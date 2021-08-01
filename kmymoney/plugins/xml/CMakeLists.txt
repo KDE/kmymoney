@@ -14,7 +14,6 @@ ki18n_wrap_ui(xmlstorage_SOURCES kgpgkeyselectiondlg.ui)
 
 kcoreaddons_add_plugin(xmlstorage
                        SOURCES ${xmlstorage_SOURCES}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/xmlstorage.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
@@ -57,7 +56,6 @@ ki18n_wrap_ui(kcm_xmlstorage_PART_SRCS xmlstoragesettings.ui)
 
 kcoreaddons_add_plugin(kcm_xmlstorage
                        SOURCES ${kcm_xmlstorage_PART_SRCS}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/kcm_xmlstorage.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 kcoreaddons_desktop_to_json(kcm_xmlstorage kcm_xmlstorage.desktop)

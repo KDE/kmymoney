@@ -148,19 +148,89 @@ void KReportsView::refresh()
 void KReportsView::showEvent(QShowEvent * event)
 {
     Q_D(KReportsView);
-    if (d->m_needLoad)
+    if (d->m_needLoad) {
         d->init();
+        connect(d->ui.m_closeButton, &QToolButton::clicked, this, [&]() {
+            Q_D(KReportsView);
+            d->ui.m_filterContainer->hide();
+            d->ui.m_searchWidget->clear();
+            d->ui.m_reportTabWidget->setFocus();
+        });
+        connect(pActions[eMenu::Action::ShowFilterWidget], &QAction::triggered, this, [&]() {
+            if (isVisible()) {
+                Q_D(KReportsView);
+                d->ui.m_filterContainer->show();
+                d->ui.m_searchWidget->setFocus();
+            }
+        });
+        connect(d->ui.m_searchWidget, &QLineEdit::textChanged, this, [&](const QString& text) {
+            Q_D(KReportsView);
+            const auto columns = d->ui.m_tocTreeWidget->columnCount();
+            for (auto i = 0; i < d->ui.m_tocTreeWidget->topLevelItemCount(); ++i) {
+                const auto toplevelItem = d->ui.m_tocTreeWidget->topLevelItem(i);
+                bool hideTopLevel = true;
+                for (auto j = 0; j < toplevelItem->childCount(); ++j) {
+                    const auto reportItem = toplevelItem->child(j);
+                    if (text.isEmpty()) {
+                        reportItem->setHidden(false);
+                        hideTopLevel = false;
+                    } else {
+                        reportItem->setHidden(true);
+                        for (auto column = 0; column < columns; ++column) {
+                            if (reportItem->text(column).contains(text, Qt::CaseInsensitive)) {
+                                reportItem->setHidden(false);
+                                hideTopLevel = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                toplevelItem->setHidden(hideTopLevel);
+            }
 
+            if (text.isEmpty()) {
+                if (!d->expandStatesBeforeSearch.isEmpty()) {
+                    d->restoreTocExpandState(d->expandStatesBeforeSearch);
+                    d->expandStatesBeforeSearch.clear();
+                }
+            } else {
+                if (d->expandStatesBeforeSearch.isEmpty()) {
+                    d->expandStatesBeforeSearch = d->saveTocExpandState();
+                }
+                // show groups with matching reports as expanded
+                for (auto i = 0; i < d->ui.m_tocTreeWidget->topLevelItemCount(); ++i) {
+                    const auto toplevelItem = d->ui.m_tocTreeWidget->topLevelItem(i);
+                    toplevelItem->setExpanded(!toplevelItem->isHidden());
+                }
+            }
+        });
+    }
     if (d->m_needsRefresh)
         refresh();
 
-    if (auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->currentWidget()))
+    if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget()))
         emit reportSelected(tab->report());
     else
         emit reportSelected(MyMoneyReport());
 
     // don't forget base class implementation
     QWidget::showEvent(event);
+}
+
+bool KReportsView::eventFilter(QObject* watched, QEvent* event)
+{
+    Q_D(KReportsView);
+
+    if (watched == d->ui.m_searchWidget || watched == d->ui.m_tocTreeWidget) {
+        if (event->type() == QEvent::KeyPress) {
+            const auto kev = static_cast<QKeyEvent*>(event);
+            if (kev->modifiers() == Qt::NoModifier && kev->key() == Qt::Key_Escape) {
+                d->ui.m_closeButton->animateClick();
+                return true;
+            }
+        }
+    }
+    return QWidget::eventFilter(watched, event);
 }
 
 void KReportsView::updateActions(const SelectedObjects& selections)
@@ -242,21 +312,21 @@ void KReportsView::slotOpenUrl(const QUrl &url)
 void KReportsView::slotPrintView()
 {
     Q_D(KReportsView);
-    if (auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->currentWidget()))
+    if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget()))
         tab->print();
 }
 
 void KReportsView::slotCopyView()
 {
     Q_D(KReportsView);
-    if (auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->currentWidget()))
+    if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget()))
         tab->copyToClipboard();
 }
 
 void KReportsView::slotSaveView()
 {
     Q_D(KReportsView);
-    if (auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->currentWidget())) {
+    if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget())) {
         QPointer<QFileDialog> dialog = new QFileDialog(this, i18n("Export as"), KRecentDirs::dir(":kmymoney-export"));
         dialog->setMimeTypeFilters({QStringLiteral("text/csv"), QStringLiteral("text/html")});
         dialog->setFileMode(QFileDialog::AnyFile);
@@ -288,11 +358,11 @@ void KReportsView::slotConfigure()
     Q_D(KReportsView);
     QString cm = "KReportsView::slotConfigure";
 
-    auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->currentWidget());
+    auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget());
 
     if (!tab) // nothing to do
         return;
-    int tabNr = d->m_reportTabWidget->currentIndex();
+    int tabNr = d->ui.m_reportTabWidget->currentIndex();
 
     tab->updateDataRange(); // range will be needed during configuration, but cannot be obtained earlier
 
@@ -315,8 +385,8 @@ void KReportsView::slotConfigure()
                 ft.commit();
                 tab->modifyReport(newreport);
 
-                d->m_reportTabWidget->setTabText(tabNr, newreport.name());
-                d->m_reportTabWidget->setCurrentIndex(tabNr) ;
+                d->ui.m_reportTabWidget->setTabText(tabNr, newreport.name());
+                d->ui.m_reportTabWidget->setCurrentIndex(tabNr);
             } else {
                 MyMoneyFile::instance()->addReport(newreport);
                 ft.commit();
@@ -332,7 +402,7 @@ void KReportsView::slotConfigure()
                     qWarning() << cm << error;
 
                     // also inform user
-                    KMessageBox::error(d->m_reportTabWidget, error, i18n("Critical Error"));
+                    KMessageBox::error(d->ui.m_reportTabWidget, error, i18n("Critical Error"));
 
                     // cleanup
                     delete dlg;
@@ -357,7 +427,7 @@ void KReportsView::slotDuplicate()
     Q_D(KReportsView);
     QString cm = "KReportsView::slotDuplicate";
 
-    auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->currentWidget());
+    auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget());
 
     if (!tab) {
         // nothing to do
@@ -389,7 +459,7 @@ void KReportsView::slotDuplicate()
                 qWarning() << cm << error;
 
                 // also inform user
-                KMessageBox::error(d->m_reportTabWidget, error, i18n("Critical Error"));
+                KMessageBox::error(d->ui.m_reportTabWidget, error, i18n("Critical Error"));
 
                 // cleanup
                 delete dlg;
@@ -408,7 +478,7 @@ void KReportsView::slotDuplicate()
             qWarning() << cm << error;
 
             // also inform user
-            KMessageBox::error(d->m_reportTabWidget, error, i18n("Critical Error"));
+            KMessageBox::error(d->ui.m_reportTabWidget, error, i18n("Critical Error"));
         }
     }
     delete dlg;
@@ -417,7 +487,7 @@ void KReportsView::slotDuplicate()
 void KReportsView::slotDelete()
 {
     Q_D(KReportsView);
-    auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->currentWidget());
+    auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget());
     if (!tab) {
         // nothing to do
         return;
@@ -428,7 +498,7 @@ void KReportsView::slotDelete()
         if (KMessageBox::Continue == d->deleteReportDialog(report.name())) {
             // close the tab and then remove the report so that it is not
             // generated again during the following loadView() call
-            slotClose(d->m_reportTabWidget->currentIndex());
+            slotClose(d->ui.m_reportTabWidget->currentIndex());
 
             MyMoneyFileTransaction ft;
             MyMoneyFile::instance()->removeReport(report);
@@ -455,8 +525,8 @@ void KReportsView::slotOpenReport(const QString& id)
 
     // Find the tab which contains the report
     int index = 1;
-    while (index < d->m_reportTabWidget->count()) {
-        auto current = dynamic_cast<KReportTab*>(d->m_reportTabWidget->widget(index));
+    while (index < d->ui.m_reportTabWidget->count()) {
+        auto current = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->widget(index));
 
         if (current && current->report().id() == id) {
             page = current;
@@ -468,7 +538,7 @@ void KReportsView::slotOpenReport(const QString& id)
 
     // Show the tab, or create a new one, as needed
     if (page)
-        d->m_reportTabWidget->setCurrentIndex(index);
+        d->ui.m_reportTabWidget->setCurrentIndex(index);
     else
         d->addReportTab(MyMoneyFile::instance()->report(id));
 }
@@ -482,8 +552,8 @@ void KReportsView::slotOpenReport(const MyMoneyReport& report)
 
     // Find the tab which contains the report indicated by this list item
     int index = 1;
-    while (index < d->m_reportTabWidget->count()) {
-        auto current = dynamic_cast<KReportTab*>(d->m_reportTabWidget->widget(index));
+    while (index < d->ui.m_reportTabWidget->count()) {
+        auto current = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->widget(index));
 
         if (current && current->report().name() == report.name()) {
             page = current;
@@ -495,7 +565,7 @@ void KReportsView::slotOpenReport(const MyMoneyReport& report)
 
     // Show the tab, or create a new one, as needed
     if (page)
-        d->m_reportTabWidget->setCurrentIndex(index);
+        d->ui.m_reportTabWidget->setCurrentIndex(index);
     else
         d->addReportTab(report);
 
@@ -523,8 +593,8 @@ void KReportsView::slotItemDoubleClicked(QTreeWidgetItem* item, int)
 
     // Find the tab which contains the report indicated by this list item
     int index = 1;
-    while (index < d->m_reportTabWidget->count()) {
-        auto current = dynamic_cast<KReportTab*>(d->m_reportTabWidget->widget(index));
+    while (index < d->ui.m_reportTabWidget->count()) {
+        auto current = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->widget(index));
         if (current) {
             // If this report has an ID, we'll use the ID to match
             if (! report.id().isEmpty()) {
@@ -548,7 +618,7 @@ void KReportsView::slotItemDoubleClicked(QTreeWidgetItem* item, int)
 
     // Show the tab, or create a new one, as needed
     if (page)
-        d->m_reportTabWidget->setCurrentIndex(index);
+        d->ui.m_reportTabWidget->setCurrentIndex(index);
     else
         d->addReportTab(report);
 }
@@ -556,21 +626,21 @@ void KReportsView::slotItemDoubleClicked(QTreeWidgetItem* item, int)
 void KReportsView::slotToggleChart()
 {
     Q_D(KReportsView);
-    if (auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->currentWidget()))
+    if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget()))
         tab->toggleChart();
 }
 
 void KReportsView::slotCloseCurrent()
 {
     Q_D(KReportsView);
-    slotClose(d->m_reportTabWidget->currentIndex());
+    slotClose(d->ui.m_reportTabWidget->currentIndex());
 }
 
 void KReportsView::slotClose(int index)
 {
     Q_D(KReportsView);
-    if (auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->widget(index))) {
-        d->m_reportTabWidget->removeTab(index);
+    if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->widget(index))) {
+        d->ui.m_reportTabWidget->removeTab(index);
         tab->setReadyToDelete(true);
     }
 }
@@ -580,8 +650,8 @@ void KReportsView::slotCloseAll()
     Q_D(KReportsView);
     if(!d->m_needLoad) {
         while (true) {
-            if (auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->widget(1))) {
-                d->m_reportTabWidget->removeTab(1);
+            if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->widget(1))) {
+                d->ui.m_reportTabWidget->removeTab(1);
                 tab->setReadyToDelete(true);
             } else
                 break;
@@ -593,7 +663,7 @@ void KReportsView::slotCloseAll()
 void KReportsView::slotListContextMenu(const QPoint & p)
 {
     Q_D(KReportsView);
-    auto items = d->m_tocTreeWidget->selectedItems();
+    auto items = d->ui.m_tocTreeWidget->selectedItems();
 
     if (items.isEmpty()) {
         return;
@@ -640,14 +710,14 @@ void KReportsView::slotListContextMenu(const QPoint & p)
         }
     }
 
-    contextmenu->popup(d->m_tocTreeWidget->viewport()->mapToGlobal(p));
+    contextmenu->popup(d->ui.m_tocTreeWidget->viewport()->mapToGlobal(p));
 }
 
 void KReportsView::slotOpenFromList()
 {
     Q_D(KReportsView);
 
-    auto items = d->m_tocTreeWidget->selectedItems();
+    auto items = d->ui.m_tocTreeWidget->selectedItems();
 
     if (items.isEmpty()) {
         return;
@@ -665,7 +735,7 @@ void KReportsView::slotPrintFromList()
 {
     Q_D(KReportsView);
 
-    auto items = d->m_tocTreeWidget->selectedItems();
+    auto items = d->ui.m_tocTreeWidget->selectedItems();
 
     if (items.isEmpty()) {
         return;
@@ -683,7 +753,7 @@ void KReportsView::slotPrintFromList()
 void KReportsView::slotConfigureFromList()
 {
     Q_D(KReportsView);
-    if (auto tocItem = dynamic_cast<TocItem*>(d->m_tocTreeWidget->currentItem())) {
+    if (auto tocItem = dynamic_cast<TocItem*>(d->ui.m_tocTreeWidget->currentItem())) {
         slotItemDoubleClicked(tocItem, 0);
         slotConfigure();
     }
@@ -692,7 +762,7 @@ void KReportsView::slotConfigureFromList()
 void KReportsView::slotNewFromList()
 {
     Q_D(KReportsView);
-    if (auto tocItem = dynamic_cast<TocItem*>(d->m_tocTreeWidget->currentItem())) {
+    if (auto tocItem = dynamic_cast<TocItem*>(d->ui.m_tocTreeWidget->currentItem())) {
         slotItemDoubleClicked(tocItem, 0);
         slotDuplicate();
     }
@@ -701,7 +771,7 @@ void KReportsView::slotNewFromList()
 void KReportsView::slotDeleteFromList()
 {
     Q_D(KReportsView);
-    if (auto tocItem = dynamic_cast<TocItem*>(d->m_tocTreeWidget->currentItem())) {
+    if (auto tocItem = dynamic_cast<TocItem*>(d->ui.m_tocTreeWidget->currentItem())) {
         if (auto reportTocItem = dynamic_cast<TocItemReport*>(tocItem)) {
             MyMoneyReport& report = reportTocItem->getReport();
 
@@ -709,8 +779,8 @@ void KReportsView::slotDeleteFromList()
             if (! report.id().isEmpty() &&
                     KMessageBox::Continue == d->deleteReportDialog(report.name())) {
                 // check if report's tab is open; start from 1 because 0 is toc tab
-                for (int i = 1; i < d->m_reportTabWidget->count(); ++i) {
-                    auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->widget(i));
+                for (int i = 1; i < d->ui.m_reportTabWidget->count(); ++i) {
+                    auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->widget(i));
                     if (tab && tab->report().id() == report.id()) {
                         slotClose(i); // if open, close it, so no crash when switching to it
                         break;

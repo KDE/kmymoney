@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/woob">
+        <file>kmymoneywoob.py</file>
+    </qresource>
+</RCC>

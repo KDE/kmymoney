@@ -17,7 +17,6 @@ qt5_add_resources(budgetview_SOURCES budgetview.qrc)
 
 kcoreaddons_add_plugin(budgetview
                        SOURCES ${budgetview_SOURCES}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/budgetview.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}

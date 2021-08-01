@@ -23,7 +23,7 @@ class MyMoneyAccount;
 class MyMoneyKeyValueContainer;
 
 class AccountSettingsPrivate;
-class AccountSettings: public QWidget
+class AccountSettings : public QWidget
 {
     Q_OBJECT
 
@@ -34,11 +34,10 @@ public:
     void loadUi(const MyMoneyKeyValueContainer& kvp);
 
     void loadKvp(MyMoneyKeyValueContainer& kvp);
+
 private:
-
     Q_DECLARE_PRIVATE(AccountSettings)
-    AccountSettingsPrivate * const d_ptr;
+    AccountSettingsPrivate* const d_ptr;
 };
-
 
 #endif

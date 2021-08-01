@@ -23,8 +23,8 @@
 class AccountSettingsPrivate
 {
 public:
-    AccountSettingsPrivate() :
-        ui(new Ui::AccountSettings)
+    AccountSettingsPrivate()
+        : ui(new Ui::AccountSettings)
     {
     }
 
@@ -32,12 +32,12 @@ public:
     {
         delete ui;
     }
-    Ui::AccountSettings *ui;
+    Ui::AccountSettings* ui;
 };
 
-AccountSettings::AccountSettings(const MyMoneyAccount& /*acc*/, QWidget* parent) :
-    QWidget(parent),
-    d_ptr(new AccountSettingsPrivate)
+AccountSettings::AccountSettings(const MyMoneyAccount& /*acc*/, QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new AccountSettingsPrivate)
 {
     Q_D(AccountSettings);
     d->ui->setupUi(this);

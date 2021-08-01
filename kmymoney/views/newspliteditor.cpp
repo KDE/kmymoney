@@ -24,25 +24,26 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "creditdebithelper.h"
-#include "kmymoneyutils.h"
-#include "kmymoneyaccountcombo.h"
-#include "mymoneyfile.h"
 #include "accountsmodel.h"
+#include "amounteditcurrencyhelper.h"
 #include "costcentermodel.h"
-#include "splitmodel.h"
-#include "payeesmodel.h"
+#include "creditdebithelper.h"
+#include "icons.h"
+#include "journalmodel.h"
+#include "kcurrencycalculator.h"
+#include "kmymoneyaccountcombo.h"
+#include "kmymoneyutils.h"
 #include "mymoneyaccount.h"
+#include "mymoneyenums.h"
 #include "mymoneyexception.h"
+#include "mymoneyfile.h"
 #include "mymoneyprice.h"
+#include "mymoneysecurity.h"
+#include "payeesmodel.h"
+#include "splitmodel.h"
+#include "splitview.h"
 #include "ui_newspliteditor.h"
 #include "widgethintframe.h"
-#include "splitview.h"
-#include "icons/icons.h"
-#include "mymoneyenums.h"
-#include "mymoneysecurity.h"
-#include "kcurrencycalculator.h"
-#include "amounteditcurrencyhelper.h"
 
 using namespace Icons;
 
@@ -153,6 +154,11 @@ bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
             ui->costCenterLabel->setEnabled(isIncomeExpense);
             ui->numberEdit->setDisabled(isIncomeExpense);
             ui->numberLabel->setDisabled(isIncomeExpense);
+            if (isIncomeExpense) {
+                ui->numberEdit->clear();
+            } else {
+                numberChanged(ui->numberEdit->text());
+            }
 
             checkMultiCurrency();
 
@@ -170,23 +176,19 @@ bool NewSplitEditor::Private::numberChanged(const QString& newNumber)
     bool rc = true;
     WidgetHintFrame::hide(ui->numberEdit, i18n("The check number used for this transaction."));
     if(!newNumber.isEmpty()) {
-        /// @todo port to new model code
-#if 0
-        const LedgerModel* model = Models::instance()->ledgerModel();
-        QModelIndexList list = model->match(model->index(0, 0), (int)eLedgerModel::Role::Number,
-                                            QVariant(newNumber),
-                                            -1,                         // all splits
-                                            Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-
-        foreach(QModelIndex index, list) {
-            if(model->data(index, (int)eLedgerModel::Role::AccountId) == ui->accountCombo->getSelected()
-                    && model->data(index, (int)eLedgerModel::Role::TransactionSplitId) != transactionSplitId) {
-                WidgetHintFrame::show(ui->numberEdit, i18n("The check number <b>%1</b> has already been used in this account.", newNumber));
-                rc = false;
-                break;
+        const auto model = MyMoneyFile::instance()->journalModel();
+        const auto rows = model->rowCount();
+        const auto accountId = ui->accountCombo->getSelected();
+        for (int row = 0; row < rows; ++row) {
+            const auto idx = model->index(row, 0);
+            if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == accountId) {
+                if (idx.data(eMyMoney::Model::JournalSplitNumberRole).toString() == newNumber) {
+                    WidgetHintFrame::show(ui->numberEdit, i18n("The check number <b>%1</b> has already been used in this account.", newNumber));
+                    rc = false;
+                    break;
+                }
             }
         }
-#endif
     }
     return rc;
 }
@@ -308,6 +310,8 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     frameCollection->addFrame(new WidgetHintFrame(d->ui->numberEdit, WidgetHintFrame::Warning));
     frameCollection->addWidget(d->ui->enterButton);
 
+    d->ui->amountEditCredit->setAllowEmpty(true);
+    d->ui->amountEditDebit->setAllowEmpty(true);
     d->amountHelper = new CreditDebitHelper(this, d->ui->amountEditCredit, d->ui->amountEditDebit);
 
     new AmountEditCurrencyHelper(d->ui->accountCombo, d->amountHelper, commodity.id());

@@ -22,10 +22,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_splitdialog.h"
-#include "mymoneyaccount.h"
+#include "icons.h"
 #include "splitadjustdialog.h"
-#include "icons/icons.h"
+#include "ui_splitdialog.h"
 
 using namespace Icons;
 
@@ -36,6 +35,7 @@ public:
         : parent(p)
         , ui(new Ui_SplitDialog)
         , transactionEditor(nullptr)
+        , fraction(100)
     {
     }
 
@@ -49,23 +49,22 @@ public:
     void blockImmediateEditor();
     void selectRow(int row);
 
-    SplitDialog*                parent;
-    Ui_SplitDialog*             ui;
-
-    /**
-     * The account in which this split editor was opened
-     */
-    MyMoneyAccount              account;
+    SplitDialog* parent;
+    Ui_SplitDialog* ui;
 
     /**
      * The parent transaction editor which opened the split editor
      */
-    QWidget*                    transactionEditor;
+    QWidget* transactionEditor;
 
-    MyMoneyMoney                transactionTotal;
-    MyMoneyMoney                splitsTotal;
-    MyMoneyMoney                inversionFactor;
+    /**
+     * The fraction of the account for which this split editor was opened
+     */
+    int fraction;
 
+    MyMoneyMoney transactionTotal;
+    MyMoneyMoney splitsTotal;
+    MyMoneyMoney inversionFactor;
     QString transactionPayeeId;
 };
 
@@ -121,12 +120,17 @@ void SplitDialog::Private::selectRow(int row)
     }
 }
 
-SplitDialog::SplitDialog(const MyMoneyAccount& account, const MyMoneySecurity& commodity, const MyMoneyMoney& amount, const MyMoneyMoney& inversionFactor, QWidget* parent, Qt::WindowFlags f)
+SplitDialog::SplitDialog(const MyMoneySecurity& commodity,
+                         const MyMoneyMoney& amount,
+                         int fraction,
+                         const MyMoneyMoney& inversionFactor,
+                         QWidget* parent,
+                         Qt::WindowFlags f)
     : QDialog(parent, f)
     , d(new Private(this))
 {
     d->transactionEditor = parent;
-    d->account = account;
+    d->fraction = fraction;
     d->transactionTotal = amount;
     d->inversionFactor = inversionFactor;
     d->ui->setupUi(this);
@@ -248,14 +252,14 @@ void SplitDialog::adjustSummary()
             d->splitsTotal += index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
         }
     }
-    QString formattedValue = (d->splitsTotal * d->inversionFactor).formatMoney(d->account.fraction());
+    QString formattedValue = (d->splitsTotal * d->inversionFactor).formatMoney(d->fraction);
     d->ui->summaryView->item(SumRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
 
     if(d->transactionEditor) {
         if (d->transactionTotal.isAutoCalc()) {
-            formattedValue = (d->splitsTotal * d->inversionFactor).formatMoney(d->account.fraction());
+            formattedValue = (d->splitsTotal * d->inversionFactor).formatMoney(d->fraction);
         } else {
-            formattedValue = (d->transactionTotal * d->inversionFactor).formatMoney(d->account.fraction());
+            formattedValue = (d->transactionTotal * d->inversionFactor).formatMoney(d->fraction);
         }
         d->ui->summaryView->item(AmountRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
 
@@ -265,7 +269,7 @@ void SplitDialog::adjustSummary()
             } else {
                 d->ui->summaryView->item(DiffRow, HeaderCol)->setData(Qt::DisplayRole, i18nc("Split editor summary", "Unassigned"));
             }
-            formattedValue = (d->transactionTotal - d->splitsTotal).abs().formatMoney(d->account.fraction());
+            formattedValue = (d->transactionTotal - d->splitsTotal).abs().formatMoney(d->fraction);
             d->ui->summaryView->item(DiffRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
         } else {
             d->ui->summaryView->item(DiffRow, HeaderCol)->setData(Qt::DisplayRole, QString());

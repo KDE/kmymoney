@@ -21,7 +21,7 @@ string(APPEND qrcContents ">\n")
 file(GLOB_RECURSE template_files
         LIST_DIRECTORIES=true
         RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
-        "C/*" "[a-z][a-z]/*" "[a-z][a-z]_[a-z][a-z]/*")
+        "C/*" "[a-z][a-z]/*" "[a-z][a-z]_[A-Z][A-Z]/*")
 
 foreach(template_file ${template_files})
     string(APPEND qrcContents "    <file>${template_file}</file>\n")

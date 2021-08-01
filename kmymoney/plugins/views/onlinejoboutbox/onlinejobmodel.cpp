@@ -80,14 +80,16 @@ QVariant onlineJobModel::headerData(int section, Qt::Orientation orientation, in
         return QVariant();
     if (orientation == Qt::Horizontal) {
         switch (section) {
+        case columns::ColPostDate:
+            return i18nc("@title:column", "Date");
         case columns::ColAccount:
-            return i18n("Account");
+            return i18nc("@title:column", "Account");
         case columns::ColAction:
-            return i18n("Action");
+            return i18nc("@title:column", "Action");
         case columns::ColDestination:
-            return i18n("Destination");
+            return i18nc("@title:column", "Destination");
         case columns::ColValue:
-            return i18n("Value");
+            return i18nc("@title:column", "Value");
         }
     }
     return QVariant();
@@ -131,7 +133,12 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
     }
 
     // Show general information
-    if (index.column() == columns::ColAccount) {
+    if (index.column() == columns::ColPostDate) {
+        if (role == Qt::DisplayRole) {
+            return MyMoneyUtils::formatDate(job.sendDate().date());
+        }
+        return QVariant();
+    } else if (index.column() == columns::ColAccount) {
         // Account column
         if (role == Qt::DisplayRole) {
             return QVariant::fromValue(job.responsibleMyMoneyAccount().name());

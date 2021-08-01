@@ -17,7 +17,6 @@ qt5_add_resources(onlinejoboutboxview_SOURCES onlinejoboutboxview.qrc)
 
 kcoreaddons_add_plugin(onlinejoboutboxview
                        SOURCES ${onlinejoboutboxview_SOURCES}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/onlinejoboutboxview.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}

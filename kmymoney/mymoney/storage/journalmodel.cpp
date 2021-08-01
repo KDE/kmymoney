@@ -10,7 +10,6 @@
 
 #include <QDebug>
 #include <QString>
-#include <QDate>
 #include <QSize>
 
 // ----------------------------------------------------------------------------
@@ -1414,4 +1413,17 @@ QModelIndex JournalModel::adjustToFirstSplitIdx(const QModelIndex& index) const
     startRow++;
 
     return index.model()->index(startRow, index.column());
+}
+
+JournalModel::DateRange JournalModel::dateRange() const
+{
+    DateRange result;
+    const auto rows = rowCount();
+    if (rows > 0) {
+        const auto firstIdx = index(0, 0);
+        const auto lastIdx = index(rows - 1, 0);
+        result.firstTransaction = firstIdx.data(eMyMoney::Model::TransactionPostDateRole).toDate();
+        result.lastTransaction = lastIdx.data(eMyMoney::Model::TransactionPostDateRole).toDate();
+    }
+    return result;
 }

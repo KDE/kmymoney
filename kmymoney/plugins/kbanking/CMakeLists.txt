@@ -39,7 +39,6 @@ qt5_add_resources(kbanking_PART_SRCS "qml/chipTan/chipTan.qrc")
 
 kcoreaddons_add_plugin(kbanking
                        SOURCES ${kbanking_PART_SRCS}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/kbanking.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}

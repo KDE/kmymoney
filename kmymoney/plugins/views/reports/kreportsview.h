@@ -105,6 +105,11 @@ protected:
       */
     void showEvent(QShowEvent * event) override;
 
+    /**
+     * Overridden so we can handle closing the search filter on ESC
+     */
+    bool eventFilter(QObject* watched, QEvent* event) override;
+
 public Q_SLOTS:
     void slotOpenUrl(const QUrl &url);
 

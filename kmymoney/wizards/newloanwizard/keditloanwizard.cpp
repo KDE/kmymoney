@@ -163,9 +163,11 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
     MyMoneyMoney basePayment;
     MyMoneyMoney addPayment;
 
-    d->m_transaction = d->m_schedule.transaction();
-
-    foreach (const MyMoneySplit& it_s, d->m_schedule.transaction().splits()) {
+    d->m_feeSplitModel.unload();
+    d->m_additionalFeesTransaction = d->m_schedule.transaction();
+    const auto splits = d->m_additionalFeesTransaction.splits();
+    for (const auto& it_s : splits) {
+        bool isAdditionalCostSplit = true;
         MyMoneyAccount acc = file->account(it_s.accountId());
         // if it's the split that references the source/dest
         // of the money, we check if we borrow or loan money
@@ -195,9 +197,10 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
 
             // remove this split with one that will be replaced
             // later and has a phony id
-            d->m_transaction.removeSplit(it_s);
-            d->m_split.clearId();
-            d->m_transaction.addSplit(d->m_split);
+            d->m_additionalFeesTransaction.removeSplit(it_s);
+            d->m_phonySplit.clearId();
+            d->m_additionalFeesTransaction.addSplit(d->m_phonySplit);
+            isAdditionalCostSplit = false;
         }
 
         if (it_s.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest)) {
@@ -209,10 +212,15 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
         } else {
             // remove the splits which should not show up
             // for additional fees
-            d->m_transaction.removeSplit(it_s);
+            d->m_additionalFeesTransaction.removeSplit(it_s);
+            isAdditionalCostSplit = false;
         }
 
+        if (isAdditionalCostSplit) {
+            d->m_feeSplitModel.appendSplit(it_s);
+        }
     }
+
     if (field("borrowButton").toBool()) {
         basePayment = -basePayment;
         addPayment = -addPayment;

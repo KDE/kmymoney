@@ -115,7 +115,11 @@ void LedgerAccountFilter::recalculateBalancesOnIdle(const QString& accountId)
 {
     Q_D(LedgerAccountFilter);
     // only start recalc if the caller means us
-    if (!accountId.compare(d->account.id())) {
+    bool updateCausedBySubAccount = false;
+    if (d->account.accountType() == eMyMoney::Account::Type::Investment) {
+        updateCausedBySubAccount = d->account.accountList().contains(accountId);
+    }
+    if ((accountId.compare(d->account.id()) == 0) || updateCausedBySubAccount) {
         // make sure the balances are recalculated but trigger only once
         // if sorting is pending, we don't trigger recalc as it is part of sorting
         if(!d->balanceCalculationPending && !d->sortPending) {

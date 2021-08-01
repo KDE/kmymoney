@@ -35,9 +35,13 @@ class SplitDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit SplitDialog(const MyMoneyAccount& account, const MyMoneySecurity& commodity, const MyMoneyMoney& mainAmount, const MyMoneyMoney& inversionFactor, QWidget* parent, Qt::WindowFlags f = {});
+    explicit SplitDialog(const MyMoneySecurity& commodity,
+                         const MyMoneyMoney& mainAmount,
+                         int fraction,
+                         const MyMoneyMoney& inversionFactor,
+                         QWidget* parent,
+                         Qt::WindowFlags f = {});
     virtual ~SplitDialog();
-
 
     void setModel(QAbstractItemModel* model);
     void setAccountId(const QString& id);

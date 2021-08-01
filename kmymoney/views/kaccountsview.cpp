@@ -259,7 +259,13 @@ void KAccountsView::slotCloseAccount()
         MyMoneyFile::instance()->modifyAccount(d->m_currentAccount);
         ft.commit();
         if (!KMyMoneySettings::showAllAccounts())
-            KMessageBox::information(this, i18n("<qt>You have closed this account. It remains in the system because you have transactions which still refer to it, but it is not shown in the views. You can make it visible again by going to the View menu and selecting <b>Show all accounts</b> or by deselecting the <b>Do not show closed accounts</b> setting.</qt>"), i18n("Information"), "CloseAccountInfo");
+            KMessageBox::information(
+                this,
+                i18n("<qt>You have closed this account. It remains in the system because you have transactions which still refer to it, but it is not shown in "
+                     "the views. You can make it visible again by going to the View menu and selecting <b>Show all accounts</b>.</qt>"),
+                i18n("Information"),
+                "CloseAccountInfo");
+        emit requestSelectionChange(d->m_selections);
     } catch (const MyMoneyException &) {
     }
 }
@@ -277,6 +283,7 @@ void KAccountsView::slotReopenAccount()
             acc = file->account(acc.parentAccountId());
         }
         ft.commit();
+        emit requestSelectionChange(d->m_selections);
     } catch (const MyMoneyException &) {
     }
 }

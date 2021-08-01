@@ -52,6 +52,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_kreportsview.h"
 #include "ui_reportcontrol.h"
 
 #include "kmymoneyviewbase_p.h"
@@ -476,10 +477,6 @@ public:
         : KMyMoneyViewBasePrivate(qq)
         , m_needLoad(true)
         , m_reportListView(nullptr)
-        , m_reportTabWidget(nullptr)
-        , m_listTab(nullptr)
-        , m_listTabLayout(nullptr)
-        , m_tocTreeWidget(nullptr)
         , m_columnsAlreadyAdjusted(false)
     {
     }
@@ -493,68 +490,49 @@ public:
         Q_Q(KReportsView);
         m_needLoad = false;
         m_needsRefresh = true;
-        auto vbox = new QVBoxLayout(q);
-        q->setLayout(vbox);
-        vbox->setSpacing(6);
-        vbox->setMargin(0);
-
 
         // build reports toc
 
         setColumnsAlreadyAdjusted(false);
+        ui.setupUi(q);
+        ui.m_tocTreeWidget->sortByColumn(0, Qt::AscendingOrder);
 
-        m_reportTabWidget = new QTabWidget(q);
-        vbox->addWidget(m_reportTabWidget);
-        m_reportTabWidget->setTabsClosable(true);
+        ui.m_closeButton->setIcon(Icons::get(Icon::DialogClose));
+        ui.m_filterContainer->hide();
+        ui.m_searchWidget->installEventFilter(q);
+        ui.m_tocTreeWidget->installEventFilter(q);
 
-        m_listTab = new QWidget(m_reportTabWidget);
-        m_listTabLayout = new QVBoxLayout(m_listTab);
-        m_listTabLayout->setSpacing(6);
-
-        m_tocTreeWidget = new QTreeWidget(m_listTab);
-
-        // report-group items have only 1 column (name of group),
-        // report items have 2 columns (report name and comment)
-        m_tocTreeWidget->setColumnCount(2);
-
-        // headers
-        QStringList headers;
-        headers << i18n("Reports") << i18n("Comment");
-        m_tocTreeWidget->setHeaderLabels(headers);
-
-        m_tocTreeWidget->setAlternatingRowColors(true);
-        m_tocTreeWidget->setSortingEnabled(true);
-        m_tocTreeWidget->sortByColumn(0, Qt::AscendingOrder);
-
-        // for report group items:
-        // doubleclick toggles the expand-state,
-        m_tocTreeWidget->setExpandsOnDoubleClick(false);
-
-        m_tocTreeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
-
-        m_tocTreeWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
-
-        m_listTabLayout->addWidget(m_tocTreeWidget);
-        m_reportTabWidget->addTab(m_listTab, i18n("Reports"));
-
-        q->connect(m_reportTabWidget, &QTabWidget::tabCloseRequested,
-                   q, &KReportsView::slotClose);
-
-        q->connect(m_tocTreeWidget, &QTreeWidget::itemDoubleClicked,
-                   q, &KReportsView::slotItemDoubleClicked);
-
-        q->connect(m_tocTreeWidget, &QWidget::customContextMenuRequested,
-                   q, &KReportsView::slotListContextMenu);
-
+        q->connect(ui.m_reportTabWidget, &QTabWidget::tabCloseRequested, q, &KReportsView::slotClose);
+        q->connect(ui.m_tocTreeWidget, &QTreeWidget::itemDoubleClicked, q, &KReportsView::slotItemDoubleClicked);
+        q->connect(ui.m_tocTreeWidget, &QWidget::customContextMenuRequested, q, &KReportsView::slotListContextMenu);
         q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KReportsView::refresh);
 
-        m_focusWidget = m_tocTreeWidget;
+        m_focusWidget = ui.m_tocTreeWidget;
+    }
+
+    QMap<QString, bool> saveTocExpandState()
+    {
+        QMap<QString, bool> expandStates;
+        for (int i = 0; i < ui.m_tocTreeWidget->topLevelItemCount(); ++i) {
+            const auto item = ui.m_tocTreeWidget->topLevelItem(i);
+
+            if (item) {
+                QString itemLabel = item->text(0);
+
+                if (item->isExpanded()) {
+                    expandStates.insert(itemLabel, true);
+                } else {
+                    expandStates.insert(itemLabel, false);
+                }
+            }
+        }
+        return expandStates;
     }
 
     void restoreTocExpandState(QMap<QString, bool>& expandStates)
     {
-        for (auto i = 0; i < m_tocTreeWidget->topLevelItemCount(); ++i) {
-            QTreeWidgetItem* item = m_tocTreeWidget->topLevelItem(i);
+        for (auto i = 0; i < ui.m_tocTreeWidget->topLevelItemCount(); ++i) {
+            QTreeWidgetItem* item = ui.m_tocTreeWidget->topLevelItem(i);
 
             if (item) {
                 QString itemLabel = item->text(0);
@@ -582,33 +560,20 @@ public:
     void addReportTab(const MyMoneyReport& report)
     {
         Q_Q(KReportsView);
-        new KReportTab(m_reportTabWidget, report, q);
+        new KReportTab(ui.m_reportTabWidget, report, q);
     }
 
     void loadView()
     {
         // remember the id of the current selected item
-        QTreeWidgetItem* item = m_tocTreeWidget->currentItem();
+        QTreeWidgetItem* item = ui.m_tocTreeWidget->currentItem();
         QString selectedItem = (item) ? item->text(0) : QString();
 
         // save expand states of all top-level items
-        QMap<QString, bool> expandStates;
-        for (int i = 0; i < m_tocTreeWidget->topLevelItemCount(); ++i) {
-            item = m_tocTreeWidget->topLevelItem(i);
-
-            if (item) {
-                QString itemLabel = item->text(0);
-
-                if (item->isExpanded()) {
-                    expandStates.insert(itemLabel, true);
-                } else {
-                    expandStates.insert(itemLabel, false);
-                }
-            }
-        }
+        QMap<QString, bool> expandStates = saveTocExpandState();
 
         // find the item visible on top
-        QTreeWidgetItem* visibleTopItem = m_tocTreeWidget->itemAt(0, 0);
+        QTreeWidgetItem* visibleTopItem = ui.m_tocTreeWidget->itemAt(0, 0);
 
         // text of column 0 identifies the item visible on top
         QString visibleTopItemText;
@@ -628,7 +593,7 @@ public:
         //
         // Rebuild the list page
         //
-        m_tocTreeWidget->clear();
+        ui.m_tocTreeWidget->clear();
 
         // Default Reports
         QList<ReportGroup> defaultreports;
@@ -651,18 +616,14 @@ public:
         // group for diagrams
         QString groupName = I18N_NOOP("Charts");
 
-        TocItemGroup* chartTocItemGroup =
-            new TocItemGroup(m_tocTreeWidget, chartGroupNo,
-                             i18n(groupName.toLatin1().data()));
+        TocItemGroup* chartTocItemGroup = new TocItemGroup(ui.m_tocTreeWidget, chartGroupNo, i18n(groupName.toLatin1().data()));
 
         m_allTocItemGroups.insert(groupName, chartTocItemGroup);
 
         while (it_group != defaultreports.constEnd()) {
             groupName = (*it_group).name();
 
-            TocItemGroup* defaultTocItemGroup =
-                new TocItemGroup(m_tocTreeWidget, defaultGroupNo++,
-                                 i18n(groupName.toLatin1().data()));
+            TocItemGroup* defaultTocItemGroup = new TocItemGroup(ui.m_tocTreeWidget, defaultGroupNo++, i18n(groupName.toLatin1().data()));
 
             m_allTocItemGroups.insert(groupName, defaultTocItemGroup);
 
@@ -698,9 +659,7 @@ public:
 
         groupName = I18N_NOOP("Favorite Reports");
 
-        TocItemGroup* favoriteTocItemGroup =
-            new TocItemGroup(m_tocTreeWidget, favoriteGroupNo,
-                             i18n(groupName.toLatin1().data()));
+        TocItemGroup* favoriteTocItemGroup = new TocItemGroup(ui.m_tocTreeWidget, favoriteGroupNo, i18n(groupName.toLatin1().data()));
 
         m_allTocItemGroups.insert(groupName, favoriteTocItemGroup);
 
@@ -729,9 +688,7 @@ public:
 
                     groupName = I18N_NOOP("Old Customized Reports");
 
-                    orphanTocItemGroup =
-                        new TocItemGroup(m_tocTreeWidget, orphanGroupNo,
-                                         i18n(groupName.toLatin1().data()));
+                    orphanTocItemGroup = new TocItemGroup(ui.m_tocTreeWidget, orphanGroupNo, i18n(groupName.toLatin1().data()));
                     m_allTocItemGroups.insert(groupName, orphanTocItemGroup);
                 }
                 new TocItemReport(orphanTocItemGroup, report);
@@ -755,9 +712,9 @@ public:
         //
 
         int index = 1;
-        while (index < m_reportTabWidget->count()) {
+        while (index < ui.m_reportTabWidget->count()) {
             // TODO: Find some way of detecting the file is closed and kill these tabs!!
-            if (auto tab = dynamic_cast<KReportTab*>(m_reportTabWidget->widget(index))) {
+            if (auto tab = dynamic_cast<KReportTab*>(ui.m_reportTabWidget->widget(index))) {
                 if (tab->isReadyToDelete() /* || ! reports.count() */) {
                     delete tab;
                     --index;
@@ -773,10 +730,7 @@ public:
 
             // intentionally not using 'Qt::MatchCaseSensitive' here
             // to avoid 'item not found' if someone corrected a typo only
-            QList<QTreeWidgetItem*> visibleTopItemList =
-                m_tocTreeWidget->findItems(visibleTopItemText,
-                                           Qt::MatchFixedString |
-                                           Qt::MatchRecursive);
+            QList<QTreeWidgetItem*> visibleTopItemList = ui.m_tocTreeWidget->findItems(visibleTopItemText, Qt::MatchFixedString | Qt::MatchRecursive);
 
             if (visibleTopItemList.isEmpty()) {
                 // the item could not be found, it was deleted or renamed
@@ -799,45 +753,45 @@ public:
             restoreTocExpandState(expandStates);
 
             // restore current item
-            m_tocTreeWidget->setCurrentItem(currentItem);
+            ui.m_tocTreeWidget->setCurrentItem(currentItem);
 
             // try to scroll to the item visible on top
             // when this method started
             if (visibleTopItemFound) {
-                m_tocTreeWidget->scrollToItem(visibleTopItem);
+                ui.m_tocTreeWidget->scrollToItem(visibleTopItem);
             } else {
-                m_tocTreeWidget->scrollToTop();
+                ui.m_tocTreeWidget->scrollToTop();
             }
             return;
         }
 
         // avoid flickering
-        m_tocTreeWidget->setUpdatesEnabled(false);
+        ui.m_tocTreeWidget->setUpdatesEnabled(false);
 
         // expand all top-level items
-        m_tocTreeWidget->expandAll();
+        ui.m_tocTreeWidget->expandAll();
 
         // resize columns
-        m_tocTreeWidget->resizeColumnToContents(0);
-        m_tocTreeWidget->resizeColumnToContents(1);
+        ui.m_tocTreeWidget->resizeColumnToContents(0);
+        ui.m_tocTreeWidget->resizeColumnToContents(1);
 
         // restore expand states of all top-level items
         restoreTocExpandState(expandStates);
 
         // restore current item
-        m_tocTreeWidget->setCurrentItem(currentItem);
+        ui.m_tocTreeWidget->setCurrentItem(currentItem);
 
         // try to scroll to the item visible on top
         // when this method started
         if (visibleTopItemFound) {
-            m_tocTreeWidget->scrollToItem(visibleTopItem);
+            ui.m_tocTreeWidget->scrollToItem(visibleTopItem);
         } else {
-            m_tocTreeWidget->scrollToTop();
+            ui.m_tocTreeWidget->scrollToTop();
         }
 
         setColumnsAlreadyAdjusted(true);
 
-        m_tocTreeWidget->setUpdatesEnabled(true);
+        ui.m_tocTreeWidget->setUpdatesEnabled(true);
     }
 
     void defaultReports(QList<ReportGroup>& groups)
@@ -1480,16 +1434,14 @@ public:
       */
     bool m_needLoad;
 
+    Ui::KReportsView ui;
     QListWidget* m_reportListView;
-    QTabWidget* m_reportTabWidget;
-    QWidget* m_listTab;
-    QVBoxLayout* m_listTabLayout;
-    QTreeWidget* m_tocTreeWidget;
     QMap<QString, TocItemGroup*> m_allTocItemGroups;
     QString m_selectedExportFilter;
 
     bool m_columnsAlreadyAdjusted;
     MyMoneyAccount m_currentAccount;
+    QMap<QString, bool> expandStatesBeforeSearch;
 };
 
 #endif

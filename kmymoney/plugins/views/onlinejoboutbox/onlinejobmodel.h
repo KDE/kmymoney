@@ -31,6 +31,7 @@ public:
     };
 
     enum columns {
+        ColPostDate,
         ColAccount,
         ColAction,
         ColDestination,

@@ -21,12 +21,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
-#include "mymoneyfile.h"
+#include "journalmodel.h"
 #include "mymoneyaccount.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
-#include "mymoneyexception.h"
 
 MyMoneyReport::MyMoneyReport() :
     MyMoneyObject(*new MyMoneyReportPrivate)
@@ -864,24 +865,10 @@ void MyMoneyReport::validDateRange(QDate& db, QDate& de)
     // year as the filter criteria.
 
     if (!db.isValid() || !de.isValid()) {
-        /// @todo port to new model code
-        /// use first and last index into journal model instead
-        /// of retrieving the whole list of transactions.
-        QList<MyMoneyTransaction> list;
-        MyMoneyFile::instance()->transactionList(list, *this);
-        QDate tmpBegin, tmpEnd;
+        const auto dateRange = MyMoneyFile::instance()->journalModel()->dateRange();
+        auto tmpBegin = dateRange.firstTransaction;
+        auto tmpEnd = dateRange.lastTransaction;
 
-        if (!list.isEmpty()) {
-            std::sort(list.begin(), list.end());
-            // try to use the post dates
-            tmpBegin = list.front().postDate();
-            tmpEnd = list.back().postDate();
-            // if the post dates are not valid try the entry dates
-            if (!tmpBegin.isValid())
-                tmpBegin = list.front().entryDate();
-            if (!tmpEnd.isValid())
-                tmpEnd = list.back().entryDate();
-        }
         // make sure that we leave this function with valid dates no mather what
         if (!tmpBegin.isValid() || !tmpEnd.isValid() || tmpBegin > tmpEnd) {
             tmpBegin = QDate(QDate::currentDate().year(), 1, 1);   // the first date in the file

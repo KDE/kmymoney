@@ -28,29 +28,30 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_investtransactioneditor.h"
-#include "creditdebithelper.h"
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "mymoneyexception.h"
-#include "kmymoneyutils.h"
-#include "kmymoneyaccountcombo.h"
 #include "accountsmodel.h"
+#include "amounteditcurrencyhelper.h"
+#include "creditdebithelper.h"
+#include "dialogenums.h"
+#include "icons.h"
+#include "investactivities.h"
 #include "journalmodel.h"
-#include "statusmodel.h"
-#include "splitmodel.h"
+#include "kcurrencycalculator.h"
+#include "kmymoneyaccountcombo.h"
+#include "kmymoneysettings.h"
+#include "kmymoneyutils.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneyprice.h"
+#include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "splitdialog.h"
+#include "splitmodel.h"
+#include "statusmodel.h"
+#include "ui_investtransactioneditor.h"
 #include "widgethintframe.h"
-#include "icons/icons.h"
-#include "mymoneyenums.h"
-#include "mymoneysecurity.h"
-#include "kcurrencycalculator.h"
-#include "investactivities.h"
-#include "kmymoneysettings.h"
-#include "mymoneyprice.h"
-#include "amounteditcurrencyhelper.h"
 
 using namespace Icons;
 
@@ -276,7 +277,21 @@ bool InvestTransactionEditor::Private::postdateChanged(const QDate& date)
 bool InvestTransactionEditor::Private::categoryChanged(SplitModel* model, const QString& accountId, AmountEdit* widget, const MyMoneyMoney& factor)
 {
     bool rc = true;
-    if (!accountId.isEmpty() && model->rowCount() <= 1) {
+    if (accountId.isEmpty()) {
+        // in case the user cleared the category, we need
+        // to make sure that there are no leftovers in the
+        // split model so we clear it. This can only happen
+        // for single split categories, so at most we
+        // have to clear one item
+        if (model->rowCount() == 1) {
+            const auto idx = model->index(0, 0);
+            const auto s = model->itemByIndex(idx);
+            model->removeItem(s);
+        }
+        return true;
+    }
+
+    if (model->rowCount() <= 1) {
         try {
             MyMoneyAccount category = MyMoneyFile::instance()->account(accountId);
 
@@ -306,6 +321,7 @@ bool InvestTransactionEditor::Private::categoryChanged(SplitModel* model, const 
             qDebug() << "Ooops: invalid account id" << accountId << "in" << Q_FUNC_INFO;
         }
     }
+
     return rc;
 }
 
@@ -426,7 +442,7 @@ void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, 
     // used to create new splits
     splitModel.appendEmptySplit();
 
-    QPointer<SplitDialog> splitDialog = new SplitDialog(parentAccount, currency, MyMoneyMoney::autoCalc, transactionFactor, q);
+    QPointer<SplitDialog> splitDialog = new SplitDialog(currency, MyMoneyMoney::autoCalc, parentAccount.fraction(), transactionFactor, q);
     splitDialog->setModel(&splitModel);
 
     int rc = splitDialog->exec();
@@ -629,15 +645,28 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     connect(d->ui->sharesAmountEdit, &AmountEdit::textChanged, this, [&]() {
         if (d->currentActivity) {
+            d->stockSplit.setShares(d->ui->sharesAmountEdit->value() * d->currentActivity->sharesFactor());
+            d->stockSplit.setValue(d->currentActivity->valueAllShares().convert(d->currency.smallestAccountFraction(), d->security.roundingMethod())
+                                   * d->currentActivity->sharesFactor());
             if (d->currentActivity->type() != eMyMoney::Split::InvestmentTransactionType::SplitShares) {
                 updateTotalAmount();
             }
+            d->updateWidgetState();
         }
     });
 
     d->ui->priceAmountEdit->setAllowEmpty(true);
     d->ui->priceAmountEdit->setCalculatorButtonVisible(true);
-    connect(d->ui->priceAmountEdit, &AmountEdit::textChanged, this, &InvestTransactionEditor::updateTotalAmount);
+    connect(d->ui->priceAmountEdit, &AmountEdit::textChanged, this, [&]() {
+        if (d->currentActivity) {
+            d->stockSplit.setValue(d->currentActivity->valueAllShares().convert(d->currency.smallestAccountFraction(), d->security.roundingMethod())
+                                   * d->currentActivity->sharesFactor());
+            if (d->currentActivity->type() != eMyMoney::Split::InvestmentTransactionType::SplitShares) {
+                updateTotalAmount();
+            }
+            d->updateWidgetState();
+        }
+    });
 
     d->ui->feesAmountEdit->setAllowEmpty(true);
     d->ui->feesAmountEdit->setCalculatorButtonVisible(true);
@@ -663,6 +692,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
         if (account.currencyId() != d->assetAccount.currencyId()) {
             /// @todo update price rate information
         }
+        d->assetSplit.setAccountId(accountId);
         d->postdateChanged(d->ui->dateEdit->date());
         d->updateWidgetState();
     });
@@ -690,6 +720,18 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
             } catch (MyMoneyException& e) {
                 qDebug() << "Problem to find securityId" << accountId << "or" << securityId << "in InvestTransactionEditor::securityAccountChanged";
             }
+        }
+    });
+
+    // since the securityAccountCombo is operated in readOnly mode, it does not
+    // propagate the keyPressEvent of the return key to TransactionEditorBase::keyPressEvent.
+    // we simply catch and process it here
+    connect(d->ui->securityAccountCombo->lineEdit(), &QLineEdit::returnPressed, this, [&]() {
+        if (d->ui->enterButton->isEnabled()) {
+            // move focus to enter button which
+            // triggers update of widgets
+            d->ui->enterButton->setFocus();
+            d->ui->enterButton->click();
         }
     });
 
@@ -737,11 +779,11 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     connect(d->ui->cancelButton, &QToolButton::clicked, this, [&]() {
         emit done();
-    } );
+    });
     connect(d->ui->enterButton, &QToolButton::clicked, this, [&]() {
         d->accepted = true;
         emit done();
-    } );
+    });
 
     // handle some events in certain conditions different from default
     d->ui->activityCombo->installEventFilter(this);
@@ -756,7 +798,6 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     setCancelButton(d->ui->cancelButton);
     setEnterButton(d->ui->enterButton);
-    // setWindowFlags(Qt::FramelessWindowHint | Qt::X11BypassWindowManagerHint);
 }
 
 InvestTransactionEditor::~InvestTransactionEditor()
@@ -831,12 +872,19 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         // load the widgets. setting activityCombo also initializes
         // d->currentActivity to have the right object
         d->ui->activityCombo->setCurrentIndex(static_cast<int>(transactionType));
+
+        // changing the transactionType may have modified the stocksplit which is
+        // not necessary here. To cope with that, we simply reload it from the model
+        d->stockSplit = file->journalModel()->itemByIndex(idx).split();
+
         d->ui->dateEdit->setDate(d->transaction.postDate());
 
         d->ui->memoEdit->setPlainText(d->stockSplit.memo());
 
         d->ui->assetAccountCombo->setSelected(d->assetSplit.accountId());
 
+        // Avoid updating other widgets (connected through signal/slot) during loading
+        QSignalBlocker blockShares(d->ui->sharesAmountEdit);
         d->ui->sharesAmountEdit->setPrecision(MyMoneyMoney::denomToPrec(d->security.smallestAccountFraction()));
         d->ui->sharesAmountEdit->setValue(d->stockSplit.shares() * d->currentActivity->sharesFactor());
 
@@ -846,10 +894,18 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
             d->stockAccount = file->account(d->stockSplit.accountId());
         }
 
-        d->ui->feesAmountEdit->setValue(d->feeSplitModel->valueSum() * d->currentActivity->feesFactor());
-        d->ui->interestAmountEdit->setValue(d->interestSplitModel->valueSum() * d->currentActivity->interestFactor());
+        if (d->feeSplitModel->rowCount() > 0) {
+            d->ui->feesAmountEdit->setValue(d->feeSplitModel->valueSum().abs());
+        }
+        if (d->interestSplitModel->rowCount() > 0) {
+            d->ui->interestAmountEdit->setValue(d->interestSplitModel->valueSum().abs());
+        }
 
+        // Avoid updating other widgets (connected through signal/slot) during loading
+        QSignalBlocker blockPrice(d->ui->priceAmountEdit);
         d->currentActivity->loadPriceWidget(d->stockSplit);
+
+        updateTotalAmount();
     }
 
     for (const auto helper : qAsConst(d->amountEditCurrencyHelpers)) {
@@ -876,7 +932,7 @@ void InvestTransactionEditor::activityChanged(int index)
         if (d->currentActivity) {
             oldType = d->currentActivity->type();
         }
-        delete d->currentActivity;
+        const auto previousActivity = d->currentActivity;
         switch(type) {
         default:
         case eMyMoney::Split::InvestmentTransactionType::BuyShares:
@@ -907,6 +963,13 @@ void InvestTransactionEditor::activityChanged(int index)
         }
         d->currentActivity->showWidgets();
 
+        // update the stocksplit when switching between e.g. buy and sell
+        if (previousActivity && previousActivity->sharesFactor() != d->currentActivity->sharesFactor()) {
+            d->stockSplit.setShares(-d->stockSplit.shares());
+            d->stockSplit.setValue(-d->stockSplit.value());
+        }
+        delete previousActivity;
+
         if (type != eMyMoney::Split::InvestmentTransactionType::SplitShares &&
                 oldType == eMyMoney::Split::InvestmentTransactionType::SplitShares) {
             // switch to split
@@ -935,6 +998,18 @@ void InvestTransactionEditor::saveTransaction()
 {
     MyMoneyTransaction t;
 
+    AlkValue::RoundingMethod roundingMethod = AlkValue::RoundRound;
+    if (d->security.roundingMethod() != AlkValue::RoundNever)
+        roundingMethod = d->security.roundingMethod();
+
+    int currencyFraction = d->currency.smallestAccountFraction();
+    int securityFraction = d->security.smallestAccountFraction();
+
+    auto roundSplitValues = [&](MyMoneySplit& split, int sharesFraction) {
+        split.setShares(MyMoneyMoney(split.shares().convertDenominator(sharesFraction, roundingMethod)));
+        split.setValue(MyMoneyMoney(split.value().convertDenominator(currencyFraction, roundingMethod)));
+    };
+
     if (!d->transaction.id().isEmpty()) {
         t = d->transaction;
     } else {
@@ -949,6 +1024,7 @@ void InvestTransactionEditor::saveTransaction()
     // we start with the previous values, clear id to make sure
     // we can add them later on
     d->stockSplit.clearId();
+    d->assetSplit.clearId();
 
     t.setCommodity(d->currency.id());
 
@@ -956,44 +1032,43 @@ void InvestTransactionEditor::saveTransaction()
 
     t.setPostDate(d->ui->dateEdit->date());
     d->stockSplit.setMemo(d->ui->memoEdit->toPlainText());
+    d->stockSplit.setAction(d->currentActivity->actionString());
 
     d->currentActivity->adjustStockSplit(d->stockSplit);
 
     QList<MyMoneySplit> resultSplits;  // concatenates splits for easy processing
 
-    // now update and add what we have in the model(s)
+    // now update and add what we have in the models
     if (d->currentActivity->assetAccountRequired() != Invest::Activity::Unused) {
-        resultSplits.append(d->assetSplit);
-    }
-    if (d->currentActivity->feesRequired() != Invest::Activity::Unused) {
-        addSplitsFromModel(resultSplits, d->feeSplitModel);
-    }
-    if (d->currentActivity->interestRequired() != Invest::Activity::Unused) {
-        addSplitsFromModel(resultSplits, d->interestSplitModel);
-    }
-
-    AlkValue::RoundingMethod roundingMethod = AlkValue::RoundRound;
-    if (d->security.roundingMethod() != AlkValue::RoundNever)
-        roundingMethod = d->security.roundingMethod();
-
-    int currencyFraction = d->currency.smallestAccountFraction();
-    int securityFraction = d->security.smallestAccountFraction();
-
-    // assuming that all non-stock splits are monetary
-    foreach (auto split, resultSplits) {
-        split.clearId();
-        split.setShares(MyMoneyMoney(split.shares().convertDenominator(currencyFraction, roundingMethod)));
-        split.setValue(MyMoneyMoney(split.value().convertDenominator(currencyFraction, roundingMethod)));
-        t.addSplit(split);
+        d->assetSplit.clearId();
+        roundSplitValues(d->assetSplit, currencyFraction);
+        t.addSplit(d->assetSplit);
     }
 
     // Don't do any rounding on a split factor
     if (d->currentActivity->type() != eMyMoney::Split::InvestmentTransactionType::SplitShares) {
-        // only the shares variable of a stock split isn't evaluated in currency
-        d->stockSplit.setShares(MyMoneyMoney(d->stockSplit.shares().convertDenominator(securityFraction, roundingMethod)));
-        d->stockSplit.setValue(MyMoneyMoney(d->stockSplit.value().convertDenominator(currencyFraction, roundingMethod)));
+        roundSplitValues(d->stockSplit, securityFraction);
+        if (d->currentActivity->priceMode() == eDialogs::PriceMode::PricePerTransaction) {
+            d->stockSplit.setPrice(d->stockSplit.value() / d->stockSplit.shares());
+        } else {
+            d->stockSplit.setPrice(d->ui->priceAmountEdit->value());
+        }
     }
     t.addSplit(d->stockSplit);
+
+    if (d->currentActivity->feesRequired() != Invest::Activity::Unused) {
+        resultSplits.append(d->feeSplitModel->splitList());
+    }
+    if (d->currentActivity->interestRequired() != Invest::Activity::Unused) {
+        resultSplits.append(d->interestSplitModel->splitList());
+    }
+
+    // assuming that all non-stock splits are monetary
+    for (auto& split : resultSplits) {
+        split.clearId();
+        roundSplitValues(split, currencyFraction);
+        t.addSplit(split);
+    }
 
     MyMoneyFileTransaction ft;
     try {
