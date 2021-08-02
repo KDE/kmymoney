@@ -767,6 +767,8 @@ const QStringList WebPriceQuote::quoteSourcesNative()
     QRegularExpressionMatch match;
 
     // get rid of all 'non online quote source' entries
+    // and only keep the names of the quote sources in the list
+    // (i.e. remove the leading "Online-Quote-Source-")
     for (it = groups.begin(); it != groups.end(); it = groups.erase(it)) {
         if ((*it).indexOf(onlineQuoteSource, 0, &match) >= 0) {
             // Insert the name part
@@ -798,7 +800,7 @@ const QStringList WebPriceQuote::quoteSourcesNative()
 
     // if the user has OLD quote source based only on symbols (and not ISIN)
     // now is the time to convert it to the new system.
-    foreach (const auto group, groups) {
+    for (const auto& group : groups) {
         KConfigGroup grp = kconfig->group(QString(QLatin1String("Online-Quote-Source-%1")).arg(group));
         if (grp.hasKey("SymbolRegex")) {
             grp.writeEntry("IDRegex", grp.readEntry("SymbolRegex"));
@@ -889,6 +891,7 @@ void WebPriceQuoteSource::write() const
     else
         grp.deleteEntry("SkipStripping");
     kconfig->sync();
+    kconfig->reparseConfiguration();
 }
 
 void WebPriceQuoteSource::rename(const QString& name)
@@ -903,6 +906,7 @@ void WebPriceQuoteSource::remove() const
     KSharedConfigPtr kconfig = KSharedConfig::openConfig();
     kconfig->deleteGroup(QString("Online-Quote-Source-%1").arg(m_name));
     kconfig->sync();
+    kconfig->reparseConfiguration();
 }
 
 //

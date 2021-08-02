@@ -47,6 +47,24 @@ public:
         delete ui;
     }
 
+    void updateButtonState()
+    {
+        ui->m_newButton->setEnabled((ui->m_quoteSourceList->findItems(i18n("New Quote Source"), Qt::MatchExactly)).isEmpty());
+
+        // clang-format off
+        const auto modified = ui->m_editURL->text() != m_currentItem.m_url
+        || ui->m_editCSVURL->text() != m_currentItem.m_csvUrl
+        || ui->m_editIdentifier->text() != m_currentItem.m_webID
+        || ui->m_editIdentifyBy->currentData().toInt() != static_cast<int>(m_currentItem.m_webIDBy)
+        || ui->m_editDate->text() != m_currentItem.m_date
+        || ui->m_editDateFormat->text() != m_currentItem.m_dateformat
+        || ui->m_editPrice->text() != m_currentItem.m_price
+        || ui->m_skipStripping->isChecked() != m_currentItem.m_skipStripping;
+        // clang-format on
+
+        ui->m_updateButton->setEnabled(modified);
+    }
+
     Ui::KSettingsOnlineQuotes  *ui;
     QList<WebPriceQuoteSource>  m_resetList;
     WebPriceQuoteSource         m_currentItem;
@@ -59,7 +77,6 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent) :
 {
     Q_D(KSettingsOnlineQuotes);
     d->ui->setupUi(this);
-    QStringList groups = WebPriceQuote::quoteSources();
 
     loadList(true /*updateResetList*/);
 
@@ -124,7 +141,7 @@ void KSettingsOnlineQuotes::loadList(const bool updateResetList)
         d->ui->m_quoteSourceList->setCurrentItem(first);
     slotLoadWidgets();
 
-    d->ui->m_newButton->setEnabled((d->ui->m_quoteSourceList->findItems(i18n("New Quote Source"), Qt::MatchExactly)).count() == 0);
+    d->updateButtonState();
     connect(d->ui->m_quoteSourceList, &QListWidget::itemChanged, this, &KSettingsOnlineQuotes::slotEntryRenamed);
 }
 
@@ -202,18 +219,7 @@ void KSettingsOnlineQuotes::slotLoadWidgets()
 void KSettingsOnlineQuotes::slotEntryChanged()
 {
     Q_D(KSettingsOnlineQuotes);
-    // clang-format off
-    bool modified = d->ui->m_editURL->text() != d->m_currentItem.m_url
-                    || d->ui->m_editCSVURL->text() != d->m_currentItem.m_csvUrl
-                    || d->ui->m_editIdentifier->text() != d->m_currentItem.m_webID
-                    || d->ui->m_editIdentifyBy->currentData().toInt() != static_cast<int>(d->m_currentItem.m_webIDBy)
-                    || d->ui->m_editDate->text() != d->m_currentItem.m_date
-                    || d->ui->m_editDateFormat->text() != d->m_currentItem.m_dateformat
-                    || d->ui->m_editPrice->text() != d->m_currentItem.m_price
-                    || d->ui->m_skipStripping->isChecked() != d->m_currentItem.m_skipStripping;
-    // clang-format on
-
-    d->ui->m_updateButton->setEnabled(modified);
+    d->updateButtonState();
 }
 
 void KSettingsOnlineQuotes::slotEntryChanged(int)
@@ -328,9 +334,17 @@ void KSettingsOnlineQuotes::slotDeleteEntry()
     else if (row >= count && count > 0)    // ...or last entry if this was the last entry...
         item = d->ui->m_quoteSourceList->item(count - 1);
 
-    if (item) {
-        d->ui->m_quoteSourceList->setCurrentItem(item);
-        slotLoadWidgets();
+    // Remember next selected name and reload list
+    const auto name = item->text();
+    loadList();
+
+    const auto itemList = d->ui->m_quoteSourceList->findItems(name, Qt::MatchExactly);
+    if (!itemList.isEmpty()) {
+        item = itemList.at(0);
+        if (item) {
+            d->ui->m_quoteSourceList->setCurrentItem(item);
+            slotLoadWidgets();
+        }
     }
 }
 
@@ -349,19 +363,28 @@ void KSettingsOnlineQuotes::slotEntryRenamed(QListWidgetItem* item)
         return;
 
     d->m_quoteInEditing = false;
-    QString text = item->text();
+    const auto newName = item->text();
     int nameCount = 0;
     for (auto i = 0; i < d->ui->m_quoteSourceList->count(); ++i) {
-        if (d->ui->m_quoteSourceList->item(i)->text() == text)
+        if (d->ui->m_quoteSourceList->item(i)->text() == newName)
             ++nameCount;
     }
 
     // Make sure we get a non-empty and unique name
-    if (text.length() > 0 && nameCount == 1) {
-        d->m_currentItem.rename(text);
+    auto name = d->m_currentItem.m_name;
+    if (newName.length() > 0 && nameCount == 1) {
+        d->m_currentItem.rename(newName);
+
+        loadList();
+
+        QListWidgetItem* item = d->ui->m_quoteSourceList->findItems(newName, Qt::MatchExactly).at(0);
+        if (item) {
+            d->ui->m_quoteSourceList->setCurrentItem(item);
+            slotLoadWidgets();
+        }
+
     } else {
         item->setText(d->m_currentItem.m_name);
     }
-    d->ui->m_quoteSourceList->sortItems();
-    d->ui->m_newButton->setEnabled(d->ui->m_quoteSourceList->findItems(i18n("New Quote Source"), Qt::MatchExactly).count() == 0);
+    d->updateButtonState();
 }
