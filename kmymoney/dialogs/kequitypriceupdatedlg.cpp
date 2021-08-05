@@ -41,7 +41,6 @@
 #include "mymoneyfile.h"
 #include "mymoneyprice.h"
 #include "mymoneysecurity.h"
-#include "webpricequote.h"
 
 // ----------------------------------------------------------------------------
 // ALkimia Includes

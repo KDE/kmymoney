@@ -23,7 +23,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "webpricequote.h"
 #include "ui_kgncpricesourcedlg.h"
 
 class KGncPriceSourceDlgPrivate
@@ -60,8 +59,8 @@ KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString& 
     d->ui->textStockName->setText(i18n("Investment: %1", stockName));
     d->ui->textGncSource->setText(i18n("Quote source: %1", gncSource));
     d->ui->listKnownSource->clear();
-//  TODO: return this feature
-//  d->ui->listKnownSource->insertItems(0, WebPriceQuote::quoteSources());
+    //  TODO: return this feature
+    //  d->ui->listKnownSource->insertItems(0, AlkOnlineQuotesProfileManager::instance().profiles().first()->quoteSources());
     d->ui->lineUserSource->setText(gncSource);
     d->ui->checkAlwaysUse->setChecked(true);
     d->ui->buttonsSource->setId(d->ui->buttonNoSource, 0);

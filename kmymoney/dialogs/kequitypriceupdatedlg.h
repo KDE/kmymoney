@@ -21,10 +21,14 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+#include "mymoneyfile.h"
+#include "mymoneyprice.h"
+#include "mymoneysecurity.h"
+#include "mymoneystatement.h"
 
-class MyMoneySecurity;
-class MyMoneyStatement;
-class MyMoneyPrice;
+// class MyMoneySecurity;
+// class MyMoneyStatement;
+// class MyMoneyPrice;
 
 typedef QPair<QString, QString> MyMoneySecurityPair;
 typedef QMap<QDate, MyMoneyPrice> MyMoneyPriceEntries;
