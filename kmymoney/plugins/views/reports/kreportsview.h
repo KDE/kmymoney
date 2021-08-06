@@ -108,7 +108,7 @@ public Q_SLOTS:
 
     void slotPrintView();
     void slotCopyView();
-    void slotSaveView();
+    void slotExportView();
     void slotConfigure();
     void slotDuplicate();
     void slotToggleChart();
