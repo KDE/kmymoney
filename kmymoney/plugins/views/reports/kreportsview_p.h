@@ -231,26 +231,13 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     m_layout->setStretch(1, 10);
     m_layout->setStretch(2, 10);
 
-    connect(m_control->ui->buttonChart, &QAbstractButton::clicked,
-            eventHandler, &KReportsView::slotToggleChart);
-
-    connect(m_control->ui->buttonConfigure, &QAbstractButton::clicked,
-            eventHandler, &KReportsView::slotConfigure);
-
-    connect(m_control->ui->buttonNew, &QAbstractButton::clicked,
-            eventHandler, &KReportsView::slotDuplicate);
-
-    connect(m_control->ui->buttonCopy, &QAbstractButton::clicked,
-            eventHandler, &KReportsView::slotCopyView);
-
-    connect(m_control->ui->buttonExport, &QAbstractButton::clicked,
-            eventHandler, &KReportsView::slotSaveView);
-
-    connect(m_control->ui->buttonDelete, &QAbstractButton::clicked,
-            eventHandler, &KReportsView::slotDelete);
-
-    connect(m_control->ui->buttonClose, &QAbstractButton::clicked,
-            eventHandler, &KReportsView::slotCloseCurrent);
+    connect(m_control->ui->buttonChart, &QAbstractButton::clicked, eventHandler, &KReportsView::slotToggleChart);
+    connect(m_control->ui->buttonConfigure, &QAbstractButton::clicked, eventHandler, &KReportsView::slotConfigure);
+    connect(m_control->ui->buttonNew, &QAbstractButton::clicked, eventHandler, &KReportsView::slotDuplicate);
+    connect(m_control->ui->buttonCopy, &QAbstractButton::clicked, eventHandler, &KReportsView::slotCopyView);
+    connect(m_control->ui->buttonExport, &QAbstractButton::clicked, eventHandler, &KReportsView::slotExportView);
+    connect(m_control->ui->buttonDelete, &QAbstractButton::clicked, eventHandler, &KReportsView::slotDelete);
+    connect(m_control->ui->buttonClose, &QAbstractButton::clicked, eventHandler, &KReportsView::slotCloseCurrent);
 
 #ifdef ENABLE_WEBENGINE
     connect(m_tableView->page(), &QWebEnginePage::urlChanged,

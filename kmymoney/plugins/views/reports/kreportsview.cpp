@@ -275,7 +275,7 @@ void KReportsView::slotOpenUrl(const QUrl &url)
         else if (command == QLatin1String("copy"))
             slotCopyView();
         else if (command == QLatin1String("save"))
-            slotSaveView();
+            slotExportView();
         else if (command == QLatin1String("configure"))
             slotConfigure();
         else if (command == QLatin1String("duplicate"))
@@ -323,7 +323,7 @@ void KReportsView::slotCopyView()
         tab->copyToClipboard();
 }
 
-void KReportsView::slotSaveView()
+void KReportsView::slotExportView()
 {
     Q_D(KReportsView);
     if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget())) {
