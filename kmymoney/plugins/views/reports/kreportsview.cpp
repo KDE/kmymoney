@@ -331,9 +331,7 @@ void KReportsView::slotExportView()
         dialog->setMimeTypeFilters({QStringLiteral("text/csv"), QStringLiteral("text/html")});
         dialog->setFileMode(QFileDialog::AnyFile);
         dialog->setAcceptMode(QFileDialog::AcceptSave);
-        if (auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->currentWidget())) {
-            dialog->selectFile(tab->report().name());
-        }
+        dialog->selectFile(tab->report().name());
 
         QUrl newURL;
         QString selectedMimeType;
