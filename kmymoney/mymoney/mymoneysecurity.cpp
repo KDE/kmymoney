@@ -100,7 +100,7 @@ bool MyMoneySecurity::operator < (const MyMoneySecurity& right) const
     Q_D(const MyMoneySecurity);
     auto d2 = static_cast<const MyMoneySecurityPrivate *>(right.d_func());
     if (d->m_securityType == d2->m_securityType)
-        return d->m_name < d2->m_name;
+        return QString::localeAwareCompare(d->m_name, d2->m_name) < 0;
     return d->m_securityType < d2->m_securityType;
 }
 
