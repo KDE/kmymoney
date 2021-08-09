@@ -196,6 +196,7 @@ void KMyMoneyAccountTreeView::keyPressEvent(QKeyEvent *event)
     Q_D(KMyMoneyAccountTreeView);
     if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
         d->openIndex(currentIndex());
+        emit returnPressed();
         event->accept();
     } else {
         QTreeView::keyPressEvent(event);

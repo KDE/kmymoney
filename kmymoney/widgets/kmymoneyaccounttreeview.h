@@ -57,6 +57,7 @@ protected Q_SLOTS:
 Q_SIGNALS:
     void selectByObject(const MyMoneyObject&, eView::Intent);
     void selectByVariant(const QVariantList&, eView::Intent);
+    void returnPressed();
 
 private:
     KMyMoneyAccountTreeViewPrivate * const d_ptr;

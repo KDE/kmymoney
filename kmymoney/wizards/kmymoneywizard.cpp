@@ -163,3 +163,13 @@ void KMyMoneyWizard::accept()
     if (page->isComplete())
         QDialog::accept();
 }
+
+void KMyMoneyWizard::selectNextPage()
+{
+    nextButtonClicked();
+}
+
+void KMyMoneyWizard::selectPreviousPage()
+{
+    backButtonClicked();
+}

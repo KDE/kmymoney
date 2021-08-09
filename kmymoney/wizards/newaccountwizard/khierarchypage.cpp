@@ -61,6 +61,7 @@ HierarchyPage::HierarchyPage(Wizard* wizard) :
     d->ui->m_parentAccounts->sortByColumn((int)eAccountsModel::Column::Account, Qt::AscendingOrder);
 
     connect(d->ui->m_parentAccounts->selectionModel(), &QItemSelectionModel::currentChanged, this, &HierarchyPage::parentAccountChanged);
+    connect(d->ui->m_parentAccounts, &KMyMoneyAccountTreeView::returnPressed, wizard, &KMyMoneyWizard::selectNextPage);
 }
 
 HierarchyPage::~HierarchyPage()
