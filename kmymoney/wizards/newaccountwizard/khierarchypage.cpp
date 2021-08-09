@@ -95,6 +95,7 @@ HierarchyPage::HierarchyPage(Wizard* wizard) :
     proxyModel->setDynamicSortFilter(true);
 
     connect(d->ui->m_parentAccounts->selectionModel(), &QItemSelectionModel::currentChanged, this, &HierarchyPage::parentAccountChanged);
+    connect(d->ui->m_parentAccounts, &KMyMoneyAccountTreeView::startEdit, wizard, &KMyMoneyWizard::selectNextPage);
 }
 
 HierarchyPage::~HierarchyPage()

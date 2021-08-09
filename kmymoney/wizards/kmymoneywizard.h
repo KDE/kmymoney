@@ -164,6 +164,10 @@ public:
 
     virtual ~KMyMoneyWizard();
 
+public Q_SLOTS:
+    void selectNextPage();
+    void selectPreviousPage();
+
 Q_SIGNALS:
 //  /**
 //    * This signal is sent out, when a new payee needs to be created
