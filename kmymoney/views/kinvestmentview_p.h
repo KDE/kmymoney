@@ -101,6 +101,7 @@ public:
         m_equitiesProxyModel->setHideAllEntries(true);
         m_equitiesProxyModel->setSourceModel(extraColumnModel);
         m_equitiesProxyModel->sort(AccountsModel::Column::AccountName);
+        m_equitiesProxyModel->setSortRole(Qt::EditRole);
 
         ui->m_equitiesTree->setModel(m_equitiesProxyModel);
 

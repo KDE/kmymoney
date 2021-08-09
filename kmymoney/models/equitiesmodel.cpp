@@ -223,20 +223,39 @@ QVariant EquitiesModel::extraColumnData(const QModelIndex& parent, int row, int 
             const auto tradingCurrencyId = tradingCurrencyIdx.data(eMyMoney::Model::IdRole).toString();
             const auto prec = MyMoneyMoney::denomToPrec(tradingCurrencyIdx.data(eMyMoney::Model::SecuritySmallestAccountFractionRole).toInt());
             const auto tradingCurrencySymbol = tradingCurrencyIdx.data(eMyMoney::Model::SecuritySymbolRole).toString();
-            return (file->price(acc.currencyId(), tradingCurrencyId).rate(tradingCurrencyId) * balance).formatMoney(tradingCurrencySymbol, prec);
+
+            const auto value = (file->price(acc.currencyId(), tradingCurrencyId).rate(tradingCurrencyId) * balance);
+
+            if(role == Qt::EditRole) {
+                return value.toDouble();
+            } else {
+                return value.formatMoney(tradingCurrencySymbol, prec);
+            }
         }
 
         case Quantity: {
             const auto balance = baseIdx.data(eMyMoney::Model::AccountBalanceRole).value<MyMoneyMoney>();
             const auto prec = MyMoneyMoney::denomToPrec(securityIdx.data(eMyMoney::Model::SecuritySmallestAccountFractionRole).toInt());
-            return balance.formatMoney(QString(), prec);
+
+            if(role == Qt::EditRole) {
+                return balance.toDouble();
+            } else {
+                return balance.formatMoney(QString(), prec);
+            }
         }
 
         case Price: {
             const auto tradingCurrencyId = tradingCurrencyIdx.data(eMyMoney::Model::IdRole).toString();
             const auto prec = securityIdx.data(eMyMoney::Model::SecurityPricePrecisionRole).toInt();
             const auto tradingCurrencySymbol = tradingCurrencyIdx.data(eMyMoney::Model::SecuritySymbolRole).toString();
-            return file->price(acc.currencyId(), tradingCurrencyId).rate(tradingCurrencyId).formatMoney(tradingCurrencySymbol, prec);
+
+            const auto value = file->price(acc.currencyId(), tradingCurrencyId).rate(tradingCurrencyId);
+
+            if(role == Qt::EditRole) {
+                return value.toDouble();
+            } else {
+                return value.formatMoney(tradingCurrencySymbol, prec);
+            }
         }
 
         default:
