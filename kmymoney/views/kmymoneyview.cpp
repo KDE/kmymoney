@@ -461,6 +461,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     case View::Home:
     case View::Reports:
         pActions[eMenu::Action::Print]->setEnabled(true);
+        pActions[eMenu::Action::PrintPreview]->setEnabled(true);
         break;
 
     default:

@@ -107,6 +107,11 @@ void KReportsView::executeAction(eMenu::Action action, const SelectedObjects& se
             slotPrintView();
         }
         break;
+    case eMenu::Action::PrintPreview:
+        if (d->isActiveView()) {
+            slotPrintPreviewView();
+        }
+        break;
     case eMenu::Action::ChartAccountBalance: {
         const auto account = MyMoneyFile::instance()->accountsModel()->itemById(selections.firstSelection(SelectedObjects::Account));
         if (!account.id().isEmpty()) {
@@ -314,6 +319,13 @@ void KReportsView::slotPrintView()
     Q_D(KReportsView);
     if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget()))
         tab->print();
+}
+
+void KReportsView::slotPrintPreviewView()
+{
+    Q_D(KReportsView);
+    if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget()))
+        tab->printPreview();
 }
 
 void KReportsView::slotCopyView()

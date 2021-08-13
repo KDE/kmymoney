@@ -16,9 +16,9 @@ class KMM_PRINTER_EXPORT KMyMoneyPrinter
     KMyMoneyPrinter();
 protected:
     static QPrintDialog* dialog();
-    static QPrinter* instance(QPrinter::PrinterMode mode = QPrinter::ScreenResolution);
 
 public:
+    static QPrinter* instance(QPrinter::PrinterMode mode = QPrinter::ScreenResolution);
     static QPrinter* startPrint(QPrinter::PrinterMode mode = QPrinter::ScreenResolution);
     static void cleanup();
 };

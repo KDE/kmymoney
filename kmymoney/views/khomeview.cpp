@@ -13,6 +13,7 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+#include <QPrintPreviewDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -81,6 +82,11 @@ void KHomeView::executeAction(eMenu::Action action, const SelectedObjects& selec
             slotPrintView();
         }
         break;
+    case eMenu::Action::PrintPreview:
+        if (d->isActiveView()) {
+            slotPrintPreviewView();
+        }
+        break;
     case eMenu::Action::FileClose:
         d->m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
         break;
@@ -136,6 +142,40 @@ void KHomeView::slotPrintView()
             d->m_view->print(printer);
 #endif
         }
+    }
+}
+
+void KHomeView::slotPrintPreviewView()
+{
+    Q_D(KHomeView);
+    if (d->m_view) {
+        QPrintPreviewDialog dlg(KMyMoneyPrinter::instance(), d->m_view);
+        connect(&dlg, &QPrintPreviewDialog::paintRequested, d->m_view, [&](QPrinter* printer) {
+            Q_D(KHomeView);
+#ifdef ENABLE_WEBENGINE
+            QEventLoop loop;
+            bool result = true;
+            auto printPreview = [&](bool success) {
+                result = success;
+                loop.quit();
+            };
+            d->m_view->page()->print(printer, std::move(printPreview));
+            loop.exec();
+            if (!result) {
+                QPainter painter;
+                if (painter.begin(printer)) {
+                    QFont font = painter.font();
+                    font.setPixelSize(20);
+                    painter.setFont(font);
+                    painter.drawText(QPointF(10, 25), QStringLiteral("Could not generate print preview."));
+                    painter.end();
+                }
+            }
+#else
+            d->m_view->print(printer);
+#endif
+        });
+        dlg.exec();
     }
 }
 

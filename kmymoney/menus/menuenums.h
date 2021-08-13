@@ -25,6 +25,7 @@ enum class Action {
     FileImportStatement,
     FileImportTemplate, FileExportTemplate,
     Print,
+    PrintPreview,
 #ifdef KMM_DEBUG
     FileDump,
 #endif

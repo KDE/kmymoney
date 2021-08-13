@@ -114,6 +114,7 @@ public Q_SLOTS:
     void slotOpenUrl(const QUrl &url);
 
     void slotPrintView();
+    void slotPrintPreviewView();
     void slotCopyView();
     void slotExportView();
     void slotConfigure();

@@ -54,6 +54,7 @@ public Q_SLOTS:
       * Print the current view
       */
     void slotPrintView();
+    void slotPrintPreviewView();
     void slotSettingsChanged() override;
 
 private:

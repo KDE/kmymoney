@@ -1084,6 +1084,7 @@ public:
             Action::NewPayee,
             Action::NewTag,
             Action::Print,
+            Action::PrintPreview,
         };
 
         for (const auto& action : actions)
@@ -1637,6 +1638,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     lutActions.insert(Action::FileClose, KStandardAction::close(this, &KMyMoneyApp::slotFileClose, aC));
     KStandardAction::quit(this, &KMyMoneyApp::slotFileQuit, aC);
     lutActions.insert(Action::Print, KStandardAction::print(this, &KMyMoneyApp::slotExecuteAction, aC));
+    lutActions.insert(Action::PrintPreview, KStandardAction::printPreview(this, &KMyMoneyApp::slotExecuteAction, aC));
     KStandardAction::preferences(this, &KMyMoneyApp::slotSettings, aC);
 
     // *************

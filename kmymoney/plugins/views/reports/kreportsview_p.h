@@ -35,6 +35,7 @@
 #include <QTextCodec>
 #include <QMenu>
 #include <QPointer>
+#include <QPrintPreviewDialog>
 #include <QWheelEvent>
 #ifdef ENABLE_WEBENGINE
 #include <QWebEngineView>
@@ -125,6 +126,7 @@ public:
         return m_report;
     }
     void print();
+    void printPreview();
     void toggleChart();
     /**
      * Updates information about plotted chart in report's data
@@ -313,6 +315,38 @@ void KReportTab::print()
 #endif
             }
         }
+    }
+}
+
+void KReportTab::printPreview()
+{
+    if (m_tableView) {
+        QPrintPreviewDialog dlg(KMyMoneyPrinter::instance(), m_tableView);
+        connect(&dlg, &QPrintPreviewDialog::paintRequested, m_tableView, [&](QPrinter* printer) {
+#ifdef ENABLE_WEBENGINE
+            QEventLoop loop;
+            bool result = true;
+            auto printPreview = [&](bool success) {
+                result = success;
+                loop.quit();
+            };
+            m_tableView->page()->print(printer, std::move(printPreview));
+            loop.exec();
+            if (!result) {
+                QPainter painter;
+                if (painter.begin(printer)) {
+                    QFont font = painter.font();
+                    font.setPixelSize(20);
+                    painter.setFont(font);
+                    painter.drawText(QPointF(10, 25), QStringLiteral("Could not generate print preview."));
+                    painter.end();
+                }
+            }
+#else
+            m_tableView->print(printer);
+#endif
+        });
+        dlg.exec();
     }
 }
 
