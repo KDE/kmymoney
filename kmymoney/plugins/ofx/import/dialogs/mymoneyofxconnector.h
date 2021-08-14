@@ -98,6 +98,9 @@ public:
     const QByteArray statementRequest() const;
     const QByteArray statementResponse(const QDate& _dtstart) const;
 
+    // returns the user agent string to be used or empty to use system default
+    QString userAgent() const;
+
 private:
     void initRequest(OfxFiLogin* fi) const;
     QDate statementStartDate() const;

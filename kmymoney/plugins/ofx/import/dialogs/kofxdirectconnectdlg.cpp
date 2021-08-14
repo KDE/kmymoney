@@ -18,11 +18,12 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <kio/job_base.h>
-#include <KJobUiDelegate>
 #include <KIO/TransferJob>
-#include <KMessageBox>
+#include <KJobUiDelegate>
 #include <KLocalizedString>
+#include <KMessageBox>
+#include <KProtocolManager>
+#include <kio/job_base.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -110,6 +111,11 @@ bool KOfxDirectConnectDlg::init()
     }
 
     m_job->addMetaData("content-type", "Content-type: application/x-ofx");
+    m_job->addMetaData("SendUserAgent", "true");
+    auto userAgent = m_connector.userAgent();
+    if (!userAgent.isEmpty()) {
+        m_job->addMetaData("UserAgent", userAgent);
+    }
 
     connect(m_job, &KJob::result, this, &KOfxDirectConnectDlg::slotOfxFinished);
     connect(m_job, &KIO::TransferJob::data, this, &KOfxDirectConnectDlg::slotOfxData);

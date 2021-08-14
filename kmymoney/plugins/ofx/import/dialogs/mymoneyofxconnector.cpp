@@ -13,12 +13,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDateTime>
-#include <QRegExp>
-#include <QByteArray>
-#include <QList>
 #include <QApplication>
+#include <QByteArray>
+#include <QDateTime>
 #include <QDebug>
+#include <QList>
+#include <QRegExp>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -232,6 +232,10 @@ QString MyMoneyOfxConnector::accountnum() const
 QString MyMoneyOfxConnector::url() const
 {
     return m_fiSettings.value("url");
+}
+QString MyMoneyOfxConnector::userAgent() const
+{
+    return m_fiSettings.value(QLatin1String("kmmofx-useragent"));
 }
 
 QDate MyMoneyOfxConnector::statementStartDate() const
