@@ -9,11 +9,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLabel>
-#include <QFile>
-#include <QTextStream>
-#include <QTemporaryFile>
 #include <QDebug>
+#include <QFile>
+#include <QLabel>
+#include <QRegularExpression>
+#include <QTemporaryFile>
+#include <QTextCodec>
+#include <QTextStream>
+#include <QUuid>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -60,7 +63,7 @@ bool KOfxDirectConnectDlg::init()
 {
     show();
 
-    QByteArray request = m_connector.statementRequest();
+    auto request = m_connector.statementRequest();
     if (request.isEmpty()) {
         hide();
         return false;
@@ -80,21 +83,25 @@ bool KOfxDirectConnectDlg::init()
         d->m_fpTrace.open(QIODevice::WriteOnly | QIODevice::Append);
     }
 
+    // Check if we need to tweak the request for specific institutions
+    MyMoneyOfxConnector::institutionSpecificRequestAdjustment(request);
+
     if (d->m_fpTrace.isOpen()) {
         QByteArray connectorData = m_connector.url().toUtf8();
         d->m_fpTrace.write("url: ", 5);
         d->m_fpTrace.write(connectorData, strlen(connectorData));
         d->m_fpTrace.write("\n", 1);
         d->m_fpTrace.write("request:\n", 9);
-        QByteArray trcData(request);  // make local copy
+        auto trcData = request.toUtf8(); // make local UTF-8 byte array copy
         trcData.replace('\r', ""); // krazy:exclude=doublequote_chars
         d->m_fpTrace.write(trcData, trcData.size());
         d->m_fpTrace.write("\n", 1);
         d->m_fpTrace.write("response:\n", 10);
     }
 
-    qDebug("creating job");
-    m_job = KIO::http_post(QUrl(m_connector.url()), request, KIO::HideProgressInfo);
+    auto codec = QTextCodec::codecForName("Windows-1251");
+    qDebug() << "creating job"; // << codec->fromUnicode(request);
+    m_job = KIO::http_post(QUrl(m_connector.url()), codec->fromUnicode(request), KIO::HideProgressInfo);
 
     // open the temp file. We come around here twice if init() is called twice
     if (m_tmpfile) {
@@ -110,11 +117,11 @@ bool KOfxDirectConnectDlg::init()
         return false;
     }
 
-    m_job->addMetaData("content-type", "Content-type: application/x-ofx");
-    m_job->addMetaData("SendUserAgent", "true");
+    m_job->addMetaData(QLatin1String("content-type"), QLatin1String("Content-type: application/x-ofx"));
     auto userAgent = m_connector.userAgent();
     if (!userAgent.isEmpty()) {
-        m_job->addMetaData("UserAgent", userAgent);
+        m_job->addMetaData(QLatin1String("UserAgent"), userAgent);
+        m_job->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
     }
 
     connect(m_job, &KJob::result, this, &KOfxDirectConnectDlg::slotOfxFinished);

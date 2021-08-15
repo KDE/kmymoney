@@ -8,30 +8,32 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLabel>
-#include <QRegExp>
 #include <QCheckBox>
+#include <QLabel>
+#include <QProgressDialog>
+#include <QRegExp>
+#include <QStandardPaths>
 #include <QTabWidget>
+#include <QTextCodec>
 #include <QTextStream>
 #include <QTimer>
+#include <QUuid>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
 #include <KMessageBox>
-
-#include <QProgressDialog>
 #include <KListWidgetSearchLine>
 #include <KComboBox>
 #include <KUrlRequester>
 #include <KWallet>
-#include <QStandardPaths>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "../ofxpartner.h"
+#include "kmymoneysettings.h"
 #include "mymoneyofxconnector.h"
 #include "passwordtoggle.h"
 
@@ -329,9 +331,10 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
 {
     bool result = true;
 
-    QString username = m_editUsername->text();
-    QString password = m_editPassword->text();
-    QString clientUid = m_editClientUid->text();
+    const auto username = m_editUsername->text();
+    const auto password = m_editPassword->text();
+    const auto clientUid = m_editClientUid->text();
+    const auto userAgent = m_userAgent->text();
 
     m_listAccount->clear();
 
@@ -370,14 +373,26 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
         QString hver = m_headerVersion->headerVersion();
         strncpy(fi.header_version, hver.toLatin1(), OFX_HEADERVERSION_LENGTH - 1);
 
+        auto codec = QTextCodec::codecForName("Windows-1251");
+        auto request = codec->toUnicode(libofx_request_accountinfo(&fi));
+
+        // Check if we need to tweak the request for specific institutions
+        MyMoneyOfxConnector::institutionSpecificRequestAdjustment(request);
+
         QUrl filename(QString("file://%1response.ofx").arg(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/')));
-        QByteArray req(libofx_request_accountinfo(&fi));
+
         // because the event loop is running while the request is performed disable the back button
         // (this function is not reentrant so the application might crash when back/next are used)
         QAbstractButton *backButton = button(QWizard::BackButton);
         bool backButtonState = backButton->isEnabled();
         backButton->setEnabled(false);
-        OfxHttpRequest(QString("POST"), QUrl((*m_it_info).url), req, QMap<QString, QString>(), filename, false);
+
+        QMap<QString, QString> metaData;
+        if (!userAgent.isEmpty()) {
+            metaData.insert(QLatin1String("UserAgent"), userAgent);
+        }
+
+        OfxHttpRequest(QString("POST"), QUrl((*m_it_info).url), codec->fromUnicode(request), metaData, filename, false);
         backButton->setEnabled(backButtonState);
 
         LibofxContextPtr ctx = libofx_get_new_context();

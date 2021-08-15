@@ -21,6 +21,8 @@
 #include <QRegExp>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QTextCodec>
+#include <QUuid>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -349,7 +351,7 @@ void MyMoneyOfxConnector::initRequest(OfxFiLogin* fi) const
     }
 }
 
-const QByteArray MyMoneyOfxConnector::statementRequest() const
+QString MyMoneyOfxConnector::statementRequest() const
 {
     OfxFiLogin fi;
     initRequest(&fi);
@@ -364,20 +366,28 @@ const QByteArray MyMoneyOfxConnector::statementRequest() const
     strncpy(account.account_number, accountnum().toLatin1(), OFX_ACCTID_LENGTH - 1);
     account.account_type = accounttype();
 
-    QByteArray result;
+    QString result;
     if (fi.userpass[0]) {
         char *szrequest = libofx_request_statement(&fi, &account, QDateTime(statementStartDate()).toTime_t());
-        QString request = szrequest;
-        // remove the trailing zero
-        result = request.toUtf8();
-        if(result.at(result.size()-1) == 0)
-            result.truncate(result.size() - 1);
+        auto codec = QTextCodec::codecForName("Windows-1251");
+        result = codec->toUnicode(szrequest);
         free(szrequest);
+        // remove the trailing zero
+        result.remove(QChar(0));
     }
 
     return result;
 }
 
+void MyMoneyOfxConnector::institutionSpecificRequestAdjustment(QString& request)
+{
+    if (request.contains(QLatin1String("<FID>67811"))) {
+        // USAA requires some specific settings
+        request.replace(QRegularExpression("NEWFILEUID:[\\d\\.]+"), QLatin1String("NEWFILEUID:NONE"));
+        request.replace(QRegularExpression("<TRNUID>[\\d\\.]+"), QStringLiteral("<TRNUID>%1").arg(QUuid::createUuid().toString(QUuid::WithoutBraces)));
+        request.replace(QRegularExpression("<DTACCTUP>19700101"), QLatin1String("<DTACCTUP>19900101"));
+    }
+}
 
 #if 0
 

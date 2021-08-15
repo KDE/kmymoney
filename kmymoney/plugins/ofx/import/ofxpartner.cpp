@@ -324,6 +324,9 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const QUrl &url, const QByte
         job = m_postJob = KIO::http_post(url, postData, jobFlags);
         m_postJob->addMetaData("content-type", "Content-type: application/x-ofx");
         m_postJob->addMetaData(metaData);
+        if (metaData.contains(QLatin1String("UserAgent"))) {
+            m_postJob->addMetaData(QLatin1String("SendUserAgent"), QLatin1String("true"));
+        }
         connect(m_postJob, &KIO::TransferJob::data, this, &OfxHttpRequest::slotOfxData);
         connect(m_postJob, &KIO::Job::connected, this, &OfxHttpRequest::slotOfxConnected);
     }
