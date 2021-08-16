@@ -378,7 +378,7 @@ public:
             accountSet.addAccountGroup(eMyMoney::Account::Type::Equity);
 
         // set the accountset to show closed account if the settings say so
-        accountSet.setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
+        accountSet.setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
         accountSet.setShowInvestments(withInvestments);
         accountSet.load(ui->m_accountsView);
         q->connect(ui->m_accountsView, &KMyMoneyAccountSelector::stateChanged, q, &KTransactionFilter::slotUpdateSelections);

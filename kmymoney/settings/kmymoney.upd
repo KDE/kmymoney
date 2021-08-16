@@ -1,4 +1,10 @@
+Version=5
 Id=1
-File=kmymoneyrc
+File=kmymoney/kmymoneyrc
 Group=List Options
 Key=listErronousTransactionColor,listErroneousTransactionColor
+
+Id=remove-hide-acc-opt-2021
+File=kmymoney/kmymoneyrc
+Group=List Options
+RemoveKey=HideClosedAccounts

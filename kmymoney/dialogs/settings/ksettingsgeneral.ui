@@ -418,18 +418,6 @@ Set it to 0 to turn the feature off.</string>
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="kcfg_HideClosedAccounts">
-            <property name="whatsThis">
-             <string>This option hides all accounts that have been closed by the user in views and selection lists.
-
-You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden accounts in the views.</string>
-            </property>
-            <property name="text">
-             <string>Do not show closed accounts</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QCheckBox" name="kcfg_ExpertMode">
             <property name="text">
              <string>Show equity accounts</string>

@@ -176,16 +176,6 @@
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Do not show closed accounts</guilabel></term>
-    <listitem>
-      <para>Checking this box hides closed accounts from display in the Accounts,
-      Ledger, and Investment Views.  Hiding closed accounts makes viewing and working
-      with open accounts easier.  Unchecking this box will show closed accounts with
-      a line drawn through them allowing viewing and reopening if needed.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
     <term><guilabel>Show equity accounts</guilabel></term>
     <listitem>
       <para>By default, equity accounts are hidden in the Accounts View.  Selecting

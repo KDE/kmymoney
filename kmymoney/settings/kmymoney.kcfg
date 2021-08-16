@@ -228,10 +228,6 @@
    <label>Hide unused categories</label>
    <default>false</default>
   </entry>
-  <entry name="HideClosedAccounts" type="Bool">
-   <label>Hide closed accounts</label>
-   <default>false</default>
-  </entry>
   <entry name="ShowAllAccounts" type="Bool">
    <label>Show all accounts</label>
    <default>false</default>

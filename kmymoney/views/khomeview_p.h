@@ -847,13 +847,13 @@ public:
         int prec = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
         QList<MyMoneyAccount> accounts;
 
-        const auto showClosedAccounts = !KMyMoneySettings::hideClosedAccounts() || KMyMoneySettings::showAllAccounts();
+        const auto showAllAccounts = KMyMoneySettings::showAllAccounts();
 
         // get list of all accounts
         file->accountList(accounts);
         for (QList<MyMoneyAccount>::Iterator it = accounts.begin(); it != accounts.end();) {
             bool removeAccount = false;
-            if (!(*it).isClosed() || showClosedAccounts) {
+            if (!(*it).isClosed() || showAllAccounts) {
                 switch ((*it).accountType()) {
                 case Account::Type::Expense:
                 case Account::Type::Income:
@@ -1204,10 +1204,10 @@ public:
         // get list of all accounts
         file->accountList(accounts);
 
-        const auto showClosedAccounts = !KMyMoneySettings::hideClosedAccounts() || KMyMoneySettings::showAllAccounts();
+        const auto showAllAccounts = KMyMoneySettings::showAllAccounts();
 
         for (it = accounts.constBegin(); it != accounts.constEnd();) {
-            if (!(*it).isClosed() || showClosedAccounts) {
+            if (!(*it).isClosed() || showAllAccounts) {
                 switch ((*it).accountType()) {
                 // group all assets into one list but make sure that investment accounts always show up
                 case Account::Type::Investment:
