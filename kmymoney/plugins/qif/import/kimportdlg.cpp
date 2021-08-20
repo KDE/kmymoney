@@ -139,6 +139,8 @@ void KImportDlg::slotFileTextChanged(const QString& text)
         if (noerror) {
             // We want a file
             fileExists = !statjob->statResult().isDir();
+        } else {
+            KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", file().toDisplayString()), statjob->errorString(), i18n("File access error"));
         }
     }
 
