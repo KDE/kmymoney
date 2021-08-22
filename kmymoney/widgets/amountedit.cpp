@@ -296,7 +296,7 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
         // the current position is the beginning and there is
         // no '-' sign at the first position.
         if (event->key() == Qt::Key_Minus) {
-            if (cursorPosition() == 0 && text()[0] != '-') {
+            if (cursorPosition() == 0 && text().at(0) != '-') {
                 break;
             }
         }
