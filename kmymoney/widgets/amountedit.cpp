@@ -458,11 +458,8 @@ void AmountEdit::slotCalculatorResult()
     if (d->m_calculator != 0) {
         setText(d->m_calculator->result());
         ensureFractionalPart();
-#if 0
-        // I am not sure if getting a result from the calculator
-        // is a good event to emit a value changed signal. We
-        // should do this only on focusOutEvent()
         emit valueChanged(text());
+#if 0
         d->m_text = text();
 #endif
     }
