@@ -247,24 +247,7 @@
          </layout>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="AmountEdit" name="m_toAmount"/>
-       </item>
-       <item row="1" column="1">
-        <widget class="AmountEdit" name="m_conversionRate"/>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLabel" name="m_conversionExample">
-         <property name="text">
-          <string>xx
-xx</string>
-         </property>
-         <property name="wordWrap">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0" colspan="2">
+       <item row="4" column="0" colspan="2">
         <widget class="QFrame" name="m_dateFrame">
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -303,6 +286,23 @@ xx</string>
            </widget>
           </item>
          </layout>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="AmountEdit" name="m_toAmount"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="AmountEdit" name="m_conversionRate"/>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLabel" name="m_conversionExample">
+         <property name="text">
+          <string>xx
+xx</string>
+         </property>
+         <property name="wordWrap">
+          <bool>false</bool>
+         </property>
         </widget>
        </item>
       </layout>
