@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2016 Thomas Baumgart <Thomas Baumgart <tbaumgart@kde.org>>
+    SPDX-FileCopyrightText: 2016 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
