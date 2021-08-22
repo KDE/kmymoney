@@ -116,8 +116,8 @@ public:
         q->connect(ui->m_amountButton, &QAbstractButton::clicked, q, &KCurrencyCalculator::slotSetToAmount);
         q->connect(ui->m_rateButton, &QAbstractButton::clicked, q, &KCurrencyCalculator::slotSetExchangeRate);
 
-        q->connect(ui->m_toAmount, &AmountEdit::valueChanged, q, &KCurrencyCalculator::slotUpdateResult);
-        q->connect(ui->m_conversionRate, &AmountEdit::valueChanged, q, &KCurrencyCalculator::slotUpdateRate);
+        q->connect(ui->m_toAmount, &AmountEdit::textChanged, q, &KCurrencyCalculator::slotUpdateResult);
+        q->connect(ui->m_conversionRate, &AmountEdit::textChanged, q, &KCurrencyCalculator::slotUpdateRate);
 
         q->connect(ui->m_toAmount, &AmountEdit::returnPressed, q, &KCurrencyCalculator::accept);
         q->connect(ui->m_conversionRate, &AmountEdit::returnPressed, q, &KCurrencyCalculator::accept);
