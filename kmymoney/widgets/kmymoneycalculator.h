@@ -141,14 +141,6 @@ protected Q_SLOTS:
       */
     void percentClicked();
 
-    /**
-      * This method updates the display of the calculator with
-      * the text passed as argument
-      *
-      * @param str reference to QString containing the new display contents
-      */
-    void changeDisplay(const QString& str);
-
 private:
     KMyMoneyCalculatorPrivate * const d_ptr;
     Q_DECLARE_PRIVATE(KMyMoneyCalculator)
