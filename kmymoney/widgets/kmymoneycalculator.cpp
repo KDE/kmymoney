@@ -9,14 +9,16 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QLabel>
-#include <QSignalMapper>
-#include <QRegExp>
-#include <QGridLayout>
+#include <QApplication>
+#include <QClipboard>
 #include <QFrame>
+#include <QGridLayout>
 #include <QKeyEvent>
+#include <QLabel>
 #include <QLocale>
 #include <QPushButton>
+#include <QRegExp>
+#include <QSignalMapper>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -37,8 +39,24 @@ public:
         display(nullptr),
         m_clearOperandOnDigit(false)
     {
-        for (auto& button : buttons)
+        for (auto& button : buttons) {
             button = nullptr;
+        }
+    }
+
+    void updateOperand()
+    {
+        if (operand.length() > 16) {
+            operand = operand.left(16);
+        }
+        changeDisplay(operand);
+    }
+
+    void changeDisplay(const QString& str)
+    {
+        auto txt = str;
+        txt.replace(QRegExp("\\."), m_comma);
+        display->setText("<b>" + txt + "</b>");
     }
 
     /**
@@ -191,7 +209,7 @@ KMyMoneyCalculator::KMyMoneyCalculator(QWidget* parent) :
     d->op1 = d->op0 = 0.0;
     d->stackedOp = d->op = 0;
     d->operand.clear();
-    changeDisplay("0");
+    d->changeDisplay("0");
 
     // connect the digit signals through a signal mapper
     QSignalMapper* mapper = new QSignalMapper(this);
@@ -239,36 +257,34 @@ void KMyMoneyCalculator::digitClicked(int button)
     }
 
     d->operand += QChar(button + 0x30);
-    if (d->operand.length() > 16)
-        d->operand = d->operand.left(16);
-    changeDisplay(d->operand);
+    d->updateOperand();
 }
 
 void KMyMoneyCalculator::commaClicked()
 {
     Q_D(KMyMoneyCalculator);
-    if (d->operand.length() == 0)
+    if (d->operand.length() == 0) {
         d->operand = '0';
+    }
     if (d->operand.contains('.', Qt::CaseInsensitive) == 0)
         d->operand.append('.');
 
-    if (d->operand.length() > 16)
-        d->operand = d->operand.left(16);
-    changeDisplay(d->operand);
+    d->updateOperand();
 }
 
 void KMyMoneyCalculator::plusminusClicked()
 {
     Q_D(KMyMoneyCalculator);
-    if (d->operand.length() == 0 && d->m_result.length() > 0)
+    if (d->operand.length() == 0 && d->m_result.length() > 0) {
         d->operand = d->m_result;
+    }
 
     if (d->operand.length() > 0) {
         if (d->operand.indexOf('-') != -1)
             d->operand.remove('-');
         else
             d->operand.prepend('-');
-        changeDisplay(d->operand);
+        d->changeDisplay(d->operand);
     }
 }
 
@@ -278,7 +294,7 @@ void KMyMoneyCalculator::calculationClicked(int button)
     if (d->operand.length() == 0 && d->op != 0 && button == KMyMoneyCalculatorPrivate::EQUAL) {
         d->op = 0;
         d->m_result = normalizeString(d->op1);
-        changeDisplay(d->m_result);
+        d->changeDisplay(d->m_result);
 
     } else if (d->operand.length() > 0 && d->op != 0) {
         // perform operation
@@ -327,17 +343,17 @@ void KMyMoneyCalculator::calculationClicked(int button)
 
         if (error) {
             d->op = 0;
-            changeDisplay("Error");
+            d->changeDisplay("Error");
             d->operand.clear();
         } else {
             d->op1 = op2;
             d->m_result = normalizeString(d->op1);
-            changeDisplay(d->m_result);
+            d->changeDisplay(d->m_result);
         }
     } else if (d->operand.length() > 0 && d->op == 0) {
         d->op1 = d->operand.toDouble();
         d->m_result = normalizeString(d->op1);
-        changeDisplay(d->m_result);
+        d->changeDisplay(d->m_result);
     }
 
     if (button != KMyMoneyCalculatorPrivate::EQUAL) {
@@ -375,9 +391,9 @@ void KMyMoneyCalculator::clearClicked()
         d->operand = d->operand.left(d->operand.length() - 1);
     }
     if (d->operand.length() == 0)
-        changeDisplay("0");
+        d->changeDisplay("0");
     else
-        changeDisplay(d->operand);
+        d->changeDisplay(d->operand);
 }
 
 void KMyMoneyCalculator::clearAllClicked()
@@ -385,7 +401,7 @@ void KMyMoneyCalculator::clearAllClicked()
     Q_D(KMyMoneyCalculator);
     d->operand.clear();
     d->op = 0;
-    changeDisplay("0");
+    d->changeDisplay("0");
 }
 
 void KMyMoneyCalculator::percentClicked()
@@ -405,7 +421,7 @@ void KMyMoneyCalculator::percentClicked()
             break;
         }
         d->operand = normalizeString(op2);
-        changeDisplay(d->operand);
+        d->changeDisplay(d->operand);
     }
 }
 
@@ -448,18 +464,34 @@ void KMyMoneyCalculator::setComma(const QChar ch)
     d->m_comma = ch;
 }
 
-void KMyMoneyCalculator::changeDisplay(const QString& str)
-{
-    Q_D(KMyMoneyCalculator);
-    auto txt = str;
-    txt.replace(QRegExp("\\."), d->m_comma);
-    d->display->setText("<b>" + txt + "</b>");
-}
-
 void KMyMoneyCalculator::keyPressEvent(QKeyEvent* ev)
 {
     Q_D(KMyMoneyCalculator);
     int button = -1;
+
+    if (ev->matches(QKeySequence::Paste)) {
+        const auto clipboard = qApp->clipboard();
+        auto txt = clipboard->text();
+
+        // check that the clipboard content is valid
+        bool ok;
+        QLocale().toDouble(txt, &ok);
+
+        // Now convert the localized command into a dot
+        txt.replace(d->m_comma, QLatin1String("."));
+
+        // since toDouble() allows scientific notation, we
+        // make sure the letter e is not contained
+        if (ok && !(txt.toLower()).contains(QLatin1Char('e'))) {
+            if (d->m_clearOperandOnDigit) {
+                d->operand.clear();
+                d->m_clearOperandOnDigit = false;
+            }
+            d->operand += txt;
+            d->updateOperand();
+        }
+        return;
+    }
 
     switch (ev->key()) {
     case Qt::Key_0:
@@ -544,12 +576,15 @@ void KMyMoneyCalculator::setInitialValues(const QString& value, QKeyEvent* ev)
         negative = true;
         d->operand.remove('-');
     }
-    if (d->operand.isEmpty())
-        d->operand = '0';
-    else if (negative)
-        d->operand = QString("-%1").arg(d->operand);
-
-    changeDisplay(d->operand);
+    if (d->operand.isEmpty()) {
+        d->operand.clear();
+        d->changeDisplay(QLatin1String("0"));
+    } else {
+        if (negative) {
+            d->operand = QStringLiteral("-%1").arg(d->operand);
+        }
+        d->changeDisplay(d->operand);
+    }
 
     // and operation
     d->op = 0;
