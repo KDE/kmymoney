@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2007 Thomas Baumgart <Thomas Baumgart <ipwizard@users.sourceforge.net>>
+    SPDX-FileCopyrightText: 2007 Thomas Baumgart <ipwizard@users.sourceforge.net>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
