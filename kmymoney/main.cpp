@@ -396,8 +396,8 @@ static void migrateConfigFiles()
         };
 
         for (const auto& sConfigName : qAsConst(sConfigNames)) {
-            const auto sOldConfigFilename = sOldMainConfigPath + sConfigName;
-            const auto sNewConfigFilename = sMainConfigPath + configNamesChange.value(sConfigName, sConfigName);
+            const QString sOldConfigFilename = sOldMainConfigPath + sConfigName;
+            const QString sNewConfigFilename = sMainConfigPath + configNamesChange.value(sConfigName, sConfigName);
             if (QFile::exists(sOldConfigFilename)) {
                 if (QFile::copy(sOldConfigFilename, sNewConfigFilename))
                     QFile::remove(sOldConfigFilename);
