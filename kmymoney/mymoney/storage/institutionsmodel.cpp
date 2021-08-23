@@ -9,10 +9,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDebug>
-#include <QString>
-#include <QFont>
 #include <QColor>
+#include <QDebug>
+#include <QFont>
+#include <QIcon>
+#include <QString>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -22,6 +23,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "icons.h"
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "mymoneysecurity.h"
@@ -163,6 +165,15 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
         switch(idx.column()) {
         case AccountsModel::Column::TotalPostedValue:
             return d->institutionValue(idx).isNegative() ? d->negativeScheme : d->positiveScheme;
+        }
+        break;
+
+    case Qt::DecorationRole:
+        if (idx.column() == AccountsModel::Column::AccountName) {
+            if (!institution.value(QStringLiteral("icon")).isEmpty()) {
+                return Icons::loadIconFromApplicationCache(institution.value(QStringLiteral("icon")));
+            }
+            return Icons::loadIconFromApplicationCache(QLatin1String("enum:Bank"));
         }
         break;
 
