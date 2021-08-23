@@ -679,7 +679,7 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                              "%y %m %d"                   // date format
                                                 );
 
-    result["Puls Biznesu (Funds)"] = WebPriceQuoteSource("Puls Biznesu (Funds)",
+    result["Puls Biznesu - Funds"] = WebPriceQuoteSource("Puls Biznesu - Funds",
                                                          "http://notowania.pb.pl/instrument/%1",
                                                          QString(),
                                                          QString(), // webIDRegExp
