@@ -174,6 +174,15 @@ public:
         q->setMinimumHeight(height);
     }
 
+    void cut()
+    {
+        Q_Q(AmountEdit);
+        // only cut if parts of the text are selected
+        if (q->hasSelectedText() && (q->text() != q->selectedText())) {
+            cut();
+        }
+    }
+
     enum Item {
         NoItem = 0x0,
         ShowCalculator = 0x1,
@@ -257,6 +266,19 @@ void AmountEdit::resizeEvent(QResizeEvent* event)
     d->updateLineEditSize();
 }
 
+void AmountEdit::focusInEvent(QFocusEvent* event)
+{
+    QLineEdit::focusInEvent(event);
+    if (event->reason() == Qt::MouseFocusReason) {
+        if (!hasSelectedText()) {
+            // we need to wait until all processing is done before
+            // we can successfully call selectAll. Hence the
+            // delayed execution when we return back to the event loop
+            metaObject()->invokeMethod(this, &QLineEdit::selectAll, Qt::QueuedConnection);
+        }
+    }
+}
+
 void AmountEdit::focusOutEvent(QFocusEvent* event)
 {
     Q_D(AmountEdit);
@@ -286,9 +308,7 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
     switch(event->key()) {
     case Qt::Key_Plus:
     case Qt::Key_Minus:
-        if (hasSelectedText()) {
-            cut();
-        }
+        d->cut();
         if (text().length() == 0) {
             break;
         }
@@ -300,15 +320,12 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
                 break;
             }
         }
-    // intentional fall through
+        // intentional fall through
 
     case Qt::Key_Slash:
     case Qt::Key_Asterisk:
     case Qt::Key_Percent:
-        if (hasSelectedText()) {
-            // remove the selected text
-            cut();
-        }
+        d->cut();
         d->calculatorOpen(event);
         return;
 
