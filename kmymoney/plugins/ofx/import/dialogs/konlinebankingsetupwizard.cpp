@@ -488,7 +488,9 @@ int KOnlineBankingSetupWizard::ofxAccountCallback(struct OfxAccountData data, vo
 #ifdef LIBOFX_HAVE_CLIENTUID
     kvps.setValue("clientUid", pthis->m_editClientUid->text());
 #endif
-
+    if (!pthis->m_userAgent->text().isEmpty()) {
+        kvps.setValue("kmmofx-useragent", pthis->m_userAgent->text());
+    }
     kvps.setValue("url", (*(pthis->m_it_info)).url);
     kvps.setValue("fid", (*(pthis->m_it_info)).fid);
     kvps.setValue("org", (*(pthis->m_it_info)).org);
