@@ -599,12 +599,17 @@ void SimpleLedgerView::aboutToShow()
     Q_D(SimpleLedgerView);
 
     d->m_selections.clearSelections();
-    // in case we have at least one account open
-    if (d->ui->ledgerTab->count() > 1) {
-        // use its current selection
-        const auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
-        if (view) {
-            d->m_selections = view->selections();
+
+    // we don't do anything special here if
+    // we are not fully initialized
+    if (!d->m_needInit) {
+        // in case we have at least one account open
+        if (d->ui->ledgerTab->count() > 1) {
+            // use its current selection
+            const auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
+            if (view) {
+                d->m_selections = view->selections();
+            }
         }
     }
 
