@@ -381,10 +381,12 @@ QString MyMoneyOfxConnector::statementRequest() const
 
 void MyMoneyOfxConnector::institutionSpecificRequestAdjustment(QString& request)
 {
-    if (request.contains(QLatin1String("<FID>67811"))) {
+    if (request.contains(QLatin1String("<FID>67811")) || request.contains(QLatin1String("<FID>00000"))) {
         // USAA requires some specific settings
+        // and we do the same with our test account
         request.replace(QRegularExpression("NEWFILEUID:[\\d\\.]+"), QLatin1String("NEWFILEUID:NONE"));
-        request.replace(QRegularExpression("<TRNUID>[\\d\\.]+"), QStringLiteral("<TRNUID>%1").arg(QUuid::createUuid().toString(QUuid::WithoutBraces)));
+        request.replace(QRegularExpression("<TRNUID>[\\d\\.]+"),
+                        QStringLiteral("<TRNUID>%1").arg(QUuid::createUuid().toString(QUuid::WithoutBraces).toUpper()));
         request.replace(QRegularExpression("<DTACCTUP>19700101"), QLatin1String("<DTACCTUP>19900101"));
     }
 }
