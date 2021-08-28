@@ -157,6 +157,11 @@ protected:
     virtual void resizeEvent(QResizeEvent* event) override;
 
     /**
+     * Overridden to support full selection upon entry.
+     */
+    virtual void focusInEvent(QFocusEvent* event) override;
+
+    /**
      * Overridden to support ensureFractionalPart().
      */
     virtual void focusOutEvent(QFocusEvent* event) override;
