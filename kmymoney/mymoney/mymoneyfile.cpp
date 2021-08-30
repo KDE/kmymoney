@@ -1759,7 +1759,9 @@ void MyMoneyFile::removePayee(const MyMoneyPayee& payee)
 {
     d->checkTransaction(Q_FUNC_INFO);
 
-    // FIXME we need to make sure, that the payee is not referenced anymore
+    if (isReferenced(payee.id())) {
+        throw MYMONEYEXCEPTION(QStringLiteral("Payee %1 is still referenced and cannot be deleted").arg(payee.name()));
+    }
     d->payeesModel.removeItem(payee);
     d->m_changeSet += MyMoneyNotification(File::Mode::Remove, File::Object::Payee, payee.id());
 }
