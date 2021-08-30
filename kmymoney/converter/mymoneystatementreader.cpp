@@ -1110,7 +1110,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             // transaction.  For now, we'll leave it unbalanced, and let the user
             // handle it.
             //
-            const MyMoneyPayee& payeeObj = MyMoneyFile::instance()->payee(payeeid);
+            const MyMoneyPayee payeeObj = MyMoneyFile::instance()->payee(payeeid);
             if (statementTransactionUnderImport.m_listSplits.isEmpty() && !payeeObj.defaultAccountId().isEmpty()) {
                 MyMoneyAccount splitAccount = file->account(payeeObj.defaultAccountId());
                 MyMoneySplit s;
