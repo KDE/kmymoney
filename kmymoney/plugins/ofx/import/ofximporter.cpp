@@ -881,6 +881,10 @@ MyMoneyKeyValueContainer OFXImporter::onlineBankingSettings(const MyMoneyKeyValu
         } else {
             kvp.deletePair(QStringLiteral("kmmofx-fixbuysellsignage"));
         }
+        if (!d->m_statusDlg->m_userAgentEdit->text().isEmpty())
+            kvp.setValue(QStringLiteral("kmmofx-useragent"), d->m_statusDlg->m_userAgentEdit->text());
+        else
+            kvp.deletePair(QStringLiteral("kmmofx-useragent"));
         // get rid of pre 4.6 values
         kvp.deletePair(QStringLiteral("kmmofx-preferPayeeid"));
     }

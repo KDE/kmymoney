@@ -91,8 +91,15 @@
           </property>
           <item>
            <layout class="QGridLayout">
-            <item row="2" column="1">
-             <widget class="KUrlRequester" name="m_url"/>
+            <item row="1" column="0">
+             <widget class="QLabel" name="textLabel1_5">
+              <property name="text">
+               <string>FID</string>
+              </property>
+              <property name="wordWrap">
+               <bool>false</bool>
+              </property>
+             </widget>
             </item>
             <item row="0" column="0">
              <widget class="QLabel" name="textLabel4">
@@ -104,21 +111,24 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="textLabel1_5">
-              <property name="text">
-               <string>FID</string>
-              </property>
-              <property name="wordWrap">
-               <bool>false</bool>
-              </property>
-             </widget>
+            <item row="3" column="1">
+             <widget class="KLineEdit" name="m_userAgent"/>
             </item>
             <item row="0" column="1">
              <widget class="KLineEdit" name="m_bankName"/>
             </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>UserAgent</string>
+              </property>
+             </widget>
+            </item>
             <item row="1" column="1">
              <widget class="KLineEdit" name="m_fid"/>
+            </item>
+            <item row="2" column="1">
+             <widget class="KUrlRequester" name="m_url"/>
             </item>
             <item row="2" column="0">
              <widget class="QLabel" name="textLabel2_4">
@@ -310,7 +320,7 @@
      </widget>
     </item>
     <item row="3" column="1">
-     <widget class="QLineEdit" name="m_editClientUid"/>
+     <widget class="KLineEdit" name="m_editClientUid"/>
     </item>
     <item row="7" column="0">
      <widget class="QLabel" name="textLabel3">
@@ -415,6 +425,11 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
@@ -429,11 +444,6 @@
    <extends>QFrame</extends>
    <header>kmessagewidget.h</header>
   </customwidget>
-  <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>m_selectionTab</tabstop>
@@ -441,11 +451,15 @@
   <tabstop>m_bankName</tabstop>
   <tabstop>m_fid</tabstop>
   <tabstop>m_url</tabstop>
+  <tabstop>m_userAgent</tabstop>
   <tabstop>m_editUsername</tabstop>
   <tabstop>m_editPassword</tabstop>
+  <tabstop>m_editClientUid</tabstop>
   <tabstop>m_storePassword</tabstop>
   <tabstop>m_applicationCombo</tabstop>
+  <tabstop>m_applicationEdit</tabstop>
   <tabstop>m_headerVersionCombo</tabstop>
+  <tabstop>m_headerVersionEdit</tabstop>
   <tabstop>m_listAccount</tabstop>
  </tabstops>
  <resources/>
