@@ -19,6 +19,8 @@
 #include <QDebug>
 #include <QList>
 #include <QRegExp>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -89,6 +91,9 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QSt
     // the swiss army knife entry :)
     m_appMap[i18n("Quicken Windows (Expert)")] = "QWIN:";
 
+    // Quicken (Mac)
+    m_appMap[i18n("Quicken Mac (Expert)")] = "QMOFX:";
+
     // MS-Money
     m_appMap[i18n("MS-Money 2003")] = "Money:1100";
     m_appMap[i18n("MS-Money 2004")] = "Money:1200";
@@ -114,11 +119,12 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QSt
     }
 
     // not found, check if we have a manual version of this product
-    QRegExp appExp("(\\w+:)(\\d+)");
+    QRegularExpression appExp("(\\w+:)(\\d+|\\w+)");
+    auto matcher = appExp.match(appId);
     if (it_a == m_appMap.constEnd()) {
-        if (appExp.exactMatch(appId)) {
+        if (matcher.hasMatch()) {
             for (it_a = m_appMap.constBegin(); it_a != m_appMap.constEnd(); ++it_a) {
-                if (*it_a == appExp.cap(1))
+                if (*it_a == matcher.captured(1))
                     break;
             }
         }
@@ -130,7 +136,7 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QSt
         if ((*it_a).endsWith(':')) {
             if (versionEdit) {
                 versionEdit->show();
-                versionEdit->setText(appExp.cap(2));
+                versionEdit->setText(matcher.captured(2));
             } else {
                 combo->setCurrentItem(i18n("Quicken Windows 2008"));
             }
