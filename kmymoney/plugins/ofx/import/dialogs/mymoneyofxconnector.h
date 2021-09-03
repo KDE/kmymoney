@@ -95,11 +95,17 @@ public:
      * for which transactions will be requested is determined
      * by statementStartDate()
      */
-    const QByteArray statementRequest() const;
+    QString statementRequest() const;
+
     const QByteArray statementResponse(const QDate& _dtstart) const;
 
     // returns the user agent string to be used or empty to use system default
     QString userAgent() const;
+
+    /**
+     * This method adjusts a request to specific requirements.
+     */
+    static void institutionSpecificRequestAdjustment(QString& request);
 
 private:
     void initRequest(OfxFiLogin* fi) const;
