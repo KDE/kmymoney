@@ -295,16 +295,15 @@ void KCurrencyCalculator::slotUpdateResult(const QString& /*txt*/)
 
     if (result.isNegative()) {
         d->ui->m_toAmount->setValue(-result);
-        slotUpdateResult(QString());
         return;
     }
 
     if (!result.isZero()) {
         price = result / d->m_value;
 
+        QSignalBlocker signalBlocker(d->ui->m_conversionRate);
         d->ui->m_conversionRate->setValue(price);
         d->m_result = (d->m_value * price).convert(d->m_resultFraction);
-        d->ui->m_toAmount->setValue(d->m_result);
     }
     d->updateExample(price);
 }
@@ -316,12 +315,11 @@ void KCurrencyCalculator::slotUpdateRate(const QString& /*txt*/)
 
     if (price.isNegative()) {
         d->ui->m_conversionRate->setValue(-price);
-        slotUpdateRate(QString());
         return;
     }
 
     if (!price.isZero()) {
-        d->ui->m_conversionRate->setValue(price);
+        QSignalBlocker signalBlocker(d->ui->m_toAmount);
         d->m_result = (d->m_value * price).convert(d->m_resultFraction);
         d->ui->m_toAmount->setValue(d->m_result);
     }
@@ -364,7 +362,7 @@ MyMoneyMoney KCurrencyCalculator::price() const
     // https://bugs.kde.org/show_bug.cgi?id=325953 as well as
     // https://bugs.kde.org/show_bug.cgi?id=300965
     if (d->ui->m_amountButton->isChecked())
-        return d->ui->m_toAmount->value().abs() / d->m_value.abs();
+        return d->m_result.abs() / d->m_value.abs();
     else
         return d->ui->m_conversionRate->value();
 }
