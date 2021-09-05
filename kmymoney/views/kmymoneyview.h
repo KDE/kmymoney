@@ -220,7 +220,7 @@ Q_SIGNALS:
 
     // these signals request a change by the application
     void requestSelectionChange (const SelectedObjects& selection);
-    void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;
+    void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos);
     void requestActionTrigger(eMenu::Action action);
 
     void settingsChanged();
