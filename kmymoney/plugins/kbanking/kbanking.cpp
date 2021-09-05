@@ -89,10 +89,11 @@
 class KBanking::Private
 {
 public:
-    Private() :
-        passwordCacheTimer(nullptr),
-        jobList(),
-        fileId()
+    Private()
+        : passwordCacheTimer(nullptr)
+        , gui(nullptr)
+        , jobList()
+        , fileId()
     {
         QString gwenProxy = QString::fromLocal8Bit(qgetenv("GWEN_PROXY"));
         if (gwenProxy.isEmpty()) {
@@ -148,9 +149,10 @@ public:
     }
 
     QTimer *passwordCacheTimer;
-    QMap<QString, QStringList>  jobList;
-    QString                     fileId;
-    QSet<QAction *>             actions;
+    gwenKdeGui* gui;
+    QMap<QString, QStringList> jobList;
+    QString fileId;
+    QSet<QAction*> actions;
 };
 
 
@@ -191,10 +193,9 @@ void KBanking::plug(KXMLGUIFactory* guiFactory)
     connect(d->passwordCacheTimer, &QTimer::timeout, this, &KBanking::slotClearPasswordCache);
 
     if (m_kbanking) {
-        //! @todo when is gwenKdeGui deleted?
-        gwenKdeGui *gui = new gwenKdeGui();
-        GWEN_Gui_SetGui(gui->getCInterface());
-        GWEN_Gui_SetLogHookFn(gui->getCInterface(), &KBanking::Private::gwenLogHook);
+        d->gui = new gwenKdeGui;
+        GWEN_Gui_SetGui(d->gui->getCInterface());
+        GWEN_Gui_SetLogHookFn(d->gui->getCInterface(), &KBanking::Private::gwenLogHook);
         if (qEnvironmentVariableIsEmpty("GWEN_LOGLEVEL")) {
             GWEN_Logger_SetLevel(GWEN_LOGDOMAIN, GWEN_LoggerLevel_Warning);
         }
@@ -205,7 +206,7 @@ void KBanking::plug(KXMLGUIFactory* guiFactory)
             setXMLFile(rcFileName);
 
             // get certificate handling and dialog settings management
-            AB_Gui_Extend(gui->getCInterface(), m_kbanking->getCInterface());
+            AB_Gui_Extend(d->gui->getCInterface(), m_kbanking->getCInterface());
 
             // create actions
             createActions();
@@ -230,6 +231,9 @@ void KBanking::unplug()
         m_kbanking->fini();
         delete m_kbanking;
     }
+    delete d->gui;
+    d->gui = nullptr;
+
     // remove and delete the actions for this plugin
     for (const auto& action : qAsConst(d->actions)) {
         actionCollection()->removeAction(action);

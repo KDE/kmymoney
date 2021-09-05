@@ -100,7 +100,8 @@ int gwenKdeGui::getPasswordHhd(uint32_t /*flags*/,
     hhdCode = QString::fromUtf8(sChallenge);
     infoText = QString::fromUtf8(text);
 
-    //! @todo: Memory leak?
+    // destruction of the dialog happens from within Qt
+    // when the parent widget gets destroyed
     QPointer<chipTanDialog> dialog = new chipTanDialog(getParentWidget());
     dialog->setInfoText(infoText);
     dialog->setHhdCode(hhdCode);
@@ -154,7 +155,8 @@ int gwenKdeGui::getPasswordPhoto(uint32_t /*flags*/,
 
     infoText = QString::fromUtf8(text);
 
-    //! @todo: Memory leak?
+    // destruction of the dialog happens from within Qt
+    // when the parent widget gets destroyed
     QPointer<photoTanDialog> dialog = new photoTanDialog(getParentWidget());
     dialog->setInfoText(infoText);
     dialog->setPicture(picture);
