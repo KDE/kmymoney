@@ -53,8 +53,8 @@ int gwenKdeGui::execDialog(GWEN_DIALOG *dlg, GWEN_UNUSED uint32_t guiid)
     }
 
     QDialog* dialog = dynamic_cast<QDialog*>(qt5Dlg.getMainWindow());
-    QList<QLineEdit*> lineedits = dialog->findChildren<QLineEdit*>();
-    for(const auto edit : lineedits) {
+    const auto lineedits = dialog->findChildren<QLineEdit*>();
+    for (const auto& edit : qAsConst(lineedits)) {
         if (edit->echoMode() == QLineEdit::Password) {
             new PasswordToggle(edit);
         }

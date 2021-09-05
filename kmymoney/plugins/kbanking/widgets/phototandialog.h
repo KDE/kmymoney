@@ -21,8 +21,8 @@ class photoTanDialog;
 class photoTanDialog : public QDialog
 {
     Q_OBJECT
-    Q_PROPERTY(QString infoText READ infoText() WRITE setInfoText)
-    Q_PROPERTY(QPixmap picture READ picture() WRITE setPicture)
+    Q_PROPERTY(QString infoText READ infoText() WRITE setInfoText CONSTANT)
+    Q_PROPERTY(QPixmap picture READ picture() WRITE setPicture CONSTANT)
 
 public:
     explicit photoTanDialog(QWidget* parent = 0);
