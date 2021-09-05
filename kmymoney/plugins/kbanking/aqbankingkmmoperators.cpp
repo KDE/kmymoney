@@ -18,24 +18,15 @@
 #include "mymoneymoney.h"
 
 /**
- * @brief DTAUS Chars
+ * @brief SEPA Charset
  *
- * @source https://www.hbci-zka.de/dokumente/spezifikation_deutsch/fintsv3/FinTS_3.0_Messages_Finanzdatenformate_2010-08-06_final_version.pdf
- *
- * @note This file is saved in UTF-8!
- *
- * Additional lower case letters were added, or should the input mask replaced them mit the uppercase version? The bank should do that
+ * Additional lower case letters were added, or should the input mask replace them with the uppercase version? The bank should do that
  * anyway.
  */
-static const QString dtausChars = QString::fromUtf8("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜß .,&-+*%/$&abcdefghijklmnopqrstuvwxyzäöü");
-
-/**
- * @brief Sepa Charset
- *
- * Additional lower case letters were added, or should the input mask replaced them mit the uppercase version? The bank should do that
- * anyway.
- */
-static const QString sepaChars = QString("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz':?.,- (+)/");
+static QString sepaChars()
+{
+    return QLatin1String("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz':?.,- (+)/");
+}
 
 /** @todo Check if AB_TransactionLimits_GetMaxLenCustomerReference really is the limit for the sepa reference */
 QSharedPointer<sepaOnlineTransfer::settings> AB_TransactionLimits_toSepaOnlineTaskSettings(const AB_TRANSACTION_LIMITS* aqlimits)
@@ -67,7 +58,7 @@ QSharedPointer<sepaOnlineTransfer::settings> AB_TransactionLimits_toSepaOnlineTa
     //settings->referenceLength = AB_TransactionLimits_GetMax( aqlimits );
     settings->setEndToEndReferenceLength(32);
 
-    settings->setAllowedChars(sepaChars);
+    settings->setAllowedChars(sepaChars());
 
     return settings.dynamicCast<sepaOnlineTransfer::settings>();
 }
@@ -148,6 +139,6 @@ MyMoneyMoney AB_Value_toMyMoneyMoney(const AB_VALUE *const value)
     // I've read somewhere that in M1 were about 12 trillion dollar in 2013. So the buffer length of 32 should be sufficient.
     char buffer[32];
     memset(buffer, 0, sizeof(buffer));
-    AB_Value_GetNumDenomString(value, static_cast<char*>(buffer), 32);
+    AB_Value_GetNumDenomString(value, &buffer[0], sizeof(buffer));
     return MyMoneyMoney(QString::fromUtf8(buffer));
 }
