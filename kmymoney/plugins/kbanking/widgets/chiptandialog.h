@@ -1,6 +1,7 @@
 /*
     A tan input dialog for optical chipTan used in online banking
     SPDX-FileCopyrightText: 2014 Christian David <christian-david@web.de>
+    SPDX-FileCopyrightText: 2021 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 
 */
@@ -9,6 +10,9 @@
 #define CHIPTANDIALOG_H
 
 #include <memory>
+
+// ----------------------------------------------------------------------------
+// QT Includes
 
 #include <QDialog>
 
@@ -20,9 +24,9 @@ class chipTanDialog;
 class chipTanDialog : public QDialog
 {
     Q_OBJECT
-    Q_PROPERTY(QString infoText READ infoText() WRITE setInfoText CONSTANT)
-    Q_PROPERTY(QString hhdCode READ hhdCode() WRITE setHhdCode CONSTANT)
-    Q_PROPERTY(int flickerFieldWidth READ flickerFieldWidth WRITE setFlickerFieldWidth CONSTANT)
+    Q_PROPERTY(QString infoText READ infoText() WRITE setInfoText NOTIFY infoTextChanged)
+    Q_PROPERTY(QString hhdCode READ hhdCode() WRITE setHhdCode NOTIFY hhdCodeChanged)
+    Q_PROPERTY(int flickerFieldWidth READ flickerFieldWidth WRITE setFlickerFieldWidth NOTIFY flickerFieldWidthChanged)
 
 public:
     explicit chipTanDialog(QWidget* parent = 0);
@@ -47,9 +51,12 @@ public Q_SLOTS:
     void setFlickerFieldClockSetting(const int& width);
 
 private Q_SLOTS:
-    void tanInputChanged(const QString&);
-    void flickerFieldWidthChanged(const int& width);
-    void flickerFieldClockSettingChanged(const int& takt);
+    void setTanInput(const QString&);
+
+Q_SIGNALS:
+    void infoTextChanged(const QString& infoText);
+    void hhdCodeChanged(const QString& code);
+    void flickerFieldWidthChanged(int);
 
 private:
     std::unique_ptr<Ui::chipTanDialog> ui;
