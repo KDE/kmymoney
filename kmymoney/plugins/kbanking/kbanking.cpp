@@ -231,7 +231,7 @@ void KBanking::unplug()
         delete m_kbanking;
     }
     // remove and delete the actions for this plugin
-    for (const auto& action : d->actions) {
+    for (const auto& action : qAsConst(d->actions)) {
         actionCollection()->removeAction(action);
     }
     qDebug("Plugins: kbanking unplugged");
@@ -316,7 +316,7 @@ void KBanking::createActions()
 #ifdef KMM_DEBUG
     QAction *openChipTanDialog = actionCollection()->addAction("open_chiptan_dialog");
     openChipTanDialog->setText("Open ChipTan Dialog");
-    connect(openChipTanDialog, &QAction::triggered, [&]() {
+    connect(openChipTanDialog, &QAction::triggered, this, [&]() {
         auto dlg = new chipTanDialog();
         dlg->setHhdCode("0F04871100030333555414312C32331D");
         dlg->setInfoText("<html><h1>Test Graphic for debugging</h1><p>The encoded data is</p><p>Account Number: <b>335554</b><br/>Amount: <b>1,23</b></p></html>");
@@ -328,7 +328,7 @@ void KBanking::createActions()
 
     QAction *openPhotoTanDialog = actionCollection()->addAction("open_phototan_dialog");
     openPhotoTanDialog->setText("Open PhotoTan Dialog");
-    connect(openPhotoTanDialog, &QAction::triggered, [&]() {
+    connect(openPhotoTanDialog, &QAction::triggered, this, [&]() {
         auto dlg = new photoTanDialog();
         QImage img;
         img.loadFromData(photoTan, sizeof(photoTan), "PNG");
@@ -653,7 +653,8 @@ void KBanking::sendOnlineJob(QList<onlineJob>& jobs)
 
         executeQueue();
     }
-    jobs = m_onlineJobQueue.values() + unhandledJobs;
+    jobs = m_onlineJobQueue.values();
+    jobs += unhandledJobs;
     m_onlineJobQueue.clear();
 }
 
@@ -1312,7 +1313,7 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
             }
             ++idx;
         }
-        kt.m_strBankID = QString("%1-%2").arg(acc.id()).arg(hash);
+        kt.m_strBankID = QString("%1-%2").arg(acc.id(), hash);
     }
 
     // store transaction

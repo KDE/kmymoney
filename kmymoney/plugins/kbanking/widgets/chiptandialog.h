@@ -20,9 +20,9 @@ class chipTanDialog;
 class chipTanDialog : public QDialog
 {
     Q_OBJECT
-    Q_PROPERTY(QString infoText READ infoText() WRITE setInfoText)
-    Q_PROPERTY(QString hhdCode READ hhdCode() WRITE setHhdCode)
-    Q_PROPERTY(int flickerFieldWidth READ flickerFieldWidth WRITE setFlickerFieldWidth)
+    Q_PROPERTY(QString infoText READ infoText() WRITE setInfoText CONSTANT)
+    Q_PROPERTY(QString hhdCode READ hhdCode() WRITE setHhdCode CONSTANT)
+    Q_PROPERTY(int flickerFieldWidth READ flickerFieldWidth WRITE setFlickerFieldWidth CONSTANT)
 
 public:
     explicit chipTanDialog(QWidget* parent = 0);
