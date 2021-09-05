@@ -74,7 +74,7 @@ private:
 class KMM_WIDGETS_EXPORT KMyMoneyDateInput : public QWidget
 {
     Q_OBJECT
-    Q_PROPERTY(QDate date READ date WRITE setDate STORED false)
+    Q_PROPERTY(QDate date READ date WRITE setDate STORED false NOTIFY dateChanged)
 
 public:
     explicit KMyMoneyDateInput(QWidget* parent = nullptr, Qt::AlignmentFlag flags = Qt::AlignLeft);
