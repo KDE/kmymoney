@@ -1028,14 +1028,12 @@ public:
         }
         {
             ReportGroup list("CashFlow", i18n("Cash Flow"));
-            list.push_back(MyMoneyReport(
-                               eMyMoney::Report::RowType::CashFlow,
-                               eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Account,
-                               TransactionFilter::Date::YearToDate,
-                               eMyMoney::Report::DetailLevel::All,
-                               i18n("Cash Flow Transactions This Month"),
-                               i18n("Default Report")
-                           ));
+            list.push_back(MyMoneyReport(eMyMoney::Report::RowType::CashFlow,
+                                         eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Account,
+                                         TransactionFilter::Date::CurrentMonth,
+                                         eMyMoney::Report::DetailLevel::All,
+                                         i18n("Cash Flow Transactions This Month"),
+                                         i18n("Default Report")));
             groups.push_back(list);
         }
         {
