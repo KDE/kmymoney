@@ -7,6 +7,8 @@ ExternalProject_Add(
   URL http://downloads.sourceforge.net/project/libofx/libofx/libofx-0.10.2.tar.gz
   URL_HASH SHA1=9949835f0eac1ec2f22ee8f5cbe70b6c73fddf07
 
+  PATCH_COMMAND ${PATCH_COMMAND} -p1 -i ${CMAKE_CURRENT_SOURCE_DIR}/nullptr.diff
+
   CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${EXT_INSTALL_DIR} ${AT_HOST} ${AT_SHARED_ONLY} --with-opensp-includes=${ofx_openSPIncludeDir} --with-opensp-libs=${ofx_openSPLibDir}
   BUILD_COMMAND $(MAKE)
   INSTALL_COMMAND $(MAKE) install

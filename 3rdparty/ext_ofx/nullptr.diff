@@ -1,0 +1,12 @@
+diff -ruN libofx-0.10.2-orig/lib/ofx_utilities.cpp libofx-0.10.2/lib/ofx_utilities.cpp
+--- libofx-0.10.2-orig/lib/ofx_utilities.cpp    2021-04-23 22:33:07.000000000 +0200
++++ libofx-0.10.2/lib/ofx_utilities.cpp 2021-09-10 19:57:52.225948498 +0200
+@@ -148,7 +148,7 @@
+     string::size_type endidx = ofxdate.find(":", startidx) - 1;
+     string offset_str = ofxdate.substr(startidx, (endidx - startidx) + 1);
+     float ofx_gmt_offset = atof(offset_str.c_str());
+-    std::time_t temptime = std::time(nullptr);
++    std::time_t temptime = std::time(0);
+     static const double secs_per_hour = 3600.0;
+     time.tm_sec += static_cast<int>(ofx_gmt_offset * secs_per_hour);
+     return timegm(&time);
