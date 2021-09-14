@@ -71,6 +71,7 @@
         "Name[fi]": "Täsmäytysraportti",
         "Name[fr]": "Rapport de consolidation",
         "Name[gl]": "Informe de conciliación",
+        "Name[ia]": "Reporto de reconciliation",
         "Name[it]": "Report di riconciliazione",
         "Name[ko]": "조정 보고서",
         "Name[nl]": "Rapport over transactiecontrole",

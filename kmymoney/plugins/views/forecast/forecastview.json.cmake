@@ -41,6 +41,7 @@
         "Description[fi]": "Lisää KMyMoneyyn ennustenäkymän",
         "Description[fr]": "Ajoute la vue Prévisions à KMyMoney",
         "Description[gl]": "Engade unha vista de prognóstico a KMyMoney",
+        "Description[ia]": "Adde vista de prevision a KMyMoney",
         "Description[it]": "Aggiunge la vista delle previsioni a KMyMoney",
         "Description[ko]": "KMyMoney에 예측 보기 추가",
         "Description[nl]": "Voegt weergave van prognoses toe aan KMyMoney",

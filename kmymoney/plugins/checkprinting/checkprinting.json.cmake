@@ -42,6 +42,7 @@
         "Description[fi]": "Tarjoaa kyvyn tulostaa shekkejä",
         "Description[fr]": "Fournit la possibilité d'imprimer des chèques",
         "Description[gl]": "Permite imprimir cheques",
+        "Description[ia]": "Forni le capacitate de imprimer cheques",
         "Description[it]": "Fornisce la funzionalità di stampa degli assegni",
         "Description[ko]": "수표 발행 기능 제공",
         "Description[nl]": "Levert de mogelijkheid checks af te drukken",

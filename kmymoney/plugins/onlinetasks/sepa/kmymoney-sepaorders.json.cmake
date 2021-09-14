@@ -90,6 +90,7 @@
         "Name[fi]": "SEPA-maksut",
         "Name[fr]": "Virements SEPA",
         "Name[gl]": "Ordes SEPA",
+        "Name[ia]": "Ordines SEPA",
         "Name[it]": "Ordini SEPA",
         "Name[ko]": "SEPA 주문",
         "Name[nl]": "SEPA-opdrachten",

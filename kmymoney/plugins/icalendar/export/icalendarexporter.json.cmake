@@ -42,6 +42,7 @@
         "Description[fi]": "Vie aikataulut iCalendar-tiedostoihin",
         "Description[fr]": "Exporte des calendriers dans des fichiers « iCalendar »",
         "Description[gl]": "Exporta planificacións a ficheiros iCalendar",
+        "Description[ia]": "Exporta planos a files de iCalendar",
         "Description[it]": "Esporta le pianificazioni a file iCalendar",
         "Description[ko]": "iCalendar 파일로 일정 내보내기",
         "Description[nl]": "Exporteert planningen naar iCalender bestanden",

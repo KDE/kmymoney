@@ -42,6 +42,7 @@
         "Description[fi]": "Lisää KMyMoneyyn ennalta asetetut IBAN/BIC-numerot",
         "Description[fr]": "Ajoute des numéros IBAN/BIC prédéfinis à KMyMoney",
         "Description[gl]": "Engade números predefinidos de IBAN e BIC a KMyMoney",
+        "Description[ia]": "Adde numeros predefinite de IBAN/BIC a KMyMoney",
         "Description[it]": "Aggiunge i numeri IBAN/BIC predefiniti a KMyMoney",
         "Description[ko]": "KMyMoney에 미리 정의된 IBAN/BIC 번호 추가",
         "Description[nl]": "Voegt voorgedefinieerde IBAN/BIC-nummers toe aan KMyMoney",
