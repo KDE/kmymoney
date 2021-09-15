@@ -62,4 +62,4 @@ private:
     Q_DECLARE_PRIVATE(KSelectTransactionsDlg)
 };
 
-#endif // KMERGETRANSACTIONSDLG_H
+#endif // KSELECTTRANSACTIONSDLG_H

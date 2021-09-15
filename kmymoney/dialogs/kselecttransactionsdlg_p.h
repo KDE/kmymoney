@@ -42,4 +42,4 @@ public:
     MyMoneyAccount m_account;
 };
 
-#endif // KMERGETRANSACTIONSDLG_H
+#endif // KSELECTTRANSACTIONSDLG_P_H

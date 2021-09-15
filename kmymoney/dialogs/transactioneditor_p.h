@@ -119,4 +119,4 @@ public:
     bool                                    m_memoChanged;
 };
 
-#endif // KMERGETRANSACTIONSDLG_H
+#endif // TRANSACTIONEDITOR_P_H
