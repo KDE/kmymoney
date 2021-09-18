@@ -18,22 +18,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QClipboard>
-#include <QFile>
 #include <QFileDialog>
-#include <QFileInfo>
-#include <QIcon>
-#include <QList>
 #include <QLocale>
 #include <QMenu>
-#include <QMimeData>
-#include <QTextBrowser>
-#include <QTextCodec>
-#include <QTimer>
 #include <QTreeWidget>
-#include <QTreeWidgetItem>
 #include <QUrlQuery>
-#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -87,14 +76,12 @@ KReportsView::KReportsView(QWidget *parent) :
     connect(pActions[eMenu::Action::ReportAccountTransactions], &QAction::triggered, this, &KReportsView::slotReportAccountTransactions);
 
     connect(pActions[eMenu::Action::ReportNew], &QAction::triggered, this, &KReportsView::slotDuplicate);
-    connect(pActions[eMenu::Action::ReportCopy], &QAction::triggered, this, &KReportsView::slotCopyView);
     connect(pActions[eMenu::Action::ReportConfigure], &QAction::triggered, this, &KReportsView::slotConfigure);
     connect(pActions[eMenu::Action::ReportExport], &QAction::triggered, this, &KReportsView::slotExportView);
     connect(pActions[eMenu::Action::ReportDelete], &QAction::triggered, this, &KReportsView::slotDelete);
     connect(pActions[eMenu::Action::ReportClose], &QAction::triggered, this, &KReportsView::slotCloseCurrent);
 
     pActions[eMenu::Action::ReportNew]->setShortcut(QKeySequence::New);
-    pActions[eMenu::Action::ReportCopy]->setShortcut(QKeySequence::Copy);
     pActions[eMenu::Action::ReportConfigure]->setShortcut(QKeySequence::Preferences);
     pActions[eMenu::Action::ReportDelete]->setShortcut(QKeySequence::Delete);
     pActions[eMenu::Action::ReportClose]->setShortcut(QKeySequence::Close);
@@ -310,8 +297,6 @@ void KReportsView::slotOpenUrl(const QUrl &url)
             // slotRefreshView();
         } else if (command == QLatin1String("print"))
             slotPrintView();
-        else if (command == QLatin1String("copy"))
-            slotCopyView();
         else if (command == QLatin1String("save"))
             slotExportView();
         else if (command == QLatin1String("configure"))
@@ -361,13 +346,6 @@ void KReportsView::slotPrintPreviewView()
         tab->printPreview();
 }
 
-void KReportsView::slotCopyView()
-{
-    Q_D(KReportsView);
-    if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget()))
-        tab->copyToClipboard();
-}
-
 void KReportsView::slotExportView()
 {
     Q_D(KReportsView);
@@ -391,7 +369,7 @@ void KReportsView::slotExportView()
             QString newName = newURL.toDisplayString(QUrl::PreferLocalFile);
 
             try {
-                tab->saveAs(newName, selectedMimeType, true);
+                tab->saveAs(newName, selectedMimeType);
             } catch (const MyMoneyException &e) {
                 KMessageBox::error(this, i18n("Failed to save: %1", QString::fromLatin1(e.what())));
             }

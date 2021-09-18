@@ -126,7 +126,7 @@ public:
      */
     void updateDataRange();
     void copyToClipboard();
-    void saveAs(const QString& filename, const QString& selectedMimeType, bool includeCSS);
+    void saveAs(const QString& filename, const QString& selectedMimeType);
     void updateReport();
     QString createTable(const QString& links = QString());
     const ReportControl* control() const
@@ -153,7 +153,6 @@ public:
     void enableAllReportActions()
     {
         pActions[eMenu::Action::ReportNew]->setEnabled(true);
-        pActions[eMenu::Action::ReportCopy]->setEnabled(true);
         pActions[eMenu::Action::ReportConfigure]->setEnabled(true);
         pActions[eMenu::Action::ReportExport]->setEnabled(true);
         pActions[eMenu::Action::ReportDelete]->setEnabled(true);
@@ -218,7 +217,6 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     m_control->ui->buttonChart->setIcon(Icons::get(Icon::OfficeCharBar));
     m_control->ui->buttonClose->setIcon(Icons::get(Icon::DocumentClose));
     m_control->ui->buttonConfigure->setIcon(Icons::get(Icon::Configure));
-    m_control->ui->buttonCopy->setIcon(Icons::get(Icon::EditCopy));
     m_control->ui->buttonDelete->setIcon(Icons::get(Icon::EditRemove));
     m_control->ui->buttonExport->setIcon(Icons::get(Icon::DocumentExport));
     m_control->ui->buttonNew->setIcon(Icons::get(Icon::DocumentNew));
@@ -226,7 +224,6 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     // and actions
     m_control->ui->buttonClose->setDefaultAction(pActions[eMenu::Action::ReportClose]);
     m_control->ui->buttonConfigure->setDefaultAction(pActions[eMenu::Action::ReportConfigure]);
-    m_control->ui->buttonCopy->setDefaultAction(pActions[eMenu::Action::ReportCopy]);
     m_control->ui->buttonDelete->setDefaultAction(pActions[eMenu::Action::ReportDelete]);
     m_control->ui->buttonExport->setDefaultAction(pActions[eMenu::Action::ReportExport]);
     m_control->ui->buttonNew->setDefaultAction(pActions[eMenu::Action::ReportNew]);
@@ -326,14 +323,7 @@ void KReportTab::printPreview()
     }
 }
 
-void KReportTab::copyToClipboard()
-{
-    QMimeData* pMimeData =  new QMimeData();
-    pMimeData->setHtml(m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name(), true));
-    QApplication::clipboard()->setMimeData(pMimeData);
-}
-
-void KReportTab::saveAs(const QString& filename, const QString& selectedMimeType, bool includeCSS)
+void KReportTab::saveAs(const QString& filename, const QString& selectedMimeType)
 {
     QFile file(filename);
 
@@ -341,8 +331,7 @@ void KReportTab::saveAs(const QString& filename, const QString& selectedMimeType
         if (selectedMimeType == QStringLiteral("text/csv")) {
             QTextStream(&file) << m_table->renderReport(QLatin1String("csv"), m_encoding, QString());
         } else {
-            QString table =
-                m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name(), includeCSS);
+            QString table = m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name());
             QTextStream stream(&file);
             stream << table;
         }

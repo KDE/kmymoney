@@ -1093,8 +1093,7 @@ void PivotTableTest::testHtmlEncoding()
 
     QByteArray encoding = QTextCodec::codecForLocale()->name();
 
-    QString html = networth_f.renderReport(QLatin1String("html"), encoding,
-                                           filter.name(), false);
+    QString html = networth_f.renderReport(QLatin1String("html"), encoding, filter.name());
 
     const QRegularExpression rx(QLatin1String("^.*<meta .* charset=" + encoding + ".*>.*"),
                                 QRegularExpression::CaseInsensitiveOption | QRegularExpression::DotMatchesEverythingOption);
