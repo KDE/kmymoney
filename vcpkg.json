@@ -1,0 +1,44 @@
+{
+  "name": "kmymoney",
+  "version-string": "5.x.x-dev",
+  "port-version": 1,
+  "homepage": "https://kmymoney.org",
+  "dependencies": [
+    "ecm",
+    "gmp",
+    "kf5archive",
+    "kf5completion",
+    "kf5config",
+    "kf5configwidgets",
+    "kf5coreaddons",
+    "kf5i18n",
+    "kf5iconthemes",
+    "kf5itemmodels",
+    "kf5itemviews",
+    "kf5kcmutils",
+    "kf5kio",
+    "kf5notifications",
+    "kf5service",
+    "kf5textwidgets",
+    "kf5wallet",
+    "kf5xmlgui",
+    "libalkimia",
+    "qt5-base",
+    "qt5-svg",
+    "qt5-webengine"
+  ],
+  "features": {
+    "encryption": {
+      "description": "Allows to store financial data using strong GPG encryption. Currently non-functional due to vcpkg's gpgme missing Qt bindings.",
+      "dependencies": [
+        "gpgme"
+      ]
+    },
+    "reports": {
+      "description": "Adds possibility to display chart and table reports",
+      "dependencies": [
+        "kf5chart"
+      ]
+    }
+  }
+}
