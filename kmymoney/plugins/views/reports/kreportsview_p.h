@@ -206,7 +206,6 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     m_control->ui->buttonChart->setIcon(Icons::get(Icon::OfficeCharBar));
     m_control->ui->buttonClose->setIcon(Icons::get(Icon::DocumentClose));
     m_control->ui->buttonConfigure->setIcon(Icons::get(Icon::Configure));
-    m_control->ui->buttonCopy->setIcon(Icons::get(Icon::EditCopy));
     m_control->ui->buttonDelete->setIcon(Icons::get(Icon::EditRemove));
     m_control->ui->buttonExport->setIcon(Icons::get(Icon::DocumentExport));
     m_control->ui->buttonNew->setIcon(Icons::get(Icon::DocumentNew));
@@ -223,7 +222,6 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     connect(m_control->ui->buttonChart, &QAbstractButton::clicked, eventHandler, &KReportsView::slotToggleChart);
     connect(m_control->ui->buttonConfigure, &QAbstractButton::clicked, eventHandler, &KReportsView::slotConfigure);
     connect(m_control->ui->buttonNew, &QAbstractButton::clicked, eventHandler, &KReportsView::slotDuplicate);
-    connect(m_control->ui->buttonCopy, &QAbstractButton::clicked, eventHandler, &KReportsView::slotCopyView);
     connect(m_control->ui->buttonExport, &QAbstractButton::clicked, eventHandler, &KReportsView::slotExportView);
     connect(m_control->ui->buttonDelete, &QAbstractButton::clicked, eventHandler, &KReportsView::slotDelete);
     connect(m_control->ui->buttonClose, &QAbstractButton::clicked, eventHandler, &KReportsView::slotCloseCurrent);
@@ -307,13 +305,6 @@ void KReportTab::printPreview()
     }
 }
 
-void KReportTab::copyToClipboard()
-{
-    QMimeData* pMimeData =  new QMimeData();
-    pMimeData->setHtml(m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name(), true));
-    QApplication::clipboard()->setMimeData(pMimeData);
-}
-
 void KReportTab::saveAs(const QString& filename, const QString& selectedMimeType, bool includeCSS)
 {
     QFile file(filename);
@@ -322,8 +313,7 @@ void KReportTab::saveAs(const QString& filename, const QString& selectedMimeType
         if (selectedMimeType == QStringLiteral("text/csv")) {
             QTextStream(&file) << m_table->renderReport(QLatin1String("csv"), m_encoding, QString());
         } else {
-            QString table =
-                m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name(), includeCSS);
+            QString table = m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name());
             QTextStream stream(&file);
             stream << table;
         }

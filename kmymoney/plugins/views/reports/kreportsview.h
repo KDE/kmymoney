@@ -110,7 +110,6 @@ public Q_SLOTS:
 
     void slotPrintView();
     void slotPrintPreviewView();
-    void slotCopyView();
     void slotExportView();
     void slotConfigure();
     void slotDuplicate();

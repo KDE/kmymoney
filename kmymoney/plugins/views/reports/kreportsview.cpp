@@ -17,22 +17,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QClipboard>
-#include <QFile>
 #include <QFileDialog>
-#include <QFileInfo>
-#include <QIcon>
-#include <QList>
 #include <QLocale>
 #include <QMenu>
-#include <QMimeData>
-#include <QTextBrowser>
-#include <QTextCodec>
-#include <QTimer>
 #include <QTreeWidget>
-#include <QTreeWidgetItem>
 #include <QUrlQuery>
-#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -272,8 +261,6 @@ void KReportsView::slotOpenUrl(const QUrl &url)
             // slotRefreshView();
         } else if (command == QLatin1String("print"))
             slotPrintView();
-        else if (command == QLatin1String("copy"))
-            slotCopyView();
         else if (command == QLatin1String("save"))
             slotExportView();
         else if (command == QLatin1String("configure"))
@@ -321,13 +308,6 @@ void KReportsView::slotPrintPreviewView()
     Q_D(KReportsView);
     if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget()))
         tab->printPreview();
-}
-
-void KReportsView::slotCopyView()
-{
-    Q_D(KReportsView);
-    if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget()))
-        tab->copyToClipboard();
 }
 
 void KReportsView::slotExportView()

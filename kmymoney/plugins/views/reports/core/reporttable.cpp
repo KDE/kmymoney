@@ -63,7 +63,7 @@ QString reports::ReportTable::cssFileNameGet()
     return cssfilename;
 }
 
-QString reports::ReportTable::renderHeader(const QString& title, const QByteArray& encoding, bool includeCSS)
+QString reports::ReportTable::renderHeader(const QString& title, const QByteArray& encoding)
 {
     QString header = QString(
                          "<!DOCTYPE HTML PUBLIC"
@@ -76,27 +76,13 @@ QString reports::ReportTable::renderHeader(const QString& title, const QByteArra
                          .arg(encoding, title, KMyMoneyUtils::variableCSS());
 
     QString cssfilename = cssFileNameGet();
-    if (includeCSS) {
-        // include css inline
-        QFile cssFile(cssfilename);
-        if (cssFile.open(QIODevice::ReadOnly)) {
-            QTextStream cssStream(&cssFile);
-            header += cssStream.readAll();
-            cssFile.close();
-        } else {
-            qDebug() << "reports::ReportTable::htmlHeaderGet: could not open file "
-                     << cssfilename << " readonly";
-        }
-        header += QLatin1String("\n-->\n</style>\n");
 
-    } else {
-        header += QString("\n<style type=\"text/css\">\n<!--\n%1\n-->\n</style>\n").arg(KMyMoneyUtils::variableCSS());
+    header += QString("\n<style type=\"text/css\">\n<!--\n%1\n-->\n</style>\n").arg(KMyMoneyUtils::variableCSS());
 
-        QUrl cssUrl = cssUrl.fromUserInput(cssfilename);
+    QUrl cssUrl = cssUrl.fromUserInput(cssfilename);
 
-        // do not include css inline instead use a link to the css file
-        header += QString("\n<link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">\n").arg(cssUrl.url());
-    }
+    // do not include css inline instead use a link to the css file
+    header += QString("\n<link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">\n").arg(cssUrl.url());
 
     header += QLatin1String("</head>\n<body>\n");
 
@@ -108,7 +94,7 @@ QString reports::ReportTable::renderFooter()
     return "</body>\n</html>\n";
 }
 
-QString reports::ReportTable::renderReport(const QString &type, const QByteArray& encoding, const QString &title, bool includeCSS)
+QString reports::ReportTable::renderReport(const QString& type, const QByteArray& encoding, const QString& title)
 {
     MyMoneyFile* file = MyMoneyFile::instance();
     QString result;
@@ -119,7 +105,7 @@ QString reports::ReportTable::renderReport(const QString &type, const QByteArray
 
     if (type == QLatin1String("html")) {
         //this renders the HEAD tag and sets the correct css file
-        result = renderHeader(title, encoding, includeCSS);
+        result = renderHeader(title, encoding);
 
         try {
             // report's name

@@ -75,22 +75,6 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="buttonCopy">
-     <property name="minimumSize">
-      <size>
-       <width>75</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="toolTip">
-      <string>Copy this report to the clipboard</string>
-     </property>
-     <property name="text">
-      <string>Copy</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QPushButton" name="buttonExport">
      <property name="minimumSize">
       <size>

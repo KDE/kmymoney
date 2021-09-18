@@ -75,11 +75,9 @@ protected:
      * Constructs html header.
      *
      * @param title html title of report
-     * @param[in] includeCSS  flag, whether the generated html has to include the css inline or whether
-     * the css is referenced as a link to a file
      * @return  html header
      */
-    QString renderHeader(const QString& title, const QByteArray &encoding, bool includeCSS);
+    QString renderHeader(const QString& title, const QByteArray& encoding);
 
     /**
      * Constructs html footer.
@@ -125,13 +123,9 @@ public:
      * @param widget      parent widget
      * @param encoding    character set encoding
      * @param title       html title of report
-     * @param includeCSS  flag, whether the generated html has
-     *                        to include the css inline or whether
-     *                        the css is referenced as a link to a file
-     *
      * @return complete html document
      */
-    QString renderReport(const QString &type, const QByteArray& encoding, const QString& title, bool includeCSS = false);
+    QString renderReport(const QString& type, const QByteArray& encoding, const QString& title);
 };
 
 }
