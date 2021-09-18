@@ -37,7 +37,7 @@
     "reports": {
       "description": "Adds possibility to display chart and table reports",
       "dependencies": [
-        "kf5chart"
+        "kf5diagram"
       ]
     }
   }
