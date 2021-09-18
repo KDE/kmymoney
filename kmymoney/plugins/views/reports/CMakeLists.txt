@@ -12,7 +12,6 @@ set(reportsview_SOURCES
   reporttabimpl.cpp
   reportcontrolimpl.cpp
   kbalancechartdlg.cpp
-  ../../../views/kmymoneywebpage.cpp
   )
 
 ki18n_wrap_ui(reportsview_SOURCES
@@ -51,12 +50,6 @@ target_link_libraries(reportsview
     kmm_menus
     kmm_printer
 )
-
-if(ENABLE_WEBENGINE)
- target_link_libraries(reportsview PRIVATE Qt5::WebEngineWidgets)
-else(ENABLE_WEBENGINE)
- target_link_libraries(reportsview PRIVATE KF5::WebKit)
-endif(ENABLE_WEBENGINE)
 
 # the KCM module
 

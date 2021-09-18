@@ -41,17 +41,12 @@ class ReportTable;
 class QTreeWidget;
 class QTreeWidgetItem;
 class QListWidget;
-class MyQWebEnginePage;
 class TocItemGroup;
 class ReportControl;
 class ReportGroup;
 class SelectedObjects;
 
-#ifdef ENABLE_WEBENGINE
-class QWebEngineView;
-#else
-class KWebView;
-#endif
+class QTextBrowser;
 
 /**
   * Displays a page where reports can be placed.

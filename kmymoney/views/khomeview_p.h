@@ -19,23 +19,18 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QBuffer>
+#include <QDesktopServices>
+#include <QElapsedTimer>
 #include <QList>
 #include <QPixmap>
-#include <QBuffer>
-#include <QStandardPaths>
-#include <QDesktopServices>
-#include <QUrlQuery>
-#include <QWheelEvent>
 #include <QPrintDialog>
-#include <QVBoxLayout>
 #include <QPrinter>
-#include <QElapsedTimer>
-#ifdef ENABLE_WEBENGINE
-#include <QWebEngineView>
-#else
-#include <KWebView>
-#include <QWebFrame>
-#endif
+#include <QStandardPaths>
+#include <QTextBrowser>
+#include <QUrlQuery>
+#include <QVBoxLayout>
+#include <QWheelEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -62,7 +57,6 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "icons.h"
-#include "kmymoneywebpage.h"
 #include "mymoneyschedule.h"
 #include "mymoneysecurity.h"
 #include "mymoneyexception.h"
@@ -121,7 +115,8 @@ public:
     ~KHomeViewPrivate() {
         // if user wants to remember the font size, store it here
         if (KMyMoneySettings::rememberZoomFactor() && m_view) {
-            KMyMoneySettings::setZoomFactor(m_view->zoomFactor());
+            // TODO
+            //            KMyMoneySettings::setZoomFactor(m_view->zoomFactor());
             KMyMoneySettings::self()->save();
         }
     }
@@ -144,24 +139,12 @@ public:
         vbox->setSpacing(6);
         vbox->setMargin(0);
 
-#ifdef ENABLE_WEBENGINE
-        m_view = new QWebEngineView(q);
-#else
-        m_view = new KWebView(q);
-#endif
+        m_view = new QTextBrowser();
         m_view->installEventFilter(q);
-        m_view->setPage(new MyQWebEnginePage(m_view));
 
         vbox->addWidget(m_view);
 
-#ifdef ENABLE_WEBENGINE
-        q->connect(m_view->page(), &QWebEnginePage::urlChanged,
-                   q, &KHomeView::slotOpenUrl);
-#else
-        m_view->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
-        q->connect(m_view->page(), &KWebPage::linkClicked,
-                   q, &KHomeView::slotOpenUrl);
-#endif
+        q->connect(m_view, &QTextBrowser::sourceChanged, q, &KHomeView::slotOpenUrl);
 
         q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KHomeView::refresh);
     }
@@ -407,21 +390,22 @@ public:
     void loadView()
     {
         Q_Q(KHomeView);
-        m_view->setZoomFactor(KMyMoneySettings::zoomFactor());
+        // TODO
+        //        m_view->setZoomFactor(KMyMoneySettings::zoomFactor());
 
         QList<MyMoneyAccount> list;
         MyMoneyFile::instance()->accountList(list);
         if (list.isEmpty()) {
-            m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
+            m_view->setHtml(KWelcomePage::welcomePage());
         } else {
             // preload transaction statistics
             m_transactionStats = MyMoneyFile::instance()->countTransactionsWithSpecificReconciliationState();
 
             // keep current location on page
             m_scrollBarPos = 0;
-#ifndef ENABLE_WEBENGINE
-            m_scrollBarPos = m_view->page()->mainFrame()->scrollBarValue(Qt::Vertical);
-#endif
+
+            // TODO: can use scrollBarWidgets(Qt::Vertical) and cast to QAbstractScrollArea to retrieve slider position
+            // m_scrollBarPos = m_view->scrollBarWidgets(Qt::Vertical)-> page()->mainFrame()->scrollBarValue(Qt::Vertical);
 
             //clear the forecast flag so it will be reloaded
             m_forecast.setForecastDone(false);
@@ -508,13 +492,11 @@ public:
             m_html += "<div id=\"vieweffect\"></div>";
             m_html += footer;
 
-            m_view->setHtml(m_html, QUrl("file://"));
+            m_view->setHtml(m_html);
 
-#ifndef ENABLE_WEBENGINE
             if (m_scrollBarPos) {
                 QMetaObject::invokeMethod(q, "slotAdjustScrollPos", Qt::QueuedConnection);
             }
-#endif
         }
     }
 
@@ -1840,11 +1822,7 @@ public:
      */
     typedef QMap<QDate, MyMoneyMoney> dailyBalances;
 
-#ifdef ENABLE_WEBENGINE
-    QWebEngineView   *m_view;
-#else
-    KWebView         *m_view;
-#endif
+    QTextBrowser* m_view;
 
     QString           m_html;
     bool              m_showAllSchedules;

@@ -253,19 +253,6 @@ cmake_dependent_option(ENABLE_IBANBICDATA "Enable IBAN/BIC data support." OFF
 
 add_feature_info("IBAN/BIC data" ENABLE_IBANBICDATA "Adds predefined IBAN/BIC numbers to KMyMoney (note: doesn't work yet).")
 
-# check for optional QWebEngine
-option(ENABLE_WEBENGINE "Enable QWebEngine" OFF)
-if(ENABLE_WEBENGINE)
-  find_package(Qt5WebEngineWidgets 5.8 REQUIRED)
-  if(Qt5WebEngineWidgets_VERSION VERSION_GREATER 5.8.99 AND Qt5WebEngineWidgets_VERSION VERSION_LESS 5.9.3)
-    message(WARNING "QWebEngine version ${Qt5WebEngineWidgets_VERSION} is known to be unstable with KMyMoney")
-  endif()
-else(ENABLE_WEBENGINE)
-  find_package(KF5WebKit REQUIRED)
-endif(ENABLE_WEBENGINE)
-
-add_feature_info("QWebEngine" ENABLE_WEBENGINE "A next-gen QT Web Engine.")
-
 # check for optional LibOFX support
 cmake_dependent_option(ENABLE_OFXIMPORTER "Enable OFX Importer" ON
                        "LIBOFX_FOUND" OFF)

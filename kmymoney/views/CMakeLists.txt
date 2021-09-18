@@ -16,7 +16,6 @@ set(libviews_a_SOURCES
   ktagsview.cpp
   kpayeeidentifierview.cpp
   payeeidentifierselectiondelegate.cpp
-  kmymoneywebpage.cpp
   simpleledgerview.cpp
   kmmstyleditemdelegate.cpp
   ledgerviewpage.cpp
@@ -72,12 +71,6 @@ set(libviews_a_UI
 ki18n_wrap_ui(libviews_a_SOURCES ${libviews_a_UI})
 
 add_library(views STATIC ${libviews_a_SOURCES})
-
-if(ENABLE_WEBENGINE)
- target_link_libraries(views PUBLIC Qt5::WebEngineWidgets)
-else(ENABLE_WEBENGINE)
- target_link_libraries(views PUBLIC KF5::WebKit)
-endif(ENABLE_WEBENGINE)
 
 # TODO: Remove this dependency. But it is needed as long as the payee editor uses these objects directly
 # This should be replaced by virtual methods in a pure abstract object.

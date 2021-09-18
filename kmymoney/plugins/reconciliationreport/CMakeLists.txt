@@ -26,9 +26,3 @@ target_link_libraries(reconciliationreport
   kmm_plugin
   kmm_printer
 )
-
-if(ENABLE_WEBENGINE)
- target_link_libraries(reconciliationreport Qt5::WebEngineWidgets)
-else(ENABLE_WEBENGINE)
- target_link_libraries(reconciliationreport KF5::WebKit)
-endif(ENABLE_WEBENGINE)

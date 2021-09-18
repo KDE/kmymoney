@@ -10,11 +10,7 @@
 
 #include "ui_kreconciliationreportdlgdecl.h"
 
-#ifdef ENABLE_WEBENGINE
-class QWebEngineView;
-#else
-class KWebView;
-#endif
+class QTextBrowser;
 
 class KReportDlg : public QDialog, public Ui::KReconciliationReportDlgDecl
 {
@@ -28,13 +24,8 @@ protected Q_SLOTS:
     void print();
 
 private:
-#ifdef ENABLE_WEBENGINE
-    QWebEngineView *m_summaryHTMLPart;
-    QWebEngineView *m_detailsHTMLPart;
-#else
-    KWebView       *m_summaryHTMLPart;
-    KWebView       *m_detailsHTMLPart;
-#endif
+    QTextBrowser* m_summaryHTMLPart;
+    QTextBrowser* m_detailsHTMLPart;
 };
 
 #endif

@@ -28,12 +28,6 @@ target_link_libraries(checkprinting
   kmm_selections
 )
 
-if(ENABLE_WEBENGINE)
- target_link_libraries(checkprinting Qt5::WebEngineWidgets)
-else(ENABLE_WEBENGINE)
- target_link_libraries(checkprinting KF5::WebKit)
-endif(ENABLE_WEBENGINE)
-
 # the KCM module
 
 set(kcm_checkprinting_PART_SRCS
@@ -65,12 +59,6 @@ target_link_libraries(
                       KF5::KIOWidgets
                       KF5::CoreAddons
                       )
-
-if(ENABLE_WEBENGINE)
- target_link_libraries(kcm_checkprinting Qt5::WebEngineWidgets)
-else(ENABLE_WEBENGINE)
- target_link_libraries(kcm_checkprinting KF5::WebKit)
-endif(ENABLE_WEBENGINE)
 
 install(FILES kcm_checkprinting.desktop
         DESTINATION "${SERVICES_INSTALL_DIR}")
