@@ -411,21 +411,7 @@ public:
             m_forecast.setForecastDone(false);
 
             const QString filename = QStandardPaths::locate(QStandardPaths::AppConfigLocation, "html/kmymoney.css");
-            QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head>\n");
-
-            // inline the CSS
-            header += "<style type=\"text/css\">\n<!--\n";
-            header += KMyMoneyUtils::variableCSS();
-            QFile cssFile(filename);
-            if (cssFile.open(QIODevice::ReadOnly)) {
-                QTextStream cssStream(&cssFile);
-                header += cssStream.readAll();
-                cssFile.close();
-            }
-            header += "-->\n</style>\n";
-
-            header += "</head><body id=\"summaryview\">\n";
-
+            QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><body id=\"summaryview\">\n");
             QString footer = "</body></html>\n";
 
             m_html.clear();
@@ -492,6 +478,15 @@ public:
             m_html += "<div id=\"vieweffect\"></div>";
             m_html += footer;
 
+            QString styleSheet = KMyMoneyUtils::variableCSS();
+            QFile cssFile(filename);
+            if (cssFile.open(QIODevice::ReadOnly)) {
+                QTextStream cssStream(&cssFile);
+                styleSheet += cssStream.readAll();
+                cssFile.close();
+            }
+
+            m_view->document()->setDefaultStyleSheet(styleSheet);
             m_view->setHtml(m_html);
 
             if (m_scrollBarPos) {
