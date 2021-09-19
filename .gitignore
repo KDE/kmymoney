@@ -1,6 +1,9 @@
 cmake-build*/
 build*/
-vcpkg_installed
+out/
+CMakeFiles/
+vcpkg_installed/
+vcpkg-manifest-install.log
 .svn/
 *.orig
 *.rej
@@ -12,7 +15,9 @@ moc_*.cpp
 kmymoney/icons/icons.qrc
 kmymoney/templates/templates.qrc
 /compile_commands.json
+CMakeSettings.json
 .clangd
 .cache
 .idea
+.vs
 docker/.env
