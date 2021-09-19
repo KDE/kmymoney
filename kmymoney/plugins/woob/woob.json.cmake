@@ -49,6 +49,7 @@
         "Description[sv]": "Insticksprogram för Woob",
         "Description[uk]": "Додаток для Woob",
         "Description[x-test]": "xxPlugin for Woobxx",
+        "Description[zh_CN]": "Woob 插件",
         "EnabledByDefault": true,
         "Icon": "network-connect",
         "Id": "woob",
@@ -70,6 +71,7 @@
         "Name[sv]": "Woob",
         "Name[uk]": "Woob",
         "Name[x-test]": "xxWoobxx",
+        "Name[zh_CN]": "Woob",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

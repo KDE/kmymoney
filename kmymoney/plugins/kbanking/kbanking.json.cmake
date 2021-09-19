@@ -48,6 +48,7 @@
         "Description[tr]": "KMyMoney'e HBCI/FinTs, OFX ve PayPal çevrimiçi bankacılığını ekle",
         "Description[uk]": "Онлайн-банкінг HBCI/FinTs, OFX і PayPal у KMyMoney",
         "Description[x-test]": "xxAdd HBCI/FinTs, OFX and PayPal online banking to KMyMoneyxx",
+        "Description[zh_CN]": "将 HBCI (FinTs)、OFX 或 PayPal 网上银行添加到 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "network-connect",
         "Id": "kbanking",
