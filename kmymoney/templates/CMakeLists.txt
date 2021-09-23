@@ -33,7 +33,7 @@ file(WRITE "templates.qrc" "${qrcContents}")
 # add generated file to resources
 qt5_add_resources(kmm_templates_SOURCES templates.qrc)
 
-add_library(kmm_templates SHARED ${kmm_templates_SOURCES})
+add_library(kmm_templates ${kmm_templates_SOURCES})
 
 #   kmm_settings
 #  KF5::KIOWidgets

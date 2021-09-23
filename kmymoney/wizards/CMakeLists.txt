@@ -12,7 +12,7 @@ set(kmm_wizard_SOURCES
   kmymoneywizardpage.cpp
 )
 
-add_library(kmm_wizard SHARED ${kmm_wizard_SOURCES})
+add_library(kmm_wizard ${kmm_wizard_SOURCES})
 
 generate_export_header(kmm_wizard BASE_NAME kmm_wizard)
 

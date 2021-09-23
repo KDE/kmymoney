@@ -19,7 +19,7 @@ set(plugin_HEADERS
   onlinepluginextended.h
 )
 
-add_library(kmm_plugin SHARED ${kmm_plugin_LIB_SRCS})
+add_library(kmm_plugin ${kmm_plugin_LIB_SRCS})
 generate_export_header(kmm_plugin BASE_NAME kmm_plugin)
 target_link_libraries(kmm_plugin
   PUBLIC

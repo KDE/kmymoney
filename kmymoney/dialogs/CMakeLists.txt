@@ -56,7 +56,7 @@ set(base_dialogs_HEADERS
 
 ki18n_wrap_ui(kmm_base_dialogs_SOURCES ${base_dialogs_UI} )
 
-add_library(kmm_base_dialogs SHARED ${kmm_base_dialogs_SOURCES})
+add_library(kmm_base_dialogs ${kmm_base_dialogs_SOURCES})
 
 generate_export_header(kmm_base_dialogs BASE_NAME kmm_base_dialogs)
 
@@ -103,7 +103,7 @@ set(kmm_extended_dialogs_UI
 
 ki18n_wrap_ui(kmm_extended_dialogs_SOURCES ${kmm_extended_dialogs_UI})
 
-add_library(kmm_extended_dialogs SHARED ${kmm_extended_dialogs_SOURCES})
+add_library(kmm_extended_dialogs ${kmm_extended_dialogs_SOURCES})
 
 generate_export_header(kmm_extended_dialogs BASE_NAME kmm_extended_dialogs)
 

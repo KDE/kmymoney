@@ -8,7 +8,7 @@ set ( PAYEEIDENTIFIER_SCRS
   payeeidentifier.cpp
 )
 
-add_library( kmm_payeeidentifier SHARED
+add_library( kmm_payeeidentifier
   ${PAYEEIDENTIFIER_SCRS}
 )
 

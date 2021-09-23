@@ -16,7 +16,7 @@ set ( onlinetask_interfaces_SRCS
 )
 
 # At the moment onlinetask_interfaces is linked into kmm_mymoney and should not be used anywhere else!
-add_library(onlinetask_interfaces SHARED ${onlinetask_interfaces_SRCS})
+add_library(onlinetask_interfaces ${onlinetask_interfaces_SRCS})
 
 target_link_libraries( onlinetask_interfaces
   PUBLIC
