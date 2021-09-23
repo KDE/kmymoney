@@ -97,7 +97,7 @@ set(mymoney_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kmm_mymoney_export.h
   onlinejobfolder.h
   )
 
-add_library(kmm_mymoney SHARED ${kmm_mymoney_LIB_SRCS})
+add_library(kmm_mymoney ${kmm_mymoney_LIB_SRCS})
 
 if (USE_MODELTEST)
   target_compile_definitions(kmm_mymoney PRIVATE -DKMM_MODELTEST)

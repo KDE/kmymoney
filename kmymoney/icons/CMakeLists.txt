@@ -30,7 +30,7 @@ file(WRITE "icons.qrc" "${qrcContents}")
 # add generated file to resources
 qt5_add_resources(icons_SOURCES icons.qrc)
 
-add_library(kmm_icons SHARED ${icons_SOURCES})
+add_library(kmm_icons ${icons_SOURCES})
 
 generate_export_header(kmm_icons)
 target_link_libraries(kmm_icons PRIVATE Qt5::Core Qt5::Gui)

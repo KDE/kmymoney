@@ -10,7 +10,7 @@ set(csvimportercore_PART_SRCS
   csvutil.cpp
 )
 
-add_library(kmm_csvimportercore SHARED ${csvimportercore_PART_SRCS})
+add_library(kmm_csvimportercore ${csvimportercore_PART_SRCS})
 generate_export_header(kmm_csvimportercore)
 target_link_libraries(kmm_csvimportercore
   PUBLIC

@@ -56,9 +56,9 @@ set( kmm_selections_SRCS
 add_library(kmm_utils_validators STATIC ${kmm_utils_validators_SRCS})
 add_library(kmm_utils_platformtools STATIC ${kmm_utils_platformtools_SRCS})
 add_library(kmm_url STATIC ${kmm_url_SRCS})
-add_library(kmm_webconnect SHARED ${kmm_webconnect_SRCS})
-add_library(kmm_printer SHARED ${kmm_printer_SRCS})
-add_library(kmm_selections SHARED ${kmm_selections_SRCS})
+add_library(kmm_webconnect ${kmm_webconnect_SRCS})
+add_library(kmm_printer ${kmm_printer_SRCS})
+add_library(kmm_selections ${kmm_selections_SRCS})
 
 target_link_libraries( kmm_utils_validators
   PUBLIC

@@ -16,7 +16,7 @@ set(libmodels_a_SOURCES
     comboboxmodels.cpp
 )
 
-add_library(kmm_models SHARED ${libmodels_a_SOURCES})
+add_library(kmm_models ${libmodels_a_SOURCES})
 
 generate_export_header(kmm_models BASE_NAME kmm_models)
 
