@@ -489,8 +489,12 @@ endif()
 configure_file("config-kmymoney.h.cmake" "${CMAKE_CURRENT_BINARY_DIR}/config-kmymoney.h")
 configure_file("config-kmymoney-version.h.cmake" "${CMAKE_CURRENT_BINARY_DIR}/config-kmymoney-version.h")
 
-message("
-Build type: ${CMAKE_BUILD_TYPE}")
+message("\nBuild type: ${CMAKE_BUILD_TYPE}")
+if (BUILD_SHARED_LIBS)
+    message("Building KMyMoney libraries: dynamically")
+else()
+    message("Building KMyMoney libraries: statically")
+endif()
 
 feature_summary(WHAT REQUIRED_PACKAGES_NOT_FOUND
                 DESCRIPTION "The following REQUIRED packages have not been found:")
