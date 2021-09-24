@@ -5,6 +5,7 @@ set(libviews_a_SOURCES
   accountdelegate.cpp
   kwelcomepage.cpp
   khomeview.cpp
+  kqmlview.cpp
   kinstitutionsview.cpp
   kinvestmentview.cpp
   kmymoneyfile.cpp
@@ -78,6 +79,11 @@ if(ENABLE_WEBENGINE)
 else(ENABLE_WEBENGINE)
  target_link_libraries(views PUBLIC KF5::WebKit)
 endif(ENABLE_WEBENGINE)
+
+target_link_libraries(views PUBLIC
+    Qt5::Quick
+    Qt5::QuickWidgets
+)
 
 # TODO: Remove this dependency. But it is needed as long as the payee editor uses these objects directly
 # This should be replaced by virtual methods in a pure abstract object.

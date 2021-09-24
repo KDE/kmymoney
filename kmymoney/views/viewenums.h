@@ -10,6 +10,7 @@
 
 enum class View {
     Home = 0,
+    HomeQML,
     Institutions,
     Accounts,
     Schedules,

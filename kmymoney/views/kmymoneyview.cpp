@@ -56,6 +56,7 @@
 #include "kmymoneyplugin.h"
 #include "kmymoneysettings.h"
 #include "kpayeesview.h"
+#include "kqmlview.h"
 #include "kscheduledview.h"
 #include "ktagsview.h"
 #include "menuenums.h"
@@ -162,6 +163,7 @@ public:
     const QVector<viewInfo> viewsInfo
     {
         {View::Home,            i18n("Home"),                         Icon::Home},
+        {View::HomeQML,         i18n("Home QML WIP"),                 Icon::Home},
         {View::Institutions,    i18n("Institutions"),                 Icon::Institutions},
         {View::Accounts,        i18n("Accounts"),                     Icon::Accounts},
         {View::Schedules,       i18n("Scheduled\ntransactions"),      Icon::Schedule},
@@ -200,6 +202,8 @@ KMyMoneyView::KMyMoneyView()
     d->m_model = new KPageWidgetModel(this); // cannot be parentless, otherwise segfaults at exit
 
     d->viewBases[View::Home] = new KHomeView;
+    //TODO: Use url as qrc://Home.qml
+    d->viewBases[View::HomeQML] = new KQmlView(QUrl::fromLocalFile("/home/isma/kde/src/kmymoney/kmymoney/qml/Home.qml"), this);
     d->viewBases[View::Institutions] = new KInstitutionsView;
     d->viewBases[View::Accounts] = new KAccountsView;
     d->viewBases[View::Schedules] = new KScheduledView;
@@ -215,7 +219,7 @@ KMyMoneyView::KMyMoneyView()
 
     // set the model
     setModel(d->m_model);
-    setCurrentPage(d->viewFrames[View::Home]);
+    setCurrentPage(d->viewFrames[View::HomeQML]);
     connect(this, &KMyMoneyView::currentPageChanged, this, &KMyMoneyView::slotSwitchView);
 
     updateViewType();
@@ -489,8 +493,9 @@ QHash<eMenu::Action, QAction *> KMyMoneyView::actionsToBeConnected()
         QString          text;
         QKeySequence     shortcut = QKeySequence();
     };
+    // clang-format off
     const QVector<pageInfo> pageInfos {
-        {Action::ShowHomeView,            View::Home,               i18n("Show home page"),                   Qt::CTRL + Qt::Key_1},
+        {Action::ShowHomeView,            View::HomeQML,            i18n("Show home page"),                   Qt::CTRL + Qt::Key_1},
         {Action::ShowInstitutionsView,    View::Institutions,       i18n("Show institutions page"),           Qt::CTRL + Qt::Key_2},
         {Action::ShowAccountsView,        View::Accounts,           i18n("Show accounts page"),               Qt::CTRL + Qt::Key_3},
         {Action::ShowSchedulesView,       View::Schedules,          i18n("Show scheduled transactions page"), Qt::CTRL + Qt::Key_4},
@@ -504,6 +509,7 @@ QHash<eMenu::Action, QAction *> KMyMoneyView::actionsToBeConnected()
         {Action::ShowForecastView,        View::Forecast,           i18n("Show forecast page"),               },
         {Action::ShowOnlineJobOutboxView, View::OnlineJobOutbox,    i18n("Show outbox page")                  },
     };
+    // clang-format on
 
     QHash<Action, QAction *> lutActions;
     auto pageCount = 0;
@@ -550,10 +556,11 @@ void KMyMoneyView::enableViewsIfFileOpen(bool fileOpen)
     Q_D(KMyMoneyView);
     // call set enabled only if the state differs to avoid widgets 'bouncing on the screen' while doing this
     Q_ASSERT_X((int)(View::Home) == 0, "viewenums.h", "View::Home must be the first entry");
-    Q_ASSERT_X(((int)(View::Home)+1) == (int)View::Institutions, "viewenums.h", "View::Institutions must be the second entry");
+    Q_ASSERT_X(((int)(View::Home) + 2) == (int)View::Institutions, "viewenums.h", "View::Institutions must be the second entry");
 
     // the home view is always enabled
     d->viewFrames[View::Home]->setEnabled(true);
+    d->viewFrames[View::HomeQML]->setEnabled(true);
     for (auto i = (int)View::Institutions; i < (int)View::None; ++i)
         if (d->viewFrames.contains(View(i)))
             if (d->viewFrames[View(i)]->isEnabled() != fileOpen)
