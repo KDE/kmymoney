@@ -7,4 +7,7 @@
         <file>html/kmymoney.css</file>
         <file>html/images/bg-texture.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>qml/HomeView.qml</file>
+    </qresource>
 </RCC>

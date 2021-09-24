@@ -5,6 +5,7 @@ set(libviews_a_SOURCES
   accountdelegate.cpp
   kwelcomepage.cpp
   khomeview.cpp
+  kqmlview.cpp
   kinstitutionsview.cpp
   kinvestmentview.cpp
   kmymoneyfile.cpp
@@ -81,12 +82,13 @@ target_link_libraries(views PUBLIC
   newaccountwizard
   KF${QT_MAJOR_VERSION}::TextWidgets
   Qt::PrintSupport
+  Qt::Quick
+  Qt::QuickWidgets
   kmm_mymoney # needed to load payeeIdentifier
   kmm_widgets
   kmm_printer
   kmm_textbrowser
   Alkimia::alkimia
 )
-
 # we rely on some of the dialogs to be generated
 add_dependencies(views newinvestmentwizard newaccountwizard newloanwizard endingbalancedlg)
