@@ -6,9 +6,8 @@ set(onlinejobpluginmockup_PART_SRCS
   onlinejobpluginmockup.cpp
 )
 
-kcoreaddons_add_plugin(onlinejobpluginmockup
-                       SOURCES ${onlinejobpluginmockup_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
+kmymoney_add_plugin(onlinejobpluginmockup
+                       SOURCES ${onlinejobpluginmockup_PART_SRCS})
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
 set_target_properties(onlinejobpluginmockup

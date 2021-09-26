@@ -12,9 +12,8 @@ set ( IBANBICDATA_SCRS
   bicmodel.cpp
 )
 
-kcoreaddons_add_plugin(ibanbicdata
-                       SOURCES ${IBANBICDATA_SCRS}
-                       INSTALL_NAMESPACE "kmymoney")
+kmymoney_add_plugin(ibanbicdata
+                       SOURCES ${IBANBICDATA_SCRS})
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
 set_target_properties(ibanbicdata

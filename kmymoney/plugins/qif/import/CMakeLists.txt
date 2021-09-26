@@ -18,9 +18,8 @@ ki18n_wrap_ui(qifimporter_PART_SRCS ${qifimporter_PART_UI})
 
 qt5_add_resources(qifimporter_PART_SRCS qifimporter.qrc)
 
-kcoreaddons_add_plugin(qifimporter
-                       SOURCES ${qifimporter_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
+kmymoney_add_plugin(qifimporter
+                       SOURCES ${qifimporter_PART_SRCS})
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
 set_target_properties(qifimporter

@@ -458,6 +458,9 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang" 
   set(CMAKE_CXX_FLAGS_DEBUGKMM  "${CMAKE_CXX_FLAGS_DEBUGFULL} -DKMM_DEBUG -DQT_FORCE_ASSERTS")
 endif()
 
+option(BUILD_SHARED_LIBS
+  "Build shared libraries" ON)
+
 option(USE_MODELTEST
   "Compile with ModelTest code (default=OFF)" OFF)
 

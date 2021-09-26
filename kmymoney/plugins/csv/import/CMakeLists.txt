@@ -40,9 +40,8 @@ ki18n_wrap_ui(csvimporter_PART_SRCS
   currenciesdlg.ui
 )
 
-kcoreaddons_add_plugin(csvimporter
-                       SOURCES ${csvimporter_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
+kmymoney_add_plugin(csvimporter
+                       SOURCES ${csvimporter_PART_SRCS})
 
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
@@ -67,9 +66,8 @@ kconfig_add_kcfg_files(kcm_csvimporter_PART_SRCS pluginsettings.kcfgc)
 
 ki18n_wrap_ui(kcm_csvimporter_PART_SRCS pluginsettingsdecl.ui)
 
-kcoreaddons_add_plugin(kcm_csvimporter
-                       SOURCES ${kcm_csvimporter_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
+kmymoney_add_plugin(kcm_csvimporter
+                       SOURCES ${kcm_csvimporter_PART_SRCS})
 
 kcoreaddons_desktop_to_json(kcm_csvimporter kcm_csvimporter.desktop)
 

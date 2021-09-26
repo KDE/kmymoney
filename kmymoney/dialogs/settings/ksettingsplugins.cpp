@@ -84,22 +84,22 @@ KSettingsPlugins::KSettingsPlugins(QWidget* parent) :
     setLayout(layout);  // otherwise KPluginSelector occupies very little area
     layout->addWidget(d->m_pluginSelector);
 
-    auto allPluginDatas = KMyMoneyPlugin::listPlugins(false); // fetch all available KMyMoney plugins
+    auto allPluginDatas = KMyMoneyPlugin::discoverPlugins(false); // fetch all available KMyMoney plugins
     QVector<KPluginMetaData> standardPlugins;
     QVector<KPluginMetaData> payeePlugins;
     QVector<KPluginMetaData> onlinePlugins;
 
     // divide plugins in some arbitrary categories
-    for (const KPluginMetaData& pluginData : allPluginDatas)
-        switch (KMyMoneyPlugin::pluginCategory(pluginData)) {
+    for (const KMyMoneyPlugin::PluginMetaFactory& pluginData : allPluginDatas)
+        switch (KMyMoneyPlugin::pluginCategory(pluginData.pluginMetaData)) {
         case KMyMoneyPlugin::Category::StandardPlugin:
-            standardPlugins.append(pluginData);
+            standardPlugins.append(pluginData.pluginMetaData);
             break;
         case KMyMoneyPlugin::Category::PayeeIdentifier:
-            payeePlugins.append(pluginData);
+            payeePlugins.append(pluginData.pluginMetaData);
             break;
         case KMyMoneyPlugin::Category::OnlineBankOperations:
-            onlinePlugins.append(pluginData);
+            onlinePlugins.append(pluginData.pluginMetaData);
             break;
         default:
             break;

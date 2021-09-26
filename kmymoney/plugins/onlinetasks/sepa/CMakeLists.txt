@@ -12,9 +12,8 @@ ki18n_wrap_ui( sepaOnlineTasks_SRCS
 
 add_library(konlinetasks_sepa_interface INTERFACE)
 
-kcoreaddons_add_plugin(konlinetasks_sepa
-                       SOURCES ${sepaOnlineTasks_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
+kmymoney_add_plugin(konlinetasks_sepa
+                       SOURCES ${sepaOnlineTasks_SRCS})
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
 set_target_properties(konlinetasks_sepa

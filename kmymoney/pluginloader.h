@@ -7,6 +7,10 @@
 #ifndef PLUGINLOADER_H
 #define PLUGINLOADER_H
 
+#include <KPluginLoader>
+#include <KPluginMetaData>
+#include <config-kmymoney.h>
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -17,6 +21,7 @@ template <class Key, class T> class QMap;
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+class KPluginFactory;
 class KPluginMetaData;
 class KXMLGUIFactory;
 
@@ -48,14 +53,27 @@ enum Category {
     StandardPlugin,
 };
 
+struct PluginMetaFactory {
+    KPluginMetaData pluginMetaData;
+    KPluginFactory* pluginFactory;
+    KPluginLoader* pluginLoader;
+
+    PluginMetaFactory(KPluginMetaData m, KPluginLoader* l, KPluginFactory* f)
+        : pluginMetaData(m)
+        , pluginLoader(l)
+        , pluginFactory(f)
+    {
+    }
+};
+
 Category pluginCategory(const KPluginMetaData& pluginInfo);
 
 /**
- * @brief It lists all kmymoney plugins
+ * @brief Discovers all the kmymoney plugins
  * @param onlyEnabled = true if plugins should be listed according to on/off saved state in kmymoneyrc
- * @return
+ * @return a Map of plugin IDs and their corresponding metaData and a Factory objects
  */
-QMap<QString, KPluginMetaData> listPlugins(bool onlyEnabled);
+QMap<QString, PluginMetaFactory> discoverPlugins(bool onlyEnabled);
 
 /**
  * @brief It should be used to handle all plugin actions

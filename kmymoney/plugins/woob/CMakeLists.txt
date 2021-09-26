@@ -15,9 +15,8 @@ set(woob_PART_SRCS
 
 qt5_add_resources(woob_PART_SRCS woob.qrc)
 
-kcoreaddons_add_plugin(woob
-                       SOURCES ${woob_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
+kmymoney_add_plugin(woob
+                       SOURCES ${woob_PART_SRCS})
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
 set_target_properties(woob

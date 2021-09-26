@@ -15,9 +15,8 @@ ki18n_wrap_ui(csvexporter_PART_SRCS
   csvexportdlg.ui
 )
 
-kcoreaddons_add_plugin(csvexporter
-                       SOURCES ${csvexporter_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
+kmymoney_add_plugin(csvexporter
+                       SOURCES ${csvexporter_PART_SRCS})
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
 set_target_properties(csvexporter

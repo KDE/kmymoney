@@ -9,13 +9,11 @@ ki18n_wrap_ui(kcm_qif_PART_SRCS mymoneyqifprofileeditor.ui)
 
 #dirty hack: kcm_qif doesn't need json but build fails if it isn't found
 if(ENABLE_QIFIMPORTER)
-kcoreaddons_add_plugin(kcm_qif
-                       SOURCES ${kcm_qif_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
+kmymoney_add_plugin(kcm_qif
+                       SOURCES ${kcm_qif_PART_SRCS})
 elseif(ENABLE_QIFEXPORTER)
-kcoreaddons_add_plugin(kcm_qif
-                       SOURCES ${kcm_qif_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
+kmymoney_add_plugin(kcm_qif
+                       SOURCES ${kcm_qif_PART_SRCS})
 endif()
 
 if(ENABLE_QIFIMPORTER)

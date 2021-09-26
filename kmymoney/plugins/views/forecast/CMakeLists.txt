@@ -12,9 +12,8 @@ qt5_add_resources(forecastview_SOURCES forecastview.qrc)
 
 kconfig_add_kcfg_files(forecastview_SOURCES forecastviewsettings.kcfgc)
 
-kcoreaddons_add_plugin(forecastview
-                       SOURCES ${forecastview_SOURCES}
-                       INSTALL_NAMESPACE "kmymoney")
+kmymoney_add_plugin(forecastview
+                       SOURCES ${forecastview_SOURCES})
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
 set_target_properties(forecastview
@@ -39,9 +38,8 @@ kconfig_add_kcfg_files(kcm_forecastview_PART_SRCS forecastviewsettings.kcfgc)
 
 ki18n_wrap_ui(kcm_forecastview_PART_SRCS forecastviewsettings.ui)
 
-kcoreaddons_add_plugin(kcm_forecastview
-                       SOURCES ${kcm_forecastview_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
+kmymoney_add_plugin(kcm_forecastview
+                       SOURCES ${kcm_forecastview_PART_SRCS})
 
 kcoreaddons_desktop_to_json(kcm_forecastview kcm_forecastview.desktop)
 

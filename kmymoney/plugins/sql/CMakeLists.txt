@@ -19,9 +19,8 @@ ki18n_wrap_ui(sqlstorage_SOURCES kselectdatabasedlg.ui kgeneratesqldlg.ui)
 
 qt5_add_resources(sqlstorage_SOURCES sqlstorage.qrc)
 
-kcoreaddons_add_plugin(sqlstorage
-                       SOURCES ${sqlstorage_SOURCES}
-                       INSTALL_NAMESPACE "kmymoney")
+kmymoney_add_plugin(sqlstorage
+                       SOURCES ${sqlstorage_SOURCES})
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
 set_target_properties(sqlstorage
