@@ -200,8 +200,6 @@ protected Q_SLOTS:
       */
     void slotBackupHandleEvents();
 
-    void slotShowTipOfTheDay();
-
     /**
       * Call this slot, if any configuration parameter has changed
       */

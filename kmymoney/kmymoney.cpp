@@ -59,7 +59,6 @@
 #include <KRecentDirs>
 #include <KRecentFilesAction>
 #include <KStandardAction>
-#include <KTipDialog>
 #include <KToolBar>
 #include <KUndoActions>
 #include <KXMLGUIFactory>
@@ -1856,10 +1855,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             // The settings menu
             // *****************
             {Action::SettingsAllMessages,           &KMyMoneyApp::slotEnableMessages},
-            // *************
-            // The help menu
-            // *************
-            {Action::HelpShow,                      &KMyMoneyApp::slotShowTipOfTheDay},
             // ***************************
             // Actions w/o main menu entry
             // ***************************
@@ -3431,11 +3426,6 @@ void KMyMoneyApp::slotBackupHandleEvents()
         ready();
         break;
     }
-}
-
-void KMyMoneyApp::slotShowTipOfTheDay()
-{
-    KTipDialog::showTip(d->m_myMoneyView, "", true);
 }
 
 void KMyMoneyApp::slotGenerateSql()

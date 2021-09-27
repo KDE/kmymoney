@@ -111,7 +111,6 @@ const QHash<Icon, QString> iconMappings{
     {Icon::TaskComplete, QStringLiteral("task-complete")},
     {Icon::TaskOngoing, QStringLiteral("task-ongoing")},
     {Icon::TaskReject, QStringLiteral("task-reject")},
-    {Icon::Tip, QStringLiteral("ktip")},
     {Icon::Unknown, QStringLiteral("unknown")},
     {Icon::UnmapOnlineAccount, QStringLiteral("network-disconnect")},
     {Icon::UserProperties, QStringLiteral("user-properties")},

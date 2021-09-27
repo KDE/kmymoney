@@ -25,7 +25,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KTipDialog>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <Kdelibs4ConfigMigrator>
@@ -332,9 +331,6 @@ int runKMyMoney(QApplication &a, const QUrl &file, bool noFile)
         }
 
         if (url.isValid() && !noFile) {
-            if (importfile.isEmpty()) {
-                KTipDialog::showTip(kmymoney, QString(), false);
-            }
             kmymoney->slotFileOpenRecent(url);
 
         } else if (KMyMoneySettings::firstTimeRun()) {

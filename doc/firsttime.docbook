@@ -15,23 +15,6 @@
 <title>Running &kmymoney; for the first time</title>
 
 <para>
-  Once &kmymoney; has fully loaded two windows will be opened. The top window,
-  'Tip of the Day' offers one of a series of important or useful pieces of
-  information about the application.
-  <screenshot>
-	<screeninfo>Tip of the Day</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="tipofday.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Tip of the Day</phrase>
-	</textobject>
-	</mediaobject>
-  </screenshot>
-</para>
-
-<para>
   You are recommended to quickly read through these tips by pressing on the
   <guibutton>Previous</guibutton> and <guibutton>Next</guibutton> buttons at the
   bottom of the window.
