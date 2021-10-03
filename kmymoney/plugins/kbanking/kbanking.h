@@ -30,15 +30,14 @@ class KBAccountSettings;
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "banking.hpp"
 #include "kmymoneyplugin.h"
-#include "onlinepluginextended.h"
+#include "kmymoneyutils.h"
+#include "mymoney/onlinejobtyped.h"
 #include "mymoneyaccount.h"
 #include "mymoneykeyvaluecontainer.h"
-
-#include "mymoney/onlinejobtyped.h"
+#include "onlinepluginextended.h"
 #include "onlinetasks/sepa/sepaonlinetransfer.h"
-
-#include "banking.hpp"
 
 /**
   * This class represents the KBanking plugin towards KMymoney.
@@ -158,7 +157,7 @@ private:
       *
       * @deprecated
       */
-    bool updateAccount(const MyMoneyAccount& acc) DEPRECATED;
+    bool updateAccount(const MyMoneyAccount& acc) KMYMONEY_DEPRECATED;
 
     /**
       * Trigger the password cache timer
