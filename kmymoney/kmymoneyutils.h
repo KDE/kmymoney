@@ -25,13 +25,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#ifndef KMYMONEY_DEPRECATED
+#define KMYMONEY_DEPRECATED Q_DECL_DEPRECATED
+#endif
+
 class QIcon;
 
 /**
   * @author Thomas Baumgart
   */
-
-static QString m_lastNumberUsed;
 
 class QPixmap;
 class QWizard;
