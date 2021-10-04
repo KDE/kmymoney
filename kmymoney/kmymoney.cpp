@@ -1144,6 +1144,19 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     qRegisterMetaType<MyMoneyMoney>("MyMoneyMoney");
     qRegisterMetaType<MyMoneySecurity>("MyMoneySecurity");
 
+#ifdef IS_APPIMAGE
+    const char* env = getenv("APPDIR");
+    if (env) {
+        if (*env) {
+            qDebug() << "APPDIR is set to" << env;
+        } else {
+            qDebug() << "APPDIR is empty";
+        }
+    } else {
+        qDebug() << "APPDIR is no set";
+    }
+#endif
+
 #ifdef ENABLE_SQLCIPHER
     /* Issues:
      * 1) libsqlite3 loads implicitly before libsqlcipher
