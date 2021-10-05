@@ -625,7 +625,12 @@ int OFXImporter::ofxStatementCallback(struct OfxStatementData data, void* pv)
         s.m_strCurrency = QString::fromUtf8(data.currency);
     }
     if (data.account_id_valid) {
-        s.m_strAccountNumber = QString::fromUtf8(data.account_id);
+        // only use the account_id if it is filled with non-blank data
+        // see https://bugs.kde.org/show_bug.cgi?id=428156
+        const auto account_id = QString::fromUtf8(data.account_id).trimmed();
+        if (!account_id.isEmpty()) {
+            s.m_strAccountNumber = account_id;
+        }
     }
 
     if (data.date_start_valid) {
@@ -666,8 +671,26 @@ int OFXImporter::ofxAccountCallback(struct OfxAccountData data, void * pv)
     pofx->d->m_hashes.clear();
 
     if (data.account_id_valid) {
-        s.m_strAccountName = QString::fromUtf8(data.account_name);
-        s.m_strAccountNumber = QString::fromUtf8(data.account_id);
+        const auto account_name = QString::fromUtf8(data.account_name);
+        // in case libofx does not extract any value, it returns
+        // one of the following fixed strings in this member.
+        // See OfxAccountContainer::gen_account_id in
+        // libofx/lib/ofx_container_account.cpp for details
+        static const QStringList emptyEntries({
+            "Credit card ",
+            "Investment account at broker ",
+            "Bank account ",
+        });
+        if (!emptyEntries.contains(account_name)) {
+            s.m_strAccountName = account_name.trimmed();
+        }
+
+        // only use the account_id if it is filled with non-blank data
+        // see https://bugs.kde.org/show_bug.cgi?id=428156
+        const auto account_id = QString::fromUtf8(data.account_id).trimmed();
+        if (!account_id.isEmpty()) {
+            s.m_strAccountNumber = account_id;
+        }
     }
     if (data.bank_id_valid) {
         s.m_strBankCode = QString::fromUtf8(data.bank_id);
