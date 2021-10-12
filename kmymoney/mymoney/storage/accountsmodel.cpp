@@ -595,10 +595,10 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
             // subaccounts can be closed. For all others,
             // the subaccounts already have to be closed
             const auto subAccountRows = rowCount();
-            const auto role = isInvestmentAccount ? eMyMoney::Model::AccountCanBeClosedRole : eMyMoney::Model::AccountIsClosedRole;
+            const auto closeRole = isInvestmentAccount ? eMyMoney::Model::AccountCanBeClosedRole : eMyMoney::Model::AccountIsClosedRole;
             for (int row = 0; row < subAccountRows; ++row) {
                 const auto subIdx = index(row, 0, idx);
-                if (!subIdx.data(role).toBool()) {
+                if (!subIdx.data(closeRole).toBool()) {
                     return false;
                 }
             }

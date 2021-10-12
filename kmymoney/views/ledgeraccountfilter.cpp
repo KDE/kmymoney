@@ -70,8 +70,7 @@ LedgerAccountFilter::LedgerAccountFilter(QObject* parent, QVector<QAbstractItemM
     setSortRole(eMyMoney::Model::TransactionPostDateRole);
     setSourceModel(d->concatModel);
 
-    connect(d->concatModel, &QAbstractItemModel::rowsInserted, this, [&](const QModelIndex &parent, int first, int last) {
-        Q_UNUSED(parent)
+    connect(d->concatModel, &QAbstractItemModel::rowsInserted, this, [&](const QModelIndex& /* parent */, int first, int last) {
         Q_UNUSED(first)
         Q_UNUSED(last)
 

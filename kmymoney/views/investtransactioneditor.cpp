@@ -593,8 +593,8 @@ void InvestTransactionEditor::Private::updateWidgetState()
     }
 }
 
-InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString& accountId)
-    : TransactionEditorBase(parent, accountId)
+InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString& accId)
+    : TransactionEditorBase(parent, accId)
     , d(new Private(this))
 {
     d->ui->setupUi(this);
@@ -791,7 +791,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     d->ui->totalAmountEdit->setCalculatorButtonVisible(false);
 
-    d->setupParentInvestmentAccount(accountId);
+    d->setupParentInvestmentAccount(accId);
 
     d->amountEditCurrencyHelpers.insert(new AmountEditCurrencyHelper(d->ui->feesCombo, d->ui->feesAmountEdit, d->transaction.commodity()));
     d->amountEditCurrencyHelpers.insert(new AmountEditCurrencyHelper(d->ui->interestCombo, d->ui->interestAmountEdit, d->transaction.commodity()));

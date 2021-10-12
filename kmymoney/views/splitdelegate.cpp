@@ -343,7 +343,7 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
     int rows = 1;
     if(fullDisplay) {
         initStyleOption(&opt, index);
-        int rows = 0;
+        rows = 0;
         const auto payeeId = index.data(eMyMoney::Model::SplitPayeeIdRole).toString();
         if (!payeeId.isEmpty() && (payeeId != d->m_transactionPayeeId)) {
             ++rows;

@@ -130,8 +130,8 @@ public:
     QUndoStack undoStack;
     SplitModel splitModel;
     MyMoneyAccount m_account;
-    MyMoneyTransaction transaction;
-    MyMoneySplit split;
+    MyMoneyTransaction m_transaction;
+    MyMoneySplit m_split;
     MyMoneyMoney price;
     CreditDebitHelper* amountHelper;
 };
@@ -270,7 +270,7 @@ void NewTransactionEditor::Private::accountChanged(const QString& id)
 {
     m_account = MyMoneyFile::instance()->accountsModel()->itemById(id);
 
-    transaction.setCommodity(m_account.currencyId());
+    m_transaction.setCommodity(m_account.currencyId());
 
     // in case we have a single split, we set the accountCombo again
     // so that a possible foreign currency is also taken care of.
@@ -352,7 +352,7 @@ bool NewTransactionEditor::Private::numberChanged(const QString& newNumber)
                                      Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
         for (const auto& idx : list) {
             if (idx.data(eMyMoney::Model::SplitAccountIdRole).toString() == m_account.id()
-                    && idx.data(eMyMoney::Model::JournalTransactionIdRole).toString().compare(transaction.id())) {
+                && idx.data(eMyMoney::Model::JournalTransactionIdRole).toString().compare(m_transaction.id())) {
                 WidgetHintFrame::show(ui->numberEdit, i18n("The check number <b>%1</b> has already been used in this account.", newNumber));
                 rc = false;
                 break;
@@ -372,8 +372,8 @@ MyMoneyMoney NewTransactionEditor::Private::getPrice()
         const auto category = file->accountsModel()->itemById(categoryId);
         if (!category.id().isEmpty()) {
             const auto security = file->security(category.currencyId());
-            if (security.id() != transaction.commodity()) {
-                const auto commodity = file->security(transaction.commodity());
+            if (security.id() != m_transaction.commodity()) {
+                const auto commodity = file->security(m_transaction.commodity());
                 QPointer<KCurrencyCalculator> calc;
                 if (category.isIncomeExpense()) {
                     if (result == MyMoneyMoney::ONE) {
@@ -486,7 +486,7 @@ int NewTransactionEditor::Private::editSplits()
     // used to create new splits
     dlgSplitModel.appendEmptySplit();
 
-    auto commodityId = transaction.commodity();
+    auto commodityId = m_transaction.commodity();
     if (commodityId.isEmpty())
         commodityId = m_account.currencyId();
     const auto commodity = MyMoneyFile::instance()->security(commodityId);
@@ -657,7 +657,7 @@ void NewTransactionEditor::Private::updateVAT(TaxValueChange amountChanged)
         return;
 
     auto t = q->transaction();
-    t.setCommodity(transaction.commodity());
+    t.setCommodity(m_transaction.commodity());
     MyMoneyFile::instance()->updateVAT(t);
 
     // clear current splits and add them again
@@ -861,10 +861,10 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
 {
     if (schedule.transaction().splitCount() == 0) {
         // new schedule
-        d->transaction = MyMoneyTransaction();
-        d->transaction.setCommodity(MyMoneyFile::instance()->baseCurrency().id());
-        d->split = MyMoneySplit();
-        d->split.setAccountId(QString());
+        d->m_transaction = MyMoneyTransaction();
+        d->m_transaction.setCommodity(MyMoneyFile::instance()->baseCurrency().id());
+        d->m_split = MyMoneySplit();
+        d->m_split.setAccountId(QString());
         const auto lastUsedPostDate = KMyMoneySettings::lastUsedPostDate();
         if (lastUsedPostDate.isValid()) {
             d->ui->dateEdit->setDate(lastUsedPostDate.date());
@@ -878,24 +878,24 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
         d->updateWidgetAccess();
     } else {
         // existing schedule
-        d->transaction = schedule.transaction();
-        d->split = d->transaction.splits().first();
+        d->m_transaction = schedule.transaction();
+        d->m_split = d->m_transaction.splits().first();
 
         // make sure the commodity is the one of the current account
         // in case we have exactly two splits. This is a precondition
         // used by the transaction editor to work properly.
-        auto transactionValue = d->split.value();
-        if (d->transaction.splitCount() == 2) {
-            transactionValue = d->split.shares();
-            d->split.setValue(transactionValue);
+        auto transactionValue = d->m_split.value();
+        if (d->m_transaction.splitCount() == 2) {
+            transactionValue = d->m_split.shares();
+            d->m_split.setValue(transactionValue);
         }
 
         // preset the value to be used for the amount widget
-        auto amount = d->split.shares();
+        auto amount = d->m_split.shares();
 
-        for (const auto& split : d->transaction.splits()) {
-            if (split.id() == d->split.id()) {
-                d->ui->dateEdit->setDate(d->transaction.postDate());
+        for (const auto& split : d->m_transaction.splits()) {
+            if (split.id() == d->m_split.id()) {
+                d->ui->dateEdit->setDate(d->m_transaction.postDate());
 
                 const auto payeeId = split.payeeId();
                 const QModelIndex payeeIdx = MyMoneyFile::instance()->payeesModel()->indexById(payeeId);
@@ -915,7 +915,7 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
                 d->ui->tagContainer->loadTags(split.tagIdList());
             } else {
                 d->splitModel.appendSplit(split);
-                if (d->transaction.splitCount() == 2) {
+                if (d->m_transaction.splitCount() == 2) {
                     const auto shares = split.shares();
                     // the following is only relevant for transactions with two splits
                     // in different currencies
@@ -937,7 +937,7 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
                 }
             }
         }
-        d->transaction.setCommodity(d->m_account.currencyId());
+        d->m_transaction.setCommodity(d->m_account.currencyId());
 
         // in case we have a single split, we set the accountCombo again
         // so that a possible foreign currency is also taken care of.
@@ -951,7 +951,7 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
         d->updateWidgetState();
         d->bypassPriceEditor = false;
     }
-    new AmountEditCurrencyHelper(d->ui->categoryCombo, d->amountHelper, d->transaction.commodity());
+    new AmountEditCurrencyHelper(d->ui->categoryCombo, d->amountHelper, d->m_transaction.commodity());
 }
 
 void NewTransactionEditor::loadTransaction(const QModelIndex& index)
@@ -963,10 +963,10 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
 
     auto idx = MyMoneyFile::baseModel()->mapToBaseSource(index);
     if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
-        d->transaction = MyMoneyTransaction();
-        d->transaction.setCommodity(d->m_account.currencyId());
-        d->split = MyMoneySplit();
-        d->split.setAccountId(d->m_account.id());
+        d->m_transaction = MyMoneyTransaction();
+        d->m_transaction.setCommodity(d->m_account.currencyId());
+        d->m_split = MyMoneySplit();
+        d->m_split.setAccountId(d->m_account.id());
         const auto lastUsedPostDate = KMyMoneySettings::lastUsedPostDate();
         if (lastUsedPostDate.isValid()) {
             d->ui->dateEdit->setDate(lastUsedPostDate.date());
@@ -983,8 +983,8 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
         const auto selectedSplitRow = idx.row();
 
         // keep a copy of the transaction and split
-        d->transaction = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).transaction();
-        d->split = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).split();
+        d->m_transaction = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).transaction();
+        d->m_split = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).split();
         const auto list = idx.model()->match(idx.model()->index(0, 0), eMyMoney::Model::JournalTransactionIdRole,
                                              idx.data(eMyMoney::Model::JournalTransactionIdRole),
                                              -1,                         // all splits
@@ -993,14 +993,14 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
         // make sure the commodity is the one of the current account
         // in case we have exactly two splits. This is a precondition
         // used by the transaction editor to work properly.
-        auto transactionValue = d->split.value();
-        if (d->transaction.splitCount() == 2) {
-            transactionValue = d->split.shares();
-            d->split.setValue(transactionValue);
+        auto transactionValue = d->m_split.value();
+        if (d->m_transaction.splitCount() == 2) {
+            transactionValue = d->m_split.shares();
+            d->m_split.setValue(transactionValue);
         }
 
         // preset the value to be used for the amount widget
-        auto amount = d->split.shares();
+        auto amount = d->m_split.shares();
 
         for (const auto& splitIdx : list) {
             if (selectedSplitRow == splitIdx.row()) {
@@ -1046,7 +1046,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                 }
             }
         }
-        d->transaction.setCommodity(d->m_account.currencyId());
+        d->m_transaction.setCommodity(d->m_account.currencyId());
 
         // in case we have a single split, we set the accountCombo again
         // so that a possible foreign currency is also taken care of.
@@ -1063,7 +1063,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
     // set focus to payee edit once we return to event loop
     QMetaObject::invokeMethod(d->ui->payeeEdit, "setFocus", Qt::QueuedConnection);
 
-    new AmountEditCurrencyHelper(d->ui->categoryCombo, d->amountHelper, d->transaction.commodity());
+    new AmountEditCurrencyHelper(d->ui->categoryCombo, d->amountHelper, d->m_transaction.commodity());
 }
 
 
@@ -1085,8 +1085,8 @@ MyMoneyTransaction NewTransactionEditor::transaction() const
 {
     MyMoneyTransaction t;
 
-    if (!d->transaction.id().isEmpty()) {
-        t = d->transaction;
+    if (!d->m_transaction.id().isEmpty()) {
+        t = d->m_transaction;
     } else {
         // we keep the date when adding a new transaction
         // for the next new one
@@ -1095,7 +1095,7 @@ MyMoneyTransaction NewTransactionEditor::transaction() const
 
     // first remove the splits that are gone
     for (const auto& split : t.splits()) {
-        if (split.id() == d->split.id()) {
+        if (split.id() == d->m_split.id()) {
             continue;
         }
         const auto rows = d->splitModel.rowCount();
@@ -1114,7 +1114,7 @@ MyMoneyTransaction NewTransactionEditor::transaction() const
     }
 
     // now we update the split we are opened for
-    MyMoneySplit sp(d->split);
+    MyMoneySplit sp(d->m_split);
 
     // in case the transaction does not have a split
     // at this point, we need to make sure that we
