@@ -236,9 +236,7 @@ public:
 
             view->setAccount(acc);
             view->setShowEntryForNewTransaction();
-
-            /// @todo setup current global setting for form visibility
-            // view->showTransactionForm(...);
+            view->showTransactionForm(KMyMoneySettings::transactionForm());
 
             // insert new ledger view page in tab view
             int newIdx = ui->ledgerTab->insertTab(ui->ledgerTab->count()-1, view, acc.name());
@@ -253,6 +251,8 @@ public:
             q->connect(view, &LedgerViewPage::requestCustomContextMenu, q, &SimpleLedgerView::requestCustomContextMenu);
 
             q->connect(q, &SimpleLedgerView::settingsChanged, view, &LedgerViewPage::slotSettingsChanged);
+            q->connect(view, &LedgerViewPage::sectionResized, q, &SimpleLedgerView::sectionResized);
+            q->connect(q, &SimpleLedgerView::resizeSection, view, &LedgerViewPage::resizeSection);
         }
     }
 
@@ -298,8 +298,8 @@ public:
                 configGroupName = QStringLiteral("StandardLedger");
                 break;
             }
-            // create new ledger view page
 
+            // create new reconciliation ledger view page
             auto reconciliationView = new ReconciliationLedgerViewPage(q, configGroupName);
 
             reconciliationView->setAccount(acc);
@@ -311,10 +311,9 @@ public:
                 reconciliationView->pushView(view);
                 view->hide();
                 ui->ledgerTab->removeTab(newPos);
+                reconciliationView->setSplitterSizes(view->splitterSizes());
             }
-
-            /// @todo setup current global setting for form visibility
-            // reconciliationView->showTransactionForm(...);
+            reconciliationView->showTransactionForm(KMyMoneySettings::transactionForm());
 
             // insert new ledger reconciliationView page in tab view
             int newIdx = ui->ledgerTab->insertTab(newPos, reconciliationView, acc.name());
@@ -329,6 +328,8 @@ public:
             q->connect(reconciliationView, &LedgerViewPage::requestCustomContextMenu, q, &SimpleLedgerView::requestCustomContextMenu);
 
             q->connect(q, &SimpleLedgerView::settingsChanged, reconciliationView, &LedgerViewPage::slotSettingsChanged);
+            q->connect(reconciliationView, &LedgerViewPage::sectionResized, q, &SimpleLedgerView::sectionResized);
+            q->connect(q, &SimpleLedgerView::resizeSection, reconciliationView, &LedgerViewPage::resizeSection);
 
             // selecting the last tab (the one with the +) and then the new one
             // makes sure that all signal about the new selection are emitted
@@ -717,4 +718,9 @@ void SimpleLedgerView::executeAction(eMenu::Action action, const SelectedObjects
     default:
         break;
     }
+}
+
+void SimpleLedgerView::sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const
+{
+    emit resizeSection(view, configGroupName, section, oldSize, newSize);
 }

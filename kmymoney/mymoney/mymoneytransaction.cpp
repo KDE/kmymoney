@@ -122,6 +122,17 @@ uint MyMoneyTransaction::splitCount() const
     return d->m_splits.count();
 }
 
+uint MyMoneyTransaction::splitCountWithValue() const
+{
+    uint rc = 0;
+    Q_D(const MyMoneyTransaction);
+    const auto splitCount = d->m_splits.count();
+    for (int split = 0; split < splitCount; ++split) {
+        rc += (d->m_splits[split].value().isZero() ? 0 : 1);
+    }
+    return rc;
+}
+
 QString MyMoneyTransaction::commodity() const
 {
     Q_D(const MyMoneyTransaction);

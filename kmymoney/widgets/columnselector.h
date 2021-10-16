@@ -84,9 +84,14 @@ public:
      */
     void setColumnOffsetForStorage();
 
+    const QString& configGroupName() const;
+
 protected Q_SLOT:
     void slotColumnsMenu(const QPoint);
     void slotUpdateHeaderState();
+
+Q_SIGNALS:
+    void columnsChanged();
 
 private:
     ColumnSelectorPrivate * const d_ptr;

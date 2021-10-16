@@ -99,6 +99,8 @@ public:
         ui->setupUi(q);
 
         ui->m_register->setSingleLineDetailRole(eMyMoney::Model::TransactionCounterAccountRole);
+        ui->m_register->setColumnSelectorGroupName(QLatin1String("PayeeLedger"));
+        ui->m_register->setShowPayeeInDetailColumn(false);
 
         // setup the model stack
         auto file = MyMoneyFile::instance();
@@ -217,6 +219,7 @@ public:
         QVector<int> columns;
         columns = {
             JournalModel::Column::Number,
+            JournalModel::Column::Payee,
             JournalModel::Column::Security,
             JournalModel::Column::CostCenter,
             JournalModel::Column::Quantity,

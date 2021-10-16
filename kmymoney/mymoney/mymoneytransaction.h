@@ -79,6 +79,7 @@ public:
     QList<MyMoneySplit>& splits();
     MyMoneySplit firstSplit() const;
     uint splitCount() const;
+    uint splitCountWithValue() const;
 
     QString commodity() const;
     void setCommodity(const QString& commodityId);

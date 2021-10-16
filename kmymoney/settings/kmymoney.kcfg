@@ -244,6 +244,10 @@
    <label>Show all register entries in full detail</label>
    <default>false</default>
   </entry>
+  <entry name="ShowAllSplits" type="Bool">
+   <label>Show all split details in register</label>
+   <default>false</default>
+  </entry>
   <entry name="ShowPlannedScheduleDates" type="Bool">
    <label>Show schedules with planned date</label>
    <default>false</default>

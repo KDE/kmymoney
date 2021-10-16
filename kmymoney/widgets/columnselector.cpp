@@ -245,6 +245,7 @@ void ColumnSelector::slotColumnsMenu(const QPoint)
 
             // do this as last statement as it contains the sync of the grp
             slotUpdateHeaderState();
+            emit columnsChanged();
         }
     }
 }
@@ -298,4 +299,10 @@ QVector<int> ColumnSelector::columns() const
         columns.append(col);
     }
     return columns;
+}
+
+const QString& ColumnSelector::configGroupName() const
+{
+    Q_D(const ColumnSelector);
+    return d->configGroupName;
 }

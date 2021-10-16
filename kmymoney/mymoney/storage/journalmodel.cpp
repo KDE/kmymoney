@@ -41,22 +41,23 @@ struct JournalModel::Private
     Private(JournalModel* qq)
         : q(qq)
         , newTransactionModel(nullptr)
-        , headerData(QHash<Column, QString> ({
-        { Number, i18nc("Cheque Number", "No.") },
-        { Date, i18n("Date") },
-        { Account, i18n("Account") },
-        { Security, i18n("Security") },
-        { CostCenter, i18n("CC") },
-        { Detail, i18n("Detail") },
-        { Reconciliation, i18n("C") },
-        { Payment, i18nc("Payment made from account", "Payment") },
-        { Deposit, i18nc("Deposit into account", "Deposit") },
-        { Quantity, i18n("Quantity") },
-        { Price, i18n("Price") },
-        { Amount, i18n("Amount") },
-        { Value, i18n("Value") },
-        { Balance, i18n("Balance") },
-    }))
+        , headerData(QHash<Column, QString>({
+              {Number, i18nc("Cheque Number", "No.")},
+              {Date, i18n("Date")},
+              {Account, i18n("Account")},
+              {Payee, i18n("Payee")},
+              {Security, i18n("Security")},
+              {CostCenter, i18n("CC")},
+              {Detail, i18n("Detail")},
+              {Reconciliation, i18n("C")},
+              {Payment, i18nc("Payment made from account", "Payment")},
+              {Deposit, i18nc("Deposit into account", "Deposit")},
+              {Quantity, i18n("Quantity")},
+              {Price, i18n("Price")},
+              {Amount, i18n("Amount")},
+              {Value, i18n("Value")},
+              {Balance, i18n("Balance")},
+          }))
     {
     }
 
@@ -483,6 +484,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         case Account:
             return MyMoneyFile::instance()->accountsModel()->itemById(journalEntry.split().accountId()).name();
 
+        case Payee:
+            return MyMoneyFile::instance()->payeesModel()->itemById(journalEntry.split().payeeId()).name();
+
         case Security:
             return d->security(journalEntry).name();
             break;
@@ -632,6 +636,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::TransactionSplitCountRole:
         return journalEntry.transaction().splitCount();
+
+    case eMyMoney::Model::TransactionValuableSplitCountRole:
+        return journalEntry.transaction().splitCountWithValue();
 
     case eMyMoney::Model::TransactionSplitSumRole:
         return QVariant::fromValue(journalEntry.transaction().splitSum());
@@ -1405,14 +1412,14 @@ QModelIndex JournalModel::adjustToFirstSplitIdx(const QModelIndex& index) const
     QModelIndex idx;
     int startRow;
     for (startRow = index.row()-1; startRow >= 0; --startRow) {
-        idx = index.model()->index(startRow, 0);
+        idx = this->index(startRow, 0);
         const auto cid = idx.data(eMyMoney::Model::IdRole).toString();
         if (cid != id)
             break;
     }
     startRow++;
 
-    return index.model()->index(startRow, index.column());
+    return this->index(startRow, index.column());
 }
 
 JournalModel::DateRange JournalModel::dateRange() const
@@ -1426,4 +1433,16 @@ JournalModel::DateRange JournalModel::dateRange() const
         result.lastTransaction = lastIdx.data(eMyMoney::Model::TransactionPostDateRole).toDate();
     }
     return result;
+}
+
+void JournalModel::resetRowHeightInformation()
+{
+    const auto rows = rowCount();
+    for (int row = 0; row < rows; ++row) {
+        const auto idx = index(row, 0);
+        setData(idx, 0, eMyMoney::Model::JournalSplitMaxLinesCountRole);
+    }
+    const QModelIndex first = index(0, 0);
+    const QModelIndex last = index(rows - 1, columnCount() - 1);
+    emit dataChanged(first, last);
 }

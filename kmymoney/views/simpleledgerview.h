@@ -50,6 +50,8 @@ private Q_SLOTS:
     void setupCornerWidget();
     void slotRequestSelectionChange(const SelectedObjects& selections) const;
 
+    void sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const;
+
 protected:
     bool eventFilter(QObject* o, QEvent* e) override;
     void aboutToShow() override;
@@ -57,6 +59,7 @@ protected:
 Q_SIGNALS:
     void showForms(bool show);
     void settingsChanged();
+    void resizeSection(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const;
 
 private:
     Q_DECLARE_PRIVATE(SimpleLedgerView)

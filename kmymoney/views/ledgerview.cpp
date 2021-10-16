@@ -62,6 +62,7 @@ class LedgerView::Private
 public:
     Private(LedgerView* qq)
         : q(qq)
+        , journalDelegate(new JournalDelegate(q))
         , delegateProxy(new DelegateProxy(q))
         , moveToAccountSelector(nullptr)
         , columnSelector(nullptr)
@@ -75,7 +76,6 @@ public:
 
         const auto file = MyMoneyFile::instance();
 
-        auto journalDelegate = new JournalDelegate(q);
         delegateProxy->addDelegate(file->journalModel(), journalDelegate);
         delegateProxy->addDelegate(file->journalModel()->newTransaction(), journalDelegate);
         delegateProxy->addDelegate(file->accountsModel(), new OnlineBalanceDelegate(q));
@@ -88,12 +88,7 @@ public:
 
     void setSingleLineDetailRole(eMyMoney::Model::Roles role)
     {
-        for (auto delegate : delegates) {
-            JournalDelegate* journalDelegate = qobject_cast<JournalDelegate*>(delegate);
-            if(journalDelegate) {
-                journalDelegate->setSingleLineRole(role);
-            }
-        }
+        journalDelegate->setSingleLineRole(role);
     }
 
     void ensureEditorFullyVisible(const QModelIndex& idx)
@@ -284,18 +279,18 @@ public:
                 for (const auto& journalId : selection.selection(SelectedObjects::JournalEntry)) {
                     const auto journalIdx = file->journalModel()->indexById(journalId);
                     moveToAccountSelector->removeItem(journalIdx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString());
-                    const auto accountId = journalIdx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString();
-                    const auto accIdx = file->accountsModel()->indexById(accountId);
+                    const auto accId = journalIdx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString();
+                    const auto accIdx = file->accountsModel()->indexById(accId);
                     currencyIds.insert(accIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString());
                 }
 
                 // remove those accounts from the list that are denominated
                 // in a different currency
                 const auto list = moveToAccountSelector->accountList();
-                for (const auto& accountId : list) {
-                    const auto idx = file->accountsModel()->indexById(accountId);
+                for (const auto& accId : list) {
+                    const auto idx = file->accountsModel()->indexById(accId);
                     if (!currencyIds.contains(idx.data(eMyMoney::Model::AccountCurrencyIdRole).toString())) {
-                        moveToAccountSelector->removeItem(accountId);
+                        moveToAccountSelector->removeItem(accId);
                     }
                 }
 
@@ -389,6 +384,7 @@ public:
     }
 
     LedgerView* q;
+    JournalDelegate* journalDelegate;
     DelegateProxy* delegateProxy;
     KMyMoneyAccountSelector* moveToAccountSelector;
     ColumnSelector* columnSelector;
@@ -428,9 +424,14 @@ LedgerView::LedgerView(QWidget* parent)
     // horizontalHeader()->setMovable(true);
 
     // make sure to get informed about resize operations on the columns
-    connect(horizontalHeader(), &QHeaderView::sectionResized, this, [&]() {
-        adjustDetailColumn(viewport()->width());
-    } );
+    // but delay the execution of adjustDetailColumn() until we return
+    // to the main event loop. Also emit information about the change
+    // so that other views in the same configuration groupcan sync up.
+    // See LedgerView::resizeSection().
+    connect(horizontalHeader(), &QHeaderView::sectionResized, this, [&](int logicalIndex, int oldSize, int newSize) {
+        emit sectionResized(this, d->columnSelector->configGroupName(), logicalIndex, oldSize, newSize);
+        QMetaObject::invokeMethod(this, "adjustDetailColumn", Qt::QueuedConnection, Q_ARG(int, viewport()->width()));
+    });
 
     // get notifications about setting changes
     connect(LedgerViewSettings::instance(), &LedgerViewSettings::settingsChanged, this, &LedgerView::slotSettingsChanged);
@@ -465,16 +466,27 @@ void LedgerView::setColumnSelectorGroupName(const QString& groupName)
     }
 }
 
+void LedgerView::setShowPayeeInDetailColumn(bool show)
+{
+    d->journalDelegate->setShowPayeeInDetailColumn(show);
+}
+
 void LedgerView::setModel(QAbstractItemModel* model)
 {
     if (!d->columnSelector) {
         d->columnSelector = new ColumnSelector(this, d->groupName);
+        connect(d->columnSelector, &ColumnSelector::columnsChanged, MyMoneyFile::instance()->journalModel(), &JournalModel::resetRowHeightInformation);
     }
     QSignalBlocker blocker(this);
     QTableView::setModel(model);
 
     d->columnSelector->setModel(model);
+
+    horizontalHeader()->setSectionResizeMode(JournalModel::Column::Detail, QHeaderView::Interactive);
     horizontalHeader()->setSectionResizeMode(JournalModel::Column::Reconciliation, QHeaderView::ResizeToContents);
+    horizontalHeader()->setSectionResizeMode(JournalModel::Column::Payment, QHeaderView::Interactive);
+    horizontalHeader()->setSectionResizeMode(JournalModel::Column::Deposit, QHeaderView::Interactive);
+    horizontalHeader()->setSectionResizeMode(JournalModel::Column::Balance, QHeaderView::Interactive);
 }
 
 void LedgerView::setAccountId(const QString& id)
@@ -932,9 +944,13 @@ void LedgerView::adjustDetailColumn(int newViewportWidth)
     d->adjustingColumn = true;
 
     QHeaderView* header = horizontalHeader();
+    // calling length() here seems to be superfluous, but it forces
+    // the execution of some internally pending operations that would
+    // otherwise have a negative impact on our operation.
+    header->length();
 
     int totalColumnWidth = 0;
-    for(int i=0; i < header->count(); ++i) {
+    for (int i = 0; i < header->count(); ++i) {
         if(header->isSectionHidden(i)) {
             continue;
         }
@@ -1272,4 +1288,22 @@ void LedgerView::slotMoveToAccount(const QString& accountId)
 
     pActions[eMenu::Action::MoveTransactionTo]->setData(accountId);
     pActions[eMenu::Action::MoveTransactionTo]->activate(QAction::Trigger);
+}
+
+void LedgerView::resizeSection(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize)
+{
+    if (view == this) {
+        return;
+    }
+
+    if (d->columnSelector->configGroupName() == configGroupName) {
+        if (oldSize == 0 && newSize > 0) {
+            setColumnHidden(section, false);
+        } else if (oldSize > 0 && newSize == 0) {
+            setColumnHidden(section, true);
+        }
+        if (newSize > 0) {
+            horizontalHeader()->resizeSection(section, newSize);
+        }
+    }
 }

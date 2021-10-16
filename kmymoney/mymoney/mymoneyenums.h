@@ -546,6 +546,7 @@ enum Roles {
     TransactionIsInvestmentRole,
     TransactionInvestementType,
     TransactionSplitCountRole,
+    TransactionValuableSplitCountRole,
     TransactionSplitSumRole,
     TransactionBrokerageAccountRole,
     TransactionInterestSplitPresentRole,

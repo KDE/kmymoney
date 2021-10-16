@@ -22,6 +22,7 @@
 
 #include "icons.h"
 #include "journalmodel.h"
+#include "kmymoneysettings.h"
 #include "menuenums.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
@@ -119,6 +120,9 @@ void LedgerViewPage::init(const QString& configGroupName)
             d->ui->m_ledgerView->ensureCurrentItemIsVisible();
         }
     });
+
+    connect(d->ui->m_ledgerView, &LedgerView::sectionResized, this, &LedgerViewPage::sectionResized);
+    connect(this, &LedgerViewPage::resizeSection, d->ui->m_ledgerView, &LedgerView::resizeSection);
 }
 
 LedgerViewPage::~LedgerViewPage()
@@ -276,6 +280,7 @@ void LedgerViewPage::setShowEntryForNewTransaction(bool show)
 
 void LedgerViewPage::slotSettingsChanged()
 {
+    showTransactionForm(KMyMoneySettings::transactionForm());
     d->ui->m_ledgerView->slotSettingsChanged();
 }
 
@@ -360,4 +365,14 @@ QString LedgerViewPage::accountName()
 
 void LedgerViewPage::updateSummaryInformation()
 {
+}
+
+QList<int> LedgerViewPage::splitterSizes() const
+{
+    return d->ui->m_splitter->sizes();
+}
+
+void LedgerViewPage::setSplitterSizes(QList<int> sizes)
+{
+    d->ui->m_splitter->setSizes(sizes);
 }

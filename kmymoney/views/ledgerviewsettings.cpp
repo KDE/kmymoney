@@ -25,6 +25,7 @@ public:
 
     bool m_showLedgerLens;
     bool m_showTransactionDetails;
+    bool m_showAllSplits;
 };
 
 LedgerViewSettings* LedgerViewSettings::instance()
@@ -70,6 +71,19 @@ void LedgerViewSettings::setShowTransactionDetails(bool show)
 {
     if (d->m_showTransactionDetails != show) {
         d->m_showTransactionDetails = show;
+        emit settingsChanged();
+    }
+}
+
+bool LedgerViewSettings::showAllSplits() const
+{
+    return d->m_showAllSplits;
+}
+
+void LedgerViewSettings::setShowAllSplits(bool show)
+{
+    if (d->m_showAllSplits != show) {
+        d->m_showAllSplits = show;
         emit settingsChanged();
     }
 }

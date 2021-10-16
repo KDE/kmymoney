@@ -52,6 +52,15 @@ public:
      */
     void setSingleLineRole(eMyMoney::Model::Roles role);
 
+    /**
+     * If @a show is @c true, the payee name is shown in the
+     * detail column if no payee column is present. During the
+     * creation of a JournalDelegate this is set to @c true.
+     */
+    void setShowPayeeInDetailColumn(bool show);
+
+    void setAccountType(eMyMoney::Account::Type accountType);
+
     static void setErroneousColor(const QColor& color);
     static void setImportedColor(const QColor& color);
 

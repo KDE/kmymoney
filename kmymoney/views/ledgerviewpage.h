@@ -63,6 +63,9 @@ public:
 
     QString accountName();
 
+    QList<int> splitterSizes() const;
+    void setSplitterSizes(QList<int> sizes);
+
 protected:
     explicit LedgerViewPage(Private& dd, QWidget* parent = nullptr, const QString& configGroupName = QString());
     bool eventFilter(QObject *watched, QEvent *event) override;
@@ -90,6 +93,8 @@ Q_SIGNALS:
     void aboutToStartEdit();
     void aboutToFinishEdit();
 
+    void resizeSection(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize);
+    void sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const;
 };
 
 #endif // LEDGERVIEWPAGE_H

@@ -140,6 +140,7 @@ public:
         Number = 0,
         Date,
         Account,
+        Payee,
         Security,
         CostCenter,
         Detail,
@@ -243,6 +244,13 @@ protected:
 
 public Q_SLOTS:
     void updateBalances();
+
+    /**
+     * Reset the information cached for each journalEntry about
+     * the height of the row. While painting the next time, this
+     * information will be updated through the JournalDelegate
+     */
+    void resetRowHeightInformation();
 
 private:
     void addTransaction(const QString& id, MyMoneyTransaction& t);

@@ -32,13 +32,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "amountedit.h"
+#include "kcreditswindow.h"
+#include "kmymoney.h"
+#include "kmymoneysettings.h"
+#include "kmymoneyutils.h"
+#include "misc/webconnect.h"
 #include "mymoney/mymoneyfile.h"
 #include "mymoneyexception.h"
-#include "kmymoney.h"
-#include "kcreditswindow.h"
-#include "kmymoneyutils.h"
-#include "kmymoneysettings.h"
-#include "misc/webconnect.h"
 #include "platformtools.h"
 
 #ifdef Q_OS_WIN

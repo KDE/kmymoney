@@ -58,6 +58,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="kcfg_ShowAllSplits">
+         <property name="text">
+          <string>Show all split details in register</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QCheckBox" name="kcfg_TransactionForm">
          <property name="text">
           <string>Show transaction form</string>

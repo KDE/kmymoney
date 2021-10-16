@@ -29,10 +29,12 @@ public:
 
     bool showLedgerLens() const;
     bool showTransactionDetails() const;
+    bool showAllSplits() const;
 
 public Q_SLOTS:
     void setShowLedgerLens(bool show);
     void setShowTransactionDetails(bool show);
+    void setShowAllSplits(bool show);
 
 Q_SIGNALS:
     void settingsChanged();

@@ -3218,8 +3218,10 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
     MyMoneyFile::instance()->schedulesJournalModel()->setShowPlannedDate(KMyMoneySettings::showPlannedScheduleDates());
 
     LedgerViewSettings::instance()->setShowLedgerLens(KMyMoneySettings::ledgerLens());
-
     LedgerViewSettings::instance()->setShowTransactionDetails(KMyMoneySettings::showRegisterDetailed());
+    LedgerViewSettings::instance()->setShowAllSplits(KMyMoneySettings::showAllSplits());
+    MyMoneyFile::instance()->journalModel()->resetRowHeightInformation();
+
     pActions[Action::ViewTransactionDetail]->setChecked(KMyMoneySettings::showRegisterDetailed());
 
     // update the holiday region configuration

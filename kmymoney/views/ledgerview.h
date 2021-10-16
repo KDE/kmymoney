@@ -58,6 +58,13 @@ public:
 
     void setColumnSelectorGroupName(const QString& groupName);
 
+    /**
+     * If @a show is @c true, the payee name is shown in the
+     * detail column if no payee column is present. This defaults
+     * to @c true.
+     */
+    void setShowPayeeInDetailColumn(bool show);
+
     void editNewTransaction();
 
     QVector<eMyMoney::Model::Roles> statusRoles(const QModelIndex& idx) const;
@@ -84,6 +91,8 @@ public Q_SLOTS:
     }
 
     void slotSettingsChanged();
+
+    void resizeSection(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize);
 
 protected:
     bool edit(const QModelIndex& index, EditTrigger trigger, QEvent* event) final override;
@@ -115,6 +124,7 @@ Q_SIGNALS:
     void transactionSelected(const QModelIndex& idx) const;
     void aboutToStartEdit() const;
     void aboutToFinishEdit() const;
+    void sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const;
 
 protected:
     class Private;

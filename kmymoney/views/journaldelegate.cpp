@@ -38,6 +38,11 @@
 
 QColor JournalDelegate::m_erroneousColor = QColor(Qt::red);
 
+struct displayProperties {
+    int italicStartLine;
+    QStringList lines;
+};
+
 class JournalDelegate::Private
 {
 public:
@@ -48,95 +53,209 @@ public:
         , m_singleLineRole(eMyMoney::Model::SplitPayeeRole)
         , m_lineHeight(-1)
         , m_margin(2)
-
+        , m_showPayeeInDetailColumn(true)
+        , m_accountType(eMyMoney::Account::Type::Unknown)
     {}
 
     ~Private()
     {
     }
 
-    QStringList displayString(const QModelIndex& index, const QStyleOptionViewItem& opt)
+    bool isInvestmentView()
     {
-        QStringList lines;
+        if (m_accountType == eMyMoney::Account::Type::Unknown) {
+            const auto accountId = m_view->accountId();
+            const auto acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
+            if (!acc.id().isEmpty()) {
+                m_accountType = acc.accountType();
+            }
+        }
+        return (m_accountType == eMyMoney::Account::Type::Investment);
+    }
+
+    displayProperties displayString(const QModelIndex& index, const QStyleOptionViewItem& opt)
+    {
+        displayProperties rc;
+        rc.italicStartLine = -1;
+
+        const auto showAllSplits = LedgerViewSettings::instance()->showAllSplits();
+
         if(index.column() == JournalModel::Column::Detail) {
             const auto showDetails = LedgerViewSettings::instance()->showTransactionDetails();
             const auto showLedgerLens = LedgerViewSettings::instance()->showLedgerLens();
-            if (index.data(eMyMoney::Model::TransactionIsInvestmentRole).toBool()) {
-                if (((opt.state & QStyle::State_Selected) && (showLedgerLens)) || showDetails) {
-                    lines << index.data(eMyMoney::Model::SplitActivityRole).toString();
-                    lines << index.data(eMyMoney::Model::TransactionBrokerageAccountRole).toString();
-                    lines << index.data(eMyMoney::Model::TransactionInterestCategoryRole).toString();
-                    lines << index.data(eMyMoney::Model::TransactionFeesCategoryRole).toString();
-                    lines << index.data(eMyMoney::Model::SplitSingleLineMemoRole).toString();
+            const auto havePayeeColumn = !m_view->isColumnHidden(JournalModel::Payee);
+
+            if (index.data(eMyMoney::Model::TransactionIsInvestmentRole).toBool() && isInvestmentView()) {
+                if (((opt.state & QStyle::State_Selected) && (showLedgerLens)) || showDetails || showAllSplits) {
+                    rc.lines << index.data(eMyMoney::Model::SplitActivityRole).toString();
+                    rc.lines << index.data(eMyMoney::Model::TransactionBrokerageAccountRole).toString();
+                    rc.lines << index.data(eMyMoney::Model::TransactionInterestCategoryRole).toString();
+                    rc.lines << index.data(eMyMoney::Model::TransactionFeesCategoryRole).toString();
+                    rc.lines << index.data(eMyMoney::Model::SplitSingleLineMemoRole).toString();
                 } else {
-                    lines << index.data(eMyMoney::Model::SplitActivityRole).toString();
+                    rc.lines << index.data(eMyMoney::Model::SplitActivityRole).toString();
                 }
 
             } else {
-                lines << index.data(m_singleLineRole).toString();
-                if (((opt.state & QStyle::State_Selected) && (showLedgerLens)) || showDetails) {
-                    lines.clear();
-                    lines << index.data(eMyMoney::Model::Roles::SplitPayeeRole).toString();
-                    lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
-                    lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
+                rc.italicStartLine = 1;
+                rc.lines << index.data(m_singleLineRole).toString();
+                if (showAllSplits && isMultiSplitDisplay(index)) {
+                    rc.lines.clear();
+                    // make sure to show a line even if we have no payee in the split
+                    if (!havePayeeColumn) {
+                        const auto payee = index.data(eMyMoney::Model::SplitPayeeRole).toString();
+                        rc.lines << (!payee.isEmpty() ? payee : QStringLiteral(" "));
+                    }
+                    const auto memo = index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
+                    rc.lines << memo;
+                    if (!memo.isEmpty()) {
+                        rc.italicStartLine = 2;
+                    }
+                    const auto rowIndeces =
+                        MyMoneyFile::instance()->journalModel()->indexesByTransactionId(index.data(eMyMoney::Model::JournalTransactionIdRole).toString());
+                    const auto rowCount = rowIndeces.count();
+                    const auto splitId = index.data(eMyMoney::Model::IdRole).toString();
+                    for (int row = 0; row < rowCount; ++row) {
+                        const auto rowIndex = rowIndeces[row];
+                        if (rowIndex.data(eMyMoney::Model::IdRole) != splitId) {
+                            // don't include the split if the value is zero
+                            if (!rowIndex.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().isZero()) {
+                                const auto accountId = rowIndex.data(eMyMoney::Model::Roles::JournalSplitAccountIdRole).toString();
+                                const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
+                                const auto account = accountIdx.data(eMyMoney::Model::Roles::AccountFullNameRole).toString();
+                                const auto memo = rowIndex.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
+                                QString txt;
+                                QString sep;
+                                if (!account.isEmpty()) {
+                                    txt = account;
+                                    sep = QStringLiteral(", ");
+                                }
+                                if (!memo.isEmpty()) {
+                                    txt += sep + memo;
+                                }
+                                rc.lines << txt;
+                            }
+                        }
+                    }
+                } else if (((opt.state & QStyle::State_Selected) && (showLedgerLens)) || showDetails || showAllSplits) {
+                    rc.lines.clear();
+                    if (!havePayeeColumn && m_showPayeeInDetailColumn) {
+                        rc.lines << index.data(eMyMoney::Model::Roles::SplitPayeeRole).toString();
+                    }
+                    rc.lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
+                    rc.lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
 
                 } else {
-                    if(lines.at(0).isEmpty()) {
-                        lines.clear();
-                        lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
+                    if (rc.lines.at(0).isEmpty()) {
+                        rc.lines.clear();
+                        rc.lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
                     }
-                    if(lines.at(0).isEmpty()) {
-                        lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
+                    if (rc.lines.at(0).isEmpty()) {
+                        rc.lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
                     }
                 }
             }
-            lines.removeAll(QString());
+            rc.lines.removeAll(QString());
 
         } else if(index.column() == JournalModel::Column::Quantity) {
             if (index.data(eMyMoney::Model::TransactionIsInvestmentRole).toBool()) {
                 const auto showDetails = LedgerViewSettings::instance()->showTransactionDetails();
                 const auto showLedgerLens = LedgerViewSettings::instance()->showLedgerLens();
-                lines << opt.text;
+                rc.lines << opt.text;
                 if (((opt.state & QStyle::State_Selected) && (showLedgerLens)) || showDetails) {
                     // we have to pay attention here as later on empty items will be removed
                     // from the lines all together. Since we use the column detail as label
                     // we have to make that we are not off. Therefor, if the detail column
                     // is filled, we add a simple blank here instead of an empty line.
                     // The first line is always present, so we make sure it is not empty in this column.
-                    if (lines[0].isEmpty())
-                        lines[0] = QStringLiteral(" ");
-                    lines << (index.data(eMyMoney::Model::TransactionBrokerageAccountRole).toString().isEmpty() ? QString() : QStringLiteral(" "));
+                    if (rc.lines[0].isEmpty())
+                        rc.lines[0] = QStringLiteral(" ");
+                    rc.lines << (index.data(eMyMoney::Model::TransactionBrokerageAccountRole).toString().isEmpty() ? QString() : QStringLiteral(" "));
 
                     MyMoneySecurity currency = MyMoneyFile::instance()->currency(index.data(eMyMoney::Model::TransactionCommodityRole).toString());
 
                     if (index.data(eMyMoney::Model::TransactionInterestSplitPresentRole).toBool()) {
                         const auto value = index.data(eMyMoney::Model::TransactionInterestValueRole).value<MyMoneyMoney>();
-                        lines << (index.data(eMyMoney::Model::TransactionInterestCategoryRole).toString().isEmpty() ? QString() : MyMoneyUtils::formatMoney(value.abs(), currency));
+                        rc.lines << (index.data(eMyMoney::Model::TransactionInterestCategoryRole).toString().isEmpty()
+                                         ? QString()
+                                         : MyMoneyUtils::formatMoney(-value, currency));
                     }
 
                     if (index.data(eMyMoney::Model::TransactionFeeSplitPresentRole).toBool()) {
                         const auto value = index.data(eMyMoney::Model::TransactionFeesValueRole).value<MyMoneyMoney>();
-                        lines << (index.data(eMyMoney::Model::TransactionFeesCategoryRole).toString().isEmpty() ? QString() : MyMoneyUtils::formatMoney(value.abs(), currency));
+                        rc.lines << (index.data(eMyMoney::Model::TransactionFeesCategoryRole).toString().isEmpty()
+                                         ? QString()
+                                         : MyMoneyUtils::formatMoney(-value, currency));
                     }
                 } else {
-                    lines << opt.text;
+                    rc.lines << opt.text;
                 }
             }
-            lines.removeAll(QString());
+            rc.lines.removeAll(QString());
+
+        } else if (index.column() == JournalModel::Column::Deposit) {
+            const auto havePayeeColumn = !m_view->isColumnHidden(JournalModel::Payee);
+            rc.lines << opt.text;
+            if (showAllSplits && isMultiSplitDisplay(index)) {
+                if (!havePayeeColumn) {
+                    rc.lines << QStringLiteral(" ");
+                }
+                rc.italicStartLine = 1;
+                rc.lines << displaySplitValues(index, JournalModel::Column::Payment);
+            }
+
+        } else if (index.column() == JournalModel::Column::Payment) {
+            const auto havePayeeColumn = !m_view->isColumnHidden(JournalModel::Payee);
+            rc.lines << opt.text;
+            if (showAllSplits && isMultiSplitDisplay(index)) {
+                if (!havePayeeColumn) {
+                    rc.lines << QStringLiteral(" ");
+                }
+                rc.italicStartLine = 1;
+                rc.lines << displaySplitValues(index, JournalModel::Column::Deposit);
+            }
 
         } else {
-            lines << opt.text;
+            rc.lines << opt.text;
+        }
+        return rc;
+    }
+
+    QStringList displaySplitValues(const QModelIndex& index, JournalModel::Column column)
+    {
+        QStringList lines;
+        const auto rowIndeces =
+            MyMoneyFile::instance()->journalModel()->indexesByTransactionId(index.data(eMyMoney::Model::Roles::JournalTransactionIdRole).toString());
+        const auto rowCount = rowIndeces.count();
+        const auto splitId = index.data(eMyMoney::Model::IdRole).toString();
+        for (int row = 0; row < rowCount; ++row) {
+            const auto rowIndex = rowIndeces[row];
+            if (rowIndex.data(eMyMoney::Model::IdRole) != splitId) {
+                // don't include the split if the value is zero
+                if (!rowIndex.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().isZero()) {
+                    const auto columnIndex = rowIndex.model()->index(rowIndex.row(), column, rowIndex.parent());
+                    const auto txt = columnIndex.data().toString();
+                    lines << (!txt.isEmpty() ? txt : QStringLiteral(" "));
+                }
+            }
         }
         return lines;
     }
 
-    TransactionEditorBase*        m_editor;
-    LedgerView*                   m_view;
-    int                           m_editorRow;
-    eMyMoney::Model::Roles        m_singleLineRole;
-    int                           m_lineHeight;
-    int                           m_margin;
-    int                           m_editorWidthOfs;
+    inline bool isMultiSplitDisplay(const QModelIndex& index)
+    {
+        return index.data(eMyMoney::Model::TransactionValuableSplitCountRole).toInt() > 2;
+    }
+
+    TransactionEditorBase* m_editor;
+    LedgerView* m_view;
+    int m_editorRow;
+    eMyMoney::Model::Roles m_singleLineRole;
+    int m_lineHeight;
+    int m_margin;
+    int m_editorWidthOfs;
+    bool m_showPayeeInDetailColumn;
+    eMyMoney::Account::Type m_accountType;
 };
 
 
@@ -160,6 +279,11 @@ void JournalDelegate::setErroneousColor(const QColor& color)
 void JournalDelegate::setSingleLineRole(eMyMoney::Model::Roles role)
 {
     d->m_singleLineRole = role;
+}
+
+void JournalDelegate::setShowPayeeInDetailColumn(bool show)
+{
+    d->m_showPayeeInDetailColumn = show;
 }
 
 QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
@@ -280,13 +404,12 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
         const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
         const bool selected = opt.state & QStyle::State_Selected;
 
-        QStringList lines = d->displayString(index, opt);
+        const auto displayProperties = d->displayString(index, opt);
 
         const bool erroneous = index.data(eMyMoney::Model::Roles::TransactionErroneousRole).toBool();
 
         // draw the text items
-        if(!opt.text.isEmpty() || !lines.isEmpty()) {
-
+        if (!opt.text.isEmpty() || !displayProperties.lines.isEmpty()) {
             // check if it is a scheduled transaction and display it as inactive
             if (MyMoneyFile::baseModel()->baseModel(index) == MyMoneyFile::instance()->schedulesJournalModel()) {
                 opt.state &= ~QStyle::State_Enabled;
@@ -313,8 +436,14 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
             }
 
             // collect data for the various columns
-            for(int i = 0; i < lines.count(); ++i) {
-                painter->drawText(textArea.adjusted(0, lineHeight * i, 0, 0), opt.displayAlignment, lines[i]);
+            for (int i = 0; i < displayProperties.lines.count(); ++i) {
+                if (i == displayProperties.italicStartLine && LedgerViewSettings::instance()->showAllSplits() && d->isMultiSplitDisplay(index)) {
+                    auto font = painter->font();
+                    font.setItalic(true);
+                    font.setPointSize(font.pointSize() - 2);
+                    painter->setFont(font);
+                }
+                painter->drawText(textArea.adjusted(0, lineHeight * i, 0, 0), opt.displayAlignment, displayProperties.lines[i]);
             }
         }
 
@@ -399,7 +528,7 @@ QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
     if (((option.state & QStyle::State_Selected) && (settings->showLedgerLens())) || settings->showTransactionDetails()) {
         rows = index.data(eMyMoney::Model::JournalSplitMaxLinesCountRole).toInt();
         if (rows == 0) {
-            rows = d->displayString(index, option).count();
+            rows = d->displayString(index, option).lines.count();
 
             // make sure we show at least one row
             if (!rows) {
@@ -473,4 +602,9 @@ void JournalDelegate::setModelData(QWidget* editWidget, QAbstractItemModel* mode
 
         d->m_view->setSelectedJournalEntries(selection);
     }
+}
+
+void JournalDelegate::setAccountType(eMyMoney::Account::Type accountType)
+{
+    d->m_accountType = accountType;
 }
