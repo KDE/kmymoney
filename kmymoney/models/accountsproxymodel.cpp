@@ -238,12 +238,22 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
                 if (sourceModel()->data(source, eMyMoney::Model::Roles::AccountIsInvestRole).toBool())
                     return false;
             }
+
             // we hide unused income and expense accounts if the specific flag is set
             if (hideUnusedIncomeExpenseAccounts()) {
                 if ((accountType == eMyMoney::Account::Type::Income) || (accountType == eMyMoney::Account::Type::Expense)) {
                     const auto totalValue = sourceModel()->data(source, eMyMoney::Model::Roles::AccountTotalValueRole);
                     if (totalValue.isValid() && totalValue.value<MyMoneyMoney>().isZero()) {
                         emit unusedIncomeExpenseAccountHidden();
+                        return false;
+                    }
+                }
+            }
+            // we hide zero balance investment accounts
+            if (hideZeroBalancedEquityAccounts()) {
+                if (accountType == eMyMoney::Account::Type::Equity || sourceModel()->data(source, eMyMoney::Model::Roles::AccountIsInvestRole).toBool()) {
+                    const auto totalValue = sourceModel()->data(source, eMyMoney::Model::Roles::AccountTotalValueRole);
+                    if (totalValue.isValid() && totalValue.value<MyMoneyMoney>().isZero()) {
                         return false;
                     }
                 }
@@ -315,6 +325,28 @@ bool AccountsProxyModel::hideEquityAccounts() const
 {
     Q_D(const AccountsProxyModel);
     return d->m_hideEquityAccounts;
+}
+
+/**
+ * Set if equity or investment accounts should be hidden if their balance is zero.
+ * @param hideZeroBalancedEquityAccounts
+ */
+void AccountsProxyModel::setHideZeroBalancedEquityAccounts(bool hideZeroBalancedEquityAccounts)
+{
+    Q_D(AccountsProxyModel);
+    if (d->m_hideZeroBalanceEquityAccounts ^ hideZeroBalancedEquityAccounts) {
+        d->m_hideZeroBalanceEquityAccounts = hideZeroBalancedEquityAccounts;
+        invalidateFilter();
+    }
+}
+
+/**
+ * Check if equity or investment accounts are hidden when their balance is zero.
+ */
+bool AccountsProxyModel::hideZeroBalancedEquityAccounts() const
+{
+    Q_D(const AccountsProxyModel);
+    return d->m_hideZeroBalanceEquityAccounts;
 }
 
 /**

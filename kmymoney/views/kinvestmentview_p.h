@@ -84,6 +84,7 @@ public:
         m_accountsProxyModel->setObjectName("m_accountsProxyModel");
         m_accountsProxyModel->addAccountType(eMyMoney::Account::Type::Investment);
         m_accountsProxyModel->setHideEquityAccounts(false);
+        m_accountsProxyModel->setHideZeroBalancedEquityAccounts(false);
         m_accountsProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
         m_accountsProxyModel->sort(AccountsModel::Column::AccountName);
         ui->m_accountComboBox->setModel(m_accountsProxyModel);

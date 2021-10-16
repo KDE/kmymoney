@@ -77,6 +77,7 @@ HierarchyPage::HierarchyPage(Wizard* wizard) :
     auto proxyModel = d->ui->m_parentAccounts->proxyModel();
     proxyModel->setHideClosedAccounts(true);
     proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+    proxyModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
     proxyModel->addAccountGroup(QVector<Account::Type> {Account::Type::Asset, Account::Type::Liability});
     // setup source model
     d->ui->m_parentAccounts->setModel(MyMoneyFile::instance()->accountsModel());

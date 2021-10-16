@@ -118,7 +118,8 @@ public:
 
         accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity});
 
-        accountsModel->setHideEquityAccounts(false);
+        accountsModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+        accountsModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
         auto const model = MyMoneyFile::instance()->accountsModel();
         accountsModel->setSourceModel(model);
         accountsModel->sort(AccountsModel::Column::AccountName);
@@ -623,6 +624,7 @@ void SimpleLedgerView::slotSettingsChanged()
     if (d->accountsModel) {
         d->accountsModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
         d->accountsModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+        d->accountsModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
         d->accountsModel->setHideFavoriteAccounts(false);
     }
     emit settingsChanged();

@@ -70,6 +70,7 @@ void KCategoriesView::slotSettingsChanged()
     Q_D(KCategoriesView);
     d->m_proxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
     d->m_proxyModel->setHideEquityAccounts(true);
+    d->m_proxyModel->setHideZeroBalancedEquityAccounts(true);
     d->m_proxyModel->setHideFavoriteAccounts(true);
 
     MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Positive, KMyMoneySettings::schemeColor(SchemeColor::Positive));

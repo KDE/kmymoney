@@ -708,6 +708,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
         eMyMoney::Account::Type::Equity,
     });
     d->accountsModel->setHideEquityAccounts(false);
+    d->accountsModel->setHideZeroBalancedEquityAccounts(false);
     d->accountsModel->setSourceModel(model);
     d->accountsModel->sort(AccountsModel::Column::AccountName);
     d->ui->accountCombo->setModel(d->accountsModel);

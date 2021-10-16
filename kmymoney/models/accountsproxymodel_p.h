@@ -27,6 +27,7 @@ public:
     AccountsProxyModelPrivate()
         : m_hideClosedAccounts(true)
         , m_hideEquityAccounts(true)
+        , m_hideZeroBalanceEquityAccounts(false)
         , m_hideUnusedIncomeExpenseAccounts(false)
         , m_haveHiddenUnusedIncomeExpenseAccounts(false)
         , m_hideFavoriteAccounts(true)
@@ -38,14 +39,15 @@ public:
     {
     }
 
-    QList<eMyMoney::Account::Type>  m_typeList;
-    QString                         m_notSelectableId;
-    bool                            m_hideClosedAccounts;
-    bool                            m_hideEquityAccounts;
-    bool                            m_hideUnusedIncomeExpenseAccounts;
-    bool                            m_haveHiddenUnusedIncomeExpenseAccounts;
-    bool                            m_hideFavoriteAccounts;
-    bool                            m_hideAllEntries;
+    QList<eMyMoney::Account::Type> m_typeList;
+    QString m_notSelectableId;
+    bool m_hideClosedAccounts;
+    bool m_hideEquityAccounts;
+    bool m_hideZeroBalanceEquityAccounts;
+    bool m_hideUnusedIncomeExpenseAccounts;
+    bool m_haveHiddenUnusedIncomeExpenseAccounts;
+    bool m_hideFavoriteAccounts;
+    bool m_hideAllEntries;
 };
 
 #endif // ACCOUNTSPROXYMODEL_P_H

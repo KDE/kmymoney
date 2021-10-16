@@ -65,6 +65,7 @@ void KAccountsView::slotSettingsChanged()
     Q_D(KAccountsView);
     d->m_proxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
     d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+    d->m_proxyModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
     d->m_proxyModel->setHideFavoriteAccounts(true);
 
     if (KMyMoneySettings::showCategoriesInAccountsView()) {

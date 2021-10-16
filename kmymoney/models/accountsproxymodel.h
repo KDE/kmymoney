@@ -82,6 +82,9 @@ public:
     void setHideEquityAccounts(bool hideEquityAccounts);
     bool hideEquityAccounts() const;
 
+    void setHideZeroBalancedEquityAccounts(bool hideZeroBalancedEquityAccounts);
+    bool hideZeroBalancedEquityAccounts() const;
+
     void setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncomeExpenseAccounts);
     bool hideUnusedIncomeExpenseAccounts() const;
 

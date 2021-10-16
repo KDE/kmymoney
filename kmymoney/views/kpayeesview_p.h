@@ -112,6 +112,7 @@ public:
 
         m_filterProxyModel = new AccountNamesFilterProxyModel(q);
         m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+        m_filterProxyModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
         m_filterProxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity});
 
         m_filterProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());

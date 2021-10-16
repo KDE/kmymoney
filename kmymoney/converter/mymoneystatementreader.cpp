@@ -1038,6 +1038,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
                     auto filterProxyModel = new AccountNamesFilterProxyModel(this);
                     filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+                    filterProxyModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
                     filterProxyModel->addAccountGroup(QVector<Account::Type> {Account::Type::Asset, Account::Type::Liability, Account::Type::Equity, Account::Type::Income, Account::Type::Expense});
 
                     filterProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
