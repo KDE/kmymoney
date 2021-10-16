@@ -3222,8 +3222,6 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
     LedgerViewSettings::instance()->setShowTransactionDetails(KMyMoneySettings::showRegisterDetailed());
     pActions[Action::ViewTransactionDetail]->setChecked(KMyMoneySettings::showRegisterDetailed());
 
-    d->m_myMoneyView->slotSettingsChanged();
-
     // update the holiday region configuration
     setHolidayRegion(KMyMoneySettings::holidayRegion());
 
