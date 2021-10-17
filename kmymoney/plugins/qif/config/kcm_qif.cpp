@@ -23,6 +23,6 @@ KCMqif::KCMqif(QWidget *parent, const QVariantList& args) : KCModule(parent, arg
     load();
 }
 
-K_PLUGIN_FACTORY(KCMqifFactory, registerPlugin<KCMqif>();)
+K_PLUGIN_CLASS_WITH_JSON(KCMqif, "kcm_qif.json")
 
 #include "kcm_qif.moc"

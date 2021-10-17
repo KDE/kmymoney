@@ -7,23 +7,11 @@ set(kcm_qif_PART_SRCS
 
 ki18n_wrap_ui(kcm_qif_PART_SRCS mymoneyqifprofileeditor.ui)
 
-#dirty hack: kcm_qif doesn't need json but build fails if it isn't found
-if(ENABLE_QIFIMPORTER)
-kcoreaddons_add_plugin(kcm_qif
-                       SOURCES ${kcm_qif_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
-elseif(ENABLE_QIFEXPORTER)
-kcoreaddons_add_plugin(kcm_qif
-                       SOURCES ${kcm_qif_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
-endif()
-
-if(ENABLE_QIFIMPORTER)
-  kcoreaddons_desktop_to_json(kcm_qif kcm_qifimporter.desktop)
-endif()
-
-if(ENABLE_QIFEXPORTER)
-  kcoreaddons_desktop_to_json(kcm_qif kcm_qifexporter.desktop)
+if(ENABLE_QIFIMPORTER OR ENABLE_QIFEXPORTER)
+  kcoreaddons_add_plugin(kcm_qif
+                         SOURCES ${kcm_qif_PART_SRCS}
+                         INSTALL_NAMESPACE "kmymoney")
+  kcoreaddons_desktop_to_json(kcm_qif kcm_qif.desktop)
 endif()
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
@@ -39,13 +27,7 @@ target_link_libraries(kcm_qif
                       KF5::KIOWidgets
                       )
 
-if(ENABLE_QIFIMPORTER)
-  install(FILES kcm_qifimporter.desktop
-        DESTINATION ${SERVICES_INSTALL_DIR})
-endif()
-
-if(ENABLE_QIFEXPORTER)
-  install(FILES kcm_qifexporter.desktop
-        DESTINATION ${SERVICES_INSTALL_DIR})
+if(ENABLE_QIFIMPORTER OR ENABLE_QIFEXPORTER)
+  install(FILES kcm_qif.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 endif()
 
