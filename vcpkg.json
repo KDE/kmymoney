@@ -34,6 +34,18 @@
         "gpgme"
       ]
     },
+    "kbanking": {
+      "description": "Enables KBanking plugin",
+      "dependencies": [
+        "libaqbanking"
+      ]
+    },
+    "ofx": {
+      "description": "Enables OFX importer",
+      "dependencies": [
+        "libofx"
+      ]
+    },
     "reports": {
       "description": "Adds possibility to display chart and table reports",
       "dependencies": [
