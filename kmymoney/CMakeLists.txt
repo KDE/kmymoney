@@ -124,7 +124,6 @@ if (ENABLE_SQLCIPHER)
 
   target_compile_definitions(kmymoney
     PRIVATE
-          QT_STATICPLUGIN
       SQLITE_HAS_CODEC
       SQLITE_TEMP_STORE=2)
 
@@ -135,8 +134,6 @@ if (ENABLE_SQLCIPHER)
         ${SQLCIPHER_INCLUDE_DIRS})
   endif()
 endif()
-
-set_property(TARGET kmymoney APPEND PROPERTY COMPILE_DEFINITIONS QT_STATICPLUGIN)
 
 target_link_libraries(kmymoney
   PUBLIC
@@ -163,39 +160,13 @@ target_link_libraries(kmymoney
   KF5::WidgetsAddons
   KF5::CoreAddons
   kmm_templates
-    checkprinting
-    kcm_checkprinting
-    csvexporter
-    csvimporter
-    kcm_csvimporter
-    gncimporter
-    kbanking
-    konlinetasks_sepa
-    kcm_qif
-    qifexporter
-    qifimporter
-    reconciliationreport
-    sqlstorage
-    budgetview
-    forecastview
-    kcm_forecastview
-    onlinejoboutboxview
-    reportsview
-    kcm_reportsview
-    woob
-    xmlstorage
-    kcm_xmlstorage
-    $<$<BOOL:${USE_MODELTEST}>:Qt5::Test>
+  $<$<BOOL:${USE_MODELTEST}>:Qt5::Test>
   $<$<BOOL:${ENABLE_HOLIDAYS}>:KF5::Holidays>
   $<$<BOOL:${ENABLE_ACTIVITIES}>:KF5::Activities>
   PRIVATE
     kmm_selections
     $<$<BOOL:${ENABLE_SQLCIPHER}>:PkgConfig::SQLCIPHER>
 )
-
-
-# when building statically, otherwise has no effect
-#qt5_import_plugins(kmymoney INCLUDE interfaces settings kmm_plugin kmm_templates kmm_csvimportercore kmm_widgets kmm_mymoney)
 
 # create symlink to let kcoreaddons find plugins
 if(WIN32 AND NOT CMAKE_CROSSCOMPILING)

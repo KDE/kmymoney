@@ -26,7 +26,7 @@ set ( qsqlcipher_HEADERS
   qsql_sqlite_p.h
 )
 
-kmymoney_add_plugin(qsqlcipher
+kcoreaddons_add_plugin(qsqlcipher
                        SOURCES ${qsqlcipher_SOURCES}
                        INSTALL_NAMESPACE "sqldrivers")
 

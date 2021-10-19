@@ -17,23 +17,18 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KPluginLoader>
 #include <KPluginFactory>
 #include <KPluginInfo>
-#include <KPluginLoader>
 #include <KPluginMetaData>
-#include <KSharedConfig>
 #include <KXMLGUIFactory>
-#include <QJsonDocument>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kmymoneyplugin.h"
 #include "onlinepluginextended.h"
-
-#include <QtPlugin>
-Q_IMPORT_PLUGIN(CSVImporterCore)
-Q_IMPORT_PLUGIN(CSVImporter)
 
 namespace KMyMoneyPlugin
 {
@@ -56,51 +51,23 @@ bool isPluginEnabled(const KPluginMetaData& pluginData, const KConfigGroup& plug
                                    pluginData.isEnabledByDefault());    // if not found, then get default from plugin's json file
 }
 
-QMap<QString, PluginMetaFactory> discoverPlugins(bool onlyEnabled)
+QMap<QString, KPluginMetaData> listPlugins(bool onlyEnabled)
 {
-    QMap<QString, PluginMetaFactory> plugins;
-    const auto pluginSection(KSharedConfig::openConfig()->group(QStringLiteral("Plugins"))); // section of config where plugin on/off were saved
+    QMap<QString, KPluginMetaData> plugins;
+    const auto pluginDatas = KPluginLoader::findPlugins(QStringLiteral("kmymoney"));          // that means search for plugins in "/lib64/plugins/kmymoney/"
+    const auto pluginSection(KSharedConfig::openConfig()->group(QStringLiteral("Plugins")));  // section of config where plugin on/off were saved
 
-    const auto staticPlugins = QPluginLoader::staticPlugins();
-    for (auto& staticPlugin : staticPlugins) {
-        QJsonObject jsonMetadata = staticPlugin.metaData().value(QStringLiteral("MetaData")).toObject();
-        auto test = QJsonDocument(jsonMetadata).toJson(QJsonDocument::JsonFormat::Indented);
-
-        KPluginMetaData pluginData(jsonMetadata, QString());
-        if (pluginData.serviceTypes().contains(QStringLiteral("KMyMoney/Plugin"))) {
-            if (!onlyEnabled || isPluginEnabled(pluginData, pluginSection)) {
-                plugins.insert(pluginData.pluginId(), PluginMetaFactory(pluginData, nullptr, qobject_cast<KPluginFactory*>(staticPlugin.instance())));
-            }
-        }
-    }
-
-    const auto pluginDatas = KPluginLoader::findPlugins(QStringLiteral("kmymoney")); // that means search for plugins in "/lib64/plugins/kmymoney/"
     for (const KPluginMetaData& pluginData : pluginDatas) {
-        auto test = QJsonDocument(pluginData.rawData()).toJson(QJsonDocument::JsonFormat::Indented);
-
         if (pluginData.serviceTypes().contains(QStringLiteral("KMyMoney/Plugin"))) {
             if (!onlyEnabled || isPluginEnabled(pluginData, pluginSection)) {
-                // only use the first one found. Otherwise, always the last one would
-                // win (usually the installed system version) with the QT_PLUGIN_PATH
-                // env variable or the current directory having no effect on KMyMoney
-                if (!plugins.contains(pluginData.pluginId())) {
-                    KPluginLoader loader(pluginData.fileName());
-                    auto factory = loader.factory();
-                    if (!factory) {
-                        qWarning("Could not load plugin '%s', error: %s", qPrintable(pluginData.fileName()), qPrintable(loader.errorString()));
-                        loader.unload();
-                        continue;
-                    } else
-                        plugins.insert(pluginData.pluginId(), PluginMetaFactory(pluginData, &loader, factory));
-                } else {
-                    qWarning("Could not load plugin '%s' – a plugin with the same '%s' ID already loaded",
-                             qPrintable(pluginData.fileName()),
-                             qPrintable(pluginData.pluginId()));
-                }
+                // only use the first one found. Otherwise, always the last one
+                // wins (usually the installed system version) and the QT_PLUGIN_PATH
+                // env variable nor the current directory have an effect for KMyMoney
+                if (!plugins.contains(pluginData.pluginId()))
+                    plugins.insert(pluginData.pluginId(), pluginData);
             }
         }
     }
-
     return plugins;
 }
 
@@ -111,14 +78,14 @@ void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLG
             action == Action::Reorganize) {
         KPluginLoader::forEachPlugin(QStringLiteral("kmymoney"), [&](const QString &pluginPath) {
             KPluginMetaData metadata(pluginPath);
-            qDebug() << "Located shared plugin" << pluginPath << "Validity" << metadata.isValid();
+            qDebug() << "Located plugin" << pluginPath << "Validity" << metadata.isValid();
         });
     }
 
-    QMap<QString, PluginMetaFactory> referencePluginDatas;
+    QMap<QString, KPluginMetaData> referencePluginDatas;
     if (action == Action::Load ||
             action == Action::Reorganize)
-        referencePluginDatas = discoverPlugins(true);
+        referencePluginDatas = listPlugins(true);
 
     if (action == Action::Unload ||
             action == Action::Reorganize) {
@@ -150,44 +117,49 @@ void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLG
         auto& refPlugins = referencePluginDatas;
         for (auto it = refPlugins.cbegin(); it != refPlugins.cend(); ++it) {
             if (!ctnPlugins.standard.contains(it.key())) {
-                qDebug() << "Loading" << (*it).pluginMetaData.fileName();
-                auto factory = (*it).pluginFactory;
+                qDebug() << "Loading" << (*it).fileName();
+                KPluginLoader loader((*it).fileName());
+                auto factory = loader.factory();
+                if (!factory) {
+                    qWarning("Could not load plugin '%s', error: %s", qPrintable((*it).fileName()), qPrintable(loader.errorString()));
+                    loader.unload();
+                    continue;
+                }
 #if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-                Plugin* plugin = factory->create<Plugin>(parent, QVariantList{(*it).pluginMetaData.pluginId(), (*it).pluginMetaData.name()});
+                Plugin* plugin = factory->create<Plugin>(parent, QVariantList { (*it).pluginId(), (*it).name() });
 #else
                 Plugin* plugin = factory->create<Plugin>(parent);
 #endif
                 if (!plugin) {
-                    qWarning("Failed to instantiate plugin: '%s'", qPrintable((*it).pluginMetaData.fileName()));
-                    auto loader = (*it).pluginLoader;
-                    if (loader)
-                        loader->unload();
+                    qWarning("This is not KMyMoney plugin: '%s'", qPrintable((*it).fileName()));
+                    loader.unload();
                     continue;
                 }
 
-                ctnPlugins.standard.insert((*it).pluginMetaData.pluginId(), plugin);
+                ctnPlugins.standard.insert((*it).pluginId(), plugin);
                 plugin->plug(guiFactory);
                 guiFactory->addClient(plugin);
 
                 auto IOnline = qobject_cast<OnlinePlugin *>(plugin);
                 if (IOnline)
-                    ctnPlugins.online.insert((*it).pluginMetaData.pluginId(), IOnline);
+                    ctnPlugins.online.insert((*it).pluginId(), IOnline);
 
                 auto IExtended = qobject_cast<OnlinePluginExtended *>(plugin);
                 if (IExtended )
-                    ctnPlugins.extended.insert((*it).pluginMetaData.pluginId(), IExtended);
+                    ctnPlugins.extended.insert((*it).pluginId(), IExtended );
 
                 auto IImporter = qobject_cast<ImporterPlugin *>(plugin);
                 if (IImporter)
-                    ctnPlugins.importer.insert((*it).pluginMetaData.pluginId(), IImporter);
+                    ctnPlugins.importer.insert((*it).pluginId(), IImporter);
 
                 auto IStorage = qobject_cast<StoragePlugin *>(plugin);
                 if (IStorage)
-                    ctnPlugins.storage.insert((*it).pluginMetaData.pluginId(), IStorage);
+                    ctnPlugins.storage.insert((*it).pluginId(), IStorage);
 
                 auto IData = qobject_cast<DataPlugin *>(plugin);
                 if (IData)
-                    ctnPlugins.data.insert((*it).pluginMetaData.pluginId(), IData);
+                    ctnPlugins.data.insert((*it).pluginId(), IData);
+
             }
         }
 

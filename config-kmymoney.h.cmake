@@ -24,5 +24,3 @@
 #cmakedefine ENABLE_GPG 1
 
 #cmakedefine IS_APPIMAGE 1
-
-#cmakedefine BUILD_SHARED_LIBS 1

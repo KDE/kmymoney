@@ -18,8 +18,9 @@ set(gncimporter_PART_UI
 
 ki18n_wrap_ui(gncimporter_PART_SRCS ${gncimporter_PART_UI})
 
-kmymoney_add_plugin(gncimporter
-                       SOURCES ${gncimporter_PART_SRCS})
+kcoreaddons_add_plugin(gncimporter
+                       SOURCES ${gncimporter_PART_SRCS}
+                       INSTALL_NAMESPACE "kmymoney")
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
 set_target_properties(gncimporter

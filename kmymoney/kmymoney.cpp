@@ -1384,6 +1384,8 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     kmymoney = this;
     d->m_config = KSharedConfig::openConfig();
 
+    d->setThemedCSS();
+
     MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
 
     QFrame* frame = new QFrame;
@@ -1457,7 +1459,6 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     d->m_myMoneyView->setOnlinePlugins(&pPlugins.online);
 
     setCentralWidget(frame);
-    d->setThemedCSS();
 
     connect(&d->m_proc, QOverload<int,QProcess::ExitStatus>::of(&KProcess::finished), this, &KMyMoneyApp::slotBackupHandleEvents);
 
@@ -2113,12 +2114,12 @@ void KMyMoneyApp::initIcons()
 
     // if it isn't default theme then set it
     if (!themeName.isEmpty() && themeName != QStringLiteral("system")) {
-        qDebug() << "Setting icon theme to: " << themeName;
         QIcon::setThemeName(themeName);
+        qDebug() << "Setting icon theme to: " << themeName;
     }
     else {
-        qDebug() << "Obeying the system-wide icon theme, currently set to: " << themeName;
         themeName = QIcon::themeName();
+        qDebug() << "Obeying the system-wide icon theme, currently set to: " << themeName;
     }
 }
 

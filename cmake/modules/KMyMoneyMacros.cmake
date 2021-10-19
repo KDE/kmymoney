@@ -1,11 +1,7 @@
-# SPDX-FileCopyrightText: 2015 Aleix Pol Gonzalez <aleixpol@kde.org>
-# Redistribution and use is allowed according to the terms of the BSD license.
-
 #
 # this file contains the following macros:
 # KMM_CREATE_LINKS
 # KMM_CREATE_LINKS_BIN
-# KMYMONEY_ADD_PLUGIN
 
 #############################################################################
 # Create Links
@@ -29,25 +25,3 @@ MACRO(KMM_CREATE_LINKS)
   ENDFOREACH (c_FILE)
 ENDMACRO(KMM_CREATE_LINKS)
 
-if (TRUE)
-    function(kmymoney_add_plugin plugin)
-        message(TEST)
-        set(options)
-        set(oneValueArgs JSON)
-        set(multiValueArgs SOURCES)
-        cmake_parse_arguments(KC_ADD_PLUGIN "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
-
-        if(NOT KC_ADD_PLUGIN_SOURCES)
-            message(FATAL_ERROR "kmymoney_add_plugin called without SOURCES parameter")
-        endif()
-        get_filename_component(json "${KC_ADD_PLUGIN_JSON}" REALPATH)
-
-        add_library(${plugin} STATIC ${KC_ADD_PLUGIN_SOURCES})
-        set_property(TARGET ${plugin} APPEND PROPERTY AUTOGEN_TARGET_DEPENDS ${json})
-        set_property(TARGET ${plugin} APPEND PROPERTY COMPILE_DEFINITIONS QT_STATICPLUGIN)
-    endfunction()
-else()
-    function(kmymoney_add_plugin)
-        kcoreaddons_add_plugin(${ARGN} INSTALL_NAMESPACE kmymoney)
-    endfunction()
-endif()
