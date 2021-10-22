@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Update 'VARIANT' to pick an LTS version of Node.js: 16, 14, 12.
+        # Append -bullseye or -buster to pin to an OS version.
+        # Use -bullseye variants on local arm64/Apple Silicon.
+        VARIANT: ubuntu-21.04
+    volumes:
+      - ..:/workspace:cached
+    init: true
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+    # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+    network_mode: service:guacd
+
+    # Uncomment the next line to use a non-root user for all processes.
+    # user: node
+
+  guacd:
+    image: guacamole/guacd
+    restart: unless-stopped
+    volumes:
+      - ./drive:/drive:rw
+      - ./record:/record:rw
+
+  guacamole:
+    depends_on:
+      - guacd
+    environment:
+      GUACD_HOSTNAME: guacd
+      GUACAMOLE_HOME: /guacamole_template
+    image: guacamole/guacamole
+    restart: unless-stopped
+    network_mode: service:guacd
+    volumes:
+      - ./user-mapping.xml:/guacamole_template/user-mapping.xml
+    # Added "forwardPorts": [8080] to **devcontainer.json** to forward Guacamole locally.
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
