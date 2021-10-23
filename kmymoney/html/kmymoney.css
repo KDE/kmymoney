@@ -259,6 +259,9 @@ table.report tr#topparent td.left {/*parent label for each row group containing 
 
 @media print {
 
+  /* unvisited link */
+  a:link { color: black; text-decoration: none }
+
   body  { background: white; margin: 0; padding: 0 }
   body  { font-family: helvetica, arial; font-size: 10pt }
   td,th { font-family: helvetica, arial; font-size:  9pt }
