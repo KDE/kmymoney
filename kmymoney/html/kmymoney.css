@@ -86,7 +86,7 @@ body#summaryview { /* set body attributes that affect only the summary view (and
 
   .itemtitle td { /*<td> table data cells related to .itemtitle*/
     padding:0px 10px 0px 10px;
-    border-left: 0px; 
+    border-left: 0px;
     border-right: 0px;
     font-size:1.2em;
   }
@@ -97,7 +97,7 @@ body#summaryview { /* set body attributes that affect only the summary view (and
   }
 
   .item td { /*<td> table data cells related to .item*/
-    border-left: 0px; 
+    border-left: 0px;
     border-right: 0px;
     border-bottom:3px solid WindowText;
   }
@@ -202,7 +202,7 @@ table.report tr#solo td {/*line separating rows that are not groups*/
     border-bottom: 1px solid black;
     font-weight: normal;
   }
-  
+
 table.report tr#topparent td.left {/*parent label for each row group containing children*/
     font-weight: bold;
   }
@@ -222,18 +222,18 @@ table.report tr#topparent td.left {/*parent label for each row group containing 
     padding: 0 0.5em 0.5em 0.5em;
     color:WindowText;
   }
-  
+
   table.report tr.sectionfooterfirst td { /* totals for each section -subtotals */
     border-top: 1px solid black;
     padding: 0 0.5em 0 0.5em;
     color:WindowText;
   }
-  
+
     table.report tr.sectionfootermiddle td { /* totals for without top border */
     padding: 0 0.5em 0 0.5em;
     color:WindowText;
   }
-  
+
   table.report tr.sectionfooterlast td { /* totals for each section -subtotals */
     padding: 0 0.5em 0.5em 0.5em;
     color:WindowText;
