@@ -366,8 +366,12 @@ TransactionEditor* KEditScheduleDlg::startEdit()
         }
 
         // connect the postdate modification signal to our update routine
-        if (auto dateEdit = dynamic_cast<KMyMoneyDateInput*>(editor->haveWidget("postdate")))
+        if (auto dateEdit = dynamic_cast<KMyMoneyDateInput*>(editor->haveWidget("postdate"))) {
             connect(dateEdit, &KMyMoneyDateInput::dateChanged, this, &KEditScheduleDlg::slotPostDateChanged);
+            connect(d->ui->m_lastDayInMonthEdit, &QCheckBox::stateChanged, dateEdit, &KMyMoneyDateInput::setDisabled);
+            // update initial state
+            dateEdit->setDisabled(d->ui->m_lastDayInMonthEdit->isChecked());
+        }
 
         d->ui->m_nameEdit->setFocus();
 
