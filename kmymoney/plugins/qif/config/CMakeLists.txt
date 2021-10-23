@@ -7,16 +7,9 @@ set(kcm_qif_PART_SRCS
 ki18n_wrap_ui(kcm_qif_PART_SRCS mymoneyqifprofileeditor.ui)
 
 if(ENABLE_QIFIMPORTER OR ENABLE_QIFEXPORTER)
-  kcoreaddons_add_plugin(kcm_qif
-                         SOURCES ${kcm_qif_PART_SRCS}
-                         INSTALL_NAMESPACE "kmymoney")
+  kmymoney_add_plugin_kcm(kcm_qif SOURCES ${kcm_qif_PART_SRCS})
   kcoreaddons_desktop_to_json(kcm_qif kcm_qif.desktop)
 endif()
-
-#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
-set_target_properties(kcm_qif
-                      PROPERTIES
-                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(kcm_qif
                       qif_common_static

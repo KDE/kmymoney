@@ -17,13 +17,7 @@ set_property(SOURCE icalendarexporter.cpp APPEND PROPERTY OBJECT_DEPENDS ${CMAKE
 
 qt5_add_resources(icalendarexporter_PART_SRCS icalendarexporter.qrc)
 
-kcoreaddons_add_plugin(icalendarexporter
-                       SOURCES ${icalendarexporter_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
-#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
-set_target_properties(icalendarexporter
-                      PROPERTIES
-                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
+kmymoney_add_plugin(icalendarexporter SOURCES ${icalendarexporter_PART_SRCS})
 
 target_include_directories(icalendarexporter PRIVATE ${LibIcal_INCLUDE_DIRS})
 target_link_libraries(icalendarexporter
@@ -43,16 +37,9 @@ set_property(SOURCE kcm_icalendarexporter.cpp APPEND PROPERTY OBJECT_DEPENDS ${C
 
 ki18n_wrap_ui(kcm_icalendarexporter_PART_SRCS icalendarsettingsdecl.ui)
 
-kcoreaddons_add_plugin(kcm_icalendarexporter
-                       SOURCES ${kcm_icalendarexporter_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
+kmymoney_add_plugin_kcm(kcm_icalendarexporter SOURCES ${kcm_icalendarexporter_PART_SRCS})
 
 kcoreaddons_desktop_to_json(kcm_icalendarexporter kcm_icalendarexporter.desktop)
-
-#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
-set_target_properties(kcm_icalendarexporter
-                      PROPERTIES
-                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(kcm_icalendarexporter
   icalendar_settings_static

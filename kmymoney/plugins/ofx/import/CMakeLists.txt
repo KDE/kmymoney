@@ -22,14 +22,7 @@ ki18n_wrap_ui(ofximporter_PART_SRCS ${ofximporter_PART_UI})
 
 qt5_add_resources(ofximporter_PART_SRCS ofximporter.qrc)
 
-kcoreaddons_add_plugin(ofximporter
-                       SOURCES ${ofximporter_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
-
-#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
-set_target_properties(ofximporter
-                      PROPERTIES
-                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
+kmymoney_add_plugin(ofximporter SOURCES ${ofximporter_PART_SRCS})
 
 target_link_libraries(ofximporter
   ofximporter_dialogs

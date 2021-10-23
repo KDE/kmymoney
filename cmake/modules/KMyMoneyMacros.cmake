@@ -25,3 +25,16 @@ MACRO(KMM_CREATE_LINKS)
   ENDFOREACH (c_FILE)
 ENDMACRO(KMM_CREATE_LINKS)
 
+
+function(kmymoney_add_plugin name)
+    kcoreaddons_add_plugin(${name} ${ARGN} INSTALL_NAMESPACE "kmymoney")
+    # TODO Remove this once we can depend on KF 5.88
+    set_target_properties(${name} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
+
+endfunction()
+
+function(kmymoney_add_plugin_kcm name)
+    kcoreaddons_add_plugin(${name} ${ARGN} INSTALL_NAMESPACE "kmymoney/kcms")
+    # TODO Remove this once we can depend on KF 5.88
+    set_target_properties(${name} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
+endfunction()

@@ -41,15 +41,7 @@ ki18n_wrap_ui(csvimporter_PART_SRCS
   currenciesdlg.ui
 )
 
-kcoreaddons_add_plugin(csvimporter
-                       SOURCES ${csvimporter_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
-
-
-#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
-set_target_properties(csvimporter
-                      PROPERTIES
-                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
+kmymoney_add_plugin(csvimporter SOURCES ${csvimporter_PART_SRCS})
 
 target_link_libraries(csvimporter
   PUBLIC
@@ -68,16 +60,9 @@ set_property(SOURCE kcm_csvimporter.cpp APPEND PROPERTY OBJECT_DEPENDS ${CMAKE_C
 
 ki18n_wrap_ui(kcm_csvimporter_PART_SRCS pluginsettingsdecl.ui)
 
-kcoreaddons_add_plugin(kcm_csvimporter
-                       SOURCES ${kcm_csvimporter_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
+kmymoney_add_plugin_kcm(kcm_csvimporter SOURCES ${kcm_csvimporter_PART_SRCS})
 
 kcoreaddons_desktop_to_json(kcm_csvimporter kcm_csvimporter.desktop)
-
-#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
-set_target_properties(kcm_csvimporter
-                      PROPERTIES
-                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(kcm_csvimporter
                       csvimporter_settings_static

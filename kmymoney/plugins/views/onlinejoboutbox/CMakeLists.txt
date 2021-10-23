@@ -15,14 +15,7 @@ ki18n_wrap_ui(onlinejoboutboxview_SOURCES
 
 qt5_add_resources(onlinejoboutboxview_SOURCES onlinejoboutboxview.qrc)
 
-kcoreaddons_add_plugin(onlinejoboutboxview
-                       SOURCES ${onlinejoboutboxview_SOURCES}
-                       INSTALL_NAMESPACE "kmymoney")
-
-#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
-set_target_properties(onlinejoboutboxview
-                      PROPERTIES
-                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
+kmymoney_add_plugin(onlinejoboutboxview SOURCES ${onlinejoboutboxview_SOURCES})
 
 target_link_libraries(onlinejoboutboxview
   PUBLIC

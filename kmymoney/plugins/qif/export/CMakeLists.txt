@@ -17,14 +17,7 @@ ki18n_wrap_ui(qifexporter_PART_SRCS ${qifexporter_PART_UI})
 
 qt5_add_resources(qifexporter_PART_SRCS qifexporter.qrc)
 
-kcoreaddons_add_plugin(qifexporter
-                       SOURCES ${qifexporter_PART_SRCS}
-                       INSTALL_NAMESPACE "kmymoney")
-
-#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
-set_target_properties(qifexporter
-                      PROPERTIES
-                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
+kmymoney_add_plugin(qifexporter SOURCES ${qifexporter_PART_SRCS})
 
 target_link_libraries(qifexporter
   qif_common_static

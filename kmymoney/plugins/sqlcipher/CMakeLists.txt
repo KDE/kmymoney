@@ -30,11 +30,6 @@ kcoreaddons_add_plugin(qsqlcipher
                        SOURCES ${qsqlcipher_SOURCES}
                        INSTALL_NAMESPACE "sqldrivers")
 
-#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
-set_target_properties(qsqlcipher
-                      PROPERTIES
-                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
-
 #otherwise "fatal error: 'sqlite3.h' file not found"
 if(CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "Windows" OR CMAKE_VERSION VERSION_LESS 3.5.2)
   target_include_directories(qsqlcipher

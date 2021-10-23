@@ -15,14 +15,7 @@ ki18n_wrap_ui(budgetview_SOURCES
 
 qt5_add_resources(budgetview_SOURCES budgetview.qrc)
 
-kcoreaddons_add_plugin(budgetview
-                       SOURCES ${budgetview_SOURCES}
-                       INSTALL_NAMESPACE "kmymoney")
-
-#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
-set_target_properties(budgetview
-                      PROPERTIES
-                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
+kmymoney_add_plugin(budgetview SOURCES ${budgetview_SOURCES})
 
 target_link_libraries(budgetview
   PUBLIC
