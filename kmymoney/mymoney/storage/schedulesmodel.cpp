@@ -236,7 +236,7 @@ QVariant SchedulesModel::data(const QModelIndex& idx, int role) const
 
         case Column::NextDueDate:
             if (!schedule.isFinished()) {
-                rc = MyMoneyUtils::formatDate(schedule.nextDueDate());
+                rc = MyMoneyUtils::formatDate(schedule.adjustedNextDueDate());
             } else {
                 rc = i18nc("Finished schedule", "Finished");
             }
@@ -311,7 +311,7 @@ QVariant SchedulesModel::data(const QModelIndex& idx, int role) const
         break;
 
     case eMyMoney::Model::ScheduleNextDueDateRole:
-        rc = schedule.nextDueDate();
+        rc = schedule.adjustedNextDueDate();
         break;
 
     case eMyMoney::Model::ScheduleFrequencyRole:
