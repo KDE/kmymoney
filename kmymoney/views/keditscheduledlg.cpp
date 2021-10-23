@@ -318,6 +318,12 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
     connect(d->ui->buttonBox, &QDialogButtonBox::helpRequested, this, [&]() {
         KHelpClient::invokeHelp("details.schedules.intro");
     });
+
+    const auto dateEdit = d->m_editor->findChild<QWidget*>("dateEdit");
+    if (dateEdit) {
+        connect(d->ui->m_lastDayInMonthEdit, &QCheckBox::stateChanged, dateEdit, &QWidget::setDisabled);
+        dateEdit->setDisabled(d->ui->m_lastDayInMonthEdit->isChecked());
+    }
 }
 
 KEditScheduleDlg::~KEditScheduleDlg()
