@@ -89,10 +89,15 @@ void SplitDialog::Private::deleteSplits(QModelIndexList indexList)
     }
 
     blockEditorStart(true);
+    const auto model = ui->splitView->model();
     QMap<int, int>::const_iterator it = sortedList.constEnd();
     do {
         --it;
-        ui->splitView->model()->removeRow(*it);
+        const auto idx = model->index(*it, 0);
+        const auto id = idx.data(eMyMoney::Model::IdRole).toString();
+        if (!(id.isEmpty() || id.endsWith('-'))) {
+            model->removeRow(*it);
+        }
     } while(it != sortedList.constBegin());
     blockEditorStart(false);
 }
