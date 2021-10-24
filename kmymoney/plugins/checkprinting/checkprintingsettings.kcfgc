@@ -1,6 +1,6 @@
 # Code generation options for kconfig_compiler
-File=pluginsettings.kcfg
-ClassName=PluginSettings
+File=checkprintingsettings.kcfg
+ClassName=CheckPrintingSettings
 Singleton=true
 Mutators=true
 DefaultValueGetters=true

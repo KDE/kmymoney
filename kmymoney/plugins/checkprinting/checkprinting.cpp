@@ -35,9 +35,9 @@
 #include "selectedobjects.h"
 #include "viewinterface.h"
 
-#include "numbertowords.h"
-#include "pluginsettings.h"
+#include "checkprintingsettings.h"
 #include "mymoneyenums.h"
+#include "numbertowords.h"
 
 #include "kmm_printer.h"
 
@@ -77,11 +77,10 @@ struct CheckPrinting::Private {
 
     void readCheckTemplate()
     {
+        QFile* checkTemplateHTMLFile = new QFile(CheckPrintingSettings::checkTemplateFile());
 
-        QFile *checkTemplateHTMLFile = new QFile(PluginSettings::checkTemplateFile());
-
-        if (!PluginSettings::useCustomCheckTemplate() || PluginSettings::checkTemplateFile().isEmpty() || !checkTemplateHTMLFile->exists())
-            checkTemplateHTMLFile = new QFile(PluginSettings::defaultCheckTemplateFileValue());
+        if (!CheckPrintingSettings::useCustomCheckTemplate() || CheckPrintingSettings::checkTemplateFile().isEmpty() || !checkTemplateHTMLFile->exists())
+            checkTemplateHTMLFile = new QFile(CheckPrintingSettings::defaultCheckTemplateFileValue());
         if (!(checkTemplateHTMLFile->open(QIODevice::ReadOnly)))
             qDebug() << "Failed to open the template from" << checkTemplateHTMLFile->fileName();
         else
@@ -193,7 +192,7 @@ CheckPrinting::CheckPrinting(QObject *parent, const KPluginMetaData &metaData, c
 
     // wait until a transaction is selected before enabling the action
     d->m_action->setEnabled(false);
-    d->m_printedTransactionIdList = PluginSettings::printedChecks();
+    d->m_printedTransactionIdList = CheckPrintingSettings::printedChecks();
     d->readCheckTemplate();
 
     //! @todo Christian: Replace
@@ -228,7 +227,7 @@ void CheckPrinting::slotPrintCheck()
         }
     }
     updateActions(d->selections);
-    PluginSettings::setPrintedChecks(d->m_printedTransactionIdList);
+    CheckPrintingSettings::setPrintedChecks(d->m_printedTransactionIdList);
 }
 
 void CheckPrinting::updateActions(const SelectedObjects& selections)
@@ -261,10 +260,10 @@ void CheckPrinting::updateActions(const SelectedObjects& selections)
 // the plugin's configurations has changed
 void CheckPrinting::updateConfiguration()
 {
-    PluginSettings::self()->load();
+    CheckPrintingSettings::self()->load();
     // re-read the data because the configuration has changed
     d->readCheckTemplate();
-    d->m_printedTransactionIdList = PluginSettings::printedChecks();
+    d->m_printedTransactionIdList = CheckPrintingSettings::printedChecks();
 }
 
 K_PLUGIN_CLASS_WITH_JSON(CheckPrinting, "checkprinting.json")

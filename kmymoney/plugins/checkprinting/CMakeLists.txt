@@ -10,7 +10,6 @@ set(checkprinting_PART_SRCS
     checkprinting.cpp
     )
 
-kconfig_add_kcfg_files(checkprinting_PART_SRCS pluginsettings.kcfgc)
 
 qt5_add_resources(checkprinting_PART_SRCS checkprinting.qrc)
 

@@ -17,7 +17,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "pluginsettings.h"
+#include "checkprintingsettings.h"
 #include "kcm_checkprinting.h"
 
 CheckPrintingSettingsWidget::CheckPrintingSettingsWidget(QWidget *parent)
@@ -31,7 +31,7 @@ CheckPrintingSettingsWidget::CheckPrintingSettingsWidget(QWidget *parent)
     m_previewFrame->setLayout(layout);
     layout->addWidget(m_checkTemplatePreviewHTMLPart);
 
-    if (PluginSettings::checkTemplateFile().isEmpty()) {
+    if (CheckPrintingSettings::checkTemplateFile().isEmpty()) {
         restoreDefaultSettings();
     }
 
@@ -51,12 +51,10 @@ CheckPrintingSettingsWidget::CheckPrintingSettingsWidget(QWidget *parent)
 
 void CheckPrintingSettingsWidget::urlSelected()
 {
-    if (kcfg_useCustomCheckTemplate->checkState() == Qt::Unchecked
-        || PluginSettings::checkTemplateFile().isEmpty()
+    if (kcfg_useCustomCheckTemplate->checkState() == Qt::Unchecked || CheckPrintingSettings::checkTemplateFile().isEmpty()
         || kcfg_checkTemplateFile->url().isEmpty()) {
-        urlSelected(QUrl::fromUserInput(PluginSettings::defaultCheckTemplateFileValue()));
-    }
-    else {
+        urlSelected(QUrl::fromUserInput(CheckPrintingSettings::defaultCheckTemplateFileValue()));
+    } else {
         urlSelected(kcfg_checkTemplateFile->url());
     }
 }
@@ -86,16 +84,16 @@ void CheckPrintingSettingsWidget::urlSelected(const QUrl &url)
 void CheckPrintingSettingsWidget::textChanged(const QString& text)
 {
     // conceal the default "qrc:/" value to avoid confusing regular users
-    if (text == PluginSettings::defaultCheckTemplateFileValue()) {
+    if (text == CheckPrintingSettings::defaultCheckTemplateFileValue()) {
         kcfg_checkTemplateFile->setText("");
     }
 }
 
 void CheckPrintingSettingsWidget::restoreDefaultSettings() const
 {
-    PluginSettings::setUseCustomCheckTemplate(false);
-    PluginSettings::setCheckTemplateFile(PluginSettings::defaultCheckTemplateFileValue());
-    PluginSettings::self()->save();
+    CheckPrintingSettings::setUseCustomCheckTemplate(false);
+    CheckPrintingSettings::setCheckTemplateFile(CheckPrintingSettings::defaultCheckTemplateFileValue());
+    CheckPrintingSettings::self()->save();
 }
 
 CheckPrintingSettingsWidget::~CheckPrintingSettingsWidget()
@@ -114,8 +112,8 @@ KCMCheckPrinting::KCMCheckPrinting(QWidget *parent, const QVariantList& args)
     setLayout(layout);
     layout->addWidget(w);
     load();
-    w->urlSelected(PluginSettings::useCustomCheckTemplate() ? PluginSettings::checkTemplateFile()
-                                                            : PluginSettings::defaultCheckTemplateFileValue());
+    w->urlSelected(CheckPrintingSettings::useCustomCheckTemplate() ? CheckPrintingSettings::checkTemplateFile()
+                                                                   : CheckPrintingSettings::defaultCheckTemplateFileValue());
 }
 
 KCMCheckPrinting::~KCMCheckPrinting()
