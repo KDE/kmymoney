@@ -37,7 +37,7 @@
     "ical": {
       "description": "Enables Calendar plugin",
       "dependencies": [
-        "gpgme"
+        "libical"
       ]
     },
     "kbanking": {
