@@ -802,7 +802,7 @@ void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& p
 {
     QTableView::currentChanged(current, previous);
 
-    if(current.isValid()) {
+    if (current.isValid() && current.row() != previous.row()) {
         QModelIndex idx = current.model()->index(current.row(), 0);
         QString id = idx.data(eMyMoney::Model::IdRole).toString();
         // For a new transaction the id is completely empty, for a split view the transaction
@@ -1016,7 +1016,13 @@ void LedgerView::editNewTransaction()
     if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
         scrollTo(idx, QAbstractItemView::EnsureVisible);
         selectRow(idx.row());
+        // if the empty row is already selected, we have to start editing here
+        // otherwise, it will happen in currentChanged()
+        const auto currentRow = currentIndex().row();
         setCurrentIndex(idx);
+        if (idx.row() == currentRow) {
+            edit(idx);
+        }
     }
 }
 
