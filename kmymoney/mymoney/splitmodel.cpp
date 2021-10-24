@@ -388,6 +388,15 @@ void SplitModel::removeEmptySplit()
     }
 }
 
+QModelIndex SplitModel::emptySplit() const
+{
+    const QModelIndexList list = match(index(0, 0), eMyMoney::Model::IdRole, QString(), -1, Qt::MatchExactly);
+    if (!list.isEmpty()) {
+        return list.first();
+    }
+    return {};
+}
+
 void SplitModel::doAddItem(const MyMoneySplit& item, const QModelIndex& parentIdx)
 {
     MyMoneyModel::doAddItem(item, parentIdx);

@@ -50,6 +50,7 @@ public:
     void appendSplit(const MyMoneySplit& s);
     void appendEmptySplit();
     void removeEmptySplit();
+    QModelIndex emptySplit() const;
 
     // Reimplemented for internal reasons
     void doRemoveItem(const MyMoneySplit& before) override;
