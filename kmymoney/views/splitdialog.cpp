@@ -150,6 +150,7 @@ SplitDialog::SplitDialog(const MyMoneySecurity& commodity,
     // setup some connections
     connect(d->ui->splitView, &SplitView::aboutToStartEdit, this, &SplitDialog::disableButtons);
     connect(d->ui->splitView, &SplitView::aboutToFinishEdit, this, &SplitDialog::enableButtons);
+    connect(d->ui->splitView, &SplitView::deleteSelectedSplits, this, &SplitDialog::deleteSelectedSplits);
 
     connect(d->ui->deleteAllButton, &QAbstractButton::pressed, this, &SplitDialog::deleteAllSplits);
     connect(d->ui->deleteButton, &QAbstractButton::pressed, this, &SplitDialog::deleteSelectedSplits);
@@ -368,7 +369,7 @@ void SplitDialog::updateButtonState()
 void SplitDialog::deleteSelectedSplits()
 {
     if (!d->ui->splitView->selectionModel()->selectedRows().isEmpty()) {
-        auto row = d->ui->splitView->selectionModel()->selectedRows().first().row();
+        const auto row = d->ui->splitView->selectionModel()->selectedRows().first().row();
         d->deleteSplits(d->ui->splitView->selectionModel()->selectedRows());
         adjustSummary();
         d->selectRow(row);
@@ -384,7 +385,7 @@ void SplitDialog::deleteAllSplits()
                                         -1,
                                         Qt::MatchRegExp
                                        );
-    auto row = d->ui->splitView->selectionModel()->selectedRows().first().row();
+    const auto row = d->ui->splitView->selectionModel()->selectedRows().first().row();
     d->deleteSplits(list);
     adjustSummary();
     d->selectRow(row);
@@ -408,7 +409,7 @@ void SplitDialog::deleteZeroSplits()
             ++row;
         }
     }
-    auto row = d->ui->splitView->selectionModel()->selectedRows().first().row();
+    const auto row = d->ui->splitView->selectionModel()->selectedRows().first().row();
     d->deleteSplits(list);
     adjustSummary();
     d->selectRow(row);

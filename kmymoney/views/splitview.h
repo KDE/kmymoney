@@ -96,6 +96,7 @@ Q_SIGNALS:
     void transactionSelected(const QModelIndex& idx);
     void aboutToStartEdit();
     void aboutToFinishEdit();
+    void deleteSelectedSplits();
 
 protected:
     class Private;

@@ -8,29 +8,33 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDate>
+#include <QDebug>
 #include <QHeaderView>
+#include <QMenu>
 #include <QPainter>
 #include <QResizeEvent>
-#include <QDate>
+#include <QScopedPointer>
 #include <QScrollBar>
-#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KLocalizedString>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "accountsmodel.h"
+#include "columnselector.h"
+#include "icons.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "accountsmodel.h"
-#include "splitmodel.h"
-#include "columnselector.h"
-#include "mymoneyenums.h"
-#include "splitdelegate.h"
 #include "mymoneysecurity.h"
+#include "splitdelegate.h"
+#include "splitmodel.h"
 
 class SplitView::Private
 {
@@ -45,6 +49,7 @@ public:
         , newTransactionPresent(false)
         , firstSelectionAfterCreation(true)
         , blockEditorStart(false)
+        , rightMouseButtonPress(false)
         , columnSelector(nullptr)
     {
     }
@@ -74,17 +79,98 @@ public:
         }
     }
 
-    SplitView*                      q;
-    SplitDelegate*                  splitDelegate;
-    MyMoneyAccount                  account;
-    int                             adjustableColumn;
-    bool                            adjustingColumn;
-    bool                            showValuesInverted;
-    bool                            balanceCalculationPending;
-    bool                            newTransactionPresent;
-    bool                            firstSelectionAfterCreation;
-    bool                            blockEditorStart;
-    ColumnSelector*                 columnSelector;
+    void executeContextMenu(const QPoint& pos)
+    {
+        const auto idx = q->currentIndex();
+        const auto id = idx.data(eMyMoney::Model::IdRole).toString();
+        const auto enableOption = !(id.isEmpty() || id.endsWith('-'));
+
+        QScopedPointer<QMenu> menu(new QMenu(q));
+        menu->addSection(i18nc("@title:menu split context menu", "Split Options"));
+
+        menu->addAction(Icons::get(Icons::Icon::DocumentNew), i18nc("@item:inmenu Create a split", "New..."), q, [&]() {
+            // search the empty split and start editing it
+            const auto rows = q->model()->rowCount();
+            for (int row = 0; row < rows; ++row) {
+                const auto idx = q->model()->index(row, 0);
+                const auto id = idx.data(eMyMoney::Model::IdRole).toString();
+                if (id.isEmpty() || id.endsWith('-')) {
+                    // force a call to currentChanged() to start editing
+                    q->setCurrentIndex(QModelIndex());
+                    q->setCurrentIndex(idx);
+                    break;
+                }
+            }
+        });
+
+        const auto editItem = menu->addAction(Icons::get(Icons::Icon::DocumentEdit), i18nc("@item:inmenu Edit a split", "Edit..."), q, [&]() {
+            q->edit(idx);
+        });
+        editItem->setEnabled(enableOption);
+
+        const auto duplicateItem = menu->addAction(Icons::get(Icons::Icon::EditCopy), i18nc("@item:inmenu Duplicate selected split(s)", "Duplicate"), q, [&]() {
+            const auto list = q->selectionModel()->selectedRows();
+            QPersistentModelIndex newCurrentIdx;
+            for (const auto idx : list) {
+                const auto id = idx.data(eMyMoney::Model::IdRole).toString();
+                if (!(id.isEmpty() || id.endsWith('-'))) {
+                    // we can use any model object for the next operation, but we have to use one
+                    const auto baseIdx = MyMoneyFile::instance()->accountsModel()->mapToBaseSource(idx);
+                    auto model = const_cast<SplitModel*>(qobject_cast<const SplitModel*>(baseIdx.model()));
+                    if (model) {
+                        // get the original data
+                        const auto split = model->itemByIndex(baseIdx);
+
+                        model->appendEmptySplit();
+                        const auto newIdx = model->emptySplit();
+                        // prevent update signals
+                        QSignalBlocker block(model);
+                        // the id of the split will be automatically assigned by the model
+                        model->setData(newIdx, split.number(), eMyMoney::Model::SplitNumberRole);
+                        model->setData(newIdx, split.memo(), eMyMoney::Model::SplitMemoRole);
+                        model->setData(newIdx, split.accountId(), eMyMoney::Model::SplitAccountIdRole);
+                        model->setData(newIdx, split.costCenterId(), eMyMoney::Model::SplitCostCenterIdRole);
+                        model->setData(newIdx, split.payeeId(), eMyMoney::Model::SplitPayeeIdRole);
+                        model->setData(newIdx, QVariant::fromValue<MyMoneyMoney>(split.shares()), eMyMoney::Model::SplitSharesRole);
+                        // send out the dataChanged signal with the next (last) setData()
+                        block.unblock();
+                        model->setData(newIdx, QVariant::fromValue<MyMoneyMoney>(split.value()), eMyMoney::Model::SplitValueRole);
+
+                        // now add a new empty split at the end
+                        model->appendEmptySplit();
+                        // and make the new split the current one
+                        if (!newCurrentIdx.isValid()) {
+                            newCurrentIdx = newIdx;
+                        }
+                    }
+                }
+            }
+            if (newCurrentIdx.isValid()) {
+                q->setCurrentIndex(newCurrentIdx);
+            }
+        });
+        duplicateItem->setEnabled(enableOption);
+
+        const auto deleteItem = menu->addAction(Icons::get(Icons::Icon::EditRemove), i18nc("@item:inmenu Delete selected split(s)", "Delete"), q, [&]() {
+            emit q->deleteSelectedSplits();
+        });
+        deleteItem->setEnabled(enableOption);
+
+        menu->exec(q->viewport()->mapToGlobal(pos));
+    }
+
+    SplitView* q;
+    SplitDelegate* splitDelegate;
+    MyMoneyAccount account;
+    int adjustableColumn;
+    bool adjustingColumn;
+    bool showValuesInverted;
+    bool balanceCalculationPending;
+    bool newTransactionPresent;
+    bool firstSelectionAfterCreation;
+    bool blockEditorStart;
+    bool rightMouseButtonPress;
+    ColumnSelector* columnSelector;
 };
 
 
@@ -121,6 +207,12 @@ SplitView::SplitView(QWidget* parent)
     setAlternatingRowColors(true);
 
     setSelectionBehavior(SelectRows);
+
+    // setup the context menu
+    setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(this, &QWidget::customContextMenuRequested, this, [&](QPoint pos) {
+        d->executeContextMenu(pos);
+    });
 
     setTabKeyNavigation(false);
 
@@ -214,7 +306,9 @@ void SplitView::mousePressEvent(QMouseEvent* event)
 {
     // qDebug() << "mousePressEvent";
     if(state() != QAbstractItemView::EditingState) {
+        d->rightMouseButtonPress = (event->button() == Qt::RightButton);
         QTableView::mousePressEvent(event);
+        d->rightMouseButtonPress = false;
     }
 }
 
@@ -252,12 +346,13 @@ void SplitView::currentChanged(const QModelIndex& current, const QModelIndex& pr
     // qDebug() << "currentChanged";
     QTableView::currentChanged(current, previous);
 
-    if(current.isValid()) {
-        QModelIndex idx = current.model()->index(current.row(), 0);
-        QString id = idx.data(eMyMoney::Model::IdRole).toString();
+    // is it a new selection (a different row)?
+    if (current.isValid() && (current.row() != previous.row())) {
+        const auto idx = current.model()->index(current.row(), 0);
+        const auto id = idx.data(eMyMoney::Model::IdRole).toString();
         // For a new transaction the id is completely empty, for a split view the transaction
         // part is filled but the split id is empty and the string ends with a dash
-        if(!d->blockEditorStart && !d->firstSelectionAfterCreation && (id.isEmpty() || id.endsWith('-'))) {
+        if (!d->blockEditorStart && !d->firstSelectionAfterCreation && (id.isEmpty() || id.endsWith('-')) && !d->rightMouseButtonPress) {
             selectionModel()->clearSelection();
             setCurrentIndex(idx);
             selectRow(idx.row());
