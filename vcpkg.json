@@ -34,6 +34,12 @@
         "gpgme"
       ]
     },
+    "ical": {
+      "description": "Enables Calendar plugin",
+      "dependencies": [
+        "gpgme"
+      ]
+    },
     "kbanking": {
       "description": "Enables KBanking plugin",
       "dependencies": [
@@ -41,7 +47,7 @@
       ]
     },
     "ofx": {
-      "description": "Enables OFX importer",
+      "description": "Enables OFX importer plugin",
       "dependencies": [
         "libofx"
       ]
