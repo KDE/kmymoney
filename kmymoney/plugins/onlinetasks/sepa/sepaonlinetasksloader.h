@@ -8,7 +8,7 @@
 
 #include <kmymoney/interfaces/onlinepluginextended.h>
 
-class sepaOnlineTasksLoader : public QObject, public KMyMoneyPlugin::onlineTaskFactory
+class sepaOnlineTasksLoader : public KMyMoneyPlugin::onlineTaskFactory
 {
     Q_OBJECT
     Q_INTERFACES(KMyMoneyPlugin::onlineTaskFactory)

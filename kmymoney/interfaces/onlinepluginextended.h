@@ -80,8 +80,17 @@ Q_SIGNALS:
     // void jobUnavailable( QString accountId );
 };
 
-class KMM_PLUGIN_EXPORT onlineTaskFactory
+class KMM_PLUGIN_EXPORT onlineTaskFactory : public QObject
 {
+    Q_OBJECT
+
+public:
+    onlineTaskFactory(QObject* parent, const QVariantList &args)
+        : QObject(parent)
+    {
+        Q_UNUSED(args)
+    }
+
 public:
     virtual onlineTask* createOnlineTask(const QString& taskId) const = 0;
 

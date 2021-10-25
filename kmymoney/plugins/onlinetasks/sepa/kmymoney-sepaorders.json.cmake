@@ -7,18 +7,15 @@
                     "Name[de]": "Sepa Überweisung",
                     "OnlineTaskIds": [
                         "org.kmymoney.creditTransfer.sepa"
-                    ],
-                    "PluginKeyword": "sepaCreditTransferUi"
+                    ]
                 }
             ],
             "Iids": [
                 "org.kmymoney.creditTransfer.sepa"
-            ],
-            "PluginKeyword": "sepaOnlineTasks"
+            ]
         },
         "StoragePlugin": {
-            "Iid": "org.kmymoney.creditTransfer.sepa.sqlStoragePlugin",
-            "PluginKeyword": "sepaSqlStoragePlugin"
+            "Iid": "org.kmymoney.creditTransfer.sepa.sqlStoragePlugin"
         }
     },
     "KPlugin": {

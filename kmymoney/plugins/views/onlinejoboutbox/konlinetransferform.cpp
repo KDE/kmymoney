@@ -98,7 +98,7 @@ void kOnlineTransferForm::loadOnlineJobEditPlugin(const onlineJobAdministration:
             return;
         }
 
-        IonlineJobEdit* widget = pluginFactory->create<IonlineJobEdit>(pluginDesc.pluginKeyword, this);
+        IonlineJobEdit* widget = pluginFactory->create<IonlineJobEdit>(this);
         if (!widget) {
             qWarning() << "Could not create online job editor in file \"" << pluginDesc.fileName << "\".";
             return;

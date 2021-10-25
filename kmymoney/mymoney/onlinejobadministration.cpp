@@ -202,10 +202,7 @@ onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const
     }
 
     // Create onlineTaskFactory
-    const QString pluginKeyword = plugins.first().rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["PluginKeyword"].toString();
-    // Can create only objects which inherit from QObject directly
-    QObject* taskFactoryObject = pluginFactory->create<QObject>(pluginKeyword, onlineJobAdministration::instance());
-    KMyMoneyPlugin::onlineTaskFactory* taskFactory = qobject_cast< KMyMoneyPlugin::onlineTaskFactory* >(taskFactoryObject);
+    auto taskFactory = pluginFactory->create<KMyMoneyPlugin::onlineTaskFactory>(onlineJobAdministration::instance());
     if (!taskFactory) {
         qWarning() << "Could not create online task factory for online task " << name << ", file name " << plugins.first().fileName() << ".";
         return nullptr;
@@ -351,7 +348,6 @@ onlineJobAdministration::onlineJobEditOffers onlineJobAdministration::onlineJobE
             if (!entry.toObject()["OnlineTaskIds"].isNull()) {
                 list.append(onlineJobAdministration::onlineJobEditOffer{
                     data.fileName(),
-                    entry.toObject()["PluginKeyword"].toString(),
                     KPluginMetaData::readTranslatedString(entry.toObject(), "Name")
                 });
             }

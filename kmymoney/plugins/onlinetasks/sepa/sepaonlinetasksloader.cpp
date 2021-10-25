@@ -13,13 +13,12 @@
 
 K_PLUGIN_FACTORY_WITH_JSON(sepaOnlineTasksFactory,
                            "kmymoney-sepaorders.json",
-                           registerPlugin<sepaOnlineTasksLoader>("sepaOnlineTasks");
-                           registerPlugin<sepaCreditTransferEdit>("sepaCreditTransferUi");
+                           registerPlugin<sepaOnlineTasksLoader>();
+                           registerPlugin<sepaCreditTransferEdit>();
                           )
 
-sepaOnlineTasksLoader::sepaOnlineTasksLoader(QObject* parent, const QVariantList& /*options*/)
-    : QObject(parent),
-      onlineTaskFactory()
+sepaOnlineTasksLoader::sepaOnlineTasksLoader(QObject* parent, const QVariantList& options)
+    : onlineTaskFactory(parent, options)
 {
 }
 

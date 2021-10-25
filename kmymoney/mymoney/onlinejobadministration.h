@@ -63,7 +63,6 @@ public:
 
     struct onlineJobEditOffer {
         QString fileName;
-        QString pluginKeyword;
         QString name;
     };
     using onlineJobEditOffers = QVector<onlineJobEditOffer>;
