@@ -83,4 +83,4 @@ done
 
 
 # remove the generated file to force regeneration
-rm -f icons.qrc
+rm -f kmm_icons.qrc

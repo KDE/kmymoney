@@ -14,6 +14,11 @@
 #include <QDir>
 #include <QStandardPaths>
 
+inline void initIconResources()
+{
+    Q_INIT_RESOURCE(kmm_icons);
+}
+
 namespace Icons {
 uint qHash(const Icon key, uint seed)
 {
@@ -191,6 +196,8 @@ const QHash<Icon, QString> iconMappings{
 
 KMM_ICONS_EXPORT QIcon get(Icon icon)
 {
+    initIconResources();
+
     return QIcon::fromTheme(iconMappings[icon]);
 }
 
