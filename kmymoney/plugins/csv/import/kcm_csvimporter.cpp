@@ -12,7 +12,7 @@
 #include <KAboutData>
 #include "pluginsettings.h"
 
-PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
+CSVImporterSettingsWidget::CSVImporterSettingsWidget(QWidget* parent) :
     QWidget(parent)
 {
     setupUi(this);
@@ -21,7 +21,7 @@ PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
 KCMCSVImporter::KCMCSVImporter(QWidget *parent, const QVariantList& args)
     : KCModule(parent, args)
 {
-    PluginSettingsWidget* w = new PluginSettingsWidget(this);
+    CSVImporterSettingsWidget* w = new CSVImporterSettingsWidget(this);
     addConfig(PluginSettings::self(), w);
     QVBoxLayout *layout = new QVBoxLayout;
     setLayout(layout);

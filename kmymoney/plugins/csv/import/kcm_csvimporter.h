@@ -10,11 +10,11 @@
 #include <QWidget>
 #include "ui_pluginsettingsdecl.h"
 
-class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
+class CSVImporterSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
 {
     Q_OBJECT
 public:
-    explicit PluginSettingsWidget(QWidget* parent = 0);
+    explicit CSVImporterSettingsWidget(QWidget* parent = 0);
 };
 
 class KCMCSVImporter : public KCModule

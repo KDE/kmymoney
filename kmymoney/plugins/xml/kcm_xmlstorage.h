@@ -22,13 +22,13 @@
 
 #include "ui_xmlstoragesettings.h"
 
-class PluginSettingsWidget : public QWidget, public Ui::XMLStorageSettings
+class XMLStorageSettingsWidget : public QWidget, public Ui::XMLStorageSettings
 {
     Q_OBJECT
-    Q_DISABLE_COPY(PluginSettingsWidget)
+    Q_DISABLE_COPY(XMLStorageSettingsWidget)
 
 public:
-    explicit PluginSettingsWidget(QWidget* parent = nullptr);
+    explicit XMLStorageSettingsWidget(QWidget* parent = nullptr);
 
 public Q_SLOTS:
     void showEvent(QShowEvent *event) override;

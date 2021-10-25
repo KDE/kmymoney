@@ -25,7 +25,7 @@
 #define RECOVER_KEY_ID      "0xD2B08440"
 #define RECOVER_KEY_ID_FULL "59B0F826D2B08440"
 
-PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
+XMLStorageSettingsWidget::XMLStorageSettingsWidget(QWidget* parent) :
     QWidget(parent)
 {
     setupUi(this);
@@ -38,23 +38,23 @@ PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
     // don't show the widget in which the master key is actually kept
     kcfg_GpgRecipient->hide();
 
-    connect(kcfg_WriteDataEncrypted, &QAbstractButton::toggled, this, &PluginSettingsWidget::slotStatusChanged);
-    connect(m_masterKeyCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, static_cast<void (PluginSettingsWidget::*)(int)>(&PluginSettingsWidget::slotIdChanged));
-    connect(kcfg_GpgRecipientList, &KEditListWidget::changed, this, static_cast<void (PluginSettingsWidget::*)()>(&PluginSettingsWidget::slotIdChanged));
-    connect(kcfg_GpgRecipientList, &KEditListWidget::added, this, &PluginSettingsWidget::slotKeyListChanged);
-    connect(kcfg_GpgRecipientList, &KEditListWidget::removed, this, &PluginSettingsWidget::slotKeyListChanged);
+    connect(kcfg_WriteDataEncrypted, &QAbstractButton::toggled, this, &XMLStorageSettingsWidget::slotStatusChanged);
+    connect(m_masterKeyCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, static_cast<void (XMLStorageSettingsWidget::*)(int)>(&XMLStorageSettingsWidget::slotIdChanged));
+    connect(kcfg_GpgRecipientList, &KEditListWidget::changed, this, static_cast<void (XMLStorageSettingsWidget::*)()>(&XMLStorageSettingsWidget::slotIdChanged));
+    connect(kcfg_GpgRecipientList, &KEditListWidget::added, this, &XMLStorageSettingsWidget::slotKeyListChanged);
+    connect(kcfg_GpgRecipientList, &KEditListWidget::removed, this, &XMLStorageSettingsWidget::slotKeyListChanged);
 
     // Initial state setup
     slotStatusChanged(kcfg_WriteDataEncrypted->isChecked());
 }
 
-void PluginSettingsWidget::slotKeyListChanged()
+void XMLStorageSettingsWidget::slotKeyListChanged()
 {
     m_needCheckList = true;
     slotIdChanged();
 }
 
-void PluginSettingsWidget::slotIdChanged()
+void XMLStorageSettingsWidget::slotIdChanged()
 {
     // this looks a bit awkward. Here's why: KGPGFile::keyAvailable() starts
     // an external task and processes UI events while it waits for the external
@@ -112,12 +112,12 @@ void PluginSettingsWidget::slotIdChanged()
     }
 }
 
-void PluginSettingsWidget::slotIdChanged(int)
+void XMLStorageSettingsWidget::slotIdChanged(int)
 {
     slotIdChanged();
 }
 
-void PluginSettingsWidget::showEvent(QShowEvent * event)
+void XMLStorageSettingsWidget::showEvent(QShowEvent * event)
 {
     QString masterKey;
 
@@ -159,7 +159,7 @@ void PluginSettingsWidget::showEvent(QShowEvent * event)
     QWidget::showEvent(event);
 }
 
-void PluginSettingsWidget::slotStatusChanged(bool state)
+void XMLStorageSettingsWidget::slotStatusChanged(bool state)
 {
     static bool oncePerSession = true;
     if (state && !KGPGFile::GPGAvailable())
@@ -190,7 +190,7 @@ void PluginSettingsWidget::slotStatusChanged(bool state)
 KCMXMLStorage::KCMXMLStorage(QWidget *parent, const QVariantList& args)
     : KCModule(parent, args)
 {
-    PluginSettingsWidget* w = new PluginSettingsWidget(this);
+    XMLStorageSettingsWidget* w = new XMLStorageSettingsWidget(this);
     addConfig(KMyMoneySettings::self(), w);
     QVBoxLayout *layout = new QVBoxLayout;
     setLayout(layout);

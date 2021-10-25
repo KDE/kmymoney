@@ -18,13 +18,13 @@
 class QTextEdit;
 class QTextDocument;
 
-class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
+class CheckPrintingSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
 {
 Q_OBJECT
 
 public:
-    explicit PluginSettingsWidget(QWidget* parent = 0);
-    ~PluginSettingsWidget();
+    explicit CheckPrintingSettingsWidget(QWidget* parent = 0);
+    ~CheckPrintingSettingsWidget();
 
 public Q_SLOTS:
     void urlSelected();
