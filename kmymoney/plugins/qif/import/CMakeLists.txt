@@ -5,7 +5,6 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/qifimporter.json.cmake ${CMAKE_CURREN
 
 set(qifimporter_PART_SRCS
   qifimporter.cpp
-  ../config/mymoneyqifprofile.cpp
   mymoneyqifreader.cpp
   kimportdlg.cpp
 )
@@ -35,4 +34,5 @@ target_link_libraries(qifimporter
     KF5::KIOWidgets
     Alkimia::alkimia
     kmm_settings
+    qif_common_static
 )

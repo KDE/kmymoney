@@ -5,7 +5,6 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/qifexporter.json.cmake ${CMAKE_CURREN
 
 set(qifexporter_PART_SRCS
   qifexporter.cpp
-  ../config/mymoneyqifprofile.cpp
   mymoneyqifwriter.cpp
   kexportdlg.cpp
 )
@@ -28,6 +27,7 @@ set_target_properties(qifexporter
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(qifexporter
+  qif_common_static
   kmm_plugin
   kmm_models
   kmm_base_widgets

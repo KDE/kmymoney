@@ -1,3 +1,7 @@
+if (ENABLE_QIFIMPORTER OR ENABLE_QIFEXPORTER)
+    add_library(qif_common_static STATIC config/mymoneyqifprofile.cpp)
+    target_link_libraries(qif_common_static kmm_widgets)
+endif()
 if(ENABLE_QIFIMPORTER)
   add_subdirectory( import )
 endif()

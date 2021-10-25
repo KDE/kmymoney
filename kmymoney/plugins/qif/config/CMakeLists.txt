@@ -1,7 +1,6 @@
 # the KCM module
 set(kcm_qif_PART_SRCS
     mymoneyqifprofileeditor.cpp
-    mymoneyqifprofile.cpp
     kcm_qif.cpp
     )
 
@@ -20,6 +19,7 @@ set_target_properties(kcm_qif
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(kcm_qif
+                      qif_common_static
                       kmm_mymoney
                       KF5::I18n
                       KF5::ConfigWidgets
