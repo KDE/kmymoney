@@ -212,6 +212,7 @@ TemplateLoader::TemplateLoader(QWidget* parent) :
     QObject(parent),
     d_ptr(new TemplateLoaderPrivate(this))
 {
+    Q_INIT_RESOURCE(templates);
 }
 
 TemplateLoader::~TemplateLoader()

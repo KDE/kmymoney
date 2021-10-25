@@ -123,6 +123,8 @@ OFXImporter::OFXImporter(QObject *parent, const KPluginMetaData &metaData, const
     KMyMoneyPlugin::ImporterPlugin(),
     d(new Private)
 {
+    Q_INIT_RESOURCE(ofximporter);
+
     const auto rcFileName = QLatin1String("ofximporter.rc");
 
     setXMLFile(rcFileName);

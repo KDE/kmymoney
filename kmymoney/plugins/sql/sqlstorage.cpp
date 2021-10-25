@@ -76,6 +76,8 @@ SQLStorage::SQLStorage(QObject *parent, const KPluginMetaData &metaData, const Q
     KMyMoneyPlugin::Plugin(parent, metaData, args)
 #endif
 {
+    Q_INIT_RESOURCE(sqlstorage);
+
     const auto rcFileName = QLatin1String("sqlstorage.rc");
 
     setXMLFile(rcFileName);

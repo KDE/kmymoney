@@ -34,6 +34,8 @@ QIFExporter::QIFExporter(QObject *parent, const KPluginMetaData &metaData, const
     KMyMoneyPlugin::Plugin(parent, metaData, args)
 #endif
 {
+    Q_INIT_RESOURCE(qifexporter);
+
     const auto rcFileName = QLatin1String("qifexporter.rc");
     setXMLFile(rcFileName);
 

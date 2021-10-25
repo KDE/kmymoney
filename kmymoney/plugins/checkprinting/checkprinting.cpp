@@ -172,6 +172,8 @@ CheckPrinting::CheckPrinting(QObject *parent, const KPluginMetaData &metaData, c
     KMyMoneyPlugin::Plugin(parent, metaData, args)
 #endif
 {
+    Q_INIT_RESOURCE(checkprinting);
+
     // Tell the host application to load my GUI component
     const auto rcFileName = QLatin1String("checkprinting.rc");
 

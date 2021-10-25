@@ -40,6 +40,8 @@ CSVExporter::CSVExporter(QObject *parent, const KPluginMetaData &metaData, const
 #endif
     , m_action(nullptr)
 {
+    Q_INIT_RESOURCE(csvexporter);
+
     const auto rcFileName = QLatin1String("csvexporter.rc");
     setXMLFile(rcFileName);
 

@@ -44,6 +44,8 @@ iCalendarExporter::iCalendarExporter(QObject *parent, const KPluginMetaData &met
 #endif
     d(std::unique_ptr<Private>(new Private))
 {
+    Q_INIT_RESOURCE(icalendarexporter);
+
     d->m_profileName = "iCalendarPlugin";
     d->m_iCalendarFileEntryName = "iCalendarFile";
 

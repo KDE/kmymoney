@@ -38,6 +38,8 @@ CSVImporter::CSVImporter(QObject *parent, const KPluginMetaData &metaData, const
 #endif
     , m_action(nullptr)
 {
+    Q_INIT_RESOURCE(csvimporter);
+
     const auto rcFileName = QLatin1String("csvimporter.rc");
     setXMLFile(rcFileName);
 

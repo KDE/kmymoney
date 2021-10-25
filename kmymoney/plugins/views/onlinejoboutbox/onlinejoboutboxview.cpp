@@ -31,6 +31,8 @@ OnlineJobOutboxView::OnlineJobOutboxView(QObject *parent, const KPluginMetaData 
 #endif
     m_view(nullptr)
 {
+    Q_INIT_RESOURCE(onlinejoboutboxview);
+
     // For information, announce that we have been loaded.
     qDebug("Plugins: onlinejoboutboxview loaded");
 }

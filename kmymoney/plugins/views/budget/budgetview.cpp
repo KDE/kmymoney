@@ -33,6 +33,8 @@ BudgetView::BudgetView(QObject *parent, const KPluginMetaData &metaData, const Q
 #endif
     m_view(nullptr)
 {
+    Q_INIT_RESOURCE(budgetview);
+
     // For information, announce that we have been loaded.
     qDebug("Plugins: budgetview loaded");
 }

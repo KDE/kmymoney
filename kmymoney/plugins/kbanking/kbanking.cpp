@@ -171,6 +171,10 @@ KBanking::KBanking(QObject *parent, const KPluginMetaData &metaData, const QVari
     , m_statementCount(0)
 {
     Q_UNUSED(args)
+
+    Q_INIT_RESOURCE(kbanking);
+    Q_INIT_RESOURCE(chipTan);
+
     QString compileVersionSet = QLatin1String(GWENHYWFAR_VERSION_FULL_STRING "/" AQBANKING_VERSION_FULL_STRING);
     QString runtimeVersionSet = QString("%1/%2").arg(d->libVersion(&GWEN_Version), d->libVersion(&AB_Banking_GetVersion));
     qDebug() << QString("Plugins: kbanking loaded, build with (%1), run with (%2)").arg(compileVersionSet, runtimeVersionSet);

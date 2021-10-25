@@ -38,6 +38,8 @@ QIFImporter::QIFImporter(QObject *parent, const KPluginMetaData &metaData, const
 #endif
     m_qifReader(nullptr)
 {
+    Q_INIT_RESOURCE(qifimporter);
+
     const auto rcFileName = QLatin1String("qifimporter.rc");
     setXMLFile(rcFileName);
 

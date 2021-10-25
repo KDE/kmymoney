@@ -84,6 +84,8 @@ Woob::Woob(QObject* parent, const KPluginMetaData& metaData, const QVariantList&
 #endif
     , d_ptr(new WoobPrivate)
 {
+    Q_INIT_RESOURCE(woob);
+
     const auto rcFileName = QLatin1String("woob.rc");
     setXMLFile(rcFileName);
 
