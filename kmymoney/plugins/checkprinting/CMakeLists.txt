@@ -1,6 +1,10 @@
 # patch the version with the version defined in the build system
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/checkprinting.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/checkprinting.json @ONLY)
 
+add_library(checkprinting_settings_static STATIC)
+target_link_libraries(checkprinting_settings_static KF5::ConfigGui)
+kconfig_add_kcfg_files(checkprinting_settings_static checkprintingsettings.kcfgc)
+
 set(checkprinting_PART_SRCS
     numbertowords.cpp
     checkprinting.cpp
@@ -22,6 +26,7 @@ set_target_properties(checkprinting
 target_link_libraries(checkprinting
   Qt5::PrintSupport
   KF5::I18n
+  checkprinting_settings_static
   kmm_mymoney
   kmm_plugin
   kmm_printer
@@ -40,8 +45,6 @@ set(kcm_checkprinting_PART_SRCS
     kcm_checkprinting.cpp
     )
 
-kconfig_add_kcfg_files(kcm_checkprinting_PART_SRCS pluginsettings.kcfgc)
-
 ki18n_wrap_ui(kcm_checkprinting_PART_SRCS pluginsettingsdecl.ui)
 
 kcoreaddons_add_plugin(kcm_checkprinting
@@ -57,6 +60,7 @@ set_target_properties(kcm_checkprinting
 
 target_link_libraries(
                       kcm_checkprinting
+                      checkprinting_settings_static
                       kmm_url
                       Qt5::PrintSupport
                       KF5::I18n

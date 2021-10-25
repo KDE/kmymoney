@@ -1,5 +1,9 @@
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/forecastview.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/forecastview.json @ONLY)
 
+add_library(forecast_settings_static STATIC)
+target_link_libraries(forecast_settings_static KF5::ConfigGui)
+kconfig_add_kcfg_files(forecast_settings_static forecastviewsettings.kcfgc)
+
 set(forecastview_SOURCES
   forecastview.cpp
   kforecastview.cpp
@@ -9,8 +13,6 @@ set(forecastview_SOURCES
 ki18n_wrap_ui(forecastview_SOURCES kforecastview.ui)
 
 qt5_add_resources(forecastview_SOURCES forecastview.qrc)
-
-kconfig_add_kcfg_files(forecastview_SOURCES forecastviewsettings.kcfgc)
 
 kcoreaddons_add_plugin(forecastview
                        SOURCES ${forecastview_SOURCES}
@@ -23,6 +25,7 @@ set_target_properties(forecastview
 
 target_link_libraries(forecastview
   PUBLIC
+    forecast_settings_static
     kmm_plugin
     KF5::TextWidgets
     kmm_widgets
@@ -34,8 +37,6 @@ target_link_libraries(forecastview
 set(kcm_forecastview_PART_SRCS
     kcm_forecastview.cpp
     )
-
-kconfig_add_kcfg_files(kcm_forecastview_PART_SRCS forecastviewsettings.kcfgc)
 
 ki18n_wrap_ui(kcm_forecastview_PART_SRCS forecastviewsettings.ui)
 
@@ -51,6 +52,7 @@ set_target_properties(kcm_forecastview
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(kcm_forecastview
+                      forecast_settings_static
                       KF5::I18n
                       KF5::ConfigWidgets
                       KF5::Completion

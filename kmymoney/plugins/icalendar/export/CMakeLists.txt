@@ -4,12 +4,14 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/icalendarexporter.json.cmake
   @ONLY
 )
 
+add_library(icalendar_settings_static STATIC)
+target_link_libraries(icalendar_settings_static KF5::ConfigGui)
+kconfig_add_kcfg_files(icalendar_settings_static icalendarsettings.kcfgc)
+
 set(icalendarexporter_PART_SRCS
   schedulestoicalendar.cpp
   icalendarexporter.cpp
 )
-
-kconfig_add_kcfg_files(icalendarexporter_PART_SRCS icalendarsettings.kcfgc)
 
 qt5_add_resources(icalendarexporter_PART_SRCS icalendarexporter.qrc)
 
@@ -24,6 +26,7 @@ set_target_properties(icalendarexporter
 
 target_include_directories(icalendarexporter PRIVATE ${LibIcal_INCLUDE_DIRS})
 target_link_libraries(icalendarexporter
+  icalendar_settings_static
   KF5::KIOWidgets
   kmm_mymoney
   kmm_plugin
@@ -36,7 +39,6 @@ set(kcm_icalendarexporter_PART_SRCS
     kcm_icalendarexporter.cpp
     )
 
-kconfig_add_kcfg_files(kcm_icalendarexporter_PART_SRCS icalendarsettings.kcfgc)
 ki18n_wrap_ui(kcm_icalendarexporter_PART_SRCS pluginsettingsdecl.ui)
 
 kcoreaddons_add_plugin(kcm_icalendarexporter
@@ -51,6 +53,7 @@ set_target_properties(kcm_icalendarexporter
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(kcm_icalendarexporter
+  icalendar_settings_static
   KF5::I18n
   KF5::ConfigWidgets
   KF5::KIOWidgets

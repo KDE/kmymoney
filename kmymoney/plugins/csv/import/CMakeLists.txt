@@ -8,6 +8,9 @@ endif()
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/csvimporter.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/csvimporter.json @ONLY)
 
 ########### next target ###############
+add_library(csvimporter_settings_static STATIC)
+target_link_libraries(csvimporter_settings_static KF5::ConfigGui)
+kconfig_add_kcfg_files(csvimporter_settings_static pluginsettings.kcfgc)
 
 set(csvimporter_PART_SRCS
   csvimporter.cpp
@@ -20,8 +23,6 @@ set(csvimporter_PART_SRCS
   securitydlg.cpp
   currenciesdlg.cpp
 )
-
-kconfig_add_kcfg_files(csvimporter_PART_SRCS pluginsettings.kcfgc)
 
 qt5_add_resources(csvimporter_PART_SRCS csvimporter.qrc)
 
@@ -52,6 +53,7 @@ set_target_properties(csvimporter
 
 target_link_libraries(csvimporter
   PUBLIC
+    csvimporter_settings_static
     kmm_csvimportercore
     kmm_plugin
 )
@@ -62,8 +64,6 @@ target_link_libraries(csvimporter
 set(kcm_csvimporter_PART_SRCS
     kcm_csvimporter.cpp
     )
-
-kconfig_add_kcfg_files(kcm_csvimporter_PART_SRCS pluginsettings.kcfgc)
 
 ki18n_wrap_ui(kcm_csvimporter_PART_SRCS pluginsettingsdecl.ui)
 
@@ -79,6 +79,7 @@ set_target_properties(kcm_csvimporter
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(kcm_csvimporter
+                      csvimporter_settings_static
                       KF5::I18n
                       KF5::ConfigWidgets
                       )
