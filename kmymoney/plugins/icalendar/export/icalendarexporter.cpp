@@ -25,7 +25,7 @@
 #include "pluginloader.h"
 
 #include "schedulestoicalendar.h"
-#include "pluginsettings.h"
+#include "icalendarsettings.h"
 #include "viewinterface.h"
 
 struct iCalendarExporter::Private {
@@ -63,16 +63,16 @@ iCalendarExporter::iCalendarExporter(QObject *parent, const KPluginMetaData &met
     icalFilePath = config.readEntry(d->m_iCalendarFileEntryName, icalFilePath);
 
     // read the settings
-    PluginSettings::self()->load();
+    ICalendarSettings::self()->load();
 
     if (!icalFilePath.isEmpty()) {
         // move the old setting to the new config
-        PluginSettings::setIcalendarFile(icalFilePath);
-        PluginSettings::self()->save();
+        ICalendarSettings::setIcalendarFile(icalFilePath);
+        ICalendarSettings::self()->save();
         KSharedConfig::openConfig()->deleteGroup(d->m_profileName);
     } else {
         // read it from the new config
-        icalFilePath = PluginSettings::icalendarFile();
+        icalFilePath = ICalendarSettings::icalendarFile();
     }
 
     if (!icalFilePath.isEmpty())
@@ -101,8 +101,8 @@ void iCalendarExporter::slotFirstExport()
     if (fileDialog->exec() == QDialog::Accepted) {
         QUrl newURL = fileDialog->selectedUrls().front();
         if (newURL.isLocalFile()) {
-            PluginSettings::setIcalendarFile(newURL.toLocalFile());
-            PluginSettings::self()->save();
+            ICalendarSettings::setIcalendarFile(newURL.toLocalFile());
+            ICalendarSettings::self()->save();
             slotExport();
         }
     }
@@ -111,7 +111,7 @@ void iCalendarExporter::slotFirstExport()
 
 void iCalendarExporter::slotExport()
 {
-    QString icalFilePath = PluginSettings::icalendarFile();
+    QString icalFilePath = ICalendarSettings::icalendarFile();
     if (!icalFilePath.isEmpty())
         d->m_exporter.exportToFile(icalFilePath);
 }
@@ -129,9 +129,9 @@ void iCalendarExporter::unplug()
 
 void iCalendarExporter::updateConfiguration()
 {
-    PluginSettings::self()->load();
+    ICalendarSettings::self()->load();
     // export the schedules because the configuration has changed
-    QString icalFilePath = PluginSettings::icalendarFile();
+    QString icalFilePath = ICalendarSettings::icalendarFile();
     if (!icalFilePath.isEmpty())
         d->m_exporter.exportToFile(icalFilePath);
 }

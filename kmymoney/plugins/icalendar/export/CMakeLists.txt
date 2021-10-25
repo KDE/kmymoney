@@ -9,7 +9,7 @@ set(icalendarexporter_PART_SRCS
   icalendarexporter.cpp
 )
 
-kconfig_add_kcfg_files(icalendarexporter_PART_SRCS pluginsettings.kcfgc)
+kconfig_add_kcfg_files(icalendarexporter_PART_SRCS icalendarsettings.kcfgc)
 
 qt5_add_resources(icalendarexporter_PART_SRCS icalendarexporter.qrc)
 
@@ -36,7 +36,7 @@ set(kcm_icalendarexporter_PART_SRCS
     kcm_icalendarexporter.cpp
     )
 
-kconfig_add_kcfg_files(kcm_icalendarexporter_PART_SRCS pluginsettings.kcfgc)
+kconfig_add_kcfg_files(kcm_icalendarexporter_PART_SRCS icalendarsettings.kcfgc)
 ki18n_wrap_ui(kcm_icalendarexporter_PART_SRCS pluginsettingsdecl.ui)
 
 kcoreaddons_add_plugin(kcm_icalendarexporter

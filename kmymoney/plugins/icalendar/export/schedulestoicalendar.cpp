@@ -30,7 +30,7 @@
 #include "mymoneyenums.h"
 
 // plugin includes
-#include "pluginsettings.h"
+#include "icalendarsettings.h"
 
 using namespace eMyMoney;
 
@@ -331,7 +331,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
         if (oldAlarm && settingsChaged)
             icalcomponent_remove_component(schedule, oldAlarm);
 
-        if (PluginSettings::createAlarm() && (!oldAlarm || settingsChaged)) {
+        if (ICalendarSettings::createAlarm() && (!oldAlarm || settingsChaged)) {
             // alarm: beginning with one day before the todo is due every one hour
             icalcomponent* alarm = icalcomponent_new_valarm();
             // alarm: action
@@ -339,14 +339,14 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
             // alarm: description
             icalcomponent_set_description(alarm, scheduleToDescription(myMoneySchedule).toUtf8());
             // alarm: trigger
-            int triggerInterval = beforeAfterToInt(PluginSettings::beforeAfter()) * PluginSettings::timeUnits() * timeUnitsInSeconds(PluginSettings::timeUnitInSeconds());
+            int triggerInterval = beforeAfterToInt(ICalendarSettings::beforeAfter()) * ICalendarSettings::timeUnits() * timeUnitsInSeconds(ICalendarSettings::timeUnitInSeconds());
             icalcomponent_add_property(alarm, icalproperty_new_trigger(icaltriggertype_from_int(triggerInterval)));
             // alarm: duration
-            int intervalBetweenReminders = PluginSettings::intervalBetweenRemindersTimeUnits() * timeUnitsInSeconds(PluginSettings::intervalBetweenRemindersTimeUnitInSeconds());
+            int intervalBetweenReminders = ICalendarSettings::intervalBetweenRemindersTimeUnits() * timeUnitsInSeconds(ICalendarSettings::intervalBetweenRemindersTimeUnitInSeconds());
             icalcomponent_set_duration(alarm, icaldurationtype_from_int(intervalBetweenReminders));
-            if (PluginSettings::repeatingReminders()) {
+            if (ICalendarSettings::repeatingReminders()) {
                 // alarm: repeat
-                icalcomponent_add_property(alarm, icalproperty_new_repeat(PluginSettings::numberOfReminders()));
+                icalcomponent_add_property(alarm, icalproperty_new_repeat(ICalendarSettings::numberOfReminders()));
             }
             // add the alarm to the schedule
             icalcomponent_add_component(schedule, alarm);

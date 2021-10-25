@@ -15,7 +15,7 @@
 #include <KLocalizedString>
 #include <KAboutData>
 
-#include "pluginsettings.h"
+#include "icalendarsettings.h"
 #include "ui_pluginsettingsdecl.h"
 
 class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
@@ -50,7 +50,7 @@ KCMiCalendarExporter::KCMiCalendarExporter(QWidget *parent, const QVariantList& 
     setAboutData( about );
 
     PluginSettingsWidget *w = new PluginSettingsWidget(this);
-    addConfig(PluginSettings::self(), w);
+    addConfig(ICalendarSettings::self(), w);
     QVBoxLayout *layout = new QVBoxLayout;
     setLayout(layout);
     layout->addWidget(w);
@@ -61,7 +61,7 @@ KCMiCalendarExporter::~KCMiCalendarExporter()
 {
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(KCMiCalendarExporterFactory,
+K_PLUGIN_FACTORY_WITH_JSON(kcm_icalendarexporter_factory,
                            "kcm_icalendarexporter.json",
                            registerPlugin<KCMiCalendarExporter>();
                           )
