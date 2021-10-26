@@ -84,5 +84,6 @@
         "Name[zh_CN]": "XML 存储",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
-    }
+    },
+    "X-KDE-ConfigModule": "kmymoney/kcms/kcm_xmlstorage"
 }

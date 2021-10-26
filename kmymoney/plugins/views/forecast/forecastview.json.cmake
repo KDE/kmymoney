@@ -86,5 +86,6 @@
         "Name[zh_CN]": "预测视图",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
-    }
+    },
+    "X-KDE-ConfigModule": "kmymoney/kcms/kcm_forecastview"
 }

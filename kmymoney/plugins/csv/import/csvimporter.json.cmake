@@ -89,5 +89,6 @@
         "Name[zh_CN]": "CSV 导入工具",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
-    }
+    },
+    "X-KDE-ConfigModule": "kmymoney/kcms/kcm_csvimporter"
 }
