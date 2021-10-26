@@ -39,7 +39,7 @@ set(kcm_icalendarexporter_PART_SRCS
     kcm_icalendarexporter.cpp
     )
 
-ki18n_wrap_ui(kcm_icalendarexporter_PART_SRCS pluginsettingsdecl.ui)
+ki18n_wrap_ui(kcm_icalendarexporter_PART_SRCS icalendarsettingsdecl.ui)
 
 kcoreaddons_add_plugin(kcm_icalendarexporter
                        SOURCES ${kcm_icalendarexporter_PART_SRCS}

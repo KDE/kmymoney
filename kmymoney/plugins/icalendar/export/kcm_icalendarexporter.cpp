@@ -16,9 +16,9 @@
 #include <KAboutData>
 
 #include "icalendarsettings.h"
-#include "ui_pluginsettingsdecl.h"
+#include "ui_icalendarsettingsdecl.h"
 
-class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
+class PluginSettingsWidget : public QWidget, public Ui::ICalendarSettingsDecl
 {
 public:
     PluginSettingsWidget(QWidget* parent = 0) : QWidget(parent) {

@@ -6,8 +6,8 @@
 #ifndef KCM_CHECKPRINTING_H
 #define KCM_CHECKPRINTING_H
 
+#include "ui_checkprintingsettingsdecl.h"
 #include <config-kmymoney.h>
-#include "ui_pluginsettingsdecl.h"
 
 #include <KCModule>
 #include <QWidget>
@@ -18,7 +18,7 @@
 class QTextEdit;
 class QTextDocument;
 
-class CheckPrintingSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
+class CheckPrintingSettingsWidget : public QWidget, public Ui::CheckPrintingSettingsDecl
 {
 Q_OBJECT
 

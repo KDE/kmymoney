@@ -45,7 +45,7 @@ set(kcm_checkprinting_PART_SRCS
     kcm_checkprinting.cpp
     )
 
-ki18n_wrap_ui(kcm_checkprinting_PART_SRCS pluginsettingsdecl.ui)
+ki18n_wrap_ui(kcm_checkprinting_PART_SRCS checkprintingsettingsdecl.ui)
 
 kcoreaddons_add_plugin(kcm_checkprinting
                        SOURCES ${kcm_checkprinting_PART_SRCS}
