@@ -158,25 +158,25 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
     e.setAttribute(getAttrName(Statement::Attribute::SkipCategoryMatching), m_skipCategoryMatching);
 
     // iterate over transactions, and add each one
-    foreach (const auto tansaction, m_listTransactions) {
+    foreach (const auto transaction, m_listTransactions) {
         auto p = _doc->createElement(getElName(Statement::Element::Transaction));
-        p.setAttribute(getAttrName(Statement::Attribute::DatePosted), tansaction.m_datePosted.toString(Qt::ISODate));
-        p.setAttribute(getAttrName(Statement::Attribute::Payee), tansaction.m_strPayee);
-        p.setAttribute(getAttrName(Statement::Attribute::Memo), tansaction.m_strMemo);
-        p.setAttribute(getAttrName(Statement::Attribute::Number), tansaction.m_strNumber);
-        p.setAttribute(getAttrName(Statement::Attribute::Amount), tansaction.m_amount.toString());
-        p.setAttribute(getAttrName(Statement::Attribute::BankID), tansaction.m_strBankID);
-        p.setAttribute(getAttrName(Statement::Attribute::Reconcile), (int)tansaction.m_reconcile);
-        p.setAttribute(getAttrName(Statement::Attribute::Action), txAction[tansaction.m_eAction]);
+        p.setAttribute(getAttrName(Statement::Attribute::DatePosted), transaction.m_datePosted.toString(Qt::ISODate));
+        p.setAttribute(getAttrName(Statement::Attribute::Payee), transaction.m_strPayee);
+        p.setAttribute(getAttrName(Statement::Attribute::Memo), transaction.m_strMemo);
+        p.setAttribute(getAttrName(Statement::Attribute::Number), transaction.m_strNumber);
+        p.setAttribute(getAttrName(Statement::Attribute::Amount), transaction.m_amount.toString());
+        p.setAttribute(getAttrName(Statement::Attribute::BankID), transaction.m_strBankID);
+        p.setAttribute(getAttrName(Statement::Attribute::Reconcile), (int)transaction.m_reconcile);
+        p.setAttribute(getAttrName(Statement::Attribute::Action), txAction[transaction.m_eAction]);
 
         if (m_eType == eMyMoney::Statement::Type::Investment) {
-            p.setAttribute(getAttrName(Statement::Attribute::Shares), tansaction.m_shares.toString());
-            p.setAttribute(getAttrName(Statement::Attribute::Security), tansaction.m_strSecurity);
-            p.setAttribute(getAttrName(Statement::Attribute::BrokerageAccount), tansaction.m_strBrokerageAccount);
+            p.setAttribute(getAttrName(Statement::Attribute::Shares), transaction.m_shares.toString());
+            p.setAttribute(getAttrName(Statement::Attribute::Security), transaction.m_strSecurity);
+            p.setAttribute(getAttrName(Statement::Attribute::BrokerageAccount), transaction.m_strBrokerageAccount);
         }
 
         // add all the splits we know of (might be empty)
-        foreach (const auto split, tansaction.m_listSplits) {
+        foreach (const auto split, transaction.m_listSplits) {
             auto el = _doc->createElement(getElName(Statement::Element::Split));
             el.setAttribute(getAttrName(Statement::Attribute::AccountID), split.m_accountId);
             el.setAttribute(getAttrName(Statement::Attribute::Amount), split.m_amount.toString());

@@ -51,7 +51,7 @@
           <account name="Property Taxes" type="13"/>
         </account>
         <account name="Travel" type="13">
-          <account name="Accomodations" type="13"/>
+          <account name="Accommodations" type="13"/>
           <account name="Fares" type="13"/>
           <account name="Car Rental" type="13"/>
         </account>
@@ -136,7 +136,7 @@
         </account>
       </account>
       <account name="Holidays" type="13">
-        <account name="Accomodation" type="13"/>
+        <account name="Accommodation" type="13"/>
         <account name="Travel" type="13"/>
       </account>
       <account name="Household" type="13">

@@ -56,7 +56,7 @@
     <account type="13" name="Wages/Salary" />
     <account type="13" name="Advertising" />
     <account type="13" name="Contract Labor" />
-    <account type="13" name="Commisions and Fees" />
+    <account type="13" name="Commissions and Fees" />
     <account type="13" name="Employee Benefit Programs" />
     <account type="13" name="Insurance (other than Health)" />
     <account type="13" name="Interest" >

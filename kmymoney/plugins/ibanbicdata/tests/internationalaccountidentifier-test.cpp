@@ -150,7 +150,7 @@ void internationalAccountIdentifierTest::setBic_data()
     QTest::newRow("Arbitrary case") << "RZtIaT22263" << "RZTIAT22263" << "RZTIAT22263";
     QTest::newRow("Without XXX")    << "MARKDEFF"    << "MARKDEFF"    << "MARKDEFFXXX";
     QTest::newRow("With XXX")       << "MARKDEFFXXX" << "MARKDEFF"    << "MARKDEFFXXX";
-    QTest::newRow("Arbitray bic")   << "GENODEF1JEV" << "GENODEF1JEV" << "GENODEF1JEV";
+    QTest::newRow("Arbitrary bic")  << "GENODEF1JEV" << "GENODEF1JEV" << "GENODEF1JEV";
 }
 
 void internationalAccountIdentifierTest::setBic()

@@ -59,7 +59,7 @@
         <account name="Prescriptions" type="13"/>
       </account>
       <account name="Holidays" type="13">
-        <account name="Accomodation" type="13"/>
+        <account name="Accommodation" type="13"/>
         <account name="Travel" type="13"/>
       </account>
       <account name="Household" type="13">

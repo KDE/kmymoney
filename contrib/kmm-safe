@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # make a copy of KMyMoney files in a 'safe' directory whenever
-# the contents of the orignal changed since the last run of this program.
+# the contents of the original changed since the last run of this program.
 # In order to make it work for you, please modify the parameters
 # and erase the line following it.
 #

@@ -20,7 +20,7 @@
 MYDIR=$HOME/money # directory where the encrypted copy is to be held
 BUDIR=$MYDIR/backup # directory where the backups should go;
 FILE=myfin # name for the encrypted copy
-DBNAME=KMyMoney # mysql datbase name
+DBNAME=KMyMoney # mysql database name
 DROP=y # (y/n) - whether to delete info from database after running kmm
 SILENT=n # if set to y, backups will be deleted silently, else you will be asked
 CRYPTEMAIL=me@googlemail.com # delete this line if you don't want encrypted copies

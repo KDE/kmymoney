@@ -83,7 +83,7 @@
     <account type="13" name="Dining Out" />
     <account type="13" name="Groceries" />
    </account>
-   <account type="13" name="Home Maintainance" >
+   <account type="13" name="Home Maintenance" >
     <account type="13" name="Repairs" />
     <account type="13" name="Improvements" />
     <account type="13" name="Yard &amp; Garden" />
@@ -103,7 +103,7 @@
    </account>
    <account type="13" name="Personal Care" />
    <account type="13" name="Vacation &amp; Holiday" >
-    <account type="13" name="Accomodations" />
+    <account type="13" name="Accommodations" />
     <account type="13" name="Travel" />
     <account type="13" name="Other" />
     <account type="13" name="Meals" />
