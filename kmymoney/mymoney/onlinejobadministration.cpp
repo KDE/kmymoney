@@ -21,7 +21,6 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-#include <KServiceTypeTrader>
 #include <KPluginMetaData>
 #include <KService>
 
