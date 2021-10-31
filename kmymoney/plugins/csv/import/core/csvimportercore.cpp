@@ -61,29 +61,28 @@ const QHash<Column, QString> CSVImporterCore::m_colTypeConfName {
     {Column::Balance, QStringLiteral("BalanceCol")},
 };
 
-const QHash<miscSettingsE, QString> CSVImporterCore::m_miscSettingsConfName {
-    {ConfDirectory, QStringLiteral("Directory")},
-    {ConfEncoding, QStringLiteral("Encoding")},
-    {ConfDateFormat, QStringLiteral("DateFormat")},
-    {ConfFieldDelimiter, QStringLiteral("FieldDelimiter")},
-    {ConfTextDelimiter, QStringLiteral("TextDelimiter")},
-    {ConfDecimalSymbol, QStringLiteral("DecimalSymbol")},
-    {ConfStartLine, QStringLiteral("StartLine")},
-    {ConfTrailerLines, QStringLiteral("TrailerLines")},
-    {ConfOppositeSigns, QStringLiteral("OppositeSigns")},
-    {ConfFeeIsPercentage, QStringLiteral("FeeIsPercentage")},
-    {ConfFeeRate, QStringLiteral("FeeRate")},
-    {ConfMinFee, QStringLiteral("MinFee")},
-    {ConfSecurityName, QStringLiteral("SecurityName")},
-    {ConfSecuritySymbol, QStringLiteral("SecuritySymbol")},
-    {ConfCurrencySymbol, QStringLiteral("CurrencySymbol")},
-    {ConfPriceFraction, QStringLiteral("PriceFraction")},
-    {ConfDontAsk, QStringLiteral("DontAsk")},
-    {ConfHeight, QStringLiteral("Height")},
-    {ConfWidth, QStringLiteral("Width")},
-    {ConfCreditIndicator, QStringLiteral("CreditIndicator")},
-    {ConfDebitIndicator, QStringLiteral("DebitIndicator")},
-};
+const QHash<miscSettingsE, QString> CSVImporterCore::m_miscSettingsConfName{{ConfDirectory, QStringLiteral("Directory")},
+                                                                            {ConfEncoding, QStringLiteral("Encoding")},
+                                                                            {ConfDateFormat, QStringLiteral("DateFormat")},
+                                                                            {ConfFieldDelimiter, QStringLiteral("FieldDelimiter")},
+                                                                            {ConfTextDelimiter, QStringLiteral("TextDelimiter")},
+                                                                            {ConfDecimalSymbol, QStringLiteral("DecimalSymbol")},
+                                                                            {ConfStartLine, QStringLiteral("StartLine")},
+                                                                            {ConfTrailerLines, QStringLiteral("TrailerLines")},
+                                                                            {ConfOppositeSigns, QStringLiteral("OppositeSigns")},
+                                                                            {ConfFeeIsPercentage, QStringLiteral("FeeIsPercentage")},
+                                                                            {ConfFeeRate, QStringLiteral("FeeRate")},
+                                                                            {ConfMinFee, QStringLiteral("MinFee")},
+                                                                            {ConfSecurityName, QStringLiteral("SecurityName")},
+                                                                            {ConfSecuritySymbol, QStringLiteral("SecuritySymbol")},
+                                                                            {ConfCurrencySymbol, QStringLiteral("CurrencySymbol")},
+                                                                            {ConfPriceFraction, QStringLiteral("PriceFraction")},
+                                                                            {ConfDontAsk, QStringLiteral("DontAsk")},
+                                                                            {ConfHeight, QStringLiteral("Height")},
+                                                                            {ConfWidth, QStringLiteral("Width")},
+                                                                            {ConfCreditIndicator, QStringLiteral("CreditIndicator")},
+                                                                            {ConfDebitIndicator, QStringLiteral("DebitIndicator")},
+                                                                            {ConfAutoAccountName, QStringLiteral("AutoAccountName")}};
 
 const QHash<eMyMoney::Transaction::Action, QString> CSVImporterCore::m_transactionConfName {
     {eMyMoney::Transaction::Action::Buy, QStringLiteral("BuyParam")},
@@ -174,8 +173,6 @@ void CSVImporterCore::readMiscSettings() {
     m_autodetect.insert(AutoFieldDelimiter, miscGroup.readEntry(QStringLiteral("AutoFieldDelimiter"), true));
     m_autodetect.insert(AutoDecimalSymbol, miscGroup.readEntry(QStringLiteral("AutoDecimalSymbol"), true));
     m_autodetect.insert(AutoDateFormat, miscGroup.readEntry(QStringLiteral("AutoDateFormat"), true));
-    m_autodetect.insert(AutoAccountInvest, miscGroup.readEntry(QStringLiteral("AutoAccountInvest"), true));
-    m_autodetect.insert(AutoAccountBank, miscGroup.readEntry(QStringLiteral("AutoAccountBank"), true));
 }
 
 void CSVImporterCore::validateConfigFile()
@@ -1401,11 +1398,12 @@ bool CSVImporterCore::createStatement(MyMoneyStatement &st)
         if (!st.m_listTransactions.isEmpty()) // don't create statement if there is one
             return true;
         st.m_eType = eMyMoney::Statement::Type::None;
-        if (m_autodetect.value(AutoAccountBank))
-            detectAccount(st);
 
         m_hashSet.clear();
         BankingProfile *profile = dynamic_cast<BankingProfile *>(m_profile);
+        if (profile->m_autoAccountName)
+            detectAccount(st);
+
         for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row)
             if (!processBankRow(st, profile, row)) { // parse fields
                 st = MyMoneyStatement();
@@ -1419,10 +1417,11 @@ bool CSVImporterCore::createStatement(MyMoneyStatement &st)
         if (!st.m_listTransactions.isEmpty()) // don't create statement if there is one
             return true;
         st.m_eType = eMyMoney::Statement::Type::Investment;
-        if (m_autodetect.value(AutoAccountInvest))
-            detectAccount(st);
 
         auto profile = dynamic_cast<InvestmentProfile *>(m_profile);
+        if (profile->m_autoAccountName)
+            detectAccount(st);
+
         if ((m_profile->m_colTypeNum.value(Column::Fee, -1) == -1 ||
                 m_profile->m_colTypeNum.value(Column::Fee, -1) >= m_file->m_columnCount) &&
                 profile && !profile->m_feeRate.isEmpty()) // fee column has not been calculated so do it now
@@ -1526,6 +1525,7 @@ bool BankingProfile::readSettings(const KSharedConfigPtr &config)
     m_oppositeSigns = profilesGroup.readEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfOppositeSigns), false);
     m_creditIndicator = profilesGroup.readEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfCreditIndicator), QString());
     m_debitIndicator = profilesGroup.readEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfDebitIndicator), QString());
+    m_autoAccountName = profilesGroup.readEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfAutoAccountName), false);
     m_memoColList = profilesGroup.readEntry(CSVImporterCore::m_colTypeConfName.value(Column::Memo), QList<int>());
 
     CSVProfile::readSettings(profilesGroup);
@@ -1540,6 +1540,7 @@ void BankingProfile::writeSettings(const KSharedConfigPtr &config)
     profilesGroup.writeEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfOppositeSigns), m_oppositeSigns);
     profilesGroup.writeEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfCreditIndicator), m_creditIndicator);
     profilesGroup.writeEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfDebitIndicator), m_debitIndicator);
+    profilesGroup.writeEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfAutoAccountName), m_autoAccountName);
     profilesGroup.writeEntry(CSVImporterCore::m_colTypeConfName.value(Column::Payee),
                              m_colTypeNum.value(Column::Payee));
     profilesGroup.writeEntry(CSVImporterCore::m_colTypeConfName.value(Column::Number),
@@ -1635,6 +1636,7 @@ void InvestmentProfile::writeSettings(const KSharedConfigPtr &config)
     profilesGroup.writeEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfSecurityName), m_securityName);
     profilesGroup.writeEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfSecuritySymbol), m_securitySymbol);
     profilesGroup.writeEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfDontAsk), m_dontAsk);
+    profilesGroup.writeEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfAutoAccountName), m_autoAccountName);
 
     profilesGroup.writeEntry(CSVImporterCore::m_colTypeConfName.value(Column::Date),
                              m_colTypeNum.value(Column::Date));

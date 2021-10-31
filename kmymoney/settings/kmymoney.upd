@@ -1,4 +1,4 @@
-Version=5
+Version=6
 Id=1
 File=kmymoney/kmymoneyrc
 Group=List Options
@@ -8,3 +8,10 @@ Id=remove-hide-acc-opt-2021
 File=kmymoney/kmymoneyrc
 Group=List Options
 RemoveKey=HideClosedAccounts
+
+Id=remove-account-autodetection-2021
+File=kmymoney/csvimporterrc
+Group=Misc
+RemoveKey=AutoAccountBank
+RemoveKey=AutoAccountInvest
+
