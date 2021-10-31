@@ -1,4 +1,4 @@
-Version=5
+Version=6
 Id=1
 File=kmymoney/kmymoneyrc
 Group=List Options
@@ -25,4 +25,10 @@ RemoveGroup=KCategoriesView
 Id=reset-institutionsview-2021
 File=kmymoney/kmymoneyrc
 RemoveGroup=KInstitutionsView
+
+Id=remove-account-autodetection-2021
+File=kmymoney/csvimporterrc
+Group=Misc
+RemoveKey=AutoAccountBank
+RemoveKey=AutoAccountInvest
 

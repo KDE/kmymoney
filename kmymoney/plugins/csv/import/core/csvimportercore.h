@@ -35,20 +35,32 @@ enum class Type;
 }
 }
 
-enum autodetectTypeE { AutoFieldDelimiter, AutoDecimalSymbol, AutoDateFormat,
-                       AutoAccountInvest, AutoAccountBank,
-                     };
+enum autodetectTypeE { AutoFieldDelimiter, AutoDecimalSymbol, AutoDateFormat };
 
-enum miscSettingsE { ConfDirectory, ConfEncoding, ConfDateFormat,
-                     ConfFieldDelimiter, ConfTextDelimiter, ConfDecimalSymbol,
-                     ConfStartLine, ConfTrailerLines,
-                     ConfOppositeSigns,
-                     ConfFeeIsPercentage, ConfFeeRate, ConfMinFee,
-                     ConfSecurityName, ConfSecuritySymbol, ConfCurrencySymbol,
-                     ConfPriceFraction, ConfDontAsk,
-                     ConfHeight, ConfWidth,
-                     ConfCreditIndicator, ConfDebitIndicator,
-                   };
+enum miscSettingsE {
+    ConfDirectory,
+    ConfEncoding,
+    ConfDateFormat,
+    ConfFieldDelimiter,
+    ConfTextDelimiter,
+    ConfDecimalSymbol,
+    ConfStartLine,
+    ConfTrailerLines,
+    ConfOppositeSigns,
+    ConfFeeIsPercentage,
+    ConfFeeRate,
+    ConfMinFee,
+    ConfSecurityName,
+    ConfSecuritySymbol,
+    ConfCurrencySymbol,
+    ConfPriceFraction,
+    ConfDontAsk,
+    ConfHeight,
+    ConfWidth,
+    ConfCreditIndicator,
+    ConfDebitIndicator,
+    ConfAutoAccountName
+};
 
 enum validationResultE { ValidActionType, InvalidActionValues, NoActionType };
 
@@ -56,27 +68,40 @@ enum validationResultE { ValidActionType, InvalidActionValues, NoActionType };
 class KMM_CSVIMPORTERCORE_EXPORT CSVProfile
 {
 protected:
-    CSVProfile() :
-        m_encodingMIBEnum(0),
-        m_startLine(0),
-        m_endLine(0),
-        m_trailerLines(0),
-        m_dateFormat(DateFormat::DayMonthYear),
-        m_fieldDelimiter(FieldDelimiter::Auto),
-        m_textDelimiter(TextDelimiter::DoubleQuote),
-        m_decimalSymbol(DecimalSymbol::Auto)
+    CSVProfile()
+        : m_encodingMIBEnum(0)
+        , m_startLine(0)
+        , m_endLine(0)
+        , m_trailerLines(0)
+        , m_dateFormat(DateFormat::DayMonthYear)
+        , m_fieldDelimiter(FieldDelimiter::Auto)
+        , m_textDelimiter(TextDelimiter::DoubleQuote)
+        , m_decimalSymbol(DecimalSymbol::Auto)
+        , m_autoAccountName(false)
     {
     }
 
-    CSVProfile(const QString &profileName, int encodingMIBEnum,
-               int startLine, int trailerLines,
-               DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
-               QMap<Column, int> &colTypeNum) :
-        m_profileName(profileName), m_encodingMIBEnum(encodingMIBEnum),
-        m_startLine(startLine), m_endLine(startLine), m_trailerLines(trailerLines),
-        m_dateFormat(dateFormat), m_fieldDelimiter(fieldDelimiter),
-        m_textDelimiter(textDelimiter), m_decimalSymbol(decimalSymbol),
-        m_colTypeNum(colTypeNum)
+    CSVProfile(const QString& profileName,
+               int encodingMIBEnum,
+               int startLine,
+               int trailerLines,
+               DateFormat dateFormat,
+               FieldDelimiter fieldDelimiter,
+               TextDelimiter textDelimiter,
+               DecimalSymbol decimalSymbol,
+               bool autoAccountName,
+               QMap<Column, int>& colTypeNum)
+        : m_profileName(profileName)
+        , m_encodingMIBEnum(encodingMIBEnum)
+        , m_startLine(startLine)
+        , m_endLine(startLine)
+        , m_trailerLines(trailerLines)
+        , m_dateFormat(dateFormat)
+        , m_fieldDelimiter(fieldDelimiter)
+        , m_textDelimiter(textDelimiter)
+        , m_decimalSymbol(decimalSymbol)
+        , m_autoAccountName(autoAccountName)
+        , m_colTypeNum(colTypeNum)
     {
         initColNumType();
     }
@@ -106,6 +131,7 @@ public:
     FieldDelimiter            m_fieldDelimiter;
     TextDelimiter             m_textDelimiter;
     DecimalSymbol             m_decimalSymbol;
+    bool m_autoAccountName;
 
     QMap<Column, int>         m_colTypeNum;
     QMap<int, Column>         m_colNumType;
@@ -115,17 +141,30 @@ class KMM_CSVIMPORTERCORE_EXPORT BankingProfile : public CSVProfile
 {
 public:
     explicit BankingProfile() : CSVProfile(), m_oppositeSigns(false) {}
-    BankingProfile(QString profileName, int encodingMIBEnum,
-                   int startLine, int trailerLines,
-                   DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
+    BankingProfile(QString profileName,
+                   int encodingMIBEnum,
+                   int startLine,
+                   int trailerLines,
+                   DateFormat dateFormat,
+                   FieldDelimiter fieldDelimiter,
+                   TextDelimiter textDelimiter,
+                   DecimalSymbol decimalSymbol,
+                   bool autoAccountName,
                    QMap<Column, int> colTypeNum,
-                   bool oppositeSigns) :
-        CSVProfile(profileName, encodingMIBEnum,
-                   startLine, trailerLines,
-                   dateFormat, fieldDelimiter, textDelimiter, decimalSymbol,
-                   colTypeNum),
-        m_oppositeSigns(oppositeSigns) {}
-
+                   bool oppositeSigns)
+        : CSVProfile(profileName,
+                     encodingMIBEnum,
+                     startLine,
+                     trailerLines,
+                     dateFormat,
+                     fieldDelimiter,
+                     textDelimiter,
+                     decimalSymbol,
+                     autoAccountName,
+                     colTypeNum)
+        , m_oppositeSigns(oppositeSigns)
+    {
+    }
 
     Profile type() const final override {
         return Profile::Banking;
@@ -151,19 +190,32 @@ public:
     {
     }
 
-    InvestmentProfile(QString profileName, int encodingMIBEnum,
-                      int startLine, int trailerLines,
-                      DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
+    InvestmentProfile(QString profileName,
+                      int encodingMIBEnum,
+                      int startLine,
+                      int trailerLines,
+                      DateFormat dateFormat,
+                      FieldDelimiter fieldDelimiter,
+                      TextDelimiter textDelimiter,
+                      DecimalSymbol decimalSymbol,
+                      bool autoAccountName,
                       QMap<Column, int> colTypeNum,
-                      int priceFraction, QMap <eMyMoney::Transaction::Action, QStringList> transactionNames) :
-        CSVProfile(profileName, encodingMIBEnum,
-                   startLine, trailerLines,
-                   dateFormat, fieldDelimiter, textDelimiter, decimalSymbol,
-                   colTypeNum),
-        m_transactionNames(transactionNames),
-        m_priceFraction(priceFraction),
-        m_dontAsk(0),
-        m_feeIsPercentage(false)
+                      int priceFraction,
+                      QMap<eMyMoney::Transaction::Action, QStringList> transactionNames)
+        : CSVProfile(profileName,
+                     encodingMIBEnum,
+                     startLine,
+                     trailerLines,
+                     dateFormat,
+                     fieldDelimiter,
+                     textDelimiter,
+                     decimalSymbol,
+                     autoAccountName,
+                     colTypeNum)
+        , m_transactionNames(transactionNames)
+        , m_priceFraction(priceFraction)
+        , m_dontAsk(0)
+        , m_feeIsPercentage(false)
     {
     }
 
@@ -207,18 +259,21 @@ public:
     {
     }
 
-    PricesProfile(QString profileName, int encodingMIBEnum,
-                  int startLine, int trailerLines,
-                  DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
+    PricesProfile(QString profileName,
+                  int encodingMIBEnum,
+                  int startLine,
+                  int trailerLines,
+                  DateFormat dateFormat,
+                  FieldDelimiter fieldDelimiter,
+                  TextDelimiter textDelimiter,
+                  DecimalSymbol decimalSymbol,
                   QMap<Column, int> colTypeNum,
-                  int priceFraction, Profile profileType) :
-        CSVProfile(profileName, encodingMIBEnum,
-                   startLine, trailerLines,
-                   dateFormat, fieldDelimiter, textDelimiter, decimalSymbol,
-                   colTypeNum),
-        m_dontAsk(0),
-        m_priceFraction(priceFraction),
-        m_profileType(profileType)
+                  int priceFraction,
+                  Profile profileType)
+        : CSVProfile(profileName, encodingMIBEnum, startLine, trailerLines, dateFormat, fieldDelimiter, textDelimiter, decimalSymbol, false, colTypeNum)
+        , m_dontAsk(0)
+        , m_priceFraction(priceFraction)
+        , m_profileType(profileType)
     {
     }
 

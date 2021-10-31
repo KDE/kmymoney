@@ -15,12 +15,6 @@
     <entry name="AutoDateFormat" type="Bool">
       <label>Determines whether date format will be autodetected.</label>
     </entry>
-    <entry name="AutoAccountInvest" type="Bool">
-      <label>Determines whether investment account will be autodetected from statement header.</label>
-    </entry>
-    <entry name="AutoAccountBank" type="Bool">
-      <label>Determines whether bank account will be autodetected from statement header.</label>
-    </entry>
     <entry name="QifExportProfile" type="String">
       <label>The profile to be used for QIF exports.</label>
     </entry>

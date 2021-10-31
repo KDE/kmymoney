@@ -830,6 +830,9 @@ RowsPage::RowsPage(CSVWizard *dlg, CSVImporterCore *imp) :
     ui(new Ui::RowsPage)
 {
     ui->setupUi(this);
+    connect(ui->m_headerHasName, &QAbstractButton::clicked, this, [&](bool checked) {
+        m_imp->m_profile->m_autoAccountName = checked;
+    });
     connect(ui->m_startLine, QOverload<int>::of(&QSpinBox::valueChanged), this, &RowsPage::startRowChanged);
     connect(ui->m_endLine, QOverload<int>::of(&QSpinBox::valueChanged), this, &RowsPage::endRowChanged);
 }
@@ -847,6 +850,7 @@ void RowsPage::initializePage()
     ui->m_endLine->setMaximum(m_imp->m_file->m_rowCount);
     ui->m_startLine->setValue(m_imp->m_profile->m_startLine + 1);
     ui->m_endLine->setValue(m_imp->m_profile->m_endLine + 1);
+    ui->m_headerHasName->setChecked(m_imp->m_profile->m_autoAccountName);
     ui->m_startLine->blockSignals(false);
     ui->m_endLine->blockSignals(false);
 

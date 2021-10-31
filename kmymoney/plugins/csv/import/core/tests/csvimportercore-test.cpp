@@ -50,16 +50,20 @@ void CSVImporterCoreTest::init()
     csvImporter->m_mapSymbolName.insert("STK2", "Stock 2");
     csvImporter->m_mapSymbolName.insert("STK3", "Stock 3");
 
-    investmentProfile = new InvestmentProfile ("investment",
-            106, 1, 0, DateFormat::YearMonthDay, FieldDelimiter::Semicolon,
-            TextDelimiter::DoubleQuote, DecimalSymbol::Dot,
-    QMap<Column, int> {{Column::Date, 0}, {Column::Name, 1}, {Column::Type, 2}, {Column::Quantity, 3}, {Column::Price, 4}, {Column::Amount, 5}},
-    2,
-    QMap <eMyMoney::Transaction::Action, QStringList> {
-        {eMyMoney::Transaction::Action::Buy, QStringList {"buy"}},
-        {eMyMoney::Transaction::Action::Sell, QStringList {"sell"}}
-    }
-                                              );
+    investmentProfile = new InvestmentProfile(
+        "investment",
+        106,
+        1,
+        0,
+        DateFormat::YearMonthDay,
+        FieldDelimiter::Semicolon,
+        TextDelimiter::DoubleQuote,
+        DecimalSymbol::Dot,
+        false,
+        QMap<Column, int>{{Column::Date, 0}, {Column::Name, 1}, {Column::Type, 2}, {Column::Quantity, 3}, {Column::Price, 4}, {Column::Amount, 5}},
+        2,
+        QMap<eMyMoney::Transaction::Action, QStringList>{{eMyMoney::Transaction::Action::Buy, QStringList{"buy"}},
+                                                         {eMyMoney::Transaction::Action::Sell, QStringList{"sell"}}});
 
     pricesProfile = new PricesProfile ("price source",
                                        106, 1, 0, DateFormat::YearMonthDay, FieldDelimiter::Comma,
@@ -67,19 +71,30 @@ void CSVImporterCoreTest::init()
     QMap<Column, int> {{Column::Date, 0}, {Column::Price, 4}},
     2, Profile::StockPrices);
 
-    amountProfile = new BankingProfile ("amount",
-                                        106, 1, 0, DateFormat::MonthDayYear, FieldDelimiter::Comma,
-                                        TextDelimiter::DoubleQuote, DecimalSymbol::Dot,
-    QMap<Column, int> {{Column::Date, 1}, {Column::Memo, 2}, {Column::Amount, 3}, {Column::Category, 4}},
-    false);
+    amountProfile = new BankingProfile("amount",
+                                       106,
+                                       1,
+                                       0,
+                                       DateFormat::MonthDayYear,
+                                       FieldDelimiter::Comma,
+                                       TextDelimiter::DoubleQuote,
+                                       DecimalSymbol::Dot,
+                                       false,
+                                       QMap<Column, int>{{Column::Date, 1}, {Column::Memo, 2}, {Column::Amount, 3}, {Column::Category, 4}},
+                                       false);
 
-    debitCreditProfile = new BankingProfile ("debit credit",
-            106, 1, 0, DateFormat::MonthDayYear, FieldDelimiter::Comma,
-            TextDelimiter::DoubleQuote, DecimalSymbol::Dot,
-    QMap<Column, int> {{Column::Date, 1}, {Column::Memo, 2}, {Column::Debit, 3}, {Column::Credit, 4}, {Column::Category, 5}},
-    false);
-
-
+    debitCreditProfile =
+        new BankingProfile("debit credit",
+                           106,
+                           1,
+                           0,
+                           DateFormat::MonthDayYear,
+                           FieldDelimiter::Comma,
+                           TextDelimiter::DoubleQuote,
+                           DecimalSymbol::Dot,
+                           false,
+                           QMap<Column, int>{{Column::Date, 1}, {Column::Memo, 2}, {Column::Debit, 3}, {Column::Credit, 4}, {Column::Category, 5}},
+                           false);
 }
 
 void CSVImporterCoreTest::cleanup()
@@ -294,7 +309,7 @@ void CSVImporterCoreTest::testInvAccountAutodetection()
     writeStatementToCSV(csvContent, filename);
 
     investmentProfile->m_startLine = 7;
-    csvImporter->m_autodetect[AutoAccountInvest] = true;
+    investmentProfile->m_autoAccountName = true;
 
     auto st = csvImporter->unattendedImport(filename, investmentProfile);
 
