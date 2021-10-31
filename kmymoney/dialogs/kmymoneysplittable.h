@@ -68,6 +68,12 @@ public:
 
     int currentRow() const;
 
+    /**
+     * Setting @a readOnly to @c true forces the object into readonly mode.
+     * It does not allow to modify any information.
+     */
+    void setReadOnlyMode(bool readOnly);
+
 protected:
     void mousePressEvent(QMouseEvent* e) override;
     void mouseReleaseEvent(QMouseEvent* e) override;
@@ -116,7 +122,7 @@ public Q_SLOTS:
 
     void selectRow(int row);
 
-    KMyMoneyCategory* slotStartEdit();
+    void slotStartEdit();
     void slotEndEdit();
     void slotEndEditKeyboard();
     void slotDeleteSplit();

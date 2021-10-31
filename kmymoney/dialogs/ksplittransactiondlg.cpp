@@ -65,13 +65,14 @@ class KSplitTransactionDlgPrivate
     Q_DECLARE_PUBLIC(KSplitTransactionDlg)
 
 public:
-    explicit KSplitTransactionDlgPrivate(KSplitTransactionDlg *qq) :
-        q_ptr(qq),
-        ui(new Ui::KSplitTransactionDlg),
-        m_buttonBox(nullptr),
-        m_precision(2),
-        m_amountValid(false),
-        m_isDeposit(false)
+    explicit KSplitTransactionDlgPrivate(KSplitTransactionDlg* qq)
+        : q_ptr(qq)
+        , ui(new Ui::KSplitTransactionDlg)
+        , m_buttonBox(nullptr)
+        , m_precision(2)
+        , m_amountValid(false)
+        , m_isDeposit(false)
+        , m_readOnly(false)
     {
     }
 
@@ -185,46 +186,51 @@ public:
         ui->transactionAmount->setText("<b>" + (-m_split.value()).formatMoney(QString(), m_precision) + ' ');
     }
 
-    KSplitTransactionDlg      *q_ptr;
-    Ui::KSplitTransactionDlg  *ui;
-    QDialogButtonBox          *m_buttonBox;
+    KSplitTransactionDlg* q_ptr;
+    Ui::KSplitTransactionDlg* ui;
+    QDialogButtonBox* m_buttonBox;
     /**
       * This member keeps a copy of the current selected transaction
       */
-    MyMoneyTransaction     m_transaction;
+    MyMoneyTransaction m_transaction;
 
     /**
       * This member keeps a copy of the currently selected account
       */
-    MyMoneyAccount         m_account;
+    MyMoneyAccount m_account;
 
     /**
       * This member keeps a copy of the currently selected split
       */
-    MyMoneySplit           m_split;
+    MyMoneySplit m_split;
 
     /**
       * This member keeps the precision for the values
       */
-    int                    m_precision;
+    int m_precision;
 
     /**
       * flag that shows that the amount specified in the constructor
       * should be used as fix value (true) or if it can be changed (false)
       */
-    bool                   m_amountValid;
+    bool m_amountValid;
 
     /**
       * This member keeps track if the current transaction is of type
       * deposit (true) or withdrawal (false).
       */
-    bool                   m_isDeposit;
+    bool m_isDeposit;
+
+    /**
+     * This member keeps track of the readonly mode
+     */
+    bool m_readOnly;
 
     /**
       * This member keeps the amount that will be assigned to all the
       * splits that are marked 'will be calculated'.
       */
-    MyMoneyMoney           m_calculatedValue;
+    MyMoneyMoney m_calculatedValue;
 };
 
 KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
@@ -488,6 +494,14 @@ void KSplitTransactionDlg::slotUpdateButtons()
     }
     d->ui->buttonBox->buttons().at(4)->setEnabled(it_s != splits.constEnd());
     d->ui->buttonBox->buttons().at(3)->setEnabled(haveZeroSplit);
+
+    // manage readonly mode
+    if (d->m_readOnly) {
+        d->ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+        d->ui->buttonBox->buttons().at(2)->setEnabled(false); // clear all splits
+        d->ui->buttonBox->buttons().at(3)->setEnabled(false); // clear zero splits
+        d->ui->buttonBox->buttons().at(4)->setEnabled(false); // merge splits
+    }
 }
 
 void KSplitTransactionDlg::slotEditStarted()
@@ -559,4 +573,12 @@ void KSplitTransactionDlg::slotCreateTag(const QString& txt, QString& id)
 {
     KMyMoneyUtils::newTag(txt, id);
     emit createTag(txt, id);
+}
+
+void KSplitTransactionDlg::setReadOnlyMode(bool readOnly)
+{
+    Q_D(KSplitTransactionDlg);
+    d->m_readOnly = readOnly;
+    d->ui->transactionsTable->setReadOnlyMode(readOnly);
+    slotUpdateButtons();
 }

@@ -1182,6 +1182,14 @@ MyMoneyMoney StdTransactionEditor::removeVatSplit()
 bool StdTransactionEditor::isComplete(QString& reason) const
 {
     Q_D(const StdTransactionEditor);
+
+    if (d->m_readOnly) {
+        reason = i18n(
+            "At least one split of the selected transaction references an account that has been closed. "
+            "Editing the transactions is therefore prohibited.");
+        return false;
+    }
+
     reason.clear();
     QMap<QString, QWidget*>::const_iterator it_w;
 
@@ -1354,6 +1362,9 @@ int StdTransactionEditor::slotEditSplits()
                                          d->m_regForm);
             connect(dlg.data(), &KSplitTransactionDlg::objectCreation, this, &StdTransactionEditor::objectCreation);
             connect(dlg.data(), &KSplitTransactionDlg::createCategory, this, &StdTransactionEditor::slotNewCategory);
+
+            // propagate read-only mode
+            dlg->setReadOnlyMode(d->m_readOnly);
 
             if ((rc = dlg->exec()) == QDialog::Accepted) {
                 d->m_transaction = dlg->transaction();

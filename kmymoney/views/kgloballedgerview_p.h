@@ -1118,29 +1118,6 @@ public:
         if (m_register->focusItem() == 0)
             return false;
 
-        bool rc = true;
-        if (list.warnLevel() == KMyMoneyRegister::SelectedTransaction::OneAccountClosed) {
-            // scan all splits for the first closed account
-            QString closedAccount;
-            foreach(const auto selectedTransaction, list) {
-                foreach(const auto split, selectedTransaction.transaction().splits()) {
-                    const auto id = split.accountId();
-                    const auto acc = MyMoneyFile::instance()->account(id);
-                    if (acc.isClosed()) {
-                        closedAccount = acc.name();
-                        // we're done
-                        rc = false;
-                        break;
-                    }
-                }
-                if(!rc)
-                    break;
-            }
-            tooltip = i18n("Cannot process transactions in account %1, which is closed.", closedAccount);
-            showTooltip(tooltip);
-            return false;
-        }
-
         if (!m_register->focusItem()->isSelected()) {
             tooltip = i18n("Cannot process transaction with focus if it is not selected.");
             showTooltip(tooltip);

@@ -222,6 +222,9 @@ public:
                         m_regForm);
                 // q->connect(dlg, SIGNAL(newCategory(MyMoneyAccount&)), q, SIGNAL(newCategory(MyMoneyAccount&)));
 
+                // propagate read-only mode
+                dlg->setReadOnlyMode(m_readOnly);
+
                 if ((rc = dlg->exec()) == QDialog::Accepted) {
                     transaction = dlg->transaction();
                     // collect splits out of the transaction
@@ -767,6 +770,13 @@ bool InvestTransactionEditor::isComplete(QString& reason) const
 {
     Q_D(const InvestTransactionEditor);
     reason.clear();
+
+    if (d->m_readOnly) {
+        reason = i18n(
+            "At least one split of the selected transaction references an account that has been closed. "
+            "Editing the transactions is therefore prohibited.");
+        return false;
+    }
 
     auto postDate = dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"]);
     if (postDate) {

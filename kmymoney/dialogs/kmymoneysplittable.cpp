@@ -64,17 +64,18 @@ class KMyMoneySplitTablePrivate
     Q_DISABLE_COPY(KMyMoneySplitTablePrivate)
 
 public:
-    KMyMoneySplitTablePrivate() :
-        m_currentRow(0),
-        m_maxRows(0),
-        m_precision(2),
-        m_contextMenu(nullptr),
-        m_contextMenuDelete(nullptr),
-        m_contextMenuDuplicate(nullptr),
-        m_editCategory(0),
-        m_editTag(0),
-        m_editMemo(0),
-        m_editAmount(0)
+    KMyMoneySplitTablePrivate()
+        : m_currentRow(0)
+        , m_maxRows(0)
+        , m_precision(2)
+        , m_contextMenu(nullptr)
+        , m_contextMenuDelete(nullptr)
+        , m_contextMenuDuplicate(nullptr)
+        , m_editCategory(0)
+        , m_editTag(0)
+        , m_editMemo(0)
+        , m_editAmount(0)
+        , m_readOnly(false)
     {
     }
 
@@ -145,6 +146,8 @@ public:
     QPointer<QPushButton>      m_registerCancelButton;
 
     QMap<QString, MyMoneyMoney>  m_priceInfo;
+
+    bool m_readOnly;
 };
 
 KMyMoneySplitTable::KMyMoneySplitTable(QWidget *parent) :
@@ -397,7 +400,10 @@ bool KMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
             d->m_contextMenuDuplicate->setEnabled(
                 row < d->m_transaction.splits().count() - 1);
 
-            d->m_contextMenu->exec(QCursor::pos());
+            // prevent access to context menu in read-only mode
+            if (!d->m_readOnly) {
+                d->m_contextMenu->exec(QCursor::pos());
+            }
             rc = true;
             break;
         default:
@@ -465,7 +471,10 @@ void KMyMoneySplitTable::slotSetFocus(const QModelIndex& index, int button)
             d->m_contextMenuDuplicate->setEnabled(
                 row < d->m_transaction.splits().count() - 1);
 
-            d->m_contextMenu->exec(QCursor::pos());
+            // prevent access to context menu in read-only mode
+            if (!d->m_readOnly) {
+                d->m_contextMenu->exec(QCursor::pos());
+            }
         }
     }
 }
@@ -484,6 +493,10 @@ void KMyMoneySplitTable::mouseDoubleClickEvent(QMouseEvent *e)
 {
     Q_D(KMyMoneySplitTable);
     MYMONEYTRACER(tracer);
+
+    if (d->m_readOnly) {
+        return;
+    }
 
     int col = columnAt(e->pos().x());
     slotSetFocus(model()->index(rowAt(e->pos().y()), col), e->button());
@@ -720,7 +733,7 @@ void KMyMoneySplitTable::slotDeleteSplit()
     Q_D(KMyMoneySplitTable);
     MYMONEYTRACER(tracer);
     QList<MyMoneySplit> list = getSplits(d->m_transaction);
-    if (d->m_currentRow < list.count()) {
+    if ((!d->m_readOnly) && (d->m_currentRow < list.count())) {
         if (KMessageBox::warningContinueCancel(this,
                                                i18n("You are about to delete the selected split. "
                                                        "Do you really want to continue?"),
@@ -741,10 +754,13 @@ void KMyMoneySplitTable::slotDeleteSplit()
     }
 }
 
-KMyMoneyCategory* KMyMoneySplitTable::slotStartEdit()
+void KMyMoneySplitTable::slotStartEdit()
 {
     MYMONEYTRACER(tracer);
-    return createEditWidgets(true);
+    Q_D(KMyMoneySplitTable);
+    if (!d->m_readOnly) {
+        createEditWidgets(true);
+    }
 }
 
 void KMyMoneySplitTable::slotEndEdit()
@@ -1122,4 +1138,10 @@ bool KMyMoneySplitTable::focusNextPrevChild(bool next)
     } else
         rc = QTableWidget::focusNextPrevChild(next);
     return rc;
+}
+
+void KMyMoneySplitTable::setReadOnlyMode(bool readOnly)
+{
+    Q_D(KMyMoneySplitTable);
+    d->m_readOnly = readOnly;
 }

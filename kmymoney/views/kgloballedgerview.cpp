@@ -320,7 +320,8 @@ void KGlobalLedgerView::updateLedgerActionsInternal()
                 if (d->m_selectedTransactions.count() == 1) {
                     pActions[Action::EditSplits]->setEnabled(true);
                 }
-                if (d->m_currentAccount.isAssetLiability() && d->m_currentAccount.accountType() != eMyMoney::Account::Type::Investment) {
+                if (d->m_currentAccount.isAssetLiability() && (d->m_currentAccount.accountType() != eMyMoney::Account::Type::Investment)
+                    && canCreateTransactions(tooltip)) {
                     pActions[Action::NewScheduledTransaction]->setEnabled(d->m_selectedTransactions.count() == 1);
                 }
             }
@@ -790,16 +791,15 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
     // 0 - no sweat, user can modify
     // 1 - user should be warned that at least one split has been reconciled
     //     already
-    // 2 - user will be informed, that this transaction cannot be changed anymore
+    // 2 - editing is not possible, only viewing the transaction is allowed.
+    //     a tooltip shows that this transaction cannot be changed anymore
+    // 3 - editing is not possible, only viewing the transaction is allowed.
+    //     a tooltip shows that this transaction cannot be changed anymore
 
     int warnLevel = list.warnLevel();
-    Q_ASSERT(warnLevel < 2);  // otherwise the edit action should not be enabled
+    Q_ASSERT(warnLevel < 4); // otherwise the edit action should not be enabled
 
-    switch (warnLevel) {
-    case 0:
-        break;
-
-    case 1:
+    if (warnLevel == 1) {
         if (KMessageBox::warningContinueCancel(this,
                                                i18n(
                                                        "At least one split of the selected transactions has been reconciled. "
@@ -807,30 +807,10 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
                                                ),
                                                i18n("Transaction already reconciled"), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
                                                "EditReconciledTransaction") == KMessageBox::Cancel) {
-            warnLevel = 2;
+            d->m_register->endEdit();
+            return 0;
         }
-        break;
-
-    case 2:
-        KMessageBox::sorry(this,
-                           i18n("At least one split of the selected transactions has been frozen. "
-                                "Editing the transactions is therefore prohibited."),
-                           i18n("Transaction already frozen"));
-        break;
-
-    case 3:
-        KMessageBox::sorry(this,
-                           i18n("At least one split of the selected transaction references an account that has been closed. "
-                                "Editing the transactions is therefore prohibited."),
-                           i18n("Account closed"));
-        break;
     }
-
-    if (warnLevel > 1) {
-        d->m_register->endEdit();
-        return 0;
-    }
-
 
     TransactionEditor* editor = 0;
     KMyMoneyRegister::Transaction* item = dynamic_cast<KMyMoneyRegister::Transaction*>(d->m_register->focusItem());
@@ -876,6 +856,9 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
                 // make sure, the height of the table is correct
                 d->m_register->updateRegister(KMyMoneySettings::ledgerLens() | !KMyMoneySettings::transactionForm());
             }
+
+            /// possibly switch editor to read-only mode
+            editor->setReadOnlyMode(warnLevel > 1);
 
             d->m_inEditMode = true;
             connect(editor, &TransactionEditor::transactionDataSufficient, pActions[Action::EnterTransaction], &QAction::setEnabled);
@@ -1152,18 +1135,11 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
     //
     //   a) no mix of standard and investment transactions exist
     //   b) if a split transaction is selected, this is the only selection
-    //   c) none of the splits is frozen
-    //   d) the transaction having the current focus is selected
+    //   c) the transaction having the current focus is selected
 
-    // check for d)
+    // check for c)
     if (!d->canProcessTransactions(list, tooltip))
         return false;
-    // check for c)
-    if (list.warnLevel() == 2) {
-        tooltip = i18n("Cannot edit transactions with frozen splits.");
-        d->showTooltip(tooltip);
-        return false;
-    }
 
     bool rc = true;
     int investmentTransactions = 0;
@@ -1176,12 +1152,7 @@ bool KGlobalLedgerView::canEditTransactions(const KMyMoneyRegister::SelectedTran
         rc = false;
     }
 
-    if (d->m_currentAccount.isClosed()) {
-        tooltip = i18n("Cannot create or edit any transactions in Account %1 as it is closed", d->m_currentAccount.name());
-        d->showTooltip(tooltip);
-        rc = false;
-    }
-
+    // check for a)
     KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
     QString action;
     for (it_t = list.begin(); rc && it_t != list.end(); ++it_t) {

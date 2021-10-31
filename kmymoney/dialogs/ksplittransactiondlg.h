@@ -90,6 +90,13 @@ public:
       */
     MyMoneyMoney splitsValue();
 
+    /**
+     * Setting @a readOnly to @c true forces the editor into readonly mode.
+     * It does not allow to save any information, though it is possible to
+     * change it in the editor.
+     */
+    void setReadOnlyMode(bool readOnly);
+
 public Q_SLOTS:
     int exec() override;
 

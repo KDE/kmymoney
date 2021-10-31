@@ -295,7 +295,7 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
                     if (widget && widget->splitButton())
                         QApplication::sendEvent(o, &evt);
 
-                } else {
+                } else if (!d->m_readOnly) {
                     QTimer::singleShot(0, this, SIGNAL(returnPressed()));
                 }
                 // don't process any further
@@ -842,4 +842,10 @@ void TransactionEditor::slotNewCategory(MyMoneyAccount& account, const MyMoneyAc
 void TransactionEditor::slotNewInvestment(MyMoneyAccount& account, const MyMoneyAccount& parent)
 {
     KNewInvestmentWizard::newInvestment(account, parent);
+}
+
+void TransactionEditor::setReadOnlyMode(bool readOnly)
+{
+    Q_D(TransactionEditor);
+    d->m_readOnly = readOnly;
 }

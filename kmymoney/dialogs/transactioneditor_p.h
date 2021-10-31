@@ -48,14 +48,15 @@ class TransactionEditorPrivate
     Q_DECLARE_PUBLIC(TransactionEditor)
 
 public:
-    explicit TransactionEditorPrivate(TransactionEditor *qq) :
-        q_ptr(qq),
-        m_paymentMethod(eMyMoney::Schedule::PaymentType::Any),
-        m_regForm(nullptr),
-        m_item(nullptr),
-        m_initialAction(eWidgets::eRegister::Action::None),
-        m_openEditSplits(false),
-        m_memoChanged(false)
+    explicit TransactionEditorPrivate(TransactionEditor* qq)
+        : q_ptr(qq)
+        , m_paymentMethod(eMyMoney::Schedule::PaymentType::Any)
+        , m_regForm(nullptr)
+        , m_item(nullptr)
+        , m_initialAction(eWidgets::eRegister::Action::None)
+        , m_openEditSplits(false)
+        , m_memoChanged(false)
+        , m_readOnly(false)
     {
     }
 
@@ -99,24 +100,25 @@ public:
         }
     }
 
-    TransactionEditor                      *q_ptr;
-    QString                                 m_scheduleInfo;
-    eMyMoney::Schedule::PaymentType         m_paymentMethod;
-    QString                                 m_memoText;
-    QList<MyMoneySplit>                     m_splits;
-    KMyMoneyRegister::SelectedTransactions  m_transactions;
-    QList<const QWidget*>                   m_finalEditWidgets;
-    TransactionEditorContainer*             m_regForm;
-    KMyMoneyRegister::Transaction*          m_item;
-    KMyMoneyRegister::QWidgetContainer      m_editWidgets;
-    MyMoneyAccount                          m_account;
-    MyMoneyTransaction                      m_transaction;
-    MyMoneySplit                            m_split;
-    QDate                                   m_lastPostDate;
-    QMap<QString, MyMoneyMoney>             m_priceInfo;
-    eWidgets::eRegister::Action              m_initialAction;
-    bool                                    m_openEditSplits;
-    bool                                    m_memoChanged;
+    TransactionEditor* q_ptr;
+    QString m_scheduleInfo;
+    eMyMoney::Schedule::PaymentType m_paymentMethod;
+    QString m_memoText;
+    QList<MyMoneySplit> m_splits;
+    KMyMoneyRegister::SelectedTransactions m_transactions;
+    QList<const QWidget*> m_finalEditWidgets;
+    TransactionEditorContainer* m_regForm;
+    KMyMoneyRegister::Transaction* m_item;
+    KMyMoneyRegister::QWidgetContainer m_editWidgets;
+    MyMoneyAccount m_account;
+    MyMoneyTransaction m_transaction;
+    MyMoneySplit m_split;
+    QDate m_lastPostDate;
+    QMap<QString, MyMoneyMoney> m_priceInfo;
+    eWidgets::eRegister::Action m_initialAction;
+    bool m_openEditSplits;
+    bool m_memoChanged;
+    bool m_readOnly;
 };
 
 #endif // TRANSACTIONEDITOR_P_H
