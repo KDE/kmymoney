@@ -101,11 +101,6 @@
         "Name[uk]": "Векселі SEPA",
         "Name[x-test]": "xxSEPA ordersxx",
         "Name[zh_CN]": "单一欧元支付区订单",
-        "ServiceTypes": [
-            "KMyMoney/OnlineTask",
-            "KMyMoney/OnlineTaskUi",
-            "KMyMoney/sqlStoragePlugin"
-        ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
     }

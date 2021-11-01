@@ -86,9 +86,6 @@
         "Name[uk]": "iCalendar",
         "Name[x-test]": "xxiCalendarxx",
         "Name[zh_CN]": "iCalendar",
-        "ServiceTypes": [
-            "KMyMoney/Plugin"
-        ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
     }

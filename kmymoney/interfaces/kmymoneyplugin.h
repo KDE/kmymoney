@@ -88,9 +88,6 @@ namespace KMyMoneyPlugin {
         "Id": "a unique identifier",
         "License": "see KPluginMetaData for list of predefined licenses (translateable)",
         "Name": "Name of the plugin (translateable)",
-        "ServiceTypes": [
-            "KMyMoney/Plugin"
-        ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
      }
    }

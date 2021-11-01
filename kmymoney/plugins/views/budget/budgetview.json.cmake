@@ -83,9 +83,6 @@
         "Name[uk]": "Панель бюджету",
         "Name[x-test]": "xxBudget viewxx",
         "Name[zh_CN]": "预算视图",
-        "ServiceTypes": [
-            "KMyMoney/Plugin"
-        ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
     }

@@ -81,9 +81,6 @@
         "Name[uk]": "onlinejobpluginmockup",
         "Name[x-test]": "xxonlinejobpluginmockupxx",
         "Name[zh_CN]": "onlinejobpluginmockup",
-        "ServiceTypes": [
-            "KMyMoney/Plugin"
-        ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org"
     }

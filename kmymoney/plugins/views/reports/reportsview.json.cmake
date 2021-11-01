@@ -84,9 +84,6 @@
         "Name[uk]": "Перегляд звітів",
         "Name[x-test]": "xxReports viewxx",
         "Name[zh_CN]": "报表视图",
-        "ServiceTypes": [
-            "KMyMoney/Plugin"
-        ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
     }
