@@ -34,14 +34,14 @@ namespace KMyMoneyPlugin
 {
 Category pluginCategory(const KPluginMetaData& pluginInfo)
 {
-    if (!pluginInfo.serviceTypes().contains(QStringLiteral("KMyMoney/Plugin"))) {
         auto jsonKMyMoneyData = pluginInfo.rawData()[QLatin1String("KMyMoney")].toObject();
-        if (!jsonKMyMoneyData[QLatin1String("OnlineTask")].isNull())
+        if (!jsonKMyMoneyData[QLatin1String("OnlineTask")].isNull()) {
             return OnlineBankOperations;
-        else if (!jsonKMyMoneyData[QLatin1String("PayeeIdentifier")].isNull())
+        } else if (!jsonKMyMoneyData[QLatin1String("PayeeIdentifier")].isNull()) {
             return PayeeIdentifier;
-    }
-    return StandardPlugin;
+        } else {
+            return StandardPlugin;
+        }
 }
 
 bool isPluginEnabled(const KPluginMetaData& pluginData, const KConfigGroup& pluginSection)
@@ -58,14 +58,12 @@ QMap<QString, KPluginMetaData> listPlugins(bool onlyEnabled)
     const auto pluginSection(KSharedConfig::openConfig()->group(QStringLiteral("Plugins")));  // section of config where plugin on/off were saved
 
     for (const KPluginMetaData& pluginData : pluginDatas) {
-        if (pluginData.serviceTypes().contains(QStringLiteral("KMyMoney/Plugin"))) {
-            if (!onlyEnabled || isPluginEnabled(pluginData, pluginSection)) {
-                // only use the first one found. Otherwise, always the last one
-                // wins (usually the installed system version) and the QT_PLUGIN_PATH
-                // env variable nor the current directory have an effect for KMyMoney
-                if (!plugins.contains(pluginData.pluginId()))
-                    plugins.insert(pluginData.pluginId(), pluginData);
-            }
+        if (!onlyEnabled || isPluginEnabled(pluginData, pluginSection)) {
+            // only use the first one found. Otherwise, always the last one
+            // wins (usually the installed system version) and the QT_PLUGIN_PATH
+            // env variable nor the current directory have an effect for KMyMoney
+            if (!plugins.contains(pluginData.pluginId()))
+                plugins.insert(pluginData.pluginId(), pluginData);
         }
     }
     return plugins;
