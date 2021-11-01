@@ -86,9 +86,6 @@
         "Name[uk]": "Імпортування GNC",
         "Name[x-test]": "xxGNC Importerxx",
         "Name[zh_CN]": "GNC 导入工具",
-        "ServiceTypes": [
-            "KMyMoney/Plugin"
-        ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
     }

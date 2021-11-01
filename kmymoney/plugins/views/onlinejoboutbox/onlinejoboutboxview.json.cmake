@@ -80,9 +80,6 @@
         "Name[uk]": "Панель вихідних даних інтернет-завдань",
         "Name[x-test]": "xxOnline job outbox viewxx",
         "Name[zh_CN]": "线上任务发件箱视图",
-        "ServiceTypes": [
-            "KMyMoney/Plugin"
-        ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
     }

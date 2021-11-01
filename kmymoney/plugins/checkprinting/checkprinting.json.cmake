@@ -85,9 +85,6 @@
         "Name[uk]": "Друк чеків",
         "Name[x-test]": "xxCheck printingxx",
         "Name[zh_CN]": "支票打印",
-        "ServiceTypes": [
-            "KMyMoney/Plugin"
-        ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
     }

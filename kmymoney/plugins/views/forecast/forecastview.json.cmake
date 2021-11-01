@@ -84,9 +84,6 @@
         "Name[uk]": "Перегляд прогнозів",
         "Name[x-test]": "xxForecast viewxx",
         "Name[zh_CN]": "预测视图",
-        "ServiceTypes": [
-            "KMyMoney/Plugin"
-        ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
     }

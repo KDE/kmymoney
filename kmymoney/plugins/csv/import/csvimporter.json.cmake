@@ -87,9 +87,6 @@
         "Name[uk]": "Імпортування CSV",
         "Name[x-test]": "xxCSV Importerxx",
         "Name[zh_CN]": "CSV 导入工具",
-        "ServiceTypes": [
-            "KMyMoney/Plugin"
-        ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
     }

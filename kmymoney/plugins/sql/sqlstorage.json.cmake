@@ -83,9 +83,6 @@
         "Name[uk]": "Сховище SQL",
         "Name[x-test]": "xxSQL Storagexx",
         "Name[zh_CN]": "SQL 存储",
-        "ServiceTypes": [
-            "KMyMoney/Plugin"
-        ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
     }
