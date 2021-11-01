@@ -12,7 +12,8 @@ ki18n_wrap_ui( sepaOnlineTasks_SRCS
 
 add_library(konlinetasks_sepa_interface INTERFACE)
 
-kmymoney_add_plugin(konlinetasks_sepa SOURCES ${sepaOnlineTasks_SRCS})
+kcoreaddons_add_plugin(konlinetasks_sepa SOURCES ${sepaOnlineTasks_SRCS} INSTALL_NAMESPACE "kmymoney/onlinetasks")
+set_target_properties(konlinetasks_sepa PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 # TODO some dependencies can be moved to konlinetasks_sepa
 target_link_libraries( konlinetasks_sepa_interface
