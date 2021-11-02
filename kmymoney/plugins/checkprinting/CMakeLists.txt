@@ -16,6 +16,7 @@ qt5_add_resources(checkprinting_PART_SRCS checkprinting.qrc)
 kcoreaddons_add_plugin(checkprinting
                        SOURCES ${checkprinting_PART_SRCS}
                        INSTALL_NAMESPACE "kmymoney")
+add_dependencies(checkprinting checkprinting_settings_static)
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
 set_target_properties(checkprinting
@@ -49,6 +50,7 @@ ki18n_wrap_ui(kcm_checkprinting_PART_SRCS checkprintingsettingsdecl.ui)
 kcoreaddons_add_plugin(kcm_checkprinting
                        SOURCES ${kcm_checkprinting_PART_SRCS}
                        INSTALL_NAMESPACE "kmymoney")
+add_dependencies(kcm_checkprinting checkprinting_settings_static)
 
 kcoreaddons_desktop_to_json(kcm_checkprinting kcm_checkprinting.desktop)
 
