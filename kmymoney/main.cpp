@@ -51,6 +51,10 @@
 #include "mymoneytracer.h"
 #endif
 
+#if IMPORT_SQLCIPHER_PLUGIN
+Q_IMPORT_PLUGIN(QSQLCipherDriverPlugin)
+#endif
+
 bool timersOn = false;
 
 KMyMoneyApp* kmymoney;

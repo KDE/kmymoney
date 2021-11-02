@@ -26,9 +26,14 @@ set ( qsqlcipher_HEADERS
   qsql_sqlite_p.h
 )
 
-kcoreaddons_add_plugin(qsqlcipher
-                       SOURCES ${qsqlcipher_SOURCES}
-                       INSTALL_NAMESPACE "sqldrivers")
+if (BUILD_STATIC_PLUGINS)
+    add_library(qsqlcipher STATIC ${qsqlcipher_SOURCES})
+    target_compile_definitions(qsqlcipher PRIVATE QT_STATICPLUGIN)
+else()
+    kcoreaddons_add_plugin(qsqlcipher
+                        SOURCES ${qsqlcipher_SOURCES}
+                        INSTALL_NAMESPACE "sqldrivers")
+endif()
 
 #otherwise "fatal error: 'sqlite3.h' file not found"
 if(CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "Windows" OR CMAKE_VERSION VERSION_LESS 3.5.2)
