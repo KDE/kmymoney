@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2014 Cristian One ț <onet.cristian@gmail.com>
+    SPDX-FileCopyrightText: 2014 Cristian Oneț <onet.cristian@gmail.com>
     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 
 */

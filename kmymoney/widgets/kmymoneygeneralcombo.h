@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2009-2016 Cristian One ț <onet.cristian@gmail.com>
+    SPDX-FileCopyrightText: 2009-2016 Cristian Oneț <onet.cristian@gmail.com>
     SPDX-FileCopyrightText: 2009-2010 Alvaro Soliverez <asoliverez@gmail.com>
     SPDX-FileCopyrightText: 2010-2017 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
