@@ -704,88 +704,74 @@ int CSVImporterCore::detectDecimalSymbols(const QList<int> &columns)
 
 QList<MyMoneyAccount> CSVImporterCore::findAccounts(const QList<eMyMoney::Account::Type> &accountTypes, const QString &statementHeader)
 {
-    MyMoneyFile* file = MyMoneyFile::instance();
     QList<MyMoneyAccount> accountList;
-    file->accountList(accountList);
     QList<MyMoneyAccount> filteredTypes;
-    QList<MyMoneyAccount> filteredAccounts;
+    QMultiMap<int, MyMoneyAccount> accountsMatchingNumber;
+    QMultiMap<int, MyMoneyAccount> accountsMatchingName;
+    QMultiMap<int, MyMoneyAccount> accountsMatchingBoth;
+    QList<MyMoneyAccount> accountsMatching;
     QRegularExpression filterOutChars(QStringLiteral("[-., ]"));
+
+    MyMoneyFile* file = MyMoneyFile::instance();
+    file->accountList(accountList);
 
     foreach (const auto account, accountList) {
         if (accountTypes.contains(account.accountType()) && !(account).isClosed())
             filteredTypes.append(account);
     }
 
-    // filter out accounts whose names aren't in statements header
+    // filter out accounts with matching numbers, names, and both
     foreach (const auto account, filteredTypes) {
-        QString txt = account.name();
-        txt.remove(filterOutChars);
-        if (txt.isEmpty() || txt.length() < 3)
-            continue;
-        if (statementHeader.contains(txt, Qt::CaseInsensitive))
-            filteredAccounts.append(account);
+        bool matchedNumber = false;
+        bool matchedName = false;
+
+        auto number = account.number();
+        number.remove(filterOutChars);
+        if (number.length() > 2 && statementHeader.contains(number, Qt::CaseInsensitive)) {
+            accountsMatchingNumber.insert(number.length(), account);
+            matchedNumber = true;
+        }
+
+        auto name = account.name();
+        name.remove(filterOutChars);
+        if (name.length() > 2 && statementHeader.contains(name, Qt::CaseInsensitive)) {
+            accountsMatchingName.insert(name.length(), account);
+            matchedName = true;
+        }
+
+        if (matchedNumber && matchedName)
+            accountsMatchingBoth.insert(number.length() + name.length(), account);
     }
 
-    // if filtering returned more results, filter out accounts whose numbers aren't in statements header
-    if (filteredAccounts.count() > 1) {
-        for (auto account = filteredAccounts.begin(); account != filteredAccounts.end();) {
-            QString txt = (*account).number();
-            txt.remove(filterOutChars);
-            if (txt.isEmpty() || txt.length() < 3) {
-                ++account;
-                continue;
-            }
-            if (statementHeader.contains(txt, Qt::CaseInsensitive))
-                ++account;
-            else
-                account = filteredAccounts.erase(account);
-        }
+    // the logic is:
+    // if a single account matching number is found, return that
+    if (accountsMatchingNumber.count() == 1)
+        return accountsMatchingNumber.values();
+    // if more than one account matching number is found
+    else if (accountsMatchingNumber.count() > 1) {
+        // see if there are any accounts that matched both number and name
+        // if one matching both was found, return it
+        if (accountsMatchingBoth.count() == 1)
+            return accountsMatchingBoth.values();
+        // if more than one was found still, return ones that have the longest sum(name, account)
+        else if (accountsMatchingBoth.count() > 1)
+            accountsMatching = accountsMatchingBoth.values(accountsMatchingBoth.lastKey());
+        else
+            // if neither account matched both name and number, return the ones that have the longest number
+            accountsMatching = accountsMatchingNumber.values(accountsMatchingNumber.lastKey());
+    }
+    // if none of the accounts matched a number, try with accounts that matched a name
+    else {
+        // if one account matched name, return it
+        if (accountsMatchingName.count() == 1)
+            return accountsMatchingName.values();
+        // if more than one account matched name, return the ones that have the longest name
+        else if (accountsMatchingName.count() > 1)
+            accountsMatching = accountsMatchingName.values(accountsMatchingName.lastKey());
     }
 
-    // if filtering returned more results, filter out accounts whose numbers are the shortest
-    if (filteredAccounts.count() > 1) {
-        for (auto i = 1; i < filteredAccounts.count();) {
-            auto firstAccNumber = filteredAccounts.at(0).number();
-            auto secondAccNumber = filteredAccounts.at(i).number();
-            if (firstAccNumber.length() > secondAccNumber.length()) {
-                filteredAccounts.removeAt(i);
-            } else if (firstAccNumber.length() < secondAccNumber.length()) {
-                filteredAccounts.removeAt(0);
-                --i;
-            } else {
-                ++i;
-            }
-        }
-    }
-
-    // if filtering returned more results, filter out accounts whose names are the shortest
-    if (filteredAccounts.count() > 1) {
-        for (auto i = 1; i < filteredAccounts.count();) {
-            auto firstAccName = filteredAccounts.at(0).name();
-            auto secondAccName = filteredAccounts.at(i).name();
-            if (firstAccName.length() > secondAccName.length()) {
-                filteredAccounts.removeAt(i);
-            } else if (firstAccName.length() < secondAccName.length()) {
-                filteredAccounts.removeAt(0);
-                --i;
-            } else {
-                ++i;
-            }
-        }
-    }
-
-    // if filtering by name and number didn't return nothing, then try filtering by number only
-    if (filteredAccounts.isEmpty()) {
-        foreach (const auto account, filteredTypes) {
-            QString txt = account.number();
-            txt.remove(filterOutChars);
-            if (txt.isEmpty() || txt.length() < 3)
-                continue;
-            if (statementHeader.contains(txt, Qt::CaseInsensitive))
-                filteredAccounts.append(account);
-        }
-    }
-    return filteredAccounts;
+    // otherwise, return accountsMatching, which may be empty if none of the accounts matched
+    return accountsMatching;
 }
 
 bool CSVImporterCore::detectAccount(MyMoneyStatement &st)
