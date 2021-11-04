@@ -235,7 +235,7 @@ public:
             view = new LedgerViewPage(q, configGroupName);
 
             view->setAccount(acc);
-            view->setShowEntryForNewTransaction();
+            view->setShowEntryForNewTransaction(!acc.isClosed());
             view->showTransactionForm(KMyMoneySettings::transactionForm());
 
             // insert new ledger view page in tab view

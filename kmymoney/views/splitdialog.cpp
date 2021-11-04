@@ -36,6 +36,7 @@ public:
         , ui(new Ui_SplitDialog)
         , transactionEditor(nullptr)
         , fraction(100)
+        , readOnly(false)
     {
     }
 
@@ -66,6 +67,7 @@ public:
     MyMoneyMoney splitsTotal;
     MyMoneyMoney inversionFactor;
     QString transactionPayeeId;
+    bool readOnly;
 };
 
 static const int SumRow = 0;
@@ -338,30 +340,32 @@ void SplitDialog::updateButtonState()
     d->ui->mergeButton->setEnabled(false);
     d->ui->deleteZeroButton->setEnabled(false);
 
-    if(d->ui->splitView->selectionModel()->selectedRows().count() > 0) {
-        d->ui->deleteButton->setEnabled(true);
-    }
-
-    if(d->ui->splitView->model()->rowCount() > 2) {
-        d->ui->deleteAllButton->setEnabled(true);
-    }
-
-    QAbstractItemModel* model = d->ui->splitView->model();
-    QSet<QString> accountIDs;
-    const auto rows = model->rowCount();
-    for(int row = 0; row < rows; ++row) {
-        const auto idx = model->index(row, 0);
-        // don't check the empty line at the end
-        if(idx.data(eMyMoney::Model::IdRole).toString().isEmpty())
-            continue;
-
-        const auto accountID = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
-        const auto amount = idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-        if(accountIDs.contains(accountID)) {
-            d->ui->mergeButton->setEnabled(true);
+    if (!d->readOnly) {
+        if (d->ui->splitView->selectionModel()->selectedRows().count() > 0) {
+            d->ui->deleteButton->setEnabled(true);
         }
-        if(amount.isZero()) {
-            d->ui->deleteZeroButton->setEnabled(true);
+
+        if (d->ui->splitView->model()->rowCount() > 2) {
+            d->ui->deleteAllButton->setEnabled(true);
+        }
+
+        QAbstractItemModel* model = d->ui->splitView->model();
+        QSet<QString> accountIDs;
+        const auto rows = model->rowCount();
+        for (int row = 0; row < rows; ++row) {
+            const auto idx = model->index(row, 0);
+            // don't check the empty line at the end
+            if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty())
+                continue;
+
+            const auto accountID = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+            const auto amount = idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+            if (accountIDs.contains(accountID)) {
+                d->ui->mergeButton->setEnabled(true);
+            }
+            if (amount.isZero()) {
+                d->ui->deleteZeroButton->setEnabled(true);
+            }
         }
     }
 }
@@ -426,4 +430,13 @@ void SplitDialog::mergeSplits()
 void SplitDialog::setTransactionPayeeId(const QString& id)
 {
     d->ui->splitView->setTransactionPayeeId(id);
+}
+
+void SplitDialog::setReadOnly(bool readOnly)
+{
+    d->readOnly = readOnly;
+    d->ui->okButton->setDisabled(readOnly);
+    d->ui->newSplitButton->setDisabled(readOnly);
+    d->ui->splitView->setReadOnlyMode(readOnly);
+    updateButtonState();
 }

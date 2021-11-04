@@ -63,6 +63,9 @@ public:
 
     QDate postDate() const;
 
+    /// overridden for internal reasons
+    void setReadOnly(bool readOnly) override;
+
 protected Q_SLOTS:
     virtual void acceptEdit();
 

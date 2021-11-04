@@ -45,6 +45,7 @@ public:
 
     void setCommodity(const MyMoneySecurity& commodity);
     void setTransactionPayeeId(const QString& id);
+    void setReadOnlyMode(bool readOnly);
 
     static void setErroneousColor(const QColor& color);
     static void setImportedColor(const QColor& color);

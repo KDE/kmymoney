@@ -62,6 +62,7 @@ struct NewSplitEditor::Private
         , haveShares(false)
         , loadingSplit(false)
         , isIncomeExpense(false)
+        , readOnly(false)
         , postDate(QDate::currentDate())
         , amountHelper(nullptr)
     {
@@ -90,26 +91,28 @@ struct NewSplitEditor::Private
 
     void checkMultiCurrency();
 
-    NewSplitEditor*               q;
-    Ui_NewSplitEditor*            ui;
+    NewSplitEditor* q;
+    Ui_NewSplitEditor* ui;
     AccountNamesFilterProxyModel* accountsModel;
-    QSortFilterProxyModel*        payeesModel;
-    QSortFilterProxyModel*        costCenterModel;
-    SplitModel*                   splitModel;
-    bool                          accepted;
-    bool                          costCenterRequired;
-    bool                          showValuesInverted;
-    bool                          haveShares;
-    bool                          loadingSplit;
-    bool                          isIncomeExpense;
-    MyMoneyAccount                counterAccount;
-    MyMoneyAccount                category;
-    MyMoneySecurity               commodity;
-    MyMoneyMoney                  shares;
-    MyMoneyMoney                  value;
-    MyMoneyMoney                  price;
-    QDate                         postDate;
-    CreditDebitHelper*            amountHelper;
+    QSortFilterProxyModel* payeesModel;
+    QSortFilterProxyModel* costCenterModel;
+    SplitModel* splitModel;
+    bool accepted;
+    bool costCenterRequired;
+    bool showValuesInverted;
+    bool haveShares;
+    bool loadingSplit;
+    bool isIncomeExpense;
+    bool readOnly;
+    MyMoneyAccount counterAccount;
+    MyMoneyAccount category;
+    MyMoneySecurity commodity;
+    MyMoneyMoney shares;
+    MyMoneyMoney value;
+    MyMoneyMoney price;
+    QDate postDate;
+    CreditDebitHelper* amountHelper;
+    WidgetHintFrameCollection* frameCollection;
 };
 
 bool NewSplitEditor::Private::checkForValidSplit(bool doUserInteraction)
@@ -306,10 +309,10 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     d->ui->costCenterCombo->setModelColumn(0);
     d->ui->costCenterCombo->completer()->setFilterMode(Qt::MatchContains);
 
-    WidgetHintFrameCollection* frameCollection = new WidgetHintFrameCollection(this);
-    frameCollection->addFrame(new WidgetHintFrame(d->ui->costCenterCombo));
-    frameCollection->addFrame(new WidgetHintFrame(d->ui->numberEdit, WidgetHintFrame::Warning));
-    frameCollection->addWidget(d->ui->enterButton);
+    d->frameCollection = new WidgetHintFrameCollection(this);
+    d->frameCollection->addFrame(new WidgetHintFrame(d->ui->costCenterCombo));
+    d->frameCollection->addFrame(new WidgetHintFrame(d->ui->numberEdit, WidgetHintFrame::Warning));
+    d->frameCollection->addWidget(d->ui->enterButton);
 
     d->ui->amountEditCredit->setAllowEmpty(true);
     d->ui->amountEditDebit->setAllowEmpty(true);
@@ -373,7 +376,7 @@ void NewSplitEditor::keyPressEvent(QKeyEvent* e)
             if(focusWidget() == d->ui->cancelButton) {
                 reject();
             } else {
-                if(d->ui->enterButton->isEnabled()) {
+                if (d->ui->enterButton->isEnabled() && !d->readOnly) {
                     d->ui->enterButton->setFocus();
                     d->ui->enterButton->click();
                 }
@@ -528,3 +531,17 @@ void NewSplitEditor::finishLoadingSplit()
     d->loadingSplit = false;
 }
 
+void NewSplitEditor::setReadOnly(bool readOnly)
+{
+    if (d->readOnly != readOnly) {
+        d->readOnly = readOnly;
+        if (readOnly) {
+            d->frameCollection->removeWidget(d->ui->enterButton);
+            d->ui->enterButton->setDisabled(true);
+        } else {
+            // no need to enable the enter button here as the
+            // framewidget will take care of it anyway
+            d->frameCollection->addWidget(d->ui->enterButton);
+        }
+    }
+}

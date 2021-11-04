@@ -30,11 +30,13 @@ public:
     Private()
         : cancelButton(nullptr)
         , enterButton(nullptr)
+        , readOnly(false)
     {
     }
 
     QAbstractButton* cancelButton;
     QAbstractButton* enterButton;
+    bool readOnly;
 };
 
 TransactionEditorBase::TransactionEditorBase(QWidget* parent, const QString& accountId)
@@ -59,7 +61,7 @@ void TransactionEditorBase::keyPressEvent(QKeyEvent* e)
                     if (focusWidget() == d->cancelButton) {
                         reject();
                     } else {
-                        if (d->enterButton->isEnabled()) {
+                        if (d->enterButton->isEnabled() && !d->readOnly) {
                             // move focus to enter button which
                             // triggers update of widgets
                             d->enterButton->setFocus();
@@ -99,4 +101,14 @@ void TransactionEditorBase::setCancelButton(QAbstractButton* button)
 void TransactionEditorBase::setEnterButton(QAbstractButton* button)
 {
     d->enterButton = button;
+}
+
+void TransactionEditorBase::setReadOnly(bool readOnly)
+{
+    d->readOnly = readOnly;
+}
+
+bool TransactionEditorBase::isReadOnly() const
+{
+    return d->readOnly;
 }

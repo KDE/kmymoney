@@ -366,13 +366,16 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     // global actions
     // --------------
     if (!selections.selection(SelectedObjects::JournalEntry).isEmpty()) {
-        pActions[eMenu::Action::MarkNotReconciled]->setEnabled(true);
-        pActions[eMenu::Action::MarkCleared]->setEnabled(true);
-        pActions[eMenu::Action::MarkReconciled]->setEnabled(true);
+        const auto enabled = MyMoneyUtils::transactionWarnLevel(selections.selection(SelectedObjects::JournalEntry)) < OneSplitFrozen;
+        pActions[eMenu::Action::MarkNotReconciled]->setEnabled(enabled);
+        pActions[eMenu::Action::MarkCleared]->setEnabled(enabled);
+        pActions[eMenu::Action::MarkReconciled]->setEnabled(enabled);
     }
 
     if (selections.selection(SelectedObjects::ReconciliationAccount).isEmpty() && (selections.selection(SelectedObjects::Account).count() == 1)) {
-        pActions[eMenu::Action::StartReconciliation]->setEnabled(true);
+        const auto idx = MyMoneyFile::instance()->accountsModel()->indexById(selections.firstSelection(SelectedObjects::Account));
+        const auto disabled = idx.data(eMyMoney::Model::AccountIsClosedRole).toBool();
+        pActions[eMenu::Action::StartReconciliation]->setDisabled(disabled);
     }
 
     switch (d->currentViewId()) {
@@ -454,6 +457,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
                     && (idx.data(eMyMoney::Model::AccountTypeRole).value<eMyMoney::Account::Type>() != eMyMoney::Account::Type::Investment)) {
                     pActions[eMenu::Action::NewScheduledTransaction]->setEnabled(selections.selection(SelectedObjects::JournalEntry).count() == 1);
                 }
+                pActions[eMenu::Action::NewTransaction]->setEnabled(!idx.data(eMyMoney::Model::AccountIsClosedRole).toBool());
             }
         }
         break;

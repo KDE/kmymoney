@@ -37,12 +37,14 @@ public:
         : m_editor(nullptr)
         , m_editorRow(-1)
         , m_showValuesInverted(false)
+        , m_readOnly(false)
     {}
 
-    NewSplitEditor*               m_editor;
-    int                           m_editorRow;
-    bool                          m_showValuesInverted;
-    MyMoneySecurity               m_commodity;
+    NewSplitEditor* m_editor;
+    int m_editorRow;
+    bool m_showValuesInverted;
+    bool m_readOnly;
+    MyMoneySecurity m_commodity;
     QString m_transactionPayeeId;
 };
 
@@ -103,6 +105,9 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
             d->m_editorRow = index.row();
             connect(d->m_editor, &NewSplitEditor::done, this, &SplitDelegate::endEdit);
             emit sizeHintChanged(index);
+
+            // propagate read-only mode
+            d->m_editor->setReadOnly(d->m_readOnly);
         }
 
     } else {
@@ -450,4 +455,9 @@ void SplitDelegate::setShowValuesInverted(bool inverse)
 bool SplitDelegate::showValuesInverted()
 {
     return d->m_showValuesInverted;
+}
+
+void SplitDelegate::setReadOnlyMode(bool readOnly)
+{
+    d->m_readOnly = readOnly;
 }

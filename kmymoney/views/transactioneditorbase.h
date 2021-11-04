@@ -38,6 +38,9 @@ public:
         Q_UNUSED(model)
     }
 
+    virtual void setReadOnly(bool readOnly);
+    bool isReadOnly() const;
+
 protected:
     virtual void keyPressEvent(QKeyEvent* e) override;
     void setCancelButton(QAbstractButton* button);

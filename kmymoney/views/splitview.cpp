@@ -50,6 +50,7 @@ public:
         , firstSelectionAfterCreation(true)
         , blockEditorStart(false)
         , rightMouseButtonPress(false)
+        , readOnly(false)
         , columnSelector(nullptr)
     {
     }
@@ -170,6 +171,7 @@ public:
     bool firstSelectionAfterCreation;
     bool blockEditorStart;
     bool rightMouseButtonPress;
+    bool readOnly;
     ColumnSelector* columnSelector;
 };
 
@@ -534,4 +536,10 @@ void SplitView::setTransactionPayeeId(const QString& id)
     if (d->splitDelegate) {
         d->splitDelegate->setTransactionPayeeId(id);
     }
+}
+
+void SplitView::setReadOnlyMode(bool readOnly)
+{
+    d->readOnly = readOnly;
+    d->splitDelegate->setReadOnlyMode(readOnly);
 }

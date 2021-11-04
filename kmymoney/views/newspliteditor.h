@@ -48,6 +48,8 @@ public:
     void startLoadingSplit();
     void finishLoadingSplit();
 
+    void setReadOnly(bool readOnly);
+
 protected:
     void keyPressEvent(QKeyEvent* e) final override;
 

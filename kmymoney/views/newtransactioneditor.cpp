@@ -78,6 +78,7 @@ public:
         , splitModel(parent, &undoStack)
         , price(MyMoneyMoney::ONE)
         , amountHelper(nullptr)
+        , frameCollection(nullptr)
     {
         accountsModel->setObjectName(QLatin1String("NewTransactionEditor::accountsModel"));
         categoriesModel->setObjectName(QLatin1String("NewTransactionEditor::categoriesModel"));
@@ -134,6 +135,7 @@ public:
     MyMoneySplit m_split;
     MyMoneyMoney price;
     CreditDebitHelper* amountHelper;
+    WidgetHintFrameCollection* frameCollection;
 };
 
 void NewTransactionEditor::Private::updateWidgetAccess()
@@ -149,7 +151,7 @@ void NewTransactionEditor::Private::updateWidgetAccess()
     ui->tagContainer->setEnabled(enable);
     ui->statusCombo->setEnabled(enable);
     ui->memoEdit->setEnabled(enable);
-    ui->enterButton->setEnabled(enable);
+    ui->enterButton->setEnabled(!q->isReadOnly());
 }
 
 void NewTransactionEditor::Private::updateWidgetState()
@@ -483,8 +485,10 @@ int NewTransactionEditor::Private::editSplits()
     SplitModel dlgSplitModel(q, nullptr, splitModel);
 
     // create an empty split at the end
-    // used to create new splits
-    dlgSplitModel.appendEmptySplit();
+    // used to create new splits, but only
+    // when not in read-only mode
+    if (!q->isReadOnly())
+        dlgSplitModel.appendEmptySplit();
 
     auto commodityId = m_transaction.commodity();
     if (commodityId.isEmpty())
@@ -495,11 +499,13 @@ int NewTransactionEditor::Private::editSplits()
     const auto payeeId = payeesModel->index(ui->payeeEdit->currentIndex(), 0).data(eMyMoney::Model::IdRole).toString();
     splitDialog->setTransactionPayeeId(payeeId);
     splitDialog->setModel(&dlgSplitModel);
+    splitDialog->setReadOnly(q->isReadOnly());
 
     int rc = splitDialog->exec();
 
     if (splitDialog && (rc == QDialog::Accepted)) {
         // remove that empty split again before we update the splits
+        // no need to check for presence, removeEmptySplit() does that
         dlgSplitModel.removeEmptySplit();
 
         // copy the splits model contents
@@ -776,11 +782,11 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->ui->amountEditDebit->setAllowEmpty(true);
     d->amountHelper = new CreditDebitHelper(this, d->ui->amountEditCredit, d->ui->amountEditDebit);
 
-    WidgetHintFrameCollection* frameCollection = new WidgetHintFrameCollection(this);
-    frameCollection->addFrame(new WidgetHintFrame(d->ui->dateEdit));
-    frameCollection->addFrame(new WidgetHintFrame(d->ui->costCenterCombo));
-    frameCollection->addFrame(new WidgetHintFrame(d->ui->numberEdit, WidgetHintFrame::Warning));
-    frameCollection->addWidget(d->ui->enterButton);
+    d->frameCollection = new WidgetHintFrameCollection(this);
+    d->frameCollection->addFrame(new WidgetHintFrame(d->ui->dateEdit));
+    d->frameCollection->addFrame(new WidgetHintFrame(d->ui->costCenterCombo));
+    d->frameCollection->addFrame(new WidgetHintFrame(d->ui->numberEdit, WidgetHintFrame::Warning));
+    d->frameCollection->addWidget(d->ui->enterButton);
 
     connect(d->ui->numberEdit, &QLineEdit::textChanged, this, [&](const QString& newNumber) {
         d->numberChanged(newNumber);
@@ -1226,4 +1232,19 @@ void NewTransactionEditor::setShowNumberWidget(bool show) const
 void NewTransactionEditor::setAccountId(const QString& accountId)
 {
     d->ui->accountCombo->setSelected(accountId);
+}
+
+void NewTransactionEditor::setReadOnly(bool readOnly)
+{
+    if (isReadOnly() != readOnly) {
+        TransactionEditorBase::setReadOnly(readOnly);
+        if (readOnly) {
+            d->frameCollection->removeWidget(d->ui->enterButton);
+            d->ui->enterButton->setDisabled(true);
+        } else {
+            // no need to enable the enter button here as the
+            // frameCollection will take care of it anyway
+            d->frameCollection->addWidget(d->ui->enterButton);
+        }
+    }
 }

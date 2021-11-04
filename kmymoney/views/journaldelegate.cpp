@@ -350,6 +350,11 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
             connect(d->m_editor, &TransactionEditorBase::done, this, &JournalDelegate::endEdit);
             JournalDelegate* that = const_cast<JournalDelegate*>(this);
             emit that->sizeHintChanged(index);
+
+            // check if we need to open editor in read-only mode
+            const auto journalEntryId = index.data(eMyMoney::Model::IdRole).toString();
+            const auto warnLevel = MyMoneyUtils::transactionWarnLevel(journalEntryId);
+            d->m_editor->setReadOnly(warnLevel >= OneSplitFrozen);
         }
 
     } else {

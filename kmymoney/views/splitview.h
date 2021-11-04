@@ -59,6 +59,8 @@ public:
 
     void setTransactionPayeeId(const QString& id);
 
+    void setReadOnlyMode(bool readOnly);
+
 public Q_SLOTS:
     /**
      * This method scrolls the ledger so that the current item is visible
