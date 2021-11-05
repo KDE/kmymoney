@@ -42,7 +42,7 @@ body {
 
 #title {
     font-family:bitstream vera sans, verdana, sans;
-    line-height:1em;
+    line-height:16px;
     font-size: 20px;
     position:absolute;
     top:-3px;
@@ -52,7 +52,7 @@ body {
 
 #subtitle {
     font-family:bitstream vera sans, verdana, sans;
-    line-height:1em;
+    line-height:16px;
     font-size: 10px;
     position:absolute;
     top:30px;

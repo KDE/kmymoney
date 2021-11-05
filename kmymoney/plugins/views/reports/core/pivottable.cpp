@@ -1819,11 +1819,11 @@ QString PivotTable::renderHTML() const
                         // don't show closed accounts if they have not been used
                         if (!rowname.isClosed() || isUsed) {
                             innergroupdata +=
-                                QString("<tr class=\"row-%1\"%2><td%3 class=\"left\" style=\"text-indent: %4.0em\">%5%6</td>")
+                            innergroupdata += QString("<tr class=\"row-%1\"%2><td%3 class=\"left\" style=\"text-indent: %4.0em\">%5%6</td>")
                                     .arg(rownum & 0x01 ? "even" : "odd")
                                     .arg(rowname.isTopLevel() ? " id=\"topparent\"" : "")
                                     .arg("") //.arg((*it_row).m_total.isZero() ? colspan : "")  // colspan the distance if this row will be blank
-                                    .arg(rowname.hierarchyDepth() - 1)
+                                    .arg((rowname.hierarchyDepth() - 1) * 16)
                                     .arg(rowname.name().replace(QRegularExpression(QLatin1String(" ")), "&nbsp;").replace("<", "&lt;").replace(">", "&gt;"))
                                     .arg((m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString()
                                                                                                         : QString(" (%1)").arg(rowname.currency().id()));
@@ -1874,10 +1874,10 @@ QString PivotTable::renderHTML() const
                         // This works for me (ipwizard)
                         ReportAccount rowname = (*it_innergroup).begin().key();
                         isUsed |= !rowname.isClosed();
-                        finalRow = QString("<tr class=\"row-%1\"%2><td class=\"left\" style=\"text-indent: %3.0em;\">%5%6</td>")
+                        finalRow = QString("<tr class=\"row-%1\"%2><td class=\"left\" style=\"text-indent: %3px;\">%5%6</td>")
                                        .arg(rownum & 0x01 ? "even" : "odd")
                                        .arg(m_config.detailLevel() == eMyMoney::Report::DetailLevel::All ? "id=\"solo\"" : "")
-                                       .arg(rowname.hierarchyDepth() - 1)
+                                       .arg((rowname.hierarchyDepth() - 1) * 16)
                                        .arg(rowname.name().replace(QRegularExpression(QLatin1String(" ")), "&nbsp;").replace("<", "&lt;").replace(">", "&gt;"))
                                        .arg((m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString()
                                                                                                            : QString(" (%1)").arg(rowname.currency().id()));

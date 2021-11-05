@@ -434,7 +434,7 @@ public:
         m_html.clear();
         m_html += header;
 
-        m_html += QString("<div id=\"summarytitle\">%1</div>").arg(i18n("Your Financial Summary"));
+        m_html += QString("<div class=\"gap\">&nbsp;</div>");
 
         QStringList settings = KMyMoneySettings::listOfItems();
 
@@ -491,7 +491,6 @@ public:
         m_html += "<div id=\"returnlink\">";
         m_html += link(VIEW_WELCOME, QString()) + i18n("Show KMyMoney welcome page") + linkend();
         m_html += "</div>";
-        m_html += "<div id=\"vieweffect\"></div>";
         m_html += footer;
 
         m_view->setHtml(m_html);
@@ -507,11 +506,15 @@ public:
 
         // Adjust the size
         QSize netWorthGraphSize = q->size();
+        netWorthGraphSize /= qreal(q->physicalDpiX()) / qreal(q->logicalDpiX());
         netWorthGraphSize -= QSize(80, 30);
         m_netWorthGraphLastValidSize = netWorthGraphSize;
 
-        m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Net Worth Forecast"));
-        m_html += QString("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
+        // print header
+        m_html +=
+            "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
+            "<tr><td class=\"summaryheader\">"
+            + i18n("Net Worth Forecast") + "</td></tr>";
         m_html += QString("<tr>");
 
         if (const auto reportsPlugin = pPlugins.data.value(QStringLiteral("reportsview"), nullptr)) {
@@ -519,15 +522,15 @@ public:
             if (!variantReport.isNull()) {
                 auto report = variantReport.value<QWidget *>();
                 report->resize(m_netWorthGraphLastValidSize);
-                m_html += QString("<td><center><img src=\"%1\" ALT=\"Networth\" width=\"100%\" ></center></td>").arg(QPixmapToDataUri(report->grab()));
+                m_html += QString("<td align=center height=\"100%\"><img src=\"%1\" ALT=\"Networth\" border=\"0\"></td>").arg(QPixmapToDataUri(report->grab()));
                 delete report;
             }
         } else {
             m_html += QString("<td><center>%1</center></td>").arg(i18n("Enable reports plugin to see this chart."));
         }
 
-        m_html += QString("</tr>");
-        m_html += QString("</table></div></div>");
+        m_html += "</tr>";
+        m_html += "</table>";
     }
 
     void showPayments()
@@ -535,7 +538,6 @@ public:
         MyMoneyFile* file = MyMoneyFile::instance();
         QList<MyMoneySchedule> overdues;
         QList<MyMoneySchedule> schedule;
-        int i = 0;
 
         //if forecast has not been executed yet, do it.
         if (!m_forecast.isForecastDone())
@@ -576,19 +578,22 @@ public:
             ++d_it;
         }
 
-        m_html += "<div class=\"shadow\"><div class=\"displayblock\">";
-        m_html += QString("<div class=\"summaryheader\">%1</div>\n").arg(i18n("Payments"));
+        // print header
+        m_html +=
+            "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
+            "<tr><td class=\"summaryheader\">"
+            + i18n("Payments") + "</td></tr>";
 
         if (!overdues.isEmpty()) {
-            m_html += "<div class=\"gap\">&nbsp;</div>\n";
+            m_html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
 
             std::sort(overdues.begin(), overdues.end());
             QList<MyMoneySchedule>::Iterator it;
             QList<MyMoneySchedule>::Iterator it_f;
 
-            m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-            m_html += QString("<tr class=\"itemtitle warningtitle\" ><td colspan=\"5\">%1</td></tr>\n").arg(showColoredAmount(i18n("Overdue payments"), true));
-            m_html += "<tr class=\"item warning\">";
+            m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+            m_html += QString("<tr class=\"itemtitle negativetext\"><td colspan=\"5\">%1</td></tr>\n").arg(i18n("Overdue payments"));
+            m_html += "<tr class=\"item\">";
             m_html += "<td class=\"left\" width=\"10%\">";
             m_html += i18n("Date");
             m_html += "</td>";
@@ -606,6 +611,7 @@ public:
             m_html += "</td>";
             m_html += "</tr>";
 
+            int i = 0;
             for (it = overdues.begin(); it != overdues.end(); ++it) {
                 // determine number of overdue payments
                 int cnt =
@@ -615,7 +621,7 @@ public:
                 showPaymentEntry(*it, cnt);
                 m_html += "</tr>";
             }
-            m_html += "</table>";
+            m_html += "</table></td></tr>";
         }
 
         if (!schedule.isEmpty()) {
@@ -640,8 +646,8 @@ public:
             }
 
             if (todays.count() > 0) {
-                m_html += "<div class=\"gap\">&nbsp;</div>\n";
-                m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+                m_html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
+                m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
                 m_html += QString("<tr class=\"itemtitle\"><td class=\"left\" colspan=\"5\">%1</td></tr>\n").arg(i18n("Today's due payments"));
                 m_html += "<tr class=\"item\">";
                 m_html += "<td class=\"left\" width=\"10%\">";
@@ -661,20 +667,21 @@ public:
                 m_html += "</td>";
                 m_html += "</tr>";
 
+                int i = 0;
                 for (t_it = todays.begin(); t_it != todays.end(); ++t_it) {
                     m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
                     showPaymentEntry(*t_it);
                     m_html += "</tr>";
                 }
-                m_html += "</table>";
+                m_html += "</table></td></tr>";
             }
 
             if (!schedule.isEmpty()) {
-                m_html += "<div class=\"gap\">&nbsp;</div>\n";
+                m_html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
 
                 QList<MyMoneySchedule>::Iterator it;
 
-                m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+                m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
                 m_html += QString("<tr class=\"itemtitle\"><td class=\"left\" colspan=\"5\">%1</td></tr>\n").arg(i18n("Future payments"));
                 m_html += "<tr class=\"item\">";
                 m_html += "<td class=\"left\" width=\"10%\">";
@@ -701,6 +708,7 @@ public:
 
                 QDate lastDate = QDate::currentDate().addMonths(1);
                 std::sort(schedule.begin(), schedule.end());
+                int i = 0;
                 do {
                     it = schedule.begin();
                     if (it == schedule.end())
@@ -728,7 +736,6 @@ public:
                     if (!(*it).isOverdue()) {
                         if (cnt > 0)
                             --cnt;
-
                         m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
                         showPaymentEntry(*it);
                         m_html += "</tr>";
@@ -764,10 +771,10 @@ public:
                     m_html += "</td>";
                     m_html += "</tr>";
                 }
-                m_html += "</table>";
+                m_html += "</table></td></tr>";
             }
         }
-        m_html += "</div></div>";
+        m_html += "</table>";
     }
 
     void showPaymentEntry(const MyMoneySchedule& sched, int cnt = 1)
@@ -914,11 +921,15 @@ public:
         if (!accounts.isEmpty()) {
             // sort the accounts by name
             qStableSort(accounts.begin(), accounts.end(), accountNameLess);
-            QString tmp;
             int i = 0;
-            tmp = "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + header + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
-            m_html += tmp;
-            m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+
+            // print header
+            m_html +=
+                "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
+                "<tr><td class=\"summaryheader\">"
+                + header + "</td></tr>";
+            m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+
             m_html += "<tr class=\"item\">";
 
             if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
@@ -970,7 +981,9 @@ public:
             if (KMyMoneySettings::showCountOfNotReconciledTransactions()) m_html += "<td></td>";
             if (KMyMoneySettings::showDateOfLastReconciliation()) m_html += "<td></td>";
             m_html += QString("<td class=\"right\"><b>%1</b></td></tr>").arg(showColoredAmount(amount, m_total.isNegative()));
-            m_html += "</table></div></div>";
+            m_html += "</tr>";
+            m_html += "</table></td></tr>";
+            m_html += "</table>";
         }
     }
 
@@ -1037,12 +1050,17 @@ public:
                 beginDay = m_forecast.accountsCycle();
 
             // Now output header
-            m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18ncp("Forecast days", "%1 Day Forecast", "%1 Day Forecast", m_forecast.forecastDays()));
-            m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-            m_html += "<tr class=\"item\"><td class=\"left\" width=\"40%\">";
+            m_html +=
+                "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
+                "<tr><td class=\"summaryheader\">"
+                + i18ncp("Forecast days", "%1 Day Forecast", "%1 Day Forecast", m_forecast.forecastDays()) + "</td></tr>";
+            m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+
+            auto numberOfColumns = m_forecast.forecastDays() / m_forecast.accountsCycle();
+            auto colWidth = 55 / numberOfColumns;
+            m_html += QString("<tr class=\"item\"><td class=\"left\" width=\"%1%\">").arg(100 - colWidth * numberOfColumns);
             m_html += i18n("Account");
             m_html += "</td>";
-            auto colWidth = 55 / (m_forecast.forecastDays() / m_forecast.accountsCycle());
             for (i = 0; (i*m_forecast.accountsCycle() + beginDay) <= m_forecast.forecastDays(); ++i) {
                 m_html += QString("<td width=\"%1%\" class=\"right\">").arg(colWidth);
 
@@ -1160,8 +1178,9 @@ public:
                     m_html += QString("<tr class=\"warning\"><td colspan=%2 align=\"center\" ><b>%1</b></td></tr>").arg(msg).arg(colspan);
                 }
             }
-            m_html += "</table></div></div>";
-
+            m_html += "</tr>";
+            m_html += "</table></td></tr>";
+            m_html += "</table>";
         }
     }
 
@@ -1252,8 +1271,11 @@ public:
             }
 
             //print header
-            m_html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Assets and Liabilities Summary") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
-            m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+            m_html +=
+                "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
+                "<tr><td class=\"summaryheader\">"
+                + i18n("Assets and Liabilities Summary") + "</td></tr>";
+            m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
 
             //column titles
 
@@ -1411,8 +1433,8 @@ public:
             m_html += QString("%1<td class=\"left\">%2</td>%3<td align=\"right\">%4</td>").arg(placeHolder_Status).arg(i18n("Net Worth")).arg(placeHolder_Counts).arg(showColoredAmount(amountNetWorth, netWorth.isNegative()));
 
             m_html += "</tr>";
+            m_html += "</table></td></tr>";
             m_html += "</table>";
-            m_html += "</div></div>";
         }
     }
 
@@ -1427,12 +1449,17 @@ public:
         if (!variantReport.isNull()) {
             m_html.append(variantReport.toString());
         } else {
-            m_html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Budget") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
-            m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-            m_html += QString("<tr>");
+            m_html +=
+                "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
+                "<tr><td class=\"summaryheader\">"
+                + i18n("Budget") + "</td></tr>";
+            m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+
+            m_html += "<tr>";
             m_html += QString("<td><center>%1</center></td>").arg(i18n("Enable reports plugin to see this chart."));
-            m_html += QString("</tr>");
-            m_html += QString("</table></div></div>");
+            m_html += "</tr>";
+            m_html += "</table></td></tr>";
+            m_html += "</table>";
         }
     }
 
@@ -1676,10 +1703,11 @@ public:
         amountLiquidWorth.replace(QChar(' '), "&nbsp;");
 
         //show the summary
-        m_html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Cash Flow Summary") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
-
-        //print header
-        m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+        m_html +=
+            "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
+            "<tr><td class=\"summaryheader\">"
+            + i18n("Cash Flow Summary") + "</td></tr>";
+        m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
         //income and expense title
         m_html += "<tr class=\"itemtitle\">";
         m_html += "<td class=\"left\" colspan=\"4\">";
@@ -1717,11 +1745,11 @@ public:
         m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountScheduledExpense,  scheduledExpense.isNegative()));
         m_html += "</tr>";
 
-        m_html += "</table>";
+        m_html += "</table></td></tr>";
 
         //print header of assets and liabilities
-        m_html += "<div class=\"gap\">&nbsp;</div>\n";
-        m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+        m_html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
+        m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
         //assets and liabilities title
         m_html += "<tr class=\"itemtitle\">";
         m_html += "<td class=\"left\" colspan=\"4\">";
@@ -1761,7 +1789,7 @@ public:
 
         m_html += "</tr>";
 
-        m_html += "</table>";
+        m_html += "</table></td></tr>";
 
         //final conclusion
         MyMoneyMoney profitValue = incomeValue + expenseValue + scheduledIncome + scheduledExpense;
@@ -1778,8 +1806,8 @@ public:
 
 
         //print header of cash flow status
-        m_html += "<div class=\"gap\">&nbsp;</div>\n";
-        m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+        m_html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
+        m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
         //income and expense title
         m_html += "<tr class=\"itemtitle\">";
         m_html += "<td class=\"left\" colspan=\"4\">";
@@ -1787,24 +1815,22 @@ public:
         m_html += "</td></tr>";
         //column titles
         m_html += "<tr class=\"item\">";
-        m_html += "<td>&nbsp;</td>";
-        m_html += "<td width=\"25%\" class=\"center\">";
+        m_html += "<td colspan=\"2\" width=\"33%\" class=\"center\">";
         m_html += i18n("Expected Liquid Assets");
         m_html += "</td>";
-        m_html += "<td width=\"25%\" class=\"center\">";
+        m_html += "<td width=\"33%\" class=\"center\">";
         m_html += i18n("Expected Liquid Liabilities");
         m_html += "</td>";
-        m_html += "<td width=\"25%\" class=\"center\">";
+        m_html += "<td width=\"34%\" class=\"center\">";
         m_html += i18n("Expected Profit/Loss");
         m_html += "</td>";
         m_html += "</tr>";
 
         //add row with banding
         m_html += QString("<tr class=\"row-even\" style=\"font-weight:bold;\">");
-        m_html += "<td>&nbsp;</td>";
 
         //print expected assets
-        m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountExpectedAsset, expectedAsset.isNegative()));
+        m_html += QString("<td colspan=\"2\" align=\"right\">%2</td>").arg(showColoredAmount(amountExpectedAsset, expectedAsset.isNegative()));
 
         //print expected liabilities
         m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountExpectedLiabilities, expectedLiabilities.isNegative()));
@@ -1813,8 +1839,8 @@ public:
         m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountProfit, profitValue.isNegative()));
 
         m_html += "</tr>";
+        m_html += "</table></td></tr>";
         m_html += "</table>";
-        m_html += "</div></div>";
     }
 
 

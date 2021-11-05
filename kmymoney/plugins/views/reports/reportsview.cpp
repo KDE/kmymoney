@@ -151,15 +151,20 @@ QString ReportsView::budget() const
     const auto file = MyMoneyFile::instance();
 
     QString html;
-    //div header
-    html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Budget") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
+
+    // header
+    html +=
+        "<table width=\"97%\" align=\"center\" class=\"displayblock\" >"
+        "<tr><td class=\"summaryheader\">"
+        + i18n("Budget") + "</td></tr>";
 
     if (file->countBudgets() == 0) {
-        html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-        html += QString("<tr>");
+        html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+        html += "<tr>";
         html += QString("<td><center>%1</center></td>").arg(i18n("You have no budgets to display."));
-        html += QString("</tr>");
-        html += "</table></div></div>";
+        html += "</tr>";
+        html += "</table></td></tr>";
+        html += "</table>";
         return html;
     }
 
@@ -183,13 +188,13 @@ QString ReportsView::budget() const
     reports::PivotGrid grid = table.grid();
 
     //display budget summary
-    html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+    html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
     html += "<tr class=\"itemtitle\">";
     html += "<td class=\"left\" colspan=\"3\">";
     html += i18n("Current Month Summary");
     html += "</td></tr>";
     html += "<tr class=\"item\">";
-    html += "<td class=\"right\" width=\"50%\">";
+    html += "<td class=\"right\" width=\"60%\">";
     html += i18n("Budgeted");
     html += "</td>";
     html += "<td class=\"right\" width=\"20%\">";
@@ -213,17 +218,17 @@ QString ReportsView::budget() const
     html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(totalActualAmount, totalActualValue.isNegative()));
     html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(totalBudgetDiffAmount, totalBudgetDiffValue.isNegative()));
     html += "</tr>";
-    html += "</table>";
+    html += "</table></td></tr>";
 
     //budget overrun
-    html += "<div class=\"gap\">&nbsp;</div>\n";
-    html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+    html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
+    html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
     html += "<tr class=\"itemtitle\">";
     html += "<td class=\"left\" colspan=\"4\">";
     html += i18n("Budget Overruns");
     html += "</td></tr>";
     html += "<tr class=\"item\">";
-    html += "<td class=\"left\" width=\"30%\">";
+    html += "<td class=\"left\" width=\"40%\">";
     html += i18n("Account");
     html += "</td>";
     html += "<td class=\"right\" width=\"20%\">";
@@ -292,7 +297,8 @@ QString ReportsView::budget() const
         html += QString::fromLatin1("<td class=\"center\" colspan=\"4\">%1</td>").arg(i18n("No Budget Categories have been overrun"));
         html += "</tr>";
     }
-    html += "</table></div></div>";
+    html += "</table></td></tr>";
+    html += "</table>";
     return html;
 }
 

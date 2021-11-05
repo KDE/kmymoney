@@ -199,7 +199,8 @@ QString KMyMoneyUtils::variableCSS()
            .arg(KMyMoneySettings::schemeColor(SchemeColor::ListBackground1).name()).arg(tcolor.name());
     css += QString(".row-odd, .item1  { background-color: %1; color: %2 }\n")
            .arg(KMyMoneySettings::schemeColor(SchemeColor::ListBackground2).name()).arg(tcolor.name());
-    css += QString("a { color: %1 }\n").arg(link.name());
+    css += QString(".negativetext  { color: %1; }\n").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name());
+    css += QString("a { color: %1; }\n").arg(link.name());
     return css;
 }
 
