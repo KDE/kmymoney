@@ -812,13 +812,12 @@ public:
                     QString pathSkip = QPixmapToDataUri(Icons::get(Icon::SkipForward).pixmap(QSize(8, 8)));
 
                     //show payment date
-                    tmp = QString("<td>") +
-                          QLocale().toString(sched.adjustedNextDueDate(), QLocale::ShortFormat) +
-                          "</td><td>";
+                    tmp = QString("<td>") + QLocale().toString(sched.adjustedNextDueDate(), QLocale::ShortFormat) + "</td><td align=\"center\">";
+
+                    // show Enter Next and Skip Next buttons
                     if (!pathEnter.isEmpty())
                         tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathEnter) + linkend();
-                    tmp += "</td><td>";
-
+                    tmp += "</td><td align=\"center\">";
                     if (!pathSkip.isEmpty())
                         tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=skip").arg(sched.id()), i18n("Skip schedule"))
                             + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathSkip) + linkend();
@@ -1303,7 +1302,7 @@ public:
             m_html += "<tr class=\"item\">";
 
             if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
-                m_html += "<td class=\"setcolor\">";
+                m_html += "<td class=\"setcolor center\">";
                 m_html += statusHeader;
                 m_html += "</td>";
             }
@@ -1313,13 +1312,13 @@ public:
             m_html += "</td>";
 
             if (KMyMoneySettings::showCountOfUnmarkedTransactions())
-                m_html += "<td class=\"setcolor\">!M</td>";
+                m_html += "<td class=\"setcolor center\">!M</td>";
 
             if (KMyMoneySettings::showCountOfClearedTransactions())
-                m_html += "<td class=\"setcolor\">C</td>";
+                m_html += "<td class=\"setcolor center\">C</td>";
 
             if (KMyMoneySettings::showCountOfNotReconciledTransactions())
-                m_html += "<td class=\"setcolor\">!R</td>";
+                m_html += "<td class=\"setcolor center\">!R</td>";
 
             if (KMyMoneySettings::showDateOfLastReconciliation())
                 m_html += "<td class=\"setcolor\">" + i18n("Last Reconciled") + "</td>";
