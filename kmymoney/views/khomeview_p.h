@@ -592,12 +592,18 @@ public:
             QList<MyMoneySchedule>::Iterator it_f;
 
             m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-            m_html += QString("<tr class=\"itemtitle negativetext\"><td colspan=\"5\">%1</td></tr>\n").arg(i18n("Overdue payments"));
+            m_html += QString("<tr class=\"itemtitle negativetext\"><td colspan=\"7\">%1</td></tr>\n").arg(i18n("Overdue payments"));
             m_html += "<tr class=\"item\">";
             m_html += "<td class=\"left\" width=\"10%\">";
             m_html += i18n("Date");
             m_html += "</td>";
-            m_html += "<td class=\"left\" width=\"40%\">";
+            m_html += "<td class=\"left\" width=\"2%\">";
+            m_html += i18n("Next");
+            m_html += "</td>";
+            m_html += "<td class=\"left\" width=\"2%\">";
+            m_html += i18n("Skip");
+            m_html += "</td>";
+            m_html += "<td class=\"left\" width=\"36%\">";
             m_html += i18n("Schedule");
             m_html += "</td>";
             m_html += "<td class=\"left\" width=\"20%\">";
@@ -648,12 +654,18 @@ public:
             if (todays.count() > 0) {
                 m_html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
                 m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-                m_html += QString("<tr class=\"itemtitle\"><td class=\"left\" colspan=\"5\">%1</td></tr>\n").arg(i18n("Today's due payments"));
+                m_html += QString("<tr class=\"itemtitle\"><td class=\"left\" colspan=\"7\">%1</td></tr>\n").arg(i18n("Today's due payments"));
                 m_html += "<tr class=\"item\">";
                 m_html += "<td class=\"left\" width=\"10%\">";
                 m_html += i18n("Date");
                 m_html += "</td>";
-                m_html += "<td class=\"left\" width=\"40%\">";
+                m_html += "<td class=\"left\" width=\"2%\">";
+                m_html += i18n("Next");
+                m_html += "</td>";
+                m_html += "<td class=\"left\" width=\"2%\">";
+                m_html += i18n("Skip");
+                m_html += "</td>";
+                m_html += "<td class=\"left\" width=\"36%\">";
                 m_html += i18n("Schedule");
                 m_html += "</td>";
                 m_html += "<td class=\"left\" width=\"20%\">";
@@ -682,12 +694,18 @@ public:
                 QList<MyMoneySchedule>::Iterator it;
 
                 m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-                m_html += QString("<tr class=\"itemtitle\"><td class=\"left\" colspan=\"5\">%1</td></tr>\n").arg(i18n("Future payments"));
+                m_html += QString("<tr class=\"itemtitle\"><td class=\"left\" colspan=\"7\">%1</td></tr>\n").arg(i18n("Future payments"));
                 m_html += "<tr class=\"item\">";
                 m_html += "<td class=\"left\" width=\"10%\">";
                 m_html += i18n("Date");
                 m_html += "</td>";
-                m_html += "<td class=\"left\" width=\"40%\">";
+                m_html += "<td class=\"left\" width=\"2%\">";
+                m_html += i18n("Next");
+                m_html += "</td>";
+                m_html += "<td class=\"left\" width=\"2%\">";
+                m_html += i18n("Skip");
+                m_html += "</td>";
+                m_html += "<td class=\"left\" width=\"36%\">";
                 m_html += i18n("Schedule");
                 m_html += "</td>";
                 m_html += "<td class=\"left\" width=\"20%\">";
@@ -799,10 +817,13 @@ public:
                           "</td><td>";
                     if (!pathEnter.isEmpty())
                         tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathEnter) + linkend();
-                    if (!pathSkip.isEmpty())
-                        tmp += "&nbsp;" + link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=skip").arg(sched.id()), i18n("Skip schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathSkip) + linkend();
+                    tmp += "</td><td>";
 
-                    tmp += QString("&nbsp;");
+                    if (!pathSkip.isEmpty())
+                        tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=skip").arg(sched.id()), i18n("Skip schedule"))
+                            + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathSkip) + linkend();
+                    tmp += "</td><td>";
+
                     tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=edit").arg(sched.id()), i18n("Edit schedule")) + sched.name() + linkend();
 
                     //show quantity of payments overdue if any
