@@ -1,6 +1,6 @@
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/forecastview.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/forecastview.json @ONLY)
 
-add_library(forecast_settings_static STATIC)
+add_library(forecast_settings_static STATIC ${CMAKE_CURRENT_BINARY_DIR}/forecastviewsettings.cpp)
 target_link_libraries(forecast_settings_static KF5::ConfigGui)
 kconfig_add_kcfg_files(forecast_settings_static forecastviewsettings.kcfgc)
 
@@ -9,6 +9,7 @@ set(forecastview_SOURCES
   kforecastview.cpp
   fixedcolumntreeview.cpp
   )
+set_property(SOURCE kforecastview.cpp APPEND PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/forecastviewsettings.h)
 
 ki18n_wrap_ui(forecastview_SOURCES kforecastview.ui)
 
@@ -17,7 +18,6 @@ qt5_add_resources(forecastview_SOURCES forecastview.qrc)
 kcoreaddons_add_plugin(forecastview
                        SOURCES ${forecastview_SOURCES}
                        INSTALL_NAMESPACE "kmymoney")
-add_dependencies(forecastview forecast_settings_static)
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
 set_target_properties(forecastview
@@ -44,7 +44,6 @@ ki18n_wrap_ui(kcm_forecastview_PART_SRCS forecastviewsettings.ui)
 kcoreaddons_add_plugin(kcm_forecastview
                        SOURCES ${kcm_forecastview_PART_SRCS}
                        INSTALL_NAMESPACE "kmymoney")
-add_dependencies(kcm_forecastview forecast_settings_static)
 
 kcoreaddons_desktop_to_json(kcm_forecastview kcm_forecastview.desktop)
 
