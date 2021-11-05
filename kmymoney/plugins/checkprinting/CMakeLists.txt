@@ -1,7 +1,7 @@
 # patch the version with the version defined in the build system
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/checkprinting.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/checkprinting.json @ONLY)
 
-add_library(checkprinting_settings_static STATIC)
+add_library(checkprinting_settings_static STATIC ${CMAKE_CURRENT_BINARY_DIR}/checkprintingsettings.cpp)
 target_link_libraries(checkprinting_settings_static KF5::ConfigGui)
 kconfig_add_kcfg_files(checkprinting_settings_static checkprintingsettings.kcfgc)
 
@@ -9,14 +9,13 @@ set(checkprinting_PART_SRCS
     numbertowords.cpp
     checkprinting.cpp
     )
-
+set_property(SOURCE checkprinting.cpp APPEND PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/checkprintingsettings.h)
 
 qt5_add_resources(checkprinting_PART_SRCS checkprinting.qrc)
 
 kcoreaddons_add_plugin(checkprinting
                        SOURCES ${checkprinting_PART_SRCS}
                        INSTALL_NAMESPACE "kmymoney")
-add_dependencies(checkprinting checkprinting_settings_static)
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
 set_target_properties(checkprinting
@@ -44,13 +43,13 @@ endif(ENABLE_WEBENGINE)
 set(kcm_checkprinting_PART_SRCS
     kcm_checkprinting.cpp
     )
+set_property(SOURCE kcm_checkprinting.cpp APPEND PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/checkprintingsettings.h)
 
 ki18n_wrap_ui(kcm_checkprinting_PART_SRCS checkprintingsettingsdecl.ui)
 
 kcoreaddons_add_plugin(kcm_checkprinting
                        SOURCES ${kcm_checkprinting_PART_SRCS}
                        INSTALL_NAMESPACE "kmymoney")
-add_dependencies(kcm_checkprinting checkprinting_settings_static)
 
 kcoreaddons_desktop_to_json(kcm_checkprinting kcm_checkprinting.desktop)
 

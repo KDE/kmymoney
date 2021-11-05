@@ -8,7 +8,7 @@ endif()
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/csvimporter.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/csvimporter.json @ONLY)
 
 ########### next target ###############
-add_library(csvimporter_settings_static STATIC)
+add_library(csvimporter_settings_static STATIC ${CMAKE_CURRENT_BINARY_DIR}/pluginsettings.cpp)
 target_link_libraries(csvimporter_settings_static KF5::ConfigGui)
 kconfig_add_kcfg_files(csvimporter_settings_static pluginsettings.kcfgc)
 
@@ -44,7 +44,6 @@ ki18n_wrap_ui(csvimporter_PART_SRCS
 kcoreaddons_add_plugin(csvimporter
                        SOURCES ${csvimporter_PART_SRCS}
                        INSTALL_NAMESPACE "kmymoney")
-add_dependencies(csvimporter checkprinting_settings_static)
 
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
@@ -65,13 +64,13 @@ target_link_libraries(csvimporter
 set(kcm_csvimporter_PART_SRCS
     kcm_csvimporter.cpp
     )
+set_property(SOURCE kcm_csvimporter.cpp APPEND PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/pluginsettings.h)
 
 ki18n_wrap_ui(kcm_csvimporter_PART_SRCS pluginsettingsdecl.ui)
 
 kcoreaddons_add_plugin(kcm_csvimporter
                        SOURCES ${kcm_csvimporter_PART_SRCS}
                        INSTALL_NAMESPACE "kmymoney")
-add_dependencies(kcm_csvimporter checkprinting_settings_static)
 
 kcoreaddons_desktop_to_json(kcm_csvimporter kcm_csvimporter.desktop)
 
