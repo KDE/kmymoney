@@ -175,9 +175,9 @@ public:
 
         if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
             //show account's online-status
-            pathOK = QPixmapToDataUri(Icons::get(Icon::DialogOKApply).pixmap(QSize(16,16)));
-            pathTODO = QPixmapToDataUri(Icons::get(Icon::MailReceive).pixmap(QSize(16,16)));
-            pathNotOK = QPixmapToDataUri(Icons::get(Icon::DialogCancel).pixmap(QSize(16,16)));
+            pathOK = QPixmapToDataUri(Icons::get(Icon::DialogOKApply).pixmap(QSize(8, 8)));
+            pathTODO = QPixmapToDataUri(Icons::get(Icon::MailReceive).pixmap(QSize(8, 8)));
+            pathNotOK = QPixmapToDataUri(Icons::get(Icon::DialogCancel).pixmap(QSize(8, 8)));
 
             if (acc.value("lastImportedTransactionDate").isEmpty() || acc.value("lastStatementBalance").isEmpty())
                 cellStatus = '-';
@@ -808,8 +808,8 @@ public:
                 if (!sched.isFinished()) {
                     MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
-                    QString pathEnter = QPixmapToDataUri(Icons::get(Icon::KeyEnter).pixmap(QSize(16,16)));
-                    QString pathSkip = QPixmapToDataUri(Icons::get(Icon::SkipForward).pixmap(QSize(16, 16)));
+                    QString pathEnter = QPixmapToDataUri(Icons::get(Icon::KeyEnter).pixmap(QSize(8,8)));
+                    QString pathSkip = QPixmapToDataUri(Icons::get(Icon::SkipForward).pixmap(QSize(8, 8)));
 
                     //show payment date
                     tmp = QString("<td>") +
@@ -954,7 +954,7 @@ public:
             m_html += "<tr class=\"item\">";
 
             if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
-                QString pathStatusHeader = QPixmapToDataUri(Icons::get(Icon::Download).pixmap(QSize(16,16)));
+                QString pathStatusHeader = QPixmapToDataUri(Icons::get(Icon::Download).pixmap(QSize(8, 8)));
                 m_html += QString("<td class=\"center\"><img src=\"%1\" border=\"0\"></td>").arg(pathStatusHeader);
             }
 
