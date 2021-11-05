@@ -4,7 +4,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/icalendarexporter.json.cmake
   @ONLY
 )
 
-add_library(icalendar_settings_static STATIC)
+add_library(icalendar_settings_static STATIC ${CMAKE_CURRENT_BINARY_DIR}/icalendarsettings.cpp)
 target_link_libraries(icalendar_settings_static KF5::ConfigGui)
 kconfig_add_kcfg_files(icalendar_settings_static icalendarsettings.kcfgc)
 
