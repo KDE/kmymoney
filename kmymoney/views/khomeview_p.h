@@ -1287,7 +1287,7 @@ public:
             QString statusHeader;
             if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
                 QString pathStatusHeader;
-                pathStatusHeader = QPixmapToDataUri(Icons::get(Icon::OnlineJobOutbox).pixmap(QSize(16, 16)));
+                pathStatusHeader = QPixmapToDataUri(Icons::get(Icon::Download).pixmap(QSize(8, 8)));
                 statusHeader = QString("<img src=\"%1\" border=\"0\">").arg(pathStatusHeader);
             }
 
