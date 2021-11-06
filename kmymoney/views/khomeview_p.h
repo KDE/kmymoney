@@ -955,30 +955,30 @@ public:
                 m_html += QString("<td class=\"center\"><img src=\"%1\" border=\"0\"></td>").arg(pathStatusHeader);
             }
 
-            m_html += "<td class=\"left\" width=\"35%\">";
+            m_html += "<td class=\"left\" width=\"80%\">";
             m_html += i18n("Account");
             m_html += "</td>";
 
             if (KMyMoneySettings::showCountOfUnmarkedTransactions())
-                m_html += QString("<td class=\"center\">%1</td>").arg(i18nc("Header not marked", "!M"));
+                m_html += QString("<td width=\"1%\" class=\"center\">%1</td>").arg(i18nc("Header not marked", "!M"));
 
             if (KMyMoneySettings::showCountOfClearedTransactions())
-                m_html += QString("<td class=\"center\">%1</td>").arg(i18nc("Header cleared", "C"));
+                m_html += QString("<td width=\"1%\" class=\"center\">%1</td>").arg(i18nc("Header cleared", "C"));
 
             if (KMyMoneySettings::showCountOfNotReconciledTransactions())
-                m_html += QString("<td class=\"center\">%1</td>").arg(i18nc("Header not reconciled", "!R"));
+                m_html += QString("<td width=\"1%\" class=\"center\">%1</td>").arg(i18nc("Header not reconciled", "!R"));
 
             if (KMyMoneySettings::showDateOfLastReconciliation())
                 m_html += QString("<td>%1</td>").arg(i18n("Reconciled"));
 
-            m_html += "<td width=\"25%\" class=\"right nowrap\">";
+            m_html += "<td width=\"10%\" class=\"right nowrap\">";
             m_html += i18n("Balance");
             m_html += "</td>";
 
             //only show limit info if user chose to do so
             if (KMyMoneySettings::showLimitInfo()) {
-                m_html += "<td width=\"40%\" class=\"right nowrap\">";
-                m_html += i18n("To Minimum Balance / Maximum Credit");
+                m_html += "<td width=\"10%\" class=\"right nowrap\">";
+                m_html += i18n("To Minimum Balance<br>/ Maximum Credit");
                 m_html += "</td>";
             }
             m_html += "</tr>";
@@ -1310,23 +1310,23 @@ public:
             m_html += "</td>";
 
             if (KMyMoneySettings::showCountOfUnmarkedTransactions())
-                m_html += "<td class=\"setcolor center\">!M</td>";
+                m_html += "<td width=\"1%\" class=\"setcolor center\">!M</td>";
 
             if (KMyMoneySettings::showCountOfClearedTransactions())
-                m_html += "<td class=\"setcolor center\">C</td>";
+                m_html += "<td width=\"1%\" class=\"setcolor center\">C</td>";
 
             if (KMyMoneySettings::showCountOfNotReconciledTransactions())
-                m_html += "<td class=\"setcolor center\">!R</td>";
+                m_html += "<td width=\"1%\" class=\"setcolor center\">!R</td>";
 
             if (KMyMoneySettings::showDateOfLastReconciliation())
-                m_html += "<td class=\"setcolor\">" + i18n("Reconciled") + "</td>";
+                m_html += "<td width=\"1%\" class=\"setcolor\">" + i18n("Reconciled") + "</td>";
 
-            m_html += "<td width=\"15%\" class=\"right nowrap\">";
+            m_html += "<td width=\"5%\" class=\"right nowrap\">";
             m_html += i18n("Balance");
             m_html += "</td>";
 
             //intermediate row to separate both columns
-            m_html += "<td width=\"10%\" class=\"setcolor\"></td>";
+            m_html += "<td width=\"5%\" class=\"setcolor\"></td>";
 
             if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
                 m_html += "<td class=\"setcolor\">";
@@ -1339,18 +1339,18 @@ public:
             m_html += "</td>";
 
             if (KMyMoneySettings::showCountOfUnmarkedTransactions())
-                m_html += "<td class=\"setcolor nowrap\">!M</td>";
+                m_html += "<td width=\"1%\" class=\"setcolor nowrap\">!M</td>";
 
             if (KMyMoneySettings::showCountOfClearedTransactions())
-                m_html += "<td class=\"setcolor nowrap\">C</td>";
+                m_html += "<td width=\"1%\" class=\"setcolor nowrap\">C</td>";
 
             if (KMyMoneySettings::showCountOfNotReconciledTransactions())
-                m_html += "<td class=\"setcolor nowrap\">!R</td>";
+                m_html += "<td width=\"1%\" class=\"setcolor nowrap\">!R</td>";
 
             if (KMyMoneySettings::showDateOfLastReconciliation())
-                m_html += "<td class=\"setcolor nowrap\">" + i18n("Reconciled") + "</td>";
+                m_html += "<td width=\"1%\" class=\"setcolor nowrap\">" + i18n("Reconciled") + "</td>";
 
-            m_html += "<td width=\"15%\" class=\"right nowrap\">";
+            m_html += "<td width=\"5%\" class=\"right nowrap\">";
             m_html += i18n("Balance");
             m_html += "</td></tr>";
 
