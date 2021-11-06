@@ -5,26 +5,6 @@
     </qresource>
     <qresource prefix="/">
         <file>html/kmymoney.css</file>
-        <file>html/images/arrow.png</file>
-        <file>html/images/bc.png</file>
         <file>html/images/bg-texture.png</file>
-        <file>html/images/bl.png</file>
-        <file>html/images/bottomleft.png</file>
-        <file>html/images/bottomright.png</file>
-        <file>html/images/br.png</file>
-        <file>html/images/center.png</file>
-        <file>html/images/lc.png</file>
-        <file>html/images/rc.png</file>
-        <file>html/images/rightborder.png</file>
-        <file>html/images/spacer.gif</file>
-        <file>html/images/spacer.png</file>
-        <file>html/images/tc.png</file>
-        <file>html/images/title-center.png</file>
-        <file>html/images/title-left.png</file>
-        <file>html/images/title-right.png</file>
-        <file>html/images/tl.png</file>
-        <file>html/images/topleft.png</file>
-        <file>html/images/topright.png</file>
-        <file>html/images/tr.png</file>
     </qresource>
 </RCC>
