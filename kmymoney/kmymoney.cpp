@@ -26,6 +26,7 @@
 #include <QByteArray>
 #include <QClipboard>
 #include <QDateTime> // only for performance tests
+#include <QDesktopServices>
 #include <QDir>
 #include <QElapsedTimer>
 #include <QFileDialog>
@@ -1732,6 +1733,9 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             // *************
             // The help menu
             // *************
+            {Action::GetOnlineHelp,                 QStringLiteral("help_get_online_help"),           i18n("Get help from our community"),                Icon::Community},
+            {Action::WhatsNew,                      QStringLiteral("help_whats_new"),                 i18n("See what's new in this version"),             Icon::DialogInformation},
+            {Action::VisitWebsite,                  QStringLiteral("help_visit_website"),             i18n("Visit our website"),                          Icon::Globe},
             // ***************************
             // Actions w/o main menu entry
             // ***************************
@@ -1872,6 +1876,12 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             // *****************
             {Action::SettingsAllMessages,           &KMyMoneyApp::slotEnableMessages},
             {Action::EditTabOrder,                  &KMyMoneyApp::slotEditTabOrder},
+            // *****************
+            // The help menu
+            // *****************
+            {Action::GetOnlineHelp,                 &KMyMoneyApp::slotGetOnlineHelp},
+            {Action::WhatsNew,                      &KMyMoneyApp::slotWhatsNew},
+            {Action::VisitWebsite,                  &KMyMoneyApp::slotVisitWebsite},
             // ***************************
             // Actions w/o main menu entry
             // ***************************
@@ -1972,6 +1982,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     // *************
     {
         const QVector<eMenu::Action> alwaysEnabled {
+            Action::GetOnlineHelp,
             Action::SettingsAllMessages,
             Action::ToolPerformance,
             Action::ToolCalculator,
@@ -4032,6 +4043,21 @@ void KMyMoneyApp::slotEnableMessages()
 {
     KMessageBox::enableAllMessages();
     KMessageBox::information(this, i18n("All messages have been enabled."), i18n("All messages"));
+}
+
+void KMyMoneyApp::slotGetOnlineHelp()
+{
+    QDesktopServices::openUrl(QUrl("https://kmymoney.org/support.html"));
+}
+
+void KMyMoneyApp::slotWhatsNew()
+{
+    QDesktopServices::openUrl(QUrl("https://kmymoney.org/news/"));
+}
+
+void KMyMoneyApp::slotVisitWebsite()
+{
+    QDesktopServices::openUrl(QUrl("https://kmymoney.org"));
 }
 
 void KMyMoneyApp::createInterfaces()

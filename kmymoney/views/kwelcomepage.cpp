@@ -77,11 +77,11 @@ const QString KWelcomePage::welcomePage()
     body += QString("<tr><td><img src=\"qrc:/icons/breeze/actions/22/help-contents.svg\"></td>");
     body += QString("<td><a href=\"/action?id=help_contents\">" + i18n("Open the Handbook and learn how to use KMyMoney") + "</a></td></tr>");
     body += QString("<tr><td><img src=\"qrc:/icons/breeze/actions/22/globe.svg\"></td>");
-    body += QString("<td><a href=\"https://kmymoney.org\">" + i18n("Visit our website") + "</a></td></tr>");
+    body += QString("<td><a href=\"/action?id=help_visit_website\">" + i18n("Visit our website") + "</a></td></tr>");
     body += QString("<tr><td><img src=\"qrc:/icons/breeze/actions/22/system-users.svg\"></td>");
-    body += QString("<td><a href=\"https://kmymoney.org/support.html\">" + i18n("Get help") + "</a></td></tr>");
+    body += QString("<td><a href=\"/action?id=help_get_online_help\">" + i18n("Get help from our community") + "</a></td></tr>");
     body += QString("<tr><td><img src=\"qrc:/icons/breeze/status/22/dialog-information.svg\"></td>");
-    body += QString("<td><a href=\"https://kmymoney.org/news/\">" + i18n("See what's new in this version") + "</a></td></tr>");
+    body += QString("<td><a href=\"/action?id=help_whats_new\">" + i18n("See what's new in this version") + "</a></td></tr>");
 
     body += QString("</table>");
     body += QString("</td>");

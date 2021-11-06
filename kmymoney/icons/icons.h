@@ -74,7 +74,7 @@ enum class Icon { OpenDatabase, Link, Unlink, Reconcile, Split, Tip, Performance
                   ArrowUp, ArrowDown, ArrowRight, ArrowLeft,
                   TaskComplete,
                   TaskReject, TaskAccepted, TaskOngoing,
-                  Help, Folder,
+                  Help, Community, Folder,
                   PreferencesFonts, PreferencesColors, PreferencesIcons,
                   PreferencesNetwork, PreferencesPlugins,
                   Empty,

@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2017, 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -90,6 +91,7 @@ enum class Action {
     // The help menu
     // *************
     SettingsAllMessages,
+    GetOnlineHelp, WhatsNew, VisitWebsite,
     // *************
     // The investment menu
     // *************

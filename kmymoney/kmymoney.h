@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2000-2001 Michael Edwardes <mte@users.sourceforge.net>
     SPDX-FileCopyrightText: 2017, 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 #ifndef KMYMONEY_H
@@ -122,6 +123,21 @@ protected Q_SLOTS:
       * option had been selected.
       */
     void slotEnableMessages();
+
+    /**
+     * This slot navigates to KMyMoney online community.
+     */
+    void slotGetOnlineHelp();
+
+    /**
+     * This slot navigates to KMyMoney release news page.
+     */
+    void slotWhatsNew();
+
+    /**
+     * This slot navigates to KMyMoney website.
+     */
+    void slotVisitWebsite();
 
     /**
       * Called to run performance test.
