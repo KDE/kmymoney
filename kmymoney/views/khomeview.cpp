@@ -149,10 +149,6 @@ void KHomeView::slotOpenUrl(const QUrl &url)
     QString protocol = url.scheme();
     QString view = url.fileName();
 
-    // empty view -> bail out
-    if (view.isEmpty())
-        return;
-
     QUrlQuery query(url);
     QString id = query.queryItemValue("id");
     QString mode = query.queryItemValue("mode");
@@ -162,6 +158,10 @@ void KHomeView::slotOpenUrl(const QUrl &url)
     } else if (protocol == QLatin1String("mailto")) {
         QDesktopServices::openUrl(url);
     } else {
+        // empty view -> bail out
+        if (view.isEmpty())
+            return;
+
         KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
         Q_CHECK_PTR(mw);
         if (view == VIEW_LEDGER) {
