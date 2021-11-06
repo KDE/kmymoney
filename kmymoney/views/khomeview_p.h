@@ -968,10 +968,10 @@ public:
                 m_html += QString("<td class=\"center\">%1</td>").arg(i18nc("Header not reconciled", "!R"));
 
             if (KMyMoneySettings::showDateOfLastReconciliation())
-                m_html += QString("<td>%1</td>").arg(i18n("Last Reconciled"));
+                m_html += QString("<td>%1</td>").arg(i18n("Reconciled"));
 
             m_html += "<td width=\"25%\" class=\"right\">";
-            m_html += i18n("Current Balance");
+            m_html += i18n("Balance");
             m_html += "</td>";
 
             //only show limit info if user chose to do so
@@ -1318,10 +1318,10 @@ public:
                 m_html += "<td class=\"setcolor center\">!R</td>";
 
             if (KMyMoneySettings::showDateOfLastReconciliation())
-                m_html += "<td class=\"setcolor\">" + i18n("Last Reconciled") + "</td>";
+                m_html += "<td class=\"setcolor\">" + i18n("Reconciled") + "</td>";
 
             m_html += "<td width=\"15%\" class=\"right\">";
-            m_html += i18n("Current Balance");
+            m_html += i18n("Balance");
             m_html += "</td>";
 
             //intermediate row to separate both columns
@@ -1347,10 +1347,10 @@ public:
                 m_html += "<td class=\"setcolor\">!R</td>";
 
             if (KMyMoneySettings::showDateOfLastReconciliation())
-                m_html += "<td class=\"setcolor\">" + i18n("Last Reconciled") + "</td>";
+                m_html += "<td class=\"setcolor\">" + i18n("Reconciled") + "</td>";
 
             m_html += "<td width=\"15%\" class=\"right\">";
-            m_html += i18n("Current Balance");
+            m_html += i18n("Balance");
             m_html += "</td></tr>";
 
             QString placeHolder_Status, placeHolder_Counts;
