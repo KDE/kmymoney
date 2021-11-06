@@ -58,7 +58,7 @@ const QString KWelcomePage::welcomePage()
     header += QString("</head>");
 
     //body of the page
-    body = QString("<body style=\"margin-top:100px\">");
+    body = QString("<body style=\"margin-top:100px; background: url(qrc:/html/images/bg-texture.png)\">");
 
     //topright
     body += QString("<table cellpadding=10 align=center width=80% height=100%\">");
