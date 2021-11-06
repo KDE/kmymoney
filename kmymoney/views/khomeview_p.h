@@ -143,11 +143,12 @@ public:
         vbox->setMargin(0);
 
         m_view = new QTextBrowser();
+        m_view->setOpenLinks(false);
         m_view->installEventFilter(q);
 
         vbox->addWidget(m_view);
 
-        q->connect(m_view, &QTextBrowser::sourceChanged, q, &KHomeView::slotOpenUrl);
+        q->connect(m_view, &QTextBrowser::anchorClicked, q, &KHomeView::slotOpenUrl);
 
         q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KHomeView::refresh);
     }
