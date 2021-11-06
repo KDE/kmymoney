@@ -447,7 +447,7 @@ public:
             if (option > 0) {
                 switch (option) {
                 case 1: // payments
-                    showPayments();
+                    showScheduledPayments();
                     break;
 
                 case 2: // preferred accounts
@@ -530,7 +530,7 @@ public:
         m_html += "</table>";
     }
 
-    void showPayments()
+    void showScheduledPayments()
     {
         MyMoneyFile* file = MyMoneyFile::instance();
         QList<MyMoneySchedule> overdues;
@@ -579,7 +579,7 @@ public:
         m_html +=
             "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
             "<tr><td class=\"summaryheader\">"
-            + i18n("Payments") + "</td></tr>";
+            + i18n("Scheduled Payments") + "</td></tr>";
 
         if (!overdues.isEmpty()) {
             m_html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";

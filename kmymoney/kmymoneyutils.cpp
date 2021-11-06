@@ -115,13 +115,13 @@ KGuiItem KMyMoneyUtils::accountsFilterGuiItem()
 }
 
 const char* homePageItems[] = {
-    I18N_NOOP("Payments"),
+    I18N_NOOP("Scheduled payments"),
     I18N_NOOP("Preferred accounts"),
     I18N_NOOP("Payment accounts"),
     I18N_NOOP("Favorite reports"),
     I18N_NOOP("Forecast (schedule)"),
     I18N_NOOP("Net worth forecast"),
-    I18N_NOOP("Forecast (history)"),        // unused, s.a. KSettingsHome::slotLoadItems()
+    I18N_NOOP("Forecast (history)"), // unused, s.a. KSettingsHome::slotLoadItems()
     I18N_NOOP("Assets and Liabilities"),
     I18N_NOOP("Budget"),
     I18N_NOOP("CashFlow"),
