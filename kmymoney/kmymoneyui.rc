@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="48" name="kmymoney" >
+<kpartgui version="49" name="kmymoney" >
  <MenuBar>
   <Menu name="file" >
    <DefineGroup name="open_db_group" append="open_merge"/>
@@ -112,9 +112,6 @@
   </Menu>
   <Menu name="settings" >
    <Action append="show_merge" name="settings_enable_messages" />
-  </Menu>
-  <Menu name="help" >
-   <Action name="show_tip" />
   </Menu>
  </MenuBar>
  <Menu name="account_context_menu">
