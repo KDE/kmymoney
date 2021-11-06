@@ -191,10 +191,7 @@ void KHomeView::slotOpenUrl(const QUrl &url)
             triggerAction(eMenu::Action::ReportOpen, id);
 
         } else if (view == VIEW_WELCOME) {
-            if (mode == QLatin1String("whatsnew"))
-                d->m_view->setHtml(KWelcomePage::whatsNewPage());
-            else
-                d->m_view->setHtml(KWelcomePage::welcomePage());
+            d->m_view->setHtml(KWelcomePage::welcomePage());
 
         } else if (view == QLatin1String("action")) {
             QMetaObject::invokeMethod(mw->actionCollection()->action(id), "trigger");

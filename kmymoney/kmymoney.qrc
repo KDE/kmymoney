@@ -5,11 +5,7 @@
     </qresource>
     <qresource prefix="/">
         <file>html/kmymoney.css</file>
-        <file>html/welcome.css</file>
-        <file>html/images/about_kde.png</file>
         <file>html/images/arrow.png</file>
-        <file>html/images/backarrow.png</file>
-        <file>html/images/background.png</file>
         <file>html/images/bc.png</file>
         <file>html/images/bg-texture.png</file>
         <file>html/images/bl.png</file>
@@ -17,13 +13,7 @@
         <file>html/images/bottomright.png</file>
         <file>html/images/br.png</file>
         <file>html/images/center.png</file>
-        <file>html/images/filenew.png</file>
-        <file>html/images/kmymoneydata.png</file>
-        <file>html/images/konqueror.png</file>
         <file>html/images/lc.png</file>
-        <file>html/images/manual.png</file>
-        <file>html/images/messagebox_info.png</file>
-        <file>html/images/original-trans_logo.png</file>
         <file>html/images/rc.png</file>
         <file>html/images/rightborder.png</file>
         <file>html/images/spacer.gif</file>
@@ -36,6 +26,5 @@
         <file>html/images/topleft.png</file>
         <file>html/images/topright.png</file>
         <file>html/images/tr.png</file>
-        <file>html/images/trans_logo.png</file>
     </qresource>
 </RCC>

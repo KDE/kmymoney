@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2009 Alvaro Soliverez <asoliverez@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -54,65 +55,40 @@ const QString KWelcomePage::welcomePage()
     header += QString("<title>" + i18n("Home Page") + "</title>");
     header += QString("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">");
 
-    header += QString("<link href=\"qrc:/html/welcome.css\" rel=\"stylesheet\" type=\"text/css\">");
     header += QString("</head>");
 
     //body of the page
-    body = QString("<body>");
-    //"background_image", if enabled, displays an image in the background of this page.
-    //If you wish to use a background, un-comment the following line
-    body += QString("<img id=\"background_image\" src=\"qrc:/html/images/background.png\" height=\"100%\">");
-    body += QString("<img id=\"KMyMoneyLogo\" src=\"qrc:/html/images/trans_logo.png\">");
-    body += QString("<h3 id=\"title\">" + i18n("Welcome to KMyMoney") + "</h3>");
-    body += QString("<h4 id=\"subtitle\">" + i18n("The free, easy to use, personal finance manager by KDE") + "</h4>");
-    body += QString("<div id=\"returnLink\"><a href=\"/home\"><img src=\"qrc:/html/images/backarrow.png\">");
-    body += QString(i18n("Go to My Financial Summary"));
-    body += QString("</a></div>");
-    body += QString("<div id=\"topleft\">");
+    body = QString("<body style=\"margin-top:100px\">");
 
     //topright
-    body += QString("<div id=\"topright\"></div>");
-    body += QString("<div id=\"rightborder\">");
-    body += QString("<table style=\"width: 100%;\">");
-    body += QString("<tbody>");
+    body += QString("<table cellpadding=10 align=center width=80% height=100%\">");
+    body += QString("<tr><td><h1 id=\"title\">" + i18n("Welcome to KMyMoney") + "</h3></td></tr>");
+    body += QString("<tr><td><h3 id=\"subtitle\">" + i18n("The free, easy to use, personal finance manager by KDE") + "</h4></td></tr>");
     body += QString("<tr>");
-    body += QString("<td></td>");
-    body += QString("<td style=\"height: 150px;\">");
-    body += QString("<div id=\"welcomeMenu\">");
-    body += QString("<h4>" + i18n("Start with one of the following activities...") + "</h4>");
+    body += QString("<td align=left valign='middle'>");
+    body += QString("<table width=100% height=100%>");
 
     //Welcome menu
-    body += QString("<ul>");
-    body += QString("<li><img src=\"qrc:/html/images/filenew.png\">");
-    body += QString("<a href=\"/action?id=file_new\">" + i18n("Get started and setup accounts") + "</a></li>");
-    body += QString("<li><img src=\"qrc:/html/images/kmymoneydata.png\">");
-    body += QString("<a href=\"/action?id=file_open\">" + i18n("Open an existing data file") + "</a></li>");
-    body += QString("<li><img src=\"qrc:/html/images/manual.png\">");
-    body += QString("<a href=\"/action?id=help_contents\">" + i18n("Learn how to use KMyMoney") + "</a></li>");
-    body += QString("<li><img src=\"qrc:/html/images/konqueror.png\">");
-    body += QString("<a href=\"https://kmymoney.org\">" + i18n("Visit our website") + "</a></li>");
-    body += QString("<li><img src=\"qrc:/html/images/about_kde.png\">");
-    body += QString("<a href=\"https://forum.kde.org/viewforum.php?f=69\">" + i18n("Get help from our community") + "</a></li>");
-    body += QString("<li><img src=\"qrc:/html/images/messagebox_info.png\">");
-    body += QString("<a href=\"/welcome?mode=whatsnew\">" + i18n("See what's new in this version") + "</a></li>");
-    body += QString("</ul>");
+    body += QString("<tr><td width=5%></td><td width=95%></td></tr>");
+    body += QString("<tr><td><img src=\"qrc:/icons/breeze/actions/22/document-new.svg\"></td>");
+    body += QString("<td><a href=\"/action?id=file_new\">" + i18n("Get started and setup accounts") + "</a></td></tr>");
+    body += QString("<tr><td><img src=\"qrc:/icons/breeze/actions/22/document-open.svg\"></td>");
+    body += QString("<td><a href=\"/action?id=file_open\">" + i18n("Open an existing data file") + "</a></td></tr>");
+    body += QString("<tr><td><img src=\"qrc:/icons/breeze/actions/22/help-contents.svg\"></td>");
+    body += QString("<td><a href=\"/action?id=help_contents\">" + i18n("Open the Handbook and learn how to use KMyMoney") + "</a></td></tr>");
+    body += QString("<tr><td><img src=\"qrc:/icons/breeze/actions/22/globe.svg\"></td>");
+    body += QString("<td><a href=\"https://kmymoney.org\">" + i18n("Visit our website") + "</a></td></tr>");
+    body += QString("<tr><td><img src=\"qrc:/icons/breeze/actions/22/system-users.svg\"></td>");
+    body += QString("<td><a href=\"https://kmymoney.org/support.html\">" + i18n("Get help") + "</a></td></tr>");
+    body += QString("<tr><td><img src=\"qrc:/icons/breeze/status/22/dialog-information.svg\"></td>");
+    body += QString("<td><a href=\"https://kmymoney.org/news/\">" + i18n("See what's new in this version") + "</a></td></tr>");
 
-    body += QString("</div>");
+    body += QString("</table>");
     body += QString("</td>");
     body += QString("<td></td>");
     body += QString("</tr>");
-    body += QString("</tbody>");
     body += QString("</table>");
-    //right border
-    body += QString("</div>");
-    body += QString("<div id=\"bottomleft\">");
 
-    //bottom right
-    body += QString("<div id=\"bottomright\"></div>");
-    //bottom left
-    body += QString("</div>");
-    //top left
-    body += QString("</div>");
     body += QString("</body>");
 
     //footer
@@ -120,117 +96,3 @@ const QString KWelcomePage::welcomePage()
 
     return header + body + footer;
 }
-
-const QString KWelcomePage::whatsNewPage()
-{
-    QString header;
-    QString footer;
-    QString body;
-
-    header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">");
-    header += QString("<html>");
-    header += QString("<head>");
-    header += QString("<title>" + i18n("What's new in this version") + "</title>");
-
-    header += QString("<link href=\"qrc:/html/welcome.css\" rel=\"stylesheet\" type=\"text/css\">");
-    header += QString("</head>");
-
-    //body of the page
-    body = QString("<body>");
-    //"background_image", if enabled, displays an image in the background of this page.
-    //If you wish to use a background, un-comment the following line
-    body += QString("<img id=\"background_image\" src=\"qrc:/html/images/background.png\" height=\"100%\">");
-    body += QString("<img id=\"KMyMoneyLogo\" src=\"qrc:/html/images/trans_logo.png\">");
-    body += QString("<h3 id=\"title\">" + i18n("What's new in KMyMoney %1", QApplication::applicationVersion()) + "</h3>");
-    body += QString("<div id=\"returnLink\"><img src=\"qrc:/html/images/backarrow.png\">");
-    body += QString("<a href=\"/welcome\">" + i18n("Return to the Welcome page") + "</a></div>");
-
-    body += QString("<div id=\"topleft\">");
-
-    body += QString("<div id=\"topright\"></div>");
-    body += QString("<div id=\"rightborder\"><table><tr><td>");
-//This is where the content should be put to show up inside the decorative frame
-//Begin content
-
-    body += QString("<p>" + i18n("We are pleased to announce a major step forward for what has been described as \"the BEST personal finance manager for FREE users\".") + "</p>");
-    body += QString("<h4>" + i18n("What's new in this version:") + "</h4>");
-
-    QStringList featuresList = KWelcomePage::featuresList();
-
-    bool inGroup = false;
-    QStringList::ConstIterator feature_it;
-    for (feature_it = featuresList.constBegin(); feature_it != featuresList.constEnd(); ++feature_it) {
-        if (isGroupHeader(*feature_it)) {
-            if (inGroup) {
-                body += QString("</ul>");
-            }
-            body += QString("<b>");
-            body += (*feature_it).midRef(2);
-            body += QString("</b><br/>");
-            body += QString("<ul>");
-            inGroup = true;
-
-        } else if(isGroupItem(*feature_it)) {
-            body += QString("<li>");
-            body += (*feature_it).midRef(2);
-            body += QString("</li>");
-        } else {
-            body += *feature_it;
-        }
-    }
-    if (inGroup) {
-        body += QString("</ul>");
-    }
-
-    body += QString("<p>" + i18n("Let us know what you think. We hope that you enjoy using the application.") + "</p>");
-    body += QString("<p>" + i18n("Please let us know about any abnormal behavior in the program by selecting <a href=\"/action?id=help_report_bug\">\"Report bug...\"</a> from the help menu or by sending an e-mail to the developers mailing list."));
-    body += QString("<font color=\"blue\"><a href=\"mailto:kmymoney-devel@kde.org\">kmymoney-devel@kde.org</a></font></p>");
-    body += QString("<p><div align=\"right\">");
-    body += QString(i18n("The KMyMoney Development Team"));
-    body += QString("</div></p>");
-
-    //End content
-    body += QString("</td></tr></table>");
-    body += QString("</div>");
-    body += QString("<div id=\"bottomleft\"><div id=\"bottomright\"></div>");
-    body += QString("</div>");
-    body += QString("</div>");
-    body += QString("<div style=\"margin-bottom: 65px\"></div>");
-    body += QString("</body>");
-
-    //footer
-    footer += QString("</html>");
-
-    return header + body + footer;
-}
-
-const QStringList KWelcomePage::featuresList()
-{
-    QStringList featuresList;
-
-    featuresList.append(i18n("* General changes"));
-    featuresList.append(i18n("- Port to KDE frameworks and Qt5"));
-
-    featuresList.append(i18n("* User Interface changes"));
-    featuresList.append(i18n("- Show more tooltips why features are not available"));
-    featuresList.append(i18n("- Improved compatibility with dark color schemes"));
-    featuresList.append(i18n("- Fast switching of main views via Ctrl + number key"));
-    featuresList.append(i18n("- Improved keyboard navigation"));
-    featuresList.append(i18n("- View columns are user selectable"));
-    featuresList.append(i18n("- Use QWebEngine in favor of KHTML when available"));
-
-    featuresList.append(i18n("* Im-/Exporter"));
-    featuresList.append(i18n("- Added support for Woob"));
-    featuresList.append(i18n("- Improved CSV importer"));
-    featuresList.append(i18n("- Added CSV exporter"));
-    featuresList.append(i18n("- Improved payee matching when importing transactions"));
-
-    featuresList.append(i18n("* Online services"));
-    featuresList.append(i18n("- Updated list of application versions for OFX direct import"));
-    featuresList.append(i18n("- Get rid of Yahoo as price source"));
-    featuresList.append(i18n("- Supporting OFX client uid required by some banks"));
-    featuresList.append(i18n("- Support price download by ISIN"));
-
-    return featuresList;
-}
-

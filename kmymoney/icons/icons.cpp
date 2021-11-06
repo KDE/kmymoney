@@ -166,6 +166,7 @@ const QHash<Icon, QString> iconMappings{
     {Icon::AssetLoanClosed, QStringLiteral("view-financial-account-loan-closed")},
     {Icon::OnlineJobOutbox, QStringLiteral("internet-mail")},
     {Icon::OnlinePriceUpdate, QStringLiteral("view-refresh-symbolic")},
+    {Icon::Globe, QStringLiteral("globe")},
     {Icon::Payees, QStringLiteral("financial-payees")},
     {Icon::Reports, QStringLiteral("financial-report")},
     {Icon::Savings, QStringLiteral("view-financial-account-savings")},

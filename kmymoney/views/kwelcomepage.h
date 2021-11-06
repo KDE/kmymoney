@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2009 Alvaro Soliverez <asoliverez@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 #ifndef KWELCOMEPAGE_H
@@ -33,11 +34,8 @@ public:
 
     static const QString welcomePage();
 
-    static const QString whatsNewPage();
-
 protected:
 
-    static const QStringList featuresList();
     static bool isGroupHeader(const QString& item);
     static bool isGroupItem(const QString& item);
 };

@@ -3760,7 +3760,7 @@ void KMyMoneyApp::Private::saveConsistencyCheckResults()
 
 void KMyMoneyApp::Private::setThemedCSS()
 {
-    const QStringList CSSnames {QStringLiteral("kmymoney.css"), QStringLiteral("welcome.css")};
+    const QStringList CSSnames {QStringLiteral("kmymoney.css")};
     const QString cssDir("/html/");
     const QString embeddedCSSPath = ":" + cssDir;
     // make sure we have the local directory where the themed version is stored

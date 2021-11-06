@@ -64,6 +64,7 @@ enum class Icon { OpenDatabase, Link, Unlink, Reconcile, Split, Tip, Performance
                   OfficeCharBar, OfficeChartLineForecast,
                   MailMessage, MailSend, MailReceive,
                   MapOnlineAccount, UnmapOnlineAccount,
+                  Globe,
                   NewSchedule, KMyMoney,
                   PayeeRename, PayeeMerge,
                   Configure,

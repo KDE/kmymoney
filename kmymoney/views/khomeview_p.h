@@ -488,9 +488,6 @@ public:
             }
         }
 
-        m_html += "<div id=\"returnlink\">";
-        m_html += link(VIEW_WELCOME, QString()) + i18n("Show KMyMoney welcome page") + linkend();
-        m_html += "</div>";
         m_html += footer;
 
         m_view->setHtml(m_html);
