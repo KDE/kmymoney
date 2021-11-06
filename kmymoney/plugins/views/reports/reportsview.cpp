@@ -214,9 +214,9 @@ QString ReportsView::budget() const
     QString totalActualAmount = totalActualValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
     QString totalBudgetDiffAmount = totalBudgetDiffValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
 
-    html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(totalBudgetAmount, totalBudgetValue.isNegative()));
-    html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(totalActualAmount, totalActualValue.isNegative()));
-    html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(totalBudgetDiffAmount, totalBudgetDiffValue.isNegative()));
+    html += QString("<td class=\"right nowrap\">%1</td>").arg(showColoredAmount(totalBudgetAmount, totalBudgetValue.isNegative()));
+    html += QString("<td class=\"right nowrap\">%1</td>").arg(showColoredAmount(totalActualAmount, totalActualValue.isNegative()));
+    html += QString("<td class=\"right nowrap\">%1</td>").arg(showColoredAmount(totalBudgetDiffAmount, totalBudgetDiffValue.isNegative()));
     html += "</tr>";
     html += "</table></td></tr>";
 
@@ -276,9 +276,9 @@ QString ReportsView::budget() const
                     html += QString("<td>") + link(VIEW_LEDGER, QString("?id=%1").arg(rowname.id()), QString()) + rowname.name() + linkend() + "</td>";
 
                     //show amounts
-                    html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(budgetAmount, budgetValue.isNegative()));
-                    html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(actualAmount, actualValue.isNegative()));
-                    html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(budgetDiffAmount, budgetDiffValue.isNegative()));
+                    html += QString("<td class=\"right nowrap\">%1</td>").arg(showColoredAmount(budgetAmount, budgetValue.isNegative()));
+                    html += QString("<td class=\"right nowrap\">%1</td>").arg(showColoredAmount(actualAmount, actualValue.isNegative()));
+                    html += QString("<td class=\"right nowrap\">%1</td>").arg(showColoredAmount(budgetDiffAmount, budgetDiffValue.isNegative()));
                     html += "</tr>";
 
                     //set the flag that there are overruns

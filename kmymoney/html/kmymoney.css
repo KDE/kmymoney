@@ -89,6 +89,10 @@
         vertical-align: bottom;
     }
 
+    .nowrap {
+        white-space: nowrap;
+    }
+
     th.left, td.left { /*rule to align table header and table data cells*/
         text-align: left;
     }

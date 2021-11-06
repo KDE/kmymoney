@@ -189,7 +189,7 @@ public:
             } else
                 cellStatus = QString("<img src=\"%1\" border=\"0\">").arg(pathNotOK);
 
-            tmp = QString("<td class=\"center\">%1</td>").arg(cellStatus);
+            tmp = QString("<td class=\"center nowrap\">%1</td>").arg(cellStatus);
         }
 
         tmp += QString("<td>") + link(VIEW_LEDGER, QString("?id=%1").arg(acc.id()));
@@ -219,7 +219,7 @@ public:
                 countStr = QString("%1").arg(countNotMarked);
             else
                 countStr = '-';
-            tmp += QString("<td class=\"center\">%1</td>").arg(countStr);
+            tmp += QString("<td class=\"center nowrap\">%1</td>").arg(countStr);
         }
 
         if (KMyMoneySettings::showCountOfClearedTransactions()) {
@@ -227,7 +227,7 @@ public:
                 countStr = QString("%1").arg(countCleared);
             else
                 countStr = '-';
-            tmp += QString("<td class=\"center\">%1</td>").arg(countStr);
+            tmp += QString("<td class=\"center nowrap\">%1</td>").arg(countStr);
         }
 
         if (KMyMoneySettings::showCountOfNotReconciledTransactions()) {
@@ -235,7 +235,7 @@ public:
                 countStr = QString("%1").arg(countNotReconciled);
             else
                 countStr = '-';
-            tmp += QString("<td class=\"center\">%1</td>").arg(countStr);
+            tmp += QString("<td class=\"center nowrap\">%1</td>").arg(countStr);
         }
 
         if (KMyMoneySettings::showDateOfLastReconciliation()) {
@@ -244,16 +244,16 @@ public:
         }
 
         //show account balance
-        tmp += QString("<td class=\"right\">%1</td>").arg(showColoredAmount(amount, value.isNegative()));
+        tmp += QString("<td class=\"right nowrap\">%1</td>").arg(showColoredAmount(amount, value.isNegative()));
 
         //show minimum balance column if requested
         if (showMinBal) {
             //if it is an investment, show minimum balance empty
             if (acc.accountType() == Account::Type::Investment) {
-                tmp += QString("<td class=\"right\">&nbsp;</td>");
+                tmp += QString("<td class=\"right nowrap\">&nbsp;</td>");
             } else {
                 //show minimum balance entry
-                tmp += QString("<td class=\"right\">%1</td>").arg(showColoredAmount(amountToMinBal, valueToMinBal.isNegative()));
+                tmp += QString("<td class=\"right nowrap\">%1</td>").arg(showColoredAmount(amountToMinBal, valueToMinBal.isNegative()));
             }
         }
         // qDebug("accountEntry = '%s'", tmp.toLatin1());
@@ -606,10 +606,10 @@ public:
             m_html += "<td class=\"left\" width=\"20%\">";
             m_html += i18n("Account");
             m_html += "</td>";
-            m_html += "<td class=\"right\" width=\"15%\">";
+            m_html += "<td class=\"right nowrap\" width=\"15%\">";
             m_html += i18n("Amount");
             m_html += "</td>";
-            m_html += "<td class=\"right\" width=\"15%\">";
+            m_html += "<td class=\"right nowrap\" width=\"15%\">";
             m_html += i18n("Balance after");
             m_html += "</td>";
             m_html += "</tr>";
@@ -668,10 +668,10 @@ public:
                 m_html += "<td class=\"left\" width=\"20%\">";
                 m_html += i18n("Account");
                 m_html += "</td>";
-                m_html += "<td class=\"right\" width=\"15%\">";
+                m_html += "<td class=\"right nowrap\" width=\"15%\">";
                 m_html += i18n("Amount");
                 m_html += "</td>";
-                m_html += "<td class=\"right\" width=\"15%\">";
+                m_html += "<td class=\"right nowrap\" width=\"15%\">";
                 m_html += i18n("Balance after");
                 m_html += "</td>";
                 m_html += "</tr>";
@@ -708,10 +708,10 @@ public:
                 m_html += "<td class=\"left\" width=\"20%\">";
                 m_html += i18n("Account");
                 m_html += "</td>";
-                m_html += "<td class=\"right\" width=\"15%\">";
+                m_html += "<td class=\"right nowrap\" width=\"15%\">";
                 m_html += i18n("Amount");
                 m_html += "</td>";
-                m_html += "<td class=\"right\" width=\"15%\">";
+                m_html += "<td class=\"right nowrap\" width=\"15%\">";
                 m_html += i18n("Balance after");
                 m_html += "</td>";
                 m_html += "</tr>";
@@ -809,7 +809,8 @@ public:
                     QString pathSkip = QPixmapToDataUri(Icons::get(Icon::SkipForward).pixmap(QSize(8, 8)));
 
                     //show payment date
-                    tmp = QString("<td>") + QLocale().toString(sched.adjustedNextDueDate(), QLocale::ShortFormat) + "</td><td align=\"center\">";
+                    tmp =
+                        QString("<td class=\"nowrap\">") + QLocale().toString(sched.adjustedNextDueDate(), QLocale::ShortFormat) + "</td><td align=\"center\">";
 
                     // show Enter Next and Skip Next buttons
                     if (!pathEnter.isEmpty())
@@ -831,7 +832,7 @@ public:
                     tmp += QString(file->account(acc.id()).name());
 
                     //show amount of the schedule
-                    tmp += "</td><td align=\"right\">";
+                    tmp += "</td><td class=\"right nowrap\">";
 
                     const MyMoneySecurity& currency = MyMoneyFile::instance()->currency(acc.currencyId());
                     MyMoneyMoney payment = MyMoneyMoney(sp.value(t.commodity(), acc.currencyId()) * cnt);
@@ -840,7 +841,7 @@ public:
                     tmp += showColoredAmount(amount, payment.isNegative());
                     tmp += "</td>";
                     //show balance after payments
-                    tmp += "<td align=\"right\">";
+                    tmp += "<td class=\"right nowrap\">";
                     QDate paymentDate = QDate(sched.adjustedNextDueDate());
                     MyMoneyMoney balanceAfter = forecastPaymentBalance(acc, payment, paymentDate);
                     QString balance = MyMoneyUtils::formatMoney(balanceAfter, acc, currency);
@@ -970,13 +971,13 @@ public:
             if (KMyMoneySettings::showDateOfLastReconciliation())
                 m_html += QString("<td>%1</td>").arg(i18n("Reconciled"));
 
-            m_html += "<td width=\"25%\" class=\"right\">";
+            m_html += "<td width=\"25%\" class=\"right nowrap\">";
             m_html += i18n("Balance");
             m_html += "</td>";
 
             //only show limit info if user chose to do so
             if (KMyMoneySettings::showLimitInfo()) {
-                m_html += "<td width=\"40%\" class=\"right\">";
+                m_html += "<td width=\"40%\" class=\"right nowrap\">";
                 m_html += i18n("To Minimum Balance / Maximum Credit");
                 m_html += "</td>";
             }
@@ -992,12 +993,12 @@ public:
             m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
             QString amount = m_total.formatMoney(file->baseCurrency().tradingSymbol(), prec);
             if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) m_html += "<td></td>";
-            m_html += QString("<td class=\"right\"><b>%1</b></td>").arg(i18n("Total"));
+            m_html += QString("<td class=\"right nowrap\"><b>%1</b></td>").arg(i18n("Total"));
             if (KMyMoneySettings::showCountOfUnmarkedTransactions()) m_html += "<td></td>";
             if (KMyMoneySettings::showCountOfClearedTransactions()) m_html += "<td></td>";
             if (KMyMoneySettings::showCountOfNotReconciledTransactions()) m_html += "<td></td>";
             if (KMyMoneySettings::showDateOfLastReconciliation()) m_html += "<td></td>";
-            m_html += QString("<td class=\"right\"><b>%1</b></td></tr>").arg(showColoredAmount(amount, m_total.isNegative()));
+            m_html += QString("<td class=\"right nowrap\"><b>%1</b></td></tr>").arg(showColoredAmount(amount, m_total.isNegative()));
             m_html += "</tr>";
             m_html += "</table></td></tr>";
             m_html += "</table>";
@@ -1079,7 +1080,7 @@ public:
             m_html += i18n("Account");
             m_html += "</td>";
             for (i = 0; (i*m_forecast.accountsCycle() + beginDay) <= m_forecast.forecastDays(); ++i) {
-                m_html += QString("<td width=\"%1%\" class=\"right\">").arg(colWidth);
+                m_html += QString("<td width=\"%1%\" class=\"right nowrap\">").arg(colWidth);
 
                 m_html += i18ncp("Forecast days", "%1 day", "%1 days", i * m_forecast.accountsCycle() + beginDay);
                 m_html += "</td>";
@@ -1118,7 +1119,7 @@ public:
                     QString amount;
                     amount = MyMoneyUtils::formatMoney(forecastBalance, *it_account, currency);
                     amount.replace(QChar(' '), "&nbsp;");
-                    m_html += QString("<td width=\"%1%\" align=\"right\">").arg(colWidth);
+                    m_html += QString("<td width=\"%1%\" class=\"right nowrap\">").arg(colWidth);
                     m_html += QString("%1</td>").arg(showColoredAmount(amount, forecastBalance.isNegative()));
                 }
 
@@ -1320,7 +1321,7 @@ public:
             if (KMyMoneySettings::showDateOfLastReconciliation())
                 m_html += "<td class=\"setcolor\">" + i18n("Reconciled") + "</td>";
 
-            m_html += "<td width=\"15%\" class=\"right\">";
+            m_html += "<td width=\"15%\" class=\"right nowrap\">";
             m_html += i18n("Balance");
             m_html += "</td>";
 
@@ -1338,18 +1339,18 @@ public:
             m_html += "</td>";
 
             if (KMyMoneySettings::showCountOfUnmarkedTransactions())
-                m_html += "<td class=\"setcolor\">!M</td>";
+                m_html += "<td class=\"setcolor nowrap\">!M</td>";
 
             if (KMyMoneySettings::showCountOfClearedTransactions())
-                m_html += "<td class=\"setcolor\">C</td>";
+                m_html += "<td class=\"setcolor nowrap\">C</td>";
 
             if (KMyMoneySettings::showCountOfNotReconciledTransactions())
-                m_html += "<td class=\"setcolor\">!R</td>";
+                m_html += "<td class=\"setcolor nowrap\">!R</td>";
 
             if (KMyMoneySettings::showDateOfLastReconciliation())
-                m_html += "<td class=\"setcolor\">" + i18n("Reconciled") + "</td>";
+                m_html += "<td class=\"setcolor nowrap\">" + i18n("Reconciled") + "</td>";
 
-            m_html += "<td width=\"15%\" class=\"right\">";
+            m_html += "<td width=\"15%\" class=\"right nowrap\">";
             m_html += i18n("Balance");
             m_html += "</td></tr>";
 
@@ -1434,20 +1435,32 @@ public:
             m_html += QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd");
 
             //print total for assets
-            m_html += QString("%1<td class=\"left\">%2</td>%3<td align=\"right\">%4</td>").arg(placeHolder_Status).arg(i18n("Total Assets")).arg(placeHolder_Counts).arg(showColoredAmount(amountAssets, netAssets.isNegative()));
+            m_html += QString("%1<td class=\"left\">%2</td>%3<td class=\"right nowrap\">%4</td>")
+                          .arg(placeHolder_Status)
+                          .arg(i18n("Total Assets"))
+                          .arg(placeHolder_Counts)
+                          .arg(showColoredAmount(amountAssets, netAssets.isNegative()));
 
             //leave the intermediate column empty
             m_html += "<td class=\"setcolor\"></td>";
 
             //print total liabilities
-            m_html += QString("%1<td class=\"left\">%2</td>%3<td align=\"right\">%4</td>").arg(placeHolder_Status).arg(i18n("Total Liabilities")).arg(placeHolder_Counts).arg(showColoredAmount(amountLiabilities, netLiabilities.isNegative()));
+            m_html += QString("%1<td class=\"left\">%2</td>%3<td class=\"right nowrap\">%4</td>")
+                          .arg(placeHolder_Status)
+                          .arg(i18n("Total Liabilities"))
+                          .arg(placeHolder_Counts)
+                          .arg(showColoredAmount(amountLiabilities, netLiabilities.isNegative()));
             m_html += "</tr>";
 
             //print net worth
             m_html += QString("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(i++ & 0x01 ? "even" : "odd");
 
             m_html += QString("%1<td></td><td></td>%2<td class=\"setcolor\"></td>").arg(placeHolder_Status).arg(placeHolder_Counts);
-            m_html += QString("%1<td class=\"left\">%2</td>%3<td align=\"right\">%4</td>").arg(placeHolder_Status).arg(i18n("Net Worth")).arg(placeHolder_Counts).arg(showColoredAmount(amountNetWorth, netWorth.isNegative()));
+            m_html += QString("%1<td class=\"left\">%2</td>%3<td class=\"right nowrap\">%4</td>")
+                          .arg(placeHolder_Status)
+                          .arg(i18n("Net Worth"))
+                          .arg(placeHolder_Counts)
+                          .arg(showColoredAmount(amountNetWorth, netWorth.isNegative()));
 
             m_html += "</tr>";
             m_html += "</table></td></tr>";
@@ -1750,16 +1763,16 @@ public:
         m_html += QString("<tr class=\"row-even\" style=\"font-weight:bold;\">");
 
         //print current income
-        m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountIncome, incomeValue.isNegative()));
+        m_html += QString("<td class=\"right nowrap\">%2</td>").arg(showColoredAmount(amountIncome, incomeValue.isNegative()));
 
         //print the scheduled income
-        m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountScheduledIncome, scheduledIncome.isNegative()));
+        m_html += QString("<td class=\"right nowrap\">%2</td>").arg(showColoredAmount(amountScheduledIncome, scheduledIncome.isNegative()));
 
         //print current expenses
-        m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountExpense,  expenseValue.isNegative()));
+        m_html += QString("<td class=\"right nowrap\">%2</td>").arg(showColoredAmount(amountExpense, expenseValue.isNegative()));
 
         //print the scheduled expenses
-        m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountScheduledExpense,  scheduledExpense.isNegative()));
+        m_html += QString("<td class=\"right nowrap\">%2</td>").arg(showColoredAmount(amountScheduledExpense, scheduledExpense.isNegative()));
         m_html += "</tr>";
 
         m_html += "</table></td></tr>";
@@ -1792,17 +1805,16 @@ public:
         m_html += QString("<tr class=\"row-even\" style=\"font-weight:bold;\">");
 
         //print current liquid assets
-        m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountLiquidAssets, liquidAssets.isNegative()));
+        m_html += QString("<td class=\"right nowrap\">%2</td>").arg(showColoredAmount(amountLiquidAssets, liquidAssets.isNegative()));
 
         //print the scheduled transfers
-        m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountScheduledLiquidTransfer, scheduledLiquidTransfer.isNegative()));
+        m_html += QString("<td class=\"right nowrap\">%2</td>").arg(showColoredAmount(amountScheduledLiquidTransfer, scheduledLiquidTransfer.isNegative()));
 
         //print current liabilities
-        m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountLiquidLiabilities,  liquidLiabilities.isNegative()));
+        m_html += QString("<td class=\"right nowrap\">%2</td>").arg(showColoredAmount(amountLiquidLiabilities, liquidLiabilities.isNegative()));
 
         //print the scheduled transfers
-        m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountScheduledOtherTransfer, scheduledOtherTransfer.isNegative()));
-
+        m_html += QString("<td class=\"right nowrap\">%2</td>").arg(showColoredAmount(amountScheduledOtherTransfer, scheduledOtherTransfer.isNegative()));
 
         m_html += "</tr>";
 
@@ -1847,13 +1859,13 @@ public:
         m_html += QString("<tr class=\"row-even\" style=\"font-weight:bold;\">");
 
         //print expected assets
-        m_html += QString("<td colspan=\"2\" align=\"right\">%2</td>").arg(showColoredAmount(amountExpectedAsset, expectedAsset.isNegative()));
+        m_html += QString("<td colspan=\"2\" class=\"right nowrap\">%2</td>").arg(showColoredAmount(amountExpectedAsset, expectedAsset.isNegative()));
 
         //print expected liabilities
-        m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountExpectedLiabilities, expectedLiabilities.isNegative()));
+        m_html += QString("<td class=\"right nowrap\">%2</td>").arg(showColoredAmount(amountExpectedLiabilities, expectedLiabilities.isNegative()));
 
         //print expected profit
-        m_html += QString("<td align=\"right\">%2</td>").arg(showColoredAmount(amountProfit, profitValue.isNegative()));
+        m_html += QString("<td class=\"right nowrap\">%2</td>").arg(showColoredAmount(amountProfit, profitValue.isNegative()));
 
         m_html += "</tr>";
         m_html += "</table></td></tr>";
