@@ -27,7 +27,7 @@
     <number>1</number>
    </property>
    <item>
-    <widget class="QPushButton" name="buttonChart">
+    <widget class="QToolButton" name="buttonChart">
      <property name="minimumSize">
       <size>
        <width>75</width>
@@ -43,7 +43,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="buttonConfigure">
+    <widget class="QToolButton" name="buttonConfigure">
      <property name="minimumSize">
       <size>
        <width>75</width>
@@ -59,7 +59,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="buttonNew">
+    <widget class="QToolButton" name="buttonNew">
      <property name="minimumSize">
       <size>
        <width>75</width>
@@ -75,7 +75,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="buttonCopy">
+    <widget class="QToolButton" name="buttonCopy">
      <property name="minimumSize">
       <size>
        <width>75</width>
@@ -91,7 +91,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="buttonExport">
+    <widget class="QToolButton" name="buttonExport">
      <property name="minimumSize">
       <size>
        <width>75</width>
@@ -107,7 +107,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="buttonDelete">
+    <widget class="QToolButton" name="buttonDelete">
      <property name="minimumSize">
       <size>
        <width>75</width>
@@ -123,7 +123,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="buttonClose">
+    <widget class="QToolButton" name="buttonClose">
      <property name="minimumSize">
       <size>
        <width>75</width>

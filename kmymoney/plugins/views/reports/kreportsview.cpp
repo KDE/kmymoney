@@ -89,6 +89,19 @@ KReportsView::KReportsView(QWidget *parent) :
     KMyMoneyViewBase(*new KReportsViewPrivate(this), parent)
 {
     connect(pActions[eMenu::Action::ReportAccountTransactions], &QAction::triggered, this, &KReportsView::slotReportAccountTransactions);
+
+    connect(pActions[eMenu::Action::ReportNew], &QAction::triggered, this, &KReportsView::slotDuplicate);
+    connect(pActions[eMenu::Action::ReportCopy], &QAction::triggered, this, &KReportsView::slotCopyView);
+    connect(pActions[eMenu::Action::ReportConfigure], &QAction::triggered, this, &KReportsView::slotConfigure);
+    connect(pActions[eMenu::Action::ReportExport], &QAction::triggered, this, &KReportsView::slotExportView);
+    connect(pActions[eMenu::Action::ReportDelete], &QAction::triggered, this, &KReportsView::slotDelete);
+    connect(pActions[eMenu::Action::ReportClose], &QAction::triggered, this, &KReportsView::slotCloseCurrent);
+
+    pActions[eMenu::Action::ReportNew]->setShortcut(QKeySequence::New);
+    pActions[eMenu::Action::ReportCopy]->setShortcut(QKeySequence::Copy);
+    pActions[eMenu::Action::ReportConfigure]->setShortcut(QKeySequence::Preferences);
+    pActions[eMenu::Action::ReportDelete]->setShortcut(QKeySequence::Delete);
+    pActions[eMenu::Action::ReportClose]->setShortcut(QKeySequence::Close);
 }
 
 KReportsView::~KReportsView()
@@ -226,26 +239,43 @@ bool KReportsView::eventFilter(QObject* watched, QEvent* event)
 {
     Q_D(KReportsView);
 
-    if (watched == d->ui.m_searchWidget || watched == d->ui.m_tocTreeWidget) {
-        if (event->type() == QEvent::KeyPress) {
+    if (event->type() == QEvent::KeyPress) {
+        if (watched == d->ui.m_searchWidget || watched == d->ui.m_tocTreeWidget) {
             const auto kev = static_cast<QKeyEvent*>(event);
             if (kev->modifiers() == Qt::NoModifier && kev->key() == Qt::Key_Escape) {
                 d->ui.m_closeButton->animateClick();
                 return true;
             }
         }
+
+    } else if (event->type() == QEvent::ShortcutOverride) {
+        const auto kev = static_cast<QKeyEvent*>(event);
+        const auto keySeq = QKeySequence(kev->modifiers() + kev->key());
+        for (auto button : findChildren<QToolButton*>()) {
+            const auto action = button->defaultAction();
+            if (action) {
+                const auto actionSeq = action->shortcut();
+                if (keySeq == actionSeq) {
+                    action->trigger();
+                    event->accept();
+                    return true;
+                }
+            }
+        }
     }
+
     return QWidget::eventFilter(watched, event);
 }
 
 void KReportsView::updateActions(const SelectedObjects& selections)
 {
+    Q_D(KReportsView);
     bool enable = false;
+
     if (!selections.selection(SelectedObjects::Account).isEmpty()) {
         const auto file = MyMoneyFile::instance();
         const auto accId = selections.selection(SelectedObjects::Account).at(0);
         if (!file->isStandardAccount(accId)) {
-            Q_D(KReportsView);
             d->m_currentAccount = file->accountsModel()->itemById(accId);
             switch (d->m_currentAccount.accountType()) {
             case eMyMoney::Account::Type::Asset:
@@ -260,6 +290,13 @@ void KReportsView::updateActions(const SelectedObjects& selections)
         }
     }
     pActions[eMenu::Action::ReportAccountTransactions]->setEnabled(enable);
+
+    // only access the widgets if they are initialized
+    if (!d->m_needLoad) {
+        if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget())) {
+            tab->enableAllReportActions();
+        }
+    }
 }
 
 void KReportsView::slotOpenUrl(const QUrl &url)
@@ -530,7 +567,7 @@ void KReportsView::slotOpenReport(const QString& id)
 {
     Q_D(KReportsView);
     if (id.isEmpty()) {
-        // nothing to  do
+        // nothing to do
         return;
     }
 

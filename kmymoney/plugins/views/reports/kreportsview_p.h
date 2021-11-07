@@ -157,6 +157,16 @@ public:
         updateReport();
     }
 
+    void enableAllReportActions()
+    {
+        pActions[eMenu::Action::ReportNew]->setEnabled(true);
+        pActions[eMenu::Action::ReportCopy]->setEnabled(true);
+        pActions[eMenu::Action::ReportConfigure]->setEnabled(true);
+        pActions[eMenu::Action::ReportExport]->setEnabled(true);
+        pActions[eMenu::Action::ReportDelete]->setEnabled(true);
+        pActions[eMenu::Action::ReportClose]->setEnabled(true);
+    }
+
     void showEvent(QShowEvent * event) final override;
     void loadTab();
 
@@ -215,7 +225,7 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     m_tableView->setPage(new MyQWebEnginePage(m_tableView));
     m_tableView->setZoomFactor(KMyMoneySettings::zoomFactor());
 
-    //set button icons
+    // set button icons
     m_control->ui->buttonChart->setIcon(Icons::get(Icon::OfficeCharBar));
     m_control->ui->buttonClose->setIcon(Icons::get(Icon::DocumentClose));
     m_control->ui->buttonConfigure->setIcon(Icons::get(Icon::Configure));
@@ -223,6 +233,14 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     m_control->ui->buttonDelete->setIcon(Icons::get(Icon::EditRemove));
     m_control->ui->buttonExport->setIcon(Icons::get(Icon::DocumentExport));
     m_control->ui->buttonNew->setIcon(Icons::get(Icon::DocumentNew));
+
+    // and actions
+    m_control->ui->buttonClose->setDefaultAction(pActions[eMenu::Action::ReportClose]);
+    m_control->ui->buttonConfigure->setDefaultAction(pActions[eMenu::Action::ReportConfigure]);
+    m_control->ui->buttonCopy->setDefaultAction(pActions[eMenu::Action::ReportCopy]);
+    m_control->ui->buttonDelete->setDefaultAction(pActions[eMenu::Action::ReportDelete]);
+    m_control->ui->buttonExport->setDefaultAction(pActions[eMenu::Action::ReportExport]);
+    m_control->ui->buttonNew->setDefaultAction(pActions[eMenu::Action::ReportNew]);
 
     m_chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_chartView->hide();
@@ -234,20 +252,18 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     m_layout->setStretch(2, 10);
 
     connect(m_control->ui->buttonChart, &QAbstractButton::clicked, eventHandler, &KReportsView::slotToggleChart);
-    connect(m_control->ui->buttonConfigure, &QAbstractButton::clicked, eventHandler, &KReportsView::slotConfigure);
-    connect(m_control->ui->buttonNew, &QAbstractButton::clicked, eventHandler, &KReportsView::slotDuplicate);
-    connect(m_control->ui->buttonCopy, &QAbstractButton::clicked, eventHandler, &KReportsView::slotCopyView);
-    connect(m_control->ui->buttonExport, &QAbstractButton::clicked, eventHandler, &KReportsView::slotExportView);
-    connect(m_control->ui->buttonDelete, &QAbstractButton::clicked, eventHandler, &KReportsView::slotDelete);
-    connect(m_control->ui->buttonClose, &QAbstractButton::clicked, eventHandler, &KReportsView::slotCloseCurrent);
+
+    // setup style for all buttons to contain icon and text
+    for (auto* button : m_control->findChildren<QToolButton*>()) {
+        button->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    }
+    enableAllReportActions();
 
 #ifdef ENABLE_WEBENGINE
-    connect(m_tableView->page(), &QWebEnginePage::urlChanged,
-            eventHandler, &KReportsView::slotOpenUrl);
+    connect(m_tableView->page(), &QWebEnginePage::urlChanged, eventHandler, &KReportsView::slotOpenUrl);
 #else
     m_tableView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
-    connect(m_tableView->page(), &KWebPage::linkClicked,
-            eventHandler, &KReportsView::slotOpenUrl);
+    connect(m_tableView->page(), &KWebPage::linkClicked, eventHandler, &KReportsView::slotOpenUrl);
 #endif
 
     // if this is a default report, then you can't delete it!
@@ -581,7 +597,8 @@ public:
     void addReportTab(const MyMoneyReport& report)
     {
         Q_Q(KReportsView);
-        new KReportTab(ui.m_reportTabWidget, report, q);
+        auto reportTab = new KReportTab(ui.m_reportTabWidget, report, q);
+        reportTab->installEventFilter(q);
     }
 
     void loadView()

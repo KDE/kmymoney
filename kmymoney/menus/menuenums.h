@@ -127,7 +127,8 @@ enum class Action {
 #endif
     DebugTimers,
     DeleteOnlineJob, EditOnlineJob, LogOnlineJob,
-    ReportOpen,
+    ReportOpen, ReportNew, ReportCopy, ReportConfigure,
+    ReportExport, ReportDelete, ReportClose, ReportToggleChart,
 };
 // clang-format on
 
