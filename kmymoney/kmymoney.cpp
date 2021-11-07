@@ -3797,6 +3797,7 @@ void KMyMoneyApp::Private::setThemedCSS()
                     cssText.replace(QLatin1String("black"),         KMyMoneySettings::schemeColor(SchemeColor::ListGrid).name(),          Qt::CaseSensitive);
                     cssStream.seek(0);
                     cssStream << cssText;
+                    cssFile.resize(cssFile.pos());
                     cssFile.close();
                 }
             }
