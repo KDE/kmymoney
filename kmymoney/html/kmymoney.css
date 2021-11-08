@@ -146,11 +146,13 @@
     table.report th { /*styles table header cells*/
         font-size: large;
         padding: 8px 8px;
+        white-space: nowrap;
     }
 
     table.report td { /*styles table cells- but not background color*/
         padding: 0 8px;
         text-align: right;
+        white-space: nowrap;
     }
 
     table.report td.leftborder { /*does not appear to be in use*/
@@ -323,6 +325,7 @@
 
     table.report td { /*styles table cells- but not background color*/
         text-align: right;
+
     }
 
     table.report td.left { /*far left column*/
