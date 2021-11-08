@@ -71,18 +71,20 @@ QString reports::ReportTable::renderHeader(const QString& title, const QByteArra
                          " \"http://www.w3.org/TR/html4/strict.dtd\">"
                          "\n<html>\n<head>"
                          "\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=%1\" />"
-                         "\n<title>%2</title>"
-                         "\n<style type=\"text/css\">\n<!--\n%3")
-                         .arg(encoding, title, KMyMoneyUtils::variableCSS());
+                         "\n<title>%2</title>")
+                         .arg(encoding, title);
 
-    QString cssfilename = cssFileNameGet();
-
-    header += QString("\n<style type=\"text/css\">\n<!--\n%1\n-->\n</style>\n").arg(KMyMoneyUtils::variableCSS());
-
-    QUrl cssUrl = cssUrl.fromUserInput(cssfilename);
-
-    // do not include css inline instead use a link to the css file
-    header += QString("\n<link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">\n").arg(cssUrl.url());
+    // inline the CSS
+    header += "<style type=\"text/css\">\n";
+    header += KMyMoneyUtils::variableCSS();
+    QString filename = cssFileNameGet();
+    QFile cssFile(filename);
+    if (cssFile.open(QIODevice::ReadOnly)) {
+        QTextStream cssStream(&cssFile);
+        header += cssStream.readAll();
+        cssFile.close();
+    }
+    header += "</style>\n";
 
     header += QLatin1String("</head>\n<body>\n");
 

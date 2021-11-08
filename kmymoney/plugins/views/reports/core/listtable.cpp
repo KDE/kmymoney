@@ -2,6 +2,7 @@
     SPDX-FileCopyrightText: 2004-2005 Ace Jones <acejones@users.sourceforge.net>
     SPDX-FileCopyrightText: 2008-2011 Alvaro Soliverez <asoliverez@gmail.com>
     SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -107,7 +108,7 @@ void ListTable::render(QString& result, QString& csv) const
     if (!m_postcolumns.isEmpty()) // prevent creation of empty column
         columns.append(postcolumns);
 
-    result.append(QLatin1String("<table class=\"report\">\n<thead><tr class=\"itemheader\">"));
+    result.append(QLatin1String("<table align=\"center\" class=\"report\">\n<thead><tr class=\"itemheader\">"));
 
     //
     // Table header

@@ -1655,7 +1655,7 @@ QString PivotTable::renderHTML() const
     // Table Header
     //
     QString result = QString(
-                         "\n\n<table class=\"report\" cellspacing=\"0\">\n"
+                         "\n\n<table align=\"center\" class=\"report\" cellspacing=\"0\">\n"
                          "<thead><tr class=\"itemheader\">\n<th>%1</th>")
                          .arg(i18nc("@title:column report header", "Account"));
 

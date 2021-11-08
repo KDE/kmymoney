@@ -112,7 +112,7 @@
     /***********************************************************/
     /* These affect only the reports found in the reports view */
     h2.report { /* header -title on report pages */
-        font-size: 18px;
+        font-size: x-large;
         font-family: verdana, arial, sans-serif;
         margin-right: 10px;
         margin-left: 10px;
@@ -133,6 +133,7 @@
     }
 
     div.subtitle { /*subtitle of each report page*/
+        font-size: large;
         text-align: center;
         color: WindowText;
     }
@@ -143,11 +144,11 @@
     }
 
     table.report th { /*styles table header cells*/
+        font-size: large;
         padding: 8px 8px;
     }
 
     table.report td { /*styles table cells- but not background color*/
-        font-size: 9pt;
         padding: 0 8px;
         text-align: right;
     }
