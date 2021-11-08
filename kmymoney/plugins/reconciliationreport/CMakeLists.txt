@@ -16,6 +16,7 @@ kmymoney_add_plugin(reconciliationreport SOURCES ${reconciliationreport_PART_SRC
 target_link_libraries(reconciliationreport
   Qt5::PrintSupport
   kmm_mymoney
+  kmymoney_common
   kmm_plugin
   kmm_printer
 )

@@ -8,15 +8,16 @@
 #include "reconciliationreport.h"
 
 //! @todo remove
+#include <QDate>
 #include <QDebug>
+#include <QFile>
 #include <QPointer>
 #include <QUrl>
-#include <QDate>
 
 // KDE includes
-#include <KPluginFactory>
 #include <KColorScheme>
 #include <KLocalizedString>
+#include <KPluginFactory>
 
 // KMyMoney includes
 #include "journalmodel.h"
@@ -30,6 +31,7 @@
 #include "mymoneytransactionfilter.h"
 #include "mymoneyutils.h"
 #include "viewinterface.h"
+#include <kmymoneyutils.h>
 
 #include "kreconciliationreportdlg.h"
 
@@ -74,23 +76,21 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
     if (!MyMoneyFile::instance()->value("reportstylesheet").isEmpty())
         filename = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString("html/%1").arg(MyMoneyFile::instance()->value("reportstylesheet")))).url();
     if (filename.isEmpty())
-        filename = "qrc:/html/kmymoney.css";
-    QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n") +
-                     QString("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">").arg(filename);
+        filename = QStandardPaths::locate(QStandardPaths::AppConfigLocation, "html/kmymoney.css");
+    QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head>\n");
 
-    header += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />";
+    // inline the CSS
+    header += "<style type=\"text/css\">\n";
+    header += KMyMoneyUtils::variableCSS();
+    QFile cssFile(filename);
+    if (cssFile.open(QIODevice::ReadOnly)) {
+        QTextStream cssStream(&cssFile);
+        header += cssStream.readAll();
+        cssFile.close();
+    }
 
-    QColor tcolor = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color();
-    QString css;
-    css += "<style type=\"text/css\">\n<!--\n"
-           +  QString(".row-even, .item0 { background-color: %1; color: %2 }\n")
-           .arg((KColorScheme(QPalette::Normal).background(KColorScheme::AlternateBackground).color()).name(), tcolor.name())
-           +  QString(".row-odd, .item1  { background-color: %1; color: %2 }\n")
-           .arg((KColorScheme(QPalette::Normal).background(KColorScheme::NormalBackground).color()).name(), tcolor.name())
-           +  "-->\n</style>\n";
-    header += css;
-
-    header += "</head><body>\n";
+    header += "</style>\n";
+    header += "</head><body id=\"summaryview\">\n";
 
     QString footer = "</body></html>\n";
 
@@ -138,7 +138,7 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
     report += QString("</div>\n");
     report += QString("<div class=\"gap\">&nbsp;</div>\n");
 
-    report += "<table class=\"report\">\n<thead><tr class=\"itemheader\">";
+    report += "<table align=\"center\" class=\"report\">\n<thead><tr class=\"itemheader\">";
     report += "<th>" + i18n("Summary") + "</th>";
     report += "</tr></thead>\n";
 
@@ -245,7 +245,7 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
     report += "</table>\n";
 
     QString detailsTableHeader;
-    detailsTableHeader += "<table class=\"report\">\n<thead><tr class=\"itemheader\">";
+    detailsTableHeader += "<table align=\"center\" class=\"report\">\n<thead><tr class=\"itemheader\">";
     detailsTableHeader += "<th>" + i18n("Date") + "</th>";
     detailsTableHeader += "<th>" + i18n("Number") + "</th>";
     detailsTableHeader += "<th>" + i18n("Payee") + "</th>";
