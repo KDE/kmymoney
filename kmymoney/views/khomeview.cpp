@@ -6,6 +6,7 @@
     SPDX-FileCopyrightText: 2000-2002 Kevin Tambascio <ktambascio@users.sourceforge.net>
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-FileCopyrightText: 2002-2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -34,12 +35,10 @@ KHomeView::~KHomeView()
 
 void KHomeView::slotAdjustScrollPos()
 {
-#ifndef ENABLE_WEBENGINE
     Q_D(KHomeView);
-    if (d && d->m_view && d->m_view->page() && d->m_view->page()->mainFrame()) {
-        d->m_view->page()->mainFrame()->setScrollBarValue(Qt::Vertical, d->m_scrollBarPos);
-    }
-#endif
+
+    if (d && d->m_view)
+        d->m_view->verticalScrollBar()->setValue(d->m_scrollBarPos);
 }
 
 bool KHomeView::eventFilter(QObject* o, QEvent* e)
@@ -53,22 +52,6 @@ bool KHomeView::eventFilter(QObject* o, QEvent* e)
         }
     }
     return KMyMoneyViewBase::eventFilter(o, e);
-}
-
-void KHomeView::wheelEvent(QWheelEvent* event)
-{
-    Q_D(KHomeView);
-    // Zoom text on Ctrl + Scroll
-    if (event->modifiers() & Qt::CTRL) {
-        qreal factor = d->m_view->zoomFactor();
-        if (event->delta() > 0)
-            factor += 0.1;
-        else if (event->delta() < 0)
-            factor -= 0.1;
-        d->m_view->setZoomFactor(factor);
-        event->accept();
-        return;
-    }
 }
 
 void KHomeView::executeAction(eMenu::Action action, const SelectedObjects& selections)
@@ -88,7 +71,7 @@ void KHomeView::executeAction(eMenu::Action action, const SelectedObjects& selec
         }
         break;
     case eMenu::Action::FileClose:
-        d->m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
+        d->m_view->setHtml(KWelcomePage::welcomePage());
         break;
     default:
         break;
@@ -136,11 +119,7 @@ void KHomeView::slotPrintView()
     if (d->m_view) {
         auto printer = KMyMoneyPrinter::startPrint();
         if (printer != nullptr) {
-#ifdef ENABLE_WEBENGINE
-            d->m_view->page()->print(printer, [=] (bool) {});
-#else
             d->m_view->print(printer);
-#endif
         }
     }
 }
@@ -152,28 +131,7 @@ void KHomeView::slotPrintPreviewView()
         QPrintPreviewDialog dlg(KMyMoneyPrinter::instance(), d->m_view);
         connect(&dlg, &QPrintPreviewDialog::paintRequested, d->m_view, [&](QPrinter* printer) {
             Q_D(KHomeView);
-#ifdef ENABLE_WEBENGINE
-            QEventLoop loop;
-            bool result = true;
-            auto printPreview = [&](bool success) {
-                result = success;
-                loop.quit();
-            };
-            d->m_view->page()->print(printer, std::move(printPreview));
-            loop.exec();
-            if (!result) {
-                QPainter painter;
-                if (painter.begin(printer)) {
-                    QFont font = painter.font();
-                    font.setPixelSize(20);
-                    painter.setFont(font);
-                    painter.drawText(QPointF(10, 25), QStringLiteral("Could not generate print preview."));
-                    painter.end();
-                }
-            }
-#else
             d->m_view->print(printer);
-#endif
         });
         dlg.exec();
     }
@@ -234,9 +192,9 @@ void KHomeView::slotOpenUrl(const QUrl &url)
 
         } else if (view == VIEW_WELCOME) {
             if (mode == QLatin1String("whatsnew"))
-                d->m_view->setHtml(KWelcomePage::whatsNewPage(), QUrl("file://"));
+                d->m_view->setHtml(KWelcomePage::whatsNewPage());
             else
-                d->m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
+                d->m_view->setHtml(KWelcomePage::welcomePage());
 
         } else if (view == QLatin1String("action")) {
             QMetaObject::invokeMethod(mw->actionCollection()->action(id), "trigger");

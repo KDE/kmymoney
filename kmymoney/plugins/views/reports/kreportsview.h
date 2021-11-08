@@ -7,6 +7,7 @@
     SPDX-FileCopyrightText: 2000-2004 Kevin Tambascio <ktambascio@users.sourceforge.net>
     SPDX-FileCopyrightText: 2000-2004 Ace Jones <ace.jones@hotpop.com>
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 #ifndef KREPORTSVIEW_H
@@ -41,17 +42,12 @@ class ReportTable;
 class QTreeWidget;
 class QTreeWidgetItem;
 class QListWidget;
-class MyQWebEnginePage;
 class TocItemGroup;
 class ReportControl;
 class ReportGroup;
 class SelectedObjects;
 
-#ifdef ENABLE_WEBENGINE
-class QWebEngineView;
-#else
-class KWebView;
-#endif
+class QTextBrowser;
 
 /**
   * Displays a page where reports can be placed.

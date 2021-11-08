@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2009 Cristian Onet onet.cristian @gmail.com
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
@@ -10,11 +11,7 @@
 
 #include "ui_kreconciliationreportdlgdecl.h"
 
-#ifdef ENABLE_WEBENGINE
-class QWebEngineView;
-#else
-class KWebView;
-#endif
+class QTextBrowser;
 
 class KReportDlg : public QDialog, public Ui::KReconciliationReportDlgDecl
 {
@@ -28,13 +25,8 @@ protected Q_SLOTS:
     void print();
 
 private:
-#ifdef ENABLE_WEBENGINE
-    QWebEngineView *m_summaryHTMLPart;
-    QWebEngineView *m_detailsHTMLPart;
-#else
-    KWebView       *m_summaryHTMLPart;
-    KWebView       *m_detailsHTMLPart;
-#endif
+    QTextBrowser* m_summaryHTMLPart;
+    QTextBrowser* m_detailsHTMLPart;
 };
 
 #endif

@@ -8,6 +8,7 @@
     SPDX-FileCopyrightText: 2000-2004 Ace Jones <ace.j@hotpop.com>
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-FileCopyrightText: 2018 Michael Kiefer <Michael-Kiefer@web.de>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -19,36 +20,33 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QTreeWidget>
-#include <QTreeWidgetItem>
-#include <QFile>
-#include <QTimer>
 #include <QClipboard>
-#include <QList>
-#include <QVBoxLayout>
-#include <QMimeData>
-#include <QIcon>
-#include <QUrlQuery>
-#include <QFileInfo>
+#include <QFile>
 #include <QFileDialog>
+#include <QFileInfo>
+#include <QIcon>
+#include <QList>
 #include <QLocale>
-#include <QTextCodec>
 #include <QMenu>
+#include <QMimeData>
 #include <QPointer>
 #include <QPrintPreviewDialog>
+#include <QTextBrowser>
+#include <QTextCodec>
+#include <QTimer>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
+#include <QUrlQuery>
+#include <QVBoxLayout>
 #include <QWheelEvent>
-#ifdef ENABLE_WEBENGINE
-#include <QWebEngineView>
-#else
-#include <KWebView>
-#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KMessageBox>
-#include <KLocalizedString>
 #include <KChartAbstractCoordinatePlane>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <QPainter>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -65,7 +63,6 @@
 #include "querytable.h"
 #include "objectinfotable.h"
 #include "icons/icons.h"
-#include <kmymoneywebpage.h>
 #include "tocitem.h"
 #include "tocitemgroup.h"
 #include "tocitemreport.h"
@@ -97,11 +94,7 @@ using namespace Icons;
 class KReportTab: public QWidget
 {
 private:
-#ifdef ENABLE_WEBENGINE
-    QWebEngineView            *m_tableView;
-#else
-    KWebView                  *m_tableView;
-#endif
+    QTextBrowser* m_tableView;
     reports::KReportChartView *m_chartView;
     ReportControl             *m_control;
     QVBoxLayout               *m_layout;
@@ -202,28 +195,24 @@ public:
 /**
   * KReportTab Implementation
   */
-KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KReportsView* eventHandler):
-    QWidget(parent),
-#ifdef ENABLE_WEBENGINE
-    m_tableView(new QWebEngineView(this)),
-#else
-    m_tableView(new KWebView(this)),
-#endif
-    m_chartView(new KReportChartView(this)),
-    m_control(new ReportControl(this)),
-    m_layout(new QVBoxLayout(this)),
-    m_report(report),
-    m_deleteMe(false),
-    m_chartEnabled(false),
-    m_showingChart(report.isChartByDefault()),
-    m_needReload(true),
-    m_isChartViewValid(false),
-    m_isTableViewValid(false),
-    m_table(0)
+KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KReportsView* eventHandler)
+    : QWidget(parent)
+    , m_tableView(new QTextBrowser(this))
+    , m_chartView(new KReportChartView(this))
+    , m_control(new ReportControl(this))
+    , m_layout(new QVBoxLayout(this))
+    , m_report(report)
+    , m_deleteMe(false)
+    , m_chartEnabled(false)
+    , m_showingChart(report.isChartByDefault())
+    , m_needReload(true)
+    , m_isChartViewValid(false)
+    , m_isTableViewValid(false)
+    , m_table(0)
 {
     m_layout->setSpacing(6);
-    m_tableView->setPage(new MyQWebEnginePage(m_tableView));
-    m_tableView->setZoomFactor(KMyMoneySettings::zoomFactor());
+    // TODO
+    //    m_tableView->setZoomFactor(KMyMoneySettings::zoomFactor());
 
     // set button icons
     m_control->ui->buttonChart->setIcon(Icons::get(Icon::OfficeCharBar));
@@ -259,12 +248,7 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     }
     enableAllReportActions();
 
-#ifdef ENABLE_WEBENGINE
-    connect(m_tableView->page(), &QWebEnginePage::urlChanged, eventHandler, &KReportsView::slotOpenUrl);
-#else
-    m_tableView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
-    connect(m_tableView->page(), &KWebPage::linkClicked, eventHandler, &KReportsView::slotOpenUrl);
-#endif
+    connect(m_tableView, &QTextBrowser::sourceChanged, eventHandler, &KReportsView::slotOpenUrl);
 
     // if this is a default report, then you can't delete it!
     if (report.id().isEmpty())
@@ -291,13 +275,14 @@ void KReportTab::wheelEvent(QWheelEvent* event)
     // Zoom text on Ctrl + Scroll
     if (event->modifiers() & Qt::CTRL) {
         if (!m_showingChart) {
-            qreal factor = m_tableView->zoomFactor();
+            // TODO
+            //            qreal factor = m_tableView->zoomFactor();
             if (event->delta() > 0)
-                factor += 0.1;
-            else if (event->delta() < 0)
-                factor -= 0.1;
-            m_tableView->setZoomFactor(factor);
-            event->accept();
+                //                factor += 0.1;
+                //            else if (event->delta() < 0)
+                //                factor -= 0.1;
+                //            m_tableView->setZoomFactor(factor);
+                event->accept();
             return;
         }
     }
@@ -324,11 +309,7 @@ void KReportTab::print()
                     painter.drawText(0, painter.window().height(), file.toLocalFile());
                 }
             } else {
-#ifdef ENABLE_WEBENGINE
-                m_tableView->page()->print(printer, [=] (bool) {});
-#else
                 m_tableView->print(printer);
-#endif
             }
         }
     }
@@ -339,28 +320,7 @@ void KReportTab::printPreview()
     if (m_tableView) {
         QPrintPreviewDialog dlg(KMyMoneyPrinter::instance(), m_tableView);
         connect(&dlg, &QPrintPreviewDialog::paintRequested, m_tableView, [&](QPrinter* printer) {
-#ifdef ENABLE_WEBENGINE
-            QEventLoop loop;
-            bool result = true;
-            auto printPreview = [&](bool success) {
-                result = success;
-                loop.quit();
-            };
-            m_tableView->page()->print(printer, std::move(printPreview));
-            loop.exec();
-            if (!result) {
-                QPainter painter;
-                if (painter.begin(printer)) {
-                    QFont font = painter.font();
-                    font.setPixelSize(20);
-                    painter.setFont(font);
-                    painter.drawText(QPointF(10, 25), QStringLiteral("Could not generate print preview."));
-                    painter.end();
-                }
-            }
-#else
             m_tableView->print(printer);
-#endif
         });
         dlg.exec();
     }
@@ -448,8 +408,7 @@ void KReportTab::toggleChart()
 
     if (m_showingChart) {
         if (!m_isTableViewValid) {
-            m_tableView->setHtml(m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name()),
-                                 QUrl("file://")); // workaround for access permission to css file
+            m_tableView->setHtml(m_table->renderReport(QLatin1String("html"), m_encoding, m_report.name()));
         }
         m_isTableViewValid = true;
         m_tableView->show();

@@ -24,8 +24,7 @@
     "kf5xmlgui",
     "libalkimia",
     "qt5-base",
-    "qt5-svg",
-    "qt5-webengine"
+    "qt5-svg"
   ],
   "features": {
     "encryption": {

@@ -46,7 +46,6 @@ public:
 
 protected:
     void showEvent(QShowEvent* event) override;
-    void wheelEvent(QWheelEvent *event) override;
     bool eventFilter(QObject* o, QEvent* e) override;
 
 public Q_SLOTS:

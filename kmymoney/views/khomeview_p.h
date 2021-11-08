@@ -6,6 +6,7 @@
     SPDX-FileCopyrightText: 2000-2002 Thomas Baumgart <ipwizard@users.sourceforge.net>
     SPDX-FileCopyrightText: 2000-2002 Kevin Tambascio <ktambascio@users.sourceforge.net>
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -19,23 +20,19 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QBuffer>
+#include <QDesktopServices>
+#include <QElapsedTimer>
 #include <QList>
 #include <QPixmap>
-#include <QBuffer>
-#include <QStandardPaths>
-#include <QDesktopServices>
-#include <QUrlQuery>
-#include <QWheelEvent>
 #include <QPrintDialog>
-#include <QVBoxLayout>
 #include <QPrinter>
-#include <QElapsedTimer>
-#ifdef ENABLE_WEBENGINE
-#include <QWebEngineView>
-#else
-#include <KWebView>
-#include <QWebFrame>
-#endif
+#include <QScrollBar>
+#include <QStandardPaths>
+#include <QTextBrowser>
+#include <QUrlQuery>
+#include <QVBoxLayout>
+#include <QWheelEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -62,7 +59,6 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "icons.h"
-#include "kmymoneywebpage.h"
 #include "mymoneyschedule.h"
 #include "mymoneysecurity.h"
 #include "mymoneyexception.h"
@@ -119,9 +115,11 @@ public:
     }
 
     ~KHomeViewPrivate() {
+        Q_Q(KHomeView);
         // if user wants to remember the font size, store it here
         if (KMyMoneySettings::rememberZoomFactor() && m_view) {
-            KMyMoneySettings::setZoomFactor(m_view->zoomFactor());
+            // zoom factor
+            KMyMoneySettings::setZoomFactor(m_view->font().pointSizeF() / q->font().pointSizeF());
             KMyMoneySettings::self()->save();
         }
     }
@@ -144,24 +142,12 @@ public:
         vbox->setSpacing(6);
         vbox->setMargin(0);
 
-#ifdef ENABLE_WEBENGINE
-        m_view = new QWebEngineView(q);
-#else
-        m_view = new KWebView(q);
-#endif
+        m_view = new QTextBrowser();
         m_view->installEventFilter(q);
-        m_view->setPage(new MyQWebEnginePage(m_view));
 
         vbox->addWidget(m_view);
 
-#ifdef ENABLE_WEBENGINE
-        q->connect(m_view->page(), &QWebEnginePage::urlChanged,
-                   q, &KHomeView::slotOpenUrl);
-#else
-        m_view->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
-        q->connect(m_view->page(), &KWebPage::linkClicked,
-                   q, &KHomeView::slotOpenUrl);
-#endif
+        q->connect(m_view, &QTextBrowser::sourceChanged, q, &KHomeView::slotOpenUrl);
 
         q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KHomeView::refresh);
     }
@@ -407,114 +393,111 @@ public:
     void loadView()
     {
         Q_Q(KHomeView);
-        m_view->setZoomFactor(KMyMoneySettings::zoomFactor());
 
         QList<MyMoneyAccount> list;
         MyMoneyFile::instance()->accountList(list);
-        if (list.isEmpty()) {
-            m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
-        } else {
-            // preload transaction statistics
-            m_transactionStats = MyMoneyFile::instance()->countTransactionsWithSpecificReconciliationState();
 
-            // keep current location on page
-            m_scrollBarPos = 0;
-#ifndef ENABLE_WEBENGINE
-            m_scrollBarPos = m_view->page()->mainFrame()->scrollBarValue(Qt::Vertical);
-#endif
+        const auto stockPointSize = q->font().pointSizeF();
+        const auto currentPointSize = m_view->font().pointSizeF();
+        const auto pointSizeDelta = (stockPointSize * KMyMoneySettings::zoomFactor()) - currentPointSize;
+        m_view->zoomIn(pointSizeDelta);
 
-            //clear the forecast flag so it will be reloaded
-            m_forecast.setForecastDone(false);
+        m_view->setHtml(KWelcomePage::welcomePage());
 
-            const QString filename = QStandardPaths::locate(QStandardPaths::AppConfigLocation, "html/kmymoney.css");
-            QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head>\n");
+        // preload transaction statistics
+        m_transactionStats = MyMoneyFile::instance()->countTransactionsWithSpecificReconciliationState();
 
-            // inline the CSS
-            header += "<style type=\"text/css\">\n<!--\n";
-            header += KMyMoneyUtils::variableCSS();
-            QFile cssFile(filename);
-            if (cssFile.open(QIODevice::ReadOnly)) {
-                QTextStream cssStream(&cssFile);
-                header += cssStream.readAll();
-                cssFile.close();
-            }
-            header += "-->\n</style>\n";
+        // keep current location on page
+        m_scrollBarPos = m_view->verticalScrollBar()->value();
 
-            header += "</head><body id=\"summaryview\">\n";
+        // clear the forecast flag so it will be reloaded
+        m_forecast.setForecastDone(false);
 
-            QString footer = "</body></html>\n";
+        const QString filename = QStandardPaths::locate(QStandardPaths::AppConfigLocation, "html/kmymoney.css");
+        QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head>\n");
 
-            m_html.clear();
-            m_html += header;
+        // inline the CSS
+        header += "<style type=\"text/css\">\n";
+        header += KMyMoneyUtils::variableCSS();
+        QFile cssFile(filename);
+        if (cssFile.open(QIODevice::ReadOnly)) {
+            QTextStream cssStream(&cssFile);
+            header += cssStream.readAll();
+            cssFile.close();
+        }
+        header += "</style>\n";
 
-            m_html += QString("<div id=\"summarytitle\">%1</div>").arg(i18n("Your Financial Summary"));
+        header += "</head><body id=\"summaryview\">\n";
 
-            QStringList settings = KMyMoneySettings::listOfItems();
+        QString footer = "</body></html>\n";
 
-            QStringList::ConstIterator it;
+        m_html.clear();
+        m_html += header;
 
-            QElapsedTimer t;
-            t.start();
-            for (it = settings.constBegin(); it != settings.constEnd(); ++it) {
-                int option = (*it).toInt();
-                if (option > 0) {
-                    switch (option) {
-                    case 1:         // payments
-                        showPayments();
-                        break;
+        m_html += QString("<div id=\"summarytitle\">%1</div>").arg(i18n("Your Financial Summary"));
 
-                    case 2:         // preferred accounts
-                        showAccounts(Preferred, i18n("Preferred Accounts"));
-                        break;
+        QStringList settings = KMyMoneySettings::listOfItems();
 
-                    case 3:         // payment accounts
-                        // Check if preferred accounts are shown separately
-                        if (settings.contains("2")) {
-                            showAccounts(static_cast<paymentTypeE>(Payment | Preferred),
-                                         i18n("Payment Accounts"));
-                        } else {
-                            showAccounts(Payment, i18n("Payment Accounts"));
-                        }
-                        break;
-                    case 4:         // favorite reports
-                        showFavoriteReports();
-                        break;
-                    case 5:         // forecast
-                        showForecast();
-                        break;
-                    case 6:         // net worth graph over all accounts
-                        showNetWorthGraph();
-                        break;
-                    case 7:         // forecast (history) - currently unused
-                        break;
-                    case 8:         // assets and liabilities
-                        showAssetsLiabilities();
-                        break;
-                    case 9:         // budget
-                        showBudget();
-                        break;
-                    case 10:         // cash flow summary
-                        showCashFlowSummary();
-                        break;
+        QStringList::ConstIterator it;
+
+        QElapsedTimer t;
+        t.start();
+        for (it = settings.constBegin(); it != settings.constEnd(); ++it) {
+            int option = (*it).toInt();
+            if (option > 0) {
+                switch (option) {
+                case 1: // payments
+                    showPayments();
+                    break;
+
+                case 2: // preferred accounts
+                    showAccounts(Preferred, i18n("Preferred Accounts"));
+                    break;
+
+                case 3: // payment accounts
+                    // Check if preferred accounts are shown separately
+                    if (settings.contains("2")) {
+                        showAccounts(static_cast<paymentTypeE>(Payment | Preferred), i18n("Payment Accounts"));
+                    } else {
+                        showAccounts(Payment, i18n("Payment Accounts"));
                     }
-                    m_html += "<div class=\"gap\">&nbsp;</div>\n";
-                    qDebug() << "Processed home view section" << option << "in" << t.restart() << "ms";
+                    break;
+                case 4: // favorite reports
+                    showFavoriteReports();
+                    break;
+                case 5: // forecast
+                    showForecast();
+                    break;
+                case 6: // net worth graph over all accounts
+                    showNetWorthGraph();
+                    break;
+                case 7: // forecast (history) - currently unused
+                    break;
+                case 8: // assets and liabilities
+                    showAssetsLiabilities();
+                    break;
+                case 9: // budget
+                    showBudget();
+                    break;
+                case 10: // cash flow summary
+                    showCashFlowSummary();
+                    break;
                 }
+                m_html += "<div class=\"gap\">&nbsp;</div>\n";
+                qDebug() << "Processed home view section" << option << "in" << t.restart() << "ms";
             }
+        }
 
-            m_html += "<div id=\"returnlink\">";
-            m_html += link(VIEW_WELCOME, QString()) + i18n("Show KMyMoney welcome page") + linkend();
-            m_html += "</div>";
-            m_html += "<div id=\"vieweffect\"></div>";
-            m_html += footer;
+        m_html += "<div id=\"returnlink\">";
+        m_html += link(VIEW_WELCOME, QString()) + i18n("Show KMyMoney welcome page") + linkend();
+        m_html += "</div>";
+        m_html += "<div id=\"vieweffect\"></div>";
+        m_html += footer;
 
-            m_view->setHtml(m_html, QUrl("file://"));
+        m_view->setHtml(m_html);
 
-#ifndef ENABLE_WEBENGINE
-            if (m_scrollBarPos) {
-                QMetaObject::invokeMethod(q, "slotAdjustScrollPos", Qt::QueuedConnection);
-            }
-#endif
+        if (m_scrollBarPos) {
+            QMetaObject::invokeMethod(q, "slotAdjustScrollPos", Qt::QueuedConnection);
         }
     }
 
@@ -1840,11 +1823,7 @@ public:
      */
     typedef QMap<QDate, MyMoneyMoney> dailyBalances;
 
-#ifdef ENABLE_WEBENGINE
-    QWebEngineView   *m_view;
-#else
-    KWebView         *m_view;
-#endif
+    QTextBrowser* m_view;
 
     QString           m_html;
     bool              m_showAllSchedules;

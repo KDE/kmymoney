@@ -7,6 +7,7 @@
     SPDX-FileCopyrightText: 2000-2004 Kevin Tambascio <ktambascio@users.sourceforge.net>
     SPDX-FileCopyrightText: 2000-2004 Ace Jones <ace.j@hotpop.com>
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -17,26 +18,22 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QClipboard>
+#include <QFile>
+#include <QFileDialog>
+#include <QFileInfo>
+#include <QIcon>
+#include <QList>
+#include <QLocale>
+#include <QMenu>
+#include <QMimeData>
+#include <QTextBrowser>
+#include <QTextCodec>
+#include <QTimer>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
-#include <QFile>
-#include <QTimer>
-#include <QClipboard>
-#include <QList>
-#include <QVBoxLayout>
-#include <QMimeData>
-#include <QIcon>
 #include <QUrlQuery>
-#include <QFileInfo>
-#include <QFileDialog>
-#include <QLocale>
-#include <QTextCodec>
-#include <QMenu>
-#ifdef ENABLE_WEBENGINE
-#include <QWebEngineView>
-#else
-#include <KWebView>
-#endif
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -54,7 +51,6 @@
 #include "journalmodel.h"
 #include "kbalancechartdlg.h"
 #include "kmymoneysettings.h"
-#include "kmymoneywebpage.h"
 #include "kreportchartview.h"
 #include "kreportconfigurationfilterdlg.h"
 #include "menuenums.h"
