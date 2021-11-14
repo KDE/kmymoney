@@ -430,14 +430,19 @@ void QueryTable::constructTotalRows()
                 }
 
                 foreach (auto subtotal, subtotals) {
-                    if (subtotal == ctReturnInvestment)
+                    if (subtotal == ctReturnInvestment) {
                         totalsRow[subtotal] = helperROI((*currencyGrp).at(0).value(ctBuys) - (*currencyGrp).at(0).value(ctReinvestIncome), (*currencyGrp).at(0).value(ctSells),
                                                         (*currencyGrp).at(0).value(ctStartingBalance), (*currencyGrp).at(0).value(ctEndingBalance) + (*currencyGrp).at(0).value(ctMarketValue),
                                                         (*currencyGrp).at(0).value(ctCashIncome));
-                    else if (subtotal == ctPercentageGain)
-                        totalsRow[subtotal] = (((*currencyGrp).at(0).value(ctBuys) + (*currencyGrp).at(0).value(ctMarketValue)) / (*currencyGrp).at(0).value(ctBuys).abs()).toString();
-                    else if (subtotal == ctPrice)
+                    } else if (subtotal == ctPercentageGain) {
+                        if (!(*currencyGrp).at(0).value(ctBuys).abs().isZero()) {
+                            totalsRow[subtotal] =
+                                (((*currencyGrp).at(0).value(ctBuys) + (*currencyGrp).at(0).value(ctMarketValue)) / (*currencyGrp).at(0).value(ctBuys).abs())
+                                    .toString();
+                        }
+                    } else if (subtotal == ctPrice) {
                         totalsRow[subtotal] = MyMoneyMoney((*currencyGrp).at(0).value(ctPrice) / (*currencyGrp).at(0).value(ctRowsCount)).toString();
+                    }
                 }
 
                 if (!stashedTotalRows.isEmpty()) {
