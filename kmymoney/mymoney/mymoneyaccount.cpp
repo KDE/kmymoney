@@ -416,23 +416,6 @@ MyMoneyMoney MyMoneyAccount::balance() const
     return d->m_balance;
 }
 
-void MyMoneyAccount::adjustBalance(const MyMoneySplit& s, bool reverse)
-{
-    Q_D(MyMoneyAccount);
-    if (s.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) {
-        if (reverse)
-            d->m_balance = d->m_balance / s.shares();
-        else
-            d->m_balance = d->m_balance * s.shares();
-    } else {
-        if (reverse)
-            d->m_balance -= s.shares();
-        else
-            d->m_balance += s.shares();
-    }
-
-}
-
 void MyMoneyAccount::setBalance(const MyMoneyMoney& val)
 {
     Q_D(MyMoneyAccount);

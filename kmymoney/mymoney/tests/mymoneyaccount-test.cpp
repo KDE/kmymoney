@@ -55,7 +55,7 @@ void MyMoneyAccountTest::testConstructor()
     r.setParentAccountId(parent);
     r.setValue(QString("key"), "value");
     s.setShares(MyMoneyMoney::ONE);
-    r.adjustBalance(s);
+    r.setBalance(s.shares());
     QVERIFY(r.pairs().count() == 1);
     QVERIFY(r.value("key") == "value");
 
@@ -162,26 +162,6 @@ void MyMoneyAccountTest::testAssignmentConstructor()
     QVERIFY(b.value("Key") == "Value");
     QVERIFY(b.accountList().count() == 1);
     QVERIFY(b.accountList()[0] == "ChildAccount");
-}
-
-void MyMoneyAccountTest::testAdjustBalance()
-{
-    MyMoneyAccount a;
-    MyMoneySplit s;
-    s.setShares(MyMoneyMoney(3, 1));
-    a.adjustBalance(s);
-    QVERIFY(a.balance() == MyMoneyMoney(3, 1));
-    s.setShares(MyMoneyMoney(5, 1));
-    a.adjustBalance(s, true);
-    QVERIFY(a.balance() == MyMoneyMoney(-2, 1));
-    s.setShares(MyMoneyMoney(2, 1));
-    s.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares));
-    a.adjustBalance(s);
-    QVERIFY(a.balance() == MyMoneyMoney(-4, 1));
-    s.setShares(MyMoneyMoney(4, 1));
-    s.setAction(QString());
-    a.adjustBalance(s);
-    QVERIFY(a.balance().isZero());
 }
 
 void MyMoneyAccountTest::testSubAccounts()

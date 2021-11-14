@@ -379,19 +379,6 @@ public:
     MyMoneyMoney balance() const;
 
     /**
-      * This method adjusts the balance of this account
-      * according to the difference contained in the split @p s.
-      * If the s.action() is MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares) then
-      * the balance will be adjusted accordingly.
-      *
-      * @param s const reference to MyMoneySplit object containing the
-      *             value to be added/subtracted to/from the balance
-      * @param reverse add (false) or subtract (true) the shares contained in the split.
-      *          It also affects the balance for share splits in the opposite direction.
-      */
-    void adjustBalance(const MyMoneySplit& s, bool reverse = false);
-
-    /**
       * This method sets the balance of this account
       * according to the value provided by @p val.
       *

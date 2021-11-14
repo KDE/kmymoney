@@ -29,7 +29,6 @@ private Q_SLOTS:
     void testSubAccounts();
     void testEquality();
     void testHasReferenceTo();
-    void testAdjustBalance();
     void testSetClosed();
     void specialAccountTypes();
     void specialAccountTypes_data();
