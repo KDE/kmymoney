@@ -3544,6 +3544,12 @@ void MyMoneyFile::fixSplitPrecision(MyMoneyTransaction& t) const
     }
 }
 
+MyMoneyMoney MyMoneyFile::stockSplit(const QString& accountId, MyMoneyMoney balance, MyMoneyMoney factor, eMyMoney::StockSplitDirection direction) const
+{
+    d->checkStorage();
+    return d->m_storage->stockSplit(accountId, balance, factor, direction);
+}
+
 class MyMoneyFileTransactionPrivate
 {
     Q_DISABLE_COPY(MyMoneyFileTransactionPrivate)

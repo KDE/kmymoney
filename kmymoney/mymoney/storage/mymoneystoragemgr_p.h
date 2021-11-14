@@ -16,9 +16,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
 #include <QBitArray>
 #include <QDate>
+#include <QList>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 
@@ -30,24 +30,24 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyexception.h"
-#include "storageenums.h"
-#include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
-#include "mymoneytag.h"
-#include "mymoneypayee.h"
 #include "mymoneybudget.h"
-#include "mymoneyschedule.h"
-#include "mymoneyreport.h"
+#include "mymoneycostcenter.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyinstitution.h"
+#include "mymoneymap.h"
 #include "mymoneymoney.h"
+#include "mymoneypayee.h"
+#include "mymoneyreport.h"
+#include "mymoneyschedule.h"
+#include "mymoneysecurity.h"
 #include "mymoneysplit.h"
+#include "mymoneytag.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
-#include "mymoneycostcenter.h"
-#include "mymoneymap.h"
 #include "onlinejob.h"
-#include "mymoneyenums.h"
+#include "storageenums.h"
 
 using namespace eStorage;
 
@@ -153,8 +153,17 @@ public:
         // in case of an investment we can't just add or subtract the
         // amount of the split since we don't know about stock splits.
         // so in the case of those stocks, we simply recalculate the balance from scratch
-        acc.isInvest() ? acc.setBalance(calculateBalance(acc.id(), QDate())) :
-        acc.adjustBalance(split, reverse);
+        MyMoneyMoney balance;
+        if (acc.isInvest()) {
+            balance = calculateBalance(acc.id(), QDate());
+        } else {
+            balance = acc.balance();
+            if (reverse)
+                balance -= split.shares();
+            else
+                balance += split.shares();
+        }
+        acc.setBalance(balance);
     }
 
     /**
@@ -237,13 +246,12 @@ public:
             for (const auto& split : splits) {
                 if (split.accountId().compare(id) != 0)
                     continue;
-                else if (split.action().compare(MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) == 0)
-                    balance *= split.shares();
-                else
+                else if (split.action().compare(MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) == 0) {
+                    balance = stockSplit(split.accountId(), balance, split.shares(), eMyMoney::StockSplitDirection::StockSplitForward);
+                } else
                     balance += split.shares();
             }
         }
-
         return balance;
     }
 
@@ -415,6 +423,33 @@ public:
             return match.captured(1).toULong();
         }
         return 0;
+    }
+
+    MyMoneyMoney stockSplit(const QString& accountId, MyMoneyMoney balance, MyMoneyMoney factor, eMyMoney::StockSplitDirection direction) const
+    {
+        Q_Q(const MyMoneyStorageMgr);
+
+        if (direction == eMyMoney::StockSplitDirection::StockSplitForward)
+            balance = balance * factor;
+        else
+            balance = balance / factor;
+
+        const auto account = q->account(accountId);
+
+        auto deepcurrency = q->security(accountId);
+        if (!deepcurrency.isCurrency())
+            deepcurrency = q->security(deepcurrency.tradingCurrency());
+
+        const auto security = q->security(deepcurrency.id());
+
+        AlkValue::RoundingMethod roundingMethod = AlkValue::RoundRound;
+        if (security.roundingMethod() != AlkValue::RoundNever)
+            roundingMethod = security.roundingMethod();
+
+        int securityFraction = security.smallestAccountFraction();
+
+        balance = balance.convertDenominator(securityFraction, roundingMethod);
+        return balance;
     }
 
     MyMoneyStorageMgr *q_ptr;

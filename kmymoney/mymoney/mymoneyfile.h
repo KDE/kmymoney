@@ -137,6 +137,7 @@ class MyMoneyTransactionFilter;
 class onlineJob;
 
 namespace eMyMoney {
+enum class StockSplitDirection;
 namespace Account {
 enum class Type;
 }
@@ -261,6 +262,13 @@ public:
       * @sa startTransaction()
       */
     void rollbackTransaction();
+
+    /**
+     * Calculate the balance after (with @a direction set to StockSplitForward) or before
+     * (with @a direction set to StockSplitBackward) from a given @a balance and @a factor
+     * in account @a accountId.
+     */
+    MyMoneyMoney stockSplit(const QString& accountId, MyMoneyMoney balance, MyMoneyMoney factor, eMyMoney::StockSplitDirection direction) const;
 
     /**
       * This method is used to return the standard liability account

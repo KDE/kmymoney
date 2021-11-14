@@ -437,5 +437,9 @@ enum signPosition : int {
 };
 }
 
+enum class StockSplitDirection {
+    StockSplitForward,
+    StockSplitBackward,
+};
 }
 #endif

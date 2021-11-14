@@ -754,7 +754,10 @@ public:
                         const MyMoneySplit& split = t->split();
                         // if this split is a stock split, we can't just add the amount of shares
                         if (t->transaction().isStockSplit()) {
-                            balance = balance * split.shares();
+                            balance = MyMoneyFile::instance()->stockSplit(split.accountId(),
+                                                                          balance,
+                                                                          split.shares(),
+                                                                          eMyMoney::StockSplitDirection::StockSplitForward);
                         } else {
                             balance += split.shares() * factor;
                         }
@@ -781,7 +784,8 @@ public:
 
                     // if this split is a stock split, we can't just add the amount of shares
                     if (t->transaction().isStockSplit()) {
-                        balance /= split.shares();
+                        balance =
+                            MyMoneyFile::instance()->stockSplit(split.accountId(), balance, split.shares(), eMyMoney::StockSplitDirection::StockSplitBackward);
                     } else {
                         balance -= split.shares() * factor;
                     }

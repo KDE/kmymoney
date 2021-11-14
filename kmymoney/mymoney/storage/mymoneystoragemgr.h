@@ -54,6 +54,7 @@ typedef QMap<QDate, MyMoneyPrice> MyMoneyPriceEntries;
 typedef QMap<MyMoneySecurityPair, MyMoneyPriceEntries> MyMoneyPriceList;
 
 namespace eMyMoney {
+enum class StockSplitDirection;
 namespace Schedule {
 enum class Type;
 }
@@ -1041,6 +1042,8 @@ public:
       * based on the transactions stored in the engine.
       */
     void rebuildAccountBalances();
+
+    MyMoneyMoney stockSplit(const QString& accountId, MyMoneyMoney balance, MyMoneyMoney factor, eMyMoney::StockSplitDirection direction) const;
 
     void startTransaction();
     bool commitTransaction();

@@ -1742,7 +1742,11 @@ void MyMoneyStorageMgr::rebuildAccountBalances()
                 const QString& id = split.accountId();
                 // locate the account and if present, update data
                 if (map.find(id) != map.end()) {
-                    map[id].adjustBalance(split);
+                    if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) {
+                        map[id].setBalance(d->stockSplit(id, map[id].balance(), split.shares(), eMyMoney::StockSplitDirection::StockSplitForward));
+                    } else {
+                        map[id].setBalance(map[id].balance() + split.shares());
+                    }
                 }
             }
         }
@@ -1885,4 +1889,10 @@ void MyMoneyStorageMgr::rollbackTransaction()
     d->m_budgetList.rollbackTransaction();
     d->m_priceList.rollbackTransaction();
     d->m_onlineJobList.rollbackTransaction();
+}
+
+MyMoneyMoney MyMoneyStorageMgr::stockSplit(const QString& accountId, MyMoneyMoney balance, MyMoneyMoney factor, eMyMoney::StockSplitDirection direction) const
+{
+    Q_D(const MyMoneyStorageMgr);
+    return d->stockSplit(accountId, balance, factor, direction);
 }
