@@ -204,6 +204,13 @@ public:
     MyMoneyMoney balance(const QString& accountId, const QDate& date) const;
 
     /**
+     * This method returns the balance after a stock split in account referenced
+     * by @a accountId. The starting balance is provided by @a balance and
+     * the stock split factor by @a factor.
+     */
+    MyMoneyMoney stockSplitBalance(const QString& accountId, MyMoneyMoney balance, MyMoneyMoney factor) const;
+
+    /**
      * This method returns a key for a specific date that can
      * be used in connection with lowerBound() and upperBound()
      * to get indexes into the journal based on the date.

@@ -165,7 +165,10 @@ void LedgerAccountFilter::recalculateBalances()
         if (accountIds.contains(accountId)) {
             if (isInvestmentAccount) {
                 if (idx.data(eMyMoney::Model::TransactionIsStockSplitRole).toBool()) {
-                    balances[accountId] *= idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+                    balances[accountId] =
+                        MyMoneyFile::instance()->journalModel()->stockSplitBalance(accountId,
+                                                                                   balances[accountId],
+                                                                                   idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>());
                 } else {
                     balances[accountId] += idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
                 }

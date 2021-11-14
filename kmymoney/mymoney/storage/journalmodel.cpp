@@ -38,6 +38,11 @@ struct JournalModel::Private
         Fees,
     } category_t;
 
+    typedef enum {
+        StockSplitForward,
+        StockSplitBackward,
+    } StockSplitDirection;
+
     Private(JournalModel* qq)
         : q(qq)
         , newTransactionModel(nullptr)
@@ -327,7 +332,8 @@ struct JournalModel::Private
                 const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(q->index(row, 0).internalPointer())->constDataRef();
                 if (fullBalanceRecalc.contains(journalEntry.split().accountId())) {
                     if (journalEntry.transaction().isStockSplit()) {
-                        balanceCache[journalEntry.split().accountId()] *= journalEntry.split().shares();
+                        const auto accountId = journalEntry.split().accountId();
+                        balanceCache[accountId] = stockSplit(accountId, balanceCache[accountId], journalEntry.split().shares(), StockSplitForward);
                     } else {
                         balanceCache[journalEntry.split().accountId()] += journalEntry.split().shares();
                     }
@@ -355,6 +361,26 @@ struct JournalModel::Private
     {
         auto acc = MyMoneyFile::instance()->accountsModel()->itemById(s.accountId());
         return (s.shares().abs()).formatMoney(acc.fraction());
+    }
+
+    MyMoneyMoney stockSplit(const QString& accountId, MyMoneyMoney balance, MyMoneyMoney factor, StockSplitDirection direction)
+    {
+        if (direction == StockSplitForward)
+            balance = balance * factor;
+        else
+            balance = balance / factor;
+
+        const auto account = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
+        const auto security = MyMoneyFile::instance()->securitiesModel()->itemById(account.tradingCurrencyId());
+
+        AlkValue::RoundingMethod roundingMethod = AlkValue::RoundRound;
+        if (security.roundingMethod() != AlkValue::RoundNever)
+            roundingMethod = security.roundingMethod();
+
+        int securityFraction = security.smallestAccountFraction();
+
+        balance = balance.convertDenominator(securityFraction, roundingMethod);
+        return balance;
     }
 
     JournalModel*                   q;
@@ -1290,7 +1316,8 @@ void JournalModel::updateBalances()
     for (int row = 0; row < rows; ++row) {
         const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
         if (journalEntry.transaction().isStockSplit()) {
-            d->balanceCache[journalEntry.split().accountId()] *= journalEntry.split().shares();
+            const auto accountId = journalEntry.split().accountId();
+            d->balanceCache[accountId] = d->stockSplit(accountId, d->balanceCache[accountId], journalEntry.split().shares(), Private::StockSplitForward);
         } else {
             d->balanceCache[journalEntry.split().accountId()] += journalEntry.split().shares();
         }
@@ -1311,7 +1338,8 @@ MyMoneyMoney JournalModel::clearedBalance(const QString& accountId, const QDate&
         if (Q_UNLIKELY(!date.isValid()) || Q_LIKELY(journalEntry.transaction().postDate() <= date)) {
             if ((split.accountId() == accountId) && (split.reconcileFlag() != eMyMoney::Split::State::NotReconciled)) {
                 if (journalEntry.transaction().isStockSplit()) {
-                    balance *= journalEntry.split().shares();
+                    const auto accountId = journalEntry.split().accountId();
+                    balance = d->stockSplit(accountId, balance, journalEntry.split().shares(), Private::StockSplitForward);
                 } else {
                     balance += journalEntry.split().shares();
                 }
@@ -1348,7 +1376,8 @@ MyMoneyMoney JournalModel::balance(const QString& accountId, const QDate& date) 
                     const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
                     if (journalEntry.split().accountId() == accountId) {
                         if (journalEntry.transaction().isStockSplit()) {
-                            balance *= journalEntry.split().shares();
+                            const auto accountId = journalEntry.split().accountId();
+                            balance = d->stockSplit(accountId, balance, journalEntry.split().shares(), Private::StockSplitForward);
                         } else {
                             balance += journalEntry.split().shares();
                         }
@@ -1364,7 +1393,8 @@ MyMoneyMoney JournalModel::balance(const QString& accountId, const QDate& date) 
                     const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
                     if (journalEntry.split().accountId() == accountId) {
                         if (journalEntry.transaction().isStockSplit()) {
-                            balance /= journalEntry.split().shares();
+                            const auto accountId = journalEntry.split().accountId();
+                            balance = d->stockSplit(accountId, balance, journalEntry.split().shares(), Private::StockSplitBackward);
                         } else {
                             balance -= journalEntry.split().shares();
                         }
@@ -1445,4 +1475,9 @@ void JournalModel::resetRowHeightInformation()
     const QModelIndex first = index(0, 0);
     const QModelIndex last = index(rows - 1, columnCount() - 1);
     emit dataChanged(first, last);
+}
+
+MyMoneyMoney JournalModel::stockSplitBalance(const QString& accountId, MyMoneyMoney balance, MyMoneyMoney factor) const
+{
+    return d->stockSplit(accountId, balance, factor, Private::StockSplitForward);
 }
