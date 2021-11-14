@@ -14,37 +14,6 @@
 <sect1 id="firstime-1">
 <title>Running &kmymoney; for the first time</title>
 
-<para>
-  You are recommended to quickly read through these tips by pressing on the
-  <guibutton>Previous</guibutton> and <guibutton>Next</guibutton> buttons at the
-  bottom of the window.
-</para>
-
-<para>
-  Once you have read the tips the window can be closed; it will re-open each
-  time &kmymoney; is started.  To stop this default behavior, uncheck the
-  appropriate option on the Tip of the Day window.
-</para>
-
-<note>
-  <para>
-    Tips can be read at anytime by selecting the <menuchoice><guimenu>Help</guimenu>
-    <guimenuitem>Show tip of the day</guimenuitem></menuchoice> menu item within &kmymoney;.
-  </para>
-</note>
-
-<para>
-  All tips have been extracted from the Frequently Asked Questions list (&FAQ;)
-  that provides more detailed help and can be found on the project <ulink
-  url="https://www.kmymoney.org/faq.php">website</ulink> and in <link
-  linkend="faq">this manual</link>.
-</para>
-
-<para>
-  Please click on <guibutton>Close</guibutton> to close the Tip of the Day
-  dialog.
-</para>
-
 <note>
   <para>
     When you run &kmymoney;, it might not look exactly like the screenshots in

@@ -89,7 +89,6 @@ enum class Action {
     // The help menu
     // *************
     SettingsAllMessages,
-    HelpShow,
     // *************
     // The investment menu
     // *************

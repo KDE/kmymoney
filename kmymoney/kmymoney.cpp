@@ -1738,7 +1738,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             // *************
             // The help menu
             // *************
-            {Action::HelpShow,                      QStringLiteral("help_show_tip"),                  i18n("&Show tip of the day"),                       Icon::Tip},
             // ***************************
             // Actions w/o main menu entry
             // ***************************
@@ -1952,7 +1951,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     // *************
     {
         const QVector<eMenu::Action> alwaysEnabled {
-            Action::HelpShow,
             Action::SettingsAllMessages,
             Action::ToolPerformance,
             Action::ToolCalculator,
