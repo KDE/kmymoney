@@ -854,6 +854,11 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         d->transaction = file->journalModel()->itemByIndex(idx).transaction();
         d->stockSplit = file->journalModel()->itemByIndex(idx).split();
 
+        // during loading the editor the stocksplit object maybe changed which
+        // don't want here. Therefore, we keep a local copy and reload it
+        // once needed
+        const auto stockSplitCopy(d->stockSplit);
+
         QModelIndex assetAccountSplitIdx;
         eMyMoney::Split::InvestmentTransactionType transactionType;
 
@@ -874,8 +879,8 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         d->ui->activityCombo->setCurrentIndex(static_cast<int>(transactionType));
 
         // changing the transactionType may have modified the stocksplit which is
-        // not necessary here. To cope with that, we simply reload it from the model
-        d->stockSplit = file->journalModel()->itemByIndex(idx).split();
+        // not necessary here. To cope with that, we simply reload it from the backup
+        d->stockSplit = stockSplitCopy;
 
         d->ui->dateEdit->setDate(d->transaction.postDate());
 
@@ -884,15 +889,24 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         d->ui->assetAccountCombo->setSelected(d->assetSplit.accountId());
 
         // Avoid updating other widgets (connected through signal/slot) during loading
-        QSignalBlocker blockShares(d->ui->sharesAmountEdit);
-        d->ui->sharesAmountEdit->setPrecision(MyMoneyMoney::denomToPrec(d->security.smallestAccountFraction()));
-        d->ui->sharesAmountEdit->setValue(d->stockSplit.shares() * d->currentActivity->sharesFactor());
-
         const auto indexes = d->securitiesModel->match(d->securitiesModel->index(0,0), eMyMoney::Model::IdRole, d->stockSplit.accountId(), 1, Qt::MatchFixedString);
         if (!indexes.isEmpty()) {
             d->ui->securityAccountCombo->setCurrentIndex(indexes.first().row());
             d->stockAccount = file->account(d->stockSplit.accountId());
         }
+
+        // changing the security in the last step may have modified the stocksplit
+        // which is not wanted here. To cope with that, we simply reload it from the model
+        d->stockSplit = stockSplitCopy;
+
+        // also, setting the security may have changed the precision so we
+        // reload it here
+        QSignalBlocker blockShares(d->ui->sharesAmountEdit);
+        if (transactionType == eMyMoney::Split::InvestmentTransactionType::SplitShares)
+            d->ui->sharesAmountEdit->setPrecision(-1);
+        else
+            d->ui->sharesAmountEdit->setPrecision(MyMoneyMoney::denomToPrec(d->security.smallestAccountFraction()));
+        d->ui->sharesAmountEdit->setValue(d->stockSplit.shares() * d->currentActivity->sharesFactor());
 
         if (d->feeSplitModel->rowCount() > 0) {
             d->ui->feesAmountEdit->setValue(d->feeSplitModel->valueSum().abs());
@@ -970,14 +984,12 @@ void InvestTransactionEditor::activityChanged(int index)
         }
         delete previousActivity;
 
-        if (type != eMyMoney::Split::InvestmentTransactionType::SplitShares &&
-                oldType == eMyMoney::Split::InvestmentTransactionType::SplitShares) {
+        if (type == eMyMoney::Split::InvestmentTransactionType::SplitShares && oldType != eMyMoney::Split::InvestmentTransactionType::SplitShares) {
             // switch to split
             d->stockSplit.setValue(MyMoneyMoney());
             d->stockSplit.setPrice(MyMoneyMoney());
             d->ui->sharesAmountEdit->setPrecision(-1);
-        } else if (type == eMyMoney::Split::InvestmentTransactionType::SplitShares &&
-                   oldType != eMyMoney::Split::InvestmentTransactionType::SplitShares) {
+        } else if (type != eMyMoney::Split::InvestmentTransactionType::SplitShares && oldType == eMyMoney::Split::InvestmentTransactionType::SplitShares) {
             // switch away from split
             d->stockSplit.setPrice(d->ui->priceAmountEdit->value());
             d->stockSplit.setValue(d->stockSplit.shares() * d->stockSplit.price());
