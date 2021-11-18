@@ -443,11 +443,7 @@ QString CsvWriter::format(const QString &s, bool withSeparator)
         return withSeparator ? m_separator : QString();
     QString m = s;
     m.remove('\'');
-#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
     m.replace(QLatin1Char('"'), QStringLiteral("\"\""));
-#else
-    m.replace(QLatin1Char('"'), QLatin1String("\"\""));
-#endif
     return QString("\"%1\"%2").arg(m, withSeparator ? m_separator : QString());
 }
 

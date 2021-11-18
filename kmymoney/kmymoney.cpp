@@ -73,12 +73,8 @@
 #include <KActivities/ResourceInstance>
 #endif
 
-#if KIO_VERSION < QT_VERSION_CHECK(5, 70, 0)
-#include <KRun>
-#else
 #include <KDialogJobUiDelegate>
 #include <KIO/CommandLauncherJob>
-#endif
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -3467,14 +3463,10 @@ void KMyMoneyApp::slotToolsStartKCalc()
         cmd = QLatin1String("kcalc");
 #endif
     }
-#if KIO_VERSION < QT_VERSION_CHECK(5,70,0)
-    KRun::runCommand(cmd, this);
-#else
     auto *job = new KIO::CommandLauncherJob(cmd, this);
     job->setUiDelegate(new KDialogJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, this));
     job->setWorkingDirectory(QString());
     job->start();
-#endif
 }
 
 void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)

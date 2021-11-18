@@ -20,10 +20,6 @@
 // Project Includes
 
 #include <QSortFilterProxyModel>
-#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
-#include <KItemModels/KRecursiveFilterProxyModel>
-#define QSortFilterProxyModel KRecursiveFilterProxyModel
-#endif
 
 /**
   * A proxy model for the schedules view to filter and sort schedule items
@@ -50,15 +46,6 @@ protected:
 
 protected:
     QScopedPointer<ScheduleProxyModelPrivate> d;
-
-private:
-#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
-    // provide the interface for backward compatibility
-    void setRecursiveFilteringEnabled(bool enable) {
-        Q_UNUSED(enable);
-    }
-#endif
-
 };
 
 #undef QSortFilterProxyModel

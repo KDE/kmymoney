@@ -31,10 +31,6 @@ public:
     bool m_hideFinishedSchedules;
 };
 
-#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
-#define QSortFilterProxyModel KRecursiveFilterProxyModel
-#endif
-
 ScheduleProxyModel::ScheduleProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)
     , d(new ScheduleProxyModelPrivate)

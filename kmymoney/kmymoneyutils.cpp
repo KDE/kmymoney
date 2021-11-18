@@ -536,12 +536,7 @@ bool KMyMoneyUtils::fileExists(const QUrl &url)
             fileExists = check_file.exists() && check_file.isFile();
 
         } else {
-#if KIO_VERSION < QT_VERSION_CHECK(5, 70, 0)
-            short int detailLevel = 0; // Lowest level: file/dir/symlink/none
-            KIO::StatJob* statjob = KIO::stat(url, KIO::StatJob::SourceSide, detailLevel);
-#else
             auto statjob = KIO::statDetails(url, KIO::StatJob::SourceSide, KIO::StatNoDetails);
-#endif
             bool noerror = statjob->exec();
             if (noerror) {
                 // We want a file

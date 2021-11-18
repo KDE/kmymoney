@@ -907,19 +907,7 @@ bool CSVImporterCore::processBankRow(MyMoneyStatement &st, const BankingProfile 
             QRegularExpression exp;
             exp.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
-            auto pattern = profile->m_creditIndicator;
-            // simplified version of QRegularExpression::wildcardToRegularExpression()
-            // for older Qt versions where the method does not exist
-            pattern.replace(QLatin1String("\\"), QLatin1String("\\\\"));
-            pattern.replace(QLatin1String("."), QLatin1String("\\."));
-            pattern.replace(QLatin1String("*"), QLatin1String(".*"));
-            pattern.replace(QLatin1String("?"), QLatin1String("."));
-            pattern.prepend(QLatin1String("\\A"));
-            pattern.append(QLatin1String("\\z"));
-#else
             auto pattern = QRegularExpression::wildcardToRegularExpression(profile->m_creditIndicator);
-#endif
             exp.setPattern(pattern);
 
             if (exp.match(indicator).hasMatch()) {

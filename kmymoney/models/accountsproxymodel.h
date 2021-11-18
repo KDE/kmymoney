@@ -16,11 +16,6 @@
 #include <QtGlobal> // for QT_VERSION macro
 #include <QSortFilterProxyModel>
 
-#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
-#include <KItemModels/KRecursiveFilterProxyModel>
-#define QSortFilterProxyModel KRecursiveFilterProxyModel
-#endif
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -138,13 +133,6 @@ Q_SIGNALS:
 
 private:
     Q_DECLARE_PRIVATE(AccountsProxyModel)
-
-#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
-    // provide the interface for backward compatibility
-    void setRecursiveFilteringEnabled(bool enable) {
-        Q_UNUSED(enable)
-    }
-#endif
 
 };
 

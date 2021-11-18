@@ -25,9 +25,7 @@
 #include <QXmlInputSource>
 #include <QXmlSimpleReader>
 #include <QPointer>
-#if QT_VERSION >= QT_VERSION_CHECK(5,10,0)
 #include <QRandomGenerator>
-#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -216,11 +214,7 @@ const QString GncObject::getKvpValue(const QString& key, const QString& type) co
 
 void GncObject::adjustHideFactor()
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5,10,0)
     m_moneyHideFactor = pMain->m_fileHideFactor * (1.0 + (int)(200.0 * QRandomGenerator::system()->generate() / (RAND_MAX + 1.0))) / 100.0;
-#else
-    m_moneyHideFactor = pMain->m_fileHideFactor * (1.0 + (int)(200.0 * qrand() / (RAND_MAX + 1.0))) / 100.0;
-#endif
 }
 
 // data anonymizer
@@ -1385,7 +1379,6 @@ void MyMoneyGncReader::setFileHideFactor()
 {
 #define MINFILEHIDEF 0.01
 #define MAXFILEHIDEF 99.99
-#if QT_VERSION >= QT_VERSION_CHECK(5,10,0)
     m_fileHideFactor = 0.0;
     while (m_fileHideFactor == 0.0) {
         m_fileHideFactor = QInputDialog::getDouble(0,
@@ -1397,20 +1390,6 @@ void MyMoneyGncReader::setFileHideFactor()
                            (1.0 + (int)(1000.0 * QRandomGenerator::system()->generate() / (RAND_MAX + 1.0))) / 100.0,
                            MINFILEHIDEF, MAXFILEHIDEF, 2);
     }
-#else
-    srand(QTime::currentTime().second());  // seed randomizer for anonymize
-    m_fileHideFactor = 0.0;
-    while (m_fileHideFactor == 0.0) {
-        m_fileHideFactor = QInputDialog::getDouble(0,
-                           i18n("Disguise your wealth"),
-                           i18n("Each monetary value on your file will be multiplied by a random number between 0.01 and 1.99\n"
-                                "with a different value used for each transaction. In addition, to further disguise the true\n"
-                                "values, you may enter a number between %1 and %2 which will be applied to all values.\n"
-                                "These numbers will not be stored in the file.", MINFILEHIDEF, MAXFILEHIDEF),
-                           (1.0 + (int)(1000.0 * qrand() / (RAND_MAX + 1.0))) / 100.0,
-                           MINFILEHIDEF, MAXFILEHIDEF, 2);
-    }
-#endif
 }
 #ifndef _GNCFILEANON
 

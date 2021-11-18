@@ -26,10 +26,6 @@ public:
 
 };
 
-#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
-#define QSortFilterProxyModel KRecursiveFilterProxyModel
-#endif
-
 SecuritiesFilterProxyModel::SecuritiesFilterProxyModel(QObject *parent, SecuritiesModel *model)
     : QSortFilterProxyModel(parent), d(new Private)
 {

@@ -21,10 +21,6 @@
 #include "mymoneymoney.h"
 #include "accountsmodel.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
-#define QSortFilterProxyModel KRecursiveFilterProxyModel
-#endif
-
 AccountsProxyModel::AccountsProxyModel(QObject *parent) :
     QSortFilterProxyModel(parent),
     d_ptr(new AccountsProxyModelPrivate)

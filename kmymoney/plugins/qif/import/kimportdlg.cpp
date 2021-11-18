@@ -129,12 +129,7 @@ void KImportDlg::slotFileTextChanged(const QString& text)
 {
     bool fileExists = false;
     if (file().isValid()) {
-#if KIO_VERSION < QT_VERSION_CHECK(5, 70, 0)
-        Q_CONSTEXPR short int detailLevel = 0; // Lowest level: file/dir/symlink/none
-        KIO::StatJob* statjob = KIO::stat(file(), KIO::StatJob::SourceSide, detailLevel);
-#else
         auto statjob = KIO::statDetails(file(), KIO::StatJob::SourceSide, KIO::StatNoDetails);
-#endif
         bool noerror = statjob->exec();
         if (noerror) {
             // We want a file
