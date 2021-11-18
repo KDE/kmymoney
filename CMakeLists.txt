@@ -2,7 +2,7 @@
 
 # The CMake version we require
 cmake_minimum_required(VERSION 3.12)
-set(ECM_MINIMUM_VERSION 5.42)
+set(ECM_MINIMUM_VERSION 5.71)
 
 set(KMYMONEY_STABLE_BRANCH TRUE)
 set(RELEASE_SERVICE_VERSION_MAJOR "5")
@@ -118,14 +118,14 @@ if (PkgConfig_FOUND)
   pkg_check_modules(LIBOFX libofx IMPORTED_TARGET)
 endif()
 
-find_package(Qt5 5.6 REQUIRED COMPONENTS
+find_package(Qt5 5.12 REQUIRED COMPONENTS
   Core DBus Widgets Svg Xml Test PrintSupport)
-find_package(Qt5 5.6 OPTIONAL_COMPONENTS
+find_package(Qt5 5.12 OPTIONAL_COMPONENTS
   Sql Concurrent QuickWidgets)
 
-find_package(KF5 5.2 REQUIRED COMPONENTS
+find_package(KF5 5.71 REQUIRED COMPONENTS
   ${REQ_KF5_COMPONENTS})
-find_package(KF5 5.2 OPTIONAL_COMPONENTS
+find_package(KF5 5.71 OPTIONAL_COMPONENTS
   ${OPT_KF5_COMPONENTS})
 
 if(LibAlkimia5_DIR)
