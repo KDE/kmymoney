@@ -1294,7 +1294,7 @@ public:
                 "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
                 "<tr><td class=\"summaryheader\">"
                 + i18n("Assets and Liabilities Summary") + "</td></tr>";
-            m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+            m_html += "<tr><td><table align=\"center\" width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
 
             //column titles
 
