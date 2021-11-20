@@ -433,6 +433,10 @@ LedgerView::LedgerView(QWidget* parent)
         QMetaObject::invokeMethod(this, "adjustDetailColumn", Qt::QueuedConnection, Q_ARG(int, viewport()->width()));
     });
 
+    connect(horizontalHeader(), &QHeaderView::sectionMoved, this, [&](int logicalIndex, int oldIndex, int newIndex) {
+        emit sectionMoved(this, logicalIndex, oldIndex, newIndex);
+    });
+
     // get notifications about setting changes
     connect(LedgerViewSettings::instance(), &LedgerViewSettings::settingsChanged, this, &LedgerView::slotSettingsChanged);
 
@@ -487,6 +491,8 @@ void LedgerView::setModel(QAbstractItemModel* model)
     horizontalHeader()->setSectionResizeMode(JournalModel::Column::Payment, QHeaderView::Interactive);
     horizontalHeader()->setSectionResizeMode(JournalModel::Column::Deposit, QHeaderView::Interactive);
     horizontalHeader()->setSectionResizeMode(JournalModel::Column::Balance, QHeaderView::Interactive);
+
+    horizontalHeader()->setSectionsMovable(true);
 }
 
 void LedgerView::setAccountId(const QString& id)
@@ -1312,4 +1318,15 @@ void LedgerView::resizeSection(QWidget* view, const QString& configGroupName, in
             horizontalHeader()->resizeSection(section, newSize);
         }
     }
+}
+
+void LedgerView::moveSection(QWidget* view, int section, int oldIndex, int newIndex)
+{
+    Q_UNUSED(section)
+    if (view == this) {
+        return;
+    }
+
+    QSignalBlocker block(horizontalHeader());
+    horizontalHeader()->moveSection(oldIndex, newIndex);
 }

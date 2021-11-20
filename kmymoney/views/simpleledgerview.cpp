@@ -252,7 +252,10 @@ public:
 
             q->connect(q, &SimpleLedgerView::settingsChanged, view, &LedgerViewPage::slotSettingsChanged);
             q->connect(view, &LedgerViewPage::sectionResized, q, &SimpleLedgerView::sectionResized);
+            q->connect(view, &LedgerViewPage::sectionMoved, q, &SimpleLedgerView::sectionMoved);
+
             q->connect(q, &SimpleLedgerView::resizeSection, view, &LedgerViewPage::resizeSection);
+            q->connect(q, &SimpleLedgerView::moveSection, view, &LedgerViewPage::moveSection);
         }
     }
 
@@ -329,7 +332,9 @@ public:
 
             q->connect(q, &SimpleLedgerView::settingsChanged, reconciliationView, &LedgerViewPage::slotSettingsChanged);
             q->connect(reconciliationView, &LedgerViewPage::sectionResized, q, &SimpleLedgerView::sectionResized);
+            q->connect(reconciliationView, &LedgerViewPage::sectionMoved, q, &SimpleLedgerView::sectionMoved);
             q->connect(q, &SimpleLedgerView::resizeSection, reconciliationView, &LedgerViewPage::resizeSection);
+            q->connect(q, &SimpleLedgerView::moveSection, reconciliationView, &LedgerViewPage::moveSection);
 
             // selecting the last tab (the one with the +) and then the new one
             // makes sure that all signal about the new selection are emitted
@@ -723,4 +728,9 @@ void SimpleLedgerView::executeAction(eMenu::Action action, const SelectedObjects
 void SimpleLedgerView::sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const
 {
     emit resizeSection(view, configGroupName, section, oldSize, newSize);
+}
+
+void SimpleLedgerView::sectionMoved(QWidget* view, int section, int oldIndex, int newIndex) const
+{
+    emit moveSection(view, section, oldIndex, newIndex);
 }

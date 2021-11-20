@@ -95,6 +95,8 @@ Q_SIGNALS:
 
     void resizeSection(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize);
     void sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const;
+    void moveSection(QWidget* view, int section, int oldIndex, int newIndex);
+    void sectionMoved(QWidget* view, int section, int oldIndex, int newIndex) const;
 };
 
 #endif // LEDGERVIEWPAGE_H

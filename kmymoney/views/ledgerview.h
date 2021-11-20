@@ -93,6 +93,7 @@ public Q_SLOTS:
     void slotSettingsChanged();
 
     void resizeSection(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize);
+    void moveSection(QWidget* view, int section, int oldIndex, int newIndex);
 
 protected:
     bool edit(const QModelIndex& index, EditTrigger trigger, QEvent* event) final override;
@@ -125,6 +126,7 @@ Q_SIGNALS:
     void aboutToStartEdit() const;
     void aboutToFinishEdit() const;
     void sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const;
+    void sectionMoved(QWidget* view, int section, int oldIndex, int newIndex) const;
 
 protected:
     class Private;

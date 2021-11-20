@@ -115,6 +115,7 @@ public:
             if (!isInit) {
                 q->connect(headerView, &QWidget::customContextMenuRequested, q, &ColumnSelector::slotColumnsMenu);
                 q->connect(headerView, &QHeaderView::sectionResized, q, &ColumnSelector::slotUpdateHeaderState);
+                q->connect(headerView, &QHeaderView::sectionMoved, q, &ColumnSelector::slotUpdateHeaderState);
                 isInit = true;
             }
 

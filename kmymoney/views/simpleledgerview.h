@@ -51,6 +51,7 @@ private Q_SLOTS:
     void slotRequestSelectionChange(const SelectedObjects& selections) const;
 
     void sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const;
+    void sectionMoved(QWidget* view, int section, int oldIndex, int newIndex) const;
 
 protected:
     bool eventFilter(QObject* o, QEvent* e) override;
@@ -60,6 +61,7 @@ Q_SIGNALS:
     void showForms(bool show);
     void settingsChanged();
     void resizeSection(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const;
+    void moveSection(QWidget* view, int section, int oldIndex, int newIndex) const;
 
 private:
     Q_DECLARE_PRIVATE(SimpleLedgerView)

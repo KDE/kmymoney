@@ -9,13 +9,15 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QAbstractItemView>
 #include <QCompleter>
-#include <QSortFilterProxyModel>
-#include <QStringList>
 #include <QDebug>
 #include <QGlobalStatic>
+#include <QHeaderView>
+#include <QSortFilterProxyModel>
 #include <QStandardItemModel>
-#include <QAbstractItemView>
+#include <QStringList>
+#include <QTableView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -690,11 +692,38 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     // default is to hide the account selection combobox
     setShowAccountCombo(false);
 
+    // determine order of credit and debit edit widgets
+    // based on their visual order in the ledger
+    int creditColumn = JournalModel::Column::Payment;
+    int debitColumn = JournalModel::Column::Deposit;
+    ;
+    QWidget* w(this);
+    do {
+        w = w->parentWidget();
+        const auto view = qobject_cast<const QTableView*>(w);
+        if (view) {
+            creditColumn = view->horizontalHeader()->visualIndex(creditColumn);
+            debitColumn = view->horizontalHeader()->visualIndex(debitColumn);
+            break;
+        }
+    } while (w);
+
+    // in case they are in the opposite order, we swap the edit widgets
+    if (debitColumn < creditColumn) {
+        std::swap(d->ui->amountEditCredit, d->ui->amountEditDebit);
+    }
+
     // insert the tag combo into the tab order
     QWidget::setTabOrder(d->ui->accountCombo, d->ui->dateEdit);
-    QWidget::setTabOrder(d->ui->dateEdit, d->ui->amountEditCredit);
-    QWidget::setTabOrder(d->ui->amountEditCredit, d->ui->amountEditDebit);
-    QWidget::setTabOrder(d->ui->amountEditDebit, d->ui->payeeEdit);
+    if (debitColumn < creditColumn) {
+        QWidget::setTabOrder(d->ui->dateEdit, d->ui->amountEditDebit);
+        QWidget::setTabOrder(d->ui->amountEditDebit, d->ui->amountEditCredit);
+        QWidget::setTabOrder(d->ui->amountEditCredit, d->ui->payeeEdit);
+    } else {
+        QWidget::setTabOrder(d->ui->dateEdit, d->ui->amountEditCredit);
+        QWidget::setTabOrder(d->ui->amountEditCredit, d->ui->amountEditDebit);
+        QWidget::setTabOrder(d->ui->amountEditDebit, d->ui->payeeEdit);
+    }
     QWidget::setTabOrder(d->ui->payeeEdit, d->ui->numberEdit);
     QWidget::setTabOrder(d->ui->numberEdit, d->ui->categoryCombo);
     QWidget::setTabOrder(d->ui->categoryCombo, d->ui->costCenterCombo);

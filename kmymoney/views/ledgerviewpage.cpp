@@ -122,7 +122,9 @@ void LedgerViewPage::init(const QString& configGroupName)
     });
 
     connect(d->ui->m_ledgerView, &LedgerView::sectionResized, this, &LedgerViewPage::sectionResized);
+    connect(d->ui->m_ledgerView, &LedgerView::sectionMoved, this, &LedgerViewPage::sectionMoved);
     connect(this, &LedgerViewPage::resizeSection, d->ui->m_ledgerView, &LedgerView::resizeSection);
+    connect(this, &LedgerViewPage::moveSection, d->ui->m_ledgerView, &LedgerView::moveSection);
 }
 
 LedgerViewPage::~LedgerViewPage()
