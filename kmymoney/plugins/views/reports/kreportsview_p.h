@@ -314,12 +314,23 @@ void KReportTab::print()
 
 void KReportTab::printPreview()
 {
-    if (m_tableView) {
-        QPrintPreviewDialog dlg(KMyMoneyPrinter::instance(), m_tableView);
-        connect(&dlg, &QPrintPreviewDialog::paintRequested, m_tableView, [&](QPrinter* printer) {
-            m_tableView->print(printer);
-        });
-        dlg.exec();
+    if (m_showingChart) {
+        if (m_chartView) {
+            QPrintPreviewDialog dlg(KMyMoneyPrinter::instance(), m_chartView);
+            connect(&dlg, &QPrintPreviewDialog::paintRequested, m_tableView, [&](QPrinter* printer) {
+                QPainter painter(printer);
+                m_chartView->paint(&painter, painter.window());
+            });
+            dlg.exec();
+        }
+    } else {
+        if (m_tableView) {
+            QPrintPreviewDialog dlg(KMyMoneyPrinter::instance(), m_tableView);
+            connect(&dlg, &QPrintPreviewDialog::paintRequested, m_tableView, [&](QPrinter* printer) {
+                m_tableView->print(printer);
+            });
+            dlg.exec();
+        }
     }
 }
 
