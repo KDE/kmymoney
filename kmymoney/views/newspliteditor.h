@@ -12,6 +12,7 @@
 
 #include <QFrame>
 #include <QScopedPointer>
+class QAbstractItemModel;
 class QWidget;
 
 // ----------------------------------------------------------------------------
@@ -48,6 +49,7 @@ public:
     void startLoadingSplit();
     void finishLoadingSplit();
 
+    void setAmountPlaceHolderText(const QAbstractItemModel* model);
     void setReadOnly(bool readOnly);
 
 protected:

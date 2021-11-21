@@ -696,7 +696,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     // based on their visual order in the ledger
     int creditColumn = JournalModel::Column::Payment;
     int debitColumn = JournalModel::Column::Deposit;
-    ;
+
     QWidget* w(this);
     do {
         w = w->parentWidget();

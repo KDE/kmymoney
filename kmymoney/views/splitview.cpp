@@ -193,11 +193,6 @@ SplitView::SplitView(QWidget* parent)
     // to use the first column to select all items in the view
     setCornerButtonEnabled(false);
 
-    // This will allow the user to move the columns, but
-    // the delegate cannot handle it yet and it requires to
-    // reset the spans as well.
-    // horizontalHeader()->setMovable(true);
-
     // make sure to get informed about resize operations on the columns
     connect(horizontalHeader(), &QHeaderView::sectionResized, this, [&]() {
         adjustDetailColumn(viewport()->width());
@@ -235,6 +230,9 @@ void SplitView::setModel(QAbstractItemModel* model)
     QTableView::setModel(model);
 
     d->columnSelector->setModel(model);
+
+    // This will allow the user to move the columns
+    horizontalHeader()->setSectionsMovable(true);
 }
 
 void SplitView::setCommodity(const MyMoneySecurity& commodity)

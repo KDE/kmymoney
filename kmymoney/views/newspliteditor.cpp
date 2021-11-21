@@ -10,16 +10,17 @@
 // QT Includes
 
 #include <QCompleter>
-#include <QSortFilterProxyModel>
-#include <QStringList>
 #include <QDate>
 #include <QDebug>
+#include <QHeaderView>
+#include <QSortFilterProxyModel>
+#include <QStringList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
 #include <KConcatenateRowsProxyModel>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -316,6 +317,28 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
 
     d->ui->amountEditCredit->setAllowEmpty(true);
     d->ui->amountEditDebit->setAllowEmpty(true);
+
+    // determine order of credit and debit edit widgets
+    // based on their visual order in the ledger
+    int creditColumn = SplitModel::Column::Payment;
+    int debitColumn = SplitModel::Column::Deposit;
+
+    QWidget* w(this);
+    do {
+        w = w->parentWidget();
+        const auto view = qobject_cast<const QTableView*>(w);
+        if (view) {
+            creditColumn = view->horizontalHeader()->visualIndex(creditColumn);
+            debitColumn = view->horizontalHeader()->visualIndex(debitColumn);
+            break;
+        }
+    } while (w);
+
+    // in case they are in the opposite order, we swap the edit widgets
+    if (debitColumn < creditColumn) {
+        std::swap(d->ui->amountEditCredit, d->ui->amountEditDebit);
+    }
+
     d->amountHelper = new CreditDebitHelper(this, d->ui->amountEditCredit, d->ui->amountEditDebit);
 
     new AmountEditCurrencyHelper(d->ui->accountCombo, d->amountHelper, commodity.id());
@@ -327,10 +350,32 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
 
     connect(d->ui->cancelButton, &QToolButton::clicked, this, &NewSplitEditor::reject);
     connect(d->ui->enterButton, &QToolButton::clicked, this, &NewSplitEditor::acceptEdit);
+
+    // setup the tab order
+    if (debitColumn < creditColumn) {
+        QWidget::setTabOrder(d->ui->amountEditDebit, d->ui->amountEditCredit);
+        QWidget::setTabOrder(d->ui->amountEditCredit, d->ui->payeeEdit);
+    } else {
+        QWidget::setTabOrder(d->ui->amountEditCredit, d->ui->amountEditDebit);
+        QWidget::setTabOrder(d->ui->amountEditDebit, d->ui->payeeEdit);
+    }
+    QWidget::setTabOrder(d->ui->payeeEdit, d->ui->numberEdit);
+    QWidget::setTabOrder(d->ui->numberEdit, d->ui->accountCombo);
+    QWidget::setTabOrder(d->ui->accountCombo, d->ui->costCenterCombo);
+    QWidget::setTabOrder(d->ui->costCenterCombo, d->ui->tagCombo);
+    QWidget::setTabOrder(d->ui->tagCombo, d->ui->memoEdit);
+    QWidget::setTabOrder(d->ui->memoEdit, d->ui->enterButton);
+    QWidget::setTabOrder(d->ui->enterButton, d->ui->cancelButton);
 }
 
 NewSplitEditor::~NewSplitEditor()
 {
+}
+
+void NewSplitEditor::setAmountPlaceHolderText(const QAbstractItemModel* model)
+{
+    d->ui->amountEditCredit->setPlaceholderText(model->headerData(SplitModel::Column::Payment, Qt::Horizontal).toString());
+    d->ui->amountEditDebit->setPlaceholderText(model->headerData(SplitModel::Column::Deposit, Qt::Horizontal).toString());
 }
 
 void NewSplitEditor::setPostDate(const QDate& date)

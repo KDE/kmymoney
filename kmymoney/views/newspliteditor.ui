@@ -193,7 +193,7 @@
     </widget>
    </item>
    <item row="3" column="1" rowspan="2">
-    <widget class="QComboBox" name="comboBox"/>
+    <widget class="QComboBox" name="tagCombo"/>
    </item>
    <item row="7" column="2">
     <spacer name="verticalSpacer">
@@ -227,7 +227,7 @@
   <tabstop>numberEdit</tabstop>
   <tabstop>accountCombo</tabstop>
   <tabstop>costCenterCombo</tabstop>
-  <tabstop>comboBox</tabstop>
+  <tabstop>tagCombo</tabstop>
   <tabstop>memoEdit</tabstop>
   <tabstop>amountEditCredit</tabstop>
   <tabstop>amountEditDebit</tabstop>

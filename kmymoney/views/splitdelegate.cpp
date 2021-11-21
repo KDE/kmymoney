@@ -106,6 +106,8 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
             connect(d->m_editor, &NewSplitEditor::done, this, &SplitDelegate::endEdit);
             emit sizeHintChanged(index);
 
+            d->m_editor->setAmountPlaceHolderText(index.model());
+
             // propagate read-only mode
             d->m_editor->setReadOnly(d->m_readOnly);
         }
