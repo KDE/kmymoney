@@ -71,15 +71,6 @@ QMap<QString, KPluginMetaData> listPlugins(bool onlyEnabled)
 
 void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLGUIFactory* guiFactory)
 {
-
-    if (action == Action::Load ||
-            action == Action::Reorganize) {
-        KPluginLoader::forEachPlugin(QStringLiteral("kmymoney"), [&](const QString &pluginPath) {
-            KPluginMetaData metadata(pluginPath);
-            qDebug() << "Located plugin" << pluginPath << "Validity" << metadata.isValid();
-        });
-    }
-
     QMap<QString, KPluginMetaData> referencePluginDatas;
     if (action == Action::Load ||
             action == Action::Reorganize)
