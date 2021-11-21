@@ -4,29 +4,26 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN echo "tzdata tzdata/Areas select Europe" | debconf-set-selections
 RUN echo "tzdata tzdata/Zones/Europe select Madrid" | debconf-set-selections
-# See https://invent.kde.org/office/kmymoney/-/wikis/home#bleeding-edge-kde-neon-ubuntu-repositories
-# for the section below
-# RUN apt-get update
-# RUN apt-get install -y apt-utils 
-# RUN apt-get install -y gnupg wget
-# RUN wget -qO - http://archive.neon.kde.org/public.key | apt-key add -
-# RUN echo "deb http://archive.neon.kde.org/testing focal main" >> /etc/apt/sources.list
-# RUN echo "deb-src http://archive.neon.kde.org/testing focal main" >> /etc/apt/sources.list
-RUN sed -i -- 's/#[ ]*deb-src/deb-src/g' /etc/apt/sources.list
-RUN apt-get update
-RUN apt-get install -y eatmydata
-RUN eatmydata apt-get upgrade -y
-RUN eatmydata apt-get install -y openssh-server gdb rsync iputils-ping telnet
-RUN eatmydata apt-get build-dep -y kmymoney
-RUN eatmydata apt-get install -y qt5-default qtwebengine5-dev
-RUN eatmydata apt-get install -y libsqlcipher-dev
-RUN eatmydata apt-get install -y libqt5sql5-*
-RUN eatmydata apt-get install -y subversion python3-dev ninja-build
-RUN eatmydata apt-get install -y breeze-icon-theme fonts-noto-color-emoji
+RUN apt update \
+    && apt install -y apt-utils gnupg wget \
+    && wget -qO - http://archive.neon.kde.org/public.key | apt-key add - \
+    && echo "deb http://archive.neon.kde.org/user focal main" >> /etc/apt/sources.list \
+    && echo "deb-src http://archive.neon.kde.org/user focal main" >> /etc/apt/sources.list \
+    && sed -i -- 's/#[ ]*deb-src/deb-src/g' /etc/apt/sources.list \
+    && apt update \
+    && apt install -y eatmydata \
+    && eatmydata apt upgrade -y \
+    && eatmydata apt install -y openssh-server gdb rsync iputils-ping telnet \
+    && eatmydata apt build-dep -y kmymoney \
+    && eatmydata apt install -y qt5-default \
+    && eatmydata apt install -y libsqlcipher-dev \
+    && eatmydata apt install -y libqt5sql5-* \
+    && eatmydata apt install -y subversion python3-dev ninja-build \
+    && eatmydata apt install -y breeze-icon-theme fonts-noto-color-emoji
 
-RUN mkdir /var/run/sshd
-RUN echo 'root:root' | chpasswd
-RUN sed -i 's/#\?PermitRootLogin .*/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN mkdir /var/run/sshd \
+    && echo 'root:root' | chpasswd \
+    && sed -i 's/#\?PermitRootLogin .*/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd

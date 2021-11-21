@@ -1,4 +1,4 @@
-# default KDe build env
+# default KDE build env
 include:
   - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-before.yml
   - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-extragear-linux.yml
@@ -12,6 +12,12 @@ build_local_ubuntu_2004:
     DEBIAN_FRONTEND: "noninteractive"
   before_script:
     - echo "Installing dependencies."
+    - apt update
+    - apt install -y apt-utils
+    - apt install -y gnupg wget
+    - wget -qO - http://archive.neon.kde.org/public.key | apt-key add -
+    - echo "deb http://archive.neon.kde.org/user focal main" >> /etc/apt/sources.list
+    - echo "deb-src http://archive.neon.kde.org/user focal main" >> /etc/apt/sources.list
     - sed -i -- 's/#[ ]*deb-src/deb-src/g' /etc/apt/sources.list
     - apt update
     - apt install -y apt-utils eatmydata
