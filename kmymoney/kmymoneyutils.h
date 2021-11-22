@@ -224,7 +224,18 @@ public:
       */
     static void checkConstants();
 
-    static QString variableCSS();
+    /**
+     * Returns common CSS stylesheet used by HTML renderers.
+     *
+     * Note that some elements are generated on the fly based on the user preferences.
+     *
+     * @param baseStylesheet filename of the custom CSS stylesheet file that will be used as a base.
+     *                           If empty or null, a stock embedded stylesheet will be used.
+     *
+     *
+     * @retval The processed CSS stylesheet with base and dynamic elements combined.
+     */
+    static QString getStylesheet(QString baseStylesheet = QString());
 
     /**
       * This method returns the split referencing a stock account if

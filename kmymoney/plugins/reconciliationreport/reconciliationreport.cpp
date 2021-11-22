@@ -73,21 +73,18 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
     MyMoneySecurity currency = file->currency(account.currencyId());
 
     QString filename;
-    if (!MyMoneyFile::instance()->value("reportstylesheet").isEmpty())
-        filename = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString("html/%1").arg(MyMoneyFile::instance()->value("reportstylesheet")))).url();
-    if (filename.isEmpty())
-        filename = QStandardPaths::locate(QStandardPaths::AppConfigLocation, "html/kmymoney.css");
     QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head>\n");
 
     // inline the CSS
     header += "<style type=\"text/css\">\n";
-    header += KMyMoneyUtils::variableCSS();
-    QFile cssFile(filename);
-    if (cssFile.open(QIODevice::ReadOnly)) {
-        QTextStream cssStream(&cssFile);
-        header += cssStream.readAll();
-        cssFile.close();
-    }
+
+    if (!MyMoneyFile::instance()->value("reportstylesheet").isEmpty())
+        header +=
+            KMyMoneyUtils::getStylesheet(QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                                                                    QString("html/%1").arg(MyMoneyFile::instance()->value("reportstylesheet"))))
+                                             .url());
+    else
+        header += KMyMoneyUtils::getStylesheet();
 
     header += "</style>\n";
     header += "</head><body id=\"summaryview\">\n";

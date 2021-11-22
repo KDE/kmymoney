@@ -76,14 +76,7 @@ QString reports::ReportTable::renderHeader(const QString& title, const QByteArra
 
     // inline the CSS
     header += "<style type=\"text/css\">\n";
-    header += KMyMoneyUtils::variableCSS();
-    QString filename = cssFileNameGet();
-    QFile cssFile(filename);
-    if (cssFile.open(QIODevice::ReadOnly)) {
-        QTextStream cssStream(&cssFile);
-        header += cssStream.readAll();
-        cssFile.close();
-    }
+    header += KMyMoneyUtils::getStylesheet(cssFileNameGet());
     header += "</style>\n";
 
     header += QLatin1String("</head>\n<body>\n");

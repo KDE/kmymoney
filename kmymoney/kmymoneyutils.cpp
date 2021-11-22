@@ -189,8 +189,11 @@ void KMyMoneyUtils::checkConstants()
 #endif
 }
 
-QString KMyMoneyUtils::variableCSS()
+QString KMyMoneyUtils::getStylesheet(QString baseStylesheet)
 {
+    if (baseStylesheet.isEmpty())
+        baseStylesheet = QStandardPaths::locate(QStandardPaths::AppConfigLocation, "html/kmymoney.css");
+
     QColor tcolor = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color();
     QColor link = KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color();
 
@@ -201,6 +204,14 @@ QString KMyMoneyUtils::variableCSS()
            .arg(KMyMoneySettings::schemeColor(SchemeColor::ListBackground2).name()).arg(tcolor.name());
     css += QString(".negativetext  { color: %1; }\n").arg(KMyMoneySettings::schemeColor(SchemeColor::Negative).name());
     css += QString("a { color: %1; }\n").arg(link.name());
+
+    QFile cssFile(baseStylesheet);
+    if (cssFile.open(QIODevice::ReadOnly)) {
+        QTextStream cssStream(&cssFile);
+        css += cssStream.readAll();
+        cssFile.close();
+    }
+
     return css;
 }
 
