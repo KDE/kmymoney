@@ -195,6 +195,14 @@ onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const
     if (plugins.length() != 1)
         qWarning() << "Multiple plugins which offer the online task \"" << name << "\" were found. Loading a random one.";
 
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 86, 0)
+    auto pluginResult = KPluginFactory::instantiatePlugin<KMyMoneyPlugin::onlineTaskFactory>(plugins.first(), onlineJobAdministration::instance());
+    if (!pluginResult) {
+        qWarning() << "Could not load plugin for online task " << name << ", file name " << plugins.first().fileName() << ".";
+        return nullptr;
+    }
+    auto taskFactory = pluginResult.plugin;
+#else
     // Load plugin
     std::unique_ptr<QPluginLoader> loader = std::unique_ptr<QPluginLoader>(new QPluginLoader{plugins.first().fileName()});
     QObject* plugin = loader->instance();
@@ -216,6 +224,7 @@ onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const
         qWarning() << "Could not create online task factory for online task " << name << ", file name " << plugins.first().fileName() << ".";
         return nullptr;
     }
+#endif
 
     // Finally create task
     onlineTask* task = taskFactory->createOnlineTask(name);

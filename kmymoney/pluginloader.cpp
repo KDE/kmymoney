@@ -111,6 +111,7 @@ void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLG
         for (auto it = refPlugins.cbegin(); it != refPlugins.cend(); ++it) {
             if (!ctnPlugins.standard.contains(it.key())) {
                 qDebug() << "Loading" << (*it).fileName();
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 86, 0)
                 KPluginLoader loader((*it).fileName());
                 auto factory = loader.factory();
                 if (!factory) {
@@ -118,6 +119,14 @@ void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLG
                     loader.unload();
                     continue;
                 }
+#else
+                auto factoryResult = KPluginFactory::loadFactory(*it);
+                if (!factoryResult) {
+                    qWarning("Could not load plugin '%s', error: %s", qPrintable((*it).fileName()), qPrintable(factoryResult.errorText));
+                    continue;
+                }
+                auto factory = factoryResult.plugin;
+#endif
 #if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
                 Plugin* plugin = factory->create<Plugin>(parent, QVariantList { (*it).pluginId(), (*it).name() });
 #else
@@ -125,7 +134,6 @@ void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLG
 #endif
                 if (!plugin) {
                     qWarning("This is not KMyMoney plugin: '%s'", qPrintable((*it).fileName()));
-                    loader.unload();
                     continue;
                 }
 
