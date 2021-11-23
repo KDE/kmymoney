@@ -50,6 +50,3 @@ target_link_libraries(kcm_icalendarexporter
   Qt5::Widgets
   Qt5::Gui
 )
-
-install(FILES kcm_icalendarexporter.desktop
-        DESTINATION ${SERVICES_INSTALL_DIR})

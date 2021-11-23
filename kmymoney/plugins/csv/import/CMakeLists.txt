@@ -69,6 +69,3 @@ target_link_libraries(kcm_csvimporter
                       KF5::I18n
                       KF5::ConfigWidgets
                       )
-
-install(FILES kcm_csvimporter.desktop
-        DESTINATION ${SERVICES_INSTALL_DIR})

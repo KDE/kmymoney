@@ -59,6 +59,3 @@ target_link_libraries(kcm_xmlstorage
     kgpgfile
     kmm_settings
 )
-
-install(FILES kcm_xmlstorage.desktop
-        DESTINATION ${SERVICES_INSTALL_DIR})

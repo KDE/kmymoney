@@ -73,6 +73,3 @@ target_link_libraries(kcm_reportsview
                       KF5::CoreAddons
                       kmm_settings
                       )
-
-install(FILES kcm_reportsview.desktop
-        DESTINATION "${SERVICES_INSTALL_DIR}")

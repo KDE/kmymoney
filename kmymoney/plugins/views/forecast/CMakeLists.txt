@@ -47,6 +47,3 @@ target_link_libraries(kcm_forecastview
                       KF5::CoreAddons
                       kmm_settings
                       )
-
-install(FILES kcm_forecastview.desktop
-        DESTINATION "${SERVICES_INSTALL_DIR}")
