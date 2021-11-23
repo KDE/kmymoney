@@ -116,6 +116,9 @@ file(GLOB_RECURSE KMYMONEY_APP_ICONS "${CMAKE_CURRENT_SOURCE_DIR}/icons/kmymoney
 ecm_add_app_icon(kmymoney_SRCS ICONS ${KMYMONEY_APP_ICONS})
 
 add_executable( kmymoney ${kmymoney_SRCS} )
+if (BUILD_STATIC_PLUGINS)
+    kcoreaddons_target_static_plugins(kmymoney "kmymoney" LINK_OPTION PUBLIC)
+endif()
 
 if (ENABLE_SQLCIPHER)
   message( STATUS "     SQLCIPHER INCLUDE   :  " ${SQLCIPHER_INCLUDE_DIRS}) #just for testing it on MS Windows

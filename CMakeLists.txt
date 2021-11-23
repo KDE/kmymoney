@@ -2,7 +2,18 @@
 
 # The CMake version we require
 cmake_minimum_required(VERSION 3.12)
-set(ECM_MINIMUM_VERSION 5.71)
+
+option(BUILD_STATIC_PLUGINS "Build the plugins statically" OFF)
+
+if (BUILD_STATIC_PLUGINS)
+    set(ECM_MINIMUM_VERSION 5.89)
+    set(KF5_MIN_VERSION 5.89)
+    set(KDE_COMPILERSETTINGS_LEVEL 5.82)
+else()
+    set(ECM_MINIMUM_VERSION 5.71)
+    set(KF5_MIN_VERSION 5.71)
+endif()
+
 
 set(KMYMONEY_STABLE_BRANCH TRUE)
 set(RELEASE_SERVICE_VERSION_MAJOR "5")
@@ -119,9 +130,9 @@ find_package(Qt5 5.12 REQUIRED COMPONENTS
 find_package(Qt5 5.12 OPTIONAL_COMPONENTS
   Sql Concurrent QuickWidgets)
 
-find_package(KF5 5.71 REQUIRED COMPONENTS
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
   ${REQ_KF5_COMPONENTS})
-find_package(KF5 5.71 OPTIONAL_COMPONENTS
+find_package(KF5 ${KF5_MIN_VERSION} OPTIONAL_COMPONENTS
   ${OPT_KF5_COMPONENTS})
 
 if(LibAlkimia5_DIR)

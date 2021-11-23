@@ -27,14 +27,21 @@ ENDMACRO(KMM_CREATE_LINKS)
 
 
 function(kmymoney_add_plugin name)
-    kcoreaddons_add_plugin(${name} ${ARGN} INSTALL_NAMESPACE "kmymoney")
-    # TODO Remove this once we can depend on KF 5.88
-    set_target_properties(${name} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
-
+    if (BUILD_STATIC_PLUGINS)
+        kcoreaddons_add_plugin(${name} ${ARGN} STATIC INSTALL_NAMESPACE "kmymoney")
+    else()
+        kcoreaddons_add_plugin(${name} ${ARGN} INSTALL_NAMESPACE "kmymoney")
+        # TODO Remove this once we can depend on KF 5.88
+        set_target_properties(${name} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
+    endif()
 endfunction()
 
 function(kmymoney_add_plugin_kcm name)
-    kcoreaddons_add_plugin(${name} ${ARGN} INSTALL_NAMESPACE "kmymoney/kcms")
-    # TODO Remove this once we can depend on KF 5.88
-    set_target_properties(${name} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
+    if (BUILD_STATIC_PLUGINS)
+        kcoreaddons_add_plugin(${name} ${ARGN} STATIC INSTALL_NAMESPACE "kmymoney/kcms")
+    else()
+        kcoreaddons_add_plugin(${name} ${ARGN} INSTALL_NAMESPACE "kmymoney/kcms")
+        # TODO Remove this once we can depend on KF 5.88
+        set_target_properties(${name} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
+    endif()
 endfunction()
