@@ -31,7 +31,6 @@
 #include <QMimeData>
 #include <QPointer>
 #include <QPrintPreviewDialog>
-#include <QTextBrowser>
 #include <QTextCodec>
 #include <QTimer>
 #include <QTreeWidget>
@@ -54,24 +53,25 @@
 #include "ui_kreportsview.h"
 #include "ui_reportcontrol.h"
 
+#include "icons/icons.h"
+#include "kmm_printer.h"
+#include "kmmtextbrowser.h"
+#include "kmymoneysettings.h"
 #include "kmymoneyviewbase_p.h"
+#include "kreportchartview.h"
 #include "kreportconfigurationfilterdlg.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneyreport.h"
-#include "mymoneyexception.h"
-#include "kmymoneysettings.h"
-#include "querytable.h"
 #include "objectinfotable.h"
-#include "icons/icons.h"
+#include "pivottable.h"
+#include "querytable.h"
+#include "reportcontrolimpl.h"
+#include "reporttable.h"
 #include "tocitem.h"
 #include "tocitemgroup.h"
 #include "tocitemreport.h"
-#include "kreportchartview.h"
-#include "pivottable.h"
-#include "reporttable.h"
-#include "reportcontrolimpl.h"
-#include "mymoneyenums.h"
-#include "kmm_printer.h"
 
 using namespace reports;
 using namespace eMyMoney;
@@ -94,7 +94,7 @@ using namespace Icons;
 class KReportTab: public QWidget
 {
 private:
-    QTextBrowser* m_tableView;
+    KMMTextBrowser* m_tableView;
     reports::KReportChartView *m_chartView;
     ReportControl             *m_control;
     QVBoxLayout               *m_layout;
@@ -196,7 +196,7 @@ public:
   */
 KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KReportsView* eventHandler)
     : QWidget(parent)
-    , m_tableView(new QTextBrowser(this))
+    , m_tableView(new KMMTextBrowser(this))
     , m_chartView(new KReportChartView(this))
     , m_control(new ReportControl(this))
     , m_layout(new QVBoxLayout(this))
@@ -245,7 +245,7 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     }
     enableAllReportActions();
 
-    connect(m_tableView, &QTextBrowser::sourceChanged, eventHandler, &KReportsView::slotOpenUrl);
+    connect(m_tableView, &KMMTextBrowser::sourceChanged, eventHandler, &KReportsView::slotOpenUrl);
 
     // if this is a default report, then you can't delete it!
     if (report.id().isEmpty())

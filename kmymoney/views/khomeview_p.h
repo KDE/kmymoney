@@ -29,7 +29,6 @@
 #include <QPrinter>
 #include <QScrollBar>
 #include <QStandardPaths>
-#include <QTextBrowser>
 #include <QUrlQuery>
 #include <QVBoxLayout>
 #include <QWheelEvent>
@@ -45,26 +44,27 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyviewbase_p.h"
-#include "mymoneyutils.h"
-#include "kmymoneyutils.h"
-#include "kwelcomepage.h"
+#include "icons.h"
+#include "kmmtextbrowser.h"
+#include "kmymoneyplugin.h"
 #include "kmymoneysettings.h"
-#include "mymoneyfile.h"
+#include "kmymoneyutils.h"
+#include "kmymoneyviewbase_p.h"
+#include "kwelcomepage.h"
+#include "menuenums.h"
 #include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneyforecast.h"
+#include "mymoneymoney.h"
 #include "mymoneyprice.h"
 #include "mymoneyreport.h"
-#include "mymoneymoney.h"
-#include "mymoneyforecast.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
-#include "icons.h"
 #include "mymoneyschedule.h"
 #include "mymoneysecurity.h"
-#include "mymoneyexception.h"
-#include "kmymoneyplugin.h"
-#include "mymoneyenums.h"
-#include "menuenums.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+#include "mymoneyutils.h"
 #include "plugins/views/reports/reportsviewenums.h"
 
 #define VIEW_LEDGER         "ledger"
@@ -142,13 +142,13 @@ public:
         vbox->setSpacing(6);
         vbox->setMargin(0);
 
-        m_view = new QTextBrowser();
+        m_view = new KMMTextBrowser();
         m_view->setOpenLinks(false);
         m_view->installEventFilter(q);
 
         vbox->addWidget(m_view);
 
-        q->connect(m_view, &QTextBrowser::anchorClicked, q, &KHomeView::slotOpenUrl);
+        q->connect(m_view, &KMMTextBrowser::anchorClicked, q, &KHomeView::slotOpenUrl);
 
         q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KHomeView::refresh);
     }
@@ -1872,7 +1872,7 @@ public:
      */
     typedef QMap<QDate, MyMoneyMoney> dailyBalances;
 
-    QTextBrowser* m_view;
+    KMMTextBrowser* m_view;
 
     QString           m_html;
     bool              m_showAllSchedules;

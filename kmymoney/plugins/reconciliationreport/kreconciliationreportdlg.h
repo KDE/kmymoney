@@ -11,7 +11,7 @@
 
 #include "ui_kreconciliationreportdlgdecl.h"
 
-class QTextBrowser;
+class KMMTextBrowser;
 
 class KReportDlg : public QDialog, public Ui::KReconciliationReportDlgDecl
 {
@@ -25,8 +25,8 @@ protected Q_SLOTS:
     void print();
 
 private:
-    QTextBrowser* m_summaryHTMLPart;
-    QTextBrowser* m_detailsHTMLPart;
+    KMMTextBrowser* m_summaryHTMLPart;
+    KMMTextBrowser* m_detailsHTMLPart;
 };
 
 #endif

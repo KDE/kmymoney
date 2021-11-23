@@ -10,6 +10,9 @@ set( kmm_url_SRCS
   kmmurl.cpp
 )
 
+set( kmm_textbrowser_SRCS
+  kmmtextbrowser.cpp
+)
 set( kmm_webconnect_SRCS
   webpricequote.cpp
   webconnect.cpp
@@ -45,6 +48,9 @@ set( kmm_url_HEADER
   kmmurl.h
 )
 
+set( kmm_textbrowser_HEADER
+  kmmtextbrowser.h
+)
 set( kmm_printer_SRCS
   kmm_printer.cpp
 )
@@ -56,6 +62,7 @@ set( kmm_selections_SRCS
 add_library(kmm_utils_validators STATIC ${kmm_utils_validators_SRCS})
 add_library(kmm_utils_platformtools STATIC ${kmm_utils_platformtools_SRCS})
 add_library(kmm_url STATIC ${kmm_url_SRCS})
+add_library(kmm_textbrowser STATIC ${kmm_textbrowser_SRCS})
 add_library(kmm_webconnect ${kmm_webconnect_SRCS})
 add_library(kmm_printer ${kmm_printer_SRCS})
 add_library(kmm_selections ${kmm_selections_SRCS})
@@ -90,6 +97,12 @@ target_link_libraries( kmm_utils_platformtools
 target_link_libraries( kmm_url
   PUBLIC
   Qt5::Core
+)
+
+target_link_libraries( kmm_textbrowser
+  PUBLIC
+  Qt5::Core
+  Qt5::Widgets
 )
 
 target_link_libraries(kmm_printer

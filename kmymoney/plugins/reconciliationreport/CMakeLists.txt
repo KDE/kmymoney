@@ -19,4 +19,5 @@ target_link_libraries(reconciliationreport
   kmymoney_common
   kmm_plugin
   kmm_printer
+  kmm_textbrowser
 )

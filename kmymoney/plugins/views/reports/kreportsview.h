@@ -47,7 +47,7 @@ class ReportControl;
 class ReportGroup;
 class SelectedObjects;
 
-class QTextBrowser;
+class KMMTextBrowser;
 
 /**
   * Displays a page where reports can be placed.

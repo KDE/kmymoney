@@ -42,6 +42,7 @@ target_link_libraries(reportsview
     kmm_widgets
     kmm_menus
     kmm_printer
+    kmm_textbrowser
 )
 
 # the KCM module

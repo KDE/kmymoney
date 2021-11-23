@@ -13,17 +13,17 @@
 
 // KDE includes
 #include <KStandardGuiItem>
-#include <QTextBrowser>
 
 #include "kmm_printer.h"
+#include "kmmtextbrowser.h"
 
 KReportDlg::KReportDlg(QWidget* parent, const QString& summaryReportHTML, const QString& detailsReportHTML) :
     QDialog(parent)
 {
     setupUi(this);
 
-    m_summaryHTMLPart = new QTextBrowser(m_summaryTab);
-    m_detailsHTMLPart = new QTextBrowser(m_detailsTab);
+    m_summaryHTMLPart = new KMMTextBrowser(m_summaryTab);
+    m_detailsHTMLPart = new KMMTextBrowser(m_detailsTab);
 
     m_summaryLayout->addWidget(m_summaryHTMLPart);
     m_detailsLayout->addWidget(m_detailsHTMLPart);
