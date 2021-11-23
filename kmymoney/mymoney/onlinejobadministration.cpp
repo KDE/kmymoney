@@ -36,6 +36,16 @@
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
 #include "tasks/onlinetask.h"
 
+template<typename... Args>
+QVector<KPluginMetaData> findPlugins(Args&&... args)
+{
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 86, 0)
+    return KPluginMetaData::findPlugins(std::forward<Args>(args)...);
+#else
+    return KPluginLoader::findPlugins(std::forward<Args>(args)...);
+#endif
+}
+
 onlineJobAdministration::onlineJobAdministration(QObject *parent)
     : QObject(parent)
     , m_onlinePlugins(nullptr)
@@ -90,7 +100,7 @@ void onlineJobAdministration::updateActions()
 
 QStringList onlineJobAdministration::availableOnlineTasks()
 {
-    auto plugins = KPluginLoader::findPlugins("kmymoney/onlinetasks", [](const KPluginMetaData& data) {
+    auto plugins = findPlugins("kmymoney/onlinetasks", [](const KPluginMetaData& data) {
         return !(data.rawData()["KMyMoney"].toObject()["OnlineTask"].isNull());
     });
 
@@ -172,7 +182,7 @@ onlineTask* onlineJobAdministration::createOnlineTaskByXml(const QString& iid, c
  */
 onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const
 {
-    auto plugins = KPluginLoader::findPlugins("kmymoney/onlinetasks", [&name](const KPluginMetaData& data) {
+    auto plugins = findPlugins("kmymoney/onlinetasks", [&name](const KPluginMetaData& data) {
         QJsonValue array = data.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Iids"];
         if (array.isArray())
             return (array.toVariant().toStringList().contains(name));
@@ -335,7 +345,7 @@ void onlineJobAdministration::registerOnlineTaskConverter(onlineTaskConverter* c
 
 onlineJobAdministration::onlineJobEditOffers onlineJobAdministration::onlineJobEdits()
 {
-    auto plugins = KPluginLoader::findPlugins("kmymoney/onlinetasks", [](const KPluginMetaData& data) {
+    auto plugins = findPlugins("kmymoney/onlinetasks", [](const KPluginMetaData& data) {
         return !(data.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Editors"].isNull());
     });
 

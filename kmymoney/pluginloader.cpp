@@ -54,7 +54,11 @@ bool isPluginEnabled(const KPluginMetaData& pluginData, const KConfigGroup& plug
 QMap<QString, KPluginMetaData> listPlugins(bool onlyEnabled)
 {
     QMap<QString, KPluginMetaData> plugins;
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 86, 0)
+    const auto pluginDatas = KPluginMetaData::findPlugins(QStringLiteral("kmymoney")); // that means search for plugins in "/lib64/plugins/kmymoney/"
+#else
     const auto pluginDatas = KPluginLoader::findPlugins(QStringLiteral("kmymoney"));          // that means search for plugins in "/lib64/plugins/kmymoney/"
+#endif
     const auto pluginSection(KSharedConfig::openConfig()->group(QStringLiteral("Plugins")));  // section of config where plugin on/off were saved
 
     for (const KPluginMetaData& pluginData : pluginDatas) {
