@@ -6,8 +6,8 @@ cmake_minimum_required(VERSION 3.12)
 option(BUILD_STATIC_PLUGINS "Build the plugins statically" OFF)
 
 if (BUILD_STATIC_PLUGINS)
-    set(ECM_MINIMUM_VERSION 5.89)
-    set(KF5_MIN_VERSION 5.89)
+    set(ECM_MINIMUM_VERSION 5.88)
+    set(KF5_MIN_VERSION 5.88)
     set(KDE_COMPILERSETTINGS_LEVEL 5.82)
 else()
     set(ECM_MINIMUM_VERSION 5.71)
@@ -130,6 +130,9 @@ find_package(Qt5 5.12 REQUIRED COMPONENTS
 find_package(Qt5 5.12 OPTIONAL_COMPONENTS
   Sql Concurrent QuickWidgets)
 
+if (BUILD_STATIC_PLUGINS)
+    find_package(KF5CoreAddons 5.89 CONFIG REQUIRED)
+endif()
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
   ${REQ_KF5_COMPONENTS})
 find_package(KF5 ${KF5_MIN_VERSION} OPTIONAL_COMPONENTS
