@@ -50,24 +50,12 @@ private:
     QString cssFileNameGet();
 
     /**
-     * Subdirectory for html-resources of application.
-     *
-     * @see QStandardPaths
-     */
-    QString m_resourceHtml;
-
-    /**
      * Notation of @c reportstylesheet as used by:
      * @code
      *  MyMoneyFile::instance()::value();
      * @endcode
     */
     QString m_reportStyleSheet;
-
-    /**
-     * Filename of default css file.
-     */
-    QString m_cssFileDefault;
 
 protected:
     ReportTable(const MyMoneyReport &_report);

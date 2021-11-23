@@ -27,12 +27,9 @@
 #include "kmmurl.h"
 
 reports::ReportTable::ReportTable(const MyMoneyReport& _report):
-    m_resourceHtml("html"),
     m_reportStyleSheet("reportstylesheet"),
-    m_cssFileDefault("kmymoney.css"),
     m_config(_report),
     m_containsNonBaseCurrency(false)
-
 {
 }
 
@@ -42,22 +39,12 @@ QString reports::ReportTable::cssFileNameGet()
 
     if (!MyMoneyFile::instance()->value(m_reportStyleSheet).isEmpty()) {
         // try to find the stylesheet specific for this report
-        cssfilename = QStandardPaths::locate(QStandardPaths::AppConfigLocation, m_resourceHtml + '/' + MyMoneyFile::instance()->value(m_reportStyleSheet));
+        cssfilename = QStandardPaths::locate(QStandardPaths::AppConfigLocation, "html/" + MyMoneyFile::instance()->value(m_reportStyleSheet));
     }
 
     if (cssfilename.isEmpty() || !QFile::exists(cssfilename)) {
         // if no report specific stylesheet was found, try to use the configured one
         cssfilename = KMyMoneySettings::cssFileDefault();
-    }
-
-    if (cssfilename.isEmpty() || !QFile::exists(cssfilename)) {
-        // if there still is nothing, try to use the themed default
-        cssfilename = QStandardPaths::locate(QStandardPaths::AppConfigLocation, m_resourceHtml + '/' + m_cssFileDefault);
-    }
-
-    if (cssfilename.isEmpty() || !QFile::exists(cssfilename)) {
-        // if there still is nothing, try to use the embedded default
-        cssfilename = ":/" + m_resourceHtml + '/' + m_cssFileDefault;
     }
 
     return cssfilename;
