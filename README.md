@@ -20,9 +20,9 @@ See KDE's [guidelines](https://community.kde.org/Get_Involved) for all the ways 
 
 ## Developers
 
-Pull requests are obviously very much welcome – refer to the [Developers Wiki](https://invent.kde.org/office/kmymoney/-/wikis/home#developers-in-particular) for information on how to proceed.
+Pull requests are obviously very much welcome – refer to the [Developers Wiki](https://invent.kde.org/office/kmymoney/-/wikis/General-contribution-guide#developers-in-particular) for information on how to proceed.
 
-Once done, [set up your development environment](https://invent.kde.org/office/kmymoney/-/wikis/home#compilationruntime-dependencies), [compile](https://invent.kde.org/office/kmymoney/-/wikis/home#compilation) and [hack](https://invent.kde.org/office/kmymoney/-/wikis/home#coding-conventions) KMyMoney.
+Once done, [set up your development environment](https://invent.kde.org/office/kmymoney/-/wikis/Build-environment), [compile](https://invent.kde.org/office/kmymoney/-/wikis/Compilation) and [hack](https://invent.kde.org/office/kmymoney/-/wikis/Coding-conventions) KMyMoney.
 
 ## License
 
