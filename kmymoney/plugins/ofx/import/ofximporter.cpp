@@ -235,15 +235,11 @@ bool OFXImporter::import(const QString& filename)
 
     QByteArray filename_deep = QFile::encodeName(filename);
 
-    qDebug() << "encoded name" << filename_deep;
+#ifndef Q_OS_WIN32
     ofx_STATUS_msg = true;
-    qDebug() << "ofx_STATUS_msg" << ofx_STATUS_msg;
     ofx_INFO_msg  = true;
-    qDebug() << "ofx_INFO_msg" << ofx_INFO_msg;
     ofx_WARNING_msg = true;
-    qDebug() << "ofx_WARNING_msg" << ofx_WARNING_msg;
     ofx_ERROR_msg = true;
-    qDebug() << "ofx_ERROR_msg" << ofx_ERROR_msg;
 
 #ifdef DEBUG_LIBOFX
     ofx_PARSER_msg = true;
@@ -253,6 +249,7 @@ bool OFXImporter::import(const QString& filename)
     ofx_DEBUG3_msg = true;
     ofx_DEBUG4_msg = true;
     ofx_DEBUG5_msg = true;
+#endif
 #endif
 
     LibofxContextPtr ctx = libofx_get_new_context();
