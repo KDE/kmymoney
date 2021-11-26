@@ -11,11 +11,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QByteArray>
 #include <QFile>
-#include <QTextStream>
 #include <QRadioButton>
 #include <QSpinBox>
-#include <QByteArray>
+#include <QTextCodec>
+#include <QTextStream>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -233,6 +234,11 @@ bool OFXImporter::import(const QString& filename)
     d->m_securitylist.clear();
 
     qDebug() << "Try to encodeName" << filename;
+    const auto codec = QTextCodec::codecForLocale();
+    qDebug() << "Codec" << (void*)codec;
+    qDebug() << "Conversion 1" << filename.toLatin1();
+    qDebug() << "Conversion 2" << QFile::encodeName(filename);
+
     QByteArray filename_deep = QFile::encodeName(filename);
 
     ofx_STATUS_msg = true;
