@@ -232,6 +232,7 @@ bool OFXImporter::import(const QString& filename)
     d->m_statementlist.clear();
     d->m_securitylist.clear();
 
+    qDebug() << "Try to encodeName" << filename;
     QByteArray filename_deep = QFile::encodeName(filename);
 
     ofx_STATUS_msg = true;
@@ -249,6 +250,7 @@ bool OFXImporter::import(const QString& filename)
     ofx_DEBUG5_msg = true;
 #endif
 
+    qDebug() << "Try to get new libofx context" << filename_deep;
     LibofxContextPtr ctx = libofx_get_new_context();
     Q_CHECK_PTR(ctx);
 
@@ -286,8 +288,9 @@ bool OFXImporter::import(const QString& filename)
     libofx_set_dtd_dir(ctx, dir.data());
 #endif
 
+    qDebug() << "Start processing OFX data from" << filename_deep;
     libofx_proc_file(ctx, filename_deep, AUTODETECT);
-    qDebug("process data done");
+    qDebug() << "Processing OFX data done";
     libofx_free_context(ctx);
 
     if (d->m_valid) {
@@ -979,7 +982,7 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
 
 void OFXImporter::slotImportFile(const QString& url)
 {
-    qDebug("OfxImporterPlugin::slotImportFile");
+    qDebug() << "OfxImporterPlugin::slotImportFile";
     if (!import(url)) {
         KMessageBox::error(0, QString("<qt>%1</qt>").arg(i18n("<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin returned the following error:</p><p>%2</p>", url, lastError())), i18n("Importing error"));
     }
