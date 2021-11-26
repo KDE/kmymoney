@@ -235,7 +235,8 @@ bool OFXImporter::import(const QString& filename)
 
     QByteArray filename_deep = QFile::encodeName(filename);
 
-#ifndef Q_OS_WIN32
+#ifndef Q_OS_WIN
+    qDebug() << "This must not appear on Windows";
     ofx_STATUS_msg = true;
     ofx_INFO_msg  = true;
     ofx_WARNING_msg = true;
