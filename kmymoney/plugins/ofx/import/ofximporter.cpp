@@ -233,18 +233,17 @@ bool OFXImporter::import(const QString& filename)
     d->m_statementlist.clear();
     d->m_securitylist.clear();
 
-    qDebug() << "Try to encodeName" << filename;
-    const auto codec = QTextCodec::codecForLocale();
-    qDebug() << "Codec" << (void*)codec;
-    qDebug() << "Conversion 1" << filename.toLatin1();
-    qDebug() << "Conversion 2" << QFile::encodeName(filename);
-
     QByteArray filename_deep = QFile::encodeName(filename);
 
+    qDebug() << "encoded name" << filename_deep;
     ofx_STATUS_msg = true;
+    qDebug() << "ofx_STATUS_msg" << ofx_STATUS_msg;
     ofx_INFO_msg  = true;
+    qDebug() << "ofx_INFO_msg" << ofx_INFO_msg;
     ofx_WARNING_msg = true;
+    qDebug() << "ofx_WARNING_msg" << ofx_WARNING_msg;
     ofx_ERROR_msg = true;
+    qDebug() << "ofx_ERROR_msg" << ofx_ERROR_msg;
 
 #ifdef DEBUG_LIBOFX
     ofx_PARSER_msg = true;
@@ -256,7 +255,6 @@ bool OFXImporter::import(const QString& filename)
     ofx_DEBUG5_msg = true;
 #endif
 
-    qDebug() << "Try to get new libofx context" << filename_deep;
     LibofxContextPtr ctx = libofx_get_new_context();
     Q_CHECK_PTR(ctx);
 
