@@ -9,7 +9,6 @@
 #include <kcmodule.h>
 
 class QStringList;
-class KPluginInfo;
 
 class KCMiCalendarExporter : public KCModule
 {

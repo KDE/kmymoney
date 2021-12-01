@@ -15,7 +15,6 @@
 
 // KDE includes
 #include <KPluginFactory>
-#include <KPluginInfo>
 #include <KActionCollection>
 #include <KSharedConfig>
 #include <KLocalizedString>

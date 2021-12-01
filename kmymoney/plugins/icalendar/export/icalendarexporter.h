@@ -14,7 +14,6 @@
 #include "mymoneykeyvaluecontainer.h"
 
 class QStringList;
-class KPluginInfo;
 
 class iCalendarExporter: public KMyMoneyPlugin::Plugin
 {

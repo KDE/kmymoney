@@ -17,9 +17,9 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KConfigGroup>
 #include <KPluginLoader>
 #include <KPluginFactory>
-#include <KPluginInfo>
 #include <KPluginMetaData>
 #include <KXMLGUIFactory>
 #include <KSharedConfig>

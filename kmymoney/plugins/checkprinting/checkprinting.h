@@ -10,7 +10,6 @@
 
 #include "kmymoneyplugin.h"
 
-class KPluginInfo;
 class QObject;
 class CheckPrinting : public KMyMoneyPlugin::Plugin
 {
