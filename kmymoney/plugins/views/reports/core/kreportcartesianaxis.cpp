@@ -32,7 +32,7 @@ const QString KReportCartesianAxis::customizedLabel( const QString& label ) cons
     const auto separator = m_locale.groupSeparator();
     const auto decimalPoint = m_locale.decimalPoint();
 
-    // convert label to double just to covert it back to string with desired precision
+    // convert label to double just to convert it back to string with desired precision
     // but without trailing zeros, separator, or decimal point
     const qreal labelValue = label.toDouble( &ok );
     if ( ok ) {

@@ -3329,7 +3329,7 @@ QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
         return c1.name().compare(c2.name()) < 0;
     });
 
-    // ... and add a few precious metals at the ned
+    // ... and add a few precious metals at the end
     currencyList.append(MyMoneySecurity("XAU", i18n("Gold"),       "XAU", 1000000));
     currencyList.append(MyMoneySecurity("XPD", i18n("Palladium"),  "XPD", 1000000));
     currencyList.append(MyMoneySecurity("XPT", i18n("Platinum"),   "XPT", 1000000));

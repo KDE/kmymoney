@@ -3343,7 +3343,7 @@ public:
     bool m_newDatabase;
 
     /**
-      * This member keeps the current precision to be used fro prices.
+      * This member keeps the current precision to be used for prices.
       * @sa setPrecision()
       */
     static int m_precision;

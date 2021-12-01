@@ -310,7 +310,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
     QTreeWidgetItem *first = 0;
 
     // sort the currencies ...
-    // ... and make sure a few precious metals are at the ned
+    // ... and make sure a few precious metals are at the end
     std::sort(list.begin(), list.end(),
               [=] (const MyMoneySecurity& c1, const MyMoneySecurity& c2)
     {

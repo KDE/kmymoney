@@ -25,7 +25,7 @@
  *
  * This class simply is a C++ binding for the C module @ref AB_BANKING.
  * It redirects C callbacks used by AB_BANKING to virtual functions in
- * this class. It also transforms some return values inconveniant for
+ * this class. It also transforms some return values inconvenient for
  * C++ into STL objects (such as "list<T>").
  *
  * @ingroup G_AB_CPP_INTERFACE

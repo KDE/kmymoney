@@ -292,7 +292,7 @@ public:
     QTime         m_lastUpdate;
     QLabel*       m_statusLabel;
 
-    // allows multiple imports to be launched trough web connect and to be executed sequentially
+    // allows multiple imports to be launched through web connect and to be executed sequentially
     QQueue<QString> m_importUrlsQueue;
 
     // This is Auto Saving related

@@ -110,8 +110,8 @@ void MyMoneyGncReader::setOptions()
     }
     // no dialog option for the following; it will set base currency, and print actual XML data
     developerDebug = false;
-    // set your fave currency here to save getting that enormous dialog each time you run a test
-    // especially if you have to scroll down to USD...
+    // set your favorite currency here to save getting that enormous dialog each time you run a
+    // test especially if you have to scroll down to USD...
     if (developerDebug) MyMoneyFile::instance()->setValue("kmm-baseCurrency", "GBP");
 #endif // _GNCFILEANON
 }

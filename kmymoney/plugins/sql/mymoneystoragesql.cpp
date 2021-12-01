@@ -1125,7 +1125,7 @@ void MyMoneyStorageSql::removePayeeIdentifier(const payeeIdentifier& ident)
     Q_D(MyMoneyStorageSql);
     MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
 
-    // Remove first, the table could have a contraint which prevents removal
+    // Remove first, the table could have a constraint which prevents removal
     // of row in kmmPayeeIdentifier
     try {
         d->actOnPayeeIdentifierObjectInSQL(MyMoneyStorageSqlPrivate::SQLAction::Remove, ident);
