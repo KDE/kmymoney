@@ -1166,8 +1166,13 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
             destRow = rowCount();
         }
         // we can skip moving if there is no transaction between
-        // the current location and the new one
-        if (destRow != (srcIdx.row() + newSplitCount)) {
+        // the current location and the new one. The first part
+        // (destRow != srcIdx.row()) checks for the same location
+        // when new post date is earlier than old post date and
+        // (destRow != (srcIdx.row() + newSplitCount)) checks
+        // for the same location when new post date is later than
+        // old post date.
+        if ((destRow != srcIdx.row()) && (destRow != (srcIdx.row() + newSplitCount))) {
             beginMoveRows(QModelIndex(), srcIdx.row(), srcIdx.row() + newSplitCount - 1, QModelIndex(), destRow);
 
             d->removeIdKeyMapping(oldTransaction.id());
