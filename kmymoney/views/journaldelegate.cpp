@@ -100,17 +100,25 @@ public:
                 rc.italicStartLine = 1;
                 rc.lines << index.data(m_singleLineRole).toString();
                 if (showAllSplits && isMultiSplitDisplay(index)) {
+                    rc.italicStartLine = 0;
                     rc.lines.clear();
-                    // make sure to show a line even if we have no payee in the split
                     if (!havePayeeColumn) {
                         const auto payee = index.data(eMyMoney::Model::SplitPayeeRole).toString();
-                        rc.lines << (!payee.isEmpty() ? payee : QStringLiteral(" "));
+                        if (!payee.isEmpty()) {
+                            rc.lines << payee;
+                            ++rc.italicStartLine;
+                        }
                     }
                     const auto memo = index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
-                    rc.lines << memo;
                     if (!memo.isEmpty()) {
-                        rc.italicStartLine = 2;
+                        rc.lines << memo;
+                        ++rc.italicStartLine;
                     }
+                    // make sure to show at least one line even if we have no payee or memo in the split
+                    if (rc.italicStartLine == 0) {
+                        rc.lines << QStringLiteral(" ");
+                    }
+
                     const auto rowIndeces =
                         MyMoneyFile::instance()->journalModel()->indexesByTransactionId(index.data(eMyMoney::Model::JournalTransactionIdRole).toString());
                     const auto rowCount = rowIndeces.count();
