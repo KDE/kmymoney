@@ -125,11 +125,11 @@ void CreditDebitHelper::setValue(const MyMoneyMoney& value)
     }
 }
 
-void CreditDebitHelper::showCurrencySymbol(const QString& symbol)
+void CreditDebitHelper::setCurrencySymbol(const QString& symbol, const QString& name)
 {
     Q_D(CreditDebitHelper);
     if(d->m_credit && d->m_debit) {
-        d->m_credit->showCurrencySymbol(symbol);
-        d->m_debit->showCurrencySymbol(symbol);
+        d->m_credit->setCurrencySymbol(symbol, name);
+        d->m_debit->setCurrencySymbol(symbol, name);
     }
 }

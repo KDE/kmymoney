@@ -108,7 +108,7 @@ public:
         KSharedConfig::Ptr kconfig = KSharedConfig::openConfig();
         KConfigGroup grp = kconfig->group("General Options");
         q->setCalculatorButtonVisible(!grp.readEntry("DontShowCalculatorButton", false));
-        q->showCurrencySymbol(QString());
+        q->setCurrencySymbol(QString(), QString());
 
         updateLineEditSize();
 
@@ -520,10 +520,11 @@ void AmountEdit::ensureFractionalPart()
         QLineEdit::setText(s);
 }
 
-void AmountEdit::showCurrencySymbol(const QString& symbol)
+void AmountEdit::setCurrencySymbol(const QString& symbol, const QString& name)
 {
     Q_D(AmountEdit);
     d->m_currencySymbol->setText(symbol);
+    d->m_currencySymbol->setToolTip(name);
     d->m_currencySymbol->setHidden(symbol.isEmpty());
     d->m_items.setFlag(AmountEditPrivate::ShowCurrencySymbol, !symbol.isEmpty());
     d->updateLineEditSize();

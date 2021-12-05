@@ -61,6 +61,14 @@ public:
 public Q_SLOTS:
     void categoryChanged(const QString& id);
 
+Q_SIGNALS:
+    /**
+     * This signal is emitted when the @a symbol to be
+     * shown changes. @a name contains the name of the
+     * currency in case the symbol is ambiguous.
+     */
+    void currencySymbolChanged(const QString& symbol, const QString& name);
+
 private:
     AmountEditCurrencyHelperPrivate * const d_ptr;
     Q_DECLARE_PRIVATE(AmountEditCurrencyHelper)

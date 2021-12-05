@@ -48,14 +48,20 @@ public:
      */
     void setValue(const MyMoneyMoney& value);
 
-    void showCurrencySymbol(const QString& symbol);
-
     /**
      * This method returns true if at least one
      * of the two widgets is filled with text.
      * It returns false if both widgets are empty.
      */
     bool haveValue() const;
+
+public Q_SLOTS:
+    /**
+     * Show the symbol next to the edit field in case
+     * @a symbol is not empty. Hide it, in case it
+     * is empty.
+     */
+    void setCurrencySymbol(const QString& symbol, const QString& name);
 
 Q_SIGNALS:
     void valueChanged();

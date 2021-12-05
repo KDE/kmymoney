@@ -99,8 +99,6 @@ public:
 
     bool isCalculatorButtonVisible() const;
 
-    void showCurrencySymbol(const QString& symbol);
-
     /**
      * This allows to setup the standard precision (number of decimal places)
      * to be used when no other information is available. @a prec must be in
@@ -134,6 +132,13 @@ public Q_SLOTS:
      * overridden for internal reasons (keep state of calculator button)
      */
     void setReadOnly(bool ro);
+
+    /**
+     * Show the symbol next to the edit field in case
+     * @a symbol is not empty. Hide it, in case it
+     * is empty.
+     */
+    void setCurrencySymbol(const QString& symbol, const QString& name);
 
 Q_SIGNALS:
     /**
