@@ -512,6 +512,7 @@ int NewTransactionEditor::Private::editSplits()
     auto commodityId = m_transaction.commodity();
     if (commodityId.isEmpty())
         commodityId = m_account.currencyId();
+    dlgSplitModel.setTransactionCommodity(commodityId);
     const auto commodity = MyMoneyFile::instance()->security(commodityId);
 
     QPointer<SplitDialog> splitDialog = new SplitDialog(commodity, -(q->transactionAmount()), m_account.fraction(), transactionFactor, q);

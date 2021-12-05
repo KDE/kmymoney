@@ -23,7 +23,9 @@
 // Project Includes
 
 #include "icons.h"
+#include "mymoneysecurity.h"
 #include "splitadjustdialog.h"
+#include "splitmodel.h"
 #include "ui_splitdialog.h"
 
 using namespace Icons;
@@ -35,6 +37,7 @@ public:
         : parent(p)
         , ui(new Ui_SplitDialog)
         , transactionEditor(nullptr)
+        , splitModel(nullptr)
         , fraction(100)
         , readOnly(false)
     {
@@ -58,6 +61,8 @@ public:
      */
     QWidget* transactionEditor;
 
+    SplitModel* splitModel;
+
     /**
      * The fraction of the account for which this split editor was opened
      */
@@ -67,6 +72,7 @@ public:
     MyMoneyMoney splitsTotal;
     MyMoneyMoney inversionFactor;
     QString transactionPayeeId;
+    QString commoditySymbol;
     bool readOnly;
 };
 
@@ -140,6 +146,7 @@ SplitDialog::SplitDialog(const MyMoneySecurity& commodity,
     d->fraction = fraction;
     d->transactionTotal = amount;
     d->inversionFactor = inversionFactor;
+    d->commoditySymbol = commodity.tradingSymbol();
     d->ui->setupUi(this);
 
     d->ui->splitView->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -235,8 +242,9 @@ void SplitDialog::disableButtons()
     d->ui->buttonContainer->setEnabled(false);
 }
 
-void SplitDialog::setModel(QAbstractItemModel* model)
+void SplitDialog::setModel(SplitModel* model)
 {
+    d->splitModel = model;
     d->ui->splitView->setModel(model);
 
     if(model->rowCount() > 0) {
@@ -253,6 +261,12 @@ void SplitDialog::setModel(QAbstractItemModel* model)
 
 void SplitDialog::adjustSummary()
 {
+    // Only show the currency symbol when multiple currencies are involved
+    QString currencySymbol = d->commoditySymbol;
+    if (!d->splitModel->hasMultiCurrencySplits()) {
+        currencySymbol.clear();
+    }
+
     d->splitsTotal = 0;
     for(int row = 0; row < d->ui->splitView->model()->rowCount(); ++row) {
         QModelIndex index = d->ui->splitView->model()->index(row, 0);
@@ -260,14 +274,15 @@ void SplitDialog::adjustSummary()
             d->splitsTotal += index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
         }
     }
-    QString formattedValue = (d->splitsTotal * d->inversionFactor).formatMoney(d->fraction);
+    const int denom = MyMoneyMoney::denomToPrec(d->fraction);
+    QString formattedValue = (d->splitsTotal * d->inversionFactor).formatMoney(currencySymbol, denom);
     d->ui->summaryView->item(SumRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
 
     if(d->transactionEditor) {
         if (d->transactionTotal.isAutoCalc()) {
-            formattedValue = (d->splitsTotal * d->inversionFactor).formatMoney(d->fraction);
+            formattedValue = (d->splitsTotal * d->inversionFactor).formatMoney(currencySymbol, denom);
         } else {
-            formattedValue = (d->transactionTotal * d->inversionFactor).formatMoney(d->fraction);
+            formattedValue = (d->transactionTotal * d->inversionFactor).formatMoney(currencySymbol, denom);
         }
         d->ui->summaryView->item(AmountRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
 
@@ -277,7 +292,7 @@ void SplitDialog::adjustSummary()
             } else {
                 d->ui->summaryView->item(DiffRow, HeaderCol)->setData(Qt::DisplayRole, i18nc("Split editor summary", "Unassigned"));
             }
-            formattedValue = (d->transactionTotal - d->splitsTotal).abs().formatMoney(d->fraction);
+            formattedValue = (d->transactionTotal - d->splitsTotal).abs().formatMoney(currencySymbol, denom);
             d->ui->summaryView->item(DiffRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
         } else {
             d->ui->summaryView->item(DiffRow, HeaderCol)->setData(Qt::DisplayRole, QString());

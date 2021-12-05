@@ -26,18 +26,20 @@
 #include "mymoneysecurity.h"
 #include "mymoneytransaction.h"
 #include "payeesmodel.h"
+#include "securitiesmodel.h"
 
 struct SplitModel::Private
 {
     Private(SplitModel* qq)
         : q(qq)
+        , headerData(QHash<Column, QString>({
+              {Category, i18nc("Split header", "Category")},
+              {Memo, i18nc("Split header", "Memo")},
+              {Payment, i18nc("Split header", "Payment")},
+              {Deposit, i18nc("Split header", "Deposit")},
+          }))
         , currentSplitCount(-1)
-        , headerData(QHash<Column, QString> ({
-        { Category, i18nc("Split header", "Category") },
-        { Memo, i18nc("Split header", "Memo") },
-        { Payment, i18nc("Split header", "Payment") },
-        { Deposit, i18nc("Split header", "Deposit") },
-    }))
+        , showCurrencies(false)
     {
     }
 
@@ -112,18 +114,34 @@ struct SplitModel::Private
             try {
                 const auto currency = MyMoneyFile::instance()->currency(account.currencyId());
                 if (Q_UNLIKELY(account.accountType() == eMyMoney::Account::Type::Cash)) {
-                    return currency.smallestCashFraction();
+                    return MyMoneyMoney::denomToPrec(currency.smallestCashFraction());
                 }
-                return currency.smallestAccountFraction();
+                return MyMoneyMoney::denomToPrec(currency.smallestAccountFraction());
             } catch(MyMoneyException& e) {
             }
         }
-        return 100;
+        return 2; // the default precision is 2 digits
     }
 
-    SplitModel*   q;
-    int                       currentSplitCount;
-    QHash<Column, QString>    headerData;
+    QString splitCurrencySymbol(const MyMoneySplit& split) const
+    {
+        QString currencySymbol;
+        if (showCurrencies) {
+            const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(split.accountId());
+            if (accountIdx.isValid()) {
+                const auto currencyId = accountIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString();
+                const auto securityIdx = MyMoneyFile::instance()->currenciesModel()->indexById(currencyId);
+                currencySymbol = securityIdx.data(eMyMoney::Model::SecuritySymbolRole).toString();
+            }
+        }
+        return currencySymbol;
+    }
+
+    SplitModel* q;
+    QHash<Column, QString> headerData;
+    QString transactionCommodity;
+    int currentSplitCount;
+    bool showCurrencies;
 };
 
 SplitModel::SplitModel(QObject* parent, QUndoStack* undoStack)
@@ -136,6 +154,7 @@ SplitModel::SplitModel(QObject* parent, QUndoStack* undoStack)
     // NewTransactionEditor::saveTransaction() )
     ++m_nextId;
     connect(this, &SplitModel::modelReset, this, [&] { d->updateItemCount(); });
+    connect(this, &SplitModel::dataChanged, this, &SplitModel::checkForForeignCurrency);
 }
 
 SplitModel::SplitModel(QObject* parent, QUndoStack* undoStack, const SplitModel& right)
@@ -143,6 +162,7 @@ SplitModel::SplitModel(QObject* parent, QUndoStack* undoStack, const SplitModel&
     , d(new Private(this))
 {
     d->copyFrom(right);
+    connect(this, &SplitModel::dataChanged, this, &SplitModel::checkForForeignCurrency);
 }
 
 SplitModel& SplitModel::operator=(const SplitModel& right)
@@ -224,18 +244,18 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
 
         case Column::Payment:
             if (!split.id().isEmpty()) {
-                const auto value = split.value();
+                const auto value = split.shares();
                 if (value.isPositive()) {
-                    return value.formatMoney(d->currencyPrecision(split));
+                    return value.formatMoney(d->splitCurrencySymbol(split), d->currencyPrecision(split));
                 }
             }
             return {};
 
         case Column::Deposit:
             if (!split.id().isEmpty()) {
-                const auto value = split.value();
+                const auto value = split.shares();
                 if (value.isNegative() || value.isZero()) {
-                    return (-value).formatMoney(d->currencyPrecision(split));
+                    return (-value).formatMoney(d->splitCurrencySymbol(split), d->currencyPrecision(split));
                 }
             }
             return {};
@@ -470,4 +490,31 @@ QList<MyMoneySplit> SplitModel::splitList() const
         splits.append(s);
     }
     return splits;
+}
+
+void SplitModel::setTransactionCommodity(const QString& commodity)
+{
+    d->transactionCommodity = commodity;
+}
+
+void SplitModel::checkForForeignCurrency() const
+{
+    d->showCurrencies = false;
+    const auto rows = rowCount();
+    for (int row = 0; row < rows; ++row) {
+        const auto idx = index(row, 0);
+        const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+        if (!accountId.isEmpty()) {
+            const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
+            if (accountIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString() != d->transactionCommodity) {
+                d->showCurrencies = true;
+                break;
+            }
+        }
+    }
+}
+
+bool SplitModel::hasMultiCurrencySplits() const
+{
+    return d->showCurrencies;
 }

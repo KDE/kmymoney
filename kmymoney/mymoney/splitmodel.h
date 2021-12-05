@@ -66,6 +66,12 @@ public:
     void addSplitsToTransaction(MyMoneyTransaction& t) const;
     QList<MyMoneySplit> splitList() const;
 
+    void setTransactionCommodity(const QString& commodity);
+    bool hasMultiCurrencySplits() const;
+
+private Q_SLOTS:
+    void checkForForeignCurrency() const;
+
 Q_SIGNALS:
     void itemCountChanged(int cnt);
 

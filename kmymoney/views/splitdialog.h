@@ -20,9 +20,9 @@
 
 #include "mymoneymoney.h"
 
-class QAbstractItemModel;
 class MyMoneyAccount;
 class MyMoneySecurity;
+class SplitModel;
 
 /**
  * This dialog allows the user to modify the splits of a transaction.
@@ -43,7 +43,7 @@ public:
                          Qt::WindowFlags f = {});
     virtual ~SplitDialog();
 
-    void setModel(QAbstractItemModel* model);
+    void setModel(SplitModel* model);
     void setAccountId(const QString& id);
     void setTransactionPayeeId(const QString& id);
     void setReadOnly(bool readOnly);
