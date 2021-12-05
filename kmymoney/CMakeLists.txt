@@ -122,7 +122,7 @@ if (BUILD_STATIC_PLUGINS)
     kcoreaddons_target_static_plugins(kmymoney "kmymoney/onlinetasks" LINK_OPTION PRIVATE)
     if (ENABLE_SQLCIPHER)
         target_link_libraries(kmymoney PRIVATE qsqlcipher)
-        target_compile_definitions(kmymoney PRIVATE -DIMPORT_SQLCIPHER_PLUGIN=1)
+        target_compile_definitions(kmymoney PRIVATE -DIMPORT_SQLCIPHER_PLUGIN)
     endif()
 endif()
 
