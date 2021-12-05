@@ -298,12 +298,22 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
                 costCenterRequired = category.isCostCenterRequired();
 
                 bool needValueSet = false;
+                bool needAdjustInitialValue = false;
                 // make sure we have a split in the model
                 if (splitModel.rowCount() == 0) {
                     // add an empty split
                     MyMoneySplit s;
                     splitModel.addItem(s);
                     needValueSet = true;
+
+                    // in case the category id differs from the transaction commodity
+                    // we need to adjust the display value if the selected category
+                    // is an income or expense category.
+                    if (category.currencyId() != m_transaction.commodity()) {
+                        if (category.isIncomeExpense()) {
+                            needAdjustInitialValue = true;
+                        }
+                    }
                 }
 
                 const QModelIndex index = splitModel.index(0, 0);
@@ -320,9 +330,16 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
 
                 if (amountHelper->haveValue() && needValueSet) {
                     if (!amountHelper->value().isZero()) {
-                        if (isIncomeExpense) {
+                        if (needAdjustInitialValue) {
+                            const auto value = amountHelper->value();
+                            amountHelper->setValue(value / getPrice());
+                            splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-value), eMyMoney::Model::SplitValueRole);
+                            splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitSharesRole);
+
+                        } else if (isIncomeExpense) {
                             splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() * getPrice()), eMyMoney::Model::SplitValueRole);
                             splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitSharesRole);
+
                         } else {
                             splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitValueRole);
                             splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() * getPrice()), eMyMoney::Model::SplitSharesRole);
