@@ -509,6 +509,13 @@ int NewTransactionEditor::Private::editSplits()
     if (!q->isReadOnly())
         dlgSplitModel.appendEmptySplit();
 
+    // in case the transaction does only have a single split (the
+    // one referencing the account) we keep a possible filled memo
+    // and add it to the empty split.
+    if ((dlgSplitModel.rowCount() == 1) && (!ui->memoEdit->toPlainText().isEmpty())) {
+        const auto idx = dlgSplitModel.index(0, 0);
+        dlgSplitModel.setData(idx, ui->memoEdit->toPlainText(), eMyMoney::Model::SplitMemoRole);
+    }
     auto commodityId = m_transaction.commodity();
     if (commodityId.isEmpty())
         commodityId = m_account.currencyId();
