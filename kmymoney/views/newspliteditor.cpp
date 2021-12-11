@@ -125,6 +125,11 @@ bool NewSplitEditor::Private::checkForValidSplit(bool doUserInteraction)
         rc = false;
     }
 
+    if (!categoryChanged(ui->accountCombo->getSelected())) {
+        infos << ui->accountCombo->toolTip();
+        rc = false;
+    }
+
     if(doUserInteraction) {
         /// @todo add dialog here that shows the @a infos
     }
@@ -134,10 +139,13 @@ bool NewSplitEditor::Private::checkForValidSplit(bool doUserInteraction)
 bool NewSplitEditor::Private::costCenterChanged(int costCenterIndex)
 {
     bool rc = true;
-    WidgetHintFrame::hide(ui->costCenterCombo, i18n("The cost center this transaction should be assigned to."));
+    WidgetHintFrame::hide(ui->costCenterCombo,
+                          i18nc("@info:tooltip costcenter combo in split editor", "The cost center this transaction should be assigned to."));
     if(costCenterIndex != -1) {
         if(costCenterRequired && ui->costCenterCombo->currentText().isEmpty()) {
-            WidgetHintFrame::show(ui->costCenterCombo, i18n("A cost center assignment is required for a transaction in the selected category."));
+            WidgetHintFrame::show(
+                ui->costCenterCombo,
+                i18nc("@info:tooltip costcenter combo in split editor", "A cost center assignment is required for a transaction in the selected category."));
             rc = false;
         }
     }
@@ -148,6 +156,7 @@ bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
 {
     bool rc = true;
     isIncomeExpense = false;
+    WidgetHintFrame::hide(ui->accountCombo, i18nc("@info:tooltip category combo in split editor", "The category this split should be assigned to."));
     if(!accountId.isEmpty()) {
         try {
             const auto model = MyMoneyFile::instance()->accountsModel();
@@ -171,6 +180,9 @@ bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
         } catch (MyMoneyException &e) {
             qDebug() << "Ooops: invalid account id" << accountId << "in" << Q_FUNC_INFO;
         }
+    } else {
+        WidgetHintFrame::show(ui->accountCombo, i18nc("@info:tooltip category combo in split editor", "A category assignment is required for a split."));
+        rc = false;
     }
     return rc;
 }
@@ -312,6 +324,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
 
     d->frameCollection = new WidgetHintFrameCollection(this);
     d->frameCollection->addFrame(new WidgetHintFrame(d->ui->costCenterCombo));
+    d->frameCollection->addFrame(new WidgetHintFrame(d->ui->accountCombo));
     d->frameCollection->addFrame(new WidgetHintFrame(d->ui->numberEdit, WidgetHintFrame::Warning));
     d->frameCollection->addWidget(d->ui->enterButton);
 
