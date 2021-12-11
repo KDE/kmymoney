@@ -339,7 +339,9 @@ bool SplitModel::setData(const QModelIndex& idx, const QVariant& value, int role
 
     // in case we modify the data of a new split, we need to setup an id
     // this will be updated once we add the split to the transaction
-    if (split.id().isEmpty()) {
+    // we do this only when the category is set since this is a required
+    // field
+    if ((role == eMyMoney::Model::SplitAccountIdRole) && split.id().isEmpty()) {
         split = MyMoneySplit(newSplitId(), split);
     }
 
