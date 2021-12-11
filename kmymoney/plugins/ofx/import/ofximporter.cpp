@@ -246,10 +246,21 @@ bool OFXImporter::import(const QString& filename)
 
     QByteArray filename_deep = QFile::encodeName(filename);
 
+#ifndef Q_OS_WIN
+
+    // setting the global variables in the windows version
+    // created on binary-factory.kde.org causes the following
+    // assignment statements to create an access violation exception
+    // which crashes the application. So we avoid setting
+    // them at all under Windows.
     ofx_STATUS_msg = true;
     ofx_INFO_msg  = true;
     ofx_WARNING_msg = true;
     ofx_ERROR_msg = true;
+
+    // Don't show the position that caused a message to be shown
+    // This has no setter (see libofx.h)
+    ofx_show_position = false;
 
 #ifdef DEBUG_LIBOFX
     ofx_PARSER_msg = true;
@@ -260,13 +271,10 @@ bool OFXImporter::import(const QString& filename)
     ofx_DEBUG4_msg = true;
     ofx_DEBUG5_msg = true;
 #endif
+#endif
 
     LibofxContextPtr ctx = libofx_get_new_context();
     Q_CHECK_PTR(ctx);
-
-    // Don't show the position that caused a message to be shown
-    // This has no setter (see libofx.h)
-    ofx_show_position = false;
 
     d->m_hashes.clear();
 
