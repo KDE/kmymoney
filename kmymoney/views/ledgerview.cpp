@@ -648,7 +648,7 @@ bool LedgerView::viewportEvent(QEvent* event)
                     ++iconCount;
                 }
 
-            } else {
+            } else if (!LedgerViewSettings::instance()->showAllSplits()) {
                 tooltips[0] = d->createSplitTooltip(idx);
                 iconIndex = 0;
             }
@@ -663,11 +663,13 @@ bool LedgerView::viewportEvent(QEvent* event)
             }
 
         } else if ((col == JournalModel::Column::Payment) || (col == JournalModel::Column::Deposit)) {
-            if (!idx.data(Qt::DisplayRole).toString().isEmpty()) {
-                auto tip = d->createSplitTooltip(idx);
-                if (!tip.isEmpty()) {
-                    QToolTip::showText(helpEvent->globalPos(), tip);
-                    return true;
+            if (!LedgerViewSettings::instance()->showAllSplits()) {
+                if (!idx.data(Qt::DisplayRole).toString().isEmpty()) {
+                    auto tip = d->createSplitTooltip(idx);
+                    if (!tip.isEmpty()) {
+                        QToolTip::showText(helpEvent->globalPos(), tip);
+                        return true;
+                    }
                 }
             }
         }
