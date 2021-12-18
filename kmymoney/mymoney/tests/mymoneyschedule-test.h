@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2003 Michael Edwardes <mte@users.sourceforge.net>
     SPDX-FileCopyrightText: 2006 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2021 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -21,6 +22,7 @@ private Q_SLOTS:
     void testAssignmentConstructor();
     void testAddHalfMonths();
     void testAdjustedNextDueDate();
+    void testAdjustedNextPaymentOnLastDayInMonth();
     void testModifyNextDueDate();
     void testDaysBetweenEvents();
     void testEventsPerYear();
@@ -32,6 +34,7 @@ private Q_SLOTS:
     void testAdjustedNextPayment();
     void testAdjustedWhenItWillEnd();
     void testProcessLastDayInMonth();
+    void testFixDate();
 };
 
 #endif
