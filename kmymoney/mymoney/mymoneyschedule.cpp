@@ -248,6 +248,12 @@ bool MyMoneySchedule::willEnd() const
 QDate MyMoneySchedule::nextDueDate() const
 {
     Q_D(const MyMoneySchedule);
+
+    if (lastDayInMonth()) {
+        const auto date = d->m_transaction.postDate();
+        return adjustedDate(QDate(date.year(), date.month(), date.daysInMonth()), weekendOption());
+    }
+
     return d->m_transaction.postDate();
 }
 
@@ -255,11 +261,6 @@ QDate MyMoneySchedule::adjustedNextDueDate() const
 {
     if (isFinished())
         return QDate();
-
-    if (lastDayInMonth()) {
-        QDate date = nextDueDate();
-        return adjustedDate(QDate(date.year(), date.month(), date.daysInMonth()), weekendOption());
-    }
 
     return adjustedDate(nextDueDate(), weekendOption());
 }
@@ -848,6 +849,11 @@ void MyMoneySchedule::fixDate(QDate& date) const
 {
     Q_D(const MyMoneySchedule);
     QDate fixDate(d->m_startDate);
+
+    if (d->m_lastDayInMonth) {
+        fixDate = QDate(fixDate.year(), fixDate.month(), fixDate.daysInMonth());
+    }
+
     if (fixDate.isValid()
             && date.day() != fixDate.day()
             && QDate::isValid(date.year(), date.month(), fixDate.day())) {
