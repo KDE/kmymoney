@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2003 Michael Edwardes <mte@users.sourceforge.net>
     SPDX-FileCopyrightText: 2006 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2021 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -944,6 +945,22 @@ void MyMoneyScheduleTest::testAdjustedNextPayment()
     QCOMPARE(s.adjustedNextPayment(s.adjustedNextDueDate()), s.adjustedDate(nextDueDate, s.weekendOption()));
 }
 
+void MyMoneyScheduleTest::testAdjustedNextPaymentOnLastDayInMonth()
+{
+    MyMoneySchedule s;
+
+    QDate dueDate(2010, 5, 23);
+    QDate adjustedDueDate(2010, 5, 21);
+    s.setOccurrence(Schedule::Occurrence::Monthly);
+    s.setWeekendOption(Schedule::WeekendOption::MoveBefore);
+    auto t = s.transaction();
+    t.setPostDate(QDate(2021, 12, 31));
+    s.setTransaction(t);
+    s.setLastPayment(QDate(2021, 12, 31));
+
+    QCOMPARE(s.adjustedNextPayment(s.lastPayment()), QDate(2022, 1, 31));
+}
+
 void MyMoneyScheduleTest::testAdjustedWhenItWillEnd()
 {
     MyMoneySchedule s;
@@ -988,13 +1005,34 @@ void MyMoneyScheduleTest::testProcessLastDayInMonth()
     s.setOccurrence(Schedule::Occurrence::Any);
     s.setLastDayInMonth(true);
     s.setNextDueDate(QDate(2010, 1, 1));
+    QCOMPARE(s.nextDueDate(), QDate(2010, 1, 31));
     QCOMPARE(s.adjustedNextDueDate(), QDate(2010,1,31));
     s.setNextDueDate(QDate(2010, 2, 1));
+    QCOMPARE(s.nextDueDate(), QDate(2010, 2, 28));
     QCOMPARE(s.adjustedNextDueDate(), QDate(2010,2,28));
     s.setNextDueDate(QDate(2016, 2, 1));
+    QCOMPARE(s.nextDueDate(), QDate(2016, 2, 29));
     QCOMPARE(s.adjustedNextDueDate(), QDate(2016,2,29));
     s.setNextDueDate(QDate(2016, 4, 1));
+    QCOMPARE(s.nextDueDate(), QDate(2016, 4, 30));
     QCOMPARE(s.adjustedNextDueDate(), QDate(2016,4,30));
     s.setLastDayInMonth(false);
+    QCOMPARE(s.nextDueDate(), QDate(2016, 4, 1));
     QCOMPARE(s.adjustedNextDueDate(), QDate(2016,4,1));
+}
+
+void MyMoneyScheduleTest::testFixDate()
+{
+    MyMoneySchedule s;
+    s.setStartDate(QDate(2021, 12, 17));
+
+    s.setLastDayInMonth(false);
+    QDate testDate(2022, 1, 31);
+    s.fixDate(testDate);
+    QCOMPARE(testDate, QDate(2022, 1, 17));
+
+    s.setLastDayInMonth(true);
+    testDate = QDate(2022, 1, 31);
+    s.fixDate(testDate);
+    QCOMPARE(testDate, QDate(2022, 1, 31));
 }
