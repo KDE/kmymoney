@@ -13,9 +13,9 @@ ki18n_wrap_ui( sepaOnlineTasks_SRCS
 add_library(konlinetasks_sepa_interface INTERFACE)
 
 if (BUILD_STATIC_PLUGINS)
-    kcoreaddons_add_plugin(konlinetasks_sepa SOURCES ${sepaOnlineTasks_SRCS} STATIC INSTALL_NAMESPACE "kmymoney/onlinetasks")
+    kcoreaddons_add_plugin(konlinetasks_sepa SOURCES ${sepaOnlineTasks_SRCS} STATIC INSTALL_NAMESPACE "kmymoney_plugins/onlinetasks")
 else()
-    kcoreaddons_add_plugin(konlinetasks_sepa SOURCES ${sepaOnlineTasks_SRCS} INSTALL_NAMESPACE "kmymoney/onlinetasks")
+    kcoreaddons_add_plugin(konlinetasks_sepa SOURCES ${sepaOnlineTasks_SRCS} INSTALL_NAMESPACE "kmymoney_plugins/onlinetasks")
     set_target_properties(konlinetasks_sepa PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 endif()
 

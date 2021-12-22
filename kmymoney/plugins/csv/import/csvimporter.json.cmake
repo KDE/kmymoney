@@ -90,5 +90,5 @@
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
     },
-    "X-KDE-ConfigModule": "kmymoney/kcms/kcm_csvimporter"
+    "X-KDE-ConfigModule": "kmymoney_plugins/kcms/kcm_csvimporter"
 }
