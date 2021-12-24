@@ -68,11 +68,11 @@ public Q_SLOTS:
     QString memo() const;
     void setMemo(const QString& memo);
 
-    MyMoneyMoney shares() const;
-    void setShares(const MyMoneyMoney& shares);
-
     MyMoneyMoney value() const;
-    void setValue(const MyMoneyMoney& value);
+    void setValue(const MyMoneyMoney& amount);
+
+    MyMoneyMoney shares() const;
+    void setShares(const MyMoneyMoney& amount);
 
     QString costCenterId() const;
     void setCostCenterId(const QString& id);
@@ -86,12 +86,6 @@ public Q_SLOTS:
 protected Q_SLOTS:
     virtual void reject();
     virtual void acceptEdit();
-
-
-    virtual void numberChanged(const QString& newNumber);
-    virtual void categoryChanged(const QString& accountId);
-    virtual void costCenterChanged(int costCenterIndex);
-    virtual void amountChanged();
 
 Q_SIGNALS:
     void done();

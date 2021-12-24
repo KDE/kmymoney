@@ -20,20 +20,28 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "multicurrencyedit.h"
 #include "mymoneymoney.h"
 
 class MyMoneySecurity;
 
 /**
-  * This class represents a widget to enter monetary values.
-  * It has an edit field and a button to select a popup
-  * calculator. The result of the calculator (if used) is
-  * stored in the edit field.
-  *
-  * @author Thomas Baumgart
-  */
+ * This class represents a widget to enter monetary values
+ * in at most two currencies. It supports two amounts for
+ * the value() and the shares(). They may differ, in case
+ * two different commodities have been setup using
+ * setValueCommodity() and setSharesCommodity(). A
+ * convenience method setCommodity() sets both to the
+ * same commodity.
+ *
+ * It has an edit field and a button to select a popup
+ * calculator. The result of the calculator (if used) is
+ * stored in the edit field.
+ *
+ * @author Thomas Baumgart
+ */
 class AmountEditPrivate;
-class KMM_BASE_WIDGETS_EXPORT AmountEdit : public QLineEdit
+class KMM_BASE_WIDGETS_EXPORT AmountEdit : public QLineEdit, public MultiCurrencyEdit
 {
     Q_OBJECT
     Q_DISABLE_COPY(AmountEdit)
@@ -55,18 +63,17 @@ public:
     explicit AmountEdit(const MyMoneySecurity& eq, QWidget* parent = nullptr);
     virtual ~AmountEdit();
 
-
-    MyMoneyMoney value() const;
-
-    void setValue(const MyMoneyMoney& value);
-
     bool isValid() const;
+
+    QWidget* widget() override;
+
+    DisplayState displayState() const override;
 
     /**
       * This method returns the value of the edit field in "numerator/denominator" format.
       * If you want to get the text of the edit field, use lineedit()->text() instead.
       */
-    QString numericalText() const;
+    // QString numericalText() const;
 
     /**
       * Set the number of fractional digits that should be shown
@@ -83,6 +90,11 @@ public:
       * @sa setPrecision
       */
     int precision() const;
+
+    /**
+     * Returns the number of fractional digits for the @a state.
+     */
+    int precision(DisplayState state) const override;
 
     /**
       * This method allows to modify the behavior of the widget
@@ -115,9 +127,103 @@ public:
      */
     int standardPrecision();
 
+    /**
+     * Show the symbol next to the edit field in case
+     * @a symbol is not empty. Hide it, in case it
+     * is empty.
+     */
+    void setCurrencySymbol(const QString& symbol, const QString& name);
 
+    /**
+     * Use @a commodity for amounts in the value portion.
+     */
+    void setValueCommodity(const MyMoneySecurity& commodity) override;
+    MyMoneySecurity valueCommodity() const override;
+
+    /**
+     * Use @a commodity for amounts in the shares portion.
+     */
+    void setSharesCommodity(const MyMoneySecurity& commodity) override;
+    MyMoneySecurity sharesCommodity() const override;
+
+    /**
+     * Use @a commodity for amounts in the values and shares portion.
+     * This is a convenience method for single currency amounts
+     */
+    void setCommodity(const MyMoneySecurity& commodity) override;
+
+    /**
+     * This returns the amount entered in the valueCommodity.
+     */
+    MyMoneyMoney value() const override;
+
+    /**
+     * This returns the amount entered in the sharesCommodity.
+     */
+    MyMoneyMoney shares() const override;
+
+    /**
+     * Sets the value portion to @a amount. This method calls
+     * setShares internally and sets the initialExchangeRate to 1.
+     *
+     * @note This method does not emit the valueChanged() signal
+     */
+    void setValue(const MyMoneyMoney& amount) override;
+
+    /**
+     * Sets the shares portion to @a amount. This method
+     * calls setInitialExchangeRate() with a price calculated
+     * based on the values passed by setValue() and setShares().
+     *
+     * @note This method does not emit the sharesChanged() signal
+     */
+    void setShares(const MyMoneyMoney& amount) override;
+
+    /**
+     * Allows to setup an initial @a price for the two
+     * selected currencies. The following equation is used
+     *
+     *    value = shares * price
+     *
+     * @note This method should be called after setValue() and
+     * setShares() because setShares overwrites the @a price provided
+     * as argument.
+     */
+    void setInitialExchangeRate(const MyMoneyMoney& price) override;
+
+    /**
+     * Returns the initial exchange rate set by setInitialExchangeRate()
+     * or calculated by setShares().
+     */
+    MyMoneyMoney initialExchangeRate() const override;
+
+    /**
+     * Show the amount in the shares commodity if @a show
+     * is @c true, show in value commodity otherwise.
+     *
+     * @note The default is to show amount in value commodity
+     */
+    void setShowShares(bool show = true);
+
+    /**
+     * Show the amount in the value commodity if @a show
+     * is @c true, show in share commodity otherwise.
+     *
+     * @note This is the default setting
+     */
+    void setShowValue(bool show = true);
+
+    /**
+     * Overridden for internal reasons. It clears both
+     * the cached text content for values and shares as
+     * well as the widget
+     */
+    void clear();
+
+    bool hasMultipleCurrencies() const override;
+
+private:
 public Q_SLOTS:
-    void setText(const QString& txt);
 
     /**
       * This method allows to show/hide the calculator button of the widget.
@@ -129,23 +235,24 @@ public Q_SLOTS:
     void setCalculatorButtonVisible(const bool show);
 
     /**
+     * Sets the display state to @a state. In case it changes,
+     * this emits displayStateChanged().
+     *
+     * @sa setShowShares(), setShowValue()
+     */
+    void setDisplayState(DisplayState state) override;
+
+    /**
      * overridden for internal reasons (keep state of calculator button)
      */
     void setReadOnly(bool ro);
 
-    /**
-     * Show the symbol next to the edit field in case
-     * @a symbol is not empty. Hide it, in case it
-     * is empty.
-     */
-    void setCurrencySymbol(const QString& symbol, const QString& name);
-
 Q_SIGNALS:
     /**
-      * This signal is sent, when the focus leaves this widget and
-      * the amount has been changed by user during this focus possession.
-      */
-    void valueChanged(const QString& text);
+     * This signal is emitted, when the focus leaves this widget and
+     * the amount has been changed by user during this focus possession.
+     */
+    void amountChanged();
 
     /**
      * This signal is emitted when the contents of the widget
@@ -154,7 +261,16 @@ Q_SIGNALS:
      */
     void validatedTextChanged(const QString& text);
 
+    /**
+     * This signal is emitted when the @a state changes either
+     * by a call to setDisplayState(), setShowShares() or
+     * setShowValue() or by user activity.
+     */
+    void displayStateChanged(DisplayState state);
+
 protected:
+    explicit AmountEdit(QWidget* parent, const int prec, AmountEditPrivate* dd);
+
     /**
       * This method ensures that the text version contains a
       * fractional part.
@@ -186,7 +302,7 @@ protected:
      */
     virtual void keyPressEvent(QKeyEvent* event) override;
 
-private:
+protected:
     AmountEditPrivate * const d_ptr;
     Q_DECLARE_PRIVATE(AmountEdit)
 };

@@ -58,6 +58,11 @@ public:
 
     const QString& getSelected() const;
 
+    /**
+     * Clears the cache of the last selected account
+     */
+    void clearSelection();
+
     void setModel(QSortFilterProxyModel *model);
 
     /**
@@ -110,11 +115,13 @@ public:
     explicit KMyMoneyAccountComboSplitHelper(QComboBox* accountCombo, QAbstractItemModel *model);
     ~KMyMoneyAccountComboSplitHelper();
 
+public Q_SLOTS:
+    void updateWidget();
+
 protected:
     bool eventFilter(QObject *watched, QEvent *event) override;
 
 private Q_SLOTS:
-    void splitCountChanged();
     void modelDestroyed();
 
 Q_SIGNALS:

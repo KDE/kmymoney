@@ -383,6 +383,14 @@ struct JournalModel::Private
         return balance;
     }
 
+    void resetRowHeightInformation(int firstRow, int lastRow)
+    {
+        for (int row = firstRow; row <= lastRow; ++row) {
+            const auto idx = q->index(row, 0);
+            q->setData(idx, 0, eMyMoney::Model::JournalSplitMaxLinesCountRole);
+        }
+    }
+
     JournalModel*                   q;
     JournalModelNewTransaction*     newTransactionModel;
     QMap<QString, QString>          transactionIdKeyMap;
@@ -1034,7 +1042,6 @@ void JournalModel::doAddItem(const JournalEntry& item, const QModelIndex& parent
 
     d->startBalanceCacheOperation();
 
-    const auto originalStartRow = startRow;
     for (const auto& split : (*transaction).splits()) {
         const JournalEntry journalEntry(QString("%1-%2").arg(key, split.id()), transaction, split);
         const auto newIdx = index(startRow, 0);
@@ -1042,12 +1049,13 @@ void JournalModel::doAddItem(const JournalEntry& item, const QModelIndex& parent
         if (m_idToItemMapper) {
             m_idToItemMapper->insert(journalEntry.id(), static_cast<TreeItem<JournalEntry>*>(newIdx.internalPointer()));
         }
-
         ++startRow;
     }
 
+    d->resetRowHeightInformation(startIdx.row(), endIdx.row());
+
     // add the splits to the balance cache
-    d->addTransactionToBalance(originalStartRow, rows);
+    d->addTransactionToBalance(startIdx.row(), rows);
 
     emit dataChanged(startIdx, endIdx);
 
@@ -1145,7 +1153,9 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
     // use the oldKey for now to keep sorting in a correct state
     int row = srcIdx.row();
     for (const auto& split : newTransaction.splits()) {
-        const JournalEntry journalEntry(QString("%1-%2").arg(oldKey, split.id()), transaction, split);
+        JournalEntry journalEntry(QString("%1-%2").arg(oldKey, split.id()), transaction, split);
+        // force recalc of row height
+        journalEntry.setLinesInLedger(0);
         const auto newIdx = index(row, 0);
         static_cast<TreeItem<JournalEntry>*>(newIdx.internalPointer())->dataRef() = journalEntry;
         if (m_idToItemMapper) {
@@ -1187,6 +1197,8 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
                     m_idToItemMapper->remove(journalEntry->dataRef().m_id);
                 }
                 journalEntry->dataRef().m_id = QString("%1-%2").arg(newKey, journalEntry->constDataRef().m_split.id());
+                // force recalc of row height
+                journalEntry->dataRef().m_linesInLedger = 0;
                 entries.append(journalEntry);
             }
             // check if the destination row must be adjusted
@@ -1218,6 +1230,7 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
                 firstRow = destRow;
                 lastRow = srcRow + newSplitCount - 1;
             }
+
             emit dataChanged(index(firstRow, 0), index(lastRow, columnCount()-1));
 
             // update the index of the transaction
@@ -1472,13 +1485,11 @@ JournalModel::DateRange JournalModel::dateRange() const
 
 void JournalModel::resetRowHeightInformation()
 {
-    const auto rows = rowCount();
-    for (int row = 0; row < rows; ++row) {
-        const auto idx = index(row, 0);
-        setData(idx, 0, eMyMoney::Model::JournalSplitMaxLinesCountRole);
-    }
+    const auto lastRow = rowCount() - 1;
+    d->resetRowHeightInformation(0, lastRow);
+
     const QModelIndex first = index(0, 0);
-    const QModelIndex last = index(rows - 1, columnCount() - 1);
+    const QModelIndex last = index(lastRow, columnCount() - 1);
     emit dataChanged(first, last);
 }
 

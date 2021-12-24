@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2004-2018 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2004-2021 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -26,6 +26,7 @@ class MyMoneyMoney;
 class MyMoneySplit;
 class MyMoneyTransaction;
 class MyMoneySecurity;
+class MultiCurrencyEdit;
 
 namespace Ui {
 class KCurrencyCalculator;
@@ -44,6 +45,8 @@ class KMM_BASE_DIALOGS_EXPORT KCurrencyCalculator : public QDialog
     Q_DISABLE_COPY(KCurrencyCalculator)
 
 public:
+    explicit KCurrencyCalculator(QWidget* parent = nullptr);
+
     /**
       * @param from the @p from currency
       * @param to   the @p to currency
@@ -55,13 +58,14 @@ public:
       *
       * @note @p value must not be 0!
       */
-    explicit KCurrencyCalculator(const MyMoneySecurity& from,
-                                 const MyMoneySecurity& to,
-                                 const MyMoneyMoney& value,
-                                 const MyMoneyMoney& shares,
-                                 const QDate& date,
-                                 const signed64 resultFraction = 100,
-                                 QWidget *parent = nullptr);
+    KCurrencyCalculator(const MyMoneySecurity& from,
+                        const MyMoneySecurity& to,
+                        const MyMoneyMoney& value,
+                        const MyMoneyMoney& shares,
+                        const QDate& date,
+                        const signed64 resultFraction = 100,
+                        QWidget* parent = nullptr);
+
     ~KCurrencyCalculator();
 
     /**
@@ -85,6 +89,21 @@ public:
                                 const QMap<QString,
                                 MyMoneyMoney>& priceInfo,
                                 QWidget* parentWidget);
+
+    void setFromCurrency(const MyMoneySecurity& sec);
+    void setToCurrency(const MyMoneySecurity& sec);
+    void setFromAmount(const MyMoneyMoney& amount);
+    void setToAmount(const MyMoneyMoney& amount);
+    void setDate(const QDate& date);
+    void setResultFraction(signed64 fraction);
+
+    /**
+     * This method asks the user for exchange rate information
+     * according to the data found in the @a amountEdit widget.
+     * In case the two commodities in @a amountEdit are identical
+     * the method returns immediately.
+     */
+    static void updateConversion(MultiCurrencyEdit* amountEdit, const QDate date);
 
 protected Q_SLOTS:
     void slotSetToAmount();

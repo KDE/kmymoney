@@ -16,13 +16,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountcombo.h"
-#include "amountedit.h"
-#include "creditdebithelper.h"
-#include "mymoneyfile.h"
 #include "accountsmodel.h"
-#include "securitiesmodel.h"
+#include "amountedit.h"
+#include "kmymoneyaccountcombo.h"
+#include "multicurrencyedit.h"
 #include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "securitiesmodel.h"
 
 class AmountEditCurrencyHelperPrivate
 {
@@ -34,8 +34,9 @@ public:
     {
     }
 
-    AmountEditCurrencyHelper*       q_ptr;
-    QString                         commodityId;
+    AmountEditCurrencyHelper* q_ptr;
+    MultiCurrencyEdit* amount;
+    QString commodityId;
 
     void init(KMyMoneyAccountCombo* category, const QString& _commodityId)
     {
@@ -48,24 +49,17 @@ public:
     }
 };
 
-
-AmountEditCurrencyHelper::AmountEditCurrencyHelper(KMyMoneyAccountCombo* category, AmountEdit* amount, const QString& commodityId)
+AmountEditCurrencyHelper::AmountEditCurrencyHelper(KMyMoneyAccountCombo* category, MultiCurrencyEdit* amount, const QString& commodityId)
     : QObject(category)
     , d_ptr(new AmountEditCurrencyHelperPrivate(this))
 {
     Q_D(AmountEditCurrencyHelper);
-    connect(amount, &QObject::destroyed, this, &QObject::deleteLater);
-    connect(this, &AmountEditCurrencyHelper::currencySymbolChanged, amount, &AmountEdit::setCurrencySymbol);
-    d->init(category, commodityId);
-}
-
-AmountEditCurrencyHelper::AmountEditCurrencyHelper(KMyMoneyAccountCombo* category, CreditDebitHelper* amount, const QString& commodityId)
-    : QObject(category)
-    , d_ptr(new AmountEditCurrencyHelperPrivate(this))
-{
-    Q_D(AmountEditCurrencyHelper);
-    connect(amount, &QObject::destroyed, this, &QObject::deleteLater);
-    connect(this, &AmountEditCurrencyHelper::currencySymbolChanged, amount, &CreditDebitHelper::setCurrencySymbol);
+    d->amount = amount;
+    connect(amount->widget(), &QObject::destroyed, this, &QObject::deleteLater);
+    connect(this, &AmountEditCurrencyHelper::commodityChanged, this, [&](const MyMoneySecurity& commodity) {
+        Q_D(AmountEditCurrencyHelper);
+        d->amount->setSharesCommodity(commodity);
+    });
     d->init(category, commodityId);
 }
 
@@ -79,6 +73,13 @@ void AmountEditCurrencyHelper::setCommodity(const QString& commodityId)
 {
     Q_D(AmountEditCurrencyHelper);
     d->commodityId = commodityId;
+    // update the widget
+    if (!commodityId.isEmpty()) {
+        const auto category = qobject_cast<KMyMoneyAccountCombo*>(parent());
+        if (category) {
+            categoryChanged(category->getSelected());
+        }
+    }
 }
 
 void AmountEditCurrencyHelper::categoryChanged(const QString& id)
@@ -93,17 +94,12 @@ void AmountEditCurrencyHelper::categoryChanged(const QString& id)
             const auto security = MyMoneyFile::instance()->security(category.currencyId());
             if (security.id() != d->commodityId) {
                 if (category.isIncomeExpense()) {
-                    currencySymbol = security.tradingSymbol();
-                    currencyName = security.name();
+                    emit commodityChanged(security);
                 } else {
-                    auto commodity = MyMoneyFile::instance()->security(d->commodityId);
-                    currencySymbol = commodity.tradingSymbol();
-                    currencyName = commodity.name();
+                    emit commodityChanged(MyMoneyFile::instance()->security(d->commodityId));
                 }
             }
         } catch (MyMoneyException& e) {
         }
     }
-
-    emit currencySymbolChanged(currencySymbol, currencyName);
 }

@@ -18,7 +18,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout" columnstretch="0,3,0,1">
    <item row="0" column="0" colspan="4">
-    <layout class="QHBoxLayout" name="hl1" stretch="0,1,0,0">
+    <layout class="QHBoxLayout" name="hl1" stretch="0,1,0">
      <item>
       <spacer name="hs2">
        <property name="orientation">
@@ -43,28 +43,12 @@
       </widget>
      </item>
      <item>
-      <widget class="AmountEdit" name="amountEditCredit">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="placeholderText">
-        <string>Payment</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="AmountEdit" name="amountEditDebit">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="placeholderText">
-        <string>Deposit</string>
+      <widget class="CreditDebitEdit" name="creditdebitedit" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>220</width>
+         <height>0</height>
+        </size>
        </property>
       </widget>
      </item>
@@ -217,9 +201,10 @@
    <header>kmymoneyaccountcombo.h</header>
   </customwidget>
   <customwidget>
-   <class>AmountEdit</class>
-   <extends>QLineEdit</extends>
-   <header>amountedit.h</header>
+   <class>CreditDebitEdit</class>
+   <extends>QWidget</extends>
+   <header>creditdebitedit.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -229,8 +214,6 @@
   <tabstop>costCenterCombo</tabstop>
   <tabstop>tagCombo</tabstop>
   <tabstop>memoEdit</tabstop>
-  <tabstop>amountEditCredit</tabstop>
-  <tabstop>amountEditDebit</tabstop>
   <tabstop>enterButton</tabstop>
   <tabstop>cancelButton</tabstop>
  </tabstops>

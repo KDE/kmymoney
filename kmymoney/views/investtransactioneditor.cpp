@@ -1,8 +1,7 @@
 /*
-    SPDX-FileCopyrightText: 2019-2020 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2019-2021 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
-
 
 #include "investtransactioneditor.h"
 
@@ -29,8 +28,6 @@
 // Project Includes
 
 #include "accountsmodel.h"
-#include "amounteditcurrencyhelper.h"
-#include "creditdebithelper.h"
 #include "dialogenums.h"
 #include "icons.h"
 #include "investactivities.h"
@@ -47,6 +44,7 @@
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "securitiesmodel.h"
 #include "splitdialog.h"
 #include "splitmodel.h"
 #include "statusmodel.h"
@@ -71,7 +69,7 @@ public:
         , feeSplitModel(new SplitModel(parent, &undoStack))
         , interestSplitModel(new SplitModel(parent, &undoStack))
         , accepted(false)
-        , bypassPriceEditor(false)
+        , bypassUserPriceUpdate(false)
     {
         accountsModel->setObjectName("InvestTransactionEditor::accountsModel");
         feeSplitModel->setObjectName("FeesSplitModel");
@@ -116,60 +114,71 @@ public:
 
     void setSecurity(const MyMoneySecurity& sec);
 
-    bool valueChanged(SplitModel* model, AmountEdit* widget, const MyMoneyMoney& transactionFactor);
+    bool amountChanged(SplitModel* model, AmountEdit* widget, const MyMoneyMoney& transactionFactor);
 
+    void scheduleUpdateTotalAmount();
     void updateWidgetState();
 
-    MyMoneyMoney getPrice(const SplitModel* model, const AmountEdit* widget);
-
-    void editSplits(SplitModel* splitModel, AmountEdit* editWidget, const MyMoneyMoney& factor);
+    void editSplits(SplitModel* sourceSplitModel, AmountEdit* amountEdit, const MyMoneyMoney& transactionFactor);
     void removeUnusedSplits(MyMoneyTransaction& t, SplitModel* splitModel);
     void addSplits(MyMoneyTransaction& t, SplitModel* splitModel);
     void setupParentInvestmentAccount(const QString& accountId);
     QModelIndex adjustToSecuritySplitIdx(const QModelIndex& idx);
 
-    InvestTransactionEditor*      q;
-    Ui_InvestTransactionEditor*   ui;
+    void loadFeeAndInterestAmountEdits();
+    void adjustSharesCommodity(AmountEdit* amountEdit, const QString& accountId);
+    void setupAssetAccount(const QString& accountId);
+
+    InvestTransactionEditor* q;
+    Ui_InvestTransactionEditor* ui;
 
     // models for UI elements
     AccountNamesFilterProxyModel* accountsModel;
     AccountNamesFilterProxyModel* feesModel;
     AccountNamesFilterProxyModel* interestModel;
-    QStringListModel*             activitiesModel;
-    QSortFilterProxyModel*        securitiesModel;
-    KDescendantsProxyModel*       accountsListModel;
+    QStringListModel* activitiesModel;
+    QSortFilterProxyModel* securitiesModel;
+    KDescendantsProxyModel* accountsListModel;
+    KMyMoneyAccountComboSplitHelper* feeSplitHelper;
+    KMyMoneyAccountComboSplitHelper* interestSplitHelper;
 
-    QUndoStack                    undoStack;
-    Invest::Activity*             currentActivity;
-
-    QSet<AmountEditCurrencyHelper*> amountEditCurrencyHelpers;
+    QUndoStack undoStack;
+    Invest::Activity* currentActivity;
 
     // the selected security and the account holding it
-    MyMoneySecurity               security;
+    MyMoneySecurity security;
     // and its trading currency
-    MyMoneySecurity               currency;
-    // and account holding the security
-    MyMoneyAccount                stockAccount;
+    MyMoneySecurity transactionCurrency;
 
-    MyMoneyAccount                assetAccount;
+    // the asset or brokerage account
+    MyMoneyAccount assetAccount;
+    // and its currency
+    MyMoneySecurity assetSecurity;
 
     // the containing investment account (parent of stockAccount)
-    MyMoneyAccount                parentAccount;
+    MyMoneyAccount parentAccount;
 
     // the transaction
-    MyMoneyTransaction            transaction;
+    MyMoneyTransaction transaction;
 
     // the various splits
-    MyMoneySplit                  stockSplit;
-    MyMoneySplit                  assetSplit;
-    SplitModel*                   feeSplitModel;
-    SplitModel*                   interestSplitModel;
+    MyMoneySplit stockSplit;
+    MyMoneySplit assetSplit;
+    SplitModel* feeSplitModel;
+    SplitModel* interestSplitModel;
 
     // exchange rate information for assetSplit
-    MyMoneyPrice                  assetPrice;
+    MyMoneyPrice assetPrice;
 
-    bool                          accepted;
-    bool                          bypassPriceEditor;
+    bool accepted;
+
+    /**
+     * Flag to bypass the user dialog to modify exchange rate information.
+     * This is used during the loading of a transaction, when data is
+     * changed due to the load operation but no user interaction is
+     * wanted.
+     */
+    bool bypassUserPriceUpdate;
 };
 
 void InvestTransactionEditor::Private::removeUnusedSplits(MyMoneyTransaction& t, SplitModel* splitModel)
@@ -274,7 +283,7 @@ bool InvestTransactionEditor::Private::postdateChanged(const QDate& date)
     return rc;
 }
 
-bool InvestTransactionEditor::Private::categoryChanged(SplitModel* model, const QString& accountId, AmountEdit* widget, const MyMoneyMoney& factor)
+bool InvestTransactionEditor::Private::categoryChanged(SplitModel* model, const QString& accountId, AmountEdit* amountEdit, const MyMoneyMoney& factor)
 {
     bool rc = true;
     if (accountId.isEmpty()) {
@@ -295,27 +304,36 @@ bool InvestTransactionEditor::Private::categoryChanged(SplitModel* model, const 
         try {
             MyMoneyAccount category = MyMoneyFile::instance()->account(accountId);
 
-            bool needValueSet = false;
             // make sure we have a split in the model
             if (model->rowCount() == 0) {
                 // add an empty split
                 MyMoneySplit s;
                 model->addItem(s);
-                needValueSet = true;
             }
 
-            const QModelIndex index = model->index(0, 0);
-            if (!needValueSet) {
-                // update the values only if the category changes. This prevents
-                // the call of the currency calculator if not needed.
-                needValueSet = (index.data(eMyMoney::Model::SplitAccountIdRole).toString().compare(accountId) != 0);
-            }
+            const auto index = model->index(0, 0);
             model->setData(index, accountId, eMyMoney::Model::SplitAccountIdRole);
 
-            if (!widget->value().isZero() && needValueSet) {
-                model->setData(index, QVariant::fromValue<MyMoneyMoney>(factor * widget->value() * getPrice(model, widget)), eMyMoney::Model::SplitValueRole);
-                model->setData(index, QVariant::fromValue<MyMoneyMoney>(factor * widget->value()), eMyMoney::Model::SplitSharesRole);
+            // extract the categories currency
+            const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
+            const auto currencyId = accountIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString();
+            const auto currency = MyMoneyFile::instance()->currenciesModel()->itemById(currencyId);
+
+            // in case the commodity changes, we need to update the shares part
+            if (currency.id() != amountEdit->sharesCommodity().id()) {
+                // switch to value display so that we show the transaction commodity
+                // for single currency data entry this does not have an effect
+                amountEdit->setDisplayState(MultiCurrencyEdit::DisplayValue);
+                amountEdit->setSharesCommodity(currency);
+                auto sharesAmount = amountEdit->value();
+                if (!sharesAmount.isZero()) {
+                    amountEdit->setShares(sharesAmount);
+                    KCurrencyCalculator::updateConversion(amountEdit, ui->dateEdit->date());
+                }
             }
+
+            model->setData(index, QVariant::fromValue<MyMoneyMoney>(factor * amountEdit->value()), eMyMoney::Model::SplitValueRole);
+            model->setData(index, QVariant::fromValue<MyMoneyMoney>(factor * amountEdit->shares()), eMyMoney::Model::SplitSharesRole);
 
         } catch (MyMoneyException& e) {
             qDebug() << "Ooops: invalid account id" << accountId << "in" << Q_FUNC_INFO;
@@ -328,11 +346,12 @@ bool InvestTransactionEditor::Private::categoryChanged(SplitModel* model, const 
 void InvestTransactionEditor::Private::setSecurity(const MyMoneySecurity& sec)
 {
     if (sec.tradingCurrency() != security.tradingCurrency()) {
-        for (const auto helper : qAsConst(amountEditCurrencyHelpers)) {
-            helper->setCommodity(sec.tradingCurrency());
-        }
+        transactionCurrency = MyMoneyFile::instance()->currency(sec.tradingCurrency());
+        ui->totalAmountEdit->setValueCommodity(transactionCurrency);
         transaction.setCommodity(sec.tradingCurrency());
-        currency = MyMoneyFile::instance()->currency(sec.tradingCurrency());
+        feeSplitModel->setTransactionCommodity(sec.tradingCurrency());
+        interestSplitModel->setTransactionCommodity(sec.tradingCurrency());
+        loadFeeAndInterestAmountEdits();
 
         auto haveValue = [&](const SplitModel* model) {
             const auto rows = model->rowCount();
@@ -344,10 +363,6 @@ void InvestTransactionEditor::Private::setSecurity(const MyMoneySecurity& sec)
             }
             return false;
         };
-
-        if (assetPrice.from() != currency.id()) {
-            /// @todo collect exchange rate from user for asset account
-        }
 
         bool needWarning = !assetSplit.value().isZero();
         if (currentActivity) {
@@ -370,57 +385,25 @@ void InvestTransactionEditor::Private::setSecurity(const MyMoneySecurity& sec)
     ui->sharesAmountEdit->setPrecision(MyMoneyMoney::denomToPrec(security.smallestAccountFraction()));
 }
 
-MyMoneyMoney InvestTransactionEditor::Private::getPrice(const SplitModel* model, const AmountEdit* widget)
-{
-    auto result(MyMoneyMoney::ONE);
-    const QModelIndex splitIdx = model->index(0, 0);
-    if (splitIdx.isValid()) {
-        const auto shares = splitIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-        const auto value = splitIdx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
-        if (!shares.isZero()) {
-            result = value / shares;
-        }
-    }
-
-    if (!bypassPriceEditor && splitIdx.isValid()) {
-        const auto categoryId = splitIdx.data(eMyMoney::Model::SplitAccountIdRole).toString();
-        const auto category = MyMoneyFile::instance()->accountsModel()->itemById(categoryId);
-        if (!category.id().isEmpty()) {
-            const auto sec = MyMoneyFile::instance()->security(category.currencyId());
-            if (sec.id() != currency.id()) {
-                if (result == MyMoneyMoney::ONE) {
-                    result = MyMoneyFile::instance()->price(sec.id(), currency.id(), QDate()).rate(sec.id());
-                }
-
-                QPointer<KCurrencyCalculator> calc =
-                    new KCurrencyCalculator(sec, currency, widget->value(), widget->value() / result, ui->dateEdit->date(), sec.smallestAccountFraction(), q);
-
-                if (calc->exec() == QDialog::Accepted && calc) {
-                    result = calc->price();
-                }
-                delete calc;
-
-            } else {
-                result = MyMoneyMoney::ONE;
-            }
-        }
-    }
-    return result;
-}
-
-bool InvestTransactionEditor::Private::valueChanged(SplitModel* model, AmountEdit* widget, const MyMoneyMoney& transactionFactor)
+bool InvestTransactionEditor::Private::amountChanged(SplitModel* model, AmountEdit* amountEdit, const MyMoneyMoney& transactionFactor)
 {
     bool rc = true;
-    if (!widget->text().isEmpty() && (model->rowCount() <= 1)) {
+    if (!amountEdit->text().isEmpty() && (model->rowCount() <= 1)) {
         rc = false;
         try {
             MyMoneyMoney shares;
             if (model->rowCount() == 1) {
-                const QModelIndex index = model->index(0, 0);
-                model->setData(index, QVariant::fromValue<MyMoneyMoney>((widget->value() * transactionFactor)), eMyMoney::Model::SplitValueRole);
-                model->setData(index,
-                               QVariant::fromValue<MyMoneyMoney>((widget->value() * transactionFactor) / getPrice(model, widget)),
-                               eMyMoney::Model::SplitSharesRole);
+                const auto index = model->index(0, 0);
+
+                // check if there is a change in the values other than simply reverting the sign
+                // and get an updated price in that case
+                if ((index.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>() != -amountEdit->shares())
+                    || (index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>() != -amountEdit->value())) {
+                    KCurrencyCalculator::updateConversion(amountEdit, ui->dateEdit->date());
+                }
+
+                model->setData(index, QVariant::fromValue<MyMoneyMoney>((amountEdit->value() * transactionFactor)), eMyMoney::Model::SplitValueRole);
+                model->setData(index, QVariant::fromValue<MyMoneyMoney>((amountEdit->shares() * transactionFactor)), eMyMoney::Model::SplitSharesRole);
             }
             rc = true;
 
@@ -434,7 +417,7 @@ bool InvestTransactionEditor::Private::valueChanged(SplitModel* model, AmountEdi
     return rc;
 }
 
-void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, AmountEdit* editWidget, const MyMoneyMoney& transactionFactor)
+void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, AmountEdit* amountEdit, const MyMoneyMoney& transactionFactor)
 {
     SplitModel splitModel(q, nullptr, *sourceSplitModel);
 
@@ -442,7 +425,7 @@ void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, 
     // used to create new splits
     splitModel.appendEmptySplit();
 
-    QPointer<SplitDialog> splitDialog = new SplitDialog(currency, MyMoneyMoney::autoCalc, parentAccount.fraction(), transactionFactor, q);
+    QPointer<SplitDialog> splitDialog = new SplitDialog(transactionCurrency, MyMoneyMoney::autoCalc, parentAccount.fraction(), transactionFactor, q);
     splitDialog->setModel(&splitModel);
 
     int rc = splitDialog->exec();
@@ -455,23 +438,24 @@ void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, 
         *sourceSplitModel = splitModel;
 
         // update the transaction amount
-        editWidget->setValue(splitDialog->transactionAmount() * transactionFactor);
+        amountEdit->setSharesCommodity(amountEdit->valueCommodity());
+        auto amountShares = splitDialog->transactionAmount() * transactionFactor;
+        amountEdit->setValue(amountShares);
 
         // the price might have been changed, so we have to update our copy
         // but only if there is one counter split
         if (sourceSplitModel->rowCount() == 1) {
-            const auto splitIdx = sourceSplitModel->index(0, 0);
-            const auto shares = splitIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+            const auto idx = sourceSplitModel->index(0, 0);
+            amountShares = idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+
+            adjustSharesCommodity(amountEdit, idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
 
             // make sure to show the value in the widget
             // according to the currency presented
-            editWidget->setValue(shares * transactionFactor);
         }
+        amountEdit->setShares(amountShares * transactionFactor);
 
-        // bypass the currency calculator here, we have all info already
-        bypassPriceEditor = true;
         updateWidgetState();
-        bypassPriceEditor = false;
     }
 
     if (splitDialog) {
@@ -593,6 +577,56 @@ void InvestTransactionEditor::Private::updateWidgetState()
     }
 }
 
+void InvestTransactionEditor::Private::loadFeeAndInterestAmountEdits()
+{
+    auto loadAmountEdit = [&](SplitModel* model, AmountEdit* amountEdit) {
+        amountEdit->setReadOnly(false);
+        amountEdit->setCommodity(transactionCurrency);
+        switch (model->rowCount()) {
+        case 0:
+            amountEdit->clear();
+            break;
+        case 1: {
+            const auto idx = model->index(0, 0);
+            amountEdit->setValue(idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>().abs());
+            amountEdit->setShares(idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().abs());
+            adjustSharesCommodity(amountEdit, idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
+        } break;
+        default:
+            amountEdit->setValue(model->valueSum().abs());
+            amountEdit->setShares(model->valueSum().abs());
+            amountEdit->setReadOnly(true);
+            break;
+        }
+    };
+
+    // possibly update the currency on the fees and interest
+    loadAmountEdit(feeSplitModel, ui->feesAmountEdit);
+    loadAmountEdit(interestSplitModel, ui->interestAmountEdit);
+}
+
+void InvestTransactionEditor::Private::adjustSharesCommodity(AmountEdit* amountEdit, const QString& accountId)
+{
+    // adjust the commodity for the shares
+    const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
+    const auto currencyId = accountIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString();
+    const auto currency = MyMoneyFile::instance()->currenciesModel()->itemById(currencyId);
+    amountEdit->setSharesCommodity(currency);
+}
+
+void InvestTransactionEditor::Private::setupAssetAccount(const QString& accountId)
+{
+    const auto file = MyMoneyFile::instance();
+    assetAccount = file->account(accountId);
+    assetSecurity = file->currency(assetAccount.currencyId());
+    ui->totalAmountEdit->setSharesCommodity(assetSecurity);
+}
+
+void InvestTransactionEditor::Private::scheduleUpdateTotalAmount()
+{
+    QMetaObject::invokeMethod(q, "updateTotalAmount", Qt::QueuedConnection);
+}
+
 InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString& accId)
     : TransactionEditorBase(parent, accId)
     , d(new Private(this))
@@ -623,15 +657,15 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     d->feesModel->setSourceModel(model);
     d->feesModel->sort(AccountsModel::Column::AccountName);
     d->ui->feesCombo->setModel(d->feesModel);
-    auto helper = new KMyMoneyAccountComboSplitHelper(d->ui->feesCombo, d->feeSplitModel);
-    connect(helper, &KMyMoneyAccountComboSplitHelper::accountComboDisabled, d->ui->feesAmountEdit, &AmountEdit::setReadOnly);
+    d->feeSplitHelper = new KMyMoneyAccountComboSplitHelper(d->ui->feesCombo, d->feeSplitModel);
+    connect(d->feeSplitHelper, &KMyMoneyAccountComboSplitHelper::accountComboDisabled, d->ui->feesAmountEdit, &AmountEdit::setReadOnly);
 
     d->interestModel->addAccountGroup(QVector<eMyMoney::Account::Type> { eMyMoney::Account::Type::Income });
     d->interestModel->setSourceModel(model);
     d->interestModel->sort(AccountsModel::Column::AccountName);
     d->ui->interestCombo->setModel(d->interestModel);
-    helper = new KMyMoneyAccountComboSplitHelper(d->ui->interestCombo, d->interestSplitModel);
-    connect(helper, &KMyMoneyAccountComboSplitHelper::accountComboDisabled, d->ui->interestAmountEdit, &AmountEdit::setReadOnly);
+    d->interestSplitHelper = new KMyMoneyAccountComboSplitHelper(d->ui->interestCombo, d->interestSplitModel);
+    connect(d->interestSplitHelper, &KMyMoneyAccountComboSplitHelper::accountComboDisabled, d->ui->interestAmountEdit, &AmountEdit::setReadOnly);
 
     d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
     d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
@@ -643,13 +677,13 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     d->ui->sharesAmountEdit->setAllowEmpty(true);
     d->ui->sharesAmountEdit->setCalculatorButtonVisible(true);
 
-    connect(d->ui->sharesAmountEdit, &AmountEdit::textChanged, this, [&]() {
+    connect(d->ui->sharesAmountEdit, &AmountEdit::amountChanged, this, [&]() {
         if (d->currentActivity) {
             d->stockSplit.setShares(d->ui->sharesAmountEdit->value() * d->currentActivity->sharesFactor());
-            d->stockSplit.setValue(d->currentActivity->valueAllShares().convert(d->currency.smallestAccountFraction(), d->security.roundingMethod())
+            d->stockSplit.setValue(d->currentActivity->valueAllShares().convert(d->transactionCurrency.smallestAccountFraction(), d->security.roundingMethod())
                                    * d->currentActivity->sharesFactor());
             if (d->currentActivity->type() != eMyMoney::Split::InvestmentTransactionType::SplitShares) {
-                updateTotalAmount();
+                d->scheduleUpdateTotalAmount();
             }
             d->updateWidgetState();
         }
@@ -657,12 +691,12 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     d->ui->priceAmountEdit->setAllowEmpty(true);
     d->ui->priceAmountEdit->setCalculatorButtonVisible(true);
-    connect(d->ui->priceAmountEdit, &AmountEdit::textChanged, this, [&]() {
+    connect(d->ui->priceAmountEdit, &AmountEdit::amountChanged, this, [&]() {
         if (d->currentActivity) {
-            d->stockSplit.setValue(d->currentActivity->valueAllShares().convert(d->currency.smallestAccountFraction(), d->security.roundingMethod())
+            d->stockSplit.setValue(d->currentActivity->valueAllShares().convert(d->transactionCurrency.smallestAccountFraction(), d->security.roundingMethod())
                                    * d->currentActivity->sharesFactor());
             if (d->currentActivity->type() != eMyMoney::Split::InvestmentTransactionType::SplitShares) {
-                updateTotalAmount();
+                d->scheduleUpdateTotalAmount();
             }
             d->updateWidgetState();
         }
@@ -670,11 +704,23 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     d->ui->feesAmountEdit->setAllowEmpty(true);
     d->ui->feesAmountEdit->setCalculatorButtonVisible(true);
-    connect(d->ui->feesAmountEdit, &AmountEdit::textChanged, this, &InvestTransactionEditor::updateTotalAmount);
+    connect(d->ui->feesAmountEdit, &AmountEdit::amountChanged, this, [&]() {
+        d->amountChanged(d->feeSplitModel, d->ui->feesAmountEdit, MyMoneyMoney::ONE);
+        d->updateWidgetState();
+        if (!d->ui->feesCombo->getSelected().isEmpty()) {
+            d->scheduleUpdateTotalAmount();
+        }
+    });
 
     d->ui->interestAmountEdit->setAllowEmpty(true);
     d->ui->interestAmountEdit->setCalculatorButtonVisible(true);
-    connect(d->ui->interestAmountEdit, &AmountEdit::textChanged, this, &InvestTransactionEditor::updateTotalAmount);
+    connect(d->ui->interestAmountEdit, &AmountEdit::amountChanged, this, [&]() {
+        d->amountChanged(d->interestSplitModel, d->ui->interestAmountEdit, MyMoneyMoney::MINUS_ONE);
+        d->updateWidgetState();
+        if (!d->ui->interestCombo->getSelected().isEmpty()) {
+            d->scheduleUpdateTotalAmount();
+        }
+    });
 
     WidgetHintFrameCollection* frameCollection = new WidgetHintFrameCollection(this);
     frameCollection->addFrame(new WidgetHintFrame(d->ui->dateEdit));
@@ -688,11 +734,11 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     frameCollection->addWidget(d->ui->enterButton);
 
     connect(d->ui->assetAccountCombo, &KMyMoneyAccountCombo::accountSelected, this, [&](const QString& accountId) {
-        const auto account = MyMoneyFile::instance()->account(accountId);
-        if (account.currencyId() != d->assetAccount.currencyId()) {
-            /// @todo update price rate information
-        }
+        d->setupAssetAccount(accountId);
         d->assetSplit.setAccountId(accountId);
+
+        // check the opening dates of this account and
+        // update the widgets accordingly
         d->postdateChanged(d->ui->dateEdit->date());
         d->updateWidgetState();
     });
@@ -711,11 +757,10 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
                 const auto file = MyMoneyFile::instance();
                 const auto sec = file->security(securityId);
 
-                d->stockAccount = file->account(accountId);
                 d->stockSplit.setAccountId(accountId);
                 d->setSecurity(sec);
 
-                updateTotalAmount();
+                d->scheduleUpdateTotalAmount();
 
             } catch (MyMoneyException& e) {
                 qDebug() << "Problem to find securityId" << accountId << "or" << securityId << "in InvestTransactionEditor::securityAccountChanged";
@@ -738,7 +783,9 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     connect(d->ui->feesCombo, &KMyMoneyAccountCombo::accountSelected, this, [&](const QString& accountId) {
         d->categoryChanged(d->feeSplitModel, accountId, d->ui->feesAmountEdit, MyMoneyMoney::ONE);
         d->updateWidgetState();
-        updateTotalAmount();
+        if (!d->feeSplitModel->valueSum().isZero()) {
+            d->scheduleUpdateTotalAmount();
+        }
     });
 
     connect(
@@ -750,16 +797,12 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
         },
         Qt::QueuedConnection);
 
-    connect(d->ui->feesAmountEdit, &AmountEdit::valueChanged, this, [&]() {
-        d->valueChanged(d->feeSplitModel, d->ui->feesAmountEdit, MyMoneyMoney::ONE);
-        d->updateWidgetState();
-        updateTotalAmount();
-    });
-
     connect(d->ui->interestCombo, &KMyMoneyAccountCombo::accountSelected, this, [&](const QString& accountId) {
         d->categoryChanged(d->interestSplitModel, accountId, d->ui->interestAmountEdit, MyMoneyMoney::MINUS_ONE);
         d->updateWidgetState();
-        updateTotalAmount();
+        if (!d->interestSplitModel->valueSum().isZero()) {
+            d->scheduleUpdateTotalAmount();
+        }
     });
 
     connect(
@@ -770,12 +813,6 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
             d->editSplits(d->interestSplitModel, d->ui->interestAmountEdit, MyMoneyMoney::MINUS_ONE);
         },
         Qt::QueuedConnection);
-
-    connect(d->ui->interestAmountEdit, &AmountEdit::valueChanged, this, [&]() {
-        d->valueChanged(d->interestSplitModel, d->ui->interestAmountEdit, MyMoneyMoney::MINUS_ONE);
-        d->updateWidgetState();
-        updateTotalAmount();
-    });
 
     connect(d->ui->cancelButton, &QToolButton::clicked, this, [&]() {
         emit done();
@@ -792,9 +829,6 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     d->ui->totalAmountEdit->setCalculatorButtonVisible(false);
 
     d->setupParentInvestmentAccount(accId);
-
-    d->amountEditCurrencyHelpers.insert(new AmountEditCurrencyHelper(d->ui->feesCombo, d->ui->feesAmountEdit, d->transaction.commodity()));
-    d->amountEditCurrencyHelpers.insert(new AmountEditCurrencyHelper(d->ui->interestCombo, d->ui->interestAmountEdit, d->transaction.commodity()));
 
     setCancelButton(d->ui->cancelButton);
     setEnterButton(d->ui->enterButton);
@@ -814,15 +848,34 @@ void InvestTransactionEditor::updateTotalAmount()
     d->updateWidgetState();
     if (d->currentActivity) {
         const auto totalAmount = d->currentActivity->totalAmount(d->stockSplit, d->feeSplitModel, d->interestSplitModel);
+        const auto oldValue = d->ui->totalAmountEdit->value();
+        const auto oldShares = d->ui->totalAmountEdit->shares();
+
         d->ui->totalAmountEdit->setValue(totalAmount.abs());
+        d->ui->totalAmountEdit->setValueCommodity(d->transactionCurrency);
         d->assetSplit.setValue(-totalAmount);
         d->assetSplit.setShares(d->assetSplit.value() / d->assetPrice.rate(d->assetAccount.currencyId()));
+        d->ui->totalAmountEdit->setShares(d->assetSplit.shares().abs());
+        // only ask the user for an exchange rate if the value differs from zero
+        // and the values have changed (reverting in sign does not count as a change)
+        if (!totalAmount.isZero() && !d->assetSplit.shares().isZero() && !d->bypassUserPriceUpdate) {
+            if ((oldValue.abs() != d->ui->totalAmountEdit->value().abs()) || (oldShares.abs() != d->ui->totalAmountEdit->shares().abs())) {
+                // force display to the transaction commodity so that the values are correct
+                d->ui->totalAmountEdit->setDisplayState(AmountEdit::DisplayValue);
+                KCurrencyCalculator::updateConversion(d->ui->totalAmountEdit, d->ui->dateEdit->date());
+                const auto rate = d->ui->totalAmountEdit->value() / d->ui->totalAmountEdit->shares();
+                d->assetPrice =
+                    MyMoneyPrice(d->transactionCurrency.id(), d->assetAccount.currencyId(), d->transaction.postDate(), rate, QLatin1String("KMyMoney"));
+                d->assetSplit.setShares(d->ui->totalAmountEdit->shares());
+            }
+        }
     }
 }
 
 
 void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
 {
+    d->bypassUserPriceUpdate = true;
     d->ui->activityCombo->setCurrentIndex(-1);
     d->ui->securityAccountCombo->setCurrentIndex(-1);
     const auto file = MyMoneyFile::instance();
@@ -830,12 +883,14 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
     if (!idx.isValid() || idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
         d->transaction = MyMoneyTransaction();
         d->transaction.setCommodity(d->parentAccount.currencyId());
-        d->currency = MyMoneyFile::instance()->baseCurrency();
+        d->transactionCurrency = MyMoneyFile::instance()->baseCurrency();
+        d->ui->totalAmountEdit->setCommodity(d->transactionCurrency);
         d->security = MyMoneySecurity();
-        d->security.setTradingCurrency(d->currency.id());
+        d->security.setTradingCurrency(d->transactionCurrency.id());
         d->stockSplit = MyMoneySplit();
         d->assetSplit = MyMoneySplit();
         d->assetAccount = MyMoneyAccount();
+        d->assetSecurity = MyMoneySecurity();
         d->ui->activityCombo->setCurrentIndex(0);
         d->ui->securityAccountCombo->setCurrentIndex(0);
         const auto lastUsedPostDate = KMyMoneySettings::lastUsedPostDate();
@@ -849,6 +904,8 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         if (!brokerageAccount.id().isEmpty()) {
             d->ui->assetAccountCombo->setSelected(brokerageAccount.id());
         }
+        d->loadFeeAndInterestAmountEdits();
+
     } else {
         // keep a copy of the transaction and split
         d->transaction = file->journalModel()->itemByIndex(idx).transaction();
@@ -862,16 +919,29 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         QModelIndex assetAccountSplitIdx;
         eMyMoney::Split::InvestmentTransactionType transactionType;
 
-        KMyMoneyUtils::dissectInvestmentTransaction(idx, assetAccountSplitIdx, d->feeSplitModel, d->interestSplitModel, d->security, d->currency, transactionType);
+        // KMyMoneyUtils::dissectInvestmentTransaction fills the split models which
+        // causes to update the widgets when they are not yet setup. So we simply
+        // prevent sending out signals for them
+        QSignalBlocker feesModelBlocker(d->feeSplitModel);
+        QSignalBlocker interestModelBlocker(d->interestSplitModel);
+
+        KMyMoneyUtils::dissectInvestmentTransaction(idx,
+                                                    assetAccountSplitIdx,
+                                                    d->feeSplitModel,
+                                                    d->interestSplitModel,
+                                                    d->security,
+                                                    d->transactionCurrency,
+                                                    transactionType);
         d->assetSplit = file->journalModel()->itemByIndex(assetAccountSplitIdx).split();
-        if (!d->assetSplit.id().isEmpty())
-            d->assetAccount = file->account(d->assetSplit.accountId());
+        if (!d->assetSplit.id().isEmpty()) {
+            d->setupAssetAccount(d->assetSplit.accountId());
+        }
 
         // extract conversion rate information for asset split before changing
         // the activity because that will need it (in updateTotalAmount() )
         if (!(d->assetSplit.shares().isZero() || d->assetSplit.value().isZero())) {
             const auto rate = d->assetSplit.value() / d->assetSplit.shares();
-            d->assetPrice = MyMoneyPrice(d->currency.id(), d->assetAccount.currencyId(), d->transaction.postDate(), rate, QLatin1String("KMyMoney"));
+            d->assetPrice = MyMoneyPrice(d->transactionCurrency.id(), d->assetAccount.currencyId(), d->transaction.postDate(), rate, QLatin1String("KMyMoney"));
         }
 
         // load the widgets. setting activityCombo also initializes
@@ -892,7 +962,6 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         const auto indexes = d->securitiesModel->match(d->securitiesModel->index(0,0), eMyMoney::Model::IdRole, d->stockSplit.accountId(), 1, Qt::MatchFixedString);
         if (!indexes.isEmpty()) {
             d->ui->securityAccountCombo->setCurrentIndex(indexes.first().row());
-            d->stockAccount = file->account(d->stockSplit.accountId());
         }
 
         // changing the security in the last step may have modified the stocksplit
@@ -908,12 +977,10 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
             d->ui->sharesAmountEdit->setPrecision(MyMoneyMoney::denomToPrec(d->security.smallestAccountFraction()));
         d->ui->sharesAmountEdit->setValue(d->stockSplit.shares() * d->currentActivity->sharesFactor());
 
-        if (d->feeSplitModel->rowCount() > 0) {
-            d->ui->feesAmountEdit->setValue(d->feeSplitModel->valueSum().abs());
-        }
-        if (d->interestSplitModel->rowCount() > 0) {
-            d->ui->interestAmountEdit->setValue(d->interestSplitModel->valueSum().abs());
-        }
+        d->loadFeeAndInterestAmountEdits();
+
+        d->feeSplitHelper->updateWidget();
+        d->interestSplitHelper->updateWidget();
 
         // Avoid updating other widgets (connected through signal/slot) during loading
         QSignalBlocker blockPrice(d->ui->priceAmountEdit);
@@ -922,9 +989,7 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         updateTotalAmount();
     }
 
-    for (const auto helper : qAsConst(d->amountEditCurrencyHelpers)) {
-        helper->setCommodity(d->transaction.commodity());
-    }
+    d->bypassUserPriceUpdate = false;
 
     // delay update until next run of event loop so that all necessary widgets are visible
     QMetaObject::invokeMethod(this, "updateWidgets", Qt::QueuedConnection);
@@ -1014,7 +1079,7 @@ void InvestTransactionEditor::saveTransaction()
     if (d->security.roundingMethod() != AlkValue::RoundNever)
         roundingMethod = d->security.roundingMethod();
 
-    int currencyFraction = d->currency.smallestAccountFraction();
+    int currencyFraction = d->transactionCurrency.smallestAccountFraction();
     int securityFraction = d->security.smallestAccountFraction();
 
     auto roundSplitValues = [&](MyMoneySplit& split, int sharesFraction) {
@@ -1038,7 +1103,7 @@ void InvestTransactionEditor::saveTransaction()
     d->stockSplit.clearId();
     d->assetSplit.clearId();
 
-    t.setCommodity(d->currency.id());
+    t.setCommodity(d->transactionCurrency.id());
 
     t.removeSplits();
 

@@ -497,6 +497,7 @@ QList<MyMoneySplit> SplitModel::splitList() const
 void SplitModel::setTransactionCommodity(const QString& commodity)
 {
     d->transactionCommodity = commodity;
+    checkForForeignCurrency();
 }
 
 void SplitModel::checkForForeignCurrency() const

@@ -101,10 +101,10 @@ protected Q_SLOTS:
     void slotNewClicked();
     void slotCheckFinished();
     void slotLoadInstitutions(const QString&);
-    void slotAdjustMinBalanceAbsoluteEdit(const QString&);
-    void slotAdjustMinBalanceEarlyEdit(const QString&);
-    void slotAdjustMaxCreditAbsoluteEdit(const QString&);
-    void slotAdjustMaxCreditEarlyEdit(const QString&);
+    void slotAdjustMinBalanceAbsoluteEdit();
+    void slotAdjustMinBalanceEarlyEdit();
+    void slotAdjustMaxCreditAbsoluteEdit();
+    void slotAdjustMaxCreditEarlyEdit();
     void slotCheckCurrency(int index);
 
 private:

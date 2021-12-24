@@ -120,13 +120,13 @@ KBudgetValues::KBudgetValues(QWidget* parent) :
     d->ui->m_periodGroup->setId(d->ui->m_individualButton, 2);
     slotChangePeriod(d->ui->m_periodGroup->id(d->ui->m_monthlyButton));
 
-    connect(d->ui->m_amountMonthly, &AmountEdit::valueChanged, this, &KBudgetValues::slotNeedUpdate);
-    connect(d->ui->m_amountYearly, &AmountEdit::valueChanged, this, &KBudgetValues::slotNeedUpdate);
+    connect(d->ui->m_amountMonthly, &AmountEdit::amountChanged, this, &KBudgetValues::slotNeedUpdate);
+    connect(d->ui->m_amountYearly, &AmountEdit::amountChanged, this, &KBudgetValues::slotNeedUpdate);
     d->ui->m_amountMonthly->installEventFilter(this);
     d->ui->m_amountYearly->installEventFilter(this);
 
     for (auto i = 0; i < 12; ++i) {
-        connect(d->m_field[i], &AmountEdit::valueChanged, this, &KBudgetValues::slotNeedUpdate);
+        connect(d->m_field[i], &AmountEdit::amountChanged, this, &KBudgetValues::slotNeedUpdate);
         d->m_field[i]->installEventFilter(this);
     }
 

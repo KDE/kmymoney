@@ -314,8 +314,8 @@ void SplitDelegate::setEditorData(QWidget* editWidget, const QModelIndex& index)
         editor->setShowValuesInverted(d->m_showValuesInverted);
         editor->setMemo(index.data(eMyMoney::Model::SplitMemoRole).toString());
         editor->setAccountId(index.data(eMyMoney::Model::SplitAccountIdRole).toString());
-        editor->setShares(-(index.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>()));
         editor->setValue(-(index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>()));
+        editor->setShares(-(index.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>()));
         editor->setCostCenterId(index.data(eMyMoney::Model::SplitCostCenterIdRole).toString());
         editor->setNumber(index.data(eMyMoney::Model::SplitNumberRole).toString());
         editor->setPayeeId(index.data(eMyMoney::Model::SplitPayeeIdRole).toString());

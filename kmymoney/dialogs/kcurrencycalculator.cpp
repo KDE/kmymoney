@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2004-2018 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2004-2021 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -43,13 +43,19 @@ class KCurrencyCalculatorPrivate
     Q_DECLARE_PUBLIC(KCurrencyCalculator)
 
 public:
-    explicit KCurrencyCalculatorPrivate(KCurrencyCalculator *qq,
-                                        const MyMoneySecurity& from,
-                                        const MyMoneySecurity& to,
-                                        const MyMoneyMoney& fromAmount,
-                                        const MyMoneyMoney& toAmount,
-                                        const QDate& date,
-                                        const signed64 resultFraction)
+    explicit KCurrencyCalculatorPrivate(KCurrencyCalculator* qq)
+        : q_ptr(qq)
+        , ui(new Ui::KCurrencyCalculator)
+    {
+    }
+
+    KCurrencyCalculatorPrivate(KCurrencyCalculator* qq,
+                               const MyMoneySecurity& from,
+                               const MyMoneySecurity& to,
+                               const MyMoneyMoney& fromAmount,
+                               const MyMoneyMoney& toAmount,
+                               const QDate& date,
+                               const signed64 resultFraction)
         : q_ptr(qq)
         , ui(new Ui::KCurrencyCalculator)
         , m_fromCurrency(from)
@@ -72,28 +78,17 @@ public:
         ui->setupUi(q);
         auto file = MyMoneyFile::instance();
 
-        //set main widget of QDialog
+        // set main widget of QDialog
         ui->buttonGroup1->setId(ui->m_amountButton, 0);
         ui->buttonGroup1->setId(ui->m_rateButton, 1);
 
         ui->m_dateFrame->hide();
-        if (m_date.isValid())
-            ui->m_dateEdit->setDate(m_date);
-        else
-            ui->m_dateEdit->setDate(QDate::currentDate());
 
-        ui->m_fromCurrencyText->setText(QString(MyMoneySecurity::securityTypeToString(m_fromCurrency.securityType()) + ' ' + (m_fromCurrency.isCurrency() ? m_fromCurrency.id() : m_fromCurrency.tradingSymbol())));
-        ui->m_toCurrencyText->setText(QString(MyMoneySecurity::securityTypeToString(m_toCurrency.securityType()) + ' ' + (m_toCurrency.isCurrency() ? m_toCurrency.id() : m_toCurrency.tradingSymbol())));
-
-        //set bold font
+        // set bold font
         auto boldFont = ui->m_fromCurrencyText->font();
         boldFont.setBold(true);
         ui->m_fromCurrencyText->setFont(boldFont);
         ui->m_toCurrencyText->setFont(boldFont);
-
-        ui->m_fromAmount->setText(m_fromAmount.formatMoney(QString(), MyMoneyMoney::denomToPrec(m_fromCurrency.smallestAccountFraction())));
-
-        ui->m_dateText->setText(QLocale().toString(m_date));
 
         ui->m_updateButton->setChecked(KMyMoneySettings::priceHistoryUpdate());
 
@@ -106,9 +101,11 @@ public:
         }
 
         // fill in initial values
+        ui->m_toAmount->setCommodity(MyMoneySecurity());
         ui->m_toAmount->setPrecision(-1);
         ui->m_toAmount->setValue(m_toAmount);
 
+        ui->m_conversionRate->setCommodity(MyMoneySecurity());
         ui->m_conversionRate->setPrecision(-1);
 
         q->connect(ui->m_amountButton, &QAbstractButton::clicked, q, &KCurrencyCalculator::slotSetToAmount);
@@ -130,6 +127,8 @@ public:
             ui->m_amountButton->hide();
             ui->m_toAmount->hide();
         }
+
+        updateWidgets();
     }
 
     void updateExample(const MyMoneyMoney& price)
@@ -158,15 +157,40 @@ public:
         ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!price.isZero());
     }
 
-    KCurrencyCalculator     *q_ptr;
+    void updateWidgets()
+    {
+        if (m_date.isValid())
+            ui->m_dateEdit->setDate(m_date);
+        else
+            ui->m_dateEdit->setDate(QDate::currentDate());
+
+        ui->m_dateText->setText(QLocale().toString(m_date));
+
+        ui->m_fromCurrencyText->setText(QStringLiteral("%1 %2").arg(MyMoneySecurity::securityTypeToString(m_fromCurrency.securityType()),
+                                                                    (m_fromCurrency.isCurrency() ? m_fromCurrency.id() : m_fromCurrency.tradingSymbol())));
+        ui->m_toCurrencyText->setText(QStringLiteral("%1 %2").arg(MyMoneySecurity::securityTypeToString(m_toCurrency.securityType()),
+                                                                  (m_toCurrency.isCurrency() ? m_toCurrency.id() : m_toCurrency.tradingSymbol())));
+
+        ui->m_fromAmount->setText(m_fromAmount.formatMoney(QString(), MyMoneyMoney::denomToPrec(m_fromCurrency.smallestAccountFraction())));
+    }
+
+    KCurrencyCalculator* q_ptr;
     Ui::KCurrencyCalculator *ui;
-    MyMoneySecurity          m_fromCurrency;
-    MyMoneySecurity          m_toCurrency;
-    MyMoneyMoney             m_toAmount;
-    MyMoneyMoney             m_fromAmount;
-    QDate                    m_date;
-    signed64                 m_resultFraction;
+    MyMoneySecurity m_fromCurrency;
+    MyMoneySecurity m_toCurrency;
+    MyMoneyMoney m_toAmount;
+    MyMoneyMoney m_fromAmount;
+    QDate m_date;
+    signed64 m_resultFraction;
 };
+
+KCurrencyCalculator::KCurrencyCalculator(QWidget* parent)
+    : QDialog(parent)
+    , d_ptr(new KCurrencyCalculatorPrivate(this))
+{
+    Q_D(KCurrencyCalculator);
+    d->init();
+}
 
 KCurrencyCalculator::KCurrencyCalculator(const MyMoneySecurity& from,
         const MyMoneySecurity& to,
@@ -192,6 +216,67 @@ KCurrencyCalculator::~KCurrencyCalculator()
 {
     Q_D(KCurrencyCalculator);
     delete d;
+}
+
+void KCurrencyCalculator::setDate(const QDate& date)
+{
+    Q_D(KCurrencyCalculator);
+    d->m_date = date;
+    if (date.isValid())
+        d->ui->m_dateEdit->setDate(date);
+    else
+        d->ui->m_dateEdit->setDate(QDate::currentDate());
+
+    d->ui->m_dateText->setText(QLocale().toString(date));
+}
+
+void KCurrencyCalculator::setFromCurrency(const MyMoneySecurity& sec)
+{
+    Q_D(KCurrencyCalculator);
+    d->m_fromCurrency = sec;
+    d->ui->m_fromCurrencyText->setText(
+        QString(MyMoneySecurity::securityTypeToString(sec.securityType()) + ' ' + (sec.isCurrency() ? sec.id() : sec.tradingSymbol())));
+
+    // If the from security is not a currency, we only allow entering a price
+    if (!sec.isCurrency()) {
+        d->ui->m_rateButton->animateClick();
+        d->ui->m_amountButton->hide();
+        d->ui->m_toAmount->hide();
+    } else {
+        d->ui->m_amountButton->show();
+        d->ui->m_toAmount->show();
+    }
+    d->updateWidgets();
+}
+
+void KCurrencyCalculator::setToCurrency(const MyMoneySecurity& sec)
+{
+    Q_D(KCurrencyCalculator);
+    d->m_toCurrency = sec;
+    d->ui->m_toCurrencyText->setText(
+        QString(MyMoneySecurity::securityTypeToString(sec.securityType()) + ' ' + (sec.isCurrency() ? sec.id() : sec.tradingSymbol())));
+    d->updateWidgets();
+}
+
+void KCurrencyCalculator::setFromAmount(const MyMoneyMoney& amount)
+{
+    Q_D(KCurrencyCalculator);
+    d->m_fromAmount = amount;
+    d->updateWidgets();
+}
+
+void KCurrencyCalculator::setToAmount(const MyMoneyMoney& amount)
+{
+    Q_D(KCurrencyCalculator);
+    d->m_toAmount = amount;
+    d->updateWidgets();
+}
+
+void KCurrencyCalculator::setResultFraction(signed64 fraction)
+{
+    Q_D(KCurrencyCalculator);
+    d->m_resultFraction = fraction;
+    d->updateWidgets();
 }
 
 bool KCurrencyCalculator::setupSplitPrice(MyMoneyMoney& shares,
@@ -302,6 +387,7 @@ void KCurrencyCalculator::slotUpdateResult(const QString& /*txt*/)
 
         d->ui->m_conversionRate->setValue(price);
         d->m_toAmount = (d->m_fromAmount * price).convert(d->m_resultFraction);
+
         d->ui->m_toAmount->setValue(d->m_toAmount);
     }
     d->updateExample(price);
@@ -368,4 +454,62 @@ MyMoneyMoney KCurrencyCalculator::price() const
         return MyMoneyMoney::ONE;
     } else
         return d->ui->m_conversionRate->value();
+}
+
+void KCurrencyCalculator::updateConversion(MultiCurrencyEdit* amountEdit, const QDate date)
+{
+    // in case the widget does not have multiple currencies we're done
+    if (!amountEdit->hasMultipleCurrencies())
+        return;
+
+    const auto file = MyMoneyFile::instance();
+    QPointer<KCurrencyCalculator> calc;
+
+    MyMoneyMoney fromValue;
+    MyMoneyMoney toValue;
+    MyMoneySecurity fromSecurity;
+    MyMoneySecurity toSecurity;
+
+    const auto state = amountEdit->displayState();
+    int fraction = MyMoneyMoney::precToDenom(amountEdit->precision(state));
+
+    switch (state) {
+    case MultiCurrencyEdit::DisplayShares:
+        fromValue = amountEdit->shares();
+        toValue = amountEdit->value();
+        fromSecurity = amountEdit->sharesCommodity();
+        toSecurity = amountEdit->valueCommodity();
+        break;
+
+    case MultiCurrencyEdit::DisplayValue:
+        fromValue = amountEdit->value();
+        toValue = amountEdit->shares();
+        fromSecurity = amountEdit->valueCommodity();
+        toSecurity = amountEdit->sharesCommodity();
+        break;
+    }
+
+    // in case the two values are identical, we search for
+    // a matching conversion rate in the price list and
+    // apply it.
+    if (fromValue == toValue) {
+        const auto rate = file->price(fromSecurity.id(), toSecurity.id(), date).rate(toSecurity.id());
+        toValue *= rate;
+    }
+
+    calc = new KCurrencyCalculator(fromSecurity, toSecurity, fromValue, toValue, date, fraction, amountEdit->widget());
+
+    if (calc->exec() == QDialog::Accepted && calc) {
+        switch (state) {
+        case MultiCurrencyEdit::DisplayShares:
+            amountEdit->setValue(fromValue * calc->price());
+            amountEdit->setShares(fromValue);
+            break;
+        case MultiCurrencyEdit::DisplayValue:
+            amountEdit->setValue(fromValue);
+            amountEdit->setShares(fromValue * calc->price());
+            break;
+        }
+    }
+    delete calc;
 }

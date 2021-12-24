@@ -17,8 +17,9 @@
 
 #include "mymoneymoney.h"
 
-#include <stdint.h>
+#include <alkimia/alkversion.h>
 #include <gmpxx.h>
+#include <stdint.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -405,11 +406,11 @@ int MyMoneyMoney::denomToPrec(signed64 fract)
     return rc;
 }
 
-/**
- * @todo Eventually move this to AlkValue
- */
 MyMoneyMoney MyMoneyMoney::convertDenominator(mpz_class denom, const AlkValue::RoundingMethod how) const
 {
+#if ALK_VERSION >= ALK_VERSION_CHECK(8, 1, 71)
+    return static_cast<const MyMoneyMoney>(AlkValue::convertDenominator(denom, how));
+#else
     MyMoneyMoney in(*this);
     mpz_class in_num(mpq_numref(in.valueRef().get_mpq_t()));
 
@@ -530,4 +531,5 @@ MyMoneyMoney MyMoneyMoney::convertDenominator(mpz_class denom, const AlkValue::R
         }
     }
     return out;
+#endif
 }

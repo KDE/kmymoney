@@ -383,10 +383,10 @@ public:
         q->connect(ui->m_vatAccount,    &KMyMoneySelector::stateChanged, q, &KNewAccountDlg::slotCheckFinished);
         q->connect(ui->m_currency, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), q, &KNewAccountDlg::slotCheckCurrency);
 
-        q->connect(ui->m_minBalanceEarlyEdit,     &AmountEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMinBalanceAbsoluteEdit);
-        q->connect(ui->m_minBalanceAbsoluteEdit,  &AmountEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMinBalanceEarlyEdit);
-        q->connect(ui->m_maxCreditEarlyEdit,      &AmountEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMaxCreditAbsoluteEdit);
-        q->connect(ui->m_maxCreditAbsoluteEdit,   &AmountEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMaxCreditEarlyEdit);
+        q->connect(ui->m_minBalanceEarlyEdit, &AmountEdit::amountChanged, q, &KNewAccountDlg::slotAdjustMinBalanceAbsoluteEdit);
+        q->connect(ui->m_minBalanceAbsoluteEdit, &AmountEdit::amountChanged, q, &KNewAccountDlg::slotAdjustMinBalanceEarlyEdit);
+        q->connect(ui->m_maxCreditEarlyEdit, &AmountEdit::amountChanged, q, &KNewAccountDlg::slotAdjustMaxCreditAbsoluteEdit);
+        q->connect(ui->m_maxCreditAbsoluteEdit, &AmountEdit::amountChanged, q, &KNewAccountDlg::slotAdjustMaxCreditEarlyEdit);
 
         q->connect(ui->m_qcomboboxInstitutions, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::activated), q, &KNewAccountDlg::slotLoadInstitutions);
 
@@ -926,25 +926,25 @@ void KNewAccountDlg::slotVatAssignmentChanged(bool state)
     d->ui->m_amountGroupBox->setEnabled(state);
 }
 
-void KNewAccountDlg::slotAdjustMinBalanceAbsoluteEdit(const QString&)
+void KNewAccountDlg::slotAdjustMinBalanceAbsoluteEdit()
 {
     Q_D(KNewAccountDlg);
     d->adjustEditWidgets(d->ui->m_minBalanceAbsoluteEdit, d->ui->m_minBalanceEarlyEdit, '<', -1);
 }
 
-void KNewAccountDlg::slotAdjustMinBalanceEarlyEdit(const QString&)
+void KNewAccountDlg::slotAdjustMinBalanceEarlyEdit()
 {
     Q_D(KNewAccountDlg);
     d->adjustEditWidgets(d->ui->m_minBalanceEarlyEdit, d->ui->m_minBalanceAbsoluteEdit, '>', -1);
 }
 
-void KNewAccountDlg::slotAdjustMaxCreditAbsoluteEdit(const QString&)
+void KNewAccountDlg::slotAdjustMaxCreditAbsoluteEdit()
 {
     Q_D(KNewAccountDlg);
     d->adjustEditWidgets(d->ui->m_maxCreditAbsoluteEdit, d->ui->m_maxCreditEarlyEdit, '>', 1);
 }
 
-void KNewAccountDlg::slotAdjustMaxCreditEarlyEdit(const QString&)
+void KNewAccountDlg::slotAdjustMaxCreditEarlyEdit()
 {
     Q_D(KNewAccountDlg);
     d->adjustEditWidgets(d->ui->m_maxCreditEarlyEdit, d->ui->m_maxCreditAbsoluteEdit, '<', 1);

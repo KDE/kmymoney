@@ -229,28 +229,12 @@
       </widget>
      </item>
      <item>
-      <widget class="AmountEdit" name="amountEditCredit">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="placeholderText">
-        <string>Payment</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="AmountEdit" name="amountEditDebit">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="placeholderText">
-        <string>Deposit</string>
+      <widget class="CreditDebitEdit" name="creditdebitedit">
+       <property name="minimumSize">
+        <size>
+         <width>220</width>
+         <height>0</height>
+        </size>
        </property>
       </widget>
      </item>
@@ -299,11 +283,6 @@
    <header>kmymoneyaccountcombo.h</header>
   </customwidget>
   <customwidget>
-   <class>AmountEdit</class>
-   <extends>QLineEdit</extends>
-   <header>amountedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>KMyMoneyDateEdit</class>
    <extends>QDateEdit</extends>
    <header>kmymoneydateedit.h</header>
@@ -314,12 +293,16 @@
    <header>ktagcontainer.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>CreditDebitEdit</class>
+   <extends>QWidget</extends>
+   <header>creditdebitedit.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>accountCombo</tabstop>
   <tabstop>dateEdit</tabstop>
-  <tabstop>amountEditCredit</tabstop>
-  <tabstop>amountEditDebit</tabstop>
   <tabstop>payeeEdit</tabstop>
   <tabstop>numberEdit</tabstop>
   <tabstop>categoryCombo</tabstop>

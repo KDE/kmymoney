@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2019-2020 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2019-2021 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -9,15 +9,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QFrame>
+#include <QObject>
 class QWidget;
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "transactioneditorbase.h"
-#include "mymoneymoney.h"
-#include "investactivities.h"
+class MyMoneyMoney;
 
 class InvestTransactionEditor : public TransactionEditorBase
 {

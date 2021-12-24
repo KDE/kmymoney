@@ -3,7 +3,7 @@
 set(kmm_widgets_HEADERS
   amountedit.h
   amountvalidator.h
-  creditdebithelper.h
+  creditdebitedit.h
   kaccounttemplateselector.h
   kguiutils.h
   kmymoneyaccountcombo.h
@@ -28,7 +28,7 @@ set(kmm_base_widgets_SOURCES
   amountedit.cpp
   amountvalidator.cpp
   columnselector.cpp
-  creditdebithelper.cpp
+  creditdebitedit.cpp
   kaccounttemplateselector.cpp
   kguiutils.cpp
   kmymoneyaccountcombo.cpp
@@ -113,6 +113,7 @@ list(APPEND kmm_base_widgets_SOURCES ${IBANBICWidget_SOURCES})
 list(APPEND kmm_widgets_HEADERS ${IBANBICWidget_HEADERS})
 
 ki18n_wrap_ui(kmm_base_widgets_SOURCES
+  creditdebitedit.ui
   kaccounttemplateselector.ui
   kmymoneyvalidationfeedback.ui
   ./payeeidentifier/nationalaccount/nationalaccountedit.ui

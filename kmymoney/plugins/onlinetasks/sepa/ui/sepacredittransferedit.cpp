@@ -202,7 +202,7 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
     connect(ui->beneficiaryName, &KLineEdit::textChanged, this, &sepaCreditTransferEdit::beneficiaryNameChanged);
     connect(ui->beneficiaryIban, &KIbanLineEdit::textChanged, this, &sepaCreditTransferEdit::beneficiaryIbanChanged);
     connect(ui->beneficiaryBankCode, &KBicEdit::textChanged, this, &sepaCreditTransferEdit::beneficiaryBicChanged);
-    connect(ui->value, &AmountEdit::valueChanged, this, &sepaCreditTransferEdit::valueChanged);
+    connect(ui->value, &AmountEdit::amountChanged, this, &sepaCreditTransferEdit::valueChanged);
     connect(ui->sepaReference, &KLineEdit::textChanged, this, &sepaCreditTransferEdit::endToEndReferenceChanged);
     connect(ui->purpose, &KMyMoneyTextEdit::textChanged, this, &sepaCreditTransferEdit::purposeChanged);
 
@@ -211,7 +211,7 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
     connect(ui->beneficiaryName, &KLineEdit::textChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
     connect(ui->beneficiaryIban, &KIbanLineEdit::textChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
     connect(ui->beneficiaryBankCode, &KBicEdit::textChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
-    connect(ui->value, &AmountEdit::valueChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
+    connect(ui->value, &AmountEdit::amountChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
     connect(ui->sepaReference, &KLineEdit::textChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
     connect(ui->purpose, &KMyMoneyTextEdit::textChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
 

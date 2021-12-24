@@ -20,8 +20,8 @@
 // Project Includes
 
 class KMyMoneyAccountCombo;
-class AmountEdit;
-class CreditDebitHelper;
+class MultiCurrencyEdit;
+class MyMoneySecurity;
 class AmountEditCurrencyHelperPrivate;
 
 #ifdef Q_OS_WIN
@@ -44,15 +44,7 @@ public:
      * @param category pointer to KMyMoneyAccountCombo object
      * @param amount pointer to AmountEdit object
      */
-    explicit AmountEditCurrencyHelper(KMyMoneyAccountCombo* category, AmountEdit* amount, const QString& commodityId);
-
-    /**
-     * Creates a AmountEditCurrencyHelper object
-     *
-     * @param category pointer to KMyMoneyAccountCombo object
-     * @param amount pointer to CreditDebitHelper object
-     */
-    explicit AmountEditCurrencyHelper(KMyMoneyAccountCombo* category, CreditDebitHelper* amount, const QString& commodityId);
+    explicit AmountEditCurrencyHelper(KMyMoneyAccountCombo* category, MultiCurrencyEdit* amount, const QString& commodityId);
 
     ~AmountEditCurrencyHelper();
 
@@ -63,11 +55,10 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     /**
-     * This signal is emitted when the @a symbol to be
-     * shown changes. @a name contains the name of the
-     * currency in case the symbol is ambiguous.
+     * This signal is emitted when the @a commodity to be
+     * used for the shares has changed.
      */
-    void currencySymbolChanged(const QString& symbol, const QString& name);
+    void commodityChanged(const MyMoneySecurity& commodity);
 
 private:
     AmountEditCurrencyHelperPrivate * const d_ptr;

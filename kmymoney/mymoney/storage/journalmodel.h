@@ -255,7 +255,9 @@ public Q_SLOTS:
     /**
      * Reset the information cached for each journalEntry about
      * the height of the row. While painting the next time, this
-     * information will be updated through the JournalDelegate
+     * information will be updated through the JournalDelegate.
+     * Once done, it emits a dataChanged signal for all rows
+     * and colums.
      */
     void resetRowHeightInformation();
 

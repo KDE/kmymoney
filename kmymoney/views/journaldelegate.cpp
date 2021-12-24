@@ -172,8 +172,8 @@ public:
                 rc.lines << opt.text;
                 if (((opt.state & QStyle::State_Selected) && (showLedgerLens)) || showDetails) {
                     // we have to pay attention here as later on empty items will be removed
-                    // from the lines all together. Since we use the column detail as label
-                    // we have to make that we are not off. Therefor, if the detail column
+                    // from the lines all together. Since we use the detail column as label
+                    // we have to make sure that we are not off. Therefore, if the detail column
                     // is filled, we add a simple blank here instead of an empty line.
                     // The first line is always present, so we make sure it is not empty in this column.
                     if (rc.lines[0].isEmpty())
@@ -205,7 +205,8 @@ public:
             const auto havePayeeColumn = !m_view->isColumnHidden(JournalModel::Payee);
             rc.lines << opt.text;
             if (showAllSplits && isMultiSplitDisplay(index)) {
-                if (!havePayeeColumn) {
+                const auto payee = index.data(eMyMoney::Model::SplitPayeeRole).toString();
+                if (!havePayeeColumn && !payee.isEmpty() && !index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString().isEmpty()) {
                     rc.lines << QStringLiteral(" ");
                 }
                 rc.italicStartLine = 1;
@@ -216,7 +217,8 @@ public:
             const auto havePayeeColumn = !m_view->isColumnHidden(JournalModel::Payee);
             rc.lines << opt.text;
             if (showAllSplits && isMultiSplitDisplay(index)) {
-                if (!havePayeeColumn) {
+                const auto payee = index.data(eMyMoney::Model::SplitPayeeRole).toString();
+                if (!havePayeeColumn && !payee.isEmpty() && !index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString().isEmpty()) {
                     rc.lines << QStringLiteral(" ");
                 }
                 rc.italicStartLine = 1;
@@ -541,12 +543,20 @@ QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
     if (((option.state & QStyle::State_Selected) && (settings->showLedgerLens())) || settings->showTransactionDetails()) {
         rows = index.data(eMyMoney::Model::JournalSplitMaxLinesCountRole).toInt();
         if (rows == 0) {
-            rows = d->displayString(index, option).lines.count();
+            // Scan certain rows which may show multiple lines in a table row
+            QSet<int> columns = {JournalModel::Column::Detail, JournalModel::Column::Deposit, JournalModel::Column::Payment};
+            for (const auto& column : qAsConst(columns)) {
+                const auto rowCount = d->displayString(index.model()->index(index.row(), column), option).lines.count();
+                if (rowCount > rows) {
+                    rows = rowCount;
+                }
+            }
 
             // make sure we show at least one row
             if (!rows) {
                 rows = 1;
             }
+            // and cache the value in the model
             auto model = const_cast<QAbstractItemModel*>(index.model());
             model->setData(index, rows, eMyMoney::Model::JournalSplitMaxLinesCountRole);
         }

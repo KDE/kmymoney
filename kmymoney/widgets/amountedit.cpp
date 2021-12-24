@@ -9,19 +9,18 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QApplication>
-#include <QDesktopWidget>
+#include <QDebug>
+#include <QFrame>
 #include <QKeyEvent>
+#include <QLocale>
 #include <QStyle>
 #include <QToolButton>
-#include <QFrame>
-#include <QLocale>
-#include <QLabel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KConfigGroup>
+#include <KLocalizedString>
 #include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
@@ -62,15 +61,27 @@ class AmountEditPrivate
     Q_DECLARE_PUBLIC(AmountEdit)
 
 public:
+    enum Item {
+        NoItem = 0x0,
+        ShowCalculator = 0x1,
+        ShowCurrencySymbol = 0x02,
+        ShowAll = 0x3,
+    };
+    Q_DECLARE_FLAGS(Items, Item)
+
     explicit AmountEditPrivate(AmountEdit* qq)
         : q_ptr(qq)
         , m_calculatorFrame(nullptr)
         , m_calculator(nullptr)
         , m_calculatorButton(nullptr)
-        , m_currencySymbol(nullptr)
         , m_prec(2)
         , m_allowEmpty(false)
-        , m_items(NoItem)
+        , m_actionIcons(NoItem)
+        , m_initialExchangeRate(MyMoneyMoney::ONE)
+        , m_state(AmountEdit::DisplayValue)
+        , sharesSet(false)
+        , valueSet(false)
+        , m_isCashAmount(false)
     {
         m_calculatorFrame = new QFrame;
         m_calculatorFrame->setWindowFlags(Qt::Popup);
@@ -99,10 +110,13 @@ public:
         m_calculatorButton->setFixedSize(btnSize, btnSize);
         m_calculatorButton->setFocusPolicy(Qt::ClickFocus);
 
-        m_currencySymbol = new QLabel(q);
-        m_currencySymbol->setCursor(Qt::ArrowCursor);
-
         q->connect(m_calculatorButton, &QAbstractButton::clicked, q, &AmountEdit::slotCalculatorOpen);
+
+        m_currencyButton = new QToolButton(q);
+        m_currencyButton->setCursor(Qt::ArrowCursor);
+        m_currencyButton->setAutoRaise(true);
+        m_currencyButton->hide();
+        m_currencyButton->setFocusPolicy(Qt::ClickFocus);
 
         // setup items
         KSharedConfig::Ptr kconfig = KSharedConfig::openConfig();
@@ -110,7 +124,7 @@ public:
         q->setCalculatorButtonVisible(!grp.readEntry("DontShowCalculatorButton", false));
         q->setCurrencySymbol(QString(), QString());
 
-        updateLineEditSize();
+        updateLineEditSize(m_currencyButton, true);
 
         q->connect(q, &QLineEdit::textChanged, q, &AmountEdit::theTextChanged);
         q->connect(m_calculator, &KMyMoneyCalculator::signalResultAvailable, q, &AmountEdit::slotCalculatorResult);
@@ -122,7 +136,7 @@ public:
       */
     void ensureFractionalPart(QString& s) const
     {
-        s = MyMoneyMoney(s).formatMoney(QString(), m_prec, false);
+        s = MyMoneyMoney(s).formatMoney(QString(), precision(m_state), false);
     }
 
     /**
@@ -149,27 +163,25 @@ public:
         m_calculator->setFocus();
     }
 
-    void updateLineEditSize()
+    void updateLineEditSize(QWidget* widget, int w, int h)
     {
         Q_Q(AmountEdit);
-        const int currencyWidth = q->fontMetrics().boundingRect(m_currencySymbol->text()).width();
-        const int currencyHeight = q->fontMetrics().boundingRect(m_currencySymbol->text()).height();
-        m_currencySymbol->resize(currencyWidth, currencyHeight);
+        widget->resize(w, h);
 
         int height = q->sizeHint().height();
         int frameWidth = q->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
         const int btnHeight = height - 2*frameWidth;
         const int btnX = (height - btnHeight) / 2;
-        const int currencyX = (height - currencyHeight) / 2;
+        const int currencyX = (height - h) / 2;
 
         int gaps = 0;
-        gaps += m_items.testFlag(ShowCalculator) ? 1 : 0;
-        gaps += m_items.testFlag(ShowCurrencySymbol) ? 1 : 0;
+        gaps += m_actionIcons.testFlag(ShowCalculator) ? 1 : 0;
+        gaps += m_actionIcons.testFlag(ShowCurrencySymbol) ? 1 : 0;
 
         m_calculatorButton->move(q->width() - m_calculatorButton->width() - frameWidth, btnX);
-        m_currencySymbol->move(q->width() - m_calculatorButton->width() - m_currencySymbol->width() - gaps*frameWidth, currencyX);
+        widget->move(q->width() - m_calculatorButton->width() - widget->width() - gaps * frameWidth, currencyX);
 
-        const int padding = m_calculatorButton->width() + m_currencySymbol->width() + ((gaps-1) * frameWidth);
+        const int padding = m_calculatorButton->width() + widget->width() + ((gaps - 1) * frameWidth);
         q->setStyleSheet(QString("QLineEdit { padding-right: %1px }").arg(padding));
         q->setMinimumHeight(height);
     }
@@ -183,33 +195,160 @@ public:
         }
     }
 
-    enum Item {
-        NoItem = 0x0,
-        ShowCalculator = 0x1,
-        ShowCurrencySymbol = 0x02,
-        ShowAll = 0x3,
-    };
-    Q_DECLARE_FLAGS(Items, Item)
+    bool hasMultipleCurrencies() const
+    {
+        return m_sharesCommodity.id().compare(m_valueCommodity.id());
+    }
 
-    AmountEdit*           q_ptr;
-    QFrame*               m_calculatorFrame;
-    KMyMoneyCalculator*   m_calculator;
-    QToolButton*          m_calculatorButton;
-    QLabel*               m_currencySymbol;
-    int                   m_prec;
-    bool                  m_allowEmpty;
-    QString               m_previousText; // keep track of what has been typed
-    QString               m_text;         // keep track of what was the original value
-    QFlags<Item>          m_items;
+    void updateLineEditSize(QToolButton* button, bool ofs = false)
+    {
+        Q_Q(AmountEdit);
+        const int currencyWidth = q->fontMetrics().boundingRect(button->text()).width() + 10;
+        const auto frameWidth = ofs ? q->style()->pixelMetric(QStyle::PM_DefaultFrameWidth) : 0;
+
+        const int currencyHeight = button->height() - frameWidth;
+
+        AmountEditPrivate::updateLineEditSize(button, currencyWidth, currencyHeight);
+    }
+
+    void setCurrencySymbol(const QString& symbol, const QString& name)
+    {
+        m_currencyButton->setText(symbol);
+        m_currencyButton->setToolTip(name);
+        m_currencyButton->setHidden(symbol.isEmpty());
+        m_actionIcons.setFlag(AmountEditPrivate::ShowCurrencySymbol, !symbol.isEmpty());
+        updateLineEditSize(m_currencyButton);
+    }
+
+    void updateWidgets()
+    {
+        Q_Q(AmountEdit);
+        if (hasMultipleCurrencies()) {
+            m_currencyButton->setEnabled(true);
+            QString currentCurrency;
+            QString otherCurrency;
+            // prevent to change the values due to emitted textChanged() signals
+            QSignalBlocker block(q);
+            if (m_state == AmountEdit::DisplayShares) {
+                currentCurrency = m_sharesCommodity.name();
+                otherCurrency = m_valueCommodity.name();
+                setCurrencySymbol(m_sharesCommodity.tradingSymbol(), currentCurrency);
+                q->setText(m_sharesText);
+            } else {
+                currentCurrency = m_valueCommodity.name();
+                otherCurrency = m_sharesCommodity.name();
+                setCurrencySymbol(m_valueCommodity.tradingSymbol(), m_valueCommodity.name());
+                q->setText(m_valueText);
+            }
+
+            m_currencyButton->setToolTip(
+                i18nc("@info:tooltip Swap currencies for entry/display", "Value are presented in %1. Press this button to switch the currency to %2.")
+                    .arg(currentCurrency, otherCurrency));
+
+        } else {
+            if (!m_valueCommodity.id().isEmpty()) {
+                m_currencyButton->setEnabled(false);
+                m_currencyButton->setToolTip(
+                    i18nc("@info:tooltip Swap currencies for entry/display", "Values are presented in %1.").arg(m_valueCommodity.name()));
+                setCurrencySymbol(m_valueCommodity.tradingSymbol(), m_valueCommodity.name());
+
+            } else {
+                // hide the currency symbol
+                setCurrencySymbol(QString(), QString());
+            }
+        }
+    }
+
+    void swapCommodities()
+    {
+        Q_Q(AmountEdit);
+        q->setDisplayState((m_state == AmountEdit::DisplayShares) ? AmountEdit::DisplayValue : AmountEdit::DisplayShares);
+    }
+
+    MyMoneyMoney adjustToPrecision(AmountEdit::DisplayState state, const MyMoneyMoney& amount) const
+    {
+        auto money(amount);
+        const MyMoneySecurity& sec((state == AmountEdit::DisplayValue) ? m_valueCommodity : m_sharesCommodity);
+        if (!sec.id().isEmpty()) {
+            const auto fraction = m_isCashAmount ? sec.smallestCashFraction() : sec.smallestAccountFraction();
+            money = money.convert(fraction);
+        } else if (m_prec != -1)
+            money = money.convert(MyMoneyMoney::precToDenom(m_prec));
+        return money;
+    }
+
+    int precision(AmountEdit::DisplayState state) const
+    {
+        const MyMoneySecurity& sec((state == AmountEdit::DisplayValue) ? m_valueCommodity : m_sharesCommodity);
+        auto prec(m_prec);
+
+        if (!sec.id().isEmpty()) {
+            prec = MyMoneyMoney::denomToPrec(m_isCashAmount ? sec.smallestCashFraction() : sec.smallestAccountFraction());
+        }
+        return prec;
+    }
+
+    void setValueText(const QString& txt)
+    {
+        Q_Q(AmountEdit);
+        m_valueText = txt;
+        if (q->isEnabled() && !txt.isEmpty()) {
+            ensureFractionalPart(m_valueText);
+        }
+        // only update text if it really differs
+        if (m_state == AmountEdit::DisplayValue && m_valueText.compare(q->QLineEdit::text())) {
+            // prevent to change the values due to emitted textChanged() signals
+            QSignalBlocker block(q);
+            q->QLineEdit::setText(m_valueText);
+        }
+    }
+
+    void setSharesText(const QString& txt)
+    {
+        Q_Q(AmountEdit);
+        m_sharesText = txt;
+        if (q->isEnabled() && !txt.isEmpty()) {
+            ensureFractionalPart(m_sharesText);
+        }
+        // only update text if it really differs
+        if (m_state == AmountEdit::DisplayShares && m_sharesText.compare(q->QLineEdit::text())) {
+            // prevent to change the values due to emitted textChanged() signals
+            QSignalBlocker block(q);
+            q->QLineEdit::setText(m_sharesText);
+        }
+    }
+
+    AmountEdit* q_ptr;
+    QFrame* m_calculatorFrame;
+    KMyMoneyCalculator* m_calculator;
+    QToolButton* m_calculatorButton;
+    QToolButton* m_currencyButton;
+    int m_prec;
+    bool m_allowEmpty;
+    QString m_previousText; // keep track of what has been typed
+
+    QString m_valueText; // keep track of what was the original value
+    QString m_sharesText; // keep track of what was the original value
+
+    QFlags<Item> m_actionIcons;
+
+    MyMoneyMoney m_value; // original amount when starting editing
+    MyMoneyMoney m_shares; // original amount when starting editing
+    MyMoneyMoney m_initialExchangeRate;
+
+    MyMoneySecurity m_sharesCommodity;
+    MyMoneySecurity m_valueCommodity;
 
     /**
-     * This holds the number of precision to be used
-     * when no other information (e.g. from account)
-     * is available.
-     *
-     * @sa setStandardPrecision()
+     * Which part is displayed
      */
+    AmountEdit::DisplayState m_state;
+
+    bool sharesSet;
+    bool valueSet;
+    bool m_isCashAmount;
 };
+
 Q_DECLARE_OPERATORS_FOR_FLAGS(AmountEditPrivate::Items)
 
 void AmountEdit::setReadOnly(bool ro)
@@ -228,7 +367,13 @@ AmountEdit::AmountEdit(QWidget *parent, const int prec) :
     if (prec < -1 || prec > 20) {
         d->m_prec = AmountEdit::global()->standardPrecision();
     }
+
     d->init();
+
+    connect(d->m_currencyButton, &QToolButton::clicked, this, [&]() {
+        Q_D(AmountEdit);
+        d->swapCommodities();
+    });
 }
 
 AmountEdit::AmountEdit(const MyMoneySecurity& sec, QWidget *parent) :
@@ -237,6 +382,18 @@ AmountEdit::AmountEdit(const MyMoneySecurity& sec, QWidget *parent) :
 {
     Q_D(AmountEdit);
     d->m_prec = MyMoneyMoney::denomToPrec(sec.smallestAccountFraction());
+    d->init();
+}
+
+AmountEdit::AmountEdit(QWidget* parent, const int prec, AmountEditPrivate* dd)
+    : QLineEdit(parent)
+    , d_ptr(dd)
+{
+    Q_D(AmountEdit);
+    d->m_prec = prec;
+    if (prec < -1 || prec > 20) {
+        d->m_prec = AmountEdit::global()->standardPrecision();
+    }
     d->init();
 }
 
@@ -263,7 +420,7 @@ void AmountEdit::resizeEvent(QResizeEvent* event)
 {
     Q_UNUSED(event);
     Q_D(AmountEdit);
-    d->updateLineEditSize();
+    d->updateLineEditSize(d->m_currencyButton);
 }
 
 void AmountEdit::focusInEvent(QFocusEvent* event)
@@ -295,10 +452,11 @@ void AmountEdit::focusOutEvent(QFocusEvent* event)
         ensureFractionalPart();
 
     // in case the widget contains a different value we emit
-    // the valueChanged signal
-    if (MyMoneyMoney(text()) != MyMoneyMoney(d->m_text)) {
-        d->m_text = text();
-        emit valueChanged(d->m_text);
+    // the amountChanged signal
+    if ((d->m_value != value()) || (d->m_shares != shares())) {
+        d->m_value = value();
+        d->m_shares = shares();
+        emit amountChanged();
     }
 }
 
@@ -332,6 +490,14 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
     case Qt::Key_Return:
     case Qt::Key_Escape:
     case Qt::Key_Enter:
+        break;
+
+    case Qt::Key_Space:
+        if (event->modifiers() == Qt::ControlModifier) {
+            event->accept();
+            d->m_currencyButton->animateClick();
+            return;
+        }
         break;
 
     default:
@@ -390,39 +556,77 @@ int AmountEdit::precision() const
     return d->m_prec;
 }
 
+int AmountEdit::precision(MultiCurrencyEdit::DisplayState state) const
+{
+    Q_D(const AmountEdit);
+    return d->precision(state);
+}
+
+MultiCurrencyEdit::DisplayState AmountEdit::displayState() const
+{
+    Q_D(const AmountEdit);
+    return d->m_state;
+}
+
 bool AmountEdit::isValid() const
 {
     return !(text().isEmpty());
 }
 
-QString AmountEdit::numericalText() const
-{
-    return value().toString();
-}
-
 MyMoneyMoney AmountEdit::value() const
 {
     Q_D(const AmountEdit);
-    MyMoneyMoney money(text());
-    if (d->m_prec != -1)
-        money = money.convert(MyMoneyMoney::precToDenom(d->m_prec));
-    return money;
+    MyMoneyMoney money(d->m_valueText);
+    return d->adjustToPrecision(AmountEdit::DisplayValue, money);
 }
 
-void AmountEdit::setValue(const MyMoneyMoney& value)
+void AmountEdit::setValue(const MyMoneyMoney& amount)
 {
     Q_D(AmountEdit);
-    // load the value into the widget but don't use thousandsSeparators
-    setText(value.formatMoney(QString(), d->m_prec, false));
+    if (d->sharesSet && !d->valueSet) {
+        qWarning() << objectName() << "Call AmountEdit::setValue() before AmountEdit::setShares(). Fix source code!";
+    }
+    if (d->valueSet && (amount == d->m_value))
+        return;
+
+    d->valueSet = true;
+    d->m_value = amount;
+    const auto txt(amount.formatMoney(QString(), d->precision(AmountEdit::DisplayValue), false));
+    d->setValueText(txt);
+
+    if (!hasMultipleCurrencies()) {
+        setShares(amount);
+    }
 }
 
-void AmountEdit::setText(const QString& txt)
+MyMoneyMoney AmountEdit::shares() const
+{
+    Q_D(const AmountEdit);
+    MyMoneyMoney money(d->m_sharesText);
+    return d->adjustToPrecision(AmountEdit::DisplayShares, money);
+}
+
+void AmountEdit::setShares(const MyMoneyMoney& amount)
 {
     Q_D(AmountEdit);
-    d->m_text = txt;
-    if (isEnabled() && !txt.isEmpty())
-        d->ensureFractionalPart(d->m_text);
-    QLineEdit::setText(d->m_text);
+    d->sharesSet = !d->valueSet;
+    d->m_shares = amount;
+
+    const auto txt(amount.formatMoney(QString(), d->precision(AmountEdit::DisplayShares), false));
+    d->setSharesText(txt);
+
+    if (!d->m_shares.isZero()) {
+        d->m_initialExchangeRate = d->m_value / d->m_shares;
+    }
+}
+
+void AmountEdit::clear()
+{
+    Q_D(AmountEdit);
+    d->m_sharesText.clear();
+    d->m_valueText.clear();
+    QLineEdit::clear();
+    d->m_previousText.clear();
 }
 
 void AmountEdit::theTextChanged(const QString & theText)
@@ -448,11 +652,28 @@ void AmountEdit::theTextChanged(const QString & theText)
             QLineEdit::setText(d->m_previousText);
         else {
             d->m_previousText = l_text;
+
+            if (!l_text.isEmpty()) {
+                // adjust value or shares depending on state
+                // by using the initialExchangeRate
+                if (d->m_state == AmountEdit::DisplayValue) {
+                    d->m_valueText = l_text;
+                    MyMoneyMoney amount(l_text);
+                    d->adjustToPrecision(AmountEdit::DisplayValue, amount);
+                    amount /= d->m_initialExchangeRate;
+                    d->m_sharesText = amount.formatMoney(QString(), d->precision(AmountEdit::DisplayShares), false);
+                } else {
+                    d->m_sharesText = l_text;
+                    MyMoneyMoney amount(l_text);
+                    d->adjustToPrecision(AmountEdit::DisplayShares, amount);
+                    amount *= d->m_initialExchangeRate;
+                    d->m_valueText = amount.formatMoney(QString(), d->precision(AmountEdit::DisplayValue), false);
+                }
+            }
             emit validatedTextChanged(text());
         }
     }
 }
-
 
 void AmountEdit::slotCalculatorOpen()
 {
@@ -473,12 +694,9 @@ void AmountEdit::slotCalculatorResult()
     Q_D(AmountEdit);
     slotCalculatorClose();
     if (d->m_calculator != 0) {
-        setText(d->m_calculator->result());
-        ensureFractionalPart();
-        emit valueChanged(text());
-#if 0
-        d->m_text = text();
-#endif
+        MyMoneyMoney amount(d->m_calculator->result());
+        d->adjustToPrecision(d->m_state, amount);
+        theTextChanged(amount.formatMoney(QString(), d->precision(d->m_state), false));
     }
 }
 
@@ -486,8 +704,8 @@ void AmountEdit::setCalculatorButtonVisible(const bool show)
 {
     Q_D(AmountEdit);
     d->m_calculatorButton->setVisible(show);
-    d->m_items.setFlag(AmountEditPrivate::ShowCalculator, show);
-    d->updateLineEditSize();
+    d->m_actionIcons.setFlag(AmountEditPrivate::ShowCalculator, show);
+    d->updateLineEditSize(d->m_currencyButton);
 }
 
 void AmountEdit::setAllowEmpty(bool allowed)
@@ -523,9 +741,94 @@ void AmountEdit::ensureFractionalPart()
 void AmountEdit::setCurrencySymbol(const QString& symbol, const QString& name)
 {
     Q_D(AmountEdit);
-    d->m_currencySymbol->setText(symbol);
-    d->m_currencySymbol->setToolTip(name);
-    d->m_currencySymbol->setHidden(symbol.isEmpty());
-    d->m_items.setFlag(AmountEditPrivate::ShowCurrencySymbol, !symbol.isEmpty());
-    d->updateLineEditSize();
+    d->setCurrencySymbol(symbol, name);
+}
+
+void AmountEdit::setDisplayState(AmountEdit::DisplayState state)
+{
+    Q_D(AmountEdit);
+    if (state != d->m_state) {
+        d->m_state = state;
+        d->updateWidgets();
+        emit displayStateChanged(state);
+    }
+}
+
+void AmountEdit::setShowShares(bool show)
+{
+    if (!show) {
+        setShowValue();
+        return;
+    }
+    setDisplayState(AmountEdit::DisplayShares);
+}
+
+void AmountEdit::setShowValue(bool show)
+{
+    if (!show) {
+        setShowShares();
+        return;
+    }
+    setDisplayState(AmountEdit::DisplayValue);
+}
+
+void AmountEdit::setCommodity(const MyMoneySecurity& commodity)
+{
+    Q_D(AmountEdit);
+    d->m_sharesCommodity = commodity;
+    d->m_valueCommodity = commodity;
+    d->updateWidgets();
+}
+
+void AmountEdit::setSharesCommodity(const MyMoneySecurity& commodity)
+{
+    Q_D(AmountEdit);
+    if (d->m_sharesCommodity.id() != commodity.id()) {
+        d->m_sharesCommodity = commodity;
+        d->updateWidgets();
+    }
+}
+
+MyMoneySecurity AmountEdit::sharesCommodity() const
+{
+    Q_D(const AmountEdit);
+    return d->m_sharesCommodity;
+}
+
+void AmountEdit::setValueCommodity(const MyMoneySecurity& commodity)
+{
+    Q_D(AmountEdit);
+    if (d->m_valueCommodity.id() != commodity.id()) {
+        d->m_valueCommodity = commodity;
+        d->updateWidgets();
+    }
+}
+
+MyMoneySecurity AmountEdit::valueCommodity() const
+{
+    Q_D(const AmountEdit);
+    return d->m_valueCommodity;
+}
+
+void AmountEdit::setInitialExchangeRate(const MyMoneyMoney& price)
+{
+    Q_D(AmountEdit);
+    d->m_initialExchangeRate = price;
+}
+
+MyMoneyMoney AmountEdit::initialExchangeRate() const
+{
+    Q_D(const AmountEdit);
+    return d->m_initialExchangeRate;
+}
+
+QWidget* AmountEdit::widget()
+{
+    return this;
+}
+
+bool AmountEdit::hasMultipleCurrencies() const
+{
+    Q_D(const AmountEdit);
+    return d->hasMultipleCurrencies();
 }

@@ -273,7 +273,10 @@ void Activity::loadPriceWidget(const MyMoneySplit & split)
     Q_D(const Activity);
     auto priceEdit = d->haveWidget<AmountEdit>("priceAmountEdit");
 
-    if (priceEdit) {
+    if (priceEdit && !split.accountId().isEmpty()) {
+        const auto account = MyMoneyFile::instance()->account(split.accountId());
+        const auto currency = MyMoneyFile::instance()->currency(account.tradingCurrencyId());
+        priceEdit->setCommodity(currency);
         if (d->priceMode() == eDialogs::PriceMode::PricePerTransaction) {
             priceEdit->setValue(split.value());
         } else {

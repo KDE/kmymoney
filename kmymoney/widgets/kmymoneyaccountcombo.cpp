@@ -113,7 +113,6 @@ KMyMoneyAccountCombo::KMyMoneyAccountCombo(QWidget *parent)
 
 void KMyMoneyAccountCombo::init()
 {
-    setObjectName("ComboBox");
     setMaxVisibleItems(15);
     setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLength);
 }
@@ -127,7 +126,6 @@ void KMyMoneyAccountCombo::setEditable(bool isEditable)
     KComboBox::setEditable(isEditable);
     // don't do the standard behavior
     if(lineEdit()) {
-        lineEdit()->setObjectName("AccountComboLineEdit");
         lineEdit()->setClearButtonEnabled(true);
         connect(lineEdit(), &QLineEdit::textEdited, this, &KMyMoneyAccountCombo::makeCompletion, Qt::UniqueConnection);
         installEventFilter(this);
@@ -276,10 +274,6 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
         setCurrentIndex(idx.row());
         setRootModelIndex(QModelIndex());
         blocker.unblock();
-
-        if(isEditable()) {
-            lineEdit()->setText(idx.data(eMyMoney::Model::AccountFullNameRole).toString());
-        }
         emit accountSelected(id);
     }
 }
@@ -352,7 +346,7 @@ void KMyMoneyAccountCombo::selectItem(const QModelIndex& index)
     if (index.model() != model()) {
         qDebug() << "KMyMoneyAccountCombo::selectItem called with wrong model" << index;
     }
-    if(index.isValid() && (index.model()->flags(index) & Qt::ItemIsSelectable)) {
+    if (index.model()->flags(index) & Qt::ItemIsSelectable) {
         // delay the call until the next time in the event loop
         QMetaObject::invokeMethod(this, "setSelected", Qt::QueuedConnection, Q_ARG(QString, index.data(eMyMoney::Model::Roles::IdRole).toString()));
     }
@@ -443,6 +437,13 @@ QTreeView* KMyMoneyAccountCombo::popup() const
     return d->m_popupView;
 }
 
+void KMyMoneyAccountCombo::clearSelection()
+{
+    d->m_lastSelectedAccount.clear();
+    setCurrentIndex(-1);
+    setCurrentText(QString());
+}
+
 class KMyMoneyAccountComboSplitHelperPrivate
 {
     Q_DISABLE_COPY(KMyMoneyAccountComboSplitHelperPrivate)
@@ -472,16 +473,16 @@ KMyMoneyAccountComboSplitHelper::KMyMoneyAccountComboSplitHelper(QComboBox* acco
     d->m_accountCombo = accountCombo;
     d->m_splitModel = model;
 
-    connect(model, &QAbstractItemModel::dataChanged, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged);
-    connect(model, &QAbstractItemModel::rowsRemoved, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged, Qt::QueuedConnection);
-    connect(model, &QAbstractItemModel::modelReset, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged, Qt::QueuedConnection);
+    connect(model, &QAbstractItemModel::dataChanged, this, &KMyMoneyAccountComboSplitHelper::updateWidget);
+    connect(model, &QAbstractItemModel::rowsRemoved, this, &KMyMoneyAccountComboSplitHelper::updateWidget, Qt::QueuedConnection);
+    connect(model, &QAbstractItemModel::modelReset, this, &KMyMoneyAccountComboSplitHelper::updateWidget, Qt::QueuedConnection);
     connect(model, &QAbstractItemModel::destroyed, this, &KMyMoneyAccountComboSplitHelper::modelDestroyed);
 
     accountCombo->installEventFilter(this);
     if (accountCombo->lineEdit()) {
         accountCombo->lineEdit()->installEventFilter(this);
     }
-    splitCountChanged();
+    updateWidget();
 }
 
 KMyMoneyAccountComboSplitHelper::~KMyMoneyAccountComboSplitHelper()
@@ -539,7 +540,7 @@ void KMyMoneyAccountComboSplitHelper::modelDestroyed()
     d->m_splitModel = nullptr;
 }
 
-void KMyMoneyAccountComboSplitHelper::splitCountChanged()
+void KMyMoneyAccountComboSplitHelper::updateWidget()
 {
     Q_D(KMyMoneyAccountComboSplitHelper);
     // sanity check
@@ -552,6 +553,7 @@ void KMyMoneyAccountComboSplitHelper::splitCountChanged()
     bool disabled = false;
 
     const auto rows = d->m_splitModel->rowCount();
+    const auto accountCombo = qobject_cast<KMyMoneyAccountCombo*>(d->m_accountCombo);
     switch (rows) {
     case 0:
         d->m_accountCombo->setCurrentIndex(-1);
@@ -564,14 +566,23 @@ void KMyMoneyAccountComboSplitHelper::splitCountChanged()
                   1,
                   Qt::MatchFlags(Qt::MatchExactly | Qt::MatchWrap | Qt::MatchRecursive));
         if (indexes.isEmpty()) {
-            d->m_accountCombo->setCurrentIndex(-1);
-            d->m_accountCombo->setCurrentText(QString());
+            if (accountCombo) {
+                accountCombo->clearSelection();
+            } else {
+                d->m_accountCombo->setCurrentIndex(-1);
+                d->m_accountCombo->setCurrentText(QString());
+            }
         } else {
             const auto idx = indexes.first();
-            QSignalBlocker comboBoxBlocker(d->m_accountCombo);
-            d->m_accountCombo->setRootModelIndex(idx.parent());
-            d->m_accountCombo->setCurrentIndex(idx.row());
-            d->m_accountCombo->setRootModelIndex(QModelIndex());
+            if (accountCombo) {
+                const auto accountId = idx.data(eMyMoney::Model::IdRole).toString();
+                accountCombo->setSelected(accountId);
+            } else {
+                QSignalBlocker comboBoxBlocker(d->m_accountCombo);
+                d->m_accountCombo->setRootModelIndex(idx.parent());
+                d->m_accountCombo->setCurrentIndex(idx.row());
+                d->m_accountCombo->setRootModelIndex(QModelIndex());
+            }
         }
         break;
     default:
@@ -604,5 +615,3 @@ void KMyMoneyAccountComboSplitHelper::splitCountChanged()
 
     d->m_norecursive = false;
 }
-
-// kate: space-indent on; indent-width 2; remove-trailing-space on; remove-trailing-space-save on;

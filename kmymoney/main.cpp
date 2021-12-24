@@ -10,13 +10,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
-#include <QStringList>
 #include <QApplication>
 #include <QCommandLineParser>
-#include <QStandardPaths>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QStandardPaths>
+#include <QStringList>
+#include <QWidget>
 #ifdef KMM_DBUS
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
