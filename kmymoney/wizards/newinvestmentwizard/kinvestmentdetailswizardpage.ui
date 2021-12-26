@@ -107,7 +107,7 @@
         </widget>
        </item>
        <item>
-        <widget class="AmountEdit" name="m_fraction" native="true"/>
+        <widget class="AmountEdit" name="m_fraction"/>
        </item>
       </layout>
      </item>
@@ -218,7 +218,7 @@ number</string>
         <number>2</number>
        </property>
        <property name="maximum">
-        <number>10</number>
+        <number>20</number>
        </property>
       </widget>
      </item>

@@ -484,7 +484,7 @@ void MyMoneyMoneyTest::testFormatMoney()
     QVERIFY(m1.formatMoney("", 10) == QString("2.6666000000"));
 
     m1 = MyMoneyMoney(-1404, 100);
-    QVERIFY(m1.formatMoney("", -1) == QString("-14.04"));
+    QCOMPARE(m1.formatMoney("", -1), QStringLiteral("-14.04"));
 }
 
 void MyMoneyMoneyTest::testRelation()
@@ -736,4 +736,11 @@ void MyMoneyMoneyTest::testZeroDenominator()
 {
     QVERIFY_EXCEPTION_THROWN(MyMoneyMoney m((int)1, 0), MyMoneyException);
     QVERIFY_EXCEPTION_THROWN(MyMoneyMoney m((signed64)1, 0), MyMoneyException);
+}
+
+void MyMoneyMoneyTest::testMaxPrecision()
+{
+    auto m1 = MyMoneyMoney("1.12345678921234567893123");
+    QCOMPARE(m1.toString(), QStringLiteral("112345678921234567893123/100000000000000000000000"));
+    QCOMPARE(m1.formatMoney("", -1), QStringLiteral("1.12345678921234567893"));
 }
