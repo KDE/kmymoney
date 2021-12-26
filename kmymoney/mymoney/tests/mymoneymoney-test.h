@@ -43,6 +43,7 @@ private Q_SLOTS:
     void testNegativeStringConstructor();
     void testReduce();
     void testZeroDenominator();
+    void testMaxPrecision();
 };
 
 #endif

@@ -96,6 +96,19 @@ public:
     static int denomToPrec(signed64 fract);
 
     MyMoneyMoney convert(const signed64 denom = 100, const AlkValue::RoundingMethod how = AlkValue::RoundRound) const;
+
+    /**
+     * Returns the current value converted to the given @a denom.
+     * The rounding method used is controlled by the @a how argument
+     * and defaults to @p RoundRound.
+     *
+     * @param denom The wanted denominator (defaults to 100 or 2 digits)
+     * @param how The rounding method. See AlkValue::RoundingMethod for details
+     *
+     * @note This should eventually be moved to AlkValue
+     */
+    MyMoneyMoney convertDenominator(mpz_class denom = 100, const AlkValue::RoundingMethod how = AlkValue::RoundRound) const;
+
     static signed64 precToDenom(int prec);
     double toDouble() const;
 

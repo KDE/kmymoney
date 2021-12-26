@@ -1,6 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2000-2004 Michael Edwardes <mte@users.sourceforge.net>
-    SPDX-FileCopyrightText: 2001-2017 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2001-2021 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-FileCopyrightText: 2001-2002 Felix Rodriguez <frodriguez@users.sourceforge.net>
     SPDX-FileCopyrightText: 2002-2004 Kevin Tambascio <ktambascio@users.sourceforge.net>
     SPDX-FileCopyrightText: 2005 Ace Jones <acejones@users.sourceforge.net>
@@ -23,6 +23,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDebug>
 #include <QString>
 
 // ----------------------------------------------------------------------------
@@ -200,44 +201,18 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
     int tmpPrec = prec;
     mpz_class denom = 1;
     mpz_class value;
+    const int maxPrecision = 20;
 
     // if prec == -1 we want the maximum possible but w/o trailing zeroes
-    if (tmpPrec > -1) {
-        while (tmpPrec--) {
-            denom *= 10;
-        }
-    } else {
-        // fix it to a max of 9 digits on the right side for now
-        denom = 1000000000;
+    if (tmpPrec == -1) {
+        tmpPrec = maxPrecision;
     }
+    mpz_ui_pow_ui(denom.get_mpz_t(), 10, tmpPrec);
 
-    // as long as AlkValue::convertDenominator() does not take an
-    // mpz_class as the denominator, we need to use a signed int
-    // and limit the precision to 9 digits (the max we can
-    // present with 31 bits
-#if 1
-    // MPIR and GMP use different types for the return value of mpz_get_si()
-    // which causes warnings on some compilers.
-#ifdef mpir_version     // MPIR is used
-    mpir_si denominator;
-#else                   // GMP is used
-    long int denominator;
-#endif
-
-    if (mpz_fits_sint_p(denom.get_mpz_t())) {
-        denominator = mpz_get_si(denom.get_mpz_t());
-    } else {
-        denominator = 1000000000;
-    }
-    value = static_cast<const MyMoneyMoney>(convertDenominator(denominator)).valueRef().get_num();
-#else
     value = static_cast<const MyMoneyMoney>(convertDenominator(denom)).valueRef().get_num();
-#endif
 
-    // Once we really support multiple currencies then this method will
-    // be much better than using KLocale::global()->formatMoney.
     bool bNegative = false;
-    mpz_class left = value / static_cast<MyMoneyMoney>(convertDenominator(denominator)).valueRef().get_den();
+    mpz_class left = value / static_cast<MyMoneyMoney>(convertDenominator(denom)).valueRef().get_den();
     mpz_class right = mpz_class((valueRef() - mpq_class(left)) * denom);
 
     if (right < 0) {
@@ -268,7 +243,7 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
         if (prec != -1)
             rs = rs.rightJustified(prec, QLatin1Char('0'), true);
         else {
-            rs = rs.rightJustified(9, QLatin1Char('0'), true);
+            rs = rs.rightJustified(maxPrecision, QLatin1Char('0'), true);
             // no trailing zeroes or decimal separators
             while (rs.endsWith(QLatin1Char('0')))
                 rs.truncate(rs.length() - 1);
@@ -395,7 +370,7 @@ bool MyMoneyMoney::isAutoCalc() const
 
 MyMoneyMoney MyMoneyMoney::convert(const signed64 _denom, const AlkValue::RoundingMethod how) const
 {
-    return static_cast<const MyMoneyMoney>(convertDenominator(_denom, how));
+    return static_cast<const MyMoneyMoney>(AlkValue::convertDenominator(_denom, how));
 }
 
 MyMoneyMoney MyMoneyMoney::reduce() const
@@ -430,3 +405,129 @@ int MyMoneyMoney::denomToPrec(signed64 fract)
     return rc;
 }
 
+/**
+ * @todo Eventually move this to AlkValue
+ */
+MyMoneyMoney MyMoneyMoney::convertDenominator(mpz_class denom, const AlkValue::RoundingMethod how) const
+{
+    MyMoneyMoney in(*this);
+    mpz_class in_num(mpq_numref(in.valueRef().get_mpq_t()));
+
+    MyMoneyMoney out; // initialize to zero
+
+    int sign = sgn(in_num);
+    if (sign != 0) {
+        // sign is either -1 for negative numbers or +1 in all other cases
+
+        MyMoneyMoney temp;
+        // only process in case the denominators are different
+        if (mpz_cmpabs(denom.get_mpz_t(), mpq_denref(valueRef().get_mpq_t())) != 0) {
+            mpz_class in_denom(mpq_denref(in.valueRef().get_mpq_t()));
+            mpz_class out_num, out_denom;
+
+            if (sgn(in_denom) == -1) { // my denom is negative
+                in_num = in_num * (-in_denom);
+                in_num = 1;
+            }
+
+            mpz_class remainder;
+            int denom_neg = 0;
+
+            // if the denominator is less than zero, we are to interpret it as
+            // the reciprocal of its magnitude.
+            if (sgn(denom) < 0) {
+                mpz_class temp_a;
+                mpz_class temp_bc;
+                denom = -denom;
+                denom_neg = 1;
+                temp_a = ::abs(in_num);
+                temp_bc = in_denom * denom;
+                remainder = temp_a % temp_bc;
+                out_num = temp_a / temp_bc;
+                out_denom = denom;
+            } else {
+                temp = AlkValue(denom, in_denom);
+                // the canonicalization required here is part of the ctor
+                // temp.d->m_val.canonicalize();
+
+                out_num = ::abs(in_num * temp.valueRef().get_num());
+                remainder = out_num % temp.valueRef().get_den();
+                out_num = out_num / temp.valueRef().get_den();
+                out_denom = denom;
+            }
+
+            if (remainder != 0) {
+                switch (how) {
+                case RoundFloor:
+                    if (sign < 0) {
+                        out_num = out_num + 1;
+                    }
+                    break;
+
+                case RoundCeil:
+                    if (sign > 0) {
+                        out_num = out_num + 1;
+                    }
+                    break;
+
+                case RoundTruncate:
+                    break;
+
+                case RoundPromote:
+                    out_num = out_num + 1;
+                    break;
+
+                case RoundHalfDown:
+                    if (denom_neg) {
+                        if ((2 * remainder) > (in_denom * denom)) {
+                            out_num = out_num + 1;
+                        }
+                    } else if ((2 * remainder) > (temp.valueRef().get_den())) {
+                        out_num = out_num + 1;
+                    }
+                    break;
+
+                case RoundHalfUp:
+                    if (denom_neg) {
+                        if ((2 * remainder) >= (in_denom * denom)) {
+                            out_num = out_num + 1;
+                        }
+                    } else if ((2 * remainder) >= temp.valueRef().get_den()) {
+                        out_num = out_num + 1;
+                    }
+                    break;
+
+                case RoundRound:
+                    if (denom_neg) {
+                        if ((remainder * 2) > (in_denom * denom)) {
+                            out_num = out_num + 1;
+                        } else if ((2 * remainder) == (in_denom * denom)) {
+                            if ((out_num % 2) != 0) {
+                                out_num = out_num + 1;
+                            }
+                        }
+                    } else {
+                        if ((remainder * 2) > temp.valueRef().get_den()) {
+                            out_num = out_num + 1;
+                        } else if ((2 * remainder) == temp.valueRef().get_den()) {
+                            if ((out_num % 2) != 0) {
+                                out_num = out_num + 1;
+                            }
+                        }
+                    }
+                    break;
+
+                case RoundNever:
+                    qWarning() << "AlkValue: have remainder" << toString() << "->convertDenominator()";
+                    break;
+                }
+            }
+
+            // construct the new output value
+            out = AlkValue(out_num * sign, out_denom);
+        } else {
+            out = *this;
+        }
+    }
+    return out;
+}
