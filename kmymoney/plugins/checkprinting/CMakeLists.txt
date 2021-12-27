@@ -42,8 +42,6 @@ ki18n_wrap_ui(kcm_checkprinting_PART_SRCS checkprintingsettingsdecl.ui)
 
 kmymoney_add_plugin_kcm(kcm_checkprinting SOURCES ${kcm_checkprinting_PART_SRCS})
 
-kcoreaddons_desktop_to_json(kcm_checkprinting kcm_checkprinting.desktop)
-
 target_link_libraries(
                       kcm_checkprinting
                       checkprinting_settings_static

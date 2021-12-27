@@ -8,9 +8,10 @@
 #include <config-kmymoney-version.h>
 
 // KDE includes
-#include <KPluginFactory>
-#include <KAboutData>
+#include "kmymoneypluginclass.h"
 #include "kmymoneysettings.h"
+#include <KAboutData>
+#include <KPluginFactory>
 
 ForecastViewSettingsWidget::ForecastViewSettingsWidget(QWidget* parent) :
     QWidget(parent)
@@ -35,6 +36,6 @@ KCMForecastView::~KCMForecastView()
 {
 }
 
-K_PLUGIN_CLASS_WITH_JSON(KCMForecastView, "kcm_forecastview.json")
+K_PLUGIN_CLASS(KCMForecastView)
 
 #include "kcm_forecastview.moc"

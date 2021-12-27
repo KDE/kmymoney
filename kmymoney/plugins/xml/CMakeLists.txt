@@ -49,8 +49,6 @@ ki18n_wrap_ui(kcm_xmlstorage_PART_SRCS xmlstoragesettings.ui)
 
 kmymoney_add_plugin_kcm(kcm_xmlstorage SOURCES ${kcm_xmlstorage_PART_SRCS})
 
-kcoreaddons_desktop_to_json(kcm_xmlstorage kcm_xmlstorage.desktop)
-
 target_link_libraries(kcm_xmlstorage
   PRIVATE
     KF5::I18n

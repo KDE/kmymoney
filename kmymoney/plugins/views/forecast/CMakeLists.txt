@@ -36,8 +36,6 @@ ki18n_wrap_ui(kcm_forecastview_PART_SRCS forecastviewsettings.ui)
 
 kmymoney_add_plugin_kcm(kcm_forecastview SOURCES ${kcm_forecastview_PART_SRCS})
 
-kcoreaddons_desktop_to_json(kcm_forecastview kcm_forecastview.desktop)
-
 target_link_libraries(kcm_forecastview
                       forecast_settings_static
                       KF5::I18n

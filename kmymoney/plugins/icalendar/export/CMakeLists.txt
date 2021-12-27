@@ -39,8 +39,6 @@ ki18n_wrap_ui(kcm_icalendarexporter_PART_SRCS icalendarsettingsdecl.ui)
 
 kmymoney_add_plugin_kcm(kcm_icalendarexporter SOURCES ${kcm_icalendarexporter_PART_SRCS})
 
-kcoreaddons_desktop_to_json(kcm_icalendarexporter kcm_icalendarexporter.desktop)
-
 target_link_libraries(kcm_icalendarexporter
   icalendar_settings_static
   KF5::I18n

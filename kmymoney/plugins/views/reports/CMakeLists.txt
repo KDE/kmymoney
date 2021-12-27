@@ -63,8 +63,6 @@ ki18n_wrap_ui(kcm_reportsview_PART_SRCS reportsviewsettings.ui)
 
 kmymoney_add_plugin_kcm(kcm_reportsview SOURCES ${kcm_reportsview_PART_SRCS})
 
-kcoreaddons_desktop_to_json(kcm_reportsview kcm_reportsview.desktop)
-
 target_link_libraries(kcm_reportsview
                       KF5::I18n
                       KF5::ConfigWidgets

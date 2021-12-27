@@ -11,9 +11,10 @@
 #include <QBoxLayout>
 
 // KDE includes
-#include <KPluginFactory>
-#include <KLocalizedString>
+#include "kmymoneypluginclass.h"
 #include <KAboutData>
+#include <KLocalizedString>
+#include <KPluginFactory>
 
 #include "icalendarsettings.h"
 #include "ui_icalendarsettingsdecl.h"
@@ -61,9 +62,6 @@ KCMiCalendarExporter::~KCMiCalendarExporter()
 {
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(kcm_icalendarexporter_factory,
-                           "kcm_icalendarexporter.json",
-                           registerPlugin<KCMiCalendarExporter>();
-                          )
+K_PLUGIN_CLASS(KCMiCalendarExporter)
 
 #include "kcm_icalendarexporter.moc"

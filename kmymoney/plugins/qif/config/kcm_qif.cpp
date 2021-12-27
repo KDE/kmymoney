@@ -8,8 +8,9 @@
 
 // KDE includes
 
-#include <KPluginFactory>
+#include "kmymoneypluginclass.h"
 #include <KAboutData>
+#include <KPluginFactory>
 
 #include "mymoneyqifprofileeditor.h"
 
@@ -23,6 +24,6 @@ KCMqif::KCMqif(QWidget *parent, const QVariantList& args) : KCModule(parent, arg
     load();
 }
 
-K_PLUGIN_CLASS_WITH_JSON(KCMqif, "kcm_qif.json")
+K_PLUGIN_CLASS(KCMqif)
 
 #include "kcm_qif.moc"

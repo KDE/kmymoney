@@ -20,6 +20,7 @@
 // Project Includes
 
 #include "kgpgfile.h"
+#include "kmymoneypluginclass.h"
 #include "kmymoneysettings.h"
 
 #define RECOVER_KEY_ID      "0xD2B08440"
@@ -203,6 +204,6 @@ KCMXMLStorage::~KCMXMLStorage()
 {
 }
 
-K_PLUGIN_CLASS_WITH_JSON(KCMXMLStorage, "kcm_xmlstorage.json")
+K_PLUGIN_CLASS(KCMXMLStorage)
 
 #include "kcm_xmlstorage.moc"

@@ -25,8 +25,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_reportsviewsettings.h"
+#include "kmymoneypluginclass.h"
 #include "kmymoneysettings.h"
+#include "ui_reportsviewsettings.h"
 
 class ReportsViewSettingsWidgetPrivate
 {
@@ -197,6 +198,6 @@ KCMReportsView::~KCMReportsView()
 {
 }
 
-K_PLUGIN_CLASS_WITH_JSON(KCMReportsView, "kcm_reportsview.json")
+K_PLUGIN_CLASS(KCMReportsView)
 
 #include "kcm_reportsview.moc"

@@ -62,8 +62,6 @@ ki18n_wrap_ui(kcm_csvimporter_PART_SRCS pluginsettingsdecl.ui)
 
 kmymoney_add_plugin_kcm(kcm_csvimporter SOURCES ${kcm_csvimporter_PART_SRCS})
 
-kcoreaddons_desktop_to_json(kcm_csvimporter kcm_csvimporter.desktop)
-
 target_link_libraries(kcm_csvimporter
                       csvimporter_settings_static
                       KF5::I18n

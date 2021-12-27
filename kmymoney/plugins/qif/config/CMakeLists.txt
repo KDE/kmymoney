@@ -8,7 +8,6 @@ ki18n_wrap_ui(kcm_qif_PART_SRCS mymoneyqifprofileeditor.ui)
 
 if(ENABLE_QIFIMPORTER OR ENABLE_QIFEXPORTER)
   kmymoney_add_plugin_kcm(kcm_qif SOURCES ${kcm_qif_PART_SRCS})
-  kcoreaddons_desktop_to_json(kcm_qif kcm_qif.desktop)
   target_link_libraries(kcm_qif
                         qif_common_static
                         kmm_mymoney

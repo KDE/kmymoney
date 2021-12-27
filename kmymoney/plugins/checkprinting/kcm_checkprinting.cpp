@@ -11,8 +11,9 @@
 #include <QTextEdit>
 
 // KDE includes
-#include <KPluginFactory>
+#include "kmymoneypluginclass.h"
 #include <KAboutData>
+#include <KPluginFactory>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -120,6 +121,6 @@ KCMCheckPrinting::~KCMCheckPrinting()
 {
 }
 
-K_PLUGIN_CLASS_WITH_JSON(KCMCheckPrinting, "kcm_checkprinting.json")
+K_PLUGIN_CLASS(KCMCheckPrinting)
 
 #include "kcm_checkprinting.moc"

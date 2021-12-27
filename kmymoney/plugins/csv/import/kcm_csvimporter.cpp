@@ -8,9 +8,10 @@
 #include <config-kmymoney-version.h>
 
 // KDE includes
-#include <KPluginFactory>
-#include <KAboutData>
+#include "kmymoneypluginclass.h"
 #include "pluginsettings.h"
+#include <KAboutData>
+#include <KPluginFactory>
 
 CSVImporterSettingsWidget::CSVImporterSettingsWidget(QWidget* parent) :
     QWidget(parent)
@@ -34,6 +35,6 @@ KCMCSVImporter::~KCMCSVImporter()
 {
 }
 
-K_PLUGIN_CLASS_WITH_JSON(KCMCSVImporter, "kcm_csvimporter.json")
+K_PLUGIN_CLASS(KCMCSVImporter)
 
 #include "kcm_csvimporter.moc"
