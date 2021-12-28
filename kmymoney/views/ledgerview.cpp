@@ -450,8 +450,13 @@ LedgerView::LedgerView(QWidget* parent)
     // setup context menu
     setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, &QWidget::customContextMenuRequested, this, [&](QPoint pos) {
-        const auto menuType = d->updateDynamicActions();
-        emit requestCustomContextMenu(menuType, viewport()->mapToGlobal(pos));
+        const auto col = columnAt(pos.x());
+        const auto row = rowAt(pos.y());
+        const auto idx = model()->index(row, col);
+        if (idx.flags() & Qt::ItemIsSelectable) {
+            const auto menuType = d->updateDynamicActions();
+            emit requestCustomContextMenu(menuType, viewport()->mapToGlobal(pos));
+        }
     });
     setTabKeyNavigation(false);
 }
@@ -683,96 +688,98 @@ bool LedgerView::viewportEvent(QEvent* event)
 
 void LedgerView::mousePressEvent(QMouseEvent* event)
 {
-    if ((state() != QAbstractItemView::EditingState) && (event->button() == Qt::LeftButton)) {
+    if (state() != QAbstractItemView::EditingState) {
         QTableView::mousePressEvent(event);
-        // a click on the reconciliation column triggers the Mark transaction action
-        switch (columnAt(event->pos().x())) {
-        case JournalModel::Column::Reconciliation:
-            pActions[eMenu::Action::ToggleReconciliationFlag]->trigger();
-            break;
+        if (event->button() == Qt::LeftButton) {
+            // a click on the reconciliation column triggers the Mark transaction action
+            switch (columnAt(event->pos().x())) {
+            case JournalModel::Column::Reconciliation:
+                pActions[eMenu::Action::ToggleReconciliationFlag]->trigger();
+                break;
 
-        case JournalModel::Column::Detail: {
-            const auto col = columnAt(event->x());
-            const auto row = rowAt(event->y());
-            const auto idx = model()->index(row, col);
-            const auto iconIndex = d->iconClickIndex(idx, event->pos());
-            const auto statusRoles = this->statusRoles(idx);
+            case JournalModel::Column::Detail: {
+                const auto col = columnAt(event->x());
+                const auto row = rowAt(event->y());
+                const auto idx = model()->index(row, col);
+                const auto iconIndex = d->iconClickIndex(idx, event->pos());
+                const auto statusRoles = this->statusRoles(idx);
 
-            KGuiItem buttonYes = KStandardGuiItem::yes();
-            KGuiItem buttonNo = KStandardGuiItem::no();
-            KGuiItem buttonCancel = KStandardGuiItem::cancel();
-            KMessageBox::ButtonCode result;
+                KGuiItem buttonYes = KStandardGuiItem::yes();
+                KGuiItem buttonNo = KStandardGuiItem::no();
+                KGuiItem buttonCancel = KStandardGuiItem::cancel();
+                KMessageBox::ButtonCode result;
 
-            if (iconIndex != -1 && (iconIndex < statusRoles.count())) {
-                switch (statusRoles[iconIndex]) {
-                case eMyMoney::Model::ScheduleIsOverdueRole:
-                    buttonNo.setToolTip(i18nc("@info:tooltip No button", "Do not enter the overdue scheduled transaction."));
-                    buttonYes.setToolTip(i18nc("@info:tooltip Yes button", "Enter the overdue scheduled transaction."));
+                if (iconIndex != -1 && (iconIndex < statusRoles.count())) {
+                    switch (statusRoles[iconIndex]) {
+                    case eMyMoney::Model::ScheduleIsOverdueRole:
+                        buttonNo.setToolTip(i18nc("@info:tooltip No button", "Do not enter the overdue scheduled transaction."));
+                        buttonYes.setToolTip(i18nc("@info:tooltip Yes button", "Enter the overdue scheduled transaction."));
 
-                    result = KMessageBox::questionYesNo(this,
-                                                        i18nc("Question about the overdue action", "Do you want to enter the overdue schedule now?"),
-                                                        i18nc("@title:window", "Enter overdue schedule"),
-                                                        buttonYes,
-                                                        buttonNo);
-                    if (result == KMessageBox::ButtonCode::Yes) {
-                        pActions[eMenu::Action::EnterSchedule]->setData(idx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
-                        pActions[eMenu::Action::EnterSchedule]->trigger();
-                    }
-                    break;
-                case eMyMoney::Model::TransactionIsImportedRole:
-                    buttonNo.setToolTip(QString());
-                    buttonYes.setToolTip(i18nc("@info:tooltip Accept button", "Accept the transaction and mark it cleared."));
-
-                    result = KMessageBox::questionYesNo(this,
-                                                        i18nc("Question about the accept action", "Do you want to accept the imported transaction now?"),
-                                                        i18nc("@title:window", "Accept transaction"),
-                                                        buttonYes,
-                                                        buttonNo);
-                    if (result == KMessageBox::ButtonCode::Yes) {
-                        pActions[eMenu::Action::AcceptTransaction]->trigger();
-                    }
-                    break;
-                case eMyMoney::Model::JournalSplitIsMatchedRole: {
-                    buttonYes.setText(pActions[eMenu::Action::AcceptTransaction]->text());
-                    buttonYes.setIcon(pActions[eMenu::Action::AcceptTransaction]->icon());
-                    const auto unmatchAction = qobject_cast<KDualAction*>(pActions[eMenu::Action::MatchTransaction]);
-                    if (unmatchAction) {
-                        unmatchAction->setActive(false);
-                        buttonNo.setText(pActions[eMenu::Action::MatchTransaction]->text());
-                        buttonNo.setIcon(pActions[eMenu::Action::MatchTransaction]->icon());
-                        buttonNo.setToolTip(i18nc("@info:tooltip Unmatch button",
-                                                  "Detach the hidden (matched) transaction from the one shown and enter it into the ledger again."));
-                        buttonYes.setToolTip(
-                            i18nc("@info:tooltip Accept button", "Accept the match as shown and remove the data of the hidden (matched) transaction."));
-
-                        result = KMessageBox::questionYesNoCancel(
-                            this,
-                            i18nc("Question about the accept or unmatch action", "Do you want to accept or unmatch the matched transaction now?"),
-                            i18nc("@title:window", "Accept or unmatch transaction"),
-                            buttonYes,
-                            buttonNo,
-                            buttonCancel);
-                        switch (result) {
-                        case KMessageBox::ButtonCode::Yes:
-                            pActions[eMenu::Action::AcceptTransaction]->trigger();
-                            break;
-                        case KMessageBox::ButtonCode::No:
-                            pActions[eMenu::Action::MatchTransaction]->trigger();
-                            break;
-                        default:
-                            break;
+                        result = KMessageBox::questionYesNo(this,
+                                                            i18nc("Question about the overdue action", "Do you want to enter the overdue schedule now?"),
+                                                            i18nc("@title:window", "Enter overdue schedule"),
+                                                            buttonYes,
+                                                            buttonNo);
+                        if (result == KMessageBox::ButtonCode::Yes) {
+                            pActions[eMenu::Action::EnterSchedule]->setData(idx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
+                            pActions[eMenu::Action::EnterSchedule]->trigger();
                         }
+                        break;
+                    case eMyMoney::Model::TransactionIsImportedRole:
+                        buttonNo.setToolTip(QString());
+                        buttonYes.setToolTip(i18nc("@info:tooltip Accept button", "Accept the transaction and mark it cleared."));
+
+                        result = KMessageBox::questionYesNo(this,
+                                                            i18nc("Question about the accept action", "Do you want to accept the imported transaction now?"),
+                                                            i18nc("@title:window", "Accept transaction"),
+                                                            buttonYes,
+                                                            buttonNo);
+                        if (result == KMessageBox::ButtonCode::Yes) {
+                            pActions[eMenu::Action::AcceptTransaction]->trigger();
+                        }
+                        break;
+                    case eMyMoney::Model::JournalSplitIsMatchedRole: {
+                        buttonYes.setText(pActions[eMenu::Action::AcceptTransaction]->text());
+                        buttonYes.setIcon(pActions[eMenu::Action::AcceptTransaction]->icon());
+                        const auto unmatchAction = qobject_cast<KDualAction*>(pActions[eMenu::Action::MatchTransaction]);
+                        if (unmatchAction) {
+                            unmatchAction->setActive(false);
+                            buttonNo.setText(pActions[eMenu::Action::MatchTransaction]->text());
+                            buttonNo.setIcon(pActions[eMenu::Action::MatchTransaction]->icon());
+                            buttonNo.setToolTip(i18nc("@info:tooltip Unmatch button",
+                                                      "Detach the hidden (matched) transaction from the one shown and enter it into the ledger again."));
+                            buttonYes.setToolTip(
+                                i18nc("@info:tooltip Accept button", "Accept the match as shown and remove the data of the hidden (matched) transaction."));
+
+                            result = KMessageBox::questionYesNoCancel(
+                                this,
+                                i18nc("Question about the accept or unmatch action", "Do you want to accept or unmatch the matched transaction now?"),
+                                i18nc("@title:window", "Accept or unmatch transaction"),
+                                buttonYes,
+                                buttonNo,
+                                buttonCancel);
+                            switch (result) {
+                            case KMessageBox::ButtonCode::Yes:
+                                pActions[eMenu::Action::AcceptTransaction]->trigger();
+                                break;
+                            case KMessageBox::ButtonCode::No:
+                                pActions[eMenu::Action::MatchTransaction]->trigger();
+                                break;
+                            default:
+                                break;
+                            }
+                        }
+                        break;
                     }
-                    break;
+                    default:
+                        break;
+                    }
                 }
-                default:
-                    break;
-                }
+                break;
             }
-            break;
-        }
-        default:
-            break;
+            default:
+                break;
+            }
         }
     }
 }
