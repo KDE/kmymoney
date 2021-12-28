@@ -12,6 +12,7 @@ if (BUILD_STATIC_PLUGINS)
 else()
     set(ECM_MINIMUM_VERSION 5.71)
     set(KF5_MIN_VERSION 5.71)
+    set(AKONADI_MIN_VERSION 5.14.2)
 endif()
 
 
@@ -105,7 +106,8 @@ include(KMyMoneyMacros)
 
 find_package(PkgConfig)
 
-set (OPT_KF5_COMPONENTS DocTools Holidays Contacts Akonadi IdentityManagement Activities)
+set (OPT_KF5_COMPONENTS DocTools Holidays Contacts Activities)
+set (OPT_AKONADI_COMPONENTS Akonadi IdentityManagement)
 set (REQ_KF5_COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet XmlGui TextWidgets Notifications KIO)
 
 if (KMYMONEY_STABLE_BRANCH)
@@ -137,6 +139,10 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
   ${REQ_KF5_COMPONENTS})
 find_package(KF5 ${KF5_MIN_VERSION} OPTIONAL_COMPONENTS
   ${OPT_KF5_COMPONENTS})
+if (DEFINED AKONADI_MIN_VERSION)
+  find_package(KF5 ${AKONADI_MIN_VERSION} OPTIONAL_COMPONENTS
+    ${OPT_AKONADI_COMPONENTS})
+endif()
 
 if(LibAlkimia5_DIR)
   set(_LibAlkimia5_DIR ${LibAlkimia5_DIR})
