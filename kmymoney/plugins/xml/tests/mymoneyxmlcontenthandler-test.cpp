@@ -49,7 +49,7 @@ public:
 
     TestMyMoneyObject & operator=(TestMyMoneyObject other);
     friend void swap(TestMyMoneyObject& first, TestMyMoneyObject& second);
-    ~TestMyMoneyObject() final override
+    ~TestMyMoneyObject() override
     {
     }
 

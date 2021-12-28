@@ -100,15 +100,7 @@ public:
     {
     }
 
-    TemplateAccount(const TemplateAccount &b)
-        : id(b.id),
-          m_type(b.m_type),
-          m_name(b.m_name),
-          code(b.code),
-          parent(b.parent),
-          slotList(b.slotList)
-    {
-    }
+    TemplateAccount(const TemplateAccount& b) = default;
 
     void clear()
     {

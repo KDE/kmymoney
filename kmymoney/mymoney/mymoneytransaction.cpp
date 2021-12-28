@@ -418,7 +418,7 @@ QSet<QString> MyMoneyTransaction::referencedObjects() const
     Q_D(const MyMoneyTransaction);
     QSet<QString> ids;
     ids.insert(d->m_commodity);
-    for (const auto split : d->m_splits) {
+    for (const auto& split : d->m_splits) {
         ids.unite(split.referencedObjects());
     }
     return ids;

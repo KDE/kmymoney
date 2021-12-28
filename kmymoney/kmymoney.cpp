@@ -327,7 +327,7 @@ public:
     SelectedObjects       m_selections;
     QTimer                m_actionCollectorTimer;
 
-    typedef struct {
+    typedef struct SharedActionButtonInfo {
         QToolButton* button = nullptr;
         QAction* defaultAction = nullptr;
     } SharedActionButtonInfo;

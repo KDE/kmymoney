@@ -74,12 +74,16 @@ public:
       */
     explicit ReportAccount(const MyMoneyAccount& accountid);
 
+    ~ReportAccount() = default;
+
     /**
       * @param right The object to compare against
       * @return bool True if this account's fully-qualified hierarchy name
       * is less than that of the given qccount
       */
     bool operator<(const ReportAccount& right) const;
+
+    ReportAccount& operator=(const ReportAccount& right) = default;
 
     /**
       * Returns the price of this account's underlying currency on the indicated date,

@@ -29,7 +29,7 @@ public:
 #else
     explicit OnlineJobOutboxView(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
 #endif
-    ~OnlineJobOutboxView() final;
+    ~OnlineJobOutboxView();
 
     void plug(KXMLGUIFactory* guiFactory) final override;
     void unplug() final override;

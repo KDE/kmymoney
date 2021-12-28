@@ -822,7 +822,7 @@ void KNewAccountDlg::slotLoadInstitutions(const QString& name)
 
     QString search(i18n("(No Institution)"));
 
-    for (const auto institution : qAsConst(list)) {
+    for (const auto& institution : qAsConst(list)) {
         names << institution.name();
         if (institution.name() == name) {
             d->ui->ibanEdit->setEnabled(true);

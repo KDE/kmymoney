@@ -30,7 +30,7 @@ public:
 #else
     explicit ReportsView(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
 #endif
-    ~ReportsView() final;
+    ~ReportsView();
 
     void plug(KXMLGUIFactory* guiFactory) final override;
     void unplug() final override;
