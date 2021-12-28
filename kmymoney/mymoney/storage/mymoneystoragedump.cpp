@@ -446,8 +446,6 @@ void MyMoneyStorageDump::dumpTransaction(QTextStream& s, MyMoneyFile* file, cons
     s << "\n";
 }
 
-#define i18n QString
-
 const QString MyMoneyStorageDump::reconcileToString(eMyMoney::Split::State flag) const
 {
     QString rc;
