@@ -70,6 +70,9 @@ QVariant SchedulesJournalModel::data(const QModelIndex& index, int role) const
     case eMyMoney::Model::TransactionScheduleRole:
         return true;
 
+    case eMyMoney::Model::TransactionScheduleIdRole:
+        return entry.transaction().id();
+
     case eMyMoney::Model::TransactionIsImportedRole:
     case eMyMoney::Model::SplitMatchedRole:
         return false;

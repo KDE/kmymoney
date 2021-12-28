@@ -1100,6 +1100,7 @@ void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSel
     // build the list of selected journalEntryIds
     // and make sure the first selected is the first listed
     QStringList selectedJournalEntries;
+    QStringList selectedSchedules;
 
     int lastRow = -1;
     bool firstSelectedStillPresent(false);
@@ -1111,6 +1112,10 @@ void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSel
                 selectedJournalEntries += idx.data(eMyMoney::Model::IdRole).toString();
             } else {
                 firstSelectedStillPresent = true;
+            }
+            const auto scheduleId = idx.data(eMyMoney::Model::TransactionScheduleIdRole).toString();
+            if (!scheduleId.isEmpty()) {
+                selectedSchedules += scheduleId;
             }
         }
     }
@@ -1125,6 +1130,7 @@ void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSel
     }
 
     d->selection.setSelection(SelectedObjects::JournalEntry, selectedJournalEntries);
+    d->selection.setSelection(SelectedObjects::Schedule, selectedSchedules);
     emit transactionSelectionChanged(d->selection);
 }
 

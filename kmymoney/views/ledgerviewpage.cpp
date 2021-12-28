@@ -289,6 +289,7 @@ void LedgerViewPage::slotSettingsChanged()
 void LedgerViewPage::slotRequestSelectionChanged(const SelectedObjects& selections) const
 {
     d->selections.setSelection(SelectedObjects::JournalEntry, selections.selection(SelectedObjects::JournalEntry));
+    d->selections.setSelection(SelectedObjects::Schedule, selections.selection(SelectedObjects::Schedule));
     emit requestSelectionChanged(d->selections);
 }
 

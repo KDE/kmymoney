@@ -558,8 +558,11 @@ enum Roles {
     TransactionIsStockSplitRole,
     TransactionInvestmentAccountIdRole,
     TransactionCommodityRole,
-    TransactionScheduleRole,
     TransactionIsImportedRole,
+
+    // MyMoneySchedule
+    TransactionScheduleRole,
+    TransactionScheduleIdRole,
 
     // MyMoneySplit
     SplitSharesSuffixRole,
