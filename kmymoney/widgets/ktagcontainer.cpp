@@ -89,6 +89,7 @@ KTagContainer::KTagContainer(QWidget* parent)
     layout->setSpacing(0);
     layout->addWidget(d->m_tagCombo, 100);
     setLayout(layout);
+    setFocusPolicy(Qt::StrongFocus);
     setFocusProxy(d->m_tagCombo);
     d->m_tagCombo->lineEdit()->setPlaceholderText(i18n("Tag"));
 
@@ -96,15 +97,12 @@ KTagContainer::KTagContainer(QWidget* parent)
     d->m_idFilter.data()->setSortLocaleAware(true);
     d->m_idFilter.data()->sort(0);
 
-    connect(d->m_tagCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            [=](int row)
-    {
+    connect(d->m_tagCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int row) {
         const auto idx = d->m_tagCombo->model()->index(row, 0);
         const auto id = idx.data(eMyMoney::Model::IdRole).toString();
         d->addTagWidget(id);
         emit tagsChanged(d->tagIdList());
-    }
-           );
+    });
 }
 
 KTagContainer::~KTagContainer()

@@ -16,13 +16,13 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KConfigGroup>
+#include <KSharedConfig>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
-#include "mymoneytransaction.h"
-#include "mymoneyexception.h"
-#include "splitmodel.h"
+#include "kmymoneyutils.h"
 
 class TransactionEditorBase::Private
 {
@@ -111,4 +111,9 @@ void TransactionEditorBase::setReadOnly(bool readOnly)
 bool TransactionEditorBase::isReadOnly() const
 {
     return d->readOnly;
+}
+
+void TransactionEditorBase::setupTabOrder(const QString& name, const QStringList& defaultTabOrder)
+{
+    KMyMoneyUtils::setupTabOrder(this, name, defaultTabOrder);
 }

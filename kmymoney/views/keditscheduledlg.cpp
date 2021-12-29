@@ -64,7 +64,7 @@ public:
         : q_ptr(qq)
         , ui(new Ui::KEditScheduleDlg)
         , m_requiredFields(nullptr)
-        , m_editor(nullptr)
+        , transactionEditor(nullptr)
     {
     }
 
@@ -78,21 +78,21 @@ public:
         Q_Q(KEditScheduleDlg);
         ui->setupUi(q);
 
-        m_editor = ui->m_editor;
-        m_editor->setShowAccountCombo(true);
+        transactionEditor = ui->transactionEditor;
+        transactionEditor->setShowAccountCombo(true);
 
-        m_editor->setShowButtons(false);
-        m_editor->setFrameShape(QFrame::NoFrame);
-        m_editor->setFrameShadow(QFrame::Plain);
-        m_editor->layout()->setMargin(0);
+        transactionEditor->setShowButtons(false);
+        transactionEditor->setFrameShape(QFrame::NoFrame);
+        transactionEditor->setFrameShadow(QFrame::Plain);
+        transactionEditor->layout()->setMargin(0);
 
         m_requiredFields = new KMandatoryFieldGroup(q);
         m_requiredFields->setOkButton(ui->buttonBox->button(QDialogButtonBox::Ok)); // button to be enabled when all fields present
 
         // add the required fields to the mandatory group
-        m_requiredFields->add(ui->m_nameEdit);
+        m_requiredFields->add(ui->nameEdit);
 
-        auto accountCombo = m_editor->findChild<KMyMoneyAccountCombo*>(QLatin1String("accountCombo"));
+        auto accountCombo = transactionEditor->findChild<KMyMoneyAccountCombo*>(QLatin1String("accountCombo"));
         if (accountCombo) {
             m_requiredFields->add(accountCombo);
         }
@@ -101,59 +101,89 @@ public:
             accountCombo->setSelected(account.id());
         }
 
-        accountCombo = m_editor->findChild<KMyMoneyAccountCombo*>(QLatin1String("categoryCombo"));
+        accountCombo = transactionEditor->findChild<KMyMoneyAccountCombo*>(QLatin1String("categoryCombo"));
         if (accountCombo) {
             m_requiredFields->add(accountCombo);
         }
 
-        m_editor->loadSchedule(m_schedule);
+        transactionEditor->loadSchedule(m_schedule);
 
         // setup widget contents
-        ui->m_nameEdit->setText(m_schedule.name());
+        ui->nameEdit->setText(m_schedule.name());
 
-        ui->m_frequencyEdit->setModel(&m_frequencyModel);
-        ui->m_frequencyEdit->setCurrentIndex(m_frequencyModel.indexByOccurrence(m_schedule.occurrence()).row());
+        ui->frequencyEdit->setModel(&m_frequencyModel);
+        ui->frequencyEdit->setCurrentIndex(m_frequencyModel.indexByOccurrence(m_schedule.occurrence()).row());
 
-        if (ui->m_frequencyEdit->currentData(eMyMoney::Model::ScheduleFrequencyRole).value<eMyMoney::Schedule::Occurrence>() == Schedule::Occurrence::Any)
-            ui->m_frequencyEdit->setCurrentIndex(m_frequencyModel.indexByOccurrence(Schedule::Occurrence::Monthly).row());
+        if (ui->frequencyEdit->currentData(eMyMoney::Model::ScheduleFrequencyRole).value<eMyMoney::Schedule::Occurrence>() == Schedule::Occurrence::Any)
+            ui->frequencyEdit->setCurrentIndex(m_frequencyModel.indexByOccurrence(Schedule::Occurrence::Monthly).row());
         // q->slotFrequencyChanged((int)ui->m_frequencyEdit->currentItem());
-        ui->m_frequencyNoEdit->setValue(m_schedule.occurrenceMultiplier());
+        ui->frequencyNoEdit->setValue(m_schedule.occurrenceMultiplier());
 
         // load option widgets
-        ui->m_paymentMethodEdit->setModel(&m_paymentMethodModel);
+        ui->paymentMethodCombo->setModel(&m_paymentMethodModel);
 
         auto method = m_schedule.paymentType();
         if (method == Schedule::PaymentType::Any)
             method = Schedule::PaymentType::Other;
-        ui->m_paymentMethodEdit->setCurrentIndex(m_paymentMethodModel.indexByPaymentMethod(method).row());
+        ui->paymentMethodCombo->setCurrentIndex(m_paymentMethodModel.indexByPaymentMethod(method).row());
 
         switch (m_schedule.weekendOption()) {
         case Schedule::WeekendOption::MoveNothing:
-            ui->m_weekendOptionEdit->setCurrentIndex(0);
+            ui->weekendOptionCombo->setCurrentIndex(0);
             break;
         case Schedule::WeekendOption::MoveBefore:
-            ui->m_weekendOptionEdit->setCurrentIndex(1);
+            ui->weekendOptionCombo->setCurrentIndex(1);
             break;
         case Schedule::WeekendOption::MoveAfter:
-            ui->m_weekendOptionEdit->setCurrentIndex(2);
+            ui->weekendOptionCombo->setCurrentIndex(2);
             break;
         }
-        ui->m_estimateEdit->setChecked(!m_schedule.isFixed());
-        ui->m_lastDayInMonthEdit->setChecked(m_schedule.lastDayInMonth());
-        ui->m_autoEnterEdit->setChecked(m_schedule.autoEnter());
-        ui->m_endSeriesEdit->setChecked(m_schedule.willEnd());
+        ui->estimateOption->setChecked(!m_schedule.isFixed());
+        ui->lastDayInMonthOption->setChecked(m_schedule.lastDayInMonth());
+        ui->autoEnterOption->setChecked(m_schedule.autoEnter());
+        ui->endSeriesOption->setChecked(m_schedule.willEnd());
 
-        ui->m_endOptionsFrame->setEnabled(m_schedule.willEnd());
+        ui->endOptionsFrame->setEnabled(m_schedule.willEnd());
         if (m_schedule.willEnd()) {
-            ui->m_RemainingEdit->setValue(m_schedule.transactionsRemaining());
-            ui->m_FinalPaymentEdit->setDate(m_schedule.endDate());
+            ui->remainingEdit->setValue(m_schedule.transactionsRemaining());
+            ui->finalPaymentDateEdit->setDate(m_schedule.endDate());
         }
 
         q->setModal(true);
 
         // we just hide the variation field for now and enable the logic
         // once we have a respective member in the MyMoneySchedule object
-        ui->m_variation->hide();
+        ui->variationEdit->hide();
+
+        const auto defaultTabOrder = QStringList{
+            QLatin1String("nameEdit"),
+            QLatin1String("frequencyNoEdit"),
+            QLatin1String("frequencyEdit"),
+            QLatin1String("paymentMethodCombo"),
+            // the std transaction editor (see also newtransactioneditor.cpp
+            QLatin1String("accountCombo"),
+            QLatin1String("dateEdit"),
+            QLatin1String("creditDebitEdit"),
+            QLatin1String("payeeEdit"),
+            QLatin1String("numberEdit"),
+            QLatin1String("categoryCombo"),
+            QLatin1String("costCenterCombo"),
+            QLatin1String("tagContainer"),
+            QLatin1String("statusCombo"),
+            QLatin1String("memoEdit"),
+            // the schedule options
+            QLatin1String("weekendOptionCombo"),
+            QLatin1String("estimateOption"),
+            QLatin1String("variationEdit"),
+            QLatin1String("lastDayInMonthOption"),
+            QLatin1String("autoEnterOption"),
+            QLatin1String("endSeriesOption"),
+            QLatin1String("remainingEdit"),
+            QLatin1String("finalPaymentDateEdit"),
+            QLatin1String("buttonBox"),
+        };
+
+        KMyMoneyUtils::setupTabOrder(q, QLatin1String("scheduleTransactionEditor"), defaultTabOrder);
     }
 
     /**
@@ -163,9 +193,9 @@ public:
     void updateTransactionsRemaining()
     {
         auto remain = m_schedule.transactionsRemaining();
-        if (remain != ui->m_RemainingEdit->value()) {
-            QSignalBlocker blocked(ui->m_RemainingEdit);
-            ui->m_RemainingEdit->setValue(remain);
+        if (remain != ui->remainingEdit->value()) {
+            QSignalBlocker blocked(ui->remainingEdit);
+            ui->remainingEdit->setValue(remain);
         }
     }
 
@@ -173,8 +203,8 @@ public:
     {
         auto t = m_schedule.transaction();
 
-        if (m_editor) {
-            t = m_editor->transaction();
+        if (transactionEditor) {
+            t = transactionEditor->transaction();
         }
 
         t.clearId();
@@ -184,8 +214,8 @@ public:
 
     void setScheduleOccurrencePeriod()
     {
-        const auto row = ui->m_frequencyEdit->currentIndex();
-        const auto idx = ui->m_frequencyEdit->model()->index(row, 0);
+        const auto row = ui->frequencyEdit->currentIndex();
+        const auto idx = ui->frequencyEdit->model()->index(row, 0);
         const auto occurrence = idx.data(eMyMoney::Model::ScheduleFrequencyRole).value<Schedule::Occurrence>();
         m_schedule.setOccurrencePeriod(occurrence);
     }
@@ -193,7 +223,7 @@ public:
     KEditScheduleDlg* q_ptr;
     Ui::KEditScheduleDlg* ui;
     KMandatoryFieldGroup* m_requiredFields;
-    NewTransactionEditor* m_editor;
+    NewTransactionEditor* transactionEditor;
     MyMoneySchedule m_schedule;
     QWidgetList m_tabOrderWidgets;
     OccurrencesModel m_frequencyModel;
@@ -208,25 +238,25 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
     d->m_schedule = schedule;
     d->init();
 
-    connect(d->ui->m_RemainingEdit, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [&](int value) {
+    connect(d->ui->remainingEdit, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [&](int value) {
         Q_D(KEditScheduleDlg);
         // Make sure the required fields are set
-        d->m_schedule.setNextDueDate(d->m_editor->postDate());
+        d->m_schedule.setNextDueDate(d->transactionEditor->postDate());
         d->setScheduleOccurrencePeriod();
-        d->m_schedule.setOccurrenceMultiplier(d->ui->m_frequencyNoEdit->value());
+        d->m_schedule.setOccurrenceMultiplier(d->ui->frequencyNoEdit->value());
 
         if (d->m_schedule.transactionsRemaining() != value) {
-            QSignalBlocker blocked(d->ui->m_FinalPaymentEdit);
-            d->ui->m_FinalPaymentEdit->setDate(d->m_schedule.dateAfter(value));
+            QSignalBlocker blocked(d->ui->finalPaymentDateEdit);
+            d->ui->finalPaymentDateEdit->setDate(d->m_schedule.dateAfter(value));
         }
     });
 
-    connect(d->ui->m_FinalPaymentEdit, &KMyMoneyDateInput::dateChanged, this, [&](const QDate& date) {
+    connect(d->ui->finalPaymentDateEdit, &KMyMoneyDateInput::dateChanged, this, [&](const QDate& date) {
         Q_D(KEditScheduleDlg);
         // Make sure the required fields are set
-        d->m_schedule.setNextDueDate(d->m_editor->postDate());
+        d->m_schedule.setNextDueDate(d->transactionEditor->postDate());
         d->setScheduleOccurrencePeriod();
-        d->m_schedule.setOccurrenceMultiplier(d->ui->m_frequencyNoEdit->value());
+        d->m_schedule.setOccurrenceMultiplier(d->ui->frequencyNoEdit->value());
 
         if (d->m_schedule.endDate() != date) {
             d->m_schedule.setEndDate(date);
@@ -234,82 +264,82 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
         }
     });
 
-    connect(d->ui->m_frequencyEdit, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int idx) {
+    connect(d->ui->frequencyEdit, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int idx) {
         Q_D(KEditScheduleDlg);
-        const auto model = d->ui->m_frequencyEdit->model();
+        const auto model = d->ui->frequencyEdit->model();
         const auto paymentType = model->index(idx, 0).data(eMyMoney::Model::ScheduleFrequencyRole).value<eMyMoney::Schedule::Occurrence>();
 
-        d->ui->m_endSeriesEdit->setEnabled(paymentType != Schedule::Occurrence::Once);
-        bool isEndSeries = d->ui->m_endSeriesEdit->isChecked();
+        d->ui->endSeriesOption->setEnabled(paymentType != Schedule::Occurrence::Once);
+        bool isEndSeries = d->ui->endSeriesOption->isChecked();
         if (isEndSeries)
-            d->ui->m_endOptionsFrame->setEnabled(paymentType != Schedule::Occurrence::Once);
+            d->ui->endOptionsFrame->setEnabled(paymentType != Schedule::Occurrence::Once);
         switch (paymentType) {
         case Schedule::Occurrence::Daily:
         case Schedule::Occurrence::Weekly:
-            d->ui->m_frequencyNoEdit->setEnabled(true);
-            d->ui->m_lastDayInMonthEdit->setEnabled(false);
+            d->ui->frequencyNoEdit->setEnabled(true);
+            d->ui->lastDayInMonthOption->setEnabled(false);
             break;
 
         case Schedule::Occurrence::EveryHalfMonth:
         case Schedule::Occurrence::Monthly:
         case Schedule::Occurrence::Yearly:
             // Supports Frequency Number
-            d->ui->m_frequencyNoEdit->setEnabled(true);
-            d->ui->m_lastDayInMonthEdit->setEnabled(true);
+            d->ui->frequencyNoEdit->setEnabled(true);
+            d->ui->lastDayInMonthOption->setEnabled(true);
             break;
 
         default:
             // Multiplier is always 1
-            d->ui->m_frequencyNoEdit->setEnabled(false);
-            d->ui->m_frequencyNoEdit->setValue(1);
-            d->ui->m_lastDayInMonthEdit->setEnabled(true);
+            d->ui->frequencyNoEdit->setEnabled(false);
+            d->ui->frequencyNoEdit->setValue(1);
+            d->ui->lastDayInMonthOption->setEnabled(true);
             break;
         }
         if (isEndSeries && (paymentType != Schedule::Occurrence::Once)) {
             // Changing the frequency changes the number
             // of remaining transactions
-            d->m_schedule.setNextDueDate(d->m_editor->postDate());
-            d->m_schedule.setOccurrenceMultiplier(d->ui->m_frequencyNoEdit->value());
+            d->m_schedule.setNextDueDate(d->transactionEditor->postDate());
+            d->m_schedule.setOccurrenceMultiplier(d->ui->frequencyNoEdit->value());
             d->m_schedule.setOccurrencePeriod(paymentType);
-            d->m_schedule.setEndDate(d->ui->m_FinalPaymentEdit->date());
+            d->m_schedule.setEndDate(d->ui->finalPaymentDateEdit->date());
             d->updateTransactionsRemaining();
         }
     });
 
-    connect(d->ui->m_frequencyNoEdit, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [&](int multiplier) {
+    connect(d->ui->frequencyNoEdit, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [&](int multiplier) {
         Q_D(KEditScheduleDlg);
         // Make sure the required fields are set
         auto oldOccurrenceMultiplier = d->m_schedule.occurrenceMultiplier();
         if (multiplier != oldOccurrenceMultiplier) {
-            if (d->ui->m_endOptionsFrame->isEnabled()) {
-                d->m_schedule.setNextDueDate(d->m_editor->postDate());
+            if (d->ui->endOptionsFrame->isEnabled()) {
+                d->m_schedule.setNextDueDate(d->transactionEditor->postDate());
                 d->m_schedule.setOccurrenceMultiplier(multiplier);
                 d->setScheduleOccurrencePeriod();
-                d->m_schedule.setEndDate(d->ui->m_FinalPaymentEdit->date());
+                d->m_schedule.setEndDate(d->ui->finalPaymentDateEdit->date());
                 d->updateTransactionsRemaining();
             }
         }
     });
 
-    connect(d->ui->m_paymentMethodEdit, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int idx) {
+    connect(d->ui->paymentMethodCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int idx) {
         Q_D(KEditScheduleDlg);
-        const auto model = d->ui->m_paymentMethodEdit->model();
+        const auto model = d->ui->paymentMethodCombo->model();
         const auto paymentType = model->index(idx, 0).data(eMyMoney::Model::SchedulePaymentTypeRole).value<eMyMoney::Schedule::PaymentType>();
         const bool isWriteCheck = paymentType == Schedule::PaymentType::WriteChecque;
-        d->m_editor->setShowNumberWidget(isWriteCheck);
+        d->transactionEditor->setShowNumberWidget(isWriteCheck);
     });
 
-    connect(d->m_editor, &NewTransactionEditor::postDateChanged, this, [&](const QDate& date) {
+    connect(d->transactionEditor, &NewTransactionEditor::postDateChanged, this, [&](const QDate& date) {
         Q_D(KEditScheduleDlg);
         if (d->m_schedule.nextDueDate() != date) {
-            if (d->ui->m_endOptionsFrame->isEnabled()) {
+            if (d->ui->endOptionsFrame->isEnabled()) {
                 d->m_schedule.setNextDueDate(date);
                 d->m_schedule.setStartDate(date);
-                d->m_schedule.setOccurrenceMultiplier(d->ui->m_frequencyNoEdit->value());
+                d->m_schedule.setOccurrenceMultiplier(d->ui->frequencyNoEdit->value());
 
                 d->setScheduleOccurrencePeriod();
 
-                d->m_schedule.setEndDate(d->ui->m_FinalPaymentEdit->date());
+                d->m_schedule.setEndDate(d->ui->finalPaymentDateEdit->date());
                 d->updateTransactionsRemaining();
             }
         }
@@ -319,10 +349,10 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
         KHelpClient::invokeHelp("details.schedules.intro");
     });
 
-    const auto dateEdit = d->m_editor->findChild<QWidget*>("dateEdit");
+    const auto dateEdit = d->transactionEditor->findChild<QWidget*>("dateEdit");
     if (dateEdit) {
-        connect(d->ui->m_lastDayInMonthEdit, &QCheckBox::stateChanged, dateEdit, &QWidget::setDisabled);
-        dateEdit->setDisabled(d->ui->m_lastDayInMonthEdit->isChecked());
+        connect(d->ui->lastDayInMonthOption, &QCheckBox::stateChanged, dateEdit, &QWidget::setDisabled);
+        dateEdit->setDisabled(d->ui->lastDayInMonthOption->isChecked());
     }
 }
 
@@ -358,16 +388,16 @@ const MyMoneySchedule& KEditScheduleDlg::schedule()
         d->m_schedule.setStartDate(t.postDate());
     }
     d->m_schedule.setTransaction(t);
-    d->m_schedule.setName(d->ui->m_nameEdit->text());
-    d->m_schedule.setFixed(!d->ui->m_estimateEdit->isChecked());
+    d->m_schedule.setName(d->ui->nameEdit->text());
+    d->m_schedule.setFixed(!d->ui->estimateOption->isChecked());
 
-    auto model = d->ui->m_frequencyEdit->model();
+    auto model = d->ui->frequencyEdit->model();
     const auto frequency =
-        model->index(d->ui->m_frequencyEdit->currentIndex(), 0).data(eMyMoney::Model::ScheduleFrequencyRole).value<eMyMoney::Schedule::Occurrence>();
+        model->index(d->ui->frequencyEdit->currentIndex(), 0).data(eMyMoney::Model::ScheduleFrequencyRole).value<eMyMoney::Schedule::Occurrence>();
     d->m_schedule.setOccurrencePeriod(frequency);
-    d->m_schedule.setOccurrenceMultiplier(d->ui->m_frequencyNoEdit->value());
+    d->m_schedule.setOccurrenceMultiplier(d->ui->frequencyNoEdit->value());
 
-    switch (d->ui->m_weekendOptionEdit->currentIndex()) {
+    switch (d->ui->weekendOptionCombo->currentIndex()) {
     case 0:
         d->m_schedule.setWeekendOption(Schedule::WeekendOption::MoveNothing);
         break;
@@ -381,7 +411,7 @@ const MyMoneySchedule& KEditScheduleDlg::schedule()
 
     d->m_schedule.setType(Schedule::Type::Bill);
 
-    const auto amount = d->m_editor->transactionAmount();
+    const auto amount = d->transactionEditor->transactionAmount();
     if (d->m_schedule.transaction().splitCount() == 2) {
         const auto splits = d->m_schedule.transaction().splits();
         bool isTransfer = true;
@@ -403,18 +433,18 @@ const MyMoneySchedule& KEditScheduleDlg::schedule()
         }
     }
 
-    if (d->ui->m_lastDayInMonthEdit->isEnabled())
-        d->m_schedule.setLastDayInMonth(d->ui->m_lastDayInMonthEdit->isChecked());
+    if (d->ui->lastDayInMonthOption->isEnabled())
+        d->m_schedule.setLastDayInMonth(d->ui->lastDayInMonthOption->isChecked());
     else
         d->m_schedule.setLastDayInMonth(false);
-    d->m_schedule.setAutoEnter(d->ui->m_autoEnterEdit->isChecked());
+    d->m_schedule.setAutoEnter(d->ui->autoEnterOption->isChecked());
 
-    model = d->ui->m_paymentMethodEdit->model();
+    model = d->ui->paymentMethodCombo->model();
     const auto paymentType =
-        model->index(d->ui->m_paymentMethodEdit->currentIndex(), 0).data(eMyMoney::Model::SchedulePaymentTypeRole).value<eMyMoney::Schedule::PaymentType>();
+        model->index(d->ui->paymentMethodCombo->currentIndex(), 0).data(eMyMoney::Model::SchedulePaymentTypeRole).value<eMyMoney::Schedule::PaymentType>();
     d->m_schedule.setPaymentType(paymentType);
-    if (d->ui->m_endSeriesEdit->isEnabled() && d->ui->m_endSeriesEdit->isChecked()) {
-        d->m_schedule.setEndDate(d->ui->m_FinalPaymentEdit->date());
+    if (d->ui->endSeriesOption->isEnabled() && d->ui->endSeriesOption->isChecked()) {
+        d->m_schedule.setEndDate(d->ui->finalPaymentDateEdit->date());
     } else {
         d->m_schedule.setEndDate(QDate());
     }

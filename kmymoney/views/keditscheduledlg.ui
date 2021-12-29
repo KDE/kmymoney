@@ -32,9 +32,12 @@
         </widget>
        </item>
        <item>
-        <widget class="KLineEdit" name="m_nameEdit">
+        <widget class="KLineEdit" name="nameEdit">
          <property name="focusPolicy">
           <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="kmm_taborder" stdset="0">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -53,7 +56,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="m_frequencyNoEdit">
+        <widget class="QSpinBox" name="frequencyNoEdit">
          <property name="focusPolicy">
           <enum>Qt::StrongFocus</enum>
          </property>
@@ -66,21 +69,28 @@
          <property name="maximum">
           <number>999</number>
          </property>
+         <property name="kmm_taborder" stdset="0">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="m_frequencyEdit"/>
+        <widget class="QComboBox" name="frequencyEdit">
+         <property name="kmm_taborder" stdset="0">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
     </layout>
    </item>
    <item>
-    <widget class="QGroupBox" name="m_paymentInformation">
+    <widget class="QGroupBox" name="paymentInformation">
      <property name="title">
       <string>Payment information</string>
      </property>
-     <layout class="QVBoxLayout" name="m_paymentInformationLayout">
+     <layout class="QVBoxLayout" name="paymentInformationLayout">
       <item>
        <layout class="QHBoxLayout">
         <item>
@@ -94,7 +104,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="m_paymentMethodEdit"/>
+         <widget class="QComboBox" name="paymentMethodCombo">
+          <property name="kmm_taborder" stdset="0">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item>
          <spacer name="spacer4">
@@ -125,7 +139,7 @@
        </widget>
       </item>
       <item>
-       <widget class="NewTransactionEditor" name="m_editor">
+       <widget class="NewTransactionEditor" name="transactionEditor">
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
@@ -149,7 +163,10 @@
       <item>
        <layout class="QGridLayout">
         <item row="1" column="1">
-         <widget class="KComboBox" name="m_weekendOptionEdit">
+         <widget class="KComboBox" name="weekendOptionCombo">
+          <property name="kmm_taborder" stdset="0">
+           <bool>true</bool>
+          </property>
           <item>
            <property name="text">
             <string>Do not change the date</string>
@@ -182,14 +199,17 @@
       <item>
        <layout class="QHBoxLayout">
         <item>
-         <widget class="QCheckBox" name="m_estimateEdit">
+         <widget class="QCheckBox" name="estimateOption">
           <property name="text">
            <string>The amount is an estimate because it varies for each payment</string>
+          </property>
+          <property name="kmm_taborder" stdset="0">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="m_variation">
+         <widget class="QSpinBox" name="variationEdit">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -198,6 +218,9 @@
           </property>
           <property name="value">
            <number>10</number>
+          </property>
+          <property name="kmm_taborder" stdset="0">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -220,28 +243,37 @@
        </layout>
       </item>
       <item>
-       <widget class="QCheckBox" name="m_lastDayInMonthEdit">
+       <widget class="QCheckBox" name="lastDayInMonthOption">
         <property name="text">
          <string>Process this schedule always at the last day of a month</string>
         </property>
+        <property name="kmm_taborder" stdset="0">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="m_autoEnterEdit">
+       <widget class="QCheckBox" name="autoEnterOption">
         <property name="text">
          <string>Enter this schedule into the register automatically when it is due</string>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="m_endSeriesEdit">
-        <property name="text">
-         <string>This schedule will end at some time</string>
+        <property name="kmm_taborder" stdset="0">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QFrame" name="m_endOptionsFrame">
+       <widget class="QCheckBox" name="endSeriesOption">
+        <property name="text">
+         <string>This schedule will end at some time</string>
+        </property>
+        <property name="kmm_taborder" stdset="0">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="endOptionsFrame">
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
@@ -278,7 +310,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QLabel" name="m_endLabel1">
+          <widget class="QLabel" name="endLabel1">
            <property name="text">
             <string>Number of transactions remaining:</string>
            </property>
@@ -288,17 +320,20 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="m_RemainingEdit">
+          <widget class="QSpinBox" name="remainingEdit">
            <property name="minimum">
             <number>0</number>
            </property>
            <property name="maximum">
             <number>9999</number>
            </property>
+           <property name="kmm_taborder" stdset="0">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="m_endLabel2">
+          <widget class="QLabel" name="endLabel2">
            <property name="text">
             <string>Date of final transaction:</string>
            </property>
@@ -308,9 +343,12 @@
           </widget>
          </item>
          <item>
-          <widget class="KMyMoneyDateInput" name="m_FinalPaymentEdit" native="true">
+          <widget class="KMyMoneyDateInput" name="finalPaymentDateEdit" native="true">
            <property name="focusPolicy">
             <enum>Qt::StrongFocus</enum>
+           </property>
+           <property name="kmm_taborder" stdset="0">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -340,6 +378,9 @@
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Help|QDialogButtonBox::Ok</set>
+     </property>
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -372,25 +413,9 @@
  <resources/>
  <connections>
   <connection>
-   <sender>m_endSeriesEdit</sender>
+   <sender>estimateOption</sender>
    <signal>toggled(bool)</signal>
-   <receiver>m_endOptionsFrame</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_estimateEdit</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>m_variation</receiver>
+   <receiver>variationEdit</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">

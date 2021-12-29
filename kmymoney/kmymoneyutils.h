@@ -113,8 +113,8 @@ public:
 
     static const int maxHomePageItems = 5;
 
-    KMyMoneyUtils();
-    ~KMyMoneyUtils();
+    KMyMoneyUtils() = default;
+    ~KMyMoneyUtils() = default;
 
     /**
       * This method is used to convert the occurrence type from its
@@ -375,6 +375,17 @@ public:
       * @return QString object containing the converted value
       */
     static QString normalizeNumericString(const qreal& val, const QLocale& loc, const char f = 'g', const int prec = 6);
+
+    /**
+     * This method sets the tab order based on the configuration found in
+     * the parameter identified in @a name in the section [TabOrder] of
+     * the global configuration file kmymoneyrc. The named widgets are
+     * searched under @a parent and if no setting is found in the
+     * configuration file, the @a defaultTabOrder is used.
+     *
+     * @note the widgets must carry the respective object name.
+     */
+    static void setupTabOrder(QWidget* parent, const QString& name, const QStringList& defaultTabOrder);
 };
 
 #endif

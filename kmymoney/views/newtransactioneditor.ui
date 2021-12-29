@@ -52,6 +52,9 @@
        <property name="calendarPopup">
         <bool>true</bool>
        </property>
+       <property name="kmm_taborder" stdset="0">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
@@ -74,10 +77,17 @@
      <property name="tabChangesFocus">
       <bool>true</bool>
      </property>
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item row="2" column="4">
-    <widget class="QLineEdit" name="numberEdit"/>
+    <widget class="QLineEdit" name="numberEdit">
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="label">
@@ -88,6 +98,9 @@
    </item>
    <item row="4" column="4">
     <widget class="QComboBox" name="statusCombo">
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
+     </property>
      <item>
       <property name="text">
        <string>Cleared</string>
@@ -103,10 +116,17 @@
      <property name="autoCompletion">
       <bool>true</bool>
      </property>
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item row="4" column="1" colspan="2">
-    <widget class="KTagContainer" name="tagContainer"/>
+    <widget class="KTagContainer" name="tagContainer">
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="postdateLabel">
@@ -143,6 +163,9 @@
        <height>0</height>
       </size>
      </property>
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item row="6" column="3" colspan="2">
@@ -168,6 +191,9 @@
        <property name="toolButtonStyle">
         <enum>Qt::ToolButtonTextBesideIcon</enum>
        </property>
+       <property name="kmm_taborder" stdset="0">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
@@ -177,6 +203,9 @@
        </property>
        <property name="toolButtonStyle">
         <enum>Qt::ToolButtonTextBesideIcon</enum>
+       </property>
+       <property name="kmm_taborder" stdset="0">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -192,6 +221,9 @@
    <item row="3" column="4">
     <widget class="QComboBox" name="costCenterCombo">
      <property name="editable">
+      <bool>true</bool>
+     </property>
+     <property name="kmm_taborder" stdset="0">
       <bool>true</bool>
      </property>
     </widget>
@@ -222,19 +254,22 @@
       </spacer>
      </item>
      <item>
-      <widget class="QLabel" name="label_7">
+      <widget class="QLabel" name="amountLabel">
        <property name="text">
         <string>Amount</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="CreditDebitEdit" name="creditdebitedit">
+      <widget class="CreditDebitEdit" name="creditDebitEdit" native="true">
        <property name="minimumSize">
         <size>
          <width>220</width>
          <height>0</height>
         </size>
+       </property>
+       <property name="kmm_taborder" stdset="0">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -270,6 +305,9 @@
    <item row="0" column="1" colspan="2">
     <widget class="KMyMoneyAccountCombo" name="accountCombo">
      <property name="editable">
+      <bool>true</bool>
+     </property>
+     <property name="kmm_taborder" stdset="0">
       <bool>true</bool>
      </property>
     </widget>

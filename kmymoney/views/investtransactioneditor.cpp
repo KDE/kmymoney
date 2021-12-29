@@ -832,6 +832,27 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     setCancelButton(d->ui->cancelButton);
     setEnterButton(d->ui->enterButton);
+
+    const auto defaultTabOrder = QStringList{
+        QLatin1String("activityCombo"),
+        QLatin1String("dateEdit"),
+        QLatin1String("securityAccountCombo"),
+        QLatin1String("sharesAmountEdit"),
+        QLatin1String("securityAccountCombo"),
+        QLatin1String("sharesAmountEdit"),
+        QLatin1String("assetAccountCombo"),
+        QLatin1String("priceAmountEdit"),
+        QLatin1String("feesCombo"),
+        QLatin1String("feesAmountEdit"),
+        QLatin1String("interestCombo"),
+        QLatin1String("interestAmountEdit"),
+        QLatin1String("memoEdit"),
+        QLatin1String("statusCombo"),
+        QLatin1String("enterButton"),
+        QLatin1String("cancelButton"),
+    };
+
+    setupTabOrder(QLatin1String("investTransactionEditor"), defaultTabOrder);
 }
 
 InvestTransactionEditor::~InvestTransactionEditor()

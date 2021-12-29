@@ -34,6 +34,9 @@
      <property name="placeholderText">
       <string>Price/share</string>
      </property>
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item row="9" column="3">
@@ -53,6 +56,9 @@
      <property name="placeholderText">
       <string>Total</string>
      </property>
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item row="6" column="2">
@@ -70,6 +76,9 @@
         <string notr="true">M/d/yy</string>
        </property>
        <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+       <property name="kmm_taborder" stdset="0">
         <bool>true</bool>
        </property>
       </widget>
@@ -128,10 +137,16 @@
        <height>0</height>
       </size>
      </property>
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item row="10" column="3">
     <widget class="QComboBox" name="statusCombo">
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
+     </property>
      <item>
       <property name="text">
        <string>Cleared</string>
@@ -170,6 +185,9 @@
      <property name="placeholderText">
       <string>Interest</string>
      </property>
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item row="3" column="2">
@@ -180,7 +198,11 @@
     </widget>
    </item>
    <item row="2" column="1">
-    <widget class="QComboBox" name="activityCombo"/>
+    <widget class="QComboBox" name="activityCombo">
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item row="4" column="1">
     <widget class="KMyMoneyAccountCombo" name="assetAccountCombo">
@@ -192,6 +214,9 @@
        <width>0</width>
        <height>0</height>
       </size>
+     </property>
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -212,6 +237,9 @@
    <item row="8" column="1" rowspan="4">
     <widget class="QPlainTextEdit" name="memoEdit">
      <property name="tabChangesFocus">
+      <bool>true</bool>
+     </property>
+     <property name="kmm_taborder" stdset="0">
       <bool>true</bool>
      </property>
     </widget>
@@ -241,6 +269,9 @@
        <height>0</height>
       </size>
      </property>
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item row="6" column="1">
@@ -253,6 +284,9 @@
        <width>0</width>
        <height>0</height>
       </size>
+     </property>
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -279,6 +313,9 @@
        <property name="toolButtonStyle">
         <enum>Qt::ToolButtonTextBesideIcon</enum>
        </property>
+       <property name="kmm_taborder" stdset="0">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
@@ -288,6 +325,9 @@
        </property>
        <property name="toolButtonStyle">
         <enum>Qt::ToolButtonTextBesideIcon</enum>
+       </property>
+       <property name="kmm_taborder" stdset="0">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -314,6 +354,9 @@
      <property name="placeholderText">
       <string>Fees</string>
      </property>
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item row="3" column="3">
@@ -329,6 +372,9 @@
      </property>
      <property name="placeholderText">
       <string>Shares</string>
+     </property>
+     <property name="kmm_taborder" stdset="0">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -375,14 +421,14 @@
    <header>kmymoneyaccountcombo.h</header>
   </customwidget>
   <customwidget>
-   <class>AmountEdit</class>
-   <extends>QLineEdit</extends>
-   <header>amountedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>KMyMoneyDateEdit</class>
    <extends>QDateEdit</extends>
    <header>kmymoneydateedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>AmountEdit</class>
+   <extends>QLineEdit</extends>
+   <header>amountedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

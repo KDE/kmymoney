@@ -45,6 +45,7 @@ protected:
     virtual void keyPressEvent(QKeyEvent* e) override;
     void setCancelButton(QAbstractButton* button);
     void setEnterButton(QAbstractButton* button);
+    void setupTabOrder(const QString& name, const QStringList& defaultTabOrder);
 
 protected Q_SLOTS:
     virtual void reject();

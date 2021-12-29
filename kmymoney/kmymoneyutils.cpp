@@ -71,14 +71,6 @@
 
 using namespace Icons;
 
-KMyMoneyUtils::KMyMoneyUtils()
-{
-}
-
-KMyMoneyUtils::~KMyMoneyUtils()
-{
-}
-
 const QString KMyMoneyUtils::occurrenceToString(const eMyMoney::Schedule::Occurrence occurrence)
 {
     return i18n(MyMoneySchedule::occurrenceToString(occurrence));
@@ -750,4 +742,23 @@ QString KMyMoneyUtils::normalizeNumericString(const qreal& val, const QLocale& l
            .remove(loc.groupSeparator())
            .remove(QRegularExpression("0+$"))
            .remove(QRegularExpression("\\" + loc.decimalPoint() + "$"));
+}
+
+void KMyMoneyUtils::setupTabOrder(QWidget* parent, const QString& name, const QStringList& defaultTabOrder)
+{
+    KSharedConfigPtr config = KSharedConfig::openConfig();
+    KConfigGroup grp = config->group(QLatin1String("TabOrder"));
+    const auto tabOrder = grp.readEntry(name, defaultTabOrder);
+
+    const auto widgetCount = tabOrder.count();
+    if (widgetCount > 0) {
+        auto prev = parent->findChild<QWidget*>(tabOrder.at(0));
+        for (int i = 1; (prev != nullptr) && (i < widgetCount); ++i) {
+            const auto next = parent->findChild<QWidget*>(tabOrder.at(i));
+            if (next) {
+                parent->setTabOrder(prev, next);
+                prev = next;
+            }
+        }
+    }
 }

@@ -135,7 +135,7 @@ void NewTransactionEditor::Private::updateWidgetAccess()
 {
     const auto enable = !m_account.id().isEmpty();
     ui->dateEdit->setEnabled(enable);
-    ui->creditdebitedit->setEnabled(enable);
+    ui->creditDebitEdit->setEnabled(enable);
     ui->payeeEdit->setEnabled(enable);
     ui->numberEdit->setEnabled(enable);
     ui->categoryCombo->setEnabled(enable);
@@ -307,21 +307,21 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
                 const auto currency = MyMoneyFile::instance()->currenciesModel()->itemById(currencyId);
 
                 // in case the commodity changes, we need to update the shares part
-                if (currency.id() != ui->creditdebitedit->sharesCommodity().id()) {
-                    ui->creditdebitedit->setSharesCommodity(currency);
-                    auto sharesAmount = ui->creditdebitedit->value();
-                    ui->creditdebitedit->setShares(sharesAmount);
+                if (currency.id() != ui->creditDebitEdit->sharesCommodity().id()) {
+                    ui->creditDebitEdit->setSharesCommodity(currency);
+                    auto sharesAmount = ui->creditDebitEdit->value();
+                    ui->creditDebitEdit->setShares(sharesAmount);
                     // switch to value display so that we show the transaction commodity
                     // for single currency data entry this does not have an effect
-                    ui->creditdebitedit->setDisplayState(MultiCurrencyEdit::DisplayValue);
+                    ui->creditDebitEdit->setDisplayState(MultiCurrencyEdit::DisplayValue);
 
                     if (!sharesAmount.isZero()) {
-                        KCurrencyCalculator::updateConversion(ui->creditdebitedit, ui->dateEdit->date());
+                        KCurrencyCalculator::updateConversion(ui->creditDebitEdit, ui->dateEdit->date());
                     }
                 }
 
-                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-ui->creditdebitedit->value()), eMyMoney::Model::SplitValueRole);
-                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-ui->creditdebitedit->shares()), eMyMoney::Model::SplitSharesRole);
+                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-ui->creditDebitEdit->value()), eMyMoney::Model::SplitValueRole);
+                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-ui->creditDebitEdit->shares()), eMyMoney::Model::SplitSharesRole);
 
                 updateVAT(ValueUnchanged);
 
@@ -360,7 +360,7 @@ bool NewTransactionEditor::Private::numberChanged(const QString& newNumber)
 bool NewTransactionEditor::Private::amountChanged()
 {
     bool rc = true;
-    if (ui->creditdebitedit->haveValue() && (splitModel.rowCount() <= 1)) {
+    if (ui->creditDebitEdit->haveValue() && (splitModel.rowCount() <= 1)) {
         rc = false;
         try {
             if (splitModel.rowCount() == 1) {
@@ -368,13 +368,13 @@ bool NewTransactionEditor::Private::amountChanged()
 
                 // check if there is a change in the values other than simply reverting the sign
                 // and get an updated price in that case
-                if ((index.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>() != ui->creditdebitedit->shares())
-                    || (index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>() != ui->creditdebitedit->value())) {
-                    KCurrencyCalculator::updateConversion(ui->creditdebitedit, ui->dateEdit->date());
+                if ((index.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>() != ui->creditDebitEdit->shares())
+                    || (index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>() != ui->creditDebitEdit->value())) {
+                    KCurrencyCalculator::updateConversion(ui->creditDebitEdit, ui->dateEdit->date());
                 }
 
-                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-ui->creditdebitedit->shares()), eMyMoney::Model::SplitSharesRole);
-                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-ui->creditdebitedit->value()), eMyMoney::Model::SplitValueRole);
+                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-ui->creditDebitEdit->shares()), eMyMoney::Model::SplitSharesRole);
+                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-ui->creditDebitEdit->value()), eMyMoney::Model::SplitValueRole);
             }
             rc = true;
 
@@ -422,7 +422,7 @@ MyMoneyMoney NewTransactionEditor::Private::splitsSum() const
 
 int NewTransactionEditor::Private::editSplits()
 {
-    const auto transactionFactor(ui->creditdebitedit->value().isNegative() ? MyMoneyMoney::ONE : MyMoneyMoney::MINUS_ONE);
+    const auto transactionFactor(ui->creditDebitEdit->value().isNegative() ? MyMoneyMoney::ONE : MyMoneyMoney::MINUS_ONE);
 
     SplitModel dlgSplitModel(q, nullptr, splitModel);
 
@@ -462,8 +462,8 @@ int NewTransactionEditor::Private::editSplits()
         splitModel = dlgSplitModel;
 
         // update the transaction amount
-        ui->creditdebitedit->setSharesCommodity(ui->creditdebitedit->valueCommodity());
-        ui->creditdebitedit->setValue(-splitDialog->transactionAmount());
+        ui->creditDebitEdit->setSharesCommodity(ui->creditDebitEdit->valueCommodity());
+        ui->creditDebitEdit->setValue(-splitDialog->transactionAmount());
         auto amountShares = -splitDialog->transactionAmount();
 
         // the price might have been changed, so we have to update our copy
@@ -479,9 +479,9 @@ int NewTransactionEditor::Private::editSplits()
             const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
             const auto currencyId = accountIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString();
             const auto currency = MyMoneyFile::instance()->currenciesModel()->itemById(currencyId);
-            ui->creditdebitedit->setSharesCommodity(currency);
+            ui->creditDebitEdit->setSharesCommodity(currency);
         }
-        ui->creditdebitedit->setShares(amountShares);
+        ui->creditDebitEdit->setShares(amountShares);
 
         updateWidgetState();
 
@@ -503,7 +503,7 @@ MyMoneyMoney NewTransactionEditor::Private::removeVatSplit()
 {
     const auto rows = splitModel.rowCount();
     if (rows != 2)
-        return ui->creditdebitedit->value();
+        return ui->creditDebitEdit->value();
 
     QModelIndex netSplitIdx;
     QModelIndex taxSplitIdx;
@@ -515,7 +515,7 @@ MyMoneyMoney NewTransactionEditor::Private::removeVatSplit()
         const auto account = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
         // in case of failure, we simply stop processing
         if (account.id().isEmpty()) {
-            return ui->creditdebitedit->value();
+            return ui->creditDebitEdit->value();
         }
         if (!account.value(QLatin1String("VatAccount")).isEmpty()) {
             netValue = (account.value(QLatin1String("VatAmount")).toLower() == QLatin1String("net"));
@@ -527,7 +527,7 @@ MyMoneyMoney NewTransactionEditor::Private::removeVatSplit()
 
     // return if not all splits are setup
     if (!(taxSplitIdx.isValid() && netSplitIdx.isValid())) {
-        return ui->creditdebitedit->value();
+        return ui->creditDebitEdit->value();
     }
 
     MyMoneyMoney amount;
@@ -585,7 +585,7 @@ void NewTransactionEditor::Private::updateVAT(TaxValueChange amountChanged)
 
     // in order to do anything, we need an amount
     MyMoneyMoney amount, newAmount;
-    amount = ui->creditdebitedit->value();
+    amount = ui->creditDebitEdit->value();
     if (amount.isZero())
         return;
 
@@ -630,6 +630,28 @@ void NewTransactionEditor::Private::updateVAT(TaxValueChange amountChanged)
     }
 }
 
+static void dumpWidgets(QDebug& dbg, QWidget* parent, int indent)
+{
+#if 0
+    const auto widgetList = qvariant_cast<QWidgetList>(parent->property("kmm_taborder"));
+    for (const auto& w : widgetList) {
+        qDebug() << w->metaObject()->className() << w->objectName() << w->property("kmm_taborder");
+    }
+
+#else
+
+    const auto widgetList = parent->findChildren<QWidget*>(QString(), Qt::FindChildrenRecursively);
+
+    QDebugStateSaver saver(dbg);
+    for (const auto& w : widgetList) {
+        const auto property = w->property("kmm_taborder");
+        if (property.isValid() && property.toBool()) {
+            qDebug() << (void*)(w) << w->metaObject()->className() << w->objectName() << w->property("kmm_taborder").toBool();
+        }
+    }
+#endif
+};
+
 NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accountId)
     : TransactionEditorBase(parent, accountId)
     , d(new Private(this))
@@ -645,19 +667,22 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     // default is to hide the account selection combobox
     setShowAccountCombo(false);
 
-    // insert the tag combo into the tab order
-    QWidget::setTabOrder(d->ui->accountCombo, d->ui->dateEdit);
+    const auto defaultTabOrder = QStringList{
+        QLatin1String("accountCombo"),
+        QLatin1String("dateEdit"),
+        QLatin1String("creditDebitEdit"),
+        QLatin1String("payeeEdit"),
+        QLatin1String("numberEdit"),
+        QLatin1String("categoryCombo"),
+        QLatin1String("costCenterCombo"),
+        QLatin1String("tagContainer"),
+        QLatin1String("statusCombo"),
+        QLatin1String("memoEdit"),
+        QLatin1String("enterButton"),
+        QLatin1String("cancelButton"),
+    };
 
-    QWidget::setTabOrder(d->ui->dateEdit, d->ui->creditdebitedit);
-    QWidget::setTabOrder(d->ui->creditdebitedit, d->ui->payeeEdit);
-    QWidget::setTabOrder(d->ui->payeeEdit, d->ui->numberEdit);
-    QWidget::setTabOrder(d->ui->numberEdit, d->ui->categoryCombo);
-    QWidget::setTabOrder(d->ui->categoryCombo, d->ui->costCenterCombo);
-    QWidget::setTabOrder(d->ui->costCenterCombo, d->ui->tagContainer->tagCombo());
-    QWidget::setTabOrder(d->ui->tagContainer->tagCombo(), d->ui->statusCombo);
-    QWidget::setTabOrder(d->ui->statusCombo, d->ui->memoEdit);
-    QWidget::setTabOrder(d->ui->memoEdit, d->ui->enterButton);
-    QWidget::setTabOrder(d->ui->enterButton, d->ui->cancelButton);
+    setupTabOrder(QLatin1String("stdTransactionEditor"), defaultTabOrder);
 
     // determine order of credit and debit edit widgets
     // based on their visual order in the ledger
@@ -677,7 +702,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
     // in case they are in the opposite order, we swap the edit widgets
     if (debitColumn < creditColumn) {
-        d->ui->creditdebitedit->swapCreditDebit();
+        d->ui->creditDebitEdit->swapCreditDebit();
     }
 
     const auto* splitHelper = new KMyMoneyAccountComboSplitHelper(d->ui->categoryCombo, &d->splitModel);
@@ -754,7 +779,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
     d->ui->dateEdit->setDisplayFormat(QLocale().dateFormat(QLocale::ShortFormat));
 
-    d->ui->creditdebitedit->setAllowEmpty(true);
+    d->ui->creditDebitEdit->setAllowEmpty(true);
 
     d->frameCollection = new WidgetHintFrameCollection(this);
     d->frameCollection->addFrame(new WidgetHintFrame(d->ui->dateEdit));
@@ -786,7 +811,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
         emit postDateChanged(date);
     });
 
-    connect(d->ui->creditdebitedit, &CreditDebitEdit::amountChanged, this, [&]() {
+    connect(d->ui->creditDebitEdit, &CreditDebitEdit::amountChanged, this, [&]() {
         d->amountChanged();
     });
 
@@ -817,7 +842,7 @@ NewTransactionEditor::~NewTransactionEditor()
 
 void NewTransactionEditor::setAmountPlaceHolderText(const QAbstractItemModel* model)
 {
-    d->ui->creditdebitedit->setPlaceholderText(model->headerData(JournalModel::Column::Payment, Qt::Horizontal).toString(),
+    d->ui->creditDebitEdit->setPlaceholderText(model->headerData(JournalModel::Column::Payment, Qt::Horizontal).toString(),
                                                model->headerData(JournalModel::Column::Deposit, Qt::Horizontal).toString());
 }
 
@@ -855,7 +880,7 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
         d->updateWidgetAccess();
 
         const auto commodity = MyMoneyFile::instance()->currency(d->m_transaction.commodity());
-        d->ui->creditdebitedit->setCommodity(commodity);
+        d->ui->creditDebitEdit->setCommodity(commodity);
 
     } else {
         // existing schedule
@@ -863,7 +888,7 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
         d->m_split = d->m_transaction.splits().first();
 
         const auto commodity = MyMoneyFile::instance()->currency(d->m_transaction.commodity());
-        d->ui->creditdebitedit->setCommodity(commodity);
+        d->ui->creditDebitEdit->setCommodity(commodity);
 
         // make sure the commodity is the one of the current account
         // in case we have exactly two splits. This is a precondition
@@ -916,7 +941,7 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
                     const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
                     const auto currencyId = accountIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString();
                     const auto currency = MyMoneyFile::instance()->currenciesModel()->itemById(currencyId);
-                    d->ui->creditdebitedit->setSharesCommodity(currency);
+                    d->ui->creditDebitEdit->setSharesCommodity(currency);
                 }
             }
         }
@@ -924,8 +949,8 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
 
         // then setup the amount widget and update the state
         // of all other widgets
-        d->ui->creditdebitedit->setValue(amountValue);
-        d->ui->creditdebitedit->setShares(amountShares);
+        d->ui->creditDebitEdit->setValue(amountValue);
+        d->ui->creditDebitEdit->setShares(amountShares);
         d->updateWidgetState();
     }
 }
@@ -941,7 +966,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
     const auto commodity = MyMoneyFile::instance()->currency(d->m_account.currencyId());
     // set both the commodities to be the same here, in case of a two split transaction
     // and the other one being in a different commodity, we adjust that later on
-    d->ui->creditdebitedit->setCommodity(commodity);
+    d->ui->creditDebitEdit->setCommodity(commodity);
 
     if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
         d->m_transaction = MyMoneyTransaction();
@@ -960,7 +985,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
         QSignalBlocker categoryBlocker(d->ui->categoryCombo->lineEdit());
         d->ui->categoryCombo->clearEditText();
 
-        d->ui->creditdebitedit->setSharesCommodity(commodity);
+        d->ui->creditDebitEdit->setSharesCommodity(commodity);
         // the default exchange rate is 1 so we don't need to set it here
 
     } else {
@@ -1026,7 +1051,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                     const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
                     const auto currencyId = accountIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString();
                     const auto currency = MyMoneyFile::instance()->currenciesModel()->itemById(currencyId);
-                    d->ui->creditdebitedit->setSharesCommodity(currency);
+                    d->ui->creditDebitEdit->setSharesCommodity(currency);
                 }
             }
         }
@@ -1034,8 +1059,8 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
 
         // then setup the amount widget and update the state
         // of all other widgets
-        d->ui->creditdebitedit->setValue(amountValue);
-        d->ui->creditdebitedit->setShares(amountShares);
+        d->ui->creditDebitEdit->setValue(amountValue);
+        d->ui->creditDebitEdit->setShares(amountShares);
         d->updateWidgetState();
     }
 
@@ -1053,7 +1078,7 @@ MyMoneyMoney NewTransactionEditor::transactionAmount() const
 {
     auto amount = -d->splitsSum();
     if (amount.isZero()) {
-        amount = d->ui->creditdebitedit->value();
+        amount = d->ui->creditDebitEdit->value();
     }
     return amount;
 }
@@ -1116,8 +1141,8 @@ MyMoneyTransaction NewTransactionEditor::transaction() const
         sp.setShares(-val);
         sp.setValue(-val);
     } else {
-        sp.setShares(d->ui->creditdebitedit->value());
-        sp.setValue(d->ui->creditdebitedit->value());
+        sp.setShares(d->ui->creditDebitEdit->value());
+        sp.setValue(d->ui->creditDebitEdit->value());
     }
 
     if (sp.reconcileFlag() != eMyMoney::Split::State::Reconciled && !sp.reconcileDate().isValid()
