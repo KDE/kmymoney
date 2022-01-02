@@ -102,8 +102,6 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget* parent, const MyMoneySchedule& sch
 
     d->m_editor = d->ui->m_editor;
     d->m_editor->setShowButtons(false);
-    d->m_editor->setFrameShape(QFrame::NoFrame);
-    d->m_editor->setFrameShadow(QFrame::Plain);
     d->m_editor->layout()->setMargin(0);
 
     d->m_schedule = schedule;

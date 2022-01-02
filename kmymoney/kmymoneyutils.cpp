@@ -14,20 +14,23 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
-#include <QApplication>
-#include <QList>
-#include <QPixmap>
-#include <QWizard>
 #include <QAbstractButton>
-#include <QPixmapCache>
-#include <QIcon>
-#include <QPainter>
+#include <QApplication>
 #include <QBitArray>
+#include <QFileInfo>
+#include <QGroupBox>
+#include <QIcon>
+#include <QList>
+#include <QPainter>
+#include <QPixmap>
+#include <QPixmapCache>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QTemporaryFile>
-#include <QFileInfo>
+#include <QWidget>
+#include <QWizard>
+#include <amountedit.h>
+#include <creditdebitedit.h>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -744,12 +747,52 @@ QString KMyMoneyUtils::normalizeNumericString(const qreal& val, const QLocale& l
            .remove(QRegularExpression("\\" + loc.decimalPoint() + "$"));
 }
 
-void KMyMoneyUtils::setupTabOrder(QWidget* parent, const QString& name, const QStringList& defaultTabOrder)
+QStringList KMyMoneyUtils::tabOrder(const QString& name, const QStringList& defaultTabOrder)
 {
     KSharedConfigPtr config = KSharedConfig::openConfig();
     KConfigGroup grp = config->group(QLatin1String("TabOrder"));
-    const auto tabOrder = grp.readEntry(name, defaultTabOrder);
+    return grp.readEntry(name, defaultTabOrder);
+}
 
+#if 0
+static QString widgetName(QWidget* w)
+{
+    return w->objectName().isEmpty() ? w->metaObject()->className() : w->objectName();
+}
+
+static void dumpFocusChain(QWidget* w, QWidget* end, int additionalTabstops = 0, bool forward = true)
+{
+    QString txt;
+    int loopValid = 80;
+    int trailing = -1;
+    do {
+        const auto policy = w->focusPolicy();
+        if (policy == Qt::TabFocus || policy == Qt::StrongFocus ) {
+            if (!txt.isEmpty()) {
+                txt += forward ? QLatin1String(" -> ") : QLatin1String(" <- ");
+            }
+            txt += widgetName(w);
+            --loopValid;
+            w = forward ? w->nextInFocusChain() : w->previousInFocusChain();
+            if (w == end && (trailing < 0)) {
+                trailing = additionalTabstops+1;
+                loopValid = trailing;
+            }
+        }
+        --trailing;
+    } while ((loopValid > 0) && (trailing != 0));
+
+    if (end) {
+        txt += forward ? QLatin1String(" -> ") : QLatin1String(" <- ");
+        txt += widgetName(w);
+    }
+
+    qDebug() << txt;
+}
+#endif
+
+void KMyMoneyUtils::setupTabOrder(QWidget* parent, const QStringList& tabOrder)
+{
     const auto widgetCount = tabOrder.count();
     if (widgetCount > 0) {
         auto prev = parent->findChild<QWidget*>(tabOrder.at(0));
@@ -758,7 +801,96 @@ void KMyMoneyUtils::setupTabOrder(QWidget* parent, const QString& name, const QS
             if (next) {
                 parent->setTabOrder(prev, next);
                 prev = next;
+            } else {
+                qDebug() << tabOrder.at(i) << "not found :(";
             }
         }
     }
+}
+
+void KMyMoneyUtils::storeTabOrder(const QString& name, const QStringList& tabOrder)
+{
+    KSharedConfigPtr config = KSharedConfig::openConfig();
+    KConfigGroup grp = config->group(QLatin1String("TabOrder"));
+    grp.writeEntry(name, tabOrder);
+}
+
+bool KMyMoneyUtils::tabFocusHelper(QWidget* topLevelWidget, bool next)
+{
+    const auto reason = next ? Qt::TabFocusReason : Qt::BacktabFocusReason;
+    const auto tabOrder = topLevelWidget->property("kmm_currenttaborder").toStringList();
+
+    if (tabOrder.isEmpty())
+        return false;
+
+    auto focusWidget = topLevelWidget->focusWidget();
+
+    enum firstOrLastVisible {
+        FirstVisible,
+        LastVisible,
+    };
+
+    auto findFirstOrLastVisible = [&](firstOrLastVisible type) {
+        const int ofs = (type == FirstVisible) ? 1 : -1;
+        int idx = (type == FirstVisible) ? 0 : tabOrder.count() - 1;
+        for (; idx >= 0 && idx < tabOrder.count(); idx += ofs) {
+            auto w = topLevelWidget->findChild<QWidget*>(tabOrder.at(idx));
+            // in case of embedded transaction editors, we may search
+            // for a widget that is known to the parent
+            if (!w) {
+                auto parent = topLevelWidget->parentWidget();
+                while (true) {
+                    w = parent->findChild<QWidget*>(tabOrder.at(idx));
+                    if (!w && qobject_cast<QGroupBox*>(parent)) {
+                        parent = parent->parentWidget();
+                        continue;
+                    }
+                    break;
+                }
+            }
+            if (w && w->isVisible() && w->isEnabled()) {
+                return w;
+            }
+        }
+        return static_cast<QWidget*>(nullptr);
+    };
+
+    auto selectWidget = [&](QWidget* w) {
+        if (w) {
+            // if we point to a contructed widget (e.g. ButtonBox) we
+            // need to select the last widget if going backward
+            if (reason == Qt::BacktabFocusReason && !w->findChildren<QWidget*>().isEmpty()) {
+                auto parent = w;
+                while (w->nextInFocusChain()->parentWidget() == parent) {
+                    w = w->nextInFocusChain();
+                }
+            }
+            w->setFocus(reason);
+        }
+    };
+
+    auto adjustToContainer = [&](const char* containerClass, const char* widgetClass) {
+        if (focusWidget->qt_metacast(widgetClass) && focusWidget->parentWidget()->qt_metacast(containerClass) && (reason == Qt::BacktabFocusReason)) {
+            if (focusWidget->previousInFocusChain() == focusWidget->parentWidget()) {
+                focusWidget = focusWidget->parentWidget();
+            }
+        }
+    };
+
+    // In case of a CreditDebitEdit widget and we leave from the left backwards,
+    // we need to adjust the widget to point to the container widget.
+    adjustToContainer("CreditDebitEdit", "AmountEdit");
+    // In case of a QDialogButtonBox widget and we leave from the left backwards,
+    // we need to adjust the widget to point to the container widget.
+    // adjustToContainer("QDialogButtonBox", "QPushButton");
+
+    if ((reason == Qt::BacktabFocusReason) && (findFirstOrLastVisible(FirstVisible) == focusWidget)) {
+        selectWidget(findFirstOrLastVisible(LastVisible));
+        return true;
+
+    } else if ((reason == Qt::TabFocusReason) && (findFirstOrLastVisible(LastVisible) == focusWidget)) {
+        selectWidget(findFirstOrLastVisible(FirstVisible));
+        return true;
+    }
+    return false;
 }

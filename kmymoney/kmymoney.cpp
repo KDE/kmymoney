@@ -1062,8 +1062,10 @@ public:
             Action::FileInformation,
             Action::FileImportTemplate,
             Action::FileExportTemplate,
+            Action::EditTabOrder,
 #ifdef KMM_DEBUG
             Action::FileDump,
+            Action::NewFeature,
 #endif
             Action::EditFindTransaction,
             Action::NewCategory,
@@ -1794,9 +1796,10 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::ReportDelete,                  QStringLiteral("report_delete"),                  i18n("Delete report"),                              Icon::EditRemove},
             {Action::ReportClose,                   QStringLiteral("report_close"),                   i18n("Close report"),                               Icon::Close},
             {Action::ReportToggleChart,             QStringLiteral("report_toggle"),                  i18n("Toggle chart"),                               Icon::Close},
+            {Action::EditTabOrder,                  QStringLiteral("edit_taborder"),                  i18n("Edit tab order"),                             Icon::Empty},
             //debug actions
 #ifdef KMM_DEBUG
-            {Action::WizardNewUser,                 QStringLiteral("new_user_wizard"),                i18n("Test new feature"),                           Icon::Empty},
+            {Action::NewFeature,                    QStringLiteral("new feature"),                    i18n("Test new feature"),                           Icon::Empty},
             {Action::DebugTraces,                   QStringLiteral("debug_traces"),                   i18n("Debug Traces"),                               Icon::Empty},
 #endif
             {Action::DebugTimers,                   QStringLiteral("debug_timers"),                   i18n("Debug Timers"),                               Icon::Empty},
@@ -1870,12 +1873,13 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             // The settings menu
             // *****************
             {Action::SettingsAllMessages,           &KMyMoneyApp::slotEnableMessages},
+            {Action::EditTabOrder,                  &KMyMoneyApp::slotEditTabOrder},
             // ***************************
             // Actions w/o main menu entry
             // ***************************
             //debug actions
 #ifdef KMM_DEBUG
-            {Action::WizardNewUser,                 &KMyMoneyApp::slotNewFeature},
+            {Action::NewFeature,                    &KMyMoneyApp::slotNewFeature},
             {Action::DebugTraces,                   &KMyMoneyApp::slotToggleTraces},
 #endif
             {Action::DebugTimers,                   &KMyMoneyApp::slotToggleTimers},
@@ -1972,8 +1976,9 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {qMakePair(Action::MarkCleared,                 Qt::CTRL + Qt::ALT+ Qt::Key_Space)},
             {qMakePair(Action::MarkReconciled,              Qt::CTRL + Qt::SHIFT + Qt::Key_Space)},
             {qMakePair(Action::SelectAllTransactions,       Qt::CTRL + Qt::Key_A)},
+            {qMakePair(Action::EditTabOrder,                Qt::CTRL + Qt::SHIFT + Qt::Key_T)},
 #ifdef KMM_DEBUG
-            {qMakePair(Action::WizardNewUser,               Qt::CTRL + Qt::Key_G)},
+            {qMakePair(Action::NewFeature,                  Qt::CTRL + Qt::Key_G)},
 #endif
             {qMakePair(Action::AssignTransactionsNumber,    Qt::CTRL + Qt::SHIFT + Qt::Key_N)},
             {qMakePair(Action::ShowFilterWidget,            Qt::CTRL + Qt::Key_F)},
@@ -3528,6 +3533,11 @@ void KMyMoneyApp::slotScheduleNew(const MyMoneyTransaction& _t, eMyMoney::Schedu
 void KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
 {
     KMyMoneyUtils::newPayee(newnameBase, id);
+}
+
+void KMyMoneyApp::slotEditTabOrder()
+{
+    d->executeAction(d->qActionToId(qobject_cast<QAction*>(sender())));
 }
 
 void KMyMoneyApp::slotNewFeature()

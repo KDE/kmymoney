@@ -121,8 +121,9 @@ enum class Action {
     // *************
     // The misc actions
     // *************
+    EditTabOrder,
 #ifdef KMM_DEBUG
-    WizardNewUser, DebugTraces,
+    NewFeature, DebugTraces,
 #endif
     DebugTimers,
     DeleteOnlineJob, EditOnlineJob, LogOnlineJob,

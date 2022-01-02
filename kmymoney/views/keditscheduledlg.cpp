@@ -8,6 +8,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QAction>
 #include <QCheckBox>
 #include <QDebug>
 #include <QLabel>
@@ -40,6 +41,7 @@
 #include "kmymoneyutils.h"
 #include "knewaccountdlg.h"
 #include "knewinvestmentwizard.h"
+#include "menuenums.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
 #include "mymoneyexception.h"
@@ -63,6 +65,7 @@ public:
     explicit KEditScheduleDlgPrivate(KEditScheduleDlg* qq)
         : q_ptr(qq)
         , ui(new Ui::KEditScheduleDlg)
+        , tabOrderUi(nullptr)
         , m_requiredFields(nullptr)
         , transactionEditor(nullptr)
     {
@@ -71,6 +74,7 @@ public:
     ~KEditScheduleDlgPrivate()
     {
         delete ui;
+        delete tabOrderUi;
     }
 
     void init()
@@ -82,8 +86,6 @@ public:
         transactionEditor->setShowAccountCombo(true);
 
         transactionEditor->setShowButtons(false);
-        transactionEditor->setFrameShape(QFrame::NoFrame);
-        transactionEditor->setFrameShadow(QFrame::Plain);
         transactionEditor->layout()->setMargin(0);
 
         m_requiredFields = new KMandatoryFieldGroup(q);
@@ -154,6 +156,11 @@ public:
         // we just hide the variation field for now and enable the logic
         // once we have a respective member in the MyMoneySchedule object
         ui->variationEdit->hide();
+    }
+
+    void setupTabOrder()
+    {
+        Q_Q(KEditScheduleDlg);
 
         const auto defaultTabOrder = QStringList{
             QLatin1String("nameEdit"),
@@ -182,8 +189,12 @@ public:
             QLatin1String("finalPaymentDateEdit"),
             QLatin1String("buttonBox"),
         };
+        q->setProperty("kmm_defaulttaborder", defaultTabOrder);
+        q->setProperty("kmm_currenttaborder", KMyMoneyUtils::tabOrder(QLatin1String("scheduleTransactionEditor"), defaultTabOrder));
+        // let the transaction editor part use the same tab order information
+        transactionEditor->setProperty("kmm_currenttaborder", KMyMoneyUtils::tabOrder(QLatin1String("scheduleTransactionEditor"), defaultTabOrder));
 
-        KMyMoneyUtils::setupTabOrder(q, QLatin1String("scheduleTransactionEditor"), defaultTabOrder);
+        KMyMoneyUtils::setupTabOrder(q, q->property("kmm_currenttaborder").toStringList());
     }
 
     /**
@@ -222,6 +233,7 @@ public:
 
     KEditScheduleDlg* q_ptr;
     Ui::KEditScheduleDlg* ui;
+    Ui::KEditScheduleDlg* tabOrderUi;
     KMandatoryFieldGroup* m_requiredFields;
     NewTransactionEditor* transactionEditor;
     MyMoneySchedule m_schedule;
@@ -237,6 +249,7 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
     Q_D(KEditScheduleDlg);
     d->m_schedule = schedule;
     d->init();
+    setSizeGripEnabled(true);
 
     connect(d->ui->remainingEdit, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [&](int value) {
         Q_D(KEditScheduleDlg);
@@ -345,6 +358,8 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
         }
     });
 
+    connect(d->ui->buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+    connect(d->ui->buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
     connect(d->ui->buttonBox, &QDialogButtonBox::helpRequested, this, [&]() {
         KHelpClient::invokeHelp("details.schedules.intro");
     });
@@ -354,6 +369,17 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
         connect(d->ui->lastDayInMonthOption, &QCheckBox::stateChanged, dateEdit, &QWidget::setDisabled);
         dateEdit->setDisabled(d->ui->lastDayInMonthOption->isChecked());
     }
+
+    // we delay setting up the tab order until we drop back to the event loop.
+    // this will make sure that all widgets are visible and the tab order logic
+    // works properly
+    QMetaObject::invokeMethod(
+        this,
+        [&]() {
+            Q_D(KEditScheduleDlg);
+            d->setupTabOrder();
+        },
+        Qt::QueuedConnection);
 }
 
 KEditScheduleDlg::~KEditScheduleDlg()
@@ -558,4 +584,100 @@ void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule)
     } catch (const MyMoneyException& e) {
         KMessageBox::detailedSorry(nullptr, i18n("Unable to modify scheduled transaction '%1'", inputSchedule.name()), QString::fromLatin1(e.what()));
     }
+}
+
+void KEditScheduleDlg::keyPressEvent(QKeyEvent* event)
+{
+    const auto keySeq = QKeySequence(event->modifiers() + event->key());
+
+    if (keySeq.matches(pActions[eMenu::Action::EditTabOrder]->shortcut())) {
+        QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(this);
+        auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(qt_metacast("TabOrderEditorInterface"));
+        if (tabOrderWidget) {
+            tabOrderDialog->setTarget(tabOrderWidget);
+
+            // the account combo is created invisible by the TransactionEditor ctor. Since we
+            // need it in the schedule dialog editor, we make sure to see it before we start
+            // to setup the tab order and modify it. At the same time, we need to hide the
+            // additional buttons provided by the TransactionEditor.
+            auto w = tabOrderDialog->findChild<QWidget*>("accountCombo");
+            if (w) {
+                w->setVisible(true);
+            }
+            const QStringList buttonNames{QLatin1String("enterButton"), QLatin1String("cancelButton")};
+            for (const auto& widgetName : buttonNames) {
+                auto w = tabOrderDialog->findChild<QWidget*>(widgetName);
+                if (w) {
+                    w->setVisible(false);
+                }
+            }
+
+            auto tabOrder = property("kmm_defaulttaborder").toStringList();
+            tabOrderDialog->setDefaultTabOrder(tabOrder);
+            tabOrder = property("kmm_currenttaborder").toStringList();
+            tabOrderDialog->setTabOrder(tabOrder);
+
+            if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
+                Q_D(KEditScheduleDlg);
+                tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());
+                d->setupTabOrder();
+            }
+        }
+        tabOrderDialog->deleteLater();
+    }
+}
+
+void KEditScheduleDlg::setupUi(QWidget* parent)
+{
+    Q_D(KEditScheduleDlg);
+    if (d->tabOrderUi == nullptr) {
+        d->tabOrderUi = new Ui::KEditScheduleDlg;
+    }
+    d->tabOrderUi->setupUi(parent);
+}
+
+void KEditScheduleDlg::storeTabOrder(const QStringList& tabOrder)
+{
+    KMyMoneyUtils::storeTabOrder(QLatin1String("scheduleTransactionEditor"), tabOrder);
+}
+
+bool KEditScheduleDlg::focusNextPrevChild(bool next)
+{
+    auto rc = KMyMoneyUtils::tabFocusHelper(this, next);
+
+    if (rc == false) {
+        // In case we're going backward from the buttonbox at the bottom,
+        // the default focusNextPrevChild() implementation sets the focus
+        // to the account combo box instead of the last option. We catch
+        // this here and set the focus accordingly.
+        const auto pushButton = focusWidget();
+        const auto dialogButtonBox = focusWidget()->parentWidget();
+        if (pushButton->qt_metacast("QPushButton") && dialogButtonBox->qt_metacast("QDialogButtonBox") && (!next)) {
+            if (dialogButtonBox->nextInFocusChain() == pushButton) {
+                const auto widgetName = focusWidget()->parentWidget()->objectName();
+                const QStringList tabOrder(property("kmm_currenttaborder").toStringList());
+                auto idx = tabOrder.indexOf(widgetName);
+                if (idx >= 0) {
+                    QWidget* w = nullptr;
+                    auto previousTabWidget = [&]() {
+                        --idx;
+                        if (idx < 0) {
+                            idx = tabOrder.count() - 1;
+                        }
+                        w = findChild<QWidget*>(tabOrder.at(idx));
+                    };
+                    previousTabWidget();
+                    while (w && !w->isEnabled()) {
+                        previousTabWidget();
+                    }
+                    if (w) {
+                        w->setFocus();
+                        return true;
+                    }
+                }
+            }
+        }
+        rc = QWidget::focusNextPrevChild(next);
+    }
+    return rc;
 }

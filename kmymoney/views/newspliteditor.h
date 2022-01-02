@@ -10,8 +10,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QFrame>
 #include <QScopedPointer>
+#include <QWidget>
 class QAbstractItemModel;
 class QWidget;
 
@@ -22,9 +22,11 @@ class QWidget;
 // Project Includes
 
 #include "mymoneymoney.h"
+#include "tabordereditor.h"
+
 class MyMoneySecurity;
 
-class NewSplitEditor : public QFrame
+class NewSplitEditor : public QWidget, TabOrderEditorInterface
 {
     Q_OBJECT
 
@@ -52,8 +54,13 @@ public:
     void setAmountPlaceHolderText(const QAbstractItemModel* model);
     void setReadOnly(bool readOnly);
 
+    // Implement TabOrderEditorInterface methods
+    void setupUi(QWidget* parent) override;
+    void storeTabOrder(const QStringList& tabOrder) override;
+
 protected:
-    void keyPressEvent(QKeyEvent* e) final override;
+    void keyPressEvent(QKeyEvent* event) final override;
+    bool focusNextPrevChild(bool next) override;
 
 public Q_SLOTS:
     /**

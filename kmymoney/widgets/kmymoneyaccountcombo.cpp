@@ -514,11 +514,14 @@ bool KMyMoneyAccountComboSplitHelper::eventFilter(QObject* watched, QEvent* even
         }
         if (type == QEvent::KeyPress) {
             auto kev = static_cast<QKeyEvent*>(event);
-            // swallow all keypress except Ctrl+Space, Return, Enter and Esc
+            // swallow all keypress except Ctrl+Space, Return,
+            // Enter, Tab, BackTab and Esc
             switch(kev->key()) {
             case Qt::Key_Enter:
             case Qt::Key_Return:
             case Qt::Key_Escape:
+            case Qt::Key_Tab:
+            case Qt::Key_Backtab:
                 return false;
 
             case Qt::Key_Space:

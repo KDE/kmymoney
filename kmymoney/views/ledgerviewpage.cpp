@@ -12,6 +12,7 @@
 
 #include <QAction>
 #include <QKeyEvent>
+#include <QPointer>
 #include <QTimer>
 
 // ----------------------------------------------------------------------------
@@ -30,6 +31,7 @@
 #include "reconciliationmodel.h"
 #include "schedulesjournalmodel.h"
 #include "specialdatesmodel.h"
+#include "tabordereditor.h"
 #include "widgetenums.h"
 
 using namespace Icons;
@@ -338,6 +340,24 @@ bool LedgerViewPage::executeAction(eMenu::Action action, const SelectedObjects& 
         d->ui->m_ledgerView->reselectJournalEntry(selections.firstSelection(SelectedObjects::JournalEntry));
         break;
 
+    case eMenu::Action::EditTabOrder: {
+        const auto editor = d->ui->m_ledgerView->indexWidget(d->ui->m_ledgerView->editIndex());
+        if (editor) {
+            QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(d->ui->m_ledgerView);
+            auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(editor->qt_metacast("TabOrderEditorInterface"));
+            tabOrderDialog->setTarget(tabOrderWidget);
+            auto tabOrder = editor->property("kmm_defaulttaborder").toStringList();
+            tabOrderDialog->setDefaultTabOrder(tabOrder);
+            tabOrder = editor->property("kmm_currenttaborder").toStringList();
+            tabOrderDialog->setTabOrder(tabOrder);
+
+            if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
+                tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());
+            }
+            delete tabOrderDialog;
+        }
+        break;
+    }
     default:
         break;
     }

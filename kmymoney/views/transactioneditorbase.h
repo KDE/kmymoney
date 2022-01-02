@@ -9,8 +9,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QFrame>
-class QWidget;
+#include <QWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -22,7 +21,7 @@ class SplitModel;
 class QAbstractButton;
 class QAbstractItemModel;
 
-class TransactionEditorBase : public QFrame
+class TransactionEditorBase : public QWidget
 {
     Q_OBJECT
 
@@ -42,10 +41,13 @@ public:
     bool isReadOnly() const;
 
 protected:
-    virtual void keyPressEvent(QKeyEvent* e) override;
+    void keyPressEvent(QKeyEvent* e) override;
+    bool focusNextPrevChild(bool next) override;
     void setCancelButton(QAbstractButton* button);
     void setEnterButton(QAbstractButton* button);
-    void setupTabOrder(const QString& name, const QStringList& defaultTabOrder);
+    QStringList tabOrder(const QString& name, const QStringList& defaultTabOrder) const;
+    void setupTabOrder(const QStringList& tabOrder);
+    void storeTabOrder(const QString& name, const QStringList& tabOrder);
 
 protected Q_SLOTS:
     virtual void reject();

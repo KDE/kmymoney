@@ -21,6 +21,7 @@ class MyMoneySchedule;
 class MyMoneyAccount;
 class MyMoneyTransaction;
 class TransactionEditor;
+#include "tabordereditor.h"
 
 namespace eMyMoney { namespace Schedule {
 enum class Occurrence;
@@ -31,7 +32,7 @@ enum class Occurrence;
  */
 
 class KEditScheduleDlgPrivate;
-class KEditScheduleDlg : public QDialog
+class KEditScheduleDlg : public QDialog, TabOrderEditorInterface
 {
     Q_OBJECT
     Q_DISABLE_COPY(KEditScheduleDlg)
@@ -50,12 +51,13 @@ public:
     static void newSchedule(const MyMoneyTransaction& _t, eMyMoney::Schedule::Occurrence occurrence);
     static void editSchedule(const MyMoneySchedule& inputSchedule);
 
+    // Implement TabOrderEditorInterface methods
+    void setupUi(QWidget* parent) override;
+    void storeTabOrder(const QStringList& tabOrder) override;
+
 protected:
-    /**
-     * This method adjusts @a _date according to the rules specified by
-     * the schedule's weekend option.
-     */
-    QDate adjustDate(const QDate& _date) const;
+    void keyPressEvent(QKeyEvent* event) override;
+    bool focusNextPrevChild(bool next) override;
 
 private Q_SLOTS:
     /// Overridden for internal reasons. No API changes.

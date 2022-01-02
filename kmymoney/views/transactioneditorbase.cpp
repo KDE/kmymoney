@@ -40,7 +40,7 @@ public:
 };
 
 TransactionEditorBase::TransactionEditorBase(QWidget* parent, const QString& accountId)
-    : QFrame(parent, Qt::FramelessWindowHint /* | Qt::X11BypassWindowManagerHint */)
+    : QWidget(parent)
     , d(new TransactionEditorBase::Private)
 {
     Q_UNUSED(accountId)
@@ -48,6 +48,16 @@ TransactionEditorBase::TransactionEditorBase(QWidget* parent, const QString& acc
 
 TransactionEditorBase::~TransactionEditorBase()
 {
+}
+
+bool TransactionEditorBase::focusNextPrevChild(bool next)
+{
+    auto rc = KMyMoneyUtils::tabFocusHelper(this, next);
+
+    if (rc == false) {
+        rc = QWidget::focusNextPrevChild(next);
+    }
+    return rc;
 }
 
 void TransactionEditorBase::keyPressEvent(QKeyEvent* e)
@@ -113,7 +123,17 @@ bool TransactionEditorBase::isReadOnly() const
     return d->readOnly;
 }
 
-void TransactionEditorBase::setupTabOrder(const QString& name, const QStringList& defaultTabOrder)
+QStringList TransactionEditorBase::tabOrder(const QString& name, const QStringList& defaultTabOrder) const
 {
-    KMyMoneyUtils::setupTabOrder(this, name, defaultTabOrder);
+    return KMyMoneyUtils::tabOrder(name, defaultTabOrder);
+}
+
+void TransactionEditorBase::setupTabOrder(const QStringList& tabOrder)
+{
+    KMyMoneyUtils::setupTabOrder(this, tabOrder);
+}
+
+void TransactionEditorBase::storeTabOrder(const QString& name, const QStringList& tabOrder)
+{
+    KMyMoneyUtils::storeTabOrder(name, tabOrder);
 }

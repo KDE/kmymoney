@@ -59,6 +59,7 @@ public:
     Private(InvestTransactionEditor* parent)
         : q(parent)
         , ui(new Ui_InvestTransactionEditor)
+        , tabOrderUi(nullptr)
         , accountsModel(new AccountNamesFilterProxyModel(parent))
         , feesModel(new AccountNamesFilterProxyModel(parent))
         , interestModel(new AccountNamesFilterProxyModel(parent))
@@ -118,6 +119,7 @@ public:
 
     void scheduleUpdateTotalAmount();
     void updateWidgetState();
+    void setupTabOrder();
 
     void editSplits(SplitModel* sourceSplitModel, AmountEdit* amountEdit, const MyMoneyMoney& transactionFactor);
     void removeUnusedSplits(MyMoneyTransaction& t, SplitModel* splitModel);
@@ -131,6 +133,7 @@ public:
 
     InvestTransactionEditor* q;
     Ui_InvestTransactionEditor* ui;
+    Ui_InvestTransactionEditor* tabOrderUi;
 
     // models for UI elements
     AccountNamesFilterProxyModel* accountsModel;
@@ -627,6 +630,32 @@ void InvestTransactionEditor::Private::scheduleUpdateTotalAmount()
     QMetaObject::invokeMethod(q, "updateTotalAmount", Qt::QueuedConnection);
 }
 
+void InvestTransactionEditor::Private::setupTabOrder()
+{
+    const auto defaultTabOrder = QStringList{
+        QLatin1String("activityCombo"),
+        QLatin1String("dateEdit"),
+        QLatin1String("securityAccountCombo"),
+        QLatin1String("sharesAmountEdit"),
+        QLatin1String("securityAccountCombo"),
+        QLatin1String("sharesAmountEdit"),
+        QLatin1String("assetAccountCombo"),
+        QLatin1String("priceAmountEdit"),
+        QLatin1String("feesCombo"),
+        QLatin1String("feesAmountEdit"),
+        QLatin1String("interestCombo"),
+        QLatin1String("interestAmountEdit"),
+        QLatin1String("memoEdit"),
+        QLatin1String("statusCombo"),
+        QLatin1String("enterButton"),
+        QLatin1String("cancelButton"),
+    };
+    q->setProperty("kmm_defaulttaborder", defaultTabOrder);
+    q->setProperty("kmm_currenttaborder", q->tabOrder(QLatin1String("investTransactionEditor"), defaultTabOrder));
+
+    q->setupTabOrder(q->property("kmm_currenttaborder").toStringList());
+}
+
 InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString& accId)
     : TransactionEditorBase(parent, accId)
     , d(new Private(this))
@@ -833,26 +862,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     setCancelButton(d->ui->cancelButton);
     setEnterButton(d->ui->enterButton);
 
-    const auto defaultTabOrder = QStringList{
-        QLatin1String("activityCombo"),
-        QLatin1String("dateEdit"),
-        QLatin1String("securityAccountCombo"),
-        QLatin1String("sharesAmountEdit"),
-        QLatin1String("securityAccountCombo"),
-        QLatin1String("sharesAmountEdit"),
-        QLatin1String("assetAccountCombo"),
-        QLatin1String("priceAmountEdit"),
-        QLatin1String("feesCombo"),
-        QLatin1String("feesAmountEdit"),
-        QLatin1String("interestCombo"),
-        QLatin1String("interestAmountEdit"),
-        QLatin1String("memoEdit"),
-        QLatin1String("statusCombo"),
-        QLatin1String("enterButton"),
-        QLatin1String("cancelButton"),
-    };
-
-    setupTabOrder(QLatin1String("investTransactionEditor"), defaultTabOrder);
+    d->setupTabOrder();
 }
 
 InvestTransactionEditor::~InvestTransactionEditor()
@@ -1192,5 +1202,19 @@ bool InvestTransactionEditor::eventFilter(QObject* o, QEvent* e)
             return true;
         }
     }
-    return QFrame::eventFilter(o, e);
+    return QWidget::eventFilter(o, e);
+}
+
+void InvestTransactionEditor::setupUi(QWidget* parent)
+{
+    if (d->tabOrderUi == nullptr) {
+        d->tabOrderUi = new Ui::InvestTransactionEditor;
+    }
+    d->tabOrderUi->setupUi(parent);
+    d->tabOrderUi->infoMessage->setHidden(true);
+}
+
+void InvestTransactionEditor::storeTabOrder(const QStringList& tabOrder)
+{
+    TransactionEditorBase::storeTabOrder(QLatin1String("investTransactionEditor"), tabOrder);
 }

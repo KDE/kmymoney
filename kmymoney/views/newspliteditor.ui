@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>NewSplitEditor</class>
- <widget class="QFrame" name="NewSplitEditor">
+ <widget class="QWidget" name="NewSplitEditor">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -9,12 +9,6 @@
     <width>651</width>
     <height>295</height>
    </rect>
-  </property>
-  <property name="frameShape">
-   <enum>QFrame::StyledPanel</enum>
-  </property>
-  <property name="frameShadow">
-   <enum>QFrame::Raised</enum>
   </property>
   <layout class="QGridLayout" name="gridLayout" columnstretch="0,3,0,1">
    <item row="0" column="0" colspan="4">

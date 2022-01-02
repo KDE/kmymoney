@@ -17,11 +17,12 @@ class QWidget;
 
 #include "mymoneymoney.h"
 #include "mymoneytransaction.h"
+#include "tabordereditor.h"
 #include "transactioneditorbase.h"
 
 class MyMoneySchedule;
 
-class NewTransactionEditor : public TransactionEditorBase
+class NewTransactionEditor : public TransactionEditorBase, TabOrderEditorInterface
 {
     Q_OBJECT
 
@@ -65,6 +66,10 @@ public:
 
     /// overridden for internal reasons
     void setReadOnly(bool readOnly) override;
+
+    // Implement TabOrderEditorInterface methods
+    void setupUi(QWidget* parent) override;
+    void storeTabOrder(const QStringList& tabOrder) override;
 
 protected Q_SLOTS:
     virtual void acceptEdit();

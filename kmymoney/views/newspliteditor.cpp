@@ -9,6 +9,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QAction>
 #include <QCompleter>
 #include <QDate>
 #include <QDebug>
@@ -33,6 +34,7 @@
 #include "kcurrencycalculator.h"
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneyutils.h"
+#include "menuenums.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
 #include "mymoneyexception.h"
@@ -43,8 +45,9 @@
 #include "securitiesmodel.h"
 #include "splitmodel.h"
 #include "splitview.h"
-#include "ui_newspliteditor.h"
 #include "widgethintframe.h"
+
+#include "ui_newspliteditor.h"
 
 using namespace Icons;
 
@@ -53,6 +56,7 @@ struct NewSplitEditor::Private
     Private(NewSplitEditor* parent)
         : q(parent)
         , ui(new Ui_NewSplitEditor)
+        , tabOrderUi(nullptr)
         , accountsModel(new AccountNamesFilterProxyModel(parent))
         , payeesModel(new QSortFilterProxyModel(parent))
         , costCenterModel(new QSortFilterProxyModel(parent))
@@ -87,9 +91,11 @@ struct NewSplitEditor::Private
     bool categoryChanged(const QString& accountId);
     bool numberChanged(const QString& newNumber);
     bool amountChanged();
+    void setupTabOrder();
 
     NewSplitEditor* q;
     Ui_NewSplitEditor* ui;
+    Ui_NewSplitEditor* tabOrderUi;
     AccountNamesFilterProxyModel* accountsModel;
     QSortFilterProxyModel* payeesModel;
     QSortFilterProxyModel* costCenterModel;
@@ -235,9 +241,27 @@ bool NewSplitEditor::Private::amountChanged()
     return true;
 }
 
+void NewSplitEditor::Private::setupTabOrder()
+{
+    const auto defaultTabOrder = QStringList{
+        QLatin1String("creditDebitEdit"),
+        QLatin1String("payeeEdit"),
+        QLatin1String("numberEdit"),
+        QLatin1String("accountCombo"),
+        QLatin1String("costCenterCombo"),
+        QLatin1String("tagContainer"),
+        QLatin1String("memoEdit"),
+        QLatin1String("enterButton"),
+        QLatin1String("cancelButton"),
+    };
+    q->setProperty("kmm_defaulttaborder", defaultTabOrder);
+    q->setProperty("kmm_currenttaborder", KMyMoneyUtils::tabOrder(QLatin1String("splitTransactionEditor"), defaultTabOrder));
+
+    KMyMoneyUtils::setupTabOrder(q, q->property("kmm_currenttaborder").toStringList());
+}
 
 NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity, const QString& counterAccountId)
-    : QFrame(parent, Qt::FramelessWindowHint /* | Qt::X11BypassWindowManagerHint */)
+    : QWidget(parent)
     , d(new Private(this))
 {
     d->commodity = commodity;
@@ -308,18 +332,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     connect(d->ui->enterButton, &QToolButton::clicked, this, &NewSplitEditor::acceptEdit);
 
     // setup the tab order
-    const auto defaultTabOrder = QStringList{
-        QLatin1String("creditDebitEdit"),
-        QLatin1String("payeeEdit"),
-        QLatin1String("numberEdit"),
-        QLatin1String("accountCombo"),
-        QLatin1String("costCenterCombo"),
-        QLatin1String("memoEdit"),
-        QLatin1String("enterButton"),
-        QLatin1String("cancelButton"),
-    };
-
-    KMyMoneyUtils::setupTabOrder(this, QLatin1String("splitEditor"), defaultTabOrder);
+    d->setupTabOrder();
 
     // determine order of credit and debit edit widgets
     // based on their visual order in the ledger
@@ -386,10 +399,10 @@ void NewSplitEditor::reject()
     emit done();
 }
 
-void NewSplitEditor::keyPressEvent(QKeyEvent* e)
+void NewSplitEditor::keyPressEvent(QKeyEvent* event)
 {
-    if (!e->modifiers() || (e->modifiers() & Qt::KeypadModifier && e->key() == Qt::Key_Enter)) {
-        switch (e->key()) {
+    if (!event->modifiers() || (event->modifiers() & Qt::KeypadModifier && event->key() == Qt::Key_Enter)) {
+        switch (event->key()) {
         case Qt::Key_Enter:
         case Qt::Key_Return:
         {
@@ -410,11 +423,30 @@ void NewSplitEditor::keyPressEvent(QKeyEvent* e)
             break;
 
         default:
-            e->ignore();
+            event->ignore();
             return;
         }
     } else {
-        e->ignore();
+        const auto keySeq = QKeySequence(event->modifiers() + event->key());
+
+        if (keySeq.matches(pActions[eMenu::Action::EditTabOrder]->shortcut())) {
+            QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(this);
+            auto tabOrderWidget = static_cast<TabOrderEditorInterface*>(qt_metacast("TabOrderEditorInterface"));
+            if (tabOrderWidget) {
+                tabOrderDialog->setTarget(tabOrderWidget);
+                auto tabOrder = property("kmm_defaulttaborder").toStringList();
+                tabOrderDialog->setDefaultTabOrder(tabOrder);
+                tabOrder = property("kmm_currenttaborder").toStringList();
+                tabOrderDialog->setTabOrder(tabOrder);
+
+                if ((tabOrderDialog->exec() == QDialog::Accepted) && tabOrderDialog) {
+                    tabOrderWidget->storeTabOrder(tabOrderDialog->tabOrder());
+                    d->setupTabOrder();
+                }
+            }
+            tabOrderDialog->deleteLater();
+        }
+        event->ignore();
     }
 }
 
@@ -529,4 +561,27 @@ void NewSplitEditor::setReadOnly(bool readOnly)
             d->frameCollection->addWidget(d->ui->enterButton);
         }
     }
+}
+
+void NewSplitEditor::setupUi(QWidget* parent)
+{
+    if (d->tabOrderUi == nullptr) {
+        d->tabOrderUi = new Ui::NewSplitEditor;
+    }
+    d->tabOrderUi->setupUi(parent);
+}
+
+void NewSplitEditor::storeTabOrder(const QStringList& tabOrder)
+{
+    KMyMoneyUtils::storeTabOrder(QLatin1String("splitTransactionEditor"), tabOrder);
+}
+
+bool NewSplitEditor::focusNextPrevChild(bool next)
+{
+    auto rc = KMyMoneyUtils::tabFocusHelper(this, next);
+
+    if (rc == false) {
+        rc = QWidget::focusNextPrevChild(next);
+    }
+    return rc;
 }

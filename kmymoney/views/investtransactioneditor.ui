@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>InvestTransactionEditor</class>
- <widget class="QFrame" name="InvestTransactionEditor">
+ <widget class="QWidget" name="InvestTransactionEditor">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -9,12 +9,6 @@
     <width>660</width>
     <height>362</height>
    </rect>
-  </property>
-  <property name="frameShape">
-   <enum>QFrame::StyledPanel</enum>
-  </property>
-  <property name="frameShadow">
-   <enum>QFrame::Raised</enum>
   </property>
   <layout class="QGridLayout" name="gridLayout" columnstretch="0,5,0,0">
    <property name="verticalSpacing">

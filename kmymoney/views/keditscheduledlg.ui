@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>KEditScheduleDlg</class>
- <widget class="QDialog" name="KEditScheduleDlg">
+ <widget class="QWidget" name="KEditScheduleDlg">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -12,9 +12,6 @@
   </property>
   <property name="windowTitle">
    <string>Edit Scheduled transaction</string>
-  </property>
-  <property name="sizeGripEnabled">
-   <bool>true</bool>
   </property>
   <layout class="QVBoxLayout">
    <item>
@@ -139,17 +136,7 @@
        </widget>
       </item>
       <item>
-       <widget class="NewTransactionEditor" name="transactionEditor">
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <property name="lineWidth">
-         <number>0</number>
-        </property>
-       </widget>
+       <widget class="NewTransactionEditor" name="transactionEditor" native="true"/>
       </item>
      </layout>
     </widget>
@@ -405,7 +392,7 @@
   </customwidget>
   <customwidget>
    <class>NewTransactionEditor</class>
-   <extends>QFrame</extends>
+   <extends>QWidget</extends>
    <header>newtransactioneditor.h</header>
    <container>1</container>
   </customwidget>
@@ -419,44 +406,28 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
+     <x>35</x>
+     <y>255</y>
     </hint>
     <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
+     <x>444</x>
+     <y>250</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>KEditScheduleDlg</receiver>
-   <slot>accept()</slot>
+   <sender>endSeriesOption</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>endOptionsFrame</receiver>
+   <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>398</x>
-     <y>616</y>
+     <x>102</x>
+     <y>333</y>
     </hint>
     <hint type="destinationlabel">
-     <x>398</x>
-     <y>319</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>KEditScheduleDlg</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>398</x>
-     <y>616</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>398</x>
-     <y>319</y>
+     <x>26</x>
+     <y>361</y>
     </hint>
    </hints>
   </connection>

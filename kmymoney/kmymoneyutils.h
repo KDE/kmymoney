@@ -377,15 +377,39 @@ public:
     static QString normalizeNumericString(const qreal& val, const QLocale& loc, const char f = 'g', const int prec = 6);
 
     /**
-     * This method sets the tab order based on the configuration found in
+     * This method returns the tab order based on the configuration found in
      * the parameter identified in @a name in the section [TabOrder] of
-     * the global configuration file kmymoneyrc. The named widgets are
-     * searched under @a parent and if no setting is found in the
+     * the global configuration file kmymoneyrc. If no setting is found in the
      * configuration file, the @a defaultTabOrder is used.
      *
-     * @note the widgets must carry the respective object name.
+     * @sa setupTabOrder(), storeTabOrder()
      */
-    static void setupTabOrder(QWidget* parent, const QString& name, const QStringList& defaultTabOrder);
+    static QStringList tabOrder(const QString& name, const QStringList& defaultTabOrder);
+
+    /**
+     * This method sets the tab order based on the order provided
+     * in @a tabOrder. The named widgets are searched under
+     * @a parent.
+     *
+     * @note the widgets must carry the respective object name.
+     *
+     * @sa tabOrder(), storeTabOrder()
+     */
+    static void setupTabOrder(QWidget* parent, const QStringList& tabOrder);
+
+    /**
+     * This method stores the tab order to the parameter identified
+     * in @a name in the section [TabOrder] of the global configuration
+     * file kmymoneyrc.
+     *
+     * @param name name of the widget type
+     * @param tabOrder QStringList of widget names
+     *
+     * @sa setupTabOrder()
+     */
+    static void storeTabOrder(const QString& name, const QStringList& tabOrder);
+
+    static bool tabFocusHelper(QWidget* topLevelWidget, bool next);
 };
 
 #endif

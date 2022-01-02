@@ -67,6 +67,7 @@ public:
     Private(NewTransactionEditor* parent)
         : q(parent)
         , ui(new Ui_NewTransactionEditor)
+        , tabOrderUi(nullptr)
         , accountsModel(new AccountNamesFilterProxyModel(parent))
         , categoriesModel(new AccountNamesFilterProxyModel(parent))
         , costCenterModel(new QSortFilterProxyModel(parent))
@@ -96,6 +97,7 @@ public:
     }
 
     void updateWidgetState();
+    void setupTabOrder();
     bool checkForValidTransaction(bool doUserInteraction = true);
     bool isDatePostOpeningDate(const QDate& date, const QString& accountId);
     bool postdateChanged(const QDate& date);
@@ -116,6 +118,7 @@ public:
 
     NewTransactionEditor* q;
     Ui_NewTransactionEditor* ui;
+    Ui_NewTransactionEditor* tabOrderUi;
     AccountNamesFilterProxyModel* accountsModel;
     AccountNamesFilterProxyModel* categoriesModel;
     QSortFilterProxyModel* costCenterModel;
@@ -630,27 +633,27 @@ void NewTransactionEditor::Private::updateVAT(TaxValueChange amountChanged)
     }
 }
 
-static void dumpWidgets(QDebug& dbg, QWidget* parent, int indent)
+void NewTransactionEditor::Private::setupTabOrder()
 {
-#if 0
-    const auto widgetList = qvariant_cast<QWidgetList>(parent->property("kmm_taborder"));
-    for (const auto& w : widgetList) {
-        qDebug() << w->metaObject()->className() << w->objectName() << w->property("kmm_taborder");
-    }
+    const auto defaultTabOrder = QStringList{
+        QLatin1String("accountCombo"),
+        QLatin1String("dateEdit"),
+        QLatin1String("creditDebitEdit"),
+        QLatin1String("payeeEdit"),
+        QLatin1String("numberEdit"),
+        QLatin1String("categoryCombo"),
+        QLatin1String("costCenterCombo"),
+        QLatin1String("tagContainer"),
+        QLatin1String("statusCombo"),
+        QLatin1String("memoEdit"),
+        QLatin1String("enterButton"),
+        QLatin1String("cancelButton"),
+    };
+    q->setProperty("kmm_defaulttaborder", defaultTabOrder);
+    q->setProperty("kmm_currenttaborder", q->tabOrder(QLatin1String("stdTransactionEditor"), defaultTabOrder));
 
-#else
-
-    const auto widgetList = parent->findChildren<QWidget*>(QString(), Qt::FindChildrenRecursively);
-
-    QDebugStateSaver saver(dbg);
-    for (const auto& w : widgetList) {
-        const auto property = w->property("kmm_taborder");
-        if (property.isValid() && property.toBool()) {
-            qDebug() << (void*)(w) << w->metaObject()->className() << w->objectName() << w->property("kmm_taborder").toBool();
-        }
-    }
-#endif
-};
+    q->setupTabOrder(q->property("kmm_currenttaborder").toStringList());
+}
 
 NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accountId)
     : TransactionEditorBase(parent, accountId)
@@ -667,22 +670,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     // default is to hide the account selection combobox
     setShowAccountCombo(false);
 
-    const auto defaultTabOrder = QStringList{
-        QLatin1String("accountCombo"),
-        QLatin1String("dateEdit"),
-        QLatin1String("creditDebitEdit"),
-        QLatin1String("payeeEdit"),
-        QLatin1String("numberEdit"),
-        QLatin1String("categoryCombo"),
-        QLatin1String("costCenterCombo"),
-        QLatin1String("tagContainer"),
-        QLatin1String("statusCombo"),
-        QLatin1String("memoEdit"),
-        QLatin1String("enterButton"),
-        QLatin1String("cancelButton"),
-    };
-
-    setupTabOrder(QLatin1String("stdTransactionEditor"), defaultTabOrder);
+    d->setupTabOrder();
 
     // determine order of credit and debit edit widgets
     // based on their visual order in the ledger
@@ -980,7 +968,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
         } else {
             d->ui->dateEdit->setDate(QDate::currentDate());
         }
-        QSignalBlocker accountBlocker(d->ui->categoryCombo->lineEdit());
+        QSignalBlocker accountBlocker(d->ui->accountCombo->lineEdit());
         d->ui->accountCombo->clearEditText();
         QSignalBlocker categoryBlocker(d->ui->categoryCombo->lineEdit());
         d->ui->categoryCombo->clearEditText();
@@ -1197,7 +1185,7 @@ bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
             return true;
         }
     }
-    return QFrame::eventFilter(o, e);
+    return QWidget::eventFilter(o, e);
 }
 
 QDate NewTransactionEditor::postDate() const
@@ -1242,4 +1230,19 @@ void NewTransactionEditor::setReadOnly(bool readOnly)
             d->frameCollection->addWidget(d->ui->enterButton);
         }
     }
+}
+
+void NewTransactionEditor::setupUi(QWidget* parent)
+{
+    if (d->tabOrderUi == nullptr) {
+        d->tabOrderUi = new Ui::NewTransactionEditor;
+    }
+    d->tabOrderUi->setupUi(parent);
+    d->tabOrderUi->accountLabel->setVisible(false);
+    d->tabOrderUi->accountCombo->setVisible(false);
+}
+
+void NewTransactionEditor::storeTabOrder(const QStringList& tabOrder)
+{
+    TransactionEditorBase::storeTabOrder(QLatin1String("stdTransactionEditor"), tabOrder);
 }

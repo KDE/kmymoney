@@ -43,6 +43,7 @@ set(libviews_a_SOURCES
   splitdialog.cpp
   splitdelegate.cpp
   widgethintframe.cpp
+  tabordereditor.cpp
 )
 
 set(libviews_a_UI
@@ -65,6 +66,7 @@ set(libviews_a_UI
   newtransactioneditor.ui
   newtransactionform.ui
   investtransactioneditor.ui
+  tabordereditor.ui
 )
 
 # The handling of these ui files depends

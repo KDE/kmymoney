@@ -15,10 +15,12 @@ class QWidget;
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "tabordereditor.h"
 #include "transactioneditorbase.h"
+
 class MyMoneyMoney;
 
-class InvestTransactionEditor : public TransactionEditorBase
+class InvestTransactionEditor : public TransactionEditorBase, TabOrderEditorInterface
 {
     Q_OBJECT
 
@@ -46,6 +48,10 @@ public:
      * Returns the transaction amount
      */
     MyMoneyMoney totalAmount() const;
+
+    // Implement TabOrderEditorInterface methods
+    void setupUi(QWidget* parent) override;
+    void storeTabOrder(const QStringList& tabOrder) override;
 
 protected Q_SLOTS:
     void activityChanged (int index);

@@ -211,6 +211,12 @@ protected Q_SLOTS:
     void slotNewFeature();
 
     /**
+     * This slot starts the tab order editor on the current widget
+     * if it is supported.
+     */
+    void slotEditTabOrder();
+
+    /**
       * This slot triggers an update of all views and restarts
       * a single shot timer to call itself again at beginning of
       * the next day.
