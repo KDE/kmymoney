@@ -379,6 +379,14 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
         [&]() {
             Q_D(KEditScheduleDlg);
             d->setupTabOrder();
+            // set focus to first tab field once we return to event loop
+            const auto tabOrder = property("kmm_currenttaborder").toStringList();
+            if (!tabOrder.isEmpty()) {
+                const auto focusWidget = findChild<QWidget*>(tabOrder.first());
+                if (focusWidget) {
+                    QMetaObject::invokeMethod(focusWidget, "setFocus", Qt::QueuedConnection);
+                }
+            }
         },
         Qt::QueuedConnection);
 }

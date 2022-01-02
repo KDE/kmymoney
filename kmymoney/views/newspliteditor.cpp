@@ -354,6 +354,15 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     if (debitColumn < creditColumn) {
         d->ui->creditDebitEdit->swapCreditDebit();
     }
+
+    // set focus to first tab field once we return to event loop
+    const auto tabOrder = property("kmm_currenttaborder").toStringList();
+    if (!tabOrder.isEmpty()) {
+        const auto focusWidget = findChild<QWidget*>(tabOrder.first());
+        if (focusWidget) {
+            QMetaObject::invokeMethod(focusWidget, "setFocus", Qt::QueuedConnection);
+        }
+    }
 }
 
 NewSplitEditor::~NewSplitEditor()

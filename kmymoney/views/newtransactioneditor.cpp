@@ -1052,8 +1052,14 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
         d->updateWidgetState();
     }
 
-    // set focus to payee edit once we return to event loop
-    QMetaObject::invokeMethod(d->ui->payeeEdit, "setFocus", Qt::QueuedConnection);
+    // set focus to first tab field once we return to event loop
+    const auto tabOrder = property("kmm_currenttaborder").toStringList();
+    if (!tabOrder.isEmpty()) {
+        const auto focusWidget = findChild<QWidget*>(tabOrder.first());
+        if (focusWidget) {
+            QMetaObject::invokeMethod(focusWidget, "setFocus", Qt::QueuedConnection);
+        }
+    }
 }
 
 

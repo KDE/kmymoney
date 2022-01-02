@@ -1025,8 +1025,14 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
     // delay update until next run of event loop so that all necessary widgets are visible
     QMetaObject::invokeMethod(this, "updateWidgets", Qt::QueuedConnection);
 
-    // set focus to date edit once we return to event loop
-    QMetaObject::invokeMethod(d->ui->dateEdit, "setFocus", Qt::QueuedConnection);
+    // set focus to first tab field once we return to event loop
+    const auto tabOrder = property("kmm_currenttaborder").toStringList();
+    if (!tabOrder.isEmpty()) {
+        const auto focusWidget = findChild<QWidget*>(tabOrder.first());
+        if (focusWidget) {
+            QMetaObject::invokeMethod(focusWidget, "setFocus", Qt::QueuedConnection);
+        }
+    }
 }
 
 void InvestTransactionEditor::updateWidgets()
