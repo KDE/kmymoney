@@ -11,6 +11,7 @@
 #include <QAction>
 #include <QCheckBox>
 #include <QDebug>
+#include <QKeyEvent>
 #include <QLabel>
 #include <QList>
 #include <QPushButton>
