@@ -23,6 +23,11 @@ void SelectedObjects::addSelections(SelectedObjects::Object_t type, const QStrin
     }
 }
 
+void SelectedObjects::removeSelection(SelectedObjects::Object_t type, const QString& id)
+{
+    m_selections[type].removeAll(id);
+}
+
 void SelectedObjects::setSelection(SelectedObjects::Object_t type, const QString& id)
 {
     setSelection(type, QStringList(id));

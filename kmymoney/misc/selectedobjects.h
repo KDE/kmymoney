@@ -40,14 +40,15 @@ public:
     } Object_t;
     SelectedObjects();
 
-    void addSelections( Object_t type, const QStringList& ids);
-    void addSelection( Object_t type, const QString& id);
-    void setSelection( Object_t type, const QStringList& ids);
-    void setSelection( Object_t type, const QString& id);
+    void addSelections(Object_t type, const QStringList& ids);
+    void addSelection(Object_t type, const QString& id);
+    void removeSelection(Object_t type, const QString& id);
+    void setSelection(Object_t type, const QStringList& ids);
+    void setSelection(Object_t type, const QString& id);
 
-    void clearSelections( Object_t type);
+    void clearSelections(Object_t type);
     void clearSelections();
-    QStringList selection( Object_t type) const;
+    QStringList selection(Object_t type) const;
 
     /**
      * This method returns the first id of the corresponding
@@ -56,12 +57,12 @@ public:
      */
     QString firstSelection(Object_t type) const;
 
-    int count( Object_t type) const;
+    int count(Object_t type) const;
     /**
      * Returns @c true if the selected @a type has no
      * selected objects, @c false otherwise.
      */
-    bool isEmpty( Object_t type) const;
+    bool isEmpty(Object_t type) const;
 
     /**
      * Returns @c true if no object is selected  @c false otherwise.
