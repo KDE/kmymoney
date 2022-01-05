@@ -444,6 +444,15 @@ public:
     bool tags(QStringList& list) const;
 
     /**
+     * This method returns all tag ids that have been
+     * added to the filter. If no tag filter has been set,
+     * an empty list is returned.
+     *
+     * @returns list of tag ids
+     */
+    QStringList tags() const;
+
+    /**
       * This method returns whether an account filter has been set,
       * and if so, it returns all the accounts set in the filter.
       *

@@ -717,6 +717,13 @@ bool MyMoneyTransactionFilter::tags(QStringList& list) const
     return result;
 }
 
+QStringList MyMoneyTransactionFilter::tags() const
+{
+    QStringList tagIds;
+    tags(tagIds);
+    return tagIds;
+}
+
 bool MyMoneyTransactionFilter::accounts(QStringList& list) const
 {
     Q_D(const MyMoneyTransactionFilter);
