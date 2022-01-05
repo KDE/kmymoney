@@ -1,5 +1,6 @@
 [Icon Theme]
 Name=Breeze Dark
+Name[ar]=نسيم داكن
 Name[ca]=Brisa fosca
 Name[ca@valencia]=Brisa fosca
 Name[cs]=Breeze Tmavé
@@ -25,6 +26,7 @@ Name[x-test]=xxBreeze Darkxx
 Name[zh_CN]=Breeze 微风深色
 
 Comment=Breeze Dark by the KDE VDG
+Comment[ar]=نسيم داكن من من مجموعة تصميم كدي
 Comment[ca]=Brisa fosca, creat pel VDG del KDE
 Comment[ca@valencia]=Brisa fosca, creat pel VDG del KDE
 Comment[cs]=Breeze Dark od KDE VDG
