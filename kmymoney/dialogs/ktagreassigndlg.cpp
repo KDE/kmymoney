@@ -1,17 +1,14 @@
 /*
-    SPDX-FileCopyrightText: 2011-2012 Alessandro Russo <axela74@yahoo.it>
-    SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-    SPDX-FileCopyrightText: 2020 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2022 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
-
-#include "ktagreassigndlg.h"
-#include "ui_ktagreassigndlg.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QCheckBox>
 #include <QList>
+#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -19,15 +16,38 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "idfilter.h"
+#include "ktagreassigndlg.h"
 #include "mymoneyfile.h"
 #include "tagsmodel.h"
-#include "idfilter.h"
 
-KTagReassignDlg::KTagReassignDlg(QWidget* parent) :
-    QDialog(parent),
-    ui(new Ui::KTagReassignDlg)
+#include "ui_ktagreassigndlg.h"
+
+KTagReassignDlg::KTagReassignDlg(QWidget* parent)
+    : QDialog(parent)
+    , ui(new Ui::KTagReassignDlg)
+    , model(new IdFilter(this))
 {
+    auto checkValidInput = [&]() {
+        const auto idx = model->index(ui->tagCombo->currentIndex(), 0);
+        const auto validInput = (!idx.data(eMyMoney::Model::IdRole).toString().isEmpty() || ui->removeCheckBox->isChecked());
+        ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(validInput);
+    };
+
     ui->setupUi(this);
+
+    model->setSourceModel(MyMoneyFile::instance()->tagsModel());
+    model->setSortLocaleAware(true);
+    ui->tagCombo->setModel(model);
+
+    connect(ui->tagCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&]() {
+        checkValidInput();
+    });
+    connect(ui->removeCheckBox, &QCheckBox::toggled, this, [&]() {
+        checkValidInput();
+    });
+
+    ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 }
 
 KTagReassignDlg::~KTagReassignDlg()
@@ -35,20 +55,18 @@ KTagReassignDlg::~KTagReassignDlg()
     delete ui;
 }
 
-QString KTagReassignDlg::show(const QList<QString>& tagslist)
+void KTagReassignDlg::setupFilter(const QList<QString>& tagslist)
 {
-    auto filter = new IdFilter(this);
-    filter->setFilterList(tagslist);
-    filter->setSourceModel(MyMoneyFile::instance()->tagsModel());
-    filter->setSortLocaleAware(true);
-    filter->sort(0);
-    ui->tagCombo->setModel(filter);
+    qobject_cast<IdFilter*>(model)->setFilterList(tagslist);
+    model->sort(0);
+    ui->tagCombo->setCurrentIndex(-1);
+}
 
-    // execute dialog and if aborted, return empty string
-    if (this->exec() == QDialog::Rejected)
-        return QString();
+QString KTagReassignDlg::reassignTo() const
+{
+    if (ui->removeCheckBox->isChecked())
+        return {};
 
-    // otherwise return id of selected tag
-    const auto idx = filter->index(ui->tagCombo->currentIndex(), 0);
+    const auto idx = ui->tagCombo->model()->index(ui->tagCombo->currentIndex(), 0);
     return idx.data(eMyMoney::Model::IdRole).toString();
 }

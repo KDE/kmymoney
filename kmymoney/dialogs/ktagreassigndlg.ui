@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>558</width>
-    <height>312</height>
+    <width>577</width>
+    <height>306</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Reassign tags</string>
+   <string>Delete or reassign tags</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>false</bool>
@@ -21,22 +21,72 @@
   </property>
   <layout class="QVBoxLayout">
    <item>
-    <widget class="QLabel" name="textLabel1">
+    <widget class="QWidget" name="tagSelectionGroup" native="true">
      <property name="minimumSize">
       <size>
-       <width>300</width>
+       <width>0</width>
        <height>0</height>
       </size>
      </property>
-     <property name="text">
-      <string>The transactions associated with the selected tags need to be re-assigned to a different tag before the selected tags can be deleted. Please select a tag from the list below.</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignJustify|Qt::AlignTop</set>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="textLabel1">
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>To complete the deletion operation, either select a tag form the available tags that will replace the selected tags before they are delete or mark the checkbox below depending on your choice. The OK button becomes accessible once you have selected a tag or marked the checkbox.</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignJustify|Qt::AlignTop</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>16</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="textLabel2">
+        <property name="text">
+         <string>Available tags:</string>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="tagCombo"/>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
@@ -56,17 +106,11 @@
     </spacer>
    </item>
    <item>
-    <widget class="QLabel" name="textLabel2">
+    <widget class="QCheckBox" name="removeCheckBox">
      <property name="text">
-      <string>Available tags:</string>
-     </property>
-     <property name="wordWrap">
-      <bool>false</bool>
+      <string>Remove selected tags from all transactions, schedules and reports before deleting them.</string>
      </property>
     </widget>
-   </item>
-   <item>
-    <widget class="QComboBox" name="tagCombo" native="true"/>
    </item>
    <item>
     <spacer name="spacer9">
@@ -104,7 +148,6 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets/>
  <resources/>
  <connections>
   <connection>
@@ -115,7 +158,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>313</x>
-     <y>286</y>
+     <y>352</y>
     </hint>
     <hint type="destinationlabel">
      <x>76</x>
@@ -131,11 +174,27 @@
    <hints>
     <hint type="sourcelabel">
      <x>462</x>
-     <y>291</y>
+     <y>357</y>
     </hint>
     <hint type="destinationlabel">
      <x>392</x>
      <y>308</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>removeCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>tagSelectionGroup</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>278</x>
+     <y>98</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>278</x>
+     <y>143</y>
     </hint>
    </hints>
   </connection>
