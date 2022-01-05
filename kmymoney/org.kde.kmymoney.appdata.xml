@@ -40,6 +40,7 @@
   <name xml:lang="zh-CN">KMyMoney</name>
   <name xml:lang="zh-TW">KMyMoney</name>
   <summary>Personal finance manager based on double-entry bookkeeping</summary>
+  <summary xml:lang="ar">مدير مالي شخصي على أساس مسك الدفاتر المزدوجة</summary>
   <summary xml:lang="ca">Gestor de les finances personals, basat en la comptabilitat de doble entrada</summary>
   <summary xml:lang="ca-valencia">Gestor de les finances personals, basat en la comptabilitat de doble entrada</summary>
   <summary xml:lang="cs">Osobní správce financí pro podvojné účetnictví</summary>
@@ -188,6 +189,7 @@
     </screenshot>
     <screenshot>
       <caption>Manage accounts e.g. by institutions they are held at</caption>
+      <caption xml:lang="ar">أدِر الحسابات حسب (مثلًا) المؤسّسات التي تديرها</caption>
       <caption xml:lang="ca">Gestiona els comptes, p. ex., per a les institucions a on estan dipositats</caption>
       <caption xml:lang="ca-valencia">Gestiona els comptes, p. ex., per a les institucions a on estan dipositats</caption>
       <caption xml:lang="de">Verwaltung von Konten nach den zugehörigen Institutionen</caption>
