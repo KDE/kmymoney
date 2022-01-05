@@ -37,7 +37,7 @@
    <label>Number of backup files to keep</label>
    <default>10</default>
    <min>0</min>
-   <max>20</max>
+   <max>100</max>
   </entry>
   <entry name="AutoSavePeriod" type="Int">
    <label>Autosave interval in minutes</label>
