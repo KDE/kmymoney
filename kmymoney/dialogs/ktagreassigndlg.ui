@@ -50,7 +50,7 @@
          </size>
         </property>
         <property name="text">
-         <string>To complete the deletion operation, either select a tag from the available tags that will replace the selected tags before they are delete or mark the checkbox below depending on your choice. The OK button becomes accessible once you have selected a tag or marked the checkbox.</string>
+         <string>To complete the deletion operation, either select a tag from the available tags that will replace the selected tags before they are deleted or mark the checkbox below depending on your choice. The OK button becomes accessible once you have selected a tag or marked the checkbox.</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignJustify|Qt::AlignTop</set>
