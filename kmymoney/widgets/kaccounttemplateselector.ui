@@ -7,10 +7,22 @@
     <x>0</x>
     <y>0</y>
     <width>663</width>
-    <height>525</height>
+    <height>445</height>
    </rect>
   </property>
-  <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0">
+  <layout class="QGridLayout" name="gridLayout_3" rowstretch="1,1">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <property name="verticalSpacing">
     <number>0</number>
    </property>
