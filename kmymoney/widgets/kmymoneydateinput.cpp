@@ -28,7 +28,6 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <KPassivePopup>
 #include <KDatePicker>
 
 // ----------------------------------------------------------------------------
@@ -41,7 +40,6 @@ using namespace Icons;
 
 namespace
 {
-const int DATE_POPUP_TIMEOUT = 1500;
 const QDate INVALID_DATE = QDate(1800, 1, 1);
 }
 
@@ -129,7 +127,6 @@ struct KMyMoneyDateInput::Private {
     Qt::AlignmentFlag m_qtalignment;
     QWidget *m_dateFrame;
     QPushButton *m_dateButton;
-    KPassivePopup *m_datePopup;
 };
 
 KMyMoneyDateInput::KMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
@@ -149,11 +146,6 @@ KMyMoneyDateInput::KMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
     // we use INVALID_DATE as a special value for multi transaction editing
     d->m_dateEdit->setMinimumDate(INVALID_DATE);
     d->m_dateEdit->setSpecialValueText(QLatin1String(" "));
-
-    d->m_datePopup = new KPassivePopup(d->m_dateEdit);
-    d->m_datePopup->setObjectName("datePopup");
-    d->m_datePopup->setTimeout(DATE_POPUP_TIMEOUT);
-    d->m_datePopup->setView(new QLabel(QLocale().toString(d->m_date), d->m_datePopup));
 
     d->m_dateFrame = new QWidget(this);
     dateInputLayout->addWidget(d->m_dateFrame);
@@ -231,7 +223,6 @@ void KMyMoneyDateInput::fixSize()
 KMyMoneyDateInput::~KMyMoneyDateInput()
 {
     delete d->m_dateFrame;
-    delete d->m_datePopup;
     delete d;
 }
 
@@ -305,16 +296,7 @@ void KMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
   */
 bool KMyMoneyDateInput::eventFilter(QObject *, QEvent *e)
 {
-    if (e->type() == QEvent::FocusIn) {
-#ifndef Q_OS_MAC
-        d->m_datePopup->show(mapToGlobal(QPoint(0, height())));
-#endif
-        // select the date section, but we need to delay it a bit
-    } else if (e->type() == QEvent::FocusOut) {
-#ifndef Q_OS_MAC
-        d->m_datePopup->hide();
-#endif
-    } else if (e->type() == QEvent::KeyPress) {
+    if (e->type() == QEvent::KeyPress) {
         if (QKeyEvent *k = dynamic_cast<QKeyEvent*>(e)) {
             keyPressEvent(k);
             if (k->isAccepted())
@@ -330,14 +312,6 @@ void KMyMoneyDateInput::slotDateChosenRef(const QDate& date)
     if (date.isValid()) {
         emit dateChanged(date);
         d->m_date = date;
-
-#ifndef Q_OS_MAC
-        QLabel *lbl = static_cast<QLabel*>(d->m_datePopup->view());
-        lbl->setText(QLocale().toString(date));
-        lbl->adjustSize();
-        if (d->m_datePopup->isVisible() || hasFocus())
-            d->m_datePopup->show(mapToGlobal(QPoint(0, height()))); // Repaint
-#endif
     }
 }
 
