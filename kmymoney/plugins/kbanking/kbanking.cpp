@@ -24,11 +24,8 @@
 #include <QRegularExpression>
 #include <QStringList>
 #include <QTimer>
-
-#ifdef IS_APPIMAGE
 #include <QCoreApplication>
 #include <QStandardPaths>
-#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -66,14 +63,15 @@
 
 #include "kbaccountsettings.h"
 #include "kbmapaccount.h"
-#include "mymoneyfile.h"
-#include "onlinejobadministration.h"
-#include "kmymoneyview.h"
 #include "kbpickstartdate.h"
-#include "mymoneyinstitution.h"
-#include "mymoneytransactionfilter.h"
+#include "kmymoneyview.h"
 #include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
 #include "mymoneysecurity.h"
+#include "mymoneytransactionfilter.h"
+#include "mymoneyutils.h"
+#include "onlinejobadministration.h"
 
 #include "gwenkdegui.h"
 #include "gwenhywfarqtoperators.h"
@@ -203,15 +201,16 @@ void KBanking::plug()
             // Tell the host application to load my GUI component
             setComponentName(componentName, "KBanking");
 
-#ifdef IS_APPIMAGE
-            const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
-            setXMLFile(rcFilePath);
+            if (MyMoneyUtils::isRunningAsAppImage()) {
+                const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+                setXMLFile(rcFilePath);
 
-            const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
-            setLocalXMLFile(localRcFilePath);
-#else
-            setXMLFile(rcFileName);
-#endif
+                const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/')
+                    + componentName + QLatin1Char('/') + rcFileName;
+                setLocalXMLFile(localRcFilePath);
+            } else {
+                setXMLFile(rcFileName);
+            }
 
             // get certificate handling and dialog settings management
             AB_Gui_Extend(d->gui->getCInterface(), m_kbanking->getCInterface());

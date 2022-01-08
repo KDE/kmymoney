@@ -18,10 +18,8 @@
 #include <QtConcurrentRun>
 #include <QFutureWatcher>
 #include <QProgressDialog>
-#ifdef IS_APPIMAGE
 #include <QCoreApplication>
 #include <QStandardPaths>
-#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,14 +31,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mapaccountwizard.h"
 #include "accountsettings.h"
-#include "woobinterface.h"
-
+#include "mapaccountwizard.h"
 #include "mymoneyaccount.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneystatement.h"
+#include "mymoneyutils.h"
 #include "statementinterface.h"
+#include "woobinterface.h"
 
 class WoobPrivate
 {
@@ -87,15 +85,16 @@ Woob::Woob(QObject *parent, const QVariantList &args) :
     const auto rcFileName = QLatin1String("woob.rc");
     setComponentName(componentName, i18n("Woob"));
 
-#ifdef IS_APPIMAGE
-    const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
-    setXMLFile(rcFilePath);
+    if (MyMoneyUtils::isRunningAsAppImage()) {
+        const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+        setXMLFile(rcFilePath);
 
-    const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
-    setLocalXMLFile(localRcFilePath);
-#else
-    setXMLFile(rcFileName);
-#endif
+        const QString localRcFilePath =
+            QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+        setLocalXMLFile(localRcFilePath);
+    } else {
+        setXMLFile(rcFileName);
+    }
 
     qDebug("Plugins: woob loaded");
 }

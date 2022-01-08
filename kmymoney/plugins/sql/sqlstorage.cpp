@@ -16,10 +16,8 @@
 #include <QTimer>
 #include <QFile>
 #include <QSqlDriver>
-#ifdef IS_APPIMAGE
 #include <QCoreApplication>
 #include <QStandardPaths>
-#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -32,18 +30,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "sqlstorage.h"
 #include "appinterface.h"
-#include "viewinterface.h"
-#include "kselectdatabasedlg.h"
-#include "kgeneratesqldlg.h"
-#include "mymoneyfile.h"
-#include "mymoneystoragesql.h"
-#include "mymoneyexception.h"
-#include "mymoneystoragemgr.h"
 #include "icons.h"
-#include "kmymoneysettings.h"
+#include "kgeneratesqldlg.h"
 #include "kmymoneyenums.h"
+#include "kmymoneysettings.h"
+#include "kselectdatabasedlg.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneystoragemgr.h"
+#include "mymoneystoragesql.h"
+#include "mymoneyutils.h"
+#include "sqlstorage.h"
+#include "viewinterface.h"
 
 using namespace Icons;
 
@@ -80,15 +79,16 @@ SQLStorage::SQLStorage(QObject *parent, const QVariantList &args) :
     const auto rcFileName = QLatin1String("sqlstorage.rc");
     setComponentName(componentName, i18n("SQL storage"));
 
-#ifdef IS_APPIMAGE
-    const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
-    setXMLFile(rcFilePath);
+    if (MyMoneyUtils::isRunningAsAppImage()) {
+        const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+        setXMLFile(rcFilePath);
 
-    const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
-    setLocalXMLFile(localRcFilePath);
-#else
-    setXMLFile(rcFileName);
-#endif
+        const QString localRcFilePath =
+            QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+        setLocalXMLFile(localRcFilePath);
+    } else {
+        setXMLFile(rcFileName);
+    }
 
     createActions();
     // For information, announce that we have been loaded.

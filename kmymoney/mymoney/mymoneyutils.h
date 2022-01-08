@@ -68,6 +68,8 @@ KMM_MYMONEY_EXPORT QDate stringToDate(const QString& str);
 KMM_MYMONEY_EXPORT QString QStringEmpty(const QString&);
 
 KMM_MYMONEY_EXPORT unsigned long extractId(const QString& txt);
+
+KMM_MYMONEY_EXPORT bool isRunningAsAppImage();
 }
 
 #endif

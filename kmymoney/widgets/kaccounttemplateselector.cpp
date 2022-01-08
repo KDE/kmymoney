@@ -25,6 +25,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyutils.h"
+
 #include "ui_kaccounttemplateselector.h"
 
 #include <mymoneytemplate.h>
@@ -167,22 +169,23 @@ void KAccountTemplateSelector::slotLoadTemplateList()
     QStringList dirs;
 
     // get list of template subdirs and scan them for the list of subdirs
-#ifdef IS_APPIMAGE
-    // according to https://docs.appimage.org/packaging-guide/ingredients.html#open-source-applications
-    // QStandardPaths::AppDataLocation is unreliable on AppImages, so apply workaround here in case we fail to find templates
-    // watch out for QStringBuilder here; for yet unknown reason it causes segmentation fault on startup
-    const auto templateDirList = QString("%1%2").arg(QCoreApplication::applicationDirPath(), QLatin1String("/../share/kmymoney/templates/"));
-    if (QFile::exists(templateDirList)) {
-        d->dirlist.append(templateDirList);
+    if (MyMoneyUtils::isRunningAsAppImage()) {
+        // according to https://docs.appimage.org/packaging-guide/ingredients.html#open-source-applications
+        // QStandardPaths::AppDataLocation is unreliable on AppImages, so apply workaround here in case we fail to find templates
+        // watch out for QStringBuilder here; for yet unknown reason it causes segmentation fault on startup
+        const auto templateDirList = QString("%1%2").arg(QCoreApplication::applicationDirPath(), QLatin1String("/../share/kmymoney/templates/"));
+        if (QFile::exists(templateDirList)) {
+            d->dirlist.append(templateDirList);
+        } else {
+            qWarning() << "Template directory was not found in the following location:" << templateDirList;
+        }
     } else {
-        qWarning() << "Template directory was not found in the following location:" << templateDirList;
-    }
-
-#elif defined(Q_OS_MAC)
-    d->dirlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "kmymoney/templates", QStandardPaths::LocateDirectory);
+#if defined(Q_OS_MAC)
+        d->dirlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "kmymoney/templates", QStandardPaths::LocateDirectory);
 #else
-    d->dirlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates", QStandardPaths::LocateDirectory);
+        d->dirlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates", QStandardPaths::LocateDirectory);
 #endif
+    }
 
     if (d->dirlist.isEmpty()) {
         qWarning("Template files were not found in any of the following QStandardPaths::AppDataLocation:");

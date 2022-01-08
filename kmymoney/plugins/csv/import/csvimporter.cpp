@@ -11,11 +11,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QFile>
-#ifdef IS_APPIMAGE
 #include <QCoreApplication>
+#include <QFile>
 #include <QStandardPaths>
-#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,6 +27,7 @@
 
 #include "core/csvimportercore.h"
 #include "csvwizard.h"
+#include "mymoneyutils.h"
 #include "statementinterface.h"
 #include "viewinterface.h"
 
@@ -41,16 +40,16 @@ CSVImporter::CSVImporter(QObject *parent, const QVariantList &args)
     const auto rcFileName = QLatin1String("csvimporter.rc");
     setComponentName(componentName, i18n("CSV importer"));
 
-#ifdef IS_APPIMAGE
-    const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
-    setXMLFile(rcFilePath);
+    if (MyMoneyUtils::isRunningAsAppImage()) {
+        const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+        setXMLFile(rcFilePath);
 
-    const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
-    setLocalXMLFile(localRcFilePath);
-#else
-    setXMLFile(rcFileName);
-#endif
-
+        const QString localRcFilePath =
+            QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+        setLocalXMLFile(localRcFilePath);
+    } else {
+        setXMLFile(rcFileName);
+    }
 
     createActions();
     // For information, announce that we have been loaded.

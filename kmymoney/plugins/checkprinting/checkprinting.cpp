@@ -9,15 +9,13 @@
 
 // QT includes
 #include <QAction>
-#include <QFile>
+#include <QCoreApplication>
 #include <QDialog>
+#include <QFile>
 #ifdef ENABLE_WEBENGINE
 #include <QWebEngineView>
 #else
 #include <KWebView>
-#endif
-#ifdef IS_APPIMAGE
-#include <QCoreApplication>
 #endif
 #include <QStandardPaths>
 
@@ -61,15 +59,16 @@ CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
     const auto rcFileName = QLatin1String("checkprinting.rc");
     setComponentName(componentName, i18nc("It's about printing bank checks", "Check printing"));
 
-#ifdef IS_APPIMAGE
-    const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
-    setXMLFile(rcFilePath);
+    if (MyMoneyUtils::isRunningAsAppImage()) {
+        const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+        setXMLFile(rcFilePath);
 
-    const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
-    setLocalXMLFile(localRcFilePath);
-#else
-    setXMLFile(rcFileName);
-#endif
+        const QString localRcFilePath =
+            QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+        setLocalXMLFile(localRcFilePath);
+    } else {
+        setXMLFile(rcFileName);
+    }
 
     // For ease announce that we have been loaded.
     qDebug("Plugins: checkprinting loaded");

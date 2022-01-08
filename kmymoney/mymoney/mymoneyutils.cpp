@@ -91,3 +91,7 @@ unsigned long MyMoneyUtils::extractId(const QString& txt)
     return rc;
 }
 
+bool MyMoneyUtils::isRunningAsAppImage()
+{
+    return !(qgetenv("APPDIR").isEmpty());
+}

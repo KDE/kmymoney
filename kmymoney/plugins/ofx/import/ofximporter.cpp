@@ -15,10 +15,8 @@
 #include <QRadioButton>
 #include <QSpinBox>
 #include <QByteArray>
-#ifdef IS_APPIMAGE
 #include <QCoreApplication>
 #include <QStandardPaths>
-#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -35,19 +33,20 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <libofx/libofx.h>
-#include "konlinebankingstatus.h"
-#include "konlinebankingsetupwizard.h"
+#include "importinterface.h"
+#include "kmymoneyutils.h"
 #include "kofxdirectconnectdlg.h"
+#include "konlinebankingsetupwizard.h"
+#include "konlinebankingstatus.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "mymoneystatement.h"
 #include "mymoneystatementreader.h"
+#include "mymoneyutils.h"
 #include "statementinterface.h"
-#include "importinterface.h"
-#include "viewinterface.h"
 #include "ui_importoption.h"
-#include "kmymoneyutils.h"
+#include "viewinterface.h"
+#include <libofx/libofx.h>
 
 //#define DEBUG_LIBOFX
 
@@ -126,15 +125,16 @@ OFXImporter::OFXImporter(QObject *parent, const QVariantList &args) :
     const auto rcFileName = QLatin1String("ofximporter.rc");
     setComponentName(componentName, i18n("OFX Importer"));
 
-#ifdef IS_APPIMAGE
-    const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
-    setXMLFile(rcFilePath);
+    if (MyMoneyUtils::isRunningAsAppImage()) {
+        const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+        setXMLFile(rcFilePath);
 
-    const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
-    setLocalXMLFile(localRcFilePath);
-#else
-    setXMLFile(rcFileName);
-#endif
+        const QString localRcFilePath =
+            QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+        setLocalXMLFile(localRcFilePath);
+    } else {
+        setXMLFile(rcFileName);
+    }
 
     createActions();
 
