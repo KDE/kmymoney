@@ -304,7 +304,7 @@ qint64 KGPGFile::writeData(const char *data, qint64 maxlen)
     // size_t boundaries.
     qint64 bytesWritten = 0;
     while (maxlen) {
-        qint64 len = 2 ^ 31;
+        qint64 len = 1LL << 31;
         if (len > maxlen)
             len = maxlen;
         bytesWritten += d->m_data.write(data, len);
