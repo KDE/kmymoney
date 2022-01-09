@@ -59,23 +59,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoney/onlinejob.h"
-
+#include "aqbankingkmmoperators.h"
+#include "gwenhywfarqtoperators.h"
+#include "gwenkdegui.h"
 #include "kbaccountsettings.h"
 #include "kbmapaccount.h"
-#include "mymoneyfile.h"
-#include "onlinejobadministration.h"
-#include "kmymoneyview.h"
 #include "kbpickstartdate.h"
-#include "mymoneyinstitution.h"
-#include "mymoneytransactionfilter.h"
+#include "kmymoneyview.h"
+#include "mymoney/onlinejob.h"
 #include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
 #include "mymoneysecurity.h"
-
-#include "gwenkdegui.h"
-#include "gwenhywfarqtoperators.h"
-#include "aqbankingkmmoperators.h"
 #include "mymoneystatement.h"
+#include "mymoneytransactionfilter.h"
+#include "mymoneyutils.h"
+#include "onlinejobadministration.h"
 #include "statementinterface.h"
 #include "viewinterface.h"
 
@@ -199,11 +198,23 @@ void KBanking::plug(KXMLGUIFactory* guiFactory)
     if (m_kbanking) {
         d->gui = new gwenKdeGui;
         GWEN_Gui_SetGui(d->gui->getCInterface());
+
+        // Setup logging features
         GWEN_Gui_SetLogHookFn(d->gui->getCInterface(), &KBanking::Private::gwenLogHook);
         if (qEnvironmentVariableIsEmpty("GWEN_LOGLEVEL")) {
-            GWEN_Logger_SetLevel(GWEN_LOGDOMAIN, GWEN_LoggerLevel_Warning);
+            if (MyMoneyUtils::isRunningAsAppImage()) {
+                GWEN_Logger_SetLevel(GWEN_LOGDOMAIN, GWEN_LoggerLevel_Verbous);
+            } else {
+                GWEN_Logger_SetLevel(GWEN_LOGDOMAIN, GWEN_LoggerLevel_Warning);
+            }
         }
-
+        if (qEnvironmentVariableIsEmpty("AQBANKING_LOGLEVEL")) {
+            if (MyMoneyUtils::isRunningAsAppImage()) {
+                GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Verbous);
+            } else {
+                GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Warning);
+            }
+        }
         if (m_kbanking->init() == 0) {
             // Tell the host application to load my GUI component
             const auto rcFileName = QLatin1String("kbanking.rc");
@@ -217,13 +228,16 @@ void KBanking::plug(KXMLGUIFactory* guiFactory)
 
             // load protocol conversion list
             loadProtocolConversion();
-            if (qEnvironmentVariableIsEmpty("AQBANKING_LOGLEVEL"))
-                GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Warning);
 
         } else {
             qWarning("Could not initialize KBanking online banking interface");
             delete m_kbanking;
             m_kbanking = 0;
+        }
+
+        if (MyMoneyUtils::isRunningAsAppImage()) {
+            GWEN_Logger_SetLevel(GWEN_LOGDOMAIN, GWEN_LoggerLevel_Warning);
+            GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Warning);
         }
     }
 }
