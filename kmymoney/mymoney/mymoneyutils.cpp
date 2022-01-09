@@ -205,3 +205,8 @@ modifyTransactionWarnLevel_t MyMoneyUtils::transactionWarnLevel(const QString& j
 {
     return transactionWarnLevel(QStringList(journalEntryId));
 }
+
+bool MyMoneyUtils::isRunningAsAppImage()
+{
+    return qEnvironmentVariableIsSet("APPDIR");
+}

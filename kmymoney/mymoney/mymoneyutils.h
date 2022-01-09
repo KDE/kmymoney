@@ -100,6 +100,8 @@ KMM_MYMONEY_EXPORT QString paymentMethodToString(eMyMoney::Schedule::PaymentType
 
 KMM_MYMONEY_EXPORT modifyTransactionWarnLevel_t transactionWarnLevel(const QString& transactionId);
 KMM_MYMONEY_EXPORT modifyTransactionWarnLevel_t transactionWarnLevel(const QStringList& transactionIds);
+
+KMM_MYMONEY_EXPORT bool isRunningAsAppImage();
 }
 
 #endif
