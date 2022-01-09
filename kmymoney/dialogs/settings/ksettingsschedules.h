@@ -33,7 +33,7 @@ public Q_SLOTS:
 
 protected Q_SLOTS:
     void slotLoadRegion(const QString &region);
-    void slotSetRegion(const QString &region);
+    void slotSetRegion(int index);
 
 protected:
     void loadList();
