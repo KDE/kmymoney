@@ -1162,11 +1162,23 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
     if (p && *p) {
         QString tmpMemo;
 
-        s=QString::fromUtf8(p).trimmed();
-        tmpMemo=QString::fromUtf8(p).trimmed();
+        s = QString::fromUtf8(p).trimmed();
+        tmpMemo = QString::fromUtf8(p).trimmed();
         tmpMemo.replace('\n', ' ');
 
-        memo=tmpMemo;
+        memo = tmpMemo;
+    }
+
+    // This is to extract Paypal specific user supplied notes
+    // and append them to the memo field
+    p = AB_Transaction_GetMemo(t);
+    if (p) {
+        QString tmpMemo;
+
+        s += QString::fromUtf8(p).trimmed();
+        tmpMemo = QString::fromUtf8(p).trimmed();
+        tmpMemo.replace('\n', ' ');
+        memo.append(tmpMemo);
     }
 
     // in case we have some SEPA fields filled with information
