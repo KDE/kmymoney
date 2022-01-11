@@ -381,7 +381,7 @@ void KSettingsSchedules::loadList()
     boldFont.setBold(true);
 
     for (const auto& region : regionList) {
-        const auto entries = region.split('\0');
+        const auto entries = region.split(QLatin1Char('\0'));
         if (entries.at(0).compare(lastCountry)) {
             lastCountry = entries.at(0);
             item = new QStandardItem(lastCountry);
