@@ -211,6 +211,7 @@ void KBanking::plug(KXMLGUIFactory* guiFactory)
         if (qEnvironmentVariableIsEmpty("AQBANKING_LOGLEVEL")) {
             if (MyMoneyUtils::isRunningAsAppImage()) {
                 GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Verbous);
+                GWEN_Logger_SetLevel("aqhbci", GWEN_LoggerLevel_Info);
             } else {
                 GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Warning);
             }
