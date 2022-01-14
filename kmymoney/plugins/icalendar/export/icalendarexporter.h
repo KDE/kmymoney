@@ -20,11 +20,7 @@ class iCalendarExporter: public KMyMoneyPlugin::Plugin
     Q_OBJECT
 
 public:
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-    explicit iCalendarExporter(QObject *parent, const QVariantList &args);
-#else
     explicit iCalendarExporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
-#endif
     ~iCalendarExporter() override;
 
 protected Q_SLOTS:

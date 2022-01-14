@@ -29,13 +29,8 @@
 #include "statementinterface.h"
 #include "viewinterface.h"
 
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-CSVImporter::CSVImporter(QObject *parent, const QVariantList &args)
-    : KMyMoneyPlugin::Plugin(parent, args)
-#else
 CSVImporter::CSVImporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     : KMyMoneyPlugin::Plugin(parent, metaData, args)
-#endif
     , m_action(nullptr)
 {
     Q_INIT_RESOURCE(csvimporter);

@@ -22,13 +22,8 @@
 #include "viewinterface.h"
 #include "konlinejoboutboxview.h"
 
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-OnlineJobOutboxView::OnlineJobOutboxView(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args),
-#else
 OnlineJobOutboxView::OnlineJobOutboxView(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, metaData, args),
-#endif
     m_view(nullptr)
 {
     Q_INIT_RESOURCE(onlinejoboutboxview);

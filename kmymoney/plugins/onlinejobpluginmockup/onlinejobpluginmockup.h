@@ -33,11 +33,7 @@ class onlineJobPluginMockup : public KMyMoneyPlugin::OnlinePluginExtended
                  KMyMoneyPlugin::OnlinePlugin)
 
 public:
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-    explicit onlineJobPluginMockup(QObject *parent, const QVariantList &args);
-#else
     explicit onlineJobPluginMockup(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
-#endif
     ~onlineJobPluginMockup() override;
 
     void protocols(QStringList& protocolList) const override;

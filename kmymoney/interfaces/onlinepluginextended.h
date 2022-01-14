@@ -31,11 +31,7 @@ class KMM_PLUGIN_EXPORT OnlinePluginExtended : public Plugin, public OnlinePlugi
     Q_OBJECT
 
 public:
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-    OnlinePluginExtended(QObject* parent, const QVariantList& args);
-#else
     OnlinePluginExtended(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args);
-#endif
     virtual ~OnlinePluginExtended()
     {
     }

@@ -35,13 +35,8 @@
 
 #include "kreconciliationreportdlg.h"
 
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-ReconciliationReport::ReconciliationReport(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args)
-#else
 ReconciliationReport::ReconciliationReport(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, metaData, args)
-#endif
 {
     qDebug("Plugins: reconciliation report loaded");
 }

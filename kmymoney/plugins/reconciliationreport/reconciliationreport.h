@@ -19,11 +19,7 @@ class ReconciliationReport: public KMyMoneyPlugin::Plugin
     Q_OBJECT
 
 public:
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-    explicit ReconciliationReport(QObject *parent, const QVariantList &args);
-#else
     explicit ReconciliationReport(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
-#endif
     ~ReconciliationReport() override;
 
 public Q_SLOTS:

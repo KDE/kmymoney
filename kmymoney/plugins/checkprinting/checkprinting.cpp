@@ -163,13 +163,8 @@ struct CheckPrinting::Private {
     }
 };
 
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args)
-#else
 CheckPrinting::CheckPrinting(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, metaData, args)
-#endif
 {
     Q_INIT_RESOURCE(checkprinting);
 

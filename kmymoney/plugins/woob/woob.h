@@ -30,11 +30,7 @@ class Woob : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::OnlinePlugin
     Q_INTERFACES(KMyMoneyPlugin::OnlinePlugin)
 
 public:
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-    explicit Woob(QObject* parent, const QVariantList& args);
-#else
     explicit Woob(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args);
-#endif
     ~Woob() override;
 
     void plug(KXMLGUIFactory* guiFactory) override;

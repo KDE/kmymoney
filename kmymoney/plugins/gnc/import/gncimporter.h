@@ -25,11 +25,7 @@ class GNCImporter : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::Storag
     Q_INTERFACES(KMyMoneyPlugin::StoragePlugin)
 
 public:
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-    explicit GNCImporter(QObject *parent, const QVariantList &args);
-#else
     explicit GNCImporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
-#endif
     ~GNCImporter() override;
 
     bool open(const QUrl &url) override;

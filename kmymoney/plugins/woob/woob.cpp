@@ -75,13 +75,8 @@ public:
     AccountSettings* accountSettings;
 };
 
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-Woob::Woob(QObject* parent, const QVariantList& args)
-    : KMyMoneyPlugin::Plugin(parent, args)
-#else
 Woob::Woob(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
     : KMyMoneyPlugin::Plugin(parent, metaData, args)
-#endif
     , d_ptr(new WoobPrivate)
 {
     Q_INIT_RESOURCE(woob);

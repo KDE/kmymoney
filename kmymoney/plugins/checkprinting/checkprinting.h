@@ -16,11 +16,7 @@ class CheckPrinting : public KMyMoneyPlugin::Plugin
     Q_OBJECT
 
 public:
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-    explicit CheckPrinting(QObject *parent, const QVariantList &args);
-#else
     explicit CheckPrinting(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
-#endif
     ~CheckPrinting() override;
 
 public Q_SLOTS:

@@ -36,11 +36,7 @@ class ibanBicData : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::DataPl
     KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-    explicit ibanBicData(QObject *parent, const QVariantList &args);
-#else
     explicit ibanBicData(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
-#endif
     ~ibanBicData() override;
 
     QVariant requestData(const QString &arg, uint type) override;

@@ -23,13 +23,8 @@
 #include "viewinterface.h"
 #include "kforecastview.h"
 
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-ForecastView::ForecastView(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args),
-#else
 ForecastView::ForecastView(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, metaData, args),
-#endif
     m_view(nullptr)
 {
     Q_INIT_RESOURCE(forecastview);

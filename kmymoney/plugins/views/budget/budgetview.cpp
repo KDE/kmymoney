@@ -24,13 +24,8 @@
 #include "viewinterface.h"
 #include "kbudgetview.h"
 
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-BudgetView::BudgetView(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args),
-#else
 BudgetView::BudgetView(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, metaData, args),
-#endif
     m_view(nullptr)
 {
     Q_INIT_RESOURCE(budgetview);

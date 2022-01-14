@@ -36,13 +36,8 @@ class MyMoneyStatement;
 
 static constexpr KCompressionDevice::CompressionType const& COMPRESSION_TYPE = KCompressionDevice::GZip;
 
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-GNCImporter::GNCImporter(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args)
-#else
 GNCImporter::GNCImporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, metaData, args)
-#endif
 {
     // For information, announce that we have been loaded.
     qDebug("Plugins: gncimporter loaded");

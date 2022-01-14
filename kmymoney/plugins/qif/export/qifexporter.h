@@ -24,11 +24,7 @@ class QIFExporter : public KMyMoneyPlugin::Plugin
     Q_OBJECT
 
 public:
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-    explicit QIFExporter(QObject *parent, const QVariantList &args);
-#else
     explicit QIFExporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
-#endif
     ~QIFExporter() override;
 
     QAction          *m_action;

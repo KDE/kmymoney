@@ -29,13 +29,8 @@
 
 class MyMoneyStatement;
 
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-QIFImporter::QIFImporter(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args),
-#else
 QIFImporter::QIFImporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, metaData, args),
-#endif
     m_qifReader(nullptr)
 {
     Q_INIT_RESOURCE(qifimporter);

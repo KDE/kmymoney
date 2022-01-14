@@ -23,28 +23,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "interfaceloader.h"
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-#include <mymoneyexception.h>
-#endif
 
 KMyMoneyPlugin::Container pPlugins;
 
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const QVariantList& args)
-    : QObject()
-    , KXMLGUIClient()
-{
-    Q_UNUSED(parent)
-
-    if (args.isEmpty() || args.count() < 2)
-        throw MYMONEYEXCEPTION_CSTRING("Plugin not initialized properly!");
-    else {
-        setObjectName(args.at(0).toString());
-        m_componentDisplayName = args.at(1).toString();
-        setComponentName(args.at(0).toString(), m_componentDisplayName);
-    }
-}
-#else
 KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
     : QObject()
     , KXMLGUIClient()
@@ -56,7 +37,6 @@ KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const KPluginMetaData& metaData,
     m_componentDisplayName = metaData.name();
     setComponentName(metaData.pluginId(), m_componentDisplayName);
 }
-#endif
 
 KMyMoneyPlugin::Plugin::~Plugin()
 {

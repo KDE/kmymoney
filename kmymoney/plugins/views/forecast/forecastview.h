@@ -25,11 +25,7 @@ class ForecastView : public KMyMoneyPlugin::Plugin
     Q_OBJECT
 
 public:
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-    explicit ForecastView(QObject *parent, const QVariantList &args);
-#else
     explicit ForecastView(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
-#endif
     ~ForecastView() override;
 
     void plug(KXMLGUIFactory* guiFactory) override;

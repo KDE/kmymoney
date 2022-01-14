@@ -32,13 +32,8 @@
 
 #define VIEW_LEDGER         "ledger"
 
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-ReportsView::ReportsView(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args),
-#else
 ReportsView::ReportsView(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, metaData, args),
-#endif
     m_view(nullptr)
 {
     // For information, announce that we have been loaded.

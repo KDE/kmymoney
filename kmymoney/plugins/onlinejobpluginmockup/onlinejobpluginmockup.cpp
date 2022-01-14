@@ -17,13 +17,8 @@
 #include "onlinetasks/sepa/sepaonlinetransfer.h"
 #include "sepacredittransfersettingsmockup.h"
 
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-onlineJobPluginMockup::onlineJobPluginMockup(QObject *parent, const QVariantList &args) :
-    OnlinePluginExtended(parent, args)
-#else
 onlineJobPluginMockup::onlineJobPluginMockup(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
     OnlinePluginExtended(parent, metaData, args)
-#endif
 {
     qDebug("onlineJobPluginMockup should be used during development only!");
 }

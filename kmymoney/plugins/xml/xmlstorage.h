@@ -29,11 +29,7 @@ class XMLStorage : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::Storage
     Q_INTERFACES(KMyMoneyPlugin::StoragePlugin)
 
 public:
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-    explicit XMLStorage(QObject *parent, const QVariantList &args);
-#else
     explicit XMLStorage(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
-#endif
     ~XMLStorage() override;
 
     bool open(const QUrl &url) override;
