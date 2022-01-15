@@ -93,5 +93,5 @@ unsigned long MyMoneyUtils::extractId(const QString& txt)
 
 bool MyMoneyUtils::isRunningAsAppImage()
 {
-    return !(qgetenv("APPDIR").isEmpty());
+    return qEnvironmentVariableIsSet("RUNNING_AS_APPIMAGE");
 }
