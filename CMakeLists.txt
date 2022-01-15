@@ -1,7 +1,7 @@
 # For all the configurable CMake switches, please see https://invent.kde.org/office/kmymoney/-/wikis/home#cmake-switches
 
 # The CMake version we require
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.16)
 
 option(BUILD_STATIC_PLUGINS "Build the plugins statically" OFF)
 
