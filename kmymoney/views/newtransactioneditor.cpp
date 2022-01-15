@@ -266,6 +266,7 @@ bool NewTransactionEditor::Private::isIncomeExpense(const QModelIndex& idx) cons
 void NewTransactionEditor::Private::accountChanged(const QString& id)
 {
     m_account = MyMoneyFile::instance()->accountsModel()->itemById(id);
+    m_split.setAccountId(id);
 
     m_transaction.setCommodity(m_account.currencyId());
 
