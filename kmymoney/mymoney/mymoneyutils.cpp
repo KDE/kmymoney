@@ -208,5 +208,5 @@ modifyTransactionWarnLevel_t MyMoneyUtils::transactionWarnLevel(const QString& j
 
 bool MyMoneyUtils::isRunningAsAppImage()
 {
-    return qEnvironmentVariableIsSet("APPDIR");
+    return qEnvironmentVariableIsSet("RUNNING_AS_APPIMAGE");
 }
