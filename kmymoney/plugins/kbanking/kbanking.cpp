@@ -188,6 +188,28 @@ KBanking::~KBanking()
 void KBanking::plug(KXMLGUIFactory* guiFactory)
 {
     Q_UNUSED(guiFactory)
+
+    if (qEnvironmentVariableIsEmpty("GWEN_LOGLEVEL")) {
+        if (MyMoneyUtils::isRunningAsAppImage()) {
+            qDebug() << "Set loglevel for" << GWEN_LOGDOMAIN << "to verbose";
+            GWEN_Logger_SetLevel(GWEN_LOGDOMAIN, GWEN_LoggerLevel_Verbous);
+        } else {
+            GWEN_Logger_SetLevel(GWEN_LOGDOMAIN, GWEN_LoggerLevel_Warning);
+        }
+    }
+    if (qEnvironmentVariableIsEmpty("AQBANKING_LOGLEVEL")) {
+        if (MyMoneyUtils::isRunningAsAppImage()) {
+            qDebug() << "Set loglevel for" << AQBANKING_LOGDOMAIN << "to verbose";
+            GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Verbous);
+            qDebug() << "Set loglevel for"
+                     << "aqhbci"
+                     << "to verbose";
+            GWEN_Logger_SetLevel("aqhbci", GWEN_LoggerLevel_Info);
+        } else {
+            GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Warning);
+        }
+    }
+
     m_kbanking = new KBankingExt(this, "KMyMoney");
 
     d->passwordCacheTimer = new QTimer(this);
@@ -201,21 +223,7 @@ void KBanking::plug(KXMLGUIFactory* guiFactory)
 
         // Setup logging features
         GWEN_Gui_SetLogHookFn(d->gui->getCInterface(), &KBanking::Private::gwenLogHook);
-        if (qEnvironmentVariableIsEmpty("GWEN_LOGLEVEL")) {
-            if (MyMoneyUtils::isRunningAsAppImage()) {
-                GWEN_Logger_SetLevel(GWEN_LOGDOMAIN, GWEN_LoggerLevel_Verbous);
-            } else {
-                GWEN_Logger_SetLevel(GWEN_LOGDOMAIN, GWEN_LoggerLevel_Warning);
-            }
-        }
-        if (qEnvironmentVariableIsEmpty("AQBANKING_LOGLEVEL")) {
-            if (MyMoneyUtils::isRunningAsAppImage()) {
-                GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Verbous);
-                GWEN_Logger_SetLevel("aqhbci", GWEN_LoggerLevel_Info);
-            } else {
-                GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Warning);
-            }
-        }
+
         if (m_kbanking->init() == 0) {
             // Tell the host application to load my GUI component
             const auto rcFileName = QLatin1String("kbanking.rc");
