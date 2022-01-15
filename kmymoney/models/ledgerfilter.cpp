@@ -136,7 +136,7 @@ bool LedgerFilter::filterAcceptsRow(int source_row, const QModelIndex& source_pa
             }
             break;
         case State::Matched:
-            if (!idx.data(eMyMoney::Model::SplitMatchedRole).toBool()) {
+            if (!idx.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool()) {
                 return false;
             }
             break;
