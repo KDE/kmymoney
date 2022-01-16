@@ -92,7 +92,35 @@ public Q_SLOTS:
 
     void slotSettingsChanged();
 
+    /**
+     * This resizes the section identified by @a section
+     * if this view belongs to the same configuration group
+     * identified by @a configGroupName. In case @a view points
+     * to itself, the method does nothing and returns.
+     *
+     * @param view pointer to LedgerView object
+     * @param configGroupName name of the configuration group that changes
+     * @param section column index
+     * @param oldSize the old width of the column in pixels
+     * @param newSize the new width of the column in pixels
+     *
+     * @note Calls adjustDetailColumn(newSize, false) in case
+     * the size changes but does not inform other views about the
+     * change.
+     */
     void resizeSection(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize);
+
+    /**
+     * This moves the section identified by @a section
+     * In case @a view points to itself, the method does nothing and returns.
+     *
+     * @param view pointer to LedgerView object
+     * @param section section index
+     * @param oldIndex the old index of the column
+     * @param newIndex the new index of the column
+     *
+     * @note Does not inform other views about the change.
+     */
     void moveSection(QWidget* view, int section, int oldIndex, int newIndex);
 
 protected:
@@ -115,7 +143,13 @@ protected Q_SLOTS:
     void currentChanged(const QModelIndex &current, const QModelIndex &previous) final override;
     void resizeEditorRow();
 
-    virtual void adjustDetailColumn(int newViewportWidth);
+    /**
+     * Adjust the detail column so that it takes the rest of the
+     * available width. In case @a informOtherViews is @c true,
+     * the sectionResized signal is emitted, if it is @c false
+     * the emission will be suppressed.
+     */
+    virtual void adjustDetailColumn(int newViewportWidth, bool informOtherViews);
 
     void slotMoveToAccount(const QString& accountId);
 

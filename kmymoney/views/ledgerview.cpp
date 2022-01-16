@@ -430,7 +430,7 @@ LedgerView::LedgerView(QWidget* parent)
     // See LedgerView::resizeSection().
     connect(horizontalHeader(), &QHeaderView::sectionResized, this, [&](int logicalIndex, int oldSize, int newSize) {
         emit sectionResized(this, d->columnSelector->configGroupName(), logicalIndex, oldSize, newSize);
-        QMetaObject::invokeMethod(this, "adjustDetailColumn", Qt::QueuedConnection, Q_ARG(int, viewport()->width()));
+        QMetaObject::invokeMethod(this, "adjustDetailColumn", Qt::QueuedConnection, Q_ARG(int, viewport()->width()), Q_ARG(bool, false));
     });
 
     connect(horizontalHeader(), &QHeaderView::sectionMoved, this, [&](int logicalIndex, int oldIndex, int newIndex) {
@@ -943,14 +943,14 @@ void LedgerView::resizeEvent(QResizeEvent* event)
 {
     // qDebug() << "resizeEvent, old:" << event->oldSize() << "new:" << event->size() << "viewport:" << viewport()->width();
     QTableView::resizeEvent(event);
-    adjustDetailColumn(event->size().width());
+    adjustDetailColumn(event->size().width(), true);
     d->infoMessage->resize(viewport()->width(), d->infoMessage->height());
     d->infoMessage->setWordWrap(false);
     d->infoMessage->setWordWrap(true);
     d->infoMessage->setText(d->infoMessage->text());
 }
 
-void LedgerView::adjustDetailColumn(int newViewportWidth)
+void LedgerView::adjustDetailColumn(int newViewportWidth, bool informOtherViews)
 {
     // make sure we don't get here recursively
     if(d->adjustingColumn)
@@ -974,6 +974,9 @@ void LedgerView::adjustDetailColumn(int newViewportWidth)
     const int delta = newViewportWidth - totalColumnWidth;
     const int newWidth = header->sectionSize(d->adjustableColumn) + delta;
     if(newWidth > 10) {
+        QSignalBlocker blocker(header);
+        if (informOtherViews)
+            blocker.unblock();
         header->resizeSection(d->adjustableColumn, newWidth);
     }
 
@@ -1330,7 +1333,9 @@ void LedgerView::resizeSection(QWidget* view, const QString& configGroupName, in
             setColumnHidden(section, true);
         }
         if (newSize > 0) {
+            QSignalBlocker blocker(horizontalHeader());
             horizontalHeader()->resizeSection(section, newSize);
+            QMetaObject::invokeMethod(this, "adjustDetailColumn", Qt::QueuedConnection, Q_ARG(int, viewport()->width()), Q_ARG(bool, false));
         }
     }
 }
