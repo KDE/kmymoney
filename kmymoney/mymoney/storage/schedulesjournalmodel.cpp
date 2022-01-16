@@ -175,6 +175,8 @@ void SchedulesJournalModel::doLoad()
                         t.setPostDate(s.adjustedNextDueDate());
                     }
                     t.setValue(QLatin1String("kmm-is-overdue"), QLatin1String("yes"));
+                } else {
+                    t.setPostDate(s.adjustedNextDueDate());
                 }
 
                 // add transaction to the list
