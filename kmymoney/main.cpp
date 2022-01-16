@@ -72,6 +72,12 @@ int main(int argc, char *argv[])
     }
 #endif
 
+    /**
+     * Create application first
+     */
+    QApplication app(argc, argv);
+    KLocalizedString::setApplicationDomain("kmymoney");
+
     /*
      * For AppImages we need to set the LD_LIBRARY_PATH to have
      * $APPDIR/usr/lib/ as the first entry. We set this up here.
@@ -85,6 +91,7 @@ int main(int argc, char *argv[])
         auto appDir = appFullPath.left(lastDirSeparator + 1);
         auto appName = QString::fromUtf8(appFullPath.mid(lastDirSeparator + 1, 6));
         const auto appDirEnv(qEnvironmentVariable("APPDIR"));
+        qDebug() << "AppImageInfo:" << appDirEnv << appFullPath << appDir << appName;
         if (appDirEnv.contains(QStringLiteral(".mount_%1").arg(appName))) {
             appDir.append("usr/lib");
             const auto libPath = qgetenv("LD_LIBRARY_PATH");
@@ -98,12 +105,6 @@ int main(int argc, char *argv[])
             qDebug() << "LD_LIBRARY_PATH set to" << newLibPath;
         }
     }
-
-    /**
-     * Create application first
-     */
-    QApplication app(argc, argv);
-    KLocalizedString::setApplicationDomain("kmymoney");
 
     migrateConfigFiles();
 
