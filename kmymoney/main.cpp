@@ -89,10 +89,9 @@ int main(int argc, char *argv[])
         QByteArray appFullPath(argv[0]);
         auto lastDirSeparator = appFullPath.lastIndexOf('/');
         auto appDir = appFullPath.left(lastDirSeparator + 1);
-        auto appName = QString::fromUtf8(appFullPath.mid(lastDirSeparator + 1, 6));
-        const auto appDirEnv(qEnvironmentVariable("APPDIR"));
-        qDebug() << "AppImageInfo:" << appDirEnv << appFullPath << appDir << appName;
-        if (appDirEnv.contains(QStringLiteral(".mount_%1").arg(appName))) {
+        auto appName = QString::fromUtf8(appFullPath.mid(lastDirSeparator + 1));
+        qDebug() << "AppImageInfo:" << appFullPath << appDir << appName;
+        if (appName == QStringLiteral("AppRun.wrapped")) {
             appDir.append("usr/lib");
             const auto libPath = qgetenv("LD_LIBRARY_PATH");
             auto newLibPath = appDir;
