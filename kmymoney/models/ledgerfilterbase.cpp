@@ -131,19 +131,28 @@ bool LedgerFilterBase::lessThan(const QModelIndex& left, const QModelIndex& righ
         const auto leftModel = model->baseModel(left);
         const auto rightModel = model->baseModel(right);
         if (leftModel != rightModel) {
-            if (d->isAccountsModel(leftModel)) {
+            // schedules will always be presented last on the same day
+            // before that the online balance is shown
+            // before that the reconciliation records are displayed
+            // special date records are shown on top
+            if (d->isSchedulesJournalModel(leftModel)) {
+                return false;
+            } else if (d->isSchedulesJournalModel(rightModel)) {
+                return true;
+            } else if (d->isAccountsModel(leftModel)) {
                 return false;
             } else if (d->isAccountsModel(rightModel)) {
                 return true;
-            } else if(d->isSpecialDatesModel(leftModel)) {
+            } else if (d->isSpecialDatesModel(leftModel)) {
                 return true;
-            } else if(d->isSpecialDatesModel(rightModel)) {
+            } else if (d->isSpecialDatesModel(rightModel)) {
                 return false;
-            } else if (d->isReconciliationModel(leftModel)) { // rightModel must be journal-/schedulesModel
+            } else if (d->isReconciliationModel(leftModel)) {
                 return false;
-            } else if (d->isReconciliationModel(rightModel)) { // leftModel must be journal-/schedulesModel
+            } else if (d->isReconciliationModel(rightModel)) {
                 return true;
             }
+            // if we get here, both are transaction entries
         }
         // same model and same post date, the ids decide
         return left.data(eMyMoney::Model::IdRole).toString() < right.data(eMyMoney::Model::IdRole).toString();

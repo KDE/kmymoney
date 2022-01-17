@@ -51,6 +51,26 @@ public:
         return (model == static_cast<void*>(MyMoneyFile::instance()->journalModel()));
     }
 
+    inline bool isSchedulesJournalModel(const QAbstractItemModel* model) const
+    {
+        return (model == static_cast<void*>(MyMoneyFile::instance()->schedulesJournalModel()));
+    }
+
+    QString modelType(const QAbstractItemModel* model) const
+    {
+        if (isAccountsModel(model))
+            return QLatin1String("AccountsModel");
+        if (isSpecialDatesModel(model))
+            return QLatin1String("SpecialDatesModel");
+        if (isReconciliationModel(model))
+            return QLatin1String("ReconciliationModel");
+        if (isJournalModel(model))
+            return QLatin1String("JournalModel");
+        if (isSchedulesJournalModel(model))
+            return QLatin1String("SchedulesJournalModel");
+        return QLatin1String("unknown model");
+    }
+
     LedgerFilterBase*           q;
     KConcatenateRowsProxyModel* concatModel;          // Qt5.13+ use QConcatenateTablesProxyModel
     eMyMoney::Account::Type     accountType;
