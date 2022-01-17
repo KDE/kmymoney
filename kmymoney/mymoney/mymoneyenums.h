@@ -583,9 +583,12 @@ enum Roles {
     SplitCostCenterIdRole,
     SplitActivityRole,
     SplitTagIdRole,
-    SplitMatchedRole,
     SplitFormattedValueRole,
     SplitFormattedSharesRole,
+
+    // MatchedSplit
+    MatchedSplitPayeeRole,
+    MatchedSplitMemoRole,
 
     // Journal
     JournalSplitIdRole,

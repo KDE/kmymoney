@@ -73,6 +73,20 @@ public:
         return (m_accountType == eMyMoney::Account::Type::Investment);
     }
 
+    displayProperties displayMatchedString(const QModelIndex& index, const QStyleOptionViewItem& opt)
+    {
+        displayProperties rc;
+        rc.italicStartLine = -1;
+        if (index.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool()) {
+            if (index.column() == JournalModel::Column::Detail) {
+                const auto memo = index.data(eMyMoney::Model::MatchedSplitMemoRole).toString();
+                rc.lines << memo;
+                return rc;
+            }
+        }
+        return rc;
+    }
+
     displayProperties displayString(const QModelIndex& index, const QStyleOptionViewItem& opt)
     {
         displayProperties rc;
@@ -420,11 +434,15 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
         const bool selected = opt.state & QStyle::State_Selected;
 
         const auto displayProperties = d->displayString(index, opt);
+        const auto matchedDisplayProperties = d->displayMatchedString(index, opt);
+
+        const int lineCount = displayProperties.lines.count();
+        const int matchedLineCount = matchedDisplayProperties.lines.count();
 
         const bool erroneous = index.data(eMyMoney::Model::Roles::TransactionErroneousRole).toBool();
 
         // draw the text items
-        if (!opt.text.isEmpty() || !displayProperties.lines.isEmpty()) {
+        if (!opt.text.isEmpty() || (lineCount > 0) || (matchedLineCount > 0)) {
             // check if it is a scheduled transaction and display it as inactive
             if (MyMoneyFile::baseModel()->baseModel(index) == MyMoneyFile::instance()->schedulesJournalModel()) {
                 opt.state &= ~QStyle::State_Enabled;
@@ -450,8 +468,9 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
                 painter->drawRect(textArea.adjusted(0, 0, -1, -1));
             }
 
+            painter->save();
             // collect data for the various columns
-            for (int i = 0; i < displayProperties.lines.count(); ++i) {
+            for (int i = 0; i < lineCount; ++i) {
                 if (i == displayProperties.italicStartLine && LedgerViewSettings::instance()->showAllSplits() && d->isMultiSplitDisplay(index)) {
                     auto font = painter->font();
                     font.setItalic(true);
@@ -459,6 +478,16 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
                     painter->setFont(font);
                 }
                 painter->drawText(textArea.adjusted(0, lineHeight * i, 0, 0), opt.displayAlignment, displayProperties.lines[i]);
+            }
+            painter->restore();
+
+            if (matchedLineCount > 0) {
+                painter->drawText(textArea.adjusted(0, lineHeight * lineCount, 0, 0), opt.displayAlignment, matchedDisplayProperties.lines[0]);
+                // possibly draw horizontal line as separator
+                if (lineCount > 0) {
+                    const auto yOffset(lineHeight * lineCount);
+                    painter->drawLine(opt.rect.x(), opt.rect.y() + yOffset, opt.rect.x() + opt.rect.width(), opt.rect.y() + yOffset);
+                }
             }
         }
 
@@ -546,7 +575,8 @@ QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
             // Scan certain rows which may show multiple lines in a table row
             QSet<int> columns = {JournalModel::Column::Detail, JournalModel::Column::Deposit, JournalModel::Column::Payment};
             for (const auto& column : qAsConst(columns)) {
-                const auto rowCount = d->displayString(index.model()->index(index.row(), column), option).lines.count();
+                const auto idx = index.model()->index(index.row(), column);
+                const auto rowCount = d->displayString(idx, option).lines.count() + d->displayMatchedString(idx, option).lines.count();
                 if (rowCount > rows) {
                     rows = rowCount;
                 }

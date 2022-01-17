@@ -391,6 +391,16 @@ struct JournalModel::Private
         }
     }
 
+    MyMoneySplit matchedSplit(const MyMoneySplit& split)
+    {
+        try {
+            const auto splitId = split.value(QLatin1String("kmm-match-split"));
+            return split.matchedTransaction().splitById(splitId);
+        } catch (...) {
+        }
+        return {};
+    }
+
     JournalModel*                   q;
     JournalModelNewTransaction*     newTransactionModel;
     QMap<QString, QString>          transactionIdKeyMap;
@@ -510,16 +520,16 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case Qt::EditRole:
         switch(idx.column()) {
         case Number:
-            return journalEntry.split().number();
+            return split.number();
 
         case Date:
             return MyMoneyUtils::formatDate(transaction.postDate());
 
         case Account:
-            return MyMoneyFile::instance()->accountsModel()->itemById(journalEntry.split().accountId()).name();
+            return MyMoneyFile::instance()->accountsModel()->itemById(split.accountId()).name();
 
         case Payee:
-            return MyMoneyFile::instance()->payeesModel()->itemById(journalEntry.split().payeeId()).name();
+            return MyMoneyFile::instance()->payeesModel()->itemById(split.payeeId()).name();
 
         case Security:
             return d->security(journalEntry).name();
@@ -539,23 +549,23 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
             return d->counterAccount(idx, journalEntry, transaction);
 
         case Reconciliation:
-            return d->reconciliationStateShort(journalEntry.split().reconcileFlag());
+            return d->reconciliationStateShort(split.reconcileFlag());
             break;
 
         case Payment:
-            if (journalEntry.split().value().isNegative()) {
-                return d->formatValue(transaction, journalEntry.split(), MyMoneyMoney::MINUS_ONE);
+            if (split.value().isNegative()) {
+                return d->formatValue(transaction, split, MyMoneyMoney::MINUS_ONE);
             }
             break;
 
         case Deposit:
-            if (!journalEntry.split().value().isNegative()) {
-                return d->formatValue(transaction, journalEntry.split(), MyMoneyMoney::ONE);
+            if (!split.value().isNegative()) {
+                return d->formatValue(transaction, split, MyMoneyMoney::ONE);
             }
             break;
 
         case Quantity:
-            switch(journalEntry.split().investmentTransactionType()) {
+            switch (split.investmentTransactionType()) {
             case eMyMoney::Split::InvestmentTransactionType::Dividend:
             case eMyMoney::Split::InvestmentTransactionType::Yield:
             case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
@@ -569,7 +579,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
             break;
 
         case Price:
-            switch(journalEntry.split().investmentTransactionType()) {
+            switch (split.investmentTransactionType()) {
             case eMyMoney::Split::InvestmentTransactionType::BuyShares:
             case eMyMoney::Split::InvestmentTransactionType::SellShares:
             case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
@@ -614,8 +624,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
         case Balance:
         {
-            const auto sp = journalEntry.split();
-            auto acc = MyMoneyFile::instance()->accountsModel()->itemById(sp.accountId());
+            auto acc = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
             return journalEntry.balance().formatMoney(acc.fraction());
         }
         break;
@@ -645,25 +654,25 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         return journalEntry.id();
 
     case eMyMoney::Model::SplitAccountIdRole:
-        return journalEntry.split().accountId();
+        return split.accountId();
 
     case eMyMoney::Model::SplitReconcileFlagRole:
-        return QVariant::fromValue<eMyMoney::Split::State>(journalEntry.split().reconcileFlag());
+        return QVariant::fromValue<eMyMoney::Split::State>(split.reconcileFlag());
 
     case eMyMoney::Model::SplitReconcileDateRole:
-        return journalEntry.split().reconcileDate();
+        return split.reconcileDate();
 
     case eMyMoney::Model::SplitActionRole:
-        return journalEntry.split().action();
+        return split.action();
 
     case eMyMoney::Model::JournalSplitIdRole:
-        return journalEntry.split().id();
+        return split.id();
 
     case eMyMoney::Model::JournalSplitNumberRole:
-        return journalEntry.split().number();
+        return split.number();
 
     case eMyMoney::Model::JournalSplitAccountIdRole:
-        return journalEntry.split().accountId();
+        return split.accountId();
 
     case eMyMoney::Model::JournalTransactionIdRole:
         return journalEntry.transaction().id();
@@ -695,7 +704,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         return transaction.isImported();
 
     case eMyMoney::Model::TransactionInvestementType:
-        return QVariant::fromValue<eMyMoney::Split::InvestmentTransactionType>(journalEntry.split().investmentTransactionType());
+        return QVariant::fromValue<eMyMoney::Split::InvestmentTransactionType>(split.investmentTransactionType());
 
     case eMyMoney::Model::TransactionBrokerageAccountRole:
         return d->investmentBrokerageAccount(journalEntry);
@@ -751,7 +760,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::SplitSharesSuffixRole:
         // figure out if it is a debit or credit split. s.a. https://en.wikipedia.org/wiki/Debits_and_credits#Aspects_of_transactions
-        if(journalEntry.split().shares().isNegative()) {
+        if (split.shares().isNegative()) {
             return i18nc("Credit suffix", "Cr.");
         }
         return i18nc("Debit suffix", "Dr.");
@@ -759,12 +768,12 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::SplitSharesRole:
     {
         QVariant rc;
-        rc.setValue(journalEntry.split().shares());
+        rc.setValue(split.shares());
         return rc;
     }
 
     case eMyMoney::Model::SplitFormattedValueRole:
-        return d->formatValue(transaction, journalEntry.split(), MyMoneyMoney::ONE);
+        return d->formatValue(transaction, split, MyMoneyMoney::ONE);
 
     case eMyMoney::Model::SplitFormattedSharesRole:
         return d->formatShares(split);
@@ -772,23 +781,22 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::SplitValueRole:
     {
         QVariant rc;
-        rc.setValue(journalEntry.split().value());
+        rc.setValue(split.value());
         return rc;
     }
 
     case eMyMoney::Model::SplitPriceRole:
     {
         QVariant rc;
-        rc.setValue(journalEntry.split().price());
+        rc.setValue(split.price());
         return rc;
     }
 
     case eMyMoney::Model::SplitPayeeIdRole:
-        if (journalEntry.split().payeeId().isEmpty()) {
+        if (split.payeeId().isEmpty()) {
             // not sure if we want to replace it with the payeeId
             // of another split. Anyway, here would be the spot to do it
 #if 0
-            const MyMoneySplit split = journalEntry.split();
             foreach (const auto sp, transaction.splits()) {
                 if(split.id() != sp.id()) {
                     if (!split.payeeId().isEmpty())
@@ -798,15 +806,15 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 #endif
             return QVariant();
         }
-        return journalEntry.split().payeeId();
+        return split.payeeId();
 
     case eMyMoney::Model::SplitTagIdRole:
-        return QVariant::fromValue<QStringList>(journalEntry.split().tagIdList());
+        return QVariant::fromValue<QStringList>(split.tagIdList());
 
     case eMyMoney::Model::SplitSingleLineMemoRole:
     case eMyMoney::Model::SplitMemoRole:
     {
-        QString rc(journalEntry.split().memo());
+        QString rc(split.memo());
         if(role == eMyMoney::Model::SplitSingleLineMemoRole) {
             // remove empty lines
             rc.replace("\n\n", "\n");
@@ -816,11 +824,27 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         return rc;
     }
 
-    case eMyMoney::Model::SplitPayeeRole:
-        return MyMoneyFile::instance()->payeesModel()->itemById(journalEntry.split().payeeId()).name();
+    case eMyMoney::Model::MatchedSplitPayeeRole:
+        if (split.isMatched()) {
+            const auto matchedSplit = d->matchedSplit(split);
+            return MyMoneyFile::instance()->payeesModel()->itemById(matchedSplit.payeeId()).name();
+        }
+        return {};
 
-    case eMyMoney::Model::SplitMatchedRole:
-        return journalEntry.split().isMatched();
+    case eMyMoney::Model::MatchedSplitMemoRole:
+        if (split.isMatched()) {
+            const auto matchedSplit = d->matchedSplit(split);
+            auto rc(matchedSplit.memo());
+            // remove empty lines
+            rc.replace("\n\n", "\n");
+            // replace '\n' with ", "
+            rc.replace('\n', ", ");
+            return rc;
+        }
+        return {};
+
+    case eMyMoney::Model::SplitPayeeRole:
+        return MyMoneyFile::instance()->payeesModel()->itemById(split.payeeId()).name();
 
     case eMyMoney::Model::TransactionCounterAccountRole:
         return d->counterAccount(idx, journalEntry, transaction);
@@ -832,25 +856,25 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         return false;
 
     case eMyMoney::Model::JournalSplitPaymentRole:
-        if (journalEntry.split().value().isNegative()) {
-            return d->formatValue(transaction, journalEntry.split(), MyMoneyMoney::MINUS_ONE);
+        if (split.value().isNegative()) {
+            return d->formatValue(transaction, split, MyMoneyMoney::MINUS_ONE);
         }
         break;
 
     case eMyMoney::Model::JournalSplitDepositRole:
-        if (!journalEntry.split().value().isNegative()) {
-            return d->formatValue(transaction, journalEntry.split(), MyMoneyMoney::ONE);
+        if (!split.value().isNegative()) {
+            return d->formatValue(transaction, split, MyMoneyMoney::ONE);
         }
         break;
 
     case eMyMoney::Model::JournalSplitIsMatchedRole:
-        return journalEntry.split().isMatched();
+        return split.isMatched();
 
     case eMyMoney::Model::SplitSharesFormattedRole:
-        return d->formatShares(journalEntry.split());
+        return d->formatShares(split);
 
     case eMyMoney::Model::SplitNumberRole:
-        return journalEntry.split().number();
+        return split.number();
 
     case eMyMoney::Model::SplitActivityRole:
         return d->investmentActivity(journalEntry);
