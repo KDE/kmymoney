@@ -18,6 +18,8 @@
 #include <QStandardItemModel>
 #include <QStringList>
 #include <QTableView>
+#include <QTimer>
+#include <QTreeView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,6 +38,7 @@
 #include "kcurrencycalculator.h"
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneysettings.h"
+#include "knewaccountdlg.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
 #include "mymoneyexception.h"
@@ -293,8 +296,9 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
 
                 // make sure we have a split in the model
                 if (splitModel.rowCount() == 0) {
-                    // add an empty split
+                    // add a first split with account assigned
                     MyMoneySplit s;
+                    s.setAccountId(accountId);
                     splitModel.addItem(s);
                 }
 
@@ -819,6 +823,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->ui->payeeEdit->installEventFilter(this);
     d->ui->costCenterCombo->installEventFilter(this);
     d->ui->tagContainer->tagCombo()->installEventFilter(this);
+    d->ui->categoryCombo->installEventFilter(this);
     d->ui->statusCombo->installEventFilter(this);
 
     setCancelButton(d->ui->cancelButton);
@@ -1191,6 +1196,18 @@ bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
         if ((e->type() == QEvent::Wheel) && !cb->view()->isVisible()) {
             return true;
         }
+
+        if (e->type() == QEvent::FocusOut) {
+            if (o == d->ui->categoryCombo) {
+                if (!d->ui->categoryCombo->popup()->isVisible() && !cb->currentText().isEmpty()) {
+                    const auto accountId = d->ui->categoryCombo->getSelected();
+                    const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
+                    if (!accountIdx.isValid() || accountIdx.data(eMyMoney::Model::AccountFullNameRole).toString().compare(cb->currentText())) {
+                        createCategory();
+                    }
+                }
+            }
+        }
     }
     return QWidget::eventFilter(o, e);
 }
@@ -1252,4 +1269,39 @@ void NewTransactionEditor::setupUi(QWidget* parent)
 void NewTransactionEditor::storeTabOrder(const QStringList& tabOrder)
 {
     TransactionEditorBase::storeTabOrder(QLatin1String("stdTransactionEditor"), tabOrder);
+}
+
+void NewTransactionEditor::createCategory()
+{
+    // delay the execution of this code for 150ms so
+    // that a click on the cancel or enter button has
+    // a chance to be executed before.
+    QTimer::singleShot(150, this, [&]() {
+        if (!d->ui->cancelButton->isDown() && !d->ui->enterButton->isDown()) {
+            MyMoneyAccount parent;
+            MyMoneyAccount account;
+
+            account.setName(d->ui->categoryCombo->lineEdit()->text());
+
+            // preset account type based on amount entered, default to expense
+            if (d->ui->creditDebitEdit->haveValue()) {
+                parent = MyMoneyFile::instance()->expense();
+                if (d->ui->creditDebitEdit->value().isPositive()) {
+                    parent = MyMoneyFile::instance()->income();
+                }
+            }
+
+            KNewAccountDlg::newCategory(account, parent);
+
+            if (account.id().isEmpty()) {
+                d->ui->categoryCombo->setSelected(QString());
+                d->ui->categoryCombo->clearSelection();
+                d->ui->categoryCombo->setFocus();
+            } else {
+                d->ui->categoryCombo->setSelected(account.id());
+                auto widget = d->ui->categoryCombo->nextInFocusChain();
+                widget->setFocus();
+            }
+        }
+    });
 }

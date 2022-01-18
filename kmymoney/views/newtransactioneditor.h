@@ -77,6 +77,8 @@ protected Q_SLOTS:
     // edit splits directly
     virtual void editSplits();
 
+    void createCategory();
+
 Q_SIGNALS:
     void postDateChanged(const QDate& date) const;
 

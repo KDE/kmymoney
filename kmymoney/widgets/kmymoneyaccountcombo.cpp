@@ -175,6 +175,11 @@ bool KMyMoneyAccountCombo::eventFilter(QObject* o, QEvent* e)
                 QKeyEvent* kev = static_cast<QKeyEvent*>(e);
                 bool forLineEdit = (kev->text().length() > 0);
                 switch(kev->key()) {
+                case Qt::Key_Tab:
+                case Qt::Key_Backtab:
+                    hidePopup();
+                    break;
+
                 case Qt::Key_Escape:
                 case Qt::Key_Up:
                 case Qt::Key_Down:
@@ -202,20 +207,7 @@ bool KMyMoneyAccountCombo::eventFilter(QObject* o, QEvent* e)
                     break;
                 }
 
-            } else if(e->type() == QEvent::Show) {
-                // Remember current selection when popup is shown
-                d->m_lastSelectedIndex = d->m_popupView->currentIndex();
-
-            } else if(e->type() == QEvent::Hide) {
-                if (d->m_lastSelectedIndex.isValid() &&  d->m_lastSelectedIndex != d->m_popupView->currentIndex()) {
-                    selectItem(d->m_popupView->currentIndex());
-                    d->m_lastSelectedIndex = QModelIndex();
-                }
-
             } else if(e->type() == QEvent::FocusOut) {
-                // if we tab out and have a selection in the popup view
-                // than we use that entry completely
-                activated();
                 hidePopup();
             }
 
@@ -321,10 +313,12 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
     // after the qlineedit had been cleared using the clear button does not trigger the
     // activated() signal of d->m_popupView. This is a workaround to catch this scenario
     // and still get valid settings.
-    connect(this, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&]() {
-        const auto idx = d->m_popupView->currentIndex();
-        if (d->m_lastSelectedAccount.isEmpty() && idx.isValid()) {
-            selectItem(idx);
+    connect(this, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int index) {
+        if (index != -1) {
+            const auto idx = d->m_popupView->currentIndex();
+            if (d->m_lastSelectedAccount.isEmpty() && idx.isValid()) {
+                selectItem(idx);
+            }
         }
     });
 
@@ -441,7 +435,7 @@ void KMyMoneyAccountCombo::clearSelection()
 {
     d->m_lastSelectedAccount.clear();
     setCurrentIndex(-1);
-    setCurrentText(QString());
+    clearEditText();
 }
 
 class KMyMoneyAccountComboSplitHelperPrivate
