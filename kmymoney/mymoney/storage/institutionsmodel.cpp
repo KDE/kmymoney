@@ -230,8 +230,7 @@ void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
     static_cast<TreeItem<MyMoneyInstitution>*>(index(0, 0).internalPointer())->dataRef() = noBank;
     ++row;
 
-    // and don't count loading as a modification
-    setDirty(false);
+    // make sure to start from 0
     m_nextId = 0;
 
     for (const auto& item : list) {
@@ -241,6 +240,9 @@ void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
         d->loadAccounts(idx, item.accountList());
         ++row;
     }
+
+    // and don't count loading as a modification
+    setDirty(false);
 
     endResetModel();
 
