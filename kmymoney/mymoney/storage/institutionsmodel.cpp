@@ -229,15 +229,18 @@ void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
     noBank.setName(i18n("Accounts with no institution assigned"));
     static_cast<TreeItem<MyMoneyInstitution>*>(index(0, 0).internalPointer())->dataRef() = noBank;
     ++row;
-    for(const auto& institution : list) {
-        const auto idx = index(row, 0);
-        static_cast<TreeItem<MyMoneyInstitution>*>(idx.internalPointer())->dataRef() = institution;
-        d->loadAccounts(idx, institution.accountList());
-        ++row;
-    }
 
     // and don't count loading as a modification
     setDirty(false);
+    m_nextId = 0;
+
+    for (const auto& item : list) {
+        updateNextObjectId(item.id());
+        const auto idx = index(row, 0);
+        static_cast<TreeItem<MyMoneyInstitution>*>(idx.internalPointer())->dataRef() = item;
+        d->loadAccounts(idx, item.accountList());
+        ++row;
+    }
 
     endResetModel();
 
