@@ -30,6 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "accountcreator.h"
 #include "accountsmodel.h"
 #include "costcentermodel.h"
 #include "icons.h"
@@ -48,6 +49,7 @@
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "payeecreator.h"
 #include "payeesmodel.h"
 #include "securitiesmodel.h"
 #include "splitdialog.h"
@@ -118,6 +120,8 @@ public:
     void updateVAT(TaxValueChange amountChanged);
     MyMoneyMoney removeVatSplit();
     MyMoneyMoney splitsSum() const;
+    void createCategory();
+    void createPayee();
 
     NewTransactionEditor* q;
     Ui_NewTransactionEditor* ui;
@@ -660,6 +664,28 @@ void NewTransactionEditor::Private::setupTabOrder()
     q->setupTabOrder(q->property("kmm_currenttaborder").toStringList());
 }
 
+void NewTransactionEditor::Private::createCategory()
+{
+    auto creator = new AccountCreator(q);
+    creator->setComboBox(ui->categoryCombo);
+    creator->addButton(ui->cancelButton);
+    creator->addButton(ui->enterButton);
+    creator->setAccountType(eMyMoney::Account::Type::Expense);
+    if (ui->creditDebitEdit->haveValue() && ui->creditDebitEdit->value().isPositive()) {
+        creator->setAccountType(eMyMoney::Account::Type::Income);
+    }
+    creator->createAccount();
+}
+
+void NewTransactionEditor::Private::createPayee()
+{
+    auto creator = new PayeeCreator(q);
+    creator->setComboBox(ui->payeeEdit);
+    creator->addButton(ui->cancelButton);
+    creator->addButton(ui->enterButton);
+    creator->createPayee();
+}
+
 NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accountId)
     : TransactionEditorBase(parent, accountId)
     , d(new Private(this))
@@ -744,7 +770,6 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
     d->ui->payeeEdit->setEditable(true);
     d->ui->payeeEdit->lineEdit()->setClearButtonEnabled(true);
-
     d->ui->payeeEdit->setModel(d->payeesModel);
     d->ui->payeeEdit->setModelColumn(0);
     d->ui->payeeEdit->completer()->setCompletionMode(QCompleter::PopupCompletion);
@@ -752,14 +777,12 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
     // make sure that there is no selection left in the background
     // in case there is no text in the edit field
-    connect(d->ui->payeeEdit->lineEdit(), &QLineEdit::textEdited,
-            [&](const QString& txt)
-    {
+    connect(d->ui->payeeEdit->lineEdit(), &QLineEdit::textEdited, [&](const QString& txt) {
         if (txt.isEmpty()) {
-            d->ui->payeeEdit->setCurrentIndex(0);
+            d->ui->payeeEdit->setCurrentIndex(-1);
         }
-    }
-           );
+    });
+
     connect(d->ui->categoryCombo->lineEdit(), &QLineEdit::textEdited, [&](const QString& txt) {
         if (txt.isEmpty()) {
             d->ui->categoryCombo->setSelected(QString());
@@ -1199,11 +1222,21 @@ bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
 
         if (e->type() == QEvent::FocusOut) {
             if (o == d->ui->categoryCombo) {
-                if (!d->ui->categoryCombo->popup()->isVisible() && !cb->currentText().isEmpty()) {
+                if (!d->ui->categoryCombo->popup()->isVisible() && !cb->currentText().isEmpty() && !d->ui->categoryCombo->lineEdit()->isReadOnly()) {
                     const auto accountId = d->ui->categoryCombo->getSelected();
                     const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
                     if (!accountIdx.isValid() || accountIdx.data(eMyMoney::Model::AccountFullNameRole).toString().compare(cb->currentText())) {
-                        createCategory();
+                        d->createCategory();
+                    }
+                }
+
+            } else if (o == d->ui->payeeEdit) {
+                if (!cb->currentText().isEmpty()) {
+                    const auto index(cb->findText(cb->currentText()));
+                    if (index != -1) {
+                        cb->setCurrentIndex(index);
+                    } else {
+                        d->createPayee();
                     }
                 }
             }
@@ -1271,37 +1304,3 @@ void NewTransactionEditor::storeTabOrder(const QStringList& tabOrder)
     TransactionEditorBase::storeTabOrder(QLatin1String("stdTransactionEditor"), tabOrder);
 }
 
-void NewTransactionEditor::createCategory()
-{
-    // delay the execution of this code for 150ms so
-    // that a click on the cancel or enter button has
-    // a chance to be executed before.
-    QTimer::singleShot(150, this, [&]() {
-        if (!d->ui->cancelButton->isDown() && !d->ui->enterButton->isDown()) {
-            MyMoneyAccount parent;
-            MyMoneyAccount account;
-
-            account.setName(d->ui->categoryCombo->lineEdit()->text());
-
-            // preset account type based on amount entered, default to expense
-            if (d->ui->creditDebitEdit->haveValue()) {
-                parent = MyMoneyFile::instance()->expense();
-                if (d->ui->creditDebitEdit->value().isPositive()) {
-                    parent = MyMoneyFile::instance()->income();
-                }
-            }
-
-            KNewAccountDlg::newCategory(account, parent);
-
-            if (account.id().isEmpty()) {
-                d->ui->categoryCombo->setSelected(QString());
-                d->ui->categoryCombo->clearSelection();
-                d->ui->categoryCombo->setFocus();
-            } else {
-                d->ui->categoryCombo->setSelected(account.id());
-                auto widget = d->ui->categoryCombo->nextInFocusChain();
-                widget->setFocus();
-            }
-        }
-    });
-}

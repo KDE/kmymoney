@@ -3,6 +3,7 @@ add_subdirectory( settings )
 ########### next target ###############
 
 set(kmm_base_dialogs_SOURCES
+  accountcreator.cpp
   amounteditcurrencyhelper.cpp
   editpersonaldatadlg.cpp
   kaccountselectdlg.cpp
@@ -23,6 +24,7 @@ set(kmm_base_dialogs_SOURCES
   ksaveasquestion.cpp
   ktagreassigndlg.cpp
   kupdatestockpricedlg.cpp
+  payeecreator.cpp
   transactionmatcher.cpp
 )
 

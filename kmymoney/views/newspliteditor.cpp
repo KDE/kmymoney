@@ -1,8 +1,7 @@
 /*
-    SPDX-FileCopyrightText: 2016-2020 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2016-2022 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
-
 
 #include "newspliteditor.h"
 
@@ -16,6 +15,7 @@
 #include <QHeaderView>
 #include <QSortFilterProxyModel>
 #include <QStringList>
+#include <QTreeView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -26,6 +26,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "accountcreator.h"
 #include "accountsmodel.h"
 #include "costcentermodel.h"
 #include "creditdebitedit.h"
@@ -41,6 +42,7 @@
 #include "mymoneyfile.h"
 #include "mymoneyprice.h"
 #include "mymoneysecurity.h"
+#include "payeecreator.h"
 #include "payeesmodel.h"
 #include "securitiesmodel.h"
 #include "splitmodel.h"
@@ -92,6 +94,8 @@ struct NewSplitEditor::Private
     bool numberChanged(const QString& newNumber);
     bool amountChanged();
     void setupTabOrder();
+    void createCategory();
+    void createPayee();
 
     NewSplitEditor* q;
     Ui_NewSplitEditor* ui;
@@ -260,6 +264,31 @@ void NewSplitEditor::Private::setupTabOrder()
     KMyMoneyUtils::setupTabOrder(q, q->property("kmm_currenttaborder").toStringList());
 }
 
+void NewSplitEditor::Private::createCategory()
+{
+    // delay the execution of this code for 150ms so
+    // that a click on the cancel or enter button has
+    // a chance to be executed before.
+    auto creator = new AccountCreator(q);
+    creator->setComboBox(ui->accountCombo);
+    creator->addButton(ui->cancelButton);
+    creator->addButton(ui->enterButton);
+    creator->setAccountType(eMyMoney::Account::Type::Expense);
+    if (ui->creditDebitEdit->haveValue() && ui->creditDebitEdit->value().isPositive()) {
+        creator->setAccountType(eMyMoney::Account::Type::Income);
+    }
+    creator->createAccount();
+}
+
+void NewSplitEditor::Private::createPayee()
+{
+    auto creator = new PayeeCreator(q);
+    creator->setComboBox(ui->payeeEdit);
+    creator->addButton(ui->cancelButton);
+    creator->addButton(ui->enterButton);
+    creator->createPayee();
+}
+
 NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity, const QString& counterAccountId)
     : QWidget(parent)
     , d(new Private(this))
@@ -285,8 +314,10 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     d->payeesModel->sort(0);
 
     d->ui->payeeEdit->setEditable(true);
+    d->ui->payeeEdit->lineEdit()->setClearButtonEnabled(true);
     d->ui->payeeEdit->setModel(d->payeesModel);
     d->ui->payeeEdit->setModelColumn(0);
+    d->ui->payeeEdit->completer()->setCompletionMode(QCompleter::PopupCompletion);
     d->ui->payeeEdit->completer()->setFilterMode(Qt::MatchContains);
 
     d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity,});
@@ -330,6 +361,9 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
 
     connect(d->ui->cancelButton, &QToolButton::clicked, this, &NewSplitEditor::reject);
     connect(d->ui->enterButton, &QToolButton::clicked, this, &NewSplitEditor::acceptEdit);
+
+    d->ui->accountCombo->installEventFilter(this);
+    d->ui->payeeEdit->installEventFilter(this);
 
     // setup the tab order
     d->setupTabOrder();
@@ -593,4 +627,38 @@ bool NewSplitEditor::focusNextPrevChild(bool next)
         rc = QWidget::focusNextPrevChild(next);
     }
     return rc;
+}
+
+bool NewSplitEditor::eventFilter(QObject* o, QEvent* e)
+{
+    auto cb = qobject_cast<QComboBox*>(o);
+    if (o) {
+        // filter out wheel events for combo boxes if the popup view is not visible
+        if ((e->type() == QEvent::Wheel) && !cb->view()->isVisible()) {
+            return true;
+        }
+
+        if (e->type() == QEvent::FocusOut) {
+            if (o == d->ui->accountCombo) {
+                if (!d->ui->accountCombo->popup()->isVisible() && !cb->currentText().isEmpty()) {
+                    const auto accountId = d->ui->accountCombo->getSelected();
+                    const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
+                    if (!accountIdx.isValid() || accountIdx.data(eMyMoney::Model::AccountFullNameRole).toString().compare(cb->currentText())) {
+                        d->createCategory();
+                    }
+                }
+
+            } else if (o == d->ui->payeeEdit) {
+                if (!cb->currentText().isEmpty()) {
+                    const auto index(cb->findText(cb->currentText(), Qt::MatchExactly | Qt::MatchCaseSensitive));
+                    if (index != -1) {
+                        cb->setCurrentIndex(index);
+                    } else {
+                        d->createPayee();
+                    }
+                }
+            }
+        }
+    }
+    return QWidget::eventFilter(o, e);
 }

@@ -74,16 +74,32 @@ public:
     void addTab(QWidget* w, const QString& name);
 
     /**
-      * Brings up the new category editor and saves the information.
-      * The dialog will be preset with the name and parent account.
-      *
-      * @param account reference of category to be created. The @p name member
-      *                should be filled by the caller. The object will be filled
-      *                with additional information during the creation process
-      *                esp. the @p id member.
-      * @param parent reference to parent account (defaults to none)
-      */
+     * Brings up the new category editor and saves the information.
+     * The dialog will be preset with the name and parent account.
+     * In contrast to the createCategory() method, this method asks
+     * the user if he really wants to create the object.
+     *
+     * @param account reference of category to be created. The @p name member
+     *                should be filled by the caller. The object will be filled
+     *                with additional information during the creation process
+     *                esp. the @p id member.
+     * @param parent reference to parent account (defaults to none)
+     */
     static void newCategory(MyMoneyAccount& account, const MyMoneyAccount& parent);
+
+    /**
+     * Brings up the new account editor and saves the information.
+     * The dialog will be preset with the name and parent account.
+     * In contrast to the createAccount() method, this method asks
+     * the user if he really wants to create the object.
+     *
+     * @param account reference of account to be created. The @p name member
+     *                should be filled by the caller. The object will be filled
+     *                with additional information during the creation process
+     *                esp. the @p id member.
+     * @param parent reference to parent account (defaults to none)
+     */
+    static void newAccount(MyMoneyAccount& account, const MyMoneyAccount& parent);
 
     /**
      * This method opens the category editor with the data found in @a account. The
@@ -91,6 +107,13 @@ public:
      * acknowledges, the category is created.
      */
     static void createCategory(MyMoneyAccount& account, const MyMoneyAccount& parent);
+
+    /**
+     * This method opens the account editor with the data found in @a account. The
+     * parent account is preset to @a parent but can be modified. If the user
+     * acknowledges, the account is created.
+     */
+    static void createAccount(MyMoneyAccount& account, const MyMoneyAccount& parent);
 
 protected Q_SLOTS:
     void okClicked();

@@ -40,7 +40,6 @@
 #include "kmymoneysettings.h"
 #include "knewinstitutiondlg.h"
 #include "mymoneyaccount.h"
-#include "mymoneyenums.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
@@ -588,6 +587,33 @@ public:
                                            .arg(ui->accountNameEdit->text(), fullName));
     }
 
+    static void createAccount(MyMoneyAccount& account, const MyMoneyAccount& parent, bool isCategory, const QString& title)
+    {
+        if (!parent.id().isEmpty()) {
+            try {
+                // make sure parent account exists
+                MyMoneyFile::instance()->account(parent.id());
+                account.setParentAccountId(parent.id());
+                account.setAccountType(parent.accountType());
+            } catch (const MyMoneyException&) {
+            }
+        }
+
+        QPointer<KNewAccountDlg> dialog = new KNewAccountDlg(account, false, isCategory, 0, title);
+
+        dialog->setOpeningBalanceShown(false);
+        dialog->setOpeningDateShown(false);
+
+        if (dialog->exec() == QDialog::Accepted && dialog != 0) {
+            MyMoneyAccount parentAccount, brokerageAccount;
+            account = dialog->account();
+            parentAccount = dialog->parentAccount();
+
+            MyMoneyFile::instance()->createAccount(account, parentAccount, brokerageAccount, MyMoneyMoney());
+        }
+        delete dialog;
+    }
+
     KNewAccountDlg*             q_ptr;
     Ui::KNewAccountDlg*         ui;
     MyMoneyAccount              m_account;
@@ -982,30 +1008,36 @@ void KNewAccountDlg::newCategory(MyMoneyAccount& account, const MyMoneyAccount& 
     }
 }
 
-void KNewAccountDlg::createCategory(MyMoneyAccount& account, const MyMoneyAccount& parent)
+void KNewAccountDlg::newAccount(MyMoneyAccount& account, const MyMoneyAccount& parent)
 {
-    if (!parent.id().isEmpty()) {
-        try {
-            // make sure parent account exists
-            MyMoneyFile::instance()->account(parent.id());
-            account.setParentAccountId(parent.id());
-            account.setAccountType(parent.accountType());
-        } catch (const MyMoneyException &) {
+    if (KMessageBox::questionYesNo(nullptr,
+                                   QString::fromLatin1("<qt>%1</qt>")
+                                       .arg(i18n("<p>The account <b>%1</b> currently does not exist. Do you want to create it?</p><p><i>The parent account "
+                                                 "will default to <b>%2</b> but can be changed in the following dialog</i>.</p>",
+                                                 account.name(),
+                                                 parent.name())),
+                                   i18n("Create category"),
+                                   KStandardGuiItem::yes(),
+                                   KStandardGuiItem::no(),
+                                   "CreateNewAccounts")
+        == KMessageBox::Yes) {
+        KNewAccountDlg::createAccount(account, parent);
+    } else {
+        // we should not keep the 'no' setting because that can confuse people like
+        // I have seen in some usability tests. So we just delete it right away.
+        KSharedConfigPtr kconfig = KSharedConfig::openConfig();
+        if (kconfig) {
+            kconfig->group(QLatin1String("Notification Messages")).deleteEntry(QLatin1String("CreateNewAccounts"));
         }
     }
+}
 
-    QPointer<KNewAccountDlg> dialog =
-        new KNewAccountDlg(account, false, true, 0, i18n("Create a new Category"));
+void KNewAccountDlg::createCategory(MyMoneyAccount& account, const MyMoneyAccount& parent)
+{
+    KNewAccountDlgPrivate::createAccount(account, parent, true, i18nc("@title:window", "Create a new Category"));
+}
 
-    dialog->setOpeningBalanceShown(false);
-    dialog->setOpeningDateShown(false);
-
-    if (dialog->exec() == QDialog::Accepted && dialog != 0) {
-        MyMoneyAccount parentAccount, brokerageAccount;
-        account = dialog->account();
-        parentAccount = dialog->parentAccount();
-
-        MyMoneyFile::instance()->createAccount(account, parentAccount, brokerageAccount, MyMoneyMoney());
-    }
-    delete dialog;
+void KNewAccountDlg::createAccount(MyMoneyAccount& account, const MyMoneyAccount& parent)
+{
+    KNewAccountDlgPrivate::createAccount(account, parent, false, i18nc("@title:window", "Create a new Account"));
 }

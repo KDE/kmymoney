@@ -61,6 +61,7 @@ public:
 protected:
     void keyPressEvent(QKeyEvent* event) final override;
     bool focusNextPrevChild(bool next) override;
+    bool eventFilter(QObject* o, QEvent* e) override;
 
 public Q_SLOTS:
     /**
