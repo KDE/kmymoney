@@ -37,7 +37,6 @@ AccountsProxyModel::AccountsProxyModel(AccountsProxyModelPrivate &dd, QObject *p
 {
     setRecursiveFilteringEnabled(true);
 }
-#undef QSortFilterProxyModel
 
 AccountsProxyModel::~AccountsProxyModel()
 {
