@@ -14,12 +14,17 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KLocalizedString>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyenums.h"
-#include "mymoneymoney.h"
 #include "accountsmodel.h"
+#include "journalmodel.h"
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "schedulesjournalmodel.h"
 
 AccountsProxyModel::AccountsProxyModel(QObject *parent) :
     QSortFilterProxyModel(parent),
@@ -221,37 +226,63 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
         if (isValidAccountEntry) {
             const auto accountType = static_cast<eMyMoney::Account::Type>(accountTypeValue.toInt());
 
-            if (hideClosedAccounts() && sourceModel()->data(source, eMyMoney::Model::Roles::AccountIsClosedRole).toBool())
-                return false;
-
-            // we hide stock accounts if not in expert mode
-            // we hide equity accounts if not in expert mode
-            if (hideEquityAccounts()) {
-                if (accountType == eMyMoney::Account::Type::Equity)
+            switch (state()) {
+            case State::Any:
+                if (hideClosedAccounts() && sourceModel()->data(source, eMyMoney::Model::Roles::AccountIsClosedRole).toBool())
                     return false;
 
-                if (sourceModel()->data(source, eMyMoney::Model::Roles::AccountIsInvestRole).toBool())
-                    return false;
-            }
+                // we hide stock accounts if not in expert mode
+                // we hide equity accounts if not in expert mode
+                if (hideEquityAccounts()) {
+                    if (accountType == eMyMoney::Account::Type::Equity)
+                        return false;
 
-            // we hide unused income and expense accounts if the specific flag is set
-            if (hideUnusedIncomeExpenseAccounts()) {
-                if ((accountType == eMyMoney::Account::Type::Income) || (accountType == eMyMoney::Account::Type::Expense)) {
-                    const auto totalValue = sourceModel()->data(source, eMyMoney::Model::Roles::AccountTotalValueRole);
-                    if (totalValue.isValid() && totalValue.value<MyMoneyMoney>().isZero()) {
-                        emit unusedIncomeExpenseAccountHidden();
+                    if (sourceModel()->data(source, eMyMoney::Model::Roles::AccountIsInvestRole).toBool())
                         return false;
+                }
+
+                // we hide unused income and expense accounts if the specific flag is set
+                if (hideUnusedIncomeExpenseAccounts()) {
+                    if ((accountType == eMyMoney::Account::Type::Income) || (accountType == eMyMoney::Account::Type::Expense)) {
+                        const auto totalValue = sourceModel()->data(source, eMyMoney::Model::Roles::AccountTotalValueRole);
+                        if (totalValue.isValid() && totalValue.value<MyMoneyMoney>().isZero()) {
+                            emit unusedIncomeExpenseAccountHidden();
+                            return false;
+                        }
                     }
                 }
+                // we hide zero balance investment accounts
+                if (hideZeroBalancedEquityAccounts()) {
+                    if (accountType == eMyMoney::Account::Type::Equity || sourceModel()->data(source, eMyMoney::Model::Roles::AccountIsInvestRole).toBool()) {
+                        const auto totalValue = sourceModel()->data(source, eMyMoney::Model::Roles::AccountTotalValueRole);
+                        if (totalValue.isValid() && totalValue.value<MyMoneyMoney>().isZero()) {
+                            return false;
+                        }
+                    }
+                }
+                break;
+
+            case State::Unused: {
+                // if an account has sub-accounts it is still used
+                if (sourceModel()->rowCount(source) > 0) {
+                    return false;
+                }
+                const auto accountId = sourceModel()->data(source, eMyMoney::Model::IdRole).toString();
+                auto journalModel = MyMoneyFile::instance()->journalModel();
+                auto indexes = journalModel->match(journalModel->index(0, 0), eMyMoney::Model::JournalSplitAccountIdRole, accountId);
+                if (!indexes.isEmpty())
+                    return false;
+                journalModel = MyMoneyFile::instance()->schedulesJournalModel();
+                indexes = journalModel->match(journalModel->index(0, 0), eMyMoney::Model::JournalSplitAccountIdRole, accountId);
+                if (!indexes.isEmpty())
+                    return false;
+                break;
             }
-            // we hide zero balance investment accounts
-            if (hideZeroBalancedEquityAccounts()) {
-                if (accountType == eMyMoney::Account::Type::Equity || sourceModel()->data(source, eMyMoney::Model::Roles::AccountIsInvestRole).toBool()) {
-                    const auto totalValue = sourceModel()->data(source, eMyMoney::Model::Roles::AccountTotalValueRole);
-                    if (totalValue.isValid() && totalValue.value<MyMoneyMoney>().isZero()) {
-                        return false;
-                    }
+            case State::Closed:
+                if (sourceModel()->data(source, eMyMoney::Model::AccountIsClosedRole).toBool() == false) {
+                    return false;
                 }
+                break;
             }
 
             if (d->m_typeList.contains(accountType)) {
@@ -457,4 +488,37 @@ QVector<eMyMoney::Account::Type> AccountsProxyModel::incomeExpense()
 QVector<eMyMoney::Account::Type> AccountsProxyModel::assetLiabilityEquityIncomeExpense()
 {
     return assetLiabilityEquity() << incomeExpense();
+}
+
+void AccountsProxyModel::setState(AccountsProxyModel::State state)
+{
+    Q_D(AccountsProxyModel);
+    if (d->m_state != state) {
+        d->m_state = state;
+        invalidateFilter();
+    }
+}
+
+AccountsProxyModel::State AccountsProxyModel::state() const
+{
+    Q_D(const AccountsProxyModel);
+    return d->m_state;
+}
+
+void AccountsProxyModel::setFilterComboBox(QComboBox* comboBox)
+{
+    Q_D(AccountsProxyModel);
+    d->m_filterComboBox = comboBox;
+    d->m_filterComboBox->clear();
+    d->m_filterComboBox->insertItem(static_cast<int>(State::Any), i18nc("", "Any status"));
+    d->m_filterComboBox->insertItem(static_cast<int>(State::Unused), i18nc("", "Unused"));
+    d->m_filterComboBox->insertItem(static_cast<int>(State::Closed), i18nc("", "Closed"));
+
+    connect(comboBox, QOverload<int>::of(&QComboBox::activated), this, [&](int idx) {
+        setState(static_cast<AccountsProxyModel::State>(idx));
+    });
+    connect(comboBox, &QComboBox::destroyed, this, [&]() {
+        Q_D(AccountsProxyModel);
+        d->m_filterComboBox = nullptr;
+    });
 }

@@ -11,6 +11,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+class QComboBox;
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -25,13 +27,15 @@ class AccountsProxyModelPrivate
 
 public:
     AccountsProxyModelPrivate()
-        : m_hideClosedAccounts(true)
+        : m_filterComboBox(nullptr)
+        , m_hideClosedAccounts(true)
         , m_hideEquityAccounts(true)
         , m_hideZeroBalanceEquityAccounts(false)
         , m_hideUnusedIncomeExpenseAccounts(false)
         , m_haveHiddenUnusedIncomeExpenseAccounts(false)
         , m_hideFavoriteAccounts(true)
         , m_hideAllEntries(false)
+        , m_state(AccountsProxyModel::State::Any)
     {
     }
 
@@ -41,6 +45,7 @@ public:
 
     QList<eMyMoney::Account::Type> m_typeList;
     QString m_notSelectableId;
+    QComboBox* m_filterComboBox;
     bool m_hideClosedAccounts;
     bool m_hideEquityAccounts;
     bool m_hideZeroBalanceEquityAccounts;
@@ -48,6 +53,7 @@ public:
     bool m_haveHiddenUnusedIncomeExpenseAccounts;
     bool m_hideFavoriteAccounts;
     bool m_hideAllEntries;
+    AccountsProxyModel::State m_state;
 };
 
 #endif // ACCOUNTSPROXYMODEL_P_H

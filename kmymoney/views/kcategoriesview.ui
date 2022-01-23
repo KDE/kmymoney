@@ -36,6 +36,9 @@
       </widget>
      </item>
      <item>
+      <widget class="QComboBox" name="m_filterBox"/>
+     </item>
+     <item>
       <widget class="QPushButton" name="m_collapseButton">
        <property name="toolTip">
         <string>Collapse all accounts in the list</string>

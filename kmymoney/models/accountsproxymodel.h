@@ -13,6 +13,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QComboBox>
 #include <QSortFilterProxyModel>
 
 // ----------------------------------------------------------------------------
@@ -61,6 +62,12 @@ class KMM_MODELS_EXPORT AccountsProxyModel : public QSortFilterProxyModel
     Q_DISABLE_COPY(AccountsProxyModel)
 
 public:
+    enum State {
+        Any,
+        Closed,
+        Unused,
+    };
+
     explicit AccountsProxyModel(QObject *parent = nullptr);
     virtual ~AccountsProxyModel();
 
@@ -88,7 +95,12 @@ public:
     void setHideAllEntries(bool hideAllEntries);
     bool hideAllEntries() const;
 
+    void setState(State state);
+    State state() const;
+
     int visibleItems(bool includeBaseAccounts = false) const;
+
+    void setFilterComboBox(QComboBox* comboBox);
 
     void setNotSelectable(const QString& accountId);
 

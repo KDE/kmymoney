@@ -76,6 +76,7 @@ public:
 
         ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
         m_proxyModel->addAccountGroup(AccountsProxyModel::incomeExpense());
+        m_proxyModel->setFilterComboBox(ui->m_filterBox);
 
         columnSelector->setModel(m_proxyModel);
         q->slotSettingsChanged();
