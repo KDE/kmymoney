@@ -89,6 +89,8 @@ Q_SIGNALS:
 
     void customActionRequested(View, eView::Action);
 
+    void requestView(QWidget* viewWidget, const QString& accountId, const QString& journalEntryId);
+
 public Q_SLOTS:
     virtual void updateActions(const SelectedObjects& selections) {
         Q_UNUSED(selections)

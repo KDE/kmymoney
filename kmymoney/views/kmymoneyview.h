@@ -159,24 +159,26 @@ protected:
 
 
 public Q_SLOTS:
-    /**
-      * This slot writes information about the page passed as argument @a current
-      * in the kmymoney.rc file so that it can be selected automatically when
-      * the application is started again.
-      *
-      * @param current KPageWidgetItem pointer to the current page item
-      * @param previous KPageWidgetItem pointer to the previous page item
-      */
-    void slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* previous);
-
     void slotSettingsChanged();
 
     void updateActions(const SelectedObjects& selections);
 
 private Q_SLOTS:
+    /**
+     * This slot writes information about the page passed as argument @a current
+     * in the kmymoney.rc file so that it can be selected automatically when
+     * the application is started again.
+     *
+     * @param current KPageWidgetItem pointer to the current page item
+     * @param previous KPageWidgetItem pointer to the previous page item
+     */
+    void slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* previous);
+
     void switchToDefaultView();
 
     void slotRememberLastView(View view);
+
+    void switchView(QWidget* viewWidget, const QString& accountId, const QString& journalEntryId);
 
 Q_SIGNALS:
     /**

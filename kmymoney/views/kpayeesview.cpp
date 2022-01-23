@@ -63,6 +63,8 @@ KPayeesView::KPayeesView(QWidget *parent) :
         emit requestSelectionChange(d->m_selections);
     });
 
+    connect(d->ui->m_register, &LedgerView::requestView, this, &KPayeesView::requestView);
+
     connect(pActions[eMenu::Action::NewPayee], &QAction::triggered, this, &KPayeesView::slotNewPayee);
     connect(pActions[eMenu::Action::DeletePayee], &QAction::triggered, this, &KPayeesView::slotDeletePayee);
     connect(pActions[eMenu::Action::RenamePayee], &QAction::triggered, this, &KPayeesView::slotRenamePayee);
@@ -479,6 +481,10 @@ void KPayeesView::executeAction(eMenu::Action action, const SelectedObjects& sel
 
     case eMenu::Action::FileClose:
         d->ui->payeeIdentifiers->closeSource();
+        break;
+
+    case eMenu::Action::ShowTransaction:
+        d->ui->m_register->showEditor();
         break;
 
     default:

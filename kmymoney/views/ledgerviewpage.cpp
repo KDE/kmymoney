@@ -127,6 +127,8 @@ void LedgerViewPage::init(const QString& configGroupName)
     connect(d->ui->m_ledgerView, &LedgerView::sectionMoved, this, &LedgerViewPage::sectionMoved);
     connect(this, &LedgerViewPage::resizeSection, d->ui->m_ledgerView, &LedgerView::resizeSection);
     connect(this, &LedgerViewPage::moveSection, d->ui->m_ledgerView, &LedgerView::moveSection);
+
+    connect(d->ui->m_ledgerView, &LedgerView::requestView, this, &LedgerViewPage::requestView);
 }
 
 LedgerViewPage::~LedgerViewPage()
@@ -336,6 +338,7 @@ bool LedgerViewPage::executeAction(eMenu::Action action, const SelectedObjects& 
     case eMenu::Action::SelectAllTransactions:
         d->ui->m_ledgerView->selectAllTransactions();
         break;
+
     case eMenu::Action::MatchTransaction:
         d->ui->m_ledgerView->reselectJournalEntry(selections.firstSelection(SelectedObjects::JournalEntry));
         break;
@@ -358,6 +361,11 @@ bool LedgerViewPage::executeAction(eMenu::Action action, const SelectedObjects& 
         }
         break;
     }
+
+    case eMenu::Action::ShowTransaction:
+        d->ui->m_ledgerView->showEditor();
+        break;
+
     default:
         break;
     }

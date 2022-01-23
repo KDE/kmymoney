@@ -77,6 +77,13 @@ public:
 
     QModelIndex editIndex() const;
 
+    /**
+     * In case an editor is opened, make sure to fully show the
+     * editor in the viewport. If editing is not active, this
+     * acts as a nop.
+     */
+    void showEditor();
+
 public Q_SLOTS:
     /**
      * This method scrolls the ledger so that the current item is visible
@@ -161,6 +168,7 @@ Q_SIGNALS:
     void aboutToFinishEdit() const;
     void sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const;
     void sectionMoved(QWidget* view, int section, int oldIndex, int newIndex) const;
+    void requestView(QWidget* viewWidget, const QString& accountId, const QString& journalEntryId);
 
 protected:
     class Private;

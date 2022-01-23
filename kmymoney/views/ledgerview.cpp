@@ -29,6 +29,7 @@
 #include <KMessageBox>
 #include <KMessageWidget>
 #include <KStandardGuiItem>
+#include <QStackedWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -39,6 +40,8 @@
 #include "journaldelegate.h"
 #include "journalmodel.h"
 #include "kmymoneyaccountselector.h"
+#include "kmymoneyview.h"
+#include "kmymoneyviewbase.h"
 #include "ledgerviewsettings.h"
 #include "menuenums.h"
 #include "mymoneyenums.h"
@@ -55,7 +58,14 @@
 #include "specialdatesmodel.h"
 #include "transactioneditorbase.h"
 
-Q_GLOBAL_STATIC(LedgerView*, s_globalEditView);
+struct GlobalEditData {
+    LedgerView* detailView = nullptr;
+    KMyMoneyViewBase* basePage = nullptr;
+    QString accountId;
+    QString journalEntryId;
+};
+
+Q_GLOBAL_STATIC(GlobalEditData, s_globalEditData);
 
 class LedgerView::Private
 {
@@ -107,19 +117,38 @@ public:
 
     bool haveGlobalEditor()
     {
-        return *s_globalEditView() != nullptr;
+        return s_globalEditData()->detailView != nullptr;
     }
 
-    void registerGlobalEditor()
+    void registerGlobalEditor(const QModelIndex& idx)
     {
         if (!haveGlobalEditor()) {
-            *s_globalEditView() = q;
+            s_globalEditData()->detailView = q;
+            s_globalEditData()->journalEntryId = idx.data(eMyMoney::Model::IdRole).toString();
+            s_globalEditData()->accountId = idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString();
+
+            // find my base view
+            // KPageStackedWidget;
+            auto w = q->parentWidget();
+            while (w) {
+                auto pageStack = qobject_cast<QStackedWidget*>(w);
+                if (pageStack != nullptr) {
+                    if (qobject_cast<KMyMoneyView*>(pageStack->parentWidget())) {
+                        s_globalEditData()->basePage = qobject_cast<KMyMoneyViewBase*>(pageStack->currentWidget());
+                        break;
+                    }
+                }
+                w = w->parentWidget();
+            }
         }
     }
 
     void unregisterGlobalEditor()
     {
-        *s_globalEditView() = nullptr;
+        s_globalEditData()->detailView = nullptr;
+        s_globalEditData()->basePage = nullptr;
+        s_globalEditData()->journalEntryId.clear();
+        s_globalEditData()->accountId.clear();
     }
 
     void createMoveToSubMenu()
@@ -458,6 +487,13 @@ LedgerView::LedgerView(QWidget* parent)
             emit requestCustomContextMenu(menuType, viewport()->mapToGlobal(pos));
         }
     });
+
+    connect(d->infoMessage, &KMessageWidget::linkActivated, this, [&](const QString& href) {
+        Q_UNUSED(href)
+        d->infoMessage->animatedHide();
+        emit requestView(s_globalEditData()->basePage, s_globalEditData()->accountId, s_globalEditData()->journalEntryId);
+    });
+
     setTabKeyNavigation(false);
 }
 
@@ -542,7 +578,9 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
     if(d->haveGlobalEditor() && suppressDuplicateEditorStart) {
         if (!d->infoMessage->isVisible() && !d->infoMessage->isShowAnimationRunning()) {
             d->infoMessage->resize(viewport()->width(), d->infoMessage->height());
-            d->infoMessage->setText(i18n("You are already editing a transaction in another view. KMyMoney does not support editing two transactions in parallel."));
+            d->infoMessage->setText(
+                i18n("You are already editing a transaction in another view. KMyMoney does not support editing two transactions in parallel. <a "
+                     "href=\"jumpToEditor\">Jump to current editor</a>"));
             d->infoMessage->setMessageType(KMessageWidget::Warning);
             d->infoMessage->animatedShow();
         }
@@ -556,7 +594,7 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
             // the editor in that single cell
             closeEditor(indexWidget(index), QAbstractItemDelegate::NoHint);
 
-            d->registerGlobalEditor();
+            d->registerGlobalEditor(index);
             d->infoMessage->animatedHide();
 
             emit aboutToStartEdit();
@@ -570,6 +608,11 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
             const auto editor = qobject_cast<TransactionEditorBase*>(indexWidget(d->editIndex));
             connect(editor, &TransactionEditorBase::editorLayoutChanged, this, &LedgerView::resizeEditorRow);
 
+            // make sure to unregister the editor in case it is destroyed
+            connect(editor, &TransactionEditorBase::destroyed, this, [&]() {
+                d->unregisterGlobalEditor();
+            });
+
             resizeEditorRow();
         }
         return rc;
@@ -577,11 +620,18 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
     return false;
 }
 
+void LedgerView::showEditor()
+{
+    if (d->haveGlobalEditor()) {
+        d->ensureEditorFullyVisible(d->editIndex);
+        QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
+    }
+}
+
 void LedgerView::resizeEditorRow()
 {
     resizeRowToContents(d->editIndex.row());
-    d->ensureEditorFullyVisible(d->editIndex);
-    QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
+    showEditor();
 }
 
 void LedgerView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint)

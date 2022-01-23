@@ -100,6 +100,14 @@ public:
         return viewFrames.key(q->currentPage());
     }
 
+    /**
+     *Returns the id of the view identified by the pointer
+     */
+    View viewIdByWidget(KMyMoneyViewBase* widget)
+    {
+        return viewBases.key(widget, View::Home);
+    }
+
     void selectSharedActions(View viewId)
     {
         Q_Q(KMyMoneyView);
@@ -299,6 +307,7 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
 
     connect(view, &KMyMoneyViewBase::viewStateChanged, d->viewFrames[idView], &KPageWidgetItem::setEnabled);
     connect(view, &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
+    connect(view, &KMyMoneyViewBase::requestView, this, &KMyMoneyView::switchView);
 
     d->addSharedActions(view);
 }
@@ -643,4 +652,17 @@ void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& se
         }
     }
     currentView->executeAction(action, selections);
+}
+
+void KMyMoneyView::switchView(QWidget* viewWidget, const QString& accountId, const QString& journalEntryId)
+{
+    Q_D(KMyMoneyView);
+    auto baseView = qobject_cast<KMyMoneyViewBase*>(viewWidget);
+    const auto viewId = d->viewIdByWidget(baseView);
+    showPage(viewId);
+
+    SelectedObjects selections;
+    selections.addSelection(SelectedObjects::Account, accountId);
+    selections.addSelection(SelectedObjects::JournalEntry, journalEntryId);
+    executeAction(eMenu::Action::ShowTransaction, selections);
 }

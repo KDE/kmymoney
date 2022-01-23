@@ -256,6 +256,8 @@ public:
 
             q->connect(q, &SimpleLedgerView::resizeSection, view, &LedgerViewPage::resizeSection);
             q->connect(q, &SimpleLedgerView::moveSection, view, &LedgerViewPage::moveSection);
+
+            q->connect(view, &LedgerViewPage::requestView, q, &SimpleLedgerView::requestView);
         }
     }
 
@@ -557,9 +559,9 @@ void SimpleLedgerView::showTransactionForm(bool show)
 void SimpleLedgerView::showEvent(QShowEvent* event)
 {
     Q_D(SimpleLedgerView);
-    if (d->m_needInit)
+    if (d->m_needInit) {
         d->init();
-
+    }
     // don't forget base class implementation
     QWidget::showEvent(event);
 }
@@ -673,6 +675,7 @@ void SimpleLedgerView::executeAction(eMenu::Action action, const SelectedObjects
     case eMenu::Action::EditSplits:
     case eMenu::Action::SelectAllTransactions:
     case eMenu::Action::EditTabOrder:
+    case eMenu::Action::ShowTransaction:
         if (d->isActiveView() && !accountId.isEmpty()) {
             d->openLedger(accountId, true);
             auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());

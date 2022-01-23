@@ -129,6 +129,10 @@ enum class Action {
     DeleteOnlineJob, EditOnlineJob, LogOnlineJob,
     ReportOpen, ReportNew, ReportCopy, ReportConfigure,
     ReportExport, ReportDelete, ReportClose, ReportToggleChart,
+    // *************
+    // Actions only used by code
+    // *************
+    ShowTransaction,
 };
 // clang-format on
 

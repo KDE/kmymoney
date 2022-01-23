@@ -1740,6 +1740,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::MarkReconciled,                QStringLiteral("transaction_mark_reconciled"),    i18nc("Mark transaction reconciled", "Reconciled"), Icon::Empty},
             {Action::MarkNotReconciled,             QStringLiteral("transaction_mark_notreconciled"), i18nc("Mark transaction not reconciled", "Not reconciled"),     Icon::Empty},
             {Action::MoveTransactionTo,             QStringLiteral("transaction_move"),               i18nc("Move transaction", "Move transaction"),      Icon::Empty},     // not directly available in UI
+            {Action::ShowTransaction,               QStringLiteral("transaction_show"),               i18nc("Show transaction", "Show transaction"),      Icon::Empty},     // not directly available in UI
 
             {Action::SelectAllTransactions,         QStringLiteral("transaction_select_all"),         i18nc("Select all transactions", "Select all"),     Icon::SelectAll},
             {Action::GoToAccount,                   QStringLiteral("transaction_goto_account"),       i18n("Go to account"),                              Icon::BankAccount},
@@ -1887,6 +1888,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::MoveTransactionTo,             &KMyMoneyApp::slotMoveTransactionTo},
             {Action::MatchTransaction,              &KMyMoneyApp::slotMatchTransaction},
             {Action::AcceptTransaction,             &KMyMoneyApp::slotAcceptTransaction},
+            {Action::ShowTransaction,               &KMyMoneyApp::slotExecuteAction},
 
             {Action::StartReconciliation,           &KMyMoneyApp::slotStartReconciliation},
             {Action::FinishReconciliation,          &KMyMoneyApp::slotExecuteAction},
