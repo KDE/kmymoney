@@ -922,86 +922,71 @@ const char* MyMoneySchedule::occurrenceToString(Schedule::Occurrence occurrence)
 
 QString MyMoneySchedule::occurrenceToString(int mult, Schedule::Occurrence type)
 {
-    QString occurrenceString = I18N_NOOP2("Frequency of schedule", "Any");
+    QString occurrenceString(occurrenceToString(type));
 
-    if (type == Schedule::Occurrence::Once)
-        switch (mult) {
-        case 1:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", "Once");
-            break;
-        default:
+    if (mult > 1) {
+        if (type == Schedule::Occurrence::Once) {
             occurrenceString = I18N_NOOP2("Frequency of schedule", QString("%1 times").arg(mult));
-        }
-    else if (type == Schedule::Occurrence::Daily)
-        switch (mult) {
-        case 1:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", "Daily");
-            break;
-        case 30:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", "Every thirty days");
-            break;
-        default:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 days").arg(mult));
-        }
-    else if (type == Schedule::Occurrence::Weekly)
-        switch (mult) {
-        case 1:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", "Weekly");
-            break;
-        case 2:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", "Every other week");
-            break;
-        case 3:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", "Every three weeks");
-            break;
-        case 4:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", "Every four weeks");
-            break;
-        case 8:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", "Every eight weeks");
-            break;
-        default:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 weeks").arg(mult));
-        }
-    else if (type == Schedule::Occurrence::EveryHalfMonth)
-        switch (mult) {
-        case 1:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", "Every half month");
-            break;
-        default:
+
+        } else if (type == Schedule::Occurrence::Daily) {
+            switch (mult) {
+            case 30:
+                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every thirty days");
+                break;
+            default:
+                occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 days").arg(mult));
+            }
+
+        } else if (type == Schedule::Occurrence::Weekly) {
+            switch (mult) {
+            case 2:
+                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every other week");
+                break;
+            case 3:
+                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every three weeks");
+                break;
+            case 4:
+                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every four weeks");
+                break;
+            case 8:
+                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every eight weeks");
+                break;
+            default:
+                occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 weeks").arg(mult));
+            }
+
+        } else if (type == Schedule::Occurrence::EveryHalfMonth) {
             occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 half months").arg(mult));
+
+        } else if (type == Schedule::Occurrence::Monthly) {
+            switch (mult) {
+            case 2:
+                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every two months");
+                break;
+            case 3:
+                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every three months");
+                break;
+            case 4:
+                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every four months");
+                break;
+            case 6:
+                occurrenceString = I18N_NOOP2("Frequency of schedule", "Twice yearly");
+                break;
+            default:
+                occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 months").arg(mult));
+            }
+
+        } else if (type == Schedule::Occurrence::Yearly) {
+            switch (mult) {
+            case 2:
+                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every other year");
+                break;
+            default:
+                occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 years").arg(mult));
+            }
         }
-    else if (type == Schedule::Occurrence::Monthly)
-        switch (mult) {
-        case 1:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", "Monthly");
-            break;
-        case 2:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", "Every two months");
-            break;
-        case 3:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", "Every three months");
-            break;
-        case 4:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", "Every four months");
-            break;
-        case 6:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", "Twice yearly");
-            break;
-        default:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 months").arg(mult));
-        }
-    else if (type == Schedule::Occurrence::Yearly)
-        switch (mult) {
-        case 1:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", "Yearly");
-            break;
-        case 2:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", "Every other year");
-            break;
-        default:
-            occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 years").arg(mult));
-        }
+    }
+
     return occurrenceString;
 }
 
