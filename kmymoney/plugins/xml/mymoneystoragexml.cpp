@@ -1201,8 +1201,11 @@ MyMoneySchedule MyMoneyXmlContentHandler::readSchedule(const QDomElement &node)
 
     schedule.setType(static_cast<Schedule::Type>(node.attribute(attributeName(Attribute::Schedule::Type)).toInt()));
     schedule.setPaymentType(static_cast<Schedule::PaymentType>(node.attribute(attributeName(Attribute::Schedule::PaymentType)).toInt()));
-    schedule.setOccurrence(static_cast<Schedule::Occurrence>(node.attribute(attributeName(Attribute::Schedule::Occurrence)).toInt()));
-    schedule.setOccurrenceMultiplier(node.attribute(attributeName(Attribute::Schedule::OccurrenceMultiplier), "1").toInt());
+    auto occurrence = static_cast<Schedule::Occurrence>(node.attribute(attributeName(Attribute::Schedule::Occurrence)).toInt());
+    auto multiplier = node.attribute(attributeName(Attribute::Schedule::OccurrenceMultiplier), "1").toInt();
+    schedule.simpleToCompoundOccurrence(multiplier, occurrence);
+    schedule.setOccurrencePeriod(occurrence);
+    schedule.setOccurrenceMultiplier(multiplier);
     schedule.setLastDayInMonth(static_cast<bool>(node.attribute("lastDayInMonth").toInt()));
     schedule.setAutoEnter(static_cast<bool>(node.attribute(attributeName(Attribute::Schedule::AutoEnter)).toInt()));
     schedule.setFixed(static_cast<bool>(node.attribute(attributeName(Attribute::Schedule::Fixed)).toInt()));
