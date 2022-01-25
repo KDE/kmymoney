@@ -793,8 +793,6 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
     d->ui->statusCombo->setModel(MyMoneyFile::instance()->statusModel());
 
-    d->ui->dateEdit->setDisplayFormat(QLocale().dateFormat(QLocale::ShortFormat));
-
     d->ui->creditDebitEdit->setAllowEmpty(true);
 
     d->frameCollection = new WidgetHintFrameCollection(this);

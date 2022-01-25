@@ -462,7 +462,7 @@ Set it to 0 to turn the feature off.</string>
              <widget class="KMyMoneyDateInput" name="m_startDateEdit"/>
             </item>
             <item>
-             <widget class="QDateEdit" name="kcfg_StartDate"/>
+             <widget class="KMyMoneyDateEdit" name="kcfg_StartDate"/>
             </item>
             <item>
              <spacer name="spacer10">
@@ -650,6 +650,11 @@ Set it to 0 to turn the feature off.</string>
    <extends>QFrame</extends>
    <header>kmymoneydateinput.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyDateEdit</class>
+   <extends>QDateEdit</extends>
+   <header>kmymoneydateedit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

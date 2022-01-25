@@ -6,45 +6,37 @@
 */
 
 #include "kmymoneydateinput.h"
-#include "kmymoneysettings.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QPoint>
 #include <QApplication>
-#include <QDesktopWidget>
 #include <QTimer>
 #include <QLabel>
 #include <QKeyEvent>
 #include <QEvent>
-#include <QDateEdit>
 #include <QLineEdit>
 #include <QPushButton>
-#include <QIcon>
 #include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
 #include <KDatePicker>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "icons.h"
+#include "kmymoneysettings.h"
 #include "popuppositioner.h"
 
 using namespace Icons;
 
-namespace
-{
-const QDate INVALID_DATE = QDate(1800, 1, 1);
-}
-
 KMyMoney::OldDateEdit::OldDateEdit(const QDate& date, QWidget* parent)
-    : QDateEdit(date, parent)
+    : KMyMoneyDateEdit(date, parent)
     , m_initialSection(QDateTimeEdit::DaySection)
     , m_initStage(Created)
 {
@@ -143,8 +135,8 @@ KMyMoneyDateInput::KMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
     setFocusProxy(d->m_dateEdit);
     d->m_dateEdit->installEventFilter(this); // To get d->m_dateEdit's FocusIn/Out and some KeyPress events
 
-    // we use INVALID_DATE as a special value for multi transaction editing
-    d->m_dateEdit->setMinimumDate(INVALID_DATE);
+    // we use KMyMoneyDateEdit::invalid_date() as a special value for multi transaction editing
+    d->m_dateEdit->setMinimumDate(KMyMoneyDateEdit::invalid_date());
     d->m_dateEdit->setSpecialValueText(QLatin1String(" "));
 
     d->m_dateFrame = new QWidget(this);
@@ -155,7 +147,6 @@ KMyMoneyDateInput::KMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
     d->m_dateFrame->setWindowFlags(Qt::Popup);
     d->m_dateFrame->hide();
 
-    d->m_dateEdit->setDisplayFormat(QLocale().dateFormat(QLocale::ShortFormat));
     switch(KMyMoneySettings::initialDateFieldCursorPosition()) {
     case KMyMoneySettings::Day:
         d->m_dateEdit->setInitialSection(QDateTimeEdit::DaySection);
@@ -232,7 +223,7 @@ void KMyMoneyDateInput::toggleDatePicker()
         d->m_dateFrame->hide();
     } else {
         PopupPositioner pos(d->m_dateButton, d->m_dateFrame, PopupPositioner::BottomRight);
-        if (d->m_date.isValid() && d->m_date != INVALID_DATE) {
+        if (d->m_date.isValid() && d->m_date != KMyMoneyDateEdit::invalid_date()) {
             d->m_datePicker->setDate(d->m_date);
         } else {
             d->m_datePicker->setDate(QDate::currentDate());
@@ -321,14 +312,14 @@ void KMyMoneyDateInput::slotDateChosen(QDate date)
         // the next line implies a call to slotDateChosenRef() above
         d->m_dateEdit->setDate(date);
     } else {
-        d->m_dateEdit->setDate(INVALID_DATE);
+        d->m_dateEdit->setDate(KMyMoneyDateEdit::invalid_date());
     }
 }
 
 QDate KMyMoneyDateInput::date() const
 {
     QDate rc = d->m_dateEdit->date();
-    if (rc == INVALID_DATE)
+    if (rc == KMyMoneyDateEdit::invalid_date())
         rc = QDate();
     return rc;
 }

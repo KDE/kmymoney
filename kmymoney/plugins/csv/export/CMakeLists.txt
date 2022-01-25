@@ -25,4 +25,5 @@ target_link_libraries(csvexporter
     KF5::Completion
     KF5::KIOWidgets
     kmm_plugin
+    kmm_base_widgets
 )

@@ -736,8 +736,6 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     d->ui->statusCombo->setModel(MyMoneyFile::instance()->statusModel());
 
-    d->ui->dateEdit->setDisplayFormat(QLocale().dateFormat(QLocale::ShortFormat));
-
     d->ui->sharesAmountEdit->setAllowEmpty(true);
     d->ui->sharesAmountEdit->setCalculatorButtonVisible(true);
 

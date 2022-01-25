@@ -13,13 +13,14 @@
 
 #include <QWidget>
 #include <QDate>
-#include <QDateEdit>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "kmymoneydateedit.h"
 
 #include "kmm_base_widgets_export.h"
 
@@ -31,7 +32,7 @@ namespace KMyMoney {
 /**
   * Provided to be able to catch the focusOut events before the contents gets changed
   */
-class OldDateEdit : public QDateEdit
+class OldDateEdit : public KMyMoneyDateEdit
 {
     Q_OBJECT
 public:
@@ -61,7 +62,7 @@ private:
         Created,
         GotFocus,
         FirstMousePress,
-    }                   m_initStage;
+    } m_initStage;
 };
 }; // namespace
 
