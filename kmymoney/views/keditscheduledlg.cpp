@@ -94,7 +94,11 @@ public:
 
         // add the required fields to the mandatory group
         m_requiredFields->add(ui->nameEdit);
+    }
 
+    void loadWidgets()
+    {
+        Q_Q(KEditScheduleDlg);
         auto accountCombo = transactionEditor->findChild<KMyMoneyAccountCombo*>(QLatin1String("accountCombo"));
         if (accountCombo) {
             m_requiredFields->add(accountCombo);
@@ -364,6 +368,8 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
     connect(d->ui->buttonBox, &QDialogButtonBox::helpRequested, this, [&]() {
         KHelpClient::invokeHelp("details.schedules.intro");
     });
+
+    d->loadWidgets();
 
     const auto dateEdit = d->transactionEditor->findChild<QWidget*>("dateEdit");
     if (dateEdit) {
