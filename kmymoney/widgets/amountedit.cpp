@@ -233,12 +233,12 @@ public:
                 currentCurrency = m_sharesCommodity.name();
                 otherCurrency = m_valueCommodity.name();
                 setCurrencySymbol(m_sharesCommodity.tradingSymbol(), currentCurrency);
-                q->setText(m_sharesText);
+                q->QLineEdit::setText(m_sharesText);
             } else {
                 currentCurrency = m_valueCommodity.name();
                 otherCurrency = m_sharesCommodity.name();
                 setCurrencySymbol(m_valueCommodity.tradingSymbol(), m_valueCommodity.name());
-                q->setText(m_valueText);
+                q->QLineEdit::setText(m_valueText);
             }
 
             m_currencyButton->setToolTip(
@@ -689,14 +689,32 @@ void AmountEdit::slotCalculatorClose()
     }
 }
 
+void AmountEdit::setText(const QString& txt)
+{
+    Q_D(AmountEdit);
+    if (!d->hasMultipleCurrencies()) {
+        QLineEdit::setText(txt);
+    } else {
+        switch (d->m_state) {
+        case MultiCurrencyEdit::DisplayShares:
+            d->m_sharesText = txt;
+            break;
+        case MultiCurrencyEdit::DisplayValue:
+            d->m_valueText = txt;
+            break;
+        }
+        d->updateWidgets();
+    }
+}
+
 void AmountEdit::slotCalculatorResult()
 {
     Q_D(AmountEdit);
     slotCalculatorClose();
     if (d->m_calculator != 0) {
         MyMoneyMoney amount(d->m_calculator->result());
-        d->adjustToPrecision(d->m_state, amount);
-        theTextChanged(amount.formatMoney(QString(), d->precision(d->m_state), false));
+        amount = d->adjustToPrecision(d->m_state, amount);
+        setText(amount.formatMoney(QString(), d->precision(d->m_state), false));
     }
 }
 

@@ -222,6 +222,13 @@ public:
 
     bool hasMultipleCurrencies() const override;
 
+    /**
+     * Behaves like QLineEdit::setText() when not in
+     * multi-currency mode. Otherwise assigns the text
+     * to the currently visible currency.
+     */
+    void setText(const QString& txt);
+
 private:
 public Q_SLOTS:
 
