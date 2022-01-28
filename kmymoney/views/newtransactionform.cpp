@@ -10,6 +10,7 @@
 // QT Includes
 
 #include <QDate>
+#include <QRegularExpression>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -17,11 +18,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_newtransactionform.h"
 #include "journalmodel.h"
 #include "mymoneyfile.h"
 #include "tagsmodel.h"
 #include "statusmodel.h"
+
+#include "ui_newtransactionform.h"
 
 class NewTransactionForm::Private
 {
@@ -79,8 +81,13 @@ void NewTransactionForm::showTransaction(const QModelIndex& idx)
     const auto index = MyMoneyFile::baseModel()->mapToBaseSource(idx);
     d->row = index.row();
 
-    d->ui->dateEdit->setText(QLocale().toString(index.data(eMyMoney::Model::TransactionPostDateRole).toDate(),
-                             QLocale::ShortFormat));
+    // make sure to have a four digit year display
+    auto format(d->ui->dateEdit->displayFormat());
+    const QRegularExpression twoYearDigits(QLatin1String("^([^y]*)yy([^y]*)$"));
+    format.replace(twoYearDigits, QLatin1String("\\1yyyy\\2"));
+    d->ui->dateEdit->setDisplayFormat(format);
+
+    d->ui->dateEdit->setDate(index.data(eMyMoney::Model::TransactionPostDateRole).toDate());
     d->ui->payeeEdit->setText(index.data(eMyMoney::Model::SplitPayeeRole).toString());
     d->ui->memoEdit->clear();
     d->ui->memoEdit->insertPlainText(index.data(eMyMoney::Model::SplitMemoRole).toString());
