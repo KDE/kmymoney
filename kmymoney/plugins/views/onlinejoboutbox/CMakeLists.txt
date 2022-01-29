@@ -4,7 +4,6 @@ set(onlinejoboutboxview_SOURCES
   onlinejoboutboxview.cpp
   konlinejoboutboxview.cpp
   konlinetransferform.cpp
-  onlinejobmodel.cpp
   onlinejobmessagesmodel.cpp
   )
 
