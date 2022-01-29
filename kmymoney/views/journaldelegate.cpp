@@ -75,6 +75,7 @@ public:
 
     displayProperties displayMatchedString(const QModelIndex& index, const QStyleOptionViewItem& opt)
     {
+        Q_UNUSED(opt)
         displayProperties rc;
         rc.italicStartLine = -1;
         if (index.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool()) {
