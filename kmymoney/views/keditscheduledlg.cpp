@@ -52,8 +52,9 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "newtransactioneditor.h"
-#include "ui_keditscheduledlg.h"
 #include "widgetenums.h"
+
+#include "ui_keditscheduledlg.h"
 
 using namespace eMyMoney;
 
@@ -91,6 +92,8 @@ public:
 
         m_requiredFields = new KMandatoryFieldGroup(q);
         m_requiredFields->setOkButton(ui->buttonBox->button(QDialogButtonBox::Ok)); // button to be enabled when all fields present
+
+        transactionEditor->setShowNumberWidget(true);
 
         // add the required fields to the mandatory group
         m_requiredFields->add(ui->nameEdit);
@@ -337,14 +340,6 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
                 d->updateTransactionsRemaining();
             }
         }
-    });
-
-    connect(d->ui->paymentMethodCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int idx) {
-        Q_D(KEditScheduleDlg);
-        const auto model = d->ui->paymentMethodCombo->model();
-        const auto paymentType = model->index(idx, 0).data(eMyMoney::Model::SchedulePaymentTypeRole).value<eMyMoney::Schedule::PaymentType>();
-        const bool isWriteCheck = paymentType == Schedule::PaymentType::WriteChecque;
-        d->transactionEditor->setShowNumberWidget(isWriteCheck);
     });
 
     connect(d->transactionEditor, &NewTransactionEditor::postDateChanged, this, [&](const QDate& date) {
