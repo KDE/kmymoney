@@ -1,6 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2013-2018 Christian Dávid <christian-david@web.de>
-    SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2019-2022 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -27,9 +27,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoney/mymoneyaccount.h"
-#include "mymoney/mymoneyfile.h"
-#include "mymoney/mymoneykeyvaluecontainer.h"
+#include "mymoneyaccount.h"
+#include "mymoneyfile.h"
+#include "mymoneykeyvaluecontainer.h"
+#include "onlinejobsmodel.h"
 #include "onlinepluginextended.h"
 
 #include "onlinetasks/unavailabletask/tasks/unavailabletask.h"
@@ -436,10 +437,14 @@ bool onlineJobAdministration::canSendCreditTransfer()
     return false;
 }
 
-bool onlineJobAdministration::canEditOnlineJob(const onlineJob& job)
+bool onlineJobAdministration::canEditOnlineJob(const QString& jobId)
 {
-    const auto taskIid = job.taskIid();
-    return (!taskIid.isEmpty() && m_onlineTasks.contains(taskIid));
+    const auto idx = MyMoneyFile::instance()->onlineJobsModel()->indexById(jobId);
+    if (idx.isValid()) {
+        const auto taskIid = idx.data(eMyMoney::Model::OnlineJobTaskIidRole).toString();
+        return (!taskIid.isEmpty() && m_onlineTasks.contains(taskIid));
+    }
+    return false;
 }
 
 void onlineJobAdministration::updateOnlineTaskProperties()

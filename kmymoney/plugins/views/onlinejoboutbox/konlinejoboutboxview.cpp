@@ -6,12 +6,20 @@
 
 #include "konlinejoboutboxview.h"
 
+#include <memory>
+
+// ----------------------------------------------------------------------------
+// QT Includes
+
 #include <QAction>
 #include <QDebug>
 #include <QMenu>
 #include <QTimer>
 #include <QModelIndex>
 #include <QModelIndexList>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
 
 #include <KLocalizedString>
 #include <KSharedConfig>
@@ -20,26 +28,27 @@
 #include <KActionCollection>
 #include <KXMLGUIFactory>
 
-#include <memory>
+// ----------------------------------------------------------------------------
+// Project Includes
 
-#include "ui_konlinejoboutboxview.h"
 #include "kmymoneyviewbase_p.h"
 #include "konlinetransferform.h"
 #include "kmymoneyplugin.h"
-
-#include "onlinejobmodel.h"
-#include "onlinejobadministration.h"
-#include "onlinejobtyped.h"
-#include "onlinejobmessagesview.h"
-#include "onlinejobmessagesmodel.h"
-#include "onlinepluginextended.h"
-
 #include "mymoneyaccount.h"
 #include "mymoneyfile.h"
 #include "menuenums.h"
 #include "mymoneyenums.h"
 #include "mymoneyexception.h"
 #include "icons.h"
+
+#include "onlinejobadministration.h"
+#include "onlinejobmessagesmodel.h"
+#include "onlinejobmessagesview.h"
+#include "onlinejobsmodel.h"
+#include "onlinejobtyped.h"
+#include "onlinepluginextended.h"
+
+#include "ui_konlinejoboutboxview.h"
 
 using namespace Icons;
 
@@ -53,7 +62,6 @@ public:
         , ui(new Ui::KOnlineJobOutboxView)
         , m_needLoad(true)
         , m_onlinePlugins(nullptr)
-        , m_onlineJobModel(nullptr)
         , m_actionCollection(nullptr)
         , m_contextMenu(nullptr)
     {
@@ -94,17 +102,9 @@ public:
         m_focusWidget = ui->m_onlineJobView;
     }
 
-    onlineJobModel* onlineJobsModel()
+    OnlineJobsModel* onlineJobsModel() const
     {
-        Q_Q(KOnlineJobOutboxView);
-        if (!m_onlineJobModel) {
-            m_onlineJobModel = new onlineJobModel(q);
-#ifdef KMM_MODELTEST
-            /// @todo using the ModelTest feature on the onlineJobModel crashes. Need to fix.
-            // new ModelTest(m_onlineJobModel, MyMoneyFile::instance());
-#endif
-        }
-        return m_onlineJobModel;
+        return MyMoneyFile::instance()->onlineJobsModel();
     }
 
 
@@ -145,11 +145,10 @@ public:
       */
     bool m_needLoad;
     QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* m_onlinePlugins;
-    onlineJobModel*                       m_onlineJobModel;
-    KActionCollection*                    m_actionCollection;
-    QMenu*                                m_contextMenu;
-    MyMoneyAccount                        m_currentAccount;
-    QHash<eMenu::OnlineAction, QAction*>  m_actions;
+    KActionCollection* m_actionCollection;
+    QMenu* m_contextMenu;
+    MyMoneyAccount m_currentAccount;
+    QHash<eMenu::OnlineAction, QAction*> m_actions;
 };
 
 KOnlineJobOutboxView::KOnlineJobOutboxView(QWidget *parent) :
@@ -218,22 +217,46 @@ void KOnlineJobOutboxView::updateActions(const SelectedObjects& selections)
     bool editable = true;
     QString tooltip;
 
+    // in case we're not initialized yet, we simply return
+    if (d->m_needLoad) {
+        return;
+    }
+
+    // no model available: bail out
+    const auto model = d->ui->m_onlineJobView->model();
+    if (model == nullptr) {
+        return;
+    }
+
+    const auto rows = model->rowCount();
+    bool sendableItems = false;
+
+    for (auto row = 0; row < rows; ++row) {
+        const auto idx = model->index(row, 0);
+        if (idx.data(eMyMoney::Model::OnlineJobSendableRole).toBool()) {
+            sendableItems = true;
+            break;
+        }
+    }
+
     if (selections.count(SelectedObjects::OnlineJob) == 1) {
         const QModelIndexList indexes = d->ui->m_onlineJobView->selectionModel()->selectedRows();
-        const onlineJob job = d->ui->m_onlineJobView->model()->data(indexes.first(), onlineJobModel::OnlineJobRole).value<onlineJob>();
+        const auto jobIdx = indexes.first();
 
-        if (!job.isEditable()) {
+        sendableItems = jobIdx.data(eMyMoney::Model::OnlineJobSendableRole).toBool();
+
+        if (!jobIdx.data(eMyMoney::Model::OnlineJobEditableRole).toBool()) {
             editable = false;
-            if (job.sendDate().isValid()) {
+            if (jobIdx.data(eMyMoney::Model::OnlineJobSendDateRole).toDate().isValid()) {
                 /// @todo maybe add a word about unable to edit but able to copy here
                 // I don't do it right away since we are in string freeze for 5.0.7
                 tooltip = i18n("This job cannot be edited anymore because it was sent already.");
                 editable = true;
-            } else if (job.isLocked())
+            } else if (jobIdx.data(eMyMoney::Model::OnlineJobLockedRole).toBool())
                 tooltip = i18n("Job is being processed at the moment.");
             else
                 Q_ASSERT(false);
-        } else if (!onlineJobAdministration::instance()->canEditOnlineJob(job)) {
+        } else if (!onlineJobAdministration::instance()->canEditOnlineJob(jobIdx.data(eMyMoney::Model::IdRole).toString())) {
             editable = false;
             tooltip = i18n("The plugin to edit this job is not available.");
         }
@@ -249,7 +272,7 @@ void KOnlineJobOutboxView::updateActions(const SelectedObjects& selections)
 
     d->m_actions[eMenu::OnlineAction::DeleteOnlineJob]->setEnabled(!selections.isEmpty(SelectedObjects::OnlineJob));
 
-    d->m_actions[eMenu::OnlineAction::SendOnlineJobs]->setEnabled(d->m_onlineJobModel ? d->m_onlineJobModel->rowCount() > 0 : false);
+    d->m_actions[eMenu::OnlineAction::SendOnlineJobs]->setEnabled(sendableItems);
 }
 
 void KOnlineJobOutboxView::updateSelection()
@@ -266,14 +289,13 @@ void KOnlineJobOutboxView::updateSelection()
 
 void KOnlineJobOutboxView::slotRemoveJob()
 {
-    Q_D(KOnlineJobOutboxView);
-    QAbstractItemModel* model = d->ui->m_onlineJobView->model();
-    QModelIndexList indexes = d->ui->m_onlineJobView->selectionModel()->selectedRows();
-
-    while (!indexes.isEmpty()) {
-        model->removeRow(indexes.at(0).row());
-        indexes = d->ui->m_onlineJobView->selectionModel()->selectedRows();
+    MyMoneyFileTransaction ft;
+    try {
+        MyMoneyFile::instance()->removeOnlineJob(selectedOnlineJobs());
+        ft.commit();
+    } catch (MyMoneyException& e) {
     }
+    return;
 }
 
 QStringList KOnlineJobOutboxView::selectedOnlineJobs() const
@@ -284,14 +306,12 @@ QStringList KOnlineJobOutboxView::selectedOnlineJobs() const
     if (indexes.isEmpty())
         return QStringList();
 
-    QStringList list;
-    list.reserve(indexes.count());
-
-    const QAbstractItemModel *const model = d->ui->m_onlineJobView->model();
-    Q_FOREACH(const QModelIndex& index, indexes) {
-        list.append(model->data(index, onlineJobModel::OnlineJobId).toString());
+    QStringList jobIds;
+    jobIds.reserve(indexes.count());
+    for (const auto& idx : indexes) {
+        jobIds << idx.data(eMyMoney::Model::IdRole).toString();
     }
-    return list;
+    return jobIds;
 }
 
 void KOnlineJobOutboxView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* plugins)
@@ -334,9 +354,8 @@ void KOnlineJobOutboxView::slotSendSelectedJobs()
     validJobs.reserve(indexes.count());
 
     // Get valid jobs
-    const QAbstractItemModel *const model = d->ui->m_onlineJobView->model();
-    foreach (const QModelIndex& index, indexes) {
-        onlineJob job = model->data(index, onlineJobModel::OnlineJobRole).value<onlineJob>();
+    for (const auto& idx : indexes) {
+        onlineJob job = idx.data(eMyMoney::Model::OnlineJobRole).value<onlineJob>();
         if (job.isValid() && job.isEditable())
             validJobs.append(job);
     }
@@ -356,9 +375,9 @@ void KOnlineJobOutboxView::slotSendSelectedJobs()
 void KOnlineJobOutboxView::slotEditJob()
 {
     Q_D(KOnlineJobOutboxView);
-    QModelIndexList indexes = d->ui->m_onlineJobView->selectionModel()->selectedIndexes();
+    const auto indexes = d->ui->m_onlineJobView->selectionModel()->selectedIndexes();
     if (!indexes.isEmpty()) {
-        QString jobId = d->ui->m_onlineJobView->model()->data(indexes.first(), onlineJobModel::OnlineJobId).toString();
+        const auto jobId = indexes.first().data(eMyMoney::Model::IdRole).toString();
         Q_ASSERT(!jobId.isEmpty());
         d->editJob(jobId);
 //    emit editJob(jobId);
@@ -371,7 +390,7 @@ void KOnlineJobOutboxView::slotEditJob(const QModelIndex &index)
     if (!d->m_actions[eMenu::OnlineAction::EditOnlineJob]->isEnabled())
         return;
 
-    auto jobId = d->ui->m_onlineJobView->model()->data(index, onlineJobModel::OnlineJobId).toString();
+    auto jobId = index.data(eMyMoney::Model::IdRole).toString();
     d->editJob(jobId);
 //  emit editJob(jobId);
 }
@@ -401,18 +420,8 @@ void KOnlineJobOutboxView::showEvent(QShowEvent* event)
 
 void KOnlineJobOutboxView::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
+    Q_UNUSED(action)
     Q_UNUSED(selections)
-    Q_D(KOnlineJobOutboxView);
-    switch (action) {
-    case eMenu::Action::FileNew:
-        d->onlineJobsModel()->load();
-        break;
-    case eMenu::Action::FileClose:
-        d->onlineJobsModel()->unload();
-        break;
-    default:
-        break;
-    }
 }
 
 void KOnlineJobOutboxView::slotOnlineJobSave(onlineJob job)
@@ -428,12 +437,7 @@ void KOnlineJobOutboxView::slotOnlineJobSave(onlineJob job)
 /** @todo when onlineJob queue is used, continue here */
 void KOnlineJobOutboxView::slotOnlineJobSend(onlineJob job)
 {
-    MyMoneyFileTransaction fileTransaction;
-    if (job.id().isEmpty())
-        MyMoneyFile::instance()->addOnlineJob(job);
-    else
-        MyMoneyFile::instance()->modifyOnlineJob(job);
-    fileTransaction.commit();
+    slotOnlineJobSave(job);
 
     QList<onlineJob> jobList;
     jobList.append(job);
@@ -504,8 +508,7 @@ void KOnlineJobOutboxView::slotOnlineJobSend(QList<onlineJob> jobs)
 
 void KOnlineJobOutboxView::slotOnlineJobLog()
 {
-    QStringList jobIds = this->selectedOnlineJobs();
-    slotOnlineJobLog(jobIds);
+    slotOnlineJobLog(selectedOnlineJobs());
 }
 
 void KOnlineJobOutboxView::slotOnlineJobLog(const QStringList& onlineJobIds)

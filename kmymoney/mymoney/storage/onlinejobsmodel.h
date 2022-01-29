@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2019-2022 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -30,6 +30,7 @@ class KMM_MYMONEY_EXPORT OnlineJobsModel : public MyMoneyModel<onlineJob>
 
 public:
     enum Columns {
+        PostDate,
         AccountName,
         Action,
         Destination,

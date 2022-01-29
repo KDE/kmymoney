@@ -623,9 +623,17 @@ enum Roles {
 
     // General state
     ClosedRole,
+
+    // OnlineJobsModel
+    OnlineJobRole,
+    OnlineJobLockedRole,
+    OnlineJobSendableRole,
+    OnlineJobEditableRole,
+    OnlineJobSendDateRole,
+    OnlineJobTaskIidRole,
 };
-}
-}
+} // namespace Model
+} // namespace eMyMoney
 
 Q_DECLARE_METATYPE(eMyMoney::Split::State)
 Q_DECLARE_METATYPE(eMyMoney::Split::InvestmentTransactionType)

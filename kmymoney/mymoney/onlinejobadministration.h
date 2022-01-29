@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2013-2018 Christian Dávid <christian-david@web.de>
+    SPDX-FileCopyrightText: 2022      Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -176,7 +177,7 @@ public:
     /**
      * @brief Are all preconditions set to edit the given job?
      */
-    bool canEditOnlineJob(const onlineJob& job);
+    bool canEditOnlineJob(const QString& jobId);
 
     /**
      * @brief See if a online task has a specified base
