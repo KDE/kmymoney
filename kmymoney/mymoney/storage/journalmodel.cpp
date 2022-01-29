@@ -1206,6 +1206,10 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
         // (destRow != (srcIdx.row() + newSplitCount)) checks
         // for the same location when new post date is later than
         // old post date.
+        //
+        // If we don't move we still have to update the id of
+        // the journal entry and the m_idToItemMapper to use
+        // the new date, though.
         if ((destRow != srcIdx.row()) && (destRow != (srcIdx.row() + newSplitCount))) {
             beginMoveRows(QModelIndex(), srcIdx.row(), srcIdx.row() + newSplitCount - 1, QModelIndex(), destRow);
 
@@ -1259,6 +1263,27 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
 
             // update the index of the transaction
             srcIdx = index(destRow, 0);
+
+        } else {
+            d->removeIdKeyMapping(oldTransaction.id());
+
+            int srcRow = srcIdx.row();
+            for (int rows = newSplitCount; rows > 0; --rows) {
+                auto newIdx = index(srcRow, 0);
+                auto journalEntry = static_cast<TreeItem<JournalEntry>*>(newIdx.internalPointer());
+                if (m_idToItemMapper) {
+                    m_idToItemMapper->remove(journalEntry->dataRef().m_id);
+                }
+                journalEntry->dataRef().m_id = QString("%1-%2").arg(newKey, journalEntry->constDataRef().m_split.id());
+                // force recalc of row height
+                journalEntry->dataRef().m_linesInLedger = 0;
+                if (m_idToItemMapper) {
+                    m_idToItemMapper->insert(journalEntry->dataRef().m_id, journalEntry);
+                }
+                ++srcRow;
+            }
+
+            d->addIdKeyMapping(oldTransaction.id(), newKey);
         }
     }
 
