@@ -30,6 +30,7 @@
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneyreconciliationreport.h"
+#include "reconciliationmodel.h"
 #include "schedulesjournalmodel.h"
 #include "specialdatesmodel.h"
 #include "widgetenums.h"
@@ -261,6 +262,9 @@ public:
                 reconciledJournalEntryIds.append(journalEntryId);
             }
             ft.commit();
+
+            // load the new data into the model
+            file->reconciliationModel()->updateData();
 
             /// send information to plugins through a QAction. Data is
             /// a) accountId
