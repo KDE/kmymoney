@@ -1097,9 +1097,9 @@ void NewTransactionEditor::editSplits()
 
 MyMoneyMoney NewTransactionEditor::transactionAmount() const
 {
-    auto amount = -d->splitsSum();
+    auto amount = d->ui->creditDebitEdit->value();
     if (amount.isZero()) {
-        amount = d->ui->creditDebitEdit->value();
+        amount = -d->splitsSum();
     }
     return amount;
 }
