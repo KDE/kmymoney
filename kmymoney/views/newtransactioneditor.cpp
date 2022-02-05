@@ -899,11 +899,17 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
 
     } else {
         // existing schedule
-        d->m_transaction = schedule.transaction();
+        // since a scheduled transaction does not have an id, we assign it here so
+        // that we can identify a transaction of an existing schedule. It will be
+        // cleared when retrieving the transaction in the schedule editor via
+        // KEditScheduleDlgPrivate::transaction()
+        d->m_transaction = MyMoneyTransaction(schedule.id(), schedule.transaction());
         d->m_split = d->m_transaction.splits().first();
 
         const auto commodity = MyMoneyFile::instance()->currency(d->m_transaction.commodity());
         d->ui->creditDebitEdit->setCommodity(commodity);
+        // update the commodity in case it was empty
+        d->m_transaction.setCommodity(commodity.id());
 
         // make sure the commodity is the one of the current account
         // in case we have exactly two splits. This is a precondition
