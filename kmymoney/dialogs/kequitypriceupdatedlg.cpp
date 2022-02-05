@@ -11,10 +11,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QPushButton>
-#include <QTimer>
 #include <QList>
 #include <QPointer>
+#include <QPushButton>
+#include <QTimer>
+#include <QToolButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,15 +34,16 @@
 
 #include "ui_kequitypriceupdatedlg.h"
 
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
-#include "mymoneyprice.h"
-#include "webpricequote.h"
+#include "dialogenums.h"
+#include "icons.h"
 #include "kequitypriceupdateconfdlg.h"
 #include "kmymoneyutils.h"
+#include "mymoneyaccount.h"
 #include "mymoneyexception.h"
-#include "dialogenums.h"
+#include "mymoneyfile.h"
+#include "mymoneyprice.h"
+#include "mymoneysecurity.h"
+#include "webpricequote.h"
 
 #define WEBID_COL       0
 #define NAME_COL        1
@@ -92,6 +94,12 @@ public:
         ui->lvEquityList->setAllColumnsShowFocus(true);
 
         ui->btnUpdateAll->setEnabled(false);
+
+        ui->closeStatusButton->setIcon(Icons::get(Icons::Icon::DialogClose));
+        q->connect(ui->closeStatusButton, &QToolButton::clicked, ui->statusContainer, &QWidget::hide);
+
+        // hide the status widgets until there is activity
+        ui->statusContainer->hide();
 
         auto file = MyMoneyFile::instance();
 
@@ -450,6 +458,11 @@ void KEquityPriceUpdateDlg::slotUpdateSelectedClicked()
     // disable sorting while the update is running to maintain the current order of items on which
     // the update process depends and which could be changed with sorting enabled due to the updated values
     d->ui->lvEquityList->setSortingEnabled(false);
+
+    // show the status widgets
+    d->ui->statusContainer->show();
+    d->ui->prgOnlineProgress->show();
+
     auto item = d->ui->lvEquityList->invisibleRootItem()->child(0);
     auto skipCnt = 1;
     while (item && !item->isSelected()) {
@@ -474,6 +487,11 @@ void KEquityPriceUpdateDlg::slotUpdateAllClicked()
     // disable sorting while the update is running to maintain the current order of items on which
     // the update process depends and which could be changed with sorting enabled due to the updated values
     d->ui->lvEquityList->setSortingEnabled(false);
+
+    // show the status widgets
+    d->ui->statusContainer->show();
+    d->ui->prgOnlineProgress->show();
+
     QTreeWidgetItem* item = d->ui->lvEquityList->invisibleRootItem()->child(0);
     if (item) {
         d->ui->prgOnlineProgress->setMaximum(1 + d->ui->lvEquityList->invisibleRootItem()->childCount());
@@ -786,8 +804,11 @@ void KEquityPriceUpdateDlg::finishUpdate()
     Q_D(KEquityPriceUpdateDlg);
     // we've run past the end, reset to the default value.
     d->m_fUpdateAll = false;
-    // force progress bar to show 100%
+
+    // force progress bar to show 100% and hide it after a while
     d->ui->prgOnlineProgress->setValue(d->ui->prgOnlineProgress->maximum());
+    QTimer::singleShot(500, d->ui->prgOnlineProgress, &QProgressBar::hide);
+
     // re-enable the sorting that was disabled during the update process
     d->ui->lvEquityList->setSortingEnabled(true);
 }
