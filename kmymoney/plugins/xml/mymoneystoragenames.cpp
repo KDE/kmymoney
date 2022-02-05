@@ -133,6 +133,11 @@ uint qHash(const OnlineJob key, uint seed) {
     Q_UNUSED(seed);
     return ::qHash(static_cast<uint>(key), 0);
 }
+uint qHash(const Reconciliation key, uint seed)
+{
+    Q_UNUSED(seed);
+    return ::qHash(static_cast<uint>(key), 0);
+}
 }
 
 QString elementName(Element::General elementID)
@@ -230,11 +235,15 @@ QString attributeName(Attribute::Split attributeID)
 
 QString elementName(Element::Account elementID)
 {
+    // clang-format off
     static const QMap<Element::Account, QString> elementNames {
-        {Element::Account::SubAccount,     QStringLiteral("SUBACCOUNT")},
-        {Element::Account::SubAccounts,    QStringLiteral("SUBACCOUNTS")},
-        {Element::Account::OnlineBanking,  QStringLiteral("ONLINEBANKING")},
+        {Element::Account::SubAccount,              QStringLiteral("SUBACCOUNT")},
+        {Element::Account::SubAccounts,             QStringLiteral("SUBACCOUNTS")},
+        {Element::Account::OnlineBanking,           QStringLiteral("ONLINEBANKING")},
+        {Element::Account::ReconciliationHistory,   QStringLiteral("RECONCILIATIONS")},
+        {Element::Account::ReconciliationEntry,     QStringLiteral("RECONCILIATION")},
     };
+    // clang-format on
     return elementNames.value(elementID);
 }
 
@@ -256,6 +265,15 @@ QString attributeName(Attribute::Account attributeID)
         {Attribute::Account::OpeningBalance, QStringLiteral("openingbalance")},
         {Attribute::Account::IBAN,           QStringLiteral("iban")},
         {Attribute::Account::BIC,            QStringLiteral("bic")},
+    };
+    return attributeNames.value(attributeID);
+}
+
+QString attributeName(Attribute::Reconciliation attributeID)
+{
+    static const QHash<Attribute::Reconciliation, QString> attributeNames{
+        {Attribute::Reconciliation::Date, QStringLiteral("date")},
+        {Attribute::Reconciliation::Amount, QStringLiteral("value")},
     };
     return attributeNames.value(attributeID);
 }

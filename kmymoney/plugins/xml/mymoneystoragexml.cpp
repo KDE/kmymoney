@@ -793,6 +793,23 @@ MyMoneyAccount MyMoneyXmlContentHandler::readAccount(const QDomElement &node)
         acc.setOnlineBankingSettings(kvp);
     }
 
+    // Read reconciliation history records
+    nodeList = node.elementsByTagName(elementName(Element::Account::ReconciliationHistory));
+    if (!nodeList.isEmpty()) {
+        nodeList = nodeList.item(0).toElement().elementsByTagName(elementName(Element::Account::ReconciliationEntry));
+        for (int i = 0; i < nodeList.count(); ++i) {
+            const auto& el(nodeList.item(i).toElement());
+            acc.addReconciliation(QDate::fromString(el.attribute(attributeName(Attribute::Reconciliation::Date)), Qt::ISODate),
+                                  MyMoneyMoney(el.attribute(attributeName(Attribute::Reconciliation::Amount))));
+        }
+    } else {
+        /// @todo remove old reconciliation history storage method
+        /// this else part can be removed when the reconciliation
+        /// history is not stored in the KVP anymore
+        // force loading map in any case
+        acc.reconciliationHistory();
+    }
+
     // Up to and including version 4.6.6 the new account dialog stored the iban in the kvp-key "IBAN".
     // But the rest of the software uses "iban". So correct this:
     if (!acc.value("IBAN").isEmpty()) {
@@ -838,7 +855,7 @@ void MyMoneyXmlContentHandler::writeAccount(const MyMoneyAccount &account, QDomD
 
     // Write online banking settings
     auto onlineBankSettingsPairs = account.onlineBankingSettings().pairs();
-    if (onlineBankSettingsPairs.count()) {
+    if (!onlineBankSettingsPairs.isEmpty()) {
         QDomElement onlinesettings = document.createElement(elementName(Element::Account::OnlineBanking));
         QMap<QString, QString>::const_iterator it_key = onlineBankSettingsPairs.constBegin();
         while (it_key != onlineBankSettingsPairs.constEnd()) {
@@ -846,6 +863,21 @@ void MyMoneyXmlContentHandler::writeAccount(const MyMoneyAccount &account, QDomD
             ++it_key;
         }
         el.appendChild(onlinesettings);
+    }
+
+    // Write reconciliation history
+    const auto reconciliationHistory(account.reconciliationHistory());
+    if (!reconciliationHistory.isEmpty()) {
+        QDomElement reconciliations = document.createElement(elementName(Element::Account::ReconciliationHistory));
+
+        for (auto it = reconciliationHistory.cbegin(); it != reconciliationHistory.cend(); ++it) {
+            auto pairElement = document.createElement(elementName(Element::Account::ReconciliationEntry));
+            pairElement.setAttribute(attributeName(Attribute::Reconciliation::Date), it.key().toString(Qt::ISODate));
+            pairElement.setAttribute(attributeName(Attribute::Reconciliation::Amount), it.value().toString());
+            reconciliations.appendChild(pairElement);
+        }
+
+        el.appendChild(reconciliations);
     }
 
     //Add in Key-Value Pairs for accounts.

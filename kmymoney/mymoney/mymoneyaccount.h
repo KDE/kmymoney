@@ -623,11 +623,29 @@ public:
     bool addReconciliation(const QDate& date, const MyMoneyMoney& amount);
 
     /**
-      * @return QMap with the reconciliation history for the account
-      *
-      * @sa addReconciliation()
-      */
+     * Return the information about stored reconciliations of the
+     * account.
+     *
+     * @return QMap with the reconciliation history for the account
+     *
+     * @sa addReconciliation()
+     *
+     * @note If the internal map is empty, the values will be
+     * loaded from the KVP with key "reconciliationHistory".
+     *
+     * @deprecated Use the const version instead.
+     */
     QMap<QDate, MyMoneyMoney> reconciliationHistory();
+
+    /**
+     * Return the information about stored reconciliations of the
+     * account.
+     *
+     * @return QMap with the reconciliation history for the account
+     *
+     * @sa addReconciliation()
+     */
+    QMap<QDate, MyMoneyMoney> reconciliationHistory() const;
 
     /**
       * @return @c true if account has an online mapping, @c false otherwise

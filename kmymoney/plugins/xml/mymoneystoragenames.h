@@ -80,6 +80,8 @@ enum class Account {
     SubAccount,
     SubAccounts,
     OnlineBanking,
+    ReconciliationHistory,
+    ReconciliationEntry,
 };
 
 enum class Payee {
@@ -178,6 +180,11 @@ enum class Account {
     BIC,
     // insert new entries above this line
     LastAttribute,
+};
+
+enum class Reconciliation {
+    Date,
+    Amount,
 };
 
 enum class Payee {
@@ -327,6 +334,7 @@ QString elementName(Element::OnlineJob elementID);
 QString attributeName(Attribute::OnlineJob attributeID);
 
 QString attributeName(Attribute::CostCenter attributeID);
+QString attributeName(Attribute::Reconciliation attributeID);
 
 QString tagName(Tag tagID);
 QString nodeName(Node nodeID);

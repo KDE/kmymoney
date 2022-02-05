@@ -572,6 +572,10 @@ bool MyMoneyAccount::addReconciliation(const QDate& date, const MyMoneyMoney& am
     reconciliationHistory();
 
     d->m_reconciliationHistory[date] = amount;
+
+    /// @todo remove old reconciliation history storage method
+    /// once we don't need to write the KVP entry anymore
+    /// this whole block can be removed
     QString history, sep;
     QMap<QDate, MyMoneyMoney>::const_iterator it;
     for (it = d->m_reconciliationHistory.constBegin();
@@ -584,20 +588,25 @@ bool MyMoneyAccount::addReconciliation(const QDate& date, const MyMoneyMoney& am
         sep = QLatin1Char(';');
     }
     setValue(QLatin1String("reconciliationHistory"), history);
+
     return true;
 }
 
+/// @todo remove old reconciliation history storage method
+/// once we don't need to read the history from the KVP entry anymore
+/// this whole method can be removed
 QMap<QDate, MyMoneyMoney> MyMoneyAccount::reconciliationHistory()
 {
     Q_D(MyMoneyAccount);
+
     // check if the internal history member is already loaded
     if (d->m_reconciliationHistory.count() == 0
             && !value("reconciliationHistory").isEmpty()) {
         QStringList entries = value("reconciliationHistory").split(';');
-        foreach (const QString& entry, entries) {
-            QStringList parts = entry.split(':');
+        for (const auto& entry : entries) {
+            const auto parts = entry.split(':');
             if (parts.count() == 2) {
-                QDate date = QDate::fromString(parts[0], Qt::ISODate);
+                const auto date = QDate::fromString(parts[0], Qt::ISODate);
                 MyMoneyMoney amount(parts[1]);
                 if (parts.count() == 2 && date.isValid()) {
                     d->m_reconciliationHistory[date] = amount;
@@ -607,7 +616,12 @@ QMap<QDate, MyMoneyMoney> MyMoneyAccount::reconciliationHistory()
             }
         }
     }
+    return d->m_reconciliationHistory;
+}
 
+QMap<QDate, MyMoneyMoney> MyMoneyAccount::reconciliationHistory() const
+{
+    Q_D(const MyMoneyAccount);
     return d->m_reconciliationHistory;
 }
 

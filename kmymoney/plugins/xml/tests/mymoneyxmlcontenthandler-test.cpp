@@ -680,23 +680,48 @@ void MyMoneyXmlContentHandlerTest::testReplaceIDinSplit()
 void MyMoneyXmlContentHandlerTest::readAccount()
 {
     MyMoneyAccount a;
-    QString ref_ok = QString(
-                         "<!DOCTYPE TEST>\n"
-                         "<ACCOUNT-CONTAINER>\n"
-                         " <ACCOUNT parentaccount=\"Parent\" lastmodified=\"%1\" lastreconciled=\"\" institution=\"B000001\" number=\"465500\" opened=\"%2\" type=\"9\" id=\"A000001\" name=\"AccountName\" description=\"Desc\" >\n"
-                         "  <SUBACCOUNTS>\n"
-                         "   <SUBACCOUNT id=\"A000002\" />\n"
-                         "   <SUBACCOUNT id=\"A000003\" />\n"
-                         "  </SUBACCOUNTS>\n"
-                         "  <KEYVALUEPAIRS>\n"
-                         "   <PAIR key=\"key\" value=\"value\" />\n"
-                         "   <PAIR key=\"Key\" value=\"Value\" />\n"
-                         "   <PAIR key=\"reconciliationHistory\" value=\"2011-01-01:123/100;2011-02-01:114/25\"/>\n"
-                         "   <PAIR key=\"lastStatementDate\" value=\"2011-01-01\"/>\n"
-                         "  </KEYVALUEPAIRS>\n"
-                         " </ACCOUNT>\n"
-                         "</ACCOUNT-CONTAINER>\n").
-                     arg(QDate::currentDate().toString(Qt::ISODate)).arg(QDate::currentDate().toString(Qt::ISODate));
+    QString ref_ok_old = QString(
+                             "<!DOCTYPE TEST>\n"
+                             "<ACCOUNT-CONTAINER>\n"
+                             " <ACCOUNT parentaccount=\"Parent\" lastmodified=\"%1\" lastreconciled=\"\" institution=\"B000001\" number=\"465500\" "
+                             "opened=\"%2\" type=\"9\" id=\"A000001\" name=\"AccountName\" description=\"Desc\" >\n"
+                             "  <SUBACCOUNTS>\n"
+                             "   <SUBACCOUNT id=\"A000002\" />\n"
+                             "   <SUBACCOUNT id=\"A000003\" />\n"
+                             "  </SUBACCOUNTS>\n"
+                             "  <KEYVALUEPAIRS>\n"
+                             "   <PAIR key=\"key\" value=\"value\" />\n"
+                             "   <PAIR key=\"Key\" value=\"Value\" />\n"
+                             "   <PAIR key=\"reconciliationHistory\" value=\"2011-01-01:123/100;2011-02-01:114/25\"/>\n"
+                             "   <PAIR key=\"lastStatementDate\" value=\"2011-01-01\"/>\n"
+                             "  </KEYVALUEPAIRS>\n"
+                             " </ACCOUNT>\n"
+                             "</ACCOUNT-CONTAINER>\n")
+                             .arg(QDate::currentDate().toString(Qt::ISODate))
+                             .arg(QDate::currentDate().toString(Qt::ISODate));
+
+    QString ref_ok_new = QString(
+                             "<!DOCTYPE TEST>\n"
+                             "<ACCOUNT-CONTAINER>\n"
+                             " <ACCOUNT parentaccount=\"Parent\" lastmodified=\"%1\" lastreconciled=\"\" institution=\"B000001\" number=\"465500\" "
+                             "opened=\"%2\" type=\"9\" id=\"A000001\" name=\"AccountName\" description=\"Desc\" >\n"
+                             "  <SUBACCOUNTS>\n"
+                             "   <SUBACCOUNT id=\"A000002\" />\n"
+                             "   <SUBACCOUNT id=\"A000003\" />\n"
+                             "  </SUBACCOUNTS>\n"
+                             "  <RECONCILIATIONS>\n"
+                             "   <RECONCILIATION date=\"2011-01-01\" value=\"123/100\" />\n"
+                             "   <RECONCILIATION date=\"2011-02-01\" value=\"114/25\" />\n"
+                             "  </RECONCILIATIONS>\n"
+                             "  <KEYVALUEPAIRS>\n"
+                             "   <PAIR key=\"key\" value=\"value\" />\n"
+                             "   <PAIR key=\"Key\" value=\"Value\" />\n"
+                             "   <PAIR key=\"lastStatementDate\" value=\"2011-01-01\"/>\n"
+                             "  </KEYVALUEPAIRS>\n"
+                             " </ACCOUNT>\n"
+                             "</ACCOUNT-CONTAINER>\n")
+                             .arg(QDate::currentDate().toString(Qt::ISODate))
+                             .arg(QDate::currentDate().toString(Qt::ISODate));
 
     QString ref_false = QString(
                             "<!DOCTYPE TEST>\n"
@@ -716,22 +741,14 @@ void MyMoneyXmlContentHandlerTest::readAccount()
 
     QDomDocument doc;
     QDomElement node;
-    doc.setContent(ref_false);
-    node = doc.documentElement().firstChild().toElement();
 
-    try {
-        a = MyMoneyXmlContentHandler::readAccount(node);
-        QFAIL("Missing expected exception");
-    } catch (const MyMoneyException &) {
-    }
+    auto checkNodeOk = [&](const QString& xmlContent, int kvpPairs) {
+        doc.setContent(xmlContent);
+        node = doc.documentElement().firstChild().toElement();
 
-    doc.setContent(ref_ok);
-    node = doc.documentElement().firstChild().toElement();
+        a.addAccountId("TEST");
+        a.setValue("KEY", "VALUE");
 
-    a.addAccountId("TEST");
-    a.setValue("KEY", "VALUE");
-
-    try {
         a = MyMoneyXmlContentHandler::readAccount(node);
         QCOMPARE(a.id(), QStringLiteral("A000001"));
         QCOMPARE(a.name(), QStringLiteral("AccountName"));
@@ -746,14 +763,34 @@ void MyMoneyXmlContentHandlerTest::readAccount()
         QCOMPARE(a.accountList().count(), 2);
         QCOMPARE(a.accountList()[0], QStringLiteral("A000002"));
         QCOMPARE(a.accountList()[1], QStringLiteral("A000003"));
-        QCOMPARE(a.pairs().count(), 3);
+        QCOMPARE(a.pairs().count(), kvpPairs);
         QCOMPARE(a.value("key"), QStringLiteral("value"));
         QCOMPARE(a.value("Key"), QStringLiteral("Value"));
         QCOMPARE(a.pairs().contains("lastStatementDate"), false);
         QCOMPARE(a.reconciliationHistory().count(), 2);
         QCOMPARE(a.reconciliationHistory()[QDate(2011, 1, 1)].toString(), MyMoneyMoney(123, 100).toString());
         QCOMPARE(a.reconciliationHistory()[QDate(2011, 2, 1)].toString(), MyMoneyMoney(456, 100).toString());
-    } catch (const MyMoneyException &) {
+    };
+
+    doc.setContent(ref_false);
+    node = doc.documentElement().firstChild().toElement();
+
+    try {
+        a = MyMoneyXmlContentHandler::readAccount(node);
+        QFAIL("Missing expected exception");
+    } catch (const MyMoneyException&) {
+    }
+
+    try {
+        checkNodeOk(ref_ok_old, 3);
+    } catch (const MyMoneyException&) {
+        QFAIL("Unexpected exception");
+    }
+
+    try {
+        /// @todo once the kvp reconciliation entry is removed, reduce the second arg to 2
+        checkNodeOk(ref_ok_new, 3);
+    } catch (const MyMoneyException&) {
         QFAIL("Unexpected exception");
     }
 }
@@ -778,6 +815,9 @@ void MyMoneyXmlContentHandlerTest::writeAccount()
     r.addReconciliation(QDate(2011, 1, 1), MyMoneyMoney(123, 100));
     r.addReconciliation(QDate(2011, 2, 1), MyMoneyMoney(456, 100));
 
+    /// @todo remove old reconciliation history storage method
+    /// once the reconciliation history is not kept in the KVP anymore
+    /// reduce to 1 and remove the second value comparison
     QCOMPARE(r.pairs().count(), 2);
     QCOMPARE(r.value("key"), QLatin1String("value"));
     QCOMPARE(r.value("reconciliationHistory"), QLatin1String("2011-01-01:123/100;2011-02-01:114/25"));
@@ -809,7 +849,7 @@ void MyMoneyXmlContentHandlerTest::writeAccount()
     QCOMPARE(account.attribute("type"), QLatin1String("9"));
     QCOMPARE(account.attribute("lastmodified"), QDate::currentDate().toString(Qt::ISODate));
     QCOMPARE(account.attribute("id"), QLatin1String("A000001"));
-    QCOMPARE(account.childNodes().size(), 2);
+    QCOMPARE(account.childNodes().size(), 3);
 
     QVERIFY(account.childNodes().at(0).isElement());
     QDomElement subAccounts = account.childNodes().at(0).toElement();
@@ -821,8 +861,30 @@ void MyMoneyXmlContentHandlerTest::writeAccount()
     QCOMPARE(subAccount.attribute("id"), QLatin1String("A000002"));
     QCOMPARE(subAccount.childNodes().size(), 0);
 
-    QDomElement keyValuePairs = account.childNodes().at(1).toElement();
+    // Check reconciliation history
+    QDomElement reconciliationPairs = account.childNodes().at(1).toElement();
+    QCOMPARE(reconciliationPairs.tagName(), QLatin1String("RECONCILIATIONS"));
+    QCOMPARE(reconciliationPairs.childNodes().size(), 2);
+
+    QVERIFY(reconciliationPairs.childNodes().at(0).isElement());
+    QDomElement reconciliationPairs1 = reconciliationPairs.childNodes().at(0).toElement();
+    QCOMPARE(reconciliationPairs1.tagName(), QLatin1String("RECONCILIATION"));
+    QCOMPARE(reconciliationPairs1.attribute("date"), QLatin1String("2011-01-01"));
+    QCOMPARE(reconciliationPairs1.attribute("value"), QLatin1String("123/100"));
+    QCOMPARE(reconciliationPairs1.childNodes().size(), 0);
+
+    QDomElement reconciliationPairs2 = reconciliationPairs.childNodes().at(1).toElement();
+    QCOMPARE(reconciliationPairs2.tagName(), QLatin1String("RECONCILIATION"));
+    QCOMPARE(reconciliationPairs2.attribute("date"), QLatin1String("2011-02-01"));
+    QCOMPARE(reconciliationPairs2.attribute("value"), QLatin1String("114/25"));
+    QCOMPARE(reconciliationPairs2.childNodes().size(), 0);
+
+    // Check KVPs
+    QDomElement keyValuePairs = account.childNodes().at(2).toElement();
     QCOMPARE(keyValuePairs.tagName(), QLatin1String("KEYVALUEPAIRS"));
+    /// @todo remove old reconciliation history storage method
+    /// once the reconciliation history is not kept in the KVP anymore
+    /// reduce to 1 and remove the second value comparison
     QCOMPARE(keyValuePairs.childNodes().size(), 2);
 
     QVERIFY(keyValuePairs.childNodes().at(0).isElement());
@@ -832,6 +894,9 @@ void MyMoneyXmlContentHandlerTest::writeAccount()
     QCOMPARE(keyValuePair1.attribute("value"), QLatin1String("value"));
     QCOMPARE(keyValuePair1.childNodes().size(), 0);
 
+    /// @todo remove old reconciliation history storage method
+    /// once the reconciliation history is not kept in the KVP anymore
+    /// remove this next block
     QVERIFY(keyValuePairs.childNodes().at(1).isElement());
     QDomElement keyValuePair2 = keyValuePairs.childNodes().at(1).toElement();
     QCOMPARE(keyValuePair2.tagName(), QLatin1String("PAIR"));
@@ -1307,7 +1372,7 @@ void MyMoneyXmlContentHandlerTest::testOverdue()
     // between the 1st and 27th. If it is between 28th and 31st
     // we don't perform them. Note: this should be fixed.
     if (QDate::currentDate().day() > 27 || QDate::currentDate().day() == 1) {
-        qDebug() << "testOverdue() skipped because current day is between 28th and 2nd";
+        QSKIP("testOverdue() skipped because current day is between 28th and 2nd");
         return;
     }
 
