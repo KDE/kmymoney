@@ -1485,7 +1485,20 @@ void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(MyMoneySchedul
             matchedSplit.setShares(importedSplit.shares());
             matchedSplit.setValue(importedSplit.value());
             t.modifySplit(matchedSplit);
-            file->updateVAT(t);
+            // don't forget to update the counter split
+            if (t.splitCount() == 2) {
+                for (const auto& split : t.splits()) {
+                    if (split.id().compare(matchedSplit.id())) {
+                        auto newSplit(split);
+                        newSplit.setShares(-matchedSplit.shares());
+                        newSplit.setValue(-matchedSplit.value());
+                        t.modifySplit(newSplit);
+                        break;
+                    }
+                }
+            } else {
+                file->updateVAT(t);
+            }
         }
 
         MyMoneyFileTransaction ft;
