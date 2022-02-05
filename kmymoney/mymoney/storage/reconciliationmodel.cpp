@@ -190,6 +190,10 @@ QVariant ReconciliationModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::ReconciliationAmountRole:
         return QVariant::fromValue(reconciliationEntry.amount());
 
+    case eMyMoney::Model::SplitReconcileFlagRole:
+        // the reconciliation entries should not be shown during reconciliation
+        return QVariant::fromValue<eMyMoney::Split::State>(eMyMoney::Split::State::Reconciled);
+
     default:
         break;
     }
