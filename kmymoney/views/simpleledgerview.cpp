@@ -324,10 +324,11 @@ public:
             int newIdx = ui->ledgerTab->insertTab(newPos, reconciliationView, acc.name());
 
             // we don't allow closing the tab without using the action buttons
-            removeCloseButton(newIdx,
-                              i18nc("@info:tooltip",
-                                    "The close button for this account has been removed because you are reconciling it. Finish or postpone the reconciliation "
-                                    "to get it back."));
+            removeCloseButton(
+                newIdx,
+                i18nc("@info:tooltip",
+                      "The close button for this account has been removed because you are reconciling it. Finish, cancel or postpone the reconciliation "
+                      "to get it back."));
 
             q->connect(reconciliationView, &LedgerViewPage::requestSelectionChanged, q, &SimpleLedgerView::slotRequestSelectionChange);
             q->connect(reconciliationView, &LedgerViewPage::requestCustomContextMenu, q, &SimpleLedgerView::requestCustomContextMenu);
@@ -659,6 +660,7 @@ void SimpleLedgerView::updateActions(const SelectedObjects& selections)
                 pActions[eMenu::Action::PostponeReconciliation]->setEnabled(true);
                 pActions[eMenu::Action::FinishReconciliation]->setEnabled(true);
             }
+            pActions[eMenu::Action::CancelReconciliation]->setEnabled(true);
         }
     }
 }

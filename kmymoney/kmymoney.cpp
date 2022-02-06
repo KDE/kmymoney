@@ -1101,9 +1101,18 @@ public:
         aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Close)))->setEnabled(m_storageInfo.isOpened);
         pActions[Action::UpdateAllAccounts]->setEnabled(m_storageInfo.isOpened && KMyMoneyUtils::canUpdateAllAccounts());
 
+        updateReconciliationTools(selections);
+
         // update actions in views and plugins
         m_myMoneyView->updateActions(selections);
         KMyMoneyPlugin::updateActions(pPlugins, selections);
+    }
+
+    void updateReconciliationTools(const SelectedObjects& selections)
+    {
+        // update reconciliation toolbar
+        const bool inReconciliation = !selections.firstSelection(SelectedObjects::ReconciliationAccount).isEmpty();
+        q->toolBar("reconcileToolBar")->setVisible(inReconciliation);
     }
 
     bool canFileSaveAs() const
@@ -1688,8 +1697,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::OpenAccount,                   QStringLiteral("account_open"),                   i18n("Open ledger"),                                Icon::Ledger},
             {Action::StartReconciliation,           QStringLiteral("account_reconcile"),              i18n("Reconcile..."),                               Icon::Reconcile},
             {Action::FinishReconciliation,          QStringLiteral("account_reconcile_finish"),       i18nc("Finish reconciliation", "Finish"),           Icon::Reconciled},
-            {Action::PostponeReconciliation,        QStringLiteral("account_reconcile_postpone"),     i18n("Postpone reconciliation"),                    Icon::Pause},
-            {Action::CancelReconciliation,          QStringLiteral("account_reconcile_cancel"),       i18n("Cancel reconciliation"),                      Icon::Empty},
+            {Action::PostponeReconciliation,        QStringLiteral("account_reconcile_postpone"),     i18nc("Postpone reconciliation", "Postpone"),       Icon::Pause},
+            {Action::CancelReconciliation,          QStringLiteral("account_reconcile_cancel"),       i18nc("Cancel reconciliation", "Cancel"),           Icon::DialogCancel},
             {Action::ReconciliationReport,          QStringLiteral("account_reconcile_report"),       i18n("Report reconciliation"),                      Icon::Empty},
             {Action::EditAccount,                   QStringLiteral("account_edit"),                   i18n("Edit account..."),                            Icon::AccountEdit},
             {Action::DeleteAccount,                 QStringLiteral("account_delete"),                 i18n("Delete account..."),                          Icon::AccountRemove},
@@ -1910,6 +1919,27 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
 
         for (auto connection = actionConnections.cbegin(); connection != actionConnections.cend(); ++connection)
             connect(lutActions[connection.key()], &QAction::triggered, this, connection.value());
+    }
+
+    {
+        // struct for adding tooltips to actions
+        struct actionInfo {
+            Action  action;
+            QString tip;
+        };
+
+        // clang-format off
+        const QVector<actionInfo> actionInfos {
+            {Action::StartReconciliation,        i18nc("@info:tooltip", "Start reconciling the currently selected account")},
+            {Action::PostponeReconciliation,     i18nc("@info:tooltip", "Postpone the current reconciliation")},
+            {Action::FinishReconciliation,       i18nc("@info:tooltip", "Finish the current reconciliation")},
+            {Action::CancelReconciliation,       i18nc("@info:tooltip", "Cancel the current reconciliation")},
+        };
+        // clang-format on
+
+        for (const auto& actionInfo : actionInfos) {
+            lutActions[actionInfo.action]->setToolTip(actionInfo.tip);
+        }
     }
 
     // *************

@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="49" name="kmymoney" >
+<kpartgui version="50" name="kmymoney" >
  <MenuBar>
   <Menu name="file" >
    <DefineGroup name="open_db_group" append="open_merge"/>
@@ -52,6 +52,7 @@
    <Action name="account_reconcile" />
    <Action name="account_reconcile_postpone" />
    <Action name="account_reconcile_finish" />
+   <Action name="account_reconcile_cancel" />
    <Separator/>
    <Action name="account_transaction_report" />
    <Separator/>
@@ -251,5 +252,10 @@
   <Action name="edit_find_transaction" />
   <Separator />
   <Action name="tools_kcalc" />
+ </ToolBar>
+ <ToolBar name="reconcileToolBar" fullWidth="false" iconText="textundericon">
+  <Action name="account_reconcile_finish" />
+  <Action name="account_reconcile_postpone" />
+  <Action name="account_reconcile_cancel" />
  </ToolBar>
 </kpartgui>

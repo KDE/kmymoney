@@ -363,6 +363,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     pActions[eMenu::Action::StartReconciliation]->setEnabled(false);
     pActions[eMenu::Action::PostponeReconciliation]->setEnabled(false);
     pActions[eMenu::Action::FinishReconciliation]->setEnabled(false);
+    pActions[eMenu::Action::CancelReconciliation]->setEnabled(false);
 
     // update actions in all views. process the current last
     for (const auto& view : d->viewBases.keys()) {
