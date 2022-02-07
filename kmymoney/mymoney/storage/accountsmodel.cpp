@@ -276,6 +276,18 @@ struct AccountsModel::Private
                  || account.value("lastStatementBalance").isEmpty());
     }
 
+    QString formatIban(const MyMoneyAccount& account)
+    {
+        auto txt(account.value("iban"));
+        txt.remove(QLatin1String(" "));
+        int pos(4);
+        while (pos < txt.length()) {
+            txt.insert(pos, QLatin1String(" "));
+            pos += 5;
+        }
+        return txt;
+    }
+
     struct DefaultAccounts {
         eMyMoney::Account::Standard groupType;
         eMyMoney::Account::Type     accountType;
@@ -509,7 +521,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
             return account.number();
 
         case Column::Iban:
-            return account.value("iban");
+            return d->formatIban(account);
 
         default:
             break;
