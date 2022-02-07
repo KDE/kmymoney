@@ -52,6 +52,7 @@ kmymoney_add_plugin_kcm(kcm_xmlstorage SOURCES ${kcm_xmlstorage_PART_SRCS})
 target_link_libraries(kcm_xmlstorage
   PRIVATE
     KF5::I18n
+    KF5::CoreAddons
     KF5::ConfigWidgets
     KF5::Completion
     kgpgfile
