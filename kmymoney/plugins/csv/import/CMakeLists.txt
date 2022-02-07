@@ -65,5 +65,6 @@ kmymoney_add_plugin_kcm(kcm_csvimporter SOURCES ${kcm_csvimporter_PART_SRCS})
 target_link_libraries(kcm_csvimporter
                       csvimporter_settings_static
                       KF5::I18n
+                      KF5::CoreAddons
                       KF5::ConfigWidgets
                       )
