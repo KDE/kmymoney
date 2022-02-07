@@ -138,6 +138,7 @@ class KMM_MYMONEY_EXPORT JournalModel : public MyMoneyModel<JournalEntry>
 public:
     enum Column {
         Number = 0,
+        EntryDate,
         Date,
         Account,
         Payee,

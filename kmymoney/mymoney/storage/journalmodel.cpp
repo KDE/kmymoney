@@ -47,21 +47,22 @@ struct JournalModel::Private
         : q(qq)
         , newTransactionModel(nullptr)
         , headerData(QHash<Column, QString>({
-              {Number, i18nc("Cheque Number", "No.")},
-              {Date, i18n("Date")},
-              {Account, i18n("Account")},
-              {Payee, i18n("Payee")},
-              {Security, i18n("Security")},
-              {CostCenter, i18n("CC")},
-              {Detail, i18n("Detail")},
-              {Reconciliation, i18n("C")},
-              {Payment, i18nc("Payment made from account", "Payment")},
-              {Deposit, i18nc("Deposit into account", "Deposit")},
-              {Quantity, i18n("Quantity")},
-              {Price, i18n("Price")},
-              {Amount, i18n("Amount")},
-              {Value, i18n("Value")},
-              {Balance, i18n("Balance")},
+              {Number, i18nc("@title:column Cheque Number", "No.")},
+              {Date, i18nc("@title:column Valuta date", "Date")},
+              {Account, i18nc("@title:column", "Account")},
+              {Payee, i18nc("@title:column", "Payee")},
+              {Security, i18nc("@title:column", "Security")},
+              {CostCenter, i18nc("@title:column", "CC")},
+              {Detail, i18nc("@title:column", "Detail")},
+              {Reconciliation, i18nc("@title:column Reconciliation state", "C")},
+              {Payment, i18nc("@title:column Payment made from account", "Payment")},
+              {Deposit, i18nc("@title:column Deposit into account", "Deposit")},
+              {Quantity, i18nc("@title:column", "Quantity")},
+              {Price, i18nc("@title:column", "Price")},
+              {Amount, i18nc("@title:column", "Amount")},
+              {Value, i18nc("@title:column", "Value")},
+              {Balance, i18nc("@title:column", "Balance")},
+              {EntryDate, i18nc("@title:column Entry date", "Entry")},
           }))
     {
     }
@@ -628,6 +629,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
             return journalEntry.balance().formatMoney(acc.fraction());
         }
         break;
+
+        case EntryDate:
+            return MyMoneyUtils::formatDate(transaction.entryDate());
         }
         break;
 
