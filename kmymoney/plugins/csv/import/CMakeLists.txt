@@ -83,6 +83,7 @@ set_target_properties(kcm_csvimporter
 
 target_link_libraries(kcm_csvimporter
                       KF5::I18n
+                      KF5::CoreAddons
                       KF5::ConfigWidgets
                       )
 
