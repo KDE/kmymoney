@@ -68,6 +68,7 @@ set_target_properties(kcm_xmlstorage
 target_link_libraries(kcm_xmlstorage
   PRIVATE
     KF5::I18n
+    KF5::CoreAddons
     KF5::ConfigWidgets
     KF5::Completion
     kgpgfile
