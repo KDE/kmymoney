@@ -763,11 +763,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         return transaction.commodity();
 
     case eMyMoney::Model::SplitSharesSuffixRole:
-        // figure out if it is a debit or credit split. s.a. https://en.wikipedia.org/wiki/Debits_and_credits#Aspects_of_transactions
-        if (split.shares().isNegative()) {
-            return i18nc("Credit suffix", "Cr.");
-        }
-        return i18nc("Debit suffix", "Dr.");
+        return QString("(%1)").arg(
+            headerData(split.shares().isNegative() ? JournalModel::Column::Payment : JournalModel::Column::Deposit, Qt::Horizontal, Qt::DisplayRole)
+                .toString());
 
     case eMyMoney::Model::SplitSharesRole:
     {

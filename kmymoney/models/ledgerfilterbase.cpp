@@ -49,16 +49,6 @@ void LedgerFilterBase::setAccountType(Account::Type type)
     d->accountType = type;
 }
 
-QVariant LedgerFilterBase::data(const QModelIndex& idx, int role) const
-{
-    if (role == eMyMoney::Model::SplitSharesSuffixRole) {
-        const int columnRole = data(idx, eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().isNegative() ? JournalModel::Column::Payment : JournalModel::Column::Deposit;
-        return QString("(%1)").arg(headerData(columnRole, Qt::Horizontal, Qt::DisplayRole).toString());
-    }
-
-    return QSortFilterProxyModel::data(idx, role);
-}
-
 QVariant LedgerFilterBase::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {

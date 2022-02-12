@@ -53,11 +53,6 @@ public:
      */
     QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
-    /**
-     * This method returns the data adjusted to the current accountType
-     */
-    QVariant data(const QModelIndex& idx, int role) const override;
-
     void setShowEntryForNewTransaction(bool show);
 
     void setShowScheduledTransactions(bool show);
