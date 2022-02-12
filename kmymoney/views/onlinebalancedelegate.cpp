@@ -140,9 +140,19 @@ void OnlineBalanceDelegate::paint(QPainter* painter, const QStyleOptionViewItem&
 
     const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
 
+    QString onlineBalanceValueTxt(i18nc("text for online balance value if not available", "n/a"));
+    QString onlineBalanceDateTxt(i18nc("text for online balance date if not available", "n/a"));
     const auto onlineBalanceDate = index.data(eMyMoney::Model::AccountOnlineBalanceDateRole).toDate();
+    if (onlineBalanceDate.isValid()) {
+        onlineBalanceDateTxt = MyMoneyUtils::formatDate(onlineBalanceDate);
+    }
     const auto onlineBalanceValue = index.data(eMyMoney::Model::AccountOnlineBalanceValueRole).value<MyMoneyMoney>();
-    const auto accountBalance = MyMoneyFile::instance()->balance(index.data(eMyMoney::Model::IdRole).toString(), onlineBalanceDate);
+    const auto accountId(index.data(eMyMoney::Model::IdRole).toString());
+    auto accountBalance(onlineBalanceValue);
+    if (!accountId.isEmpty()) {
+        accountBalance = MyMoneyFile::instance()->balance(accountId, onlineBalanceDate);
+        onlineBalanceValueTxt = onlineBalanceValue.formatMoney(index.data(eMyMoney::Model::AccountFractionRole).toInt());
+    }
 
     KColorScheme::BackgroundRole role = (accountBalance == onlineBalanceValue) ? KColorScheme::PositiveBackground : KColorScheme::NegativeBackground;
 
@@ -163,15 +173,15 @@ void OnlineBalanceDelegate::paint(QPainter* painter, const QStyleOptionViewItem&
             opt.rect.setWidth(view->viewport()->width());
         }
         painter->setPen(opt.palette.color(QPalette::Normal, QPalette::Text));
-        painter->drawText(opt.rect, Qt::AlignCenter, "Online Balance");
+        painter->drawText(opt.rect, Qt::AlignCenter, i18nc("Label in ledger for online balance row", "Online Balance"));
         break;
     case JournalModel::Column::Date:
         painter->setPen(opt.palette.color(QPalette::Normal, QPalette::Text));
-        painter->drawText(textArea, opt.displayAlignment, MyMoneyUtils::formatDate(onlineBalanceDate));
+        painter->drawText(textArea, opt.displayAlignment, onlineBalanceDateTxt);
         break;
     case JournalModel::Column::Balance:
         painter->setPen(opt.palette.color(QPalette::Normal, QPalette::Text));
-        painter->drawText(textArea, opt.displayAlignment, onlineBalanceValue.formatMoney(index.data(eMyMoney::Model::AccountFractionRole).toInt()));
+        painter->drawText(textArea, opt.displayAlignment, onlineBalanceValueTxt);
         break;
     }
 
