@@ -23,36 +23,24 @@ void KMyMoneyUtilsTest::initTestCase()
 {
 }
 
-void KMyMoneyUtilsTest::testNextCheckNumber()
+void KMyMoneyUtilsTest::testGetAdjacentNumber_data()
 {
-    MyMoneyAccount acc;
+    QTest::addColumn<QString>("lastnumber");
+    QTest::addColumn<QString>("nextnumber");
 
-    // make sure first check number is 1
-    acc.setValue("lastNumberUsed", QString());
-    QVERIFY(KMyMoneyUtils::nextCheckNumber(acc) == QLatin1String("1"));
+    QTest::newRow("empty") << QString() << QStringLiteral("1");
+    QTest::newRow("simple number") << QStringLiteral("123") << QStringLiteral("124");
+    QTest::newRow("text in front") << QStringLiteral("No 123") << QStringLiteral("No 124");
+    QTest::newRow("text following") << QStringLiteral("123 ABC") << QStringLiteral("124 ABC");
+    QTest::newRow("enclosed in text") << QStringLiteral("No 123 ABC") << QStringLiteral("No 124 ABC");
+    QTest::newRow("number with hyphen") << QStringLiteral("No 123-001 ABC") << QStringLiteral("No 123-002 ABC");
+    QTest::newRow("number with dot") << QStringLiteral("2012.001") << QStringLiteral("2012.002");
+}
 
-    // a simple increment of a plain value
-    acc.setValue("lastNumberUsed", QLatin1String("123"));
-    QVERIFY(KMyMoneyUtils::nextCheckNumber(acc) == QLatin1String("124"));
+void KMyMoneyUtilsTest::testGetAdjacentNumber()
+{
+    QFETCH(QString, lastnumber);
+    QFETCH(QString, nextnumber);
 
-    // a number preceded by text
-    acc.setValue("lastNumberUsed", QLatin1String("No 123"));
-    QVERIFY(KMyMoneyUtils::nextCheckNumber(acc) == QLatin1String("No 124"));
-
-    // a number followed by text
-    acc.setValue("lastNumberUsed", QLatin1String("123 ABC"));
-    QVERIFY(KMyMoneyUtils::nextCheckNumber(acc) == QLatin1String("124 ABC"));
-
-    // a number enclosed by text
-    acc.setValue("lastNumberUsed", QLatin1String("No 123 ABC"));
-    QVERIFY(KMyMoneyUtils::nextCheckNumber(acc) == QLatin1String("No 124 ABC"));
-
-    // a number containing a dash (e.g. invoice number)
-    acc.setValue("lastNumberUsed", QLatin1String("No 123-001 ABC"));
-    QVERIFY(KMyMoneyUtils::nextCheckNumber(acc) == QLatin1String("No 123-002 ABC"));
-
-    // a number containing a dot (e.g. invoice number)
-    acc.setValue("lastNumberUsed", QLatin1String("2012.001"));
-    QVERIFY(KMyMoneyUtils::nextCheckNumber(acc) == QLatin1String("2012.002"));
-
+    QCOMPARE(KMyMoneyUtils::getAdjacentNumber(lastnumber), nextnumber);
 }

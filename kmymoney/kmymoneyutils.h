@@ -271,28 +271,16 @@ public:
       */
     static QString nextFreeCheckNumber(const MyMoneyAccount& acc);
 
-
-    // static void setLastNumberUsed(const QString& num);
-
-    // static QString lastNumberUsed();
-
     /**
-      * Returns previous number if offset is -1 or
-      * the following number if offset is 1.
-      */
+     * Returns previous number if offset is -1 or
+     * the following number if offset is 1.
+     */
     static QString getAdjacentNumber(const QString& number, int offset = 1);
 
-
     /**
-    * remove any non-numeric characters from check number
-    * to allow validity check
-    */
-    static quint64 numericPart(const QString & num);
-
-    /**
-      * Returns the text representing the reconcile flag. If @a text is @p true
-      * then the full text will be returned otherwise a short form (usually one character).
-      */
+     * Returns the text representing the reconcile flag. If @a text is @p true
+     * then the full text will be returned otherwise a short form (usually one character).
+     */
     static QString reconcileStateToString(eMyMoney::Split::State flag, bool text = false);
 
     /**

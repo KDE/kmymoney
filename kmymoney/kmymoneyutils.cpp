@@ -308,33 +308,13 @@ QString KMyMoneyUtils::getAdjacentNumber(const QString& number, int offset)
     // make sure the offset is either -1 or 1
     offset = (offset >= 0) ? 1 : -1;
 
-    QString num = number;
-    //                   +-#1--+ +#2++-#3-++-#4--+
-    QRegExp exp(QString("(.*\\D)?(0*)(\\d+)(\\D.*)?"));
-    if (exp.indexIn(num) != -1) {
-        QString arg1 = exp.cap(1);
-        QString arg2 = exp.cap(2);
-        QString arg3 = QString::number(exp.cap(3).toULong() + offset);
-        QString arg4 = exp.cap(4);
-        num = QString("%1%2%3%4").arg(arg1, arg2, arg3, arg4);
-    } else {
-        num = QStringLiteral("1");
+    //                              +-#1--+ +#2++-#3-++-#4--+
+    QRegularExpression exp(QString("(.*\\D)?(0*)(\\d+)(\\D.*)?"));
+    QRegularExpressionMatch match = exp.match(number);
+    if (match.hasMatch()) {
+        return QStringLiteral("%1%2%3%4").arg(match.captured(1), match.captured(2), QString::number(match.captured(3).toULong() + offset), match.captured(4));
     }
-    return num;
-}
-
-quint64 KMyMoneyUtils::numericPart(const QString & num)
-{
-    quint64 num64 = 0;
-    QRegExp exp(QString("(.*\\D)?(0*)(\\d+)(\\D.*)?"));
-    if (exp.indexIn(num) != -1) {
-        // QString arg1 = exp.cap(1);
-        QString arg2 = exp.cap(2);
-        QString arg3 = QString::number(exp.cap(3).toULongLong());
-        // QString arg4 = exp.cap(4);
-        num64 = QString("%2%3").arg(arg2, arg3).toULongLong();
-    }
-    return num64;
+    return QStringLiteral("1");
 }
 
 QString KMyMoneyUtils::reconcileStateToString(eMyMoney::Split::State flag, bool text)
