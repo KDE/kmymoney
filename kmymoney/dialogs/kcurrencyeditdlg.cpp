@@ -538,7 +538,16 @@ void KCurrencyEditDlg::slotSelectBaseCurrency()
 void KCurrencyEditDlg::slotAddCurrency()
 {
     Q_D(KCurrencyEditDlg);
-    d->m_availableCurrencyDlg = new KAvailableCurrencyDlg;                                   // create new dialog for selecting currencies to add
+    QTreeWidgetItemIterator it(d->ui->m_currencyList); // iterate over whole tree
+    QList<QString> currencyIdList;
+    while (*it) {
+        const auto currencyId = (*it)->data(0, Qt::UserRole).value<MyMoneySecurity>().id();
+        if (!currencyId.isEmpty()) {
+            currencyIdList.append(currencyId);
+        }
+        ++it;
+    }
+    d->m_availableCurrencyDlg = new KAvailableCurrencyDlg(currencyIdList); // create new dialog for selecting currencies to add
     if (d->m_availableCurrencyDlg->exec() != QDialog::Rejected) {
         auto file = MyMoneyFile::instance();
         QMap<MyMoneySecurity, MyMoneyPrice> ancientCurrencies = file->ancientCurrencies();

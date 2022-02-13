@@ -27,7 +27,7 @@
 #include <ui_kavailablecurrencydlg.h>
 #include "mymoneysecurity.h"
 
-KAvailableCurrencyDlg::KAvailableCurrencyDlg(QWidget *parent)
+KAvailableCurrencyDlg::KAvailableCurrencyDlg(const QList<QString>& usedCurrencies, QWidget* parent)
     : ui(new Ui::KAvailableCurrencyDlg)
 {
     Q_UNUSED(parent);
@@ -37,10 +37,10 @@ KAvailableCurrencyDlg::KAvailableCurrencyDlg(QWidget *parent)
     ui->verticalLayout->insertWidget(0, m_searchWidget);
     connect(ui->m_currencyList, &QTreeWidget::itemSelectionChanged, this, &KAvailableCurrencyDlg::slotItemSelectionChanged);
 
-    slotLoadCurrencies();
+    slotLoadCurrencies(usedCurrencies);
 
     //resize the column widths
-    for (auto i = 0; i < 3; ++i)
+    for (auto i = 0; i < ui->m_currencyList->columnCount(); ++i)
         ui->m_currencyList->resizeColumnToContents(i);
 
     m_searchWidget->setFocus();
@@ -51,17 +51,9 @@ KAvailableCurrencyDlg::~KAvailableCurrencyDlg()
     delete ui;
 }
 
-void KAvailableCurrencyDlg::slotLoadCurrencies()
+void KAvailableCurrencyDlg::slotLoadCurrencies(const QList<QString>& usedCurrencies)
 {
     QList<MyMoneySecurity> list = MyMoneyFile::instance()->availableCurrencyList();
-    QList<MyMoneySecurity> currencies = MyMoneyFile::instance()->currencyList();
-    foreach (auto currency, currencies) {
-        int idx = list.indexOf(currency);
-        if (idx != -1)
-            list.removeAt(idx);
-    }
-
-    QList<MyMoneySecurity>::ConstIterator it;
 
     // construct a transparent 16x16 pixmap
     QPixmap empty(16, 16);
@@ -70,14 +62,17 @@ void KAvailableCurrencyDlg::slotLoadCurrencies()
     empty.setMask(mask);
 
     ui->m_currencyList->clear();
-    for (it = list.constBegin(); it != list.constEnd(); ++it) {
-        QTreeWidgetItem *p = new QTreeWidgetItem(ui->m_currencyList);
-        p->setText(0, (*it).name());
-        p->setData(0, Qt::UserRole, QVariant::fromValue(*it));
-        p->setData(0, Qt::DecorationRole, empty);
-        p->setFlags(p->flags() | Qt::ItemIsEditable);
-        p->setText(1, (*it).id());
-        p->setText(2, (*it).tradingSymbol());
+    // remove the used currencies from the list
+    for (const auto& currency : list) {
+        if (!usedCurrencies.contains(currency.id())) {
+            const auto item = new QTreeWidgetItem(ui->m_currencyList);
+            item->setText(0, currency.name());
+            item->setData(0, Qt::UserRole, QVariant::fromValue(currency));
+            item->setData(0, Qt::DecorationRole, empty);
+            item->setFlags(item->flags() | Qt::ItemIsEditable);
+            item->setText(1, currency.id());
+            item->setText(2, currency.tradingSymbol());
+        }
     }
 
     ui->m_currencyList->sortItems(0, Qt::AscendingOrder);
