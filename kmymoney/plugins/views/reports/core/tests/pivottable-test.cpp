@@ -6,8 +6,9 @@
 
 #include "pivottable-test.h"
 
-#include <QList>
 #include <QFile>
+#include <QList>
+#include <QRegularExpression>
 #include <QTest>
 #include <QTextCodec>
 
@@ -622,7 +623,7 @@ void PivotTableTest::testAdvancedFilter()
         MyMoneyReport filter;
         filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
         filter.setDateFilter(QDate(2004, 1, 1), QDate(2005, 1, 1).addDays(-1));
-        filter.setTextFilter(QRegExp("Thomas"));
+        filter.setTextFilter(QRegularExpression("Thomas"), false, false);
         XMLandback(filter);
         PivotTable spending_f(filter);
     }

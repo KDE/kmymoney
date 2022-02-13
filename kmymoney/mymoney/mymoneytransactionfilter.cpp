@@ -12,8 +12,9 @@
 // QT Includes
 
 #include <QDate>
-#include <QFlags>
 #include <QDebug>
+#include <QFlags>
+#include <QRegularExpression>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -42,30 +43,35 @@ public:
         , m_treatTransfersAsIncomeExpense(false)
         , m_matchingSplitsCount(0)
         , m_invertText(false)
+        , m_filterIsRegExp(false)
     {
     }
 
     MyMoneyTransactionFilter::FilterSet m_filterSet;
-    bool                m_reportAllSplits;
-    bool                m_considerCategory;
-    bool                m_considerCategorySplits;
-    bool                m_matchOnly;
-    bool                m_treatTransfersAsIncomeExpense;
+    bool m_reportAllSplits;
+    bool m_considerCategory;
+    bool m_considerCategorySplits;
+    bool m_matchOnly;
+    bool m_treatTransfersAsIncomeExpense;
 
-    uint                m_matchingSplitsCount;
+    uint m_matchingSplitsCount;
 
-    QRegExp             m_text;
-    bool                m_invertText;
-    QHash<QString, QString>    m_accounts;
-    QHash<QString, QString>    m_payees;
-    QHash<QString, QString>    m_tags;
-    QHash<QString, QString>    m_categories;
-    QHash<int, QString>      m_states;
-    QHash<int, QString>      m_types;
-    QHash<int, QString>      m_validity;
-    QString             m_fromNr, m_toNr;
-    QDate               m_fromDate, m_toDate;
-    MyMoneyMoney        m_fromAmount, m_toAmount;
+    QRegularExpression m_text;
+    bool m_invertText;
+    bool m_filterIsRegExp;
+    QHash<QString, QString> m_accounts;
+    QHash<QString, QString> m_payees;
+    QHash<QString, QString> m_tags;
+    QHash<QString, QString> m_categories;
+    QHash<int, QString> m_states;
+    QHash<int, QString> m_types;
+    QHash<int, QString> m_validity;
+    QString m_fromNr;
+    QString m_toNr;
+    QDate m_fromDate;
+    QDate m_toDate;
+    MyMoneyMoney m_fromAmount;
+    MyMoneyMoney m_toAmount;
 };
 
 MyMoneyTransactionFilter::MyMoneyTransactionFilter() :
@@ -98,6 +104,7 @@ void MyMoneyTransactionFilter::clear()
     Q_D(MyMoneyTransactionFilter);
     d->m_filterSet = {};
     d->m_invertText = false;
+    d->m_filterIsRegExp = false;
     d->m_accounts.clear();
     d->m_categories.clear();
     d->m_payees.clear();
@@ -116,10 +123,11 @@ void MyMoneyTransactionFilter::clearAccountFilter()
     d->m_accounts.clear();
 }
 
-void MyMoneyTransactionFilter::setTextFilter(const QRegExp& text, bool invert)
+void MyMoneyTransactionFilter::setTextFilter(const QRegularExpression& text, bool isRegExp, bool invert)
 {
     Q_D(MyMoneyTransactionFilter);
     d->m_filterSet.setFlag(textFilterActive);
+    d->m_filterIsRegExp = isRegExp;
     d->m_invertText = invert;
     d->m_text = text;
 }
@@ -845,10 +853,11 @@ bool MyMoneyTransactionFilter::firstValidity(int&i) const
     return result;
 }
 
-bool MyMoneyTransactionFilter::textFilter(QRegExp& exp) const
+bool MyMoneyTransactionFilter::textFilter(QRegularExpression& text, bool& isRegExp) const
 {
     Q_D(const MyMoneyTransactionFilter);
-    exp = d->m_text;
+    text = d->m_text;
+    isRegExp = d->m_filterIsRegExp;
     return d->m_filterSet.testFlag(textFilterActive);
 }
 

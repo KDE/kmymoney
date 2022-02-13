@@ -19,15 +19,17 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_ktransactionfilter.h"
-#include "mymoneyreport.h"
-#include "mymoneysplit.h"
+#include "daterangedlg.h"
+#include "kmymoneysettings.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
+#include "mymoneyreport.h"
+#include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
-#include "kmymoneysettings.h"
-#include "daterangedlg.h"
+#include "mymoneyutils.h"
+
+#include "ui_ktransactionfilter.h"
 
 KTransactionFilter::KTransactionFilter(QWidget *parent, bool withEquityAccounts, bool withInvestments, bool withDataTab) :
     QWidget(parent),
@@ -259,8 +261,14 @@ MyMoneyTransactionFilter KTransactionFilter::setupFilter()
 
     // Text tab
     if (!d->ui->m_textEdit->text().isEmpty()) {
-        QRegExp exp(d->ui->m_textEdit->text(), d->ui->m_caseSensitive->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive, !d->ui->m_regExp->isChecked() ? QRegExp::Wildcard : QRegExp::RegExp);
-        d->m_filter.setTextFilter(exp, d->ui->m_textNegate->currentIndex() != 0);
+        QRegularExpression exp;
+        auto pattern(d->ui->m_textEdit->text());
+        if (!d->ui->m_regExp->isChecked()) {
+            pattern = MyMoneyUtils::convertWildcardToRegularExpression(pattern);
+        }
+        exp.setPattern(pattern);
+        exp.setPatternOptions(d->ui->m_caseSensitive->isChecked() ? QRegularExpression::NoPatternOption : QRegularExpression::CaseInsensitiveOption);
+        d->m_filter.setTextFilter(exp, d->ui->m_regExp->isChecked(), d->ui->m_textNegate->currentIndex() != 0);
     }
 
     // Account tab
@@ -359,11 +367,16 @@ void KTransactionFilter::resetFilter(MyMoneyReport& rep)
     // Text Filter
     //
 
-    QRegExp textfilter;
-    if (rep.textFilter(textfilter)) {
-        d->ui->m_textEdit->setText(textfilter.pattern());
-        d->ui->m_caseSensitive->setChecked(Qt::CaseSensitive == textfilter.caseSensitivity());
-        d->ui->m_regExp->setChecked(QRegExp::RegExp == textfilter.patternSyntax());
+    QRegularExpression textfilter;
+    bool isRegExp(false);
+    if (rep.textFilter(textfilter, isRegExp)) {
+        auto pattern(textfilter.pattern());
+        if (!isRegExp) {
+            pattern = MyMoneyUtils::convertRegularExpressionToWildcard(pattern);
+        }
+        d->ui->m_textEdit->setText(pattern);
+        d->ui->m_caseSensitive->setChecked(!(textfilter.patternOptions() & QRegularExpression::CaseInsensitiveOption));
+        d->ui->m_regExp->setChecked(isRegExp);
         d->ui->m_textNegate->setCurrentIndex(rep.isInvertingText());
     }
 

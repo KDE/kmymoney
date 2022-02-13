@@ -6,18 +6,19 @@
 
 #include "mymoneytransactionfilter-test.h"
 
+#include <QRegularExpression>
 #include <QTest>
 
-#include "mymoneyenums.h"
-#include "mymoneytransactionfilter.h"
-#include "mymoneyfile.h"
 #include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
 #include "mymoneypayee.h"
 #include "mymoneysecurity.h"
+#include "mymoneysplit.h"
 #include "mymoneytag.h"
 #include "mymoneytransaction.h"
-#include "mymoneysplit.h"
-#include "mymoneyexception.h"
+#include "mymoneytransactionfilter.h"
 
 // uses helper functions from reports tests
 #include "tests/testutilities.h"
@@ -84,12 +85,11 @@ void MyMoneyTransactionFilterTest::testMatchText()
 
     // no filter
     QCOMPARE(filter.matchText(split, account), true);
-
-    filter.setTextFilter(QRegExp("10.2"), false);
+    filter.setTextFilter(QRegularExpression("10.2"), false, false);
     MyMoneyTransactionFilter filterInvert;
-    filterInvert.setTextFilter(QRegExp("10.2"), true);
+    filterInvert.setTextFilter(QRegularExpression("10.2"), false, true);
     MyMoneyTransactionFilter filterNotFound;
-    filterNotFound.setTextFilter(QRegExp("10.5"), false);
+    filterNotFound.setTextFilter(QRegularExpression("10.5"), false, false);
 
     // memo
     split.setMemo("10.2");

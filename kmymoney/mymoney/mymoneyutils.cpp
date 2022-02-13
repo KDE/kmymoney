@@ -210,3 +210,74 @@ bool MyMoneyUtils::isRunningAsAppImage()
 {
     return qEnvironmentVariableIsSet("RUNNING_AS_APPIMAGE");
 }
+
+QString MyMoneyUtils::convertWildcardToRegularExpression(const QString& pattern)
+{
+    QString rc;
+    bool insideBrackets = false;
+    int pos = 0;
+    int len = pattern.length();
+
+    // insert an escape character if c == d
+    auto escapeChar = [&](const QChar& d, const QChar& c) {
+        if (c == d) {
+            rc.append(QLatin1Char('\\'));
+        }
+    };
+
+    while (pos < len) {
+        bool skipInResult(false);
+        const auto c = pattern[pos];
+        if (insideBrackets) {
+            if (c == QLatin1Char(']')) {
+                insideBrackets = false;
+            } else {
+                escapeChar(QLatin1Char('.'), c);
+                escapeChar(QLatin1Char('?'), c);
+                escapeChar(QLatin1Char('*'), c);
+            }
+        } else {
+            if (c == QLatin1Char('[')) {
+                insideBrackets = true;
+            } else if (c == QLatin1Char('?')) {
+                rc.append(QLatin1Char('.'));
+                skipInResult = true;
+            } else if (c == QLatin1Char('*')) {
+                rc.append(QLatin1Char('.'));
+            } else {
+                escapeChar(QLatin1Char('.'), c);
+            }
+        }
+        if (!skipInResult) {
+            rc.append(c);
+        }
+        ++pos;
+    }
+    return rc;
+}
+
+QString MyMoneyUtils::convertRegularExpressionToWildcard(const QString& pattern)
+{
+    QString rc;
+    int pos = 0;
+    int len = pattern.length();
+
+    while (pos < len) {
+        auto c = pattern[pos];
+        if (c == QLatin1Char('\\')) {
+            if ((pos + 1) < len) {
+                c = pattern[++pos];
+            }
+        } else if (c == QLatin1Char('.')) {
+            c = QLatin1Char('?');
+            if ((pos + 1) < len) {
+                if (pattern[pos + 1] == QLatin1Char('*')) {
+                    c = pattern[++pos];
+                }
+            }
+        }
+        rc.append(c);
+        ++pos;
+    }
+    return rc;
+}

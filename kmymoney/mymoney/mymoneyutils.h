@@ -98,6 +98,9 @@ KMM_MYMONEY_EXPORT QString formatDate(const QDate& date);
  */
 KMM_MYMONEY_EXPORT QString paymentMethodToString(eMyMoney::Schedule::PaymentType paymentType);
 
+KMM_MYMONEY_EXPORT QString convertWildcardToRegularExpression(const QString& pattern);
+KMM_MYMONEY_EXPORT QString convertRegularExpressionToWildcard(const QString& pattern);
+
 KMM_MYMONEY_EXPORT modifyTransactionWarnLevel_t transactionWarnLevel(const QString& transactionId);
 KMM_MYMONEY_EXPORT modifyTransactionWarnLevel_t transactionWarnLevel(const QStringList& transactionIds);
 

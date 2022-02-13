@@ -15,15 +15,15 @@
 // QT Includes
 
 #include <QMetaType>
+class QString;
+class QDate;
+class QRegularExpression;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
-class QString;
-class QDate;
 
 template <typename T> class QList;
 
@@ -112,22 +112,23 @@ public:
     void clearAccountFilter();
 
     /**
-      * This method is used to set the regular expression filter to the value specified
-      * as parameter @p exp. The following text based fields are searched:
-      *
-      * - Memo
-      * - Payee
-      * - Tag
-      * - Category
-      * - Shares / Value
-      * - Number
-      *
-      * @param exp The regular expression that must be found in a transaction
-      *            before it is included in the result set.
-      * @param invert If true, value must not be contained in any of the above mentioned fields
-      *
-      */
-    void setTextFilter(const QRegExp& exp, bool invert = false);
+     * This method is used to set the regular expression filter to the value specified
+     * as parameter @p exp. The following text based fields are searched:
+     *
+     * - Memo
+     * - Payee
+     * - Tag
+     * - Category
+     * - Shares / Value
+     * - Number
+     *
+     * @param exp The regular expression that must be found in a transaction
+     *            before it is included in the result set.
+     * @param isRegExp the user should see a regular expression if true or a wildcard if false
+     * @param invert If true, value must not be contained in any of the above mentioned fields
+     *
+     */
+    void setTextFilter(const QRegularExpression& exp, bool isRegExp, bool invert);
 
     /**
       * This method will add the account with id @p id to the list of matching accounts.
@@ -504,13 +505,15 @@ public:
     bool validities(QList<int>& list) const;
 
     /**
-      * This method returns whether a text filter has been set,
-      * and if so, it returns the text filter.
-      *
-      * @param text regexp to replace with text filter, or blank if none set
-      * @return return true if a text filter has been set
-      */
-    bool textFilter(QRegExp& text) const;
+     * This method returns whether a text filter has been set,
+     * and if so, it returns the text filter.
+     *
+     * @param text regexp to replace with text filter, or blank if none set
+     * @param isRegExp reference to bool which will return if @a text should
+     *                 be treated as regex (@c true) or wildcard (@c false)
+     * @return return true if a text filter has been set
+     */
+    bool textFilter(QRegularExpression& text, bool& isRegExp) const;
 
     /**
      * This method returns whether the text filter should return

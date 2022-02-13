@@ -13,10 +13,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDomElement>
-#include <QDomDocument>
 #include <QDate>
+#include <QDomDocument>
+#include <QDomElement>
 #include <QMap>
+#include <QRegularExpression>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -24,12 +25,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
 #include "mymoneybudget.h"
-#include "mymoneyreport.h"
-#include "mymoneytransactionfilter.h"
 #include "mymoneyenums.h"
 #include "mymoneyexception.h"
+#include "mymoneymoney.h"
+#include "mymoneyreport.h"
+#include "mymoneytransactionfilter.h"
+#include "mymoneyutils.h"
 
 namespace Element {
 
@@ -844,11 +846,17 @@ MyMoneyReport readReport(const QDomElement &node)
     while (!child.isNull() && child.isElement()) {
         QDomElement c = child.toElement();
         if (elementName(Element::Report::Text) == c.tagName() && c.hasAttribute(attributeName(Attribute::Report::Pattern))) {
-            report.setTextFilter(QRegExp(c.attribute(attributeName(Attribute::Report::Pattern)),
-                                         c.attribute(attributeName(Attribute::Report::CaseSensitive), "1").toUInt()
-                                         ? Qt::CaseSensitive : Qt::CaseInsensitive,
-                                         c.attribute(attributeName(Attribute::Report::RegEx), "1").toUInt()
-                                         ? QRegExp::Wildcard : QRegExp::RegExp),
+            QRegularExpression exp;
+            const bool isRegExp(c.attribute(attributeName(Attribute::Report::RegEx), "1").toUInt() == 1);
+            auto pattern(c.attribute(attributeName(Attribute::Report::Pattern)));
+            if (!isRegExp) {
+                pattern = MyMoneyUtils::convertWildcardToRegularExpression(pattern);
+            }
+            exp.setPattern(pattern);
+            exp.setPatternOptions(c.attribute(attributeName(Attribute::Report::CaseSensitive), "1").toUInt() ? QRegularExpression::NoPatternOption
+                                                                                                             : QRegularExpression::CaseInsensitiveOption);
+            report.setTextFilter(exp,
+                                 c.attribute(attributeName(Attribute::Report::RegEx), "1").toUInt(),
                                  c.attribute(attributeName(Attribute::Report::InvertText), "0").toUInt());
         }
         if (elementName(Element::Report::Type) == c.tagName() && c.hasAttribute(attributeName(Attribute::Report::Type))) {
@@ -1017,12 +1025,17 @@ void writeReport(const MyMoneyReport &report, QDomDocument &document, QDomElemen
     // Text Filter
     //
 
-    QRegExp textfilter;
-    if (report.textFilter(textfilter)) {
+    QRegularExpression textfilter;
+    bool isRegExp;
+    if (report.textFilter(textfilter, isRegExp)) {
+        auto pattern(textfilter.pattern());
+        if (!isRegExp) {
+            pattern = MyMoneyUtils::convertRegularExpressionToWildcard(pattern);
+        }
         QDomElement f = document.createElement(elementName(Element::Report::Text));
-        f.setAttribute(attributeName(Attribute::Report::Pattern), textfilter.pattern());
-        f.setAttribute(attributeName(Attribute::Report::CaseSensitive), (textfilter.caseSensitivity() == Qt::CaseSensitive) ? 1 : 0);
-        f.setAttribute(attributeName(Attribute::Report::RegEx), (textfilter.patternSyntax() == QRegExp::Wildcard) ? 1 : 0);
+        f.setAttribute(attributeName(Attribute::Report::Pattern), pattern);
+        f.setAttribute(attributeName(Attribute::Report::CaseSensitive), (textfilter.patternOptions() & QRegularExpression::CaseInsensitiveOption) ? 0 : 1);
+        f.setAttribute(attributeName(Attribute::Report::RegEx), isRegExp);
         f.setAttribute(attributeName(Attribute::Report::InvertText), report.MyMoneyTransactionFilter::isInvertingText());
         el.appendChild(f);
     }
