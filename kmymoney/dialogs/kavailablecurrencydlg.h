@@ -31,13 +31,13 @@ class KMM_BASE_DIALOGS_EXPORT KAvailableCurrencyDlg : public QDialog
 {
     Q_OBJECT
 public:
-    explicit KAvailableCurrencyDlg(QWidget *parent = nullptr);
+    explicit KAvailableCurrencyDlg(const QList<QString>& usedCurrencies, QWidget* parent = nullptr);
     ~KAvailableCurrencyDlg();
 
     QList<QTreeWidgetItem *> selectedItems() const;
 
 protected Q_SLOTS:
-    void slotLoadCurrencies();
+    void slotLoadCurrencies(const QList<QString>& usedCurrencies);
     void slotItemSelectionChanged();
 
 private:
