@@ -102,7 +102,7 @@ void KTransactionFilter::slotUpdateSelections()
         if (!txt.isEmpty())
             txt += separator;
         txt += i18n("Text");
-        d->ui->m_regExp->setEnabled(QRegExp(d->ui->m_textEdit->text()).isValid());
+        d->ui->m_regExp->setEnabled(QRegularExpression(d->ui->m_textEdit->text()).isValid());
     } else
         d->ui->m_regExp->setEnabled(false);
 
