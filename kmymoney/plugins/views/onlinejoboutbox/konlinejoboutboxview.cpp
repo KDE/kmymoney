@@ -424,7 +424,7 @@ void KOnlineJobOutboxView::executeAction(eMenu::Action action, const SelectedObj
     Q_UNUSED(selections)
 }
 
-void KOnlineJobOutboxView::slotOnlineJobSave(onlineJob job)
+QString KOnlineJobOutboxView::slotOnlineJobSave(onlineJob job)
 {
     MyMoneyFileTransaction fileTransaction;
     if (job.id().isEmpty())
@@ -432,16 +432,25 @@ void KOnlineJobOutboxView::slotOnlineJobSave(onlineJob job)
     else
         MyMoneyFile::instance()->modifyOnlineJob(job);
     fileTransaction.commit();
+
+    return job.id();
 }
 
-/** @todo when onlineJob queue is used, continue here */
 void KOnlineJobOutboxView::slotOnlineJobSend(onlineJob job)
 {
-    slotOnlineJobSave(job);
+    // in case a complete new job is provided by the caller
+    // there is no id assigned to the job (yet). This will
+    // happen in the call to slotOnlineJobSave(). All we
+    // need to do after the job is created, we need to
+    // reload it from the engine to get it with the id
+    // filled in.
+    const auto jobId = slotOnlineJobSave(job);
 
-    QList<onlineJob> jobList;
-    jobList.append(job);
-    slotOnlineJobSend(jobList);
+    if (job.id().isEmpty() && !jobId.isEmpty()) {
+        job = MyMoneyFile::instance()->getOnlineJob(jobId);
+    }
+
+    slotOnlineJobSend(QList<onlineJob>{job});
 }
 
 void KOnlineJobOutboxView::slotOnlineJobSend(QList<onlineJob> jobs)

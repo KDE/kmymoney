@@ -91,7 +91,10 @@ private Q_SLOTS:
     void slotEditJob();
     void slotEditJob(const QModelIndex&);
 
-    void slotOnlineJobSave(onlineJob job);
+    /**
+     * Saves the @a job to the engine and returns the id of the job
+     */
+    QString slotOnlineJobSave(onlineJob job);
     void slotOnlineJobSend(onlineJob job);
     void slotOnlineJobSend(QList<onlineJob> jobs);
 
