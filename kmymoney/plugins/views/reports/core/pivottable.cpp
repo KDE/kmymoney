@@ -9,10 +9,10 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
-#include <QRegExp>
 #include <QFile>
-#include <QTextStream>
 #include <QList>
+#include <QRegularExpression>
+#include <QTextStream>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -21,23 +21,23 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "pivotgrid.h"
-#include "reportdebug.h"
-#include "kreportchartview.h"
+#include "journalmodel.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
+#include "kreportchartview.h"
+#include "mymoneybudget.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
 #include "mymoneyforecast.h"
 #include "mymoneyprice.h"
-#include "mymoneyfile.h"
-#include "mymoneysecurity.h"
-#include "mymoneybudget.h"
 #include "mymoneyreport.h"
 #include "mymoneyschedule.h"
+#include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "mymoneyexception.h"
-#include "mymoneyenums.h"
-#include "journalmodel.h"
+#include "pivotgrid.h"
+#include "reportdebug.h"
 
 namespace KChart {
 class Widget;
@@ -1666,7 +1666,7 @@ QString PivotTable::renderHTML() const
 
     auto column = 0;
     while (column < m_numColumns)
-        result += QString("<th%1>%2</th>").arg(headerspan, QString(m_columnHeadings[column++]).replace(QRegExp(" "), "<br>"));
+        result += QString("<th%1>%2</th>").arg(headerspan, QString(m_columnHeadings[column++]).replace(QRegularExpression(QLatin1String(" ")), "<br>"));
 
     if (m_config.isShowingRowTotals())
         result += QString("<th%1>%2</th>").arg(headerspan).arg(i18nc("Total balance", "Total"));
@@ -1818,13 +1818,15 @@ QString PivotTable::renderHTML() const
 
                         // don't show closed accounts if they have not been used
                         if (!rowname.isClosed() || isUsed) {
-                            innergroupdata += QString("<tr class=\"row-%1\"%2><td%3 class=\"left\" style=\"text-indent: %4.0em\">%5%6</td>")
-                                              .arg(rownum & 0x01 ? "even" : "odd")
-                                              .arg(rowname.isTopLevel() ? " id=\"topparent\"" : "")
-                                              .arg("") //.arg((*it_row).m_total.isZero() ? colspan : "")  // colspan the distance if this row will be blank
-                                              .arg(rowname.hierarchyDepth() - 1)
-                                              .arg(rowname.name().replace(QRegExp(" "), "&nbsp;").replace("<", "&lt;").replace(">", "&gt;"))
-                                              .arg((m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString() : QString(" (%1)").arg(rowname.currency().id()));
+                            innergroupdata +=
+                                QString("<tr class=\"row-%1\"%2><td%3 class=\"left\" style=\"text-indent: %4.0em\">%5%6</td>")
+                                    .arg(rownum & 0x01 ? "even" : "odd")
+                                    .arg(rowname.isTopLevel() ? " id=\"topparent\"" : "")
+                                    .arg("") //.arg((*it_row).m_total.isZero() ? colspan : "")  // colspan the distance if this row will be blank
+                                    .arg(rowname.hierarchyDepth() - 1)
+                                    .arg(rowname.name().replace(QRegularExpression(QLatin1String(" ")), "&nbsp;").replace("<", "&lt;").replace(">", "&gt;"))
+                                    .arg((m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString()
+                                                                                                        : QString(" (%1)").arg(rowname.currency().id()));
 
                             // Don't print this row if it's going to be all zeros
                             // TODO: Uncomment this, and deal with the case where the data
@@ -1873,11 +1875,12 @@ QString PivotTable::renderHTML() const
                         ReportAccount rowname = (*it_innergroup).begin().key();
                         isUsed |= !rowname.isClosed();
                         finalRow = QString("<tr class=\"row-%1\"%2><td class=\"left\" style=\"text-indent: %3.0em;\">%5%6</td>")
-                                   .arg(rownum & 0x01 ? "even" : "odd")
-                                   .arg(m_config.detailLevel() == eMyMoney::Report::DetailLevel::All ? "id=\"solo\"" : "")
-                                   .arg(rowname.hierarchyDepth() - 1)
-                                   .arg(rowname.name().replace(QRegExp(" "), "&nbsp;").replace("<", "&lt;").replace(">", "&gt;"))
-                                   .arg((m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString() : QString(" (%1)").arg(rowname.currency().id()));
+                                       .arg(rownum & 0x01 ? "even" : "odd")
+                                       .arg(m_config.detailLevel() == eMyMoney::Report::DetailLevel::All ? "id=\"solo\"" : "")
+                                       .arg(rowname.hierarchyDepth() - 1)
+                                       .arg(rowname.name().replace(QRegularExpression(QLatin1String(" ")), "&nbsp;").replace("<", "&lt;").replace(">", "&gt;"))
+                                       .arg((m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString()
+                                                                                                           : QString(" (%1)").arg(rowname.currency().id()));
                     }
 
                     // Finish the row started above, unless told not to

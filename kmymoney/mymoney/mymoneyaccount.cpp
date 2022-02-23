@@ -14,13 +14,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QRegExp>
+#include <QDebug>
+#include <QIcon>
+#include <QPainter>
 #include <QPixmap>
 #include <QPixmapCache>
-#include <QPainter>
-#include <QIcon>
 #include <QSet>
-#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,17 +29,17 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyutils.h"
+#include "icons.h"
 #include "mymoneyexception.h"
-#include "mymoneysplit.h"
 #include "mymoneyfile.h"
-#include "mymoneysecurity.h"
 #include "mymoneyinstitution.h"
 #include "mymoneypayee.h"
-#include "payeeidentifier/payeeidentifiertyped.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneyutils.h"
 #include "payeeidentifier/ibanbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
-#include "icons/icons.h"
+#include "payeeidentifier/payeeidentifiertyped.h"
 
 using namespace Icons;
 

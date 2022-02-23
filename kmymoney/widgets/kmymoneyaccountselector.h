@@ -83,7 +83,7 @@ public:
       * @retval true item matches
       * @retval false item does not match
       */
-    virtual bool match(const QRegExp& exp, QTreeWidgetItem* item) const override;
+    virtual bool match(const QRegularExpression& exp, QTreeWidgetItem* item) const override;
 
     /**
       * This method returns, if any of the items in the selector contains

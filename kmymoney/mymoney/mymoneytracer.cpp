@@ -7,11 +7,19 @@
 #include "mymoneytracer.h"
 
 #include <iostream>
-
 #include <cstdio>
 #include <cstdarg>
 
-#include <QRegExp>
+// ----------------------------------------------------------------------------
+// QT Includes
+
+#include <QRegularExpression>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
+// ----------------------------------------------------------------------------
+// Project Includes
 
 class MyMoneyTracerPrivate
 {
@@ -37,10 +45,11 @@ MyMoneyTracer::MyMoneyTracer(const char* name) :
 {
     Q_D(MyMoneyTracer);
     if (d->m_onoff) {
-        QRegExp exp("(.*)::(.*)");
-        if (exp.indexIn(name) != -1) {
-            d->m_className = exp.cap(1);
-            d->m_memberName = exp.cap(2);
+        const QRegularExpression classMethodExp("(.*)::(.*)");
+        const auto classAndMethod(classMethodExp.match(name));
+        if (classAndMethod.hasMatch()) {
+            d->m_className = classAndMethod.captured(1);
+            d->m_memberName = classAndMethod.captured(2);
         } else {
             d->m_className = QString(name);
             d->m_memberName.clear();

@@ -6,8 +6,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QRegExp>
 #include <QFontDatabase>
+#include <QRegularExpression>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -102,10 +102,11 @@ QStringList KMyMoneySettings::listOfItems()
     QStringList list = itemList().split(',', QString::SkipEmptyParts);
 
     // now add all from 'all' that are missing in 'list'
-    QRegExp exp("-?(\\d+)");
+    const QRegularExpression exp(QLatin1String("-?(\\d+)"));
     QStringList::iterator it_s;
     for (it_s = all.begin(); it_s != all.end(); ++it_s) {
-        if ((exp.indexIn(*it_s) != -1) && !list.contains(exp.cap(1)) && !list.contains(QString("-%1").arg(exp.cap(1)))) {
+        const auto item(exp.match(*it_s));
+        if ((item.hasMatch()) && !list.contains(item.captured(1)) && !list.contains(QString("-%1").arg(item.captured(1)))) {
             list << *it_s;
         }
     }

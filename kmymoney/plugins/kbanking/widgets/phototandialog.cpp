@@ -10,7 +10,7 @@
 
 // Qt Includes
 #include <QPushButton>
-#include <QRegExpValidator>
+#include <QRegularExpressionValidator>
 
 #include <KLocalizedString>
 
@@ -78,7 +78,7 @@ QString photoTanDialog::tan()
 
 void photoTanDialog::setTanLimits(const int& minLength, const int& maxLength)
 {
-    ui->tanInput->setValidator(new QRegExpValidator(QRegExp(QString("\\d{%1,%2}").arg(minLength).arg(maxLength)), ui->tanInput));
+    ui->tanInput->setValidator(new QRegularExpressionValidator(QRegularExpression(QStringLiteral("\\d{%1,%2}").arg(minLength).arg(maxLength)), ui->tanInput));
 }
 
 void photoTanDialog::tanInputChanged(const QString& input)

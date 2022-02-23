@@ -10,7 +10,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QRegExp>
+#include <QRegularExpression>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -40,7 +40,7 @@ public:
     QString                     m_id;
     QTreeWidget*                m_lv;
     KMyMoneySelector*           m_selector;
-    QRegExp                     m_lastCompletion;
+    QRegularExpression m_lastCompletion;
     static const int MAX_ITEMS = 16;
 };
 

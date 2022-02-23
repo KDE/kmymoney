@@ -51,9 +51,10 @@ public:
     {
         if (!templateHierarchy.contains(parent)
                 || templateHierarchy[parent] == 0) {
-            QRegExp exp("(.*):(.*)");
-            if (exp.indexIn(parent) != -1)
-                templateHierarchy[parent] = hierarchyItem(exp.cap(1), exp.cap(2));
+            const QRegularExpression hierarchyExp(QLatin1String("(.*):(.*)"));
+            const auto hierarchyParts(hierarchyExp.match(parent));
+            if (hierarchyParts.hasMatch())
+                templateHierarchy[parent] = hierarchyItem(hierarchyParts.captured(1), hierarchyParts.captured(2));
         }
         QTreeWidgetItem *item = new QTreeWidgetItem(templateHierarchy[parent]);
         item->setText(0, name);
@@ -145,13 +146,14 @@ public:
 
         ui->m_accountList->clear();
 
-        QRegExp exp("(.*):(.*)");
+        const QRegularExpression hierarchyExp(QLatin1String("(.*):(.*)"));
         for (QMap<QString, QTreeWidgetItem*>::iterator it_h = templateHierarchy.begin(); it_h != templateHierarchy.end(); ++it_h) {
-            if (exp.indexIn(it_h.key()) == -1) {
+            const auto hierarchyParts(hierarchyExp.match(it_h.key()));
+            if (!hierarchyParts.hasMatch()) {
                 (*it_h) = new QTreeWidgetItem(ui->m_accountList);
                 (*it_h)->setText(0, it_h.key());
             } else {
-                (*it_h) = hierarchyItem(exp.cap(1), exp.cap(2));
+                (*it_h) = hierarchyItem(hierarchyParts.captured(1), hierarchyParts.captured(2));
             }
             (*it_h)->setExpanded(true);
         }

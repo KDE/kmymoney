@@ -58,11 +58,12 @@ class KEquityPriceUpdateDlgPrivate
     Q_DECLARE_PUBLIC(KEquityPriceUpdateDlg)
 
 public:
-    explicit KEquityPriceUpdateDlgPrivate(KEquityPriceUpdateDlg *qq) :
-        q_ptr(qq),
-        ui(new Ui::KEquityPriceUpdateDlg),
-        m_fUpdateAll(false),
-        m_updatingPricePolicy(eDialogs::UpdatePrice::All)
+    explicit KEquityPriceUpdateDlgPrivate(KEquityPriceUpdateDlg* qq)
+        : q_ptr(qq)
+        , ui(new Ui::KEquityPriceUpdateDlg)
+        , m_fUpdateAll(false)
+        , m_updatingPricePolicy(eDialogs::UpdatePrice::All)
+        , m_splitRegex("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", QRegularExpression::CaseInsensitiveOption)
     {
     }
 
@@ -109,10 +110,10 @@ public:
 
         // send in securityId == "XXX YYY" to get a single-shot update for XXX to YYY.
         // for consistency reasons, this accepts the same delimiters as WebPriceQuote::launch()
-        QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
+        QRegularExpressionMatch match(m_splitRegex.match(securityId));
         MyMoneySecurityPair currencyIds;
-        if (splitrx.indexIn(securityId) != -1) {
-            currencyIds = MyMoneySecurityPair(splitrx.cap(1), splitrx.cap(2));
+        if (match.hasMatch()) {
+            currencyIds = MyMoneySecurityPair(match.captured(1), match.captured(2));
         }
 
         MyMoneyPriceList prices = file->priceList();
@@ -319,11 +320,12 @@ public:
         }
     }
 
-    KEquityPriceUpdateDlg      *q_ptr;
-    Ui::KEquityPriceUpdateDlg  *ui;
-    bool                        m_fUpdateAll;
-    eDialogs::UpdatePrice        m_updatingPricePolicy;
-    WebPriceQuote               m_webQuote;
+    KEquityPriceUpdateDlg* q_ptr;
+    Ui::KEquityPriceUpdateDlg* ui;
+    bool m_fUpdateAll;
+    eDialogs::UpdatePrice m_updatingPricePolicy;
+    WebPriceQuote m_webQuote;
+    QRegularExpression m_splitRegex;
 };
 
 KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& securityId) :
@@ -607,11 +609,11 @@ void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _kmmID, const QS
             }
 
         } else {
-            QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
-            if (splitrx.indexIn(_kmmID) != -1) {
+            QRegularExpressionMatch match(d->m_splitRegex.match(_kmmID));
+            if (match.hasMatch()) {
                 try {
-                    fromCurrency = MyMoneyFile::instance()->security(splitrx.cap(2).toUtf8());
-                    toCurrency = MyMoneyFile::instance()->security(splitrx.cap(1).toUtf8());
+                    fromCurrency = MyMoneyFile::instance()->security(match.captured(2).toUtf8());
+                    toCurrency = MyMoneyFile::instance()->security(match.captured(1).toUtf8());
                 } catch (const MyMoneyException &) {
                     fromCurrency = toCurrency = MyMoneySecurity();
                 }
@@ -755,11 +757,11 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _kmmID, const QStri
                 }
 
             } else {
-                QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
-                if (splitrx.indexIn(_kmmID) != -1) {
+                QRegularExpressionMatch match(d->m_splitRegex.match(_kmmID));
+                if (match.hasMatch()) {
                     try {
-                        fromCurrency = MyMoneyFile::instance()->security(splitrx.cap(2).toUtf8());
-                        toCurrency = MyMoneyFile::instance()->security(splitrx.cap(1).toUtf8());
+                        fromCurrency = MyMoneyFile::instance()->security(match.captured(2).toUtf8());
+                        toCurrency = MyMoneyFile::instance()->security(match.captured(1).toUtf8());
                     } catch (const MyMoneyException &) {
                         fromCurrency = toCurrency = MyMoneySecurity();
                     }

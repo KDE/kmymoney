@@ -11,12 +11,13 @@
 
 // Qt Includes
 #include <QMetaObject>
-#include <QQuickView>
-#include <QQuickItem>
 #include <QPushButton>
-#include <QRegExpValidator>
+#include <QQuickItem>
+#include <QQuickView>
+#include <QRegularExpressionValidator>
 #include <QStandardPaths>
 
+// KDE Includes
 #include <KLocalizedString>
 
 // Project Includes
@@ -106,7 +107,7 @@ QString chipTanDialog::tan()
 
 void chipTanDialog::setTanLimits(const int& minLength, const int& maxLength)
 {
-    ui->tanInput->setValidator(new QRegExpValidator(QRegExp(QString("\\d{%1,%2}").arg(minLength).arg(maxLength)), ui->tanInput));
+    ui->tanInput->setValidator(new QRegularExpressionValidator(QRegularExpression(QStringLiteral("\\d{%1,%2}").arg(minLength).arg(maxLength)), ui->tanInput));
 }
 
 int chipTanDialog::flickerFieldWidth()

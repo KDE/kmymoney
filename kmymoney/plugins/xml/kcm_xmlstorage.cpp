@@ -10,6 +10,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QRegularExpression>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -99,9 +101,10 @@ void XMLStorageSettingsWidget::slotIdChanged()
 
             // if we have a master key, we store it in the hidden widget
             if (m_masterKeyCombo->currentIndex() != 0) {
-                QRegExp keyExp(".* \\((.*)\\)");
-                if (keyExp.indexIn(m_masterKeyCombo->currentText()) != -1) {
-                    kcfg_GpgRecipient->setText(keyExp.cap(1));
+                const QRegularExpression keyExp(".* \\((.*)\\)");
+                const auto key(keyExp.match(m_masterKeyCombo->currentText()));
+                if (key.hasMatch()) {
+                    kcfg_GpgRecipient->setText(key.captured(1));
                 }
             }
 
@@ -123,9 +126,10 @@ void XMLStorageSettingsWidget::showEvent(QShowEvent * event)
     QString masterKey;
 
     if (m_masterKeyCombo->currentIndex() != 0) {
-        QRegExp keyExp(".* \\((.*)\\)");
-        if (keyExp.indexIn(m_masterKeyCombo->currentText()) != -1) {
-            masterKey = keyExp.cap(1);
+        const QRegularExpression keyExp(".* \\((.*)\\)");
+        const auto key(keyExp.match(m_masterKeyCombo->currentText()));
+        if (key.hasMatch()) {
+            masterKey = key.captured(1);
         }
     } else
         masterKey = kcfg_GpgRecipient->text();

@@ -11,9 +11,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QRegExp>
 #include <QDate>
 #include <QLocale>
+#include <QRegularExpression>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -97,7 +97,7 @@ unsigned long MyMoneyUtils::extractId(const QString& txt)
     int pos;
     unsigned long rc = 0;
 
-    pos = txt.indexOf(QRegExp("\\d+"), 0);
+    pos = txt.indexOf(QRegularExpression("\\d+"));
     if (pos != -1) {
         rc = txt.mid(pos).toInt();
     }

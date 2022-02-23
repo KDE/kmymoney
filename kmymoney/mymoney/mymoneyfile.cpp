@@ -17,14 +17,15 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
-#include <QList>
-#include <QUuid>
-#include <QLocale>
-#include <QBitArray>
 #include <QAction>
-#include <QTimer>
+#include <QBitArray>
 #include <QDebug>
+#include <QList>
+#include <QLocale>
+#include <QRegularExpression>
+#include <QString>
+#include <QTimer>
+#include <QUuid>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -1491,11 +1492,11 @@ MyMoneyAccount MyMoneyFile::createOpeningBalanceAccount(const MyMoneySecurity& s
     // find present opening balance accounts without containing '('
     QString name;
     QString parentAccountId;
-    QRegExp exp(QString("\\([A-Z]{3}\\)"));
+    const QRegularExpression currencyExp(QLatin1String("\\([A-Z]{3}\\)"));
 
     for (it = accounts.constBegin(); it != accounts.constEnd(); ++it) {
-        if (it->value("OpeningBalanceAccount") == QLatin1String("Yes")
-                && exp.indexIn(it->name()) == -1) {
+        const auto currencyMatch(currencyExp.match(it->name()));
+        if (it->value("OpeningBalanceAccount") == QLatin1String("Yes") && currencyMatch.hasMatch()) {
             name = it->name();
             parentAccountId = it->parentAccountId();
             break;
@@ -3820,8 +3821,8 @@ QSet<QString> MyMoneyFile::referencedObjects() const
 bool MyMoneyFile::checkNoUsed(const QString& accId, const QString& no) const
 {
     // by definition, an empty string or a non-numeric string is not used
-    QRegExp exp(QString("(.*\\D)?(\\d+)(\\D.*)?"));
-    if (no.isEmpty() || exp.indexIn(no) == -1)
+    const QRegularExpression checkNumberExp(QLatin1String("(.*\\D)?(\\d+)(\\D.*)?"));
+    if (no.isEmpty() || !checkNumberExp.match(no).hasMatch())
         return false;
 
     const auto model = &d->journalModel;

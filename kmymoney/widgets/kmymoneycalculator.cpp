@@ -17,7 +17,7 @@
 #include <QLabel>
 #include <QLocale>
 #include <QPushButton>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QSignalMapper>
 
 // ----------------------------------------------------------------------------
@@ -55,7 +55,7 @@ public:
     void changeDisplay(const QString& str)
     {
         auto txt = str;
-        txt.replace(QRegExp("\\."), m_comma);
+        txt.replace(QRegularExpression(QLatin1String("\\.")), m_comma);
         display->setText("<b>" + txt + "</b>");
     }
 
@@ -429,7 +429,7 @@ QString KMyMoneyCalculator::result() const
 {
     Q_D(const KMyMoneyCalculator);
     auto txt = d->m_result;
-    txt.replace(QRegExp("\\."), d->m_comma);
+    txt.replace(QRegularExpression(QLatin1String("\\.")), d->m_comma);
     if (txt[0] == '-') {
         txt = txt.mid(1); // get rid of the minus sign
         QString mask;
@@ -564,9 +564,9 @@ void KMyMoneyCalculator::setInitialValues(const QString& value, QKeyEvent* ev)
     // setup operand
     d->operand = value;
     // make sure the group/thousands separator is removed ...
-    d->operand.replace(QRegExp(QString("\\%1").arg(QLocale().groupSeparator())), QChar());
+    d->operand.replace(QRegularExpression(QStringLiteral("\\%1").arg(QLocale().groupSeparator())), QChar());
     // ... and the decimal is represented by a dot
-    d->operand.replace(QRegExp(QString("\\%1").arg(d->m_comma)), QChar('.'));
+    d->operand.replace(QRegularExpression(QStringLiteral("\\%1").arg(d->m_comma)), QChar('.'));
     if (d->operand.contains('(')) {
         negative = true;
         d->operand.remove('(');

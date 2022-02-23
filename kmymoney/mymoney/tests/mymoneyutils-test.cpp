@@ -72,3 +72,23 @@ void MyMoneyUtilsTest::testConvertRegularExpressionToWildcard()
 
     QCOMPARE(MyMoneyUtils::convertRegularExpressionToWildcard(regex), wildcard);
 }
+
+void MyMoneyUtilsTest::testExtractId_data()
+{
+    QTest::addColumn<QString>("string");
+    QTest::addColumn<unsigned long>("result");
+
+    QTest::newRow("empty") << QString() << 0UL;
+    QTest::newRow("no-number") << QStringLiteral("thb") << 0UL;
+    QTest::newRow("number-only") << QStringLiteral("123") << 123UL;
+    QTest::newRow("text-leadin") << QStringLiteral("TEST-123") << 123UL;
+    QTest::newRow("text-leadout") << QStringLiteral("123-TEST") << 0UL;
+}
+
+void MyMoneyUtilsTest::testExtractId()
+{
+    QFETCH(QString, string);
+    QFETCH(unsigned long, result);
+
+    QCOMPARE(MyMoneyUtils::extractId(string), result);
+}

@@ -5,13 +5,14 @@
 
 #include "../kmymoney/mymoney/mymoneyaccount.h"
 
+#include <QDebug>
 #include <QDir>
 #include <QFile>
-#include <QStringList>
 #include <QMap>
+#include <QRegularExpression>
+#include <QStringList>
 #include <QTextStream>
 #include <QXmlStreamReader>
-#include <QDebug>
 
 #include "mymoneyenums.h"
 
@@ -478,7 +479,7 @@ protected:
         xml.writeStartDocument();
 
         QString fileName = inFileName;
-        fileName.replace(QRegExp(".*/accounts"),"accounts");
+        fileName.replace(QRegularExpression(".*/accounts"), "accounts");
         xml.writeComment(QString("\n"
                                  "     Converted using xea2kmt from GnuCash sources\n"
                                  "\n"

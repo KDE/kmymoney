@@ -172,7 +172,7 @@
     rounding errors which can make &kmymoney; unable to exactly match the information
     shown by your brokerage institution.
   </para></listitem>
-  
+
   <listitem><para> Trading market.  Where the stock trades.  This is an optional
     field which is provided for your convenience.  This information is not used
     anywhere else within &kmymoney;.
@@ -248,7 +248,7 @@
     possible.
   </para>
 </note>
-      
+
 <para>
   It is possible to own shares of the same security in different investment accounts,
   such as a regular investment account and also a retirement account.  If you follow the
@@ -287,7 +287,7 @@
   online source.  In addition, it is possible to close an empty account, or to
   reopen a closed account.  The order for value, quantity and price can be changed
   on the screen by selecting any of them by left clicking on the item in the top bar and
-  dragging it to the left or right. 
+  dragging it to the left or right.
 </para>
 <para>
   If you choose to Edit an Investment, you will use the <guilabel>Investment detail
@@ -551,7 +551,7 @@
 <title>Online Price Quotes</title>
 <para>
   &kmymoney; has the ability to download the latest prices for your securities
-  and currencies via the web.  
+  and currencies via the web.
 </para>
 
 <sect3>
@@ -587,7 +587,7 @@
   Source</quote>.  This is the name of the service from which the quote should
   be fetched.  &kmymoney; ships with several sources to choose from.  Yahoo is the
   recommended default source, and should work for most investments and all
-  currencies. 
+  currencies.
 </para>
 
 <para>
@@ -704,7 +704,7 @@
 <para>
   The page parser looks for a symbol, a date, and a price.  Regular expressions tell
   it how to extract those items from the page.  Please review the documentation for
-  the <ulink url="https://doc.qt.io/qt-5/qregexp.html">QRegExp
+  the <ulink url="https://doc.qt.io/qt-5/qregularexpression.html">QRegularExpression
   class</ulink> for the exact syntax regular expressions used by &kmymoney;.  There
   should be exactly one capture expression, surrounded by parentheses, in each regexp
   field.  The date format further tells the date parser the order of year, month, and

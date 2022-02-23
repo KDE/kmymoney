@@ -11,6 +11,7 @@
 // QT Includes
 
 #include <QFileDialog>
+#include <QRegularExpression>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -94,8 +95,8 @@ bool GNCImporter::open(const QUrl &url)
 
     QString txt(qbaFileHeader);
 
-    QRegExp gncexp("<gnc-v(\\d+)");
-    if (!(gncexp.indexIn(txt) != -1)) {
+    const QRegularExpression gncVersionExp("<gnc-v(\\d+)");
+    if (!(gncVersionExp.match(txt).hasMatch())) {
         return false;
     }
 

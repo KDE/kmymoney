@@ -13,9 +13,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QRegularExpression>
+#include <QSet>
 #include <QString>
 #include <QStringList>
-#include <QSet>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -264,8 +265,8 @@ void MyMoneyPayee::setMatchData(eMyMoney::Payee::MatchType type, bool ignorecase
     if (d->m_matchingEnabled) {
         d->m_usingMatchKey = (type == eMyMoney::Payee::MatchType::Key);
         if (d->m_usingMatchKey) {
-            QRegExp validKeyRegExp("[^ ]");
-            QStringList filteredKeys = keys.filter(validKeyRegExp);
+            const QRegularExpression validKeyRegExp(QLatin1String("[^ ]"));
+            const auto filteredKeys = keys.filter(validKeyRegExp);
             d->m_matchKey = filteredKeys.join(QLatin1Char('\n'));
         } else if(type == eMyMoney::Payee::MatchType::NameExact) {
             d->m_matchKey = QLatin1String("^$");

@@ -13,9 +13,9 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QRegExp>
 #include <QDate>
 #include <QMap>
+#include <QRegularExpression>
 #include <QSet>
 
 // ----------------------------------------------------------------------------
@@ -52,11 +52,12 @@ const MyMoneyMoney MyMoneyAccountLoan::interestRate(const QDate& date) const
 
     key.sprintf("ir-%04d-%02d-%02d", date.year(), date.month(), date.day());
 
-    QRegExp regExp("ir-(\\d{4})-(\\d{2})-(\\d{2})");
+    const QRegularExpression interestRateExp("ir-(\\d{4})-(\\d{2})-(\\d{2})");
 
     QMap<QString, QString>::ConstIterator it;
     for (it = pairs().constBegin(); it != pairs().constEnd(); ++it) {
-        if (regExp.indexIn(it.key()) > -1) {
+        const auto interestRateDate(interestRateExp.match(it.key()));
+        if (interestRateDate.hasMatch()) {
             if (qstrcmp(it.key().toLatin1(), key.toLatin1()) <= 0)
                 val = *it;
             else
@@ -102,9 +103,10 @@ const QDate MyMoneyAccountLoan::nextInterestChange() const
 {
     QDate rc;
 
-    QRegExp regExp("(\\d{4})-(\\d{2})-(\\d{2})");
-    if (regExp.indexIn(value("interest-nextchange")) != -1) {
-        rc.setDate(regExp.cap(1).toInt(), regExp.cap(2).toInt(), regExp.cap(3).toInt());
+    const QRegularExpression nextChangeExp("(\\d{4})-(\\d{2})-(\\d{2})");
+    const auto nextChange(nextChangeExp.match(value("interest-nextchange")));
+    if (nextChange.hasMatch()) {
+        rc.setDate(nextChange.captured(1).toInt(), nextChange.captured(2).toInt(), nextChange.captured(3).toInt());
     }
     return rc;
 }
@@ -121,11 +123,12 @@ int MyMoneyAccountLoan::interestChangeFrequency(int* unit) const
     if (unit)
         *unit = 1;
 
-    QRegExp regExp("(\\d+)/(\\d{1})");
-    if (regExp.indexIn(value("interest-changefrequency")) != -1) {
-        rc = regExp.cap(1).toInt();
+    const QRegularExpression frequencyExp("(\\d+)/(\\d{1})");
+    const auto frequency(frequencyExp.match(value("interest-changefrequency")));
+    if (frequency.hasMatch()) {
+        rc = frequency.captured(1).toInt();
         if (unit != 0) {
-            *unit = regExp.cap(2).toInt();
+            *unit = frequency.captured(2).toInt();
         }
     }
     return rc;

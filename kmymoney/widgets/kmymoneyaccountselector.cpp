@@ -10,11 +10,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QIcon>
 #include <QList>
-#include <QVBoxLayout>
 #include <QPixmapCache>
 #include <QPushButton>
-#include <QIcon>
+#include <QVBoxLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -24,11 +24,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "icons/icons.h"
-#include "mymoneyenums.h"
 #include "dialogenums.h"
+#include "icons.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
 #include "widgetenums.h"
 
 using namespace Icons;
@@ -171,11 +171,12 @@ QStringList KMyMoneyAccountSelector::accountList() const
     return accountList(QList<eMyMoney::Account::Type>());
 }
 
-bool KMyMoneyAccountSelector::match(const QRegExp& exp, QTreeWidgetItem* item) const
+bool KMyMoneyAccountSelector::match(const QRegularExpression& exp, QTreeWidgetItem* item) const
 {
     if (!item->flags().testFlag(Qt::ItemIsSelectable))
         return false;
-    return exp.indexIn(item->data(0, (int)eWidgets::Selector::Role::Key).toString().mid(1)) != -1;
+    const auto matchingItem(exp.match(item->data(0, static_cast<int>(eWidgets::Selector::Role::Key)).toString().mid(1)));
+    return matchingItem.hasMatch();
 }
 
 bool KMyMoneyAccountSelector::contains(const QString& txt) const
@@ -192,8 +193,9 @@ bool KMyMoneyAccountSelector::contains(const QString& txt) const
                        i18n("Security");
 
     while ((it_v = *it) != 0) {
-        QRegExp exp(QString("^(?:%1):%2$").arg(baseName).arg(QRegExp::escape(txt)));
-        if (exp.indexIn(it_v->data(0, (int)eWidgets::Selector::Role::Key).toString().mid(1)) != -1) {
+        const QRegularExpression exp(QString("^(?:%1):%2$").arg(baseName).arg(QRegularExpression::escape(txt)));
+        const auto matchingItem(exp.match(it_v->data(0, static_cast<int>(eWidgets::Selector::Role::Key)).toString().mid(1)));
+        if (matchingItem.hasMatch()) {
             return true;
         }
         it++;

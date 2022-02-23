@@ -10,7 +10,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QRegExp>
 #include <QLayout>
 
 // ----------------------------------------------------------------------------
@@ -75,7 +74,7 @@ void KMyMoneyAccountCompletion::slotMakeCompletion(const QString& txt)
 
     auto cnt = 0;
     if (txt.contains(MyMoneyFile::AccountSeparator) == 0) {
-        d->m_lastCompletion = QRegExp(QRegExp::escape(txt), Qt::CaseInsensitive);
+        d->m_lastCompletion = QRegularExpression(QRegularExpression::escape(txt), QRegularExpression::CaseInsensitiveOption);
         cnt = selector()->slotMakeCompletion(txt);
     } else {
         QStringList parts = txt.split(MyMoneyFile::AccountSeparator, QString::SkipEmptyParts);
@@ -84,16 +83,16 @@ void KMyMoneyAccountCompletion::slotMakeCompletion(const QString& txt)
         for (it = parts.begin(); it != parts.end(); ++it) {
             if (pattern.length() > 1)
                 pattern += MyMoneyFile::AccountSeparator;
-            pattern += QRegExp::escape(QString(*it).trimmed()) + ".*";
+            pattern += QRegularExpression::escape(QString(*it).trimmed()) + ".*";
         }
         pattern += '$';
-        d->m_lastCompletion = QRegExp(pattern, Qt::CaseInsensitive);
+        d->m_lastCompletion = QRegularExpression(pattern, QRegularExpression::CaseInsensitiveOption);
         cnt = selector()->slotMakeCompletion(d->m_lastCompletion);
         // if we don't have a match, we try it again, but this time
         // we add a wildcard for the top level
         if (cnt == 0) {
             pattern = pattern.insert(1, QString(".*") + MyMoneyFile::AccountSeparator);
-            d->m_lastCompletion = QRegExp(pattern, Qt::CaseInsensitive);
+            d->m_lastCompletion = QRegularExpression(pattern, QRegularExpression::CaseInsensitiveOption);
             cnt = selector()->slotMakeCompletion(d->m_lastCompletion);
         }
     }

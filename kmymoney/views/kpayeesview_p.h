@@ -17,6 +17,7 @@
 // QT Includes
 
 #include <QDesktopServices>
+#include <QRegularExpression>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -603,14 +604,15 @@ public:
                         // make sure we really need it and it is not caught by an existing regexp
                         QStringList::const_iterator it_k;
                         for (it_k = payeeNames.constBegin(); it_k != payeeNames.constEnd(); ++it_k) {
-                            QRegExp exp(*it_k, ignorecase ? Qt::CaseInsensitive : Qt::CaseSensitive);
-                            if (exp.indexIn(*it_n) != -1)
+                            const QRegularExpression exp(*it_k, ignorecase ? QRegularExpression::CaseInsensitiveOption : QRegularExpression::NoPatternOption);
+                            const auto payee(exp.match(*it_n));
+                            if (payee.hasMatch())
                                 break;
                         }
                         if (it_k == payeeNames.constEnd())
-                            payeeNames << QRegExp::escape(*it_n);
+                            payeeNames << QRegularExpression::escape(*it_n);
                     } else if (payeeNames.contains(*it_n) == 0)
-                        payeeNames << QRegExp::escape(*it_n);
+                        payeeNames << QRegularExpression::escape(*it_n);
                 }
 
                 // and update the payee in the engine context

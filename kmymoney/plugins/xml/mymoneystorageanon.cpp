@@ -118,7 +118,7 @@ void MyMoneyStorageANON::writePayee(QDomElement& payee, const MyMoneyPayee& _p)
     bool ignoreCase;
     QStringList keys;
     auto matchType = p.matchData(ignoreCase, keys);
-    QRegExp exp("[A-Za-z]");
+    const QRegularExpression exp("[A-Za-z]");
     p.setMatchData(matchType, ignoreCase, keys.join(";").replace(exp, "x").split(';'));
 
     // Data from plugins cannot be estranged, yet.

@@ -9,12 +9,13 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
+#include <QAction>
 #include <QEvent>
 #include <QKeyEvent>
-#include <QTreeView>
 #include <QLineEdit>
-#include <QAction>
+#include <QList>
+#include <QRegularExpression>
+#include <QTreeView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -366,8 +367,8 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
                 // clear the filter before setting it to a new value
                 filterModel->setFilterFixedString(QString());
                 if (txt.contains(MyMoneyFile::AccountSeparator) == 0) {
-                    const auto filterString = QString::fromLatin1("%1%2%3").arg(completionStr).arg(QRegExp::escape(txt)).arg(completionStr);
-                    filterModel->setFilterRegExp(QRegExp(filterString, Qt::CaseInsensitive));
+                    const auto filterString = QString::fromLatin1("%1%2%3").arg(completionStr).arg(QRegularExpression::escape(txt)).arg(completionStr);
+                    filterModel->setFilterRegularExpression(QRegularExpression(filterString, QRegularExpression::CaseInsensitiveOption));
                 } else {
                     QStringList parts = txt.split(MyMoneyFile::AccountSeparator /*, QString::SkipEmptyParts */);
                     QString pattern;
@@ -375,9 +376,9 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
                     for (it = parts.begin(); it != parts.end(); ++it) {
                         if (pattern.length() > 1)
                             pattern += MyMoneyFile::AccountSeparator;
-                        pattern += QRegExp::escape(QString(*it).trimmed()) + completionStr;
+                        pattern += QRegularExpression::escape(QString(*it).trimmed()) + completionStr;
                     }
-                    filterModel->setFilterRegExp(QRegExp(pattern, Qt::CaseInsensitive));
+                    filterModel->setFilterRegularExpression(QRegularExpression(pattern, QRegularExpression::CaseInsensitiveOption));
                     // if we don't have a match, we try it again, but this time
                     // we add a wildcard for the top level
                     if (filterModel->visibleItems() == 0) {
@@ -385,7 +386,7 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
                         // clear the filter before setting it to a new value
                         filterModel->setFilterFixedString(QString());
                         pattern = pattern.prepend(completionStr + MyMoneyFile::AccountSeparator);
-                        filterModel->setFilterRegExp(QRegExp(pattern, Qt::CaseInsensitive));
+                        filterModel->setFilterRegularExpression(QRegularExpression(pattern, QRegularExpression::CaseInsensitiveOption));
                     }
                 }
 

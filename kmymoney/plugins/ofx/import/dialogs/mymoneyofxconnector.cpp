@@ -18,7 +18,6 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QList>
-#include <QRegExp>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QTextCodec>
@@ -168,7 +167,7 @@ const QString OfxAppVersion::appId() const
 
 bool OfxAppVersion::isValid() const
 {
-    QRegExp exp(".+:\\d+");
+    const QRegularExpression validAppVersionExp(QRegularExpression::anchoredPattern(QLatin1String(".+:\\d+")));
     QString app = m_combo->currentText();
     if (m_appMap[app].endsWith(':')) {
         if (m_versionEdit) {
@@ -179,7 +178,7 @@ bool OfxAppVersion::isValid() const
     } else {
         app = m_appMap[app];
     }
-    return exp.exactMatch(app);
+    return validAppVersionExp.match(app).hasMatch();
 }
 
 MyMoneyOfxConnector::MyMoneyOfxConnector(const MyMoneyAccount& _account):
@@ -303,19 +302,21 @@ OfxAccountData::AccountType MyMoneyOfxConnector::accounttype() const
     // This is a bit of a personalized hack.  Sometimes we may want to override the
     // ofx type for an account.  For now, I will stash it in the notes!
 
-    QRegExp rexp("OFXTYPE:([A-Z]*)");
-    if (rexp.indexIn(m_account.description()) != -1) {
-        QString override = rexp.cap(1);
-        qDebug() << "MyMoneyOfxConnector::accounttype() overriding to " << result;
+    const QRegularExpression accountTypeExp(QLatin1String("OFXTYPE:([A-Z]*)"));
+    const auto accountType(accountTypeExp.match(m_account.description()));
+    if (accountType.hasMatch()) {
+        const auto override = accountType.captured(1);
 
-        if (override == "BANK")
+        if (override == QLatin1String("BANK"))
             result = OfxAccountData::OFX_CHECKING;
-        else if (override == "CC")
+        else if (override == QLatin1String("CC"))
             result = OfxAccountData::OFX_CREDITCARD;
-        else if (override == "INV")
+        else if (override == QLatin1String("INV"))
             result = OfxAccountData::OFX_INVESTMENT;
-        else if (override == "MONEYMARKET")
+        else if (override == QLatin1String("MONEYMARKET"))
             result = OfxAccountData::OFX_MONEYMRKT;
+
+        qDebug() << "MyMoneyOfxConnector::accounttype() overriding to " << result;
     }
 
     return result;

@@ -9,6 +9,8 @@
 // QT Includes
 
 #include <QCollator>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 #include <QSet>
 
 // ----------------------------------------------------------------------------
@@ -91,9 +93,10 @@ void MyMoneyCostCenter::setName(const QString& val)
 QString MyMoneyCostCenter::shortName() const
 {
     Q_D(const MyMoneyCostCenter);
-    QRegExp shortNumberExp("^(\\d+)\\s.+");
-    if(shortNumberExp.exactMatch(d->m_name)) {
-        return shortNumberExp.cap(1);
+    const QRegularExpression shortNumberExp("^(\\d+)\\s.+");
+    const auto shortNumber(shortNumberExp.match(d->m_name));
+    if (shortNumber.hasMatch()) {
+        return shortNumber.captured(1);
     }
     return d->m_name;
 }

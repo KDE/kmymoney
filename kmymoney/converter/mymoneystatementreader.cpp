@@ -946,19 +946,20 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
                 case eMyMoney::Payee::MatchType::Name:
                 case eMyMoney::Payee::MatchType::NameExact:
-                    keys << QString("%1").arg(QRegExp::escape((*it_p).name()));
+                    keys << QString("%1").arg(QRegularExpression::escape((*it_p).name()));
                     if(matchType == eMyMoney::Payee::MatchType::NameExact) {
                         keys.clear();
-                        keys << QString("^%1$").arg(QRegExp::escape((*it_p).name()));
+                        keys << QString("^%1$").arg(QRegularExpression::escape((*it_p).name()));
                     }
                 // intentional fall through
 
                 case eMyMoney::Payee::MatchType::Key:
                     for (it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
-                        QRegExp exp(*it_s, ignoreCase ? Qt::CaseInsensitive : Qt::CaseSensitive);
-                        if (exp.indexIn(payeename) != -1) {
-                            qDebug("Found match with '%s' on '%s'", qPrintable(payeename), qPrintable((*it_p).name()));
-                            matchMap[exp.matchedLength()] = (*it_p).id();
+                        QRegularExpression exp(*it_s, ignoreCase ? QRegularExpression::CaseInsensitiveOption : QRegularExpression::NoPatternOption);
+                        QRegularExpressionMatch match(exp.match(payeename));
+                        if (match.hasMatch()) {
+                            qDebug() << "Found match with" << payeename << "on" << (*it_p).name() << "for" << match.capturedLength();
+                            matchMap[match.capturedLength()] = (*it_p).id();
                         }
                     }
                     break;
@@ -1020,7 +1021,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 // is called in the context of an automatic procedure it
                 // might distract the user.
                 payee.setName(payeename);
-                payee.setMatchData(eMyMoney::Payee::MatchType::Key, true, QStringList() << QString("^%1$").arg(QRegExp::escape(payeename)));
+                payee.setMatchData(eMyMoney::Payee::MatchType::Key, true, QStringList() << QString("^%1$").arg(QRegularExpression::escape(payeename)));
                 if (m_askPayeeCategory) {
                     // We use a QPointer because the dialog may get deleted
                     // during exec() if the parent of the dialog gets deleted.

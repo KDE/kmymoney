@@ -189,9 +189,10 @@ bool XMLStorage::open(const QUrl &url)
     else
         ungetString(qfile, qbaFileHeader.data(), 70);
 
-    QRegExp kmyexp("<!DOCTYPE KMYMONEY-FILE>");
+    const QRegularExpression kmyexp(QLatin1String("<!DOCTYPE KMYMONEY-FILE>"));
     QByteArray txt(qbaFileHeader, 70);
-    if (kmyexp.indexIn(txt) == -1)
+    const auto docType(kmyexp.match(txt));
+    if (!docType.hasMatch())
         return false;
 
     MyMoneyStorageXML pReader;
@@ -378,9 +379,10 @@ bool XMLStorage::saveAs()
                 rc = save(newURL);
             else {
                 appInterface()->writeFilenameURL(newURL);
-                QRegExp keyExp(".* \\((.*)\\)");
-                if (keyExp.indexIn(selectedKeyName) != -1) {
-                    m_encryptionKeys = keyExp.cap(1);
+                const QRegularExpression keyExp(QLatin1String(".* \\((.*)\\)"));
+                const auto key(keyExp.match(selectedKeyName));
+                if (key.hasMatch()) {
+                    m_encryptionKeys = key.captured(1);
                     if (!m_additionalGpgKeys.isEmpty()) {
                         if (!m_encryptionKeys.isEmpty())
                             m_encryptionKeys.append(QLatin1Char(','));

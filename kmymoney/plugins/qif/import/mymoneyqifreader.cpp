@@ -14,14 +14,14 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <QFile>
-#include <QStringList>
-#include <QTimer>
-#include <QRegExp>
 #include <QBuffer>
 #include <QByteArray>
-#include <QInputDialog>
 #include <QDir>
+#include <QFile>
+#include <QInputDialog>
+#include <QRegularExpression>
+#include <QStringList>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -211,14 +211,14 @@ bool MyMoneyQifReader::Private::isTransfer(QString& tmp, const QString& leftDeli
     // S[Mehrwertsteuer]/_VATCode_N_I          (The '/' is the Quicken class symbol)
     //
     // so extracting is a bit more complex and we use a regexp for it
-    QRegExp exp(QString("\\%1(.*)\\%2(.*)").arg(leftDelim, rightDelim));
-
-    bool rc;
-    if ((rc = (exp.indexIn(tmp) != -1)) == true) {
-        tmp = exp.cap(1) + exp.cap(2);
+    const QRegularExpression transferExp(QStringLiteral("\\%1(.*)\\%2(.*)").arg(leftDelim, rightDelim));
+    const auto transfer(transferExp.match(tmp));
+    if (transfer.hasMatch()) {
+        tmp = transfer.captured(1) + transfer.captured(2);
         tmp = tmp.trimmed();
+        return true;
     }
-    return rc;
+    return false;
 }
 
 eMyMoney::Split::State MyMoneyQifReader::Private::reconcileState(const QString& state) const
@@ -1467,7 +1467,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
     // dividend payment
     if ((xAction == true)
             || (d->isTransfer(tmp, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1)) == true)) {
-        tmp = tmp.remove(QRegExp("[\\[\\]]"));                 //  xAction != true so ignore any'[ and ]'
+        tmp = tmp.remove(QRegularExpression(QLatin1String("[\\[\\]]"))); //  xAction != true so ignore any'[ and ]'
         if (!tmp.isEmpty()) {                                  // use 'L' record name
             tr.m_strBrokerageAccount = tmp;
             transferAccount(tmp);                                // make sure the account exists
@@ -1476,7 +1476,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
             transferAccount(m_account.brokerageName());          // make sure the account exists
         }
     } else {
-        tmp = tmp.remove(QRegExp("[\\[\\]]"));                 //  xAction != true so ignore any'[ and ]'
+        tmp = tmp.remove(QRegularExpression(QLatin1String("[\\[\\]]"))); //  xAction != true so ignore any'[ and ]'
         tr.m_strInterestCategory = tmp;
         tr.m_strBrokerageAccount = m_account.brokerageName();
     }
@@ -1910,8 +1910,8 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
         account.setLastReconciliationDate(m_qifProfile.date(tmp));
 
     QifEntryTypeE transactionType = EntryTransaction;
-    QString type = extractLine('T').toLower().remove(QRegExp("\\s+"));
-    if (type == m_qifProfile.profileType().toLower().remove(QRegExp("\\s+"))) {
+    QString type = extractLine('T').toLower().remove(QRegularExpression(QLatin1String("\\s+")));
+    if (type == m_qifProfile.profileType().toLower().remove(QRegularExpression(QLatin1String("\\s+")))) {
         account.setAccountType(eMyMoney::Account::Type::Checkings);
     } else if (type == "ccard" || type == "creditcard") {
         account.setAccountType(eMyMoney::Account::Type::CreditCard);
@@ -2029,13 +2029,14 @@ void MyMoneyQifReader::processPriceEntry()
     QStringList::const_iterator it_line = m_qifEntry.constBegin();
 
     // Make a price for each line
-    QRegExp priceExp("\"(.*)\",(.*),\"(.*)\"");
+    const QRegularExpression priceExp(QLatin1String("\"(.*)\",(.*),\"(.*)\""));
     while (it_line != m_qifEntry.constEnd()) {
-        if (priceExp.indexIn(*it_line) != -1) {
+        const auto priceMatch(priceExp.match(*it_line));
+        if (priceMatch.hasMatch()) {
             MyMoneyStatement::Price price;
-            price.m_strSecurity = priceExp.cap(1);
-            QString pricestr = priceExp.cap(2);
-            QString datestr = priceExp.cap(3);
+            price.m_strSecurity = priceMatch.captured(1);
+            QString pricestr = priceMatch.captured(2);
+            QString datestr = priceMatch.captured(3);
             qDebug() << "Price:" << price.m_strSecurity << " / " << pricestr << " / " << datestr;
 
             // Only add the price if the date is valid.  If invalid, fail silently.  See note above.

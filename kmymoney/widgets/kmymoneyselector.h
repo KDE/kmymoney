@@ -227,7 +227,7 @@ public:
       * @retval true item matches
       * @retval false item does not match
       */
-    virtual bool match(const QRegExp& exp, QTreeWidgetItem* item) const;
+    virtual bool match(const QRegularExpression& exp, QTreeWidgetItem* item) const;
 
     /**
       * This method returns a pointer to the QListViewItem with the id @a id.
@@ -310,20 +310,20 @@ protected:
 
 public Q_SLOTS:
     /**
-      * Hide all listview items that do not match the regular expression @a exp.
-      * This method returns the number of visible items
-      *
-      * @param exp const reference to QRegExp that an item must match to stay visible
-      *
-      * @return number of visible items
-      */
-    int slotMakeCompletion(const QRegExp& exp);
+     * Hide all listview items that do not match the regular expression @a exp.
+     * This method returns the number of visible items
+     *
+     * @param exp const reference to QRegularExpression that an item must match to stay visible
+     *
+     * @return number of visible items
+     */
+    int slotMakeCompletion(const QRegularExpression& exp);
 
     /**
-      * This is an overloaded member function, provided for convenience. It behaves essentially like the above function.
-      *
-      * @param txt contains the pattern for a QRegExp
-      */
+     * This is an overloaded member function, provided for convenience. It behaves essentially like the above function.
+     *
+     * @param txt contains the pattern for a QRegularExpression
+     */
     int slotMakeCompletion(const QString& txt);
 
 

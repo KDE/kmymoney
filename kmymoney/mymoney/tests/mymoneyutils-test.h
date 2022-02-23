@@ -20,6 +20,8 @@ private Q_SLOTS:
     void testConvertWildcardToRegularExpression();
     void testConvertRegularExpressionToWildcard_data();
     void testConvertRegularExpressionToWildcard();
+    void testExtractId_data();
+    void testExtractId();
 };
 
 #endif // MYMONEYUTILSTEST_H

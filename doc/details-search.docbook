@@ -115,7 +115,7 @@
   If you check the <guilabel>Treat Text as regular expression</guilabel> box,
   the text will be treated as a regular expression.  For details on how to
   craft a regular expression, visit the &Qt; documentation about the
-  <ulink url="https://doc.qt.io/qt-5/qregexp.html">QRegExp
+  <ulink url="https://doc.qt.io/qt-5/qregularexpression.html">QRegularExpression
   class</ulink>.
 </para>
 </sect2>
@@ -135,7 +135,7 @@
 </screenshot>
 
 <para>
-  This tab allows you to specify the accounts that should be searched. 
+  This tab allows you to specify the accounts that should be searched.
 </para>
 
 <para>
@@ -218,7 +218,7 @@
 </screenshot>
 
 <para>
-  This tab allows you to specify which categories should be searched. 
+  This tab allows you to specify which categories should be searched.
 </para>
 
 <para>
@@ -254,7 +254,7 @@
 </screenshot>
 
 <para>
-  This tab allows you to specify which payees should be searched. 
+  This tab allows you to specify which payees should be searched.
 </para>
 
 <para>

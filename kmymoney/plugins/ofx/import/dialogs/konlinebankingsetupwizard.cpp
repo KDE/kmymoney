@@ -11,7 +11,7 @@
 #include <QCheckBox>
 #include <QLabel>
 #include <QProgressDialog>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QStandardPaths>
 #include <QTabWidget>
 #include <QTextCodec>
@@ -357,13 +357,14 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
         // https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
         // https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
         QString appId = m_appId->appId();
-        QRegExp exp("(.*):(.*)");
-        if (exp.indexIn(appId) != -1) {
-            strncpy(fi.appid, exp.cap(1).toLatin1(), OFX_APPID_LENGTH - 1);
-            if (exp.cap(2).isEmpty()) {
+        const QRegularExpression appVersionExp(QLatin1String("(.*):(.*)"));
+        const auto appVersion(appVersionExp.match(appId));
+        if (appVersion.hasMatch()) {
+            strncpy(fi.appid, appVersion.captured(1).toLatin1(), OFX_APPID_LENGTH - 1);
+            if (appVersion.captured(2).isEmpty()) {
                 strncpy(fi.appver, m_applicationEdit->text().toLatin1(), OFX_APPVER_LENGTH - 1);
             } else {
-                strncpy(fi.appver, exp.cap(2).toLatin1(), OFX_APPVER_LENGTH - 1);
+                strncpy(fi.appver, appVersion.captured(2).toLatin1(), OFX_APPVER_LENGTH - 1);
             }
         } else {
             strncpy(fi.appid, "QWIN", OFX_APPID_LENGTH - 1);

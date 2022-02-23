@@ -17,7 +17,6 @@
 // QT Includes
 
 #include <QFile>
-#include <QRegExp>
 #include <QLayout>
 #include <QList>
 #include <QByteArray>

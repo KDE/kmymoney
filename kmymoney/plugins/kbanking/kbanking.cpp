@@ -21,7 +21,6 @@
 #include <QLabel>
 #include <QLayout>
 #include <QRadioButton>
-#include <QRegExp>
 #include <QRegularExpression>
 #include <QStringList>
 #include <QTimer>
@@ -97,7 +96,8 @@ public:
         QString gwenProxy = QString::fromLocal8Bit(qgetenv("GWEN_PROXY"));
         if (gwenProxy.isEmpty()) {
             std::unique_ptr<KConfig> cfg = std::unique_ptr<KConfig>(new KConfig("kioslaverc"));
-            QRegExp exp("(\\w+://)?([^/]{2}.+:\\d+)");
+            const QRegularExpression exp(QLatin1String("(\\w+://)?([^/]{2}.+:\\d+)"));
+            QRegularExpressionMatch proxyMatch;
             QString proxy;
 
             KConfigGroup grp = cfg->group("Proxy Settings");
@@ -108,9 +108,10 @@ public:
 
             case 1: // manual specified
                 proxy = grp.readEntry("httpsProxy");
+                proxyMatch = exp.match(proxy);
                 qDebug("KDE https proxy setting is '%s'", qPrintable(proxy));
-                if (exp.exactMatch(proxy)) {
-                    proxy = exp.cap(2);
+                if (proxyMatch.hasMatch()) {
+                    proxy = proxyMatch.captured(2);
                     qDebug("Setting GWEN_PROXY to '%s'", qPrintable(proxy));
                     if (!qputenv("GWEN_PROXY", qPrintable(proxy))) {
                         qDebug("Unable to setup GWEN_PROXY");
@@ -451,9 +452,10 @@ AB_ACCOUNT_SPEC* KBanking::aqbAccount(const QString& accountId) const
 QString KBanking::stripLeadingZeroes(const QString& s) const
 {
     QString rc(s);
-    QRegExp exp("^(0*)([^0].*)");
-    if (exp.exactMatch(s)) {
-        rc = exp.cap(2);
+    const QRegularExpression stripZeroExp(QLatin1String("^(0*)([^0].*)"));
+    const auto number(stripZeroExp.match(s));
+    if (number.hasMatch()) {
+        rc = number.captured(2);
     }
     return rc;
 }
@@ -1256,18 +1258,21 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
         bool needExtract = true;
         QStringList::const_iterator it_s;
         for (it_s = exceptions.constBegin(); needExtract && it_s != exceptions.constEnd(); ++it_s) {
-            QRegExp exp(*it_s, Qt::CaseInsensitive);
-            if (exp.indexIn(kt.m_strMemo) != -1) {
+            const QRegularExpression exceptionExp(*it_s, QRegularExpression::CaseInsensitiveOption);
+            const auto memo(exceptionExp.match(kt.m_strMemo));
+            if (memo.hasMatch()) {
                 needExtract = false;
             }
         }
         if (needExtract) {
-            QRegExp expPayee(rePayee, Qt::CaseInsensitive);
-            QRegExp expMemo(reMemo, Qt::CaseInsensitive);
-            if (expPayee.indexIn(kt.m_strMemo) != -1) {
-                kt.m_strPayee = expPayee.cap(1);
-                if (expMemo.indexIn(kt.m_strMemo) != -1) {
-                    kt.m_strMemo = expMemo.cap(1);
+            const QRegularExpression payeeExp(rePayee, QRegularExpression::CaseInsensitiveOption);
+            const QRegularExpression memoExp(reMemo, QRegularExpression::CaseInsensitiveOption);
+            const auto payee(payeeExp.match(kt.m_strMemo));
+            const auto memo(memoExp.match(kt.m_strMemo));
+            if (payee.hasMatch()) {
+                kt.m_strPayee = payee.captured(1);
+                if (memo.hasMatch()) {
+                    kt.m_strMemo = memo.captured(1);
                 }
             }
         }
@@ -1310,7 +1315,7 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
         // different nowadays, we make sure to use 100 for the
         // duplicate detection
         QString tmpVal = kt.m_amount.formatMoney(100, false);
-        tmpVal.remove(QRegExp("[,\\.]"));
+        tmpVal.remove(QRegularExpression(QLatin1String("[,\\.]")));
         tmpVal += QLatin1String("/100");
         h = MyMoneyTransaction::hash(tmpVal, h);
     } else {

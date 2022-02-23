@@ -6,12 +6,13 @@
 
 #include "testutilities.h"
 
-#include <QList>
-#include <QFile>
-#include <QTextStream>
+#include <QDebug>
 #include <QDomDocument>
 #include <QDomElement>
-#include <QDebug>
+#include <QFile>
+#include <QList>
+#include <QRegularExpression>
+#include <QTextStream>
 
 #include "mymoneyfile.h"
 #include "mymoneyexception.h"
@@ -434,9 +435,10 @@ void XMLandback(MyMoneyReport& filter)
 MyMoneyMoney searchHTML(const QString& _html, const QString& _search)
 {
     Q_UNUSED(_html)
-    QRegExp re(QString("%1[<>/td]*([\\-.0-9,]*)").arg(_search));
-    if (re.indexIn(_html) > -1) {
-        QString found = re.cap(1);
+    const QRegularExpression re(QStringLiteral("%1[<>/td]*([\\-.0-9,]*)").arg(_search));
+    const auto html(re.match(_html));
+    if (html.hasMatch()) {
+        auto found = html.captured(1);
         found.remove(',');
 
         return MyMoneyMoney(found.toDouble());

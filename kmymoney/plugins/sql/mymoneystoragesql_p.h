@@ -1959,7 +1959,7 @@ public:
     ulong calcHighId(ulong i, const QString& id)
     {
         QString nid = id;
-        ulong high = (ulong) nid.remove(QRegExp("[A-Z]*")).toULongLong();
+        ulong high = (ulong)nid.remove(QRegularExpression(QLatin1String("[A-Z]*"))).toULongLong();
         return std::max(high, i);
     }
 

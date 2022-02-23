@@ -11,18 +11,17 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDateTime>
-#include <QEventLoop>
-#include <QFileInfo>
 #include <QApplication>
-#include <QRegExp>
-#include <QDir>
-#include <QFile>
-#include <QTextStream>
-#include <QDomDocument>
+#include <QDateTime>
 #include <QDebug>
+#include <QDir>
+#include <QDomDocument>
+#include <QEventLoop>
+#include <QFile>
+#include <QFileInfo>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QTextStream>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -147,17 +146,18 @@ QStringList FipidForBank(const QString& bank)
 QString extractNodeText(QDomElement& node, const QString& name)
 {
     QString res;
-    QRegExp exp("([^/]+)/?([^/].*)?");
-    if (exp.indexIn(name) != -1) {
-        QDomNodeList olist = node.elementsByTagName(exp.cap(1));
+    const QRegularExpression exp(QLatin1String("([^/]+)/?([^/].*)?"));
+    const auto match(exp.match(name));
+    if (match.hasMatch()) {
+        QDomNodeList olist = node.elementsByTagName(match.captured(1));
         if (olist.count()) {
             QDomNode onode = olist.item(0);
             if (onode.isElement()) {
                 QDomElement elo = onode.toElement();
-                if (exp.cap(2).isEmpty()) {
+                if (match.captured(2).isEmpty()) {
                     res = elo.text();
                 } else {
-                    res = extractNodeText(elo, exp.cap(2));
+                    res = extractNodeText(elo, match.captured(2));
                 }
             }
         }
@@ -168,17 +168,18 @@ QString extractNodeText(QDomElement& node, const QString& name)
 QString extractNodeText(QDomDocument& doc, const QString& name)
 {
     QString res;
-    QRegExp exp("([^/]+)/?([^/].*)?");
-    if (exp.indexIn(name) != -1) {
-        QDomNodeList olist = doc.elementsByTagName(exp.cap(1));
+    const QRegularExpression exp(QLatin1String("([^/]+)/?([^/].*)?"));
+    const auto match(exp.match(name));
+    if (match.hasMatch()) {
+        QDomNodeList olist = doc.elementsByTagName(match.captured(1));
         if (olist.count()) {
             QDomNode onode = olist.item(0);
             if (onode.isElement()) {
                 QDomElement elo = onode.toElement();
-                if (exp.cap(2).isEmpty()) {
+                if (match.captured(2).isEmpty()) {
                     res = elo.text();
                 } else {
-                    res = extractNodeText(elo, exp.cap(2));
+                    res = extractNodeText(elo, match.captured(2));
                 }
             }
         }

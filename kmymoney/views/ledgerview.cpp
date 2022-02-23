@@ -17,6 +17,7 @@
 #include <QResizeEvent>
 #include <QScrollBar>
 #include <QSet>
+#include <QStackedWidget>
 #include <QToolTip>
 #include <QWidgetAction>
 
@@ -29,7 +30,6 @@
 #include <KMessageBox>
 #include <KMessageWidget>
 #include <KStandardGuiItem>
-#include <QStackedWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -236,7 +236,7 @@ public:
             // found an account, update the action
             if (!acc.id().isEmpty()) {
                 auto name = acc.name();
-                name.replace(QRegExp("&(?!&)"), "&&");
+                name.replace(QRegularExpression(QLatin1String("&(?!&)")), QLatin1String("&&"));
                 gotoAccount->setEnabled(true);
                 gotoAccount->setText(i18nc("@action:inmenu open account", "Go to '%1'", name));
                 gotoAccount->setData(acc.id());
@@ -246,7 +246,7 @@ public:
                 auto payeeId = indexes.at(0).data(eMyMoney::Model::SplitPayeeIdRole).toString();
                 if (!payeeId.isEmpty()) {
                     auto name = indexes.at(0).data(eMyMoney::Model::SplitPayeeRole).toString();
-                    name.replace(QRegExp("&(?!&)"), "&&");
+                    name.replace(QRegularExpression(QLatin1String("&(?!&)")), QLatin1String("&&"));
                     gotoPayee->setEnabled(true);
                     gotoPayee->setText(i18nc("@action:inmenu open payee", "Go to '%1'", name));
                     gotoPayee->setData(payeeId);

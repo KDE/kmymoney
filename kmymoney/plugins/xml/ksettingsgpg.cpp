@@ -10,7 +10,8 @@
 // QT Includes
 
 #include <QCheckBox>
-#include <QRegExp>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -134,9 +135,10 @@ void KSettingsGpg::slotIdChanged()
 
             // if we have a master key, we store it in the hidden widget
             if (d->ui->m_masterKeyCombo->currentIndex() != 0) {
-                QRegExp keyExp(".* \\((.*)\\)");
-                if (keyExp.indexIn(d->ui->m_masterKeyCombo->currentText()) != -1) {
-                    d->ui->kcfg_GpgRecipient->setText(keyExp.cap(1));
+                const QRegularExpression keyExp(QLatin1String(".* \\((.*)\\)"));
+                const auto key(keyExp.match(d->ui->m_masterKeyCombo->currentText()));
+                if (key.hasMatch()) {
+                    d->ui->kcfg_GpgRecipient->setText(key.captured(1));
                 }
             }
 
@@ -159,9 +161,10 @@ void KSettingsGpg::showEvent(QShowEvent * event)
     QString masterKey;
 
     if (d->ui->m_masterKeyCombo->currentIndex() != 0) {
-        QRegExp keyExp(".* \\((.*)\\)");
-        if (keyExp.indexIn(d->ui->m_masterKeyCombo->currentText()) != -1) {
-            masterKey = keyExp.cap(1);
+        const QRegularExpression keyExp(QLatin1String(".* \\((.*)\\)"));
+        const auto key(keyExp.match(d->ui->m_masterKeyCombo->currentText()));
+        if (key.hasMatch()) {
+            masterKey = key.captured(1);
         }
     } else
         masterKey = d->ui->kcfg_GpgRecipient->text();

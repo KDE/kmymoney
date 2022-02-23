@@ -704,7 +704,7 @@ void SeparatorPage::initializeEncodingCombobox()
 
     QList<QTextCodec *>   codecs;
     QMap<QString, QTextCodec *> codecMap;
-    QRegExp iso8859RegExp(QStringLiteral("ISO[- ]8859-([0-9]+).*"));
+    const QRegularExpression iso8859RegExp(QLatin1String("ISO[- ]8859-([0-9]+).*"));
 
     foreach (const auto mib, QTextCodec::availableMibs()) {
         QTextCodec *codec = QTextCodec::codecForMib(mib);
@@ -712,12 +712,13 @@ void SeparatorPage::initializeEncodingCombobox()
         QString sortKey = codec->name().toUpper();
         int rank;
 
+        const auto iso8859(iso8859RegExp.match(sortKey));
         if (sortKey.startsWith(QLatin1String("UTF-8"))) {             // krazy:exclude=strings
             rank = 1;
         } else if (sortKey.startsWith(QLatin1String("UTF-16"))) {            // krazy:exclude=strings
             rank = 2;
-        } else if (iso8859RegExp.exactMatch(sortKey)) {
-            if (iso8859RegExp.cap(1).size() == 1)
+        } else if (iso8859.hasMatch()) {
+            if (iso8859.captured(1).size() == 1)
                 rank = 3;
             else
                 rank = 4;
