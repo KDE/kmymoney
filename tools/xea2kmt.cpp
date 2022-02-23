@@ -118,22 +118,22 @@ public:
         while (!xml.atEnd()) {
             QXmlStreamReader::TokenType type = xml.readNext();
             if (type == QXmlStreamReader::StartElement) {
-                QStringRef _name = xml.name();
-                if (_name == "slot") {
+                QStringView _name = xml.name();
+                if (_name == QLatin1String("slot")) {
                     type = xml.readNext();
                     if (type == QXmlStreamReader::Characters)
                         type = xml.readNext();
                     if (type == QXmlStreamReader::StartElement) {
-                        QStringRef name = xml.name();
+                        QStringView name = xml.name();
                         QString key, value;
-                        if (name == "key")
+                        if (name == QLatin1String("key"))
                             key = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
                         type = xml.readNext();
                         if (type == QXmlStreamReader::Characters)
                             type = xml.readNext();
                         if (type == QXmlStreamReader::StartElement) {
                             name = xml.name();
-                            if (name == "value")
+                            if (name == QLatin1String("value"))
                                 value = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
                         }
                         if (!key.isEmpty() && !value.isEmpty())
@@ -141,8 +141,8 @@ public:
                     }
                 }
             } else if (type == QXmlStreamReader::EndElement) {
-                QStringRef _name = xml.name();
-                if (_name  == "slots")
+                QStringView _name = xml.name();
+                if (_name == QLatin1String("slots"))
                     return true;
             }
         }
@@ -153,25 +153,25 @@ public:
     {
         while (!xml.atEnd()) {
             xml.readNext();
-            QStringRef _name = xml.name();
-            if (xml.isEndElement() && _name == "account") {
+            QStringView _name = xml.name();
+            if (xml.isEndElement() && _name == QLatin1String("account")) {
                 if (prefixNameWithCode && !code.isEmpty() && !m_name.startsWith(code))
                     m_name = code + ' ' + m_name;
                 return true;
             }
             if (xml.isStartElement())
             {
-                if (_name == "name")
+                if (_name == QLatin1String("name"))
                     m_name = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
-                else if (_name == "id")
+                else if (_name == QLatin1String("id"))
                     id = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
-                else if (_name == "type")
+                else if (_name == QLatin1String("type"))
                     m_type = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
-                else if (_name == "code")
+                else if (_name == QLatin1String("code"))
                     code = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
-                else if (_name == "parent")
+                else if (_name == QLatin1String("parent"))
                     parent = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
-                else if (_name == "slots")
+                else if (_name == QLatin1String("slots"))
                     readSlots(xml);
                 else
                 {
@@ -221,21 +221,18 @@ public:
         Q_ASSERT(xml.isStartElement() && xml.name() == "gnc-account-example");
 
         while (xml.readNextStartElement()) {
-            QStringRef name = xml.name();
-            if (xml.name() == "title")
+            QStringView name = xml.name();
+            if (name == QLatin1String("title"))
                 title = xml.readElementText().trimmed();
-            else if (xml.name() == "short-description")
+            else if (name == QLatin1String("short-description"))
                 shortDescription = xml.readElementText().trimmed().replace("  ", " ");
-            else if (xml.name() == "long-description")
+            else if (name == QLatin1String("long-description"))
                 longDescription = xml.readElementText().trimmed().replace("  ", " ");
-            else if (xml.name() == "account")
-            {
+            else if (name == QLatin1String("account")) {
                 TemplateAccount account;
                 if (account.read(xml))
                     accounts.append(account);
-            }
-            else
-            {
+            } else {
                 if (debug)
                     qDebug() << "skipping" << name.toString();
                 xml.skipCurrentElement();
