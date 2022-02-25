@@ -16,7 +16,6 @@
 
 #include <QStringList>
 #include <QMap>
-#include <QSet>
 
 // ----------------------------------------------------------------------------
 // Project Includes

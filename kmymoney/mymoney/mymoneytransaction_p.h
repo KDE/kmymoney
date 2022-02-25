@@ -14,10 +14,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
-#include <QList>
 #include <QDate>
 #include <QHash>
+#include <QList>
+#include <QSet>
+#include <QString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -35,9 +36,18 @@ public:
       */
     QString nextSplitID()
     {
-        QString id;
-        id = 'S' + id.setNum(m_nextSplitID++).rightJustified(SPLIT_ID_SIZE, '0');
-        return id;
+        QSet<QString> usedIds;
+        for (const auto& split : m_splits) {
+            usedIds.insert(split.id());
+        }
+        for (int i = 1; true; ++i) {
+            QString id;
+            id = 'S' + id.setNum(i).rightJustified(SPLIT_ID_SIZE, '0');
+            if (!usedIds.contains(id)) {
+                return id;
+            }
+        }
+        return {};
     }
 
     static const int SPLIT_ID_SIZE = 4;

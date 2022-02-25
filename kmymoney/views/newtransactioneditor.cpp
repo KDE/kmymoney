@@ -303,7 +303,9 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
                     // add a first split with account assigned
                     MyMoneySplit s;
                     s.setAccountId(accountId);
-                    splitModel.addItem(s);
+                    // the following call does not assign a split ID
+                    // this will be done in SplitModel::addSplitsToTransaction()
+                    splitModel.appendSplit(s);
                 }
 
                 const auto index = splitModel.index(0, 0);
