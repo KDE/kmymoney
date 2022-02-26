@@ -1714,10 +1714,9 @@ void MyMoneyFileTest::testAddEquityAccount()
         a.setAccountType(*it);
         ft.restart();
         try {
-            char    msg[100];
             m->addAccount(a, i);
-            sprintf(msg, "Can add non-equity type %d to investment", (int)*it);
-            QFAIL(msg);
+            const auto msg = QStringLiteral("Can add non-equity type %1 to investment").arg(static_cast<int>(*it));
+            QFAIL(msg.toLatin1());
         } catch (const MyMoneyException &) {
             ft.commit();
         }
@@ -1793,10 +1792,9 @@ void MyMoneyFileTest::testReparentEquity(QList<eMyMoney::Account::Type>& list, M
         a.setAccountType(*it);
         try {
             m->addAccount(a, parent);
-            char    msg[100];
             m->reparentAccount(stock, a);
-            sprintf(msg, "Can reparent stock to non-investment type %d account", (int)*it);
-            QFAIL(msg);
+            const auto msg = QStringLiteral("Can reparent stock to non-investment type %1 to account").arg(static_cast<int>(*it));
+            QFAIL(msg.toLatin1());
         } catch (const MyMoneyException &) {
             ft.commit();
         }

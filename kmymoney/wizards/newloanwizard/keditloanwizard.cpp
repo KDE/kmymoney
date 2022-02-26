@@ -475,7 +475,7 @@ void KEditLoanWizard::updateEditSummary()
             ++count;
     }
 
-    setField("affectedPayments", QString().sprintf("%d", count));
+    setField("affectedPayments", QString::number(count));
 }
 
 const MyMoneySchedule KEditLoanWizard::schedule() const

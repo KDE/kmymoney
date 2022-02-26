@@ -44,14 +44,12 @@ void MyMoneyAccountLoan::setLoanAmount(const MyMoneyMoney& amount)
 const MyMoneyMoney MyMoneyAccountLoan::interestRate(const QDate& date) const
 {
     MyMoneyMoney rate;
-    QString key;
-    QString val;
 
     if (!date.isValid())
         return rate;
 
-    key.sprintf("ir-%04d-%02d-%02d", date.year(), date.month(), date.day());
-
+    const auto key = QStringLiteral("ir-%1").arg(date.toString(Qt::ISODate));
+    QString val;
     const QRegularExpression interestRateExp("ir-(\\d{4})-(\\d{2})-(\\d{2})");
 
     QMap<QString, QString>::ConstIterator it;
@@ -78,8 +76,7 @@ void MyMoneyAccountLoan::setInterestRate(const QDate& date, const MyMoneyMoney& 
     if (!date.isValid())
         return;
 
-    QString key;
-    key.sprintf("ir-%04d-%02d-%02d", date.year(), date.month(), date.day());
+    const auto key = QStringLiteral("ir-%1").arg(date.toString(Qt::ISODate));
     setValue(key, value.toString());
 }
 
@@ -136,8 +133,7 @@ int MyMoneyAccountLoan::interestChangeFrequency(int* unit) const
 
 void MyMoneyAccountLoan::setInterestChangeFrequency(const int amount, const int unit)
 {
-    QString val;
-    val.sprintf("%d/%d", amount, unit);
+    const auto val = QStringLiteral("%1/%2").arg(amount).arg(unit);
     setValue("interest-changeFrequency", val);
 }
 

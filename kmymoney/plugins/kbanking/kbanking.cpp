@@ -1347,8 +1347,7 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
 
     // make hash value unique in case we don't have one already
     if (kt.m_strBankID.isEmpty()) {
-        QString hashBase;
-        hashBase.sprintf("%s-%07lx", qPrintable(kt.m_datePosted.toString(Qt::ISODate)), h);
+        const auto hashBase(QStringLiteral("%1-%2").arg(kt.m_datePosted.toString(Qt::ISODate)).arg(h, 7, 16, QLatin1Char('0')));
         int idx = 1;
         QString hash;
         for (;;) {

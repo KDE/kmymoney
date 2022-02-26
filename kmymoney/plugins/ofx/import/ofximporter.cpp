@@ -486,8 +486,7 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
         h = MyMoneyTransaction::hash(t.m_amount.toString(), h);
         // make hash value unique in case we don't have one already
 
-        QString hashBase;
-        hashBase.sprintf("%s-%07lx", qPrintable(t.m_datePosted.toString(Qt::ISODate)), h);
+        const auto hashBase(QStringLiteral("%1-%2").arg(t.m_datePosted.toString(Qt::ISODate)).arg(h, 7, 16, QLatin1Char('0')));
         int idx = 1;
         QString hash;
         for (;;) {

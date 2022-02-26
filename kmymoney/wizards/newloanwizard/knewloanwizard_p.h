@@ -177,8 +177,7 @@ public:
         if (q->field("durationValueEdit").toInt() == 0) {
             txt = QString("<") + i18n("calculate") + QString(">");
         } else {
-            txt = QString().sprintf("%d ", q->field("durationValueEdit").toInt())
-                  + q->field("durationUnitEdit").toString();
+            txt = QStringLiteral("%1 %2").arg(q->field("durationValueEdit").toInt()).arg(q->field("durationUnitEdit").toString());
         }
         q->setField("duration1", txt);
         q->setField("duration2", txt);
@@ -237,8 +236,7 @@ public:
         int fraction = m_account.fraction(MyMoneyFile::instance()->security(m_account.currencyId()));
         q->setField("loanAmount6", q->field("loanAmountEdit").value<MyMoneyMoney>().formatMoney(fraction));
         q->setField("interestRate6", QString(q->field("interestRateEdit").value<MyMoneyMoney>().formatMoney("", 3) + QString("%")));
-        txt = QString().sprintf("%d ", q->field("durationValueEdit").toInt())
-              + q->field("durationUnitEdit").toString();
+        txt = QStringLiteral("%1 %2").arg(q->field("durationValueEdit").toInt()).arg(q->field("durationUnitEdit").toString());
         q->setField("duration6", txt);
         q->setField("payment6", q->field("paymentEdit").value<MyMoneyMoney>().formatMoney(fraction));
         q->setField("balloon6", q->field("finalPaymentEdit").value<MyMoneyMoney>().formatMoney(fraction));

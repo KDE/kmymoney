@@ -1025,8 +1025,7 @@ void MyMoneyQifReader::processTransactionEntry()
 
     h = MyMoneyTransaction::hash(m_qifEntry.join(";"));
 
-    QString hashBase;
-    hashBase.sprintf("%s-%07lx", qPrintable(m_qifProfile.date(extractLine('D')).toString(Qt::ISODate)), h);
+    const auto hashBase(QStringLiteral("%1-%2").arg(m_qifProfile.date(extractLine('D')).toString(Qt::ISODate)).arg(h, 7, 16, QLatin1Char('0')));
     int idx = 1;
     QString hash;
     for (;;) {
@@ -1330,8 +1329,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
 
     h = MyMoneyTransaction::hash(m_qifEntry.join(";"));
 
-    QString hashBase;
-    hashBase.sprintf("%s-%07lx", qPrintable(m_qifProfile.date(extractLine('D')).toString(Qt::ISODate)), h);
+    const auto hashBase(QStringLiteral("%1-%2").arg(m_qifProfile.date(extractLine('D')).toString(Qt::ISODate)).arg(h, 7, 16, QLatin1Char('0')));
     int idx = 1;
     QString hash;
     for (;;) {
