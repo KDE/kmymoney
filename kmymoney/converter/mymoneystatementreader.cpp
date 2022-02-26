@@ -1169,7 +1169,20 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
                     // Only copy the splits if the transaction found does not reference a closed account
                     if (!MyMoneyFile::instance()->referencesClosedAccount(t_old)) {
-                        foreach (const auto split, t_old.splits()) {
+                        // special care must be taken, if the old transaction references
+                        // a category and vat account combination that is not effective
+                        // anymore due to a change in the tax category. If that is the
+                        // case, we simply don't add the old tax category to the
+                        // transaction and let MyMoneyFile::updateVAT handle the correct
+                        // addition of a tax split. Since we don't know the order of
+                        // the splits we scan over all of them and update the
+                        // transactionUnderImport at the end of the loop.
+                        MyMoneySplit categorySplit;
+                        MyMoneySplit taxSplit;
+                        QString newVatAccountId;
+                        QString oldVatAccountId;
+
+                        for (const auto& split : t_old.splits()) {
                             // We don't need the split that covers this account,
                             // we just need the other ones.
                             if (split.accountId() != thisaccount.id()) {
@@ -1196,6 +1209,31 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                                        qPrintable(s.accountId()));
                                 d->setupPrice(s, splitAccount, d->m_account, statementTransactionUnderImport.m_datePosted);
                                 transactionUnderImport.addSplit(s);
+
+                                // check for vat categories
+                                if (t_old.splits().count() == 3) {
+                                    if (!splitAccount.value(QLatin1String("VatAccount")).isEmpty()) {
+                                        newVatAccountId = splitAccount.value(QLatin1String("VatAccount"));
+                                        categorySplit = s;
+                                    } else {
+                                        taxSplit = s;
+                                        oldVatAccountId = split.accountId();
+                                    }
+                                }
+                            }
+                        }
+
+                        // now check if we have to remove the tax split. This is
+                        // the case when newVatAccountId is set and differs from
+                        // oldVatAccountId.
+                        if (!newVatAccountId.isEmpty()) {
+                            if (newVatAccountId.compare(oldVatAccountId)) {
+                                // remove the tax split
+                                transactionUnderImport.removeSplit(taxSplit);
+                                // and update the value of the remaining split
+                                categorySplit.setShares(-s1.shares());
+                                categorySplit.setValue(-s1.value());
+                                transactionUnderImport.modifySplit(categorySplit);
                             }
                         }
                     }
