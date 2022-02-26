@@ -35,25 +35,26 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
 #include "mymoneyaccountloan.h"
-#include "mymoneysecurity.h"
-#include "mymoneyreport.h"
 #include "mymoneybalancecache.h"
 #include "mymoneybudget.h"
-#include "mymoneyprice.h"
-#include "mymoneypayee.h"
-#include "mymoneytag.h"
-#include "mymoneyschedule.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
 #include "mymoneycostcenter.h"
+#include "mymoneyenums.h"
 #include "mymoneyexception.h"
 #include "mymoneyforecast.h"
+#include "mymoneyinstitution.h"
+#include "mymoneypayee.h"
+#include "mymoneyprice.h"
+#include "mymoneyreport.h"
+#include "mymoneyschedule.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytag.h"
+#include "mymoneytransaction.h"
+#include "mymoneyutils.h"
 #include "onlinejob.h"
 #include "storageenums.h"
-#include "mymoneyenums.h"
 
 // the models
 #include "accountsmodel.h"
@@ -2530,6 +2531,9 @@ QStringList MyMoneyFile::consistencyCheck()
                           << Account::Type::Liability;
     QSet<QString> reportedUnsupportedAccounts;
 
+    const auto txProblemHeader(i18n("* Problems with transactions"));
+    rc << txProblemHeader;
+
     for (const auto& transaction : tList) {
         MyMoneyTransaction t = transaction;
         bool tChanged = false;
@@ -2544,6 +2548,18 @@ QStringList MyMoneyFile::consistencyCheck()
         }
 
         const auto splits = t.splits();
+        if (!t.splitSum().isZero()) {
+            rc << i18n("  * Sum of splits in transaction '%1' posted on %2 is not zero.", t.id(), t.postDate().toString(Qt::ISODate));
+            for (const auto& split : splits) {
+                const auto accIdx = d->accountsModel.indexById(split.accountId());
+                const auto name = accIdx.data(eMyMoney::Model::AccountFullHierarchyNameRole).toString();
+                const auto acc = d->accountsModel.itemByIndex(accIdx);
+                const auto security = MyMoneyFile::instance()->security(acc.currencyId());
+                rc << i18n("    Account: %1, Amount: %2", name, MyMoneyUtils::formatMoney(split.shares(), security));
+            }
+            ++unfixedCount;
+        }
+
         foreach (const auto split, splits) {
             bool sChanged = false;
             MyMoneySplit s = split;
@@ -2673,6 +2689,11 @@ QStringList MyMoneyFile::consistencyCheck()
         if (tChanged) {
             d->journalModel.modifyTransaction(t);
         }
+    }
+
+    // if no problems were reported, we remove the header again
+    if (rc.constLast() == txProblemHeader) {
+        rc.takeLast();
     }
 
     // Fix the schedules
