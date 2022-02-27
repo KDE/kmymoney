@@ -75,6 +75,44 @@ public:
         }
     }
 
+    /**
+     * Find which item has the @a id and return its index
+     * into the model of the KMyMoneyAccountCombo. In case
+     * no item is found, an invalid QModelIndex will be
+     * returned. If the current selection is pointing to
+     * one of the favorite accounts, the index for the
+     * corresponding entry in the hierarchy will be returned.
+     */
+    QModelIndex findMatchingItem(const QString& id)
+    {
+        const auto startRow =
+            m_q->model()->index(0, 0).data(eMyMoney::Model::Roles::IdRole).toString() == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Favorite) ? 1
+                                                                                                                                                           : 0;
+        // Note: Without Qt::MatchWrap we might not get results for credit card
+        const auto list = m_q->model()->match(m_q->model()->index(startRow, 0),
+                                              eMyMoney::Model::Roles::IdRole,
+                                              QVariant(id),
+                                              1,
+                                              Qt::MatchFlags(Qt::MatchExactly | Qt::MatchWrap | Qt::MatchRecursive));
+        if (!list.isEmpty()) {
+            return list.first();
+        }
+        return {};
+    }
+
+    /**
+     * Set the current index based on the QModelIndex @a idx.
+     * While setting the index, the signals sent out by the
+     * KMyMoneyAccountCombo are blocked.
+     */
+    void setCurrentIndex(const QModelIndex& idx)
+    {
+        QSignalBlocker blocker(m_q);
+        m_q->setRootModelIndex(idx.parent());
+        m_q->setCurrentIndex(idx.row());
+        m_q->setRootModelIndex(QModelIndex());
+    }
+
     void showSplitAction(bool show)
     {
         if (show && !m_splitAction) {
@@ -177,9 +215,18 @@ bool KMyMoneyAccountCombo::eventFilter(QObject* o, QEvent* e)
                 bool forLineEdit = (kev->text().length() > 0);
                 switch(kev->key()) {
                 case Qt::Key_Tab:
-                case Qt::Key_Backtab:
+                case Qt::Key_Backtab: {
+                    const auto idx = view()->currentIndex();
+                    const auto accountId = idx.data(eMyMoney::Model::Roles::IdRole).toString();
+                    if (!accountId.isEmpty()) {
+                        d->m_lastSelectedAccount = accountId;
+                        QSignalBlocker blocker(lineEdit());
+                        lineEdit()->setText(idx.data(eMyMoney::Model::Roles::AccountFullNameRole).toString());
+                        d->setCurrentIndex(d->findMatchingItem(accountId));
+                    }
                     hidePopup();
                     break;
+                }
 
                 case Qt::Key_Escape:
                 case Qt::Key_Up:
@@ -247,26 +294,12 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
     auto* filterModel = qobject_cast<QSortFilterProxyModel*>(model());
     filterModel->setFilterFixedString(QString());
 
-    // find which item has this id and set it as the current item
-    // and we always skip over the favorite section
-    int startRow = model()->index(0, 0).data(eMyMoney::Model::Roles::IdRole).toString() == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Favorite) ? 1 : 0;
-    // Note: Without Qt::MatchWrap we might not get results for credit card
-    const auto list = model()->match(model()->index(startRow, 0), eMyMoney::Model::Roles::IdRole,
-                                     QVariant(id),
-                                     1,
-                                     Qt::MatchFlags(Qt::MatchExactly | Qt::MatchWrap | Qt::MatchRecursive));
-
-    if (!list.isEmpty()) {
+    const auto idx = d->findMatchingItem(id);
+    if (idx.isValid()) {
         // make sure the popup is closed from here on
         hidePopup();
         d->m_lastSelectedAccount = id;
-        const auto idx = list.front();
-
-        QSignalBlocker blocker(this);
-        setRootModelIndex(idx.parent());
-        setCurrentIndex(idx.row());
-        setRootModelIndex(QModelIndex());
-        blocker.unblock();
+        d->setCurrentIndex(idx);
         emit accountSelected(id);
     }
 }
@@ -401,6 +434,9 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
                     d->selectFirstMatchingItem();
                     break;
                 }
+
+                // we don't have a selection since the user edits the name
+                d->m_lastSelectedAccount.clear();
 
                 // keep current text in edit widget no matter what
                 QSignalBlocker blocker(lineEdit());
