@@ -1876,15 +1876,22 @@ void MyMoneyStorageXML::writePrices(QDomElement& prices)
 {
     const MyMoneyPriceList list = m_storage->priceList();
     MyMoneyPriceList::ConstIterator it;
-    prices.setAttribute(attributeName(Attribute::General::Count), list.count());
 
+    int count(0);
     for (it = list.constBegin(); it != list.constEnd(); ++it) {
+        const auto& pair = it.key();
+        if (m_storage->security(pair.first).isCurrency() && !m_storage->security(pair.second).isCurrency()) {
+            qDebug() << "A currency pair" << pair << "is invalid (from currency to equity). Omitting from storage.";
+            continue;
+        }
         QDomElement price = m_doc->createElement(nodeName(Node::PricePair));
-        price.setAttribute(attributeName(Attribute::General::From), it.key().first);
-        price.setAttribute(attributeName(Attribute::General::To), it.key().second);
+        price.setAttribute(attributeName(Attribute::General::From), pair.first);
+        price.setAttribute(attributeName(Attribute::General::To), pair.second);
         writePricePair(price, *it);
         prices.appendChild(price);
+        ++count;
     }
+    prices.setAttribute(attributeName(Attribute::General::Count), count);
 }
 
 void MyMoneyStorageXML::writePricePair(QDomElement& price, const MyMoneyPriceEntries& p)

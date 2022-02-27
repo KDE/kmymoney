@@ -115,7 +115,10 @@ public:
                     qDebug() << "A currency pair" << pair << "has one of its elements present, while the other one is empty. Omitting.";
                     continue;
                 }
-
+                if (!file->security(pair.second).isCurrency()) {
+                    qDebug() << "A currency pair" << pair << "is invalid (from currency to equity). Omitting.";
+                    continue;
+                }
                 const MyMoneyPriceEntries& entries = (*it_price);
                 if (entries.count() > 0 && entries.begin().key() <= QDate::currentDate()) {
                     addPricePair(pair, false);
