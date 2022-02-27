@@ -2019,13 +2019,27 @@ void MyMoneyStorageXML::writePrices(QDomElement& prices)
 
     for (auto row = 0; row < rows; ++row) {
         idx = model->index(row, 0);
-        PriceEntry entry = model->itemByIndex(idx);
+        const auto entry = model->itemByIndex(idx);
 
         if ((entry.from() != from) || (entry.to() != to)) {
-            ++pricePairCount;
             if (!pricePair.isNull()) {
                 prices.appendChild(pricePair);
             }
+
+            try {
+                const auto from = m_file->security(entry.from());
+                const auto to = m_file->security(entry.to());
+                if (from.isCurrency() && !to.isCurrency()) {
+                    qDebug() << QStringLiteral("The currency pair %1->%2 is invalid (from currency to equity). Omitting from storage.")
+                                    .arg(entry.from(), entry.to());
+                    continue;
+                }
+            } catch (MyMoneyException& e) {
+                qDebug() << QStringLiteral("The currency pair %1->%2 is invalid. Omitting from storage.").arg(entry.from(), entry.to());
+                continue;
+            }
+
+            ++pricePairCount;
             pricePair = m_doc->createElement(nodeName(Node::PricePair));
             pricePair.setAttribute(attributeName(Attribute::General::From), entry.from());
             pricePair.setAttribute(attributeName(Attribute::General::To), entry.to());

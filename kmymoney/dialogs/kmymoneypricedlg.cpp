@@ -188,6 +188,17 @@ void KMyMoneyPriceDlg::slotLoadWidgets()
     MyMoneyPriceList list = file->priceList();
     MyMoneyPriceList::ConstIterator it_allPrices;
     for (it_allPrices = list.constBegin(); it_allPrices != list.constEnd(); ++it_allPrices) {
+        const auto& pair = it_allPrices.key();
+        try {
+            if (file->security(pair.first).isCurrency() && !file->security(pair.second).isCurrency()) {
+                qDebug() << "A currency pair" << pair << "is invalid (from currency to equity). Omitting from listing.";
+                continue;
+            }
+        } catch (MyMoneyException& e) {
+            qDebug() << "A currency pair" << pair << "is invalid. Omitting from listing.";
+            continue;
+        }
+
         MyMoneyPriceEntries::ConstIterator it_priceItem;
         if (d->ui->m_showAllPrices->isChecked()) {
             for (it_priceItem = (*it_allPrices).constBegin(); it_priceItem != (*it_allPrices).constEnd(); ++it_priceItem) {

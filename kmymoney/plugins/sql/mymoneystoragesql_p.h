@@ -638,6 +638,16 @@ public:
         signalProgress(0, list.count(), "Writing Prices...");
         MyMoneyPriceList::ConstIterator it;
         for (it = list.constBegin(); it != list.constEnd(); ++it)   {
+            const auto& pair = it.key();
+            try {
+                if (m_file->security(pair.first).isCurrency() && !m_file->security(pair.second).isCurrency()) {
+                    qDebug() << "A currency pair" << pair << "is invalid (from currency to equity). Omitting from storage.";
+                    continue;
+                }
+            } catch (MyMoneyException& e) {
+                qDebug() << "A currency pair" << pair << "is invalid. Omitting from storage.";
+                continue;
+            }
             writePricePair(*it);
         }
     }
