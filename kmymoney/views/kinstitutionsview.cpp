@@ -84,7 +84,6 @@ public:
             AccountsModel::Column::CostCenter,
             AccountsModel::Column::Tax,
             AccountsModel::Column::Vat,
-            AccountsModel::Column::Iban,
             AccountsModel::Column::Number,
             AccountsModel::Column::HasOnlineMapping,
         }));
