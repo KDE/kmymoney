@@ -890,7 +890,7 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
         } else {
             d->ui->dateEdit->setDate(QDate::currentDate());
         }
-        QSignalBlocker accountBlocker(d->ui->categoryCombo->lineEdit());
+        QSignalBlocker accountBlocker(d->ui->accountCombo->lineEdit());
         d->ui->accountCombo->clearEditText();
         QSignalBlocker categoryBlocker(d->ui->categoryCombo->lineEdit());
         d->ui->categoryCombo->clearEditText();
