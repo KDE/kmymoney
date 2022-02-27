@@ -4,13 +4,13 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
+#ifndef MYMONEYMAP_H
+#define MYMONEYMAP_H
+
 #include <stdint.h>
 #include <QMap>
 #include <QStack>
 #include <mymoneyexception.h>
-
-#ifndef MYMONEYMAP_H
-#define MYMONEYMAP_H
 
 #define MY_OWN_DEBUG 0
 
@@ -225,7 +225,7 @@ private:
         Key m_key;
     };
 
-    class MyMoneyMapStart : public MyMoneyMapAction
+    class MyMoneyMapStart final : public MyMoneyMapAction
     {
     public:
         MyMoneyMapStart(MyMoneyMap<Key, T>* container, unsigned long* id) :
@@ -246,7 +246,7 @@ private:
         unsigned long  m_id;
     };
 
-    class MyMoneyMapInsert : public MyMoneyMapAction
+    class MyMoneyMapInsert final : public MyMoneyMapAction
     {
     public:
         MyMoneyMapInsert(MyMoneyMap<Key, T>* container, const Key& key, const T& obj) :
@@ -262,7 +262,7 @@ private:
         }
     };
 
-    class MyMoneyMapRemove : public MyMoneyMapAction
+    class MyMoneyMapRemove final : public MyMoneyMapAction
     {
     public:
         MyMoneyMapRemove(MyMoneyMap<Key, T>* container, const Key& key) :
@@ -276,7 +276,7 @@ private:
         }
     };
 
-    class MyMoneyMapModify : public MyMoneyMapAction
+    class MyMoneyMapModify final : public MyMoneyMapAction
     {
     public:
         MyMoneyMapModify(MyMoneyMap<Key, T>* container, const Key& key, const T& obj) :

@@ -24,7 +24,7 @@ class TestMyMoneyObjectPrivate : public MyMoneyObjectPrivate
 {
 };
 
-class TestMyMoneyObject : public MyMoneyObject
+class TestMyMoneyObject final : public MyMoneyObject
 {
     Q_DECLARE_PRIVATE(TestMyMoneyObject)
 
