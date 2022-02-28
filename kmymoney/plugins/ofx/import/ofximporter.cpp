@@ -296,9 +296,9 @@ bool OFXImporter::import(const QString& filename)
 #endif
 
 #ifdef Q_OS_WIN
-    const auto dir = QDir::toNativeSeparators(QStringLiteral("%1/data/libofx/dtd").arg(QCoreApplication::applicationDirPath()));
+    const auto dir = QFile::encodeName(QStringLiteral("%1/data/libofx/dtd").arg(QCoreApplication::applicationDirPath()));
     qDebug() << "Set DTD dir to" << dir;
-    libofx_set_dtd_dir(ctx, dir.toUtf8());
+    libofx_set_dtd_dir(ctx, dir);
 #endif
 
     qDebug() << "Start processing OFX data from" << filename_deep;
