@@ -128,9 +128,9 @@ if (PkgConfig_FOUND)
 endif()
 
 find_package(Qt5 5.12 REQUIRED COMPONENTS
-	Core DBus Widgets Svg Xml Test PrintSupport WebEngineWidgets)
+	Core DBus Widgets Svg Xml Test PrintSupport)
 find_package(Qt5 5.12 OPTIONAL_COMPONENTS
-  Sql Concurrent QuickWidgets)
+  Sql Concurrent QuickWidgets WebEngineWidgets)
 
 if (BUILD_STATIC_PLUGINS)
     find_package(KF5CoreAddons 5.89 CONFIG REQUIRED)
