@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="50" name="kmymoney" >
+<kpartgui version="51" name="kmymoney" >
  <MenuBar>
   <Menu name="file" >
    <DefineGroup name="open_db_group" append="open_merge"/>
@@ -80,6 +80,7 @@
    <Action name="transaction_delete" />
    <Action name="transaction_duplicate" />
    <Action name="transaction_add_reversing" />
+   <Action name="transaction_move_to_today" />
    <Menu name="transaction_mark_menu">
     <text>Mark transaction as...</text>
     <title>Mark transaction</title>
@@ -209,6 +210,7 @@
   <Action name="transaction_duplicate" />
   <Action name="transaction_add_reversing" />
   <Action name="transaction_copy_splits" />
+  <Action name="transaction_move_to_today" />
   <Menu name="transaction_move_menu">
    <text>Move transaction to...</text>
    <title>Select account</title>

@@ -1756,7 +1756,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::GoToPayee,                     QStringLiteral("transaction_goto_payee"),         i18n("Go to payee"),                                Icon::Payee},
             {Action::NewScheduledTransaction,       QStringLiteral("transaction_create_schedule"),    i18n("Create scheduled transaction..."),            Icon::NewSchedule},
             {Action::AssignTransactionsNumber,      QStringLiteral("transaction_assign_number"),      i18n("Assign next number"),                         Icon::Empty},
-            {Action::CombineTransactions,           QStringLiteral("transaction_combine"),            i18nc("Combine transactions", "Combine"),    Icon::Empty},
+            {Action::CombineTransactions,           QStringLiteral("transaction_combine"),            i18nc("Combine transactions", "Combine"),           Icon::Empty},
+            {Action::MoveToToday,                   QStringLiteral("transaction_move_to_today"),      i18n("Move to today"),                              Icon::Empty},
             {Action::CopySplits,                    QStringLiteral("transaction_copy_splits"),        i18n("Copy splits"),                                Icon::Empty},
             {Action::ShowFilterWidget,              QStringLiteral("filter_show_widget"),             i18n("Show filter widget"),                         Icon::Empty},
             //Investment
@@ -1914,6 +1915,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::ChartAccountBalance,           &KMyMoneyApp::slotExecuteAction},
 
             {Action::EditFindTransaction,           &KMyMoneyApp::slotFindTransaction},
+            {Action::MoveToToday,                   &KMyMoneyApp::slotMoveToToday},
         };
         // clang-format off
 
@@ -2750,6 +2752,53 @@ void KMyMoneyApp::slotMoveTransactionTo()
             qDebug() << e.what();
         }
     }
+}
+
+void KMyMoneyApp::slotMoveToToday()
+{
+    const auto file = MyMoneyFile::instance();
+
+    // since we may jump here via code, we have to make sure to react only
+    // if the action is enabled
+    if (!pActions[Action::MoveToToday]->isEnabled())
+        return;
+
+    if (d->m_selections.selection(SelectedObjects::JournalEntry).isEmpty())
+        return;
+
+    if (MyMoneyUtils::transactionWarnLevel(d->m_selections.selection(SelectedObjects::JournalEntry)) == OneSplitReconciled) {
+        if (KMessageBox::warningContinueCancel(this,
+                                               i18n("At least one split of the selected transactions has been reconciled. "
+                                                    "Do you wish to change the transactions anyway?"),
+                                               i18nc("@title:window Warning dialog", "Transaction already reconciled"))
+            == KMessageBox::Cancel)
+            return;
+
+    } else {
+        auto msg = i18np("Do you really want to change the selected transaction?",
+                         "Do you really want to change all %1 selected transactions?",
+                         d->m_selections.selection(SelectedObjects::JournalEntry).count());
+
+        if (KMessageBox::questionYesNo(this, msg, i18nc("@title:window Confirmation dialog", "Change transaction")) == KMessageBox::Cancel) {
+            return;
+        }
+    }
+
+    MyMoneyFileTransaction ft;
+    const QDate today = QDate::currentDate();
+    for (const auto& journalEntryId : d->m_selections.selection(SelectedObjects::JournalEntry)) {
+        const auto journalEntry = file->journalModel()->itemById(journalEntryId);
+        if (!journalEntry.id().isEmpty()) {
+            if (!journalEntry.transaction().id().isEmpty()) {
+                if (!file->referencesClosedAccount(journalEntry.transaction())) {
+                    MyMoneyTransaction tr = file->transaction(journalEntry.transaction().id());
+                    tr.setPostDate(today);
+                    file->modifyTransaction(tr);
+                }
+            }
+        }
+    }
+    ft.commit();
 }
 
 void KMyMoneyApp::slotMatchTransaction()

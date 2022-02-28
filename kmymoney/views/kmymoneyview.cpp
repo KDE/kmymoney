@@ -363,6 +363,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     pActions[eMenu::Action::PostponeReconciliation]->setEnabled(false);
     pActions[eMenu::Action::FinishReconciliation]->setEnabled(false);
     pActions[eMenu::Action::CancelReconciliation]->setEnabled(false);
+    pActions[eMenu::Action::MoveToToday]->setEnabled(false);
 
     // update actions in all views. process the current last
     for (const auto& view : d->viewBases.keys()) {
@@ -401,6 +402,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
             pActions[eMenu::Action::DuplicateTransaction]->setDisabled(true);
             pActions[eMenu::Action::AddReversingTransaction]->setDisabled(true);
             pActions[eMenu::Action::CopySplits]->setDisabled(true);
+            pActions[eMenu::Action::MoveToToday]->setDisabled(true);
         } else {
             const auto warnLevel = MyMoneyUtils::transactionWarnLevel(selections.selection(SelectedObjects::JournalEntry));
             pActions[eMenu::Action::EditTransaction]->setEnabled(true);
@@ -409,6 +411,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
             pActions[eMenu::Action::DuplicateTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
             pActions[eMenu::Action::AddReversingTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
             pActions[eMenu::Action::CopySplits]->setDisabled(true);
+            pActions[eMenu::Action::MoveToToday]->setEnabled(true);
 
             int singleSplitTransactions(0);
             int multipleSplitTransactions(0);

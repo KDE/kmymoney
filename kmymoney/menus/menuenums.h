@@ -78,6 +78,7 @@ enum class Action {
     NewScheduledTransaction, AssignTransactionsNumber,
     CombineTransactions,
     MoveTransactionTo,
+    MoveToToday,
     // *************
     // The tools menu
     // *************
