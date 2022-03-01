@@ -610,7 +610,7 @@ public:
                                 break;
                         }
                         if (it_k == payeeNames.constEnd())
-                            payeeNames << QRegularExpression::escape(*it_n);
+                            payeeNames << *it_n;
                     } else if (payeeNames.contains(*it_n) == 0)
                         payeeNames << QRegularExpression::escape(*it_n);
                 }
