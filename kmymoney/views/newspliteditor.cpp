@@ -47,6 +47,7 @@
 #include "securitiesmodel.h"
 #include "splitmodel.h"
 #include "splitview.h"
+#include "tagsmodel.h"
 #include "widgethintframe.h"
 
 #include "ui_newspliteditor.h"
@@ -328,6 +329,8 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     d->ui->accountCombo->setModel(d->accountsModel);
     d->ui->accountCombo->setSplitActionVisible(false);
 
+    d->ui->tagContainer->setModel(file->tagsModel()->modelWithEmptyItem());
+
     d->costCenterModel->setSortRole(Qt::DisplayRole);
     d->costCenterModel->setSourceModel(MyMoneyFile::instance()->costCenterModel());
     d->costCenterModel->sort(AccountsModel::Column::AccountName);
@@ -579,6 +582,16 @@ void NewSplitEditor::setPayeeId(const QString& id)
         row = indexes.first().row();
     }
     d->ui->payeeEdit->setCurrentIndex(row);
+}
+
+void NewSplitEditor::setTagIdList(const QList<QString>& tagIds)
+{
+    d->ui->tagContainer->loadTags(tagIds);
+}
+
+QList<QString> NewSplitEditor::tagIdList() const
+{
+    return d->ui->tagContainer->selectedTags();
 }
 
 void NewSplitEditor::startLoadingSplit()

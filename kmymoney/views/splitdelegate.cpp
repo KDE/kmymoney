@@ -319,6 +319,7 @@ void SplitDelegate::setEditorData(QWidget* editWidget, const QModelIndex& index)
         editor->setCostCenterId(index.data(eMyMoney::Model::SplitCostCenterIdRole).toString());
         editor->setNumber(index.data(eMyMoney::Model::SplitNumberRole).toString());
         editor->setPayeeId(index.data(eMyMoney::Model::SplitPayeeIdRole).toString());
+        editor->setTagIdList(index.data(eMyMoney::Model::SplitTagIdRole).toStringList());
         editor->finishLoadingSplit();
     }
 }
@@ -334,6 +335,7 @@ void SplitDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, con
         model->setData(index, splitEditor->accountId(), eMyMoney::Model::SplitAccountIdRole);
         model->setData(index, splitEditor->costCenterId(), eMyMoney::Model::SplitCostCenterIdRole);
         model->setData(index, splitEditor->payeeId(), eMyMoney::Model::SplitPayeeIdRole);
+        model->setData(index, QVariant::fromValue<QStringList>(splitEditor->tagIdList()), eMyMoney::Model::SplitTagIdRole);
         model->setData(index, QVariant::fromValue<MyMoneyMoney>(-splitEditor->shares()), eMyMoney::Model::SplitSharesRole);
         // send out the dataChanged signal with the next (last) setData()
         block.unblock();

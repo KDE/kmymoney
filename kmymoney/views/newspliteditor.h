@@ -91,6 +91,9 @@ public Q_SLOTS:
     QString payeeId() const;
     void setPayeeId(const QString& id);
 
+    QList<QString> tagIdList() const;
+    void setTagIdList(const QList<QString>& tagIds);
+
 protected Q_SLOTS:
     virtual void reject();
     virtual void acceptEdit();

@@ -315,6 +315,9 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::SplitPayeeRole:
         return MyMoneyFile::instance()->payeesModel()->itemById(split.payeeId()).name();
 
+    case eMyMoney::Model::SplitTagIdRole:
+        return QVariant::fromValue<QStringList>(split.tagIdList());
+
     case eMyMoney::Model::TransactionCounterAccountRole:
         break;
 
@@ -385,6 +388,13 @@ bool SplitModel::setData(const QModelIndex& idx, const QVariant& value, int role
         emit dataChanged(startIdx, endIdx);
         return true;
 
+    case eMyMoney::Model::SplitTagIdRole:
+        split.setTagIdList(value.toStringList());
+        emit dataChanged(startIdx, endIdx);
+        return true;
+
+    default:
+        break;
     }
     return QAbstractItemModel::setData(idx, value, role);
 }
