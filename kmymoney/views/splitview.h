@@ -87,6 +87,10 @@ protected:
     void paintEvent(QPaintEvent* event) final override;
     int sizeHintForRow(int row) const final override;
     int sizeHintForColumn(int row) const final override;
+    /**
+     * Overridden to prevent moving to the end using End or PageDown to start the editor
+     */
+    QModelIndex moveCursor(CursorAction cursorAction, Qt::KeyboardModifiers modifiers) override;
 
 protected Q_SLOTS:
     void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) final override;

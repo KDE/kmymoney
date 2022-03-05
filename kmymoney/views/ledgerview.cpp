@@ -863,6 +863,49 @@ void LedgerView::keyPressEvent(QKeyEvent* kev)
     }
 }
 
+QModelIndex LedgerView::moveCursor(QAbstractItemView::CursorAction cursorAction, Qt::KeyboardModifiers modifiers)
+{
+    QModelIndex newIndex;
+    bool skipSchedules(false);
+
+    if (!(modifiers & Qt::ControlModifier)) {
+        // for home and end we need to have the ControlModifier set so
+        // that the base class implementation works on rows instead of
+        // columns.
+        switch (cursorAction) {
+        case MoveHome:
+        case MoveEnd:
+            newIndex = QTableView::moveCursor(cursorAction, modifiers | Qt::ControlModifier);
+            skipSchedules = true;
+            break;
+
+        default:
+            newIndex = QTableView::moveCursor(cursorAction, modifiers);
+            break;
+        }
+    }
+
+    // now make sure that moving the cursor does not hit the empty
+    // transaction at the bottom or a schedule.
+    for (auto row = newIndex.row(); row >= 0; --row) {
+        newIndex = model()->index(row, 0);
+        QString id = newIndex.data(eMyMoney::Model::IdRole).toString();
+        // skip the empty transaction at the end of a ledger if
+        // the movement is not the down arrow
+        if ((id.isEmpty() || id.endsWith('-')) && (cursorAction != MoveDown)) {
+            continue;
+        }
+        // skip scheduled transactions as well if moving to the end
+        if (skipSchedules && newIndex.data(eMyMoney::Model::TransactionScheduleRole).toBool()) {
+            continue;
+        }
+        if ((newIndex.flags() & (Qt::ItemIsSelectable | Qt::ItemIsEnabled)) == (Qt::ItemIsSelectable | Qt::ItemIsEnabled)) {
+            return newIndex;
+        }
+    }
+    return {};
+}
+
 void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& previous)
 {
     QTableView::currentChanged(current, previous);
@@ -872,7 +915,7 @@ void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& p
         QString id = idx.data(eMyMoney::Model::IdRole).toString();
         // For a new transaction the id is completely empty, for a split view the transaction
         // part is filled but the split id is empty and the string ends with a dash
-        if(id.isEmpty() || id.endsWith('-')) {
+        if (id.isEmpty() || id.endsWith('-')) {
             // the next two lines prevent an endless recursive call of this method
             if (idx == previous) {
                 return;

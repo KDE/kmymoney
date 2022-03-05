@@ -341,6 +341,43 @@ void SplitView::blockEditorStart(bool blocked)
     d->blockEditorStart = blocked;
 }
 
+QModelIndex SplitView::moveCursor(QAbstractItemView::CursorAction cursorAction, Qt::KeyboardModifiers modifiers)
+{
+    QModelIndex newIndex;
+
+    if (!(modifiers & Qt::ControlModifier)) {
+        // for home and end we need to have the ControlModifier set so
+        // that the base class implementation works on rows instead of
+        // columns.
+        switch (cursorAction) {
+        case MoveHome:
+        case MoveEnd:
+            newIndex = QTableView::moveCursor(cursorAction, modifiers | Qt::ControlModifier);
+            break;
+
+        default:
+            newIndex = QTableView::moveCursor(cursorAction, modifiers);
+            break;
+        }
+    }
+
+    // now make sure that moving the cursor does not hit the empty
+    // transaction at the bottom or a schedule.
+    for (auto row = newIndex.row(); row >= 0; --row) {
+        newIndex = model()->index(row, 0);
+        QString id = newIndex.data(eMyMoney::Model::IdRole).toString();
+        // skip the empty transaction at the end of a ledger if
+        // the movement is not the down arrow
+        if ((id.isEmpty() || id.endsWith('-')) && (cursorAction != MoveDown)) {
+            continue;
+        }
+        if ((newIndex.flags() & (Qt::ItemIsSelectable | Qt::ItemIsEnabled)) == (Qt::ItemIsSelectable | Qt::ItemIsEnabled)) {
+            return newIndex;
+        }
+    }
+    return {};
+}
+
 void SplitView::currentChanged(const QModelIndex& current, const QModelIndex& previous)
 {
     // qDebug() << "currentChanged";

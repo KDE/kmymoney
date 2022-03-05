@@ -143,6 +143,10 @@ protected:
     int sizeHintForColumn(int row) const final override;
     void keyPressEvent ( QKeyEvent* event ) override;
     bool viewportEvent(QEvent*) override;
+    /**
+     * Overridden to prevent moving to the end using End or PageDown to start the editor
+     */
+    QModelIndex moveCursor(CursorAction cursorAction, Qt::KeyboardModifiers modifiers) override;
 
 protected Q_SLOTS:
     void selectionChanged ( const QItemSelection& selected, const QItemSelection& deselected ) override;
