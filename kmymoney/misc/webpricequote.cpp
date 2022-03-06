@@ -280,6 +280,36 @@ bool WebPriceQuote::launchNative(const QString& _webID, const QString& _kmmID, c
                 arguments.clear();
                 arguments << QStringLiteral("-c");
                 arguments << url.toLocalFile();
+
+                /*
+                 * Adjust the LD_LIBRARY_PATH environment variable to exclude
+                 * the AppImage mount point so that external tools do not try
+                 * to use libs contained inside the AppImage
+                 */
+                auto environment = QProcessEnvironment::systemEnvironment();
+                auto ld_library_path = environment.value(QLatin1String("LD_LIBRARY_PATH"));
+                qDebug() << "WebPriceQuote::launchNative";
+                qDebug() << "LD_LIBRARY_PATH" << ld_library_path;
+                if (!ld_library_path.isEmpty()) {
+                    const auto appdir = environment.value(QLatin1String("APPDIR"));
+                    qDebug() << "APPDIR" << appdir;
+                    auto path_list = ld_library_path.split(QLatin1Char(':'));
+                    while (!path_list.isEmpty() && path_list.at(0).startsWith(appdir)) {
+                        path_list.removeAt(0);
+                        ld_library_path.clear();
+                        if (!path_list.isEmpty()) {
+                            ld_library_path = path_list.join(QLatin1Char(':'));
+                        }
+                        if (!ld_library_path.isEmpty()) {
+                            environment.insert(QLatin1String("LD_LIBRARY_PATH"), ld_library_path);
+                            qDebug() << "LD_LIBRARY_PATH" << ld_library_path;
+                        } else {
+                            environment.remove(QLatin1String("LD_LIBRARY_PATH"));
+                            qDebug() << "LD_LIBRARY_PATH removed";
+                        }
+                        d->m_filter.setProcessEnvironment(environment);
+                    }
+                }
             }
         }
         d->m_filter.setWebID(d->m_webID);
