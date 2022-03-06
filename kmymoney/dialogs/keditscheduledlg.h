@@ -73,7 +73,6 @@ private Q_SLOTS:
     void slotRemainingChanged(int);
     void slotEndDateChanged(const QDate& date);
     void slotPostDateChanged(const QDate& date);
-    void slotSetPaymentMethod(int);
     void slotFrequencyChanged(int item);
     void slotShowHelp();
     void slotOccurrenceMultiplierChanged(int mult);

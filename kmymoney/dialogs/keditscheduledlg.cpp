@@ -313,17 +313,6 @@ TransactionEditor* KEditScheduleDlg::startEdit()
         }
         editor->setup(d->m_tabOrderWidgets, d->m_schedule.account(), action);
 
-        // if it's not a check, then we need to clear
-        // a possibly assigned check number
-        if (d->m_schedule.paymentType() != Schedule::PaymentType::WriteChecque) {
-            QWidget* w = editor->haveWidget("number");
-            if (w) {
-                if (auto numberWidget = dynamic_cast<KMyMoneyLineEdit*>(w)) {
-                    numberWidget->loadText(QString());
-                }
-            }
-        }
-
         Q_ASSERT(!d->m_tabOrderWidgets.isEmpty());
 
         d->m_tabOrderWidgets.push_front(d->ui->m_paymentMethodEdit);
@@ -385,9 +374,6 @@ TransactionEditor* KEditScheduleDlg::startEdit()
             label->setText(i18n("Next due date"));
 
         d->m_editor = editor;
-        slotSetPaymentMethod((int)d->m_schedule.paymentType());
-
-        connect(d->ui->m_paymentMethodEdit, &KMyMoneyGeneralCombo::itemSelected, this, &KEditScheduleDlg::slotSetPaymentMethod);
         connect(editor, &TransactionEditor::operationTypeChanged, this, &KEditScheduleDlg::slotFilterPaymentType);
     }
 
@@ -678,20 +664,6 @@ void KEditScheduleDlg::slotPostDateChanged(const QDate& date)
             d->m_schedule.setEndDate(d->ui->m_FinalPaymentEdit->date());
             d->updateTransactionsRemaining();
         }
-    }
-}
-
-void KEditScheduleDlg::slotSetPaymentMethod(int item)
-{
-    Q_D(KEditScheduleDlg);
-    const bool isWriteCheck = item == (int)Schedule::PaymentType::WriteChecque;
-    if (auto numberEdit = dynamic_cast<KMyMoneyLineEdit*>(d->m_editor->haveWidget("number"))) {
-        numberEdit->setVisible(isWriteCheck);
-
-        // hiding the label does not work, because the label underneath will shine
-        // through. So we either write the label or a blank
-        if (auto label = dynamic_cast<QLabel *>(d->m_editor->haveWidget("number-label")))
-            label->setText(isWriteCheck ? i18n("Number") : QStringLiteral(" "));
     }
 }
 

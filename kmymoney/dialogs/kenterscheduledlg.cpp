@@ -307,12 +307,6 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
             if (w)
                 if (auto numberWidget = dynamic_cast<KMyMoneyLineEdit*>(w))
                     numberWidget->loadText(num);
-        } else {
-            // if it's not a check, then we need to clear
-            // a possibly assigned check number
-            if (w)
-                if (auto numberWidget = dynamic_cast<KMyMoneyLineEdit*>(w))
-                    numberWidget->loadText(QString());
         }
 
         Q_ASSERT(!d->m_tabOrderWidgets.isEmpty());
