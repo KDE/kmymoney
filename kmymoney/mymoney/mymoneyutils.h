@@ -9,20 +9,28 @@
 #ifndef MYMONEYUTILS_H
 #define MYMONEYUTILS_H
 
-#include <QString>
 #include "kmm_mymoney_export.h"
+
+// ----------------------------------------------------------------------------
+// QT Includes
+
+#include <QString>
+class QDate;
+class QProcess;
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
+// ----------------------------------------------------------------------------
+// Project Includes
 
 #include "mymoneyenums.h"
 
+class MyMoneyAccount;
 class MyMoneyMoney;
 class MyMoneySecurity;
-class MyMoneyAccount;
-class MyMoneyTransaction;
 class MyMoneySplit;
-class QDate;
-class QString;
-
-//class that has utility functions to use throughout the application.
+class MyMoneyTransaction;
 
 typedef enum {
     NoWarning = 0,
@@ -105,6 +113,8 @@ KMM_MYMONEY_EXPORT modifyTransactionWarnLevel_t transactionWarnLevel(const QStri
 KMM_MYMONEY_EXPORT modifyTransactionWarnLevel_t transactionWarnLevel(const QStringList& transactionIds);
 
 KMM_MYMONEY_EXPORT bool isRunningAsAppImage();
+
+KMM_MYMONEY_EXPORT void removeAppImagePathFromLinkLoaderLibPath(QProcess* process);
 }
 
 #endif

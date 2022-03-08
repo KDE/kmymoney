@@ -3368,11 +3368,15 @@ void KMyMoneyApp::slotBackupFile()
 #else
             // If we don't have to mount a device, we just issue
             // a dummy command to start the copy operation
+
+            // make sure to fix the LD_LIBRARY_PATH
+            // to not include APPDIR subdirectories
+            MyMoneyUtils::removeAppImagePathFromLinkLoaderLibPath(&d->m_proc);
+
             d->m_proc.setProgram("true");
             d->m_proc.start();
 #endif
         }
-
     }
 
     delete backupDlg;
@@ -3383,6 +3387,11 @@ void KMyMoneyApp::slotBackupMount()
     progressCallback(0, 300, i18n("Mounting %1", d->m_mountpoint));
     d->m_proc.setProgram("mount");
     d->m_proc << d->m_mountpoint;
+
+    // make sure to fix the LD_LIBRARY_PATH
+    // to not include APPDIR subdirectories
+    MyMoneyUtils::removeAppImagePathFromLinkLoaderLibPath(&d->m_proc);
+
     d->m_proc.start();
 }
 
@@ -3423,6 +3432,10 @@ bool KMyMoneyApp::slotBackupWriteFile()
 #else
     d->m_proc << "cp" << "-f";
     d->m_proc << d->m_storageInfo.url.toLocalFile() << backupfile;
+
+    // make sure to fix the LD_LIBRARY_PATH
+    // to not include APPDIR subdirectories
+    MyMoneyUtils::removeAppImagePathFromLinkLoaderLibPath(&d->m_proc);
 #endif
     d->m_backupState = BACKUP_COPYING;
     qDebug() << "Backup cmd:" << d->m_proc.program();
@@ -3437,6 +3450,11 @@ void KMyMoneyApp::slotBackupUnmount()
     d->m_proc.setProgram("umount");
     d->m_proc << d->m_mountpoint;
     d->m_backupState = BACKUP_UNMOUNTING;
+
+    // make sure to fix the LD_LIBRARY_PATH
+    // to not include APPDIR subdirectories
+    MyMoneyUtils::removeAppImagePathFromLinkLoaderLibPath(&d->m_proc);
+
     d->m_proc.start();
 }
 

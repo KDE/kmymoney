@@ -13,6 +13,7 @@
 
 #include <QDate>
 #include <QLocale>
+#include <QProcess>
 #include <QRegularExpression>
 
 // ----------------------------------------------------------------------------
@@ -280,4 +281,34 @@ QString MyMoneyUtils::convertRegularExpressionToWildcard(const QString& pattern)
         ++pos;
     }
     return rc;
+}
+
+void MyMoneyUtils::removeAppImagePathFromLinkLoaderLibPath(QProcess* process)
+{
+    /*
+     * Adjust the LD_LIBRARY_PATH environment variable to exclude
+     * the AppImage mount point so that external tools do not try
+     * to use libs contained inside the AppImage
+     */
+    if (isRunningAsAppImage()) {
+        auto environment = QProcessEnvironment::systemEnvironment();
+        auto ld_library_path = environment.value(QLatin1String("LD_LIBRARY_PATH"));
+        if (!ld_library_path.isEmpty()) {
+            const auto appdir = environment.value(QLatin1String("APPDIR"));
+            auto path_list = ld_library_path.split(QLatin1Char(':'));
+            while (!path_list.isEmpty() && path_list.at(0).startsWith(appdir)) {
+                path_list.removeAt(0);
+                ld_library_path.clear();
+                if (!path_list.isEmpty()) {
+                    ld_library_path = path_list.join(QLatin1Char(':'));
+                }
+                if (!ld_library_path.isEmpty()) {
+                    environment.insert(QLatin1String("LD_LIBRARY_PATH"), ld_library_path);
+                } else {
+                    environment.remove(QLatin1String("LD_LIBRARY_PATH"));
+                }
+                process->setProcessEnvironment(environment);
+            }
+        }
+    }
 }

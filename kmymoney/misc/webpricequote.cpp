@@ -38,6 +38,7 @@
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
+#include "mymoneyutils.h"
 
 Q_DECLARE_LOGGING_CATEGORY(WEBPRICEQUOTE)
 Q_LOGGING_CATEGORY(WEBPRICEQUOTE, "kmymoney_webpricequote")
@@ -281,35 +282,9 @@ bool WebPriceQuote::launchNative(const QString& _webID, const QString& _kmmID, c
                 arguments << QStringLiteral("-c");
                 arguments << url.toLocalFile();
 
-                /*
-                 * Adjust the LD_LIBRARY_PATH environment variable to exclude
-                 * the AppImage mount point so that external tools do not try
-                 * to use libs contained inside the AppImage
-                 */
-                auto environment = QProcessEnvironment::systemEnvironment();
-                auto ld_library_path = environment.value(QLatin1String("LD_LIBRARY_PATH"));
-                qDebug() << "WebPriceQuote::launchNative";
-                qDebug() << "LD_LIBRARY_PATH" << ld_library_path;
-                if (!ld_library_path.isEmpty()) {
-                    const auto appdir = environment.value(QLatin1String("APPDIR"));
-                    qDebug() << "APPDIR" << appdir;
-                    auto path_list = ld_library_path.split(QLatin1Char(':'));
-                    while (!path_list.isEmpty() && path_list.at(0).startsWith(appdir)) {
-                        path_list.removeAt(0);
-                        ld_library_path.clear();
-                        if (!path_list.isEmpty()) {
-                            ld_library_path = path_list.join(QLatin1Char(':'));
-                        }
-                        if (!ld_library_path.isEmpty()) {
-                            environment.insert(QLatin1String("LD_LIBRARY_PATH"), ld_library_path);
-                            qDebug() << "LD_LIBRARY_PATH" << ld_library_path;
-                        } else {
-                            environment.remove(QLatin1String("LD_LIBRARY_PATH"));
-                            qDebug() << "LD_LIBRARY_PATH removed";
-                        }
-                        d->m_filter.setProcessEnvironment(environment);
-                    }
-                }
+                // make sure to fix the LD_LIBRARY_PATH
+                // to not include APPDIR subdirectories
+                MyMoneyUtils::removeAppImagePathFromLinkLoaderLibPath(&d->m_filter);
             }
         }
         d->m_filter.setWebID(d->m_webID);
@@ -414,6 +389,10 @@ bool WebPriceQuote::launchFinanceQuote(const QString& _webID, const QString& _km
     arguments << m_financeQuoteScriptPath << FQSource << KShell::quoteArg(_webID);
     d->m_filter.setWebID(d->m_webID);
     emit status(i18nc("Executing 'script' 'online source' 'investment symbol' ", "Executing %1 %2 %3...", m_financeQuoteScriptPath, FQSource, _webID));
+
+    // make sure to fix the LD_LIBRARY_PATH
+    // to not include APPDIR subdirectories
+    MyMoneyUtils::removeAppImagePathFromLinkLoaderLibPath(&d->m_filter);
 
     d->m_filter.setProcessChannelMode(QProcess::MergedChannels);
     d->m_filter.start(QStringLiteral("perl"), arguments);
@@ -1070,6 +1049,11 @@ void FinanceQuoteProcess::launch(const QString& scriptPath)
     QStringList arguments;
     arguments << scriptPath << QStringLiteral("-l");
     setProcessChannelMode(QProcess::SeparateChannels);
+
+    // make sure to fix the LD_LIBRARY_PATH
+    // to not include APPDIR subdirectories
+    MyMoneyUtils::removeAppImagePathFromLinkLoaderLibPath(this);
+
     start(QStringLiteral("perl"), arguments);
     if (! waitForStarted()) qWarning("Unable to start FQ script");
     return;
