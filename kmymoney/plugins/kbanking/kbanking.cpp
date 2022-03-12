@@ -367,8 +367,8 @@ void KBanking::createActions()
         img = img.scaled(300, 300, Qt::KeepAspectRatio);
         dlg->setPicture(QPixmap::fromImage(img));
         dlg->setInfoText("<html><h1>Test Graphic for debugging</h1><p>The encoded data is</p><p>unknown</p></html>");
-        connect(dlg, &QDialog::accepted, dlg, &chipTanDialog::deleteLater);
-        connect(dlg, &QDialog::rejected, dlg, &chipTanDialog::deleteLater);
+        connect(dlg, &QDialog::accepted, dlg, &photoTanDialog::deleteLater);
+        connect(dlg, &QDialog::rejected, dlg, &photoTanDialog::deleteLater);
         dlg->show();
     });
     d->actions.insert(openPhotoTanDialog);
