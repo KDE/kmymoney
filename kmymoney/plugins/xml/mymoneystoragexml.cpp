@@ -84,7 +84,7 @@ class MyMoneyStorageXML::Private
 {
     friend class MyMoneyStorageXML;
 public:
-    Private() : m_nextTransactionID(0) {}
+    Private() = default;
 
     QMap<QString, MyMoneyInstitution> iList;
     QMap<QString, MyMoneyAccount> aList;
@@ -102,15 +102,6 @@ public:
 
     QString           m_fromSecurity;
     QString           m_toSecurity;
-    unsigned long     m_nextTransactionID;
-    static const int  TRANSACTION_ID_SIZE = 18;
-
-    QString nextTransactionID() {
-        QString id;
-        id.setNum(++m_nextTransactionID);
-        id = 'T' + id.rightJustified(TRANSACTION_ID_SIZE, '0');
-        return id;
-    }
 };
 
 namespace test {
@@ -334,8 +325,7 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
                 if (s == nodeName(Node::Transaction)) {
                     auto t0 = readTransaction(m_baseNode);
                     if (!t0.id().isEmpty()) {
-                        MyMoneyTransaction t1(m_reader->d->nextTransactionID(), t0);
-                        m_reader->d->tList[t1.uniqueSortKey()] = t1;
+                        m_reader->d->tList[t0.uniqueSortKey()] = t0;
                     }
                     m_reader->signalProgress(++m_elementCount, 0);
                 } else if (s == nodeName(Node::Account)) {
