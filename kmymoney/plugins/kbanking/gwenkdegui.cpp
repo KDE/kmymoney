@@ -63,19 +63,22 @@ int gwenKdeGui::execDialog(GWEN_DIALOG *dlg, GWEN_UNUSED uint32_t guiid)
 }
 
 int gwenKdeGui::getPasswordText(uint32_t flags,
-                                const char *token,
-                                const char *title,
-                                const char *text,
-                                char *buffer,
+                                const char* token,
+                                const char* title,
+                                const char* text,
+                                char* buffer,
                                 int minLen,
                                 int maxLen,
                                 GWEN_GUI_PASSWORD_METHOD methodId,
-                                GWEN_DB_NODE *methodParams,
-                                uint32_t guiid) {
-    return QT5_Gui::getPassword(flags, token, title, text, buffer, minLen, maxLen, methodId, methodParams, guiid);
+                                GWEN_DB_NODE* methodParams,
+                                uint32_t guiid)
+{
+    // convert HTML linebreaks into regular ones
+    QString txt = QString::fromUtf8(text);
+    txt.replace(QLatin1String("<br>"), QLatin1String("\n"));
+
+    return QT5_Gui::getPassword(flags, token, title, txt.toUtf8(), buffer, minLen, maxLen, methodId, methodParams, guiid);
 }
-
-
 
 int gwenKdeGui::getPasswordHhd(uint32_t /*flags*/,
                                const char * /*token*/,
