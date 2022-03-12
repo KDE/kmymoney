@@ -56,42 +56,42 @@ AB_ACCOUNT_SPEC *KBAccountListViewItem::getAccount()
 void KBAccountListViewItem::_populate()
 {
     QString tmp;
-    int i;
+    int column;
 
     assert(_account);
 
-    i = 0;
+    column = 0;
 
     // unique id
-    setText(i++, QString::number(AB_AccountSpec_GetUniqueId(_account)));
+    setText(column++, QString::number(AB_AccountSpec_GetUniqueId(_account)));
 
     // bank code
-    setText(i++, QString::fromUtf8(AB_AccountSpec_GetBankCode(_account)));
+    setText(column++, QString::fromUtf8(AB_AccountSpec_GetBankCode(_account)));
 
     // bank name
 //  tmp = AB_Account_GetBankName(_account);
 //  if (tmp.isEmpty())
     tmp = i18nc("replacement for institution or account w/o name", "(unnamed)");
-    setText(i++, tmp);
+    setText(column++, tmp);
 
     // account id
-    setText(i++, QString::fromUtf8(AB_AccountSpec_GetAccountNumber(_account)));
+    setText(column++, QString::fromUtf8(AB_AccountSpec_GetAccountNumber(_account)));
 
     // account name
     tmp = QString::fromUtf8(AB_AccountSpec_GetAccountName(_account));
     if (tmp.isEmpty())
         tmp = i18nc("replacement for institution or account w/o name", "(unnamed)");
-    setText(i++, tmp);
+    setText(column++, tmp);
 
     tmp = QString::fromUtf8(AB_AccountSpec_GetOwnerName(_account));
     if (tmp.isEmpty())
         tmp = "";
-    setText(i++, tmp);
+    setText(column++, tmp);
 
     tmp = QString::fromUtf8(AB_AccountSpec_GetBackendName(_account));
     if (tmp.isEmpty())
         tmp = i18nc("replacement for institution or account w/o name", "(unnamed)");
-    setText(i++, tmp);
+    setText(column, tmp);
 }
 
 bool KBAccountListViewItem::operator< (const QTreeWidgetItem & other) const

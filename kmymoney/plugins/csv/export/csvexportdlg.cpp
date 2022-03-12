@@ -134,7 +134,6 @@ void CsvExportDlg::checkData(const QString& accountName)
     QDate earliestDate(QDate(2500, 01, 01));
     QDate latestDate(QDate(1900, 01, 01));
     QList<MyMoneyTransaction> listTrans;
-    QList<MyMoneyTransaction>::Iterator itTrans;
     MyMoneyAccount account;
     MyMoneyFile* file = MyMoneyFile::instance();
 

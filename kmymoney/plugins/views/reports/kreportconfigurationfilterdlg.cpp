@@ -145,7 +145,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
         d->ui->m_criteriaTab->insertTab(tabNr++, d->m_tabChart, i18n("Chart"));
 
         d->m_tabRange = new ReportTabRange(d->ui->m_criteriaTab);
-        d->ui->m_criteriaTab->insertTab(tabNr++, d->m_tabRange, i18n("Range"));
+        d->ui->m_criteriaTab->insertTab(tabNr, d->m_tabRange, i18n("Range"));
 
         d->m_dateRange = d->m_tabRange->m_dateRange;
 

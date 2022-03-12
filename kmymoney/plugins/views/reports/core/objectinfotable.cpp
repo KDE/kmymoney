@@ -156,13 +156,6 @@ void ObjectInfoTable::constructScheduleTable()
         ReportAccount account(schedule.account());
 
         if (m_config.includes(account))  {
-            //get fraction for account
-            int fraction = account.fraction();
-
-            //use base currency fraction if not initialized
-            if (fraction == -1)
-                fraction = MyMoneyFile::instance()->baseCurrency().smallestAccountFraction();
-
             TableRow scheduleRow;
 
             //convert to base currency if needed

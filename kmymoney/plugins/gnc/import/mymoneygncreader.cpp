@@ -2155,7 +2155,6 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
         // if an end date was specified, use it, otherwise if the input file had a number
         // of occurs remaining, work out the end date
         sc.setEndDate(gsc->endDate());
-        numOccurs = gsc->numOccurs().toInt();
         remOccurs = gsc->remOccurs().toInt();
         if ((sc.endDate() == QDate()) && (remOccurs > 0)) {
             endDate = sc.lastPayment();

@@ -1812,7 +1812,6 @@ void QueryTable::constructSplitsTable()
         //the account of the beginning splits
         ReportAccount myBeginAcc((*myBegin).accountId());
 
-        bool include_me = true;
         QString a_fullname;
         QString a_memo;
         int pass = 1;
@@ -1860,7 +1859,7 @@ void QueryTable::constructSplitsTable()
                 qA[ctInvestAccount] = splitAcc.parent().name();
             }
 
-            include_me = m_config.includes(splitAcc);
+            const auto include_me = m_config.includes(splitAcc);
             a_fullname = splitAcc.fullName();
             a_memo = (*it_split).memo();
 

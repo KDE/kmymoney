@@ -551,7 +551,6 @@ QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
         d->m_margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
         d->m_lineHeight = opt.fontMetrics.lineSpacing();
     }
-    int rows = 1;
 
     if(index.isValid()) {
         // check if we are showing the edit widget
@@ -571,7 +570,7 @@ QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
 
     const auto settings = LedgerViewSettings::instance();
     if (((option.state & QStyle::State_Selected) && (settings->showLedgerLens())) || settings->showTransactionDetails()) {
-        rows = index.data(eMyMoney::Model::JournalSplitMaxLinesCountRole).toInt();
+        auto rows = index.data(eMyMoney::Model::JournalSplitMaxLinesCountRole).toInt();
         if (rows == 0) {
             // Scan certain rows which may show multiple lines in a table row
             QSet<int> columns = {JournalModel::Column::Detail, JournalModel::Column::Deposit, JournalModel::Column::Payment};

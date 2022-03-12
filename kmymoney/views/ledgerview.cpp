@@ -1293,9 +1293,8 @@ void LedgerView::setSelectedJournalEntries(const QStringList& journalEntryIds)
     for (const auto& id : journalEntryIds) {
         if (id.isEmpty())
             continue;
-        int row = -1;
         const auto baseIdx = journalModel->indexById(id);
-        row = journalModel->mapFromBaseSource(model(), baseIdx).row();
+        auto row = journalModel->mapFromBaseSource(model(), baseIdx).row();
 
         // the baseIdx may point to a split in a different account which
         // we don't see here. In this case, we scan the journal entries

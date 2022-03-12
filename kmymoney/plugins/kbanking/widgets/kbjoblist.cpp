@@ -55,14 +55,14 @@ AB_TRANSACTION *KBJobListViewItem::getJob()
 void KBJobListViewItem::_populate()
 {
     QString tmp;
-    int i;
+    int column;
 
     assert(_job);
 
-    i = 0;
+    column = 0;
 
     // job id
-    setText(i++, QString::number(AB_Transaction_GetIdForApplication(_job)));
+    setText(column++, QString::number(AB_Transaction_GetIdForApplication(_job)));
 
     // job type
     switch (AB_Transaction_GetCommand(_job)) {
@@ -82,19 +82,19 @@ void KBJobListViewItem::_populate()
         tmp = i18nc("Unknown job type", "(unknown)");
         break;
     }
-    setText(i++, tmp);
+    setText(column++, tmp);
 
     // bank name
     tmp = AB_Transaction_GetLocalBankCode(_job);
     if (tmp.isEmpty())
         tmp = i18nc("Unknown bank code", "(unknown)");
-    setText(i++, tmp);
+    setText(column++, tmp);
 
     // account name
     tmp = AB_Transaction_GetLocalAccountNumber(_job);
     if (tmp.isEmpty())
         tmp = i18nc("Unknown account number", "(unknown)");
-    setText(i++, tmp);
+    setText(column++, tmp);
 
     // status
     switch (AB_Transaction_GetStatus(_job)) {
@@ -136,7 +136,7 @@ void KBJobListViewItem::_populate()
         tmp = i18nc("Status of the job", "(unknown)");
         break;
     }
-    setText(i++, tmp);
+    setText(column, tmp);
 }
 
 
