@@ -686,11 +686,16 @@ void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _kmmID, const QS
 
             // latest price could be in the last or in the first row
             MyMoneyStatement::Price priceClass;
-            if (st.m_listPrices.first().m_date > st.m_listPrices.last().m_date)
+            QDate firstEntry;
+            QDate lastEntry;
+            if (st.m_listPrices.first().m_date > st.m_listPrices.last().m_date) {
                 priceClass = st.m_listPrices.first();
-            else
+                firstEntry = st.m_listPrices.last().m_date;
+            } else {
                 priceClass = st.m_listPrices.last();
-
+                firstEntry = st.m_listPrices.first().m_date;
+            }
+            lastEntry = priceClass.m_date;
             // update latest price in dialog if applicable
             auto latestDate = QDate::fromString(item->text(DATE_COL),Qt::ISODate);
             if (latestDate <= priceClass.m_date && priceClass.m_amount.isPositive()) {
@@ -698,7 +703,12 @@ void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _kmmID, const QS
                 item->setText(DATE_COL, priceClass.m_date.toString(Qt::ISODate));
                 item->setText(SOURCE_COL, priceClass.m_sourceName);
             }
-            logStatusMessage(i18n("Price for %1 updated (id %2)", _webID, _kmmID));
+            logStatusMessage(i18nc("Log message e.g. 'Prices for EUR > USD updated between 2001-01-01 and 2001-02-01 (id EUR USD)'",
+                                   "Prices for %1 updated between %3 and %4 (id %2)",
+                                   _webID,
+                                   _kmmID,
+                                   firstEntry.toString(Qt::ISODate),
+                                   lastEntry.toString(Qt::ISODate)));
             // make sure to make OK button available
         }
         d->ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
