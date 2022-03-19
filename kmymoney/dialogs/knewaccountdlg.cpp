@@ -44,6 +44,7 @@
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneymoney.h"
+#include "widgethintframe.h"
 
 using namespace eMyMoney;
 
@@ -177,6 +178,9 @@ public:
         ui->m_openingDateEdit->setDate(m_account.openingDate());
 
         handleOpeningBalanceCheckbox(m_account.currencyId());
+
+        // the filter buttons have no function here
+        ui->m_vatAccount->removeButtons();
 
         if (m_categoryEditor) {
             // get rid of the tabs that are not used for categories
@@ -389,6 +393,12 @@ public:
 
         q->connect(ui->m_qcomboboxInstitutions, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::activated), q, &KNewAccountDlg::slotLoadInstitutions);
 
+        frameCollection = new WidgetHintFrameCollection(q);
+        frameCollection->addFrame(new WidgetHintFrame(ui->accountNameEdit));
+        frameCollection->addFrame(new WidgetHintFrame(ui->m_vatRate));
+        frameCollection->addFrame(new WidgetHintFrame(ui->m_vatAccount));
+        frameCollection->addWidget(ui->buttonBox->button(QDialogButtonBox::Ok));
+
         QModelIndex parentIndex;
         if (!m_parentAccount.id().isEmpty()) {
             const auto baseIdx = model->indexById(m_parentAccount.id());
@@ -428,10 +438,6 @@ public:
         q->slotVatChanged(ui->m_vatCategory->isChecked());
         q->slotVatAssignmentChanged(ui->m_vatAssignment->isChecked());
         q->slotCheckFinished();
-
-        auto requiredFields = new KMandatoryFieldGroup(q);
-        requiredFields->setOkButton(ui->buttonBox->button(QDialogButtonBox::Ok)); // button to be enabled when all fields present
-        requiredFields->add(ui->accountNameEdit);
     }
 
     void loadKVP(const QString& key, AmountEdit* widget)
@@ -614,11 +620,12 @@ public:
         delete dialog;
     }
 
-    KNewAccountDlg*             q_ptr;
-    Ui::KNewAccountDlg*         ui;
-    MyMoneyAccount              m_account;
-    MyMoneyAccount              m_parentAccount;
-    AccountsProxyModel*         m_filterProxyModel;
+    KNewAccountDlg* q_ptr;
+    Ui::KNewAccountDlg* ui;
+    MyMoneyAccount m_account;
+    MyMoneyAccount m_parentAccount;
+    AccountsProxyModel* m_filterProxyModel;
+    WidgetHintFrameCollection* frameCollection;
 
     bool m_categoryEditor;
     bool m_isEditing;
@@ -916,38 +923,46 @@ void KNewAccountDlg::slotAccountTypeChanged(int index)
 void KNewAccountDlg::slotCheckFinished()
 {
     Q_D(KNewAccountDlg);
-    auto showButton = true;
 
-    if (d->ui->accountNameEdit->text().length() == 0) {
-        showButton = false;
+    WidgetHintFrame::hide(d->ui->accountNameEdit);
+    WidgetHintFrame::hide(d->ui->m_vatRate);
+    WidgetHintFrame::hide(d->ui->m_vatAccount);
+
+    const QString emptyAccountName(MyMoneyAccount::accountSeparator() + MyMoneyAccount::accountSeparator());
+    if (d->ui->accountNameEdit->text().isEmpty()) {
+        WidgetHintFrame::show(d->ui->accountNameEdit, i18nc("@info:tooltip Hint to provide name", "Please provide a name for the new category or account."));
+
+    } else if (d->ui->accountNameEdit->text().contains(emptyAccountName)) {
+        WidgetHintFrame::show(
+            d->ui->accountNameEdit,
+            i18nc("@info:tooltip %1 contains invalid character combination", "You cannot create an account or category that contains %1 in the name.")
+                .arg(emptyAccountName));
     }
 
-    if (d->ui->m_vatCategory->isChecked() && d->ui->m_vatRate->value() <= MyMoneyMoney()) {
-        showButton = false;
+    if (d->ui->m_vatCategory->isChecked() && ((d->ui->m_vatRate->value() <= MyMoneyMoney()) || (d->ui->m_vatRate->value() >= MyMoneyMoney(100)))) {
+        WidgetHintFrame::show(
+            d->ui->m_vatRate,
+            i18nc("@info:tooltip Hint to provide VAT percentage in range", "Please provide a percentage greater than zero and less than 100."));
+
     } else {
-        if (d->ui->m_vatAssignment->isChecked() && d->ui->m_vatAccount->selectedItems().isEmpty())
-            showButton = false;
+        if (d->ui->m_vatAssignment->isChecked() && d->ui->m_vatAccount->selectedItems().isEmpty()) {
+            WidgetHintFrame::show(d->ui->m_vatAccount, i18nc("@info:tooltip Hint to provide category to assign VAT", "Please select a category for the VAT."));
+        }
     }
-    d->ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(showButton);
 }
 
 void KNewAccountDlg::slotVatChanged(bool state)
 {
     Q_D(KNewAccountDlg);
-    if (state) {
-        d->ui->m_vatCategoryFrame->show();
-        d->ui->m_vatAssignmentFrame->hide();
-    } else {
-        d->ui->m_vatCategoryFrame->hide();
-        if (!d->m_account.isAssetLiability()) {
-            d->ui->m_vatAssignmentFrame->show();
-        }
-    }
+    d->ui->m_vatPercentageFrame->setEnabled(state);
+    d->ui->m_vatAssignmentFrame->setDisabled(state);
+    d->ui->m_vatAssignmentFrame->setVisible(!d->m_account.isAssetLiability());
 }
 
 void KNewAccountDlg::slotVatAssignmentChanged(bool state)
 {
     Q_D(KNewAccountDlg);
+    d->ui->m_vatCategoryFrame->setDisabled(state);
     d->ui->m_vatAccount->setEnabled(state);
     d->ui->m_amountGroupBox->setEnabled(state);
 }

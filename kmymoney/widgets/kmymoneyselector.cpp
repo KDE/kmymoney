@@ -325,7 +325,7 @@ void KMyMoneySelector::selectedItems(QStringList& list) const
     list.clear();
     if (d->m_selMode == QTreeWidget::SingleSelection) {
         QTreeWidgetItem* it_c = d->m_treeWidget->currentItem();
-        if (it_c != 0)
+        if (it_c != 0 && it_c->isSelected())
             list << it_c->data(0, (int)Selector::Role::Id).toString();
     } else {
         QTreeWidgetItem* rootItem = d->m_treeWidget->invisibleRootItem();
