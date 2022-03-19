@@ -30,6 +30,7 @@
 #include <QDir>
 #include <QElapsedTimer>
 #include <QFileDialog>
+#include <QFlags>
 #include <QHBoxLayout>
 #include <QIcon>
 #include <QInputDialog>
@@ -3230,7 +3231,7 @@ void KMyMoneyApp::slotSaveAccountTemplates()
 
             TemplateWriter templateWriter(this);
             if (!templateWriter.exportTemplate(tmpl, QUrl::fromLocalFile(newName))) {
-                KMessageBox::error(this, templateWriter.errorMessage(), i18nc("@title:window Error display", "Template export"), 0);
+                KMessageBox::error(this, templateWriter.errorMessage(), i18nc("@title:window Error display", "Template export"), QFlags<KMessageBox::Option>());
             }
         }
         delete dlg;
