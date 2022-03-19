@@ -224,6 +224,11 @@
     <binary>kmymoney</binary>
   </provides>
   <content_rating type="oars-1.1"/>
+  <launchable type="desktop-id">org.kde.kmymoney.desktop</launchable>
+  <categories>
+    <category>Office</category>
+    <category>Finance</category>
+  </categories>
   <custom>
     <value key="KDE::forum">69</value>
     <value key="KDE::mailinglist">kmymoney@kde.org</value>
