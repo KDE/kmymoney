@@ -20,8 +20,8 @@
 class WidgetHintFrameCollection::Private
 {
 public:
-    QList<QWidget*>           widgetList;
-    QList<WidgetHintFrame*>   frameList;
+    QList<QWidget*> widgetList;
+    QList<WidgetHintFrame*> frameList;
 };
 
 WidgetHintFrameCollection::WidgetHintFrameCollection(QObject* parent)
@@ -37,16 +37,18 @@ WidgetHintFrameCollection::~WidgetHintFrameCollection()
 
 void WidgetHintFrameCollection::addFrame(WidgetHintFrame* frame)
 {
-    if(!d->frameList.contains(frame)) {
+    if (!d->frameList.contains(frame)) {
         connect(frame, &QObject::destroyed, this, &WidgetHintFrameCollection::frameDestroyed);
-        connect(frame, &WidgetHintFrame::changed, this, [=] { QMetaObject::invokeMethod(this, "updateWidgets", Qt::QueuedConnection); });
+        connect(frame, &WidgetHintFrame::changed, this, [=] {
+            QMetaObject::invokeMethod(this, "updateWidgets", Qt::QueuedConnection);
+        });
         d->frameList.append(frame);
     }
 }
 
 void WidgetHintFrameCollection::addWidget(QWidget* w)
 {
-    if(!d->widgetList.contains(w)) {
+    if (!d->widgetList.contains(w)) {
         d->widgetList.append(w);
         updateWidgets();
     }
@@ -60,8 +62,8 @@ void WidgetHintFrameCollection::removeWidget(QWidget* w)
 
 void WidgetHintFrameCollection::frameDestroyed(QObject* o)
 {
-    WidgetHintFrame* frame = qobject_cast< WidgetHintFrame* >(o);
-    if(frame) {
+    WidgetHintFrame* frame = qobject_cast<WidgetHintFrame*>(o);
+    if (frame) {
         d->frameList.removeAll(frame);
     }
 }
@@ -69,30 +71,24 @@ void WidgetHintFrameCollection::frameDestroyed(QObject* o)
 void WidgetHintFrameCollection::updateWidgets()
 {
     bool enabled = true;
-    Q_FOREACH(WidgetHintFrame* frame, d->frameList) {
+    for (const auto& frame : d->frameList) {
         enabled &= !frame->isErroneous();
-        if(!enabled) {
+        if (!enabled) {
             break;
         }
     }
 
-    Q_FOREACH(QWidget* w, d->widgetList) {
+    for (auto& w : d->widgetList) {
         w->setEnabled(enabled);
     }
 }
 
-
-
-
-
-
-
 class WidgetHintFrame::Private
 {
 public:
-    QWidget*    editWidget;
-    bool        status;
-    FrameStyle  style;
+    QWidget* editWidget;
+    bool status;
+    FrameStyle style;
 };
 
 WidgetHintFrame::WidgetHintFrame(QWidget* editWidget, FrameStyle style, Qt::WindowFlags f)
@@ -102,7 +98,7 @@ WidgetHintFrame::WidgetHintFrame(QWidget* editWidget, FrameStyle style, Qt::Wind
     d->editWidget = 0;
     d->status = false;
     d->style = style;
-    switch(style) {
+    switch (style) {
     case Error:
         setStyleSheet("QFrame { background-color: none; padding: 1px; border: 2px solid red; border-radius: 4px; }");
         break;
@@ -128,36 +124,35 @@ static WidgetHintFrame* frame(QWidget* editWidget)
 {
     QList<WidgetHintFrame*> allErrorFrames = editWidget->parentWidget()->findChildren<WidgetHintFrame*>();
     QList<WidgetHintFrame*>::const_iterator it;
-    foreach(WidgetHintFrame* f, allErrorFrames) {
-        if(f->editWidget() == editWidget) {
+    for (const auto& f : allErrorFrames) {
+        if (f->editWidget() == editWidget) {
             return f;
         }
     }
     return 0;
 }
 
-
 void WidgetHintFrame::show(QWidget* editWidget, const QString& tooltip)
 {
     WidgetHintFrame* f = frame(editWidget);
-    if(f) {
+    if (f) {
         f->QWidget::show();
         f->d->status = true;
         emit f->changed();
     }
-    if(!tooltip.isNull())
+    if (!tooltip.isNull())
         editWidget->setToolTip(tooltip);
 }
 
 void WidgetHintFrame::hide(QWidget* editWidget, const QString& tooltip)
 {
     WidgetHintFrame* f = frame(editWidget);
-    if(f) {
+    if (f) {
         f->QWidget::hide();
         f->d->status = false;
         emit f->changed();
     }
-    if(!tooltip.isNull())
+    if (!tooltip.isNull())
         editWidget->setToolTip(tooltip);
 }
 
@@ -168,7 +163,7 @@ QWidget* WidgetHintFrame::editWidget() const
 
 void WidgetHintFrame::detachFromWidget()
 {
-    if(d->editWidget) {
+    if (d->editWidget) {
         d->editWidget->removeEventFilter(this);
         d->editWidget = 0;
     }
@@ -178,13 +173,13 @@ void WidgetHintFrame::attachToWidget(QWidget* w)
 {
     // detach first
     detachFromWidget();
-    if(w) {
+    if (w) {
         d->editWidget = w;
         // make sure we receive changes in position and size
         w->installEventFilter(this);
         // place frame around widget
         move(w->pos() - QPoint(2, 2));
-        resize(w->width()+4, w->height()+4);
+        resize(w->width() + 4, w->height() + 4);
         // make sure widget is on top of frame
         w->raise();
         // and hide frame for now
@@ -194,10 +189,10 @@ void WidgetHintFrame::attachToWidget(QWidget* w)
 
 bool WidgetHintFrame::eventFilter(QObject* o, QEvent* e)
 {
-    if(o == d->editWidget) {
+    if (o == d->editWidget) {
         QMoveEvent* mev = 0;
         QResizeEvent* sev = 0;
-        switch(e->type()) {
+        switch (e->type()) {
         case QEvent::EnabledChange:
         case QEvent::Hide:
         case QEvent::Show:
@@ -214,7 +209,7 @@ bool WidgetHintFrame::eventFilter(QObject* o, QEvent* e)
 
         case QEvent::Resize:
             sev = static_cast<QResizeEvent*>(e);
-            resize(sev->size().width()+4, sev->size().height()+4);
+            resize(sev->size().width() + 4, sev->size().height() + 4);
             break;
         default:
             break;

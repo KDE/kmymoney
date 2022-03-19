@@ -41,7 +41,6 @@ set(libviews_a_SOURCES
   splitview.cpp
   splitdialog.cpp
   splitdelegate.cpp
-  widgethintframe.cpp
   tabordereditor.cpp
 )
 

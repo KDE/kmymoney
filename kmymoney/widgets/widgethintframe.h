@@ -6,6 +6,8 @@
 #ifndef WIDGETHINTFRAME_H
 #define WIDGETHINTFRAME_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -18,7 +20,7 @@ class QWidget;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class WidgetHintFrame : public QFrame
+class KMM_BASE_WIDGETS_EXPORT WidgetHintFrame : public QFrame
 {
     Q_OBJECT
 
@@ -64,10 +66,10 @@ Q_SIGNALS:
 
 private:
     class Private;
-    Private * const d;
+    Private* const d;
 };
 
-class WidgetHintFrameCollection : public QObject
+class KMM_BASE_WIDGETS_EXPORT WidgetHintFrameCollection : public QObject
 {
     Q_OBJECT
 public:
@@ -87,8 +89,7 @@ Q_SIGNALS:
 
 private:
     class Private;
-    Private * const d;
+    Private* const d;
 };
 
 #endif // WIDGETHINTFRAME_H
-

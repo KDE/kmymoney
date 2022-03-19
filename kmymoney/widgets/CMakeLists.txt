@@ -65,6 +65,7 @@ set(kmm_base_widgets_SOURCES
   styleditemdelegateforwarder.cpp
   tabbar.cpp
   kmymoneytreeview.cpp
+  widgethintframe.cpp
   )
 
 set(kmm_widgets_SOURCES
