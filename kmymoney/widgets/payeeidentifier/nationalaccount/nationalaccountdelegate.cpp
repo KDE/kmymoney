@@ -92,7 +92,7 @@ QSize nationalAccountDelegate::sizeHint(const QStyleOptionViewItem& option, cons
     const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin) + 1;
 
     // An iban has maximal 32 characters, so national accounts should be shorter than 28
-    return QSize((28)*metrics.width(QLatin1Char('X')) + 2*margin, 3*metrics.lineSpacing() + metrics.leading() + 2*margin);
+    return QSize((28) * metrics.horizontalAdvance(QLatin1Char('X')) + 2 * margin, 3 * metrics.lineSpacing() + metrics.leading() + 2 * margin);
 }
 
 QWidget* nationalAccountDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const

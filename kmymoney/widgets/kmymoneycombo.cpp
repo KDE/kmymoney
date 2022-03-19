@@ -355,7 +355,7 @@ QSize KMyMoneyCombo::sizeHint() const
     int i, w;
     QFontMetrics fm = fontMetrics();
 
-    int maxW = count() ? 18 : 7 * fm.width(QChar('x')) + 18;
+    int maxW = count() ? 18 : 7 * fm.horizontalAdvance(QChar('x')) + 18;
     int maxH = qMax(fm.lineSpacing(), 14) + 2;
 
     w = selector()->optimizedWidth();

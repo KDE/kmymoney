@@ -70,7 +70,7 @@ void KMyMoneyWizard::addStep(const QString& text)
     QFont font(step->font());
     font.setBold(true);
     QFontMetrics fm(font);
-    int w = fm.width(text) + 30;
+    int w = fm.horizontalAdvance(text) + 30;
     if (d->m_stepFrame->minimumWidth() < w) {
         d->m_stepFrame->setMinimumWidth(w);
     }

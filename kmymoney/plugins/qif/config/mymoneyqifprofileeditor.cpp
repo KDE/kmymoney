@@ -228,7 +228,7 @@ void MyMoneyQifProfileEditor::loadProfileListFromConfig()
         slotLoadProfileFromConfig(list[0]);
     }
     for (int i = 0; i < list.count(); ++i) {
-        int nw = fontMetrics.width(list[i]) + 10;
+        int nw = fontMetrics.horizontalAdvance(list[i]) + 10;
         w = qMax(w, nw);
     }
     w = qMin(w, 200);
