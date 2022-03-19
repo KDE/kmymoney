@@ -40,7 +40,7 @@ public:
         , m_inMakeCompletion(false)
     {
         m_q->setInsertPolicy(QComboBox::NoInsert);
-        m_q->setMinimumWidth(m_q->fontMetrics().width(QLatin1Char('W')) * 15);
+        m_q->setMinimumWidth(m_q->fontMetrics().horizontalAdvance(QLatin1Char('W')) * 15);
         m_q->setMaxVisibleItems(15);
     }
 

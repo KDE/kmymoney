@@ -90,7 +90,7 @@ void KMyMoneyCompletion::adjustSize(const int count)
     if (d->m_parent && w < d->m_parent->width())
         w = d->m_parent->width();
 
-    const int minimumWidth = fontMetrics().width(QLatin1Char('W')) * 15;
+    const int minimumWidth = fontMetrics().horizontalAdvance(QLatin1Char('W')) * 15;
     w = qMax(w, minimumWidth);
 
     int h = 0;

@@ -68,7 +68,8 @@ QSize bicItemDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
     const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin) + 1;
 
     // A bic has maximal 11 characters. So we guess, we want to display 11 characters. The name of the institution has to adapt to what is given
-    return QSize(metrics.width(QLatin1Char('X')) + 2*margin, metrics.lineSpacing() + smallMetrics.lineSpacing() + smallMetrics.leading() + 2*margin);
+    return QSize(metrics.horizontalAdvance(QLatin1Char('X')) + 2 * margin,
+                 metrics.lineSpacing() + smallMetrics.lineSpacing() + smallMetrics.leading() + 2 * margin);
 }
 
 /**
