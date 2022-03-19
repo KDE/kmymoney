@@ -163,14 +163,14 @@ bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
     WidgetHintFrame::hide(ui->accountCombo, i18nc("@info:tooltip category combo in split editor", "The category this split should be assigned to."));
     if(!accountId.isEmpty()) {
         try {
-            const auto category = MyMoneyFile::instance()->account(accountId);
-            const bool isIncomeExpense = category.isIncomeExpense();
-            ui->costCenterCombo->setEnabled(isIncomeExpense);
-            ui->costCenterLabel->setEnabled(isIncomeExpense);
-            ui->numberEdit->setDisabled(isIncomeExpense);
-            ui->numberLabel->setDisabled(isIncomeExpense);
+            const auto account = MyMoneyFile::instance()->account(accountId);
+            const bool isCategory = account.isIncomeExpense();
+            ui->costCenterCombo->setEnabled(isCategory);
+            ui->costCenterLabel->setEnabled(isCategory);
+            ui->numberEdit->setDisabled(isCategory);
+            ui->numberLabel->setDisabled(isCategory);
 
-            if (isIncomeExpense) {
+            if (isCategory) {
                 ui->numberEdit->clear();
             } else {
                 numberChanged(ui->numberEdit->text());
@@ -183,7 +183,7 @@ bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
             // in case the commodity changes, we need to update the shares part
             if (currency.id() != ui->creditDebitEdit->sharesCommodity().id()) {
                 ui->creditDebitEdit->setSharesCommodity(currency);
-                auto sharesAmount = ui->creditDebitEdit->value();
+                const auto sharesAmount = ui->creditDebitEdit->value();
                 ui->creditDebitEdit->setShares(sharesAmount);
                 // switch to value display so that we show the transaction commodity
                 // for single currency data entry this does not have an effect
@@ -194,7 +194,7 @@ bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
                 }
             }
 
-            costCenterRequired = category.isCostCenterRequired();
+            costCenterRequired = account.isCostCenterRequired();
             rc &= costCenterChanged(ui->costCenterCombo->currentIndex());
 
         } catch (MyMoneyException &e) {
