@@ -88,7 +88,7 @@ public:
 
     QMap<QString, MyMoneyInstitution> iList;
     QMap<QString, MyMoneyAccount> aList;
-    QMap<QString, MyMoneyTransaction> tList;
+    QMap<QString, QSharedPointer<MyMoneyTransaction>> tList;
     QMap<QString, MyMoneyPayee> pList;
     QMap<QString, MyMoneyTag> taList;
     QMap<QString, MyMoneySchedule> sList;
@@ -323,9 +323,9 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
         if (!m_level) {
             try {
                 if (s == nodeName(Node::Transaction)) {
-                    auto t0 = readTransaction(m_baseNode);
-                    if (!t0.id().isEmpty()) {
-                        m_reader->d->tList[t0.uniqueSortKey()] = t0;
+                    const auto t0 = QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(readTransaction(m_baseNode)));
+                    if (!t0->id().isEmpty()) {
+                        m_reader->d->tList[t0->uniqueSortKey()] = t0;
                     }
                     m_reader->signalProgress(++m_elementCount, 0);
                 } else if (s == nodeName(Node::Account)) {

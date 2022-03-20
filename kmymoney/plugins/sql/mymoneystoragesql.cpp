@@ -1912,7 +1912,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const QSt
 }
 #endif
 
-QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions() const
+QMap<QString, QSharedPointer<MyMoneyTransaction>> MyMoneyStorageSql::fetchTransactions() const
 {
     // return fetchTransactions(QString(), QString(), false);
 
@@ -1950,7 +1950,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions() const
     static const int txCurrencyIdCol = base + t.fieldNumber("currencyId");
     static const int txBankIdCol = base + t.fieldNumber("bankId");
 
-    QMap <QString, MyMoneyTransaction> txMap;
+    QMap<QString, QSharedPointer<MyMoneyTransaction>> txMap;
     MyMoneyTransaction tx;
 
     QSqlQuery tagQuery(*const_cast <MyMoneyStorageSql*>(this));
@@ -1966,7 +1966,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions() const
         // and store it in the map
         if (txId != tx.id()) {
             if (!tx.id().isEmpty()) {
-                txMap.insert(tx.uniqueSortKey(), tx);
+                txMap.insert(tx.uniqueSortKey(), QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(tx)));
             }
             // start a new transaction
             tx = MyMoneyTransaction(txId, MyMoneyTransaction());
@@ -2020,7 +2020,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions() const
 
     // make sure to not forget the last transaction
     if (!tx.id().isEmpty()) {
-        txMap.insert(tx.uniqueSortKey(), tx);
+        txMap.insert(tx.uniqueSortKey(), QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(tx)));
     }
 
     return txMap;

@@ -197,7 +197,7 @@ public:
 
     bool setData(const QModelIndex& idx, const QVariant& value, int role = Qt::EditRole) override;
 
-    void load(const QMap<QString, MyMoneyTransaction>& list);
+    void load(const QMap<QString, QSharedPointer<MyMoneyTransaction>>& list);
     void unload();
 
     JournalModelNewTransaction* newTransaction();

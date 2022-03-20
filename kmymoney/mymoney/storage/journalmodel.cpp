@@ -416,12 +416,12 @@ JournalModelNewTransaction::JournalModelNewTransaction(QObject* parent)
     : JournalModel(parent)
 {
     setObjectName(QLatin1String("JournalModelNewTransaction"));
-    QMap<QString, MyMoneyTransaction> list;
+    QMap<QString, QSharedPointer<MyMoneyTransaction>> list;
     MyMoneyTransaction t;
     MyMoneySplit sp;
     sp.setAccountId(fakeId());
     t.addSplit(sp);
-    list[QString()] = t;
+    list[QString()] = QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(t));
     JournalModel::load(list);
 }
 
@@ -937,7 +937,7 @@ bool JournalModel::setData(const QModelIndex& idx, const QVariant& value, int ro
     return QAbstractItemModel::setData(idx, value, role);
 }
 
-void JournalModel::load(const QMap<QString, MyMoneyTransaction>& list)
+void JournalModel::load(const QMap<QString, QSharedPointer<MyMoneyTransaction>>& list)
 {
     QElapsedTimer t;
 
@@ -949,21 +949,21 @@ void JournalModel::load(const QMap<QString, MyMoneyTransaction>& list)
     // create the number of required items
     int itemCount = 0;
     for (const auto& item : qAsConst(list)) {
-        itemCount += item.splitCount();
+        itemCount += item->splitCount();
     }
     insertRows(0, itemCount);
 
     m_nextId = 0;
 
     int row = 0;
-    QMap<QString, MyMoneyTransaction>::const_iterator it;
+    QMap<QString, QSharedPointer<MyMoneyTransaction>>::const_iterator it;
     for (it = list.constBegin(); it != list.constEnd(); ++it) {
-        const QString& id = (*it).id();
+        const QString& id = (*it)->id();
         updateNextObjectId(id);
         d->addIdKeyMapping(id, it.key());
-        auto transaction = QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(*it));
-        for (const auto& split : (*transaction).splits()) {
-            const JournalEntry journalEntry(QString("%1-%2").arg(it.key(), split.id()), transaction, split);
+        // auto transaction = QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(*it));
+        for (const auto& split : (*it)->splits()) {
+            const JournalEntry journalEntry(QString("%1-%2").arg(it.key(), split.id()), *it, split);
             const auto newIdx = index(row, 0);
             static_cast<TreeItem<JournalEntry>*>(newIdx.internalPointer())->dataRef() = journalEntry;
             if (m_idToItemMapper) {

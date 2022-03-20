@@ -153,8 +153,7 @@ void SchedulesJournalModel::doLoad()
         JournalModel::unload();
 
     } else {
-
-        QMap<QString, MyMoneyTransaction> transactionList;
+        QMap<QString, QSharedPointer<MyMoneyTransaction>> transactionList;
 
         while (!scheduleList.isEmpty()) {
             MyMoneySchedule& s = scheduleList.first();
@@ -180,7 +179,7 @@ void SchedulesJournalModel::doLoad()
                 }
 
                 // add transaction to the list
-                transactionList.insert(t.uniqueSortKey(), t);
+                transactionList.insert(t.uniqueSortKey(), QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(t)));
 
                 // keep track of this payment locally (not in the engine)
                 if (s.isOverdue() && !d->showPlannedDate) {

@@ -9,8 +9,9 @@
 #ifndef MYMONEYSTORAGESQL_H
 #define MYMONEYSTORAGESQL_H
 
-#include <QSqlDatabase>
 #include <QSharedData>
+#include <QSharedPointer>
+#include <QSqlDatabase>
 
 #include "imymoneystorageformat.h"
 #include "mymoneyunittestable.h"
@@ -226,7 +227,7 @@ public:
 
     QMap<QString, MyMoneyTransaction> fetchTransactions(const QString& tidList, const QString& dateClause, bool forUpdate = false) const;
     QMap<QString, MyMoneyTransaction> fetchTransactions(const QString& tidList) const;
-    QMap<QString, MyMoneyTransaction> fetchTransactions() const;
+    QMap<QString, QSharedPointer<MyMoneyTransaction>> fetchTransactions() const;
 
     QMap<QString, MyMoneyTransaction> fetchTransactions(const MyMoneyTransactionFilter& filter) const;
     payeeIdentifier fetchPayeeIdentifier(const QString& id) const;
