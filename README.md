@@ -1,7 +1,7 @@
 
 # KMyMoney
 
-KMyMoney is an open-source personal finance software, part of the [KDE software](https://kde.org) family. Written in C++ and Qt, available for all major platforms: *NIX/BSD/Windows and macOS.
+KMyMoney is an open-source personal finance software, part of the [KDE software](https://kde.org) family. Written in C++ and Qt, available for all major platforms: Linux, Windows, BSD and macOS.
 
 ## Download and Help
 
