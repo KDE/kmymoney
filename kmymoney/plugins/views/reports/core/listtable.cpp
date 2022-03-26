@@ -315,7 +315,7 @@ void ListTable::render(QString& result, QString& csv) const
             // vector of a properties class.
             QString tlinkBegin, tlinkEnd;
             if (!tlink.isEmpty()) {
-                tlinkBegin = QString::fromLatin1("<a href=ledger?%1>").arg(tlink);
+                tlinkBegin = QString::fromLatin1("<a href=\"/ledger?%1\">").arg(tlink);
                 tlinkEnd = QLatin1String("</a>");
             }
 

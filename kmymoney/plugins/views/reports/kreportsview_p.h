@@ -245,7 +245,7 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     }
     enableAllReportActions();
 
-    connect(m_tableView, &KMMTextBrowser::sourceChanged, eventHandler, &KReportsView::slotOpenUrl);
+    connect(m_tableView, &KMMTextBrowser::anchorClicked, eventHandler, &KReportsView::slotOpenUrl);
 
     // if this is a default report, then you can't delete it!
     if (report.id().isEmpty())
