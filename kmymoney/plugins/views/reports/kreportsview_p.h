@@ -231,6 +231,8 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     m_chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_chartView->hide();
     m_tableView->hide();
+    m_tableView->setOpenLinks(false);
+
     m_layout->addWidget(m_control);
     m_layout->addWidget(m_tableView);
     m_layout->addWidget(m_chartView);
