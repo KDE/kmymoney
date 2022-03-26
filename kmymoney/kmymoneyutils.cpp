@@ -693,6 +693,7 @@ bool KMyMoneyUtils::newPayee(const QString& newnameBase, QString& id)
 
             MyMoneyPayee p;
             p.setName(newname);
+            p.setMatchData(eMyMoney::Payee::MatchType::NameExact, true, QStringList());
             MyMoneyFile::instance()->addPayee(p);
             id = p.id();
             ft.commit();
