@@ -4,8 +4,8 @@
 		xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 		http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
 
-	<kcfgfile name="kmymoney/csvimporterrc"/>
-	<group name="Misc">
+<kcfgfile name="kmymoney/csvimporterrc"/>
+  <group name="Misc">
     <entry name="AutoFieldDelimiter" type="Bool">
       <label>Determines whether field delimiter will be autodetected.</label>
     </entry>
@@ -18,8 +18,11 @@
     <entry name="AutoAccountInvest" type="Bool">
       <label>Determines whether investment account will be autodetected from statement header.</label>
     </entry>
-        <entry name="AutoAccountBank" type="Bool">
+    <entry name="AutoAccountBank" type="Bool">
       <label>Determines whether bank account will be autodetected from statement header.</label>
     </entry>
-	</group>
+    <entry name="QifExportProfile" type="String">
+      <label>The profile to be used for QIF exports.</label>
+    </entry>
+  </group>
 </kcfg>

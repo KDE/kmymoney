@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>267</width>
-    <height>188</height>
+    <width>254</width>
+    <height>306</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>CSV Importer settings</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,0">
    <item>
     <widget class="QGroupBox" name="autodetect">
      <property name="title">
       <string>Autodetecting</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QCheckBox" name="kcfg_AutoFieldDelimiter">
         <property name="sizePolicy">
@@ -90,6 +90,21 @@
          <string>Account in bank statement</string>
         </property>
        </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>QIF export profile</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLineEdit" name="kcfg_QifExportProfile"/>
+      </item>
+      <item>
+       <widget class="QComboBox" name="qifProfileCombo"/>
       </item>
      </layout>
     </widget>

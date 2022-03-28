@@ -6,22 +6,29 @@
 #ifndef KCM_CSVIMPORTER_H
 #define KCM_CSVIMPORTER_H
 
+// ----------------------------------------------------------------------------
+// QT Includes
+
+class QWidget;
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
 #include <KCModule>
-#include <QWidget>
-#include "ui_pluginsettingsdecl.h"
 
-class CSVImporterSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
-{
-    Q_OBJECT
-public:
-    explicit CSVImporterSettingsWidget(QWidget* parent = 0);
-};
+// ----------------------------------------------------------------------------
+// Project Includes
 
+class KCMCSVImporterPrivate;
 class KCMCSVImporter : public KCModule
 {
 public:
     explicit KCMCSVImporter(QWidget* parent, const QVariantList& args);
     ~KCMCSVImporter();
+
+private:
+    Q_DECLARE_PRIVATE(KCMCSVImporter)
+    KCMCSVImporterPrivate* d_ptr;
 };
 
 #endif // KCM_CSVIMPORT_H
