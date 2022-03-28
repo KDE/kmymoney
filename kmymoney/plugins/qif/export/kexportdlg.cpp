@@ -31,15 +31,15 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "../config/mymoneyqifprofile.h"
 #include "accountsmodel.h"
-#include "icons/icons.h"
+#include "icons.h"
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneyutils.h"
 #include "mymoneyaccount.h"
 #include "mymoneycategory.h"
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"
+#include "mymoneyqifprofile.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 

@@ -27,5 +27,4 @@ target_link_libraries(qifimporter
     KF5::KIOWidgets
     Alkimia::alkimia
     kmm_settings
-    qif_common_static
 )

@@ -24,7 +24,7 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "../config/mymoneyqifprofile.h"
+#include "mymoneyqifprofile.h"
 
 class MyMoneyTransaction;
 class MyMoneySplit;

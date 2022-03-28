@@ -37,8 +37,8 @@
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 
-#include "../config/mymoneyqifprofile.h"
-#include <icons/icons.h>
+#include "icons.h"
+#include "mymoneyqifprofile.h"
 
 using namespace Icons;
 

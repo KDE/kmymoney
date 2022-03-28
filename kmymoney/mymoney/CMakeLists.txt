@@ -19,6 +19,7 @@ set(kmm_mymoney_LIB_SRCS
   mymoneyaccount.cpp mymoneyaccountloan.cpp
   mymoneyreport.cpp mymoneystatement.cpp mymoneyprice.cpp mymoneybudget.cpp
   mymoneyforecast.cpp
+  mymoneyqifprofile.cpp
   mymoneytemplate.cpp
   mymoneybalancecache.cpp
   onlinejob.cpp
@@ -88,6 +89,7 @@ set(mymoney_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kmm_mymoney_export.h
   imymoneyprocessingcalendar.h
   mymoneycostcenter.h
   mymoneyenums.h
+  mymoneyqifprofile.h
   mymoneytemplate.h
   mymoneyunittestable.h
   mymoneypayeeidentifiercontainer.h
@@ -114,6 +116,7 @@ target_link_libraries(kmm_mymoney
                       KF5::Service
                       KF5::I18n
                       KF5::ItemModels
+                      KF5::ConfigCore
                       Alkimia::alkimia
                       kmm_payeeidentifier
                       kmm_plugin

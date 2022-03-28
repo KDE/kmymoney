@@ -30,9 +30,9 @@
 // Project Headers
 
 #include "mymoneyaccount.h"
-#include "mymoneytransaction.h"
 #include "mymoneyenums.h"
-#include "../config/mymoneyqifprofile.h"
+#include "mymoneyqifprofile.h"
+#include "mymoneytransaction.h"
 
 class MyMoneyFileTransaction;
 class MyMoneyStatement;

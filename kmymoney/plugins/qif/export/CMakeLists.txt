@@ -20,7 +20,6 @@ qt5_add_resources(qifexporter_PART_SRCS qifexporter.qrc)
 kmymoney_add_plugin(qifexporter SOURCES ${qifexporter_PART_SRCS})
 
 target_link_libraries(qifexporter
-  qif_common_static
   kmm_plugin
   kmm_models
   kmm_base_widgets

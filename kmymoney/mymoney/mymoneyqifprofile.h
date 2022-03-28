@@ -20,13 +20,15 @@ class QDate;
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmm_mymoney_export.h"
+
 class MyMoneyMoney;
 
 /**
-  * @author Thomas Baumgart
-  */
+ * @author Thomas Baumgart
+ */
 
-class MyMoneyQifProfile : public QObject
+class KMM_MYMONEY_EXPORT MyMoneyQifProfile : public QObject
 {
     Q_OBJECT
 
@@ -35,7 +37,8 @@ public:
     explicit MyMoneyQifProfile(const QString& name);
     ~MyMoneyQifProfile();
 
-    inline const QString& profileName() const {
+    inline const QString& profileName() const
+    {
         return m_profileName;
     }
     void setProfileName(const QString& name);
@@ -43,44 +46,54 @@ public:
     void loadProfile(const QString& name);
     void saveProfile();
 
-    const QDate date(const QString& datein) const;
-    const QString date(const QDate& datein) const;
+    QDate date(const QString& datein) const;
+    QString date(const QDate& datein) const;
 
-    const MyMoneyMoney value(const QChar& def, const QString& valuein) const;
-    const QString value(const QChar& def, const MyMoneyMoney& valuein) const;
+    MyMoneyMoney value(const QChar& def, const QString& valuein) const;
+    QString value(const QChar& def, const MyMoneyMoney& valuein) const;
 
-    inline const QString& outputDateFormat() const {
+    inline const QString& outputDateFormat() const
+    {
         return m_dateFormat;
     }
-    const QString inputDateFormat() const;
-    inline const QString& apostropheFormat() const {
+    QString inputDateFormat() const;
+    inline const QString& apostropheFormat() const
+    {
         return m_apostropheFormat;
     }
-    const QChar amountDecimal(const QChar& def) const;
-    const QChar amountThousands(const QChar& def) const;
-    inline const QString& profileDescription() const {
+    QChar amountDecimal(const QChar& def) const;
+    QChar amountThousands(const QChar& def) const;
+    inline const QString& profileDescription() const
+    {
         return m_profileDescription;
     }
-    inline const QString& profileType() const {
+    inline const QString& profileType() const
+    {
         return m_profileType;
     }
-    inline const QString& openingBalanceText() const {
+    inline const QString& openingBalanceText() const
+    {
         return m_openingBalanceText;
     }
-    const QString accountDelimiter() const;
-    inline const QString& voidMark() const {
+    QString accountDelimiter() const;
+    inline const QString& voidMark() const
+    {
         return m_voidMark;
     }
-    inline const QString& filterScriptImport() const {
+    inline const QString& filterScriptImport() const
+    {
         return m_filterScriptImport;
     }
-    inline const QString& filterScriptExport() const {
+    inline const QString& filterScriptExport() const
+    {
         return m_filterScriptExport;
     }
-    inline const QString& filterFileType() const {
+    inline const QString& filterFileType() const
+    {
         return m_filterFileType;
     }
-    inline bool attemptMatchDuplicates() const {
+    inline bool attemptMatchDuplicates() const
+    {
         return m_attemptMatchDuplicates;
     }
 
@@ -99,14 +112,15 @@ public:
     void possibleDateFormats(QStringList& list) const;
 
     /**
-      * This method presets the member variables with the default values.
-      */
+     * This method presets the member variables with the default values.
+     */
     void clear();
 
     /**
-      * This method is used to determine, if a profile has been changed or not
-      */
-    inline bool isDirty() const {
+     * This method is used to determine, if a profile has been changed or not
+     */
+    inline bool isDirty() const
+    {
         return m_isDirty;
     };
 
@@ -136,22 +150,22 @@ private:
     class Private;
     /// \internal d-pointer instance.
     Private* const d;
-    bool      m_isDirty;
-    QString   m_profileName;
-    QString   m_profileDescription;
-    QString   m_dateFormat;
-    QString   m_apostropheFormat;
-    QString   m_valueMode;
-    QString   m_profileType;
-    QString   m_openingBalanceText;
-    QString   m_voidMark;
-    QString   m_accountDelimiter;
-    QString   m_filterScriptImport;
-    QString   m_filterScriptExport;
-    QString   m_filterFileType;  /*< The kind of input files the filter will expect, e.g. "*.qif" */
+    bool m_isDirty;
+    QString m_profileName;
+    QString m_profileDescription;
+    QString m_dateFormat;
+    QString m_apostropheFormat;
+    QString m_valueMode;
+    QString m_profileType;
+    QString m_openingBalanceText;
+    QString m_voidMark;
+    QString m_accountDelimiter;
+    QString m_filterScriptImport;
+    QString m_filterScriptExport;
+    QString m_filterFileType; /*< The kind of input files the filter will expect, e.g. "*.qif" */
     QMap<QChar, QChar> m_decimal;
     QMap<QChar, QChar> m_thousands;
-    bool      m_attemptMatchDuplicates;
+    bool m_attemptMatchDuplicates;
 };
 
 #endif
