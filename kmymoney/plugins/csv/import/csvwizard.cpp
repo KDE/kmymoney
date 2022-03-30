@@ -31,14 +31,17 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "csvimporter.h"
-#include "core/csvutil.h"
+#include "bankingwizardpage.h"
 #include "core/convdate.h"
 #include "core/csvimportercore.h"
+#include "core/csvutil.h"
+#include "csvimporter.h"
+#include "icons.h"
 #include "investmentwizardpage.h"
-#include "bankingwizardpage.h"
+#include "mymoneyqifprofile.h"
+#include "pluginsettings.h"
 #include "priceswizardpage.h"
-#include "icons/icons.h"
+
 #include "ui_csvwizard.h"
 #include "ui_introwizardpage.h"
 #include "ui_separatorwizardpage.h"
@@ -408,12 +411,15 @@ void CSVWizard::saveAsQIFClicked()
     outFileName = QFileDialog::getSaveFileName(this, i18n("Save QIF"), outFileName, i18n("QIF Files (*.qif)"));
     if (outFileName.isEmpty())
         return;
+
+    MyMoneyQifProfile qifProfile(PluginSettings::qifExportProfile());
+
     switch (m_imp->m_profile->type()) {
     case Profile::Banking:
-        m_pageBanking->makeQIF(m_st, outFileName);
+        m_pageBanking->makeQIF(m_st, outFileName, qifProfile);
         break;
     case Profile::Investment:
-        m_pageInvestment->makeQIF(m_st, outFileName);
+        m_pageInvestment->makeQIF(m_st, outFileName, qifProfile);
         break;
     default:
         break;
@@ -1084,9 +1090,27 @@ bool FormatsPage::validateDateFormat(const int col)
 bool FormatsPage::isComplete() const
 {
     const bool enable = m_isDecimalSymbolOK && m_isDateFormatOK;
-    if (m_imp->m_profile->type() != Profile::StockPrices &&
-            m_imp->m_profile->type() != Profile::CurrencyPrices)
-        wizard()->button(QWizard::CustomButton2)->setEnabled(enable);
+    const auto button = wizard()->button(QWizard::CustomButton2);
+
+    if ((m_imp->m_profile->type() != Profile::StockPrices) && (m_imp->m_profile->type() != Profile::CurrencyPrices)) {
+        if (enable) {
+            // check if QIF profile exists and is selected
+            QStringList profileList;
+            KSharedConfigPtr config = KSharedConfig::openConfig();
+            qDebug() << config->name();
+            KConfigGroup grp = config->group("Profiles");
+            profileList = grp.readEntry("profiles", QStringList());
+
+            const auto profile = PluginSettings::qifExportProfile();
+
+            if (profile.isEmpty() || profileList.contains(profile)) {
+                button->setEnabled(true);
+                button->setToolTip(QString());
+            } else {
+                button->setToolTip(i18nc("@info:tooltip QIF profile not selected", "Please select a QIF profile in the CSV importer settings"));
+            }
+        }
+    }
     return enable;
 }
 

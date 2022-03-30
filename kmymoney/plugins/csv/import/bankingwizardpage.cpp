@@ -23,9 +23,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "csvwizard.h"
 #include "core/csvimportercore.h"
+#include "csvwizard.h"
 #include "icons.h"
+#include "mymoneyqifprofile.h"
+
 #include "ui_bankingwizardpage.h"
 
 // ----------------------------------------------------------------------------
@@ -403,7 +405,7 @@ bool BankingPage::validateCreditDebit()
     return true;
 }
 
-void BankingPage::makeQIF(const MyMoneyStatement& st, const QString& outFileName)
+void BankingPage::makeQIF(const MyMoneyStatement& st, const QString& outFileName, const MyMoneyQifProfile& qifProfile)
 {
     QFile oFile(outFileName);
     oFile.open(QIODevice::WriteOnly);
@@ -422,27 +424,30 @@ void BankingPage::makeQIF(const MyMoneyStatement& st, const QString& outFileName
         strEType = QStringLiteral("Bank");
     }
 
+    const auto eol(QLatin1Char('\n'));
+
     if (!st.m_strAccountName.isEmpty()) {
         buffer.append(QStringLiteral("!Account\n"));
-        buffer.append(QChar(QLatin1Char('N')) + st.m_strAccountName + QChar(QLatin1Char('\n')));
-        buffer.append(QChar(QLatin1Char('T')) + strEType + QChar(QLatin1Char('\n')));
+        buffer.append(QLatin1Char('N') + st.m_strAccountName + eol);
+        buffer.append(QLatin1Char('T') + strEType + eol);
         buffer.append(QStringLiteral("^\n"));
     }
 
-    buffer.append(QStringLiteral("!Type:") + strEType + QChar(QLatin1Char('\n')));
+    buffer.append(QStringLiteral("!Type:") + strEType + eol);
 
     for (QList<MyMoneyStatement::Transaction>::const_iterator it = st.m_listTransactions.constBegin(); it != st.m_listTransactions.constEnd(); ++it) {
-        buffer.append(QChar(QLatin1Char('D')) + it->m_datePosted.toString(QStringLiteral("MM/dd/yyyy")) + QChar(QLatin1Char('\n')));
-        QString txt;
-        txt.setNum(it->m_amount.toDouble(), 'f', 4);
-        buffer.append(QChar(QLatin1Char('T')) + txt + QChar(QLatin1Char('\n')));
-        buffer.append(QChar(QLatin1Char('P')) + it->m_strPayee + QChar(QLatin1Char('\n')));
-        if (!it->m_listSplits.isEmpty())
-            buffer.append(QChar(QLatin1Char('L')) + it->m_listSplits.first().m_strCategoryName + QChar(QLatin1Char('\n')));
-        if (!it->m_strNumber.isEmpty())
-            buffer.append(QChar(QLatin1Char('N')) + it->m_strNumber + QChar(QLatin1Char('\n')));
-        if (!it->m_strMemo.isEmpty())
-            buffer.append(QChar(QLatin1Char('M')) + it->m_strMemo + QChar(QLatin1Char('\n')));
+        buffer.append(QLatin1Char('D') + qifProfile.date(it->m_datePosted) + eol);
+        buffer.append(QLatin1Char('T') + qifProfile.value(QLatin1Char('T'), it->m_amount) + eol);
+        buffer.append(QLatin1Char('P') + it->m_strPayee + eol);
+        if (!it->m_listSplits.isEmpty()) {
+            buffer.append(QLatin1Char('L') + it->m_listSplits.first().m_strCategoryName + eol);
+        }
+        if (!it->m_strNumber.isEmpty()) {
+            buffer.append(QLatin1Char('N') + it->m_strNumber + eol);
+        }
+        if (!it->m_strMemo.isEmpty()) {
+            buffer.append(QLatin1Char('M') + it->m_strMemo + eol);
+        }
         buffer.append(QStringLiteral("^\n"));
         out << buffer;// output qif file
         buffer.clear();

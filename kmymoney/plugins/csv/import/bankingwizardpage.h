@@ -25,6 +25,7 @@ class QComboBox;
 
 class BankingProfile;
 class MyMoneyStatement;
+class MyMoneyQifProfile;
 
 namespace Ui
 {
@@ -43,29 +44,29 @@ public:
     /**
     * This method fills QIF file with bank/credit card data
     */
-    void                makeQIF(const MyMoneyStatement &st, const QString &outFileName);
+    void makeQIF(const MyMoneyStatement& st, const QString& outFileName, const MyMoneyQifProfile& qifProfile);
 
 private:
     void initializePage() final override;
     bool isComplete() const final override;
     int nextId() const final override;
 
-    bool                validateMemoComboBox();
-    void                resetComboBox ( Column comboBox, int index = -1 );
-    bool                validateSelectedColumn(const int col, const Column type);
+    bool validateMemoComboBox();
+    void resetComboBox(Column comboBox, int index = -1);
+    bool validateSelectedColumn(const int col, const Column type);
 
-    void                memoColSelected(int col);
-    void                payeeColSelected(int col);
+    void memoColSelected(int col);
+    void payeeColSelected(int col);
 
-    void                clearColumns();
-    void                updateCurrentMemoSelection();
-    void                clearMemoColumns();
+    void clearColumns();
+    void updateCurrentMemoSelection();
+    void clearMemoColumns();
 
 private:
-    BankingProfile*             m_profile;
-    Ui::BankingPage*            ui;
+    BankingProfile* m_profile;
+    Ui::BankingPage* ui;
 
-    QHash<Column, QComboBox *>  m_columnBoxes;
+    QHash<Column, QComboBox*> m_columnBoxes;
 };
 
 #endif // BANKINGWIZARDPAGE_H

@@ -22,10 +22,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
-#include "mymoneysecurity.h"
-#include "csvwizard.h"
 #include "core/csvimportercore.h"
+#include "csvwizard.h"
+#include "mymoneyfile.h"
+#include "mymoneyqifprofile.h"
+#include "mymoneysecurity.h"
 
 #include "transactiondlg.h"
 #include "securitydlg.h"
@@ -176,7 +177,7 @@ void InvestmentPage::memoColSelected(int col)
                                             "<center>If you wish to copy that data to the memo field, click 'Yes'.</center>",
                                             m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col))));
         if (rc == KMessageBox::Yes) {
-            ui->m_memoCol->setItemText(col, QString::number(col + 1) + QChar(QLatin1Char('*')));
+            ui->m_memoCol->setItemText(col, QString::number(col + 1) + QLatin1Char('*'));
             if (!m_profile->m_memoColList.contains(col))
                 m_profile->m_memoColList.append(col);
         } else {
@@ -555,7 +556,7 @@ bool InvestmentPage::validateSecurity()
     return true;
 }
 
-void InvestmentPage::makeQIF(const MyMoneyStatement& st, const QString& outFileName)
+void InvestmentPage::makeQIF(const MyMoneyStatement& st, const QString& outFileName, const MyMoneyQifProfile& qifProfile)
 {
     QFile oFile(outFileName);
     oFile.open(QIODevice::WriteOnly);
@@ -569,32 +570,34 @@ void InvestmentPage::makeQIF(const MyMoneyStatement& st, const QString& outFileN
         strEType = QStringLiteral("Invst");
     }
 
+    const auto eol(QLatin1Char('\n'));
+
     if (!st.m_strAccountName.isEmpty()) {
         buffer.append(QStringLiteral("!Account\n"));
-        buffer.append(QChar(QLatin1Char('N')) + st.m_strAccountName + QChar(QLatin1Char('\n')));
-        buffer.append(QChar(QLatin1Char('T')) + strEType + QChar(QLatin1Char('\n')));
+        buffer.append(QLatin1Char('N') + st.m_strAccountName + eol);
+        buffer.append(QLatin1Char('T') + strEType + eol);
         buffer.append(QStringLiteral("^\n"));
     }
 
     for (QList<MyMoneyStatement::Security>::const_iterator it = st.m_listSecurities.constBegin(); it != st.m_listSecurities.constEnd(); ++it) {
         buffer.append(QStringLiteral("!Type:Security\n"));
-        buffer.append(QChar(QLatin1Char('N')) + (*it).m_strName + QChar(QLatin1Char('\n')));
-        buffer.append(QChar(QLatin1Char('S')) + (*it).m_strSymbol + QChar(QLatin1Char('\n')));
+        buffer.append(QLatin1Char('N') + (*it).m_strName + eol);
+        buffer.append(QLatin1Char('S') + (*it).m_strSymbol + eol);
         buffer.append(QStringLiteral("TStock\n^\n"));
     }
 
     if (!st.m_strAccountName.isEmpty()) {
         buffer.append(QStringLiteral("!Account\n"));
-        buffer.append(QChar(QLatin1Char('N')) + st.m_strAccountName + QChar(QLatin1Char('\n')));
-        buffer.append(QChar(QLatin1Char('T')) + strEType + QChar(QLatin1Char('\n')));
+        buffer.append(QLatin1Char('N') + st.m_strAccountName + eol);
+        buffer.append(QLatin1Char('T') + strEType + eol);
         buffer.append(QStringLiteral("^\n"));
     }
 
-    buffer.append(QStringLiteral("!Type:") + strEType + QChar(QLatin1Char('\n')));
+    buffer.append(QStringLiteral("!Type:") + strEType + eol);
 
     for (QList<MyMoneyStatement::Transaction>::const_iterator it = st.m_listTransactions.constBegin(); it != st.m_listTransactions.constEnd(); ++it) {
-        buffer.append(QChar(QLatin1Char('D')) + it->m_datePosted.toString(QStringLiteral("MM/dd/yyyy")) + QChar(QLatin1Char('\n')));
-        buffer.append(QChar(QLatin1Char('Y')) + it->m_strSecurity + QChar(QLatin1Char('\n')));
+        buffer.append(QLatin1Char('D') + qifProfile.date(it->m_datePosted) + eol);
+        buffer.append(QLatin1Char('Y') + it->m_strSecurity + eol);
         QString txt;
         switch (it->m_eAction) {
         case eMyMoney::Transaction::Action::Buy:
@@ -623,29 +626,29 @@ void InvestmentPage::makeQIF(const MyMoneyStatement& st, const QString& outFileN
             break;
         default:
             txt = QStringLiteral("unknown");  // shouldn't happen
+            break;
         }
 
-        buffer.append(QChar(QLatin1Char('N')) + txt + QChar(QLatin1Char('\n')));
+        buffer.append(QLatin1Char('N') + txt + eol);
 
-        if (it->m_eAction == eMyMoney::Transaction::Action::Buy)  // we added 'N' field so buy transaction should have any sign
-            txt.setNum(it->m_amount.abs().toDouble(), 'f', 4);
-        else
-            txt.setNum(it->m_amount.toDouble(), 'f', 4);
-        buffer.append(QChar(QLatin1Char('T')) + txt + QChar(QLatin1Char('\n')));
-        txt.setNum(it->m_shares.toDouble(), 'f', 4);
-        buffer.append(QChar(QLatin1Char('Q')) + txt + QChar(QLatin1Char('\n')));
-        txt.setNum(it->m_price.toDouble(), 'f', 4);
-        buffer.append(QChar(QLatin1Char('I')) + txt + QChar(QLatin1Char('\n')));
+        if (it->m_eAction == eMyMoney::Transaction::Action::Buy) { // we added 'N' field so buy transaction should have any sign
+            txt = qifProfile.value(QLatin1Char('T'), it->m_amount.abs());
+        } else {
+            txt = qifProfile.value(QLatin1Char('T'), it->m_amount);
+        }
+        buffer.append(QLatin1Char('T') + txt + eol);
+        buffer.append(QLatin1Char('Q') + qifProfile.value(QLatin1Char('Q'), it->m_shares) + eol);
+        buffer.append(QLatin1Char('I') + qifProfile.value(QLatin1Char('I'), it->m_price) + eol);
         if (!it->m_fees.isZero()) {
-            txt.setNum(it->m_fees.toDouble(), 'f', 4);
-            buffer.append(QChar(QLatin1Char('O')) + txt + QChar(QLatin1Char('\n')));
+            buffer.append(QLatin1Char('O') + qifProfile.value(QLatin1Char('O'), it->m_fees) + eol);
         }
 
-        if (!it->m_strBrokerageAccount.isEmpty())
-            buffer.append(QChar(QLatin1Char('L')) + it->m_strBrokerageAccount + QChar(QLatin1Char('\n')));
-
-        if (!it->m_strMemo.isEmpty())
-            buffer.append(QChar(QLatin1Char('M')) + it->m_strMemo + QChar(QLatin1Char('\n')));
+        if (!it->m_strBrokerageAccount.isEmpty()) {
+            buffer.append(QLatin1Char('L') + it->m_strBrokerageAccount + eol);
+        }
+        if (!it->m_strMemo.isEmpty()) {
+            buffer.append(QLatin1Char('M') + it->m_strMemo + eol);
+        }
         buffer.append(QStringLiteral("^\n"));
         out << buffer;// output qif file
         buffer.clear();
