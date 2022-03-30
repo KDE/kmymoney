@@ -968,9 +968,7 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         }
         // select the associated brokerage account if it exists
         const auto brokerageAccount = file->accountsModel()->itemByName(d->parentAccount.brokerageName());
-        if (!brokerageAccount.id().isEmpty()) {
-            d->ui->assetAccountCombo->setSelected(brokerageAccount.id());
-        }
+        d->ui->assetAccountCombo->setSelected(brokerageAccount.id());
         d->loadFeeAndInterestAmountEdits();
 
     } else {

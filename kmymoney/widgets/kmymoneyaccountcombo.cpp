@@ -276,6 +276,10 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
 {
     if (id.isEmpty()) {
         d->m_lastSelectedAccount.clear();
+        d->m_popupView->selectionModel()->clearSelection();
+        d->m_popupView->setCurrentIndex(QModelIndex());
+        setRootModelIndex(QModelIndex());
+        setCurrentIndex(-1);
         emit accountSelected(id);
         return;
     }
@@ -385,12 +389,7 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
     if(!d->m_inMakeCompletion) {
         d->m_inMakeCompletion = true;
         if (txt.isEmpty()) {
-            d->m_lastSelectedAccount.clear();
-            d->m_popupView->selectionModel()->clearSelection();
-            d->m_popupView->setCurrentIndex(QModelIndex());
-            setRootModelIndex(QModelIndex());
-            setCurrentIndex(-1);
-            emit accountSelected(QString());
+            setSelected(QString());
         } else {
             AccountNamesFilterProxyModel* filterModel = qobject_cast<AccountNamesFilterProxyModel*>(model());
 
