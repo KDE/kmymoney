@@ -934,6 +934,13 @@ void InvestTransactionEditor::updateTotalAmount()
                 d->assetPrice =
                     MyMoneyPrice(d->transactionCurrency.id(), d->assetAccount.currencyId(), d->transaction.postDate(), rate, QLatin1String("KMyMoney"));
                 d->assetSplit.setShares(d->ui->totalAmountEdit->shares());
+                // since the total amount is kept as a positive number, we may
+                // need to adjust the sign of the shares. The value nevertheless
+                // has the correct sign. So if the sign does not match, we
+                // simply revert the sign of the shares.
+                if (d->assetSplit.shares().isNegative() != d->assetSplit.value().isNegative()) {
+                    d->assetSplit.setShares(-d->assetSplit.shares());
+                }
             }
         }
     }
