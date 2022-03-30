@@ -60,11 +60,18 @@ private:
             m_homeDir = QString::fromUtf8(ctx->engineInfo().homeDirectory());
         }
 
-        const auto fileName = QString("%1/%2").arg(m_homeDir, "secring.gpg");
-        qDebug() << "GPG search" << fileName;
-        if (!QFileInfo::exists(fileName)) {
-            qDebug() << "GPG no secure keyring found.";
+        // search secret keys location
+        // GPG >= 2.1     - private-keys-v1.d subdirectory
+        // older versions - secring.pgp
+        const auto secKeyDir = QStringLiteral("%1/private-keys-v1.d").arg(m_homeDir);
+        if (!QFileInfo::exists(secKeyDir)) {
+            const auto fileName = QString("%1/%2").arg(m_homeDir, "secring.gpg");
+            qDebug() << "GPG search" << fileName;
+            if (!QFileInfo::exists(fileName)) {
+                qDebug() << "GPG no secure keyring found.";
+            }
         }
+
         m_homeDir = QDir::toNativeSeparators(m_homeDir);
         /// FIXME This might be nasty if the underlying gpgme lib does not work on UTF-8
         auto lastError = ctx->setEngineHomeDirectory(m_homeDir.toUtf8());
