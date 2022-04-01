@@ -32,7 +32,7 @@
             }
         ],
         "Description": "Adds reports view to KMyMoney",
-        "Description[ca@valencia]": "Afig la vista dels informes al KMyMoney",
+        "Description[ca@valencia]": "Afig la vista dels informes a KMyMoney",
         "Description[ca]": "Afegeix la vista dels informes al KMyMoney",
         "Description[en_GB]": "Adds reports view to KMyMoney",
         "Description[es]": "Añade una vista de informes a KMyMoney",
