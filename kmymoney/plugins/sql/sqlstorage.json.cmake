@@ -32,7 +32,7 @@
             }
         ],
         "Description": "Adds SQL storage support to KMyMoney",
-        "Description[ca@valencia]": "Afig la implementació de l'emmagatzematge en SQL al KMyMoney",
+        "Description[ca@valencia]": "Afig la implementació de l'emmagatzematge en SQL a KMyMoney",
         "Description[ca]": "Afegeix la implementació de l'emmagatzematge en SQL al KMyMoney",
         "Description[en_GB]": "Adds SQL storage support to KMyMoney",
         "Description[es]": "Añade almacenamiento SQL a KMyMoney",

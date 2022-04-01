@@ -32,7 +32,7 @@
             }
         ],
         "Description": "Adds XML storage support to KMyMoney",
-        "Description[ca@valencia]": "Afig la implementació de l'emmagatzematge en XML al KMyMoney",
+        "Description[ca@valencia]": "Afig la implementació de l'emmagatzematge en XML a KMyMoney",
         "Description[ca]": "Afegeix la implementació de l'emmagatzematge en XML al KMyMoney",
         "Description[en_GB]": "Adds XML storage support to KMyMoney",
         "Description[es]": "Añade almacenamiento XML a KMyMoney",
