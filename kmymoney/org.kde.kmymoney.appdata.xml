@@ -67,7 +67,7 @@
   <description>
     <p>KMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.</p>
     <p xml:lang="ca">El KMyMoney és un gestor de les finances personals desenvolupat per la comunitat KDE. Té un gran conjunt de característiques encara que és fàcil d'emprar per als usuaris no tècnics.</p>
-    <p xml:lang="ca-valencia">El KMyMoney és un gestor de les finances personals desenvolupat per la comunitat KDE. Té un gran conjunt de característiques encara que és fàcil d'emprar per als usuaris no tècnics.</p>
+    <p xml:lang="ca-valencia">KMyMoney és un gestor de les finances personals desenvolupat per la comunitat KDE. Té un gran conjunt de característiques encara que és fàcil d'emprar per als usuaris no tècnics.</p>
     <p xml:lang="de">KMyMoney ist eine persönliche Finanzverwaltung von KDE mit vielen Funktionen, aber trotzdem leicht zu bedienen.</p>
     <p xml:lang="en-GB">KMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.</p>
     <p xml:lang="es">KMyMoney es un gestor de finanzas personales creado por KDE. Contiene un gran número de funciones, aunque es fácil de usar para los usuarios no técnicos.</p>
@@ -130,7 +130,7 @@
       <caption>KMyMoney has a welcome page to help new users get off to a good start</caption>
       <caption xml:lang="bs">KMyMoney ima stranicu dobrodošlice da pomogne novim korisnicima da imaju dobar start</caption>
       <caption xml:lang="ca">El KMyMoney disposa d'una pàgina de benvinguda per a ajudar els usuaris nous a començar amb bon peu</caption>
-      <caption xml:lang="ca-valencia">El KMyMoney disposa d'una pàgina de benvinguda per a ajudar els usuaris nous a començar amb bon peu</caption>
+      <caption xml:lang="ca-valencia">KMyMoney disposa d'una pàgina de benvinguda per a ajudar els usuaris nous a començar amb bon peu</caption>
       <caption xml:lang="da">KMyMoney har en velkomstside til at hjælpe nye brugere godt i gang</caption>
       <caption xml:lang="de">KMyMoney hat eine Willkommensseite, um neue Anwender zu Anfang zu unterstützen</caption>
       <caption xml:lang="en-GB">KMyMoney has a welcome page to help new users get off to a good start</caption>
