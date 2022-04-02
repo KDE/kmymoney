@@ -1818,7 +1818,6 @@ QString PivotTable::renderHTML() const
 
                         // don't show closed accounts if they have not been used
                         if (!rowname.isClosed() || isUsed) {
-                            innergroupdata +=
                             innergroupdata += QString("<tr class=\"row-%1\"%2><td%3 class=\"left\" style=\"text-indent: %4.0em\">%5%6</td>")
                                     .arg(rownum & 0x01 ? "even" : "odd")
                                     .arg(rowname.isTopLevel() ? " id=\"topparent\"" : "")
