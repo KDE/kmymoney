@@ -50,6 +50,9 @@ public:
 
     void loadProfiles()
     {
+        // only need to do this once
+        disconnect(ui->kcfg_QifExportProfile, &QLineEdit::textChanged, this, &KCMCSVImporterPrivate::loadProfiles);
+
         auto text = ui->kcfg_QifExportProfile->text();
 
         // load the profiles from the configuration into the combobox
@@ -60,6 +63,8 @@ public:
 
         if (profileList.isEmpty()) {
             profileList.append(emptyProfileListText);
+            ui->qifProfileCombo->setToolTip(
+                i18nc("@info:tooltip No QIF profile defined", "Please use the QIF profile editor in the QIF plugin settings to create one."));
         }
         profileList.sort();
 
@@ -107,6 +112,12 @@ KCMCSVImporter::KCMCSVImporter(QWidget* parent, const QVariantList& args)
     // once everything is set up, copy the combobox content to the hidden field
     QTimer::singleShot(50, this, [&]() {
         Q_D(KCMCSVImporter);
+        // Check if the combo box has been loaded. There must
+        // be at least one entry in the list. If none is present,
+        // we simply call loadProfile() to fix that.
+        if (d->ui->qifProfileCombo->count() == 0) {
+            d->loadProfiles();
+        }
         d->setSelectedProfile(d->ui->qifProfileCombo->currentIndex());
     });
 }
