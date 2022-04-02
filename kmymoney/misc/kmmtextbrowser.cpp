@@ -44,7 +44,7 @@ void KMMTextBrowser::setHtml(const QString& text)
 
     if (match.hasMatch()) {
         m_css = match.captured(1);
-        m_html = m_html.remove(match.capturedRef(0).position(), match.capturedRef(1).length());
+        m_html = m_html.remove(match.capturedRef(1).position(), match.capturedRef(1).length());
     }
 
     QTextBrowser::setHtml(text);
