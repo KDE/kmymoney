@@ -991,6 +991,14 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
     // and the other one being in a different commodity, we adjust that later on
     d->ui->creditDebitEdit->setCommodity(commodity);
 
+    // we block sending out signals for the account and category combo here
+    // to avoid calling NewTransactionEditorPrivate::categoryChanged which
+    // does not work properly when loading the editor
+    QSignalBlocker accountBlocker(d->ui->accountCombo->lineEdit());
+    d->ui->accountCombo->clearEditText();
+    QSignalBlocker categoryBlocker(d->ui->categoryCombo->lineEdit());
+    d->ui->categoryCombo->clearEditText();
+
     if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
         d->m_transaction = MyMoneyTransaction();
         d->m_transaction.setCommodity(commodity.id());
@@ -1003,10 +1011,6 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
         } else {
             d->ui->dateEdit->setDate(QDate::currentDate());
         }
-        QSignalBlocker accountBlocker(d->ui->accountCombo->lineEdit());
-        d->ui->accountCombo->clearEditText();
-        QSignalBlocker categoryBlocker(d->ui->categoryCombo->lineEdit());
-        d->ui->categoryCombo->clearEditText();
 
         d->ui->creditDebitEdit->setSharesCommodity(commodity);
         // the default exchange rate is 1 so we don't need to set it here
@@ -1056,10 +1060,6 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                 d->ui->statusCombo->setCurrentIndex(splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
                 d->ui->tagContainer->loadTags(splitIdx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
             } else {
-                // we block sending out signals for the category combo here to avoid
-                // calling NewTransactionEditorPrivate::categoryChanged which does not
-                // work properly when loading the editor
-                QSignalBlocker categoryComboBlocker(d->ui->categoryCombo);
                 d->splitModel.appendSplit(MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
                 if (splitIdx.data(eMyMoney::Model::TransactionSplitCountRole) == 2) {
                     // force the value of the second split to be the same as for the first
