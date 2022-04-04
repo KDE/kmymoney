@@ -1097,7 +1097,6 @@ bool FormatsPage::isComplete() const
             // check if QIF profile exists and is selected
             QStringList profileList;
             KSharedConfigPtr config = KSharedConfig::openConfig();
-            qDebug() << config->name();
             KConfigGroup grp = config->group("Profiles");
             profileList = grp.readEntry("profiles", QStringList());
 
