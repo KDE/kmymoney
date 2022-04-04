@@ -89,7 +89,7 @@ void KImportDlg::slotBrowse()
     // determine what the browse prefix should be from the current profile
 
     MyMoneyQifProfile tmpprofile;
-    tmpprofile.loadProfile("Profile-" + profile());
+    tmpprofile.loadProfile(profile());
     QUrl file = QFileDialog::getOpenFileUrl(this,
                                             i18n("Import File..."),
                                             QUrl::fromLocalFile(m_qlineeditFile->text()),
@@ -157,26 +157,26 @@ void KImportDlg::loadProfiles(const bool selectLast)
 
     QStringList list;
     KSharedConfigPtr config = KSharedConfig::openConfig();
-    KConfigGroup grp = config->group("Profiles");
+    KConfigGroup grp = config->group(QLatin1String("Profiles"));
 
-    list = grp.readEntry("profiles", QStringList());
+    list = grp.readEntry(QLatin1String("profiles"), QStringList());
     list.sort();
     if (list.isEmpty()) {
         // in case the list is empty, we need to create the default profile
         MyMoneyQifProfile defaultProfile;
         defaultProfile.setProfileDescription(i18n("The default QIF profile"));
-        defaultProfile.setProfileName("Profile-Default");
+        defaultProfile.setProfileName(QLatin1String("Default"));
 
-        list += "Default";
-        grp.writeEntry("profiles", list);
+        list += QLatin1String("Default");
+        grp.writeEntry(QLatin1String("profiles"), list);
 
         defaultProfile.saveProfile();
     }
     m_profileComboBox->addItems(list);
 
     if (selectLast == true) {
-        config->group("Last Use Settings");
-        current = grp.readEntry("KImportDlg_LastProfile");
+        config->group(QLatin1String("Last Use Settings"));
+        current = grp.readEntry(QLatin1String("KImportDlg_LastProfile"));
     }
 
     int index = m_profileComboBox->findText(current, Qt::MatchExactly);

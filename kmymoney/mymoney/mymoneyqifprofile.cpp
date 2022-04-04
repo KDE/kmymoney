@@ -142,12 +142,12 @@ MyMoneyQifProfile::~MyMoneyQifProfile()
 
 void MyMoneyQifProfile::clear()
 {
-    m_dateFormat = "%d.%m.%yyyy";
-    m_apostropheFormat = "2000-2099";
-    m_valueMode = "";
-    m_filterScriptImport = "";
-    m_filterScriptExport = "";
-    m_filterFileType = "*.qif *.QIF";
+    m_dateFormat = QLatin1String("%d.%m.%yyyy");
+    m_apostropheFormat = QLatin1String("2000-2099");
+    m_valueMode.clear();
+    m_filterScriptImport.clear();
+    m_filterScriptExport.clear();
+    m_filterFileType = QLatin1String("*.qif *.QIF");
 
     m_decimal.clear();
     m_decimal['$'] = m_decimal['Q'] = m_decimal['T'] = m_decimal['O'] = m_decimal['I'] = QLocale().decimalPoint();
@@ -155,25 +155,26 @@ void MyMoneyQifProfile::clear()
     m_thousands.clear();
     m_thousands['$'] = m_thousands['Q'] = m_thousands['T'] = m_thousands['O'] = m_thousands['I'] = QLocale().groupSeparator();
 
-    m_openingBalanceText = "Opening Balance";
-    m_voidMark = "VOID ";
+    m_openingBalanceText = QLatin1String("Opening Balance");
+    m_voidMark = QLatin1String("VOID ");
     m_accountDelimiter = '[';
 
-    m_profileName = "";
-    m_profileDescription = "";
-    m_profileType = "Bank";
+    m_profileName.clear();
+    m_profileDescription.clear();
+    m_profileType = QLatin1String("Bank");
 
     m_attemptMatchDuplicates = true;
 }
 
 void MyMoneyQifProfile::loadProfile(const QString& name)
 {
-    KSharedConfigPtr config = KSharedConfig::openConfig();
-    KConfigGroup grp = config->group(name);
-
     clear();
 
-    m_profileName = name;
+    setProfileName(name);
+
+    KSharedConfigPtr config = KSharedConfig::openConfig();
+    KConfigGroup grp = config->group(m_profileName);
+
     m_profileDescription = grp.readEntry("Description", m_profileDescription);
     m_profileType = grp.readEntry("Type", m_profileType);
     m_dateFormat = grp.readEntry("DateFormat", m_dateFormat);
@@ -239,10 +240,12 @@ void MyMoneyQifProfile::saveProfile()
 
 void MyMoneyQifProfile::setProfileName(const QString& name)
 {
-    if (m_profileName != name)
+    const auto internalName = QStringLiteral("Profile-%1").arg(name);
+
+    if (m_profileName != internalName)
         m_isDirty = true;
 
-    m_profileName = name;
+    m_profileName = internalName;
 }
 
 void MyMoneyQifProfile::setProfileDescription(const QString& desc)

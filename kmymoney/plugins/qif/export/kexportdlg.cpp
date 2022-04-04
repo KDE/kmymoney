@@ -119,26 +119,26 @@ void KExportDlg::loadProfiles(const bool selectLast)
 
     QStringList list;
     KSharedConfigPtr config = KSharedConfig::openConfig();
-    KConfigGroup grp = config->group("Profiles");
+    KConfigGroup grp = config->group(QLatin1String("Profiles"));
 
-    list = grp.readEntry("profiles", QStringList());
+    list = grp.readEntry(QLatin1String("profiles"), QStringList());
     list.sort();
     if (list.isEmpty()) {
         // in case the list is empty, we need to create the default profile
         MyMoneyQifProfile defaultProfile;
         defaultProfile.setProfileDescription(i18n("The default QIF profile"));
-        defaultProfile.setProfileName("Profile-Default");
+        defaultProfile.setProfileName(QLatin1String("Default"));
 
-        list += "Default";
-        grp.writeEntry("profiles", list);
+        list += QLatin1String("Default");
+        grp.writeEntry(QLatin1String("profiles"), list);
 
         defaultProfile.saveProfile();
     }
     m_profileComboBox->insertItems(0, list);
 
     if (selectLast == true) {
-        grp = config->group("Last Use Settings");
-        current = grp.readEntry("KExportDlg_LastProfile");
+        grp = config->group(QLatin1String("Last Use Settings"));
+        current = grp.readEntry(QLatin1String("KExportDlg_LastProfile"));
     }
 
     m_profileComboBox->setCurrentItem(0);

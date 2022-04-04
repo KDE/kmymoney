@@ -50,7 +50,7 @@ void MyMoneyQifWriter::write(const QString& filename, const QString& profile,
                              const bool categoryData,
                              const QDate& startDate, const QDate& endDate)
 {
-    m_qifProfile.loadProfile("Profile-" + profile);
+    m_qifProfile.loadProfile(profile);
 
     QFile qifFile(filename);
     if (qifFile.open(QIODevice::WriteOnly)) {

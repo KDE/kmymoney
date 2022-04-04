@@ -151,7 +151,7 @@ private:
     /// \internal d-pointer instance.
     Private* const d;
     bool m_isDirty;
-    QString m_profileName;
+    QString m_profileName; //< contains the name of the profile with "Profile-" prepended
     QString m_profileDescription;
     QString m_dateFormat;
     QString m_apostropheFormat;

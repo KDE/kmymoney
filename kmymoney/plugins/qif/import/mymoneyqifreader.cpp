@@ -278,7 +278,7 @@ void MyMoneyQifReader::setURL(const QUrl &url)
 
 void MyMoneyQifReader::setProfile(const QString& profile)
 {
-    m_qifProfile.loadProfile("Profile-" + profile);
+    m_qifProfile.loadProfile(profile);
 }
 
 void MyMoneyQifReader::slotSendDataToFilter()

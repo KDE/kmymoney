@@ -248,7 +248,7 @@ void MyMoneyQifProfileEditor::slotLoadProfileFromConfig(const QString& profile)
         profileName = m_profileListBox->item(0)->text();
     }
 
-    m_profile.loadProfile("Profile-" + profileName);
+    m_profile.loadProfile(profileName);
 
     QList<QListWidgetItem*> lbi = m_profileListBox->findItems(profileName, Qt::MatchExactly | Qt::MatchCaseSensitive);
 
