@@ -399,7 +399,6 @@ QString MyMoneyQifProfile::date(const QDate& datein) const
                         buffer += delim;
                     buffer += QString::number(datein.year());
                 }
-                break;
             } else {
                 throw MYMONEYEXCEPTION_CSTRING("Invalid char in QifProfile date field");
             }
