@@ -1060,7 +1060,12 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                 d->ui->statusCombo->setCurrentIndex(splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
                 d->ui->tagContainer->loadTags(splitIdx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
             } else {
+                // block the signals sent out from the model here so that
+                // connected widgets don't overwrite the values we just loaded
+                // because they are not yet set (d->ui->creditDebitEdit)
+                QSignalBlocker blocker(d->splitModel);
                 d->splitModel.appendSplit(MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
+
                 if (splitIdx.data(eMyMoney::Model::TransactionSplitCountRole) == 2) {
                     // force the value of the second split to be the same as for the first
                     idx = d->splitModel.index(0, 0);
