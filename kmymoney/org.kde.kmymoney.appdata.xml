@@ -89,7 +89,7 @@
     <p xml:lang="sk">KMyMomney je osobný správca financií od KDE. Prichádza s veľkou sadou funkcií, pričom je jednoduchý na používanie pre netechnického používateľa.</p>
     <p xml:lang="sl">KMyMoney je osebni finančni upravitelj namizja KDE. Priložen je velik nabor funkcij, ki so enostavne za uporabo za netehničnega uporabnika.</p>
     <p xml:lang="sv">KMyMoney är en hemekonomihanterare av KDE. Den levereras med ett stort antal funktioner, medan den är lätt att använda för den icke-tekniska användaren.</p>
-    <p xml:lang="tr">KMyMoney, KDE tarafından bir kişisel bir finans yöneticisidir. Teknik olmayan kullanıcılar için kullanımı kolayken, geniş bir özellik seti ile birlikte gelir.</p>
+    <p xml:lang="tr">KMyMoney, KDE tarafından bir kişisel bir finans yöneticisidir. Teknik olmayan kullanıcılar için kullanımı kolayken, geniş bir özellik kümesi ile birlikte gelir.</p>
     <p xml:lang="uk">KMyMoney — програма для керування особистими фінансами від KDE. У програмі передбачено багато можливостей, якими просто користуватися навіть технічно не обізнаним користувачам.</p>
     <p xml:lang="x-test">xxKMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.xx</p>
     <p xml:lang="zh-CN">KMyMoney 是一款 KDE 开发的个人财务管理工具。它不但功能丰富，而且非专业人士也可轻松上手。</p>
@@ -152,7 +152,7 @@
       <caption xml:lang="sk">KMyMoney má uvítaciu stránku na pomoc novým používateľom na dobrý začiatok</caption>
       <caption xml:lang="sl">KMyMoney ima stran dobrodošlice, s katero lahko novim uporabnikom pomaga do dobrega začetka</caption>
       <caption xml:lang="sv">KMyMoney har en välkomstsida för att hjälpa nya användare att komma igång</caption>
-      <caption xml:lang="tr">KMyMoney iyi bir başlangıç yapması için bir hoş geldiniz sayfası vardır</caption>
+      <caption xml:lang="tr">KMyMoney'in iyi bir başlangıç yapılabilmesi için bir hoş geldiniz sayfası vardır</caption>
       <caption xml:lang="uk">У KMyMoney передбачено сторінку вітання, за допомогою якої новим користувачам буде простіше розпочати користування програмою.</caption>
       <caption xml:lang="x-test">xxKMyMoney has a welcome page to help new users get off to a good startxx</caption>
       <caption xml:lang="zh-CN">KMyMoney 会显示一个欢迎页面来帮助新用户轻松上手</caption>
@@ -214,7 +214,7 @@
       <caption xml:lang="sk">Spravovať účtu napríklad podľa inštitúcií, ktoré ich držia</caption>
       <caption xml:lang="sl">Upravlja račune, npr. po institucijah, kjer imajo sedež</caption>
       <caption xml:lang="sv">Hantera konton, t.ex. enligt institution som de hör till</caption>
-      <caption xml:lang="tr">Hesapları yönetin ör. tutuldukları kurumlar tarafından </caption>
+      <caption xml:lang="tr">Hesapları yönetin; örn. tutuldukları kurumlar tarafından </caption>
       <caption xml:lang="uk">Керування рахунками, наприклад, за установами, де їх відкрито.</caption>
       <caption xml:lang="x-test">xxManage accounts e.g. by institutions they are held atxx</caption>
       <caption xml:lang="zh-CN">按开户机构管理账户</caption>
