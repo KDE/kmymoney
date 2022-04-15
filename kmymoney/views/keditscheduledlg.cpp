@@ -266,10 +266,8 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
         d->setScheduleOccurrencePeriod();
         d->m_schedule.setOccurrenceMultiplier(d->ui->frequencyNoEdit->value());
 
-        if (d->m_schedule.transactionsRemaining() != value) {
-            QSignalBlocker blocked(d->ui->finalPaymentDateEdit);
-            d->ui->finalPaymentDateEdit->setDate(d->m_schedule.dateAfter(value));
-        }
+        QSignalBlocker blocked(d->ui->finalPaymentDateEdit);
+        d->ui->finalPaymentDateEdit->setDate(d->m_schedule.dateAfter(value));
     });
 
     connect(d->ui->finalPaymentDateEdit, &KMyMoneyDateInput::dateChanged, this, [&](const QDate& date) {
@@ -279,10 +277,8 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
         d->setScheduleOccurrencePeriod();
         d->m_schedule.setOccurrenceMultiplier(d->ui->frequencyNoEdit->value());
 
-        if (d->m_schedule.endDate() != date) {
-            d->m_schedule.setEndDate(date);
-            d->updateTransactionsRemaining();
-        }
+        d->m_schedule.setEndDate(date);
+        d->updateTransactionsRemaining();
     });
 
     connect(d->ui->frequencyEdit, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int idx) {
