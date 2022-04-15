@@ -182,9 +182,8 @@ public:
     {
         auto remain = m_schedule.transactionsRemaining();
         if (remain != ui->m_RemainingEdit->value()) {
-            ui->m_RemainingEdit->blockSignals(true);
+            QSignalBlocker blocker(ui->m_RemainingEdit);
             ui->m_RemainingEdit->setValue(remain);
-            ui->m_RemainingEdit->blockSignals(false);
         }
     }
 
@@ -630,11 +629,8 @@ void KEditScheduleDlg::slotRemainingChanged(int value)
     d->m_schedule.setOccurrencePeriod(static_cast<Schedule::Occurrence>(d->ui->m_frequencyEdit->currentItem()));
     d->m_schedule.setOccurrenceMultiplier(d->ui->m_frequencyNoEdit->value());
 
-    if (d->m_schedule.transactionsRemaining() != value) {
-        d->ui->m_FinalPaymentEdit->blockSignals(true);
-        d->ui->m_FinalPaymentEdit->setDate(d->m_schedule.dateAfter(value));
-        d->ui->m_FinalPaymentEdit->blockSignals(false);
-    }
+    QSignalBlocker blocker(d->ui->m_FinalPaymentEdit);
+    d->ui->m_FinalPaymentEdit->setDate(d->m_schedule.dateAfter(value));
 }
 
 void KEditScheduleDlg::slotEndDateChanged(const QDate& date)
@@ -646,10 +642,8 @@ void KEditScheduleDlg::slotEndDateChanged(const QDate& date)
     d->m_schedule.setOccurrencePeriod(static_cast<Schedule::Occurrence>(d->ui->m_frequencyEdit->currentItem()));
     d->m_schedule.setOccurrenceMultiplier(d->ui->m_frequencyNoEdit->value());
 
-    if (d->m_schedule.endDate() != date) {
-        d->m_schedule.setEndDate(date);
-        d->updateTransactionsRemaining();
-    }
+    d->m_schedule.setEndDate(date);
+    d->updateTransactionsRemaining();
 }
 
 void KEditScheduleDlg::slotPostDateChanged(const QDate& date)
