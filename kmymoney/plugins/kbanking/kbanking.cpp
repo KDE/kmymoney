@@ -1246,6 +1246,19 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
         }
     }
 
+    // Append additional payee/payer information which
+    // can be found in additional fields
+    p = AB_Transaction_GetUltimateDebtor(t);
+    if (p) {
+        const auto delim = kt.m_strPayee.isEmpty() ? QChar() : QLatin1Char('/');
+        kt.m_strPayee.append(QStringLiteral("%1%2").arg(delim).arg(p));
+    }
+    p = AB_Transaction_GetUltimateCreditor(t);
+    if (p) {
+        const auto delim = kt.m_strPayee.isEmpty() ? QChar() : QLatin1Char('/');
+        kt.m_strPayee.append(QStringLiteral("%1%2").arg(delim).arg(p));
+    }
+
     kt.m_strPayee = kt.m_strPayee.trimmed();
 
     // date
