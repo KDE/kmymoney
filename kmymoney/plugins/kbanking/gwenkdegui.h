@@ -70,6 +70,7 @@ private:
                          GWEN_DB_NODE *methodParams,
                          uint32_t guiid);
 
+    QString passwordId;
 };
 
 /**

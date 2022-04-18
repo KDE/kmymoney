@@ -20,10 +20,10 @@
 #include <QPointer>
 #include <QLineEdit>
 
+#include "passstore.h"
 #include "passwordtoggle.h"
 #include "widgets/chiptandialog.h"
 #include "widgets/phototandialog.h"
-
 
 #define KBANKING_TANMETHOD_TEXT          0x00000001
 #define KBANKING_TANMETHOD_CHIPTAN       0x00000002
@@ -52,14 +52,23 @@ int gwenKdeGui::execDialog(GWEN_DIALOG *dlg, GWEN_UNUSED uint32_t guiid)
         return GWEN_ERROR_GENERIC;
     }
 
+    PassStore* passStore(nullptr);
     QDialog* dialog = dynamic_cast<QDialog*>(qt5Dlg.getMainWindow());
     const auto lineedits = dialog->findChildren<QLineEdit*>();
     for (const auto& edit : qAsConst(lineedits)) {
         if (edit->echoMode() == QLineEdit::Password) {
+            // check for available pass entry
+            passStore = new PassStore(edit, QLatin1String("KMyMoney/KBanking"), passwordId);
+            if (!passStore->isActionVisible()) {
+                qDebug() << "No password found for KMyMoney/KBanking/" << passwordId;
+            }
             new PasswordToggle(edit);
+            break;
         }
     }
-    return qt5Dlg.execute();
+    auto rc = qt5Dlg.execute();
+
+    return rc;
 }
 
 int gwenKdeGui::getPasswordText(uint32_t flags,
@@ -73,6 +82,9 @@ int gwenKdeGui::getPasswordText(uint32_t flags,
                                 GWEN_DB_NODE* methodParams,
                                 uint32_t guiid)
 {
+    // Keep the current password identifier
+    passwordId = QString(token);
+
     // convert HTML linebreaks into regular ones
     QString txt = QString::fromUtf8(text);
     txt.replace(QLatin1String("<br>"), QLatin1String("\n"));

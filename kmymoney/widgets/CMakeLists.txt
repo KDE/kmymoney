@@ -61,6 +61,7 @@ set(kmm_base_widgets_SOURCES
   ktagcontainer.cpp
   ktaglabel.cpp
   passwordtoggle.cpp
+  passstore.cpp
   popuppositioner.cpp
   styleditemdelegateforwarder.cpp
   tabbar.cpp
@@ -136,23 +137,12 @@ target_link_libraries(kmm_base_widgets PUBLIC
   KF5::Completion
   KF5::Notifications
   KF5::TextWidgets
-#  KF5::KIOWidgets
-#  KF5::ItemViews
-#  KF5::I18n
-#  KF5::XmlGui
-#  KF5::ConfigWidgets
-#  KF5::ConfigCore
-#  KF5::ItemModels
-#  KF5::Service
-#  Qt5::Gui
-#  Qt5::Core
-#  Qt5::Widgets
-#  Qt5::Xml
   Alkimia::alkimia
   kmm_selections
   kmm_mymoney
   kmm_settings
   kmm_models
+  kmm_gpgfile
 )
 
 set_target_properties(kmm_base_widgets PROPERTIES
