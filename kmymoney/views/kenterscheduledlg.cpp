@@ -58,19 +58,6 @@ public:
         delete ui;
     }
 
-    MyMoneyTransaction transaction() const
-    {
-        auto t = m_schedule.transaction();
-
-        if (m_editor) {
-            m_editor->transaction();
-        }
-
-        t.clearId();
-        t.setEntryDate(QDate());
-        return t;
-    }
-
     Ui::KEnterScheduleDlg* ui;
     NewTransactionEditor* m_editor;
     MyMoneySchedule m_schedule;
@@ -119,7 +106,22 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget* parent, const MyMoneySchedule& sch
     d->ui->buttonIgnore->setHidden(true);
     d->ui->buttonSkip->setHidden(true);
 
-    d->m_editor->loadSchedule(d->m_schedule);
+    try {
+        if (d->m_schedule.type() == eMyMoney::Schedule::Type::LoanPayment) {
+            // in case of a loan payment we need to adjust the schedule locally
+            // to contain the actual values for the next transaction. We do that
+            // on a copy of the schedule.
+            auto schedule(d->m_schedule);
+            auto t = schedule.transaction();
+            KMyMoneyUtils::calculateAutoLoan(schedule, t, QMap<QString, MyMoneyMoney>());
+            schedule.setTransaction(t);
+            d->m_editor->loadSchedule(schedule);
+        } else {
+            d->m_editor->loadSchedule(d->m_schedule);
+        }
+    } catch (const MyMoneyException& e) {
+        KMessageBox::detailedError(this, i18n("Unable to load schedule details"), QString::fromLatin1(e.what()));
+    }
 
     // setup name and type
     d->ui->m_scheduleName->setText(d->m_schedule.name());
@@ -172,20 +174,7 @@ void KEnterScheduleDlg::setShowExtendedKeys(bool visible)
 MyMoneyTransaction KEnterScheduleDlg::transaction()
 {
     Q_D(const KEnterScheduleDlg);
-    auto t = d->m_schedule.transaction();
-
-    if (d->m_editor) {
-        t = d->m_editor->transaction();
-    }
-
-    try {
-        if (d->m_schedule.type() == eMyMoney::Schedule::Type::LoanPayment) {
-            KMyMoneyUtils::calculateAutoLoan(d->m_schedule, t, QMap<QString, MyMoneyMoney>());
-        }
-    } catch (const MyMoneyException& e) {
-        KMessageBox::detailedError(this, i18n("Unable to load schedule details"), QString::fromLatin1(e.what()));
-    }
-
+    auto t = d->m_editor->transaction();
     t.clearId();
     t.setEntryDate(QDate());
     return t;

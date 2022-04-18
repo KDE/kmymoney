@@ -219,16 +219,20 @@ public:
                                 taccepted = dlg->transaction();
                                 // make sure to suppress comparison of some data: postDate
                                 torig.setPostDate(taccepted.postDate());
-                                if (torig != taccepted) {
-                                    QPointer<KConfirmManualEnterDlg> cdlg = new KConfirmManualEnterDlg(schedule, q);
-                                    cdlg->loadTransactions(torig, taccepted);
-                                    if ((cdlg->exec() == QDialog::Accepted) && (cdlg != nullptr)) {
-                                        action = cdlg->action();
-                                        break;
+
+                                // for loans we only have the option to enter, so we don't ask
+                                if (schedule.type() != eMyMoney::Schedule::Type::LoanPayment) {
+                                    if (torig != taccepted) {
+                                        QPointer<KConfirmManualEnterDlg> cdlg = new KConfirmManualEnterDlg(schedule, q);
+                                        cdlg->loadTransactions(torig, taccepted);
+                                        if ((cdlg->exec() == QDialog::Accepted) && (cdlg != nullptr)) {
+                                            action = cdlg->action();
+                                            break;
+                                        }
+                                        // the user has chosen 'cancel' during confirmation,
+                                        // we go back to the editor
+                                        continue;
                                     }
-                                    // the user has chosen 'cancel' during confirmation,
-                                    // we go back to the editor
-                                    continue;
                                 }
                                 break;
 
