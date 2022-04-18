@@ -1278,8 +1278,10 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
         }
     }
 
+#if QT_VERSION_CHECK(AQBANKING_VERSION_MAJOR, AQBANKING_VERSION_MINOR, AQBANKING_VERSION_PATCHLEVEL) > QT_VERSION_CHECK(6, 2, 0)
     // Append additional payee/payer information which
-    // can be found in additional fields
+    // can be found in additional fields (but only in
+    // versions > 6.2.0)
     p = AB_Transaction_GetUltimateDebtor(t);
     if (p) {
         const auto delim = kt.m_strPayee.isEmpty() ? QChar() : QLatin1Char('/');
@@ -1290,6 +1292,7 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
         const auto delim = kt.m_strPayee.isEmpty() ? QChar() : QLatin1Char('/');
         kt.m_strPayee.append(QStringLiteral("%1%2").arg(delim).arg(p));
     }
+#endif
 
     kt.m_strPayee = kt.m_strPayee.trimmed();
 
