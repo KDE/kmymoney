@@ -67,7 +67,7 @@ LoanAttributesWizardPage::~LoanAttributesWizardPage()
  */
 bool LoanAttributesWizardPage::isComplete() const
 {
-    return true;
+    return !ui->m_accountNameEdit->text().isEmpty();
 }
 
 void LoanAttributesWizardPage::initializePage()
