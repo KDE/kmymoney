@@ -1,5 +1,3 @@
-add_subdirectory( libkgpgfile )
-
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/xmlstorage.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/xmlstorage.json @ONLY)
 
 set(xmlstorage_SOURCES
@@ -22,7 +20,7 @@ target_link_libraries(xmlstorage
     KF5::Archive
     KF5::I18n
     KF5::CoreAddons
-    kgpgfile
+    kmm_gpgfile
     kmymoney_common
     kmm_mymoney
     xmlstoragehelper
@@ -55,6 +53,6 @@ target_link_libraries(kcm_xmlstorage
     KF5::CoreAddons
     KF5::ConfigWidgets
     KF5::Completion
-    kgpgfile
+    kmm_gpgfile
     kmm_settings
 )

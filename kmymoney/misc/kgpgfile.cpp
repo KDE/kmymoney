@@ -13,31 +13,31 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <vector>
-#include <qglobal.h>
-#include <QFile>
-#include <QDir>
-#include <QString>
 #include <QByteArray>
+#include <QDateTime>
+#include <QDebug>
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
 #include <QList>
 #include <QSaveFile>
-#include <QDateTime>
-#include <QStringList>
 #include <QStandardPaths>
-#include <QFileInfo>
-#include <QDebug>
+#include <QString>
+#include <QStringList>
+#include <qglobal.h>
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #ifdef ENABLE_GPG
 #include <gpgme++/context.h>
-#include <gpgme++/encryptionresult.h>
-#include <gpgme++/decryptionresult.h>
-#include <gpgme++/keylistresult.h>
-#include <gpgme++/key.h>
 #include <gpgme++/data.h>
+#include <gpgme++/decryptionresult.h>
+#include <gpgme++/encryptionresult.h>
 #include <gpgme++/engineinfo.h>
+#include <gpgme++/key.h>
+#include <gpgme++/keylistresult.h>
 
 class GPGConfig
 {
@@ -137,7 +137,8 @@ public:
         }
     }
 
-    ~Private() {
+    ~Private()
+    {
         delete m_ctx;
     }
 
@@ -150,14 +151,14 @@ public:
     GpgME::Context* m_ctx;
     GpgME::Data m_data;
 
-    std::vector< GpgME::Key > m_recipients;
+    std::vector<GpgME::Key> m_recipients;
 
     // the result set of the last key list job
-    std::vector< GpgME::Key > m_keys;
+    std::vector<GpgME::Key> m_keys;
 };
 
-KGPGFile::KGPGFile(const QString& fn, const QString& homedir, const QString& options) :
-    d(new Private)
+KGPGFile::KGPGFile(const QString& fn, const QString& homedir, const QString& options)
+    : d(new Private)
 {
     // only kept for interface compatibility
     Q_UNUSED(homedir);
@@ -228,7 +229,6 @@ bool KGPGFile::open(OpenMode mode)
     }
 
     if (isWritable()) {
-
         if (d->m_recipients.empty()) {
             setOpenMode(NotOpen);
             return false;
@@ -297,7 +297,7 @@ void KGPGFile::close()
     setOpenMode(NotOpen);
 }
 
-qint64 KGPGFile::writeData(const char *data, qint64 maxlen)
+qint64 KGPGFile::writeData(const char* data, qint64 maxlen)
 {
     if (!isOpen())
         return EOF;
@@ -322,7 +322,7 @@ qint64 KGPGFile::writeData(const char *data, qint64 maxlen)
     return bytesWritten;
 }
 
-qint64 KGPGFile::readData(char *data, qint64 maxlen)
+qint64 KGPGFile::readData(char* data, qint64 maxlen)
 {
     if (maxlen == 0)
         return 0;
@@ -428,7 +428,7 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
 
                         if (((skey.canEncrypt() && !secretKeys) || (skey.isSecret() && secretKeys))
 
-                                &&  !(skey.isRevoked() || skey.isExpired() || skey.isInvalid()  || skey.isDisabled())) {
+                            && !(skey.isRevoked() || skey.isExpired() || skey.isInvalid() || skey.isDisabled())) {
                             QString entry = QString("%1:%2").arg(key.shortKeyID()).arg(userIDs[i].id());
                             list += entry;
                             if (needPushBack) {
@@ -442,7 +442,7 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
                 } else {
                     // we have no subkey, so we operate on the main key
                     if (((key.canEncrypt() && !secretKeys) || (key.hasSecret() && secretKeys))
-                            && !(key.isRevoked() || key.isExpired() || key.isInvalid()  || key.isDisabled())) {
+                        && !(key.isRevoked() || key.isExpired() || key.isInvalid() || key.isDisabled())) {
                         QString entry = QString("%1:%2").arg(key.shortKeyID()).arg(userIDs[i].id());
                         list += entry;
                         if (needPushBack) {
@@ -462,7 +462,8 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
 #else // not ENABLE_GPG
 
 // NOOP implementation
-KGPGFile::KGPGFile(const QString& fn, const QString& homedir, const QString& options) : d(0)
+KGPGFile::KGPGFile(const QString& fn, const QString& homedir, const QString& options)
+    : d(0)
 {
     Q_UNUSED(fn);
     Q_UNUSED(homedir);
@@ -487,14 +488,14 @@ void KGPGFile::flush()
 {
 }
 
-qint64 KGPGFile::readData(char *data, qint64 maxlen)
+qint64 KGPGFile::readData(char* data, qint64 maxlen)
 {
     Q_UNUSED(data);
     Q_UNUSED(maxlen);
     return 0;
 }
 
-qint64 KGPGFile::writeData(const char *data, qint64 maxlen)
+qint64 KGPGFile::writeData(const char* data, qint64 maxlen)
 {
     Q_UNUSED(data);
     Q_UNUSED(maxlen);

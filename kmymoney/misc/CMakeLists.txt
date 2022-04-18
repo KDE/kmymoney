@@ -116,33 +116,60 @@ target_link_libraries( kmm_selections
   Qt5::Core
 )
 
+
 set_target_properties(kmm_selections PROPERTIES
   VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
 )
-
 generate_export_header(kmm_selections)
 
 set_target_properties(kmm_printer PROPERTIES
   VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
 )
-
 generate_export_header(kmm_printer)
 
 set_target_properties(kmm_webconnect PROPERTIES
   VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
 )
-
 generate_export_header(kmm_webconnect)
+
+
+if(ENABLE_GPG)
+  if(WIN32)
+    find_package(KDEWin REQUIRED)
+    target_include_directories(kmm_gpgfile PUBLIC ${KDEWIN_INCLUDES})
+    target_compile_definitions(kgpgfile PUBLIC ${KDEWIN_DEFINITIONS})
+  endif()
+endif()
+
+set( kmm_gpgfile_SRCS
+  kgpgfile.cpp
+)
+add_library(kmm_gpgfile ${kmm_gpgfile_SRCS})
+
+target_link_libraries( kmm_gpgfile
+  PUBLIC
+  Qt5::Core
+  $<$<BOOL:${WIN32}>:${KDEWIN_LIBRARIES}>
+  $<$<BOOL:${Gpgmepp_FOUND}>:Gpgmepp>
+  $<$<BOOL:${KF5Gpgmepp_FOUND}>:KF5::Gpgmepp>
+)
+set_target_properties(kmm_gpgfile PROPERTIES
+  VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
+)
+generate_export_header(kmm_gpgfile)
+
 
 install(TARGETS
         kmm_printer
         kmm_webconnect
         kmm_selections
+        kmm_gpgfile
         ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(FILES
         ${CMAKE_CURRENT_BINARY_DIR}/kmm_printer_export.h
         ${CMAKE_CURRENT_BINARY_DIR}/kmm_selections_export.h
         ${CMAKE_CURRENT_BINARY_DIR}/kmm_webconnect_export.h
+        ${CMAKE_CURRENT_BINARY_DIR}/kmm_gpgfile_export.h
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
 
