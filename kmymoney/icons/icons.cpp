@@ -194,6 +194,7 @@ const QHash<Icon, QString> iconMappings{
     {Icon::TransactionStateNotMarked, QStringLiteral("view-financial-transfer-notmarked")},
     {Icon::TransactionStateCleared, QStringLiteral("view-financial-transfer-cleared")},
     {Icon::Unlink, QStringLiteral("remove-link")},
+    {Icon::Vault, QStringLiteral("plasmavault")},
 };
 
 KMM_ICONS_EXPORT QIcon get(Icon icon)
