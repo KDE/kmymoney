@@ -4,6 +4,7 @@
 */
 
 #include "passstore.h"
+#include "config-kmymoney.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -61,10 +62,10 @@ PassStore::PassStore(QLineEdit* parent, const QString& applicationPrefix, const 
 
     setPasswordId(id);
 
+#if ENABLE_GPG
     connect(d->m_loadPasswordAction, &QAction::triggered, this, [&]() {
         Q_D(PassStore);
-        KGPGFile passwordFile;
-        passwordFile.setFileName(d->passwordFile());
+        KGPGFile passwordFile(d->passwordFile());
         if (passwordFile.open(QIODevice::ReadOnly)) {
             QTextStream stream(&passwordFile);
             const auto pwd = stream.readLine();
@@ -72,6 +73,7 @@ PassStore::PassStore(QLineEdit* parent, const QString& applicationPrefix, const 
             d->m_lineEdit->setText(pwd);
         }
     });
+#endif
 }
 
 PassStore::~PassStore()
@@ -87,10 +89,12 @@ void PassStore::setPasswordId(const QString& id)
 
     // control visibility of icon
     bool visible = false;
+#if ENABLE_GPG
     if (KGPGFile::GPGAvailable() && !id.isEmpty()) {
         QFileInfo fi(d->passwordFile());
         visible = (fi.exists() && fi.isReadable());
     }
+#endif
     d->m_loadPasswordAction->setVisible(visible);
 }
 
