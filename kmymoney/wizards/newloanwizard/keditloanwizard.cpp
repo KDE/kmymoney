@@ -75,7 +75,7 @@ KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent)
 
     setWindowTitle(i18n("Edit loan wizard"));
 
-    d->m_account = account;
+    d->m_account = file->account(account.id());
     try {
         QString id = d->m_account.value("schedule");
         d->m_schedule = file->schedule(id);
@@ -109,6 +109,13 @@ KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent)
 
     // make sure, we show the correct start page
     setStartId(Page_EditIntro);
+
+    // make sure to update the name in case we change it
+    // the new loan wizard has a page for that which is
+    // not available in the edit loan wizard, but we have
+    // a field for it and simply copy any changes over to
+    // the (non-accessible) edit widget
+    connect(d->ui->m_loanAttributesPage->ui->m_accountNameEdit, &QLineEdit::textChanged, d->ui->m_namePage->ui->m_nameEdit, &QLineEdit::setText);
 }
 
 KEditLoanWizard::~KEditLoanWizard()
@@ -140,6 +147,7 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
     } catch (const MyMoneyException &) {
     }
     d->ui->m_loanAttributesPage->setInstitution(institutionName);
+    d->ui->m_loanAttributesPage->ui->m_accountNameEdit->setText(d->m_account.name());
 
     MyMoneyMoney ir;
     if (d->m_schedule.startDate() > QDate::currentDate()) {
