@@ -238,10 +238,9 @@ bool MyMoneyAccount::operator == (const MyMoneyAccount& right) const
     // clang-format on
 }
 
-Account::Type MyMoneyAccount::accountGroup() const
+Account::Type MyMoneyAccount::accountGroup(Account::Type type)
 {
-    Q_D(const MyMoneyAccount);
-    switch (d->m_accountType) {
+    switch (type) {
     case Account::Type::Checkings:
     case Account::Type::Savings:
     case Account::Type::Cash:
@@ -258,8 +257,14 @@ Account::Type MyMoneyAccount::accountGroup() const
         return Account::Type::Liability;
 
     default:
-        return d->m_accountType;
+        return type;
     }
+}
+
+Account::Type MyMoneyAccount::accountGroup() const
+{
+    Q_D(const MyMoneyAccount);
+    return accountGroup(d->m_accountType);
 }
 
 QString MyMoneyAccount::currencyId() const
