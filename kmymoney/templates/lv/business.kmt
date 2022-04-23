@@ -156,6 +156,6 @@
     <account type="12" name="8810 Nodoklis no peļņas (ienākuma nodoklis)"/>
    </account>
   </account>
-  <account type="1" name=""/>
+  <account type="9" name=""/>
  </accounts>
 </kmymoney-account-template>

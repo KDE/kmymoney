@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/da/acctchrt_car.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Bilejer</title>
+ <shortdesc>Udgifter vedrørende bil</shortdesc>
+ <longdesc>Udgifter i forbindelse med at holde bil. Vedligehold, drift og skatter.</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Bil">
+    <account type="13" name="Benzin"/>
+    <account type="13" name="Parking"/>
+    <account type="13" name="Reparation og vedligehold"/>
+    <account type="13" name="Vægtafgift"/>
+   </account>
+   <account type="13" name="Forsikring">
+    <account type="13" name="Bilforsikring"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

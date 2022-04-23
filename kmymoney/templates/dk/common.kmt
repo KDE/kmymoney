@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/da/acctchrt_common.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Basiskonti</title>
+ <shortdesc>En samling grundlæggende konti</shortdesc>
+ <longdesc>De fleste brugere kan have nytte af disse konti. Almindelige brugte konti er medtaget (check, lønkonto, kontant, kreditkort, indkomst og almindelige udgifter)</longdesc>
+ <accounts>
+  <account type="16" name="">
+   <account type="16" name="Åbningssaldi">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="Aktuelle aktiver">
+    <account type="1" name="Checkkonto"/>
+    <account type="3" name="Kontanter på lommen"/>
+    <account type="1" name="Lønkonto"/>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Andre indtægter"/>
+   <account type="12" name="Bonus"/>
+   <account type="12" name="Løn"/>
+   <account type="12" name="Modtagne gaver"/>
+   <account type="12" name="Renteindtægter">
+    <account type="12" name="Andre renter"/>
+    <account type="12" name="Checkrenter"/>
+    <account type="12" name="Lønkontorenter"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Forventede udgifter">
+    <account type="4" name="Kreditkort"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Abonnementer"/>
+   <account type="13" name="Antenne"/>
+   <account type="13" name="Bankgebyrer"/>
+   <account type="13" name="Bøger"/>
+   <account type="13" name="Computer"/>
+   <account type="13" name="Cykel"/>
+   <account type="13" name="Diverse"/>
+   <account type="13" name="Forsikring">
+    <account type="13" name="Indboforsikring"/>
+    <account type="13" name="Livsforsikring"/>
+    <account type="13" name="Sygesikring"/>
+   </account>
+   <account type="13" name="Forsyning">
+    <account type="13" name="Affald"/>
+    <account type="13" name="El"/>
+    <account type="13" name="Gas"/>
+    <account type="13" name="Vand"/>
+   </account>
+   <account type="13" name="Gaver"/>
+   <account type="13" name="Hobby"/>
+   <account type="13" name="Husholdning"/>
+   <account type="13" name="Internet"/>
+   <account type="13" name="Justering"/>
+   <account type="13" name="Medicin"/>
+   <account type="13" name="Offentlig transport"/>
+   <account type="13" name="Restaurant"/>
+   <account type="13" name="Skatter/afgifter">
+    <account type="13" name="Andre skatter"/>
+    <account type="13" name="Kommune"/>
+    <account type="13" name="Region"/>
+    <account type="13" name="Stat"/>
+   </account>
+   <account type="13" name="Telefon"/>
+   <account type="13" name="Tøj"/>
+   <account type="13" name="Tøjvask/rensning"/>
+   <account type="13" name="Uddannelse"/>
+   <account type="13" name="Underholdning">
+    <account type="13" name="Fritid"/>
+    <account type="13" name="Musik/film"/>
+    <account type="13" name="Rejser"/>
+   </account>
+   <account type="13" name="Velgørenhed"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

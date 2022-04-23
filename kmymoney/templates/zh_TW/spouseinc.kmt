@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/zh_TW/acctchrt_spouseinc.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>配偶收入</title>
+ <shortdesc>用來分開記錄配偶收入的科目</shortdesc>
+ <longdesc>如果您是雙薪家庭，您可能會想選擇這組帳號，來記錄配偶的收入。</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="稅費（配偶）">
+    <account type="13" name="個人綜合所得稅"/>
+    <account type="13" name="健保費"/>
+    <account type="13" name="勞保費"/>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="薪資（配偶）"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

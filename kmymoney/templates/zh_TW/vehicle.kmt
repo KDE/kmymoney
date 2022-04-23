@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/zh_TW/acctchrt_vehicle.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>汔機車</title>
+ <shortdesc>和汔機車相關的費用科目</shortdesc>
+ <longdesc>如果您有汔車或機車，您可能會想要選擇這組科目。它包含了可以記錄在台灣擁有汔機車時常見的費用的科目。</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="保險">
+    <account type="13" name="汔機車第三人強制責任險"/>
+    <account type="13" name="汔車保險"/>
+   </account>
+   <account type="13" name="汔機車">
+    <account type="13" name="停車費用"/>
+    <account type="13" name="加油"/>
+    <account type="13" name="維修與保養"/>
+   </account>
+   <account type="13" name="稅費">
+    <account type="13" name="燃料稅"/>
+    <account type="13" name="牌照稅"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

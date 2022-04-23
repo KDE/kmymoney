@@ -11,7 +11,7 @@
 <kmymoney-account-template>
  <title>Allgemeine Konten</title>
  <shortdesc>Grundlegende Kontenstruktur</shortdesc>
- <longdesc>Die meisten privaten, aber nicht die geschäftlichen Anwender benötigen diese grundlegende Kontenstruktur. Sie finden hier die allgemein üblichen Konten wie Giro-, Sparkonto, Bargeld, Kreditkarte, Erträge und verschiedene Ausgaben.</longdesc>
+ <longdesc>Die meisten privaten, aber nicht die geschäftlichen Anwender benötigen diese grundlegende Kontenstruktur. Sie finden hier die allgemein üblichen Konten wie Giro-, Sparkonto, Bargeld, Kreditkarte, Erträge und verschiedene Ausgaben. Wenn Sie aber einen SKR verwenden wollen, brauchen Sie sie nicht.</longdesc>
  <accounts>
   <account type="9" name="">
    <account type="9" name="Barvermögen">
@@ -50,7 +50,7 @@
    </account>
    <account type="13" name="Spenden"/>
    <account type="13" name="Steuern">
-    <account type="13" name="Einkommenssteuer"/>
+    <account type="13" name="Einkommensteuer"/>
     <account type="13" name="Sonstige"/>
     <account type="13" name="Sozialversicherung"/>
    </account>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/zh_TW/acctchrt_eduloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>助學貸款</title>
+ <shortdesc>助學貸款與相關利息的科目</shortdesc>
+ <longdesc>如果您有助學貸款或助學貸款利息，您可能會想要選擇這組科目。</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="利息">
+    <account type="13" name="助學貸款利息"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="貸款">
+    <account type="10" name="助學貸款"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

@@ -186,7 +186,7 @@ Erweitert auf den Stand 2018: Christoph Franzen 2017-2018, christoph@alte-pflast
        <account type="9" name="0672 Forderungen aus Lieferungen und Leistungen gegen Gesellschafter &gt;1 Jahr"/>
       </account>
       <account type="9" name="0673 Gegenkonto zu 0700-0899 bei Buchungen über Debitorenkonto"/>
-      <account type="9" name="0675 Gegenkonto 0653-0654, 0661-0664, 0670-0672, 0675-0679, 0687-0689, 0697-0699 bei Aufteilung Debitorenkonto"/>
+      <account type="9" name="0674 Gegenkonto 0653-0654, 0661-0664, 0670-0672, 0675-0679, 0687-0689, 0697-0699 bei Aufteilung Debitorenkonto"/>
      </account>
      <account type="9" name="0675-0676+0680-0689 Forderungen / Verbindlichkeiten (verbundene Unternehmen)">
       <account type="9" name="0675-0676 Wertberichtigungen auf Forderungen gegen verbundene Unternehmen">
@@ -1234,7 +1234,6 @@ Erweitert auf den Stand 2018: Christoph Franzen 2017-2018, christoph@alte-pflast
        </account>
        <account type="13" name="5490 Abschreibungen auf Umlaufvermögen"/>
       </account>
-      <account type="13" name="5490 Abschreibungen auf Umlaufvermögen, unüblich hoch"/>
       <account type="13" name="5500-5699 Sonstige betriebliche Aufwendungen">
        <account type="13" name="5500-5549 Entschädigungen, Sportveranstaltungen">
         <account type="13" name="5500-5509+5524-5533 Reisekosten">

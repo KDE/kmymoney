@@ -70,7 +70,7 @@
    <account type="13" name="Sonstiges"/>
    <account type="13" name="Spenden"/>
    <account type="13" name="Steuern">
-    <account type="13" name="Einkommenssteuer"/>
+    <account type="13" name="Einkommensteuer"/>
     <account type="13" name="Körperschaftssteuer"/>
     <account type="13" name="Sonstige"/>
     <account type="13" name="Umsatzsteuer Zahllast"/>
