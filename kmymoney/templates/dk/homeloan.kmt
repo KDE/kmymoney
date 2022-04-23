@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/da/acctchrt_homeloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Realkreditlån</title>
+ <shortdesc>Konti i forbindelse med realkreditlån og tilhørende renter</shortdesc>
+ <longdesc>Du vil have nytte af disse konti, hvis du har et realkreditlån.</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="10" name="Lån">
+    <account type="10" name="Realkreditlån"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Renter">
+    <account type="13" name="Realkreditrenter"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

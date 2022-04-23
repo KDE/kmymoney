@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/zh_TW/acctchrt_fixedassets.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>固定資產</title>
+ <shortdesc>用來追記錄固定資產的科目</shortdesc>
+ <longdesc>如果您有大型的固定資產（房屋、汔車、別墅），您可能會想要選擇這組科目。</longdesc>
+ <accounts>
+  <account type="9" name="">
+   <account type="9" name="固定資產">
+    <account type="9" name="其他資產"/>
+    <account type="9" name="房屋"/>
+    <account type="9" name="汔車"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/zh_TW/acctchrt_childcare.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>育兒支出</title>
+ <shortdesc>用來記錄育兒支出的科目</shortdesc>
+ <longdesc>如果您有育兒支出，您可能會想要選擇這組科目。</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="育兒"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

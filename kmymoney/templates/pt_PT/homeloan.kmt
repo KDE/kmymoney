@@ -11,8 +11,8 @@
 <kmymoney-account-template>
  <title>Empréstimo para habitação</title>
  <shortdesc>Contas para empréstimo de habitação e juros associados</shortdesc>
- <longdesc>Desejará seleccionar este conjunto de contas caso tenha contraido um
-  empréstimo para habitação (emprétimo habitação, juro do empréstimo).</longdesc>
+ <longdesc>Desejará seleccionar este conjunto de contas caso tenha contraído um
+  empréstimo para habitação (empréstimo habitação, juro do empréstimo).</longdesc>
  <accounts>
   <account type="13" name="">
    <account type="13" name="Juros">

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/pt_PT/acctchrt_business.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Contas empresariais</title>
+ <shortdesc>Plano de contas completo para empresas.</shortdesc>
+ <longdesc>Os utilizadores que gerem uma empresa devem seleccionar esta em vez de outras escolhas. Isto inclui todas as contas necessárias para gerir a maioria dos negócios, incluindo Contas a pagar, Contas a receber, Receitas e Despesas.</longdesc>
+ <accounts>
+  <account type="9" name="">
+   <account type="9" name="Activos actuais">
+    <account type="1" name="Conta Poupança"/>
+    <account type="1" name="Conta à ordem"/>
+    <account type="3" name="Dinheiro"/>
+   </account>
+   <account type="9" name="Contas A/Receber"/>
+  </account>
+  <account type="16" name="">
+   <account type="16" name="Ganhos retidos"/>
+   <account type="16" name="Saldos iniciais">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Ajuste"/>
+   <account type="13" name="Aluguer de equipamento"/>
+   <account type="13" name="Automóvel">
+    <account type="13" name="Combustível"/>
+    <account type="13" name="Estacionamento"/>
+    <account type="13" name="Reparações e manutenção"/>
+    <account type="13" name="Taxas"/>
+   </account>
+   <account type="13" name="Caridade"/>
+   <account type="13" name="Correios e entregas"/>
+   <account type="13" name="Depreciação"/>
+   <account type="13" name="Descontos em dinheiro"/>
+   <account type="13" name="Despesas com salários"/>
+   <account type="13" name="Devidas e subscrições"/>
+   <account type="13" name="Diversas"/>
+   <account type="13" name="Educação"/>
+   <account type="13" name="Impostos">
+    <account type="13" name="IMI"/>
+    <account type="13" name="IRS"/>
+    <account type="13" name="IUC"/>
+    <account type="13" name="IVA"/>
+    <account type="13" name="Outros impostos"/>
+    <account type="13" name="SS"/>
+    <account type="13" name="SS - Empregado"/>
+   </account>
+   <account type="13" name="Impressão e reprografia"/>
+   <account type="13" name="Licenças"/>
+   <account type="13" name="Livros"/>
+   <account type="13" name="Material de escritório"/>
+   <account type="13" name="Renda"/>
+   <account type="13" name="Reparações">
+    <account type="13" name="Despesas de limpezas"/>
+    <account type="13" name="Reparações em computadores"/>
+    <account type="13" name="Reparações em edifícios"/>
+    <account type="13" name="Reparações em equipamento"/>
+   </account>
+   <account type="13" name="Restaurantes e cafetarias"/>
+   <account type="13" name="Seguros">
+    <account type="13" name="Seguro automóvel"/>
+    <account type="13" name="Seguro de acidentes de trabalho"/>
+    <account type="13" name="Seguro de invalidez"/>
+   </account>
+   <account type="13" name="Serviços">
+    <account type="13" name="Electricidade"/>
+    <account type="13" name="Gás"/>
+    <account type="13" name="Internet"/>
+    <account type="13" name="Pacote TV"/>
+    <account type="13" name="Saneamento"/>
+    <account type="13" name="Telefone"/>
+    <account type="13" name="Telemóvel"/>
+    <account type="13" name="Água"/>
+   </account>
+   <account type="13" name="Serviços externos"/>
+   <account type="13" name="Taxas e comissões bancárias"/>
+   <account type="13" name="Taxas profissionais">
+    <account type="13" name="Contabilidade"/>
+    <account type="13" name="Taxas legais"/>
+   </account>
+   <account type="13" name="Viagens e entretenimento">
+    <account type="13" name="Entretenimento"/>
+    <account type="13" name="Refeições"/>
+    <account type="13" name="Viagens"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="4" name="Cartão de crédito"/>
+   <account type="10" name="Contas A/Pagar"/>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Despesas reembolsadas"/>
+   <account type="12" name="Outras receitas"/>
+   <account type="12" name="Receita de juros"/>
+   <account type="12" name="Vendas"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>
