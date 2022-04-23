@@ -64,8 +64,20 @@ DirNameMapType &getDirNameMap()
     return dirNameMap;
 }
 
-int toKMyMoneyAccountType(const QString &type)
+int toKMyMoneyAccountType(const QString& type, int index)
 {
+    // in case index is 1 we process the level that represents the
+    // KMyMoney top-level accounts. They can only have distinct values
+    // and we have to make sure to return one of them by converting
+    // the Account::Type into the respective accountGroup value.
+    if (index == 1) {
+        const auto accountType = toKMyMoneyAccountType(type, 0);
+        if (accountType != (int)Account::Type::Unknown) {
+            return (int)MyMoneyAccount::accountGroup(static_cast<eMyMoney::Account::Type>(accountType));
+        }
+        return 99; // unknown
+    }
+
     if(type == "ROOT")              return (int)Account::Type::Unknown;
     else if (type == "BANK")        return (int)Account::Type::Checkings;
     else if (type == "CASH")        return (int)Account::Type::Cash;
@@ -105,11 +117,11 @@ public:
 
     void clear()
     {
-        id = "";
-        m_type = "";
-        m_name = "";
-        code = "";
-        parent = "";
+        id.clear();
+        m_type.clear();
+        m_name.clear();
+        code.clear();
+        parent.clear();
         slotList.clear();
     }
 
@@ -272,7 +284,7 @@ public:
             if (account->m_type != "ROOT")
             {
                 xml.writeStartElement("","account");
-                xml.writeAttribute("type", QString::number(toKMyMoneyAccountType(account->m_type)));
+                xml.writeAttribute("type", QString::number(toKMyMoneyAccountType(account->m_type, index)));
                 xml.writeAttribute("name", noLevel1Names && index < 2 ? "" : account->m_name);
                 if (withID)
                     xml.writeAttribute("id", account->id);
@@ -363,7 +375,7 @@ public:
         {
             QString a;
             a.fill(' ', index);
-            qDebug() << a << account->m_name << toKMyMoneyAccountType(account->m_type);
+            qDebug() << a << account->m_name << toKMyMoneyAccountType(account->m_type, index);
             index++;
             dumpTemplates(account->id, index);
             index--;

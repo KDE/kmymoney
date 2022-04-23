@@ -238,7 +238,7 @@ bool MyMoneyAccount::operator == (const MyMoneyAccount& right) const
     // clang-format on
 }
 
-Account::Type MyMoneyAccount::accountGroup(Account::Type type) const
+Account::Type MyMoneyAccount::accountGroup(Account::Type type)
 {
     switch (type) {
     case Account::Type::Checkings:

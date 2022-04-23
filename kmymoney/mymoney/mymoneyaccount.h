@@ -155,7 +155,7 @@ public:
     /**
      * Return the account group for a given account @a type.
      */
-    eMyMoney::Account::Type accountGroup(eMyMoney::Account::Type type) const;
+    static eMyMoney::Account::Type accountGroup(eMyMoney::Account::Type type);
 
     /**
       * This method returns the id of the MyMoneyInstitution object this account
