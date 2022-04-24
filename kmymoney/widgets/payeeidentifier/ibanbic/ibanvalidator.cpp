@@ -20,6 +20,7 @@ QValidator::State ibanValidator::validate(QString& string, int&) const
 {
     // Check country code and set it uppercase
     if (string.length() >= 1) {
+        fixup(string);
         if (!string.at(0).isLetter())
             return Invalid;
         if (string.at(0).isLower())
