@@ -45,6 +45,8 @@ struct SplitModel::Private
 
     void copyFrom(const SplitModel& right)
     {
+        // suppress emission of dataChanged signal
+        QSignalBlocker blocker(q);
         q->unload();
         headerData = right.d->headerData;
         const auto rows = right.rowCount();
@@ -53,6 +55,12 @@ struct SplitModel::Private
             const auto split = right.itemByIndex(idx);
             q->appendSplit(split);
         }
+        blocker.unblock();
+        // send out a combined dataChanged signal
+        QModelIndex start(q->index(0, 0));
+        QModelIndex end(q->index(rows - 1, q->columnCount() - 1));
+        emit q->dataChanged(start, end);
+
         updateItemCount();
     }
 
