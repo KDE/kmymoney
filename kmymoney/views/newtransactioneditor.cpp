@@ -82,6 +82,7 @@ public:
         , inUpdateVat(false)
         , splitModel(parent, &undoStack)
         , frameCollection(nullptr)
+        , m_splitHelper(nullptr)
     {
         accountsModel->setObjectName(QLatin1String("NewTransactionEditor::accountsModel"));
         categoriesModel->setObjectName(QLatin1String("NewTransactionEditor::categoriesModel"));
@@ -139,6 +140,7 @@ public:
     MyMoneyTransaction m_transaction;
     MyMoneySplit m_split;
     WidgetHintFrameCollection* frameCollection;
+    KMyMoneyAccountComboSplitHelper* m_splitHelper;
 };
 
 void NewTransactionEditor::Private::updateWidgetAccess()
@@ -726,9 +728,9 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
         d->ui->creditDebitEdit->swapCreditDebit();
     }
 
-    const auto* splitHelper = new KMyMoneyAccountComboSplitHelper(d->ui->categoryCombo, &d->splitModel);
-    connect(splitHelper, &KMyMoneyAccountComboSplitHelper::accountComboEnabled, d->ui->costCenterCombo, &QComboBox::setEnabled);
-    connect(splitHelper, &KMyMoneyAccountComboSplitHelper::accountComboEnabled, d->ui->costCenterLabel, &QComboBox::setEnabled);
+    d->m_splitHelper = new KMyMoneyAccountComboSplitHelper(d->ui->categoryCombo, &d->splitModel);
+    connect(d->m_splitHelper, &KMyMoneyAccountComboSplitHelper::accountComboEnabled, d->ui->costCenterCombo, &QComboBox::setEnabled);
+    connect(d->m_splitHelper, &KMyMoneyAccountComboSplitHelper::accountComboEnabled, d->ui->costCenterLabel, &QComboBox::setEnabled);
 
     d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type>{
         eMyMoney::Account::Type::Asset,
@@ -925,6 +927,11 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
         // preset the value to be used for the amount widget
         auto amountShares = d->m_split.shares();
 
+        // block the signals sent out from the model here so that
+        // connected widgets don't overwrite the values we just loaded
+        // because they are not yet set (d->ui->creditDebitEdit)
+        QSignalBlocker blocker(d->splitModel);
+
         for (const auto& split : d->m_transaction.splits()) {
             if (split.id() == d->m_split.id()) {
                 d->ui->dateEdit->setDate(d->m_transaction.postDate());
@@ -975,6 +982,7 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
         d->ui->creditDebitEdit->setValue(amountValue);
         d->ui->creditDebitEdit->setShares(amountShares);
         d->updateWidgetState();
+        d->m_splitHelper->updateWidget();
     }
 }
 
@@ -1039,6 +1047,11 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
         // preset the value to be used for the amount widget
         auto amountShares = d->m_split.shares();
 
+        // block the signals sent out from the model here so that
+        // connected widgets don't overwrite the values we just loaded
+        // because they are not yet set (d->ui->creditDebitEdit)
+        QSignalBlocker blocker(d->splitModel);
+
         for (const auto& splitIdx : list) {
             if (selectedSplitRow == splitIdx.row()) {
                 d->ui->dateEdit->setDate(splitIdx.data(eMyMoney::Model::TransactionPostDateRole).toDate());
@@ -1060,10 +1073,6 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                 d->ui->statusCombo->setCurrentIndex(splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
                 d->ui->tagContainer->loadTags(splitIdx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
             } else {
-                // block the signals sent out from the model here so that
-                // connected widgets don't overwrite the values we just loaded
-                // because they are not yet set (d->ui->creditDebitEdit)
-                QSignalBlocker blocker(d->splitModel);
                 d->splitModel.appendSplit(MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
 
                 if (splitIdx.data(eMyMoney::Model::TransactionSplitCountRole) == 2) {
@@ -1089,7 +1098,9 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
         // of all other widgets
         d->ui->creditDebitEdit->setValue(amountValue);
         d->ui->creditDebitEdit->setShares(amountShares);
+
         d->updateWidgetState();
+        d->m_splitHelper->updateWidget();
     }
 
     // set focus to first tab field once we return to event loop
