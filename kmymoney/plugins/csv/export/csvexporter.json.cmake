@@ -49,6 +49,7 @@
         "Description[pl]": "Dodaje eksportowanie CSV do KMyMoney",
         "Description[pt]": "Adição da exportação para CSV para o KMyMoney",
         "Description[pt_BR]": "Adiciona exportação CSV no KMyMoney",
+        "Description[ru]": "Добавляет в KMyMoney возможность экспорта CSV",
         "Description[sk]": "Pridať CSV exportovanie do KMyMoney",
         "Description[sl]": "Doda izvoz CSV v KMyMoney",
         "Description[sv]": "Lägg till CSV-export till KMyMoney",

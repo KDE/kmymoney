@@ -49,6 +49,7 @@
         "Description[pl]": "Dodaje importowanie GnuCash do KMyMoney",
         "Description[pt]": "Adição da importação do GnuCash para o KMyMoney",
         "Description[pt_BR]": "Adiciona importação GnuCash no KMyMoney",
+        "Description[ru]": "Добавляет в KMyMoney возможность импорта GnuCash",
         "Description[sk]": "Pridať GnuCash import do KMyMoney",
         "Description[sl]": "Doda uvoz GnuCash v KMyMoney",
         "Description[sv]": "Lägg till GnuCash-import till KMyMoney",

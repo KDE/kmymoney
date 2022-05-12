@@ -49,6 +49,7 @@
         "Description[pl]": "Dodaje eksportowanie QIF do KMyMoney",
         "Description[pt]": "Adição da exportação para QIF para o KMyMoney",
         "Description[pt_BR]": "Adiciona exportação QIF no KMyMoney",
+        "Description[ru]": "Добавляет в KMyMoney возможность экспорта QIF",
         "Description[sk]": "Pridať QIF export do KMyMoney",
         "Description[sl]": "Dodaj v KMyMoney možnost izvoza QIF",
         "Description[sv]": "Lägg till QIF-export till KMyMoney",

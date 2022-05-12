@@ -49,6 +49,7 @@
         "Description[pl]": "Tworzy sprawozdanie, po każdym uzgodnieniu, zawierające dane o procesie uzgadniania",
         "Description[pt]": "Cria um relatório após cada reconciliação de contas, contendo os dados sobre o processo de reconciliação",
         "Description[pt_BR]": "Cria um relatório após cada reconciliação contendo dados sobre o processo de reconciliação",
+        "Description[ru]": "Создаёт после каждой сверки отчёт, содержащий данные о процессе сверки",
         "Description[sk]": "Vytvorí report po každom zrovnaní obsahujúcom dáta o procese zrovnania",
         "Description[sl]": "Po vsaki uskladitvi ustvari poročilo, ki vsebuje podatke o postopku usklajevanja",
         "Description[sv]": "Skapar en rapport efter varje avstämning som innehåller information om avstämningsprocessen",
