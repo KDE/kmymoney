@@ -14,7 +14,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-
+#include "mymoneymoney.h"
 
 KReportCartesianAxis::KReportCartesianAxis (const QLocale& locale, int precision, KChart::AbstractCartesianDiagram* diagram )
     : CartesianAxis ( diagram )
@@ -29,17 +29,13 @@ KReportCartesianAxis::KReportCartesianAxis (const QLocale& locale, int precision
 const QString KReportCartesianAxis::customizedLabel( const QString& label ) const
 {
     bool ok;
-    const auto separator = m_locale.groupSeparator();
-    const auto decimalPoint = m_locale.decimalPoint();
 
-    // convert label to double just to covert it back to string with desired precision
-    // but without trailing zeros, separator, or decimal point
+    // convert label to double just to convert it back to string with desired precision
+    // but without trailing zeros
     const qreal labelValue = label.toDouble( &ok );
     if ( ok ) {
-        return m_locale.toString( labelValue, 'f', m_precision )
-               .remove( separator )
-               .remove( QRegularExpression( "0+$" ) )
-               .remove( QRegularExpression( "\\" + decimalPoint + "$" ) );
-    } else
-        return label;
+        const MyMoneyMoney value(labelValue);
+        return value.formatMoney(QString(), m_precision).remove(QRegularExpression(QStringLiteral("\\").append(m_locale.decimalPoint()).append("0*$")));
+    }
+    return label;
 }

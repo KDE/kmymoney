@@ -594,6 +594,18 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     //assign model to the diagram
     planeDiagram->setModel(&m_model);
 
+    // use MyMoney::formatMoney to format the values
+    const auto rows = m_model.rowCount();
+    const auto cols = m_model.columnCount();
+    for (int col = 0; col < cols; ++col) {
+        for (int row = 0; row < rows; ++row) {
+            const auto idx = m_model.index(row, 0);
+            auto attrs = planeDiagram->dataValueAttributes(idx);
+            const MyMoneyMoney value(idx.data(Qt::DisplayRole).toDouble());
+            attrs.setDataLabel(value.formatMoney(QString(), m_precision));
+            planeDiagram->setDataValueAttributes(idx, attrs);
+        }
+    }
     adjustVerticalRange(config.yLabelsPrecision());
 }
 
@@ -659,9 +671,10 @@ int reports::KReportChartView::drawPivotGridRow ( int rowNum, const reports::Piv
         QStandardItem* item = new QStandardItem();
         double value = gridRow.m_total.toDouble();
         item->setData(QVariant(value), Qt::DisplayRole);
-        if (isToolTip)
-            item->setToolTip(toolTip.arg(legendText).arg(value, 0, 'f', precision));
-
+        if (isToolTip) {
+            const MyMoneyMoney monetaryValue(value);
+            item->setToolTip(toolTip.arg(legendText, monetaryValue.formatMoney(QString(), precision)));
+        }
         //set the cell value
         if (accountSeries()) {
             m_model.insertRows(rowNum, 1);
@@ -683,8 +696,10 @@ int reports::KReportChartView::drawPivotGridRow ( int rowNum, const reports::Piv
                 if (invertValue)
                     value = -value;
                 item->setData(QVariant(value), Qt::DisplayRole);
-                if (isToolTip)
-                    item->setToolTip(toolTip.arg(legendText).arg(value, 0, 'f', precision));
+                if (isToolTip) {
+                    const MyMoneyMoney monetaryValue(value);
+                    item->setToolTip(toolTip.arg(legendText, monetaryValue.formatMoney(QString(), precision)));
+                }
             }
             itemList.append(item);
         }
