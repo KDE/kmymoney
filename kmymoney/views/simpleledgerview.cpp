@@ -113,6 +113,7 @@ public:
         q->connect(ui->ledgerTab, &QTabWidget::currentChanged, q, &SimpleLedgerView::tabSelected);
         q->connect(ui->ledgerTab, &QTabWidget::tabBarClicked, q, &SimpleLedgerView::tabClicked);
         q->connect(ui->ledgerTab, &QTabWidget::tabCloseRequested, q, &SimpleLedgerView::closeLedger);
+
         // we reload the icon if the institution data changed
         q->connect(MyMoneyFile::instance()->institutionsModel(), &InstitutionsModel::dataChanged, q, &SimpleLedgerView::setupCornerWidget);
 
@@ -199,25 +200,14 @@ public:
 
         accountCombo->hide();
 
-        // in case a stock account is selected, we switch to the parent which
-        // is the investment account
-        MyMoneyAccount acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
-        if (acc.isInvest()) {
-            acc = MyMoneyFile::instance()->accountsModel()->itemById(acc.parentAccountId());
-            accountId = acc.id();
+        const auto idx = tabIdByAccountId(accountId);
+        if (idx != -1) {
+            ui->ledgerTab->setCurrentIndex(idx);
+            return;
         }
 
-        LedgerViewPage* view = 0;
-        // check if ledger is already opened
-        for(int idx = 0; idx < ui->ledgerTab->count()-1; ++idx) {
-            view = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx));
-            if(view) {
-                if(accountId == view->accountId()) {
-                    ui->ledgerTab->setCurrentIndex(idx);
-                    return;
-                }
-            }
-        }
+        LedgerViewPage* view = nullptr;
+        MyMoneyAccount acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
 
         // need a new tab, we insert it before the rightmost one
         if(!acc.id().isEmpty()) {
@@ -400,6 +390,35 @@ public:
         }
     }
 
+    /**
+     * This method returns the tab index for the given @a accountId
+     * or -1 if there is no tab for it open
+     *
+     * @note updates accountId to point to the investment account in case
+     * @a accountId references a stock account
+     */
+    int tabIdByAccountId(QString& accountId)
+    {
+        // in case a stock account is selected, we switch to the parent which
+        // is the investment account
+        MyMoneyAccount acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
+        if (acc.isInvest()) {
+            acc = MyMoneyFile::instance()->accountsModel()->itemById(acc.parentAccountId());
+            accountId = acc.id();
+        }
+
+        // check if ledger is already opened
+        for (int idx = 0; idx < ui->ledgerTab->count() - 1; ++idx) {
+            const auto view = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx));
+            if (view) {
+                if (accountId == view->accountId()) {
+                    return idx;
+                }
+            }
+        }
+        return -1;
+    }
+
     Ui_SimpleLedgerView*          ui;
     AccountNamesFilterProxyModel* accountsModel;
     QWidget*                      newTabWidget;
@@ -562,6 +581,19 @@ void SimpleLedgerView::showEvent(QShowEvent* event)
     Q_D(SimpleLedgerView);
     if (d->m_needInit) {
         d->init();
+
+        // close ledgers of accounts about to be removed
+        connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::rowsAboutToBeRemoved, this, [&](const QModelIndex& parent, int first, int last) {
+            Q_D(SimpleLedgerView);
+            for (int row = first; row <= last; ++row) {
+                const auto modelIdx = parent.model()->index(row, 0, parent);
+                auto accountId = modelIdx.data(eMyMoney::Model::IdRole).toString();
+                const auto idx = d->tabIdByAccountId(accountId);
+                if (idx != -1) {
+                    closeLedger(idx);
+                }
+            }
+        });
     }
     // don't forget base class implementation
     QWidget::showEvent(event);
