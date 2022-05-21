@@ -224,7 +224,7 @@ void KScheduledView::slotDeleteSchedule()
                 msg += QString(" ");
                 msg += i18n("In case of loan payments it is currently not possible to recreate the scheduled transaction.");
             }
-            if (KMessageBox::questionYesNo(this, msg) == KMessageBox::No)
+            if (KMessageBox::questionYesNo(parentWidget(), msg) == KMessageBox::No)
                 return;
 
             MyMoneyFile::instance()->removeSchedule(sched);
