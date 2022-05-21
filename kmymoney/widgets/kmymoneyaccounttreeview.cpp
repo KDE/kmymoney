@@ -55,7 +55,7 @@ public:
             const auto objId = baseIdx.data(eMyMoney::Model::IdRole).toString();
             auto idx = MyMoneyFile::instance()->accountsModel()->indexById(objId);
             if (idx.isValid()) {
-                emit q->requestActionTrigger(eMenu::Action::EditAccount);
+                emit q->requestActionTrigger(eMenu::Action::OpenAccount);
             } else {
                 idx = MyMoneyFile::instance()->institutionsModel()->indexById(objId);
                 if (idx.isValid()) {
