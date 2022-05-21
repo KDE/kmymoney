@@ -181,6 +181,7 @@ public:
         qq->connect(&journalModel, &JournalModel::balancesChanged, &accountsModel, &AccountsModel::updateAccountBalances);
         qq->connect(&schedulesModel, &SchedulesModel::dataChanged, &schedulesJournalModel, static_cast<void (SchedulesJournalModel::*)()>(&SchedulesJournalModel::updateData));
         qq->connect(&schedulesModel, &SchedulesModel::modelReset, &schedulesJournalModel, &SchedulesJournalModel::updateData);
+        qq->connect(&schedulesModel, &SchedulesModel::rowsAboutToBeRemoved, &schedulesJournalModel, &SchedulesJournalModel::updateData);
     }
 
     ~Private()
