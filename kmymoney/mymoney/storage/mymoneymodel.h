@@ -741,14 +741,12 @@ protected:
     {
         const auto idx = indexById(before.id());
         if (idx.isValid()) {
-            beginRemoveRows(idx.parent(), idx.row(), idx.row());
             if (m_idToItemMapper) {
                 m_idToItemMapper->remove(static_cast<const TreeItem<T>*>(idx.internalPointer())->constDataRef().id());
             }
             removeRow(idx.row(), idx.parent());
             doUpdateReferencedObjects();
             setDirty();
-            endRemoveRows();
         }
     }
 
