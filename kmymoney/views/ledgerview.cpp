@@ -1016,19 +1016,21 @@ int LedgerView::sizeHintForRow(int row) const
     // We always ask for the detail column as this varies in height
     ensurePolished();
 
-    const QModelIndex index = model()->index(row, JournalModel::Column::Detail);
-    const auto delegate = d->delegateProxy->delegate(index);
-    const auto journalDelegate = qobject_cast<const JournalDelegate*>(delegate);
+    const auto m = model();
+    if (m) {
+        const QModelIndex index = m->index(row, JournalModel::Column::Detail);
+        const auto delegate = d->delegateProxy->delegate(index);
+        const auto journalDelegate = qobject_cast<const JournalDelegate*>(delegate);
 
-    if(journalDelegate && (journalDelegate->editorRow() != row)) {
-        QStyleOptionViewItem opt;
-        opt.state |= (row == currentIndex().row()) ? QStyle::State_Selected : QStyle::State_None;
-        int hint = delegate->sizeHint(opt, index).height();
-        if(showGrid())
-            hint += 1;
-        return hint;
+        if (journalDelegate && (journalDelegate->editorRow() != row)) {
+            QStyleOptionViewItem opt;
+            opt.state |= (row == currentIndex().row()) ? QStyle::State_Selected : QStyle::State_None;
+            int hint = delegate->sizeHint(opt, index).height();
+            if (showGrid())
+                hint += 1;
+            return hint;
+        }
     }
-
     return QTableView::sizeHintForRow(row);
 }
 

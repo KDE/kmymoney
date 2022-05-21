@@ -41,20 +41,30 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
     : QWidget(parent)
     , d(new Private(this))
 {
-    init(configGroupName);
+    d->initWidgets(configGroupName);
+    d->ui->m_ledgerView->setModel(MyMoneyFile::instance()->journalModel()->newTransaction());
 }
 
 LedgerViewPage::LedgerViewPage(LedgerViewPage::Private& dd, QWidget* parent, const QString& configGroupName)
     : QWidget(parent)
     , d(&dd)
 {
-    init(configGroupName);
+    d->initWidgets(configGroupName);
+    d->ui->m_ledgerView->setModel(MyMoneyFile::instance()->journalModel()->newTransaction());
 }
 
-void LedgerViewPage::init(const QString& configGroupName)
+void LedgerViewPage::showEvent(QShowEvent* event)
 {
-    d->init(configGroupName);
+    // the first time we are shown, we need to
+    // setup the model to get access to data
+    if (d->needModelInit) {
+        initModel();
+    }
+    QWidget::showEvent(event);
+}
 
+void LedgerViewPage::initModel()
+{
     // setup the model stack
     const auto file = MyMoneyFile::instance();
     d->accountFilter =
@@ -129,6 +139,14 @@ void LedgerViewPage::init(const QString& configGroupName)
     connect(this, &LedgerViewPage::moveSection, d->ui->m_ledgerView, &LedgerView::moveSection);
 
     connect(d->ui->m_ledgerView, &LedgerView::requestView, this, &LedgerViewPage::requestView);
+
+    d->needModelInit = false;
+
+    // now execute all the postponed actions
+    const auto acc = file->account(d->accountId);
+    setAccount(acc);
+
+    setShowEntryForNewTransaction(d->showEntryForNewTransaction);
 }
 
 LedgerViewPage::~LedgerViewPage()
@@ -171,10 +189,17 @@ QString LedgerViewPage::accountId() const
 
 void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
 {
+    // in case we don't have a model, postpone this call
+    // but remember the account id
+    if (d->needModelInit) {
+        d->accountId = acc.id();
+        return;
+    }
+
     QVector<int> columns;
     // get rid of current form
     delete d->form;
-    d->form = 0;
+    d->form = nullptr;
     d->hideFormReasons.insert(QLatin1String("FormAvailable"));
 
     switch(acc.accountType()) {
@@ -281,6 +306,11 @@ void LedgerViewPage::splitterChanged(int pos, int index)
 
 void LedgerViewPage::setShowEntryForNewTransaction(bool show)
 {
+    // postpone this setting until we are fully initialized
+    if (d->needModelInit) {
+        d->showEntryForNewTransaction = show;
+        return;
+    }
     d->accountFilter->setShowEntryForNewTransaction(show);
 }
 

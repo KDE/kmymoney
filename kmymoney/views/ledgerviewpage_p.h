@@ -35,6 +35,8 @@ public:
         , stateFilter(nullptr)
         , form(nullptr)
         , stackedView(nullptr)
+        , needModelInit(true)
+        , showEntryForNewTransaction(false)
     {
     }
 
@@ -43,7 +45,7 @@ public:
         delete ui;
     }
 
-    void init(const QString& configGroupName)
+    void initWidgets(const QString& configGroupName)
     {
         ui->setupUi(q);
         ui->m_reconciliationContainer->hide();
@@ -70,6 +72,8 @@ public:
         connect(ui->m_splitter, &QSplitter::splitterMoved, q, &LedgerViewPage::splitterChanged);
 
         ui->m_ledgerView->setColumnSelectorGroupName(configGroupName);
+
+        needModelInit = true;
     }
 
     LedgerViewPage* q;
@@ -84,6 +88,8 @@ public:
     QString accountName;
     SelectedObjects selections;
     QTimer delayTimer;
+    bool needModelInit;
+    bool showEntryForNewTransaction;
 };
 
 #endif // LEDGERVIEWPAGE_P_H
