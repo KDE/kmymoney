@@ -31,7 +31,7 @@
             }
         ],
         "Description": "Adds SQL storage support to KMyMoney",
-        "Description[ca@valencia]": "Afig la implementació de l'emmagatzematge en SQL a KMyMoney",
+        "Description[ca@valencia]": "Afig la implementació de l'almagasenada en SQL a KMyMoney",
         "Description[ca]": "Afegeix la implementació de l'emmagatzematge en SQL al KMyMoney",
         "Description[en_GB]": "Adds SQL storage support to KMyMoney",
         "Description[es]": "Añade almacenamiento SQL a KMyMoney",
@@ -59,7 +59,7 @@
         "Id": "sqlstorage",
         "License": "GPL",
         "Name": "SQL Storage",
-        "Name[ca@valencia]": "Emmagatzematge SQL",
+        "Name[ca@valencia]": "Almagasenada SQL",
         "Name[ca]": "Emmagatzematge SQL",
         "Name[cs]": "Úložiště SQL",
         "Name[de]": "SQL-Speicher",
