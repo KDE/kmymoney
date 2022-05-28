@@ -32,7 +32,7 @@
             }
         ],
         "Description": "Adds XML storage support to KMyMoney",
-        "Description[ca@valencia]": "Afig la implementació de l'emmagatzematge en XML a KMyMoney",
+        "Description[ca@valencia]": "Afig la implementació de l'almagasenada en XML a KMyMoney",
         "Description[ca]": "Afegeix la implementació de l'emmagatzematge en XML al KMyMoney",
         "Description[en_GB]": "Adds XML storage support to KMyMoney",
         "Description[es]": "Añade almacenamiento XML a KMyMoney",
@@ -60,7 +60,7 @@
         "Id": "xmlstorage",
         "License": "GPL",
         "Name": "XML Storage",
-        "Name[ca@valencia]": "Emmagatzematge XML",
+        "Name[ca@valencia]": "Almagasenada XML",
         "Name[ca]": "Emmagatzematge XML",
         "Name[de]": "XML-Speicher",
         "Name[en_GB]": "XML Storage",
