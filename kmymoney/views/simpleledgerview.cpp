@@ -570,12 +570,6 @@ void SimpleLedgerView::checkTabOrder(int from, int to)
     }
 }
 
-void SimpleLedgerView::showTransactionForm(bool show)
-{
-    emit showForms(show);
-}
-
-
 void SimpleLedgerView::showEvent(QShowEvent* event)
 {
     Q_D(SimpleLedgerView);

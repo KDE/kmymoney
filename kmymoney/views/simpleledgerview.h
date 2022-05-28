@@ -28,8 +28,6 @@ public:
     explicit SimpleLedgerView(QWidget *parent = nullptr);
     ~SimpleLedgerView() override;
 
-    virtual void showTransactionForm(bool = true);
-
     void updateActions(const SelectedObjects& selections) override;
     void executeAction(eMenu::Action action, const SelectedObjects& selections) override;
 
@@ -58,7 +56,6 @@ protected:
     void aboutToShow() override;
 
 Q_SIGNALS:
-    void showForms(bool show);
     void settingsChanged();
     void resizeSection(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const;
     void moveSection(QWidget* view, int section, int oldIndex, int newIndex) const;

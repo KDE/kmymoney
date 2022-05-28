@@ -1380,8 +1380,6 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     kmymoney = this;
     d->m_config = KSharedConfig::openConfig();
 
-    d->setThemedCSS();
-
     MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
 
     QFrame* frame = new QFrame;
