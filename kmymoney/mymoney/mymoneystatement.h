@@ -44,7 +44,8 @@ public:
 
     struct Transaction
     {
-        QDate m_datePosted;
+        QDate m_datePosted; // valuta date
+        QDate m_dateProcessed; // entry date
         QString m_strPayee;
         QString m_strMemo;
         QString m_strNumber;

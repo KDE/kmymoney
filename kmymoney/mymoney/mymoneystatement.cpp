@@ -51,6 +51,7 @@ enum class Attribute {
     AccountID,
     SkipCategoryMatching,
     DatePosted,
+    DateProcessed,
     Payee,
     Memo,
     Number,
@@ -71,16 +72,19 @@ uint qHash(const Attribute key, uint seed) {
 
 using namespace eMyMoney;
 
-const QHash<Statement::Type, QString> txAccountType {
+const QHash<Statement::Type, QString> txAccountType{
+    // clang-format off
     {Statement::Type::None,       QStringLiteral("none")},
     {Statement::Type::Checkings,  QStringLiteral("checkings")},
     {Statement::Type::Savings,    QStringLiteral("savings")},
     {Statement::Type::Investment, QStringLiteral("investment")},
     {Statement::Type::CreditCard, QStringLiteral("creditcard")},
     {Statement::Type::Invalid,    QStringLiteral("invalid")},
+    // clang-format on
 };
 
-const QHash<Transaction::Action, QString> txAction {
+const QHash<Transaction::Action, QString> txAction{
+    // clang-format off
     {Transaction::Action::None,             QStringLiteral("none")},
     {Transaction::Action::Buy,              QStringLiteral("buy")},
     {Transaction::Action::Sell,             QStringLiteral("sell")},
@@ -92,24 +96,28 @@ const QHash<Transaction::Action, QString> txAction {
     {Transaction::Action::Fees,             QStringLiteral("fees")},
     {Transaction::Action::Interest,         QStringLiteral("interest")},
     {Transaction::Action::Invalid,          QStringLiteral("invalid")},
+    // clang-format on
 };
 
 QString getElName(const Statement::Element el)
 {
-    static const QHash<Statement::Element, QString> elNames {
+    static const QHash<Statement::Element, QString> elNames{
+        // clang-format off
         {Statement::Element::KMMStatement, QStringLiteral("KMYMONEY-STATEMENT")},
         {Statement::Element::Statement,    QStringLiteral("STATEMENT")},
         {Statement::Element::Transaction,  QStringLiteral("TRANSACTION")},
         {Statement::Element::Split,        QStringLiteral("SPLIT")},
         {Statement::Element::Price,        QStringLiteral("PRICE")},
         {Statement::Element::Security,     QStringLiteral("SECURITY")},
+        // clang-format on
     };
     return elNames[el];
 }
 
 QString getAttrName(const Statement::Attribute attr)
 {
-    static const QHash<Statement::Attribute, QString> attrNames {
+    static const QHash<Statement::Attribute, QString> attrNames{
+        // clang-format off
         {Statement::Attribute::Name,                 QStringLiteral("name")},
         {Statement::Attribute::Symbol,               QStringLiteral("symbol")},
         {Statement::Attribute::ID,                   QStringLiteral("id")},
@@ -125,6 +133,7 @@ QString getAttrName(const Statement::Attribute attr)
         {Statement::Attribute::AccountID,            QStringLiteral("accountid")},
         {Statement::Attribute::SkipCategoryMatching, QStringLiteral("skipCategoryMatching")},
         {Statement::Attribute::DatePosted,           QStringLiteral("dateposted")},
+        {Statement::Attribute::DateProcessed,        QStringLiteral("entrydate")},
         {Statement::Attribute::Payee,                QStringLiteral("payee")},
         {Statement::Attribute::Memo,                 QStringLiteral("memo")},
         {Statement::Attribute::Number,               QStringLiteral("number")},
@@ -136,6 +145,7 @@ QString getAttrName(const Statement::Attribute attr)
         {Statement::Attribute::Security,             QStringLiteral("security")},
         {Statement::Attribute::BrokerageAccount,     QStringLiteral("brokerageaccount")},
         {Statement::Attribute::Category,             QStringLiteral("version")},
+        // clang-format on
     };
     return attrNames[attr];
 }
@@ -161,6 +171,9 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
     foreach (const auto transaction, m_listTransactions) {
         auto p = _doc->createElement(getElName(Statement::Element::Transaction));
         p.setAttribute(getAttrName(Statement::Attribute::DatePosted), transaction.m_datePosted.toString(Qt::ISODate));
+        if (transaction.m_dateProcessed.isValid()) {
+            p.setAttribute(getAttrName(Statement::Attribute::DateProcessed), transaction.m_dateProcessed.toString(Qt::ISODate));
+        }
         p.setAttribute(getAttrName(Statement::Attribute::Payee), transaction.m_strPayee);
         p.setAttribute(getAttrName(Statement::Attribute::Memo), transaction.m_strMemo);
         p.setAttribute(getAttrName(Statement::Attribute::Number), transaction.m_strNumber);
@@ -238,6 +251,9 @@ bool MyMoneyStatement::read(const QDomElement& _e)
                 MyMoneyStatement::Transaction t;
 
                 t.m_datePosted = QDate::fromString(c.attribute(getAttrName(Statement::Attribute::DatePosted)), Qt::ISODate);
+                if (c.hasAttribute(getAttrName(Statement::Attribute::DateProcessed))) {
+                    t.m_dateProcessed = QDate::fromString(c.attribute(getAttrName(Statement::Attribute::DateProcessed)), Qt::ISODate);
+                }
                 t.m_amount = MyMoneyMoney(c.attribute(getAttrName(Statement::Attribute::Amount)));
                 t.m_strMemo = c.attribute(getAttrName(Statement::Attribute::Memo));
                 t.m_strNumber = c.attribute(getAttrName(Statement::Attribute::Number));

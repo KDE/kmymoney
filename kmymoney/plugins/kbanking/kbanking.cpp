@@ -1155,9 +1155,8 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
     QString s;
     QString memo;
     const char *p;
-    const AB_VALUE *val;
-    const GWEN_DATE *dt;
-    const GWEN_DATE *startDate = 0;
+    const AB_VALUE* val = nullptr;
+    const GWEN_DATE* dt = nullptr;
     MyMoneyStatement::Transaction kt;
     unsigned long h;
 
@@ -1297,15 +1296,41 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
     kt.m_strPayee = kt.m_strPayee.trimmed();
 
     // date
-    dt = AB_Transaction_GetDate(t);
-    if (!dt)
-        dt = AB_Transaction_GetValutaDate(t);
+    dt = AB_Transaction_GetValutaDate(t);
     if (dt) {
-        if (!startDate)
-            startDate = dt;
         kt.m_datePosted = QDate(GWEN_Date_GetYear(dt), GWEN_Date_GetMonth(dt), GWEN_Date_GetDay(dt));
+    }
+    dt = AB_Transaction_GetDate(t);
+    if (dt) {
+        kt.m_dateProcessed = QDate(GWEN_Date_GetYear(dt), GWEN_Date_GetMonth(dt), GWEN_Date_GetDay(dt));
+    }
+
+    // make sure, datePosted and dateProcessed are set for the transaction
+    if (!(kt.m_dateProcessed.isValid() || kt.m_datePosted.isValid())) {
+        DBG_WARN(0, "No date for transaction found, use today");
+        kt.m_dateProcessed = QDate::currentDate();
+        kt.m_datePosted = kt.m_dateProcessed;
+
     } else {
-        DBG_WARN(0, "No date for transaction");
+        if (!kt.m_dateProcessed.isValid()) {
+            kt.m_dateProcessed = kt.m_datePosted;
+        } else if (!kt.m_datePosted.isValid()) {
+            kt.m_datePosted = kt.m_dateProcessed;
+        }
+    }
+
+    // update the first and last date of the statement
+    // based on datePosted
+    if (!ks.m_dateBegin.isValid()) {
+        ks.m_dateBegin = kt.m_datePosted;
+    } else if (kt.m_datePosted < ks.m_dateBegin) {
+        ks.m_dateBegin = kt.m_datePosted;
+    }
+
+    if (!ks.m_dateEnd.isValid()) {
+        ks.m_dateEnd = kt.m_datePosted;
+    } else if (kt.m_datePosted > ks.m_dateEnd) {
+        ks.m_dateEnd = kt.m_datePosted;
     }
 
     // value
@@ -1336,22 +1361,6 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
         h = MyMoneyTransaction::hash(tmpVal, h);
     } else {
         DBG_WARN(0, "No value for transaction");
-    }
-
-    if (startDate) {
-        QDate d(QDate(GWEN_Date_GetYear(startDate), GWEN_Date_GetMonth(startDate), GWEN_Date_GetDay(startDate)));
-
-        if (!ks.m_dateBegin.isValid())
-            ks.m_dateBegin = d;
-        else if (d < ks.m_dateBegin)
-            ks.m_dateBegin = d;
-
-        if (!ks.m_dateEnd.isValid())
-            ks.m_dateEnd = d;
-        else if (d > ks.m_dateEnd)
-            ks.m_dateEnd = d;
-    } else {
-        DBG_WARN(0, "No date in current transaction");
     }
 
     // add information about remote account to memo in case we have something

@@ -660,6 +660,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     transactionUnderImport.setCommodity(d->m_account.currencyId());
 
     transactionUnderImport.setPostDate(statementTransactionUnderImport.m_datePosted);
+    if (statementTransactionUnderImport.m_dateProcessed.isValid()) {
+        transactionUnderImport.setEntryDate(statementTransactionUnderImport.m_dateProcessed);
+    }
     transactionUnderImport.setMemo(statementTransactionUnderImport.m_strMemo);
 
     MyMoneySplit s1;
