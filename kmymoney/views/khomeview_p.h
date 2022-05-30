@@ -506,7 +506,9 @@ public:
             "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
             "<tr><td class=\"summaryheader\">"
             + i18n("Net Worth Forecast") + "</td></tr>";
-        m_html += QString("<tr>");
+
+        m_html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
+        m_html += "<tr><td><table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" ><tr>";
 
         if (const auto reportsPlugin = pPlugins.data.value(QStringLiteral("reportsview"), nullptr)) {
             const auto variantReport = reportsPlugin->requestData(QString(), eWidgetPlugin::WidgetType::NetWorthForecast);
@@ -520,7 +522,7 @@ public:
             m_html += QString("<td><center>%1</center></td>").arg(i18n("Enable reports plugin to see this chart."));
         }
 
-        m_html += "</tr>";
+        m_html += "</tr></table></td></tr>";
         m_html += "</table>";
     }
 
@@ -1013,7 +1015,12 @@ public:
             while (it_report != reports.constEnd()) {
                 if ((*it_report).isFavorite()) {
                     if (firstTime) {
-                        m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Favorite Reports"));
+                        m_html +=
+                            "<table width=\"97%\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" class=\"displayblock\" >"
+                            "<tr><td class=\"summaryheader\">"
+                            + i18n("Favorite Reports") + "</td></tr>";
+
+                        m_html += "<tr class=\"gap\"><td>&nbsp;\n</td></tr>";
                         m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
                         m_html += "<tr class=\"item\"><td class=\"left\" width=\"40%\">";
                         m_html += i18n("Report");
@@ -1033,8 +1040,10 @@ public:
 
                 ++it_report;
             }
-            if (!firstTime)
-                m_html += "</table></div></div>";
+            if (!firstTime) {
+                m_html += "</table></td></tr>";
+                m_html += "</table>";
+            }
         }
     }
 
