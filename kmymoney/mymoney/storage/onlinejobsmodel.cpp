@@ -106,6 +106,7 @@ QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
                 onlineJobTyped<creditTransfer> transfer(job);
                 return MyMoneyUtils::formatMoney(transfer.task()->value(), transfer.task()->currency());
 
+            } catch (const onlineJob::badTaskCast&) {
             } catch (const MyMoneyException&) {
             }
 
@@ -114,6 +115,8 @@ QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
                 onlineJobTyped<creditTransfer> transfer(job);
                 const payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic(transfer.constTask()->beneficiary());
                 return ibanBic->ownerName();
+            } catch (const onlineJob::badTaskCast&) {
+                return i18nc("Unknown payee in online task", "Unknown");
             } catch (const MyMoneyException&) {
             }
 
