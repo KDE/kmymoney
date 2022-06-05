@@ -2444,7 +2444,7 @@ void KMyMoneyApp::slotDeleteTransactions()
             "Do you really want to delete all %1 selected transactions?",
             d->m_selections.selection(SelectedObjects::JournalEntry).count());
 
-        if (KMessageBox::questionYesNo(this, msg, i18n("Delete transaction")) == KMessageBox::Cancel) {
+        if (KMessageBox::questionYesNo(this, msg, i18n("Delete transaction")) == KMessageBox::No) {
             return;
         }
     }
