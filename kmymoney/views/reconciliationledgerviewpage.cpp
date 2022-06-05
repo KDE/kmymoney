@@ -253,6 +253,7 @@ public:
                 auto t = journalEntry.transaction();
                 sp.setReconcileFlag(eMyMoney::Split::State::Reconciled);
                 sp.setReconcileDate(endingBalanceDlg->statementDate());
+                t.setImported(false);
                 t.modifySplit(sp);
 
                 // update the engine ...

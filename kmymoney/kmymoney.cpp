@@ -2654,6 +2654,7 @@ void KMyMoneyApp::slotMarkTransactions()
                                     break;
                                 case eMyMoney::Split::State::Cleared:
                                     sp.setReconcileFlag(eMyMoney::Split::State::Reconciled);
+                                    t.setImported(false);
                                     break;
                                 case eMyMoney::Split::State::Reconciled:
                                     sp.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
@@ -2860,7 +2861,9 @@ void KMyMoneyApp::slotAcceptTransaction()
             auto s = journalEntry.split();
             if (t.isImported()) {
                 t.setImported(false);
-                s.setReconcileFlag(eMyMoney::Split::State::Cleared);
+                if (s.reconcileFlag() < eMyMoney::Split::State::Reconciled) {
+                    s.setReconcileFlag(eMyMoney::Split::State::Cleared);
+                }
                 t.modifySplit(s);
                 file->modifyTransaction(t);
             }
