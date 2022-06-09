@@ -32,7 +32,7 @@
             }
         ],
         "Description": "Exports schedules to iCalendar files",
-        "Description[ca@valencia]": "Exporta les planificacions a fichers iCalendar",
+        "Description[ca@valencia]": "Exporta les planificacions a fitxers iCalendar",
         "Description[ca]": "Exporta les planificacions a fitxers iCalendar",
         "Description[de]": "Exportiert geplante Buchungen in iCalendar-Dateien",
         "Description[en_GB]": "Exports schedules to iCalendar files",
