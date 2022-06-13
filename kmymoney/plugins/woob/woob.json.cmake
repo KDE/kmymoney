@@ -33,7 +33,7 @@
             }
         ],
         "Description": "Plugin for Woob",
-        "Description[ca@valencia]": "Conector per al Woob",
+        "Description[ca@valencia]": "Connector per al Woob",
         "Description[ca]": "Connector per al Woob",
         "Description[cs]": "Modul Woob",
         "Description[en_GB]": "Plugin for Woob",
