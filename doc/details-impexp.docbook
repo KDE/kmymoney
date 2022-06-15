@@ -673,7 +673,7 @@
 <para>
   The next step is to verify the imported data and accept it. This is a general
   process and also applies to imports from other sources. It is outlined in a
-  separate section of this document.  JHOXXXJHO
+  separate section of this document.
 </para>
 
 <note>
@@ -1007,7 +1007,7 @@
   menu bar. From the <menuchoice><guimenu>File</guimenu><guisubmenu>Import</guisubmenu>
   <guimenuitem>OFX...</guimenuitem></menuchoice> menu item. If OFX does not show
   up under Import, the OFX Importer Plugin is either not installed or not
-  installed installed correctly.  Please see the previous section.
+  installed correctly.  Please see the previous section.
 </para>
 
 <para>
@@ -1125,7 +1125,7 @@
   bank, and download available transactions.  You can use the <link
   linkend="details.accounts.edit">Edit account</link> dialog (under the
   <guilabel>Online settings</guilabel> tab, <guilabel>Import
-  Details</guilabel>subtab) to indicate whether to download transactions since
+  Details</guilabel> subtab) to indicate whether to download transactions since
   the last update, since a specified number of days ago, or since a specified
   date.
 </para>
