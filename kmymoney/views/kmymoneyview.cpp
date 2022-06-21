@@ -358,6 +358,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     pActions[eMenu::Action::MarkReconciled]->setDisabled(true);
     pActions[eMenu::Action::SelectAllTransactions]->setEnabled(false);
     pActions[eMenu::Action::MatchTransaction]->setEnabled(false);
+    pActions[eMenu::Action::AcceptTransaction]->setEnabled(false);
     pActions[eMenu::Action::NewScheduledTransaction]->setEnabled(false);
     pActions[eMenu::Action::StartReconciliation]->setEnabled(false);
     pActions[eMenu::Action::PostponeReconciliation]->setEnabled(false);
