@@ -226,11 +226,15 @@ public:
                             break;
                         }
                     }
+                    acc.clearId();
                 }
-            }
-            // we don't allow jumping to categories when there are more than one
-            if (acc.isIncomeExpense() && journalEntry.transaction().splitCount() > 2) {
-                acc.clearId();
+                // try looking for a suitable category in case we
+                // did not find an account, but we don't support
+                // jumping to categories when there are more than one
+                if (acc.id().isEmpty() && (journalEntry.transaction().splitCount() == 2)) {
+                    const auto counterId = baseIdx.data(eMyMoney::Model::TransactionCounterAccountIdRole).toString();
+                    acc = MyMoneyFile::instance()->account(counterId);
+                }
             }
 
             // found an account, update the action
