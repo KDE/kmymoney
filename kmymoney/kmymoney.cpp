@@ -2704,7 +2704,9 @@ void KMyMoneyApp::slotMoveTransactionTo()
             for (const auto& journalId : journalEntryList) {
                 const auto journalIdx = file->journalModel()->indexById(journalId);
                 auto t = file->transaction(journalIdx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
-                if (journalIdx.data(eMyMoney::Model::TransactionIsInvestmentRole).toBool()) {
+                auto s = t.splitById(journalIdx.data(eMyMoney::Model::JournalSplitIdRole).toString());
+                const auto acc = file->accountsModel()->itemById(s.accountId());
+                if (acc.isInvest()) {
                     /// moving an investment transactions must make sure that the
                     //  necessary (security) accounts exist before the transaction is moved
                     auto toInvAcc = file->account(accountId);
@@ -2712,7 +2714,6 @@ void KMyMoneyApp::slotMoveTransactionTo()
                     // fortunately, investment transactions have only one stock involved
                     QString stockAccountId;
                     QString stockSecurityId;
-                    MyMoneySplit s;
                     for (const auto& split : t.splits()) {
                         stockAccountId = split.accountId();
                         stockSecurityId = file->account(stockAccountId).currencyId();
@@ -2749,13 +2750,11 @@ void KMyMoneyApp::slotMoveTransactionTo()
 
                     // now update the split and the transaction
                     s.setAccountId(newStockAccountId);
-                    t.modifySplit(s);
 
                 } else {
-                    auto s = t.splitById(journalIdx.data(eMyMoney::Model::JournalSplitIdRole).toString());
                     s.setAccountId(accountId);
-                    t.modifySplit(s);
                 }
+                t.modifySplit(s);
                 file->modifyTransaction(t);
             }
             ft.commit();
