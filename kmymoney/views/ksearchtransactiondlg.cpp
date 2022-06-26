@@ -105,6 +105,8 @@ public:
         ui.m_tabWidget->setTabEnabled(ui.m_tabWidget->indexOf(ui.m_resultPage), true);
         ui.m_tabWidget->setCurrentWidget(ui.m_resultPage);
         ui.m_ledgerView->setFocus();
+
+        ui.m_foundText->setText(i18np("Found %1 matching splits", "Found %1 matching splits", filterModel->rowCount()));
     }
 
     void selectTransaction(const QModelIndex& idx)
