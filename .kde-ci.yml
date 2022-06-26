@@ -20,3 +20,6 @@ Dependencies:
     'frameworks/ktextwidgets': '@stable'
     'frameworks/kcmutils': '@stable'
     'office/alkimia': '@latest'
+
+Options:
+  require-passing-tests-on: [ 'Linux', 'FreeBSD', 'Windows' ]
