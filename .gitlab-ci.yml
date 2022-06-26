@@ -6,7 +6,9 @@ include:
 
 # custom builds
 
-build_local_ubuntu_2110:
+build_local_ubuntu_2110: 
+# make it manual for now, since 21.10 alkimia is at 5.7 and as such incompatible with master
+  when: manual
   stage: build
   image: ubuntu:21.10
   variables:
