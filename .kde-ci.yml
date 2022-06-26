@@ -18,4 +18,5 @@ Dependencies:
     'frameworks/kio': '@stable'
     'frameworks/kxmlgui': '@stable'
     'frameworks/ktextwidgets': '@stable'
+    'frameworks/kcmutils': '@stable'
     'office/alkimia': '@latest'
