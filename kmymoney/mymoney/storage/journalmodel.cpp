@@ -887,6 +887,10 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::ScheduleIsOverdueRole:
         return false;
 
+    case eMyMoney::Model::TransactionScheduleIdRole:
+        // we don't store schedules in this model
+        return {};
+
     case eMyMoney::Model::JournalSplitMaxLinesCountRole:
         return journalEntry.linesInLedger();
 
