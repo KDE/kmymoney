@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2022 Thomas Baumgart <tbaumgart@kde.org>
+# SPDX-FileCopyrightText: 2022 Dawid Wróbel <me@dawidwrobel.com>
+# SPDX-License-Identifier: CC0-1.0
+
+Dependencies:
+- 'on': ['@all']
+  'require':
+    'frameworks/extra-cmake-modules': '@stable'
+    'frameworks/kcoreaddons': '@stable'
+    'frameworks/kguiaddons': '@stable'
+    'frameworks/kwidgetsaddons': '@stable'
+    'frameworks/ki18n': '@stable'
+    'frameworks/kconfig': '@stable'
+    'frameworks/kcompletion': '@stable'
+    'frameworks/kitemmodels': '@stable'
+    'frameworks/kitemviews': '@stable'
+    'frameworks/kwindowsystem': '@stable'
+    'frameworks/kiconthemes': '@stable'
+    'frameworks/kio': '@stable'
+    'frameworks/kxmlgui': '@stable'
+    'frameworks/ktextwidgets': '@stable'
+    'frameworks/kcmutils': '@stable'
+    'office/alkimia': '@stable'
+
+Options:
+  require-passing-tests-on: [ 'Linux', 'FreeBSD', 'Windows' ]
