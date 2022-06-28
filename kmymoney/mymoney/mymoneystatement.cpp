@@ -391,9 +391,13 @@ QDate MyMoneyStatement::statementEndDate() const
     if (m_dateEnd.isValid())
         return m_dateEnd;
 
+    // if we don't have an end date listed in the
+    // statement, we take the last postdate we
+    // find that is not in the future and use it
+    // as the end date of the statement.
     QDate postDate;
     for(auto& t : m_listTransactions) {
-        if (t.m_datePosted > postDate) {
+        if ((t.m_datePosted > postDate) && (t.m_datePosted <= QDate::currentDate())) {
             postDate = t.m_datePosted;
         }
     }
