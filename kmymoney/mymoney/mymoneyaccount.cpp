@@ -608,3 +608,8 @@ QString MyMoneyAccount::stdAccName(eMyMoney::Account::Standard stdAccID)
     };
     return stdAccNames.value(stdAccID);
 }
+
+QString MyMoneyAccount::accountSeparator()
+{
+    return QStringLiteral(":");
+}
