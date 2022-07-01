@@ -2580,16 +2580,18 @@ void KMyMoneyApp::slotCopySplits()
                                 }
 
                                 MyMoneySplit sp(split);
-                                // clear the ID and reconciliation state
+                                // clear the ID, reconciliation state, match information and data stored in KVP
                                 sp.clearId();
                                 sp.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
                                 sp.setReconcileDate(QDate());
+                                sp.removeMatch();
+                                sp.clear();
 
                                 // in case it is a simple transaction consisting of two splits,
                                 // we can adjust the share and value part of the second split we
                                 // just created. We need to keep a possible price in mind in case
                                 // of different currencies
-                                if (t.splitCount() == 2) {
+                                if (selectedSourceTransaction.splitCount() == 2) {
                                     sp.setValue(-baseSplit.value());
                                     sp.setShares(-(baseSplit.shares() * baseSplit.price()));
                                 }
