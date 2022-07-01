@@ -53,12 +53,13 @@ class KNewAccountDlgPrivate
     Q_DECLARE_PUBLIC(KNewAccountDlg)
 
 public:
-    explicit KNewAccountDlgPrivate(KNewAccountDlg *qq) :
-        q_ptr(qq),
-        ui(new Ui::KNewAccountDlg),
-        m_filterProxyModel(nullptr),
-        m_categoryEditor(false),
-        m_isEditing(false)
+    explicit KNewAccountDlgPrivate(KNewAccountDlg* qq)
+        : q_ptr(qq)
+        , ui(new Ui::KNewAccountDlg)
+        , m_requiredFields(new KMandatoryFieldGroup(qq))
+        , m_filterProxyModel(nullptr)
+        , m_categoryEditor(false)
+        , m_isEditing(false)
     {
     }
 
@@ -413,9 +414,8 @@ public:
         q->slotVatAssignmentChanged(ui->m_vatAssignment->isChecked());
         q->slotCheckFinished();
 
-        auto requiredFields = new KMandatoryFieldGroup(q);
-        requiredFields->setOkButton(ui->buttonBox->button(QDialogButtonBox::Ok)); // button to be enabled when all fields present
-        requiredFields->add(ui->accountNameEdit);
+        m_requiredFields->setOkButton(ui->buttonBox->button(QDialogButtonBox::Ok)); // button to be enabled when all fields present
+        m_requiredFields->add(ui->accountNameEdit);
     }
 
     void loadKVP(const QString& key, AmountEdit* widget)
@@ -563,12 +563,12 @@ public:
         ui->m_parentAccounts->scrollTo(parentIndex, QAbstractItemView::PositionAtCenter);
     }
 
-    KNewAccountDlg             *q_ptr;
-    Ui::KNewAccountDlg         *ui;
-    MyMoneyAccount              m_account;
-    MyMoneyAccount              m_parentAccount;
-    HierarchyFilterProxyModel  *m_filterProxyModel;
-
+    KNewAccountDlg* q_ptr;
+    Ui::KNewAccountDlg* ui;
+    KMandatoryFieldGroup* m_requiredFields;
+    MyMoneyAccount m_account;
+    MyMoneyAccount m_parentAccount;
+    HierarchyFilterProxyModel* m_filterProxyModel;
     bool m_categoryEditor;
     bool m_isEditing;
 };
@@ -851,9 +851,10 @@ void KNewAccountDlg::slotAccountTypeChanged(int index)
 void KNewAccountDlg::slotCheckFinished()
 {
     Q_D(KNewAccountDlg);
+    const QString emptyAccountName(MyMoneyAccount::accountSeparator() + MyMoneyAccount::accountSeparator());
     auto showButton = true;
 
-    if (d->ui->accountNameEdit->text().length() == 0) {
+    if (d->ui->accountNameEdit->text().isEmpty() || (d->ui->accountNameEdit->text().contains(emptyAccountName))) {
         showButton = false;
     }
 
@@ -863,7 +864,7 @@ void KNewAccountDlg::slotCheckFinished()
         if (d->ui->m_vatAssignment->isChecked() && d->ui->m_vatAccount->selectedItems().isEmpty())
             showButton = false;
     }
-    d->ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(showButton);
+    d->m_requiredFields->setExternalMandatoryState(showButton);
 }
 
 void KNewAccountDlg::slotVatChanged(bool state)
