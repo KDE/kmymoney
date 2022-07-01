@@ -343,14 +343,26 @@ void KAccountsView::slotCloseAccount()
 {
     Q_D(KAccountsView);
     MyMoneyFileTransaction ft;
+    MyMoneyFile* file = MyMoneyFile::instance();
+
     try {
+        // in case of investment, try to close the sub-accounts first
+        if (d->m_currentAccount.accountType() == eMyMoney::Account::Type::Investment) {
+            d->closeSubAccounts(d->m_currentAccount);
+        }
         d->m_currentAccount.setClosed(true);
-        MyMoneyFile::instance()->modifyAccount(d->m_currentAccount);
+        file->modifyAccount(d->m_currentAccount);
         emit selectByObject(d->m_currentAccount, eView::Intent::None);
         ft.commit();
         if (!KMyMoneySettings::showAllAccounts())
-            KMessageBox::information(this, i18n("<qt>You have closed this account. It remains in the system because you have transactions which still refer to it, but it is not shown in the views. You can make it visible again by going to the View menu and selecting <b>Show all accounts</b> or by deselecting the <b>Do not show closed accounts</b> setting.</qt>"), i18n("Information"), "CloseAccountInfo");
-    } catch (const MyMoneyException &) {
+            KMessageBox::information(this,
+                                     i18n("<qt>You have closed this account. It remains in the system because you have transactions which still refer to it, "
+                                          "but it is not shown in the views. You can make it visible again by going to the View menu and selecting <b>Show all "
+                                          "accounts</b> or by deselecting the <b>Do not show closed accounts</b> setting.</qt>"),
+                                     i18n("Information"),
+                                     "CloseAccountInfo");
+    } catch (const MyMoneyException& e) {
+        qDebug() << e.what();
     }
 }
 

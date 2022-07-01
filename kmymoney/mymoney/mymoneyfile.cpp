@@ -600,6 +600,35 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
         }
     }
 
+    // check if account can be closed
+    if (account.isClosed() && !acc.isClosed()) {
+        // balance must be zero
+        if (!account.balance().isZero())
+            throw MYMONEYEXCEPTION_CSTRING("Cannot close account with balance unequal to zero");
+        if (account.hasOnlineMapping())
+            throw MYMONEYEXCEPTION_CSTRING("Cannot close account with active online mapping");
+
+        // all children must be closed already
+        const auto accList = account.accountList();
+        for (const auto& sAccount : accList) {
+            const auto subAccount = MyMoneyFile::instance()->account(sAccount);
+            if (!subAccount.isClosed()) {
+                throw MYMONEYEXCEPTION_CSTRING("Cannot close account with open sub-account");
+            }
+        }
+
+        // there must be no unfinished schedule referencing the account
+        QList<MyMoneySchedule> list = scheduleList();
+        QList<MyMoneySchedule>::const_iterator it_l;
+        for (it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
+            if ((*it_l).isFinished())
+                continue;
+            if ((*it_l).hasReferenceTo(acc.id())) {
+                throw MYMONEYEXCEPTION_CSTRING("Cannot close account referenced in schedule");
+            }
+        }
+    }
+
     d->m_storage->modifyAccount(account);
     d->m_changeSet += MyMoneyNotification(File::Mode::Modify, account);
 }
