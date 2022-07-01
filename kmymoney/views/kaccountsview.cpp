@@ -255,9 +255,15 @@ void KAccountsView::slotCloseAccount()
 {
     Q_D(KAccountsView);
     MyMoneyFileTransaction ft;
+    MyMoneyFile* file = MyMoneyFile::instance();
+
     try {
+        // in case of investment, try to close the sub-accounts first
+        if (d->m_currentAccount.accountType() == eMyMoney::Account::Type::Investment) {
+            d->closeSubAccounts(d->m_currentAccount);
+        }
         d->m_currentAccount.setClosed(true);
-        MyMoneyFile::instance()->modifyAccount(d->m_currentAccount);
+        file->modifyAccount(d->m_currentAccount);
         ft.commit();
         if (!KMyMoneySettings::showAllAccounts())
             KMessageBox::information(
@@ -267,7 +273,8 @@ void KAccountsView::slotCloseAccount()
                 i18n("Information"),
                 "CloseAccountInfo");
         emit requestSelectionChange(d->m_selections);
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException& e) {
+        qDebug() << e.what();
     }
 }
 

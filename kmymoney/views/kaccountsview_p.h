@@ -271,18 +271,18 @@ public:
     };
 
     /**
-      * This method checks, if an account can be closed or not. An account
-      * can be closed if:
-      *
-      * - the balance is zero and
-      * - all children are already closed and
-      * - there is no unfinished schedule referencing the account
-      * - and no online mapping is setup
-      *
-      * @param acc reference to MyMoneyAccount object in question
-      * @retval true account can be closed
-      * @retval false account cannot be closed
-      */
+     * This method checks, if an account can be closed or not. An account
+     * can be closed if:
+     *
+     * - the balance is zero and
+     * - all children are already closed (or it is an investment account and all sub-accounts can be closed) and
+     * - there is no unfinished schedule referencing the account
+     * - and no online mapping is setup
+     *
+     * @param acc reference to MyMoneyAccount object in question
+     * @retval true account can be closed
+     * @retval false account cannot be closed
+     */
     CanCloseAccountCodeE canCloseAccount(const MyMoneyAccount& acc)
     {
         // balance must be zero
@@ -292,8 +292,15 @@ public:
             return AccountHasOnlineMapping;
 
         // all children must be already closed
-        foreach (const auto sAccount, acc.accountList()) {
-            if (!MyMoneyFile::instance()->account(sAccount).isClosed()) {
+        const auto accList = acc.accountList();
+        for (const auto& sAccount : accList) {
+            const auto subAccount = MyMoneyFile::instance()->account(sAccount);
+            if (acc.accountType() == eMyMoney::Account::Type::Investment) {
+                auto subAccountResult = canCloseAccount(subAccount);
+                if (subAccountResult != AccountCanClose)
+                    return AccountChildrenOpen;
+
+            } else if (!subAccount.isClosed()) {
                 return AccountChildrenOpen;
             }
         }
@@ -428,6 +435,19 @@ public:
         }
         pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
     }
+
+    void closeSubAccounts(const MyMoneyAccount& account)
+    {
+        MyMoneyFile* file = MyMoneyFile::instance();
+        const auto accountList = account.accountList();
+
+        for (const auto& subAccountId : accountList) {
+            auto subAccount = file->account(subAccountId);
+            closeSubAccounts(subAccount);
+            subAccount.setClosed(true);
+            file->modifyAccount(subAccount);
+        }
+    };
 
     Ui::KAccountsView   *ui;
     bool                m_haveUnusedCategories;
