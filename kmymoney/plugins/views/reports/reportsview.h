@@ -18,14 +18,14 @@
 
 class KReportsView;
 
-class ReportsView : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::DataPlugin
+class ReportsView final : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::DataPlugin
 {
     Q_OBJECT
     Q_INTERFACES(KMyMoneyPlugin::DataPlugin)
 
 public:
     explicit ReportsView(QObject *parent, const QVariantList &args);
-    ~ReportsView() final;
+    ~ReportsView();
 
     void plug() final override;
     void unplug() final override;
