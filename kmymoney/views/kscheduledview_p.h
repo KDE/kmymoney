@@ -203,7 +203,7 @@ public:
                 KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
 
                 auto torig = dlg->transaction();
-                MyMoneyTransaction taccepted;
+                MyMoneyTransaction taccepted(torig);
                 // force actions to be available no matter what (will be updated according to the state during
                 // slotTransactionsEnter or cancelEditing)
                 pActions[eMenu::Action::CancelTransaction]->setEnabled(true);
