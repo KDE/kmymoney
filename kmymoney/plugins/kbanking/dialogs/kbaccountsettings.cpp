@@ -17,6 +17,8 @@
 
 #include "ui_kbaccountsettings.h"
 
+#include <aqbanking/version.h>
+
 struct KBAccountSettings::Private {
     Ui::KBAccountSettings ui;
 };
@@ -47,6 +49,12 @@ void KBAccountSettings::loadUi(const MyMoneyKeyValueContainer& kvp)
         d->ui.m_payeeExceptions->insertStringList(kvp.value("kbanking-payee-exceptions").split(';', QString::SkipEmptyParts));
     }
     d->ui.m_removeLineBreaksFromMemo->setChecked(kvp.value("kbanking-memo-removelinebreaks").compare(QLatin1String("no")));
+
+    d->ui.m_includePayeeDetails->setChecked(kvp.value("kbanking-memo-includepayeedetails").compare(QLatin1String("no")));
+    // don't present the option to the user if it is not available
+#if QT_VERSION_CHECK(AQBANKING_VERSION_MAJOR, AQBANKING_VERSION_MINOR, AQBANKING_VERSION_PATCHLEVEL) <= QT_VERSION_CHECK(6, 2, 0)
+    d->ui.m_includePayeeDetails->hide();
+#endif
 }
 
 void KBAccountSettings::loadKvp(MyMoneyKeyValueContainer& kvp)
@@ -55,7 +63,8 @@ void KBAccountSettings::loadKvp(MyMoneyKeyValueContainer& kvp)
     kvp.deletePair("kbanking-memo-regexp");
     kvp.deletePair("kbanking-payee-exceptions");
     kvp.deletePair("kbanking-txn-download");
-    kvp.deletePair("kbanking-memo-remlinebreak");
+    kvp.deletePair("kbanking-memo-removelinebreaks");
+    kvp.deletePair("kbanking-memo-includepayeedetails");
     // The key "kbanking-jobexec" is not used since version 4.8 anymore
     kvp.deletePair("kbanking-jobexec");
 
@@ -74,6 +83,10 @@ void KBAccountSettings::loadKvp(MyMoneyKeyValueContainer& kvp)
     // remove linebreaks, default is on
     if (!d->ui.m_removeLineBreaksFromMemo->isChecked())
         kvp["kbanking-memo-removelinebreaks"] = "no";
+
+    // include payee details, default is no
+    if (!d->ui.m_includePayeeDetails->isChecked())
+        kvp["kbanking-memo-includepayeedetails"] = "no";
 
     kvp["kbanking-statementDate"] = QString("%1").arg(d->ui.m_preferredStatementDate->currentIndex());
 }
