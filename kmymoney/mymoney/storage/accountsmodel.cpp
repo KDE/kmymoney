@@ -671,7 +671,12 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::AccountOnlineBalanceValueRole:
         if (d->hasOnlineBalance(account)) {
-            return QVariant::fromValue(MyMoneyMoney(account.value("lastStatementBalance")));
+            auto balance = MyMoneyMoney(account.value("lastStatementBalance"));
+            // revert the sign for liability accouts
+            if (account.accountGroup() == eMyMoney::Account::Type::Liability) {
+                balance = -balance;
+            }
+            return QVariant::fromValue(balance);
         }
         break;
 
