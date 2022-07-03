@@ -1229,6 +1229,7 @@ QStringList NewTransactionEditor::saveTransaction(const QStringList& selectedJou
         if (t.id().isEmpty()) {
             MyMoneyFile::instance()->addTransaction(t);
         } else {
+            t.setImported(false);
             MyMoneyFile::instance()->modifyTransaction(t);
         }
         ft.commit();

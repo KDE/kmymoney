@@ -1236,6 +1236,7 @@ QStringList InvestTransactionEditor::saveTransaction(const QStringList& selected
         if (t.id().isEmpty()) {
             file->addTransaction(t);
         } else {
+            t.setImported(false);
             file->modifyTransaction(t);
         }
         ft.commit();
