@@ -2682,6 +2682,7 @@ void KMyMoneyApp::slotMarkTransactions()
                     }
 
                     t.modifySplit(sp);
+                    t.setImported(false);
                     MyMoneyFile::instance()->modifyTransaction(t);
                 }
             }
