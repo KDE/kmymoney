@@ -1296,6 +1296,11 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
     d->addTransactionToBalance(srcIdx.row(), newTransaction.splitCount());
 
     d->finishBalanceCacheOperation();
+
+    if (oldKey != newKey) {
+        emit idChanged(newKey, oldKey);
+    }
+
     setDirty();
 }
 
