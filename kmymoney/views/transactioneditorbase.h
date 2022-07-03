@@ -31,7 +31,7 @@ public:
 
     virtual bool accepted() const = 0;
     virtual void loadTransaction(const QModelIndex& index) = 0;
-    virtual void saveTransaction() = 0;
+    virtual QStringList saveTransaction(const QStringList& selectedJournalEntries) = 0;
     virtual void setAmountPlaceHolderText(const QAbstractItemModel* model)
     {
         Q_UNUSED(model)

@@ -1149,9 +1149,14 @@ MyMoneyMoney InvestTransactionEditor::totalAmount() const
     return d->assetSplit.value();
 }
 
-void InvestTransactionEditor::saveTransaction()
+QStringList InvestTransactionEditor::saveTransaction(const QStringList& selectedJournalEntries)
 {
     MyMoneyTransaction t;
+
+    auto selection(selectedJournalEntries);
+    connect(MyMoneyFile::instance()->journalModel(), &JournalModel::idChanged, this, [&](const QString& currentId, const QString& previousId) {
+        selection.replaceInStrings(previousId, currentId);
+    });
 
     AlkValue::RoundingMethod roundingMethod = AlkValue::RoundRound;
     if (d->security.roundingMethod() != AlkValue::RoundNever)
@@ -1237,7 +1242,9 @@ void InvestTransactionEditor::saveTransaction()
 
     } catch (const MyMoneyException& e) {
         qDebug() << Q_FUNC_INFO << "something went wrong" << e.what();
+        selection = selectedJournalEntries;
     }
+    return selection;
 }
 
 bool InvestTransactionEditor::eventFilter(QObject* o, QEvent* e)

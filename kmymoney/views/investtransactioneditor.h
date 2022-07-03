@@ -37,7 +37,7 @@ public:
     /**
      */
     void loadTransaction(const QModelIndex& index) override;
-    void saveTransaction() override;
+    QStringList saveTransaction(const QStringList& selectedJournalEntries) override;
 
     /**
      * Reimplemented to suppress some events in certain conditions

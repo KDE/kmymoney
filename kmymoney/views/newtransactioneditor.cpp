@@ -1215,9 +1215,14 @@ MyMoneyTransaction NewTransactionEditor::transaction() const
     return t;
 }
 
-void NewTransactionEditor::saveTransaction()
+QStringList NewTransactionEditor::saveTransaction(const QStringList& selectedJournalEntries)
 {
     auto t = transaction();
+
+    auto selection(selectedJournalEntries);
+    connect(MyMoneyFile::instance()->journalModel(), &JournalModel::idChanged, this, [&](const QString& currentId, const QString& previousId) {
+        selection.replaceInStrings(previousId, currentId);
+    });
 
     MyMoneyFileTransaction ft;
     try {
@@ -1230,7 +1235,10 @@ void NewTransactionEditor::saveTransaction()
 
     } catch (const MyMoneyException& e) {
         qDebug() << Q_FUNC_INFO << "something went wrong" << e.what();
+        selection = selectedJournalEntries;
     }
+
+    return selection;
 }
 
 bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)

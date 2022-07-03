@@ -44,7 +44,7 @@ public:
     /**
      */
     void loadTransaction(const QModelIndex& index) override;
-    void saveTransaction() override;
+    QStringList saveTransaction(const QStringList& selectedJournalEntries) override;
 
     void setAmountPlaceHolderText(const QAbstractItemModel* model) override;
 
