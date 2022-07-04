@@ -9,6 +9,7 @@
 // QT Includes
 
 #include <QAction>
+#include <QApplication>
 #include <QDate>
 #include <QDebug>
 #include <QHeaderView>
@@ -863,6 +864,27 @@ void LedgerView::keyPressEvent(QKeyEvent* kev)
         kev->accept();
         d->infoMessage->animatedHide();
     } else {
+#ifndef Q_OS_OSX
+        // on non OSX operating systems, we turn a return or enter
+        // key press into an F2 to start editing the transaction.
+        // This is otherwise suppressed. Comment from QAbstractItemView:
+        //
+        // ### we can't open the editor on enter, becuse
+        // some widgets will forward the enter event back
+        // to the viewport, starting an endless loop
+
+        QKeyEvent evt(kev->type(), Qt::Key_F2, kev->modifiers(), QString(), kev->isAutoRepeat(), kev->count());
+        switch (kev->key()) {
+        case Qt::Key_Return:
+        case Qt::Key_Enter:
+            // send out the modified key event
+            // and don't process this one any further
+            QApplication::sendEvent(this, &evt);
+            return;
+        default:
+            break;
+        }
+#endif
         QTableView::keyPressEvent(kev);
     }
 }
