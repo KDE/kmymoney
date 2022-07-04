@@ -123,6 +123,7 @@ public:
     MyMoneyMoney splitsSum() const;
     void createCategory();
     void createPayee();
+    void defaultCategoryAssignment();
 
     NewTransactionEditor* q;
     Ui_NewTransactionEditor* ui;
@@ -688,6 +689,18 @@ void NewTransactionEditor::Private::createPayee()
     creator->addButton(ui->cancelButton);
     creator->addButton(ui->enterButton);
     creator->createPayee();
+}
+
+void NewTransactionEditor::Private::defaultCategoryAssignment()
+{
+    if (splitModel.rowCount() == 0) {
+        const auto payeesModel = ui->payeeEdit->model();
+        const auto payeeIdx = payeesModel->index(ui->payeeEdit->currentIndex(), 0);
+        const auto defaultAccount = payeeIdx.data(eMyMoney::Model::PayeeDefaultAccountRole).toString();
+        if (!defaultAccount.isEmpty()) {
+            categoryChanged(defaultAccount);
+        }
+    }
 }
 
 NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accountId)
@@ -1269,6 +1282,10 @@ bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
                     } else {
                         d->createPayee();
                     }
+
+                    // check if category is filled and fill with
+                    // default for payee if one is setup
+                    d->defaultCategoryAssignment();
                 }
             }
         }
