@@ -959,8 +959,8 @@ void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& p
             scrollTo(idx, QAbstractItemView::PositionAtBottom);
             edit(idx);
         } else {
-            scrollTo(idx, EnsureVisible);
             emit transactionSelected(idx);
+            QMetaObject::invokeMethod(this, &LedgerView::ensureCurrentItemIsVisible, Qt::QueuedConnection);
         }
         QMetaObject::invokeMethod(this, "doItemsLayout", Qt::QueuedConnection);
     }
