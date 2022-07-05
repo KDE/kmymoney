@@ -140,11 +140,13 @@ void LedgerViewPage::initModel()
 
     connect(d->ui->m_ledgerView, &LedgerView::requestView, this, &LedgerViewPage::requestView);
 
+    connect(file->journalModel(), &JournalModel::balancesChanged, this, &LedgerViewPage::updateSummaryInformation);
+
     d->needModelInit = false;
 
     // now execute all the postponed actions
     const auto acc = file->account(d->accountId);
-    setAccount(acc);
+    this->setAccount(acc);
 
     setShowEntryForNewTransaction(d->showEntryForNewTransaction);
 }
@@ -269,7 +271,21 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
     }
     d->ui->m_ledgerView->selectMostRecentTransaction();
 
+    connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::dataChanged, this, [&]() {
+        const auto account = MyMoneyFile::instance()->accountsModel()->itemById(d->accountId);
+        d->reconciliationDate = account.lastReconciliationDate();
+        d->precision = MyMoneyMoney::denomToPrec(account.fraction());
+        d->accountName = account.name();
+    });
+
+    d->reconciliationDate = acc.lastReconciliationDate();
+    d->precision = MyMoneyMoney::denomToPrec(acc.fraction());
     d->accountName = acc.name();
+
+    const auto file = MyMoneyFile::instance();
+    d->totalBalance = file->balance(d->accountId, QDate());
+    d->clearedBalance = file->clearedBalance(d->accountId, QDate());
+    d->updateSummaryInformation();
 }
 
 void LedgerViewPage::showTransactionForm(bool show)
@@ -424,8 +440,14 @@ QString LedgerViewPage::accountName()
     return d->accountName;
 }
 
-void LedgerViewPage::updateSummaryInformation()
+void LedgerViewPage::updateSummaryInformation(const QHash<QString, AccountBalances>& balances)
 {
+    const auto it = balances.find(d->accountId);
+    if (it != balances.cend()) {
+        d->totalBalance = (*it).m_totalBalance;
+        d->clearedBalance = (*it).m_clearedBalance;
+        d->updateSummaryInformation();
+    }
 }
 
 QList<int> LedgerViewPage::splitterSizes() const

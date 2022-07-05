@@ -301,7 +301,7 @@ struct JournalModel::Private
             if (Q_UNLIKELY(journalEntry.transaction().isStockSplit())) {
                 fullBalanceRecalc.insert(journalEntry.split().accountId());
             } else {
-                balanceCache[journalEntry.split().accountId()] -= journalEntry.split().shares();
+                balanceCache[journalEntry.split().accountId()] -= journalEntry.split();
             }
             ++startRow;
         }
@@ -315,7 +315,7 @@ struct JournalModel::Private
             if (Q_UNLIKELY(journalEntry.transaction().isStockSplit())) {
                 fullBalanceRecalc.insert(journalEntry.split().accountId());
             } else {
-                balanceCache[journalEntry.split().accountId()] += journalEntry.split().shares();
+                balanceCache[journalEntry.split().accountId()] += journalEntry.split();
             }
             ++startRow;
         }
@@ -326,7 +326,7 @@ struct JournalModel::Private
         if (!fullBalanceRecalc.isEmpty()) {
             const auto journalRows = q->rowCount();
             for (const auto& accountId : qAsConst(fullBalanceRecalc)) {
-                balanceCache[accountId] = MyMoneyMoney();
+                balanceCache[accountId].clear();
             }
 
             for (int row = 0; row < journalRows; ++row) {
@@ -336,14 +336,14 @@ struct JournalModel::Private
                         const auto accountId = journalEntry.split().accountId();
                         balanceCache[accountId] = stockSplit(accountId, balanceCache[accountId], journalEntry.split().shares(), StockSplitForward);
                     } else {
-                        balanceCache[journalEntry.split().accountId()] += journalEntry.split().shares();
+                        balanceCache[journalEntry.split().accountId()] += journalEntry.split();
                     }
                 }
             }
         }
 
         // inform others about the changes
-        QHash<QString, MyMoneyMoney> balances;
+        QHash<QString, AccountBalances> balances;
         for (const auto& accountId : qAsConst(balanceChangedSet)) {
             balances.insert(accountId, balanceCache.value(accountId));
             emit q->balanceChanged(accountId);
@@ -366,11 +366,20 @@ struct JournalModel::Private
 
     MyMoneyMoney stockSplit(const QString& accountId, MyMoneyMoney balance, MyMoneyMoney factor, StockSplitDirection direction)
     {
-        if (direction == StockSplitForward)
-            balance = balance * factor;
-        else
-            balance = balance / factor;
+        AccountBalances balances;
+        balances.m_totalBalance = balance;
+        balances.m_clearedBalance = balance;
+        balances = stockSplit(accountId, balances, factor, direction);
+        return balances.m_totalBalance;
+    }
 
+    AccountBalances stockSplit(const QString& accountId, AccountBalances balance, MyMoneyMoney factor, StockSplitDirection direction)
+    {
+        if (direction == StockSplitForward) {
+            balance *= factor;
+        } else {
+            balance /= factor;
+        }
         const auto account = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
         const auto security = MyMoneyFile::instance()->securitiesModel()->itemById(account.tradingCurrencyId());
 
@@ -380,7 +389,8 @@ struct JournalModel::Private
 
         int securityFraction = security.smallestAccountFraction();
 
-        balance = balance.convertDenominator(securityFraction, roundingMethod);
+        balance.m_totalBalance = balance.m_totalBalance.convertDenominator(securityFraction, roundingMethod);
+        balance.m_clearedBalance = balance.m_clearedBalance.convertDenominator(securityFraction, roundingMethod);
         return balance;
     }
 
@@ -402,14 +412,14 @@ struct JournalModel::Private
         return {};
     }
 
-    JournalModel*                   q;
-    JournalModelNewTransaction*     newTransactionModel;
-    QMap<QString, QString>          transactionIdKeyMap;
-    QHash<Column, QString>          headerData;
-    QHash<QString, MyMoneyMoney>    balanceCache;
-    QHash<QString, MyMoneyAccount>  accountCache;
-    QSet<QString>                   fullBalanceRecalc;
-    QSet<QString>                   balanceChangedSet;
+    JournalModel* q;
+    JournalModelNewTransaction* newTransactionModel;
+    QMap<QString, QString> transactionIdKeyMap;
+    QHash<Column, QString> headerData;
+    QHash<QString, AccountBalances> balanceCache;
+    QHash<QString, MyMoneyAccount> accountCache;
+    QSet<QString> fullBalanceRecalc;
+    QSet<QString> balanceChangedSet;
 };
 
 JournalModelNewTransaction::JournalModelNewTransaction(QObject* parent)
@@ -1397,7 +1407,7 @@ void JournalModel::updateBalances()
             const auto accountId = journalEntry.split().accountId();
             d->balanceCache[accountId] = d->stockSplit(accountId, d->balanceCache[accountId], journalEntry.split().shares(), Private::StockSplitForward);
         } else {
-            d->balanceCache[journalEntry.split().accountId()] += journalEntry.split().shares();
+            d->balanceCache[journalEntry.split().accountId()] += journalEntry.split();
         }
     }
     qDebug() << "End calculating balances";
@@ -1466,7 +1476,7 @@ MyMoneyMoney JournalModel::balance(const QString& accountId, const QDate& date) 
                 // we start at the end and go backwards
                 // This requires the balance cache to always
                 // be up-to-date
-                balance = d->balanceCache.value(accountId);
+                balance = d->balanceCache.value(accountId).m_totalBalance;
                 for (int row = rowCount()-1; row >= lastIdx.row(); --row) {
                     const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
                     if (journalEntry.split().accountId() == accountId) {
@@ -1482,7 +1492,7 @@ MyMoneyMoney JournalModel::balance(const QString& accountId, const QDate& date) 
             return balance;
         }
     }
-    return d->balanceCache.value(accountId);
+    return d->balanceCache.value(accountId).m_totalBalance;
 }
 
 // determine for which type we were created:

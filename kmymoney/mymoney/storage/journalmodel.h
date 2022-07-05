@@ -18,10 +18,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymodel.h"
-#include "mymoneyenums.h"
 #include "kmm_mymoney_export.h"
 
+#include "accountsmodel.h"
+#include "mymoneyenums.h"
+#include "mymoneymodel.h"
 #include "mymoneymoney.h"
 #include "mymoneyobject.h"
 #include "mymoneysplit.h"
@@ -271,7 +272,7 @@ private:
 
 
 Q_SIGNALS:
-    void balancesChanged(const QHash<QString, MyMoneyMoney>& balances);
+    void balancesChanged(const QHash<QString, AccountBalances>& balances);
     void balanceChanged(const QString& accountId);
     void idChanged(const QString& current, const QString& previous);
 

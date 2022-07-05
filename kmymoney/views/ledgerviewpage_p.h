@@ -9,6 +9,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDate>
 #include <QTimer>
 
 // ----------------------------------------------------------------------------
@@ -19,6 +20,8 @@
 
 #include "ledgeraccountfilter.h"
 #include "ledgerfilter.h"
+#include "mymoneymoney.h"
+#include "mymoneyutils.h"
 #include "newtransactionform.h"
 #include "selectedobjects.h"
 #include "specialdatesfilter.h"
@@ -37,10 +40,11 @@ public:
         , stackedView(nullptr)
         , needModelInit(true)
         , showEntryForNewTransaction(false)
+        , precision(-1)
     {
     }
 
-    ~Private()
+    virtual ~Private()
     {
         delete ui;
     }
@@ -48,7 +52,6 @@ public:
     void initWidgets(const QString& configGroupName)
     {
         ui->setupUi(q);
-        ui->m_reconciliationContainer->hide();
 
         // make sure, we can disable the detail form but not the ledger view
         ui->m_splitter->setCollapsible(0, false);
@@ -76,6 +79,17 @@ public:
         needModelInit = true;
     }
 
+    virtual void updateSummaryInformation() const
+    {
+        if (reconciliationDate.isValid()) {
+            ui->m_leftLabel->setText(i18nc("@label:textbox Reconciliation date", "Last reconciliation: %1").arg(MyMoneyUtils::formatDate(reconciliationDate)));
+        } else {
+            ui->m_leftLabel->setText(i18nc("@label:textbox Reconciliation date", "Never reconciled"));
+        }
+        ui->m_centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", clearedBalance.formatMoney("", precision)));
+        ui->m_rightLabel->setText(i18nc("@label:textbox Total balance", "Balance: %1", totalBalance.formatMoney("", precision)));
+    }
+
     LedgerViewPage* q;
     Ui_LedgerViewPage* ui;
     LedgerAccountFilter* accountFilter;
@@ -88,8 +102,12 @@ public:
     QString accountName;
     SelectedObjects selections;
     QTimer delayTimer;
+    QDate reconciliationDate;
+    MyMoneyMoney totalBalance;
+    MyMoneyMoney clearedBalance;
     bool needModelInit;
     bool showEntryForNewTransaction;
+    int precision;
 };
 
 #endif // LEDGERVIEWPAGE_P_H

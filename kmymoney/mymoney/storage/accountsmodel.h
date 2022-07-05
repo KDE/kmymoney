@@ -15,13 +15,26 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymodel.h"
-#include "mymoneyenums.h"
 #include "kmm_mymoney_export.h"
+#include "mymoneyenums.h"
+#include "mymoneymodel.h"
+#include "mymoneymoney.h"
 
 #include "mymoneyaccount.h"
 
 class QUndoStack;
+
+struct KMM_MYMONEY_EXPORT AccountBalances {
+    MyMoneyMoney m_totalBalance;
+    MyMoneyMoney m_clearedBalance;
+
+    void clear();
+    AccountBalances& operator+=(const MyMoneySplit& split);
+    AccountBalances& operator-=(const MyMoneySplit& split);
+    AccountBalances& operator*=(const MyMoneyMoney& factor);
+    AccountBalances& operator/=(const MyMoneyMoney& factor);
+};
+
 /**
   */
 class KMM_MYMONEY_EXPORT AccountsModel : public MyMoneyModel<MyMoneyAccount>
@@ -141,7 +154,7 @@ protected:
 
 public Q_SLOTS:
     void setupAccountFractions();
-    void updateAccountBalances(const QHash<QString, MyMoneyMoney>& balances);
+    void updateAccountBalances(const QHash<QString, AccountBalances>& balances);
 
 Q_SIGNALS:
     void netWorthChanged(const MyMoneyMoney& amount, bool approximate);

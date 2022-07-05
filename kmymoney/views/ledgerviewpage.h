@@ -24,6 +24,7 @@ enum class Action;
 
 class MyMoneyAccount;
 class SelectedObjects;
+struct AccountBalances;
 
 class LedgerViewPage : public QWidget
 {
@@ -76,7 +77,7 @@ public Q_SLOTS:
     void showTransactionForm(bool show);
     void splitterChanged(int pos, int index);
     void slotSettingsChanged();
-    void updateSummaryInformation();
+    virtual void updateSummaryInformation(const QHash<QString, AccountBalances>& balances);
 
 protected Q_SLOTS:
     void startEdit();

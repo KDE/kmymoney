@@ -52,7 +52,7 @@
            <number>3</number>
           </property>
           <item>
-           <widget class="QLabel" name="leftLabel">
+           <widget class="QLabel" name="m_leftLabel">
             <property name="font">
              <font>
               <weight>75</weight>
@@ -65,7 +65,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="centerLabel">
+           <widget class="QLabel" name="m_centerLabel">
             <property name="font">
              <font>
               <weight>75</weight>
@@ -81,7 +81,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="rightLabel">
+           <widget class="QLabel" name="m_rightLabel">
             <property name="font">
              <font>
               <weight>75</weight>

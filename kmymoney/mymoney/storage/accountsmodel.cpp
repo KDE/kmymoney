@@ -33,9 +33,60 @@
 #include "mymoneymoney.h"
 #include "mymoneyprice.h"
 #include "mymoneysecurity.h"
+#include "mymoneysplit.h"
 #include "securitiesmodel.h"
 
 #include "icons.h"
+
+void AccountBalances::clear()
+{
+    m_totalBalance = MyMoneyMoney();
+    m_clearedBalance = MyMoneyMoney();
+}
+
+AccountBalances& AccountBalances::operator+=(const MyMoneySplit& split)
+{
+    m_totalBalance += split.shares();
+    switch (split.reconcileFlag()) {
+    case eMyMoney::Split::State::Frozen:
+    case eMyMoney::Split::State::Cleared:
+    case eMyMoney::Split::State::Reconciled:
+        m_clearedBalance += split.shares();
+        break;
+    default:
+        break;
+    }
+    return *this;
+}
+
+AccountBalances& AccountBalances::operator-=(const MyMoneySplit& split)
+{
+    m_totalBalance -= split.shares();
+    switch (split.reconcileFlag()) {
+    case eMyMoney::Split::State::Frozen:
+    case eMyMoney::Split::State::Cleared:
+    case eMyMoney::Split::State::Reconciled:
+        m_clearedBalance -= split.shares();
+        break;
+    default:
+        break;
+    }
+    return *this;
+}
+
+AccountBalances& AccountBalances::operator*=(const MyMoneyMoney& factor)
+{
+    m_totalBalance *= factor;
+    m_clearedBalance *= factor;
+    return *this;
+}
+
+AccountBalances& AccountBalances::operator/=(const MyMoneyMoney& factor)
+{
+    m_totalBalance /= factor;
+    m_clearedBalance /= factor;
+    return *this;
+}
 
 struct AccountsModel::Private
 {
@@ -990,7 +1041,7 @@ QPair<MyMoneyMoney, bool> AccountsModel::balanceToValue(const QString& accountId
     return result;
 }
 
-void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& balances)
+void AccountsModel::updateAccountBalances(const QHash<QString, AccountBalances>& balances)
 {
     const MyMoneyFile* file = MyMoneyFile::instance();
     const MyMoneySecurity baseCurrency = file->baseCurrency();
@@ -1000,9 +1051,9 @@ void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& ba
     bool approximate = false;
     for(auto it = balances.constBegin(); it != balances.constEnd(); ++it) {
         MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(indexById(it.key()).internalPointer())->dataRef();
-        account.setBalance(it.value());
+        account.setBalance(it.value().m_totalBalance);
 
-        const auto result = d->balanceToValue(account, it.value());
+        const auto result = d->balanceToValue(account, it.value().m_totalBalance);
 
         account.setPostedValue(result.first);
         approximate |= result.second;

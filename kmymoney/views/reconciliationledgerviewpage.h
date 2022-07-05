@@ -33,7 +33,7 @@ public:
     bool executeAction(eMenu::Action action, const SelectedObjects& selections) override;
 
 public Q_SLOTS:
-    void updateSummaryInformation();
+    virtual void updateSummaryInformation(const QHash<QString, AccountBalances>& balances) override;
 
 private:
     class Private;

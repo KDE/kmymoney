@@ -140,7 +140,6 @@ public:
 
     void startReconciliation()
     {
-        const auto qq = static_cast<ReconciliationLedgerViewPage*>(q);
         delete endingBalanceDlg;
         endingBalanceDlg = nullptr;
 
@@ -168,8 +167,7 @@ public:
                     } catch (const MyMoneyException& e) {
                         qWarning("interest transaction not stored: '%s'", e.what());
                     }
-                    qq->updateSummaryInformation();
-                    ui->m_reconciliationContainer->show();
+                    updateSummaryInformation();
                 } else {
                     pActions[eMenu::Action::CancelReconciliation]->trigger();
                 }
@@ -315,26 +313,28 @@ public:
         }
     }
 
+    void updateSummaryInformation() const override
+    {
+        ui->m_reconciliationContainer->setVisible(endingBalanceDlg != nullptr);
+        if (endingBalanceDlg) {
+            const auto endingBalance = endingBalanceDlg->endingBalance();
+            const auto clearedBalance = MyMoneyFile::instance()->journalModel()->clearedBalance(accountId, endingBalanceDlg->statementDate());
+            ui->m_leftLabel->setText(i18nc("@label:textbox Statement balance", "Statement: %1", endingBalance.formatMoney("", precision)));
+            ui->m_centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", clearedBalance.formatMoney("", precision)));
+            ui->m_rightLabel->setText(
+                i18nc("@label:textbox Difference to statement", "Difference: %1", (clearedBalance - endingBalance).formatMoney("", precision)));
+        }
+    }
+
     KEndingBalanceDlg* endingBalanceDlg;
-    int precision;
 };
 
 ReconciliationLedgerViewPage::ReconciliationLedgerViewPage(QWidget* parent, const QString& configGroupName)
     : LedgerViewPage(*new Private(this), parent, configGroupName)
 {
-    d->ui->m_reconciliationContainer->show();
-
     // in reconciliation mode we use a fixed state filter
     d->ui->m_filterBox->setCurrentIndex(static_cast<int>(LedgerFilter::State::NotReconciled));
     d->ui->m_filterBox->setDisabled(true);
-    d->stateFilter->setStateFilter(LedgerFilter::State::NotReconciled);
-
-    connect(d->ui->m_ledgerView->model(), &QAbstractItemModel::dataChanged, this, [&](const QModelIndex& startIdx, const QModelIndex& endIdx) {
-        // in case any of the columns that have influence on the summary changes, update it
-        if (startIdx.column() <= JournalModel::Column::Balance && endIdx.column() >= JournalModel::Column::Reconciliation) {
-            updateSummaryInformation();
-        }
-    });
 }
 
 ReconciliationLedgerViewPage::~ReconciliationLedgerViewPage()
@@ -343,11 +343,13 @@ ReconciliationLedgerViewPage::~ReconciliationLedgerViewPage()
 
 void ReconciliationLedgerViewPage::setAccount(const MyMoneyAccount& account)
 {
-    auto dd = static_cast<ReconciliationLedgerViewPage::Private*>(d);
-
     LedgerViewPage::setAccount(account);
+    if (d->needModelInit) {
+        return;
+    }
+
     d->selections.setSelection(SelectedObjects::ReconciliationAccount, account.id());
-    dd->precision = MyMoneyMoney::denomToPrec(account.fraction());
+    d->stateFilter->setStateFilter(LedgerFilter::State::NotReconciled);
 }
 
 bool ReconciliationLedgerViewPage::executeAction(eMenu::Action action, const SelectedObjects& selections)
@@ -373,13 +375,10 @@ bool ReconciliationLedgerViewPage::executeAction(eMenu::Action action, const Sel
     return true;
 }
 
-void ReconciliationLedgerViewPage::updateSummaryInformation()
+void ReconciliationLedgerViewPage::updateSummaryInformation(const QHash<QString, AccountBalances>& balances)
 {
+    Q_UNUSED(balances)
+
     auto dd = static_cast<ReconciliationLedgerViewPage::Private*>(d);
-    const auto endingBalance = dd->endingBalanceDlg->endingBalance();
-    const auto clearedBalance = MyMoneyFile::instance()->journalModel()->clearedBalance(dd->accountId, dd->endingBalanceDlg->statementDate());
-    dd->ui->leftLabel->setText(i18nc("@label:textbox Statement balance", "Statement: %1", endingBalance.formatMoney("", dd->precision)));
-    dd->ui->centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", clearedBalance.formatMoney("", dd->precision)));
-    dd->ui->rightLabel->setText(
-        i18nc("@label:textbox Difference to statement", "Difference: %1", (clearedBalance - endingBalance).formatMoney("", dd->precision)));
+    dd->updateSummaryInformation();
 }
