@@ -82,7 +82,7 @@ public:
     virtual void updateSummaryInformation() const
     {
         if (reconciliationDate.isValid()) {
-            ui->m_leftLabel->setText(i18nc("@label:textbox Reconciliation date", "Last reconciliation: %1").arg(MyMoneyUtils::formatDate(reconciliationDate)));
+            ui->m_leftLabel->setText(i18nc("@label:textbox Reconciliation date", "Last reconciliation: %1", MyMoneyUtils::formatDate(reconciliationDate)));
         } else {
             ui->m_leftLabel->setText(i18nc("@label:textbox Reconciliation date", "Never reconciled"));
         }
