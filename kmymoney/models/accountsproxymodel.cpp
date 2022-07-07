@@ -218,17 +218,18 @@ Qt::ItemFlags AccountsProxyModel::flags(const QModelIndex& index) const
 bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
 {
     Q_D(const AccountsProxyModel);
+
     if (source.isValid()) {
-        const auto accountTypeValue = sourceModel()->data(source, eMyMoney::Model::Roles::AccountTypeRole);
+        const auto accountTypeValue = source.data(eMyMoney::Model::Roles::AccountTypeRole);
         const bool isValidAccountEntry = accountTypeValue.isValid();
-        const bool isValidInstititonEntry = sourceModel()->data(source, eMyMoney::Model::Roles::InstitutionBankCodeRole).isValid();
+        const bool isValidInstititonEntry = source.data(eMyMoney::Model::Roles::InstitutionBankCodeRole).isValid();
 
         if (isValidAccountEntry) {
             const auto accountType = static_cast<eMyMoney::Account::Type>(accountTypeValue.toInt());
 
             switch (state()) {
             case State::Any:
-                if (hideClosedAccounts() && sourceModel()->data(source, eMyMoney::Model::Roles::AccountIsClosedRole).toBool())
+                if (hideClosedAccounts() && source.data(eMyMoney::Model::Roles::AccountIsClosedRole).toBool())
                     return false;
 
                 // we hide stock accounts if not in expert mode
@@ -237,14 +238,14 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
                     if (accountType == eMyMoney::Account::Type::Equity)
                         return false;
 
-                    if (sourceModel()->data(source, eMyMoney::Model::Roles::AccountIsInvestRole).toBool())
+                    if (source.data(eMyMoney::Model::Roles::AccountIsInvestRole).toBool())
                         return false;
                 }
 
                 // we hide unused income and expense accounts if the specific flag is set
                 if (hideUnusedIncomeExpenseAccounts()) {
                     if ((accountType == eMyMoney::Account::Type::Income) || (accountType == eMyMoney::Account::Type::Expense)) {
-                        const auto totalValue = sourceModel()->data(source, eMyMoney::Model::Roles::AccountTotalValueRole);
+                        const auto totalValue = source.data(eMyMoney::Model::Roles::AccountTotalValueRole);
                         if (totalValue.isValid() && totalValue.value<MyMoneyMoney>().isZero()) {
                             emit unusedIncomeExpenseAccountHidden();
                             return false;
@@ -253,8 +254,8 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
                 }
                 // we hide zero balance investment accounts
                 if (hideZeroBalancedEquityAccounts()) {
-                    if (accountType == eMyMoney::Account::Type::Equity || sourceModel()->data(source, eMyMoney::Model::Roles::AccountIsInvestRole).toBool()) {
-                        const auto totalValue = sourceModel()->data(source, eMyMoney::Model::Roles::AccountTotalValueRole);
+                    if (accountType == eMyMoney::Account::Type::Equity || source.data(eMyMoney::Model::Roles::AccountIsInvestRole).toBool()) {
+                        const auto totalValue = source.data(eMyMoney::Model::Roles::AccountTotalValueRole);
                         if (totalValue.isValid() && totalValue.value<MyMoneyMoney>().isZero()) {
                             return false;
                         }
@@ -267,7 +268,7 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
                 if (sourceModel()->rowCount(source) > 0) {
                     return false;
                 }
-                const auto accountId = sourceModel()->data(source, eMyMoney::Model::IdRole).toString();
+                const auto accountId = source.data(eMyMoney::Model::IdRole).toString();
                 auto journalModel = MyMoneyFile::instance()->journalModel();
                 auto indexes = journalModel->match(journalModel->index(0, 0), eMyMoney::Model::JournalSplitAccountIdRole, accountId);
                 if (!indexes.isEmpty())
@@ -279,7 +280,7 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
                 break;
             }
             case State::Closed:
-                if (sourceModel()->data(source, eMyMoney::Model::AccountIsClosedRole).toBool() == false) {
+                if (source.data(eMyMoney::Model::AccountIsClosedRole).toBool() == false) {
                     return false;
                 }
                 break;
@@ -302,8 +303,9 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
         const auto rowCount = sourceModel()->rowCount(source);
         for (auto i = 0; i < rowCount; ++i) {
             const auto index = sourceModel()->index(i, AccountsModel::Column::AccountName, source);
-            if (acceptSourceItem(index))
+            if (acceptSourceItem(index)) {
                 return true;
+            }
         }
     }
     return false;
