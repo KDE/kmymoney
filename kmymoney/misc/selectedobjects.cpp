@@ -17,8 +17,10 @@ void SelectedObjects::addSelection(SelectedObjects::Object_t type, const QString
 void SelectedObjects::addSelections(SelectedObjects::Object_t type, const QStringList& ids)
 {
     for(const auto& id : qAsConst(ids)) {
-        if (!m_selections[type].contains(id)) {
-            m_selections[type].append(id);
+        if (!id.isEmpty()) {
+            if (!m_selections[type].contains(id)) {
+                m_selections[type].append(id);
+            }
         }
     }
 }
@@ -26,6 +28,9 @@ void SelectedObjects::addSelections(SelectedObjects::Object_t type, const QStrin
 void SelectedObjects::removeSelection(SelectedObjects::Object_t type, const QString& id)
 {
     m_selections[type].removeAll(id);
+    if (m_selections[type].isEmpty()) {
+        m_selections.remove(type);
+    }
 }
 
 void SelectedObjects::setSelection(SelectedObjects::Object_t type, const QString& id)
@@ -35,7 +40,11 @@ void SelectedObjects::setSelection(SelectedObjects::Object_t type, const QString
 
 void SelectedObjects::setSelection(SelectedObjects::Object_t type, const QStringList& ids)
 {
-    m_selections[type] = ids;
+    if (ids.isEmpty()) {
+        m_selections.remove(type);
+    } else {
+        m_selections[type] = ids;
+    }
 }
 
 void SelectedObjects::clearSelections(SelectedObjects::Object_t type)
