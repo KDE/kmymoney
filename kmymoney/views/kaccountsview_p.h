@@ -436,19 +436,6 @@ public:
         pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
     }
 
-    void closeSubAccounts(const MyMoneyAccount& account)
-    {
-        MyMoneyFile* file = MyMoneyFile::instance();
-        const auto accountList = account.accountList();
-
-        for (const auto& subAccountId : accountList) {
-            auto subAccount = file->account(subAccountId);
-            closeSubAccounts(subAccount);
-            subAccount.setClosed(true);
-            file->modifyAccount(subAccount);
-        }
-    };
-
     Ui::KAccountsView   *ui;
     bool                m_haveUnusedCategories;
     MyMoneyAccount      m_currentAccount;

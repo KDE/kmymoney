@@ -115,7 +115,23 @@ void KInvestmentView::showEvent(QShowEvent* event)
             [&](const QModelIndex& current, const QModelIndex& previous) {
                 Q_UNUSED(previous)
                 Q_D(KInvestmentView);
-                d->m_equitySelections.setSelection(SelectedObjects::Account, current.data(eMyMoney::Model::IdRole).toString());
+                d->m_equitySelections.clearSelections(SelectedObjects::Account);
+                // when closing equities, current may still reference a row that
+                // is not valid any longer. For this reason, we set the row
+                // to the last row in the model
+                if (current.isValid()) {
+                    const auto rows = current.model()->rowCount(current.parent());
+                    auto idx = current;
+                    if (idx.row() >= rows) {
+                        idx = idx.model()->index(rows - 1, idx.column(), idx.parent());
+                    }
+                    if (idx.isValid()) {
+                        d->m_equitySelections.setSelection(SelectedObjects::Account, idx.data(eMyMoney::Model::IdRole).toString());
+                    }
+                } else {
+                    // suppress display if no more equities are shown
+                    d->m_equitiesProxyModel->setHideAllEntries(true);
+                }
                 if (d->ui->m_equitiesTree->isVisible()) {
                     d->m_selections = d->m_equitySelections;
                     emit requestSelectionChange(d->m_selections);
@@ -308,4 +324,18 @@ void KInvestmentView::slotDeleteSecurity()
     auto sec = d->currentSecurity();
     if (!sec.id().isEmpty())
         KMyMoneyUtils::deleteSecurity(sec, this);
+}
+
+void KInvestmentView::slotSettingsChanged()
+{
+    Q_D(KInvestmentView);
+    if (d->m_needLoad) {
+        return;
+    }
+
+    const bool showAllAccounts = KMyMoneySettings::showAllAccounts();
+    if (d->m_equitiesProxyModel->hideClosedAccounts() == showAllAccounts) {
+        d->m_equitiesProxyModel->setHideClosedAccounts(!showAllAccounts);
+        d->loadAccount(d->m_idInvAcc);
+    }
 }

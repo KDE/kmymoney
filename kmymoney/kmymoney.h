@@ -268,6 +268,8 @@ protected Q_SLOTS:
     void slotReportReconciliation();
     void slotEnterOverdueSchedules();
     void slotFindTransaction();
+    void slotCloseAccount();
+    void slotReopenAccount();
 
     void slotExecuteAction();
     void slotExecuteActionWithData();

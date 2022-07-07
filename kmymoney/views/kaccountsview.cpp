@@ -43,8 +43,6 @@ KAccountsView::KAccountsView(QWidget *parent) :
     connect(pActions[eMenu::Action::NewAccount],          &QAction::triggered, this, &KAccountsView::slotNewAccount);
     connect(pActions[eMenu::Action::EditAccount],         &QAction::triggered, this, &KAccountsView::slotEditAccount);
     connect(pActions[eMenu::Action::DeleteAccount],       &QAction::triggered, this, &KAccountsView::slotDeleteAccount);
-    connect(pActions[eMenu::Action::CloseAccount],        &QAction::triggered, this, &KAccountsView::slotCloseAccount);
-    connect(pActions[eMenu::Action::ReopenAccount],       &QAction::triggered, this, &KAccountsView::slotReopenAccount);
     connect(pActions[eMenu::Action::MapOnlineAccount],    &QAction::triggered, this, &KAccountsView::slotAccountMapOnline);
     connect(pActions[eMenu::Action::UnmapOnlineAccount],  &QAction::triggered, this, &KAccountsView::slotAccountUnmapOnline);
     connect(pActions[eMenu::Action::UpdateAccount],       &QAction::triggered, this, &KAccountsView::slotAccountUpdateOnline);
@@ -248,51 +246,6 @@ void KAccountsView::slotDeleteAccount()
         ft.commit();
     } catch (const MyMoneyException &e) {
         KMessageBox::error(this, i18n("Unable to delete account '%1'. Cause: %2", selectedAccountName, QString::fromLatin1(e.what())));
-    }
-}
-
-void KAccountsView::slotCloseAccount()
-{
-    Q_D(KAccountsView);
-    MyMoneyFileTransaction ft;
-    MyMoneyFile* file = MyMoneyFile::instance();
-
-    try {
-        // in case of investment, try to close the sub-accounts first
-        if (d->m_currentAccount.accountType() == eMyMoney::Account::Type::Investment) {
-            d->closeSubAccounts(d->m_currentAccount);
-        }
-        d->m_currentAccount.setClosed(true);
-        file->modifyAccount(d->m_currentAccount);
-        ft.commit();
-        if (!KMyMoneySettings::showAllAccounts())
-            KMessageBox::information(
-                this,
-                i18n("<qt>You have closed this account. It remains in the system because you have transactions which still refer to it, but it is not shown in "
-                     "the views. You can make it visible again by going to the View menu and selecting <b>Show all accounts</b>.</qt>"),
-                i18n("Information"),
-                "CloseAccountInfo");
-        emit requestSelectionChange(d->m_selections);
-    } catch (const MyMoneyException& e) {
-        qDebug() << e.what();
-    }
-}
-
-void KAccountsView::slotReopenAccount()
-{
-    Q_D(KAccountsView);
-    const auto file = MyMoneyFile::instance();
-    MyMoneyFileTransaction ft;
-    try {
-        auto& acc = d->m_currentAccount;
-        while (acc.isClosed()) {
-            acc.setClosed(false);
-            file->modifyAccount(acc);
-            acc = file->account(acc.parentAccountId());
-        }
-        ft.commit();
-        emit requestSelectionChange(d->m_selections);
-    } catch (const MyMoneyException &) {
     }
 }
 

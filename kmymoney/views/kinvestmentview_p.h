@@ -103,6 +103,7 @@ public:
         m_equitiesProxyModel->setSourceModel(extraColumnModel);
         m_equitiesProxyModel->sort(AccountsModel::Column::AccountName);
         m_equitiesProxyModel->setSortRole(Qt::EditRole);
+        m_equitiesProxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
 
         ui->m_equitiesTree->setModel(m_equitiesProxyModel);
 
@@ -152,11 +153,17 @@ public:
         q->connect(ui->m_searchSecurities, &QLineEdit::textChanged, m_securitiesProxyModel, &QSortFilterProxyModel::setFilterFixedString);
     }
 
-    void loadAccount(const QString& id)
+    /**
+     * Use a copy of the account @a id here because we pass
+     * m_idInvAcc as argument at one point which gets cleared
+     * but we need it later on.
+     */
+    void loadAccount(QString id)
     {
         Q_Q(KInvestmentView);
         auto baseModel = MyMoneyFile::instance()->accountsModel();
         auto baseIdx = baseModel->indexById(id);
+        const auto currentSelectedId = ui->m_equitiesTree->currentIndex().data(eMyMoney::Model::IdRole).toString();
         QModelIndex idx;
 
         m_selections.clearSelections();
@@ -169,14 +176,24 @@ public:
                 m_equitiesProxyModel->setHideAllEntries(false);
                 idx = baseModel->mapFromBaseSource(m_equitiesProxyModel, baseIdx);
                 m_idInvAcc = id;
-            } else {
-                idx = QModelIndex();
             }
         }
-        ui->m_equitiesTree->setRootIndex(idx);
+
+        if (idx.isValid()) {
+            ui->m_equitiesTree->setRootIndex(idx);
+        } else {
+            m_equitiesProxyModel->setHideAllEntries(true);
+        }
 
         if (m_equitiesProxyModel->rowCount(idx) > 0) {
-            idx = m_equitiesProxyModel->index(0, 0, idx);
+            int row(0);
+            if (!currentSelectedId.isEmpty()) {
+                const auto indexList = m_equitiesProxyModel->match(idx, eMyMoney::Model::IdRole, currentSelectedId, 1, Qt::MatchRecursive);
+                if (!indexList.isEmpty()) {
+                    row = indexList.first().row();
+                }
+            }
+            idx = m_equitiesProxyModel->index(row, 0, idx);
             ui->m_equitiesTree->selectionModel()->select(idx, QItemSelectionModel::SelectCurrent | QItemSelectionModel::Rows);
             ui->m_equitiesTree->setCurrentIndex(idx);
         }

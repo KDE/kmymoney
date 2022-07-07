@@ -1340,6 +1340,19 @@ public:
             m_myMoneyView->executeAction(actionId, selections);
         }
     }
+
+    void closeSubAccounts(const MyMoneyAccount& account)
+    {
+        MyMoneyFile* file = MyMoneyFile::instance();
+        const auto accountList = account.accountList();
+
+        for (const auto& subAccountId : accountList) {
+            auto subAccount = file->account(subAccountId);
+            closeSubAccounts(subAccount);
+            subAccount.setClosed(true);
+            file->modifyAccount(subAccount);
+        }
+    }
 };
 
 KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
@@ -1860,6 +1873,12 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::ViewHideReconciled,            &KMyMoneyApp::slotHideReconciledTransactions},
             {Action::ViewHideCategories,            &KMyMoneyApp::slotHideUnusedCategories},
             {Action::ViewShowAll,                   &KMyMoneyApp::slotShowAllAccounts},
+            // *************
+            // The Account menu
+            // *************
+            {Action::CloseAccount,                  &KMyMoneyApp::slotCloseAccount},
+            {Action::ReopenAccount,                 &KMyMoneyApp::slotReopenAccount},
+
             // **************
             // The tools menu
             // **************
@@ -2969,6 +2988,55 @@ void KMyMoneyApp::slotFindTransaction()
     d->m_searchDlg->activateWindow();
 }
 
+void KMyMoneyApp::slotCloseAccount()
+{
+    MyMoneyFileTransaction ft;
+    MyMoneyFile* file = MyMoneyFile::instance();
+
+    try {
+        const auto accountId = d->m_selections.firstSelection(SelectedObjects::Account);
+        auto account = file->account(accountId);
+        // in case of investment, try to close the sub-accounts first
+        if (account.accountType() == eMyMoney::Account::Type::Investment) {
+            d->closeSubAccounts(account);
+        }
+        account.setClosed(true);
+        file->modifyAccount(account);
+        ft.commit();
+        if (!KMyMoneySettings::showAllAccounts()) {
+            KMessageBox::information(
+                this,
+                i18n("<qt>You have closed this account. It remains in the system because you have transactions which still refer to it, but it is not shown in "
+                     "the views. You can make it visible again by going to the View menu and selecting <b>Show all accounts</b>.</qt>"),
+                i18n("Information"),
+                "CloseAccountInfo");
+        }
+        slotSelectionChanged(d->m_selections);
+
+    } catch (const MyMoneyException& e) {
+        qDebug() << e.what();
+    }
+}
+
+void KMyMoneyApp::slotReopenAccount()
+{
+    const auto file = MyMoneyFile::instance();
+    MyMoneyFileTransaction ft;
+    try {
+        const auto accountId = d->m_selections.firstSelection(SelectedObjects::Account);
+        auto account = file->account(accountId);
+        while (account.isClosed()) {
+            account.setClosed(false);
+            file->modifyAccount(account);
+            account = file->account(account.parentAccountId());
+        }
+        ft.commit();
+        slotSelectionChanged(d->m_selections);
+
+    } catch (const MyMoneyException& e) {
+        qDebug() << e.what();
+    }
+}
 
 #if 0
 void KMyMoneyApp::slotOpenAccount()

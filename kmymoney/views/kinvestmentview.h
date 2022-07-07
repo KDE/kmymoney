@@ -41,6 +41,9 @@ public:
     void updateActions(const SelectedObjects& selections) override;
     void executeAction(eMenu::Action action, const SelectedObjects& selections) override;
 
+public Q_SLOTS:
+    void slotSettingsChanged() override;
+
 protected:
     void showEvent(QShowEvent* event) override;
 
