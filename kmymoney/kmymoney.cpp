@@ -1500,7 +1500,6 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     connect(&d->m_actionCollectorTimer, &QTimer::timeout, this, [&]() {
         // update the actions in the views
         d->updateActions(d->m_selections);
-        emit selectionChanged(d->m_selections);
     });
 }
 

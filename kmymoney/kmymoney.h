@@ -602,8 +602,6 @@ Q_SIGNALS:
 
     void kmmFilePlugin(unsigned int);
 
-    void selectionChanged(const SelectedObjects& selection);
-
 public:
 
     bool isActionToggled(const eMenu::Action _a);
