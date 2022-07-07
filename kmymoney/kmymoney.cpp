@@ -1626,6 +1626,8 @@ void KMyMoneyApp::slotSelectionChanged(const SelectedObjects& selections)
             qDebug() << "Tags:" << selections.selection(SelectedObjects::Tag);
         if (!selections.isEmpty(SelectedObjects::Security))
             qDebug() << "Securities:" << selections.selection(SelectedObjects::Security);
+        if (!selections.isEmpty(SelectedObjects::Report))
+            qDebug() << "Reports:" << selections.selection(SelectedObjects::Report);
     } else {
         qDebug() << "No selections";
     }
