@@ -513,6 +513,7 @@ void InvestTransactionEditor::Private::updateWidgetState()
     WidgetHintFrame::hide(ui->interestAmountEdit, i18nc("@info:tooltip", "Amount of interest"));
     WidgetHintFrame::hide(ui->assetAccountCombo, i18nc("@info:tooltip", "Asset or brokerage account"));
     WidgetHintFrame::hide(ui->priceAmountEdit, i18nc("@info:tooltip", "Price information for this transaction"));
+    WidgetHintFrame::hide(ui->securityAccountCombo, i18nc("@info:tooltip", "Security for this transaction"));
 
     // all the other logic needs a valid activity
     if (currentActivity == nullptr) {
@@ -583,6 +584,10 @@ void InvestTransactionEditor::Private::updateWidgetState()
             WidgetHintFrame::show(ui->interestAmountEdit, i18nc("@info:tooltip", "Enter amount of interest"));
         }
     }
+
+    if (ui->securityAccountCombo->currentIndex() == -1) {
+        WidgetHintFrame::show(ui->securityAccountCombo, i18nc("@info:tooltip", "Select the security for this transaction"));
+    }
 }
 
 void InvestTransactionEditor::Private::loadFeeAndInterestAmountEdits()
@@ -640,8 +645,6 @@ void InvestTransactionEditor::Private::setupTabOrder()
     const auto defaultTabOrder = QStringList{
         QLatin1String("activityCombo"),
         QLatin1String("dateEdit"),
-        QLatin1String("securityAccountCombo"),
-        QLatin1String("sharesAmountEdit"),
         QLatin1String("securityAccountCombo"),
         QLatin1String("sharesAmountEdit"),
         QLatin1String("assetAccountCombo"),
@@ -707,8 +710,12 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     d->securitiesModel->setSourceModel(d->accountsListModel);
     d->securitiesModel->setFilterRole(eMyMoney::Model::AccountParentIdRole);
     d->securitiesModel->setFilterKeyColumn(0);
+    d->securitiesModel->setSortRole(Qt::DisplayRole);
+    d->securitiesModel->setSortLocaleAware(true);
+    d->securitiesModel->sort(AccountsModel::Column::AccountName);
+
     d->ui->securityAccountCombo->setModel(d->securitiesModel);
-    d->ui->securityAccountCombo->lineEdit()->setReadOnly(true);
+    d->ui->securityAccountCombo->lineEdit()->setClearButtonEnabled(true);
 
     d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> { eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability } );
     d->accountsModel->setHideEquityAccounts(false);
@@ -786,6 +793,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     WidgetHintFrameCollection* frameCollection = new WidgetHintFrameCollection(this);
     frameCollection->addFrame(new WidgetHintFrame(d->ui->dateEdit));
+    frameCollection->addFrame(new WidgetHintFrame(d->ui->securityAccountCombo));
     frameCollection->addFrame(new WidgetHintFrame(d->ui->assetAccountCombo));
     frameCollection->addFrame(new WidgetHintFrame(d->ui->sharesAmountEdit));
     frameCollection->addFrame(new WidgetHintFrame(d->ui->priceAmountEdit));
@@ -830,15 +838,10 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
         }
     });
 
-    // since the securityAccountCombo is operated in readOnly mode, it does not
-    // propagate the keyPressEvent of the return key to TransactionEditorBase::keyPressEvent.
-    // we simply catch and process it here
-    connect(d->ui->securityAccountCombo->lineEdit(), &QLineEdit::returnPressed, this, [&]() {
-        if (d->ui->enterButton->isEnabled()) {
-            // move focus to enter button which
-            // triggers update of widgets
-            d->ui->enterButton->setFocus();
-            d->ui->enterButton->click();
+    connect(d->ui->securityAccountCombo, &QComboBox::currentTextChanged, this, [&](const QString& text) {
+        if (text.isEmpty() && d->ui->securityAccountCombo->currentIndex() != -1) {
+            d->ui->securityAccountCombo->setCurrentIndex(-1);
+            updateWidgets();
         }
     });
 
@@ -966,7 +969,7 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         d->assetAccount = MyMoneyAccount();
         d->assetSecurity = MyMoneySecurity();
         d->ui->activityCombo->setCurrentIndex(0);
-        d->ui->securityAccountCombo->setCurrentIndex(0);
+        d->ui->securityAccountCombo->setCurrentIndex(-1);
         const auto lastUsedPostDate = KMyMoneySettings::lastUsedPostDate();
         if (lastUsedPostDate.isValid()) {
             d->ui->dateEdit->setDate(lastUsedPostDate.date());
