@@ -260,6 +260,7 @@ public:
     ColumnSelector* m_equityColumnSelector;
     SelectedObjects m_equitySelections;
     SelectedObjects m_securitySelections;
+    SelectedObjects m_externalSelections;
 };
 
 #endif

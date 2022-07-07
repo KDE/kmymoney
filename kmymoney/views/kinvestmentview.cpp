@@ -182,6 +182,17 @@ void KInvestmentView::showEvent(QShowEvent* event)
 
     // don't forget base class implementation
     QWidget::showEvent(event);
+
+    // check if the last selected account was an investment account.
+    // if so, then select it in this view as well. otherwise, we
+    // leave the selection as is
+    const auto accountId = d->m_externalSelections.firstSelection(SelectedObjects::Account);
+    if (!accountId.isEmpty()) {
+        const auto account = MyMoneyFile::instance()->account(accountId);
+        if (account.accountType() == eMyMoney::Account::Type::Investment) {
+            d->ui->m_accountComboBox->setSelected(accountId);
+        }
+    }
 }
 
 void KInvestmentView::updateActions(const SelectedObjects& selections)
@@ -224,6 +235,8 @@ void KInvestmentView::updateActions(const SelectedObjects& selections)
         pActions[eMenu::Action::EditSecurity]->setEnabled(true);
         pActions[eMenu::Action::DeleteSecurity]->setDisabled(file->isReferenced(securityId, skip));
     }
+
+    d->m_externalSelections = selections;
 }
 
 void KInvestmentView::slotNewInvestment()
