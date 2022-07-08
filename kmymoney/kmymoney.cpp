@@ -2935,9 +2935,11 @@ void KMyMoneyApp::slotEnterOverdueSchedules()
     if (!schedules.isEmpty()) {
         const auto accountName = accountIdx.data(eMyMoney::Model::AccountNameRole).toString();
         if (KMessageBox::questionYesNo(this,
-            i18n("KMyMoney has detected some overdue scheduled transactions for the account <b>%1</b>. Do you want to enter those scheduled transactions now?").arg(accountName),
-                                       i18n("Scheduled transactions found")) == KMessageBox::Yes) {
-
+                                       i18n("KMyMoney has detected some overdue scheduled transactions for the account <b>%1</b>. Do you want to enter those "
+                                            "scheduled transactions now?",
+                                            accountName),
+                                       i18n("Scheduled transactions found"))
+            == KMessageBox::Yes) {
             QSet<QString> skipMap;
             bool processedOne(false);
             auto rc = eDialogs::ScheduleResultCode::Enter;

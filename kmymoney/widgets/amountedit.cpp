@@ -241,15 +241,15 @@ public:
                 q->QLineEdit::setText(m_valueText);
             }
 
-            m_currencyButton->setToolTip(
-                i18nc("@info:tooltip Swap currencies for entry/display", "Value are presented in %1. Press this button to switch the currency to %2.")
-                    .arg(currentCurrency, otherCurrency));
+            m_currencyButton->setToolTip(i18nc("@info:tooltip Swap currencies for entry/display",
+                                               "Value are presented in %1. Press this button to switch the currency to %2.",
+                                               currentCurrency,
+                                               otherCurrency));
 
         } else {
             if (!m_valueCommodity.id().isEmpty()) {
                 m_currencyButton->setEnabled(false);
-                m_currencyButton->setToolTip(
-                    i18nc("@info:tooltip Swap currencies for entry/display", "Values are presented in %1.").arg(m_valueCommodity.name()));
+                m_currencyButton->setToolTip(i18nc("@info:tooltip Swap currencies for entry/display", "Values are presented in %1.", m_valueCommodity.name()));
                 setCurrencySymbol(m_valueCommodity.tradingSymbol(), m_valueCommodity.name());
 
             } else {

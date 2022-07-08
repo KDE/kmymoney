@@ -514,7 +514,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
                 qCDebug(WEBPRICEQUOTE) << "Date" << datestr;
                 emit status(i18n("Date found: '%1'", d->m_date.toString()));
             } catch (const MyMoneyException &) {
-                // emit error(i18n("Unable to parse date %1 using format %2: %3").arg(datestr,dateparse.format(),e.what()));
+                // emit error(i18n("Unable to parse date %1 using format %2: %3", datestr,dateparse.format(),e.what()));
                 d->m_date = QDate::currentDate();
                 gotdate = true;
             }
