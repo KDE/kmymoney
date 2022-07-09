@@ -1234,7 +1234,7 @@ QStringList InvestTransactionEditor::saveTransaction(const QStringList& selected
     if (d->currentActivity->type() != eMyMoney::Split::InvestmentTransactionType::SplitShares) {
         roundSplitValues(d->stockSplit, securityFraction);
         // if there are no shares, we don't have a price either
-        if (d->stockSplit.shares().isZero()) {
+        if (!d->stockSplit.shares().isZero()) {
             if (d->currentActivity->priceMode() == eDialogs::PriceMode::PricePerTransaction) {
                 d->stockSplit.setPrice(d->stockSplit.value() / d->stockSplit.shares());
             } else {
