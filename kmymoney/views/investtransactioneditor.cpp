@@ -1141,6 +1141,19 @@ void InvestTransactionEditor::activityChanged(int index)
             d->stockSplit.setValue(d->stockSplit.shares() * d->stockSplit.price());
             d->ui->sharesAmountEdit->setPrecision(MyMoneyMoney::denomToPrec(d->security.smallestAccountFraction()));
         }
+
+        if (type == eMyMoney::Split::InvestmentTransactionType::Dividend && oldType != eMyMoney::Split::InvestmentTransactionType::Dividend) {
+            // switch to dividend
+            d->stockSplit.setShares(MyMoneyMoney()); // dividend payments don't affect the number of shares
+            d->stockSplit.setValue(MyMoneyMoney());
+            d->stockSplit.setPrice(MyMoneyMoney());
+        } else if (type != eMyMoney::Split::InvestmentTransactionType::Dividend && oldType == eMyMoney::Split::InvestmentTransactionType::Dividend) {
+            // switch away from dividend
+            d->stockSplit.setShares(d->ui->sharesAmountEdit->shares());
+            d->stockSplit.setPrice(d->ui->priceAmountEdit->value());
+            d->stockSplit.setValue(d->stockSplit.shares() * d->stockSplit.price());
+        }
+
         updateTotalAmount();
         d->updateWidgetState();
         emit editorLayoutChanged();
