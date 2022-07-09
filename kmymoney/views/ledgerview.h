@@ -173,6 +173,7 @@ Q_SIGNALS:
     void sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const;
     void sectionMoved(QWidget* view, int section, int oldIndex, int newIndex) const;
     void requestView(QWidget* viewWidget, const QString& accountId, const QString& journalEntryId);
+    void settingsChanged();
 
 protected:
     class Private;

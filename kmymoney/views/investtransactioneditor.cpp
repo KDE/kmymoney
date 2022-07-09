@@ -66,6 +66,7 @@ public:
         , interestModel(new AccountNamesFilterProxyModel(parent))
         , activitiesModel(new QStringListModel(parent))
         , securitiesModel(new QSortFilterProxyModel(parent))
+        , securityFilterModel(new AccountsProxyModel(parent))
         , accountsListModel(new KDescendantsProxyModel(parent))
         , currentActivity(nullptr)
         , feeSplitModel(new SplitModel(parent, &undoStack))
@@ -146,6 +147,7 @@ public:
     AccountNamesFilterProxyModel* interestModel;
     QStringListModel* activitiesModel;
     QSortFilterProxyModel* securitiesModel;
+    AccountsProxyModel* securityFilterModel;
     KDescendantsProxyModel* accountsListModel;
     KMyMoneyAccountComboSplitHelper* feeSplitHelper;
     KMyMoneyAccountComboSplitHelper* interestSplitHelper;
@@ -705,8 +707,15 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     d->ui->activityCombo->setModel(d->activitiesModel);
 
-    auto const model = MyMoneyFile::instance()->accountsModel();
-    d->accountsListModel->setSourceModel(model);
+    auto const accountsModel = MyMoneyFile::instance()->accountsModel();
+
+    d->securityFilterModel->addAccountGroup({eMyMoney::Account::Type::Asset});
+    d->securityFilterModel->setSourceModel(accountsModel);
+    d->securityFilterModel->setHideEquityAccounts(false);
+    d->securityFilterModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
+
+    d->accountsListModel->setSourceModel(d->securityFilterModel);
+
     d->securitiesModel->setSourceModel(d->accountsListModel);
     d->securitiesModel->setFilterRole(eMyMoney::Model::AccountParentIdRole);
     d->securitiesModel->setFilterKeyColumn(0);
@@ -719,20 +728,20 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> { eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability } );
     d->accountsModel->setHideEquityAccounts(false);
-    d->accountsModel->setSourceModel(model);
+    d->accountsModel->setSourceModel(accountsModel);
     d->accountsModel->sort(AccountsModel::Column::AccountName);
     d->ui->assetAccountCombo->setModel(d->accountsModel);
     d->ui->assetAccountCombo->setSplitActionVisible(false);
 
     d->feesModel->addAccountGroup(QVector<eMyMoney::Account::Type> { eMyMoney::Account::Type::Expense });
-    d->feesModel->setSourceModel(model);
+    d->feesModel->setSourceModel(accountsModel);
     d->feesModel->sort(AccountsModel::Column::AccountName);
     d->ui->feesCombo->setModel(d->feesModel);
     d->feeSplitHelper = new KMyMoneyAccountComboSplitHelper(d->ui->feesCombo, d->feeSplitModel);
     connect(d->feeSplitHelper, &KMyMoneyAccountComboSplitHelper::accountComboDisabled, d->ui->feesAmountEdit, &AmountEdit::setReadOnly);
 
     d->interestModel->addAccountGroup(QVector<eMyMoney::Account::Type> { eMyMoney::Account::Type::Income });
-    d->interestModel->setSourceModel(model);
+    d->interestModel->setSourceModel(accountsModel);
     d->interestModel->sort(AccountsModel::Column::AccountName);
     d->ui->interestCombo->setModel(d->interestModel);
     d->interestSplitHelper = new KMyMoneyAccountComboSplitHelper(d->ui->interestCombo, d->interestSplitModel);
@@ -1319,4 +1328,9 @@ void InvestTransactionEditor::setupUi(QWidget* parent)
 void InvestTransactionEditor::storeTabOrder(const QStringList& tabOrder)
 {
     TransactionEditorBase::storeTabOrder(QLatin1String("investTransactionEditor"), tabOrder);
+}
+
+void InvestTransactionEditor::slotSettingsChanged()
+{
+    d->securityFilterModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
 }

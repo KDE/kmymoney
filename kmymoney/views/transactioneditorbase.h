@@ -40,6 +40,11 @@ public:
     virtual void setReadOnly(bool readOnly);
     bool isReadOnly() const;
 
+public Q_SLOTS:
+    virtual void slotSettingsChanged()
+    {
+    }
+
 protected:
     void keyPressEvent(QKeyEvent* e) override;
     bool focusNextPrevChild(bool next) override;

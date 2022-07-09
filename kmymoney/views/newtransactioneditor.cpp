@@ -866,6 +866,9 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
     setCancelButton(d->ui->cancelButton);
     setEnterButton(d->ui->enterButton);
+
+    // force setup of filters
+    slotSettingsChanged();
 }
 
 NewTransactionEditor::~NewTransactionEditor()
@@ -1352,3 +1355,8 @@ void NewTransactionEditor::storeTabOrder(const QStringList& tabOrder)
     TransactionEditorBase::storeTabOrder(QLatin1String("stdTransactionEditor"), tabOrder);
 }
 
+void NewTransactionEditor::slotSettingsChanged()
+{
+    d->categoriesModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
+    d->accountsModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
+}

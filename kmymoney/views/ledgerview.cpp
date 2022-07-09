@@ -612,6 +612,7 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
             // and is completely visible
             const auto editor = qobject_cast<TransactionEditorBase*>(indexWidget(d->editIndex));
             connect(editor, &TransactionEditorBase::editorLayoutChanged, this, &LedgerView::resizeEditorRow);
+            connect(this, &LedgerView::settingsChanged, editor, &TransactionEditorBase::slotSettingsChanged);
 
             // make sure to unregister the editor in case it is destroyed
             connect(editor, &TransactionEditorBase::destroyed, this, [&]() {
@@ -1113,6 +1114,7 @@ void LedgerView::ensureCurrentItemIsVisible()
 void LedgerView::slotSettingsChanged()
 {
     updateGeometries();
+    emit settingsChanged();
 #if 0
 
     // KMyMoneySettings::showGrid()

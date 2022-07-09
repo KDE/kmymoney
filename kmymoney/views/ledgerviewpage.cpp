@@ -59,6 +59,7 @@ void LedgerViewPage::showEvent(QShowEvent* event)
     // setup the model to get access to data
     if (d->needModelInit) {
         initModel();
+        emit requestSelectionChanged(d->selections);
     }
     QWidget::showEvent(event);
 }

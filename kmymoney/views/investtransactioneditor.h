@@ -53,6 +53,9 @@ public:
     void setupUi(QWidget* parent) override;
     void storeTabOrder(const QStringList& tabOrder) override;
 
+public Q_SLOTS:
+    void slotSettingsChanged() override;
+
 protected Q_SLOTS:
     void activityChanged (int index);
 
