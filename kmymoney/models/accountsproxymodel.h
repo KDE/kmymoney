@@ -104,6 +104,8 @@ public:
 
     void setNotSelectable(const QString& accountId);
 
+    void setClosedSelectable(bool selectable);
+
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
     /**

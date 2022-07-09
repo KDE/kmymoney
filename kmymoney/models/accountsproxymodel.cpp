@@ -201,6 +201,12 @@ void AccountsProxyModel::setNotSelectable(const QString& accountId)
     d->m_notSelectableId = accountId;
 }
 
+void AccountsProxyModel::setClosedSelectable(bool selectable)
+{
+    Q_D(AccountsProxyModel);
+    d->m_canSelectClosedAccounts = selectable;
+}
+
 Qt::ItemFlags AccountsProxyModel::flags(const QModelIndex& index) const
 {
     Q_D(const AccountsProxyModel);
@@ -208,6 +214,9 @@ Qt::ItemFlags AccountsProxyModel::flags(const QModelIndex& index) const
     if (d->m_notSelectableId == index.data(eMyMoney::Model::IdRole).toString()) {
         flags.setFlag(Qt::ItemIsSelectable, false);
         flags.setFlag(Qt::ItemIsEnabled, false);
+    }
+    if (!d->m_canSelectClosedAccounts && index.data(eMyMoney::Model::AccountIsClosedRole).toBool()) {
+        flags.setFlag(Qt::ItemIsSelectable, false);
     }
     return flags;
 }

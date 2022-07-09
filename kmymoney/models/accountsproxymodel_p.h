@@ -35,6 +35,7 @@ public:
         , m_haveHiddenUnusedIncomeExpenseAccounts(false)
         , m_hideFavoriteAccounts(true)
         , m_hideAllEntries(false)
+        , m_canSelectClosedAccounts(false)
         , m_state(AccountsProxyModel::State::Any)
     {
     }
@@ -53,6 +54,7 @@ public:
     bool m_haveHiddenUnusedIncomeExpenseAccounts;
     bool m_hideFavoriteAccounts;
     bool m_hideAllEntries;
+    bool m_canSelectClosedAccounts;
     AccountsProxyModel::State m_state;
 };
 
