@@ -232,7 +232,7 @@ public:
             int newIdx = ui->ledgerTab->insertTab(ui->ledgerTab->count()-1, view, acc.name());
             if (makeCurrentLedger) {
                 // selecting the last tab (the one with the +) and then the new one
-                // makes sure that all signal about the new selection are emitted
+                // makes sure that all signals about the new selection are emitted
                 ui->ledgerTab->setCurrentIndex(ui->ledgerTab->count()-1);
                 ui->ledgerTab->setCurrentIndex(newIdx);
             }
@@ -498,7 +498,7 @@ void SimpleLedgerView::tabSelected(int idx)
 {
     Q_D(SimpleLedgerView);
     // make sure that the ledger does not change
-    // when the user access the account selection combo box
+    // when the user accesses the account selection combo box
     if(idx != (d->ui->ledgerTab->count()-1)) {
         d->lastIdx = idx;
 
