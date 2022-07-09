@@ -100,6 +100,7 @@ public:
         m_equitiesProxyModel->addAccountType(eMyMoney::Account::Type::Stock);
         m_equitiesProxyModel->setHideEquityAccounts(false);
         m_equitiesProxyModel->setHideAllEntries(true);
+        m_equitiesProxyModel->setClosedSelectable(true);
         m_equitiesProxyModel->setSourceModel(extraColumnModel);
         m_equitiesProxyModel->sort(AccountsModel::Column::AccountName);
         m_equitiesProxyModel->setSortRole(Qt::EditRole);
