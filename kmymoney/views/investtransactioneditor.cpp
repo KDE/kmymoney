@@ -1224,12 +1224,16 @@ QStringList InvestTransactionEditor::saveTransaction(const QStringList& selected
     // Don't do any rounding on a split factor
     if (d->currentActivity->type() != eMyMoney::Split::InvestmentTransactionType::SplitShares) {
         roundSplitValues(d->stockSplit, securityFraction);
-        if (d->currentActivity->priceMode() == eDialogs::PriceMode::PricePerTransaction) {
-            d->stockSplit.setPrice(d->stockSplit.value() / d->stockSplit.shares());
-        } else {
-            d->stockSplit.setPrice(d->ui->priceAmountEdit->value());
+        // if there are no shares, we don't have a price either
+        if (d->stockSplit.shares().isZero()) {
+            if (d->currentActivity->priceMode() == eDialogs::PriceMode::PricePerTransaction) {
+                d->stockSplit.setPrice(d->stockSplit.value() / d->stockSplit.shares());
+            } else {
+                d->stockSplit.setPrice(d->ui->priceAmountEdit->value());
+            }
         }
     }
+
     t.addSplit(d->stockSplit);
 
     if (d->currentActivity->feesRequired() != Invest::Activity::Unused) {
