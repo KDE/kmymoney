@@ -436,6 +436,11 @@ LedgerViewPage* LedgerViewPage::popView()
     return view;
 }
 
+bool LedgerViewPage::hasPushedView() const
+{
+    return d->stackedView != nullptr;
+}
+
 QString LedgerViewPage::accountName()
 {
     return d->accountName;

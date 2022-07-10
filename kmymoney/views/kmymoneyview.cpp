@@ -93,9 +93,9 @@ public:
     /**
      * Returns the id of the current selected view
      */
-    View currentViewId()
+    View currentViewId() const
     {
-        Q_Q(KMyMoneyView);
+        Q_Q(const KMyMoneyView);
         return viewFrames.key(q->currentPage());
     }
 
@@ -669,4 +669,23 @@ void KMyMoneyView::switchView(QWidget* viewWidget, const QString& accountId, con
     selections.addSelection(SelectedObjects::Account, accountId);
     selections.addSelection(SelectedObjects::JournalEntry, journalEntryId);
     executeAction(eMenu::Action::ShowTransaction, selections);
+}
+
+bool KMyMoneyView::hasClosableView() const
+{
+    Q_D(const KMyMoneyView);
+    const auto currentView = d->viewBases[d->currentViewId()];
+    if (currentView) {
+        return currentView->hasClosableView();
+    }
+    return false;
+}
+
+void KMyMoneyView::closeCurrentView()
+{
+    Q_D(const KMyMoneyView);
+    const auto currentView = d->viewBases[d->currentViewId()];
+    if (currentView) {
+        currentView->closeCurrentView();
+    }
 }

@@ -80,6 +80,9 @@ public:
 
     void refresh();
 
+    bool hasClosableView() const override;
+    void closeCurrentView() override;
+
 Q_SIGNALS:
     /**
       * This signal is emitted whenever a report is selected

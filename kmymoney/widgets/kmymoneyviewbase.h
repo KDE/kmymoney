@@ -79,6 +79,18 @@ public:
 
     virtual QHash<eMenu::Action, QAction*> sharedToolbarActions();
 
+    /**
+     * Returns @c true if the view has a closable tab/sub-view.
+     * Default is to return @c false.
+     */
+    virtual bool hasClosableView() const;
+
+    /**
+     * Closes the current selected closable tab/sub-view in the view.
+     * Default is to do nothing.
+     */
+    virtual void closeCurrentView();
+
 Q_SIGNALS:
     // these signals are send to application logic
     void requestSelectionChange(const SelectedObjects& selection) const;

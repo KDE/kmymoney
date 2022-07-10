@@ -34,6 +34,7 @@
 #include <QHBoxLayout>
 #include <QIcon>
 #include <QInputDialog>
+#include <QKeyEvent>
 #include <QKeySequence>
 #include <QLabel>
 #include <QList>
@@ -195,6 +196,36 @@ enum backupStateE {
     BACKUP_MOUNTING,
     BACKUP_COPYING,
     BACKUP_UNMOUNTING,
+};
+
+class ShortCutActionFilter : public QObject
+{
+    Q_OBJECT
+public:
+    ShortCutActionFilter(QAction* parent)
+        : QObject(parent)
+    {
+    }
+
+    bool eventFilter(QObject* watched, QEvent* event) override
+    {
+        Q_UNUSED(watched)
+
+        if (event->type() == QEvent::ShortcutOverride) {
+            const auto kev = static_cast<QKeyEvent*>(event);
+            const auto keySeq = QKeySequence(kev->modifiers() + kev->key());
+            const auto action = static_cast<QAction*>(parent());
+            if (keySeq == action->shortcut()) {
+                emit shortCutDetected();
+                event->accept();
+                return true;
+            }
+        }
+        return false;
+    }
+
+Q_SIGNALS:
+    void shortCutDetected();
 };
 
 class KMyMoneyApp::Private
@@ -1656,6 +1687,14 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     KStandardAction::save(this, &KMyMoneyApp::slotFileSave, aC);
     KStandardAction::saveAs(this, &KMyMoneyApp::slotFileSaveAs, aC);
     lutActions.insert(Action::FileClose, KStandardAction::close(this, &KMyMoneyApp::slotFileClose, aC));
+    auto actionFilter = new ShortCutActionFilter(lutActions[Action::FileClose]);
+    connect(actionFilter, &ShortCutActionFilter::shortCutDetected, this, &KMyMoneyApp::slotCloseViewOrFile, Qt::QueuedConnection);
+    for (auto* w : qApp->topLevelWidgets()) {
+        const auto mw = qobject_cast<QMainWindow*>(w);
+        if (mw) {
+            mw->installEventFilter(actionFilter);
+        }
+    }
     KStandardAction::quit(this, &KMyMoneyApp::slotFileQuit, aC);
     lutActions.insert(Action::Print, KStandardAction::print(this, &KMyMoneyApp::slotExecuteAction, aC));
     lutActions.insert(Action::PrintPreview, KStandardAction::printPreview(this, &KMyMoneyApp::slotExecuteAction, aC));
@@ -4504,6 +4543,19 @@ bool KMyMoneyApp::slotFileSaveAs()
     return false;
 }
 
+bool KMyMoneyApp::slotCloseViewOrFile()
+{
+    if (!d->m_storageInfo.isOpened)
+        return true;
+
+    // check if we have a closable view/tab
+    if (d->m_myMoneyView && d->m_myMoneyView->hasClosableView()) {
+        d->m_myMoneyView->closeCurrentView();
+        return true;
+    }
+    return slotFileClose();
+}
+
 bool KMyMoneyApp::slotFileClose()
 {
     if (!d->m_storageInfo.isOpened)
@@ -4571,3 +4623,5 @@ void KMyMoneyApp::Private::unlinkStatementXML()
         dir.remove(KMyMoneySettings::logPath() + QString("/%1").arg(dir[i]));
     }
 }
+
+#include "kmymoney.moc"

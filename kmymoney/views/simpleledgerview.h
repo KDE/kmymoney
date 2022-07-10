@@ -31,6 +31,9 @@ public:
     void updateActions(const SelectedObjects& selections) override;
     void executeAction(eMenu::Action action, const SelectedObjects& selections) override;
 
+    bool hasClosableView() const override;
+    void closeCurrentView() override;
+
 public Q_SLOTS:
     void showEvent(QShowEvent* event) override;
 

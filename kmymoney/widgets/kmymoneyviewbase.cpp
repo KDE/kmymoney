@@ -79,3 +79,12 @@ QHash<eMenu::Action, QAction*> KMyMoneyViewBase::sharedToolbarActions()
     Q_D(KMyMoneyViewBase);
     return d->m_sharedToolbarActions;
 }
+
+bool KMyMoneyViewBase::hasClosableView() const
+{
+    return false;
+}
+
+void KMyMoneyViewBase::closeCurrentView()
+{
+}

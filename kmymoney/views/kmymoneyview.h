@@ -151,6 +151,16 @@ public:
 
     void setupSharedActions();
 
+    /**
+     * Returns @c true if the current view has a closable tab/sub-view.
+     */
+    bool hasClosableView() const;
+
+    /**
+     * Closes the current selected closable tab/sub-view in the current view.
+     */
+    void closeCurrentView();
+
 protected:
     /**
       * Overwritten because KMyMoney has it's custom header.

@@ -654,6 +654,21 @@ void KReportsView::slotToggleChart()
         tab->toggleChart();
 }
 
+bool KReportsView::hasClosableView() const
+{
+    Q_D(const KReportsView);
+    return d->ui.m_reportTabWidget->count() > 1;
+}
+
+void KReportsView::closeCurrentView()
+{
+    Q_D(KReportsView);
+    const auto idx = d->ui.m_reportTabWidget->currentIndex();
+    if (idx > 0) {
+        slotClose(idx);
+    }
+}
+
 void KReportsView::slotCloseCurrent()
 {
     Q_D(KReportsView);

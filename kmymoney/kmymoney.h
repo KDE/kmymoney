@@ -625,6 +625,7 @@ public Q_SLOTS:
     bool slotFileSave();
     bool slotFileSaveAs();
     bool slotFileClose();
+    bool slotCloseViewOrFile();
     /**
       * closes all open windows by calling close() on each memberList item
       * until the list is empty, then quits the application.

@@ -61,6 +61,7 @@ public:
 
     void pushView(LedgerViewPage* view);
     LedgerViewPage* popView();
+    bool hasPushedView() const;
 
     QString accountName();
 

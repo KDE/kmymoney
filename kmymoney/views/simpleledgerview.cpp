@@ -24,6 +24,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KMessageBox>
 #include <KPageWidgetItem>
 
 // ----------------------------------------------------------------------------
@@ -765,4 +766,33 @@ void SimpleLedgerView::sectionResized(QWidget* view, const QString& configGroupN
 void SimpleLedgerView::sectionMoved(QWidget* view, int section, int oldIndex, int newIndex) const
 {
     emit moveSection(view, section, oldIndex, newIndex);
+}
+
+bool SimpleLedgerView::hasClosableView() const
+{
+    Q_D(const SimpleLedgerView);
+    return d->ui->ledgerTab->count() > 1;
+}
+
+void SimpleLedgerView::closeCurrentView()
+{
+    Q_D(SimpleLedgerView);
+    const auto idx = d->ui->ledgerTab->currentIndex();
+
+    // in case we're in reconciliation, we cannot simply close the
+    // view but must use the finish/postpone reconciliation actions
+    auto tab = d->ui->ledgerTab->widget(idx);
+    auto view = qobject_cast<LedgerViewPage*>(tab);
+    if (view) {
+        if (view->hasPushedView()) {
+            KMessageBox::information(
+                this,
+                i18n("You cannot close this view because you are reconciling the account. Finish, cancel or postpone the reconciliation first."),
+                i18nc("@title:info In reconciliation", "View cannot be closed"));
+            return;
+        }
+    }
+
+    // ok to close the view
+    closeLedger(idx);
 }
