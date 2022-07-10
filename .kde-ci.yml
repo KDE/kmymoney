@@ -20,6 +20,8 @@ Dependencies:
     'frameworks/kxmlgui': '@stable'
     'frameworks/ktextwidgets': '@stable'
     'frameworks/kcmutils': '@stable'
+    'frameworks/kdiagram': '@stable'
+    'frameworks/kdewebkit': '@stable'
     'office/alkimia': '@stable'
 
 Options:
