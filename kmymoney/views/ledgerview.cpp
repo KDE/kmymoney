@@ -782,17 +782,7 @@ void LedgerView::mousePressEvent(QMouseEvent* event)
                         }
                         break;
                     case eMyMoney::Model::TransactionIsImportedRole:
-                        buttonNo.setToolTip(QString());
-                        buttonYes.setToolTip(i18nc("@info:tooltip Accept button", "Accept the transaction and mark it cleared."));
-
-                        result = KMessageBox::questionYesNo(this,
-                                                            i18nc("Question about the accept action", "Do you want to accept the imported transaction now?"),
-                                                            i18nc("@title:window", "Accept transaction"),
-                                                            buttonYes,
-                                                            buttonNo);
-                        if (result == KMessageBox::ButtonCode::Yes) {
-                            pActions[eMenu::Action::AcceptTransaction]->trigger();
-                        }
+                        pActions[eMenu::Action::AcceptTransaction]->trigger();
                         break;
                     case eMyMoney::Model::JournalSplitIsMatchedRole: {
                         buttonYes.setText(pActions[eMenu::Action::AcceptTransaction]->text());
