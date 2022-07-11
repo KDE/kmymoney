@@ -134,6 +134,7 @@ public:
 
         accountCombo->installEventFilter(q);
         accountCombo->popup()->installEventFilter(q);
+        updateTitlePage();
 
         q->tabSelected(0);
         openLedgersAfterFileOpen();
@@ -420,6 +421,20 @@ public:
         return -1;
     }
 
+    void updateTitlePage()
+    {
+        QString txt = QLatin1String("<html><head/><body><p>");
+        if (MyMoneyFile::instance()->accountsModel()->itemList().isEmpty()) {
+            txt.append(i18nc("@label displayed when no ledger is open",
+                             "This page shows the accounts ledger. Currently, no accounts exist so this text is shown instead."));
+        } else {
+            txt.append(i18nc("@label displayed when no ledger is open",
+                             "This page shows the accounts ledger. Currently, no accounts are selected so this text is shown instead."));
+        }
+        txt.append(QLatin1String("</p></body></html>"));
+        ui->l1->setText(txt);
+    }
+
     Ui_SimpleLedgerView*          ui;
     AccountNamesFilterProxyModel* accountsModel;
     QWidget*                      newTabWidget;
@@ -689,6 +704,9 @@ void SimpleLedgerView::updateActions(const SelectedObjects& selections)
             }
             pActions[eMenu::Action::CancelReconciliation]->setEnabled(true);
         }
+    }
+    if (!d->m_needInit) {
+        d->updateTitlePage();
     }
 }
 

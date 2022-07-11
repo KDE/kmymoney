@@ -39,7 +39,7 @@
       <attribute name="title">
        <string notr="true"/>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout" stretch="2,0,2">
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <spacer name="verticalSpacer_2">
          <property name="orientation">
@@ -54,9 +54,35 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="l1">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This page shows the accounts ledger. Currently, no account exist so this text is shown instead.&lt;/p&gt;&lt;p&gt;Once you created the first asset or liability account its transactions will be presented here.&lt;/p&gt;&lt;p&gt;Accounts marked as favorites will be opened automatically after KMyMoney opened the file or database. Use the + button on the tabbar above to add accounts.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string notr="true" extracomment="placeholder">L1</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="l2">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Once an account or category is selected its transactions will be presented here.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="l3">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accounts marked as favorites will be opened automatically after KMyMoney opened the file or database. Use the + button on the tabbar above to select an account.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
