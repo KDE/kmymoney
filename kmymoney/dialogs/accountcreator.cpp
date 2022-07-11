@@ -69,7 +69,7 @@ void AccountCreator::createAccount()
             parent = MyMoneyFile::instance()->income();
         }
 
-        if ((m_accountType == eMyMoney::Account::Type::Asset) || (m_accountType == eMyMoney::Account::Type::Asset)) {
+        if ((m_accountType == eMyMoney::Account::Type::Asset) || (m_accountType == eMyMoney::Account::Type::Liability)) {
             KNewAccountDlg::newAccount(account, parent);
         } else {
             KNewAccountDlg::newCategory(account, parent);
