@@ -57,16 +57,23 @@ public:
             QSignalBlocker blocker(m_popupView);
             m_popupView->setCurrentIndex(QModelIndex());
             const auto rows = m_q->model()->rowCount();
+            const auto filterModel = qobject_cast<AccountNamesFilterProxyModel*>(m_q->model());
+            const auto filterExp = filterModel->filterRegularExpression();
             for (auto i = 0; i < rows; ++i) {
-                QModelIndex childIndex = m_q->model()->index(i, 0);
-                if (m_q->model()->hasChildren(childIndex)) {
-                    // search the first leaf
+                QModelIndex childIndex = filterModel->index(i, 0);
+                if (filterModel->hasChildren(childIndex)) {
+                    // search the first match by walking down the first leaf
                     do {
-                        childIndex = m_q->model()->index(0, 0, childIndex);
-                    } while(m_q->model()->hasChildren(childIndex));
+                        childIndex = filterModel->index(0, 0, childIndex);
+                        if (filterModel->flags(childIndex) & Qt::ItemIsSelectable) {
+                            if (filterExp.match(childIndex.data(eMyMoney::Model::AccountFullHierarchyNameRole).toString()).hasMatch()) {
+                                break;
+                            }
+                        }
+                    } while (filterModel->hasChildren(childIndex));
 
                     // make it the current selection if it's selectable
-                    if(m_q->model()->flags(childIndex) & Qt::ItemIsSelectable) {
+                    if (filterModel->flags(childIndex) & Qt::ItemIsSelectable) {
                         m_popupView->setCurrentIndex(childIndex);
                     }
                     break;
