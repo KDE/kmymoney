@@ -595,12 +595,16 @@ void SimpleLedgerView::showEvent(QShowEvent* event)
         // close ledgers of accounts about to be removed
         connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::rowsAboutToBeRemoved, this, [&](const QModelIndex& parent, int first, int last) {
             Q_D(SimpleLedgerView);
-            for (int row = first; row <= last; ++row) {
-                const auto modelIdx = parent.model()->index(row, 0, parent);
-                auto accountId = modelIdx.data(eMyMoney::Model::IdRole).toString();
-                const auto idx = d->tabIdByAccountId(accountId);
-                if (idx != -1) {
-                    closeLedger(idx);
+            // we only need to react on real account removals not if the favorite
+            // option is removed and the row is removed from the favorite subtree
+            if (parent != MyMoneyFile::instance()->accountsModel()->favoriteIndex()) {
+                for (int row = first; row <= last; ++row) {
+                    const auto modelIdx = parent.model()->index(row, 0, parent);
+                    auto accountId = modelIdx.data(eMyMoney::Model::IdRole).toString();
+                    const auto idx = d->tabIdByAccountId(accountId);
+                    if (idx != -1) {
+                        closeLedger(idx);
+                    }
                 }
             }
         });
