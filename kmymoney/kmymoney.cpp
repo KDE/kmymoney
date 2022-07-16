@@ -1637,7 +1637,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
         };
 
         for(const auto& it : actionShortcuts)
-            aC->setDefaultShortcut(lutActions[it.first], it.second);
+            lutActions[it.first]->setShortcut(it.second);
     }
 
     // *************
