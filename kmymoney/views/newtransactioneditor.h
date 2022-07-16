@@ -71,6 +71,12 @@ public:
     void setupUi(QWidget* parent) override;
     void storeTabOrder(const QStringList& tabOrder) override;
 
+    /**
+     * This method is used to embed the transaction editor in other dialogs
+     * e.g. KEditScheduleDlg
+     */
+    virtual WidgetHintFrameCollection* widgetHintFrameCollection() const override;
+
 public Q_SLOTS:
     void slotSettingsChanged() override;
 

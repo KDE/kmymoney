@@ -29,7 +29,7 @@ ScheduleWizardPage::ScheduleWizardPage(QWidget *parent)
     registerField("nextDueDateEdit", ui->m_nextDueDateEdit, "date", SIGNAL(dateChanged(QDate)));
     registerField("paymentAccountEdit", ui->m_paymentAccountEdit, "selectedItems");
 
-    connect(ui->m_nextDueDateEdit, &KMyMoneyDateInput::dateChanged, this, &QWizardPage::completeChanged);
+    connect(ui->m_nextDueDateEdit, &KMyMoneyDateEdit::dateChanged, this, &QWizardPage::completeChanged);
     connect(ui->m_paymentAccountEdit,  &KMyMoneySelector::stateChanged, this, &QWizardPage::completeChanged);
 
     ui->m_paymentAccountEdit->removeButtons();
@@ -45,9 +45,8 @@ ScheduleWizardPage::~ScheduleWizardPage()
  */
 bool ScheduleWizardPage::isComplete() const
 {
-    return ui->m_nextDueDateEdit->date().isValid()
-           && ui->m_nextDueDateEdit->date() >= field("firstDueDateEdit").toDate()
-           && ui->m_paymentAccountEdit->selectedItems().count() > 0;
+    return ui->m_nextDueDateEdit->isValid() && ui->m_nextDueDateEdit->date() >= field("firstDueDateEdit").toDate()
+        && ui->m_paymentAccountEdit->selectedItems().count() > 0;
 }
 
 void ScheduleWizardPage::initializePage()

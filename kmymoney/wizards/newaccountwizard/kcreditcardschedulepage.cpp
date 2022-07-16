@@ -27,7 +27,6 @@
 
 #include "kmymoneyaccountselector.h"
 #include "kmymoneycategory.h"
-#include "kmymoneydateinput.h"
 #include "kmymoneygeneralcombo.h"
 #include "kmymoneypayeecombo.h"
 #include "knewaccountwizard.h"
@@ -63,7 +62,8 @@ CreditCardSchedulePage::CreditCardSchedulePage(Wizard* wizard) :
 
     connect(d->ui->m_paymentAccount, &KMyMoneyCombo::itemSelected, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
     connect(d->ui->m_payee, &KMyMoneyMVCCombo::itemSelected, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
-    connect(d->ui->m_date, &KMyMoneyDateInput::dateChanged, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
+    connect(d->ui->m_date, &KMyMoneyDateEdit::dateChanged, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
+    connect(d->ui->m_date, &KMyMoneyDateEdit::dateValidityChanged, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
 
     connect(d->ui->m_payee, &KMyMoneyMVCCombo::createItem, wizard, &Wizard::slotPayeeNew);
 
@@ -111,6 +111,10 @@ bool CreditCardSchedulePage::isComplete() const
         if (d->ui->m_date->date() < d->m_wizard->d_func()->m_accountTypePage->d_func()->ui->m_openingDate->date()) {
             rc = false;
             msg = i18n("Next due date is prior to opening date");
+        }
+        if (!d->ui->m_date->isValid()) {
+            rc = false;
+            msg = i18n("Next due date is invalid");
         }
         if (d->ui->m_paymentAccount->selectedItem().isEmpty()) {
             rc = false;

@@ -14,7 +14,6 @@ set(kmm_widgets_HEADERS
   kmymoneycompletion.h
   kmymoneycurrencyselector.h
   kmymoneydateedit.h
-  kmymoneydateinput.h
   kmymoneylineedit.h
   kmymoneymvccombo.h
   kmymoneyselector.h
@@ -43,7 +42,6 @@ set(kmm_base_widgets_SOURCES
   kmymoneycompletion.cpp
   kmymoneycurrencyselector.cpp
   kmymoneydateedit.cpp
-  kmymoneydateinput.cpp
   kmymoneyfrequencycombo.cpp
   kmymoneygeneralcombo.cpp
   kmymoneylineedit.cpp

@@ -214,8 +214,12 @@ bool NewTransactionEditor::Private::isDatePostOpeningDate(const QDate& date, con
 
 bool NewTransactionEditor::Private::postdateChanged(const QDate& date)
 {
-    bool rc = true;
     WidgetHintFrame::hide(ui->dateEdit, i18n("The posting date of the transaction."));
+
+    if (!date.isValid()) {
+        WidgetHintFrame::show(ui->dateEdit, i18n("The posting date is invalid."));
+        return false;
+    }
 
     // collect all account ids
     QStringList accountIds;
@@ -226,6 +230,7 @@ bool NewTransactionEditor::Private::postdateChanged(const QDate& date)
         accountIds << index.data(eMyMoney::Model::SplitAccountIdRole).toString();
     }
 
+    bool rc = true;
     for (const auto& accountId : accountIds) {
         if (!isDatePostOpeningDate(date, accountId)) {
             MyMoneyAccount account = MyMoneyFile::instance()->account(accountId);
@@ -694,7 +699,6 @@ void NewTransactionEditor::Private::createPayee()
 void NewTransactionEditor::Private::defaultCategoryAssignment()
 {
     if (splitModel.rowCount() == 0) {
-        const auto payeesModel = ui->payeeEdit->model();
         const auto payeeIdx = payeesModel->index(ui->payeeEdit->currentIndex(), 0);
         const auto defaultAccount = payeeIdx.data(eMyMoney::Model::PayeeDefaultAccountRole).toString();
         if (!defaultAccount.isEmpty()) {
@@ -837,7 +841,11 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
         d->editSplits();
     });
 
-    connect(d->ui->dateEdit, &KMyMoneyDateEdit::dateChanged, this, [&](const QDate& date) {
+    connect(d->ui->dateEdit, &KMyMoneyDateEdit::dateValidityChanged, this, [&](const QDate& date) {
+        d->postdateChanged(date);
+    });
+
+    connect(d->ui->dateEdit, &KMyMoneyDateEdit::dateEntered, this, [&](const QDate& date) {
         d->postdateChanged(date);
         emit postDateChanged(date);
     });
@@ -1305,6 +1313,7 @@ void NewTransactionEditor::setShowAccountCombo(bool show) const
 {
     d->ui->accountLabel->setVisible(show);
     d->ui->accountCombo->setVisible(show);
+    d->ui->topMarginWidget->setVisible(show);
     d->ui->accountCombo->setSplitActionVisible(false);
 }
 
@@ -1359,4 +1368,9 @@ void NewTransactionEditor::slotSettingsChanged()
 {
     d->categoriesModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
     d->accountsModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
+}
+
+WidgetHintFrameCollection* NewTransactionEditor::widgetHintFrameCollection() const
+{
+    return d->frameCollection;
 }

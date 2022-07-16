@@ -363,7 +363,7 @@
               </widget>
              </item>
              <item row="2" column="1" colspan="3">
-              <widget class="KMyMoneyDateInput" name="m_specificDate">
+              <widget class="KMyMoneyDateEdit" name="m_specificDate">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -542,6 +542,11 @@
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
+   <class>KMyMoneyDateEdit</class>
+   <extends>KDateComboBox</extends>
+   <header>kmymoneydateedit.h</header>
+  </customwidget>
+  <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
@@ -550,12 +555,6 @@
    <class>KLed</class>
    <extends>QWidget</extends>
    <header>kled.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KMyMoneyDateInput</class>
-   <extends>QFrame</extends>
-   <header>kmymoneydateinput.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>

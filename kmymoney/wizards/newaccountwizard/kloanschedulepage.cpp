@@ -24,7 +24,6 @@
 #include <kguiutils.h>
 #include "kmymoneyaccountselector.h"
 #include "kmymoneycategory.h"
-#include "kmymoneydateinput.h"
 #include "knewaccountwizard.h"
 #include "knewaccountwizard_p.h"
 #include "kaccountsummarypage.h"

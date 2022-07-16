@@ -36,6 +36,8 @@ public:
     ~CheckingStatementInfoWizardPage();
 
     Ui::CheckingStatementInfoWizardPage *ui;
+
+    bool isComplete() const override;
 };
 
 #endif

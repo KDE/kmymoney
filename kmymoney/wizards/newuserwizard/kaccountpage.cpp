@@ -23,7 +23,6 @@
 
 #include "ui_kaccountpage.h"
 
-#include "kmymoneydateinput.h"
 #include "knewuserwizard.h"
 #include "knewuserwizard_p.h"
 #include "kcategoriespage.h"

@@ -19,11 +19,11 @@
 
 #include "ui_ksettingsgeneral.h"
 
-#include "kmymoneydateinput.h"
-#include "mymoneymoney.h"
-#include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "widgethintframe.h"
 
 class KSettingsGeneralPrivate
 {
@@ -51,15 +51,17 @@ KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
 {
     Q_D(KSettingsGeneral);
     d->ui->setupUi(this);
-    // hide the internally used date field
-    d->ui->kcfg_StartDate->hide();
 
-    // setup connections, so that the sort options get loaded once the edit fields are filled
-    connect(d->ui->kcfg_StartDate, &QDateTimeEdit::dateChanged, this, &KSettingsGeneral::slotLoadStartDate);
-
-    // setup connections, so that changes by the user are forwarded to the (hidden) edit fields
-    connect(d->ui->m_startDateEdit, &KMyMoneyDateInput::dateChanged, d->ui->kcfg_StartDate, &QDateTimeEdit::setDate);
-
+    auto frameCollection = new WidgetHintFrameCollection(this);
+    frameCollection->addFrame(new WidgetHintFrame(d->ui->kcfg_StartDate));
+    connect(frameCollection, &WidgetHintFrameCollection::inputIsValid, this, &KSettingsGeneral::haveValidInput);
+    connect(d->ui->kcfg_StartDate, &KMyMoneyDateEdit::dateValidityChanged, this, [&](const QDate& date) {
+        Q_D(KSettingsGeneral);
+        WidgetHintFrame::hide(d->ui->kcfg_StartDate, QString());
+        if (!date.isValid()) {
+            WidgetHintFrame::show(d->ui->kcfg_StartDate, i18nc("@info:tooltip", "The date is invalid."));
+        }
+    });
     connect(d->ui->choosePath, &QAbstractButton::pressed, this, &KSettingsGeneral::slotChooseLogPath);
     d->initialHideZeroBalanceEquities = d->ui->kcfg_HideZeroBalanceEquities->isChecked();
 }
@@ -76,14 +78,6 @@ void KSettingsGeneral::slotChooseLogPath()
     QString filePath = QFileDialog::getExistingDirectory(this, i18n("Choose file path"), QDir::homePath());
     d->ui->kcfg_logPath->setText(filePath);
     slotUpdateLogTypes();
-}
-
-void KSettingsGeneral::slotLoadStartDate(const QDate&)
-{
-    Q_D(KSettingsGeneral);
-    // only need this once
-    disconnect(d->ui->kcfg_StartDate, &QDateTimeEdit::dateChanged, this, &KSettingsGeneral::slotLoadStartDate);
-    d->ui->m_startDateEdit->setDate(d->ui->kcfg_StartDate->date());
 }
 
 void KSettingsGeneral::slotUpdateLogTypes()

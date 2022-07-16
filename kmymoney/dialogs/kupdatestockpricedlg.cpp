@@ -21,7 +21,6 @@
 
 #include "ui_kupdatestockpricedlg.h"
 
-#include "kmymoneydateinput.h"
 #include "kmymoneycurrencyselector.h"
 
 KUpdateStockPriceDlg::KUpdateStockPriceDlg(QWidget* parent) :

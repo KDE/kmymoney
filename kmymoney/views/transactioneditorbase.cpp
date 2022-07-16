@@ -23,6 +23,7 @@
 // Project Includes
 
 #include "kmymoneyutils.h"
+#include "widgethintframe.h"
 
 class TransactionEditorBase::Private
 {
@@ -136,4 +137,9 @@ void TransactionEditorBase::setupTabOrder(const QStringList& tabOrder)
 void TransactionEditorBase::storeTabOrder(const QString& name, const QStringList& tabOrder)
 {
     KMyMoneyUtils::storeTabOrder(name, tabOrder);
+}
+
+WidgetHintFrameCollection* TransactionEditorBase::widgetHintFrameCollection() const
+{
+    return nullptr;
 }

@@ -28,7 +28,7 @@ FirstPaymentWizardPage::FirstPaymentWizardPage(QWidget *parent)
     // Register the fields with the QWizard and connect the
     // appropriate signals to update the "Next" button correctly
     registerField("firstDueDateEdit", ui->m_firstDueDateEdit, "date");
-    connect(ui->m_firstDueDateEdit, &KMyMoneyDateInput::dateChanged, this, &QWizardPage::completeChanged);
+    connect(ui->m_firstDueDateEdit, &KMyMoneyDateEdit::dateChanged, this, &QWizardPage::completeChanged);
 }
 
 FirstPaymentWizardPage::~FirstPaymentWizardPage()
@@ -41,7 +41,7 @@ FirstPaymentWizardPage::~FirstPaymentWizardPage()
  */
 bool FirstPaymentWizardPage::isComplete() const
 {
-    return ui->m_firstDueDateEdit->date().isValid();
+    return ui->m_firstDueDateEdit->isValid();
 }
 
 void FirstPaymentWizardPage::initializePage()

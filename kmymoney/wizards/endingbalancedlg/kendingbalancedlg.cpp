@@ -140,7 +140,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
 
     // connect the signals with the slots
     connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &KEndingBalanceDlg::slotReloadEditWidgets);
-    connect(d->ui->m_statementInfoPageCheckings->ui->m_statementDate, &KMyMoneyDateInput::dateChanged, this, &KEndingBalanceDlg::slotUpdateBalances);
+    connect(d->ui->m_statementInfoPageCheckings->ui->m_statementDate, &KMyMoneyDateEdit::dateChanged, this, &KEndingBalanceDlg::slotUpdateBalances);
     connect(d->ui->m_interestChargeCheckings->ui->m_interestCategoryEdit, &KMyMoneyCombo::createItem, this, &KEndingBalanceDlg::slotCreateInterestCategory);
     connect(d->ui->m_interestChargeCheckings->ui->m_chargesCategoryEdit, &KMyMoneyCombo::createItem, this, &KEndingBalanceDlg::slotCreateChargesCategory);
     connect(d->ui->m_interestChargeCheckings->ui->m_payeeEdit, &KMyMoneyMVCCombo::createItem, this, &KEndingBalanceDlg::slotNewPayee);

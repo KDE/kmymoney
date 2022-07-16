@@ -27,7 +27,7 @@
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="KMyMoneyDateInput" name="m_fromDate" native="true"/>
+    <widget class="KMyMoneyDateEdit" name="m_fromDate" native="true"/>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="TextLabel6">
@@ -40,7 +40,7 @@
     </widget>
    </item>
    <item row="2" column="1">
-    <widget class="KMyMoneyDateInput" name="m_toDate" native="true"/>
+    <widget class="KMyMoneyDateEdit" name="m_toDate" native="true"/>
    </item>
   </layout>
  </widget>
@@ -53,9 +53,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>KMyMoneyDateInput</class>
-   <extends>QWidget</extends>
-   <header>kmymoneydateinput.h</header>
+   <class>KMyMoneyDateEdit</class>
+   <extends>KDateComboBox</extends>
+   <header>kmymoneydateedit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

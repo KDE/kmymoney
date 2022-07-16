@@ -22,7 +22,6 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "kmymoneydateinput.h"
 #include "ui_kexportdlgdecl.h"
 
 /**

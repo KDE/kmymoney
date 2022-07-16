@@ -9,6 +9,7 @@
 // QT Includes
 
 #include <QEvent>
+#include <QMetaMethod>
 #include <QMoveEvent>
 
 // ----------------------------------------------------------------------------
@@ -20,7 +21,8 @@
 class WidgetHintFrameCollection::Private
 {
 public:
-    QList<QWidget*> widgetList;
+    bool haveChainedCollection = false;
+    bool chainedCollectionState = true;
     QList<WidgetHintFrame*> frameList;
 };
 
@@ -33,6 +35,34 @@ WidgetHintFrameCollection::WidgetHintFrameCollection(QObject* parent)
 WidgetHintFrameCollection::~WidgetHintFrameCollection()
 {
     delete d;
+}
+
+bool WidgetHintFrameCollection::chainFrameCollection(WidgetHintFrameCollection* chainedCollection)
+{
+    if ((chainedCollection == nullptr) || (d->haveChainedCollection)) {
+        return false;
+    }
+    d->haveChainedCollection = true;
+    connect(chainedCollection, &WidgetHintFrameCollection::inputIsValid, this, &WidgetHintFrameCollection::changeChainedCollectionState);
+    connect(chainedCollection, &WidgetHintFrameCollection::destroyed, this, &WidgetHintFrameCollection::unchainFrameCollection);
+    return true;
+}
+
+void WidgetHintFrameCollection::unchainFrameCollection()
+{
+    if (d->haveChainedCollection) {
+        d->haveChainedCollection = false;
+        d->chainedCollectionState = true;
+    }
+}
+
+void WidgetHintFrameCollection::connectNotify(const QMetaMethod& signal)
+{
+    // Whenever a new object connects to our inputIsValid signal
+    // we emit the current status right away.
+    if (signal == QMetaMethod::fromSignal(&WidgetHintFrameCollection::inputIsValid)) {
+        updateWidgets();
+    }
 }
 
 void WidgetHintFrameCollection::addFrame(WidgetHintFrame* frame)
@@ -48,15 +78,18 @@ void WidgetHintFrameCollection::addFrame(WidgetHintFrame* frame)
 
 void WidgetHintFrameCollection::addWidget(QWidget* w)
 {
-    if (!d->widgetList.contains(w)) {
-        d->widgetList.append(w);
-        updateWidgets();
-    }
+    connect(this, &WidgetHintFrameCollection::inputIsValid, w, &QWidget::setEnabled, Qt::UniqueConnection);
+}
+
+void WidgetHintFrameCollection::changeChainedCollectionState(bool valid)
+{
+    d->chainedCollectionState = valid;
+    updateWidgets();
 }
 
 void WidgetHintFrameCollection::removeWidget(QWidget* w)
 {
-    d->widgetList.removeAll(w);
+    disconnect(this, &WidgetHintFrameCollection::inputIsValid, w, &QWidget::setEnabled);
     w->setEnabled(true);
 }
 
@@ -70,7 +103,7 @@ void WidgetHintFrameCollection::frameDestroyed(QObject* o)
 
 void WidgetHintFrameCollection::updateWidgets()
 {
-    bool enabled = true;
+    bool enabled = d->chainedCollectionState;
     for (const auto& frame : d->frameList) {
         enabled &= !frame->isErroneous();
         if (!enabled) {
@@ -78,16 +111,14 @@ void WidgetHintFrameCollection::updateWidgets()
         }
     }
 
-    for (auto& w : d->widgetList) {
-        w->setEnabled(enabled);
-    }
+    emit inputIsValid(enabled);
 }
 
 class WidgetHintFrame::Private
 {
 public:
-    QWidget* editWidget;
-    bool status;
+    QWidget* editWidget = nullptr;
+    bool status = false;
     FrameStyle style;
 };
 
@@ -95,8 +126,6 @@ WidgetHintFrame::WidgetHintFrame(QWidget* editWidget, FrameStyle style, Qt::Wind
     : QFrame(editWidget->parentWidget(), f)
     , d(new Private)
 {
-    d->editWidget = 0;
-    d->status = false;
     d->style = style;
     switch (style) {
     case Error:
@@ -122,14 +151,16 @@ bool WidgetHintFrame::isErroneous() const
 
 static WidgetHintFrame* frame(QWidget* editWidget)
 {
-    QList<WidgetHintFrame*> allErrorFrames = editWidget->parentWidget()->findChildren<WidgetHintFrame*>();
-    QList<WidgetHintFrame*>::const_iterator it;
-    for (const auto& f : allErrorFrames) {
-        if (f->editWidget() == editWidget) {
-            return f;
+    if (editWidget && editWidget->parentWidget()) {
+        QList<WidgetHintFrame*> allErrorFrames = editWidget->parentWidget()->findChildren<WidgetHintFrame*>();
+        QList<WidgetHintFrame*>::const_iterator it;
+        for (const auto& f : allErrorFrames) {
+            if (f->editWidget() == editWidget) {
+                return f;
+            }
         }
     }
-    return 0;
+    return nullptr;
 }
 
 void WidgetHintFrame::show(QWidget* editWidget, const QString& tooltip)
@@ -165,7 +196,7 @@ void WidgetHintFrame::detachFromWidget()
 {
     if (d->editWidget) {
         d->editWidget->removeEventFilter(this);
-        d->editWidget = 0;
+        d->editWidget = nullptr;
     }
 }
 

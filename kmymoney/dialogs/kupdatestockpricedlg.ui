@@ -19,7 +19,7 @@
      <item row="2" column="1">
       <layout class="QHBoxLayout">
        <item>
-        <widget class="KMyMoneyDateInput" name="m_date" native="true"/>
+        <widget class="KMyMoneyDateEdit" name="m_date" native="true"/>
        </item>
        <item>
         <spacer name="spacer25">
@@ -174,10 +174,9 @@
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>KMyMoneyDateInput</class>
-   <extends>QWidget</extends>
-   <header>kmymoneydateinput.h</header>
-   <container>1</container>
+   <class>KMyMoneyDateEdit</class>
+   <extends>KDateComboBox</extends>
+   <header>kmymoneydateedit.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneySecuritySelector</class>

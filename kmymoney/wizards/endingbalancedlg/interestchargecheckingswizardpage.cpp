@@ -14,6 +14,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "widgethintframe.h"
+
 #include "ui_interestchargecheckingswizardpage.h"
 
 InterestChargeCheckingsWizardPage::InterestChargeCheckingsWizardPage(QWidget *parent) :
@@ -21,6 +23,11 @@ InterestChargeCheckingsWizardPage::InterestChargeCheckingsWizardPage(QWidget *pa
     ui(new Ui::InterestChargeCheckingsWizardPage)
 {
     ui->setupUi(this);
+
+    auto frameCollection = new WidgetHintFrameCollection(this);
+    frameCollection->addFrame(new WidgetHintFrame(ui->m_interestDateEdit));
+    frameCollection->addFrame(new WidgetHintFrame(ui->m_chargesDateEdit));
+
     // Register the fields with the QWizard and connect the
     // appropriate signals to update the "Next" button correctly
     registerField("interestDateEdit", ui->m_interestDateEdit, "date", SIGNAL(dateChanged(QDate)));
@@ -40,6 +47,21 @@ InterestChargeCheckingsWizardPage::InterestChargeCheckingsWizardPage(QWidget *pa
     ui->m_payeeEdit->setMinimumContentsLength(40);
     ui->m_payeeEdit->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLength);
 
+    auto updateDateFrame = [&](QWidget* w, bool state) {
+        WidgetHintFrame::hide(w);
+        if (!state) {
+            WidgetHintFrame::show(w, i18nc("@info:tooltip", "The date is invalid."));
+        }
+    };
+
+    connect(ui->m_interestDateEdit, &KMyMoneyDateEdit::dateValidityChanged, this, [&](const QDate& date) {
+        updateDateFrame(qobject_cast<QWidget*>(sender()), date.isValid());
+        emit completeChanged();
+    });
+    connect(ui->m_chargesDateEdit, &KMyMoneyDateEdit::dateValidityChanged, this, [&](const QDate& date) {
+        updateDateFrame(qobject_cast<QWidget*>(sender()), date.isValid());
+        emit completeChanged();
+    });
     connect(ui->m_interestEdit, &AmountEdit::textChanged, this, &QWizardPage::completeChanged);
     connect(ui->m_interestCategoryEdit, &QComboBox::editTextChanged, this, &QWizardPage::completeChanged);
     connect(ui->m_chargesEdit, &AmountEdit::textChanged, this, &QWizardPage::completeChanged);
@@ -58,6 +80,6 @@ bool InterestChargeCheckingsWizardPage::isComplete() const
     if (cnt1 == 1 || cnt2 == 1)
         return false;
 
-    return true;
+    return ui->m_interestDateEdit->isValid() && ui->m_chargesDateEdit->isValid();
 }
 

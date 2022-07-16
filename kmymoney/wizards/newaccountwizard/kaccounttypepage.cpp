@@ -34,7 +34,6 @@
 #include "kguiutils.h"
 #include "khierarchypage.h"
 #include "kmymoneycurrencyselector.h"
-#include "kmymoneydateinput.h"
 #include "kmymoneygeneralcombo.h"
 #include "kmymoneysettings.h"
 #include "kmymoneywizardpage.h"

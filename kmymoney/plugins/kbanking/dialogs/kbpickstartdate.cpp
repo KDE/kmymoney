@@ -24,11 +24,21 @@
 #include <KLocalizedString>
 
 // KMyMoney includes
-#include "kmymoneydateinput.h"
+#include "kmymoneydateedit.h"
+#include "widgethintframe.h"
 
 #include "ui_kbpickstartdate.h"
 
 struct KBPickStartDate::Private {
+    void updateButtonState(const QDate& date)
+    {
+        if (date.isValid()) {
+            WidgetHintFrame::hide(ui.pickDateEdit);
+        } else {
+            WidgetHintFrame::show(ui.pickDateEdit, i18nc("@info:tooltip", "The date is invalid."));
+        }
+    }
+
     Ui::KBPickStartDate ui;
     KBankingExt *banking;
     QDate firstPossible;
@@ -53,6 +63,11 @@ KBPickStartDate::KBPickStartDate(KBankingExt* qb,
     d->banking = qb;
 
     connect(d->ui.buttonBox, &QDialogButtonBox::helpRequested, this, &KBPickStartDate::slotHelpClicked);
+
+    /// @todo implement online help
+    // since we did not fully implement the help, we better hide it for now
+    d->ui.buttonBox->button(QDialogButtonBox::Help)->hide();
+
     d->ui.label->setText(i18n("<qt><p>Please select the first date for which transactions are to be retrieved from <b>%1</b>.</p><p>If you specify no date then the bank will choose one.</p></qt>", accountName));
 
     if (lastUpdate.isValid()) {
@@ -94,7 +109,24 @@ KBPickStartDate::KBPickStartDate(KBankingExt* qb,
         break;
     }
 
-    d->ui.pickDateEdit->setDate(QDate::currentDate());
+    auto frameCollection = new WidgetHintFrameCollection(this);
+    frameCollection->addFrame(new WidgetHintFrame(d->ui.pickDateEdit));
+    frameCollection->addWidget(d->ui.buttonBox->button(QDialogButtonBox::Ok));
+
+    connect(d->ui.pickDateEdit, &KMyMoneyDateEdit::dateValidityChanged, this, [&](const QDate& date) {
+        if (d->ui.pickDateButton->isChecked()) {
+            d->updateButtonState(date);
+        }
+    });
+
+    connect(d->ui.pickDateButton, &QRadioButton::toggled, this, [&](bool selected) {
+        if (selected) {
+            d->updateButtonState(d->ui.pickDateEdit->date());
+        } else {
+            // this will remove the widget hint frame and enable the OK button
+            d->updateButtonState(QDate::currentDate());
+        }
+    });
 
     d->ui.buttonGroup->setFocus();
 }

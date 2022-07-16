@@ -20,6 +20,7 @@ class MyMoneyTransaction;
 class SplitModel;
 class QAbstractButton;
 class QAbstractItemModel;
+class WidgetHintFrameCollection;
 
 class TransactionEditorBase : public QWidget
 {
@@ -39,6 +40,13 @@ public:
 
     virtual void setReadOnly(bool readOnly);
     bool isReadOnly() const;
+
+    /**
+     * This method is used to embed the transaction editor in other dialogs
+     * e.g. KEditScheduleDlg. If the editor does not have a WidgetHintFrameCollection
+     * then @c nullptr is returned. This is the default implementation.
+     */
+    virtual WidgetHintFrameCollection* widgetHintFrameCollection() const;
 
 public Q_SLOTS:
     virtual void slotSettingsChanged()

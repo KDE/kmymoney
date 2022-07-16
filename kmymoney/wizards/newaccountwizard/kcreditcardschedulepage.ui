@@ -114,7 +114,7 @@
               </widget>
             </item>
             <item row="3" column="1">
-              <widget class="KMyMoneyDateInput" name="m_date">
+              <widget class="KMyMoneyDateEdit" name="m_date">
                 <property name="focusPolicy">
                   <enum>Qt::StrongFocus</enum>
                 </property>
@@ -201,7 +201,12 @@ from account</string>
     <customwidget>
       <class>AmountEdit</class>
       <extends>QLineEdit</extends>
-      <header location="global">amountedit.h</header>
+      <header>amountedit.h</header>
+    </customwidget>
+    <customwidget>
+      <class>KMyMoneyDateEdit</class>
+      <extends>KDateComboBox</extends>
+      <header>kmymoneydateedit.h</header>
     </customwidget>
   </customwidgets>
 </ui>

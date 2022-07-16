@@ -30,11 +30,13 @@ public:
 
 protected Q_SLOTS:
     void slotChooseLogPath();
-    void slotLoadStartDate(const QDate&);
     void slotUpdateLogTypes();
 
 protected:
     void showEvent(QShowEvent* event) override;
+
+Q_SIGNALS:
+    void haveValidInput(bool valid);
 
 private:
     KSettingsGeneralPrivate * const d_ptr;

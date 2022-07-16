@@ -98,7 +98,7 @@ public:
         // should be recorded and none have been made so far.
 
         //FIXME: port
-        ui->m_firstPaymentPage->ui->m_firstDueDateEdit->loadDate(QDate(QDate::currentDate().year(), QDate::currentDate().month(), 30));
+        ui->m_firstPaymentPage->ui->m_firstDueDateEdit->setDate(QDate(QDate::currentDate().year(), QDate::currentDate().month(), 30));
 
         // FIXME: we currently only support interest calculation on reception
         m_pages.clearBit(KNewLoanWizard::Page_InterestCalculation);

@@ -61,7 +61,7 @@
       </widget>
      </item>
      <item>
-      <widget class="KMyMoneyDateInput" name="m_fromDate" native="true"/>
+      <widget class="KMyMoneyDateEdit" name="m_fromDate"/>
      </item>
      <item>
       <widget class="QLabel" name="label">
@@ -71,30 +71,16 @@
       </widget>
      </item>
      <item>
-      <widget class="KMyMoneyDateInput" name="m_toDate" native="true"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout">
-     <item>
-      <widget class="QPushButton" name="btnConfigure">
-       <property name="text">
-        <string>Configure</string>
-       </property>
-      </widget>
+      <widget class="KMyMoneyDateEdit" name="m_toDate"/>
      </item>
      <item>
-      <spacer name="spacer3_2">
+      <spacer name="horizontalSpacer_2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Expanding</enum>
-       </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>21</width>
+         <width>40</width>
          <height>20</height>
         </size>
        </property>
@@ -173,6 +159,9 @@
       </item>
       <item>
        <widget class="KTextEdit" name="lbStatus">
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
         <property name="readOnly">
          <bool>true</bool>
         </property>
@@ -187,7 +176,7 @@
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::RestoreDefaults</set>
      </property>
     </widget>
    </item>
@@ -201,12 +190,26 @@
    <header>ktextedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KMyMoneyDateInput</class>
-   <extends>QWidget</extends>
-   <header>kmymoneydateinput.h</header>
+   <class>KDateComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kdatecombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyDateEdit</class>
+   <extends>KDateComboBox</extends>
+   <header>kmymoneydateedit.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>lvEquityList</tabstop>
+  <tabstop>m_fromDate</tabstop>
+  <tabstop>m_toDate</tabstop>
+  <tabstop>btnUpdateAll</tabstop>
+  <tabstop>btnUpdateSelected</tabstop>
+  <tabstop>lbStatus</tabstop>
+  <tabstop>closeStatusButton</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

@@ -40,7 +40,7 @@
       <widget class="QCheckBox" name="m_showSTLTCapitalGains"/>
      </item>
      <item row="3" column="1">
-      <widget class="KMyMoneyDateInput" name="m_termSeparator" native="true">
+      <widget class="KMyMoneyDateEdit" name="m_termSeparator" native="true">
        <property name="toolTip">
         <string>Before this date investments are counted as long-term investments.</string>
        </property>
@@ -126,9 +126,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KMyMoneyDateInput</class>
-   <extends>QWidget</extends>
-   <header>kmymoneydateinput.h</header>
+   <class>KMyMoneyDateEdit</class>
+   <extends>KDateComboBox</extends>
+   <header>kmymoneydateedit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

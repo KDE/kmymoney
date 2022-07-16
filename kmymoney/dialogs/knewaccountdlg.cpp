@@ -36,7 +36,6 @@
 #include "accountsproxymodel.h"
 #include "columnselector.h"
 #include "kmymoneycurrencyselector.h"
-#include "kmymoneydateinput.h"
 #include "kmymoneysettings.h"
 #include "knewinstitutiondlg.h"
 #include "mymoneyaccount.h"

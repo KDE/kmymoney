@@ -73,7 +73,7 @@ Select the date when the interest rate for this loan will be modified and the fr
           </layout>
         </item>
         <item row="0" column="1">
-          <widget class="KMyMoneyDateInput" name="m_interestChangeDateEdit"/>
+          <widget class="KMyMoneyDateEdit" name="m_interestChangeDateEdit"/>
         </item>
         <item row="1" column="0">
           <widget class="QLabel" name="TextLabel2">
@@ -108,6 +108,11 @@ Select the date when the interest rate for this loan will be modified and the fr
  <resources/>
  <connections/>
  <customwidgets>
+  <customwidget>
+   <class>KMyMoneyDateEdit</class>
+   <extends>KDateComboBox</extends>
+   <header>kmymoneydateedit.h</header>
+  </customwidget>
   <customwidget>
    <class>KMyMoneyGeneralCombo</class>
    <extends>QWidget</extends>

@@ -22,6 +22,7 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void slotPluginsChanged(bool changed);
+    void slotEnableFinishButton(bool enable);
 };
 
 

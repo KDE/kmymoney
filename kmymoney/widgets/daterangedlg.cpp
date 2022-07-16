@@ -15,9 +15,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneytransactionfilter.h"
 #include "mymoneyenums.h"
-#include "kmymoneydateinput.h"
+#include "mymoneytransactionfilter.h"
+#include "widgethintframe.h"
 
 #include "ui_daterangedlg.h"
 
@@ -29,9 +29,10 @@ class DateRangeDlgPrivate
     Q_DECLARE_PUBLIC(DateRangeDlg)
 
 public:
-    explicit DateRangeDlgPrivate(DateRangeDlg *qq) :
-        q_ptr(qq),
-        ui(new Ui::DateRangeDlg)
+    explicit DateRangeDlgPrivate(DateRangeDlg* qq)
+        : q_ptr(qq)
+        , ui(new Ui::DateRangeDlg)
+        , m_frameCollection(new WidgetHintFrameCollection(qq))
     {
     }
 
@@ -48,16 +49,47 @@ public:
         }
 
         q->connect(ui->m_dateRange, static_cast<void (KMyMoneyPeriodCombo::*)(int)>(&KMyMoneyPeriodCombo::currentIndexChanged), q, &DateRangeDlg::slotDateRangeSelectedByUser);
-        q->connect(ui->m_fromDate, &KMyMoneyDateInput::dateChanged, q, &DateRangeDlg::slotDateChanged);
-        q->connect(ui->m_toDate, &KMyMoneyDateInput::dateChanged, q, &DateRangeDlg::slotDateChanged);
 
         q->setDateRange(TransactionFilter::Date::All);
+
+        m_frameCollection->addFrame(new WidgetHintFrame(ui->m_fromDate));
+        m_frameCollection->addFrame(new WidgetHintFrame(ui->m_toDate));
     }
 
-    DateRangeDlg     *q_ptr;
+    void updateFrameStates()
+    {
+        WidgetHintFrame::hide(ui->m_fromDate);
+        WidgetHintFrame::hide(ui->m_toDate);
+        if (!ui->m_fromDate->isValid()) {
+            WidgetHintFrame::show(ui->m_fromDate, i18nc("@info:tooltip", "The date is invalid."));
+        }
+        if (!ui->m_toDate->isValid()) {
+            WidgetHintFrame::show(ui->m_toDate, i18nc("@info:tooltip", "The date is invalid."));
+        }
+        if (ui->m_fromDate->date().isValid() && (ui->m_fromDate->date() > ui->m_toDate->date())) {
+            WidgetHintFrame::show(ui->m_fromDate,
+                                  i18nc("@info:tooltip Date range error",
+                                        "The date provided as start lies past the one provided for the end of the search. This will result in an empty set."));
+        }
+    }
+
+    void changingDatesAdjustsRangeSelector(bool adjust)
+    {
+        Q_Q(DateRangeDlg);
+        if (adjust) {
+            q->connect(ui->m_fromDate, &KMyMoneyDateEdit::dateChanged, q, &DateRangeDlg::slotDateChanged, Qt::UniqueConnection);
+            q->connect(ui->m_toDate, &KMyMoneyDateEdit::dateChanged, q, &DateRangeDlg::slotDateChanged, Qt::UniqueConnection);
+        } else {
+            q->disconnect(ui->m_fromDate, &KMyMoneyDateEdit::dateChanged, q, &DateRangeDlg::slotDateChanged);
+            q->disconnect(ui->m_toDate, &KMyMoneyDateEdit::dateChanged, q, &DateRangeDlg::slotDateChanged);
+        }
+    }
+
+    DateRangeDlg* q_ptr;
     Ui::DateRangeDlg *ui;
-    QDate             m_startDates[(int)eMyMoney::TransactionFilter::Date::LastDateItem];
-    QDate             m_endDates[(int)eMyMoney::TransactionFilter::Date::LastDateItem];
+    WidgetHintFrameCollection* m_frameCollection;
+    QDate m_startDates[(int)eMyMoney::TransactionFilter::Date::LastDateItem];
+    QDate m_endDates[(int)eMyMoney::TransactionFilter::Date::LastDateItem];
 };
 
 DateRangeDlg::DateRangeDlg(QWidget *parent) :
@@ -66,7 +98,18 @@ DateRangeDlg::DateRangeDlg(QWidget *parent) :
 {
     Q_D(DateRangeDlg);
     d->ui->setupUi(this);
+    d->ui->m_fromDate->setAllowEmptyDate(true);
+    d->ui->m_toDate->setAllowEmptyDate(true);
     d->setupDatePage();
+
+    connect(d->ui->m_fromDate, &KMyMoneyDateEdit::dateValidityChanged, [&]() {
+        Q_D(DateRangeDlg);
+        d->updateFrameStates();
+    });
+    connect(d->ui->m_toDate, &KMyMoneyDateEdit::dateValidityChanged, [&]() {
+        Q_D(DateRangeDlg);
+        d->updateFrameStates();
+    });
 }
 
 DateRangeDlg::~DateRangeDlg()
@@ -91,9 +134,10 @@ void DateRangeDlg::slotDateRangeSelectedByUser()
 void DateRangeDlg::setDateRange(const QDate& from, const QDate& to)
 {
     Q_D(DateRangeDlg);
-    d->ui->m_fromDate->loadDate(from);
-    d->ui->m_toDate->loadDate(to);
+    d->ui->m_fromDate->setDate(from);
+    d->ui->m_toDate->setDate(to);
     d->ui->m_dateRange->setCurrentItem(TransactionFilter::Date::UserDefined);
+    d->updateFrameStates();
     emit rangeChanged();
 }
 
@@ -101,22 +145,22 @@ void DateRangeDlg::setDateRange(TransactionFilter::Date idx)
 {
     Q_D(DateRangeDlg);
     d->ui->m_dateRange->setCurrentItem(idx);
+
+    d->changingDatesAdjustsRangeSelector(false);
     switch (idx) {
     case TransactionFilter::Date::All:
-        d->ui->m_fromDate->loadDate(QDate());
-        d->ui->m_toDate->loadDate(QDate());
+        d->ui->m_fromDate->setDate(QDate());
+        d->ui->m_toDate->setDate(QDate());
         break;
     case TransactionFilter::Date::UserDefined:
         break;
     default:
-        d->ui->m_fromDate->blockSignals(true);
-        d->ui->m_toDate->blockSignals(true);
-        d->ui->m_fromDate->loadDate(d->m_startDates[(int)idx]);
-        d->ui->m_toDate->loadDate(d->m_endDates[(int)idx]);
-        d->ui->m_fromDate->blockSignals(false);
-        d->ui->m_toDate->blockSignals(false);
+        d->ui->m_fromDate->setDate(d->m_startDates[(int)idx]);
+        d->ui->m_toDate->setDate(d->m_endDates[(int)idx]);
         break;
     }
+    d->changingDatesAdjustsRangeSelector(true);
+
     emit rangeChanged();
 }
 
@@ -129,9 +173,8 @@ TransactionFilter::Date DateRangeDlg::dateRange() const
 void DateRangeDlg::slotDateChanged()
 {
     Q_D(DateRangeDlg);
-    d->ui->m_dateRange->blockSignals(true);
+    QSignalBlocker blocker(d->ui->m_dateRange);
     d->ui->m_dateRange->setCurrentItem(TransactionFilter::Date::UserDefined);
-    d->ui->m_dateRange->blockSignals(false);
 }
 
 QDate DateRangeDlg::fromDate() const

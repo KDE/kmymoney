@@ -88,10 +88,10 @@ KExportDlg::KExportDlg(QWidget *parent)
     connect(m_profileComboBox, QOverload<int>::of(&KComboBox::activated), this, [&]() {
         checkData();
     });
-    connect(m_kmymoneydateStart, &KMyMoneyDateInput::dateChanged, this, [&]() {
+    connect(m_kmymoneydateStart, &KMyMoneyDateEdit::dateChanged, this, [&]() {
         checkData();
     });
-    connect(m_kmymoneydateEnd, &KMyMoneyDateInput::dateChanged, this, [&]() {
+    connect(m_kmymoneydateEnd, &KMyMoneyDateEdit::dateChanged, this, [&]() {
         checkData();
     });
 
@@ -202,10 +202,10 @@ void KExportDlg::checkData(const QString& accountId)
 
             if (!list.isEmpty()) {
                 it = list.begin();
-                m_kmymoneydateStart->loadDate((*it).postDate());
+                m_kmymoneydateStart->setDate((*it).postDate());
                 it = list.end();
                 --it;
-                m_kmymoneydateEnd->loadDate((*it).postDate());
+                m_kmymoneydateEnd->setDate((*it).postDate());
             }
             m_lastAccount = accountId;
             m_accountComboBox->setSelected(account.id());

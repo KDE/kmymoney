@@ -26,7 +26,6 @@
 
 #include "ui_kgeneralloaninfopage.h"
 
-#include "kmymoneydateinput.h"
 #include "kmymoneypayeecombo.h"
 #include "kmymoneywizardpage.h"
 #include "knewaccountwizard.h"
@@ -72,7 +71,8 @@ GeneralLoanInfoPage::GeneralLoanInfoPage(Wizard* wizard) :
     connect(d->ui->m_recordings, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
 
     connect(d->ui->m_interestType, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), object(),  &KMyMoneyWizardPagePrivate::completeStateChanged);
-    connect(d->ui->m_interestChangeDateEdit, &KMyMoneyDateInput::dateChanged, object(),  &KMyMoneyWizardPagePrivate::completeStateChanged);
+    connect(d->ui->m_interestChangeDateEdit, &KMyMoneyDateEdit::dateChanged, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
+    connect(d->ui->m_interestChangeDateEdit, &KMyMoneyDateEdit::dateValidityChanged, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
     connect(d->ui->m_openingBalance, &AmountEdit::textChanged, object(),  &KMyMoneyWizardPagePrivate::completeStateChanged);
 
     connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &GeneralLoanInfoPage::slotLoadWidgets);

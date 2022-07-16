@@ -96,7 +96,7 @@ If this loan is a 'consumer loan' (money to use however you want), you can use a
           </widget>
         </item>
         <item>
-          <widget class="KMyMoneyDateInput" name="m_paymentDate"/>
+          <widget class="KMyMoneyDateEdit" name="m_paymentDate"/>
         </item>
       </layout>
     </item>
@@ -121,6 +121,11 @@ If this loan is a 'consumer loan' (money to use however you want), you can use a
  <resources/>
  <connections/>
  <customwidgets>
+  <customwidget>
+   <class>KMyMoneyDateEdit</class>
+   <extends>KDateComboBox</extends>
+   <header>kmymoneydateedit.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
  </tabstops>

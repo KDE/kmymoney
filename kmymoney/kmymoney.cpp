@@ -112,6 +112,7 @@
 #include "specialdatesmodel.h"
 #include "widgets/amountedit.h"
 #include "widgets/kmymoneyaccountselector.h"
+#include "widgets/kmymoneydateedit.h"
 #include "widgets/kmymoneymvccombo.h"
 #include "widgets/kmymoneypayeecombo.h"
 #include "wizards/endingbalancedlg/kendingbalancedlg.h"
@@ -3402,6 +3403,18 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
         d->m_myMoneyView->setOnlinePlugins(&pPlugins.online);
         d->updateActions(d->m_selections);
         return;
+    }
+
+    switch (KMyMoneySettings::initialDateFieldCursorPosition()) {
+    case KMyMoneySettings::Day:
+        KMyMoneyDateEdit().setInitialSection(QDateTimeEdit::DaySection);
+        break;
+    case KMyMoneySettings::Month:
+        KMyMoneyDateEdit().setInitialSection(QDateTimeEdit::MonthSection);
+        break;
+    case KMyMoneySettings::Year:
+        KMyMoneyDateEdit().setInitialSection(QDateTimeEdit::YearSection);
+        break;
     }
 
     MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());

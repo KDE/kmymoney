@@ -121,7 +121,7 @@
               </widget>
              </item>
              <item>
-              <widget class="KMyMoneyDateInput" name="m_interestDateEdit"/>
+              <widget class="KMyMoneyDateEdit" name="m_interestDateEdit"/>
              </item>
             </layout>
            </item>
@@ -157,7 +157,7 @@
               </widget>
              </item>
              <item>
-              <widget class="KMyMoneyDateInput" name="m_chargesDateEdit"/>
+              <widget class="KMyMoneyDateEdit" name="m_chargesDateEdit"/>
              </item>
             </layout>
            </item>
@@ -214,7 +214,7 @@
   <customwidget>
    <class>AmountEdit</class>
    <extends>QLineEdit</extends>
-   <header location="global">amountedit.h</header>
+   <header>amountedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

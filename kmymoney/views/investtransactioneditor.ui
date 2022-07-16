@@ -66,12 +66,6 @@
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
       <widget class="KMyMoneyDateEdit" name="dateEdit">
-       <property name="displayFormat">
-        <string notr="true">M/d/yy</string>
-       </property>
-       <property name="calendarPopup">
-        <bool>true</bool>
-       </property>
        <property name="kmm_taborder" stdset="0">
         <bool>true</bool>
        </property>
@@ -416,7 +410,7 @@
   </customwidget>
   <customwidget>
    <class>KMyMoneyDateEdit</class>
-   <extends>QDateEdit</extends>
+   <extends>KDateComboBox</extends>
    <header>kmymoneydateedit.h</header>
   </customwidget>
   <customwidget>

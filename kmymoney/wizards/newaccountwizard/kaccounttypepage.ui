@@ -148,7 +148,7 @@ Use the liability account type to manage any type of liability except amortizati
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="KMyMoneyDateInput" name="m_openingDate">
+      <widget class="KMyMoneyDateEdit" name="m_openingDate">
        <property name="focusPolicy">
         <enum>Qt::StrongFocus</enum>
        </property>
@@ -280,9 +280,9 @@ Use the liability account type to manage any type of liability except amortizati
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KMyMoneyDateInput</class>
-   <extends>QFrame</extends>
-   <header>kmymoneydateinput.h</header>
+   <class>KMyMoneyDateEdit</class>
+   <extends>KDateComboBox</extends>
+   <header>kmymoneydateedit.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyCurrencySelector</class>

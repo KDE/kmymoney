@@ -34,7 +34,6 @@
 #include "icons.h"
 #include "kmymoneyaccountselector.h"
 #include "kmymoneycategory.h"
-#include "kmymoneydateinput.h"
 #include "kmymoneywizardpage.h"
 #include "knewaccountwizard.h"
 #include "knewaccountwizard_p.h"

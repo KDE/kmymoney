@@ -35,7 +35,7 @@
 #include "keditloanwizard.h"
 #include "kguiutils.h"
 #include "kmymoneyaccountcombo.h"
-#include "kmymoneydateinput.h"
+#include "kmymoneydateedit.h"
 #include "kmymoneylineedit.h"
 #include "kmymoneymvccombo.h"
 #include "kmymoneysettings.h"
@@ -53,13 +53,16 @@
 #include "mymoneytransaction.h"
 #include "newtransactioneditor.h"
 #include "widgetenums.h"
+#include "widgethintframe.h"
 
 #include "ui_keditscheduledlg.h"
 
 using namespace eMyMoney;
 
-class KEditScheduleDlgPrivate
+class KEditScheduleDlgPrivate : public QObject
 {
+    Q_OBJECT
+
     Q_DISABLE_COPY(KEditScheduleDlgPrivate)
     Q_DECLARE_PUBLIC(KEditScheduleDlg)
 
@@ -68,7 +71,9 @@ public:
         : q_ptr(qq)
         , ui(new Ui::KEditScheduleDlg)
         , tabOrderUi(nullptr)
-        , m_requiredFields(nullptr)
+        , m_frameCollection(nullptr)
+        , m_accountCombo(nullptr)
+        , m_categoryCombo(nullptr)
         , transactionEditor(nullptr)
     {
     }
@@ -90,30 +95,57 @@ public:
         transactionEditor->setShowButtons(false);
         transactionEditor->layout()->setMargin(0);
 
-        m_requiredFields = new KMandatoryFieldGroup(q);
-        m_requiredFields->setOkButton(ui->buttonBox->button(QDialogButtonBox::Ok)); // button to be enabled when all fields present
+        m_frameCollection = new WidgetHintFrameCollection(q);
+        m_frameCollection->addWidget(ui->buttonBox->button(QDialogButtonBox::Ok));
+        m_frameCollection->addFrame(new WidgetHintFrame(ui->nameEdit));
+        connect(ui->nameEdit, &KLineEdit::textChanged, this, [&]() {
+            updateState();
+        });
+
+        // also forward the state of the editor's widgets
+        m_frameCollection->chainFrameCollection(transactionEditor->widgetHintFrameCollection());
 
         transactionEditor->setShowNumberWidget(true);
+    }
 
-        // add the required fields to the mandatory group
-        m_requiredFields->add(ui->nameEdit);
+    void updateState()
+    {
+        WidgetHintFrame::hide(ui->nameEdit);
+        WidgetHintFrame::hide(m_accountCombo);
+        WidgetHintFrame::hide(m_categoryCombo);
+
+        if (ui->nameEdit->text().isEmpty()) {
+            WidgetHintFrame::show(ui->nameEdit, i18nc("@info:tooltip", "The name is a required field for a schedule"));
+        }
+        if (m_accountCombo && m_accountCombo->getSelected().isEmpty()) {
+            WidgetHintFrame::show(m_accountCombo, i18nc("@info:tooltip", "The account is a required field for a schedule"));
+        }
+        if (m_categoryCombo && m_categoryCombo->getSelected().isEmpty()) {
+            WidgetHintFrame::show(m_categoryCombo, i18nc("@info:tooltip", "The category is a required field for a schedule"));
+        }
     }
 
     void loadWidgets()
     {
         Q_Q(KEditScheduleDlg);
-        auto accountCombo = transactionEditor->findChild<KMyMoneyAccountCombo*>(QLatin1String("accountCombo"));
-        if (accountCombo) {
-            m_requiredFields->add(accountCombo);
+        m_accountCombo = transactionEditor->findChild<KMyMoneyAccountCombo*>(QLatin1String("accountCombo"));
+        if (m_accountCombo) {
+            m_frameCollection->addFrame(new WidgetHintFrame(m_accountCombo));
+            connect(m_accountCombo, &KMyMoneyAccountCombo::accountSelected, this, [&]() {
+                updateState();
+            });
         }
         const auto account = m_schedule.account();
         if (!account.id().isEmpty()) {
-            accountCombo->setSelected(account.id());
+            m_accountCombo->setSelected(account.id());
         }
 
-        accountCombo = transactionEditor->findChild<KMyMoneyAccountCombo*>(QLatin1String("categoryCombo"));
-        if (accountCombo) {
-            m_requiredFields->add(accountCombo);
+        m_categoryCombo = transactionEditor->findChild<KMyMoneyAccountCombo*>(QLatin1String("categoryCombo"));
+        if (m_categoryCombo) {
+            m_frameCollection->addFrame(new WidgetHintFrame(m_categoryCombo));
+            connect(m_categoryCombo, &KMyMoneyAccountCombo::accountSelected, this, [&]() {
+                updateState();
+            });
         }
 
         transactionEditor->loadSchedule(m_schedule);
@@ -242,7 +274,9 @@ public:
     KEditScheduleDlg* q_ptr;
     Ui::KEditScheduleDlg* ui;
     Ui::KEditScheduleDlg* tabOrderUi;
-    KMandatoryFieldGroup* m_requiredFields;
+    WidgetHintFrameCollection* m_frameCollection;
+    KMyMoneyAccountCombo* m_accountCombo;
+    KMyMoneyAccountCombo* m_categoryCombo;
     NewTransactionEditor* transactionEditor;
     MyMoneySchedule m_schedule;
     QWidgetList m_tabOrderWidgets;
@@ -270,7 +304,7 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
         d->ui->finalPaymentDateEdit->setDate(d->m_schedule.dateAfter(value));
     });
 
-    connect(d->ui->finalPaymentDateEdit, &KMyMoneyDateInput::dateChanged, this, [&](const QDate& date) {
+    connect(d->ui->finalPaymentDateEdit, &KMyMoneyDateEdit::dateChanged, this, [&](const QDate& date) {
         Q_D(KEditScheduleDlg);
         // Make sure the required fields are set
         d->m_schedule.setNextDueDate(d->transactionEditor->postDate());
@@ -367,6 +401,9 @@ KEditScheduleDlg::KEditScheduleDlg(const MyMoneySchedule& schedule, QWidget* par
         connect(d->ui->lastDayInMonthOption, &QCheckBox::stateChanged, dateEdit, &QWidget::setDisabled);
         dateEdit->setDisabled(d->ui->lastDayInMonthOption->isChecked());
     }
+
+    // update the widget hint frames
+    d->updateState();
 
     // we delay setting up the tab order until we drop back to the event loop.
     // this will make sure that all widgets are visible and the tab order logic
@@ -502,7 +539,6 @@ void KEditScheduleDlg::newSchedule(const MyMoneyTransaction& _t, eMyMoney::Sched
     do {
         committed = true;
         QPointer<KEditScheduleDlg> dlg = new KEditScheduleDlg(schedule, nullptr);
-        // QPointer<TransactionEditor> transactionEditor = dlg->startEdit();
         KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
         if (dlg->exec() == QDialog::Accepted && dlg != 0) {
             MyMoneyFileTransaction ft;
@@ -612,7 +648,7 @@ void KEditScheduleDlg::keyPressEvent(QKeyEvent* event)
             }
             const QStringList buttonNames{QLatin1String("enterButton"), QLatin1String("cancelButton")};
             for (const auto& widgetName : buttonNames) {
-                auto w = tabOrderDialog->findChild<QWidget*>(widgetName);
+                w = tabOrderDialog->findChild<QWidget*>(widgetName);
                 if (w) {
                     w->setVisible(false);
                 }
@@ -687,3 +723,5 @@ bool KEditScheduleDlg::focusNextPrevChild(bool next)
     }
     return rc;
 }
+
+#include "keditscheduledlg.moc"

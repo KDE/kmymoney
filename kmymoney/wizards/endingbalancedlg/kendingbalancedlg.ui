@@ -50,9 +50,9 @@
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>KMyMoneyDateInput</class>
-   <extends>QFrame</extends>
-   <header>kmymoneydateinput.h</header>
+   <class>KMyMoneyDateEdit</class>
+   <extends>KDateComboBox</extends>
+   <header>kmymoneydateedit.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyCategory</class>
@@ -62,7 +62,7 @@
   <customwidget>
    <class>AmountEdit</class>
    <extends>QLineEdit</extends>
-   <header location="global">amountedit.h</header>
+   <header>amountedit.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyPayeeCombo</class>

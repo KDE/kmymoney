@@ -44,6 +44,7 @@
 #include "mymoneyprice.h"
 #include "mymoneysecurity.h"
 #include "webpricequote.h"
+#include "widgethintframe.h"
 
 #define WEBID_COL       0
 #define NAME_COL        1
@@ -94,8 +95,6 @@ public:
         ui->lvEquityList->setSelectionMode(QAbstractItemView::MultiSelection);
         ui->lvEquityList->setAllColumnsShowFocus(true);
 
-        ui->btnUpdateAll->setEnabled(false);
-
         ui->closeStatusButton->setIcon(Icons::get(Icons::Icon::DialogClose));
         q->connect(ui->closeStatusButton, &QToolButton::clicked, ui->statusContainer, &QWidget::hide);
 
@@ -131,7 +130,6 @@ public:
                 const MyMoneyPriceEntries& entries = (*it_price);
                 if (entries.count() > 0 && entries.begin().key() <= QDate::currentDate()) {
                     addPricePair(pair, false);
-                    ui->btnUpdateAll->setEnabled(true);
                 }
             }
         }
@@ -147,7 +145,6 @@ public:
                     && !(*it).value("kmm-online-source").isEmpty()
                ) {
                 addInvestment(*it);
-                ui->btnUpdateAll->setEnabled(true);
             }
         }
 
@@ -159,23 +156,19 @@ public:
         q->connect(ui->btnUpdateSelected, &QAbstractButton::clicked, q, &KEquityPriceUpdateDlg::slotUpdateSelectedClicked);
         q->connect(ui->btnUpdateAll, &QAbstractButton::clicked, q, &KEquityPriceUpdateDlg::slotUpdateAllClicked);
 
-        q->connect(ui->m_fromDate, &KMyMoneyDateInput::dateChanged, q, &KEquityPriceUpdateDlg::slotDateChanged);
-        q->connect(ui->m_toDate, &KMyMoneyDateInput::dateChanged, q, &KEquityPriceUpdateDlg::slotDateChanged);
+        q->connect(ui->m_fromDate, &KMyMoneyDateEdit::dateChanged, q, &KEquityPriceUpdateDlg::slotDateChanged);
+        q->connect(ui->m_toDate, &KMyMoneyDateEdit::dateChanged, q, &KEquityPriceUpdateDlg::slotDateChanged);
 
-        q->connect(&m_webQuote, &WebPriceQuote::csvquote,
-                   q, &KEquityPriceUpdateDlg::slotReceivedCSVQuote);
-        q->connect(&m_webQuote, &WebPriceQuote::quote,
-                   q, &KEquityPriceUpdateDlg::slotReceivedQuote);
-        q->connect(&m_webQuote, &WebPriceQuote::failed,
-                   q, &KEquityPriceUpdateDlg::slotQuoteFailed);
-        q->connect(&m_webQuote, &WebPriceQuote::status,
-                   q, &KEquityPriceUpdateDlg::logStatusMessage);
-        q->connect(&m_webQuote, &WebPriceQuote::error,
-                   q, &KEquityPriceUpdateDlg::logErrorMessage);
+        q->connect(&m_webQuote, &WebPriceQuote::csvquote, q, &KEquityPriceUpdateDlg::slotReceivedCSVQuote);
+        q->connect(&m_webQuote, &WebPriceQuote::quote, q, &KEquityPriceUpdateDlg::slotReceivedQuote);
+        q->connect(&m_webQuote, &WebPriceQuote::failed, q, &KEquityPriceUpdateDlg::slotQuoteFailed);
+        q->connect(&m_webQuote, &WebPriceQuote::status, q, &KEquityPriceUpdateDlg::logStatusMessage);
+        q->connect(&m_webQuote, &WebPriceQuote::error, q, &KEquityPriceUpdateDlg::logErrorMessage);
 
         q->connect(ui->lvEquityList, &QTreeWidget::itemSelectionChanged, q, &KEquityPriceUpdateDlg::slotUpdateSelection);
 
-        q->connect(ui->btnConfigure, &QAbstractButton::clicked, q, &KEquityPriceUpdateDlg::slotConfigureClicked);
+        ui->buttonBox->button(QDialogButtonBox::RestoreDefaults)->setText(i18nc("@action:button Configuration of price update", "Configure"));
+        q->connect(ui->buttonBox->button(QDialogButtonBox::RestoreDefaults), &QAbstractButton::clicked, q, &KEquityPriceUpdateDlg::slotConfigureClicked);
 
         if (!securityId.isEmpty()) {
             ui->btnUpdateSelected->hide();
@@ -187,10 +180,7 @@ public:
 
         // Hide OK button until we have received the first update
         ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
-        if (ui->lvEquityList->invisibleRootItem()->childCount() == 0) {
-            ui->btnUpdateAll->setEnabled(false);
-        }
-        q->slotUpdateSelection();
+        updateButtonState();
 
         // previous versions of this dialog allowed to store a "Don't ask again" switch.
         // Since we don't support it anymore, we just get rid of it
@@ -204,6 +194,20 @@ public:
             m_updatingPricePolicy = eDialogs::UpdatePrice::Missing;
         else
             m_updatingPricePolicy = static_cast<eDialogs::UpdatePrice>(policyValue);
+    }
+
+    void updateButtonState()
+    {
+        if (ui->m_fromDate->date().isValid() && ui->m_toDate->date().isValid()) {
+            // Only enable the update all button if there is an item in the list
+            ui->btnUpdateAll->setEnabled(ui->lvEquityList->invisibleRootItem()->childCount() > 0);
+            // Only enable the update button if there is a selection
+            ui->btnUpdateSelected->setEnabled(!ui->lvEquityList->selectedItems().empty());
+        } else {
+            // upon invalid date, disable all buttons
+            ui->btnUpdateAll->setEnabled(false);
+            ui->btnUpdateSelected->setEnabled(false);
+        }
     }
 
     void addPricePair(const MyMoneySecurityPair& pair, bool dontCheckExistance)
@@ -337,6 +341,30 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
 {
     Q_D(KEquityPriceUpdateDlg);
     d->init(securityId);
+
+    auto decorateEditWidget = [&](const QDate& date, QWidget* widget) {
+        if (widget) {
+            WidgetHintFrame::hide(widget, QString());
+            if (!date.isValid()) {
+                WidgetHintFrame::show(widget, i18nc("@info:tooltip", "The date is invalid."));
+            }
+        }
+    };
+
+    auto frameCollection = new WidgetHintFrameCollection(this);
+    frameCollection->addFrame(new WidgetHintFrame(d->ui->m_fromDate));
+    frameCollection->addFrame(new WidgetHintFrame(d->ui->m_toDate));
+
+    connect(d->ui->m_fromDate, &KMyMoneyDateEdit::dateValidityChanged, this, [&](const QDate& date) {
+        Q_D(KEquityPriceUpdateDlg);
+        decorateEditWidget(date, qobject_cast<QWidget*>(sender()));
+        d->updateButtonState();
+    });
+    connect(d->ui->m_toDate, &KMyMoneyDateEdit::dateValidityChanged, this, [&](const QDate& date) {
+        Q_D(KEquityPriceUpdateDlg);
+        decorateEditWidget(date, qobject_cast<QWidget*>(sender()));
+        d->updateButtonState();
+    });
 }
 
 KEquityPriceUpdateDlg::~KEquityPriceUpdateDlg()
@@ -450,11 +478,7 @@ void KEquityPriceUpdateDlg::slotConfigureClicked()
 void KEquityPriceUpdateDlg::slotUpdateSelection()
 {
     Q_D(KEquityPriceUpdateDlg);
-    // Only enable the update button if there is a selection
-    d->ui->btnUpdateSelected->setEnabled(false);
-
-    if (! d->ui->lvEquityList->selectedItems().empty())
-        d->ui->btnUpdateSelected->setEnabled(true);
+    d->updateButtonState();
 }
 
 void KEquityPriceUpdateDlg::slotUpdateSelectedClicked()

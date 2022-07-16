@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget2">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -459,9 +459,6 @@ Set it to 0 to turn the feature off.</string>
              </widget>
             </item>
             <item>
-             <widget class="KMyMoneyDateInput" name="m_startDateEdit"/>
-            </item>
-            <item>
              <widget class="KMyMoneyDateEdit" name="kcfg_StartDate"/>
             </item>
             <item>
@@ -646,14 +643,8 @@ Set it to 0 to turn the feature off.</string>
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KMyMoneyDateInput</class>
-   <extends>QFrame</extends>
-   <header>kmymoneydateinput.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>KMyMoneyDateEdit</class>
-   <extends>QDateEdit</extends>
+   <extends>KDateComboBox</extends>
    <header>kmymoneydateedit.h</header>
   </customwidget>
  </customwidgets>

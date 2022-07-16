@@ -280,9 +280,6 @@
           </item>
           <item>
            <widget class="KMyMoneyDateEdit" name="m_dateEdit">
-            <property name="calendarPopup">
-             <bool>true</bool>
-            </property>
            </widget>
           </item>
          </layout>
@@ -353,7 +350,7 @@ xx</string>
   </customwidget>
   <customwidget>
    <class>KMyMoneyDateEdit</class>
-   <extends>QDateEdit</extends>
+   <extends>KDateComboBox</extends>
    <header>kmymoneydateedit.h</header>
   </customwidget>
  </customwidgets>

@@ -13,6 +13,7 @@
 
 #include <QFrame>
 class QWidget;
+class QMetaMethod;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -80,8 +81,21 @@ public:
     void addWidget(QWidget* w);
     void removeWidget(QWidget* w);
 
+    /**
+     * Connect the @a chainedCollection so that its result affects this
+     * collection. Only one collection can be chained.
+     *
+     * @returns true if the connection was setup correctly.
+     */
+    bool chainFrameCollection(WidgetHintFrameCollection* chainedCollection);
+
+protected:
+    void connectNotify(const QMetaMethod& signal) override;
+
 protected Q_SLOTS:
+    virtual void unchainFrameCollection();
     virtual void frameDestroyed(QObject* o);
+    virtual void changeChainedCollectionState(bool valid);
     virtual void updateWidgets();
 
 Q_SIGNALS:

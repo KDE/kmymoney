@@ -20,6 +20,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+class WidgetHintFrameCollection;
+
 namespace eMyMoney {
 namespace TransactionFilter {
 enum class Date;
@@ -54,6 +56,8 @@ public:
 
     QDate fromDate() const;
     QDate toDate() const;
+
+    WidgetHintFrameCollection* widgetHintFrameCollection() const;
 
 public Q_SLOTS:
     void slotReset();

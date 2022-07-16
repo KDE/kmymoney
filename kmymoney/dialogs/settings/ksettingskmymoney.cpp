@@ -62,6 +62,15 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
     connect(defaultButton, &QPushButton::clicked, pluginsPage, &KSettingsPlugins::slotResetToDefaults);
     connect(pluginsPage, &KSettingsPlugins::changed, this, &KSettingsKMyMoney::slotPluginsChanged);
     connect(pluginsPage, &KSettingsPlugins::settingsChanged, this, &KConfigDialog::settingsChanged);
+    connect(generalPage, &KSettingsGeneral::haveValidInput, this, &KSettingsKMyMoney::slotEnableFinishButton);
+}
+
+void KSettingsKMyMoney::slotEnableFinishButton(bool enable)
+{
+    auto b = button(QDialogButtonBox::Apply);
+    b->setEnabled(enable);
+    b = button(QDialogButtonBox::Ok);
+    b->setEnabled(enable);
 }
 
 void KSettingsKMyMoney::slotPluginsChanged(bool changed)

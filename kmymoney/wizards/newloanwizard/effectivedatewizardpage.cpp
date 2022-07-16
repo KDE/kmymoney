@@ -30,7 +30,7 @@ EffectiveDateWizardPage::EffectiveDateWizardPage(QWidget *parent)
     // Register the fields with the QWizard and connect the
     // appropriate signals to update the "Next" button correctly
     registerField("effectiveChangeDateEdit", ui->m_effectiveChangeDateEdit, "date", SIGNAL(dateChanged(QDate)));
-    connect(ui->m_effectiveChangeDateEdit, &KMyMoneyDateInput::dateChanged, this, &QWizardPage::completeChanged);
+    connect(ui->m_effectiveChangeDateEdit, &KMyMoneyDateEdit::dateChanged, this, &QWizardPage::completeChanged);
 }
 
 EffectiveDateWizardPage::~EffectiveDateWizardPage()
@@ -51,6 +51,8 @@ void EffectiveDateWizardPage::initializePage()
  */
 bool EffectiveDateWizardPage::isComplete() const
 {
+    if (!ui->m_effectiveChangeDateEdit->isValid())
+        return false;
     return !(ui->m_effectiveChangeDateEdit->date() < qobject_cast<KNewLoanWizard*>(wizard())->account().openingDate()
              || ui->m_effectiveChangeDateEdit->date() > QDate::currentDate());
     return true;

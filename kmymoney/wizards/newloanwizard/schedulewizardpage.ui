@@ -54,7 +54,7 @@ If you selected to record all payments this date has already been supplied. If y
           <widget class="KMyMoneyAccountSelector" name="m_paymentAccountEdit"/>
         </item>
         <item row="0" column="1">
-          <widget class="KMyMoneyDateInput" name="m_nextDueDateEdit"/>
+          <widget class="KMyMoneyDateEdit" name="m_nextDueDateEdit"/>
         </item>
         <item row="0" column="0">
           <widget class="QLabel" name="m_dueLabel">
@@ -102,6 +102,21 @@ If you selected to record all payments this date has already been supplied. If y
  <resources/>
  <connections/>
  <customwidgets>
+  <customwidget>
+   <class>KDateComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kdatecombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyDateEdit</class>
+   <extends>KDateComboBox</extends>
+   <header>kmymoneydateedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyCategory</class>
+   <extends>QWidget</extends>
+   <header>kmymoneycategory.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
  </tabstops>
