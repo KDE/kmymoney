@@ -1426,8 +1426,8 @@ MyMoneyMoney JournalModel::clearedBalance(const QString& accountId, const QDate&
         if (Q_UNLIKELY(!date.isValid()) || Q_LIKELY(journalEntry.transaction().postDate() <= date)) {
             if ((split.accountId() == accountId) && (split.reconcileFlag() != eMyMoney::Split::State::NotReconciled)) {
                 if (journalEntry.transaction().isStockSplit()) {
-                    const auto accountId = journalEntry.split().accountId();
-                    balance = d->stockSplit(accountId, balance, journalEntry.split().shares(), Private::StockSplitForward);
+                    const auto accId = journalEntry.split().accountId();
+                    balance = d->stockSplit(accId, balance, journalEntry.split().shares(), Private::StockSplitForward);
                 } else {
                     balance += journalEntry.split().shares();
                 }
@@ -1464,8 +1464,8 @@ MyMoneyMoney JournalModel::balance(const QString& accountId, const QDate& date) 
                     const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
                     if (journalEntry.split().accountId() == accountId) {
                         if (journalEntry.transaction().isStockSplit()) {
-                            const auto accountId = journalEntry.split().accountId();
-                            balance = d->stockSplit(accountId, balance, journalEntry.split().shares(), Private::StockSplitForward);
+                            const auto accId = journalEntry.split().accountId();
+                            balance = d->stockSplit(accId, balance, journalEntry.split().shares(), Private::StockSplitForward);
                         } else {
                             balance += journalEntry.split().shares();
                         }
@@ -1481,8 +1481,8 @@ MyMoneyMoney JournalModel::balance(const QString& accountId, const QDate& date) 
                     const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
                     if (journalEntry.split().accountId() == accountId) {
                         if (journalEntry.transaction().isStockSplit()) {
-                            const auto accountId = journalEntry.split().accountId();
-                            balance = d->stockSplit(accountId, balance, journalEntry.split().shares(), Private::StockSplitBackward);
+                            const auto accId = journalEntry.split().accountId();
+                            balance = d->stockSplit(accId, balance, journalEntry.split().shares(), Private::StockSplitBackward);
                         } else {
                             balance -= journalEntry.split().shares();
                         }

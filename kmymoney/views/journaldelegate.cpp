@@ -146,15 +146,15 @@ public:
                                 const auto accountId = rowIndex.data(eMyMoney::Model::Roles::JournalSplitAccountIdRole).toString();
                                 const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
                                 const auto account = accountIdx.data(eMyMoney::Model::Roles::AccountFullNameRole).toString();
-                                const auto memo = rowIndex.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
+                                const auto splitMemo = rowIndex.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
                                 QString txt;
                                 QString sep;
                                 if (!account.isEmpty()) {
                                     txt = account;
                                     sep = QStringLiteral(", ");
                                 }
-                                if (!memo.isEmpty()) {
-                                    txt += sep + memo;
+                                if (!splitMemo.isEmpty()) {
+                                    txt += sep + splitMemo;
                                 }
                                 rc.lines << txt;
                             }

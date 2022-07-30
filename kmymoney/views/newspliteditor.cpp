@@ -297,7 +297,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     d->commodity = commodity;
     auto const file = MyMoneyFile::instance();
     auto view = qobject_cast<SplitView*>(parent->parentWidget());
-    Q_ASSERT(view != 0);
+    Q_ASSERT(view != nullptr);
     d->splitModel = qobject_cast<SplitModel*>(view->model());
 
     auto const model = MyMoneyFile::instance()->accountsModel();
@@ -379,10 +379,10 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     QWidget* w(this);
     do {
         w = w->parentWidget();
-        const auto view = qobject_cast<const QTableView*>(w);
-        if (view) {
-            creditColumn = view->horizontalHeader()->visualIndex(creditColumn);
-            debitColumn = view->horizontalHeader()->visualIndex(debitColumn);
+        const auto v = qobject_cast<const QTableView*>(w);
+        if (v) {
+            creditColumn = v->horizontalHeader()->visualIndex(creditColumn);
+            debitColumn = v->horizontalHeader()->visualIndex(debitColumn);
             break;
         }
     } while (w);

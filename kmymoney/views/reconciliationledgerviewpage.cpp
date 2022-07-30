@@ -188,18 +188,16 @@ public:
         QStringList journalEntryIds(journalEntriesToReconcile());
         if (!journalEntryIds.isEmpty()) {
             auto balance = file->balance(accountId, endingBalanceDlg->statementDate());
-            MyMoneyMoney actBalance, clearedBalance;
-            actBalance = clearedBalance = balance;
 
             // walk the list of journalEntries to figure out the balance(s)
             for (const auto& journalEntryId : journalEntryIds) {
                 const auto idx = journalModel->indexById(journalEntryId);
                 if (idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>() == eMyMoney::Split::State::NotReconciled) {
-                    clearedBalance -= idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+                    balance -= idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
                 }
             }
 
-            if (endingBalanceDlg->endingBalance() != clearedBalance) {
+            if (endingBalanceDlg->endingBalance() != balance) {
                 auto message = i18n(
                     "You are about to finish the reconciliation of this account with a difference between your bank statement and the transactions marked as "
                     "cleared.\n"
@@ -318,11 +316,10 @@ public:
         ui->m_reconciliationContainer->setVisible(endingBalanceDlg != nullptr);
         if (endingBalanceDlg) {
             const auto endingBalance = endingBalanceDlg->endingBalance();
-            const auto clearedBalance = MyMoneyFile::instance()->journalModel()->clearedBalance(accountId, endingBalanceDlg->statementDate());
+            const auto balance = MyMoneyFile::instance()->journalModel()->clearedBalance(accountId, endingBalanceDlg->statementDate());
             ui->m_leftLabel->setText(i18nc("@label:textbox Statement balance", "Statement: %1", endingBalance.formatMoney("", precision)));
-            ui->m_centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", clearedBalance.formatMoney("", precision)));
-            ui->m_rightLabel->setText(
-                i18nc("@label:textbox Difference to statement", "Difference: %1", (clearedBalance - endingBalance).formatMoney("", precision)));
+            ui->m_centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", balance.formatMoney("", precision)));
+            ui->m_rightLabel->setText(i18nc("@label:textbox Difference to statement", "Difference: %1", (balance - endingBalance).formatMoney("", precision)));
         }
     }
 

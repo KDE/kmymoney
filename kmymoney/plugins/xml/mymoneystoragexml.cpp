@@ -2017,9 +2017,9 @@ void MyMoneyStorageXML::writePrices(QDomElement& prices)
             }
 
             try {
-                const auto from = m_file->security(entry.from());
-                const auto to = m_file->security(entry.to());
-                if (from.isCurrency() && !to.isCurrency()) {
+                const auto fromSecurity = m_file->security(entry.from());
+                const auto toSecurity = m_file->security(entry.to());
+                if (fromSecurity.isCurrency() && !toSecurity.isCurrency()) {
                     qDebug() << QStringLiteral("The currency pair %1->%2 is invalid (from currency to equity). Omitting from storage.")
                                     .arg(entry.from(), entry.to());
                     continue;

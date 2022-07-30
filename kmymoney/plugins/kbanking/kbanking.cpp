@@ -1251,8 +1251,8 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
         QStringList::const_iterator it_s;
         for (it_s = exceptions.constBegin(); needExtract && it_s != exceptions.constEnd(); ++it_s) {
             const QRegularExpression exceptionExp(*it_s, QRegularExpression::CaseInsensitiveOption);
-            const auto memo(exceptionExp.match(kt.m_strMemo));
-            if (memo.hasMatch()) {
+            const auto memoRegExMatch(exceptionExp.match(kt.m_strMemo));
+            if (memoRegExMatch.hasMatch()) {
                 needExtract = false;
             }
         }
@@ -1260,11 +1260,11 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
             const QRegularExpression payeeExp(rePayee, QRegularExpression::CaseInsensitiveOption);
             const QRegularExpression memoExp(reMemo, QRegularExpression::CaseInsensitiveOption);
             const auto payee(payeeExp.match(kt.m_strMemo));
-            const auto memo(memoExp.match(kt.m_strMemo));
+            const auto memoRegExMatch(memoExp.match(kt.m_strMemo));
             if (payee.hasMatch()) {
                 kt.m_strPayee = payee.captured(1);
-                if (memo.hasMatch()) {
-                    kt.m_strMemo = memo.captured(1);
+                if (memoRegExMatch.hasMatch()) {
+                    kt.m_strMemo = memoRegExMatch.captured(1);
                 }
             }
         }

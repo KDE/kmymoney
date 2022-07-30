@@ -111,11 +111,11 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget* parent, const MyMoneySchedule& sch
             // in case of a loan payment we need to adjust the schedule locally
             // to contain the actual values for the next transaction. We do that
             // on a copy of the schedule.
-            auto schedule(d->m_schedule);
-            auto t = schedule.transaction();
-            KMyMoneyUtils::calculateAutoLoan(schedule, t, QMap<QString, MyMoneyMoney>());
-            schedule.setTransaction(t);
-            d->m_editor->loadSchedule(schedule);
+            auto loanSchedule(d->m_schedule);
+            auto t = loanSchedule.transaction();
+            KMyMoneyUtils::calculateAutoLoan(loanSchedule, t, QMap<QString, MyMoneyMoney>());
+            loanSchedule.setTransaction(t);
+            d->m_editor->loadSchedule(loanSchedule);
         } else {
             d->m_editor->loadSchedule(d->m_schedule);
         }

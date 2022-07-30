@@ -82,9 +82,9 @@ public:
 
     void executeContextMenu(const QPoint& pos)
     {
-        const auto idx = q->currentIndex();
-        const auto id = idx.data(eMyMoney::Model::IdRole).toString();
-        const auto enableOption = !(id.isEmpty() || id.endsWith('-'));
+        const auto currentIdx = q->currentIndex();
+        const auto currentId = currentIdx.data(eMyMoney::Model::IdRole).toString();
+        const auto enableOption = !(currentId.isEmpty() || currentId.endsWith('-'));
 
         QScopedPointer<QMenu> menu(new QMenu(q));
         menu->addSection(i18nc("@title:menu split context menu", "Split Options"));
@@ -105,7 +105,7 @@ public:
         });
 
         const auto editItem = menu->addAction(Icons::get(Icons::Icon::DocumentEdit), i18nc("@item:inmenu Edit a split", "Edit..."), q, [&]() {
-            q->edit(idx);
+            q->edit(currentIdx);
         });
         editItem->setEnabled(enableOption);
 
