@@ -24,6 +24,7 @@
 #include "icons.h"
 #include "journalmodel.h"
 #include "kmymoneysettings.h"
+#include "ledgerviewsettings.h"
 #include "menuenums.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
@@ -72,6 +73,8 @@ void LedgerViewPage::initModel()
         new LedgerAccountFilter(d->ui->m_ledgerView,
                                 QVector<QAbstractItemModel*>{file->specialDatesModel(), file->schedulesJournalModel(), file->reconciliationModel()});
     connect(file->journalModel(), &JournalModel::balanceChanged, d->accountFilter, &LedgerAccountFilter::recalculateBalancesOnIdle);
+    d->accountFilter->setHideReconciledTransactions(LedgerViewSettings::instance()->hideReconciledTransactions());
+    d->accountFilter->setHideTransactionsBefore(LedgerViewSettings::instance()->hideTransactionsBefore());
 
     d->stateFilter = new LedgerFilter(d->ui->m_ledgerView);
     d->stateFilter->setSourceModel(d->accountFilter);
@@ -113,6 +116,11 @@ void LedgerViewPage::initModel()
     connect(file->journalModel(), &JournalModel::rowsMoved, this, &LedgerViewPage::reloadFilter, Qt::QueuedConnection);
 
     d->ui->m_ledgerView->setModel(d->specialDatesFilter);
+
+    connect(LedgerViewSettings::instance(), &LedgerViewSettings::settingsChanged, this, [&]() {
+        d->accountFilter->setHideReconciledTransactions(LedgerViewSettings::instance()->hideReconciledTransactions());
+        d->accountFilter->setHideTransactionsBefore(LedgerViewSettings::instance()->hideTransactionsBefore());
+    });
 
     // combine multiple row updates into one
     connect(d->stateFilter, &LedgerFilter::rowsRemoved, this, [&]() {

@@ -19,10 +19,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "accountsmodel.h"
+#include "journalmodel.h"
+#include "ledgerviewsettings.h"
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"
-#include "journalmodel.h"
-#include "accountsmodel.h"
 #include "specialdatesmodel.h"
 
 using namespace eMyMoney;
@@ -160,14 +161,24 @@ bool LedgerFilterBase::filterAcceptsRow(int source_row, const QModelIndex& sourc
     if (d->filterIds.isEmpty())
         return false;
 
-    // in case it's a special date entry, we accept it
     QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
+    if (d->firstVisiblePostDate.isValid() && d->firstVisiblePostDate > idx.data(eMyMoney::Model::TransactionPostDateRole).toDate()) {
+        return false;
+    }
+
+    // in case it's a special date entry, we accept it
     const auto baseModel = MyMoneyFile::baseModel()->baseModel(idx);
     if (d->isSpecialDatesModel(baseModel)) {
         return (sortRole() == eMyMoney::Model::TransactionPostDateRole);
     }
 
     // now do the filtering
+
+    if (d->hideReconciledTransactions
+        && idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>() >= eMyMoney::Split::State::Reconciled) {
+        return false;
+    }
+
     const auto id = idx.data(filterRole()).toString();
     bool rc = d->filterIds.contains(id);
 
@@ -232,6 +243,25 @@ void LedgerFilterBase::removeSourceModel(QAbstractItemModel* model)
     if (model && d->sourceModels.contains(model)) {
         d->concatModel->removeSourceModel(model);
         d->sourceModels.remove(model);
+        invalidateFilter();
+    }
+}
+
+void LedgerFilterBase::setHideTransactionsBefore(const QDate& date)
+{
+    Q_D(LedgerFilterBase);
+    if (d->firstVisiblePostDate != date) {
+        d->firstVisiblePostDate = date;
+        qDebug() << "Set first visible post date to" << date;
+        invalidateFilter();
+    }
+}
+
+void LedgerFilterBase::setHideReconciledTransactions(bool hide)
+{
+    Q_D(LedgerFilterBase);
+    if (d->hideReconciledTransactions != hide) {
+        d->hideReconciledTransactions = hide;
         invalidateFilter();
     }
 }

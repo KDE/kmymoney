@@ -30,36 +30,39 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <config-kmymoney.h>
-#include <ui_kpayeesview.h>
-#include "kmymoneyviewbase_p.h"
-#include "kmymoneyutils.h"
+#include "config-kmymoney.h"
+
+#include "accountsmodel.h"
+#include "icons.h"
+#include "itemrenameproxymodel.h"
+#include "journalmodel.h"
 #include "kmymoneymvccombo.h"
-#include "mymoneypayee.h"
+#include "kmymoneysettings.h"
+#include "kmymoneyutils.h"
+#include "kmymoneyviewbase_p.h"
+#include "kpayeereassigndlg.h"
+#include "ledgerpayeefilter.h"
+#include "ledgerviewsettings.h"
+#include "menuenums.h"
+#include "mymoneyaccount.h"
+#include "mymoneyaccountloan.h"
+#include "mymoneycontact.h"
+#include "mymoneyenums.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
-#include "mymoneyaccount.h"
 #include "mymoneymoney.h"
-#include "mymoneytransactionfilter.h"
-#include "kmymoneysettings.h"
-#include "kpayeereassigndlg.h"
-#include "accountsmodel.h"
-#include "mymoneysecurity.h"
-#include "mymoneyschedule.h"
-#include "mymoneycontact.h"
-#include "mymoneyaccountloan.h"
-#include "mymoneysplit.h"
+#include "mymoneypayee.h"
 #include "mymoneyprice.h"
+#include "mymoneyschedule.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "icons.h"
-#include "mymoneyenums.h"
+#include "mymoneytransactionfilter.h"
 #include "payeesmodel.h"
-#include "menuenums.h"
-#include "ledgerpayeefilter.h"
-#include "journalmodel.h"
-#include "itemrenameproxymodel.h"
-#include "specialdatesmodel.h"
 #include "specialdatesfilter.h"
+#include "specialdatesmodel.h"
+
+#include "ui_kpayeesview.h"
 
 using namespace Icons;
 
@@ -106,6 +109,9 @@ public:
         // setup the model stack
         auto file = MyMoneyFile::instance();
         m_transactionFilter = new LedgerPayeeFilter(ui->m_register, QVector<QAbstractItemModel*> { file->specialDatesModel() });
+        m_transactionFilter->setHideReconciledTransactions(LedgerViewSettings::instance()->hideReconciledTransactions());
+        m_transactionFilter->setHideTransactionsBefore(LedgerViewSettings::instance()->hideTransactionsBefore());
+
         auto specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), q);
         specialDatesFilter->setSourceModel(m_transactionFilter);
         ui->m_register->setModel(specialDatesFilter);

@@ -9,6 +9,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDate>
 #include <QSet>
 
 // ----------------------------------------------------------------------------
@@ -28,6 +29,7 @@ public:
         , concatModel(nullptr)
         , accountType(eMyMoney::Account::Type::Asset)
         , showValuesInverted(false)
+        , hideReconciledTransactions(false)
     {
     }
 
@@ -71,12 +73,14 @@ public:
         return QLatin1String("unknown model");
     }
 
-    LedgerFilterBase*           q;
+    LedgerFilterBase* q;
     KConcatenateRowsProxyModel* concatModel;          // Qt5.13+ use QConcatenateTablesProxyModel
-    eMyMoney::Account::Type     accountType;
-    QStringList                 filterIds;
-    bool                        showValuesInverted;
-    QSet<QAbstractItemModel*>   sourceModels;
+    eMyMoney::Account::Type accountType;
+    QStringList filterIds;
+    QDate firstVisiblePostDate;
+    bool showValuesInverted;
+    bool hideReconciledTransactions;
+    QSet<QAbstractItemModel*> sourceModels;
 };
 
 #endif

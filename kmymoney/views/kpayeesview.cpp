@@ -65,6 +65,12 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
     connect(d->ui->m_register, &LedgerView::requestView, this, &KPayeesView::requestView);
 
+    connect(LedgerViewSettings::instance(), &LedgerViewSettings::settingsChanged, this, [&]() {
+        Q_D(KPayeesView);
+        d->m_transactionFilter->setHideReconciledTransactions(LedgerViewSettings::instance()->hideReconciledTransactions());
+        d->m_transactionFilter->setHideTransactionsBefore(LedgerViewSettings::instance()->hideTransactionsBefore());
+    });
+
     connect(pActions[eMenu::Action::NewPayee], &QAction::triggered, this, &KPayeesView::slotNewPayee);
     connect(pActions[eMenu::Action::DeletePayee], &QAction::triggered, this, &KPayeesView::slotDeletePayee);
     connect(pActions[eMenu::Action::RenamePayee], &QAction::triggered, this, &KPayeesView::slotRenamePayee);

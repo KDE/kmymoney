@@ -37,6 +37,7 @@
 #include "kmymoneyviewbase_p.h"
 #include "ktagreassigndlg.h"
 #include "ledgertagfilter.h"
+#include "ledgerviewsettings.h"
 #include "mymoneyexception.h"
 #include "mymoneymoney.h"
 #include "mymoneyprice.h"
@@ -111,6 +112,9 @@ public:
         // setup the model stack
         auto file = MyMoneyFile::instance();
         m_transactionFilter = new LedgerTagFilter(ui->m_register, QVector<QAbstractItemModel*>{file->specialDatesModel()});
+        m_transactionFilter->setHideReconciledTransactions(LedgerViewSettings::instance()->hideReconciledTransactions());
+        m_transactionFilter->setHideTransactionsBefore(LedgerViewSettings::instance()->hideTransactionsBefore());
+
         auto specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), q);
         specialDatesFilter->setSourceModel(m_transactionFilter);
         ui->m_register->setModel(specialDatesFilter);
@@ -537,6 +541,10 @@ void KTagsView::showEvent(QShowEvent* event)
             emit requestCustomContextMenu(eMenu::Menu::Transaction, d->ui->m_register->mapToGlobal(pos));
         });
 
+        connect(LedgerViewSettings::instance(), &LedgerViewSettings::settingsChanged, this, [&]() {
+            d->m_transactionFilter->setHideReconciledTransactions(LedgerViewSettings::instance()->hideReconciledTransactions());
+            d->m_transactionFilter->setHideTransactionsBefore(LedgerViewSettings::instance()->hideTransactionsBefore());
+        });
     }
     // don't forget base class implementation
     QWidget::showEvent(event);

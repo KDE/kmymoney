@@ -3417,6 +3417,9 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
         break;
     }
 
+    LedgerViewSettings::instance()->setHideReconciledTransactions(KMyMoneySettings::hideReconciledTransactions());
+    LedgerViewSettings::instance()->setHideTransactionsBefore(KMyMoneySettings::startDate().date());
+
     MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
     MyMoneyReport::setLineWidth(KMyMoneySettings::lineWidth());
 
