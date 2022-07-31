@@ -54,11 +54,7 @@ bool isPluginEnabled(const KPluginMetaData& pluginData, const KConfigGroup& plug
 QMap<QString, KPluginMetaData> listPlugins(bool onlyEnabled)
 {
     QMap<QString, KPluginMetaData> plugins;
-#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 86, 0)
     const auto pluginDatas = KPluginMetaData::findPlugins(QStringLiteral("kmymoney_plugins")); // that means search for plugins in "/lib64/plugins/kmymoney/"
-#else
-    const auto pluginDatas = KPluginLoader::findPlugins(QStringLiteral("kmymoney_plugins")); // that means search for plugins in "/lib64/plugins/kmymoney/"
-#endif
     const auto pluginSection(KSharedConfig::openConfig()->group(QStringLiteral("Plugins")));  // section of config where plugin on/off were saved
 
     for (const KPluginMetaData& pluginData : pluginDatas) {
@@ -111,22 +107,12 @@ void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLG
         for (auto it = refPlugins.cbegin(); it != refPlugins.cend(); ++it) {
             if (!ctnPlugins.standard.contains(it.key())) {
                 qDebug() << "Loading" << (*it).fileName();
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 86, 0)
-                KPluginLoader loader((*it).fileName());
-                auto factory = loader.factory();
-                if (!factory) {
-                    qWarning("Could not load plugin '%s', error: %s", qPrintable((*it).fileName()), qPrintable(loader.errorString()));
-                    loader.unload();
-                    continue;
-                }
-#else
                 auto factoryResult = KPluginFactory::loadFactory(*it);
                 if (!factoryResult) {
                     qWarning("Could not load plugin '%s', error: %s", qPrintable((*it).fileName()), qPrintable(factoryResult.errorText));
                     continue;
                 }
                 auto factory = factoryResult.plugin;
-#endif
                 Plugin* plugin = factory->create<Plugin>(parent);
                 if (!plugin) {
                     qWarning("This is not KMyMoney plugin: '%s'", qPrintable((*it).fileName()));

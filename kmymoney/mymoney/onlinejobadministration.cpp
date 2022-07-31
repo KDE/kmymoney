@@ -37,16 +37,6 @@
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
 #include "tasks/onlinetask.h"
 
-template<typename... Args>
-QVector<KPluginMetaData> findPlugins(Args&&... args)
-{
-#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 86, 0)
-    return KPluginMetaData::findPlugins(std::forward<Args>(args)...);
-#else
-    return KPluginLoader::findPlugins(std::forward<Args>(args)...);
-#endif
-}
-
 onlineJobAdministration::onlineJobAdministration(QObject *parent)
     : QObject(parent)
     , m_onlinePlugins(nullptr)
@@ -101,7 +91,7 @@ void onlineJobAdministration::updateActions()
 
 QStringList onlineJobAdministration::availableOnlineTasks()
 {
-    auto plugins = findPlugins("kmymoney_plugins/onlinetasks", [](const KPluginMetaData& data) {
+    auto plugins = KPluginMetaData::findPlugins("kmymoney_plugins/onlinetasks", [](const KPluginMetaData& data) {
         return !(data.rawData()["KMyMoney"].toObject()["OnlineTask"].isNull());
     });
 
@@ -183,7 +173,7 @@ onlineTask* onlineJobAdministration::createOnlineTaskByXml(const QString& iid, c
  */
 onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const
 {
-    auto plugins = findPlugins("kmymoney_plugins/onlinetasks", [&name](const KPluginMetaData& data) {
+    auto plugins = KPluginMetaData::findPlugins("kmymoney_plugins/onlinetasks", [&name](const KPluginMetaData& data) {
         QJsonValue array = data.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Iids"];
         if (array.isArray())
             return (array.toVariant().toStringList().contains(name));
@@ -196,36 +186,12 @@ onlineTask* onlineJobAdministration::rootOnlineTask(const QString& name) const
     if (plugins.length() != 1)
         qWarning() << "Multiple plugins which offer the online task \"" << name << "\" were found. Loading a random one.";
 
-#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 86, 0)
     auto pluginResult = KPluginFactory::instantiatePlugin<KMyMoneyPlugin::onlineTaskFactory>(plugins.first(), onlineJobAdministration::instance());
     if (!pluginResult) {
         qWarning() << "Could not load plugin for online task " << name << ", file name " << plugins.first().fileName() << ".";
         return nullptr;
     }
     auto taskFactory = pluginResult.plugin;
-#else
-    // Load plugin
-    std::unique_ptr<QPluginLoader> loader = std::unique_ptr<QPluginLoader>(new QPluginLoader{plugins.first().fileName()});
-    QObject* plugin = loader->instance();
-    if (!plugin) {
-        qWarning() << "Could not load plugin for online task " << name << ", file name " << plugins.first().fileName() << ".";
-        return nullptr;
-    }
-
-    // Cast to KPluginFactory
-    KPluginFactory* pluginFactory = qobject_cast< KPluginFactory* >(plugin);
-    if (!pluginFactory) {
-        qWarning() << "Could not create plugin factory for online task " << name << ", file name " << plugins.first().fileName() << ".";
-        return nullptr;
-    }
-
-    // Create onlineTaskFactory
-    auto taskFactory = pluginFactory->create<KMyMoneyPlugin::onlineTaskFactory>(onlineJobAdministration::instance());
-    if (!taskFactory) {
-        qWarning() << "Could not create online task factory for online task " << name << ", file name " << plugins.first().fileName() << ".";
-        return nullptr;
-    }
-#endif
 
     // Finally create task
     onlineTask* task = taskFactory->createOnlineTask(name);
@@ -355,7 +321,7 @@ void onlineJobAdministration::registerOnlineTaskConverter(onlineTaskConverter* c
 
 onlineJobAdministration::onlineJobEditOffers onlineJobAdministration::onlineJobEdits()
 {
-    auto plugins = findPlugins("kmymoney_plugins/onlinetasks", [](const KPluginMetaData& data) {
+    auto plugins = KPluginMetaData::findPlugins("kmymoney_plugins/onlinetasks", [](const KPluginMetaData& data) {
         return !(data.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Editors"].isNull());
     });
 
