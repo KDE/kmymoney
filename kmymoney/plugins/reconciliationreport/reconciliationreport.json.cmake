@@ -84,7 +84,7 @@
         "Name[sv]": "Avstämningsrapport",
         "Name[uk]": "Звіт щодо звірки",
         "Name[x-test]": "xxReconciliation reportxx",
-        "Name[zh_CN]": "对帐报告",
+        "Name[zh_CN]": "对账报告",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],
