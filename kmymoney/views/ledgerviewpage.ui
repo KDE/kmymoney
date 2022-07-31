@@ -131,7 +131,11 @@
            <widget class="QLineEdit" name="m_searchWidget"/>
           </item>
           <item>
-           <widget class="QComboBox" name="m_filterBox"/>
+           <widget class="QComboBox" name="m_filterBox">
+            <property name="sizeAdjustPolicy">
+             <enum>QComboBox::AdjustToContents</enum>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

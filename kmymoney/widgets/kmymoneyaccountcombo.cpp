@@ -160,7 +160,7 @@ KMyMoneyAccountCombo::KMyMoneyAccountCombo(QWidget *parent)
 void KMyMoneyAccountCombo::init()
 {
     setMaxVisibleItems(15);
-    setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLength);
+    setSizeAdjustPolicy(QComboBox::AdjustToContents);
 }
 
 KMyMoneyAccountCombo::~KMyMoneyAccountCombo()
