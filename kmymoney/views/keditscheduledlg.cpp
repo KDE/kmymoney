@@ -120,7 +120,8 @@ public:
         if (m_accountCombo && m_accountCombo->getSelected().isEmpty()) {
             WidgetHintFrame::show(m_accountCombo, i18nc("@info:tooltip", "The account is a required field for a schedule"));
         }
-        if (m_categoryCombo && m_categoryCombo->getSelected().isEmpty()) {
+        // if we have a combo, it is empty and can be modified (no multi split transaction)
+        if (m_categoryCombo && m_categoryCombo->getSelected().isEmpty() && !m_categoryCombo->lineEdit()->isReadOnly()) {
             WidgetHintFrame::show(m_categoryCombo, i18nc("@info:tooltip", "The category is a required field for a schedule"));
         }
     }
