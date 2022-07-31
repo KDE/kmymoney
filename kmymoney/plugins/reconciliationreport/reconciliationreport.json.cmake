@@ -86,7 +86,7 @@
         "Name[tr]": "Mutabakat raporu",
         "Name[uk]": "Звіт щодо звірки",
         "Name[x-test]": "xxReconciliation reportxx",
-        "Name[zh_CN]": "对帐报告",
+        "Name[zh_CN]": "对账报告",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
     }
