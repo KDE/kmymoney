@@ -162,8 +162,11 @@ bool LedgerFilterBase::filterAcceptsRow(int source_row, const QModelIndex& sourc
         return false;
 
     QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
-    if (d->firstVisiblePostDate.isValid() && d->firstVisiblePostDate > idx.data(eMyMoney::Model::TransactionPostDateRole).toDate()) {
-        return false;
+    // only check the start date if it's not the new transaction placeholder
+    if (!idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
+        if (d->firstVisiblePostDate.isValid() && d->firstVisiblePostDate > idx.data(eMyMoney::Model::TransactionPostDateRole).toDate()) {
+            return false;
+        }
     }
 
     // in case it's a special date entry, we accept it
