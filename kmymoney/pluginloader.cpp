@@ -44,13 +44,6 @@ Category pluginCategory(const KPluginMetaData& pluginInfo)
         }
 }
 
-bool isPluginEnabled(const KPluginMetaData& pluginData, const KConfigGroup& pluginSection)
-{
-    return pluginSection.readEntry(QString::fromLatin1("%1Enabled").    // we search here for e.g. "csvimporterEnabled = true"
-                                   arg(pluginData.pluginId()),
-                                   pluginData.isEnabledByDefault());    // if not found, then get default from plugin's json file
-}
-
 QMap<QString, KPluginMetaData> listPlugins(bool onlyEnabled)
 {
     QMap<QString, KPluginMetaData> plugins;
@@ -58,7 +51,7 @@ QMap<QString, KPluginMetaData> listPlugins(bool onlyEnabled)
     const auto pluginSection(KSharedConfig::openConfig()->group(QStringLiteral("Plugins")));  // section of config where plugin on/off were saved
 
     for (const KPluginMetaData& pluginData : pluginDatas) {
-        if (!onlyEnabled || isPluginEnabled(pluginData, pluginSection)) {
+        if (!onlyEnabled || pluginData.isEnabled(pluginSection)) {
             // only use the first one found. Otherwise, always the last one
             // wins (usually the installed system version) and the QT_PLUGIN_PATH
             // env variable nor the current directory have an effect for KMyMoney
