@@ -1,8 +1,13 @@
+# SPDX-FileCopyrightText: 2022 Alexander Lohnau <alexander.lohnau@gmx.de>
+
 # For all the configurable CMake switches, please see https://invent.kde.org/office/kmymoney/-/wikis/home#cmake-switches
 
 # The CMake version we require
 cmake_minimum_required(VERSION 3.12)
 set(ECM_MINIMUM_VERSION 5.42)
+set(KF5_MIN_VERSION 5.2)
+set(QT_MIN_VERSION 5.6)
+set(AKONADI_MIN_VERSION 5.2)
 
 set(RELEASE_SERVICE_VERSION_MAJOR "5")
 set(RELEASE_SERVICE_VERSION_MINOR "1")
@@ -76,13 +81,12 @@ include(KMyMoneyMacros)
 
 find_package(PkgConfig)
 
-set (OPT_KF5_COMPONENTS DocTools Holidays Contacts Akonadi IdentityManagement Activities)
 find_package(Gpgmepp)
 if (Gpgmepp_FOUND)
   set(GPG_FOUND TRUE)
 else()
   set(GPG_FOUND FALSE)
-  list(APPEND OPT_KF5_COMPONENTS Gpgmepp)
+  find_package(KF5 ${KF5_MIN_VERSION} OPTIONAL_COMPONENTS Gpgmepp)
 endif()
 
 if (PkgConfig_FOUND)
@@ -90,15 +94,15 @@ if (PkgConfig_FOUND)
   pkg_check_modules(LIBOFX libofx IMPORTED_TARGET)
 endif()
 
-find_package(Qt5 5.6 REQUIRED COMPONENTS
-  Core DBus Widgets Svg Xml Test PrintSupport)
-find_package(Qt5 5.6 OPTIONAL_COMPONENTS
-  Sql Concurrent QuickWidgets WebEngineWidgets WebKitWidgets)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets Svg Xml Test PrintSupport)
+find_package(Qt5 ${QT_MIN_VERSION} OPTIONAL_COMPONENTS Sql Concurrent QuickWidgets WebEngineWidgets WebKitWidgets)
 
-find_package(KF5 5.2 REQUIRED COMPONENTS
-  Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO)
-find_package(KF5 5.2 OPTIONAL_COMPONENTS
-  ${OPT_KF5_COMPONENTS})
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO)
+find_package(KF5 ${KF5_MIN_VERSION} OPTIONAL_COMPONENTS DocTools Holidays Contacts Activities)
+
+# TODO: KF5:: targets deprecated, switch to KPim5::
+find_package(KF5Akonadi ${AKONADI_MIN_VERSION} QUIET)
+find_package(KF5IdentityManagement ${AKONADI_MIN_VERSION} QUIET)
 
 if(LibAlkimia5_DIR)
   set(_LibAlkimia5_DIR ${LibAlkimia5_DIR})
@@ -111,11 +115,6 @@ if (NOT LibAlkimia5_FOUND)
   endif()
   find_package(LibAlkimia5 7.0 REQUIRED)
 endif()
-
-# Recent changes to LibAlkimia should allow us to remove this construct
-#if(CMAKE_SYSTEM_NAME MATCHES "Windows")
-#  include_directories(${GMP_INCLUDE_DIR})
-#endif()
 
 find_package(KChart 2.6.0)
 
