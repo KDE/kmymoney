@@ -85,9 +85,6 @@ if (NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/po)
     add_custom_target(fetch-translations)
 endif()
 include(KDECMakeSettings)
-if(NOT WIN32)
-   set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
-endif()
 
 include(FeatureSummary)
 include(CMakeDependentOption)
@@ -324,9 +321,6 @@ option(ENABLE_UNFINISHEDFEATURES "For devs only" OFF)
 add_feature_info("New features" ENABLE_CSVEXPORTER "Compiles unfinished features for testing.")
 
 add_feature_info("prefix.sh" KDE_INSTALL_PREFIX_SCRIPT "create prefix.sh script to support local execution")
-
-# TODO: this should be removed
-enable_testing()
 
 # Source translations (adapted from Krita)
 find_package(Python3 COMPONENTS Interpreter)
