@@ -27,7 +27,7 @@ KMyMoneyAccountCompletion::KMyMoneyAccountCompletion(QWidget *parent) :
 {
     Q_D(KMyMoneyCompletion);
     delete d->m_selector;
-    d->m_selector = new KMyMoneyAccountSelector(this, 0, false);
+    d->m_selector = new KMyMoneyAccountSelector(this, {}, false);
     d->m_selector->listView()->setFocusProxy(parent);
     layout()->addWidget(d->m_selector);
 
