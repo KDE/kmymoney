@@ -6,6 +6,7 @@ cmake_minimum_required(VERSION 3.16)
 option(BUILD_STATIC_PLUGINS "Build the plugins statically" OFF)
 
 set(KF5_MIN_VERSION 5.90)
+set(QT_MIN_VERSION 5.15.2)
 set(KDE_COMPILERSETTINGS_LEVEL 5.82)
 
 if (NOT BUILD_STATIC_PLUGINS)
@@ -115,9 +116,9 @@ if (PkgConfig_FOUND)
   pkg_check_modules(LIBOFX libofx IMPORTED_TARGET)
 endif()
 
-find_package(Qt5 5.12 REQUIRED COMPONENTS
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS
 	Core DBus Widgets Svg Xml Test PrintSupport)
-find_package(Qt5 5.12 OPTIONAL_COMPONENTS
+find_package(Qt5 ${QT_MIN_VERSION} OPTIONAL_COMPONENTS
   Sql Concurrent QuickWidgets WebEngineWidgets WebKitWidgets)
 
 if (BUILD_STATIC_PLUGINS)
