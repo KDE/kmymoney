@@ -1561,19 +1561,19 @@ bool InvestmentProfile::readSettings(const KSharedConfigPtr &config)
         exists = false;
 
     m_transactionNames[eMyMoney::Transaction::Action::Buy] = profilesGroup.readEntry(CSVImporterCore::m_transactionConfName.value(eMyMoney::Transaction::Action::Buy),
-            QString(i18nc("Type of operation as in financial statement", "buy")).split(',', QString::SkipEmptyParts));
+            QString(i18nc("Type of operation as in financial statement", "buy")).split(',', Qt::SkipEmptyParts));
     m_transactionNames[eMyMoney::Transaction::Action::Sell] = profilesGroup.readEntry(CSVImporterCore::m_transactionConfName.value(eMyMoney::Transaction::Action::Sell),
-            QString(i18nc("Type of operation as in financial statement", "sell,repurchase")).split(',', QString::SkipEmptyParts));
+            QString(i18nc("Type of operation as in financial statement", "sell,repurchase")).split(',', Qt::SkipEmptyParts));
     m_transactionNames[eMyMoney::Transaction::Action::ReinvestDividend] = profilesGroup.readEntry(CSVImporterCore::m_transactionConfName.value(eMyMoney::Transaction::Action::ReinvestDividend),
-            QString(i18nc("Type of operation as in financial statement", "reinvest,reinv,re-inv")).split(',', QString::SkipEmptyParts));
+            QString(i18nc("Type of operation as in financial statement", "reinvest,reinv,re-inv")).split(',', Qt::SkipEmptyParts));
     m_transactionNames[eMyMoney::Transaction::Action::CashDividend] = profilesGroup.readEntry(CSVImporterCore::m_transactionConfName.value(eMyMoney::Transaction::Action::CashDividend),
-            QString(i18nc("Type of operation as in financial statement", "dividend")).split(',', QString::SkipEmptyParts));
+            QString(i18nc("Type of operation as in financial statement", "dividend")).split(',', Qt::SkipEmptyParts));
     m_transactionNames[eMyMoney::Transaction::Action::Interest] = profilesGroup.readEntry(CSVImporterCore::m_transactionConfName.value(eMyMoney::Transaction::Action::Interest),
-            QString(i18nc("Type of operation as in financial statement", "interest,income")).split(',', QString::SkipEmptyParts));
+            QString(i18nc("Type of operation as in financial statement", "interest,income")).split(',', Qt::SkipEmptyParts));
     m_transactionNames[eMyMoney::Transaction::Action::Shrsin] = profilesGroup.readEntry(CSVImporterCore::m_transactionConfName.value(eMyMoney::Transaction::Action::Shrsin),
-            QString(i18nc("Type of operation as in financial statement", "add,stock dividend,divd reinv,transfer in,re-registration in,journal entry")).split(',', QString::SkipEmptyParts));
+            QString(i18nc("Type of operation as in financial statement", "add,stock dividend,divd reinv,transfer in,re-registration in,journal entry")).split(',', Qt::SkipEmptyParts));
     m_transactionNames[eMyMoney::Transaction::Action::Shrsout] = profilesGroup.readEntry(CSVImporterCore::m_transactionConfName.value(eMyMoney::Transaction::Action::Shrsout),
-            QString(i18nc("Type of operation as in financial statement", "remove")).split(',', QString::SkipEmptyParts));
+            QString(i18nc("Type of operation as in financial statement", "remove")).split(',', Qt::SkipEmptyParts));
 
     m_colTypeNum[Column::Date] = profilesGroup.readEntry(CSVImporterCore::m_colTypeConfName.value(Column::Date), -1);
     m_colTypeNum[Column::Type] = profilesGroup.readEntry(CSVImporterCore::m_colTypeConfName.value(Column::Type), -1);  //use for type col.

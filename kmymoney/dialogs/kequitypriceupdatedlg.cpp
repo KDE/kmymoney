@@ -405,7 +405,7 @@ MyMoneyPrice KEquityPriceUpdateDlg::price(const QString& id) const
 
             // if the ID has a space, then this is TWO ID's, so it's a currency quote
             if (kmm_id.contains(" ")) {
-                QStringList ids = kmm_id.split(' ', QString::SkipEmptyParts);
+                QStringList ids = kmm_id.split(' ', Qt::SkipEmptyParts);
                 QString fromid = ids[0].toUtf8();
                 QString toid = ids[1].toUtf8();
                 price = MyMoneyPrice(fromid, toid, QDate().fromString(item->text(DATE_COL), Qt::ISODate), rate, item->text(SOURCE_COL));
@@ -443,7 +443,7 @@ void KEquityPriceUpdateDlg::storePrices()
 
                 // if the ID has a space, then this is TWO ID's, so it's a currency quote
                 if (id.contains(QLatin1Char(' '))) {
-                    QStringList ids = id.split(QLatin1Char(' '), QString::SkipEmptyParts);
+                    QStringList ids = id.split(QLatin1Char(' '), Qt::SkipEmptyParts);
                     fromid = ids.at(0);
                     toid = ids.at(1);
                     name = QString::fromLatin1("%1 --> %2").arg(fromid, toid);

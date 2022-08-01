@@ -1240,7 +1240,7 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
     QString rePayee = kvp.value("kbanking-payee-regexp");
     if (!rePayee.isEmpty() && kt.m_strPayee.isEmpty()) {
         QString reMemo = kvp.value("kbanking-memo-regexp");
-        QStringList exceptions = kvp.value("kbanking-payee-exceptions").split(';', QString::SkipEmptyParts);
+        QStringList exceptions = kvp.value("kbanking-payee-exceptions").split(';', Qt::SkipEmptyParts);
 
         bool needExtract = true;
         QStringList::const_iterator it_s;

@@ -442,7 +442,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
                 }
             }
 
-            for(const QString& key: keyList.split(',', QString::SkipEmptyParts)) {
+            for(const QString& key: keyList.split(',', Qt::SkipEmptyParts)) {
                 if (!KGPGFile::keyAvailable(key)) {
                     KMessageBox::sorry(nullptr, i18n("<p>You have specified to encrypt your data for the user-id</p><p><center><b>%1</b>.</center></p><p>Unfortunately, a valid key for this user-id was not found in your keyring. Please make sure to import a valid key for this user-id. This time, encryption is disabled.</p>", key), i18n("GPG Key not found"));
                     encryptFile = false;
@@ -481,7 +481,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
     if (!keyList.isEmpty() && encryptFile && !plaintext) {
         std::unique_ptr<KGPGFile> kgpg = std::unique_ptr<KGPGFile>(new KGPGFile{writeFile});
         if (kgpg) {
-            for(const QString& key: keyList.split(',', QString::SkipEmptyParts)) {
+            for(const QString& key: keyList.split(',', Qt::SkipEmptyParts)) {
                 kgpg->addRecipient(key.toLatin1());
             }
 

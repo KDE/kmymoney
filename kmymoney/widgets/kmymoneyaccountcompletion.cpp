@@ -77,7 +77,7 @@ void KMyMoneyAccountCompletion::slotMakeCompletion(const QString& txt)
         d->m_lastCompletion = QRegularExpression(QRegularExpression::escape(txt), QRegularExpression::CaseInsensitiveOption);
         cnt = selector()->slotMakeCompletion(txt);
     } else {
-        QStringList parts = txt.split(MyMoneyFile::AccountSeparator, QString::SkipEmptyParts);
+        QStringList parts = txt.split(MyMoneyFile::AccountSeparator, Qt::SkipEmptyParts);
         QString pattern("^");
         QStringList::iterator it;
         for (it = parts.begin(); it != parts.end(); ++it) {

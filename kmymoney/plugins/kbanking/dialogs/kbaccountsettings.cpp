@@ -46,7 +46,7 @@ void KBAccountSettings::loadUi(const MyMoneyKeyValueContainer& kvp)
         d->ui.m_payeeRegExpEdit->setText(kvp.value("kbanking-payee-regexp"));
         d->ui.m_memoRegExpEdit->setText(kvp.value("kbanking-memo-regexp"));
         d->ui.m_payeeExceptions->clear();
-        d->ui.m_payeeExceptions->insertStringList(kvp.value("kbanking-payee-exceptions").split(';', QString::SkipEmptyParts));
+        d->ui.m_payeeExceptions->insertStringList(kvp.value("kbanking-payee-exceptions").split(';', Qt::SkipEmptyParts));
     }
     d->ui.m_removeLineBreaksFromMemo->setChecked(kvp.value("kbanking-memo-removelinebreaks").compare(QLatin1String("no")));
 

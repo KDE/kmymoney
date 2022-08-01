@@ -409,7 +409,7 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
                     const auto filterString = QString::fromLatin1("%1%2%3").arg(completionStr).arg(QRegularExpression::escape(txt)).arg(completionStr);
                     filterModel->setFilterRegularExpression(QRegularExpression(filterString, QRegularExpression::CaseInsensitiveOption));
                 } else {
-                    QStringList parts = txt.split(MyMoneyFile::AccountSeparator /*, QString::SkipEmptyParts */);
+                    QStringList parts = txt.split(MyMoneyFile::AccountSeparator /*, Qt::SkipEmptyParts */);
                     QString pattern;
                     QStringList::iterator it;
                     for (it = parts.begin(); it != parts.end(); ++it) {

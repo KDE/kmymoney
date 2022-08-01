@@ -97,9 +97,9 @@ QColor KMyMoneySettings::schemeColor(const SchemeColor color)
 QStringList KMyMoneySettings::listOfItems()
 {
     bool prevValue = self()->useDefaults(true);
-    QStringList all = itemList().split(',', QString::SkipEmptyParts);
+    QStringList all = itemList().split(',', Qt::SkipEmptyParts);
     self()->useDefaults(prevValue);
-    QStringList list = itemList().split(',', QString::SkipEmptyParts);
+    QStringList list = itemList().split(',', Qt::SkipEmptyParts);
 
     // now add all from 'all' that are missing in 'list'
     const QRegularExpression exp(QLatin1String("-?(\\d+)"));

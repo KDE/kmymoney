@@ -2619,7 +2619,7 @@ public:
     {
         Q_Q(MyMoneyStorageSql);
         // create the tables
-        QStringList ql = t.generateCreateSQL(m_driver, version).split('\n', QString::SkipEmptyParts);
+        QStringList ql = t.generateCreateSQL(m_driver, version).split('\n', Qt::SkipEmptyParts);
         QSqlQuery query(*q);
         foreach (const QString& i, ql) {
             if (!query.exec(i)) throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("creating table/index %1").arg(t.name()));

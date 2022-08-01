@@ -269,7 +269,7 @@ bool WebPriceQuote::launchNative(const QString& _webID, const QString& _kmmID, c
         emit status(i18nc("The process x is executing", "Executing %1...", url.toLocalFile()));
 
         QString program;
-        QStringList arguments = url.toLocalFile().split(' ', QString::SkipEmptyParts);
+        QStringList arguments = url.toLocalFile().split(' ', Qt::SkipEmptyParts);
         if (!arguments.isEmpty()) {
             program = arguments.first();
             arguments.removeFirst();
@@ -1061,7 +1061,7 @@ void FinanceQuoteProcess::launch(const QString& scriptPath)
 
 const QStringList FinanceQuoteProcess::getSourceList() const
 {
-    QStringList raw = m_string.split(0x0A, QString::SkipEmptyParts);
+    QStringList raw = m_string.split(0x0A, Qt::SkipEmptyParts);
     QStringList sources;
     QStringList::iterator it;
     for (it = raw.begin(); it != raw.end(); ++it) {

@@ -741,7 +741,7 @@ void MyMoneyQifProfile::possibleDateFormats(QStringList& list) const
     list.clear();
     QStringList::const_iterator it_d;
     for (it_d = defaultList.constBegin(); it_d != defaultList.constEnd(); ++it_d) {
-        const QStringList parts = (*it_d).split(',', QString::SkipEmptyParts);
+        const QStringList parts = (*it_d).split(',', Qt::SkipEmptyParts);
         int i;
         for (i = 0; i < 3; ++i) {
             if (d->m_partPos.contains(parts[i][0])) {
