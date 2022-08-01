@@ -10,6 +10,7 @@
 
 #include <QAction>
 #include <QCompleter>
+#include <QConcatenateTablesProxyModel>
 #include <QDate>
 #include <QDebug>
 #include <QHeaderView>
@@ -20,7 +21,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KConcatenateRowsProxyModel>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
@@ -307,7 +307,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
     d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
 
-    auto concatModel = new KConcatenateRowsProxyModel(parent);
+    auto concatModel = new QConcatenateTablesProxyModel(parent);
     concatModel->addSourceModel(file->payeesModel()->emptyPayee());
     concatModel->addSourceModel(file->payeesModel());
     d->payeesModel->setSortRole(Qt::DisplayRole);

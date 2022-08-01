@@ -21,7 +21,6 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <KConcatenateRowsProxyModel>
 #include <KDescendantsProxyModel>
 
 // ----------------------------------------------------------------------------

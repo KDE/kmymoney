@@ -10,22 +10,20 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QConcatenateTablesProxyModel>
+#include <QDebug>
+#include <QDomDocument>
+#include <QDomElement>
+#include <QElapsedTimer>
+#include <QModelIndex>
 #include <QObject>
 #include <QSharedData>
 #include <QSharedDataPointer>
-#include <QVariant>
-#include <QModelIndex>
-#include <QDomDocument>
-#include <QDomElement>
 #include <QUndoStack>
-
-#include <QDebug>
-#include <QElapsedTimer>
+#include <QVariant>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <KConcatenateRowsProxyModel>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -225,10 +223,10 @@ public:
         delete m_rootItem;
     }
 
-    KConcatenateRowsProxyModel* modelWithEmptyItem()
+    QConcatenateTablesProxyModel* modelWithEmptyItem()
     {
         if (m_emptyItemModel == nullptr) {
-            m_emptyItemModel = new KConcatenateRowsProxyModel(this);
+            m_emptyItemModel = new QConcatenateTablesProxyModel(this);
             m_emptyItemModel->addSourceModel(new MyMoneyEmptyModel<T>(this, m_idLeadin, m_idSize, nullptr));
             m_emptyItemModel->addSourceModel(this);
         }
@@ -787,12 +785,11 @@ protected:
     }
 
 protected:
-    TreeItem<T> *                 m_rootItem;
-    KConcatenateRowsProxyModel*   m_emptyItemModel;
-    QUndoStack*                   m_undoStack;
+    TreeItem<T>* m_rootItem;
+    QConcatenateTablesProxyModel* m_emptyItemModel;
+    QUndoStack* m_undoStack;
     QHash<QString, TreeItem<T>*>* m_idToItemMapper;
-    QSet<QString>                 m_referencedObjects;
-
+    QSet<QString> m_referencedObjects;
 };
 
 template <typename T>

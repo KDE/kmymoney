@@ -9,13 +9,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QConcatenateTablesProxyModel>
 #include <QDate>
 #include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include "kconcatenaterowsproxymodel.h"
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -74,7 +73,7 @@ public:
     }
 
     LedgerFilterBase* q;
-    KConcatenateRowsProxyModel* concatModel;          // Qt5.13+ use QConcatenateTablesProxyModel
+    QConcatenateTablesProxyModel* concatModel;
     eMyMoney::Account::Type accountType;
     QStringList filterIds;
     QDate firstVisiblePostDate;

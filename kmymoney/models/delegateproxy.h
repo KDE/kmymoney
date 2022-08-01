@@ -28,7 +28,7 @@ class DelegateProxyPrivate;
  *
  * The delegate proxy object allows to assign a specific delegate in a view
  * depending on the model where the item is located. This becomes handy in case
- * the items shown are combined using e.g. a KConcatenateRowsProxyModel and
+ * the items shown are combined using e.g. a QConcatenateTablesProxyModel and
  * each base model should have its own delegate.
  */
 class KMM_MODELS_EXPORT DelegateProxy : public QStyledItemDelegate

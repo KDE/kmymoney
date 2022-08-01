@@ -33,7 +33,7 @@ LedgerFilterBase::LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent)
     , d_ptr(dd)
 {
     Q_D(LedgerFilterBase);
-    d->concatModel = new KConcatenateRowsProxyModel(parent);
+    d->concatModel = new QConcatenateTablesProxyModel(parent);
 
     setFilterRole(eMyMoney::Model::Roles::SplitAccountIdRole);
     setFilterKeyColumn(0);

@@ -60,7 +60,7 @@ public:
      * it is returned unaltered.
      *
      * @note The following filter models (and any derivatives are supported:
-     * QSortFilterProxyModel, KConcatenateRowsProxyModel
+     * QSortFilterProxyModel, QConcatenateTablesProxyModel
      */
     QModelIndex mapToBaseSource(const QModelIndex& idx);
 

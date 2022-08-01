@@ -8,14 +8,14 @@
 // ----------------------------------------------------------------------------
 // Qt Includes
 
-#include <QSortFilterProxyModel>
-#include <QIdentityProxyModel>
+#include <QConcatenateTablesProxyModel>
 #include <QDebug>
+#include <QIdentityProxyModel>
+#include <QSortFilterProxyModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KConcatenateRowsProxyModel>           // Qt5.13+ use QConcatenateTablesProxyModel
 #include <KDescendantsProxyModel>
 
 // ----------------------------------------------------------------------------
@@ -50,17 +50,17 @@ const QAbstractItemModel* MyMoneyModelBase::baseModel(const QModelIndex& idx)
 
 QModelIndex MyMoneyModelBase::mapToBaseSource(const QModelIndex& _idx)
 {
-    QModelIndex                       idx(_idx);
-    const QSortFilterProxyModel*      sortFilterModel;
-    const QIdentityProxyModel*        identityModel;
-    const KConcatenateRowsProxyModel* concatModel;
-    const KDescendantsProxyModel*     descendantsModel;
+    QModelIndex idx(_idx);
+    const QSortFilterProxyModel* sortFilterModel;
+    const QIdentityProxyModel* identityModel;
+    const QConcatenateTablesProxyModel* concatModel;
+    const KDescendantsProxyModel* descendantsModel;
     do {
         if (( sortFilterModel = qobject_cast<const QSortFilterProxyModel*>(idx.model())) != nullptr) {
             // qDebug() << "QSortFilterProxyModel";
             idx = sortFilterModel->mapToSource(idx);
-        } else if ((concatModel = qobject_cast<const KConcatenateRowsProxyModel*>(idx.model())) != nullptr) {
-            // qDebug() << "KConcatenateRowsProxyModel";
+        } else if ((concatModel = qobject_cast<const QConcatenateTablesProxyModel*>(idx.model())) != nullptr) {
+            // qDebug() << "QConcatenateTablesProxyModel";
             idx = concatModel->mapToSource(idx);
         } else if ((identityModel = qobject_cast<const QIdentityProxyModel*>(idx.model())) != nullptr) {
             // qDebug() << "QIdentityProxyModel";
@@ -77,11 +77,11 @@ QModelIndex MyMoneyModelBase::mapToBaseSource(const QModelIndex& _idx)
 
 QModelIndex MyMoneyModelBase::mapFromBaseSource(QAbstractItemModel* proxyModel, const QModelIndex& _idx)
 {
-    QModelIndex                       idx(_idx);
-    const QSortFilterProxyModel*      sortFilterModel;
-    const QIdentityProxyModel*        identityModel;
-    const KConcatenateRowsProxyModel* concatModel;
-    const KDescendantsProxyModel*     descendantsModel;
+    QModelIndex idx(_idx);
+    const QSortFilterProxyModel* sortFilterModel;
+    const QIdentityProxyModel* identityModel;
+    const QConcatenateTablesProxyModel* concatModel;
+    const KDescendantsProxyModel* descendantsModel;
 
     if (( sortFilterModel = qobject_cast<const QSortFilterProxyModel*>(proxyModel)) != nullptr) {
         if (sortFilterModel->sourceModel() != idx.model()) {
@@ -89,15 +89,15 @@ QModelIndex MyMoneyModelBase::mapFromBaseSource(QAbstractItemModel* proxyModel, 
         }
         idx = sortFilterModel->mapFromSource(idx);
 
-    } else if((concatModel = qobject_cast<const KConcatenateRowsProxyModel*>(proxyModel)) != nullptr) {
+    } else if ((concatModel = qobject_cast<const QConcatenateTablesProxyModel*>(proxyModel)) != nullptr) {
         idx = concatModel->mapFromSource(idx);
 
-    } else if((identityModel = qobject_cast<const QIdentityProxyModel*>(proxyModel)) != nullptr) {
+    } else if ((identityModel = qobject_cast<const QIdentityProxyModel*>(proxyModel)) != nullptr) {
         if (identityModel->sourceModel() != idx.model()) {
             idx = mapFromBaseSource(identityModel->sourceModel(), idx);
         }
         idx = identityModel->mapFromSource(idx);
-    } else if((descendantsModel = qobject_cast<const KDescendantsProxyModel*>(idx.model())) != nullptr) {
+    } else if ((descendantsModel = qobject_cast<const KDescendantsProxyModel*>(idx.model())) != nullptr) {
         if (descendantsModel->sourceModel() != idx.model()) {
             idx = mapFromBaseSource(descendantsModel->sourceModel(), idx);
         }
