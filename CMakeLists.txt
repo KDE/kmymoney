@@ -319,8 +319,6 @@ add_feature_info("CSV Exporter" ENABLE_CSVEXPORTER "Allows exporting CSV files."
 
 add_feature_info("New features" ENABLE_CSVEXPORTER "Compiles unfinished features for testing.")
 
-add_feature_info("prefix.sh" KDE_INSTALL_PREFIX_SCRIPT "create prefix.sh script to support local execution")
-
 # Source translations (adapted from Krita)
 find_package(Python3 COMPONENTS Interpreter)
 set_package_properties(Python3 PROPERTIES
