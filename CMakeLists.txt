@@ -95,6 +95,9 @@ include(CMakeDependentOption)
 include(GenerateExportHeader)
 include(KMyMoneyMacros)
 
+include(KDEGitCommitHooks)
+kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
+
 find_package(PkgConfig)
 
 set (OPT_AKONADI_COMPONENTS )
@@ -495,18 +498,3 @@ feature_summary(WHAT ENABLED_FEATURES
 
 feature_summary(WHAT DISABLED_FEATURES
                 DESCRIPTION "The following features have been disabled:")
-
-# TODO Remove the clang-format file + cmake code once we depend on ECM 5.80
-set(GIT_DIR "${CMAKE_SOURCE_DIR}/.git")
-find_program(KDE_CLANG_FORMAT_EXECUTABLE clang-format)
-# In case of tarballs there is no .git directory
-if (EXISTS ${GIT_DIR})
-    # The pre-commit hook is a bash script, consequently it won't work on non-unix platforms
-    if (UNIX)
-        if(KDE_CLANG_FORMAT_EXECUTABLE)
-            configure_file("${CMAKE_SOURCE_DIR}/clang-format-pre-commit-hook.sh" "${GIT_DIR}/hooks/pre-commit" @ONLY)
-        else()
-            message(WARNING "No clang-format executable was found, skipping the formatting pre-commit hook")
-        endif()
-    endif()
-endif()
