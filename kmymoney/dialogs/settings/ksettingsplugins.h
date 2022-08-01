@@ -7,19 +7,9 @@
 #ifndef KSETTINGSPLUGINS_H
 #define KSETTINGSPLUGINS_H
 
-// ----------------------------------------------------------------------------
-// QT Includes
-
 #include <QWidget>
 
-// ----------------------------------------------------------------------------
-// KDE Includes
-
-// ----------------------------------------------------------------------------
-// Project Includes
-
-
-class  KSettingsPluginsPrivate;
+class KPluginWidget;
 class KSettingsPlugins : public QWidget
 {
     Q_OBJECT
@@ -27,7 +17,6 @@ class KSettingsPlugins : public QWidget
 
 public:
     explicit KSettingsPlugins(QWidget* parent = nullptr);
-    ~KSettingsPlugins();
 
 public Q_SLOTS:
     void slotResetToDefaults();
@@ -38,8 +27,7 @@ Q_SIGNALS:
     void settingsChanged(const QString &dialogName);
 
 private:
-    KSettingsPluginsPrivate* const d_ptr;
-    Q_DECLARE_PRIVATE(KSettingsPlugins)
+    KPluginWidget* const m_pluginSelector;
 };
 #endif
 

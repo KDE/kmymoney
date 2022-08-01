@@ -31,37 +31,14 @@ struct pluginGroupInfo {
     QString                           categoryName;
 };
 
-class KSettingsPluginsPrivate
-{
-    Q_DISABLE_COPY(KSettingsPluginsPrivate)
-
-public:
-    explicit KSettingsPluginsPrivate(KSettingsPlugins* qq)
-        : m_pluginSelector(new KPluginWidget(qq))
-    {
-    }
-
-    ~KSettingsPluginsPrivate()
-    {
-        delete m_pluginSelector;
-    }
-
-    KPluginWidget* const m_pluginSelector;
-    /**
-     * @brief savedPluginStates This caches on/off states as in kmymoneyrc
-     */
-    QBitArray savedPluginStates;
-};
-
-KSettingsPlugins::KSettingsPlugins(QWidget* parent) :
-    QWidget(parent),
-    d_ptr(new KSettingsPluginsPrivate(this))
+KSettingsPlugins::KSettingsPlugins(QWidget* parent)
+    : QWidget(parent)
+    , m_pluginSelector(new KPluginWidget(this))
 
 {
-    Q_D(KSettingsPlugins);
     auto layout = new QVBoxLayout;
     setLayout(layout);  // otherwise KPluginSelector occupies very little area
-    layout->addWidget(d->m_pluginSelector);
+    layout->addWidget(m_pluginSelector);
 
     auto allPluginDatas = KMyMoneyPlugin::listPlugins(false); // fetch all available KMyMoney plugins
     QVector<KPluginMetaData> standardPlugins;
@@ -91,34 +68,26 @@ KSettingsPlugins::KSettingsPlugins(QWidget* parent) :
     };
 
     KConfigGroup grp = KSharedConfig::openConfig()->group("Plugins");
-    d->m_pluginSelector->setConfig(grp);
+    m_pluginSelector->setConfig(grp);
 
     // add all plugins to selector
     for(const auto& pluginGroup : pluginGroups) {
         if (!pluginGroup.plugins.isEmpty()) {
-            d->m_pluginSelector->addPlugins(pluginGroup.plugins,
-                                            pluginGroup.categoryName); // at that step plugin on/off state should be fetched automatically by KPluginSelector
+            m_pluginSelector->addPlugins(pluginGroup.plugins,
+                                         pluginGroup.categoryName); // at that step plugin on/off state should be fetched automatically by KPluginSelector
         }
     }
 
-    connect(d->m_pluginSelector, &KPluginWidget::changed, this, &KSettingsPlugins::changed);
-}
-
-KSettingsPlugins::~KSettingsPlugins()
-{
-    Q_D(KSettingsPlugins);
-    delete d;
+    connect(m_pluginSelector, &KPluginWidget::changed, this, &KSettingsPlugins::changed);
 }
 
 void KSettingsPlugins::slotResetToDefaults()
 {
-    Q_D(KSettingsPlugins);
-    d->m_pluginSelector->defaults();
+    m_pluginSelector->defaults();
 }
 
 void KSettingsPlugins::slotSavePluginConfiguration()
 {
-    Q_D(KSettingsPlugins);
-    d->m_pluginSelector->save();
+    m_pluginSelector->save();
     emit settingsChanged(QStringLiteral("Plugins"));
 }
