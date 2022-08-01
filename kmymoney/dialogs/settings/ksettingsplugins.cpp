@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2022 Alexander Lohnau <alexander.lohnau@gmx.de>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -14,10 +15,11 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KConfigGroup>
 #include <KLocalizedString>
-#include <KPluginSelector>
-#include <KPluginInfo>
 #include <KPluginMetaData>
+#include <KPluginWidget>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -25,8 +27,7 @@
 #include "pluginloader.h"
 
 struct pluginGroupInfo {
-    QList<KPluginInfo>                plugins;
-    KPluginSelector::PluginLoadMethod loadMethod;
+    QVector<KPluginMetaData> plugins;
     QString                           categoryName;
 };
 
@@ -35,8 +36,8 @@ class KSettingsPluginsPrivate
     Q_DISABLE_COPY(KSettingsPluginsPrivate)
 
 public:
-    explicit KSettingsPluginsPrivate(KSettingsPlugins* qq) :
-        m_pluginSelector(new KPluginSelector(qq))
+    explicit KSettingsPluginsPrivate(KSettingsPlugins* qq)
+        : m_pluginSelector(new KPluginWidget(qq))
     {
     }
 
@@ -45,29 +46,7 @@ public:
         delete m_pluginSelector;
     }
 
-    /**
-     * @brief This should be called after save to kmymoneyrc in order to update cached on/off states
-     */
-    void updateSavedPluginStates()
-    {
-        for (auto i = 0 ; i < pluginInfos.size(); ++i)
-            savedPluginStates[i] = pluginInfos[i].isPluginEnabled();
-    }
-
-    /**
-     * @brief This compares plugin on/off states from KPluginSelector with cached one
-     * @return true if user changes to plugin on/off state aren't different than initial
-     */
-    bool isEqualToSavedStates()
-    {
-        for (auto i = 0 ; i < pluginInfos.size(); ++i)
-            if (savedPluginStates[i] != pluginInfos[i].isPluginEnabled())
-                return false;
-        return true;
-    }
-
-    KPluginSelector* const m_pluginSelector;
-    QList<KPluginInfo> pluginInfos;
+    KPluginWidget* const m_pluginSelector;
     /**
      * @brief savedPluginStates This caches on/off states as in kmymoneyrc
      */
@@ -105,51 +84,30 @@ KSettingsPlugins::KSettingsPlugins(QWidget* parent) :
             break;
         }
 
-    const QVector<pluginGroupInfo> pluginGroups {
-        {   KPluginInfo::fromMetaData(standardPlugins),
-            KPluginSelector::PluginLoadMethod::ReadConfigFile,
-            i18n("KMyMoney Plugins")
-        },
-
-        {   KPluginInfo::fromMetaData(payeePlugins),
-            KPluginSelector::PluginLoadMethod::IgnoreConfigFile,
-            i18n("Payee Identifier")
-        },
-
-        {   KPluginInfo::fromMetaData(onlinePlugins),
-            KPluginSelector::PluginLoadMethod::IgnoreConfigFile,
-            i18n("Online Banking Operations")
-        }
+    const QVector<pluginGroupInfo> pluginGroups{
+        {standardPlugins, i18n("KMyMoney Plugins")},
+        {payeePlugins, i18n("Payee Identifier")},
+        {onlinePlugins, i18n("Online Banking Operations")},
     };
+
+    KConfigGroup grp = KSharedConfig::openConfig()->group("Plugins");
+    d->m_pluginSelector->setConfig(grp);
 
     // add all plugins to selector
     for(const auto& pluginGroup : pluginGroups) {
         if (!pluginGroup.plugins.isEmpty()) {
             d->m_pluginSelector->addPlugins(pluginGroup.plugins,
-                                            pluginGroup.loadMethod,
                                             pluginGroup.categoryName); // at that step plugin on/off state should be fetched automatically by KPluginSelector
-            d->pluginInfos.append(pluginGroup.plugins);                // store initial on/off state to be able to enable/disable Apply button
         }
     }
-    d->savedPluginStates.resize(d->pluginInfos.size());
-    d->updateSavedPluginStates();
 
-    connect(d->m_pluginSelector, &KPluginSelector::changed, this, &KSettingsPlugins::slotPluginsSelectionChanged);
+    connect(d->m_pluginSelector, &KPluginWidget::changed, this, &KSettingsPlugins::changed);
 }
 
 KSettingsPlugins::~KSettingsPlugins()
 {
     Q_D(KSettingsPlugins);
     delete d;
-}
-
-void KSettingsPlugins::slotPluginsSelectionChanged(bool b)
-{
-    Q_D(KSettingsPlugins);
-    if (b) {
-        d->m_pluginSelector->updatePluginsState();
-        emit changed(!d->isEqualToSavedStates());
-    }
 }
 
 void KSettingsPlugins::slotResetToDefaults()
@@ -161,9 +119,6 @@ void KSettingsPlugins::slotResetToDefaults()
 void KSettingsPlugins::slotSavePluginConfiguration()
 {
     Q_D(KSettingsPlugins);
-    if (!d->isEqualToSavedStates()) {
-        d->m_pluginSelector->save();
-        d->updateSavedPluginStates();
-        emit settingsChanged(QStringLiteral("Plugins"));
-    }
+    d->m_pluginSelector->save();
+    emit settingsChanged(QStringLiteral("Plugins"));
 }

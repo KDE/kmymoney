@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2022 Alexander Lohnau <alexander.lohnau@gmx.de>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -17,7 +18,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class KPluginSelector;
 
 class  KSettingsPluginsPrivate;
 class KSettingsPlugins : public QWidget
@@ -40,9 +40,6 @@ Q_SIGNALS:
 private:
     KSettingsPluginsPrivate* const d_ptr;
     Q_DECLARE_PRIVATE(KSettingsPlugins)
-
-private Q_SLOTS:
-    void slotPluginsSelectionChanged(bool changed);
 };
 #endif
 
