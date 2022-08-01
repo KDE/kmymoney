@@ -21,6 +21,7 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+#include <KJsonUtils>
 #include <KPluginMetaData>
 #include <KService>
 
@@ -331,10 +332,7 @@ onlineJobAdministration::onlineJobEditOffers onlineJobAdministration::onlineJobE
         QJsonArray editorsArray = data.rawData()["KMyMoney"].toObject()["OnlineTask"].toObject()["Editors"].toArray();
         for(QJsonValue entry: editorsArray) {
             if (!entry.toObject()["OnlineTaskIds"].isNull()) {
-                list.append(onlineJobAdministration::onlineJobEditOffer{
-                    data.fileName(),
-                    KPluginMetaData::readTranslatedString(entry.toObject(), "Name")
-                });
+                list.append(onlineJobAdministration::onlineJobEditOffer{data.fileName(), KJsonUtils::readTranslatedString(entry.toObject(), "Name")});
             }
         }
     }
