@@ -41,9 +41,5 @@ target_link_libraries(newaccountwizard
   kmm_wizard
   )
 
-if (KMYMONEY_STABLE_BRANCH)
-  target_link_libraries(newaccountwizard KF5::IconThemes)
-endif()
-
 # we rely on some dialogs to be generated
 # add_dependencies(newaccountwizard)

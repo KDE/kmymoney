@@ -97,12 +97,6 @@ kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 
 find_package(PkgConfig)
 
-set (OPT_AKONADI_COMPONENTS )
-
-if (KMYMONEY_STABLE_BRANCH)
-  list(APPEND REQ_KF5_COMPONENTS IconThemes)
-endif()
-
 find_package(Gpgmepp)
 if (Gpgmepp_FOUND)
   set(GPG_FOUND TRUE)

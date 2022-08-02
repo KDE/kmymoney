@@ -39,10 +39,6 @@ target_link_libraries(settings PUBLIC
   Alkimia::alkimia
 )
 
-if (KMYMONEY_STABLE_BRANCH)
-  target_link_libraries(settings PUBLIC KF5::IconThemes)
-endif()
-
 if (ENABLE_HOLIDAYS)
   target_link_libraries(settings PUBLIC KF5::Holidays)
 endif()
