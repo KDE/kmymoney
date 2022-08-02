@@ -245,11 +245,7 @@ cmake_dependent_option(ENABLE_IBANBICDATA "Enable IBAN/BIC data support." OFF
 
 add_feature_info("IBAN/BIC data" ENABLE_IBANBICDATA "Adds predefined IBAN/BIC numbers to KMyMoney (note: doesn't work yet).")
 
-# check for optional LibOFX support
-cmake_dependent_option(ENABLE_OFXIMPORTER "Enable OFX Importer" ON
-                       "LIBOFX_FOUND" OFF)
-
-if(ENABLE_OFXIMPORTER)
+if(LIBOFX_FOUND)
   if(NOT LIBOFX_HAVE_CLIENTUID)
     get_target_property(PATH_TO_LIBOFX_HEADER PkgConfig::LIBOFX INTERFACE_INCLUDE_DIRECTORIES )
     if ("${PATH_TO_LIBOFX_HEADER}" STREQUAL "PATH_TO_LIBOFX_HEADER-NOTFOUND")
@@ -271,9 +267,7 @@ else()
   set (nice_LIBOFX_HAVE_CLIENTUID "unknown")
   unset(LIBOFX_HAVE_CLIENTUID)
   unset(LIBOFX_HAVE_CLIENTUID CACHE)
-endif(ENABLE_OFXIMPORTER)
-
-add_feature_info("OFX Importer" ENABLE_OFXIMPORTER "Allows importing OFX files (have client uid version: ${nice_LIBOFX_HAVE_CLIENTUID})" )
+endif(LIBOFX_FOUND)
 
 # check for optional KBanking support
 find_package(aqbanking 6.2.5)
@@ -302,22 +296,6 @@ find_package(LibIcal)
 cmake_dependent_option(ENABLE_LIBICAL "Enable Calendar plugin" ON
                        "LibIcal_FOUND" OFF)
 add_feature_info(iCalendar ENABLE_LIBICAL "iCalendar integration.")
-
-
-option(ENABLE_QIFIMPORTER "Enable QIF Importer" ON)
-option(ENABLE_QIFEXPORTER "Enable QIF Exporter" ON)
-add_feature_info("QIF Importer" ENABLE_QIFIMPORTER "Allows importing QIF files.")
-add_feature_info("QIF Exporter" ENABLE_QIFEXPORTER "Allows exporting QIF files.")
-
-option(ENABLE_GNCIMPORTER "Enable GNC Importer" ON)
-add_feature_info("GNC Importer" ENABLE_GNCIMPORTER "Allows importing GNUCash files.")
-
-option(ENABLE_CSVIMPORTER "Enable CSV Importer" ON)
-option(ENABLE_CSVEXPORTER "Enable CSV Exporter" ON)
-add_feature_info("CSV Importer" ENABLE_CSVIMPORTER "Allows importing CSV files.")
-add_feature_info("CSV Exporter" ENABLE_CSVEXPORTER "Allows exporting CSV files.")
-
-add_feature_info("New features" ENABLE_CSVEXPORTER "Compiles unfinished features for testing.")
 
 # Source translations (adapted from Krita)
 find_package(Python3 COMPONENTS Interpreter)

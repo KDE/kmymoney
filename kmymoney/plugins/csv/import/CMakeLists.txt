@@ -1,9 +1,5 @@
 add_subdirectory(core)
 
-if(NOT ENABLE_CSVIMPORTER)
-  return()
-endif()
-
 # patch the version with the version defined in the build system
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/csvimporter.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/csvimporter.json @ONLY)
 
