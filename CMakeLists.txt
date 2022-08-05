@@ -101,7 +101,7 @@ if (PkgConfig_FOUND)
 endif()
 
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets Svg Xml Test PrintSupport)
-find_package(Qt5 ${QT_MIN_VERSION} OPTIONAL_COMPONENTS Sql Concurrent QuickWidgets WebEngineWidgets WebKitWidgets)
+find_package(Qt5 ${QT_MIN_VERSION} OPTIONAL_COMPONENTS Sql Concurrent QuickWidgets)
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO)
 find_package(KF5 ${KF5_MIN_VERSION} OPTIONAL_COMPONENTS DocTools Holidays Contacts Activities)
