@@ -390,7 +390,7 @@ public:
         q->connect(ui->m_maxCreditEarlyEdit, &AmountEdit::amountChanged, q, &KNewAccountDlg::slotAdjustMaxCreditAbsoluteEdit);
         q->connect(ui->m_maxCreditAbsoluteEdit, &AmountEdit::amountChanged, q, &KNewAccountDlg::slotAdjustMaxCreditEarlyEdit);
 
-        q->connect(ui->m_qcomboboxInstitutions, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::activated), q, &KNewAccountDlg::slotLoadInstitutions);
+        q->connect(ui->m_qcomboboxInstitutions, &QComboBox::textActivated, q, &KNewAccountDlg::slotLoadInstitutions);
 
         frameCollection = new WidgetHintFrameCollection(q);
         frameCollection->addFrame(new WidgetHintFrame(ui->accountNameEdit));

@@ -394,7 +394,13 @@ bool MyMoneyBudget::hasReferenceTo(const QString& id) const
 QSet<QString> MyMoneyBudget::referencedObjects() const
 {
     Q_D(const MyMoneyBudget);
-    return QSet<QString>::fromList(d->m_accounts.keys());
+#if 0
+    if (d->m_accounts.isEmpty()) {
+        return {};
+    }
+#endif
+    const auto keys = d->m_accounts.keys();
+    return QSet<QString>(keys.constBegin(), keys.constEnd());
 }
 
 void MyMoneyBudget::removeReference(const QString& id)

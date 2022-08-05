@@ -28,8 +28,8 @@ ibanBicItemEdit::ibanBicItemEdit(QWidget* parent)
     connect(d->ui->ibanEdit, &KIbanLineEdit::textChanged, this, &ibanBicItemEdit::ibanChanged);
     connect(d->ui->bicEdit, &KBicEdit::textChanged, this, &ibanBicItemEdit::bicChanged);
 
-    connect(d->ui->ibanEdit, &KIbanLineEdit::returnPressed, this, &ibanBicItemEdit::editFinished);
-    connect(d->ui->bicEdit, &KBicEdit::returnPressed, this, &ibanBicItemEdit::editFinished);
+    connect(d->ui->ibanEdit, &KIbanLineEdit::returnKeyPressed, this, &ibanBicItemEdit::editFinished);
+    connect(d->ui->bicEdit, &KBicEdit::returnKeyPressed, this, &ibanBicItemEdit::editFinished);
 }
 
 void ibanBicItemEdit::editFinished()

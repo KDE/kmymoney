@@ -173,8 +173,8 @@ void KExportDlg::writeConfig()
     grp.writeEntry("KExportDlg_LastFile", m_qlineeditFile->text());
     grp.writeEntry("KExportDlg_AccountOpt", m_qcheckboxAccount->isChecked());
     grp.writeEntry("KExportDlg_CatOpt", m_qcheckboxCategories->isChecked());
-    grp.writeEntry("KExportDlg_StartDate", QDateTime(m_kmymoneydateStart->date()));
-    grp.writeEntry("KExportDlg_EndDate", QDateTime(m_kmymoneydateEnd->date()));
+    grp.writeEntry("KExportDlg_StartDate", m_kmymoneydateStart->date().startOfDay());
+    grp.writeEntry("KExportDlg_EndDate", m_kmymoneydateEnd->date().startOfDay());
     grp.writeEntry("KExportDlg_LastProfile", m_profileComboBox->currentText());
     kconfig->sync();
 }

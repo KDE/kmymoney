@@ -113,8 +113,6 @@ public:
     {
     }
 
-    TemplateAccount(const TemplateAccount& b) = default;
-
     void clear()
     {
         id.clear();
@@ -577,7 +575,7 @@ int convertFileStructure(const QString &indir, const QString &outdir)
         }
         fi.setFile(outFileName);
 
-        d = fi.absolutePath();
+        d.setPath(fi.absolutePath());
         if (!d.exists())
         {
             if  (debug)

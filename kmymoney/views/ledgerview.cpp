@@ -165,7 +165,7 @@ public:
                 case 1: // the header is the only thing in the menu
                 {
                     auto accountSelectorAction = new QWidgetAction(menu);
-                    moveToAccountSelector = new KMyMoneyAccountSelector(menu, 0, false);
+                    moveToAccountSelector = new KMyMoneyAccountSelector(menu, {}, false);
                     moveToAccountSelector->setObjectName("transaction_move_menu_selector");
                     accountSelectorAction->setDefaultWidget(moveToAccountSelector);
                     menu->addAction(accountSelectorAction);

@@ -619,7 +619,7 @@ public:
             //add cycle interval columns
             QDate f_date = forecastStartDate;
             for (; f_date <= forecastEndDate; f_date = f_date.addMonths(1)) {
-                headerLabels << QDate::longMonthName(f_date.month());
+                headerLabels << QLocale().standaloneMonthName(f_date.month(), QLocale::LongFormat);
             }
         }
         //add total column

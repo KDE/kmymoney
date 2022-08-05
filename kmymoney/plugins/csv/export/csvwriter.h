@@ -66,7 +66,7 @@ public:
 private:
     bool m_firstSplit;
 
-    QMap<QString, QString> m_map;
+    QMultiMap<QString, QString> m_map;
     /**
       * This method writes the entries necessary for an account. First
       * the leadin, and then the transactions that are in the account

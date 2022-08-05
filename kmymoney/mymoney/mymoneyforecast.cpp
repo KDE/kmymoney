@@ -869,7 +869,8 @@ public:
      */
     void purgeForecastAccountsList(QMap<QString, dailyBalances>& accountList)
     {
-        m_forecastAccounts.intersect(accountList.keys().toSet());
+        const auto keys = accountList.keys();
+        m_forecastAccounts.intersect(QSet<QString>(keys.constBegin(), keys.constEnd()));
     }
 
     MyMoneyForecast *q_ptr;

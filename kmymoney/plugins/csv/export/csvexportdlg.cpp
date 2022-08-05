@@ -115,8 +115,8 @@ void CsvExportDlg::writeConfig()
     grp.writeEntry("CsvExportDlg_LastFile", ui->m_qlineeditFile->text());
     grp.writeEntry("CsvExportDlg_AccountOpt", ui->m_radioButtonAccount->isChecked());
     grp.writeEntry("CsvExportDlg_CatOpt", ui->m_radioButtonCategories->isChecked());
-    grp.writeEntry("CsvExportDlg_StartDate", QDateTime(ui->m_kmymoneydateStart->date()));
-    grp.writeEntry("CsvExportDlg_EndDate", QDateTime(ui->m_kmymoneydateEnd->date()));
+    grp.writeEntry("CsvExportDlg_StartDate", ui->m_kmymoneydateStart->date().startOfDay());
+    grp.writeEntry("CsvExportDlg_EndDate", ui->m_kmymoneydateEnd->date().startOfDay());
     grp.writeEntry("CsvExportDlg_separatorIndex", ui->m_separatorComboBox->currentIndex());
     config->sync();
 }

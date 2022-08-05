@@ -89,7 +89,7 @@ void MyMoneyQifWriter::writeAccountEntry(QTextStream& s, const QString& accountI
     QString openingBalanceTransactionId;
     QString type = m_qifProfile.profileType();
 
-    s << "!Type:" << type << endl;
+    s << "!Type:" << type << Qt::endl;
     if (type == "Invst") {
         extractInvestmentEntries(s, accountId, startDate, endDate);
     } else {
@@ -97,28 +97,28 @@ void MyMoneyQifWriter::writeAccountEntry(QTextStream& s, const QString& accountI
         QList<MyMoneyTransaction> list;
         file->transactionList(list, filter);
         if (!startDate.isValid() || startDate <= account.openingDate()) {
-            s << "D" << m_qifProfile.date(account.openingDate()) << endl;
+            s << "D" << m_qifProfile.date(account.openingDate()) << Qt::endl;
             openingBalanceTransactionId = file->openingBalanceTransaction(account);
             MyMoneySplit split;
             if (!openingBalanceTransactionId.isEmpty()) {
                 MyMoneyTransaction openingBalanceTransaction = file->transaction(openingBalanceTransactionId);
                 split = openingBalanceTransaction.splitByAccount(account.id(), true /* match */);
             }
-            s << "T" << m_qifProfile.value('T', split.value()) << endl;
+            s << "T" << m_qifProfile.value('T', split.value()) << Qt::endl;
         } else {
-            s << "D" << m_qifProfile.date(startDate) << endl;
-            s << "T" << m_qifProfile.value('T', file->balance(accountId, startDate.addDays(-1))) << endl;
+            s << "D" << m_qifProfile.date(startDate) << Qt::endl;
+            s << "T" << m_qifProfile.value('T', file->balance(accountId, startDate.addDays(-1))) << Qt::endl;
         }
-        s << "CX" << endl;
-        s << "P" << m_qifProfile.openingBalanceText() << endl;
+        s << "CX" << Qt::endl;
+        s << "P" << m_qifProfile.openingBalanceText() << Qt::endl;
         s << "L";
         if (m_qifProfile.accountDelimiter().length())
             s << m_qifProfile.accountDelimiter()[0];
         s << account.name();
         if (m_qifProfile.accountDelimiter().length() > 1)
             s << m_qifProfile.accountDelimiter()[1];
-        s << endl;
-        s << "^" << endl;
+        s << Qt::endl;
+        s << "^" << Qt::endl;
 
         QList<MyMoneyTransaction>::ConstIterator it;
         signalProgress(0, list.count());
@@ -141,7 +141,7 @@ void MyMoneyQifWriter::writeCategoryEntries(QTextStream &s)
     income = file->income();
     expense = file->expense();
 
-    s << "!Type:Cat" << endl;
+    s << "!Type:Cat" << Qt::endl;
     QStringList list = income.accountList() + expense.accountList();
     emit signalProgress(0, list.count());
     QStringList::Iterator it;
@@ -157,9 +157,9 @@ void MyMoneyQifWriter::writeCategoryEntry(QTextStream &s, const QString& account
     MyMoneyAccount acc = MyMoneyFile::instance()->account(accountId);
     QString name = acc.name();
 
-    s << "N" << leadIn << name << endl;
-    s << (acc.accountGroup() == eMyMoney::Account::Type::Expense ? "E" : "I") << endl;
-    s << "^" << endl;
+    s << "N" << leadIn << name << Qt::endl;
+    s << (acc.accountGroup() == eMyMoney::Account::Type::Expense ? "E" : "I") << Qt::endl;
+    s << "^" << Qt::endl;
 
     QStringList list = acc.accountList();
     QStringList::Iterator it;
@@ -174,16 +174,16 @@ void MyMoneyQifWriter::writeTransactionEntry(QTextStream &s, const MyMoneyTransa
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneySplit split = t.splitByAccount(accountId);
 
-    s << "D" << m_qifProfile.date(t.postDate()) << endl;
+    s << "D" << m_qifProfile.date(t.postDate()) << Qt::endl;
 
     switch (split.reconcileFlag()) {
     case eMyMoney::Split::State::Cleared:
-        s << "C*" << endl;
+        s << "C*" << Qt::endl;
         break;
 
     case eMyMoney::Split::State::Reconciled:
     case eMyMoney::Split::State::Frozen:
-        s << "CX" << endl;
+        s << "CX" << Qt::endl;
         break;
 
     default:
@@ -193,17 +193,17 @@ void MyMoneyQifWriter::writeTransactionEntry(QTextStream &s, const MyMoneyTransa
     if (split.memo().length() > 0) {
         QString m = split.memo();
         m.replace('\n', "\\n");
-        s << "M" << m << endl;
+        s << "M" << m << Qt::endl;
     }
 
-    s << "T" << m_qifProfile.value('T', split.value()) << endl;
+    s << "T" << m_qifProfile.value('T', split.value()) << Qt::endl;
 
     if (split.number().length() > 0)
-        s << "N" << split.number() << endl;
+        s << "N" << split.number() << Qt::endl;
 
     if (!split.payeeId().isEmpty()) {
         MyMoneyPayee payee = file->payee(split.payeeId());
-        s << "P" << payee.name() << endl;
+        s << "P" << payee.name() << Qt::endl;
     }
 
     QList<MyMoneySplit> list = t.splits();
@@ -212,11 +212,10 @@ void MyMoneyQifWriter::writeTransactionEntry(QTextStream &s, const MyMoneyTransa
         MyMoneyAccount acc = file->account(sp.accountId());
         if (acc.accountGroup() != eMyMoney::Account::Type::Income
                 && acc.accountGroup() != eMyMoney::Account::Type::Expense) {
-            s << "L" << m_qifProfile.accountDelimiter()[0]
-              << MyMoneyFile::instance()->accountToCategory(sp.accountId())
-              << m_qifProfile.accountDelimiter()[1] << endl;
+            s << "L" << m_qifProfile.accountDelimiter()[0] << MyMoneyFile::instance()->accountToCategory(sp.accountId()) << m_qifProfile.accountDelimiter()[1]
+              << Qt::endl;
         } else {
-            s << "L" << file->accountToCategory(sp.accountId()) << endl;
+            s << "L" << file->accountToCategory(sp.accountId()) << Qt::endl;
         }
         if (list.count() > 2) {
             QList<MyMoneySplit>::ConstIterator it;
@@ -227,7 +226,7 @@ void MyMoneyQifWriter::writeTransactionEntry(QTextStream &s, const MyMoneyTransa
             }
         }
     }
-    s << "^" << endl;
+    s << "^" << Qt::endl;
 }
 
 void MyMoneyQifWriter::writeSplitEntry(QTextStream& s, const MyMoneySplit& split)
@@ -244,15 +243,15 @@ void MyMoneyQifWriter::writeSplitEntry(QTextStream& s, const MyMoneySplit& split
     } else {
         s << file->accountToCategory(split.accountId());
     }
-    s << endl;
+    s << Qt::endl;
 
     if (split.memo().length() > 0) {
         QString m = split.memo();
         m.replace('\n', "\\n");
-        s << "E" << m << endl;
+        s << "E" << m << Qt::endl;
     }
 
-    s << "$" << m_qifProfile.value('$', -split.value()) << endl;
+    s << "$" << m_qifProfile.value('$', -split.value()) << Qt::endl;
 }
 
 void MyMoneyQifWriter::extractInvestmentEntries(QTextStream &s, const QString& accountId, const QDate& startDate, const QDate& endDate)

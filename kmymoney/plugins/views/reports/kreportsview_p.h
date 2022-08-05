@@ -276,7 +276,7 @@ void KReportTab::wheelEvent(QWheelEvent* event)
         if (!m_showingChart) {
             // TODO
             //            qreal factor = m_tableView->zoomFactor();
-            if (event->delta() > 0)
+            if (event->angleDelta().y() > 0)
                 //                factor += 0.1;
                 //            else if (event->delta() < 0)
                 //                factor -= 0.1;

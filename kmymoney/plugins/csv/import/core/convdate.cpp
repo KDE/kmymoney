@@ -37,6 +37,16 @@ QDate ConvertDate::convertDate(const QString& txt)
 
     QRegularExpression rx(QStringLiteral("[\\. :-]"));  //                           replace date field separators '.' ' ' ':' '-'
     QString buffer = txt.trimmed();
+
+    // in case we detect more than 3 sections, it could be,
+    // that a single dot is appended to a monthname. We
+    // remove this single dot before we continue
+    if (buffer.count(rx) > 2) {
+        if (buffer.count(QLatin1Char('.')) == 1) {
+            buffer.remove(QLatin1Char('.'));
+        }
+    }
+
     buffer = buffer.replace(rx, QString::fromLatin1("/"));   //     ....with '/'
     int count = buffer.count(QLatin1Char('/'), Qt::CaseSensitive);
     if (count == 0) {      //                              no separators so use QDate()
@@ -173,20 +183,20 @@ QDate ConvertDate::convertDate(const QString& txt)
         int i;
         if (aMonth.length() > 3) {
             for (i = 1; i <= 12; ++i)
-                if (aMonth.compare(QDate::longMonthName(i, QDate::StandaloneFormat), Qt::CaseInsensitive) == 0)
+                if (aMonth.compare(QLocale().standaloneMonthName(i, QLocale::LongFormat), Qt::CaseInsensitive) == 0)
                     break;
             if (i == 13) {
                 for (i = 1; i <= 12; ++i)
-                    if (aMonth.compare(QDate::longMonthName(i), Qt::CaseInsensitive) == 0)
+                    if (aMonth.compare(QLocale().monthName(i, QLocale::LongFormat), Qt::CaseInsensitive) == 0)
                         break;
             }
         } else {
             for (i = 1; i <= 12; ++i)
-                if (aMonth.compare(QDate::shortMonthName(i, QDate::StandaloneFormat), Qt::CaseInsensitive) == 0)
+                if (aMonth.compare(QLocale().standaloneMonthName(i, QLocale::ShortFormat), Qt::CaseInsensitive) == 0)
                     break;
             if (i == 13) {
                 for (i = 1; i <= 12; ++i)
-                    if (aMonth.compare(QDate::shortMonthName(i), Qt::CaseInsensitive) == 0)
+                    if (aMonth.compare(QLocale().monthName(i, QLocale::ShortFormat), Qt::CaseInsensitive) == 0)
                         break;
             }
         }

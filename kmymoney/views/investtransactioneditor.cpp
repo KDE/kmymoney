@@ -1199,7 +1199,7 @@ QStringList InvestTransactionEditor::saveTransaction(const QStringList& selected
     } else {
         // we keep the date when adding a new transaction
         // for the next new one
-        KMyMoneySettings::setLastUsedPostDate(QDateTime(d->ui->dateEdit->date()));
+        KMyMoneySettings::setLastUsedPostDate(d->ui->dateEdit->date().startOfDay());
     }
 
     d->removeUnusedSplits(t, d->feeSplitModel);

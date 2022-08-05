@@ -934,7 +934,7 @@ public:
 
         if (!accounts.isEmpty()) {
             // sort the accounts by name
-            qStableSort(accounts.begin(), accounts.end(), accountNameLess);
+            std::stable_sort(accounts.begin(), accounts.end(), accountNameLess);
             int i = 0;
 
             // print header
@@ -1006,7 +1006,7 @@ public:
         QList<MyMoneyReport> reports = MyMoneyFile::instance()->reportList();
 
         if (!reports.isEmpty()) {
-            qStableSort(reports.begin(), reports.end(), [&](const MyMoneyReport &rep1, const MyMoneyReport &rep2) {
+            std::stable_sort(reports.begin(), reports.end(), [&](const MyMoneyReport& rep1, const MyMoneyReport& rep2) {
                 return rep1.name().localeAwareCompare(rep2.name()) < 0;
             });
             bool firstTime = 1;
@@ -1060,7 +1060,7 @@ public:
 
         if (accList.count() > 0) {
             // sort the accounts by name
-            qStableSort(accList.begin(), accList.end(), accountNameLess);
+            std::stable_sort(accList.begin(), accList.end(), accountNameLess);
             auto i = 0;
 
             auto colspan = 1;
@@ -1282,8 +1282,8 @@ public:
         //only do it if we have assets or liabilities account
         if (assets.count() > 0 || liabilities.count() > 0) {
             // sort the accounts by name
-            qStableSort(assets.begin(), assets.end(), accountNameLess);
-            qStableSort(liabilities.begin(), liabilities.end(), accountNameLess);
+            std::stable_sort(assets.begin(), assets.end(), accountNameLess);
+            std::stable_sort(liabilities.begin(), liabilities.end(), accountNameLess);
             QString statusHeader;
             if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
                 QString pathStatusHeader;

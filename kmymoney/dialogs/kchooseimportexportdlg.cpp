@@ -88,7 +88,7 @@ KChooseImportExportDlg::KChooseImportExportDlg(int type, QWidget *parent) :
     slotTypeActivated(d->m_lastType);
     d->ui->typeCombo->setCurrentItem(((d->m_lastType == "QIF") ? i18n("QIF") : i18n("CSV")), false);
 
-    connect(d->ui->typeCombo, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::activated), this, &KChooseImportExportDlg::slotTypeActivated);
+    connect(d->ui->typeCombo, &QComboBox::textActivated, this, &KChooseImportExportDlg::slotTypeActivated);
 }
 
 KChooseImportExportDlg::~KChooseImportExportDlg()

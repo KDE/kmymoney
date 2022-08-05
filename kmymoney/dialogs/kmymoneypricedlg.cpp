@@ -217,7 +217,7 @@ void KMyMoneyPriceDlg::slotLoadWidgets()
     }
     //reenable sorting and sort by the commodity column
     d->ui->m_priceList->setSortingEnabled(true);
-    d->ui->m_priceList->sortByColumn(KPriceTreeItem::ePriceCommodity);
+    d->ui->m_priceList->sortByColumn(KPriceTreeItem::ePriceCommodity, Qt::SortOrder::AscendingOrder);
 
     //update the search widget so the list gets refreshed correctly if it was being filtered
     if (!d->m_searchWidget->searchLine()->text().isEmpty())

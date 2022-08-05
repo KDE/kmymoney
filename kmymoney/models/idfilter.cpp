@@ -53,7 +53,7 @@ bool IdFilter::filterAcceptsRow(int source_row, const QModelIndex& source_parent
 void IdFilter::setFilterList(const QStringList& idList)
 {
     Q_D(IdFilter);
-    d->idList = QSet<QString>::fromList(idList);
+    d->idList = QSet<QString>(idList.constBegin(), idList.constEnd());
     invalidateFilter();
 }
 
@@ -75,7 +75,7 @@ void IdFilter::removeFilter(const QString& id)
 QList<QString> IdFilter::filterList() const
 {
     Q_D(const IdFilter);
-    return d->idList.toList();
+    return d->idList.values();
 }
 
 bool IdFilter::lessThan(const QModelIndex& left, const QModelIndex& right) const

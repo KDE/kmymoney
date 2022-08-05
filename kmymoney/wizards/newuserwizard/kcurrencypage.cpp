@@ -80,7 +80,7 @@ CurrencyPage::CurrencyPage(Wizard* wizard) :
         first = *itemsIt;
     if (first != 0) {
         ui->m_currencyList->setCurrentItem(first);
-        ui->m_currencyList->setItemSelected(first, true);
+        first->setSelected(true);
         ui->m_currencyList->scrollToItem(first, QTreeView::PositionAtTop);
     }
 }

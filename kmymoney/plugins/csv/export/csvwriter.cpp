@@ -153,7 +153,7 @@ void CsvWriter::writeCategoryEntry(QTextStream &s, const QString& accountId, con
 
     s << leadIn << name;
     s << (acc.accountGroup() == eMyMoney::Account::Type::Expense ? QLatin1Char('E') : QLatin1Char('I'));
-    s << endl;
+    s << Qt::endl;
 
     foreach (const auto sAccount, acc.accountList())
         writeCategoryEntry(s, sAccount, name);
@@ -217,7 +217,7 @@ void CsvWriter::writeTransactionEntry(const MyMoneyTransaction& t, const QString
         }
     }
     QString date = t.postDate().toString(Qt::ISODate);
-    m_map.insertMulti(date, str);
+    m_map.insert(date, str);
 }
 
 void CsvWriter::writeSplitEntry(QString &str, const MyMoneySplit& split, const int splitCount, const int lastEntry)
@@ -428,7 +428,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
     }  //  end of itSplit loop
     str += strAccName + strAction + strAmount + strQuantity + strPrice + strInterest + strFees + strCheckingAccountName + strMemo + strStatus;
     QString date = t.postDate().toString(Qt::ISODate);
-    m_map.insertMulti(date, str);
+    m_map.insert(date, str);
 }
 
 /**

@@ -2410,7 +2410,7 @@ bool MyMoneyGncReader::writeReportToFile(const QList<QString>& sectionsToReport)
         }
         QTextStream stream(&reportFile);
         for (i = 0; i < sectionsToReport.count(); i++)
-            stream << buildReportSection(sectionsToReport[i]) << endl;
+            stream << buildReportSection(sectionsToReport[i]) << Qt::endl;
         reportFile.close();
         return (true);
     }

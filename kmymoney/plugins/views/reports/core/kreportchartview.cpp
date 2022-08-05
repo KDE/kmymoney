@@ -291,7 +291,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     int precision = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
     int rowNum = 0;
     QStringList legendNames;
-    QMap<MyMoneyMoney, int> legendTotal;
+    QMultiMap<MyMoneyMoney, int> legendTotal;
 
     switch (config.detailLevel()) {
     case eMyMoney::Report::DetailLevel::None:
@@ -335,7 +335,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
                             //set the legend text
                             legendNames.append(legendText);
-                            legendTotal.insertMulti(it_row.value().value(myRowTypeList.at(i)).m_total.abs(), rowNum);
+                            legendTotal.insert(it_row.value().value(myRowTypeList.at(i)).m_total.abs(), rowNum);
 
                             precision = myRowTypeList.at(i) == ePrice ? securityPrecision : currencyPrecision;
 
@@ -375,7 +375,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
                     //set the legend text
                     legendNames.append(legendText);
-                    legendTotal.insertMulti((*it_innergroup).m_total.value(myRowTypeList.at(i)).m_total.abs(), rowNum);
+                    legendTotal.insert((*it_innergroup).m_total.value(myRowTypeList.at(i)).m_total.abs(), rowNum);
 
                     //set the cell value and tooltip
                     rowNum = drawPivotGridRow(rowNum, (*it_innergroup).m_total.value(myRowTypeList.at(i)),
@@ -407,7 +407,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
                 //set the legend text
                 legendNames.append(legendText);
-                legendTotal.insertMulti((*it_outergroup).m_total.value(myRowTypeList.at(i)).m_total.abs(), rowNum);
+                legendTotal.insert((*it_outergroup).m_total.value(myRowTypeList.at(i)).m_total.abs(), rowNum);
 
                 //set the cell value and tooltip
                 rowNum = drawPivotGridRow(rowNum, (*it_outergroup).m_total.value(myRowTypeList.at(i)),
@@ -431,7 +431,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
                 //set the legend text
                 legendNames.append(legendText);
-                legendTotal.insertMulti(grid.m_total.value(myRowTypeList.at(i)).m_total.abs(), rowNum);
+                legendTotal.insert(grid.m_total.value(myRowTypeList.at(i)).m_total.abs(), rowNum);
 
                 //set the cell value and tooltip
                 rowNum = drawPivotGridRow(rowNum, grid.m_total.value(myRowTypeList.at(i)),
@@ -455,7 +455,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
             //set the legend text
             legendNames.append(legendText);
-            legendTotal.insertMulti(grid.m_total.value(myRowTypeList.at(i)).m_total.abs(), rowNum);
+            legendTotal.insert(grid.m_total.value(myRowTypeList.at(i)).m_total.abs(), rowNum);
 
             //set the cell value and tooltip
             if (config.isMixedTime()) {

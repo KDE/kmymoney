@@ -213,7 +213,6 @@ bool WebPriceQuote::launchCSV(const QString& _webID, const QString& _kmmID, cons
         }
         QFile::remove(tmpFile);
         const QUrl dest = QUrl::fromLocalFile(tmpFile);
-        KIO::Scheduler::checkSlaveOnHold(true);
         KIO::Job *job = KIO::file_copy(url, dest, -1, KIO::HideProgressInfo);
         connect(job, SIGNAL(result(KJob*)),
                 this, SLOT(downloadCSV(KJob*)));
@@ -310,7 +309,6 @@ bool WebPriceQuote::launchNative(const QString& _webID, const QString& _kmmID, c
         }
         QFile::remove(tmpFile);
         const QUrl dest = QUrl::fromLocalFile(tmpFile);
-        KIO::Scheduler::checkSlaveOnHold(true);
         KIO::Job *job = KIO::file_copy(url, dest, -1, KIO::HideProgressInfo);
         connect(job, SIGNAL(result(KJob*)),
                 this, SLOT(downloadResult(KJob*)));

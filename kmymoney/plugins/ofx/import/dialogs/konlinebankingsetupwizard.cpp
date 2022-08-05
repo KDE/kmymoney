@@ -81,7 +81,7 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
     QCoreApplication::processEvents();
 
     //set password field according to KDE preferences
-    m_editPassword->setPasswordMode(true);
+    m_editPassword->setEchoMode(QLineEdit::EchoMode::PasswordEchoOnEdit);
     new PasswordToggle(m_editPassword);
 
     // make sure to not exceed data fields

@@ -316,7 +316,7 @@ void onlineJobAdministration::registerOnlineTaskConverter(onlineTaskConverter* c
     if (Q_UNLIKELY(converter == 0))
         return;
 
-    m_onlineTaskConverter.insertMulti(converter->convertedTask(), converter);
+    m_onlineTaskConverter.insert(converter->convertedTask(), converter);
     qDebug() << "onlineTaskConverter available" << converter->convertedTask() << converter->convertibleTasks();
 }
 

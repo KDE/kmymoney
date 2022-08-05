@@ -468,7 +468,7 @@ bool MyMoneyQifReader::startImport()
             arguments << "-";
 #endif
         } else {
-            arguments << m_qifProfile.filterScriptImport().split(' ', QString::KeepEmptyParts);
+            arguments << m_qifProfile.filterScriptImport().split(' ');
             program = arguments.takeFirst();
         }
         m_entryType = EntryUnknown;

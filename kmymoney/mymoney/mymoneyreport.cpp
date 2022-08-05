@@ -978,7 +978,7 @@ QSet<QString> MyMoneyReport::referencedObjects() const
     categories(list);
     payees(list);
     tags(list);
-    return QSet<QString>::fromList(list);
+    return QSet<QString>(list.constBegin(), list.constEnd());
 }
 
 int MyMoneyReport::m_lineWidth = 2;
