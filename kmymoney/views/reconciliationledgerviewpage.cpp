@@ -260,9 +260,6 @@ public:
             }
             ft.commit();
 
-            // load the new data into the model
-            file->reconciliationModel()->updateData();
-
             /// send information to plugins through a QAction. Data is
             /// a) accountId
             /// b) reconciledJournalEntryIds

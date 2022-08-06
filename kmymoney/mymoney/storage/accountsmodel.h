@@ -159,6 +159,7 @@ public Q_SLOTS:
 Q_SIGNALS:
     void netWorthChanged(const MyMoneyMoney& amount, bool approximate);
     void profitLossChanged(const MyMoneyMoney& amount, bool approximate);
+    void reconciliationInfoChanged();
 
 private:
     struct Private;

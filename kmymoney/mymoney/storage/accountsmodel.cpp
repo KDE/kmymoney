@@ -1141,6 +1141,9 @@ void AccountsModel::doModifyItem(const MyMoneyAccount& before, const MyMoneyAcco
         } else {
             removeFavorite(after.id());
         }
+        if (before.reconciliationHistory() != after.reconciliationHistory()) {
+            emit reconciliationInfoChanged();
+        }
         // MyMoneyModel::doModifyItem already sents this out, so maybe we can skip it here
         // emit dataChanged(idx, index(idx.row(), columnCount(idx.parent())-1));
     }
