@@ -96,7 +96,7 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
         // then take the last statement date and add one month and use that as statement
         // date.
         QDate lastStatementDate = account.lastReconciliationDate();
-        if (lastStatementDate.addMonths(1) < QDate::currentDate()) {
+        if (lastStatementDate.isValid() && (lastStatementDate.addMonths(1) < QDate::currentDate())) {
             setField("statementDate", lastStatementDate.addMonths(1));
         }
 
