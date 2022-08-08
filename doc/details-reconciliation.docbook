@@ -3,8 +3,9 @@
 <chapterinfo>
   <authorgroup>
     <author> &Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
   </authorgroup>
-  <date>2010-07-21</date>
+  <date>2022-08-08</date>
   <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
@@ -24,21 +25,23 @@
 </para>
 
 <para>
-  To reconcile an account, choose your account from the drop down box and click
-  on the <guiicon><inlinemediaobject><imageobject><imagedata fileref="reconcile.png"
-  format="PNG"/></imageobject></inlinemediaobject></guiicon> reconcile icon, select
-  the <menuchoice><guimenu>Account</guimenu> <guimenuitem>Reconcile...</guimenuitem>
-  </menuchoice> menu item or use the <keycombo>&Ctrl;&Shift;<keycap>R</keycap></keycombo>
-  shortcut.
+  To reconcile an account, display that account in the ledger and click on the
+  <guiicon><inlinemediaobject><imageobject><imagedata fileref="reconcile.png"
+  format="PNG"/></imageobject></inlinemediaobject></guiicon>Reconcile icon,
+  select the <menuchoice><guimenu>Account</guimenu>
+  <guimenuitem>Reconcile...</guimenuitem> </menuchoice> menu item, or use the
+  <keycombo>&Ctrl;&Shift;<keycap>R</keycap></keycombo> shortcut.  You can also
+  right click the account in the <guilabel>Accounts</guilabel> View and select
+  <guimenuitem>Reconcile...</guimenuitem> from the context menu.
 </para>
 </sect1>
 
 <sect1 id="details.reconcile.wizard">
 <title>The reconciliation wizard</title>
 <para>
-  This will open the reconciliation wizard.  The first page of the wizard
-  briefly describes the process you will follow.  Click
-  on <guibutton>Next</guibutton> to actually start the wizard.
+  Any of the spcified actions will open the reconciliation wizard.  The first
+  page of the wizard briefly describes the process you will follow.  Click on
+  <guibutton>Next</guibutton> to actually start the wizard.
 </para>
 
 <para>
@@ -59,10 +62,7 @@
 <title>Statement details</title>
 <para>
   The statement date, starting balance, and ending balance can be found in your
-  statement.  Make sure that the figures match and click on
-  the <guibutton>Next</guibutton> button.  If the figures do not match then
-  enter the figures as listed on your statement and click on
-  the <guibutton>Next</guibutton> button.
+  statement.  The default values displayed by the wizard are determined by your data.
 </para>
 
 <para>
@@ -78,19 +78,61 @@
 	</mediaobject>
 </screenshot>
 </para>
+
+<para>
+  The default value for the statement date is 30 days after the prior
+  reconciliation, so you will often need to adjust this by one or two days.  You
+  may need to adjust it by two months if you only receive quarterly statement
+  from the Institution for this Account.
+</para>
+
+<para>
+  The starting balance shown is the balance on the date of the previous
+  reconciliation.  The ending balance is the cleared balance at the end of the
+  Statement date.  This is the starting balance with the values of all cleared
+  transactions between the previous reconciliation and the statement date added
+  or subtracted as appropriate.
+</para>
+
+<para>
+  If the values all match, click on the <guibutton>Next</guibutton> button.
+</para>
+
+<para>
+  If the figures do not match there are two paths you can take.  The first is to
+  cancel the reconciliation, resolve any discrepancies between your data and the
+  information shown on the statement, and then start the reconciliation again.
+  The second is to adjust the ending balance to match the value on the
+  statement, and then click on the <guibutton>Next</guibutton> button.  You will
+  have an opportunity to resolve any discrepancies during the next step of the
+  reconciliation process.
+</para>
+
+<para>
+  Note that you cannot adjust the starting balance.  If the amount diplayed does
+  not match the amount on your statement, it indicates there is a problem with
+  the previous reconciliation, or maybe even an earlier one.  In this case, you
+  need to cancel the reconciliation and start again after fixing any problems
+  with your data.  The most common reason for this situation is that some time
+  after the prior reconciliation, you have inadvertently edited a transaction
+  propr to that date.  There are plans to make &kmymoney; more resistant to this
+  problem, but for now, you need to work your way back to find the earliest
+  reconciliation which does match as the problem is most likely with one or more
+  transactions between that date and the prior reconciliation.
+</para>
 </sect2>
 
 <sect2 id="details.reconcile.wizard.interest">
 <title>Interest</title>
 <para>
-  If the statement reconciliation is on a bank account or any account with
-  interest and/or charges fees, then enter these values in the appropriate
-  fields.  A category can be assigned for each of these amounts.
+  If you are reconciling a bank account or any account which pays interest
+  and/or charges fees, then enter these values in the appropriate fields.  A
+  category must be assigned for each of these amounts.
 </para>
 
 <note>
 <para>
-  The interest field is for interest you gained. If you have to pay interest,
+  The interest field is for interest you gained.  If you have to pay interest,
   &eg;, for a credit card account, this has to be entered as a charge.
 </para>
 </note>
@@ -111,21 +153,21 @@
 
 <para>
   Click on <guibutton>Continue</guibutton> to start matching your statement to
-  what you have entered.  Note that this completes the Reconciliation Wizard,
-  but not the process of reconciliation.  It also changes the ledger display by
-  only showing transactions that have not already been marked as reconciled.  As
-  described below, you still need to clear transactions and then tell &kmymoney;
-  that the account is reconciled.
+  what you have entered.  Note that this is the last screen of the
+  Reconciliation Wizard, but it is not the end of the process of reconciliation.
+  It also changes the ledger display by only showing transactions that have not
+  already been marked as reconciled.  As described below, you still need to
+  clear transactions and then tell &kmymoney; that the account is reconciled.
 </para>
 </sect2>
 
 <sect2 id="details.reconcile.wizard.clearing">
 <title>Clearing transactions</title>
 <para>
-  During the reconciliation, any transaction can be edited to make it match the
-  statement, and new transactions can be created as usual.  To mark a
-  transaction as cleared, click on the <guilabel>C</guilabel> column in the list
-  view.  A transaction is cleared when it matches the transaction on your
+  During the reconciliation process, any transaction can be edited to make it
+  match the statement, and new transactions can be created as usual.  To mark a
+  transaction as cleared, click on the <guilabel>C</guilabel> column in the
+  ledger.  A transaction is cleared when it matches the transaction on your
   statement.
 </para>
 
@@ -176,7 +218,7 @@
 <sect3 id="details.reconcile.postpone">
 <title>Postponing Reconciliation</title>
 <para>
-  If you're having trouble completing the reconciliation, or you need to gather
+  If you are having trouble completing the reconciliation, or you need to gather
   some additional information before you can complete the process, you can
   postpone the process to a later time by clicking on the
   <guibutton>Postpone</guibutton> button. When you do this, &kmymoney; remembers
