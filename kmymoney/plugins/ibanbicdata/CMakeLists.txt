@@ -13,6 +13,7 @@ set ( IBANBICDATA_SCRS
 
 kmymoney_add_plugin(ibanbicdata SOURCES ${IBANBICDATA_SCRS})
 
+generate_export_header(iban_bic_identifier)
 target_link_libraries(ibanbicdata
   PUBLIC
     kmm_plugin
