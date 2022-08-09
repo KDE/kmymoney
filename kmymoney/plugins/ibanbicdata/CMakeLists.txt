@@ -22,6 +22,7 @@ set_target_properties(ibanbicdata
                       PROPERTIES
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
+generate_export_header(iban_bic_identifier)
 target_link_libraries(ibanbicdata
   PUBLIC
     kmm_plugin

@@ -1044,15 +1044,22 @@ FinanceQuoteProcess::FinanceQuoteProcess()
 
 void FinanceQuoteProcess::slotReceivedDataFromFilter()
 {
-    QByteArray data(readAllStandardOutput());
+    auto data = QString::fromUtf8(readAllStandardOutput());
 
-//   qDebug() << "WebPriceQuoteProcess::slotReceivedDataFromFilter(): " << QString(data);
-    m_string += QString(data);
+#ifdef Q_OS_WIN
+    // on Windows we need to change the CR-LF sequence into a simple LF
+    // Otherwise, the CR will be appended to the name which is then
+    // confusing the rest of the logic.
+    data.remove(QLatin1Char('\r'));
+#endif
+
+    // qDebug() << "WebPriceQuoteProcess::slotReceivedDataFromFilter(): " << QString(data);
+    m_string.append(data);
 }
 
 void FinanceQuoteProcess::slotProcessExited()
 {
-//   qDebug() << "WebPriceQuoteProcess::slotProcessExited()";
+    // qDebug() << "WebPriceQuoteProcess::slotProcessExited()";
     m_isDone = true;
 }
 
@@ -1068,7 +1075,7 @@ void FinanceQuoteProcess::launch(const QString& scriptPath)
 
 const QStringList FinanceQuoteProcess::getSourceList() const
 {
-    QStringList raw = m_string.split(0x0A, QString::SkipEmptyParts);
+    QStringList raw = m_string.split(QLatin1Char('\n'), QString::SkipEmptyParts);
     QStringList sources;
     QStringList::iterator it;
     for (it = raw.begin(); it != raw.end(); ++it) {
