@@ -25,10 +25,10 @@
   During the initial &kmymoney; <link linkend="firsttime.3">New File
   Setup</link>, you will be asked to select the base currency.  Usually, the
   base currency is the currency you use in your country.  The base currency is
-  the one that all income and expense categories use and that reports will be
-  based on. When you set up a new account, &kmymoney; will automatically default
-  to the base currency.  If your account requires you to use a different
-  currency, you can change it during the <link
+  the one that will be used as the default for all new accounts and categories,
+  and that reports will be based on.  When you set up a new account or category,
+  &kmymoney; will automatically default to the base currency.  If your account
+  requires you to use a different currency, you can change it during the <link
   linkend="details.accounts.create">New Account Setup.</link>
 </para>
 

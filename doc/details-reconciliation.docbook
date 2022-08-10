@@ -109,16 +109,16 @@
 </para>
 
 <para>
-  Note that you cannot adjust the starting balance.  If the amount diplayed does
-  not match the amount on your statement, it indicates there is a problem with
-  the previous reconciliation, or maybe even an earlier one.  In this case, you
-  need to cancel the reconciliation and start again after fixing any problems
-  with your data.  The most common reason for this situation is that some time
-  after the prior reconciliation, you have inadvertently edited a transaction
-  propr to that date.  There are plans to make &kmymoney; more resistant to this
-  problem, but for now, you need to work your way back to find the earliest
-  reconciliation which does match as the problem is most likely with one or more
-  transactions between that date and the prior reconciliation.
+  Note that you cannot adjust the starting balance.  If the amount displayed
+  does not match the amount on your statement, it indicates there is a problem
+  with the previous reconciliation, or maybe even an earlier one.  In this case,
+  you need to cancel the reconciliation and start again after fixing any
+  problems with your data.  The most common reason for this situation is that
+  some time after the prior reconciliation, you have inadvertently edited a
+  transaction prior to that date.  There are plans to make &kmymoney; more
+  resistant to this problem, but for now, you need to work your way back to find
+  the earliest reconciliation which does match as the problem is most likely
+  with one or more transactions between that date and the prior reconciliation.
 </para>
 </sect2>
 
@@ -126,8 +126,10 @@
 <title>Interest</title>
 <para>
   If you are reconciling a bank account or any account which pays interest
-  and/or charges fees, then enter these values in the appropriate fields.  A
-  category must be assigned for each of these amounts.
+  and/or charges fees, then enter these values in the appropriate fields.  Note
+  that both of these fields are optional.  If you do fill in one or both of
+  them, a category must be assigned, and the appropriate transaction(s) will be
+  created by &kmymoney; prior to the next step of the wizard.
 </para>
 
 <note>
@@ -252,6 +254,32 @@
 </screenshot>
 
 </sect3>
+</sect2>
+
+<sect2 id="reconcile.investments">
+<title>Reconciling Investment Accounts</title>
+<para>
+  Although it may change in the future, <link
+  linkend="details.investments.accounts">Investment Accounts</link> currently
+  contain securities, but no cash.  Because of this, from &kmymoney;'s
+  perspective, it makes no sense to reconcile them.  However, some users use the
+  reconciliation process to indicate that the number of shares of each security
+  owned matches the Institution's records, whether from a printed statement or
+  indicated on-line.  Beyond the number of shares, you could also match the
+  total investment value of each security, which would depend on the last <link
+  linkend="details.investments.prices">price</link> for that security on or
+  prior to the date of the reconciliation.
+</para>
+
+<para>
+  If you choose to do this, the process is slightly different from that
+  described above.  First, the starting and ending balances will always be 0, as
+  there is no cash in an Investment Account.  Next, when you complete the
+  wizard, below the ledger, the statement balance will be shown as 0 and the
+  difference will be the investment value of the account.  Finally, after you
+  click the <guibutton>Finish</guibutton> button, you will manually need to
+  change all the transactions marked as Cleared to be Reconciled.
+</para>
 </sect2>
 </sect1>
 

@@ -49,7 +49,7 @@
 </para>
 </sect2>
 
-<sect2>
+<sect2 id="details.investments.accounts">
 <title>Investment Accounts</title>
 <para>
   An Investment Account holds a collection of Securities, also referred to as
