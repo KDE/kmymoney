@@ -39,7 +39,7 @@
 <sect1 id="details.reconcile.wizard">
 <title>The reconciliation wizard</title>
 <para>
-  Any of the spcified actions will open the reconciliation wizard.  The first
+  Any of the specified actions will open the reconciliation wizard.  The first
   page of the wizard briefly describes the process you will follow.  Click on
   <guibutton>Next</guibutton> to actually start the wizard.
 </para>
