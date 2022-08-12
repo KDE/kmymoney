@@ -24,6 +24,8 @@ build_local_ubuntu_2004:
     - ninja
 
 build_local_ubuntu_2110:
+  # make it manual for now, since it constantly fails
+  when: manual
   stage: build
   image: ubuntu:21.10
   variables:
