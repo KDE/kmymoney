@@ -270,7 +270,7 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
                 }
 
                 detailsReport += QString("<tr class=\"%1\"><td>").arg((index++ % 2 == 1) ? "row-odd" : "row-even");
-                detailsReport += QString("%1").arg(QLocale().toString(transaction.entryDate(), QLocale::ShortFormat));
+                detailsReport += QString("%1").arg(QLocale().toString(transaction.postDate(), QLocale::ShortFormat));
                 detailsReport += "</td><td>";
                 detailsReport += QString("%1").arg(split.number());
                 detailsReport += "</td><td>";
@@ -313,7 +313,7 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
                 }
 
                 detailsReport += QString("<tr class=\"%1\"><td>").arg((index++ % 2 == 1) ? "row-odd" : "row-even")
-                    + QString("%1").arg(QLocale().toString(transaction.entryDate(), QLocale::ShortFormat)) + "</td><td>" + QString("%1").arg(split.number())
+                    + QString("%1").arg(QLocale().toString(transaction.postDate(), QLocale::ShortFormat)) + "</td><td>" + QString("%1").arg(split.number())
                     + "</td><td>" + QString("%1").arg(file->payee(split.payeeId()).name()) + "</td><td>" + QString("%1").arg(transaction.memo()) + "</td><td>"
                     + QString("%1").arg(category) + "</td><td>"
                     + QString("%1").arg(MyMoneyUtils::formatMoney(split.shares(), file->currency(account.currencyId()))) + "</td></tr>";
