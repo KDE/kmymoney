@@ -745,19 +745,32 @@ bool LedgerView::viewportEvent(QEvent* event)
 void LedgerView::mousePressEvent(QMouseEvent* event)
 {
     if (state() != QAbstractItemView::EditingState) {
-        QTableView::mousePressEvent(event);
-        if (event->button() == Qt::LeftButton) {
-            // a click on the reconciliation column triggers the Mark transaction action
-            switch (columnAt(event->pos().x())) {
+        if (event->button() != Qt::LeftButton) {
+            QTableView::mousePressEvent(event);
+
+        } else {
+            const auto pos = event->pos();
+            const auto column = columnAt(pos.x());
+            // call base class (which modifies the selection) in case the reconciliation
+            // column was not clicked or the current index is not selected. This will
+            // make sure that if multiple transactions are selected and the reconciliation
+            // column is clicked that the selection will not change.
+            if (column != JournalModel::Column::Reconciliation || !selectionModel()->isSelected(indexAt(pos))) {
+                QTableView::mousePressEvent(event);
+            }
+
+            switch (column) {
             case JournalModel::Column::Reconciliation:
+                // a click on the reconciliation column triggers the Mark transaction action
                 pActions[eMenu::Action::ToggleReconciliationFlag]->trigger();
                 break;
 
             case JournalModel::Column::Detail: {
+                // check if an icon was clicked in the detail column
                 const auto col = columnAt(event->x());
                 const auto row = rowAt(event->y());
                 const auto idx = model()->index(row, col);
-                const auto iconIndex = d->iconClickIndex(idx, event->pos());
+                const auto iconIndex = d->iconClickIndex(idx, pos);
                 const auto statusRoles = this->statusRoles(idx);
 
                 KGuiItem buttonYes = KStandardGuiItem::yes();
