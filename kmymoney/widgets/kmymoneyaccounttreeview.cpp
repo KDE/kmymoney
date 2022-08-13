@@ -54,8 +54,14 @@ public:
             // the object.
             const auto objId = baseIdx.data(eMyMoney::Model::IdRole).toString();
             auto idx = MyMoneyFile::instance()->accountsModel()->indexById(objId);
-            if (idx.isValid()) {
-                emit q->requestActionTrigger(eMenu::Action::OpenAccount);
+            if (idx.isValid() || (objId == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Favorite))) {
+                // In case we should open an account or category we do it
+                // For the top level accounts we switch between expanded and collapsed view
+                if (index.parent().isValid()) {
+                    emit q->requestActionTrigger(eMenu::Action::OpenAccount);
+                } else {
+                    q->setExpanded(index, !q->isExpanded(index));
+                }
             } else {
                 idx = MyMoneyFile::instance()->institutionsModel()->indexById(objId);
                 if (idx.isValid()) {
