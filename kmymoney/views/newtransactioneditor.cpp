@@ -284,7 +284,7 @@ void NewTransactionEditor::Private::accountChanged(const QString& id)
 
     m_transaction.setCommodity(m_account.currencyId());
 
-    // in case we have a single split, we set the accountCombo again
+    // in case we have a single split, we set the categoryCombo again
     // so that a possible foreign currency is also taken care of.
     if (splitModel.rowCount() == 1) {
         ui->categoryCombo->setSelected(splitModel.index(0, 0).data(eMyMoney::Model::SplitAccountIdRole).toString());
