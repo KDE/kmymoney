@@ -361,8 +361,10 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
     connect(this, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int index) {
         if (index != -1) {
             const auto idx = d->m_popupView->currentIndex();
-            if (d->m_lastSelectedAccount.isEmpty() && idx.isValid()) {
-                selectItem(idx);
+            if (idx.isValid()) {
+                if (d->m_lastSelectedAccount.isEmpty() || (idx.data(eMyMoney::Model::IdRole).toString() != d->m_lastSelectedAccount)) {
+                    selectItem(idx);
+                }
             }
         }
     });
