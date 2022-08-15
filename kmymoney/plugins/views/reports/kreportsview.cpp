@@ -81,10 +81,10 @@ KReportsView::KReportsView(QWidget *parent) :
     connect(pActions[eMenu::Action::ReportDelete], &QAction::triggered, this, &KReportsView::slotDelete);
     connect(pActions[eMenu::Action::ReportClose], &QAction::triggered, this, &KReportsView::slotCloseCurrent);
 
-    pActions[eMenu::Action::ReportNew]->setShortcut(QKeySequence::New);
-    pActions[eMenu::Action::ReportConfigure]->setShortcut(QKeySequence::Preferences);
-    pActions[eMenu::Action::ReportDelete]->setShortcut(QKeySequence::Delete);
-    pActions[eMenu::Action::ReportClose]->setShortcut(QKeySequence::Close);
+    pActions[eMenu::Action::ReportNew]->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Plus));
+    pActions[eMenu::Action::ReportConfigure]->setShortcut(QKeySequence(Qt::SHIFT | Qt::Key_P));
+    pActions[eMenu::Action::ReportDelete]->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Delete));
+    pActions[eMenu::Action::ReportClose]->setShortcut(QKeySequence(Qt::SHIFT | Qt::Key_W));
 }
 
 KReportsView::~KReportsView()
