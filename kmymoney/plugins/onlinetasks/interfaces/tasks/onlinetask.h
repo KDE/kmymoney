@@ -159,6 +159,13 @@ protected:
      */
     virtual QString responsibleAccount() const = 0;
 
+    /**
+     * @brief Purpose of the job
+     *
+     * Each job may contain a description what it is used for.
+     */
+    virtual QString purpose() const = 0;
+
     friend class onlineJob;
 };
 

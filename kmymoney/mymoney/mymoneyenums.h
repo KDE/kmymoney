@@ -631,6 +631,9 @@ enum Roles {
     OnlineJobEditableRole,
     OnlineJobSendDateRole,
     OnlineJobTaskIidRole,
+    OnlineJobPurposeRole,
+    OnlineJobPostDateRole,
+    OnlineJobValueAsDoubleRole,
 };
 } // namespace Model
 } // namespace eMyMoney

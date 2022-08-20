@@ -26,6 +26,11 @@ QString unavailableTask::responsibleAccount() const
     return QString();
 }
 
+QString unavailableTask::purpose() const
+{
+    return QString();
+}
+
 unavailableTask* unavailableTask::createFromXml(const QDomElement& element) const
 {
     return new unavailableTask(element);

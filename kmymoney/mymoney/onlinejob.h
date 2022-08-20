@@ -140,6 +140,11 @@ public:
     QSet<QString> referencedObjects() const override;
 
     /**
+     * @brief Return the purpose of the job
+     */
+    QString purpose() const;
+
+    /**
      * @brief Account this job is related to
      *
      * Each job must have an account on which the job operates. This is used to determine

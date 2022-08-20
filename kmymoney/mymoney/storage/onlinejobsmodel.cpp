@@ -40,12 +40,34 @@ using namespace Icons;
 
 struct OnlineJobsModel::Private
 {
-    Private() {}
+    Private(OnlineJobsModel* qq)
+        : q(qq)
+    {
+    }
+
+    QDate youngestDateOnFile()
+    {
+        QDate date;
+
+        const auto rows = q->rowCount();
+        for (int row = rows - 1; row >= 0; --row) {
+            const auto idx = q->index(row, 0);
+            const onlineJob& job = static_cast<TreeItem<onlineJob>*>(idx.internalPointer())->constDataRef();
+            if (job.sendDate().isValid()) {
+                if (job.sendDate().date() > date) {
+                    date = job.sendDate().date();
+                }
+            }
+        }
+        return date;
+    }
+
+    OnlineJobsModel* q;
 };
 
 OnlineJobsModel::OnlineJobsModel(QObject* parent, QUndoStack* undoStack)
     : MyMoneyModel<onlineJob>(parent, QStringLiteral("O"), OnlineJobsModel::ID_SIZE, undoStack)
-    , d(new Private)
+    , d(new Private(this))
 {
     setObjectName(QLatin1String("OnlineJobsModel"));
 }
@@ -74,6 +96,8 @@ QVariant OnlineJobsModel::headerData(int section, Qt::Orientation orientation, i
             return i18nc("@title:column", "Destination");
         case Value:
             return i18nc("@title:column", "Value");
+        case Purpose:
+            return i18nc("@title:column", "Purpose");
         }
     }
     return {};
@@ -109,6 +133,7 @@ QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
             } catch (const onlineJob::badTaskCast&) {
             } catch (const MyMoneyException&) {
             }
+            break;
 
         case Destination:
             try {
@@ -119,6 +144,15 @@ QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
                 return i18nc("Unknown payee in online task", "Unknown");
             } catch (const MyMoneyException&) {
             }
+            break;
+
+        case Purpose:
+            try {
+                return job.purpose().remove(QLatin1Char('\n'));
+            } catch (const onlineJob::badTaskCast&) {
+            } catch (const MyMoneyException&) {
+            }
+            break;
 
         default:
             return QStringLiteral("not yet implemented");
@@ -148,6 +182,8 @@ QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
                 return Icons::get(Icon::TaskAccepted);
             } else if (!job.isValid()) {
                 return Icons::get(Icon::DialogWarning);
+            } else {
+                return Icons::get(Icon::TaskPending);
             }
         }
         break;
@@ -211,6 +247,25 @@ QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
 
     case eMyMoney::Model::OnlineJobSendDateRole:
         return job.sendDate();
+
+    case eMyMoney::Model::OnlineJobPurposeRole:
+        return job.purpose();
+
+    case eMyMoney::Model::OnlineJobPostDateRole:
+        if ((job.bankAnswerState() == eMyMoney::OnlineJob::sendingState::noBankAnswer) && !job.sendDate().isValid() && job.isValid()) {
+            return d->youngestDateOnFile().addDays(1);
+        }
+        return job.sendDate().date();
+
+    case eMyMoney::Model::OnlineJobValueAsDoubleRole:
+        try {
+            onlineJobTyped<creditTransfer> transfer(job);
+            return transfer.task()->value().toDouble();
+
+        } catch (const onlineJob::badTaskCast&) {
+        } catch (const MyMoneyException&) {
+        }
+        break;
     }
     return {};
 }

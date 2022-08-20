@@ -35,6 +35,7 @@ public:
         Action,
         Destination,
         Value,
+        Purpose,
         // insert new columns above this line
         MaxColumns,
     };

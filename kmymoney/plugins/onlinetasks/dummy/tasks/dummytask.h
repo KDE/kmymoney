@@ -67,6 +67,11 @@ protected:
         return QString();
     }
 
+    QString purpose() const final override
+    {
+        return QString();
+    }
+
     int m_testNumber;
 };
 

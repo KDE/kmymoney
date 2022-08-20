@@ -13,10 +13,11 @@
 
 #include <QAction>
 #include <QDebug>
+#include <QHeaderView>
 #include <QMenu>
-#include <QTimer>
 #include <QModelIndex>
 #include <QModelIndexList>
+#include <QSortFilterProxyModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -31,16 +32,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "columnselector.h"
+#include "icons.h"
+#include "kmymoneyplugin.h"
 #include "kmymoneyviewbase_p.h"
 #include "konlinetransferform.h"
-#include "kmymoneyplugin.h"
-#include "mymoneyaccount.h"
-#include "mymoneyfile.h"
 #include "menuenums.h"
+#include "mymoneyaccount.h"
 #include "mymoneyenums.h"
 #include "mymoneyexception.h"
-#include "icons.h"
-
+#include "mymoneyfile.h"
 #include "onlinejobadministration.h"
 #include "onlinejobmessagesmodel.h"
 #include "onlinejobmessagesview.h"
@@ -57,13 +58,14 @@ class KOnlineJobOutboxViewPrivate : public KMyMoneyViewBasePrivate
     Q_DECLARE_PUBLIC(KOnlineJobOutboxView)
 
 public:
-    explicit KOnlineJobOutboxViewPrivate(KOnlineJobOutboxView *qq)
+    explicit KOnlineJobOutboxViewPrivate(KOnlineJobOutboxView* qq)
         : KMyMoneyViewBasePrivate(qq)
         , ui(new Ui::KOnlineJobOutboxView)
         , m_needLoad(true)
         , m_onlinePlugins(nullptr)
         , m_actionCollection(nullptr)
         , m_contextMenu(nullptr)
+        , m_filterModel(nullptr)
     {
     }
 
@@ -86,9 +88,21 @@ public:
         KConfigGroup configGroup = KSharedConfig::openConfig()->group("KOnlineJobOutboxView");
         QByteArray columns;
         columns = configGroup.readEntry("HeaderState", columns);
-        ui->m_onlineJobView->header()->restoreState(columns);
 
-        ui->m_onlineJobView->setModel(this->onlineJobsModel());
+        auto columnSelector = new ColumnSelector(ui->m_onlineJobView, q->metaObject()->className());
+        columnSelector->setAlwaysVisible(QVector<int>({OnlineJobsModel::Columns::PostDate,
+                                                       OnlineJobsModel::Columns::AccountName,
+                                                       OnlineJobsModel::Columns::Destination,
+                                                       OnlineJobsModel::Columns::Value}));
+
+        m_filterModel = new QSortFilterProxyModel(q);
+        m_filterModel->setSourceModel(MyMoneyFile::instance()->onlineJobsModel());
+        ui->m_onlineJobView->setModel(m_filterModel);
+        columnSelector->setModel(m_filterModel);
+
+        ui->m_onlineJobView->setSortingEnabled(true);
+        ui->m_onlineJobView->header()->restoreState(columns);
+        ui->m_onlineJobView->header()->setSortIndicatorShown(true);
 
         ui->m_buttonSend->setDefaultAction(m_actions[eMenu::OnlineAction::SendOnlineJobs]);
         ui->m_buttonRemove->setDefaultAction(m_actions[eMenu::OnlineAction::DeleteOnlineJob]);
@@ -102,9 +116,15 @@ public:
         m_focusWidget = ui->m_onlineJobView;
     }
 
-    OnlineJobsModel* onlineJobsModel() const
+    void setSortRole(int column)
     {
-        return MyMoneyFile::instance()->onlineJobsModel();
+        if (column == OnlineJobsModel::Columns::PostDate) {
+            m_filterModel->setSortRole(eMyMoney::Model::OnlineJobPostDateRole);
+        } else if (column == OnlineJobsModel::Columns::Value) {
+            m_filterModel->setSortRole(eMyMoney::Model::OnlineJobValueAsDoubleRole);
+        } else {
+            m_filterModel->setSortRole(Qt::DisplayRole);
+        }
     }
 
 
@@ -147,6 +167,7 @@ public:
     QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* m_onlinePlugins;
     KActionCollection* m_actionCollection;
     QMenu* m_contextMenu;
+    QSortFilterProxyModel* m_filterModel;
     MyMoneyAccount m_currentAccount;
     QHash<eMenu::OnlineAction, QAction*> m_actions;
 };
@@ -411,9 +432,18 @@ void KOnlineJobOutboxView::contextMenuEvent(QContextMenuEvent*)
 void KOnlineJobOutboxView::showEvent(QShowEvent* event)
 {
     Q_D(KOnlineJobOutboxView);
-    if (d->m_needLoad)
-        d->init();
 
+    if (d->m_needLoad) {
+        d->init();
+        connect(d->ui->m_onlineJobView->header(), &QHeaderView::sortIndicatorChanged, this, [&](int logicalIndex, Qt::SortOrder order) {
+            Q_D(KOnlineJobOutboxView);
+            Q_UNUSED(order)
+            d->setSortRole(logicalIndex);
+        });
+        const auto header = d->ui->m_onlineJobView->header();
+        d->setSortRole(header->sortIndicatorSection());
+        d->ui->m_onlineJobView->sortByColumn(header->sortIndicatorSection(), header->sortIndicatorOrder());
+    }
     // don't forget base class implementation
     QWidget::showEvent(event);
 }

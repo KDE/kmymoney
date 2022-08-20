@@ -48,6 +48,10 @@ protected:
     QString responsibleAccount() const final override {
         return QString();
     }
+    QString purpose() const final override
+    {
+        return QString();
+    }
 };
 
 void onlineJobTypedTest::initTestCase()

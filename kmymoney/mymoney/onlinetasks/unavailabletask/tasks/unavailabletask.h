@@ -30,6 +30,7 @@ public:
     void writeXML(QDomDocument& document, QDomElement& parent) const override;
 protected:
     QString responsibleAccount() const override;
+    QString purpose() const override;
     unavailableTask* createFromXml(const QDomElement& element) const override;
     bool hasReferenceTo(const QString& id) const override;
 

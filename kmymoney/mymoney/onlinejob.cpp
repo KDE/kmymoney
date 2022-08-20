@@ -132,6 +132,15 @@ QString onlineJob::taskIid() const
     return QString();
 }
 
+QString onlineJob::purpose() const
+{
+    try {
+        return task()->purpose();
+    } catch (const emptyTask&) {
+    }
+    return QString();
+}
+
 QString onlineJob::responsibleAccount() const
 {
     try {
