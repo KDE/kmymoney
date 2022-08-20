@@ -2054,8 +2054,10 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     // *************
     // Setting keyboard shortcuts for some of added actions
     // *************
-    {
+    //
+        {
         const QVector<QPair<Action, QKeySequence>> actionShortcuts {
+            // clang-format off
             {qMakePair(Action::EditFindTransaction,         Qt::CTRL + Qt::SHIFT + Qt::Key_F)},
             {qMakePair(Action::ViewTransactionDetail,       Qt::CTRL + Qt::Key_T)},
             {qMakePair(Action::ViewHideReconciled,          Qt::CTRL + Qt::Key_R)},
@@ -2069,6 +2071,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {qMakePair(Action::EditSplits,                  Qt::CTRL + Qt::SHIFT + Qt::Key_E)},
             {qMakePair(Action::CopySplits,                  Qt::CTRL + Qt::SHIFT + Qt::Key_C)},
             {qMakePair(Action::AddReversingTransaction,     Qt::CTRL + Qt::SHIFT + Qt::Key_R)},
+            {qMakePair(Action::AddReversingTransaction,     Qt::CTRL + Qt::SHIFT + Qt::Key_Backspace)},
             {qMakePair(Action::ToggleReconciliationFlag,    Qt::CTRL + Qt::Key_Space)},
             {qMakePair(Action::MarkCleared,                 Qt::CTRL + Qt::ALT + Qt::Key_Space)},
             {qMakePair(Action::MarkNotReconciled,           Qt::CTRL + Qt::SHIFT + Qt::ALT + Qt::Key_Space)},
@@ -2083,6 +2086,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
 #endif
             {qMakePair(Action::AssignTransactionsNumber,    Qt::CTRL + Qt::SHIFT + Qt::Key_N)},
             {qMakePair(Action::ShowFilterWidget,            Qt::CTRL + Qt::Key_F)},
+            // clang-format on
         };
 
         for(const auto& it : actionShortcuts)
