@@ -66,7 +66,7 @@ public:
         if (!ui->m_toDate->isValid()) {
             WidgetHintFrame::show(ui->m_toDate, i18nc("@info:tooltip", "The date is invalid."));
         }
-        if (ui->m_fromDate->date().isValid() && (ui->m_fromDate->date() > ui->m_toDate->date())) {
+        if (ui->m_fromDate->date().isValid() && ui->m_toDate->date().isValid() && (ui->m_fromDate->date() > ui->m_toDate->date())) {
             WidgetHintFrame::show(ui->m_fromDate,
                                   i18nc("@info:tooltip Date range error",
                                         "The date provided as start lies past the one provided for the end of the search. This will result in an empty set."));
