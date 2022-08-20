@@ -282,7 +282,11 @@ public:
             end = length;
         }
         q->lineEdit()->setCursorPosition(end);
-        q->lineEdit()->setSelection(start, end - start);
+
+        // in case the text field is empty, we cannot select anything
+        if (start >= 0) {
+            q->lineEdit()->setSelection(start, end - start);
+        }
     }
 
     /**
@@ -447,9 +451,15 @@ void KMyMoneyDateEdit::focusOutEvent(QFocusEvent* event)
                 setFocus();
             }
         } else {
-            d->setDate(date);
-            if (!lineEdit()->text().isEmpty())
-                KDateComboBox::focusOutEvent(event);
+            // skip setting the date, if it is empty and this is allowed
+            if (!d->m_emptyDateAllowed || (date != QDate::fromJulianDay(1))) {
+                d->setDate(date);
+                if (!lineEdit()->text().isEmpty())
+                    KDateComboBox::focusOutEvent(event);
+            } else {
+                // prevent KDateComboBox from showing an error
+                QComboBox::focusOutEvent(event);
+            }
         }
     } else {
         // prevent KDateComboBox from showing an error
