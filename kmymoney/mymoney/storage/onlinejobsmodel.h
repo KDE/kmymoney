@@ -36,6 +36,8 @@ public:
         Destination,
         Value,
         Purpose,
+        DestinationAccount,
+        DestinationBic,
         // insert new columns above this line
         MaxColumns,
     };

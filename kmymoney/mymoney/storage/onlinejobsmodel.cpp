@@ -98,6 +98,10 @@ QVariant OnlineJobsModel::headerData(int section, Qt::Orientation orientation, i
             return i18nc("@title:column", "Value");
         case Purpose:
             return i18nc("@title:column", "Purpose");
+        case DestinationAccount:
+            return i18nc("@title:column", "Destination Account");
+        case DestinationBic:
+            return i18nc("@title:column", "Destination BIC");
         }
     }
     return {};
@@ -154,6 +158,27 @@ QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
             }
             break;
 
+        case DestinationAccount:
+            try {
+                onlineJobTyped<creditTransfer> transfer(job);
+                const payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic(transfer.constTask()->beneficiary());
+                return ibanBic->paperformatIban();
+            } catch (const onlineJob::badTaskCast&) {
+                return i18nc("Unknown payee in online task", "Unknown");
+            } catch (const MyMoneyException&) {
+            }
+            break;
+
+        case DestinationBic:
+            try {
+                onlineJobTyped<creditTransfer> transfer(job);
+                const payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic(transfer.constTask()->beneficiary());
+                return ibanBic->bic();
+            } catch (const onlineJob::badTaskCast&) {
+                return i18nc("Unknown payee in online task", "Unknown");
+            } catch (const MyMoneyException&) {
+            }
+            break;
         default:
             return QStringLiteral("not yet implemented");
         }
