@@ -955,5 +955,15 @@ of accounts.</para>
 
 
 </sect2>
+<sect2 id="details.settings.plugins.kbanking">
+<title>KBanking</title>
+
+<para>
+  This plugins adds support for HBCI/FinTs, OFX and PayPal online banking to KMyMoney.
+  After this plugin has been enabled, online banking can be configured in the
+  <link linkend="reference.menus.settings.help">Settings</link> menu.
+</para>
+
+</sect2>
 </sect1>
 </chapter>
