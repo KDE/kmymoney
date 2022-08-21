@@ -148,12 +148,14 @@ Activity::~Activity()
 void Activity::setupWidgets(const QStringList& activityWidgets) const
 {
     static const QStringList dynamicWidgetNames = {
+        // clang-format off
         "sharesLabel", "sharesAmountEdit",
         "assetAccountLabel", "assetAccountCombo",
         "priceLabel", "priceAmountEdit",
         "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
         "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
         "totalLabel", "totalAmountEdit",
+        // clang-format on
     };
 
     setWidgetVisibility(dynamicWidgetNames, false);
@@ -162,6 +164,7 @@ void Activity::setupWidgets(const QStringList& activityWidgets) const
     setLabelText("sharesLabel", sharesLabelText());
 
     static const QStringList standardWidgetNames = {
+        // clang-format off
         "activityLabel", "activityCombo",
         "dateLabel", "dateEdit",
         "securityLabel", "securityAccountCombo",
@@ -171,6 +174,7 @@ void Activity::setupWidgets(const QStringList& activityWidgets) const
         "memoLabel", "memoEdit",
         "statusLabel", "statusCombo",
         "enterButton", "cancelButton",
+        // clang-format on
     };
 
     setWidgetVisibility(standardWidgetNames, true);
@@ -335,11 +339,14 @@ eMyMoney::Split::InvestmentTransactionType Buy::type() const
 void Buy::showWidgets() const
 {
     static const QStringList activityWidgets = {
+        // clang-format off
         "sharesLabel", "sharesAmountEdit",
         "assetAccountLabel", "assetAccountCombo",
         "priceLabel", "priceAmountEdit",
         "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
+        "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
         "totalLabel", "totalAmountEdit",
+        // clang-format on
     };
 
     setupWidgets(activityWidgets);
@@ -362,12 +369,14 @@ eMyMoney::Split::InvestmentTransactionType Sell::type() const
 void Sell::showWidgets() const
 {
     static const QStringList activityWidgets = {
+        // clang-format off
         "sharesLabel", "sharesAmountEdit",
         "assetAccountLabel", "assetAccountCombo",
         "priceLabel", "priceAmountEdit",
         "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
         "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
         "totalLabel", "totalAmountEdit",
+        // clang-format on
     };
 
     setupWidgets(activityWidgets);
@@ -401,10 +410,12 @@ eMyMoney::Split::InvestmentTransactionType Div::type() const
 void Div::showWidgets() const
 {
     static const QStringList activityWidgets = {
+        // clang-format off
         "assetAccountLabel", "assetAccountCombo",
         "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
         "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
         "totalLabel", "totalAmountEdit",
+        // clang-format on
     };
 
     setupWidgets(activityWidgets);
@@ -427,12 +438,14 @@ eMyMoney::Split::InvestmentTransactionType Reinvest::type() const
 void Reinvest::showWidgets() const
 {
     static const QStringList activityWidgets = {
+        // clang-format off
         "sharesLabel", "sharesAmountEdit",
         "assetAccountLabel", "assetAccountCombo",
         "priceLabel", "priceAmountEdit",
         "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
         "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
         "totalLabel", "totalAmountEdit",
+        // clang-format on
     };
 
     setupWidgets(activityWidgets);
@@ -465,7 +478,9 @@ eMyMoney::Split::InvestmentTransactionType Add::type() const
 void Add::showWidgets() const
 {
     static const QStringList activityWidgets = {
+        // clang-format off
         "sharesLabel", "sharesAmountEdit",
+        // clang-format on
     };
 
     setupWidgets(activityWidgets);
@@ -504,7 +519,9 @@ eMyMoney::Split::InvestmentTransactionType Remove::type() const
 void Remove::showWidgets() const
 {
     static const QStringList activityWidgets = {
+        // clang-format off
         "sharesLabel", "sharesAmountEdit",
+        // clang-format on
     };
 
     setupWidgets(activityWidgets);
@@ -548,7 +565,9 @@ eMyMoney::Split::InvestmentTransactionType Invest::Split::type() const
 void Invest::Split::showWidgets() const
 {
     static const QStringList activityWidgets = {
+        // clang-format off
         "sharesLabel", "sharesAmountEdit",
+        // clang-format on
     };
 
     setupWidgets(activityWidgets);
@@ -593,10 +612,12 @@ eMyMoney::Split::InvestmentTransactionType IntInc::type() const
 void IntInc::showWidgets() const
 {
     static const QStringList activityWidgets = {
+        // clang-format off
         "assetAccountLabel", "assetAccountCombo",
         "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
         "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
         "totalLabel", "totalAmountEdit",
+        // clang-format on
     };
 
     setupWidgets(activityWidgets);

@@ -118,13 +118,20 @@ public:
     void showWidgets() const override;
     virtual void adjustStockSplit(MyMoneySplit&) override {}
 
-    fieldRequired_t feesRequired() const override {
+    fieldRequired_t feesRequired() const override
+    {
         return Optional;
     }
-    fieldRequired_t assetAccountRequired() const override {
+    fieldRequired_t interestRequired() const override
+    {
+        return Optional;
+    }
+    fieldRequired_t assetAccountRequired() const override
+    {
         return Mandatory;
     }
-    fieldRequired_t priceRequired() const override {
+    fieldRequired_t priceRequired() const override
+    {
         return Mandatory;
     }
 };
