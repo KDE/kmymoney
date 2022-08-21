@@ -92,6 +92,7 @@ public:
         ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
         m_proxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());
         m_proxyModel->setFilterComboBox(ui->m_filterBox);
+        m_proxyModel->setClosedSelectable(true);
 
         columnSelector->setModel(m_proxyModel);
         q->slotSettingsChanged();
