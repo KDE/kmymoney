@@ -783,6 +783,22 @@ with one additional entry:</para>
         box.</action></para>
     </listitem>
   </varlistentry>
+  <varlistentry>
+    <term><menuchoice>
+      <guimenu>Settings</guimenu><guimenuitem>Configure Aqbanking</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para><action>Configure online banking settings</action>, see
+        <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F">How do I configure online banking</ulink>
+        for further details.
+      </para>
+      <para>Note that this menu selection is only available if the KBanking
+        module is enabled. See the section on configuring the
+        <link linkend="details.settings.plugins.kbanking">KBanking plugin</link>
+        for more information.
+      </para>
+    </listitem>
+  </varlistentry>
 
 </variablelist>
 </sect2>
