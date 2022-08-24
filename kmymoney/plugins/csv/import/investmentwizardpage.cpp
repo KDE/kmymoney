@@ -373,7 +373,7 @@ void InvestmentPage::resetComboBox(const Column comboBox)
         ui->m_nameCol->setCurrentIndex(-1);
         break;
     default:
-        KMessageBox::sorry(m_dlg, i18n("<center>Field name not recognised.</center><center>'<b>%1</b>'</center>Please re-enter your column selections.", (int)comboBox), i18n("CSV import"));
+        KMessageBox::error(m_dlg, i18n("<center>Field name not recognised.</center><center>'<b>%1</b>'</center>Please re-enter your column selections.", (int)comboBox), i18n("CSV import"));
     }
 }
 
@@ -399,7 +399,7 @@ bool InvestmentPage::validateActionType()
 
         switch(m_imp->validateActionType(tr)) {
         case InvalidActionValues:
-            KMessageBox::sorry(m_dlg,
+            KMessageBox::error(m_dlg,
                                i18n("The values in the columns you have selected\ndo not match any expected investment type.\n"
                                     "Please check the fields in the current transaction,\nand also your selections."),
                                i18n("CSV import"));

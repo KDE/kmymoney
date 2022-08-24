@@ -393,7 +393,7 @@ const QString MyMoneyQifProfileEditor::enterName(bool& ok)
                 } else {
                     errorMsg = i18n("The name <b>%1</b> is already taken. Please change the name or cancel.", rc);
                 }
-                KMessageBox::sorry(this, errorMsg, i18n("QIF profile name problem"));
+                KMessageBox::error(this, errorMsg, i18n("QIF profile name problem"));
                 continue;
             }
         }

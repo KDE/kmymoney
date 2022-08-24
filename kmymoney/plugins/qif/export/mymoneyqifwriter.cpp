@@ -345,7 +345,7 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
             }
             if ((action == "DivX") || (action == "IntIncX")) {
                 if (map.value(eMyMoney::Account::Type::Checkings).isEmpty()) {
-                    KMessageBox::sorry(0,
+                    KMessageBox::error(0,
                                        QString("<qt>%1</qt>").arg(i18n("Transaction number <b>%1</b> is missing an account assignment.\nTransaction dropped.", count)),
                                        i18n("Invalid transaction"));
                     noError = false;

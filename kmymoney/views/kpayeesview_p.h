@@ -471,7 +471,7 @@ public:
 
                 // show error message if no payees remain
                 if (remainingPayees.isEmpty()) {
-                    KMessageBox::sorry(q, i18n("At least one transaction/scheduled transaction or loan account is still referenced by a payee. "
+                    KMessageBox::error(q, i18n("At least one transaction/scheduled transaction or loan account is still referenced by a payee. "
                                                "Currently you have all payees selected. However, at least one payee must remain so "
                                                "that the transaction/scheduled transaction or loan account can be reassigned."));
                     return false;
@@ -560,7 +560,7 @@ public:
                 }
             } else { // if !translist.isEmpty()
                 if (type == KPayeeReassignDlg::TypeMerge) {
-                    KMessageBox::sorry(q, i18n("Nothing to merge."), i18n("Merge Payees"));
+                    KMessageBox::error(q, i18n("Nothing to merge."), i18n("Merge Payees"));
                     return false;
                 }
             }

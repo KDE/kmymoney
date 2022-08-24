@@ -106,7 +106,7 @@ public:
             }
             file.close();
         } else {
-            KMessageBox::sorry(KMyMoneyUtils::mainWindow(), i18n("File '%1' not found.", filename));
+            KMessageBox::error(KMyMoneyUtils::mainWindow(), i18n("File '%1' not found.", filename));
             rc = false;
         }
 

@@ -991,7 +991,7 @@ void FormatsPage::decimalSymbolChanged(int index)
         m_imp->m_profile->m_decimalSymbol = DecimalSymbol::Auto;
         int failColumn = m_imp->detectDecimalSymbols(columns);
         if (failColumn != -2) {
-            KMessageBox::sorry(this, i18n("<center>Autodetect could not detect your decimal symbol in column %1.</center>"
+            KMessageBox::error(this, i18n("<center>Autodetect could not detect your decimal symbol in column %1.</center>"
                                           "<center>Try manual selection to see problematic cells and correct your data.</center>", failColumn), i18n("CSV import"));
             ui->m_decimalSymbol->setCurrentIndex(-1);
             ui->m_thousandsDelimiter->setCurrentIndex(-1);
@@ -1062,7 +1062,7 @@ void FormatsPage::dateFormatChanged(const int index)
     m_imp->m_convertDate->setDateFormatIndex(static_cast<DateFormat>(index));
     m_isDateFormatOK = validateDateFormat(col);
     if (!m_isDateFormatOK) {
-        KMessageBox::sorry(this, i18n("<center>There are invalid date formats in column '%1'.</center>"
+        KMessageBox::error(this, i18n("<center>There are invalid date formats in column '%1'.</center>"
                                       "<center>Please check your selections.</center>"
                                       , col + 1), i18n("CSV import"));
     }

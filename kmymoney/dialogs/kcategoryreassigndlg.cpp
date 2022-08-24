@@ -72,7 +72,7 @@ QString KCategoryReassignDlg::show(const MyMoneyAccount& category)
 
     // if there is no category for reassignment left, we bail out
     if (list.isEmpty()) {
-        KMessageBox::sorry(this, QString("<qt>") + i18n("At least one transaction/schedule still references the category <b>%1</b>.  However, at least one category with the same currency must exist so that the transactions/schedules can be reassigned.", category.name()) + QString("</qt>"));
+        KMessageBox::error(this, QString("<qt>") + i18n("At least one transaction/schedule still references the category <b>%1</b>.  However, at least one category with the same currency must exist so that the transactions/schedules can be reassigned.", category.name()) + QString("</qt>"));
         return QString();
     }
 

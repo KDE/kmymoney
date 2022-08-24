@@ -72,7 +72,7 @@ public:
         QFileInfo* info = new QFileInfo(css);
 
         if (!info->exists()) {
-            KMessageBox::sorry(0, i18n("File %1 does not exist", css));
+            KMessageBox::error(0, i18n("File %1 does not exist", css));
             return;
         }
 
@@ -102,7 +102,7 @@ public:
             out += '\n' + *i;
         }
 
-        KMessageBox::sorry(0, out);
+        KMessageBox::error(0, out);
     }
 
     Ui::ReportsViewSettings *ui;

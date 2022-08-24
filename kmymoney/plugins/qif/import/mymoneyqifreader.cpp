@@ -974,7 +974,7 @@ void MyMoneyQifReader::createOpeningBalance(eMyMoney::Account::Type accType)
             }
             if (needCreate) {
                 // in case we create it anyway, we issue a warning to the user to check it manually
-                KMessageBox::sorry(0, QString("<qt>%1</qt>").arg(i18n("KMyMoney has imported a second opening balance transaction into account <b>%1</b> which differs from the one found already on file. Please correct this manually once the import is done.", acc.name())), i18n("Opening balance problem"));
+                KMessageBox::error(0, QString("<qt>%1</qt>").arg(i18n("KMyMoney has imported a second opening balance transaction into account <b>%1</b> which differs from the one found already on file. Please correct this manually once the import is done.", acc.name())), i18n("Opening balance problem"));
             }
         }
 

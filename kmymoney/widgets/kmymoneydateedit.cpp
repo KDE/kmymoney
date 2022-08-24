@@ -447,7 +447,7 @@ void KMyMoneyDateEdit::focusOutEvent(QFocusEvent* event)
             // if the editor is quit due to pressing ESC, we don't
             // show an error for having an invalid date.
             if (!d->m_lastKeyPressWasEscape) {
-                KMessageBox::sorry(this, i18nc("@info", "The date you entered is invalid"));
+                KMessageBox::error(this, i18nc("@info", "The date you entered is invalid"));
                 setFocus();
             }
         } else {
@@ -514,7 +514,7 @@ void KMyMoneyDateEdit::keyPressEvent(QKeyEvent* keyEvent)
     case Qt::Key_Return:
         date = d->fixupDate();
         if (!date.isValid()) {
-            KMessageBox::sorry(this, i18nc("@info", "The date you entered is invalid"));
+            KMessageBox::error(this, i18nc("@info", "The date you entered is invalid"));
             keyEvent->accept();
             setFocus();
         } else {

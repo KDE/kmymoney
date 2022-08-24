@@ -286,13 +286,13 @@ bool KOnlineBankingSetupWizard::finishFiPage()
             result = true;
         } else
             // error!  No current item
-            KMessageBox::sorry(this, i18n("Please choose a bank."));
+            KMessageBox::error(this, i18n("Please choose a bank."));
 
     } else {  // manual entry of values
         if (m_fid->text().isEmpty()
                 || m_url->url().isEmpty()
                 || m_bankName->text().isEmpty()) {
-            KMessageBox::sorry(this, i18n("Please fill all fields with values."));
+            KMessageBox::error(this, i18n("Please fill all fields with values."));
         }
 
         m_textDetails->clear();
@@ -409,7 +409,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
     }
 
     if (! m_listAccount->topLevelItem(0)) {
-        KMessageBox::sorry(this, i18n("No suitable accounts were found at this bank."));
+        KMessageBox::error(this, i18n("No suitable accounts were found at this bank."));
         result = false;
     } else {
         m_listAccount->resizeColumnToContents(0);
@@ -425,7 +425,7 @@ bool KOnlineBankingSetupWizard::finishAccountPage()
     bool result = true;
 
     if (! m_listAccount->currentItem()) {
-        KMessageBox::sorry(this, i18n("Please choose an account"));
+        KMessageBox::error(this, i18n("Please choose an account"));
         result = false;
     }
 

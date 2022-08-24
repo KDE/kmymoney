@@ -431,20 +431,20 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
     bool encryptRecover = false;
     if (!keyList.isEmpty()) {
         if (!KGPGFile::GPGAvailable()) {
-            KMessageBox::sorry(nullptr, i18n("GPG does not seem to be installed on your system. Please make sure that GPG can be found using the standard search path. This time, encryption is disabled."), i18n("GPG not found"));
+            KMessageBox::error(nullptr, i18n("GPG does not seem to be installed on your system. Please make sure that GPG can be found using the standard search path. This time, encryption is disabled."), i18n("GPG not found"));
             encryptFile = false;
         } else {
             if (KMyMoneySettings::encryptRecover()) {
                 encryptRecover = true;
                 if (!KGPGFile::keyAvailable(QString(recoveryKeyId))) {
-                    KMessageBox::sorry(nullptr, i18n("<p>You have selected to encrypt your data also with the KMyMoney recover key, but the key with id</p><p><center><b>%1</b></center></p><p>has not been found in your keyring at this time. Please make sure to import this key into your keyring. You can find it on the <a href=\"https://kmymoney.org/\">KMyMoney web-site</a>. This time your data will not be encrypted with the KMyMoney recover key.</p>", QString(recoveryKeyId)), i18n("GPG Key not found"));
+                    KMessageBox::error(nullptr, i18n("<p>You have selected to encrypt your data also with the KMyMoney recover key, but the key with id</p><p><center><b>%1</b></center></p><p>has not been found in your keyring at this time. Please make sure to import this key into your keyring. You can find it on the <a href=\"https://kmymoney.org/\">KMyMoney web-site</a>. This time your data will not be encrypted with the KMyMoney recover key.</p>", QString(recoveryKeyId)), i18n("GPG Key not found"));
                     encryptRecover = false;
                 }
             }
 
             for(const QString& key: keyList.split(',', Qt::SkipEmptyParts)) {
                 if (!KGPGFile::keyAvailable(key)) {
-                    KMessageBox::sorry(nullptr, i18n("<p>You have specified to encrypt your data for the user-id</p><p><center><b>%1</b>.</center></p><p>Unfortunately, a valid key for this user-id was not found in your keyring. Please make sure to import a valid key for this user-id. This time, encryption is disabled.</p>", key), i18n("GPG Key not found"));
+                    KMessageBox::error(nullptr, i18n("<p>You have specified to encrypt your data for the user-id</p><p><center><b>%1</b>.</center></p><p>Unfortunately, a valid key for this user-id was not found in your keyring. Please make sure to import a valid key for this user-id. This time, encryption is disabled.</p>", key), i18n("GPG Key not found"));
                     encryptFile = false;
                     break;
                 }

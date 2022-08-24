@@ -3497,7 +3497,7 @@ void KMyMoneyApp::slotBackupFile()
         return;
 
     if (!d->m_storageInfo.url.isLocalFile()) {
-        KMessageBox::sorry(this,
+        KMessageBox::error(this,
                            i18n("The current implementation of the backup functionality only supports local files as source files. Your current source file is '%1'.", d->m_storageInfo.url.url()),
 
                            i18n("Local files only"));
@@ -4447,14 +4447,14 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
         throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid URL %1").arg(qPrintable(url.url())));
 
     if (isFileOpenedInAnotherInstance(url)) {
-        KMessageBox::sorry(this, i18n("<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("Duplicate open"));
+        KMessageBox::error(this, i18n("<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("Duplicate open"));
         return false;
     }
 
     qDebug() << "Open file" << url;
 
     if (url.scheme() != QLatin1String("sql") && !KMyMoneyUtils::fileExists(url)) {
-        KMessageBox::sorry(this, i18n("<p><b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("File not found"));
+        KMessageBox::error(this, i18n("<p><b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("File not found"));
         return false;
     }
 

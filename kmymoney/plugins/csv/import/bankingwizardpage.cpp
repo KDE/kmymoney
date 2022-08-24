@@ -335,7 +335,7 @@ void BankingPage::resetComboBox(Column comboBox, int index)
     if (m_columnBoxes.contains(comboBox)) {
         m_columnBoxes.value(comboBox)->setCurrentIndex(index);
     } else {
-        KMessageBox::sorry(m_dlg, i18n("<center>Field name not recognised.</center> <center>'<b>%1</b>'</center> Please re-enter your column selections."
+        KMessageBox::error(m_dlg, i18n("<center>Field name not recognised.</center> <center>'<b>%1</b>'</center> Please re-enter your column selections."
                                        , static_cast<int>(comboBox)), i18n("CSV import"));
     }
 }

@@ -132,7 +132,7 @@ void PricesPage::resetComboBox(const Column comboBox)
         ui->m_priceCol->setCurrentIndex(-1);
         break;
     default:
-        KMessageBox::sorry(m_dlg, i18n("<center>Field name not recognised.</center><center>'<b>%1</b>'</center>Please re-enter your column selections.", (int)comboBox), i18n("CSV import"));
+        KMessageBox::error(m_dlg, i18n("<center>Field name not recognised.</center><center>'<b>%1</b>'</center>Please re-enter your column selections.", (int)comboBox), i18n("CSV import"));
     }
 }
 

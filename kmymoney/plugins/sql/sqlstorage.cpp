@@ -226,12 +226,12 @@ bool SQLStorage::saveAs()
                 && oldUrl.host() == url.host()
                 && QUrlQuery(oldUrl).queryItemValue("driver") == QUrlQuery(url).queryItemValue("driver")
                 && oldUrl.path().right(oldUrl.path().length() - 1) == url.path().right(url.path().length() - 1)) {
-            KMessageBox::sorry(nullptr, i18n("Cannot save to current database."));
+            KMessageBox::error(nullptr, i18n("Cannot save to current database."));
         } else {
             try {
                 rc = saveAsDatabase(url);
             } catch (const MyMoneyException &e) {
-                KMessageBox::sorry(nullptr, i18n("Cannot save to current database: %1", QString::fromLatin1(e.what())));
+                KMessageBox::error(nullptr, i18n("Cannot save to current database: %1", QString::fromLatin1(e.what())));
             }
         }
     }

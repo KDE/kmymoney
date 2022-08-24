@@ -171,7 +171,7 @@ void EditPersonalDataDlg::loadFromAddressBook()
     d->ui->userNameEdit->setText(d->m_contact->ownerFullName());
     d->ui->emailEdit->setText(d->m_contact->ownerEmail());
     if (d->ui->emailEdit->text().isEmpty()) {
-        KMessageBox::sorry(this, i18n("Unable to load data, because no contact has been associated with the owner of the standard address book."), i18n("Address book import"));
+        KMessageBox::error(this, i18n("Unable to load data, because no contact has been associated with the owner of the standard address book."), i18n("Address book import"));
         return;
     }
     d->ui->kabcBtn->setEnabled(false);
