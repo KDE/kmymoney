@@ -26,18 +26,18 @@
 using namespace eWidgets;
 using namespace Icons;
 
-static const char* sortOrderText[] = {
-    kli18nc("Unknown sort order", "Unknown").untranslatedText(),
-    kli18n("Post date").untranslatedText(),
-    kli18n("Date entered").untranslatedText(),
-    kli18n("Payee").untranslatedText(),
-    kli18n("Amount").untranslatedText(),
-    kli18n("Number").untranslatedText(),
-    kli18n("Entry order").untranslatedText(),
-    kli18n("Type").untranslatedText(),
-    kli18n("Category").untranslatedText(),
-    kli18n("Reconcile state").untranslatedText(),
-    kli18n("Security").untranslatedText(),
+static constexpr KLazyLocalizedString sortOrderText[] = {
+    kli18nc("Unknown sort order", "Unknown"),
+    kli18n("Post date"),
+    kli18n("Date entered"),
+    kli18n("Payee"),
+    kli18n("Amount"),
+    kli18n("Number"),
+    kli18n("Entry order"),
+    kli18n("Type"),
+    kli18n("Category"),
+    kli18n("Reconcile state"),
+    kli18n("Security"),
     // add new values above this comment line
 };
 
@@ -280,7 +280,7 @@ void TransactionSortOption::slotDownItem()
 SortField TransactionSortOption::textToSortOrder(const QString& text)
 {
     for (auto idx = 1; idx < static_cast<int>(SortField::MaxFields); ++idx) {
-        if (text == i18n(sortOrderText[idx])) {
+        if (text == sortOrderText[idx].toString()) {
             return static_cast<SortField>(idx);
         }
     }
@@ -291,5 +291,5 @@ QString TransactionSortOption::sortOrderToText(SortField idx)
 {
     if ((int)idx < (int)SortField::PostDate || (int)idx >= (int)SortField::MaxFields)
         idx = SortField::Unknown;
-    return i18n(sortOrderText[(int)idx]);
+    return sortOrderText[(int)idx].toString();
 }
