@@ -22,7 +22,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
+#include <KLazyLocalizedString>
 #include <QHeaderView>
 
 // ----------------------------------------------------------------------------
@@ -345,12 +345,12 @@ struct AccountsModel::Private
         const char*                 description;
     };
     const QVector<DefaultAccounts> defaults = {
-        { eMyMoney::Account::Standard::Favorite,  eMyMoney::Account::Type::Asset,     I18N_NOOP("Favorite")},
-        { eMyMoney::Account::Standard::Asset,     eMyMoney::Account::Type::Asset,     I18N_NOOP("Asset accounts") },
-        { eMyMoney::Account::Standard::Liability, eMyMoney::Account::Type::Liability, I18N_NOOP("Liability accounts") },
-        { eMyMoney::Account::Standard::Income,    eMyMoney::Account::Type::Income,    I18N_NOOP("Income categories") },
-        { eMyMoney::Account::Standard::Expense,   eMyMoney::Account::Type::Expense,   I18N_NOOP("Expense categories") },
-        { eMyMoney::Account::Standard::Equity,    eMyMoney::Account::Type::Equity,    I18N_NOOP("Equity accounts") },
+        {eMyMoney::Account::Standard::Favorite, eMyMoney::Account::Type::Asset, kli18n("Favorite").untranslatedText()},
+        {eMyMoney::Account::Standard::Asset, eMyMoney::Account::Type::Asset, kli18n("Asset accounts").untranslatedText()},
+        {eMyMoney::Account::Standard::Liability, eMyMoney::Account::Type::Liability, kli18n("Liability accounts").untranslatedText()},
+        {eMyMoney::Account::Standard::Income, eMyMoney::Account::Type::Income, kli18n("Income categories").untranslatedText()},
+        {eMyMoney::Account::Standard::Expense, eMyMoney::Account::Type::Expense, kli18n("Expense categories").untranslatedText()},
+        {eMyMoney::Account::Standard::Equity, eMyMoney::Account::Type::Equity, kli18n("Equity accounts").untranslatedText()},
     };
 
     AccountsModel*                  q_ptr;

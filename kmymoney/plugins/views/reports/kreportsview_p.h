@@ -43,6 +43,7 @@
 // KDE Includes
 
 #include <KChartAbstractCoordinatePlane>
+#include <KLazyLocalizedString>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <QPainter>
@@ -613,7 +614,7 @@ public:
         int chartGroupNo = defaultreports.size() + 1;
 
         // group for diagrams
-        QString groupName = I18N_NOOP("Charts");
+        QString groupName = kli18n("Charts").untranslatedText();
 
         TocItemGroup* chartTocItemGroup = new TocItemGroup(ui.m_tocTreeWidget, chartGroupNo, i18n(groupName.toLatin1().data()));
 
@@ -656,7 +657,7 @@ public:
         // group for custom (favorite) reports
         int favoriteGroupNo = chartGroupNo + 1;
 
-        groupName = I18N_NOOP("Favorite Reports");
+        groupName = kli18n("Favorite Reports").untranslatedText();
 
         TocItemGroup* favoriteTocItemGroup = new TocItemGroup(ui.m_tocTreeWidget, favoriteGroupNo, i18n(groupName.toLatin1().data()));
 
@@ -685,7 +686,7 @@ public:
                     // group for orphaned reports
                     int orphanGroupNo = favoriteGroupNo + 1;
 
-                    groupName = I18N_NOOP("Old Customized Reports");
+                    groupName = kli18n("Old Customized Reports").untranslatedText();
 
                     orphanTocItemGroup = new TocItemGroup(ui.m_tocTreeWidget, orphanGroupNo, i18n(groupName.toLatin1().data()));
                     m_allTocItemGroups.insert(groupName, orphanTocItemGroup);

@@ -13,6 +13,7 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+#include <KLazyLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -26,17 +27,17 @@ using namespace eWidgets;
 using namespace Icons;
 
 static const char* sortOrderText[] = {
-    I18N_NOOP2("Unknown sort order", "Unknown"),
-    I18N_NOOP("Post date"),
-    I18N_NOOP("Date entered"),
-    I18N_NOOP("Payee"),
-    I18N_NOOP("Amount"),
-    I18N_NOOP("Number"),
-    I18N_NOOP("Entry order"),
-    I18N_NOOP("Type"),
-    I18N_NOOP("Category"),
-    I18N_NOOP("Reconcile state"),
-    I18N_NOOP("Security"),
+    kli18nc("Unknown sort order", "Unknown").untranslatedText(),
+    kli18n("Post date").untranslatedText(),
+    kli18n("Date entered").untranslatedText(),
+    kli18n("Payee").untranslatedText(),
+    kli18n("Amount").untranslatedText(),
+    kli18n("Number").untranslatedText(),
+    kli18n("Entry order").untranslatedText(),
+    kli18n("Type").untranslatedText(),
+    kli18n("Category").untranslatedText(),
+    kli18n("Reconcile state").untranslatedText(),
+    kli18n("Security").untranslatedText(),
     // add new values above this comment line
 };
 

@@ -39,6 +39,7 @@
 #include <KGuiItem>
 #include <KIO/StatJob>
 #include <KIO/StoredTransferJob>
+#include <KLazyLocalizedString>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KStandardGuiItem>
@@ -115,16 +116,16 @@ KGuiItem KMyMoneyUtils::accountsFilterGuiItem()
 }
 
 const char* homePageItems[] = {
-    I18N_NOOP("Scheduled payments"),
-    I18N_NOOP("Preferred accounts"),
-    I18N_NOOP("Payment accounts"),
-    I18N_NOOP("Favorite reports"),
-    I18N_NOOP("Forecast (schedule)"),
-    I18N_NOOP("Net worth forecast"),
-    I18N_NOOP("Forecast (history)"), // unused, s.a. KSettingsHome::slotLoadItems()
-    I18N_NOOP("Assets and Liabilities"),
-    I18N_NOOP("Budget"),
-    I18N_NOOP("CashFlow"),
+    kli18n("Scheduled payments").untranslatedText(),
+    kli18n("Preferred accounts").untranslatedText(),
+    kli18n("Payment accounts").untranslatedText(),
+    kli18n("Favorite reports").untranslatedText(),
+    kli18n("Forecast (schedule)").untranslatedText(),
+    kli18n("Net worth forecast").untranslatedText(),
+    kli18n("Forecast (history)").untranslatedText(), // unused, s.a. KSettingsHome::slotLoadItems()
+    kli18n("Assets and Liabilities").untranslatedText(),
+    kli18n("Budget").untranslatedText(),
+    kli18n("CashFlow").untranslatedText(),
     // insert new items above this comment
     0,
 };

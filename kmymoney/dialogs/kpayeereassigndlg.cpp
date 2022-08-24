@@ -17,9 +17,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KLazyLocalizedString>
+#include <KLocalizedString>
 #include <KMessageBox>
 #include <kguiutils.h>
-#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -29,9 +30,11 @@
 #include <kmymoneymvccombo.h>
 
 /** This lookup table needs to be in sync with KPayeeReassignDlg::OperationType enum */
-static const char * labelText[KPayeeReassignDlg::TypeCount] = {
-    I18N_NOOP("To be able to merge previous selected payees, please select a payee from the list below or create a new one."),
-    I18N_NOOP("The transactions associated with the selected payees need to be re-assigned to a different payee before the selected payees can be deleted. Please select a payee from the list below."),
+static const char* labelText[KPayeeReassignDlg::TypeCount] = {
+    kli18n("To be able to merge previous selected payees, please select a payee from the list below or create a new one.").untranslatedText(),
+    kli18n("The transactions associated with the selected payees need to be re-assigned to a different payee before the selected payees can be deleted. Please "
+           "select a payee from the list below.")
+        .untranslatedText(),
 };
 
 class KPayeeReassignDlgPrivate

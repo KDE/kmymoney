@@ -22,8 +22,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 #include <KJsonUtils>
-#include <KPluginMetaData>
 #include <KPluginFactory>
+#include <KPluginMetaData>
 
 // ----------------------------------------------------------------------------
 // Project Includes

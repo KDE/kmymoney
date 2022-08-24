@@ -17,6 +17,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KLazyLocalizedString>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
@@ -175,14 +176,14 @@ int SchedulesModel::columnCount(const QModelIndex& parent) const
 
 QVariant SchedulesModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    const QVector<const char *> headers = {
-        I18N_NOOP2("Schedule header", "Type/Name"),
-        I18N_NOOP2("Schedule header", "Account"),
-        I18N_NOOP2("Schedule header", "Payee"),
-        I18N_NOOP2("Schedule header", "Amount"),
-        I18N_NOOP2("Schedule header", "Next Due Date"),
-        I18N_NOOP2("Schedule header", "Frequency"),
-        I18N_NOOP2("Schedule header", "Payment Method"),
+    const QVector<const char*> headers = {
+        kli18nc("Schedule header", "Type/Name").untranslatedText(),
+        kli18nc("Schedule header", "Account").untranslatedText(),
+        kli18nc("Schedule header", "Payee").untranslatedText(),
+        kli18nc("Schedule header", "Amount").untranslatedText(),
+        kli18nc("Schedule header", "Next Due Date").untranslatedText(),
+        kli18nc("Schedule header", "Frequency").untranslatedText(),
+        kli18nc("Schedule header", "Payment Method").untranslatedText(),
     };
 
     if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {

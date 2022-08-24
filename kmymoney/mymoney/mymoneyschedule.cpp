@@ -18,6 +18,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KLazyLocalizedString>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
@@ -882,42 +883,42 @@ QString MyMoneySchedule::occurrenceToString() const
 const char* MyMoneySchedule::occurrenceToString(Schedule::Occurrence occurrence)
 {
     if (occurrence == Schedule::Occurrence::Once)
-        return I18N_NOOP2("Frequency of schedule", "Once");
+        return kli18nc("Frequency of schedule", "Once").untranslatedText();
     else if (occurrence == Schedule::Occurrence::Daily)
-        return I18N_NOOP2("Frequency of schedule", "Daily");
+        return kli18nc("Frequency of schedule", "Daily").untranslatedText();
     else if (occurrence == Schedule::Occurrence::Weekly)
-        return I18N_NOOP2("Frequency of schedule", "Weekly");
+        return kli18nc("Frequency of schedule", "Weekly").untranslatedText();
     else if (occurrence == Schedule::Occurrence::Fortnightly)
-        return I18N_NOOP2("Frequency of schedule", "Fortnightly");
+        return kli18nc("Frequency of schedule", "Fortnightly").untranslatedText();
     else if (occurrence == Schedule::Occurrence::EveryOtherWeek)
-        return I18N_NOOP2("Frequency of schedule", "Every other week");
+        return kli18nc("Frequency of schedule", "Every other week").untranslatedText();
     else if (occurrence == Schedule::Occurrence::EveryHalfMonth)
-        return I18N_NOOP2("Frequency of schedule", "Every half month");
+        return kli18nc("Frequency of schedule", "Every half month").untranslatedText();
     else if (occurrence == Schedule::Occurrence::EveryThreeWeeks)
-        return I18N_NOOP2("Frequency of schedule", "Every three weeks");
+        return kli18nc("Frequency of schedule", "Every three weeks").untranslatedText();
     else if (occurrence == Schedule::Occurrence::EveryFourWeeks)
-        return I18N_NOOP2("Frequency of schedule", "Every four weeks");
+        return kli18nc("Frequency of schedule", "Every four weeks").untranslatedText();
     else if (occurrence == Schedule::Occurrence::EveryThirtyDays)
-        return I18N_NOOP2("Frequency of schedule", "Every thirty days");
+        return kli18nc("Frequency of schedule", "Every thirty days").untranslatedText();
     else if (occurrence == Schedule::Occurrence::Monthly)
-        return I18N_NOOP2("Frequency of schedule", "Monthly");
+        return kli18nc("Frequency of schedule", "Monthly").untranslatedText();
     else if (occurrence == Schedule::Occurrence::EveryEightWeeks)
-        return I18N_NOOP2("Frequency of schedule", "Every eight weeks");
+        return kli18nc("Frequency of schedule", "Every eight weeks").untranslatedText();
     else if (occurrence == Schedule::Occurrence::EveryOtherMonth)
-        return I18N_NOOP2("Frequency of schedule", "Every two months");
+        return kli18nc("Frequency of schedule", "Every two months").untranslatedText();
     else if (occurrence == Schedule::Occurrence::EveryThreeMonths)
-        return I18N_NOOP2("Frequency of schedule", "Every three months");
+        return kli18nc("Frequency of schedule", "Every three months").untranslatedText();
     else if (occurrence == Schedule::Occurrence::Quarterly)
-        return I18N_NOOP2("Frequency of schedule", "Quarterly");
+        return kli18nc("Frequency of schedule", "Quarterly").untranslatedText();
     else if (occurrence == Schedule::Occurrence::EveryFourMonths)
-        return I18N_NOOP2("Frequency of schedule", "Every four months");
+        return kli18nc("Frequency of schedule", "Every four months").untranslatedText();
     else if (occurrence == Schedule::Occurrence::TwiceYearly)
-        return I18N_NOOP2("Frequency of schedule", "Twice yearly");
+        return kli18nc("Frequency of schedule", "Twice yearly").untranslatedText();
     else if (occurrence == Schedule::Occurrence::Yearly)
-        return I18N_NOOP2("Frequency of schedule", "Yearly");
+        return kli18nc("Frequency of schedule", "Yearly").untranslatedText();
     else if (occurrence == Schedule::Occurrence::EveryOtherYear)
-        return I18N_NOOP2("Frequency of schedule", "Every other year");
-    return I18N_NOOP2("Frequency of schedule", "Any");
+        return kli18nc("Frequency of schedule", "Every other year").untranslatedText();
+    return kli18nc("Frequency of schedule", "Any").untranslatedText();
 }
 
 QString MyMoneySchedule::occurrenceToString(int mult, Schedule::Occurrence type)
@@ -926,63 +927,63 @@ QString MyMoneySchedule::occurrenceToString(int mult, Schedule::Occurrence type)
 
     if (mult > 1) {
         if (type == Schedule::Occurrence::Once) {
-            occurrenceString = I18N_NOOP2("Frequency of schedule", QString("%1 times").arg(mult));
+            occurrenceString = QString(kli18nc("Frequency of schedule", "%1 times").untranslatedText()).arg(mult);
 
         } else if (type == Schedule::Occurrence::Daily) {
             switch (mult) {
             case 30:
-                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every thirty days");
+                occurrenceString = kli18nc("Frequency of schedule", "Every thirty days").untranslatedText();
                 break;
             default:
-                occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 days").arg(mult));
+                occurrenceString = QString(kli18nc("Frequency of schedule", "Every %1 days").untranslatedText()).arg(mult);
             }
 
         } else if (type == Schedule::Occurrence::Weekly) {
             switch (mult) {
             case 2:
-                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every other week");
+                occurrenceString = kli18nc("Frequency of schedule", "Every other week").untranslatedText();
                 break;
             case 3:
-                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every three weeks");
+                occurrenceString = kli18nc("Frequency of schedule", "Every three weeks").untranslatedText();
                 break;
             case 4:
-                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every four weeks");
+                occurrenceString = kli18nc("Frequency of schedule", "Every four weeks").untranslatedText();
                 break;
             case 8:
-                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every eight weeks");
+                occurrenceString = kli18nc("Frequency of schedule", "Every eight weeks").untranslatedText();
                 break;
             default:
-                occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 weeks").arg(mult));
+                occurrenceString = QString(kli18nc("Frequency of schedule", "Every %1 weeks").untranslatedText()).arg(mult);
             }
 
         } else if (type == Schedule::Occurrence::EveryHalfMonth) {
-            occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 half months").arg(mult));
+            occurrenceString = QString(kli18nc("Frequency of schedule", "Every %1 half months").untranslatedText()).arg(mult);
 
         } else if (type == Schedule::Occurrence::Monthly) {
             switch (mult) {
             case 2:
-                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every two months");
+                occurrenceString = kli18nc("Frequency of schedule", "Every two months").untranslatedText();
                 break;
             case 3:
-                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every three months");
+                occurrenceString = kli18nc("Frequency of schedule", "Every three months").untranslatedText();
                 break;
             case 4:
-                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every four months");
+                occurrenceString = kli18nc("Frequency of schedule", "Every four months").untranslatedText();
                 break;
             case 6:
-                occurrenceString = I18N_NOOP2("Frequency of schedule", "Twice yearly");
+                occurrenceString = kli18nc("Frequency of schedule", "Twice yearly").untranslatedText();
                 break;
             default:
-                occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 months").arg(mult));
+                occurrenceString = QString(kli18nc("Frequency of schedule", "Every %1 months").untranslatedText()).arg(mult);
             }
 
         } else if (type == Schedule::Occurrence::Yearly) {
             switch (mult) {
             case 2:
-                occurrenceString = I18N_NOOP2("Frequency of schedule", "Every other year");
+                occurrenceString = kli18nc("Frequency of schedule", "Every other year").untranslatedText();
                 break;
             default:
-                occurrenceString = I18N_NOOP2("Frequency of schedule", QString("Every %1 years").arg(mult));
+                occurrenceString = QString(kli18nc("Frequency of schedule", "Every %1 years").untranslatedText()).arg(mult);
             }
         }
     }
@@ -992,20 +993,20 @@ QString MyMoneySchedule::occurrenceToString(int mult, Schedule::Occurrence type)
 
 QString MyMoneySchedule::occurrencePeriodToString(Schedule::Occurrence type)
 {
-    QString occurrenceString = I18N_NOOP2("Schedule occurrence period", "Any");
+    QString occurrenceString = kli18nc("Schedule occurrence period", "Any").untranslatedText();
 
     if (type == Schedule::Occurrence::Once)
-        occurrenceString = I18N_NOOP2("Schedule occurrence period", "Once");
+        occurrenceString = kli18nc("Schedule occurrence period", "Once").untranslatedText();
     else if (type == Schedule::Occurrence::Daily)
-        occurrenceString = I18N_NOOP2("Schedule occurrence period", "Day");
+        occurrenceString = kli18nc("Schedule occurrence period", "Day").untranslatedText();
     else if (type == Schedule::Occurrence::Weekly)
-        occurrenceString = I18N_NOOP2("Schedule occurrence period", "Week");
+        occurrenceString = kli18nc("Schedule occurrence period", "Week").untranslatedText();
     else if (type == Schedule::Occurrence::EveryHalfMonth)
-        occurrenceString = I18N_NOOP2("Schedule occurrence period", "Half-month");
+        occurrenceString = kli18nc("Schedule occurrence period", "Half-month").untranslatedText();
     else if (type == Schedule::Occurrence::Monthly)
-        occurrenceString = I18N_NOOP2("Schedule occurrence period", "Month");
+        occurrenceString = kli18nc("Schedule occurrence period", "Month").untranslatedText();
     else if (type == Schedule::Occurrence::Yearly)
-        occurrenceString = I18N_NOOP2("Schedule occurrence period", "Year");
+        occurrenceString = kli18nc("Schedule occurrence period", "Year").untranslatedText();
     return occurrenceString;
 }
 
@@ -1015,20 +1016,20 @@ QString MyMoneySchedule::scheduleTypeToString(Schedule::Type type)
 
     switch (type) {
     case Schedule::Type::Bill:
-        text = I18N_NOOP2("Scheduled transaction type", "Bill");
+        text = kli18nc("Scheduled transaction type", "Bill").untranslatedText();
         break;
     case Schedule::Type::Deposit:
-        text = I18N_NOOP2("Scheduled transaction type", "Deposit");
+        text = kli18nc("Scheduled transaction type", "Deposit").untranslatedText();
         break;
     case Schedule::Type::Transfer:
-        text = I18N_NOOP2("Scheduled transaction type", "Transfer");
+        text = kli18nc("Scheduled transaction type", "Transfer").untranslatedText();
         break;
     case Schedule::Type::LoanPayment:
-        text = I18N_NOOP2("Scheduled transaction type", "Loan payment");
+        text = kli18nc("Scheduled transaction type", "Loan payment").untranslatedText();
         break;
     case Schedule::Type::Any:
     default:
-        text = I18N_NOOP2("Scheduled transaction type", "Unknown");
+        text = kli18nc("Scheduled transaction type", "Unknown").untranslatedText();
     }
     return text;
 }
@@ -1037,28 +1038,28 @@ const char* MyMoneySchedule::paymentMethodToString(Schedule::PaymentType payment
 {
     switch (paymentType) {
     case Schedule::PaymentType::DirectDebit:
-        return I18N_NOOP2("Scheduled Transaction payment type", "Direct debit");
+        return kli18nc("Scheduled Transaction payment type", "Direct debit").untranslatedText();
         break;
     case Schedule::PaymentType::DirectDeposit:
-        return I18N_NOOP2("Scheduled Transaction payment type", "Direct deposit");
+        return kli18nc("Scheduled Transaction payment type", "Direct deposit").untranslatedText();
         break;
     case Schedule::PaymentType::ManualDeposit:
-        return I18N_NOOP2("Scheduled Transaction payment type", "Manual deposit");
+        return kli18nc("Scheduled Transaction payment type", "Manual deposit").untranslatedText();
         break;
     case Schedule::PaymentType::Other:
-        return I18N_NOOP2("Scheduled Transaction payment type", "Other");
+        return kli18nc("Scheduled Transaction payment type", "Other").untranslatedText();
         break;
     case Schedule::PaymentType::WriteChecque:
-        return I18N_NOOP2("Scheduled Transaction payment type", "Write check");
+        return kli18nc("Scheduled Transaction payment type", "Write check").untranslatedText();
         break;
     case Schedule::PaymentType::StandingOrder:
-        return I18N_NOOP2("Scheduled Transaction payment type", "Standing order");
+        return kli18nc("Scheduled Transaction payment type", "Standing order").untranslatedText();
         break;
     case Schedule::PaymentType::BankTransfer:
-        return I18N_NOOP2("Scheduled Transaction payment type", "Bank transfer");
+        return kli18nc("Scheduled Transaction payment type", "Bank transfer").untranslatedText();
         break;
     case Schedule::PaymentType::Any:
-        return I18N_NOOP2("Scheduled Transaction payment type", "Any (Error)");
+        return kli18nc("Scheduled Transaction payment type", "Any (Error)").untranslatedText();
         break;
     }
     return {};
@@ -1070,13 +1071,13 @@ QString MyMoneySchedule::weekendOptionToString(Schedule::WeekendOption weekendOp
 
     switch (weekendOption) {
     case Schedule::WeekendOption::MoveBefore:
-        text = I18N_NOOP("Change the date to the previous processing day");
+        text = kli18n("Change the date to the previous processing day").untranslatedText();
         break;
     case Schedule::WeekendOption::MoveAfter:
-        text = I18N_NOOP("Change the date to the next processing day");
+        text = kli18n("Change the date to the next processing day").untranslatedText();
         break;
     case Schedule::WeekendOption::MoveNothing:
-        text = I18N_NOOP("Do not change the date");
+        text = kli18n("Do not change the date").untranslatedText();
         break;
     }
     return text;

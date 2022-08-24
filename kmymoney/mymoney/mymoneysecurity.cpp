@@ -16,6 +16,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KLazyLocalizedString>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
@@ -258,22 +259,22 @@ QString MyMoneySecurity::roundingMethodToString(const AlkValue::RoundingMethod r
 {
     switch (roundingMethod) {
     case AlkValue::RoundNever:
-        return I18N_NOOP("Never");
+        return kli18n("Never").untranslatedText();
     case AlkValue::RoundFloor:
-        return I18N_NOOP("Floor");
+        return kli18n("Floor").untranslatedText();
     case AlkValue::RoundCeil:
-        return I18N_NOOP("Ceil");
+        return kli18n("Ceil").untranslatedText();
     case AlkValue::RoundTruncate:
-        return I18N_NOOP("Truncate");
+        return kli18n("Truncate").untranslatedText();
     case AlkValue::RoundPromote:
-        return I18N_NOOP("Promote");
+        return kli18n("Promote").untranslatedText();
     case AlkValue::RoundHalfDown:
-        return I18N_NOOP("HalfDown");
+        return kli18n("HalfDown").untranslatedText();
     case AlkValue::RoundHalfUp:
-        return I18N_NOOP("HalfUp");
+        return kli18n("HalfUp").untranslatedText();
     case AlkValue::RoundRound:
-        return I18N_NOOP("Round");
+        return kli18n("Round").untranslatedText();
     default:
-        return I18N_NOOP("Unknown");
+        return kli18n("Unknown").untranslatedText();
     }
 }
