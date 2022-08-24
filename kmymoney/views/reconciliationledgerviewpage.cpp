@@ -33,6 +33,7 @@
 #include "reconciliationmodel.h"
 #include "schedulesjournalmodel.h"
 #include "specialdatesmodel.h"
+#include "transactionmatcher.h"
 #include "widgetenums.h"
 
 using namespace Icons;
@@ -238,6 +239,7 @@ public:
 
             // walk the list of transactions/splits and mark the cleared ones as reconciled
             QStringList reconciledJournalEntryIds;
+            TransactionMatcher matcher;
             for (const auto& journalEntryId : journalEntryIds) {
                 const auto journalEntry = journalModel->itemById(journalEntryId);
                 auto sp = journalEntry.split();
@@ -247,6 +249,7 @@ public:
                     continue;
 
                 auto t = journalEntry.transaction();
+
                 sp.setReconcileFlag(eMyMoney::Split::State::Reconciled);
                 sp.setReconcileDate(endingBalanceDlg->statementDate());
                 t.setImported(false);
@@ -254,6 +257,8 @@ public:
 
                 // update the engine ...
                 file->modifyTransaction(t);
+
+                matcher.accept(t, sp);
 
                 // ... and the list
                 reconciledJournalEntryIds.append(journalEntryId);
