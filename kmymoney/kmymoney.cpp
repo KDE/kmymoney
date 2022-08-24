@@ -70,6 +70,7 @@
 #ifdef ENABLE_HOLIDAYS
 #include <KHolidays/Holiday>
 #include <KHolidays/HolidayRegion>
+#include <KHolidays/kholidays_version.h>
 #endif
 
 #ifdef ENABLE_ACTIVITIES
@@ -4307,7 +4308,11 @@ void KMyMoneyApp::preloadHolidays()
         if (endDate < QDate::currentDate().addYears(2))
             endDate = QDate::currentDate().addYears(2);
 
+#if KHOLIDAYS_VERSION >= QT_VERSION_CHECK(5, 95, 0)
+        KHolidays::Holiday::List holidayList = d->m_holidayRegion->rawHolidaysWithAstroSeasons(QDate::currentDate(), endDate);
+#else
         KHolidays::Holiday::List holidayList = d->m_holidayRegion->holidays(QDate::currentDate(), endDate);
+#endif
         KHolidays::Holiday::List::const_iterator holiday_it;
         for (holiday_it = holidayList.constBegin(); holiday_it != holidayList.constEnd(); ++holiday_it) {
             for (QDate holidayDate = (*holiday_it).observedStartDate(); holidayDate <= (*holiday_it).observedEndDate(); holidayDate = holidayDate.addDays(1))
