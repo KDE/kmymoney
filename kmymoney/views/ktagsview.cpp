@@ -392,7 +392,7 @@ void KTagsView::slotRenameSingleTag(const QModelIndex& idx, const QVariant& valu
             ft.commit();
 
         } catch (const MyMoneyException &e) {
-            KMessageBox::detailedSorry(this, i18n("Unable to modify tag"), QString::fromLatin1(e.what()));
+            KMessageBox::detailedError(this, i18n("Unable to modify tag"), QString::fromLatin1(e.what()));
         }
     }
 }
@@ -516,7 +516,7 @@ void KTagsView::slotUpdateTag()
             d->m_havePendingChanges = false;
 
         } catch (const MyMoneyException &e) {
-            KMessageBox::detailedSorry(this, i18n("Unable to modify tag"), QString::fromLatin1(e.what()));
+            KMessageBox::detailedError(this, i18n("Unable to modify tag"), QString::fromLatin1(e.what()));
         }
     }
 }
@@ -783,7 +783,7 @@ void KTagsView::slotDeleteTag()
                 } // for - Schedules
 
             } catch (const MyMoneyException &e) {
-                KMessageBox::detailedSorry(this, i18n("Unable to reassign tag of transaction/split"), QString::fromLatin1(e.what()));
+                KMessageBox::detailedError(this, i18n("Unable to reassign tag of transaction/split"), QString::fromLatin1(e.what()));
             }
         } // if !translist.isEmpty()
 
@@ -795,6 +795,6 @@ void KTagsView::slotDeleteTag()
         ft.commit();
 
     } catch (const MyMoneyException &e) {
-        KMessageBox::detailedSorry(this, i18n("Unable to remove tag(s)"), QString::fromLatin1(e.what()));
+        KMessageBox::detailedError(this, i18n("Unable to remove tag(s)"), QString::fromLatin1(e.what()));
     }
 }

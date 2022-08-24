@@ -189,7 +189,7 @@ public:
             try {
                 schedule = MyMoneyFile::instance()->schedule(schedule.id());
             } catch (const MyMoneyException &e) {
-                KMessageBox::detailedSorry(q, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e.what());
+                KMessageBox::detailedError(q, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e.what());
                 return rc;
             }
 
@@ -301,11 +301,11 @@ public:
 
                         ft.commit();
                     } catch (const MyMoneyException& e) {
-                        KMessageBox::detailedSorry(q, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e.what());
+                        KMessageBox::detailedError(q, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e.what());
                     }
                 }
             } catch (const MyMoneyException &e) {
-                KMessageBox::detailedSorry(q, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e.what());
+                KMessageBox::detailedError(q, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e.what());
             }
             delete dlg;
         }
@@ -349,7 +349,7 @@ public:
                     }
                 }
             } catch (const MyMoneyException &e) {
-                KMessageBox::detailedSorry(q, i18n("<qt>Unable to skip scheduled transaction <b>%1</b>.</qt>", schedule.name()), e.what());
+                KMessageBox::detailedError(q, i18n("<qt>Unable to skip scheduled transaction <b>%1</b>.</qt>", schedule.name()), e.what());
             }
         }
     }

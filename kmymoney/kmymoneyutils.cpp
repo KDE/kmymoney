@@ -601,7 +601,7 @@ bool KMyMoneyUtils::newPayee(const QString& newnameBase, QString& id)
             id = p.id();
             ft.commit();
         } catch (const MyMoneyException &e) {
-            KMessageBox::detailedSorry(nullptr, i18n("Unable to add payee"), QString::fromLatin1(e.what()));
+            KMessageBox::detailedError(nullptr, i18n("Unable to add payee"), QString::fromLatin1(e.what()));
             doit = false;
         }
     }
@@ -650,7 +650,7 @@ void KMyMoneyUtils::newTag(const QString& newnameBase, QString& id)
             id = ta.id();
             ft.commit();
         } catch (const MyMoneyException &e) {
-            KMessageBox::detailedSorry(nullptr, i18n("Unable to add tag"), QString::fromLatin1(e.what()));
+            KMessageBox::detailedError(nullptr, i18n("Unable to add tag"), QString::fromLatin1(e.what()));
         }
     }
 }

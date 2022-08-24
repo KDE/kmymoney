@@ -598,7 +598,7 @@ void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule)
                     MyMoneyFile::instance()->modifySchedule(sched);
                     ft.commit();
                 } catch (const MyMoneyException& e) {
-                    KMessageBox::detailedSorry(nullptr,
+                    KMessageBox::detailedError(nullptr,
                                                i18n("Unable to modify scheduled transaction '%1'", inputSchedule.name()),
                                                QString::fromLatin1(e.what()));
                 }
@@ -614,7 +614,7 @@ void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule)
                     MyMoneyFile::instance()->modifyAccount(dlg->account());
                     ft.commit();
                 } catch (const MyMoneyException& e) {
-                    KMessageBox::detailedSorry(nullptr,
+                    KMessageBox::detailedError(nullptr,
                                                i18n("Unable to modify scheduled transaction '%1'", inputSchedule.name()),
                                                QString::fromLatin1(e.what()));
                 }
@@ -625,7 +625,7 @@ void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule)
             break;
         }
     } catch (const MyMoneyException& e) {
-        KMessageBox::detailedSorry(nullptr, i18n("Unable to modify scheduled transaction '%1'", inputSchedule.name()), QString::fromLatin1(e.what()));
+        KMessageBox::detailedError(nullptr, i18n("Unable to modify scheduled transaction '%1'", inputSchedule.name()), QString::fromLatin1(e.what()));
     }
 }
 

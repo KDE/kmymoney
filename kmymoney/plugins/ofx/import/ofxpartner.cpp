@@ -401,7 +401,7 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
                 }
                 f.close();
             }
-            KMessageBox::detailedSorry(0, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
+            KMessageBox::detailedError(0, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
             QFile::remove(m_dst);
         }
 

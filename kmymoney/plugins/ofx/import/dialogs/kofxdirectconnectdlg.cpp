@@ -200,7 +200,7 @@ void KOfxDirectConnectDlg::slotOfxFinished(KJob* /* e */)
                 qDebug() << "The HTTP request failed: " << details;
             }
         }
-        KMessageBox::detailedSorry(this, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
+        KMessageBox::detailedError(this, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
     } else if (m_tmpfile) {
         qDebug("Emit statementReady signal with '%s'", qPrintable(m_tmpfile->fileName()));
         emit statementReady(m_tmpfile->fileName());

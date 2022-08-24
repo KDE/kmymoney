@@ -95,7 +95,7 @@ void KBudgetView::slotNewBudget()
         // select the newly created budget
         d->ui->m_budgetList->setCurrentIndex(MyMoneyFile::instance()->budgetsModel()->indexById(budget.id()));
     } catch (const MyMoneyException &e) {
-        KMessageBox::detailedSorry(this, i18n("Unable to add budget"), QString::fromLatin1(e.what()));
+        KMessageBox::detailedError(this, i18n("Unable to add budget"), QString::fromLatin1(e.what()));
     }
 }
 
@@ -134,7 +134,7 @@ void KBudgetView::slotDeleteBudget()
         }
         ft.commit();
     } catch (const MyMoneyException &e) {
-        KMessageBox::detailedSorry(this, i18n("Unable to remove budget."), QString::fromLatin1(e.what()));
+        KMessageBox::detailedError(this, i18n("Unable to remove budget."), QString::fromLatin1(e.what()));
     }
 }
 
@@ -154,7 +154,7 @@ void KBudgetView::slotCopyBudget()
             file->addBudget(budget);
             ft.commit();
         } catch (const MyMoneyException &e) {
-            KMessageBox::detailedSorry(this, i18n("Unable to add budget"), QString::fromLatin1(e.what()));
+            KMessageBox::detailedError(this, i18n("Unable to add budget"), QString::fromLatin1(e.what()));
         }
     }
 }
@@ -197,7 +197,7 @@ void KBudgetView::slotBudgetForecast()
                 }
             }
         } catch (const MyMoneyException &e) {
-            KMessageBox::detailedSorry(this, i18n("Unable to modify budget."), QString::fromLatin1(e.what()));
+            KMessageBox::detailedError(this, i18n("Unable to modify budget."), QString::fromLatin1(e.what()));
         }
     }
 }
@@ -212,7 +212,7 @@ void KBudgetView::slotResetBudget()
         slotSelectBudget();
         d->loadBudgetAccountsView();
     } catch (const MyMoneyException &e) {
-        KMessageBox::detailedSorry(this, i18n("Unable to reset budget"), QString::fromLatin1(e.what()));
+        KMessageBox::detailedError(this, i18n("Unable to reset budget"), QString::fromLatin1(e.what()));
     }
 }
 
@@ -227,7 +227,7 @@ void KBudgetView::slotUpdateBudget()
         // load updated data
         slotSelectBudget();
     } catch (const MyMoneyException &e) {
-        KMessageBox::detailedSorry(this, i18n("Unable to modify budget"), QString::fromLatin1(e.what()));
+        KMessageBox::detailedError(this, i18n("Unable to modify budget"), QString::fromLatin1(e.what()));
     }
 }
 

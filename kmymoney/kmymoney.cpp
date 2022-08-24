@@ -1335,7 +1335,7 @@ public:
                 matcher.match(remaining.transaction(), remaining.split(), toBeDeleted.transaction(), toBeDeleted.split(), true);
                 ft.commit();
             } catch (const MyMoneyException& e) {
-                KMessageBox::detailedSorry(q, i18n("Unable to match the selected transactions"), e.what());
+                KMessageBox::detailedError(q, i18n("Unable to match the selected transactions"), e.what());
             }
 
             // inform views about the match (they may have to reselect some items)
@@ -1360,7 +1360,7 @@ public:
             ft.commit();
 
         } catch (const MyMoneyException& e) {
-            KMessageBox::detailedSorry(q, i18n("Unable to unmatch the selected transactions"), e.what());
+            KMessageBox::detailedError(q, i18n("Unable to unmatch the selected transactions"), e.what());
         }
     }
 
@@ -2595,7 +2595,7 @@ void KMyMoneyApp::slotDuplicateTransactions()
         d->m_myMoneyView->executeAction(eMenu::Action::OpenAccount, selections);
 
     } catch (const MyMoneyException &e) {
-        KMessageBox::detailedSorry(this, i18n("Unable to duplicate transaction(s)"), QString::fromLatin1(e.what()));
+        KMessageBox::detailedError(this, i18n("Unable to duplicate transaction(s)"), QString::fromLatin1(e.what()));
     }
 }
 
@@ -2763,7 +2763,7 @@ void KMyMoneyApp::slotMarkTransactions()
         }
         ft.commit();
     } catch (const MyMoneyException &e) {
-        KMessageBox::detailedSorry(this, i18n("Unable to modify transaction"), e.what());
+        KMessageBox::detailedError(this, i18n("Unable to modify transaction"), e.what());
     }
 }
 
@@ -2950,7 +2950,7 @@ void KMyMoneyApp::slotAcceptTransaction()
         d->updateActions(d->m_selections);
 
     } catch (const MyMoneyException &e) {
-        KMessageBox::detailedSorry(this, i18n("Unable to accept transaction"), QString::fromLatin1(e.what()));
+        KMessageBox::detailedError(this, i18n("Unable to accept transaction"), QString::fromLatin1(e.what()));
     }
 }
 
@@ -3313,7 +3313,7 @@ void KMyMoneyApp::slotLoadAccountTemplates()
             }
             ft.commit();
         } catch (const MyMoneyException &e) {
-            KMessageBox::detailedSorry(this, i18n("Unable to import template(s)"), QString::fromLatin1(e.what()));
+            KMessageBox::detailedError(this, i18n("Unable to import template(s)"), QString::fromLatin1(e.what()));
         }
     }
     delete dlg;

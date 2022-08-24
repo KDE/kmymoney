@@ -264,7 +264,7 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
         }
         ft.commit();
     } catch (const MyMoneyException &e) {
-        KMessageBox::detailedSorry(this, i18n("Unexpected error occurred while adding new investment"), QString::fromLatin1(e.what()));
+        KMessageBox::detailedError(this, i18n("Unexpected error occurred while adding new investment"), QString::fromLatin1(e.what()));
     }
 }
 

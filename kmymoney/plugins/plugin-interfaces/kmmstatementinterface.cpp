@@ -90,6 +90,6 @@ void KMyMoneyPlugin::KMMStatementInterface::setAccountOnlineParameters(const MyM
 
     } catch (const MyMoneyException&) {
         qDebug("Unable to setup online parameters for account '%s'", qPrintable(acc.name()));
-        //    KMessageBox::detailedSorry(0, i18n("Unable to setup online parameters for account '%1'", acc.name()), QString::fromLatin1(e.what()));
+        //    KMessageBox::detailedError(0, i18n("Unable to setup online parameters for account '%1'", acc.name()), QString::fromLatin1(e.what()));
     }
 }

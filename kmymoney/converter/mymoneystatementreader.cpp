@@ -1087,7 +1087,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                     s1.setPayeeId(payeeid);
 
                 } catch (const MyMoneyException &e) {
-                    KMessageBox::detailedSorry(nullptr, i18n("Unable to add payee/receiver"), QString::fromLatin1(e.what()));
+                    KMessageBox::detailedError(nullptr, i18n("Unable to add payee/receiver"), QString::fromLatin1(e.what()));
 
                 }
 
@@ -1573,7 +1573,7 @@ void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(MyMoneySchedul
 
         } catch (const MyMoneyException& e) {
             QWidget* parent = QApplication::activeWindow();
-            KMessageBox::detailedSorry(parent, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e.what());
+            KMessageBox::detailedError(parent, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e.what());
         }
     }
 }

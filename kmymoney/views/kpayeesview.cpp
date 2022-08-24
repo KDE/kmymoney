@@ -168,7 +168,7 @@ void KPayeesView::slotRenameSinglePayee(const QModelIndex& idx, const QVariant& 
             d->ensurePayeeVisible(d->m_payee.id());
 
         } catch (const MyMoneyException &e) {
-            KMessageBox::detailedSorry(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
+            KMessageBox::detailedError(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
         }
     }
 }
@@ -365,7 +365,7 @@ void KPayeesView::slotUpdatePayee()
             ft.commit();
 
         } catch (const MyMoneyException &e) {
-            KMessageBox::detailedSorry(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
+            KMessageBox::detailedError(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
         }
     }
 }
@@ -388,7 +388,7 @@ void KPayeesView::slotSyncAddressBook()
                 }
                 ft.commit();
             } catch (const MyMoneyException &e) {
-                KMessageBox::detailedSorry(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
+                KMessageBox::detailedError(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
             }
         }
         d->m_payeesToSync.clear();  // that means end of sync
