@@ -148,14 +148,11 @@
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="KLineEdit" name="m_password">
+          <widget class="KPasswordLineEdit" name="m_password">
            <property name="enabled">
             <bool>false</bool>
            </property>
            <property name="showClearButton" stdset="0">
-            <bool>true</bool>
-           </property>
-           <property name="passwordMode">
             <bool>true</bool>
            </property>
           </widget>
@@ -550,6 +547,11 @@
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KPasswordLineEdit</class>
+   <extends>QWidget</extends>
+   <header>kpasswordlineedit.h</header>
   </customwidget>
   <customwidget>
    <class>KLed</class>

@@ -860,7 +860,7 @@ MyMoneyKeyValueContainer OFXImporter::onlineBankingSettings(const MyMoneyKeyValu
                 d->m_wallet->setFolder(KWallet::Wallet::PasswordFolder())) {
             QString key = OFX_PASSWORD_KEY(kvp.value(QStringLiteral("url")), kvp.value(QStringLiteral("uniqueId")));
             if (d->m_statusDlg->m_storePassword->isChecked()) {
-                d->m_wallet->writePassword(key, d->m_statusDlg->m_password->text());
+                d->m_wallet->writePassword(key, d->m_statusDlg->m_password->password());
             } else {
                 if (d->m_wallet->hasEntry(key)) {
                     d->m_wallet->removeEntry(key);
@@ -868,7 +868,7 @@ MyMoneyKeyValueContainer OFXImporter::onlineBankingSettings(const MyMoneyKeyValu
             }
         } else {
             if (d->m_statusDlg->m_storePassword->isChecked()) {
-                kvp.setValue(QStringLiteral("password"), d->m_statusDlg->m_password->text());
+                kvp.setValue(QStringLiteral("password"), d->m_statusDlg->m_password->password());
             }
         }
 

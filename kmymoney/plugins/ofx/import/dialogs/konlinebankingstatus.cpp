@@ -116,7 +116,7 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
             wallet->readPassword(key, pwd);
         }
     }
-    m_password->setText(pwd);
+    m_password->setPassword(pwd);
     m_storePassword->setChecked(!pwd.isEmpty());
 }
 
