@@ -65,6 +65,12 @@ void ScheduleProxyModel::setHideFinishedSchedules(bool hide)
 bool ScheduleProxyModel::lessThan(const QModelIndex& source_left, const QModelIndex& source_right) const
 {
     if (source_left.parent().isValid() && source_right.parent().isValid()) {
+        // always show overdue schedules first
+        if (source_left.data(eMyMoney::Model::ScheduleIsOverdueRole).toBool() != source_right.data(eMyMoney::Model::ScheduleIsOverdueRole).toBool()) {
+            return (sortOrder() == Qt::SortOrder::AscendingOrder) ? source_left.data(eMyMoney::Model::ScheduleIsOverdueRole).toBool()
+                                                                  : source_right.data(eMyMoney::Model::ScheduleIsOverdueRole).toBool();
+        }
+
         switch (source_left.column()) {
         case SchedulesModel::Column::Name:
         case SchedulesModel::Column::Account:
