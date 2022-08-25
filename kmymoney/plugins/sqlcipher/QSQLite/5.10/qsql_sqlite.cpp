@@ -1019,7 +1019,7 @@ void QSQLiteDriver::handleNotification(const QString &tableName, qint64 rowid)
 {
     Q_D(const QSQLiteDriver);
     if (d->notificationid.contains(tableName)) {
-        emit notification(tableName);
+        // commented out due to it being deprecated emit notification(tableName);
         emit notification(tableName, QSqlDriver::UnknownSource, QVariant(rowid));
     }
 }
