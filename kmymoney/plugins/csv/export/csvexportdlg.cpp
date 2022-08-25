@@ -75,11 +75,15 @@ CsvExportDlg::CsvExportDlg(QWidget *parent) : QDialog(parent), ui(new Ui::CsvExp
     connect(ui->m_qlineeditFile, &KLineEdit::editingFinished, this, [&] { checkData(); });
     connect(ui->m_radioButtonAccount, &QRadioButton::toggled, this, [&] { checkData(); });
     connect(ui->m_radioButtonCategories, &QRadioButton::toggled, this, [&] { checkData(); });
-    connect(ui->m_accountComboBox, QOverload<const QString&>::of(&KComboBox::currentIndexChanged), this, &CsvExportDlg::checkData);
+    connect(ui->m_accountComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, [this](int idx) {
+        checkData(ui->m_accountComboBox->itemText(idx));
+    });
     connect(ui->m_separatorComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int index) {
         m_separator = m_fieldDelimiterCharList[index];
     } );
-    connect(ui->m_separatorComboBox, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), this, &CsvExportDlg::checkData);
+    connect(ui->m_separatorComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, [this](int idx) {
+        checkData(ui->m_accountComboBox->itemText(idx));
+    });
 
     checkData(QString());
 }
