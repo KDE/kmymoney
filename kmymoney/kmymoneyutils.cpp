@@ -75,11 +75,6 @@
 
 using namespace Icons;
 
-const QString KMyMoneyUtils::occurrenceToString(const eMyMoney::Schedule::Occurrence occurrence)
-{
-    return i18n(MyMoneySchedule::occurrenceToString(occurrence));
-}
-
 const QString KMyMoneyUtils::paymentMethodToString(eMyMoney::Schedule::PaymentType paymentType)
 {
     return i18n(MyMoneySchedule::paymentMethodToString(paymentType));

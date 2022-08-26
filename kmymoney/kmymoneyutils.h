@@ -117,21 +117,6 @@ public:
     ~KMyMoneyUtils() = default;
 
     /**
-      * This method is used to convert the occurrence type from its
-      * internal representation into a human readable format.
-      *
-      * @param occurrence numerical representation of the MyMoneySchedule
-      *                  occurrence type
-      *
-      * @return QString representing the human readable format translated according to the language catalog
-      *
-      * @sa MyMoneySchedule::occurrenceToString()
-      *
-      * @deprecated Use i18n(MyMoneySchedule::occurrenceToString(occurrence)) instead
-      */
-    static const QString occurrenceToString(const eMyMoney::Schedule::Occurrence occurrence);
-
-    /**
       * This method is used to convert the payment type from its
       * internal representation into a human readable format.
       *
