@@ -535,14 +535,14 @@ public:
 
     /**
      * This method is used to convert the occurrence type from its
-     * internal representation into a (untranslated) human readable format.
+     * internal representation into a translated human readable format.
      *
      * @param type numerical representation of the MyMoneySchedule
      *                  occurrence type
      *
      * @return QString representing the human readable format
      */
-    static const char* occurrenceToString(eMyMoney::Schedule::Occurrence type);
+    static QString occurrenceToString(eMyMoney::Schedule::Occurrence type);
 
     /**
      * This method is used to convert a multiplier and base occurrence type

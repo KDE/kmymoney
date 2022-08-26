@@ -76,12 +76,12 @@ public:
                                  transactions,
                                  QLocale().toString(m_date, QLocale::ShortFormat),
                                  amount.formatMoney(sched.account().fraction()),
-                                 i18n(sched.occurrenceToString().toLatin1()));
+                                 sched.occurrenceToString());
                 } else {
                     text = i18n("Payment on %1 for %2 occurring %3.",
                                 QLocale().toString(m_date, QLocale::ShortFormat),
                                 amount.formatMoney(sched.account().fraction()),
-                                i18n(sched.occurrenceToString().toLatin1()));
+                                sched.occurrenceToString());
                 }
 
                 if (m_date < QDate::currentDate()) {

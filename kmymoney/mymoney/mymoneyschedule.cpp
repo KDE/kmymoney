@@ -880,45 +880,45 @@ QString MyMoneySchedule::occurrenceToString() const
     return occurrenceToString(occurrenceMultiplier(), occurrence());
 }
 
-const char* MyMoneySchedule::occurrenceToString(Schedule::Occurrence occurrence)
+QString MyMoneySchedule::occurrenceToString(Schedule::Occurrence occurrence)
 {
     if (occurrence == Schedule::Occurrence::Once)
-        return kli18nc("Frequency of schedule", "Once").untranslatedText();
+        return i18nc("Frequency of schedule", "Once");
     else if (occurrence == Schedule::Occurrence::Daily)
-        return kli18nc("Frequency of schedule", "Daily").untranslatedText();
+        return i18nc("Frequency of schedule", "Daily");
     else if (occurrence == Schedule::Occurrence::Weekly)
-        return kli18nc("Frequency of schedule", "Weekly").untranslatedText();
+        return i18nc("Frequency of schedule", "Weekly");
     else if (occurrence == Schedule::Occurrence::Fortnightly)
-        return kli18nc("Frequency of schedule", "Fortnightly").untranslatedText();
+        return i18nc("Frequency of schedule", "Fortnightly");
     else if (occurrence == Schedule::Occurrence::EveryOtherWeek)
-        return kli18nc("Frequency of schedule", "Every other week").untranslatedText();
+        return i18nc("Frequency of schedule", "Every other week");
     else if (occurrence == Schedule::Occurrence::EveryHalfMonth)
-        return kli18nc("Frequency of schedule", "Every half month").untranslatedText();
+        return i18nc("Frequency of schedule", "Every half month");
     else if (occurrence == Schedule::Occurrence::EveryThreeWeeks)
-        return kli18nc("Frequency of schedule", "Every three weeks").untranslatedText();
+        return i18nc("Frequency of schedule", "Every three weeks");
     else if (occurrence == Schedule::Occurrence::EveryFourWeeks)
-        return kli18nc("Frequency of schedule", "Every four weeks").untranslatedText();
+        return i18nc("Frequency of schedule", "Every four weeks");
     else if (occurrence == Schedule::Occurrence::EveryThirtyDays)
-        return kli18nc("Frequency of schedule", "Every thirty days").untranslatedText();
+        return i18nc("Frequency of schedule", "Every thirty days");
     else if (occurrence == Schedule::Occurrence::Monthly)
-        return kli18nc("Frequency of schedule", "Monthly").untranslatedText();
+        return i18nc("Frequency of schedule", "Monthly");
     else if (occurrence == Schedule::Occurrence::EveryEightWeeks)
-        return kli18nc("Frequency of schedule", "Every eight weeks").untranslatedText();
+        return i18nc("Frequency of schedule", "Every eight weeks");
     else if (occurrence == Schedule::Occurrence::EveryOtherMonth)
-        return kli18nc("Frequency of schedule", "Every two months").untranslatedText();
+        return i18nc("Frequency of schedule", "Every two months");
     else if (occurrence == Schedule::Occurrence::EveryThreeMonths)
-        return kli18nc("Frequency of schedule", "Every three months").untranslatedText();
+        return i18nc("Frequency of schedule", "Every three months");
     else if (occurrence == Schedule::Occurrence::Quarterly)
-        return kli18nc("Frequency of schedule", "Quarterly").untranslatedText();
+        return i18nc("Frequency of schedule", "Quarterly");
     else if (occurrence == Schedule::Occurrence::EveryFourMonths)
-        return kli18nc("Frequency of schedule", "Every four months").untranslatedText();
+        return i18nc("Frequency of schedule", "Every four months");
     else if (occurrence == Schedule::Occurrence::TwiceYearly)
-        return kli18nc("Frequency of schedule", "Twice yearly").untranslatedText();
+        return i18nc("Frequency of schedule", "Twice yearly");
     else if (occurrence == Schedule::Occurrence::Yearly)
-        return kli18nc("Frequency of schedule", "Yearly").untranslatedText();
+        return i18nc("Frequency of schedule", "Yearly");
     else if (occurrence == Schedule::Occurrence::EveryOtherYear)
-        return kli18nc("Frequency of schedule", "Every other year").untranslatedText();
-    return kli18nc("Frequency of schedule", "Any").untranslatedText();
+        return i18nc("Frequency of schedule", "Every other year");
+    return i18nc("Frequency of schedule", "Any");
 }
 
 QString MyMoneySchedule::occurrenceToString(int mult, Schedule::Occurrence type)
@@ -927,33 +927,33 @@ QString MyMoneySchedule::occurrenceToString(int mult, Schedule::Occurrence type)
 
     if (mult > 1) {
         if (type == Schedule::Occurrence::Once) {
-            occurrenceString = QString(kli18nc("Frequency of schedule", "%1 times").untranslatedText()).arg(mult);
+            occurrenceString = i18nc("Frequency of schedule", "%1 times", mult);
 
         } else if (type == Schedule::Occurrence::Daily) {
             switch (mult) {
             case 30:
-                occurrenceString = kli18nc("Frequency of schedule", "Every thirty days").untranslatedText();
+                occurrenceString = i18nc("Frequency of schedule", "Every thirty days");
                 break;
             default:
-                occurrenceString = QString(kli18nc("Frequency of schedule", "Every %1 days").untranslatedText()).arg(mult);
+                occurrenceString = i18nc("Frequency of schedule", "Every %1 days", mult);
             }
 
         } else if (type == Schedule::Occurrence::Weekly) {
             switch (mult) {
             case 2:
-                occurrenceString = kli18nc("Frequency of schedule", "Every other week").untranslatedText();
+                occurrenceString = i18nc("Frequency of schedule", "Every other week");
                 break;
             case 3:
-                occurrenceString = kli18nc("Frequency of schedule", "Every three weeks").untranslatedText();
+                occurrenceString = i18nc("Frequency of schedule", "Every three weeks");
                 break;
             case 4:
-                occurrenceString = kli18nc("Frequency of schedule", "Every four weeks").untranslatedText();
+                occurrenceString = i18nc("Frequency of schedule", "Every four weeks");
                 break;
             case 8:
-                occurrenceString = kli18nc("Frequency of schedule", "Every eight weeks").untranslatedText();
+                occurrenceString = i18nc("Frequency of schedule", "Every eight weeks");
                 break;
             default:
-                occurrenceString = QString(kli18nc("Frequency of schedule", "Every %1 weeks").untranslatedText()).arg(mult);
+                occurrenceString = i18nc("Frequency of schedule", "Every %1 weeks", mult);
             }
 
         } else if (type == Schedule::Occurrence::EveryHalfMonth) {
@@ -962,28 +962,28 @@ QString MyMoneySchedule::occurrenceToString(int mult, Schedule::Occurrence type)
         } else if (type == Schedule::Occurrence::Monthly) {
             switch (mult) {
             case 2:
-                occurrenceString = kli18nc("Frequency of schedule", "Every two months").untranslatedText();
+                occurrenceString = i18nc("Frequency of schedule", "Every two months");
                 break;
             case 3:
-                occurrenceString = kli18nc("Frequency of schedule", "Every three months").untranslatedText();
+                occurrenceString = i18nc("Frequency of schedule", "Every three months");
                 break;
             case 4:
-                occurrenceString = kli18nc("Frequency of schedule", "Every four months").untranslatedText();
+                occurrenceString = i18nc("Frequency of schedule", "Every four months");
                 break;
             case 6:
-                occurrenceString = kli18nc("Frequency of schedule", "Twice yearly").untranslatedText();
+                occurrenceString = i18nc("Frequency of schedule", "Twice yearly");
                 break;
             default:
-                occurrenceString = QString(kli18nc("Frequency of schedule", "Every %1 months").untranslatedText()).arg(mult);
+                occurrenceString = i18nc("Frequency of schedule", "Every %1 months", mult);
             }
 
         } else if (type == Schedule::Occurrence::Yearly) {
             switch (mult) {
             case 2:
-                occurrenceString = kli18nc("Frequency of schedule", "Every other year").untranslatedText();
+                occurrenceString = i18nc("Frequency of schedule", "Every other year");
                 break;
             default:
-                occurrenceString = QString(kli18nc("Frequency of schedule", "Every %1 years").untranslatedText()).arg(mult);
+                occurrenceString = i18nc("Frequency of schedule", "Every %1 years", mult);
             }
         }
     }

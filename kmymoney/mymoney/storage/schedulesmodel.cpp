@@ -244,7 +244,7 @@ QVariant SchedulesModel::data(const QModelIndex& idx, int role) const
             break;
 
         case Column::Frequency:
-            rc = i18n(schedule.occurrenceToString(schedule.occurrenceMultiplier(), schedule.occurrence()).toLatin1());
+            rc = schedule.occurrenceToString(schedule.occurrenceMultiplier(), schedule.occurrence());
             break;
 
         case Column::PaymentMethod:

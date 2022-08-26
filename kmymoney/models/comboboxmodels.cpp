@@ -52,7 +52,7 @@ public:
         q->insertRows(0, occurrences.count());
         int row = 0;
         for (const auto& occurrence : occurrences) {
-            const auto text = i18n(MyMoneySchedule::occurrenceToString(occurrence));
+            const auto text = MyMoneySchedule::occurrenceToString(occurrence);
             rowToScheduleMap.insert(row, occurrence);
             scheduleToRowMap.insert(occurrence, row);
             scheduleToStringMap.insert(occurrence, text);
