@@ -121,6 +121,19 @@ void ReconciliationModel::doLoad()
                 ++row;
             }
         }
+        // in active reconciliation, the lastReconciledBalance is empty,
+        // statementBalance and statementDate are not empty
+        // see also
+        bool inReconciliation =
+            account.value("lastReconciledBalance").isEmpty() && !account.value("statementBalance").isEmpty() && !account.value("statementDate").isEmpty();
+        if (inReconciliation) {
+            ReconciliationEntry entry(nextId(),
+                                      account.id(),
+                                      QDate::fromString(account.value("statementDate"), Qt::ISODate),
+                                      MyMoneyMoney(account.value("statementBalance")));
+            insertRows(0, 1);
+            static_cast<TreeItem<ReconciliationEntry>*>(index(0, 0).internalPointer())->dataRef() = entry;
+        }
     }
 
     endResetModel();

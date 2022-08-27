@@ -14,16 +14,18 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "specialdatesmodel.h"
+#include "journalmodel.h"
 #include "mymoneyfile.h"
+#include "reconciliationmodel.h"
+#include "specialdatesmodel.h"
 
 using namespace eMyMoney;
 
 class SpecialDatesFilterPrivate
 {
 public:
-    SpecialDatesFilterPrivate(QAbstractItemModel* model)
-        : specialDatesModel(model)
+    SpecialDatesFilterPrivate()
+        : specialDatesModel(nullptr)
     {
     }
 
@@ -32,14 +34,23 @@ public:
         return (model == specialDatesModel);
     }
 
-    QAbstractItemModel*   specialDatesModel;
+    inline bool isReconciliatonModel(const QAbstractItemModel* model) const
+    {
+        return (model == reconciliationModel);
+    }
+
+    QAbstractItemModel* specialDatesModel;
+    QAbstractItemModel* reconciliationModel;
 };
 
-
-SpecialDatesFilter::SpecialDatesFilter(const QAbstractItemModel* datesModel, QObject* parent)
+SpecialDatesFilter::SpecialDatesFilter(QObject* parent)
     : QSortFilterProxyModel(parent)
-    , d_ptr(new SpecialDatesFilterPrivate(const_cast<QAbstractItemModel*>(datesModel)))
+    , d_ptr(new SpecialDatesFilterPrivate)
 {
+    Q_D(SpecialDatesFilter);
+    const auto file = MyMoneyFile::instance();
+    d->specialDatesModel = file->specialDatesModel();
+    d->reconciliationModel = file->reconciliationModel();
 }
 
 bool SpecialDatesFilter::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
@@ -47,8 +58,7 @@ bool SpecialDatesFilter::filterAcceptsRow(int source_row, const QModelIndex& sou
     Q_D(const SpecialDatesFilter);
 
     QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
-    const auto model = MyMoneyFile::baseModel();
-    const auto baseModel = model->baseModel(idx);
+    const auto baseModel = MyMoneyModelBase::baseModel(idx);
     if (d->isSpecialDatesModel(baseModel)) {
         // make sure we don't show trailing special date entries
         const auto rows = sourceModel()->rowCount(source_parent);
@@ -62,7 +72,7 @@ bool SpecialDatesFilter::filterAcceptsRow(int source_row, const QModelIndex& sou
                 // we're done scanning
                 break;
             }
-            const auto testModel = model->baseModel(testIdx);
+            const auto testModel = MyMoneyModelBase::baseModel(idx);
             if (!d->isSpecialDatesModel(testModel)) {
                 // we did not hit a special date entry
                 // now we need to check for a real transaction or the online balance one
@@ -78,13 +88,25 @@ bool SpecialDatesFilter::filterAcceptsRow(int source_row, const QModelIndex& sou
         if (visible && ((source_row + 1) < rows)) {
             // check if the next is also a date entry
             testIdx = sourceModel()->index(source_row+1, 0, source_parent);
-            const auto testModel = model->baseModel(testIdx);
+            const auto testModel = MyMoneyModelBase::baseModel(idx);
             if (d->isSpecialDatesModel(testModel)) {
                 visible = false;
             }
         }
         return visible;
+
+    } else if (d->isReconciliatonModel(baseModel)) {
+        // make sure we only show reconciliation entries that are followed by
+        // a regular transaction
+        int row = source_row + 1;
+        QModelIndex testIdx;
+        testIdx = sourceModel()->index(row, 0, source_parent);
+        if (MyMoneyModelBase::baseModel(testIdx) == MyMoneyFile::instance()->journalModel()) {
+            return true;
+        }
+        return false;
     }
+
     return QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
 }
 

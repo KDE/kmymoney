@@ -56,6 +56,9 @@ QModelIndex MyMoneyModelBase::mapToBaseSource(const QModelIndex& _idx)
     const QConcatenateTablesProxyModel* concatModel;
     const KDescendantsProxyModel* descendantsModel;
     do {
+        if (!idx.isValid()) {
+            break;
+        }
         if (( sortFilterModel = qobject_cast<const QSortFilterProxyModel*>(idx.model())) != nullptr) {
             // qDebug() << "QSortFilterProxyModel";
             idx = sortFilterModel->mapToSource(idx);

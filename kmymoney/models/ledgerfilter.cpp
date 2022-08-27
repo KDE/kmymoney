@@ -21,12 +21,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyenums.h"
 #include "icons.h"
-#include "mymoneyfile.h"
+#include "journalmodel.h"
 #include "mymoneyaccount.h"
-#include "mymoneytag.h"
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "mymoneymodelbase.h"
 #include "mymoneymoney.h"
+#include "mymoneytag.h"
+#include "reconciliationmodel.h"
 
 using namespace Icons;
 
@@ -107,46 +110,49 @@ bool LedgerFilter::filterAcceptsRow(int source_row, const QModelIndex& source_pa
     Q_D(const LedgerFilter);
 
     const auto idx = sourceModel()->index(source_row, 0, source_parent);
+
     if (d->state != State::Any) {
-        const auto splitState = idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>();
-        switch(d->state) {
-        case State::NotMarked:
-            if (splitState != eMyMoney::Split::State::NotReconciled) {
-                return false;
+        if (MyMoneyModelBase::baseModel(idx) == MyMoneyFile::instance()->journalModel()) {
+            const auto splitState = idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>();
+            switch (d->state) {
+            case State::NotMarked:
+                if (splitState != eMyMoney::Split::State::NotReconciled) {
+                    return false;
+                }
+                break;
+            case State::Cleared:
+                if (splitState != eMyMoney::Split::State::Cleared) {
+                    return false;
+                }
+                break;
+            case State::NotReconciled:
+                if ((splitState == eMyMoney::Split::State::Reconciled) || (splitState == eMyMoney::Split::State::Frozen)) {
+                    return false;
+                }
+                break;
+            case State::Erroneous:
+                if (!idx.data(eMyMoney::Model::TransactionErroneousRole).toBool()) {
+                    return false;
+                }
+                break;
+            case State::Imported:
+                if (!idx.data(eMyMoney::Model::TransactionIsImportedRole).toBool()) {
+                    return false;
+                }
+                break;
+            case State::Matched:
+                if (!idx.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool()) {
+                    return false;
+                }
+                break;
+            case State::Scheduled:
+                if (!idx.data(eMyMoney::Model::TransactionScheduleRole).toBool()) {
+                    return false;
+                }
+                break;
+            default:
+                break;
             }
-            break;
-        case State::Cleared:
-            if (splitState != eMyMoney::Split::State::Cleared) {
-                return false;
-            }
-            break;
-        case State::NotReconciled:
-            if ((splitState == eMyMoney::Split::State::Reconciled) || (splitState == eMyMoney::Split::State::Frozen)) {
-                return false;
-            }
-            break;
-        case State::Erroneous:
-            if (!idx.data(eMyMoney::Model::TransactionErroneousRole).toBool()) {
-                return false;
-            }
-            break;
-        case State::Imported:
-            if (!idx.data(eMyMoney::Model::TransactionIsImportedRole).toBool()) {
-                return false;
-            }
-            break;
-        case State::Matched:
-            if (!idx.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool()) {
-                return false;
-            }
-            break;
-        case State::Scheduled:
-            if (!idx.data(eMyMoney::Model::TransactionScheduleRole).toBool()) {
-                return false;
-            }
-            break;
-        default:
-            break;
         }
     }
 

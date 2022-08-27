@@ -82,7 +82,7 @@ void LedgerViewPage::initModel()
     d->stateFilter->setLineEdit(d->ui->m_searchWidget);
     d->ui->m_searchWidget->installEventFilter(this);
 
-    d->specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), this);
+    d->specialDatesFilter = new SpecialDatesFilter(this);
     d->specialDatesFilter->setSourceModel(d->stateFilter);
 
     // prepare the filter container
@@ -91,10 +91,7 @@ void LedgerViewPage::initModel()
     d->ui->m_filterContainer->hide();
 
     connect(d->ui->m_closeButton, &QToolButton::clicked, this, [&]() {
-        d->stateFilter->clearFilter();
-        d->ui->m_filterContainer->hide();
-        d->ui->m_ledgerView->setFocus();
-        QMetaObject::invokeMethod(d->ui->m_ledgerView, &LedgerView::ensureCurrentItemIsVisible, Qt::QueuedConnection);
+        d->clearFilter();
     });
     connect(pActions[eMenu::Action::ShowFilterWidget], &QAction::triggered, this, [&]() {
         if (isVisible()) {

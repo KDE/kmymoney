@@ -157,6 +157,11 @@ public:
                     auto tc = endingBalanceDlg->chargeTransaction();
                     MyMoneyFileTransaction ft;
                     try {
+                        account.deletePair("lastReconciledBalance");
+                        account.setValue("statementBalance", endingBalanceDlg->endingBalance().toString());
+                        account.setValue("statementDate", endingBalanceDlg->statementDate().toString(Qt::ISODate));
+                        MyMoneyFile::instance()->modifyAccount(account);
+
                         if (ti != MyMoneyTransaction()) {
                             MyMoneyFile::instance()->addTransaction(ti);
                         }
@@ -164,6 +169,7 @@ public:
                             MyMoneyFile::instance()->addTransaction(tc);
                         }
                         ft.commit();
+                        file->reconciliationModel()->updateData();
 
                     } catch (const MyMoneyException& e) {
                         qWarning("interest transaction not stored: '%s'", e.what());
@@ -178,6 +184,27 @@ public:
         } catch (const MyMoneyException& e) {
             qDebug() << "Starting reconciliation dialog failed" << e.what();
         }
+    }
+
+    bool cancelReconciliation()
+    {
+        const auto file = MyMoneyFile::instance();
+        auto reconciliationAccount = file->account(accountId);
+
+        reconciliationAccount.deletePair("lastReconciledBalance");
+        reconciliationAccount.deletePair("statementBalance");
+        reconciliationAccount.deletePair("statementDate");
+        MyMoneyFileTransaction ft;
+        try {
+            // update the account data
+            file->modifyAccount(reconciliationAccount);
+            ft.commit();
+            file->reconciliationModel()->updateData();
+
+        } catch (const MyMoneyException&) {
+            qDebug() << "Unexpected exception while cancelling of reconciliation of" << reconciliationAccount.name();
+        }
+        return true;
     }
 
     bool finishReconciliation()
@@ -325,6 +352,12 @@ public:
         }
     }
 
+    void clearFilter() override
+    {
+        LedgerViewPage::Private::clearFilter();
+        stateFilter->setStateFilter(LedgerFilter::State::NotReconciled);
+    }
+
     KEndingBalanceDlg* endingBalanceDlg;
 };
 
@@ -367,6 +400,9 @@ bool ReconciliationLedgerViewPage::executeAction(eMenu::Action action, const Sel
 
     case eMenu::Action::FinishReconciliation:
         return dd->finishReconciliation();
+
+    case eMenu::Action::CancelReconciliation:
+        return dd->cancelReconciliation();
 
     default:
         break;

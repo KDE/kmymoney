@@ -115,7 +115,7 @@ public:
         m_transactionFilter->setHideReconciledTransactions(LedgerViewSettings::instance()->hideReconciledTransactions());
         m_transactionFilter->setHideTransactionsBefore(LedgerViewSettings::instance()->hideTransactionsBefore());
 
-        auto specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), q);
+        auto specialDatesFilter = new SpecialDatesFilter(q);
         specialDatesFilter->setSourceModel(m_transactionFilter);
         ui->m_register->setModel(specialDatesFilter);
 

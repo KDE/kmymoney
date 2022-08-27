@@ -90,6 +90,14 @@ public:
         ui->m_rightLabel->setText(i18nc("@label:textbox Total balance", "Balance: %1", totalBalance.formatMoney("", precision)));
     }
 
+    virtual void clearFilter()
+    {
+        stateFilter->clearFilter();
+        ui->m_filterContainer->hide();
+        ui->m_ledgerView->setFocus();
+        QMetaObject::invokeMethod(ui->m_ledgerView, &LedgerView::ensureCurrentItemIsVisible, Qt::QueuedConnection);
+    }
+
     LedgerViewPage* q;
     Ui_LedgerViewPage* ui;
     LedgerAccountFilter* accountFilter;

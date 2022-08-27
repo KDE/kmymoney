@@ -29,7 +29,7 @@ class KMM_MODELS_EXPORT SpecialDatesFilter : public QSortFilterProxyModel
     Q_DISABLE_COPY(SpecialDatesFilter)
 
 public:
-    explicit SpecialDatesFilter(const QAbstractItemModel* specialDatesModel, QObject* parent);
+    explicit SpecialDatesFilter(QObject* parent);
 
 public Q_SLOTS:
     void forceReload();
