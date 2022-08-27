@@ -47,6 +47,7 @@ class KMyMoneyDateEditPrivate;
 class KMM_BASE_WIDGETS_EXPORT KMyMoneyDateEdit : public KDateComboBox
 {
     Q_OBJECT
+    Q_PROPERTY(QDate date READ date WRITE setDate)
 
 public:
     explicit KMyMoneyDateEdit(QWidget* parent = nullptr);
