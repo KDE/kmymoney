@@ -50,7 +50,7 @@ public:
      *
      * @sa mapToBaseSource
      */
-    const QAbstractItemModel* baseModel(const QModelIndex& idx);
+    static const QAbstractItemModel* baseModel(const QModelIndex& idx);
 
     /**
      * This method returns the model index in the base model of a
@@ -62,7 +62,7 @@ public:
      * @note The following filter models (and any derivatives are supported:
      * QSortFilterProxyModel, QConcatenateTablesProxyModel
      */
-    QModelIndex mapToBaseSource(const QModelIndex& idx);
+    static QModelIndex mapToBaseSource(const QModelIndex& idx);
 
     /**
      * This method returns a QModelIndex for a stacked @a proxyModel based
