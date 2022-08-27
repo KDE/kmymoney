@@ -16,14 +16,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyenums.h"
-#include "mymoneymoney.h"
-#include "mymoneyaccount.h"
-#include "mymoneyfile.h"
-#include "journalmodel.h"
 #include "accountsmodel.h"
-#include "specialdatesmodel.h"
+#include "journalmodel.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
 #include "onlinebalanceproxymodel.h"
+#include "schedulesjournalmodel.h"
+#include "specialdatesmodel.h"
 
 class LedgerAccountFilterPrivate : public LedgerFilterBasePrivate
 {
@@ -142,8 +143,8 @@ void LedgerAccountFilter::recalculateBalances()
     if (sourceModel() == nullptr || d->account.id().isEmpty())
         return;
 
-    // we need to operate on our own model (filtered by account and
-    // sorted by date including schedules)
+    // we need to operate on our own source model (not filtered,
+    // sorted by date and including schedules)
     // and update only the selected account(s). In case of investment
     // accounts, we also update the balance of the underlying stock
     // accounts.
@@ -156,35 +157,41 @@ void LedgerAccountFilter::recalculateBalances()
     }
 
     QHash<QString, MyMoneyMoney> balances;
-    const auto rows = rowCount();
+    const auto rows = sourceModel()->rowCount();
     QModelIndex idx;
     QString accountId;
-    for (int row = 0; row < rows; ++row) {
-        idx = index(row, 0);
-        accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
-        if (accountIds.contains(accountId)) {
-            if (isInvestmentAccount) {
-                if (idx.data(eMyMoney::Model::TransactionIsStockSplitRole).toBool()) {
-                    balances[accountId] =
-                        MyMoneyFile::instance()->journalModel()->stockSplitBalance(accountId,
-                                                                                   balances[accountId],
-                                                                                   idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>());
-                } else {
-                    balances[accountId] += idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-                }
+    const auto file = MyMoneyFile::instance();
 
-            } else {
-                if(d->showValuesInverted) {
-                    balances[accountId] -= idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-                } else {
-                    balances[accountId] += idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+    for (int row = 0; row < rows; ++row) {
+        idx = sourceModel()->index(row, 0);
+        const auto baseModel = MyMoneyModelBase::baseModel(idx);
+        if (baseModel) {
+            if (baseModel == file->journalModel() || baseModel == file->schedulesJournalModel()) {
+                accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+                if (accountIds.contains(accountId)) {
+                    if (isInvestmentAccount) {
+                        if (idx.data(eMyMoney::Model::TransactionIsStockSplitRole).toBool()) {
+                            balances[accountId] =
+                                MyMoneyFile::instance()->journalModel()->stockSplitBalance(accountId,
+                                                                                           balances[accountId],
+                                                                                           idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>());
+                        } else {
+                            balances[accountId] += idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+                        }
+
+                    } else {
+                        if (d->showValuesInverted) {
+                            balances[accountId] -= idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+                        } else {
+                            balances[accountId] += idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+                        }
+                    }
+                    const auto dispIndex = sourceModel()->index(row, JournalModel::Column::Balance);
+                    sourceModel()->setData(dispIndex, QVariant::fromValue(balances[accountId]), Qt::DisplayRole);
                 }
             }
-            const auto dispIndex = index(row, JournalModel::Column::Balance);
-            setData(dispIndex, QVariant::fromValue(balances[accountId]), Qt::DisplayRole);
         }
     }
-
     emit dataChanged(index(0, JournalModel::Column::Balance), index(rows - 1, JournalModel::Column::Balance));
     d->balanceCalculationPending = false;
 }
