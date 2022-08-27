@@ -521,6 +521,7 @@ enum Roles {
     SchedulePayeeRole,
     ScheduleNextDueDateRole,
     ScheduleIsOverdueRole,
+    ScheduleIsOverdueSinceRole,
     ScheduleIsFinishedRole,
     ScheduleFrequencyRole,
     SchedulePaymentTypeRole,

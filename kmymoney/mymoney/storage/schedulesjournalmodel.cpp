@@ -67,6 +67,9 @@ QVariant SchedulesJournalModel::data(const QModelIndex& index, int role) const
     case eMyMoney::Model::ScheduleIsOverdueRole:
         return entry.transaction().value(QStringLiteral("kmm-is-overdue")).compare(QStringLiteral("yes")) == 0;
 
+    case eMyMoney::Model::ScheduleIsOverdueSinceRole:
+        return QDate::fromString(entry.transaction().value(QLatin1String("kmm-overdue-since")), Qt::ISODate);
+
     case eMyMoney::Model::TransactionScheduleRole:
         return true;
 
@@ -174,6 +177,7 @@ void SchedulesJournalModel::doLoad()
                         t.setPostDate(s.adjustedNextDueDate());
                     }
                     t.setValue(QLatin1String("kmm-is-overdue"), QLatin1String("yes"));
+                    t.setValue(QLatin1String("kmm-overdue-since"), s.adjustedNextDueDate().toString(Qt::ISODate));
                 } else {
                     t.setPostDate(s.adjustedNextDueDate());
                 }
