@@ -33,6 +33,7 @@ class KMyMoneyDateEditPrivate
 public:
     KMyMoneyDateEditPrivate(KMyMoneyDateEdit* qq)
         : q(qq)
+        , m_originalDay(0)
         , m_emptyDateAllowed(false)
         , m_dateValidity(false)
         , m_lastKeyPressWasEscape(false)
@@ -208,8 +209,8 @@ public:
 
         if ((newMonth >= minValue) && (newMonth <= maxValue)) {
             auto day = date.day();
-            if (originalDay > day)
-                day = originalDay;
+            if (m_originalDay > day)
+                day = m_originalDay;
             auto newDate = QDate(date.year(), newMonth, day);
             if (!newDate.isValid()) {
                 const auto maxDays(QDate(date.year(), newMonth, 1).daysInMonth());
@@ -236,8 +237,8 @@ public:
         const auto newYear(date.year() + delta);
         if ((newYear >= minValue) && (newYear <= maxValue)) {
             auto day = date.day();
-            if (originalDay > day)
-                day = originalDay;
+            if (m_originalDay > day)
+                day = m_originalDay;
             auto newDate = QDate(newYear, date.month(), day);
             if (!newDate.isValid()) {
                 const auto maxDays(QDate(newYear, date.month(), 1).daysInMonth());
@@ -311,7 +312,7 @@ public:
                 case QDateEdit::DaySection:
                     date = adjustDay(date, delta);
                     if (date.isValid()) {
-                        originalDay = date.day();
+                        m_originalDay = date.day();
                     }
                     break;
                 case QDateEdit::MonthSection:
@@ -323,7 +324,7 @@ public:
                 case QDateEdit::NoSection:
                 default:
                     date = date.addDays(delta);
-                    originalDay = date.day();
+                    m_originalDay = date.day();
                     break;
                 }
                 if (date.isValid()) {
@@ -352,7 +353,7 @@ public:
     KMyMoneyDateEdit* q;
     QVector<QChar> m_validDelims;
     QVector<QDateTimeEdit::Section> m_sections;
-    int originalDay;
+    int m_originalDay;
     bool m_emptyDateAllowed;
     bool m_dateValidity;
     bool m_lastKeyPressWasEscape;
@@ -398,6 +399,7 @@ void KMyMoneyDateEdit::setDate(const QDate& date)
     const auto isNewDate(date != this->date());
     QSignalBlocker blocker(lineEdit());
     d->setDate(date);
+    d->m_originalDay = date.day();
     if (isNewDate) {
         d->selectSection(s_globalKMyMoneyDateEditSettings()->initialSection);
     }
@@ -580,7 +582,7 @@ void KMyMoneyDateEdit::keyPressEvent(QKeyEvent* keyEvent)
 
             if (newDate.isValid()) {
                 if (!oldDate.isValid() || (oldDate.day() != newDate.day())) {
-                    d->originalDay = newDate.day();
+                    d->m_originalDay = newDate.day();
                 }
                 if (oldSection != newSection) {
                     d->selectSection(newSection);
