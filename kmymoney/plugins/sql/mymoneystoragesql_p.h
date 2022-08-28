@@ -1360,7 +1360,10 @@ public:
         query.bindValue(":typeString", MyMoneySchedule::scheduleTypeToString(sch.type()));
         query.bindValue(":occurence", (int)sch.occurrence()); // krazy:exclude=spelling
         query.bindValue(":occurenceMultiplier", sch.occurrenceMultiplier()); // krazy:exclude=spelling
+
+        // TODO This seems unused, investigae & remove. Also, we do not want to write translated strings in the DB
         query.bindValue(":occurenceString", sch.occurrenceToString()); // krazy:exclude=spelling
+
         query.bindValue(":paymentType", (int)sch.paymentType());
         query.bindValue(":paymentTypeString", MyMoneySchedule::paymentMethodToString(sch.paymentType()));
         query.bindValue(":startDate", sch.startDate().toString(Qt::ISODate));
