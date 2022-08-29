@@ -95,12 +95,10 @@ include(KMyMoneyMacros)
 include(KDEGitCommitHooks)
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 
-include(ECMDeprecationSettings)
-ecm_set_disabled_deprecation_versions(
-    # TODO QT 5.15.2
-    KF 5.98.0
+add_definitions(
+    -DKF_DEPRECATED_WARNINGS_SINCE=0x60000
+    -DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x56200C
 )
-
 
 find_package(PkgConfig)
 
