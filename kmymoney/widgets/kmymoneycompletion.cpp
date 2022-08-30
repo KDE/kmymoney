@@ -11,11 +11,12 @@
 // QT Includes
 
 #include <QApplication>
-#include <QKeyEvent>
 #include <QEvent>
-#include <QDesktopWidget>
+#include <QKeyEvent>
 #include <QLineEdit>
+#include <QScreen>
 #include <QVBoxLayout>
+#include <QWindow>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -106,7 +107,7 @@ void KMyMoneyCompletion::adjustSize(const int count)
         // the code of this basic block is taken from KCompletionBox::show()
         // and modified to our local needs
 
-        QRect screenSize = QApplication::desktop()->availableGeometry(parentWidget());
+        QRect screenSize = windowHandle()->screen()->availableGeometry();
 
         QPoint orig = d->m_parent->mapToGlobal(QPoint(0, d->m_parent->height()));
         int x = orig.x();

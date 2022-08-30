@@ -9,10 +9,10 @@
 // QT Includes
 
 #include <QApplication>
-#include <QDesktopWidget>
+#include <QRect>
 #include <QScreen>
 #include <QWidget>
-#include <QRect>
+#include <QWindow>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -23,10 +23,7 @@
 
 PopupPositioner::PopupPositioner(QWidget* baseWidget, QWidget* popupWidget, Anchor anchor)
 {
-    // the following two lines use deprecated functions. I have not yet
-    // found out how to obtain the same information with newer versions (> 5.14)
-    auto screenNr = QApplication::desktop()->screenNumber(baseWidget);
-    const auto screenRect = QApplication::desktop()->screenGeometry(screenNr);
+    const auto screenRect = baseWidget->windowHandle()->screen()->availableGeometry();
 
     auto p = baseWidget->mapToGlobal(QPoint());
     // align the y coordinate

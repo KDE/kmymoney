@@ -9,8 +9,9 @@
 // ----------------------------------------------------------------------------
 // QT Headers
 
-#include <QDesktopWidget>
 #include <QPushButton>
+#include <QScreen>
+#include <QWindow>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -82,7 +83,7 @@ void TransactionDlg::updateWindowSize()
     int columnsWidth = 0;
     int headerWidth;
     int newWidth;
-    QRect screen = QApplication::desktop()->availableGeometry();
+    QSize screen = windowHandle()->screen()->size();
 
     layout()->invalidate();
     layout()->activate();
