@@ -217,7 +217,7 @@ KMyMoneyCalculator::KMyMoneyCalculator(QWidget* parent) :
         mapper->setMapping(d->buttons[i], i);
         connect(d->buttons[i], &QAbstractButton::clicked, mapper, static_cast<void (QSignalMapper::*)()>(&QSignalMapper::map));
     }
-    connect(mapper, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mapped), this, &KMyMoneyCalculator::digitClicked);
+    connect(mapper, &QSignalMapper::mappedInt, this, &KMyMoneyCalculator::digitClicked);
 
     // connect the calculation operations through another mapper
     mapper = new QSignalMapper(this);
@@ -225,7 +225,7 @@ KMyMoneyCalculator::KMyMoneyCalculator(QWidget* parent) :
         mapper->setMapping(d->buttons[i], i);
         connect(d->buttons[i], &QAbstractButton::clicked, mapper, static_cast<void (QSignalMapper::*)()>(&QSignalMapper::map));
     }
-    connect(mapper, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mapped), this, &KMyMoneyCalculator::calculationClicked);
+    connect(mapper, &QSignalMapper::mappedInt, this, &KMyMoneyCalculator::calculationClicked);
 
     // connect all remaining signals
     connect(d->buttons[KMyMoneyCalculatorPrivate::COMMA], &QAbstractButton::clicked, this, &KMyMoneyCalculator::commaClicked);
