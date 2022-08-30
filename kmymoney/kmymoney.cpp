@@ -70,7 +70,7 @@
 #ifdef ENABLE_HOLIDAYS
 #include <KHolidays/Holiday>
 #include <KHolidays/HolidayRegion>
-#include <KHolidays/kholidays_version.h>
+#include <kholidays_version.h>
 #endif
 
 #ifdef ENABLE_ACTIVITIES
