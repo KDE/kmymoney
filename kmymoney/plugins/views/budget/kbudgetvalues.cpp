@@ -131,7 +131,7 @@ KBudgetValues::KBudgetValues(QWidget* parent) :
     }
 
     connect(d->ui->m_clearButton, &QAbstractButton::clicked, this, &KBudgetValues::slotClearAllValues);
-    connect(d->ui->m_periodGroup, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), this, &KBudgetValues::slotChangePeriod);
+    connect(d->ui->m_periodGroup, &QButtonGroup::idClicked, this, &KBudgetValues::slotChangePeriod);
     connect(this, &KBudgetValues::valuesChanged, this, &KBudgetValues::slotUpdateClearButton);
 
     KGuiItem clearItem(KStandardGuiItem::clear());

@@ -54,7 +54,7 @@ KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString& 
     Q_D(KGncPriceSourceDlg);
     d->ui->setupUi(this);
     // signals and slots connections
-    connect(d->ui->buttonsSource, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), this, &KGncPriceSourceDlg::buttonPressed);
+    connect(d->ui->buttonsSource, &QButtonGroup::idClicked, this, &KGncPriceSourceDlg::buttonPressed);
     connect(d->ui->buttonBox, &QDialogButtonBox::helpRequested, this, &KGncPriceSourceDlg::slotHelp);
     // initialize data fields
     d->ui->textStockName->setText(i18n("Investment: %1", stockName));
