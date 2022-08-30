@@ -109,7 +109,7 @@ bool readRCFfromXMLDoc(QList<MyMoneyReport>& list, QDomDocument* doc);
 void writeRCFtoXMLDoc(const MyMoneyReport& filter, QDomDocument* doc);
 }
 
-class MyMoneyXmlContentHandler : public QXmlContentHandler
+class MyMoneyXmlContentHandler
 {
     friend class MyMoneyXmlContentHandlerTest;
     friend class MyMoneyStorageXML;
@@ -119,23 +119,20 @@ class MyMoneyXmlContentHandler : public QXmlContentHandler
 public:
     MyMoneyXmlContentHandler(MyMoneyStorageXML* reader);
     virtual ~MyMoneyXmlContentHandler() {}
-    virtual void setDocumentLocator(QXmlLocator * locator) final override {
-        m_loc = locator;
-    }
-    virtual bool startDocument() final override;
-    virtual bool endDocument() final override;
-    virtual bool startPrefixMapping(const QString & prefix, const QString & uri) final override;
-    virtual bool endPrefixMapping(const QString & prefix) final override;
-    virtual bool startElement(const QString & namespaceURI, const QString & localName, const QString & qName, const QXmlAttributes & atts) final override;
-    virtual bool endElement(const QString & namespaceURI, const QString & localName, const QString & qName) final override;
-    virtual bool characters(const QString & ch) final override;
-    virtual bool ignorableWhitespace(const QString & ch) final override;
-    virtual bool processingInstruction(const QString & target, const QString & data) final override;
-    virtual bool skippedEntity(const QString & name) final override;
-    virtual QString errorString() const final override;
+    virtual bool startDocument();
+    virtual bool endDocument();
+    virtual bool startPrefixMapping(const QString& prefix, const QString& uri);
+    virtual bool endPrefixMapping(const QString& prefix);
+    virtual bool startElement(int /*lineNumber*/, int /*columnNumber*/, const QString& qName, const QXmlStreamAttributes& atts);
+    virtual bool endElement(int /*lineNumber*/, int /*columnNumber*/, const QString& elName);
+    virtual bool characters(const QString& ch);
+    virtual bool ignorableWhitespace(const QString& ch);
+    virtual bool processingInstruction(const QString& target, const QString& data);
+    virtual bool skippedEntity(const QString& name);
+    virtual QString errorString() const;
+
 private:
     MyMoneyStorageXML* m_reader;
-    QXmlLocator*       m_loc;
     int                m_level;
     int                m_elementCount;
     QDomDocument       m_doc;
@@ -185,7 +182,6 @@ private:
 
 MyMoneyXmlContentHandler::MyMoneyXmlContentHandler(MyMoneyStorageXML* reader) :
     m_reader(reader),
-    m_loc(0),
     m_level(0),
     m_elementCount(0)
 {
@@ -221,7 +217,7 @@ bool MyMoneyXmlContentHandler::endPrefixMapping(const QString& /* prefix */)
     return true;
 }
 
-bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, const QString& /* localName */, const QString& qName, const QXmlAttributes & atts)
+bool MyMoneyXmlContentHandler::startElement(int /*lineNumber*/, int /*columnNumber*/, const QString& qName, const QXmlStreamAttributes& atts)
 {
     if (m_level == 0) {
         QString s = qName.toUpper();
@@ -245,7 +241,7 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
             // clang-format on
             m_baseNode = m_doc.createElement(qName);
             for (int i = 0; i < atts.count(); ++i) {
-                m_baseNode.setAttribute(atts.qName(i), atts.value(i));
+                m_baseNode.setAttribute(atts.at(i).name().toString(), atts.at(i).value().toString());
             }
             m_currNode = m_baseNode;
             m_level = 1;
@@ -289,8 +285,8 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
             }
         } else if (s == nodeName(Node::PricePair)) {
             if (atts.count()) {
-                m_reader->d->m_fromSecurity = atts.value(attributeName(Attribute::General::From));
-                m_reader->d->m_toSecurity = atts.value(attributeName(Attribute::General::To));
+                m_reader->d->m_fromSecurity = atts.value(attributeName(Attribute::General::From)).toString();
+                m_reader->d->m_toSecurity = atts.value(attributeName(Attribute::General::To)).toString();
             }
         } else if (s == tagName(Tag::CostCenters)) {
             if(atts.count()) {
@@ -304,7 +300,7 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
         m_level++;
         QDomElement node = m_doc.createElement(qName);
         for (int i = 0; i < atts.count(); ++i) {
-            node.setAttribute(atts.qName(i), atts.value(i));
+            node.setAttribute(atts.at(i).name().toString(), atts.at(i).value().toString());
         }
         m_currNode.appendChild(node);
         m_currNode = node;
@@ -312,8 +308,7 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
     return true;
 }
 
-
-bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, const QString& /* localName */, const QString& qName)
+bool MyMoneyXmlContentHandler::endElement(int lineNumber, int /*columnNumber*/, const QString& qName)
 {
     bool rc = true;
     QString s = qName.toUpper();
@@ -331,7 +326,7 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
                 } else if (s == nodeName(Node::Account)) {
                     auto a = readAccount(m_baseNode);
                     if (!m_reader->m_file->hasValidId(a)) {
-                        throw MYMONEYEXCEPTION(i18n("ID '%1' is invalid in line %2.").arg(a.id()).arg(m_loc->lineNumber()));
+                        throw MYMONEYEXCEPTION(i18n("ID '%1' is invalid in line %2.").arg(a.id()).arg(lineNumber));
                     }
                     if (!a.id().isEmpty())
                         m_reader->d->aList[a.id()] = a;
@@ -339,7 +334,7 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
                 } else if (s == nodeName(Node::Payee)) {
                     auto p = readPayee(m_baseNode);
                     if (!m_reader->m_file->hasValidId(p)) {
-                        throw MYMONEYEXCEPTION(i18n("ID '%1' is invalid in line %2.").arg(p.id().arg(m_loc->lineNumber())));
+                        throw MYMONEYEXCEPTION(i18n("ID '%1' is invalid in line %2.").arg(p.id().arg(lineNumber)));
                     }
                     if (!p.id().isEmpty())
                         m_reader->d->pList[p.id()] = p;
@@ -409,7 +404,7 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
                     }
                     m_reader->signalProgress(++m_elementCount, 0);
                 } else {
-                    m_errMsg = i18n("Unknown XML tag %1 found in line %2", qName, m_loc->lineNumber());
+                    m_errMsg = i18n("Unknown XML tag %1 found in line %2", qName, lineNumber);
                     qWarning() << m_errMsg;
                     rc = false;
                 }
@@ -1453,19 +1448,11 @@ void MyMoneyStorageXML::readFile(QIODevice* pDevice, MyMoneyFile* file)
     m_file = file;
 
     qDebug("reading file");
-    // creating the QXmlInputSource object based on a QIODevice object
-    // reads all data of the underlying object into memory. I have not
-    // found an object that reads on the fly. I tried to derive one myself,
-    // but there could be a severe problem with decoding when reading
-    // blocks of data and not a stream. So I left it the way it is. (ipwizard)
-    QXmlInputSource xml(pDevice);
 
     qDebug("start parsing file");
     MyMoneyXmlContentHandler mmxml(this);
-    QXmlSimpleReader reader;
-    reader.setContentHandler(&mmxml);
 
-    if (!reader.parse(&xml, false)) {
+    if (!parseContents(&mmxml, QString(pDevice->readAll()))) {
         throw MYMONEYEXCEPTION(i18n("File was not parsable. Reason: %1").arg(mmxml.errorString()));
     }
     qDebug("done parsing file");
@@ -1474,6 +1461,49 @@ void MyMoneyStorageXML::readFile(QIODevice* pDevice, MyMoneyFile* file)
     signalProgress(-1, -1);
 }
 
+bool MyMoneyStorageXML::parseContents(MyMoneyXmlContentHandler* handler, const QString& contents)
+{
+    bool foundDtd = false;
+    QXmlStreamReader xmlReader(contents);
+    while (!xmlReader.atEnd()) {
+        const QXmlStreamReader::TokenType token = xmlReader.readNext();
+        switch (token) {
+        case QXmlStreamReader::StartDocument:
+            handler->startDocument();
+            break;
+        case QXmlStreamReader::EndDocument:
+            // Nothing
+            break;
+        case QXmlStreamReader::Comment:
+            // comment(xmlReader.text());
+            break;
+        case QXmlStreamReader::DTD:
+            foundDtd = true;
+            break;
+        case QXmlStreamReader::StartElement:
+            handler->startElement(xmlReader.lineNumber(), xmlReader.columnNumber(), xmlReader.qualifiedName().toString(), xmlReader.attributes());
+            break;
+        case QXmlStreamReader::EndElement:
+            handler->endElement(xmlReader.lineNumber(), xmlReader.columnNumber(), xmlReader.qualifiedName().toString());
+            break;
+        case QXmlStreamReader::Characters:
+            handler->characters(xmlReader.text().toString());
+            break;
+        case QXmlStreamReader::EntityReference:
+            // skippedEntity(xmlReader.name());
+            break;
+        case QXmlStreamReader::Invalid:
+            qWarning() << "Invalid token found" << xmlReader.errorString() << xmlReader.lineNumber() << xmlReader.columnNumber() << contents;
+            return false;
+        case QXmlStreamReader::ProcessingInstruction:
+            // Nothing
+            break;
+        default:
+            qWarning() << "unexpected token" << token;
+        }
+    }
+    return true;
+}
 bool saveNodeCanonically(QXmlStreamWriter &stream, const QDomNode &domNode)
 {
     // [#x1-#x8], [#xB-#xC], [#xE-#x1F], [#x7F-#x84], [#x86-#x9F], [#xFDD0-#xFDDF]

@@ -135,10 +135,11 @@ allow us to test the structure, if not the data content, of the file.
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
-#include <QStack>
-#include <QXmlDefaultHandler>
 #include <QDate>
+#include <QList>
+#include <QMap>
+#include <QStack>
+#include <QXmlStreamReader>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -170,7 +171,6 @@ class QTextCodec;
 class MyMoneyStorageMgr;
 class QXmlAttributes;
 class QXmlInputSource;
-class QXmlSimpleReader;
 
 /** GncObject is the base class for the various objects in the gnucash file
     Beyond the first level XML objects, elements will be of one of three types:
@@ -188,12 +188,12 @@ protected:
     friend class XmlReader;
     friend class MyMoneyGncReader;
     // check for sub object element; if it is, create the object
-    GncObject *isSubElement(const QString &elName, const QXmlAttributes& elAttrs);
+    GncObject* isSubElement(const QString& elName, const QXmlStreamAttributes& elAttrs);
     // check for data element; if so, set data pointer
-    bool isDataElement(const QString &elName, const QXmlAttributes& elAttrs);
+    bool isDataElement(const QString& elName, const QXmlStreamAttributes& elAttrs);
     // process start element for 'this'; normally for attribute checking; other initialization done in constructor
-    virtual void initiate(const QString&, const QXmlAttributes&) {
-        return ;
+    virtual void initiate(const QString&, const QXmlStreamAttributes& /*elAttrs*/)
+    {
     }
     // a sub object has completed; process the data it gathered
     virtual void endSubEl(GncObject *) {
@@ -225,7 +225,7 @@ protected:
     }
 
     // some gnucash elements have version attribute; check it
-    void checkVersion(const QString&, const QXmlAttributes&, const map_elementVersions&);
+    void checkVersion(const QString&, const QXmlStreamAttributes& elAttrs, const map_elementVersions&);
     // get name of element processed by 'this'
     QString getElName() const {
         return (m_elementName);
@@ -244,7 +244,8 @@ protected:
         return (0);
     }
     // called by isDataElement to set variable pointer
-    virtual void dataEl(const QXmlAttributes&) {
+    virtual void dataEl(const QXmlStreamAttributes& /*elAttrs*/)
+    {
         m_dataPtr = &(m_v[m_state]);
         m_anonClass = m_anonClassList[m_state];
     }
@@ -326,7 +327,7 @@ private:
     void endSubEl(GncObject *) final override;
     // data elements
     enum KvpDataEls {KEY, VALUE, END_Kvp_DELS };
-    void dataEl(const QXmlAttributes&) final override;
+    void dataEl(const QXmlStreamAttributes& elAttrs) final override;
     QString m_kvpType;  // type is an XML attribute
 };
 // ************* GncLot********************************************
@@ -387,7 +388,8 @@ protected:
 private:
     // data elements
     enum DateDataEls {TSDATE, GDATE, END_Date_DELS};
-    void dataEl(const QXmlAttributes&) final override {
+    void dataEl(const QXmlStreamAttributes& /*elAttrs*/) final override
+    {
         m_dataPtr = &(m_v[TSDATE]);
         m_anonClass = GncObject::ASIS;
     }
@@ -405,7 +407,7 @@ public:
     GncCountData();
     ~GncCountData();
 private:
-    void initiate(const QString&, const QXmlAttributes&) final override;
+    void initiate(const QString&, const QXmlStreamAttributes& elAttrs) final override;
     void terminate() final override;
     QString m_countType; // type of element being counted
 };
@@ -791,21 +793,21 @@ private:
  of object represented by the XMl, and calls the appropriate object functions
 */
 // *****************************************************************************************
-class XmlReader : public QXmlDefaultHandler
+class XmlReader
 {
 protected:
     friend class MyMoneyGncReader;
     XmlReader(MyMoneyGncReader *pM);                 // keep pointer to 'main'
     void processFile(QIODevice*);  // main entry point of reader
+    bool parseContents(const QString& contents);
     //  define xml content handler functions
-    bool startDocument() final override;
-    bool startElement(const QString&, const QString&, const QString&, const QXmlAttributes&) final override;
-    bool endElement(const QString&, const QString&, const QString&) final override;
-    bool characters(const QString &) final override;
-    bool endDocument() final override;
+    bool startDocument();
+    bool startElement(int lineNumber, int columnNumber, const QString& elName, const QXmlStreamAttributes& attr);
+    bool endElement(int lineNumber, int columnNumber, const QString& qName);
+    bool characters(const QString&);
+    bool endDocument();
+
 private:
-    QXmlInputSource *m_source;
-    QXmlSimpleReader *m_reader;
     QStack<GncObject*> m_os; // stack of sub objects
     GncObject *m_co;           // current object, for ease of coding (=== m_os.top)
     MyMoneyGncReader *pMain;  // the 'main' pointer, to pass on to objects

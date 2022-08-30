@@ -49,6 +49,7 @@ class MyMoneyCostCenter;
 class onlineJob;
 class MyMoneyFile;
 class PriceEntry;
+class MyMoneyXmlContentHandler;
 
 template <typename T> class QList;
 typedef QPair<QString, QString> MyMoneySecurityPair;
@@ -68,6 +69,7 @@ public:
     };
 
     void readFile(QIODevice* s, MyMoneyFile* file) override;
+    bool parseContents(MyMoneyXmlContentHandler* handler, const QString& contents);
     void writeFile(QIODevice* s, MyMoneyFile* file) override;
     void setProgressCallback(void(*callback)(int, int, const QString&)) override;
 
@@ -172,7 +174,6 @@ private:
       * new format. This should go at some time beyond 0.8 (ipwizard)
       */
     QString m_baseCurrencyId;
-
 };
 
 #endif
