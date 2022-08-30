@@ -284,9 +284,6 @@
      <property name="editable">
       <bool>true</bool>
      </property>
-     <property name="autoCompletion">
-      <bool>true</bool>
-     </property>
      <property name="kmm_taborder" stdset="0">
       <bool>true</bool>
      </property>
