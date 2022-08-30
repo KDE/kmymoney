@@ -175,10 +175,11 @@ public:
 
     void clearSubBudgets(const QModelIndex &index)
     {
-        const auto children = ui->m_accountTree->model()->rowCount(index);
+        QAbstractItemModel* model = ui->m_accountTree->model();
+        const auto children = model->rowCount(index);
 
         for (auto i = 0; i < children; ++i) {
-            const auto childIdx = index.child(i, 0);
+            const auto childIdx = model->index(i, 0, index);
             const auto accountID = childIdx.data(eMyMoney::Model::Roles::IdRole).toString();
             m_budget.removeReference(accountID);
             clearSubBudgets(childIdx);
@@ -188,10 +189,11 @@ public:
     bool collectSubBudgets(MyMoneyBudget::AccountGroup &destination, const QModelIndex &index) const
     {
         auto rc = false;
-        const auto children = ui->m_accountTree->model()->rowCount(index);
+        QAbstractItemModel* model = ui->m_accountTree->model();
+        const auto children = model->rowCount(index);
 
         for (auto i = 0; i < children; ++i) {
-            auto childIdx = index.child(i, 0);
+            auto childIdx = model->index(i, 0, index);
             auto accountID = childIdx.data(eMyMoney::Model::Roles::IdRole).toString();
             MyMoneyBudget::AccountGroup auxAccount = m_budget.account(accountID);
             if (auxAccount.budgetLevel() != eMyMoney::Budget::Level::None
