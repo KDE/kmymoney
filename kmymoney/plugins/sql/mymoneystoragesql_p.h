@@ -2046,12 +2046,12 @@ public:
              .arg(db->driverName()).arg(db->hostName()).arg(db->userName()).arg(db->databaseName());
         QSqlError e = db->lastError();
         s += QString("\nDriver Error: %1").arg(e.driverText());
-        s += QString("\nDatabase Error No %1: %2").arg(e.number()).arg(e.databaseText());
+        s += QString("\nDatabase Error No %1: %2").arg(e.nativeErrorCode()).arg(e.databaseText());
         s += QString("\nText: %1").arg(e.text());
         s += QString("\nError type %1").arg(e.type());
         e = query.lastError();
         s += QString("\nExecuted: %1").arg(query.executedQuery());
-        s += QString("\nQuery error No %1: %2").arg(e.number()).arg(e.text());
+        s += QString("\nQuery error No %1: %2").arg(e.nativeErrorCode()).arg(e.text());
         s += QString("\nError type %1").arg(e.type());
 
         const_cast <MyMoneyStorageSql*>(q)->d_func()->m_error = s;
