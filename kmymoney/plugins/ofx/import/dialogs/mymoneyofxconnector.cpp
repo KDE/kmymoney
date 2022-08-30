@@ -369,7 +369,7 @@ QString MyMoneyOfxConnector::statementRequest() const
 
     QString result;
     if (fi.userpass[0]) {
-        char *szrequest = libofx_request_statement(&fi, &account, QDateTime(statementStartDate()).toTime_t());
+        char* szrequest = libofx_request_statement(&fi, &account, statementStartDate().startOfDay().toMSecsSinceEpoch());
         auto codec = QTextCodec::codecForName("Windows-1251");
         result = codec->toUnicode(szrequest);
         free(szrequest);
