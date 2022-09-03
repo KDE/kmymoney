@@ -543,7 +543,7 @@ void KMyMoneySelector::slotItemPressed(QTreeWidgetItem* item, int /* col */)
     if (item->flags().testFlag(Qt::ItemIsUserCheckable)) {
         QStyleOptionButton opt;
         opt.rect = d->m_treeWidget->visualItemRect(item);
-        QRect rect = d->m_treeWidget->style()->subElementRect(QStyle::SE_ViewItemCheckIndicator, &opt, d->m_treeWidget);
+        QRect rect = d->m_treeWidget->style()->subElementRect(QStyle::SE_ItemViewItemCheckIndicator, &opt, d->m_treeWidget);
         if (rect.contains(d->m_treeWidget->mapFromGlobal(QCursor::pos()))) {
             // we get down here, if we have a right click onto the checkbox
             item->setCheckState(0, item->checkState(0) == Qt::Checked ? Qt::Unchecked : Qt::Checked);
