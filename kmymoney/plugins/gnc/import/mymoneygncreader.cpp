@@ -23,7 +23,6 @@
 #include <QDebug>
 #include <QXmlAttributes>
 #include <QXmlInputSource>
-#include <QXmlSimpleReader>
 #include <QPointer>
 #include <QRandomGenerator>
 
@@ -130,12 +129,10 @@ GncObject::GncObject() :
 }
 
 // Check that the current element is of a version we are coded for
-void GncObject::checkVersion(const QString& elName, const QXmlAttributes& elAttrs, const map_elementVersions& map)
-{
-    TRY {
-        if (map.contains(elName)) { // if it's not in the map, there's nothing to check
-            if (!map[elName].contains(elAttrs.value("version")))
-                throw MYMONEYEXCEPTION(QString::fromLatin1("%1 : Sorry. This importer cannot handle version %2 of element %3").arg(Q_FUNC_INFO, elAttrs.value("version"), elName));
+void GncObject::checkVersion(const QString& elName, const QXmlStreamAttributes& elAttrs, const map_elementVersions& map){TRY{if (map.contains(elName)){
+    // if it's not in the map, there's nothing to check
+    if (!map[elName].contains(elAttrs.value("version"))) throw MYMONEYEXCEPTION(
+        QString::fromLatin1("%1 : Sorry. This importer cannot handle version %2 of element %3").arg(Q_FUNC_INFO, elAttrs.value("version").toString(), elName));
         }
         return ;
     }
@@ -143,7 +140,7 @@ void GncObject::checkVersion(const QString& elName, const QXmlAttributes& elAttr
 }
 
 // Check if this element is in the current object's sub element list
-GncObject *GncObject::isSubElement(const QString& elName, const QXmlAttributes& elAttrs)
+GncObject* GncObject::isSubElement(const QString& elName, const QXmlStreamAttributes& elAttrs)
 {
     TRY {
         uint i;
@@ -165,9 +162,8 @@ GncObject *GncObject::isSubElement(const QString& elName, const QXmlAttributes& 
 }
 
 // Check if this element is in the current object's data element list
-bool GncObject::isDataElement(const QString &elName, const QXmlAttributes& elAttrs)
-{
-    TRY {
+bool GncObject::isDataElement(const QString& elName, const QXmlStreamAttributes& elAttrs){
+    TRY{
         uint i;
         for (i = 0; i < m_dataElementListCount; i++) {
             if (elName == m_dataElementList[i]) {
@@ -175,7 +171,7 @@ bool GncObject::isDataElement(const QString &elName, const QXmlAttributes& elAtt
                 dataEl(elAttrs); // go set the pointer so the data can be stored
                 return (true);
             }
-        }
+    }
         m_dataPtr = 0; // we don't need this, so make sure we don't store extraneous data
         return (false);
     }
@@ -410,11 +406,11 @@ GncKvp::GncKvp()
 
 GncKvp::~GncKvp() {}
 
-void GncKvp::dataEl(const QXmlAttributes& elAttrs)
+void GncKvp::dataEl(const QXmlStreamAttributes& elAttrs)
 {
     switch (m_state) {
     case VALUE:
-        m_kvpType = elAttrs.value("type");
+        m_kvpType = elAttrs.value("type").toString();
     }
     m_dataPtr = &(m_v[m_state]);
     if (key().contains("formula")) {
@@ -468,9 +464,9 @@ GncCountData::GncCountData()
 
 GncCountData::~GncCountData() {}
 
-void GncCountData::initiate(const QString&, const QXmlAttributes& elAttrs)
+void GncCountData::initiate(const QString&, const QXmlStreamAttributes& elAttrs)
 {
-    m_countType = elAttrs.value("cd:type");
+    m_countType = elAttrs.value("cd:type").toString();
     m_dataPtr = &(m_v[0]);
     return ;
 }
@@ -1086,8 +1082,6 @@ GncSchedDef::~GncSchedDef() {}
                          XML Reader
 ************************************************************************************************/
 XmlReader::XmlReader(MyMoneyGncReader *pM) :
-    m_source(0),
-    m_reader(0),
     m_co(0),
     pMain(pM),
     m_headerFound(false)
@@ -1096,16 +1090,53 @@ XmlReader::XmlReader(MyMoneyGncReader *pM) :
 
 void XmlReader::processFile(QIODevice* pDevice)
 {
-    m_source = new QXmlInputSource(pDevice);  // set up the Qt XML reader
-    m_reader = new QXmlSimpleReader;
-    m_reader->setContentHandler(this);
     // go read the file
-    if (!m_reader->parse(m_source))
-        throw MYMONEYEXCEPTION(QString::fromLatin1("Input file cannot be parsed; may be corrupt\n%1").arg(errorString()));
+    if (!parseContents(QString(pDevice->readAll())))
+        throw MYMONEYEXCEPTION(QStringLiteral("Input file cannot be parsed; may be corrupt\n"));
+}
 
-    delete m_reader;
-    delete m_source;
-    return ;
+bool XmlReader::parseContents(const QString& contents)
+{
+    bool foundDtd = false;
+    QXmlStreamReader xmlReader(contents);
+    while (!xmlReader.atEnd()) {
+        const QXmlStreamReader::TokenType token = xmlReader.readNext();
+        switch (token) {
+        case QXmlStreamReader::StartDocument:
+            startDocument();
+            break;
+        case QXmlStreamReader::EndDocument:
+            // Nothing
+            break;
+        case QXmlStreamReader::Comment:
+            // comment(xmlReader.text());
+            break;
+        case QXmlStreamReader::DTD:
+            foundDtd = true;
+            break;
+        case QXmlStreamReader::StartElement:
+            startElement(xmlReader.lineNumber(), xmlReader.columnNumber(), xmlReader.qualifiedName().toString(), xmlReader.attributes());
+            break;
+        case QXmlStreamReader::EndElement:
+            endElement(xmlReader.lineNumber(), xmlReader.columnNumber(), xmlReader.qualifiedName().toString());
+            break;
+        case QXmlStreamReader::Characters:
+            characters(xmlReader.text().toString());
+            break;
+        case QXmlStreamReader::EntityReference:
+            // skippedEntity(xmlReader.name());
+            break;
+        case QXmlStreamReader::Invalid:
+            qWarning() << "Invalid token found" << xmlReader.errorString() << xmlReader.lineNumber() << xmlReader.columnNumber() << contents;
+            return false;
+        case QXmlStreamReader::ProcessingInstruction:
+            // Nothing
+            break;
+        default:
+            qWarning() << "unexpected token" << token;
+        }
+    }
+    return true;
 }
 
 // XML handling routines
@@ -1123,8 +1154,7 @@ bool XmlReader::startDocument()
     return (true);
 }
 
-bool XmlReader::startElement(const QString&, const QString&, const QString& elName,
-                             const QXmlAttributes& elAttrs)
+bool XmlReader::startElement(int /*lineNumber*/, int /*columnNumber*/, const QString& elName, const QXmlStreamAttributes& elAttrs)
 {
     try {
         if (pMain->gncdebug) qDebug() << "XML start -" << elName;
@@ -1161,7 +1191,7 @@ bool XmlReader::startElement(const QString&, const QString&, const QString& elNa
         if (temp != 0) {
             m_os.push(temp);
             m_co = m_os.top();
-            m_co->setVersion(elAttrs.value("version"));
+            m_co->setVersion(elAttrs.value("version").toString());
             m_co->setPm(pMain);  // pass the 'main' pointer to the sub object
             // return true;   // removed, as we hit a return true anyway
         }
@@ -1186,7 +1216,7 @@ bool XmlReader::startElement(const QString&, const QString&, const QString& elNa
     return true; // to keep compiler happy
 }
 
-bool XmlReader::endElement(const QString&, const QString&, const QString&elName)
+bool XmlReader::endElement(int /*lineNumber*/, int /*columnNumber*/, const QString& elName)
 {
     try {
         if (pMain->xmldebug) qDebug() << "XML end -" << elName;
