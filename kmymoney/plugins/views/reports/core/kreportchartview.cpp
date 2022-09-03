@@ -283,9 +283,11 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
     int eBudgetDiffIdx = rowTypeList.indexOf(eBudgetDiff);
     QList<ERowType> myRowTypeList = rowTypeList;
-    myRowTypeList.removeAt(eBudgetDiffIdx);
+    if (eBudgetDiffIdx != -1)
+        myRowTypeList.removeAt(eBudgetDiffIdx);
     QStringList myColumnTypeHeaderList = columnTypeHeaderList;
-    myColumnTypeHeaderList.removeAt(eBudgetDiffIdx);
+    if (eBudgetDiffIdx != -1)
+        myColumnTypeHeaderList.removeAt(eBudgetDiffIdx);
     int myRowTypeListSize = myRowTypeList.size();
     MyMoneyFile* file = MyMoneyFile::instance();
     int precision = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
