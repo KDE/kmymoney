@@ -334,11 +334,11 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
 
     if (data.date_posted_valid) {
         QDateTime dt;
-        dt.setTime_t(data.date_posted - pofx->d->m_timestampOffset * 60);
+        dt.setSecsSinceEpoch(data.date_posted - pofx->d->m_timestampOffset * 60);
         t.m_datePosted = dt.date();
     } else if (data.date_initiated_valid) {
         QDateTime dt;
-        dt.setTime_t(data.date_initiated - pofx->d->m_timestampOffset * 60);
+        dt.setSecsSinceEpoch(data.date_initiated - pofx->d->m_timestampOffset * 60);
         t.m_datePosted = dt.date();
     }
     if (t.m_datePosted.isValid()) {
@@ -667,20 +667,20 @@ int OFXImporter::ofxStatementCallback(struct OfxStatementData data, void* pv)
 
     if (data.date_start_valid) {
         QDateTime dt;
-        dt.setTime_t(data.date_start - pofx->d->m_timestampOffset * 60);
+        dt.setSecsSinceEpoch(data.date_start - pofx->d->m_timestampOffset * 60);
         s.m_dateBegin = dt.date();
     }
 
     if (data.date_end_valid) {
         QDateTime dt;
-        dt.setTime_t(data.date_end - pofx->d->m_timestampOffset * 60);
+        dt.setSecsSinceEpoch(data.date_end - pofx->d->m_timestampOffset * 60);
         s.m_dateEnd = dt.date();
     }
 
     if (data.ledger_balance_valid && data.ledger_balance_date_valid) {
         s.m_closingBalance = MyMoneyMoney(data.ledger_balance);
         QDateTime dt;
-        dt.setTime_t(data.ledger_balance_date);
+        dt.setSecsSinceEpoch(data.ledger_balance_date);
         s.m_dateEnd = dt.date();
     }
 

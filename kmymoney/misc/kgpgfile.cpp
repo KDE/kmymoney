@@ -400,7 +400,7 @@ QDateTime KGPGFile::keyExpires(const QString& name)
     // in case we have no or more than one matching key
     // or the key does not have subkeys, we return an invalid date
     if (d->m_keys.size() == 1 && d->m_keys[0].subkeys().size() > 0 && !d->m_keys[0].subkeys()[0].neverExpires()) {
-        expirationDate.setTime_t(d->m_keys[0].subkeys()[0].expirationTime());
+        expirationDate.setSecsSinceEpoch(d->m_keys[0].subkeys()[0].expirationTime());
     }
     return expirationDate;
 }
