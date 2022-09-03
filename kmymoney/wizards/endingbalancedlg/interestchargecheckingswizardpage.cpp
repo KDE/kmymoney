@@ -45,7 +45,7 @@ InterestChargeCheckingsWizardPage::InterestChargeCheckingsWizardPage(QWidget *pa
 
     // reduce the amount of characters shown for a payee
     ui->m_payeeEdit->setMinimumContentsLength(40);
-    ui->m_payeeEdit->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLength);
+    ui->m_payeeEdit->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
 
     auto updateDateFrame = [&](QWidget* w, bool state) {
         WidgetHintFrame::hide(w);

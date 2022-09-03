@@ -51,7 +51,7 @@ GeneralLoanInfoPage::GeneralLoanInfoPage(Wizard* wizard) :
 
     // reduce the amount of characters shown for a payee
     d->ui->m_payee->setMinimumContentsLength(40);
-    d->ui->m_payee->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLength);
+    d->ui->m_payee->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
 
     d->m_firstTime = true;
     d->m_mandatoryGroup->add(d->ui->m_payee);
