@@ -1,3 +1,4 @@
+add_subdirectory( xmlhelper )
 add_subdirectory( storage )
 add_subdirectory( payeeidentifier )
 
@@ -63,6 +64,10 @@ set(kmm_mymoney_LIB_SRCS
   ./onlinetasks/unavailabletask/tasks/unavailabletask.cpp
   )
 
+  set(xmlhelper_a_SOURCES
+  ./xmlhelper/xmlstoragehelper.cpp
+  )
+
   # NOTE: this payeeIdentifier and its cmake file cannot be used as a template
   # This payeeIdentifier must be linked with payeeIdentifierLoader because it
   # is a fallback if something failed during loading of plugins (for xml files only)
@@ -77,6 +82,7 @@ list(APPEND storage_a_SOURCES $<$<BOOL:${USE_MODELTEST}>:modeltest.cpp>)
 list(APPEND kmm_mymoney_LIB_SRCS ${storage_a_SOURCES})
 list(APPEND kmm_mymoney_LIB_SRCS ${onlineTask_a_SOURCES})
 list(APPEND kmm_mymoney_LIB_SRCS ${payeeidentifier_a_SOURCES})
+list(APPEND kmm_mymoney_LIB_SRCS ${xmlhelper_a_SOURCES})
 
 set(mymoney_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kmm_mymoney_export.h
   mymoneyobject.h mymoneyaccount.h mymoneycategory.h mymoneyexception.h

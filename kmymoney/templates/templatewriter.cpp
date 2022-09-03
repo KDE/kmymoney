@@ -10,13 +10,14 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDir>
-#include <QList>
-#include <QStandardPaths>
-#include <QUrl>
-#include <QTemporaryFile>
-#include <QSaveFile>
 #include <QDebug>
+#include <QDir>
+#include <QDomElement>
+#include <QList>
+#include <QSaveFile>
+#include <QStandardPaths>
+#include <QTemporaryFile>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2014 Christian Dávid <christian-david@web.de>
+    SPDX-FileCopyrightText: 2022 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -7,7 +8,6 @@
 #define UNAVAILABLEPLUGIN_H
 
 #include "payeeidentifier/payeeidentifierdata.h"
-#include <QDomElement>
 
 class payeeIdentifierLoader;
 
@@ -26,21 +26,21 @@ public:
     PAYEEIDENTIFIER_IID(payeeIdentifierUnavailable, "org.kmymoney.payeeIdentifier.payeeIdentifierUnavailable");
 
     payeeIdentifierUnavailable();
-    void writeXML(QDomDocument& document, QDomElement& parent) const final override;
-    payeeIdentifierUnavailable* createFromXml(const QDomElement& element) const final override;
+    void writeXML(QXmlStreamWriter* writer) const final override;
+    payeeIdentifierUnavailable* createFromXml(QXmlStreamReader* reader) const final override;
     bool isValid() const final override;
     bool operator==(const payeeIdentifierData& other) const final override;
     bool operator==(const payeeIdentifierUnavailable& other) const;
 
     friend class payeeIdentifierLoader;
     /** @todo make private */
-    explicit payeeIdentifierUnavailable(QDomElement data);
+    explicit payeeIdentifierUnavailable(const QString& data);
 
 protected:
     payeeIdentifierUnavailable* clone() const final override;
 
 private:
-    QDomElement m_data;
+    QString m_data;
 };
 
 } // namespace payeeidentifiers

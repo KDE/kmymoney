@@ -12,8 +12,6 @@
 
 #include <QConcatenateTablesProxyModel>
 #include <QDebug>
-#include <QDomDocument>
-#include <QDomElement>
 #include <QElapsedTimer>
 #include <QModelIndex>
 #include <QObject>
@@ -21,6 +19,7 @@
 #include <QSharedDataPointer>
 #include <QUndoStack>
 #include <QVariant>
+#include <QXmlStreamWriter>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -551,22 +550,22 @@ public:
 
     };
 
-    struct xmlWriter : public Worker
-    {
-        xmlWriter(void (*writer)(const T&, QDomDocument&, QDomElement&), QDomDocument& document, QDomElement& element)
+    struct xmlWriter : public Worker {
+        xmlWriter(void (*writer)(const T&, QXmlStreamWriter*), QXmlStreamWriter* stream)
             : Worker()
             , m_writer(writer)
-            , m_doc(document)
-            , m_element(element) {}
-        void operator()(const T& item) override {
-            m_writer(item, m_doc, m_element);
+            , m_stream(stream)
+        {
         }
 
-        void (*m_writer)(const T&, QDomDocument&, QDomElement&);
-        QDomDocument& m_doc;
-        QDomElement& m_element;
-    };
+        void operator()(const T& item) override
+        {
+            m_writer(item, m_stream);
+        }
 
+        void (*m_writer)(const T&, QXmlStreamWriter*);
+        QXmlStreamWriter* m_stream;
+    };
 
     virtual int processItems(Worker *worker)
     {
@@ -575,7 +574,7 @@ public:
 
     int processItems(Worker *worker, const QModelIndexList& indexes)
     {
-        foreach (const auto idx, indexes) {
+        for (const auto& idx : indexes) {
             worker->operator()(static_cast<TreeItem<T>*>(idx.internalPointer())->constDataRef());
         }
         return indexes.count();

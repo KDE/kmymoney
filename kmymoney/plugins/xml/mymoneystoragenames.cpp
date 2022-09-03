@@ -12,6 +12,7 @@
 
 QString tagName(Tag tagID)
 {
+    // clang-format off
     static const QHash<Tag, QString> tagNames {
         {Tag::Institutions, QStringLiteral("INSTITUTIONS")},
         {Tag::Payees,       QStringLiteral("PAYEES")},
@@ -29,7 +30,9 @@ QString tagName(Tag tagID)
         {Tag::KMMFile,      QStringLiteral("KMYMONEY-FILE")},
         {Tag::FileInfo,     QStringLiteral("FILEINFO")},
         {Tag::User,         QStringLiteral("USER")},
+        {Tag::KeyValuePairs,QStringLiteral("KEYVALUEPAIRS")},
     };
+    // clang-format on
     return tagNames.value(tagID);
 }
 
@@ -155,6 +158,7 @@ QString elementName(Element::General elementID)
 
 QString attributeName(Attribute::General attributeID)
 {
+    // clang-format off
     static const QMap<Attribute::General, QString> attributeNames {
         {Attribute::General::ID,        QStringLiteral("id")},
         {Attribute::General::Date,      QStringLiteral("date")},
@@ -167,12 +171,17 @@ QString attributeName(Attribute::General attributeID)
         {Attribute::General::Price,     QStringLiteral("price")},
         {Attribute::General::Name,      QStringLiteral("name")},
         {Attribute::General::Email,     QStringLiteral("email")},
-        {Attribute::General::Country,   QStringLiteral("county")},
+        {Attribute::General::State,     QStringLiteral("state")},
+        {Attribute::General::Country,   QStringLiteral("country")}, // deprecated, use General::State instead
+        {Attribute::General::AltCountry,QStringLiteral("county")}, // deprecated, was a typo
         {Attribute::General::City,      QStringLiteral("city")},
-        {Attribute::General::ZipCode,   QStringLiteral("zipcode")},
+        {Attribute::General::ZipCode,   QStringLiteral("zip")},
+        {Attribute::General::AltZipCode,QStringLiteral("zipcode")}, // deprecated
+        {Attribute::General::PostCode,  QStringLiteral("postcode")}, // deprecated
         {Attribute::General::Street,    QStringLiteral("street")},
         {Attribute::General::Telephone, QStringLiteral("telephone")},
     };
+    // clang-format on
     return attributeNames.value(attributeID);
 }
 

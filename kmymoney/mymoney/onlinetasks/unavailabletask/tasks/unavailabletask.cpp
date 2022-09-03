@@ -8,11 +8,13 @@
 #include "unavailabletask.h"
 
 #include <QSet>
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
 
 #include <KLocalizedString>
 
-unavailableTask::unavailableTask(const QDomElement& element)
-    : m_data(element)
+unavailableTask::unavailableTask(const QString& xmlData)
+    : m_data(xmlData)
 {
 }
 
@@ -31,15 +33,35 @@ QString unavailableTask::purpose() const
     return QString();
 }
 
-unavailableTask* unavailableTask::createFromXml(const QDomElement& element) const
+static void addElements(QXmlStreamReader* reader, QXmlStreamWriter* writer)
 {
-    return new unavailableTask(element);
+    while (reader->readNextStartElement()) {
+        writer->writeStartElement(reader->name().toString());
+        writer->writeAttributes(reader->attributes());
+        addElements(reader, writer);
+        writer->writeEndElement();
+    }
 }
 
-void unavailableTask::writeXML(QDomDocument& document, QDomElement& parent) const
+unavailableTask* unavailableTask::createFromXml(QXmlStreamReader* reader) const
 {
-    Q_UNUSED(document);
-    parent = m_data;
+    QString taskXml;
+    QXmlStreamWriter writer(&taskXml);
+
+    writer.setAutoFormatting(false);
+    writer.writeStartDocument();
+    writer.writeStartElement(reader->name().toString());
+    writer.writeAttributes(reader->attributes());
+    addElements(reader, &writer);
+    writer.writeEndElement();
+    writer.writeEndDocument();
+
+    return new unavailableTask(taskXml);
+}
+
+void unavailableTask::writeXML(QXmlStreamWriter* writer) const
+{
+    Q_UNUSED(writer)
 }
 
 bool unavailableTask::hasReferenceTo(const QString& id) const

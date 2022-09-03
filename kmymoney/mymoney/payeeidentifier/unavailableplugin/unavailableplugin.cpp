@@ -1,7 +1,11 @@
 /*
     SPDX-FileCopyrightText: 2014 Christian Dávid <christian-david@web.de>
+    SPDX-FileCopyrightText: 2022 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
+
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
 
 #include "unavailableplugin.h"
 
@@ -11,16 +15,14 @@ namespace payeeIdentifiers
 {
 
 payeeIdentifierUnavailable::payeeIdentifierUnavailable()
-    : payeeIdentifierData(),
-      m_data(QDomElement())
+    : payeeIdentifierData()
 {
 }
 
-payeeIdentifierUnavailable::payeeIdentifierUnavailable(QDomElement data)
-    : payeeIdentifierData(),
-      m_data(data)
+payeeIdentifierUnavailable::payeeIdentifierUnavailable(const QString& data)
+    : payeeIdentifierData()
+    , m_data(data)
 {
-
 }
 
 payeeIdentifierUnavailable* payeeIdentifierUnavailable::clone() const
@@ -28,15 +30,35 @@ payeeIdentifierUnavailable* payeeIdentifierUnavailable::clone() const
     return new payeeIdentifierUnavailable(m_data);
 }
 
-void payeeIdentifierUnavailable::writeXML(QDomDocument& document, QDomElement& parent) const
+void payeeIdentifierUnavailable::writeXML(QXmlStreamWriter* writer) const
 {
-    Q_UNUSED(document);
-    parent = m_data;
+    Q_UNUSED(writer)
 }
 
-payeeIdentifierUnavailable* payeeIdentifierUnavailable::createFromXml(const QDomElement& element) const
+static void addElements(QXmlStreamReader* reader, QXmlStreamWriter* writer)
 {
-    return new payeeIdentifierUnavailable(element);
+    while (reader->readNextStartElement()) {
+        writer->writeStartElement(reader->name().toString());
+        writer->writeAttributes(reader->attributes());
+        addElements(reader, writer);
+        writer->writeEndElement();
+    }
+}
+
+payeeIdentifierUnavailable* payeeIdentifierUnavailable::createFromXml(QXmlStreamReader* reader) const
+{
+    QString payeeIdentifier;
+    QXmlStreamWriter writer(&payeeIdentifier);
+
+    writer.setAutoFormatting(false);
+    writer.writeStartDocument();
+    writer.writeStartElement(reader->name().toString());
+    writer.writeAttributes(reader->attributes());
+    addElements(reader, &writer);
+    writer.writeEndElement();
+    writer.writeEndDocument();
+
+    return new payeeIdentifierUnavailable(payeeIdentifier);
 }
 
 bool payeeIdentifierUnavailable::isValid() const

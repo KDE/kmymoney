@@ -759,7 +759,9 @@ void MyMoneyReport::setDateFilter(const QDate& db, const QDate& de)
 void MyMoneyReport::updateDateFilter()
 {
     Q_D(MyMoneyReport);
-    if (d->m_dateLock != eMyMoney::TransactionFilter::Date::UserDefined) MyMoneyTransactionFilter::setDateFilter(d->m_dateLock);
+    if (d->m_dateLock != eMyMoney::TransactionFilter::Date::UserDefined) {
+        MyMoneyTransactionFilter::setDateFilter(d->m_dateLock);
+    }
 }
 
 

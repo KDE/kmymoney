@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2014 Christian Dávid <christian-david@web.de>
+    SPDX-FileCopyrightText: 2022 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -28,8 +29,8 @@ public:
     nationalAccount* clone() const final override {
         return new nationalAccount(*this);
     }
-    nationalAccount* createFromXml(const QDomElement& element) const final override;
-    void writeXML(QDomDocument& document, QDomElement& parent) const final override;
+    nationalAccount* createFromXml(QXmlStreamReader* reader) const final override;
+    void writeXML(QXmlStreamWriter* writer) const final override;
 
     void setBankCode(const QString& bankCode) {
         m_bankCode = bankCode;

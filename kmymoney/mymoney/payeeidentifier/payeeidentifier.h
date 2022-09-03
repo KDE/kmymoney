@@ -54,7 +54,7 @@ public:
      *
      * The counter part to load a payee identifier again is payeeIdentifierLoader::createPayeeIdentifierFromXML().
      */
-    void writeXML(QDomDocument &document, QDomElement &parent, const QString& elementName = QLatin1String("payeeIdentifier")) const;
+    // void writeXML(QDomDocument &document, QDomElement &parent, const QString& elementName = QLatin1String("payeeIdentifier")) const;
 
     /**
      * @throws payeeIdentifier::empty

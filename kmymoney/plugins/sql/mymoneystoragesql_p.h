@@ -3,6 +3,7 @@
     SPDX-FileCopyrightText: 2005 Fernando Vilas <fvilas@iname.com>
     SPDX-FileCopyrightText: 2005 Christian Dávid <christian-david@web.de>
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2022 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -1489,28 +1490,34 @@ public:
         if (!query.exec()) throw MYMONEYEXCEPTIONSQL("writing Currencies"); // krazy:exclude=crashy
     }
 
-    void writeReport(const MyMoneyReport& rep, QSqlQuery& query)
+    void writeReport(const MyMoneyReport& report, QSqlQuery& query)
     {
-        QDomDocument d; // create a dummy XML document
-        QDomElement e = d.createElement("REPORTS");
-        d.appendChild(e);
-        MyMoneyXmlContentHandler2::writeReport(rep, d, e); // write the XML to document
-        query.bindValue(":id", rep.id());
-        query.bindValue(":name", rep.name());
-        query.bindValue(":XML", d.toString());
+        QString xml;
+        QXmlStreamWriter writer(&xml);
+        writer.setAutoFormattingIndent(0);
+        writer.setAutoFormatting(false);
+        writer.writeStartElement(QLatin1String("REPORTS"));
+        MyMoneyXmlHelper::writeReport(report, &writer); // write the XML to the string
+        writer.writeEndElement();
+        query.bindValue(":id", report.id());
+        query.bindValue(":name", report.name());
+        query.bindValue(":XML", xml);
         if (!query.exec()) throw MYMONEYEXCEPTIONSQL("writing Reports"); // krazy:exclude=crashy
     }
 
-    void writeBudget(const MyMoneyBudget& bud, QSqlQuery& query)
+    void writeBudget(const MyMoneyBudget& budget, QSqlQuery& query)
     {
-        QDomDocument d; // create a dummy XML document
-        QDomElement e = d.createElement("BUDGETS");
-        d.appendChild(e);
-        MyMoneyXmlContentHandler2::writeBudget(bud, d, e); // write the XML to document
-        query.bindValue(":id", bud.id());
-        query.bindValue(":name", bud.name());
-        query.bindValue(":start", bud.budgetStart());
-        query.bindValue(":XML", d.toString());
+        QString xml;
+        QXmlStreamWriter writer(&xml);
+        writer.setAutoFormattingIndent(0);
+        writer.setAutoFormatting(false);
+        writer.writeStartElement(QLatin1String("BUDGETS"));
+        MyMoneyXmlHelper::writeBudget(budget, &writer); // write the XML to the string
+        writer.writeEndElement();
+        query.bindValue(":id", budget.id());
+        query.bindValue(":name", budget.name());
+        query.bindValue(":start", budget.budgetStart());
+        query.bindValue(":XML", xml);
         if (!query.exec()) // krazy:exclude=crashy
             throw MYMONEYEXCEPTIONSQL("writing Budgets"); // krazy:exclude=crashy
     }

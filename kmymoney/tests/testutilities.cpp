@@ -7,24 +7,24 @@
 #include "testutilities.h"
 
 #include <QDebug>
-#include <QDomDocument>
-#include <QDomElement>
 #include <QFile>
 #include <QList>
 #include <QRegularExpression>
 #include <QTextStream>
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
 
-#include "mymoneyfile.h"
 #include "mymoneyexception.h"
+#include "mymoneyfile.h"
 #include "mymoneymoney.h"
-#include "mymoneysecurity.h"
-#include "mymoneyprice.h"
-#include "mymoneysplit.h"
-#include "mymoneystoragedump.h"
-#include "mymoneyreport.h"
 #include "mymoneypayee.h"
+#include "mymoneyprice.h"
+#include "mymoneyreport.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
 #include "mymoneystatement.h"
-#include "plugins/xmlhelper/xmlstoragehelper.h"
+#include "mymoneystoragedump.h"
+#include "xmlhelper/xmlstoragehelper.h"
 
 namespace test
 {
@@ -333,18 +333,14 @@ QString makeBaseCurrency(const MyMoneySecurity& base)
     return base.id();
 }
 
-void writeRCFtoXMLDoc(const MyMoneyReport& filter, QDomDocument* doc)
+void writeRCFtoXMLDoc(const MyMoneyReport& filter, QXmlStreamWriter* writer)
 {
-    QDomProcessingInstruction instruct = doc->createProcessingInstruction(QString("xml"), QString("version=\"1.0\" encoding=\"utf-8\""));
-    doc->appendChild(instruct);
-
-    QDomElement root = doc->createElement("KMYMONEY-FILE");
-    doc->appendChild(root);
-
-    QDomElement reports = doc->createElement("REPORTS");
-    root.appendChild(reports);
-
-    MyMoneyXmlContentHandler2::writeReport(filter, *doc, reports);
+    writer->writeDTD(QLatin1String("<!DOCTYPE KMYMONEY-FILE>"));
+    writer->writeStartElement(QLatin1String("KMYMONEY-FILE"));
+    writer->writeStartElement(QLatin1String("REPORTS"));
+    MyMoneyXmlHelper::writeReport(filter, writer);
+    writer->writeEndElement();
+    writer->writeEndElement();
 }
 
 void writeRCFtoXML(const MyMoneyReport& filter, const QString& _filename)
@@ -356,43 +352,43 @@ void writeRCFtoXML(const MyMoneyReport& filter, const QString& _filename)
         ++filenum;
     }
 
-    QDomDocument* doc = new QDomDocument("KMYMONEY-FILE");
-    Q_CHECK_PTR(doc);
-
-    writeRCFtoXMLDoc(filter, doc);
-
     QFile g(filename);
     g.open(QIODevice::WriteOnly);
 
-    QTextStream stream(&g);
-    stream.setCodec("UTF-8");
-    stream << doc->toString();
-    g.close();
+    QXmlStreamWriter writer(&g);
+    writeRCFtoXMLDoc(filter, &writer);
 
-    delete doc;
+    g.close();
 }
 
-bool readRCFfromXMLDoc(QList<MyMoneyReport>& list, QDomDocument* doc)
+bool readRCFfromXMLDoc(QList<MyMoneyReport>& list, QXmlStreamReader* reader)
 {
     bool result = false;
 
-    QDomElement rootElement = doc->documentElement();
-    if (!rootElement.isNull()) {
-        QDomNode child = rootElement.firstChild();
-        while (!child.isNull() && child.isElement()) {
-            QDomElement childElement = child.toElement();
-            if ("REPORTS" == childElement.tagName()) {
-                result = true;
-                QDomNode subchild = child.firstChild();
-                while (!subchild.isNull() && subchild.isElement()) {
-                    auto filter = MyMoneyXmlContentHandler2::readReport(subchild.toElement());
-                    list += filter;
-                    subchild = subchild.nextSibling();
+    while (reader->readNextStartElement()) {
+        if (reader->name() == QLatin1String("KMYMONEY-FILE")) {
+            while (reader->readNextStartElement()) {
+                if (reader->name() == QLatin1String("REPORTS")) {
+                    while (reader->readNextStartElement()) {
+                        if (reader->name() == QLatin1String("REPORT")) {
+                            result = true;
+                            const auto filter = MyMoneyXmlHelper::readReport(reader);
+                            if (reader->hasError())
+                                qDebug() << reader->errorString();
+                            list += filter;
+                        } else {
+                            reader->skipCurrentElement();
+                        }
+                    }
+                } else {
+                    reader->skipCurrentElement();
                 }
             }
-            child = child.nextSibling();
+        } else {
+            reader->skipCurrentElement();
         }
     }
+
     return result;
 }
 
@@ -401,11 +397,11 @@ bool readRCFfromXML(QList<MyMoneyReport>& list, const QString& filename)
     int result = false;
     QFile f(filename);
     f.open(QIODevice::ReadOnly);
-    QDomDocument* doc = new QDomDocument;
-    if (doc->setContent(&f, false)) {
-        result = readRCFfromXMLDoc(list, doc);
-    }
-    delete doc;
+
+    QXmlStreamReader reader;
+    reader.setDevice(&f);
+
+    result = readRCFfromXMLDoc(list, &reader);
 
     return result;
 
@@ -418,18 +414,16 @@ void XMLandback(MyMoneyReport& filter)
     // in all cases, the result should be the same if the read
     // & write methods are working correctly.
 
-    QDomDocument* doc = new QDomDocument("KMYMONEY-FILE");
-    Q_CHECK_PTR(doc);
+    QString xml;
+    QXmlStreamWriter writer(&xml);
 
-    writeRCFtoXMLDoc(filter, doc);
+    writeRCFtoXMLDoc(filter, &writer);
+    QXmlStreamReader reader(xml);
     QList<MyMoneyReport> list;
-    if (readRCFfromXMLDoc(list, doc) && !list.isEmpty())
+    if (readRCFfromXMLDoc(list, &reader) && !list.isEmpty())
         filter = list[0];
     else
         throw MYMONEYEXCEPTION_CSTRING("Failed to load report from XML");
-
-    delete doc;
-
 }
 
 MyMoneyMoney searchHTML(const QString& _html, const QString& _search)

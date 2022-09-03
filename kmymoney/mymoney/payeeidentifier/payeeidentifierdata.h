@@ -12,8 +12,9 @@
 #include <QSharedPointer>
 #include <QHash>
 #include <QMetaType>
-#include <QDomElement>
 
+class QXmlStreamReader;
+class QXmlStreamWriter;
 class payeeIdentifier;
 class payeeIdentifierLoader;
 
@@ -98,7 +99,7 @@ public:
      *
      * @param element Note: there could be more data in that element than you created in writeXML()
      */
-    virtual payeeIdentifierData* createFromXml(const QDomElement &element) const = 0;
+    virtual payeeIdentifierData* createFromXml(QXmlStreamReader* reader) const = 0;
 
     /**
      * @see MyMoneyObject::writeXML()
@@ -106,7 +107,7 @@ public:
      * @warning Do not set an attribute "type" or "id" to parent, it is used to store internal data and is
      * set automatically.
      */
-    virtual void writeXML(QDomDocument &document, QDomElement &parent) const = 0;
+    virtual void writeXML(QXmlStreamWriter* writer) const = 0;
 
 protected:
     /**

@@ -14,10 +14,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
 #include <QDebug>
-#include <QPluginLoader>
 #include <QJsonArray>
+#include <QList>
+#include <QPluginLoader>
+#include <QXmlStreamReader>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,7 +34,6 @@
 #include "mymoneykeyvaluecontainer.h"
 #include "onlinejobsmodel.h"
 #include "onlinepluginextended.h"
-
 #include "onlinetasks/unavailabletask/tasks/unavailabletask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
 #include "tasks/onlinetask.h"
@@ -156,14 +156,19 @@ onlineTask* onlineJobAdministration::createOnlineTask(const QString& name) const
     return nullptr;
 }
 
-onlineTask* onlineJobAdministration::createOnlineTaskByXml(const QString& iid, const QDomElement& element) const
+onlineTask* onlineJobAdministration::createOnlineTaskByXml(QXmlStreamReader* reader, const QString& iid) const
 {
     onlineTask* task = rootOnlineTask(iid);
     if (task) {
-        return task->createFromXml(element);
+        return task->createFromXml(reader);
     }
     qWarning("In the file is a onlineTask for which I could not find the plugin ('%s')", qPrintable(iid));
-    return new unavailableTask(element);
+    // the taskTemplate object is only used to get access
+    // to the createFromXml() method which returns
+    // a pointer to the actual newly created object.
+    unavailableTask taskTemplate(QString{});
+    task = taskTemplate.createFromXml(reader);
+    return task;
 }
 
 /**

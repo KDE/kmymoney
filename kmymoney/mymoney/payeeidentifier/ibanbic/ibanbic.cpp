@@ -4,6 +4,7 @@
 */
 
 #include "payeeidentifier/ibanbic/ibanbic.h"
+#include "xmlhelper/xmlstoragehelper.h"
 
 #include <typeinfo>
 #include <algorithm>
@@ -12,7 +13,7 @@
 #include <QDebug>
 
 #include "kmymoneyplugin.h"
-#include "mymoney/mymoneyexception.h"
+#include "mymoneyexception.h"
 #include "plugins/ibanbicdata/ibanbicdataenums.h"
 
 namespace payeeIdentifiers
@@ -52,25 +53,27 @@ ibanBic* ibanBic::clone() const
     return (new ibanBic(*this));
 }
 
-ibanBic* ibanBic::createFromXml(const QDomElement& element) const
+ibanBic* ibanBic::createFromXml(QXmlStreamReader* reader) const
 {
+    // Q_ASSERT(m_reader->isStartElement() && (m_reader->name() == ));
     ibanBic* ident = new ibanBic;
+    ident->setBic(MyMoneyXmlHelper::readStringAttribute(reader, QLatin1String("bic")));
+    ident->setIban(MyMoneyXmlHelper::readStringAttribute(reader, QLatin1String("iban")));
+    ident->setOwnerName(MyMoneyXmlHelper::readStringAttribute(reader, QLatin1String("ownerName")));
 
-    ident->setBic(element.attribute("bic", QString()));
-    ident->setIban(element.attribute("iban", QString()));
-    ident->setOwnerName(element.attribute("ownerName", QString()));
     return ident;
 }
 
-void ibanBic::writeXML(QDomDocument& document, QDomElement& parent) const
+void ibanBic::writeXML(QXmlStreamWriter* writer) const
 {
-    Q_UNUSED(document);
-    parent.setAttribute("iban", m_iban);
+    writer->writeAttribute("iban", m_iban);
 
-    if (!m_bic.isEmpty())
-        parent.setAttribute("bic", m_bic);
-    if (!m_ownerName.isEmpty())
-        parent.setAttribute("ownerName", m_ownerName);
+    if (!m_bic.isEmpty()) {
+        writer->writeAttribute("bic", m_bic);
+    }
+    if (!m_ownerName.isEmpty()) {
+        writer->writeAttribute("ownerName", m_ownerName);
+    }
 }
 
 QString ibanBic::paperformatIban(const QString& separator) const

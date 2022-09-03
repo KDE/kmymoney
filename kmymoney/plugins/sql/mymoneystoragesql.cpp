@@ -3,6 +3,7 @@
     SPDX-FileCopyrightText: 2005 Fernando Vilas <fvilas@iname.com>
     SPDX-FileCopyrightText: 2005 Christian Dávid <christian-david@web.de>
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2022 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -31,6 +32,7 @@
 // Project Includes
 
 #include "tagsmodel.h"
+#include "xml/mymoneystoragenames.h"
 
 /// @todo port to new model code
 
@@ -2667,24 +2669,33 @@ QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies() const
 QMap<QString, MyMoneyReport> MyMoneyStorageSql::fetchReports(const QStringList& /*idList*/, bool /*forUpdate*/) const
 {
     Q_D(const MyMoneyStorageSql);
-    d->signalProgress(0, d->m_reports, QObject::tr("Loading reports..."));
-    int progress = 0;
-    const MyMoneyDbTable& t = d->m_db.m_tables["kmmReportConfig"];
+    const MyMoneyDbTable& table = d->m_db.m_tables["kmmReportConfig"];
     QSqlQuery query(*const_cast <MyMoneyStorageSql*>(this));
-    query.prepare(t.selectAllString(true));
+    query.prepare(table.selectAllString(true));
     if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading reports")); // krazy:exclude=crashy
-    int xmlCol = t.fieldNumber("XML");
+    const auto xmlCol = table.fieldNumber("XML");
     QMap<QString, MyMoneyReport> rList;
+
     while (query.next()) {
-        QDomDocument dom;
-        dom.setContent(GETSTRING(xmlCol), false);
-
-        QDomNode child = dom.firstChild();
-        child = child.firstChild();
-        auto report = MyMoneyXmlContentHandler2::readReport(child.toElement());
-        rList[report.id()] = report;
-
-        d->signalProgress(++progress, 0);
+        const auto xml = GETSTRING(xmlCol);
+        QScopedPointer<QXmlStreamReader> m_reader(new QXmlStreamReader(xml));
+        while (m_reader->readNextStartElement()) {
+            const auto tag = m_reader->name();
+            if (tag.toString().toUpper() == QLatin1String("REPORTS")) {
+                while (m_reader->readNextStartElement()) {
+                    if (m_reader->name().toString().toUpper() == QLatin1String("REPORT")) {
+                        const auto report = MyMoneyXmlHelper::readReport(m_reader.get());
+                        if (!report.id().isEmpty()) {
+                            rList[report.id()] = report;
+                        }
+                    } else {
+                        m_reader->skipCurrentElement();
+                    }
+                }
+            } else {
+                m_reader->skipCurrentElement();
+            }
+        }
     }
     return rList;
 }
@@ -2697,13 +2708,10 @@ QMap<QString, MyMoneyReport> MyMoneyStorageSql::fetchReports() const
 QMap<QString, MyMoneyBudget> MyMoneyStorageSql::fetchBudgets(const QStringList& idList, bool forUpdate) const
 {
     Q_D(const MyMoneyStorageSql);
-    int budgetsNb = (idList.isEmpty() ? d->m_budgets : idList.size());
-    d->signalProgress(0, budgetsNb, QObject::tr("Loading budgets..."));
-    int progress = 0;
-    const MyMoneyDbTable& t = d->m_db.m_tables["kmmBudgetConfig"];
+    const MyMoneyDbTable& table = d->m_db.m_tables["kmmBudgetConfig"];
     QSqlQuery query(*const_cast <MyMoneyStorageSql*>(this));
-    QString queryString(t.selectAllString(false));
-    if (! idList.empty()) {
+    QString queryString(table.selectAllString(false));
+    if (!idList.empty()) {
         queryString += " WHERE id = '" + idList.join("' OR id = '") + '\'';
     }
     if (forUpdate)
@@ -2714,16 +2722,27 @@ QMap<QString, MyMoneyBudget> MyMoneyStorageSql::fetchBudgets(const QStringList& 
     query.prepare(queryString);
     if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading budgets")); // krazy:exclude=crashy
     QMap<QString, MyMoneyBudget> budgets;
-    int xmlCol = t.fieldNumber("XML");
+    const auto xmlCol = table.fieldNumber("XML");
     while (query.next()) {
-        QDomDocument dom;
-        dom.setContent(GETSTRING(xmlCol), false);
-
-        QDomNode child = dom.firstChild();
-        child = child.firstChild();
-        auto budget = MyMoneyXmlContentHandler2::readBudget(child.toElement());
-        budgets.insert(budget.id(), budget);
-        d->signalProgress(++progress, 0);
+        const auto xml = GETSTRING(xmlCol);
+        QScopedPointer<QXmlStreamReader> m_reader(new QXmlStreamReader(xml));
+        while (m_reader->readNextStartElement()) {
+            const auto tag = m_reader->name();
+            if (tag.toString().toUpper() == QLatin1String("BUDGETS")) {
+                while (m_reader->readNextStartElement()) {
+                    if (m_reader->name().toString().toUpper() == QLatin1String("BUDGET")) {
+                        const auto budget = MyMoneyXmlHelper::readBudget(m_reader.get());
+                        if (!budget.id().isEmpty()) {
+                            budgets.insert(budget.id(), budget);
+                        }
+                    } else {
+                        m_reader->skipCurrentElement();
+                    }
+                }
+            } else {
+                m_reader->skipCurrentElement();
+            }
+        }
     }
     return budgets;
 }

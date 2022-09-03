@@ -115,13 +115,10 @@ public:
 
     virtual QSharedPointer<const settings> getSettings() const = 0;
 
-    virtual void writeXML(QDomDocument& document, QDomElement& parent) const override = 0;
-
 protected:
     virtual sepaOnlineTransfer* clone() const override = 0;
 
-    virtual sepaOnlineTransfer* createFromXml(const QDomElement &element) const override = 0;
-
+    virtual sepaOnlineTransfer* createFromXml(QXmlStreamReader* reader) const override = 0;
 };
 
 #endif // SEPAONLINETRANSFER_H

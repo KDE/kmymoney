@@ -10,15 +10,16 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDir>
-#include <QTimer>
-#include <QList>
-#include <QTreeWidget>
-#include <QTreeView>
-#include <QStandardPaths>
-#include <QUrl>
 #include <QDebug>
+#include <QDir>
+#include <QDomElement>
+#include <QList>
+#include <QStandardPaths>
 #include <QTemporaryFile>
+#include <QTimer>
+#include <QTreeView>
+#include <QTreeWidget>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

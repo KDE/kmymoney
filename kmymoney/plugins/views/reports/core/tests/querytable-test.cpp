@@ -125,7 +125,7 @@ void QueryTableTest::testQueryBasics()
 
         unsigned cols;
 
-        MyMoneyReport filter;
+        MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::Category);
         cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Account;
         filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
@@ -390,7 +390,7 @@ void QueryTableTest::testAccountQuery()
         // No transactions, opening balances only
         //
 
-        MyMoneyReport filter;
+        MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::Institution);
         filter.setName("Accounts by Institution (No transactions)");
         XMLandback(filter);
@@ -514,13 +514,13 @@ void QueryTableTest::testInvestment()
         //
 
         MyMoneyReport invtran_r(
-            eMyMoney::Report::RowType::TopAccount,
-            eMyMoney::Report::QueryColumn::Action | eMyMoney::Report::QueryColumn::Shares | eMyMoney::Report::QueryColumn::Price,
-            eMyMoney::TransactionFilter::Date::UserDefined,
-            eMyMoney::Report::DetailLevel::All,
-            i18n("Investment Transactions"),
-            i18n("Test Report")
-        );
+            QLatin1String("fake-id"),
+            MyMoneyReport(eMyMoney::Report::RowType::TopAccount,
+                          eMyMoney::Report::QueryColumn::Action | eMyMoney::Report::QueryColumn::Shares | eMyMoney::Report::QueryColumn::Price,
+                          eMyMoney::TransactionFilter::Date::UserDefined,
+                          eMyMoney::Report::DetailLevel::All,
+                          i18n("Investment Transactions"),
+                          i18n("Test Report")));
         invtran_r.setDateFilter(QDate(2004, 1, 1), QDate(2004, 12, 31));
         invtran_r.setInvestmentsOnly(true);
         XMLandback(invtran_r);
@@ -613,14 +613,13 @@ void QueryTableTest::testInvestment()
         // Investment Performance Report
         //
 
-        MyMoneyReport invhold_r(
-            eMyMoney::Report::RowType::AccountByTopAccount,
-            eMyMoney::Report::QueryColumn::Performance,
-            eMyMoney::TransactionFilter::Date::UserDefined,
-            eMyMoney::Report::DetailLevel::All,
-            i18n("Investment Performance by Account"),
-            i18n("Test Report")
-        );
+        MyMoneyReport invhold_r(QLatin1String("fake-id"),
+                                MyMoneyReport(eMyMoney::Report::RowType::AccountByTopAccount,
+                                              eMyMoney::Report::QueryColumn::Performance,
+                                              eMyMoney::TransactionFilter::Date::UserDefined,
+                                              eMyMoney::Report::DetailLevel::All,
+                                              i18n("Investment Performance by Account"),
+                                              i18n("Test Report")));
         invhold_r.setDateFilter(QDate(2004, 1, 1), QDate(2004, 10, 1));
         invhold_r.setInvestmentsOnly(true);
         XMLandback(invhold_r);
@@ -696,14 +695,13 @@ void QueryTableTest::testSplitShares()
         // Investment Performance Report
         //
 
-        MyMoneyReport invhold_r(
-            eMyMoney::Report::RowType::AccountByTopAccount,
-            eMyMoney::Report::QueryColumn::Performance,
-            eMyMoney::TransactionFilter::Date::UserDefined,
-            eMyMoney::Report::DetailLevel::All,
-            i18n("Investment Performance by Account"),
-            i18n("Test Report")
-        );
+        MyMoneyReport invhold_r(QLatin1String("fake-id"),
+                                MyMoneyReport(eMyMoney::Report::RowType::AccountByTopAccount,
+                                              eMyMoney::Report::QueryColumn::Performance,
+                                              eMyMoney::TransactionFilter::Date::UserDefined,
+                                              eMyMoney::Report::DetailLevel::All,
+                                              i18n("Investment Performance by Account"),
+                                              i18n("Test Report")));
         invhold_r.setDateFilter(QDate(2017, 8, 1), QDate(2017, 8, 3));
         invhold_r.setInvestmentsOnly(true);
         XMLandback(invhold_r);
@@ -736,7 +734,7 @@ void QueryTableTest::testConversionRate()
 
         TransactionHelper t1(QDate(2017, 8, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), amountWithdrawn, acCadChecking, acSolo, "CAD");
 
-        MyMoneyReport filter;
+        MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::Account);
         filter.setDateFilter(QDate(2017, 8, 1), QDate(2017, 8, 2));
         filter.setName("Transactions by Account");
@@ -783,7 +781,7 @@ void QueryTableTest::testBalanceColumn()
 
         unsigned cols;
 
-        MyMoneyReport filter;
+        MyMoneyReport filter(QLatin1String("fake-id"));
 
         filter.setRowType(eMyMoney::Report::RowType::Account);
         filter.setName("Transactions by Account");
@@ -845,7 +843,7 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
 
         unsigned cols;
 
-        MyMoneyReport filter;
+        MyMoneyReport filter(QLatin1String("fake-id"));
 
         filter.setRowType(eMyMoney::Report::RowType::Account);
         filter.setName("Transactions by Account");
@@ -973,7 +971,7 @@ void QueryTableTest::testTaxReport()
         TransactionHelper t2q1(QDate(2004, 2, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acChecking, acTax);
 
         unsigned cols;
-        MyMoneyReport filter;
+        MyMoneyReport filter(QLatin1String("fake-id"));
 
         filter.setRowType(eMyMoney::Report::RowType::Category);
         filter.setName("Tax Transactions");

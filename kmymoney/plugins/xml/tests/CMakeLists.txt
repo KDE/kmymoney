@@ -1,8 +1,8 @@
 include(ECMAddTests)
 
 set(mymoneystoragexml_SOURCES
-  ../mymoneystoragexml.cpp
   ../mymoneystoragenames.cpp
+  ../mymoneyxmlreader.cpp
   )
 
 add_library(mymoneystoragexml STATIC ${mymoneystoragexml_SOURCES})

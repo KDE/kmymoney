@@ -1,13 +1,15 @@
 /*
     SPDX-FileCopyrightText: 2014 Christian Dávid <christian-david@web.de>
+    SPDX-FileCopyrightText: 2022 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
+#include <QVariant>
+
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
+#include "xmlhelper/xmlstoragehelper.h"
 
 #include <typeinfo>
-
-#include <QVariant>
 
 namespace payeeIdentifiers
 {
@@ -29,25 +31,25 @@ nationalAccount::nationalAccount(const nationalAccount& other)
 
 }
 
-nationalAccount* nationalAccount::createFromXml(const QDomElement& element) const
+nationalAccount* nationalAccount::createFromXml(QXmlStreamReader* reader) const
 {
     nationalAccount* ident = new nationalAccount;
 
-    ident->setBankCode(element.attribute("bankcode", QString()));
-    ident->setAccountNumber(element.attribute("accountnumber", QString()));
-    ident->setOwnerName(element.attribute("ownername", QString()));
-    ident->setCountry(element.attribute("country", QString()));
+    ident->setBankCode(MyMoneyXmlHelper::readStringAttribute(reader, QLatin1String("bankcode")));
+    ident->setAccountNumber(MyMoneyXmlHelper::readStringAttribute(reader, QLatin1String("accountnumber")));
+    ident->setOwnerName(MyMoneyXmlHelper::readStringAttribute(reader, QLatin1String("ownername")));
+    ident->setCountry(MyMoneyXmlHelper::readStringAttribute(reader, QLatin1String("country")));
     return ident;
 }
 
-void nationalAccount::writeXML(QDomDocument& document, QDomElement& parent) const
+void nationalAccount::writeXML(QXmlStreamWriter* writer) const
 {
-    Q_UNUSED(document);
-    parent.setAttribute("accountnumber", m_accountNumber);
-    if (!m_bankCode.isEmpty())
-        parent.setAttribute("bankcode", m_bankCode);
-    parent.setAttribute("ownername", m_ownerName);
-    parent.setAttribute("country", m_country);
+    writer->writeAttribute("accountnumber", m_accountNumber);
+    if (!m_bankCode.isEmpty()) {
+        writer->writeAttribute("bankcode", m_bankCode);
+    }
+    writer->writeAttribute("ownername", m_ownerName);
+    writer->writeAttribute("country", m_country);
 }
 
 /** @todo implement */

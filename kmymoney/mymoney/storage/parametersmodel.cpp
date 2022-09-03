@@ -58,9 +58,9 @@ QVariant ParametersModel::headerData(int section, Qt::Orientation orientation, i
 {
     if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
         switch(section) {
-        case 0:
+        case ParameterKey:
             return i18nc("ParameterModel key", "Key");
-        case 1:
+        case ParameterValue:
             return i18nc("ParameterModel value", "Value");
         }
     }
@@ -79,21 +79,31 @@ QVariant ParametersModel::data(const QModelIndex& index, int role) const
     case Qt::DisplayRole:
     case Qt::EditRole:
         switch(index.column()) {
-        case eMyMoney::Model::IdRole:
+        case ParameterKey:
             // make sure to never return any displayable text for the dummy entry
             if (!parameter.id().isEmpty()) {
                 return parameter.id();
             }
             return QVariant();
 
+        case ParameterValue:
+            // make sure to never return any displayable text for the dummy entry
+            if (!parameter.id().isEmpty()) {
+                return parameter.value();
+            }
+            return QVariant();
         }
         return QVariant();
 
     case Qt::TextAlignmentRole:
         return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
 
-    case eMyMoney::Model::Roles::IdRole:
+    case eMyMoney::Model::IdRole:
+    case eMyMoney::Model::ParameterKeyRole:
         return parameter.id();
+
+    case eMyMoney::Model::ParameterValueRole:
+        return parameter.value();
     }
     return QVariant();
 }

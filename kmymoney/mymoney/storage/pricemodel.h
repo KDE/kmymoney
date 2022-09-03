@@ -28,7 +28,7 @@
 
 class QUndoStack;
 
-class PriceEntry : public MyMoneyPrice
+class KMM_MYMONEY_EXPORT PriceEntry : public MyMoneyPrice
 {
 public:
     explicit PriceEntry() : MyMoneyPrice() {}

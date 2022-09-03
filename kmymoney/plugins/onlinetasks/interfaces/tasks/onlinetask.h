@@ -15,6 +15,8 @@
 #include <qobject.h>
 
 class onlineJob;
+class QXmlStreamReader;
+class QXmlStreamWriter;
 
 /**
  * @brief Enables onlineTask meta system
@@ -115,7 +117,7 @@ public:
     virtual QString jobTypeName() const = 0;
 
     /** @see MyMoneyObject::writeXML() */
-    virtual void writeXML(QDomDocument &document, QDomElement &parent) const = 0;
+    virtual void writeXML(QXmlStreamWriter* writer) const = 0;
 
 protected:
     onlineTask(const onlineTask& other);
@@ -144,7 +146,7 @@ protected:
      * This method is created const as it should create a @emph new onlineTask.
      * @return A pointer to a new instance, caller takes ownership
      */
-    virtual onlineTask* createFromXml(const QDomElement &element) const = 0;
+    virtual onlineTask* createFromXml(QXmlStreamReader* reader) const = 0;
 
     /**
      * @brief Account this job is related to

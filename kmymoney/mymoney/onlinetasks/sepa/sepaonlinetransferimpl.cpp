@@ -6,20 +6,22 @@
 
 #include "sepaonlinetransferimpl.h"
 
-#include <QVariant>
 #include <QSet>
+#include <QVariant>
+#include <QXmlStreamReader>
 
-#include "mymoneyutils.h"
+#include "misc/validators.h"
+#include "mymoney/mymoneyfile.h"
+#include "mymoney/onlinejobadministration.h"
 #include "mymoneyaccount.h"
 #include "mymoneyinstitution.h"
-#include "mymoneysecurity.h"
-#include "mymoney/mymoneyfile.h"
 #include "mymoneypayee.h"
-#include "mymoney/onlinejobadministration.h"
-#include "misc/validators.h"
-#include "payeeidentifiertyped.h"
+#include "mymoneysecurity.h"
+#include "mymoneyutils.h"
 #include "payeeidentifier/ibanbic/ibanbic.h"
+#include "payeeidentifiertyped.h"
 #include "sepaonlinetransfer.h"
+#include "xmlhelper/xmlstoragehelper.h"
 
 static const unsigned short defaultTextKey = 51;
 static const unsigned short defaultSubTextKey = 0;
@@ -218,51 +220,55 @@ void sepaOnlineTransferImpl::setOriginAccount(const QString &accountId)
     }
 }
 
-void sepaOnlineTransferImpl::writeXML(QDomDocument& document, QDomElement& parent) const
+void sepaOnlineTransferImpl::writeXML(QXmlStreamWriter* writer) const
 {
-    Q_UNUSED(document);
-    parent.setAttribute("originAccount", _originAccount);
-    parent.setAttribute("value", _value.toString());
-    parent.setAttribute("textKey", _textKey);
-    parent.setAttribute("subTextKey", _subTextKey);
+    writer->writeAttribute("originAccount", _originAccount);
+    writer->writeAttribute("value", _value.toString());
+    writer->writeAttribute("textKey", QString::number(_textKey));
+    writer->writeAttribute("subTextKey", QString::number(_subTextKey));
 
     if (!_purpose.isEmpty()) {
-        parent.setAttribute("purpose", _purpose);
+        writer->writeAttribute("purpose", _purpose);
     }
 
     if (!_endToEndReference.isEmpty()) {
-        parent.setAttribute("endToEndReference", _endToEndReference);
+        writer->writeAttribute("endToEndReference", _endToEndReference);
     }
 
-    QDomElement beneficiaryEl = document.createElement("beneficiary");
-    _beneficiaryAccount.writeXML(document, beneficiaryEl);
-    parent.appendChild(beneficiaryEl);
+    writer->writeStartElement("beneficiary");
+    _beneficiaryAccount.writeXML(writer);
+    writer->writeEndElement();
 }
 
-sepaOnlineTransfer* sepaOnlineTransferImpl::createFromXml(const QDomElement& element) const
+sepaOnlineTransfer* sepaOnlineTransferImpl::createFromXml(QXmlStreamReader* reader) const
 {
     sepaOnlineTransferImpl* task = new sepaOnlineTransferImpl();
-    task->setOriginAccount(element.attribute("originAccount", QString()));
-    task->setValue(MyMoneyMoney(MyMoneyUtils::QStringEmpty(element.attribute("value", QString()))));
-    task->_textKey = element.attribute("textKey", QString().setNum(defaultTextKey)).toUShort();
-    task->_subTextKey = element.attribute("subTextKey", QString().setNum(defaultSubTextKey)).toUShort();
-    task->setPurpose(element.attribute("purpose", QString()));
-    task->setEndToEndReference(element.attribute("endToEndReference", QString()));
+    task->setOriginAccount(MyMoneyXmlHelper::readStringAttribute(reader, QLatin1String("originAccount")));
+    task->setValue(MyMoneyXmlHelper::readValueAttribute(reader, QLatin1String("value")));
+    task->_textKey = MyMoneyXmlHelper::readUintAttribute(reader, QLatin1String("textKey"), defaultTextKey);
+    task->_subTextKey = MyMoneyXmlHelper::readUintAttribute(reader, QLatin1String("subTextKey"), defaultSubTextKey);
+    task->setPurpose(MyMoneyXmlHelper::readStringAttribute(reader, QLatin1String("purpose")));
+    task->setEndToEndReference(MyMoneyXmlHelper::readStringAttribute(reader, QLatin1String("endToEndReference")));
 
     payeeIdentifiers::ibanBic beneficiary;
-    payeeIdentifiers::ibanBic* beneficiaryPtr = 0;
-    QDomElement beneficiaryEl = element.firstChildElement("beneficiary");
-    if (!beneficiaryEl.isNull()) {
-        beneficiaryPtr = beneficiary.createFromXml(beneficiaryEl);
+    payeeIdentifiers::ibanBic* beneficiaryPtr = nullptr;
+
+    while (reader->readNextStartElement()) {
+        if (reader->name() == QLatin1String("beneficiary")) {
+            delete beneficiaryPtr;
+            beneficiaryPtr = beneficiary.createFromXml(reader);
+        } else {
+            reader->skipCurrentElement();
+        }
     }
 
-    if (beneficiaryPtr == 0) {
+    if (beneficiaryPtr == nullptr) {
         task->_beneficiaryAccount = beneficiary;
     } else {
         task->_beneficiaryAccount = *beneficiaryPtr;
+        delete beneficiaryPtr;
     }
 
-    delete beneficiaryPtr;
     return task;
 }
 

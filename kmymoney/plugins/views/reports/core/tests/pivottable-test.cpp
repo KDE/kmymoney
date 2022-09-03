@@ -116,7 +116,7 @@ void PivotTableTest::cleanup()
 void PivotTableTest::testNetWorthSingle()
 {
     try {
-        MyMoneyReport filter;
+        MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::AssetLiability);
         filter.setDateFilter(QDate(2004, 1, 1), QDate(2004, 7, 1).addDays(-1));
         XMLandback(filter);
@@ -141,7 +141,7 @@ void PivotTableTest::testNetWorthOfsetting()
     // accounts opened during the period of the report, one asset & one liability.  Test
     // that it calculates the totals correctly.
 
-    MyMoneyReport filter;
+    MyMoneyReport filter(QLatin1String("fake-id"));
     filter.setRowType(eMyMoney::Report::RowType::AssetLiability);
     filter.setDateFilter(QDate(2004, 1, 1), QDate(2005, 1, 1).addDays(-1));
     XMLandback(filter);
@@ -157,7 +157,7 @@ void PivotTableTest::testNetWorthOpeningPrior()
     // Test the net worth report to make sure it's picking up opening balances PRIOR to
     // the period of the report.
 
-    MyMoneyReport filter;
+    MyMoneyReport filter(QLatin1String("fake-id"));
     filter.setRowType(eMyMoney::Report::RowType::AssetLiability);
     filter.setDateFilter(QDate(2005, 8, 1), QDate(2005, 12, 31));
     filter.setName("Net Worth Opening Prior 1");
@@ -194,7 +194,7 @@ void PivotTableTest::testNetWorthDateFilter()
     // Test a net worth report whose period is prior to the time any accounts are open,
     // so the report should be zero.
 
-    MyMoneyReport filter;
+    MyMoneyReport filter(QLatin1String("fake-id"));
     filter.setRowType(eMyMoney::Report::RowType::AssetLiability);
     filter.setDateFilter(QDate(2004, 1, 1), QDate(2004, 2, 1).addDays(-1));
     XMLandback(filter);
@@ -224,7 +224,7 @@ void PivotTableTest::testNetWorthOpening()
     TransactionHelper t12(QDate(2017, 6, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
     TransactionHelper t13(QDate(2017, 7, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(-100000), acBasicAccount, ctBasicIncome);
 
-    MyMoneyReport filter;
+    MyMoneyReport filter(QLatin1String("fake-id"));
     filter.setRowType(eMyMoney::Report::RowType::AssetLiability);
     filter.setDateFilter(QDate(2016, 1, 1), QDate(2017, 12, 31));
     filter.addAccount(acBasicAccount);
@@ -232,26 +232,30 @@ void PivotTableTest::testNetWorthOpening()
     PivotTable nt_opening1(filter);
     writeTabletoCSV(nt_opening1, "networth-opening-1.csv");
 
-    QVERIFY(nt_opening1.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][0] == openingBalance); // opening value on 1st Jan 2016 is 12000000, but before that i.e. 31st Dec 2015 opening value is 0
+    QCOMPARE(nt_opening1.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][0].toDouble(),
+             openingBalance.toDouble()); // opening value on 1st Jan 2016 is 12000000, but before that i.e. 31st Dec 2015 opening value is 0
     for (auto i = 1; i <= 6; ++i)
-        QVERIFY(nt_opening1.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][i] == openingBalance);
-    QVERIFY(nt_opening1.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][7] == openingBalance + MyMoneyMoney(6200000));
-    QVERIFY(nt_opening1.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][12] == MyMoneyMoney(18700000)); // value after t6 transaction
+        QCOMPARE(nt_opening1.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][i].toDouble(), openingBalance.toDouble());
+    QCOMPARE(nt_opening1.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][7].toDouble(),
+             (openingBalance + MyMoneyMoney(6200000)).toDouble());
+    QCOMPARE(nt_opening1.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][12].toDouble(),
+             MyMoneyMoney(18700000).toDouble()); // value after t6 transaction
 
     filter.setDateFilter(QDate(2017, 1, 1), QDate(2017, 12, 31));
     XMLandback(filter);
     PivotTable nt_opening2(filter);
     writeTabletoCSV(nt_opening2, "networth-opening-2.csv");
 
-    QVERIFY(nt_opening2.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][0] == MyMoneyMoney(18700000)); // opening value is equal to the value after t6 transaction
-    QVERIFY(nt_opening2.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][12] == MyMoneyMoney(14800000));
+    QCOMPARE(nt_opening2.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][0].toDouble(),
+             MyMoneyMoney(18700000).toDouble()); // opening value is equal to the value after t6 transaction
+    QCOMPARE(nt_opening2.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][12].toDouble(), MyMoneyMoney(14800000).toDouble());
 }
 
 void PivotTableTest::testSpendingEmpty()
 {
     // test a spending report with no entries
 
-    MyMoneyReport filter;
+    MyMoneyReport filter(QLatin1String("fake-id"));
     filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
     XMLandback(filter);
     PivotTable spending_f1(filter);
@@ -267,7 +271,7 @@ void PivotTableTest::testSingleTransaction()
     // Test a single transaction
     TransactionHelper t(QDate(2004, 10, 31), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moSolo, acChecking, acSolo);
 
-    MyMoneyReport filter;
+    MyMoneyReport filter(QLatin1String("fake-id"));
     filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
     filter.setDateFilter(QDate(2004, 9, 1), QDate(2005, 1, 1).addDays(-1));
     filter.setName("Spending with Single Transaction.html");
@@ -297,7 +301,7 @@ void PivotTableTest::testSubAccount()
     TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
     TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
-    MyMoneyReport filter;
+    MyMoneyReport filter(QLatin1String("fake-id"));
     filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
     filter.setDateFilter(QDate(2004, 9, 1), QDate(2005, 1, 1).addDays(-1));
     filter.setDetailLevel(eMyMoney::Report::DetailLevel::All);
@@ -333,7 +337,7 @@ void PivotTableTest::testFilterIEvsIE()
     TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
     TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
-    MyMoneyReport filter;
+    MyMoneyReport filter(QLatin1String("fake-id"));
     filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
     filter.setDateFilter(QDate(2004, 9, 1), QDate(2005, 1, 1).addDays(-1));
     filter.addCategory(acChild);
@@ -354,7 +358,7 @@ void PivotTableTest::testFilterALvsAL()
     TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
     TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
-    MyMoneyReport filter;
+    MyMoneyReport filter(QLatin1String("fake-id"));
     filter.setRowType(eMyMoney::Report::RowType::AssetLiability);
     filter.setDateFilter(QDate(2004, 9, 1), QDate(2005, 1, 1).addDays(-1));
     filter.addAccount(acChecking);
@@ -372,7 +376,7 @@ void PivotTableTest::testFilterALvsIE()
     TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
     TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
-    MyMoneyReport filter;
+    MyMoneyReport filter(QLatin1String("fake-id"));
     QList<MyMoneyTransaction> list;
     filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
     filter.setDateFilter(QDate(2004, 9, 1), QDate(2005, 1, 1).addDays(-1));
@@ -396,7 +400,7 @@ void PivotTableTest::testFilterAllvsIE()
     TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
     TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
-    MyMoneyReport filter;
+    MyMoneyReport filter(QLatin1String("fake-id"));
     filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
     filter.setDateFilter(QDate(2004, 9, 1), QDate(2005, 1, 1).addDays(-1));
     filter.addAccount(acCredit);
@@ -487,7 +491,7 @@ void PivotTableTest::testMultipleCurrencies()
     g.close();
 #endif
 
-    MyMoneyReport filter;
+    MyMoneyReport filter(QLatin1String("fake-id"));
     filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
     filter.setDateFilter(QDate(2004, 1, 1), QDate(2005, 1, 1).addDays(-1));
     filter.setDetailLevel(eMyMoney::Report::DetailLevel::All);
@@ -568,7 +572,7 @@ void PivotTableTest::testAdvancedFilter()
         TransactionHelper t1(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
         TransactionHelper t2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
-        MyMoneyReport filter;
+        MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
         filter.setDateFilter(QDate(2004, 1, 1), QDate(2005, 1, 1).addDays(-1));
         filter.setAmountFilter(moChild, moChild);
@@ -584,7 +588,7 @@ void PivotTableTest::testAdvancedFilter()
         TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
         TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moThomas, acCredit, acParent, QString(), "Thomas Baumgart");
 
-        MyMoneyReport filter;
+        MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
         filter.setDateFilter(QDate(2004, 1, 1), QDate(2005, 1, 1).addDays(-1));
         filter.addPayee(MyMoneyFile::instance()->payeeByName("Thomas Baumgart").id());
@@ -603,7 +607,7 @@ void PivotTableTest::testAdvancedFilter()
         TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
         TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moNoPayee, acCredit, acParent, QString(), QString());
 
-        MyMoneyReport filter;
+        MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
         filter.setDateFilter(QDate(2004, 1, 1), QDate(2005, 1, 1).addDays(-1));
         filter.addPayee(QString());
@@ -620,7 +624,7 @@ void PivotTableTest::testAdvancedFilter()
         TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
         TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moThomas, acCredit, acParent, QString(), "Thomas Baumgart");
 
-        MyMoneyReport filter;
+        MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
         filter.setDateFilter(QDate(2004, 1, 1), QDate(2005, 1, 1).addDays(-1));
         filter.setTextFilter(QRegularExpression("Thomas"), false, false);
@@ -634,7 +638,7 @@ void PivotTableTest::testAdvancedFilter()
         TransactionHelper t2(QDate(2004, 2, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), -moParent1, acCredit, acParent);
         TransactionHelper t3(QDate(2004, 11, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer), moChild, acCredit, acChecking);
 
-        MyMoneyReport filter;
+        MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
         filter.addType((int)eMyMoney::TransactionFilter::Type::Payments);
         XMLandback(filter);
@@ -689,7 +693,7 @@ void PivotTableTest::testAdvancedFilter()
         t2.modifySplit(splits[1]);
         t2.update();
 
-        MyMoneyReport filter;
+        MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
         filter.setDateFilter(QDate(2004, 1, 1), QDate(2005, 1, 1).addDays(-1));
         filter.addState((int)eMyMoney::TransactionFilter::State::Cleared);
@@ -750,7 +754,7 @@ void PivotTableTest::testAdvancedFilter()
         t4.modifySplit(splits[1]);
         t4.update();
 
-        MyMoneyReport filter;
+        MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
         filter.setDateFilter(QDate(2004, 1, 1), QDate(2005, 1, 1).addDays(-1));
         filter.setNumberFilter("1", "3");
@@ -773,7 +777,7 @@ void PivotTableTest::testAdvancedFilter()
         TransactionHelper t2y3(QDate(2005, 5, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
         TransactionHelper t3y3(QDate(2005, 9, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
 
-        MyMoneyReport filter;
+        MyMoneyReport filter(QLatin1String("fake-id"));
         filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
         filter.setDateFilter(QDate(), QDate(2004, 7, 1));
         XMLandback(filter);
@@ -805,7 +809,7 @@ void PivotTableTest::testColumnType()
     TransactionHelper t2y2(QDate(2005, 5, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent1, acCredit, acParent);
     TransactionHelper t3y2(QDate(2005, 9, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
 
-    MyMoneyReport filter;
+    MyMoneyReport filter(QLatin1String("fake-id"));
     filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
     filter.setDateFilter(QDate(2003, 12, 31), QDate(2005, 12, 31));
     filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
@@ -958,7 +962,7 @@ void PivotTableTest::testInvestment()
         // Net Worth Report (with investments)
         //
 
-        MyMoneyReport networth_r;
+        MyMoneyReport networth_r(QLatin1String("fake-id"));
         networth_r.setRowType(eMyMoney::Report::RowType::AssetLiability);
         networth_r.setDateFilter(QDate(2004, 1, 1), QDate(2004, 12, 31).addDays(-1));
         XMLandback(networth_r);
@@ -1085,7 +1089,7 @@ void PivotTableTest::testBudget()
 
 void PivotTableTest::testHtmlEncoding()
 {
-    MyMoneyReport filter;
+    MyMoneyReport filter(QLatin1String("fake-id"));
     filter.setRowType(eMyMoney::Report::RowType::AssetLiability);
     filter.setDateFilter(QDate(2004, 1, 1), QDate(2005, 1, 1).addDays(-1));
     XMLandback(filter);

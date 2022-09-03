@@ -10,7 +10,8 @@
 #include <QList>
 #include <QDate>
 
-class QDomDocument;
+class QXmlStreamWriter;
+class QXmlStreamReader;
 
 #include "mymoneyaccount.h"
 #include "mymoneytransaction.h"
@@ -117,9 +118,9 @@ extern QString makeAccount(const QString& _name, eMyMoney::Account::Type _type, 
 extern void makePrice(const QString& _currencyid, const QDate& _date, const MyMoneyMoney& _price);
 QString makeEquity(const QString& _name, const QString& _symbol);
 extern void makeEquityPrice(const QString& _id, const QDate& _date, const MyMoneyMoney& _price);
-extern void writeRCFtoXMLDoc(const MyMoneyReport& filter, QDomDocument* doc);
+extern void writeRCFtoXMLDoc(const MyMoneyReport& filter, QXmlStreamWriter* writer);
 extern void writeRCFtoXML(const MyMoneyReport& filter, const QString& _filename = QString());
-extern bool readRCFfromXMLDoc(QList<MyMoneyReport>& list, QDomDocument* doc);
+extern bool readRCFfromXMLDoc(QList<MyMoneyReport>& list, QXmlStreamReader* reader);
 extern bool readRCFfromXML(QList<MyMoneyReport>& list, const QString& filename);
 extern void XMLandback(MyMoneyReport& filter);
 extern MyMoneyMoney searchHTML(const QString& _html, const QString& _search);

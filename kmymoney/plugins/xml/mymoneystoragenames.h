@@ -31,6 +31,7 @@ enum class Tag {
     KMMFile,
     FileInfo,
     User,
+    KeyValuePairs,
 };
 
 enum class Node {
@@ -61,11 +62,15 @@ enum class General {
     Version,
     FixVersion,
     Pair,
+    // insert new entries above this line
+    LastElement,
 };
 
 enum class Transaction {
     Split = 0,
     Splits,
+    // insert new entries above this line
+    LastElement,
 };
 
 enum class Split {
@@ -74,6 +79,8 @@ enum class Split {
     Match,
     Container,
     KeyValuePairs,
+    // insert new entries above this line
+    LastElement,
 };
 
 enum class Account {
@@ -82,30 +89,42 @@ enum class Account {
     OnlineBanking,
     ReconciliationHistory,
     ReconciliationEntry,
+    // insert new entries above this line
+    LastElement,
 };
 
 enum class Payee {
     Address,
     Identifier,
+    // insert new entries above this line
+    LastElement,
 };
 
 enum class KVP {
     Pair,
+    // insert new entries above this line
+    LastElement,
 };
 
 enum class Institution {
     AccountID,
     AccountIDS,
     Address,
+    // insert new entries above this line
+    LastElement,
 };
 
 enum class Schedule {
     Payment,
     Payments,
+    // insert new entries above this line
+    LastElement,
 };
 
 enum class OnlineJob {
     OnlineTask,
+    // insert new entries above this line
+    LastElement,
 };
 }
 
@@ -122,9 +141,13 @@ enum class General {
     Price,
     Name,
     Email,
-    Country,
+    State,
+    Country, // deprecated
+    AltCountry, // deprecated
     City,
     ZipCode,
+    AltZipCode, // deprecated
+    PostCode, // deprecated
     Street,
     Telephone,
     // insert new entries above this line

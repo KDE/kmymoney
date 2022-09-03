@@ -34,6 +34,7 @@
  * object. It avoids needless string conversion if the input string is const char*
  */
 
+#define MYMONEYEXCEPTION_SSTRING(exceptionMessage) MyMoneyException(exceptionMessage + std::string(", " __FILE__ ":" KMM_TOSTRING(__LINE__)))
 #define MYMONEYEXCEPTION_CSTRING(exceptionMessage) MyMoneyException(exceptionMessage " " __FILE__ ":" KMM_TOSTRING(__LINE__))
 
 // krazy:excludeall=dpointer
@@ -64,6 +65,10 @@ public:
       * and line parameter to the correct values.
       */
     explicit MyMoneyException(const char *exceptionMessage) : std::runtime_error(exceptionMessage) {}  // krazy:exclude=inline
+    explicit MyMoneyException(const std::string& exceptionMessage)
+        : std::runtime_error(exceptionMessage)
+    {
+    } // krazy:exclude=inline
 };
 
 #endif

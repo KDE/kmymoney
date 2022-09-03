@@ -22,14 +22,18 @@ class onlineTaskDummy3 : public onlineTask, public onlineTaskInterface
 public:
     ONLINETASK_META(dummyTask, "org.kmymoney.onlinetasks.dummytask");
 
-    bool isValid() const final override {
+    bool isValid() const final override
+    {
         return true;
     }
-    QString jobTypeName() const final override {
+    QString jobTypeName() const final override
+    {
         return QLatin1String("Dummy credit transfer");
     }
 
-    void writeXML(QDomDocument&, QDomElement&) const final override {}
+    void writeXML(QXmlStreamWriter*) const final override
+    {
+    }
 
 protected:
 
@@ -42,7 +46,8 @@ protected:
     QSet<QString> referencedObjects() const final override {
         return {};
     }
-    onlineTaskDummy3* createFromXml(const QDomElement &) const final override {
+    onlineTaskDummy3* createFromXml(QXmlStreamReader*) const final override
+    {
         return (new onlineTaskDummy3);
     }
     QString responsibleAccount() const final override {

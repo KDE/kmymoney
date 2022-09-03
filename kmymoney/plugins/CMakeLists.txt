@@ -13,7 +13,6 @@ add_subdirectory( reconciliationreport )
 add_subdirectory( checkprinting )
 add_subdirectory( views )
 add_subdirectory( xml )
-add_subdirectory( xmlhelper )
 
 if(ENABLE_SQLSTORAGE)
   add_subdirectory(sql)

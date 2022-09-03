@@ -13,6 +13,7 @@
 // QT Includes
 
 #include <QMap>
+class QXmlStreamReader;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -204,6 +205,7 @@ public:
      * @return pointer to task, caller gains ownership. Can be 0.
      */
     onlineTask* createOnlineTaskByXml(const QString& iid, const QDomElement& element) const;
+    onlineTask* createOnlineTaskByXml(QXmlStreamReader* reader, const QString& iid) const;
 
 Q_SIGNALS:
     /**

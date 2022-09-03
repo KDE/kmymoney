@@ -5,9 +5,6 @@
 
 #include "payeeidentifier.h"
 
-#include <QDomDocument>
-#include <QDomElement>
-
 #include "payeeidentifierdata.h"
 
 payeeIdentifier::payeeIdentifier()
@@ -129,20 +126,5 @@ bool payeeIdentifier::operator==(const payeeIdentifier& other) const
         return true;
     }
     return (*data() == *(other.data()));
-}
-
-void payeeIdentifier::writeXML(QDomDocument& document, QDomElement& parent, const QString& elemenName) const
-{
-    // Important: type must be set before calling m_payeeIdentifier->writeXML()
-    // the plugin for unavailable plugins must be able to set type itself
-    QDomElement elem = document.createElement(elemenName);
-    if (m_id != 0)
-        elem.setAttribute("id", m_id);
-
-    if (!isNull()) {
-        elem.setAttribute("type", m_payeeIdentifier->payeeIdentifierId());
-        m_payeeIdentifier->writeXML(document, elem);
-    }
-    parent.appendChild(elem);
 }
 

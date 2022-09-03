@@ -45,8 +45,8 @@ public:
     ibanBic& operator=(const ibanBic& other) = default;
 
     ibanBic* clone() const final override;
-    ibanBic* createFromXml(const QDomElement& element) const final override;
-    void writeXML(QDomDocument& document, QDomElement& parent) const final override;
+    ibanBic* createFromXml(QXmlStreamReader* reader) const final override;
+    void writeXML(QXmlStreamWriter* writer) const final override;
 
     /**
      * @brief Set an owner name for this account

@@ -1,11 +1,12 @@
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/xmlstorage.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/xmlstorage.json @ONLY)
 
 set(xmlstorage_SOURCES
-  xmlstorage.cpp
-  mymoneystoragexml.cpp
+  mymoneyxmlreader.cpp
+  mymoneyxmlwriter.cpp
+  mymoneyanonwriter.cpp
   mymoneystoragenames.cpp
-  mymoneystorageanon.cpp
   kgpgkeyselectiondlg.cpp
+  xmlstorage.cpp
   )
 
 ki18n_wrap_ui(xmlstorage_SOURCES kgpgkeyselectiondlg.ui)

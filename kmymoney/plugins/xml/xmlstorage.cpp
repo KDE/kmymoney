@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
+    SPDX-FileCopyrightText: 2022 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -34,18 +35,19 @@
 // Project Includes
 
 #include "appinterface.h"
-#include "viewinterface.h"
-#include "mymoneyfile.h"
-#include "mymoneyexception.h"
-#include "mymoneystoragebin.h"
-#include "mymoneystoragexml.h"
-#include "mymoneystorageanon.h"
 #include "icons.h"
-#include "kmymoneysettings.h"
-#include "kmymoneyutils.h"
 #include "kgpgfile.h"
 #include "kgpgkeyselectiondlg.h"
 #include "kmymoneyenums.h"
+#include "kmymoneysettings.h"
+#include "kmymoneyutils.h"
+#include "mymoneyanonwriter.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneystoragebin.h"
+#include "mymoneyxmlreader.h"
+#include "mymoneyxmlwriter.h"
+#include "viewinterface.h"
 
 using namespace Icons;
 
@@ -190,10 +192,9 @@ bool XMLStorage::open(const QUrl &url)
     if (!docType.hasMatch())
         return false;
 
-    MyMoneyStorageXML pReader;
-    pReader.setProgressCallback(appInterface()->progressCallback());
-    pReader.readFile(qfile, MyMoneyFile::instance());
-    pReader.setProgressCallback(0);
+    MyMoneyXmlReader reader;
+    reader.setFile(MyMoneyFile::instance());
+    reader.read(qfile);
 
     qfile->close();
     delete qfile;
@@ -235,15 +236,15 @@ bool XMLStorage::save(const QUrl &url)
         return false;
     }
 
-    std::unique_ptr<IMyMoneyOperationsFormat> storageWriter;
+    std::unique_ptr<MyMoneyXmlWriter> storageWriter;
 
     // If this file ends in ".ANON.XML" then this should be written using the
     // anonymous writer.
     bool plaintext = filename.right(4).toLower() == ".xml";
     if (filename.right(9).toLower() == ".anon.xml")
-        storageWriter = std::make_unique<MyMoneyStorageANON>();
+        storageWriter = std::make_unique<MyMoneyAnonWriter>();
     else
-        storageWriter = std::make_unique<MyMoneyStorageXML>();
+        storageWriter = std::make_unique<MyMoneyXmlWriter>();
 
     QString keyList;
     if (!appInterface()->filenameURL().isEmpty())
@@ -424,7 +425,7 @@ void XMLStorage::ungetString(QIODevice *qfile, char *buf, int len)
     }
 }
 
-void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFormat* pWriter, bool plaintext, const QString& keyList)
+void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWriter, bool plaintext, const QString& keyList)
 {
     // Check GPG encryption
     bool encryptFile = true;
@@ -503,9 +504,13 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
         throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to open file '%1' for writing.").arg(localFile));
     }
 
-    pWriter->setProgressCallback(appInterface()->progressCallback());
-    pWriter->writeFile(device.get(), MyMoneyFile::instance());
+    pWriter->setFile(MyMoneyFile::instance());
+    const auto xmlWrittenOk = pWriter->write(device.get());
     device->close();
+
+    if (!xmlWrittenOk) {
+        throw MYMONEYEXCEPTION(QString::fromLatin1("XML write failure while writing to '%1'").arg(localFile));
+    }
 
     // Check for errors if possible, only possible for KGPGFile
     QFileDevice *fileDevice = qobject_cast<QFileDevice*>(device.get());
@@ -530,7 +535,6 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
         }
     }
     QFile::setPermissions(localFile, fmode);
-    pWriter->setProgressCallback(0);
 }
 
 void XMLStorage::checkRecoveryKeyValidity()

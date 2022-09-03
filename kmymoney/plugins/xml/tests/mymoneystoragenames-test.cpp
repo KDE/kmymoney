@@ -5,16 +5,16 @@
 
 #include "mymoneystoragenames-test.h"
 
-#include <QTest>
 #include "../mymoneystoragenames.cpp"
-#include "plugins/xmlhelper/xmlstoragehelper.h"
-#include "plugins/xmlhelper/xmlstoragehelper.cpp"
+#include "xmlhelper/xmlstoragehelper.cpp"
+#include "xmlhelper/xmlstoragehelper.h"
+#include <QTest>
 
 QTEST_GUILESS_MAIN(MyMoneyStorageNamesTest)
 
 void MyMoneyStorageNamesTest::keyValuePairElementNames()
 {
-    for (auto i = (int)Element::KVP::Pair; i <= (int)Element::KVP::Pair; ++i) {
+    for (auto i = (int)Element::KVP::Pair; i < (int)Element::KVP::LastElement; ++i) {
         auto isEmpty = elementName(static_cast<Element::KVP>(i)).isEmpty();
         if (isEmpty)
             qWarning() << "Empty element's name " << i;
@@ -34,7 +34,7 @@ void MyMoneyStorageNamesTest::keyValuePairAttributeNames()
 
 void MyMoneyStorageNamesTest::transactionElementNames()
 {
-    for (auto i = (int)Element::Transaction::Split; i <= (int)Element::Transaction::Splits; ++i) {
+    for (auto i = (int)Element::Transaction::Split; i < (int)Element::Transaction::LastElement; ++i) {
         auto isEmpty = elementName(static_cast<Element::Transaction>(i)).isEmpty();
         if (isEmpty)
             qWarning() << "Empty element's name " << i;
@@ -54,7 +54,7 @@ void MyMoneyStorageNamesTest::transactionAttributeNames()
 
 void MyMoneyStorageNamesTest::splitElementNames()
 {
-    for (auto i = (int)Element::Split::Split; i <= (int)Element::Split::KeyValuePairs; ++i) {
+    for (auto i = (int)Element::Split::Split; i < (int)Element::Split::LastElement; ++i) {
         auto isEmpty = elementName(static_cast<Element::Split>(i)).isEmpty();
         if (isEmpty)
             qWarning() << "Empty element's name " << i;
@@ -74,7 +74,7 @@ void MyMoneyStorageNamesTest::splitAttributeNames()
 
 void MyMoneyStorageNamesTest::accountElementNames()
 {
-    for (auto i = (int)Element::Account::SubAccount; i <= (int)Element::Account::OnlineBanking; ++i) {
+    for (auto i = (int)Element::Account::SubAccount; i < (int)Element::Account::LastElement; ++i) {
         auto isEmpty = elementName(static_cast<Element::Account>(i)).isEmpty();
         if (isEmpty)
             qWarning() << "Empty element's name " << i;
@@ -94,7 +94,7 @@ void MyMoneyStorageNamesTest::accountAttributeNames()
 
 void MyMoneyStorageNamesTest::payeeElementNames()
 {
-    for (auto i = (int)Element::Payee::Address; i <= (int)Element::Payee::Address; ++i) {
+    for (auto i = (int)Element::Payee::Address; i < (int)Element::Payee::LastElement; ++i) {
         auto isEmpty = elementName(static_cast<Element::Payee>(i)).isEmpty();
         if (isEmpty)
             qWarning() << "Empty element's name " << i;
@@ -134,13 +134,12 @@ void MyMoneyStorageNamesTest::securityAttributeNames()
 
 void MyMoneyStorageNamesTest::institutionElementNames()
 {
-    for (auto i = (int)Element::Institution::AccountID; i <= (int)Element::Institution::Address; ++i) {
+    for (auto i = (int)Element::Institution::AccountID; i < (int)Element::Institution::LastElement; ++i) {
         auto isEmpty = elementName(static_cast<Element::Institution>(i)).isEmpty();
         if (isEmpty)
             qWarning() << "Empty element's name " << i;
         QVERIFY(!isEmpty);
     }
-
 }
 
 void MyMoneyStorageNamesTest::institutionAttributeNames()
@@ -155,8 +154,8 @@ void MyMoneyStorageNamesTest::institutionAttributeNames()
 
 void MyMoneyStorageNamesTest::reportElementNames()
 {
-    for (auto i = (int)Element::Report::Payee; i <= (int)Element::Report::AccountGroup; ++i) {
-        auto isEmpty = MyMoneyXmlContentHandler2::elementName(static_cast<Element::Report>(i)).isEmpty();
+    for (auto i = (int)Element::Report::Payee; i < (int)Element::Report::LastElement; ++i) {
+        auto isEmpty = MyMoneyXmlHelper::elementName(static_cast<Element::Report>(i)).isEmpty();
         if (isEmpty)
             qWarning() << "Empty element's name " << i;
         QVERIFY(!isEmpty);
@@ -166,7 +165,7 @@ void MyMoneyStorageNamesTest::reportElementNames()
 void MyMoneyStorageNamesTest::reportAttributeNames()
 {
     for (auto i = (int)Attribute::Report::ID; i < (int)Attribute::Report::LastAttribute; ++i) {
-        auto isEmpty = MyMoneyXmlContentHandler2::attributeName(static_cast<Attribute::Report>(i)).isEmpty();
+        auto isEmpty = MyMoneyXmlHelper::attributeName(static_cast<Attribute::Report>(i)).isEmpty();
         if (isEmpty)
             qWarning() << "Empty attribute's name " << i;
         QVERIFY(!isEmpty);
@@ -175,8 +174,8 @@ void MyMoneyStorageNamesTest::reportAttributeNames()
 
 void MyMoneyStorageNamesTest::budgetElementNames()
 {
-    for (auto i = (int)Element::Budget::Budget; i <= (int)Element::Budget::Period; ++i) {
-        auto isEmpty = MyMoneyXmlContentHandler2::elementName(static_cast<Element::Budget>(i)).isEmpty();
+    for (auto i = (int)Element::Budget::Budget; i < (int)Element::Budget::LastElement; ++i) {
+        auto isEmpty = MyMoneyXmlHelper::elementName(static_cast<Element::Budget>(i)).isEmpty();
         if (isEmpty)
             qWarning() << "Empty element's name " << i;
         QVERIFY(!isEmpty);
@@ -186,7 +185,7 @@ void MyMoneyStorageNamesTest::budgetElementNames()
 void MyMoneyStorageNamesTest::budgetAttributeNames()
 {
     for (auto i = (int)Attribute::Budget::ID; i < (int)Attribute::Budget::LastAttribute; ++i) {
-        auto isEmpty = MyMoneyXmlContentHandler2::attributeName(static_cast<Attribute::Budget>(i)).isEmpty();
+        auto isEmpty = MyMoneyXmlHelper::attributeName(static_cast<Attribute::Budget>(i)).isEmpty();
         if (isEmpty)
             qWarning() << "Empty attribute's name " << i;
         QVERIFY(!isEmpty);
@@ -195,7 +194,7 @@ void MyMoneyStorageNamesTest::budgetAttributeNames()
 
 void MyMoneyStorageNamesTest::scheduleElementNames()
 {
-    for (auto i = (int)Element::Schedule::Payment; i <= (int)Element::Schedule::Payments; ++i) {
+    for (auto i = (int)Element::Schedule::Payment; i < (int)Element::Schedule::LastElement; ++i) {
         auto isEmpty = elementName(static_cast<Element::Schedule>(i)).isEmpty();
         if (isEmpty)
             qWarning() << "Empty element's name " << i;
@@ -215,7 +214,7 @@ void MyMoneyStorageNamesTest::scheduleAttributeNames()
 
 void MyMoneyStorageNamesTest::onlineJobElementNames()
 {
-    for (auto i = (int)Element::OnlineJob::OnlineTask; i <= (int)Element::OnlineJob::OnlineTask; ++i) {
+    for (auto i = (int)Element::OnlineJob::OnlineTask; i < (int)Element::OnlineJob::LastElement; ++i) {
         auto isEmpty = elementName(static_cast<Element::OnlineJob>(i)).isEmpty();
         if (isEmpty)
             qWarning() << "Empty element's name " << i;

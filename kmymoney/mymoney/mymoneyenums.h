@@ -606,6 +606,7 @@ enum Roles {
     LedgerDisplayOrderRole,
 
     // Parameter
+    ParameterKeyRole,
     ParameterValueRole,
 
     // Templates

@@ -8,8 +8,6 @@
 #ifndef UNAVAILABLETASK_H
 #define UNAVAILABLETASK_H
 
-#include <QDomElement>
-
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 
 /**
@@ -27,11 +25,13 @@ public:
     bool isValid() const override;
     QString jobTypeName() const override;
 
-    void writeXML(QDomDocument& document, QDomElement& parent) const override;
+    void writeXML(QXmlStreamWriter* writer) const override;
+
 protected:
     QString responsibleAccount() const override;
     QString purpose() const override;
-    unavailableTask* createFromXml(const QDomElement& element) const override;
+    unavailableTask* createFromXml(QXmlStreamReader* reader) const override;
+
     bool hasReferenceTo(const QString& id) const override;
 
     /**
@@ -42,12 +42,12 @@ protected:
     unavailableTask* clone() const override;
 
 private:
-    explicit unavailableTask(const QDomElement& element);
+    explicit unavailableTask(const QString& xmlData);
 
     /**
      * The data received by createFromXml(). Written back by writeXML().
      */
-    QDomElement m_data;
+    QString m_data;
 };
 
 #endif // UNAVAILABLETASK_H

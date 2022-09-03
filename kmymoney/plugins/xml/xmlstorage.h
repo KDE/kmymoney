@@ -22,6 +22,7 @@
 class QIODevice;
 
 class MyMoneyStorageMgr;
+class MyMoneyXmlWriter;
 
 class XMLStorage : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::StoragePlugin
 {
@@ -58,7 +59,7 @@ private:
       *
       * @note This method will close the file when it is written.
       */
-    void saveToLocalFile(const QString& localFile, IMyMoneyOperationsFormat* pWriter, bool plaintext, const QString& keyList);
+    void saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWriter, bool plaintext, const QString& keyList);
 
     void checkRecoveryKeyValidity();
 

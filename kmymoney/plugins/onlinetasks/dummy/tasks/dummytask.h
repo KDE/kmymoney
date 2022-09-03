@@ -45,7 +45,9 @@ public:
         return m_testNumber;
     }
 
-    void writeXML(QDomDocument&, QDomElement&) const final override {}
+    void writeXML(QXmlStreamWriter*) const final override
+    {
+    }
 
 protected:
 
@@ -59,7 +61,8 @@ protected:
     QSet<QString> referencedObjects() const final override {
         return {};
     }
-    dummyTask* createFromXml(const QDomElement&) const final override {
+    dummyTask* createFromXml(QXmlStreamReader*) const final override
+    {
         return (new dummyTask);
     }
 
