@@ -89,7 +89,7 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget* parent, const MyMoneySchedule& sch
 
     d->m_editor = d->ui->m_editor;
     d->m_editor->setShowButtons(false);
-    d->m_editor->layout()->setMargin(0);
+    d->m_editor->layout()->setContentsMargins(0, 0, 0, 0);
 
     d->m_schedule = schedule;
     const auto account = schedule.account();

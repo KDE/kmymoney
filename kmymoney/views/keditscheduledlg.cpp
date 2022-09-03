@@ -93,7 +93,7 @@ public:
         transactionEditor->setShowAccountCombo(true);
 
         transactionEditor->setShowButtons(false);
-        transactionEditor->layout()->setMargin(0);
+        transactionEditor->layout()->setContentsMargins(0, 0, 0, 0);
 
         m_frameCollection = new WidgetHintFrameCollection(q);
         m_frameCollection->addWidget(ui->buttonBox->button(QDialogButtonBox::Ok));
