@@ -650,10 +650,10 @@ QString readRequiredStringAttribute(QXmlStreamReader* reader, const QString& att
     const auto value(attributes.value(attribute).toString());
 
     if (!haveAttribute) {
-        reader->raiseError(i18nc("Missing attribute %1 in xml file", "Missing attribute %1 in line %2").arg(attribute).arg(reader->lineNumber()));
+        reader->raiseError(i18nc("Missing attribute %1 in xml file", "Missing attribute %1 in line %2", attribute, reader->lineNumber()));
 
     } else if (value.isEmpty()) {
-        reader->raiseError(i18nc("Empty attribute %1 in xml file", "Empty attribute %1 in line %2").arg(attribute).arg(reader->lineNumber()));
+        reader->raiseError(i18nc("Empty attribute %1 in xml file", "Empty attribute %1 in line %2", attribute, reader->lineNumber()));
     }
     return value;
 }
