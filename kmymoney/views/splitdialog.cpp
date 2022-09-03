@@ -401,12 +401,7 @@ void SplitDialog::deleteSelectedSplits()
 void SplitDialog::deleteAllSplits()
 {
     QAbstractItemModel* model = d->ui->splitView->model();
-    QModelIndexList list = model->match(model->index(0,0),
-                                        eMyMoney::Model::IdRole,
-                                        QLatin1String(".+"),
-                                        -1,
-                                        Qt::MatchRegExp
-                                       );
+    QModelIndexList list = model->match(model->index(0, 0), eMyMoney::Model::IdRole, QLatin1String(".+"), -1, Qt::MatchRegularExpression);
     const auto row = d->ui->splitView->selectionModel()->selectedRows().first().row();
     d->deleteSplits(list);
     adjustSummary();
@@ -416,12 +411,7 @@ void SplitDialog::deleteAllSplits()
 void SplitDialog::deleteZeroSplits()
 {
     QAbstractItemModel* model = d->ui->splitView->model();
-    QModelIndexList list = model->match(model->index(0,0),
-                                        eMyMoney::Model::IdRole,
-                                        QLatin1String(".+"),
-                                        -1,
-                                        Qt::MatchRegExp
-                                       );
+    QModelIndexList list = model->match(model->index(0, 0), eMyMoney::Model::IdRole, QLatin1String(".+"), -1, Qt::MatchRegularExpression);
 
     for(int row = 0; row < list.count();) {
         const auto idx = list.at(row);
