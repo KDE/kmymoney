@@ -10,6 +10,7 @@
 // QT Includes
 
 #include <QFile>
+#include <QLocale>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -95,9 +96,11 @@ QString reports::ReportTable::renderReport(const QString& type, const QByteArray
 
             // report's date range
             result.append(QString::fromLatin1("<div class=\"subtitle\">%1</div>\n"
-                                              "<div class=\"gap\">&nbsp;</div>\n").arg(i18nc("Report date range", "%1 through %2",
-                                                      fromDate.toString(Qt::SystemLocaleShortDate),
-                                                      toDate.toString(Qt::SystemLocaleShortDate))));
+                                              "<div class=\"gap\">&nbsp;</div>\n")
+                              .arg(i18nc("Report date range",
+                                         "%1 through %2",
+                                         QLocale().toString(fromDate, QLocale::ShortFormat),
+                                         QLocale().toString(toDate, QLocale::ShortFormat))));
             // report's currency information
             if (m_containsNonBaseCurrency) {
                 result.append(QString::fromLatin1("<div class=\"subtitle\">%1</div>\n"
@@ -121,9 +124,8 @@ QString reports::ReportTable::renderReport(const QString& type, const QByteArray
         result.append(QLatin1String("</body>\n</html>\n"));
     } else if (type == QLatin1String("csv")) {
         result.append(QString::fromLatin1("\"Report: %1\"\n").arg(m_config.name()));
-        result.append(QString::fromLatin1("%1\n").arg(i18nc("Report date range", "%1 through %2",
-                      fromDate.toString(Qt::SystemLocaleShortDate),
-                      toDate.toString(Qt::SystemLocaleShortDate))));
+        result.append(QString::fromLatin1("%1\n").arg(
+            i18nc("Report date range", "%1 through %2", QLocale().toString(fromDate, QLocale::ShortFormat), QLocale().toString(toDate, QLocale::ShortFormat))));
         if (m_containsNonBaseCurrency)
             result.append(QString::fromLatin1("%1\n").arg(m_config.isConvertCurrency() ?
                           i18n("All currencies converted to %1", file->baseCurrency().name()) :

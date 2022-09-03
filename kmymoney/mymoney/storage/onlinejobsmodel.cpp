@@ -227,22 +227,22 @@ QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
             case eMyMoney::OnlineJob::sendingState::acceptedByBank:
                 return i18nc("@info:tooltip online job list status Arg 1 is a date/time",
                              "This job was accepted by the bank on %1.",
-                             job.bankAnswerDate().toString(Qt::DefaultLocaleShortDate));
+                             QLocale().toString(job.bankAnswerDate(), QLocale::ShortFormat));
             case eMyMoney::OnlineJob::sendingState::sendingError:
                 return i18nc("@info:tooltip online job list status Arg 1 is a date/time",
                              "Sending this job failed (tried on %1).",
-                             job.sendDate().toString(Qt::DefaultLocaleShortDate));
+                             QLocale().toString(job.sendDate(), QLocale::ShortFormat));
             case eMyMoney::OnlineJob::sendingState::abortedByUser:
                 return i18nc("@info:tooltip online job list status", "Sending this job was manually aborted.");
             case eMyMoney::OnlineJob::sendingState::rejectedByBank:
                 return i18nc("@info:tooltip online job list status Arg 1 is a date/time",
                              "The bank rejected this job on %1.",
-                             job.bankAnswerDate().toString(Qt::DefaultLocaleShortDate));
+                             QLocale().toString(job.bankAnswerDate(), QLocale::ShortFormat));
             case eMyMoney::OnlineJob::sendingState::noBankAnswer:
                 if (job.sendDate().isValid())
                     return i18nc("@info:tooltip online job list status Arg 1 is a date/time",
                                  "The bank accepted this job on %1.",
-                                 job.sendDate().toString(Qt::DefaultLocaleShortDate));
+                                 QLocale().toString(job.sendDate(), QLocale::ShortFormat));
                 else if (!job.isValid())
                     return i18nc("@info:tooltip online job list status", "This job needs further editing and cannot be sent therefore.");
                 else

@@ -135,10 +135,12 @@ allow us to test the structure, if not the data content, of the file.
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#undef QT_DISABLE_DEPRECATED_BEFORE
+
+#include <QDate>
 #include <QList>
 #include <QStack>
 #include <QXmlDefaultHandler>
-#include <QDate>
 
 // ----------------------------------------------------------------------------
 // Project Includes
