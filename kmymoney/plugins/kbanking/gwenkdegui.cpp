@@ -5,6 +5,9 @@
 
 */
 
+// Gwenhywfar uses the deprecated QFlags constructor in a header. This will be fixed in master shortly.
+#undef QT_DISABLE_DEPRECATED_BEFORE
+
 #include "gwenkdegui.h"
 
 #include <gwenhywfar/debug.h>
