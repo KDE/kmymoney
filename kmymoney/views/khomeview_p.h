@@ -140,7 +140,7 @@ public:
         auto vbox = new QVBoxLayout(q);
         q->setLayout(vbox);
         vbox->setSpacing(6);
-        vbox->setMargin(0);
+        vbox->setContentsMargins(0, 0, 0, 0);
 
         m_view = new KMMTextBrowser();
         m_view->setOpenLinks(false);
