@@ -152,6 +152,7 @@ SplitDialog::SplitDialog(const MyMoneySecurity& commodity,
     d->ui->splitView->setSelectionMode(QAbstractItemView::ExtendedSelection);
     d->ui->splitView->setSelectionBehavior(QAbstractItemView::SelectRows);
     d->ui->splitView->setCommodity(commodity);
+    d->ui->splitView->setTotalTransactionValue(amount);
 
     d->ui->okButton->setIcon(Icons::get(Icon::DialogOK));
     d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
@@ -268,12 +269,14 @@ void SplitDialog::adjustSummary()
     }
 
     d->splitsTotal = 0;
-    for(int row = 0; row < d->ui->splitView->model()->rowCount(); ++row) {
-        QModelIndex index = d->ui->splitView->model()->index(row, 0);
-        if(index.isValid()) {
+    const auto model = d->ui->splitView->model();
+    for (int row = 0; row < model->rowCount(); ++row) {
+        const auto index = model->index(row, 0);
+        if (index.isValid() && !index.data(eMyMoney::Model::SplitIsNewRole).toBool()) {
             d->splitsTotal += index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
         }
     }
+
     const int denom = MyMoneyMoney::denomToPrec(d->fraction);
     QString formattedValue = (d->splitsTotal * d->inversionFactor).formatMoney(currencySymbol, denom);
     d->ui->summaryView->item(SumRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);

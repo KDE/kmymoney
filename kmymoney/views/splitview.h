@@ -21,6 +21,7 @@
 #include "mymoneyenums.h"
 
 class MyMoneyAccount;
+class MyMoneyMoney;
 class MyMoneySecurity;
 
 class SplitView : public QTableView
@@ -60,6 +61,8 @@ public:
     void setTransactionPayeeId(const QString& id);
 
     void setReadOnlyMode(bool readOnly);
+
+    void setTotalTransactionValue(const MyMoneyMoney& transactionValue);
 
 public Q_SLOTS:
     /**

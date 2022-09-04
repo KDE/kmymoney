@@ -586,6 +586,7 @@ enum Roles {
     SplitTagIdRole,
     SplitFormattedValueRole,
     SplitFormattedSharesRole,
+    SplitIsNewRole,
 
     // MatchedSplit
     MatchedSplitPayeeRole,

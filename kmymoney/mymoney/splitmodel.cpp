@@ -329,6 +329,9 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::TransactionCounterAccountRole:
         break;
 
+    case eMyMoney::Model::SplitIsNewRole:
+        return split.id().isEmpty() || split.id().endsWith(QLatin1Char('-'));
+
     default:
         break;
     }

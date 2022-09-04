@@ -80,6 +80,26 @@ public:
         }
     }
 
+    void setupUnassignedValue(const QModelIndex& idx)
+    {
+        if (!totalTransactionValue.isAutoCalc()) {
+            auto model = const_cast<SplitModel*>(qobject_cast<const SplitModel*>(idx.model()));
+            MyMoneyMoney splitsTotal;
+            for (int row = 0; row < model->rowCount(); ++row) {
+                if (row == idx.row()) {
+                    continue;
+                }
+                const auto idx = model->index(row, 0);
+                if (idx.isValid()) {
+                    splitsTotal += idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
+                }
+            }
+
+            model->setData(idx, QVariant::fromValue<MyMoneyMoney>(totalTransactionValue - splitsTotal), eMyMoney::Model::SplitValueRole);
+            model->setData(idx, QVariant::fromValue<MyMoneyMoney>(totalTransactionValue - splitsTotal), eMyMoney::Model::SplitSharesRole);
+        }
+    }
+
     void executeContextMenu(const QPoint& pos)
     {
         const auto currentIdx = q->currentIndex();
@@ -113,8 +133,7 @@ public:
             const auto list = q->selectionModel()->selectedRows();
             QPersistentModelIndex newCurrentIdx;
             for (const auto idx : list) {
-                const auto id = idx.data(eMyMoney::Model::IdRole).toString();
-                if (!(id.isEmpty() || id.endsWith('-'))) {
+                if (!idx.data(eMyMoney::Model::SplitIsNewRole).toBool()) {
                     // we can use any model object for the next operation, but we have to use one
                     const auto baseIdx = MyMoneyFile::instance()->accountsModel()->mapToBaseSource(idx);
                     auto model = const_cast<SplitModel*>(qobject_cast<const SplitModel*>(baseIdx.model()));
@@ -163,6 +182,7 @@ public:
     SplitView* q;
     SplitDelegate* splitDelegate;
     MyMoneyAccount account;
+    MyMoneyMoney totalTransactionValue;
     int adjustableColumn;
     bool adjustingColumn;
     bool showValuesInverted;
@@ -272,6 +292,10 @@ bool SplitView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger tr
 
         if(!haveEditorInOtherView) {
             emit aboutToStartEdit();
+
+            if (index.data(eMyMoney::Model::SplitIsNewRole).toBool()) {
+                d->setupUnassignedValue(index);
+            }
             setSpan(index.row(), 0, 1, horizontalHeader()->count());
             QModelIndex editIndex = model()->index(index.row(), 0);
             rc = QTableView::edit(editIndex, trigger, event);
@@ -577,4 +601,9 @@ void SplitView::setReadOnlyMode(bool readOnly)
 {
     d->readOnly = readOnly;
     d->splitDelegate->setReadOnlyMode(readOnly);
+}
+
+void SplitView::setTotalTransactionValue(const MyMoneyMoney& transactionValue)
+{
+    d->totalTransactionValue = transactionValue;
 }
