@@ -40,7 +40,6 @@
 #include "mymoneyenums.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
-#include "mymoneyprice.h"
 #include "mymoneysecurity.h"
 #include "payeecreator.h"
 #include "payeesmodel.h"
