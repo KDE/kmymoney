@@ -2591,7 +2591,7 @@ QStringList MyMoneyFile::consistencyCheck()
             ++unfixedCount;
         }
 
-        foreach (const auto split, splits) {
+        for (const auto& split : splits) {
             bool sChanged = false;
             MyMoneySplit s = split;
             if (payeeConversionMap.find(split.payeeId()) != payeeConversionMap.end()) {
@@ -2652,6 +2652,15 @@ QStringList MyMoneyFile::consistencyCheck()
                     sChanged = true;
                     ++problemCount;
                 }
+
+                // make sure that shares and value have the same sign
+                if (!(s.shares().isZero() || s.value().isZero())) {
+                    if ((s.shares().isNegative() ^ s.value().isNegative()) || (s.shares().isPositive() ^ s.value().isPositive())) {
+                        rc << i18n("  * Split %2 in transaction '%1' contains different signs for shares and value. Please fix manually.", t.id(), split.id());
+                        ++unfixedCount;
+                    }
+                }
+
             } catch (const MyMoneyException &) {
                 rc << i18n("  * Split %2 in transaction '%1' contains a reference to invalid account %3. Please fix manually.", t.id(), split.id(), split.accountId());
                 ++unfixedCount;
