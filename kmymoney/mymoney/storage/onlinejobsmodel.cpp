@@ -135,6 +135,7 @@ QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
                 return MyMoneyUtils::formatMoney(transfer.task()->value(), transfer.task()->currency());
 
             } catch (const onlineJob::badTaskCast&) {
+            } catch (const onlineJob::emptyTask&) {
             } catch (const MyMoneyException&) {
             }
             break;
@@ -146,6 +147,7 @@ QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
                 return ibanBic->ownerName();
             } catch (const onlineJob::badTaskCast&) {
                 return i18nc("Unknown payee in online task", "Unknown");
+            } catch (const onlineJob::emptyTask&) {
             } catch (const MyMoneyException&) {
             }
             break;
@@ -154,6 +156,7 @@ QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
             try {
                 return job.purpose().remove(QLatin1Char('\n'));
             } catch (const onlineJob::badTaskCast&) {
+            } catch (const onlineJob::emptyTask&) {
             } catch (const MyMoneyException&) {
             }
             break;
@@ -165,6 +168,7 @@ QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
                 return ibanBic->paperformatIban();
             } catch (const onlineJob::badTaskCast&) {
                 return i18nc("Unknown payee in online task", "Unknown");
+            } catch (const onlineJob::emptyTask&) {
             } catch (const MyMoneyException&) {
             }
             break;
@@ -176,6 +180,7 @@ QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
                 return ibanBic->bic();
             } catch (const onlineJob::badTaskCast&) {
                 return i18nc("Unknown payee in online task", "Unknown");
+            } catch (const onlineJob::emptyTask&) {
             } catch (const MyMoneyException&) {
             }
             break;
