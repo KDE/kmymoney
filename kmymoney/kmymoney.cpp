@@ -1222,6 +1222,8 @@ public:
             break;
 
         case eKMyMoney::FileAction::Saved:
+            // clear the dirty flag
+            MyMoneyFile::instance()->setDirty(false);
             q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
             q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
             m_autoSaveTimer->stop();
