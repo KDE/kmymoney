@@ -6,7 +6,7 @@ add_library(csvimport_testcommon STATIC
 
 target_link_libraries(csvimport_testcommon
   PUBLIC
-  Qt5::Core
+  Qt::Core
   kmm_mymoney
 )
 
@@ -15,7 +15,7 @@ ecm_add_tests(${tests_sources}
   NAME_PREFIX
     "csvimport-"
   LINK_LIBRARIES
-    Qt5::Test
+    Qt::Test
     kmm_csvimportercore
     csvimport_testcommon
 )

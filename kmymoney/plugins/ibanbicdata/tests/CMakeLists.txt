@@ -5,6 +5,6 @@ ecm_add_tests(${tests_sources}
   NAME_PREFIX
     "ibanandbic-"
   LINK_LIBRARIES
-    Qt5::Test
+    Qt::Test
     kmm_mymoney
 )

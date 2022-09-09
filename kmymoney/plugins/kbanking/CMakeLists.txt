@@ -48,7 +48,7 @@ target_link_libraries(kbanking
                       kmm_plugin
                       KF5::ConfigCore
                       KF5::ConfigGui
-                      Qt5::Core
+                      Qt::Core
                       Alkimia::alkimia
                       gwenhywfar::core
                       gwenhywfar::gui-cpp

@@ -5,7 +5,7 @@ ecm_add_tests(${tests_sources}
   NAME_PREFIX
    payeeidentifier
   LINK_LIBRARIES
-    Qt5::Test
+    Qt::Test
     kmm_payeeidentifier
     kmm_mymoney
 )

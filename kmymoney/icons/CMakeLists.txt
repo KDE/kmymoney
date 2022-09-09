@@ -33,7 +33,7 @@ qt5_add_resources(icons_SOURCES kmm_icons.qrc)
 add_library(kmm_icons ${icons_SOURCES})
 
 generate_export_header(kmm_icons)
-target_link_libraries(kmm_icons PRIVATE Qt5::Core Qt5::Gui)
+target_link_libraries(kmm_icons PRIVATE Qt::Core Qt::Gui)
 
 set_target_properties(kmm_icons PROPERTIES
   VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}

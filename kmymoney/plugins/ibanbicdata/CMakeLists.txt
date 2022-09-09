@@ -18,6 +18,6 @@ target_link_libraries(ibanbicdata
   PUBLIC
     kmm_plugin
   PRIVATE
-    Qt5::Sql
+    Qt::Sql
     KF5::I18n
 )

@@ -23,13 +23,13 @@ add_library(kmm_plugin ${kmm_plugin_LIB_SRCS})
 generate_export_header(kmm_plugin BASE_NAME kmm_plugin)
 target_link_libraries(kmm_plugin
   PUBLIC
-    Qt5::Core
+    Qt::Core
     KF5::XmlGui
   PRIVATE
     KF5::KCMUtils
     KF5::KIOWidgets
-    Qt5::Gui
-    Qt5::Widgets
+    Qt::Gui
+    Qt::Widgets
   INTERFACE
     kmm_mymoney
 )

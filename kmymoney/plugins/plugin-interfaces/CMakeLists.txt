@@ -13,7 +13,7 @@ target_link_libraries(interfaces
     KF5::Service
     KF5::XmlGui
     Alkimia::alkimia
-    Qt5::Xml
+    Qt::Xml
     KF5::I18n
     onlinetask_interfaces
 )

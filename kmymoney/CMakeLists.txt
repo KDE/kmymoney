@@ -64,7 +64,7 @@ add_library(kmymoney_common STATIC ${kmymoney_common_SRCS})
 
 target_link_libraries(kmymoney_common
   PUBLIC
-    Qt5::Core
+    Qt::Core
     KF5::ConfigGui
     KF5::WidgetsAddons
     KF5::KIOCore
@@ -164,12 +164,12 @@ target_link_libraries(kmymoney
   kmm_mymoney
   interfaces
   kmm_plugin
-  Qt5::Core
+  Qt::Core
   KF5::ConfigGui
   KF5::WidgetsAddons
   KF5::CoreAddons
   kmm_templates
-  $<$<BOOL:${USE_MODELTEST}>:Qt5::Test>
+  $<$<BOOL:${USE_MODELTEST}>:Qt::Test>
   $<$<BOOL:${ENABLE_HOLIDAYS}>:KF5::Holidays>
   $<$<BOOL:${ENABLE_ACTIVITIES}>:KF5::Activities>
   PRIVATE

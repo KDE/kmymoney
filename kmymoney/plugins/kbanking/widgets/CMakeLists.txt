@@ -20,8 +20,8 @@ ki18n_wrap_ui(kbanking_widgets_la_SOURCES ${kbanking_widgets_UI})
 add_library(kbanking_widgets STATIC ${kbanking_widgets_la_SOURCES})
 
 target_link_libraries(kbanking_widgets
-  Qt5::Widgets
-  Qt5::QuickWidgets
+  Qt::Widgets
+  Qt::QuickWidgets
   aqbanking::aqbanking
   KF5::I18n
   KF5::ConfigCore

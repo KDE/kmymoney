@@ -40,8 +40,8 @@ add_library(kmm_templates ${kmm_templates_SOURCES})
 #  KF5::Completion
 #  KF5::Notifications
 #  KF5::ItemViews
-#  Qt5::Gui
-#  Qt5::Core
+#  Qt::Gui
+#  Qt::Core
 #  Alkimia::alkimia
 #  kmm_mymoney
 

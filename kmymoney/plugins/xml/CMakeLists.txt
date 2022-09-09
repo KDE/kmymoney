@@ -17,7 +17,7 @@ target_link_libraries(xmlstorage
   PUBLIC
     kmm_plugin
   PRIVATE
-    Qt5::Xml
+    Qt::Xml
     KF5::Archive
     KF5::I18n
     KF5::CoreAddons

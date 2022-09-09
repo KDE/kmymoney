@@ -21,7 +21,7 @@ add_library(kmm_models ${libmodels_a_SOURCES})
 generate_export_header(kmm_models BASE_NAME kmm_models)
 
 target_link_libraries(kmm_models PUBLIC
-    Qt5::Core
+    Qt::Core
     kmm_mymoney
     kmm_settings
     kmymoney_common
@@ -32,7 +32,7 @@ set_target_properties(kmm_models PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION
 
 if (USE_MODELTEST)
   target_compile_definitions(kmm_models PRIVATE -DKMM_MODELTEST)
-  target_link_libraries(kmm_models PRIVATE Qt5::Test)
+  target_link_libraries(kmm_models PRIVATE Qt::Test)
 endif()
 
 add_dependencies(kmm_models kmm_settings)

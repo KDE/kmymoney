@@ -69,14 +69,14 @@ add_library(kmm_selections ${kmm_selections_SRCS})
 
 target_link_libraries( kmm_utils_validators
   PUBLIC
-  Qt5::Core
-  Qt5::Gui
+  Qt::Core
+  Qt::Gui
 )
 
 target_link_libraries( kmm_webconnect
   PUBLIC
-    Qt5::Core
-    Qt5::Network
+    Qt::Core
+    Qt::Network
     KF5::ConfigCore
     KF5::Service
     KF5::Codecs
@@ -91,29 +91,29 @@ target_link_libraries( kmm_webconnect
 
 target_link_libraries( kmm_utils_platformtools
   PUBLIC
-  Qt5::Core
+  Qt::Core
 )
 
 target_link_libraries( kmm_url
   PUBLIC
-  Qt5::Core
+  Qt::Core
 )
 
 target_link_libraries( kmm_textbrowser
   PUBLIC
-  Qt5::Core
-  Qt5::Widgets
+  Qt::Core
+  Qt::Widgets
 )
 
 target_link_libraries(kmm_printer
   PUBLIC
-  Qt5::Core
-  Qt5::PrintSupport
+  Qt::Core
+  Qt::PrintSupport
 )
 
 target_link_libraries( kmm_selections
   PUBLIC
-  Qt5::Core
+  Qt::Core
 )
 
 
@@ -148,7 +148,7 @@ add_library(kmm_gpgfile ${kmm_gpgfile_SRCS})
 
 target_link_libraries( kmm_gpgfile
   PUBLIC
-  Qt5::Core
+  Qt::Core
   $<$<BOOL:${WIN32}>:${KDEWIN_LIBRARIES}>
   $<$<BOOL:${Gpgmepp_FOUND}>:Gpgmepp>
   $<$<BOOL:${KF5Gpgmepp_FOUND}>:KF5::Gpgmepp>

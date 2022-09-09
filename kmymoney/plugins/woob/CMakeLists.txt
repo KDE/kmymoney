@@ -25,5 +25,5 @@ target_link_libraries(
   kmm_mymoney
   kmm_widgets
   kmm_plugin
-  Qt5::Concurrent
+  Qt::Concurrent
 )

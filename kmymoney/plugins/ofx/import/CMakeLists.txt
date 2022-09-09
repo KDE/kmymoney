@@ -30,7 +30,7 @@ target_link_libraries(ofximporter
   kmm_widgets
   kmm_plugin
   KF5::Wallet
-  Qt5::Xml
+  Qt::Xml
   Alkimia::alkimia
   PkgConfig::LIBOFX
 )

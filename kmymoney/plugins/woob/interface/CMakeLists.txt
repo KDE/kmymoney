@@ -10,7 +10,7 @@ add_library(woob_interface STATIC ${woob_interface_SOURCES})
 target_link_libraries (
   woob_interface
   PUBLIC
-  Qt5::Core
+  Qt::Core
   Alkimia::alkimia
   PRIVATE
   ${Python3_LIBRARIES}

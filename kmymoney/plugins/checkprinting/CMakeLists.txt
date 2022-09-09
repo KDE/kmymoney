@@ -16,7 +16,7 @@ qt5_add_resources(checkprinting_PART_SRCS checkprinting.qrc)
 kmymoney_add_plugin(checkprinting SOURCES ${checkprinting_PART_SRCS})
 
 target_link_libraries(checkprinting
-  Qt5::PrintSupport
+  Qt::PrintSupport
   KF5::I18n
   checkprinting_settings_static
   kmm_mymoney
@@ -40,7 +40,7 @@ target_link_libraries(
                       kcm_checkprinting
                       checkprinting_settings_static
                       kmm_url
-                      Qt5::PrintSupport
+                      Qt::PrintSupport
                       KF5::I18n
                       KF5::ConfigWidgets
                       KF5::Completion

@@ -169,10 +169,10 @@ target_link_libraries(kmm_widgets PUBLIC
   KF5::ConfigCore
   KF5::ItemModels
   KF5::Service
-  Qt5::Gui
-  Qt5::Core
-  Qt5::Widgets
-  Qt5::Xml
+  Qt::Gui
+  Qt::Core
+  Qt::Widgets
+  Qt::Xml
   Alkimia::alkimia
   converter
   kmm_mymoney

@@ -78,7 +78,7 @@ add_library(views STATIC ${libviews_a_SOURCES})
 target_link_libraries( views PUBLIC
   newaccountwizard
   KF5::TextWidgets
-  Qt5::PrintSupport
+  Qt::PrintSupport
   kmm_base_dialogs
   kmm_mymoney # needed to load payeeIdentifier
   kmm_widgets

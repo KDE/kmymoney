@@ -116,9 +116,9 @@ generate_export_header(kmm_mymoney BASE_NAME kmm_mymoney)
 target_link_libraries(kmm_mymoney
                       PUBLIC
                       kmm_icons
-                      Qt5::Xml
-                      Qt5::Core
-                      Qt5::Gui
+                      Qt::Xml
+                      Qt::Core
+                      Qt::Gui
                       KF5::Service
                       KF5::I18n
                       KF5::ItemModels
@@ -130,7 +130,7 @@ target_link_libraries(kmm_mymoney
                       KF5::XmlGui
                       PRIVATE
                       onlinetask_interfaces
-                      $<$<BOOL:${USE_MODELTEST}>:Qt5::Test>
+                      $<$<BOOL:${USE_MODELTEST}>:Qt::Test>
 )
 
 if(ENABLE_ADDRESSBOOK)

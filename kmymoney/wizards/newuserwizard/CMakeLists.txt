@@ -31,8 +31,8 @@ target_link_libraries(newuserwizard
     KF5::TextWidgets
     KF5::Completion
     KF5::ConfigWidgets
-    Qt5::Widgets
-    Qt5::Xml
+    Qt::Widgets
+    Qt::Xml
     Alkimia::alkimia
     kmm_mymoney
     kmm_wizard

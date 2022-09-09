@@ -20,7 +20,7 @@ target_link_libraries(reports
   PUBLIC
     KChart
     Alkimia::alkimia
-    Qt5::PrintSupport
+    Qt::PrintSupport
     kmymoney_common
     kmm_settings
     PRIVATE

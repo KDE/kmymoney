@@ -17,8 +17,8 @@ add_library(woob_dialogs STATIC ${woob_dialogs_la_SOURCES})
 target_link_libraries (
   woob_dialogs
   PRIVATE
-  Qt5::Concurrent
-  Qt5::Widgets
+  Qt::Concurrent
+  Qt::Widgets
   KF5::WidgetsAddons
   KF5::I18n
   Alkimia::alkimia

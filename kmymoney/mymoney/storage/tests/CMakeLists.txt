@@ -8,10 +8,10 @@ list(REMOVE_ITEM tests_sources ${CMAKE_CURRENT_SOURCE_DIR}/mymoneystoragemgr-tes
 
 ecm_add_tests(${tests_sources}
   LINK_LIBRARIES
-    Qt5::Core
-    Qt5::Test
-    Qt5::Xml
-    Qt5::Gui
+    Qt::Core
+    Qt::Test
+    Qt::Xml
+    Qt::Gui
     kmm_mymoney
     kmm_testutils
     kmm_utils_platformtools

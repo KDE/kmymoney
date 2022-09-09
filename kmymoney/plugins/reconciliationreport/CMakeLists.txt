@@ -14,7 +14,7 @@ ki18n_wrap_ui(reconciliationreport_PART_SRCS kreconciliationreportdlgdecl.ui )
 kmymoney_add_plugin(reconciliationreport SOURCES ${reconciliationreport_PART_SRCS})
 
 target_link_libraries(reconciliationreport
-  Qt5::PrintSupport
+  Qt::PrintSupport
   kmm_mymoney
   kmymoney_common
   kmm_plugin

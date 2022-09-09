@@ -31,7 +31,7 @@ target_compile_definitions(qsqlcipher
 target_link_libraries(qsqlcipher
   PRIVATE
     PkgConfig::SQLCIPHER
-    Qt5::SqlPrivate
+    Qt::SqlPrivate
 )
 
 if(BUILD_TESTING)

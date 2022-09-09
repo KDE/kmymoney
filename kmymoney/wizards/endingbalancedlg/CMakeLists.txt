@@ -24,8 +24,8 @@ target_link_libraries(endingbalancedlg
         KF5::WidgetsAddons
         KF5::I18n
         KF5::Completion
-        Qt5::Widgets
-        Qt5::Xml
+        Qt::Widgets
+        Qt::Xml
         Alkimia::alkimia
         kmm_base_widgets
     )

@@ -11,8 +11,8 @@ ecm_add_tests(${tests_sources}
   NAME_PREFIX
     "reports-"
   LINK_LIBRARIES
-    Qt5::Core
-    Qt5::Test
+    Qt::Core
+    Qt::Test
     reports
     kmm_mymoney
     kmm_testutilities
@@ -21,7 +21,7 @@ ecm_add_tests(${tests_sources}
 add_executable(reports-chart-test chart-test.cpp)
 target_link_libraries(reports-chart-test
   reports
-  Qt5::Core
-  Qt5::Gui
-  Qt5::Test
+  Qt::Core
+  Qt::Gui
+  Qt::Test
 )

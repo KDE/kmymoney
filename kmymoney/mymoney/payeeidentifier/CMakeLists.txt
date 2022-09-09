@@ -17,8 +17,8 @@ set_target_properties(kmm_payeeidentifier PROPERTIES VERSION ${PROJECT_VERSION} 
 generate_export_header( kmm_payeeidentifier )
 
 target_link_libraries( kmm_payeeidentifier
-  Qt5::Core
-  Qt5::Xml
+  Qt::Core
+  Qt::Xml
 )
 
 target_include_directories( kmm_payeeidentifier PUBLIC

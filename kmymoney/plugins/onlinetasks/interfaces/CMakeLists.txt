@@ -21,7 +21,7 @@ add_library(onlinetask_interfaces ${onlinetask_interfaces_SRCS})
 target_link_libraries( onlinetask_interfaces
   PUBLIC
     kmm_payeeidentifier
-    Qt5::Widgets
+    Qt::Widgets
     Alkimia::alkimia
 )
 

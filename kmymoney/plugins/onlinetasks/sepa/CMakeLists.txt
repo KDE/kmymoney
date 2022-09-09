@@ -26,9 +26,9 @@ target_link_libraries( konlinetasks_sepa_interface
   kmm_base_widgets
   kmm_plugin
   onlinetask_interfaces
-  Qt5::Xml
-  Qt5::Core
-  Qt5::Gui
+  Qt::Xml
+  Qt::Core
+  Qt::Gui
 )
 
 target_link_libraries(konlinetasks_sepa

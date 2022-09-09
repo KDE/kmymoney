@@ -10,7 +10,7 @@ add_library(sqlstoragestatic STATIC ${sqlstoragestatic_SOURCES} )
 kde_target_enable_exceptions(sqlstoragestatic PUBLIC)
 target_link_libraries(sqlstoragestatic
 PUBLIC
-  Qt5::Sql
+  Qt::Sql
   KF5::CoreAddons
   kmm_plugin
   kmm_widgets
@@ -28,7 +28,7 @@ list(REMOVE_ITEM tests_sources ${CMAKE_CURRENT_SOURCE_DIR}/mymoneydatabasemgr-te
 ecm_add_tests(${tests_sources}
   LINK_LIBRARIES
     sqlstoragestatic
-    Qt5::Test
+    Qt::Test
     kmm_testutils
     kmm_plugin
     kmm_widgets

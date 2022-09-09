@@ -8,7 +8,7 @@ set(mymoneystoragexml_SOURCES
 add_library(mymoneystoragexml STATIC ${mymoneystoragexml_SOURCES})
 target_link_libraries(mymoneystoragexml
   PUBLIC
-    Qt5::Xml
+    Qt::Xml
     KF5::I18n
     onlinetask_interfaces
     kmm_mymoney
@@ -19,7 +19,7 @@ target_link_libraries(mymoneystoragexml
 file(GLOB tests_sources "*-test.cpp")
 ecm_add_tests(${tests_sources}
   LINK_LIBRARIES
-    Qt5::Test
+    Qt::Test
     mymoneystoragexml
     kmm_testutilities
 )
