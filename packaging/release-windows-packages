@@ -26,7 +26,7 @@ ROOT64=windows\:mingw\:win64
 ARCHOUT64=x86_64-w64-mingw32
 use64=1
 
-REPO=openSUSE_Leap_42.3
+REPO=openSUSE_Leap_15.3
 SRCREPO=$REPO
 usesrc=0
 
@@ -107,12 +107,12 @@ function download() {
 	cd work
 	rm -rf binaries
 	if test $use32 -eq 1; then
-		osc $oscoptions getbinaries --multibuild-package=$PACKAGENAME32-installer $ROOT32 $PACKAGENAME32 $REPO x86_64
+		osc $oscoptions getbinaries $ROOT32 $PACKAGENAME32:$PACKAGENAME32-installer $REPO x86_64
 		VERSION=$(find binaries/ -name "*$PACKAGENAME32-setup*" | sed "s,^.*$PACKAGENAME32-setup-,,g;s,-.*$,,g")
 		echo $VERSION > VERSION
 	fi
 	if test $use64 -eq 1; then
-		osc $oscoptions getbinaries --multibuild-package=$PACKAGENAME64-installer $ROOT64 $PACKAGENAME64 $REPO x86_64
+		osc $oscoptions getbinaries $ROOT64 $PACKAGENAME64:$PACKAGENAME64-installer $REPO x86_64
 		VERSION=$(find binaries/ -name "*$PACKAGENAME64-setup*" | sed "s,^.*$PACKAGENAME64-setup-,,g;s,-.*$,,g")
 		echo $VERSION > VERSION
 	fi
@@ -169,9 +169,10 @@ function movepackage() {
 	cd work
 	rm -rf out
 	mkdir -p out
-	find tmp/ -type f -name '*.exe' -exec cp {} out \;
-	find tmp/ -type f -name '*.7z' -exec cp {} out \;
-	find tmp/ -type f -name '*.xz' -exec cp {} out \;
+	for i in $(find tmp/ -type f -name '*.exe' -o -name '*.7z' -o -name '*.xz'); do
+		on=$(basename $i | sed  's,lp..,,g');
+		cp $i out/$on
+	done
 	cd ..
 	touch $1.finished
 }
