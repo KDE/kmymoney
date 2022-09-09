@@ -356,7 +356,7 @@ MyMoneyMoney ObjectInfoTable::investmentBalance(const MyMoneyAccount& acc)
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneyMoney value = file->balance(acc.id());
 
-    foreach (const auto sAccount, acc.accountList()) {
+    Q_FOREACH (const auto sAccount, acc.accountList()) {
         auto stock = file->account(sAccount);
         try {
             MyMoneyMoney val;

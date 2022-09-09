@@ -216,7 +216,7 @@ void kOnlineTransferForm::accountChanged()
         ui->orderAccountBalance->setText("");
     }
 
-    foreach (IonlineJobEdit* widget, m_onlineJobEditWidgets)
+    Q_FOREACH (IonlineJobEdit* widget, m_onlineJobEditWidgets)
         widget->setOriginAccount(accountId);
 
     checkNotSupportedWidget();
@@ -297,7 +297,7 @@ void kOnlineTransferForm::setJobReadOnly(const bool& readOnly)
 bool kOnlineTransferForm::showEditWidget(const QString& onlineTaskName)
 {
     int index = 0;
-    foreach (IonlineJobEdit* widget, m_onlineJobEditWidgets) {
+    Q_FOREACH (IonlineJobEdit* widget, m_onlineJobEditWidgets) {
         if (widget->supportedOnlineTasks().contains(onlineTaskName)) {
             ui->transferTypeSelection->setCurrentIndex(index);
             showEditWidget(widget);

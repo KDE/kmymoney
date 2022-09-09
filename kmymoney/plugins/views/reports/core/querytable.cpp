@@ -304,7 +304,7 @@ void QueryTable::constructTotalRows()
     QMap<cellTypeE, MyMoneyMoney> totalsValues;
 
     // initialize all total values under summed columns to be zero
-    foreach (auto subtotal, subtotals) {
+    Q_FOREACH (auto subtotal, subtotals) {
         totalsValues.insert(subtotal, MyMoneyMoney());
     }
     totalsValues.insert(ctRowsCount, MyMoneyMoney());
@@ -330,7 +330,7 @@ void QueryTable::constructTotalRows()
         // sum all subtotal values for lowest group
         QString currencyID = m_rows.at(iCurrentRow).value(ctCurrency);
         if (m_rows.at(iCurrentRow).value(ctRank) == QLatin1String("1")) { // don't sum up on balance (rank = 0 || rank = 3) and minor split (rank = 2)
-            foreach (auto subtotal, subtotals) {
+            Q_FOREACH (auto subtotal, subtotals) {
                 if (!totalCurrency.contains(currencyID))
                     totalCurrency[currencyID].append(totalGroups);
                 totalCurrency[currencyID].last()[subtotal] += MyMoneyMoney(m_rows.at(iCurrentRow)[subtotal]);
@@ -369,7 +369,7 @@ void QueryTable::constructTotalRows()
                     }
 
                     // custom total values calculations
-                    foreach (auto subtotal, subtotals) {
+                    Q_FOREACH (auto subtotal, subtotals) {
                         if (subtotal == ctReturnInvestment)
                             totalsRow[subtotal] = helperROI((*currencyGrp).at(i + 1).value(ctBuys) - (*currencyGrp).at(i + 1).value(ctReinvestIncome), (*currencyGrp).at(i + 1).value(ctSells),
                                                             (*currencyGrp).at(i + 1).value(ctStartingBalance), (*currencyGrp).at(i + 1).value(ctEndingBalance) + (*currencyGrp).at(i + 1).value(ctMarketValue),
@@ -387,7 +387,7 @@ void QueryTable::constructTotalRows()
                         for (int j = 0; j < stashedTotalRows.count(); ++j) {
                             if (stashedTotalRows.at(j).value(ctCurrency) != currencyID)
                                 continue;
-                            foreach (auto subtotal, subtotals) {
+                            Q_FOREACH (auto subtotal, subtotals) {
                                 if (subtotal == ctReturn)
                                     totalsRow[ctReturn] = stashedTotalRows.takeAt(j)[ctReturn];
                             }
@@ -430,7 +430,7 @@ void QueryTable::constructTotalRows()
                     ++grandTotalGrp;
                 }
 
-                foreach (auto subtotal, subtotals) {
+                Q_FOREACH (auto subtotal, subtotals) {
                     if (subtotal == ctReturnInvestment) {
                         totalsRow[subtotal] = helperROI((*currencyGrp).at(0).value(ctBuys) - (*currencyGrp).at(0).value(ctReinvestIncome), (*currencyGrp).at(0).value(ctSells),
                                                         (*currencyGrp).at(0).value(ctStartingBalance), (*currencyGrp).at(0).value(ctEndingBalance) + (*currencyGrp).at(0).value(ctMarketValue),
@@ -448,7 +448,7 @@ void QueryTable::constructTotalRows()
 
                 if (!stashedTotalRows.isEmpty()) {
                     for (int j = 0; j < stashedTotalRows.count(); ++j) {
-                        foreach (auto subtotal, subtotals) {
+                        Q_FOREACH (auto subtotal, subtotals) {
                             if (subtotal == ctReturn)
                                 totalsRow[ctReturn] = stashedTotalRows.takeAt(j)[ctReturn];
                         }
@@ -754,7 +754,7 @@ void QueryTable::constructTransactionTable()
                     tagIdListCache = tagIdList;
                 } else {
                     QString delimiter;
-                    foreach(const auto tagId, tagIdList) {
+                    Q_FOREACH(const auto tagId, tagIdList) {
                         qA[ctTag] += delimiter + file->tag(tagId).name().simplified();
                         delimiter = QLatin1Char(',');
                     }
@@ -934,7 +934,7 @@ void QueryTable::constructTransactionTable()
                                             qA[ctTag] = i18n("[No Tag]");
                                         } else {
                                             QString delimiter;
-                                            foreach(const auto tagId, tagIdListCache) {
+                                            Q_FOREACH(const auto tagId, tagIdListCache) {
                                                 qA[ctTag] += delimiter + file->tag(tagId).name().simplified();
                                                 delimiter = QLatin1Char(',');
                                             }
@@ -985,7 +985,7 @@ void QueryTable::constructTransactionTable()
                             qS[ctTag] = i18n("[No Tag]");
                         } else {
                             QString delimiter;
-                            foreach(const auto tagId, tagIdList) {
+                            Q_FOREACH(const auto tagId, tagIdList) {
                                 qS[ctTag] += delimiter + file->tag(tagId).name().simplified();
                                 delimiter = QLatin1Char(',');
                             }
@@ -1315,7 +1315,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
                 }
                 if (transactionType == eMyMoney::Split::InvestmentTransactionType::ReinvestDividend) {
                     value = MyMoneyMoney();
-                    foreach (const auto split, interestSplits)
+                    Q_FOREACH (const auto split, interestSplits)
                         value += split.value();
                     value *= price;
                     cfList[ReinvestIncome].append(CashFlowListItem(postDate, -value));
@@ -1348,7 +1348,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
         file->transactionList(transactions, report);
         shList[BuysOfOwned] = shList[LongTermBuysOfSells];
 
-        foreach (const auto transaction, transactions) {
+        Q_FOREACH (const auto transaction, transactions) {
             MyMoneySplit shareSplit = transaction.splitByAccount(account.id());
             MyMoneySplit assetAccountSplit;
             QList<MyMoneySplit> feeSplits;
@@ -1875,7 +1875,7 @@ void QueryTable::constructSplitsTable()
 
             //FIXME-ALEX Is this useless? Isn't constructSplitsTable called only for cashflow type report?
             QString delimiter;
-            foreach(const auto tagId, tagIdList) {
+            Q_FOREACH(const auto tagId, tagIdList) {
                 qA[ctTag] += delimiter + file->tag(tagId).name().simplified();
                 delimiter = QLatin1Char(',');
             }

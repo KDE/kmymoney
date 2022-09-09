@@ -95,7 +95,7 @@ void MyMoneyContact::searchContactResult(KJob *job)
         items = contactJob->items();
     ContactData contactData;
     contactData.email = job->property("MyMoneyContact_email").toString();
-    foreach (const Akonadi::Item &item, items) {
+    Q_FOREACH (const Akonadi::Item &item, items) {
         const KContacts::Addressee &contact = item.payload<KContacts::Addressee>();
         if (contact.emails().contains(contactData.email)) {
             KContacts::PhoneNumber phone;
@@ -108,8 +108,8 @@ void MyMoneyContact::searchContactResult(KJob *job)
                                                                  KContacts::PhoneNumber::Home | KContacts::PhoneNumber::Pref,
                                                                  KContacts::PhoneNumber::Home,
                                                                 };
-                foreach (auto type,  typesList) {
-                    foreach (auto phn, phones) {
+                Q_FOREACH (auto type,  typesList) {
+                    Q_FOREACH (auto phn, phones) {
                         if (phn.type() & type) {
                             phone = phn;
                             break;
@@ -133,8 +133,8 @@ void MyMoneyContact::searchContactResult(KJob *job)
                                                              KContacts::Address::Home | KContacts::Address::Pref,
                                                              KContacts::Address::Home,
                                                             };
-                foreach (auto type,  typesList) {
-                    foreach (auto addr, addresses) {
+                Q_FOREACH (auto type,  typesList) {
+                    Q_FOREACH (auto addr, addresses) {
                         if (addr.type() & type) {
                             address = addr;
                             break;

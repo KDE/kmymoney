@@ -155,7 +155,7 @@ void CsvWriter::writeCategoryEntry(QTextStream &s, const QString& accountId, con
     s << (acc.accountGroup() == eMyMoney::Account::Type::Expense ? QLatin1Char('E') : QLatin1Char('I'));
     s << Qt::endl;
 
-    foreach (const auto sAccount, acc.accountList())
+    Q_FOREACH (const auto sAccount, acc.accountList())
         writeCategoryEntry(s, sAccount, name);
 }
 
@@ -243,7 +243,7 @@ void CsvWriter::extractInvestmentEntries(const QString& accountId, const QDate& 
 {
     MyMoneyFile* file = MyMoneyFile::instance();
 
-    foreach (const auto sAccount, file->account(accountId).accountList()) {
+    Q_FOREACH (const auto sAccount, file->account(accountId).accountList()) {
         MyMoneyTransactionFilter filter(sAccount);
         filter.setDateFilter(startDate, endDate);
         QList<MyMoneyTransaction> list;

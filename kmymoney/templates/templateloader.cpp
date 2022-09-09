@@ -380,7 +380,7 @@ bool TemplateLoader::importTemplate(const MyMoneyTemplate& tmpl)
      */
     QList<MyMoneyAccount> accountList;
     file->accountList(accountList);
-    foreach (MyMoneyAccount acc, accountList) {
+    Q_FOREACH (MyMoneyAccount acc, accountList) {
         if (!acc.pairs().contains("UnresolvedVatAccount"))
             continue;
         QString id = acc.value("UnresolvedVatAccount");

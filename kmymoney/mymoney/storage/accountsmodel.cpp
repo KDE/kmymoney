@@ -807,7 +807,7 @@ void AccountsModel::clearModelItems()
     // create the account groups with favorite entry as the first thing
     int row = 0;
     insertRows(0, static_cast<int>(eMyMoney::Account::Standard::MaxGroups));
-    foreach(auto baseAccount, d->defaults) {
+    Q_FOREACH(auto baseAccount, d->defaults) {
         MyMoneyAccount account;
         account.setName(i18n(baseAccount.description));
         account.setAccountType(baseAccount.accountType);

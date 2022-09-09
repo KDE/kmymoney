@@ -113,7 +113,7 @@ void KMyMoneyMVCCombo::setSubstringSearchForChildren(QWidget*const widget, bool 
     Q_CHECK_PTR(widget);
     QList<KMyMoneyMVCCombo *> comboList;
     comboList = widget->findChildren<KMyMoneyMVCCombo *>();
-    foreach (KMyMoneyMVCCombo *combo, comboList) {
+    Q_FOREACH (KMyMoneyMVCCombo *combo, comboList) {
         combo->setSubstringSearch(enabled);
     }
 }

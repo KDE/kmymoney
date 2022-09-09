@@ -113,7 +113,7 @@ void MyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, con
     // the list of all incomes
     assetAccountSplit = MyMoneySplit(); // set to none to check later if it was assigned
     auto file = MyMoneyFile::instance();
-    foreach (const auto tsplit, transaction.splits()) {
+    Q_FOREACH (const auto tsplit, transaction.splits()) {
         auto acc = file->account(tsplit.accountId());
         if (tsplit.id() == split.id()) {
             security = file->security(acc.currencyId());

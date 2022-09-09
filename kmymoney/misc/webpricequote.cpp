@@ -831,7 +831,7 @@ const QStringList WebPriceQuote::quoteSourcesNative()
 
     // if the user has OLD quote source based only on symbols (and not ISIN)
     // now is the time to convert it to the new system.
-    foreach (const auto group, groups) {
+    Q_FOREACH (const auto group, groups) {
         KConfigGroup grp = kconfig->group(QString(QLatin1String("Online-Quote-Source-%1")).arg(group));
         if (grp.hasKey("SymbolRegex")) {
             grp.writeEntry("IDRegex", grp.readEntry("SymbolRegex"));

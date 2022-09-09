@@ -46,7 +46,7 @@ public:
         // extract the payee id
         auto payeeId = m_split.payeeId();
         if(payeeId.isEmpty()) {
-            foreach (const auto split, m_transaction.splits()) {
+            Q_FOREACH (const auto split, m_transaction.splits()) {
                 if(!split.payeeId().isEmpty()) {
                     payeeId = split.payeeId();
                     break;
@@ -67,7 +67,7 @@ public:
 
             // ... exactly two splits ...
         } else if(m_transaction.splitCount() == 2) {
-            foreach (const auto split, m_transaction.splits()) {
+            Q_FOREACH (const auto split, m_transaction.splits()) {
                 if(split.id() != m_split.id()) {
                     m_counterAccountId = split.accountId();
                     m_counterAccount = MyMoneyFile::instance()->accountToCategory(m_counterAccountId);

@@ -70,7 +70,7 @@ void KGpgKeySelectionDlg::setSecretKeys(const QStringList& keyList, const QStrin
     Q_D(KGpgKeySelectionDlg);
     d->ui->m_secretKey->addItem(i18n("No encryption"));
 
-    foreach(auto key, keyList) {
+    Q_FOREACH(auto key, keyList) {
         QStringList fields = key.split(':', Qt::SkipEmptyParts);
         if (fields[0] != recoveryKeyId) {
             // replace parenthesis in name field with brackets

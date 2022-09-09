@@ -159,7 +159,7 @@ void SchedulesModel::clearModelItems()
     // create the type entries
     insertRows(0, types.count());
     int row = 0;
-    foreach(auto type, types) {
+    Q_FOREACH(auto type, types) {
         auto idx = index(row, 0);
         setData(idx, static_cast<int>(type.first), eMyMoney::Model::Roles::ScheduleTypeRole);
         setData(idx, type.second);
@@ -468,7 +468,7 @@ QList<MyMoneySchedule> SchedulesModel::scheduleList(const QString& accountId,
         if (!accountId.isEmpty()) {
             bool found = false;
             const MyMoneyTransaction& t = schedule.transaction();
-            foreach(const auto& split, t.splits()) {
+            Q_FOREACH(const auto& split, t.splits()) {
                 if (split.accountId() == accountId) {
                     found = true;
                     break;

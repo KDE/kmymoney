@@ -48,7 +48,7 @@ QVector<ListTable::cellTypeE> ListTable::TableRow::m_sortCriteria;
 bool ListTable::TableRow::operator< (const TableRow& _compare) const
 {
     bool result = false;
-    foreach (const auto criterion, m_sortCriteria) {
+    Q_FOREACH (const auto criterion, m_sortCriteria) {
         if (this->operator[](criterion) < _compare[criterion]) {
             result = true;
             break;
@@ -113,7 +113,7 @@ void ListTable::render(QString& result, QString& csv) const
     //
     // Table header
     //
-    foreach (const auto cellType, columns) {
+    Q_FOREACH (const auto cellType, columns) {
         result.append(QString::fromLatin1("<th>%1</th>").arg(tableHeader(cellType)));
         csv.append(tableHeader(cellType) + QLatin1Char(','));
     }
@@ -486,10 +486,10 @@ void ListTable::includeInvestmentSubAccounts()
         }
     }
 
-    foreach (const auto sAccount, accountIdList) {
+    Q_FOREACH (const auto sAccount, accountIdList) {
         auto acc = file->account(sAccount);
         if (acc.accountType() == eMyMoney::Account::Type::Investment) {
-            foreach (const auto sSubAccount, acc.accountList()) {
+            Q_FOREACH (const auto sSubAccount, acc.accountList()) {
                 if (!accountIdList.contains(sSubAccount)) {
                     subAccountsList.append(sSubAccount);
                 }
@@ -524,7 +524,7 @@ void ListTable::includeInvestmentSubAccounts()
         //Check each split for a matching account
         for (; it_t != transactions.constEnd(); ++it_t) {
             const QList<MyMoneySplit>& splits = (*it_t).splits();
-            foreach (const auto split, splits) {
+            Q_FOREACH (const auto split, splits) {
                 const QString& accountId = split.accountId();
                 if (!split.shares().isZero()
                         && subAccountsList.contains(accountId)) {

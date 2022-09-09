@@ -282,7 +282,7 @@ struct JournalModel::Private
     {
         accountCache.clear();
         const auto accountList = MyMoneyFile::instance()->accountsModel()->itemList();
-        foreach(const auto& acc, accountList) {
+        Q_FOREACH(const auto& acc, accountList) {
             accountCache[acc.id()] = acc;
         }
     }
@@ -809,7 +809,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
             // not sure if we want to replace it with the payeeId
             // of another split. Anyway, here would be the spot to do it
 #if 0
-            foreach (const auto sp, transaction.splits()) {
+            Q_FOREACH (const auto sp, transaction.splits()) {
                 if(split.id() != sp.id()) {
                     if (!split.payeeId().isEmpty())
 

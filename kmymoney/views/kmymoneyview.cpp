@@ -251,7 +251,7 @@ void KMyMoneyView::updateViewType()
         setFaceType(faceType);
         if (faceType == KPageView::Tree) {
             QList<QTreeView *> views = findChildren<QTreeView*>();
-            foreach (QTreeView * view, views) {
+            Q_FOREACH (QTreeView * view, views) {
                 if (view && (view->parent() == this)) {
                     view->setRootIsDecorated(false);
                     break;

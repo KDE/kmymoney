@@ -108,7 +108,7 @@ void InvestmentPage::initializePage()
         it.value()->setCurrentIndex(m_profile->m_colTypeNum.value(it.key()));
 
     ui->m_priceFraction->blockSignals(true);
-    foreach (const auto priceFraction, m_imp->m_priceFractions)
+    Q_FOREACH (const auto priceFraction, m_imp->m_priceFractions)
         ui->m_priceFraction->addItem(QString::number(priceFraction.toDouble(), 'g', 3));
     ui->m_priceFraction->blockSignals(false);
     ui->m_priceFraction->setCurrentIndex(m_profile->m_priceFraction);

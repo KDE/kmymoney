@@ -30,7 +30,7 @@ void ParseDataTest::cleanup()
 void ParseDataTest::parseSplitString()
 {
     QVector<FieldDelimiter> delimiters {FieldDelimiter::Comma, FieldDelimiter::Semicolon, FieldDelimiter::Colon, FieldDelimiter::Tab};
-    foreach (const auto delimiter, delimiters) { //        All four delimiters should produce same result
+    Q_FOREACH (const auto delimiter, delimiters) { //        All four delimiters should produce same result
         m_parse->setFieldDelimiter(delimiter);
 
         QString input = "abc,defgh,";//  When this string is QString::split(), two strings

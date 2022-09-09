@@ -709,7 +709,7 @@ void KReportsView::slotListContextMenu(const QPoint & p)
     }
 
     QList<TocItem*> tocItems;
-    foreach(auto item, items) {
+    Q_FOREACH(auto item, items) {
         auto tocItem = dynamic_cast<TocItem*>(item);
         if (tocItem && tocItem->isReport()) {
             tocItems.append(tocItem);
@@ -762,7 +762,7 @@ void KReportsView::slotOpenFromList()
         return;
     }
 
-    foreach(auto item, items) {
+    Q_FOREACH(auto item, items) {
         auto tocItem = dynamic_cast<TocItem*>(item);
         if (tocItem && tocItem->isReport()) {
             slotItemDoubleClicked(tocItem, 0);
@@ -780,7 +780,7 @@ void KReportsView::slotPrintFromList()
         return;
     }
 
-    foreach(auto item, items) {
+    Q_FOREACH(auto item, items) {
         auto tocItem = dynamic_cast<TocItem*>(item);
         if (tocItem && tocItem->isReport()) {
             slotItemDoubleClicked(tocItem, 0);

@@ -147,7 +147,7 @@ void CsvExportDlg::checkData(const QString& accountName)
         MyMoneyAccount accnt;
         if (account.accountType() == eMyMoney::Account::Type::Investment) {
             //  If this is Investment account, we need child account.
-            foreach (const auto sAccount, account.accountList()) {
+            Q_FOREACH (const auto sAccount, account.accountList()) {
                 accnt = file->account(sAccount);
                 MyMoneyTransactionFilter filter(accnt.id());
                 file->transactionList(listTrans, filter);

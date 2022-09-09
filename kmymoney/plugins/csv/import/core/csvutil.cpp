@@ -33,7 +33,7 @@ QStringList Parse::parseLine(const QString& data)
     QStringList listOut;
     const QStringList listIn = data.split(m_fieldDelimiter);  // firstly, split on m_fieldDelimiterCharacter
     QString cell;
-    foreach (const auto it, listIn) {
+    Q_FOREACH (const auto it, listIn) {
         cell.append(it);
         // detect where a "quoted" string has been erroneously split, because of a comma,
         // or in a value, a 'thousand separator' being mistaken for a field delimiter.
@@ -58,7 +58,7 @@ QStringList Parse::parseFile(const QString &buf)
     QString line;
     QStringList lines;
 
-    foreach (const auto chr, buf) {
+    Q_FOREACH (const auto chr, buf) {
         if (chr == m_textDelimiter) {
             line += chr;
             inQuotes = !inQuotes;

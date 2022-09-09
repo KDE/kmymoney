@@ -364,7 +364,7 @@ public:
                                 // make sure we have all 'starting balances' so that the autocalc works
                                 QMap<QString, MyMoneyMoney> balanceMap;
 
-                                foreach (const auto split, t.splits()) {
+                                Q_FOREACH (const auto split, t.splits()) {
                                     auto accountFromSplit = file->account(split.accountId());
                                     if (q->isForecastAccount(accountFromSplit)) {
                                         // collect all overdues on the first day
@@ -385,7 +385,7 @@ public:
                                 q->calculateAutoLoan(*it, t, balanceMap);
 
                                 // now add the splits to the balances
-                                foreach (const auto split, t.splits()) {
+                                Q_FOREACH (const auto split, t.splits()) {
                                     auto accountFromSplit = file->account(split.accountId());
                                     if (q->isForecastAccount(accountFromSplit)) {
                                         dailyBalances balance;

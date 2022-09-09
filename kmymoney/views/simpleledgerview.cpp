@@ -172,12 +172,12 @@ public:
         const auto subtrees = QVector<QModelIndex> ({ model->favoriteIndex(), model->assetIndex(), model->liabilityIndex() });
 
         bool stopAfterFirstAccount = false;
-        foreach(const auto startIdx, subtrees) {
+        Q_FOREACH(const auto startIdx, subtrees) {
             // retrieve all items in the current subtree
             auto indexes = model->match(model->index(0, 0, startIdx), Qt::DisplayRole, QString("*"), -1, Qt::MatchWildcard);
 
             // indexes now has a list of favorite accounts
-            foreach (const auto idx, indexes) {
+            Q_FOREACH (const auto idx, indexes) {
                 openLedger(idx.data(eMyMoney::Model::Roles::IdRole).toString(), false);
                 if (stopAfterFirstAccount) {
                     break;

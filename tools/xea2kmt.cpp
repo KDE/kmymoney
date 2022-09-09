@@ -211,7 +211,7 @@ QDebug operator <<(QDebug out, const TemplateAccount &a)
 QDebug operator <<(QDebug out, const TemplateAccount::PointerList &a)
 {
     out << "TemplateAccount::List(";
-    foreach(const TemplateAccount *account, a)
+    Q_FOREACH(const TemplateAccount *account, a)
         out << *account;
     out << ")";
     return out;
@@ -277,7 +277,7 @@ public:
         else
             list = accountsByParentID(id);
 
-        foreach(TemplateAccount *account, list)
+        Q_FOREACH(TemplateAccount *account, list)
         {
             if (account->m_type != "ROOT")
             {
@@ -369,7 +369,7 @@ public:
         else
             list = accountsByParentID(id);
 
-        foreach(TemplateAccount *account, list)
+        Q_FOREACH(TemplateAccount *account, list)
         {
             QString a;
             a.fill(' ', index);
@@ -389,7 +389,7 @@ QDebug operator <<(QDebug out, const TemplateFile &a)
         << "short description:" << a.shortDescription
         << "long description:" << a.longDescription
         << "accounts:";
-    foreach(const TemplateAccount &account, a.accounts)
+    Q_FOREACH(const TemplateAccount &account, a.accounts)
         out << account;
     out << ")";
     return out;
@@ -557,7 +557,7 @@ int convertFileStructure(const QString &indir, const QString &outdir)
     int result = 0;
 
     // process templates
-    foreach (const QString &file, files)
+    Q_FOREACH (const QString &file, files)
     {
         if (debug || verbose)
             qDebug() << "processing" << file;
@@ -568,7 +568,7 @@ int convertFileStructure(const QString &indir, const QString &outdir)
         outFileName.replace(inPath, outPath);
         outFileName.remove("acctchrt_");
         outFileName.replace(".gnucash-xea", ".kmt");
-        foreach(const QString &key, mapKeys)
+        Q_FOREACH(const QString &key, mapKeys)
         {
             if (outFileName.contains('/' + key + '/'))
                 outFileName = outFileName.replace('/' + key + '/', '/' + dirNameMap[key] + '/');

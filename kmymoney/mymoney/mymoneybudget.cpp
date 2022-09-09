@@ -242,7 +242,7 @@ MyMoneyMoney MyMoneyBudget::AccountGroup::balance() const
     Q_D(const AccountGroup);
     MyMoneyMoney balance;
 
-    foreach (const auto period, d->m_periods)
+    Q_FOREACH (const auto period, d->m_periods)
         balance += period.amount();
     return balance;
 }

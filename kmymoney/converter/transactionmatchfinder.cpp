@@ -126,7 +126,7 @@ bool TransactionMatchFinder::splitsPayeesMatchOrEmpty(const MyMoneySplit& split1
 
 void TransactionMatchFinder::findMatchingSplit(const MyMoneyTransaction& transaction, int amountVariation)
 {
-    foreach (const MyMoneySplit & split, transaction.splits()) {
+    Q_FOREACH (const MyMoneySplit & split, transaction.splits()) {
         if (splitsAreDuplicates(m_importedSplit, split, amountVariation)) {
             matchedTransaction.reset(new MyMoneyTransaction(transaction));
             matchedSplit.reset(new MyMoneySplit(split));

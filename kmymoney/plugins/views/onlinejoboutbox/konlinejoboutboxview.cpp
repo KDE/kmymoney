@@ -353,7 +353,7 @@ void KOnlineJobOutboxView::slotSendJobs()
 void KOnlineJobOutboxView::slotSendAllSendableJobs()
 {
     QList<onlineJob> validJobs;
-    foreach (const onlineJob& job, MyMoneyFile::instance()->onlineJobList()) {
+    Q_FOREACH (const onlineJob& job, MyMoneyFile::instance()->onlineJobList()) {
         if (job.isValid() && job.isEditable())
             validJobs.append(job);
     }
@@ -490,7 +490,7 @@ void KOnlineJobOutboxView::slotOnlineJobSend(QList<onlineJob> jobs)
     QMultiMap<QString, onlineJob> jobsByPlugin;
 
     // Sort jobs by online plugin & lock them
-    foreach (onlineJob job, jobs) {
+    Q_FOREACH (onlineJob job, jobs) {
         Q_ASSERT(!job.id().isEmpty());
         // find the provider
         const MyMoneyAccount originAcc = job.responsibleMyMoneyAccount();
@@ -508,7 +508,7 @@ void KOnlineJobOutboxView::slotOnlineJobSend(QList<onlineJob> jobs)
     const QList<QString>::iterator newEnd = std::unique(usedPlugins.begin(), usedPlugins.end());
     usedPlugins.erase(newEnd, usedPlugins.end());
 
-    foreach (const QString& pluginKey, usedPlugins) {
+    Q_FOREACH (const QString& pluginKey, usedPlugins) {
         QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p = d->m_onlinePlugins->constFind(pluginKey);
 
         if (it_p != d->m_onlinePlugins->constEnd()) {
@@ -526,7 +526,7 @@ void KOnlineJobOutboxView::slotOnlineJobSend(QList<onlineJob> jobs)
 
             // Save possible changes of the online job and remove lock
             MyMoneyFileTransaction fileTransaction;
-            foreach (onlineJob job, executedJobs) {
+            Q_FOREACH (onlineJob job, executedJobs) {
                 fileTransaction.restart();
                 job.setLock(false);
                 kmmFile->modifyOnlineJob(job);

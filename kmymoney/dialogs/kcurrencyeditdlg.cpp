@@ -128,7 +128,7 @@ public:
             }
         } else if (mode == RemoveSelected) {
             QList<QTreeWidgetItem*> currencyRows = ui->m_currencyList->selectedItems();
-            foreach(auto currencyRow, currencyRows) {
+            Q_FOREACH(auto currencyRow, currencyRows) {
                 MyMoneySecurity currency = currencyRow->data(0, Qt::UserRole).value<MyMoneySecurity>();
                 if (file->baseCurrency() != currency && !file->isReferenced(currency, skip))
                     KMyMoneyUtils::deleteSecurity(currency, q);
@@ -551,7 +551,7 @@ void KCurrencyEditDlg::slotAddCurrency()
         QMap<MyMoneySecurity, MyMoneyPrice> ancientCurrencies = file->ancientCurrencies();
         MyMoneyFileTransaction ft;
         QList<QTreeWidgetItem *> currencyRows = d->m_availableCurrencyDlg->selectedItems(); // get selected currencies from new dialog
-        foreach (auto currencyRow, currencyRows) {
+        Q_FOREACH (auto currencyRow, currencyRows) {
             MyMoneySecurity currency = currencyRow->data(0, Qt::UserRole).value<MyMoneySecurity>();
             file->addCurrency(currency);
             if (ancientCurrencies.value(currency, MyMoneyPrice()) != MyMoneyPrice()) { // if ancient currency is added...

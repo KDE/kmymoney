@@ -165,7 +165,7 @@ void PivotTable::init()
             m_config.isIncludingAveragePrice()) {
         QList<MyMoneyAccount> accounts;
         file->accountList(accounts);
-        foreach (const auto acc, accounts) {
+        Q_FOREACH (const auto acc, accounts) {
             if (acc.isInvest()) {
                 const ReportAccount repAcc(acc);
                 if (m_config.includes(repAcc)) {
@@ -295,7 +295,7 @@ void PivotTable::init()
 
                     //if the loan split is not included in the report, update the balance for the next occurrence
                     if (!m_config.includes(splitAccount)) {
-                        foreach (const auto txsplit, tx.splits()) {
+                        Q_FOREACH (const auto txsplit, tx.splits()) {
                             if (txsplit.isAmortizationSplit() && txsplit.accountId() == splitAccount.id())
                                 loanBalances[splitAccount.id()] = loanBalances[splitAccount.id()] + txsplit.shares();
                         }
@@ -1056,7 +1056,7 @@ void PivotTable::convertToBaseCurrency()
                     else
                         pricePrecision = MyMoneyMoney::denomToPrec(fraction);
 
-                    foreach (const auto rowType, rowTypeList) {
+                    Q_FOREACH (const auto rowType, rowTypeList) {
                         //calculate base value
                         MyMoneyMoney oldval = it_row.value()[rowType][column];
                         MyMoneyMoney value = (oldval * conversionfactor).reduce();
@@ -1466,7 +1466,7 @@ QString PivotTable::renderCSV() const
                     while (column < m_numColumns) {
 
                         //show columns
-                        foreach (const auto rowType, m_rowTypeList) {
+                        Q_FOREACH (const auto rowType, m_rowTypeList) {
                             if (rowType == ePrice) {
                                 if (pricePrecision == 0) {
                                     if (it_row.key().isInvest()) {
@@ -1771,7 +1771,7 @@ QString PivotTable::renderHTML() const
                                 if (column > 0)
                                     lb = leftborder;
 
-                                foreach (const auto rowType, m_rowTypeList) {
+                                Q_FOREACH (const auto rowType, m_rowTypeList) {
                                     if (rowType == ePrice) {
                                         if (pricePrecision == 0) {
                                             if (it_row.key().isInvest()) {
@@ -2379,10 +2379,10 @@ void PivotTable::includeInvestmentSubAccounts()
     QStringList accountList;
     if (m_config.accounts(accountList)) {
         if (!KMyMoneySettings::expertMode()) {
-            foreach (const auto sAccount, accountList) {
+            Q_FOREACH (const auto sAccount, accountList) {
                 auto acc = MyMoneyFile::instance()->account(sAccount);
                 if (acc.accountType() == eMyMoney::Account::Type::Investment) {
-                    foreach (const auto sSubAccount, acc.accountList()) {
+                    Q_FOREACH (const auto sSubAccount, acc.accountList()) {
                         if (!accountList.contains(sSubAccount)) {
                             m_config.addAccount(sSubAccount);
                         }

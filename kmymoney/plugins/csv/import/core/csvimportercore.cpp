@@ -425,7 +425,7 @@ bool CSVImporterCore::validateDateFormat(const int col)
 bool CSVImporterCore::validateDecimalSymbols(const QList<int> &columns)
 {
     bool isOK = true;
-    foreach (const auto column, columns) {
+    Q_FOREACH (const auto column, columns) {
         m_file->m_parse->setDecimalSymbol(m_decimalSymbolIndexMap.value(column));
 
         for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row) {
@@ -490,7 +490,7 @@ eMyMoney::Transaction::Action CSVImporterCore::processActionTypeField(const Inve
             eMyMoney::Transaction::Action::Interest <<
             eMyMoney::Transaction::Action::Shrsin << eMyMoney::Transaction::Action::Shrsout;
 
-    foreach (const auto action, actions) {
+    Q_FOREACH (const auto action, actions) {
         if (profile->m_transactionNames.value(action).contains(type, Qt::CaseInsensitive))
             return action;
     }
@@ -682,7 +682,7 @@ int CSVImporterCore::detectDecimalSymbols(const QList<int> &columns)
     };
 
     QSet<QString> currencySymbols;
-    foreach (const auto account, accounts) {
+    Q_FOREACH (const auto account, accounts) {
         if (accountTypes.contains(account.accountType())) {                             // account must actually have currency property
             currencySymbols.insert(account.currencyId());                                 // add currency id
             currencySymbols.insert(file->currency(account.currencyId()).tradingSymbol()); // add currency symbol
@@ -691,7 +691,7 @@ int CSVImporterCore::detectDecimalSymbols(const QList<int> &columns)
     QString filteredCurrencies = QStringList(currencySymbols.values()).join("");
     QString pattern = QString::fromLatin1("%1%2").arg(QLocale().currencySymbol()).arg(filteredCurrencies);
 
-    foreach (const auto column, columns) {
+    Q_FOREACH (const auto column, columns) {
         DecimalSymbol detectedSymbol = detectDecimalSymbol(column, pattern);
         if (detectedSymbol == DecimalSymbol::Auto) {
             ret = column;
@@ -715,13 +715,13 @@ QList<MyMoneyAccount> CSVImporterCore::findAccounts(const QList<eMyMoney::Accoun
     MyMoneyFile* file = MyMoneyFile::instance();
     file->accountList(accountList);
 
-    foreach (const auto account, accountList) {
+    Q_FOREACH (const auto account, accountList) {
         if (accountTypes.contains(account.accountType()) && !(account).isClosed())
             filteredTypes.append(account);
     }
 
     // filter out accounts with matching numbers, names, and both
-    foreach (const auto account, filteredTypes) {
+    Q_FOREACH (const auto account, filteredTypes) {
         bool matchedNumber = false;
         bool matchedName = false;
 
@@ -1295,7 +1295,7 @@ bool CSVImporterCore::sortSecurities(QSet<QString>& onlySymbols, QSet<QString>& 
     // try to find names for symbols
     for (QSet<QString>::iterator symbol = onlySymbols.begin(); symbol != onlySymbols.end();) {
         QList<MyMoneySecurity> filteredSecurities;
-        foreach (const auto sec, securityList) {
+        Q_FOREACH (const auto sec, securityList) {
             if ((*symbol).compare(sec.tradingSymbol(), Qt::CaseInsensitive) == 0)
                 filteredSecurities.append(sec);      // gather all securities that by matched by symbol
         }
@@ -1314,7 +1314,7 @@ bool CSVImporterCore::sortSecurities(QSet<QString>& onlySymbols, QSet<QString>& 
     // try to find symbols for names
     for (QSet<QString>::iterator name = onlyNames.begin(); name != onlyNames.end();) {
         QList<MyMoneySecurity> filteredSecurities;
-        foreach (const auto sec, securityList) {
+        Q_FOREACH (const auto sec, securityList) {
             if ((*name).compare(sec.name(), Qt::CaseInsensitive) == 0)
                 filteredSecurities.append(sec);      // gather all securities that by matched by name
         }
@@ -1713,8 +1713,8 @@ void CSVFile::getColumnCount(CSVProfile *profile, const QStringList &rows)
     FieldDelimiter possibleDelimiter = FieldDelimiter::Comma;
     m_columnCount = 0;
 
-    foreach (const auto row, rows) {
-        foreach(const auto delimiterIndex, delimiterIndexes) {
+    Q_FOREACH (const auto row, rows) {
+        Q_FOREACH(const auto delimiterIndex, delimiterIndexes) {
             m_parse->setFieldDelimiter(delimiterIndex);
             colCount = m_parse->parseLine(row).count(); //  parse each line using each delimiter
 

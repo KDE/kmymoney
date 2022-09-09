@@ -173,7 +173,7 @@ void CSVWizard::clearColumnsBackground(const QList<int> &columnList)
 {
     QStandardItemModel *model = m_imp->m_file->m_model;
     for (int i = m_imp->m_profile->m_startLine; i <= m_imp->m_profile->m_endLine; ++i) {
-        foreach (const auto j, columnList) {
+        Q_FOREACH (const auto j, columnList) {
             model->item(i, j)->setBackground(m_clearBrush);
             model->item(i, j)->setForeground(m_clearBrushText);
         }
@@ -433,7 +433,7 @@ void CSVWizard::initializeComboBoxes(const QHash<Column, QComboBox *> &columns)
     for (int i = 0; i < m_imp->m_file->m_columnCount; ++i)
         columnNumbers.append(QString::number(i + 1));
 
-    foreach (const auto column, columns) {
+    Q_FOREACH (const auto column, columns) {
         // block signals from combobox during their initialization
         QSignalBlocker blocker(column);
         // clear all existing items before adding new ones
@@ -709,7 +709,7 @@ void SeparatorPage::initializeEncodingCombobox()
     QMap<QString, QTextCodec *> codecMap;
     const QRegularExpression iso8859RegExp(QLatin1String("ISO[- ]8859-([0-9]+).*"));
 
-    foreach (const auto mib, QTextCodec::availableMibs()) {
+    Q_FOREACH (const auto mib, QTextCodec::availableMibs()) {
         QTextCodec *codec = QTextCodec::codecForMib(mib);
 
         QString sortKey = codec->name().toUpper();
@@ -734,7 +734,7 @@ void SeparatorPage::initializeEncodingCombobox()
     }
     codecs = codecMap.values();
 
-    foreach (const auto codec, codecs)
+    Q_FOREACH (const auto codec, codecs)
         ui->m_encoding->addItem(codec->name(), codec->mibEnum());
 }
 
@@ -995,7 +995,7 @@ void FormatsPage::decimalSymbolChanged(int index)
         } else if (index == -1) { // if detection went well and decimal symbol was unspecified then we'll be specifying it
             DecimalSymbol firstDecSymbol = m_imp->m_decimalSymbolIndexMap.first();
             bool allSymbolsEqual = true;
-            foreach (const auto mapDecSymbol, m_imp->m_decimalSymbolIndexMap) {
+            Q_FOREACH (const auto mapDecSymbol, m_imp->m_decimalSymbolIndexMap) {
                 if (firstDecSymbol != mapDecSymbol)
                     allSymbolsEqual = false;
             }
@@ -1013,7 +1013,7 @@ void FormatsPage::decimalSymbolChanged(int index)
         break;
     }
     default:
-        foreach (const auto column, columns)
+        Q_FOREACH (const auto column, columns)
             m_imp->m_decimalSymbolIndexMap.insert(column, static_cast<DecimalSymbol>(index));
         ui->m_thousandsDelimiter->setCurrentIndex(index);
         m_imp->m_profile->m_decimalSymbol = static_cast<DecimalSymbol>(index);
@@ -1026,7 +1026,7 @@ void FormatsPage::decimalSymbolChanged(int index)
 bool FormatsPage::validateDecimalSymbols(const QList<int> &columns)
 {
     bool isOK = true;
-    foreach (const auto col, columns) {
+    Q_FOREACH (const auto col, columns) {
         m_imp->m_file->m_parse->setDecimalSymbol(m_imp->m_decimalSymbolIndexMap.value(col));
         m_dlg->clearColumnsBackground(col);
         for (int row = m_imp->m_profile->m_startLine; row <= m_imp->m_profile->m_endLine; ++row) {

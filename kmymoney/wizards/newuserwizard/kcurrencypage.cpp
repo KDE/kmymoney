@@ -99,7 +99,7 @@ KMyMoneyWizardPage* CurrencyPage::nextPage() const
     Q_D(const CurrencyPage);
     QString selCur = selectedCurrency();
     QList<MyMoneySecurity> currencies = MyMoneyFile::instance()->availableCurrencyList();
-    foreach (auto currency, currencies) {
+    Q_FOREACH (auto currency, currencies) {
         if (selCur == currency.id()) {
             d->m_wizard->d_func()->m_baseCurrency = currency;
             break;

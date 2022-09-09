@@ -89,7 +89,7 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
     reportCfg.setIncludingForecast(true);
     reportCfg.setIncludingBudgetActuals(true);
     if (account.accountType() == eMyMoney::Account::Type::Investment) {
-        foreach (const auto accountID, account.accountList())
+        Q_FOREACH (const auto accountID, account.accountList())
             reportCfg.addAccount(accountID);
     } else
         reportCfg.addAccount(account.id());

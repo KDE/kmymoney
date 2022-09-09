@@ -399,11 +399,11 @@ public:
         QList<MyMoneySecurity> availableCurrencies = MyMoneyFile::instance()->availableCurrencyList();
         QStringList currencyIDs;
 
-        foreach (auto currency, availableCurrencies)
+        Q_FOREACH (auto currency, availableCurrencies)
             currencyIDs.append(currency.id());
 
         try {
-            foreach (auto currency, storedCurrencies) {
+            Q_FOREACH (auto currency, storedCurrencies) {
                 int i = currencyIDs.indexOf(currency.id());
                 if (i != -1 && availableCurrencies.at(i).name() != currency.name()) {
                     currency.setName(availableCurrencies.at(i).name());
@@ -631,7 +631,7 @@ public:
                                            };
 
 
-        foreach(auto currency, currencies) {
+        Q_FOREACH(auto currency, currencies) {
             if (symbols.contains(currency.id())) {
                 if (currency.smallestAccountFraction() != currency.smallestCashFraction()) {
                     currency.setSmallestAccountFraction(currency.smallestCashFraction());
@@ -659,13 +659,13 @@ public:
         // which reference an account and a category to have the memo text
         // of the account.
         auto count = 0;
-        foreach (const auto transaction, transactionList) {
+        Q_FOREACH (const auto transaction, transactionList) {
             if (transaction.splitCount() == 2) {
                 QString accountId;
                 QString categoryId;
                 QString accountMemo;
                 QString categoryMemo;
-                foreach (const auto split, transaction.splits()) {
+                Q_FOREACH (const auto split, transaction.splits()) {
                     auto acc = file->account(split.accountId());
                     if (acc.isIncomeExpense()) {
                         categoryId = split.id();
@@ -707,7 +707,7 @@ public:
                     for (it_a = list.constBegin(); it_a != list.constEnd(); ++it_a) {
                         auto acc = MyMoneyFile::instance()->account(*it_a);
                         if (acc.accountType() == eMyMoney::Account::Type::Investment) {
-                            foreach (const auto accountID, acc.accountList()) {
+                            Q_FOREACH (const auto accountID, acc.accountList()) {
                                 if (!list.contains(accountID)) {
                                     missing.append(accountID);
                                 }
@@ -740,7 +740,7 @@ public:
             for (it_a = list.begin(); it_a != list.end(); ++it_a) {
                 auto acc = MyMoneyFile::instance()->account(*it_a);
                 if (acc.accountType() == Account::Type::Investment) {
-                    foreach (const auto accountID, acc.accountList()) {
+                    Q_FOREACH (const auto accountID, acc.accountList()) {
                         if (!list.contains(accountID)) {
                             missing.append(accountID);
                         }
@@ -908,7 +908,7 @@ public:
             QStringList accounts;
             bool hasDuplicateAccounts = false;
 
-            foreach (const auto split, t.splits()) {
+            Q_FOREACH (const auto split, t.splits()) {
                 if (accounts.contains(split.accountId())) {
                     hasDuplicateAccounts = true;
                     qDebug() << Q_FUNC_INFO << " " << t.id() << " has multiple splits with account " << split.accountId();
@@ -949,7 +949,7 @@ public:
                 // check for transfer
                 int accountCount = 0;
                 MyMoneyMoney val;
-                foreach (const auto split, splits) {
+                Q_FOREACH (const auto split, splits) {
                     auto acc = file->account(split.accountId());
                     if (acc.accountGroup() == eMyMoney::Account::Type::Asset //
                             || acc.accountGroup() == eMyMoney::Account::Type::Liability) {
@@ -975,7 +975,7 @@ public:
             }
 
             isLoan = false;
-            foreach (const auto split, splits) {
+            Q_FOREACH (const auto split, splits) {
                 auto acc = file->account(split.accountId());
                 MyMoneyMoney val = split.value();
                 if (acc.accountGroup() == eMyMoney::Account::Type::Asset
@@ -2168,7 +2168,7 @@ void KMyMoneyApp::slotAddSharedAction(eMenu::Action action, QAction* defaultActi
 void KMyMoneyApp::dumpActions() const
 {
     const QList<QAction*> list = actionCollection()->actions();
-    foreach (const auto it, list)
+    Q_FOREACH (const auto it, list)
         std::cout << qPrintable(it->objectName()) << ": " << qPrintable(it->text()) << std::endl;
 }
 #endif
@@ -3800,7 +3800,7 @@ void KMyMoneyApp::Private::moveInvestmentTransaction(const QString& /*fromId*/,
     QString stockAccountId;
     QString stockSecurityId;
     MyMoneySplit s;
-    foreach (const auto split, t.splits()) {
+    Q_FOREACH (const auto split, t.splits()) {
         stockAccountId = split.accountId();
         stockSecurityId =
             MyMoneyFile::instance()->account(stockAccountId).currencyId();
@@ -3812,7 +3812,7 @@ void KMyMoneyApp::Private::moveInvestmentTransaction(const QString& /*fromId*/,
     // Now check the target investment account to see if it
     // contains a stock with this id
     QString newStockAccountId;
-    foreach (const auto sAccount, toInvAcc.accountList()) {
+    Q_FOREACH (const auto sAccount, toInvAcc.accountList()) {
         if (MyMoneyFile::instance()->account(sAccount).currencyId() ==
                 stockSecurityId) {
             newStockAccountId = sAccount;
@@ -3925,7 +3925,7 @@ void KMyMoneyApp::Private::setThemedCSS()
     const QString themedCSSPath  = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).first() + cssDir;
     QDir().mkpath(themedCSSPath);
 
-    foreach (const auto CSSname, CSSnames) {
+    Q_FOREACH (const auto CSSname, CSSnames) {
         const QString defaultCSSFilename = embeddedCSSPath + CSSname;
         QFileInfo fileInfo(defaultCSSFilename);
         if (fileInfo.exists()) {

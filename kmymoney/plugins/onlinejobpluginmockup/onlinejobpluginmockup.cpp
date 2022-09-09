@@ -83,7 +83,7 @@ IonlineTaskSettings::ptr onlineJobPluginMockup::settings(QString accountId, QStr
 
 void onlineJobPluginMockup::sendOnlineJob(QList< onlineJob >& jobs)
 {
-    foreach (const onlineJob& job, jobs) {
+    Q_FOREACH (const onlineJob& job, jobs) {
         qDebug() << "Pretend to send: " << job.taskIid() << job.id();
     }
 }

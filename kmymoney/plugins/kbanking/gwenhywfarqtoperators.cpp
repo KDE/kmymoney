@@ -12,7 +12,7 @@ GWEN_STRINGLIST* GWEN_StringList_fromQStringList(const QStringList& input)
 {
     GWEN_STRINGLIST *ret = GWEN_StringList_new();
     QString line;
-    foreach (line, input) {
+    Q_FOREACH (line, input) {
         GWEN_StringList_AppendString(ret, line.toUtf8().constData(), false, false);
     }
     return ret;

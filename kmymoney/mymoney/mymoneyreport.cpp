@@ -83,7 +83,7 @@ MyMoneyReport::MyMoneyReport(eMyMoney::Report::RowType rt,
 #ifdef DEBUG_REPORTS
     QDebug out = qDebug();
     out << _name << toString(_rt) << toString(m_reportType);
-    foreach(const eMyMoney::Account::Type accountType, m_accountGroups)
+    Q_FOREACH(const eMyMoney::Account::Type accountType, m_accountGroups)
         out << MyMoneyeMyMoney::Account::accountTypeToString(accountType);
     if (m_accounts.size() > 0)
         out << m_accounts;
