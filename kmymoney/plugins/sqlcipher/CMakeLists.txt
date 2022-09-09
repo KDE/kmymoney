@@ -1,29 +1,9 @@
 # qsql_sqlite between Qt versions aren't necessarily compatible and can fail to compile
 # qsql_sqlite is copied from https://github.com/sjemens/qsqlcipher-qt5
-if (Qt5Core_VERSION VERSION_GREATER 5.10.99)
-  set (QSQLITE_VERSION 5.11) #untested
-
-elseif (Qt5Core_VERSION VERSION_GREATER 5.9.99)
-  set (QSQLITE_VERSION 5.10) #tested
-
-elseif (Qt5Core_VERSION VERSION_GREATER 5.7.99)
-  set (QSQLITE_VERSION 5.9) #untested
-
-else()
-  set (QSQLITE_VERSION 5.7) #untested
-
-endif()
-
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/QSQLite/${QSQLITE_VERSION}/qsql_sqlite_p.h ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/QSQLite/${QSQLITE_VERSION}/qsql_sqlite.cpp ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 
 set ( qsqlcipher_SOURCES
   smain.cpp
   qsql_sqlite.cpp
-)
-
-set ( qsqlcipher_HEADERS
-  qsql_sqlite_p.h
 )
 
 if (BUILD_STATIC_PLUGINS)
