@@ -203,7 +203,7 @@ void KOfxDirectConnectDlg::slotOfxFinished(KJob* /* e */)
         KMessageBox::detailedError(this, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
     } else if (m_tmpfile) {
         qDebug("Emit statementReady signal with '%s'", qPrintable(m_tmpfile->fileName()));
-        emit statementReady(m_tmpfile->fileName());
+        Q_EMIT statementReady(m_tmpfile->fileName());
         qDebug("Return from signal statementReady() processing");
     }
     delete m_tmpfile;

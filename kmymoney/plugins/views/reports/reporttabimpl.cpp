@@ -92,7 +92,7 @@ ReportTabChart::ReportTabChart(QWidget *parent)
     ui->m_comboType->addItem(i18nc("type of graphic chart", "Pie"), static_cast<int>(eMyMoney::Report::ChartType::Pie));
     ui->m_comboType->addItem(i18nc("type of graphic chart", "Ring"), static_cast<int>(eMyMoney::Report::ChartType::Ring));
     connect(ui->m_comboType, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &ReportTabChart::slotChartTypeChanged);
-    emit ui->m_comboType->currentIndexChanged(ui->m_comboType->currentIndex());
+    Q_EMIT ui->m_comboType->currentIndexChanged(ui->m_comboType->currentIndex());
 
     ui->m_comboPalette->addItem(i18nc("type of graphic palette", "Use application setting"), static_cast<int>(eMyMoney::Report::ChartPalette::Application));
     ui->m_comboPalette->addItem(i18nc("type of graphic palette", "Default"), static_cast<int>(eMyMoney::Report::ChartPalette::Default));
@@ -143,13 +143,13 @@ ReportTabRange::ReportTabRange(QWidget *parent)
     m_dateRange = new DateRangeDlg;
     ui->dateRangeGrid->addWidget(m_dateRange, 0, 0, 1, 2);
     connect(ui->m_yLabelsPrecision, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &ReportTabRange::slotYLabelsPrecisionChanged);
-    emit ui->m_yLabelsPrecision->valueChanged(ui->m_yLabelsPrecision->value());
+    Q_EMIT ui->m_yLabelsPrecision->valueChanged(ui->m_yLabelsPrecision->value());
     connect(ui->m_dataRangeStart, &QLineEdit::editingFinished, this, &ReportTabRange::slotEditingFinishedStart);
     connect(ui->m_dataRangeEnd, &QLineEdit::editingFinished, this, &ReportTabRange::slotEditingFinishedEnd);
     connect(ui->m_dataMajorTick, &QLineEdit::editingFinished, this, &ReportTabRange::slotEditingFinishedMajor);
     connect(ui->m_dataMinorTick, &QLineEdit::editingFinished, this, &ReportTabRange::slotEditingFinishedMinor);
     connect(ui->m_dataLock, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &ReportTabRange::slotDataLockChanged);
-    emit ui->m_dataLock->currentIndexChanged(ui->m_dataLock->currentIndex());
+    Q_EMIT ui->m_dataLock->currentIndexChanged(ui->m_dataLock->currentIndex());
 }
 
 ReportTabRange::~ReportTabRange()

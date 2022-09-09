@@ -846,7 +846,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
     connect(d->ui->dateEdit, &KMyMoneyDateEdit::dateEntered, this, [&](const QDate& date) {
         d->postdateChanged(date);
-        emit postDateChanged(date);
+        Q_EMIT postDateChanged(date);
     });
 
     connect(d->ui->creditDebitEdit, &CreditDebitEdit::amountChanged, this, [&]() {
@@ -897,7 +897,7 @@ void NewTransactionEditor::acceptEdit()
 {
     if (d->checkForValidTransaction()) {
         d->accepted = true;
-        emit done();
+        Q_EMIT done();
     }
 }
 

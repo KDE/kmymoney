@@ -270,7 +270,7 @@ bool KMyMoneyAccountCombo::eventFilter(QObject* o, QEvent* e)
             if(e->type() == QEvent::KeyPress) {
                 const auto kev = static_cast<QKeyEvent*>(e);
                 if (kev->modifiers() & Qt::ControlModifier && kev->key() == Qt::Key_Space) {
-                    emit splitDialogRequest();
+                    Q_EMIT splitDialogRequest();
                     return true;
                 }
             }
@@ -287,7 +287,7 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
         d->m_popupView->setCurrentIndex(QModelIndex());
         setRootModelIndex(QModelIndex());
         setCurrentIndex(-1);
-        emit accountSelected(id);
+        Q_EMIT accountSelected(id);
         return;
     }
 
@@ -311,7 +311,7 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
         hidePopup();
         d->m_lastSelectedAccount = id;
         d->setCurrentIndex(idx);
-        emit accountSelected(id);
+        Q_EMIT accountSelected(id);
     }
 }
 
@@ -652,8 +652,8 @@ void KMyMoneyAccountComboSplitHelper::updateWidget()
     d->m_accountCombo->hidePopup();
     d->m_accountCombo->lineEdit()->setReadOnly(disabled);
 
-    emit accountComboEnabled(!disabled);
-    emit accountComboDisabled(disabled);
+    Q_EMIT accountComboEnabled(!disabled);
+    Q_EMIT accountComboDisabled(disabled);
 
     d->m_norecursive = false;
 }

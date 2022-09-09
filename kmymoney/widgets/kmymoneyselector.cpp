@@ -104,7 +104,7 @@ void KMyMoneySelector::slotItemSelected(QTreeWidgetItem *item)
     Q_D(KMyMoneySelector);
     if (d->m_selMode == QTreeWidget::SingleSelection) {
         if (item && item->flags().testFlag(Qt::ItemIsSelectable)) {
-            emit itemSelected(item->data(0, (int)Selector::Role::Id).toString());
+            Q_EMIT itemSelected(item->data(0, (int)Selector::Role::Id).toString());
         }
     }
 }
@@ -285,14 +285,14 @@ void KMyMoneySelector::selectAllItems(const bool state)
 {
     Q_D(KMyMoneySelector);
     selectAllSubItems(d->m_treeWidget->invisibleRootItem(), state);
-    emit stateChanged();
+    Q_EMIT stateChanged();
 }
 
 void KMyMoneySelector::selectItems(const QStringList& itemList, const bool state)
 {
     Q_D(KMyMoneySelector);
     selectSubItems(d->m_treeWidget->invisibleRootItem(), itemList, state);
-    emit stateChanged();
+    Q_EMIT stateChanged();
 }
 
 void KMyMoneySelector::selectSubItems(QTreeWidgetItem* item, const QStringList& itemList, const bool state)
@@ -304,7 +304,7 @@ void KMyMoneySelector::selectSubItems(QTreeWidgetItem* item, const QStringList& 
         }
         selectSubItems(child, itemList, state);
     }
-    emit stateChanged();
+    Q_EMIT stateChanged();
 }
 
 void KMyMoneySelector::selectAllSubItems(QTreeWidgetItem* item, const bool state)
@@ -316,7 +316,7 @@ void KMyMoneySelector::selectAllSubItems(QTreeWidgetItem* item, const bool state
         }
         selectAllSubItems(child, state);
     }
-    emit stateChanged();
+    Q_EMIT stateChanged();
 }
 
 void KMyMoneySelector::selectedItems(QStringList& list) const

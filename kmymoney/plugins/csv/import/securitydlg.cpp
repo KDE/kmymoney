@@ -50,7 +50,7 @@ void SecurityDlg::initializeSecurities(const QString& presetSymbol, const QStrin
     }
     ui->cbSecurity->blockSignals(false);
     ui->cbSecurity->setCurrentIndex(presetIndex);
-    emit ui->cbSecurity->currentIndexChanged(presetIndex); // in case currentIndex == presetIndex and no signal would be emitted
+    Q_EMIT ui->cbSecurity->currentIndexChanged(presetIndex); // in case currentIndex == presetIndex and no signal would be emitted
 }
 
 QString SecurityDlg::security() {

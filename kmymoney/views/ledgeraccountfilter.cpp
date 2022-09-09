@@ -192,7 +192,7 @@ void LedgerAccountFilter::recalculateBalances()
             }
         }
     }
-    emit dataChanged(index(0, JournalModel::Column::Balance), index(rows - 1, JournalModel::Column::Balance));
+    Q_EMIT dataChanged(index(0, JournalModel::Column::Balance), index(rows - 1, JournalModel::Column::Balance));
     d->balanceCalculationPending = false;
 }
 

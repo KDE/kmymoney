@@ -691,9 +691,9 @@ void SeparatorPage::initializePage()
     ui->m_textDelimiter->blockSignals(false);
 
     // ... and ensure that their signal receivers will always be called
-    emit ui->m_encoding->currentIndexChanged(ui->m_encoding->currentIndex());
-    emit ui->m_fieldDelimiter->currentIndexChanged(ui->m_fieldDelimiter->currentIndex());
-    emit ui->m_textDelimiter->currentIndexChanged(ui->m_textDelimiter->currentIndex());
+    Q_EMIT ui->m_encoding->currentIndexChanged(ui->m_encoding->currentIndex());
+    Q_EMIT ui->m_fieldDelimiter->currentIndexChanged(ui->m_fieldDelimiter->currentIndex());
+    Q_EMIT ui->m_textDelimiter->currentIndexChanged(ui->m_textDelimiter->currentIndex());
     m_dlg->updateWindowSize();
 
     QList<QWizard::WizardButton> layout;
@@ -747,7 +747,7 @@ void SeparatorPage::encodingChanged(const int index)
         return;
     m_imp->m_profile->m_encodingMIBEnum = ui->m_encoding->currentData().toInt();
     m_imp->m_file->readFile(m_imp->m_profile);
-    emit completeChanged();
+    Q_EMIT completeChanged();
 }
 
 void SeparatorPage::fieldDelimiterChanged(const int index)
@@ -768,7 +768,7 @@ void SeparatorPage::fieldDelimiterChanged(const int index)
         ui->m_fieldDelimiter->blockSignals(false);
     }
     m_dlg->updateWindowSize();
-    emit completeChanged();
+    Q_EMIT completeChanged();
 }
 
 void SeparatorPage::textDelimiterChanged(const int index)
@@ -780,7 +780,7 @@ void SeparatorPage::textDelimiterChanged(const int index)
 
     m_imp->m_profile->m_textDelimiter = static_cast<TextDelimiter>(index);
     m_imp->m_file->setupParser(m_imp->m_profile);
-    emit completeChanged();
+    Q_EMIT completeChanged();
 }
 
 bool SeparatorPage::isComplete() const
@@ -961,7 +961,7 @@ void FormatsPage::initializePage()
     ui->m_dateFormat->blockSignals(true);
     ui->m_dateFormat->setCurrentIndex((int)m_imp->m_profile->m_dateFormat);
     ui->m_dateFormat->blockSignals(false);
-    emit ui->m_dateFormat->currentIndexChanged((int)m_imp->m_profile->m_dateFormat); // emit update signal manually regardless of change to combobox
+    Q_EMIT ui->m_dateFormat->currentIndexChanged((int)m_imp->m_profile->m_dateFormat); // Q_EMIT update signal manually regardless of change to combobox
 
     ui->m_decimalSymbol->blockSignals(true);
     if (m_imp->m_profile->m_decimalSymbol == DecimalSymbol::Auto && !m_imp->m_autodetect.value(AutoDecimalSymbol))
@@ -969,7 +969,7 @@ void FormatsPage::initializePage()
     else
         ui->m_decimalSymbol->setCurrentIndex((int)m_imp->m_profile->m_decimalSymbol);
     ui->m_decimalSymbol->blockSignals(false);
-    emit ui->m_decimalSymbol->currentIndexChanged((int)m_imp->m_profile->m_decimalSymbol); // emit update signal manually regardless of change to combobox
+    Q_EMIT ui->m_decimalSymbol->currentIndexChanged((int)m_imp->m_profile->m_decimalSymbol); // Q_EMIT update signal manually regardless of change to combobox
 }
 
 void FormatsPage::decimalSymbolChanged(int index)
@@ -1020,7 +1020,7 @@ void FormatsPage::decimalSymbolChanged(int index)
     }
 
     m_isDecimalSymbolOK = validateDecimalSymbols(columns);
-    emit completeChanged();
+    Q_EMIT completeChanged();
 }
 
 bool FormatsPage::validateDecimalSymbols(const QList<int> &columns)
@@ -1063,7 +1063,7 @@ void FormatsPage::dateFormatChanged(const int index)
                                       "<center>Please check your selections.</center>"
                                       , col + 1), i18n("CSV import"));
     }
-    emit completeChanged();
+    Q_EMIT completeChanged();
 }
 
 bool FormatsPage::validateDateFormat(const int col)

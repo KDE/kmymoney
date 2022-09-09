@@ -94,7 +94,7 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
              */
             d->m_editor = 0;
             SplitDelegate* that = const_cast<SplitDelegate*>(this);
-            emit that->closeEditor(d->m_editor, NoHint);
+            Q_EMIT that->closeEditor(d->m_editor, NoHint);
 
         } else {
             QString accountId = index.data(eMyMoney::Model::SplitAccountIdRole).toString();
@@ -104,7 +104,7 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
         if(d->m_editor) {
             d->m_editorRow = index.row();
             connect(d->m_editor, &NewSplitEditor::done, this, &SplitDelegate::endEdit);
-            emit sizeHintChanged(index);
+            Q_EMIT sizeHintChanged(index);
 
             d->m_editor->setAmountPlaceHolderText(index.model());
 
@@ -297,9 +297,9 @@ void SplitDelegate::endEdit()
 {
     if(d->m_editor) {
         if(d->m_editor->accepted()) {
-            emit commitData(d->m_editor);
+            Q_EMIT commitData(d->m_editor);
         }
-        emit closeEditor(d->m_editor, NoHint);
+        Q_EMIT closeEditor(d->m_editor, NoHint);
         d->m_editorRow = -1;
     }
 }

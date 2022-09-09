@@ -101,9 +101,9 @@ QWidget* nationalAccountDelegate::createEditor(QWidget* parent, const QStyleOpti
     nationalAccountEdit* edit = new nationalAccountEdit(parent);
     connect(edit, &nationalAccountEdit::commitData, this, &nationalAccountDelegate::commitData);
     connect(edit, &nationalAccountEdit::closeEditor, this, [&](QWidget* editor) {
-        emit const_cast<nationalAccountDelegate*>(this)->closeEditor(editor);
+        Q_EMIT const_cast<nationalAccountDelegate*>(this)->closeEditor(editor);
     } );
-    emit sizeHintChanged(index);
+    Q_EMIT sizeHintChanged(index);
     return edit;
 }
 

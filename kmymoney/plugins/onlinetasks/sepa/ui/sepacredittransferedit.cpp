@@ -154,13 +154,13 @@ void ibanBicCompleter::slotActivated(const QModelIndex &index) const
     if (!index.isValid())
         return;
 
-    emit activatedName(index.model()->data(index, payeeIdentifierModel::payeeName).toString());
+    Q_EMIT activatedName(index.model()->data(index, payeeIdentifierModel::payeeName).toString());
     try {
         payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(
                     index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
                 );
-        emit activatedIban(iban->electronicIban());
-        emit activatedBic(iban->storedBic());
+        Q_EMIT activatedIban(iban->electronicIban());
+        Q_EMIT activatedBic(iban->storedBic());
     } catch (const payeeIdentifier::empty &) {
     } catch (const payeeIdentifier::badCast &) {
     }
@@ -171,13 +171,13 @@ void ibanBicCompleter::slotHighlighted(const QModelIndex &index) const
     if (!index.isValid())
         return;
 
-    emit highlightedName(index.model()->data(index, payeeIdentifierModel::payeeName).toString());
+    Q_EMIT highlightedName(index.model()->data(index, payeeIdentifierModel::payeeName).toString());
     try {
         payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(
                     index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
                 );
-        emit highlightedIban(iban->electronicIban());
-        emit highlightedBic(iban->storedBic());
+        Q_EMIT highlightedIban(iban->electronicIban());
+        Q_EMIT highlightedBic(iban->storedBic());
     } catch (const payeeIdentifier::empty &) {
     } catch (const payeeIdentifier::badCast &) {
     }
@@ -352,7 +352,7 @@ void sepaCreditTransferEdit::setReadOnly(const bool& readOnly)
     // Only set writeable if it changes something and if it is possible
     if (readOnly != m_readOnly && (readOnly == true || getOnlineJobTyped().isEditable())) {
         m_readOnly = readOnly;
-        emit readOnlyChanged(m_readOnly);
+        Q_EMIT readOnlyChanged(m_readOnly);
     }
 }
 

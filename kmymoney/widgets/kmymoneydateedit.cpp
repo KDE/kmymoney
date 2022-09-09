@@ -368,7 +368,7 @@ KMyMoneyDateEdit::KMyMoneyDateEdit(QWidget* parent)
     connect(lineEdit(), &QLineEdit::textChanged, this, [&]() {
         const auto newDate(d->fixupDate());
         if (newDate.isValid() != d->m_dateValidity) {
-            emit dateValidityChanged(newDate);
+            Q_EMIT dateValidityChanged(newDate);
             d->m_dateValidity = newDate.isValid();
         }
     });
@@ -386,10 +386,10 @@ KMyMoneyDateEdit::~KMyMoneyDateEdit()
 void KMyMoneyDateEdit::connectNotify(const QMetaMethod& signal)
 {
     // Whenever a new object connects to our dateValidityChanged signal
-    // we emit the current status right away.
+    // we Q_EMIT the current status right away.
     if (signal == QMetaMethod::fromSignal(&KMyMoneyDateEdit::dateValidityChanged)) {
         const auto newDate(d->fixupDate());
-        emit dateValidityChanged(newDate);
+        Q_EMIT dateValidityChanged(newDate);
     }
 }
 
@@ -404,7 +404,7 @@ void KMyMoneyDateEdit::setDate(const QDate& date)
         d->selectSection(s_globalKMyMoneyDateEditSettings()->initialSection);
     }
     const auto newDate = d->fixupDate();
-    emit dateValidityChanged(newDate);
+    Q_EMIT dateValidityChanged(newDate);
     d->m_dateValidity = newDate.isValid();
 }
 
@@ -547,7 +547,7 @@ void KMyMoneyDateEdit::keyPressEvent(QKeyEvent* keyEvent)
 
     case Qt::Key_T:
         d->setDate(QDate::currentDate());
-        emit dateValidityChanged(QDate::currentDate());
+        Q_EMIT dateValidityChanged(QDate::currentDate());
         d->selectSection(s_globalKMyMoneyDateEditSettings()->initialSection);
         break;
 

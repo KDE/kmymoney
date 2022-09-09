@@ -218,7 +218,7 @@ public:
             const auto keySeq = QKeySequence(kev->modifiers() + kev->key());
             const auto action = static_cast<QAction*>(parent());
             if (keySeq == action->shortcut()) {
-                emit shortCutDetected();
+                Q_EMIT shortCutDetected();
                 event->accept();
                 return true;
             }

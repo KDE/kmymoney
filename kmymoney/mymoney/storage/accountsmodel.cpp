@@ -878,7 +878,7 @@ void AccountsModel::load(const QMap<QString, MyMoneyAccount>& _list)
 
     endResetModel();
 
-    emit modelLoaded();
+    Q_EMIT modelLoaded();
 
     qDebug() << "Model for accounts loaded with" << itemCount << "items in" << t.elapsed() << "ms";
 }
@@ -946,7 +946,7 @@ void AccountsModel::touchAccountById(const QString& id)
     if (idx.isValid()) {
         static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->dataRef().touch();
         setDirty();
-        emit dataChanged(idx, idx);
+        Q_EMIT dataChanged(idx, idx);
     }
 }
 
@@ -1071,11 +1071,11 @@ void AccountsModel::updateAccountBalances(const QHash<QString, AccountBalances>&
 
     MyMoneyMoney newNetWorth = d->netWorth();
     if (netWorth != newNetWorth)
-        emit netWorthChanged(newNetWorth, approximate);
+        Q_EMIT netWorthChanged(newNetWorth, approximate);
 
     MyMoneyMoney newProfit = d->profitLoss();
     if (profit != newProfit)
-        emit profitLossChanged(newProfit, approximate);
+        Q_EMIT profitLossChanged(newProfit, approximate);
 }
 
 void AccountsModel::addItem(MyMoneyAccount& account)
@@ -1142,10 +1142,10 @@ void AccountsModel::doModifyItem(const MyMoneyAccount& before, const MyMoneyAcco
             removeFavorite(after.id());
         }
         if (before.reconciliationHistory() != after.reconciliationHistory()) {
-            emit reconciliationInfoChanged();
+            Q_EMIT reconciliationInfoChanged();
         }
         // MyMoneyModel::doModifyItem already sents this out, so maybe we can skip it here
-        // emit dataChanged(idx, index(idx.row(), columnCount(idx.parent())-1));
+        // Q_EMIT dataChanged(idx, index(idx.row(), columnCount(idx.parent())-1));
     }
 }
 

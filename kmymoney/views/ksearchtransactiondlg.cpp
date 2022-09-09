@@ -121,7 +121,7 @@ public:
         // close myself and open the ledger of the account
         q->hide();
 
-        q->emit requestSelectionChange(selections);
+        q->requestSelectionChange(selections);
         pActions[eMenu::Action::GoToAccount]->setData(accountId);
         pActions[eMenu::Action::GoToAccount]->trigger();
     }

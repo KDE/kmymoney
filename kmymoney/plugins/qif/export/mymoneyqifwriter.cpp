@@ -65,7 +65,7 @@ void MyMoneyQifWriter::write(const QString& filename, const QString& profile,
             if (accountData) {
                 writeAccountEntry(s, accountId, startDate, endDate);
             }
-            emit signalProgress(-1, -1);
+            Q_EMIT signalProgress(-1, -1);
 
         } catch (const MyMoneyException &e) {
             KMessageBox::error(nullptr, i18n("Unexpected exception '%1'", QString::fromLatin1(e.what())));
@@ -143,12 +143,12 @@ void MyMoneyQifWriter::writeCategoryEntries(QTextStream &s)
 
     s << "!Type:Cat" << Qt::endl;
     QStringList list = income.accountList() + expense.accountList();
-    emit signalProgress(0, list.count());
+    Q_EMIT signalProgress(0, list.count());
     QStringList::Iterator it;
     int count = 0;
     for (it = list.begin(); it != list.end(); ++it) {
         writeCategoryEntry(s, *it, "");
-        emit signalProgress(++count, 0);
+        Q_EMIT signalProgress(++count, 0);
     }
 }
 

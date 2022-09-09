@@ -246,7 +246,7 @@ void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
 
     endResetModel();
 
-    emit modelLoaded();
+    Q_EMIT modelLoaded();
 
     qDebug() << "Model for" << m_idLeadin << "loaded with" << rowCount() << "items in" << t.elapsed() << "ms";
 }
@@ -269,7 +269,7 @@ void InstitutionsModel::addAccount(const QString& institutionId, const QString& 
         const auto subIdx = index(rows, 0, idx);
         MyMoneyInstitution account(accountId, MyMoneyInstitution());
         static_cast<TreeItem<MyMoneyInstitution>*>(subIdx.internalPointer())->dataRef() = account;
-        emit dataChanged(subIdx, subIdx);
+        Q_EMIT dataChanged(subIdx, subIdx);
     }
 }
 

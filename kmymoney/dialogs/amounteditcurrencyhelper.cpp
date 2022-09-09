@@ -94,9 +94,9 @@ void AmountEditCurrencyHelper::categoryChanged(const QString& id)
             const auto security = MyMoneyFile::instance()->security(category.currencyId());
             if (security.id() != d->commodityId) {
                 if (category.isIncomeExpense()) {
-                    emit commodityChanged(security);
+                    Q_EMIT commodityChanged(security);
                 } else {
-                    emit commodityChanged(MyMoneyFile::instance()->security(d->commodityId));
+                    Q_EMIT commodityChanged(MyMoneyFile::instance()->security(d->commodityId));
                 }
             }
         } catch (MyMoneyException& e) {

@@ -71,14 +71,14 @@ public:
     /**
      * Sets the value portion to @a amount.
      *
-     * @note This method does not emit the amountChanged() signal
+     * @note This method does not Q_EMIT the amountChanged() signal
      */
     virtual void setValue(const MyMoneyMoney& amount) = 0;
 
     /**
      * Sets the shares portion to @a amount.
      *
-     * @note This method does not emit the amountChanged() signal
+     * @note This method does not Q_EMIT the amountChanged() signal
      */
     virtual void setShares(const MyMoneyMoney& amount) = 0;
 

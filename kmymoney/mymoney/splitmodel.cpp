@@ -59,7 +59,7 @@ struct SplitModel::Private
         // send out a combined dataChanged signal
         QModelIndex start(q->index(0, 0));
         QModelIndex end(q->index(rows - 1, q->columnCount() - 1));
-        emit q->dataChanged(start, end);
+        Q_EMIT q->dataChanged(start, end);
 
         updateItemCount();
     }
@@ -82,7 +82,7 @@ struct SplitModel::Private
         const auto count = splitCount();
         if (count != currentSplitCount) {
             currentSplitCount = count;
-            emit q->itemCountChanged(currentSplitCount);
+            Q_EMIT q->itemCountChanged(currentSplitCount);
         }
     }
 
@@ -366,42 +366,42 @@ bool SplitModel::setData(const QModelIndex& idx, const QVariant& value, int role
 
     case eMyMoney::Model::SplitNumberRole:
         split.setNumber(value.toString());
-        emit dataChanged(startIdx, endIdx);
+        Q_EMIT dataChanged(startIdx, endIdx);
         return true;
 
     case eMyMoney::Model::SplitMemoRole:
         split.setMemo(value.toString());
-        emit dataChanged(startIdx, endIdx);
+        Q_EMIT dataChanged(startIdx, endIdx);
         return true;
 
     case eMyMoney::Model::SplitAccountIdRole:
         split.setAccountId(value.toString());
-        emit dataChanged(startIdx, endIdx);
+        Q_EMIT dataChanged(startIdx, endIdx);
         return true;
 
     case eMyMoney::Model::SplitCostCenterIdRole:
         split.setCostCenterId(value.toString());
-        emit dataChanged(startIdx, endIdx);
+        Q_EMIT dataChanged(startIdx, endIdx);
         return true;
 
     case eMyMoney::Model::SplitSharesRole:
         split.setShares(value.value<MyMoneyMoney>());
-        emit dataChanged(startIdx, endIdx);
+        Q_EMIT dataChanged(startIdx, endIdx);
         return true;
 
     case eMyMoney::Model::SplitValueRole:
         split.setValue(value.value<MyMoneyMoney>());
-        emit dataChanged(startIdx, endIdx);
+        Q_EMIT dataChanged(startIdx, endIdx);
         return true;
 
     case eMyMoney::Model::SplitPayeeIdRole:
         split.setPayeeId(value.toString());
-        emit dataChanged(startIdx, endIdx);
+        Q_EMIT dataChanged(startIdx, endIdx);
         return true;
 
     case eMyMoney::Model::SplitTagIdRole:
         split.setTagIdList(value.toStringList());
-        emit dataChanged(startIdx, endIdx);
+        Q_EMIT dataChanged(startIdx, endIdx);
         return true;
 
     default:

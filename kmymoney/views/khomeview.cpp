@@ -143,7 +143,7 @@ void KHomeView::slotOpenUrl(const QUrl &url)
 
     auto triggerAction = [&](eMenu::Action action, const QString& id) {
         pActions[action]->setData(id);
-        emit requestActionTrigger(action);
+        Q_EMIT requestActionTrigger(action);
     };
 
     QString protocol = url.scheme();
@@ -166,7 +166,7 @@ void KHomeView::slotOpenUrl(const QUrl &url)
         Q_CHECK_PTR(mw);
         if (view == VIEW_LEDGER) {
             pActions[eMenu::Action::GoToAccount]->setData(id);
-            emit requestActionTrigger(eMenu::Action::GoToAccount);
+            Q_EMIT requestActionTrigger(eMenu::Action::GoToAccount);
 
         } else if (view == VIEW_SCHEDULE) {
             if (mode == QLatin1String("enter")) {

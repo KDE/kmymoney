@@ -305,10 +305,10 @@ void KMyMoneyCompletion::slotItemSelected(QTreeWidgetItem *item, int)
     if (item && item->flags().testFlag(Qt::ItemIsSelectable)) {
         QString id = item->data(0, (int)eWidgets::Selector::Role::Id).toString();
         // hide the widget, so we can debug the slots that are connect
-        // to the signal we emit very soon
+        // to the signal we Q_EMIT very soon
         hide();
         d->m_id = id;
-        emit itemSelected(id);
+        Q_EMIT itemSelected(id);
     }
 }
 

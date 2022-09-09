@@ -94,9 +94,9 @@ private Q_SLOTS:
      */
     void requiredFieldsCompleted(const bool& status = true) {
         if (status) {
-            emit validityChanged(getOnlineJobTyped().isValid());
+            Q_EMIT validityChanged(getOnlineJobTyped().isValid());
         } else {
-            emit validityChanged(false);
+            Q_EMIT validityChanged(false);
         }
     }
 

@@ -138,7 +138,7 @@ void DateRangeDlg::setDateRange(const QDate& from, const QDate& to)
     d->ui->m_toDate->setDate(to);
     d->ui->m_dateRange->setCurrentItem(TransactionFilter::Date::UserDefined);
     d->updateFrameStates();
-    emit rangeChanged();
+    Q_EMIT rangeChanged();
 }
 
 void DateRangeDlg::setDateRange(TransactionFilter::Date idx)
@@ -161,7 +161,7 @@ void DateRangeDlg::setDateRange(TransactionFilter::Date idx)
     }
     d->changingDatesAdjustsRangeSelector(true);
 
-    emit rangeChanged();
+    Q_EMIT rangeChanged();
 }
 
 TransactionFilter::Date DateRangeDlg::dateRange() const

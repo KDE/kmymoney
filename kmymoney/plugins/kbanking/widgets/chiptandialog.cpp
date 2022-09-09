@@ -75,7 +75,7 @@ void chipTanDialog::setInfoText(const QString& text)
 {
     if (text != infoText()) {
         ui->infoText->setText(text);
-        emit infoTextChanged(text);
+        Q_EMIT infoTextChanged(text);
     }
 }
 
@@ -88,7 +88,7 @@ void chipTanDialog::setHhdCode(const QString& code)
 {
     if (hhdCode() != code) {
         setRootObjectProperty("transferData", code);
-        emit hhdCodeChanged(code);
+        Q_EMIT hhdCodeChanged(code);
     }
 }
 
@@ -141,7 +141,7 @@ void chipTanDialog::setFlickerFieldWidth(const int& width)
         if (width != KBankingSettings::width()) {
             KBankingSettings::setWidth(width);
             KBankingSettings::self()->save();
-            emit flickerFieldWidthChanged(width);
+            Q_EMIT flickerFieldWidthChanged(width);
         }
     }
 }

@@ -39,7 +39,7 @@ bool ItemRenameProxyModel::setData(const QModelIndex& idx, const QVariant& value
 {
     if (idx.column() == m_renameColumn && role == Qt::EditRole) {
         qDebug() << "Rename to" << value.toString();
-        emit renameItem(idx, value);
+        Q_EMIT renameItem(idx, value);
         return true;
     }
     return QSortFilterProxyModel::setData(idx, value, role);

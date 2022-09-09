@@ -450,7 +450,7 @@ void KTagsView::slotTagSelectionChanged(const QItemSelection& selected, const QI
         d->m_tag = MyMoneyTag();
     }
 
-    emit requestSelectionChange(d->m_selections);
+    Q_EMIT requestSelectionChange(d->m_selections);
 }
 
 void KTagsView::slotTransactionSelectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
@@ -464,7 +464,7 @@ void KTagsView::slotTransactionSelectionChanged(const QItemSelection& selected, 
         d->m_selections.addSelection(SelectedObjects::JournalEntry, selected.indexes().first().data(eMyMoney::Model::IdRole).toString());
     }
 
-    emit requestSelectionChange(d->m_selections);
+    Q_EMIT requestSelectionChange(d->m_selections);
 }
 
 void KTagsView::slotModelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight)
@@ -533,12 +533,12 @@ void KTagsView::showEvent(QShowEvent* event)
 
         connect(d->ui->m_tagsList, &QWidget::customContextMenuRequested, this, [&](QPoint pos) {
             Q_D(KTagsView);
-            emit requestCustomContextMenu(eMenu::Menu::Tag, d->ui->m_tagsList->mapToGlobal(pos));
+            Q_EMIT requestCustomContextMenu(eMenu::Menu::Tag, d->ui->m_tagsList->mapToGlobal(pos));
         });
 
         connect(d->ui->m_register, &QWidget::customContextMenuRequested, this, [&](QPoint pos) {
             Q_D(KTagsView);
-            emit requestCustomContextMenu(eMenu::Menu::Transaction, d->ui->m_register->mapToGlobal(pos));
+            Q_EMIT requestCustomContextMenu(eMenu::Menu::Transaction, d->ui->m_register->mapToGlobal(pos));
         });
 
         connect(LedgerViewSettings::instance(), &LedgerViewSettings::settingsChanged, this, [&]() {

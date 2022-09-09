@@ -259,7 +259,7 @@ void InvestmentPage::feeIsPercentageClicked(bool checked)
 void InvestmentPage::fractionChanged(int col)
 {
     m_profile->m_priceFraction = col;
-    emit completeChanged();
+    Q_EMIT completeChanged();
 }
 
 void InvestmentPage::clearColumns()
@@ -460,7 +460,7 @@ bool InvestmentPage::validateSelectedColumn(const int col, const Column type)
         m_profile->m_colTypeNum[type] = col; // assign new column 'number' to this 'type'
         m_profile->m_colNumType[col] = type; // assign new 'type' to this column 'number'
     }
-    emit completeChanged();
+    Q_EMIT completeChanged();
     return ret;
 }
 

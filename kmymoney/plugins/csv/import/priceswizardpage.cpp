@@ -112,7 +112,7 @@ void PricesPage::priceColSelected(int col)
 void PricesPage::fractionChanged(int col)
 {
     m_profile->m_priceFraction = col;
-    emit completeChanged();
+    Q_EMIT completeChanged();
 }
 
 void PricesPage::clearColumns()
@@ -157,7 +157,7 @@ bool PricesPage::validateSelectedColumn(const int col, const Column type)
         colTypeNum[type] = col; // assign new column 'number' to this 'type'
         colNumType[col] = type; // assign new 'type' to this column 'number'
     }
-    emit completeChanged();
+    Q_EMIT completeChanged();
     return ret;
 }
 

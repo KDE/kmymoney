@@ -383,7 +383,7 @@ void InvestTransactionEditor::Private::setSecurity(const MyMoneySecurity& sec)
             ui->infoMessage->setText(i18nc("@info:usagetip", "The transaction commodity has been changed which will possibly make all price information invalid. Please check them."));
             if (!ui->infoMessage->isShowAnimationRunning()) {
                 ui->infoMessage->animatedShow();
-                emit q->editorLayoutChanged();
+                Q_EMIT q->editorLayoutChanged();
             }
         }
     }
@@ -888,11 +888,11 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
         Qt::QueuedConnection);
 
     connect(d->ui->cancelButton, &QToolButton::clicked, this, [&]() {
-        emit done();
+        Q_EMIT done();
     });
     connect(d->ui->enterButton, &QToolButton::clicked, this, [&]() {
         d->accepted = true;
-        emit done();
+        Q_EMIT done();
     });
 
     // handle some events in certain conditions different from default
@@ -1164,7 +1164,7 @@ void InvestTransactionEditor::activityChanged(int index)
 
         updateTotalAmount();
         d->updateWidgetState();
-        emit editorLayoutChanged();
+        Q_EMIT editorLayoutChanged();
     }
 }
 

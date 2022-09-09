@@ -261,8 +261,8 @@ void KMandatoryFieldGroup::changed()
         d->m_okButton->setEnabled(enable);
     d->m_enabled = enable;
 
-    emit stateChanged();
-    emit stateChanged(enable);
+    Q_EMIT stateChanged();
+    Q_EMIT stateChanged(enable);
 }
 
 bool KMandatoryFieldGroup::isEnabled() const

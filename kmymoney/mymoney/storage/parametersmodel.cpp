@@ -163,7 +163,7 @@ void ParametersModel::load(const QMap<QString, QString>& pairs)
 
     endResetModel();
 
-    emit modelLoaded();
+    Q_EMIT modelLoaded();
 
     qDebug() << "Model for parameters loaded with" << itemCount << "items";
 }

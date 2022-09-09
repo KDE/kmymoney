@@ -54,5 +54,5 @@ void KMyMoneyGeneralCombo::removeItem(int id)
 
 void KMyMoneyGeneralCombo::slotChangeItem(int idx)
 {
-    emit itemSelected(itemData(idx).toInt());
+    Q_EMIT itemSelected(itemData(idx).toInt());
 }

@@ -155,7 +155,7 @@ bool BudgetsModel::setData(const QModelIndex& index, const QVariant& value, int 
     setDirty();
     const auto topLeft = BudgetsModel::index(index.row(), 0);
     const auto bottomRight = BudgetsModel::index(index.row(), columnCount()-1);
-    emit dataChanged(topLeft, bottomRight);
+    Q_EMIT dataChanged(topLeft, bottomRight);
 
     return true;
 }

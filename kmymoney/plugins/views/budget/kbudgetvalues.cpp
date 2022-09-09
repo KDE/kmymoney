@@ -199,7 +199,7 @@ void KBudgetValues::slotClearAllValues()
         for (auto i = 0; i < 12; ++i)
             d->m_field[i]->setValue(MyMoneyMoney());
     }
-    emit valuesChanged();
+    Q_EMIT valuesChanged();
 }
 
 void KBudgetValues::slotChangePeriod(int id)

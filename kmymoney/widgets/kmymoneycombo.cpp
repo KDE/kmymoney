@@ -93,7 +93,7 @@ void KMyMoneyCombo::slotItemSelected(const QString& id)
 
     if (d->m_id != id) {
         d->m_id = id;
-        emit itemSelected(id);
+        Q_EMIT itemSelected(id);
     }
 }
 
@@ -269,12 +269,12 @@ void KMyMoneyCombo::focusOutEvent(QFocusEvent* e)
                 QString id;
                 // announce that we go into a possible dialog to create an object
                 // This can be used by upstream widgets to disable filters etc.
-                emit objectCreation(true);
+                Q_EMIT objectCreation(true);
 
-                emit createItem(currentText(), id);
+                Q_EMIT createItem(currentText(), id);
 
                 // Announce that we return from object creation
-                emit objectCreation(false);
+                Q_EMIT objectCreation(false);
 
                 // update the field to a possibly created object
                 d->m_id = id;
@@ -298,7 +298,7 @@ void KMyMoneyCombo::focusOutEvent(QFocusEvent* e)
         QString id = d->m_id;
         d->m_id.clear();
         if (!id.isEmpty())
-            emit itemSelected(d->m_id);
+            Q_EMIT itemSelected(d->m_id);
         update();
     }
     d->m_inFocusOutEvent = false;

@@ -118,7 +118,7 @@ bool SchedulesJournalModel::setData(const QModelIndex& index, const QVariant& va
         setDirty();
         const auto topLeft = SchedulesJournalModel::index(index.row(), 0);
         const auto bottomRight = SchedulesJournalModel::index(index.row(), columnCount()-1);
-        emit dataChanged(topLeft, bottomRight);
+        Q_EMIT dataChanged(topLeft, bottomRight);
     }
     return rc;
 #endif

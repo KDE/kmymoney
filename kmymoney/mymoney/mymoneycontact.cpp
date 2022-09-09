@@ -69,7 +69,7 @@ void MyMoneyContact::fetchContact(const QString &email)
     QRegularExpression re(".+@.+");
     if (!re.match(email).hasMatch()) {
         ContactData contact;
-        emit contactFetched(contact);
+        Q_EMIT contactFetched(contact);
     } else {
         // fetch the contact data
         Akonadi::RecursiveItemFetchJob *job = new Akonadi::RecursiveItemFetchJob(Akonadi::Collection::root(), QStringList{KContacts::Addressee::mimeType()});
@@ -82,7 +82,7 @@ void MyMoneyContact::fetchContact(const QString &email)
 #else
     Q_UNUSED(email);
     ContactData contact;
-    emit contactFetched(contact);
+    Q_EMIT contactFetched(contact);
 #endif
 }
 
@@ -155,7 +155,7 @@ void MyMoneyContact::searchContactResult(KJob *job)
             break;
         }
     }
-    emit contactFetched(contactData);
+    Q_EMIT contactFetched(contactData);
 #else
     Q_UNUSED(job);
 #endif

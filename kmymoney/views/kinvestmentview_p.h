@@ -168,7 +168,7 @@ public:
         QModelIndex idx;
 
         m_selections.clearSelections();
-        emit q->requestSelectionChange(m_selections);
+        Q_EMIT q->requestSelectionChange(m_selections);
 
         m_equitiesProxyModel->setHideAllEntries(true);
         m_idInvAcc.clear();

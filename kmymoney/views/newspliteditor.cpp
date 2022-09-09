@@ -435,13 +435,13 @@ void NewSplitEditor::acceptEdit()
 {
     if(d->checkForValidSplit()) {
         d->accepted = true;
-        emit done();
+        Q_EMIT done();
     }
 }
 
 void NewSplitEditor::reject()
 {
-    emit done();
+    Q_EMIT done();
 }
 
 void NewSplitEditor::keyPressEvent(QKeyEvent* event)

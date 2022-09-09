@@ -325,7 +325,7 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
              */
             d->m_editor = nullptr;
             JournalDelegate* that = const_cast<JournalDelegate*>(this);
-            emit that->closeEditor(d->m_editor, NoHint);
+            Q_EMIT that->closeEditor(d->m_editor, NoHint);
 
         } else {
             auto accountId = index.data(eMyMoney::Model::SplitAccountIdRole).toString();
@@ -366,7 +366,7 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
 
                 d->m_editor = nullptr;
                 JournalDelegate* that = const_cast<JournalDelegate*>(this);
-                emit that->closeEditor(d->m_editor, NoHint);
+                Q_EMIT that->closeEditor(d->m_editor, NoHint);
             }
         }
 
@@ -374,7 +374,7 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
             d->m_editorRow = index.row();
             connect(d->m_editor, &TransactionEditorBase::done, this, &JournalDelegate::endEdit);
             JournalDelegate* that = const_cast<JournalDelegate*>(this);
-            emit that->sizeHintChanged(index);
+            Q_EMIT that->sizeHintChanged(index);
 
             // check if we need to open editor in read-only mode
             const auto journalEntryId = index.data(eMyMoney::Model::IdRole).toString();
@@ -615,9 +615,9 @@ void JournalDelegate::endEdit()
 {
     if(d->m_editor) {
         if(d->m_editor->accepted()) {
-            emit commitData(d->m_editor);
+            Q_EMIT commitData(d->m_editor);
         }
-        emit closeEditor(d->m_editor, NoHint);
+        Q_EMIT closeEditor(d->m_editor, NoHint);
         d->m_editorRow = -1;
         d->m_editor = nullptr;
     }

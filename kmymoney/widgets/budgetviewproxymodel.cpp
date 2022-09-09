@@ -261,6 +261,6 @@ QVariant BudgetViewProxyModel::data(const QModelIndex & idx, int role) const
 
         if (d->m_lastBalance != balance) {
             d->m_lastBalance = balance;
-            emit balanceChanged(d->m_lastBalance);
+            Q_EMIT balanceChanged(d->m_lastBalance);
         }
     }

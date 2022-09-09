@@ -152,7 +152,7 @@ void KMyMoneyCategory::slotItemSelected(const QString& id)
 
     if (d->m_id != id) {
         d->m_id = id;
-        emit itemSelected(id);
+        Q_EMIT itemSelected(id);
     }
 }
 

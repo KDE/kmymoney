@@ -129,11 +129,11 @@ public:
                     // Select the journal entries to be cleared
                     SelectedObjects tempSelections;
                     tempSelections.setSelection(SelectedObjects::JournalEntry, autoClearList);
-                    emit q->requestSelectionChanged(tempSelections);
+                    Q_EMIT q->requestSelectionChanged(tempSelections);
                     // mark them cleared
                     pActions[eMenu::Action::MarkCleared]->trigger();
                     // and reset the selection to what it was before
-                    emit q->requestSelectionChanged(selections);
+                    Q_EMIT q->requestSelectionChanged(selections);
                 }
             }
         }

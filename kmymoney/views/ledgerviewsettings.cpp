@@ -64,7 +64,7 @@ void LedgerViewSettings::setShowLedgerLens(bool show)
 {
     if (d->m_showLedgerLens != show) {
         d->m_showLedgerLens = show;
-        emit settingsChanged();
+        Q_EMIT settingsChanged();
     }
 }
 
@@ -77,7 +77,7 @@ void LedgerViewSettings::setShowTransactionDetails(bool show)
 {
     if (d->m_showTransactionDetails != show) {
         d->m_showTransactionDetails = show;
-        emit settingsChanged();
+        Q_EMIT settingsChanged();
     }
 }
 
@@ -90,7 +90,7 @@ void LedgerViewSettings::setShowAllSplits(bool show)
 {
     if (d->m_showAllSplits != show) {
         d->m_showAllSplits = show;
-        emit settingsChanged();
+        Q_EMIT settingsChanged();
     }
 }
 
@@ -103,7 +103,7 @@ void LedgerViewSettings::setHideReconciledTransactions(bool hide)
 {
     if (d->m_hideReconciledTransactions != hide) {
         d->m_hideReconciledTransactions = hide;
-        emit settingsChanged();
+        Q_EMIT settingsChanged();
     }
 }
 
@@ -116,6 +116,6 @@ void LedgerViewSettings::setHideTransactionsBefore(const QDate& date)
 {
     if (d->m_hideTransactionsBefore != date) {
         d->m_hideTransactionsBefore = date;
-        emit settingsChanged();
+        Q_EMIT settingsChanged();
     }
 }

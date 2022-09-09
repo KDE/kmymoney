@@ -463,7 +463,7 @@ void KCurrencyEditDlg::slotSelectCurrency(QTreeWidgetItem *item)
         d->ui->m_selectBaseCurrencyButton->setDisabled(rc1 || count != 1);
         d->ui->m_editCurrencyButton->setDisabled(count != 1);
         d->ui->m_removeCurrencyButton->setDisabled((rc1 || rc2) && count <= 1);
-//    emit selectObject(d->m_currentCurrency);
+        // Q_EMIT selectObject(d->m_currentCurrency);
     }
 }
 

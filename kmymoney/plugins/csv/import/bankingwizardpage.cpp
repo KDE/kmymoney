@@ -95,11 +95,11 @@ BankingPage::BankingPage(CSVWizard *dlg, CSVImporterCore *imp)
 
     connect(ui->m_creditIndicator, &QLineEdit::textEdited, [&](const QString& indicator) {
         m_profile->m_creditIndicator = indicator;
-        emit completeChanged();
+        Q_EMIT completeChanged();
     });
     connect(ui->m_debitIndicator, &QLineEdit::textEdited, [&](const QString&  indicator) {
         m_profile->m_debitIndicator = indicator;
-        emit completeChanged();
+        Q_EMIT completeChanged();
     });
 
     connect(ui->m_memoCol, signal, this, &BankingPage::memoColSelected);
@@ -363,7 +363,7 @@ bool BankingPage::validateSelectedColumn(const int col, const Column type)
         m_profile->m_colTypeNum[type] = col; // assign new column 'number' to this 'type'
         m_profile->m_colNumType[col] = type; // assign new 'type' to this column 'number'
     }
-    emit completeChanged();
+    Q_EMIT completeChanged();
     return ret;
 }
 

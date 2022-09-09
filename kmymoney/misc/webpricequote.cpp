@@ -101,7 +101,7 @@ bool WebPriceQuote::launchCSV(const QString& _webID, const QString& _kmmID, cons
     d->m_webID = _webID;
     d->m_kmmID = _kmmID;
 
-//   emit status(QString("(Debug) symbol=%1 id=%2...").arg(_symbol,_id));
+//   Q_EMIT status(QString("(Debug) symbol=%1 id=%2...").arg(_symbol,_id));
 
     // Get sources from the config file
     QString sourcename = _sourcename;
@@ -115,8 +115,8 @@ bool WebPriceQuote::launchCSV(const QString& _webID, const QString& _kmmID, cons
     if (quoteSources().contains(sourcename))
         d->m_source = WebPriceQuoteSource(sourcename);
     else {
-        emit error(i18n("Source <placeholder>%1</placeholder> does not exist.", sourcename));
-        emit failed(d->m_kmmID, d->m_webID);
+        Q_EMIT error(i18n("Source <placeholder>%1</placeholder> does not exist.", sourcename));
+        Q_EMIT failed(d->m_kmmID, d->m_webID);
         return false;
     }
 
@@ -148,8 +148,8 @@ bool WebPriceQuote::launchCSV(const QString& _webID, const QString& _kmmID, cons
         urlStr.replace(i, 2, QString().setNum(d->m_toDate.day()).rightJustified(2, QLatin1Char('0')));
 
     if (urlStr.contains(QLatin1String("%y")) || urlStr.contains(QLatin1String("%m")) || urlStr.contains(QLatin1String("%d"))) {
-        emit error(i18n("Cannot resolve input date."));
-        emit failed(d->m_kmmID, d->m_webID);
+        Q_EMIT error(i18n("Cannot resolve input date."));
+        Q_EMIT failed(d->m_kmmID, d->m_webID);
         return false;
     }
 
@@ -165,8 +165,8 @@ bool WebPriceQuote::launchCSV(const QString& _webID, const QString& _kmmID, cons
         QMap<QString, PricesProfile> result = defaultCSVQuoteSources();
         d->m_CSVSource = result.value(sourcename);
         if (d->m_CSVSource.m_profileName.isEmpty()) {
-            emit error(i18n("CSV source <placeholder>%1</placeholder> does not exist.", sourcename));
-            emit failed(d->m_kmmID, d->m_webID);
+            Q_EMIT error(i18n("CSV source <placeholder>%1</placeholder> does not exist.", sourcename));
+            Q_EMIT failed(d->m_kmmID, d->m_webID);
             return false;
         }
     }
@@ -183,8 +183,8 @@ bool WebPriceQuote::launchCSV(const QString& _webID, const QString& _kmmID, cons
             d->m_CSVSource.m_securitySymbol = match.captured(1);
         } else {
             qCDebug(WEBPRICEQUOTE) << "WebPriceQuote::launch() did not find 2 symbols";
-            emit error(i18n("Cannot find from and to currency."));
-            emit failed(d->m_kmmID, d->m_webID);
+            Q_EMIT error(i18n("Cannot find from and to currency."));
+            Q_EMIT failed(d->m_kmmID, d->m_webID);
             return false;
         }
 
@@ -196,12 +196,12 @@ bool WebPriceQuote::launchCSV(const QString& _webID, const QString& _kmmID, cons
     }
 
     if (url.isLocalFile()) {
-        emit error(i18n("Local quote sources aren't supported."));
-        emit failed(d->m_kmmID, d->m_webID);
+        Q_EMIT error(i18n("Local quote sources aren't supported."));
+        Q_EMIT failed(d->m_kmmID, d->m_webID);
         return false;
     } else {
         //silent download
-        emit status(i18n("Fetching URL %1...", url.toDisplayString()));
+        Q_EMIT status(i18n("Fetching URL %1...", url.toDisplayString()));
         QString tmpFile;
         {
             QTemporaryFile tmpFileFile;
@@ -226,11 +226,11 @@ bool WebPriceQuote::launchNative(const QString& _webID, const QString& _kmmID, c
     d->m_kmmID = _kmmID;
 
     if (_webID == i18n("[No identifier]")) {
-        emit error(i18n("<placeholder>%1</placeholder> skipped because it doesn't have identification number.", _kmmID));
-        emit failed(d->m_kmmID, d->m_webID);
+        Q_EMIT error(i18n("<placeholder>%1</placeholder> skipped because it doesn't have identification number.", _kmmID));
+        Q_EMIT failed(d->m_kmmID, d->m_webID);
         return false;
     }
-//   emit status(QString("(Debug) symbol=%1 id=%2...").arg(_symbol,_id));
+//   Q_EMIT status(QString("(Debug) symbol=%1 id=%2...").arg(_symbol,_id));
 
     // Get sources from the config file
     QString sourcename = _sourcename;
@@ -240,8 +240,8 @@ bool WebPriceQuote::launchNative(const QString& _webID, const QString& _kmmID, c
     if (quoteSources().contains(sourcename))
         d->m_source = WebPriceQuoteSource(sourcename);
     else {
-        emit error(i18n("Source <placeholder>%1</placeholder> does not exist.", sourcename));
-        emit failed(d->m_kmmID, d->m_webID);
+        Q_EMIT error(i18n("Source <placeholder>%1</placeholder> does not exist.", sourcename));
+        Q_EMIT failed(d->m_kmmID, d->m_webID);
         return false;
     }
 
@@ -265,7 +265,7 @@ bool WebPriceQuote::launchNative(const QString& _webID, const QString& _kmmID, c
     }
 
     if (url.isLocalFile()) {
-        emit status(i18nc("The process x is executing", "Executing %1...", url.toLocalFile()));
+        Q_EMIT status(i18nc("The process x is executing", "Executing %1...", url.toLocalFile()));
 
         QString program;
         QStringList arguments = url.toLocalFile().split(' ', Qt::SkipEmptyParts);
@@ -292,12 +292,12 @@ bool WebPriceQuote::launchNative(const QString& _webID, const QString& _kmmID, c
         d->m_filter.start(program, arguments);
 
         if (!d->m_filter.waitForStarted()) {
-            emit error(i18n("Unable to launch: %1", url.toLocalFile()));
+            Q_EMIT error(i18n("Unable to launch: %1", url.toLocalFile()));
             slotParseQuote(QString());
         }
     } else {
         //silent download
-        emit status(i18n("Fetching URL %1...", url.toDisplayString()));
+        Q_EMIT status(i18n("Fetching URL %1...", url.toDisplayString()));
         QString tmpFile;
         {
             QTemporaryFile tmpFileFile;
@@ -328,11 +328,11 @@ void WebPriceQuote::downloadCSV(KJob* job)
             f.close();
             slotParseCSVQuote(tmpFile);
         } else {
-            emit error(i18n("Failed to open downloaded file"));
+            Q_EMIT error(i18n("Failed to open downloaded file"));
             slotParseCSVQuote(QString());
         }
     } else {
-        emit error(job->errorString());
+        Q_EMIT error(job->errorString());
         slotParseCSVQuote(QString());
     }
 }
@@ -357,12 +357,12 @@ void WebPriceQuote::downloadResult(KJob* job)
             f.close();
             slotParseQuote(quote);
         } else {
-            emit error(i18n("Failed to open downloaded file"));
+            Q_EMIT error(i18n("Failed to open downloaded file"));
             slotParseQuote(QString());
         }
         QFile::remove(tmpFile);
     } else {
-        emit error(job->errorString());
+        Q_EMIT error(job->errorString());
         slotParseQuote(QString());
     }
 }
@@ -381,12 +381,12 @@ bool WebPriceQuote::launchFinanceQuote(const QString& _webID, const QString& _km
                                       "[^,]*,([^,]*),.*", // date regexp
                                       "%y-%m-%d"); // date format
 
-    //emit status(QString("(Debug) symbol=%1 id=%2...").arg(_symbol,_id));
+    //Q_EMIT status(QString("(Debug) symbol=%1 id=%2...").arg(_symbol,_id));
 
     QStringList arguments;
     arguments << m_financeQuoteScriptPath << FQSource << KShell::quoteArg(_webID);
     d->m_filter.setWebID(d->m_webID);
-    emit status(i18nc("Executing 'script' 'online source' 'investment symbol' ", "Executing %1 %2 %3...", m_financeQuoteScriptPath, FQSource, _webID));
+    Q_EMIT status(i18nc("Executing 'script' 'online source' 'investment symbol' ", "Executing %1 %2 %3...", m_financeQuoteScriptPath, FQSource, _webID));
 
     // make sure to fix the LD_LIBRARY_PATH
     // to not include APPDIR subdirectories
@@ -399,7 +399,7 @@ bool WebPriceQuote::launchFinanceQuote(const QString& _webID, const QString& _km
     if (d->m_filter.waitForFinished()) {
         result = true;
     } else {
-        emit error(i18n("Unable to launch: %1", m_financeQuoteScriptPath));
+        Q_EMIT error(i18n("Unable to launch: %1", m_financeQuoteScriptPath));
         slotParseQuote(QString());
     }
 
@@ -416,7 +416,7 @@ void WebPriceQuote::slotParseCSVQuote(const QString& filename)
         CSVImporterCore* csvImporter = new CSVImporterCore;
         st = csvImporter->unattendedImport(filename, &d->m_CSVSource);
         if (!st.m_listPrices.isEmpty())
-            emit csvquote(d->m_kmmID, d->m_webID, st);
+            Q_EMIT csvquote(d->m_kmmID, d->m_webID, st);
         else
             isOK = false;
         delete csvImporter;
@@ -424,8 +424,8 @@ void WebPriceQuote::slotParseCSVQuote(const QString& filename)
     }
 
     if (!isOK) {
-        emit error(i18n("Unable to update price for %1", d->m_webID));
-        emit failed(d->m_kmmID, d->m_webID);
+        Q_EMIT error(i18n("Unable to update price for %1", d->m_webID));
+        Q_EMIT failed(d->m_kmmID, d->m_webID);
     }
 }
 
@@ -458,7 +458,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
 
         if (quotedata.indexOf(webIDRegExp, 0, &match) > -1) {
             qCDebug(WEBPRICEQUOTE) << "Identifier" << match.captured(1);
-            emit status(i18n("Identifier found: '%1'", match.captured(1)));
+            Q_EMIT status(i18n("Identifier found: '%1'", match.captured(1)));
         }
 
         bool gotprice = false;
@@ -499,7 +499,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
 
             d->m_price = pricestr.toDouble();
             qCDebug(WEBPRICEQUOTE) << "Price" << pricestr;
-            emit status(i18n("Price found: '%1' (%2)", pricestr, d->m_price));
+            Q_EMIT status(i18n("Price found: '%1' (%2)", pricestr, d->m_price));
         }
 
         if (quotedata.indexOf(dateRegExp, 0, &match) > -1) {
@@ -510,23 +510,23 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
                 d->m_date = dateparse.convertString(datestr, false /*strict*/);
                 gotdate = true;
                 qCDebug(WEBPRICEQUOTE) << "Date" << datestr;
-                emit status(i18n("Date found: '%1'", d->m_date.toString()));
+                Q_EMIT status(i18n("Date found: '%1'", d->m_date.toString()));
             } catch (const MyMoneyException &) {
-                // emit error(i18n("Unable to parse date %1 using format %2: %3", datestr,dateparse.format(),e.what()));
+                // Q_EMIT error(i18n("Unable to parse date %1 using format %2: %3", datestr,dateparse.format(),e.what()));
                 d->m_date = QDate::currentDate();
                 gotdate = true;
             }
         }
 
         if (gotprice && gotdate) {
-            emit quote(d->m_kmmID, d->m_webID, d->m_date, d->m_price);
+            Q_EMIT quote(d->m_kmmID, d->m_webID, d->m_date, d->m_price);
         } else {
-            emit error(i18n("Unable to update price for %1 (no price or no date)", d->m_webID));
-            emit failed(d->m_kmmID, d->m_webID);
+            Q_EMIT error(i18n("Unable to update price for %1 (no price or no date)", d->m_webID));
+            Q_EMIT failed(d->m_kmmID, d->m_webID);
         }
     } else {
-        emit error(i18n("Unable to update price for %1 (empty quote data)", d->m_webID));
-        emit failed(d->m_kmmID, d->m_webID);
+        Q_EMIT error(i18n("Unable to update price for %1 (empty quote data)", d->m_webID));
+        Q_EMIT failed(d->m_kmmID, d->m_webID);
     }
 }
 
@@ -957,7 +957,7 @@ void WebPriceQuoteProcess::slotReceivedDataFromFilter()
 void WebPriceQuoteProcess::slotProcessExited(int /*exitCode*/, QProcess::ExitStatus /*exitStatus*/)
 {
 //   qDebug() << "WebPriceQuoteProcess::slotProcessExited()";
-    emit processExited(m_string);
+    Q_EMIT processExited(m_string);
     m_string.truncate(0);
 }
 

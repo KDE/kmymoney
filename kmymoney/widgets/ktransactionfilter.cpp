@@ -176,7 +176,7 @@ void KTransactionFilter::slotUpdateSelections()
     }
 
     // disable the search button if no selection is made
-    emit selectionNotEmpty(!txt.isEmpty());
+    Q_EMIT selectionNotEmpty(!txt.isEmpty());
 
     if (txt.isEmpty()) {
         txt = i18nc("No selection", "(None)");

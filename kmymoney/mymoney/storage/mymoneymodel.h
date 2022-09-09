@@ -537,7 +537,7 @@ public:
             ++row;
         }
         endResetModel();
-        emit modelLoaded();
+        Q_EMIT modelLoaded();
 
         qDebug() << "Model for" << m_idLeadin << "loaded with" << rowCount() << "items in" << t.elapsed() << "ms";
     }
@@ -715,7 +715,7 @@ protected:
         }
         setDirty();
         doUpdateReferencedObjects();
-        emit dataChanged(idx, index(row, columnCount()-1, parentIdx));
+        Q_EMIT dataChanged(idx, index(row, columnCount()-1, parentIdx));
     }
 
     virtual void doModifyItem(const T& before, const T& after)
@@ -730,7 +730,7 @@ protected:
             static_cast<TreeItem<T>*>(idx.internalPointer())->dataRef() = after;
             setDirty();
             doUpdateReferencedObjects();
-            emit dataChanged(idx, index(idx.row(), columnCount(idx.parent())-1));
+            Q_EMIT dataChanged(idx, index(idx.row(), columnCount(idx.parent())-1));
         }
     }
 

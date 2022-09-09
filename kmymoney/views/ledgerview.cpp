@@ -463,12 +463,12 @@ LedgerView::LedgerView(QWidget* parent)
     // so that other views in the same configuration groupcan sync up.
     // See LedgerView::resizeSection().
     connect(horizontalHeader(), &QHeaderView::sectionResized, this, [&](int logicalIndex, int oldSize, int newSize) {
-        emit sectionResized(this, d->columnSelector->configGroupName(), logicalIndex, oldSize, newSize);
+        Q_EMIT sectionResized(this, d->columnSelector->configGroupName(), logicalIndex, oldSize, newSize);
         QMetaObject::invokeMethod(this, "adjustDetailColumn", Qt::QueuedConnection, Q_ARG(int, viewport()->width()), Q_ARG(bool, false));
     });
 
     connect(horizontalHeader(), &QHeaderView::sectionMoved, this, [&](int logicalIndex, int oldIndex, int newIndex) {
-        emit sectionMoved(this, logicalIndex, oldIndex, newIndex);
+        Q_EMIT sectionMoved(this, logicalIndex, oldIndex, newIndex);
     });
 
     // get notifications about setting changes
@@ -489,14 +489,14 @@ LedgerView::LedgerView(QWidget* parent)
         const auto idx = model()->index(row, col);
         if (idx.flags() & Qt::ItemIsSelectable) {
             const auto menuType = d->updateDynamicActions();
-            emit requestCustomContextMenu(menuType, viewport()->mapToGlobal(pos));
+            Q_EMIT requestCustomContextMenu(menuType, viewport()->mapToGlobal(pos));
         }
     });
 
     connect(d->infoMessage, &KMessageWidget::linkActivated, this, [&](const QString& href) {
         Q_UNUSED(href)
         d->infoMessage->animatedHide();
-        emit requestView(s_globalEditData()->basePage, s_globalEditData()->accountId, s_globalEditData()->journalEntryId);
+        Q_EMIT requestView(s_globalEditData()->basePage, s_globalEditData()->accountId, s_globalEditData()->journalEntryId);
     });
 
     setTabKeyNavigation(false);
@@ -602,7 +602,7 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
             d->registerGlobalEditor(index);
             d->infoMessage->animatedHide();
 
-            emit aboutToStartEdit();
+            Q_EMIT aboutToStartEdit();
             setSpan(index.row(), 0, 1, horizontalHeader()->count());
             d->editIndex = model()->index(index.row(), 0);
 
@@ -650,7 +650,7 @@ void LedgerView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint
     // we need to resize the row that contained the editor.
     resizeRowsToContents();
 
-    emit aboutToFinishEdit();
+    Q_EMIT aboutToFinishEdit();
 
     d->editIndex = QModelIndex();
     QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
@@ -966,7 +966,7 @@ void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& p
             scrollTo(idx, QAbstractItemView::PositionAtBottom);
             edit(idx);
         } else {
-            emit transactionSelected(idx);
+            Q_EMIT transactionSelected(idx);
             QMetaObject::invokeMethod(this, &LedgerView::ensureCurrentItemIsVisible, Qt::QueuedConnection);
         }
         QMetaObject::invokeMethod(this, "doItemsLayout", Qt::QueuedConnection);
@@ -1120,7 +1120,7 @@ void LedgerView::ensureCurrentItemIsVisible()
 void LedgerView::slotSettingsChanged()
 {
     updateGeometries();
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 #if 0
 
     // KMyMoneySettings::showGrid()
@@ -1270,7 +1270,7 @@ void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSel
 
     d->selection.setSelection(SelectedObjects::JournalEntry, selectedJournalEntries);
     d->selection.setSelection(SelectedObjects::Schedule, selectedSchedules);
-    emit transactionSelectionChanged(d->selection);
+    Q_EMIT transactionSelectionChanged(d->selection);
 }
 
 QStringList LedgerView::selectedJournalEntries() const

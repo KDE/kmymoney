@@ -397,7 +397,7 @@ void MyMoneyQifReader::slotProcessData()
     qDebug("%d lines processed", m_linenumber);
     signalProgress(-1, -1);
 
-    emit statementsReady(d->statements);
+    Q_EMIT statementsReady(d->statements);
 }
 
 bool MyMoneyQifReader::startImport()
@@ -479,7 +479,7 @@ bool MyMoneyQifReader::startImport()
             signalProgress(0, m_file->size(), i18n("Reading QIF..."));
             slotSendDataToFilter();
             rc = true;
-//      emit statementsReady(d->statements);
+//      Q_EMIT statementsReady(d->statements);
         } else {
             KMessageBox::detailedError(0, i18n("Error while running the filter '%1'.", m_filter.program()),
                                        m_filter.errorString(),

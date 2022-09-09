@@ -182,7 +182,7 @@ void PriceModel::load(const QMap<MyMoneySecurityPair, MyMoneyPriceEntries>& list
     }
     endResetModel();
 
-    emit modelLoaded();
+    Q_EMIT modelLoaded();
 
     // and don't count loading as a modification
     setDirty(false);
@@ -206,7 +206,7 @@ void PriceModel::addPrice(const MyMoneyPrice& price)
 
     if (static_cast<TreeItem<PriceEntry>*>(index(row, 0).internalPointer())->dataRef() != newEntry) {
         static_cast<TreeItem<PriceEntry>*>(index(row, 0).internalPointer())->dataRef() = newEntry;
-        emit dataChanged(idx, index(row, columnCount()-1));
+        Q_EMIT dataChanged(idx, index(row, columnCount()-1));
         setDirty();
     }
 }

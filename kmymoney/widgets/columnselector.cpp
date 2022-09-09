@@ -246,7 +246,7 @@ void ColumnSelector::slotColumnsMenu(const QPoint)
 
             // do this as last statement as it contains the sync of the grp
             slotUpdateHeaderState();
-            emit columnsChanged();
+            Q_EMIT columnsChanged();
         }
     }
 }

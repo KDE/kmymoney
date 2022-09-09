@@ -51,7 +51,7 @@ void CurrenciesDlg::initializeCurrencies(const QString &presetFromCurrency, cons
     ui->cbTo->blockSignals(false);
     ui->cbFrom->setCurrentIndex(presetFromIndex);
     ui->cbTo->setCurrentIndex(presetToIndex);
-    emit ui->cbFrom->currentIndexChanged(presetFromIndex); // in case currentIndex == presetIndex and no signal would be emitted
+    Q_EMIT ui->cbFrom->currentIndexChanged(presetFromIndex); // in case currentIndex == presetIndex and no signal would be emitted
 }
 
 QString CurrenciesDlg::fromCurrency() {

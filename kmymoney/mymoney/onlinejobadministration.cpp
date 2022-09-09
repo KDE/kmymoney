@@ -86,8 +86,8 @@ void onlineJobAdministration::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::Onl
 
 void onlineJobAdministration::updateActions()
 {
-    emit canSendAnyTaskChanged(canSendAnyTask());
-    emit canSendCreditTransferChanged(canSendCreditTransfer());
+    Q_EMIT canSendAnyTaskChanged(canSendAnyTask());
+    Q_EMIT canSendCreditTransferChanged(canSendCreditTransfer());
 }
 
 QStringList onlineJobAdministration::availableOnlineTasks()
@@ -311,9 +311,9 @@ void onlineJobAdministration::registerOnlineTask(onlineTask *const task)
     m_onlineTasks.insert(task->taskName(), task);
 
     if (sendAnyTask != canSendAnyTask())
-        emit canSendAnyTaskChanged(!sendAnyTask);
+        Q_EMIT canSendAnyTaskChanged(!sendAnyTask);
     if (sendCreditTransfer != canSendCreditTransfer())
-        emit canSendCreditTransferChanged(!sendCreditTransfer);
+        Q_EMIT canSendCreditTransferChanged(!sendCreditTransfer);
 }
 
 void onlineJobAdministration::registerOnlineTaskConverter(onlineTaskConverter* const converter)
@@ -418,6 +418,6 @@ bool onlineJobAdministration::canEditOnlineJob(const QString& jobId)
 
 void onlineJobAdministration::updateOnlineTaskProperties()
 {
-    emit canSendAnyTaskChanged(canSendAnyTask());
-    emit canSendCreditTransferChanged(canSendCreditTransfer());
+    Q_EMIT canSendAnyTaskChanged(canSendAnyTask());
+    Q_EMIT canSendCreditTransferChanged(canSendCreditTransfer());
 }

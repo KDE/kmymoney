@@ -56,11 +56,11 @@ InterestChargeCheckingsWizardPage::InterestChargeCheckingsWizardPage(QWidget *pa
 
     connect(ui->m_interestDateEdit, &KMyMoneyDateEdit::dateValidityChanged, this, [&](const QDate& date) {
         updateDateFrame(qobject_cast<QWidget*>(sender()), date.isValid());
-        emit completeChanged();
+        Q_EMIT completeChanged();
     });
     connect(ui->m_chargesDateEdit, &KMyMoneyDateEdit::dateValidityChanged, this, [&](const QDate& date) {
         updateDateFrame(qobject_cast<QWidget*>(sender()), date.isValid());
-        emit completeChanged();
+        Q_EMIT completeChanged();
     });
     connect(ui->m_interestEdit, &AmountEdit::textChanged, this, &QWizardPage::completeChanged);
     connect(ui->m_interestCategoryEdit, &QComboBox::editTextChanged, this, &QWizardPage::completeChanged);

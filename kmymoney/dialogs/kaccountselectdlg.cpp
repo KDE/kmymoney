@@ -160,7 +160,7 @@ void KAccountSelectDlg::slotCreateAccount()
 {
     Q_D(KAccountSelectDlg);
     if (!((int)d->m_accountType & ((int)eDialogs::Category::expense | (int)eDialogs::Category::income))) {
-        emit createAccount(d->m_account);
+        Q_EMIT createAccount(d->m_account);
         if (!d->m_account.id().isEmpty()) {
             accept();
         }

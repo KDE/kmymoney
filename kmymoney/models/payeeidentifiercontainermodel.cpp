@@ -48,7 +48,7 @@ bool payeeIdentifierContainerModel::setData(const QModelIndex& index, const QVar
             endInsertRows();
         } else {
             m_data->modifyPayeeIdentifier(index.row(), ident);
-            emit dataChanged(createIndex(index.row(), 0), createIndex(index.row(), 0));
+            Q_EMIT dataChanged(createIndex(index.row(), 0), createIndex(index.row(), 0));
         }
         return true;
     }

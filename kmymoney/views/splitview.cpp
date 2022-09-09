@@ -172,7 +172,7 @@ public:
         duplicateItem->setEnabled(enableOption);
 
         const auto deleteItem = menu->addAction(Icons::get(Icons::Icon::EditRemove), i18nc("@item:inmenu Delete selected split(s)", "Delete"), q, [&]() {
-            emit q->deleteSelectedSplits();
+            Q_EMIT q->deleteSelectedSplits();
         });
         deleteItem->setEnabled(enableOption);
 
@@ -291,7 +291,7 @@ bool SplitView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger tr
         /// @todo Here we need to make sure that only a single editor can be started at a time
 
         if(!haveEditorInOtherView) {
-            emit aboutToStartEdit();
+            Q_EMIT aboutToStartEdit();
 
             if (index.data(eMyMoney::Model::SplitIsNewRole).toBool()) {
                 d->setupUnassignedValue(index);
@@ -321,7 +321,7 @@ void SplitView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint 
     // we need to resize the row that contained the editor.
     resizeRowsToContents();
 
-    emit aboutToFinishEdit();
+    Q_EMIT aboutToFinishEdit();
 
     QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
 }
@@ -421,7 +421,7 @@ void SplitView::currentChanged(const QModelIndex& current, const QModelIndex& pr
             edit(idx);
         } else {
             scrollTo(idx, EnsureVisible);
-            emit transactionSelected(MyMoneyFile::baseModel()->mapToBaseSource(idx));
+            Q_EMIT transactionSelected(MyMoneyFile::baseModel()->mapToBaseSource(idx));
         }
         d->firstSelectionAfterCreation = false;
         QMetaObject::invokeMethod(this, "doItemsLayout", Qt::QueuedConnection);

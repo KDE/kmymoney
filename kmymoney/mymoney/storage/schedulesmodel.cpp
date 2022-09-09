@@ -427,7 +427,7 @@ void SchedulesModel::doAddItem(const MyMoneySchedule& schedule, const QModelInde
     const QModelIndex idx = index(row, 0, group);
     static_cast<TreeItem<MyMoneySchedule>*>(idx.internalPointer())->dataRef() = sch
             setDirty();
-    emit dataChanged(idx, index(row, columnCount(group)-1, group));
+    Q_EMIT dataChanged(idx, index(row, columnCount(group)-1, group));
 #endif
 }
 

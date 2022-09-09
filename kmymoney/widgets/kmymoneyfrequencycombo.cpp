@@ -75,5 +75,5 @@ void KMyMoneyFrequencyCombo::setCurrentData(QVariant datavar)
 
 void KMyMoneyFrequencyCombo::slotCurrentDataChanged()
 {
-    emit currentDataChanged(currentData());
+    Q_EMIT currentDataChanged(currentData());
 }

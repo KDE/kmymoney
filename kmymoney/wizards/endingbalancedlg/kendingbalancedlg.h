@@ -81,7 +81,7 @@ Q_SIGNALS:
     void createPayee(const QString&, QString&);
 
     /**
-      * emit when a category is about to be created
+      * Q_EMIT when a category is about to be created
       */
     void createCategory(MyMoneyAccount& acc, const MyMoneyAccount& parent);
 

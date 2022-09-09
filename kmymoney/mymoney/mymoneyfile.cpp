@@ -499,9 +499,9 @@ void MyMoneyFile::attachStorage(MyMoneyStorageMgr* const storage)
     d->m_priceCache.clear();
 
     // notify application about new data availability
-    emit beginChangeNotification();
-    emit dataChanged();
-    emit endChangeNotification();
+    Q_EMIT beginChangeNotification();
+    Q_EMIT dataChanged();
+    Q_EMIT endChangeNotification();
 }
 
 void MyMoneyFile::detachStorage(MyMoneyStorageMgr* const /* storage */)
@@ -561,7 +561,7 @@ void MyMoneyFile::commitTransaction()
     }
 
     // inform the outside world about the beginning of notifications
-    emit beginChangeNotification();
+    Q_EMIT beginChangeNotification();
 
     // Now it's time to send out some signals to the outside world
     // First we go through the d->m_changeSet and emit respective
@@ -594,19 +594,19 @@ void MyMoneyFile::commitTransaction()
 
         switch (change.notificationMode()) {
         case File::Mode::Remove:
-            emit objectRemoved(change.objectType(), change.id());
+            Q_EMIT objectRemoved(change.objectType(), change.id());
             // if there is a balance change recorded for this account remove it since the account itself will be removed
             // this can happen when deleting categories that have transactions and the reassign category feature was used
             d->m_balanceChangedSet.remove(change.id());
             break;
         case File::Mode::Add:
             if (!removedObjects.contains(change.id())) {
-                emit objectAdded(change.objectType(), change.id());
+                Q_EMIT objectAdded(change.objectType(), change.id());
             }
             break;
         case File::Mode::Modify:
             if (!removedObjects.contains(change.id())) {
-                emit objectModified(change.objectType(), change.id());
+                Q_EMIT objectModified(change.objectType(), change.id());
             }
             break;
         }
@@ -624,7 +624,7 @@ void MyMoneyFile::commitTransaction()
             // if we notify about balance change we don't need to notify about value change
             // for the same account since a balance change implies a value change
             d->m_valueChangedSet.remove(id);
-            emit balanceChanged(account(id));
+            Q_EMIT balanceChanged(account(id));
         }
     }
     d->m_balanceChangedSet.clear();
@@ -634,7 +634,7 @@ void MyMoneyFile::commitTransaction()
     for (const auto& id : m_valueChanges) {
         if (!removedObjects.contains(id)) {
             changed = true;
-            emit valueChanged(account(id));
+            Q_EMIT valueChanged(account(id));
         }
     }
 
@@ -642,10 +642,10 @@ void MyMoneyFile::commitTransaction()
 
     // as a last action, send out the global dataChanged signal
     if (changed)
-        emit dataChanged();
+        Q_EMIT dataChanged();
 
     // inform the outside world about the end of notifications
-    emit endChangeNotification();
+    Q_EMIT endChangeNotification();
 }
 
 void MyMoneyFile::rollbackTransaction()
@@ -3948,7 +3948,7 @@ void MyMoneyFile::clearCache()
 
 void MyMoneyFile::forceDataChanged()
 {
-    emit dataChanged();
+    Q_EMIT dataChanged();
 }
 
 bool MyMoneyFile::isTransfer(const MyMoneyTransaction& t) const

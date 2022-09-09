@@ -51,7 +51,7 @@ public:
 
     void emitCompleteStateChanged()
     {
-        emit completeStateChanged();
+        Q_EMIT completeStateChanged();
     }
 
     uint                  m_step;

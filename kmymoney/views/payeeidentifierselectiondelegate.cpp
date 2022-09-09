@@ -21,7 +21,7 @@ payeeIdentifierTypeSelectionWidget::payeeIdentifierTypeSelectionWidget(QWidget* 
 void payeeIdentifierTypeSelectionWidget::itemSelected(int index)
 {
     if (index != 0) {
-        emit commitData(this);
+        Q_EMIT commitData(this);
         setCurrentIndex(0);
     }
 }

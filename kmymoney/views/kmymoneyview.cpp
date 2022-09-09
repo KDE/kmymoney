@@ -115,10 +115,10 @@ public:
             const auto sharedActions = view->sharedToolbarActions();
             if (sharedActions.isEmpty()) {
                 // reset to default
-                emit q->selectSharedActionButton(eMenu::Action::None, nullptr);
+                Q_EMIT q->selectSharedActionButton(eMenu::Action::None, nullptr);
             } else {
                 for (auto it = sharedActions.cbegin(); it != sharedActions.cend(); ++it) {
-                    emit q->selectSharedActionButton(it.key(), it.value());
+                    Q_EMIT q->selectSharedActionButton(it.key(), it.value());
                 }
             }
         }
@@ -129,7 +129,7 @@ public:
         Q_Q(KMyMoneyView);
         const auto sharedActions = view->sharedToolbarActions();
         for (auto it = sharedActions.cbegin(); it != sharedActions.cend(); ++it) {
-            emit q->addSharedActionButton(it.key(), it.value());
+            Q_EMIT q->addSharedActionButton(it.key(), it.value());
         }
     }
 
@@ -264,7 +264,7 @@ void KMyMoneyView::updateViewType()
 void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* plugins)
 {
     // propagate to all views
-    emit onlinePluginsChanged(plugins);
+    Q_EMIT onlinePluginsChanged(plugins);
 }
 
 eDialogs::ScheduleResultCode KMyMoneyView::enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys)
@@ -493,7 +493,7 @@ void KMyMoneyView::slotSettingsChanged()
 {
     updateViewType();
 
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 QHash<eMenu::Action, QAction *> KMyMoneyView::actionsToBeConnected()
@@ -576,7 +576,7 @@ void KMyMoneyView::enableViewsIfFileOpen(bool fileOpen)
             if (d->viewFrames[View(i)]->isEnabled() != fileOpen)
                 d->viewFrames[View(i)]->setEnabled(fileOpen);
 
-    emit viewStateChanged(fileOpen);
+    Q_EMIT viewStateChanged(fileOpen);
 }
 
 void KMyMoneyView::switchToDefaultView()
@@ -609,7 +609,7 @@ void KMyMoneyView::slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* pre
             if (previous != nullptr) {
                 for (auto it = d->viewFrames.constBegin(); it != d->viewFrames.constEnd(); ++it) {
                     if (it.value() == current) {
-                        emit viewActivated(it.key());
+                        Q_EMIT viewActivated(it.key());
                         break;
                     }
                 }

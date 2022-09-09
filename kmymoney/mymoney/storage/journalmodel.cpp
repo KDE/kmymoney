@@ -346,9 +346,9 @@ struct JournalModel::Private
         QHash<QString, AccountBalances> balances;
         for (const auto& accountId : qAsConst(balanceChangedSet)) {
             balances.insert(accountId, balanceCache.value(accountId));
-            emit q->balanceChanged(accountId);
+            Q_EMIT q->balanceChanged(accountId);
         }
-        emit q->balancesChanged(balances);
+        Q_EMIT q->balancesChanged(balances);
     }
 
     QString formatValue(const MyMoneyTransaction& t, const MyMoneySplit& s, const MyMoneyMoney& factor = MyMoneyMoney::ONE)
@@ -988,7 +988,7 @@ void JournalModel::load(const QMap<QString, QSharedPointer<MyMoneyTransaction>>&
     }
     endResetModel();
 
-    emit modelLoaded();
+    Q_EMIT modelLoaded();
 
     // and don't count loading as a modification
     setDirty(false);
@@ -1097,7 +1097,7 @@ void JournalModel::doAddItem(const JournalEntry& item, const QModelIndex& parent
     // add the splits to the balance cache
     d->addTransactionToBalance(startIdx.row(), rows);
 
-    emit dataChanged(startIdx, endIdx);
+    Q_EMIT dataChanged(startIdx, endIdx);
 
     d->finishBalanceCacheOperation();
     setDirty();
@@ -1206,7 +1206,7 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
 
     // let the world know that things have changed
     QModelIndex endIdx = index(row-1, columnCount()-1);
-    emit dataChanged(srcIdx, endIdx);
+    Q_EMIT dataChanged(srcIdx, endIdx);
 
     // Step 3
     if (newTransaction.postDate() != oldTransaction.postDate()) {
@@ -1275,7 +1275,7 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
                 lastRow = srcRow + newSplitCount - 1;
             }
 
-            emit dataChanged(index(firstRow, 0), index(lastRow, columnCount()-1));
+            Q_EMIT dataChanged(index(firstRow, 0), index(lastRow, columnCount()-1));
 
             // update the index of the transaction
             srcIdx = index(destRow, 0);
@@ -1308,7 +1308,7 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
     d->finishBalanceCacheOperation();
 
     if (oldKey != newKey) {
-        emit idChanged(newKey, oldKey);
+        Q_EMIT idChanged(newKey, oldKey);
     }
 
     setDirty();
@@ -1413,7 +1413,7 @@ void JournalModel::updateBalances()
     qDebug() << "End calculating balances";
 
     // and store the results in the accountsModel
-    emit balancesChanged(d->balanceCache);
+    Q_EMIT balancesChanged(d->balanceCache);
 }
 
 MyMoneyMoney JournalModel::clearedBalance(const QString& accountId, const QDate& date) const
@@ -1560,7 +1560,7 @@ void JournalModel::resetRowHeightInformation()
 
     const QModelIndex first = index(0, 0);
     const QModelIndex last = index(lastRow, columnCount() - 1);
-    emit dataChanged(first, last);
+    Q_EMIT dataChanged(first, last);
 }
 
 MyMoneyMoney JournalModel::stockSplitBalance(const QString& accountId, MyMoneyMoney balance, MyMoneyMoney factor) const

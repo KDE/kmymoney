@@ -60,7 +60,7 @@ void LedgerViewPage::showEvent(QShowEvent* event)
     // setup the model to get access to data
     if (d->needModelInit) {
         initModel();
-        emit requestSelectionChanged(d->selections);
+        Q_EMIT requestSelectionChanged(d->selections);
     }
     QWidget::showEvent(event);
 }
@@ -341,7 +341,7 @@ void LedgerViewPage::slotRequestSelectionChanged(const SelectedObjects& selectio
 {
     d->selections.setSelection(SelectedObjects::JournalEntry, selections.selection(SelectedObjects::JournalEntry));
     d->selections.setSelection(SelectedObjects::Schedule, selections.selection(SelectedObjects::Schedule));
-    emit requestSelectionChanged(d->selections);
+    Q_EMIT requestSelectionChanged(d->selections);
 }
 
 const SelectedObjects& LedgerViewPage::selections() const

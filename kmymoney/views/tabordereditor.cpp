@@ -195,7 +195,7 @@ public:
         pos.setY(pos.y() - 20);
         q->move(pos);
         q->resize(size);
-        emit q->geometryUpdated();
+        Q_EMIT q->geometryUpdated();
     }
 
     int widgetIndexAt(const QPoint& pos) const

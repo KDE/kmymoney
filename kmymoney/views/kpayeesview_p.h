@@ -746,7 +746,7 @@ public:
             ui->m_register->scrollTo(idx);
         }
 
-        q->emit requestSelectionChange(m_selections);
+        q->Q_EMIT requestSelectionChange(m_selections);
     }
 
     void finalizePendingChanges()
@@ -790,7 +790,7 @@ public:
         }
 
         m_selections.setSelection(SelectedObjects::Payee, selectedPayeeIds());
-        q->emit requestSelectionChange(m_selections);
+        q->Q_EMIT requestSelectionChange(m_selections);
     }
 
     Ui::KPayeesView*    ui;

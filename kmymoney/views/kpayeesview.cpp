@@ -37,14 +37,14 @@ KPayeesView::KPayeesView(QWidget *parent) :
     connect(d->ui->m_payees, &QWidget::customContextMenuRequested, this, [&](QPoint pos) {
         Q_D(KPayeesView);
         updateActions(d->m_selections);
-        emit requestCustomContextMenu(eMenu::Menu::Payee, d->ui->m_payees->mapToGlobal(pos));
+        Q_EMIT requestCustomContextMenu(eMenu::Menu::Payee, d->ui->m_payees->mapToGlobal(pos));
     });
 
     connect(d->ui->m_register, &QWidget::customContextMenuRequested, this, [&](QPoint pos) {
         Q_D(KPayeesView);
         // it does not make sense to jump to myself
         pActions[eMenu::Action::GoToPayee]->setDisabled(true);
-        emit requestCustomContextMenu(eMenu::Menu::Transaction, d->ui->m_register->mapToGlobal(pos));
+        Q_EMIT requestCustomContextMenu(eMenu::Menu::Transaction, d->ui->m_register->mapToGlobal(pos));
     });
 
     connect(d->ui->m_filterBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int idx) {
@@ -60,7 +60,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
             const auto idx = file->journalModel()->indexById(selections.firstSelection(SelectedObjects::JournalEntry));
             d->m_selections.setSelection(SelectedObjects::Account, idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
         }
-        emit requestSelectionChange(d->m_selections);
+        Q_EMIT requestSelectionChange(d->m_selections);
     });
 
     connect(d->ui->m_register, &LedgerView::requestView, this, &KPayeesView::requestView);

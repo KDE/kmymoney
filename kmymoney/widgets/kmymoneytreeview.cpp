@@ -27,7 +27,7 @@ KMyMoneyTreeView::~KMyMoneyTreeView()
 
 void KMyMoneyTreeView::mouseDoubleClickEvent(QMouseEvent *event)
 {
-    emit startEdit(currentIndex());
+    Q_EMIT startEdit(currentIndex());
     event->accept();
 }
 
@@ -35,7 +35,7 @@ void KMyMoneyTreeView::keyPressEvent(QKeyEvent* event)
 {
     if (event->modifiers() == Qt::NoModifier) {
         if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
-            emit startEdit(currentIndex());
+            Q_EMIT startEdit(currentIndex());
             event->accept();
             return;
         }

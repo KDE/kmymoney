@@ -381,7 +381,7 @@ void KBudgetView::slotSelectBudget()
         }
     }
 
-    emit requestSelectionChange(selection);
+    Q_EMIT requestSelectionChange(selection);
 }
 
 void KBudgetView::slotHideUnused(bool toggled)

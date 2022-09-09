@@ -101,7 +101,7 @@ KTagContainer::KTagContainer(QWidget* parent)
         const auto idx = d->m_tagCombo->model()->index(row, 0);
         const auto id = idx.data(eMyMoney::Model::IdRole).toString();
         d->addTagWidget(id);
-        emit tagsChanged(d->tagIdList());
+        Q_EMIT tagsChanged(d->tagIdList());
     });
 }
 
@@ -148,7 +148,7 @@ void KTagContainer::slotRemoveTagWidget()
     d->m_tagLabelList.removeAt(index);
     delete tagLabel;
 
-    emit tagsChanged(d->tagIdList());
+    Q_EMIT tagsChanged(d->tagIdList());
 
     d->m_tagCombo->setCurrentIndex(0);
     d->m_tagCombo->setFocus();

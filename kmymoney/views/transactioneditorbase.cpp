@@ -101,7 +101,7 @@ void TransactionEditorBase::keyPressEvent(QKeyEvent* e)
 
 void TransactionEditorBase::reject()
 {
-    emit done();
+    Q_EMIT done();
 }
 
 void TransactionEditorBase::setCancelButton(QAbstractButton* button)

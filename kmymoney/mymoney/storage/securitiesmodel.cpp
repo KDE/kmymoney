@@ -221,7 +221,7 @@ void SecuritiesModel::addCurrency(const MyMoneySecurity& currency)
             const QModelIndex index = SecuritiesModel::index(row, 0);
             static_cast<TreeItem<MyMoneySecurity>*>(index.internalPointer())->dataRef() = currency;
             setDirty();
-            emit dataChanged(index, SecuritiesModel::index(row, columnCount()-1));
+            Q_EMIT dataChanged(index, SecuritiesModel::index(row, columnCount()-1));
         } else {
             qDebug() << "Currency with ID" << currency.id() << "already exists";
         }

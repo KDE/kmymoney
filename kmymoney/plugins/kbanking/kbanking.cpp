@@ -625,7 +625,7 @@ bool KBanking::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
                                            i18n("Error"));
                     } else {
                         rc = true;
-                        emit queueChanged();
+                        Q_EMIT queueChanged();
                     }
                 }
             }
@@ -977,7 +977,7 @@ int KBankingExt::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
     _jobQueue = AB_Transaction_List2_new();
     AB_Transaction_List2_freeAll(oldQ);
 
-    emit m_parent->queueChanged();
+    Q_EMIT m_parent->queueChanged();
     m_parent->startPasswordTimer();
 
     return rv;
@@ -1030,7 +1030,7 @@ int KBankingExt::dequeueJob(AB_TRANSACTION *j)
     assert(_jobQueue);
     AB_Transaction_List2_Remove(_jobQueue, j);
     AB_Transaction_free(j);
-    emit m_parent->queueChanged();
+    Q_EMIT m_parent->queueChanged();
     return 0;
 }
 

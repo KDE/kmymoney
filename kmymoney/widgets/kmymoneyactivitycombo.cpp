@@ -82,6 +82,6 @@ void KMyMoneyActivityCombo::slotSetActivity(const QString& id)
             break;
         }
     }
-    emit activitySelected(d->m_activity);
+    Q_EMIT activitySelected(d->m_activity);
     update();
 }

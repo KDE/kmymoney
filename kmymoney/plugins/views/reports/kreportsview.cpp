@@ -210,9 +210,9 @@ void KReportsView::showEvent(QShowEvent * event)
         refresh();
 
     if (auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget()))
-        emit reportSelected(tab->report());
+        Q_EMIT reportSelected(tab->report());
     else
-        emit reportSelected(MyMoneyReport());
+        Q_EMIT reportSelected(MyMoneyReport());
 
     // don't forget base class implementation
     QWidget::showEvent(event);
@@ -324,7 +324,7 @@ void KReportsView::slotOpenUrl(const QUrl &url)
             }
         }
         selection.setSelection(SelectedObjects::JournalEntry, tid);
-        emit requestSelectionChange(selection);
+        Q_EMIT requestSelectionChange(selection);
 
         gotoAccount->trigger();
     } else {
@@ -594,7 +594,7 @@ void KReportsView::slotOpenReport(const MyMoneyReport& report)
         d->addReportTab(report);
 
     if (!isVisible())
-        emit switchViewRequested(View::Reports);
+        Q_EMIT switchViewRequested(View::Reports);
 }
 
 void KReportsView::slotItemDoubleClicked(QTreeWidgetItem* item, int)

@@ -360,7 +360,7 @@ void KMyMoneyCalculator::calculationClicked(int button)
         d->op = button;
     } else {
         d->op = 0;
-        emit signalResultAvailable();
+        Q_EMIT signalResultAvailable();
     }
     d->operand.clear();
 }
@@ -542,7 +542,7 @@ void KMyMoneyCalculator::keyPressEvent(QKeyEvent* ev)
         button = KMyMoneyCalculatorPrivate::EQUAL;
         break;
     case Qt::Key_Escape:
-        emit signalQuit();
+        Q_EMIT signalQuit();
         break;
     case Qt::Key_Percent:
         button = KMyMoneyCalculatorPrivate::PERCENT;

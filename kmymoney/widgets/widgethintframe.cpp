@@ -111,7 +111,7 @@ void WidgetHintFrameCollection::updateWidgets()
         }
     }
 
-    emit inputIsValid(enabled);
+    Q_EMIT inputIsValid(enabled);
 }
 
 class WidgetHintFrame::Private
@@ -169,7 +169,7 @@ void WidgetHintFrame::show(QWidget* editWidget, const QString& tooltip)
     if (f) {
         f->QWidget::show();
         f->d->status = true;
-        emit f->changed();
+        Q_EMIT f->changed();
     }
     if (!tooltip.isNull())
         editWidget->setToolTip(tooltip);
@@ -181,7 +181,7 @@ void WidgetHintFrame::hide(QWidget* editWidget, const QString& tooltip)
     if (f) {
         f->QWidget::hide();
         f->d->status = false;
-        emit f->changed();
+        Q_EMIT f->changed();
     }
     if (!tooltip.isNull())
         editWidget->setToolTip(tooltip);

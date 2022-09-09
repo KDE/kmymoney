@@ -185,13 +185,13 @@ void KMyMoneyBriefSchedule::slotEnterClicked()
 {
     Q_D(KMyMoneyBriefSchedule);
     hide();
-    emit enterClicked(d->m_scheduleList[d->m_index], d->m_date);
+    Q_EMIT enterClicked(d->m_scheduleList[d->m_index], d->m_date);
 }
 
 void KMyMoneyBriefSchedule::slotSkipClicked()
 {
     Q_D(KMyMoneyBriefSchedule);
     hide();
-    emit skipClicked(d->m_scheduleList[d->m_index], d->m_date);
+    Q_EMIT skipClicked(d->m_scheduleList[d->m_index], d->m_date);
 }
 

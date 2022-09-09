@@ -84,7 +84,7 @@ void KMyMoneyCashFlowCombo::slotSetDirection(const QString& id)
             break;
         }
     }
-    emit directionSelected(d->m_dir);
+    Q_EMIT directionSelected(d->m_dir);
     update();
 }
 

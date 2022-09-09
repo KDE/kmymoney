@@ -27,7 +27,7 @@ public:
     /**
       * This member keeps the initial value. It is used during
       * resetText() to set the widgets text back to this initial value
-      * and as comparison during focusOutEvent() to emit the lineChanged
+      * and as comparison during focusOutEvent() to Q_EMIT the lineChanged
       * signal if the current text is different.
       */
     QString m_text;
@@ -76,7 +76,7 @@ void KMyMoneyLineEdit::focusOutEvent(QFocusEvent *ev)
     // possible completions, we have a new payee
     // and signal that to the outside world.
     if (text() != d->m_text) {
-        emit lineChanged(text());
+        Q_EMIT lineChanged(text());
     }
     KLineEdit::focusOutEvent(ev);
 

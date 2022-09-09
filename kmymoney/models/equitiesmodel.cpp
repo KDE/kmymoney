@@ -538,11 +538,11 @@ void EquitiesFilterProxyModel::slotColumnsMenu(const QPoint)
         const auto contains = d->m_visColumns.contains(idColumn);
         if (isChecked && !contains) {           // column has just been enabled
             d->m_visColumns.append(idColumn);     // change filtering variable
-            emit columnToggled(idColumn, true);   // emit signal for method to add column to model
+            Q_EMIT columnToggled(idColumn, true);   // Q_EMIT signal for method to add column to model
             invalidate();                         // refresh model to reflect recent changes
         } else if (!isChecked && contains) {    // column has just been disabled
             d->m_visColumns.removeOne(idColumn);
-            emit columnToggled(idColumn, false);
+            Q_EMIT columnToggled(idColumn, false);
             invalidate();
         }
     }

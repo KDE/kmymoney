@@ -287,7 +287,7 @@ void KMyMoneyPriceDlg::slotSelectPrice()
         MyMoneyPrice price = item->data(0, Qt::UserRole).value<MyMoneyPrice>();
         if (price.source() == "KMyMoney" || itemsList.count() > 1)
             d->ui->m_editButton->setEnabled(false);
-//    emit selectObject(price);
+//    Q_EMIT selectObject(price);
     }
 }
 

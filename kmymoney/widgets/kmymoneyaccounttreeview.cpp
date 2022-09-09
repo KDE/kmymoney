@@ -58,14 +58,14 @@ public:
                 // In case we should open an account or category we do it
                 // For the top level accounts we switch between expanded and collapsed view
                 if (index.parent().isValid()) {
-                    emit q->requestActionTrigger(eMenu::Action::OpenAccount);
+                    Q_EMIT q->requestActionTrigger(eMenu::Action::OpenAccount);
                 } else {
                     q->setExpanded(index, !q->isExpanded(index));
                 }
             } else {
                 idx = MyMoneyFile::instance()->institutionsModel()->indexById(objId);
                 if (idx.isValid()) {
-                    emit q->requestActionTrigger(eMenu::Action::EditInstitution);
+                    Q_EMIT q->requestActionTrigger(eMenu::Action::EditInstitution);
                 }
             }
         }
@@ -146,9 +146,9 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint pos)
         const auto account = MyMoneyFile::instance()->accountsModel()->itemById(objId);
         if (!account.id().isEmpty()) {
             if (account.isIncomeExpense()) {
-                emit requestCustomContextMenu(eMenu::Menu::Category, viewport()->mapToGlobal(pos));
+                Q_EMIT requestCustomContextMenu(eMenu::Menu::Category, viewport()->mapToGlobal(pos));
             } else {
-                emit requestCustomContextMenu(eMenu::Menu::Account, viewport()->mapToGlobal(pos));
+                Q_EMIT requestCustomContextMenu(eMenu::Menu::Account, viewport()->mapToGlobal(pos));
             }
         }
         const auto institution = MyMoneyFile::instance()->institutionsModel()->itemById(objId);
@@ -158,7 +158,7 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint pos)
             // the index. If it is valid, we have been called via an account,
             // if it is invalid the source is an institution.
             if (!currentIndex().parent().isValid()) {
-                emit requestCustomContextMenu(eMenu::Menu::Institution, viewport()->mapToGlobal(pos));
+                Q_EMIT requestCustomContextMenu(eMenu::Menu::Institution, viewport()->mapToGlobal(pos));
             }
         }
     }
@@ -189,5 +189,5 @@ void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, c
         }
     }
     // since no object was selected reset the object selection
-    emit requestSelectionChange(selections);
+    Q_EMIT requestSelectionChange(selections);
 }

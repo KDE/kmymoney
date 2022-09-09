@@ -36,7 +36,7 @@ CheckingStatementInfoWizardPage::CheckingStatementInfoWizardPage(QWidget *parent
         if (!date.isValid()) {
             WidgetHintFrame::show(ui->m_statementDate, i18nc("@info:tooltip", "The date is invalid."));
         }
-        emit completeChanged();
+        Q_EMIT completeChanged();
     });
 
     registerField("endingBalance", ui->m_endingBalance, "value");

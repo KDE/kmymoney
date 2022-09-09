@@ -85,7 +85,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
     //make sure the model is clear
     m_model.clear();
-    const bool blocked = m_model.blockSignals(true); // don't emit dataChanged() signal during each drawPivotRowSet
+    const bool blocked = m_model.blockSignals(true); // don't Q_EMIT dataChanged() signal during each drawPivotRowSet
 
     //set the new header
     HeaderFooter* header = new HeaderFooter;

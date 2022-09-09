@@ -50,7 +50,7 @@ void KMyMoneyViewBase::aboutToShow()
 
     d->m_isActiveView = true;
     // tell everyone what is selected here
-    emit requestSelectionChange(d->m_selections);
+    Q_EMIT requestSelectionChange(d->m_selections);
 }
 
 void KMyMoneyViewBase::aboutToHide()

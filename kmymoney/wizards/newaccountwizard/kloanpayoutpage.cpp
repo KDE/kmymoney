@@ -97,7 +97,7 @@ void LoanPayoutPage::slotCreateAssetAccount()
     acc.setAccountType(Account::Type::Asset);
     acc.setOpeningDate(d->m_wizard->d_func()->m_accountTypePage->d_func()->ui->m_openingDate->date());
 
-    emit d->m_wizard->createAccount(acc);
+    Q_EMIT d->m_wizard->createAccount(acc);
 
     if (!acc.id().isEmpty()) {
         d->ui->m_assetAccount->setSelectedItem(acc.id());

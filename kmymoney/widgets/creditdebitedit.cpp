@@ -54,7 +54,7 @@ public:
             src->clear();
         }
         Q_Q(CreditDebitEdit);
-        emit q->amountChanged();
+        Q_EMIT q->amountChanged();
     }
 
     CreditDebitEdit* q_ptr;

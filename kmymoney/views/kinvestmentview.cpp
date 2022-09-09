@@ -100,12 +100,12 @@ void KInvestmentView::showEvent(QShowEvent* event)
 
         connect(d->ui->m_equitiesTree, &QWidget::customContextMenuRequested, this, [&](const QPoint& pos) {
             Q_D(KInvestmentView);
-            emit requestCustomContextMenu(eMenu::Menu::Investment, d->ui->m_equitiesTree->viewport()->mapToGlobal(pos));
+            Q_EMIT requestCustomContextMenu(eMenu::Menu::Investment, d->ui->m_equitiesTree->viewport()->mapToGlobal(pos));
         });
 
         connect(d->ui->m_securitiesTree, &QWidget::customContextMenuRequested, this, [&](const QPoint& pos) {
             Q_D(KInvestmentView);
-            emit requestCustomContextMenu(eMenu::Menu::Security, d->ui->m_equitiesTree->viewport()->mapToGlobal(pos));
+            Q_EMIT requestCustomContextMenu(eMenu::Menu::Security, d->ui->m_equitiesTree->viewport()->mapToGlobal(pos));
         });
 
         connect(d->ui->m_equitiesTree->selectionModel(),
@@ -133,7 +133,7 @@ void KInvestmentView::showEvent(QShowEvent* event)
                     }
                     if (d->ui->m_equitiesTree->isVisible()) {
                         d->m_selections = d->m_equitySelections;
-                        emit requestSelectionChange(d->m_selections);
+                        Q_EMIT requestSelectionChange(d->m_selections);
                     }
                 });
 
@@ -146,7 +146,7 @@ void KInvestmentView::showEvent(QShowEvent* event)
                     d->m_securitySelections.setSelection(SelectedObjects::Security, current.data(eMyMoney::Model::IdRole).toString());
                     if (d->ui->m_securitiesTree->isVisible()) {
                         d->m_selections = d->m_securitySelections;
-                        emit requestSelectionChange(d->m_selections);
+                        Q_EMIT requestSelectionChange(d->m_selections);
                     }
                 });
 
@@ -165,7 +165,7 @@ void KInvestmentView::showEvent(QShowEvent* event)
                 d->m_selections = d->m_securitySelections;
                 break;
             }
-            emit requestSelectionChange(d->m_selections);
+            Q_EMIT requestSelectionChange(d->m_selections);
         });
 
         connect(d->ui->m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, this, [&](const QString& accountId) {

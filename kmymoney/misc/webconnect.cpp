@@ -149,7 +149,7 @@ void WebConnect::dataAvailable()
     QUrl url;
     in >> url;
     qCDebug(WebConnectLog) << "Processing" << url;
-    emit gotUrl(url);
+    Q_EMIT gotUrl(url);
 }
 
 void WebConnect::loadFile(const QUrl& url)

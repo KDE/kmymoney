@@ -67,7 +67,7 @@ void CsvWriter::write(const QString& filename,
             if (accountData) {
                 writeAccountEntry(s, accountId, startDate, endDate);
             }
-            emit signalProgress(-1, -1);
+            Q_EMIT signalProgress(-1, -1);
 
         } catch (const MyMoneyException &e) {
             KMessageBox::error(nullptr, i18n("Unexpected exception '%1'", QString::fromLatin1(e.what())));
@@ -137,12 +137,12 @@ void CsvWriter::writeCategoryEntries(QTextStream &s)
     expense = file->expense();
 
     QStringList list = income.accountList() + expense.accountList();
-    emit signalProgress(0, list.count());
+    Q_EMIT signalProgress(0, list.count());
     QStringList::Iterator it_catList;
     int count = 0;
     for (it_catList = list.begin(); it_catList != list.end(); ++it_catList) {
         writeCategoryEntry(s, *it_catList, "");
-        emit signalProgress(++count, 0);
+        Q_EMIT signalProgress(++count, 0);
     }
 }
 

@@ -89,5 +89,5 @@ void KSettingsPlugins::slotResetToDefaults()
 void KSettingsPlugins::slotSavePluginConfiguration()
 {
     m_pluginSelector->save();
-    emit settingsChanged(QStringLiteral("Plugins"));
+    Q_EMIT settingsChanged(QStringLiteral("Plugins"));
 }

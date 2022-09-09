@@ -45,8 +45,8 @@ payeeIdentifier nationalAccountEdit::identifier() const
 
 void nationalAccountEdit::editFinished()
 {
-    emit commitData(this);
-    emit closeEditor(this);
+    Q_EMIT commitData(this);
+    Q_EMIT closeEditor(this);
 }
 
 QString nationalAccountEdit::accountNumber() const

@@ -288,7 +288,7 @@ void TemplateLoader::load(TemplatesModel* model)
     if (d->countryRow < d->countries.count()) {
         QMetaObject::invokeMethod(this, "slotLoadCountry", Qt::QueuedConnection);
     } else {
-        emit loadingFinished();
+        Q_EMIT loadingFinished();
     }
 }
 
@@ -321,7 +321,7 @@ void TemplateLoader::slotLoadCountry()
     if (d->countryRow < d->countries.count()) {
         QMetaObject::invokeMethod(this, "slotLoadCountry", Qt::QueuedConnection);
     } else {
-        emit loadingFinished();
+        Q_EMIT loadingFinished();
     }
 }
 

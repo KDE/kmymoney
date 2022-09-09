@@ -539,7 +539,7 @@ void SimpleLedgerView::closeLedger(int idx)
         // if the currently selected ledger is closed, we
         // remove any selection
         d->m_selections.clearSelections();
-        emit requestSelectionChange(d->m_selections);
+        Q_EMIT requestSelectionChange(d->m_selections);
 
         auto tab = d->ui->ledgerTab->widget(idx);
         d->ui->ledgerTab->removeTab(idx);
@@ -682,7 +682,7 @@ void SimpleLedgerView::slotSettingsChanged()
         d->accountsModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
         d->accountsModel->setHideFavoriteAccounts(false);
     }
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 void SimpleLedgerView::slotRequestSelectionChange(const SelectedObjects& selections) const
@@ -693,7 +693,7 @@ void SimpleLedgerView::slotRequestSelectionChange(const SelectedObjects& selecti
     if (!d->reconciledAccount.isEmpty()) {
         newSelections.setSelection(SelectedObjects::ReconciliationAccount, d->reconciledAccount);
     }
-    emit requestSelectionChange(newSelections);
+    Q_EMIT requestSelectionChange(newSelections);
 }
 
 void SimpleLedgerView::updateActions(const SelectedObjects& selections)
@@ -782,12 +782,12 @@ void SimpleLedgerView::executeAction(eMenu::Action action, const SelectedObjects
 
 void SimpleLedgerView::sectionResized(QWidget* view, const QString& configGroupName, int section, int oldSize, int newSize) const
 {
-    emit resizeSection(view, configGroupName, section, oldSize, newSize);
+    Q_EMIT resizeSection(view, configGroupName, section, oldSize, newSize);
 }
 
 void SimpleLedgerView::sectionMoved(QWidget* view, int section, int oldIndex, int newIndex) const
 {
-    emit moveSection(view, section, oldIndex, newIndex);
+    Q_EMIT moveSection(view, section, oldIndex, newIndex);
 }
 
 bool SimpleLedgerView::hasClosableView() const

@@ -129,7 +129,7 @@ void KMyMoneyAccountSelector::selectCategories(const bool income, const bool exp
         else if ((*it_v)->text(0) == i18n("Expense categories"))
             selectAllSubItems(*it_v, expense);
     }
-    emit stateChanged();
+    Q_EMIT stateChanged();
 }
 
 void KMyMoneyAccountSelector::slotSelectIncomeCategories()

@@ -67,7 +67,7 @@ void KScheduledView::showEvent(QShowEvent* event)
         d->init();
         connect(d->ui->m_scheduleTree, &QWidget::customContextMenuRequested, this, [&](const QPoint& pos) {
             Q_D(KScheduledView);
-            emit requestCustomContextMenu(eMenu::Menu::Schedule, d->ui->m_scheduleTree->viewport()->mapToGlobal(pos));
+            Q_EMIT requestCustomContextMenu(eMenu::Menu::Schedule, d->ui->m_scheduleTree->viewport()->mapToGlobal(pos));
         });
         connect(d->ui->m_scheduleTree, &KMyMoneyTreeView::startEdit, this, &KScheduledView::slotEditSchedule);
 
@@ -189,7 +189,7 @@ void KScheduledView::slotSetSelectedItem(const QItemSelection& selected, const Q
             selections.addSelection(SelectedObjects::Schedule, objId);
         }
     }
-    emit requestSelectionChange(selections);
+    Q_EMIT requestSelectionChange(selections);
 }
 
 void KScheduledView::slotNewSchedule()

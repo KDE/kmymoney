@@ -305,7 +305,7 @@ void KOnlineJobOutboxView::updateSelection()
         d->m_selections.addSelection(SelectedObjects::OnlineJob, idx.data(eMyMoney::Model::IdRole).toString());
     }
 
-    emit requestSelectionChange(d->m_selections);
+    Q_EMIT requestSelectionChange(d->m_selections);
 }
 
 void KOnlineJobOutboxView::slotRemoveJob()
@@ -360,7 +360,7 @@ void KOnlineJobOutboxView::slotSendAllSendableJobs()
     qDebug() << "I shall send " << validJobs.count() << "/" << MyMoneyFile::instance()->onlineJobList().count() << " onlineJobs";
     if (!validJobs.isEmpty())
         slotOnlineJobSend(validJobs);
-//    emit sendJobs(validJobs);
+//    Q_EMIT sendJobs(validJobs);
 }
 
 void KOnlineJobOutboxView::slotSendSelectedJobs()
@@ -390,7 +390,7 @@ void KOnlineJobOutboxView::slotSendSelectedJobs()
     }
 
     slotOnlineJobSend(validJobs);
-//  emit sendJobs(validJobs);
+//  Q_EMIT sendJobs(validJobs);
 }
 
 void KOnlineJobOutboxView::slotEditJob()
@@ -401,7 +401,7 @@ void KOnlineJobOutboxView::slotEditJob()
         const auto jobId = indexes.first().data(eMyMoney::Model::IdRole).toString();
         Q_ASSERT(!jobId.isEmpty());
         d->editJob(jobId);
-//    emit editJob(jobId);
+//    Q_EMIT editJob(jobId);
     }
 }
 
@@ -413,7 +413,7 @@ void KOnlineJobOutboxView::slotEditJob(const QModelIndex &index)
 
     auto jobId = index.data(eMyMoney::Model::IdRole).toString();
     d->editJob(jobId);
-//  emit editJob(jobId);
+//  Q_EMIT editJob(jobId);
 }
 
 void KOnlineJobOutboxView::contextMenuEvent(QContextMenuEvent*)

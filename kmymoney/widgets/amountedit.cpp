@@ -456,7 +456,7 @@ void AmountEdit::focusOutEvent(QFocusEvent* event)
     if ((d->m_value != value()) || (d->m_shares != shares())) {
         d->m_value = value();
         d->m_shares = shares();
-        emit amountChanged();
+        Q_EMIT amountChanged();
     }
 }
 
@@ -670,7 +670,7 @@ void AmountEdit::theTextChanged(const QString & theText)
                     d->m_valueText = amount.formatMoney(QString(), d->precision(AmountEdit::DisplayValue), false);
                 }
             }
-            emit validatedTextChanged(text());
+            Q_EMIT validatedTextChanged(text());
         }
     }
 }
@@ -768,7 +768,7 @@ void AmountEdit::setDisplayState(AmountEdit::DisplayState state)
     if (state != d->m_state) {
         d->m_state = state;
         d->updateWidgets();
-        emit displayStateChanged(state);
+        Q_EMIT displayStateChanged(state);
     }
 }
 

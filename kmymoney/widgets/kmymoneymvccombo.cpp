@@ -150,7 +150,7 @@ void KMyMoneyMVCCombo::activated(int index)
     auto dataVariant = itemData(index);
     if (dataVariant.isValid()) {
         d->m_id = dataVariant.toString();
-        emit itemSelected(d->m_id);
+        Q_EMIT itemSelected(d->m_id);
     }
 }
 
@@ -235,7 +235,7 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
         //this is to cover the case when you highlight an item but don't activate it with Enter
         if (currentText() != itemText(currentIndex())) {
             setCurrentIndex(findText(currentText(), Qt::MatchExactly));
-            emit activated(currentIndex());
+            Q_EMIT activated(currentIndex());
         }
     }
 
@@ -247,13 +247,13 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
         d->m_id.clear();
         setCurrentIndex(-1);
         if (!id.isEmpty())
-            emit itemSelected(d->m_id);
+            Q_EMIT itemSelected(d->m_id);
         update();
     }
 
     d->m_inFocusOutEvent = false;
     // This is used only be KMyMoneyTagCombo at this time
-    emit lostFocus();
+    Q_EMIT lostFocus();
 }
 
 void KMyMoneyMVCCombo::checkCurrentText()
@@ -264,12 +264,12 @@ void KMyMoneyMVCCombo::checkCurrentText()
         QString id;
         // announce that we go into a possible dialog to create an object
         // This can be used by upstream widgets to disable filters etc.
-        emit objectCreation(true);
+        Q_EMIT objectCreation(true);
 
-        emit createItem(payeeName, id);
+        Q_EMIT createItem(payeeName, id);
 
         // Announce that we return from object creation
-        emit objectCreation(false);
+        Q_EMIT objectCreation(false);
 
         // update the field to a possibly created object
         d->m_id = id;

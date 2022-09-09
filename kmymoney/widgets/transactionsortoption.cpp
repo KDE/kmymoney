@@ -166,7 +166,7 @@ void TransactionSortOption::slotToggleDirection()
         int direction = item->data(Qt::UserRole).toInt() * (-1);
         item->setData(Qt::UserRole, QVariant(direction));
         setDirectionIcon(item);
-        emit settingsChanged(settings());
+        Q_EMIT settingsChanged(settings());
     }
 }
 
@@ -226,7 +226,7 @@ void TransactionSortOption::slotAddItem()
         if (next) {
             ui->m_availableList->setCurrentItem(next);
         }
-        emit settingsChanged(settings());
+        Q_EMIT settingsChanged(settings());
     }
 }
 
@@ -243,7 +243,7 @@ void TransactionSortOption::slotRemoveItem()
         if (next) {
             ui->m_selectedList->setCurrentItem(next);
         }
-        emit settingsChanged(settings());
+        Q_EMIT settingsChanged(settings());
     }
 }
 
@@ -258,7 +258,7 @@ void TransactionSortOption::slotUpItem()
         ui->m_selectedList->setCurrentRow(ui->m_selectedList->row(item));
         ui->m_upButton->setEnabled(ui->m_selectedList->row(item) > 0);
         ui->m_downButton->setEnabled(ui->m_selectedList->row(item) < ui->m_selectedList->count() - 1);
-        emit settingsChanged(settings());
+        Q_EMIT settingsChanged(settings());
     }
 }
 
@@ -273,7 +273,7 @@ void TransactionSortOption::slotDownItem()
         ui->m_selectedList->setCurrentRow(ui->m_selectedList->row(item));
         ui->m_upButton->setEnabled(ui->m_selectedList->row(item) > 0);
         ui->m_downButton->setEnabled(ui->m_selectedList->row(item) < ui->m_selectedList->count() - 1);
-        emit settingsChanged(settings());
+        Q_EMIT settingsChanged(settings());
     }
 }
 

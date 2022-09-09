@@ -34,8 +34,8 @@ ibanBicItemEdit::ibanBicItemEdit(QWidget* parent)
 
 void ibanBicItemEdit::editFinished()
 {
-    emit commitData(this);
-    emit closeEditor(this);
+    Q_EMIT commitData(this);
+    Q_EMIT closeEditor(this);
 }
 
 payeeIdentifier ibanBicItemEdit::identifier() const
@@ -97,7 +97,7 @@ void ibanBicItemEdit::updateIdentifier()
     d->m_identifier = ident;
 
     if (changed) {
-        emit identifierChanged(d->m_identifier);
-        emit commitData(this);
+        Q_EMIT identifierChanged(d->m_identifier);
+        Q_EMIT commitData(this);
     }
 }

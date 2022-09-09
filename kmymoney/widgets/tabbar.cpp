@@ -95,7 +95,7 @@ void TabBar::setCurrentIndex(int id)
         blockSignals(false);
 
     if (d->m_signalType == eTabBar::SignalEmission::Always)
-        emit currentChanged(d->m_idMap[id]);
+        Q_EMIT currentChanged(d->m_idMap[id]);
 }
 
 void TabBar::setTabEnabled(int id, bool enable)
@@ -124,12 +124,12 @@ void TabBar::slotTabCurrentChanged(int id)
     QMap<int, int>::const_iterator it;
     for (it = d->m_idMap.constBegin(); it != d->m_idMap.constEnd(); ++it) {
         if (*it == id) {
-            emit tabCurrentChanged(it.key());
+            Q_EMIT tabCurrentChanged(it.key());
             break;
         }
     }
     if (it == d->m_idMap.constEnd())
-        emit tabCurrentChanged(id);
+        Q_EMIT tabCurrentChanged(id);
 }
 
 void TabBar::showEvent(QShowEvent* event)
