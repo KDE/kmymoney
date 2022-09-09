@@ -149,7 +149,7 @@ cmake_dependent_option(ENABLE_GPG "Enable GPG support." ON
 
 add_feature_info("Encryption" ENABLE_GPG "Allows to store your financial data using strong GPG encryption.")
 
-add_definitions(-DQT_USE_QSTRINGBUILDER -DQT_NO_CAST_TO_ASCII -DQT_NO_URL_CAST_FROM_STRING)
+add_definitions(-DQT_USE_QSTRINGBUILDER -DQT_NO_CAST_TO_ASCII -DQT_NO_URL_CAST_FROM_STRING -DQT_NO_KEYWORDS)
 add_definitions(-DTRANSLATION_DOMAIN=\"kmymoney\")
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
