@@ -426,7 +426,13 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
 
     t.m_shares = MyMoneyMoney();
     if (data.units_valid) {
-        t.m_shares = MyMoneyMoney(data.units, 100000).reduce();
+        auto shares = MyMoneyMoney(data.units, 1000000000).reduce();
+        const auto denominator = MyMoneyMoney(shares.toString().remove(QRegularExpression("^[+-]?[\\d]+/")));
+        t.m_shareDenominator = MyMoneyMoney::ONE;
+        while (t.m_shareDenominator < denominator) {
+            t.m_shareDenominator *= MyMoneyMoney(10, 1);
+        }
+        t.m_shares = shares;
     }
 
     t.m_amount = MyMoneyMoney();
@@ -572,12 +578,26 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
     if (data.security_data_valid) {
         struct OfxSecurityData* secdata = data.security_data_ptr;
 
+        if (secdata->unique_id_valid) {
+            t.m_strSecurityId = QString::fromUtf8(secdata->unique_id);
+        }
         if (secdata->ticker_valid) {
             t.m_strSymbol = QString::fromUtf8(secdata->ticker);
         }
 
         if (secdata->secname_valid) {
             t.m_strSecurity = QString::fromUtf8(secdata->secname);
+        }
+
+        // scan over securities and check if security is there
+        // and possibly adjust the smallestFraction setting
+        for (auto& security : s.m_listSecurities) {
+            if ((t.m_strSecurityId == security.m_strId) || (t.m_strSecurity == security.m_strName)) {
+                if (t.m_shareDenominator > security.m_smallestFraction) {
+                    security.m_smallestFraction = t.m_shareDenominator;
+                    break;
+                }
+            }
         }
     }
 
@@ -595,7 +615,7 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
         t.m_fees += MyMoneyMoney(data.commission, 1000).reduce();
     }
 
-    // In the case of investment transactions, the 'total' is supposed to the total amount
+    // In the case of investment transactions, the 'total' is supposed to be the total amount
     // of the transaction.  units * unitprice +/- commission.  Easy, right?  Sadly, it seems
     // some ofx creators do not follow this in all circumstances.  Therefore, we have to double-
     // check the total here and adjust it if it's wrong.

@@ -55,10 +55,12 @@ public:
 
         eMyMoney::Transaction::Action m_eAction = eMyMoney::Transaction::Action::None;
         MyMoneyMoney m_shares;
+        MyMoneyMoney m_shareDenominator;
         MyMoneyMoney m_fees;
         MyMoneyMoney m_price;
         QString m_strInterestCategory;
         QString m_strBrokerageAccount;
+        QString m_strSecurityId;
         QString m_strSymbol;
         QString m_strSecurity;
         QList<Split> m_listSplits;
@@ -76,6 +78,7 @@ public:
         QString m_strName;
         QString m_strSymbol;
         QString m_strId;
+        MyMoneyMoney m_smallestFraction = MyMoneyMoney(100, 1);
     };
 
     QString m_strAccountName;

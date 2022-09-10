@@ -102,6 +102,8 @@ public:
     QMap<QString, MyMoneySecurity> securitiesByName;
     bool                           m_skipCategoryMatching;
     void (*m_progressCallback)(int, int, const QString&);
+    QDate m_oldestPostDate;
+
 private:
     void scanCategories(QString& id, const MyMoneyAccount& invAcc, const MyMoneyAccount& parentAccount, const QString& defaultName);
     /**
@@ -375,8 +377,8 @@ QStringList MyMoneyStatementReader::importStatement(const MyMoneyStatement& s, b
 
     // keep a copy of the statement
     if (KMyMoneySettings::logImportedStatements()) {
-        auto logFile = QString::fromLatin1("%1/kmm-statement-%2.txt").arg(KMyMoneySettings::logPath(),
-                       QDateTime::currentDateTimeUtc().toString(QStringLiteral("yyyy-MM-dd hh-mm-ss.zzz")));
+        auto logFile = QString::fromLatin1("%1/kmm-statement-%2.txt")
+                           .arg(KMyMoneySettings::logPath(), QDateTime::currentDateTimeUtc().toString(QStringLiteral("yyyy-MM-ddThh-mm-ss.zzz")));
         MyMoneyStatement::writeXMLFile(s, logFile);
     }
 
@@ -486,6 +488,17 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
         messages += i18n("Importing statement without transactions");
 
     qDebug("Importing statement for '%s'", qPrintable(d->m_account.name()));
+
+    //
+    // Determine oldest transaction date
+    // (we will use that as opening date for security accounts)
+    //
+    d->m_oldestPostDate = QDate::currentDate();
+    for (const auto& transaction : s.m_listTransactions) {
+        if (transaction.m_datePosted < d->m_oldestPostDate) {
+            d->m_oldestPostDate = transaction.m_datePosted;
+        }
+    }
 
     //
     // Process the securities
@@ -608,8 +621,8 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
     QList<MyMoneySecurity> list = file->securityList();
     QList<MyMoneySecurity>::ConstIterator it = list.constBegin();
     while (it != list.constEnd() && security.id().isEmpty()) {
-        if (matchNotEmpty(sec_in.m_strSymbol, (*it).tradingSymbol()) ||
-                matchNotEmpty(sec_in.m_strName, (*it).name())) {
+        if (matchNotEmpty(sec_in.m_strSymbol, (*it).tradingSymbol()) || matchNotEmpty(sec_in.m_strId, (*it).value("kmm-security-id"))
+            || matchNotEmpty(sec_in.m_strName, (*it).name())) {
             security = *it;
         }
         ++it;
@@ -624,6 +637,7 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
         security.setValue("kmm-security-id", sec_in.m_strId);
         security.setValue("kmm-online-source", "Yahoo Finance");
         security.setSecurityType(Security::Type::Stock);
+        security.setSmallestAccountFraction(static_cast<int>(sec_in.m_smallestFraction.toDouble()));
         MyMoneyFileTransaction ft;
         try {
             file->addSecurity(security);
@@ -753,6 +767,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                         thisaccount.setName(security.name());
                         thisaccount.setAccountType(Account::Type::Stock);
                         thisaccount.setCurrencyId(security.id());
+                        thisaccount.setOpeningDate(d->m_oldestPostDate);
                         currencyid = thisaccount.currencyId();
 
                         file->addAccount(thisaccount, d->m_account);

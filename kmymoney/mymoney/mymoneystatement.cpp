@@ -61,8 +61,10 @@ enum class Attribute {
     Action,
     Shares,
     Security,
+    SecurityId,
     BrokerageAccount,
     Category,
+    SmallestFraction,
 };
 uint qHash(const Attribute key, uint seed) {
     return ::qHash(static_cast<uint>(key), seed);
@@ -143,8 +145,10 @@ QString getAttrName(const Statement::Attribute attr)
         {Statement::Attribute::Action,               QStringLiteral("action")},
         {Statement::Attribute::Shares,               QStringLiteral("shares")},
         {Statement::Attribute::Security,             QStringLiteral("security")},
+        {Statement::Attribute::SecurityId,           QStringLiteral("securityId")},
         {Statement::Attribute::BrokerageAccount,     QStringLiteral("brokerageaccount")},
         {Statement::Attribute::Category,             QStringLiteral("version")},
+        {Statement::Attribute::SmallestFraction,     QStringLiteral("smallestFraction")},
         // clang-format on
     };
     return attrNames[attr];
@@ -185,6 +189,7 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
         if (m_eType == eMyMoney::Statement::Type::Investment) {
             p.setAttribute(getAttrName(Statement::Attribute::Shares), transaction.m_shares.toString());
             p.setAttribute(getAttrName(Statement::Attribute::Security), transaction.m_strSecurity);
+            p.setAttribute(getAttrName(Statement::Attribute::SecurityId), transaction.m_strSecurityId);
             p.setAttribute(getAttrName(Statement::Attribute::BrokerageAccount), transaction.m_strBrokerageAccount);
         }
 
@@ -218,6 +223,7 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
         p.setAttribute(getAttrName(Statement::Attribute::Name), security.m_strName);
         p.setAttribute(getAttrName(Statement::Attribute::Symbol), security.m_strSymbol);
         p.setAttribute(getAttrName(Statement::Attribute::ID), security.m_strId);
+        p.setAttribute(getAttrName(Statement::Attribute::SmallestFraction), security.m_smallestFraction.toString());
 
         e.appendChild(p);
     }
@@ -267,6 +273,7 @@ bool MyMoneyStatement::read(const QDomElement& _e)
                 if (m_eType == eMyMoney::Statement::Type::Investment) {
                     t.m_shares = MyMoneyMoney(c.attribute(getAttrName(Statement::Attribute::Shares)));
                     t.m_strSecurity = c.attribute(getAttrName(Statement::Attribute::Security));
+                    t.m_strSecurityId = c.attribute(getAttrName(Statement::Attribute::SecurityId));
                     t.m_strBrokerageAccount = c.attribute(getAttrName(Statement::Attribute::BrokerageAccount));
                 }
 
@@ -300,6 +307,7 @@ bool MyMoneyStatement::read(const QDomElement& _e)
                 s.m_strName = c.attribute(getAttrName(Statement::Attribute::Name));
                 s.m_strSymbol = c.attribute(getAttrName(Statement::Attribute::Symbol));
                 s.m_strId = c.attribute(getAttrName(Statement::Attribute::ID));
+                s.m_smallestFraction = MyMoneyMoney(c.attribute(getAttrName(Statement::Attribute::SmallestFraction)));
 
                 m_listSecurities += s;
             }
@@ -313,7 +321,7 @@ bool MyMoneyStatement::read(const QDomElement& _e)
 bool MyMoneyStatement::isStatementFile(const QString& _filename)
 {
     // filename is considered a statement file if it contains
-    // the tag "<KMYMONEY2-STATEMENT>" in the first 20 lines.
+    // the tag "<KMYMONEY-STATEMENT>" in the first 20 lines.
     bool result = false;
 
     QFile f(_filename);
