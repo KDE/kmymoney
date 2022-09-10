@@ -108,51 +108,47 @@ void KInvestmentView::showEvent(QShowEvent* event)
             emit requestCustomContextMenu(eMenu::Menu::Security, d->ui->m_equitiesTree->viewport()->mapToGlobal(pos));
         });
 
-        connect(
-            d->ui->m_equitiesTree->selectionModel(),
-            &QItemSelectionModel::currentRowChanged,
-            this,
-            [&](const QModelIndex& current, const QModelIndex& previous) {
-                Q_UNUSED(previous)
-                Q_D(KInvestmentView);
-                d->m_equitySelections.clearSelections(SelectedObjects::Account);
-                // when closing equities, current may still reference a row that
-                // is not valid any longer. For this reason, we set the row
-                // to the last row in the model
-                if (current.isValid()) {
-                    const auto rows = current.model()->rowCount(current.parent());
-                    auto idx = current;
-                    if (idx.row() >= rows) {
-                        idx = idx.model()->index(rows - 1, idx.column(), idx.parent());
+        connect(d->ui->m_equitiesTree->selectionModel(),
+                &QItemSelectionModel::currentRowChanged,
+                this,
+                [&](const QModelIndex& current, const QModelIndex& previous) {
+                    Q_UNUSED(previous)
+                    Q_D(KInvestmentView);
+                    d->m_equitySelections.clearSelections(SelectedObjects::Account);
+                    // when closing equities, current may still reference a row that
+                    // is not valid any longer. For this reason, we set the row
+                    // to the last row in the model
+                    if (current.isValid()) {
+                        const auto rows = current.model()->rowCount(current.parent());
+                        auto idx = current;
+                        if (idx.row() >= rows) {
+                            idx = idx.model()->index(rows - 1, idx.column(), idx.parent());
+                        }
+                        if (idx.isValid()) {
+                            d->m_equitySelections.setSelection(SelectedObjects::Account, idx.data(eMyMoney::Model::IdRole).toString());
+                        }
+                    } else {
+                        // suppress display if no more equities are shown
+                        d->m_equitiesProxyModel->setHideAllEntries(true);
                     }
-                    if (idx.isValid()) {
-                        d->m_equitySelections.setSelection(SelectedObjects::Account, idx.data(eMyMoney::Model::IdRole).toString());
+                    if (d->ui->m_equitiesTree->isVisible()) {
+                        d->m_selections = d->m_equitySelections;
+                        emit requestSelectionChange(d->m_selections);
                     }
-                } else {
-                    // suppress display if no more equities are shown
-                    d->m_equitiesProxyModel->setHideAllEntries(true);
-                }
-                if (d->ui->m_equitiesTree->isVisible()) {
-                    d->m_selections = d->m_equitySelections;
-                    emit requestSelectionChange(d->m_selections);
-                }
-            },
-            Qt::QueuedConnection);
+                });
 
-        connect(
-            d->ui->m_securitiesTree->selectionModel(),
-            &QItemSelectionModel::currentRowChanged,
-            this,
-            [&](const QModelIndex& current, const QModelIndex& previous) {
-                Q_UNUSED(previous)
-                Q_D(KInvestmentView);
-                d->m_securitySelections.setSelection(SelectedObjects::Security, current.data(eMyMoney::Model::IdRole).toString());
-                if (d->ui->m_securitiesTree->isVisible()) {
-                    d->m_selections = d->m_securitySelections;
-                    emit requestSelectionChange(d->m_selections);
-                }
-            },
-            Qt::QueuedConnection);
+        connect(d->ui->m_securitiesTree->selectionModel(),
+                &QItemSelectionModel::currentRowChanged,
+                this,
+                [&](const QModelIndex& current, const QModelIndex& previous) {
+                    Q_UNUSED(previous)
+                    Q_D(KInvestmentView);
+                    d->m_securitySelections.setSelection(SelectedObjects::Security, current.data(eMyMoney::Model::IdRole).toString());
+                    if (d->ui->m_securitiesTree->isVisible()) {
+                        d->m_selections = d->m_securitySelections;
+                        emit requestSelectionChange(d->m_selections);
+                    }
+                });
 
         connect(d->ui->m_equitiesTree, &QTreeView::doubleClicked, this, &KInvestmentView::slotEditInvestment);
 
