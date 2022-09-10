@@ -59,26 +59,25 @@ bool GNCImporter::open(const QUrl &url)
     const auto fileName = url.toLocalFile();
     const auto sFileToShort = QString::fromLatin1("File %1 is too short.").arg(fileName);
 
-    QFile file(fileName);
-    if (!file.open(QIODevice::ReadOnly))
+    QScopedPointer<QIODevice> qfile(new QFile(fileName));
+    if (!qfile->open(QIODevice::ReadOnly))
         throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot read the file: %1").arg(fileName));
 
     QByteArray qbaFileHeader(2, '\0');
-    if (file.read(qbaFileHeader.data(), 2) != 2)
+    if (qfile->read(qbaFileHeader.data(), 2) != 2)
         throw MYMONEYEXCEPTION(sFileToShort);
 
-    file.close();
+    if (qbaFileHeader == QByteArray("\037\213")) { // gzipped?
+        qfile->close();
 
-    QScopedPointer<QIODevice> qfile;
-    QString sFileHeader(qbaFileHeader);
-    if (sFileHeader == QString("\037\213"))        // gzipped?
         qfile.reset(new KCompressionDevice(fileName, COMPRESSION_TYPE));
-    else
-        return false;
-
-    if (!qfile->open(QIODevice::ReadOnly)) {
-        throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot read the file: %1").arg(fileName));
+        if (!qfile->open(QIODevice::ReadOnly))
+            throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot read the file: %1").arg(fileName));
+        qfile->read(qbaFileHeader.data(), 2);
     }
+
+    if (qbaFileHeader == QByteArray("SQ"))
+        throw MYMONEYEXCEPTION(QString::fromLatin1("GnuCash SQLite file format is not supported. Please save it using XML format in GnuCash and try again."));
 
     // Scan the first 70 bytes to see if we find something
     // we know. For now, we support our own XML format and
@@ -88,10 +87,8 @@ bool GNCImporter::open(const QUrl &url)
     if (qfile->read(qbaFileHeader.data(), 70) != 70)
         throw MYMONEYEXCEPTION(sFileToShort);
 
-    QString txt(qbaFileHeader);
-
     const QRegularExpression gncVersionExp("<gnc-v(\\d+)");
-    if (!(gncVersionExp.match(txt).hasMatch())) {
+    if (!(gncVersionExp.match(qbaFileHeader).hasMatch())) {
         return false;
     }
 
