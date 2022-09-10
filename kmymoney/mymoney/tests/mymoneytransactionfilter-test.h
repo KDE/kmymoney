@@ -16,7 +16,7 @@ class MyMoneyTransactionFilterTest : public QObject
 public:
     MyMoneyTransactionFilterTest();
 
-private slots:
+private Q_SLOTS:
     void init();
     void cleanup();
     void testMatchAmount();
