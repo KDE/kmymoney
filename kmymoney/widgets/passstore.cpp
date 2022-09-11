@@ -62,7 +62,7 @@ PassStore::PassStore(QLineEdit* parent, const QString& applicationPrefix, const 
 
     setPasswordId(id);
 
-#if ENABLE_GPG
+#ifdef ENABLE_GPG
     connect(d->m_loadPasswordAction, &QAction::triggered, this, [&]() {
         Q_D(PassStore);
         KGPGFile passwordFile(d->passwordFile());
@@ -89,7 +89,7 @@ void PassStore::setPasswordId(const QString& id)
 
     // control visibility of icon
     bool visible = false;
-#if ENABLE_GPG
+#ifdef ENABLE_GPG
     if (KGPGFile::GPGAvailable() && !id.isEmpty()) {
         QFileInfo fi(d->passwordFile());
         visible = (fi.exists() && fi.isReadable());
