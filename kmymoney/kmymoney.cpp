@@ -2209,10 +2209,7 @@ void KMyMoneyApp::initIcons()
     themeName = QStringLiteral("breeze");                      // only breeze is available for craft packages
     qDebug() << "Running under Windows, so will be forcing the icon theme to: " << themeName;
 #elif defined(Q_OS_MACOS)
-    // @todo requires https://phabricator.kde.org/D25119 or icons/CMakeList.txt to generate for macOS as well
-
     constexpr int OSX_LIGHT_MODE = 236;
-    constexpr int OSX_DARK_MODE = 50;
 
     auto bg = palette().color(QPalette::Active, QPalette::Window);
 
