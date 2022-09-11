@@ -333,15 +333,28 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /FORCE:Multiple")
 endif()
 
+option(WARNINGS_AS_ERRORS "Force warnings to be reported as errors" OFF)
+add_feature_info("Warnings as errors" WARNINGS_AS_ERRORS "Enforces all warnings to be reported as errors.")
+
 # Set compiler flags
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wlogical-op -Wno-null-dereference -Wshadow -Wunused -Wno-misleading-indentation -Wsuggest-override -Wcast-qual -Wformat=2 -fno-common")
+  add_compile_options(-Wall -Wextra -Wlogical-op -Wno-null-dereference -Wshadow -Wunused -Wno-misleading-indentation -Wsuggest-override -Wcast-qual -Wformat=2 -fno-common -Werror=return-type)
 
+  if(WARNINGS_AS_ERRORS)
+    add_compile_options(-Werror)
+  endif()
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wcast-qual -Wformat=2 -Wunreachable-code -fno-common")
+  add_compile_options(-Wall -Wextra -Wcast-qual -Wformat=2 -Wunreachable-code -fno-common -Werror=return-type)
 
+  if(WARNINGS_AS_ERRORS)
+    add_compile_options(-Werror)
+  endif()
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /experimental:external /external:anglebrackets /external:W0 /W3")
+  add_compile_options(/experimental:external /external:anglebrackets /external:W0 /W3)
+
+  if(WARNINGS_AS_ERRORS)
+    add_compile_options(/WX)
+  endif()
 endif()
 
 
