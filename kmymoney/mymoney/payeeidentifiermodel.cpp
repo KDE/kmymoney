@@ -15,7 +15,14 @@
 /**
  * @brief create unique value for QModelIndex::internalId() to indicate "not set"
  */
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wnonnull"
+#endif
 static constexpr decltype(reinterpret_cast<QModelIndex*>(0)->internalId()) invalidParent = std::numeric_limits<decltype(reinterpret_cast<QModelIndex*>(0)->internalId())>::max();
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 
 payeeIdentifierModel::payeeIdentifierModel(QObject* parent)
     : QAbstractItemModel(parent),
