@@ -57,11 +57,11 @@ bool GNCImporter::open(const QUrl &url)
         return false;
 
     const auto fileName = url.toLocalFile();
-    const auto sFileToShort = QString::fromLatin1("File %1 is too short.").arg(fileName);
+    const auto sFileToShort = i18n("The size of the file is too small to be a valid GnuCash format: %1").arg(fileName);
 
     QScopedPointer<QIODevice> qfile(new QFile(fileName));
     if (!qfile->open(QIODevice::ReadOnly))
-        throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot read the file: %1").arg(fileName));
+        throw MYMONEYEXCEPTION(i18n("Cannot read the file: %1").arg(fileName));
 
     QByteArray qbaFileHeader(2, '\0');
     if (qfile->read(qbaFileHeader.data(), 2) != 2)
@@ -72,12 +72,12 @@ bool GNCImporter::open(const QUrl &url)
 
         qfile.reset(new KCompressionDevice(fileName, COMPRESSION_TYPE));
         if (!qfile->open(QIODevice::ReadOnly))
-            throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot read the file: %1").arg(fileName));
+            throw MYMONEYEXCEPTION(i18n("Cannot read the file: %1").arg(fileName));
         qfile->read(qbaFileHeader.data(), 2);
     }
 
     if (qbaFileHeader == QByteArray("SQ"))
-        throw MYMONEYEXCEPTION(QString::fromLatin1("GnuCash SQLite file format is not supported. Please save it using XML format in GnuCash and try again."));
+        throw MYMONEYEXCEPTION(i18n("GnuCash SQLite file format is not supported. Please save it using XML format in GnuCash and try again."));
 
     // Scan the first 70 bytes to see if we find something
     // we know. For now, we support our own XML format and
