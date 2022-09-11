@@ -770,9 +770,3 @@ bool MyMoneyXmlWriter::write(QIODevice* device)
 
     return d->write(device);
 }
-
-bool MyMoneyXmlWriter::write(const QString& text)
-{
-    Q_D(MyMoneyXmlWriter);
-    return !d->m_writer->hasError();
-}

@@ -52,18 +52,6 @@ public:
 protected:
     MyMoneyXmlWriter(MyMoneyXmlWriterPrivate* dd);
 
-    /**
-     * This is an internal entry point for testcases. It resets
-     * the writer to its initial value and calls the internal
-     * writeKMyMoney() routine.
-     *
-     * @param text text of the section to test
-     * @returns true if no error occurred
-     * @returns false in case of an error while reading
-     */
-    bool write(const QString& text);
-
-protected:
     MyMoneyXmlWriterPrivate* d_ptr;
 };
 
