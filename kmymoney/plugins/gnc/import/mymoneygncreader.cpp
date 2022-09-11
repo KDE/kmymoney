@@ -1111,7 +1111,6 @@ bool XmlReader::parseContents(const QString& contents)
             // comment(xmlReader.text());
             break;
         case QXmlStreamReader::DTD:
-            foundDtd = true;
             break;
         case QXmlStreamReader::StartElement:
             startElement(xmlReader.lineNumber(), xmlReader.columnNumber(), xmlReader.qualifiedName().toString(), xmlReader.attributes());
