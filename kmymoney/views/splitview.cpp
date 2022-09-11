@@ -80,13 +80,13 @@ public:
         }
     }
 
-    void setupUnassignedValue(const QModelIndex& idx)
+    void setupUnassignedValue(const QModelIndex& targetIdx)
     {
         if (!totalTransactionValue.isAutoCalc()) {
-            auto model = const_cast<SplitModel*>(qobject_cast<const SplitModel*>(idx.model()));
+            auto model = const_cast<SplitModel*>(qobject_cast<const SplitModel*>(targetIdx.model()));
             MyMoneyMoney splitsTotal;
             for (int row = 0; row < model->rowCount(); ++row) {
-                if (row == idx.row()) {
+                if (row == targetIdx.row()) {
                     continue;
                 }
                 const auto idx = model->index(row, 0);
@@ -95,8 +95,8 @@ public:
                 }
             }
 
-            model->setData(idx, QVariant::fromValue<MyMoneyMoney>(totalTransactionValue - splitsTotal), eMyMoney::Model::SplitValueRole);
-            model->setData(idx, QVariant::fromValue<MyMoneyMoney>(totalTransactionValue - splitsTotal), eMyMoney::Model::SplitSharesRole);
+            model->setData(targetIdx, QVariant::fromValue<MyMoneyMoney>(totalTransactionValue - splitsTotal), eMyMoney::Model::SplitValueRole);
+            model->setData(targetIdx, QVariant::fromValue<MyMoneyMoney>(totalTransactionValue - splitsTotal), eMyMoney::Model::SplitSharesRole);
         }
     }
 
