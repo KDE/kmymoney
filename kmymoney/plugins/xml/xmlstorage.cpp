@@ -390,7 +390,7 @@ bool XMLStorage::saveAs()
                 try {
                     MyMoneyFile::instance()->deletePair("kmm-encryption-key");
                     ft.commit();
-                } catch(MyMoneyException& e) {
+                } catch (MyMoneyException&) {
                     ; // do nothing
                 }
                 rc = save(newURL);

@@ -251,7 +251,7 @@ bool InvestTransactionEditor::Private::isDatePostOpeningDate(const QDate& date, 
             if (date < account.openingDate())
                 rc = false;
         }
-    } catch (MyMoneyException& e) {
+    } catch (MyMoneyException&) {
         qDebug() << "Ooops: invalid account id" << accountId << "in" << Q_FUNC_INFO;
     }
     return rc;
@@ -344,7 +344,7 @@ bool InvestTransactionEditor::Private::categoryChanged(SplitModel* model, const 
             model->setData(index, QVariant::fromValue<MyMoneyMoney>(factor * amountEdit->value()), eMyMoney::Model::SplitValueRole);
             model->setData(index, QVariant::fromValue<MyMoneyMoney>(factor * amountEdit->shares()), eMyMoney::Model::SplitSharesRole);
 
-        } catch (MyMoneyException& e) {
+        } catch (MyMoneyException&) {
             qDebug() << "Ooops: invalid account id" << accountId << "in" << Q_FUNC_INFO;
         }
     }
@@ -416,7 +416,7 @@ bool InvestTransactionEditor::Private::amountChanged(SplitModel* model, AmountEd
             }
             rc = true;
 
-        } catch (MyMoneyException& e) {
+        } catch (MyMoneyException&) {
             qDebug() << "Ooops: something went wrong in" << Q_FUNC_INFO;
         }
     } else {
@@ -840,7 +840,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
                 d->scheduleUpdateTotalAmount();
 
-            } catch (MyMoneyException& e) {
+            } catch (MyMoneyException&) {
                 qDebug() << "Problem to find securityId" << accountId << "or" << securityId << "in InvestTransactionEditor::securityAccountChanged";
             }
         }

@@ -30,7 +30,7 @@ void onlineJobAdministrationTest::setupBaseCurrency()
     MyMoneyFileTransaction ft;
     try {
         file->currency(base.id());
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException&) {
         file->addCurrency(base);
     }
     file->setBaseCurrency(base);

@@ -196,7 +196,7 @@ bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
             costCenterRequired = account.isCostCenterRequired();
             rc &= costCenterChanged(ui->costCenterCombo->currentIndex());
 
-        } catch (MyMoneyException &e) {
+        } catch (MyMoneyException&) {
             qDebug() << "Ooops: invalid account id" << accountId << "in" << Q_FUNC_INFO;
         }
     } else {

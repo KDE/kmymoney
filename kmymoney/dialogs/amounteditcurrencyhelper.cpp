@@ -99,7 +99,7 @@ void AmountEditCurrencyHelper::categoryChanged(const QString& id)
                     Q_EMIT commodityChanged(MyMoneyFile::instance()->security(d->commodityId));
                 }
             }
-        } catch (MyMoneyException& e) {
+        } catch (MyMoneyException&) {
         }
     }
 }

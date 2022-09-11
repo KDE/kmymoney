@@ -125,7 +125,7 @@ struct SplitModel::Private
                     return MyMoneyMoney::denomToPrec(currency.smallestCashFraction());
                 }
                 return MyMoneyMoney::denomToPrec(currency.smallestAccountFraction());
-            } catch(MyMoneyException& e) {
+            } catch (MyMoneyException&) {
             }
         }
         return 2; // the default precision is 2 digits

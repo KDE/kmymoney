@@ -598,7 +598,7 @@ void MyMoneyXmlWriterPrivate::writePrices()
                                     .arg(entry.from(), entry.to());
                     continue;
                 }
-            } catch (MyMoneyException& e) {
+            } catch (MyMoneyException&) {
                 qDebug() << QStringLiteral("The currency pair %1->%2 is invalid. Omitting from storage.").arg(entry.from(), entry.to());
                 continue;
             }

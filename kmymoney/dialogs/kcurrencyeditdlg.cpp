@@ -574,7 +574,7 @@ void KCurrencyEditDlg::slotAddCurrency()
                             if (!ancientCurrency.id().isEmpty()) {
                                 file->addPrice(ancientCurrencies[ancientCurrency]);
                             }
-                        } catch (MyMoneyException& e) {
+                        } catch (MyMoneyException&) {
                             // nothing to do because ancient currency is not on file
                         }
                         break;

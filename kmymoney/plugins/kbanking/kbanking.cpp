@@ -1054,7 +1054,7 @@ bool KBankingExt::askMapAccount(const MyMoneyAccount& acc)
         bankId = bank.name();
         if (!bank.bankcode().isEmpty())
             bankId = bank.bankcode();
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException&) {
         // no bank assigned, we just leave the field empty
     }
 

@@ -63,7 +63,7 @@ struct CheckPrinting::Private {
                     const auto split = transaction.splitByAccount(accountId);
                     return split.shares().isNegative();
                 }
-            } catch (MyMoneyException& e) {
+            } catch (MyMoneyException&) {
                 return false;
             }
         }

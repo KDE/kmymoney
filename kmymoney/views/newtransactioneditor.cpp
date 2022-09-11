@@ -205,7 +205,7 @@ bool NewTransactionEditor::Private::isDatePostOpeningDate(const QDate& date, con
             if (date < account.openingDate())
                 rc = false;
         }
-    } catch (MyMoneyException& e) {
+    } catch (MyMoneyException&) {
         qDebug() << "Ooops: invalid account id" << accountId << "in" << Q_FUNC_INFO;
     }
     return rc;
@@ -346,7 +346,7 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
 
                 updateVAT(ValueUnchanged);
 
-            } catch (MyMoneyException& e) {
+            } catch (MyMoneyException&) {
                 qDebug() << "Ooops: invalid account id" << accountId << "in" << Q_FUNC_INFO;
             }
         } else {
@@ -399,7 +399,7 @@ bool NewTransactionEditor::Private::amountChanged()
             }
             rc = true;
 
-        } catch (MyMoneyException& e) {
+        } catch (MyMoneyException&) {
             qDebug() << "Ooops: something went wrong in" << Q_FUNC_INFO;
         }
     } else {

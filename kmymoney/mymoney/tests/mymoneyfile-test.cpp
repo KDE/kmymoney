@@ -82,7 +82,7 @@ void MyMoneyFileTest::setupBaseCurrency()
     MyMoneyFileTransaction ft;
     try {
         m->currency(base.id());
-    } catch (const MyMoneyException &e) {
+    } catch (const MyMoneyException&) {
         m->addCurrency(base);
     }
     m->setBaseCurrency(base);
@@ -1299,7 +1299,7 @@ void testMoveSplits() {
                 QCOMPARE(m->account("A000001").transactionCount(), 0);
                 QCOMPARE(m->account("A000002").transactionCount(), 1);
                 QCOMPARE(m->account("A000003").transactionCount(), 1);
-        } catch (const MyMoneyException &e) {
+        } catch (const MyMoneyException&) {
                 QFAIL("Unexpected exception!");
         }
 }

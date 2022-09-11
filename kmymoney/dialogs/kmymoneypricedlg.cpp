@@ -194,7 +194,7 @@ void KMyMoneyPriceDlg::slotLoadWidgets()
                 qDebug() << "A currency pair" << pair << "is invalid (from currency to equity). Omitting from listing.";
                 continue;
             }
-        } catch (MyMoneyException& e) {
+        } catch (MyMoneyException&) {
             qDebug() << "A currency pair" << pair << "is invalid. Omitting from listing.";
             continue;
         }

@@ -645,7 +645,7 @@ public:
                     qDebug() << "A currency pair" << pair << "is invalid (from currency to equity). Omitting from storage.";
                     continue;
                 }
-            } catch (MyMoneyException& e) {
+            } catch (MyMoneyException&) {
                 qDebug() << "A currency pair" << pair << "is invalid. Omitting from storage.";
                 continue;
             }

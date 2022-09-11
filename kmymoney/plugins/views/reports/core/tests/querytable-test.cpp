@@ -375,7 +375,7 @@ void QueryTableTest::testCashFlowAnalysis()
     bool result = false;
     try {
         XIRR = MyMoneyMoney(list.XIRR(), 1000);
-    } catch (MyMoneyException &e) {
+    } catch (MyMoneyException&) {
         result  = true;
     }
     QVERIFY(result);

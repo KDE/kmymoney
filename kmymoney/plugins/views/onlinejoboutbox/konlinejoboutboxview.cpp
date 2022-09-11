@@ -314,7 +314,7 @@ void KOnlineJobOutboxView::slotRemoveJob()
     try {
         MyMoneyFile::instance()->removeOnlineJob(selectedOnlineJobs());
         ft.commit();
-    } catch (MyMoneyException& e) {
+    } catch (MyMoneyException&) {
     }
     return;
 }
