@@ -133,7 +133,7 @@ if (NOT LibAlkimia5_FOUND)
   find_package(LibAlkimia5 7.0 REQUIRED)
 endif()
 
-find_package(KChart 2.6.0)
+find_package(KChart 2.6.0 QUIET)
 
 find_package(libofx)
 if(NOT libofx_FOUND)
@@ -258,10 +258,10 @@ cmake_dependent_option(ENABLE_IBANBICDATA "Enable IBAN/BIC data support." OFF
 add_feature_info("IBAN/BIC data" ENABLE_IBANBICDATA "Adds predefined IBAN/BIC numbers to KMyMoney (note: doesn't work yet).")
 
 # check for optional KBanking support
-find_package(aqbanking 6.2.5)
-find_package(gwenhywfar 5.4.1)
-find_package(gwengui-cpp)
-find_package(gwengui-qt5)
+find_package(aqbanking 6.2.5 QUIET)
+find_package(gwenhywfar 5.4.1 QUIET)
+find_package(gwengui-cpp QUIET)
+find_package(gwengui-qt5 QUIET)
 
 cmake_dependent_option(ENABLE_KBANKING "Enable KBanking plugin" ON
                        "AQBANKING_FOUND;gwengui-cpp_FOUND;gwengui-qt5_FOUND;Qt5QuickWidgets_FOUND" OFF)
