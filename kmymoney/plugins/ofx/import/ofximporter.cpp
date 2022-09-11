@@ -757,6 +757,9 @@ int OFXImporter::ofxAccountCallback(struct OfxAccountData data, void * pv)
         case OfxAccountData::OFX_INVESTMENT :
             s.m_eType = eMyMoney::Statement::Type::Investment;
             break;
+        case OfxAccountData::OFX_401K:
+            s.m_eType = eMyMoney::Statement::Type::Investment;
+            break;
         }
     }
 
