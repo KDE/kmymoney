@@ -62,6 +62,9 @@ if (POLICY CMP0071)
   # set to "3.10".
   cmake_policy(SET CMP0071 OLD) # Policy introduced in CMake version 3.10
 endif()
+if (POLICY CMP0127)
+  cmake_policy(SET CMP0127 NEW) # Policy introduced in CMake version 3.22
+endif()
 
 
 ######################### General Requirements ##########################
