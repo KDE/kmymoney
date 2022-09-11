@@ -56,12 +56,6 @@ endif()
 if (POLICY CMP0063)
   cmake_policy(SET CMP0063 NEW) # Policy introduced in CMake version 3.3
 endif()
-if (POLICY CMP0071)
-  # We do not require the old behaviour. It is only set to old, to prevent accidental use of
-  # the new behaviour. If the new behaviour becomes important, cmake_minimum_required has to be
-  # set to "3.10".
-  cmake_policy(SET CMP0071 OLD) # Policy introduced in CMake version 3.10
-endif()
 if (POLICY CMP0127)
   cmake_policy(SET CMP0127 NEW) # Policy introduced in CMake version 3.22
 endif()
