@@ -116,7 +116,7 @@ if (NOT LibAlkimia5_FOUND)
   find_package(LibAlkimia5 7.0 REQUIRED)
 endif()
 
-find_package(KChart 2.6.0)
+find_package(KChart 2.6.0 QUIET)
 
 if(KF5Gpgmepp_FOUND)
   set(GPG_FOUND TRUE)
@@ -260,10 +260,10 @@ endif(ENABLE_OFXIMPORTER)
 add_feature_info("OFX Importer" ENABLE_OFXIMPORTER "Allows importing OFX files (have client uid version: ${nice_LIBOFX_HAVE_CLIENTUID})" )
 
 # check for optional KBanking support
-find_package(aqbanking 6.0.1)
-find_package(gwenhywfar 5.1.2)
-find_package(gwengui-cpp)
-find_package(gwengui-qt5)
+find_package(aqbanking 6.0.1 QUIET)
+find_package(gwenhywfar 5.1.2 QUIET)
+find_package(gwengui-cpp QUIET)
+find_package(gwengui-qt5 QUIET)
 
 cmake_dependent_option(ENABLE_KBANKING "Enable KBanking plugin" ON
                        "AQBANKING_FOUND;gwengui-cpp_FOUND;gwengui-qt5_FOUND;Qt5QuickWidgets_FOUND" OFF)
