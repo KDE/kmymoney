@@ -1097,7 +1097,6 @@ void XmlReader::processFile(QIODevice* pDevice)
 
 bool XmlReader::parseContents(const QString& contents)
 {
-    bool foundDtd = false;
     QXmlStreamReader xmlReader(contents);
     while (!xmlReader.atEnd()) {
         const QXmlStreamReader::TokenType token = xmlReader.readNext();
