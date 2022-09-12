@@ -15,6 +15,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include "qcontainerfwd.h"
 #include <QObject>
 
 // ----------------------------------------------------------------------------
@@ -113,7 +114,6 @@
   */
 template <class Key, class T> class QMap;
 class QString;
-class QStringList;
 class QBitArray;
 class QUndoStack;
 class MyMoneyStorageMgr;

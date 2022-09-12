@@ -13,6 +13,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include "qcontainerfwd.h"
 #include <QMetaType>
 
 // ----------------------------------------------------------------------------
@@ -23,7 +24,6 @@
 #include "mymoneypayeeidentifiercontainer.h"
 
 class QString;
-class QStringList;
 
 namespace eMyMoney {
 namespace Payee {

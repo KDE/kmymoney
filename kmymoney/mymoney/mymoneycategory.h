@@ -10,10 +10,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include "qcontainerfwd.h"
 #include <qglobal.h>
 
 class QString;
-class QStringList;
 
 /**
   * @deprecated This class represents an Income or Expense category. Please don't

@@ -12,6 +12,7 @@
 #ifndef MYMONEYSTATEMENTREADER_H
 #define MYMONEYSTATEMENTREADER_H
 
+#include "qcontainerfwd.h"
 #include <QObject>
 #include <QString>
 #include <QStringList>
@@ -21,7 +22,6 @@
 
 class MyMoneyFileTransaction;
 class TransactionMatcher;
-class QStringList;
 class MyMoneyAccount;
 class MyMoneyInstitution;
 

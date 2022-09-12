@@ -13,7 +13,7 @@
 #include "mymoneyaccount.h"
 #include "mymoneykeyvaluecontainer.h"
 
-class QStringList;
+#include "qcontainerfwd.h"
 
 class iCalendarExporter: public KMyMoneyPlugin::Plugin
 {

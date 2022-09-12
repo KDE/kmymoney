@@ -26,8 +26,7 @@ class QDomElement;
 
 class MyMoneyMoney;
 
-template <class T1, class T2> class QMap;
-template <class T1, class T2> struct QPair;
+#include "qcontainerfwd.h"
 
 /**
   * @author Thomas Baumgart

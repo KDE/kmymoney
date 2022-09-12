@@ -8,7 +8,7 @@
 
 #include <kcmodule.h>
 
-class QStringList;
+#include "qcontainerfwd.h"
 
 class KCMiCalendarExporter : public KCModule
 {

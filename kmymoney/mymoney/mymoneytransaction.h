@@ -15,6 +15,7 @@
 // QT Includes
 
 #include <QMetaType>
+#include <QStringList>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -29,7 +30,6 @@ class QDate;
 
 class MyMoneyMoney;
 class MyMoneySplit;
-class QStringList;
 
 template <typename T> class QList;
 

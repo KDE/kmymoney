@@ -13,6 +13,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include "qcontainerfwd.h"
 #include <QMetaType>
 
 // ----------------------------------------------------------------------------
@@ -23,7 +24,6 @@
 #include "kmm_mymoney_export.h"
 
 class QString;
-class QStringList;
 class QPixmap;
 
 /**

@@ -9,7 +9,7 @@
 #include <gwenhywfar/stringlist.h>
 
 class QString;
-class QStringList;
+#include "qcontainerfwd.h"
 
 /**
  * @defgroup gwenhywfarqtoperators Helper functions for using gwenhywfar with Qt
