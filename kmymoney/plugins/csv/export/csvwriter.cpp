@@ -56,7 +56,9 @@ void CsvWriter::write(const QString& filename,
     QFile csvFile(filename);
     if (csvFile.open(QIODevice::WriteOnly)) {
         QTextStream s(&csvFile);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         s.setCodec("UTF-8");
+#endif
 
         m_plugin->exporterDialog()->show();
         try {

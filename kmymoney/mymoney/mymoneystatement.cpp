@@ -362,7 +362,9 @@ void MyMoneyStatement::writeXMLFile(const MyMoneyStatement& _s, const QString& _
     QFile g(filename);
     if (g.open(QIODevice::WriteOnly)) {
         QTextStream stream(&g);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         stream.setCodec("UTF-8");
+#endif
         stream << doc->toString();
         g.close();
     }

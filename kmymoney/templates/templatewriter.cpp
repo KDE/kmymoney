@@ -164,7 +164,9 @@ public:
         auto saveToLocalFile = [&](QSaveFile* qfile)
         {
             QTextStream stream(qfile);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             stream.setCodec("UTF-8");
+#endif
             stream << m_doc.toString();
             stream.flush();
         };

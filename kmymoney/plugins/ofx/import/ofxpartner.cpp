@@ -90,7 +90,9 @@ static void ParseFile(QMap<QString, QString>& result, const QString& fileName, c
     QFile f(fileName);
     if (f.open(QIODevice::ReadOnly)) {
         QTextStream stream(&f);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         stream.setCodec("UTF-8");
+#endif
         QString msg;
         int errl, errc;
         QDomDocument doc;
@@ -221,7 +223,9 @@ OfxHomeServiceInfo ServiceInfo(const QString& fipid)
     QFile f(guidFile.toLocalFile());
     if (f.open(QIODevice::ReadOnly)) {
         QTextStream stream(&f);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         stream.setCodec("UTF-8");
+#endif
         QString msg;
         int errl, errc;
         QDomDocument doc;

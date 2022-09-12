@@ -1793,7 +1793,9 @@ void CSVFile::readFile(CSVProfile *profile)
     inFile.open(QIODevice::ReadOnly);
     QTextStream inStream(&inFile);
     QTextCodec* codec = QTextCodec::codecForMib(profile->m_encodingMIBEnum);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     inStream.setCodec(codec);
+#endif
 
     QString buf = inStream.readAll();
     inFile.close();
