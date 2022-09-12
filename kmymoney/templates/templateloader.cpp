@@ -234,7 +234,7 @@ void TemplateLoader::load(TemplatesModel* model)
     if (d->model == nullptr) {
         return;
     }
-    d->dirlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates", QStandardPaths::LocateDirectory);
+    d->dirlist = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, "templates", QStandardPaths::LocateDirectory);
     d->dirlist.append(":/templates");
 
     QStringList::iterator it;

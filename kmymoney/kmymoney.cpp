@@ -3323,7 +3323,7 @@ void KMyMoneyApp::slotSaveAccountTemplates()
 {
     KMSTATUS(i18n("Exporting account templates."));
 
-    QString savePath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/templates/" + QLocale().name();
+    QString savePath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/templates/" + QLocale().name();
     QDir templatesDir(savePath);
     if (!templatesDir.exists())
         templatesDir.mkpath(savePath);

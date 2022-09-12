@@ -88,7 +88,7 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
     vboxLayout1->insertWidget(0, searchLine);
     QTimer::singleShot(20, searchLine, SLOT(setFocus()));
 
-    OfxPartner::setDirectory(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "");
+    OfxPartner::setDirectory(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QLatin1Char('/') + "");
     m_listFi->addItems(OfxPartner::BankNames());
     m_fInit = true;
     delete dlg;
@@ -374,7 +374,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
         // Check if we need to tweak the request for specific institutions
         MyMoneyOfxConnector::institutionSpecificRequestAdjustment(request);
 
-        QUrl filename(QString("file://%1response.ofx").arg(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/')));
+        QUrl filename(QString("file://%1response.ofx").arg(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QLatin1Char('/')));
 
         // because the event loop is running while the request is performed disable the back button
         // (this function is not reentrant so the application might crash when back/next are used)
