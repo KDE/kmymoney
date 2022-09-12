@@ -709,7 +709,7 @@ QDateTime readDateTimeAttribute(QXmlStreamReader* reader, const QString& attribu
 
 bool readBoolAttribute(QXmlStreamReader* reader, const QString& attribute, bool defaultValue)
 {
-    const auto strValue = reader->attributes().value(attribute);
+    const QString strValue = reader->attributes().value(attribute).toString();
     if (strValue.isEmpty()) {
         return defaultValue;
     }

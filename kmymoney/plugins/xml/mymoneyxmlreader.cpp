@@ -168,7 +168,7 @@ public:
         return rc;
     }
 
-    QStringList readAccountIds(const QStringRef& containerTagName, const QString& tagName)
+    QStringList readAccountIds(const QStringView containerTagName, const QString& tagName)
     {
         Q_ASSERT(m_reader->isStartElement() && (m_reader->name() == containerTagName));
 

@@ -756,8 +756,8 @@ bool QSQLiteDriver::open(const QString & db, const QString &, const QString &, c
     int regexpCacheSize = 25;
 #endif
 
-    const auto opts = conOpts.splitRef(QLatin1Char(';'));
-    for (auto option : opts) {
+    const QStringList opts = conOpts.split(QLatin1Char(';'));
+    for (QString option : opts) {
         option = option.trimmed();
         if (option.startsWith(QLatin1String("QSQLITE_BUSY_TIMEOUT"))) {
             option = option.mid(20).trimmed();

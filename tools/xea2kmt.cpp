@@ -228,7 +228,7 @@ public:
 
     bool read(QXmlStreamReader &xml)
     {
-        Q_ASSERT(xml.isStartElement() && xml.name() == "gnc-account-example");
+        Q_ASSERT(xml.isStartElement() && xml.name().toString() == "gnc-account-example");
 
         while (xml.readNextStartElement()) {
             QStringView name = xml.name();
@@ -405,7 +405,9 @@ public:
     {
         QFile file(filename);
         QTextStream in(&file);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         in.setCodec("utf-8");
+#endif
 
         if(!file.open(QIODevice::ReadOnly))
             return false;
@@ -463,12 +465,10 @@ protected:
             m_xml.readNext();
             if (m_xml.isStartElement())
             {
-                if (m_xml.name() == "gnc-account-example")
-                {
+                if (m_xml.name() == QLatin1String("gnc-account-example")) {
                     checkAndUpdateAvailableNamespaces(m_xml);
                     _template.read(m_xml);
-                }
-                else
+                } else
                     m_xml.raiseError(QObject::tr("The file is not an gnucash account template file."));
             }
         }
@@ -482,7 +482,9 @@ protected:
         QXmlStreamWriter xml(device);
         xml.setAutoFormatting(true);
         xml.setAutoFormattingIndent(1);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         xml.setCodec("utf-8");
+#endif
         xml.writeStartDocument();
 
         QString fileName = inFileName;
