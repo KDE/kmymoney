@@ -31,8 +31,11 @@ target_compile_definitions(qsqlcipher
 target_link_libraries(qsqlcipher
   PRIVATE
     PkgConfig::SQLCIPHER
-    Qt::SqlPrivate
 )
+if (TARGET Qt::SqlPrivate)
+  target_link_libraries(qsqlcipher PRIVATE Qt::SqlPrivate)
+endif()
+target_link_libraries(qsqlcipher PRIVATE Qt::Sql)
 
 if(BUILD_TESTING)
  add_subdirectory(tests)

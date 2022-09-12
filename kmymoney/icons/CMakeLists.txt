@@ -6,7 +6,7 @@ include(ECMInstallIcons)
 file(GLOB_RECURSE KMYMONEY_ICONS "kmymoney/*.png")
 ecm_install_icons(
   ICONS ${KMYMONEY_ICONS}
-  DESTINATION ${ICON_INSTALL_DIR}
+  DESTINATION ${KDE_INSTALL_ICONDIR}
 )
 
 set (icons_SOURCES

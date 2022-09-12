@@ -196,7 +196,7 @@ generate_export_header(kmm_widgets BASE_NAME kmm_widgets)
 install(TARGETS kmm_base_widgets kmm_widgets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(FILES ${kmm_widgets_HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/kmm_widgets_export.h
-  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
+  DESTINATION ${KDE_INSTALL_INCLUDEDIR}/kmymoney COMPONENT Devel)
 
 ############## tests ####################
 

@@ -32,4 +32,4 @@ generate_export_header(onlinetask_interfaces BASE_NAME onlinetask_interfaces)
 install(TARGETS onlinetask_interfaces ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(FILES ${onlinetask_interfaces_HEADER}
-    DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney/onlinetasks/interfaces/ COMPONENT Devel)
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/kmymoney/onlinetasks/interfaces/ COMPONENT Devel)

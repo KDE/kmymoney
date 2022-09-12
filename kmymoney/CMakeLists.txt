@@ -107,8 +107,8 @@ set( kmymoney_SRCS
   pluginloader.cpp
 )
 
-qt5_add_dbus_adaptor(kmymoney_SRCS org.kde.kmymoney.xml kmymoney.h KMyMoneyApp)
-qt5_add_resources(kmymoney_SRCS kmymoney.qrc)
+qt_add_dbus_adaptor(kmymoney_SRCS org.kde.kmymoney.xml kmymoney.h KMyMoneyApp)
+qt_add_resources(kmymoney_SRCS kmymoney.qrc)
 
 # collect application icons
 file(GLOB_RECURSE KMYMONEY_APP_ICONS "${CMAKE_CURRENT_SOURCE_DIR}/icons/kmymoney/apps/*.png")
@@ -217,17 +217,17 @@ endif()
 install(TARGETS kmymoney ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES ${_HEADERS}
-  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney
+  DESTINATION ${KDE_INSTALL_INCLUDEDIR}/kmymoney
   )
 install(FILES org.kde.kmymoney.desktop
-  DESTINATION ${XDG_APPS_INSTALL_DIR}
+  DESTINATION ${KDE_INSTALL_APPDIR}
   )
 install(FILES org.kde.kmymoney.appdata.xml
   DESTINATION ${KDE_INSTALL_METAINFODIR}
   )
 
 install(FILES x-kmymoney.xml
-  DESTINATION ${XDG_MIME_INSTALL_DIR})
+  DESTINATION ${KDE_INSTALL_MIMEDIR})
 
 #UPDATE_XDG_MIMETYPES(${XDG_MIME_INSTALL_DIR})
 

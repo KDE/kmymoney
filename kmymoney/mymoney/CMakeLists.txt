@@ -144,7 +144,7 @@ install(TARGETS kmm_mymoney
   ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(FILES ${mymoney_HEADERS}
-  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
+  DESTINATION ${KDE_INSTALL_INCLUDEDIR}/kmymoney COMPONENT Devel)
 
 ############## tests ####################
 

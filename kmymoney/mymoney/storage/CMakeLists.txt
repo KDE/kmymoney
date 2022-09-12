@@ -25,4 +25,4 @@ set(storage_HEADERS
 ########### install files ###############
 
 install(FILES ${storage_HEADERS}
-  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel )
+  DESTINATION ${KDE_INSTALL_INCLUDEDIR}/kmymoney COMPONENT Devel )

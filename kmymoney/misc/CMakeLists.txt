@@ -1,5 +1,5 @@
 install(PROGRAMS financequote.pl
-        DESTINATION ${DATA_INSTALL_DIR}/kmymoney/misc)
+        DESTINATION ${KDE_INSTALL_DATADIR}/kmymoney/misc)
 
 set( kmm_utils_validators_SRCS
   charvalidator.cpp
@@ -171,5 +171,5 @@ install(FILES
         ${CMAKE_CURRENT_BINARY_DIR}/kmm_selections_export.h
         ${CMAKE_CURRENT_BINARY_DIR}/kmm_webconnect_export.h
         ${CMAKE_CURRENT_BINARY_DIR}/kmm_gpgfile_export.h
-  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
+  DESTINATION ${KDE_INSTALL_INCLUDEDIR}/kmymoney COMPONENT Devel)
 
