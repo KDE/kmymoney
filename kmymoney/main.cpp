@@ -27,7 +27,6 @@
 
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <Kdelibs4ConfigMigrator>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -405,12 +404,6 @@ static void migrateConfigFiles()
             QStringLiteral("icalendarexportpluginrc"),
             QStringLiteral("kbankingrc"),
         };
-
-        // Copy KDE 4 config files to the KF5 location
-        Kdelibs4ConfigMigrator migrator(QStringLiteral("kmymoney"));
-        migrator.setConfigFiles(sConfigNames);
-        migrator.setUiFiles(QStringList{QStringLiteral("kmymoneyui.rc")});
-        migrator.migrate();
 
         QFileInfo fileInfo(sMainConfigPath + sMainConfigName);
         QDir().mkpath(fileInfo.absolutePath());
