@@ -26,6 +26,7 @@
 #include <QString>
 #include <QTimer>
 #include <QUuid>
+#include <QtTest/QAbstractItemModelTester>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -75,10 +76,6 @@
 #include "statusmodel.h"
 #include "tagsmodel.h"
 /// @note add new models here
-
-#ifdef KMM_MODELTEST
-#include "modeltest.h"
-#endif
 
 
 // include the following line to get a 'cout' for debug purposes
@@ -157,23 +154,23 @@ public:
           /// @note add new models here
     {
 #ifdef KMM_MODELTEST
-        new ModelTest(&payeesModel, m_file);
-        new ModelTest(&userModel, m_file);
-        new ModelTest(&costCenterModel, m_file);
-        new ModelTest(&schedulesModel, m_file);
-        new ModelTest(&tagsModel, m_file);
-        new ModelTest(&securitiesModel, m_file);
-        new ModelTest(&currenciesModel, m_file);
-        new ModelTest(&budgetsModel, m_file);
-        new ModelTest(&accountsModel, m_file);
-        new ModelTest(&institutionsModel, m_file);
-        new ModelTest(&journalModel, m_file);
-        new ModelTest(&priceModel, m_file);
-        new ModelTest(&parametersModel, m_file);
-        new ModelTest(&onlineJobsModel, m_file);
-        new ModelTest(&reportsModel, m_file);
-        new ModelTest(&specialDatesModel, m_file);
-        new ModelTest(&schedulesJournalModel, m_file);
+        new QAbstractItemModelTester(&payeesModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&userModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&costCenterModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&schedulesModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&tagsModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&securitiesModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&currenciesModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&budgetsModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&accountsModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&institutionsModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&journalModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&priceModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&parametersModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&onlineJobsModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&reportsModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&specialDatesModel, QAbstractItemModelTester::FailureReportingMode::Warning);
+        new QAbstractItemModelTester(&schedulesJournalModel, QAbstractItemModelTester::FailureReportingMode::Warning);
         /// @note add new models here
 #endif
         qq->connect(qq, &MyMoneyFile::modelsReadyToUse, &journalModel, &JournalModel::updateBalances);

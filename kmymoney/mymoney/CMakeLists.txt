@@ -78,7 +78,6 @@ set(kmm_mymoney_LIB_SRCS
   )
 
 list(APPEND storage_a_SOURCES $<$<OR:$<CONFIG:Debug>,$<CONFIG:DebugFull>,$<CONFIG:DebugKMM>>: ./storage/mymoneystoragedump.cpp>)
-list(APPEND storage_a_SOURCES $<$<BOOL:${USE_MODELTEST}>:modeltest.cpp>)
 list(APPEND kmm_mymoney_LIB_SRCS ${storage_a_SOURCES})
 list(APPEND kmm_mymoney_LIB_SRCS ${onlineTask_a_SOURCES})
 list(APPEND kmm_mymoney_LIB_SRCS ${payeeidentifier_a_SOURCES})
