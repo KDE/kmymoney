@@ -120,7 +120,7 @@ void CsvWriter::writeAccountEntry(QTextStream& stream, const QString& accountId,
     }
 
     QString result;
-    QMap<QString, QString>::const_iterator it_map = m_map.constBegin();
+    auto it_map = m_map.constBegin();
     while (it_map != m_map.constEnd()) {
         result += it_map.value();
         ++it_map;
