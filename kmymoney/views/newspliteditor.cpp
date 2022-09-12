@@ -472,7 +472,7 @@ void NewSplitEditor::keyPressEvent(QKeyEvent* event)
             return;
         }
     } else {
-        const auto keySeq = QKeySequence(event->modifiers() + event->key());
+        const auto keySeq = QKeySequence(event->modifiers() | event->key());
 
         if (keySeq.matches(pActions[eMenu::Action::EditTabOrder]->shortcut())) {
             QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(this);

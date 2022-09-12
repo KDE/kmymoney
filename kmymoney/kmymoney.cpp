@@ -215,7 +215,7 @@ public:
 
         if (event->type() == QEvent::ShortcutOverride) {
             const auto kev = static_cast<QKeyEvent*>(event);
-            const auto keySeq = QKeySequence(kev->modifiers() + kev->key());
+            const auto keySeq = QKeySequence(kev->modifiers() | kev->key());
             const auto action = static_cast<QAction*>(parent());
             if (keySeq == action->shortcut()) {
                 Q_EMIT shortCutDetected();
@@ -2059,38 +2059,38 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     // *************
     //
         {
-        const QVector<QPair<Action, QKeySequence>> actionShortcuts {
-            // clang-format off
-            {qMakePair(Action::EditFindTransaction,         Qt::CTRL + Qt::SHIFT + Qt::Key_F)},
-            {qMakePair(Action::ViewTransactionDetail,       Qt::CTRL + Qt::Key_T)},
-            {qMakePair(Action::ViewHideReconciled,          Qt::CTRL + Qt::Key_R)},
-            {qMakePair(Action::ViewHideCategories,          Qt::CTRL + Qt::Key_U)},
-            {qMakePair(Action::ViewShowAll,                 Qt::CTRL + Qt::SHIFT + Qt::Key_A)},
-            {qMakePair(Action::StartReconciliation,         Qt::CTRL + Qt::SHIFT + Qt::Key_R)},
-            {qMakePair(Action::NewTransaction,              Qt::CTRL + Qt::Key_Insert)},
-            {qMakePair(Action::DuplicateTransaction,        Qt::CTRL + Qt::Key_D)},
-            {qMakePair(Action::DeleteTransaction,           Qt::CTRL + Qt::Key_Delete)},
-            {qMakePair(Action::EditTransaction,             Qt::CTRL + Qt::Key_E)},
-            {qMakePair(Action::EditSplits,                  Qt::CTRL + Qt::SHIFT + Qt::Key_E)},
-            {qMakePair(Action::CopySplits,                  Qt::CTRL + Qt::SHIFT + Qt::Key_C)},
-            {qMakePair(Action::AddReversingTransaction,     Qt::CTRL + Qt::SHIFT + Qt::Key_R)},
-            {qMakePair(Action::AddReversingTransaction,     Qt::CTRL + Qt::SHIFT + Qt::Key_Backspace)},
-            {qMakePair(Action::ToggleReconciliationFlag,    Qt::CTRL + Qt::Key_Space)},
-            {qMakePair(Action::MarkCleared,                 Qt::CTRL + Qt::ALT + Qt::Key_Space)},
-            {qMakePair(Action::MarkNotReconciled,           Qt::CTRL + Qt::SHIFT + Qt::ALT + Qt::Key_Space)},
-            {qMakePair(Action::MarkReconciled,              Qt::CTRL + Qt::SHIFT + Qt::Key_Space)},
-            {qMakePair(Action::MoveToToday,                 Qt::CTRL + Qt::SHIFT + Qt::Key_T)},
-            {qMakePair(Action::GoToPayee,                   Qt::CTRL + Qt::SHIFT + Qt::Key_P)},
-            {qMakePair(Action::GoToAccount,                 Qt::CTRL + Qt::SHIFT + Qt::Key_A)},
-            {qMakePair(Action::SelectAllTransactions,       Qt::CTRL + Qt::Key_A)},
-            {qMakePair(Action::EditTabOrder,                Qt::CTRL + Qt::SHIFT + Qt::Key_T)},
+            const QVector<QPair<Action, QKeySequence>> actionShortcuts{
+                // clang-format off
+            {qMakePair(Action::EditFindTransaction,         Qt::CTRL | Qt::SHIFT | Qt::Key_F)},
+            {qMakePair(Action::ViewTransactionDetail,       Qt::CTRL | Qt::Key_T)},
+            {qMakePair(Action::ViewHideReconciled,          Qt::CTRL | Qt::Key_R)},
+            {qMakePair(Action::ViewHideCategories,          Qt::CTRL | Qt::Key_U)},
+            {qMakePair(Action::ViewShowAll,                 Qt::CTRL | Qt::SHIFT | Qt::Key_A)},
+            {qMakePair(Action::StartReconciliation,         Qt::CTRL | Qt::SHIFT | Qt::Key_R)},
+            {qMakePair(Action::NewTransaction,              Qt::CTRL | Qt::Key_Insert)},
+            {qMakePair(Action::DuplicateTransaction,        Qt::CTRL | Qt::Key_D)},
+            {qMakePair(Action::DeleteTransaction,           Qt::CTRL | Qt::Key_Delete)},
+            {qMakePair(Action::EditTransaction,             Qt::CTRL | Qt::Key_E)},
+            {qMakePair(Action::EditSplits,                  Qt::CTRL | Qt::SHIFT | Qt::Key_E)},
+            {qMakePair(Action::CopySplits,                  Qt::CTRL | Qt::SHIFT | Qt::Key_C)},
+            {qMakePair(Action::AddReversingTransaction,     Qt::CTRL | Qt::SHIFT | Qt::Key_R)},
+            {qMakePair(Action::AddReversingTransaction,     Qt::CTRL | Qt::SHIFT | Qt::Key_Backspace)},
+            {qMakePair(Action::ToggleReconciliationFlag,    Qt::CTRL | Qt::Key_Space)},
+            {qMakePair(Action::MarkCleared,                 Qt::CTRL | Qt::ALT | Qt::Key_Space)},
+            {qMakePair(Action::MarkNotReconciled,           Qt::CTRL | Qt::SHIFT | Qt::ALT | Qt::Key_Space)},
+            {qMakePair(Action::MarkReconciled,              Qt::CTRL | Qt::SHIFT | Qt::Key_Space)},
+            {qMakePair(Action::MoveToToday,                 Qt::CTRL | Qt::SHIFT | Qt::Key_T)},
+            {qMakePair(Action::GoToPayee,                   Qt::CTRL | Qt::SHIFT | Qt::Key_P)},
+            {qMakePair(Action::GoToAccount,                 Qt::CTRL | Qt::SHIFT | Qt::Key_A)},
+            {qMakePair(Action::SelectAllTransactions,       Qt::CTRL | Qt::Key_A)},
+            {qMakePair(Action::EditTabOrder,                Qt::CTRL | Qt::SHIFT | Qt::Key_T)},
 #ifdef KMM_DEBUG
-            {qMakePair(Action::NewFeature,                  Qt::CTRL + Qt::Key_G)},
+            {qMakePair(Action::NewFeature,                  Qt::CTRL | Qt::Key_G)},
 #endif
-            {qMakePair(Action::AssignTransactionsNumber,    Qt::CTRL + Qt::SHIFT + Qt::Key_N)},
-            {qMakePair(Action::ShowFilterWidget,            Qt::CTRL + Qt::Key_F)},
-            // clang-format on
-        };
+            {qMakePair(Action::AssignTransactionsNumber,    Qt::CTRL | Qt::SHIFT | Qt::Key_N)},
+            {qMakePair(Action::ShowFilterWidget,            Qt::CTRL | Qt::Key_F)},
+                // clang-format on
+            };
 
         for(const auto& it : actionShortcuts)
             lutActions[it.first]->setShortcut(it.second);

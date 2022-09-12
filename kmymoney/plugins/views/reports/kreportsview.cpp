@@ -233,7 +233,7 @@ bool KReportsView::eventFilter(QObject* watched, QEvent* event)
 
     } else if (event->type() == QEvent::ShortcutOverride) {
         const auto kev = static_cast<QKeyEvent*>(event);
-        const auto keySeq = QKeySequence(kev->modifiers() + kev->key());
+        const auto keySeq = QKeySequence(kev->modifiers() | kev->key());
         for (auto button : findChildren<QToolButton*>()) {
             const auto action = button->defaultAction();
             if (action) {

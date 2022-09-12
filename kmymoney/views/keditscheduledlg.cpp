@@ -631,7 +631,7 @@ void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule)
 
 void KEditScheduleDlg::keyPressEvent(QKeyEvent* event)
 {
-    const auto keySeq = QKeySequence(event->modifiers() + event->key());
+    const auto keySeq = QKeySequence(event->modifiers() | event->key());
 
     if (keySeq.matches(pActions[eMenu::Action::EditTabOrder]->shortcut())) {
         QPointer<TabOrderDialog> tabOrderDialog = new TabOrderDialog(this);
