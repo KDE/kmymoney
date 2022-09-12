@@ -19,6 +19,11 @@ Dependencies:
     'frameworks/kxmlgui': '@stable'
     'frameworks/ktextwidgets': '@stable'
     'frameworks/kcmutils': '@stable'
+    'frameworks/kcontacts': '@stable'
+    'frameworks/kholidays': '@stable'
+    'graphics/kdiagram': '@stable'
+    'pim/akonadi': '@stable'
+    'pim/kidentitymanagement': '@stable'
     'office/alkimia': '@latest'
 
 Options:
