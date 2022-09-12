@@ -28,6 +28,7 @@
 #include "ui_kpayeereassigndlg.h"
 
 #include <kmymoneymvccombo.h>
+#include <mymoneypayee.h>
 
 /** This lookup table needs to be in sync with KPayeeReassignDlg::OperationType enum */
 static const char* labelText[KPayeeReassignDlg::TypeCount] = {
