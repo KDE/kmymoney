@@ -105,7 +105,7 @@ void MyMoneyMoney::setThousandSeparator(const QChar &separator)
     if (separator != QLatin1Char(' '))
         eMyMoney::Money::_thousandSeparator = separator;
     else
-        eMyMoney::Money::_thousandSeparator = 0;
+        eMyMoney::Money::_thousandSeparator = QLatin1Char(0);
 }
 
 const QChar MyMoneyMoney::thousandSeparator()
@@ -118,7 +118,7 @@ void MyMoneyMoney::setDecimalSeparator(const QChar &separator)
     if (separator != QLatin1Char(' '))
         eMyMoney::Money::_decimalSeparator = separator;
     else
-        eMyMoney::Money::_decimalSeparator = 0;
+        eMyMoney::Money::_decimalSeparator = QLatin1Char(0);
 }
 
 const QChar MyMoneyMoney::decimalSeparator()

@@ -405,7 +405,7 @@ QString MyMoneyQifProfile::date(const QDate& datein) const
             } else {
                 throw MYMONEYEXCEPTION_CSTRING("Invalid char in QifProfile date field");
             }
-            delim = 0;
+            delim = QLatin1Char(0);
         } else {
             if (!delim.isNull())
                 buffer += delim;
