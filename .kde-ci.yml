@@ -1,4 +1,5 @@
 # SPDX-FileCopyrightText: 2022 Thomas Baumgart <tbaumgart@kde.org>
+# SPDX-FileCopyrightText: 2022 Dawid Wróbel <me@dawidwrobel.com>
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
@@ -28,4 +29,4 @@ Dependencies:
 
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD', 'Windows' ]
-  cmake-options: '-DWARNINGS_AS_ERRORS=on -Werror=dev'
+  cmake-options: '-DUSE_MODELTEST=on -DWARNINGS_AS_ERRORS=on -Werror=dev'
