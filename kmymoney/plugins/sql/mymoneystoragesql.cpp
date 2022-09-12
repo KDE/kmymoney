@@ -2752,6 +2752,10 @@ QMap<QString, MyMoneyBudget> MyMoneyStorageSql::fetchBudgets() const
     return fetchBudgets(QStringList(), false);
 }
 
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Waddress"
+#endif
 ulong MyMoneyStorageSql::getNextBudgetId() const
 {
     Q_D(const MyMoneyStorageSql);
@@ -2823,6 +2827,9 @@ ulong MyMoneyStorageSql::getNextCostCenterId() const
     Q_D(const MyMoneyStorageSql);
     return d->getNextId<&MyMoneyStorageSqlPrivate::m_hiIdCostCenter>(QLatin1String("kmmCostCenterIdentifier"), QLatin1String("id"), 5);
 }
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 
 ulong MyMoneyStorageSql::incrementBudgetId()
 {
