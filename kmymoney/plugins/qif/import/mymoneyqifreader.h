@@ -32,10 +32,10 @@
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
 #include "mymoneyqifprofile.h"
+#include "mymoneystatement.h"
 #include "mymoneytransaction.h"
 
 class MyMoneyFileTransaction;
-class MyMoneyStatement;
 class MyMoneyQifProfile;
 
 /**
