@@ -18,6 +18,9 @@ class CSVImporterCoreTest : public QObject
 {
     Q_OBJECT
 
+public:
+    ~CSVImporterCoreTest() = default;
+
     CSVImporterCore     *csvImporter;
     BankingProfile      *debitCreditProfile;
     BankingProfile      *amountProfile;

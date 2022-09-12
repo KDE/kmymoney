@@ -14,6 +14,8 @@ class ConvertDate;
 class CsvDateTest : public QObject
 {
     Q_OBJECT
+public:
+    ~CsvDateTest() = default;
 
 private Q_SLOTS:
     void init();
