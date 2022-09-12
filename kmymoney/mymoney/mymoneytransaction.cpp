@@ -235,7 +235,7 @@ void MyMoneyTransaction::modifySplit(const MyMoneySplit& split)
 void MyMoneyTransaction::removeSplit(const MyMoneySplit& split)
 {
     Q_D(MyMoneyTransaction);
-    for (auto end = d->m_splits.size(), i = 0; i < end; ++i) {
+    for (int end = d->m_splits.size(), i = 0; i < end; ++i) {
         if (split.id() == d->m_splits.at(i).id()) {
             d->m_splits.removeAt(i);
             return;
