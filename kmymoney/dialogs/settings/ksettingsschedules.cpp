@@ -332,13 +332,6 @@ KSettingsSchedules::~KSettingsSchedules()
 
 void KSettingsSchedules::loadList()
 {
-    struct CompareByName : public std::binary_function<QString, QString, bool> {
-        bool operator()(const QString& lhs, const QString& rhs) const
-        {
-            return QString::localeAwareCompare(lhs, rhs) < 0;
-        }
-    };
-
     Q_D(KSettingsSchedules);
     const auto model = qobject_cast<QStandardItemModel*>(d->ui->m_holidayRegion->model());
 
@@ -367,7 +360,9 @@ void KSettingsSchedules::loadList()
     }
 
     regionList = m_regionalHolidays.values();
-    std::sort(regionList.begin(), regionList.end(), CompareByName());
+    std::sort(regionList.begin(), regionList.end(), [&](const QString& lhs, const QString& rhs) {
+        return QString::localeAwareCompare(lhs, rhs) < 0;
+    });
 #endif
 
     model->clear();
