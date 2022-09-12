@@ -18,13 +18,13 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KMessageBox>
-#include <KLineEdit>
-#include <kguiutils.h>
-#include <KLocalizedString>
-#include <KIO/Scheduler>
+#include <KIO/FavIconRequestJob>
 #include <KIO/Job>
-#include <KIOGui/KIO/FavIconRequestJob>
+#include <KIO/Scheduler>
+#include <KLineEdit>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <kguiutils.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
