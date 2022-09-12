@@ -96,7 +96,7 @@ void AmountValidatorTest::testValidator()
     QFETCH(QChar, groupSeparator);
     QFETCH(int, result);
 
-    QLocale::setDefault(locale);
+    QLocale::setDefault(QLocale(locale));
     if (QLocale().decimalPoint() != decimalPoint) {
         const QString msg = QStringLiteral("Locale %1 does not seem to be loaded correctly: decimal point is %2 and should be  %3").arg(locale, QLocale().decimalPoint(), decimalPoint);
 
