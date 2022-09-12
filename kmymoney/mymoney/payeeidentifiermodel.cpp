@@ -107,7 +107,9 @@ Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex &index) const
             return Qt::ItemIsEnabled;
     }
 #endif
-
+    if (!index.isValid()) {
+        return Qt::NoItemFlags;
+    }
     return (Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 }
 

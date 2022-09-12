@@ -198,7 +198,10 @@ Qt::ItemFlags SchedulesModel::flags(const QModelIndex& index) const
     if (index.parent().isValid()) {
         return (Qt::ItemIsEnabled | Qt::ItemIsSelectable);
     }
-    return Qt::ItemIsEnabled;
+    if (index.isValid())
+        return Qt::ItemIsEnabled;
+
+    return Qt::NoItemFlags;
 }
 
 QVariant SchedulesModel::data(const QModelIndex& idx, int role) const

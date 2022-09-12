@@ -246,9 +246,9 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const override
     {
         if (!index.isValid())
-            return Qt::ItemFlags();
+            return Qt::NoItemFlags;
         if (index.row() < 0 || index.row() >= rowCount(index.parent()))
-            return Qt::ItemFlags();
+            return Qt::NoItemFlags;
 
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
     }

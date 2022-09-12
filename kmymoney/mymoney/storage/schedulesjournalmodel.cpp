@@ -50,8 +50,10 @@ SchedulesJournalModel::~SchedulesJournalModel()
 
 Qt::ItemFlags SchedulesJournalModel::flags(const QModelIndex& index) const
 {
-    Q_UNUSED(index);
-    return (Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+    if (index.isValid()) {
+        return (Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+    }
+    return Qt::NoItemFlags;
 }
 
 QVariant SchedulesJournalModel::data(const QModelIndex& index, int role) const

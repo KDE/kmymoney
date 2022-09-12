@@ -134,9 +134,9 @@ QVariant TemplatesModel::data(const QModelIndex& idx, int role) const
 Qt::ItemFlags TemplatesModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
-        return Qt::ItemFlags();
+        return Qt::NoItemFlags;
     if (index.row() < 0 || index.row() >= rowCount(index.parent()))
-        return Qt::ItemFlags();
+        return Qt::NoItemFlags;
 
     // we don't allow to select the country entries of the model
     return index.parent().isValid() ? (Qt::ItemIsEnabled | Qt::ItemIsSelectable) : Qt::ItemIsEnabled;

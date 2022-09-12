@@ -221,8 +221,10 @@ QVariant SplitModel::headerData(int section, Qt::Orientation orientation, int ro
 
 Qt::ItemFlags SplitModel::flags(const QModelIndex& index) const
 {
-    Q_UNUSED(index);
-    return (Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
+    if (index.isValid()) {
+        return (Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
+    }
+    return Qt::NoItemFlags;
 }
 
 QVariant SplitModel::data(const QModelIndex& idx, int role) const

@@ -55,8 +55,10 @@ QVariant StatusModel::headerData(int section, Qt::Orientation orientation, int r
 
 Qt::ItemFlags StatusModel::flags(const QModelIndex& index) const
 {
-    Q_UNUSED(index);
-    return (Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+    if (index.isValid()) {
+        return (Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+    }
+    return Qt::NoItemFlags;
 }
 
 QVariant StatusModel::data(const QModelIndex& idx, int role) const
