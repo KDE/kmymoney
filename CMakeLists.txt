@@ -114,7 +114,6 @@ endif()
 
 if (PkgConfig_FOUND)
   pkg_check_modules(SQLCIPHER sqlcipher IMPORTED_TARGET)
-  pkg_check_modules(LIBOFX libofx IMPORTED_TARGET)
 endif()
 
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets Svg Xml Test PrintSupport)
@@ -139,6 +138,8 @@ if (NOT LibAlkimia5_FOUND)
 endif()
 
 find_package(KChart 2.6.0)
+
+find_package(LibOFX)
 
 if(KF5Gpgmepp_FOUND)
   set(GPG_FOUND TRUE)
@@ -227,6 +228,9 @@ add_feature_info("SQL Storage" ENABLE_SQLSTORAGE "Allows storing your financial 
 cmake_dependent_option(ENABLE_SQLCIPHER "Enable SQLCipher support." ON
                        "SQLCIPHER_FOUND" OFF)
 
+cmake_dependent_option(ENABLE_LIBOFX "Enable LibOFX support." ON "LibOFX_FOUND" OFF)
+add_feature_info("LibOFX" ENABLE_LIBOFX "Enables OFX import, export, and Direct Connect using LibOFX library.")
+
 cmake_dependent_option(ENABLE_SQLTRACER "Dump SQL requests to console" OFF
                        "ENABLE_SQLSTORAGE" OFF)
 
@@ -245,30 +249,6 @@ cmake_dependent_option(ENABLE_IBANBICDATA "Enable IBAN/BIC data support." OFF
                        "Qt5Sql_FOUND" OFF)
 
 add_feature_info("IBAN/BIC data" ENABLE_IBANBICDATA "Adds predefined IBAN/BIC numbers to KMyMoney (note: doesn't work yet).")
-
-if(LIBOFX_FOUND)
-  if(NOT LIBOFX_HAVE_CLIENTUID)
-    get_target_property(PATH_TO_LIBOFX_HEADER PkgConfig::LIBOFX INTERFACE_INCLUDE_DIRECTORIES )
-    if ("${PATH_TO_LIBOFX_HEADER}" STREQUAL "PATH_TO_LIBOFX_HEADER-NOTFOUND")
-      set(PATH_TO_LIBOFX_HEADER ${LIBOFX_INCLUDEDIR})
-    endif()
-    set(PATH_TO_LIBOFX_HEADER "${PATH_TO_LIBOFX_HEADER}/libofx/libofx.h")
-    unset(LIBOFX_HAVE_CLIENTUID)
-    unset(LIBOFX_HAVE_CLIENTUID CACHE) #not doing this will prevent updating below check
-    check_struct_has_member("struct OfxFiLogin" clientuid ${PATH_TO_LIBOFX_HEADER} LIBOFX_HAVE_CLIENTUID LANGUAGE CXX)
-  endif()
-
-  if (LIBOFX_HAVE_CLIENTUID)
-    set (nice_LIBOFX_HAVE_CLIENTUID "yes")
-  else()
-    set (nice_LIBOFX_HAVE_CLIENTUID "no")
-  endif()
-
-else()
-  set (nice_LIBOFX_HAVE_CLIENTUID "unknown")
-  unset(LIBOFX_HAVE_CLIENTUID)
-  unset(LIBOFX_HAVE_CLIENTUID CACHE)
-endif(LIBOFX_FOUND)
 
 # check for optional KBanking support
 find_package(aqbanking 6.2.5)

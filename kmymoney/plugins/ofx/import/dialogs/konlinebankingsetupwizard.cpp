@@ -61,10 +61,6 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
 
     m_applicationEdit->hide();
     m_headerVersionEdit->hide();
-#ifndef LIBOFX_HAVE_CLIENTUID
-    m_editClientUid->setEnabled(false);
-    m_clientUidLabel->setEnabled(false);
-#endif
 
     m_appId = new OfxAppVersion(m_applicationCombo, m_applicationEdit, "");
     m_headerVersion = new OfxHeaderVersion(m_headerVersionCombo, "");
@@ -349,9 +345,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
         memcpy(fi.org, (*m_it_info).org, OFX_ORG_LENGTH - 1);
         strncpy(fi.userid, username.toLatin1().left(OFX_USERID_LENGTH - 1), OFX_USERID_LENGTH - 1);
         strncpy(fi.userpass, password.toLatin1(), OFX_USERPASS_LENGTH - 1);
-#ifdef LIBOFX_HAVE_CLIENTUID
         strncpy(fi.clientuid, clientUid.toLatin1(), OFX_CLIENTUID_LENGTH - 1);
-#endif
 
         // pretend we're Quicken 2008
         // https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
@@ -486,9 +480,7 @@ int KOnlineBankingSetupWizard::ofxAccountCallback(struct OfxAccountData data, vo
 
     kvps.setValue("username", pthis->m_editUsername->text());
     kvps.setValue("password", pthis->m_editPassword->text());
-#ifdef LIBOFX_HAVE_CLIENTUID
     kvps.setValue("clientUid", pthis->m_editClientUid->text());
-#endif
     if (!pthis->m_userAgent->text().isEmpty()) {
         kvps.setValue("kmmofx-useragent", pthis->m_userAgent->text());
     }

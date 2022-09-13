@@ -64,14 +64,6 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
     m_appId = new OfxAppVersion(m_applicationCombo, m_applicationEdit, settings.value("appId"));
     m_headerVersion = new OfxHeaderVersion(m_headerVersionCombo, settings.value("kmmofx-headerVersion"));
     m_clientUidEdit->setText(settings.value("clientUid"));
-
-#ifndef LIBOFX_HAVE_CLIENTUID
-    // in case the installed libofx does not support clientuid
-    // we disable the widget
-    m_clientUidEdit->setEnabled(false);
-    m_clientUidLabel->setEnabled(false);
-#endif
-
     m_userAgentEdit->setPlaceholderText(KProtocolManager::defaultUserAgent());
     m_userAgentEdit->setText(settings.value(QLatin1String("kmmofx-useragent")));
     connect(m_applicationCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &KOnlineBankingStatus::applicationSelectionChanged);

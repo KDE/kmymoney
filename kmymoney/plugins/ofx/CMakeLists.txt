@@ -1,3 +1,3 @@
-if(LIBOFX_FOUND)
+if(LibOFX_FOUND)
   add_subdirectory( import )
-endif(LIBOFX_FOUND)
+endif()

@@ -1,10 +1,6 @@
 # patch the version with the version defined in the build system
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ofximporter.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/ofximporter.json @ONLY)
 
-if(${LIBOFX_HAVE_CLIENTUID})
-  add_definitions(-DLIBOFX_HAVE_CLIENTUID)
-endif(${LIBOFX_HAVE_CLIENTUID})
-
 add_subdirectory( dialogs )
 
 ########### next target ###############
@@ -32,12 +28,11 @@ target_link_libraries(ofximporter
   KF5::Wallet
   Qt::Xml
   Alkimia::alkimia
-  PkgConfig::LIBOFX
+  libofx::libofx
 )
 
 target_include_directories(ofximporter
   PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/dialogs
   ${CMAKE_CURRENT_BINARY_DIR}/dialogs
-  ${LIBOFX_INCLUDEDIR}
 )
