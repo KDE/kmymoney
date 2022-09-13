@@ -44,8 +44,8 @@ enum fileVersionE : int {
     FILE_8_BYTE_VALUE,
 };
 
-QChar _thousandSeparator = QLatin1Char(',');
-QChar _decimalSeparator = QLatin1Char('.');
+QString _thousandSeparator = QLatin1String(",");
+QString _decimalSeparator = QLatin1String(".");
 eMyMoney::Money::signPosition _negativeMonetarySignPosition = PreceedQuantityAndSymbol;
 eMyMoney::Money::signPosition _positiveMonetarySignPosition = PreceedQuantityAndSymbol;
 bool _negativePrefixCurrencySymbol = false;
@@ -108,12 +108,28 @@ void MyMoneyMoney::setThousandSeparator(const QChar &separator)
         eMyMoney::Money::_thousandSeparator = QLatin1Char(0);
 }
 
+void MyMoneyMoney::setThousandSeparator(const QString& separator)
+{
+    if (separator != QLatin1Char(' '))
+        eMyMoney::Money::_thousandSeparator = separator;
+    else
+        eMyMoney::Money::_thousandSeparator = QLatin1Char(0);
+}
+
 const QChar MyMoneyMoney::thousandSeparator()
 {
-    return eMyMoney::Money::_thousandSeparator;
+    return eMyMoney::Money::_thousandSeparator.isEmpty() ? QLatin1Char(0) : eMyMoney::Money::_thousandSeparator.at(0);
 }
 
 void MyMoneyMoney::setDecimalSeparator(const QChar &separator)
+{
+    if (separator != QLatin1Char(' '))
+        eMyMoney::Money::_decimalSeparator = separator;
+    else
+        eMyMoney::Money::_decimalSeparator = QString();
+}
+
+void MyMoneyMoney::setDecimalSeparator(const QString& separator)
 {
     if (separator != QLatin1Char(' '))
         eMyMoney::Money::_decimalSeparator = separator;
@@ -123,11 +139,11 @@ void MyMoneyMoney::setDecimalSeparator(const QChar &separator)
 
 const QChar MyMoneyMoney::decimalSeparator()
 {
-    return eMyMoney::Money::_decimalSeparator;
+    return eMyMoney::Money::_decimalSeparator.isEmpty() ? QLatin1Char(0) : eMyMoney::Money::_decimalSeparator.at(0);
 }
 
 MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
-    : AlkValue(pszAmount, eMyMoney::Money::_decimalSeparator)
+    : AlkValue(pszAmount, decimalSeparator())
 {
 }
 
@@ -145,7 +161,7 @@ MyMoneyMoney::MyMoneyMoney(qint64 Amount, const unsigned int denom)
     if (denom == 0)
         throw MYMONEYEXCEPTION_CSTRING("Denominator 0 not allowed!");
 
-    *this = AlkValue(QString::fromLatin1("%1/%2").arg(Amount).arg(denom), eMyMoney::Money::_decimalSeparator);
+    *this = AlkValue(QString::fromLatin1("%1/%2").arg(Amount).arg(denom), decimalSeparator());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -177,7 +193,7 @@ MyMoneyMoney::MyMoneyMoney(const long int iAmount, const unsigned int denom)
 {
     if (denom == 0)
         throw MYMONEYEXCEPTION_CSTRING("Denominator 0 not allowed!");
-    *this = AlkValue(QString::fromLatin1("%1/%2").arg(iAmount).arg(denom), eMyMoney::Money::_decimalSeparator);
+    *this = AlkValue(QString::fromLatin1("%1/%2").arg(iAmount).arg(denom), decimalSeparator());
 }
 
 

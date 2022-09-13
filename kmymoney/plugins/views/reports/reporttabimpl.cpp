@@ -361,7 +361,7 @@ QValidator::State MyDoubleValidator::validate(QString &s, int &i) const
         return QValidator::Intermediate;
     }
 
-    QChar decimalPoint = locale().decimalPoint();
+    QString decimalPoint = locale().decimalPoint();
 
     if(s.indexOf(decimalPoint) != -1) {
         int charsAfterPoint = s.length() - s.indexOf(decimalPoint) - 1;
@@ -394,7 +394,7 @@ QValidator::State MyLogarithmicDoubleValidator::validate(QString &s, int &i) con
         return QValidator::Intermediate;
     }
 
-    QChar decimalPoint = locale().decimalPoint();
+    QString decimalPoint = locale().decimalPoint();
 
     // start numbering placeholders with a two-digit number to avoid
     // interpreting the following zero as part of the placeholder index

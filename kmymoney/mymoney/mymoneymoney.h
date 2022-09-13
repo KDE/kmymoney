@@ -113,7 +113,9 @@ public:
     double toDouble() const;
 
     static void setThousandSeparator(const QChar &);
+    static void setThousandSeparator(const QString&);
     static void setDecimalSeparator(const QChar &);
+    static void setDecimalSeparator(const QString&);
     static void setNegativeMonetarySignPosition(const eMyMoney::Money::signPosition pos);
     static void setPositiveMonetarySignPosition(const eMyMoney::Money::signPosition pos);
     static void setNegativePrefixCurrencySymbol(const bool flag);

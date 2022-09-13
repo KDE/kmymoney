@@ -439,8 +439,8 @@ void KReportTab::updateDataRange()
     QList<DataDimension> grids = m_chartView->coordinatePlane()->gridDimensionsList();    // get dimensions of plotted graph
     if (grids.isEmpty())
         return;
-    QChar separator = locale().groupSeparator();
-    QChar decimalPoint = locale().decimalPoint();
+    auto separator = locale().groupSeparator(); // QChar in Qt5, QString in Qt6
+    auto decimalPoint = locale().decimalPoint(); // QChar in Qt5, QString in Qt6
     int precision = m_report.yLabelsPrecision();
     QList<QPair<QString, qreal>> dims;  // create list of dimension values in string and qreal
 

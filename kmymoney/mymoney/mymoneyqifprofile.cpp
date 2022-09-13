@@ -150,10 +150,18 @@ void MyMoneyQifProfile::clear()
     m_filterFileType = QLatin1String("*.qif *.QIF");
 
     m_decimal.clear();
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     m_decimal['$'] = m_decimal['Q'] = m_decimal['T'] = m_decimal['O'] = m_decimal['I'] = QLocale().decimalPoint();
+#else
+    m_decimal['$'] = m_decimal['Q'] = m_decimal['T'] = m_decimal['O'] = m_decimal['I'] = QLocale().decimalPoint().at(0);
+#endif
 
     m_thousands.clear();
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     m_thousands['$'] = m_thousands['Q'] = m_thousands['T'] = m_thousands['O'] = m_thousands['I'] = QLocale().groupSeparator();
+#else
+    m_thousands['$'] = m_thousands['Q'] = m_thousands['T'] = m_thousands['O'] = m_thousands['I'] = QLocale().groupSeparator().at(0);
+#endif
 
     m_openingBalanceText = QLatin1String("Opening Balance");
     m_voidMark = QLatin1String("VOID ");

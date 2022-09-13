@@ -74,7 +74,7 @@ public:
       * character to be used to separate the integer and fractional
       * part of numbers. The internal representation is always a period.
       */
-    QChar m_comma;
+    QString m_comma;
 
     /**
       * The numeric representation of a stacked first operand
