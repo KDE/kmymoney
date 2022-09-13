@@ -25,7 +25,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneypluginclass.h"
 #include "kmymoneysettings.h"
 #include "ui_reportsviewsettings.h"
 

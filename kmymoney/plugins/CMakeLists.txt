@@ -1,7 +1,3 @@
-include(ECMSetupQtPluginMacroNames)
-# TODO Remove once we depend on KF 5.90
-ecm_setup_qtplugin_macro_names(JSON_ARG1 KMM_PLUGIN_CLASS)
-
 add_subdirectory( onlinetasks )
 add_subdirectory( plugin-interfaces )
 add_subdirectory( csv )

@@ -23,7 +23,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneypluginclass.h"
 #include "pluginsettings.h"
 #include "ui_pluginsettingsdecl.h"
 

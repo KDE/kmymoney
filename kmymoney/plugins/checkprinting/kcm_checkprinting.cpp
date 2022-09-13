@@ -11,7 +11,6 @@
 #include <QTextEdit>
 
 // KDE includes
-#include "kmymoneypluginclass.h"
 #include <KAboutData>
 #include <KPluginFactory>
 

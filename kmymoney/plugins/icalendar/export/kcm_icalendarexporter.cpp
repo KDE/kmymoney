@@ -11,7 +11,6 @@
 #include <QBoxLayout>
 
 // KDE includes
-#include "kmymoneypluginclass.h"
 #include <KAboutData>
 #include <KLocalizedString>
 #include <KPluginFactory>

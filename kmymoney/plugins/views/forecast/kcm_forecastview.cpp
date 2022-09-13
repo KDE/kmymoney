@@ -8,7 +8,6 @@
 #include <config-kmymoney-version.h>
 
 // KDE includes
-#include "kmymoneypluginclass.h"
 #include "kmymoneysettings.h"
 #include <KAboutData>
 #include <KPluginFactory>

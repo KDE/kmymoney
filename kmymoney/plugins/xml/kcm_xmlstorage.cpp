@@ -22,7 +22,6 @@
 // Project Includes
 
 #include "kgpgfile.h"
-#include "kmymoneypluginclass.h"
 #include "kmymoneysettings.h"
 
 #define RECOVER_KEY_ID      "0xD2B08440"
