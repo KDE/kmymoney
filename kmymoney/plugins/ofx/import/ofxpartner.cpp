@@ -281,7 +281,12 @@ public:
     QFile  m_fpTrace;
 };
 
-OfxHttpRequest::OfxHttpRequest(const QString& type, const QUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const QUrl& dst, bool showProgressInfo)
+OfxHttpRequest::OfxHttpRequest(const QString& method,
+                               const QUrl& url,
+                               const QByteArray& postData,
+                               const QMap<QString, QString>& metaData,
+                               const QUrl& dst,
+                               bool showProgressInfo)
     : d(new Private)
     , m_dst(dst.toLocalFile())
     , m_error(-1)
@@ -319,7 +324,7 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const QUrl &url, const QByte
         jobFlags = KIO::HideProgressInfo | KIO::Overwrite;
 
     KIO::Job* job;
-    if(type.toLower() == QStringLiteral("get")) {
+    if (method.toLower() == QStringLiteral("get")) {
         job = m_getJob = KIO::copy(url, QUrl(QString("file://%1").arg(m_dst)), jobFlags);
     } else {
         job = m_postJob = KIO::http_post(url, postData, jobFlags);
