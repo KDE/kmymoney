@@ -12,7 +12,6 @@
 #include <QRect>
 #include <QScreen>
 #include <QWidget>
-#include <QWindow>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -23,7 +22,7 @@
 
 PopupPositioner::PopupPositioner(QWidget* baseWidget, QWidget* popupWidget, Anchor anchor)
 {
-    const auto screenRect = baseWidget->windowHandle()->screen()->availableGeometry();
+    const auto screenRect = baseWidget->screen()->availableGeometry();
 
     auto p = baseWidget->mapToGlobal(QPoint());
     // align the y coordinate

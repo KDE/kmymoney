@@ -19,7 +19,6 @@
 #include <QScrollBar>
 #include <QStandardItemModel>
 #include <QTextCodec>
-#include <QWindow>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -221,7 +220,7 @@ void CSVWizard::updateWindowSize()
     table->resizeColumnsToContents();
     this->repaint();
 
-    QSize screen = windowHandle()->screen()->size(); // get available screen size
+    QSize screen = this->screen()->size(); // get available screen size
     QRect wizard = this->frameGeometry(); // get current wizard size
 
     int newWidth = (table->contentsMargins().left() //
@@ -491,10 +490,8 @@ void IntroPage::initializePage()
         m_dlg->m_initialWidth = m_dlg->geometry().width();
     } else {
         //resize wizard to its initial size and center it
-        m_dlg->setGeometry(QStyle::alignedRect(Qt::LeftToRight,
-                                               Qt::AlignCenter,
-                                               QSize(m_dlg->m_initialWidth, m_dlg->m_initialHeight),
-                                               windowHandle()->screen()->availableGeometry()));
+        m_dlg->setGeometry(
+            QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, QSize(m_dlg->m_initialWidth, m_dlg->m_initialHeight), screen()->availableGeometry()));
     }
     m_dlg->ui->tableView->hide();
 }

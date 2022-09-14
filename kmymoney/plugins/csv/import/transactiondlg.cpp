@@ -11,7 +11,6 @@
 
 #include <QPushButton>
 #include <QScreen>
-#include <QWindow>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -83,7 +82,7 @@ void TransactionDlg::updateWindowSize()
     int columnsWidth = 0;
     int headerWidth;
     int newWidth;
-    QSize screen = windowHandle()->screen()->size();
+    QSize screen = this->screen()->size();
 
     layout()->invalidate();
     layout()->activate();

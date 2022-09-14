@@ -16,7 +16,6 @@
 #include <QLineEdit>
 #include <QScreen>
 #include <QVBoxLayout>
-#include <QWindow>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -107,7 +106,7 @@ void KMyMoneyCompletion::adjustSize(const int count)
         // the code of this basic block is taken from KCompletionBox::show()
         // and modified to our local needs
 
-        QRect screenSize = windowHandle()->screen()->availableGeometry();
+        QRect screenSize = screen()->availableGeometry();
 
         QPoint orig = d->m_parent->mapToGlobal(QPoint(0, d->m_parent->height()));
         int x = orig.x();
@@ -182,7 +181,7 @@ bool KMyMoneyCompletion::eventFilter(QObject* o, QEvent* e)
     KMyMoneyCombo *c = dynamic_cast<KMyMoneyCombo*>(d->m_parent);
     if (o == d->m_parent || (c && o == c->lineEdit()) || o == this) {
         if (isVisible()) {
-#ifdef Q_OS_WIN32                   //krazy:exclude=cpp 
+#ifdef Q_OS_WIN32 // krazy:exclude=cpp
             // hide the completer only if the focus was not lost because of windows activation or the activated window is not an application window
             if (e->type() == QEvent::FocusOut && (static_cast<QFocusEvent*>(e)->reason() != Qt::ActiveWindowFocusReason || QApplication::activeWindow() == 0)) {
 #else
