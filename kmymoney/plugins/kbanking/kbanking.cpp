@@ -1144,6 +1144,13 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
     MyMoneyStatement::Transaction kt;
     unsigned long h;
 
+    auto appendToMemo = [&](const QString& line) {
+        s += QStringLiteral(", %1").arg(line);
+        if (!memo.isEmpty())
+            memo.append('\n');
+        memo.append(line);
+    };
+
     kt.m_fees = MyMoneyMoney();
 
     // bank's transaction id
@@ -1185,43 +1192,29 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
     // we add them to the memo field
     p = AB_Transaction_GetEndToEndReference(t);
     if (p) {
-        s += QString(", EREF: %1").arg(p);
-        if(memo.length())
-            memo.append('\n');
-        memo.append(QString("EREF: %1").arg(p));
+        appendToMemo(QStringLiteral("EREF: %1").arg(QString::fromUtf8(p)));
     }
     p = AB_Transaction_GetCustomerReference(t);
     if (p) {
-        s += QString(", CREF: %1").arg(p);
-        if(memo.length())
-            memo.append('\n');
-        memo.append(QString("CREF: %1").arg(p));
+        appendToMemo(QStringLiteral("CREF: %1").arg(QString::fromUtf8(p)));
     }
     p = AB_Transaction_GetMandateId(t);
     if (p) {
-        s += QString(", MREF: %1").arg(p);
-        if(memo.length())
-            memo.append('\n');
-        memo.append(QString("MREF: %1").arg(p));
+        appendToMemo(QStringLiteral("MREF: %1").arg(QString::fromUtf8(p)));
     }
     p = AB_Transaction_GetCreditorSchemeId(t);
     if (p) {
-        s += QString(", CRED: %1").arg(p);
-        if(memo.length())
-            memo.append('\n');
-        memo.append(QString("CRED: %1").arg(p));
+        appendToMemo(QStringLiteral("CRED: %1").arg(QString::fromUtf8(p)));
     }
     p = AB_Transaction_GetOriginatorId(t);
     if (p) {
-        s += QString(", DEBT: %1").arg(p);
-        if(memo.length())
-            memo.append('\n');
-        memo.append(QString("DEBT: %1").arg(p));
+        appendToMemo(QStringLiteral("DEBT: %1").arg(QString::fromUtf8(p)));
     }
 
     const MyMoneyKeyValueContainer& kvp = acc.onlineBankingSettings();
     // check if we need the version with or without linebreaks
-    if (kvp.value("kbanking-memo-removelinebreaks").compare(QLatin1String("no"))) {
+    const auto removeLineBreaks = kvp.value("kbanking-memo-removelinebreaks").compare(QLatin1String("no")) != 0;
+    if (removeLineBreaks) {
         kt.m_strMemo = memo;
     } else {
         kt.m_strMemo = s;
@@ -1262,15 +1255,22 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
     // Append additional payee/payer information which
     // can be found in additional fields (but only in
     // versions > 6.2.0)
+    const auto includePayeeDetails = kvp.value("kbanking-memo-includepayeedetails").compare(QLatin1String("no")) != 0;
     p = AB_Transaction_GetUltimateDebtor(t);
     if (p) {
         const auto delim = kt.m_strPayee.isEmpty() ? QChar() : QLatin1Char('/');
-        kt.m_strPayee.append(QStringLiteral("%1%2").arg(delim).arg(p));
+        kt.m_strPayee.append(QStringLiteral("%1%2").arg(delim).arg(QString::fromUtf8(p)));
+        if (includePayeeDetails) {
+            kt.m_strMemo.append(QStringLiteral("\nABWA: %1").arg(QString::fromUtf8(p)));
+        }
     }
     p = AB_Transaction_GetUltimateCreditor(t);
     if (p) {
         const auto delim = kt.m_strPayee.isEmpty() ? QChar() : QLatin1Char('/');
-        kt.m_strPayee.append(QStringLiteral("%1%2").arg(delim).arg(p));
+        kt.m_strPayee.append(QStringLiteral("%1%2").arg(delim).arg(QString::fromUtf8(p)));
+        if (includePayeeDetails) {
+            kt.m_strMemo.append(QStringLiteral("\nABWE: %1").arg(QString::fromUtf8(p)));
+        }
     }
 #endif
 
