@@ -17,6 +17,7 @@
                 "Name[gl]": "Cristian Oneț",
                 "Name[ia]": "Cristian Oneț",
                 "Name[it]": "Cristian Oneț",
+                "Name[ka]": "Cristian Oneț",
                 "Name[ko]": "Cristian Oneț",
                 "Name[nl]": "Cristian Oneț",
                 "Name[pl]": "Cristian Oneț",
