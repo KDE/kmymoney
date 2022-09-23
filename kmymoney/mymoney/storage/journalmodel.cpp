@@ -1562,7 +1562,10 @@ void JournalModel::resetRowHeightInformation()
 
     const QModelIndex first = index(0, 0);
     const QModelIndex last = index(lastRow, columnCount() - 1);
-    Q_EMIT dataChanged(first, last);
+
+    if (last.isValid()) {
+        Q_EMIT dataChanged(first, last);
+    }
 }
 
 MyMoneyMoney JournalModel::stockSplitBalance(const QString& accountId, MyMoneyMoney balance, MyMoneyMoney factor) const
