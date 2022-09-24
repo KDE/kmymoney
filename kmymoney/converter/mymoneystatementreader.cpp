@@ -684,7 +684,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
     if (thisaccount.accountType() == Account::Type::Investment) {
         // determine the brokerage account
-        brokerageactid = d->m_account.value("kmm-brokerage-account").toUtf8();
+        brokerageactid = d->m_account.value("kmm-brokerage-account");
         if (brokerageactid.isEmpty()) {
             brokerageactid = file->accountByName(statementTransactionUnderImport.m_strBrokerageAccount).id();
         }
@@ -892,15 +892,19 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         } else if ((statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::Shrsin) ||
                    (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::Shrsout)) {
             s1.setValue(MyMoneyMoney());
-            s1.setShares(statementTransactionUnderImport.m_shares);
             s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares));
+            if (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::Shrsin) {
+                s1.setShares(statementTransactionUnderImport.m_shares.abs());
+            } else {
+                s1.setShares(-(statementTransactionUnderImport.m_shares.abs()));
+            }
         } else if (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::None) {
             // User is attempting to import a non-investment transaction into this
             // investment account.  This is not supportable the way KMyMoney is
             // written.  However, if a user has an associated brokerage account,
             // we can stuff the transaction there.
 
-            brokerageactid = d->m_account.value("kmm-brokerage-account").toUtf8();
+            brokerageactid = d->m_account.value("kmm-brokerage-account");
             if (brokerageactid.isEmpty()) {
                 brokerageactid = file->accountByName(d->m_account.brokerageName()).id();
             }
