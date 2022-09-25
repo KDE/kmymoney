@@ -366,6 +366,14 @@ protected:
      * @sa KMyMoneySettings::firstFiscalDay(), KMyMoneySettings::firstFiscalMonth()
      */
     bool startDateIsFiscalYearStart() const;
+
+    /**
+     * Returns @c true if the fiscal year starts on Jan 1st and
+     * @c false otherwise.
+     *
+     * @sa KMyMoneySettings::firstFiscalDay(), KMyMoneySettings::firstFiscalMonth()
+     */
+    bool fiscalYearIsCalendarYear() const;
 };
 
 

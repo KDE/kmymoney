@@ -576,7 +576,7 @@ void PivotTable::calculateColumnHeadings()
         if (columnpitch == 12) {
             int year = m_beginDate.year();
             int column = m_startColumn;
-            const auto fiscalYearDiffersFromCalendarYear = (((m_beginDate.day() != 1) || (m_beginDate.month() != 0)) && startDateIsFiscalYearStart());
+            const auto columnCoversTwoYears = !fiscalYearIsCalendarYear() || !startDateIsFiscalYearStart();
             // in case the report is for a fiscal year and the fiscal year does not
             // start on Jan 1st, we show both years, the first with 4 digits, the second
             // with 2 digits (e.g. "2021/22"). If the first year is the last of a
@@ -584,7 +584,7 @@ void PivotTable::calculateColumnHeadings()
             // other cases we simply print the current year with 4 digits.
             while (column++ < m_numColumns) {
                 QString yearHeading;
-                if (fiscalYearDiffersFromCalendarYear) {
+                if (columnCoversTwoYears) {
                     if ((year % 100) == 99) {
                         yearHeading = QStringLiteral("%1/%2").arg(year).arg(year + 1);
                     } else {
@@ -2422,6 +2422,11 @@ int PivotTable::currentDateColumn()
 bool reports::PivotTable::startDateIsFiscalYearStart() const
 {
     return (QDate(2021, m_beginDate.month(), m_beginDate.day()) == QDate(2021, KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay()));
+}
+
+bool reports::PivotTable::fiscalYearIsCalendarYear() const
+{
+    return (QDate(2021, 1, 1) == QDate(2021, KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay()));
 }
 
 } // namespace
