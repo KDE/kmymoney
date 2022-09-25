@@ -218,6 +218,7 @@ install(TARGETS kmymoney ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES ${_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney
+  COMPONENT Devel
   )
 install(FILES org.kde.kmymoney.desktop
   DESTINATION ${XDG_APPS_INSTALL_DIR}
