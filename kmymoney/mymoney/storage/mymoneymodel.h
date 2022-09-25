@@ -580,13 +580,30 @@ public:
         return indexes.count();
     }
 
+    bool hasReferenceTo(const QModelIndex& parent, const int rows, const QString& id) const
+    {
+        bool rc = false;
+        for (int row = 0; (rc == false) && (row < rows); ++row) {
+            const auto idx = index(row, 0, parent);
+            const auto childCount = rowCount(idx);
+            if (!rc && childCount > 0) {
+                rc |= hasReferenceTo(idx, childCount, id);
+            }
+        }
+        return rc;
+    }
+
     virtual bool hasReferenceTo(const QString& id) const
     {
         bool rc = false;
-        QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, "*", -1, Qt::MatchWildcard | Qt::MatchRecursive);
-        for (const auto idx : indexes) {
-            if ((rc |= static_cast<TreeItem<T>*>(idx.internalPointer())->constDataRef().hasReferenceTo(id)) == true)
-                break;
+        const auto rows = rowCount();
+        for (int row = 0; (rc == false) && (row < rows); ++row) {
+            const auto idx = index(row, 0);
+            rc |= static_cast<TreeItem<T>*>(idx.internalPointer())->constDataRef().hasReferenceTo(id);
+            const auto childCount = rowCount(idx);
+            if (!rc && childCount > 0) {
+                rc |= hasReferenceTo(idx, childCount, id);
+            }
         }
         return rc;
     }
