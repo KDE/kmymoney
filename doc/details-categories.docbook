@@ -144,7 +144,8 @@
 <para>
   To delete a category, select it in the tree, right click to bring up the popup
   menu, and select <guimenuitem>Delete</guimenuitem>.  If the category has no
-  transactions, schedules, or budgets associated with it, it will be deleted.
+  transactions, schedules, or budgets associated with it, and it is not set as the
+  default category for new transactions with any payee, it will be deleted.
 </para>
 
 <para>
