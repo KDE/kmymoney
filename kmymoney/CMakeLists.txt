@@ -221,16 +221,17 @@ install(FILES ${_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney
   COMPONENT Devel
   )
+
 install(FILES org.kde.kmymoney.desktop
   DESTINATION ${XDG_APPS_INSTALL_DIR}
+  COMPONENT FreeDesktop
   )
+
 install(FILES org.kde.kmymoney.appdata.xml
   DESTINATION ${KDE_INSTALL_METAINFODIR}
+  COMPONENT FreeDesktop
   )
 
 install(FILES x-kmymoney.xml
-  DESTINATION ${XDG_MIME_INSTALL_DIR})
-
-#UPDATE_XDG_MIMETYPES(${XDG_MIME_INSTALL_DIR})
-
-
+  DESTINATION ${XDG_MIME_INSTALL_DIR}
+  COMPONENT FreeDesktop)
