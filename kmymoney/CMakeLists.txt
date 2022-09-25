@@ -198,6 +198,7 @@ endif()
 if(APPLE)
     string(TIMESTAMP CURRENT_YEAR "%Y")
     # own plist template
+    # TODO: by moving MacOSXBundleInfo.plist.in to CMAKE_MODULE_PATH, this can be removed, see https://cmake.org/cmake/help/latest/prop_tgt/MACOSX_BUNDLE_INFO_PLIST.html
     set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/MacOSXBundleInfo.plist.in)
 
     # the MacOSX bundle display name property (CFBundleDisplayName) is not currently supported by cmake,

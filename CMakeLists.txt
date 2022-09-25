@@ -15,6 +15,10 @@ if (NOT BUILD_STATIC_PLUGINS)
     set(AKONADI_MIN_VERSION 5.14.2)
 endif()
 
+# TODO: remove once https://bugs.kde.org/show_bug.cgi?id=459214 is sorted out
+# macOS KMyMoney.app bundle install location
+set(BUNDLE_INSTALL_DIR "./")
+
 
 set(KMYMONEY_STABLE_BRANCH TRUE)
 set(RELEASE_SERVICE_VERSION_MAJOR "5")
@@ -468,3 +472,18 @@ feature_summary(WHAT ENABLED_FEATURES
 
 feature_summary(WHAT DISABLED_FEATURES
                 DESCRIPTION "The following features have been disabled:")
+
+######################### CPack installers #############################
+
+get_cmake_property(CPACK_COMPONENTS_ALL COMPONENTS)
+list(REMOVE_ITEM CPACK_COMPONENTS_ALL "Devel")
+
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSES/GPL-2.0-only.txt")
+set(CPACK_PACKAGE_VERSION_MAJOR "${RELEASE_SERVICE_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${RELEASE_SERVICE_VERSION_MINOR}")
+set(CPACK_GENERATOR DragNDrop)
+set(CPACK_DMG_VOLUME_NAME "KMyMoney")
+set(CPACK_DMG_FORMAT UDZO)
+set(CPACK_PACKAGE_ICON "${PROJECT_SOURCE_DIR}/kmymoney/icons/kmymoney/apps/1024-apps-kmymoney.png")
+include(CPack)
