@@ -580,7 +580,7 @@ public:
         return indexes.count();
     }
 
-    bool hasReferenceTo(const QString& id) const
+    virtual bool hasReferenceTo(const QString& id) const
     {
         bool rc = false;
         QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, "*", -1, Qt::MatchWildcard | Qt::MatchRecursive);

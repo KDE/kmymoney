@@ -1572,3 +1572,17 @@ MyMoneyMoney JournalModel::stockSplitBalance(const QString& accountId, MyMoneyMo
 {
     return d->stockSplit(accountId, balance, factor, Private::StockSplitForward);
 }
+
+bool JournalModel::hasReferenceTo(const QString& id) const
+{
+    bool rc = false;
+
+    const int rows = rowCount();
+    for (int row = 0; row < rows; ++row) {
+        const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
+        if ((rc |= journalEntry.hasReferenceTo(id)) == true) {
+            break;
+        }
+    }
+    return rc;
+}

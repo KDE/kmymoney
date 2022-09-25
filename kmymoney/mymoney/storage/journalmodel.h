@@ -243,6 +243,8 @@ public:
 
     DateRange dateRange() const;
 
+    bool hasReferenceTo(const QString& id) const override;
+
 protected:
     explicit JournalModel(const QString& idLeadin, QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
 
