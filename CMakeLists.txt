@@ -476,7 +476,7 @@ feature_summary(WHAT DISABLED_FEATURES
 ######################### CPack installers #############################
 
 get_cmake_property(CPACK_COMPONENTS_ALL COMPONENTS)
-list(REMOVE_ITEM CPACK_COMPONENTS_ALL "Devel")
+list(REMOVE_ITEM CPACK_COMPONENTS_ALL "Devel" "FreeDesktop")
 
 include(InstallRequiredSystemLibraries)
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSES/GPL-2.0-only.txt")
