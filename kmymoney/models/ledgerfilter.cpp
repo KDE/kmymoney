@@ -23,6 +23,7 @@
 
 #include "icons.h"
 #include "journalmodel.h"
+#include "ledgersortproxymodel_p.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"
@@ -30,14 +31,16 @@
 #include "mymoneymoney.h"
 #include "mymoneytag.h"
 #include "reconciliationmodel.h"
+#include "schedulesjournalmodel.h"
 
 using namespace Icons;
 
-class LedgerFilterPrivate
+class LedgerFilterPrivate : public LedgerSortProxyModelPrivate
 {
 public:
-    LedgerFilterPrivate()
-        : lineEdit(nullptr)
+    LedgerFilterPrivate(LedgerFilter* qq)
+        : LedgerSortProxyModelPrivate(qq)
+        , lineEdit(nullptr)
         , comboBox(nullptr)
         , state(LedgerFilter::State::Any)
     {
@@ -51,12 +54,11 @@ public:
     QTimer                delayTimer;
 };
 
-
 LedgerFilter::LedgerFilter(QObject* parent)
-    : QSortFilterProxyModel(parent)
-    , d_ptr(new LedgerFilterPrivate)
+    : LedgerSortProxyModel(new LedgerFilterPrivate(this), parent)
 {
     Q_D(LedgerFilter);
+    setObjectName("LedgerFilter");
     connect(&d->delayTimer, &QTimer::timeout, this, [&]() {
         invalidateFilter();
     });
@@ -110,9 +112,10 @@ bool LedgerFilter::filterAcceptsRow(int source_row, const QModelIndex& source_pa
     Q_D(const LedgerFilter);
 
     const auto idx = sourceModel()->index(source_row, 0, source_parent);
-
+    const bool isJournalItem = MyMoneyModelBase::baseModel(idx) == MyMoneyFile::instance()->journalModel();
+    const bool isScheduleItem = MyMoneyModelBase::baseModel(idx) == qobject_cast<QAbstractItemModel*>(MyMoneyFile::instance()->schedulesJournalModel());
     if (d->state != State::Any) {
-        if (MyMoneyModelBase::baseModel(idx) == MyMoneyFile::instance()->journalModel()) {
+        if (isJournalItem) {
             const auto splitState = idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>();
             switch (d->state) {
             case State::NotMarked:
@@ -156,58 +159,63 @@ bool LedgerFilter::filterAcceptsRow(int source_row, const QModelIndex& source_pa
         }
     }
 
-    if (!d->filterString.isEmpty()) {
-        const auto file = MyMoneyFile::instance();
-        auto rc = idx.data(eMyMoney::Model::SplitMemoRole).toString().contains(d->filterString, Qt::CaseInsensitive);
-        if (!rc)
-            rc = idx.data(eMyMoney::Model::SplitNumberRole).toString().contains(d->filterString, Qt::CaseInsensitive);
-        if (!rc)
-            rc = idx.data(eMyMoney::Model::SplitPayeeRole).toString().contains(d->filterString, Qt::CaseInsensitive);
-        if (!rc) {
-            const auto tagIdList = idx.data(eMyMoney::Model::SplitTagIdRole).toStringList();
-            for (const auto& tagId : tagIdList) {
-                const auto tagName = file->tag(tagId).name();
-                rc = tagName.contains(d->filterString, Qt::CaseInsensitive);
-                if (rc)
-                    break;
-            }
-        }
-        if (!rc) {
-            const auto accId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
-            if (!accId.isEmpty()) {
-                const auto acc = file->account(accId);
-                if (d->filterString.contains(MyMoneyFile::AccountSeparator)) {
-                    QStringList names;
-                    MyMoneyAccount current = acc;
-                    QString accountId;
-                    do {
-                        names.prepend(current.name());
-                        accountId = current.parentAccountId();
-                        current = file->account(accountId);
-                    } while (current.accountType() != eMyMoney::Account::Type::Unknown && !MyMoneyFile::instance()->isStandardAccount(accountId));
-                    if (names.size() > 1 && names.join(MyMoneyFile::AccountSeparator).contains(d->filterString, Qt::CaseInsensitive))
-                        rc = true;
-                }
-
-                if (!rc) {
-                    rc = acc.name().contains(d->filterString, Qt::CaseInsensitive);
+    if (isJournalItem || isScheduleItem) {
+        if (!d->filterString.isEmpty()) {
+            const auto file = MyMoneyFile::instance();
+            auto rc = idx.data(eMyMoney::Model::SplitMemoRole).toString().contains(d->filterString, Qt::CaseInsensitive);
+            if (!rc)
+                rc = idx.data(eMyMoney::Model::SplitNumberRole).toString().contains(d->filterString, Qt::CaseInsensitive);
+            if (!rc)
+                rc = idx.data(eMyMoney::Model::SplitPayeeRole).toString().contains(d->filterString, Qt::CaseInsensitive);
+            if (!rc) {
+                const auto tagIdList = idx.data(eMyMoney::Model::SplitTagIdRole).toStringList();
+                for (const auto& tagId : tagIdList) {
+                    const auto tagName = file->tag(tagId).name();
+                    rc = tagName.contains(d->filterString, Qt::CaseInsensitive);
+                    if (rc)
+                        break;
                 }
             }
-        }
+            if (!rc) {
+                const auto accId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+                if (!accId.isEmpty()) {
+                    const auto acc = file->account(accId);
+                    if (d->filterString.contains(MyMoneyFile::AccountSeparator)) {
+                        QStringList names;
+                        MyMoneyAccount current = acc;
+                        QString accountId;
+                        do {
+                            names.prepend(current.name());
+                            accountId = current.parentAccountId();
+                            current = file->account(accountId);
+                        } while (current.accountType() != eMyMoney::Account::Type::Unknown && !MyMoneyFile::instance()->isStandardAccount(accountId));
+                        if (names.size() > 1 && names.join(MyMoneyFile::AccountSeparator).contains(d->filterString, Qt::CaseInsensitive))
+                            rc = true;
+                    }
 
-        if (!rc) {
-            QString s(d->filterString);
-            s.replace(MyMoneyMoney::thousandSeparator(), QChar());
-            if (!s.isEmpty()) {
-                rc = idx.data(eMyMoney::Model::SplitFormattedValueRole).toString().contains(s, Qt::CaseInsensitive);
-                if (!rc)
-                    rc = idx.data(eMyMoney::Model::SplitFormattedSharesRole).toString().contains(s, Qt::CaseInsensitive);
+                    if (!rc) {
+                        rc = acc.name().contains(d->filterString, Qt::CaseInsensitive);
+                    }
+                }
             }
+
+            if (!rc) {
+                QString s(d->filterString);
+                s.replace(MyMoneyMoney::thousandSeparator(), QChar());
+                if (!s.isEmpty()) {
+                    rc = idx.data(eMyMoney::Model::SplitFormattedValueRole).toString().contains(s, Qt::CaseInsensitive);
+                    if (!rc)
+                        rc = idx.data(eMyMoney::Model::SplitFormattedSharesRole).toString().contains(s, Qt::CaseInsensitive);
+                }
+            }
+            if (!rc)
+                return false;
         }
-        if (!rc)
-            return false;
     }
-    return QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
+
+    // Don't call base class here on purpose.
+    // We've done all the filtering that need's to be done.
+    return true;
 }
 
 void LedgerFilter::setStateFilter(LedgerFilter::State state)

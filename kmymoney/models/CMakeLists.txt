@@ -1,19 +1,20 @@
 set(libmodels_a_SOURCES
     accountsproxymodel.cpp
-    institutionsproxymodel.cpp
-    onlinebankingaccountsfilterproxymodel.cpp
-    payeeidentifiercontainermodel.cpp
-    equitiesmodel.cpp
-    securitiesfilterproxymodel.cpp
-    delegateproxy.cpp
-    itemrenameproxymodel.cpp
-    onlinebalanceproxymodel.cpp
-    ledgerfilterbase.cpp
-    specialdatesfilter.cpp
-    idfilter.cpp
-    scheduleproxymodel.cpp
-    ledgerfilter.cpp
     comboboxmodels.cpp
+    delegateproxy.cpp
+    equitiesmodel.cpp
+    idfilter.cpp
+    institutionsproxymodel.cpp
+    itemrenameproxymodel.cpp
+    ledgerfilter.cpp
+    ledgerfilterbase.cpp
+    ledgersortproxymodel.cpp
+    onlinebankingaccountsfilterproxymodel.cpp
+    onlinebalanceproxymodel.cpp
+    payeeidentifiercontainermodel.cpp
+    scheduleproxymodel.cpp
+    securitiesfilterproxymodel.cpp
+    specialledgeritemfilter.cpp
 )
 
 add_library(kmm_models ${libmodels_a_SOURCES})

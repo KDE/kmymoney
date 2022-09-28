@@ -18,6 +18,7 @@
 #include <QResizeEvent>
 #include <QScrollBar>
 #include <QSet>
+#include <QSortFilterProxyModel>
 #include <QStackedWidget>
 #include <QToolTip>
 #include <QWidgetAction>
@@ -466,6 +467,7 @@ LedgerView::LedgerView(QWidget* parent)
     verticalHeader()->setMinimumSectionSize(1);
     verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     verticalHeader()->hide();
+    setSortingEnabled(true);
 
     d->setFonts();
 
@@ -570,6 +572,12 @@ void LedgerView::setModel(QAbstractItemModel* model)
             }
         }
     });
+
+    // make sure to show sort indicator
+    if (!horizontalHeader()->isSortIndicatorShown()) {
+        horizontalHeader()->setSortIndicator(JournalModel::Column::Date, Qt::AscendingOrder);
+        horizontalHeader()->setSortIndicatorShown(true);
+    }
 }
 
 void LedgerView::reset()
@@ -1259,15 +1267,17 @@ void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSel
     // list of selected journalEntries. We have to divide
     // the number of selected indexes by the column count
     // to get the number of selected rows.
-    switch (selectionModel()->selectedIndexes().count() / model()->columnCount()) {
-    case 0:
-        d->firstSelectedId.clear();
-        break;
-    case 1:
-        d->firstSelectedId = selectionModel()->selectedIndexes().first().data(eMyMoney::Model::IdRole).toString();
-        break;
-    default:
-        break;
+    if (selectionModel() && model() && (model()->columnCount() > 0)) {
+        switch (selectionModel()->selectedIndexes().count() / model()->columnCount()) {
+        case 0:
+            d->firstSelectedId.clear();
+            break;
+        case 1:
+            d->firstSelectedId = selectionModel()->selectedIndexes().first().data(eMyMoney::Model::IdRole).toString();
+            break;
+        default:
+            break;
+        }
     }
 
     if (!selected.isEmpty()) {

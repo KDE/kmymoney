@@ -32,8 +32,6 @@ public:
     explicit LedgerAccountFilterPrivate(LedgerAccountFilter* qq)
         : LedgerFilterBasePrivate(qq)
         , onlinebalanceproxymodel(nullptr)
-        , balanceCalculationPending(false)
-        , sortPending(false)
     {}
 
     ~LedgerAccountFilterPrivate()
@@ -42,8 +40,6 @@ public:
 
     OnlineBalanceProxyModel*    onlinebalanceproxymodel;
     MyMoneyAccount              account;
-    bool                        balanceCalculationPending;
-    bool                        sortPending;
 };
 
 
@@ -53,8 +49,6 @@ LedgerAccountFilter::LedgerAccountFilter(QObject* parent, QVector<QAbstractItemM
     Q_D(LedgerAccountFilter);
     d->onlinebalanceproxymodel = new OnlineBalanceProxyModel(parent);
 
-    setFilterKeyColumn(0);
-    setFilterRole(eMyMoney::Model::SplitAccountIdRole);
     setObjectName("LedgerAccountFilter");
 
     d->concatModel->setObjectName("LedgerView concatModel");
@@ -68,41 +62,13 @@ LedgerAccountFilter::LedgerAccountFilter(QObject* parent, QVector<QAbstractItemM
         d->concatModel->addSourceModel(model);
     }
 
-    setSortRole(eMyMoney::Model::TransactionPostDateRole);
+    setFilterRole(eMyMoney::Model::SplitAccountIdRole);
+
     setSourceModel(d->concatModel);
-
-    connect(d->concatModel, &QAbstractItemModel::rowsInserted, this, [&](const QModelIndex& /* parent */, int first, int last) {
-        Q_UNUSED(first)
-        Q_UNUSED(last)
-
-        Q_D(LedgerAccountFilter);
-        // mark this view for sorting but don't actually start sorting
-        // until we come back to the main event loop. This allows to collect
-        // multiple row insertions into the model into a single sort run.
-        // This is important during import of multiple transactions.
-        if (!d->sortPending) {
-            d->sortPending = true;
-            // in case a recalc operation is pending, we turn it off
-            // since we need to sort first. Once sorting is done,
-            // the recalc will be triggered again
-            d->balanceCalculationPending = false;
-            QMetaObject::invokeMethod(this, &LedgerAccountFilter::sortView, Qt::QueuedConnection);
-        }
-    });
 }
 
 LedgerAccountFilter::~LedgerAccountFilter()
 {
-}
-
-void LedgerAccountFilter::sortView()
-{
-    Q_D(LedgerAccountFilter);
-    sort(0);
-    d->sortPending = false;
-
-    // trigger a recalculation of the balances after sorting
-    recalculateBalancesOnIdle(d->account.id());
 }
 
 void LedgerAccountFilter::setShowBalanceInverted(bool inverted)
@@ -124,7 +90,7 @@ void LedgerAccountFilter::recalculateBalancesOnIdle(const QString& accountId)
         // if sorting is pending, we don't trigger recalc as it is part of sorting
         if(!d->balanceCalculationPending && !d->sortPending) {
             d->balanceCalculationPending = true;
-            QMetaObject::invokeMethod(this, "recalculateBalances", Qt::QueuedConnection);
+            QMetaObject::invokeMethod(this, &LedgerAccountFilter::recalculateBalances, Qt::QueuedConnection);
         }
     }
 }
@@ -211,10 +177,6 @@ void LedgerAccountFilter::setAccount(const MyMoneyAccount& acc)
     setAccountType(d->account.accountType());
     setFilterFixedString(d->account.id());
 
-    invalidateFilter();
-    setSortRole(eMyMoney::Model::TransactionPostDateRole);
-    sort(JournalModel::Column::Date);
-
     // if balance calculation has not been triggered, then run it immediately
     recalculateBalancesOnIdle(d->account.id());
 }
@@ -232,4 +194,13 @@ bool LedgerAccountFilter::filterAcceptsRow(int source_row, const QModelIndex& so
         rc = d->account.accountList().contains(idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
     }
     return rc;
+}
+
+void LedgerAccountFilter::doSort()
+{
+    Q_D(LedgerAccountFilter);
+
+    LedgerFilterBase::doSort();
+    // trigger a recalculation of the balances after sorting
+    recalculateBalancesOnIdle(d->account.id());
 }

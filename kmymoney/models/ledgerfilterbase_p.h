@@ -19,42 +19,18 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ledgersortproxymodel_p.h"
 #include "mymoneyfile.h"
 
-class LedgerFilterBasePrivate {
+class LedgerFilterBasePrivate : public LedgerSortProxyModelPrivate
+{
 public:
     LedgerFilterBasePrivate(LedgerFilterBase* qq)
-        : q(qq)
+        : LedgerSortProxyModelPrivate(qq)
         , concatModel(nullptr)
         , accountType(eMyMoney::Account::Type::Asset)
         , showValuesInverted(false)
-        , hideReconciledTransactions(false)
     {
-    }
-
-    inline bool isAccountsModel(const QAbstractItemModel* model) const
-    {
-        return (model == static_cast<void*>(MyMoneyFile::instance()->accountsModel()));
-    }
-
-    inline bool isSpecialDatesModel(const QAbstractItemModel* model) const
-    {
-        return (model == static_cast<void*>(MyMoneyFile::instance()->specialDatesModel()));
-    }
-
-    inline bool isReconciliationModel(const QAbstractItemModel* model) const
-    {
-        return (model == static_cast<void*>(MyMoneyFile::instance()->reconciliationModel()));
-    }
-
-    inline bool isJournalModel(const QAbstractItemModel* model) const
-    {
-        return (model == static_cast<void*>(MyMoneyFile::instance()->journalModel()));
-    }
-
-    inline bool isSchedulesJournalModel(const QAbstractItemModel* model) const
-    {
-        return (model == static_cast<void*>(MyMoneyFile::instance()->schedulesJournalModel()));
     }
 
     QString modelType(const QAbstractItemModel* model) const
@@ -72,13 +48,10 @@ public:
         return QLatin1String("unknown model");
     }
 
-    LedgerFilterBase* q;
     QConcatenateTablesProxyModel* concatModel;
     eMyMoney::Account::Type accountType;
     QStringList filterIds;
-    QDate firstVisiblePostDate;
     bool showValuesInverted;
-    bool hideReconciledTransactions;
     QSet<QAbstractItemModel*> sourceModels;
 };
 

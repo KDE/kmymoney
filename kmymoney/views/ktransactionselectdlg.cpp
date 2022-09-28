@@ -75,7 +75,7 @@ KTransactionSelectDlg::KTransactionSelectDlg(QWidget* parent)
     d->ui->m_ledgerView->setColumnsShown(columns);
     d->filterModel->setSortRole(eMyMoney::Model::IdRole);
     d->filterModel->setSortLocaleAware(true);
-    d->filterModel->sort(0);
+    d->filterModel->sort(JournalModel::Column::Date, Qt::AscendingOrder);
     d->filterModel->setDynamicSortFilter(true);
 }
 

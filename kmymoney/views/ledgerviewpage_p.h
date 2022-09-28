@@ -24,7 +24,7 @@
 #include "mymoneyutils.h"
 #include "newtransactionform.h"
 #include "selectedobjects.h"
-#include "specialdatesfilter.h"
+#include "specialledgeritemfilter.h"
 #include <ui_ledgerviewpage.h>
 
 class LedgerViewPage::Private
@@ -34,7 +34,7 @@ public:
         : q(qq)
         , ui(new Ui_LedgerViewPage)
         , accountFilter(nullptr)
-        , specialDatesFilter(nullptr)
+        , specialItemFilter(nullptr)
         , stateFilter(nullptr)
         , form(nullptr)
         , stackedView(nullptr)
@@ -101,7 +101,7 @@ public:
     LedgerViewPage* q;
     Ui_LedgerViewPage* ui;
     LedgerAccountFilter* accountFilter;
-    SpecialDatesFilter* specialDatesFilter;
+    SpecialLedgerItemFilter* specialItemFilter;
     LedgerFilter* stateFilter;
     NewTransactionForm* form;
     LedgerViewPage* stackedView;

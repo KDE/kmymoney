@@ -29,15 +29,14 @@
 using namespace eMyMoney;
 
 LedgerFilterBase::LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent)
-    : QSortFilterProxyModel(parent)
-    , d_ptr(dd)
+    : LedgerSortProxyModel(dd, parent)
 {
     Q_D(LedgerFilterBase);
     d->concatModel = new QConcatenateTablesProxyModel(parent);
 
-    setFilterRole(eMyMoney::Model::Roles::SplitAccountIdRole);
-    setFilterKeyColumn(0);
-    setSortRole(eMyMoney::Model::Roles::TransactionPostDateRole);
+    setSortRole(-1);
+    setFilterRole(-1);
+    setFilterKeyColumn(-1);
 }
 
 LedgerFilterBase::~LedgerFilterBase()
@@ -103,56 +102,6 @@ QVariant LedgerFilterBase::headerData(int section, Qt::Orientation orientation, 
     return QSortFilterProxyModel::headerData(section, orientation, role);
 }
 
-bool LedgerFilterBase::lessThan(const QModelIndex& left, const QModelIndex& right) const
-{
-    Q_D(const LedgerFilterBase);
-
-    // make sure that the dummy transaction is shown last in any case
-    if(left.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
-        return false;
-
-    } else if(right.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
-        return true;
-    }
-
-    const auto model = MyMoneyFile::baseModel();
-    // make sure that the online balance is the last entry of a day
-    // and the date headers are the first
-    if (left.data(eMyMoney::Model::TransactionPostDateRole).toDate() == right.data(eMyMoney::Model::TransactionPostDateRole).toDate()) {
-        const auto leftModel = model->baseModel(left);
-        const auto rightModel = model->baseModel(right);
-        if (leftModel != rightModel) {
-            // schedules will always be presented last on the same day
-            // before that the online balance is shown
-            // before that the reconciliation records are displayed
-            // special date records are shown on top
-            if (d->isSchedulesJournalModel(leftModel)) {
-                return false;
-            } else if (d->isSchedulesJournalModel(rightModel)) {
-                return true;
-            } else if (d->isAccountsModel(leftModel)) {
-                return false;
-            } else if (d->isAccountsModel(rightModel)) {
-                return true;
-            } else if (d->isSpecialDatesModel(leftModel)) {
-                return true;
-            } else if (d->isSpecialDatesModel(rightModel)) {
-                return false;
-            } else if (d->isReconciliationModel(leftModel)) {
-                return false;
-            } else if (d->isReconciliationModel(rightModel)) {
-                return true;
-            }
-            // if we get here, both are transaction entries
-        }
-        // same model and same post date, the ids decide
-        return left.data(eMyMoney::Model::IdRole).toString() < right.data(eMyMoney::Model::IdRole).toString();
-    }
-
-    // otherwise use normal sorting
-    return QSortFilterProxyModel::lessThan(left, right);
-}
-
 bool LedgerFilterBase::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
 {
     Q_D(const LedgerFilterBase);
@@ -161,35 +110,23 @@ bool LedgerFilterBase::filterAcceptsRow(int source_row, const QModelIndex& sourc
     if (d->filterIds.isEmpty())
         return false;
 
-    QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
-    // only check the start date if it's not the new transaction placeholder
-    if (!idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
-        if (d->firstVisiblePostDate.isValid() && d->firstVisiblePostDate > idx.data(eMyMoney::Model::TransactionPostDateRole).toDate()) {
-            return false;
+    // special dates are always true
+    const auto idx = sourceModel()->index(source_row, 0, source_parent);
+    if (d->isSpecialDatesModel(idx)) {
+        return true;
+    }
+
+    if (LedgerSortProxyModel::filterAcceptsRow(source_row, source_parent)) {
+        const auto id = idx.data(filterRole()).toString();
+        bool rc = d->filterIds.contains(id);
+
+        // in case a journal entry has no id, it is the new transaction placeholder
+        if (!rc) {
+            rc = idx.data(eMyMoney::Model::IdRole).toString().isEmpty();
         }
+        return rc;
     }
-
-    // in case it's a special date entry, we accept it
-    const auto baseModel = MyMoneyFile::baseModel()->baseModel(idx);
-    if (d->isSpecialDatesModel(baseModel)) {
-        return (sortRole() == eMyMoney::Model::TransactionPostDateRole);
-    }
-
-    // now do the filtering
-
-    if (d->hideReconciledTransactions
-        && idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>() >= eMyMoney::Split::State::Reconciled) {
-        return false;
-    }
-
-    const auto id = idx.data(filterRole()).toString();
-    bool rc = d->filterIds.contains(id);
-
-    // in case a journal entry has no id, it is the new transaction placeholder
-    if(!rc) {
-        rc = idx.data(eMyMoney::Model::IdRole).toString().isEmpty();
-    }
-    return rc;
+    return false;
 }
 
 void LedgerFilterBase::setFilterFixedString(const QString& id)
@@ -246,25 +183,6 @@ void LedgerFilterBase::removeSourceModel(QAbstractItemModel* model)
     if (model && d->sourceModels.contains(model)) {
         d->concatModel->removeSourceModel(model);
         d->sourceModels.remove(model);
-        invalidateFilter();
-    }
-}
-
-void LedgerFilterBase::setHideTransactionsBefore(const QDate& date)
-{
-    Q_D(LedgerFilterBase);
-    if (d->firstVisiblePostDate != date) {
-        d->firstVisiblePostDate = date;
-        qDebug() << "Set first visible post date to" << date;
-        invalidateFilter();
-    }
-}
-
-void LedgerFilterBase::setHideReconciledTransactions(bool hide)
-{
-    Q_D(LedgerFilterBase);
-    if (d->hideReconciledTransactions != hide) {
-        d->hideReconciledTransactions = hide;
         invalidateFilter();
     }
 }

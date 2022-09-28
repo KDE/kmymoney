@@ -157,6 +157,7 @@ QVariant ReconciliationModel::data(const QModelIndex& idx, int role) const
     case Qt::DisplayRole:
     case Qt::EditRole:
         switch (idx.column()) {
+        case JournalModel::Column::EntryDate:
         case JournalModel::Column::Date:
             return reconciliationEntry.date();
 
@@ -193,6 +194,7 @@ QVariant ReconciliationModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::IdRole:
         return reconciliationEntry.id();
 
+    case eMyMoney::Model::TransactionEntryDateRole:
     case eMyMoney::Model::TransactionPostDateRole:
         return reconciliationEntry.date();
 

@@ -19,27 +19,37 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyenums.h"
+#include "ledgersortproxymodel.h"
 
-class SpecialDatesFilterPrivate;
-class KMM_MODELS_EXPORT SpecialDatesFilter : public QSortFilterProxyModel
+class SpecialLedgerItemFilterPrivate;
+class KMM_MODELS_EXPORT SpecialLedgerItemFilter : public LedgerSortProxyModel
 {
     Q_OBJECT
-    Q_DECLARE_PRIVATE(SpecialDatesFilter)
-    Q_DISABLE_COPY(SpecialDatesFilter)
+    Q_DECLARE_PRIVATE(SpecialLedgerItemFilter)
+    Q_DISABLE_COPY(SpecialLedgerItemFilter)
 
 public:
-    explicit SpecialDatesFilter(QObject* parent);
+    explicit SpecialLedgerItemFilter(QObject* parent);
+
+    /**
+     * Reimplemented to propagate sorting to sourceModel
+     */
+    void sort(int column, Qt::SortOrder order = Qt::AscendingOrder) override;
+
+    void setSourceModel(LedgerSortProxyModel* model);
 
 public Q_SLOTS:
     void forceReload();
 
 protected:
+    /**
+     * @note Does not call base class implementation
+     */
     bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 
 private:
-    SpecialDatesFilterPrivate*  d_ptr;
+    // make sure that only LedgerSortProxyModel models can be used as sources
+    void setSourceModel(QAbstractItemModel* model) override;
 };
 
 #endif // SPECIALDATESFILTER_H
-

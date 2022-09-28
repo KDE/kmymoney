@@ -38,10 +38,10 @@ public Q_SLOTS:
 
 protected Q_SLOTS:
     void recalculateBalances();
-    void sortView();
 
 protected:
     bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
+    void doSort() override;
 
 private:
     Q_DECLARE_PRIVATE_D(LedgerFilterBase::d_ptr, LedgerAccountFilter)

@@ -118,7 +118,7 @@ void LedgerTagFilter::setTagIdList(const QStringList& tagIds)
     setFilterFixedStrings(tagIds);
 
     setSortRole(eMyMoney::Model::TransactionPostDateRole);
-    sort(JournalModel::Column::Date);
+    sort(JournalModel::Column::Date, sortOrder());
 
     // if balance calculation has not been triggered, then run it immediately
     if(!d->balanceCalculationPending) {

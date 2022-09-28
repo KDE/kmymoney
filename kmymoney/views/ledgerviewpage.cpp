@@ -82,8 +82,9 @@ void LedgerViewPage::initModel()
     d->stateFilter->setLineEdit(d->ui->m_searchWidget);
     d->ui->m_searchWidget->installEventFilter(this);
 
-    d->specialDatesFilter = new SpecialDatesFilter(this);
-    d->specialDatesFilter->setSourceModel(d->stateFilter);
+    d->specialItemFilter = new SpecialLedgerItemFilter(this);
+    d->specialItemFilter->setSourceModel(d->stateFilter);
+    d->specialItemFilter->setSortRole(eMyMoney::Model::TransactionPostDateRole);
 
     // prepare the filter container
     d->ui->m_closeButton->setIcon(Icons::get(Icon::DialogClose));
@@ -107,7 +108,7 @@ void LedgerViewPage::initModel()
     connect(file->journalModel(), &JournalModel::rowsAboutToBeMoved, this, &LedgerViewPage::keepSelection);
     connect(file->journalModel(), &JournalModel::rowsMoved, this, &LedgerViewPage::reloadFilter, Qt::QueuedConnection);
 
-    d->ui->m_ledgerView->setModel(d->specialDatesFilter);
+    d->ui->m_ledgerView->setModel(d->specialItemFilter);
 
     connect(LedgerViewSettings::instance(), &LedgerViewSettings::settingsChanged, this, [&]() {
         d->accountFilter->setHideReconciledTransactions(LedgerViewSettings::instance()->hideReconciledTransactions());
@@ -178,7 +179,7 @@ void LedgerViewPage::keepSelection()
 
 void LedgerViewPage::reloadFilter()
 {
-    d->specialDatesFilter->forceReload();
+    d->specialItemFilter->forceReload();
 
     d->ui->m_ledgerView->setSelectedJournalEntries(d->selections.selection(SelectedObjects::JournalEntry));
     // not sure if the following statement must be removed (THB - 2020-09-20)
@@ -263,6 +264,7 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
     }
     d->ui->m_formWidget->setVisible(d->hideFormReasons.isEmpty());
     d->accountFilter->setAccount(acc);
+
     d->accountId = acc.id();
 
     d->ui->m_ledgerView->setAccountId(d->accountId);
@@ -339,9 +341,11 @@ void LedgerViewPage::slotSettingsChanged()
 
 void LedgerViewPage::slotRequestSelectionChanged(const SelectedObjects& selections) const
 {
-    d->selections.setSelection(SelectedObjects::JournalEntry, selections.selection(SelectedObjects::JournalEntry));
-    d->selections.setSelection(SelectedObjects::Schedule, selections.selection(SelectedObjects::Schedule));
-    Q_EMIT requestSelectionChanged(d->selections);
+    if (isVisible()) {
+        d->selections.setSelection(SelectedObjects::JournalEntry, selections.selection(SelectedObjects::JournalEntry));
+        d->selections.setSelection(SelectedObjects::Schedule, selections.selection(SelectedObjects::Schedule));
+        Q_EMIT requestSelectionChanged(d->selections);
+    }
 }
 
 const SelectedObjects& LedgerViewPage::selections() const

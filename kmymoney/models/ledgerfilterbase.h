@@ -20,23 +20,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyenums.h"
+#include "ledgersortproxymodel.h"
 
 class LedgerFilterBasePrivate;
-class KMM_MODELS_EXPORT LedgerFilterBase : public QSortFilterProxyModel
+class KMM_MODELS_EXPORT LedgerFilterBase : public LedgerSortProxyModel
 {
     Q_OBJECT
     Q_DECLARE_PRIVATE(LedgerFilterBase)
     Q_DISABLE_COPY(LedgerFilterBase)
 
 public:
-    enum GroupSortOrder {
-        DateGrouping = 0,
-        PayeeGrouping,
-        JournalEntry,
-        OnlineBalance,
-    };
-
     virtual ~LedgerFilterBase();
 
     void setAccountType(eMyMoney::Account::Type type);
@@ -67,27 +60,8 @@ public:
      */
     void removeSourceModel(QAbstractItemModel* model);
 
-    /**
-     * This method changes the global filter for
-     * all instances of LedgerFilterBase and derived objects to
-     * filter out any transaction with a post date prior to
-     * @a date. If @a date is an invalid QDate, then the
-     * filter is inactive.
-     */
-    void setHideTransactionsBefore(const QDate& date);
-
-    /**
-     * This method changes the global filter for
-     * all instances of LedgerFilterBase and derived objects to
-     * filter out any reconciled transaction.
-     */
-    void setHideReconciledTransactions(bool hide);
-
 protected:
-    LedgerFilterBasePrivate*  d_ptr;
     explicit LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent);
-
-    bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
 
     /**
      * @note This does not call the base class implementation for speed purposes

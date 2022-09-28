@@ -11,7 +11,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QSortFilterProxyModel>
 class QComboBox;
 class QLineEdit;
 
@@ -21,8 +20,10 @@ class QLineEdit;
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ledgersortproxymodel.h"
+
 class LedgerFilterPrivate;
-class KMM_MODELS_EXPORT LedgerFilter : public QSortFilterProxyModel
+class KMM_MODELS_EXPORT LedgerFilter : public LedgerSortProxyModel
 {
     Q_OBJECT
     Q_DECLARE_PRIVATE(LedgerFilter)
@@ -49,14 +50,14 @@ public:
     void setFilterFixedString(const QString &pattern);
 
 protected:
+    /**
+     * @note Does not call base class implementation
+     */
     bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 
     // prohibit usage of these methods as we internally rely on setFilterFixedString
     void setFilterRegularExpression(const QString& pattern);
     void setFilterRegExp(const QString &pattern);
-
-private:
-    LedgerFilterPrivate*  d_ptr;
 };
 
 #endif // LEDGERFILTER_H

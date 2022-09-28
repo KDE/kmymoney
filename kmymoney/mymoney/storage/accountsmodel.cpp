@@ -29,6 +29,7 @@
 // Project Includes
 
 #include "mymoneyenums.h"
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "mymoneyprice.h"
@@ -548,9 +549,12 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
 
         case Column::Balance:
         {
-            auto security = MyMoneyFile::instance()->security(account.currencyId());
-            const auto prec = MyMoneyMoney::denomToPrec(account.fraction());
-            return d->adjustedBalance(account.balance(), account).formatMoney(security.tradingSymbol(), prec);
+            try {
+                auto security = MyMoneyFile::instance()->security(account.currencyId());
+                const auto prec = MyMoneyMoney::denomToPrec(account.fraction());
+                return d->adjustedBalance(account.balance(), account).formatMoney(security.tradingSymbol(), prec);
+            } catch (const MyMoneyException&) {
+            }
         }
 
         case Column::PostedValue:

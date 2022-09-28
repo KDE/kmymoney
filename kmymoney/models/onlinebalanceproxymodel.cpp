@@ -94,6 +94,7 @@ QVariant OnlineBalanceProxyModel::data(const QModelIndex& idx, int role) const
         switch(role) {
         case Qt::DisplayRole:
             switch (idx.column()) {
+            case JournalModel::Column::EntryDate:
             case JournalModel::Column::Date:
                 return QSortFilterProxyModel::data(idx, eMyMoney::Model::AccountOnlineBalanceDateRole);
             case JournalModel::Column::Balance:
@@ -106,6 +107,7 @@ QVariant OnlineBalanceProxyModel::data(const QModelIndex& idx, int role) const
             return QSortFilterProxyModel::data(idx, eMyMoney::Model::IdRole);
 
         case eMyMoney::Model::TransactionPostDateRole:
+        case eMyMoney::Model::TransactionEntryDateRole:
             return QSortFilterProxyModel::data(idx, eMyMoney::Model::AccountOnlineBalanceDateRole);
 
         case Qt::ForegroundRole:

@@ -153,20 +153,25 @@ void KInvestmentView::showEvent(QShowEvent* event)
         connect(d->ui->m_equitiesTree, &QTreeView::doubleClicked, this, &KInvestmentView::slotEditInvestment);
 
         // use a QueuedConnection here to suppress duplicate call (at least on Qt 5.12.7)
-        connect(d->ui->m_tab, &QTabWidget::currentChanged, this, [&](int index) {
-            Q_D(KInvestmentView);
-            const auto tab = static_cast<eView::Investment::Tab>(index);
+        connect(
+            d->ui->m_tab,
+            &QTabWidget::currentChanged,
+            this,
+            [&](int index) {
+                Q_D(KInvestmentView);
+                const auto tab = static_cast<eView::Investment::Tab>(index);
 
-            switch (tab) {
-            case eView::Investment::Tab::Equities:
-                d->m_selections = d->m_equitySelections;
-                break;
-            case eView::Investment::Tab::Securities:
-                d->m_selections = d->m_securitySelections;
-                break;
-            }
-            Q_EMIT requestSelectionChange(d->m_selections);
-        });
+                switch (tab) {
+                case eView::Investment::Tab::Equities:
+                    d->m_selections = d->m_equitySelections;
+                    break;
+                case eView::Investment::Tab::Securities:
+                    d->m_selections = d->m_securitySelections;
+                    break;
+                }
+                Q_EMIT requestSelectionChange(d->m_selections);
+            },
+            Qt::QueuedConnection);
 
         connect(d->ui->m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, this, [&](const QString& accountId) {
             Q_D(KInvestmentView);
@@ -186,6 +191,15 @@ void KInvestmentView::showEvent(QShowEvent* event)
     if (!accountId.isEmpty()) {
         const auto account = MyMoneyFile::instance()->account(accountId);
         if (account.accountType() == eMyMoney::Account::Type::Investment) {
+            const auto indexes = d->m_accountsProxyModel->match(d->m_accountsProxyModel->index(0, 0),
+                                                                eMyMoney::Model::AccountTypeRole,
+                                                                static_cast<int>(eMyMoney::Account::Type::Investment),
+                                                                -1,
+                                                                Qt::MatchExactly | Qt::MatchRecursive);
+            if (indexes.count()) {
+                qDebug() << indexes.count();
+                d->ui->m_accountComboBox->setSelected(QString());
+            }
             d->ui->m_accountComboBox->setSelected(accountId);
         }
     }

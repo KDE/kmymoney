@@ -546,7 +546,6 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
         case Security:
             return d->security(journalEntry).name();
-            break;
 
         case CostCenter:
 #if 0
