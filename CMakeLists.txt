@@ -139,7 +139,19 @@ endif()
 
 find_package(KChart 2.6.0)
 
-find_package(LibOFX)
+find_package(libofx)
+if(NOT libofx_FOUND)
+    find_package(PkgConfig)
+
+    if(PkgConfig_FOUND)
+        pkg_check_modules(libofx IMPORTED_TARGET libofx)
+
+        if(libofx_FOUND)
+            add_library(libofx::libofx INTERFACE IMPORTED)
+            target_link_libraries(libofx::libofx INTERFACE PkgConfig::libofx)
+        endif()
+    endif()
+endif()
 
 if(KF5Gpgmepp_FOUND)
   set(GPG_FOUND TRUE)
@@ -228,7 +240,7 @@ add_feature_info("SQL Storage" ENABLE_SQLSTORAGE "Allows storing your financial 
 cmake_dependent_option(ENABLE_SQLCIPHER "Enable SQLCipher support." ON
                        "SQLCIPHER_FOUND" OFF)
 
-cmake_dependent_option(ENABLE_LIBOFX "Enable LibOFX support." ON "LibOFX_FOUND" OFF)
+cmake_dependent_option(ENABLE_LIBOFX "Enable LibOFX support." ON "libofx_FOUND" OFF)
 add_feature_info("LibOFX" ENABLE_LIBOFX "Enables OFX import, export, and Direct Connect using LibOFX library.")
 
 cmake_dependent_option(ENABLE_SQLTRACER "Dump SQL requests to console" OFF
