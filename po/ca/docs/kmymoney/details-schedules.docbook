@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.schedules">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+  </authorgroup>
+  <date
+>1 d'abril de 2019</date>
+  <releaseinfo
+>5.0.3</releaseinfo>
+</chapterinfo>
+
+<title
+>Planificacions</title>
+
+<sect1 id="details.schedules.intro">
+<title
+>Introducció</title>
+
+<para>
+  <quote
+>Les planificacions mantenen la informació sobre les operacions que ocorren una o més vegades durant un període de temps específic. </quote>
+</para>
+
+<para
+>Anomenada a vegades operació recurrent, una planificació proporciona un mitjà per a enregistrar la informació sobre una operació que ocorre de manera regular. Podreu planificar operacions d'ingrés, transferència, reintegrament i préstec. Hi ha una gran flexibilitat incorporada amb les operacions de planificació que inclouen fer-ho Una vegada, o en funció de la quantitat de Dia/es, Setmana/es, Mig mes, Mes/os o Any/s. </para>
+
+<para
+>Atès que sabeu que aquestes operacions es realitzen regularment, siguin pagaments que us fan o, que feu a una altra persona, podreu crear una Planificació per a enregistrar la informació sobre els detalls recurrents per tal de simplificar i recordar amb facilitat quan succeirà l'esdeveniment. </para>
+
+<para
+>Es pot considerar que les planificacions reflecteixen els diners que s'ingressen o surten dels comptes de manera coherent. Els usos comuns inclouen xecs de pagament, impostos, assegurances, targetes de crèdit, venciments, interessos, préstecs, hipoteques i lloguers. Planificar un pagament com aquests proporciona un recordatori útil perquè pugueu gestionar amb eficàcia els assumptes financers futurs que s'esperen. </para>
+
+<para
+>Una planificació consta de dues parts principals: les dades de l'operació i les dades de la planificació. Les dades de la planificació enregistren l'aparició de la planificació, &ead;, com i quan s'haurà d'introduir l'operació en el llibre major. Les dades de l'operació enregistren els detalls normals sobre l'operació. Això inclou les opcions per a Mètode de pagament, Compte, Paga a/des de, Categoria, Etiquetes, Recordatori, Data de venciment, Import i Estat. Juntament amb això, també podreu seleccionar opcions addicionals en funció de quan es va processar l'operació. </para>
+</sect1>
+
+<sect1 id="details.schedules.type">
+<title
+>Tipus de planificacions</title>
+
+<para
+>Hi ha quatre tipus diferents de planificacions a la versió actual del &kmymoney;: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Ingressos</para
+></listitem>
+  <listitem
+><para
+>Factures</para
+></listitem>
+  <listitem
+><para
+>Transferències</para
+></listitem>
+  <listitem
+><para
+>Préstecs</para
+></listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Ingrés</title>
+
+<para
+>Un Ingrés és per a diners que ingresseu al compte, com xecs de pagament, bons o els interessos rebuts. </para>
+</sect2>
+
+<sect2>
+<title
+>Factures/Reintegraments</title>
+
+<para
+>Una Factura o Reintegrament és per a diners que surten del compte, com una afiliació, factura de serveis, impostos o la matriculació del cotxe. </para>
+</sect2>
+
+<sect2>
+<title
+>Transferència</title>
+
+<para
+>Una Transferència és per als diners que surten d'un compte i que entren en un altre, com fer un pagament amb targeta de crèdit des del compte corrent. </para>
+</sect2>
+
+<sect2>
+<title
+>Préstecs</title>
+
+<para
+>Una Planificació de préstec és un tipus especial de planificació i es crea quan es tracta d'un <link linkend="details.loans"
+>Compte de préstec</link
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.schedules.view">
+<title
+>La Vista de les planificacions</title>
+
+<para
+>Obriu la vista de les planificacions fent clic sobre la icona Planificació <guiicon
+><inlinemediaobject
+><imageobject
+> <imagedata fileref="schedule_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+> </guiicon
+> que hi ha al selector de la vista. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="scheduleview.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Vista de la Planificació</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>La vista de les planificacions consta d'una àrea de vista amb el botó <guibutton
+>Planificació nova</guibutton
+> i el <guibutton
+>Filtre</guibutton
+> amb el quadre de text <guilabel
+>Filtre</guilabel
+> a sobre seu. </para>
+	
+<para
+>Per a crear una planificació nova, feu clic al botó. Per a les planificacions d'Ingrés, Transferència, Reintegrament/Factures, el &kmymoney; mostrarà el diàleg Planificació nova. Les planificacions dels préstecs es manegen de manera diferent, com es descriu a la secció Préstecs d'aquest manual. </para>
+</sect1>
+
+<sect1 id="details.schedules.new">
+<title
+>El diàleg Planificació nova</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newsched_numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Planificació nova</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Ara es mostra un diàleg de Planificació nova, demanant els detalls per a la planificació i l'operació. Les dades sol·licitades inclouen el següent: </para>
+
+<orderedlist numeration="upperalpha">
+  <listitem
+><para
+>Nom de la planificació</para
+></listitem>
+  <listitem
+><para
+>Pròxima data de venciment</para
+></listitem>
+  <listitem
+><para
+>Freqüència</para
+></listitem>
+  <listitem
+><para
+>Mètode de pagament</para
+></listitem>
+  <listitem
+><para
+>Import</para
+></listitem>
+  <listitem
+><para
+>Altres detalls de l'operació</para
+></listitem>
+  <listitem
+><para
+>Opcions de la planificació</para
+></listitem>
+</orderedlist>
+
+<sect2>
+<title
+>Omplir el Nom de la planificació, la Freqüència i la Informació del pagament</title>
+
+<para
+>Introduïu el nom de la planificació i la data de la propera aparició en els seus respectius camps. El nom és com s'etiquetarà la planificació a la Vista de les planificacions i a les altres pantalles. Especifiqueu amb quina freqüència succeirà la planificació, utilitzant el camp Freqüència i la llista desplegable. Per exemple, «cada 6 setmanes» o «cada 3 mesos». Si l'import varia d'una operació a una altra, assegureu-vos de marcar la casella de selecció <guilabel
+>Estimació</guilabel
+> i quan escriviu en el llibre major se us demanarà per l'import correcte. Els altres camps obligatoris a la secció Informació del pagament inclouen el Compte i la Categoria. Els camps restants d'aquesta secció són opcionals. </para
+> 
+</sect2>
+
+<sect2>
+<title
+>Modificar la secció Opcions de la planificació</title>
+<para
+>Podreu escollir com gestionar els dies sense processament. Si la planificació es produeix en un dia sense processament, podreu escollir entre <guilabel
+>No canviïs la data</guilabel
+>, <guilabel
+>Canvia la data al dia hàbil anterior</guilabel
+> o <guilabel
+>Canvia la data al dia hàbil següent</guilabel
+>. Aquesta opció està disponible per a replicar alguns dels processos operatius bancaris del món real. Els dies sense processament inclouen caps de setmana i festius coneguts pel &kmymoney; per a la regió especificada a l'<link linkend="details.settings.schedules.calendar"
+>opció de configuració apropiada</link
+>. </para>
+
+<para
+>També podreu seleccionar si l'import és una estimació o no, per la qual cosa se us demanarà que l'actualitzeu quan venci la planificació. En seleccionar el procés l'últim dia del mes, es podrà planificar el processament irregular de la data al final del mes. En marcar la casella per a introduir automàticament quan venç, el &kmymoney; introduirà l'operació en el llibre major sense intervenció humana. En cas contrari, quan s'hagi d'introduir quan venç l'operació, el &kmymoney; obrirà un diàleg demanant-vos que confirmeu què voleu que s'introdueixi. Aquest comportament és configurable i trobareu més informació a la secció <link linkend="details.settings.schedules"
+>Configuració</link
+>. </para>
+
+<para
+>Si sabeu quantes operacions queden per a finalitzar o quan vencen, es podrà introduir aquesta informació perquè les operacions no s'introdueixin de manera indefinida. En marcar la planificació es finalitzarà el quadre i s'introduiran el nombre d'operacions restants o la data de l'operació final finalitzarà l'operació planificada segons aquest criteri. </para>
+
+<para
+>Quan hàgiu introduït tota la informació necessària, feu clic a <guibutton
+>D'acord</guibutton
+> per a continuar. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.schedules.edit">
+<title
+>Editar les planificacions</title>
+
+<para
+>Per a editar una planificació, simplement seleccioneu l'entrada a la llista i feu-hi clic dret perquè aparegui el menú contextual, seleccioneu <guimenuitem
+>Edita l'operació planificada</guimenuitem
+>. Apareixerà un diàleg semblant al del diàleg Edició d'operacions planificades, des del qual podreu actualitzar les dades necessàries. </para>
+</sect1>
+
+<sect1 id="details.schedules.delete">
+<title
+>Suprimir les planificacions</title>
+
+<para
+>Per a suprimir una planificació, simplement seleccioneu l'entrada a la llista, feu clic dret perquè aparegui el menú contextual i seleccioneu <guimenuitem
+>Suprimeix l'operació planificada</guimenuitem
+>. </para>
+</sect1>
+
+<sect1 id="details.schedules.duplicate">
+<title
+>Duplicar les planificacions</title>
+
+<para
+>Per a duplicar una planificació, simplement seleccioneu l'entrada a la llista, feu-hi clic dret perquè aparegui el menú contextual i seleccioneu <guimenuitem
+>Duplica l'operació planificada</guimenuitem
+>. </para>
+</sect1>
+
+<sect1 id="details.schedules.entering">
+<title
+>Introduir les operacions planificades</title>
+
+<para
+>Introduir una operació planificada vol dir introduir una operació en el llibre major apropiat, utilitzant els detalls especificats a la planificació. Les operacions planificades es poden introduir d'una de les 3 maneres diferents: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Manualment fent clic dret sobre l'entrada a la vista de les planificacions</para>
+  </listitem>
+
+  <listitem>
+    <para
+>El &kmymoney; podrà introduir-les a l'inici amb la vostra interacció o sense </para>
+  </listitem>
+  <listitem>
+    <para
+>El &kmymoney; podrà introduir-les amb la vostra interacció durant la banca en línia o en importar un extracte bancari electrònic </para>
+  </listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Introduir manualment les operacions planificades</title>
+
+<para
+>Podreu introduir manualment una operació planificada fent clic dret sobre l'entrada de la llista i seleccionant <guimenuitem
+>Introducció</guimenuitem
+> des del menú emergent. </para>
+</sect2>
+
+<sect2>
+<title
+>Confirmar l'operació a introduir</title>
+
+<para
+>Després de seleccionar qualsevol dels mètodes, es mostrarà el diàleg <guilabel
+>Introdueix l'operació planificada</guilabel
+> amb la informació requerida que es va introduir quan es va crear la planificació. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="enterschedule.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Aquesta informació es podrà canviar i els canvis es podran aplicar només a aquesta instància de la planificació o a totes les operacions posteriors. Després de verificar que totes les dades són correctes, en fer clic a <guibutton
+>D'acord</guibutton
+> afegirà l'operació al llibre major i actualitzarà la pròxima data de venciment de la planificació a la propera aparició. Si heu canviat alguna de les dades de l'operació, es mostrarà una confirmació addicional del que heu canviat, el qual us donarà l'oportunitat final d'acceptar o rebutjar els canvis. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="confirmenter.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Seleccioneu el que voleu fer amb la informació presentada i feu clic a <guibutton
+>D'acord</guibutton
+> o <guibutton
+>Cancel·la</guibutton
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Permetre que el &kmymoney; introdueixi per vosaltres les operacions planificades</title>
+
+<para
+>De manera alternativa, el &kmymoney; podrà verificar durant l'inici quines planificacions vencen i introduir-les per vosaltres si es va marcar l'opció adequada en configurar la planificació. </para>
+
+<para
+>Si no es va marcar l'opció, el &kmymoney; obrirà el diàleg esmentat anteriorment i podreu seguir els passos esmentats allà. El &kmymoney; també obrirà el diàleg si l'import és una estimació perquè pugueu introduir l'import real. </para>
+
+<para
+>També podreu optar perquè el &kmymoney; no verifiqui durant l'inici quines operacions estan planificades desseleccionant l'opció en el diàleg de configuració i qualsevol operació endarrerida o les operacions que vencen «avui» es mostraran a la vista principal perquè les introduïu manualment. </para>
+</sect2>
+</sect1>
+</chapter>
+

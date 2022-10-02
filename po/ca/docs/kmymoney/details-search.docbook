@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.search">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Darin.Strait; &Darin.Strait.mail; </author>
+  </authorgroup>
+  <date
+>25 de juliol de 2010</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Cercar operacions</title>
+
+<sect1 id="details.search.general">
+<title
+>General</title>
+
+<para
+>El diàleg <guilabel
+>Cerca operacions</guilabel
+> cerca les dades segons els criteris que especifiqueu. Podreu accedir al diàleg anant a l'element de menú <menuchoice
+><guimenu
+>Edita</guimenu
+><guimenuitem
+>Cerca una operació...</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Hi ha dues pestanyes principals en aquest diàleg. La pestanya <guilabel
+>Criteris</guilabel
+> mostra una sèrie de subpestanyes per a especificar els criteris de la cerca. </para>
+
+<para
+>Una vegada s'hagi completat la cerca, els resultats es mostraran sota la pestanya <guilabel
+>Resultat</guilabel
+>. A sota de la llista de resultats, el &kmymoney; mostrarà el nombre d'operacions que han complit amb els criteris de la cerca. En fer doble clic sobre una operació individual a la llista de resultats, apareixerà el llibre major apropiat i es mostrarà l'operació. </para>
+
+<para
+>Quan es prem el botó <guibutton
+>Cerca</guibutton
+>, s'iniciarà la cerca i es tindran en compte tots els criteris que s'hagin introduït a qualsevol pestanya. </para>
+
+<para
+>El botó <guibutton
+>Restaura</guibutton
+> restablirà tots els camps en totes les subpestanyes de criteris als valors predeterminats. Això permetrà especificar criteris de cerca nous. </para>
+
+<para
+>El botó <guibutton
+>Tanca</guibutton
+> tancarà el diàleg <guilabel
+>Cerca operacions</guilabel
+>. </para>
+
+</sect1>
+
+<sect1 id="details.search.criteria">
+<title
+>Criteri de cerca</title>
+
+<para
+>Hi ha diverses subpestanyes sota de la pestanya principal <guilabel
+>Criteris</guilabel
+>, cadascuna de les quals permet especificar diferents tipus de criteris de cerca. A sota de l'àrea per a especificar els criteris, el &kmymoney; llista cadascun dels diferents tipus de criteris que s'especifiquen actualment per a la cerca. </para>
+
+<sect2 id="details.search.text">
+<title
+>Text</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-text.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Diàleg Cerca operacions, pestanya Text</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Aquesta pestanya permet especificar el text a cercar. També hi ha dues caselles de selecció que controlen com s'utilitzarà el text a la cerca. </para>
+
+<para
+>De manera predeterminada, això coincidirà a les subcadenes senzilles. Per exemple: </para>
+
+<para>
+<itemizedlist>
+  <listitem>
+    <para
+><quote
+>Best</quote
+> trobarà <quote
+>Best Cakes, Inc.</quote
+></para>
+  </listitem>
+  <listitem>
+    <para
+><quote
+>est</quote
+> també trobarà <quote
+>Best Cakes, Inc.</quote
+> </para>
+  </listitem>
+</itemizedlist>
+</para>
+
+<para
+>A la llista desplegable que hi ha al costat del camp de text, seleccioneu <guilabel
+>Conté</guilabel
+> si voleu trobar operacions que continguin el text, o seleccioneu <guilabel
+>No conté</guilabel
+> si voleu trobar operacions que no continguin el text especificat. </para>
+
+<para
+>Si marqueu la casella <guilabel
+>Distingeix majúscules i minúscules</guilabel
+>, la cerca distingirà les majúscules i minúscules. Per exemple, si s'ha establert aquesta opció, <quote
+>best</quote
+> no trobaria <quote
+>Best Cakes, Inc.</quote
+>. </para>
+
+<para
+>Si marqueu la casella <guilabel
+>Tracta el text com una expressió regular</guilabel
+>, el text es tractarà com una expressió regular. Per a obtenir detalls sobre com crear una expressió regular, visiteu la documentació de les &Qt; sobre la <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
+>classe QRegularExpression</ulink
+>. </para>
+</sect2>
+
+<sect2 id="details.search.account">
+<title
+>Compte</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-account.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Diàleg Cerca operacions, pestanya Compte</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Aquesta pestanya permet especificar els comptes que s'han de cercar. </para>
+
+<para
+>Els comptes es mostren en format d'arbre. Els comptes marcats per a cercar s'indiquen amb una casella de selecció. Si feu clic al botó <guibutton
+>Tots</guibutton
+>, es marcaran per a la cerca tots els comptes. Si feu clic al botó <guibutton
+>Cap</guibutton
+>, no es marcarà cap compte per a la cerca. Es poden canviar individualment els comptes fent clic amb el &BER; al quadre que hi ha al costat del nom del compte. Fent clic sobre el quadre amb el &BDR; podreu canviar la selecció d'una estructura sencera de comptes. </para>
+</sect2>
+
+<sect2 id="details.search.date">
+<title
+>Data</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-date.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Diàleg Cerca operacions, pestanya Data</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Aquesta pestanya permet especificar quines dates s'han de cercar. </para>
+
+<para
+>El control <quote
+>Interval</quote
+> proporciona una manera pràctica de configurar els controls «Des de» i «A». Els controls «Des de» i «A» es poden manipular individualment. Les dates es poden introduir manualment. Els controls impedeixen introduir dates no existents. Els valors de la data també es poden canviar fent clic a les fletxes cap amunt i cap avall quan està ressaltada una part particular d'una data. En fer clic sobre la petita icona de calendari, apareixerà un calendari per a seleccionar dates amb facilitat. </para>
+</sect2>
+
+
+<sect2 id="details.search.amount">
+<title
+>Import</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-amount.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Diàleg Cerca operacions, pestanya Import</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Aquesta pestanya permet especificar quins imports s'han de cercar. </para>
+
+<para
+>Podreu cercar un import exacte o un interval d'imports. Si feu clic sobre la icona de calculadora, apareixerà una petita calculadora en pantalla per a ajudar-vos a introduir un valor. </para>
+</sect2>
+
+<sect2 id="details.search.category">
+<title
+>Categoria</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-category.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Diàleg Cerca operacions, pestanya Categoria</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Aquesta pestanya permet especificar quines categories s'han de cercar. </para>
+
+<para
+>Les categories es mostren en format d'arbre. Les categories marcades per a cercar s'indiquen amb un quadre. Si feu clic al botó <guibutton
+>Tots</guibutton
+>, es marcaran totes les categories per a la cerca. Si feu clic al botó <guibutton
+>Cap</guibutton
+>, no es marcarà cap categoria per a la cerca. Si feu clic al botó <guibutton
+>Ingrés</guibutton
+>, es marcaran les categories d'ingressos i no es marcaran les categories de despeses. Si feu clic al botó <guibutton
+>Despesa</guibutton
+>, es desmarcaran les categories d'ingressos i es marcaran les categories de despeses. </para>
+
+<para
+>Es podrà canviar individualment les categories canviant la selecció fent clic amb el &BER; sobre el quadre que hi ha al costat del nom de la categoria. Es podrà canviar la selecció de tota una jerarquia de categories fent clic amb el &BDR; sobre el quadre. </para>
+</sect2>
+
+<sect2 id="details.search.payee">
+<title
+>Beneficiari</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-payee.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Diàleg Cerca operacions, pestanya Beneficiari</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Aquesta pestanya permet especificar quins beneficiaris s'han de cercar. </para>
+
+<para
+>Els beneficiaris que estan marcats per a la cerca s'indiquen amb un quadre. Si feu clic al botó <guibutton
+>Tots</guibutton
+>, es marcaran tots els beneficiaris per a la cerca. Si feu clic al botó <guibutton
+>Cap</guibutton
+>, no es marcarà cap beneficiari per a la cerca. Es podran canviar individualment la selecció dels beneficiaris fent clic sobre el quadre que hi ha al costat del nom del beneficiari. </para>
+
+<para
+>Si marqueu la casella <guilabel
+>Selecciona les operacions sense beneficiaris</guilabel
+>, només se seleccionaran les operacions sense beneficiari. </para>
+
+</sect2>
+
+<sect2 id="details.search.details">
+<title
+>Detalls</title>
+
+<para
+>Aquesta pestanya permet especificar diversos criteris de cerca addicionals. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-details.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Diàleg Cerca operacions, pestanya Detalls</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para>
+<itemizedlist>
+  <title
+>El tipus pot ser un dels següents:</title>
+  <listitem
+><para
+>Tots els tipus</para
+></listitem>
+  <listitem
+><para
+>Pagaments</para
+></listitem>
+  <listitem
+><para
+>Ingressos</para
+></listitem>
+  <listitem
+><para
+>Transferències</para
+></listitem>
+</itemizedlist>
+
+<itemizedlist>
+  <title
+>L'estat pot ser un dels següents:</title>
+  <listitem
+><para
+>Tots els estats</para
+></listitem>
+  <listitem
+><para
+>No conciliada</para
+></listitem>
+  <listitem
+><para
+>Liquidada</para
+></listitem>
+  <listitem
+><para
+>Conciliada</para
+></listitem>
+</itemizedlist>
+
+<itemizedlist>
+  <title
+>La validesa pot ser una de les següents:</title>
+  <listitem
+><para
+>Qualsevol operació</para
+></listitem>
+  <listitem
+><para
+>Operació vàlida</para
+></listitem>
+  <listitem
+><para
+>Operació no vàlida</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Podreu cercar un número d'operació en particular o cercar un interval de números d'operació. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="details.search.results">
+<title
+>Resultat de la cerca</title>
+
+<para
+>La pestanya <guilabel
+>Resultat</guilabel
+> mostra la Data, Compte, Detalls, Estat de la conciliació, Pagament i Ingrés per a cada operació que coincideixi amb els criteris de la cerca que heu introduït. Fer clic dret sobre la capçalera de la fila a la llista de resultats us permetrà modificar l'ordenació dels resultats. </para>
+
+<para
+>En fer doble clic sobre una operació, es mostrarà el llibre major del compte corresponent i se centrarà en l'operació seleccionada. </para>
+
+</sect1>
+
+</chapter>

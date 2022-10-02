@@ -1,0 +1,1069 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.settings">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>31/03/2019</date>
+  <releaseinfo
+>5.0.3</releaseinfo>
+</chapterinfo>
+
+<title
+>Impostazioni di &kmymoney;</title>
+
+<para
+>Le impostazioni descritte di seguito modificano il comportamento di &kmymoney; consentendo di personalizzarlo per soddisfare le necessità dei propri affari finanziari, e per modificare il suo aspetto perché corrisponda alla propria personalità. Queste impostazioni possono essere modificate tramite la voce di menu <menuchoice
+><guimenu
+>Impostazioni</guimenu
+><guimenuitem
+>Configura &kmymoney;...</guimenuitem
+></menuchoice
+> o utilizzando la scorciatoia da tastiera <keycombo action="simul"
+>&Ctrl; &Shift; <keycap
+>,</keycap
+></keycombo
+>. Affinché qualsiasi modifica abbia effetto, il pulsante <guibutton
+>Applica</guibutton
+> deve essere premuto. </para>
+
+<para
+>A sinistra della finestra delle impostazioni c'è un elenco delle icone e delle etichette, ognuna delle quali rappresenta una particolare area del programma. Quando si fa clic su una di queste icone, la parte destra della finestra visualizzerà controlli per configurare quell'area del programma, spesso divisa in diverse schede. </para>
+
+<sect1 id="details.settings.general">
+<title
+>Generale</title>
+
+<sect2 id="details.settings.general.global">
+<title
+>Scheda globale</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Opzioni salvataggio automatico</guilabel
+></term>
+<!-- I would prefer to use a more consistent hierarchy and use of levels on this
+     page, but for now, I'm minimizing changes. -->
+    <listitem>
+      <para
+>La selezione della casella <guilabel
+>Salvataggio automatico periodico</guilabel
+> indica a &kmymoney; di salvare automaticamente i propri file a un intervallo definito. Il valore predefinito è 10 minuti. È possibile cambiare questa impostazione da 0 (salva immediatamente dopo l'inserimento di una transazione) fino a 60 minuti.</para>
+
+      <para
+>La selezione della casella <guilabel
+>Salvataggio automatico se il file è modificato alla chiusura</guilabel
+> indica a &kmymoney; di salvare automaticamente il proprio file quando il programma viene chiuso. Alla chiusura del programma, è disponibile anche l'opzione per creare una copia di sicurezza del file di &kmymoney;. Il numero di copie di sicurezza da mantenere può essere impostato a 0 (spento) fino a 20 copie di sicurezza. Tutti i file di backup saranno memorizzati nella stessa cartella del file principale. Saranno etichettati sequenzialmente con 1 che rappresenta il più recente.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Anno fiscale</guilabel
+></term>
+    <listitem>
+      <para
+>Digitare il giorno e il mese del proprio anno fiscale. Questo valore è utilizzato per budget e alcuni report.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Programmi esterni</guilabel
+></term>
+    <listitem>
+      <para
+>Questa impostazione non influenza direttamente l'operatività di &kmymoney;, ma fornisce un modo conveniente per avviare qualsiasi strumento esterno, come una calcolatrice avanzata. Il primo passo è digitare il percorso completo al programma scelto nella casella di testo <guilabel
+>Calcolatrice</guilabel
+>. Ci sono quindi due modi di avviare il programma.</para>
+      <para
+>Primo, è possibile utilizzare la voce di menu <menuchoice
+><guimenu
+>Impostazioni</guimenu
+><guimenuitem
+>Configura le barre degli strumenti...</guimenuitem
+></menuchoice
+> per posizionare l'icona <guilabel
+>Calcolatrice</guilabel
+> nella barra degli strumenti. Poi, quando si fa clic sull'icona nella barra degli strumenti, &kmymoney; avvierà l'applicazione selezionata.</para>
+      <!-- FIXME since the Settings menu is deferred to the Frameworks docs and
+           not explicitly described in this manual, it would at least be nice to
+           refer to the actual Calculator icon here, but I cannot find the
+           source png.  It might also be nice to have a link to Settings Menu
+           doc page. -->
+      <para
+>Secondo, è possibile utilizzare la voce di menu <menuchoice
+><guimenu
+>Impostazioni</guimenu
+><guimenuitem
+>Configura scorciatoie...</guimenuitem
+></menuchoice
+> per impostare una scorciatoia da tastiera personalizzata. (La voce è sotto &kmymoney;/Calcolatrice in tale elenco.) È quindi possibile utilizzare la scorciatoia per avviare l'applicazione.</para>
+      <!-- FIXME is not currently possible to launch the calculator from some menu
+           item.  I have filed a wishlist, and when implemented, it should be
+           described here, probably as the first choice. -->
+       
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.general.views">
+<title
+>Scheda delle viste</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Opzioni della pagina di avvio</guilabel
+></term>
+    <listitem>
+      <para
+>Quando &kmymoney; si avvia, questa opzione indica se partire con la pagina principale o con la vista mostrata all'ultima chiusura del programma.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+><guilabel
+>Tipo di vista di &kmymoney;</guilabel
+></term>
+    <listitem>
+      <para
+>È possibile selezionare una delle tre disposizioni generali da utilizzare in &kmymoney;. Se si seleziona la vista Elenco o Albero, le icone e le relative etichette saranno posizionate a destra della finestra. La vista Elenco visualizza icone più grandi mentre la vista Albero ha icone più piccole. La vista con schede posiziona le icone e le etichette nella parte alta della finestra.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra la barra del titolo in ogni pagina</guilabel
+></term>
+    <listitem>
+      <para
+>La selezione di questa casella visualizzerà la barra del titolo blu di &kmymoney; nella parte superiore di ogni pagina. La sua deselezione rimuoverà la barra del titolo e fornirà un'area più ampia per visualizzare il contenuto di ogni pagina.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Sincronizza la selezione del libro mastro con la vista investimenti</guilabel
+></term>
+    <listitem>
+      <para
+>Se questa opzione è selezionata, i conti visualizzati nella vista Registro e la vista Investimenti saranno sincronizzate, vale a dire se si cambia il conto visualizzato in una delle viste, e poi si passa all'altra vista, saranno visualizzate le informazioni per lo stesso conto. Questo aumenta l'efficacia della navigazione tra due viste a schede. Se non è selezionata, la selezione di una delle viste mostrerà lo stesso conto precedentemente selezionato in quella vista, senza tener conto del conto selezionato nell'altra vista.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.general.filter">
+<title
+>Scheda del filtro</title>
+
+<sect3>
+<title
+>Conti / Categorie</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Non mostrare le categorie non utilizzate</guilabel
+></term>
+    <listitem>
+      <para
+>La selezione di questa casella nasconde le categorie non utilizzate nella vista Categorie. Una categoria nascosta è comunque visibile qualora una transazione la richieda. Se si digita una categoria nascosta nel registro, essa diverrà disponibile per l'uso.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra conti di capitale</guilabel
+></term>
+    <listitem>
+      <para
+>In modo predefinito, i conti di capitale sono nascosti nella vista Conti. La selezione di questa opzione visualizzerà i conti di capitale nella vista Conti. I conti di capitale sono utilizzate per tracciare titoli singoli o investimenti detenuti in un conto Investimenti. Questo non dovrebbe essere confuso con il gruppo <emphasis
+>Capitale</emphasis
+> del livello principale, che include i conti che contengono i saldi di apertura per gli altri conti.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+><guilabel
+>Mostra le categorie nella vista dell'elenco dei conti</guilabel
+></term>
+    <listitem>
+      <para
+>In modo predefinito, le Categorie sono nascoste nella vista Conti. La selezione di questa opzione visualizzerà le Categorie nella vista Conti.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+><guilabel
+>Non mostrare i conti patrimoniali a saldo zero</guilabel
+></term>
+    <listitem>
+      <para
+>La selezione di questa opzione rimuoverà qualsiasi conto patrimoniale a saldo zero dalla vista Conti.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+
+<sect3>
+<title
+>Pianificazioni</title>
+<variablelist>
+    <varlistentry>
+    <term
+><guilabel
+>Non mostrare le pianificazioni completate</guilabel
+></term>
+    <listitem>
+      <para
+>Marcando questa casella si nasconderanno tutte le pianificazioni terminate dalla vista delle transazioni pianificate</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+
+<sect3>
+<title
+>Transazioni</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Non mostrare le transazioni precedenti a</guilabel
+></term>
+    <listitem>
+      <para
+>Le transazioni che precedono la data digitata qui non saranno visualizzate nella vista Registro. Questo può essere utile se i propri dati includono molti anni di transazioni; l'impostazione di questa opzione a uno o due anno prima nasconde le transazioni più datate.</para>
+      <para
+>Impostando questa opzione al 1° gennaio 1900 (il valore predefinito) è un buon modo per diagnosticare problemi nell'importazione dei dati legati alle date, nel caso alcune date siano erroneamente molto lontane nel tempo.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Non mostrare le transazioni riconciliate</guilabel
+></term>
+    <listitem>
+      <para
+>La selezione di questa casella filtrerà le transazioni in base allo stato di riconciliazione. Le transazioni marcate come <emphasis
+>Riconciliate</emphasis
+> non saranno mostrate nella vista Registro.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.home">
+<title
+>Inizio</title>
+
+<sect2>
+<title
+>Sezioni di visualizzazione della pagina principale</title>
+<para
+>Queste opzioni consentono di personalizzare l'aspetto della <link linkend="firsttime.mainwindow"
+>Vista principale</link
+> (anche chiamata Pagina principale o Finestra principale) scegliendo quali informazioni visualizzare nella vista e l'ordine in cui appaiono. Le sezioni selezionate possono essere riordinate facendo clic sui rispettivi pulsanti <guibutton
+>Su</guibutton
+> o <guibutton
+>Giù</guibutton
+>. </para>
+<!-- FIXME Many of these sections need a <link
+> to the doc section actually
+     describing the content. -->
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Attività e passività</guilabel
+></term>
+    <listitem>
+      <para
+>Questo visualizzerà i conti di attività e passività che sono aperti insieme ai saldi attuali. Questo e l'elenco degli altri conti sulla pagina principale sono disposti in ordine alfabetico, a meno che non annotato altrimenti.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Pagamenti</guilabel
+></term>
+    <listitem>
+      <para
+>Questo visualizzerà le occorrenze future delle transazioni pianificate, distinguendo i pagamenti scaduti dai pagamenti futuri. Mostra la data, il nome della pianificazione, conto e importo del pagamento e il saldo del conto dopo il pagamento. In modo predefinito, mostrerà fino a sei transazioni. Se sono visualizzate sei transazioni, c'è un collegamento che si può selezionare per mostrarne ancora, fino a 30 giorni in anticipo.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Conti preferiti</guilabel
+></term>
+    <listitem>
+      <para
+>Questo visualizzerà i conti che sono identificati come conti preferiti nella finestra di configurazione <menuchoice
+><guimenu
+>Conto</guimenu
+><guimenuitem
+>Modifica conto...</guimenuitem
+></menuchoice
+></para>
+      <para
+>Per questa e per tutte le altre sezioni di elenchi di conti interessate da questo insieme di opzioni, la visualizzazione includerà il nome del conto e il saldo attuale, altre colonne specifiche per quel tipo di report, e in alcuni casi, come configurato altrove.</para>
+      <!-- FIXME - the menu item (or maybe link to actual doc page) should point
+           to the actual other config location and perhaps which items for
+           which account type. -->
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Conti di pagamento</guilabel
+></term>
+    <listitem>
+      <para
+>Visualizzerà tutti i conti di pagamento, che includono qualsiasi conto in cui le entrate possono essere depositate, e/o dal quale è possibile pagare fatture.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Report preferiti</guilabel
+></term>
+    <listitem>
+      <para
+>Questo visualizzerà un elenco di tutti i report che sono stati identificati come preferiti nella finestra Configurazione del report. L'elenco ordinato viene cronologicamente in base a quando ogni report diventa un preferito.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Previsione (pianificazione)</guilabel
+></term>
+    <listitem>
+      <para
+>Visualizzerà una previsione a 30, 60 e 90 giorni per i conti di attività e passività con saldi diversi da zero e con transazioni non riconciliate.</para>
+      <!-- FIXME What are the real criteria for inclusion in this (and these other) list(s). -->
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Previsione di patrimonio netto</guilabel
+></term>
+    <listitem>
+      <para
+>Visualizzerà un grafico della previsione del patrimonio netto per i prossimi 90 giorni.</para>
+    </listitem>
+  </varlistentry>
+
+  <!-- FIXME "Forecast (history) removed as apparently not actually used. -->
+
+  <varlistentry>
+    <term
+><guilabel
+>Budget</guilabel
+></term>
+    <listitem>
+      <para
+>Questo visualizzerà il riepilogo del mese attuale e gli sforamenti per ogni budget specificato. Se non è specificato alcun budget, non visualizzerà alcun budget o sforamento, con la spesa effettiva del mese attuale.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Flusso di cassa</guilabel
+></term>
+    <listitem>
+      <para
+>Questo visualizzerà un'analisi di riepilogo del flusso di cassa per il mese attuale.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Riscalatura pagina principale/Riepilogo</title>
+<variablelist>
+
+  <varlistentry>
+    <term
+><guilabel
+>Fattore di ingrandimento:</guilabel
+></term>
+    <listitem>
+      <para
+>Questa opzione consente la selezione della dimensione del carattere come percentuale per adattarsi alla pagina principale sulla base della preferenza dell'utente.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Ricorda il fattore di ingrandimento all'uscita dal programma se modificato manualmente con la rotella del mouse</guilabel
+></term>
+    <listitem>
+      <para
+>La selezione di questa opzione salverà la preferenza per la dimensione del carattere se è stata modificata nella pagina iniziale impostata usando la rotellina del mouse.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Visualizzazione delle informazioni del conto</title>
+<para
+>Queste opzioni permettono di personalizzare quali informazioni devono essere incluse in un qualsiasi elenco di conti.</para>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Mostra informazioni di limite del conto</guilabel
+></term>
+    <listitem>
+      <para
+>Visualizza il limite del conto come impostato nella finestra Modifica conto. Interessa qualsiasi elenco che include i conti di pagamento.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra lo stato del saldo dei conti in linea associati</guilabel
+></term>
+    <listitem>
+      <para
+>Mostra lo stato del saldo dei conti associati, rappresentato da un'icona nelle colonne che precedono i nomi dei conti. Una spunta verde indica che il saldo in linea e il saldo locale sono sincronizzati. Se il file locale ha transazioni più recenti di quelle precedentemente aggiornate in linea, sarà mostrata una cassetta postale con una freccia verde. L'utente viene avvisato della necessità di eseguire un aggiornamento in linea. I disallineamenti tra il file locale e il saldo in linea sono indicati da un simbolo rosso di avviso.</para>
+      <!-- Note: the colors might be different depending on the selected theme
+           -->
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra il numero di transazioni non marcate per conto [!M]</guilabel
+></term>
+    <listitem>
+      <para
+>Inserisce una colonna aggiuntiva accanto al nome del conto, che mostra il numero delle transazioni non marcate nel conto.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra il numero delle transazioni compensate per conto [C]</guilabel
+></term>
+    <listitem>
+      <para
+>Inserisce una colonna aggiuntiva che mostra il numero delle transazioni riconciliate per il conto.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra il numero delle transazioni non riconciliate (non marcate + compensate) per conto [!R]</guilabel
+></term>
+    <listitem>
+      <para
+>Inserisce una colonna aggiuntiva che mostra il numero delle transazioni non riconciliate per il conto, &ie;, la somma di tutte le transazioni non marcate e compensate.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra la data dell'ultima riconciliazione</guilabel
+></term>
+    <listitem>
+      <para
+>Inserisce una colonna aggiuntiva che mostra la data dell'ultima riconciliazione per il conto.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.register">
+<title
+>Registro</title>
+
+<para
+>Le seguenti opzioni specificate in questa sezione consentono la modifica del registro delle transazioni contenuto nella scheda della vista Registro. </para>
+
+<sect2 id="details.settings.register.display">
+<title
+>Scheda Visualizza</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Mostra una griglia nel registro</guilabel
+></term>
+    <listitem>
+      <para
+>La selezione di questa opzione visualizza le righe della griglia nel registro delle transazioni o nella vista Registro. Fornisce un'opzione di visualizzazione aggiuntiva che rende più semplice visualizzare transazioni separate e le relative parti componenti.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostrare tutte le voci del registro con il massimo livello di dettaglio</guilabel
+></term>
+    <listitem>
+      <para
+>La selezione di questa opzione fa in modo che il registro mostri tutte le informazioni per le transazioni visualizzate, con righe separate nell colonna dei dettagli per Categoria, Etichette e per Promemoria. Se non è selezionata, Categoria, Etichette e Promemoria non saranno visualizzate.</para>
+      <para
+>Questa opzione ha lo stesso effetto della selezione dell'opzione di menu <link linkend="reference.menus.settings.transactiondetail"
+>Mostra dettagli della transazione</link
+>.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry id="details.settings.register.lens">
+    <term
+><guilabel
+>Usa la lente</guilabel
+></term>
+    <listitem>
+      <para
+>La selezione di questa opzione visualizza tutte le righe di dettaglio per le transazioni selezionate, anche se <guilabel
+>Mostra il dettaglio completo delle voci di registro</guilabel
+> non è selezionata.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+><guilabel
+>Mostra modulo della transazione</guilabel
+></term>
+    <listitem>
+      <para
+>La selezione di questa opzione visualizza il <link linkend="details.ledger.transactionform"
+>modulo della transazione</link
+> nella parte inferiore del registro, per modificare una transazione. Se il modulo della transazione non è visualizzato, è possibile modificare una transazione dall'interno del registro stesso. Con questa opzione abilitata sarà visibile un numero minore di transazioni nel registro, se paragonato a quello quando l'opzione è disabilitata.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra sempre un campo Num.</guilabel
+></term>
+    <listitem>
+      <para
+>Visualizzare sempre il campo del numero (<quote
+>Num.</quote
+>) quando si inserisce o si modifica una transazione. Con questa opzione abilitata, si potrà controllare i numeri digitati in questo campo per i conti correnti.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra intestazione di gruppo tra le transazioni</guilabel
+></term>
+    <listitem>
+      <para
+>La selezione di questa opzione visualizzerà le intestazioni di gruppo nel registro. Queste si riferiscono ai periodi di tempo o alle milestone come Ultimo mese, Ultima settimana, Questo mese, Ultima riconciliazione, Settimana successiva e Mese successivo.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra intestazione per l'anno fiscale precedente e per quello attuale </guilabel
+></term>
+    <listitem>
+      <para
+>La selezione di questa opzione visualizzerà le intestazioni di gruppo nel registro per l'anno fiscale precedente e quello corrente.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Visualizza la pianificazioni scadute con date pianificate</guilabel
+></term>
+    <listitem>
+      <para
+>Le transazioni pianificate con date future sono mostrate nella vista Registro per il conto relativo. Quando la data passa, e una transazione pianificata diventa scaduta, non è più mostrata nel registro, a meno che questa opzione sia selezionata.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.register.sorting">
+<title
+>Scheda Ordinamento</title>
+<para
+>Queste tre sezioni consentono di impostare l'ordinamento predefinito delle transazioni nella vista Registro. In tutti i casi, l'elenco a sinistra mostra tutti i campi disponibili per l'ordinamento. Per ordinare un elemento, selezionarlo (singolo clic del mouse) e fare clic sulla freccia destra tra i due elenchi. L'elenco a destra mostra tutti i campi che sono stati selezionati come parte dell'ordinamento per quella vista. È possibile cambiare l'ordine relativo dei campi selezionandone uno e modificando la sua posizione nell'elenco utilizzando la frecce su e giù a destra dell'elenco. È possibile passare dall'ordinamento crescente e decrescente per qualsiasi elemento facendo doppio clic su di esso. </para>
+<para
+>I campi disponibili per l'ordinamento sono gli stessi per tutte e tre le sezioni: Importo, Categoria, Ordine di inserimento (data di creazione della transazione), Numero, Beneficiario, Data di emissione, Stato di riconciliazione, Strumento finanziario e Tipo. </para>
+
+<sect3 id="details.settings.register.sorting.normal">
+<title
+>Scheda Vista normale</title>
+<para
+>Questa scheda controlla l'ordinamento delle transazioni nel registro nella modalità di visualizzazione Normale. </para>
+</sect3>
+
+<sect3 id="details.settings.register.sorting.reconciliation">
+<title
+>Scheda della Vista Riconciliazione</title>
+<para
+>Questa scheda controlla l'ordinamento predefinito del registro mentre si è nella vista Riconciliazione. Questa è la visualizzazione delle transazioni mostrate durante il processo di <link linkend="details.reconcile"
+>Riconciliazione</link
+>. </para>
+</sect3>
+
+<sect3 id="details.settings.register.sorting.search">
+<title
+>Scheda Vista di ricerca</title>
+<para
+>Questa scheda controlla l'ordinamento delle transazioni nel registro nella <link linkend="details.search"
+>vista Ricerca</link
+>. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.settings.register.dataentry">
+<title
+>Scheda Inserimento dati</title>
+<para
+>Queste opzioni interessano il processo di creazione di nuove transazioni.</para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Auto-incrementa il numero degli assegni</guilabel
+></term>
+    <listitem>
+      <para
+>L'abilitazione di questa opzione incrementerà automaticamente il numero degli assegni all'inserimento di una nuova transazione. Hanno lo stesso effetto se si utilizza la lente del registro o il modulo delle transazioni.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mantieni le modifiche quando si seleziona un'altra transazione/suddivisione</guilabel
+></term>
+    <listitem>
+      <para
+>Quando è abilitata, la selezione di un'altra transazione o suddivisione saranno salvate le modifiche alla transazione corrente. Se disabilitata, la selezione di una transazione o suddivisione differente richiederà se salvare o meno le modifiche.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Usa Invio per spostarti tra i campi</guilabel
+></term>
+    <listitem>
+      <para
+>Se abilitata, la pressione di &Enter; cambiare il fuoco al campo successivo della transazione. Quando si è nell'ultimo campo, la transazione sarà salvata. Se disabilitata, la navigazione tra i campi richiede l'utilizzo del tasto &Tab; o del mouse. La pressione del tasto &Enter; salverà la transazione, non importa su quale campo sia il fuoco in quel momento. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Abbina i nomi a partire dall'inizio</guilabel
+></term>
+    <listitem>
+      <para
+>Questa opzione controlla la <link linkend="details.payees.personalinformation.matching"
+>corrispondenza dei beneficiari</link
+>. Se abilitata, i nomi dei beneficiari saranno sempre verificati dall'inizio. Se disabilitata, sarà verificata qualsiasi sottostringa. Inoltre, quando la si abilita, possono essere definite opzioni aggiuntive per la corrispondenza nella scheda Corrispondenza della vista Beneficiari.</para>
+    </listitem>
+  </varlistentry>
+
+  <!--FIXME missing Automatic reconciliation-->
+  <varlistentry>
+    <term
+><guilabel
+>Riconciliazione automatica</guilabel
+></term>
+    <listitem>
+      <para
+>Questa opzione deve essere documentata. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Stato di riconciliazione predefinito</guilabel
+></term>
+    <listitem>
+      <para
+>Selezionare lo stato di riconciliazione predefinito per le nuove transazioni: Non riconciliata, Compensata e Riconciliata.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Riempimento automatico</guilabel
+></term>
+    <listitem>
+      <para
+>Questa opzione consente di selezionare il comportamento desiderato per il completamento automatico. Questo controlla quali, se presenti, transazioni precedenti devono essere visualizzate per lo stesso beneficiario e quali, se presenti, di tali transazioni devono essere utilizzate per il completamento automatico dei dettagli della nuova transazione.</para>
+      <itemizedlist>
+        <listitem>
+          <para
+>No auto riempimento</para>
+          <para
+>Questa opzione disattiverà l'auto-compilazione e sarà necessario digitare tutti i dettagli per la nuova transazione.</para>
+        </listitem>
+        <listitem>
+          <para
+>Stessa transazione se l'ammontare differisce per meno della percentuale imposta di seguito</para>
+          <para
+>Con questa opzione selezionata, quando si digita una nuova transazione, &kmymoney; visualizzerà un elenco delle transazioni precedenti per lo stesso beneficiario e conto. Se l'importo di una transazione precedente differisce di meno di X percento dall'importo digitato, essa sarà considerata identica, e i dettagli dalla transazione precedente sarà utilizzato per completare automaticamente i dettagli di una nuova transazione. La «X» suddetta è specificata nella casella accanto a <guilabel
+>Stessa transazione se l'importo differisce per meno di</guilabel
+>, e può essere compreso tra 0 e 100%. Se la percentuale è 0, tutte le transazioni precedenti per il beneficiario e per il conto saranno visualizzate, ed è possibile selezionare una di queste transazioni per utilizzarla per il completamento automatico facendo clic su di essa.</para>
+        </listitem>
+        <listitem>
+          <para
+>Con la precedente transazione più usata per il beneficiario</para>
+          <para
+>Con questa opzione selezionata, quando si inserisce una nuova transazione, &kmymoney; compilerà tutti i dettagli della transazione con i dati della transazione usata più di frequente con il beneficiario selezionato.</para>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Utilizza i promemoria della precedente transazione</guilabel
+></term>
+    <listitem>
+      <para
+>Se selezionata, il promemoria dalla transazione inserita precedentemente sarà inserito come promemoria per la nuova transazione. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.register.import">
+<title
+>Scheda Importa</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Cerca transazioni corrispondenti entro</guilabel
+></term>
+    <listitem>
+      <para
+>Cerca le transazioni corrispondenti entro l'intervallo della transazione importata +/- il numeri di giorni specificato, che può essere impostato tra 0 e 99.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Chiedi la categoria predefinita dei nuovi beneficiari</guilabel
+></term>
+    <listitem>
+      <para
+>Se questa opzione è selezionata, quando viene rilevato un nuovo beneficiario durante l'importazione, verrà chiesta all'utente la categoria predefinita per il beneficiario.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.schedules">
+<title
+>Transazioni pianificate</title>
+
+<para
+>Queste opzioni consentono di modificare il comportamento di <link linkend="details.schedules"
+>Pianificazione transazioni</link
+>. </para>
+
+<sect2>
+<title
+>Opzioni di avvio</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Controlla le operazioni pianificate all'avvio</guilabel
+></term>
+    <listitem>
+      <para
+>L'abilitazione del controllo della pianificazione all'avvio di &kmymoney;. Se una transazione pianificata corrisponde all'insieme di criteri di pianificazione, &kmymoney; produrrà una notifica richiedendo di gestire la transazione. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Inserisci le transazioni con questo numero di giorni di anticipo</guilabel
+></term>
+    <listitem
+><para
+>Specificare il numero di giorni di anticipo con cui bisogna inserire una transazione pianificata.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.schedules.calendar">
+<title
+>Giorni di elaborazione</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Utilizzare il calendario delle festività per regione</guilabel
+></term>
+    <listitem
+><para
+>Selezionare la regione del mondo più appropriata alle proprie necessità.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+></title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Visualizza le transazioni pianificate nel registro per</guilabel
+></term>
+    <listitem>
+      <para
+>Specifica il numero di giorni che le transazioni pianificate devono mostrare nel registro.</para>
+      <para
+>Le transazioni pianificate saranno visualizzate nel registro. È possibile inserire o saltare le transazioni pianificate facendo clic con il tasto destro del mouse.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.onlinequote">
+<title
+>Quotazioni in linea</title>
+
+<para
+>Queste impostazioni modificano come sono recuperate le quotazioni finanziarie da diverse fonti in linea. Queste includono azioni, obbligazioni e altri prezzi di titoli, così come i prezzi dei metalli preziosi e i cambi di valuta. </para>
+
+<para
+>In questa scheda è possibile modificare le sorgenti delle quotazioni in linea usate da &kmymoney;. In generale, queste sono impostazioni avanzate e dovrebbero essere usate solo dagli utenti più esperti. </para>
+
+<para
+>Per maggiori informazioni, vedere la sezione sulle <link linkend="details.investments.onlinequotes"
+>Quotazioni in linea dei prezzi</link
+>. </para>
+</sect1>
+
+
+<sect1 id="details.settings.colors">
+<title
+>Colori</title>
+
+<para
+>Questa sezione consente di personalizzare i colori utilizzati in &kmymoney;. Se <guilabel
+>Colori personalizzati</guilabel
+> non è marcata, saranno utilizzati i colori predefiniti. </para>
+
+<para
+>Per personalizzare i colori controllare il riquadro Colori personalizzati. </para>
+
+<para
+>Modificare qualsiasi colore facendo clic sul pulsante del colore, che aprirà la tavolozza di selezione del colore. Questo fornirà opzioni illimitate di selezione del colore. È possibile selezionare un colore di base specifico, ottenere un colore facendo clic ovunque sullo schermo, digitare un colore &HTML; specifico, specificare i valori per tonalità, saturazione, valore, rosso, verde e blu. </para>
+</sect1>
+
+<sect1 id="details.settings.fonts">
+<title
+>Tipi di carattere</title>
+
+<para
+>Queste opzioni permettono di modificare i caratteri nei campi Cella o Intestazione. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Usa i caratteri di sistema</guilabel
+></term>
+    <listitem>
+      <para
+>Selezionare questa opzione per usare i tipi di carattere di sistema. Deselezionando questa opzione, è possibile personalizzare i carattere utilizzati.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Carattere delle celle</guilabel
+></term>
+    <listitem>
+      <para
+>Specifica il carattere personalizzato da usare nelle celle dei registri.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Carattere dell'intestazione</guilabel
+></term>
+    <listitem>
+      <para
+>Specifica il carattere personalizzata da usare per le intestazioni delle viste all'interno del registro.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="details.settings.icons">
+<title
+>Icone</title>
+
+<para
+>Questa opzione consente la selezione delle icone che saranno visualizzate. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Impostazioni delle singole icone</guilabel
+></term>
+    <listitem>
+      <para
+>Utilizzando il menu a tendina, c'è una selezione delle icone disponibili all'uso. Icone aggiuntive possono essere disponibili per lo scaricamento e per l'uso in base al sistema operativo installato.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="details.settings.plugins">
+<title
+>Estensioni</title>
+
+<para
+>Questa sezione fornisce informazioni sulle estensioni disponibili e consente di modificare il comportamento delle estensioni installate. Notare che l'elenco delle estensioni visualizzato dipenderà da quali estensioni &kmymoney; trova all'avvio. Non importa se l'estensione è stata compilata come parte dell'applicazione o aggiunta come pacchetto separato. <screenshot
+> <screeninfo
+>Configura estensioni</screeninfo
+> <mediaobject
+> <imageobject
+> <imagedata fileref="configure_plugins.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Configura estensioni</phrase
+> </textobject
+> </mediaobject
+> </screenshot
+> Ogni estensione può essere abilitata o disabilitata, come indicato dalla casella di selezione accanto al nome dell'estensione. In aggiunta, c'è un pulsante <guibutton
+>informazioni</guibutton
+> (&infoicon;) per ogni estensione, che mostrerà la versione e l'autore dell'estensione. Per alcune estensioni, ulteriori informazioni sulla configurazione e sull'utilizzo di queste estensioni sono disponibili facendo clic sul pulsante di configurazione a sinistra del pulsante Informazioni. L'unica estensione che non richiede configurazione è Stampa assegni. </para>
+
+<sect2 id="details.settings.plugins.printchecks">
+<title
+>Estensione di stampa degli assegni</title>
+
+<para
+>C'è estensione per stampare assegni inclusa nel sorgente di &kmymoney; e dovrebbe essere sempre abilitata. Essa consente di stampare un assegno sulla base dei dati di una transazione selezionata, con la struttura controllata da un modello &HTML;. Bisogna utilizzare un modello che corrisponde ai propri assegni pre-stampati. Viene fornito un modello predefinito integrato. Per fare ciò, fare clic sul pulsante <guibutton
+>configura</guibutton
+> (&configicon;) per visualizzare la finestra di configurazione <guilabel
+>Stampa assegno</guilabel
+>. Nella parte alta, è presente una casella di testo per utilizzare un modello personalizzato. A destra della casella, c'è un pulsante che fa apparire un selettore dei file, per selezionare un file di modello alternativo. </para>
+
+<para
+>Un file di modello è un file &HTML;, nel quale stringhe specifiche sono utilizzate per creare riferimenti ai campi della transazione, dal conto e dall'istituto attuale per mostrare dove saranno stampati sull'assegno. &kmymoney; è distribuito con un modello predefinito integrato. A <ulink url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/"
+>questo</ulink
+> indirizzo, è possibile trovare il file sorgente HTML del modello predefinito, così come alcuni modelli aggiuntivi. Sarà possibile utilizzarne uno o modificare un file per le proprie esigenze. Notare che è supportato solo un <emphasis
+>sottoinsieme</emphasis
+> dello standard HTML — la documentazione dettagliata sull'argomento è disponibile <ulink url="https://doc.qt.io/qt-5/richtext-html-subset.html"
+>qui</ulink
+>. </para>
+
+
+<!-- info from source code on substitution variables
+    // data about the user
+    checkHTML.replace("$OWNER_NAME", file->user().name());
+    checkHTML.replace("$OWNER_ADDRESS", file->user().address());
+    checkHTML.replace("$OWNER_CITY", file->user().city());
+    checkHTML.replace("$OWNER_STATE", file->user().state());
+    // data about the account institution
+    checkHTML.replace("$INSTITUTION_NAME", institution.name());
+    checkHTML.replace("$INSTITUTION_STREET", institution.street());
+    checkHTML.replace("$INSTITUTION_TELEPHONE", institution.telephone());
+    checkHTML.replace("$INSTITUTION_TOWN", institution.town());
+    checkHTML.replace("$INSTITUTION_CITY", institution.city());
+    checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
+    checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
+    // data about the transaction
+    checkHTML.replace("$DATE", KGlobal::locale()->formatDate(QDate::currentDate(), KLocale::LongDate));
+    checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
+    checkHTML.replace("$PAYEE_NAME", file->payee((*it).split().payeeId()).name());
+    checkHTML.replace("$PAYEE_ADDRESS", file->payee((*it).split().payeeId()).address());
+    checkHTML.replace("$PAYEE_CITY", file->payee((*it).split().payeeId()).city());
+    checkHTML.replace("$PAYEE_POSTCODE", file->payee((*it).split().payeeId()).postcode());
+    checkHTML.replace("$PAYEE_STATE", file->payee((*it).split().payeeId()).state());
+    checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().shares().abs()));
+    checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
+    checkHTML.replace("$MEMO", (*it).split().memo());
+-->
+
+
+</sect2>
+</sect1>
+</chapter>

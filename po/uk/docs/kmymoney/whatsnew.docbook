@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="whatsnew">
+<chapterinfo>
+  <date
+>4 квітня 2019 року</date>
+  <releaseinfo
+>5.0.4</releaseinfo>
+</chapterinfo>
+<title
+>Що нового у цьому випуску?</title>
+
+<sect1>
+<title
+>Виправлення вад та поліпшення функціональних можливостей</title>
+
+<para
+>Як і під час будь-якого випуску, команда розробників &kmymoney; ретельно попрацювали над цим випуском, щоб зробити його кращим і простішим у користуванні. Це четвертий випуск у гілці 5.0, у якому більшу частину змін пов'язано із виправленням вад. </para>
+
+<para
+>На даному етапі перехід на використання KDE Frameworks загалом завершено. Втім, це і робота над оновленням базових бібліотек, які використовує програма, лишиться непомітним для кінцевого користувача. Загалом, вигляд і поведінка програми лишається незмінними, хоча і є певні малопомітні зміни. Базові функціональні можливості залишилися тими самими, якщо не брати до уваги поліпшень і розширень можливостей. </para>
+
+<para
+>У попередніх випусках на цій сторінці підручника ми наводили список багатьох виправлено специфічних вад та поліпшень у функціональних можливостях. Втім, щоб не дублювати ці відомості, тепер ви можете просто ознайомитися із ними у <ulink url="https://kmymoney.org/changelog.html"
+>журналі змін</ulink
+>. </para>
+
+<para
+>Починаючи з випуску 5.0, декілька змін потребуватимуть певного коригування на боці користувача, якщо ви оновлюєтеся з версії 4.8.x або старішої версії. </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Програма шукає шаблони для додатка друку чеків у різних каталогах. Користувачеві слід врахувати це у діалоговому вікні параметрів додатка. Докладніший опис наведено у <link linkend="details.settings.plugins"
+>цьому розділі</link
+>. </para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1>
+<title
+>Оновлення цього підручника</title>
+
+<para
+>Хоча значну частину роботи вже виконано, у цьому підручнику є ще декілька розділів які не було оновлено відповідно до змін, які є видимими для користувачів версії 5.0. У кожному розділі наведено дані щодо відповідної наведеним у ньому відомостям версії програми &kmymoney;. Втім, з довідковою метою, ми наведемо тут повний список. </para>
+
+<para
+>Будь ласка, зауважте, що рівень застарілості розділів, які не було явним чином оновлено, залежить від того, чи відбувалися зміни у відповідному компоненті програми між версією 4.8 та версією 5.0. </para>
+  
+<informaltable frame="none">
+  <tgroup cols="2">
+    <thead>
+      <row>
+	<entry
+><para
+>Оновлені до версії 5.x розділи</para
+></entry>
+	<entry
+><para
+>Розділи, які ще не оновлено до версії 5.x</para
+></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry valign="top">
+	  <simplelist>
+	    <member
+><link linkend="introduction"
+>Вступ</link
+></member>
+	    <member
+><link linkend="whatsnew"
+>Що нового у цьому випуску?</link
+></member>
+	    <member
+><link linkend="makingmostof"
+>Повне використання можливостей &kmymoney;</link
+></member>
+	    <member
+><link linkend="firsttime"
+>Початковий період роботи з &kmymoney;</link
+></member>
+	    <member
+><link linkend="details.institutions"
+>Установи</link
+></member>
+	    <member
+><link linkend="details.accounts"
+>Рахунки</link
+></member>
+	    <member
+><link linkend="details.categories"
+>Категорії</link
+></member>
+	    <member
+><link linkend="details.tags"
+>Мітки</link
+></member>
+	    <member
+><link linkend="details.payees"
+>Отримувачі</link
+></member>
+	    <member
+><link linkend="details.reconcile"
+>Розклади</link
+></member>
+	    <member
+><link linkend="details.ledgers"
+>Облікові книги</link
+></member>
+	    <member
+><link linkend="details.investments"
+>Інвестиції</link
+></member>
+	    <member
+><link linkend="details.settings"
+>Параметри</link
+></member>
+	    <member
+><link linkend="reference.menus"
+>Довідник: меню</link
+></member>
+	    <member
+><link linkend="credits"
+>Подяки</link
+></member>
+	  </simplelist>
+	</entry>
+	<entry valign="top">
+	  <simplelist>
+	    <member
+><link linkend="details.currencies"
+>Валюти</link
+></member>
+	    <member
+><link linkend="details.reconcile"
+>Узгодження</link
+></member>
+	    <member
+><link linkend="details.reports"
+>Звіти</link
+></member>
+	    <member
+><link linkend="details.impexp"
+>Імпортування та експортування</link
+></member>
+	    <member
+><link linkend="details.loans"
+>Кредити</link
+></member>
+	    <member
+><link linkend="details.budgets"
+>Бюджети</link
+></member>
+	    <member
+><link linkend="details.forecast"
+>Прогноз</link
+></member>
+	    <member
+><link linkend="details.search"
+>Пошук операцій</link
+></member>
+	    <member
+><link linkend="details.formats"
+>Формати файлів</link
+></member>
+	    <member
+><link linkend="details.database"
+>База даних</link
+></member>
+	    <member
+><link linkend="faq"
+>Запитання і відповіді</link
+></member>
+	    <member
+><link linkend="reference.widgets"
+>Довідник: віджети</link
+></member>
+	  </simplelist>
+	</entry>
+      </row>
+    </tbody>
+  </tgroup>
+</informaltable>
+ 
+</sect1>
+
+  
+</chapter>

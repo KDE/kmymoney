@@ -1,0 +1,1126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.impexp">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+  </authorgroup>
+  <date
+>3 de juliol de 2011</date>
+  <releaseinfo
+>4.6</releaseinfo>
+</chapterinfo>
+
+<title
+>Importar i exportar</title>
+
+<sect1 id="details.impexp.gnucash">
+<sect1info>
+  <author
+>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
+</sect1info>
+
+<title
+>Importador del &gnucash;</title>
+
+<sect2>
+<title
+>Fitxers del &gnucash;</title>
+
+<para
+>L'importador del &gnucash; per al &kmymoney; fa servir la lectura directa de fitxers estàndard (&XML;) produïts per les versions 1.8 i 2.0 del &gnucash;. No s'admeten les següents: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Importació de dades de la base de dades (Postgres).</para
+></listitem>
+  <listitem
+><para
+>Importació de fitxers «multi-book».</para
+></listitem>
+  <listitem
+><para
+>Importació a dins d'un fitxer existent del &kmymoney;.</para
+></listitem>
+  <listitem
+><para
+>Importació de les característiques específiques de negocis petits (empleats, factures, &etc;)</para
+></listitem>
+  <listitem
+><para
+>Exportació a fitxers del &gnucash;.</para
+></listitem>
+</itemizedlist>
+
+<para
+>La importació probablement només funcionarà correctament si es presenta un fitxer vàlid. Abans d'intentar importar, es recomana executar l'element de menú <menuchoice
+><guimenu
+>Accions</guimenu
+><guimenuitem
+>Comprova i repara-ho tot</guimenuitem
+></menuchoice
+> del &gnucash;. </para>
+
+<para
+>Els fitxers es poden obrir especificant el nom del fitxer a la línia d'ordres (<command
+>kmymoney &lt;camí al fitxer&gt;</command
+>), o per mitjà dels elements de menú <menuchoice
+> <shortcut
+><keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Obre</guimenuitem
+> </menuchoice
+> o <menuchoice
+> <guimenu
+>Fitxer</guimenu
+><guisubmenu
+>Importa</guisubmenu
+> </menuchoice
+> del &kmymoney;. </para>
+
+<para
+>La similitud entre els dos productes vol dir que es podran importar moltes dades del dia a dia de manera directa. No obstant això, hi ha algunes àrees on sorgeixen diferències, i es proporcionen diverses opcions per a tractar-les. Les seccions següents descriuran algunes d'aquestes diferències. Entendre-les hauria de conduir a una importació més fluida. </para>
+</sect2>
+
+<sect2>
+<title
+>Similituds, diferències i terminologia</title>
+
+<sect3>
+<title
+>Ús en negocis petits</title>
+
+<para
+>Cal assenyalar que el &kmymoney; és un gestor per a les finances <emphasis
+>personals</emphasis
+> i, com a tal, no admet directament cap de les característiques comercials del &gnucash;, com taules d'impostos, nòmines i seguiment de lots. Els comptes a Pagar o a Cobrar que es trobin en un fitxer s'importaran com a comptes de Passiu o Actiu, respectivament. </para>
+</sect3>
+
+<sect3>
+<title
+>Comptes</title>
+
+<sect4>
+<title
+>Tipus de compte</title>
+
+<para
+>Per a ambdós productes, el nivell més alt de l'estructura al fitxer és el compte. El &kmymoney; admet 5 tipus principals de compte: Actiu, Passiu, Ingressos, Despeses i Accions, cadascun dels quals pot tenir diversos subtipus, &pex;, Compte corrent, Targeta de crèdit, &etc; El &kmymoney; inclou un compte «estàndard» per a cadascun d'aquests cinc tipus, i tots els altres comptes es mantindran subordinats a un d'aquests. El &kmymoney; imposa més coherència (o menys flexibilitat, depenent del vostre punt de vista) entre els tipus de compte que el &gnucash;, i l'importador corregirà qualsevol incoherència que detecti. Això pot donar com a resultat una estructura del compte lleugerament diferent, encara que això es podrà modificar després, dins del que és raonable, quan es completi la importació. </para>
+</sect4>
+
+<sect4>
+<title
+>Categories</title>
+
+<para
+>El &kmymoney; fa servir el terme Categoria per a denotar un compte d'un tipus per a Ingressos o Despeses. A diferència del &gnucash;, aquestes no es consideren com a comptes del «llibre major» i no s'admet la introducció de la carpeta d'operacions dins de les categories. Les assignacions es realitzaran durant la introducció de les operacions en altres tipus de compte. </para>
+</sect4>
+
+<sect4>
+<title
+>Estructura i reserves de lloc</title>
+
+<para
+>El &gnucash; admet l'ús de comptes amb reserva de lloc. En efecte, aquests només són de lectura, en els quals no es podran introduir operacions, però que funcionen de manera anàloga a les carpetes en una estructura de carpetes, com a titular d'altres comptes. Encara que el &kmymoney; no admeti aquesta característica com a tal, sí que proporciona una relació entre el compte pare/fill, de manera que l'importador simularà reserves de lloc creant comptes buits. </para>
+</sect4>
+
+<sect4>
+<title
+>Vincular el tipus de compte</title>
+
+<informaltable frame='all'>
+<tgroup cols='2' align='left' colsep='1' rowsep='1'>
+<thead>
+  <row>
+    <entry
+>Tipus del &gnucash;</entry
+><entry
+>Tipus del &kmymoney;</entry>
+  </row>
+</thead>
+<tbody>
+  <row>
+    <entry
+><literal
+>BANK</literal
+></entry
+><entry
+><literal
+>Checking</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>CHECKING</literal
+></entry
+><entry
+><literal
+>Checking</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>SAVINGS</literal
+></entry
+><entry
+><literal
+>Savings</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>ASSET</literal
+></entry
+><entry
+><literal
+>Asset</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>CASH</literal
+></entry
+><entry
+><literal
+>Cash</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>CURRENCY</literal
+></entry
+><entry
+><literal
+>Cash</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>MONEYMRKT</literal
+></entry
+><entry
+><literal
+>MoneyMarket</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>STOCK</literal
+></entry
+><entry
+><literal
+>Stock</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>MUTUAL</literal
+></entry
+><entry
+><literal
+>Stock</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>EQUITY</literal
+></entry
+><entry
+><literal
+>Equity</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>LIABILITY</literal
+></entry
+><entry
+><literal
+>Liability</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>CREDIT</literal
+></entry
+><entry
+><literal
+>CreditCard</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>INCOME</literal
+></entry
+><entry
+><literal
+>Income</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>EXPENSE</literal
+></entry
+><entry
+><literal
+>Expense</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>RECEIVABLE</literal
+></entry
+><entry
+><literal
+>Asset</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>PAYABLE</literal
+></entry
+><entry
+><literal
+>Liability</literal
+></entry>
+  </row>
+</tbody>
+</tgroup>
+</informaltable>
+</sect4>
+</sect3>
+
+<sect3>
+<title
+>Operacions i Desglossaments</title>
+
+<sect4>
+<title
+>Operacions equilibrades</title>
+
+<para
+>Igual com el &gnucash;, les dades s'introdueixen en forma d'operacions, cadascuna de les quals generalment constarà de 2 o més entrades desglossades. De fet, les operacions vàlides del &gnucash; sempre contindran almenys 2 desglossaments, i per a complir amb l'estàndard de comptabilitat de doble entrada del &gnucash;, aquestes hauran d'estar en equilibri monetari (&ead;, hauran d'equilibrar-se a zero). El &kmymoney; encoratja a seguir aquest estàndard, però no el força, qualsevol operació importada que no estigui equilibrada es marcarà a la vista del llibre major com un problema. </para>
+</sect4>
+
+<sect4>
+<title
+>Beneficiaris</title>
+
+<para
+>El &kmymoney; prefereix que totes les operacions tinguin un Beneficiari (un terme genèric que abasta tant als beneficiaris com als pagadors) i, a diferència del &gnucash;, es manté una llista d'aquests beneficiaris. L'importador generarà els noms dels beneficiaris des del camp Descripció de l'operació del &gnucash;. </para>
+</sect4>
+
+<sect4>
+<title
+>Transferències</title>
+
+<para
+>El &kmymoney; fa servir el terme Transferència per a descriure una operació que no involucra una Categoria, sinó que només transfereix diners entre comptes d'Actius i/o Passius. </para>
+</sect4>
+
+<sect4>
+<title
+>Conciliació</title>
+
+<para
+>El &kmymoney; proporciona una funció per a la conciliació dels comptes similar a la del &gnucash;, i s'importarà l'estat de l'operació corresponent. </para>
+</sect4>
+</sect3>
+
+<sect3>
+<title
+>Mercaderies</title>
+
+<para
+>El &gnucash; fa servir el terme Mercaderia per a cobrir tant els actius en divises com els no monetaris. Aquests es tracten per separat al &kmymoney;. </para>
+
+<sect4>
+<title
+>Divises</title>
+
+<para
+>El &kmymoney; té una implementació incorporada per a tots els tipus de divisa estrangera. El &kmymoney; també requereix que l'usuari especifiqui una divisa base, la qual serà la divisa predeterminada per als comptes nous. L'importador intentarà determinar la divisa base més probable, tot i que aquesta opció pot ser rebutjada a favor d'una alternativa. </para>
+
+<note
+><para
+>En l'actualitat, el &kmymoney; no admet comptes denominats en divises «difuntes» (excepte aquelles substituïdes per l'euro). Actualment, abans d'importar serà necessari eliminar aquests comptes del fitxer del &gnucash;. Esperem millorar aquesta situació en un llançament futur). </para
+></note>
+</sect4>
+
+<sect4 id="gncsecurities">
+<title
+>Títols i Inversions</title>
+
+<para
+>El &kmymoney; anomena Títols als actius no monetaris (normalment accions i bons), i representen la principal diferència entre els dos productes, ja que el &kmymoney; requereix que qualsevol compte denominat en un títol estigui subordinat a un compte d'Inversió. Això es descriu amb més detall al capítol sobre les <link linkend="details.investments"
+>Inversions</link
+>. Tot i que els usuaris poden haver implementat aquesta relació, el &gnucash; no imposa cap estructura definida, de manera que l'importador no podrà detectar-la i realitzar una conversió automàtica. Per tant, hi ha tres opcions disponibles: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Crearà un compte d'inversió separat per a cada valor, amb el mateix nom que el títol.</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Crearà un únic compte d'inversió que actuarà com a «pare» per a tots els comptes de títols.</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Crearà diversos comptes d'Inversió i els hi assignarà els títols segons ho indiqui l'usuari.</para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Dependrà completament dels requisits de l'usuari quina d'aquestes opcions és rellevant en cada situació i, en alguns casos, podria ser necessària la reestructuració manual dels comptes després de la importació. </para>
+</sect4>
+
+<sect4>
+<title
+>Preus i tipus de canvi</title>
+
+<para
+>S'importaran els preus dels títols i els tipus de canvi per a la divisa que es mostren a l'Editor de preus del &gnucash;. A més, les entrades dels preus i taxes es generaran a partir de totes les operacions que involucrin títols i múltiples divises. </para>
+</sect4>
+
+<sect4 id="details.impexp.gncquotes">
+<title
+>Cotitzacions en línia</title>
+
+<para
+>Per a obtenir la cotització en línia dels preus i els tipus de canvi, el &gnucash; utilitza un paquet anomenat <literal
+>Finance::Quote</literal
+>. Les versions recents del &kmymoney; contenen una implementació d'aquest paquet per a obtenir la cotització dels valors, i s'emprarà de manera predeterminada en importar les dades. No obstant això, podreu optar per a convertir al mètode natiu utilitzat pel &kmymoney;, el qual es cobreix amb més detall a les <link linkend="details.investments.onlinequotes"
+>cotitzacions en línia</link
+>. </para>
+
+<para
+>Si trieu fer-ho, el diàleg següent us permetrà seleccionar una font de preu «nativa» del &kmymoney;, o una font definida per l'usuari, per a cada compte per al qual es requereixen cotitzacions en línia. No obstant això, el símbol borsari del valor s'importarà sense canvis. Atès que aquest símbol segurament serà diferent als dos paquets, l'haureu d'editar manualment després per a completar el procés d'importació. Les actualitzacions futures dels tipus de canvi no utilitzaran <literal
+>Finance::Quote</literal
+>, i utilitzaran sempre el mètode de recuperació natiu. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="gnucash-select_price_source.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect4>
+</sect3>
+
+<sect3 id="gncschedules">
+<title
+>Operacions planificades</title>
+
+<para
+>El &kmymoney; no reté la separació realitzada al &gnucash; entre les operacions de plantilla i la seva freqüència d'ocurrència. Les dades de l'operació es duplicaran si s'utilitza la mateixa plantilla a planificacions diferents, però és probable que això no sigui de gran importància. </para>
+
+<sect4>
+<title
+>Tipus de planificacions</title>
+
+<para
+>El &kmymoney; classificarà totes les planificacions com un dels tres tipus, Factures, Ingressos o Transferències. Atès que el &gnucash; no fa aquesta distinció, l'importador intentarà determinar la classificació dels comptes i la direcció dels moviments de diners. Podria ser que en alguns casos es facin suposicions incorrectes, i aquestes necessitaran una correcció manual. </para>
+</sect4>
+
+<sect4>
+<title
+>Planificacions sospitoses</title>
+
+<para
+>Algunes característiques de les operacions planificades del &gnucash; no estan disponibles al &kmymoney;, de manera que l'importador intentarà en cada cas arribar a un compromís raonable en convertir les dades. Aquestes operacions es marcaran com a sospitoses i l'usuari tindrà l'opció d'editar-les directament durant el procés d'importació. Exemples de situacions que poden causar això són: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Alguns intervals de freqüència admesos al &gnucash; que actualment no estan disponibles Al &kmymoney;.</para>
+  </listitem>
+
+  <listitem>
+    <para
+>El &kmymoney; no admet l'ús de fórmules i variables als camps d'import.</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Casos complexos que encara no s'han identificat per a la importació.</para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Tot i els millors esforços, és possible que, a causa de les moltes opcions involucrades, una operació planificada pugui causar un error fatal dins del &kmymoney;. Si sembla que està succeint aquest tipus de problema, l'importador ofereix l'opció de descartar totes les planificacions sospitoses. </para>
+</sect4>
+</sect3>
+
+<sect3>
+<title
+>Informes</title>
+
+<para
+>El &kmymoney; proporciona una àmplia selecció d'informes configurables, la qual es descriu amb més detall als <link linkend="details.reports"
+>Informes</link
+>. No obstant això, aquests no coincidiran necessàriament amb els informes disponibles al &gnucash;. </para>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Seleccionar opcions de l'importador</title>
+
+<para id="details.impexp.gncoptions">
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="gnucash-import_options.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect3>
+<title
+>Tractament de les inversions</title>
+
+<para
+>Vegeu <link linkend="gncsecurities"
+>Títols i Inversions</link
+> més amunt. </para>
+</sect3>
+
+<sect3>
+<title
+>Cotitzacions en línia</title>
+
+<para
+>Desactiveu-les si voleu utilitzar el mètode natiu per a les futures cotitzacions en línia dels preus. </para>
+
+<para
+>Vegeu <link linkend="details.impexp.gncquotes"
+>Cotitzacions en línia</link
+> més amunt. </para>
+</sect3>
+
+<sect3>
+<title
+>Operacions planificades</title>
+
+<para
+>Vegeu <link linkend="gncschedules"
+>Operacions planificades</link
+> més amunt. </para>
+</sect3>
+
+<sect3>
+<title
+>Opcions de la descodificació</title>
+
+<para
+>Si el vostre idioma nadiu s'escriu en lletres o símbols que són diferents dels emprats als idiomes «llatins» (&ead;, generalment d'Europa occidental), aquests es representaran d'una manera especial («codificats») al fitxer del &gnucash;. Si aquestes lletres no es mostren correctament a la pantalla, s'hauran de descodificar. Actualment, no sempre és possible detectar amb precisió quina forma de descodificació s'ha d'utilitzar, de manera que és possible que haureu d'establir aquesta opció i seleccionar una entrada des de la llista. En general, el primer element de la llista serà el que es consideri apropiat per a la configuració regional (&ead;, el país i idioma que es va seleccionar com a natiu quan vàreu instal·lar el sistema operatiu), de manera que primer s'haurà de provar això. Com que el procés d'importació no sobreescriurà el fitxer del &gnucash;, podreu experimentar amb qualsevol d'aquestes seleccions. </para>
+</sect3>
+
+<sect3>
+<title
+>Opcions de notes d'operacions</title>
+
+<para
+>Sota algunes condicions d'ús, les operacions no desglossades del &gnucash; podrien contenir dades residuals, sovint incorrectes, dades de recordatori que normalment no són visibles per l'usuari. No obstant això, quan s'importa al &kmymoney;, a causa de les diferències de visualització, aquestes dades es podran fer visibles. Sovint, aquestes operacions tindran un camp Notes que descriu la finalitat real de l'operació. Si se selecciona aquesta opció, aquestes notes, si estan presents, s'utilitzaran per a sobreescriure les dades estranyes de recordatori. </para>
+</sect3>
+
+<sect3>
+<title
+>Opcions de depuració</title>
+
+<para
+>Aquestes només s'han d'emprar en el cas de problemes amb la importació. Si els teniu, també n'haureu d'informar a la llista de desenvolupadors &devlist; del &kmymoney;. Recordeu que les traces produïdes per aquestes opcions podrien contenir dades de caràcter confidencial, i que s'haurà d'emprar l'opció <guilabel
+>Fes anònimes les dades</guilabel
+> si es posen a disposició pública. </para>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Informe de la importació</title>
+
+<para
+>Amb la finalitat de processar, l'importador produirà un informe que mostrarà el nombre de les diferents entitats processades i qualsevol error o anomalia que s'hagi trobat. Aquest informe es mostrarà en pantalla i es podrà desar a un fitxer per a una revisió posterior. Un informe complet pot contenir les seccions següents: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Enregistrament dels comptes</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Inconsistències als tipus de compte i les accions preses</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Detalls de les planificacions sospitoses</para>
+  </listitem>
+</itemizedlist>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="gnucash-report.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="details.impexp.qifimp">
+<sect1info>
+  <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+</sect1info>
+
+<title
+>Importador de QIF</title>
+
+<sect2>
+<title
+>El format QIF es considera nociu</title>
+
+<para
+>En termes generals, s'haurà d'evitar el format QIF sempre que sigui possible. És una mala elecció per a transportar dades financeres. Entre altres coses, el QIF pateix aquests problemes: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Manca d'un format estandarditzat: diferents versions del mateix programa imparteixen significats diferents al mateix element.</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Manca d'un identificador d'operació: pel fet que no hi ha un número d'ID associat amb cada operació, la coincidència de les operacions duplicades és, en el millor dels casos, casual.</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Falta d'expressivitat: la gramàtica és realment simple i no pot representar la profunditat de la informació financera que es troba a l'entorn financer actual.</para>
+  </listitem>
+</itemizedlist>
+
+<para
+>En general, aquesta és la raó per la qual Intuit va deixar d'admetre l'entrada QIF amb el <application
+>Quicken</application
+> de 2005. Si teniu l'opció d'obtenir les dades d'una altra manera, com OFX, trieu sempre aquesta opció. </para>
+</sect2>
+
+<sect2>
+<title
+>Com importar un fitxer QIF</title>
+
+<para
+>Per a importar un fitxer QIF, primer assegureu-vos que teniu obert un fitxer vàlid del &kmymoney;. Després seleccioneu l'element de menú <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guisubmenu
+>Importa</guisubmenu
+> <guimenuitem
+>QIF...</guimenuitem
+> </menuchoice
+>. </para>
+	
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifopen.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>El diàleg resultant demanarà un nom de fitxer QIF que permeti localitzar el fitxer fent clic al botó <guibutton
+>Explora</guibutton
+>. </para>
+
+<para
+>A més, el &kmymoney; diferenciarà entre la importació d'un fitxer d'extracte bancari i les dades històriques exportades des d'una altra aplicació. De manera predeterminada és la importació d'un fitxer d'extracte bancari. En cas que esteu important dades des de l'aplicació anterior de gestor per a les finances personals, seleccioneu l'opció adequada. </para>
+
+<para
+>En general, el perfil QIF predeterminat hauria de funcionar amb les dades QIF. En alguns casos, podria ser necessari utilitzar un perfil QIF modificat. Consulteu la <link linkend="details.impexp.qifimp.profile"
+>secció següent</link
+> per a més detalls sobre aquest tema. </para>
+
+<para
+>Feu clic a <guibutton
+>Importa</guibutton
+> per a importar el fitxer QIF. </para>
+
+<para
+>El &kmymoney; començarà a escanejar el fitxer per a determinar els formats emprats per a representar les dates i números. En cas que no pugui determinar un format de data sense ambigüitat, el &kmymoney; demanarà a l'usuari que en triï un de la llista de formats de data possibles. </para>
+
+<para
+>A continuació, el &kmymoney; importarà les dades i crearà tots els objectes necessaris, com la informació del beneficiari, registres de comptes i les categories, i la informació sobre el preu dels valors. Sempre que sigui possible, les operacions existents es compararan amb la informació importada. Es mostrarà una barra de progrés i s'actualitzarà durant el procés d'importació. </para>
+
+<para
+>En cas que el &kmymoney; no pugui detectar el nom del compte que s'ha d'importar, se li demanarà a l'usuari que seleccioni el compte per al qual s'han d'importar les dades. Si el compte encara no existeix al fitxer, es podrà crear un compte nou fent clic a <guibutton
+>Crea</guibutton
+>. </para>
+
+<para
+>Al final de la importació, el &kmymoney; mostrarà una finestra amb les estadístiques d'importació dels extractes. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Estadístiques dels extractes</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qif_report.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Estadístiques dels extractes</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Després d'importar, totes les operacions importades es mostraran amb un fons groc a la vista del llibre major. En cas que el &kmymoney; hagi pogut fer coincidir una operació importada amb una operació ja existent, el fons es mostrarà en verd clar. </para>
+
+<para
+>El pas següent és verificar les dades importades i acceptar-les. Aquest és un procés general i també s'aplica a les importacions des d'altres fonts. Es descriu en una secció separada d'aquest document. </para>
+
+<note>
+<para
+>Els colors emprats per a marcar les operacions importades i coincidents són personalitzables i poden ser diferents al vostre entorn. </para>
+</note>
+</sect2>
+
+<!--
+<sect2>
+<title
+>Accepting the imported transactions</title>
+<para>
+  
+	When &kmymoney; has finished importing the QIF transactions the account will be shown with the imported transactions listed in Yellow.
+</para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Imported transactions</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifimportverify.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Imported transactions</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+	Some of your transactions may be flashing red in the ledger.  
+	This is because they need to be assigned a category.  
+	The importer was not able to automatically assign a category based on your past transaction history.
+</para>
+
+<para
+>	
+	Transaction data can be edited or even deleted if needed.  To edit a transaction simply double click on the entry or hit enter when the entry is highlighted.  Once finished click on <guibutton
+>OK</guibutton
+> to accept the imported transactions or <guibutton
+>Cancel</guibutton
+> to remove the imported transactions.
+</para>
+
+</sect2>
+
+<sect2
+><title
+>Importing Investments</title>
+
+<para>
+	Please note that if you are importing a file with investment transactions, those investments must first exist in your &kmymoney; file.
+	The trading symbol is used to match, so please ensure that the symbol in &kmymoney; is exactly the same as the one in the file you're importing.
+</para>
+</sect2>
+-->
+
+<sect2 id="details.impexp.qifimp.profile">
+<title
+>Configurar un perfil QIF</title>
+
+<para
+>A causa que no existeix un format universalment estàndard per a un fitxer QIF, diferents proveïdors s'han pres la llibertat amb el format i han introduït els seus propis matisos. El perfil QIF permet al &kmymoney; conèixer les peculiaritats del fitxer. Per a editar un perfil QIF existent o crear-ne un de nou, premeu el botó <guibutton
+>Nou</guibutton
+> en el diàleg Importació QIF, al costat del selector de perfil. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifimport-qifprofileeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Editor del perfil QIF</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<note>
+<para
+>Les versions anteriors del &kmymoney; solien tenir una pestanya per a les especificacions de la data i import. Ara, el &kmymoney; determinarà aquestes opcions escanejant el fitxer. Si no pot resoldre totes les opcions, interrogarà a l'usuari durant la importació. </para>
+</note>
+<!--
+<para>
+	The most commonly changed thing between QIF implementations is the date format.  
+	So if this is the first time you're importing a QIF file, spend a few moments to figure out what format the dates are in, and set the QIF Profile accordingly.  
+	See the discussion below on apostrophe format for more details.
+</para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifimport-qifprofiledate.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>QIF Profile Date</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+</sect2>
+
+<sect2
+><title
+>Apostrophe format</title>
+
+<para>
+	Many common QIF writers use a 2-digit representation for the year. 
+	This is ambiguous, because the importer cannot know which century the date belongs in.
+	To make things even more complicated, QIF files will often used an apostrophe as a year separator to indicate that the date belongs in the OTHER century from the default.
+</para>
+<para>
+	For example, if the default century is 1900-1999, the date 12/31/95 would mean 1995.  The date 12/31'05 would mean 2005.
+</para>
+<para>
+	Because the QIF format is not standardized, it's impossible to know which century is desired.
+	This is why you have to explicitly state it in the QIF profile.
+	You do this by specifying which century is intended when an apostrophe is found.
+	In the example above, you would set the Apostrophe Format to &quot;2000-2099&quot;, so dates with an apostrophe will be interpreted as being &gt; year 2000.
+	In this case, dates without an apostrophe will be treated as being in the 1900's.
+</para>
+-->
+</sect2>
+
+<sect2
+><title
+>Coincidència de les operacions</title>
+
+<para
+>Com s'ha assenyalat anteriorment, un dels principals inconvenients del format QIF és la manca d'un identificador únic per a cada operació. Per tant, si importeu un fitxer QIF i algunes de les operacions ja es troben al llibre major, podríeu obtenir duplicats. El &kmymoney; ho intentarà solucionar cercant les operacions similars a les que ja teniu. Si troba quelcom que s'assembla a la mateixa operació, coincidirà amb el duplicat aparent. </para>
+
+<para
+>Això pot ser un problema si teniu operacions que s'assemblen massa, però que en realitat són diferents. En aquest cas, podreu no fer-les coincidir més endavant a la vista del llibre major. </para>
+</sect2>
+
+<sect2>
+<title
+>Escriure un filtre d'importació</title>
+
+<para
+>A vegades podríeu tenir dades en un format personalitzat, com a valors separats per comes (CSV) o alguna cosa més exclusiva per a la vostra situació. A partir de la versió 4.6, el &kmymoney; inclou un connector importador de CSV, però encara podreu importar altres tipus de fitxers al &kmymoney; utilitzant un filtre d'importació QIF. Un filtre és un programa personalitzat que escriu què es prendrà com a entrada des del fitxer especial i produirà un fitxer QIF com a sortida. Pot ser un script en Shell, un script en Perl, un programa compilat escrit en C/C++ o qualsevol altra cosa que pugueu somiar, sempre que el sistema pugui executar-lo. </para>
+
+<para
+>Per a emprar-lo, editeu el perfil QIF preferit i seleccioneu la pestanya <guilabel
+>Filtre</guilabel
+>. Introduïu la ubicació del programa de filtre on se us demani. Després, cada vegada que feu una importació QIF utilitzant aquest perfil, el fitxer que seleccioneu per a importar s'executarà primer a través del filtre. </para>
+
+<para
+>Un problema habitual és convertir una llista de valors separats per comes en un fitxer QIF. Aquest és un cas del llibre de text per a l'eina <command
+>awk</command
+>. Creeu un script anomenat <filename
+>csv2qif.awk</filename
+>, amb les dues línies següents com a contingut: </para>
+
+<programlisting
+>BEGIN { FS=&quot;,&quot;; print &quot;!Type:Bank&quot; }
+
+        { print &quot;D&quot;$1; print &quot;T&quot;$2; print &quot;N&quot;$3; print &quot;P&quot;$4; print &quot;M&quot;$5; print &quot;^&quot; }
+</programlisting>
+
+<para
+>Després, canvieu les claus QIF (D,T,N,P,M) perquè coincideixin amb l'ordre de les dades CSV. Establiu el filtre d'entrada a <userinput
+>awk -f csv2qif.awk</userinput
+>. </para>
+
+<para
+>De vegades sorgirà un altre problema amb la codificació dels fitxers QIF. El &kmymoney; espera que els fitxers estiguin codificats en UTF-8. Si el fitxer està codificat en una altra cosa, podria ser útil convertir-lo a UTF-8. Per exemple, per a convertir-lo des de la iso-8859-1, establiu el filtre d'entrada a <userinput
+>recode iso-8859-1..utf-8</userinput
+>. </para>
+
+</sect2>
+<sect2>
+<title
+>Extensions especials QIF del &kmymoney;</title>
+
+<para
+>Com ja s'ha mencionat, un dels principals inconvenients del format QIF és la manca d'un identificador únic per a cada operació. Si esteu escrivint el propi creador de fitxers QIF (o filtre, com s'ha descrit anteriorment), podreu superar aquest problema. El &kmymoney; admet el camp «#». L'importador l'interpretarà com un ID únic d'operació i no tindrà en compte el registre si l'operació ja es troba al sistema. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.impexp.qifexp">
+<title
+>Exportador a QIF</title>
+<para
+>Per a exportar un dels comptes a un fitxer QIF, escolliu l'element de menú <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guisubmenu
+>Exporta</guisubmenu
+> <guimenuitem
+>QIF...</guimenuitem
+></menuchoice
+>. Se us demanarà a quin compte únic exportar, a quin fitxer exportar i quin perfil QIF utilitzar. </para>
+
+<note
+><para
+>De moment, l'exportador a QIF no gestiona l'exportació de les inversions. </para
+></note>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifimport-export.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Exportació QIF</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect1>
+
+<sect1 id="details.impexp.ofx">
+<sect1info>
+  <author
+>&Ace.Jones; &Ace.Jones.mail;</author>
+  <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+</sect1info>
+<title
+>Connector de l'importador des d'OFX</title>
+
+<sect2>
+<title
+>Obtenir el connector</title>
+
+<para
+>El &kmymoney; importarà els fitxers OFX sense problemes. No obstant això, aquesta funcionalitat no està integrada al nucli del programa. Haureu d'obtenir i instal·lar el connector d'importació OFX. Una vegada estigui instal·lat, l'ordre per a importar els fitxers OFX apareixerà automàticament al submenú <menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guisubmenu
+>Importa</guisubmenu
+></menuchoice
+>. </para>
+
+<para
+>Cal tenir en compte que moltes versions preempaquetades del &kmymoney; s'han creat amb l'importador OFX ja inclòs o disponible com un paquet separat. Si l'importador OFX no sembla estar instal·lat a la versió, el primer lloc per a comprovar és al mateix on vàreu obtenir el paquet base del &kmymoney;. </para>
+
+<para
+>Si heu instal·lat des de RPM, el connector d'importació OFX estarà contingut dins del paquet kmymoney-ofx. Hauria d'estar disponible des de qualsevol font on hàgiu obtingut el paquet base del &kmymoney;. Si l'heu creat a partir del codi font, tot el que haureu de fer és tenir al sistema les capçaleres i biblioteques de desenvolupament libOFX 0.9. El procés de compilació del &kmymoney; les detectarà i compilarà el connector. En el moment del llançament del &kmymoney; 4.6, l'última versió de libofx era 0.9.4, la qual també és la versió mínima requerida. </para>
+
+<para
+>Si teniu problemes per a compilar el &kmymoney; i esteu segur que teniu instal·lada la versió correcta de la libOFX, contacteu amb la llista de desenvolupadors &devlist; per a obtenir ajuda. Afegiu-hi una còpia del fitxer <filename
+>config.log</filename
+>, comprimit primer mitjançant el <command
+>gzip</command
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Què és OFX?</title>
+
+<para
+>OFX vol dir <quote
+>Open Financial Exchange</quote
+> (-intercanvi obert de finances-). Segons el <ulink url="https://www.ofx.net/"
+>lloc web de l'OFX</ulink
+>, <quote
+>és una especificació unificada per a l'intercanvi electrònic de dades financeres entre institucions financeres, empreses i consumidors a través d'Internet. OFX no és una institució financera.</quote
+> L'especificació defineix formats per a la transferència de dades financeres tant per a l'intercanvi amb fitxers, així com directe. </para>
+
+<para
+>Encara que l'estàndard és molt més complet i robust que el QIF, encara hi ha variacions, depenent de la implementació específica emprada per qualsevol institució. Els fitxers OFX poden tenir una extensió <quote
+>OFX</quote
+> o <quote
+>QFX</quote
+> (en majúscules o minúscules). Això no implica cap diferència particular al contingut. L'especificació es basa en &XML;, de manera que els fitxers es podran llegir en qualsevol editor de text, però com els espais en blanc no són rellevants per al contingut en si, algunes implementacions no n'empren cap, la qual cosa dificulta molt la lectura d'un humà. </para>
+
+<para
+>Un altre lloc amb bona informació és <ulink url="https:/ofxhome.com/"
+>OFX Home</ulink
+>. Mantenen un directori d'institucions financeres que donen suport OFX. Això pot ser útil si teniu problemes per a configurar la <link linkend="details.impexp.ofxdirectconnect"
+>connexió directa OFX</link
+>. També tenen un fòrum per al debat sobre els temes OFX. </para>
+</sect2>
+
+<sect2>
+<title
+>Importar un fitxer OFX</title>
+
+<para
+>La forma més bàsica d'importar un fitxer OFX és triar l'importador des de la barra de menús. Des de l'element de menú <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guisubmenu
+>Importa</guisubmenu
+> <guimenuitem
+>OFX...</guimenuitem
+></menuchoice
+>. Si no es mostra OFX, és que no teniu instal·lat correctament el connector Importador OFX. Consulteu la secció anterior. </para>
+
+<para
+>El primer que farà l'importador és demanar-vos a quin compte importar les operacions. Si hi ha operacions d'un compte al fitxer, aquesta pregunta es farà múltiples vegades. </para>
+
+<para
+>Després d'importar, algunes de les operacions podrien mostrar-se al llibre major amb un signe d'exclamació en un triangle groc. Això es deu al fet que se'ls ha d'assignar una categoria. L'importador no ha pogut assignar-la automàticament en funció de l'historial de les operacions anteriors. Podreu editar cada operació al llibre major per a assignar una categoria, i s'eliminarà la marca. </para>
+
+<para
+>Recordeu que aquesta secció descriu l'importador OFX <quote
+>natiu</quote
+>. Si l'heu instal·lat, els fitxers OFX també es podran importar utilitzant el connector Importador d'AqBanking. Recordeu que els dos importadors es comporten de manera lleugerament diferent, i estan escrits i mantinguts per dos desenvolupadors diferents. </para>
+</sect2>
+
+<sect2>
+<title
+>Importar les inversions</title>
+
+<para
+>Cal tenir en compte que si esteu important un fitxer amb operacions d'inversió, aquestes inversions primer hauran d'existir al fitxer del &kmymoney;. S'utilitza el símbol comercial per a aparellar, així que assegureu-vos que el símbol al &kmymoney; sigui exactament el mateix que al fitxer que esteu important. </para>
+</sect2>
+
+<sect2 id="details.impexp.webconnect">
+<title
+>Connexió web</title>
+
+<para
+>La forma més fàcil d'importar un fitxer OFX és configurar la Connexió web. Visiteu el lloc web del banc i feu clic sobre un enllaç per a baixar un fitxer OFX. El navegador us demanarà quin programa voleu fer servir per a obrir-lo. Apunteu el navegador cap al &kmymoney;. Després s'importarà el fitxer OFX baixat al fitxer del &kmymoney; que heu obert recentment. També podreu canviar les associacions de fitxer de l'entorn d'escriptori i fer que el &kmymoney; obri automàticament el fitxer OFX. </para>
+
+<para
+>Si necessiteu importar el fitxer OFX a un altre fitxer del &kmymoney;, primer carregueu aquest fitxer al &kmymoney; i després visiteu el lloc web del banc. </para>
+</sect2>
+
+<sect2 id="details.impexp.ofxdirectconnect">
+<title
+>Connexió directa</title>
+
+<para
+>Ara, la connexió directa OFX està admesa al &kmymoney;. Això us permetrà comunicar-vos directament amb el banc per a obtenir extractes del compte. En el futur, hi haurà més ajuda escrita, i això es traslladarà a la seva pròpia secció. </para>
+
+<para
+>Per a habilitar aquesta característica, haureu de compilar el &kmymoney; amb l'opció <userinput
+><option
+>--enable-ofxbanking</option
+></userinput
+> (ara serà el valor predeterminat). </para>
+
+<para
+>Cal tenir en compte: molts bancs requereixen registrar-se per separat, us donaran una contrasenya o PIN per separat i, fins i tot podrien cobrar una tarifa per a aquest servei. Cap banc admet directament el &kmymoney;. Haureu de dir-los que voleu realitzar operacions bancàries directament des del <application
+>MS Money</application
+> o <application
+>Quicken</application
+>. </para>
+
+<para
+>El primer pas és configurar cada compte per al qual voleu baixar extractes. Aneu a la vista dels comptes, feu clic dret sobre el compte que voleu configurar i trieu <guimenuitem
+>Vincula amb un compte en línia...</guimenuitem
+>. En cas que hi hagi més d'un connector de banca en línia al sistema, se us demanarà quin emprar. Per al mètode OFX intern, seleccioneu <guimenuitem
+>OFX del &kmymoney;</guimenuitem
+>. Es baixarà una llista de bancs des d'Internet i un assistent us guiarà a través de l'elecció d'un banc, introduïu el nom d'usuari i la contrasenya, i seleccioneu un compte. Si trobeu que el banc no es troba a la llista, encara es podrà emprar l'opció manual. És possible que el banc us pugui proporcionar els paràmetres requerits, o potser hàgiu d'investigar una mica per a trobar-los. </para>
+
+<note>
+  <para
+>La configuració de la Connexió directa OFX de vegades pot ser un desafiament, especialment perquè la implementació a la majoria de les institucions no proporciona prou detalls als missatges d'error. Una qüestió particular a tenir en compte és que moltes institucions requereixen que es canviï la contrasenya la primera vegada que hi accediu en línia utilitzant aquest mètode. Malauradament, en aquest moment, la biblioteca que utilitza el &kmymoney; (libofx) no té una forma interactiva de canviar una contrasenya. En alguns casos, és possible obtenir suport tècnic des de la institució per a canviar la contrasenya. Fins que puguem expandir aquesta secció amb informació més detallada per a la resolució de problemes, si teniu problemes perquè això funcioni, sol·liciteu ajuda a la llista de desenvolupadors &devlist; del &kmymoney;. </para>
+</note>
+
+<para
+>Una vegada es tingui un compte configurat amb la banca en línia, aneu al llibre major d'aquest compte. Després, trieu l'element de menú <menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Actualitza el compte...</guimenuitem
+></menuchoice
+>. Aquest connectarà amb el banc i baixarà un extracte dels darrers 60 dies. </para>
+
+<note>
+  <para
+>A la versió del &kmymoney; anterior a la 4.6, el nom del beneficiari sempre es prenia del camp <literal
+>PAYEEID</literal
+>. A partir de la versió 4.6, el nom del beneficiari podrà basar-se al camp <literal
+>PAYEEID</literal
+>, <literal
+>NAME</literal
+> o <literal
+>MEMO</literal
+> en l'operació OFX. Podreu configurar aquesta característica i algunes altres opcions per a la connexió directa OFX seleccionant la pestanya corresponent al diàleg <link linkend="details.accounts.edit"
+>Edita el compte</link
+>. </para>
+</note>
+</sect2>
+
+<sect2>
+<title
+>Exportar un fitxer OFX</title>
+
+<para
+>En l'actualitat no és possible exportar les dades com un fitxer OFX. Si esteu interessat a contribuir en aquesta àrea, contacteu amb l'equip de desenvolupament de «libofx» per a més detalls. </para>
+</sect2>
+</sect1
+>&details-impexp-csv; &details-impexp-csvexp; &details-impexp-woob; <sect1 id="details.impexp.plugins">
+<title
+>Escriure connectors d'importador</title>
+
+<para
+>El &kmymoney; conté suport explícit per a connectors importadors. Si teniu un format personalitzat i voleu escriure un connector d'importador, valorem la vostra col·laboració. Per a fer-ho, haureu de compilar el programa des del codi font. Després utilitzeu el connector importador OFX com a exemple. </para>
+</sect1>
+</chapter>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.formats">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Formatos de Ficheiros</title>
+
+<para
+>A menos que opte por usar uma <link linkend="details.database"
+>base de dados relacional</link
+>, o &kappname; irá guardar toda a sua informação financeira num ficheiro que termina em '.kmy'. Do mesmo modo, a menos que use uma <link linkend="firsttime.launch"
+>opção da linha de comandos</link
+> que indique para não o fazer, ao lançar o &kappname; irá abrir o último ficheiro que tiver aberto. Contudo, é importante que saiba que existe mais que um tipo de ficheiros que o &kappname; pode usar para guardar os seus dados financeiros. </para>
+
+<para
+>Este capítulo descreve os formatos onde o &kappname; guarda os seus dados, de forma permanente, no dispositivos de armazenamento do utilizador. De um modo geral, o &kappname; guarda a sua informação sob um documento em &XML;. Dependendo do formato actual, este documento em &XML; será escrito <itemizedlist>
+  <listitem
+><para
+>como um <link linkend="details.formats.plain"
+>ficheiro de texto simples</link
+>, codificado em UTF-8,</para
+></listitem>
+
+  <listitem
+><para
+>como um <link linkend="details.formats.compressed"
+>ficheiro comprimido</link
+>, usando a compressão GZIP,</para
+></listitem>
+
+  <listitem
+><para
+>como um <link linkend="details.formats.encrypted"
+>ficheiro encriptado</link
+>, usando a encriptação do GPG ou</para
+></listitem>
+
+  <listitem
+><para
+>como um <link linkend="details.formats.anonymous"
+>ficheiro de texto simples anónimo</link
+>, codificado em UTF-8, mas com todos os seus dados pessoais baralhados.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<sect1 id="details.formats.plain">
+<title
+>Ficheiro de texto simples</title>
+<para
+>Este é o formato que consome mais espaço, dado que não é efectuada nenhuma compressão. Não se pretende para um uso normal e é fornecido apenas para fins de depuração, e com a ideia de modificar manualmente o ficheiro. Se terminar o nome do ficheiro em <literal role="extension"
+>.xml</literal
+>, o ficheiro será gravado nesse formato. <caution
+> <para
+>A modificação manual do ficheiro não é recomendada para o utilizador normal, devendo apenas ser efectuada se o funcionamento interno do &kappname; estiver completamente compreendido ou tiver indicações dos programadores sobre o que fazer. Não culpe os programadores do &kappname; se der cabo dos seus dados: Você foi avisado! </para>
+</caution>
+</para>
+</sect1>
+
+<sect1 id="details.formats.compressed">
+<title
+>Ficheiro comprimido com o GZIP</title>
+<para
+>Este é o formato normal, usado pelo &kappname;, quando gravar um ficheiro com a extensão <literal role="extension"
+>.kmy</literal
+>. </para>
+
+<note>
+  <para
+>Se tiver seleccionado a <link linkend="details.formats.encrypted"
+>encriptação</link
+>, o ficheiro será gravado nesse estado. </para>
+</note>
+
+<para
+>Se quiser ver um ficheiro comprimido com o GZIP, mude o nome do ficheiro para algo terminado em <literal role="extension"
+>.gz</literal
+> (&eg; <filename
+>financas.kmy</filename
+> para <filename
+>financas.kmy.gz</filename
+>, usando depois o <command
+>gunzip</command
+> para descomprimir o ficheiro e olhar para ele. Não terá de o comprimir antes de o carregar no &kappname; da próxima vez, porque o &kappname; também consegue ler os dados não-comprimidos. Em todo o caso, se o gravar posteriormente, será gravado comprimido de novo. Use a extensão <link linkend="details.formats.plain"
+>.xml</link
+> para o gravar num formato não-comprimido. </para>
+</sect1>
+
+<sect1 id="details.formats.encrypted">
+<title
+>Ficheiro encriptado com o GPG</title>
+<para
+>A utilização do formato de ficheiro encriptado com o GPG é um método muito seguro de guardar os seus dados financeiros pessoais no seu dispositivo de armazenamento. Quando o &kappname; for configurado na janela respectiva para guardar os seus dados encriptado, ele irá codificar os dados com o GPG e com a chave que indicar, antes de o gravar propriamente. Ao abrir um ficheiro encriptado, terá de indicar a frase-senha necessária para abrir o seu porta-chaves. O ficheiro encriptado em si será guardado no formato <emphasis
+>armado em ASCII</emphasis
+> do GPG. <note
+> <para
+>Ao usar a encriptação do GPG, este irá também comprimir o ficheiro, pelo que não é necessária nenhuma compressão extra. </para>
+  </note>
+</para>
+
+<sect2 id="details.formats.encrypted.gpgkeys">
+<title
+>Chaves do GPG</title>
+<para
+>Se não o tiver já feito para a encriptação do correio, terá de gerar um par de chaves para poder usar a funcionalidade de encriptação com GPG do &kappname;. Do mesmo modo, o <application
+>GPG</application
+> terá de estar instalado no seu sistema. </para>
+
+<para
+>Os detalhes da geração de um par de chaves, assim como lidar com ele, está fora do âmbito deste documento. Está disponível um Mini-Howto sobre o assunto em <ulink url="http://www.gnupg.org/documentation/howtos.en.html"
+>http://www.gnupg.org/documentation/howtos.en.html</ulink
+>. </para>
+</sect2>
+
+<sect2 id="details.formats.encrypted.keysettings">
+<title
+>Configurar as chaves no &kappname;</title>
+<para
+>Na página de encriptação da janela de configuração, terá um campo onde poderá introduzir a chave que deverá ser usada para a encriptação e a descodificação. Para além disso, poderá encontrar um campo onde poderá usar o ID de uma chave que não conste na lista. Tanto poderá usar o ID da chave, o endereço de e-mail associado a esta chave ou qualquer outra identificação de chaves do GPG válida como valor para este campo. Quando introduzir o ID da chave, o &kappname; irá verificar a sua validade e ligar um LED verde na janela, caso seja encontrada uma chave. <caution
+> <para
+>Certifique-se que tem tanto a chave pública como a privada para este ID. Se não possuir a chave privada do ID introduzido, não será capaz de aceder ao ficheiro de novo. </para>
+  </caution>
+</para>
+</sect2>
+
+<sect2 id="details.formats.encrypted.recoverkey">
+<title
+>A chave de recuperação do &kappname;</title>
+<para
+>Do mesmo modo, nesta página da janela de configuração, poderá seleccionar uma encriptação suplementar com a chave de recuperação do &kappname;. Esta opção está disponível para si, se essa chave estiver no seu porta-chaves do <application
+>GPG</application
+>. Se seleccionar esta opção, poderá recuperar os seus dados, mesmo no caso de perder a sua chave privada. Isto é possível, porque os dados não estão só encriptados para a sua chave, mas também para a chave de encriptação do &kappname;. Esta chave só está disponível para os programadores do &kappname; seleccionados (na altura da escrita deste documento, só o autor). Na versão 4.7 do &kappname;, a chave da versão está programada para expirar a 3 de Janeiro de 2015. </para>
+
+<para
+>Em circunstâncias normais, irá abrir/gravar/fechar o seu ficheiro, como de costume. No caso anormal de perda da sua chave, terá a hipótese de contactar um dos programadores que tiver acesso à chave de recuperação do &kappname;, pedindo para tal ajuda para recuperar os seus dados. Poderá contactar os programadores por e-mail, na lista de correio do &kappname;, em &devlist;. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.formats.anonymous">
+<title
+>Ficheiro anónimo</title>
+<para
+>Este formato não pretende ser usado para o armazenamento de dados normais. É suportado para que, em caso de ocorrer algum problema, possa fornecer à equipa de desenvolvimento do &kappname; o seu ficheiro sem revelar nenhum dos seus detalhes confidenciais dos seus dados financeiros. Por exemplo, muda a instituição, a conta, o beneficiário e os nomes das categorias para coisas do tipo "I000001" e "A000001,", fazendo alterações semelhantes para todos os dados, como os números d conta, mudando também de forma aleatória os montantes das transacções. </para>
+
+<para
+>Se for indicado pelos programadores, use a opção do menu <guimenuitem
+>Gravar Como...</guimenuitem
+> para guardar os seus dados num formato anónimo, seleccionando os <literal role="filter"
+>Ficheiros anónimos</literal
+> como filtro. Isto irá também mudar a extensão do ficheiro para <literal role="extension"
+>.anon.xml</literal
+>. </para>
+
+<para
+>Para verificar se o seu problema ainda existe, volte a carregar este ficheiro anónimo e tente replicar o seu problema. Se este continuar presente, envie o ficheiro à lista de correio dos programadores, em &devlist;, para mais informações. Se o problema não se manifestar... bem, não queremos pensar nesse cenário por agora. </para>
+</sect1>
+</chapter>
+

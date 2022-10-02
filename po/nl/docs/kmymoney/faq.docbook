@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="faq">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Vragen en antwoorden</title>
+
+<para
+>Dit hoofdstuk gaat over een aantal onderwerpen die vaak verwarring veroorzaken, speciaal bij nieuwe gebruikers van &kmymoney;. Als u vindt dat &kmymoney; iets doet dat u niet begrijpt (of soms iets niet doet waarvan u wilt dat het wordt gedaan,) lees dan deze sectie voordat u om hulp vraagt op een van de e-maillijsten. Als uw probleem hier niet genoemd wordt, ga dan naar de sectie op <link linkend="firsttime.contact"
+>hulp verkrijgen</link
+>. </para>
+
+<qandaset>
+
+<qandadiv
+><title
+>Vragen over installatie en opstarten</title>
+
+<qandaentry>
+ <question>
+   <para
+>&kmymoney; crasht wanneer ik het probeer te starten.</para>
+ </question>
+ <answer>
+   <para
+>Er zijn vele redenen waarom &kmymoney; zou kunnen crashen of een fout geeft in plaats van normaal op te starten. U moet eerst bepalen of het probleem aan de software ligt of aan uw gegevens. De eerste poging is dus om <link linkend="firsttime.launch"
+>&kmymoney; te starten</link
+> zonder uw gegevensbestand te openen. Als de toepassing opstart, maar crasht wanneer u uw gegevensbestand probeert te openen, probeer dan een oudere kopie van uw bestand te openen. (U hebt toch een reservekopie gemaakt, toch?)</para>
+   <para
+>Als &kmymoney; crasht bij opstarten zonder te proberen een gegevensbestand te laden, dan zou er een probleem met uw installatie kunnen zijn. Zie de sectie <link linkend="firsttime.contact"
+>hulp verkrijgen</link
+>.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Kan &kmymoney; werken op mijn X/&ubuntu; desktop? Kan &kmymoney; werken zonder een complete &kde; bureaublad?</para>
+ </question>
+ <answer>
+   <para
+>Ja, &kmymoney; kan werken zonder een complete &kde; desktop, maar u moet wel eerst de basis &kde; libraries installeren. De makkelijkste manier om dit te doen is door het pakket beheersysteem van uw distributie te gebruiken, dat deze vereisten automatisch zal afhandelen. Als u van broncode gaat installeren, dan zult u waarschijnlijk de development versies van deze libraries nodig hebben.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Vragen over instellingen</title>
+
+<qandaentry>
+ <question>
+   <para
+>Kan ik de startdatum van het fiscale jaar wijzigen, zodat het overeenkomt met mijn fiscale jaar of mijn boekhoudkundig jaar?</para>
+ </question>
+ <answer>
+   <para
+>Ja, u kunt makkelijk de startdatum van het jaar wijzigen in de <link linkend="details.settings.general.global"
+>Algemene Opties</link
+> van het dialoogvenster <guilabel
+>&kmymoney; instellen</guilabel
+>.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Vragen over rekeningen en transacties</title>
+
+<qandaentry>
+ <question
+><para
+>Waarom kan ik geen transactie bewerken? </para
+></question>
+ <answer>
+   <para
+>U kunt een transactie met een datum ouder dan de openingsdatum van de rekening waaraan het is gekoppeld niet wijzigen. De belangrijkste reden voor dit probleem is de import van alle data van een rekening. Als het importbestand geen openingsdatum voor de rekening heeft, dan zal &kmymoney; de huidige datum daarvoor gebruiken. De manier om dit op te lossen is om de rekening te wijzigen, en <link linkend="details.accounts.edit"
+>de openingsdatum zodanig te wijzigen</link
+> dat het eerder is dan alle transacties van die rekening.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Waarom wordt een transactie in rood getoond en hoe kan ik de kleur kwijt raken?</para>
+ </question>
+ <answer>
+   <para
+>Een transactie krijgt de kleur rood als er nog gedeeltes van het bedrag zijn die nog geen categorie hebben toegewezen. Dit wordt meestal veroorzaakt door de import van QIF- of OFX-bestand of het downloaden van online-gegevens. Het enige wat u hooft te doen is de transactie zo te wijzigen dat het hele bedrag van de transactie aan categorieën is toegewezen.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Waarom kan ik geen beginsaldo aan een account toevoegen?</para>
+ </question>
+ <answer>
+   <para
+>Als u een beginsaldo opgeeft bij de creatie van een rekening, dan krijgt u het als eerste transactie van de rekening te zien. Als u dat niet doet, dan is de transactie er niet, en omdat het een speciaal type transactie is, kunt u het niet later gewoon toevoegen zoals een bijschrijving of opname. Maar u kunt het later toevoegen door <link linkend="details.accounts.edit"
+>de rekening te wijzigen</link
+>.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Toen ik een rekening creëerde, gebruikte ik het verkeerde type, en ik kan het nu niet meer wijzigen. Ik kan de rekening wijzigen, maar de keuzelijst voor het type rekening is ofwel uitgeschakeld, of het toont niet alle mogelijke types.</para>
+ </question>
+ <answer>
+   <para
+>U kunt makkelijk het rekeningtype omschakelen tussen cheques, spaarrekening, en contant. Maar vanwege de manier waarop &kmymoney; de informatie over de rekening opslaat, zijn andere wijzigingen van het rekeningtype niet mogelijk. Een manier om dit op te lossen is het creëren van een nieuwe rekening van het juiste type, het verplaatsen van alle transacties van de oude rekening naar de nieuwe rekening, en tenslotte het verwijderen van de oude rekening.</para>
+   <!-- this should have links to the sections on new acct, move transactions,
+        delete account. -->
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Ik heb een lening met 0% rente, maar ik krijg een fout in de nieuwe lening wizard die mij deze waarde niet laat gebruiken.</para>
+ </question>
+ <answer>
+   <para
+>De interne berekeningen van de nieuwe lening wizard staan geen 0% rente toe. De beste manier om deze situatie op te lossen is om <link linkend="details.accounts.create.account"
+>een eenvoudige rekening voor schulden te creëren</link
+> met een startsaldo voor het bedrag van de lening, en daarna <link linkend="details.schedules.new"
+>een schema te creëren</link
+> voor de nodige aflossingen.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Waarom kan ik niet al mijn transacties in het kasboek zien?</para>
+ </question>
+ <answer>
+   <para
+>Er zijn meerdere instellingen die regelen welke transacties worden getoond in de kasboek-weergave van een rekening. Controleer eerst het <link linkend="details.ledgers.view.filter"
+>filtervak van het kasboek</link
+>. Als er in het zoekvak iets is ingevoerd, dan krijgt u alleen transacties waarin die tekst voorkomt te zien. Als het status-keuzevak is veranderd van <quote
+>Elke status,</quote
+> dan krijgt u alleen de transacties van het geselecteerde type te zien. Daarnaast zijn er twee belangrijke instellingen in de sectie <link linkend="details.settings.general.filter"
+>filter opties</link
+> van het instellingendialoog van &kmymoney;. Als <guilabel
+>Toon geen transacties van voor</guilabel
+> is ingeschakeld, dan krijgt u in het kasboek alleen transacties van op of na die datum te zien. Als <guilabel
+>Gecontroleerde transacties niet tonen</guilabel
+> is ingeschakeld, dan krijgt u geen gecontroleerde transacties te zien.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Ik heb een typefout in de naam van een begunstigde gemaakt en wil dat in alle transacties wijzigen. Is er een globale zoeken/vervangen?</para>
+ </question>
+ <answer>
+   <para
+>Er is geen globale zoek en vervang functie in &kmymoney;. Desondanks is het makkelijk om de naam van een begunstigde te veranderen: selecteer de weergave voor begunstigden en zoek de naam die u wilt wijzigen. Klik met de &RMB; op de begunstigde, en selecteer uit het contextmenu <guimenuitem
+>Begunstigde hernoemen</guimenuitem
+>. Voer de nieuwe naam in. Omdat de transacties alleen een referentie gebruiken naar het record van de begunstigde, tonen nu alle transacties de nieuwe naam.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Waarom kan ik geen account verwijderen?</para>
+ </question>
+ <answer>
+   <para
+>Om een rekening te kunnen verwijderen, mag er in &kmymoney; niets meer naar referen. Dat houd in dat u alle transacties van deze rekening moet verwijderen, of ze naar een andere rekening moet verplaatsen. Als u nog steeds een rekening niet kan verwijderen, dan kunnen er nog periodieke transacties naar deze rekening referen, Die in het kasboek niet zichtbaar hoeven te zijn. Het kan nodig zijn dat u alle toekomstige transacties en het schema zelf moet verwijderen, of ze naar een andere rekening moet verplaatsen.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Vragen over import en export</title>
+
+<qandaentry>
+ <question>
+   <para
+>Waar vindt ik meer informatie over OFX parameters?</para>
+ </question>
+ <answer>
+   <para
+>Hier zijn enkele externe bronnen waar u meer informatie kunt vinden: <ulink url="http://ofxblog.wordpress.com/"
+>OFX Blog</ulink
+> en <ulink url="http://www.ofxhome.com/"
+>OFX Home</ulink
+>.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Overige vragen</title>
+
+<qandaentry>
+ <question>
+   <para
+>Waarom is er geen vertaling voor 'mijn' taal?</para>
+ </question>
+ <answer>
+   <para
+>&kmymoney; gebruikt de instellingen van &kde; voor de taal, zorg er daarom eerst voor dat uw land en taal correct zijn ingesteld. Als dat het geval is, dan is de meest waarschijnlijke reden dat nog niemand het heeft aangeboden om het te vertalen. Het vertalen van op &kde;/&Qt;-gebaseerde programma's is vrij makkelijk, en u heeft er niet voor te kunnen programmeren. Als u &kmymoney; naar uw taal wilt vertalen, plaats dan een bericht in de juiste <ulink url="https://l10n.kde.org/teams-list.php"
+>team mailing list</ulink
+>. Als u uw taal in de lijst niet kan vinden of u kunt niet in contact komen met de teamleden, stuur dan een email direct naar de <ulink url="mailto:kde-i18n-doc@kde.org"
+>&kde; translation mailing list</ulink
+> (<ulink url="https://mail.kde.org/mailman/listinfo/kde-i18n-doc"
+>inschrijving</ulink
+> vereist) en wij zullen u de informatie geven over hoe u makkelijk een vertaling voor &kmymoney; kunt maken. </para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Waarom ging het versienummer van 1.0.5 naar 4.5, en wat gebeurde er met KMyMoney2?</para>
+ </question>
+ <answer>
+   <para
+>Het gebruik van KMyMoney2 was een historische overblijfsel van toen het project van&kde; 1 naar &kde; 2 ging. Om iedere keer de naamswijziging te vermijden als een nieuwe &kde; versie is, hebben we besloten om bij &kmymoney; te blijven.</para>
+   <para
+>De eerste versie van &kmymoney; die stabiel genoeg werd geacht, kreeg de versie 1.0, alhoewel het onder &kde; 3 liep. Omdat het project dichter bij &kde; kwam, hebben we besloten om hetzelfde major versienummer te gebruiken.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Hoe kan ik een bug rapporteren? Hoe kan ik een suggestie doen?</para>
+ </question>
+ <answer>
+   <para
+>De ontwikkelaars moedigen aan dat u feedback geeft. Lees meer daarover in de sectie over <link linkend="firsttime.contact"
+>Contact maken met de ontwikkelaars / Bugs (programmafouten) melden</link
+>.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Waarom is er geen makkelijke manier om periodieke transacties, of een gedeelte van het kasboek, of ... af te drukken.</para>
+ </question>
+ <answer>
+   <para
+>Kijk in de sectie over <link linkend="details.reports.avail"
+>Rapporten</link
+>. Veel rapporten geven een makkelijke manier om dingen af te drukken die u niet makkelijk kunt doen vanuit het kasboek of andere schermen.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+</qandaset>
+
+</chapter>

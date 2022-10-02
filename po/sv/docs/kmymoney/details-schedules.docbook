@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.schedules">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+  </authorgroup>
+  <date
+>2019-04-01</date>
+  <releaseinfo
+>5.0.3</releaseinfo>
+</chapterinfo>
+
+<title
+>Scheman</title>
+
+<sect1 id="details.schedules.intro">
+<title
+>Inledning</title>
+
+<para>
+  <quote
+>Scheman innehåller information om transaktioner som inträffar en eller flera gånger under en tidsperiod. </quote>
+</para>
+
+<para
+>Scheman, som ibland kallas återkommande transaktioner, erbjuder ett sätt att lagra information om transaktioner som inträffar regelbundet. Det går att schemalägga insättningar, överföringar, uttag och lånetransaktioner. En hel del flexibilitet är inbyggd i schemalagda transaktioner, som omfattar att göra dem en gång, eller baserat på antal dag(ar), vecka/veckor, halva månad(er), månad(er) eller år. </para>
+
+<para
+>Eftersom du vet att transaktionerna görs regelbundet, vare sig de är inbetalningar som görs till dig eller utbetalningar du gör till någon annan, kan ett schema skapas för att lagra information om de återkommande betalningarna för att förenkla och enkelt komma ihåg när händelsen inträffar. </para>
+
+<para
+>Scheman kan betraktas som speglingar av pengar som kommer in till eller går ut från dina konton på ett konsekvent sätt. Vanlig användning inkluderar löneutbetalningar, skatter, försäkringar, kreditkort, avgifter, räntor, lån, inteckningar och hyror. Att schemalägga sådana betalningar tillhandahåller en användbar påminnelse så att du kan hantera förväntade framtida ekonomiska ärenden effektivt. </para>
+
+<para
+>Ett schema består av två huvuddelar: transaktionsdata och schemaläggningsdata. Schemaläggningsdata lagrar när schemat inträffar, dvs. när transaktionen ska skrivas in i huvudboken och hur. Transaktionsdata lagrar den vanliga informationen om transaktionen. Det omfattar alternativ för betalningsmetod, konto, betala till/från, kategori, etiketter, anmärkning, förfallodatum, belopp och status. Tillsammans med det, kan också ytterligare alternativ väljas baserat på när transaktionen ska behandlas. </para>
+</sect1>
+
+<sect1 id="details.schedules.type">
+<title
+>Typer av scheman</title>
+
+<para
+>Det fyra olika typer av scheman i den nuvarande versionen av &kmymoney;: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Insättningar</para
+></listitem>
+  <listitem
+><para
+>Räkningar</para
+></listitem>
+  <listitem
+><para
+>Överföringar</para
+></listitem>
+  <listitem
+><para
+>Lån</para
+></listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Insättning</title>
+
+<para
+>En insättning används för pengar som sätts in på kontot, såsom löneinbetalningar, bonus eller ränteinkomster. </para>
+</sect2>
+
+<sect2>
+<title
+>Räkningar, uttag</title>
+
+<para
+>En räkning eller ett uttag används för pengar som tas ut från kontot, såsom medlemskap, serviceräkningar, skatter eller registreringsavgifter. </para>
+</sect2>
+
+<sect2>
+<title
+>Överföring</title>
+
+<para
+>En överföring används för pengar som tas ut från ett konto och sätts in på ett annat. Ett typiskt exempel är en kreditkortsinbetalning från lönekontot. </para>
+</sect2>
+
+<sect2>
+<title
+>Lån</title>
+
+<para
+>Ett låneschema är en särskild typ av schema, och skapas vid hantering av <link linkend="details.loans"
+>lånekonton</link
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.schedules.view">
+<title
+>Schemaläggningsvyn</title>
+
+<para
+>Öppna schemaläggningsvyn genom att klicka på <guiicon
+><inlinemediaobject
+><imageobject
+> <imagedata fileref="schedule_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+> </guiicon
+> schemaikonen i vyväljaren. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="scheduleview.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Schemaläggningsvy</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Schemavyn består av ett vyområde med knapparna <guibutton
+>Nytt schema</guibutton
+> och <guibutton
+>Filter</guibutton
+> med textrutan <guilabel
+>Filter:</guilabel
+> ovanför. </para>
+	
+<para
+>Klicka på knappen för att skapa ett nytt schema. För insättnings-, överförings- uttags- och räkningsscheman, visar &kmymoney; dialogrutan för nytt schema. Lånescheman hanteras på ett annat sätt, och beskrivs i avsnittet om lån i handboken. </para>
+</sect1>
+
+<sect1 id="details.schedules.new">
+<title
+>Dialogrutan Nytt schema</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newsched_numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Nytt schema</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Dialogrutan Nytt schema visas nu som frågar efter schema- och transaktionsinformation. Begärd information omfattar följande: </para>
+
+<orderedlist numeration="upperalpha">
+  <listitem
+><para
+>Schemanamn</para
+></listitem>
+  <listitem
+><para
+>Nästa förfallodatum</para
+></listitem>
+  <listitem
+><para
+>Termin</para
+></listitem>
+  <listitem
+><para
+>Betalningsmetod</para
+></listitem>
+  <listitem
+><para
+>Belopp</para
+></listitem>
+  <listitem
+><para
+>Övrig transaktionsinformation</para
+></listitem>
+  <listitem
+><para
+>Schemaläggningsalternativ</para
+></listitem>
+</orderedlist>
+
+<sect2>
+<title
+>Fylla i information om schemanamn, frekvens och betalning.</title>
+
+<para
+>Skriv in schemats namn och datum då schemat infaller nästa gång i respektive fält. Namnet anger hur schemat betecknas i schemavyn och andra vyer. Ange hur ofta schemat ska infalla, med frekvensfältet och kombinationsrutan, exempelvis "var sjätte vecka" eller "var tredje månad". Om beloppet varierar från transaktion till transaktion, försäkra dig om att markera kryssrutan <guilabel
+>Uppskattning</guilabel
+>, så blir du tillfrågad om det riktiga beloppet när det skrivs in i huvudboken. Övriga nödvändiga fält i sektionen betalningsinformation inkluderar kontot och kategori. Återstående fält i sektionen är valfria. </para
+> 
+</sect2>
+
+<sect2>
+<title
+>Ändra sektionen med schemaalternativ</title>
+<para
+>Du kan välja hur icke-behandlingsdagar hanteras. Om schemat gäller en icke-behandlingsdag kan du välja <guilabel
+>Ändra inte datum</guilabel
+>, <guilabel
+>Ändra datumet till föregående behandlingsdag</guilabel
+> eller <guilabel
+>Ändra datumet till nästa behandlingsdag</guilabel
+>. Alternativet är tillgängligt för att återskapa något av den operationella behandling i den verkliga bankvärlden. Icke-behandlingsdagar inkluderar veckoslut och helger som &kmymoney; känner till för angivet område i <link linkend="details.settings.schedules.calendar"
+>tillämpliga inställningsalternativ</link
+>. </para>
+
+<para
+>Du kan också välja om beloppet är en uppskattning så att du blir tillfrågat om att uppdatera beloppet när schemat infaller. Att välja behandling sista dagen i månaden tillåter att oregelbunden behandling vid månadsslut schemaläggs. Genom att markera rutan för att automatiskt registrera betalningen på förfallodagen, gör det möjligt för &kmymoney; att automatiskt registrera transaktionen i huvudboken utan mänskligt ingripande. Annars visar &kmymoney; en dialogruta när transaktionen infaller och ska registreras, som ber dig bekräfta att den ska registreras. Beteendet går att anpassa, och mer information finns i avsnittet <link linkend="details.settings.schedules"
+>Inställningar</link
+>. </para>
+
+<para
+>Om du vet hur många transaktioner som är kvar eller när de ska sluta, kan informationen skrivas in, så att transaktioner inte skrivs in för alltid. Markera kryssrutan att schemat tar slut, och skriv antingen in antal återstående transaktioner eller datumet för den sista transaktionen för att avsluta den schemalagda transaktionen baserat på villkoret. </para>
+
+<para
+>När du har skrivit in nödvändig information, klicka på <guibutton
+>Ok</guibutton
+> för att fortsätta. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.schedules.edit">
+<title
+>Redigera scheman</title>
+
+<para
+>För att redigera ett schema, markera helt enkelt posten i listan, högerklicka för att visa den sammanhangsberoende menyn, och välj <guimenuitem
+>Redigera schemalagd transaktion</guimenuitem
+>. Det visar en transaktionsdialogruta som liknar Redigera schema, där du kan ändra nödvändig information. </para>
+</sect1>
+
+<sect1 id="details.schedules.delete">
+<title
+>Ta bort scheman</title>
+
+<para
+>För att ta bort ett schema, markera helt enkelt posten i listan, högerklicka för att visa den sammanhangsberoende menyn, och välj <guimenuitem
+>Ta bort schemalagd transaktion</guimenuitem
+>. </para>
+</sect1>
+
+<sect1 id="details.schedules.duplicate">
+<title
+>Duplicera scheman</title>
+
+<para
+>För att duplicera ett schema, markera helt enkelt posten i listan, högerklicka för att visa den sammanhangsberoende menyn, och välj <guimenuitem
+>Duplicera schemalagd transaktion</guimenuitem
+>. </para>
+</sect1>
+
+<sect1 id="details.schedules.entering">
+<title
+>Skriva in schemalagda transaktioner</title>
+
+<para
+>Att skriva in en schemalagd transaktion betyder att i själva verket skriva in en transaktion i lämplig huvudbok, genom att använda informationen angiven i schemat. Schemalagda transaktioner kan skrivas in på ett av tre olika sätt: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Manuellt genom att högerklicka på posten i schemavyn</para>
+  </listitem>
+
+  <listitem>
+    <para
+>&kmymoney; kan skriva in dem med eller utan interaktion vid start </para>
+  </listitem>
+  <listitem>
+    <para
+>&kmymoney; kan skriva in dem med eller utan interaktion vid användning av Internet-bank eller import av ett elektroniskt bankutdrag </para>
+  </listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Skriva in schemalagda transaktioner manuellt</title>
+
+<para
+>Du kan skriva in en schemalagd transaktion för hand, genom att högerklicka på posten i listan och välja <guimenuitem
+>Registrera</guimenuitem
+> i den sammanhangsberoende menyn. </para>
+</sect2>
+
+<sect2>
+<title
+>Bekräfta transaktionen att skriva in</title>
+
+<para
+>Efter att ha vald någon av metoderna visas dialogfönstret Registrera schemalagd transaktion, som frågar dig efter nödvändig information, angiven när schemat skapades. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="enterschedule.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Informationen kan ändras, och ändringarna verkställas för bara den här instansen av schemat, eller för alla efterföljande transaktioner. Efter att ha kontrollerat att all data är riktig, klicka på knappen <guibutton
+>Ok</guibutton
+> så läggs transaktionen till i huvudboken, och nästa förfallodatum i schemat uppdateras till nästa förekomst. Om du har ändrat någon data i transaktionen, visas ytterligare en bekräftelse av vad du har ändrat, vilket ger dig en sista chans att acceptera eller avstå från ändringarna. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="confirmenter.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Välja vad du vill göra med informationen som visas, och klicka <guibutton
+>Ok</guibutton
+> eller <guibutton
+>Avbryt</guibutton
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Låta &kmymoney; skriva in de schemalagda transaktionerna åt dig</title>
+
+<para
+>Som alternativ kan &kmymoney; kontrollera vilka scheman som ska utföras vid start, och skriva in dem åt dig om lämpligt alternativ var markerat när schemat ställdes in. </para>
+
+<para
+>Om alternativet inte var markerat, visar &kmymoney; den tidigare nämnda dialogrutan och du kan utföra stegen som anges där. &kmymoney; visar också dialogrutan om beloppet är en uppskattning, så att du kan skriva in det verkliga beloppet. </para>
+
+<para
+>Du kan också välja att låta &kmymoney; inte kontrollera vilka transaktioner som är schemalagda vid start, genom att avmarkera alternativet i inställningsdialogrutan, så visas eventuella försenade transaktioner eller transaktioner som ska utföras idag i hemvyn så att du kan skriva in dem manuellt. </para>
+</sect2>
+</sect1>
+</chapter>
+

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="faq">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>30 d'agost de 2014</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Preguntes i respostes</title>
+
+<para
+>Aquest capítol aborda una sèrie de problemes que sovint causen confusió, especialment als usuaris nous del &kmymoney;. Si trobeu que el &kmymoney; està fent una cosa que no compreneu (o, de vegades, no està fent una cosa que voleu que faci), consulteu aquesta llista abans de sol·licitar ajuda en una de les llistes de correu. Si el problema no s'esmenta aquí, consulteu la secció sobre <link linkend="firsttime.contact"
+>com obtenir ajuda</link
+>. </para>
+
+<qandaset>
+
+<qandadiv
+><title
+>Preguntes d'instal·lació i inici</title>
+
+<qandaentry>
+ <question>
+   <para
+>El &kmymoney; es bloqueja quan intento llançar-lo.</para>
+ </question>
+ <answer>
+   <para
+>Hi ha moltes raons per les quals el &kmymoney; podria fallar o donar un error en lloc d'iniciar-se amb normalitat. Primer haureu de determinar si el problema és amb el programari o amb les dades. Per tant, el primer que haureu d'intentar és <link linkend="firsttime.launch"
+>llançar el &kmymoney;</link
+> sense obrir el fitxer de dades. Si l'aplicació s'inicia, però es bloqueja quan intenteu carregar el fitxer de dades, proveu de carregar una còpia anterior del fitxer. (Heu fet una còpia de seguretat, no?)</para>
+   <para
+>Si el &kmymoney; es bloqueja durant l'inici sense intentar carregar un fitxer de dades, hi podria haver un problema amb la instal·lació. Consulteu la secció sobre <link linkend="firsttime.contact"
+>com obtenir ajuda</link
+>.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Funcionarà el &kmymoney; al meu escriptori X/&ubuntu;? Funcionarà sense un escriptori &kde; complet?</para>
+ </question>
+ <answer>
+   <para
+>Sí, el &kmymoney; funcionarà sense un escriptori &kde; complet, però primer haureu d'instal·lar les biblioteques bàsiques del &kde;. La forma més fàcil de fer-ho és utilitzar el sistema per a la gestió de paquets de la distribució, el qual manejarà aquests requisits automàticament. Si esteu instal·lant des del codi font, probablement necessitareu versions de desenvolupament d'aquestes biblioteques.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Preguntes de configuració</title>
+
+<qandaentry>
+ <question>
+   <para
+>Puc canviar l'inici de l'any fiscal perquè coincideixi amb el meu any d'impostos o comptable?</para>
+ </question>
+ <answer>
+   <para
+>Sí, podreu configurar amb facilitat l'inici de l'any a la secció <link linkend="details.settings.general.global"
+>Opcions globals</link
+> del diàleg <guilabel
+>Configuració del &kmymoney;</guilabel
+>.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Preguntes sobre comptes i operacions</title>
+
+<qandaentry>
+ <question
+><para
+>Per què no puc editar una operació? </para
+></question>
+ <answer>
+   <para
+>No podreu fer cap canvi en una operació amb una data anterior a la data d'obertura del compte en el qual es troba. La raó més habitual per a això és importar totes les dades d'un compte. Si el fitxer d'importació no conté una data d'obertura per al compte, el &kmymoney; emprarà la data actual. La forma de solucionar això és editar el compte i canviar la data d'obertura perquè sigui anterior a qualsevol operació en aquest compte.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Per què una operació es mostra en vermell i com puc desfer-me del color?</para>
+ </question>
+ <answer>
+   <para
+>Una operació es mostrarà en vermell si alguna part de l'import no s'ha assignat a una categoria. Això se sol deure a la importació d'un fitxer QIF o OFX, o en baixar les dades de l'extracte en línia. Tot el que haureu de fer és modificar l'operació de manera que l'import total de l'operació s'assigni a les categories.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Per què no puc afegir un saldo inicial a un compte?</para>
+ </question>
+ <answer>
+   <para
+>Si proporcioneu un saldo inicial quan creeu un compte, es mostrarà com la primera operació per al compte. Si no ho feu, llavors l'operació no hi estarà, i pel fet que és un tipus especial d'operació, simplement no es podrà afegir com podríeu fer amb un ingrés o reintegrament. No obstant això, el podreu afegir més tard editant el compte.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Quan vaig crear un compte, vaig emprar el tipus incorrecte, i ara no em deixa canviar-lo. Puc editar el compte, però la llista desplegable per al tipus de compte està inhabilitada o no llista tots els tipus possibles.</para>
+ </question>
+ <answer>
+   <para
+>Ho podreu canviar amb facilitat entre xecs, estalvis i efectiu. No obstant això, a causa de la forma en què el &kmymoney; emmagatzema la informació del compte, no permet altres canvis de tipus de compte. La solució a això és crear un compte nou del tipus correcte, moure totes les operacions des del compte anterior cap al nou i després suprimir el compte anterior.</para>
+   <!-- this should have links to the sections on new acct, move transactions,
+        delete account. -->
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Tinc un préstec amb el 0% d'interès, però apareix una errada a l'assistent de préstecs nous que no em permet fer servir aquest valor.</para>
+ </question>
+ <answer>
+   <para
+>Els càlculs interns de l'assistent per a préstecs nous no permeten un tipus d'interès del 0%. La millor manera de gestionar aquesta situació és <link linkend="details.accounts.create.account"
+>crear un compte de passius senzill</link
+> amb un saldo inicial per a l'import del préstec, i després <link linkend="details.schedules.new"
+>crear una planificació</link
+> per als pagaments requerits.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Per què no veig totes les meves operacions al llibre major?</para>
+ </question>
+ <answer>
+   <para
+>Hi ha diverses opcions que controlen quines operacions es mostraran a la vista del llibre major d'un compte. Primer, comproveu l'<link linkend="details.ledgers.view.filter"
+>àrea de filtre del llibre major</link
+>. Si hi ha alguna cosa escrita al quadre de cerca, només es mostraran les operacions que continguin aquest text. Si la llista desplegable d'estat ha canviat de <quote
+>Qualsevol estat</quote
+>, només es mostraran les operacions del tipus seleccionat. A més, hi ha dues opcions importants a la secció d'<link linkend="details.settings.general.filter"
+>opcions del filtre</link
+> al diàleg de configuració del &kmymoney;. Si s'estableix el camp a <guilabel
+>No mostris les operacions anteriors a</guilabel
+>, només es mostraran al llibre major les operacions en aquesta data o abans d'aquesta. Si està marcada la casella <guilabel
+>No mostris les operacions conciliades</guilabel
+>, no es mostraran les operacions conciliades.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Vaig escriure malament el nom d'un beneficiari i vull canviar-lo en totes les operacions. Hi ha una cerca/substitució global?</para>
+ </question>
+ <answer>
+   <para
+>No hi ha cap funció de cerca i substitució global al &kmymoney;. No obstant això, és fàcil canviar el nom d'un beneficiari: seleccioneu la vista dels beneficiaris i cerqueu l'entrada amb el nom que voleu canviar. Feu clic amb el &BDR; sobre el beneficiari i seleccioneu <guimenuitem
+>Reanomena el beneficiari</guimenuitem
+> des del menú contextual. Introduïu el nom nou. Atès que les operacions només fan servir una referència amb el registre de beneficiaris, totes les operacions ara mostraran el nom nou.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Per què no puc suprimir un compte?</para>
+ </question>
+ <answer>
+   <para
+>Per a suprimir un compte, el &kmymoney; no podrà tenir altres referències a ell. Això vol dir que haureu de suprimir totes les operacions o moure-les a un altre compte. Si encara no podeu suprimir un compte, podria haver-hi operacions planificades que hi facin referència, les quals poden no ser visibles al llibre major. Haureu de suprimir qualsevol operació futura i la planificació en si, o canviar-la a un compte diferent.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Preguntes d'importació i exportació</title>
+
+<qandaentry>
+ <question>
+   <para
+>On trobo més informació sobre els paràmetres de l'OFX?</para>
+ </question>
+ <answer>
+   <para
+>Aquí hi ha algunes fonts externes que poden oferir més informació: <ulink url="https://ofxblog.wordpress.com/"
+>OFX Blog</ulink
+> i <ulink url="https://www.ofxhome.com/"
+>OFX Home</ulink
+>.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Preguntes diverses</title>
+
+<qandaentry>
+ <question>
+   <para
+>Per què no hi ha traducció per al «meu» idioma?</para>
+ </question>
+ <answer>
+   <para
+>El &kmymoney; utilitza la configuració del &kde; per a l'idioma, així que primer, assegureu-vos que la regió i idioma són correctes. Si ho són, la raó més probable és que ningú s'hagi ofert encara a traduir-lo. La traducció d'aplicacions basades en el &kde;/&Qt; és molt senzilla i no requereix cap habilitat de programació. Si voleu traduir el &kmymoney; al vostre idioma, envieu un missatge a la <ulink url="https://l10n.kde.org/teams-list.php"
+>llista de correu de l'equip</ulink
+> corresponent. Si no trobeu el vostre idioma a la llista o no podeu comunicar amb els membres de l'equip, envieu un correu directament a la <ulink url="mailto:kde-i18n-doc@kde.org"
+>llista de correu per a la traducció del &kde;</ulink
+> (es requereix <ulink url="https://mail.kde.org/mailman/listinfo/kde-i18n-doc"
+>subscripció</ulink
+>) i us donarem els detalls sobre com podreu proporcionar amb facilitat una traducció per al &kmymoney;. </para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Per què el número de versió va saltar de 1.0.5 a 4.5, i què va passar amb el KMyMoney2?</para>
+ </question>
+ <answer>
+   <para
+>L'ús de KMyMoney2 va ser un llegat històric de quan el projecte va passar del &kde; 1 al &kde; 2. Per a evitar canviar el nom cada vegada que hi havia una nova versió del &kde;, vam decidir seguir amb &kmymoney;.</para>
+   <para
+>La primera versió del &kmymoney; que es va considerar prou estable tenia l'etiqueta 1.0, tot i que s'executava sota el &kde; 3. Com el projecte ara s'està alineant més estretament amb el &kde;, vam decidir fer servir el mateix número de versió principal.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Com puc informar d'un error? Com puc sol·licitar una nova característica?</para>
+ </question>
+ <answer>
+   <para
+>Els desenvolupadors encoratgen els vostres comentaris. Consulteu <link linkend="firsttime.contact"
+>Com contactar amb els desenvolupadors / Informar dels errors</link
+>.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Per què no hi ha una manera fàcil d'imprimir algunes operacions planificades, o part del llibre major, o «...»</para>
+ </question>
+ <answer>
+   <para
+>Vegeu la secció <link linkend="details.reports.avail"
+>Informes</link
+>. Molts dels informes en realitat proporcionen una manera fàcil d'imprimir coses que no es poden fer directament des del llibre major o altres vistes.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+</qandaset>
+
+</chapter>

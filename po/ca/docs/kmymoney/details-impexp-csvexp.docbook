@@ -1,0 +1,28 @@
+<sect1 id="details.impexp.csvexp">
+<title
+>Exportador a CSV</title>
+<para
+>Per a exportar un dels comptes a un fitxer CSV, escolliu l'element de menú <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guisubmenu
+>Exporta</guisubmenu
+><guimenuitem
+>CSV...</guimenuitem
+></menuchoice
+>. Se us demanaran algunes opcions. </para>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="csvexport.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>Exportació CSV</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+</sect1>

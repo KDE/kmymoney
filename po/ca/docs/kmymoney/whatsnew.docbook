@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="whatsnew">
+<chapterinfo>
+  <date
+>4 d'abril de 2019</date>
+  <releaseinfo
+>5.0.4</releaseinfo>
+</chapterinfo>
+<title
+>Què hi ha de nou en aquesta versió</title>
+
+<sect1>
+<title
+>Correcció d'errors i millores a les funcionalitats</title>
+
+<para
+>Com a cada llançament, l'equip de desenvolupament del &kmymoney; ha estat treballant de valent per a fer que aquest llançament sigui millor i més fàcil d'emprar en tots els sentits. Aquesta és la quarta versió de la sèrie 5.0, i la major part de l'activitat s'ha dirigit a corregir els errors. </para>
+
+<para
+>En aquest punt, la conversió per a emprar els &kde-frameworks; està essencialment completa, encara que aquesta i el treball per a actualitzar moltes de les biblioteques subjacents emprades per l'aplicació són interns i l'usuari final no ho veu directament. L'aparença general ha de ser estable, encara que puguin ocórrer alguns canvis menors. La funcionalitat bàsica del programa també segueix sent la mateixa, a part de les millores i addicions intencionades. </para>
+
+<para
+>A les versions anteriors, aquesta pàgina del manual ha inclòs una llista de moltes correccions d'errors específics i millores funcionals. No obstant això, en lloc de duplicar aquesta informació, la trobareu directament en el <ulink url="https://kmymoney.org/changelog.html"
+>Changelog</ulink
+>. </para>
+
+<para
+>Des del llançament de la 5.0, hi ha hagut alguns canvis que necessitaran ajustos per part de l'usuari si esteu actualitzant des de la 4.8.x o una versió anterior. </para>
+
+<itemizedlist>
+  <listitem
+><para
+>El programa cerca les plantilles per al connector «printcheck» en diferents ubicacions. L'usuari haurà de tenir-ho en compte al diàleg de configuració del connector. Per a més detalls, <link linkend="details.settings.plugins"
+>vegeu aquesta secció</link
+>. </para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1>
+<title
+>Actualitzacions a aquest manual</title>
+
+<para
+>Si bé continuem avançant, encara hi ha capítols d'aquest manual que no s'han actualitzat per a reflectir tots els canvis al programa que són visibles per l'usuari a partir de la 5.0. Cada capítol identifica el llançament del &kmymoney; per al qual es va actualitzar per darrera vegada, però presentem aquí la llista completa, com a referència ràpida. </para>
+
+<para
+>Tanmateix, cal tenir en compte fins a quin punt els capítols que no s'han actualitzat explícitament reflecteixen o no l'operació actual del programa dependrà de com hagi canviat aquesta àrea del programa entre les versions 4.8 i 5.0. </para>
+  
+<informaltable frame="none">
+  <tgroup cols="2">
+    <thead>
+      <row>
+	<entry
+><para
+>Capítols actualitzats a la 5.x</para
+></entry>
+	<entry
+><para
+>Capítols que encara no s'han actualitzat a la 5.x</para
+></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry valign="top">
+	  <simplelist>
+	    <member
+><link linkend="introduction"
+>Introducció</link
+></member>
+	    <member
+><link linkend="whatsnew"
+>Què hi ha de nou en aquesta versió</link
+></member>
+	    <member
+><link linkend="makingmostof"
+>Aprofitant el &kmymoney; al màxim</link
+></member>
+	    <member
+><link linkend="firsttime"
+>Emprar el &kmymoney; per primera vegada</link
+></member>
+	    <member
+><link linkend="details.institutions"
+>Institucions</link
+></member>
+	    <member
+><link linkend="details.accounts"
+>Comptes</link
+></member>
+	    <member
+><link linkend="details.categories"
+>Categories</link
+></member>
+	    <member
+><link linkend="details.tags"
+>Etiquetes</link
+></member>
+	    <member
+><link linkend="details.payees"
+>Beneficiaris</link
+></member>
+	    <member
+><link linkend="details.reconcile"
+>Planificacions</link
+></member>
+	    <member
+><link linkend="details.ledgers"
+>Llibres majors</link
+></member>
+	    <member
+><link linkend="details.investments"
+>Inversions</link
+></member>
+	    <member
+><link linkend="details.settings"
+>Configuració</link
+></member>
+	    <member
+><link linkend="reference.menus"
+>Referència: Menús</link
+></member>
+	    <member
+><link linkend="credits"
+>Crèdits</link
+></member>
+	  </simplelist>
+	</entry>
+	<entry valign="top">
+	  <simplelist>
+	    <member
+><link linkend="details.currencies"
+>Divises</link
+></member>
+	    <member
+><link linkend="details.reconcile"
+>Conciliació</link
+></member>
+	    <member
+><link linkend="details.reports"
+>Informes</link
+></member>
+	    <member
+><link linkend="details.impexp"
+>Importar i exportar</link
+></member>
+	    <member
+><link linkend="details.loans"
+>Préstecs</link
+></member>
+	    <member
+><link linkend="details.budgets"
+>Pressupostos</link
+></member>
+	    <member
+><link linkend="details.forecast"
+>Previsió</link
+></member>
+	    <member
+><link linkend="details.search"
+>Cerca d'operacions</link
+></member>
+	    <member
+><link linkend="details.formats"
+>Formats de fitxer</link
+></member>
+	    <member
+><link linkend="details.database"
+>Base de dades</link
+></member>
+	    <member
+><link linkend="faq"
+>Preguntes i respostes</link
+></member>
+	    <member
+><link linkend="reference.widgets"
+>Referència: Ginys</link
+></member>
+	  </simplelist>
+	</entry>
+      </row>
+    </tbody>
+  </tgroup>
+</informaltable>
+ 
+</sect1>
+
+  
+</chapter>

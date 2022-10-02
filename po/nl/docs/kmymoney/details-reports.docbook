@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.reports">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Rapporten</title>
+
+<sect1 id="details.reports.avail">
+<title
+>Beschikbare rapporten</title>
+
+<para>
+<screenshot>
+	<screeninfo
+>Weergave van rapporten</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reports_view-all.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Weergave van rapporten</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>De Rapportenweergave geeft een lijst met alle beschikbare rapporten, gegroepeerd onder de volgende koppen. </para>
+
+<sect2>
+<title
+>Inkomsten en Uitgaven</title>
+<para
+>De rapporten in deze sectie tonen uw inkomsten en uitgaven ofwel voor de huidige maand of voor elke maand in het huidige jaar. De duur van het totale rapport en de duur gevat in elke kolom kan naar believen worden geconfigureerd. Grafieken en taartgrafieken kunnen ook geproduceerd worden. </para>
+</sect2>
+
+<sect2>
+<title
+>Netto vermogen</title>
+<para
+>Hier zijn rapporten die uw netto vermogen tonen, naar keuze op dit moment, elke maand van dit jaar, of elk jaar in uw geschiedenis. Daarnaast is er een 7-daagse Cashflow prognose en een Netto vermogen grafiek. Er zijn ook rapporten over de balansen van al uw rekeningen voor elk moment. </para>
+</sect2>
+
+<sect2>
+<title
+>Transacties</title>
+<para
+>In deze sectie zijn rapporten met lijsten van individuele transacties. Dat is de beste manier om uw rekeningregister over een bepaald tijdsperiode uit te printen. U kunt de transacties bij het printen naar wens groeperen door het juiste rapport te kiezen, zoals: <itemizedlist>
+  <listitem
+><para
+>Per rekening</para
+></listitem>
+  <listitem
+><para
+>Per categorie</para
+></listitem>
+  <listitem
+><para
+>Per maand of week</para
+></listitem>
+  <listitem
+><para
+>Per begunstigde</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Cashflow</title>
+<para
+>Het Cashflow rapport lijkt op een transactie rapport, maar het toont alle cashflow gerelateerde transacties. </para>
+</sect2>
+
+<sect2>
+<title
+>Investeringen</title>
+<para
+>Deze rapporten helpen u om uw investeringen te volgen. Ze bevatten alleen investeringsrekeningen. Er zijn een aantal verschillende presentatiefilters en stijlen, zoals getoond in deze gedeeltelijke lijst. </para>
+<itemizedlist>
+  <listitem
+><para
+>Investeringstransacties: Vergelijkbaar met een Transactiesrapport en bevat de prijzen van aandelen en hoeveelheden.</para
+></listitem>
+  <listitem
+><para
+>Investeringsportefeuille per rekening: toont de huidige aandelen, prijzen en waarde van elke rekening.</para
+></listitem>
+  <listitem
+><para
+>Investeringsportefeuille per type: hetzelfde als het vorige rapport, maar georganiseerd op type (Aandeel, Beleggingsfonds, &etc;)</para
+></listitem>
+  <listitem
+><para
+>Prestatie van de investeringen per rekening: Toont de jaarlijkse prestatie voor elke tijdsperiode. Dit geeft een cashflow-analyse voor al het geld dat IN- en UIT- van een rekening gaat. Als resultaat geeft dit een zeer accuraat beeld van hoe goed uw investeringen het doen.</para
+></listitem>
+  <listitem
+><para
+>Investerings-prestaties per Type: hetzelfde als het vorige rapport, maar georganiseerd op type (Aandeel, Beleggingsfonds, &etc;)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Er zijn ook grafieken voor Investeringsprijzen en Investeringswaarde. </para>
+</sect2>
+
+<sect2>
+<title
+>Belastingen</title>
+<para
+>De belastingrapporten zijn net zoals de transactierapporten, met alleen de belasting-gerelateerde categorieën. Hierdoor kunt u bepaalde categorieën als belasting-gerelateerd markeren, en vervolgens aan het eind van het jaar alles in een dik rapport zien. Ze kunnen dan gesorteerd zijn op categorie of begunstigde, en voor het laatste fiscale jaar. </para>
+</sect2>
+
+<sect2>
+<title
+>Budgettering</title>
+<para
+>De budget rapporten zijn vergelijkbaar met de netto vermogen rapporten, maar de rapporten kunnen het budget voor een bepaald jaar tonen, of zelfs vergelijken met de daadwerkelijk inkomsten en uitgaven van hetzelfde periode. </para>
+</sect2>
+
+<sect2>
+<title
+>Prognose</title>
+<para
+>De prognose rapporten zijn vergelijkbaar met de netto vermogen rapporten, maar gebruiken de informatie om een prognose te tonen. U kunt de informatie op meerdere niveau's en elk gekozen tijdsperiode bekijken. </para>
+</sect2>
+
+<sect2>
+<title
+>Informatie</title>
+<para
+>Deze rapporten tonen niet-transactie informatie over periodieken, rekeningen en leningen. </para>
+</sect2>
+
+<sect2>
+<title
+>Grafieken</title>
+<para
+>Als <link linkend="details.reports.charts"
+>grafieken</link
+> is ingeschakeld, dan kunt u in deze lijst alle rapporten zien die gemarkeerddie standaard een grafiek laten zien. Ze komen ook in een van de andere secties voor, maar ze zijn voor uw gemak ook hier verzameld. </para>
+</sect2>
+
+<sect2>
+<title
+>Favoriete rapporten</title>
+<para
+>In deze sectie ziet u alle rapporten die u in de configuratievenster voor rapporten heeft gemarkeerd als favoriet. Ze worden nog steeds genoemd in een van de andere secties, maar ze zijn voor uw gemak ook hier verzameld. Uw favoriete rapporten zijn ook om het u makkelijker te maken verzameld op de financiële samenvattingspagina. </para>
+</sect2>
+
+<sect2>
+<title
+>Rapporten configureren</title>
+<para
+>Om het configuratievenster voor rapporten te openen, opent u het rapport dat u wilt instellen, en drukt u op de knop <guibutton
+>Instellen</guibutton
+> aan de bovenkant van het rapport. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.reports.working">
+<title
+>Met rapporten werken</title>
+
+<para
+>Er zijn een aantal acties die u bij elk rapport kunt ondernemen. U heeft tot deze toegang door in de lijst met rapporten met de &RMB; te klikken. Nadat u een rapport heeft geopend, kunt u als alternatief met knoppen bovenaan het venster elk van deze aanroepen: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Grafiek: toon deze alleen als het rapport in staat is om een grafiek te tonen. Door te klikken op deze optie schakelt u tussen het rapport en de grafiek.</para
+></listitem>
+  <listitem
+><para
+>Instellen: Past de eigenschappen van dit rapport aan. U kunt het rapport naar wens aanpassen en voor later gebruik opslaan.</para
+></listitem>
+  <listitem
+><para
+>Nieuw: Creëer een nieuw aangepast rapport gebaseerd op het geselecteerde rapport.</para
+></listitem>
+  <listitem
+><para
+>Kopiëren: Het resultaat van het rapport kunt u kopiëren naar het klembord om dit in een ander programma zoals een spreadsheet, te plakken voor verdere analyze.</para
+></listitem>
+  <listitem
+><para
+>Exporteren: Rapporten kunt u opslaan in &HTML; of CSV formaat.</para
+></listitem>
+  <listitem
+><para
+>Verwijderen: u kunt aangepaste rapporten ook weer verwijderen. De standaardrapporten die met &kmymoney; zijn meegenomen, kunt u niet verwijderen.</para
+></listitem>
+  <listitem
+><para
+>Sluiten: Sluit het huidige rapport.</para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="details.reports.config">
+<title
+>Rapporten configureren</title>
+
+<sect2>
+<title
+>Werken met aangepaste rapporten</title>
+<para
+>U kunt de standaardrapporten instellen en ook uw eigen rapporten uit de standaardrapporten creëren door 'Nieuw' te selecteren en daarna het nieuwe rapport in te stellen. Als u 'Instellen' selecteert dan krijgt u de rapport-tab te zien. Initieel heeft deze dezelfde naam als het oude rapport met <quote
+>(aangepast)</quote
+> eraan toegevoegd. U kunt de naam naar wens veranderen. U kunt zelfs uw aangepaste rapporten dezelfde naam geven als een standaardrapport, of hetzelfde als een ander aangepast rapport. U kunt het commentaar-veld gebruiken om de rapporten verder van elkaar te onderscheiden. </para>
+
+<para
+>Het configuratievenster voor rapporten heeft aan de bovenkant een aantal tabs. Elke tab toont de configuratie-opties van een ander aspect van het rapport. </para>
+
+</sect2>
+
+<sect2
+><title
+>Rapportage Tab</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="report_configuration-reporttab.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Rapport Configuratie -Rapport</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Op dit tabblad kunt u de basis instellingen van het rapport vastleggen. <itemizedlist>
+  <listitem
+><para
+>Rapport naam: Kies hier een naam voor dit rapport.</para
+></listitem>
+  <listitem
+><para
+>Commentaar: Voeg commentaar toe om informatie over dit rapport vast te leggen.</para
+></listitem>
+  <listitem
+><para
+>Converteer waardes naar de standaard valuta: Selecteer deze optie om alle waarden in dit rapport naar uw standaard valuta te converteren. Markeer dit niet als u graag de bedragen in de originele valuta wilt zien. Als de valuta's niet geconverteerd zijn, dan krijgt u geen subtotalen te zien.</para
+></listitem>
+  <listitem
+><para
+>Markeer als favoriet rapport: Selecteer dit om te zorgen dat dit rapport in de groep <guilabel
+>Favoriete Rapporten</guilabel
+> op de startpagina te zien is.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2 id="details.reports.config.rowscolumns">
+<title
+>Rijen/kolommen tabblad</title>
+<para
+>In deze tab, kunt u instellen hoe u wilt dat de rijen en kolommen worden geselecteerd en georganiseerd. Deze tab geeft verschillende configuratie-opties afhankelijk van de door u geselecteerde rapportstijl. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="report_configuration-rowscolumns.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Rapport Configuratie -Rijen en kolommen</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Voor inkomsten/uitgaven- en netto vermogen-rapporten: <itemizedlist>
+  <listitem
+><para
+>Kolommen: Kies de grootte van de tijdsperiode die iedere kolom moet omspannen</para
+></listitem>
+  <listitem
+><para
+>Rijen: Kies welk type rekeningen moeten worden getoond als rijen in dit rapport</para
+></listitem>
+  <listitem
+><para
+>Detail: Kies welk detailniveau u wilt zien in dit rapport.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>De volgende detailniveau's zijn beschikbaar: <itemizedlist>
+  <listitem
+><para
+>Alles: Toon elke categorie of rekening.</para
+></listitem>
+  <listitem
+><para
+>Hoogste niveau: Toon alleen de categorie of rekening op het hoogste niveau, en toon de som van de lagere categorieën of rekeningen in die waarden.</para
+></listitem>
+  <listitem
+><para
+>Groepen: Toon alleen de totalen van de inkomsten, uitgaven, bezittingen, of schulden.</para
+></listitem>
+  <listitem
+><para
+>Totalen: toon alleen de regel met de totalen.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Voor transactierapporten: <itemizedlist>
+  <listitem
+><para
+>Organiseer als: Kies hoe u de transacties in dit rapport wilt groeperen.</para
+></listitem>
+  <listitem
+><para
+>Toon kolommen: Kies welke kolommen moeten worden getoond in dit rapport. De datum en het bedrag van transacties worden altijd getoond.</para
+></listitem>
+  <listitem
+><para
+>Alleen Belasting categorieën tonen: Toont alleen categorieën die zijn gemarkeerd als belasting-gerelateerd.</para
+></listitem>
+  <listitem
+><para
+>Alleen investeringsrekeningen meenemen: Toon alleen transacties van investeringsrekeningen.</para
+></listitem>
+  <listitem
+><para
+>Uitsluitend leningen: Toon alleen transacties van leningen.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Grafiek Tabblad</title>
+
+<para
+>In deze tab kunt u het uiterlijk van het rapport instellen als er grafieken in voorkomen. Zie de sectie <link linkend="details.reports.charts"
+>Grafieken &amp; Kaarten</link
+> voor meer uitleg over de soorten grafieken. <itemizedlist>
+  <listitem
+><para
+>Grafiek Type: De gewenste visuele opmaak van de grafiek.</para
+></listitem>
+  <listitem
+><para
+>Rasterlijnen tonen: Selecteer deze optie om zowel horizontale als verticale lijnen te tonen in de grafiek.</para
+></listitem>
+  <listitem
+><para
+>Teken waarden op de grafiek: Selecteer deze optie om de data zelf voor de gekozen datapunten op de grafiek te vermelden.</para
+></listitem>
+  <listitem
+><para
+>Laat standaard als grafiek zien: Selecteer deze optie om dit rapport na het openen als een grafiek te tonen.</para
+></listitem>
+  <listitem
+><para
+>Lijndikte: de breedte van de datalijnen in de grafiek.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Andere tabbladen</title>
+<para
+>De andere tabs in dit dialoogvenster zijn hetzelfde als in het dialoogvenster voor transacties doorzoeken. Lees deze <link linkend="details.search"
+>documentatie</link
+> over dat dialoogvenster voor de details over de andere tabs.</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.reports.charts">
+<title
+>Grafieken &amp; Kaarten</title>
+
+<sect2>
+<title
+>Als een grafiek tonen</title>
+
+<para
+>Elk rapport kunt u naar keuze in tekst vorm of in grafische (grafiek) vorm bekijken. In beide gevallen zijn dezelfde rapport configuratieparameters van toepassing. U kunt eenvoudig tussen de tekst vorm en de grafische vorm omschakelen door op de knop <guibutton
+>Grafiek</guibutton
+> of <guibutton
+>Rapporten</guibutton
+> aan de bovenkant van het rapport te drukken. </para>
+
+<para
+>U moet aandacht geven aan het beperken van de hoeveelheid data dat u wilt laten zien op een grafiek. Als u niet voorzichtig bent, zal het gebruik van dezelfde configuratie voor zowel formulieren met tekst als met grafieken inhouden dat het  mogelijk is om een grafiek zo te configureren dat het visueel rommelig, onaantrekkelijk, en niet informatief is. &kmymoney; dwingt u niet om uw grafieken leesbaar en bruikbaar te houden! </para>
+
+</sect2>
+
+<sect2>
+<title
+>Beschikbare grafieksoorten</title>
+
+<sect3>
+<title
+>Lijngrafiek</title>
+
+<para
+>Een lijngrafiek is een van de meest simpele grafieken. Er is een lijn voor elke serie. (Meestal is een serie een enkele rekening of categorie; zie hieronder voor meer details daarover.) De tijd ziet u aan de onderkant, en de bedragen aan de linkerkant. </para>
+
+<para
+>De gedetailleerdheid van elke lijn regelt u in de tab <link linkend="details.reports.config.rowscolumns"
+>Rijen/Kolommen</link
+> van de grafiek-configuratie. Als u kiest voor het detailniveau <quote
+>Hoogste niveau</quote
+>, dan is er een lijn voor elk van hoogste niveau rekeningen of categorieën die het totaal van alle lagere rekeningen of subcategorieën toont. Als u kiest voor  <quote
+>Groepen</quote
+> dan zal het een lijn voor inkomsten, uitgaven, bezittingen, of schulden. tonen, afhankelijk van andere instellingen. </para>
+</sect3>
+
+<sect3>
+<title
+>Balkgrafiek</title>
+
+<para
+>De balkgrafiek werkt hetzelfde als de lijngrafiek, behalve dat er een balk is voor elke serie in elke stuk tijd. </para>
+</sect3>
+
+<sect3>
+<title
+>Taartgrafiek</title>
+
+<para
+>De taartgrafiek is een van de meest simpele grafieken. Het toont voor een tijdstip een taartpunt, in plaats van waarden over een tijdsperiode. Deze grafiek toont alleen totalen voor elk geselecteerd rapport. Als uw rapport zo is ingesteld dat het NIET bedragen naar de basisvaluta converteert, dan is er geen totaal en is dit rapport onbruikbaar. </para>
+</sect3>
+
+<sect3>
+<title
+>Ringgrafiek</title>
+
+<para
+>De ringgrafiek lijkt erg op de taartgrafiek, behalve dat er een <quote
+>ring</quote
+> is voor elk stuk tijd in het rapport. </para>
+</sect3>
+
+</sect2>
+
+</sect1>
+</chapter>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="reference.widgets">
+<sect1info>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</sect1info>
+
+<title
+>Widgets</title>
+
+<para
+>&kappname; tiene algunos widgets específicos que no se encuentran en otras aplicaciones. El uso de estos widgets se explica en este capítulo. </para>
+
+<sect2 id="reference.widgets.datepicker">
+<title
+>Widget de entrada de fecha</title>
+
+<para
+>Siempre que &kappname; necesite información sobre una fecha específica, &eg; la fecha de envío de una transacción o la fecha de apertura de una cuenta, ofrece al usuario el <emphasis
+>widget de entrada de datos</emphasis
+>. Este widget consiste en tres campos y un botón. Los campos presentan el <emphasis
+>día</emphasis
+>, el <emphasis
+>mes</emphasis
+>, y el <emphasis
+>año</emphasis
+>, separados por los caracteres separadores de fecha especificados en su configuración local. El botón, si se presiona, abre el widget <emphasis
+>selector de fechas</emphasis
+>. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Consejo del día</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="date_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Widget de fecha</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Dentro del widget de entrada de fecha, las teclas del cursor izquierda/derecha se pueden usar para cambiar entre los campos de <emphasis
+>día</emphasis
+>, <emphasis
+>mes</emphasis
+>, y <emphasis
+>año</emphasis
+>. Usando las teclas del cursor arriba/abajo, se incrementa o disminuye el valor del campo seleccionado. Las teclas <keycap
+>+</keycap
+> y <keycap
+>-</keycap
+> se pueden utilizar para incrementar o disminuir un solo día. Se consideran los límites del mes y el año, y se incrementarán o disminuirán si es necesario. Presionar <keycap
+>T</keycap
+> establecerá la fecha a la del día de hoy. </para>
+
+<para
+>La fecha también se puede cambiar utilizando el ratón. Haciendo clic en el campo de <emphasis
+>día</emphasis
+>, <emphasis
+>mes</emphasis
+> o <emphasis
+>año</emphasis
+> se selecciona el campo. El valor puede entonces aumentarse o disminuirse usando los botones de flecha a la derecha del widget. Actúan exactamente igual que las teclas arriba/abajo. </para>
+
+<para
+>El selector de fecha se abre cuando se presiona el botón a la derecha de los botones de flecha. Muestra cuatro botones de flecha en la parte superior, dos a cada lado del mes y el año seleccionados actualmente. Los botones de más a la izquierda se usan para disminuir el año y el mes; los botones a la derecha del año se usan para incrementar el mes y el año. El botón de más a la derecha cierra el selector de fecha. </para>
+
+<para
+>Bajo los botones, el widget muestra una página de calendario para el mes seleccionado. Hacer clic en un día del calendario selecciona esa fecha, cierra el selector de fecha y transfiere la fecha elegida a los campos de <emphasis
+>día</emphasis
+>, <emphasis
+>mes</emphasis
+> y <emphasis
+>año</emphasis
+>. </para>
+
+<para
+>En la parte inferior del widget del selector de fecha, hay un botón, un campo para la edición de texto y una lista desplegable. Presionando el botón se selecciona la fecha de hoy. El campo de texto se puede usar para introducir una fecha específica. Presionar la tecla <keycap
+>INTRO</keycap
+> muestra esa fecha en el widget del selector de fecha. La lista desplegable le permite al usuario seleccionar una semana específica, y continuar para elegir una fecha desde ahí. </para>
+</sect2>
+
+<sect2 id="reference.widgets.value">
+<title
+>Entrada del valor</title>
+<para
+>El widget de entrada del valor consiste en un campo de texto (que acepta dígitos, separadores de miles y símbolos decimales), además de un botón a la derecha. Use los dígitos para introducir el valor. Separe la parte fraccionaria introduciendo el separador decimal de su configuración local. Si hace clic en el botón de la derecha o presiona una tecla que representa una operación numérica (&eg;, +,-,/,* or %), surgirá una pequeña calculadora y le permitirá calcular el valor final. </para>
+
+<para
+>Los valores negativos se pueden introducir precediendo el valor de un signo menos. En caso de que su configuración local esté establecida para mostrar los números negativos entre paréntesis, el valor también se puede incluir entre paréntesis en el widget de entrada del valor. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Consejo del día</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="value_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Widget de valor</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Use el widget de la calculadora como una calculadora normal, y una vez haya terminado salga haciendo clic en el botón «=» o presione la tecla «=» de su teclado. </para>
+</sect2>
+
+<sect2 id="reference.widgets.payee">
+<title
+>Entrada de beneficiario/pagador</title>
+
+<para
+>Cuando se le requiere que introduzca un beneficiario/pagador para una transacción, puede empezar a introducir el nombre presionando las teclas de su teclado. Siempre que existan entradas coincidentes en la lista de beneficiarios/pagadores mantenida por &kappname;, se mostrarán en un recuadro por debajo o por encima del área de entrada de texto. Usando el ratón o las teclas de arriba/abajo puede seleccionar un nombre de la lista. Usando el teclado requiere que usted seleccione la entrada presionando la tecla INTRO. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Consejo del día</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Widget del beneficiario</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Si se introduce un nombre que no es conocido para &kappname;, se le preguntará si desea crear un nuevo registro de beneficiario/pagador. Si no desea hacerlo, entonces el campo estará en blanco. De la otra forma, el registro se creará y será añadido a la lista. </para>
+
+<para
+>Una vez el campo de edición contiene caracteres, la lista solo mostrará los pagadores que coincidan con la secuencia de caracteres introducida. Haga doble clic en la flecha de la lista desplegable para mostrar a todos los beneficiarios de la lista. </para>
+
+</sect2>
+
+<sect2 id="reference.widgets.category">
+<title
+>Entrada de categoría/cuenta</title>
+
+<para
+>Cuando se le requiere que introduzca el nombre de una categoría o cuenta, puede empezar introduciendo el nombre mediante el teclado. Mientras existan entradas coincidentes en la lista de categorías/cuentas conocidas para &kappname;, se mostrarán en el recuadro por encima o por debajo del área de entrada de texto. Usando el ratón o las teclas arriba/abajo, se puede seleccionar un nombre de esa lista. Usando el teclado requiere que seleccione la entrada presionando la tecla INTRO. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Consejo del día</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="category_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Widget de categorías</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Si se introduce un nombre que aún no es conocido para &kappname;, se le preguntará si desea crear un nuevo registro de categoría. Si no desea hacerlo, entonces el campo se quedará en blanco. De otro modo, el registro será creado y añadido a la lista. </para>
+
+<para
+>Una vez el campo de edición se llena de caracteres, la lista solo mostrará aquellas categorías/cuentas que coincidan con la secuencia de caracteres introducida. Haga doble clic en la flecha de la lista desplegable para mostrar la lista completa. </para>
+
+</sect2>
+</sect1>

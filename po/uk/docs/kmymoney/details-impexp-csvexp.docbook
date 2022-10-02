@@ -1,0 +1,28 @@
+<sect1 id="details.impexp.csvexp">
+<title
+>Експортування CSV</title>
+<para
+>Щоб експортувати один з ваших рахунків до файла CSV, виберіть пункт <menuchoice
+><guimenuitem
+>Експортувати</guimenuitem
+> <guimenuitem
+>CSV</guimenuitem
+></menuchoice
+> з меню <guimenu
+>Файл</guimenu
+>. Програма попросить вас вказати певні параметри експортування. </para>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="csvexport.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>Експортування до CSV</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+</sect1>

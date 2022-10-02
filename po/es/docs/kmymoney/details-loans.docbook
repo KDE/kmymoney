@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.loans">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Darin.Strait; &Darin.Strait.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Préstamos</title>
+
+<sect1 id="details.loans.general">
+<title
+>Entendiendo los préstamos</title>
+
+<para
+>Esta sección proporciona una visión general de cómo &kappname; gestiona los préstamos. Las reglamentaciones y costumbres varían de localidad a localidad. Para explicaciones más detalladas sobre préstamos, además de información sobre reglamentaciones locales y costumbres, por favor consulte otras fuentes. </para>
+
+<para
+>Un préstamo es un acuerdo bajo el cual un prestatario recibe dinero de un prestador y acuerda devolver el dinero en una fecha futura. &kappname; le permite llevar un registro de los préstamos en los que usted, como prestatario, toma prestado dinero o, como prestador, presta dinero a alguien. La mayoría de personas toman prestado más que prestan, así que normalmente usted será el prestatario y alguna entidad financiera será el prestador. Si presta dinero a un familiar o un amigo, también puede usar &kappname; para llevar un registro de este préstamo. </para>
+
+<para
+>Esta guía supone que usted está tomando prestado dinero de algún tipo de compañía financera, pero los asuntos de los que se tratará aquí se aplican igualmente bien a los préstamos que usted les pueda conceder a otras personas. La principal diferencia entre tomar prestado y prestar dinero es que, cuando se toma prestado, se utiliza una categoría de gastos para llevar un registro de los intereses, y una de ingresos cuando se presta. </para>
+
+<formalpara
+><title
+>Principal del préstamo</title>
+<para
+>La cantidad que se presta se llama <quote
+>monto del préstamo</quote
+> o <quote
+>principal</quote
+>. </para>
+</formalpara>
+
+<formalpara
+><title
+>Plazo</title>
+<para
+>El periodo de un préstamo se llama <quote
+>plazo</quote
+> del préstamo. Al final del plazo, la totalidad del principal se habrá devuelto al prestador. Los plazos se suelen expresar en semanas, meses o años. Un plazo también se puede expresar por el número de pagos. Por ejemplo, un préstamo a un año con cuotas semanales se podría describir como un préstamo a un año o un préstamo con 52 cuotas. </para>
+</formalpara>
+
+<formalpara
+><title
+>Cuotas</title>
+<para
+>La devolución del principal al prestador por lo general no se hace como un solo pago global. En su lugar, se hacen una serie de pagos, cada uno de los cuales representa una fracción del principal. Estos pagos a veces se conocen como <quote
+>pagos de amortización</quote
+>, y en &kappname; se define la <quote
+>Amortización</quote
+> como el acto de pagar un préstamo en cuotas. </para>
+</formalpara>
+
+<formalpara
+><title
+>Frecuencia de los pagos</title>
+<para
+>La frecuencia de las cuotas se denomina <quote
+>Frecuencia de los pagos</quote
+> en &kappname;. Ejemplos de periodicidad pueden ser semanal, bisemanal, mensual, trimestral o anual. En los EE.UU., los pagos periódicos con comúnmente realizados cada mes, con lo que el periodo del préstamo es de un mes. </para>
+</formalpara>
+
+<formalpara
+><title
+>Tasa de interés</title>
+<para
+>Por el privilegio de poder utilizar el dinero, el prestatario pagará al prestador una tarifa llamada <quote
+>interés</quote
+>, normalmente expresada como un porcentaje de la cantidad del principal en un periodo de tiempo determinado. Las tasas de interés pueden ser fijas, donde la tasa de interés no cambia durante la vida del préstamo, o variable, donde la tasa de interés puede cambiar con el tiempo. Típicamente, el pago del interés se incluye con cada cuota periódica. </para>
+</formalpara>
+
+<formalpara
+><title
+>Cuotas periódicas</title>
+<para
+>Como estos pagos generalmente se hacen según algún tipo de planificación, sea de forma semanal, mensual, trimestral o anual, se les conoce como <quote
+>cuotas periódicas</quote
+>. La suma de todos los pagos periódicos más el pago final será igual al principal del préstamo más los intereses. </para>
+</formalpara>
+
+<formalpara
+><title
+>Tarifas</title>
+<para
+>Puede haber otras tarifas además de los intereses que habrá que pagar con cada cuota. Estas se llaman <quote
+>tarifas recurrentes</quote
+>. Ejemplos de tarifas recurrentes incluyen (pero no necesariamente están limitadas a): <itemizedlist>
+  <listitem>
+    <para
+>Pagos a cuenta de <quote
+>embargo</quote
+> o <quote
+>fideicomiso</quote
+>. (Los pagos de esta clase se utilizan comúnmente para retener fondos para pagar impuestos anuales o bianuales sobre propiedades). </para>
+  </listitem>
+
+  <listitem
+><para
+>Seguro de la hipoteca</para
+></listitem>
+
+  <listitem
+><para
+>Seguro por incapacidad</para
+></listitem>
+
+  <listitem
+><para
+>Tarifas de mantenimiento del préstamo</para
+></listitem>
+</itemizedlist>
+</para>
+</formalpara>
+
+<formalpara
+><title
+>Resumen</title>
+<para
+>En resumen, el prestatario recibe una suma total de dinero del prestador al inicio del préstamo. El prestatario le hace al prestador unos pagos periódicos. Cada pago periódico es la suma del pago principal (que se utiliza para devolver el saldo del préstamo), más el pago de los intereses (que recompensa al prestador por permitir el uso del dinero por el prestatario), más otras tarifas recurrentes (que cubren cualquier incidencia). Al final del préstamo, el prestatario ha devuelto el total del principal. </para>
+</formalpara>
+</sect1>
+
+<sect1 id="details.loans.example">
+<title
+>Ejemplo</title>
+<para
+>Por ejemplo, usted puede tomar prestados 25.000 dólares para un coche nuevo, y acuerda pagarle al banco una cuota cada mes durante 60 meses. La tasa de interés del préstamo podría ser del 5,5%. </para>
+
+<para
+>En este contexto, el monto del préstamo es de 25.000$. El plazo del préstamo es 60 meses, o 5 años. El plazo del préstamo también se podría describir como 60 pagos, ya que habrá un pago al mes durante cinco años. La frecuencia de las cuotas es de un mes, ya que los pagos periódicos se realizarán una vez al mes. La cuota periódica, calculada por &kappname; sería de 477,53$. </para>
+
+<para
+>Un <quote
+>calendario de préstamo</quote
+> es una planilla o tabla que muestra la fecha en la que se debe pagar una cuota y la cantidad de cada pago periódico. A menudo, estas planificaciones descomponen el pago periódico en sus partes constituyentes: el pago del principal, el pago del interés y el de las tarifas recurrentes. </para>
+</sect1>
+
+<sect1 id="details.loans.creation">
+<title
+>Creando un nuevo préstamo</title>
+
+<para
+>En &kappname;, un préstamo es un tipo de cuenta. Por consiguiente, para crear un nuevo préstamo se empieza seleccionando <menuchoice
+> <guimenu
+>Cuenta</guimenu
+><guimenuitem
+>Nueva cuenta</guimenuitem
+> </menuchoice
+>. Continúe respondiendo a las preguntas que le plantea el asistente. </para>
+
+<para
+>Opcionalmente, un préstamo se puede asociar con una organización en particular. Si está tomando prestado dinero de una compañía hipotecaria o de una compañía de préstamos para automóviles, podría crear una entrada de organización que describa esta empresa y asociarla con su préstamo. Si el préstamo se lo ha concedido su tío Ted, no se requiere que se establezca una organización. </para>
+</sect1>
+
+<sect1 id="details.loans.extra-payments">
+<title
+>Hacer pagos extra del principal en préstamos</title>
+
+<para
+>Si desea hacer pagos extras del principal, puede hacerlo. Simplemente <link linkend="details.ledger.transactions"
+>introduzca un asiento</link
+>  utilizando el libro mayor. Este pago extra del principal se tomará en cuenta para el cálculo de los intereses de la próxima cuota periódica. </para>
+
+<para
+>Ejemplos de pagos extra del principal incluyen (pero no necesariamente están limitados a): </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Contribuir con 50$ extra cada mes</para
+></listitem>
+
+  <listitem>
+    <para
+>Doblar la cuota periódica del principal para cada periodo. (La devolución del principal se puede averiguar para cualquier periodo particular referido a la planificación del préstamo). </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Pagar una decimotercera cuota del principal cada año (esto supone que el préstamo se está pagando en cuotas mensuales). </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Nota: Si dobla la cuota del principal en cada pago periódico, necesitará recalcular la planificación del préstamo para cada plazo. Esto permitirá que haya un valor precioso del pago del principal requerido con cada cuota. </para>
+</sect1>
+</chapter>
+

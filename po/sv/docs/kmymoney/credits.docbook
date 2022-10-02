@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="credits">
+<chapterinfo>
+  <date
+>2019-04-05</date>
+  <releaseinfo
+>5.0.4</releaseinfo>
+</chapterinfo>
+
+<title
+>Tack till</title>
+
+<para
+>Program Copyright &copy; 2000-2019 &kmymoney;-utvecklingsgruppen </para>
+
+<para
+>&underGPL; </para>
+
+<para
+>Dokumentation Copyright &copy; 2000-2019 &kmymoney;-utvecklingsgruppen </para>
+
+<para
+>Översättning Stefan Asserhäll <email
+>stefan.asserhall@bredband.net</email
+></para
+> 
+<para
+>&underFDL; </para>
+
+<sect1 id="credits.active">
+<title
+>Aktiva utvecklare</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title
+>Thomas Baumgart &Thomas.Baumgart.mail;</title>
+      <para
+>Utgåveansvar och de facto underhåll. Kärnprogram. Projektadministration. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Ralf Habacker &Ralf.Habacker.mail;</title>
+      <para
+>Utvecklare.</para>
+    </formalpara>
+  </listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="credits.special">
+<title
+>Särskilt tack till</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title
+>Jack Ostroff &Jack.H.Ostroff.mail;</title>
+      <para
+>Dokumentation och användarstöd.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Kevin Tambascio <email
+>ktambascio@users.sourceforge.net</email
+></title>
+      <para
+>Ursprungligt stöd för investeringar.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Javier Campos Morales <email
+>javi_c@users.sourceforge.net</email
+></title>
+      <para
+>Utvecklare och grafiker.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Robert Wadley &Robert.Wadley.mail;</title>
+      <para
+>Grafiker. ikoner, startskärm, hemvy.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Laurent Montel <email
+>montel@kde.org</email
+></title>
+      <para
+>Programfixar och konvertering till &kde; 4.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Wolfgang Rohdewald <email
+>woro@users.sourceforge.net</email
+></title>
+      <para
+>Programfixar.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Marko Käning <email
+>mk-lists@email.de</email
+></title>
+      <para
+>Programfixar, paketering och KF5-CI för OS X.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Allan Anderson ✝&Allan.Anderson.mail;</title>
+      <para
+>Programfixar, CSV-import och -export.</para>
+    </formalpara>
+  </listitem>
+
+</itemizedlist>
+</sect1>
+
+<sect1 id="credits.past">
+<title
+>Inaktiva utvecklare och bidragsgivare till tidigare versioner</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title
+>Cristian Oneţ &Cristian.Onet.mail;</title>
+      <para
+>Programfixar och insticksprogram.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Cristian Dávid &Christian.David.mail;</title>
+      <para
+>Utvecklare.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Łukasz Wojniłowicz &Lukasz.Wojnilowicz.mail;</title>
+      <para
+>Utvecklare.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Michael Edwardes &Michael.T.Edwardes.mail;</title>
+      <para
+>Ursprunglig upphovsman, mycket ursprunglig källkod. Projektadministratör. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Alvaro Soliverez &Alvaro.Soliverez.mail;</title>
+      <para
+>Prognos. Rapporter.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Ace Jones &Ace.Jones.mail;</title>
+      <para
+>Rapportlogik. OFX-import. Direktkurser. Redaktör för dokumentation.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Tony Bloomfield &Tony.Bloomfield.mail;</title>
+      <para
+>Import från &gnucash;. Databasstöd.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Felix Rodriguez <email
+>frodriguez@users.sourceforge.net</email
+></title>
+      <para
+>Projektadministration.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>John C <email
+>tacoturtle@users.sourceforge.net</email
+></title>
+      <para
+>Utvecklare.</para>
+    </formalpara>
+  </listitem>
+ 
+  <listitem>
+    <formalpara>
+      <title
+>Fernando Vilas &Fernando.Vilas.mail;</title>
+      <para
+>Databasstöd.</para>
+    </formalpara>
+  </listitem>
+
+
+  <listitem>
+    <formalpara>
+      <title
+>Roger Lum &Roger.Lum.mail;</title>
+      <para
+>Dokumentation.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Darin Strait &Darin.Strait.mail;</title>
+      <para
+>Dokumentation.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Colin Wright &Colin.Wright.mail;</title>
+      <para
+>Programfixar och dokumentation.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Bernd Gonsior <email
+>bernd.gonsior@googlemail.com</email
+></title>
+      <para
+>Rapporter. Överföring till &kde;4/&Qt;4.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Ian Neal <email
+>iann_bugzilla@blueyonder.co.uk</email
+></title>
+      <para
+>Schemalagda överföringar och kalendrar.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Överföring till &kde;4/&Qt;4</title>
+      <para
+>Detta har varit en kraftansträngning, och många utvecklare har bidragit. Vi ber om ursäkt om vi glömt att nämna någon explicit.</para>
+    </formalpara>
+  </listitem>
+
+</itemizedlist>
+
+</sect1>
+</chapter>

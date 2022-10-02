@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.reconcile">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-21</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Avstämning</title>
+
+<sect1 id="details.reconcile.whatis">
+<title
+>Vad är avstämning?</title>
+
+<para
+>Avstämning omfattar att jämföra transaktionerna du har skrivit in i &kmymoney; med transaktioner listade för det kontot av institutionen. Det görs oftast med transaktionslistan på ett utdrag, vare sig det är ett bankutdrag, kreditkortsutdrag, låneutdrag eller något annat utdrag. Det kan också göras med en kontolista från nätet, även om det är mindre vanligt. Om några avvikelser hittas, så har antingen du eller den som skapade utdraget gjort ett misstag. </para>
+
+<para
+>För att stämma av ett konto, välj kontot i kombinationsrutan och klicka på <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="reconcile.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> avstämningsikonen, välj menyalternativet <menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Stäm av...</guimenuitem
+> </menuchoice
+> eller använd genvägen <keycombo
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+>. </para>
+</sect1>
+
+<sect1 id="details.reconcile.wizard">
+<title
+>Avstämningsguiden</title>
+<para
+>Det öppnar avstämningsguiden. Guidens första sida beskriver kortfattat processen du kommer att följa. Klicka på <guibutton
+>Nästa</guibutton
+> för att starta själva guiden. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Avstämningsguiden</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile1.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Avstämningsguiden</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.reconcile.wizard.statement">
+<title
+>Utdragsinformation</title>
+<para
+>Utdragets datum, ingående behållning och slutlig behållning hittar du på utdraget. Försäkra dig om att siffrorna stämmer och klicka på knappen <guibutton
+>Nästa</guibutton
+>. Om siffrorna inte stämmer, skriv in siffrorna som anges på utdraget och klicka på knappen <guibutton
+>Nästa</guibutton
+>. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Avstämningsguiden</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile2.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Avstämningsguiden</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect2>
+
+<sect2 id="details.reconcile.wizard.interest">
+<title
+>Ränta</title>
+<para
+>Om utdragets avstämning gäller ett bankkonto, eller något annat konto med ränta och/eller avgifter, skriv då in dessa värden i motsvarande fält. En kategori kan tilldelas till vart och ett av beloppen. </para>
+
+<note>
+<para
+>Räntefältet är till för ränteinkomster. Om du exempelvis måste betala ränta för ett kreditkortskonto, måste det skrivas in som en avgift. </para>
+</note>
+
+<para>
+<screenshot>
+	<screeninfo
+>Avstämningsguiden</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile3.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Avstämningsguiden</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Klicka på <guibutton
+>Slutför</guibutton
+> för att börja jämföra utdraget med det du har skrivit in. Observera att det avslutar avstämningsguiden, men inte avstämningsprocessen. Det ändrar också visningen i huvudboken genom att bara visa transaktioner som inte redan har markerats som avstämda. Som beskrivs ovan, måste du fortfarande kontrollera transaktioner och därefter tala om för &kmymoney; att kontot är avstämt. </para>
+</sect2>
+
+<sect2 id="details.reconcile.wizard.clearing">
+<title
+>Kontrollera transaktioner</title>
+<para
+>Under avstämningen kan vilken transaktion som helst redigeras för att få den att stämma med utdraget. För att markera en transaktion som kontrollerad, klicka på kolumnen <guilabel
+>K</guilabel
+> i listvyn. En transaktion är kontrollerad när den stämmer med transaktionen på utdraget. </para>
+
+<para
+>Kommandoramen (precis under området med transaktionslistan) visar utdragets belopp till vänster, det avstämda beloppet i mitten och skillnaden till höger. När transaktioner markeras som avstämda, uppdateras värdena för att visa ändringen. </para>
+
+<para
+>Observera dock, att eftersom avstämning är processen då information i kontot matchas med den på ett utdrag, kommer ändringar av transaktioner efter utdragets datum som skrevs in i guiden att sparas, men får ingen effekt på det avstämda beloppet som visas i kommandoramen. </para>
+
+<screenshot>
+	<screeninfo
+>Avstämningsguiden</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile4.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Avstämningsguiden</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="details.reconcile.complete">
+<title
+>Slutföra avstämningen</title>
+
+<sect3 id="details.reconcile.finish">
+<title
+>Göra färdigt avstämningen</title>
+<para
+>När skillnaden är noll är kontot avstämt, och du kan klicka på knappen <guibutton
+>Slutför</guibutton
+>. När du gör det, tar &kmymoney; alla transaktioner som markerats som kontrollerade och markerar dem som avstämda, och värdet i <guilabel
+>K</guilabel
+>-kolumnen ändras från <quote
+>K</quote
+> till <quote
+>A</quote
+> för att visa ändringen. Dessutom sparar det ändringarna och registrerar att kontot har stämts av. (Filen måste fortfarande sparas för att spara alla ändringar permanent.) </para>
+</sect3>
+
+<sect3 id="details.reconcile.postpone">
+<title
+>Senarelägga avstämningen</title>
+<para
+>Om du har problem med att slutföra avstämningen, eller behöver samla in ytterligare information innan processen kan slutföras, kan du senarelägga processen genom att klicka på knappen <guibutton
+>Senarelägg</guibutton
+>. När du gör det, kommer &kmymoney; ihåg värdena du skrev in när guiden startades, kontrollerade transaktioner markeras inte som avstämda, och huvudboken återställs till sin vanliga visning. Om &kmymoney; avslutas innan antingen <guibutton
+>Slutför</guibutton
+> eller <guibutton
+>Senarelägg</guibutton
+> klickas, får det samma effekt som att klicka på <guibutton
+>Senarelägg</guibutton
+>. Alla redigeringar som har utförts, som att markera transaktioner som kontrollerade eller skriva in nya transaktioner, rörs inte, och du kan fortfarande spara dem innan &kmymoney; avslutas. Du måste dock använda avstämningsguiden igen för att stämma av kontot. </para>
+
+<para
+>När avstämningsguiden används för det här kontot nästa gång, kommer &kmymoney; ihåg värdena du skrev in när guiden användes förra gången, och du kommer att kunna ändra dem, om det behövs. I detta fall är guidens inledande skärm annorlunda, för att påminna dig om det. </para>
+
+<screenshot>
+	<screeninfo
+>Avstämningsguiden</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile-redo.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Avstämningsguiden</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+
+</sect3>
+</sect2>
+</sect1>
+
+</chapter>
+

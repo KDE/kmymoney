@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="credits">
+<chapterinfo>
+  <date
+>5 d'abril de 2019</date>
+  <releaseinfo
+>5.0.4</releaseinfo>
+</chapterinfo>
+
+<title
+>Crèdits</title>
+
+<para
+>Copyright del programa &copy; 2000-2019, L'equip de desenvolupament del &kmymoney; </para>
+
+<para
+>&underGPL; </para>
+
+<para
+>Copyright de la documentació &copy; 2000-2019, L'equip de desenvolupament del &kmymoney; </para>
+
+<para
+>Traductor de la documentació: &credits.Antoni.Bella;</para
+> <para
+>Revisor de la documentació: &credits.JosepMa.Ferrer;</para
+> 
+<para
+>&underFDL; </para>
+
+<sect1 id="credits.active">
+<title
+>Desenvolupadors actius</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title
+>Thomas Baumgart &Thomas.Baumgart.mail;</title>
+      <para
+>Gestiona les versions i és mantenidor de facto. Motor intern. Administració del projecte. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Ralf Habacker &Ralf.Habacker.mail;</title>
+      <para
+>Desenvolupador.</para>
+    </formalpara>
+  </listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="credits.special">
+<title
+>Un agraïment especial</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title
+>Jack Ostroff &Jack.H.Ostroff.mail;</title>
+      <para
+>Documentació i ajuda als usuaris.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Kevin Tambascio <email
+>ktambascio@users.sourceforge.net</email
+></title>
+      <para
+>Implementació inicial de les inversions.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Javier Campos Morales <email
+>javi_c@users.sourceforge.net</email
+></title>
+      <para
+>Desenvolupador i artista.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Robert Wadley &Robert.Wadley.mail;</title>
+      <para
+>Artista, icones, pantalla de presentació i vista de casa.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Laurent Montel <email
+>montel@kde.org</email
+></title>
+      <para
+>Pedaços i adaptació al &kde; 4.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Wolfgang Rohdewald <email
+>woro@users.sourceforge.net</email
+></title>
+      <para
+>Pedaços.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Marko Käning <email
+>mk-lists@email.de</email
+></title>
+      <para
+>Pedaços i empaquetat i KF5-CI per a l'OS X.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Allan Anderson ✝&Allan.Anderson.mail;</title>
+      <para
+>Pedaços. Importació/exportació de CSV.</para>
+    </formalpara>
+  </listitem>
+
+</itemizedlist>
+</sect1>
+
+<sect1 id="credits.past">
+<title
+>Desenvolupadors inactius que han col·laborat en versions anteriors</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title
+>Cristian Oneţ &Cristian.Onet.mail;</title>
+      <para
+>Pedaços i connectors.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Cristian Dávid &Christian.David.mail;</title>
+      <para
+>Desenvolupador.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Łukasz Wojniłowicz &Lukasz.Wojnilowicz.mail;</title>
+      <para
+>Desenvolupador.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Michael Edwardes &Michael.T.Edwardes.mail;</title>
+      <para
+>Autor inicial, gran part del codi font inicial. Administrador del projecte. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Alvaro Soliverez &Alvaro.Soliverez.mail;</title>
+      <para
+>Previsió. Informes.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Ace Jones &Ace.Jones.mail;</title>
+      <para
+>Lògica dels informes. Importació OFX. Cotitzacions en línia. Editor de la documentació.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Tony Bloomfield &Tony.Bloomfield.mail;</title>
+      <para
+>Importador del &gnucash;. Implementació de les bases de dades.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Felix Rodriguez <email
+>frodriguez@users.sourceforge.net</email
+></title>
+      <para
+>Administrador del projecte.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>John C <email
+>tacoturtle@users.sourceforge.net</email
+></title>
+      <para
+>Desenvolupador.</para>
+    </formalpara>
+  </listitem>
+ 
+  <listitem>
+    <formalpara>
+      <title
+>Fernando Vilas &Fernando.Vilas.mail;</title>
+      <para
+>Implementació de les bases de dades.</para>
+    </formalpara>
+  </listitem>
+
+
+  <listitem>
+    <formalpara>
+      <title
+>Roger Lum &Roger.Lum.mail;</title>
+      <para
+>Documentació.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Darin Strait &Darin.Strait.mail;</title>
+      <para
+>Documentació.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Colin Wright &Colin.Wright.mail;</title>
+      <para
+>Pedaços i documentació.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Bernd Gonsior <email
+>bernd.gonsior@googlemail.com</email
+></title>
+      <para
+>Informes. Migració al &kde; 4 i les &Qt;4.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Ian Neal <email
+>iann_bugzilla@blueyonder.co.uk</email
+></title>
+      <para
+>Operacions planificades i calendaris.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Migració al &kde; 4 i les &Qt;4</title>
+      <para
+>Aquest va ser un esforç massiu, i hi van contribuir molts desenvolupadors. Disculpes a qualsevol que oblidem anomenar explícitament.</para>
+    </formalpara>
+  </listitem>
+
+</itemizedlist>
+
+</sect1>
+</chapter>

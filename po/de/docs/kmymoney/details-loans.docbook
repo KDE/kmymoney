@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.loans">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Darin.Strait; &Darin.Strait.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Kredite</title>
+
+<sect1 id="details.loans.general">
+<title
+>Kredite verstehen</title>
+
+<para
+>Dieser Abschnitt gibt Ihnen einen Überblick darüber, wie &kmymoney; Kredite behandelt. Die Bedingungen für Bankkredit-Regelungen variieren und sind ortsabhängig. Für detaillierte Erläuterungen zu Krediten und Informationen über örtliche Regelungen und Abgaben schauen Sie bitte in andere Quellen. </para>
+
+<para
+>Ein Kredit ist eine Vereinbarung, bei der ein Kreditnehmer von einem Kreditgeber Geld erhält und sich bereit erklärt, das Geld zu einem späteren Zeitpunkt zurückzuzahlen. &kmymoney; erlaubt es Ihnen, Kredite zu verfolgen, bei denen Sie selbst der Kreditgeber sind und Geld verliehen haben, oder Sie als Kreditnehmer einen Kredit aufgenommen haben. Die meisten Privatpersonen nehmen eher Kredite auf, als dass sie Geld verleihen, sodass Sie in der Regel der Kreditnehmer und ein Geldinstitut der Kreditgeber sind. Wenn Sie Geld an ein Familienmitglied oder einen Freund verleihen, können Sie natürlich &kmymoney; dazu verwenden, auch diesen Kredit zu überwachen. </para>
+
+<para
+>Im Rahmen dieser Anleitung nehmen wir an, dass Sie sich Geld bei einem Kreditinstitut leihen, aber die angesprochenen Punkte gelten analog auch für einen Kredit, den Sie jemandem als Kreditgeber einräumen. Die Hauptunterschied zwischen dem Leihen und dem Verleihen von Geld liegt darin, dass Sie eine Ausgabenkategorie für das Verwalten eines Kredits, den Sie aufnehmen, verwenden und eine Einnahmenkategorie, wenn Sie das Geld verleihen. </para>
+
+<formalpara
+><title
+>Grundlagen eines Kredits</title>
+<para
+>Der Betrag, der geliehen wurde, wird <quote
+>Kreditsumme</quote
+> oder <quote
+>Kreditschuld</quote
+> genannt. </para>
+</formalpara>
+
+<formalpara
+><title
+>Laufzeit</title>
+<para
+>Die Zeitspanne, in der der Kredit läuft wird <quote
+>Laufzeit</quote
+> des Kredits genannt. Am Ende der Kreditlaufzeit ist die Gesamtkreditsumme an den Geldgeber zurückgezahlt.  Kreditlaufzeiten werden in der Regel in Wochen, Monaten oder Jahren vereinbart. Eine Kreditlaufzeit kann aber auch durch eine Anzahl an Zahlungen definiert werden. Ein Jahreskredit mit wöchentlicher Rückzahlung kann entweder als Kredit mit einer Laufzeit von einem Jahr, oder als Kredit mit 52 Zahlungen beschrieben werden. </para>
+</formalpara>
+
+<formalpara
+><title
+>Rückzahlungen</title>
+<para
+>Die Rückzahlung der Kreditsumme an den Kreditgeber erfolgt normalerweise nicht auf einmal in einer Summe. Stattdessen wird es eine Reihe von Zahlungen geben, jede zur Tilgung eines Teils der Kreditschuld. Solche Rückzahlungen werden manchmal auch <quote
+>Tilgungsleistung</quote
+> genannt und in &kmymoney; wird der Begriff <quote
+>Kredittilgung</quote
+> verwendet, um das Rückzahlen eines Kredits in Raten zu beschreiben. </para>
+</formalpara>
+
+<formalpara
+><title
+>Zahlungshäufigkeit</title>
+<para
+>Die Häufigkeit der Rückzahlung wird in &kmymoney; <quote
+>Zahlungshäufigkeit</quote
+> genannt, wie z.B. wöchentlich, zweiwöchentlich, monatlich, quartalsweise oder jährlich. In Deutschland werden regelmäßige Zahlungen meist jeden Monat geleistet, sodass die Zahlungshäufigkeit von Krediten einen Monat beträgt. </para>
+</formalpara>
+
+<formalpara
+><title
+>Zinssatz</title>
+<para
+>Für die Tatsache, dass man sich Geld leihen darf, bezahlt der Kreditnehmer dem Kreditgeber ein Entgelt, das <quote
+>Zins</quote
+> genannt wird. Der Zins wird üblicherweise als Prozentsatz auf die Kreditsumme über die festgelegte Laufzeit berechnet. Zinssätze können fest sein und sich während der Kreditlaufzeit nicht verändern, oder aber variabel und sich während der Laufzeit verändern. Zinszahlungen werden normalerweise zusammen mit der monatlichen Tilgung geleistet. </para>
+</formalpara>
+
+<formalpara
+><title
+>Regelmäßige Rückzahlungen</title>
+<para
+>Da Rückzahlungen normalerweise auf einer regelmäßigen Basis, wie wöchentlich, monatlich, quartalsweise oder jährlich, erfolgen, werden sie <quote
+>Periodische Rückzahlungen</quote
+> genannt. Die Summe aller periodischen Rückzahlungen plus der Abschlussrate ergeben zusammen die Kreditsumme plus den Zinsen. </para>
+</formalpara>
+
+<formalpara
+><title
+>Gebühren</title>
+<para
+>Es können weitere Gebühren vereinbart sind, die zusätzlich mit jeder Tilgung gezahlt werden müssen. Diese werden <quote
+>wiederholende Gebühren</quote
+> genannt. Beispiele für sich wiederholende Gebühren (aber nicht nur beschränkt auf diese): <itemizedlist>
+  <listitem>
+    <para
+><quote
+>Pfand</quote
+>- oder <quote
+>Treuhand</quote
+>- Kontenzahlungen. Zahlungen dieser Art werden üblicherweise dafür verwendet, um Fonds zu halten und jährliche oder zweijährliche Steuern zu zahlen. </para>
+  </listitem>
+
+  <listitem
+><para
+>Hypothekenversicherung</para
+></listitem>
+
+  <listitem
+><para
+>Berufsunfähigkeitsversicherung</para
+></listitem>
+
+  <listitem
+><para
+>Gebühren für Kreditkonten</para
+></listitem>
+</itemizedlist>
+</para>
+</formalpara>
+
+<formalpara
+><title
+>Zusammenfassung</title>
+<para
+>Zusammengefasst erhält der Kreditnehmer eine Gesamtsumme vom Kreditgeber am Beginn des Kredits. Der Kreditnehmer tätigt eine periodische Zahlung an den Geldgeber. Die periodische Zahlung ist die Summe aus der Tilgung (die zur Rückzahlung des Kredites dient), den Zinsen (wodurch der Geldgeber für das Verleihen des Geldes belohnt wird) und sonstige regelmäßige Gebühren (welche sonstige Nebenausgaben abdecken). Am Ende des Kredits hat der Kreditnehmer den Gesamtbetrag zurückgezahlt. </para>
+</formalpara>
+</sect1>
+
+<sect1 id="details.loans.example">
+<title
+>Beispiel</title>
+<para
+>Nehmen wir an, Sie benötigen 25.000 EUR für ein neues Auto und vereinbaren mit Ihrer Bank eine monatliche Zahlung über insgesamt 60 Monate. Der Zinssatz des Kredits soll 5,5 % betragen. </para>
+
+<para
+>In diesem Beispiel beläuft sich die Kreditsumme 25.000 EUR. Die Kreditlaufzeit beträgt 60 Monate oder 5 Jahre. Die Ratenzahlung erfolgt monatlich, solange jeden Monate eine regelmäßig Rückzahlung erfolgt. Die regelmäßige Rückzahlung, die &kmymoney; berechnet, beträgt 477,53 EUR. </para>
+
+<para
+>Ein <quote
+>Tilgungsplan</quote
+> ist ein Diagramm oder eine Tabelle, die angibt, wie oft und wann eine Ratenzahlung zu erfolgen hat. Oftmals wird die regelmäßige Rate noch in ihre Bestandteile aufgeschlüsselt: die Tilgung, der Zinsanteil und die regelmäßigen Gebühren. </para>
+</sect1>
+
+<sect1 id="details.loans.creation">
+<title
+>Einen neuen Kredit anlegen</title>
+
+<para
+>In &kmymoney; ist ein Kredit einfach ein bestimmter Kontentyp. Um also einen neuen Kredit anzulegen, wählen Sie den Menüeintrag <menuchoice
+><guimenu
+>Konten</guimenu
+><guimenuitem
+>Neues Konto</guimenuitem
+></menuchoice
+>. Fahren Sie fort und beantworten Sie die Fragen, die Ihnen der Assistent nun stellt. </para>
+
+<para
+>Optional kann ein Kredit auch einem bestimmten Geldinstitut zugeordnet werden. Wenn Sie sich Geld von einer Pfandbriefbank oder einer Autokreditbank leihen, können Sie ein neues Geldinstitut anlegen, das das Unternehmen beschreibt und dieses dann dem Kredit zuordnen. Wenn Sie sich dagegen Geld von Ihrem Onkel Herbert leihen, besteht keine Notwendigkeit, ein neues Geldinstitut anzulegen. </para>
+</sect1>
+
+<sect1 id="details.loans.extra-payments">
+<title
+>Sondertilgungen auf Kredite</title>
+
+<para
+>Sie können jederzeit Sondertilgungszahlungen leisten. Geben Sie einfach <link linkend="details.ledger.transactions"
+>eine neue Buchung</link
+> im Kontenbuch ein. Diese Sondertilgung wird bei der nächsten Zinsberechnung am nächsten regelmäßigen Zahlungstermin berücksichtigt. </para>
+
+<para
+>Beispiele von Sondertilgungszahlungen beinhalten (aber nicht beschränkt darauf): </para>
+
+<itemizedlist>
+  <listitem
+><para
+>das Beisteuern von zusätzlichen 50 EUR pro Monat</para
+></listitem>
+
+  <listitem>
+    <para
+>Verdopplung der regelmäßigen Rückzahlung für jede Zahlungsperiode, die Tilgung für jede Zahlungsperiode kann in der regelmäßigen Kreditbuchung gefunden werden. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Ausführen einer 13. Tilgungszahlung pro Jahr, das setzt einen Kredit mit monatlichen Zahlungen voraus. </para>
+  </listitem>
+</itemizedlist>
+
+<note
+><para
+>Wenn Sie die Tilgung bei jeder periodischen Zahlung verdoppeln, müssen Sie die regelmäßige Kreditzahlung für jede Rate neu berechnen. Dies ist die Voraussetzung für einen korrekten Tilgungsbetrag für jede Rate. </para
+></note>
+</sect1>
+</chapter>
+

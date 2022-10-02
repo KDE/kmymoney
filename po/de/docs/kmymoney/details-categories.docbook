@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.categories">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail;</author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Kategorien</title>
+
+<para
+>Die Kategorienansicht gibt eine Übersicht über alle existierenden Kategorien, die den Buchungen zugeordnet wurden. Die Kategorien sind aufgeteilt in Einnahmen und Ausgaben. Hinter jeder Kategorie wird der zugehörige Kontostand angezeigt. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="categories.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect1 id="details.categories.create">
+<title
+>Erstellen einer Kategorie</title>
+
+<para
+>Um eine neue Kategorie zu erstellen, wählen Sie entweder <menuchoice
+><guimenu
+>Kategorie</guimenu
+> <guimenuitem
+>Neue Kategorie</guimenuitem
+></menuchoice
+> im Menü, oder wählen Sie in den Kategorienansicht eine übergeordnete Kategorie und klicken Sie auf diese mit der rechten Maustaste. Wählen Sie dann die Option <guimenuitem
+>Neue Kategorie</guimenuitem
+>. Es öffnet sich ein Assistent zum Erstellen einer neuen Kategorie. Geben Sie den Namen der neuen Kategorie ein und wählen Sie eine andere Währung aus, wenn die Voreinstellung nicht zutrifft. Stellen Sie sicher, dass im Unterfenster "Hierarchie" die richtige übergeordnete Kategorie ausgewählt ist. Im Unterfenster "Steuer" können Sie schließlich noch die Mehrwertsteuer-Unterstützung aktivieren, sowie auswählen, ob diese Kategorie in Steuerberichten erscheinen soll. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="categoryedit.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+ </para>
+
+<para
+>Geben Sie den Kategorienamen und bei Bedarf Ihre Notizen ein. Anschließend klicken Sie auf <guibutton
+>OK</guibutton
+> um die neue Kategorie zu speichern. Um eine ganze Konten-Hierarchie zu erstellen, trennen Sie die Unterkategorien durch Doppelpunkte (:), wie zum Beispiel in <emphasis
+>Rechnungen:Auto:Benzin</emphasis
+>. </para>
+</sect1>
+
+<sect1 id="details.categories.edit">
+<title
+>Eine Kategorie bearbeiten</title>
+
+<para
+>Um eine Kategorie zu bearbeiten klicken Sie mit der rechten Maustaste auf den Kategorienamen und wählen <guimenuitem
+>Kategorie bearbeiten</guimenuitem
+> aus dem erscheinenden Menü. Es erscheint ein Fenster mit drei Karteikarten: Allgemein, Hierarchie und Steuer. </para>
+
+<para
+>Das Karteikarte "Allgemein" erlaubt es Ihnen, den Namen der Kategorie und Ihre Notizen zu bearbeiten, die Sie beim Anlegen eingegeben haben. </para>
+
+<para
+>Auf der Karteikarte „Hierarchie“ können Sie die übergeordnete Kategorie ändern. Dazu klicken Sie in dieser Ansicht der Kategorienhierarchie auf eine andere Kategorie. In früheren Versionen von &kmymoney; konnte dies auch durch Ziehen und Ablegen ausgeführt werden. Diese Funktion wird in einer zukünftige Version wieder eingeführt, aber wahrscheinlich nicht vor der Portierung von &kmymoney; zu &kde;-Frameworks. </para>
+
+<para
+>Die Karteikarte „Steuer“ erlaubt das Zuweisen oder Ändern der Mehrwertsteuerkategorie oder das Verändern der automatischen Mehrwertsteuerzuordnung. Weiterhin können Sie auswählen, ob die Kategorie in Steuerberichten erscheint oder nicht. </para>
+</sect1>
+
+<sect1 id="details.categories.vat">
+<sect1info>
+  <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+</sect1info>
+
+<title
+>Mehrwertsteuer-Unterstützung</title>
+	
+<para
+>Sie können eine Einnahmen-/Ausgaben-Kategorie in eine Mehrwertsteuerkategorie verwandeln, was dazu führt, dass alle Splitt-Buchungen auf diese Kategorie gebucht werden, um die Mehrwertsteuer-Zahlungen an das Finanzamt zu sammeln. Sie können weiterhin einen Mehrwertsteuersatz hinterlegen. </para>
+ 
+<para
+>Kategorien können einer Mehrwertsteuerkategorie zugeordnet werden, sodass &kmymoney; eine Buchung in zwei Buchungen splittet: eine für die Kategorie und eine für die Mehrwertsteuer. Abhängig von der Brutto/Netto-Einstellung im Unterfenster "Steuer" ist der eingegebene Betrag der Buchung ein Brutto- oder Nettobetrag. </para>
+ 
+<para
+>Beispiel: In Deutschland gibt es drei Mehrwertsteuersätze (0 %, 7 % und 19 %). Dann wird eine Hauptkategorie „Gezahlte MwSt.“ und drei Unterkategorien, jeweils eine für jeden Mehrwertsteuersatz, angelegt, sowohl für die Einnahmen- als auch die Ausgabenseite, sodass insgesamt acht Kategorien entstehen. Für die gekauften Waren wird eine der oben genannten Kategorien als „automatische MwSt. Zuweisung“ ausgewählt. </para>
+ 
+<para
+>Werden Waren gekauft, wird dies in eine Buchung eingegeben. Angenommen, die Eingabe von Bruttobeträgen ist ausgewählt. Sobald die Kategorie gewählt und der Betrag eingegeben wurde, wird &kmymoney; feststellen, dass die Kategorie eine automatische MwSt.-Zuweisung besitzt. &kmymoney; wird nun den Mehrwertsteuerbetrag berechnen, eine Split-Buchung für das angegebene MwSt.-Konto erzeugen und den errechneten Mehrwertsteuerbetrag zuweisen. Anschließend wird der um die MwSt. reduzierte Restbetrag der eigentlichen Kategorie als Split-Buchung zugeordnet. </para>
+ 
+<para
+>Das gleiche geschieht ebenfalls für Einnahmen-Kategorien in umgekehrter Weise. </para>
+
+</sect1>
+
+<sect1 id="details.categories.delete">
+<title
+>Löschen einer Kategorie</title>
+
+<para
+>Um eine Kategorie zu löschen, klicken Sie diese mit der rechten Maustaste an und wählen <guimenuitem
+>Kategorie löschen</guimenuitem
+> aus dem erscheinenden Menü. Wenn die Kategorie noch zugeordnete Buchungen enthält, erscheint ein Fenster, mit dessen Hilfe Sie den Buchungen eine neue übergeordnete Kategorie zuordnen können. Wenn Sie eine übergeordnete Kategorie löschen, erscheint ein Dialogfenster, in dem Sie auswählen können, ob Sie entweder alle Kategorien unterhalb der zu löschenden Kategorie eine Ebene nach oben verschieben, oder sie komplett löschen möchten. </para>
+</sect1>
+</chapter>

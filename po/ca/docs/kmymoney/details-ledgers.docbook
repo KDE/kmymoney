@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.ledgers">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+  </authorgroup>
+  <date
+>2 d'abril de 2019</date>
+  <releaseinfo
+>5.0.3</releaseinfo>
+</chapterinfo>
+
+<title
+>Llibres majors</title>
+
+<sect1 id="details.ledgers.view">
+<title
+>La vista del llibre major</title>
+
+<para
+>La vista del llibre major és funcionalment el centre d'integració de les dades del &kmymoney;. Aquesta vista és per a introduir, examinar, suprimir i editar les operacions definides als comptes. La vista es divideix en tres àrees principals: l'àrea de filtre, la llista d'operacions i l'àrea d'entrada. </para>
+
+<para
+>Aquesta vista permet diverses accions clau: cercar i veure operacions -introduint una operació nova, editar, duplicar, suprimir i planificar operacions existents-. Juntament amb això, també proporciona la capacitat de moure, marcar i anar als detalls addicionals de les operacions del compte. Una altra funcionalitat dins de la vista del llibre major inclou modificar i conciliar el compte. </para>
+  
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="ledgerview-numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Vista del llibre major</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>La vista té tres elements: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>L'àrea de filtre</para
+></listitem>
+  <listitem
+><para
+>La llista d'operacions</para
+></listitem>
+  <listitem>
+    <para
+>El formulari de l'operació, el qual pot aparèixer o no, segons la configuració seleccionada a la secció <guilabel
+>Llibre major</guilabel
+> a la configuració del &kmymoney;. </para>
+  </listitem>
+</itemizedlist>
+
+<sect2 id="details.ledgers.view.filter">
+<title
+>L'àrea de filtre</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="accountdropdown.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Àrea de filtre</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Podreu seleccionar amb facilitat qualsevol compte mitjançant la llista desplegable del compte que hi ha a la part superior de l'àrea de vista. Recordeu que, segons el tipus de compte, el formulari de l'operació que hi ha a la part inferior de la vista podria canviar. </para>
+
+<para
+>A la dreta de la llista desplegable del compte, hi ha dos camps addicionals. El quadre de filtre proporciona la capacitat de cercar les operacions coincidents que es mostraran a la vista de llista. El text especificat pot estar en qualsevol dels camps de l'operació per al compte específic. El camp d'estat és una llista desplegable. La llista de camps d'estat permet la selecció de: <guilabel
+>Qualsevol estat</guilabel
+>, <guilabel
+>Importat</guilabel
+>, <guilabel
+>Coincident</guilabel
+>, <guilabel
+>Erroni</guilabel
+>, <guilabel
+>No verificat</guilabel
+>, <guilabel
+>No conciliat</guilabel
+>, <guilabel
+>Liquidat</guilabel
+> i <guilabel
+>Operacions planificades</guilabel
+>. </para>
+
+</sect2>
+
+<sect2>
+<title
+>La llista d'operacions</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="translist.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Llista d'operacions</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Després d'introduir una operació, es mostrarà a la llista d'operacions. També podreu canviar les propietats de l'operació o fins i tot crear operacions noves directament a la llista. A la llista d'operacions, l'ordre predeterminat de les operacions és per data, amb l'operació més recent a la part inferior. En fer clic amb el &BDR; sobre la capçalera de la llista d'operacions, apareixerà un diàleg que permetrà canviar l'ordre de les operacions. Per a obtenir instruccions sobre com canviar l'ordre predeterminat, consulteu la secció de la <link linkend="details.settings.register.sorting"
+>pestanya Ordenació</link
+> a la <link linkend="details.settings"
+>Configuració del &kmymoney;</link
+>. </para>
+
+<para
+>Recordeu que la columna de saldo es basa en l'ordre que es mostra actualment i no es calcularà si es filtra la visualització mitjançant la cerca dins del quadre de filtre o la llista desplegable per al tipus d'operació, com s'ha descrit anteriorment. </para>
+
+<para
+>A la part inferior de la llista d'operacions, el &kmymoney; mostra tres valors: </para>
+
+<formalpara
+><title
+>Darrera conciliació</title>
+  <para
+>Aquesta serà la data més recent quan vàreu conciliar aquest compte. La conciliació és un procés important per a molts comptes, i es descriu <link linkend="details.reconcile"
+>aquí</link
+>. </para>
+</formalpara>
+
+<formalpara
+><title
+>Liquidada</title>
+  <para
+>Aquest serà el total de totes les operacions liquidades i conciliades en aquest compte. Consulteu <link linkend="details.ledgers.cleared"
+>aquesta secció</link
+> per a obtenir més informació sobre els estats liquidada i conciliada de les operacions. </para>
+</formalpara>
+
+<formalpara
+><title
+>Saldo</title>
+  <para
+> Aquí és on el &kmymoney; mostrarà el saldo total del compte, el qual és la suma de totes les operacions de compte. No obstant això, si seleccioneu més d'una operació a la llista d'operacions, això canviarà per a mostrar la suma de les operacions seleccionades. Això retornarà al saldo només quan se seleccioni una única operació. </para>
+</formalpara>
+</sect2>
+
+<sect2>
+<title
+>El formulari de l'operació</title>
+
+<para
+>La disposició exacta de l'àrea inferior de la vista del llibre major dependrà de la configuració i del tipus de compte que es mostra. No obstant això, generalment inclou camps per a tots els detalls d'una sola operació, així com botons per a diverses accions que poden aplicar-se a una operació. Es descriu amb més detall a les seccions següents. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledger.transactions">
+<title
+>Introduir operacions</title>
+
+<para
+>Hi ha dos mètodes per a introduir operacions al llibre major: utilitzar el formulari de l'operació o introduir les dades directament a la llista d'operacions. De manera predeterminada es mostrarà el formulari de l'operació i aquest és el mètode que es comentarà primer. Podreu desactivar-lo anant a la secció <guilabel
+>Llibre major</guilabel
+> a la configuració del &kmymoney;. </para>
+
+<para
+>Els camps en l'àrea d'entrada coincideixen amb els camps d'informació a la llista d'operacions. Els camps addicionals inclouen el camp Recordatori, per a una descripció més detallada de l'operació, i una selecció de la Categoria. El botó <guibutton
+>Desglossa</guibutton
+> permet dividir l'operació en múltiples categories. </para>
+</sect1>
+
+<sect1 id="details.ledger.transactionform">
+<title
+>Usar el formulari de l'operació</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Formulari de l'operació</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>El formulari de l'operació que hi ha a la part inferior de la vista del llibre major és la interfície per a crear manualment les operacions. </para>
+
+<para
+>Depenent del tipus d'operació que vulgueu introduir, hi haurà diverses pestanyes disponibles al formulari de l'operació. Feu clic a la pestanya que millor defineixi l'operació (ingrés, transferència o reintegrament) i el formulari carregarà diversos camps disponibles per a l'entrada. </para>
+
+<para
+>Recordeu que el &kmymoney; no utilitzarà directament el mètode d'operació real, sinó que únicament l'utilitzarà per a fins d'agrupació/informes. </para>
+
+<para
+>Si no sabeu quin mètode triar, simplement feu servir Ingrés per a qualsevol quantitat que ingresseu al compte, Reintegrament per als diners que surten del compte i Transferència per als diners que es mouen d'un compte a un altre. Els mètodes d'operació i les diferències entre ells s'analitzen amb més detall a una altra part. </para>
+
+<para
+>Seleccioneu el mètode d'operació fent clic a la pestanya corresponent. </para>
+
+<sect2>
+<title
+>Els camps d'una operació</title>
+
+<para
+>Introduïu la informació utilitzant les notes següents als camps disponibles. Cal tenir en compte que molts camps tenen activada la «Compleció automàtica». És a dir, si comenceu a escriure, el &kmymoney; oferirà alternatives que coincideixin amb els caràcters que heu introduït. Per a seleccionar el contingut coincident, simplement feu clic sobre l'entrada o premeu les tecles apropiades. Si l'entrada no apareix a la llista, acabeu d'escriure el contingut per a afegir el valor nou. La pròxima vegada que escriviu el contingut, el &kmymoney; el trobarà quan comenceu a introduir els caràcters inicials. </para>
+
+<sect3>
+<title
+>El beneficiari</title>
+
+<para
+>El Beneficiari és a qui van els diners. Si el beneficiari és una entrada nova, el &kmymoney; us demanarà si el voleu afegir a la llista de Beneficiaris. Qualsevol altra informació relacionada amb un beneficiari o pagador, com l'adreça, el número de telèfon i el número de compte, així com les notes, es poden actualitzar a la vista dels beneficiaris. </para>
+</sect3>
+
+<sect3>
+<title
+>La categoria</title>
+
+<para
+>La Categoria associa una operació amb una categoria d'ingressos o despeses amb finalitats comptables i d'informes, i permet agrupar certes operacions. Escriviu el nom de la categoria al camp definit. Si heu introduït la categoria i no existeix, el &kmymoney; us demanarà si voleu crear-ne una de nova. Si la selecció és <guibutton
+>Sí</guibutton
+>, el &kmymoney; obrirà un diàleg que permet una definició addicional de la categoria basant-se en les característiques General, Jerarquia i Impostos. </para>
+
+<para
+>Si voleu associar parts de l'operació amb diferents categories, el &kmymoney; gestionarà aquesta necessitat. Un exemple d'operació podria ser un reintegrament d'efectiu de 50, dels quals feu servir 10 per a aliments, 20 per a cervesa i 20 per a efectiu. Per tant, a l'operació se li assignaran tres categories: Menjar, Cervesa i Efectiu. Per a fer això, haureu d'utilitzar <link linkend="details.ledgers.split"
+>Desglossar les operacions</link
+>, el qual es descriu amb més detall a continuació. </para>
+
+<para
+>Consulteu la secció especial de <link linkend="reference.widgets"
+>camps del &kmymoney;</link
+> per a obtenir més informació sobre com utilitzar aquest camp. </para>
+</sect3>
+
+<sect3>
+<title
+>L'etiqueta</title>
+
+<para
+>Les Etiquetes són similars a les Categories i es poden utilitzar per a mantenir una vista ortogonal a les Categories. Proporcionen la capacitat d'agrupar les operacions dins d'una categoria en funció de les vostres necessitats definides. Aquesta necessitat podria estar definida amb els detalls específics de Persona, Lloc o Cosa. Per exemple, podríeu tenir una Categoria per a cada tipus diferent de despesa del cotxe, i després tenir una etiqueta per a cada vehicle. Com amb les Categories, les podreu seleccionar des de la llista desplegable o escriure un nom nou d'Etiqueta, i se us demanarà si voleu crear una Etiqueta nova amb aquest nom. Dins del camp Etiqueta, el &kmymoney; permetrà introduir múltiples etiquetes dins d'una sola operació. A més, podreu introduir una etiqueta en un únic desglossament. </para>
+</sect3>
+
+<sect3>
+<title
+>El recordatori</title>
+
+<para
+>Es podrà introduir un recordatori de múltiples línies si voleu ajudar a recordar més detalls d'una operació específica. </para>
+</sect3>
+
+<sect3>
+<title
+>El número de xec</title>
+
+<para
+>Si cal es pot introduir el número de xec. Recordeu que si voleu es podrà fer visible el camp seleccionable del número a llibre major. Això es configura al diàleg de configuració del llibre major. </para>
+</sect3>
+
+<sect3>
+<title
+>La data</title>
+
+<para
+>S'haurà d'introduir la data de l'operació per a especificar quan es va realitzar. Consulteu la secció especial <link linkend="reference.widgets"
+>camps del &kmymoney;</link
+> per a obtenir més informació sobre com es pot fer servir el camp d'entrada de la data perquè introduir dates sigui més ràpid i fàcil. Per a les operacions a comptes de xec i targeta de crèdit, trieu si voleu utilitzar la data real (quan es va emetre el xec o fer la compra) o la data d'enviament segons l'informat pel banc o la companyia de la targeta de crèdit. Utilitzant la data real ajudareu a fer un seguiment de quan es va fer la compra, per exemple, però és més probable que l'extracte o les dades baixades del banc utilitzin la data d'enviament. </para>
+</sect3>
+
+<sect3>
+<title
+>L'import</title>
+
+<para
+>Finalment, introduïu l'import de l'operació al camp requerit. Recordeu que es pot mostrar una calculadora senzilla, sigui fent clic a la icona que hi ha a la dreta del camp de l'import, o introduint al camp el caràcter «%», o introduint qualsevol d'aquests símbols matemàtics: «+» (més), «-» (menys), «*» (multiplica) i «/» (divideix) en una fórmula, com en <emphasis
+>12 + 3</emphasis
+>. Quan s'introdueixi el signe més, s'obrirà la calculadora. Recordeu que només es desarà el resultat final de qualsevol càlcul. </para>
+
+<para
+>Quan esteu satisfet que tots els camps s'han completat adequadament, feu clic a <guibutton
+>Introdueix</guibutton
+>. Si accidentalment premeu o feu clic abans d'acabar d'introduir totes les dades, feu clic a <guibutton
+>Edita</guibutton
+> per a continuar introduint les dades. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledger.direct">
+<title
+>Introduir directament les operacions a dins de la llista</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform-off.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Introduint directament l'operació</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>El segon mètode per a introduir operacions al llibre major consisteix a editar directament la llista d'operacions. </para>
+
+<para
+>Per a fer-ho, primer haureu de fer que el &kmymoney; sàpiga que no voleu utilitzar el formulari de l'operació obrint el diàleg de configuració i desmarcant l'opció <guilabel
+>Mostra el formulari de l'operació</guilabel
+>. </para>
+
+<para
+>Això es realitza seleccionant l'element de menú <menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Configura el &kmymoney;...</guimenuitem
+></menuchoice
+> de la barra de menús i seleccionant la icona Enregistra <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="ledgers_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+> </guiicon
+> des de la llista de l'esquerra. L'opció a desmarcar està etiquetada com <guilabel
+>Mostra el formulari de l'operació</guilabel
+>. Quan acabeu, feu clic a <guibutton
+>D'acord</guibutton
+> per a estar a punt per a introduir o editar directament les operacions. </para>
+
+<sect2>
+<title
+>Començar l'edició</title>
+
+<para
+>Per a introduir una operació nova al registre, ara podreu fer clic en una entrada buida, prémer <keycombo action="simul"
+>&Ctrl;&Ins;</keycombo
+> o fer clic a <guibutton
+>Nova</guibutton
+> al peu de la finestra. Les tecles &Up; i &Down; permeten navegar per la llista. Després de prémer &Intro; o fer doble clic sobre una entrada, la llista d'operacions mostrarà els camps requerits per a introduir l'operació i esperarà la introducció. </para>
+
+<para
+>Per a desplaçar-vos pels camps, premeu la tecla &Tab; i, quan acabeu, premeu &Intro; per a desar els canvis o &Esc; per a cancel·lar. </para>
+
+<para
+>En cas que estigui seleccionada l'opció <guilabel
+>Empra Retorn per a desplaçar entre els camps</guilabel
+>, la tecla &Intro; mourà al camp següent igual com la tecla &Tab;, excepte l'últim camp d'entrada on es desaran les dades. </para>
+
+<para
+>El mètode que utilitzeu per a introduir les operacions dependrà de vosaltres i és una qüestió de preferència personal. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledgers.split">
+<title id="details.ledgers.split.title"
+>Desglossar les operacions</title>
+
+<para
+>La característica Desglossa l'operació permet dividir una operació en múltiples categories, que representaran, per exemple, els diferents articles comprats amb una sola compra a una botiga. </para
+> 
+
+<para
+>Per a introduir un desglossament d'operació, utilitzant el formulari de l'operació o la llista d'operacions, comenceu una operació nova, inclosa la introducció de l'import total. Després, en lloc de seleccionar una categoria, feu clic al botó <guibutton
+>Desglossa</guibutton
+> que hi ha a la dreta el camp <guilabel
+>Categoria</guilabel
+>. Si ja heu seleccionat una categoria, aquesta es convertirà en la primera entrada a la pantalla de l'editor del desglossament. </para
+> 
+ 
+<para
+>A la pantalla de l'editor del desglossament, feu doble clic sobre una línia buida per a introduir una suboperació nova o premeu <keycombo action="simul"
+>&Ctrl;&Ins;</keycombo
+>. Especifiqueu la categoria, afegiu un recordatori (opcional) i poseu l'import. Per a desar aquesta part del desglossament, premeu la marca de selecció verda que hi ha a sota de la categoria. Per a cancel·lar, premeu la creu vermella. </para
+> 
+ 
+<para
+>Després d'introduir un desglossament, la part inferior de l'editor del desglossament mostrarà quant de l'operació total encara no està assignat. Després d'introduir tots els desglossaments, premeu el botó <guibutton
+>D'acord</guibutton
+> per a desar tota l'operació. Si encara hi ha un import sense assignar, se us demanarà que torneu a editar els desglossaments, canvieu l'import total de l'operació o deixeu part de l'operació sense assignar. </para>
+
+<para
+>Recordeu que el camp Categoria al formulari de l'operació o a la llista d'operacions ara mostrarà <emphasis
+>Operació desglossada</emphasis
+>. </para
+> 
+
+<para>
+	<screenshot>
+	<screeninfo
+>Desglossament de les operacions</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="split_transaction.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Operació desglossada</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+</sect1>
+
+<sect1 id="details.ledger.edit">
+<title
+>Editar les operacions</title>
+
+<para
+>Per a editar una operació, seleccioneu-la a la vista de llista i feu clic a <guibutton
+>Edita</guibutton
+> al formulari de l'operació o feu clic dret sobre l'entrada i seleccioneu <guimenuitem
+>Edita</guimenuitem
+> des del menú emergent. Si esteu editant directament operacions a la llista, podreu editar l'operació simplement fent doble clic sobre una entrada o prement &Intro; quan estigui ressaltada una operació. </para>
+</sect1>
+
+<sect1 id="details.ledger.delete">
+<title
+>Suprimir operacions</title>
+
+<para
+>Per a suprimir una operació, seleccioneu-la a la vista de llista, feu clic dret sobre l'entrada i seleccioneu <guimenuitem
+>Suprimeix</guimenuitem
+> des del menú emergent, o feu clic a <guibutton
+>Suprimeix</guibutton
+> sobre el formulari de l'operació. </para>
+</sect1>
+
+<sect1 id="details.ledgers.match">
+<title id="details.ledgers.match.title"
+>Operacions coincidents</title>
+
+<para
+>En general, quan importeu operacions, sigui mitjançant QIF, OFX o HBCI, el &kmymoney; intentarà comparar-les automàticament amb les operacions existents. Per a permetre diferències en les dates, hi ha una opció predeterminada de 4 dies, la qual es pot canviar a les opcions -Enregistra/Importa-. Qualsevol operació que coincideixi es ressaltarà en verd. En acabar la importació, haureu de revisar-les i acceptar-les o no comparar-les. </para>
+
+<para
+>Si trobeu que una operació importada no es va fer coincidir automàticament amb una operació existent quan hauria d'haver coincidit, llavors és possible fer-la coincidir manualment. Recordeu que hi ha una diferència entre fer coincidir manualment dues operacions i simplement suprimir-ne una, encara que sembli que té el mateix efecte. Específicament amb OFX o HBCI, és important no suprimir l'operació importada, perquè trobareu que la pròxima vegada que importeu les operacions, l'operació suprimida podria aparèixer de nou. Això es deu al fet que els formats d'importació moderns com OFX i HBCI utilitzen un <quote
+>ID de l'operació</quote
+> per a identificar les operacions. Quan suprimiu l'operació importada, l'ID de l'operació seguirà amb ella, de manera que l'importador no té forma de saber que aquesta operació ja s'ha importat. </para
+> 
+
+<para
+>La solució és indicar-li al &kmymoney; que les operacions són la mateixa, utilitzant la interfície de coincidència manual. Això permet fer coincidir una operació importada amb una operació introduïda manualment (no importada). Per a fer-ho, seleccioneu una de les operacions que coincideixin fent clic sobre seu, després seleccioneu l'altra fent-hi clic esquerre mentre premeu la tecla &Ctrl;, i després seleccioneu <guimenuitem
+>Coincidència</guimenuitem
+> des del menú contextual. Això les farà coincidir i combinarà juntes les dues operacions. Els valors de les dues operacions hauran de ser els mateixos perquè la coincidència funcioni, excepte que les dates poden diferir segons la finestra especificada a les opcions, com s'ha descrit anteriorment. Si esteu satisfet amb el resultat, feu clic dret sobre l'operació coincident, després seleccioneu <guibutton
+>D'acord</guibutton
+>. </para>
+
+<para
+>Durant la importació dels extractes en línia, ja sigui directament o mitjançant la importació d'un fitxer descarregat, el &kmymoney; realitzarà la coincidència el millor que pugui segons el nom del beneficiari i l'import de l'operació. En cas d'una coincidència no vàlida, una operació coincident es pot fer no coincident. </para>
+
+<note>
+  <para
+>La interfície de coincidència no us permetrà fer coincidir dues operacions que s'hagin importat. De la mateixa manera, no permetrà la coincidència entre dues operacions que s'hagin introduït manualment. </para>
+</note>
+</sect1>
+
+<sect1 id="details.ledgers.cleared">
+<title
+>Comprendre l'estat d'una operació</title>
+
+<para
+>Una operació pot tenir un de tres estats: no conciliada (en blanc), liquidada (L) o conciliada (C). Quan s'introdueixi una operació, aquesta tindrà un estat de no conciliada. Una vegada que el banc enviï l'operació, l'usuari podrà liquidar-la i així transformar-la a l'estat (L). Quan rebeu un extracte des del compte del banc, totes les operacions liquidades hauran d'estar a l'extracte. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Comprensió de l'estat de liquidada</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="cleared_state.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Estat de liquidada</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Quan <link linkend="details.reconcile"
+>concilieu</link
+> el compte, en realitat marcareu els extractes com a liquidats i comprovareu que la diferència entre el saldo inicial i les operacions liquidades és igual que el saldo final de l'extracte. Quan aquest és el cas, podreu «finalitzar la conciliació», el qual en realitat canviarà l'estat de totes les operacions liquidades (L) a conciliades (C). </para>
+
+<para
+>Si intenteu editar una operació amb almenys un desglossament marcat com a conciliat (C), se us advertirà. </para>
+</sect1>
+
+<sect1 id="details.ledgers.settings">
+<title
+>Canviar les opcions de l'operació</title>
+
+<para
+>Hi ha diverses opcions que canvien l'aparença i el comportament de la vista del llibre major en termes d'operacions. Aquestes opcions es troben seleccionant l'element de menú <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura el &kmymoney;</guimenuitem
+></menuchoice
+> des de la barra de menús i seleccionant la icona Llibre major <guiicon
+><inlinemediaobject
+><imageobject
+> <imagedata fileref="ledgers_view.png" format="PNG"/></imageobject
+> </inlinemediaobject
+></guiicon
+> que hi ha a la llista de l'esquerra. </para
+> 
+
+<para
+>La majoria de les opcions s'expliquen per si mateixes. Per a més claredat, s'expliquen a continuació diverses opcions. </para>
+<!-- FIXME - if these are explained in the chapter on settings, just refer to that
+     as is done above, and don't duplicate here.  Leaving for now, but should clean
+     up later. -->
+
+<itemizedlist>
+  <listitem>
+    <para
+><guilabel
+>Mostra el formulari de l'operació</guilabel
+> (a la pestanya <guilabel
+>Visualització</guilabel
+>): alterneu-la per a ocultar el formulari de l'operació que hi ha a la part inferior d'aquesta pantalla. Les operacions encara es podran introduir directament a una línia buida al final de la llista d'operacions, a través d'una àrea d'entrada automàtica compacta. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Aquestes imatges mostren com es veurà l'entrada directa de l'operació en comparació amb el formulari de l'operació. </para>
+
+<para
+>El formulari de l'operació</para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>El formulari de l'operació</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Formulari de l'operació</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Operacions introduïdes directament</para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Operacions introduïdes directament</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform-off.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Introducció directa</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<itemizedlist>
+  <listitem>
+    <para
+><guilabel
+>Preserva els canvis en seleccionar una operació/desglossat diferent</guilabel
+>: en seleccionar la línia següent a la llista d'operacions o l'editor del desglossament, els canvis es mantindran, en lloc del comportament predeterminat en el qual s'ha de prémer la marca de selecció verda per a desar els canvis. </para>
+  </listitem>
+</itemizedlist>
+
+</sect1>
+
+<sect1 id="details.ledgers.other">
+<title id="details.ledgers.other.title"
+>Una altra funcionalitat</title>
+
+<para
+>Les opcions addicionals estan disponibles des del menú <guimenuitem
+>Opcions de l'operació</guimenuitem
+>, al qual s'accedeix fent clic dret en qualsevol operació de la llista. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>El submenú Opcions de l'operació</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="ledger_more.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Opcions de l'operació</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Les opcions inclouen saltar a la vista dels beneficiaris per al Beneficiari a l'operació, crear una planificació i canviar l'estat de conciliada o liquidada. </para>
+
+<para
+>Per a editar la informació del compte des de la vista del llibre major, seleccioneu l'element <menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Edita el compte...</guimenuitem
+></menuchoice
+> de la barra de menús i podreu canviar els detalls del compte. També hi ha un element de menú perquè aparegui el menú Concilia, el qual permet comparar les operacions amb un extracte bancari oficial o un avís de la targeta de crèdit. </para>
+</sect1>
+</chapter>
+

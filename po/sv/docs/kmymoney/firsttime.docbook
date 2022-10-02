@@ -1,0 +1,949 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="firsttime">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2018-02-01</date>
+  <releaseinfo
+>5.0.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Använda &kmymoney; för första gången</title>
+
+<sect1 id="firstime-1">
+<title
+>Köra &kmymoney; för första gången</title>
+
+<note>
+  <para
+>När du kör &kmymoney; kanske det inte ser exakt ut som skärmbilderna i den här handboken. Många detaljer som teckensnitt, färger och ikoner, kan anpassas, antingen genom att använda menyalternativet <menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Anpassa &kmymoney;...</guimenuitem
+></menuchoice
+> eller &kde;:s systeminställningsprogram, beroende på operativsystem. </para>
+</note>
+
+</sect1>
+
+<sect1 id="firsttime.mainwindow">
+<title
+>Huvudfönstret</title>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Huvudfönstret</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="mainwindow_numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Huvudfönstret</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Huvudfönstret i &kmymoney; består av fyra delar </para>
+
+<itemizedlist>
+  <listitem
+><para
+>A. Menyraden</para
+></listitem>
+  <listitem
+><para
+>B. Verktygsraden</para
+></listitem>
+  <listitem
+><para
+>C. Vyväljaren</para
+></listitem>
+  <listitem
+><para
+>D. Vyn</para
+></listitem>
+</itemizedlist>
+
+<para
+>Menyn och verktygsraderna ger åtkomst till funktionerna i &kmymoney; och låter dig <link linkend="firsttime.3"
+>skapa</link
+> filer eller ställa in hur &kmymoney; fungerar. </para>
+
+<para
+>Vyväljaren består av minst elva ikoner på vänster sida av huvudfönstret med valfria beteckningar, beroende på programvaran som tillhandahålls av systemet. Fler ikoner skulle kunna läggas till av diverse insticksprogram. Genom att klicka på en ikon laddas vyfönstret på höger sida med lämplig vy av din ekonomiska information. Varje vy tillhandahåller en unik representation av din ekonomiska situation och låter dig granska eller redigera informationen som visas. </para>
+
+<para
+>Vyväljaren kan innehålla följande ikoner </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="home_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Hemvy</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Hem: En inställningsbar översikt av din aktuella ekonomiska situation (eller en introduktionssida när ingen data finns). </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="institutions_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Institutionsvy</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Institutioner: Alla institutioner och konton visade i en hierarki. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="accounts_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Kontovy</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Konton: Alla konton visade i en hierarki. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="schedule_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Schemaläggningsvy</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Schemalagda transaktioner: Dina återkommande räkningar och insättningar. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="categories_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Kategorivy</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Kategorier: Särskilda konton som tillhandahåller ett sätt att gruppera samhörande transaktioner. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="mail-tagged.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Etikettvy</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Etiketter: Särskilda konton som tillhandahåller ytterligare ett sätt att skapa kategorier för att gruppera samhörande transaktioner. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="payees_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Betalarvy</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Betalare: Alla betalare som används av &kmymoney;. Det är alla personer eller organisationer som du betalar pengar till eller tar emot pengar från. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="ledgers_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Huvudboksvy</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Huvudbok: Transaktionerna i ett konto. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="investments_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Investeringsvy</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Investeringar: Sammanfattning av din aktieportfölj. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="reports_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Rapportvy</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Rapporter: En samling användbara rapporter, som tillhandahåller alternativa framställningar av din ekonomiska information. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="budgets_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Budgetvy</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Budgetar: Dina budgetar. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="forecast_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Prognosvy</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Prognos: Den här vyn tillhandahåller en prognos för konton och kategorier. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="outbox_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Utkorg</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Utkorg: Används av Internetbankmodulen för att tillhandahålla återmatning om pågående processer. Det är en vy som tillhandahålls av insticksprogrammet Kbanking, och kanske inte är tillgänglig på din dator. </para>
+  </listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="firsttime.3">
+<title
+>Skapa en ny fil</title>
+
+<para
+>&kmymoney; lagrar all information om din ekonomi i en fil. Som nämndes i <link linkend="makingmostof.basicaccounting.personalaccounts"
+>Definiera konton (personlig registrering)</link
+>, kan du ha mer än en uppsättning konton, men data för vart och ett hålls i en separat fil, och &kmymoney; kan bara ha en fil öppen åt gången. Se kapitlet om <link linkend="details.formats"
+>Filformat</link
+> för mer information om &kmymoney;s datafiler. </para>
+
+<para
+>För att skapa en ny fil kan du antingen välja menyalternativet <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Ny</guimenuitem
+></menuchoice
+> eller välja ikonen ny <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="new.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> i verktygsraden. Om välkomstsidan visas, kan du dessutom också välja den första länken: "Kom igång och ställ in konton". </para>
+
+<para
+>&kmymoney; öppnar då <quote
+>Inställningsguiden för nya filer</quote
+>. som leder dig genom processen att skapa filen. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Personlig datasida</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Personlig datasida</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Eftersom alla fält är valfria, kan du använda &kmymoney; utan att skriva in någon information nu. All information som skrivs in här används bara för att göra filer personliga. I framtiden kan den användas i vissa rapporter och för Internetbanker. Om &kmymoney; kräver någon personlig information i framtida utgåvor, och inte hittar någon, blir du då tillfrågad om att skriva in relevant information. </para>
+
+<para
+>Skriv in namn och adress, eller ingenting alls, och klicka på <guibutton
+>Nästa</guibutton
+>. </para>
+
+<para
+>Om du har din egen adress lagrad i adressboken, är knappen <guibutton
+>Ladda från adressbok</guibutton
+> aktiverad, och all information importeras till &kmymoney; genom att klicka på den. </para>
+
+<para
+>&kmymoney; stöder flera valutor. För att ställa in basvalutan (den valuta du använder dagligen, och som kommer att användas i rapporter), välj lämpligt värde i listan som tillhandahålls och klicka på <guibutton
+>Nästa</guibutton
+>. Ett standardvärde väljes av &kmymoney; baserat på dina landsinställningar. </para>
+
+<para
+>I följande exempel har amerikanska dollar valts som basvaluta. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Valsida för basvaluta</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-2.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Valsida för basvaluta</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Följande sida låter dig skapa ett startkonto. För en typisk användare av &kmymoney; är det ett lönekonto. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Sidan för att skapa lönekonto</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-3.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Sidan för att skapa lönekonto</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Skriv in kontots namn och eventuellt konto eller referensnummer tilldelat av institutionen som handhar kontot. Skriv in kontots uppläggningsdatum och kontots ursprungliga behållning. Om du till exempel vill att &kmymoney; ska hantera hela din ekonomi från och med 2008-01-01, skriv då in kontots behållning i början av detta datum. Värdet kan möjligen erhållas från ett pappersutdrag. Du kan också skriva in institutionens namn och bankkod. Den senare, känd som clearingnummer i Sverige, är valfri och krävs bara i fallet med Internetbank, men kan också vara till hjälp vid import av bankutdrag med något av formaten som stöds (OFX, QFX). </para>
+
+<para
+>Om du inte vill ställa in ett startkonto, avmarkera kryssrutan. </para>
+
+<para
+>När du är klar, klicka på <guibutton
+>Nästa</guibutton
+> för att gå vidare. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Valsida av kontomall</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-4.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Valsida av kontomall</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+
+<para
+>Välj lämpligt land och kontomall(ar). Varje mall erbjuder olika uppsättningar kategorier för att organisera din ekonomi. Flera mallar, till och med från flera länder, kan väljas genom att använda en kombination av &Ctrl; och &Shift; tillsammans med vänster musknapp. Kontohierarkin som ska skapas visas av en förhandsgranskning i guiden. Om du inte kan hitta en mall som passar dina behov, välj inte någon vid detta tillfälle, och ställ in kategorier manuellt senare. </para>
+
+<para
+>När du väl är klar med valet av mall, klicka på <guibutton
+>Nästa</guibutton
+> för att fortsätta. </para>
+
+<para
+>Nästa sida i guiden låter dig ställa in användarinställningar. Om du markerar kryssrutan visas programmets inställningsdialogruta efter att kontoinställningsguiden är färdig. Klicka på <guibutton
+>Nästa</guibutton
+> om du är klar och vill fortsätta. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Inställningssida</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-5.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Inställningssida</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Den sista sidan i guiden låter dig välja plats och filnamnet som ska användas för att lagra ekonomisk data. Initiala värden skapas av din hemkatalog och användarnamn. Om filen finns, visas en varning som påminner dig om att välja ett filnamn som inte finns. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Valsida för filnamn</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-6.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Valsida för filnamn</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Nu har du samlat in all relevant information för att skapa filen. Klicka på <guibutton
+>Slutför</guibutton
+> så skapar &kmymoney; filen åt dig och öppnar den. </para>
+
+</sect1>
+
+<sect1 id="firsttime.4">
+<title
+>Skapa konton</title>
+
+<para
+>Det finns flera sätt att skapa ett konto på, som beskrivs här: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Genom att använda menyn</term>
+    <listitem>
+      <para
+>För att skapa ett konto genom att använda menyn, välj menyalternativet <menuchoice
+><guimenu
+>Konton</guimenu
+><guimenuitem
+>Nytt konto</guimenuitem
+></menuchoice
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Genom att använda kontovyn</term>
+    <listitem>
+      <para
+>För att skapa ett konto i kontovyn, klicka på <guiicon
+> <inlinemediaobject
+><imageobject
+><imagedata fileref="accounts_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> kontoikonen i vyväljaren för att visa kontovyn. Högerklicka därefter antingen på tillgångsträdets ikon eller skuldträdets ikon i högervyn och välj <guimenuitem
+>Nytt konto</guimenuitem
+> i den sammanhangsberoende menyn. Tillgångsträdet innehåller alla konton som är tillgångar, såsom sparande och investeringar. Skulder är konton som representerar pengar som du är skyldig, såsom lån och kreditkort.Dessa och alla andra kontotyper, beskrivs mer detaljerat senare i handboken. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Använda verktygsraden</term>
+    <listitem>
+      <para
+>Om knappen <guibutton
+>Nytt konto...</guibutton
+> visas på verktygsraden kan du klicka på den för att skapa ett konto. </para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+
+<tip>
+  <para
+>Observera att &kmymoney; använder sammanhangsberoende menyer genomgående i hela programmet. Om du märker att du har kört fast när du försöker räkna ut hur man gör någonting, försök att högerklicka där du förväntar dig att se en funktion. </para>
+</tip>
+
+<para
+>Att skapa ett konto med endera metoden, öppnar <emphasis
+>Guiden för nytt konto</emphasis
+>. Guiden leder dig steg för steg igenom processen att skapa ett konto, och samlar in nödvändig information i varje steg. För att gå mellan sidorna, klicka på knapparna <guibutton
+>Nästa</guibutton
+> och <guibutton
+>Tillbaka</guibutton
+>. </para>
+
+<para
+>Skapa ett konto genom att använda någon av de två tidigare nämnda metoderna, för att fortsätta. En fullständig beskrivning av hur konton skapas finns i avsnittet <link linkend="details.accounts"
+>Konton</link
+>. </para>
+
+<para
+>Nu när ett eller flera konton finns i &kmymoney;, visas kontosammanfattningen i hemvyn. Du kan skapa transaktioner manuellt i <link linkend="details.ledgers"
+>huvudboksvyn</link
+>, eller ställa in automatiska transaktioner via <link linkend="details.schedules"
+>schemaläggningsvyn</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.schedules">
+<title
+>Schemaläggning</title>
+
+<para
+>Ett <link linkend="details.schedules"
+>schema</link
+> är en transaktion som sker en eller flera gånger över en viss tidsperiod. Ibland kallas den för återkommande transaktion, och ett typiskt exempel är din lön som du får varje månad eller vecka. Istället för att behöva skriva in information om transaktionen varje gång du får lönen, kan du tala om för &kmymoney; att skapa ett schema som lägger till en transaktion åt dig när du får lönen. </para>
+
+<para
+>För att underhålla <link linkend="details.schedules"
+>scheman</link
+> klicka på <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="schedule_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> schemaikonen i vyväljaren. </para>
+</sect1>
+
+<sect1 id="firsttime.categories">
+<title
+>Kategorier</title>
+
+<para
+>För att underhålla <link linkend="details.categories"
+>kategorier</link
+>, klicka på <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="categories_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> kategori-ikonen i vyväljaren. </para>
+
+<para
+>En fullständig beskrivning av ämnet finns i avsnittet <link linkend="details.categories"
+>Kategorier</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.tags">
+<title
+>Etiketter</title>
+
+<para
+>För att underhålla <link linkend="details.tags"
+>etiketter</link
+>, klicka på <guiicon
+> <inlinemediaobject
+><imageobject
+><imagedata fileref="mail-tagged.png" format="PNG"/> </imageobject
+></inlinemediaobject
+></guiicon
+> etikettikonen i vyväljaren. </para>
+
+<para
+>En fullständig beskrivning av ämnet finns i avsnittet <link linkend="details.tags"
+>Etiketter</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.payees">
+<title
+>Betalare</title>
+
+<para
+>För att underhålla listan med betalare, klicka på <guiicon
+><inlinemediaobject
+> <imageobject
+><imagedata fileref="payees_view.png" format="PNG"/></imageobject
+> </inlinemediaobject
+></guiicon
+> ikonen Betalare i vyväljaren. </para>
+
+<para
+>En fullständig beskrivning av ämnet finns i avsnittet <link linkend="details.payees"
+>Betalare</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.import">
+<title
+>Import av Quicken Interchange Format (QIF)</title>
+
+<para
+>Om du för närvarande använder ett ekonomihanteringsprogram, kan &kmymoney; importera transaktioner i ett konto, under förutsättning att de kan exporteras eller sparas med ett format som &kmymoney; förstår. Det vanligaste av dessa är Quicken Interchange Format (QIF). De flesta ekonomiprogram kan exportera till detta format, men de olika programmens metoder för att exportera QIF beskrivs inte här, för att hålla texten kortfattad. </para>
+
+<para
+>En fullständig beskrivning av ämnet finns i avsnittet <link linkend="details.impexp.qifimp"
+>Import av QIF</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.find">
+<title
+>Söka efter transaktioner</title>
+
+<para
+>&kmymoney; tillhandahåller en användbar och kraftfull sökfunktion av transaktioner, i form av sökdialogrutan. </para>
+
+<para
+>Sökdialogrutan kan öppnas från verktygsraden genom att använda <guiicon
+> <inlinemediaobject
+><imageobject
+><imagedata fileref="transaction_find.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> sökikonen eller genom att välja menyalternativet <menuchoice
+><guimenu
+>Redigera</guimenu
+><guimenuitem
+>Sök transaktion</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>En fullständig beskrivning av ämnet finns i avsnittet <link linkend="details.search"
+>Sökning</link
+>. </para>
+
+</sect1>
+
+<sect1 id="firsttime.reconcile">
+<title
+>Avstämning</title>
+
+<para
+>Vid något tillfälle kommer du att vilja stämma av transaktionerna du har skrivit in med transaktioner listade i ett utdrag, vare sig det är ett bankutdrag, kreditkortsutdrag, låneutdrag eller något annat utdrag. Avstämning omfattar att jämföra vad du har skrivit in med utdragslistorna. Om några avvikelser hittas, så har antingen du eller den som skapade utdraget gjort ett misstag. </para>
+
+<para
+>För att stämma av ett konto, markera först kontot, antingen i <guiicon
+>kontovyn</guiicon
+> eller från <guiicon
+>huvudboksvyn</guiicon
+>. Klicka därefter antingen på ikonen <guiicon
+>Stäm av</guiicon
+> i verktygsraden, eller välj menyalternativet <menuchoice
+><guimenu
+>Konto</guimenu
+><guimenuitem
+>Stäm av</guimenuitem
+></menuchoice
+>.. </para>
+
+<para
+>En fullständig beskrivning av ämnet finns i avsnittet <link linkend="details.reconcile"
+>Avstämning</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.backup">
+<title
+>Säkerhetskopiering</title>
+
+<para
+>När du nu har skapat några konton och skrivit in transaktioner är det en god idé att utföra en säkerhetskopiering. Eftersom filen som används av &kmymoney; är en vanlig Unix-fil, kan du helt enkelt kopiera filen till en annan plats för att säkerhetskopiera den, eller använda dialogrutan som tillhandahålls av &kmymoney;. Att använda dialogrutan är föredragen metod, eftersom om &kmymoney; någonsin börjar använda andra filformat, som SQL, kommer det att bli mycket svårare att kopiera filen manuellt. </para>
+
+<para
+>För att säkerhetskopiera filen via &kmymoney;, välj menyalternativet <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Säkerhetskopiera</guimenuitem
+></menuchoice
+>och skriv in katalogen där du vill att filen ska sparas. Om katalogen först måste monteras, och du har nödvändiga rättigheter, markera då kryssrutan som heter <guilabel
+>Montera katalogen innan säkerhetskopiering</guilabel
+> och klicka på <guibutton
+>Ok</guibutton
+>. </para>
+
+<para
+>Filen kopieras till angiven katalog med dagens datum tillagt sist i filnamnet, så att det är enkelt att se datumet filen säkerhetskopierades. </para>
+</sect1>
+
+<sect1 id="firsttime.launch">
+<title
+>Starta &kmymoney;</title>
+
+<para
+>Allra vanligast är att &kmymoney; startas från en ikon eller en startmeny i fönsterhanteraren. I detta fall är normalbeteendet att &kmymoney; kommer att öppna den senaste filen som var öppen. Under vissa omständigheter vill man, eller måste man, dock starta &kmymoney; från kommandoraden. </para>
+
+<para
+>För en fullständig beskrivning av alla tillgängliga kommandoradsväljare, se &kmymoney;s manualsida. Det finns dock två specialfall som vi beskriver här. </para>
+
+<formalpara
+><title
+><command
+>kmymoney -n</command
+></title>
+  <para
+>Väljaren -n talar om för &kmymoney; att inte öppna den senaste filen som var öppen. Det kan vara användbart om programmet kraschar vid start. </para>
+</formalpara>
+
+<formalpara
+><title
+><command
+>kmymoney &lt;sökväg till fil&gt;</command
+></title>
+  <para
+>Att ange ett filnamn på &kmymoney;s kommandorad talar om för det att öppna den filen istället för filen som senast var öppen. Namnet på vilken giltig &kmymoney;-fil som helst kan användas, som beskriv i kapitlet om <link linkend="details.formats"
+>filformat</link
+>. Dessutom kan det användas för att importera en <link linkend="details.impexp.gnucash"
+>&gnucash;</link
+>-fil. </para>
+</formalpara>
+</sect1>
+
+<sect1 id="firsttime.newpc">
+<title
+>Hur man flyttar &kmymoney; till en ny dator</title>
+
+<sect2 id="firsttime.newpc.data">
+<title
+>Flytta data</title>
+
+<para
+>Om du får en ny dator är det mycket enkelt att flytta data. I själva verket är det enda du måste göra att kopiera &kmymoney;s datafil. Filens namn visas i namnlisten när &kmymoney; kör. Den slutar oftast med <filename class="extension"
+>.kmy</filename
+>. Första gången som programmet körs på den nya datorn måste du tala om för det var datafilen har placerats, antingen genom att köra från kommandoraden, eller med menyalternativet <menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Öppna...</guimenuitem
+></menuchoice
+>. Det ska till och med gå att flytta mellan &Windows;-, &MacOS;- och &Linux;-system. </para>
+
+<para
+>Om datafilen har krypterats, försäkra dig om att lämplig programvara och nycklar också har ställts in på den nya datorn. </para>
+
+<para
+>Om data finns i en SQL-databas, se dokumentationen för databasens programvara för vägledning om hur data kan överföras. </para>
+
+<para
+>Observera att detta förutsätter att du har installerat samma version av &kmymoney; på den nya datorn som du kör på den gamla. Att installera en nyare version bör också vara säkert, men du måste vara medveten om eventuella problem relaterade till uppgraderingen. Alla sådana problem ska finnas noterade i versionsfakta för den nya versionen. </para>
+</sect2>
+
+<sect2 id="firsttime.newpc.settings">
+<title
+>Flytta inställningar</title>
+
+<para
+>Om du bara flyttar datafilen till den nya datorn som beskrivs i föregående avsnitt, fungerar &kmymoney; som det ska, men eventuella inställningar som du har ändrat från standardvärden på den gamla datorn har gått förlorade. För att behålla dessa inställningar måste du kopiera din inställningsfil. Filen kallas <filename
+>kmymoneyrc</filename
+>. Den finns i en katalog med inställningsfiler för andra &kde;-program. På ett &Linux;-system är det i <filename class="directory"
+>$KDEHOME/share/config</filename
+> där <envar
+>$KDEHOME</envar
+> oftast är <quote
+>.config</quote
+> i din hemkatalog. Om du konverterar från en version av &kmymoney; tidigare än 5.0 till 5.0 eller senare, var den gamla platsen för <envar
+>$KDEHOME</envar
+> <filename class="directory"
+>.kde4</filename
+>. </para>
+
+<sect3 id="firsttime.newpc.settings.plugins">
+<title
+>Flytta inställningar av insticksprogram</title>
+
+<para
+>Om du har kört något insticksprogram i &kmymoney;, såsom verktyget för CSV-import eller CSV-export, kan det också ha skapat en inställningsfil i samma katalog, såsom <filename
+>csvimporterrc</filename
+> eller <filename
+>csvexporterrc</filename
+>. De ska också kopieras till den nya datorn. </para>
+
+<para
+>Liksom med den huvudsakliga datafilen antar detta samma version av insticksprogrammet på båda datorerna. Uppgraderingar är i allmänhet säkra, men om insticksprogrammets funktionalitet har ändrats kraftigt, är det lämpligt att noggrant prova med den gamla inställningsfilen för att vara säker på att insticksprogrammet beter sig som förväntat. </para>
+
+<para
+>Observera att när man uppgraderar från en tidigare version till version 6.0 eller senare, har platsen för mallfilerna som används av insticksprogrammet för att skriva ut checkar har ändrats. Se versionsfakta eller projektets <ulink url="https://www.kmymoney.org/faq.php"
+>webbplats</ulink
+> för mer detaljerad information. </para>
+
+<note>
+<para
+>Dessa instruktioner gäller bara för att flytta data och inställningar för &kmymoney;. Det kan dock finnas viktiga saker som lagras av &kde; och inte av &kmymoney;, såsom lösenord lagrade i plånboken. Att flytta andra delar av &kde;:s inställningar är utanför ramen för den här handboken, även om många av de relevanta filerna också lagras i <envar
+>$KDEHOME</envar
+>. </para>
+</note>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="firsttime.contact">
+<title
+>Kontakta utvecklarna - Rapportera fel</title>
+
+<sect2>
+<title
+>Kontakta utvecklarna</title>
+
+<para
+>Det finns en e-postlista, &userlist;, för användare för allmänna frågor eller kommentarer om &kmymoney; (<ulink url="https://mail.kde.org/mailman/listinfo/kmymoney"
+>mer detaljerad information här</ulink
+>). Dessutom kan du kontakta utvecklarna via deras e-postlista, &devlist; (<ulink url="https://mail.kde.org/mailman/listinfo/kmymoney-devel"
+>mer detaljerad information här</ulink
+>). Eftersom svar ofta bara skickas till listan, kanske du inte får några svar om du inte prenumererar på listan innan du skickar till den. </para>
+
+<para
+>Vi vill gärna höra om dina erfarenheter av att använda &kmymoney;. </para>
+</sect2>
+
+<sect2>
+<title
+>Rapportera fel</title>
+
+<para
+>För att rapportera ett fel, använd gränssnittet som &kmymoney; tillhandahåller genom att välja menyalternativet <menuchoice
+><guimenu
+>Hjälp</guimenu
+><guimenuitem
+>Rapportera fel</guimenuitem
+></menuchoice
+> och fylla i begärd information. Om du dock har några svårigheter med den metoden kan du rapportera ett fel (eller skicka in ett önskemål eller begäran om förbättring) direkt på <ulink url="http://bugs.kde.org"
+>&kde;:s felrapporteringssida</ulink
+>. Rapporter ska göras för produkten <quote
+>kmymoney</quote
+>. </para>
+
+<para
+>Hur som helst, innan ett fel rapporteras, läs igenom instruktionerna nedan. Genom att följa dem, blir det troligare att utvecklarna snabbt kan identifiera problemet utan att behöva fråga dig efter ytterligare information. </para>
+
+<sect3 id="firsttime.bugs.quality">
+<title
+>Skriva felrapporter av god kvalitet</title>
+
+<para
+>Vi uppmuntrar användare att ta sig extra tid för att skriva felrapporter av god kvalitet när de skickar in dem. Det reducerar bortkastat arbete på alla håll, eftersom rapportören och utvecklaren som ska rätta felet annars utbyter e-post ända till informationen verkligen finns på plats. </para>
+
+<para
+>Eli Goldberg skrev de formella riktlinjerna för felrapportering, tillgängliga på <ulink url="https://issues.apache.org/bugwritinghelp.html"
+>http://issues.apache.org/bugwritinghelp.html</ulink
+>. I allmänhet, klarar du dig bra om du följer dessa riktlinjer: </para>
+
+<formalpara
+><title
+>Inkludera systeminformation</title>
+  <para
+>Menyalternativet <menuchoice
+><guimenu
+>Hjälp</guimenu
+><guimenuitem
+>Rapportera fel</guimenuitem
+></menuchoice
+> fyller i det automatiskt, men om du föredrar att inte använda detta gränssnitt, är det flera saker som måste ingå i rapporten. Vi behöver vi få reda på vilket operativsystem som används (&Linux;, &MacOS; eller &Windows;), version av &kde;, och versionen av &kmymoney; som du använder, och antingen version av &MacOS; eller &Windows;, eller namn och version av &Linux;-distributionen och version av operativsystemets kärna. </para>
+</formalpara>
+
+<formalpara
+><title
+>Inkludera bakåtspårningar av krascher</title>
+  <para
+>Bakåtspårningen är ofta den allra mest användbara informationen för att lösa krascher. </para>
+</formalpara>
+
+<formalpara
+><title
+>Försök att reproducera det</title>
+  <para
+>Tala om för oss om du kunde göra det. Det är användbart att veta om felet bara hände en gång och du inte kunde få det att hända igen, om det händer varje gång, eller om det händer vid vissa tillfällen men inte andra. </para>
+</formalpara>
+
+<formalpara
+><title
+>Inkludera specifika steg</title>
+  <para
+>Följande är en dålig felrapport: <quote
+>Jag skrev in en transaktion och &kmymoney; kraschade</quote
+>. En mycket bättre felrapport är: <quote
+>Genom att använda transaktionsformuläret, skrev jag in en ny transaktion i mitt kreditkortskonto. Jag valde överföringsfliken, skrev in ett belopp, bytte därefter till insättningsfliken, och tillbaka till överföringsfliken. När jag återvände till överföringsfliken, kraschade &kmymoney;. Felet är fullständigt reproducerbart för mig.</quote
+> </para>
+</formalpara>
+
+<formalpara
+><title
+>Tala om för oss vad du förväntade dig skulle hända</title>
+  <para
+>I vissa fall är det uppenbart, men för mer subtila fel, ser man ibland en felrapport där det inte är uppenbart vad rapportören förväntade sig skulle hända. Tala alltid om för oss vad du tycker borde ha hänt. </para>
+</formalpara>
+
+<formalpara
+><title
+>Fundera på att köra med avlusning aktiverad</title>
+  <para
+>Genom att kompilera en version konfigurerad med --enable-debug=full, kan du försäkra dig om att de bästa möjliga bakåtspårningarna skapas. Om du råkar ut för en krasch, kör &kmymoney; igen inne i gdb, och återupprepa kraschen. Efter kraschen, skriv <quote
+>bt</quote
+> för att skapa en bakåtspårning. </para>
+</formalpara>
+
+<para
+>Att köra på detta sätt är lite svårare, så vi förväntar oss inte att alla användare ska göra det. Om du dock är intresserad av att hjälpa till att göra &kmymoney; så stabilt som möjligt, är detta det bästa sättet att göra det, förutom att hitta felet i koden och skicka in en programfix. </para>
+</sect3>
+</sect2>
+</sect1>
+</chapter>

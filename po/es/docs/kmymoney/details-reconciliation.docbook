@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.reconcile">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-21</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Conciliación</title>
+
+<sect1 id="details.reconcile.whatis">
+<title
+>¿Qué es la conciliación?</title>
+
+<para
+>La conciliación es el proceso de comparar los asientos que ha introducido en &kappname; con los listados para esa cuenta por la organización. Esto se hace más comúnmente con la lista de transacciones de un extracto, sea un extracto bancario, de una tarjeta de crédito, de un préstamo o cualquier otro extracto. También se puede hacer frente un listado en línea de la cuenta, aunque esto es menos corriente. Si se encuentran discrepancias, entonces usted o la persona que ha creado el extracto ha cometido un error. </para>
+
+<para
+>Para conciliar una cuenta, elija la cuenta en la lista desplegable y haga clic en el icono <guiicon
+><inlinemediaobject
+> <imageobject
+><imagedata fileref="reconcile.png"/></imageobject
+> </inlinemediaobject
+>Conciliar</guiicon
+>, seleccione <menuchoice
+><guimenu
+>Cuenta</guimenu
+> <guimenuitem
+>Conciliar...</guimenuitem
+></menuchoice
+> o use la combinación de teclas <keycombo
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+>. </para>
+</sect1>
+
+<sect1 id="details.reconcile.wizard">
+<title
+>El asistente de conciliación</title>
+<para
+>Esto abrirá el asistente de conciliación. La primera página del asistente describe brevemente el proceso que seguirá. Haga clic en <guibutton
+>Siguiente</guibutton
+> para iniciar el asistente. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Asistente de conciliación</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile1.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Asistente de conciliación</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.reconcile.wizard.statement">
+<title
+>Detalles del extracto</title>
+<para
+>La fecha del extracto, el saldo inicial y el saldo final se pueden encontrar en su extracto. Asegúrese de que las cifras coinciden y haga clic en el botón <guibutton
+>Siguiente</guibutton
+>. Si las cifras no coinciden, introduzca las cifras como vienen en su extracto y haga clic en el botón <guibutton
+>Siguiente</guibutton
+>. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Asistente de conciliación</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile2.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Asistente de conciliación</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect2>
+
+<sect2 id="details.reconcile.wizard.interest">
+<title
+>Intereses</title>
+<para
+>Si la conciliación del extracto es sobre una cuenta bancaria o cualquier cuenta con intereses y/o tarifas de cargos, introduzca estos valores en los campos apropiados. Se puede asignar una categoría para cada una de estas cantidades. </para>
+
+<note>
+<para
+>El campo de intereses es para el interés que usted ha ganado. Si debe pagar intereses, &eg; por una cuenta de tarjeta de crédito, se deben introducir como un cargo. </para>
+</note>
+
+<para>
+<screenshot>
+	<screeninfo
+>Asistente de conciliación</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile3.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Asistente de conciliación</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Haga clic en el botón <guibutton
+>Continuar</guibutton
+> para empezar a comparar su extracto con lo que usted ha traducido. Tenga en cuenta que esto completa el Asistente de conciliación, pero no el proceso de conciliación. También cambia la vista del libro mayor, mostrando solo los asientos que no se han marcado ya como conciliados. Como se describe más abajo, necesitará liquidar los asientos y después decirle a &kappname; que la cuenta está conciliada. </para>
+</sect2>
+
+<sect2 id="details.reconcile.wizard.clearing">
+<title
+>Limpiando asientos</title>
+<para
+>Durante la conciliación, cualquier asiento se puede editar para hacer que coincida con el extracto, y los nuevos asientos se pueden crear como de costumbre. Para marcar un asiento como liquidado, haga clic en la columna <guilabel
+>C</guilabel
+> de la vista de lista. Un asiento está limpio cuando coincide con el asiento del extracto. </para>
+
+<para
+>El recuadro de órdenes (justo debajo del área de la lista de asientos) muestra la cantidad del extracto a la izquierda, la cantidad liquidada en el centro, y la diferencia a la derecha. A medida que marque los asientos como liquidados, estos valores se actualizan para reflejar el cambio. </para>
+
+<para
+>Tenga en cuenta, sin embargo, que como la conciliación es el proceso de hacer coincidir los datos de su cuenta con los del extracto, los cambios a cualquier asiento con fechas posteriores a las del extracto se guardarán, pero no tendrán ningún efecto en la cantidad liquidada mostrada en el recuadro de órdenes. </para>
+
+<screenshot>
+	<screeninfo
+>Asistente de conciliación</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile4.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Asistente de conciliación</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="details.reconcile.complete">
+<title
+>Completar la conciliación</title>
+
+<sect3 id="details.reconcile.finish">
+<title
+>Finalizar la conciliación</title>
+<para
+>Cuando la diferencia entre el extracto y el saldo liquidado es cero, entonces la cuenta está conciliada y usted puede hacer clic en el botón <guibutton
+>Finalizar</guibutton
+>. Cuando lo haga, &kappname; tomará todos los asientos que han sido marcados como liquidados y los marcará como conciliados, y el valor en la columna <guilabel
+>C</guilabel
+> cambiará de <quote
+>C</quote
+> a <quote
+>R</quote
+> para reflejar este cambio. Además, guarda los cambios y registar que la cuenta ha sido conciliada (usted todavía necesitará guardar el archivo para guardar permanentemente todos los cambios). </para>
+</sect3>
+
+<sect3 id="details.reconcile.postpone">
+<title
+>Posponer la conciliación</title>
+<para
+>Si tiene problemas para completar la conciliación, o si necesita reunir información adicional antes de que pueda completar el proceso, puede posponer el proceso para una ocasión posterior haciendo clic en el botón <guibutton
+>Posponer</guibutton
+>. Cuando haga esto, &kappname; recordará los valores que introdujo cuando inició el asistente, no marcará los asientos liquidados como conciliados, y devolverá el libro mayor a su vista normal. Si sale de &kappname; antes de hacer clic en <guibutton
+>Finalizar</guibutton
+> o en <guibutton
+>Posponer</guibutton
+>, tiene el mismo efecto que pulsar <guibutton
+>Postpone</guibutton
+>. Cualquier cambio que haya hecho, como marcar asientos como liquidados o introducir nuevos asientos, no se tocan y todavía podrá guardarlos antes de salir de &kappname;. Sin embargo, deberá ejecutar el asistente de conciliación de nuevo para conciliar la cuenta. </para>
+
+<para
+>Cuando ejecute el asistente de conciliación en esta cuenta la próxima vez, &kappname; recordará los valores que introdujo cuando lo ejecutó por última vez, y usted podrá cambiarlos si es necesario. En este caso, la pantalla inicial del asistente será distinta para recordarle esto. </para>
+
+<screenshot>
+	<screeninfo
+>Asistente de conciliación</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile-redo.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Asistente de conciliación</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+
+</sect3>
+</sect2>
+</sect1>
+
+</chapter>
+

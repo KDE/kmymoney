@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.formats">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+  </authorgroup>
+  <date
+>30/08/2014</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Formati dei file</title>
+
+<para
+>A meno che non si scelga una <link linkend="details.database"
+>base dati relazionale</link
+>, &kmymoney; salverà tutte le proprie informazioni finanziarie in un file con estensione <filename class="extension"
+>.kmy</filename
+>. Inoltre, a meno che non si usi un' <link linkend="firsttime.launch"
+>opzione da riga di comando</link
+> che specifica diversamente, quando si lancia &kmymoney; sarà riaperto l'ultimo file aperto. È importante sapere che esiste più di un tipo di file in cui &kmymoney; può memorizzare i dati finanziari. </para>
+
+<para
+>Questo capitolo descrive i formati in cui &kmymoney; memorizza i dati in modo permanente sul dispositivo di archiviazione dell'utente. In generale, &kmymoney; salva le informazioni come documento &XML;. In base al formato effettivo, questo documento &XML; può essere salvato come: <itemizedlist>
+  <listitem
+><para
+><link linkend="details.formats.plain"
+>file di testo semplice</link
+>, con codifica UTF-8, o</para
+></listitem>
+
+  <listitem
+><para
+><link linkend="details.formats.compressed"
+>file compresso</link
+> con GZIP, o</para
+></listitem>
+
+  <listitem
+><para
+><link linkend="details.formats.encrypted"
+>file cifrato</link
+> con la cifratura GPG, o</para
+></listitem>
+
+  <listitem
+><para
+><link linkend="details.formats.anonymous"
+>file di testo semplice anonimo</link
+> codificato in UTF-8 senza dati personali.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<sect1 id="details.formats.plain">
+<title
+>File di testo semplice</title>
+<para
+>Questo è il formato supportato che occupa più spazio su disco, perché non viene applicata alcuna compressione. Non è pensato per essere usato normalmente, ma per scopi di debug e per la possibilità di modificare manualmente il file. Se il nome del file ha estensione <filename class="extension"
+>.xml</filename
+> sarà salvato in questo formato. <caution
+> <para
+>La modifica manuale del file non è raccomandata agli utenti normali, e dovrebbe essere fatta solo se si conosce il funzionamento interno di &kmymoney; o se gli sviluppatori danno istruzioni precise. Non dare la colpa agli sviluppatori di &kmymoney; se perdi dati: sei stato avvisato! </para>
+</caution>
+</para>
+</sect1>
+
+<sect1 id="details.formats.compressed">
+<title
+>File compresso con GZIP</title>
+<para
+>Questo è il formato usato solitamente da &kmymoney; quando si salva un file con l'estensione <filename class="extension"
+>.kmy</filename
+>. </para>
+
+<note>
+  <para
+>Se è stata selezionata la <link linkend="details.formats.encrypted"
+>cifratura</link
+>, questo file verrà memorizzato in modo cifrato. </para>
+</note>
+
+<para
+>Se si vuole vedere il contenuto di un file compresso con GZIP, rinominarlo con l'estensione <filename class="extension"
+>.gz</filename
+> (&eg;, da <filename
+>miefinanze.kmy</filename
+> a <filename
+>miefinanze.kmy.gz</filename
+>) e poi usare <command
+>gunzip</command
+> per scompattarlo e vedere il contenuto. Non è necessario comprimerlo per caricarlo in &kmymoney; la volta successiva, perché &kmymoney;è in grado di leggere anche i dati non compressi. Comunque, quando lo si salva tornerà ad essere memorizzato in modo compresso. Utilizzare l'estensione <link linkend="details.formats.plain"
+><filename class="extension"
+>.xml</filename
+></link
+> per scriverlo in formato non compresso. </para>
+</sect1>
+
+<sect1 id="details.formats.encrypted">
+<title
+>File cifrato con GPG</title>
+<para
+>L'uso del formato cifrato con GPG è un modo molto sicuro di archiviare i propri dati finanziari sui dispositivi di memorizzazione. Una volta impostato &kmymoney; per la memorizzazione cifrata dei dati nella finestra di configurazione, cifrerà i dati prima di memorizzarli, utilizzando GPG e la chiave fornita. Quando si apre un file cifrato, si deve inserire la password necessaria per aprire il portachiavi. Il file cifrato sarà memorizzato nel formato <emphasis
+>&ASCII; con cifratura corazzata</emphasis
+> di GPG. <note
+> <para
+>Quando si usa la cifratura GPG il file viene anche compresso da GPG, quindi non è necessaria una compressione aggiuntiva. </para>
+  </note>
+</para>
+
+<sect2 id="details.formats.encrypted.gpgkeys">
+<title
+>Chiavi GPG</title>
+<para
+>Se non l'hai già fatto per la cifratura dei messaggi email, devi generare una coppia di chiavi prima di usare la funzione di cifratura GPG presente in &kmymoney;. È necessario anche avere installato il programma <application
+>GPG</application
+> </para>
+
+<para
+>Questo documento non ha come obiettivo la spiegazione dei dettagli su come generare e generare una coppia di chiavi. Si può trovare una piccola guida passo passo per questo argomento all'indirizzo <ulink url="https://www.gnupg.org/documentation/howtos.it.html"
+>https://www.gnupg.org/documentation/howtos.it.html</ulink
+>. </para>
+</sect2>
+
+<sect2 id="details.formats.encrypted.keysettings">
+<title
+>Impostazione delle chiavi in &kmymoney;</title>
+<para
+>Nella pagina Cifratura della finestra delle impostazioni, c'è un menu a discesa in cui si può selezionare la chiave da usare per la cifratura e la decifratura. Inoltre, c'è un campo in cui si può inserire l'id di una chiave non presente nel menu a discesa. Si può inserire in questo campo l'id della chiave, l'indirizzo email associato alla chiave o qualsiasi altra identificazione valida di una chiave GPG. Quando si inserisce l'id, &kmymoney; controllerà la sua validità e visualizzerà un semaforo verde nella finestra se viene trovata una chiave. <caution
+> <para
+>Assicurarsi di avere sia la chiave pubblica sia quella privata per questo id. Se non si possiede la chiave privata, non si sarà più in grado di aprire il file, una volta salvato. </para>
+  </caution>
+</para>
+</sect2>
+
+<sect2 id="details.formats.encrypted.recoverkey">
+<title
+>La chiave di ripristino di &kmymoney;</title>
+<para
+>In questa pagina di impostazioni è possibile anche selezionare una cifratura supplementare con la chiave di ripristino di &kmymoney;. Questa opzione è disponibile se la chiave è memorizzata nel portachiavi di <application
+>GPG</application
+>. Selezionando questa opzione, sarà possibile ripristinare i dati anche se si perde la chiave privata. Questo è possibile perché i dati non vengono cifrati solo con la propria chiave, ma anche con quella di ripristino di &kmymoney;. Questa chiave è disponibile solo ad alcuni sviluppatori di &kmymoney; (al momento della scrittura di questo manuale, solo l'autore). Dal rilascio della versione 4.7 di &kmymoney;, la chiave è stata impostata per scadere il 3 gennaio 2015. </para>
+
+<para
+>Nelle normali circostanze, si può aprire, salvare e chiudere il file come al solito. In caso di perdita della chiave, si può contattare uno degli sviluppatori che possiede la chiave di ripristino di &kmymoney; e chiedere aiuto per il ripristino dei dati. È possibile contattare gli sviluppatori tramite email scrivendo alla lista di distribuzione degli sviluppatori di &kmymoney;: &devlist;. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.formats.anonymous">
+<title
+>File anonimo</title>
+<para
+>Questo formato non è pensato per la normale archiviazione dei dati. È supportato solo perché, in caso di problemi, puoi fornire alla squadra di sviluppo di &kmymoney; il tuo file, senza svelare i dettagli confidenziali presenti nei tuoi dati finanziari. Ad esempio, i nomi degli istituti, dei beneficiari e dei conti sono sostituiti da stringhe come «I000001» e «A000001». Vengono apportate modifiche simili a tutti i dati, come i numeri dei conti, e modificati in modo casuale gli importi delle transazioni. </para>
+
+<para
+>Se gli sviluppatori indicano di farlo, usare la voce di menu <guimenuitem
+>Salva come...</guimenuitem
+> per memorizzare i dati in formato anonimo, selezionando <literal role="filter"
+>File anonimi</literal
+> come filtro. Questo imposta anche l'estensione del file a <filename class="extension"
+>.anon.xml</filename
+>. </para>
+
+<para
+>Per verificare che il problema persiste, ricarica questo file reso anonimo e prova a replicare il problema. Se il problema rimane, invia il file alla mailing list degli sviluppatori: &devlist;, in modo che venga analizzato. Se il problema non si ripresenta... beh, adesso non ho voglia di pensare a questo caso . </para>
+</sect1>
+</chapter>
+

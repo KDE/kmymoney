@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="firsttime">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>&kappname; zum ersten Mal starten</title>
+
+<sect1 id="firstime-1">
+<title
+>&kappname; zum ersten Mal starten</title>
+
+<para
+>Wenn &kappname; vollständig gestartet ist, werden zwei Fenster angezeigt. Das oberste Fenster „Tipp des Tages “ zeigt eine Reihe von wichtigen und nützlichen Informationen über das Programm. <screenshot>
+	<screeninfo
+>Tipp des Tages</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="tipofday.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Tipp des Tages</phrase>
+	</textobject>
+	</mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Es wird empfohlen, diese Hinweise durchzulesen, indem Sie die Knöpfe <guibutton
+>Zurück</guibutton
+> und <guibutton
+>Nächster</guibutton
+> unten im Dialogfenster benutzen. </para>
+
+<para
+>Haben Sie diese Tipps durchgelesen, können Sie das Fenster schließen. Es wird bei jedem Start von &kappname; wieder geöffnet. Um dieses Standardverhalten abzustellen, deaktivieren Sie das Ankreuzfeld <guilabel
+>Tipps beim Start anzeigen</guilabel
+> im Dialogfenster, </para>
+
+<note>
+  <para
+>Die Tipps können Sie jederzeit lesen, indem Sie in &kappname; <guimenuitem
+>Tipp des Tages anzeigen</guimenuitem
+> aus dem Menü <guimenu
+>Hilfe</guimenu
+> wählen. </para>
+</note>
+
+<para
+>Alle Tipps wurden aus der Liste „Häufig gestellter Fragen“ (FAQ) erstellt, in der Sie ausführliche Hilfen finden. Diese FAQ finden Sie auf der <ulink url="http://kmymoney2.sourceforge.net/faq.html"
+>Webseite</ulink
+> und in diesem Handbuch.d  </para>
+
+<para
+>Bitte klicken Sie auf <guibutton
+>Schließen</guibutton
+>, um den Dialog „Tipp des Tages“ zu beenden. </para>
+</sect1>
+
+<sect1 id="firsttime.mainwindow">
+<title
+>Das Hauptfenster</title>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Das Hauptfenster</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="mainwindow_numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Das Hauptfenster</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Das Hauptfenster von &kappname; besteht aus vier Bereichen: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>A. Die Menüleiste</para
+></listitem>
+  <listitem
+><para
+>B. Die Werkzeugleiste</para
+></listitem>
+  <listitem
+><para
+>C. Die Ansichtsauswahl</para
+></listitem>
+  <listitem
+><para
+>D. Die Ansicht</para
+></listitem>
+</itemizedlist>
+
+<para
+>Über das Menü und die Werkzeugleisten können Sie die Funktionen von &kappname; erreichen und zum Beispiel Dateien <link linkend="firsttime.3"
+>erstellen</link
+> oder die Arbeitsweise von &kappname; einrichten.  </para>
+
+<para
+>In der Ansichtsauswahl an der linken Seite des Hauptfensters finden Sie mindestens elf Symbole, abhängig von den auf Ihrem System installierten Programmen. Weitere Symbole können durch zusätzliche Module hinzukommen. Klicken Sie auf ein Symbol, dann erscheint diese Ansicht Ihrer Finanzdaten im rechten Teil des Hauptfensters. Jede Ansicht zeigt Ihre finanzielle Situation in einer anderen Form an und ermöglicht das Bearbeiten den Daten. </para>
+
+<para
+>Die Ansichtsauswahl enthält folgende Symbole: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="home_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Übersicht</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Übersicht: Eine einstellbare Übersicht Ihrer aktuellen finanziellen Situation oder die Einführungsseite, wenn keine Datendatei geöffnet ist. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="institutions_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Geldinstitute</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Geldinstitute: Alle Geldinstitute und Konten werden in einer Baumansicht angezeigt. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="accounts_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Konten</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Konten: Alle Konten werden in einer Baumansicht angezeigt. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="schedule_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Geplante Buchungen</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Geplante Buchungen: Ihre wiederkehrenden Rechnungen und Zahlungen. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="categories_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Kategorien</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Kategorien: Eine besondere Kontenart, die es Ihnen ermöglicht, zusammengehörende Buchungen in Gruppen zusammenzufassen. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="payees_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Empfänger</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Empfänger: Alle Zahlungsempfänger, die in &kappname; verwendet werden. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="ledgers_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Kontenbuch</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Kontenbuch: Übersicht der Buchungen aller Konten. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="investments_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Investitionen</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Investitionen: Eine Zusammenfassung Ihrer Anlagen. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="reports_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Berichte</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Berichte: Eine Sammlung von nützlichen Berichten, die alternative Übersichten Ihrer Finanzdaten bieten. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="budgets_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Budgets</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Budgets: Eine Übersicht über Ihre Budgets. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="forecast_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Vorhersage</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Vorhersage: Diese Ansicht zeigt eine Vorhersage Ihrer Konten und Kategorien. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="outbox_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Ausgang</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Ausgang: In dieser Ansicht werden die laufenden Prozesse des Online-Bankingmoduls angezeigt. Diese Ansicht liefert das KBanking-Modul. Ist es auf Ihrem System nicht installiert, fehlt diese Ansicht. </para>
+  </listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="firsttime.3">
+<title
+>Erstellen einer neuen Datei</title>
+
+<para
+>&kappname; speichert alle Finanzdaten in einer Datei. Wie bereits im Kapitel <link linkend="makingmostof.basicaccounting.personalaccounts"
+>Definition der Konten (private Nutzung)</link
+> erläutert, können Sie mehr als eine Gruppe von Konten verwenden, aber die Daten jeder einzelnen Gruppe werden in getrennten Dateien gespeichert und in &kappname; kann nur eine Datei geöffnet sein. Weitere Informationen über die &kappname;-Dateien finden Sie im Kapitel <link linkend="details.formats"
+>Dateiformate</link
+>. </para>
+
+<para
+>Um eine neue Datei zu erstellen, wählen Sie entweder <menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Neu</guimenuitem
+></menuchoice
+> aus dem Menü oder das Symbol <inlinemediaobject
+><imageobject
+><imagedata fileref="new.png"/></imageobject
+><textobject
+><phrase
+>Neu</phrase
+></textobject
+></inlinemediaobject
+> aus der Werkzeugleiste. </para>
+
+<para
+>&kappname; öffnet dann den <quote
+>Assistenten zur Erstellung einer neuen Datei</quote
+>, der Sie bei dieser Aufgabe unterstützt. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Die Seite „Persönliche Daten“</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Die Seite „Persönliche Daten“</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Alle Einträge auf dieser Seite sind nicht zwingend erforderlich, Sie können &kappname; auch ohne diese persönlichen Daten benutzen. Alle hier eingegebenen Informationen werden zur individuellen Anpassung Ihrer Daten benutzt. In weiteren Versionen können diese Daten für Berichte und das Online-Banking gebraucht werden. Sind in zukünftigen Versionen von &kappname; persönliche Daten für einige Funktionen erforderlich, aber noch nicht eingegeben, dann werden diese Daten abgefragt. </para>
+
+<para
+>Bitte geben Sie Ihren Namen und die Adresse ein, oder lassen alle Felder leer und drücken den Knopf <guibutton
+>Weiter</guibutton
+>. </para>
+
+<para
+>Haben Sie Ihre Adresse in &kaddressbook; eingegeben, dann ist der Knopf <guibutton
+>Aus dem Adressbuch laden</guibutton
+> aktiviert, klicken Sie darauf, um alle Daten in &kappname; einzufügen. </para>
+
+<para
+>In &kappname; können Sie mehrere Währungen verwenden. Um die Basiswährung einzustellen, die Sie am häufigsten verwenden und die für Berichte benutzt wird, wählen Sie den passenden Eintrag aus der Liste und drücken dann auf <guibutton
+>Weiter</guibutton
+>. Als Voreinstellung ist die in den &systemsettings; gewählte Währung vorgegeben. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Auswahl der Basiswährung</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-2.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Auswahl der Basiswährung</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Auf der nächsten Seite können Sie ein erstes Konto erstellen. Für den normalen Benutzer von &kappname; ist das ein Girokonto. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Erstellung des Girokontos</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-3.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Erstellung des Girokontos</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Geben Sie den Namen des Kontos und möglicherweise eine Kontonummer an, die von der Bank, die diese Konto verwaltet, zugewiesen wurde. Tragen Sie das Eröffnungsdatum und das Eröffnungssaldo des Kontos ein. Möchten Sie zum Beispiel mit &kappname; alle Finanzen ab dem 01.01.2011 verwalten, tragen Sie den Eröffnungssaldo am Beginn dieses Tages ein. Den Wert finden Sie möglicherweise auf einem Kontoauszug. Geben Sie noch den Namen und die Bankleitzahl der Bank an. Die Bankleitzahl ist nicht erforderlich und nur für das Online-Banking nötig. </para>
+
+<para
+>Möchten Sie zu Anfang kein Girokonto einrichten, deaktivieren Sie das Ankreuzfeld <guilabel
+>Ich habe ein Girokonto, das ich mit KMyMoney verwalten möchte</guilabel
+>. </para>
+
+<para
+>Haben Sie alle Daten eingegeben, klicken Sie auf <guibutton
+>Weiter</guibutton
+>. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Die Seite Auswahl einer Kontovorlage</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-4.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Die Seite Auswahl einer Kontovorlage</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+
+<para
+>Wählen Sie ein passendes Land und eine oder mehrere Kontenvorlagen. Mehrere Vorlagen aus verschiedenen Ländern  können Sie mit der &Ctrl;- und &Shift;taste zusammen mit der Maus auswählen. Die eingestellte Kontenhierarchie wird als Vorschau angezeigt. Finden Sie keine passende Vorlage, gehen Sie weiter zur nächsten Seite. </para>
+
+<para
+>Haben Sie eine Kontenvorlage ausgewählt, drücken Sie auf <guibutton
+>Weiter</guibutton
+>. </para>
+
+<para
+>Auf der nächsten Seite des Assistenten können Sie Ihre benutzerdefinierten Präferenzen setzen. Drücken Sie auf <guibutton
+>Weiter</guibutton
+>, um zur nächsten Seite zu kommen. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Die Seite Präferenzen</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-5.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Die Seite Präferenzen</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Auf der letzten Seite des Assistenten können Sie den Dateinamen für die Speicherung Ihrer Finanzdaten auswählen. Als Voreinstellung wird Ihr persönlicher Ordner und Benutzername vorgeschlagen. Ist diese Datei bereits vorhanden, werden Sie darauf hingewiesen und Sie müssen einen anderen Namen oder Ordner wählen. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Auswahl des Dateinamens</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-6.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Auswahl des Dateinamens</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Jetzt sind alle notwendigen Daten zur Erstellung der Datei eingegeben. Klicken Sie auf <guibutton
+>Fertigstellen</guibutton
+> und &kappname; erzeugt die Datei und öffnet sie. </para>
+
+<!--
+<para
+>After &kappname; has finished loading the default accounts your financial
+summary will be displayed.  As you have defined no accounts to hold your
+transactions this is currently empty.</para>
+-->
+</sect1>
+
+<sect1 id="firsttime.4">
+<title
+>Konten erstellen</title>
+
+<para
+>Es gibt zwei Möglichkeiten, um ein Konto zu erstellen, beide werden im Folgenden beschrieben: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Verwendung des Menüs</term>
+    <listitem>
+      <para
+>Wählen Sie dazu im Menü <menuchoice
+><guimenu
+>Konten</guimenu
+><guimenuitem
+>Neues Konto</guimenuitem
+></menuchoice
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Die Kontenansicht benutzen</term>
+    <listitem>
+      <para
+>Sie können zum Anlegen eines neuen Kontos auch auf das Symbol „Konten“ auf der linken Seite des &kappname;-Fensters klicken und dann mit der rechten Maustaste auf das Anlagen-Symbol klicken. Im Kontextmenü wählen Sie <guimenuitem
+>Neues Konto</guimenuitem
+>. Der Zweig „Anlagen“ beinhaltet alle Ihre Konten, die Ihr Vermögen darstellen. Anlagen und alle anderen Kontentypen werden im Verlauf des Handbuches detaillierter erklärt. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<tip>
+  <para
+>In &kappname; wird das Kontextmenü überall sehr oft verwendet. Kommen Sie an einer Stelle nicht weiter, klicken Sie mit der &RMBn; auf einen Bereich, in dem Sie Funktionen erwarten. </para>
+</tip>
+
+<para
+>Jede dieser Methoden startet den <emphasis
+>Assistenten für ein neues Konto</emphasis
+>. In diesem Dialog werden Sie durch alle notwendigen Schritte für ein neues Konto geführt, dabei werden alle erforderlichen Informationen abgefragt. Um zwischen den Seiten zu wechseln, klicken Sie auf <guibutton
+>Zurück</guibutton
+> oder <guibutton
+>Weiter</guibutton
+>. </para>
+
+<para
+>Erstellen Sie ein Konto mit einer der vorher genannten Methoden, um weiterzumachen. Eine vollständige Beschreibung zur Erstellung von Konten finden Sie im Abschnitt <link linkend="details.accounts"
+>Konten</link
+>. </para>
+
+<para
+>Wenn mindestens ein Konto erstellt worden ist, wird die Zusammenfassung der Daten aller Konten in der Übersicht angezeigt. Sie können einzelne Buchungen im <link linkend="details.ledgers"
+>Kontenbuch</link
+> oder Daueraufträge in der Ansicht <guilabel
+>Geplante Buchungen</guilabel
+> eingeben. </para>
+</sect1>
+
+<sect1 id="firsttime.schedules">
+<title
+>Geplante Buchungen</title>
+
+<para
+><link linkend="details.schedules"
+>Geplante Buchungen</link
+>, auch wiederholte Buchungen genannt, sind Buchungen die mehrmals in einen bestimmten Zeitraum ausgeführt werden. Ein typisches Beispiel is Ihre wöchentliche oder monatliche Lohnzahlung. Anstatt alle Details dieser Buchung jedesmal wieder neu einzugeben, können Sie in &kappname; eine geplante Buchung ausführen, die zu den angegebenen Terminen ausgeführt wird. </para>
+
+<para
+>Um <link linkend="details.schedules"
+>Buchungen</link
+> zu verwalten, klicken Sie auf das Symbol <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="schedule_view.png"/></imageobject
+></inlinemediaobject
+>Geplante Buchungen</guiicon
+> in der Ansichtsauswahl. </para>
+</sect1>
+
+<sect1 id="firsttime.categories">
+<title
+>Kategorien</title>
+
+<para
+>Um <link linkend="details.schedules"
+>Kategorien</link
+> zu verwalten, klicken Sie auf das Symbol <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="schedule_view.png"/></imageobject
+></inlinemediaobject
+>Kategorien</guiicon
+> in der Ansichtsauswahl. </para>
+
+<para
+>Eine umfangreiche Erläuterung zu diesem Thema finden Sie im Abschnitt <link linkend="details.categories"
+>Kategorien</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.payees">
+<title
+>Zahlungsempfänger</title>
+
+<para
+>Um Ihre Liste der Zahlungsempfänger zu verwalten, klicken Sie auf das Symbol <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="schedule_view.png"/></imageobject
+></inlinemediaobject
+>Empfänger</guiicon
+> in der Ansichtsauswahl. </para>
+
+<para
+>Eine umfangreiche Erläuterung zu diesem Thema finden Sie im Abschnitt <link linkend="details.payees"
+>Zahlungsempfänger</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.import">
+<title
+>Import des „Quicken Interchange Formats“ (QIF)</title>
+
+<para
+>Haben Sie vorher bereits ein Finanzverwaltungsprogramm benutzt, dann können Sie die Buchungen eines Kontos in &kappname; importieren, wenn diese Daten im „Quicken Interchange“-Format (QIF) vorliegen. Die meisten Finanzprogramme haben eine Exportfunktion für das QIF-Format, informieren Sie sich in der Dokumentation zum Programm, wie Sie den Export durchführen können. </para>
+
+<para
+>Eine umfangreiche Erläuterung zu diesem Thema finden Sie im Abschnitt <link linkend="details.impexp.qifimp"
+>QIF-Import</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.find">
+<title
+>Suche nach Buchungen</title>
+
+<para
+>&kappname; bietet eine nützliche und leistungsfähige Funktion zur Suchen mit dem Dialog „Suchen“. </para>
+
+<para
+>Den Suchdialog können Sie mit <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="transaction_find.png"/></imageobject
+></inlinemediaobject
+>Buchung suchen</guiicon
+> aus der Werkzeugleiste oder <guimenuitem
+>Buchung suchen</guimenuitem
+> aus dem Menü <guimenu
+>Bearbeiten</guimenu
+> öffnen. </para>
+
+<para
+>Eine umfangreiche Erläuterung zu diesem Thema finden Sie im Abschnitt <link linkend="details.search"
+>Suchen</link
+>. </para>
+
+</sect1>
+
+<sect1 id="firsttime.reconcile">
+<title
+>Kontenabgleich</title>
+
+<para
+>Irgendwann möchten Sie Ihre eingegebenen Buchungen mit den Buchungen auf Kontoauszügen wie zum Beispiel Bankauszügen, Kreditartenkonten, Gehaltskonten usw. abgleichen. Dieser Vorgang erfordert die Abstimmung der eingegebenen Buchungen mit den Buchungen auf den Auszügen. Treten dabei Abweichungen auf, haben entweder Sie oder die Person, die die Kontoauszüge erstellt hat, einen Fehler gemacht. </para>
+
+<para
+>Um ein Konto abzugleichen, wählen Sie zuerst das Konto entweder aus der Ansicht <guiicon
+>Konten</guiicon
+> oder <guiicon
+>Kontenbuch</guiicon
+>. Klicken Sie dann entweder auf das Symbol <guiicon
+>Abgleichen</guiicon
+> in der Werkzeugleiste oder wählen Sie <guimenuitem
+>Abgleichen</guimenuitem
+> aus dem Menü <guimenu
+>Konto</guimenu
+>. </para>
+
+<para
+>Eine umfangreiche Erläuterung zu diesem Thema finden Sie im Abschnitt <link linkend="details.reconcile"
+>Kontenabgleich</link
+>. </para>
+
+</sect1>
+
+<sect1 id="firsttime.backup">
+<title
+>Sicherung</title>
+
+<para
+>Da Sie jetzt einige Konten erstellt und Buchungen eingegeben haben, wird empfohlen, eine Sicherung der Daten durchzuführen. Da &kappname; eine normale Datei verwendet, kann als Sicherung eine Kopie an einem anderen Speicherort erstellt werden. Außerdem können Sie auch den Dialog „Sicherung“ benutzen. Es wird empfohlen, die Sicherung mit dem Dialog auszuführen, da es viel schwieriger ist, die Daten von Hand zu kopieren, wenn &kappname; andere Speicherformate wie zum Beispiel eine SQL-Datenbank benutzt. </para>
+
+<para
+>Um Ihre Datei mit &kappname; zu sichern, wählen Sie <guimenuitem
+>Sicherung</guimenuitem
+> aus dem Menü <guimenu
+>Datei</guimenu
+> und geben Sie den Ordner an, in den die Datei kopiert werden soll. Muss der Ordner zuerst eingebunden werden, aktivieren Sie <guilabel
+>Dieses Gerät einhängen, bevor die Sicherung durchgeführt wird</guilabel
+>, sofern Sie die Berechtigung für diese Aktion haben. Drücken Sie dann den Knopf <guibutton
+>OK</guibutton
+>.  </para>
+
+<para
+>Die Datei wird mir dem aktuellen Datum als Ergänzung des Dateinamens in dem angegebenen Ordner gespeichert, so dass Sie am Dateinamen sofort das Datum der Sicherung erkennen können.  </para>
+</sect1>
+
+<sect1 id="firsttime.launch">
+<title
+>&kappname; starten</title>
+
+<para
+>Normalerweise starten Sie &kappname; durch Anklicken eines Symbols auf Ihrer Arbeitsfläche oder aus einen Startmenü Ihres Fenstermanagers. In diesem Fall öffnet &kappname; die beim letzten Start geladene Datei. Unter bestimmten Bedingungen aber möchten oder müssen Sie &kappname; vielleicht von der Befehlszeile aufrufen. </para>
+
+<para
+>Eine umfassende Beschreibung aller vorhandenen Befehlszeilenoptionen finden Sie in den Handbuchseiten zu &kappname;. Zwei besondere Optionen werden hier kurz beschrieben. </para>
+
+<formalpara
+><title
+><command
+>kmymoney -n</command
+></title>
+  <para
+>Mit der Option -n startet &kappname; nicht mit der zuletzt geöffneten Datei. Diese Einstellung kann dann nützlich sein, wenn das Programm beim Start abstürzt. </para>
+</formalpara>
+
+<formalpara
+><title
+><command
+>kmymoney &lt;pfad/zu/datei&gt;</command
+></title>
+  <para
+>Geben Sie beim Start von &kappname; auf der Befehlszeile einen Dateinamen an, wird diese Datei anstelle der zuletzt geöffneten Datei geladen. Sie können hier den Namen jeder gültigen &kappname;-Datei angeben, die im Kapitel <link linkend="details.formats"
+>Dateiformate</link
+> beschrieben sind. Zusätzlich können Sie diese Option benutzen um eine <link linkend="details.impexp.gnucash"
+>GnuCash</link
+>-Datei zu importieren. </para>
+</formalpara>
+
+</sect1>
+
+<sect1 id="firsttime.contact">
+<title
+>Kontakt mit den Entwicklern aufnehmen und Fehler berichten</title>
+
+<sect2>
+<title
+>Kontakt mit den Entwicklern aufnehmen</title>
+
+<para
+>Die Entwickler erreichen Sie auf der Mailingliste &devlist;. </para>
+
+<para
+>Bitte schicken Sie Ihre Erfahrungsberichte mit &kappname;. </para>
+</sect2>
+
+<sect2>
+<title
+>Berichten von Fehlern</title>
+
+<para
+>Für einen Fehlerbericht benutzen Sie bitte den Menüeintrag <menuchoice
+><guimenu
+>Hilfe</guimenu
+><guimenuitem
+>Probleme oder Wünsche berichten</guimenuitem
+></menuchoice
+> und geben Sie alle nötigen Informationen ein. Bei Problemen mit diese Methode können Sie einen Fehler, einen Wunsch oder einen Verbesserungsvorschlag auch direkt auf der <ulink url="http://bugs.kde.org"
+>&kde;-Internetseite für Fehlerberichte</ulink
+> eingeben. Benutzen Sie dass Produkt <quote
+>kmymoney4</quote
+>. <quote
+>kmymoney2</quote
+> sollte nur für Fehler der Version 1.x des Programms benutzt werden. </para>
+
+<para
+>Ehe Sie einen Fehler berichten, lesen Sie bitte die folgenden Anleitungen. Folgen Sie diesen Anleitungen, können Entwickler wahrscheinlich schneller das Problem erkennen, ohne Sie mit weiteren Fragen belästigen zu müssen. </para>
+
+<sect3 id="firsttime.bugs.quality">
+<title
+>Nützliche Fehlerberichte schreiben</title>
+
+<para
+>Wir empfehlen unseren Benutzern, sich zusätzliche Zeit zu nehmen, um hochwertige Fehlerberichte zu schreiben, ehe sie eingeschickt werden. Dadurch reduziert sich der Aufwand sowohl für den Reporter als auch für den Entwickler, da keine weiteren E-Mails ausgetauscht werden müssen, bis alle notwendigen Informationen zu Behebung des Fehlers wirklich vorhanden sind. </para>
+
+<para
+>Eli Goldberg schrieb eine anerkannte Anleitung für das Schreiben von Fehlerberichten, die sie auf <ulink url="http://issues.apache.org/bugwritinghelp.html"
+>http://issues.apache.org/bugwritinghelp.html</ulink
+> finden. Folgen Sie dieser Anleitung, um nützliche Fehlerberichte zu schreiben. </para>
+
+<formalpara
+><title
+>Systeminformationen einfügen</title>
+  <para
+>Mit der Menüauswahl <menuchoice
+><guimenu
+>Hilfe</guimenu
+><guimenuitem
+>Probleme oder Wünsche berichten ...</guimenuitem
+></menuchoice
+> werden diese Informationen automatisch ausgefüllt. Möchten Sie diese Funktion nicht benutzen, dann müssen Sie die Version von &kappname;, die &kde;-Version, den Namen und die Version Ihrer Distribution und die Version des Kernels kennen. </para>
+</formalpara>
+
+<formalpara
+><title
+>Rückverfolgung für Abstürze einfügen</title>
+  <para
+>Die Rückverfolgung ist meistens die einzige hilfreiche Information, um die Fehler für solche Abstürze zu beseitigen. </para>
+</formalpara>
+
+<formalpara
+><title
+>Versuchen Sie, den Fehler zu reproduzieren</title>
+  <para
+>Geben Sie an, ob Sie den Fehler reproduzieren können. Es ist hilfreich zu wissen, ob der Fehler nur einmal auftrat und dann nie wieder, oder jedesmal oder nur manchmal. </para>
+</formalpara>
+
+<formalpara
+><title
+>Geben Sie alle nötigen Schritte an, um den Fehler reproduzieren zu können.</title>
+  <para
+>Die ist ein nutzloser Fehlerbericht: <quote
+>Ich habe eine Buchung eingeben und &kappname; ist abgestürzt.</quote
+> Viel besser ist dieser Fehlerbericht: <quote
+>Im Buchungsformular habe ich einen Buchung für mein Kreditkartenkonto eingegeben. Auf der Karteikarte Umbuchung habe ich einen Betrag eingegeben, dann wechselte ich zur Karteikarte Gutschrift und wieder zurück zur Karteikarte Umbuchung. Als ich zurück zu Umbuchung wechselte, ist &kappname; abgestürzt. Diesen Fehler kann ich jederzeit reproduzieren.</quote
+> </para>
+</formalpara>
+
+<formalpara
+><title
+>Was haben Sie erwartet?</title>
+  <para
+>In manchen Fällen ist das offensichtlich, aber bei subtilen Fehlerberichten ist nicht immer ersichtlich, was vom Programm erwartet wurde. Daher geben Sie diese Information immer an. </para>
+</formalpara>
+
+<formalpara
+><title
+>Ausführung mit Symbolen zur Fehlersuche</title>
+  <para
+>Kompilieren Sie ein Programm mit  --enable-debug=full können Sie sicherstellen, das nützliche Absturzinformationen erstellt werden. Stürzt &kappname; ab, starten Sie es im Programm gdb und wiederholen Sie den Absturz. Dann geben Sie <quote
+>bt</quote
+> ein. um die Absturzinformationen zu sammeln. </para>
+</formalpara>
+
+<para
+>Diese Art der Ausführung des Programms ist etwas schwieriger, daher wird das nicht von allen Benutzer erwartet. Möchten Sie jedoch mithelfen, dass &kappname; so stabil wie möglich läuft, ist dies der beste Weg, um Fehler im Quelltext zu finden und Korrekturen des Quelltexts zu schicken. </para>
+</sect3>
+</sect2>
+</sect1>
+</chapter>

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.forecast">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Colin.Wright; &Colin.Wright.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Vorhersage</title>
+
+<sect1 id="details.forecast.define">
+<title
+>Was ist eine Vorhersage?</title>
+
+<para
+>In &kmymoney; ist eine Vorhersage eine Vorausberechnung der Kontostände von Konten während des angegebenen Zeitraums in der Zukunft.</para>
+
+<para
+>Vorhersagen können durch eine von zwei Methoden berechnet werden. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Geplante und zukünftige Buchungen</term>
+    <listitem>
+      <para
+>&kmymoney; verwendet eine Kombination aus zukünftigen Buchungen, die bereits im Kontenbuch eingetragen sind, sowie den Einträgen unter geplanten Buchungen.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Vergangenheitsbasiert</term>
+    <listitem>
+      <para
+>&kmymoney; verwendet Werte aus vergangenen Buchungen im Kontenbuch um zukünftige Buchungen zu berechnen.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>Die Vorhersagemethode und der Vorhersagezeitraum lässt sich in den Einstellung von &kmymoney; auf der Seite „Vorhersage“ wählen. </para>
+
+<para
+>Die Vorhersage erstellt eine Zusammenfassung bestehend aus den vorhergesagten Kontoständen zu den Abrechnungszeitpunkten der Konten, sowie der erwarteten Differenz der Kontostände zwischen Beginn und Ende des Vorhersagezeitraums. Die Länge der Abrechnungszeitpunkte können vom Benutzer angegeben werden. Die Zusammenfassung zeigt auch entsprechende Warnungen, wenn signifikante Änderungen der Kontostände innerhalb des Vorhersagezeitraums errechnet werden. </para>
+
+<para
+>Neben der Zusammenfassung erlaubt es die Vorhersage auch tagesaktuelle Kontostände, sowie Minimal- und Maximalkontostände für jeden Abrechnungszeitraum zu ermitteln und anzuzeigen. </para>
+
+<para
+>Standardmäßig wird die Vorhersage für 90 Tage erstellt mit Abrechnungszeitraum für das Konto von 30 Tagen unter Verwendung der Methode mittels geplanter und zukünftiger Buchungen. </para>
+</sect1>
+
+<sect1 id="details.forecast.view">
+<title
+>Vorhersagen anzeigen</title>
+
+<para
+>Sie können eine Vorhersage anzeigen, indem Sie das entsprechende Symbol in der Navigationsleiste auf der linken Seite des &kmymoney;-Fensters anklicken. </para>
+
+<para
+>Das Vorhersagebereich ist in fünf Karteikarten unterteilt.: </para>
+
+<sect2>
+<title
+>Karteikarte „Zusammenfassung“</title>
+
+<para
+>Das Unterfenster "Zusammenfassung" ist vertikal in zwei Hälften geteilt. </para>
+
+<sect3>
+<title
+>Kontozusammenfassung</title>
+
+<para
+>Die Kontozusammenfassung zeigt in jeder Zeile Informationen für jede Anlage und Verbindlichkeit. </para>
+
+<para
+>Die folgenden Spalten sind zu sehen: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Konto</term>
+    <listitem>
+      <para
+>Der Name des Anlage- oder Verbindlichkeitenkontos</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Aktuell</term>
+    <listitem>
+      <para
+>Der aktuelle Kontostand des angezeigten Kontos.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Abrechnungszeitraum, z.B. "30 Tage"</term>
+    <listitem>
+      <para
+>Der Vorhersagezeitraum ist aufgeteilt in Kontozyklen (Abrechnungszyklen). Der standardmäßige Abrechnungszeitraum beträgt 30 Tage, kann aber vom Benutzer geändert werden.</para>
+
+      <para
+>Der erste Tag des Abrechnungszyklus ist der erste Vorhersagetag. Standardmäßig ist dies der heutige Tag plus einem Abrechnungszyklus, was aber abhängig von der Einstellung "Start-Tag (des Monats) der Vorhersage" variieren kann.</para>
+
+      <para
+>Verbleibende Abrechnungszyklus-Daten werden ermittelt, indem zum vorherigen Abrechnungszyklus-Datum ein weiterer Abrechnungszyklus hinzugezählt wird. Dies wiederholt sich, bis das errechnete Abrechnungszyklus-Datum hinter dem Vorhersagezeitraum liegt.</para>
+
+      <para
+>Für jeden Abrechnungszyklus wird der errechnete Kontostand angezeigt.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Gesamtvariation</term>
+    <listitem>
+      <para
+>Die Spalte ganz rechts zeigt die berechnete Differenz der Werte zwischen den Kontoständen am Anfang und am Ende der Vorhersage. Wenn der vorhergesagte Endsaldo des Kontos (im Sinne des Eigenkapitals) geringer ist als der Startsaldo, wird die gesamte Zeile rot hervorgehoben.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+</sect3>
+
+<sect3>
+<title
+>Schlüsselinformationen der Zusammenfassung</title>
+
+<para
+>Die rechte Hälfte der Karteikarte "Zusammenfassung" zeigt einige nennenswerte Informationen über die Konten. Dazu gehören: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Anlagen im Soll</term>
+    <listitem>
+      <para
+>Eine Nachricht wird für alle Anlagen angezeigt, deren Salden während der Vorhersageperiode unter 0 sinken oder unter 0 starten.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Verbindlichkeiten im Haben</term>
+    <listitem>
+      <para
+>Für alle Verbindlichkeiten, deren Salden während der Vorhersageperiode über 0 steigen, oder über 0 starten, wird ebenfalls eine Meldung ausgegeben. Beachten Sie, dass der Wert einer Verbindlichkeit der negierte Wert der Kontenbuch-Saldos ist, während eine positiver Betrag bedeutet, dass Geld geschuldet wird.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Die Karteikarte "Details"</title>
+
+<para
+>Die Karteikarte "Details" enthält eine Tabelle mit Informationen zu jeder Anlage und jeder Verbindlichkeit pro Zeile. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Konto</term>
+    <listitem>
+      <para
+>Der Name des Anlage- oder Verbindlichkeitenkontos</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Daten</term>
+    <listitem>
+      <para
+>Für jedes Datum der Vorhersageperiode wird eine Spalte erzeugt, die den vorausberechneten Kontostand an diesem Tag zeigt. Die Datum-Spalten sind aufsteigend von links nach rechts sortiert.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Gesamtvariation</term>
+    <listitem>
+      <para
+>Die Spalte ganz rechts zeigt die berechnete Differenz der Werte zwischen den Kontoständen am Anfang und am Ende der Vorhersage. Wenn der vorhergesagte Endsaldo des Kontos (im Sinne des Eigenkapitals) geringer ist als der Startsaldo, wird die gesamte Zeile rot hervorgehoben.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Karteikarte "Erweitert"</title>
+
+<para
+>Unter "Erweitert" werden pro Zeile Informationen für alle Verbindlichkeiten und Anlagen angezeigt. Die Informationen befinden sich in folgenden Spalten: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Konto</term>
+    <listitem>
+      <para
+>Der Name des Anlage- oder Verbindlichkeitenkontos</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Minimal-Saldo</term>
+    <listitem>
+      <para
+>Für jeden Abrechnungszyklus &lt;n&gt; des Vorhersagezeitraums werden die folgenden Spalten angezeigt:</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>Minimal-Saldo &lt;n&gt;</term>
+	  <listitem>
+	    <para
+>Der minimale vorhergesagte Kontostand im Abrechnungszyklus</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term
+>Minimal-Datum &lt;n&gt;</term>
+	  <listitem>
+	    <para
+>Das Datum, an dem der Kontostand das errechnete Minimum erreicht.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Maximaler Kontostand innerhalb des Abrechnungszyklus.</term>
+
+    <listitem>
+      <para
+>Für jeden Abrechnungszyklus &lt;n&gt; des Vorhersagezeitraums werden die folgenden Spalten angezeigt:</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>Maximal-Saldo &lt;n&gt;</term>
+	  <listitem>
+	    <para
+>Der maximale berechnete Kontostand während des Abrechnungszyklus</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term
+>Maximal-Datum &lt;n&gt;</term>
+	  <listitem>
+	    <para
+>Das Datum, an dem der Saldo das vorausgesagte Maximum erreicht.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Mittelwert</term>
+
+    <listitem>
+      <para
+>Der mittlere Kontostand während der Vorhersagezeitraums.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2>
+<title
+>Die Karteikarte Budget-Vorhersage</title>
+
+<para
+>Auf dieser Karteikarte wird eine Berechnung der Vorhersage für Einnahmen und Ausgaben als Tabelle angezeigt. Es werden ähnliche Spalten wie auf den Karteikarten Zusammenfassung und Details verwendet. </para>
+
+</sect2>
+
+<sect2>
+<title
+>Die Karteikarte Diagramm</title>
+
+<para
+>Hier wird ein Diagramm mit der grafischen Darstellung der Vorhersage angezeigt. Den Umfang und die Detaillierung des Diagramms legen Sie mit den Einstellungen oben im Fenster fest. </para>
+
+</sect2>
+
+</sect1>
+</chapter>

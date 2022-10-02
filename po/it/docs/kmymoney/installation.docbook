@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appendix id="installation">
+<appendixinfo>
+  <authorgroup>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+  </authorgroup>
+  <date
+>30/08/2014</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</appendixinfo>
+
+<title
+>Installazione</title>
+
+<para
+>Questa appendice si riferisce in modo particolare all'installazione di &kmymoney; usando il sistema operativo &Linux;. L'<link linkend="installation.nonlinux"
+>ultima sezione</link
+> riguarda gli altri sistemi operativi. </para>
+
+<sect1 id="installation.getting">
+<title
+>Come ottenere &kmymoney;</title>
+
+<para
+>Nonostante &kmymoney; esista da vari anni, abbiamo lavorato duramente a un'integrazione completa in &kde;. Le prime versioni stabili (1.0.x) richiedevano librerie di &kde; 3, e non erano quindi disponibili in molte distribuzioni Linux, che erano già migrate a &kde; 4. Con il rilascio della versione 4.5 nell'agosto 2010, invece, &kmymoney; può essere facilmente compilato e installato su qualsiasi versione di &kde;, 4.3 o superiore. La versione attuale, 4.7, richiede &kde; 4.6, nello specifico kdelibs e kdepimlibs. </para>
+
+<para
+>Nonostante il lavoro di conversione di &kmymoney; al nuovo KDE Frameworks 5 sia cominciato, siamo ancora in uno stadio iniziale, e non ancora utilizzabile. Se tutto va bene, lo sarà nella versione 5.0, attesa per i primi mesi del 2015. Fino ad allora, se si è interessati a seguire questo lavoro, è necessario iscriversi alla lista di distribuzione degli sviluppatori &devlist;. </para>
+
+<para
+>Il resto di questa sezione descrive l'installazione di &kmymoney; usando il processo standard di installazione per la tua distribuzione Linux. La sezione successiva tratta invece la compilazione dai sorgenti. </para>
+
+<sect2 id="installation.distribution">
+<title
+>Pacchetti ufficiali della distribuzione</title>
+<para
+>Il modo migliore per installare &kmymoney; è di usare il gestore dei pacchetti della tua distribuzione, come apt-get, yum, portage o pacman. In questo modo saranno gestite automaticamente le dipendenze e le librerie necessarie. Nonostante possa passare un po' di tempo dal rilascio di una nuova versione di &kmymoney; perché essa sia inserita nei repository ufficiali di tutte le distribuzioni, verifica sempre questa opzione per prima. </para>
+</sect2>
+
+<sect2 id="installation.unsupported">
+<title
+>Repository non supportati</title>
+<para
+>Molte distribuzioni Linux hanno repository non supportati, forniti da utenti, che offrono pacchetti più aggiornati dei repository ufficiali della distribuzione. Si può trovare un elenco di questi repository nel <ulink url="http://www.kmymoney.org"
+>sito di &kmymoney;</ulink
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="installation.fromsource">
+<title
+>Compilazione di &kmymoney; dai sorgenti</title>
+
+<para
+>Si possono trovare informazioni più aggiornate sull'ultima versione disponibile e sui problemi di installazione conosciuti nel <ulink url="http://www.kmymoney.org"
+>sito di &kmymoney;</ulink
+>. Questa pagina contiene anche collegamenti ai file compressi delle versioni più recenti, così come le istruzioni per ottenere i sorgenti dal Git di &kde;, nel caso si voglia compilare l'ultima versione di sviluppo. </para>
+
+<para
+>Come si poteva intuire dal paragrafo precedente, ci sono due possibili ragioni per voler compilare &kmymoney; dai sorgenti. Se non riesci a trovare una versione pacchettizzata specificamente per la tua distribuzione, scarica il file compresso della versione stabile più recente. Al momento della scrittura di questo manuale, l'ultima versione è la 4.6.0. Questa è la versione consigliata per i normali utenti. </para>
+
+<para
+>Se invece si desidera vedere lo stato attuale dello sviluppo, controllare la correzione di un bug o una nuova funzione, è possibile scaricare un archivio contenente i file del deposito di sviluppo. Puoi anche ottenere i sorgenti direttamente dal deposito. La versione 4.x si trova nel Git di &kde;. (I sorgenti delle versioni 1.0.x sono nel cvs di SourceForge, ma non sono più sviluppati o supportati). Le istruzioni per l'accesso si trovano sul sito del progetto. </para>
+
+<warning>
+ <para
+>Il codice negli archivi Git ed in quelli di sviluppo è in fase di continuo sviluppo: potrebbe contenere errori, potrebbe bloccarsi, e potrebbe causare il danneggiamento o la perdita di dati. Se lo usi, sii assolutamente sicuro di fare copie di sicurezza adeguate. A meno di non avere una buona ragione per usare questo codice, utilizza una versione stabile. </para>
+</warning>
+
+<sect2
+><title
+>Librerie richieste</title>
+<para
+>Per poter essere compilato ed eseguito correttamente &kmymoney; necessita di determinate librerie. Innanzi tutto KDE, versione 4.3.5 o successiva, in particolare kdelibs e kdepimlibs. A seconda della tua distribuzione, potresti dover caricare esplicitamente le versioni <quote
+>-devel</quote
+> per compilare &kmymoney;, invece di eseguire semplicemente una versione pre-compilata. Per quanto riguarda la versione 4.6.0, &kmymoney; dipende anche da libalkimia, versione 4.3.1 o superiore. Ulteriori requisiti possono essere individuati durante la fase di <quote
+>cmake</quote
+>, di seguito. </para>
+
+<para
+>Ulteriori funzionalità possono essere ottenute se al momento della compilazione sono disponibili librerie aggiuntive. Le due più comuni sono </para>
+
+<itemizedlist>
+<listitem>
+  <para
+>libofx, versione 0.9.4 o superiore, per essere in grado di importare dati finanziari nel formato OFX, e</para>
+</listitem>
+
+<listitem>
+  <para
+>AqBanking, versione 5.0.0 o superiore, per poter utilizzare alcune funzionalità del banking online. Si raccomanda l'utilizzo della versione 5.0.14 o superiore, a causa di errori di programmazione presenti nelle precedenti versioni.</para>
+</listitem>
+</itemizedlist>
+</sect2>
+
+<sect2
+><title
+>Istruzioni di compilazione</title>
+<para
+>&kmymoney; usa il sistema di compilazione cmake. Si possono trovare maggiori informazioni nel file README.cmake presente nella cartella radice dei sorgenti. I comandi base sono i seguenti: </para>
+
+<simplelist>
+<member
+><command
+>$ mkdir build</command
+></member>
+<member
+><command
+>$ cd build</command
+></member>
+<member
+><command
+>$ cmake .. -DCMAKE_INSTALL_PREFIX=/usr/</command
+></member>
+<member
+><command
+>$ make</command
+></member>
+<member
+><command
+>$ sudo make install/fast</command
+></member>
+</simplelist>
+
+<important
+><para
+>Notare che l'ultimo passo è necessario. &kmymoney; si aspetta di trovare certe componenti in posizioni standard, e se lo si esegue dalla cartella di compilazione senza installarlo, ci possono essere icone mancanti o altre sorprese. </para
+></important>
+
+<para
+>Se hai compilato i sorgenti da git, e vuoi aggiornarli all'ultima revisione, la maggior parte delle volte puoi fare così: </para>
+
+<simplelist>
+<member
+><command
+>$ cd &lt;cartella principale dei sorgenti&gt;</command
+></member>
+<member
+><command
+>$ git pull --rebase</command
+></member>
+<member
+><command
+>$ cd build</command
+></member>
+<member
+><command
+>$ make</command
+></member>
+<member
+><command
+>$ sudo make install/fast</command
+></member>
+</simplelist>
+
+<para
+>Comunque, a volte i cambiamenti fatti dagli sviluppatori producono dei problemi di compilazione se non si parte da una base di codice pulita. In questi casi, è necessario eseguire i seguenti comandi: </para>
+
+<simplelist>
+<member
+><command
+>$ cd &lt;cartella principale dei sorgenti&gt;</command
+></member>
+<member
+><command
+>$ git pull --rebase</command
+></member>
+<member
+><command
+>$ rm -r build</command
+></member>
+<member
+><command
+>$ mkdir build</command
+></member>
+<member
+><command
+>$ cd build</command
+></member>
+<member
+><command
+>$ cmake .. -DCMAKE_INSTALL_PREFIX=/usr/</command
+></member>
+<member
+><command
+>$ make</command
+></member>
+<member
+><command
+>$ sudo make install/fast</command
+></member>
+</simplelist>
+</sect2>
+</sect1>
+
+<sect1 id="installation.nonlinux">
+<title
+>Installazione di &kmymoney; senza Linux</title>
+
+<para
+>&kmymoney; è stato compilato con successo per &MacOS; X ed è disponibile nel <ulink url="http://www.macports.com"
+>sito web MacPorts</ulink
+>. </para>
+<para
+>&kmymoney; è disponibile anche per &Windows;. Questa iniziativa è ancora incompleta, ma negli ultimi anni sono stati apportati grandi miglioramenti. Per ulteriori informazioni su come eseguire &kde;, incluso &kmymoney; su &Windows;, vedere la pagina <ulink url="http://windows.kde.org"
+>KDE on Windows Initiative</ulink
+>. Per un programma di installazione autonomo che installa solo &kmymoney;, vedere la <ulink url="http://www.kmymoney.org"
+>pagina principale di &kmymoney;</ulink
+>. Notare che la versione più recente del programma di installazione non funziona più su &Windows; XP. Al momento del rilascio, non era chiaro se ciò poteva essere cambiato, poiché il problema era collegato agli strumenti utilizzati per compilare l'applicazione, non l'applicazione stessa. </para>
+
+<para
+>Se sai che &kmymoney; è stato compilato con successo e reso disponibile per un altro sistema operativo, faccelo sapere, così possiamo diffondere la notizia. </para>
+
+</sect1>
+</appendix>

@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.database">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
+  </authorgroup>
+  <date
+>2011-07-21</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Databas</title>
+
+<sect1 id="details.database.usage">
+<title
+>Använda relationsdatabaser</title>
+
+<sect2>
+<title
+>Inledning</title>
+<para
+>Från utgåva 1.0, tillåter &kmymoney; att du lagrar data i en relationsdatabas. En av fördelarna med att använda detta industristandardformat är att det låter dig visa data med något av de grafiska gränssnitten som <trademark
+>OpenOffice.org</trademark
+> eller <trademark
+>LibreOffice</trademark
+>, kanske med något format som &kmymoney; för närvarande inte tillhandahåller. Dessutom bör en viss kunskap om SQL (Structured Query Language, det språk som används i hela världen för att komma åt relationsdatabaser) göra det möjligt att enklare exportera data till ett externt program, till exempel ett budgetprogram. </para>
+<para/>
+</sect2>
+
+<sect2
+><title
+>Förberedelse</title>
+
+<para
+>För att komma åt databasen använder &kmymoney; SQL-modulen som levereras av &Qt; Software som en del av deras &Qt; programmeringssystem. Modulen stöder ett antal olika databassystem via en samling drivrutiner. Bland de populärare systemen med öppen källkod, där drivrutiner finns tillgängliga är <trademark
+>MySQL</trademark
+>, SQLite (bara version 3 och senare) och PostgreSQL. Modulen stöder också "tyngre", mer industriella system såsom <trademark class="registered"
+>Oracle</trademark
+> och IBM <trademark class="registered"
+>DB2</trademark
+>. </para>
+
+<para
+>Med undantag av SQLite, använder systemen en klient/server-modell, där 'klientprogramvaran' finns på 'din' dator, medan servern befinner sig på samma dator som själva databasen, vilket kan vara någon annanstans på ett nätverk. I det normala scenariot för ett hemekonomiprogram som &kmymoney;, är det naturligtvis så att din dator fungerar både som klient och server. Din första uppgift är därför att installera klientprogramvaran, och troligtvis också serverprogramvaran, när du har bestämt dig för vilket databassystem du vill använda. </para>
+
+<para
+>Förutom själva databasprogramvaran, måste du också installera motsvarande &Qt;-drivrutin. Drivrutiner för de populärare databaserna ingår i de flesta distributioner. Kontrollera annars på webbsidan för <ulink url="https://www.qt.io/"
+>&Qt; software</ulink
+> och sök efter 'SQL drivers'. </para>
+
+<note>
+  <para
+>SQLite arbetar inte med en klient/server-modell. Varje databas finns i en vanlig fil, lokal eller på en annan dator, som kan kommas åt via de normala metoderna som det underliggande operativsystemet tillhandahåller. I detta fall, finns det därför bara ett programvarupaket och drivrutinen att installera. Dessutom gäller kanske inte en del av informationen som följer SQLite, i synnerhet den som är relaterad till administration. </para>
+</note>
+</sect2>
+
+<sect2>
+<title
+>Administration</title>
+
+<para
+>Att hålla ordning på databaser är lite komplexare än att hantera vanliga filer. Varje system har olika metoder för att utföra de nödvändiga administrativa uppgifterna som att skapa databaser, tilldela rättigheter till diverse användare, skapa säkerhetskopior, etc. Att beskriva dessa är utanför den här handbokens omfattning, men alla produkter som stöds tillhandahåller fullständig referensdokumentation, och en snabb sökning på webben ger pekare till många handledningar i ämnet. </para>
+
+<sect3>
+<title
+>Skapa databasen</title>
+
+<para
+>Kod har inkluderats som skapar en initial databas för att lagra data om det inte finns någon. Dock rekommenderas du starkt att skapa en databas i förväg, eftersom de flesta produkter erbjuder ett antal alternativ som kan vara relevanta. Ett som kan vara särskilt viktigt för vissa, är att ange teckenuppsättning (t.ex. UTF-8) som används för textfält. </para>
+
+<para
+>Vid denna tidpunkt måste du också ange rättigheter för diverse användare att utföra olika åtgärder med databasen. I de flesta system, blir användaren som skapar databasen automatiskt tilldelad fullständiga rättigheter, men det är ett område där man bör rådfråga dokumentationen. </para>
+
+<para
+>Vid den första användningen av databasen, och då och då vid andra tillfällen när databasens layout ändras, behöver du rättigheter (också kallat behörighet) att skapa och ändra tabeller och vyer (se nästa stycke). Det kan finnas olika namn på rättigheter/behörighet i olika system, men något som liknar <literal
+>CREATE</literal
+> (skapa) och <literal
+>ALTER</literal
+> (ändra) bör vara vanligt. Vid normal användning måste du kunna läsa och skriva poster. Det definieras i allmänhet i SQL som rättigheterna <literal
+>SELECT</literal
+> (välja), <literal
+>INSERT</literal
+> (infoga), <literal
+>UPDATE</literal
+> (uppdatera) och <literal
+>DELETE</literal
+> (ta bort). </para>
+</sect3>
+
+<sect3>
+<title
+>Skapa tabeller</title>
+
+<para
+>När du först använder det, kommer &kmymoney; försöka skapa nödvändiga tabellstrukturer. För att uppnå maximal kompatibilitet mellan diverse databastyper, används bara en delmängd av vanliga datatyper. Det kan hur som helst uppstå situationer där en viss typ inte stöds, och i detta fall finns möjligheten att generera nödvändig SQL-kod för att skapa tabellerna. Koden kan därefter ändras efter behov, och användas för att skapa tabellerna utanför &kmymoney;. Skulle du hamna i den situationen, kan hjälp oftast erhållas från &devlist;. Se <link linkend="details.database.generatesql"
+>Skapa en databas för hand</link
+> för mer information. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.database.selectdatabase">
+<title
+>Skapa en databas</title>
+
+<para
+>Öppna eller importera en befintlig datafil, eller skapa en ny, med användning av &kmymoney;. Välj därefter menyalternativet <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Spara som databas</guimenuitem
+></menuchoice
+>. Det visar följande dialogruta: </para>
+
+<screenshot>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="select_database.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Fyll i lämpliga fält för typen av databas du har valt (som vanligt är nödvändiga fält markerade) och klicka på <guibutton
+>Ok</guibutton
+> för att skapa databasen. </para>
+
+<sect3>
+<title
+>Databastyp</title>
+
+<para
+>Rutan listar alla &Qt; SQL-drivrutiner installerade på systemet. Välj drivrutin för din databastyp. Om den du vill ha inte finns i listan, måste du installera lämplig drivrutin. Se dokumentationen för din distribution, eller besök webbsidan för <ulink url="https://www.qt.io/"
+>&Qt; software</ulink
+> och sök efter 'SQL drivers'. </para>
+</sect3>
+
+<sect3>
+<title
+>Fil (bara SQLite)</title>
+<para
+>SQLite har en databas per fil, ange alltså därför filnamnet där du vill skapa databasen. För att bläddra i filsystemet, klicka på ikonen till höger om filnamnet. För SQLite databaser är fälten <guilabel
+>Värddatornamn</guilabel
+>, <guilabel
+>Användarnamn</guilabel
+> och <guilabel
+>Lösenord</guilabel
+> inte relevanta. SQLite-filen måste ha lämpliga läs- och skrivrättigheter inställda av det underliggande filsystemet för att aktivera lämplig åtkomst för användaren som för närvarande är inloggad. </para>
+</sect3>
+
+<sect3>
+<title
+>Databasnamn (övriga)</title>
+<para
+>Standardnamnet på databasen är <literal
+>KMyMoney</literal
+>, men du kan välja något annat namn om du vill. För vissa typer av databas, kanske &kmymoney; inte klarar av att skapa databasen, så den måste skapas i förväg genom att använda lämplig administrationsprocedur. &kmymoney; klarar dock oftast av att skapa alla tabellstrukturer när det behövs. Om inte, kan du skapa dem själv. Se <link linkend="details.database.generatesql"
+>Skapa en databas för hand</link
+> för mer information. </para>
+</sect3>
+
+<sect3
+><title
+>Värddatornamn</title>
+<para
+>För vanliga användare, är standardnamnet <quote
+>localhost</quote
+>, vilket är datorn som för närvarande används, riktigt. För nätverksdatabaser, ska den anslutna värddatorns namn anges. </para>
+
+</sect3>
+
+<sect3>
+<title
+>Användarnamn och lösenord</title>
+<para
+>Kontrollera inställda rättigheter för databasen, eller kontakta administratören av databasen, för riktiga värden att använda här. Användarnamnet måste ha möjlighet att välja, ta bort, infoga och uppdatera poster. Om användarnamnet är samma som inloggningsnamnet behövs i allmänhet inte något lösenord. </para>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Komma åt data</title>
+
+<sect3>
+<title
+>Tabellkonstruktion</title>
+
+<para
+>För att komma åt data i &kmymoney;, använd menyalternativet <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Öppna databas</guimenuitem
+></menuchoice
+>. Det visar en dialogruta som liknar den ovanstående. </para>
+
+<note>
+<para
+>Om du skapade din databas genom att först öppna en fil, och sedan <guimenuitem
+>Spara som databas</guimenuitem
+>, enligt de tidigare instruktionerna, kommer ändringar av din data endast sparas i databasen, inte i filen. Det innebär att du kan använda filen som en säkerhetskopia av din data som den var vid en viss tid. För att ta en ny säkerhetskopia på det här sättet, öppna din databas, välj menyalternativet <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Spara som...</guimenuitem
+></menuchoice
+>, och ange ett passande filnamn. Kom ihåg att öppna databasen igen, så att &kmymoney; inte fortsätter använda den gamla filen. </para>
+</note>
+
+<para
+>För att komma åt data på andra format, måste du känna till en del om hur den lagras i relationsdatabaser. Det allra enklaste sättet att få en känsla för det är att öppna databasen i ett gränssnitt som <trademark
+>OpenOffice.org</trademark
+>. Det tillhandahåller en lista med de olika tabellerna som utgör databasen, och gör det möjligt för dig att se layouten för var och en av dem. </para>
+
+<para
+>För att hämta ut data, t.ex. till ett kalkylark eller extern fil, är det nästan utan undantag nödvändigt att välja länkad data från en eller flera tabeller. Det görs genom att 'förena' tabellerna, genom att använda ett fält som är gemensamt för båda. Du hittar mycket mer information om hur man gör det i handledningarna på nätet som nämndes ovan. Följande tabell listar fälten som används för att definiera dessa relationer mellan tabeller. </para>
+
+<informaltable>
+  <tgroup cols="3">
+    <thead>
+      <row>
+        <entry valign="top">
+          <para
+>Relation</para>
+        </entry>
+        <entry valign="top">
+          <para
+>Matchar</para>
+        </entry>
+        <entry valign="top">
+          <para
+>Med</para>
+        </entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+        <entry valign="top">
+          <para
+>Institutioner och konton</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmInstitutions.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmAccounts.institutionId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Överliggande konton och delkonton</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmAccounts.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmAccounts.parentId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Transaktioner och delningar (se anmärkning 1)</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmTransactions.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSplits.transactionId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Konton och delningar</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmAccounts.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSplits.accountId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Betalare och delningar</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmPayees.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSplits.payeeId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Schemaläggningar och transaktioner</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSchedules.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmTransactions.id</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Transaktioner och valutor</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmTransactions.currencyId</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmCurrencies.ISOCode</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+><literal
+>Konton och värdepapper (se anmärkning 2)</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmAccounts.currencyId</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSecurities.id</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Värdepapper och kurser</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSecurities.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmPrices.fromId</literal
+> eller <literal
+>kmmPrices.toId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Valutakurser</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmCurrencies.ISOCode</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmPrices.fromId</literal
+> eller <literal
+>kmmPrices.toId</literal
+></para>
+        </entry>
+      </row>
+    </tbody>
+  </tgroup>
+</informaltable>
+
+<para
+>Anmärkningar: </para>
+
+<para
+>1 &#x2013; txType = &#x201C;N&#x201D; för normala transaktioner, &#x201C;S&#x201D; för schemalagda transaktioner </para>
+
+<para
+>2 &#x2013; om kmmAccounts.isStockAccount = &#x201C;Y&#x201D; </para>
+</sect3>
+
+<sect3>
+<title
+>Fältformat</title>
+
+<para
+>Flera av datafälten lagras med ett internt format, vilket kanske inte är omedelbart användbart för externa program. I dessa fall, har informationen duplicerats med både internt och externt format. </para>
+
+<para
+>Valutabelopp och aktievärden visas både på bråkform, och på formen som syns i fönstren med ett fältnamn som slutar med '<literal
+>Formatted</literal
+>' (formaterat). </para>
+
+<para
+>På liknande sätt, anges fält som kontotyp både som en numerisk kod, och på programmets form och språk i ett fält som slutar med '<literal
+>String</literal
+>' (sträng) </para>
+</sect3>
+
+<sect3>
+<title
+>Uppdatera data</title>
+
+<para
+>Att ha data på ett industristandardformat ger möjlighet att ändra det utanför programmet &kmymoney;. GÖR INTE DET, om du inte verkligen vet vad du gör, och försäkra dig alltid om att först skapa en säkerhetskopia av data. Om du gör fel, kanske &kmymoney; inte kan komma åt data, och du kan till och med bli av med det helt och hållet. Du har fått en varning. </para>
+</sect3>
+
+<sect3>
+<title
+>Lagrade förfrågningar</title>
+
+<para
+>De flesta databassystem låter dig lagra ofta använda förfrågningar och procedurer, och i vissa fall kan de lagras som tabeller i själva databasen. Som du kanske gissat från det ovanstående, börjar alla tabeller som &kmymoney; använder med '<literal
+>kmm</literal
+>', med små bokstäver. Den standarden kommer att upprätthållas, och bara tabeller som börjar med dessa bokstäver kommer att uppdateras. Under förutsättning att du undviker dessa när du namnger förfrågningar, etc., bör du sålunda inte uppleva några problem. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.database.generatesql">
+<title
+>Skapa en databas för hand</title>
+<note>
+  <para
+>Det här avsnittet beskriver mer avancerad användning av databaser, och kan hoppas över av vanliga användare. </para>
+</note>
+
+<sect3>
+<title
+>När det bör användas</title>
+<para
+>Det kan finnas tillfällen då &kmymoney; inte klarar av att skapa databasen automatiskt, eller skapar den utan vissa alternativ som krävs av användaren. Exempelvis kanske inte databassystemet som används är fullständigt anpassat för vanlig användning av SQL, eller stöd kan ha lagts till för nya system som inte har utprovats fullständigt i &kmymoney;. </para>
+<para
+>Innan funktionen används, bör du försöka att skapa själva databasposten själv (dvs. med satsen <literal
+>CREATE DATABASE</literal
+>). Under förutsättning att databasen finns, kan &kmymoney; mycket väl klara av att skapa tabeller, etc. med den normala proceduren för att spara i en databas, som beskrivs ovan. </para>
+</sect3>
+
+<sect3>
+<title
+>Skapa SQL-koden</title>
+<para
+>Om detta misslyckas, är det möjligt att generera de grundläggande SQL-kommandon som behövs för att skapa de olika tabellerna, vyerna eller indexen som krävs av programmet. Välj menyalternativet <menuchoice
+><guimenu
+>Verktyg</guimenu
+><guimenuitem
+>Generera SQL för databas</guimenuitem
+></menuchoice
+>. Det visar följande dialogruta: </para>
+<screenshot>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="generate_sql.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>När typ av databas väljes, visas lämplig SQL i textrutan <guilabel
+>SQL för att skapa databas</guilabel
+>. Den kan redigeras av användaren, eller sparas i en textfil genom att klicka på <guibutton
+>Spara SQL</guibutton
+>. I det senare fallet, måste databasen skapas med de administrativa funktionerna som tillhandahålls av databassystemet. </para>
+<para
+>Om du vill att &kmymoney; ska skapa databasen efter att du har redigerat texten i dialogrutan, måste fylla i övriga fält i dialogrutan, som beskrivs under <link linkend="details.database.selectdatabase"
+>Skapa en databas</link
+> ovan, och klicka på <guibutton
+>Skapa tabeller</guibutton
+>. Observera att utom för fallet med SQLite, måste du antingen inkludera en lämplig <literal
+>CREATE DATABASE</literal
+>-sats som första kommando, eller tidigare ha utfört ett sådant kommando utanför &kmymoney;. </para>
+</sect3>
+
+<sect3>
+<title
+>Varning</title>
+<para
+>Du måste vara mycket försiktig när du redigerar definitionerna av någon av de grundläggande tabellerna eller vyerna (de med namn som börjar med '<literal
+>kmm</literal
+>'). Vissa ändringar, som att öka längden på ett heltalsfält, kan ge liten påverkan, men du får inte ta bort eller ändra följden av några fält, annars kanske &kmymoney; vägrar fungera, eller förstör data. </para>
+<para
+>Även om prestanda kan förbättras genom att lägga till eller ta bort index, bör du också vara medveten om att motsatsen kan inträffa. Viss kunskap om de interna funktionerna i &kmymoney; kan hjälpa till att få bästa prestanda under dessa omständigheter. </para>
+</sect3>
+
+</sect2>
+
+<sect2>
+<title
+>Kryptering</title>
+
+<para
+>Kryptering av data i databasen stöds för närvarande inte. </para>
+</sect2>
+</sect1>
+</chapter>

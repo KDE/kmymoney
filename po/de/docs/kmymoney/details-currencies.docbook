@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.currencies">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Währungen</title>
+
+<para
+>&kmymoney; unterstützt verschiedene Währungen in beliebigen Konten. Sie können &eg; ein Bankkonto in Euro, ein anderes in britischen Pfund und Ihr Kreditkartenkonto in US$ führen. </para>
+
+<sect1 id="details.currencies.basecurrency">
+<title
+>Basis-Währung</title>
+
+<para
+>Sobald Sie eine neue &kmymoney;-Datei anlegen, müssen Sie die Basis-Währung dieser Datei angeben. Die Basis-Währung wird von allen Einnahmen- und Ausgabenkategorien, sowie in den Berichten verwendet. Üblicherweise ist die Basis-Währung diejenige, die in Ihrem Land verwendet wird. Wenn keine andere ausgewählt wird, wird immer die Basis-Währung verwendet, wenn ein neues Konto in &kmymoney; angelegt wird. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Der Dialog Währungen</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="select_currency.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Währung auswählen</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect2 id="details.currencies.newcurrency">
+<title
+>Eine neue Währung hinzufügen</title>
+
+<para
+>Manchmal - aber eher selten - wird eine neue Währung eingeführt. Die kann zum Beispiel eine neue virtuellen Währung wie Bitcoin oder eine Änderung einer Landeswährung aus finanzpolitischen Gründen. Solche neuen Währungen werden zur nächsten Version von &kmymoney; hinzugefügt, aber Sie können eine neue Währung auch manuell hinzufügen, wenn Sie sie sofort verwenden müssen. </para>
+
+<para
+>Um eine neue Währung manuell hinzuzufügen, öffnen Sie mit <menuchoice
+><guimenu
+>Extras</guimenu
+><guimenuitem
+>Währungen ...</guimenuitem
+></menuchoice
+> den oben angezeigten Dialog <guilabel
+>Währungen</guilabel
+>. Klicken Sie mir der &RMBn; auf irgendeine vorhandene Währung und wählen <menuchoice
+><guimenuitem
+>Neue Währung</guimenuitem
+></menuchoice
+> aus dem Kontextmenü <menuchoice
+><guimenu
+>Währungsoptionen</guimenu
+></menuchoice
+>. Geben Sie die den offiziellen Code für die neue Währung ein und drücken Sie auf <guilabel
+>OK</guilabel
+>. Es wird eine Währung mit dem Namen <quote
+>Neue Währung</quote
+> erstellt. Ändern Sie den Namen, indem Sie entweder <keycap
+>F2</keycap
+> drücken oder mit der &RMBn; Maustaste auf diesen Eintrag klicken und <menuchoice
+><guimenuitem
+>Währung umbenennen</guimenuitem
+></menuchoice
+> wählen. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.currencies.accountsetup">
+<title
+>Kontoeinrichtung</title>
+
+<para
+>Wenn Sie ein neues Konto anlegen, können Sie die Währung auswählen, in der das Konto geführt werden soll. Das Kontenbuch dieses Kontos wird dann alle Beträge in der gewählten Währung anzeigen. Der Assistent für das Anlegen eines Kontos setzt standardmäßig die <link linkend="details.currencies.basecurrency"
+>Basis-Währung</link
+> als Vorgabewert. </para>
+</sect1>
+
+<sect1 id="details.currencies.transactions">
+<title
+>Buchungen mit anderen Währungen eingeben</title>
+
+<para
+>Sobald eine Buchung eingegeben wird, die mehrere Währungen enthält, öffnet sich der Währungskurs-Editor und erlaubt Ihnen das Eingeben eines Wechselkurses. Als Vorgabe wird der Wechselkurs aus der Preisdatenbank verwendet. Schauen Sie unter <link linkend="details.currencies.prices"
+>Wechselkurse eingeben</link
+> für weitere Informationen, wie Sie Wechselkurse manuell eingeben oder Online-Informationen einbinden können. </para>
+
+<para
+>Optional wird der Wechselkurs in der Preisdatenbank gespeichert, sobald er vom Benutzer eingegeben wurde. </para>
+</sect1>
+
+<sect1 id="details.currencies.prices">
+<title
+>Wechselkurse für Währungen</title>
+
+<sect2>
+<title
+>Preise manuell eingeben</title>
+
+<para
+>Der Preiseditor erlaubt es Ihnen, Wechselkursraten zwischen verschiedenen Währungen oder Preise für Anlagen einzugeben. Sie können ihn über das Menü <menuchoice
+><guimenu
+>Extras</guimenu
+><guimenuitem
+>Preise ...</guimenuitem
+></menuchoice
+> öffnen. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="currency_priceeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Währungskurs-Editor</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>In &kmymoney; ist ein <quote
+>Preis</quote
+> der Preis einer Währung im Verhältnis zu einer zweiten Währung. Nehmen wir ein Beispiel: das Verhältnis zwischen 1 US$ und 1 EUR ist 0,83: das bedeutet, dass 1 US$ 0,83 EUR kostet. Die erstgenannte Währung ist diejenige, die ge- oder verkauft wird und die zweite Währung ist diejenige die verwendet wird, um zu kaufen oder zu verkaufen. </para>
+
+<para
+>Wenn Sie den Knopf <guibutton
+>Neu</guibutton
+> drücken, öffnet sich ein Dialogfenster zum Eingeben eines neuen Preises. Geben Sie die erste Währung ein (US$ in dem Beispiel oben) in das Feld "Wertpapier". Die zweite Währung (EUR in unserem Beispiel) in das Eingabefeld "Währung". In das Datums-Feld geben Sie den Tag des Wechselkurses ein. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="currency_newpriceentry.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Neuer Kurs</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect2>
+
+<sect2>
+<title
+>Online-Aktualisierung von Wechselkursen</title>
+
+<para
+>&kmymoney; holt hier Wechselkurse aus dem Internet. Sobald Sie einen einzelne Preis für ein Währungspaar eingetragen haben, listet es die Online-Kursnotiz-Funktion gegen die möglichen Optionen. </para>
+
+<para
+>Im Abschnitt <link linkend="details.investments.onlinequotes"
+>Online-Kursnotizen</link
+> des Kapitels Wertpapiere finden Sie weitere Details. </para>
+</sect2>
+</sect1>
+</chapter>

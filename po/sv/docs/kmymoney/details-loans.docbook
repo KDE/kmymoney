@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.loans">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Darin.Strait; &Darin.Strait.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Lån</title>
+
+<sect1 id="details.loans.general">
+<title
+>Att förstå lån</title>
+
+<para
+>Det här avsnittet tillhandahåller en översikt av hur &kmymoney; hanterar lån. Lånereglering och vanor varierar från plats till plats. För en detaljerad förklaring av lån, samt information om lokala regleringar och vanor, se andra källor. </para>
+
+<para
+>Ett lån är en överenskommelse där en låntagare tar emot pengar från en långivare, och avtalar att betala tillbaka pengarna något framtida datum. &kmymoney; låter dig följa lån där du, som låntagare lånar pengar från, eller som långivare lånar ut pengar till, någon annan. De flesta personer lånar själv mer än de lånar ut. Du kommer i allmänhet att vara låntagare och ett kreditinstitut kommer i allmänhet vara långivare. Om du lånar pengar till en familjemedlem eller vän, kan du använda &kmymoney; för att också hålla reda på detta lån. </para>
+
+<para
+>Den här guiden antar att du lånar från någon form av kreditinstitut, men de ämnen som beskrivs här gäller likaväl lån du kan ge en person. Huvudskillnaden mellan att låna och låna ut pengar är att en utgiftskategori används för att hålla reda på ränta vid lån av pengar, medan en inkomstkategori används för att hålla reda på ränta när pengar lånas ut. </para>
+
+<formalpara
+><title
+>Lånebelopp</title>
+<para
+>Den summa som lånas kallas <quote
+>lånebelopp</quote
+>. </para>
+</formalpara>
+
+<formalpara
+><title
+>Löptid</title>
+<para
+>Lånets tidsrymd kallas dess <quote
+>löptid</quote
+>. När löptiden nått sitt slut, har hela lånebeloppet lämnats tillbaka till utlånaren. Löptider uttrycks i allmänhet i veckor, månader eller år. En löptid kan också uttryckas i antal avbetalningar. Exempelvis kan ettåriga lån med veckovisa avbetalningar beskrivas som ettåriga eller lån med 52 avbetalningar. </para>
+</formalpara>
+
+<formalpara
+><title
+>Avbetalningar</title>
+<para
+>Återbetalningen av lånebeloppet till långivaren sker i allmänhet inte som en klumpsumma. Istället görs en serie avbetalningar som var och en representerar en del av lånebeloppet. Sådana avbetalningar betecknas ibland som <quote
+>amorteringar</quote
+>, och i &kmymoney; är <quote
+>amortera</quote
+> definierat som handlingen att betala av ett lån i omgångar. </para>
+</formalpara>
+
+<formalpara
+><title
+>Avbetalningstermin</title>
+<para
+>Amorteringarnas period kallas för <quote
+>avbetalningstermin</quote
+> i &kmymoney;. Exempel på period kan vara vecka, varannan vecka, månad, kvartal eller år. I Sverige görs periodiska avbetalningar normalt varje månad, därför är lånets termin en månad. </para>
+</formalpara>
+
+<formalpara
+><title
+>Räntesats</title>
+<para
+>För privilegiet att kunna använda pengarna, betalar låntagaren långivaren en avgift som kallas <quote
+>ränta</quote
+>, normalt uttryckt i procent av beloppet under en definierad period. Räntesatser kan vara fasta, där räntan inte ändras under lånets livstid, eller rörliga, där räntan kan ändras med tiden. Oftast ingår ränteavbetalningar i varje periodisk avbetalning. </para>
+</formalpara>
+
+<formalpara
+><title
+>Periodiska avbetalningar</title>
+<para
+>Eftersom avbetalningarna i allmänhet görs baserade på någon form av schema, som veckovis, månadsvis, kvartalsvis eller årsvis, kallas de <quote
+>periodiska avbetalningar</quote
+>. Summan av alla periodiska avbetalningar plus den slutliga avbetalningen blir lånets totala belopp plus räntan. </para>
+</formalpara>
+
+<formalpara
+><title
+>Avgifter</title>
+<para
+>Det kan finnas andra avgifter förutom räntan som måste betalas vid varje inbetalning. De kallas <quote
+>återkommande avgifter</quote
+>. Exempel på återkommande avgifter omfattar (men är inte nödvändigtvis begränsat till): <itemizedlist>
+  <listitem>
+    <para
+>Kontoinbetalning av en <quote
+>deposition</quote
+>. (Betalningar av denna typ används vanligtvis för att rymma medel för betalning av fastighetsskatt varje eller vartannat år.) </para>
+  </listitem>
+
+  <listitem
+><para
+>Låneförsäkring</para
+></listitem>
+
+  <listitem
+><para
+>Invaliditetsförsäkring</para
+></listitem>
+
+  <listitem
+><para
+>Underhållsavgift för lånekonto</para
+></listitem>
+</itemizedlist>
+</para>
+</formalpara>
+
+<formalpara
+><title
+>Sammanfattning</title>
+<para
+>För att sammanfatta, låntagaren tar emot en klumpsumma från långivaren när lånet läggs upp. Låntagaren gör periodiska avbetalningar till långivaren. De periodiska avbetalningarna är summan av lånebeloppet (som används för att reducera återstående lånebelopp) plus räntebetalningen (som belönar långivaren för att låta låntagaren använda pengarna) plus eventuella återkommande avgifter (som täcker oförutsedda utgifter). När lånets löptid är slut, har låntagaren betalat tillbaka hela lånebeloppet. </para>
+</formalpara>
+</sect1>
+
+<sect1 id="details.loans.example">
+<title
+>Exempel</title>
+<para
+>Som ett exempel, kanske du lånar 250 000,00 kr till en ny bil, och går med på att betala banken en avbetalning i månaden under 60 månader. Lånets räntesats anses vara 5,5%. </para>
+
+<para
+>I detta fall, är lånebeloppet 250 000,00 kr. Låneterminen är 60 månader eller 5 år. Låneterminen skulle också kunna beskrivas som 60 avbetalningar, eftersom det blir en avbetalning per månad under 5 år. Avbetalningstiden är en månad, eftersom periodiska avbetalningar kommer att göras en gång i månaden. Den periodiska avbetalningen, som beräknas av &kmymoney;, skulle bli 4775,30 kr. </para>
+
+<para
+>Ett <quote
+>låneschema</quote
+> är ett diagram eller tabell som visar datum då en avbetalning ska ske, och storleken på varje periodisk avbetalning. Ofta delar dessa scheman upp den periodiska avbetalningen i dess ingående delar: återbetalning av lånebeloppet, räntebetalning och betalning av återkommande avgifter. </para>
+</sect1>
+
+<sect1 id="details.loans.creation">
+<title
+>Skapa ett nytt lån</title>
+
+<para
+>I &kmymoney; är ett lån en kontotyp. Därför börjar du med att välja menyalternativet <menuchoice
+><guimenu
+>Konto</guimenu
+><guimenuitem
+>Nytt konto</guimenuitem
+></menuchoice
+> för att skapa ett nytt lån. Fortsätt genom att besvara frågorna som guiden ställer till dig. </para>
+
+<para
+>Ett lån kan valfritt kopplas ihop med en viss institution. Om du lånar från ett hypoteksinstitut eller ett billåneinstitut, skulle du kunna skapa en institutionspost som beskriver företaget och koppla ihop institutionen med lånet. Om du lånar från din farbror Sven, finns det inget krav på att ange någon institution. </para>
+</sect1>
+
+<sect1 id="details.loans.extra-payments">
+<title
+>Göra extra avbetalningar av lånebeloppet</title>
+
+<para
+>Om du skulle vilja göra en extra avbetalningar av lånebeloppet, går det bra. Lägg helt enkelt till en <link linkend="details.ledger.transactions"
+>transaktion</link
+> i huvudboken. Den extra avbetalningar av lånebeloppet tas hänsyn till i ränteberäkningen som sker vid nästa periodiska avbetalning. </para>
+
+<para
+>Exempel på extra avbetalningar av lånebeloppet omfattar (men är inte nödvändigtvis begränsade till): </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Att bidra med 500 kr extra per månad</para
+></listitem>
+
+  <listitem>
+    <para
+>Att dubbla den periodiska avbetalningen av lånebeloppet för varje period. (Avbetalningen av lånebeloppet för en viss period går att hitta genom att titta på låneschemat.) </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Att göra en 13:e avbetalning av lånebeloppet varje år (det förutsätter ett lån som återbetalas med månadsvisa avbetalningar). </para>
+  </listitem>
+</itemizedlist>
+
+<note
+><para
+>Om du dubblar avbetalningen av lånebeloppet vid varje periodisk avbetalning, måste du beräkna om låneschemat för varje avbetalning. Det gör det möjligt att ha ett riktigt värde för den återbetalning av lånebeloppet som krävs vid varje avbetalning. </para
+></note>
+</sect1>
+</chapter>
+

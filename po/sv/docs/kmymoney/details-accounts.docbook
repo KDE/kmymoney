@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.accounts">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2018-02-01</date>
+  <releaseinfo
+>5.0.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Konton</title>
+
+<sect1 id="details.accounts.view">
+<title
+>Kontovyn</title>
+
+<para
+>Kontovyn tillhandahåller en sammanfattning av alla konton. Den liknar institutionsvyn, utom att konton är grupperade under kategorierna Tillgångar och Skulder. Typiska tillgångskonton omfattar bankkonton, kontanter och investeringar, medan typiska skuldkonton omfattar kreditkort och lån. </para>
+
+<para
+>Det finns i själva verket två andra kontokategorier: Inkomst och Utgift. Kategorier är ett sätt att organisera transaktioner (de grupperas antingen under inkomst- eller utgiftskontokategorier), och behandlas internt som konton av &kmymoney;. De beskrivs mer detaljerat i kapitlet om <link linkend="details.categories"
+>Kategorier</link
+>. Inkomst- och utgiftskontokategorierna visas alltid i kategorivyn, men det är möjligt att <link linkend="details.settings"
+>ställa in &kmymoney;</link
+> att också visa dem i kontovyn. </para>
+
+<para>
+<screenshot>
+    	<screeninfo
+>Kontovy</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="account_view.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Kontovy</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>På liknande sätt som för institutionsvyn, visar kontovyn flera kolumner med beskrivande och sammanfattande information om varje konto. Återstoden av det här kapitlet fokuserar på tillgångs- och skuldkontofunktionaliteten. Inkomst- och utgiftskonton, dvs. kategorier, beskrivs i kapitlet om <link linkend="details.categories"
+>Kategorier</link
+>. </para>
+
+</sect1>
+
+<sect1 id="details.accounts.create">
+<title
+>Skapa ett konto</title>
+
+<note
+><para
+>En fil måste vara öppen innan du kan skapa ett nytt konto. Om du inte har en befintlig fil, behöver du <link linkend="firsttime.3"
+>skapa en</link
+>. </para
+></note>
+
+<para
+>För att skapa ett nytt konto, kan du antingen välja menyalternativet <menuchoice
+><guimenu
+>Konto</guimenu
+><guimenuitem
+>Nytt konto...</guimenuitem
+></menuchoice
+>, eller välja  ikonen nytt konto <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="newacct.png" format="PNG"/></imageobject
+></inlinemediaobject
+> </guiicon
+>i verktygsraden. Du kan också skapa ett konto i kontovyn: Klicka på kontoikonen i vyväljaren och högerklicka därefter på trädikonen för tillgångar eller skulder och välj <guimenuitem
+>Nytt konto...</guimenuitem
+> i den sammanhangsberoende menyn. </para>
+
+<sect2 id="details.accounts.create.institution">
+<title
+>Institutionens (bankens) namn</title>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="accwiz1.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>Kontoguiden</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Det första steget omfattar att välja en institution för kontot. Om det är ett konto på en institution som du redan har skapat, kan du välja institutionen i kombinationsrutan. Om du vill skapa en ny institution, klicka på knappen <guibutton
+>Ny institution</guibutton
+>. Det visar dialogrutan Ny institution, som beskrivs i föregående avsnitt. Om detta inte är ett bankkonto, eller om du inte vill använda Internet-bank, behöver du inte ange en institution. </para>
+
+<para
+>Kontonumret och <ulink url="https://sv.wikipedia.org/wiki/International_Bank_Account_Number"
+><acronym
+>IBAN</acronym
+> (Internationellt bankkontonummer)</ulink
+> används för närvarande inte av &kmymoney;. Fälten kan lämnas tomma och fyllas i senare. De krävs bara för Internetbanker. </para>
+
+<para
+>För att gå vidare till nästa steg, klicka på <guibutton
+>Nästa</guibutton
+>. </para>
+</sect2>
+
+<sect2 id="details.accounts.create.account">
+<title
+>Konto</title>
+
+<para>
+  <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="accwiz2.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase
+>Kontoguiden</phrase>
+            </textobject>
+          </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Skriv först in ett namn på kontot. Namnet kommer att användas för att identifiera det. </para>
+
+<para
+>Välj därefter typ av konto från en av typerna tillgängliga i kombinationslistan. Olika kontotyper hanteras olika av &kmymoney;, så det är viktigt att välja rätt typ när kontot skapas. Dessutom kräver olika typer av konton olika inställningsinformation, och kan visa olika sidor i guiden för inställning av nytt konto för att samla in informationen. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Lönekonto</term>
+    <listitem>
+      <para
+>Ett normalt lönekonto, av den typ som du får hos vilken bank eller kreditinstitut som helst. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Sparkonto</term>
+    <listitem>
+      <para
+>Ett normalt sparkonto, av den typ som du får hos vilken bank eller kreditinstitut som helst. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Kreditkort</term>
+    <listitem>
+      <para
+>Ett konto som representerar ett kreditkort. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Kontanter</term>
+    <listitem>
+      <para
+>Ett generellt konto, som oftast används för konton som inte finns på en bank, som kontanter i en plånbok. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Lån</term>
+    <listitem>
+      <para
+>Ett konto för att hantera ett penninglån, antingen lånade eller utlånade pengar. &kmymoney; beräknar automatiskt ränteinbetalningar med lånekonton, för att hjälpa dig följa återstående lånebelopp. Lån utan ränta kan använda de vanliga tillgångs- och skuldtyperna nedan, beroende på om pengarna är lånade eller utlånade. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Investering</term>
+    <listitem>
+      <para
+>Ett konto för att hantera en investering, såsom aktier, obligationer eller investeringsfonder. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Tillgång</term>
+    <listitem>
+      <para
+>Ett konto för att hantera en tillgång, som inte passar in i någon av ovanstående typer. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Skuld</term>
+    <listitem>
+      <para
+>Ett konto för att hantera en skuld, som pengar du lånat eller en framtida utgift som inte passar in i någon av ovanstående typer. Det används oftast för lån utan ränta. Om ränta behöver beräknas, kan det vara bättre att använda typen Lån ovan. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>Välj valutan att använda för kontot från kombinationsrutan. </para>
+
+<para
+>Ange datum kontot öppnades eller välj det i kalendern genom att använda ikonen till höger. Du kan inte mata in en transaktion med ett tidigare datum än kontots öppningsdatum, men du kan ändra datumet senare, om det behövs. </para>
+
+<para
+>Skriv in kontots ursprungliga behållning. Om detta är ett befintligt bankkonto hittar du informationen på utdraget. Om det är ett nytt konto, kan behållningen lämnas som noll. </para>
+
+<para
+>Att markera kryssrutan <emphasis
+>Föredraget konto</emphasis
+>, tillåter föredragen åtkomst i vissa dialogrutor och vyer i &kmymoney;. </para>
+
+<para
+>För att gå vidare till nästa steg, klicka på <guibutton
+>Nästa</guibutton
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Kreditkortskonton</title>
+
+<para
+>När ett kreditkortskonto skapas, efter att ha skrivit in grundläggande information och klickat på <guibutton
+>Nästa</guibutton
+>, kan du valfritt låta &kmymoney; skapa en <link linkend="details.schedules"
+>schemalagd transaktion</link
+> åt dig. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz6.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Kontoguiden</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Om du vill att en sådan transaktion ska skapas, försäkra dig om att kryssrutan är markerad, och skriv in nödvändig information. </para>
+
+<para
+>Klicka på <guibutton
+>Nästa</guibutton
+> för att fortsätta. </para>
+</sect2>
+
+<sect2>
+<title
+>Investeringskonton</title>
+
+<para
+>I &kmymoney; innehåller investeringskonton bara värdepapper (aktier, obligationer, etc.) men innehåller inte kontanter. (Det är orsaken till att det inte går att ange en öppningsbehållning för ett investeringskonto.) Om en transaktion i ett investeringskonto kräver eller genererar kontanter (såsom köp eller försäljning av aktier), används ett mäklarkonto för kontanterna. Mäklarkonton beskrivs ytterligare i kapitlet om <link linkend="details.investments"
+>Investeringar</link
+>. När ett nytt investeringskonto skapas, efter att ha skrivit in grundläggande information och klickat på <guibutton
+>Nästa</guibutton
+>, har du möjlighet att skapa ett tillhörande mäklarkonto. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz7.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Kontoguiden</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>I allmänhet är det bäst att skapa mäklarkontot här, som får samma namn som investeringskontot, med "(kontantdepå)" tillagt sist. För närvarande är det inte möjligt att ange öppningsdatum eller behållning för mäklarkontot vid detta tillfälle, men du kan göra det genom att redigera kontoinformationen efter att kontot har skapats. </para>
+</sect2>
+
+<sect2>
+<title
+>Lånekonton</title>
+
+<para
+>Lånekonton är särskilda konton som används för att hjälpa dig hantera lån med ränta och regelbundna avbetalningar. Genom att tillhandahålla information till &kmymoney; om lånet, kan &kmymoney; hjälpa dig följa räntebetalningar och återstående lånebelopp. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_1.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Kontoguiden</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>På sidan Detaljinformation skriver du in den allmänna informationen om lånet. </para>
+
+<para
+>Välj först om du lånar eller lånar ut pengar. Om du lånar pengar kommer lånet att listas under skulder på kontosidan. Om du lånar ut pengar, kommer lånet att listas under tillgångar. </para>
+
+<para
+>Välj därefter lånets betalningsmottagare eller betalare. Som alltid, om namnet inte finns i listan med betalare, skriv in det här, så skapar &kmymoney; det åt dig. </para>
+
+<para
+>Följande tre objekt är till för att hantera lån där du redan har gjort avbetalningar. Om du väljer <guibutton
+>Ja</guibutton
+> i kombinationsrutan <guilabel
+>Har du gjort eller mottagit några avbetalningar ännu?</guilabel
+>, kan du därefter välja om du vill registrera alla avbetalningar eller bara de med början på innevarande år. Om du vill registrera från början av innevarande år, blir du därefter tillfrågad om att skriva in aktuellt lånebelopp vid årets början. </para>
+
+<para
+>Välj därefter hur ofta avbetalningar ska göras, och hur ofta ränta på ränta beräknas. Ränta på ränta inträffar när räntan läggs till lånets skuldbelopp, så att nästa gång räntan beräknas blir det ytterligare ränta att betala för räntan. Det är vanligt att ränta på ränta gäller samma tidsperiod som avbetalningarna görs. </para>
+
+<para
+>Skriv därefter in datum då den första avbetalningen ska registreras. </para>
+
+<para
+>Skriv till sist in information om hur räntesatsen varierar. Om lånet har fast ränta, finns det ingenting att göra. Om räntan är rörlig, välj Rörlig under <guilabel
+>Typ av räntesats</guilabel
+>, och skriv därefter in intervallet mellan ändringar av räntan och datumet den första ränteändringen kommer att ske. &kmymoney; kommer att be dig uppdatera räntesatsen när datumet inträffar. Klicka på <guibutton
+>Nästa</guibutton
+> för att fortsätta. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_2.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Kontoguiden</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Betalningssidan är stället där du skriver in lånets avbetalningsvärde och räntevärde. </para>
+
+<para
+>Välj först om räntesatsen beräknas när avbetalningen tas emot eller när den ska göras. Om du inte vet, lämna standardvärdet oförändrat. </para>
+
+<para
+>Skriv därefter in följande värden: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Lånebelopp</term>
+    <listitem>
+      <para
+>Lånets belopp.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Räntesats</term>
+    <listitem>
+      <para
+>Lånets årliga räntesats.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Löptid</term>
+    <listitem>
+      <para
+>Lånets längd. Skriv in ett tal, och välj antingen månader eller år. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Avbetalning (lånebelopp och ränta)</term>
+    <listitem>
+      <para
+>Belopp för varje avbetalning av lånet. Det är summan av lånebeloppet och räntan som betalas vid varje avbetalning. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Slutbetalning</term>
+    <listitem>
+      <para
+>En extra slutbetalning som görs när lånetiden har gått ut, för att betala av återstående lånebelopp. För ett avbetalningslån är den ofta noll. För ett amorteringsfritt lån, är den samma som lånebeloppet. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>Använd till sist knappen <guibutton
+>Beräkna</guibutton
+> för att kontrollera de värden du har skrivit in. Du måste antingen ha skrivit in alla, eller alla utom ett av värdena som anges ovan. Om du utelämnar två eller flera värden, är knappen inaktiverad, eftersom det inte är möjligt att kontrollera att inskrivna värden stämmer: I detta fall kommer du inte att kunna använda lånefunktionen i &kmymoney;, och måste istället använda ett skuldkonto eller tillgångskonto för att följa lånet manuellt. </para>
+
+<para
+>Om du utelämnar ett värde, försöker &kmymoney; beräkna det åt dig. Om du har skrivit in alla värden, kontrollerar &kmymoney; att värdena överensstämmer. &kmymoney; ändrar inte inskrivna värden, utom "slutbetalningen", som kan justeras marginellt för att hantera avrundningar. Om värdena inte överensstämmer eller &kmymoney; inte kan beräkna det utelämnade värdet, talar &kmymoney; om det så att du kan rätta eventuella fel och upprepa beräkningen. </para>
+
+<para
+>När värdena väl överensstämmer, aktiveras knappen <guibutton
+>Nästa</guibutton
+> och du kan gå vidare till nästa sida. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_3.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Kontoguiden</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Avgiftssidan är stället där du kan skriva in eventuella avgifter som ska läggas till avbetalningarna. </para>
+
+<para
+>Om det finns några avgifter, klicka på knappen <guibutton
+>Tilläggsavgifter</guibutton
+>. Editorn för transaktionsdelning visas för att skriva in avgifterna. Alla rader som läggs till här kommer att ingå i lånets schemalagda avbetalningar. När du sparar delningen, visar avgiftssidan amorteringen och räntebetalningen, de totala tilläggsavgifterna och den totala periodiska avbetalningen. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_4.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Kontoguiden</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>&kmymoney; skapar en <link linkend="details.schedules"
+>schemalagd transaktion</link
+> för lånet. Schemaläggningssidan är stället där du skriver in den återstående detaljinformationen som behövs för att skapa schemaläggningen. </para>
+
+<para
+>Skriv först in kategorin som lånets ränta kommer att tilldelas. Skriv därefter in kontot som låneavbetalningen kommer att göras från. </para>
+
+<para
+>Sidan visar också första avbetalningsdatum som schemaläggningen kommer att skapas för. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_5.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Kontoguiden</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Alternativt kan &kmymoney; skapa en transaktion som representerar vad som togs emot eller betalades vid uppläggning av lånet. </para>
+
+<para
+>Om du lånade eller lånar ut kontanter, välj kontot lånebeloppet betalades till eller från. </para>
+
+<para
+>Om du lånade pengar för att köpa en bil, kan du välja eller skapa ett tillgångskonto för att hjälpa dig hålla reda på den nya bilens värde. </para>
+
+<para
+>Om du finansierar om ett befintligt lån, markera rutan <guilabel
+>Finansiera om ett befintligt lån</guilabel
+>, välj lånekontot så skapar &kmymoney; en överföringstransaktion som betalar av det befintliga lånet. </para>
+
+<para
+>Om du inte vill skapa utbetalningstransaktionen, markera kryssrutan <guilabel
+>Skapa inte utbetalningstransaktion</guilabel
+>. </para>
+</sect2>
+
+<sect2 id="details.accounts.create.parent">
+<title
+>Överliggande konto</title>
+
+<para>
+  <screenshot>
+	<screeninfo
+>Överliggande konto</screeninfo>
+	<mediaobject>
+	  <imageobject>
+            <imagedata fileref="accwiz10.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Kontoguiden</phrase>
+	  </textobject>
+	</mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Det här är det näst sista steget när ett nytt konto skapas utom för lån. Beroende på typ av konto som skapas, visas ett träd med dina tillgångs- och skuldkonton. </para>
+
+<para
+>För närvarande visas inte sidan med överliggande konto för lån, eftersom de inte kan skapas som delkonton. Dessutom kan inte investeringskonton innehålla andra konton, så de visas inte i trädet. </para>
+
+<para
+>Välj kontot som du vill ska innehålla det nya kontot. Om du inte väljer ett överliggande konto, kommer det nya kontot att skapas på toppnivå. </para>
+
+</sect2>
+
+<sect2>
+<title
+>Granska och spara kontots detaljinformation</title>
+
+<para>
+  <screenshot>
+          <screeninfo
+>Granska</screeninfo>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="accwiz9.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase
+>Kontoguiden</phrase>
+            </textobject>
+          </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Det här är det sista steget när ett nytt konto skapas. En sammanfattning av informationen du har skrivit in visas. Granska den, och om allting är ok, klicka på knappen <guibutton
+>Slutför</guibutton
+>. Klicka annars antingen på knappen <guibutton
+>Tillbaka</guibutton
+>, för att göra korrigeringar, eller knappen <guibutton
+>Avbryt</guibutton
+> för att överge att skapa det nya kontot. </para>
+
+<note
+><para
+>Typ och valuta kan inte för närvarande ändras efter att kontot har skapats. </para
+></note>
+</sect2>
+</sect1>
+
+<sect1 id="details.accounts.viewing">
+<title
+>Öppna eller visa konton</title>
+
+<para
+>För att öppna ett konto i huvudboksvyn kan du antingen klicka på länken till kontot på hemvyn, eller klicka på huvudboksikonen <guiicon
+><inlinemediaobject
+> <imageobject
+><imagedata fileref="ledgers_view.png" format="PNG"/></imageobject
+> </inlinemediaobject
+></guiicon
+> i vyväljaren och välja kontot i kombinationsrutan längst upp i vyn. Som alternativ, i <guiicon
+>Kontovyn</guiicon
+>, dubbelklicka antingen på kontoposten eller högerklicka och välj <guimenuitem
+>Öppna huvudbok</guimenuitem
+>. </para>
+</sect1>
+
+<sect1 id="details.accounts.edit">
+<title
+>Redigera kontoinformation</title>
+
+<para
+>För att redigera ett visst konto, högerklicka på kontot och välj <guimenuitem
+>Redigera konto...</guimenuitem
+> eller med kontot öppet i huvudboken, välj <menuchoice
+><guimenu
+>Konto</guimenu
+><guimenuitem
+>Redigera konto...</guimenuitem
+></menuchoice
+>. Ett fönster med flera flikar kommer att visas, där varje flik låter dig se och ändra viss information om kontot. För mer information om någon av dessa detaljer, se avsnittet om att <link linkend="details.accounts.create"
+>skapa ett nytt konto</link
+>. </para>
+
+<para>
+  <screenshot>
+        <screeninfo
+>Redigera ett konto</screeninfo>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="account_edit.png" format="PNG"/>
+          </imageobject>
+
+          <textobject>
+            <phrase
+>Redigera kontoinformation</phrase>
+          </textobject>
+        </mediaobject>
+  </screenshot>
+</para>
+
+<formalpara
+><title
+>Allmänt</title>
+<para
+>Visa allmän information om kontot, och ändra namn, start- eller öppningsdatum, och några grundläggande inställningar för kontot. </para>
+</formalpara>
+
+<formalpara
+><title
+>Institution</title>
+<para
+>Visa och ändra den associerade bankinstitutionen och kontonumret. Du kan också skapa en ny institution här. </para>
+</formalpara>
+
+<formalpara
+><title
+>Hierarki</title>
+<para
+>Du kan ändra toppnivåkonto genom att klicka på ett annat toppnivåkonto i den här vyn av kontohierarkin. </para>
+</formalpara>
+
+<formalpara
+><title
+>Gränser</title>
+<para
+>Den här fliken visas bara för tillgångs- och riskkonton. Om du matar in belopp i de befintliga fälten kommer &kmymoney; varna dig när kontot når dessa värden. </para>
+</formalpara>
+
+<formalpara
+><title
+>Skatt</title>
+<para
+>Här kan du se om det här är ett momskonto, och om kontot ska ingå i deklarationen. </para>
+</formalpara>
+
+<formalpara
+><title
+>Nätinställningar</title>
+<para
+>Den här fliken visas bara om kontot har anslutits till ett <link linkend="details.impexp.ofxdirectconnect"
+>Internetkonto</link
+>. Den har tre delflikar. </para>
+</formalpara>
+
+<itemizedlist>
+<listitem>
+<para
+><emphasis
+>Kontoinformation</emphasis
+>: Det visar tillståndet för uppkopplingen, bank/mäklare och kontonummer, och låter dig lagra eller ändra lösenord för Internetkontot. </para>
+</listitem>
+
+<listitem>
+<para
+><emphasis
+>OFX-information</emphasis
+>: Här kan du justera viss information som &kmymoney; använder när det etablerar en OFX-uppkoppling med institutionen. Det ska bara vara nödvändigt om du får felmeddelanden när du först skapar Internetkontot, eller kanske om din institution byter OFX-serverprogram. </para>
+</listitem>
+
+<listitem>
+<para
+><emphasis
+>Importinformation</emphasis
+>: Här kan du ställa in vad &kmymoney; ska använda som startdatum för importen. Dessutom, från och med version 4.6, kan du välja om betalningsmottagarens namn ska baseras på PAYEEID-, NAME-, eller MEMO-fältet i den importerade transaktionen. </para>
+</listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="details.accounts.delete">
+<title
+>Ta bort konton</title>
+
+<para
+>För att ta bort ett konto, ta först bort alla transaktioner från kontot i huvudboken. Leta därefter rätt på kontot i kontovyn och efter att ha högerklickat på posten för att visa den sammanhangsberoende menyn, välj <guimenuitem
+>Ta bort konto...</guimenuitem
+> i menyn. </para>
+
+<para
+>Om du inte kan ta bort ett konto som ser ut att inte ha några transaktioner, kontrollera alla filter. Se <menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Anpassa &kmymoney;</guimenuitem
+> <guimenuitem
+>Allmänt</guimenuitem
+> <guimenuitem
+>Filter</guimenuitem
+> </menuchoice
+>. Rensa alla filter. Ställ in startdatum till något som liknar 1900-01-01. </para>
+
+<para
+>Det kan finnas transaktioner i huvudboken som inte visas, om du till exempel har skrivit in fel år av misstag när du har lagt till en post, så att en post finns kvar utanför startdatum i &kmymoney;. Det visas som återstående kapital på huvudboksidan. </para>
+</sect1>
+</chapter>

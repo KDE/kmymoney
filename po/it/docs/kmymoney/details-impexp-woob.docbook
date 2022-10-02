@@ -1,0 +1,41 @@
+<sect1 id="details.impexp.woob">
+    <sect1info>
+        <author
+>&Dawid.Wrobel; &Dawid.Wrobel.mail;</author>
+    </sect1info>
+
+    <title
+>Importatore Woob</title>
+    <sect2>
+        <title
+>Che cos'è Woob?</title>
+        <para
+><ulink url="https://woob.tech/"
+>Woob</ulink
+> è <quote
+>una raccolta di applicazioni in grado di interagire con i siti web, senza richiedere all'utente di aprirli in un browser</quote
+>. Una di <ulink url="https://woob.tech/applications/"
+>tali applicazioni</ulink
+> consente specificamente di interagire con <ulink url="https://woob.tech/applications/bank"
+>istituti finanziari</ulink
+>. &kmymoney; fornisce un'estensione che lo utilizza direttamente, permettendo quindi di importare transazioni da quei conti che altrimenti non offrono supporto per nessun altro protocollo finanziario gestito da &kmymoney;. </para>
+
+        <note>
+            <para
+>&kmymoney; attualmente richiede l'installazione di Woob in modo indipendente. Fare riferimento alle sezioni successive per i dettagli. </para>
+        </note>
+    </sect2>
+    <sect2>
+        <title
+>Installare Woob</title>
+        <para
+>È necessario installare Python 3 prima di continuare. È possibile scaricare un pacchetto per il proprio sistema dal <ulink url="https://www.python.org/downloads/"
+>sito web ufficiale</ulink
+>. </para>
+
+        <para
+>Con Python 3 installato, ora dovrebbe essere possibile scaricare e installare facilmente i moduli Woob richiesti. Fare riferimento alle istruzioni sul <ulink url="https://woob.tech/install/"
+>sito Web Woob</ulink
+>. </para>
+    </sect2>
+</sect1>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="reference.widgets">
+<sect1info>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+  </authorgroup>
+  <date
+>25 de juliol de 2010</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</sect1info>
+
+<title
+>Ginys</title>
+
+<para
+>El &kmymoney; disposa d'alguns ginys específics que no es troben en altres aplicacions. L'ús d'aquests ginys s'explica en aquest capítol. </para>
+
+<sect2 id="reference.widgets.datepicker">
+<title
+>Giny d'introducció de data</title>
+
+<para
+>Sempre que el &kmymoney; necessiti informació sobre una data específica, &pex;, la data de publicació d'una operació o la data d'obertura d'un compte, oferirà a l'usuari el <emphasis
+>giny per introduir la data</emphasis
+>. Aquest giny consta de tres camps i un botó. Els camps presenten el <emphasis
+>dia</emphasis
+>, el <emphasis
+>mes</emphasis
+> i l'<emphasis
+>any</emphasis
+>, separats pels caràcters separadors de la data especificats per la configuració regional. Si es prem el botó, s'obrirà el giny <emphasis
+>selector de la data</emphasis
+>. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Consell del dia</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="date_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Giny de data</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Dins del giny per introduir la data, es poden utilitzar les tecles de cursor &Left;/&Right; per a canviar entre els camps de <emphasis
+>dia</emphasis
+>, <emphasis
+>mes</emphasis
+> i <emphasis
+>any</emphasis
+>. Utilitzant les tecles de cursor &Up;/&Down;, es pot incrementar/disminuir el valor del camp seleccionat. Es poden utilitzar les tecles <keycap
+>+</keycap
+> i <keycap
+>-</keycap
+> per incrementar/disminuir un sol dia. Es tindran en consideració els límits de mes i any, i si cal s'incrementaran/disminuiran. Prement <keycap
+>T</keycap
+> s'establirà la data a avui. </para>
+
+<para
+>La data també es pot canviar amb el ratolí. Fent clic al camp de <emphasis
+>dia</emphasis
+>, <emphasis
+>mes</emphasis
+> o <emphasis
+>any</emphasis
+>, se seleccionarà el camp. El valor es pot incrementar/disminuir utilitzant els botons de fletxa a la dreta del giny. Actuen exactament igual que les tecles de cursor &Up;/&Down;. </para>
+
+<para
+>El selector de la data s'obrirà quan es prem el botó a la dreta dels botons de fletxa. Es mostren quatre botons de fletxa a la part superior, dos a cada costat del nom i any del mes actualment seleccionat. Els botons més a l'esquerra es fan servir per a disminuir l'any i el mes. Els botons a la dreta de l'any es fan servir per a incrementar el mes i l'any. El botó més a la dreta tancarà el selector de la data. </para>
+
+<para
+>A sota dels botons, el giny presenta una pàgina de calendari per al mes seleccionat. En fer clic sobre un dia al calendari se seleccionarà aquesta data, es tancarà el selector de la data i es transferirà la data seleccionada als camps de <emphasis
+>dia</emphasis
+>, <emphasis
+>mes</emphasis
+> i <emphasis
+>any</emphasis
+>. </para>
+
+<para
+>A la part inferior del giny del selector de la data, hi ha un botó, un camp d'edició de text i un quadre combinat. En prémer el botó se seleccionarà la data d'avui al gestor de dates. El camp de text es pot utilitzar per a introduir una data específica. En prémer la tecla &Intro; es mostrarà aquesta data al giny selector de dates. El quadre combinat permet a l'usuari seleccionar una setmana específica i continuar triant una data a partir d'allà. </para>
+</sect2>
+
+<sect2 id="reference.widgets.value">
+<title
+>Introduir el valor</title>
+<para
+>El giny per introduir el valor consta d'un camp de text (que accepta dígits, separadors de milers i símbols decimals), així com un botó a la dreta. Utilitza dígits per introduir el valor. Separeu la part fraccional introduint el separador decimal per a la configuració regional. Si feu clic al botó a la dreta o premeu una tecla que representi una operació numèrica (&pex;, <keycap
+>+</keycap
+>, <keycap
+>-</keycap
+>, <keycap
+>/</keycap
+>, <keycap
+>*</keycap
+> o <keycap
+>%</keycap
+>) apareixerà una petita calculadora que us permetrà calcular el valor final. </para>
+
+<para
+>Els valors negatius es poden introduir precedint el valor amb un signe menys. En cas que la configuració regional estigui establerta per a mostrar nombres negatius amb parèntesis al voltant del valor, el valor també podrà tancar-se entre parèntesis al giny per introduir un valor. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Consell del dia</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="value_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Giny de valor</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Utilitza el giny de la calculadora com una calculadora normal i un cop fet, deixeu-lo fent clic al botó <guibutton
+>=</guibutton
+> o premeu la tecla <keycap
+>=</keycap
+> al teclat. </para>
+</sect2>
+
+<sect2 id="reference.widgets.payee">
+<title
+>Introduir el beneficiari/pagador</title>
+
+<para
+>Quan se us demana que introduïu un beneficiari/pagador per a una operació, podreu començar a introduir el nom prement les tecles del teclat. Mentre hi hagi entrades coincidents a la llista de beneficiaris/pagadors mantinguts pel &kmymoney;, es presentaran en un quadre sota o sobre de l'àrea d'entrada de text. Utilitzant el ratolí o les tecles &Up;/&Down; es podrà seleccionar un nom d'aquesta llista. L'ús addicional del teclat requerirà que seleccioneu l'entrada prement la tecla &Intro;. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Consell del dia</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Giny de beneficiari</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Si s'introdueix un nom que el &kmymoney; encara no coneix, se us demanarà si voleu crear un registre nou de beneficiari/pagador. Si no ho voleu fer, el camp quedarà en blanc. Altrament, es crearà el registre i s'afegirà a la llista. </para>
+
+<para
+>Una vegada el camp d'edició contingui caràcters, la llista només mostrarà els beneficiaris que coincideixin amb la seqüència de caràcters introduïda. Feu doble clic a la fletxa del quadre combinat per a mostrar tots els beneficiaris que hi ha a la llista. </para>
+
+</sect2>
+
+<sect2 id="reference.widgets.category">
+<title
+>Introduir la categoria/compte</title>
+
+<para
+>Quan se us demana que introduïu el nom d'una categoria o compte, podreu començar a introduir el nom prement les tecles del teclat. Mentre hi hagi entrades coincidents a la llista de categories/comptes coneguts pel &kmymoney;, es presentaran en un quadre sota o sobre de l'àrea d'entrada de text. Utilitzant el ratolí o les tecles &Up;/&Down; es podrà seleccionar un nom d'aquesta llista. L'ús addicional del teclat requerirà que seleccioneu l'entrada prement la tecla &Intro;. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Consell del dia</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="category_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Giny de categoria</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Si s'introdueix un nom que el &kmymoney; encara no coneix, se us demanarà si voleu crear un registre nou de categoria. Si no ho voleu fer, el camp quedarà en blanc. Altrament, es crearà el registre i s'afegirà a la llista. </para>
+
+<para
+>Una vegada el camp d'edició contingui caràcters, la llista només mostrarà les categories/comptes que coincideixin amb la seqüència de caràcters introduïda. Feu doble clic a la fletxa del quadre combinat per a mostrar tota la llista. </para>
+
+</sect2>
+</sect1>

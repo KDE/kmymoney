@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="faq">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Fragen und Antworten</title>
+
+<para
+>In diesem Kapitel werden Fragen behandelt, die besonders bei neuen Benutzern von &kmymoney; häufig auftreten. Bei Problemen mit &kmymoney; oder wenn Sie die Arbeitsweise des Programms nicht verstehen, sollten Sie zuerst dieses Kapitel lesen, befor Sie auf der Mailingliste fragen. Finden Sie hier keine Antwort auf Ihre Fragen, gehen Sie zum Abschnitt <link linkend="firsttime.contact"
+>Kontakt mit den Entwicklern aufnehmen und Fehler berichten</link
+>. </para>
+
+<qandaset>
+
+<qandadiv
+><title
+>Fragen zur Installation und zum Start</title>
+
+<qandaentry>
+ <question>
+   <para
+>&kmymoney; stürzt beim Starten ab.</para>
+ </question>
+ <answer>
+   <para
+>Es gibt viele Gründe, warum &kmymoney; abstürzen kann oder sich mit einer Fehlermeldung beendet, anstatt normal zu starten. Zuerst müssen Sie feststellen, ob der Fehler beim Programm oder an Ihren Daten liegt. Daher sollten Sie als erstes <link linkend="firsttime.launch"
+>&kmymoney; starten</link
+>, ohne Ihre Datendatei zu laden. Wenn das Programm ohne Probleme startet, aber beim Laden der Datei abstürzt. versuchen Sie eine ältere Version der Datei zu laden, wenn Sie eine Sicherungskopie Ihrer Daten angelegt haben.</para>
+   <para
+>Wenn &kmymoney; beim Starten abstürzt, ohne eine Datendatei zu laden, liegt möglicherweise eine Problem mit Ihrer Installation vor. Weitere Informationen finden Sie im Abschnitt <link linkend="firsttime.contact"
+>Hilfe erhalten</link
+>.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Läuft &kmymoney; auf meinem X/&ubuntu;-System? Muss ich für &kmymoney; das gesamte &kde;-System installieren?</para>
+ </question>
+ <answer>
+   <para
+>&kmymoney; benötigt keine vollständige &kde;-Arbeitsumgebung, aber Sie müssen die Basis-Bibliotheken für &kde; installieren. Am einfachsten ist es, wenn Sie das Paketverwaltungssystem Ihrer Distribution verwenden, das diese Abhängigkeiten automatisch berücksichtigt. Wenn Sie das Programm aus dem Quelltext installieren, brauchen Sie die Entwicklungsversionen dieser Bibliotheken.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Fragen zur Einrichtung</title>
+
+<qandaentry>
+ <question>
+   <para
+>Kann ich den Beginn des Geschäftsjahres passen zu meinem Steuerjahr bzw. Buchungsjahr ändern?</para>
+ </question>
+ <answer>
+   <para
+>Sie können den Beginn des Geschäftsjahres auf der Seite <link linkend="details.settings.general.global"
+>Allgemein</link
+> des Dialogs <guilabel
+>Einrichten - &kmymoney;</guilabel
+> ändern.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Fragen zu Konten und Buchungen</title>
+
+<qandaentry>
+ <question
+><para
+>Warum kann ich eine Buchung nicht bearbeiten? </para
+></question>
+ <answer>
+   <para
+>Sie können eine Buchung mit einem Datum vor dem Eröffnungsdatum des Kontos, zu dem es gehört, nicht ändern. Der häufigste Grund dafür ist, dass alle Daten eines Kontos importiert wurden. Enthält die importierte Datei kein Eröffnungsdatum für das Konto, wird es von &kmymoney; auf das aktuelle Datum gesetzt. Um dies zu beheben, bearbeiten Sie das Konto und ändern das <link linkend="details.accounts.edit"
+>Eröffnungsdatum</link
+> auf ein Datum vor dem ersten Datum einer Buchung in diesem Konto.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Warum wird eine Buchung in roter Farbe angezeigt und wie kann Ich das ändern?</para>
+ </question>
+ <answer>
+   <para
+>Eine Buchung wird in roter Farbe angezeigt, wenn irgendein Teil des Betrages noch nicht einer Kategorie zugewiesen wurde. Die wird häufig beim  Importieren von QIF- oder QFX-Dateien oder beim Herunterladen von Online-Kontoauszügen. Um das zu ändern, müssen Sie die Buchung so bearbeiten, dass der gesamte Buchungsbetrag an Kategorie zugewiesen wurde.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Warum kann ich einem Konto kein Eröffnungssaldo hinzufügen?</para>
+ </question>
+ <answer>
+   <para
+>Geben Sie bei der Erstellung eines Kontos ein Anfangssaldo an, dann wird es als erste Buchung dieses Kontos eingetragen. Fehlt diese Anfangssaldo, dann gibt es diese Buchung auch nicht. Da es sich hier um einen besondere Buchung handelt, kann Sie auch nicht wie ein Guthaben oder Abbuchung eingefügt werden. Sie können diese Buchung jedoch später beim <link linkend="details.accounts.edit"
+>Bearbeiten des Kontos</link
+> hinzufügen.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Als ich ein neues Konto erstellte, habe ich den falschen Kontentyp angegeben. Jetzt kann ich ihn nicht mehr ändern. Ich kann das Konto bearbeiten, aber das Aufklappfeld für die Kontotypen ist entweder deaktiviert oder es werden nicht alle möglichen Typen angezeigt.</para>
+ </question>
+ <answer>
+   <para
+>Sie können den Kontentyp beliebig zwischen Girokonto, Sparkonto und Bargeld ändern. Wegen der Art der Speicherung der Konteninformationen in  &kmymoney; sind andere Änderungen des Kontentyps nicht möglich. Um diese Problem zu lösen, erstellen Sie ein neues Konto mit dem richtigen Typ, verschieben alle Buchungen vom alten zum neuen Konto und löschen dann das alte Konto. </para>
+   <!-- this should have links to the sections on new acct, move transactions,
+        delete account. -->
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Ich habe einen Kredit mit 0 % Zinsen, aber im Assistenten für Kredite wird eine Fehlermeldung angezeigt und ich kann diesen Wert nicht eingeben.</para>
+ </question>
+ <answer>
+   <para
+>In der internen Berechnung des Assistenten für Kredite kann kein Zinssatz von 0 % verwendet werden. Am einfachsten ist es, ein <link linkend="details.accounts.create.account"
+>Verbindlichkeitskonto</link
+> mit einer Eröffnungsbilanz des Kreditbetrags zu erstellen und dann <link linkend="details.schedules.new"
+>geplante Buchungen</link
+> für die nötigen Zahlungen zu erstellen.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Warum werden nicht alle meine Buchungen im Kontenbuch angezeigt?</para>
+ </question>
+ <answer>
+   <para
+>Es gibt mehrere Einstellungen, die die Anzeige von Buchungen im Kontenbuch festlegen. Zuerst überprüfen Sie, ob der <link linkend="details.ledgers.view.filter"
+>Filter</link
+> des Kontenbuchs benutzt wird. Haben Sie Text im Suchfeld eingegeben, dann werden nur Buchungen angezeigt, die diesen Text enthalten. Wenn im Auswahlfeld Status andere Kriterien als <quote
+>Alle Zustände</quote
+> eingestellt ist, werden nur die Buchungen für den ausgewählten Typ angezeigt. Zusätzlich gibt es zwei wichtige Einstellungen auf der Karteikarte <link linkend="details.settings.general.filter"
+>Filter</link
+> der Seite „Allgemein“ des Einrichtungsdialogs für &kmymoney;. Ist die Einstellung <guilabel
+>Ausblenden der Buchungen vor</guilabel
+> aktiviert, werden nur Buchungen an oder nach diesem Datum im Kontenbuch angezeigt. Ist <guilabel
+>Abgeglichene Buchungen ausblenden</guilabel
+>aktiviert,werden keine abgeglichenen Buchungen angezeigt.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Ich habe den Namen eines Zahlungsempfängers falsch geschrieben und möchte ihn in allen Buchungen ändern. Gibt es eine Funktion, um solche Werte in allen Daten zu suchen und zu ersetzen?</para>
+ </question>
+ <answer>
+   <para
+>Es gibt keine Funktion zum Suchen und Ersetzen in &kmymoney;. Trotzdem ist es einfach, den Namen eines Zahlungsempfängers zu ändern. Gehen Sie zur Ansicht Zahlungsempfänger und suchen Sie den Namen, den Sie ändern möchten. Klicken Sie mit der &RMB; auf diesen Eintrag und wählen Sie <guimenuitem
+>Zahlungsempfänger umbenennen</guimenuitem
+> im Kontextmenü. Geben Sie dann den neuen Namen ein. Da die Buchungen nur eine Referenz zum Eintrag des Zahlungsempfänger verwenden, zeigen alle Buchungen jetzt den geänderten Namen.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Warum kann ich ein Konto nicht löschen?</para>
+ </question>
+ <answer>
+   <para
+>Um ein Konto zu löschen, darf es in &kmymoney; keine weiteren Verweise darauf geben. Sie müssen also alle Buchungen löschen oder zu einem anderen Konto verschieben. Wenn Sie ein Konto immer noch nicht löschen können, gibt es möglicherweise geplante Buchungen für dieses Konto, die nicht im Kontenbuch angezeigt werden. Sie müssen alle geplanten Buchungen löschen, oder sie zu einem anderen Konto verschieben.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Fragen zu Import und Export</title>
+
+<qandaentry>
+ <question>
+   <para
+>Wo finde ich weitere Informationen über OFX-Parameter?</para>
+ </question>
+ <answer>
+   <para
+>Zusätzliche Informationen zu OFX finden Sie unter <ulink url="https://ofxblog.wordpress.com/"
+>OFX Blog</ulink
+> und <ulink url="https://www.ofxhome.com/"
+>OFX Home</ulink
+>.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Verschiedene Fragen</title>
+
+<qandaentry>
+ <question>
+   <para
+>Warum gibt es keine Übersetzung in meiner Sprache?</para>
+ </question>
+ <answer>
+   <para
+>&kmymoney; benutzt die &kde;-Einstellungen für Sprachen, deshalb überprüfen Sie als erstes die Einstellungen in <menuchoice
+><guimenu
+>Regionales</guimenu
+><guimenuitem
+>Land/Region &amp; Sprache</guimenuitem
+></menuchoice
+>in den &systemsettings;. Ist diese Einstellung richtig, hat wahrscheinlich noch niemand mit der Übersetzung begonnen. Das Übersetzen von &kde;- oder &Qt;-Programmen ist nicht schwer und erfordert keine Programmierkenntnisse. Möchten &kmymoney; in Ihre Sprache übersetzen, schicken Sie eine E-Mail an die <ulink url="http://l10n.kde.org/teams-list.php"
+>Mailingliste</ulink
+> Ihre Sprache. Gibt es kein Team für Ihre Sprache oder können Sie keinen Kontakt herstellen, schicken Sie eine E-Mail direkt an die Liste der <ulink url="mailto:kde-i18n-doc@kde.org"
+>&kde;-Übersetzungteams</ulink
+> (<ulink url="https://mail.kde.org/mailman/listinfo/kde-i18n-doc"
+>Abonnieren</ulink
+> erforderlich). Dann erhalten Sie alle nötigen Informationen, um Übersetzungen für &kmymoney; zu erstellen. </para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Warum wurde die Versionsnummer von 1.0.5 auf 4.5 erhöht und der Name  KMyMoney2 geändert?</para>
+ </question>
+ <answer>
+   <para
+>Der Name KMyMoney2 war eine Altlast aus der Zeit als das Programm von &kde; 1 auf &kde; 2 portiert wurde. Um nicht mit jeder neuen Version von &kde; den Namen ändern zu müssen, entschieden die Entwickler, nur noch den Namen &kmymoney; zu benutzen.</para>
+   <para
+>Die erste Version von &kmymoney;, die als stabile Version veröffentlicht wurde, hatte die Bezeichnung 1.0, obwohl sie unter &kde; 3 lief. Da das Projekt jetzt mehr in &kde; eingebunden ist, entschieden die Entwickler, die gleiche Hauptversionsnummer wie &kde; zu benutzen.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Wie kann Ich Fehler oder Wünsche berichten?</para>
+ </question>
+ <answer>
+   <para
+>Die Entwickler freuen sich über jede Rückmeldung. Siehe auch den Abschnitt <link linkend="firsttime.contact"
+>Kontakt mit Entwicklern / Fehler berichten</link
+>.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Gibt es eine einfache Möglichkeit, einige geplante Buchungen oder Teile des Kontenbuchs or mehr auszudrucken?</para>
+ </question>
+ <answer>
+   <para
+>Lesen Sie den Abschnitt <link linkend="details.reports.avail"
+>Berichte</link
+>. Viele der aktuell mitgelieferten Berichten bieten einen einfachen Weg zum Drucken von Informationen, die Sie nicht direkt aus dem Kontenbuch oder aus anderen Ansichten drucken können.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+</qandaset>
+
+</chapter>

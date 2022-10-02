@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.reports">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+  </authorgroup>
+  <date
+>25/07/2010</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Relatórios</title>
+
+<sect1 id="details.reports.avail">
+<title
+>Relatórios disponíveis</title>
+
+<para>
+<screenshot>
+	<screeninfo
+>Área de Relatórios</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reports_view-all.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Área de Relatórios</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>A Área de Relatórios apresenta todos os relatórios disponíveis, agrupados nas seguintes categorias. </para>
+
+<sect2>
+<title
+>Receitas e Despesas</title>
+<para
+>Os relatórios nesta seção mostram as suas receitas e despesas, quer para o mês atual, quer para cada mês do ano atual. Obviamente, a duração do relatório global e a duração capturada por cada coluna poderão ser configuradas como quiser. Também poderá produzir gráficos de barras ou circulares. </para>
+</sect2>
+
+<sect2>
+<title
+>Valor Líquido</title>
+<para
+>Aqui estão os relatórios que descrevem o seu valor líquido, quer no momento atual, para todos os meses do ano atual ou para todos os anos do seu histórico. Além disso, existe ainda uma Previsão de Caixa para 7 Dias e um Gráfico do Valor Líquido. Existem também relatórios para obter os saldos de todas as suas contas, em qualquer ponto do tempo. </para>
+</sect2>
+
+<sect2>
+<title
+>Transações</title>
+<para
+>Esta seção inclui os relatórios que apresentam as suas operações individuais, e é a melhor forma de imprimir o seu registro de contas, para um determinado período de tempo. As operações impressas poderão ser agrupadas em conjunto, de acordo com sua preferência, escolhendo para isso o relatório apropriado, como por exemplo: <itemizedlist>
+  <listitem
+><para
+>Por Conta</para
+></listitem>
+  <listitem
+><para
+>Por Categoria</para
+></listitem>
+  <listitem
+><para
+>Por Mês ou Semana</para
+></listitem>
+  <listitem
+><para
+>Por Beneficiário</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Fluxo de Caixa</title>
+<para
+>O relatório Fluxo de Caixa é semelhante ao relatório Transações, que mostra todas as operações relacionadas ao fluxo de caixa. </para>
+</sect2>
+
+<sect2>
+<title
+>Investimentos</title>
+<para
+>Estes relatórios ajudam-no a monitorar seus investimentos e só incluem contas desse tipo. Existe uma grande variedade de filtros e estilos de apresentação, tal como aparece nesta lista parcial. </para>
+<itemizedlist>
+  <listitem
+><para
+>Transações de Investimento: É semelhante a um relatório de Transações, incluindo o preço individual e o número de ações.</para
+></listitem>
+  <listitem
+><para
+>Posses de Investimento por Conta: Mostra as ações atuais, o preço e o valor de cada conta.</para
+></listitem>
+  <listitem
+><para
+>Posses de Investimento por Tipo: Igual ao relatório anterior, mas organiza as contas pelo tipo (Ações, Fundos Mútuos, etc.)</para
+></listitem>
+  <listitem
+><para
+>Desempenho do Investimento por Conta: Mostra a performance anual ao longo de qualquer período de tempo. Isto efetua uma análise do fluxo de caixa para todo o dinheiro que entra e sai da conta. Como resultado, isto é uma imagem bastante exata da situação dos seus investimentos.</para
+></listitem>
+  <listitem
+><para
+>Performance do Investimento por Tipo: Igual ao relatório anterior, mas organiza as contas pelo tipo (Ações, Fundos Mútuos, etc.)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Existem também gráficos para os Preços dos Investimentos e o Valor dos mesmos. </para>
+</sect2>
+
+<sect2>
+<title
+>Impostos</title>
+<para
+>Os relatórios de impostos são como o de Transações, com a diferença que só são incluídas as categorias de Impostos. Isto permite-lhe assinalar certas categorias como sendo relacionadas com impostos, obtendo depois um relatório grande no fim do ano, para os ver todos num único local. Eles poderão ser apresentados tanto por Categoria como por Beneficiário, assim como para o último ano fiscal. </para>
+</sect2>
+
+<sect2>
+<title
+>Orçamento</title>
+<para
+>Os relatórios de orçamentos são semelhantes aos dos valores líquidos, mas os relatórios poderão mostrar o orçamento para um determinado ano, ou mesmo compará-lo com as receitas e despesas para o mesmo período. </para>
+</sect2>
+
+<sect2>
+<title
+>Previsão</title>
+<para
+>Os relatórios de previsões são como os dos valores Líquidos, mas usam os dados para mostrar a informação de previsão. Você poderá apresentar a informação em vários níveis, assim como usar uma moldura temporal à sua escolha. </para>
+</sect2>
+
+<sect2>
+<title
+>Informações</title>
+<para
+>Estes relatórios mostram a informação não associada às transações, como os agendamentos, as contas e os financiamentos. </para>
+</sect2>
+
+<sect2>
+<title
+>Gráficos</title>
+<para
+>Se os <link linkend="details.reports.charts"
+>Gráficos</link
+> estiverem ativos, esta seção apresenta todos os relatórios que estão marcados para mostrar um gráfico por padrão. Eles aparecem ainda numa das outras seções, mas também estão aqui agregados para fácil acesso. </para>
+</sect2>
+
+<sect2>
+<title
+>Relatórios favoritos</title>
+<para
+>Esta seção apresenta todos os relatórios que marcou como seus favoritos, na janela de configuração do relatório. Eles continuam a aparecer em outras seções, mas também estão agregados aqui para uma referência mais simples. Os relatórios favoritos também estão incluídos na página de resumo financeiro, para uma referência ainda mais simples. </para>
+</sect2>
+
+<sect2>
+<title
+>Configurar os Relatórios</title>
+<para
+>Para acessar à janela de configuração do relatório, invoque o relatório que deseja configurar, e clique depois no botão <guibutton
+>Configurar</guibutton
+> no topo do relatório. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.reports.working">
+<title
+>Trabalhar com os Relatórios</title>
+
+<para
+>Existe um conjunto de ações que você poderá efetuar com cada relatório. Você poderá acessá-las com o botão direito do mouse sobre o nome do relatório, na lista de relatórios. Em alternativa, logo que tenha executado um relatório, existem botões ao longo do topo da janela para invocar cada uma das ações em questão: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Gráfico: Só está presente se o relatório for capaz de apresentar um gráfico. Esta opção comuta entre o relatório e o gráfico.</para
+></listitem>
+  <listitem
+><para
+>Configurar: Muda as propriedades deste relatório. Você poderá personalizar o relatório a seu gosto, gravando-o para uso posterior.</para
+></listitem>
+  <listitem
+><para
+>Novo: Cria um novo relatório personalizado, com base no relatório selecionado.</para
+></listitem>
+  <listitem
+><para
+>Copiar: Os relatórios poderão ser copiados para a área de transferência, de modo a serem colados em outro aplicativo, como uma planilha, para análise futura.</para
+></listitem>
+  <listitem
+><para
+>Exportar: Os relatórios poderão ser salvos no formato &HTML; ou CSV.</para
+></listitem>
+  <listitem
+><para
+>Excluir: Os relatórios personalizados podem ser excluídos, mas os que vêm por padrão no &kappname; não podem.</para
+></listitem>
+  <listitem
+><para
+>Fechar: Fecha o relatório atual.</para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="details.reports.config">
+<title
+>Configurar os Relatórios</title>
+
+<sect2>
+<title
+>Trabalhar com relatórios personalizados</title>
+<para
+>Você pode configurar os relatórios disponibilizados por padrão ou criar os seus próprios, selecionando a opção 'Novo' e configurando depois o novo relatório. Quando selecionar a opção 'Configurar', será apresentada a página do Relatório. Inicialmente, ele terá o mesmo nome que o relatório antigo, com o texto adicional <quote
+>(Personalizado)</quote
+>. Esse nome padrão poderá ser alterado, sendo possível usar o mesmo nome de um relatório padrão ou de um relatório personalizado. Da mesma forma, o campo Comentário também poderá ser usado para diferenciar os relatórios. </para>
+
+<para
+>A caixa de diálogo Configuração do Relatório possui um conjunto de abas na parte superior. Cada aba mostra opções para configurar diferentes aspectos do relatório. </para>
+
+</sect2>
+
+<sect2
+><title
+>Aba Relatório</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="report_configuration-reporttab.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Configuração do Relatório - Relatório</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Nesta aba são definidas as propriedades básicas do relatório. <itemizedlist>
+  <listitem
+><para
+>Nome do relatório: Escolha um nome para este relatório.</para
+></listitem>
+  <listitem
+><para
+>Comentário: Digite um comentário para ajudá-lo a lembrar dos detalhes deste relatório.</para
+></listitem>
+  <listitem
+><para
+>Converter os valores para a moeda base: Selecione esta opção para converter todos os valores do relatório para a sua moeda base. Deixe a opção desmarcada se quiser ver os valores na sua moeda original. Se as moedas não forem convertidas, então os subtotais não serão apresentados.</para
+></listitem>
+  <listitem
+><para
+>Marcar como um relatório favorito: Assinale esta opção para fazer com que este relatório apareça na página inicial e no grupo de <guilabel
+>Relatórios favoritos</guilabel
+>.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2 id="details.reports.config.rowscolumns">
+<title
+>Aba Linhas/Colunas</title>
+<para
+>Nesta aba, você irá configurar como gostaria de organizar e selecionar as linhas e colunas. Esta página apresenta diferentes opções de configuração, dependendo do estilo do relatório que tiver selecionado. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="report_configuration-rowscolumns.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Configuração do Relatório - Linhas e Colunas</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Para os relatórios de receita/despesa e valor líquido: <itemizedlist>
+  <listitem
+><para
+>Colunas: Escolha a abrangência do período de tempo associado a cada coluna.</para
+></listitem>
+  <listitem
+><para
+>Linhas: Escolha o tipo de contas a mostrar como linhas neste relatório.</para
+></listitem>
+  <listitem
+><para
+>Detalhe: Escolha o nível de detalhe necessário para este relatório.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Estão disponíveis os seguintes níveis de detalhe: <itemizedlist>
+  <listitem
+><para
+>Tudo: Mostrar todas as categorias ou contas.</para
+></listitem>
+  <listitem
+><para
+>Nível de topo: Mostra apenas as categorias ou contas do nível de topo, acrescentando as somas das categorias ou contas subordinadas a esses valores.</para
+></listitem>
+  <listitem
+><para
+>Grupos: Mostra apenas os totais das receitas, despesas, ativos ou passivos.</para
+></listitem>
+  <listitem
+><para
+>Total: Mostrar apenas a linha com os totais gerais.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Para os relatórios de transações: <itemizedlist>
+  <listitem
+><para
+>Organizadas por: Escolha como agrupar as transações neste relatório.</para
+></listitem>
+  <listitem
+><para
+>Mostrar colunas: Escolha as colunas que deverão ser apresentadas no relatório. A data e o montante da operação sempre ficarão visíveis.</para
+></listitem>
+  <listitem
+><para
+>Incluir somente categorias de taxas: Mostra apenas as categorias relacionadas com taxas.</para
+></listitem>
+  <listitem
+><para
+>Incluir somente contas de investimento: Mostra apenas as operações das contas de investimento.</para
+></listitem>
+  <listitem
+><para
+>Incluir somente contas de empréstimo: Mostra apenas as operações das contas de empréstimo.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Aba Gráfico</title>
+
+<para
+>Esta aba permite-lhe configurar a aparência do relatório, quando for apresentado como um gráfico. Consulte a seção <link linkend="details.reports.charts"
+>Gráficos &amp; Gráficos Dinâmicos</link
+> para obter uma explicação mais detalhada sobre as funções de gráficos. <itemizedlist>
+  <listitem
+><para
+>Tipo de gráfico: O formato visual do gráfico desejado.</para
+></listitem>
+  <listitem
+><para
+>Mostrar linhas de grade: Selecione esta opção para mostrar linhas horizontais e verticais no gráfico.</para
+></listitem>
+  <listitem
+><para
+>Mostrar valores no gráfico: Selecione esta opção para mostrar os valores dos dados no gráfico em si, para os pontos de dados escolhidos.</para
+></listitem>
+  <listitem
+><para
+>Mostrar como gráfico por padrão: Selecione esta opção para que o relatório apresente primeiro um gráfico quando for aberto.</para
+></listitem>
+  <listitem
+><para
+>Espessura da linha: A espessura das linhas de dados no gráfico.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Outras abas</title>
+<para
+>As outras aba desta caixa de diálogo são as mesmas que na interface para Procurar operações. Consulte a <link linkend="details.search"
+>documentação</link
+> sobre essa interface, para obter mais detalhes sobre as outras abas.</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.reports.charts">
+<title
+>Gráficos &amp; Gráficos Dinâmicos</title>
+
+<sect2>
+<title
+>Ver como um Gráfico</title>
+
+<para
+>Cada relatório poderá ser visto tanto num formato textual como num formato gráfico. São usados os mesmos parâmetros do relatório em qualquer um dos casos. Você poderá mudar facilmente entre o modo textual e o gráfico, clicando nos botões <guibutton
+>Gráfico</guibutton
+> ou <guibutton
+>Relatório</guibutton
+>, ao longo do topo da área do relatório. </para>
+
+<para
+>Você deverá ter o cuidado de limitar a quantidade de dados que opta por mostrar num gráfico, de modo que ele seja útil. Se não tiver cuidado, a utilização da mesma configuração no formato textual e gráfico significa que é possível configurar um gráfico de forma confusa e pouco apelativa. O &kappname; não irá obrigá-lo a manter os seus gráficos legíveis e úteis! </para>
+
+</sect2>
+
+<sect2>
+<title
+>Tipos de Gráficos Disponíveis</title>
+
+<sect3>
+<title
+>Gráfico de Linhas</title>
+
+<para
+>Um gráfico de linhas é a forma mais simples dos gráficos. Existe uma linha para cada série (normalmente, uma série é uma única conta ou categoria; veja mais detalhes abaixo sobre o assunto). Os períodos de tempo ajustam-se ao longo do eixo inferior, enquanto os valores monetários ajustam-se ao longo do eixo da esquerda. </para>
+
+<para
+>O nível de detalhe de cada linha é controlado na aba <link linkend="details.reports.config.rowscolumns"
+>Linhas/Colunas</link
+> da configuração do gráfico. Se optar pelo nível de detalhe <quote
+>Nível de topo</quote
+>, existirá uma linha para cada uma das contas ou categorias superiores, apresentando a soma total de todas as contas ou categorias subjacentes. Se optar pelos <quote
+>Grupos</quote
+>, irá mostrar em alternativa uma linha para a Receita, a Despesa, os Ativos e os Passivos, dependendo da outra configuração. </para>
+</sect3>
+
+<sect3>
+<title
+>Gráfico de barras</title>
+
+<para
+>O gráfico de barras funciona exatamente da mesma forma que o gráfico de linhas, exceto que existe uma barra para cada série, em cada fatia temporal. </para>
+</sect3>
+
+<sect3>
+<title
+>Gráfico de setores</title>
+
+<para
+>O gráfico de setores é o mais simples disponível. Só mostra uma fatia temporal, em oposição à apresentação dos valores ao longo do tempo. Este gráfico mostra apenas a coluna de totais do relatório selecionado. Se o seu relatório for configurado para NÃO converter os valores para a moeda base, não existirá nenhuma coluna de totais; como tal, esse relatório não será útil. </para>
+</sect3>
+
+<sect3>
+<title
+>Gráfico em anel</title>
+
+<para
+>O gráfico em anel é como um gráfico de setores, exceto que existe um <quote
+>anel</quote
+> por cada fatia temporal no relatório. </para>
+</sect3>
+
+</sect2>
+
+</sect1>
+</chapter>

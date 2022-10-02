@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.currencies">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+    <author
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+  </authorgroup>
+  <date
+>2020-02-20</date>
+  <releaseinfo
+>5.0.8</releaseinfo>
+</chapterinfo>
+
+<title
+>Valuta's</title>
+
+<para
+>&kmymoney; ondersteunt het gebruik van meerdere valuta's in verschillende accounts. U kunt bijvoorbeeld een bankrekening in Euro's instellen, een andere in Britse Ponden en nog steeds uw creditcardrekening in US Dollars. </para>
+
+<sect1 id="details.currencies.basecurrency">
+<title
+>Basis valuta</title>
+
+<para
+>Bij het initiële "Instellen van nieuw bestand" van &kmymoney;, zal u worden gevraagd om de basis valuta te selecteren. Gewoonlijk is de basis valuta diegene die u in uwe land gebruikt. De basis valuta wordt gebruikt voor alle inkomsten- en uitgavecategorieën gebruikt wordt en waar rapporten op gebaseerd zullen zijn. Wanneer u een nieuwe rekening instelt zal &kmymoney; automatisch de basis valuta als standaard instellen. Als uw rekening vereist dat u een andere valuta gebruikt, kunt u het bij het Instellen van de nieuwe rekening instellen. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Het dialoogvenster keuze van valuta</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="select_currency.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Selecteer valuta</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect2 id="details.currencies.newcurrency">
+<title
+>Een nieuwe valuta toevoegen</title>
+
+<para
+>Hoewel het niet vaak gebeurt, wordt soms een nieuwe valuta geïntroduceerd. Dit kan een nieuwe virtuele valuta zijn, zoals Bitcoin of een wijziging geïntroduceerd door een land om financiële politieke redenen. Terwijl elk zo'n valuta aan de volgende versie van &kmymoney; zal worden toegevoegd, is het mogelijk om het handmatig toe te voegen, in het geval dat u het al nodig heeft om het onmiddellijk te gebruiken. </para>
+
+<para
+>Om handmatig een valuta toe te voegen, selecteer het menu-item <menuchoice
+><guimenu
+>Hulpmiddelen</guimenu
+><guimenuitem
+>Valuta's...</guimenuitem
+></menuchoice
+> om de dialoog <guilabel
+>Valuta's</guilabel
+> te tonen, zoals bovenstaand getoond. Klik rechts op een bestaande valuta en selecteer <guimenuitem
+>Nieuwe valuta</guimenuitem
+> uit het  contextmenu <guimenu
+>Valutaopties</guimenu
+>. Voer de officiële code voor de valuta in en klik op <guilabel
+>OK</guilabel
+>. De valuta zal aangemaakt worden met de naam <quote
+>Nieuwe valuta</quote
+>. Om de naam te wijzigen, druk ofwel op <keycap
+>F2</keycap
+> of klik rechts en selecteer <guimenuitem
+>Valuta hernoemen</guimenuitem
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.currencies.accountsetup">
+<title
+>Rekeninginstellingen</title>
+
+<para
+>Wanneer u een nieuwe rekening aanmaakt, specificeert u de valuta waarin het beheerd zal worden. De assistent Nieuwe rekening zet deze instelling op de <link linkend="details.currencies.basecurrency"
+>basis valuta</link
+>. Als u een andere valuta wilt, moet u het bij deze initiële opzet selecteren. Het grootboek voor de rekening zal dan alle waarden in de geselecteerde valuta tonen. </para>
+</sect1>
+
+<sect1 id="details.currencies.transactions">
+<title
+>Transacties invoeren met verschillende valuta</title>
+
+<para
+>Wanneer een transactie wordt ingevoerd die refereert aan meer dan één valuta, zal de wisselkoersbewerker verschijnen en stelt u in staat om een wisselkoers in te voeren. Initieel zal de huidige koers beschikbaar uit de koersdatabase worden gebruikt als wisselkoers. Zie <link linkend="details.currencies.prices"
+>Wisselkoersen voor valuta's invoeren</link
+> voor meer informatie over hoe handmatig wisselkoersen te leveren en online koersinformatie te verkrijgen. </para>
+
+<para
+>Naar keuze wordt de wisselkoers opgeslagen in de prijsdatabase nadat deze is ingevoerd door de gebruiker. </para>
+</sect1>
+
+<sect1 id="details.currencies.prices">
+<title
+>Wisselkoers voor valuta</title>
+
+<sect2>
+<title
+>Handmatig ingevoerde prijzen</title>
+
+<para
+>De prijsdatabasebewerker stelt u in staat om wisselkoersen in te voeren tussen valuta's of prijzen voor investeringen. U kunt deze te voorschijn halen met de menu-item <menuchoice
+><guimenu
+>Hulpmiddelen</guimenu
+><guimenuitem
+>Prijzen...</guimenuitem
+></menuchoice
+>. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="currency_priceeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Bewerker van valutakoers</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>In &kmymoney; is een <quote
+>Koers</quote
+> de koers van één valuta in termen van een tweede valuta. Bijvoorbeeld als ik dit schrijf, de koers van 1 USD in termen van 1 EUR is 0.83; dan betekent dat dat 1 USD 0.83 EUR kost. De eerste valuta is diegene die wordt gekocht of verkocht, en de tweede is de valuta gebruikt om het te kopen of te verkopen. </para>
+
+<para
+>Wanneer u op de knop <guibutton
+>Nieuw</guibutton
+> drukt, krijgt u de dialoog Nieuwe koersinvoer. Voer de eerste valuta in (USD in het bovenstaande voorbeeld) in het veld Waardepapier. Voer de tweede valuta (EUR in het bovenstaande voorbeeld) in het veld Valuta. Voer de effectieve datum van de koers in in het veld Datum. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="currency_newpriceentry.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Invoer van nieuwe koers</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect2>
+
+<sect2>
+<title
+>Online bijwerken van valuta</title>
+
+<para
+>&kmymoney; zal valutaconversies vanaf het web ophalen. Nadat u een enkele prijs hebt ingevoerd voor valutapaar, zal de online functie voor koersen altijd dat paar onder zijn opties tonen. </para>
+
+<para
+>Zie de sectie over <link linkend="details.investments.onlinequotes"
+>Online prijzen</link
+> in het hoofdstuk Investering voor meer details. </para>
+</sect2>
+</sect1>
+</chapter>
+

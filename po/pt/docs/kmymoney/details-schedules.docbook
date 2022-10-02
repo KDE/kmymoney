@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.schedules">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Escalonamentos</title>
+
+<sect1 id="details.schedules.intro">
+<title
+>Introdução</title>
+
+<para>
+  <quote
+>As calendarizações mantêm a informação acerca das transacções que ocorrem uma ou mais vezes durante um período de tempo. </quote>
+</para>
+
+<para
+>Algumas vezes chamadas de transacções recorrentes, as calendarizações de eventos recorrentes oferecem uma forma de registar informações acerca de transacções que ocorram regularmente. Um evento recorrente comum é o seu salário. Uma vez por mês, ou mesmo semanalmente, a companhia para a qual trabalha pagar-lhe-á pelos serviços prestados. Este pagamento poderá ocorrer de diversas formas, mas em cada mês ou semana irá receber um pagamento que terá de ser registado. </para>
+
+<para
+>Dado que sabe que estes pagamentos são feitos regularmente por si, poderá criar um Evento Recorrente para registar a informação acerca do pagamento e até criar a transacção por si, quando chegar o dia de pagamento. </para>
+
+<para
+>Poderá registar outros tipos de eventos recorrentes para reflectir o dinheiro que entra e sai da sua conta. As despesas comuns, como as contas de serviços ou as transferências de dinheiro poderão ser registadas com os eventos recorrentes, em conjunto com as prestações dos financiamentos. A calendarização de um pagamento também poderá fornecer uma chamada de atenção útil que reflecte a necessidade de fazer um dado pagamento. </para>
+
+<para
+>O evento recorrente consiste em duas partes principais: os dados de calendarização e a transacção propriamente dita. Os dados de calendarização registam a ocorrência do evento, i.e., quando e onde a transacção deverá ser introduzida. Os dados da transacção registam a informação normal da transacção, sendo esta introduzida no livro de registos tal-e-qual. </para>
+</sect1>
+
+<sect1 id="details.schedules.type">
+<title
+>Tipos de eventos recorrentes</title>
+
+<para
+>Existem quatro tipos diferentes de eventos recorrentes na versão actual do &kappname;: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Contas</para
+></listitem>
+  <listitem
+><para
+>Depósitos</para
+></listitem>
+  <listitem
+><para
+>Financiamentos</para
+></listitem>
+  <listitem
+><para
+>Transferências</para
+></listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Contas</title>
+
+<para
+>Um Evento de Conta é usado para criar um evento recorrente para o dinheiro que sai da sua conta para pagar um serviço, como uma mensalidade do ginásio ou uma conta de um serviço utilitário qualquer. </para>
+</sect2>
+
+<sect2>
+<title
+>Depósitos</title>
+
+<para
+>É usado um Evento de Depósito para criar um evento recorrente para o dinheiro que entra na sua conta, como o pagamento de um cheque. </para>
+</sect2>
+
+<sect2>
+<title
+>Financiamentos</title>
+
+<para
+>Um Evento de Financiamento é um tipo de evento recorrente especial que é criado ao lidar com contas de <link linkend="details.loans"
+>Financiamento</link
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Transferências</title>
+
+<para
+>Um Evento de Transferência é usado para criar um evento recorrente para o dinheiro que vem de uma conta e entra noutra. Um exemplo típico é o pagamento de um cartão de crédito a partir da sua conta à ordem. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.schedules.view">
+<title
+>A área de calendarização de eventos recorrentes</title>
+
+<para
+>Abra a área de calendarização de eventos recorrentes, carregando no ícone <guiicon
+>Evento Recorrente<inlinemediaobject
+><imageobject
+><imagedata fileref="schedule_view.png"/></imageobject
+></inlinemediaobject
+></guiicon
+> no selector de áreas. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="scheduleview.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Área de Calendarização</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>A área de calendarizações consiste numa área de visualização com duas páginas, em conjunto com um botão <guibutton
+>Novo Evento Recorrente</guibutton
+> por cima. A primeira página, a <guibutton
+>Lista</guibutton
+>, mostra todos os eventos recorrentes agrupados pelo tipo. A segunda página, o <guibutton
+>Calendário</guibutton
+>, está descrita na sua própria secção em baixo. </para>
+	
+<para
+>Para criar uma nova calendarização, carregue no botão. Para calendarizar Pagamentos, Depósitos e Transferências, o &kappname; irá mostrar a janela de novos eventos recorrentes. A calendarização dos financiamentos são tratadas de forma diferente, sendo descrito na secção sobre os Empréstimos. </para>
+</sect1>
+
+<sect1 id="details.schedules.new">
+<title
+>A janela do novo evento recorrente</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newsched_numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Novo Evento Recorrente</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Irá aparecer agora uma nova janela que lhe pede os dados do evento recorrente e da transacção. Os dados do evento incluem os seguintes campos: </para>
+
+<orderedlist numeration="upperalpha">
+  <listitem
+><para
+>Nome do Calendário</para
+></listitem>
+  <listitem
+><para
+>Data de vencimento seguinte</para
+></listitem>
+  <listitem
+><para
+>Frequência</para
+></listitem>
+  <listitem
+><para
+>Método de pagamento</para
+></listitem>
+  <listitem
+><para
+>Montante</para
+></listitem>
+  <listitem
+><para
+>Outros detalhes da transacção</para
+></listitem>
+  <listitem
+><para
+>Opções de calendarização</para
+></listitem>
+</orderedlist>
+
+<sect2>
+<title
+>Preencher os campos</title>
+
+<para
+>Indique o nome do evento recorrente e a próxima ocorrência do mesmo, nos seus campos respectivos. Seleccione a frequência no campo e lista da Frequência. Por exemplo, "todas as 6 semanas" ou "todos os 3 meses". Se o montante variar entre transacções, certifique-se que assinala a opção <guilabel
+>Estimativa</guilabel
+>, para que lhe seja pedido o valor correcto quando for introduzido no livro de registos. Preencha todos os campos da transacção, como normalmente faria no livro de registos. </para>
+</sect2>
+
+<sect2>
+<title
+>Modificar o comportamento da calendarização</title>
+<para
+>No fundo da janela, existem alguns campos opcionais que poderão modificar a forma como se comporta o evento recorrente. Se este ocorrer num fim-de-semana, poderá escolher se deseja introduzir a transacção na 6a-feira anterior ou na 2a-feira seguinte. Tipicamente, esta opção é usada para replicar alguma operação do mundo real, como uma transacção do banco. </para>
+</sect2>
+
+<sect2>
+<title
+>Deixar o &kappname; introduzir a transacção no livro de registos</title>
+
+<para
+>Para deixar o &kappname; introduzir a transacção por si, quando for necessário, certifique-se que a opção <guilabel
+>Introduzir isto no livro de registos automaticamente quando chegar a hora</guilabel
+> está assinalada; caso contrário, quando a transacção for para ser introduzida, o &kappname; irá abrir uma janela que lhe pede a confirmação dos dados a introduzir. Este comportamento é configurável e poderá indicar mais informações na secção de Configuração. </para>
+</sect2>
+
+<sect2>
+<title
+>Deixar o &kappname; saber quando irá terminar a calendarização</title>
+
+<para
+>Se souber quantas transacções faltam ou quando é suposto estas terminarem, poderá introduzir esta informação, de modo a que as transacções não sejam introduzidas indefinidamente. Assinale a opção apropriada e introduza a informação que tiver. Só é necessária a data ou o número de transacções restantes, dado que os outros valores poderão ser calculados. </para>
+
+<para
+>Indique a informação necessária e carregue em <guibutton
+>OK</guibutton
+> para continuar. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.schedules.edit">
+<title
+>Editar os eventos recorrentes</title>
+
+<para
+>Para editar o evento recorrente, basta seleccionar o item na lista e carregar com o botão direito, de modo a invocar o menu de contexto e seleccionar a opção <guimenuitem
+>Editar</guimenuitem
+>. Isto irá invocar uma janela semelhante à do Novo Evento Recorrente, onde poderá alterar os dados necessários. </para>
+</sect1>
+
+<sect1 id="details.schedules.delete">
+<title
+>Apagar eventos recorrentes</title>
+
+<para
+>Para apagar o evento recorrente, basta seleccionar o item na lista e carregar com o botão direito, de modo a invocar o menu de contexto e seleccionar a opção <guimenuitem
+>Apagar</guimenuitem
+>. </para>
+</sect1>
+
+<sect1 id="details.schedules.calendar">
+<title
+>A área do calendário</title>
+
+<para
+>A página do calendário apresenta os eventos recorrentes num formato de calendário, de modo a que seja mais fácil de ver quando ocorrem. Para mudar para a área do calendário, carregue na página da <guibutton
+>Área do Calendário</guibutton
+>. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="calendarview.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Área do Calendário</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Poderá alterar o tipo de calendário, usando o botão para <guibutton
+>Seleccionar o Estilo</guibutton
+>. De momento, só existem dois tipos; Semana e Mês. A vista mensal é a predefinida e, normalmente, é a mais útil. Percorra as datas, usando os controlos, como faria no campo de introdução de datas. </para>
+
+<para
+>Em qualquer dia com transacções agendadas, é apresentado o número de transacções agendadas para cada dia no calendário. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="schedmonthday.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Para ver os eventos que ocorrem nesse dia, passe o cursor do rato sobre a área realçada para aparecer uma janela que lhe permite ver o resumo do evento recorrente. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="schedpopup.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Se tiver mais de um evento que ocorra nesse dia, poderá circular entre eles, usando os botões de setas nos cantos superiores da janela. </para>
+
+<para
+>Se achar que a janela está desorganizada com muitos eventos, e se só quiser ver um tipo de evento recorrente, então podê-lo-á fazer com o botão <guibutton
+>Seleccionar os Eventos Recorrentes</guibutton
+>. Depois de carregar neste botão, aparecerão os diferentes tipos de eventos, estando todos assinalados por omissão </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="schedcaltypes.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Para remover um tipo da área do calendário, basta desmarcá-lo na lista. </para>
+
+</sect1>
+
+<sect1 id="details.schedules.entering">
+<title
+>Introduzir transacções agendadas</title>
+
+<para
+>A introdução de uma transacção agendada significa de facto introduzir uma transacção no livro de registos apropriado, usando os detalhes definidos na calendarização. As transacções agendadas poderão ser introduzidas de uma de quatro formas diferentes: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Manualmente, carregando com o botão direito no item da lista</para
+></listitem>
+  <listitem
+><para
+>Manualmente, através da janela da área do calendário</para
+></listitem>
+  <listitem>
+    <para
+>O &kappname; podê-las-á introduzir com ou sem a sua interacção, no arranque </para>
+  </listitem>
+  <listitem>
+    <para
+>O &kappname; podê-las-á introduzir com ou sem a sua interacção, durante a banca 'online' ou na importação de um extracto bancário electrónico </para>
+  </listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Introduzir manualmente as transacções agendadas</title>
+
+<para
+>Poderá introduzir uma transacção agendada manualmente, carregando com o botão direito no item da lista e seleccionando a opção <guimenuitem
+>Introduzir</guimenuitem
+> no menu de contexto, ou carregando no botão <guibutton
+>Introduzir</guibutton
+> da janela que aparece no calendário. </para>
+</sect2>
+
+<sect2>
+<title
+>Confirmar a transacção a introduzir</title>
+
+<para
+>Depois de seleccionar qualquer um dos métodos, a janela para Introduzir a Transacção Agendada irá aparecer, pedindo-lhe a informação necessária, que é a introduzida ao criar a calendarização. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="enterschedule.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Esta informação poderá ser alterada e poderá ser aplicada a apenas uma instância da calendarização, ou a todas as transacções subsequentes. Depois de verificar que todos os dados estão correctos, carregue em <guibutton
+>OK</guibutton
+> para adicionar a transacção ao livro de registos e actualizar a data do próximo pagamento. Se tiver mudado algum dos dados da transacção, irá aparecer uma confirmação posterior para lhe dar uma última hipótese para aceitar ou rejeitar as alterações. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="confirmenter.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Seleccione o que deseja fazer com a informação apresentada, carregando depois em <guibutton
+>OK</guibutton
+> ou em <guibutton
+>Cancelar</guibutton
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Deixar o &kappname; introduzir as transacções agendadas por si</title>
+
+<para
+>Em alternativa, o &kappname; poderá verificar os eventos recorrentes que estão prestes a ser vencidos no arranque e introduzi-los por si, caso a opção apropriada estivesse assinalada ao configurar o evento recorrente. </para>
+
+<para
+>Se a opção não foi assinalada, então o &kappname; irá abrir a janela mencionada anteriormente e você poderá seguir os passos aí indicados. O &kappname; irá também abrir a janela, caso o montante seja uma estimativa, para que possa então introduzir o valor real. </para>
+
+<para
+>Também poderá optar por ter o &kappname; a não verificar quais as transacções agendadas no arranque, desligando a opção na janela de Configuração, para que todas as transacções atrasadas ou que vençam 'hoje', sejam apresentadas na área inicial, para que as introduza manualmente. </para>
+</sect2>
+</sect1>
+</chapter>

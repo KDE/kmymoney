@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Catalan  "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+
+<author
+><firstname
+>Michael</firstname
+><othername
+>T.</othername
+><surname
+>Edwardes</surname
+> <contrib
+>Concepte original, la majoria del codi inicial. Gestió del projecte</contrib
+> <email
+>mte@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Thomas</firstname
+><surname
+>Baumgart</surname
+> <contrib
+>Gestiona les versions i és mantenidor de facto. Motor intern. Administració del projecte</contrib
+> <email
+>ipwizard@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Tony</firstname
+><surname
+>Bloomfield</surname
+> <contrib
+>Importador del GnuCash. Implementació de les bases de dades.</contrib
+> <email
+>tonybloom@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Robert</firstname
+><surname
+>Wadley</surname
+> <contrib
+>Artista. Icones, pantalla de benvinguda, vista de casa. Captures de pantalla.</contrib
+> <email
+>robntina@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Alvaro</firstname
+><surname
+>Soliverez</surname
+> <contrib
+>Previsions. Informes.</contrib
+> <email
+>asoliverez@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Fernando</firstname
+><surname
+>Vilas</surname
+> <contrib
+>Implementació de les bases de dades.</contrib
+> <email
+>fvilas@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Cristian</firstname
+><surname
+>Oneț</surname
+> <contrib
+>Pedaços i connectors.</contrib
+> <email
+>onet.cristian@gmail.com</email
+> </author>
+
+<author
+><firstname
+>Jack</firstname
+><othername
+>H.</othername
+><surname
+>Ostroff</surname
+> <contrib
+>Documentació.</contrib
+> <email
+>ostroffjh@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Felix</firstname
+><surname
+>Rodriguez</surname
+> <contrib
+>Administració del projecte, versions anteriors.</contrib
+> <email
+>frodriguez@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Kevin</firstname
+><surname
+>Tambascio</surname
+> <contrib
+>Implementació inicial de les inversions.</contrib
+> <email
+>ktambascio@users.sourceforge.net</email
+> </author>
+
+<!-- This person was previously listed as an author here, but is not currently
+     included in credits.docbook.  He should either be dropped from here or
+     included there.
+
+    <author
+><firstname
+>Arni</firstname
+><surname
+>Ingimundarson</surname>
+    <contrib
+>Developer, previous versions.</contrib>
+    <email
+>arniing@users.sourceforge.net</email
+></author>
+
+    These persons were not previously listed as authors here, but are included
+    in credits.docbook.  They should either be dropped from there or included
+    here.
+
+    <author
+><firstname
+>Ace</firstname
+><surname
+>Jones</surname>
+    <contrib
+>Reports.  OFX Import.  Online Quotes.  Documentatation.  Previous versions.</contrib>
+    <email
+>acejones@users.sourceforge.net</email
+></author>
+
+    <author
+><firstname
+>John</firstname
+><surname
+>C</surname>
+    <contrib
+>Developer, previous versions.</contrib>
+    <email
+>tacoturtle@users.sourceforge.net</email
+></author>
+
+    There are eight additional people in credits.docbook for "Special Thanks."
+    Should any of them be included here?  -->
+<date
+>17 de juny de 2016</date>
+<releaseinfo
+>KMyMoney 5.0</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kmymoney</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+<refmiscinfo class="source"
+>&kmymoney;</refmiscinfo>
+<refmiscinfo class="manual"
+>Programes executables</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kmymoney</command
+></refname>
+<refpurpose
+>El gestor de les finances personals per al &kde;</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>kmymoney</command
+> <group choice="opt"
+><option
+>--lang</option
+></group
+> <group choice="opt"
+><option
+>-n</option
+></group
+> <group choice="opt"
+><option
+>--timers</option
+> <replaceable
+> columna</replaceable
+></group
+> <group choice="opt"
+><option
+>--nocatch</option
+></group
+> <group choice="opt"
+><option
+>--trace</option
+></group
+> <group choice="opt"
+><option
+><replaceable
+>fitxer</replaceable
+></option
+></group
+> </cmdsynopsis>
+
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Descripció</title>
+
+<para
+>El &kmymoney; és el gestor de les finances personals per al &kde;. Proporciona les funcions necessàries per a consolidar els talonaris de xecs, gestionar els préstecs personals i ordenar els ingressos i despeses, utilitzant una interfície gràfica d'usuari similar a un talonari de xecs.</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>Opcions</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><option
+>--lang</option
+></term>
+<listitem>
+<para
+>L'idioma a emprar. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-n</option
+></term>
+<listitem>
+<para
+>No obris el darrer fitxer utilitzat. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--timers</option
+></term>
+<listitem>
+<para
+>Activa els temporitzadors de rendiment. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--nocatch</option
+></term>
+<listitem>
+<para
+>No captura globalment les excepcions no capturades. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--trace</option
+></term>
+<listitem>
+<para
+>Engega els traçats del programa. Aquesta opció només està disponible quan el &kmymoney; es compila en el mode de depuració. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--dump-actions</option
+></term>
+<listitem>
+<para
+>Bolca els noms de tots els objectes QAction definits a la sortida estàndard i surt. Aquesta opció només està disponible quan el &kmymoney; es compila en el mode de depuració. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+
+<refsect1>
+<title
+>Vegeu també</title>
+
+<simplelist>
+<member
+>La documentació completa per al &kmymoney; es manté com un manual en el format docbook. Si es troba adequadament instal·lat el programa &khelpcenter;, l'ordre <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/kmymoney</parameter
+></userinput
+> hauria de donar accés a tot el manual. De manera alternativa, podeu navegar pel manual emprant el &konqueror; donant-li l'<acronym
+>URL</acronym
+> <ulink url="help:/kmymoney"
+>help:/kmymoney</ulink
+></member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+</simplelist>
+
+</refsect1>
+
+</refentry>

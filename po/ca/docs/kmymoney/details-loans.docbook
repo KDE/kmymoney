@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.loans">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Darin.Strait; &Darin.Strait.mail; </author>
+  </authorgroup>
+  <date
+>25 de juliol de 2010</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Préstecs</title>
+
+<sect1 id="details.loans.general">
+<title
+>Entendre els préstecs</title>
+
+<para
+>Aquí oferim un resum general de com maneja els préstecs el &kmymoney;. Les regulacions i costums dels préstecs varien d'una localitat a una altra. Per a obtenir explicacions detallades dels préstecs, així com informació sobre la reglamentació i costums locals, consulteu altres recursos. </para>
+
+<para
+>Un préstec és un acord en virtut del qual un prestatari rep diners d'un prestador i acorda pagar els diners en una data futura. El &kmymoney; permet realitzar un seguiment dels préstecs mitjançant els quals vosaltres, com a prestatari, preneu els diners des de, o com a prestador, presteu els diners a una altra persona. La majoria de les persones demanen prestat més del que presten, per la qual cosa generalment sereu el prestatari i una companyia financera generalment serà el prestador. Si presteu diners a un familiar o amic, també podreu utilitzar el &kmymoney; per a fer un seguiment d'aquest préstec. </para>
+
+<para
+>Aquesta guia d'aprenentatge assumirà que esteu prenent prestat d'algun tipus de companyia financera, però els temes debatuts s'aplicaran igualment bé als préstecs que podríeu fer a una persona. La diferència principal entre demanar diners prestats i prestar-los és que s'utilitza una categoria de despeses per a realitzar un seguiment dels interessos quan es presten diners i una categoria d'ingressos per a realitzar un seguiment dels interessos quan es presten diners. </para>
+
+<formalpara
+><title
+>Principal del préstec</title>
+<para
+>L'import que es presta s'anomena <quote
+>import del préstec</quote
+> o <quote
+>principal</quote
+>. </para>
+</formalpara>
+
+<formalpara
+><title
+>Termini</title>
+<para
+>El període d'un préstec s'anomena <quote
+>termini</quote
+> del préstec. Al final del termini, s'haurà retornat al prestatari la totalitat del capital. Els terminis generalment s'expressen en setmanes, mesos o anys. Un termini també es pot expressar pel nombre de pagaments. Per exemple, un préstec a un any amb amortitzacions setmanals podria descriure's com un préstec a un any o un préstec amb 52 amortitzacions. </para>
+</formalpara>
+
+<formalpara
+><title
+>Amortitzacions</title>
+<para
+>L'amortització del principal al prestador generalment no es realitza com una suma global. En canvi, es realitzen una sèrie de pagaments, cadascun dels quals representa una part del capital. Tals pagaments a vegades es coneixen com a <quote
+>pagaments d'amortització</quote
+> i al &kmymoney; <quote
+>amortització</quote
+> es defineix com l'acte de pagar un préstec en quotes. </para>
+</formalpara>
+
+<formalpara
+><title
+>Freqüència dels pagaments</title>
+<para
+>La freqüència de les quotes es coneix com a <quote
+>Freqüència de pagament</quote
+> al &kmymoney;. Exemples del període poden ser setmanals, quinzenals, mensuals, trimestrals o anuals. Als Estats Units, els pagaments periòdics es realitzen amb major freqüència cada mes, per tant, el període del préstec serà d'un mes. </para>
+</formalpara>
+
+<formalpara
+><title
+>Tipus d'interès</title>
+<para
+>Pel privilegi de poder utilitzar els diners, el prestatari li pagarà al prestador una tarifa anomenada <quote
+>interès</quote
+>, normalment expressada com un percentatge de l'import del principal durant un període definit. Els tipus d'interès poden ser fixos, on el tipus d'interès no canviarà durant la vigència del préstec, o variable, on el tipus d'interès podrà canviar amb el temps. En general, el pagament dels interessos se sol incloure amb cada amortització periòdica. </para>
+</formalpara>
+
+<formalpara
+><title
+>Amortitzacions periòdiques</title>
+<para
+>Atès que aquestes amortitzacions generalment es realitzen de forma planificada, com setmanal, mensual, trimestral o anual, s'anomenen <quote
+>amortitzacions periòdiques</quote
+>. La suma de totes les amortitzacions periòdiques més l'amortització final s'afegiran al principal del préstec més els interessos. </para>
+</formalpara>
+
+<formalpara
+><title
+>Despeses</title>
+<para
+>Hi poden haver altres tarifes a més dels interessos que s'han de pagar amb cada quota. Aquestes s'anomenen <quote
+>tarifes recurrents</quote
+>. Els exemples de tarifes recurrents inclouen (però no es limiten necessàriament a): <itemizedlist>
+  <listitem>
+    <para
+>Pagaments de comptes de <quote
+>reserva</quote
+> o de <quote
+>garantia</quote
+>. (Els pagaments d'aquest tipus es fan servir habitualment per a acumular fons, per a pagar impostos de béns immobles anuals o bianuals). </para>
+  </listitem>
+
+  <listitem
+><para
+>Assegurança de la hipoteca</para
+></listitem>
+
+  <listitem
+><para
+>Assegurança d'invalidesa</para
+></listitem>
+
+  <listitem
+><para
+>Despesa de manteniment del compte de préstec</para
+></listitem>
+</itemizedlist>
+</para>
+</formalpara>
+
+<formalpara
+><title
+>Resum</title>
+<para
+>En resum, el prestatari rep una suma global del prestador a l'inici del préstec. El prestatari realitzarà un pagament periòdic al prestador. El pagament periòdic és la suma del pagament principal (el qual s'utilitza per a pagar el saldo del préstec) més el pagament dels interessos (el qual recompensa al prestador per a permetre l'ús de diners per part del prestatari) més qualsevol tarifa recurrent (la qual cobreixi qualsevol imprevist). Al final del préstec, el prestatari haurà pagat tot el capital. </para>
+</formalpara>
+</sect1>
+
+<sect1 id="details.loans.example">
+<title
+>Exemple</title>
+<para
+>Per exemple, podeu demanar prestat 25.000,00 dòlars per a un cotxe nou i acceptar pagar al banc un pagament cada mes durant 60 mesos. El tipus d'interès del préstec podria ser del 5,5%. </para>
+
+<para
+>En aquest escenari, l'import del préstec és de 25.000,00 dòlars. El termini del préstec és de 60 mesos o 5 anys. El termini del préstec també es podria descriure com 60 pagaments, ja que hi haurà un pagament per mes durant 5 anys. La freqüència de pagament serà d'un mes, ja que els pagaments periòdics es realitzaran un cop al mes. L'amortització periòdica, la qual és calculada pel &kmymoney;, serà de 477,53 dòlars. </para>
+
+<para
+>Una <quote
+>planificació del préstec</quote
+> és un gràfic o taula que mostra la data en què s'ha de realitzar un pagament i l'import de cada pagament periòdic. Sovint, aquestes planificacions desglossen el pagament periòdic en les seves parts constituents: l'amortització del principal, el pagament dels interessos i el pagament de les tarifes recurrents. </para>
+</sect1>
+
+<sect1 id="details.loans.creation">
+<title
+>Crear un préstec nou</title>
+
+<para
+>Al &kmymoney;, un préstec és un tipus de compte. Per tant, per a crear un préstec nou, comenceu seleccionant l'element de menú <menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Compte nou</guimenuitem
+></menuchoice
+>. Continueu responent les preguntes que us faci l'assistent. </para>
+
+<para
+>De manera opcional, un préstec podrà associar-se amb una institució en particular. Si esteu prenent prestat d'una companyia hipotecària o d'una companyia de préstecs per a cotxes, podreu crear una entrada de la institució que descrigui aquesta signatura i associarà la institució amb el préstec. Si esteu demanant prestat al vostre oncle Pep, no caldrà establir cap institució. </para>
+</sect1>
+
+<sect1 id="details.loans.extra-payments">
+<title
+>Fer amortitzacions extraordinàries del principal als préstecs</title>
+
+<para
+>Si voleu fer una amortització extraordinària del principal, podreu fer-ho. Simplement <link linkend="details.ledger.transactions"
+>introduïu una operació</link
+> utilitzant el llibre major. Aquesta amortització extraordinària del principal es tindrà en compte per al càlcul dels interessos que es realitzarà per al pagament periòdic següent. </para>
+
+<para
+>Els exemples de pagaments extraordinaris del principal inclouen (però no es limiten necessàriament a): </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Aportant 50 dòlars addicionals al mes.</para
+></listitem>
+
+  <listitem>
+    <para
+>Doblar l'amortització periòdica del principal per a cada període. (L'amortització del principal es trobarà per a qualsevol període en particular consultant la planificació del préstec). </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Fer una 13a amortització del principal cada any. (Això suposa un préstec que es paga en quotes mensuals). </para>
+  </listitem>
+</itemizedlist>
+
+<note
+><para
+>Si dobleu el principal reemborsat amb cada pagament periòdic, haureu de tornar a calcular la planificació del préstec per a cada quota. Això permetrà que hi hagi un valor exacte per a l'amortització del principal requerida amb cada quota. </para
+></note>
+</sect1>
+</chapter>
+

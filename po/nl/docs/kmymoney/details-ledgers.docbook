@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.ledgers">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+  </authorgroup>
+  <date
+>2019-04-02</date>
+  <releaseinfo
+>5.0.3</releaseinfo>
+</chapterinfo>
+
+<title
+>Grootboeken</title>
+
+<sect1 id="details.ledgers.view">
+<title
+>De grootboekweergave</title>
+
+<para
+>In de grootboekweergave is de functionaliteit van &kmymoney; het gegevensintegriteitscontrum. Deze weergave is er voor het invoeren, bekijken, verwijderen en bewerken van transactiegegevens in uw gedefinieerde accounts. De weergave is opgesplitst in drie hoofdgebieden: het filtergebied, de transactielijst en het invoergebied. </para>
+
+<para
+>Deze weergave biedt verschillende sleutelacties: zoeken en bekijken van transacties, nieuwe transacties invoeren; bestaande transacties bewerken, dupliceren, verwijderen of plannen. Daarnaast biedt het ook de mogelijkheid te verplaatsen, markeren en naar extra rekeningtransactiedetails te gaan. Andere functionaliteit binnen de Grootboekweergave omvat het wijzigen en transactiecontrole van het account. </para>
+  
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="ledgerview-numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Grootboekweergave</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>De weergave heeft drie elementen: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Het filtergebied</para
+></listitem>
+  <listitem
+><para
+>De transactielijst</para
+></listitem>
+  <listitem>
+    <para
+>Het transactieformulier, dat al of niet kan verschijnen, afhankelijk van uw configuratie. </para>
+  </listitem>
+</itemizedlist>
+
+<sect2 id="details.ledgers.view.filter">
+<title
+>Het filtergebied</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="accountdropdown.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Filtergebied</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>U kunt gemakkelijk elke rekening selecteren via de afrollijst met rekeningen bovenaan het weergavegebied. Merk op dat afhankelijk van het type rekening het <link linkend="details.ledger.transactionform"
+>transactieformulier</link
+> onderaan de weergave kan wijzigen. </para>
+
+<para
+>Rechts van de afrollijst met rekeningen zijn twee extra velden. Het filtervak biedt de mogelijkheid om naar overeenkomstige transacties te zoeken die getoond zullen worden in de lijstweergave. De gespecificeerde tekst kan zich bevinden in elk van de velden van de transactie voor de gespecificeerde rekening. Het statusveld is een afrollijst. De statusveldlijst biedt de selectie van: Elke status, Geïmporteerd, Komt overeen, Foutief, Niet gemarkeerd, Niet gecontroleerd, Gecontroleerd en geplande transacties. </para>
+
+</sect2>
+
+<sect2>
+<title
+>De transactielijst</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="translist.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transactielijst</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Nadat een transactie is ingevoerd, wordt het getoond in de lijst met transacties. U kunt ook transactie-eigenschappen wijzigen of zelfs nieuwe aanmaken direct in de lijst. De standaard ordening in de lijst met transacties van transacties is gesorteerd op datum met de meest recente transactie onderaan. Met de &RMB; op de kop van de lijst met transacties laat een dialoog zien die u in staat stelt om de ordening van de sortering van de transacties te wijzigen. Voor instructies over hoe de standaard volgorde van de sortering te wijzigen, zie de sectie <link linkend="details.settings.register.sorting"
+>Sorteringstabblad</link
+> van het hoofdstuk <link linkend="details.settings"
+>&kmymoney;-instellingen</link
+>. </para>
+
+<para
+>Merk op dat de saldokolom gebaseerd is op de nu getoonde volgorde van sortering en niet berekend zal worden als het beeld is gefilterd door het zoeken binnen het filtervak of afrolvak van transactietype, zoals boven beschreven. </para>
+
+<para
+>Aan de onderkant van de lijst met transacties toont &kmymoney; drie waarden: </para>
+
+<formalpara
+><title
+>Laatste transactiecontrole</title>
+  <para
+>Dit is de meest recente datum waarop u dit account hebt gecontroleerd. Controleren is een belangrijk proces voor vele rekeningen en is <link linkend="details.reconcile"
+>hier</link
+> beschreven. </para>
+</formalpara>
+
+<formalpara
+><title
+>Opgeschoond</title>
+  <para
+>Dit is het totaal van alle vrijgegeven en gecontroleerde transacties in deze rekening. Zie <link linkend="details.ledgers.cleared"
+>deze sectie</link
+> voor meer informatie over de vrijgegeven en gecontroleerde statussen van transacties. </para>
+</formalpara>
+
+<formalpara
+><title
+>Balans</title>
+  <para
+>Dit is waar &kmymoney; het totaalsaldo van de rekening toont, wat de som is van alle transacties in de rekening. Als u echter meer dan één transactie in de lijst met transacties selecteert, dan wijzigt dit in het tonen van de som van de geselecteerde transacties. Dit keert terug naar het saldo wanneer slechts één transactie is geselecteerd. </para>
+</formalpara>
+</sect2>
+
+<sect2>
+<title
+>Het transactieformulier</title>
+
+<para
+>De exacte indeling van het gebied onderaan de grootboekweergave hangt af van uw configuratie en het type getoonde rekening. In het algemeen echter bevat het velden voor alle details van een enkele transactie, evenals knoppen voor verschillende acties die toegepast kunnen worden op een transactie. Het wordt in meer detail beschreven in de volgende secties. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledger.transactions">
+<title
+>Transacties invoeren</title>
+
+<para
+>Er zijn twee methoden voor invoeren van transacties in het grootboek: met het formulier voor transacties en de gegevens direct in de lijst met transacties invoeren. Het formulier voor transacties wordt standaard getoond en dit is de methode die we eerst zullen beschrijven. het transactieformulier uitschakelen kan door naar de Grootboeksectie te gaan in het &kmymoney; configureren dat zich in Instellingen bevindt. </para>
+
+<para
+>De velden in het invoergebied komen overeen met de informatievelden in de lijst met transacties. Extra velden omvatten het memoveld, voor een meer gedetailleerde beschrijving van de transactie en een selectie van de categorie. De knop Splitsen biedt u het splitsen van de transactie in meerdere categorieën. </para>
+</sect1>
+
+<sect1 id="details.ledger.transactionform">
+<title
+>Het transactieformulier gebruiken</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transactieformulier</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Het transactieformulier onderaan de weergave van het grootboek is het interface voor aanmaken van transacties. </para>
+
+<para
+>Afhankelijk van het type van de transactie die u wilt invoeren, zijn er verschillende tabbladen beschikbaar in het transactieformulier. Klik op het tabblad dat het best uw transactie definieert (storting, overboeking of opname) en het formulier zal verschillende velden laden die beschikbaar zijn voor uw invoer. </para>
+
+<para
+>Merk op dat de actuele transactiemethode niet direct wordt gebruikt door &kmymoney; maar puur is voor doelen als groepering/rapportering. </para>
+
+<para
+>Als u niet zeker bent van welke methode te kiezen gebruik gewoon Storting voor geld naar de rekening, Opname voor geld dat van de rekening wordt gehaald en Overdracht voor geld dat van de ene rekening naar een andere gaat. De transactiemethoden en de verschillen tussen hen worden elders in meer detail behandeld. </para>
+
+<para
+>Selecteer de transactiemethode door te klikken op het van toepassing zijnde tabblad. </para>
+
+<sect2>
+<title
+>De velden van een transactie</title>
+
+<para
+>de informatie in met gebruik van de volgende notities in de beschikbare velden. Merk op dat vele velden 'Automatisch aanvullen' aan hebben staan. Dat betekent dat als u begint met typen, &kmymoney; alternatieven biedt die overeenkomen met de tekens die u toto zover hebt ingevoerd. Om een item te selecteren klik erop met de muis of toetsenbord of als uw item niet in de lijst staat blijf dan typen om de nieuwe waarde toe te voegen. De volgende keer dat u de waarde intypt zal &kmymoney; deze voor u vinden na de eerste paar tekens die zijn ingevoerd. </para>
+
+<sect3>
+<title
+>De debiteur</title>
+
+<para
+>De debiteur is diegene waar het geld vandaan kwam. Als de debiteur een nieuw item is zal &kmymoney; vragen of u deze wilt toevoegen aan de lijst met debiteuren. Elke andere informatie gerelateerd aan een debiteur of betaler, zoals adres, telefoonnummer en rekeningnummer kan later bijgewerkt worden in Debiteurenweergave. </para>
+</sect3>
+
+<sect3>
+<title
+>De categorie</title>
+
+<para
+>De categorie associeert een transactie met een categorie inkomen of uitgave voor doelen van boekhouden en rapporteren en maakt het mogelijk dat u bepaalde transacties groepeert. Typ de naam van de categorie in het gedefinieerde veld. Als u de categorie hebt ingevoerd en het bestaat niet dan zal &kmymoney; vragen of u een nieuwe wilt aanmaken. Als de selectie Ja is zal &kmymoney; een dialoogvenster openen die de verdere definitie van de categorie biedt gebaseerd op karakteristieken Algemeen, Hiërarchie en Belasting. </para>
+
+<para
+>Als u delen van de transactie wilt associëren met verschillende categorieën kan &kmymoney; deze behoefte vervullen. Een voorbeeldtransactie kan een opname van 50 bij een geldautomaat zijn waarvan u 10 gebruikt aan eten, 20 aan bier en 20 als reservegeld. Aan de transactie zullen daarom drie categorieën worden toegekend: Eten, Bier en Kasgeld. Om dit te doen moet u <link linkend="details.ledgers.split"
+>Transacties splitsen</link
+> gebruiken, die onderstaand in meer detail is beschreven. </para>
+
+<para
+>Zie de speciale sectie <link linkend="reference.widgets"
+> velden van &kmymoney;</link
+> voor meer informatie over hoe dit veld te gebruiken. </para>
+</sect3>
+
+<sect3>
+<title
+>De tag</title>
+
+<para
+>Tags zijn gelijk aan Categorieën en kunnen gebruikt worden om een orthogonaal zicht te bieden op Categorieën. Ze bieden de mogelijkheid transacties te groeperen binnen een categorie gebaseerd op gedefinieerde behoeften. Deze behoefte kan gedefinieerd worden op Persoon, Plaats of Ding. U kunt bijvoorbeeld een Categorie hebben voor elk verschillend type uitgave voor de auto en dan een Tag hebben voor elk voertuig. Evenals met Categorieën kunt u uit de afrollijst selecteren of een nieuwe tagnaam intypten en gevraagd worden of u een nieuwe tag met die naam wilt aanmaken. Binnen het Tagveld zal &kmymoney; meerdere tags bieden om ingevoerd te worden binnen een enkele transactie. U kunt ook een tag invoeren op een individuele splitsing. </para>
+</sect3>
+
+<sect3>
+<title
+>Het memo</title>
+
+<para
+>Een memo met meerdere regels kan ingevoerd worden als u zich verdere details van een specifieke transactie wilt herinneren. </para>
+</sect3>
+
+<sect3>
+<title
+>Het controlenummer</title>
+
+<para
+>Het nummer van de cheque kan, indien nodig, ingevoerd worden. Merk op dat het nummerveld van de cheque, indien gewenst, zichtbaar of onzichtbaar in het grootboek gemaakt kan worden. Dit is te configureren in de Grootboekinstellingendialoog. </para>
+</sect3>
+
+<sect3>
+<title
+>De datum</title>
+
+<para
+>De transactiedatum moet ingevoerd worden om te specificeren wanneer de transactie plaatsvond. Zie de speciale sectie <link linkend="reference.widgets"
+>&kmymoney; velden</link
+> voor meer informatie over hoe het datuminvoerveld gebruikt kan worden om datums invoeren sneller en gemakkelijker te maken. Voor transacties in rekeningen voor cheques en creditcards, is de keuze aan u om de actuele datum te gebruiken (toen u de cheque uitschreef of de koop deed) of de datum van verwerking zoals gerapporteerd door de bank of creditcardmaatschappij. De actuele datum gebruiken kan u, bijvoorbeeld, helpen na te gaan wanneer u de aankoop deed, maar het afschrift of de gedownloade gegevens van de bank zal waarschijnlijk de verwerkingsdatum te gebruiken. </para>
+</sect3>
+
+<sect3>
+<title
+>De hoeveelheid</title>
+
+<para
+>Voer tenslotte de hoeveelheid van de transactie in in het vereiste veld. Merk op dat een eenvoudige rekenmachine getoond kan worden, ofwel door te klikken op het pictogram rechts van het veld met de hoeveelheid of door het %-teken in het veld in te voeren of door deze mathematische symbolen: +-*/ in een formule in te voeren, zoals in <emphasis
+>12 + 3</emphasis
+>. Bij invoeren van het plusteken zal de rekenmachine worden geopend. Merk op dat alleen het resultaat van elke berekening zal worden opgeslagen als de hoeveelheid van de transactie. </para>
+
+<para
+>Wanneer u tevreden bent dat alle velden adequat zijn ingevuld, klik op <guibutton
+>Enter</guibutton
+>. Als u per ongeluk drukt of klikt op <guibutton
+>Enter</guibutton
+> voordat u gereed bent bij invoeren van alle gegevens, klik op <guibutton
+>Bewerken</guibutton
+> om invoeren van gegevens te hervatten. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledger.direct">
+<title
+>Transacties direct invoeren in de lijst</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform-off.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Direct invoeren van transacties</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>De tweede methode van invoeren van transacties in het grootboek heeft betrekking op het direct bewerken van de transactielijst. </para>
+
+<para
+>Om dit te doen moet u eerst &kmymoney; laten weten dat u het transactieformulier niet wilt gebruiken door de instellingendialoog te gebruiken en de optie <guilabel
+>Transactieformulier tonen</guilabel
+> te deactiveren. </para>
+
+<para
+>Dit wordt gedaan door het menu-item <menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>&kmymoney; configureren...</guimenuitem
+></menuchoice
+> te selecteren en het registreerpictogram <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="ledgers_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+> </guiicon
+> uit de lijst links. De te deactiveren optie heeft het label <guilabel
+>Transactieformulier</guilabel
+>. Indien gereed, klik op <guibutton
+>OK</guibutton
+> om gereed te zijn direct transacties in te voeren of te bewerken. </para>
+
+<sect2>
+<title
+>Het bewerken beginnen</title>
+
+<para
+>Om een nieuwe transactie in het register in te voeren kunt u nu ofwel klikken op een leeg item, op <keycombo action="simul"
+>&Ctrl;&Ins;</keycombo
+> drukken of klikken op <guibutton
+>Nieuw</guibutton
+> onderaan het venster. De pijltjestoetsen &Up; en &Down; laten u navigeren door de lijst. Na indrukken van &Enter; of dubbel te klikken op een item toont de transactielijst de vereiste velden om de transactie in te voeren en wacht op invoer. </para>
+
+<para
+>Om door de velden te lopen druk op de toets &Tab; en indien gereed druk op &Enter; om de wijzigingen op te slaan of &Esc; om te annuleren. </para>
+
+<para
+>In het geval de optie <guilabel
+>Enter gebruiken om tussen velden te wisselen</guilabel
+> is geselecteerd, zal toets &Enter; naar het volgende veld gaan evenals de toets &Tab; behalve voor het laatste invoerveld waar het de gegevens opslaat. </para>
+
+<para
+>Welke methode u gebruikt om transacties in te voeren is aan u en is een kwestie van persoonlijke voorkeur. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledgers.split">
+<title id="details.ledgers.split.title"
+>Transacties splitsen</title>
+
+<para
+>De functie transactie splitsen stelt u in staat om een transactie op te splitsen in meerdere categorieën, die bijvoorbeeld de verschillende items representeren gekocht in een enkele aankoop in een winkel. </para
+> 
+
+<para
+>Om een gesplitste transactie in te voeren, start u een nieuwe transactie met gebruik van ofwel het transactieformulier of de transactielijst, inclusief invoeren van de totale hoeveelheid. In plaats van een categorie te selecteren, klikt u op de knop <guibutton
+>Splitsen</guibutton
+> rechts van het veld <guilabel
+>Categorie</guilabel
+>. Als u al een categorie hebt geselecteerd, dan wordt dat het eerste item in het bewerkingsscherm voor splitsen. </para
+> 
+ 
+<para
+>In het scherm van de bewerker voor splitsen, dubbelklik op een lege regel om een nieuwe sub-transactie in te voeren of druk op <keycombo action="simul"
+>&Ctrl;&Ins;</keycombo
+>. Specificeer de categorie, voeg een (optioneel) memo toe en voer de hoeveelheid in. Om dit deel van de splitsing op te slaan, druk op het groene vinkje onder de categorie. Om te annuleren, druk op het rode kruisje. </para
+> 
+ 
+<para
+>Na invoeren van een splitsing wordt onderaan de bewerker voor splitsen getoond hoeveel van de totale transactie nog niet is toegekend. Na invoeren van alle splitsingen, druk op de knop <guibutton
+>OK</guibutton
+> om de gehele transactie op te slaan. Als er nog steeds een niet toegekende hoeveelheid is, zult u gevraagd worden om ofwel terug te keren naar het bewerken van het splitsen, de totale hoeveelheid in de transactie te wijzigen of een gedeelte van de transactie niet toegekend te laten. </para>
+
+<para
+>Merk op dat het veld categorie in het transactieformulier of de lijst met transacties nu <emphasis
+>Transactie splitsen</emphasis
+> toont. </para
+> 
+
+<para>
+	<screenshot>
+	<screeninfo
+>Transacties splitsen</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="split_transaction.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transactie splitsen</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+</sect1>
+
+<sect1 id="details.ledger.edit">
+<title
+>Transacties bewerken</title>
+
+<para
+>Om een transactie te bewerken, selecteer het in de lijstweergave en ofwel klik op <guibutton
+>Bewerken</guibutton
+> in het transactieformulier of klik rechts op het item en selecteer <guimenuitem
+>Bewerken</guimenuitem
+> uit het pop-up-menu. Als u transacties direct in de lijst bewerkt kunt u de transactie eenvoudig bewerken door dubbel te klikken op een item of door &Enter; in te drukken wanneer een transactie is geaccentueerd. </para>
+</sect1>
+
+<sect1 id="details.ledger.delete">
+<title
+>Transacties verwijderen</title>
+
+<para
+>Om een transactie te verwijderen, selecteer het in de lijstweergave, klik rechts op het item en selecteer <guimenuitem
+>Verwijderen</guimenuitem
+> uit het pop-up-menu wanneer het verschijnt of klik op <guibutton
+>Verwijderen</guibutton
+> in het transactieformulier. </para>
+</sect1>
+
+<sect1 id="details.ledgers.match">
+<title id="details.ledgers.match.title"
+>Identieke transacties</title>
+
+<para
+>Algemeen zult u, bij het importeren van transacties, ofwel via QIF, OFX or HBCI, &kmymoney; automatisch proberen ze identiek te maken met bestaande transacties. Om verschillen in datums toe te staan is er een standaard instelling van 4 dagen, die gewijzigd kan worden in de instellingen - Registreren/Importeren. Elke transactie die zo identiek is zal geaccentueerd worden in groen. Bij voltooien van het importeren zou u deze moeten bekijken en ze accepteren of het identiek zijn verwijderen. </para>
+
+<para
+>Als u zou vinden dat een geïmporteerde transactie niet automatisch identiek is met een bestaande transactie wanneer dat wel zou moeten, dan kunt u ze handmatig identiek maken. Merk op er is een verschil tussen het handmatig identiek maken van twee transacties en eenvoudig een ervan verwijderen, zelfs als het kan lijken dat het hetzelfde effect heeft. Speciaal met OFX of HBCI is het belangrijk geen geïmporteerde transactie te verwijderen, omdat u zult merken dat de volgende keer dat u uw transacties importeert, de verwijderde transactie opnieuw kan verschijnen. Dit komt doordat het moderne importformaat zoals OFX en HBCI een <quote
+>Transactie-ID</quote
+> gebruiken om transacties te identificeren. Wanneer u de geïmporteerde transactie verwijdert, wordt de transactie-ID ook verwijdert, het importprogramma heeft dus geen manier om te weten dat deze transactie al was geïmporteerd. </para
+> 
+
+<para
+>De oplossing is om &kmymoney; te vertellen dat de transacties identiek zijn, met gebruik van het handmatige interface voor identiek zijn. Dit stelt u in staat om een geïmporteerde transactie identiek te maken met een handmatig ingevoerde (niet-geïmporteerde) transactie. Om dat te doen selecteert u een van de identiek te maken transacties door er op te klikken, daarna selecteert u de andere door er links op te klikken met indrukken van de toets &Ctrl; en daarna <guimenuitem
+>Identiek</guimenuitem
+> uit het contextmenu te selecteren. Dit zal de twee transacties identiek maken en samenbrengen. De waarden van beide transacties moeten hetzelfde zijn om het identiek zijn te laten werken, behalve dat de datums mogen verschillen zoals gespecificeerd is de instellingen, zoals boven beschreven. Als het resultaat u bevalt, klik rechts op de identieke transactie en selecteer daarna <guibutton
+>Accepteren</guibutton
+>. </para>
+
+<para
+>Tijdens het importeren van online afschriften - ofwel direct of door een gedownload bestand - voert &kmymoney; identiek maken uit zo goed als dat kan gebaseerd op de naam van de debiteur en het bedrag van de transactie. In het geval van een ongeldig identiek zijn, kan een deze ongedaan worden gemaakt. </para>
+
+<note>
+  <para
+>Het interface voor overeenkomsten staat u niet toe om twee transacties die beiden zijn geïmporteerd identiek te verklaren. Evenzo staat het niet toe twee transacties die beiden handmatig zijn ingevoerd identiek te verklaren. </para>
+</note>
+</sect1>
+
+<sect1 id="details.ledgers.cleared">
+<title
+>De status van een transactie begrijpen</title>
+
+<para
+>Een transactie kan een van drie statussen hebben: niet-gecontroleerd (blanco), geklaard (C) of gecontroleerd (R). Wanneer een transactie is ingevoerd heeft het de status niet-gecontroleerd. Nadat de bank de transactie heeft gemeld, kan de gebruiker het klaren en dus transformeren naar zijn status (C). Wanneer u een bankafschrift hebt ontvangen van de bank, dan zouden alle geklaarde transacties op het bankafschrift moeten staan. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>De status geklaard begrijpen</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="cleared_state.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>gewiste status</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Wanneer u uw rekening hebt <link linkend="details.reconcile"
+>gecontroleeerd</link
+>, merkt u in werkelijkheid de afschriften als geklaard en controleert u dat het verschil tussen het beginsaldo en de geklaarde transacties gelijk is aam het eindsaldo van het afschrift. Wanneer dat het geval is kunt u can 'controleren beëindigen' wat in werkelijkheid de status van alle geklaarde transacties (C) wijzigt naar gecontroleerd (R). </para>
+
+<para
+>Als u een transactie wilt bewerken met minstens één splitsing gemarkeerd als gecontroleerd (R), dan krijgt u een waarschuwing. </para>
+</sect1>
+
+<sect1 id="details.ledgers.settings">
+<title
+>Transactie-instellingen wijzigen</title>
+
+<para
+>Er zijn verschillende opties die het uiterlijk en gedrag van de grootboekweergave wijzigen in termen van transacties. Deze instellingen worden gevonden door <guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>&kmymoney; configureren</guimenuitem
+> te selecteren uit de menubalk en het Grootboekpictogram <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="ledgers_view.png" format="PNG"/> </imageobject
+></inlinemediaobject
+></guiicon
+> uit de linker lijst te selecteren. </para
+> 
+
+<para
+>De meeste instellingen tonen duidelijk hun doel. Voor alle helderheid worden verschillende instellingen onderstaand uitgelegd. </para>
+<!-- FIXME - if these are explained in the chapter on settings, just refer to that
+     as is done above, and don't duplicate here.  Leaving for now, but should clean
+     up later. -->
+
+<itemizedlist>
+  <listitem>
+    <para
+>Transactieformulier tonen (onder het tabblad Tonen) - schakel om om het transactieformulier onderaan dit scherm te verbergen. Transacties kunnen nog steeds direct ingevoerd worden in een lege regel aan het eind van de transactielijst, via een automatisch compact invoergebied. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Deze afbeeldingen tonen hoe het directe transactie-item er uit ziet vergeleken met het transactieformulier. </para>
+
+<para
+>Het transactieformulier</para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Het transactieformulier</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transactieformulier</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Direct ingevoerde transacties</para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Direct ingevoerde transacties</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform-off.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Directe invoer</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Wijzigingen behouden bij selecteren van een andere transactie/splitsing - door de volgende regel in de transactielijst of splitsingsbewerker te selecteren, de wijzigen worden bewaard, in plaats van het standaard gedrag waar u op het groene activeringsteken moet drukken om wijzigingen op te slaan. </para>
+  </listitem>
+</itemizedlist>
+
+</sect1>
+
+<sect1 id="details.ledgers.other">
+<title id="details.ledgers.other.title"
+>Andere functionaliteit</title>
+
+<para
+>Aanvullende opties zijn beschikbaar uit het menu <guimenu
+>Transactie-opties</guimenu
+>, toegankelijk door rechts te klikken op een transactie in de lijst. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Het submenu transactie-opties</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="ledger_more.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transactie-opties</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Opties omvatten springen naar de Debiteurenweergave voor de debiteur in de transactie, aanmaken van periodieke betalingen en wijzigen van de status gecontroleerd of geklaard. </para>
+
+<para
+>Om de informatie van een rekening uit de grootboekweergave te bewerken, selecteer <guimenu
+>Rekening</guimenu
+> uit de menubalk. Vanuit het menu-item <guimenuitem
+>Rekening bewerken...</guimenuitem
+> kunt u de details van de rekening wijzigen. Er is ook een menu-item om om het menu Controleren te voorschijn te roepen, wat u toestaat transacties overeen te laten komen met een officieel bankafschrift of creditcardafschrift. </para>
+</sect1>
+</chapter>
+

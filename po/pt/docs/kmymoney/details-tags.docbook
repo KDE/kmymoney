@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.tags">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Cristian.Onet; &Cristian.Onet.mail;</author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Marcas</title>
+
+<para
+>O ecrã de Marcas oferece informações detalhadas sobre todas as marcas que estão aplicadas sobre as transacções. O ecrã de Marcas está dividido em duas áreas principais: uma lista de marcas e uma área de detalhes. </para>
+
+<sect1 id="details.tags.list">
+<title
+>Lista de Marcas</title>
+
+<para
+>Aparece do lado esquerdo deste ecrã uma lista com as marcas. A lista de marcas está ordenada de forma alfabética. <screenshot
+> <mediaobject
+> <imageobject>
+  <imagedata fileref="tags.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+  </screenshot>
+</para>
+
+<sect2>
+<title
+>Adicionar uma Marca</title>
+<para
+>Para adicionar uma marca, carregue no ícone para Adicionar uma Marca <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="list-add.png"/></imageobject
+></inlinemediaobject
+></guiicon
+> ou carregue com o botão direito sobre qualquer marca e escolha <guimenuitem
+>Nova marca</guimenuitem
+>. Isto irá criar uma marca nova chamada <quote
+>Marca nova</quote
+>. Carregue com o botão direito do rato sobre esta marca e seleccione a opção <guimenuitem
+>Mudar o nome da marca</guimenuitem
+> para introduzir o nome da nova marca. </para>
+</sect2>
+
+<sect2>
+<title
+>Mudar o Nome de uma Marca</title>
+<para
+>Para mudar o nome de uma marca, basta carregar no nome da marca, para a seleccionar, e depois carregar no botão <guiicon
+>Mudar o nome da marca</guiicon
+> (entre os ícones para adicionar e remover) ou então carregar com o botão direito sobre o nome e seleccionar a opção <guimenuitem
+>Mudar o nome da marca</guimenuitem
+> para que este nome possa ser editado. A alteração do nome irá afectá-lo em todas as transacções em que ele aparece. </para>
+</sect2>
+
+<sect2>
+<title
+>Apagar uma Marca</title>
+<para
+>Para remover uma marca, carregue no ícone para apagar uma marca <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="list-remove.png"/></imageobject
+></inlinemediaobject
+></guiicon
+> ou carregue com o botão direito do rato sobre o nome e seleccione a opção <guimenuitem
+>Apagar a marca</guimenuitem
+>. Se esta tiver associada alguma transacção, ser-lhe-a apresentada uma janela que permitirá associar as transacções afectadas a uma marca diferente, se necessário. </para>
+
+<note>
+<para
+>Dado que as marcas já foram introduzidas no &kappname; na versão 4.7, nenhum dos métodos de importação de dados são capazes de importar as marcas. Reconhece-se que é uma funcionalidade importante, e cada método de importação provavelmente a irá introduzir numa versão futura. </para>
+</note>
+</sect2>
+</sect1>
+
+<sect1 id="details.tags.info">
+<title
+>Transacções marcadas e detalhes da marca</title>
+<para
+>Para ver as transacções ou para ver e editar a informação associada a uma dada marca, seleccione-a na lista e seleccione depois a página apropriada do lado direito da janela. <screenshot>
+  <screeninfo
+>A página de detalhes da marca</screeninfo>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="tag_details.png" format="PNG"/>
+  </imageobject>
+  <textobject>
+  <phrase
+>Detalhes da marca</phrase>
+  </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.tags.info.transactions">
+<title
+>Transacções marcadas</title>
+<para
+>Para ver uma lista das transacções associadas à marca seleccionada, seleccione a página <guilabel
+>Transacções</guilabel
+>. Esta lista é semelhante à lista de transacções de um beneficiário. Poderá fazer duplo-click sobre uma transacção para que seja remetido à área do livro de registos dessa transacção para a conta em que a transacção foi marcada. </para>
+</sect2>
+
+
+<sect2 id="details.tags.info.details">
+<title
+>Detalhes da marca</title>
+<para
+>Para ver e editar a informação associada a uma dada marca, seleccione a página de <guilabel
+>Detalhes</guilabel
+>. </para>
+  <itemizedlist>
+    <listitem>
+      <para
+>Poderá seleccionar a cor usada para realçar as transacções associadas a esta marca. Se carregar na barra de cores, irá obter uma janela de selecção de cores. </para>
+    </listitem>
+    <listitem>
+      <para
+>Para modificar as notas associadas à marca, basta editar o texto no campo. </para>
+    </listitem>
+    <listitem>
+      <para
+>Se assinalar a opção <guilabel
+>Fechado</guilabel
+>, não irá alterar nenhuma das transacções associadas à marca, mas irá impedir a atribuição da marca a outras transacções adicionais. </para>
+    </listitem>
+  </itemizedlist>
+<para
+>Quanto terminar, não se esqueça de carregar no botão <guiicon
+>Actualizar</guiicon
+>, ainda que seja questionado, caso saia da janela sem o ter feito. </para>
+</sect2>
+</sect1>
+</chapter>

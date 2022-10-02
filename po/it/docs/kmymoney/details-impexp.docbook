@@ -1,0 +1,1126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.impexp">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+  </authorgroup>
+  <date
+>03/07/2011</date>
+  <releaseinfo
+>4.6</releaseinfo>
+</chapterinfo>
+
+<title
+>Importazione ed esportazione</title>
+
+<sect1 id="details.impexp.gnucash">
+<sect1info>
+  <author
+>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
+</sect1info>
+
+<title
+>Strumento di importazione di &gnucash;</title>
+
+<sect2>
+<title
+>File di &gnucash;</title>
+
+<para
+>Lo strumento di importazione da &gnucash; di &kmymoney; gestisce la lettura diretta dei file standard (&XML;) prodotti da &gnucash;, nelle versioni 1.8 e 2.0. I seguenti non sono supportati: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>importazione di dati da database (Postgres)</para
+></listitem>
+  <listitem
+><para
+>importazione di file «multi-book»</para
+></listitem>
+  <listitem
+><para
+>importazione in un file di &kmymoney; esistente</para
+></listitem>
+  <listitem
+><para
+>importazione di funzionalità specifiche delle piccole aziende (impiegati, fatture, &etc;)</para
+></listitem>
+  <listitem
+><para
+>esportazione in file di &gnucash;.</para
+></listitem>
+</itemizedlist>
+
+<para
+>L'importazione probabilmente funzionerà correttamente solo se si usa un file valido. Si consiglia di eseguire la voce di menu <menuchoice
+><guimenu
+>Azioni</guimenu
+><guimenuitem
+>Controlla e ripara tutto</guimenuitem
+></menuchoice
+> di &gnucash; prima di provare a importare il file. </para>
+
+<para
+>I file possono essere aperti specificando il nome nella riga di comando (<command
+>kmymoney &lt;percorso del file&gt;</command
+>), o dalla voce di menu di &kmymoney;, <menuchoice
+> <shortcut
+><keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+></shortcut
+> <guimenu
+>File</guimenu
+><guimenuitem
+>Apri</guimenuitem
+> </menuchoice
+> o <menuchoice
+> <guimenu
+>File</guimenu
+><guisubmenu
+>Importa</guisubmenu
+> </menuchoice
+> </para>
+
+<para
+>I due programmi sono abbastanza simili da permettere di importare la maggior parte dei dati giornalieri in modo semplice. Comunque ci sono delle parti diverse, e vengono fornite varie opzioni per gestire queste differenze. Le sezioni seguenti spiegano alcune delle differenze; capendole si possono importare meglio i dati. </para>
+</sect2>
+
+<sect2>
+<title
+>Cose simili, differenze e terminologia</title>
+
+<sect3>
+<title
+>Utilizzo in una piccola azienda</title>
+
+<para
+>Notare che &kmymoney; è un programma per la gestione delle finanze <emphasis
+>personali</emphasis
+> e, come tale, non supporta direttamente le funzioni aziendali di &gnucash;, come le tabelle delle imposte, il libro paga e il tracciamento dei lotti. I conti di credito e di debito presenti nel file saranno importati rispettivamente come conti di passività e attività. </para>
+</sect3>
+
+<sect3>
+<title
+>Conti</title>
+
+<sect4>
+<title
+>Tipi di conto</title>
+
+<para
+>In entrambi i programmi, il livello più alto di struttura nel file è il conto. &kmymoney; supporta 5 tipi principali di conti: Attività, Passività, Entrate, Uscite e Patrimonio; ognuno dei quali può avere diversi sottotipi, &eg; Conto corrente, Carta di credito, &etc;. &kmymoney; include un conto «standard» per ognuno di questi cinque tipi, e tutti gli altri conti vengono subordinati a questi. &kmymoney; garantisce una maggiore coerenza (o meno flessibilità, in base al punto di vista) tra tipi di conto rispetto a &gnucash;; le incoerenze rilevate durante l'importazione saranno corrette. Ciò può causare una struttura leggermente diversa dei conti, che può essere modificata, ragionevolmente, alla fine dell'importazione. </para>
+</sect4>
+
+<sect4>
+<title
+>Categorie</title>
+
+<para
+>&kmymoney; usa il termine Categoria per indicare un conto di tipo Entrata o Uscita. A differenza di &gnucash;, questi conti non sono considerati «libri mastri» e l'inserimento di cartelle di transazioni nelle categorie non è supportato; durante l'inserimento delle transazioni, sono mappate in altri tipi di conto. </para>
+</sect4>
+
+<sect4>
+<title
+>Struttura e segnaposto</title>
+
+<para
+>&gnucash; supporta l'utilizzo di conti Segnaposto. Di fatto, sono conti in sola lettura in cui non si possono inserire transazioni, ma funzionano in modo simile alle cartelle in una struttura di cartelle, come contenitori di altri conti. &kmymoney; non supporta questa funzione in modo nativo, ma fornisce le relazioni padre/figlio, quindi i segnaposto vengono simulati creando conti vuoti. </para>
+</sect4>
+
+<sect4>
+<title
+>Mappatura dei tipi di conto</title>
+
+<informaltable frame='all'>
+<tgroup cols='2' align='left' colsep='1' rowsep='1'>
+<thead>
+  <row>
+    <entry
+>Tipo di &gnucash;</entry
+><entry
+>Tipo di &kmymoney;</entry>
+  </row>
+</thead>
+<tbody>
+  <row>
+    <entry
+><literal
+>BANK</literal
+></entry
+><entry
+><literal
+>Checking</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>CHECKING</literal
+></entry
+><entry
+><literal
+>Checking</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>SAVINGS</literal
+></entry
+><entry
+><literal
+>Savings</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>ASSET</literal
+></entry
+><entry
+><literal
+>Asset</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>CASH</literal
+></entry
+><entry
+><literal
+>Cash</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>CURRENCY</literal
+></entry
+><entry
+><literal
+>Cash</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>MONEYMRKT</literal
+></entry
+><entry
+><literal
+>MoneyMarket</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>STOCK</literal
+></entry
+><entry
+><literal
+>Stock</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>MUTUAL</literal
+></entry
+><entry
+><literal
+>Stock</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>EQUITY</literal
+></entry
+><entry
+><literal
+>Equity</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>LIABILITY</literal
+></entry
+><entry
+><literal
+>Liability</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>CREDIT</literal
+></entry
+><entry
+><literal
+>CreditCard</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>INCOME</literal
+></entry
+><entry
+><literal
+>Income</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>EXPENSE</literal
+></entry
+><entry
+><literal
+>Expense</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>RECEIVABLE</literal
+></entry
+><entry
+><literal
+>Asset</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>PAYABLE</literal
+></entry
+><entry
+><literal
+>Liability</literal
+></entry>
+  </row>
+</tbody>
+</tgroup>
+</informaltable>
+</sect4>
+</sect3>
+
+<sect3>
+<title
+>Transazioni e suddivisioni</title>
+
+<sect4>
+<title
+>Transazioni bilanciate</title>
+
+<para
+>Come in &gnucash;, i dati sono inseriti sotto forma di transazioni, ognuna generalmente costituita da due o più parti. Di fatto, le transazioni valide di &gnucash; contengono sempre almeno due parti, e per essere conformi allo standard contabile della partita doppia, devono essere bilanciate (&ie; devono avere somma zero). &kmymoney; incoraggia a seguire questo schema, ma non obbliga a farlo; comunque, ogni transazione importata che non è bilanciata sarà segnalata nel registro come un problema. </para>
+</sect4>
+
+<sect4>
+<title
+>Beneficiari</title>
+
+<para
+>&kmymoney; preferisce che ogni transazione abbia un beneficiario (un termine generico usato per riferirsi sia ai beneficiari sia a chi paga), e, a differenza di &gnucash;, ne viene mantenuto un elenco. I nomi dei beneficiari sono generati durante l'importazione, utilizzando il campo Descrizione della transazione di &gnucash;. </para>
+</sect4>
+
+<sect4>
+<title
+>Trasferimenti</title>
+
+<para
+>&kmymoney; usa il termine Trasferimenti per indicare una transazione che non riguarda una Categoria, ma trasferisce solo soldi tra conti di Entrate/Uscite. </para>
+</sect4>
+
+<sect4>
+<title
+>Riconciliazioni</title>
+
+<para
+>&kmymoney; fornisce una funzione per la riconciliazione dei conti, simile a quella di &gnucash;; sarà importato lo stato corrispondente della transazione. </para>
+</sect4>
+</sect3>
+
+<sect3>
+<title
+>Beni</title>
+
+<para
+>&gnucash; usa il termine Bene per indicare sia i soldi sia le risorse non monetarie. Queste due cose sono separate in &kmymoney;. </para>
+
+<sect4>
+<title
+>Valute</title>
+
+<para
+>&kmymoney; supporta nativamente tutte le <link linkend="details.currencies"
+>valute</link
+> straniere. &kmymoney; richiede anche di specificare una valuta di base, che verrà utilizzata in modo predefinito per i nuovi conti. Durante l'importazione verrà selezionata la valuta di base più probabile, comunque è possibile modificare questa scelta. </para>
+
+<note
+><para
+>&kmymoney; correntemente non supporta i conti in valute «obsolete» (a parte quelle sostituite dall'Euro). È necessario eliminare questi conti dal file &gnucash; prima dell'importazione. Speriamo di migliorare questa situazione in una versione futura. </para
+></note>
+</sect4>
+
+<sect4 id="gncsecurities">
+<title
+>Titoli e investimenti</title>
+
+<para
+>Le attività non monetarie (normalmente azioni e obbligazioni) vengono chiamate strumenti finanziari in &kmymoney; e rappresentano la differenza principale tra i due programmi, perché &kmymoney; richiede che i conti che contengono titoli facciano parte di conti di investimento. Questo aspetto è descritto in dettaglio nel capitolo sugli <link linkend="details.investments"
+>Investimenti</link
+>. Nonostante gli utenti possano usare questo tipo di relazione, &gnucash; non la impone, quindi il processo di importazione non è in grado di rilevarla e convertirla in automatico. Per questa situazione vengono fornite tre possibilità: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>creare un conto di investimento separato per ogni titolo, con lo stesso nome del titolo;</para>
+  </listitem>
+
+  <listitem>
+    <para
+>creare un unico conto di investimento che conterrà tutti i conti di titoli;</para>
+  </listitem>
+
+  <listitem>
+    <para
+>creare diversi conti di investimento e assegnare manualmente i titoli ai vari conti.</para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Si può scegliere l'opzione desiderata in base a ciò che si vuole ottenere. In alcuni casi potrebbe essere necessaria una riorganizzazione manuale dei conti dopo l'importazione. </para>
+</sect4>
+
+<sect4>
+<title
+>Tassi di cambio e prezzi</title>
+
+<para
+>I prezzi dei titoli e i tassi di cambio delle valute saranno importati come sono visualizzati nell'editor dei prezzi di &gnucash;. Inoltre, saranno aggiunti i tassi di cambio relativi alle transazioni che riguardano titoli o più valute. </para>
+</sect4>
+
+<sect4 id="details.impexp.gncquotes">
+<title
+>Quotazioni in linea</title>
+
+<para
+>&gnucash; usa un pacchetto chiamato <literal
+>Finance::Quote</literal
+> per ottenere le quotazioni dei prezzi e i tassi da Internet. Le versioni recenti di &kmymoney; supportano questo pacchetto per l'importazione delle quotazioni, e sarà usato in modo predefinito per i dati importati. Si può comunque decidere di passare al metodo nativo di &kmymoney;, che è spiegato in dettaglio nella sezione <link linkend="details.investments.onlinequotes"
+>Quotazioni in linea</link
+>. </para>
+
+<para
+>Se si fa questa scelta, la finestra seguente permetterà la selezione di una sorgente dei prezzi «nativa» per &kmymoney;, o una sorgente definita dall'utente, per ogni conto che ha bisogno di quotazioni in linea. In ogni caso, il simbolo di scambio (ticker) sarà importato senza modifiche, ma probabilmente sarà diverso nei due sistemi, quindi sarà da necessario modificarlo manualmente alla fine del processo di importazione. Gli aggiornamenti futuri delle quotazioni delle valute non utilizzeranno <literal
+>Finance::Quote</literal
+>, ma solo il metodo nativo. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="gnucash-select_price_source.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect4>
+</sect3>
+
+<sect3 id="gncschedules">
+<title
+>Transazioni pianificate</title>
+
+<para
+>&kmymoney; non mantiene la separazione fatta da &gnucash; tra i modelli di transazione e la loro frequenza. I dati delle transazioni saranno duplicati se lo stesso modello viene utilizzato in pianificazioni diverse, ma questo non è molto significativo. </para>
+
+<sect4>
+<title
+>Tipi di pianificazione</title>
+
+<para
+>&kmymoney; classifica le pianificazioni in tre tipi: Fatture, Depositi e Trasferimenti. &gnucash; non fa questa distinzione, lo strumento d'importazione cerca di determinare la classificazione dai conti e dalla direzione dei movimenti di denaro. In alcuni casi potrebbe essere legato ad assunzioni non corrette, ed è necessaria una correzione manuale. </para>
+</sect4>
+
+<sect4>
+<title
+>Pianificazioni sospette</title>
+
+<para
+>Alcune funzionalità delle transazioni pianificate di &gnucash; non sono disponibili in &kmymoney;, per cui durante l'importazione vengono fatti dei piccoli compromessi per convertire i dati. Queste transazioni saranno contrassegnate come sospette, e l'utente potrà modificarle direttamente durante il processo di importazione. Alcuni esempi di situazioni del genere: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>alcuni intervalli di frequenza supportati in &gnucash; non sono attualmente disponibili in &kmymoney;</para>
+  </listitem>
+
+  <listitem>
+    <para
+>&kmymoney; non supporta l'utilizzo delle formule e delle variabili nei campi importo</para>
+  </listitem>
+
+  <listitem>
+    <para
+>casi complessi di importazione che non sono ancora stati identificati.</para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Nonostante gli sforzi è possibile che, dato il grande numero di opzioni in gioco, una transazione pianificata potrebbe causare un errore grave in &kmymoney;. Se questo avviene, si può decidere di eliminare tutte le pianificazioni sospette durante l'importazione. </para>
+</sect4>
+</sect3>
+
+<sect3>
+<title
+>Report</title>
+
+<para
+>&kmymoney; fornisce molti possibili report configurabili, descritti in dettaglio in <link linkend="details.reports"
+>Report</link
+>. Nonostante ciò, potrebbero non corrispondere in modo preciso ai report disponibili in &gnucash;. </para>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Selezione delle impostazioni di importazione</title>
+
+<para id="details.impexp.gncoptions">
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="gnucash-import_options.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect3>
+<title
+>Gestione degli investimenti</title>
+
+<para
+>Vedere «<link linkend="gncsecurities"
+>Titoli e investimenti</link
+>» sopra. </para>
+</sect3>
+
+<sect3>
+<title
+>Quotazioni in linea</title>
+
+<para
+>Disabilitare questa caratteristica se si vuole usare il modo nativo per ottenere le quotazioni in linea future. </para>
+
+<para
+>Vedere <link linkend="details.impexp.gncquotes"
+>«Quotazioni in linea»</link
+> sopra. </para>
+</sect3>
+
+<sect3>
+<title
+>Transazioni pianificate</title>
+
+<para
+>Vedere <link linkend="gncschedules"
+>«Transazioni pianificate»</link
+> sopra. </para>
+</sect3>
+
+<sect3>
+<title
+>Opzioni di decodifica</title>
+
+<para
+>Se la tua lingua nativa viene scritta usando lettere o simboli diversi da quelli delle lingue «latine» (&ie;, generalmente, quelle dell'Europa occidentale), queste saranno rappresentate in modo speciale («codificate») nel file di &gnucash;. Se queste lettere non sono visualizzate correttamente, devono essere decodificate. Attualmente, spesso non è possibile rilevare accuratamente il tipo di decodifica da utilizzare, quindi a volte si deve abilitare questa opzione e selezionare un elemento dall'elenco. In generale, il primo elemento dell'elenco sarà quello considerato più appropriato per la propria localizzazione (&ie; in base alla nazione e alla lingua selezionata come nativa durante l'installazione del sistema operativo), quindi per prima cosa è bene provare questa opzione. Dato che il processo di importazione non sovrascrive il file di &gnucash;, si possono sperimentare liberamente diverse opzioni. </para>
+</sect3>
+
+<sect3>
+<title
+>Opzioni sulle note delle transazioni</title>
+
+<para
+>In certe situazioni, le transazioni non divise di &gnucash; possono contenere promemoria residui, spesso errati, che normalmente non sono visibili all'utente. Quando queste transazioni vengono importate in &kmymoney;, invece, questi messaggi possono diventare visibili a causa di differenze nella visualizzazione. Spesso queste transazioni hanno un campo Note che descrive lo scopo effettivo della transazione. Se si seleziona questa opzione saranno utilizzate queste note, se presenti, al posto dei dati errati nel campo Promemoria. </para>
+</sect3>
+
+<sect3>
+<title
+>Opzioni di debug</title>
+
+<para
+>Queste opzioni devono essere utilizzate solo in caso di problemi di importazione. Se si hanno questi problemi, comunque, bisognerebbe segnalarli alla lista di distribuzione degli sviluppatori di &kmymoney;: &devlist;. Notare che i tracciamenti generati da queste opzioni potrebbero contenere dati confidenziali, e si dovrebbe usare l'opzione <guilabel
+>Elimina le informazioni sensibili dai dati</guilabel
+> prima di renderli pubblici. </para>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Riepilogo dell'importazione</title>
+
+<para
+>Alla fine del processo di importazione viene visualizzato un riepilogo con il numero di transazioni processate e il numero di errori o anomalie riscontrate. Questo riepilogo può essere visualizzato, ma anche salvato su un file per rivederlo in seguito. Un riepilogo completo può contenere le seguenti sezioni: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Numero dei record</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Inconsistenze nei tipi dei conti e relative correzioni</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Dettagli sulle pianificazioni sospette</para>
+  </listitem>
+</itemizedlist>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="gnucash-report.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="details.impexp.qifimp">
+<sect1info>
+  <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+</sect1info>
+
+<title
+>Importazione QIF</title>
+
+<sect2>
+<title
+>Il formato QIF è pericoloso</title>
+
+<para
+>In condizioni normali, si dovrebbe evitare il più possibile di usare il formato QIF. Non è un buon formato per la memorizzazione di dati finanziari. Questi sono solo alcuni dei problemi di questo formato: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Mancanza di formato standard: versioni diverse dello stesso programma interpretano in modo diverso lo stesso elemento.</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Mancanza di un identificatore delle transazioni: non essendoci un codice univoco (ID) associato ad ogni transazione, le transazioni duplicate vengono associate a caso, nella migliore delle ipotesi.</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Mancanza di espressività: la sintassi è molto semplice e non supporta tutte le informazioni offerte dai programmi odierni di gestione delle finanze.</para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Questi sono i motivi principali per cui Intuit ha smesso di supportare il formato QIF a partire da <application
+>Quicken</application
+> 2005. Se si ha la possibilità di ottenere i dati in un altro formato, come OFX, evitare sempre di usare QIF. </para>
+</sect2>
+
+<sect2>
+<title
+>Come importare un file QIF</title>
+
+<para
+>Per importare un file QIF, per prima cosa assicurarsi di avere aperto un file valido di &kmymoney;. Poi selezionare la voce di menu <menuchoice
+><guimenu
+>File</guimenu
+><guisubmenu
+>Import</guisubmenu
+> <guimenuitem
+>QIF...</guimenuitem
+> </menuchoice
+>. </para>
+	
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifopen.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Si aprirà una finestra che chiede il nome del file QIF e permette di specificare il percorso del file facendo clic sul pulsante <guibutton
+>Sfoglia</guibutton
+>. </para>
+
+<para
+>Inoltre, &kmymoney; distingue l'importazione di un estratto conto dai dati storici esportati da un'altra applicazione. L'impostazione predefinita prevede l'importazione di un estratto conto. Se si stanno importando dati da un altro programma di gestione delle finanze, selezionare l'opzione relativa. </para>
+
+<para
+>In generale, il profilo QIF predefinito dovrebbe andare bene con i tuoi dati QIF. In certi casi è necessario usare un profilo QIF modificato. Vedere la <link linkend="details.impexp.qifimp.profile"
+>prossima sezione</link
+> per maggiori informazioni. </para>
+
+<para
+>Fare clic su <guibutton
+>Importa</guibutton
+> per importare il file QIF. </para>
+
+<para
+>&kmymoney; inizierà la scansione del file per determinare il formato utilizzato per la rappresentazione di date e numeri. Se non riesce a determinarlo con sicurezza, &kmymoney; chiederà all'utente di selezionarne uno tra un elenco di possibili candidati. </para>
+
+<para
+>Poi, &kmymoney; importa i dati e crea gli oggetti necessari, come le informazioni sui beneficiari, i conti, le categorie e le quotazioni. Quando possibile, saranno fatte corrispondere le transazioni esistenti con quelle importate. Viene visualizzata una barra di avanzamento per visualizzare il progresso dell'importazione. </para>
+
+<para
+>Se &kmymoney; non riesce a rilevare il nome del conto da importare, sarà chiesto all'utente di selezionare il conto in cui importare i dati. Se il conto non esiste, può essere creato facendo clic su <guibutton
+>Crea</guibutton
+>. </para>
+
+<para
+>Alla fine del processo di importazione, &kmymoney; visualizzerà una finestra di riepilogo dell'estratto conto. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Riepilogo dell'estratto</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qif_report.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Riepilogo dell'estratto</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Dopo l'importazione, le transazioni importate verranno visualizzate con uno sfondo giallo nella vista Registri. Se &kmymoney; è riuscito ad abbinare una transazione importata con una esistente, lo sfondo della transazione sarà verde. </para>
+
+<para
+>Il prossimo passo consiste nella verifica dei dati importati e nella loro conferma. Questa parte è comune anche agli altri tipi di importazione e viene spiegata in dettaglio in un'altra sezione. </para>
+
+<note>
+<para
+>I colori usati per segnalare le transazioni importate e abbinate possono essere personalizzati, e potrebbero essere diversi nel sistema in uso. </para>
+</note>
+</sect2>
+
+<!--
+<sect2>
+<title
+>Accepting the imported transactions</title>
+<para>
+  
+	When &kmymoney; has finished importing the QIF transactions the account will be shown with the imported transactions listed in Yellow.
+</para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Imported transactions</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifimportverify.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Imported transactions</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+	Some of your transactions may be flashing red in the ledger.  
+	This is because they need to be assigned a category.  
+	The importer was not able to automatically assign a category based on your past transaction history.
+</para>
+
+<para
+>	
+	Transaction data can be edited or even deleted if needed.  To edit a transaction simply double click on the entry or hit enter when the entry is highlighted.  Once finished click on <guibutton
+>OK</guibutton
+> to accept the imported transactions or <guibutton
+>Cancel</guibutton
+> to remove the imported transactions.
+</para>
+
+</sect2>
+
+<sect2
+><title
+>Importing Investments</title>
+
+<para>
+	Please note that if you are importing a file with investment transactions, those investments must first exist in your &kmymoney; file.
+	The trading symbol is used to match, so please ensure that the symbol in &kmymoney; is exactly the same as the one in the file you're importing.
+</para>
+</sect2>
+-->
+
+<sect2 id="details.impexp.qifimp.profile">
+<title
+>Impostazione di un profilo QIF</title>
+
+<para
+>Non essendoci uno standard universalmente riconosciuto per i file QIF, i vari produttori si sono presi la libertà di introdurre leggere modifiche. Il profilo QIF permette di indicare a &kmymoney; le particolarità del tuo file. Per modificare un profilo QIF esistente, o per crearne uno nuovo, premere il pulsante <guibutton
+>Nuovo</guibutton
+> nella finestra di importazione QIF, vicino al selettore dei profili. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifimport-qifprofileeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Editor del profilo QIF</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<note>
+<para
+>Le versioni precedenti di &kmymoney; avevano una scheda per la specifica della data e dell'importo. Adesso queste impostazioni vengono determinate automaticamente da &kmymoney;, scansionando il file. Se il programma non riesce a determinarle, le chiederà all'utente durante l'importazione. </para>
+</note>
+<!--
+<para>
+	The most commonly changed thing between QIF implementations is the date format.  
+	So if this is the first time you're importing a QIF file, spend a few moments to figure out what format the dates are in, and set the QIF Profile accordingly.  
+	See the discussion below on apostrophe format for more details.
+</para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifimport-qifprofiledate.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>QIF Profile Date</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+</sect2>
+
+<sect2
+><title
+>Apostrophe format</title>
+
+<para>
+	Many common QIF writers use a 2-digit representation for the year. 
+	This is ambiguous, because the importer cannot know which century the date belongs in.
+	To make things even more complicated, QIF files will often used an apostrophe as a year separator to indicate that the date belongs in the OTHER century from the default.
+</para>
+<para>
+	For example, if the default century is 1900-1999, the date 12/31/95 would mean 1995.  The date 12/31'05 would mean 2005.
+</para>
+<para>
+	Because the QIF format is not standardized, it's impossible to know which century is desired.
+	This is why you have to explicitly state it in the QIF profile.
+	You do this by specifying which century is intended when an apostrophe is found.
+	In the example above, you would set the Apostrophe Format to &quot;2000-2099&quot;, so dates with an apostrophe will be interpreted as being &gt; year 2000.
+	In this case, dates without an apostrophe will be treated as being in the 1900's.
+</para>
+-->
+</sect2>
+
+<sect2
+><title
+>Abbinamento delle transazioni</title>
+
+<para
+>Come si faceva notare prima, uno dei punti deboli del formato QIF è la mancanza di un identificatore univoco per le transazioni. Quindi se si importa un file QIF e alcune delle transazioni sono già nel registro, si otterranno dei duplicati. &kmymoney; cerca di evitare questa situazione cercando transazioni simili a quelle che si hanno già. Se trova una possibile corrispondenza, abbina le transazioni simili. </para>
+
+<para
+>Questo può dare problemi se si hanno transazioni simili ma diverse. In questo caso, è possibile rimuovere l'abbinamento tra le transazioni nella vista del Registro. </para>
+</sect2>
+
+<sect2>
+<title
+>Scrittura di un filtro di importazione</title>
+
+<para
+>A volte si hanno dati in un formato personalizzato, come valori separati da virgola (CSV) o altri formati non standard. A partire dalla versione 4.6, &kmymoney; include un'estensione di importazione di CSV, ma è comunque possibile importare altri tipi di file in &kmymoney; utilizzando un filtro di importazione QIF. Un filtro è un programma scritto a questo scopo, che prende in ingresso il file che si ha e restituisce come risultato un file QIF. Questo filtro può essere uno script della shell, uno script perl, un programma compilato scritto in C/C++ o qualsiasi altro programma immaginabile che possa essere eseguito sul tuo sistema. </para>
+
+<para
+>Per usare i filtro, modificare il profilo QIF preferito e selezionare la scheda Filtro. Inserire il percorso al programma filtro quando richiesto. Poi, ad ogni importazione che usa questo profilo, il file importato verrà prima processato con il filtro fornito. </para>
+
+<para
+>Un problema comune è la conversione di un elenco di valori separati da virgole in un file QIF. Questo è un tipico caso d'uso del programma <command
+>awk</command
+>. Creare uno script chiamato <filename
+>csv2qif.awk</filename
+>, contenente le seguenti due righe: </para>
+
+<programlisting
+>BEGIN { FS=&quot;,&quot;; print &quot;!Type:Bank&quot; }
+
+        { print &quot;D&quot;$1; print &quot;T&quot;$2; print &quot;N&quot;$3; print &quot;P&quot;$4; print &quot;M&quot;$5; print &quot;^&quot; }
+</programlisting>
+
+<para
+>Poi, cambiare le chiavi QIF (D,T,N,P,M) per farle corrispondere all'ordine dei dati nel file CSV. Impostare il filtro di ingresso a <userinput
+>awk -f csv2qif.awk</userinput
+>. </para>
+
+<para
+>Un altro problema comune è la codifica dei file QIF. &kmymoney; si aspetta che siano codificati in UTF-8. Se il tuo file usa una codifica differente, può essere utile convertirlo prima in UTF-8. Ad esempio, per convertire un file con la codifica iso-8859-1, il filtro di ingresso deve essere impostato a <userinput
+>recode iso-8859-1..utf-8</userinput
+>. </para>
+
+</sect2>
+<sect2>
+<title
+>Estensioni speciali di &kmymoney; per QIF</title>
+
+<para
+>Come già detto sopra, uno dei problemi principali di QIF è la mancanza di un identificatore univoco per le transazioni. Se si sta scrivendo un programma per la creazione di file QIF (o un filtro, come descritto sopra), è possibile rimediare a questo problema. &kmymoney; supporta il campo «#». Il processo di importazione interpreterà il contenuto di questo campo come un identificatore univoco della transazione e la scarterà se è già presente. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.impexp.qifexp">
+<title
+>Modulo di esportazione QIF</title>
+<para
+>Per esportare uno dei conti in un file QIF, scegliere la voce di menu <menuchoice
+><guimenu
+>File</guimenu
+><guisubmenu
+>Export</guisubmenu
+> <guimenuitem
+>QIF...</guimenuitem
+></menuchoice
+>. Sarà chiesto il conto da esportare, il file in cui esportare e il profilo QIF da utilizzare. </para>
+
+<note
+><para
+>Al momento, non è possibile esportare gli investimenti in QIF. </para
+></note>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifimport-export.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Esportazione QIF</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect1>
+
+<sect1 id="details.impexp.ofx">
+<sect1info>
+  <author
+>&Ace.Jones; &Ace.Jones.mail;</author>
+  <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+</sect1info>
+<title
+>Estensione per l'importazione da OFX</title>
+
+<sect2>
+<title
+>Come ottenere l'estensione</title>
+
+<para
+>&kmymoney; importerà i file OFX senza problemi. Tuttavia, questa funzionalità non fa parte del programma principale. È necessario ottenere e installare l'estensione per l'importazione da OFX. Una volta installata, sarà visualizzato automaticamente il comando per l'importazione dei file OFX, nel sottomenu <menuchoice
+><guimenu
+>File</guimenu
+> <guisubmenu
+>Importa</guisubmenu
+></menuchoice
+>. </para>
+
+<para
+>Notare che in molte versioni pacchettizzate di &kmymoney; l'estensione per l'importazione OFX è già presente, nello stesso pacchetto o in un pacchetto separato. Se l'estensione per l'importazione OFX non risulta installata, il primo posto in cui guardare è la fonte da cui si è ottenuto il pacchetto base di &kmymoney;. </para>
+
+<para
+>Se si è installato il programma da un pacchetto RPM, l'estensione per l'importazione da OFX è contenuta nel pacchetto kmymoney-ofx. Dovrebbe essere disponibile dalla stessa fonte dalla quale si è ottenuto il pacchetto base di &kmymoney;. Se si è compilato &kmymoney; dai sorgenti, basta avere installati sul sistema gli header e le librerie di libOFX 0.9. Il processo di compilazione di &kmymoney; li rileverà e compilerà anche l'estensione. Al momento del rilascio di &kmymoney; 4.6, l'ultima versione di libofx era la 0.9.4, che è anche la versione minima richiesta. </para>
+
+<para
+>Se si hanno dei problemi nella compilazione di &kmymoney; e si vuole essere certi di avere installato la versione corretta di libOFX, contattare gli sviluppatori alla lista di distribuzione &devlist; per ricevere assistenza. Includere una copia del file <filename
+>config.log</filename
+>, compressa precedentemente con <command
+>gzip</command
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Cos'è OFX</title>
+
+<para
+>OFX sta per <quote
+>Open Financial Exchange</quote
+>. In base al <ulink url="https://www.ofx.net/"
+>sito web di OFX</ulink
+>, <quote
+>Open Financial Exchange (OFX) è una specifica unificata per lo scambio elettronico di dati finanziari tra istituti finanziari, aziende e consumatori tramite Internet. OFX non è un'istituzione finanziaria.</quote
+> La specifica definisce i formati per trasferire dati finanziari tramite file e scambio diretto. </para>
+
+<para
+>Nonostante lo standard sia molto più completo e affidabile di QIF, ci sono ancora variazioni, in base alla specifica implementazione utilizzata da ciascun istituto. I file di OFX potrebbero avere un'estensione <quote
+>OFX</quote
+> o <quote
+>QFX</quote
+> (maiuscolo o minuscolo); ciò non implica particolari differenze nel contenuto. La specifica è basata su &XML;, perciò i file possono essere letti in un editor di testo, ma poiché gli spazi bianchi non sono rilevanti per il contenuto stesso, alcune implementazioni non ne utilizzano alcuno, rendendo molto difficile la loro lettura. </para>
+
+<para
+>Un altro sito con buone informazioni è <ulink url="https:/ofxhome.com/"
+>OFX Home</ulink
+>. Gestisce un elenco di istituti finanziari che supportano OFX. Ciò può essere utile se si hanno problemi a configurare la<link linkend="details.impexp.ofxdirectconnect"
+>connessione diretta OFX</link
+>. Ha inoltre un forum per le discussioni relative a problemi con OFX. </para>
+</sect2>
+
+<sect2>
+<title
+>Importazione di un file OFX</title>
+
+<para
+>Il modo più semplice per importare un file OFX è scegliere il modulo di importazione dalla barra dei menu. Dalla voce di menu <menuchoice
+><guimenu
+>File</guimenu
+><guisubmenu
+>Importa</guisubmenu
+> <guimenuitem
+>OFX...</guimenuitem
+></menuchoice
+>. Se OFX non è presente sotto Importa, l'estensione di importazione da OFX non è installata correttamente. Vedere la sezione precedente. </para>
+
+<para
+>La prima cosa che verrà richiesta dal processo di importazione è il conto in cui importare le transazioni. Se il tuo file contiene transazioni di più conti, questa richiesta verrà fatta più volte. </para>
+
+<para
+>Dopo l'importazione, alcune delle transazioni potrebbero essere marcate nel registro con un simbolo «!» o un triangolo giallo. Questo perché hanno bisogno di una categoria assegnata. Il processo di importazione non è stato in grado di associare automaticamente una categoria utilizzando lo storico delle transazioni. Si può modificare ogni singola transazione nel registro, assegnando una categoria, e la transazione non sarà più marcata in questo modo. </para>
+
+<para
+>Notare che questa sezione descrive l'importazione <quote
+>nativa</quote
+> da OFX. È possibile anche importare i file OFX usando l'estensione di importazione AqBanking se è installata. I due processi di importazione si comportano in modo leggermente diverso, e sono scritti e supportati da sviluppatori differenti. </para>
+</sect2>
+
+<sect2>
+<title
+>Importazione degli investimenti</title>
+
+<para
+>Notare che se si importa un file che contiene transazioni di investimento, questi investimenti devono già esistere nel tuo file di &kmymoney;. Per abbinare gli investimenti viene usato il simbolo di scambio, quindi assicurarsi che il simbolo di scambio usato in &kmymoney; sia esattamente uguale a quello usato nel file che si sta importando. </para>
+</sect2>
+
+<sect2 id="details.impexp.webconnect">
+<title
+>Connessione al Web</title>
+
+<para
+>Il modo più semplice di importare un file OFX è di configurare Web Connect. Visitare il sito della propria banca, e fare clic sul collegamento che permette di scaricare il file OFX. Il browser dovrebbe chiedere il programma con cui aprire il file: scegliere &kmymoney;. Il file OFX scaricato verrà importato nell'ultimo file aperto in &kmymoney;. È possibile inoltre cambiare le associazioni dei file per l'ambiente desktop in uso, in modo da impostare &kmymoney; per l'apertura automatica dei file OFX. </para>
+
+<para
+>Se si ha bisogno di importare il file OFX in qualche altro file di &kmymoney;, caricare quel file in &kmymoney; prima di visitare il sito della banca. </para>
+</sect2>
+
+<sect2 id="details.impexp.ofxdirectconnect">
+<title
+>Connessione diretta</title>
+
+<para
+>Adesso &kmymoney; supporta OFX Direct Connect. Questo permette di ottenere gli estratti conto direttamente dalla banca. In futuro questa funzione sarà spiegata più in dettaglio e spostata in una sezione a parte. </para>
+
+<para
+>Per abilitare questa funzionalità, è necessario compilare &kmymoney; con l'opzione <userinput
+><option
+>--enable-ofxbanking</option
+></userinput
+> (adesso è diventata l'opzione predefinita). </para>
+
+<para
+>Attenzione: molte banche richiedono un accesso separato, forniranno una password o un PIN diverso, e potrebbero anche far pagare una commissione per questo servizio. Nessuna banca supporta direttamente &kmymoney;. Bisogna dire loro che si vuole importare direttamente da <application
+>MS Money</application
+> o <application
+>Quicken</application
+>. </para>
+
+<para
+>Il primo passo consiste nella configurazione di ogni conto per cui si desidera scaricare l'estratto. Andare nella vista Conti, fare clic con il tasto destro del mouse sul conto che si vuole configurare e scegliere <guimenuitem
+>Mappa a un conto in linea...</guimenuitem
+>. Se è installata più di una estensione per l'online banking, sarà chiesto quale utilizzare. Per il metodo OFX interno, scegliere <guimenuitem
+>&kmymoney; OFX</guimenuitem
+>. Sarà scaricata da Internet un elenco di banche, e una procedura guidata permetterà di scegliere una banca, digitare nome utente e password e selezionare un conto. Se la propria banca non è nell'elenco, si può provare a utilizzare l'opzione manuale. La propria banca potrebbe essere in grado di fornire i parametri richiesti, o potrebbe essere necessaria qualche ricerca per reperirli. </para>
+
+<note>
+  <para
+>La configurazione di OFX Direct Connect può, in alcuni casi, non essere banale, specialmente quando l'implementazione da parte degli istituti non fornisce dettagli sufficienti nei messaggi di errore. Un problema particolare da tener presente è costituito dal fatto che molti istituti richiedono un cambio della password al primo accesso in linea utilizzando questo metodo. Sfortunatamente, al momento, la libreria che &kmymoney; utilizza (libofx) non può cambiare la password in modo interattivo. In alcuni casi, è possibile ottenere supporto tecnico dall'istituto per cambiare la propria password. Fino a quando potremo espandere questa sezione con altre informazioni dettagliate per l'individuazione dei problemi, se si riscontrano problemi nella configurazione, sarà possibile chiedere aiuto sulla lista di distribuzione &devlist; degli sviluppatori di &kmymoney;. </para>
+</note>
+
+<para
+>Una volta configurato un conto per l'online banking, visualizzare il registro di quel conto. Scegliere quindi la voce di menu <menuchoice
+><guimenu
+>Conto</guimenu
+><guimenuitem
+>Aggiorna conto...</guimenuitem
+></menuchoice
+>. Il programma si connetterà alla propria banca e scaricherà l'estratto conto relativo agli ultimi 60 giorni. </para>
+
+<note>
+  <para
+>Nelle versioni di &kmymoney; precedenti la 4.6, il nome del beneficiario veniva preso sempre dal campo <literal
+>PAYEEID</literal
+>. A partire dalla versione 4.6, il nome del beneficiario può essere basato sul campo <literal
+>PAYEEID</literal
+>, <literal
+>NAME</literal
+> o <literal
+>MEMO</literal
+> nella transazione OFX. Puoi configurare questa funzionalità e altre impostazioni di OFX Direct Connect selezionando la scheda appropriata nella finestra <link linkend="details.accounts.edit"
+>Modifica conto</link
+>. </para>
+</note>
+</sect2>
+
+<sect2>
+<title
+>Esportazione in un file OFX</title>
+
+<para
+>Attualmente, non è possibile esportare nel formato OFX. Se si è interessati a contribuire in questo aspetto, contattare la squadra di sviluppo di libofx per maggiori informazioni. </para>
+</sect2>
+</sect1
+>&details-impexp-csv; &details-impexp-csvexp; &details-impexp-woob; <sect1 id="details.impexp.plugins">
+<title
+>Scrittura di estensioni di importazione</title>
+
+<para
+>&kmymoney; contiene un supporto esplicito alle estensioni di importazione. Se si usa un formato personalizzato e si vuole scrivere un'estensione di importazione, il tuo contributo sarà apprezzato. Per fare questo, è necessario compilare il programma dai sorgenti. Poi usare come esempio l'estensione di importazione da OFX. </para>
+</sect1>
+</chapter>

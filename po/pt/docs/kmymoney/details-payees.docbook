@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.payees">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title id="details.payees.title"
+>Beneficiários</title>
+
+<para
+>O ecrã de Beneficiários oferece informações detalhadas sobre todos os beneficiários e pagadores envolvidos nas transacções. O ecrã dos Beneficiários está dividido em duas áreas principais: uma lista de pagadores e credores e uma área de detalhes. </para>
+
+<para
+>O ecrã de Beneficiários permite ver as transacções do beneficiário seleccionado, a actualização da informação pessoal associada a um beneficiário ou pagador em particular e a definição dos critérios de correspondência das transacções. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payeeview.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect1 id="details.payees.list">
+<title
+>Lista de Beneficiários</title>
+
+<para
+>Aparecerá uma lista de pagadores e cobradores do lado esquerdo deste ecrã. A lista de cobradores ou beneficiários está ordenada alfabeticamente. </para>
+
+<sect2>
+<title
+>Adicionar um Beneficiário ou Pagador</title>
+
+<para
+>Para adicionar um beneficiário ou pagador, carregue com o botão direito no nome de qualquer beneficiário e escolha <guimenuitem
+>Novo beneficiário</guimenuitem
+>. Isto irá criar um novo beneficiário chamado <quote
+>Novo Beneficiário</quote
+>. Faça duplo-click sobre este item e seleccionar <guimenuitem
+>Mudar o nome do beneficiário</guimenuitem
+> para introduzir o nome do novo beneficiário ou pagador. </para>
+</sect2>
+
+<sect2>
+<title
+>Mudar o Nome de um Beneficiário ou Pagador</title>
+
+<para
+>Para mudar o nome de um beneficiário ou pagador, basta carregar o botão direito e seleccionar <guimenuitem
+>Mudar o nome do beneficiário</guimenuitem
+> para que o nome fique editável. A alteração do nome irá afectar o nome em todos os itens de transacções. </para>
+</sect2>
+
+<sect2>
+<title
+>Apagar um Beneficiário ou Pagador</title>
+
+<para
+>Para remover um beneficiário ou pagador, carregue com o botão direito no nome e seleccione a opção <guimenuitem
+>Apagar o beneficiário</guimenuitem
+>. Se este tiver algumas transacções associadas, ser-lhe-á apresentada uma janela que lhe permite atribuir as mesmas a um beneficiário diferente, assim como uma opção que, quando assinalada, permite adicionar um nome 'removido' à lista de correspondência do novo beneficiário. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.payees.personalinformation">
+<title
+>Detalhes Adicionais do Beneficiário</title>
+
+<sect2>
+<title
+>Dados Pessoais</title>
+
+<para
+>Para ver e editar a informação pessoal associada a um dado beneficiário, seleccione-o na lista e seleccione a página de 'Endereço' na área de detalhes. Para modificar esta informação, edite a área de detalhes directamente e carregue no botão Actualizar quando terminar. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>A página de dados pessoais</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_info.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Dados pessoais</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect2>
+
+<sect2>
+<title
+>Configuração da Correspondência de Transacções</title>
+
+<sect3>
+<title
+>Introdução</title>
+
+<para
+>O &kappname; tem a capacidade de atribuir automaticamente o beneficiário adequado às transacções importadas. Isto poderá ser útil ao importar as transacções do seu banco, quando o nome do beneficiário tiver caracteres extra desnecessários ou, pior ainda, se os nomes do beneficiário mudarem. </para>
+
+<para
+>Por exemplo, imaginemos que o seu pagamento da prestação da casa vem do seu banco como algo do género <quote
+>CAIXA GERAL DE DEPÓSITOS, GA 111506</quote
+> num mês, e vem como <quote
+>CAIXA GERAL DE DEPÓSITOS, GA 121606</quote
+> no mês seguinte. Você poderá querer que ambas as transacções sejam associadas simplesmente ao seu beneficiário <quote
+>Caixa Geral</quote
+>. A funcionalidade de correspondência das transacções existe mesmo para si! </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>A página de correspondência do beneficiário</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_match.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Detalhes de correspondência do beneficiário</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect3>
+
+<sect3>
+<title
+>Configurar</title>
+
+<para
+>Na página de Correspondência, poderá definir a Configuração da Correspondência das Transacções. Tem 3 opções importantes: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Sem Correspondência: Desactiva a funcionalidade para este beneficiário. Esta é a configuração por omissão para todos os beneficiários. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Corresponder ao Nome do Beneficiário. Activa a funcionalidade e usar o nome do próprio beneficiário como Chave de Correspondência </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Corresponder à Chave. Activa a funcionalidade e permite-lhe introduzir uma ou mais chaves de correspondência à sua escolha. De um modo geral, a introdução de um texto simples irá funcionar perfeitamente. Contudo, as chaves de correspondência são de facto expressões regulares, pelo que poderá fazer a correspondência com padrões mais complicados. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Poderá também optar se deseja ignorar a capitalização em minúsculas/maiúsculas da chave de correspondência. Se escolher esta opção, a Chave de Correspondência <quote
+>Caixa</quote
+> irá corresponder a <quote
+>CAIXA GERAL</quote
+> ou <quote
+>Caixa Geral</quote
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Importar Transacções</title>
+
+<para
+>Quando importar as transacções com a importação do QIF, ou se usar um 'plugin' como o OFX ou o AqBanking, as Chaves de Correspondência que tiver definido serão tidas em consideração. Se for encontrada a Chave de Correspondência para um dos seus beneficiários em qualquer lado do beneficiário da transacção importada, o beneficiário correspondente da sua lista será atribuído a essa transacção. Deste modo, uma Chave de Correspondência da  <quote
+>Caixa Geral</quote
+> irá corresponder a <quote
+>CAIXA GERAL DE DEPÓSITOS</quote
+> ou mesmo a <quote
+>CRÉDITO CAIXA GERAL&amp;EMPRÉSTIMO</quote
+>. Como tal, escolha as suas Chaves de Correspondência com cuidado. <note
+><para
+>Se o beneficiário de uma transacção corresponder a mais que uma chave, o comportamento é indefinido. O &kappname; irá escolher arbitrariamente um dos beneficiários correspondentes. </para
+></note>
+</para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.payees.transactionhistory">
+<title
+>Ver o Histórico de Transacções</title>
+
+<para
+>Para ver todas as transacções associadas a um dado beneficiário, seleccione-o na lista e depois a página Transacção na área de detalhes. Faça duplo-click numa dada transacção para o levar a essa transacção no ecrã do Livro de Registos. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>A página da transacção</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_history.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Histórico de transacções</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect1>
+</chapter>

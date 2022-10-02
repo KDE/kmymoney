@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.accounts">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+  </authorgroup>
+  <date
+>2011-07-21</date>
+  <releaseinfo
+>4.6</releaseinfo>
+</chapterinfo>
+  
+<title
+>Contas</title>
+
+<sect1 id="details.accounts.view">
+<title
+>A Área de Contas</title>
+
+<para
+>O ecrã de Contas oferece um resumo de todas as contas. Existem quatro categorias diferentes de contas: Activos, Passivos, Receita e Despesa. As contas típicas de activos incluem as contas no banco, o dinheiro e os investimentos, enquanto as contas de passivo típicas incluem os cartões de créditos e financiamentos. </para>
+
+<para
+>Existem duas formas de ver as contas: por Ícones ou por Lista, podendo ser seleccionado com a página apropriada no topo da janela. </para>
+
+<para
+>Na área de Listas, as contas são agrupadas segundo quatro cabeçalhos: Activos, Passivos, Receita e Despesa. A área da Lista mostra o nome e o saldo ou valor de cada conta. A Receita e a Despesa mostram as categorias em que cada transacção está registada, oferecendo uma funcionalidade semelhante ao ecrã de Categorias. As opções e funcionalidades que envolvem as contas de Receita e Despesa estão descritas, em detalhe, no capítulo de <link linkend="details.categories"
+>Categorias</link
+>. O resto do capítulo focar-se-á na funcionalidade de contas de Activos e Passivos. </para>
+
+<para
+>Na área de Ícones, as Contas de Activos e Passivos são apresentadas com ícones que indicam o tipo de conta. O &kappname; coloca inicialmente os ícones por ordem alfabética, mas poderá mover os ícones para qualquer posição que desejar, bastando para tal arrastar o ícone com o rato. Lembre-se, contudo, que o facto de mover um ícone não faz com que o &kappname; pense que algum dos dados foi alterado. Isto significa que terá de fazer alguma outra alteração, como editar uma conta ou uma transacção, dizendo OK (mesmo sem alterar nenhum dado), para que o &kappname; lhe permita gravar o ficheiro. O ficheiro gravado irá incluir as novas posições dos ícones. </para>
+</sect1>
+
+<sect1 id="details.accounts.create">
+<title
+>Criar uma Conta</title>
+
+<para>
+  <emphasis
+>NOTA: Deverá ter um ficheiro aberto antes de poder criar uma conta nova. Se não tiver um ficheiro existente, terá de criar um <link linkend="firsttime.3"
+>ficheiro novo</link
+>. </emphasis>
+</para>
+
+<para
+>Para criar uma conta nova, tanto poderá seleccionar a opção <menuchoice
+><guimenu
+>Conta</guimenu
+><guimenuitem
+>Nova conta...</guimenuitem
+></menuchoice
+> no menu ou escolher o ícone <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="newacct.png" format="PNG"/></imageobject
+><textobject
+><phrase
+>Nova</phrase
+></textobject
+></inlinemediaobject
+></guiicon
+> da barra de ferramentas. </para>
+
+<para
+>Em alternativa, para criar uma conta com a área de contas, carregue no ícone respectivo no selector de áreas e carregue depois, com o botão direito do rato, no ícone de Activos, na área à direita, seleccionando depois a opção <guimenuitem
+>Nova conta...</guimenuitem
+> no menu que aparece. A árvore de Activos mostra todas as suas contas referentes a activos. Os activos, assim como todos os outros tipos de contas, são descritos posteriormente neste manual. </para>
+
+<sect2 id="details.accounts.create.institution">
+<title
+>O nome da Instituição (Banco)</title>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="accwiz1.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>Assistente de Contas</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>O primeiro passo envolve a selecção de uma instituição para a conta. Se for uma conta para uma instituição que já tenha criado, poderá seleccionar a instituição na lista. Se quiser criar uma nova, carregue no botão <guibutton
+>Nova Instituição</guibutton
+>. Isto irá invocar a janela de Nova Instituição, como está descrita na secção anterior. Se não for uma conta bancária, ou caso não queira usar a banca 'online', não terá de indicar nenhuma instituição. </para>
+
+<para
+>O número de conta, bem como o <ulink url="http://www.investordictionary.com/definition/international+bank+account+number.aspx"
+>IBAN</ulink
+> não são usados de momento pelo &kappname;. Estes campos poderão ser deixados em branco e serem preenchidos posteriormente; só são necessários para a banca 'online'. </para>
+
+<para
+>Para passar ao passo seguinte, carregue em <guibutton
+>Seguinte</guibutton
+>. </para>
+</sect2>
+
+<sect2 id="details.accounts.create.account">
+<title
+>Conta</title>
+
+<para>
+  <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="accwiz2.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase
+>Assistente de Contas</phrase>
+            </textobject>
+          </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Esta página é usada para configurar o tipo de conta. </para>
+
+<para
+>Primeiro, indique um nome para a conta. Este nome será usado para a identificar. </para>
+
+<para
+>De seguida, seleccione o tipo de conta num dos tipos disponíveis da lista: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Conta à Ordem</term>
+    <listitem>
+      <para
+>Uma conta à ordem normal, como as que obtém em qualquer banco ou agência de crédito. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Poupança</term>
+    <listitem>
+      <para
+>Uma conta-poupança normal, como as que obtém em qualquer banco ou agência de crédito. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Cartão de Crédito</term>
+    <listitem>
+      <para
+>Uma conta para representar o seu cartão de crédito. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Dinheiro</term>
+    <listitem>
+      <para
+>Uma conta de uso geral, usada tipicamente para as contas mantidas fora dos bancos, como o dinheiro na sua carteira. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Financiamento</term>
+    <listitem>
+      <para
+>Uma conta para gerir um financiamento de dinheiro, quer pedido quer cedido. Com uma conta de Financiamento, o &kappname; calcula automaticamente as taxas de juro para o ajudar a seguir a amortização restante do empréstimo. Os financiamentos sem juros poderão usar o tipo Activo ou Passivo abaixo, dependendo se o dinheiro é recebido ou pago. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Investimento</term>
+    <listitem>
+      <para
+>Uma conta para gerir um investimento, como os fundos de acções e de investimento. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Activo</term>
+    <listitem>
+      <para
+>Uma conta para gerir um activo que não caiba em nenhum dos tipos acima. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Passivo</term>
+    <listitem>
+      <para
+>Uma conta para gerir um passivo, como o dinheiro que tenha emprestado ou uma despesa futura. Se tiver de calcular juros, poderá ser melhor usar o tipo Financiamento acima. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>Seleccione a moeda a usar para a conta na lista. </para>
+
+<para
+>Indique a data em que a conta foi aberta ou seleccione-a no calendário, usando o ícone à direita. </para>
+
+<para
+>Indique o saldo inicial da conta. Se for uma conta existente no banco, esta informação poderá ser encontrada no seu extracto. Se for uma conta nova, o saldo inicial poderá ser deixado a zero. </para>
+
+<para
+>A selecção da opção <emphasis
+>Conta Preferida</emphasis
+> irá permitir o acesso preferido em algumas janelas e áreas do &kappname;. </para>
+
+<para
+>Para passar ao passo seguinte, carregue em Seguinte. </para>
+</sect2>
+
+<sect2>
+<title
+>Contas do Cartão de Crédito</title>
+
+<para
+>Ao criar uma conta de Cartão de Crédito, poderá fazer com que o &kappname; crie opcionalmente uma <link linkend="details.schedules"
+>transacção agendada</link
+> para si. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz6.png" format="PNG"/>
+              </imageobject>
+
+              <textobject>
+                <phrase
+>Assistente de Contas</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Se quiser gerar uma transacção como estas, certifique-se que a opção está assinalada e introduza a informação necessária. </para>
+
+<para
+>Carregue em <guibutton
+>Seguinte</guibutton
+> para continuar. </para>
+</sect2>
+
+<sect2>
+<title
+>Contas de Investimento</title>
+
+<para
+>Para uma conta de Investimento, tem a opção de criar uma conta de Corretagem associada. Para mais informações, veja os <link linkend="details.investments"
+>Investimentos</link
+> </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz7.png" format="PNG"/>
+              </imageobject>
+
+              <textobject>
+                <phrase
+>Assistente de Contas</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+</sect2>
+
+<sect2>
+<title
+>Contas de Financiamento</title>
+
+<para
+>As contas de financiamento são contas especiais que são usadas para o ajudar a gerir os Empréstimos com juros e prestações agendadas. Ao dar ao &kappname; a informação acerca do financiamento, o &kappname; podê-lo-á ajudar a seguir o pagamento dos juros e da amortização do financiamento. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_1.png" format="PNG"/>
+              </imageobject>
+
+              <textobject>
+                <phrase
+>Assistente de Contas</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+	
+<para
+>Na página de Detalhes, poderá introduzir a informação geral acerca do empréstimo. </para>
+
+<para
+>Em primeiro lugar, seleccione se está a emprestar ou a pedir emprestado o dinheiro. Se estiver a pedir emprestado, o financiamento irá aparecer nas Contas como Passivo. Se estiver a emprestar, aparece como Activo. </para>
+	
+<para
+>De seguida, seleccione o devedor ou credor do financiamento. Como sempre, se o nome não existir na lista de Beneficiários, introduza-o aqui para que o &kappname; o crie por si. </para>
+
+<para
+>Os três itens seguinte são para lidar com os Financiamentos nos quais já fez pagamentos. Se seleccionar Sim na opção "Já fez/recebeu alguns pagamentos?", poderá então seleccionar se quer registar todos os pagamentos ou apenas os que começaram no ano actual. Se quiser registar desde o início do ano actual, ser-lhe-á então pedido para introduzir o saldo actual. </para>
+	
+<para
+>Depois, seleccione a frequência com que os pagamentos serão feitos, assim como a frequência com que os juros são compostos. A composição acontece quando o juro é adicionado ao montante do financiamento de modo que, quando o juro for calculado de novo, já existirá mais juro pago sobre o juro. É interessante que seja composto com a mesma frequência com que são feitos os pagamentos. </para>
+
+<para
+>De seguida, indique a data em que será feito o primeiro pagamento registado. </para>
+	
+<para
+>Finalmente, introduza a informação sobre a forma como varia a taxa de juro. Se o financiamento for com uma taxa fixa, não há nada a fazer. Se a taxa variar, seleccione 'Variável' na opção "Tipo de taxa de juro" e indique depois o intervalo entre as alterações da taxa de juro e a data em que vence a primeira alteração da taxa de juro: o &kappname; pedir-lhe-á para actualizar a taxa de juro quando chegar essa data. </para>
+	
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_2.png" format="PNG"/>
+              </imageobject>
+
+              <textobject>
+                <phrase
+>Assistente de Contas</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+  
+<para
+>A página de Pagamentos é onde irá introduzir os valores do montante e dos juros para o financiamento. </para>
+
+<para
+>Em primeiro lugar, seleccione se a taxa de juro é calculada quando o pagamento é recebido ou quando chegar a altura. Se não souber, deixe a opção com o valor por omissão. </para>
+
+<para
+>De seguida, indique os seguintes valores: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Montante do financiamento</term>
+    <listitem>
+      <para
+>O valor pedido para o financiamento.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Taxa de juro</term>
+    <listitem>
+      <para
+>A taxa de juros anual do financiamento.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Prazo</term>
+    <listitem>
+      <para
+>A duração do financiamento. Indique um número e seleccione a unidade em Meses ou Anos. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Pagamento (principal e juros)</term>
+    <listitem>
+      <para
+>O montante pago por cada prestação do financiamento. Isto é o total da amortização e dos juros pagos em cada pagamento. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Pagamento-balão</term>
+    <listitem>
+      <para
+>O pagamento final, feito no fim do prazo, para pagar o restante do financiamento. Para um financiamento a prestações, normalmente é igual a zero. Para um financiamento apenas a juro, será igual ao valor do empréstimo. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>Finalmente, use o botão <guibutton
+>Calcular</guibutton
+> para verificar os valores que introduziu. Se omitir dois ou mais valores, o botão fica desactivado, porque deixa de ser possível verificar se os valores introduzidos são consistentes: nesse caso, não será capaz de usar a funcionalidade de Financiamento no &kappname;, tendo aí de utilizar uma conta de Activo ou Passivo para seguir manualmente o financiamento. </para>
+	
+<para
+>Se omitir um valor, o &kappname; irá tentar calculá-lo para si. Se tiver introduzido todos os valores, o &kappname; irá verificar se os valores são consistentes. O &kappname; não irá ajustar os valores introduzidos, exceptuando o "Pagamento-balão", que poderá ajustar ligeiramente para lidar com os arredondamentos. Se os valores forem inconsistentes, ou se o &kappname; não conseguir calcular o valor omitido, o &kappname; avisá-lo-á, para que possa corrigir os erros e repetir o cálculo. </para>
+	
+<para
+>Assim que os valores estejam consistentes, o botão <guibutton
+>Seguinte</guibutton
+> fica activo e você poderá passar à página seguinte. </para>
+	
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_3.png" format="PNG"/>
+              </imageobject>
+
+              <textobject>
+                <phrase
+>Assistente de Contas</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+	 
+<para
+>A página de Encargos é onde poderá introduzir quaisquer despesas ou encargos adicionais para os pagamentos dos financiamentos. </para>
+	
+<para
+>Se existirem alguns encargos, carregue no botão <guibutton
+>Encargos Adicionais</guibutton
+>. O editor de Parcelas da Transacção será apresentado para introduzir esses encargos. Todas as linhas que forem aqui adicionadas serão incluídas na calendarização do pagamento do financiamento. Quando gravar as parcelas, a página de Encargos irá mostrar o pagamento da amortização e dos juros, os encargos adicionais e o pagamento periódico total. </para>
+	
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_4.png" format="PNG"/>
+              </imageobject>
+
+              <textobject>
+                <phrase
+>Assistente de Contas</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+	  
+<para
+>O &kappname; irá criar uma <link linkend="details.schedules"
+>transacção agendada</link
+> para o seu financiamento. A página da Calendarização é onde poderá introduzir os detalhes restantes para a criação do evento recorrente. </para>
+	
+<para
+>Primeiro, indique a Categoria a que será associado o juro do financiamento. Depois, indique a conta de onde será feito o pagamento do financiamento. </para>
+	
+<para
+>A página também mostra a data do primeiro pagamento, para a qual será criado o Evento Recorrente. </para>
+	
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_5.png" format="PNG"/>
+              </imageobject>
+
+              <textobject>
+                <phrase
+>Assistente de Contas</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Opcionalmente, o &kappname; pode criar uma transacção que representa o que foi recebido ou pago, quando foi criado o financiamento. </para>
+	
+<para
+>Se pediu emprestado ou emprestou dinheiro, a conta de ou para onde foi pago o montante do empréstimo. </para>
+	
+<para
+>Se pediu emprestado dinheiro para pagar um carro, poderá seleccionar ou criar uma conta de Activo que o ajuda a seguir o valor do carro novo. </para>
+	
+<para
+>Se tiver financiado de novo um financiamento existente, assinale a opção "Financiar de novo o empréstimo existente", seleccione a conta de Financiamento e o &kappname; irá então criar uma transacção de transferência que compense o financiamento existente. </para>
+	
+<para
+>Se não quiser criar a transacção de compensação, assinale a opção "Não criar a transacção". </para>
+</sect2>
+
+<sect2 id="details.accounts.create.parent">
+<title
+>Conta-Mãe</title>
+
+<para>
+  <screenshot>
+	<screeninfo
+>Conta-Mãe</screeninfo>
+	<mediaobject>
+	  <imageobject>
+            <imagedata fileref="accwiz10.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Assistente de Contas</phrase>
+	  </textobject>
+	</mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Este é o penúltimo passo na criação de uma conta nova. É apresentada uma árvore de contas. A árvore terá as suas contas de Activos ou Passivos, dependendo do tipo de conta que está a ser criada. </para>
+
+<para
+>Seleccione a conta que deseja que possa a conta nova. Se não seleccionar uma conta-mãe, a conta nova será criada no nível de topo. </para>
+
+<para
+>A página da Conta-Mãe não aparece de momento para os Financiamentos, porque não podem ser criados como sub-contas. Do mesmo modo, as contas de Investimento também não poderão conter outras contas, por isso também não aparecem na árvore. </para>
+</sect2>
+
+<sect2>
+<title
+>Rever e gravar os detalhes da conta</title>
+
+<para>
+  <screenshot>
+          <screeninfo
+>Revisão</screeninfo>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="accwiz9.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase
+>Assistente de Contas</phrase>
+            </textobject>
+          </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Este é o passo final na criação de uma conta nova. É apresentado um resumo da informação introduzida. Reveja-a e, se estiver tudo bem, carregue no botão Terminar. Caso contrário, carregue no botão <guibutton
+>Recuar</guibutton
+> para fazer correcções ou no botão Cancelar para abandonar a criação de uma conta nova. </para>
+
+<para
+>NOTA: O Tipo e a Moeda não podem, neste momento, ser alteradas após a criação da conta. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.accounts.viewing">
+<title
+>Abrir / ver as contas</title>
+
+<para
+>Para abrir uma conta na área dos Livros de Registos, tanto poderá carregar na referência à conta na área Inicial, como carregar no ícone dos <guiicon
+><inlinemediaobject
+> <imageobject
+> <imagedata fileref="ledgers_view.png"/> </imageobject
+> </inlinemediaobject
+>Livros de Registos</guiicon
+>, no selector de áreas, seleccionando depois a conta na lista que aparece no topo desta área. Em alternativa, na área da <guiicon
+>Conta</guiicon
+>, poderá tanto fazer duplo-click no item de conta como carregar com o botão direito e seleccionar o item <guimenuitem
+>Abrir o livro de registos</guimenuitem
+>. </para>
+</sect1>
+
+<sect1 id="details.accounts.edit">
+<title
+>Editar a Informação da Conta</title>
+
+<para
+>Para editar uma dada conta, carregue com o botão direito sobre a mesma e escolha a opção <menuchoice
+><guimenuitem
+>Editar a conta...</guimenuitem
+></menuchoice
+> ou, com essa conta aberta no livro de registos, seleccione a opção do menu <menuchoice
+><guimenu
+>Conta</guimenu
+><guimenuitem
+>Editar a Conta...</guimenuitem
+></menuchoice
+>. Irá abrir uma janela com várias páginas, cada uma delas permitindo ver e alterar certos dados acerca da conta. Para mais informações sobre qualquer um desses detalhes, veja a secção sobre como <link linkend="details.accounts.create"
+>criar uma nova conta</link
+>. </para>
+
+<para>
+  <screenshot>
+        <screeninfo
+>Editar uma conta</screeninfo>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="account_edit.png" format="PNG"/>
+          </imageobject>
+
+          <textobject>
+            <phrase
+>Editar a informação da conta</phrase>
+          </textobject>
+        </mediaobject>
+  </screenshot>
+</para>
+
+<formalpara
+><title
+>Geral</title>
+<para
+>Ver a informação geral acerca da conta e mudar o nome, a data de início ou de abertura, assim como alguns dados básicos da conta. </para>
+</formalpara>
+
+<formalpara
+><title
+>Instituição</title>
+<para
+>Ver e alterar a instituição bancária associada e os números de conta. Poderá também criar aqui uma nova instituição. </para>
+</formalpara>
+
+<formalpara
+><title
+>Hierarquia</title>
+<para
+>Poderá alterar a conta-mãe se carregar noutra conta-mãe desta janela da hierarquia de contas. </para>
+</formalpara>
+
+<formalpara
+><title
+>Limites</title>
+<para
+>Esta página só está presente para contas de activos e passivos. Se indicar montantes nos campos disponíveis, o &kappname; avisá-lo-á quando o saldo da conta atingir estes valores. </para>
+</formalpara>
+
+<formalpara
+><title
+>Imposto</title>
+<para
+>Aqui poderá verificar se esta é uma conta de IVA, e se deve incluir esta conta nos relatórios de impostos. </para>
+</formalpara>
+
+<formalpara
+><title
+>Configuração 'Online'</title>
+<para
+>Esta página só estará presente se a conta tiver sido associada a uma <link linkend="details.impexp.ofxdirectconnect"
+>conta 'online'</link
+>. Tem três sub-páginas. </para>
+</formalpara>
+
+<itemizedlist>
+<listitem>
+<para
+><emphasis
+>Detalhes da Conta</emphasis
+> Isto mostra o estado da ligação 'online', o número de conta e o banco/corrector, permitindo-lhe guardar ou alterar a senha da conta 'online'. </para>
+</listitem>
+
+<listitem>
+<para
+><emphasis
+>Detalhes do OFX</emphasis
+> Aqui poderá ajustar certos detalhes que o &kappname; usa quando estabelece uma ligação OFX com a instituição. Isto só deve ser necessário se obtiver alguns erros quando configurar a conta da primeira vez, ou se a sua instituição mudar o programa servidor de OFX. </para>
+</listitem>
+
+<listitem>
+<para
+><emphasis
+>Detalhes da Importação</emphasis
+> Aqui poderá dizer ao &kappname; qual a data de início que deve usar para a importação. A começar na versão 4.6, poderá escolher se o nome do beneficiário se baseia no campo PAYEEID, NAME ou MEMO da transacção importada. </para>
+</listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="details.accounts.delete">
+<title
+>Apagar as contas</title>
+
+<para
+>Para apagar uma conta, remova por favor todas as transacções da mesma no livro de registos. De seguida, procure a conta na área de contas e, após carregar com o botão direito no item, de modo a mostrar o menu de contexto, seleccione a opção <guimenuitem
+>Apagar a conta...</guimenuitem
+> desse menu. </para>
+
+<para
+>Se não for capaz de apagar uma conta que pareça não ter transacções na mesma, verifique o seu filtro. Veja em <menuchoice
+> <guimenu
+>Configuração</guimenu
+> <guimenuitem
+>Configurar o &kappname;</guimenuitem
+> <guimenuitem
+>Geral</guimenuitem
+> <guimenuitem
+>Filtro</guimenuitem
+> </menuchoice
+>. Limpe todos os filtros. Coloque a data inicial como 1.1.1900 ou algo do género. </para>
+
+<para
+>Poderão existir algumas transacções no seu livro de registos que não apareçam, por exemplo se tiver escrito o ano errado ao fazer uma inserção, de forma inadvertida, ficando assim fora da data de abertura do &kappname;. Esta aparece por baixo da área de registo, como fundos restantes. </para>
+</sect1>
+</chapter>

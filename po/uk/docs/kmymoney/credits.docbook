@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="credits">
+<chapterinfo>
+  <date
+>5 квітня 2019 року</date>
+  <releaseinfo
+>5.0.4</releaseinfo>
+</chapterinfo>
+
+<title
+>Подяки</title>
+
+<para
+>Авторські права на програму належать Команді з розробки &kmymoney;, 2000–2019. </para>
+
+<para
+>&underGPL; </para>
+
+<para
+>Авторські права на документацію до програми належать Команді з розробки &kmymoney;, 2000–2019. </para>
+
+<para
+>Переклад українською: Юрій Чорноіван <email
+>yurchor@ukr.net</email
+></para
+> 
+<para
+>&underFDL; </para>
+
+<sect1 id="credits.active">
+<title
+>Активні розробники</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title
+>Thomas Baumgart &Thomas.Baumgart.mail;</title>
+      <para
+>Керівник випусків і фактичний супровідник. Рушій. Адміністратор проєкту. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Ralf Habacker &Ralf.Habacker.mail;</title>
+      <para
+>Розробник.</para>
+    </formalpara>
+  </listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="credits.special">
+<title
+>Особлива подяка</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title
+>Jack Ostroff &Jack.H.Ostroff.mail;</title>
+      <para
+>Документація та підтримка користувачів.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Kevin Tambascio <email
+>ktambascio@users.sourceforge.net</email
+></title>
+      <para
+>Початкова підтримка інвестування.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Javier Campos Morales <email
+>javi_c@users.sourceforge.net</email
+></title>
+      <para
+>Розробник і художник.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Robert Wadley &Robert.Wadley.mail;</title>
+      <para
+>Художник. Піктограми, вікно вітання, перегляд домівки.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Laurent Montel <email
+>montel@kde.org</email
+></title>
+      <para
+>Латки та портування на &kde;4.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Wolfgang Rohdewald <email
+>woro@users.sourceforge.net</email
+></title>
+      <para
+>Латки.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Marko Käning <email
+>mk-lists@email.de</email
+></title>
+      <para
+>Латки та пакування і KF5 для OS X.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Allan Anderson ✝&Allan.Anderson.mail;</title>
+      <para
+>Латки. Імпортування та експортування даних CSV.</para>
+    </formalpara>
+  </listitem>
+
+</itemizedlist>
+</sect1>
+
+<sect1 id="credits.past">
+<title
+>Колишні розробники та учасники розробки попередніх версій</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title
+>Cristian Oneţ &Cristian.Onet.mail;</title>
+      <para
+>Латки і додатки.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Cristian Dávid &Christian.David.mail;</title>
+      <para
+>Розробник.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Łukasz Wojniłowicz &Lukasz.Wojnilowicz.mail;</title>
+      <para
+>Розробник.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Michael Edwardes &Michael.T.Edwardes.mail;</title>
+      <para
+>Початковий автор, більша частина початкового коду. Адміністратор проєкту. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Alvaro Soliverez &Alvaro.Soliverez.mail;</title>
+      <para
+>Прогноз, звіти</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Ace Jones &Ace.Jones.mail;</title>
+      <para
+>Логіка звітів. Імпортування OFX. Інтерактивні курси. Редактор документації.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Tony Bloomfield &Tony.Bloomfield.mail;</title>
+      <para
+>Інструмент імпортування &gnucash;. Підтримка баз даних.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Felix Rodriguez <email
+>frodriguez@users.sourceforge.net</email
+></title>
+      <para
+>Адміністратор проєкту.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>John C <email
+>tacoturtle@users.sourceforge.net</email
+></title>
+      <para
+>Розробник.</para>
+    </formalpara>
+  </listitem>
+ 
+  <listitem>
+    <formalpara>
+      <title
+>Fernando Vilas &Fernando.Vilas.mail;</title>
+      <para
+>Підтримка баз даних.</para>
+    </formalpara>
+  </listitem>
+
+
+  <listitem>
+    <formalpara>
+      <title
+>Roger Lum &Roger.Lum.mail;</title>
+      <para
+>Документація.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Darin Strait &Darin.Strait.mail;</title>
+      <para
+>Документація.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Colin Wright &Colin.Wright.mail;</title>
+      <para
+>Латки і документація.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Bernd Gonsior <email
+>bernd.gonsior@googlemail.com</email
+></title>
+      <para
+>Звіти. Перехід на &kde;4/&Qt;4.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Ian Neal <email
+>iann_bugzilla@blueyonder.co.uk</email
+></title>
+      <para
+>Заплановані операції та календарі.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Перехід на &kde;4/&Qt;4</title>
+      <para
+>Це був доволі складний перехід, у якому взяло участь багато розробників. Вибачте, якщо ми не згадали вашого імені.</para>
+    </formalpara>
+  </listitem>
+
+</itemizedlist>
+
+</sect1>
+</chapter>

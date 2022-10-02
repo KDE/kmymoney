@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.search">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Darin.Strait; &Darin.Strait.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Buchungen suchen</title>
+
+<sect1 id="details.search.general">
+<title
+>Allgemein</title>
+
+<para
+>Im Dialog <guilabel
+>Buchungen suchen</guilabel
+> können Sie Ihre Datenbasis nach den von Ihnen angegebenen Kriterien durchsuchen. Sie gelangen dorthin, indem Sie im Menü <guimenu
+>Bearbeiten</guimenu
+> den Punkt <guimenuitem
+>Buchung suchen ...</guimenuitem
+> auswählen. </para>
+
+<para
+>Es gibt zwei Karteikarte in diesem Dialogfenster. Die Karteikarte <quote
+>Kriterien</quote
+> zeigt einige weitere Karteikarten, um die Suchkriterien einzugeben. </para>
+
+<para
+>Die Suchergebnisse werden auf der Karteikarte <quote
+>Resultat</quote
+> angezeigt, nachdem die Suche abgeschlossen ist. Unterhalb der Ergebnisliste zeigt &kmymoney; die Anzahl der gefundenen Buchungen, die den Suchkriterien entsprechen. Ein Doppelklick auf eine Buchung in der Ergebnisliste öffnet das zugehörige Kontenbuch und zeigt die Buchung dort. </para>
+
+<para
+>Sobald der Knopf <guibutton
+>Suchen</guibutton
+> gedrückt wird, wird die Suche auf Basis aller eingegebenen Suchkriterien gestartet. </para>
+
+<para
+>Der Knopf <guibutton
+>Zurücksetzen</guibutton
+> setzt alle Eingabefelder der Suchkriterien auf den Karteikarten zurück auf die Standardwerte. Hierdurch können Sie neue Suchkriterien festlegen. </para>
+
+<para
+>Mit dem Knopf <guibutton
+>Schließen</guibutton
+> wird das Fenster <guilabel
+>Buchungen suchen</guilabel
+> geschlossen. </para>
+
+</sect1>
+
+<sect1 id="details.search.criteria">
+<title
+>Suchkriterien</title>
+
+<para
+>Auf der Karteikarte <quote
+>Kriterien</quote
+> befinden sich weitere Karteikarten, in denen Sie verschiedene Typen von Suchkriterien festlegen können. Unterhalb der Kriterien-Karteikarte zeigt &kmymoney; an, welche Kriterien für die Suche festgelegt wurden ("Aktuelle Auswahl"). </para>
+
+<sect2 id="details.search.text">
+<title
+>Text</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-text.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialogfenster "Buchungen suchen", Karteikarte "Text"</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Auf dieser Karteikarte können Sie den Text angeben, nach dem in den Buchungen gesucht werden soll. Über die beiden Ankreuzfelder können Sie beeinflussen, wie der eingegebene Text für die Suche verwendet wird. </para>
+
+<para
+>In der Standardeinstellung wird nach einem beliebigen Vorkommen innerhalb der Textfelder gesucht. Zum Beispiel: </para>
+
+<para>
+<itemizedlist>
+  <listitem>
+    <para
+><quote
+>Beste</quote
+> findet <quote
+>Beste Kuchen GmbH</quote
+></para>
+  </listitem>
+  <listitem>
+    <para
+><quote
+>este</quote
+> wird ebenfalls <quote
+>Beste Kuchen GmbH</quote
+> finden. </para>
+  </listitem>
+</itemizedlist>
+</para>
+
+<para
+>Wählen Sie in der Auswahlliste direkt neben dem Texteingabefeld den Eintrag <guilabel
+>Enthält</guilabel
+> aus, so werden alle Buchungen nach dem Vorkommen des eingegebenen Textes durchsucht. Bei der Option <guilabel
+>Enthält nicht</guilabel
+> werden alle Buchungen in die Trefferliste übernommen, die den eingegebenen Text nicht enthalten. </para>
+
+<para
+>Wenn Sie die Option <guilabel
+>Groß-/Kleinschreibung beachten</guilabel
+> ankreuzen, muss auch die Groß- und Kleinschreibung beim Vergleich übereinstimmend sein. So wird zum Beispiel die Eingabe <quote
+>best</quote
+> die Buchung <quote
+>Beste Kuchen GmbH</quote
+> nicht finden, wenn die Option gesetzt ist. </para>
+
+<para
+>Sobald die Option <guilabel
+>Text als regulären Ausdruck interpretieren</guilabel
+> gesetzt ist, wird der eingegebene Text als regulärer Ausdruck interpretiert. Um zu erfahren, was "reguläre Ausdrücke" sind und wie man sie erstellt, schauen Sie zum Beispiel in die &Qt;-Dokumentation in den Abschnitt <ulink url="https://doc.qt.io/qt-5/qregexp.html"
+>QRegExp-Klasse</ulink
+>. </para>
+</sect2>
+
+<sect2 id="details.search.account">
+<title
+>Konto</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-account.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialogfenster "Buchungen suchen", Karteikarte "Konto"</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Auf dieser Karteikarte können Sie angeben, welche Konten durchsucht werden sollen. </para>
+
+<para
+>Die Konten werden als Baumansicht dargestellt, wobei die angekreuzten Konten durchsucht werden. Durch Klick auf den Knopf <guibutton
+>Alle</guibutton
+> werden alle Konten angekreuzt, durch den Knopf <guibutton
+>Keine</guibutton
+> werden alle Kreuze entfernt. Einzelne Konten können durch Anklicken der kleinen Box direkt neben dem Kontennamen mit der &LMBn; angekreuzt werden. Einen ganzen Zweig der Baumhierarchie kann durch Anklicken mit der &RMBn; zum Durchsuchen markiert werden. </para>
+</sect2>
+
+<sect2 id="details.search.date">
+<title
+>Datum</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-date.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialogfenster "Buchungen suchen", Karteikarte "Datum"</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Hier können Sie angeben, in welchem Zeitbereich die Suche durchgeführt wird. </para>
+
+<para
+>Die Auswahlliste <quote
+>Bereich</quote
+> bietet eine komfortable Möglichkeit, die Eingabefelder Von und Bis vorzubelegen. Zusätzlich können beide Eingabefelder auch separat bearbeitet werden, indem Sie individuelle Daten festlegen. Die Eingabefelder verhindern die Eingabe von nicht existierenden Daten. Durch beiden Pfeile hoch und runter kann das Datum ebenfalls variiert werden. Über das kleine Kalendersymbol gelangen Sie zu einem Kalender, in dem Sie sehr einfach Daten auswählen können. </para>
+</sect2>
+
+
+<sect2 id="details.search.amount">
+<title
+>Betrag</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-amount.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialogfenster "Buchungen suchen", Karteikarte "Betrag"</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Mit Hilfe dieser Karteikarte legen Sie fest, welche Beträge gesucht werden sollen. </para>
+
+<para
+>Sie können entweder einen festen Betrag, oder einen Bereich angeben, in dem sich das Suchergebnis befinden soll. Über das Taschenrechnersymbol öffnet sich ein kleiner Taschenrechner, der Ihnen bei der Eingabe der Werte behilflich ist. </para>
+</sect2>
+
+<sect2 id="details.search.category">
+<title
+>Kategorie</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-category.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialogfenster "Buchungen suchen", Karteikarte "Kategorie"</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Hier können Sie festlegen, welche Kategorien durchsucht werden sollen. </para>
+
+<para
+>Die Kategorien werden als Baumansicht dargestellt, wobei die angekreuzten Kategorien durchsucht werden. Durch Klick auf den Knopf <guibutton
+>Alle</guibutton
+> werden alle Kategorien angekreuzt, durch den Knopf <guibutton
+>Keine</guibutton
+> werden alle Kreuze entfernt. Durch den Knopf <guibutton
+>Einnahme</guibutton
+> werden alle Einnahme-Kategorien markiert und alle Ausgabekategorien abgewählt. Durch den Knopf <guibutton
+>Ausgabe</guibutton
+> werden alle Ausgaben-Kategorien markiert und die Kreuzchen bei den Einnahme-Kategorien entfernt. </para>
+
+<para
+>Einzelne Kategorien können durch Anklicken des Ankreuzfelds direkt neben dem Kategoriennamen mit der &LMBn; angekreuzt werden. Einen ganzen Zweig der Baumhierarchie kann durch Anklicken mit der &RMBn; zum Durchsuchen markiert werden. </para>
+</sect2>
+
+<sect2 id="details.search.payee">
+<title
+>Zahlungsempfänger</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-payee.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialogfenster "Buchungen suchen", Karteikarte "Zahlungsempfänger"</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Auf dieser Karteikarte wählen Sie die Zahlungsempfänger aus, nach denen gesucht werden soll.  </para>
+
+<para
+>Zahlungsempfänger, nach denen gesucht werden soll, werden mit einem Kreuzchen gekennzeichnet. Durch Klick auf den Knopf <guibutton
+>Alle</guibutton
+> werden alle Zahlungsempfänger angekreuzt, durch den Knopf <guibutton
+>Keine</guibutton
+> werden alle Kreuze entfernt. Einzelne Zahlungsempfänger können durch Anklicken des Ankreuzfelds direkt neben dem Namen des Empfängers mit der linken Maustaste angekreuzt werden. </para>
+
+<para
+>Wenn Sie <guilabel
+>Buchungen ohne Empfänger auswählen</guilabel
+> ankreuzen, werden nur Buchungen ohne Empfänger ermittelt. </para>
+
+</sect2>
+
+<sect2 id="details.search.details">
+<title
+>Details</title>
+
+<para
+>Hier können Sie einige zusätzliche Suchkriterien festlegen. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-details.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialogfenster "Buchungen suchen", Karteikarte "Details"</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para>
+<itemizedlist>
+  <title
+>In der Auswahlliste "Typ" können Sie zwischen folgenden Werten wählen:</title>
+  <listitem
+><para
+>Alle Typen</para
+></listitem>
+  <listitem
+><para
+>Zahlungen</para
+></listitem>
+  <listitem
+><para
+>Einzahlungen</para
+></listitem>
+  <listitem
+><para
+>Umbuchungen</para
+></listitem>
+</itemizedlist>
+
+<itemizedlist>
+  <title
+>Im Feld "Zustand" können Sie auswählen:</title>
+  <listitem
+><para
+>Alle Zustände</para
+></listitem>
+  <listitem
+><para
+>Nicht abgeglichen</para
+></listitem>
+  <listitem
+><para
+>Verrechnet</para
+></listitem>
+  <listitem
+><para
+>Abgeglichen</para
+></listitem>
+</itemizedlist>
+
+<itemizedlist>
+  <title
+>Im Feld Gültigkeit haben Sie die Wahl zwischen:</title>
+  <listitem
+><para
+>Jede Buchung</para
+></listitem>
+  <listitem
+><para
+>Gültige Buchung</para
+></listitem>
+  <listitem
+><para
+>Ungültige Buchung</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Des weiteren können Sie entweder nach einer bestimmten Buchungsnummer oder einen Bereich von Buchungsnummern suchen. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="details.search.results">
+<title
+>Suchergebnisse</title>
+
+<para
+>Die Karteikarte <quote
+>Resultat</quote
+> zeigt das Datum, das Konto, einige Details, den Abgleichstatus, Auszahlungs- und Einzahlungsbetrag für jede gefundene Buchung an. Durch Anklicken der Spaltenüberschriften können Sie die Sortierreihenfolge verändern. </para>
+
+<para
+>Ein Doppelklick auf eine Buchung öffnet das zugehörige Kontenbuch und die angeklickte Buchung erhält dort den Fokus. </para>
+
+</sect1>
+
+</chapter>

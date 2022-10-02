@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.payees">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+  </authorgroup>
+  <date
+>2019-06-24</date>
+  <releaseinfo
+>5.0.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Betalare</title>
+
+<para
+>Betalarvyn tillhandahåller detaljerad information om alla betalningsmottagare och betalare inblandade i transaktioner. Det är posterna till och från pengar överförs. &kmymoney;  lagrar information om alla betalningsmottagare och betalare för alla befintliga transaktioner. Det gör det möjligt att välja en betalningsmottagare från en lista istället för att behöva skriva in hela namnet, vilket också ökar risken för felstavning eller inmatning av fel namn. </para>
+
+<para
+>Betalarvyn är uppdelad i två huvudområden: en lista över betalningsmottagare och betalare till vänster, och ett informationsområde till höger. Sektionen <guilabel
+>Dina betalningsmottagare</guilabel
+> gör det möjligt att lägga till, ta bort, byta namn på, och sammanfoga betalningsmottagare. Informationsområdet har flera flikar, som visar transaktionerna, adress, matchningsinformation, standardkategori, och kontonummer för betalningsmottagaren markerad i listan. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payeeview.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect1 id="details.payees.list">
+<title
+>Betalarlista</title>
+
+<para
+>En lista med betalningsmottagare och betalare för din data finns på vänster sida i vyn. Betalningsmottagarlistan är sorterad alfabetiskt. </para>
+
+<sect2>
+<title
+>Lägga till en betalningsmottagare eller betalare</title>
+
+<para
+>För att lägga till en betalningsmottagare eller betalare välj <guibutton
+>+Ny</guibutton
+>. Det skapar en ny betalare som kallas <quote
+>Ny betalare</quote
+>. Det går också att högerklicka på vilken befintlig betalare som helst och välja <guimenuitem
+>Lägg till betalare</guimenuitem
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Byta namn på en betalningsmottagare eller betalare</title>
+
+<para
+>För att byta namn på en betalningsmottagare eller betalare, dubbelklicka antingen på namnet eller högerklicka och välj <guimenuitem
+>Byt namn på betalare</guimenuitem
+>. Namnet blir då redigerbart. Att ändra namnet påverkar namnet i alla transaktioner där det finns. </para>
+</sect2>
+
+<sect2>
+<title
+>Ta bort en betalningsmottagare eller betalare</title>
+
+<para
+>Högerklicka på namnet och välj <guimenuitem
+>Ta bort betalare</guimenuitem
+> för att ta bort en betalningsmottagare eller betalare. Om betalaren har några transaktioner, visas en dialogruta som låter dig tilldela dem till en annan betalningsmottagare, och dessutom en kryssruta för att låta ett borttaget namn läggas till i den nya betalarens matchningslista. Ett annat sätt att byta namn på en befintlig betalningsmottagare är att markera betalningsmottagaren eller betalaren genom att vänsterklicka på den och därefter vänsterklicka på <guibutton
+>Bort</guibutton
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.payees.personalinformation">
+<title
+>Ytterligare information om betalare</title>
+
+<sect2>
+<title
+>Personlig information</title>
+
+<para
+>För att visa och redigera den personliga informationen som hör ihop med en viss betalare, markera betalaren i listan och välj adressfliken. Förutom adressinformation kan också telefonnummer, e-postadress och anmärkningar som gäller den markerade betalaren lagras. För att ändra informationen, redigera direkt i informationsområdet och tryck på knappen Uppdatera när du är klar. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Fliken med personlig information</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_info.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Personlig information</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect2>
+
+<sect2 id="details.payees.personalinformation.matching">
+<title
+>Inställning av transaktionsmatchning</title>
+
+<sect3>
+<title
+>Översikt</title>
+
+<para
+>&kmymoney; har möjlighet att automatiskt tilldela lämplig betalare till importerade transaktioner. Det kan vara praktiskt när transaktioner importeras från banken när betalarens namn har extra onödiga tecken, eller ännu värre, om betalarnas namn ändras. Möjligheten att matcha transaktioner med en viss betalningsmottagare hjälper till att åstadkomma en konsekvent namngivning av betalningsmottagare i huvudboken och i rapporter. </para>
+
+<para
+>Låt oss exempelvis säga att din månatliga bostadsamortering kommer från banken som <quote
+>SUNTRUST BANK MAPLE VALLEY, GA 111506</quote
+> en månad, och därefter <quote
+>SUNTRUST BANK MAPLE VALLEY, GA 121606</quote
+> nästa månad. Du skulle helst vilja att båda transaktionerna helt enkelt tilldelas till din betalare <quote
+>SunTrust</quote
+>. Då är funktionen för transaktionsmatchning någonting för dig. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Matchningsfliken för betalare</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_match.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Matchningsinformation för betalare</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect3>
+
+<sect3>
+<title
+>Inställning</title>
+
+<para
+>Du kan ställa in transaktionsmatchning under matchningsfliken. Du kan välja ett av fyra alternativ med kombinationsrutan <guilabel
+>Matchningsmetod</guilabel
+>. </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Ingen matchning. Inaktiverar funktionen för den här betalningsmottagaren. Det är den normala inställningen för alla betalningsmottagare. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Matcha med betalningsmottagarens namn (partiellt). Aktiverar funktionen baserat på en partiell namnmatchning av betalningsmottagaren, och använder själva betalningsmottagarens namn som matchningsbegrepp. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Matcha med betalningsmottagarens namn (exakt). Det aktiverar funktionen baserat på en exakt matchning av betalningsmottagaren. Den här matchningsmetoden ska användas om du vill hålla reda på olika betalningsmottagare som har samma företagsnamn men är lokaliserade på olika ställen. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Matcha med ett namn listat nedan. Det möjliggör matchning baserat på flera olika eller valfria namn för en betalningsmottagare. Den här matchningsmetoden ska användas om du har en särskilt betalningsmottagare som har olika företagsnamn men du vill att alla importerade transaktioner som identifieras med något av namnen ska höra ihop med en enda betalningsmottagare i &kmymoney;. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>För vilket som helst av alternativen kan du välja om skiftläge ska ignoreras eller inte i  stavningen av betalningsmottagaren, baserat på om du markerar <guilabel
+>Ignorera skiftläge</guilabel
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Importera transaktioner</title>
+
+<para
+>När du importerar transaktioner med användning av QIF-import, eller använder ett insticksprogram som OFX eller AqBanking, beaktas de matchningsnycklar du har angivit. Om matchningsnyckeln för en av dina betalningsmottagare hittas någonstans i den importerade transaktionens betalningsmottagare, tilldelas motsvarande betalningsmottagare från din lista till transaktionen. På så sätt kommer nyckeln <quote
+>SunTrust</quote
+> att matcha <quote
+>SUNTRUST BANK MAPLE VALLEY,GA</quote
+> eller till och med <quote
+>MORGENSUNTRUST&amp;LOAN</quote
+>. Du måste alltså välja matchningsnycklar omsorgsfull. <note
+> <para
+>Om en betalare i en transaktion matchar mer än en matchningsnyckel, är beteendet odefinierat. &kmymoney; väljer godtyckligt en av betalarna som matchar.</para>
+  </note>
+</para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.payees.transactionhistory">
+<title
+>Visa transaktionshistorik</title>
+
+<para
+>För att visa alla transaktioner som hör ihop med en viss betalningsmottagare, markera betalningsmottagaren i listan och under transaktionsfliken i informationsområdet. Att dubbelklicka på en viss transaktion tar dig direkt till den transaktionen i huvudboksfönstret för tillämpligt konto. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Transaktionsfliken</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_history.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transaktionshistorik</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect1>
+</chapter>
+

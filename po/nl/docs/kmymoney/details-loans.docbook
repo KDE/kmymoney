@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.loans">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Darin.Strait; &Darin.Strait.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Leningen</title>
+
+<sect1 id="details.loans.general">
+<title
+>Leningen begrijpen</title>
+
+<para
+>Deze sectie biedt een overzicht van hoe &kmymoney; leningen behandelt. Regels en gebruiken voor leningen en variëren van plaats tot plaats. Voor gedetailleerde uitleg over leningen, evenals informatie over locale regels en gebruiken, raadpleeg andere bronnen. </para>
+
+<para
+>Een lening is een overeenkomst waaronder een lener geld ontvangt van een uitlener en er mee akkoord gaat om het geld op een toekomstige datum terug te betalen. &kmymoney; stelt u in staat om leningen te volgen waarbij u, als lener, geld leent van, als lener, of geld uitleent aan iemand anders. De meeste mensen lenen meer dan ze uitlenen, dus u zult in het algemeen de lener zijn en een financieringsmaatschappij zal in het algemeen de uitlener zijn. Als u geld uitleent aan een familielid of een vriend, dan kunt u &kmymoney; gebruiken om deze lening eveneens te volgen. </para>
+
+<para
+>Deze handleiding zal aannemen dat u leent van een soort van financieringsmaatschappij, maar de hier besproken zaken zijn evengoed van toepassing op leningen die u zou kunnen hebben met een persoon. Het belangrijkste verschil tussen geld lenen en uitlenen is dat een categorie uitgaven wordt gebruikt om rente te volgen bij lenen van geld en een categorie inkomen wordt gebruikt om rente te volgen bij uit lenen van geld. </para>
+
+<formalpara
+><title
+>Leningbedrag</title>
+<para
+>De hoeveelheid die is uitgeleend wordt het <quote
+>leningbedrag</quote
+> of <quote
+>hoofdsom</quote
+> genoemd. </para>
+</formalpara>
+
+<formalpara
+><title
+>Looptijd</title>
+<para
+>De periode van een lening wordt zijn de <quote
+>termijn</quote
+> van de lening genoemd. Aan het eind van de termijn, zal het geheel van de hoofdsom teruggegeven moeten zijn aan de uitlener. Termijnen worden in het algemeen uitgedrukt in weken, maanden of jaren. Een termijn kan ook uitgedrukt worden door het aantal betalingen. Een eenjarige lening met wekelijkse betalingen zou beschreven kunnen worden als een eenjarige lening of een lening met 52 terugbetalingen. </para>
+</formalpara>
+
+<formalpara
+><title
+>Afbetalingen</title>
+<para
+>De afbetaling van de hoofdsom aan de uitlener wordt in het algemeen niet in zijn geheel gedaan. In plaats daarvan worden een serie afbetalingen gedaan, elk voorstellend een gedeelte van de hoofdsom. Zulke afbetalingen staan soms bekend als <quote
+>amortisatie betalingen</quote
+> en in &kmymoney; is <quote
+>Amortisatie</quote
+> gedefinieerd als de actie van afbetalen van een lening in delen. </para>
+</formalpara>
+
+<formalpara
+><title
+>Betalingsfrequentie</title>
+<para
+>Naar de frequentie van afbetalingen wordt gerefereerd als <quote
+>Betalingsfrequentie</quote
+> in &kmymoney;. Voorbeelden van perioden kunnen zijn wekelijks, tweewekelijks, maandelijks, per kwartaal of jaarlijks. In de VS, worden periodieke betalingen het meest gebruikelijk elke maand gedaan, de leningen periodiek is dan één maand. </para>
+</formalpara>
+
+<formalpara
+><title
+>Rentepercentage</title>
+<para
+>Voor het privilege om het geld te gebruiken zal de lener aan de uitlener een vergoeding betalen genaamd de <quote
+>rente</quote
+>, normaal uitgedrukt als een percentage van de hoofdsom over een gedefinieerde periode. Rentekoersen kunnen vast zijn, waar de rente niet wijzigt over de leeftijd van de lening of variabel, waar de rente in de tijd kan wijzigen. Rentebetalingen worden typisch meegenomen met elke periodieke afbetaling. </para>
+</formalpara>
+
+<formalpara
+><title
+>Periodieke afbetalingen</title>
+<para
+>Omdat deze afbetalingen in het algemeen gedaan worden op een soort van geplande basis, zoals wekelijks, maandelijks, per kwartaal of jaarlijks, wordt er naar gerefereerd als <quote
+>periodieke afbetalingen</quote
+>. De som van alle periodieke afbetalingen plus de eindbetaling telt op tot de hoofdsom van de lening plus de rente. </para>
+</formalpara>
+
+<formalpara
+><title
+>Kosten</title>
+<para
+>Er kunnen andere kosten zijn naast rente die vereist zijn om te betalen bij elke afbetalingstermijn. Deze worden <quote
+>terugkerende kosten</quote
+> genoemd. Voorbeelden van terugkerende kosten omvatten (maar zijn niet noodzakelijk beperkt tot): <itemizedlist>
+  <listitem>
+    <para
+><quote
+>In beslag neming</quote
+> of <quote
+>escrow</quote
+> betalingen in de rekening. (Betalingen van deze soort worden gewoonlijk gebruikt om fondsen vast te houden voor betaling van jaarlijkse of tweejaarlijkse eigenaarsbelastingen.) </para>
+  </listitem>
+
+  <listitem
+><para
+>Hypotheekverzekering</para
+></listitem>
+
+  <listitem
+><para
+>Verzekering tegen onvermogen</para
+></listitem>
+
+  <listitem
+><para
+>Onderhoudskosten voor een leningrekening</para
+></listitem>
+</itemizedlist>
+</para>
+</formalpara>
+
+<formalpara
+><title
+>Samenvatting</title>
+<para
+>Samengevat ontvangt de lener een som geld van de uitlener aan het begin van de lening. De lener doet periodieke betalingen aan de uitlener. De periodieke betaling is de som van de te betalen hoofdsom (die wordt gebruikt het saldo van de lening te verminderen) plus de rentebetaling (die rewards de uitlener beloont voor het gebruik van het geld door de lener) plus eventuele terugkerende kosten (die bijkomende bedragen dekken). Aan het einde van de lening heeft de lener de gehele hoofdsom terugbetaald. </para>
+</formalpara>
+</sect1>
+
+<sect1 id="details.loans.example">
+<title
+>Voorbeeld</title>
+<para
+>U hebt bijvoorbeeld $25,000.00 geleend voor een nieuwe auto en met de bank afgesproken elke maand gedurende 60 maanden een betaling te doen. De rente op de lening kan 5.5% zijn. </para>
+
+<para
+>In dit scenario is grootte van de lening $25,000.00. De termijn van de lening is 60 maanden of 5 jaar. De termijn van de lening kan ook beschreven worden als 60 betalingen omdat er één betaling per maand is gedurende 5 jaar. De afbetalingsfrequentie is één maand omdat periodieke afbetaling gedaan wordt eens per maand. De periodieke afbetaling, die berekend wordt door &kmymoney;, zou $477.53 zijn. </para>
+
+<para
+>Een <quote
+>leningenplan</quote
+> is een grafiek of tabel die de datum toont waarop een afbetaling dedaan zou moeten worden en de grootte van elke periodieke afbetaling. Deze planning breekt de periodieke afbetaling op in zijn bestanddelen: de afbetaling van de hoofdsom, de rentebetaling en de betaling van terugkerende kosten. </para>
+</sect1>
+
+<sect1 id="details.loans.creation">
+<title
+>Een nieuwe lening aanmaken</title>
+
+<para
+>In &kmymoney; is een lening een type rekening. Om dus een nieuwe lening aan te maken begint u met selecteren van menu-item <menuchoice
+><guimenu
+>Rekening</guimenu
+><guimenuitem
+>Nieuwe rekening</guimenuitem
+></menuchoice
+>. Ga door door de vragen te beantwoorden die de assistent u stelt. </para>
+
+<para
+>Optioneel kan een lening geassocieerd worden met een specifiek instituut. Als u leent van een hypotheekbedrijf of een bedrijf voor autoleningen, dan kunt u een instituutitem aanmaken die dit bedrijf beschrijft en het instituut associeert met uw lening. Als u leent van uw oom Ted, is er geen noodzaak om een instituut in te stellen. </para>
+</sect1>
+
+<sect1 id="details.loans.extra-payments">
+<title
+>Extra aflossingen op de hoofdsom bij leningen</title>
+
+<para
+>Als u een extra afbetaling van de hoofdsom wilt doen dan kunt u dat doen. <link linkend="details.ledger.transactions"
+>Voer een transactie in</link
+> eenvoudig door het grootboek te gebruiken. Deze extra afbetaling van de hoofdsom zal in rekening worden genomen voor de renteberekening die gedaan wordt voor de volgende periodieke betaling. </para>
+
+<para
+>Voorbeelden van extra afbetalingen van de hoofdsom omvatten (maar zijn niet noodzakelijk beperkt tot): </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Een extra $50 per maand bijdragen</para
+></listitem>
+
+  <listitem>
+    <para
+>Verdubbelen van de periodieke afbetaling van de hoofdsom voor elke periode. (De afbetaling van de hoofdsom is te vinden voor een specifieke periode door te refereren naar de leningplanning). </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Het maken van de 13de afbetaling van de hoofdsom elk jaar. (Dit neemt aan dat de lening wordt terugbetaald in maandelijkse delen), </para>
+  </listitem>
+</itemizedlist>
+
+<note
+><para
+>Als u de afbetaling van de hoofdsom verdubbelt met elke periodieke betaling, dan zult u de leningplanning voor elk deel opnieuw moeten berekenen. Dit biedt een accurate waarde voor de vereiste afbetaling van de hoofdsom voor elk deel. </para
+></note>
+</sect1>
+</chapter>
+

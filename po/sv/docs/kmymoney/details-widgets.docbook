@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="reference.widgets">
+<sect1info>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</sect1info>
+
+<title
+>Grafiska komponenter</title>
+
+<para
+>&kmymoney; har några specifika grafiska komponenter som inte finns i andra program. Användningen av dessa komponenter förklaras i det här kapitlet. </para>
+
+<sect2 id="reference.widgets.datepicker">
+<title
+>Grafisk datuminmatningskomponent</title>
+
+<para
+>När &kmymoney; behöver information om ett specifikt datum, t.ex. bokföringsdatum för en transaktion eller öppningsdatum för ett konto, erbjuds användaren den <emphasis
+>grafiska datuminmatningskomponenten</emphasis
+>. Komponenten består av tre fält och en knapp. Fälten visar <emphasis
+>dagen</emphasis
+>, <emphasis
+>månaden</emphasis
+> och <emphasis
+>året</emphasis
+> åtskilda med respektive skiljetecken för datum beroende på landsinställningarna. Om du klickar på knappen, öppnas den grafiska <emphasis
+>datumväljarkomponenten</emphasis
+>. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Dagens tips</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="date_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Grafisk datumkomponent</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Vänster eller höger piltangent kan användas för att byta mellan fälten med <emphasis
+>dagen</emphasis
+>, <emphasis
+>månaden</emphasis
+> och <emphasis
+>året</emphasis
+>. Genom att använda uppåtpil och neråtpil kan värdet i det valda fältet ökas eller minskas. Tangenterna <keycap
+>+</keycap
+> och <keycap
+>-</keycap
+> kan användas för att öka eller minska med en dag. Månads- och årsgränser tas hänsyn till, och ökas eller minskas om det behövs. Att trycka på <keycap
+>T</keycap
+> ställer in datumet till dagens datum. </para>
+
+<para
+>Datumet kan också ändras med musen. Att klicka på fältet med <emphasis
+>dagen</emphasis
+>, <emphasis
+>månaden</emphasis
+> eller <emphasis
+>året</emphasis
+> väljer det. Värdet kan därefter ökas eller minskas genom att använda piltangenterna till höger i komponenten. De fungerar precis på samma sätt som uppåtpilen och neråtpilen. </para>
+
+<para
+>Datumväljaren öppnas när knappen till höger om pilknapparna klickas. Den visar fyra pilknappar längst upp, som omger det valda månadsnamnet och året. Knapparna längst till vänster används för att minska året och månaden, knapparna till höger om året används för att öka månaden och året. Knappen längst till höger stänger datumväljaren. </para>
+
+<para
+>Under knapparna visar komponenten en kalendersida för respektive månad. Genom att klicka på en dag i den valda månaden, väljer man det datumet, stänger datumväljaren och överför det valda datumet till fälten med <emphasis
+>dagen</emphasis
+>, <emphasis
+>månaden</emphasis
+> och <emphasis
+>året</emphasis
+>. </para>
+
+<para
+>Längst ner i komponenten finns en knapp, ett textredigeringsfält och en kombinationsruta. Genom att klicka på knappen väljer man dagens datum i datumväljaren. Textfältet kan användas för att mata in ett specifikt datum. Genom att trycka på returtangenten visas datumet i datumväljaren. Kombinationsrutan låter användaren välja en specifik vecka, och fortsätta välja ett datum från den. </para>
+</sect2>
+
+<sect2 id="reference.widgets.value">
+<title
+>Värdeinmatning</title>
+<para
+>Den grafiska komponenten för värdeinmatning består av ett textfält (som accepterar siffror, skiljetecken för tusental och decimaltecken), samt en knapp till höger. Använd siffror för att skriva in värdet. Skilj på bråkdelen genom att skriva in decimaltecknet enligt landsinställningarna. Om du klickar på knappen till höger, eller trycker på en tangent som representerar en numerisk operator (t.ex. <keycap
+>+</keycap
+>, <keycap
+>-</keycap
+>, <keycap
+>/</keycap
+>, <keycap
+>*</keycap
+> eller <keycap
+>%</keycap
+>) dyker en liten räknare upp, som låter dig beräkna det slutgiltiga värdet. </para>
+
+<para
+>Negativa värden kan matas in genom att inleda värdet med ett minustecken. Om landsinställningarna visar negativa nummer med parenteser omkring värdet, kan värdet också omslutas av parenteser i komponenten för värdeinmatning. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Dagens tips</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="value_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Grafisk värdekomponent</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Använd räknarkomponenten precis som en vanlig räknare, och när du väl är klar, lämna den genom att klicka på knappen <guibutton
+>=</guibutton
+> eller tryck på tangenten <keycap
+>=</keycap
+> på tangentbordet. </para>
+</sect2>
+
+<sect2 id="reference.widgets.payee">
+<title
+>Inmatning av betalningsmottagare/utbetalare</title>
+
+<para
+>När du blir tillfrågad om att skriva in en betalningsmottagare eller utbetalare för en transaktion, kan du börja skriva in namnet genom att trycka på tangentbordstangenter. Så länge motsvarande poster finns i listan med betalningsmottagare och utbetalare som upprätthålls av &kmymoney;, visas de i en ruta under eller ovanför textinmatningsområdet. Genom att använda musen eller uppåtpil och neråtpil, kan man välja ett namn i listan. Används tangentbordet, krävs också att posten väljes genom att trycka på returtangenten. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Dagens tips</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Grafisk betalningsmottagarkomponent</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Om ett namn skrivs in som &kmymoney; inte ännu känner till, blir du tillfrågad om du vill skapa en ny post med betalningsmottagare eller utbetalare. Om du inte vill göra det, rensas fältet. Annars skapas posten och läggs till i listan. </para>
+
+<para
+>När redigeringsfältet väl innehåller tecken, visar listan bara de betalare som motsvarar den inmatade teckenföljden. Dubbelklicka på pilen i kombinationsrutan för att visa alla betalare i listan. </para>
+
+</sect2>
+
+<sect2 id="reference.widgets.category">
+<title
+>Inmatning av kategori eller konto</title>
+
+<para
+>När du blir tillfrågad om att skriva in ett kategori- eller kontonamn, kan du börja skriva in namnet genom att trycka på tangentbordstangenter. Så länge motsvarande poster finns i listan med kategorier och konton kända av &kmymoney;, visas de i en ruta under eller ovanför textinmatningsområdet. Genom att använda musen eller uppåtpil och neråtpil, kan man välja ett namn i listan. Används tangentbordet, krävs också att posten väljes genom att trycka på returtangenten. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Dagens tips</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="category_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Grafisk kategorikomponent</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Om ett namn skrivs in som &kmymoney; inte ännu känner till, blir du tillfrågad om du vill skapa en ny kategoripost. Om du inte vill göra det, rensas fältet. Annars skapas posten och läggs till i listan. </para>
+
+<para
+>När redigeringsfältet väl är fyllt med tecken, visar listan bara de kategorier eller konton som motsvarar den inmatade teckenföljden. Dubbelklicka på pilen i kombinationsrutan för att visa den fullständiga listan. </para>
+
+</sect2>
+</sect1>

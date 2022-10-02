@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.investments">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+  </authorgroup>
+  <date
+>30/08/2014</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Investimentos</title>
+
+<sect1 id="details.investments.overview">
+<title
+>Investimentos no &kappname;</title>
+
+<sect2>
+<title
+>Investimentos</title>
+
+<para
+>Investimentos são instrumentos para aplicar dinheiro e são comercializados em um mercado. As ações, fundos de investimento e fundos mútuos são os investimentos mais comuns; como tal, são os que possuem suporte mais direto. As prospecções, mercadorias, opções de compra e derivações mais complexas são algumas vezes usadas, mas o &kappname; não tem nenhuma funcionalidade especial para elas. Desde que se comportem como uma ação ou fundo, poderão ser acompanhadas facilmente. </para>
+</sect2>
+
+<sect2>
+<title
+>Moeda Base</title>
+<para
+>Cada investimento possui uma Moeda Base. Esta é a moeda em que ele é comercializado. Quando o preço de uma ação é inserido para um determinado investimento, a moeda do valor é sempre a sua moeda base. Uma ação na NYSE seria em dólares dos EUA, enquanto um investimento nos mercados australianos seria em dólares australianos. </para>
+</sect2>
+
+<sect2>
+<title
+>Contas de Investimento</title>
+<para
+>As Contas de Investimento mantêm uma coleção dos investimentos. As transações, como as compras e vendas, destes investimentos estão contidas numa Conta de Investimento. Todas as transações numa conta de Investimento deverão estar relacionadas a um determinado investimento. Não existe nenhum <quote
+>saldo monetário</quote
+> separado numa conta de investimento. Para isso, você precisa de uma Conta de Corretagem. </para>
+</sect2>
+
+<sect2>
+<title
+>Contas de Corretagem</title>
+<para
+>Normalmente, uma conta de investimento possui uma conta de corretagem associada. Esta é também normalmente referida como uma <quote
+>Conta em Dinheiro</quote
+>. As contas de investimento não poderão conter transações de dinheiro, como uma transferência do seu banco. Quando uma ação é vendida, os resultados são normalmente colocados na Conta de Corretagem. </para>
+
+<para
+>Quando criar uma Conta de Investimento, você terá a opção de criar uma Conta de Corretagem associada a ela. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="details.investments.investment">
+<title
+>Criar uma Conta de Investimento</title>
+
+<para
+>O primeiro passo no caminho da utilização dos investimentos é criar uma conta para guardar os seus investimentos. Escolha a opção <menuchoice
+> <guimenu
+>Conta</guimenu
+> <guimenuitem
+>Nova conta...</guimenuitem
+> </menuchoice
+> para iniciar o processo de adição de uma nova conta. Crie uma conta como de costume, certificando-se de escolher o <quote
+>Investimento</quote
+> como tipo de conta. </para>
+
+<para
+>Para trabalhar com a nova conta de investimento, vá para a área de <guibutton
+>Investimentos</guibutton
+> e escolha a conta que acabou de criar na lista <guilabel
+>Selecionar a Conta</guilabel
+>. </para>
+</sect1>
+            
+<sect1 id="details.investments.securities">
+<title
+>Adicionar Investimentos à sua Conta</title>
+
+<para
+>Para adicionar investimentos adicionais à sua conta de investimento, vá para a área <guibutton
+>Investimentos</guibutton
+>, selecione <guibutton
+>Ações Ordinárias</guibutton
+> e escolha a conta onde o investimento é mantido, na lista <guilabel
+>Selecionar conta</guilabel
+>. <screenshot>
+  <screeninfo
+>Área de Investimentos, aba Ações Ordinárias</screeninfo>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="investments_summarytab.png" format="PNG"/>
+  </imageobject>
+  <textobject>
+  <phrase
+>Área de Investimentos, aba Ações Ordinárias</phrase>
+  </textobject>
+  </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Clique com o botão direito do mouse no espaço em branco da área. Isto irá invocar o menu de contexto das <guimenu
+>Opções do Investimento</guimenu
+>. Escolha a opção <guimenuitem
+>Novo investimento...</guimenuitem
+> neste menu. Isto invoca o <guilabel
+>Assistente de Novos Investimentos</guilabel
+>, que você poderá usar para criar o seu novo investimento. </para>
+
+<sect2 id="details.investments.newinvestmentwizard">
+<title
+>Assistente de Novos Investimentos</title>
+
+<para
+>A primeira coisa que lhe será questionada é o tipo de investimento, se é um grupo de ações, títulos, ou fundos, etc. </para>
+
+<para
+>Em seguida, é apresentada a página de detalhes do investimento. É inserida a seguinte informação nesta página: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Símbolo Comercial. O símbolo usado no expositor que identifica o investimento no mercado em que é comercializado. O &kappname; necessita de um símbolo comercial para todos os investimentos; contudo, alguns investimentos não possuem símbolos. Nesse caso, você terá que criar um símbolo para eles. </para
+></listitem>
+
+  <listitem
+><para
+>Nome completo. O nome amigável e legível do investimento que está criando, &eg;, <quote
+>Companhia de Seguros Ltda.</quote
+> Este nome também é referido como título. </para
+></listitem>
+
+  <listitem
+><para
+>Fração. O grau de precisão com que são medidas as suas posses em carteira. Por exemplo, nos fundos mútuos dos EUA, as posses são medidas com três casas decimais, assim você iria indicar 1000 neste campo. As ações normalmente são medidas como ações inteiras; por isso, você poderia indicar 1 como uma ação para este efeito. </para
+></listitem>
+  
+  <listitem
+><para
+>Mercado de câmbio. Onde as ações são negociadas. Este é um campo opcional que é oferecido para sua conveniência. Esta informação não é usada em nenhum outro local do &kappname;. </para
+></listitem>
+
+  <listitem
+><para
+>Identificação. Um campo opcional para inserir a informação de identificação adicional que você gostaria de manter. Mais uma vez, esta informação não é usada em nenhum outro lugar. </para
+></listitem>
+
+  <listitem
+><para
+>Moeda de câmbio. A moeda subjacente em que este investimento é comercializado no seu mercado. </para
+></listitem>
+
+  <listitem
+><para
+>Entrada do preço. Escolha se o preço será inserido como um preço individual ou como o total para todas as ações. </para
+></listitem>
+</itemizedlist>
+
+<para
+>Se estiver usando cotações online, certifique-se de que o símbolo corresponde exatamente àquele usado pela sua fonte de cotações. O Yahoo cobre a maior parte dos mercados mundiais, e necessita de um sufixo no fim dos símbolos fora dos EUA. Por exemplo, a Rubicon Limited, no mercado da Nova Zelândia, deveria ser inserido como <quote
+>RBC.NZ</quote
+>. </para>
+
+<para
+>Finalmente, será apresentada a página para atualização online. Este é o local onde é informado ao &kappname; como os preços do seu investimento devem ser atualizados. Estão definidos os seguintes itens aqui: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Usar o Finance::Quote. Esta é uma opção para os usuários do GnuCash que estão habituados a este estilo de ações. A maioria dos usuários poderão desligar esta opção. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Fonte online. A fonte online a ser usada para este investimento em particular. A escolha mais comum é a <quote
+>Yahoo</quote
+>. Tente essa primeiro e, se o investimento não for encontrado com essa fonte, experimente então com as outras. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Fator. Um coeficiente multiplicativo que deverá ser aplicado às cotações obtidas para este investimento. Normalmente é usado para as ações da GB, onde o preço cotado vem em pence (1/100), e ação é apresentada em libras. Nesse caso, indique 0,01 como Fator. </para>
+  </listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.edit">
+<title
+>Editar um Investimento</title>
+
+<para
+>A aba <guilabel
+>Ações Ordinárias</guilabel
+> da área de Investimentos apresenta as posses atuais nessa conta, em conjunto com o seu símbolo, valor, quantidade e preço. Clique com o botão direito do mouse em qualquer dos investimentos, de modo a apresentar o menu de contexto <guimenu
+>Opções do Investimento</guimenu
+>, onde você terá a opção de adicionar, editar ou excluir investimentos individuais dessa conta. Do mesmo modo, você poderá atualizar aqui o valor dos seus investimentos, de forma manual ou através da sua fonte online. Além disso, é possível fechar uma conta vazia ou reabrir uma conta fechada. </para>
+</sect1>
+
+<sect1 id="details.investments.ledger">
+<title
+>Transações de Investimento</title>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Formulário da Transação de Investimento</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Formulário da Transação de Investimento</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>O registro de investimentos é quase igual ao <link linkend="details.ledgers"
+>livro de registros</link
+> dos outros tipos de contas. Contudo, os campos são diferentes, e irão variar de acordo com o tipo ou atividade da transação. As transações de investimento possuem alguns elementos adicionais: </para>
+
+<itemizedlist>
+	<listitem
+><para
+>Atividade</para
+></listitem>
+	<listitem
+><para
+>Título</para
+></listitem>
+	<listitem
+><para
+>Conta</para
+></listitem>
+	<listitem
+><para
+>Ações, Preço e Montante</para
+></listitem>
+	<listitem
+><para
+>Encargos</para
+></listitem>
+	<listitem
+><para
+>Categoria de juros</para
+></listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Atividade</title>
+<para
+>A Atividade de uma transação de investimento descreve a ação que está acontecendo com a carteira de ações. Há suporte para as seguintes atividades: </para>
+
+<variablelist>
+  <varlistentry>
+  <term
+>Comprar/Vender</term>
+  <listitem>
+    <para
+>Usado para registrar compras ou vendas de investimentos individuais. Esta ação precisa de uma conta de/para onde transferir os fundos. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Dividendos/Receita</term>
+  <listitem>
+    <para
+>Também conhecido como um <quote
+>Dividendo Monetário</quote
+>, esta ação é usada quando você recebe os juros ou deduções dos dividendos do seu investimento. Esta ação necessita de uma conta de/para onde transferir os fundos. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Reinvestir o Dividendo</term>
+  <listitem>
+    <para
+>Reinvestir o Dividendo. Este é um dividendo onde os resultados são investidos de volta no investimento. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Adicionar/Remover Ações</term>
+  <listitem>
+    <para
+>Um simples aumento ou diminuição no seu saldo. Isto deverá ser usado muito raramente, porque é muito raro as ações simplesmente aparecerem ou desaparecerem na sua conta, a menos que seja uma compra ou uma venda. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Dividir as Ações</term>
+  <listitem>
+    <para
+>Usado quando o grupo de ações é dividido. Indique a relação da divisão no campo <quote
+>Proporção da Divisão</quote
+>. Por exemplo, numa divisão 3:2, indique 1,5 </para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Segurança</title>
+<para
+>Cada transação do investimento deverá estar associada a um título individual, que é apenas outro nome para um investimento. Escolha o nome do investimento ao adicionar ou editar uma transação. O símbolo será apresentado ao visualizá-la. </para>
+</sect2>
+
+<sect2>
+<title
+>Conta</title>
+<para
+>Para as transações que geram ou necessitam de dinheiro, você deve indicar a conta de/para onde o dinheiro é transferido. Se a sua conta de investimento tiver uma conta de corretagem associada, normalmente é melhor transferir para aí os fundos. Isto aplica-se aos fundos para a compra ou venda do investimento, assim como para os encargos pagos ou juros/dividendos auferidos. </para>
+</sect2>
+
+<sect2>
+<title
+>Ações, Preço e Montante</title>
+<para
+>Para as transações de compra, venda e recolhimento de dividendos, o número de ações, o preço e o montante da transação deverão estar estabelecidos. Você poderá indicar dois destes valores, para que o &kappname; calcule o terceiro. Normalmente é melhor indicar apenas o montante e as ações, porque são os dados conhecidos na transação. O preço poderá ser calculado a partir destes. </para>
+</sect2>
+
+<sect2>
+<title
+>Encargos</title>
+<para
+>Com muitas transações de investimentos, você poderá incluir os encargos (ou comissões) que pagou ao corretor. Se você indicar uma categoria para o encargo, então irá aparecer um campo à direita para introduzir o montante do encargo. Se você precisar inserir mais de um encargo para a transação, poderá usar a funcionalidade de <link linkend="details.ledgers.split"
+>Transações Divididas</link
+>. Nesse caso, quando acabar de inserir todas as parcelas, o montante dos encargos será apresentado à direita. </para>
+</sect2>
+
+<sect2>
+<title
+>Juros</title>
+<para
+>Essa é a forma como o pagamento de juros ou dividendos deve ser inserido a partir de um investimento. Como acontece nos encargos, se indicar uma categoria, então aparecerá um campo à direita para inserir o montante. Você poderá também usar a funcionalidade de transações divididas, caso seja necessário. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.investments.foreign">
+<title
+>Trabalhar com investimentos estrangeiros</title>
+
+<para
+>Agora que o &kappname; tem suporte a várias moedas e investimentos, provavelmente você gostaria de combinar os dois. Fazer isso exige bastante cuidado. Como foi indicado acima, quando você adicionou um investimento, você teve de indicar a sua moeda de câmbio. Esta moeda poderá não ser a mesma que a sua moeda base, e poderá também não ser a mesma da conta em que guarda a carteira de ações ou a conta de/para onde transfere os fundos das compras/vendas. </para>
+
+<para
+>Considere um caso hipotético. Sua moeda base é USD. Você possui uma conta de investimento em EUR e uma conta de corretagem também em EUR. Nessa conta, você possui ações da TietoEnator, que é vendida em SEK. </para>
+
+<para
+>Quando inserir uma transação de compra nesse investimento, use o SEK como moeda. Por isso, se comprar 100 ações a um preço de SEK 248,00, totalizando SEK 24.800,00, indique esses valores na transação. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Aviso da moeda</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-currencywarning.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Aviso da moeda</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Quando escolher a conta de corretagem onde colocar a transferência como fundo, você será avisado que esta é uma moeda diferente. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Editor da taxa de câmbio</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-exchangerateeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Editor da taxa de câmbio</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Quando terminar a transação, você será avisado de uma atualização do preço da moeda da conta de investimento, neste caso SEK -> EUR. Reveja a documentação sobre como <link linkend="details.currencies.prices"
+>Inserir os preços manualmente</link
+> para obter mais informações sobre a janela de preços. </para>
+
+<para
+>Se retornar para a conta de corretagem verá a transação com EUR 2.254,54, assumindo uma taxa de câmbio de 11,0000 SEK / EUR. </para>
+</sect1>
+
+<sect1 id="details.investments.prices">
+<title
+>Atualizar os preços</title>
+<para
+>Existem duas formas de atualizar os preços dos seus investimentos. Você poderá inserir manualmente o preço novo ou poderá fazer com que o &kappname; busque-o na Web. </para>
+
+<sect2>
+<title
+>Atualização de preços manual</title>
+<para
+>Você poderá inserir os preços dos seus investimentos, usando o mesmo <link linkend="details.currencies.prices"
+>Editor de Preços</link
+> que é usado para as moedas. </para>
+</sect2>
+
+<sect2 id="details.investments.onlinequotes">
+<title
+>Cotações de preços online</title>
+<para
+>O &kappname; pode obter os últimos preços dos seus investimentos e taxas de câmbio a partir da Web. </para>
+
+<sect3>
+<title
+>Como funcionam as cotações online</title>
+<para
+>Por sua solicitação, o &kappname; irá obter uma página da Web que contém o último preço para cada item. Por padrão, os preços são obtidos de <ulink url="http://finance.yahoo.com"
+>finance.yahoo.com</ulink
+>, estando sujeitos aos termos e condições desse serviço. </para>
+
+<para
+>A pesquisa de cotações online usa o símbolo comercial do investimento para descobrir o preço. Como tal, é importante definir o símbolo corretamente. O Yahoo suporta as cotações da maioria dos mercados mundiais, como tal é apenas uma questão de encontrar o símbolo correto. Por exemplo, a TietoEnator comercializa no mercado da Bolsa de Valores de Estocolmo, sendo que o seu símbolo na Yahoo é TIEN.ST. </para>
+
+<para
+>Para descobrir o símbolo comercial de um título suportado pela Yahoo, use a funcionalidade de <quote
+>Pesquisa do Símbolo</quote
+> em <ulink url="http://finance.yahoo.com"
+>finance.yahoo.com</ulink
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Atribuir uma fonte de cotações</title>
+
+<para
+>Para obter as cotações de preços online, você primeiro precisa ativá-las para cada investimento ou moeda que deseje atualizar, definindo para tal, uma <quote
+>Fonte de cotações online</quote
+>. Esse é o nome do serviço de onde a cotação deverá ser obtida. O &kappname; vem com várias fontes para escolher. O Yahoo é a fonte recomendada e deverá funcionar para a maioria dos investimentos, em todas as moedas. </para>
+
+<para
+>Para atribuir uma fonte a um investimento, vá para a área de resumo dos investimentos para a conta em que está guardado o título. Edite o título, clicando com o botão direito nele e selecionando a opção <guimenuitem
+>Editar investimento...</guimenuitem
+>. No Assistente de Detalhes do Investimento, clique em <guibutton
+>Próximo</guibutton
+> duas vezes, para obter a seção de atualização online. Nessa lista, escolha a fonte de atualização. </para>
+
+<para
+>As versões posteriores do &kappname; contêm suporte para o pacote Finance::Quote para obter as cotações online. Isso é principalmente uma conveniência para os usuários que fizeram conversões do pacote de finanças GnuCash, que o usa como método nativo. Se selecionar de fato esta opção, deverá ver uma lista de fontes diferente, as que são suportadas pelo Finance::Quote. Se a lista estiver vazia, poderá ser pelo fato do pacote não estar devidamente instalado. Veja a sua página Web em <ulink url="http://finance-quote.sourceforge.net"
+> http://finance-quote.sourceforge.net</ulink
+> para mais informações. </para>
+</sect3>
+
+<sect3>
+<title
+>Ajustar uma cotação</title>
+
+<para
+>Algumas fontes online não comunicam o preço em uma quantidade de base (&eg;, EUR), mas sim, em uma fração (&eg;, Cêntimos). Se usar essa informação como preço, irá produzir valores errados para seus investimentos. </para>
+
+<para
+>Se for esse o caso da sua fonte online, poderá usar o campo <guilabel
+>Fator</guilabel
+> para inserir um fator de ajuste. Para o exemplo mencionado acima, o fator seria de 0,01. </para>
+
+<para
+>O campo <guilabel
+>Fator</guilabel
+> só ficará disponível se uma <guibutton
+>Fonte de cotações</guibutton
+> estiver selecionada. </para>
+</sect3>
+
+<sect3>
+<title
+>Obter as cotações</title>
+
+<para
+>Tipicamente, você irá atualizar os preços de todos os seus investimentos e moedas de uma vez. Escolha a opção do menu <menuchoice
+> <guimenu
+>Ferramentas</guimenu
+> <guimenuitem
+>Atualizar o preço das moedas e ações...</guimenuitem
+> </menuchoice
+> para invocar a janela de cotações de preços online. Clique em <guibutton
+>Atualizar tudo</guibutton
+> para obter as cotações de todos os investimentos e moedas no seu arquivo do &kappname;. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Atualizar o preço das moedas e ações</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-onlineupdate.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Atualização online das cotações e preços das moedas</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect3>
+
+<sect3>
+<title
+>Editar ou adicionar fontes de cotações</title>
+
+<para
+>A edição ou adição de fontes de cotações não é recomendada a ninguém, a não ser para o usuário mais técnico. Sinta-se à vontade para ler o HTML e escrever expressões regulares complexas. Se isso não lhe soa muito agradável, recomendamos que contate a lista de programadores, no caso de nenhuma das fontes de cotações funcionar para você. De preferência, indique-nos uma página Web onde essas cotações poderão ser obtidas. </para>
+
+<para
+>Se estiver à vontade com esse desafio, aqui está como elas funcionam. As fontes de cotações estão contidas na caixa de diálogo de configuração. Escolha a opção <menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Configurar o &kappname;</guimenuitem
+></menuchoice
+>. Na caixa de diálogo que abrir, escolha a seção <guilabel
+>Cotações online</guilabel
+>. Você poderá escolher uma fonte existente para editar ou criar uma nova. Quando terminar as alterações, pressione o botão <guibutton
+>Atualizar</guibutton
+> antes de sair da caixa de diálogo. Suas alterações não serão salvas por padrão. </para>
+
+<para
+>A primeira informação com que deverá se preocupar sobre uma fonte de cotações online é a URL, que é a página Web onde será obtida. Você verá um %1 em todas as fontes, bem como um %2 nas fontes de moedas. Para investimentos, o %1 é substituído pelo símbolo comercial. Para moedas, o %1 é substituído pela moeda de Origem, enquanto o %2 é substituído pela de Destino. Esta URL é então obtida, todas as marcas de HTML serão removidas e o texto reduzido é então enviado para o processador de páginas. </para>
+
+<para
+>Lembre-se de que a URL também poderá ser uma URL do tipo 'file:', onde o módulo de extração de cotações irá assumir como um programa executável. O módulo irá passar todos os argumentos da linha de comando indicados por você, alimentando o 'stdout' ao processador da página. Por exemplo, você poderá ter um programa chamado 'cotacoes.sh' que contém a lógica de cotações personalizada, usando o símbolo como um único parâmetro. Sua URL seria algo do gênero <quote
+>file:/local/das/cotacoes.sh %1</quote
+>. </para>
+
+<para
+>O processador de páginas procura por um símbolo, uma data e um preço. As expressões regulares indicam como extrair esses itens da página. Reveja a documentação da <ulink url="http://qt-project.org/doc/qt-4.8/qregexp.html#1"
+>classe QRegExp</ulink
+>, para saber a formatação correta das expressões regulares. Deverá existir apenas uma expressão de captura entre parênteses, em cada expressão regular. O formato da data indica posteriormente ao processador a ordem do ano, mês e dia. Este formato de datas deverá ser sempre no formato "%x %x %x". em que o 'x' pode ser 'y', 'm' ou 'd'. O processador de datas é bastante inteligente. O <quote
+>%m %d %y</quote
+> irá processar o <quote
+>Dezembro 31, 2005</quote
+> da mesma forma que <quote
+>12/31/05</quote
+>. Os anos com dois algarismos são considerados como sendo entre 1950 e 2049. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.unimplemented">
+<title
+>Funcionalidades não implementadas</title>
+<para
+>Algumas funcionalidades comuns que normalmente são encontradas em investimentos, não estão implementadas no &kappname;. Entre elas incluem-se: Derivações (opções, futuros, etc.), ganhos de capital e declaração para impostos de investimentos. </para>
+</sect1>
+</chapter>

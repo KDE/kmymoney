@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.tags">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Cristian.Onet; &Cristian.Onet.mail;</author>
+    <author
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+  </authorgroup>
+  <date
+>6/2/2020</date>
+  <releaseinfo
+>5.0.8</releaseinfo>
+</chapterinfo>
+
+<title
+>Etichette</title>
+
+<para
+>La vista delle etichette fornisce informazioni su tutte le etichette che sono state aggiunte dall'utente. La schermata Etichetta è suddivisa in due aree principali: un elenco di etichette e un'area di dettaglio, che ha due schede: Transazioni e Dettagli. La scheda <guilabel
+>Transazioni</guilabel
+> visualizza tutte le transazioni associate all'etichetta. La scheda <guilabel
+>Dettagli</guilabel
+> include un colore definito dall'utente, nonché le note, che non vengono utilizzate altrove. Notare che se si cambia il colore, che viene utilizzato nel simbolo visualizzato prima del nome dell'etichetta in qualsiasi transazione associata, è necessario fare clic sul pulsante di controllo in basso a destra nell'area Dettagli per salvarlo. </para>
+
+<sect1 id="details.tags.list">
+<title
+>Elenco delle etichette</title>
+
+<para
+>Un elenco di tutte le etichette, ordinate alfabeticamente, viene visualizzato sul lato sinistro di questa schermata. <screenshot
+> <mediaobject
+> <imageobject>
+  <imagedata fileref="tags.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+  </screenshot>
+</para>
+
+<sect2>
+<title
+>Aggiungere un'etichetta</title>
+<para
+>La creazione di un etichetta può avvenire in tre modi diversi. Primo, è possibile fare clic sull'icona di nuova etichetta <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="list-add.png"/></imageobject
+></inlinemediaobject
+></guiicon
+>. Secondo, è possibile fare clic con il tasto destro del mouse su una qualsiasi etichetta e scegliere <guimenuitem
+>Nuova etichetta</guimenuitem
+>. Ciò creerà una nuova etichetta chiamata <quote
+>Nuova etichetta</quote
+>. Fare clic con il tasto destro su questa etichetta e selezionare <guimenuitem
+>Rinomina etichetta</guimenuitem
+> per digitare il nome della nuova etichetta. Infine, è possibile aggiungere una nuova etichetta direttamente nella pagina del registro o all'interno di una transazione divisa digitando il nome dell'etichetta nel campo relativo. &kmymoney; chiederà se si desidera aggiungere questa etichetta e dopo aver selezionato <quote
+>sì</quote
+>, sarà aggiunta. </para>
+</sect2>
+
+<sect2>
+<title
+>Rinominare un'etichetta</title>
+<para
+>Per rinominare un'etichetta, fare clic sul nome dell'etichetta per selezionarla e fare clic su <guiicon
+>Rinomina etichetta</guiicon
+> (tra le icone Aggiungi e Rimuovi) o fare clic con il tasto destro del mouse sul nome e selezionare <guimenuitem
+>Rinomina etichetta</guimenuitem
+>. Il nome sarà quindi modificabile. La modifica cambierà il nome in tutte le transazioni nelle quali appare. </para>
+</sect2>
+
+<sect2>
+<title
+>Eliminare un'etichetta</title>
+<para
+>Per rimuovere un'etichetta, fare clic sull'icona di eliminazione delle etichette <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="list-remove.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> o fare clic con il tasto destro del mouse sul nome e selezionare <guimenuitem
+>Elimina etichetta</guimenuitem
+>. Se l'etichetta ha delle transazioni, comparirà una finestra che consente di riassegnarle a un'etichetta diversa. </para>
+
+<note>
+<para
+>Poiché le etichette sono state introdotte in &kmymoney; nella versione 4.7, nessuno dei metodi di importazione dei dati può importare le etichette. Comprendiamo che questa è una funzionalità importante, ed è probabile che ogni metodo di importazione la introdurrà nelle prossime versioni. </para>
+</note>
+</sect2>
+</sect1>
+
+<sect1 id="details.tags.info">
+<title
+>Transazioni etichettate e dettagli dell'etichetta</title>
+<para
+>Per visualizzare le transazioni o visualizzare e modificare le informazioni associate con un'etichetta particolare, selezionare l'etichetta dall'elenco e selezionare la scheda appropriata sul lato destro della finestra. <screenshot>
+  <screeninfo
+>La scheda dei dettagli dell'etichetta</screeninfo>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="tag_details.png" format="PNG"/>
+  </imageobject>
+  <textobject>
+  <phrase
+>Dettagli dell'etichetta</phrase>
+  </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.tags.info.transactions">
+<title
+>Transazioni etichettate</title>
+<para
+>Per vedere un elenco delle transazioni associate all'etichetta selezionata, selezionare la scheda <guilabel
+>Transazioni</guilabel
+>. Questo elenco è simile all'elenco di transazioni per un beneficiario. Si può fare clic su una transazione, per essere condotti alla vista di registro per quella transazione per il conto in cui la transazione è stata etichettata. </para>
+</sect2>
+
+
+<sect2 id="details.tags.info.details">
+<title
+>Dettagli dell'etichetta</title>
+<para
+>Per visualizzare e modificare le informazioni associate a un'etichetta particolare, selezionare la scheda <guilabel
+>Dettagli</guilabel
+>. </para>
+  <itemizedlist>
+    <listitem>
+      <para
+>Puoi selezionare il colore utilizzato per evidenziare le transazioni con le quali questa etichetta è stata assegnata. Facendo clic sulla barra del colore, si aprirà la finestra del selettore del colore. </para>
+    </listitem>
+    <listitem>
+      <para
+>Il clic sulla casella di selezione <guilabel
+>Chiuso</guilabel
+> non modificherà alcuna transazione già associata all'etichetta, ma impedirà di assegnare l'etichetta a qualsiasi transazione aggiuntiva. </para>
+    </listitem>
+    <listitem>
+      <para
+>Per modificare le note associate all'etichetta, modificare il testo nel riquadro. </para>
+    </listitem>
+  </itemizedlist>
+<para
+>Una volta completata, non dimenticare di fare clic sul pulsante <guiicon
+>Aggiorna</guiicon
+>, nell'angolo in basso a destra della finestra, anche se si riceverà una richiesta di chiudere la finestra senza averlo fatto. </para>
+</sect2>
+</sect1>
+</chapter>
+

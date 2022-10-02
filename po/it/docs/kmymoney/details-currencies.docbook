@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.currencies">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+    <author
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+  </authorgroup>
+  <date
+>20/2/2020</date>
+  <releaseinfo
+>5.0.8</releaseinfo>
+</chapterinfo>
+
+<title
+>Valute</title>
+
+<para
+>&kmymoney; supporta l'uso di valute diverse in conti diversi. Ad esempio, è possibile impostare un conto bancario in euro, uno in sterline inglesi e continuare ad avere il conto della carta di credito in dollari statunitensi. </para>
+
+<sect1 id="details.currencies.basecurrency">
+<title
+>Valuta di base</title>
+
+<para
+>Durante la configurazione iniziale di un nuovo file di &kmymoney;, si riceverà la richiesta di selezionare la valuta di base. Di solito, la valuta di base è la valuta utilizzata nel proprio paese. La valuta di base è quella utilizzata da tutte le categorie di entrate e uscite e su cui si baseranno i report. Quando si configura un nuovo conto, &kmymoney; utilizzerà in modo predefinito la valuta di base. Se il proprio conto richiede di utilizzare una valuta diversa, è possibile cambiarla durante la configurazione del nuovo conto. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>La finestra di selezione della valuta</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="select_currency.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Selezione della valuta</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect2 id="details.currencies.newcurrency">
+<title
+>Aggiungere una nuova valuta</title>
+
+<para
+>Nonostante non accada spesso, a volte si introduce una nuova valuta. Può essere una nuova moneta virtuale, come il Bitcoin o un cambio introdotto da uno Stato per ragioni di politica finanziaria. Anche se queste monete saranno aggiunte alla nuova versione di &kmymoney;, è possibile aggiungerle manualmente, nel caso in cui fosse necessario utilizzarle subito. </para>
+
+<para
+>Per aggiungere manualmente una valuta, selezionare la voce di menu <menuchoice
+><guimenu
+>Strumenti</guimenu
+><guimenuitem
+>Valute...</guimenuitem
+></menuchoice
+> per visualizzare la finestra <guilabel
+>Valute</guilabel
+>, come mostrato sopra. Fare clic con il tasto destro su una delle valute esistenti e selezionare <menuchoice
+><guimenuitem
+>Nuova valuta</guimenuitem
+></menuchoice
+> dal menu contestuale <menuchoice
+><guimenu
+>Opzioni valuta</guimenu
+></menuchoice
+>. Digitare il codice ufficiale della valuta e fare clic su <guilabel
+>OK</guilabel
+>. La valuta sarà creata con il nome <quote
+>Nuova valuta</quote
+>. Per modificare il nome, premere <keycap
+>F2</keycap
+> o fare clic con il tasto destro del mouse e selezionare <guimenuitem
+>Rinomina valuta</guimenuitem
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.currencies.accountsetup">
+<title
+>Configurazione del conto</title>
+
+<para
+>Quando si crea un nuovo conto, si specifica la valuta in cui sarà gestito. La procedura guidata Nuovo conto imposta automaticamente questa impostazione su <link linkend="details.currencies.basecurrency"
+>valuta di base</link
+>. Se è richiesta una valuta diversa, è necessario selezionarla durante questa configurazione iniziale. Il registro per il conto mostrerà quindi tutti i valori nella valuta selezionata. </para>
+</sect1>
+
+<sect1 id="details.currencies.transactions">
+<title
+>Inserimento di transazioni in altre valute</title>
+
+<para
+>Quando viene inserita una transazione che si riferisce a più di una valuta, viene visualizzato l'editor dei prezzi che permette di inserire il tasso di cambio. All'inizio, verrà usato come tasso di cambio l'ultimo disponibile nella banca dati dei prezzi.Vedere <link linkend="details.currencies.prices"
+>Inserimento di tassi di cambio per le valute</link
+> per avere maggiori informazioni su come fornire i tassi di cambio manualmente e ottenere informazioni sui prezzi da Internet. </para>
+
+<para
+>È possibile salvare il tasso di cambio nella banca dati dei prezzi una volta che è stato inserito. </para>
+</sect1>
+
+<sect1 id="details.currencies.prices">
+<title
+>Tassi di cambio per le valute</title>
+
+<sect2>
+<title
+>Inserimento manuale dei prezzi</title>
+
+<para
+>L'editor della banca dati dei prezzi consente di inserire i tassi di cambio tra le valute o i prezzi per gli investimenti. Lo si può richiamare dalla voce di menu in <menuchoice
+><guimenu
+>Strumenti</guimenu
+><guimenuitem
+>Prezzi...</guimenuitem
+></menuchoice
+>. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="currency_priceeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Editor dei tassi di cambio</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>In &kmymoney; un <quote
+>prezzo</quote
+> è il prezzo di una valuta in termini di un'altra. Ad esempio, al momento della scrittura di questa documentazione, il prezzo di un dollaro statunitense in termini di un euro è 0.83; cioè un dollaro costa 0.83 euro. La prima valuta è quella comprata o venduta, la seconda è quella usata per comprarla o venderla. </para>
+
+<para
+>Quando si preme il pulsante <guibutton
+>Nuovo</guibutton
+>, si apre la finestra di dialogo Nuovo prezzo. Inserire la prima valuta (USD nell'esempio sopra) nel campo Titolo e la seconda valuta nel campo Valuta. Inserire la data effettiva del prezzo nel campo Data. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="currency_newpriceentry.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Nuovo prezzo</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect2>
+
+<sect2>
+<title
+>Aggiornamenti in linea sui prezzi</title>
+
+<para
+>&kmymoney; otterrà automaticamente i tassi di cambio delle valute da Internet. Una volta inserito un prezzo per una coppia di valute, la funzione delle quotazioni in linea visualizzerà sempre quella coppia tra le opzioni disponibili. </para>
+
+<para
+>Vedere la sezione sulle <link linkend="details.investments.onlinequotes"
+>Quotazioni in linea dei prezzi</link
+> nel capitolo Investimenti per maggiori informazioni. </para>
+</sect2>
+</sect1>
+</chapter>
+

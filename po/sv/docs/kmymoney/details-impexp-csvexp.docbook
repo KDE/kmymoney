@@ -1,0 +1,28 @@
+<sect1 id="details.impexp.csvexp">
+<title
+>CSV-export</title>
+<para
+>För att exportera ett av dina konton till en CSV-fil, välj menyalternativet <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guisubmenu
+>Exportera</guisubmenu
+><guimenuitem
+>CSV...</guimenuitem
+></menuchoice
+>. Du blir tillfrågad om några alternativ. </para>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="csvexport.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>CSV-export</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+</sect1>

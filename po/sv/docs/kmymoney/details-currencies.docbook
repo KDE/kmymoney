@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.currencies">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+    <author
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+  </authorgroup>
+  <date
+>2020-02-20</date>
+  <releaseinfo
+>5.0.8</releaseinfo>
+</chapterinfo>
+
+<title
+>Valutor</title>
+
+<para
+>&kmymoney; stöder användning av flera valutor i olika konton. Du kan till exempel skapa ett bankkonto i euro, ett annat i kronor, och ändå ha ett kreditkortskonto i amerikanska dollar. </para>
+
+<sect1 id="details.currencies.basecurrency">
+<title
+>Basvaluta</title>
+
+<para
+>I den inledande inställningen av en ny fil i &kmymoney;, blir du tillfrågad om att välja basvalutan. Oftast är basvalutan den valuta du använder i ditt land. Basvalutan är den som alla inkomst- och utgiftskategorier använder och som rapporter baseras på. När du ställer in ett nytt konto använder &kmymoney; basvalutan som förval. Om kontot kräver att du använder en annan valuta, kan du ändra den under inställning av nytt konto. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Dialogrutan för att välja valuta</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="select_currency.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Välj valuta</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect2 id="details.currencies.newcurrency">
+<title
+>Lägga till en ny valuta</title>
+
+<para
+>Även om det inte händer ofta, introduceras en ny valuta ibland. Det kan vara en ny virtuell valuta såsom Bitcoin, eller än ändring som görs av ett land av finanspolitiska skäl. Även om en sådan valuta kommer att läggas till i nästa version av &kmymoney;, är det möjligt att lägga till den manuellt om det finns behov av att börja använda den omedelbart. </para>
+
+<para
+>För att lägga till en valuta manuellt, välj menyalternativet <menuchoice
+><guimenu
+>Verktyg</guimenu
+><guimenuitem
+>Valutor...</guimenuitem
+></menuchoice
+> för att visa dialogrutan <guilabel
+>Valutor</guilabel
+>, som visas ovan. Högerklicka på någon befintlig valuta och välj <guimenuitem
+>Ny valuta</guimenuitem
+> i den sammanhangsberoende menyn <guimenu
+>Valutaalternativ</guimenu
+>. Skriv in valutans officiella kod och klicka på <guilabel
+>Ok</guilabel
+>. Valutan skapas med namnet <quote
+>Ny valuta</quote
+>. Tryck antingen på <keycap
+>F2</keycap
+> eller högerklicka och välj <guimenuitem
+>Byt namn på valuta</guimenuitem
+> för att ändra namnet. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.currencies.accountsetup">
+<title
+>Kontoinställning</title>
+
+<para
+>När du skapar ett nytt konto, anger du valutan som det ska att hanteras med. Guiden för nytt konto använder <link linkend="details.currencies.basecurrency"
+>basvalutan</link
+> som förval. Om du kräver en annan valuta måste den väljas under den inledande inställningen. Huvudboken för kontot visar sedan alla valutor med den vald valutan. </para>
+</sect1>
+
+<sect1 id="details.currencies.transactions">
+<title
+>Skriva in transaktioner med användning av olika valutor</title>
+
+<para
+>När en transaktion skrivs in som hänvisar till mer än en valuta, visas kurseditorn och låter dig skriva in en valutakurs. Ursprungligen används den aktuella kursen tillgänglig i kursdatabasen som valutakurs. Se <link linkend="details.currencies.prices"
+>Skriva in vaöutakurser</link
+> för mer information om hur man tillhandahåller valutakurser manuellt och erhåller direktinformation om kurser. </para>
+
+<para
+>Kursen kan valfritt sparas i kursdatabasen när användaren väl har matat in den. </para>
+</sect1>
+
+<sect1 id="details.currencies.prices">
+<title
+>Valutakurser</title>
+
+<sect2>
+<title
+>Skriva in kurser manuellt</title>
+
+<para
+>Kursdatabaseditorn låter dig skriva in valutakurser mellan valutor eller investeringskurser. Du kan få den att dyka upp genom att använda menyalternativet <menuchoice
+><guimenu
+>Verktyg</guimenu
+> <guimenuitem
+>Kurser...</guimenuitem
+></menuchoice
+>. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="currency_priceeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Valutakurseditor</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>I &kmymoney; är en <quote
+>kurs</quote
+> värdet på en valuta i förhållande till en andra valuta. När jag skriver detta, är exempelvis kursen för 1 USD i förhållande till EUR 0,83, dvs. 1 USD kostar 0,83 EUR. Den första valutan är den som köps eller säljs, och den andra valutan är valutan som används för att köpa eller sälja den. </para>
+
+<para
+>När du klickar på knappen <guibutton
+>Ny</guibutton
+>, får du fram inmatningsdialogrutan för ny kurs. Skriv in den första valutan (USD i exemplet ovan) i värdepappersfältet. Skriv in den andra valutan (EUR i exemplet ovan) i valutafältet. Skriv in gällande datum för värdet i datumfältet. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="currency_newpriceentry.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Ny kurspost</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect2>
+
+<sect2>
+<title
+>Direktuppdateringar av valutor</title>
+
+<para
+>&kmymoney; hämtar valutakurser från nätet. När du väl har skrivit in en enda kurs för två valutor, anger alltid funktionen för direktkurser paret bland sina alternativ. </para>
+
+<para
+>Se avsnittet om <link linkend="details.investments.onlinequotes"
+>direktuppdatering av kurser</link
+> i kapitlet Investeringar för mer information. </para>
+</sect2>
+</sect1>
+</chapter>
+

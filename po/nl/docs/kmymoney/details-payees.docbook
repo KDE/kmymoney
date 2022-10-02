@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.payees">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+  </authorgroup>
+  <date
+>2019-06-24</date>
+  <releaseinfo
+>5.0.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Begunstigden</title>
+
+<para
+>De Debiteurenweergave biedt gedetailleerde informatie over alle debiteuren en crediteuren betrokken in transacties. Er zijn de item van waarnaar en waarvan u geld overmaakt of ontvangt. &kmymoney; slaat informatie op over alle debiteuren en crediteuren van alle bestaande transacties. Dit maakt het mogelijk om een debiteur te kiezen uit een lijst in plaats van de volledige naam in te voeren, wat ook de kans van fout spellen vermindert of de verkeerde naam in te voeren. </para>
+
+<para
+>De Debiteurenweergave is gesplitst in twee hoofdgebieden: een lijst met debiteuren en crediteuren links en een gebied met details rechts. De sectie <guilabel
+>Uw debiteuren</guilabel
+> biedt het toevoegen, verwijderen, hernoemen en samenvoegen van debiteuren. Het gebied met details heeft verschillende tabbladen, met de transacties, adres, informatie voor overeenkomst, standaard categorie en rekeningnummers voor de debiteur geselecteerd in de lijst. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payeeview.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect1 id="details.payees.list">
+<title
+>Debiteurenlijst</title>
+
+<para
+>De lijst met alle debiteuren en betalers in uw gegevens wordt getoond aan de linkerkant van deze weergave. De lijst met debiteuren is alfabetisch gesorteerd. </para>
+
+<sect2>
+<title
+>Een debiteur of betaler toevoegen</title>
+
+<para
+>Om een debiteur of crediteur toe te voegen, kies <guibutton
+>+New</guibutton
+>. Dit maakt een nieuwe debiteur genaamd <quote
+>Nieuwe debiteur</quote
+> aan. U kunt ook rechts op elke bestaande debiteur klikken en <guimenuitem
+>Debiteur toevoegen</guimenuitem
+> selecteren. </para>
+</sect2>
+
+<sect2>
+<title
+>Een debiteur of betaler hernoemen</title>
+
+<para
+>Om een debiteur of crediteur te hernoemen, dubbelklik op de naam, of klik rechts en selecteer <guimenuitem
+>Debiteur hernoemen</guimenuitem
+>. De naam is te bewerken. De naam wijzigen zal de naam in alle transacties waarin het verschijnt beïnvloeden. </para>
+</sect2>
+
+<sect2>
+<title
+>Een debiteur of betaler verwijderen</title>
+
+<para
+>Om een debiteur of betaler te verwijderen, klik rechts op de naam en selecteer <guimenuitem
+>Debiteur verwijderen</guimenuitem
+>. Als de debiteur nog transacties heeft, dan krijgt u een dialoog te zien die u ze laat toekennen aan een andere debiteur en een keuzevak om de verwijderde naam toe te voegen aan de nieuwe lijst met overeenkomsten met debiteuren. Een andere optie voor verwijderen van een bestaande debiteur is het selecteren van de debiteur of crediteur door er links op te klikken en dan op <guibutton
+>Del</guibutton
+> links te klikken. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.payees.personalinformation">
+<title
+>Extra debiteurendetails</title>
+
+<sect2>
+<title
+>Persoonlijke informatie</title>
+
+<para
+>Om de persoonlijke informatie behorende bij een specifieke debiteur te bewerken, selecteer de debiteur uit de lijst en selecteer het tabblad Adres. Samen met adresinformatie kunt u ook een telefoonnummer, e-mailadres en notities, behorende bij de geselecteerde debiteur, opslaan. Om deze informatie te wijzigen, bewerkt het detailgebied direct en druk op de knop Bijwerken bij gereed. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Het tabblad persoonlijke informatie</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_info.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Persoonlijke informatie</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect2>
+
+<sect2 id="details.payees.personalinformation.matching">
+<title
+>Instellingen voor transacties vergelijken</title>
+
+<sect3>
+<title
+>Overzicht</title>
+
+<para
+>&kmymoney; heeft de mogelijkheid automatisch de juiste debiteur aan geïmporteerde transacties toe te kennen. Dit kan handig zijn bij importeren van transacties van uw bank, wanneer de debiteurennaam extra onnodige tekens of slechter, wanneer de naam van de debiteur wijzigt. De mogelijkheid om transacties aan een bepaalde debiteur te koppelen werkt mee in het leveren van een consiste naamgeving van debiteuren binnen het grootboek en rapporten. </para>
+
+<para
+>Laten we aannemen dat uw maandelijkse hypotheekbetaling inkomt van uw bank zoals deze <quote
+>SUNTRUST BANK MAPLE VALLEY, GA 111506</quote
+> de ene maand en de volgende maand van <quote
+>SUNTRUST BANK MAPLE VALLEY, GA 121606</quote
+>. U wilt echt dat beiden van deze transacties toegekend worden aan uw debiteur <quote
+>SunTrust</quote
+>. De functie transactieovereenkomst is er voor u! </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Tabblad Overeen laten komen van debiteuren</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_match.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Details van Overeen laten komen van debiteuren</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect3>
+
+<sect3>
+<title
+>Aan het instellen</title>
+
+<para
+>Op het tabblad Overeen laten komen, kunt u de Instellingen voor Overeen laten komen instellen.  U kunt een van vier opties selecteren met het afrolmenu <guilabel
+>Methode van overeenkomen</guilabel
+>. </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Geen overeenkomst. Dit schakelt de functie voor deze debiteur uit. Dit is de standaard instelling voor alle debiteuren. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Debiteurennaam overeen laten komen (gedeeltelijk). Schakelt de functie in gebaseerd op een gedeeltelijke overeenkomst met de debiteur en gebruikt de naam van de debiteur zelf als de sleutel voor overeenkomst. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Debiteurennaam overeen laten komen (exact). Schakelt de functie in gebaseerd op een exacte overeenkomst met de debiteur. U zou deze mogelijkheid van overeenkomst kunnen gebruiken wanneer u verschillende debiteuren wilt volgen die dezelfde naam van de zaak hebben maar verschillende locaties. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Laat overeenkomen met een naam in de onderstaande lijst. Dit schakelt overeenkomen in gebaseerd op meerdere verschillende of optionele namen voor een debiteur. U zou deze mogelijkheid voor overeenkomen kunnen gebruiken wanneer u een specifieke debiteur hebt die verschillende namen voor zijn zaken heeft maar u wilt alle geïmporteerde transacties geïdentificeerd door elk van die namen laten behoren aan een enkele debiteur in &kmymoney;. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Met elk van deze opties kunt u kiezen of al of niet de gevoeligheid van de spelling van de debiteur afhangt van hoofd-/kleine letters door activeren of niet van <guilabel
+>Hoofd-/kleine letters negeren</guilabel
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Transacties importeren</title>
+
+<para
+>De indentificatiesleutels, die u hebt ingesteld, zullen meegenomen worden wanneer u transacties importeert met het QIF importeren of een plug-in gebruikt zoals OFX of AqBanking. Als de identificatiesleutel voor een van uw debiteuren ergens is gevonden in de debiteur van de geïmporteerde transactie, zal de overeenkomende debiteur uit uw lijst toegekend worden aan die transactie. Dus een identificatiesleutel van <quote
+>SunTrust</quote
+> zal overeenkomen met <quote
+>SUNTRUST BANK MAPLE VALLEY,GA</quote
+> of zelfs <quote
+>MORGENSUNTRUST&amp;LOAN</quote
+>. Kies uw indentificatiesleutels dus zorgvuldig. <note
+> <para
+>Als een debiteur in een transactie overeenkomt met meer dan één identificatiesleutel, is het gedrag ongedefinieerd. &kmymoney; zal willekeurig een van de overeenkomende debiteuren kiezen.</para>
+  </note>
+</para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.payees.transactionhistory">
+<title
+>Transactiegeschiedenis bekijken</title>
+
+<para
+>Om alle transacties geassocieerd met een specifieke debiteur te bekijken, selecteer de debiteur uit de lijst en selecteer het tabblad Transactie in het detailgebied. Dubbelklik op een specifieke transactie brengt u direct naar die transactie in de Grootboekweergave voor de betrokken rekening. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Het tabblad transactie</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_history.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transactiegeschiedenis</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect1>
+</chapter>
+

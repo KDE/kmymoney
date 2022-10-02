@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.accounts">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>1 de febrer de 2018</date>
+  <releaseinfo
+>5.0.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Comptes</title>
+
+<sect1 id="details.accounts.view">
+<title
+>La vista dels comptes</title>
+
+<para
+>La vista dels comptes proporciona un resum de tots els comptes. És similar a la vista de les institucions, excepte que els comptes s'agrupen en les categories d'Actius i Passius. Els comptes d'actius podrien ser comptes bancaris, efectiu i inversions, mentre que els comptes de passius típics inclouen les targetes de crèdit i préstecs. </para>
+
+<para
+>En realitat, hi ha dues categories de compte: Ingressos i Despeses. Les categories són una forma d'organitzar l'operació: s'agrupen en la categoria de compte d'Entrades o Despeses i el &kmymoney; els tractarà internament com a comptes. Es descriuen amb més detall en el capítol sobre les <link linkend="details.categories"
+>Categories</link
+>. Les categories dels comptes d'Ingressos i Despeses sempre es mostraran a la vista de les categories, però és possible <link linkend="details.settings"
+>configurar el &kmymoney;</link
+> perquè també es mostrin a la vista dels comptes. </para>
+
+<para>
+<screenshot>
+    	<screeninfo
+>La vista del compte</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="account_view.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>La vista del compte</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Igual que amb la vista de les institucions, la vista dels comptes mostra diverses columnes amb informació descriptiva i resumida sobre cada compte. La resta d'aquest capítol se centrarà en la funcionalitat del compte d'Actiu i Passiu. Els comptes d'Ingressos i Despeses, &ead;, les Categories, es descriuen en el capítol sobre <link linkend="details.categories"
+>Categories</link
+>. </para>
+
+</sect1>
+
+<sect1 id="details.accounts.create">
+<title
+>Crear un compte</title>
+
+<note
+><para
+>Haureu de tenir un fitxer obert abans de poder crear un compte nou. Si no n'hi ha un, l'<link linkend="firsttime.3"
+>haureu de crear</link
+>. </para
+></note>
+
+<para
+>Per a crear un compte nou, podreu seleccionar l'element de menú <menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Compte nou...</guimenuitem
+></menuchoice
+> o triar la icona Compte nou... <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="newacct.png" format="PNG"/></imageobject
+></inlinemediaobject
+> </guiicon
+> a la barra d'eines. També podreu crear un compte des de la vista dels comptes: feu clic a la icona Comptes al selector de vistes i després feu clic dret sobre la icona de l'arbre Actius o Passius i seleccioneu <guimenuitem
+>Compte nou...</guimenuitem
+> des del menú emergent. </para>
+
+<sect2 id="details.accounts.create.institution">
+<title
+>El nom de la institució (banc)</title>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="accwiz1.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>Assistent de comptes</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>El primer pas consisteix a seleccionar una institució per al compte. Si es tracta d'un compte per a una institució que ja heu creat, podreu seleccionar la institució des de la llista desplegable. Per a crear una institució nova, premeu el botó <guibutton
+>Institució nova</guibutton
+>. Això obrirà el diàleg Institució nova, com s'ha descrit a la secció anterior. Si no es tracta d'un compte bancari, o si no voleu utilitzar la banca en línia, no necessitareu especificar una institució. </para>
+
+<para
+>Actualment, el &kmymoney; no utilitza Número de compte i l'<ulink url="https://en.wikipedia.org/wiki/International_Bank_Account_Number"
+><acronym
+>IBAN</acronym
+> (número de compte bancari internacional)</ulink
+>. Aquests camps poden deixar-se en blanc i emplenar més endavant. Només seran necessaris per a la banca en línia. </para>
+
+<para
+>Per a continuar amb el pas següent, feu clic a <guibutton
+>Següent</guibutton
+>. </para>
+</sect2>
+
+<sect2 id="details.accounts.create.account">
+<title
+>Compte</title>
+
+<para>
+  <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="accwiz2.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase
+>Assistent de comptes</phrase>
+            </textobject>
+          </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Primer, introduïu un nom per al compte. Aquest nom es farà servir per a identificar-lo. </para>
+
+<para
+>A continuació, seleccioneu el tipus de compte des d'un dels tipus disponibles a la llista desplegable. Els diferents tipus de compte es manegen de manera diferent dins del &kmymoney;, per la qual cosa és important triar el tipus correcte en crear el compte. A més, els diferents tipus de comptes requereixen informació de configuració diferent, i poden mostrar pàgines diferents de l'assistent de configuració del compte nou per a recollir aquesta informació. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Compte corrent</term>
+    <listitem>
+      <para
+>Un compte corrent normal, del tipus que s'obté amb qualsevol banc o cooperativa de crèdit. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Estalvis</term>
+    <listitem>
+      <para
+>Un compte d'estalvi normal, del tipus que s'obté amb qualsevol banc o cooperativa de crèdit. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Targeta de crèdit</term>
+    <listitem>
+      <para
+>Un compte per a representar la targeta de crèdit. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Efectiu</term>
+    <listitem>
+      <para
+>Un compte d'ús general, que generalment s'utilitza per a comptes que no es mantenen en un banc, com l'efectiu a la cartera. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Préstec</term>
+    <listitem>
+      <para
+>Un compte per a gestionar un préstec per a diners demanats o prestats. Amb un compte de préstec, el &kmymoney; calcularà automàticament el pagament dels interessos per a ajudar a seguir el capital restant del préstec. Els préstecs sense interessos poden utilitzar el tipus d'Actiu o Passiu net a continuació, depenent de si els diners estan prestats o demanats. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Inversions</term>
+    <listitem>
+      <para
+>Un compte per a gestionar una inversió com accions, bons o fons d'inversió. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Actius</term>
+    <listitem>
+      <para
+>Un compte per a gestionar un actiu que no cap en un dels tipus anteriors. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Passius</term>
+    <listitem>
+      <para
+>Un compte per a gestionar diners que deveu o una despesa futura que no s'ajusta a un dels anteriors tipus. Aquest s'utilitza més habitualment per a préstecs sense interessos. Si necessiteu calcular l'interès, podria ser millor fer servir el tipus de préstec anterior. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>Seleccioneu des de la llista desplegable la divisa que s'utilitzarà per al compte. </para>
+
+<para
+>Introduïu la data en què es va obrir el compte o seleccioneu-la en el calendari emprant la icona a la dreta. No podreu introduir cap operació amb una data anterior a la data d'obertura del compte, però si cal, podreu canviar aquesta data més endavant. </para>
+
+<para
+>Introduïu el saldo d'obertura del compte. Si es tracta d'un compte bancari existent, aquesta informació es podria trobar en l'extracte del compte. Si es tracta d'un compte nou, el saldo inicial pot deixar-se a zero. </para>
+
+<para
+>Seleccionant la casella de selecció <emphasis
+>Compte preferit</emphasis
+> es permetrà l'accés preferit en alguns diàlegs i vistes del &kmymoney;. </para>
+
+<para
+>Per a continuar amb el pas següent, feu clic a <guibutton
+>Següent</guibutton
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Comptes de targeta de crèdit</title>
+
+<para
+>En crear un compte de targeta de crèdit, després d'introduir la informació bàsica i fer clic a <guibutton
+>Següent</guibutton
+>, de manera opcional podreu fer que el &kmymoney; creï una <link linkend="details.schedules"
+>operació planificada</link
+>. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz6.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Assistent de comptes</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Si voleu que es generi aquesta operació, assegureu-vos que la casella de selecció està marcada i introduïu la informació requerida. </para>
+
+<para
+>Feu clic a <guibutton
+>Següent</guibutton
+> per a continuar. </para>
+</sect2>
+
+<sect2>
+<title
+>Comptes d'inversió</title>
+
+<para
+>En el &kmymoney;, els comptes d'Inversió només contenen patrimoni (accions, bons, &etc;) però no contenen efectiu. (És per això que no podreu especificar un saldo d'obertura per a un compte d'Inversió). Si una operació en un compte d'Inversió requereix o genera efectiu (com comprar o vendre accions), s'utilitzarà un compte de Valors per a l'efectiu. Els comptes de Valors es descriuen amb més detall en el capítol sobre les <link linkend="details.investments"
+>Inversions</link
+>. Quan creeu un compte nou d'Inversió, després d'introduir la informació bàsica i fer clic a <guibutton
+>Següent</guibutton
+>, tindreu l'opció de crear un compte associat de Valors. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz7.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Assistent de comptes</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>En general, és millor crear aquí el compte de Valors, el qual rebrà el mateix nom que el compte d'Inversió, amb «(valors)» annexat. En aquest moment no és possible especificar la data d'obertura o el saldo del compte de Valors. Podreu fer-ho editant els detalls del compte una vegada s'hagi creat. </para>
+</sect2>
+
+<sect2>
+<title
+>Comptes de préstec</title>
+
+<para
+>Els comptes de préstec són comptes especials que s'utilitzen per a ajudar a gestionar els Préstecs amb interessos i amortitzacions planificades. En proporcionar informació sobre el préstec al &kmymoney;, aquest podrà ajudar a fer un seguiment del pagament dels interessos i el capital restant del préstec. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_1.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Assistent de comptes</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>A la pàgina Detalls, introduïu la informació general sobre el préstec. </para>
+
+<para
+>Primer, seleccioneu si esteu demanant o prestant diners. Si esteu demanant diners, el préstec s'inclourà en els Comptes sota Passius. Si presteu diners, el préstec apareixerà a la llista sota Actius. </para>
+
+<para
+>Després, seleccioneu el beneficiari o el pagador del préstec. Com sempre, si el nom encara no existeix a la llista de Beneficiaris, introduïu-lo aquí i el &kmymoney; el crearà. </para>
+
+<para
+>Els tres elements següents són per a gestionar els Préstecs en els quals ja heu realitzat pagaments. Si seleccioneu <guibutton
+>Sí</guibutton
+> a la llista desplegable <guilabel
+>Ja heu fet/rebut algun pagament?</guilabel
+>, després podreu seleccionar si voleu registrar tots els pagaments o només aquells des del començament de l'any actual. Si voleu escriure des del començament de l'any actual, se us demanarà que introduïu el saldo al començament d'aquest any. </para>
+
+<para
+>Després, seleccioneu amb quina freqüència es realitzaran els pagaments i amb quina freqüència es capitalitzaran els interessos. La capitalització és quan l'interès s'afegeix a l'import que es deu del préstec, de manera que quan es calculi l'interès a continuació, hi haurà més interessos pagats sobre l'interès. És habitual que es capitalitzi l'interès amb la mateixa freqüència amb què es realitzen els pagaments. </para>
+
+<para
+>Després, introduïu la data en què s'enregistrarà el primer pagament. </para>
+
+<para
+>Finalment, introduïu la informació sobre com varia el tipus de l'interès. Si el préstec és de tipus fix, no hi haurà res a fer. Si el tipus és variable, seleccioneu Variable a <guilabel
+>Classe del tipus d'interès</guilabel
+> i després introduïu l'interval entre els canvis del tipus d'interès i la data de venciment del primer canvi del tipus d'interès: el &kmymoney; demanarà que actualitzeu el tipus d'interès quan arribi aquesta data. Feu clic a <guibutton
+>Següent</guibutton
+> per a continuar. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_2.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Assistent de comptes</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>La pàgina Pagaments és on introduïu els valors de pagament i interès del préstec. </para>
+
+<para
+>Primer, seleccioneu si el tipus d'interès es calcularà quan rebeu el pagament o quan venci. Si no ho sabeu, deixeu-ho en el valor predeterminat. </para>
+
+<para
+>Després, introduïu els valors següents: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Import del préstec</term>
+    <listitem>
+      <para
+>L'import del préstec.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Tipus d'interès</term>
+    <listitem>
+      <para
+>El tipus d'interès en percentatge anual del préstec.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Termini</term>
+    <listitem>
+      <para
+>La durada del préstec. Introduïu un número i seleccioneu Mesos o Anys. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Pagament (principal i interès)</term>
+    <listitem>
+      <para
+>L'import de cada pagament del préstec. Aquest és el total del capital i els interessos pagats en cada pagament. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Pagament al final</term>
+    <listitem>
+      <para
+>Pagament final addicional realitzat al final del termini per a pagar el capital restant del préstec. Per a un préstec d'amortització, aquest sol ser zero. Per a un préstec amb només interessos, serà igual que l'import del préstec. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>Finalment, utilitzeu el botó <guibutton
+>Calcula</guibutton
+> per a comprovar els valors que heu introduït. Cal haver introduït tots o tots menys un dels valors llistats anteriorment. Si ometeu dos o més valors, el botó estarà inhabilitat perquè no és possible comprovar que els valors introduïts són coherents: en aquest cas no podreu utilitzar el compte de Préstec al &kmymoney;, en el seu lloc haureu de fer servir un compte de Passiu o Actiu per a fer manualment el seguiment del préstec. </para>
+
+<para
+>Si ometeu un valor, el &kmymoney; l'intentarà calcular. Si heu introduït tots els valors, el &kmymoney; comprovarà que els valors són coherents. El &kmymoney; no ajustarà els valors introduïts que no siguin el «Pagament al final», el qual es pot ajustar lleugerament per a mirar d'arrodonir. Si els valors són incoherents o el &kmymoney; no pot calcular el valor omès, el &kmymoney; ho informarà perquè pugueu corregir qualsevol error i repetir el càlcul. </para>
+
+<para
+>Una vegada que els valors són coherents, el botó <guibutton
+>Següent</guibutton
+> estarà habilitat i podreu avançar a la pàgina següent. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_3.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Assistent de comptes</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>La pàgina Despeses és on podreu introduir qualsevol despesa afegida als pagaments del préstec. </para>
+
+<para
+>Si hi ha cap despesa, premeu el botó <guibutton
+>Despeses addicionals</guibutton
+>. Es mostrarà l'editor per al Desglossament de l'operació per a introduir les despeses. Qualsevol línia afegida aquí s'inclourà a la planificació per al pagament del préstec. Quan deseu el desglossament, la pàgina Despeses mostrarà el pagament del capital i els interessos, el total de les despeses addicionals i del pagament periòdic. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_4.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Assistent de comptes</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>El &kmymoney; crearà una <link linkend="details.schedules"
+>operació planificada</link
+> per al préstec. La pàgina Planificació és on introduireu els detalls restants necessaris per a crear la planificació. </para>
+
+<para
+>Primer introduïu la Categoria a la qual se li assignaran els interessos del préstec. Després introduïu el compte des del qual es realitzarà el pagament del préstec. </para>
+
+<para
+>La pàgina també mostrarà la primera data de pagament per a la qual es crearà la Planificació. </para>
+
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_5.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase
+>Assistent de comptes</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>De manera opcional, el &kmymoney; podria crear una operació que representi el que s'havia rebut o pagat quan es va crear el préstec. </para>
+
+<para
+>Si demaneu o presteu diners en efectiu, seleccioneu el compte des del qual es va pagar el romanent del préstec. </para>
+
+<para
+>Si demaneu diners per a comprar un cotxe, podreu seleccionar o crear un compte d'Actiu per a ajudar a fer un seguiment del valor per al cotxer nou. </para>
+
+<para
+>Si torneu a finançar un Préstec existent, marqueu la casella de selecció <guilabel
+>Refinançament d'un préstec existent</guilabel
+>, seleccioneu el compte del Préstec i el &kmymoney; crearà una operació de transferència que saldarà el préstec existent. </para>
+
+<para
+>Si no voleu crear l'operació de pagament, marqueu la casella de selecció <guilabel
+>No creïs l'operació de pagament</guilabel
+>. </para>
+</sect2>
+
+<sect2 id="details.accounts.create.parent">
+<title
+>Compte pare</title>
+
+<para>
+  <screenshot>
+	<screeninfo
+>Compte pare</screeninfo>
+	<mediaobject>
+	  <imageobject>
+            <imagedata fileref="accwiz10.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Assistent de comptes</phrase>
+	  </textobject>
+	</mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Aquest és el penúltim pas en crear qualsevol compte nou, excepte un préstec. Depenent del tipus de compte que s'està creant, es mostrarà un arbre dels comptes d'Actiu o Passiu. </para>
+
+<para
+>Actualment la pàgina del Compte pare no es mostrarà per als Préstecs perquè no es poden crear com a subcomptes. A més, els comptes d'Inversió no poden contenir altres comptes, de manera que no es mostraran a l'arbre. </para>
+
+<para
+>Seleccioneu el compte que voleu que contingui el compte nou. Si no seleccioneu un compte pare, el compte nou es crearà al nivell superior. </para>
+
+</sect2>
+
+<sect2>
+<title
+>Revisar i desar els detalls del compte</title>
+
+<para>
+  <screenshot>
+          <screeninfo
+>Revisió</screeninfo>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="accwiz9.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase
+>Assistent de comptes</phrase>
+            </textobject>
+          </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Aquest és el pas final per a crear un compte nou. Es mostrarà un resum de la informació introduïda. Reviseu-la i, si tot està bé, premeu <guibutton
+>Finalitza</guibutton
+>. En cas contrari, premeu <guibutton
+>Enrere</guibutton
+> per a fer les correccions o <guibutton
+>Cancel·la</guibutton
+> per a abandonar la creació del compte nou. </para>
+
+<note
+><para
+>El Tipus i la Divisa no es podran canviar en aquest moment després de crear el compte. </para
+></note>
+</sect2>
+</sect1>
+
+<sect1 id="details.accounts.viewing">
+<title
+>Obrir / veure els comptes</title>
+
+<para
+>Per a obrir un compte a la vista del llibre major, podreu fer clic sobre l'enllaç al compte des de la vista principal o fer clic sobre la icona Llibres majors <guiicon
+><inlinemediaobject
+> <imageobject
+><imagedata fileref="ledgers_view.png" format="PNG"/></imageobject
+> </inlinemediaobject
+></guiicon
+> al selector de vistes i seleccionar el compte a la llista desplegable que hi ha a la part superior de la vista. De manera alternativa, a la vista del <guiicon
+>Compte</guiicon
+>, feu doble clic a l'entrada del compte o feu clic dret i seleccioneu <guimenuitem
+>Obre el llibre major</guimenuitem
+>. </para>
+</sect1>
+
+<sect1 id="details.accounts.edit">
+<title
+>Editar la informació del compte</title>
+
+<para
+>Per a editar un compte en particular, feu clic dret sobre aquest compte i trieu <guimenuitem
+>Edita el compte...</guimenuitem
+> o amb aquest compte obert al llibre major, seleccioneu l'element de menú <menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Edita el compte...</guimenuitem
+></menuchoice
+>. Apareixerà una finestra amb diverses pestanyes, cadascuna permet veure i canviar certa informació sobre el compte. Per a obtenir més informació sobre qualsevol d'aquests detalls, consulteu la secció sobre <link linkend="details.accounts.create"
+>com crear un compte nou</link
+>. </para>
+
+<para>
+  <screenshot>
+        <screeninfo
+>Editant un compte</screeninfo>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="account_edit.png" format="PNG"/>
+          </imageobject>
+
+          <textobject>
+            <phrase
+>Editant la informació del compte</phrase>
+          </textobject>
+        </mediaobject>
+  </screenshot>
+</para>
+
+<formalpara
+><title
+>General</title>
+<para
+>Vegeu la informació general sobre el compte i canvieu el nom, la data d'inici o obertura, així com alguna de les altres opcions bàsiques del compte. </para>
+</formalpara>
+
+<formalpara
+><title
+>Institució</title>
+<para
+>Vegeu i canvieu la institució bancària associada i els números de compte. També podreu crear aquí una institució nova. </para>
+</formalpara>
+
+<formalpara
+><title
+>Jerarquia</title>
+<para
+>Podreu canviar el compte pare fent clic sobre un altre compte pare en aquesta vista de la jerarquia dels comptes. </para>
+</formalpara>
+
+<formalpara
+><title
+>Límits</title>
+<para
+>Aquesta pestanya només està present per als comptes d'actiu i passiu. Si introduïu imports en els camps disponibles, el &kmymoney; us avisarà quan el saldo del compte abasti aquests valors. </para>
+</formalpara>
+
+<formalpara
+><title
+>Impostos</title>
+<para
+>Aquí podreu comprovar si es tracta d'un compte per a l'IVA i si incloure aquest compte en els informes d'impostos. </para>
+</formalpara>
+
+<formalpara
+><title
+>Configuració en línia</title>
+<para
+>Aquesta pestanya només estarà present si el compte està vinculat amb un <link linkend="details.impexp.ofxdirectconnect"
+>compte en línia</link
+>. Conté tres subpestanyes. </para>
+</formalpara>
+
+<itemizedlist>
+<listitem>
+<para
+><emphasis
+>Detalls del compte</emphasis
+>: Mostra l'estat de la connexió en línia, el banc/corredor i el número de compte, i permet emmagatzemar o canviar la contrasenya del compte en línia. </para>
+</listitem>
+
+<listitem>
+<para
+><emphasis
+>Detalls OFX</emphasis
+>: Aquí podreu establir certs detalls que el &kmymoney; utilitzarà quan estableixi una connexió OFX amb la institució. Això només hauria de ser necessari si obteniu certs errors la primera vegada que configureu el compte en línia, o potser si la institució canvia el programari del servidor OFX. </para>
+</listitem>
+
+<listitem>
+<para
+><emphasis
+>Detalls de la importació</emphasis
+>: Aquí podreu dir-li al &kmymoney; què fer servir com a data d'inici per a la importació. A més, a partir de la versió 4.6, podreu triar si el nom del beneficiari es basa en el camp <literal
+>PAYEEID</literal
+>, <literal
+>NAME</literal
+> o <literal
+>MEMO</literal
+> de l'operació importada. </para>
+</listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="details.accounts.delete">
+<title
+>Suprimir comptes</title>
+
+<para
+>Per a suprimir un compte, primer elimineu totes les operacions d'aquest compte en el llibre major. Després, cerqueu el compte a la vista dels comptes i després feu clic dret sobre l'entrada per a mostrar el menú emergent, seleccioneu <guimenuitem
+>Suprimeix el compte...</guimenuitem
+> des del menú emergent. </para>
+
+<para
+>Si no podeu suprimir un compte que sembla que no té operacions, comproveu el filtre. Vegeu <menuchoice
+> <guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Configura el &kmymoney;</guimenuitem
+> <guimenuitem
+>General</guimenuitem
+> <guimenuitem
+>Filtre</guimenuitem
+> </menuchoice
+>. Esborrarà tots els filtres. Establiu la data d'inici a 1900.01.01, més o menys. </para>
+
+<para
+>Hi pot haver operacions que no es mostren al llibre major, per exemple, si heu escrit accidentalment l'any equivocat en crear una entrada perquè una entrada romangui fora de la data d'obertura del &kmymoney;. Aquesta apareixerà a sota de la pàgina del llibre major com a fons restants. </para>
+</sect1>
+</chapter>

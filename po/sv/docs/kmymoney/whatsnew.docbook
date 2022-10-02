@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="whatsnew">
+<chapterinfo>
+  <date
+>2019-04-04</date>
+  <releaseinfo
+>5.0.4</releaseinfo>
+</chapterinfo>
+<title
+>Vad är nytt i den här utgåvan</title>
+
+<sect1>
+<title
+>Felrättningar och förbättringar av funktionalitet</title>
+
+<para
+>Liksom vid varje utgåva, har &kmymoney;s utvecklingsgrupp arbetat hårt för att göra den hör utgåvan bättre och enklare att använda på alla sätt. Det här är fjärde utgåvan i 5.0-serien, och de flesta aktiviteterna har varit inriktade på att rätta fel. </para>
+
+<para
+>Vid denna tidpunkt är konverteringen till att använda KDE Ramverk i stort sett färdig, även om det och arbetet för att uppdatera många av de underliggande biblioteken som används av programmet är bakom kulisserna, och inte direkt synligt för slutanvändaren. Det allmänna utseendet och känslan bör vara stabila, även om några mindre ändringar fortfarande kan ske. Programmets grundläggande funktionalitet förblir också densamma, förutom avsiktliga förbättringar och tillägg. </para>
+
+<para
+>I tidigare utgåvor har den här sidan i handboken inkluderat en lista med många av de specifika felrättningarna och funktionsförbättringarna. Istället för att duplicera informationen, hittar du den direkt i <ulink url="https://kmymoney.org/changelog.html"
+>versionsfakta</ulink
+>. </para>
+
+<para
+>Sedan 5.0 gavs ut har några ändringar skett som kräver justeringar från användarens sida vid uppgradering från 4.8.x eller äldre version </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Programmet söker efter mallarna för checkutskriftsinsticksprogrammet på olika ställen. Användaren måste ta hänsyn till det i insticksprogrammets inställningsdialogruta. Se <link linkend="details.settings.plugins"
+>följande avsnitt för mer detaljerad information</link
+>. </para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1>
+<title
+>Uppdateringar av den här handboken</title>
+
+<para
+>Medan vi håller på, finns fortfarande kapitel i handboken som inte har uppdaterats för att motsvara ändringarna i programmet som är synliga för användaren från 5.0. Varje kapitel identifierar den utgåva av &kmymoney; då det senast uppdaterades, men vi presenterar en fullständig lista här som snabbreferens. </para>
+
+<para
+>Observera dock att i vilken utsträckning de kapitel som inte har uppdaterats motsvarar eller inte motsvarar programmets nuvarande funktion beror på hur mycket det området av programmet har ändrats mellan utgåva 4.8 och 5.0. </para>
+  
+<informaltable frame="none">
+  <tgroup cols="2">
+    <thead>
+      <row>
+	<entry
+><para
+>Kapitel som uppdaterats för 5.x</para
+></entry>
+	<entry
+><para
+>Kapitel som ännu inte uppdaterats för 5.x</para
+></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry valign="top">
+	  <simplelist>
+	    <member
+><link linkend="introduction"
+>Inledning</link
+></member>
+	    <member
+><link linkend="whatsnew"
+>Vad är nytt i den här utgåvan</link
+></member>
+	    <member
+><link linkend="makingmostof"
+>Få ut så mycket som möjligt av &kmymoney;</link
+></member>
+	    <member
+><link linkend="firsttime"
+>Använda &kmymoney; för första gången</link
+></member>
+	    <member
+><link linkend="details.institutions"
+>Institutioner</link
+></member>
+	    <member
+><link linkend="details.accounts"
+>Konton</link
+></member>
+	    <member
+><link linkend="details.categories"
+>Kategorier</link
+></member>
+	    <member
+><link linkend="details.tags"
+>Etiketter</link
+></member>
+	    <member
+><link linkend="details.payees"
+>Betalningsmottagare</link
+></member>
+	    <member
+><link linkend="details.reconcile"
+>Scheman</link
+></member>
+	    <member
+><link linkend="details.ledgers"
+>Huvudböcker</link
+></member>
+	    <member
+><link linkend="details.investments"
+>Investeringar</link
+></member>
+	    <member
+><link linkend="details.settings"
+>Inställningar</link
+></member>
+	    <member
+><link linkend="reference.menus"
+>Referens: Menyer</link
+></member>
+	    <member
+><link linkend="credits"
+>Tack till</link
+></member>
+	  </simplelist>
+	</entry>
+	<entry valign="top">
+	  <simplelist>
+	    <member
+><link linkend="details.currencies"
+>Valutor</link
+></member>
+	    <member
+><link linkend="details.reconcile"
+>Avstämning</link
+></member>
+	    <member
+><link linkend="details.reports"
+>Rapporter</link
+></member>
+	    <member
+><link linkend="details.impexp"
+>Import och export</link
+></member>
+	    <member
+><link linkend="details.loans"
+>Lån</link
+></member>
+	    <member
+><link linkend="details.budgets"
+>Budget</link
+></member>
+	    <member
+><link linkend="details.forecast"
+>Prognoser</link
+></member>
+	    <member
+><link linkend="details.search"
+>Sök transaktioner</link
+></member>
+	    <member
+><link linkend="details.formats"
+>Filformat</link
+></member>
+	    <member
+><link linkend="details.database"
+>Databas</link
+></member>
+	    <member
+><link linkend="faq"
+>Frågor och svar</link
+></member>
+	    <member
+><link linkend="reference.widgets"
+>Referens: Grafiska komponenter</link
+></member>
+	  </simplelist>
+	</entry>
+      </row>
+    </tbody>
+  </tgroup>
+</informaltable>
+ 
+</sect1>
+
+  
+</chapter>

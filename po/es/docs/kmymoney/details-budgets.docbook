@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.budgets">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Colin.Wright; &Colin.Wright.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2011-06-29</date>
+  <releaseinfo
+>4.6</releaseinfo>
+</chapterinfo>
+
+<title
+>Presupuestos</title>
+
+<sect1 id="details.budgets.define">
+<title
+>¿Qué es un presupuesto?</title>
+
+<para
+>Un presupuesto es una lista por categorías de ingresos y gastos esperados para un periodo de tiempo. </para>
+
+<para
+>La funcionalidad de Presupuestos de &kappname; le permite crear presupuestos anuales. Se puede crear más de un presupuesto para cada año. Usted establece valores de presupuesto mensual contra cualquier categoría de ingresos o de gastos que haya definido. Los valores se pueden establecer de tres maneras, dependiendo del periodo:  </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Mensualmente</term>
+    <listitem
+><para
+>(Por defecto) especifica un valor sencillo aplicado a cada mes del presupuesto.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Anualmente</term>
+    <listitem
+><para
+>especifica un valor sencillo para dividir equitativamente a lo largo de cada mes del presupuesto</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Individual</term>
+    <listitem
+><para
+>especifica valores separados para cada mes.</para>
+      <para
+>Esto se usa para ingresos y gastos repartidos irregularmente a lo largo del año.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>&kappname; proporciona varios informes para comparar los ingresos y los gastos reales frente a los presupuestos introducidos. Se describen con más detalle en <link linkend="budget.details.reports"
+>otra sección</link
+>. </para>
+</sect1>
+
+<sect1 id="details.budgets.create">
+<title
+>Sus presupuestos</title>
+
+<para
+>Usted puede acceder a sus presupuestos haciendo clic en el icono apropiado en el panel de navegación a la izquierda de la ventana de &kappname;. </para>
+
+<para
+>Hay dos secciones principales en la ventana de presupuesto. Estas se describen con más detalle debajo. A la izquierda, la sección principal muestra la lista de presupuestos que ha creado. Encima están los botones para crear, renombrar y eliminar presupuestos. A la derecha, hay tres secciones. En la parte superior está la lista de cuentas. En la parte inferior hay una muestra de las cantidades asignadas al presupuesto para la categoría seleccionada en la lista de cuentas de arriba. Entre esas dos áreas hay algunos controles adicionales para gestionar el presupuesto. </para>
+
+<sect2>
+<title
+>Ver, crear, renombrar y eliminar presupuestos</title>
+
+<para
+>Esta sección de la ventana de Presupuestos muestra la lista de presupuestos contenida en el archivo actual de &kappname;. Si aún no se ha creado ninguno, la lista estará vacía. La lista de presupuestos tiene dos columnas: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Nombre</term>
+    <listitem>
+      <para
+>Nombre del presupuesto</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Año</term>
+    <listitem>
+      <para
+>El año fiscal del presupuesto. Tenga en cuenta que el día y el mes de inicio del año fiscal se pueden especificar en <link linkend="details.settings.general.global"
+>diálogo de Configurar &kappname;.</link
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>Los valores del presupuesto seleccionado se muestran a la derecha. Para seleccionar un presupuesto diferente puede hacer click sobre el presupuesto en la lista. Alternativamente, cuando la lista está activa, puede seleccionar diferentes presupuestos usando las teclas «arriba» y «abajo». Si ha hecho cambios en el presupuesto y selecciona otro diferente, &kappname; le preguntará si desea guardar o descartar los cambios. </para>
+
+<para
+>Hay tres botones sobre de la lista de presupuestos. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Nuevo</term>
+    <listitem>
+      <para
+>Crear un nuevo presupuesto vacío. El nombre predeterminado del nuevo presupuesto es «Presupuesto &lt;año&gt;», donde &lt;año&gt; es el año fiscal actual. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Renombrar</term>
+    <listitem>
+      <para
+>Editar el nombre del presupuesto seleccionado.</para>
+
+      <para
+>También puede editar el nombre de un presupuesto haciendo doble clic sobre el nombre del presupuesto en la lista.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Eliminar</term>
+    <listitem>
+      <para
+>Eliminar el presupuesto seleccionado</para>
+    </listitem>
+  </varlistentry>
+
+<!--  buttons moved in the UI - they are now described below.  Will remove
+      from here after this chapter has been reviewed.
+  <varlistentry>
+    <term
+>Revert</term>
+    <listitem>
+      <para
+>Reverts the selected Budget to its last stored state.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Save</term>
+    <listitem>
+      <para
+>Accepts any unsaved changes to the selected Budget and
+        stores them.</para>
+    </listitem>
+  </varlistentry>
+ -->
+</variablelist>
+
+<para
+>Hay disponibles opciones adicionales en el menú al que se accede haciendo clic derecho sobre un presupuesto. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Nuevo presupuesto</term>
+    <listitem>
+      <para
+>Crear un nuevo presupuesto en blanco.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Renombrar presupuesto</term>
+    <listitem>
+      <para
+>Renombra el presupuesto seleccionado.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Cambiar el año del presupuesto</term>
+    <listitem>
+      <para
+>Muestra una ventana con una lista de años de donde seleccionar un año fiscal diferente para el presupuesto.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Eliminar presupuesto</term>
+    <listitem>
+      <para
+>Elimina el presupuesto seleccionado.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Copiar presupuesto</term>
+    <listitem>
+      <para
+>Crea una copia del presupuesto seleccionado. El nuevo presupuesto tiene por nombre «Copia de &lt;presupuesto&gt;», donde &lt;presupuesto&gt; es el nombre del presupuesto copiado.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Presupuesto basado en predicciones</term>
+    <listitem>
+      <para
+>Rellene las cantidades del presupuesto basándose en los datos de los valores de las predicciones de &kappname;. Vea la sección de <link linkend="details.forecast.define"
+>Predicciones</link
+>  para más información. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Lista de cuentas</title>
+
+<para
+>La Lista de cuentas muestra la lista de las categorías de ingresos y gastos. (Recuerde que, dentro de &kappname; las categorías se tratan como un tipo especial de cuenta). Como en otros lugares de &kappname;, la lista se organiza en estructura de árbol. La lista se puede expandir o contraer para mostrar u ocultar las subcategorías dentro de una categoría. La lista de cuentas tiene varias columnas: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Cuenta</term>
+    <listitem>
+      <para
+>Nombre de la cuenta (categoría)</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Tipo</term>
+    <listitem>
+      <para
+>Tipo de cuenta (ingresos o gastos)</para>
+    </listitem>
+  </varlistentry>
+
+<!-- these seem to have been removed from the display.  Remove from here
+     once this is confirmed by the programmers.
+  <varlistentry>
+    <term
+>Tax</term>
+    <listitem>
+      <para
+>Checked if a Category included in Tax Reports</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>VAT</term>
+    <listitem>
+      <para
+>Checked if a Category marked as a VAT Category</para>
+    </listitem>
+  </varlistentry>
+-->
+
+  <varlistentry>
+    <term
+>Saldo total</term>
+    <listitem>
+      <para
+>Saldo actual de la cuenta. Esto estará en blanco para las categorías, a menos que la categoría esté definida en una divisa extranjera. En este caso, el saldo total mostrará el valor para la categoría en su divisa definida.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Valor total</term>
+    <listitem>
+      <para
+>Valor total anual del presupuesto. Si una categoría tiene subcategorías y la lista de subcategorías de la categoría está contraída, el valor que se muestra es la suma de los valores de todas las subcategorías de esa categoría. Si una categoría está definida en una divisa extranjera, el valor total se mostrará en la divisa base.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<!-- It would be nice to include the actual button icons here to confirm
+     which buttons are referred to.  -->
+<para
+>Bajo la lista de cuentas hay varios controles. Los botones de Actualizar y Revertir se describen más abajo. Los botones de expandir y contraer expanden o contraen la lista completa de cuentas. </para>
+
+<para
+>La lista de cuentas se puede filtrar de dos maneras. Marcando la casilla «Ocultar categorías sin usar» oculta cualquier categoría para la que no se ha asignado ningún valor, ni a la categoría ni a ninguna de sus subcategorías. A la derecha de esta casilla, hay un cuadro de texto sin etiquetar. Solo se listarán las categorías que incluyen lo que sea que esté especificado en este cuadro, pero también lo estará la categoría padre. </para>
+
+<para
+>Tenga en cuenta que cambiar «Ocultar las categorías de presupuestos sin usar» o el valor del filtro puede hacer que cambie la vista de la lista de categorías. Puede necesitar expandir de nuevo la lista para ver todas las categorías que deberían mostrarse con los ajustes actuales. </para>
+
+</sect2>
+
+<sect2>
+<title
+>Asignaciones</title>
+
+<para
+>El área de asignaciones muestra los valores para la categoría seleccionada en la lista de cuentas. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Cuenta</term>
+    <listitem>
+      <para
+>Muestra el nombre de la categoría seleccionada. Si la categoría es una subcategoría, su nombre completo se muestra de la forma Categoría:Subcategoría.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Total</term>
+    <listitem>
+      <para
+>Muestra el valor total anual asignado a la categoría</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Incluir subcuentas</term>
+    <listitem>
+      <para
+>Si esto está marcado, entonces los informes muestran los ingresos o gastos reales de las subcategorías que pertenecen a la categoría frente a la categoría, en lugar de a la subcategoría.</para>
+
+      <para
+>Si una subcategoría tiene un valor definido en el presupuesto, los ingresos y gastos se mostrarán frente a la subcategoría.</para>
+
+      <para
+>Si la categoría seleccionada en la lista de cuentas tiene sus subcategorías contraídas, aunque el valor total se muestre en la suma de los valores totales para todas las subcategorías, las cantidades en el área de Asignaciones pueden mostrarse como 0, a menos que se haya marcado la casilla o se haya asignado explícitamente una cantidad a la categoría.</para>
+
+      <para
+>En general, marque esta casilla y asigne valores a la categoría y no a las subcategorías, o no marque la casilla y asigne valores a las subcategorías, pero no a la categoría. Si se les han asignado cantidades a las subcategorías cuando la casilla está marcada, entonces esas cantidades se añaden a la categoría.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Limpiar</term>
+    <listitem>
+      <para
+>El botón Limpiar revierte el valor o valores de la cuenta presupuestada a cero.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Periodo</term>
+    <listitem>
+      <para
+>Los botones de radio del periodo le permiten seleccionar el periodo al que se aplica el valor.</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>Mensualmente</term>
+	  <listitem>
+	    <para
+>Se introduce un solo valor, especificando la cantidad por mes. Esta es la configuración por defecto.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term
+>Anualmente</term>
+	  <listitem>
+	    <para
+>Se introduce un solo valor, especificando la cantidad por año.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term
+>Individual</term>
+	  <listitem>
+	    <para
+>Los valores se especifican para cada mes del calendario. Esto se usa donde los gastos o los ingresos se reparten irregularmente a lo largo del año.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+
+      <para
+>Si un valor o valores ya están especificados y se cambia el periodo, &kappname; preguntará si usar el valor total anual actual para asignarle los nuevos valores. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Actualizar y revertir</title>
+
+<para
+>Por razones de rendimiento, los cambios que se hacen a un presupuesto no se guardan inmediatamente. En su lugar, primero se tienen que almacenar usando el botón Actualizar, y después guardarse permanentemente usando el guardado de &kappname;. </para>
+
+<para
+>Cuando se modifican por primera vez los valores de un presupuesto, los botones de Actualizar y Revertir están habilitados. Se pueden hacer múltiples cambios al presupuesto. Presionar Actualizar almacenará los cambios y deshabilitará los botones de Actualizar y Revertir. </para>
+
+<para
+>El guardado de &kappname; cambia lo que ha sido almacenado usando el botón Actualizar. Así, si ha modificado un presupuesto pero aún no ha guardado los cambios, el guardado de &kappname; no afectará al presupuesto modificado y los botones Actualizar y Revertir permanecerán activos. </para>
+
+<para
+>Revertir deshace cualquier cambio que se haya hecho al presupuesto desde la última actualización, y deshabilita los botones Actualizar y Revertir. </para>
+
+<para
+>Los cambios guardados usando Actualizar pero aún no almacenados usando el guardado de &kappname; solo se pueden revertir cargando de nuevo el archivo de &kappname;. </para>
+</sect2>
+</sect1>
+
+<sect1 id="budget.details.reports">
+<title
+>Informes de presupuesto</title>
+
+<para
+>&kappname; proporciona varios informes para comparar los ingresos y los gastos reales frente a un presupuesto. Se listan en Informes, bajo «Presupuestos». Hay dos tipos de informes: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Solo presupuesto</term>
+    <listitem
+><para
+>Estos informes muestran valores de un presupuesto.</para>
+      <variablelist>
+        <varlistentry>
+          <term
+>Presupuesto mensual</term
+> 
+          <listitem
+><para
+>Muestra los valores mensuales de un presupuesto.</para>
+          </listitem
+></varlistentry>
+        <varlistentry>
+          <term
+>Presupuesto anual</term
+> 
+          <listitem
+><para
+>Muestra los valores mensuales de un presupuesto con el total anual.</para>
+          </listitem
+></varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Presupuesto frente a real</term>
+    <listitem
+><para
+>Estos informes comparan valores de un presupuesto con los ingresos y gastos reales. En cada informe de presupuesto puede encontrar las columnas Presupuesto, Real y Diferencia. Cada informe difiere en el periodo que se muestra.</para>
+      <variablelist>
+      <varlistentry>
+      <term
+>Presupuesto frente a real este año</term
+> 
+      <listitem
+><para
+>Desde el principio del año hasta hoy</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Presupuesto frente a real este año (YTM)</term
+> 
+      <listitem
+><para
+>Desde el principio del año hasta el último día del mes actual</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Presupuesto mensual frente a real</term
+> 
+      <listitem
+><para
+>Desde el principio del año hasta el último día del mes actual</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Presupuesto anual frente a real</term
+> 
+      <listitem
+><para
+>Desde el 1 de enero al 31 de diciembre</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Presupuesto anual frente a real (gráfico)</term
+> 
+      <listitem
+><para
+>Lo mismo que el informe anterior, pero muestra el gráfico por omisión</para>
+      </listitem
+></varlistentry>
+      </variablelist>
+
+      <para
+>Estos informes proporcionan una base a partir de la que se pueden crear informes personalizados cambiando el intervalo de fechas en el presupuesto, entre otras opciones. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+</chapter>

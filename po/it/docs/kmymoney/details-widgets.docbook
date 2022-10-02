@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="reference.widgets">
+<sect1info>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+  </authorgroup>
+  <date
+>25/07/2010</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</sect1info>
+
+<title
+>Widget</title>
+
+<para
+>&kmymoney; ha dei widget specifici che non si trovano in altre applicazioni. Questo capitolo spiega l'uso di questi widget. </para>
+
+<sect2 id="reference.widgets.datepicker">
+<title
+>Widget per l'inserimento della data</title>
+
+<para
+>Quando &kmymoney; ha bisogno di informazioni relative a una data specifica, &eg; la data di una transazione o la data di apertura di un conto, permette di usare il <emphasis
+>widget per l'inserimento della data</emphasis
+>. Questo widget consiste di tre campi e un pulsante. I campi contengono il <emphasis
+>giorno</emphasis
+>, il <emphasis
+>mese</emphasis
+> e l'<emphasis
+>anno</emphasis
+>, separati dai caratteri di separazione della data specificati dalle proprie impostazioni di localizzazione. La pressione del pulsante aprirà il widget di <emphasis
+>selezione della data</emphasis
+>. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Suggerimento del giorno</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="date_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Widget della data</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Nel widget di inserimento della data, i tasti freccia &Left;/&Right; possono essere usati per navigare tra i campi <emphasis
+>giorno</emphasis
+>, <emphasis
+>mese</emphasis
+> e <emphasis
+>anno</emphasis
+>. Usando i tasti &Up;/&Down;, si può aumentare o diminuire il valore del campo selezionato. I tasti <keycap
+>+</keycap
+> e <keycap
+>-</keycap
+> possono essere usati per aumentare/diminuire di un solo giorno. Vengono considerati i limiti del mese e dell'anno e saranno aumentati o diminuiti se necessario. Premendo <keycap
+>T</keycap
+> si imposterà la data a quella odierna. </para>
+
+<para
+>La data può essere modificata anche usando il mouse. Facendo clic sul campo <emphasis
+>giorno</emphasis
+>, <emphasis
+>mese</emphasis
+> o <emphasis
+>anno</emphasis
+> lo si seleziona. Il valore può essere incrementato/decrementato utilizzando le frecce nella parte destra del widget. Il loro funzionamento è esattamente uguale alle frecce direzionali &Up;/&Down; della tastiera. </para>
+
+<para
+>Il selezionatore della data verrà aperto quando si fa clic sul pulsante alla destra dei pulsanti freccia. Contiene quatto pulsanti freccia nella parte alta, due da ogni parte. I pulsanti a sinistra permettono di diminuire il mese o l'anno selezionati, mentre quelli alla destra permettono di aumentarli. Il pulsante più a destra permette di chiudere il selezionatore della data. </para>
+
+<para
+>Sotto i pulsanti, viene visualizzato il calendario del mese selezionato. Facendo clic su un giorno nel calendario lo seleziona, chiude il selezionatore della data e immette la data selezionata nei campi <emphasis
+>giorno</emphasis
+>, <emphasis
+>mese</emphasis
+> e <emphasis
+>anno</emphasis
+>. </para>
+
+<para
+>Nella parte bassa del widget di selezione della data ci sono un pulsante, un campo per l'immissione di testo e un menu a discesa. Facendo clic sul pulsante si seleziona la data di oggi. Il campo può essere usato per immettere una data specifica. Premendo il tasto &Enter; sarà visualizzata quella data. Il menu a tendina permette di andare ad una certa settimana e selezionare una data a partire da essa. </para>
+</sect2>
+
+<sect2 id="reference.widgets.value">
+<title
+>Inserimento di valori</title>
+<para
+>Il widget per l'inserimento di valori consiste in un campo di testo (che accetta cifre, separatori delle migliaia e separatore dei decimali) e un pulsante sulla destra. Utilizzare le cifre per inserire il valore. Separare la parte frazionale digitando il separatore dei decimali della propria localizzazione. Se si fa clic sul pulsante sulla destra o si preme un tasto associato ad un'operazione matematica (&eg;, <keycap
+>+</keycap
+>, <keycap
+>-</keycap
+>, <keycap
+>/</keycap
+>, <keycap
+>*</keycap
+> o <keycap
+>%</keycap
+>) sarà visualizzata una piccola calcolatrice che permette di calcolare il valore finale. </para>
+
+<para
+>Possono essere inseriti valori negativi immettendo il simbolo meno prima del numero. Se la tua lingua permette di visualizzare i numeri negativi racchiudendoli tra parentesi, lo si può fare anche in questo widget. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Suggerimento del giorno</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="value_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Widget del valore</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Usare il widget della calcolatrice come una normale calcolatrice e chiuderlo premendo il pulsante <guibutton
+>=</guibutton
+> o premendo il tasto <keycap
+>=</keycap
+> sulla tastiera. </para>
+</sect2>
+
+<sect2 id="reference.widgets.payee">
+<title
+>Inserimento di un beneficiario/pagante</title>
+
+<para
+>Quando è richiesto l'inserimento di un beneficiario/pagante per una transazione, si può iniziare a inserire il nome premendo i tasti della tastiera. Finché ci sono delle corrispondenze nella lista dei beneficiari/paganti di &kmymoney;, saranno presentati in un riquadro sopra o sotto all'area di inserimento del testo. Si può selezionare un elemento della lista usando il mouse o i tasti &Up;/&Down;. Se si usa la tastiera, è necessario premere il tasto &Enter; dopo la selezione. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Suggerimento del giorno</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Widget dei beneficiari</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Se viene inserito un nome che non è presente nella lista di &kmymoney;, sarà chiesto se lo si vuole aggiungere come beneficiario/pagante. In questo caso, sarà aggiunto alla lista, altrimenti il campo sarà svuotato. </para>
+
+<para
+>Quando il campo di testo contiene dei caratteri, la lista visualizzerà solo i beneficiari che corrispondono alla sequenza di caratteri inserita. Facendo doppio clic sulla freccia del menu a discesa si visualizzano tutti i beneficiari nella lista. </para>
+
+</sect2>
+
+<sect2 id="reference.widgets.category">
+<title
+>Inserimento di conti/categorie</title>
+
+<para
+>Quando è richiesto l'inserimento del nome di una categoria o di un conto, si può iniziare ad inserire il nome premendo di tasti della la tastiera. Finché ci saranno delle corrispondenze nella lista dei conti e delle categorie di &kmymoney;, saranno visualizzate in un riquadro sopra o sotto al campo di inserimento del testo. Si può selezionare un conto dalla lista usando il mouse o i tasti &Up;/&Down;. Se si usa la tastiera, bisogna confermare la scelta premendo il tasto &Enter;. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Suggerimento del giorno</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="category_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Widget delle categorie</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Se viene inserito un nome che non è presente nella lista di &kmymoney;, sarà chiesto se lo si vuole aggiungere come nuova categoria. In questo caso, sarà aggiunta alla lista, altrimenti il campo sarà svuotato. </para>
+
+<para
+>Quando il campo di testo contiene dei caratteri, la lista visualizzerà solo ile categorie che corrispondono alla sequenza di caratteri inserita. Facendo doppio clic sulla freccia del menu a discesa si visualizza tutta la lista delle categorie. </para>
+
+</sect2>
+</sect1>

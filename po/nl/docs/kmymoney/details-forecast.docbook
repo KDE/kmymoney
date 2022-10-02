@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.forecast">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Colin.Wright; &Colin.Wright.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Prognose</title>
+
+<sect1 id="details.forecast.define">
+<title
+>Wat is een Prognose?</title>
+
+<para
+>In &kmymoney; is een Prognose een prognose van de saldi van rekeningen gedurende een gespecificeerde toekomstige tijdsperiode.</para>
+
+<para
+>Prognoses kunnen gemaakt worden met een van twee methoden. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Geplande en toekomstige transacties</term>
+    <listitem>
+      <para
+>&kmymoney; gebruikt een combinatie van toekomstige transacties die al zijn ingevoerd in de kasboeken en de items in de planning.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Historie-gebaseerd</term>
+    <listitem>
+      <para
+>&kmymoney; gebruikt waarden uit eerdere transacties in de kasboeken om toekomstige transacties te voorspellen.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>De methode van prognosticeren en periode hiervan kan in de instellingen van &kmymoney; worden geconfigureerd in het paneel Prognose. </para>
+
+<para
+>Prognose in &kmymoney; biedt een samenvatting, die de voorspelde balansen op cyclusdatums van rekeningen en het verwachte verschil tussen het begin- en eindsaldo. De lengte van de cyclus in de rekening kan ingesteld worden door de gebruiker. De samenvatting toont ook berichten over significante voorspelde wijzigingen aan de rekeningen gedurende de prognoseperiode. </para>
+
+<para
+>Evenals de samenvatting staat Prognose van &kmymoney; u ook in staat om dagelijkse saldo's en de minimale en maximale saldo's voor elke rekeningcyclus van de rekening te bekijken. </para>
+
+<para
+>Standaard wordt de Prognose aangemaakt voor 90 dagen, met een 30 dagen rekeningcyclus met gebruik van geplande en toekomstige transacties. </para>
+</sect1>
+
+<sect1 id="details.forecast.view">
+<title
+>Prognose bekijken</title>
+
+<para
+>U kunt een prognose bekijken door op het toepasselijke pictogram in het navigatiepaneel aan de linkerkant van uw &kmymoney;-venster te klikken. </para>
+
+<para
+>Het venster Prognose is in vijf tabbladen gesplitst: </para>
+
+<sect2>
+<title
+>Tabblad Samenvatting</title>
+
+<para
+>Het tabblad Samenvatting is verticaal gesplitst in twee helften. </para>
+
+<sect3>
+<title
+>Rekeningsamenvatting</title>
+
+<para
+>De rekeningsamenvatting bevat een raster die een rij informatie toont voor elk Vermogen en Verplichtingen. </para>
+
+<para
+>De volgende kolommen worden getoond: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Rekening</term>
+    <listitem>
+      <para
+>De naam van de rekening met Vermogen of Verplichting</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Huidig saldo (huidig)</term>
+    <listitem>
+      <para
+>Het huidige saldo van de rekening wordt getoond.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Saldo in rekeningcyclus</term>
+    <listitem>
+      <para
+>De prognoseperiode is in rekeningcycli gesplitst. De standaard lengte van de rekeningcyclus is 30 dagen, maar kan door de gebruiker worden ingesteld.</para>
+
+      <para
+>De eerste datum in de rekeningcyclus is de eerste prognosedatumstandaard. Dit is standaard de huidige datum plus één rekeningcyclus, maar kan afhankelijk van de instelling "Dag van de maand voor start prognose".</para>
+
+      <para
+>Overblijvende datums van rekeningcycli worden bepaald door de lengte van de rekeningcyclus op te tellen bij de vorige datum van de rekeningcyclus. Dit gaat verder totdat de berekende datum van de rekeningcyclus verder is dan de prognoseperiode.</para>
+
+      <para
+>Voor elke datum van de rekeningcyclus wordt het voorspelde saldo getoond.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Totale variantie</term>
+    <listitem>
+      <para
+>De meest rechtse kolom toont het voorspelde verschil in waarde tussen de saldi aan het begin en einde van de prognose. Als de voorspelde eindwaarde van de rekening (in termen van netto waarde) kleiner is dan de beginwaarde zal de gehele rij met rood geaccentueerd worden.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+</sect3>
+
+<sect3>
+<title
+>Samenvatting sleutelinformatie</title>
+
+<para
+>De onderste helft van het tabblad Samenvatting toont vermeldenswaardige informatie over rekeningen. Dit omvat: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Bezittingen onder nul</term>
+    <listitem>
+      <para
+>Er wordt een bericht getoond voor elke bezitting waarvan de waarde gedurende de prognoseperiode onder nul begint of zal komen.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Verplichtingen boven nul</term>
+    <listitem>
+      <para
+>Er wordt een bericht getoond voor elke verplichting waarvoor de waarde boven nul begint of zal komen tijdens de prognoseperiode. Merk op dat de waarde van een verplichting het negatief is van zijn grootboeksaldo, omdat een positief saldo bezit van geld aangeeft.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Tabblad Details</title>
+
+<para
+>Het tabblad Details bevat een raster die een rij informatie toont voor elk Vermogen en Verplichting. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Rekening</term>
+    <listitem>
+      <para
+>De naam van de rekening met Vermogen of Verplichting</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Datums</term>
+    <listitem>
+      <para
+>Voor elke datum in de prognoseperiode toont een kolom het voorspelde saldo van de rekening op die datum. De datumkolommen zijn in oplopende volgorde van links naar rechts.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Totale variantie</term>
+    <listitem>
+      <para
+>De meest rechtse kolom toont het voorspelde verschil in waarde tussen de saldi aan het begin en einde van de prognose. Als de voorspelde eindwaarde van de rekening (in termen van netto waarde) kleiner is dan de beginwaarde zal de gehele rij met rood geaccentueerd worden.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Het tabblad Gevorderd</title>
+
+<para
+>Het tabblad Geavanceerd bevat een raster die een rij informatie toont voor elk Vermogen en Verplichting. De informatie os opgesplitst in kolommen als volgt: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Rekening</term>
+    <listitem>
+      <para
+>De naam van de rekening met Vermogen of Verplichting</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Minimum saldo in rekeningcyclus</term>
+    <listitem>
+      <para
+>Voor elk rekeningcyclusnummer &lt;n&gt; in de prognoseperiode worden de volgende kolommen getoond:</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>Minimum saldo (Min sal &lt;n&gt;)</term>
+	  <listitem>
+	    <para
+>Het minimale voorspelde saldo gedurende de rekeningcyclus</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term
+>Datum minimum saldo (Min datum &lt;n&gt;)</term>
+	  <listitem>
+	    <para
+>De datum waarop het saldo zijn voorspelde minimum bereikt.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Maximum van rekeningcyclussaldo</term>
+
+    <listitem>
+      <para
+>Voor elk rekeningcyclusnummer &lt;n&gt; in de prognoseperiode worden de volgende kolommen getoond:</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>Maximum saldo (Max sld &lt;n&gt;)</term>
+	  <listitem>
+	    <para
+>Het maximale voorspelde saldo gedurende de rekeningcyclus</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term
+>Datum maximum saldo (Max datum &lt;n&gt;)</term>
+	  <listitem>
+	    <para
+>De datum waarop het saldo zijn voorspelde maximum bereikt.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Gemiddeld</term>
+
+    <listitem>
+      <para
+>Het gemiddelde saldo van de rekening gedurende de prognoseperiode</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2>
+<title
+>Tabblad Budget prognose</title>
+
+<para
+>Het tabblad Budget toont een prognoseberekening voor de categorieën Inkomen en Uitgaven. De kolommen zijn gelijk aan de tabbladen Samenvatting en Details. </para>
+
+</sect2>
+
+<sect2>
+<title
+>Grafiek Tabblad</title>
+
+<para
+>Het toont een grafiek met de prognose. Het detailniveau varieert afhankelijk van het detailniveau geselecteerd in de bovenstaande optie. </para>
+
+</sect2>
+
+</sect1>
+</chapter>

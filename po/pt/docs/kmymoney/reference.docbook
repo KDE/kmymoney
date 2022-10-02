@@ -1,0 +1,1314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="reference">
+<chapterinfo>
+  <date
+>2016-12-05</date>
+  <releaseinfo
+>5.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Referência</title>
+
+<sect1 id="reference.menus">
+<sect1info>
+  <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+</sect1info>
+<title
+>Menus</title>
+
+<para
+>Por baixo, encontra-se uma lista com as selecções do menu no &kmymoney;, com uma descrição muito breve sobre o que cada uma delas faz. Lembre-se que muitas destas opções do menu estarão disponíveis ou acinzentadas, dependendo da visualização actual ou do estado da aplicação. Por exemplo, não será capaz de editar uma conta, a menos que a tenha seleccionado previamente ou apresentado na área actual. </para>
+
+<sect2 id="reference.menus.file">
+<title
+>O Menu Ficheiro</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Ficheiro</guimenu
+> <guimenuitem
+>Novo</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Cria um novo ficheiro vazio de dados do &kmymoney;. Só poderá estar aberto um ficheiro do &kmymoney; aberto de cada vez; por isso, isto irá fechar o seu ficheiro actual primeiro. </action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Ficheiro</guimenu
+> <guimenuitem
+>Abrir</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Abre um ficheiro existente do &kmymoney;.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ficheiro</guimenu
+> <guimenuitem
+>Abrir um Recente</guimenuitem
+><guimenuitem
+>...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Permite um acesso rápido aos ficheiros abertos recentemente.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ficheiro</guimenu
+><guimenuitem
+>Abrir uma Base de Dados...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Abre uma base de dados existente.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Ficheiro</guimenu
+> <guimenuitem
+>Gravar</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Grava o ficheiro aberto de momento.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Ficheiro</guimenu
+> <guimenuitem
+>Gravar Como...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Grava o ficheiro aberto de momento com outro nome.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ficheiro</guimenu
+> <guimenuitem
+>Gravar Como Base de Dados...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Grava o ficheiro aberto de momento numa <link linkend="details.database"
+>base de dados</link
+>.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ficheiro</guimenu
+> <guimenuitem
+>Importar</guimenuitem
+><guimenuitem
+>...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Importa os dados financeiros de outros tipos de ficheiros, como o QIF e o Gnucash, ou um ficheiro de modelos de contas e categorias que poderá ser usado para configurar as contas novas.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ficheiro</guimenu
+> <guimenuitem
+>Exportar</guimenuitem
+><guimenuitem
+>...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Exporta o ficheiro actual com um tipo diferente, como o QIF, ou exporta uma lista das suas contas e das categorias como um modelo. </action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Ficheiro</guimenu
+> <guimenuitem
+>Imprimir</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Imprime o ficheiro actual.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ficheiro</guimenu
+><guimenuitem
+>Cópia de Segurança</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Grava uma cópia de segurança do ficheiro actual.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ficheiro</guimenu
+> <guimenuitem
+>Dados Pessoais</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Permite editar os dados pessoais.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ficheiro</guimenu
+> <guimenuitem
+>Informação do ficheiro</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Mostra informações acerca do ficheiro do &kmymoney; aberto de momento.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <!--Dump Memory what i sthis?-->
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Ficheiro</guimenu
+> <guimenuitem
+>Fechar</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Fecha o ficheiro actual.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Ficheiro</guimenu
+> <guimenuitem
+>Sair</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Sai do &kmymoney;</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.edit">
+<title
+>O Menu Editar</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Editar</guimenu
+> <guimenuitem
+>Procurar uma transacção...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Faz a pesquisa por transacções.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.view">
+<title
+>O Menu Ver</title>
+
+<variablelist>
+  <varlistentry id="reference.menus.settings.transactiondetail">
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Configuração</guimenu
+> <guimenuitem
+>Mostrar os Detalhes da Transacção</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Mostra os detalhes da transacção na área de <link linkend="details.ledgers"
+>Livros de Registo</link
+>. Com esta opção activa, todas as linhas da transacção serão apresentadas no livro de registos. Quando estiver desligada, só será apresentada uma linha. </action
+></para>
+      <para
+>Se só quiser ver os detalhes da transacção actual, mas só uma linha para as outras, poderá activar a <link linkend="details.settings.register.lens"
+>Lente do Livro de Registos</link
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Ver</guimenu
+> <guimenuitem
+>Esconder as transacções reconciliadas</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Esconde as transacções reconciliadas no livro de registos.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Ver</guimenu
+> <guimenuitem
+>Esconder as categorias não-usadas</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Esconde as categorias não-usadas nas áreas.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Ver</guimenu
+> <guimenuitem
+>Mostrar todas as contas</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Mostra todas as contas nas áreas.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.institution">
+<title
+>O Menu Instituição</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Instituição</guimenu
+> <guimenuitem
+>Nova instituição...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Adiciona uma nova instituição.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Instituição</guimenu
+> <guimenuitem
+>Editar a instituição...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Edita uma instituição.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Instituição</guimenu
+> <guimenuitem
+>Apagar a instituição...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Apaga uma instituição.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.account">
+<title
+>O Menu Conta</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Conta</guimenu
+> <guimenuitem
+>Nova conta...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Adiciona uma conta nova.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Conta</guimenu
+> <guimenuitem
+>Editar a conta...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Edita uma conta.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Conta</guimenu
+> <guimenuitem
+>Apagar a conta...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Apaga uma conta.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Conta</guimenu
+> <guimenuitem
+>Abrir o livro de registos</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Mostra a área de registos de uma conta.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Conta</guimenu
+> <guimenuitem
+>Reconciliar...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Faz a reconciliação ou consolidação de uma conta através do assistente de reconciliação.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Conta</guimenu
+> <guimenuitem
+>Adiar a reconciliação</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Adia a reconciliação ou consolidação de uma conta.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Conta</guimenu
+> <guimenuitem
+>Terminar</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Termina a reconciliação de uma conta.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Conta</guimenu
+> <guimenuitem
+>Relatório de transacções</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Abre um relatório de transacções de uma conta.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Conta</guimenu
+> <guimenuitem
+>Fechar a conta</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Fecha uma conta.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Conta</guimenu
+> <guimenuitem
+>Reabrir a conta</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Reabre uma conta, caso esteja fechada.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Conta</guimenu
+> <guimenuitem
+>Dissociar a conta</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Retira a associação a uma conta 'online'.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Conta</guimenu
+> <guimenuitem
+>Associar a uma conta 'online'</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Associa a conta a uma conta 'online'.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Conta</guimenu
+> <guimenuitem
+>Actualizar a conta...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Importa as transacções da banca 'online' para uma dada conta</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Conta</guimenu
+> <guimenuitem
+>Actualizar todas as contas...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Importa as transacções da banca 'online' para todas as contas associadas.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <!--New credit transfer-->
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.category">
+<title
+>O Menu Categoria</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Categoria</guimenu
+> <guimenuitem
+>Nova categoria...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Adiciona uma nova categoria.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Categoria</guimenu
+> <guimenuitem
+>Editar a categoria...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Edita uma categoria.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Categoria</guimenu
+> <guimenuitem
+>Apagar a categoria...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Apaga uma categoria.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Categoria</guimenu
+> <guimenuitem
+>Abrir o livro de registos</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Vai à área de registos de uma categoria.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.transaction">
+<title
+>O Menu Transacção</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Ins;</keycombo
+> </shortcut
+> <guimenu
+>Transacção</guimenu
+> <guimenuitem
+>Nova</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Adiciona uma nova transacção.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transacção</guimenu
+> <guimenuitem
+>Editar</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Edita uma transacção.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transacção</guimenu
+> <guimenuitem
+>Editar as parcelas</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Edita as parcelas de uma transacção.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transacção</guimenu
+> <guimenuitem
+>Apagar</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Apaga uma transacção.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transacção</guimenu
+> <guimenuitem
+>Duplicar</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Duplica uma transacção.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transacção</guimenu
+> <guimenuitem
+>Marcar a transacção como...</guimenuitem
+><guimenuitem
+>Não-Reconciliada</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Muda uma transacção para o estado Não Reconciliada.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;;<keycap
+>Espaço</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Transacção</guimenu
+> <guimenuitem
+>Marcar a transacção como...</guimenuitem
+><guimenuitem
+>Limpa</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Muda uma transacção para o estado Confirmada.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>Espaço</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Transacção</guimenu
+> <guimenuitem
+>Marcar a transacção como...</guimenuitem
+><guimenuitem
+>Confirmada</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Muda uma transacção para o estado Reconciliada.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transacção</guimenu
+> <guimenuitem
+>Ir para a conta</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Mostra a outra conta de uma transacção.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transacção</guimenu
+> <guimenuitem
+>Ir para o beneficiário</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Vai para a área de Beneficiários e realça o beneficiário da transacção seleccionada.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transacção</guimenu
+> <guimenuitem
+>Criar uma transacção agendada...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Cria uma nova transacção agendada.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transacção</guimenu
+> <guimenuitem
+>Corresponder</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Faz a correspondência das transacções importadas.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transacção</guimenu
+> <guimenuitem
+>Dissociar</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Dissocia as transacções que o &kmymoney; tenha proposto como correspondências às transacções importadas.</action
+> Lembre-se que esta opção do menu só está disponível se existir uma transacção correspondente. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transacção</guimenu
+> <guimenuitem
+>Aceitar</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Aceita uma proposta de junção de transacções importadas.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Transacção</guimenu
+><guimenuitem
+>Seleccionar tudo</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Selecciona todas as transacções no livro de registos.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transacção</guimenu
+> <guimenuitem
+>Imprimir um cheque</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Imprime o conteúdo da transacção seleccionada no livro de registos visível, formatada de acordo com o modelo seleccionado.</action
+> Lembre-se que esta opção do menu só está presente se estiver seleccionada uma transacção no livro de registos. Veja a secção e configuração do 'plugin' de <link linkend="details.settings.plugins"
+>Impressão de cheques</link
+> para mais informações. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.tools">
+<title
+>O Menu Ferramentas</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ferramentas</guimenu
+> <guimenuitem
+>Editor do Perfil QIF...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Modifica o perfil QIF usado para importar os ficheiros QIF.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ferramentas</guimenu
+> <guimenuitem
+>Moedas...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Apresenta as moedas conhecidas no &kmymoney;.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ferramentas</guimenu
+> <guimenuitem
+>Preços...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Apresenta os preços das acções e das moedas.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ferramentas</guimenu
+> <guimenuitem
+>Actualizar os Preços das Acções e Moedas...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Actualiza os preços das acções e moedas directamente das fontes 'online', usando a funcionalidade das <link linkend="details.investments.onlinequotes"
+>Cotações de Preços 'Online'</link
+>.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ferramentas</guimenu
+> <guimenuitem
+>Verificação de Consistência</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Executa uma verificação sobre o seu ficheiro e tenta corrigir os problemas que encontrar, se possível.</action
+></para>
+      <para
+>Faça uma cópia de segurança do seu ficheiro, antes de executar esta opção.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Ferramentas</guimenu
+> <guimenuitem
+>Teste de Performance</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Executa um teste de performance no seu ficheiro e mostra os resultados.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <!--Generate Database SQL
+  Debug Traces
+  Debug Timers-->
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.settings.help">
+<title
+>Menu de Configuração e Ajuda</title>
+
+<para
+>O &kmymoney; tem os menus de Configuração e Ajuda normais do &kde;, que estão descritos nos <ulink url="help:/fundamentals/ui.html#menus"
+>Fundamentos do &kde;</ulink
+> com um elemento adicional:</para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Configuração</guimenu
+> <guimenuitem
+>Activar todas as mensagens</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Volta a activar todas as mensagens que tenha desactivado com a opção <guimenuitem
+>Não me perguntar de novo</guimenuitem
+> numa janela.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+</sect2>
+
+</sect1>
+&details-widgets; </chapter>

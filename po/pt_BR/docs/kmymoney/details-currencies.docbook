@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.currencies">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+  </authorgroup>
+  <date
+>30/08/2014</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Moedas</title>
+
+<para
+>O &kappname; tem suporte a utilização de várias moedas em contas diferentes. Por exemplo, você poderá configurar uma conta bancária em Reais, outra em Euros e ainda ter o seu cartão de crédito em Dólares. </para>
+
+<sect1 id="details.currencies.basecurrency">
+<title
+>Moeda base</title>
+
+<para
+>A moeda base será solicitada ao criar um arquivo do &kappname;. Esta será a moeda que todas as categorias de despesas e receitas irão utilizar, e na qual os relatórios se baseiam. Normalmente, a moeda base será a moeda do seu país. Se nenhuma outra for selecionada, as novas contas usarão essa moeda por padrão. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Caixa de diálogo de seleção da moeda</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="select_currency.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>selecionar a moeda</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect2 id="details.currencies.newcurrency">
+<title
+>Adição de nova moeda</title>
+
+<para
+>Ainda que não aconteça com muita frequência, em alguns casos uma nova moeda é criada. Pode ser uma nova moeda virtual, como o Bitcoin, ou uma moeda introduzida por um país por razões de política financeira. Embora essa moeda venha a ser adicionada na próxima versão do &kappname;, é possível adicioná-la manualmente, caso seja necessário usá-la de imediato. </para>
+
+<para
+>Para adicionar manualmente uma moeda, selecione a opção <menuchoice
+><guimenu
+>Ferramentas</guimenu
+><guimenuitem
+>Moedas...</guimenuitem
+></menuchoice
+> para exibir a caixa de diálogo <guilabel
+>Moedas</guilabel
+>, como apresentado acima. Clique com o botão direito sobre uma moeda existente e selecione <menuchoice
+><guimenuitem
+>Nova moeda</guimenuitem
+></menuchoice
+> a partir do menu de contexto <menuchoice
+><guimenu
+>Opções da moeda</guimenu
+></menuchoice
+>. Digite o código oficial da moeda e clique em <guilabel
+>OK</guilabel
+>. A moeda será criada com o nome <quote
+>Nova moeda</quote
+>. Para alterar o nome, pressione <keycap
+>F2</keycap
+> ou clique com o botão direito do mouse e selecione <menuchoice
+><guimenuitem
+>Renomear moeda</guimenuitem
+></menuchoice
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.currencies.accountsetup">
+<title
+>Configuração da conta</title>
+
+<para
+>Se criar uma conta nova terá a opção de indicar a moeda em que a conta será gerenciada. O livro de registros da conta irá então mostrar todos os valores na moeda selecionada. O assistente de novas contas irá definir por padrão esta opção com a <link linkend="details.currencies.basecurrency"
+>moeda base</link
+>. </para>
+</sect1>
+
+<sect1 id="details.currencies.transactions">
+<title
+>Inserir transações em diferentes moedas</title>
+
+<para
+>Sempre que uma transação for inserida, referindo-se a mais de uma moeda, o editor da taxa de câmbio aparece e permitirá inserir uma taxa de câmbio. Inicialmente, o preço atual disponível no banco de dados será usado como taxa de câmbio. Veja a seção <link linkend="details.currencies.prices"
+>Inserir as taxas de câmbio das moedas</link
+> para obter mais informações sobre como indicar as taxas de câmbio manualmente e como obter a informação online sobre os preços. </para>
+
+<para
+>Opcionalmente, a taxa de câmbio é armazenada no banco de dados de preços, uma vez introduzida pelo usuário. </para>
+</sect1>
+
+<sect1 id="details.currencies.prices">
+<title
+>Taxas de câmbio para as moedas</title>
+
+<sect2>
+<title
+>Inserir os preços manualmente</title>
+
+<para
+>O editor do banco de dados de preços permite-lhe inserir as taxas de câmbio entre as moedas ou os preços para investimentos. Você poderá executá-lo com a opção <menuchoice
+> <guimenu
+>Ferramentas</guimenu
+> <guimenuitem
+>Preços...</guimenuitem
+></menuchoice
+> no menu. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="currency_priceeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Editor de preços das moedas</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>No &kappname;, um <quote
+>Preço</quote
+> é o valor de uma moeda em função de uma segunda moeda. Por exemplo, no momento da escrita deste documento, o preço de 1 USD (Dólar dos EUA) corresponde a 0,83 EUR (Euros). A primeira moeda é a comprada ou vendida, e a segunda, a usada para a comprar ou vender. </para>
+
+<para
+>Ao clicar no botão <guibutton
+>Novo</guibutton
+>, aparecerá a caixa de diálogo de Item de Novo Preço. Indique a primeira moeda (USD, no exemplo acima) no campo Título. Indique a segunda moeda (EUR, no mesmo exemplo) no campo Moeda. Indique a data efetiva do preço no campo Data. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="currency_newpriceentry.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Item de Novo Preço</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect2>
+
+<sect2>
+<title
+>Atualizações online das moedas</title>
+
+<para
+>O &kappname; irá obter as conversões atuais a partir da Web. Assim que tiver inserido um único preço para um par de moedas, a funcionalidade de cotações online irá mostrar sempre esse par nas suas opções. </para>
+
+<para
+>Consulte a seção sobre <link linkend="details.investments.onlinequotes"
+>Cotações de preços online</link
+> do capítulo de Investimentos, para obter mais detalhes. </para>
+</sect2>
+</sect1>
+</chapter>

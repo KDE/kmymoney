@@ -1,0 +1,1085 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.settings">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>31 de març de 2019</date>
+  <releaseinfo
+>5.0.3</releaseinfo>
+</chapterinfo>
+
+<title
+>Configuració del &kmymoney;</title>
+
+<para
+>La configuració que es descriu a continuació modificarà el comportament del &kmymoney;, el qual us permetrà personalitzar-lo per a satisfer les necessitats úniques dels vostres assumptes financers, i modificar el seu aspecte i comportament perquè s'adapti a la vostra personalitat. Aquesta configuració es pot canviar mitjançant l'element de menú <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura el &kmymoney;...</guimenuitem
+></menuchoice
+> o utilitzant la drecera <keycombo action="simul"
+>&Ctrl;&Maj;<keycap
+>,</keycap
+></keycombo
+>. Perquè els canvis tinguin efecte, s'haurà de fer clic al botó <guibutton
+>Aplica</guibutton
+>. </para>
+
+<para
+>A l'esquerra del diàleg de configuració hi ha una llista d'icones i etiquetes, cadascuna de les quals representa una àrea particular del programa. Quan feu clic en una d'aquestes icones, la part dreta del diàleg mostrarà els controls per a configurar aquesta àrea del programa, sovint dividida en diverses pestanyes. </para>
+
+<sect1 id="details.settings.general">
+<title
+>General</title>
+
+<sect2 id="details.settings.general.global">
+<title
+>La pestanya Global</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Opcions de desament automàtic</guilabel
+></term>
+<!-- I would prefer to use a more consistent hierarchy and use of levels on this
+     page, but for now, I'm minimizing changes. -->
+    <listitem>
+      <para
+>Si marqueu la casella <guilabel
+>Desament automàtic periòdic</guilabel
+>, se li indicarà al &kmymoney; que desi automàticament els fitxers en un interval definit. El valor predeterminat és de 10 minuts. Podreu canviar aquesta opció des de 0 (còpia de seguretat immediatament després d'introduir una operació) fins a 60 minuts.</para>
+
+      <para
+>En marcar la casella <guilabel
+>Desament automàtic en tancar quan el fitxer estigui modificat</guilabel
+>, se li indicarà al &kmymoney; que desi automàticament el fitxer quan es tanqui el programa. També teniu l'opció de fer una còpia de seguretat del fitxer. El <guilabel
+>Nombre de còpies de seguretat a mantenir</guilabel
+> es pot establir a 0 (desactivat) fins a 20 còpies de seguretat. Qualsevol fitxer de còpia de seguretat s'emmagatzemarà a la mateixa carpeta que el fitxer principal. S'etiquetaran de manera seqüencial, amb 1 sent el més actual.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Any fiscal</guilabel
+></term>
+    <listitem>
+      <para
+>Introduïu el dia i el mes de l'any fiscal. Aquest valor s'utilitza per a pressupostos i alguns informes.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Programes externs</guilabel
+></term>
+    <listitem>
+      <para
+>Aquesta opció no afectarà directament el funcionament del &kmymoney;, però proporciona una forma apropiada d'iniciar qualsevol utilitat externa, com una calculadora avançada. El primer pas és introduir el camí sencer cap al programa triat al quadre de text <guilabel
+>Calculadora</guilabel
+>. Hi ha dues maneres de llançar el programa.</para>
+      <para
+>La primera: podeu utilitzar l'element de menú <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura les barres d'eines...</guimenuitem
+></menuchoice
+> per a col·locar la icona de la <guilabel
+>Calculadora</guilabel
+> a la barra d'eines. Després, quan feu clic en aquesta icona a la barra d'eines, el &kmymoney; llançarà l'aplicació seleccionada.</para>
+      <!-- FIXME since the Settings menu is deferred to the Frameworks docs and
+           not explicitly described in this manual, it would at least be nice to
+           refer to the actual Calculator icon here, but I cannot find the
+           source png.  It might also be nice to have a link to Settings Menu
+           doc page. -->
+      <para
+>La segona: podeu utilitzar l'element de menú <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura les dreceres de teclat...</guimenuitem
+></menuchoice
+> per a establir una drecera de teclat personalitzada. (L'entrada es troba llistada sota &kmymoney;/Calculadora). Després podreu utilitzar aquesta drecera per a llançar l'aplicació.</para>
+      <!-- FIXME is not currently possible to launch the calculator from some menu
+           item.  I have filed a wishlist, and when implemented, it should be
+           described here, probably as the first choice. -->
+       
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.general.views">
+<title
+>La pestanya Vistes</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Opcions de la pàgina principal</guilabel
+></term>
+    <listitem>
+      <para
+>Quan s'inicia el &kmymoney;, aquesta opció indica si començar amb la vista principal o amb la vista que es mostrava quan es va tancar el programa per darrera vegada.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+><guilabel
+>Tipus de la vista del &kmymoney;</guilabel
+></term>
+    <listitem>
+      <para
+>Podreu seleccionar una de les tres disposicions generals perquè les empri el &kmymoney;. Si seleccioneu la vista de Llista o Arbre, les icones i les seves etiquetes s'ubicaran al costat esquerre de la finestra. La vista de llista mostra icones més grans, mentre que la vista en arbre té icones més petites. La vista amb pestanyes situa les icones i les etiquetes a través de la part superior de la finestra.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra la barra de títol a cada pàgina</guilabel
+></term>
+    <listitem>
+      <para
+>En marcar aquesta casella, es mostrarà la barra de títol blau del &kmymoney; a la part superior de cada pàgina. Desmarcar-la eliminarà la barra de títol i proporcionarà una àrea més gran per a veure el contingut de cada pàgina.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Sincronitza la selecció del compte de la vista del llibre major i de les inversions</guilabel
+></term>
+    <listitem>
+      <para
+>Si se selecciona aquesta opció, se sincronitzaran els comptes que es mostren a la vista del llibre major amb la vista de les inversions, el qual vol dir que si canvieu el compte que es mostra en una de les vistes i després canvieu a l'altra vista, es mostrarà la informació del mateix compte. Això augmentarà l'eficiència de la navegació entre aquestes vistes de 2 pestanyes. Si no està seleccionada, en seleccionar qualsevol d'aquestes vistes es mostrarà el mateix compte prèviament seleccionat en aquesta vista, independentment del compte seleccionat a l'altra vista.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.general.filter">
+<title
+>La pestanya Filtre</title>
+
+<sect3>
+<title
+>Comptes / Categories</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>No mostris les categories no emprades</guilabel
+></term>
+    <listitem>
+      <para
+>En marcar aquesta casella, s'ocultaran les categories no emprades a la vista de les categories. Una categoria oculta encara estarà disponible si una operació ho requereix. En escriure una categoria oculta al llibre major, aquesta estarà disponible per al seu ús.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra els comptes d'accions</guilabel
+></term>
+    <listitem>
+      <para
+>De manera predeterminada, els comptes d'accions estaran ocults a la vista dels comptes. En seleccionar aquesta opció, es mostraran els comptes d'accions a la vista dels comptes. Els comptes d'accions s'utilitzen per a fer un seguiment individual de les accions o inversions mantingudes en un compte d'inversió. Això no s'ha de confondre amb el grup de comptes <emphasis
+>Acció</emphasis
+> de nivell superior, els quals inclouen el/s compte/s que contenen els saldos d'obertura per als altres comptes.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+><guilabel
+>Mostra les categories a la vista de la llista de comptes</guilabel
+></term>
+    <listitem>
+      <para
+>De manera predeterminada, les Categories estaran ocultes a la vista dels comptes. En seleccionar aquesta opció, es mostraran les Categories a la vista dels comptes.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+><guilabel
+>No mostris les accions amb saldo zero</guilabel
+></term>
+    <listitem>
+      <para
+>En marcar aquesta opció, s'eliminarà qualsevol compte d'accions amb saldo zero de la vista dels comptes.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+
+<sect3>
+<title
+>Planificacions</title>
+<variablelist>
+    <varlistentry>
+    <term
+><guilabel
+>No mostris les planificacions finalitzades</guilabel
+></term>
+    <listitem>
+      <para
+>En marcar aquesta casella, s'ocultaran totes les planificacions finalitzades perquè no apareguin a la vista de les operacions planificades.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+
+<sect3>
+<title
+>Operacions</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>No mostris les operacions anteriors a</guilabel
+></term>
+    <listitem>
+      <para
+>Les operacions anteriors a la data introduïda aquí no es mostraran a la vista del llibre major. Això pot ser útil si les dades inclouen molts anys d'operacions. Establir això a un o dos anys enrere ocultarà les operacions més antigues.</para>
+      <para
+>Establir aquesta opció a l'1 de gener de 1900 (el valor predeterminat) és una bona manera de depurar problemes d'importació de les dades relacionats amb la data, en el cas que algunes dates estiguin erròniament molt lluny en el passat.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>No mostris les operacions conciliades</guilabel
+></term>
+    <listitem>
+      <para
+>En marcar aquesta casella, es filtraran les operacions per l'estat de la conciliació. Les operacions que estan marcades com a <emphasis
+>Conciliada</emphasis
+> no es mostraran a la vista del llibre major.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.home">
+<title
+>Principal</title>
+
+<sect2>
+<title
+>Les seccions mostrades a la pàgina principal</title>
+<para
+>Aquestes opcions permeten personalitzar l'aparença de la <link linkend="firsttime.mainwindow"
+>Vista principal</link
+> (també anomenada Pàgina principal o Finestra principal) triant quina informació s'hi mostrarà i l'ordre en què apareixerà. Les seccions seleccionades es podran tornar a ordenar fent clic al botó <guibutton
+>Amunt</guibutton
+> o <guibutton
+>Avall</guibutton
+> corresponent. </para>
+<!-- FIXME Many of these sections need a <link
+> to the doc section actually
+     describing the content. -->
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Actius i Passius</guilabel
+></term>
+    <listitem>
+      <para
+>Mostrarà els comptes d'actiu i passiu que estan oberts juntament amb els seus saldos actuals. Aquesta i les altres llistes de comptes a la pàgina principal apareixeran ordenades en ordre alfabètic, llevat que s'indiqui el contrari.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Pagaments</guilabel
+></term>
+    <listitem>
+      <para
+>Mostrarà les properes ocurrències de les operacions planificades, distingint entre els Pagaments endarrerits i els Pagaments futurs. Mostra la data, el nom de la planificació, el compte i l'import del pagament, i el saldo del compte després del pagament. De manera predeterminada mostrarà fins a sis operacions. Si se'n mostren sis, hi haurà un enllaç que podreu seleccionar per a mostrar-ne més, fins a 30 dies d'anticipació.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Comptes preferits</guilabel
+></term>
+    <listitem>
+      <para
+>Mostrarà els comptes identificats com a Comptes preferits dins del diàleg de configuració que apareix amb el diàleg de configuració <menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Edita el compte... </guimenuitem
+></menuchoice
+>.</para>
+      <para
+>Per a aquesta i totes les altres seccions de la llista de comptes abordades per a aquest conjunt d'opcions, la pantalla inclourà el nom del compte i el saldo actual, i altres columnes específiques per a aquest tipus d'informe, i en alguns casos, com està configurada en un altre lloc.</para>
+      <!-- FIXME - the menu item (or maybe link to actual doc page) should point
+           to the actual other config location and perhaps which items for
+           which account type. -->
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Comptes monetaris</guilabel
+></term>
+    <listitem>
+      <para
+>Mostrarà tots els comptes monetaris. Això inclourà qualsevol compte en què es puguin dipositar ingressos, i/o des dels quals es puguin pagar factures.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Informes preferits</guilabel
+></term>
+    <listitem>
+      <para
+>Mostrarà una llista de tots els informes que s'han identificat com a preferits al diàleg de configuració de l'Informe. La llista s'ordenarà cronològicament quan cada informe es converteix en preferit.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Previsió (planificació)</guilabel
+></term>
+    <listitem>
+      <para
+>Mostrarà una previsió de 30, 60, fins a 90 dies per als comptes d'actiu i passiu amb saldos diferents de zero i amb operacions sense conciliar.</para>
+      <!-- FIXME What are the real criteria for inclusion in this (and these other) list(s). -->
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Previsió del valor net</guilabel
+></term>
+    <listitem>
+      <para
+>Mostrarà un gràfic del valor net previst per als pròxims 90 dies.</para>
+    </listitem>
+  </varlistentry>
+
+  <!-- FIXME "Forecast (history) removed as apparently not actually used. -->
+
+  <varlistentry>
+    <term
+><guilabel
+>Pressupost</guilabel
+></term>
+    <listitem>
+      <para
+>Mostrarà un resum del mes actual i excedent del/s pressupost/os definit/s. Si no es defineix un pressupost, no es mostrarà cap pressupost o excedent, amb la despesa real del mes actual.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Flux de caixa</guilabel
+></term>
+    <listitem>
+      <para
+>Mostrarà una anàlisi de resum del flux de caixa per al mes actual.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Escalat de la Pàgina principal/Pàgina de resum</title>
+<variablelist>
+
+  <varlistentry>
+    <term
+><guilabel
+>Factor d'apropament:</guilabel
+></term>
+    <listitem>
+      <para
+>Aquesta opció permet la selecció de la mida del tipus de lletra com un percentatge perquè s'ajusti a la vista principal segons les preferències de l'usuari.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Recorda el factor d'apropament en sortir del programa si s'ha canviat manualment amb la roda del ratolí</guilabel
+></term>
+    <listitem>
+      <para
+>En seleccionar això, es desarà la preferència per a la mida del tipus de lletra si l'heu canviat a la pàgina principal utilitzant la roda del ratolí.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Informació a mostrar del compte</title>
+<para
+>Aquestes opcions permeten personalitzar quina informació s'inclourà en qualsevol llista de comptes.</para>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Mostra la informació sobre el límit del compte</guilabel
+></term>
+    <listitem>
+      <para
+>Mostrarà el límit del compte establert al diàleg Edició del compte. Afectarà qualsevol llista que inclogui comptes monetaris.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra l'estat del saldo dels comptes en línia vinculats</guilabel
+></term>
+    <listitem>
+      <para
+>Mostrarà l'estat del saldo dels comptes vinculats, simbolitzat per una icona a les columnes que precedeixen el nom del compte. Una marca de selecció verda indicarà que el saldo en línia i el saldo local són iguals. Una bústia amb una fletxa verda indicarà que el fitxer local té operacions més recents que l'actualització en línia més recent. Això alertarà a l'usuari per a iniciar una actualització en línia. Un senyal d'avís en vermell indicarà una manca de coincidència entre el fitxer local i el saldo en línia.</para>
+      <!-- Note: the colors might be different depending on the selected theme
+           -->
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra el nombre d'operacions no marcades per compte [!M]</guilabel
+></term>
+    <listitem>
+      <para
+>Inserirà una columna addicional al costat del nom del compte, mostrant el nombre d'operacions sense marcar que hi ha al compte.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra el nombre d'operacions liquidades per compte [L]</guilabel
+></term>
+    <listitem>
+      <para
+>Inserirà una columna addicional mostrant el nombre d'operacions liquidades que hi ha al compte.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra el nombre d'operacions no conciliades (no marcades + liquidades) per compte [!C]</guilabel
+></term>
+    <listitem>
+      <para
+>Inserirà una columna addicional mostrant el nombre d'operacions sense conciliar que hi ha al compte, &ead;, la suma de totes les operacions sense marcar ni liquidar.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra la data de l'última conciliació</guilabel
+></term>
+    <listitem>
+      <para
+>Inserirà una columna addicional mostrant l'última data de conciliació per al compte.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.register">
+<title
+>Llibre major</title>
+
+<para
+>Les opcions següents descrites en aquesta secció permetran la modificació del registre d'operacions contingut a la pestanya <guilabel
+>Visualització</guilabel
+> del Llibre major. </para>
+
+<sect2 id="details.settings.register.display">
+<title
+>La pestanya Visualització</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Mostra una quadrícula als llibres</guilabel
+></term>
+    <listitem>
+      <para
+>En seleccionar aquesta opció, es mostraran les línies de quadrícula al registre d'operacions o a la vista del llibre major. Proporciona una opció de visualització addicional que facilitarà la visualització separada de les operacions i dels seus components.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra tots els detalls a les entrades del llibre</guilabel
+></term>
+    <listitem>
+      <para
+>En seleccionar aquesta opció, el registre mostrarà tota la informació de totes les operacions mostrades, amb línies separades a la columna Detalls per a Categoria i Etiquetes, i per al Recordatori. Si no està seleccionada, no es mostraran Categoria, Etiquetes ni Recordatori.</para>
+      <para
+>Això té el mateix efecte que seleccionar l'element de menú <link linkend="reference.menus.settings.transactiondetail"
+>Mostra els detalls de l'operació</link
+>.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry id="details.settings.register.lens">
+    <term
+><guilabel
+>Usa la lupa del llibre major</guilabel
+></term>
+    <listitem>
+      <para
+>En seleccionar aquesta opció, es mostraran totes les línies de detall per a l'operació seleccionada, fins i tot si no s'ha seleccionat <guilabel
+>Mostra tots els detalls a les entrades del llibre</guilabel
+>.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+><guilabel
+>Mostra el formulari de l'operació</guilabel
+></term>
+    <listitem>
+      <para
+>En seleccionar aquesta opció, es mostrarà el <link linkend="details.ledger.transactionform"
+>formulari de l'operació</link
+> a la part inferior del registre, i aquí és on editareu una operació. Si no es mostra el formulari de l'operació, editeu una operació dins del mateix llibre major. Amb aquesta opció habilitada, es veuran menys operacions al llibre major, en comparació amb quan està inhabilitada.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra sempre el camp Núm.</guilabel
+></term>
+    <listitem>
+      <para
+>Mostrarà sempre el camp del número (<quote
+>Núm.</quote
+>) quan s'introdueixi o editi una operació. Amb això habilitat, podreu verificar per als comptes corrents els números introduïts en aquest camp.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra la capçalera de grup entre les operacions</guilabel
+></term>
+    <listitem>
+      <para
+>En seleccionar aquesta opció, es mostraran les capçaleres de grup al registre. Aquestes es refereixen a períodes de temps o fites com Mes anterior, Última setmana, Aquest mes, Última conciliació, Setmana següent i Mes següent.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra una capçalera per a l'any fiscal anterior i l'actual </guilabel
+></term>
+    <listitem>
+      <para
+>En seleccionar aquesta opció, es mostraran les capçaleres de grup al registre per a l'any fiscal actual i l'anterior.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostra les planificacions endarrerides amb data planificada</guilabel
+></term>
+    <listitem>
+      <para
+>Les operacions planificades amb dates futures es mostraran a la vista del llibre major per al compte rellevant. Quan passa la data i s'endarrereix una operació planificada, ja no es mostrarà al llibre major, llevat que se seleccioni aquesta opció.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.register.sorting">
+<title
+>La pestanya Ordenació</title>
+<para
+>Aquestes tres seccions permeten establir l'ordre d'ordenació predeterminat de les operacions a la vista del llibre major. En tots els casos, la llista de l'esquerra mostrarà tots els camps disponibles per a ordenar. Per a ordenar sobre un element, seleccioneu (amb un sol clic del ratolí) i feu clic a la fletxa dreta entre les dues llistes. La llista de la dreta mostra tots els camps que s'han seleccionat com a part de l'ordenació per a aquesta vista. Podreu ajustar l'ordre relatiu dels camps seleccionant-ne un i ajustant la seva posició a la llista utilitzant les fletxes cap amunt i cap avall que hi ha a la dreta de la llista. Podreu canviar entre l'ordre ascendent i descendent de qualsevol element fent-hi doble clic. </para>
+<para
+>Els camps disponibles per a l'ordenació són els mateixos per a les tres seccions: Import, Categoria, Ordre d'entrada (data de creació de l'operació), Número, Beneficiari, Data de situació, Estat de la conciliació, Títol i Tipus. </para>
+
+<sect3 id="details.settings.register.sorting.normal">
+<title
+>La pestanya Vista normal</title>
+<para
+>Aquesta pestanya controla l'ordenació predeterminada de la vista normal del llibre major. </para>
+</sect3>
+
+<sect3 id="details.settings.register.sorting.reconciliation">
+<title
+>La pestanya Vista de la conciliació</title>
+<para
+>Aquesta pestanya controla l'ordenació predeterminada del llibre major mentre està a la vista de la conciliació. Aquesta és la visualització de les operacions que es mostren durant el procés de <link linkend="details.reconcile"
+>Conciliació</link
+>. </para>
+</sect3>
+
+<sect3 id="details.settings.register.sorting.search">
+<title
+>La pestanya Vista de la cerca</title>
+<para
+>Aquesta pestanya controla l'ordenació predeterminada del llibre major mentre està a la <link linkend="details.search"
+>vista de la cerca</link
+>. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.settings.register.dataentry">
+<title
+>La pestanya Introducció de les dades</title>
+<para
+>Aquestes opcions afectaran el procés de creació de les operacions noves.</para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Incrementa automàticament el número de xec</guilabel
+></term>
+    <listitem>
+      <para
+>Habilitar això incrementarà automàticament el número de xec cada vegada que introduïu una operació nova de xec. Tindrà el mateix efecte si empreu la Lupa del llibre major o el Formulari de l'operació.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Preserva els canvis en seleccionar una operació/desglossament diferent</guilabel
+></term>
+    <listitem>
+      <para
+>Quan està habilitada, en seleccionar una operació o desglossament diferent es desaran les edicions a l'operació actual. Quan està inhabilitada, en seleccionar un desglossament de l'operació diferent, es demanarà si voleu desar o no els canvis.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Useu Retorn per a desplaçar-vos entre els camps</guilabel
+></term>
+    <listitem>
+      <para
+>Quan està habilitada, en prémer &Intro; es canviarà el focus al camp següent de l'operació. Quan esteu a l'últim camp, l'operació es desarà. Quan està inhabilitada, la navegació entre els camps succeirà amb la tecla &Tab; o el ratolí. En prémer la tecla &Intro; es desarà l'operació, independentment de si hi ha un camp amb el focus. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Coincidència de noms des del començament</guilabel
+></term>
+    <listitem>
+      <para
+>Aquesta opció controlarà la <link linkend="details.payees.personalinformation.matching"
+>coincidència dels beneficiaris</link
+>. Quan està habilitada, els noms dels beneficiaris sempre coincidiran des del començament. Quan està inhabilitada, coincidirà qualsevol subcadena. A més, quan s'habilita, es podran establir opcions addicionals per a la coincidència en la pestanya <guilabel
+>Coincidència</guilabel
+> de la vista dels beneficiaris.</para>
+    </listitem>
+  </varlistentry>
+
+  <!--FIXME missing Automatic reconciliation-->
+  <varlistentry>
+    <term
+><guilabel
+>Conciliació automàtica</guilabel
+></term>
+    <listitem>
+      <para
+>Aquesta opció s'ha de documentar. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Estat predeterminat de la conciliació</guilabel
+></term>
+    <listitem>
+      <para
+>Seleccioneu l'estat predeterminat de la conciliació de les operacions noves: No conciliada, Liquidada i Conciliada.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Compleció automàtica</guilabel
+></term>
+    <listitem>
+      <para
+>Aquesta opció permet seleccionar el comportament desitjat per a la compleció automàtica. Això controlarà quines operacions anteriors, si escau, es mostraran per al mateix beneficiari i quins, si n'hi ha, s'utilitzaran per a completar automàticament els detalls de l'operació nova.</para>
+      <itemizedlist>
+        <listitem>
+          <para
+>No completis automàticament</para>
+          <para
+>Desactivarà la compleció automàtica i haureu d'introduir manualment tots els detalls de l'operació nova.</para>
+        </listitem>
+        <listitem>
+          <para
+>La mateixa operació si l'import difereix menys que el percentatge definit a sota</para>
+          <para
+>Amb aquesta opció seleccionada, quan introduïu una operació nova, el &kmymoney; mostrarà una llista de les operacions anteriors per al mateix beneficiari i compte. Si l'import de les operacions prèvies difereix menys que un X per cent de l'import que heu introduït, es consideraran idèntiques i s'utilitzaran els detalls de l'operació anterior per a completar automàticament els detalls de l'operació nova. La «X» anterior s'especifica al quadre al costat de <guilabel
+>La mateixa operació si la quantitat difereix menys que el</guilabel
+>, i pot variar de 0 a 100%. Si el percentatge és 0, es mostraran totes les operacions anteriors per al beneficiari i el compte, i podreu seleccionar una d'aquestes operacions fent-hi clic per a utilitzar la compleció automàtica.</para>
+        </listitem>
+        <listitem>
+          <para
+>Amb l'operació anterior emprada més freqüentment pel beneficiari</para>
+          <para
+>Amb aquesta opció seleccionada, quan introduïu una operació nova, el &kmymoney; completarà tots els detalls de l'operació en funció de l'operació utilitzada anteriorment amb més freqüència per al beneficiari seleccionat.</para>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Usa els recordatoris de l'operació anterior</guilabel
+></term>
+    <listitem>
+      <para
+>Quan estigui seleccionada, el recordatori de l'operació introduït anteriorment s'introduirà automàticament com el recordatori de l'operació nova. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.register.import">
+<title
+>La pestanya Importa</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Fes coincidir les operacions entre dies</guilabel
+></term>
+    <listitem>
+      <para
+>Cercarà les operacions coincidents dins l'interval de l'operació importada +/- al nombre de dies indicat, el qual podrà establir-se des de 0 fins a 99.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Demana una categoria predeterminada per a un beneficiari nou</guilabel
+></term>
+    <listitem>
+      <para
+>Si se selecciona aquesta opció, cada vegada que es detecti un beneficiari nou durant una importació, es demanarà a l'usuari per la categoria predeterminada per a aquest.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.schedules">
+<title
+>Operacions planificades</title>
+
+<para
+>Aquestes opcions permeten modificar el comportament de les operacions <link linkend="details.schedules"
+>planificades</link
+>. </para>
+
+<sect2>
+<title
+>Opcions d'inici</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Comprova les planificacions en iniciar</guilabel
+></term>
+    <listitem>
+      <para
+>Permet verificar la planificació durant l'inici del &kmymoney;. Si una operació planificada coincideix amb els criteris de planificació establerts, el &kmymoney; generarà una notificació requerint el maneig de l'operació. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Introdueix les operacions aquest nombre de dies per avançat</guilabel
+></term>
+    <listitem
+><para
+>Especificarà amb quants dies d'anticipació s'introduirà una operació planificada.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.schedules.calendar">
+<title
+>Dies hàbils</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Usa el calendari de festius per a la regió</guilabel
+></term>
+    <listitem
+><para
+>Se seleccionarà la regió del món que millor s'adapti a les vostres necessitats.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+></title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Nombre de dies a previsualitzar les planificacions al llibre major</guilabel
+></term>
+    <listitem>
+      <para
+>S'especificarà quants dies hauran d'aparèixer les operacions planificades en el llibre major.</para>
+      <para
+>Les operacions planificades es llistaran al llibre major. Podreu introduir o ometre les operacions planificades fent clic dret sobre seu.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.onlinequote">
+<title
+>Cotitzacions en línia</title>
+
+<para
+>Aquestes opcions modificaran com es recolliran les cotitzacions financeres des de fonts en línia diferents. Inclou els preus de les accions, bons i altres accions, així com els preus dels metalls preciosos i la conversió entre les divises. </para>
+
+<para
+>Aquesta pestanya permet canviar les fonts de cotització en línia per al &kmymoney;. En termes generals, aquesta és una característica avançada, i només l'haurien d'intentar els usuaris tècnicament més experts. </para>
+
+<para
+>Per a més detalls, consulteu la secció <link linkend="details.investments.onlinequotes"
+>Cotització en línia dels preus</link
+>. </para>
+</sect1>
+
+
+<sect1 id="details.settings.colors">
+<title
+>Colors</title>
+
+<para
+>Aquesta secció permet personalitzar els colors utilitzats al &kmymoney;. Si no s'ha marcat l'opció <guilabel
+>Colors personalitzats</guilabel
+>, s'utilitzaran els colors predeterminats. </para>
+
+<para
+>Per a personalitzar els colors, marqueu la casella Colors personalitzats. </para>
+
+<para
+>Modifiqueu qualsevol dels colors fent clic al botó del color, el qual obrirà la paleta de selecció del color. Aquesta proporcionarà opcions il·limitades per a la selecció de colors. Podreu seleccionar un color bàsic definit, triar un color fent clic a qualsevol lloc de la pantalla, introduir un color definit en &HTML;, passar valors per a To, Saturació, Valor, Vermell, Verd i Blau. </para>
+</sect1>
+
+<sect1 id="details.settings.fonts">
+<title
+>Tipus de lletra</title>
+
+<para
+>Aquestes opcions permeten modificar els tipus de lletra dins dels camps Cel·la o Capçalera. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Usa els tipus de lletra del sistema</guilabel
+></term>
+    <listitem>
+      <para
+>Seleccioneu aquesta opció per a fer servir els tipus de lletra del sistema. Desmarcar-la permetrà seleccionar un tipus de lletra de la vostra elecció.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Tipus de lletra de la cel·la</guilabel
+></term>
+    <listitem>
+      <para
+>Especifiqueu el tipus de lletra personalitzat per a utilitzar dins de cada cel·la dels registres.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Tipus de lletra de la capçalera</guilabel
+></term>
+    <listitem>
+      <para
+>Especifiqueu el tipus de lletra personalitzat que s'utilitzarà per a les capçaleres de cada vista dins del registre.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="details.settings.icons">
+<title
+>Icones</title>
+
+<para
+>Aquesta opció permet la selecció de les icones que es mostraran. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Configuració individual de les icones</guilabel
+></term>
+    <listitem>
+      <para
+>Emprant la llista desplegable hi ha disponible una selecció d'icones. Les icones addicionals poden estar disponibles per a descarregar i utilitzar segons el sistema operatiu instal·lat.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="details.settings.plugins">
+<title
+>Connectors</title>
+
+<para
+>Aquesta secció proporciona la informació sobre els connectors disponibles i permet modificar el comportament dels connectors instal·lats. Recordeu que la llista de connectors que es mostra dependrà dels connectors que ha trobat el &kmymoney; durant l'inici. Tant se val si el connector es va compilar com a part de l'aplicació o si es va afegir com un paquet separat. <screenshot
+> <screeninfo
+>Configurant els connectors</screeninfo
+> <mediaobject
+> <imageobject
+> <imagedata fileref="configure_plugins.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Configurant els connectors</phrase
+> </textobject
+> </mediaobject
+> </screenshot
+> Cada connector es pot activar o desactivar, d'acord amb l'estat de la casella de selecció que hi ha al costat del nom del connector. A més, a la dreta, també hi ha un botó d'<guibutton
+>Informació</guibutton
+> (&infoicon;) per a cadascun, el qual mostrarà la versió i l'autor. Per a alguns connectors, trobareu més informació sobre com configurar i utilitzar fent clic sobre la icona de configuració o l'eina que hi ha a l'esquerra del botó d'informació. Només hi ha un connector que requereix configuració, i aquest és el connector per a la impressió de xecs. </para>
+
+<sect2 id="details.settings.plugins.printchecks">
+<title
+>Connector d'impressió de xecs</title>
+
+<para
+>Com a exemple, hi ha un connector per a imprimir xecs, el qual s'inclou amb el codi font del &kmymoney;, i sempre haurà d'estar habilitat. Permet imprimir un xec basat en les dades d'una operació seleccionada, amb la disposició controlada per una plantilla &HTML;. Haureu d'emprar una plantilla que coincideixi amb els xecs prèviament impresos. De manera predeterminada es proporciona una plantilla incrustada. També podreu triar una plantilla personalitzada. Per a fer-ho, feu clic al botó <guibutton
+>configura</guibutton
+> (&configicon;) perquè es mostri el diàleg de configuració <guilabel
+>Impressió de xecs</guilabel
+>. A la part superior podreu marcar la casella per a utilitzar una plantilla personalitzada. A la dreta hi ha un botó que obrirà un selector de fitxers per a seleccionar un fitxer de plantilla alternatiu. </para>
+
+<para
+>Un fitxer de plantilla és un fitxer &HTML;, en el qual s'utilitzen cadenes específiques per a fer referència als camps de l'operació, del compte i la institució actuals per a mostrar on s'imprimiran al xec. El &kmymoney; es distribueix de manera predeterminada amb una plantilla incrustada. En <ulink url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/"
+>aquesta</ulink
+> adreça trobareu el fitxer font &HTML; de la plantilla predeterminada, així com algunes plantilles addicionals. Hauríeu de poder utilitzar-ne una o modificar-la per a satisfer les vostres necessitats. Recordeu que només s'admet un <emphasis
+>subconjunt</emphasis
+> de l'estàndard &HTML; -la documentació detallada es trobarà <ulink url="https://doc.qt.io/qt-5/richtext-html-subset.html"
+>aquí</ulink
+>-. </para>
+
+
+<!-- info from source code on substitution variables
+    // data about the user
+    checkHTML.replace("$OWNER_NAME", file->user().name());
+    checkHTML.replace("$OWNER_ADDRESS", file->user().address());
+    checkHTML.replace("$OWNER_CITY", file->user().city());
+    checkHTML.replace("$OWNER_STATE", file->user().state());
+    // data about the account institution
+    checkHTML.replace("$INSTITUTION_NAME", institution.name());
+    checkHTML.replace("$INSTITUTION_STREET", institution.street());
+    checkHTML.replace("$INSTITUTION_TELEPHONE", institution.telephone());
+    checkHTML.replace("$INSTITUTION_TOWN", institution.town());
+    checkHTML.replace("$INSTITUTION_CITY", institution.city());
+    checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
+    checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
+    // data about the transaction
+    checkHTML.replace("$DATE", KGlobal::locale()->formatDate(QDate::currentDate(), KLocale::LongDate));
+    checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
+    checkHTML.replace("$PAYEE_NAME", file->payee((*it).split().payeeId()).name());
+    checkHTML.replace("$PAYEE_ADDRESS", file->payee((*it).split().payeeId()).address());
+    checkHTML.replace("$PAYEE_CITY", file->payee((*it).split().payeeId()).city());
+    checkHTML.replace("$PAYEE_POSTCODE", file->payee((*it).split().payeeId()).postcode());
+    checkHTML.replace("$PAYEE_STATE", file->payee((*it).split().payeeId()).state());
+    checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().shares().abs()));
+    checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
+    checkHTML.replace("$MEMO", (*it).split().memo());
+-->
+
+
+</sect2>
+<sect2 id="details.settings.plugins.kbanking">
+<title
+>KBanking</title>
+
+<para
+>Aquest connector afegeix la implementació per a la banca en línia de HBCI/FinTs, OFX i PayPal al KMyMoney. Després d'activar aquest connector, la banca en línia es pot configurar al menú <link linkend="reference.menus.settings.help"
+>Arranjament</link
+>. </para>
+
+</sect2>
+</sect1>
+</chapter>

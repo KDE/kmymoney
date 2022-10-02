@@ -1,0 +1,1336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="reference">
+<chapterinfo>
+  <date
+>5 de desembre de 2016</date>
+  <releaseinfo
+>5.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Referència</title>
+
+<sect1 id="reference.menus">
+<sect1info>
+  <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+</sect1info>
+<title
+>Menús</title>
+
+<para
+>A continuació es mostra una llista completa de les seleccions de menú al &kmymoney;, amb una breu descripció del que fa cadascuna. Cal tenir en compte que moltes d'aquestes opcions de menú no estaran disponibles o estaran en gris, segons la pantalla actual o l'estat de l'aplicació. Per exemple, no podreu editar un compte a menys que es tingui un compte seleccionat o mostrat a la vista actual. </para>
+
+<sect2 id="reference.menus.file">
+<title
+>El menú Fitxer</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Nou</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Crea un fitxer de dades nou buit del &kmymoney;. Només es pot obrir un fitxer del &kmymoney; alhora, de manera que això tancarà primer el fitxer actual, si està obert. </action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Obre...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Obre un fitxer de base de dades existent del &kmymoney;.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Obre'n un de recent</guimenuitem
+> <guimenuitem
+>...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Permet accés ràpid als fitxers oberts recentment.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Obre una base de dades...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Obre una base de dades existent.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Desa</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Desa el fitxer actualment obert.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Maj;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Desa com a...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Desa el fitxer actualment obert amb un nom de fitxer diferent.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Desa com a base de dades...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Desa el fitxer actualment obert en una <link linkend="details.database"
+>base de dades</link
+>.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guisubmenu
+>Importa</guisubmenu
+> <guimenuitem
+>...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Importa dades financeres des d'altres tipus de fitxer, com QIF i &gnucash;, o un fitxer de plantilla de comptes i categories que es poden emprar en configurar comptes nous.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Exporta</guimenuitem
+> <guimenuitem
+>...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Exporta el fitxer actual com un tipus de fitxer diferent, com a QIF, o exporta una llista dels comptes i categories com a una plantilla. </action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Imprimeix</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Imprimeix el fitxer actual.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Còpia de seguretat</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Desa una còpia de seguretat del fitxer actual.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Dades personals</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Permet editar les dades personals.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Informació del fitxer</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Mostra informació sobre el fitxer actualment obert del &kmymoney;.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <!--Dump Memory what i sthis?-->
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Tanca</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Tanca el fitxer actual.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Surt</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Surt del &kmymoney;.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.edit">
+<title
+>El menú Edita</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Edita</guimenu
+><guimenuitem
+>Cerca una operació...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Cerca les operacions.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.view">
+<title
+>El menú Visualitza</title>
+
+<variablelist>
+  <varlistentry id="reference.menus.settings.transactiondetail">
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Mostra els detalls de l'operació</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Mostra els detalls de l'operació en la vista <link linkend="details.ledgers"
+>Llibre major</link
+>. Amb aquesta opció activada, totes les línies de l'operació es mostraran al llibre major. Quan està desactivada, només es mostrarà una línia. </action
+></para>
+      <para
+>Si només voleu veure els detalls de l'operació actualment seleccionada, però només una línia per a les altres, podreu activar la <link linkend="details.settings.register.lens"
+>Lupa del llibre major</link
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Oculta les operacions conciliades</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Oculta les operacions conciliades al registre.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Oculta les categories no emprades</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Oculta a les vistes les categories sense emprar.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+> &Ctrl;&Maj;<keycap
+>A</keycap
+> </keycombo
+> </shortcut
+> <guimenu
+>Visualitza</guimenu
+><guimenuitem
+>Mostra tots els comptes</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Mostra a les vistes tots els comptes.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.institution">
+<title
+>El menú Institució</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Institució</guimenu
+> <guimenuitem
+>Institució nova...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Afegeix una institució nova.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Institució</guimenu
+> <guimenuitem
+>Edita una institució...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Edita una institució.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Institució</guimenu
+> <guimenuitem
+>Suprimeix la institució...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Suprimeix una institució.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.account">
+<title
+>El menú Compte</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Compte</guimenu
+> <guimenuitem
+>Compte nou...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Afegeix un compte nou.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Edita el compte...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Edita un compte.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Suprimeix un compte...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Suprimeix un compte.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Obre el llibre major</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Mostra la vista del llibre major d'un compte.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+> &Ctrl;&Maj;<keycap
+>R</keycap
+> </keycombo
+> </shortcut
+> <guimenu
+>Compte</guimenu
+><guimenuitem
+>Concilia...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Concilia un compte mitjançant l'assistent de conciliació.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Posposa la conciliació</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Posposa la conciliació d'un compte.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Finalitza</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Finalitza la conciliació d'un compte.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Informe de l'operació</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Obre un informe d'operació d'un compte.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Tanca el compte</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Tanca un compte.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Reobre el compte</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Si el compte està tancat, el torna a obrir.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Desvincula el compte</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Desvincula un compte en línia.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Vincula amb un compte en línia</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Fa que un compte segueixi a un compte en línia.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Compte</guimenu
+><guimenuitem
+>Actualitza un compte...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Importa operacions per a un compte des de la banca en línia.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Compte</guimenu
+> <guimenuitem
+>Actualitza tots els comptes...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Importa operacions per a tots els comptes des de la banca en línia.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <!--New credit transfer-->
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.category">
+<title
+>El menú Categoria</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Categoria</guimenu
+><guimenuitem
+>Categoria nova...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Afegeix una categoria nova.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Categoria</guimenu
+><guimenuitem
+>Edita la categoria...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Edita una categoria.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Categoria</guimenu
+><guimenuitem
+>Suprimeix la categoria...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Suprimeix una categoria.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Categoria</guimenu
+><guimenuitem
+>Obre el llibre major</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Mostra la vista del llibre major d'una categoria.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.transaction">
+<title
+>El menú Operació</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Ins;</keycombo
+> </shortcut
+> <guimenu
+>Operació</guimenu
+><guimenuitem
+>Nova</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Afegeix una operació nova.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Operació</guimenu
+><guimenuitem
+>Edita</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Edita una operació.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Operació</guimenu
+><guimenuitem
+>Edita els desglossaments</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Edita els desglossaments d'una operació.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Operació</guimenu
+><guimenuitem
+>Suprimeix</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Suprimeix una operació.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Operació</guimenu
+><guimenuitem
+>Duplica</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Duplica una operació.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Operació</guimenu
+> <guimenuitem
+>Marca l'operació com a...</guimenuitem
+> <guimenuitem
+>No conciliada</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Canvia una operació a l'estat de No conciliada.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+> &Ctrl;&Alt;&Space; </keycombo
+> </shortcut
+> <guimenu
+>Operació</guimenu
+> <guimenuitem
+>Marca l'operació com a...</guimenuitem
+> <guimenuitem
+>Liquidada</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Canvia una operació a l'estat de Liquidada.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+> &Ctrl;&Maj;&Space; </keycombo
+> </shortcut
+> <guimenu
+>Operació</guimenu
+> <guimenuitem
+>Marca l'operació com a...</guimenuitem
+> <guimenuitem
+>Conciliada</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Canvia una operació a l'estat de Conciliada.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Operació</guimenu
+><guimenuitem
+>Ves al compte</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Mostra l'altre compte d'una operació.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Operació</guimenu
+><guimenuitem
+>Ves al beneficiari</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Mostra la vista del Beneficiari i se centra en el beneficiari de l'operació seleccionada.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Operació</guimenu
+> <guimenuitem
+>Crea operacions planificades...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Crea una operació planificada nova.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Operació</guimenu
+><guimenuitem
+>Coincidència</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Coincideix amb les operacions importades.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Operació</guimenu
+><guimenuitem
+>Desaparella</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Desaparella una operació que el &kmymoney; ha proposat com una coincidència de les operacions importades.</action
+> Recordeu que aquesta opció de menú només està present si hi ha una operació coincident. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Operació</guimenu
+><guimenuitem
+>Accepta</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Accepta una fusió proposada de les operacions importades.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Operació</guimenu
+><guimenuitem
+>Selecciona-ho tot</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Selecciona totes les operacions al registre.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Operació</guimenu
+><guimenuitem
+>Imprimeix el xec</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Imprimeix el contingut de l'operació seleccionada al registre mostrat, amb un format d'acord amb la plantilla seleccionada.</action
+> Recordeu que aquesta opció de menú només estarà present si se selecciona una operació al registre. Per a obtenir més informació consulteu la secció sobre configurar el connector <link linkend="details.settings.plugins"
+>Imprimir un xec</link
+>. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.tools">
+<title
+>El menú Eines</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Eines</guimenu
+><guimenuitem
+>Editor del perfil QIF...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Modifica el perfil QIF emprat per a importar o exportar els fitxers QIF.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Eines</guimenu
+><guimenuitem
+>Divises...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Llista les divises conegudes pel &kmymoney;.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Eines</guimenu
+><guimenuitem
+>Preus...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Llista la cotització dels valors i divises.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Eines</guimenu
+> <guimenuitem
+>Actualitza la cotització dels valors i divises...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Actualitza la cotització dels valors i divises des de fonts en línia utilitzant la característica <link linkend="details.investments.onlinequotes"
+>Cotització en línia dels preus</link
+>.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Eines</guimenu
+><guimenuitem
+>Comprova la coherència</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Executa una comprovació al fitxer i intenta solucionar qualsevol problema que trobi, si és possible.</action
+></para>
+      <para
+>Realitzeu una còpia de seguretat del fitxer abans d'executar aquesta opció.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Eines</guimenu
+><guimenuitem
+>Prova de rendiment</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Executa una prova de rendiment al fitxer i mostra el resultat.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <!--Generate Database SQL
+  Debug Traces
+  Debug Timers-->
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.settings.help">
+<title
+>Els menús Arranjament i Ajuda</title>
+
+<para
+>El &kmymoney; disposa dels menús <guimenu
+>Arranjament</guimenu
+> i <guimenu
+>Ajuda</guimenu
+> predeterminats del &kde;, com es descriu en els <ulink url="help:/fundamentals/menus.html"
+>Fonaments del &kde;</ulink
+>, amb una entrada addicional:</para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Habilita tots els missatges</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Torna a habilitar qualsevol missatge que hàgiu desactivat marcant <guimenuitem
+>No m'ho tornis a dir</guimenuitem
+> en algun diàleg.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Configura l'AqBanking</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Configuració del paràmetres de la banca en línia</action
+>, vegeu <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
+>How do I configure online banking</ulink
+> per a més detalls. </para>
+      <para
+>Tingueu en compte que aquesta selecció de menú només és disponible si està activat el mòdul KBanking. Vegeu la secció de la configuració del <link linkend="details.settings.plugins.kbanking"
+>connector del KBanking</link
+> per a més informació. </para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+</sect2>
+
+</sect1
+>&details-widgets; </chapter>

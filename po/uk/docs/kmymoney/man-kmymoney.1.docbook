@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Ukrainian "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+
+<author
+><firstname
+>Michael</firstname
+><othername
+>T.</othername
+><surname
+>Edwardes</surname
+> <contrib
+>Початкова концепція, багато початкового коду. Адміністрування проєкту.</contrib
+> <email
+>mte@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Thomas</firstname
+><surname
+>Baumgart</surname
+> <contrib
+>Керування випуском, фактичний супровід. Ядро програми. Адміністрування проєкту.</contrib
+> <email
+>ipwizard@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Tony</firstname
+><surname
+>Bloomfield</surname
+> <contrib
+>Інструмент імпортування даних з GnuCash. Підтримка баз даних.</contrib
+> <email
+>tonybloom@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Robert</firstname
+><surname
+>Wadley</surname
+> <contrib
+>Художник. Піктограми, вікно вітання, домашня сторінка. Знімки вікон.</contrib
+> <email
+>robntina@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Alvaro</firstname
+><surname
+>Soliverez</surname
+> <contrib
+>Прогноз. Звіти.</contrib
+> <email
+>asoliverez@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Fernando</firstname
+><surname
+>Vilas</surname
+> <contrib
+>Підтримка баз даних.</contrib
+> <email
+>fvilas@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Cristian</firstname
+><surname
+>Oneț</surname
+> <contrib
+>Латки і додатки.</contrib
+> <email
+>onet.cristian@gmail.com</email
+> </author>
+
+<author
+><firstname
+>Jack</firstname
+><othername
+>H.</othername
+><surname
+>Ostroff</surname
+> <contrib
+>Документація.</contrib
+> <email
+>ostroffjh@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Felix</firstname
+><surname
+>Rodriguez</surname
+> <contrib
+>Адміністрування проєкту, попередні версії.</contrib
+> <email
+>frodriguez@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Kevin</firstname
+><surname
+>Tambascio</surname
+> <contrib
+>Початкова реалізації підтримки вкладень.</contrib
+> <email
+>ktambascio@users.sourceforge.net</email
+> </author>
+
+<!-- This person was previously listed as an author here, but is not currently
+     included in credits.docbook.  He should either be dropped from here or
+     included there.
+
+    <author
+><firstname
+>Arni</firstname
+><surname
+>Ingimundarson</surname>
+    <contrib
+>Developer, previous versions.</contrib>
+    <email
+>arniing@users.sourceforge.net</email
+></author>
+
+    These persons were not previously listed as authors here, but are included
+    in credits.docbook.  They should either be dropped from there or included
+    here.
+
+    <author
+><firstname
+>Ace</firstname
+><surname
+>Jones</surname>
+    <contrib
+>Reports.  OFX Import.  Online Quotes.  Documentatation.  Previous versions.</contrib>
+    <email
+>acejones@users.sourceforge.net</email
+></author>
+
+    <author
+><firstname
+>John</firstname
+><surname
+>C</surname>
+    <contrib
+>Developer, previous versions.</contrib>
+    <email
+>tacoturtle@users.sourceforge.net</email
+></author>
+
+    There are eight additional people in credits.docbook for "Special Thanks."
+    Should any of them be included here?  -->
+<date
+>17 червня 2016 року</date>
+<releaseinfo
+>KMyMoney 5.0</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kmymoney</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+<refmiscinfo class="source"
+>&kmymoney;</refmiscinfo>
+<refmiscinfo class="manual"
+>Виконувані файли програм</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kmymoney</command
+></refname>
+<refpurpose
+>інструмент керування особистими фінансами, створений розробниками &kde;</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>kmymoney</command
+> <group choice="opt"
+><option
+>--lang</option
+></group
+> <group choice="opt"
+><option
+>-n</option
+></group
+> <group choice="opt"
+><option
+>--timers</option
+> <replaceable
+> стовпчик</replaceable
+></group
+> <group choice="opt"
+><option
+>--nocatch</option
+></group
+> <group choice="opt"
+><option
+>--trace</option
+></group
+> <group choice="opt"
+><option
+><replaceable
+>файл</replaceable
+></option
+></group
+> </cmdsynopsis>
+
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Опис</title>
+
+<para
+>&kmymoney; — це інструмент керування вашими особистими фінансами, створений розробниками &kde;. Програма надасть вам можливість керувати балансом ваших чекових книжок, керувати кредитними зобов’язаннями або впорядковувати ваші дані щодо прибутків і витрат. У програмі використовується графічний інтерфейс користувача, що імітує роботу зі звичайною бухгалтерською книгою.</para>
+
+</refsect1>
+
+<refsect1>
+<title
+>Параметри</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><option
+>--lang</option
+></term>
+<listitem>
+<para
+>мова, яку слід використовувати </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-n</option
+></term>
+<listitem>
+<para
+>не відкривати попередній використаний файл </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--timers</option
+></term>
+<listitem>
+<para
+>Увімкнути таймери швидкодії </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--nocatch</option
+></term>
+<listitem>
+<para
+>Не перехоплювати на загальному рівні неперехоплені виключення </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--trace</option
+></term>
+<listitem>
+<para
+>Увімкнути трасування програми. Цим параметром можна скористатися, лише якщо &kmymoney; зібрано у діагностичному режимі. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--dump-actions</option
+></term>
+<listitem>
+<para
+>Надіслати список всіх визначених об’єктів QAction до stdout і завершити роботу програми. Цим параметром можна скористатися, лише якщо &kmymoney; зібрано у діагностичному режимі. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</refsect1>
+
+
+<refsect1>
+<title
+>Прочитайте також</title>
+
+<simplelist>
+<member
+>Повна документація до &kmymoney; міститься у підручнику у форматі docbook. Якщо у системі належним чином встановлено програму &khelpcenter;, за допомогою команди <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/kmymoney</parameter
+></userinput
+> ви отримаєте доступ до повного підручника з програми. Крім того підручник можна відкрити за допомогою введення адреси <acronym
+>URL</acronym
+> <ulink url="help:/kmymoney"
+>help:/kmymoney</ulink
+> до рядка адреси &konqueror;.</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+</simplelist>
+
+</refsect1>
+
+</refentry>

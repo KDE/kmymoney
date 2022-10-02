@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.reconcile">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-21</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Transactie-controle</title>
+
+<sect1 id="details.reconcile.whatis">
+<title
+>Wat is transactiecontrole?</title>
+
+<para
+>Transactiecontrole is het proces van het aan elkaar koppelen van transacties die u hebt ingevoerd in &kmymoney; met de transacties in de lijst voor die rekening door het instituut. Dit wordt gewoonlijk gedaan met de lijst met transacties in een afschrift, een bankafschrift, creditcardafschrift, loonstrookje of elk ander afschrift. Het kan ook gedaan worden tegen een online lijst van de rekening, hoewel dat minder gebruikelijk is. Als er verschillen worden gevonden, dan hebt u of de persoon van het afschrift een fout gemaakt. </para>
+
+<para
+>Om transacties op een rekening te controleren, kies uw rekening uit het afrolvak en klik op het Transactiecontrolepictogram <guiicon
+><inlinemediaobject
+> <imageobject
+><imagedata fileref="reconcile.png" format="PNG"/></imageobject
+> </inlinemediaobject
+></guiicon
+>, selecteer menu-item <menuchoice
+><guimenu
+>Rekening</guimenu
+> <guimenuitem
+>Transacties controleren...</guimenuitem
+></menuchoice
+> of gebruik de sneltoets <keycombo
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+>. </para>
+</sect1>
+
+<sect1 id="details.reconcile.wizard">
+<title
+>De saldo-controle-assistent</title>
+<para
+>Dit opent de transactiecontrole-assistent. De eerste pagina van de assistent beschrijven beknopt het te volgen proces. Klik op <guibutton
+>Volgende</guibutton
+> om echt met de assistent te beginnen. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Transactiecontrole-assistent</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile1.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transactiecontrole-assistent</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.reconcile.wizard.statement">
+<title
+>Bankafschrift-details</title>
+<para
+>De datum van het afschrift, het startsaldo en eindsaldo is te vinden in uw afschrift. Ga na dat de cijfers kloppen en klik op de knop <guibutton
+>Volgende</guibutton
+>. Als de cijfers niet kloppen voer dan de cijfers in zoals ze staan op uw afschrift en klik op de knop <guibutton
+>Volgende</guibutton
+>. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Transactiecontrole-assistent</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile2.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transactiecontrole-assistent</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect2>
+
+<sect2 id="details.reconcile.wizard.interest">
+<title
+>Rente</title>
+<para
+>Als het op transacties te controleren afschrift van een bankrekening of elke rekening met rente en/of kosten, voer deze waarden dan in in de van toepassing zijnde velden. Er kan een categorie toegekend worden voor elk van deze hoeveelheden. </para>
+
+<note>
+<para
+>Het renteveld is voor ontvangen rente. Als u rente moet betalen, &eg;, voor een creditcardrekening, dan moet dat ingevoerd worden als een kostenpost. </para>
+</note>
+
+<para>
+<screenshot>
+	<screeninfo
+>Transactiecontrole-assistent</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile3.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transactiecontrole-assistent</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Klik op <guibutton
+>Doorgaan</guibutton
+> om te beginnen met in overeenstemming brengen van uw afschrift met wat u hebt ingevoerd. Merk op dat dit de transactiecontrole-assistent voltooid, maar niet het proces van transactiecontrole. Het wijzigt ook de grootboekbeeld door alleen transacties te tonen die nog niet al gemarkeerd zijn als gecontroleerd. Zoals onderstaand beschreven, moet u nog steeds transacties klaren en dan &kmymoney; vertellen dat de rekening is gecontroleerd. </para>
+</sect2>
+
+<sect2 id="details.reconcile.wizard.clearing">
+<title
+>Transacties klaren</title>
+<para
+>Tijdens de transactiecontrole kan elke transactie bewerkt worden om het te laten kloppen met het afschrift en nieuwe transacties kunnen zoals gebruikelijk aangemaakt worden. Om een transactie als geklaard te markeren, klik op de kolom <guilabel
+>C</guilabel
+> in de lijstweergave. Een transactie is geklaard wanneer het klopt met de transactie op uw afschrift. </para>
+
+<para
+>Het opdrachtenframe (net onder het gebied met de transactielijst) toont de hoeveelheid links, de geklaarde hoeveelheid in het midden en het verschil rechts. Als u transacties als geklaard markeert, worden deze waarden bijgewerkt om de wijziging te tonen. </para>
+
+<para
+>Merk echter op dat transactiecontrole het proces is van de gegevens in uw rekening overeen te laten komen met wat in een afschrift staat, wijzigingen aan elke transactie met datums na de datum van het afschrift dat u invoert in de assistent zal opgeslagen worden, maar zal geen enkel effect hebben op de geklaarde hoeveelheid getoond in het opdrachtenframe. </para>
+
+<screenshot>
+	<screeninfo
+>Transactiecontrole-assistent</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile4.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transactiecontrole-assistent</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="details.reconcile.complete">
+<title
+>Transactie-controle afronden</title>
+
+<sect3 id="details.reconcile.finish">
+<title
+>Transactie-controle beëindigen</title>
+<para
+>Wanneer het verschil tussen het afschrift en het geklaarde saldo nul is dan is de rekening transactie gecontroleerd en kunt u klikken op de knop <guibutton
+>Beëindigen</guibutton
+>. Wanneer u dit doet, neemt &kmymoney; alle transacties die gemarkeerd zijn als geklaard en markeert ze als transactie gecontroleerd en de waarde in de <guilabel
+>C</guilabel
+> kolom wijzigt van <quote
+>C</quote
+> naar <quote
+>R</quote
+> om de wijziging weer te geven. Bovendien worden de wijzigingen opgeslagen en wordt opgenomen dat de rekening is transactie gecontroleerd. (U moet nog steeds het bestand opslaan om alle wijzigingen permanent op te slaan.) </para>
+</sect3>
+
+<sect3 id="details.reconcile.postpone">
+<title
+>Transactie-controle uitstellen</title>
+<para
+>Als u problemen hebt om de transactiecontrole af te ronden of u moet enige extra informatie verzamelen alvorens het proces af te ronden, dan kunt u het proces uitstellen naar een later moment door te klikken oo de knop <guibutton
+>Uitstellen</guibutton
+>. Wann u dat doet zal &kmymoney; de waarden onthouden die u hebt ingevoerd toen u de assistent startte, het markeert geen geklaarde transacties als transactie gecontroleerd en het geeft het grootboek terug in zijn normale weergave. Als u &kmymoney; verlaat alvorens te klikken ofwel op <guibutton
+>Beëindigen</guibutton
+> of <guibutton
+>Uitstellen</guibutton
+>, dan heeft dat hetzelfde effect als klikken op <guibutton
+>Uitstellen</guibutton
+>. Elke bewerking die u hebt gedaan, zoals transacties markeren als geklaard of nieuwe transacties invoeren, worden niet aangeraakt en u kunt ze nog steeds opslaan alvorens u &kmymoney; verlaat. U zult echter de assistent voor transactiecontrole opnieuw moeten uitvoeren om de transactie te controleren. </para>
+
+<para
+>Wanneer u de assistent voor transactiecontrole op deze rekening de volgende keer uitvoert zal &kmymoney; de waarden die u hebt ingevoerd herinneren toen u de vorige keer de assistent uitvoerde end u zult in staat zijn deze, indien nodig, te wijzigen. In dat geval zal het initiële scherm van de assistent anders zijn om hieraan te herinneren. </para>
+
+<screenshot>
+	<screeninfo
+>Transactiecontrole-assistent</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile-redo.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transactiecontrole-assistent</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+
+</sect3>
+</sect2>
+</sect1>
+
+</chapter>
+

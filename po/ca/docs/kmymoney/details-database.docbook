@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.database">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
+  </authorgroup>
+  <date
+>21 de juliol de 2011</date>
+  <releaseinfo
+>4.6</releaseinfo>
+</chapterinfo>
+
+<title
+>Base de dades</title>
+
+<sect1 id="details.database.usage">
+<title
+>Usar bases de dades relacionals</title>
+
+<sect2>
+<title
+>Introducció</title>
+<para
+>A partir de la versió 1.0, el &kmymoney; permet mantenir les dades en una base de dades relacional. Un dels avantatges d'utilitzar aquest format estàndard de la indústria és que us permetrà veure les dades emprant un dels frontals com <trademark
+>OpenOffice.org</trademark
+> o <trademark
+>LibreOffice</trademark
+>, potser en algun format que el &kmymoney; actualment no proporciona. A més, una mica de coneixement de SQL (llenguatge estructurat de consulta, el llenguatge utilitzat a tot el món per a accedir a les bases de dades relacionals) hauria de permetre-us exportar amb més facilitat les dades a un programa extern, per exemple, una aplicació de pressupostos. </para>
+<para/>
+</sect2>
+
+<sect2
+><title
+>Preparació</title>
+
+<para
+>Per a accedir a la base de dades, el &kmymoney; utilitza el mòdul SQL subministrat per les &Qt; com a part del seu sistema de programació en &Qt;. Aquest mòdul admet diversos sistemes de bases de dades diferents mitjançant una col·lecció de controladors. Entre els sistemes de codi obert més populars per als que hi ha controladors disponibles estan el <trademark
+>MySQL</trademark
+>, SQLite (només la versió 3 i les versions posteriors) i PostgreSQL. El mòdul també admet els sistemes més «pesats», més de la indústria, com <trademark class="registered"
+>Oracle</trademark
+> i <trademark class="registered"
+>DB2</trademark
+> d'IBM. </para>
+
+<para
+>Amb l'excepció de l'SQLite, aquests sistemes utilitzen un model client/servidor, on el programari «client» es troba a la vostra màquina, mentre que el servidor resideix a la mateixa màquina que la base de dades, la qual podrà estar en una altra part de la xarxa. Per descomptat, a l'escenari normal per a una aplicació de finances personals com el &kmymoney;, la vostra màquina actuarà com a client i servidor. Per tant, la primera tasca, després d'haver decidit quin sistema de base de dades voleu utilitzar, és instal·lar el programari del client i, probablement, del servidor. </para>
+
+<para
+>A més del programari de la base de dades en si, també haureu d'instal·lar el corresponent mòdul controlador de les &Qt;. La majoria de les distribucions inclouran mòduls dels controladors per a les bases de dades més populars. Altrament, consulteu el <ulink url="https://www.qt.io/"
+>lloc web de les &Qt;</ulink
+> i cerqueu «SQL drivers». </para>
+
+<note>
+  <para
+>L'SQLite no funciona en un model client/servidor. Cada base de dades s'emmagatzema en un fitxer normal, local o remot, al qual s'accedeix utilitzant els mètodes normals subministrats pel sistema operatiu subjacent. En aquest cas, per tant, només s'haurà d'instal·lar un paquet de programari i el controlador. A més, part de la informació següent, particularment la relacionada amb l'administració, podria no aplicar-se a l'SQLite. </para>
+</note>
+</sect2>
+
+<sect2>
+<title
+>Administració</title>
+
+<para
+>Tenir cura de les bases de dades és una mica més complex que tractar amb fitxers normals. Cada sistema té diferents mètodes per a realitzar les tasques administratives necessàries, com crear les bases de dades, assignar permisos a diversos usuaris, fer còpies de seguretat, &etc; La descripció d'aquestes tasques queda fora de l'àmbit d'aquest manual, però tots els productes admesos proporcionen una completa documentació de referència, i una cerca ràpida al web us guiarà a moltes guies d'aprenentatge sobre el tema. </para>
+
+<sect3>
+<title
+>Crear la base de dades</title>
+
+<para
+>S'ha inclòs el codi per a crear una base de dades inicial -si no existeix- per a emmagatzemar les dades. No obstant això, es recomana encaridament que creeu prèviament una base de dades, ja que la majoria dels productes ofereixen una sèrie d'opcions que poden ser rellevants. Quelcom que podria ser de particular importància per a alguns seria la designació del joc de caràcters (&pex;, UTF-8) que s'utilitzarà per als camps de text. </para>
+
+<para
+>En aquest moment, també haureu d'especificar els permisos perquè diversos usuaris realitzin diferents operacions a la base de dades. En la majoria dels sistemes, a l'usuari que crea la base de dades se li assignaran automàticament tots els permisos, però aquesta és una àrea en la qual s'haurà de consultar la documentació. </para>
+
+<para
+>Per al primer ús de la base de dades, i ocasionalment en altres ocasions quan canviï el disseny de la base de dades, necessitareu permís (també anomenat privilegis) per a crear i modificar taules i vistes (vegeu el paràgraf següent). Poden haver-hi diferents noms per als permisos/privilegis en sistemes diferents, però quelcom com <literal
+>CREATE</literal
+> (crea) i <literal
+>ALTER</literal
+> (altera) hauria de ser comuna. Per a una execució normal, haureu de poder llegir i escriure els registres, aquests es defineixen normalment a l'SQL com permisos <literal
+>SELECT</literal
+> (selecciona), <literal
+>INSERT</literal
+> (insereix), <literal
+>UPDATE</literal
+> (actualitza) i <literal
+>DELETE</literal
+> (suprimeix). </para>
+</sect3>
+
+<sect3>
+<title
+>Crear taules</title>
+
+<para
+>En el primer ús, el &kmymoney; intentarà crear les estructures de taula necessàries. Per a aconseguir la màxima compatibilitat entre diversos tipus de bases de dades, només s'utilitzarà un subconjunt de tipus de dades habituals. No obstant això, poden haver-hi situacions en què no s'admetrà un tipus en particular, i en aquest cas, s'ha previst generar el codi SQL necessari per a crear les taules. Aquest codi podrà modificar-se segons sigui necessari i emprar-se per a crear taules fora del &kmymoney;. Si esteu en aquesta situació, generalment podreu obtenir ajuda des de &devlist;. Per a obtenir més informació consulteu <link linkend="details.database.generatesql"
+>Crear manualment la base de dades</link
+>. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.database.selectdatabase">
+<title
+>Crear una base de dades</title>
+
+<para
+>Amb el &kmymoney;, obriu o importeu un fitxer de dades existent o creeu-ne un de nou. Després seleccioneu l'element de menú <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Desa com a base de dades</guimenuitem
+></menuchoice
+>. Això presentarà el diàleg següent: </para>
+
+<screenshot>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="select_database.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Completeu els camps apropiats per al tipus de base de dades que heu seleccionat (com de costum, els camps obligatoris estaran ressaltats) i premeu <guibutton
+>D'acord</guibutton
+> per a crear la base de dades. </para>
+
+<sect3>
+<title
+>Tipus de base de dades</title>
+
+<para
+>Aquest quadre llista tots els controladors SQL de les &Qt; al sistema. Seleccioneu el controlador per al tipus de base de dades. Si el que voleu no es troba a la llista, haureu d'instal·lar el controlador apropiat. Consulteu la documentació de la distribució o visiteu el <ulink url="https://www.qt.io/"
+>lloc web de les &Qt;</ulink
+> i cerqueu «SQL drivers». </para>
+</sect3>
+
+<sect3>
+<title
+>Fitxer (només SQLite)</title>
+<para
+>L'SQLite té una base de dades per fitxer, així que introduïu el nom del fitxer en el qual voleu crear la base de dades. Per a explorar el sistema de fitxers, feu clic sobre la icona que hi ha a la dreta del nom de fitxer. Per a les bases de dades SQLite, els camps <guilabel
+>Nom de la màquina</guilabel
+>, <guilabel
+>Nom d'usuari</guilabel
+> i <guilabel
+>Contrasenya</guilabel
+> no són rellevants. El fitxer SQLite haurà de tenir establerts els permisos adequats de lectura/escriptura per al sistema de fitxers subjacent per a permetre l'accés apropiat a l'usuari que ha accedit actualment. </para>
+</sect3>
+
+<sect3>
+<title
+>Nom de la base de dades (altres)</title>
+<para
+>El nom predeterminat de la base de dades és <literal
+>KMyMoney</literal
+>, però si voleu podreu triar un altre nom. Per a alguns tipus de bases de dades, el &kmymoney; podria no ser capaç de crear la base de dades, de manera que s'haurà de crear prèviament mitjançant el procediment administratiu apropiat. No obstant això, el &kmymoney; generalment podrà crear totes les estructures de taula quan sigui necessari. Si no, podreu crear-les vosaltres mateixos. Per a més informació consulteu <link linkend="details.database.generatesql"
+>Crear manualment la base de dades</link
+>. </para>
+</sect3>
+
+<sect3
+><title
+>Nom de la màquina</title>
+<para
+>Per a l'usuari mitjà, el nom predeterminat de <quote
+>localhost</quote
+> -el qual és la màquina que esteu utilitzant- és correcte. Per a les bases de dades en xarxa, introduïu el nom de la màquina amb la qual s'està connectat. </para>
+
+</sect3>
+
+<sect3>
+<title
+>Nom d'usuari i contrasenya</title>
+<para
+>Comproveu els permisos configurats a la base de dades, o poseu-vos en contacte amb l'administrador de la base de dades, per a obtenir els valors correctes per a utilitzar-los aquí. El nom d'usuari haurà de ser capaç de seleccionar, inserir, actualitzar i suprimir registres. Si el nom d'usuari és el mateix que el nom per a iniciar la sessió, normalment no es requerirà cap contrasenya. </para>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Accedir a les dades</title>
+
+<sect3>
+<title
+>Dissenyar la taula</title>
+
+<para
+>Per a accedir a les dades al &kmymoney;, utilitzeu l'element de menú <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Obre la base de dades</guimenuitem
+></menuchoice
+>. Això obrirà un diàleg similar a l'anterior. </para>
+
+<note>
+<para
+>Si heu creat la base de dades obrint primer un fitxer i després fent <guimenuitem
+>Desa com a base de dades</guimenuitem
+>, com s'ha descrit anteriorment, els canvis posteriors a les dades només es desaran a la base de dades, no a l'arxiu. Això vol dir que podreu utilitzar el fitxer com a una còpia de seguretat o una instantània de les dades en un moment determinat. Per a crear una còpia de seguretat nova com aquesta, obriu la base de dades, trieu l'element de menú <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Desa com a...</guimenuitem
+></menuchoice
+>, donant un nom de fitxer apropiat. Recordeu tornar a obrir la base de dades, perquè el &kmymoney; no continuï utilitzant el fitxer. </para>
+</note>
+
+<para
+>Per a accedir a les dades en altres formats, necessitareu saber una mica sobre com es desen en les bases de dades relacionals. De molt, la forma més fàcil d'entendre-ho és obrir la base de dades en un frontal com <trademark
+>OpenOffice.org</trademark
+>. Això proporcionarà una llista de les diverses taules que componen la base de dades i us permetrà veure el disseny de cadascuna d'elles. </para>
+
+<para
+>Per a extreure dades, &pex;, a un full de càlcul o a un fitxer extern, gairebé sempre cal seleccionar dades vinculades des de més d'una taula. Això es fa «unint» les taules, emprant un camp que és comú a cadascuna. Trobareu molta més informació sobre com es fa això a les guies d'aprenentatge en línia per a bases de dades esmentades anteriorment. La taula següent llista els camps utilitzats per a definir aquestes relacions entre taules. </para>
+
+<informaltable>
+  <tgroup cols="3">
+    <thead>
+      <row>
+        <entry valign="top">
+          <para
+>Relació</para>
+        </entry>
+        <entry valign="top">
+          <para
+>Coincidència</para>
+        </entry>
+        <entry valign="top">
+          <para
+>Amb</para>
+        </entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+        <entry valign="top">
+          <para
+>Institucions i Comptes</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmInstitutions.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmAccounts.institutionId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Comptes pare/fill</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmAccounts.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmAccounts.parentId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Operacions i Desglossaments (vegeu la nota 1)</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmTransactions.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSplits.transactionId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Comptes i desglossaments</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmAccounts.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSplits.accountId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Beneficiaris i desglossaments</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmPayees.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSplits.payeeId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Planificacions i Operacions</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSchedules.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmTransactions.id</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Operacions i divises</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmTransactions.currencyId</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmCurrencies.ISOCode</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+><literal
+>Comptes i Títols (vegeu la nota 2)</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmAccounts.currencyId</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSecurities.id</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Títols i Preus</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSecurities.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmPrices.fromId</literal
+> o <literal
+>kmmPrices.toId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Tipus de canvi</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmCurrencies.ISOCode</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmPrices.fromId</literal
+> o <literal
+>kmmPrices.toId</literal
+></para>
+        </entry>
+      </row>
+    </tbody>
+  </tgroup>
+</informaltable>
+
+<para
+>Notes: </para>
+
+<para
+>1 &#x2013; txType = «N» per a les operacions normals, «S» per a les operacions planificades </para>
+
+<para
+>2 &#x2013; si kmmAccounts.isStockAccount = «Y» </para>
+</sect3>
+
+<sect3>
+<title
+>Formats de camp</title>
+
+<para
+>Diversos dels camps de dades es mantenen en un format intern que pot no ser immediatament útil per als programes externs. En aquests casos, la informació s'ha duplicat en ambdós formats, intern i extern. </para>
+
+<para
+>Els imports monetaris i els valors compartits es mostren en format numerador/denominador i, amb un nom de camp amb el sufix «<literal
+>Formatted</literal
+>» (amb format), en la forma que es mostra a la pantalla. </para>
+
+<para
+>De la mateixa manera, alguns camps, com el tipus de compte, apareixen com un codi numèric i en un camp amb el sufix «<literal
+>String</literal
+>» (cadena) en la forma i l'idioma de l'aplicació. </para>
+</sect3>
+
+<sect3>
+<title
+>Actualitzar les dades</title>
+
+<para
+>Tenir les dades en un format estàndard de la indústria permet modificar-los des de fora de l'aplicació &kmymoney;. NO HO FEU a menys que realment sapigueu el que esteu fent, i primer creeu sempre una còpia de seguretat de les dades. Si us equivoqueu, és possible que el &kmymoney; no pugui accedir a les dades i, fins i tot podria acabar perdent-ho tot. Quedeu avisats! </para>
+</sect3>
+
+<sect3>
+<title
+>Consultes emmagatzemades</title>
+
+<para
+>La majoria dels sistemes de bases de dades permeten emmagatzemar consultes i procediments d'ús habitual, i en alguns casos, aquests es poden mantenir com a taules o altres objectes dins de la base de dades. Com haureu endevinat per l'anterior, totes les taules utilitzades pel &kmymoney; comencen amb les lletres minúscules «<literal
+>kmm</literal
+>». Aquest estàndard es mantindrà i només s'actualitzaran les taules que comencin amb aquestes lletres. Per tant, sempre que proporcioneu aquestes lletres en les consultes, &etc;, no hi haurà cap problema. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.database.generatesql">
+<title
+>Crear manualment la base de dades</title>
+<note>
+  <para
+>Aquesta secció cobreix l'ús més avançat de la base de dades i pot ser omesa per l'usuari general. </para>
+</note>
+
+<sect3>
+<title
+>Quan emprar-ho</title>
+<para
+>Hi poden haver ocasions en què el &kmymoney; no pot crear la base de dades automàticament, o la crea sense algunes opcions requerides per l'usuari. Per exemple, el sistema de base de dades utilitzat pot no ajustar-se completament a l'ús estàndard de l'SQL, o es pot introduir suport per a sistemes nous que no s'han provat completament al &kmymoney;. </para>
+<para
+>Abans d'utilitzar aquesta facilitat, haureu d'intentar crear l'entrada de la base de dades en si (&ead;, amb la instrucció <literal
+>CREATE DATABASE</literal
+>). Sempre que existeixi la base de dades, el &kmymoney; podrà crear les taules, seguint el procediment normal descrit anteriorment per a desar la base de dades. </para>
+</sect3>
+
+<sect3>
+<title
+>Generar l'SQL</title>
+<para
+>Si això falla, és possible generar les ordres SQL bàsiques necessàries per a crear les diverses taules, vistes i índexs requerits per l'aplicació. Seleccioneu l'element de menú <menuchoice
+><guimenu
+>Eines</guimenu
+><guimenuitem
+>Genera la base de dades SQL</guimenuitem
+></menuchoice
+>. Això presentarà el diàleg següent: </para>
+<screenshot>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="generate_sql.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>En seleccionar el tipus de la base de dades, apareixerà l'SQL apropiat al quadre de text <guilabel
+>SQL per a la creació</guilabel
+>. L'usuari la podrà editar o desar en un fitxer de text fent clic a <guibutton
+>Desa com a SQL</guibutton
+>. En l'últim cas, la base de dades s'haurà de crear utilitzant les funcions administratives proporcionades pel sistema de la base de dades. </para>
+<para
+>Si després d'editar el text al diàleg, voleu que el &kmymoney; creï la base de dades, haureu de completar els altres camps al diàleg, com es detalla a <link linkend="details.database.selectdatabase"
+>Crear una base de dades</link
+>, i feu clic a <guibutton
+>Crea les taules</guibutton
+>. Recordeu que, excepte en el cas de l'SQLite, haureu d'incloure una instrucció <literal
+>CREATE DATABASE</literal
+> adequada com a primera ordre, o haver executat prèviament l'ordre esmentada, de manera externa al &kmymoney;. </para>
+</sect3>
+
+<sect3>
+<title
+>Avís</title>
+<para
+>Cal tenir molta cura en editar les definicions de qualsevol de les taules o vistes bàsiques (aquelles amb noms que comencen amb «<literal
+>kmm</literal
+>»). Alguns canvis com ara augmentar la longitud d'un camp de nombre sencer, poden tenir poc impacte, però no haureu d'eliminar ni canviar la seqüència de cap camp, o el &kmymoney; podria negar-se a funcionar, o podríeu corrompre les dades. </para>
+<para
+>Si bé afegir o eliminar índexs pot millorar el rendiment, també haureu de tenir en compte que pot succeir tot el contrari. Alguns coneixements sobre el funcionament intern de &kmymoney; podrien ajudar a obtenir el millor rendiment en aquestes circumstàncies. </para>
+</sect3>
+
+</sect2>
+
+<sect2>
+<title
+>Encriptatge</title>
+
+<para
+>En l'actualitat no s'admet l'encriptatge de les dades a la base de dades. </para>
+</sect2>
+</sect1>
+</chapter>

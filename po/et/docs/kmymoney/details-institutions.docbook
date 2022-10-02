@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.institutions">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Rahaasutused</title>
+
+<para
+>Rahaasutuste kaart näitab kõigi kontode kokkuvõtet rühmitatuna rahaasutuste järgi. Varakontod on tähistatud musta, kohustiskontod punase noolega. </para>
+
+<para
+>Rahaasutuste kaardil on mitu veergu, mis näitavad muu hulgas konto tüüpi ja kõigi kontode väärtust. Samuti näeb seal iga rahaasutuse kõigi kontode koguväärtust. </para>
+
+<para>
+<screenshot>
+    	<screeninfo
+>rahaasutuse vaade</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_view.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>rahaasutuse vaade</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="details.institutions.institution">
+<title
+>Rahaasutuse valikud</title>
+
+<para
+>Paremklõpsuga rahaasutuse nimel avaneb rahaasutuse valikute alammenüü. Kui valida <guimenuitem
+>Uus rahaasutus...</guimenuitem
+>, ilmub uue rahaasutuse dialoog, kus saab sisestada kogu vajaliku teabe uue rahaasutuse loomiseks. Kui valida <guimenuitem
+>Muuda rahaasutust...</guimenuitem
+>, ilmub aken, kus saab muuta mitmesugust rahaasutuse teavet, näiteks nime ja aadressi. Kui valida <guimenuitem
+>Kustuta rahaasutus</guimenuitem
+>, eemaldatakse kogu rahaasutus ja sellega seotud kontod. Pane tähele, et rahaasutust saab kustutada ainult siis, kui kustutada kõik selle kontod, ja kõiki seotud kontosid saab kustutada ainult siis, kui pole tehinguid ega ajaplaane, mis neile viitaksid. Kui valida <guimenuitem
+>Uus konto...</guimenuitem
+>, saab sammhaaval luua uue konto, mida tutvustatakse üksikasjalikumalt järgmises osas. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Rahaasutuse valikute alammenüü</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_options.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Rahaasutuse valikute alammenüü</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.institutions.new">
+<title
+>Uus rahaasutus</title>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="newinst.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>Uus rahaasutus</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<para>
+  <emphasis
+>MÄRKUS: enne seda, kui saab luua rahaasutuse, peab olema avatud fail. Kui sul pole faili, tuleb luua <link linkend="firsttime.3"
+>uus fail</link
+>. </emphasis>
+</para>
+
+<para
+>Uue rahaasutuse dialoogis on nõutav ainult nimi, kõik ülejäänud väljad võib ka tühjaks jätta. Nagi isikliku teabe dialoogi puhul, ei kasuta &kappname; praegu neid andmeid, kuid tulevastes väljalasetes võib neid teatavate omaduste jaoks vaja minna. Näiteks internetipanganduseks on kindlasti vajalikud <quote
+>Routing Number</quote
+> ja <acronym
+><ulink url="http://en.wikipedia.org/wiki/ISO_9362"
+>BIC (panga tunnuskood)</ulink
+></acronym
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.institutions.account">
+<title
+>Konto valikud</title>
+
+<para
+>Paremklõps konto nimel avab konto valikute alammenüü. Kui valida <guimenuitem
+>Uus konto...</guimenuitem
+>, saab sammhaaval luua uue konto. Kui valida <guimenuitem
+>Ava pearaamat</guimenuitem
+>, liigutakse sõltuvalt konto tüübist otse pearaamatu või investeeringute vaatesse. Konto avab ka lihtsalt topeltklõps konto nimel. Kui valida <guimenuitem
+>Muuda kontot</guimenuitem
+>, ilmub aken, kus saab muuta konto nime, alguskuupäeva, seotud pangandusasutust ja ülemkontot. Konto kustutamine on võimalik ainult siis, kui sellega pole seotud ühtegi tehingut. Kui valida <guimenuitem
+>Kooskõlasta...</guimenuitem
+>, ilmub kooskõlastamisnõustaja, milles saab sammhaaval võrrelda oma pangakonto andmeid elektrooniliste kirjetega. Täpsemalt kõneldakse sellest ja muudest valikutest käsiraamatu vastavates osades. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>konto valikute alammenüü</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="account_options.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>konto valikute alammenüü</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect1>
+</chapter>

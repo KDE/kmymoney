@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.institutions">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Organizaciones</title>
+
+<para
+>La pantalla de organizaciones le proporciona un resumen de todas las cuentas agrupadas por sus respectivas organizaciones. Las cuentas de activo se simbolizan con una flecha negra, y las de pasivo con una roja. </para>
+
+<para
+>La pantalla de organizaciones muestra varias columnas, incluyendo el tipo de cuenta y el valor de cada una. También muestra el valor total de todas las cuentas en cada organización. </para>
+
+<para>
+<screenshot>
+    	<screeninfo
+>vista de organización</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_view.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>vista de organización</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="details.institutions.institution">
+<title
+>Opciones de organización</title>
+
+<para
+>Hacer un clic derecho en el nombre de una organización hace aparecer un submenú de Opciones de organización, que le proporciona diferentes alternativas. Seleccionar <guimenuitem
+>Nueva organización...</guimenuitem
+> abre el diálogo de Nueva Organización, donde puede introducir toda la información necesaria para crear una nueva organización. Seleccionar <guimenuitem
+>Editar organización...</guimenuitem
+> hace aparecer una ventana editable con los detalles de la organización, como el nombre y la dirección postal. Seleccionar <guimenuitem
+>Eliminar organización</guimenuitem
+> elimina la organización y todas sus cuentas asociadas. Tenga en cuenta que solo podrá eliminar una organización si puede eliminar todas sus cuentas, y solo podrá borrar cada cuenta asociada si ningún asiento ni programación se refiere a ella. Seleccionar <guimenuitem
+>Nueva cuenta...</guimenuitem
+> le guía a través del proceso de crear una nueva cuenta, que se describe con más detalle en la siguiente sección. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Submenú de opciones de organización</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_options.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Submenú de opciones de organización</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.institutions.new">
+<title
+>Nueva organización</title>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="newinst.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>Nueva organización</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<para>
+  <emphasis
+>NOTA: Debe tener abierto un archivo antes de poder crear una nueva organización. Si no tiene ningún archivo existente, deberá crear <link linkend="firsttime.3"
+>uno nuevo</link
+>. </emphasis>
+</para>
+
+<para
+>Solo se requiere un nombre en el diálogo de Nueva organización; todos los otros campos son opcionales. Como con el diálogo de información personal, estos datos ya no se usan en &kappname;, pero serán requeridos por futuras ediciones para determinadas funcionalidades. En particular, el Número de Ruta y el <acronym
+><ulink url="http://en.wikipedia.org/wiki/ISO_9362"
+>BIC (Código de Identificación Bancaria)</ulink
+></acronym
+> se necesitarán para la banca en línea. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.institutions.account">
+<title
+>Opciones de cuenta</title>
+
+<para
+>Hacer clic derecho en el nombre de una cuenta hace aparecer un submenú de Opciones de cuenta. Seleccionar <guimenuitem
+>Nueva cuenta...</guimenuitem
+> le guía a través del proceso de crear una nueva cuenta. Seleccionar <guimenuitem
+>Abrir libro mayor</guimenuitem
+> le lleva directamente a la vista de Libro mayor o a la vista de Inversiones, dependiendo del tipo de cuenta. Simplemente hacer doble clic en el nombre de una cuenta también abrirá la cuenta. Seleccionar <guimenuitem
+>Editar cuenta</guimenuitem
+> hará aparecer una ventana que le permitirá cambiar el nombre de la cuenta, la fecha de inicio, entidad bancaria asociada y cuenta madre. Eliminar una cuenta solo será posible si no hay asientos asociados a ella. Seleccionar <guimenuitem
+>Conciliar...</guimenuitem
+> abrirá el Asistente de conciliación, que le guiará a través del proceso de comparar los asientos de la cuenta de su banco con sus entradas electrónicas. Hay más detalles, además de más información sobre las otras opciones, en las secciones apropiadas de este manual. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>submenú de opciones de cuenta</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="account_options.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>submenú de opciones de cuenta</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect1>
+</chapter>

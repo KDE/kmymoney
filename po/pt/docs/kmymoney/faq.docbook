@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="faq">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Perguntas e Respostas</title>
+
+<para
+>Este capítulo descreve um conjunto de questões que normalmente causam confusão, especialmente nos utilizadores novos do &kappname;. Se achar que o &kappname; faz algo que não compreende (ou que não faz algo que deveria), verifique primeiro esta lista antes de pedir ajuda em alguma das listas de correio. Se o seu problema não for aqui mencionado, veja a secção para <link linkend="firsttime.contact"
+>obter ajuda</link
+>. </para>
+
+<qandaset>
+
+<qandadiv
+><title
+>Questões de Instalação e Arranque</title>
+
+<qandaentry>
+ <question>
+   <para
+>O &kappname; estoira quando o tento lançar.</para>
+ </question>
+ <answer>
+   <para
+>Existem muitas razões pelas quais o &kappname; possa estoirar ou dar um erro, em vez de o iniciar normalmente. É necessário determinar primeiro se o problema é com a aplicação ou com os seus dados. Por isso, a primeira coisa será <link linkend="firsttime.launch"
+>invocar o &kappname;</link
+> sem abrir o seu ficheiro de dados. Se a aplicação for iniciada, mas se estoirar quando tentar carregar o seu ficheiro de dados, tente carregar uma versão mais antiga do mesmo ficheiro. (Você criou uma cópia de segurança, não criou?)</para>
+   <para
+>Se o &kappname; estoirar no arranque, sem tentar carregar um ficheiro de dados, poderá existir algum problema com a sua instalação. Veja a secção sobre a <link linkend="installation"
+>instalação do &kappname;</link
+> ou a secção para <link linkend="firsttime.contact"
+>obter ajuda</link
+>.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Quando inicio o KMyMoney, obtenho um erro de "URL Inválido". O que se passa?</para>
+ </question>
+ <answer>
+   <para
+>Normalmente a razão para isso é não ter executado o 'make install' como 'root'. Este passo copia de facto todos os ícones e os outros ficheiros necessários pelo KMyMoney para correr adequadamente. Se o executou, de facto, certifique-se que passou o prefixo correcto ao 'cmake' no início da sua compilação. Veja a secção de <link linkend="installation.fromsource"
+>compilação do código</link
+> para obter mais informações.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Quando compilo a partir do código, todos os ícones aparecem como ausentes. O que fiz de errado?</para>
+ </question>
+ <answer>
+   <para
+>Normalmente a razão para isso é não ter executado o 'make install' como 'root'. Veja a pergunta/resposta anterior para obter mais informações.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Que opções são úteis para passar ao 'cmake'?</para>
+ </question>
+ <answer>
+   <para
+>A opção mais importante é o -DCMAKE_INSTALL_PREFIX. Esta indica onde deseja instalar o KMyMoney; deverá ser o mesmo local onde está instalado o &kde;. Em muitas distribuições, o 'cmake' irá procurar ele mesmo esta localização mas, caso não o consiga, o utilizador poderá usar a ferramenta da linha de comandos <command
+>kde4-config --prefix</command
+> para consultar qual deveria ser o prefixo. Nas distribuições baseadas no &RedHat;, incluindo o Mandriva e o Fedora, o &kde; está instalado em <filename role="directory"
+>/usr</filename
+>.</para>
+   <para
+>Outra opção útil é o -DCMAKE_BUILD_TYPE. Normalmente, não está definido, mas se for configurado como 'Debug', poderá compilar o KMyMoney com os símbolos de depuração, o que ajuda a descobrir os problemas com estoiros. Esta opção é essencial se for um programador e quiser contribuir.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>A versão no Git tem problemas! O que faço agora?</para>
+ </question>
+ <answer>
+   <para
+>Normalmente a razão para isto é um dos programadores ter feito uma alteração no código, necessitando esta de uma reconfiguração do zero. Veja o fim da secção de <link linkend="installation.fromsource"
+>compilação do código</link
+> para obter mais instruções. Se seguir estes passos com cuidado, e ainda tiver um problema na compilação, envie por favor uma mensagem à Lista de Programadores do &kappname; em <email
+>&devlist;</email
+> e inclua o resultado do erro no comando 'cmake' ou 'make'. </para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Compilei a partir do código-fonte, mas o número de versão na janela 'Ajuda->Acerca' não é mais alterado para mostrar a última versão do Git, como fazia anteriormente?</para>
+ </question>
+ <answer>
+   <para
+>Provavelmente executou o <command
+>$ make</command
+> sem executar o <command
+>$ cmake</command
+> ou o <command
+>$ ccmake</command
+> antes. Se actualizou o código, usando o <command
+>$ git pull</command
+>, um desses dois comandos é necessário para colocar o número de versão da aplicação/modificação do Git no local correcto. </para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Será que o &kappname; irá correr no meu ambiente X/&ubuntu;? Será que o &kappname; funciona sem um ambiente de trabalho KDE completo?</para>
+ </question>
+ <answer>
+   <para
+>Sim, o &kappname; irá funcionar sem um ambiente de trabalho &kde; completo, mas terá à mesma de instalar as bibliotecas básicas do &kde; primeiro. A forma mais simples de o fazer é usar o <link linkend="installation.distribution"
+>sistema de gestão de pacotes da sua distribuição</link
+>, o qual irá lidar automaticamente com esses requisitos. Se vai instalar a partir do código-fonte, irá provavelmente necessitar das versões de desenvolvimento destas bibliotecas; veja mais detalhes nestas <link linkend="installation.fromsource"
+>instruções</link
+>.</para>
+   <para
+>Existe pelo menos um relatório de uma mensagem de erro sobre um processo do &kappname; que não veio de nenhum código-fonte do &kappname; ou do &kde;. Não é necessariamente mau, mas poderá ser bastante difícil determinar a causa concreta.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Questões de Configuração</title>
+
+<qandaentry>
+ <question>
+   <para
+>Posso alterar o início do ano fiscal, para corresponder ao meu ano de impostos ou contabilístico?</para>
+ </question>
+ <answer>
+   <para
+>Sim, poderá alterar facilmente o início do ano na secção <link linkend="details.settings.general.global"
+>Opções Globais</link
+> da janela para <guilabel
+>Configurar o &kappname;</guilabel
+>.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Questões sobre Contas e Transacções</title>
+
+<qandaentry>
+ <question
+><para
+>Porque é que não consigo editar uma transacção? </para
+></question>
+ <answer>
+   <para
+>Não poderá ver nenhumas alterações numa transacção com uma data anterior à data de abertura da conta em que se encontra. A razão mais comum para isto é a importação de todos os dados de uma conta. Se o ficheiro de importação não tiver uma data de abertura da conta, o &kappname; irá usar a data actual. A forma de corrigir isto é editar a conta e <link linkend="details.accounts.edit"
+>mudar a data de abertura</link
+> para uma data anterior a qualquer transacção dessa conta.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Porque é que uma transacção aparece a vermelho, e não consigo retirar essa cor?</para>
+ </question>
+ <answer>
+   <para
+>Uma transacção aparece a vermelho se qualquer parte do montante não tiver sido atribuída a uma categoria. Isto acontece normalmente se importar um ficheiro QIF ou OFX ou se obter um extracto 'online'. Tudo o que tem a fazer é modificar a transacção, de modo que o montante completo da transacção seja associado a categorias em particular.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Porque é que não consigo adicionar um saldo de abertura a uma conta?</para>
+ </question>
+ <answer>
+   <para
+>Se indicou um saldo inicial quando criar uma conta, aparecerá como a primeira transacção da mesma conta. Se não o fizer, então não existirá essa transacção e, dado que é um tipo especial de transacção, não a poderá adicionar simplesmente como aconteceria num depósito ou levantamento. Contudo, podê-lo-á adicionar posteriormente se <link linkend="details.accounts.edit"
+>editar a conta</link
+>.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Quando criei uma conta, usei o tipo errado, e agora não me deixa alterá-la. Posso editar a conta, mas a lista do tipo está desactivada ou não apresenta todos os tipos possíveis.</para>
+ </question>
+ <answer>
+   <para
+>Poderá mudar facilmente um tipo de conta entre conta à ordem, poupança e dinheiro. Contudo, devido à forma como o &kappname; guarda a informação da conta, não permite depois algumas mudanças do tipo de conta. A alternativa é criar uma nova conta com o tipo correcto, mover todas as transacções da conta antiga para a nova e depois apagar a conta antiga.</para>
+   <!-- this should have links to the sections on new acct, move transactions,
+        delete account. -->
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Tenho um financiamento com 0% de juros, mas tenho um erro no assistente, no qual não me deixa usar este valor.</para>
+ </question>
+ <answer>
+   <para
+>Os cálculos internos do novo assistente de financiamentos não permite uma taxa de juros igual a 0%. A melhor forma de lidar com esta situação é <link linkend="details.accounts.create.account"
+>criar uma conta simples de passivo</link
+> com um saldo inicial igual ao valor do financiamento, criando depois um <link linkend="details.schedules.new"
+>escalonamento</link
+> dos pagamentos necessários.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Porque é que não vejo todas as transacções no registo?</para>
+ </question>
+ <answer>
+   <para
+>Existem diversas opções que controlam as transacções que aparecem no livro de registos de uma conta. Em primeiro lugar, veja a <link linkend="details.ledgers.view.filter"
+>área de filtragem do livro de registos</link
+>. Se estiver escrita alguma coisa no campo de pesquisa, só aparecerão as transacções que contêm esse texto. Se a lista do estado tiver sido mudada de <quote
+>Qualquer estado</quote
+>, então só aparecerão as transacções desse tipo. Para além disso, existem duas opções importantes nas  <link linkend="details.settings.general.filter"
+>opções de filtragem</link
+> na janela de Configuração do &kappname;. Se o campo <quote
+>Não mostrar as transacções anteriores a</quote
+>, só as transacções que ocorram nessa data ou depois irão aparecer no livro de registo. Se a opção <quote
+>Não mostrar as transacções consolidadas</quote
+> estiver assinalada, então não aparecerá nenhuma transacção consolidada.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Escrevi mal o nome de um beneficiário e quero alterá-lo em todas as transacões. Existe alguma pesquisa/substituição global?</para>
+ </question>
+ <answer>
+   <para
+>Não existe uma funcionalidade de pesquisa e substituição global no KMyMoney. Contudo, é fácil mudar o nome de um beneficiário: seleccione a área de Beneficiários e procure o item com o nome que deseja alterar. Carregue com o &RMB;  no beneficiário e seleccione a opção <menuchoice
+><guimenuitem
+>Mudar o nome do beneficiário</guimenuitem
+></menuchoice
+>. Indique o novo nome. Dado que as transacções só usam uma referência para o registo dos beneficiários, todas as transacções irão mostrar o novo nome.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Porque é que não consigo apagar uma dada conta?</para>
+ </question>
+ <answer>
+   <para
+>Para apagar uma conta, o &kappname; não poderá ter quaisquer referências para ela. Isto significa que terá de apagar todas as transacções ou movê-las para outra conta. Se mesmo assim não conseguir apagar uma conta, poderão existir transacções agendadas que façam referência a essa conta, as quais poderão não estar visíveis no livro de registos. Terá de apagar todas as transacções futuras e a calendarização propriamente dita, ou então mudá-las para uma conta diferente.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Questões sobre Importações e Exportações</title>
+
+<qandaentry>
+ <question>
+   <para
+>Onde é que posso encontrar mais informações sobre os parâmetros OFX?</para>
+ </question>
+ <answer>
+   <para
+>Existem algumas fontes externas que lhe poderão dar mais informações: <ulink url="http://ofxblog.wordpress.com/"
+>ofxblog</ulink
+> e <ulink url="http://www.ofxhome.com/"
+>ofxhome</ulink
+>.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Questões diversas</title>
+
+<qandaentry>
+ <question>
+   <para
+>Porque é que não existe uma tradução para a minha língua?</para>
+ </question>
+ <answer>
+   <para
+>Em primeiro lugar, o &kappname; usa a configuração da língua do &kde;, por isso, certifique-se que as suas opções de região e língua estão correctos. Caso estejam, a razão mais provável é que ninguém ainda se tenha oferecido para o traduzir. A tradução de aplicações do &kde;/&Qt; é bastante simples e não necessita de conhecimentos de programação. Se quiser traduzir o &kappname; para a sua língua, envie por favor uma mensagem para a <ulink url="http://l10n.kde.org/teams-list.php"
+>lista de correio das equipas</ulink
+>. Caso não consiga encontrar a sua língua na lista ou se não conseguir contactar os membros da equipa, por favor envie directamente um e-mail para a <ulink url="mailto:kde-i18n-doc@kde.org"
+>lista de correio das traduções do KDE</ulink
+> (<ulink url="https://mail.kde.org/mailman/listinfo/kde-i18n-doc"
+>subscrição obrigatória</ulink
+>), para que lhe sejam dados os detalhes para gerar facilmente uma tradução para a aplicação. </para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Porque é que o número da versão saltou de 1.0.5 para 4.5, e o que é que aconteceu ao KMyMoney2?</para>
+ </question>
+ <answer>
+   <para
+>O uso do KMyMoney2 foi um legado histórico, quando o projecto foi migrado do &kde; 1 para o &kde; 2. Para evitar mudar de novo o nome, sempre que haja uma nova versão do &kde;, decidimos ficar com o nome fixo &kappname;.</para>
+   <para
+>A primeira versão do &kappname; que foi considerada estável o suficiente foi chamada de 1.0, ainda que só se executasse no &kde; 3. Dado que o projecto agora está mais alinhado com o &kde;, optámos por usar o mesmo número de versão.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Como é que posso comunicar um erro ou uma nova funcionalidade?</para>
+ </question>
+ <answer>
+   <para
+>Os programadores agradecem as suas reacções. Veja a secção para <link linkend="firsttime.contact"
+>Contactar os Programadores / Comunicar Erros</link
+>.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Porque é que não existe uma forma simples de imprimir algumas transacções agendadas ou parte do livro de registo ou ainda ...</para>
+ </question>
+ <answer>
+   <para
+>Veja a secção de <link linkend="details.reports.avail"
+>Relatórios</link
+>. Muitos dos relatórios já oferecem uma forma simples de imprimir coisas que não consegue imprimir directamente a partir do livro de registos ou de outros ecrãs.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+</qandaset>
+
+</chapter>

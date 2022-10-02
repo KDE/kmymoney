@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.reports">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Rapporter</title>
+
+<sect1 id="details.reports.avail">
+<title
+>Tillgängliga rapporter</title>
+
+<para>
+<screenshot>
+	<screeninfo
+>Rapportvy</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reports_view-all.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Rapportvy</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Rapportvyn listar alla tillgängliga rapporter, grupperade under följande rubriker: </para>
+
+<sect2>
+<title
+>Inkomster och utgifter</title>
+<para
+>Rapporterna i den här delen visar inkomster eller utgifter, antingen för innevarande månad eller för varje månad under innevarande år. Naturligtvis kan hela rapportens längd, och längden som återges av varje kolumn ställas in som du vill ha dem. Grafer och cirkeldiagram kan också skapas. </para>
+</sect2>
+
+<sect2>
+<title
+>Nettotillgångar</title>
+<para
+>Här är rapporter som beskriver dina nettotillgångar, antingen för närvarande, varje månad under innevarande år, eller varje år i historiken. Dessutom finns en sjudagars prognos av kassaflöde och en graf av nettotillgångar. Det finns också rapporter för att få behållningen i alla konton vid ett givet tillfälle. </para>
+</sect2>
+
+<sect2>
+<title
+>Transaktioner</title>
+<para
+>Den här delen omfattar rapporter som listar enskilda transaktioner. Det är det bästa sättet att skriva ut kontoregistreringar för en specifik tidsperiod. Utskrivna transaktioner kan grupperas ihop som du vill genom att ange lämplig rapport, såsom: <itemizedlist>
+  <listitem
+><para
+>Per konto</para
+></listitem>
+  <listitem
+><para
+>Per kategori</para
+></listitem>
+  <listitem
+><para
+>Per månad eller vecka</para
+></listitem>
+  <listitem
+><para
+>Per betalare</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Kassaflöde</title>
+<para
+>Kassaflödesrapporten liknar en transaktionsrapport, men den visar alla kassaflödesrelaterade transaktioner. </para>
+</sect2>
+
+<sect2>
+<title
+>Investeringar</title>
+<para
+>Dessa rapporter hjälper till att hålla reda på investeringar. De omfattar bara investeringskonton. Det finns en mängd olika presentationsfilter och stilar, som visas i den här ofullständiga listan. </para>
+<itemizedlist>
+  <listitem
+><para
+>Investeringstransaktioner. Liknar en transaktionsrapport, och omfattar aktiekurser och kvantiteter.</para
+></listitem>
+  <listitem
+><para
+>Investeringsinnehav per konto. Visar aktuella aktier, kurser och värde för varje konto.</para
+></listitem>
+  <listitem
+><para
+>Investeringsinnehav per typ. Samma som föregående rapport, men organiserar konton enligt typ (aktie, värdepappersfond, etc.)</para
+></listitem>
+  <listitem
+><para
+>Investeringsavkastning per konto. Visar avkastningen på årsbasis över en viss tidsperiod. En kassaflödesanalys utförs av alla insättningar till och uttag från kontot. Som resultat, ger detta en mycket noggrann bild av hur bra investeringarna klarar sig.</para
+></listitem>
+  <listitem
+><para
+>Investeringsavkastning per typ. Samma som föregående rapport, men organiserar konton enligt typ (aktie, värdepappersfond, etc.)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Det finns också diagram för investeringskurs och investeringsvärde. </para>
+</sect2>
+
+<sect2>
+<title
+>Skatter</title>
+<para
+>Skatterapporterna är precis som transaktionsrapporten, med tillägget att bara skatterelaterade kategorier ingår. Det låter dig markera vissa kategorier som skatterelaterade, och därefter få en stor rapport i slutet på året för att se alla på samma ställe. De kan antingen listas enligt kategori eller betalare, och enligt det senaste räkenskapsåret. </para>
+</sect2>
+
+<sect2>
+<title
+>Budget</title>
+<para
+>Budgetrapporterna liknar rapporter av nettotillgångar, men rapporterna kan visa budgeten för ett givet år, eller till och med jämföra den med verkliga inkomster och utgifter under samma period. </para>
+</sect2>
+
+<sect2>
+<title
+>Prognos</title>
+<para
+>Prognosrapporterna är precis som nettotillgångar, men de använder informationen för att visa prognoser. Du kan visa informationen på diverse nivåer, och under den tidsrymd du väljer. </para>
+</sect2>
+
+<sect2>
+<title
+>Information</title>
+<para
+>Dessa rapporter visar information som inte är transaktioner om scheman, konton och lån </para>
+</sect2>
+
+<sect2>
+<title
+>Diagram</title>
+<para
+>Om <link linkend="details.reports.charts"
+>Diagram</link
+> är aktiverat, listar den här delen alla rapporter som är markerade att normalt visa ett grafiskt diagram. De listas dessutom i en av de andra delarna, men är också samlade här för enkel referens. </para>
+</sect2>
+
+<sect2>
+<title
+>Favoritrapporter</title>
+<para
+>Den här delen listar alla rapporter du har markerat som favoriter i inställningsdialogrutan för rapporter. De listas dessutom i en av de andra delarna, men är också samlade här för enkel referens. Favoritrapporter ingår också på den ekonomiska sammanfattningssidan, för ännu enklare referens. </para>
+</sect2>
+
+<sect2>
+<title
+>Anpassa rapporter</title>
+<para
+>För att komma åt inställningsdialogrutan för rapporter, ta fram den rapport du vill ställa in, och klicka på knappen <guibutton
+>Anpassa</guibutton
+> längst upp i rapporten. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.reports.working">
+<title
+>Arbeta med rapporter</title>
+
+<para
+>Det finns ett antal åtgärder du kan utföra med varje rapport. Du kan komma åt dem genom att högerklicka på rapportnamnet i listan med rapporter. Som ett alternativ, när väl en rapport har skapats, finns det knappar längst upp i vyn för att utföra var och en av dessa: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Diagram: Finns bara med om rapporten klarar av att visa ett diagram. Genom att klicka på alternativet byter man mellan rapporten och diagrammet.</para
+></listitem>
+  <listitem
+><para
+>Anpassa: Ändra den här rapportens egenskaper. Du kan anpassa rapporten enligt dina önskemål och spara den för framtida användning.</para
+></listitem>
+  <listitem
+><para
+>Ny: Skapa en ny anpassad rapport, baserad på den valda rapporten.</para
+></listitem>
+  <listitem
+><para
+>Kopiera: Rapportens utdata kan kopieras till klippbordet för att klistras in i ett annat program, som ett kalkylprogram, för ytterligare analys.</para
+></listitem>
+  <listitem
+><para
+>Exportera: Rapporter kan sparas med &HTML;- eller CSV-format.</para
+></listitem>
+  <listitem
+><para
+>Ta bort: Anpassade rapporter kan tas bort. Standardrapporterna som levereras med &kmymoney; kan inte tas bort.</para
+></listitem>
+  <listitem
+><para
+>Stäng: Stäng aktuell rapport.</para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="details.reports.config">
+<title
+>Anpassa rapporter</title>
+
+<sect2>
+<title
+>Arbeta med egna rapporter</title>
+<para
+>Du kan anpassa standardrapporterna eller skapa dina egna från dem genom att välja 'Ny' och därefter anpassa den nya rapporten. När du väljer 'Anpassa' visas rapportfliken. Från början har den samma namn som den gamla rapporten med <quote
+>(Anpassad)</quote
+> tillagt i slutet. Du kan ändra namnet till vad du vill. Du kan till och med namnge dina anpassade rapporter till samma namn som en standardrapport, eller samma som en annan anpassad rapport. Du kan dessutom alltid använda kommentarfältet för att ytterligare skilja rapporter åt. </para>
+
+<para
+>Dialogrutan för rapportinställning har ett antal flikar längst upp. Varje flik visar alternativ för att ställa in olika aspekter av rapporten. </para>
+
+</sect2>
+
+<sect2
+><title
+>Rapportflik</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="report_configuration-reporttab.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Rapportinställning - Rapport</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Under den här fliken, ställer du in den här rapportens grundegenskaper. <itemizedlist>
+  <listitem
+><para
+>Rapportnamn: Välj ett namn på rapporten.</para
+></listitem>
+  <listitem
+><para
+>Kommentar: Skriv in en kommentar som hjälper dig att komma ihåg den här rapportens detaljinformation.</para
+></listitem>
+  <listitem
+><para
+>Konvertera värden till basvaluta: Välj alternativet för att konvertera alla värden i rapporten till basvalutan. Lämna det omarkerat om du vill se värden i deras ursprungliga valuta. Om valutor inte konverteras, visas inte delsummor.</para
+></listitem>
+  <listitem
+><para
+>Markera som favoritrapport: Markera för att göra att rapporten visas på hemsidan och i gruppen <guilabel
+>Favoritrapporter</guilabel
+>.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2 id="details.reports.config.rowscolumns">
+<title
+>Rad- och kolumnfliken</title>
+<para
+>Under den här fliken, ställer du in hur du vill att rader och kolumner ska väljas och organiseras. Fliken visar olika inställningsalternativ beroende på vilken rapportstil du har valt. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="report_configuration-rowscolumns.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Rapportinställning - Rader och kolumner</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>För inkomst- och utgiftsrapporter, samt rapporter av nettotillgångar: <itemizedlist>
+  <listitem
+><para
+>Kolumner: Välj hur lång tidsperiod som varje kolumn ska omfatta</para
+></listitem>
+  <listitem
+><para
+>Rader: Välj vilken sorts konton som ska visas som rader i den här rapporten</para
+></listitem>
+  <listitem
+><para
+>Detaljinformation: Välj detaljnivån som krävs i den här rapporten.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Följande detaljnivåer är tillgängliga: <itemizedlist>
+  <listitem
+><para
+>Alla: Visa alla kategorier eller konton.</para
+></listitem>
+  <listitem
+><para
+>Toppnivå: Visa bara kategorierna eller kontona på högsta nivå, och inkludera summorna av underliggande kategorier eller konton i dessa värden.</para
+></listitem>
+  <listitem
+><para
+>Grupper: Visa bara totalvärden för inkomster, utgifter, tillgångar eller skulder.</para
+></listitem>
+  <listitem
+><para
+>Totalt: Visa bara raden med totalsummor.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>För transaktionsrapporter: <itemizedlist>
+  <listitem
+><para
+>Organisera enligt: Välj hur transaktionerna grupperas i den här rapporten.</para
+></listitem>
+  <listitem
+><para
+>Visa kolumner: Välj vilka kolumner som ska visas i rapporten. Datum och transaktionsbelopp visas alltid.</para
+></listitem>
+  <listitem
+><para
+>Inkludera bara skattekategorier: Visa bara kategorier som har markerats som skatterelaterade.</para
+></listitem>
+  <listitem
+><para
+>Inkludera bara investeringskonton: Visa bara transaktioner från investeringskonton.</para
+></listitem>
+  <listitem
+><para
+>Inkludera bara lånekonton: Visa bara transaktioner från lånekonton.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Diagramflik</title>
+
+<para
+>Fliken låter dig anpassa hur rapporten ska se ut när den visas som ett diagram. Se avsnittet <link linkend="details.reports.charts"
+>Grafer och diagram</link
+> för ytterligare förklaring av diagramfunktionerna. <itemizedlist>
+  <listitem
+><para
+>Diagramtyp: Önskat visuellt format för diagrammet.</para
+></listitem>
+  <listitem
+><para
+>Visa rutnät: Om horisontella och vertikala rutnät ska ritas på diagrammet.</para
+></listitem>
+  <listitem
+><para
+>Rita värden på diagram: Om datavärden ska ritas på själva diagrammet för valda datapunkter.</para
+></listitem>
+  <listitem
+><para
+>Visa normalt diagram: Om rapporten först ska visas som ett diagram när den öppnas.</para
+></listitem>
+  <listitem
+><para
+>Linjebredd: Bredden hos datalinjer på diagrammet.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Övriga flikar</title>
+<para
+>De övriga flikarna i dialogrutan är samma som i gränssnittet för sökning av transaktioner. Se <link linkend="details.search"
+>dokumentationen</link
+> av det gränssnittet för detaljinformation om de övriga flikarna.</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.reports.charts">
+<title
+>Grafer och diagram</title>
+
+<sect2>
+<title
+>Visa som ett diagram</title>
+
+<para
+>Varje rapport kan antingen visas i textform eller grafisk (diagram) form. Samma inställningsparametrar av rapporten används i båda fallen. Du kan enkelt gå fram och tillbaka mellan textformen och den grafiska formen genom att klicka på knapparna <guibutton
+>Diagram</guibutton
+> eller <guibutton
+>Rapport</guibutton
+> längst upp i rapportvyn. </para>
+
+<para
+>Försiktighet bör iakttas för att begränsa mängden data du visar i ett diagram. Om du inte är försiktig, och använder samma inställning för både text- och grafisk form, betyder det att det är möjligt att anpassa ett diagram så att det är visuellt rörigt, mindre attraktivt och inte informativt. &kmymoney; tvingar dig inte att hålla diagram läsbara och användbara. </para>
+
+</sect2>
+
+<sect2>
+<title
+>Tillgängliga diagramtyper</title>
+
+<sect3>
+<title
+>Linjediagram</title>
+
+<para
+>Ett linjediagram är den enklaste formen av diagram. Det finns en linje för varje serie (oftast är en serie ett enstaka konto eller kategori, se nedan för mer information om det). Tidsperioden visas utsträckt längs den nedre axeln, och valutavärden visas längs vänster sida. </para>
+
+<para
+>Detaljnivån för varje linje styrs av fliken <link linkend="details.reports.config.rowscolumns"
+>Rader och kolumner</link
+> i diagraminställningen. Om du väljer detaljnivån <quote
+>Toppnivå</quote
+>, finns det en linje för var och ett av kontona eller kategorierna på toppnivå, som visar totalsumman av alla underliggande konton eller kategorier. Om du väljer <quote
+>Grupper</quote
+> visas istället en linje för vardera inkomster, utgifter, tillgångar eller skulder, beroende på övriga inställningar. </para>
+</sect3>
+
+<sect3>
+<title
+>Stapeldiagram</title>
+
+<para
+>Stapeldiagrammet fungerar på exakt samma sätt som linjediagrammet, utom att det finns en stapel för varje serie i varje tidsintervall. </para>
+</sect3>
+
+<sect3>
+<title
+>Cirkeldiagram</title>
+
+<para
+>Cirkeldiagrammet är det enklaste tillgängliga diagrammet. Det visar bara en tidsperiod, i motsats till att visa värden över tiden. Diagrammet visar bara totalkolumnen i vilken rapport som än är vald. Om rapporten är inställd att INTE konvertera värden till basvalutan, finns det ingen totalkolumn, och därför är rapporten inte användbar. </para>
+</sect3>
+
+<sect3>
+<title
+>Ringdiagram</title>
+
+<para
+>Ringdiagrammet är precis som ett cirkeldiagram, förutom att det finns en <quote
+>ring</quote
+> för varje tidsintervall i rapporten. </para>
+</sect3>
+
+</sect2>
+
+</sect1>
+</chapter>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.tags">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Cristian.Onet; &Cristian.Onet.mail;</author>
+    <author
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+  </authorgroup>
+  <date
+>6 de febrer de 2020</date>
+  <releaseinfo
+>5.0.8</releaseinfo>
+</chapterinfo>
+
+<title
+>Etiquetes</title>
+
+<para
+>La vista Etiquetes proporciona informació sobre totes les etiquetes que ha afegit l'usuari. La pantalla Etiquetes es divideix en dues àrees principals: una llista d'etiquetes i una àrea de detalls, la qual té dues pestanyes: Operacions i Detalls. La pestanya <guilabel
+>Operacions</guilabel
+> mostra totes les operacions associades amb l'etiqueta. La pestanya <guilabel
+>Detalls</guilabel
+> inclou un color definit per l'usuari, així com Notes, les quals no s'utilitzen en cap altre costat. Recordeu que si canvieu el color, el qual s'utilitza en el símbol que es mostra abans del nom de l'etiqueta en qualsevol operació associada, per a desar-lo haureu de fer clic al botó de verificació que hi ha a la cantonada inferior dreta de l'àrea Detalls. </para>
+
+<sect1 id="details.tags.list">
+<title
+>Llista d'etiquetes</title>
+
+<para
+>Al costat esquerre d'aquesta pantalla es mostra una llista de totes les etiquetes, ordenades alfabèticament. <screenshot
+> <mediaobject
+> <imageobject>
+  <imagedata fileref="tags.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+  </screenshot>
+</para>
+
+<sect2>
+<title
+>Afegir una etiqueta</title>
+<para
+>Hi ha tres maneres diferents de crear una etiqueta nova. La primera, podeu fer clic sobre la icona Etiqueta nova <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="list-add.png"/></imageobject
+></inlinemediaobject
+></guiicon
+>. La segona, feu clic dret sobre qualsevol etiqueta i trieu <guimenuitem
+>Etiqueta nova</guimenuitem
+>. Això crearà una etiqueta anomenada <quote
+>Etiqueta nova</quote
+>. Feu clic dret sobre aquesta etiqueta i seleccioneu <guimenuitem
+>Reanomena l'etiqueta</guimenuitem
+> per a introduir el nom de l'etiqueta nova. Finalment, podeu afegir una etiqueta nova directament a la pàgina del llibre major o dins d'una operació desglossada escrivint el nom de l'etiqueta en el camp de l'etiqueta. El &kmymoney; us demanarà si la voleu afegir i després de seleccionar <quote
+>Sí</quote
+> s'afegirà. </para>
+</sect2>
+
+<sect2>
+<title
+>Reanomenar una etiqueta</title>
+<para
+>Per a canviar el nom d'una etiqueta, feu clic sobre el nom de l'etiqueta per a seleccionar-la i feu clic sobre la icona <guiicon
+>Reanomena l'etiqueta</guiicon
+> (entre les icones <guibutton
+>Afegeix</guibutton
+> i <guibutton
+>Elimina</guibutton
+>) o feu clic dret sobre el nom i després seleccioneu <guimenuitem
+>Reanomena l'etiqueta</guimenuitem
+>. El nom esdevindrà editable. Canviar el nom afectarà el nom en totes les operacions en què apareix. </para>
+</sect2>
+
+<sect2>
+<title
+>Suprimir una etiqueta</title>
+<para
+>Per a eliminar una etiqueta, feu clic a la icona Suprimeix l'etiqueta <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="list-remove.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> o feu clic dret sobre el nom i seleccioneu <guimenuitem
+>Suprimeix l'etiqueta</guimenuitem
+>. Si l'etiqueta té alguna operació, se us presentarà un diàleg que permetrà reassignar-la a una etiqueta diferent. </para>
+
+<note>
+<para
+>Com que les Etiquetes es van introduir en el &kmymoney; a la versió 4.7, cap dels mètodes per a importar dades podrà importar les etiquetes. S'entén que aquesta és una característica important, i és probable que cada mètode d'importació la presenti en una versió vinent. </para>
+</note>
+</sect2>
+</sect1>
+
+<sect1 id="details.tags.info">
+<title
+>Operacions amb etiqueta i detalls de l'etiqueta</title>
+<para
+>Per a veure les operacions o veure i editar la informació associada amb una etiqueta en particular, seleccioneu l'etiqueta des de la llista i seleccioneu la pestanya corresponent al costat dret del diàleg. <screenshot>
+  <screeninfo
+>La pestanya Detalls de l'etiqueta</screeninfo>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="tag_details.png" format="PNG"/>
+  </imageobject>
+  <textobject>
+  <phrase
+>Detalls de l'etiqueta</phrase>
+  </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.tags.info.transactions">
+<title
+>Operacions amb etiqueta</title>
+<para
+>Per a veure una llista de les operacions associades amb l'etiqueta seleccionada, seleccioneu la pestanya <guilabel
+>Operacions</guilabel
+>. Aquesta llista és similar a la llista de les operacions per a un Beneficiari. Podreu fer doble clic sobre una operació i accedireu a la vista del llibre major d'aquesta operació per al compte en què s'ha etiquetat. </para>
+</sect2>
+
+
+<sect2 id="details.tags.info.details">
+<title
+>Detalls de l'etiqueta</title>
+<para
+>Per a veure i editar la informació associada amb una etiqueta en particular, seleccioneu la pestanya <guilabel
+>Detalls</guilabel
+>. </para>
+  <itemizedlist>
+    <listitem>
+      <para
+>Podreu seleccionar el color utilitzat per a ressaltar les operacions amb les quals s'ha associat aquesta etiqueta. Si feu clic sobre la barra de color, obtindreu un diàleg Selector de color. </para>
+    </listitem>
+    <listitem>
+      <para
+>En fer clic a la casella de selecció <guilabel
+>Tancada</guilabel
+> no s'alteraran les operacions ja associades amb l'etiqueta, però s'evitarà assignar l'etiqueta a qualsevol operació addicional. </para>
+    </listitem>
+    <listitem>
+      <para
+>Per a modificar les notes associades amb l'etiqueta, editeu el text al quadre. </para>
+    </listitem>
+  </itemizedlist>
+<para
+>En acabar, no oblideu fer clic al botó <guibutton
+>Actualitza</guibutton
+>, al costat inferior dret de la finestra, encara que se us demanarà si intenteu abandonar el diàleg sense fer-ho. </para>
+</sect2>
+</sect1>
+</chapter>
+

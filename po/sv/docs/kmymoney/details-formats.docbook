@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.formats">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Filformat</title>
+
+<para
+>Om du inte väljer att använda en <link linkend="details.database"
+>relationsdatabas</link
+>, lagrar &kmymoney; all ekonomisk information i en fil som har ändelsen <filename class="extension"
+>.kmy</filename
+>. Dessutom öppnar &kmymoney; den senaste filen som var öppen när det startas, om du inte använder en <link linkend="firsttime.launch"
+>kommandoradsväljare</link
+> som talar om att det inte ska göras. Det är dock viktigt att veta att det finns mer än en typ av fill som &kmymoney; kan använda för att lagra ekonomisk data. </para>
+
+<para
+>Det här kapitlet beskriver formaten som &kmymoney; lagrar data i permanent form på användarens lagringsenhet. I allmänhet lagrar &kmymoney; information i form av ett &XML;-dokument. Beroende på själva formatet, kommer detta &XML;-dokument att skrivas: <itemizedlist>
+  <listitem
+><para
+>som en <link linkend="details.formats.plain"
+>vanlig textfil</link
+> kodad med UTF-8,</para
+></listitem>
+
+  <listitem
+><para
+>som en <link linkend="details.formats.compressed"
+>komprimerad fil</link
+> med användning av komprimering med GZIP,</para
+></listitem>
+
+  <listitem
+><para
+>som en <link linkend="details.formats.encrypted"
+>krypterad fil</link
+> med användning av kryptering med GPG, eller</para
+></listitem>
+
+  <listitem
+><para
+>som en <link linkend="details.formats.anonymous"
+>anonym vanlig textfil</link
+> kodad med UTF-8 men med all personlig data förvanskad.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<sect1 id="details.formats.plain">
+<title
+>Vanlig textfil</title>
+<para
+>Det här är formatet som konsumerar mest utrymme, eftersom ingen komprimering utförs. Det är inte avsett för normal användning, och tillhandahålls i felsökningssyfte och ger möjlighet att ändra filen för hand. Om du slutar ett filnamn med <filename class="extension"
+>.xml</filename
+> kommer filen att lagras med det här formatet. <caution
+> <para
+>Att ändra filen för hand rekommenderas inte för den vanliga användaren, och ska bara göras om den interna funktionen hos &kmymoney; är fullständigt förstådd eller instruktioner från utvecklarna talar om för dig vad du ska göra. Skyll inte på utvecklarna av &kmymoney; om du förstör data. Du har fått en varning. </para>
+</caution>
+</para>
+</sect1>
+
+<sect1 id="details.formats.compressed">
+<title
+>Fil komprimerad med GZIP</title>
+<para
+>Detta är det normala formatet som används av &kmymoney; när du lagrar en fil med filändelsen <filename class="extension"
+>.kmy</filename
+>. </para>
+
+<note>
+  <para
+>Om <link linkend="details.formats.encrypted"
+>kryptering</link
+> har valts, kommer filen att lagras krypterad. </para>
+</note>
+
+<para
+>Om du vill titta på en fil komprimerad med GZIP, byt namn på den till ett filnamn som slutar med <filename class="extension"
+>.gz</filename
+> (t.ex. <filename
+>min_ekonomi.kmy</filename
+> till <filename
+>min_ekonomi.kmy.gz</filename
+>, och använd därefter <command
+>gunzip</command
+> för att avkoda filen och titta på den. Du behöver inte komprimera den innan du laddar den i &kmymoney; nästa gång, eftersom &kmymoney; också kan läsa okomprimerad data. Hur som helst, om du senare sparar den, kommer den att sparas komprimerad igen. Använd filändelsen <link linkend="details.formats.plain"
+><filename class="extension"
+>.xml</filename
+></link
+> för att skriva den med okomprimerat format. </para>
+</sect1>
+
+<sect1 id="details.formats.encrypted">
+<title
+>Fil komprimerad med GPG</title>
+<para
+>Att använda filformatet krypterat av GPG är en mycket säker metod att lagra personlig ekonomidata på en lagringsenhet. När &kmymoney; har blivit instruerad att lagra data krypterat via inställningsdialogrutan, chiffreras data med GPG och nyckeln du tillhandahållit innan det verkligen lagras. När en krypterad fil öppnas, måste du tillhandahålla lösenordsfrasen som är nödvändig för att öppna din nyckelring. Själva den krypterade filen lagras i GPG:s <emphasis
+>&ASCII;-bepansrade</emphasis
+> format. <note
+> <para
+>När kryptering med GPG används, komprimerar också GPG filen, så ingen ytterligare komprimering är nödvändig. </para>
+  </note>
+</para>
+
+<sect2 id="details.formats.encrypted.gpgkeys">
+<title
+>GPG-nycklar</title>
+<para
+>Om du inte redan har gjort det för e-postkryptering, måste du skapa ett nyckelpar för att kunna använda funktionen för kryptering med GPG i &kmymoney;. Dessutom måste <application
+>GPG</application
+> vara installerat på systemet. </para>
+
+<para
+>Information om hur ett nyckelpar skapas, och hur det hanteras, är utanför det här dokumentets omfattning. En kort handledning om ämnet finns på <ulink url="https://www.gnupg.org/documentation/howtos.en.html"
+>https://www.gnupg.org/documentation/howtos.en.html</ulink
+>. </para>
+</sect2>
+
+<sect2 id="details.formats.encrypted.keysettings">
+<title
+>Ställa in nycklarna i &kmymoney;</title>
+<para
+>På krypteringssidan i inställningsdialogrutan finns en kombinationsruta där du kan välja nyckeln som ska användas vid kryptering och avkodning. Dessutom finns ett fält där du kan skriva in nyckel-id för en nyckel som inte finns i listrutan. Du kan antingen använda nyckel-id, e-postadressen som hör ihop med nyckeln eller någon annan giltig nyckelidentifiering i GPG som värde i fältet. När nyckel-id skrivs in, kommer &kmymoney; kontrollera dess giltighet och tända en grön lysdiod i dialogrutan om en nyckel hittas. <caution
+> <para
+>Försäkra dig om att du har både den öppna och privata nyckeln för detta id. Om du inte äger den privata nyckeln för det id som skrivs in, kommer du inte att kunna öppna filen igen. </para>
+  </caution>
+</para>
+</sect2>
+
+<sect2 id="details.formats.encrypted.recoverkey">
+<title
+>&kmymoney;s återställningsnyckel</title>
+<para
+>På den här sidan i inställningsdialogrutan har du också möjlighet att välja tilläggskryptering med &kmymoney;s återställningsnyckel. Alternativet är tillgängligt om den nyckeln är lagrad i din nyckelring i <application
+>GPG</application
+>. Att välja alternativet gör det möjligt att återställa data även i fallet då du förlorar din egen privata nyckel. Det är möjligt eftersom data inte bara krypteras med din egen nyckel, utan också med &kmymoney;s återställningsnyckel. Nyckeln är bara tillgänglig för utvalda utvecklare av &kmymoney; (när det här skrivs, bara upphovsmannen). Från och med utgivningen av &kmymoney; version 4.7, är utgåvenyckeln inställd att gå ut 3:e januari 2015. </para>
+
+<para
+>Under normala omständigheter, kommer du att öppna, spara och stänga filen som vanligt. I det onormala fallet när din nyckel har gått förlorad, har du möjlighet att kontakta en av utvecklarna som har tillgång till &kmymoney;s återställningsnyckel och be om hjälp att återställa din data. Du kan kontakta utvecklarna via e-post till &kmymoney;s e-postlista för utvecklare på &devlist;. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.formats.anonymous">
+<title
+>Anonym fil</title>
+<para
+>Formatet är inte avsett att användas för normal datalagring. Det stöds så att du kan tillhandahålla filen till &kmymoney;s utvecklingsgrupp i händelse av problem, utan att avslöja några av de konfidentiella delarna av din ekonomiska information. Det ändrar till exempel institution, konto, betalare och kategorinamn till strängar som "I000001" och "A000001", det gör liknande ändringar av all information som kontonummer, och ändrar också slumpmässigt transaktionernas värden. </para>
+
+<para
+>Om du blir ombedd av utvecklarna, använd menyalternativet <guimenuitem
+>Spara som...</guimenuitem
+> för att lagra data på anonymt format genom att välja <literal role="filter"
+>Anonyma filer</literal
+> som filter. Det ändrar också filändelsen till <filename class="extension"
+>.anon.xml</filename
+>. </para>
+
+<para
+>För att kontrollera att problemet fortfarande finns, läs in den anonyma filen igen och försök upprepa problemet. Om problemet fortfarande finns, skicka filen till utvecklarnas e-postlista på &devlist; för ytterligare undersökning. Om problemet inte visar sig, ... nåja, det är ett scenario som jag inte vill föreställa mig just nu. </para>
+</sect1>
+</chapter>
+
