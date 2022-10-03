@@ -193,6 +193,7 @@ void ListTable::render(QString& result, QString& csv) const
                     tlink = QString::fromLatin1("id=%1&tid=%2").arg((*it_row).value(ctAccountID), (*it_row).value(ctID));
                 }
                 result.append(QString::fromLatin1("<tr class=\"row-%1\">").arg(row_odd ? QLatin1String("odd") : QLatin1String("even")));
+
             } else if (rowRank == 2) {
                 result.append(QString::fromLatin1("<tr class=\"item%1\">").arg(row_odd ? QLatin1Char('1') : QLatin1Char('0')));
             } else if (rowRank == 4 || rowRank == 5) {
@@ -292,16 +293,21 @@ void ListTable::render(QString& result, QString& csv) const
                 if (it_column == columns.constBegin() && data.isEmpty()) {
                     result.append(QString::fromLatin1("<td class=\"left%1\">").arg((*it_row).value(ctDepth)));
                     if (rowRank == 4) {
-                        if (!(*it_row).value(ctDepth).isEmpty())
+                        if (!(*it_row).value(ctDepth).isEmpty()) {
                             result += i18nc("Total balance", "Total") + QLatin1Char(' ') + prevGrpNames.at((*it_row).value(ctDepth).toInt());
-                        else
+                            csv.append(i18nc("Total balance", "Total") + QLatin1Char(' ') + prevGrpNames.at((*it_row).value(ctDepth).toInt())
+                                       + QLatin1Char(','));
+                        } else {
                             result += i18n("Grand Total");
+                            csv.append(i18n("Grand Total") + QLatin1Char(','));
+                        }
                     }
                     result.append(QLatin1String("</td>"));
                     ++it_column;
                     continue;
                 } else if (!m_subtotal.contains(*it_column)) {  // don't display e.g. account in totals row
                     result.append(QLatin1String("<td></td>"));
+                    csv.append(QLatin1Char(','));
                     ++it_column;
                     continue;
                 }
