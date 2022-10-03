@@ -3354,7 +3354,7 @@ msgid ""
 "selection lists."
 msgstr ""
 "Esta opció oculta totes les categories en la vista de les categories que no "
-"s'empren en cap operació. Encara es mostren a la llista de selecció de "
+"s'empren en cap operació. Encara es mostren en la llista de selecció de "
 "categories."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideUnusedCategory)
@@ -3521,8 +3521,8 @@ msgid ""
 "Selected entries are shown on the home page of the application.<p>\n"
 "Use the buttons and checkboxes to customize the layout of the home page."
 msgstr ""
-"A la pàgina principal de l'aplicació es mostraran les entrades seleccionades."
-"<p>\n"
+"En la pàgina principal de l'aplicació es mostraran les entrades "
+"seleccionades.<p>\n"
 "Utilitzeu els botons i les caselles de selecció per a personalitzar "
 "l'aparença de la pàgina principal."
 
@@ -8989,7 +8989,7 @@ msgstr "Falta l'atribut %1 en la línia %2"
 #, kde-format
 msgctxt "Empty attribute %1 in xml file"
 msgid "Empty attribute %1 in line %2"
-msgstr "Atribut %1 buit a la línia %2"
+msgstr "Atribut %1 buit en la línia %2"
 
 #: kmymoney/plugins/checkprinting/checkprinting.cpp:183
 #, kde-format
@@ -10134,7 +10134,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info:tooltip QIF profile not selected"
 msgid "Please select a QIF profile in the CSV importer settings"
-msgstr "Seleccioneu un perfil QIF a la configuració de l'importador de CSV"
+msgstr "Seleccioneu un perfil QIF en la configuració de l'importador de CSV"
 
 #. i18n: Noun, the introduction.
 #. i18n: ectx: property (text), widget (QLabel, label_intro)
@@ -10672,7 +10672,7 @@ msgctxt "@info:tooltip No QIF profile defined"
 msgid ""
 "Please use the QIF profile editor in the QIF plugin settings to create one."
 msgstr ""
-"Utilitzeu l'editor de perfil QIF a la configuració del connector QIF per a "
+"Utilitzeu l'editor de perfil QIF en la configuració del connector QIF per a "
 "crear-ne un."
 
 #. i18n: ectx: label, entry (AutoFieldDelimiter), group (Misc)
@@ -18178,7 +18178,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:160
 #, kde-format
 msgid "Show account limit information on the Homepage"
-msgstr "Mostra la informació sobre el límit del compte a la pàgina principal"
+msgstr "Mostra la informació sobre el límit del compte en la pàgina principal"
 
 #. i18n: ectx: label, entry (ShowBalanceStatusOfOnlineAccounts), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:164
@@ -18187,7 +18187,7 @@ msgid ""
 "Show balance status on the Homepage for accounts where data imports include "
 "balance information."
 msgstr ""
-"Mostra a la pàgina principal l'estat del saldo dels comptes en què les "
+"Mostra en la pàgina principal l'estat del saldo dels comptes en què les "
 "importacions de dades inclouen informació del saldo."
 
 # skip-rule: t-ad_sp
@@ -18222,13 +18222,13 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:180
 #, kde-format
 msgid "Show date of last reconciliation on the Homepage"
-msgstr "Mostra la data de l'última conciliació a la pàgina principal"
+msgstr "Mostra la data de l'última conciliació en la pàgina principal"
 
 #. i18n: ectx: label, entry (HideZeroBalanceLiabilities), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:184
 #, kde-format
 msgid "Hide zero balance liabilities on the Homepage"
-msgstr "Oculta els passius amb saldo zero a la pàgina principal"
+msgstr "Oculta els passius amb saldo zero en la pàgina principal"
 
 #. i18n: ectx: label, entry (useCustomColors), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:190
@@ -18485,7 +18485,7 @@ msgstr "S'ha produït un error amb el tipus de fitxer"
 msgid ""
 "<p>Error while reading template file <b>%1</b> in line %2, column %3</p>"
 msgstr ""
-"<p>S'ha produït un error en llegir el fitxer de plantilla <b>%1</b> a la "
+"<p>S'ha produït un error en llegir el fitxer de plantilla <b>%1</b> en la "
 "línia %2, columna %3</p>"
 
 #: kmymoney/templates/templateloader.cpp:105
@@ -19186,7 +19186,7 @@ msgid ""
 "next payment date."
 msgstr ""
 "Introduïx l'operació i avança la pròxima data de venciment d'esta "
-"planificació a la pròxima data de pagament."
+"planificació fins a la pròxima data de pagament."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonSkip)
 #: kmymoney/views/kenterscheduledlg.ui:182
@@ -19196,7 +19196,7 @@ msgid ""
 "to the next payment date."
 msgstr ""
 "No introduïsques l'operació, però avança la pròxima data de venciment d'esta "
-"planificació a la pròxima data de pagament."
+"planificació fins a la pròxima data de pagament."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, buttonIgnore)
 #: kmymoney/views/kenterscheduledlg.ui:195
@@ -19292,13 +19292,13 @@ msgstr "Pagaments propers"
 #, kde-format
 msgctxt "Less..."
 msgid "Show fewer schedules on the list"
-msgstr "Mostra algunes planificacions a la llista"
+msgstr "Mostra algunes planificacions en la llista"
 
 #: kmymoney/views/khomeview_p.h:780
 #, kde-format
 msgctxt "More..."
 msgid "Show more schedules on the list"
-msgstr "Mostra més planificacions a la llista"
+msgstr "Mostra més planificacions en la llista"
 
 #: kmymoney/views/khomeview_p.h:813
 #, kde-format
@@ -24360,12 +24360,12 @@ msgstr "no assignat"
 #: kmymoney/wizards/newloanwizard/summarywizardpage.cpp:68
 #, kde-format
 msgid "on reception"
-msgstr "a la recepció"
+msgstr "en la recepció"
 
 #: kmymoney/wizards/newloanwizard/summarywizardpage.cpp:70
 #, kde-format
 msgid "on due date"
-msgstr "a la data de venciment"
+msgstr "en la data de venciment"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel22_2_2)
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:19
