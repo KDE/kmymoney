@@ -132,7 +132,9 @@ endif()
 
 find_package(KChart 2.6.0 QUIET)
 
-find_package(libofx)
+# we want the lowercase 'libofx' package name, for 'libofx_FOUND' compatibility with what pkg-config returns,
+# in case it is to be used as fallback
+find_package(libofx NAMES LibOFX libofx)
 if(NOT libofx_FOUND)
     find_package(PkgConfig)
 
