@@ -14,16 +14,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-29 00:47+0000\n"
-"PO-Revision-Date: 2022-09-25 23:31+0200\n"
-"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
+"POT-Creation-Date: 2022-10-04 00:44+0000\n"
+"PO-Revision-Date: 2022-10-03 21:40+0200\n"
+"Last-Translator: Jon Intxaurbe <joinzar@gmail.com>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.0\n"
+"X-Generator: Lokalize 22.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1008,7 +1008,7 @@ msgstr "Kanbio-tasen/Prezioen editorea"
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:57
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:246
-#: kmymoney/plugins/views/reports/core/listtable.cpp:609
+#: kmymoney/plugins/views/reports/core/listtable.cpp:615
 #: kmymoney/views/khomeview_p.h:606 kmymoney/views/khomeview_p.h:668
 #: kmymoney/views/khomeview_p.h:708 kmymoney/views/newspliteditor.ui:32
 #: kmymoney/views/newtransactioneditor.ui:56
@@ -1092,7 +1092,7 @@ msgstr "xxx"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:274
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:241
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:120
-#: kmymoney/plugins/views/reports/core/listtable.cpp:607
+#: kmymoney/plugins/views/reports/core/listtable.cpp:613
 #: kmymoney/views/investtransactioneditor.ui:245
 #: kmymoney/views/khomeview_p.h:591 kmymoney/views/khomeview_p.h:653
 #: kmymoney/views/khomeview_p.h:693 kmymoney/views/newtransactioneditor.ui:78
@@ -1184,7 +1184,7 @@ msgstr "Dibisa berria"
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:211
 #, kde-format
 msgid "Cannot modify currency. %1"
-msgstr "Ezin da moneta aldatu. %1"
+msgstr "Ezin du moneta aldatu. %1"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:211
 #, kde-format
@@ -1710,7 +1710,7 @@ msgstr "Izena"
 #: kmymoney/plugins/csv/import/priceswizardpage.ui:144
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:465
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:163
-#: kmymoney/plugins/views/reports/core/listtable.cpp:637
+#: kmymoney/plugins/views/reports/core/listtable.cpp:643
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:185
 #, kde-format
 msgid "Price"
@@ -2032,7 +2032,7 @@ msgstr "Prezioak"
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:83
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:52
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:381
-#: kmymoney/plugins/views/reports/core/listtable.cpp:679
+#: kmymoney/plugins/views/reports/core/listtable.cpp:685
 #: kmymoney/widgets/ktransactionfilter.ui:574
 #: kmymoney/widgets/transactionsortoption.cpp:37
 #, kde-format
@@ -2128,7 +2128,7 @@ msgstr "Akzioaren izena"
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:75
 #: kmymoney/mymoney/storage/pricemodel.cpp:38
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:87
-#: kmymoney/plugins/views/reports/core/listtable.cpp:695
+#: kmymoney/plugins/views/reports/core/listtable.cpp:701
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:104
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:61
 #, kde-format
@@ -2537,7 +2537,7 @@ msgstr "Hasierako saldo kontua"
 #. i18n: ectx: property (title), widget (QGroupBox, m_institutionBox)
 #: kmymoney/dialogs/knewaccountdlg.ui:310
 #: kmymoney/dialogs/knewaccountdlg.ui:316
-#: kmymoney/plugins/views/reports/core/listtable.cpp:689
+#: kmymoney/plugins/views/reports/core/listtable.cpp:695
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:44
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:72
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.ui:19
@@ -2637,7 +2637,7 @@ msgstr "Abisu goiztiarra"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_taxTab)
 #: kmymoney/dialogs/knewaccountdlg.ui:584
-#: kmymoney/plugins/views/reports/core/listtable.cpp:705
+#: kmymoney/plugins/views/reports/core/listtable.cpp:711
 #, kde-format
 msgid "Tax"
 msgstr "Zergak"
@@ -4166,7 +4166,7 @@ msgstr "Eguna"
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_initialDateFieldCursorPosition)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:265
-#: kmymoney/plugins/views/reports/core/listtable.cpp:627
+#: kmymoney/plugins/views/reports/core/listtable.cpp:633
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:501
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:96
 #, kde-format
@@ -4216,7 +4216,7 @@ msgstr "Kitatuak"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkReconciled)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:318
-#: kmymoney/plugins/views/reports/core/listtable.cpp:631
+#: kmymoney/plugins/views/reports/core/listtable.cpp:637
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
 #: kmymoney/views/khomeview_p.h:968 kmymoney/views/khomeview_p.h:1325
 #: kmymoney/views/khomeview_p.h:1354
@@ -4365,13 +4365,13 @@ msgstr ""
 msgid "Ask for a new payee's default category"
 msgstr "Eskatu onuradun berriaren kategoria lehenetsia"
 
-#: kmymoney/dialogs/settings/ksettingsschedules.cpp:361
+#: kmymoney/dialogs/settings/ksettingsschedules.cpp:354
 #, kde-format
 msgctxt "Holiday region (region language)"
 msgid "Holidays for %1 (%2)"
 msgstr "%1(e)ko jaiegunak (%2)"
 
-#: kmymoney/dialogs/settings/ksettingsschedules.cpp:376
+#: kmymoney/dialogs/settings/ksettingsschedules.cpp:371
 #, kde-format
 msgctxt "@item:inlistbox No holiday region selected"
 msgid "None"
@@ -5614,7 +5614,7 @@ msgid ""
 msgstr ""
 "Ezin da %1 inportatu %2 plugina erabiliz. Pluginak errore hau itzuli du: %3"
 
-#: kmymoney/kmymoney.cpp:4163 kmymoney/plugins/ofx/import/ofximporter.cpp:1014
+#: kmymoney/kmymoney.cpp:4163 kmymoney/plugins/ofx/import/ofximporter.cpp:1017
 #, kde-format
 msgid "Importing error"
 msgstr "Inportatze-errorea"
@@ -6351,7 +6351,7 @@ msgid "Dr."
 msgstr "Z."
 
 #: kmymoney/models/payeeidentifiercontainermodel.cpp:35
-#: kmymoney/mymoney/payeeidentifiermodel.cpp:93
+#: kmymoney/mymoney/payeeidentifiermodel.cpp:100
 #, kde-format
 msgid "The plugin to show this information could not be found."
 msgstr "Informazio hau erakusteko pluginak ez da aurkitzen."
@@ -8752,7 +8752,7 @@ msgstr "Balioa"
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:21
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:68
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:243
-#: kmymoney/plugins/views/reports/core/listtable.cpp:613
+#: kmymoney/plugins/views/reports/core/listtable.cpp:619
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:268
 #: kmymoney/widgets/ktransactionfilter.ui:445
 #: kmymoney/widgets/ktransactionfilter.ui:487
@@ -9453,7 +9453,7 @@ msgstr "Kontu mota:"
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:292
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:481
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:613
-#: kmymoney/plugins/views/reports/core/listtable.cpp:619
+#: kmymoney/plugins/views/reports/core/listtable.cpp:625
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:92
@@ -9496,7 +9496,7 @@ msgstr "Egoera"
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:78
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:192
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:244
-#: kmymoney/plugins/views/reports/core/listtable.cpp:621
+#: kmymoney/plugins/views/reports/core/listtable.cpp:627
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:159
 #: kmymoney/views/investtransactioneditor.ui:155
 #: kmymoney/views/newspliteditor.ui:191
@@ -9514,7 +9514,7 @@ msgstr "Oharra"
 #. i18n: ectx: property (text), item, widget (QComboBox, cbActionTypes)
 #: kmymoney/plugins/csv/export/csvwriter.cpp:98
 #: kmymoney/plugins/csv/import/transactiondlg.ui:127
-#: kmymoney/plugins/views/reports/core/listtable.cpp:673
+#: kmymoney/plugins/views/reports/core/listtable.cpp:679
 #: kmymoney/views/investtransactioneditor.ui:61
 #: kmymoney/views/investtransactioneditor.ui:174
 #: kmymoney/views/investtransactioneditor.ui:238
@@ -9529,7 +9529,7 @@ msgstr "Interesa"
 #. i18n: ectx: property (text), widget (QLabel, feesLabel)
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, feesAmountEdit)
 #: kmymoney/plugins/csv/export/csvwriter.cpp:98
-#: kmymoney/plugins/views/reports/core/listtable.cpp:671
+#: kmymoney/plugins/views/reports/core/listtable.cpp:677
 #: kmymoney/views/investtransactioneditor.ui:106
 #: kmymoney/views/investtransactioneditor.ui:214
 #: kmymoney/views/investtransactioneditor.ui:343
@@ -9791,7 +9791,7 @@ msgstr "Garbitu ohar-eremu hautapena."
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_balance)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:325
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:165
-#: kmymoney/plugins/views/reports/core/listtable.cpp:677
+#: kmymoney/plugins/views/reports/core/listtable.cpp:683
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
 #: kmymoney/views/khomeview_p.h:971 kmymoney/views/khomeview_p.h:1328
@@ -11996,7 +11996,7 @@ msgid "Pick &date"
 msgstr "Hautatu data"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:305
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:862
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:865
 #, kde-format
 msgid "Online settings"
 msgstr "Online ezarpenak"
@@ -12987,17 +12987,17 @@ msgstr "Okerreko formatua"
 msgid "Unable to parse file"
 msgstr "Ezin da fitxategia analizatu"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:809
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:812
 #, kde-format
 msgid "No accounts found."
 msgstr "Ez da konturik aurkitu."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1004
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1007
 #, kde-format
 msgid "Error connecting to bank: %1"
 msgstr "Errorea gertatu da bankura konektatzean: %1"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1014
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1017
 #, kde-format
 msgid ""
 "<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin "
@@ -13006,12 +13006,12 @@ msgstr ""
 "<p>Ezin da <b>'%1'</b> inportatu, OFX inportatzaile-plugina erabiliz. "
 "Pluginak errore hau itzuli du:</p><p>%2</p>"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1048
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1051
 #, kde-format
 msgid "Importing process terminated unexpectedly."
 msgstr "Inportazio-prozesua ustekabean amaitu da."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1048
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1051
 #, kde-format
 msgid "Failed to import all statements."
 msgstr "Huts egin du kontu-laburpen guztiak inportatzean."
@@ -13206,7 +13206,7 @@ msgstr "Kontu-mugatzailea"
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:146
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:134
-#: kmymoney/plugins/views/reports/core/listtable.cpp:691
+#: kmymoney/plugins/views/reports/core/listtable.cpp:697
 #, kde-format
 msgid "Description"
 msgstr "Deskribapena"
@@ -14032,7 +14032,7 @@ msgstr "Erregistroaren amaierako saldoa"
 #. i18n: ectx: attribute (title), widget (QWidget, m_categoryTab)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkCategory)
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:245
-#: kmymoney/plugins/views/reports/core/listtable.cpp:617
+#: kmymoney/plugins/views/reports/core/listtable.cpp:623
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:287
 #: kmymoney/views/newspliteditor.ui:160
 #: kmymoney/views/newtransactioneditor.ui:212
@@ -15069,7 +15069,8 @@ msgstr "Batezbestekoa"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:432
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:454
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
-#: kmymoney/plugins/views/reports/core/listtable.cpp:296
+#: kmymoney/plugins/views/reports/core/listtable.cpp:297
+#: kmymoney/plugins/views/reports/core/listtable.cpp:298
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1403
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1544
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1596
@@ -15302,40 +15303,41 @@ msgctxt "Chart legend title"
 msgid "Legend"
 msgstr "Legenda"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:273
+#: kmymoney/plugins/views/reports/core/listtable.cpp:274
 #, kde-format
 msgid "Initial Market Value"
 msgstr "Hasierako merkatu-balioa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:274
+#: kmymoney/plugins/views/reports/core/listtable.cpp:275
 #, kde-format
 msgid "Ending Market Value"
 msgstr "Amaierako merkatu-balioa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:277
+#: kmymoney/plugins/views/reports/core/listtable.cpp:278
 #, kde-format
 msgid "Opening Balance"
 msgstr "Hasierako saldoa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:278
+#: kmymoney/plugins/views/reports/core/listtable.cpp:279
 #, kde-format
 msgid "Closing Balance"
 msgstr "Amaierako saldoa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:298
+#: kmymoney/plugins/views/reports/core/listtable.cpp:301
+#: kmymoney/plugins/views/reports/core/listtable.cpp:302
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1620
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1968
 #, kde-format
 msgid "Grand Total"
 msgstr "Azken totala"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:340
-#: kmymoney/plugins/views/reports/core/listtable.cpp:341
+#: kmymoney/plugins/views/reports/core/listtable.cpp:346
+#: kmymoney/plugins/views/reports/core/listtable.cpp:347
 #, kde-format
 msgid "Calculated"
 msgstr "Kalkulatuta"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:611
+#: kmymoney/plugins/views/reports/core/listtable.cpp:617
 #, kde-format
 msgid "Num"
 msgstr "Zk."
@@ -15343,7 +15345,7 @@ msgstr "Zk."
 #. i18n: ectx: property (text), widget (QLabel, tagsLabel)
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:615
+#: kmymoney/plugins/views/reports/core/listtable.cpp:621
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:489
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:76
 #: kmymoney/views/kmymoneyview.cpp:176 kmymoney/views/newspliteditor.ui:110
@@ -15354,18 +15356,18 @@ msgstr "Zk."
 msgid "Tags"
 msgstr "Etiketak"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:623
+#: kmymoney/plugins/views/reports/core/listtable.cpp:629
 #, kde-format
 msgid "Top Category"
 msgstr "Kategoria nagusia"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:625
+#: kmymoney/plugins/views/reports/core/listtable.cpp:631
 #, kde-format
 msgid "Category Type"
 msgstr "Kategoria mota"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:629
+#: kmymoney/plugins/views/reports/core/listtable.cpp:635
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:504
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:101
 #, kde-format
@@ -15373,7 +15375,7 @@ msgid "Week"
 msgstr "Astea"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkAction)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:633
+#: kmymoney/plugins/views/reports/core/listtable.cpp:639
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:300
 #, kde-format
 msgid "Action"
@@ -15381,89 +15383,89 @@ msgstr "Ekintza"
 
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, sharesAmountEdit)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkShares)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:635
+#: kmymoney/plugins/views/reports/core/listtable.cpp:641
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:172
 #: kmymoney/views/investtransactioneditor.ui:362
 #, kde-format
 msgid "Shares"
 msgstr "Akzioak"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:639
+#: kmymoney/plugins/views/reports/core/listtable.cpp:645
 #, kde-format
 msgid "Last Price"
 msgstr "Azken prezioa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:641
+#: kmymoney/plugins/views/reports/core/listtable.cpp:647
 #, kde-format
 msgid "Buy Price"
 msgstr "Erosketa prezioa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:643
+#: kmymoney/plugins/views/reports/core/listtable.cpp:649
 #, kde-format
 msgid "Net Value"
 msgstr "Balio garbia"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:645
+#: kmymoney/plugins/views/reports/core/listtable.cpp:651
 #, kde-format
 msgid "Buy Value"
 msgstr "Erosketa balioa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:647
+#: kmymoney/plugins/views/reports/core/listtable.cpp:653
 #, kde-format
 msgid "Sell Value"
 msgstr "Salmenta balioa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:649
+#: kmymoney/plugins/views/reports/core/listtable.cpp:655
 #, kde-format
 msgid "Short-term Buy Value"
 msgstr "Erosketa balioa epe motzera"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:651
+#: kmymoney/plugins/views/reports/core/listtable.cpp:657
 #, kde-format
 msgid "Short-term Sell Value"
 msgstr "Salmenta balio epe motzera"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:653
+#: kmymoney/plugins/views/reports/core/listtable.cpp:659
 #, kde-format
 msgid "Long-term Buy Value"
 msgstr "Erosketa balioa epe luzera"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:655
+#: kmymoney/plugins/views/reports/core/listtable.cpp:661
 #, kde-format
 msgid "Long-term Sell Value"
 msgstr "Salmenta balioa epe luzera"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:657
+#: kmymoney/plugins/views/reports/core/listtable.cpp:663
 #, kde-format
 msgid "Dividends Reinvested"
 msgstr "Dibidendu berrinbestituak"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:659
+#: kmymoney/plugins/views/reports/core/listtable.cpp:665
 #, kde-format
 msgid "Dividends Paid Out"
 msgstr "Dibidendu ordainduak"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:661
+#: kmymoney/plugins/views/reports/core/listtable.cpp:667
 #, kde-format
 msgid "Starting Balance"
 msgstr "Hasierako saldoa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:663
+#: kmymoney/plugins/views/reports/core/listtable.cpp:669
 #, kde-format
 msgid "Ending Balance"
 msgstr "Amaierako saldoa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:665
+#: kmymoney/plugins/views/reports/core/listtable.cpp:671
 #, kde-format
 msgid "Market Value"
 msgstr "Merkatu-balioa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:667
+#: kmymoney/plugins/views/reports/core/listtable.cpp:673
 #, kde-format
 msgid "Annualized Return"
 msgstr "Urteko etekina"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:669
+#: kmymoney/plugins/views/reports/core/listtable.cpp:675
 #, kde-format
 msgid "Return On Investment"
 msgstr "Inbertsio-etekina"
@@ -15472,7 +15474,7 @@ msgstr "Inbertsio-etekina"
 #. i18n: ectx: attribute (title), widget (QWizardPage, PaymentEditWizardPage)
 #. i18n: ectx: property (title), widget (QGroupBox, GroupBox1)
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, creditAmount)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:675
+#: kmymoney/plugins/views/reports/core/listtable.cpp:681
 #: kmymoney/widgets/creditdebitedit.ui:35
 #: kmymoney/wizards/newloanwizard/paymenteditwizardpage.ui:6
 #: kmymoney/wizards/newloanwizard/paymentwizardpage.ui:6
@@ -15481,105 +15483,105 @@ msgstr "Inbertsio-etekina"
 msgid "Payment"
 msgstr "Ordainketa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:681
+#: kmymoney/plugins/views/reports/core/listtable.cpp:687
 #, kde-format
 msgctxt "Account name"
 msgid "Name"
 msgstr "Izena"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:683
+#: kmymoney/plugins/views/reports/core/listtable.cpp:689
 #, kde-format
 msgid "Next Due Date"
 msgstr "Hurrengo mugaeguna"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:685
+#: kmymoney/plugins/views/reports/core/listtable.cpp:691
 #, kde-format
 msgid "Occurrence"
 msgstr "Agerraldia"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:687
+#: kmymoney/plugins/views/reports/core/listtable.cpp:693
 #, kde-format
 msgid "Payment Method"
 msgstr "Ordainketa-metodoa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:693
+#: kmymoney/plugins/views/reports/core/listtable.cpp:699
 #, kde-format
 msgid "Opening Date"
 msgstr "Irekitze-data"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:697
+#: kmymoney/plugins/views/reports/core/listtable.cpp:703
 #, kde-format
 msgid "Balance Early Warning"
 msgstr "Saldoaren abisu goiztiarra"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:699
+#: kmymoney/plugins/views/reports/core/listtable.cpp:705
 #, kde-format
 msgid "Balance Max Limit"
 msgstr "Saldoaren gehieneko muga"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:701
+#: kmymoney/plugins/views/reports/core/listtable.cpp:707
 #, kde-format
 msgid "Credit Early Warning"
 msgstr "Hartzekoaren abisu goiztiarra"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:703
+#: kmymoney/plugins/views/reports/core/listtable.cpp:709
 #, kde-format
 msgid "Credit Max Limit"
 msgstr "Hartzekoaren gehieneko muga"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:707
+#: kmymoney/plugins/views/reports/core/listtable.cpp:713
 #, kde-format
 msgid "Preferred"
 msgstr "Hobetsia"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:709
+#: kmymoney/plugins/views/reports/core/listtable.cpp:715
 #, kde-format
 msgid "Loan Amount"
 msgstr "Maileguaren zenbatekoa"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, InterestEditWizardPage)
-#: kmymoney/plugins/views/reports/core/listtable.cpp:711
+#: kmymoney/plugins/views/reports/core/listtable.cpp:717
 #: kmymoney/wizards/newloanwizard/interesteditwizardpage.ui:6
 #, kde-format
 msgid "Interest Rate"
 msgstr "Interes-tasa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:713
+#: kmymoney/plugins/views/reports/core/listtable.cpp:719
 #, kde-format
 msgid "Next Interest Change"
 msgstr "Hurrengo interes-aldaketa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:715
+#: kmymoney/plugins/views/reports/core/listtable.cpp:721
 #, kde-format
 msgid "Periodic Payment"
 msgstr "Aldizkako ordainketa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:717
+#: kmymoney/plugins/views/reports/core/listtable.cpp:723
 #, kde-format
 msgid "Final Payment"
 msgstr "Azken ordainketa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:719
+#: kmymoney/plugins/views/reports/core/listtable.cpp:725
 #, kde-format
 msgid "Current Balance"
 msgstr "Uneko saldoa"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:721
+#: kmymoney/plugins/views/reports/core/listtable.cpp:727
 #, kde-format
 msgid "Capital Gain"
 msgstr "Kapital-irabazia"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:723
+#: kmymoney/plugins/views/reports/core/listtable.cpp:729
 #, kde-format
 msgid "Percentage Gain"
 msgstr "Irabazia ehunekoan"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:725
+#: kmymoney/plugins/views/reports/core/listtable.cpp:731
 #, kde-format
 msgid "Short-term Gain"
 msgstr "Epe motzeko irabazia"
 
-#: kmymoney/plugins/views/reports/core/listtable.cpp:727
+#: kmymoney/plugins/views/reports/core/listtable.cpp:733
 #, kde-format
 msgid "Long-term Gain"
 msgstr "Epe luzeko irabazia"
@@ -23215,7 +23217,7 @@ msgstr ""
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:284
 #, kde-format
 msgid "Create security"
-msgstr "Burtsa-balioa sortu"
+msgstr "finantza-aktiboa sortu"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KNewInvestmentWizard)
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.ui:17
