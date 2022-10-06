@@ -102,6 +102,13 @@ void KHomeView::refresh()
     }
 }
 
+void KHomeView::resizeEvent(QResizeEvent* event)
+{
+    Q_UNUSED(event);
+
+    refresh();
+}
+
 void KHomeView::showEvent(QShowEvent* event)
 {
     Q_D(KHomeView);
