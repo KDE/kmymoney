@@ -46,6 +46,7 @@ public:
     void refresh();
 
 protected:
+    void resizeEvent(QResizeEvent* event) override;
     void showEvent(QShowEvent* event) override;
     bool eventFilter(QObject* o, QEvent* e) override;
 
