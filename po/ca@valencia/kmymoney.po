@@ -4465,7 +4465,7 @@ msgstr "Canvia l'import &total de l'operació a %1."
 #: kmymoney/dialogs/splitadjustdialog.cpp:61
 #, kde-format
 msgid "&Distribute difference of %1 among all splits."
-msgstr "&Distribuïx la diferència de %1 entre tots els desglossaments."
+msgstr "Distrib&uïx la diferència de %1 entre tots els desglossaments."
 
 #: kmymoney/dialogs/splitadjustdialog.cpp:69
 #, kde-format
@@ -5509,7 +5509,7 @@ msgstr ""
 #: kmymoney/kmymoney.cpp:3576
 #, kde-format
 msgid "&Replace"
-msgstr "&Substituïx"
+msgstr "Su&bstituïx"
 
 #: kmymoney/kmymoney.cpp:3582
 #, kde-format
@@ -12765,7 +12765,7 @@ msgstr "Data inicial de la importació"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:305
 #, kde-format
 msgid "Last &update"
-msgstr "Última act&ualisació"
+msgstr "Última act&ualització"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_todayRB)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:325
@@ -16214,7 +16214,7 @@ msgstr "Opcions de l'informe"
 #, kde-format
 msgctxt "To open a new report"
 msgid "&Open"
-msgstr "&Obri"
+msgstr "O&bri"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:729
 #, kde-format
@@ -20657,7 +20657,7 @@ msgstr "D'ac&ord"
 #: kmymoney/views/splitdialog.ui:677 kmymoney/wizards/kmymoneywizard_p.h:76
 #, kde-format
 msgid "&Cancel"
-msgstr "&Cancel·la"
+msgstr "C&ancel·la"
 
 #: kmymoney/views/splitview.cpp:110
 #, kde-format
