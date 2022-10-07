@@ -183,7 +183,7 @@ void KHomeView::resizeEvent(QResizeEvent* event)
 
     // refresh only if no other resize event occurs within the specified time
     timeout.stop();
-    connect(&timeout, &QTimer::timeout, this, &KHomeView::refresh, Qt::UniqueConnection);
+    connect(&timeout, SIGNAL(timeout()), this, SLOT(refresh()), Qt::UniqueConnection);
     timeout.setSingleShot(true);
     timeout.start(100);
     KMyMoneyViewBase::resizeEvent(event);
