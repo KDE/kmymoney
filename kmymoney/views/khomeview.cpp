@@ -177,6 +177,13 @@ void KHomeView::slotLoadView()
   }
 }
 
+void KHomeView::resizeEvent(QResizeEvent* event)
+{
+    Q_UNUSED(event);
+
+    refresh();
+}
+
 void KHomeView::showEvent(QShowEvent* event)
 {
   emit aboutToShow();

@@ -87,6 +87,11 @@ protected:
     */
   void showEvent(QShowEvent* event);
 
+  /**
+    * Overriden so we can handle low speed fresh
+    */
+  void resizeEvent(QResizeEvent* event) override;
+
 public slots:
 
   void slotOpenUrl(const KUrl &url, const KParts::OpenUrlArguments &args, const KParts::BrowserArguments &browArgs);
