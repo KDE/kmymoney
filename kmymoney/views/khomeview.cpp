@@ -179,9 +179,14 @@ void KHomeView::slotLoadView()
 
 void KHomeView::resizeEvent(QResizeEvent* event)
 {
-    Q_UNUSED(event);
+    static QTimer timeout;
 
-    refresh();
+    // refresh only if no other resize event occurs within the specified time
+    timeout.stop();
+    connect(&timeout, &QTimer::timeout, this, &KHomeView::refresh, Qt::UniqueConnection);
+    timeout.setSingleShot(true);
+    timeout.start(100);
+    KMyMoneyViewBase::resizeEvent(event);
 }
 
 void KHomeView::showEvent(QShowEvent* event)
