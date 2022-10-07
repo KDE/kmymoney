@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-04 00:44+0000\n"
+"POT-Creation-Date: 2022-10-07 00:46+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -19801,7 +19801,7 @@ msgstr "Ignoriraj"
 msgid "Cancel processing of schedule entry."
 msgstr "Otkaži obradu rasporeda ulaska."
 
-#: kmymoney/views/khomeview.cpp:209
+#: kmymoney/views/khomeview.cpp:216
 #, kde-format
 msgid ""
 "Before KMyMoney can give you detailed information about your financial "

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-04 00:44+0000\n"
+"POT-Creation-Date: 2022-10-07 00:46+0000\n"
 "PO-Revision-Date: 2022-10-05 07:12+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -19111,7 +19111,7 @@ msgstr "Ez ikusi egin"
 msgid "Cancel processing of schedule entry."
 msgstr "Utzi bertan behera antolaketa-sarrera prozesatzea."
 
-#: kmymoney/views/khomeview.cpp:209
+#: kmymoney/views/khomeview.cpp:216
 #, kde-format
 msgid ""
 "Before KMyMoney can give you detailed information about your financial "
