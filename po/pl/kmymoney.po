@@ -7,13 +7,14 @@
 # Marta Rybczyńska <kde-i18n@rybczynska.net>, 2010, 2011, 2013.
 # Marek Lemanczyk <marek@lemanczyk.eu>, 2011.
 # Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011, 2012, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Grzegorz Koryga <rehork@tutamail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-08 00:48+0000\n"
-"PO-Revision-Date: 2022-09-23 10:37+0200\n"
-"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
+"PO-Revision-Date: 2022-10-08 11:24+0200\n"
+"Last-Translator: Grzegorz Koryga <rehork@tutamail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -26,12 +27,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Mateusz \"Święty\" Pogorzelski, Łukasz Wojniłowicz"
+msgstr "Mateusz \"Święty\" Pogorzelski, Łukasz Wojniłowicz, Grzegorz Koryga"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "vlogical@o2.pl, lukasz.wojnilowicz@gmail.com"
+msgstr "vlogical@o2.pl, lukasz.wojnilowicz@gmail.com, rehork@tutamail.com"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:128
 #, kde-format
@@ -2351,19 +2352,19 @@ msgstr "Nie można dodać instytucji"
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
-msgstr ""
+msgstr "Podaj nazwę dla nowej kategorii lub konta."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:944
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
-msgstr ""
+msgstr "Nie można utworzyć konta lub kategorii, która w nazwie zawiera %1."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:951
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
-msgstr ""
+msgstr "Proszę podać procent większy od zera i mniejszy od 100."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:955
 #, kde-format
@@ -6622,16 +6623,13 @@ msgid "  * value set to shares in split of transaction '%1'."
 msgstr "  * wartości ustalona na papiery w części transakcji '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2656
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Split %2 in transaction '%1' contains a reference to invalid account "
-#| "%3. Please fix manually."
+#, kde-format
 msgid ""
 "  * Split %2 in transaction '%1' contains different signs for shares and "
 "value. Please fix manually."
 msgstr ""
-"  * Część %2 w transakcji '%1' zawiera dowiązanie do złego konta %3. Popraw "
-"ręcznie."
+"  * Część %2 w transakcji '%1'  zawiera różne znaki dla papierów i "
+"wartości.  Popraw ręcznie."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2662
 #, kde-format
@@ -8933,13 +8931,13 @@ msgstr "Opis"
 #, kde-format
 msgctxt "Missing attribute %1 in xml file"
 msgid "Missing attribute %1 in line %2"
-msgstr ""
+msgstr "Brak atrybutu %1 w wierszu %2"
 
 #: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:656
 #, kde-format
 msgctxt "Empty attribute %1 in xml file"
 msgid "Empty attribute %1 in line %2"
-msgstr ""
+msgstr "Pusty atrybut %1 w wierszu %2"
 
 #: kmymoney/plugins/checkprinting/checkprinting.cpp:183
 #, kde-format
@@ -10630,7 +10628,7 @@ msgstr "Określa czy zapis daty zostanie samoczynnie wykryty."
 #: kmymoney/plugins/csv/import/pluginsettings.kcfg:19
 #, kde-format
 msgid "The profile to be used for QIF exports."
-msgstr ""
+msgstr "Profil, który ma być używany do eksportu QIF."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, PluginSettingsDecl)
 #: kmymoney/plugins/csv/import/pluginsettingsdecl.ui:14
@@ -11002,7 +11000,7 @@ msgstr "Usunięcie papierów"
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:60
 #, kde-format
 msgid "The size of the file is too small to be a valid GnuCash format: %1"
-msgstr ""
+msgstr "Rozmiar pliku jest zbyt mały, aby był prawidłowym formatem GnuCash: %1"
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:64
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:75
@@ -11016,6 +11014,8 @@ msgid ""
 "GnuCash SQLite file format is not supported. Please save it using XML format "
 "in GnuCash and try again."
 msgstr ""
+"Format pliku GnuCash SQLite nie jest obsługiwany. Zapisz go przy użyciu  "
+"formatu XML w GnuCash i spróbuj ponownie."
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:129
 #, kde-format
@@ -18654,12 +18654,10 @@ msgid "Enter amount of interest"
 msgstr "Wpisz kwotę odsetek"
 
 #: kmymoney/views/investtransactioneditor.cpp:590
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Enter the split ratio for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
-msgstr "Wpisz współczynnik podziału dla tej transakcji"
+msgstr "Wybierz zabezpieczenie dla tej transakcji"
 
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, priceAmountEdit)
 #: kmymoney/views/investtransactioneditor.ui:29
@@ -18907,26 +18905,22 @@ msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Nie można usunąć kategorii %1. Powód: %2 "
 
 #: kmymoney/views/keditscheduledlg.cpp:118
-#, fuzzy, kde-format
-#| msgid "No name assigned for schedule"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
-msgstr "Nie przydzielono nazwy dla harmonogramu"
+msgstr "Nazwa jest wymaganym polem dla harmonogramu"
 
 #: kmymoney/views/keditscheduledlg.cpp:121
-#, fuzzy, kde-format
-#| msgid "This account is still included in an active schedule"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The account is a required field for a schedule"
-msgstr "To konto nadal jest uwzględniane w aktywnym harmonogramie"
+msgstr "Konto jest wymaganym polem dla harmonogramu"
 
 #: kmymoney/views/keditscheduledlg.cpp:125
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip category combo in split editor"
-#| msgid "A category assignment is required for a split."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
-msgstr "Wymagane jest przypisanie kategorii dla części."
+msgstr "Kategoria jest wymaganym polem dla harmonogramu"
 
 #: kmymoney/views/keditscheduledlg.cpp:552
 #, kde-format
@@ -19907,14 +19901,12 @@ msgid "Search transactions"
 msgstr "Przeszukaj transakcje"
 
 #: kmymoney/views/ksearchtransactiondlg.cpp:109
-#, fuzzy, kde-format
-#| msgid "Found %1 matching transaction"
-#| msgid_plural "Found %1 matching transactions"
+#, kde-format
 msgid "Found %1 matching splits"
 msgid_plural "Found %1 matching splits"
-msgstr[0] "Znaleziono %1 pasującą transakcję"
-msgstr[1] "Znaleziono %1 pasujące transakcje"
-msgstr[2] "Znaleziono %1 pasujących transakcji"
+msgstr[0] "Znaleziono %1 pasującą część"
+msgstr[1] "Znaleziono %1 pasujące części"
+msgstr[2] "Znaleziono %1 pasujących części"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_resultPage)
 #: kmymoney/views/ksearchtransactiondlg.ui:24
@@ -20115,12 +20107,11 @@ msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Transakcji brakuje przypisania <b>%1</b>."
 
 #: kmymoney/views/ledgerview.cpp:700
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip icon description"
-#| msgid "This schedule is overdue. Click on the icon to enter it."
+#, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
-msgstr "Ten harmonogram jest przedawniony. Naciśnij ikonę, aby go wprowadzić."
+msgstr ""
+"Ten harmonogram jest przedawniony od %1. Naciśnij ikonę, aby go wprowadzić."
 
 #: kmymoney/views/ledgerview.cpp:706
 #, kde-format
@@ -20407,6 +20398,8 @@ msgid ""
 "This page shows the accounts ledger. Currently, no accounts exist so this "
 "text is shown instead."
 msgstr ""
+"Ta strona pokazuje księgę rachunkową. Obecnie nie istnieją żadne konta,  "
+"więc zamiast nich wyświetlany jest ten tekst."
 
 #: kmymoney/views/simpleledgerview.cpp:432
 #, kde-format
@@ -20415,6 +20408,8 @@ msgid ""
 "This page shows the accounts ledger. Currently, no accounts are selected so "
 "this text is shown instead."
 msgstr ""
+"Ta strona pokazuje księgę rachunkową. Obecnie nie wybrano żadnych kont,  "
+"więc zamiast tego wyświetlany jest ten tekst."
 
 #: kmymoney/views/simpleledgerview.cpp:644
 #, kde-format
@@ -20438,16 +20433,13 @@ msgstr "Nie można zamknąć widoku"
 
 #. i18n: ectx: property (text), widget (QLabel, l2)
 #: kmymoney/views/simpleledgerview.ui:72
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>Flag this account to be an opening balance account</"
-#| "p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>Once an account or category is selected its "
 "transactions will be presented here.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Oznacz to konto jako konto salda otwarcia</p></body></"
-"html>"
+"<html><head/><body><p>Po wybraniu konta lub kategorii jego transakcje  "
+"zostaną zaprezentowane w tym miejscu.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, l3)
 #: kmymoney/views/simpleledgerview.ui:85
@@ -20621,7 +20613,7 @@ msgstr "Wyzeruj do domyślnych"
 #, kde-format
 msgctxt "@action:inmenu Open tab order dialog"
 msgid "Tab Order List..."
-msgstr ""
+msgstr "Lista porządku kart..."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, TabOrderEditor)
 #: kmymoney/views/tabordereditor.ui:14
@@ -20635,12 +20627,14 @@ msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
 "Value are presented in %1. Press this button to switch the currency to %2."
 msgstr ""
+"Wartości prezentowane są w %1. Naciśnij ten przycisk, aby przełączyć walutę "
+"na %2."
 
 #: kmymoney/widgets/amountedit.cpp:252
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."
-msgstr ""
+msgstr "Wartości przedstawione są w %1."
 
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, debitAmount)
 #: kmymoney/widgets/creditdebitedit.ui:42
@@ -20655,6 +20649,8 @@ msgid ""
 "The date provided as start lies past the one provided for the end of the "
 "search. This will result in an empty set."
 msgstr ""
+"Data podana jako początek znajduje się obok tej podanej jako koniec "
+"wyszukiwania. W wyniku tego otrzymamy pusty zbiór."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: kmymoney/widgets/daterangedlg.ui:22
@@ -21228,7 +21224,7 @@ msgstr "Fi&ltr:"
 #: kmymoney/widgets/passstore.cpp:61
 #, kde-format
 msgid "Read the password from pass store"
-msgstr ""
+msgstr "Odczytaj hasło z magazynu haseł"
 
 #: kmymoney/widgets/passwordtoggle.cpp:33
 #, kde-format
