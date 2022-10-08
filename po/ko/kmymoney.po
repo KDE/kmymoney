@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-07 00:46+0000\n"
+"POT-Creation-Date: 2022-10-08 00:48+0000\n"
 "PO-Revision-Date: 2022-07-13 15:41+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -18840,7 +18840,7 @@ msgstr "무시"
 msgid "Cancel processing of schedule entry."
 msgstr "일정 입력 처리를 취소합니다."
 
-#: kmymoney/views/khomeview.cpp:216
+#: kmymoney/views/khomeview.cpp:222
 #, kde-format
 msgid ""
 "Before KMyMoney can give you detailed information about your financial "

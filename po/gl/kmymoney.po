@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-07 00:46+0000\n"
+"POT-Creation-Date: 2022-10-08 00:48+0000\n"
 "PO-Revision-Date: 2020-03-07 08:15+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -19480,7 +19480,7 @@ msgstr "Ignorar"
 msgid "Cancel processing of schedule entry."
 msgstr "Cancelar o procesamento do asentamento da planificación."
 
-#: kmymoney/views/khomeview.cpp:216
+#: kmymoney/views/khomeview.cpp:222
 #, kde-format
 msgid ""
 "Before KMyMoney can give you detailed information about your financial "
