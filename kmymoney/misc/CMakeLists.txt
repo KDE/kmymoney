@@ -102,7 +102,7 @@ target_link_libraries( kmm_webconnect
 target_link_libraries( kmm_keychain
   PUBLIC
   Qt::Core
-  Qt5Keychain::Qt5Keychain
+  qt${QT_MAJOR_VERSION}keychain
 )
 
 target_link_libraries( kmm_utils_platformtools

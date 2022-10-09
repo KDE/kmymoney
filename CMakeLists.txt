@@ -118,7 +118,7 @@ if (DEFINED AKONADI_MIN_VERSION)
   find_package(KF5 ${AKONADI_MIN_VERSION} OPTIONAL_COMPONENTS Akonadi IdentityManagement)
 endif()
 
-find_package(Qt5Keychain CONFIG REQUIRED)
+find_package(Qt${QT_MAJOR_VERSION}Keychain CONFIG REQUIRED)
 
 if(LibAlkimia5_DIR)
   set(_LibAlkimia5_DIR ${LibAlkimia5_DIR})
