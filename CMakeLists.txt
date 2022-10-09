@@ -112,11 +112,13 @@ endif()
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DBus Widgets Svg Xml Test PrintSupport)
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} OPTIONAL_COMPONENTS Sql Concurrent QuickWidgets WebEngineWidgets WebKitWidgets)
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet XmlGui TextWidgets Notifications KIO)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service XmlGui TextWidgets Notifications KIO)
 find_package(KF5 ${KF5_MIN_VERSION} OPTIONAL_COMPONENTS DocTools Holidays Contacts Activities)
 if (DEFINED AKONADI_MIN_VERSION)
   find_package(KF5 ${AKONADI_MIN_VERSION} OPTIONAL_COMPONENTS Akonadi IdentityManagement)
 endif()
+
+find_package(Qt5Keychain CONFIG REQUIRED)
 
 if(LibAlkimia5_DIR)
   set(_LibAlkimia5_DIR ${LibAlkimia5_DIR})

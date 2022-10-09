@@ -25,7 +25,7 @@ target_link_libraries(ofximporter
   kmm_mymoney
   kmm_widgets
   kmm_plugin
-  KF5::Wallet
+  kmm_keychain
   Qt::Xml
   Alkimia::alkimia
   libofx::libofx

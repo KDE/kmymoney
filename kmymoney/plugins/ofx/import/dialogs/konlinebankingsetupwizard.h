@@ -69,7 +69,6 @@ public:
 protected Q_SLOTS:
     void checkNextButton();
     void newPage(int id);
-    void walletOpened(bool ok);
     void applicationSelectionChanged();
 
 protected:

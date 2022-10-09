@@ -1,7 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2005 Ace Jones acejones @users.sourceforge.net
     SPDX-FileCopyrightText: 2010-2019 Thomas Baumgart tbaumgart @kde.org
-    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
+    SPDX-FileCopyrightText: 2021-2022 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -21,35 +21,33 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
-#include <QUrl>
-#include <KMessageBox>
 #include <KActionCollection>
-#include <KLocalizedString>
-#include <KWallet>
-#include <KSharedConfig>
 #include <KConfigGroup>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KPluginFactory>
+#include <KSharedConfig>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <libofx/libofx.h>
-#include "konlinebankingstatus.h"
-#include "konlinebankingsetupwizard.h"
+#include "importinterface.h"
+#include "kmmkeychain.h"
+#include "kmymoneyutils.h"
 #include "kofxdirectconnectdlg.h"
+#include "konlinebankingsetupwizard.h"
+#include "konlinebankingstatus.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "mymoneystatement.h"
 #include "mymoneystatementreader.h"
 #include "statementinterface.h"
-#include "importinterface.h"
-#include "viewinterface.h"
 #include "ui_importoption.h"
-#include "kmymoneyutils.h"
+#include "viewinterface.h"
+#include <libofx/libofx.h>
 
-//#define DEBUG_LIBOFX
-
-using KWallet::Wallet;
+// #define DEBUG_LIBOFX
 
 typedef enum  {
     UniqueIdUnknown = -1,
@@ -60,9 +58,18 @@ typedef enum  {
 class OFXImporter::Private
 {
 public:
-    Private() : m_valid(false), m_preferName(PreferId), m_uniqueIdSource(UniqueIdUnknown), m_walletIsOpen(false), m_invertAmount(false), m_fixBuySellSignage(false),
-        m_statusDlg(nullptr), m_wallet(nullptr), m_action(nullptr),
-        m_updateStartDate(QDate(1900,1,1)), m_timestampOffset(0) {}
+    Private()
+        : m_valid(false)
+        , m_preferName(PreferId)
+        , m_uniqueIdSource(UniqueIdUnknown)
+        , m_invertAmount(false)
+        , m_fixBuySellSignage(false)
+        , m_statusDlg(nullptr)
+        , m_action(nullptr)
+        , m_updateStartDate(QDate(1900, 1, 1))
+        , m_timestampOffset(0)
+    {
+    }
 
     bool m_valid;
     enum NamePreference {
@@ -70,8 +77,7 @@ public:
         PreferName,
         PreferMemo,
     } m_preferName;
-    UniqueTransactionIdSource  m_uniqueIdSource;
-    bool m_walletIsOpen;
+    UniqueTransactionIdSource m_uniqueIdSource;
     bool m_invertAmount;
     bool m_fixBuySellSignage;
     QList<MyMoneyStatement> m_statementlist;
@@ -81,7 +87,6 @@ public:
     QStringList m_warnings;
     QStringList m_errors;
     KOnlineBankingStatus* m_statusDlg;
-    Wallet *m_wallet;
     QAction* m_action;
     QDate m_updateStartDate;
     int m_timestampOffset;
@@ -877,22 +882,12 @@ MyMoneyKeyValueContainer OFXImporter::onlineBankingSettings(const MyMoneyKeyValu
         kvp.deletePair(QStringLiteral("kmmofx-headerVersion"));
         kvp.deletePair(QStringLiteral("password"));
 
-        d->m_wallet = openSynchronousWallet();
-        if (d->m_wallet && (d->m_wallet->hasFolder(KWallet::Wallet::PasswordFolder()) ||
-                            d->m_wallet->createFolder(KWallet::Wallet::PasswordFolder())) &&
-                d->m_wallet->setFolder(KWallet::Wallet::PasswordFolder())) {
-            QString key = OFX_PASSWORD_KEY(kvp.value(QStringLiteral("url")), kvp.value(QStringLiteral("uniqueId")));
-            if (d->m_statusDlg->m_storePassword->isChecked()) {
-                d->m_wallet->writePassword(key, d->m_statusDlg->m_password->password());
-            } else {
-                if (d->m_wallet->hasEntry(key)) {
-                    d->m_wallet->removeEntry(key);
-                }
-            }
+        const QString key = OFX_PASSWORD_KEY(kvp.value(QStringLiteral("url")), kvp.value(QStringLiteral("uniqueId")));
+        auto keyChain = new KMMKeychain();
+        if (d->m_statusDlg->m_storePassword->isChecked()) {
+            keyChain->writeKey(key, d->m_statusDlg->m_password->password());
         } else {
-            if (d->m_statusDlg->m_storePassword->isChecked()) {
-                kvp.setValue(QStringLiteral("password"), d->m_statusDlg->m_password->password());
-            }
+            keyChain->deleteKey(key);
         }
 
         if (!d->m_statusDlg->appId().isEmpty())

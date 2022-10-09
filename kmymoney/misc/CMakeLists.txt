@@ -18,6 +18,10 @@ set( kmm_webconnect_SRCS
   webconnect.cpp
 )
 
+set ( kmm_keychain_SRCS
+  kmmkeychain.cpp
+)
+
 if( "${HAVE_UNISTD_H}" AND "${HAVE_PWD_H}" )
   set( kmm_utils_platformtools_SRCS
     platformtools_gnu.cpp
@@ -40,6 +44,10 @@ set( kmm_webconnect_HEADER
   webconnect.h
 )
 
+set ( kmm_keychain_HEADER
+  kmmkeychain.h
+)
+
 set( kmm_utils_platformtools_HEADER
   platformtools.h
 )
@@ -51,6 +59,7 @@ set( kmm_url_HEADER
 set( kmm_textbrowser_HEADER
   kmmtextbrowser.h
 )
+
 set( kmm_printer_SRCS
   kmm_printer.cpp
 )
@@ -64,6 +73,7 @@ add_library(kmm_utils_platformtools STATIC ${kmm_utils_platformtools_SRCS})
 add_library(kmm_url STATIC ${kmm_url_SRCS})
 add_library(kmm_textbrowser STATIC ${kmm_textbrowser_SRCS})
 add_library(kmm_webconnect ${kmm_webconnect_SRCS})
+add_library(kmm_keychain ${kmm_keychain_SRCS})
 add_library(kmm_printer ${kmm_printer_SRCS})
 add_library(kmm_selections ${kmm_selections_SRCS})
 
@@ -87,6 +97,12 @@ target_link_libraries( kmm_webconnect
     kmm_csvimportercore
   PRIVATE
     KF5::I18n
+)
+
+target_link_libraries( kmm_keychain
+  PUBLIC
+  Qt::Core
+  Qt5Keychain::Qt5Keychain
 )
 
 target_link_libraries( kmm_utils_platformtools
@@ -132,6 +148,11 @@ set_target_properties(kmm_webconnect PROPERTIES
 )
 generate_export_header(kmm_webconnect)
 
+set_target_properties(kmm_keychain PROPERTIES
+        VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
+        )
+generate_export_header(kmm_keychain)
+
 
 if(ENABLE_GPG)
   if(WIN32)
@@ -162,6 +183,7 @@ generate_export_header(kmm_gpgfile)
 install(TARGETS
         kmm_printer
         kmm_webconnect
+        kmm_keychain
         kmm_selections
         kmm_gpgfile
         ${INSTALL_TARGETS_DEFAULT_ARGS} )
@@ -170,6 +192,7 @@ install(FILES
         ${CMAKE_CURRENT_BINARY_DIR}/kmm_printer_export.h
         ${CMAKE_CURRENT_BINARY_DIR}/kmm_selections_export.h
         ${CMAKE_CURRENT_BINARY_DIR}/kmm_webconnect_export.h
+        ${CMAKE_CURRENT_BINARY_DIR}/kmm_keychain_export.h
         ${CMAKE_CURRENT_BINARY_DIR}/kmm_gpgfile_export.h
   DESTINATION ${KDE_INSTALL_INCLUDEDIR}/kmymoney COMPONENT Devel)
 

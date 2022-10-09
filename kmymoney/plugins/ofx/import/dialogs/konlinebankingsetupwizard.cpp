@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2006 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2022 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -22,32 +23,31 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KComboBox>
+#include <KListWidgetSearchLine>
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KListWidgetSearchLine>
-#include <KComboBox>
 #include <KUrlRequester>
-#include <KWallet>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "../ofxpartner.h"
+#include "kmmkeychain.h"
 #include "kmymoneysettings.h"
 #include "mymoneyofxconnector.h"
 #include "passwordtoggle.h"
 
-using KWallet::Wallet;
-
 class KOnlineBankingSetupWizard::Private
 {
 public:
-    Private() : m_prevPage(-1), m_wallet(0), m_walletIsOpen(false) {}
+    Private()
+        : m_prevPage(-1)
+    {
+    }
     QFile       m_fpTrace;
     QTextStream m_trace;
-    int         m_prevPage;
-    Wallet      *m_wallet;
-    bool        m_walletIsOpen;
+    int m_prevPage;
 };
 
 KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
@@ -134,18 +134,6 @@ void KOnlineBankingSetupWizard::applicationSelectionChanged()
     checkNextButton();
 }
 
-void KOnlineBankingSetupWizard::walletOpened(bool ok)
-{
-    if (ok && (d->m_wallet->hasFolder(KWallet::Wallet::PasswordFolder()) ||
-               d->m_wallet->createFolder(KWallet::Wallet::PasswordFolder())) &&
-            d->m_wallet->setFolder(KWallet::Wallet::PasswordFolder())) {
-        d->m_walletIsOpen = true;
-    } else {
-        qDebug("Wallet was not opened");
-    }
-    m_storePassword->setEnabled(d->m_walletIsOpen);
-}
-
 void KOnlineBankingSetupWizard::checkNextButton()
 {
     bool enableButton = false;
@@ -184,11 +172,6 @@ void KOnlineBankingSetupWizard::newPage(int id)
         switch (d->m_prevPage) {
         case 0:
             ok = finishFiPage();
-            // open the KDE wallet if not already opened
-            if (ok && !d->m_wallet) {
-                d->m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), winId(), Wallet::Asynchronous);
-                connect(d->m_wallet, &KWallet::Wallet::walletOpened, this, &KOnlineBankingSetupWizard::walletOpened);
-            }
             focus = m_editUsername;
             break;
         case 1:
@@ -564,14 +547,12 @@ bool KOnlineBankingSetupWizard::chosenSettings(MyMoneyKeyValueContainer& setting
             if (!hVer.isEmpty())
                 settings.setValue("kmmofx-headerVersion", hVer);
             if (m_storePassword->isChecked()) {
-                if (d->m_walletIsOpen) {
-                    QString key = OFX_PASSWORD_KEY(settings.value("url"), settings.value("uniqueId"));
-                    d->m_wallet->writePassword(key, settings.value("password"));
-                    settings.deletePair("password");
-                }
-            } else {
-                settings.deletePair("password");
+                const QString key = OFX_PASSWORD_KEY(settings.value("url"), settings.value("uniqueId"));
+                auto keyChain = new KMMKeychain();
+                keyChain->writeKey(key, settings.value("password"));
             }
+            settings.deletePair("password");
+
             result = true;
         }
     }

@@ -853,7 +853,7 @@
 <para>
   These instructions are solely for moving your &kmymoney; data and settings.
   However, there may be important items which are stored by &kde; and not by
-  &kmymoney;, such as passwords stored in kwallet.  Moving other parts of
+  &kmymoney;, such as passwords stored in Keychain.  Moving other parts of
   your &kde; setup is beyond the scope of this manual, although many of the
   relevant files are also stored under <envar>$KDEHOME</envar>.
 </para>

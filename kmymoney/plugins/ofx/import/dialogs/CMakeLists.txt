@@ -13,4 +13,16 @@ set(ofximporter_dialogs_UI
 ki18n_wrap_ui(ofximporter_dialogs_la_SOURCES
   ${ofximporter_dialogs_UI})
 add_library(ofximporter_dialogs STATIC ${ofximporter_dialogs_la_SOURCES})
-target_link_libraries(ofximporter_dialogs kmm_widgets libofx::libofx KF5::WidgetsAddons KF5::I18n KF5::CoreAddons KF5::KIOCore KF5::KIOWidgets KF5::Wallet Qt::Widgets Qt::Xml)
+target_link_libraries(
+        ofximporter_dialogs
+        kmm_widgets
+        libofx::libofx
+        KF5::WidgetsAddons
+        KF5::I18n
+        KF5::CoreAddons
+        KF5::KIOCore
+        KF5::KIOWidgets
+        Qt::Widgets
+        Qt::Xml
+        kmm_keychain
+)

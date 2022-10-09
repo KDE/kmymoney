@@ -128,6 +128,7 @@ target_link_libraries(kmm_mymoney
                       # TODO: fix this
                       KF5::XmlGui
                       PRIVATE
+                      kmm_keychain
                       onlinetask_interfaces
                       $<$<BOOL:${USE_MODELTEST}>:Qt::Test>
 )

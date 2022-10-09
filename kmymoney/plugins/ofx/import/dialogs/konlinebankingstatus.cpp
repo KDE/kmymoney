@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2008 Thomas Baumgart <ipwizard@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2022 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -22,16 +23,14 @@
 #include <KLed>
 #include <KLocalizedString>
 #include <KProtocolManager>
-#include <KWallet>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneykeyvaluecontainer.h"
+#include "kmmkeychain.h"
 #include "mymoneyaccount.h"
+#include "mymoneykeyvaluecontainer.h"
 #include "mymoneyofxconnector.h"
-
-using KWallet::Wallet;
 
 KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *parent) :
     KOnlineBankingStatusDecl(parent),
@@ -94,20 +93,18 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
     m_invertAmount->setChecked(settings.value("kmmofx-invertamount").toLower() == QStringLiteral("yes"));
     m_fixBuySellSignage->setChecked(settings.value("kmmofx-fixbuysellsignage").toLower() == QStringLiteral("yes"));
 
-    QString key = OFX_PASSWORD_KEY(settings.value("url"), settings.value("uniqueId"));
+    const QString key = OFX_PASSWORD_KEY(settings.value("url"), settings.value("uniqueId"));
     QString pwd;
 
-    // if we don't find a password in the wallet, we use the old method
+    // if we don't find a password in the KeyChain, we use the old method
     // and retrieve it from the settings stored in the KMyMoney data storage.
-    if (Wallet::keyDoesNotExist(Wallet::NetworkWallet(), Wallet::PasswordFolder(), key)) {
+    auto keyChain = new KMMKeychain();
+    pwd = keyChain->readKeySynchronous(key);
+
+    if (pwd.isEmpty()) {
         pwd = settings.value("password");
-    } else {
-        Wallet *wallet = openSynchronousWallet();
-        if (wallet) {
-            wallet->setFolder(Wallet::PasswordFolder());
-            wallet->readPassword(key, pwd);
-        }
     }
+
     m_password->setPassword(pwd);
     m_storePassword->setChecked(!pwd.isEmpty());
 }
