@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-08 00:48+0000\n"
+"POT-Creation-Date: 2022-10-10 00:46+0000\n"
 "PO-Revision-Date: 2022-09-13 07:20+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -1009,8 +1009,8 @@ msgstr "Urejevalnik menjalnih tečajev/cenika"
 #. i18n: ectx: attribute (title), widget (QWidget, m_amountTab)
 #. i18n: ectx: attribute (title), widget (QWidget, amountTab)
 #: kmymoney/dialogs/kcurrencycalculator.ui:51
-#: kmymoney/plugins/csv/export/csvwriter.cpp:98
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#: kmymoney/plugins/csv/export/csvwriter.cpp:100
+#: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:398
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:57
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
@@ -1089,8 +1089,8 @@ msgstr "xxx"
 #: kmymoney/dialogs/kmymoneypricedlg.ui:60
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:92
 #: kmymoney/mymoney/storage/pricemodel.cpp:39
-#: kmymoney/plugins/csv/export/csvwriter.cpp:98
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#: kmymoney/plugins/csv/export/csvwriter.cpp:100
+#: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:132
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:56
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:152
@@ -1708,7 +1708,7 @@ msgstr "Ime"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:75
 #: kmymoney/models/equitiesmodel.cpp:193 kmymoney/models/equitiesmodel.cpp:415
 #: kmymoney/mymoney/storage/pricemodel.cpp:40
-#: kmymoney/plugins/csv/export/csvwriter.cpp:98
+#: kmymoney/plugins/csv/export/csvwriter.cpp:100
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:53
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:174
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:45
@@ -2812,7 +2812,7 @@ msgstr "Kraj:"
 msgid "Bank Code:"
 msgstr "Koda banke:"
 
-#: kmymoney/dialogs/kpayeereassigndlg.cpp:34
+#: kmymoney/dialogs/kpayeereassigndlg.cpp:35
 msgid ""
 "To be able to merge previous selected payees, please select a payee from the "
 "list below or create a new one."
@@ -2820,7 +2820,7 @@ msgstr ""
 "Če želite združiti prejšnje izbrane prejemnike plačil, izberite prejemnika "
 "plačila izmed spodnjega seznama ali ustvarite novega."
 
-#: kmymoney/dialogs/kpayeereassigndlg.cpp:35
+#: kmymoney/dialogs/kpayeereassigndlg.cpp:36
 msgid ""
 "The transactions associated with the selected payees need to be re-assigned "
 "to a different payee before the selected payees can be deleted. Please "
@@ -2830,7 +2830,7 @@ msgstr ""
 "dodeliti drugemu prejemniku plačila, preden lahko izbrane prejemnike plačila "
 "izbrišemo. Prosim izberite prejemnika plačil iz spodnjega seznama."
 
-#: kmymoney/dialogs/kpayeereassigndlg.cpp:113
+#: kmymoney/dialogs/kpayeereassigndlg.cpp:114
 #, kde-format
 msgid ""
 "This dialog does not allow new payees to be created. Please pick a payee "
@@ -2839,7 +2839,7 @@ msgstr ""
 "Ta dialog okno ne dovoljuje ustvarjanja novih prejemnikov plačil. Izberite "
 "prejemnika plačila iz seznama."
 
-#: kmymoney/dialogs/kpayeereassigndlg.cpp:113
+#: kmymoney/dialogs/kpayeereassigndlg.cpp:114
 #, kde-format
 msgid "Payee creation"
 msgstr "Ustvarjanje prejemnika plačil"
@@ -3012,7 +3012,7 @@ msgstr "Nov vnos cene"
 #. i18n: ectx: property (windowTitle), widget (QDialog, SecurityDlg)
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:95
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:79
-#: kmymoney/plugins/csv/export/csvwriter.cpp:98
+#: kmymoney/plugins/csv/export/csvwriter.cpp:100
 #: kmymoney/plugins/csv/import/securitydlg.ui:14
 #: kmymoney/views/investtransactioneditor.ui:99
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:193
@@ -6069,47 +6069,47 @@ msgstr[3] "Nobene nove transakcije ni bilo uvožene."
 msgid "Statement import statistics"
 msgstr "Statistika uvoza izkazov"
 
-#: kmymoney/main.cpp:113
+#: kmymoney/main.cpp:112
 #, kde-format
 msgid "KMyMoney"
 msgstr "KMyMoney"
 
-#: kmymoney/main.cpp:133
+#: kmymoney/main.cpp:132
 #, kde-format
 msgid "language to be used"
 msgstr "jezik, ki naj bi se uporabil"
 
-#: kmymoney/main.cpp:137
+#: kmymoney/main.cpp:136
 #, kde-format
 msgid "do not open last used file"
 msgstr "ne odpirajte zadnje uporabljene datoteke"
 
-#: kmymoney/main.cpp:141
+#: kmymoney/main.cpp:140
 #, kde-format
 msgid "enable performance timers"
 msgstr "omogoči časomerilnike učinkovitosti"
 
-#: kmymoney/main.cpp:145
+#: kmymoney/main.cpp:144
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
 msgstr "globalno ne lovite neulovljenih izjem"
 
-#: kmymoney/main.cpp:151
+#: kmymoney/main.cpp:150
 #, kde-format
 msgid "turn on program traces"
 msgstr "vklopite sledenje programa"
 
-#: kmymoney/main.cpp:155
+#: kmymoney/main.cpp:154
 #, kde-format
 msgid "dump the names of all defined QAction objects to stdout and quit"
 msgstr "izbruhaj imena vseh določenih predmetov QAction na stdout in končaj"
 
-#: kmymoney/main.cpp:161
+#: kmymoney/main.cpp:160
 #, kde-format
 msgid "file to open"
 msgstr "datoteka za odpiranje"
 
-#: kmymoney/main.cpp:296
+#: kmymoney/main.cpp:295
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
 msgstr "Neulovljena napaka. Prosimo poročajte podrobnosti razvijalcem"
@@ -6235,7 +6235,7 @@ msgstr "Simbol"
 #. i18n: ectx: property (text), widget (QLabel, labelInv_quantity)
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
 #: kmymoney/models/equitiesmodel.cpp:192 kmymoney/models/equitiesmodel.cpp:413
-#: kmymoney/plugins/csv/export/csvwriter.cpp:98
+#: kmymoney/plugins/csv/export/csvwriter.cpp:100
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:54
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:102
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:482
@@ -8743,7 +8743,7 @@ msgstr "Vrednost"
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkPayee)
 #. i18n: ectx: attribute (title), widget (QWidget, payeeTab)
 #: kmymoney/mymoney/storage/payeesmodel.cpp:95
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:21
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:68
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:243
@@ -9408,24 +9408,24 @@ msgid ""
 "qt>"
 msgstr "<qt>Datoteka <b>%1</b> že obstaja. Ali jo res želite prepisati?</qt>"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:73
-#: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:71
+#: kmymoney/plugins/csv/export/csvwriter.cpp:75
+#: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:73
 #, kde-format
 msgid "Unexpected exception '%1'"
 msgstr "Nepričakovana izjema '%1'"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:77
+#: kmymoney/plugins/csv/export/csvwriter.cpp:79
 #, kde-format
 msgid "Export completed.\n"
 msgstr "Izvoz dokončan.\n"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:80
-#: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:77
+#: kmymoney/plugins/csv/export/csvwriter.cpp:82
+#: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "Datoteke '%1' ni mogoče odpreti za pisanje"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:94
+#: kmymoney/plugins/csv/export/csvwriter.cpp:96
 #, kde-format
 msgid "Account Type:"
 msgstr "Vrsta računa:"
@@ -9436,7 +9436,7 @@ msgstr "Vrsta računa:"
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkAccount)
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxAccount)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:98
+#: kmymoney/plugins/csv/export/csvwriter.cpp:100
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:158
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:247
 #: kmymoney/plugins/views/budget/kbudgetview.ui:185
@@ -9461,8 +9461,8 @@ msgstr "Račun"
 #. i18n: ectx: property (text), widget (QLabel, statusLabel)
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:98
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#: kmymoney/plugins/csv/export/csvwriter.cpp:100
+#: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:72
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:159
 #: kmymoney/views/investtransactioneditor.ui:113
@@ -9479,8 +9479,8 @@ msgstr "Stanje"
 #. i18n: ectx: attribute (title), widget (QWidget, memoTab)
 #. i18n: ectx: property (text), widget (QLabel, labelInv_memo)
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_memo)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:98
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#: kmymoney/plugins/csv/export/csvwriter.cpp:100
+#: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:270
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:60
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:86
@@ -9503,7 +9503,7 @@ msgstr "Opomba"
 #. i18n: ectx: attribute (title), widget (QWizardPage, InterestWizardPage)
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
 #. i18n: ectx: property (text), item, widget (QComboBox, cbActionTypes)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:98
+#: kmymoney/plugins/csv/export/csvwriter.cpp:100
 #: kmymoney/plugins/csv/import/transactiondlg.ui:127
 #: kmymoney/plugins/views/reports/core/listtable.cpp:679
 #: kmymoney/views/investtransactioneditor.ui:61
@@ -9519,7 +9519,7 @@ msgstr "Obresti"
 #. i18n: ectx: property (text), widget (QLabel, feesAmountLabel)
 #. i18n: ectx: property (text), widget (QLabel, feesLabel)
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, feesAmountEdit)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:98
+#: kmymoney/plugins/csv/export/csvwriter.cpp:100
 #: kmymoney/plugins/views/reports/core/listtable.cpp:677
 #: kmymoney/views/investtransactioneditor.ui:106
 #: kmymoney/views/investtransactioneditor.ui:214
@@ -9529,7 +9529,7 @@ msgstr "Obresti"
 msgid "Fees"
 msgstr "Pristojbine"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:98
+#: kmymoney/plugins/csv/export/csvwriter.cpp:100
 #, kde-format
 msgid "Action/Type"
 msgstr "Dejavnost/Tip"
@@ -9538,7 +9538,7 @@ msgstr "Dejavnost/Tip"
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkNumber)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:376
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:230
@@ -9550,12 +9550,12 @@ msgstr "Dejavnost/Tip"
 msgid "Number"
 msgstr "Številka"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #, kde-format
 msgid "Account/Cat"
 msgstr "Račun/Kategorija"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:171
+#: kmymoney/plugins/csv/export/csvwriter.cpp:173
 #, kde-format
 msgid ""
 "Transaction number '%1' is missing an account assignment.\n"
@@ -9567,30 +9567,30 @@ msgstr ""
 "Transakcija zavrnjena.\n"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:173
-#: kmymoney/plugins/csv/export/csvwriter.cpp:350
-#: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:347
+#: kmymoney/plugins/csv/export/csvwriter.cpp:175
+#: kmymoney/plugins/csv/export/csvwriter.cpp:352
+#: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:349
 #: kmymoney/widgets/ktransactionfilter.ui:643
 #, kde-format
 msgid "Invalid transaction"
 msgstr "Neveljavna transakcija"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:234
+#: kmymoney/plugins/csv/export/csvwriter.cpp:236
 #, kde-format
 msgid "splitCategory"
 msgstr "deljena-kategorija"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:234
+#: kmymoney/plugins/csv/export/csvwriter.cpp:236
 #, kde-format
 msgid "splitMemo"
 msgstr "deljena-opomba"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:234
+#: kmymoney/plugins/csv/export/csvwriter.cpp:236
 #, kde-format
 msgid "splitAmount"
 msgstr "deljen-znesek"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:348
+#: kmymoney/plugins/csv/export/csvwriter.cpp:350
 #, kde-format
 msgid ""
 "Transaction number '%1' is missing an account assignment.\n"
@@ -12325,13 +12325,13 @@ msgstr ""
 "vaš generator"
 
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:203
-#: kmymoney/plugins/ofx/import/ofxpartner.cpp:409
+#: kmymoney/plugins/ofx/import/ofxpartner.cpp:413
 #, kde-format
 msgid "The HTTP request failed."
 msgstr "Zahtevek HTTP ni uspel."
 
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:203
-#: kmymoney/plugins/ofx/import/ofxpartner.cpp:409
+#: kmymoney/plugins/ofx/import/ofxpartner.cpp:413
 #, kde-format
 msgctxt "The HTTP request failed"
 msgid "Failed"
@@ -13577,7 +13577,7 @@ msgstr "Profil QIF"
 msgid "Categories"
 msgstr "Kategorije"
 
-#: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:346
+#: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:348
 #, kde-format
 msgid ""
 "Transaction number <b>%1</b> is missing an account assignment.\n"
@@ -18436,24 +18436,24 @@ msgstr ""
 "<p>Neveljavna vrsta računa na najvišji ravni <b>%1</b> v datoteki predloge "
 "<b>%2</b></p>"
 
-#: kmymoney/templates/templatewriter.cpp:176
+#: kmymoney/templates/templatewriter.cpp:178
 #, kde-format
 msgid "Invalid template URL '%1'"
 msgstr "Neveljaven spletni naslov predloge '%1'"
 
-#: kmymoney/templates/templatewriter.cpp:186
-#: kmymoney/templates/templatewriter.cpp:200
+#: kmymoney/templates/templatewriter.cpp:188
+#: kmymoney/templates/templatewriter.cpp:202
 #, kde-format
 msgid "Unable to write changes to '%1'"
 msgstr "Sprememb v '%1' ni mogoče zapisati"
 
-#: kmymoney/templates/templatewriter.cpp:190
-#: kmymoney/templates/templatewriter.cpp:204
+#: kmymoney/templates/templatewriter.cpp:192
+#: kmymoney/templates/templatewriter.cpp:206
 #, kde-format
 msgid "Unable to open template file '%1'"
 msgstr "Ni mogoče odpreti datoteke predloge '%1'"
 
-#: kmymoney/templates/templatewriter.cpp:213
+#: kmymoney/templates/templatewriter.cpp:215
 #, kde-format
 msgid "Unable to upload to '%1'.<br />%2"
 msgstr "Ni mogoče prenesti v '%1'. <br />%2"
