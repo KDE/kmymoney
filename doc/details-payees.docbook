@@ -29,8 +29,9 @@
   left, and a detail area on the right.  The <guilabel>Your payees</guilabel>
   section allows for adding, deleting, renaming, and merging payees.  The detail
   area has several tabs, showing the transactions, address, matching
-  information, default category, and account numbers for the payee selected in
-  the list.
+  information, default category and account numbers for the payee selected in
+  the list. Furthermore, links between payee-specific contents of a transaction's
+  memo field and local file paths or remote URL can be created and managed.
 </para>
 
 <para>
@@ -250,5 +251,81 @@
 </screenshot>
 </para>
 </sect1>
-</chapter>
 
+<sect1 id="details.payees.linkmatching">
+<title>Manage link matching</title>
+
+<para>
+  This tab can be used to link parts of contents of the memo field of a transaction to
+  a remote or local URL, for example to make invoices or other documents accessible.
+</para>
+
+<para>
+  The tab contains input fields for a pattern and a URL template. The specified pattern
+  is extracted via regular expressions in the memo field from transactions associated
+  with this payee and inserted into the URL template at designated locations.
+
+<screenshot>
+  <screeninfo>The link matching tab</screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="payee_link-matching.png" format="PNG" />
+      </imageobject>
+    </mediaobject>
+</screenshot>
+</para>
+
+<para>
+  The resulting URL is displayed as link in the general ledger at the corresponding transactions (see column "Detail").
+<screenshot>
+  <screeninfo>Show link in the general ledger</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_link-matching-ledger.png" format="PNG" />
+    </imageobject>
+  </mediaobject>
+</screenshot>
+
+The link can be accessed via the context menu of a transaction or via a keyboard shortcut.
+<screenshot>
+  <screeninfo>....</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="payee_link-matching-open-url.png" format="PNG" />
+    </imageobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.payees.linkmatching.pattern">
+<title>Hints</title>
+<para>
+  Found patterns, which must match Perl-compatible regular expressions, are inserted in the URL template in the place of the supported placeholders.
+
+  Simple example are:
+
+  <itemizedlist>
+    <listitem><para>\d+\b - one or more numbers followed by a word boundary.</para></listitem>
+    <listitem><para>\d{2,4}\b - 2 to 4 numbers followed by a word boundary</para></listitem>
+    <listitem><para>\d{3}-d{6}\b - 3 numbers followed by a hyphen and 6 numbers followed by a word boundary</para></listitem>
+  </itemizedlist>
+</para>
+
+<para>
+  Supported placeholders are:
+  <itemizedlist>
+    <listitem><para>%1 - first found expression</para></listitem>
+    <listitem><para>%2 - second found expression (optional)</para></listitem>
+  </itemizedlist>
+ When using two independent patterns, the individual expressions in the pattern are separated by round brackets, e.g. <code>(..)...(..)</code>.
+</para>
+
+<para>
+  In addition, predefined variables can be used in the URL template. Currently supported variables are:
+  <itemizedlist>
+    <listitem><para>%year - the year from the date of the corresponding transaction</para></listitem>
+  </itemizedlist>
+</para>
+</sect2>
+</sect1>
+</chapter>
