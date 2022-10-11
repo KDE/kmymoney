@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-10 00:46+0000\n"
+"POT-Creation-Date: 2022-10-11 00:47+0000\n"
 "PO-Revision-Date: 2022-09-18 15:57+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -5632,7 +5632,7 @@ msgstr ""
 "No s'ha pogut importar %1 utilitzant el connector %2. El connector ha "
 "retornat l'error següent: %3"
 
-#: kmymoney/kmymoney.cpp:4163 kmymoney/plugins/ofx/import/ofximporter.cpp:1017
+#: kmymoney/kmymoney.cpp:4163 kmymoney/plugins/ofx/import/ofximporter.cpp:1012
 #, kde-format
 msgid "Importing error"
 msgstr "S'ha produït un error d'importació"
@@ -12059,7 +12059,7 @@ msgid "Pick &date"
 msgstr "Seleccioneu una &data"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:305
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:865
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:870
 #, kde-format
 msgid "Online settings"
 msgstr "Configuració en línia"
@@ -12422,32 +12422,32 @@ msgstr ""
 "S'està obtenint la llista de bancs des de https://www.ofxhome.com/\n"
 "Açò pot tardar una estona depenent de l'amplada de banda disponible."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:257
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:311
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:240
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:294
 #, kde-format
 msgid "Supports online statements<br/>"
 msgstr "Permet extractes en línia<br/>"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:259
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:313
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:242
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:296
 #, kde-format
 msgid "Supports investments<br/>"
 msgstr "Permet inversions<br/>"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:261
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:315
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:244
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:298
 #, kde-format
 msgid "Supports bill payment (but not supported by KMyMoney yet)<br/>"
 msgstr ""
 "Permet el pagament de factures (però encara no està implementat en "
 "KMyMoney)<br/>"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:265
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:248
 #, kde-format
 msgid "OFX host failed. Last successful access was on '%1'. "
 msgstr "El servidor OFX ha fallat. L'últim accés correcte fou «%1». "
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:267
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:250
 #, kde-format
 msgid ""
 "Certificate verification of OFX host failed. Last successful verification "
@@ -12456,58 +12456,58 @@ msgstr ""
 "Ha fallat la verificació del certificat del servidor OFX. L'última "
 "verificació correcta fou «%1»."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:275
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:258
 #, kde-format
 msgid "Does not support online banking"
 msgstr "No permet banca en línia"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:285
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:268
 #, kde-format
 msgid "Please choose a bank."
 msgstr "Seleccioneu un banc."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:291
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:274
 #, kde-format
 msgid "Please fill all fields with values."
 msgstr "Empleneu tots els camps amb valors."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:295
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:278
 #, kde-format
 msgid "<p>Details for %1:</p>"
 msgstr "<p>Detalls per a %1:</p>"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:406
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:389
 #, kde-format
 msgid "No suitable accounts were found at this bank."
 msgstr "No s'ha trobat cap compte apropiat en este banc."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:422
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:405
 #, kde-format
 msgid "Please choose an account"
 msgstr "Seleccioneu un compte"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:525
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:508
 #, kde-format
 msgid "Server message: %1\n"
 msgstr "Missatge del servidor: %1\n"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:533
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:516
 #, kde-format
 msgid "Your bank returned warnings when signing on"
 msgstr "El vostre banc ha retornat avisos en connectar-se"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:533
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:516
 #, kde-format
 msgctxt "Warning 'message'"
 msgid "WARNING %1"
 msgstr "AVÍS %1"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:536
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:519
 #, kde-format
 msgid "Error signing onto your bank"
 msgstr "S'ha produït un error en connectar-se al vostre banc"
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:536
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:519
 #, kde-format
 msgid "ERROR %1"
 msgstr "ERROR %1"
@@ -12688,7 +12688,7 @@ msgstr ""
 "Enhorabona, heu configurat correctament el banc per a la banca en línia via "
 "OFX."
 
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatus.cpp:53
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatus.cpp:52
 #, kde-format
 msgid "Enabled & configured"
 msgstr "Activada i configurada"
@@ -12893,149 +12893,149 @@ msgstr ""
 "correcte a la quantitat de les accions o el valor de la quantitat.</p></"
 "body></html>"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:72
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:71
 #, kde-format
 msgid "Quicken Windows 2003"
 msgstr "Quicken Windows 2003"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:73
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:72
 #, kde-format
 msgid "Quicken Windows 2004"
 msgstr "Quicken Windows 2004"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:74
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:73
 #, kde-format
 msgid "Quicken Windows 2005"
 msgstr "Quicken Windows 2005"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:75
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:74
 #, kde-format
 msgid "Quicken Windows 2006"
 msgstr "Quicken Windows 2006"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:76
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:75
 #, kde-format
 msgid "Quicken Windows 2007"
 msgstr "Quicken Windows 2007"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:77
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:142
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:146
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:76
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:141
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:145
 #, kde-format
 msgid "Quicken Windows 2008"
 msgstr "Quicken Windows 2008"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:80
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:79
 #, kde-format
 msgid "Quicken Windows 2010"
 msgstr "Quicken Windows 2010"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:81
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:80
 #, kde-format
 msgid "Quicken Windows 2011"
 msgstr "Quicken Windows 2011"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:82
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:81
 #, kde-format
 msgid "Quicken Windows 2012"
 msgstr "Quicken Windows 2012"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:83
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:82
 #, kde-format
 msgid "Quicken Windows 2013"
 msgstr "Quicken Windows 2013"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:84
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:83
 #, kde-format
 msgid "Quicken Windows 2014"
 msgstr "Quicken Windows 2014"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:86
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:85
 #, kde-format
 msgid "Quicken Windows 2015"
 msgstr "Quicken Windows 2015"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:87
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:86
 #, kde-format
 msgid "Quicken Windows 2016"
 msgstr "Quicken Windows 2016"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:89
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:88
 #, kde-format
 msgid "Quicken Windows 2017"
 msgstr "Quicken Windows 2017"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:90
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:89
 #, kde-format
 msgid "Quicken Windows 2018"
 msgstr "Quicken Windows 2018"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:91
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:90
 #, kde-format
 msgid "Quicken Windows 2019"
 msgstr "Quicken Windows 2019"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:93
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:92
 #, kde-format
 msgid "Quicken Windows (Expert)"
 msgstr "Quicken Windows (expert)"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:96
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:95
 #, kde-format
 msgid "Quicken Mac (Expert)"
 msgstr "Quicken Mac (Expert)"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:99
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:98
 #, kde-format
 msgid "MS-Money 2003"
 msgstr "MS-Money 2003"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:100
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:99
 #, kde-format
 msgid "MS-Money 2004"
 msgstr "MS-Money 2004"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:101
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:100
 #, kde-format
 msgid "MS-Money 2005"
 msgstr "MS-Money 2005"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:102
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:101
 #, kde-format
 msgid "MS-Money 2006"
 msgstr "MS-Money 2006"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:103
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:102
 #, kde-format
 msgid "MS-Money 2007"
 msgstr "MS-Money 2007"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:104
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:103
 #, kde-format
 msgid "MS-Money Plus"
 msgstr "MS-Money Plus"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:105
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:104
 #, kde-format
 msgid "MS-Money (Expert)"
 msgstr "MS-Money (expert)"
 
-#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:228
+#: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:225
 #, kde-format
 msgid "Enter your password for account <b>%1</b>"
 msgstr "Introduïu la contrasenya per al compte <b>%1</b>"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:143
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:148
 #, kde-format
 msgid "OFX..."
 msgstr "OFX..."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:157
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:162
 #, kde-format
 msgid "OFX import file selection"
 msgstr "Seleccioneu el fitxer d'importació OFX"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:177
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:182
 #, kde-format
 msgid ""
 "Unable to import %1 using the OFX importer plugin.  This file is not the "
@@ -13044,27 +13044,27 @@ msgstr ""
 "No s'ha pogut importar %1 utilitzant el connector Importador d'OFX. Este "
 "fitxer no té el format correcte."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:177
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:182
 #, kde-format
 msgid "Incorrect format"
 msgstr "Format Incorrecte"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:222
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:227
 #, kde-format
 msgid "Unable to parse file"
 msgstr "No s'ha pogut interpretar el fitxer"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:812
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:817
 #, kde-format
 msgid "No accounts found."
 msgstr "No s'ha trobat cap compte."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1007
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1002
 #, kde-format
 msgid "Error connecting to bank: %1"
 msgstr "S'ha produït un error en connectar amb el banc: %1"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1017
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1012
 #, kde-format
 msgid ""
 "<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin "
@@ -13073,12 +13073,12 @@ msgstr ""
 "<p>No s'ha pogut importar <b>«%1»</b> utilitzant el connector Importador "
 "d'OFX. El connector ha retornat l'error següent:</p><p>%2</p>"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1051
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1046
 #, kde-format
 msgid "Importing process terminated unexpectedly."
 msgstr "El procés d'importació ha finalitzat inesperadament."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1051
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1046
 #, kde-format
 msgid "Failed to import all statements."
 msgstr "No s'han pogut importar tots els extractes."
