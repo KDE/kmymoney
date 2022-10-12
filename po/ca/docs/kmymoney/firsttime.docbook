@@ -828,7 +828,7 @@
 
 <note>
 <para
->Aquestes instruccions són únicament per a moure les opcions del &kmymoney;. No obstant això, hi podria haver elements importants que desa el &kde; i no el &kmymoney;, com les contrasenyes emmagatzemades en el &kwallet5;. Moure altres parts de la configuració del &kde; està més enllà de l'àmbit d'aquest manual, encara que molts dels fitxers rellevants també s'emmagatzemen sota la <envar
+>Aquestes instruccions són únicament per a moure les opcions del &kmymoney;. No obstant això, hi podria haver elements importants que desa el &kde; i no el &kmymoney;, com les contrasenyes emmagatzemades en un clauer. Moure altres parts de la configuració del &kde; està més enllà de l'àmbit d'aquest manual, encara que molts dels fitxers rellevants també s'emmagatzemen sota la <envar
 >$KDEHOME</envar
 >. </para>
 </note>

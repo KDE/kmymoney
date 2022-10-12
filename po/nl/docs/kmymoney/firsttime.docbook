@@ -826,7 +826,7 @@
 
 <note>
 <para
->Deze instructie zijn uitsluitend voor het verplaatsen van uw &kmymoney;-data en instellingen. Maar er kunnen belangrijke items zijn die door &kde; worden opgeslagen en niet door &kmymoney;, zoals wachtwoorden die in kwallet zijn opgeslagen. Het verplaatsen van andere onderdelen van uw &kde; instellingen valt buiten het doel van deze handleiding, ofschoon veel van de relevante bestanden ook in <envar
+>Deze instructie zijn uitsluitend voor het verplaatsen van uw &kmymoney;-data en instellingen. Maar er kunnen belangrijke items zijn die door &kde; worden opgeslagen en niet door &kmymoney;, zoals wachtwoorden die in Keychain zijn opgeslagen. Het verplaatsen van andere onderdelen van uw &kde; instellingen valt buiten het doel van deze handleiding, ofschoon veel van de relevante bestanden ook in <envar
 >$KDEHOME</envar
 > zijn opgeslagen. </para>
 </note>
