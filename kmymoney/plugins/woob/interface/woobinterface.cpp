@@ -42,6 +42,7 @@ WoobInterface::WoobInterface()
 
     Py_Initialize();
     qDebug() << "Python interpreter found:" << Py_GetVersion();
+    qDebug() << "Python interpreter module search paths:" << QString::fromWCharArray(Py_GetPath());
 
     const auto scriptResourceName = ":/plugins/woob/kmymoneywoob.py";
     auto nativeScript = std::unique_ptr<QTemporaryFile>(QTemporaryFile::createNativeFile(scriptResourceName));
