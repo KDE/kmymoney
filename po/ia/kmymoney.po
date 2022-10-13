@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-11 00:47+0000\n"
-"PO-Revision-Date: 2022-07-15 11:58+0200\n"
+"PO-Revision-Date: 2022-10-12 15:43+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -4199,10 +4199,9 @@ msgid ""
 msgstr ""
 
 #: kmymoney/kcreditswindow.cpp:41
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2021 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2022 The KMyMoney development team"
-msgstr "(c) 2000-2021 le equipa de disveloppamento de KMyMoney"
+msgstr "(c) 2000-2022 le equipa de disveloppamento de KMyMoney"
 
 #: kmymoney/kcreditswindow.cpp:44
 #, kde-format
@@ -7508,25 +7507,22 @@ msgid "Any"
 msgstr "Ulle"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:930
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Frequency of schedule"
 msgid "%1 times"
-msgstr ""
+msgstr "; %1 vices"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:938
-#, fuzzy, kde-format
-#| msgctxt "Forecast days"
-#| msgid "%1 day"
-#| msgid_plural "%1 days"
+#, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 days"
-msgstr "%1 die"
+msgstr "Cata %1dies"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:956
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 weeks"
-msgstr ""
+msgstr "Cata %1 septimanas"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:960
 #, kde-format
@@ -7535,17 +7531,16 @@ msgid "Every %1 half months"
 msgstr ""
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:977
-#, fuzzy, kde-format
-#| msgid "Next 12 months"
+#, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 months"
-msgstr "Proxime 12 menses"
+msgstr "Omne %1 menses"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:986
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 years"
-msgstr ""
+msgstr "Cata %1 annos"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:996
 msgctxt "Schedule occurrence period"
@@ -19887,7 +19882,7 @@ msgstr "Ex"
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"
-msgstr ""
+msgstr "Le data que tu insertava es invalide"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
 #, kde-format
