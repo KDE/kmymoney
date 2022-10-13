@@ -2,15 +2,56 @@
 # This file is part of KMyMoney, A Personal Finance Manager by KDE
 # SPDX-FileCopyrightText: 2014-2015 Romain Bignon <romain@symlink.me>
 # SPDX-FileCopyrightText: 2014-2015 Florent Fourcot <weboob@flo.fourcot.fr>
+# SPDX-FileCopyrightText: 2022 Dawid Wróbel <me@dawidwrobel.com>
 # SPDX-License-Identifier: GPL-2.0-or-later
 #
 
 import logging
+import logging.config
+import sys
+
 from woob.core import Woob
 from woob.capabilities.bank import CapBank
 
-LOGGER = logging.getLogger(__name__)
+# based on https://stackoverflow.com/a/53257669/665932
+class _ExcludeErrorsFilter(logging.Filter):
+    def filter(self, record):
+        """Only lets through log messages with log level below ERROR ."""
+        return record.levelno < logging.ERROR
 
+
+config = {
+    'version': 1,
+    'filters': {
+        'exclude_errors': {
+            '()': _ExcludeErrorsFilter
+        }
+    },
+    'handlers': {
+        'console_stderr': {
+            # Sends log messages with log level ERROR or higher to stderr
+            'class': 'logging.StreamHandler',
+            'level': 'ERROR',
+            'stream': sys.stderr
+        },
+        'console_stdout': {
+            # Sends log messages with log level lower than ERROR to stdout
+            'class': 'logging.StreamHandler',
+            'level': 'DEBUG',
+            'filters': ['exclude_errors'],
+            'stream': sys.stdout
+        },
+    },
+    'root': {
+        # In general, this should be kept at 'NOTSET'.
+        # Otherwise it would interfere with the log levels set for each handler.
+        'level': 'NOTSET',
+        'handlers': ['console_stderr', 'console_stdout']
+    },
+}
+
+logging.config.dictConfig(config)
+LOGGER = logging.getLogger(__name__)
 
 def get_backends():
     w = Woob()
