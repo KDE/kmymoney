@@ -61,6 +61,9 @@ void KHomeView::executeAction(eMenu::Action action, const SelectedObjects& selec
 
     Q_D(KHomeView);
     switch (action) {
+    case eMenu::Action::FileNew:
+        d->m_fileOpen = true;
+        break;
     case eMenu::Action::Print:
         if (d->isActiveView()) {
             slotPrintView();
@@ -72,7 +75,8 @@ void KHomeView::executeAction(eMenu::Action action, const SelectedObjects& selec
         }
         break;
     case eMenu::Action::FileClose:
-        d->m_view->setHtml(KWelcomePage::welcomePage());
+        d->m_fileOpen = false;
+        d->loadView();
         break;
     default:
         break;

@@ -111,6 +111,7 @@ public:
         , m_needLoad(true)
         , m_netWorthGraphLastValidSize(400, 300)
         , m_scrollBarPos(0)
+        , m_fileOpen(false)
     {
     }
 
@@ -404,6 +405,9 @@ public:
         m_view->zoomIn(pointSizeDelta);
 
         m_view->setHtml(KWelcomePage::welcomePage());
+
+        if (!m_fileOpen)
+            return;
 
         // preload transaction statistics
         m_transactionStats = MyMoneyFile::instance()->countTransactionsWithSpecificReconciliationState();
@@ -1901,6 +1905,7 @@ public:
       */
     QMap<QString, dailyBalances> m_accountList;
     int       m_scrollBarPos;
+    bool      m_fileOpen;
 };
 
 #endif
