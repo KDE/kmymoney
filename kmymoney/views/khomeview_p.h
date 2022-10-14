@@ -396,9 +396,6 @@ public:
     {
         Q_Q(KHomeView);
 
-        QList<MyMoneyAccount> list;
-        MyMoneyFile::instance()->accountList(list);
-
         const auto stockPointSize = q->font().pointSizeF();
         const auto currentPointSize = m_view->font().pointSizeF();
         const auto pointSizeDelta = (stockPointSize * KMyMoneySettings::zoomFactor()) - currentPointSize;
