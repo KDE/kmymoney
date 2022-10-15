@@ -130,6 +130,8 @@ public Q_SLOTS:
      */
     void moveSection(QWidget* view, int section, int oldIndex, int newIndex);
 
+    void reset() override;
+
 protected:
     bool edit(const QModelIndex& index, EditTrigger trigger, QEvent* event) final override;
     void mousePressEvent(QMouseEvent* event) final override;
@@ -163,6 +165,8 @@ protected Q_SLOTS:
     virtual void adjustDetailColumn(int newViewportWidth, bool informOtherViews);
 
     void slotMoveToAccount(const QString& accountId);
+
+    void reselectAfterReset();
 
 Q_SIGNALS:
     void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;

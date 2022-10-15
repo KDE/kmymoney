@@ -79,6 +79,7 @@ public:
         , columnSelector(nullptr)
         , infoMessage(new KMessageWidget(q))
         , adjustableColumn(JournalModel::Column::Detail)
+        , lastSelectedRow(-1)
         , adjustingColumn(false)
         , showValuesInverted(false)
         , newTransactionPresent(false)
@@ -425,6 +426,7 @@ public:
     KMessageWidget* infoMessage;
     QHash<const QAbstractItemModel*, QStyledItemDelegate*>   delegates;
     int adjustableColumn;
+    int lastSelectedRow;
     bool adjustingColumn;
     bool showValuesInverted;
     bool newTransactionPresent;
@@ -539,6 +541,52 @@ void LedgerView::setModel(QAbstractItemModel* model)
     horizontalHeader()->setSectionResizeMode(JournalModel::Column::Balance, QHeaderView::Interactive);
 
     horizontalHeader()->setSectionsMovable(true);
+
+    connect(model, &QAbstractItemModel::modelAboutToBeReset, this, [&]() {
+        if (selectionModel()) {
+            // using this->model() here, because model is already used any maybe out of scope
+            const auto selectedRows = selectionModel()->selectedIndexes().count() / this->model()->columnCount();
+            if (selectedRows >= 1) {
+                d->lastSelectedRow = selectionModel()->selectedIndexes().at(0).row();
+            }
+        }
+    });
+}
+
+void LedgerView::reset()
+{
+    QTableView::reset();
+    QMetaObject::invokeMethod(this, "reselectAfterReset", Qt::QueuedConnection);
+}
+
+void LedgerView::reselectAfterReset()
+{
+    // make sure we stay in bounds
+    if (d->lastSelectedRow > model()->rowCount()) {
+        d->lastSelectedRow = model()->rowCount() - 1;
+    }
+
+    if (d->lastSelectedRow != -1) {
+        QModelIndex idx;
+        do {
+            idx = model()->index(d->lastSelectedRow, 0);
+            if (!idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
+                if ((idx.flags() & (Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsEnabled))
+                    == (Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsEnabled)) {
+                    break;
+                }
+            }
+            --d->lastSelectedRow;
+        } while (d->lastSelectedRow > -1);
+
+        if (d->lastSelectedRow > -1) {
+            setCurrentIndex(idx);
+            selectRow(idx.row());
+            scrollTo(idx, EnsureVisible);
+        }
+    }
+    // reset last remembered value
+    d->lastSelectedRow = -1;
 }
 
 void LedgerView::setAccountId(const QString& id)
