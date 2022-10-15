@@ -250,11 +250,14 @@ void KSettingsOnlineQuotes::slotDumpCSVProfile()
     }
 
     if (profileExists)
-        writeProfile = (KMessageBox::questionYesNoCancel(this,
-                        i18n("CSV profile <b>%1</b> already exists.<br>"
-                             "Do you want to overwrite it?",
-                             d->m_currentItem.m_name),
-                        i18n("CSV Profile Already Exists")) == KMessageBox::Yes ? true : false);
+        writeProfile = (KMessageBox::questionTwoActionsCancel(this,
+                                                              i18n("CSV profile <b>%1</b> already exists.<br>"
+                                                                   "Do you want to overwrite it?",
+                                                                   d->m_currentItem.m_name),
+                                                              i18n("CSV Profile Already Exists"))
+                                == KMessageBox::PrimaryAction
+                            ? true
+                            : false);
 
     if (writeProfile) {
         QMap<QString, PricesProfile> quoteSources = WebPriceQuote::defaultCSVQuoteSources();
@@ -302,10 +305,12 @@ void KSettingsOnlineQuotes::slotDeleteEntry()
     auto securities = MyMoneyFile::instance()->securityList();
     Q_FOREACH(const auto security, securities) {
         if (security.value(QStringLiteral("kmm-online-source")).compare(d->m_currentItem.m_name) == 0) {
-            if (KMessageBox::questionYesNo(this,
-                                           i18n("Security <b>%1</b> uses this quote source.<br>"
-                                                "Do you really want to remove it?", security.name()),
-                                           i18n("Delete quote source")) == KMessageBox::Yes)
+            if (KMessageBox::questionTwoActions(this,
+                                                i18n("Security <b>%1</b> uses this quote source.<br>"
+                                                     "Do you really want to remove it?",
+                                                     security.name()),
+                                                i18n("Delete quote source"))
+                == KMessageBox::PrimaryAction)
                 break;  // webpricequote can handle missing online quotes, so proceed without any extra action
             else
                 return;

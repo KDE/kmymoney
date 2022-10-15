@@ -835,11 +835,11 @@ void LedgerView::mousePressEvent(QMouseEvent* event)
                         buttonNo.setToolTip(i18nc("@info:tooltip No button", "Do not enter the overdue scheduled transaction."));
                         buttonYes.setToolTip(i18nc("@info:tooltip Yes button", "Enter the overdue scheduled transaction."));
 
-                        result = KMessageBox::questionYesNo(this,
-                                                            i18nc("Question about the overdue action", "Do you want to enter the overdue schedule now?"),
-                                                            i18nc("@title:window", "Enter overdue schedule"),
-                                                            buttonYes,
-                                                            buttonNo);
+                        result = KMessageBox::questionTwoActions(this,
+                                                                 i18nc("Question about the overdue action", "Do you want to enter the overdue schedule now?"),
+                                                                 i18nc("@title:window", "Enter overdue schedule"),
+                                                                 buttonYes,
+                                                                 buttonNo);
                         if (result == KMessageBox::ButtonCode::Yes) {
                             pActions[eMenu::Action::EnterSchedule]->setData(idx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
                             pActions[eMenu::Action::EnterSchedule]->trigger();
@@ -861,7 +861,7 @@ void LedgerView::mousePressEvent(QMouseEvent* event)
                             buttonYes.setToolTip(
                                 i18nc("@info:tooltip Accept button", "Accept the match as shown and remove the data of the hidden (matched) transaction."));
 
-                            result = KMessageBox::questionYesNoCancel(
+                            result = KMessageBox::questionTwoActionsCancel(
                                 this,
                                 i18nc("Question about the accept or unmatch action", "Do you want to accept or unmatch the matched transaction now?"),
                                 i18nc("@title:window", "Accept or unmatch transaction"),

@@ -2321,7 +2321,7 @@ void MyMoneyGncReader::terminate()
 
         if (mainCurrency != "") {
             QString question = i18n("Your main currency seems to be %1 (%2); do you want to set this as your base currency?", mainCurrency, m_storage->currency(mainCurrency.toUtf8()).name());
-            if (KMessageBox::questionYesNo(0, question, PACKAGE) == KMessageBox::Yes) {
+            if (KMessageBox::questionTwoActions(0, question, PACKAGE) == KMessageBox::PrimaryAction) {
                 m_storage->setValue("kmm-baseCurrency", mainCurrency);
             }
         }
@@ -2341,13 +2341,10 @@ void MyMoneyGncReader::terminate()
             KGuiItem yesItem(button0Text, QIcon(), "", "");
             KGuiItem noItem(i18n("Save Report"), QIcon(), "", "");
 
-            switch (KMessageBox::questionYesNoCancel(0,
-                    buildReportSection(sectionsToReport[si]),
-                    PACKAGE,
-                    yesItem, noItem)) {
-            case KMessageBox::Yes:
+            switch (KMessageBox::questionTwoActionsCancel(0, buildReportSection(sectionsToReport[si]), PACKAGE, yesItem, noItem)) {
+            case KMessageBox::PrimaryAction:
                 break;
-            case KMessageBox::No:
+            case KMessageBox::SecondaryAction:
                 exit = writeReportToFile(sectionsToReport);
                 break;
             default:
@@ -2360,18 +2357,19 @@ void MyMoneyGncReader::terminate()
         for (si = 0; si < m_suspectList.count(); ++si) {
             auto sc = m_storage->schedule(m_suspectList[si]);
             KMessageBox::information(0, i18n("Problems were encountered in converting schedule '%1'.", sc.name()), PACKAGE);
-//      TODO: return this feature
-//      switch (KMessageBox::warningYesNo(0, i18n("Problems were encountered in converting schedule '%1'.\nDo you want to review or edit it now?", sc.name()), PACKAGE)) {
-//        case KMessageBox::Yes:
-//          auto s = new KEditScheduleDlg(sc);
-//          if (s->exec())
-//            m_storage->modifySchedule(s->schedule());
-//          delete s;
-//          break;
+            //      TODO: return this feature
+            //      switch (KMessageBox::warningTwoActions(0, i18n("Problems were encountered in converting schedule '%1'.\nDo you want to review or edit it
+            //      now?", sc.name()), PACKAGE)) {
+            //        case KMessageBox::PrimaryAction:
+            //          auto s = new KEditScheduleDlg(sc);
+            //          if (s->exec())
+            //            m_storage->modifySchedule(s->schedule());
+            //          delete s;
+            //          break;
 
-//        default:
-//          break;
-//      }
+            //        default:
+            //          break;
+            //      }
         }
     }
     PASS
@@ -2657,8 +2655,8 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
                         break;
                     }
 #endif
-                    switch (KMessageBox::questionYesNo(0, i18n("%1 is not an Investment Account. Do you wish to make it one?", invAcc.name()), PACKAGE)) {
-                    case KMessageBox::Yes:
+                    switch (KMessageBox::questionTwoActions(0, i18n("%1 is not an Investment Account. Do you wish to make it one?", invAcc.name()), PACKAGE)) {
+                    case KMessageBox::PrimaryAction:
                         // convert it - but what if it has splits???
                         qWarning("Not yet implemented");
                         ok = true;

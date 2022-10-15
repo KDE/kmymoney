@@ -119,13 +119,13 @@ public:
             if (!autoClearList.empty()) {
                 QString message =
                     i18n("KMyMoney has detected transactions matching your reconciliation data.\nWould you like KMyMoney to clear these transactions for you?");
-                if (KMessageBox::questionYesNo(q,
-                                               message,
-                                               i18n("Automatic reconciliation"),
-                                               KStandardGuiItem::yes(),
-                                               KStandardGuiItem::no(),
-                                               "AcceptAutomaticReconciliation")
-                    == KMessageBox::Yes) {
+                if (KMessageBox::questionTwoActions(q,
+                                                    message,
+                                                    i18n("Automatic reconciliation"),
+                                                    KStandardGuiItem::yes(),
+                                                    KStandardGuiItem::no(),
+                                                    "AcceptAutomaticReconciliation")
+                    == KMessageBox::PrimaryAction) {
                     // Select the journal entries to be cleared
                     SelectedObjects tempSelections;
                     tempSelections.setSelection(SelectedObjects::JournalEntry, autoClearList);
@@ -230,8 +230,8 @@ public:
                     "You are about to finish the reconciliation of this account with a difference between your bank statement and the transactions marked as "
                     "cleared.\n"
                     "Are you sure you want to finish the reconciliation?");
-                if (KMessageBox::questionYesNo(q, message, i18n("Confirm end of reconciliation"), KStandardGuiItem::yes(), KStandardGuiItem::no())
-                    == KMessageBox::No) {
+                if (KMessageBox::questionTwoActions(q, message, i18n("Confirm end of reconciliation"), KStandardGuiItem::yes(), KStandardGuiItem::no())
+                    == KMessageBox::SecondaryAction) {
                     return false;
                 }
             }

@@ -253,13 +253,13 @@ void KInvestmentView::slotEditInvestment()
 void KInvestmentView::slotDeleteInvestment()
 {
     Q_D(KInvestmentView);
-    if (KMessageBox::questionYesNo(this,
-                                   i18n("<p>Do you really want to delete the investment <b>%1</b>?</p>", d->currentEquity().name()),
-                                   i18n("Delete investment"),
-                                   KStandardGuiItem::yes(),
-                                   KStandardGuiItem::no(),
-                                   "DeleteInvestment")
-        == KMessageBox::Yes) {
+    if (KMessageBox::questionTwoActions(this,
+                                        i18n("<p>Do you really want to delete the investment <b>%1</b>?</p>", d->currentEquity().name()),
+                                        i18n("Delete investment"),
+                                        KStandardGuiItem::yes(),
+                                        KStandardGuiItem::no(),
+                                        "DeleteInvestment")
+        == KMessageBox::PrimaryAction) {
         auto file = MyMoneyFile::instance();
         MyMoneyFileTransaction ft;
         try {

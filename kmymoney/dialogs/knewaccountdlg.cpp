@@ -1015,9 +1015,17 @@ void KNewAccountDlg::addTab(QWidget* w, const QString& name)
 
 void KNewAccountDlg::newCategory(MyMoneyAccount& account, const MyMoneyAccount& parent)
 {
-    if (KMessageBox::questionYesNo(nullptr,
-                                   QString::fromLatin1("<qt>%1</qt>").arg(i18n("<p>The category <b>%1</b> currently does not exist. Do you want to create it?</p><p><i>The parent account will default to <b>%2</b> but can be changed in the following dialog</i>.</p>", account.name(), parent.name())), i18n("Create category"),
-                                   KStandardGuiItem::yes(), KStandardGuiItem::no(), "CreateNewCategories") == KMessageBox::Yes) {
+    if (KMessageBox::questionTwoActions(nullptr,
+                                        QString::fromLatin1("<qt>%1</qt>")
+                                            .arg(i18n("<p>The category <b>%1</b> currently does not exist. Do you want to create it?</p><p><i>The parent "
+                                                      "account will default to <b>%2</b> but can be changed in the following dialog</i>.</p>",
+                                                      account.name(),
+                                                      parent.name())),
+                                        i18n("Create category"),
+                                        KStandardGuiItem::yes(),
+                                        KStandardGuiItem::no(),
+                                        "CreateNewCategories")
+        == KMessageBox::PrimaryAction) {
         KNewAccountDlg::createCategory(account, parent);
     } else {
         // we should not keep the 'no' setting because that can confuse people like
@@ -1031,17 +1039,18 @@ void KNewAccountDlg::newCategory(MyMoneyAccount& account, const MyMoneyAccount& 
 
 void KNewAccountDlg::newAccount(MyMoneyAccount& account, const MyMoneyAccount& parent)
 {
-    if (KMessageBox::questionYesNo(nullptr,
-                                   QString::fromLatin1("<qt>%1</qt>")
-                                       .arg(i18n("<p>The account <b>%1</b> currently does not exist. Do you want to create it?</p><p><i>The parent account "
-                                                 "will default to <b>%2</b> but can be changed in the following dialog</i>.</p>",
-                                                 account.name(),
-                                                 parent.name())),
-                                   i18n("Create category"),
-                                   KStandardGuiItem::yes(),
-                                   KStandardGuiItem::no(),
-                                   "CreateNewAccounts")
-        == KMessageBox::Yes) {
+    if (KMessageBox::questionTwoActions(
+            nullptr,
+            QString::fromLatin1("<qt>%1</qt>")
+                .arg(i18n("<p>The account <b>%1</b> currently does not exist. Do you want to create it?</p><p><i>The parent account "
+                          "will default to <b>%2</b> but can be changed in the following dialog</i>.</p>",
+                          account.name(),
+                          parent.name())),
+            i18n("Create category"),
+            KStandardGuiItem::yes(),
+            KStandardGuiItem::no(),
+            "CreateNewAccounts")
+        == KMessageBox::PrimaryAction) {
         KNewAccountDlg::createAccount(account, parent);
     } else {
         // we should not keep the 'no' setting because that can confuse people like

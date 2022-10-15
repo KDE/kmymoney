@@ -171,7 +171,10 @@ void KNewInvestmentWizard::slotCheckForExistingSymbol(const QString& symbol)
             if (it_s.securityType() == type
                     && it_s.tradingSymbol() == field("investmentSymbol").toString()) {
                 d->m_security = MyMoneySecurity();
-                if (KMessageBox::questionYesNo(this, i18n("The selected symbol is already on file. Do you want to reuse the existing security?"), i18n("Security found")) == KMessageBox::Yes) {
+                if (KMessageBox::questionTwoActions(this,
+                                                    i18n("The selected symbol is already on file. Do you want to reuse the existing security?"),
+                                                    i18n("Security found"))
+                    == KMessageBox::PrimaryAction) {
                     d->m_security = it_s;
                     d->init2();
                     d->ui->m_investmentDetailsPage->loadName(d->m_security.name());
@@ -279,10 +282,16 @@ void KNewInvestmentWizard::newInvestment(const MyMoneyAccount& parent)
 void KNewInvestmentWizard::newInvestment(MyMoneyAccount& account, const MyMoneyAccount& parent)
 {
     QString dontShowAgain = "CreateNewInvestments";
-    if (KMessageBox::questionYesNo(nullptr,
-                                   i18n("<qt>The security <b>%1</b> currently does not exist as sub-account of <b>%2</b>. "
-                                        "Do you want to create it?</qt>", account.name(), parent.name()), i18n("Create security"),
-                                   KStandardGuiItem::yes(), KStandardGuiItem::no(), dontShowAgain) == KMessageBox::Yes) {
+    if (KMessageBox::questionTwoActions(nullptr,
+                                        i18n("<qt>The security <b>%1</b> currently does not exist as sub-account of <b>%2</b>. "
+                                             "Do you want to create it?</qt>",
+                                             account.name(),
+                                             parent.name()),
+                                        i18n("Create security"),
+                                        KStandardGuiItem::yes(),
+                                        KStandardGuiItem::no(),
+                                        dontShowAgain)
+        == KMessageBox::PrimaryAction) {
         QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard;
         dlg->setName(account.name());
         if (dlg->exec() == QDialog::Accepted) {

@@ -563,11 +563,19 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _kmmID, const QString
     } else if (!item) {
         return;
     } else {
-        result = KMessageBox::questionYesNoCancel(this, QString::fromLatin1("<qt>%1</qt>").arg(i18n("Failed to retrieve a quote for %1 from %2.  Press <b>No</b> to remove the online price source from this security permanently, <b>Yes</b> to continue updating this security during future price updates or <b>Cancel</b> to stop the current update operation.", _webID, item->text(SOURCE_COL))), i18n("Price Update Failed"), KStandardGuiItem::yes(), KStandardGuiItem::no());
+        result = KMessageBox::questionTwoActionsCancel(
+            this,
+            QString::fromLatin1("<qt>%1</qt>")
+                .arg(i18n("Failed to retrieve a quote for %1 from %2.  Press <b>No</b> to remove the online price source from this security permanently, "
+                          "<b>Yes</b> to continue updating this security during future price updates or <b>Cancel</b> to stop the current update operation.",
+                          _webID,
+                          item->text(SOURCE_COL))),
+            i18n("Price Update Failed"),
+            KStandardGuiItem::yes(),
+            KStandardGuiItem::no());
     }
 
-
-    if (result == KMessageBox::No) {
+    if (result == KMessageBox::SecondaryAction) {
         // Disable price updates for this security
 
         MyMoneyFileTransaction ft;
@@ -673,13 +681,14 @@ void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _kmmID, const QS
                         break;
                     case eDialogs::UpdatePrice::Ask:
                     {
-                        auto result = KMessageBox::questionYesNoCancel(this,
-                                      i18n("For <b>%1</b> on <b>%2</b> price <b>%3</b> already exists.<br>"
-                                           "Do you want to replace it with <b>%4</b>?",
-                                           storedPrice.from(), storedPrice.date().toString(Qt::ISODate),
-                                           QString().setNum(storedPrice.rate(storedPrice.to()).toDouble(), 'g', 10),
-                                           QString().setNum((*it).m_amount.toDouble(), 'g', 10)),
-                                      i18n("Price Already Exists"));
+                        auto result = KMessageBox::questionTwoActionsCancel(this,
+                                                                            i18n("For <b>%1</b> on <b>%2</b> price <b>%3</b> already exists.<br>"
+                                                                                 "Do you want to replace it with <b>%4</b>?",
+                                                                                 storedPrice.from(),
+                                                                                 storedPrice.date().toString(Qt::ISODate),
+                                                                                 QString().setNum(storedPrice.rate(storedPrice.to()).toDouble(), 'g', 10),
+                                                                                 QString().setNum((*it).m_amount.toDouble(), 'g', 10)),
+                                                                            i18n("Price Already Exists"));
                         switch(result) {
                         case KMessageBox::ButtonCode::Yes:
                             ++it;

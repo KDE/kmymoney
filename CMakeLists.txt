@@ -113,6 +113,26 @@ find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS Core DB
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} OPTIONAL_COMPONENTS Sql Concurrent QuickWidgets WebEngineWidgets WebKitWidgets)
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service XmlGui TextWidgets Notifications KIO)
+
+# For KF5 < 5.100 we need to fix a few method names that
+# have been deprecated but are not available before that version.
+# Once the KF5_MIN_VERSION of this project is >= 5.100 this
+# whole block can be removed
+if (${KF5_MIN_VERSION} VERSION_LESS "5.100")
+    if (${KF5_VERSION} VERSION_LESS "5.100")
+        add_definitions(
+            -DquestionTwoActions=questionYesNo
+            -DquestionTwoActionsCancel=questionYesNoCancel
+            -DwarningTwoActions=warningYesNo
+            -DwarningTwoActionsCancel=warningYesNoCancel
+            -DPrimaryAction=Yes
+            -DSecondaryAction=No
+        )
+    endif()
+else()
+    message(FATAL_ERROR "Removes the above logic from CMakeLists.txt since it is not needed anymore")
+endif()
+
 find_package(KF5 ${KF5_MIN_VERSION} OPTIONAL_COMPONENTS DocTools Holidays Contacts Activities)
 if (DEFINED AKONADI_MIN_VERSION)
   find_package(KF5 ${AKONADI_MIN_VERSION} OPTIONAL_COMPONENTS Akonadi IdentityManagement)

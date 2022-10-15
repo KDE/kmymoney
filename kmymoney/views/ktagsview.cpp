@@ -284,10 +284,10 @@ public:
         // check if the content of a currently selected tag was modified
         // and ask to store the data
         if (m_havePendingChanges) {
-            if (KMessageBox::questionYesNo(q,
-                                           QString("<qt>%1</qt>").arg(i18n("Do you want to save the changes for <b>%1</b>?", m_newName)),
-                                           i18n("Save changes"))
-                == KMessageBox::Yes) {
+            if (KMessageBox::questionTwoActions(q,
+                                                QString("<qt>%1</qt>").arg(i18n("Do you want to save the changes for <b>%1</b>?", m_newName)),
+                                                i18n("Save changes"))
+                == KMessageBox::PrimaryAction) {
                 q->slotUpdateTag();
             }
         }
@@ -369,10 +369,12 @@ void KTagsView::slotRenameSingleTag(const QModelIndex& idx, const QVariant& valu
             const auto tag = MyMoneyFile::instance()->tagByName(new_name);
             // if the name already exists, ask the user whether he's sure to keep the name
             if (!tag.id().isEmpty()) {
-                if (KMessageBox::questionYesNo(this,
-                                               i18n("A tag with the name '%1' already exists. It is not advisable to have "
-                                                    "multiple tags with the same identification name. Are you sure you would like "
-                                                    "to rename the tag?", new_name)) != KMessageBox::Yes) {
+                if (KMessageBox::questionTwoActions(this,
+                                                    i18n("A tag with the name '%1' already exists. It is not advisable to have "
+                                                         "multiple tags with the same identification name. Are you sure you would like "
+                                                         "to rename the tag?",
+                                                         new_name))
+                    != KMessageBox::PrimaryAction) {
                     return;
                 }
             }

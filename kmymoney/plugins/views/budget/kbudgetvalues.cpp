@@ -230,7 +230,17 @@ void KBudgetValues::slotChangePeriod(int id)
                 newValue = (newValue / MyMoneyMoney(12, 1)).convert();
             }
             if (!newValue.isZero()) {
-                if (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("You have entered budget values using a different base which would result in a monthly budget of <b>%1</b>. Should this value be used to fill the monthly budget?", newValue.formatMoney(QString(), 2)) + QString("</qt>"), i18nc("Auto assignment (caption)", "Auto assignment"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "use_previous_budget_values") == KMessageBox::Yes) {
+                if (KMessageBox::questionTwoActions(this,
+                                                    QString("<qt>")
+                                                        + i18n("You have entered budget values using a different base which would result in a monthly budget "
+                                                               "of <b>%1</b>. Should this value be used to fill the monthly budget?",
+                                                               newValue.formatMoney(QString(), 2))
+                                                        + QString("</qt>"),
+                                                    i18nc("Auto assignment (caption)", "Auto assignment"),
+                                                    KStandardGuiItem::yes(),
+                                                    KStandardGuiItem::no(),
+                                                    "use_previous_budget_values")
+                    == KMessageBox::PrimaryAction) {
                     d->ui->m_amountMonthly->setValue(newValue);
                 }
             }
@@ -249,7 +259,17 @@ void KBudgetValues::slotChangePeriod(int id)
                     newValue += d->m_field[i]->value();
             }
             if (!newValue.isZero()) {
-                if (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("You have entered budget values using a different base which would result in a yearly budget of <b>%1</b>. Should this value be used to fill the monthly budget?", newValue.formatMoney(QString(), 2)) + QString("</qt>"), i18nc("Auto assignment (caption)", "Auto assignment"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "use_previous_budget_values") == KMessageBox::Yes) {
+                if (KMessageBox::questionTwoActions(this,
+                                                    QString("<qt>")
+                                                        + i18n("You have entered budget values using a different base which would result in a yearly budget of "
+                                                               "<b>%1</b>. Should this value be used to fill the monthly budget?",
+                                                               newValue.formatMoney(QString(), 2))
+                                                        + QString("</qt>"),
+                                                    i18nc("Auto assignment (caption)", "Auto assignment"),
+                                                    KStandardGuiItem::yes(),
+                                                    KStandardGuiItem::no(),
+                                                    "use_previous_budget_values")
+                    == KMessageBox::PrimaryAction) {
                     d->ui->m_amountYearly->setValue(newValue);
                 }
             }
@@ -268,7 +288,17 @@ void KBudgetValues::slotChangePeriod(int id)
             }
 
             if (!newValue.isZero()) {
-                if (KMessageBox::questionYesNo(this, QString("<qt>") + i18n("You have entered budget values using a different base which would result in an individual monthly budget of <b>%1</b>. Should this value be used to fill the monthly budgets?", newValue.formatMoney(QString(), 2)) + QString("</qt>"), i18nc("Auto assignment (caption)", "Auto assignment"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "use_previous_budget_values") == KMessageBox::Yes) {
+                if (KMessageBox::questionTwoActions(this,
+                                                    QString("<qt>")
+                                                        + i18n("You have entered budget values using a different base which would result in an individual "
+                                                               "monthly budget of <b>%1</b>. Should this value be used to fill the monthly budgets?",
+                                                               newValue.formatMoney(QString(), 2))
+                                                        + QString("</qt>"),
+                                                    i18nc("Auto assignment (caption)", "Auto assignment"),
+                                                    KStandardGuiItem::yes(),
+                                                    KStandardGuiItem::no(),
+                                                    "use_previous_budget_values")
+                    == KMessageBox::PrimaryAction) {
                     for (auto i = 0; i < 12; ++i)
                         d->m_field[i]->setValue(newValue);
                 }

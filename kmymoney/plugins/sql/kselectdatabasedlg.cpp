@@ -90,11 +90,12 @@ bool KSelectDatabaseDlg::checkDrivers()
 
     if (m_widget->databaseTypeCombo->count() == 0) {
         // why does KMessageBox not have a standard dialog with Help button?
-        if ((KMessageBox::questionYesNo(this,
-                                        i18n("In order to use a database, you need to install some additional software. Click Help for more information"),
-                                        i18n("No Qt SQL Drivers"),
-                                        KStandardGuiItem::help(), KStandardGuiItem::cancel()))
-                == KMessageBox::Yes) { // Yes stands in for help here
+        if ((KMessageBox::questionTwoActions(this,
+                                             i18n("In order to use a database, you need to install some additional software. Click Help for more information"),
+                                             i18n("No Qt SQL Drivers"),
+                                             KStandardGuiItem::help(),
+                                             KStandardGuiItem::cancel()))
+            == KMessageBox::PrimaryAction) {
             KHelpClient::invokeHelp("details.database.usage");
         }
         return false;

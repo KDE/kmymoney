@@ -137,8 +137,8 @@ public:
         // check if the content of a currently selected budget was modified
         // and ask to store the data
         if (ui->m_updateButton->isEnabled()) {
-            if (KMessageBox::questionYesNo(q, i18n("<qt>Do you want to save the changes for <b>%1</b>?</qt>", m_budget.name()),
-                                           i18n("Save changes")) == KMessageBox::Yes) {
+            if (KMessageBox::questionTwoActions(q, i18n("<qt>Do you want to save the changes for <b>%1</b>?</qt>", m_budget.name()), i18n("Save changes"))
+                == KMessageBox::PrimaryAction) {
                 // m_inSelection = true;
                 q->slotUpdateBudget();
                 // m_inSelection = false;

@@ -144,10 +144,12 @@ void KPayeesView::slotRenameSinglePayee(const QModelIndex& idx, const QVariant& 
             // check if we already have a payee with the new name
             if (!MyMoneyFile::instance()->payeeByName(new_name).id().isEmpty()) {
                 // the name already exists, ask the user whether he's sure to keep the name
-                if (KMessageBox::questionYesNo(this,
-                                               i18n("A payee with the name '%1' already exists. It is not advisable to have "
-                                                    "multiple payees with the same identification name. Are you sure you would like "
-                                                    "to rename the payee?", new_name)) != KMessageBox::Yes) {
+                if (KMessageBox::questionTwoActions(this,
+                                                    i18n("A payee with the name '%1' already exists. It is not advisable to have "
+                                                         "multiple payees with the same identification name. Are you sure you would like "
+                                                         "to rename the payee?",
+                                                         new_name))
+                    != KMessageBox::PrimaryAction) {
                     // p->setText(d->m_payee.name());
                     return;
                 }
@@ -535,7 +537,7 @@ void KPayeesView::slotDeletePayee()
     else
         prompt = i18n("Do you really want to remove all selected payees?");
 
-    if (KMessageBox::questionYesNo(this, prompt, i18n("Remove Payee")) == KMessageBox::No)
+    if (KMessageBox::questionTwoActions(this, prompt, i18n("Remove Payee")) == KMessageBox::SecondaryAction)
         return;
 
     d->payeeReassign(KPayeeReassignDlg::TypeDelete);
@@ -548,8 +550,8 @@ void KPayeesView::slotMergePayee()
     if (payeesList.count() < 1)
         return; // shouldn't happen
 
-    if (KMessageBox::questionYesNo(this, i18n("<p>Do you really want to merge the selected payees?"),
-                                   i18n("Merge Payees")) == KMessageBox::No)
+    if (KMessageBox::questionTwoActions(this, i18n("<p>Do you really want to merge the selected payees?"), i18n("Merge Payees"))
+        == KMessageBox::SecondaryAction)
         return;
 
     if (d->payeeReassign(KPayeeReassignDlg::TypeMerge))

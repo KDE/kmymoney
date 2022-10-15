@@ -271,7 +271,13 @@ void KAccountsView::slotAccountUnmapOnline()
     if (!d->m_currentAccount.hasOnlineMapping())
         return;
 
-    if (KMessageBox::warningYesNo(this, QString("<qt>%1</qt>").arg(i18n("Do you really want to remove the mapping of account <b>%1</b> to an online account? Depending on the details of the online banking method used, this action cannot be reverted.", d->m_currentAccount.name())), i18n("Remove mapping to online account")) == KMessageBox::Yes) {
+    if (KMessageBox::warningTwoActions(this,
+                                       QString("<qt>%1</qt>")
+                                           .arg(i18n("Do you really want to remove the mapping of account <b>%1</b> to an online account? Depending on the "
+                                                     "details of the online banking method used, this action cannot be reverted.",
+                                                     d->m_currentAccount.name())),
+                                       i18n("Remove mapping to online account"))
+        == KMessageBox::PrimaryAction) {
         MyMoneyFileTransaction ft;
         try {
             d->m_currentAccount.setOnlineBankingSettings(MyMoneyKeyValueContainer());

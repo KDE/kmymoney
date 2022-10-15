@@ -729,14 +729,14 @@ void MyMoneyQifReader::processMSAccountEntry(const eMyMoney::Account::Type accou
 
                 if (split.shares() != balance) {
                     const MyMoneySecurity& sec = file->security(m_account.currencyId());
-                    if (KMessageBox::questionYesNo(
+                    if (KMessageBox::questionTwoActions(
                                 KMyMoneyUtils::mainWindow(),
                                 i18n("The %1 account currently has an opening balance of %2. This QIF file reports an opening balance of %3. Would you like to overwrite the current balance with the one from the QIF file?", m_account.name(), split.shares().formatMoney(m_account, sec), balance.formatMoney(m_account, sec)),
                                 i18n("Overwrite opening balance"),
                                 KStandardGuiItem::yes(),
                                 KStandardGuiItem::no(),
                                 "OverwriteOpeningBalance")
-                            == KMessageBox::Yes) {
+                            == KMessageBox::PrimaryAction) {
                         file->removeTransaction(openingtx);
                         m_account.setOpeningDate(date);
                         file->createOpeningBalanceTransaction(m_account, balance);

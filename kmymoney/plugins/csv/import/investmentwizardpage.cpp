@@ -171,12 +171,13 @@ void InvestmentPage::memoColSelected(int col)
 {
     if (m_profile->m_colNumType.value(col) == Column::Type ||
             m_profile->m_colNumType.value(col) == Column::Name) {
-        int rc = KMessageBox::Yes;
+        int rc = KMessageBox::PrimaryAction;
         if (isVisible())
-            rc = KMessageBox::questionYesNo(m_dlg, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
-                                            "<center>If you wish to copy that data to the memo field, click 'Yes'.</center>",
-                                            m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col))));
-        if (rc == KMessageBox::Yes) {
+            rc = KMessageBox::questionTwoActions(m_dlg,
+                                                 i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
+                                                      "<center>If you wish to copy that data to the memo field, click 'Yes'.</center>",
+                                                      m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col))));
+        if (rc == KMessageBox::PrimaryAction) {
             ui->m_memoCol->setItemText(col, QString::number(col + 1) + QLatin1Char('*'));
             if (!m_profile->m_memoColList.contains(col))
                 m_profile->m_memoColList.append(col);

@@ -242,12 +242,13 @@ void BankingPage::memoColSelected(int col)
 {
     if (col != -1) {
         if (m_profile->m_colNumType.value(col) == Column::Payee ) {
-            int rc = KMessageBox::Yes;
+            int rc = KMessageBox::PrimaryAction;
             if (isVisible())
-                rc = KMessageBox::questionYesNo(m_dlg, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
-                                                "<center>If you wish to copy the Payee data to the memo field, click 'Yes'.</center>",
-                                                m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col))));
-            if (rc == KMessageBox::Yes) {
+                rc = KMessageBox::questionTwoActions(m_dlg,
+                                                     i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
+                                                          "<center>If you wish to copy the Payee data to the memo field, click 'Yes'.</center>",
+                                                          m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col))));
+            if (rc == KMessageBox::PrimaryAction) {
                 ui->m_memoCol->setItemText(col, QString::number(col + 1) + QLatin1Char('*'));
                 if (!m_profile->m_memoColList.contains(col))
                     m_profile->m_memoColList.append(col);
@@ -377,25 +378,25 @@ bool BankingPage::validateCreditDebit()
             QString debit = m_imp->m_file->m_model->item(row, m_profile->m_colTypeNum.value(Column::Debit))->text();
             m_imp->processCreditDebit(credit, debit);
             if (!credit.isEmpty() && !debit.isEmpty()) {
-                int ret = KMessageBox::questionYesNoCancel(m_dlg,
-                          i18n("<center>The %1 field contains '%2'</center>"
-                               "<center>and the %3 field contains '%4'.</center>"
-                               "<center>Please choose which you wish to accept.</center>",
-                               m_dlg->m_colTypeName.value(Column::Debit),
-                               debit,
-                               m_dlg->m_colTypeName.value(Column::Credit),
-                               credit),
-                          i18n("CSV invalid field values"),
-                          KGuiItem(i18n("Accept %1", m_dlg->m_colTypeName.value(Column::Debit))),
-                          KGuiItem(i18n("Accept %1", m_dlg->m_colTypeName.value(Column::Credit))),
-                          KGuiItem(i18n("Cancel")));
+                int ret = KMessageBox::questionTwoActionsCancel(m_dlg,
+                                                                i18n("<center>The %1 field contains '%2'</center>"
+                                                                     "<center>and the %3 field contains '%4'.</center>"
+                                                                     "<center>Please choose which you wish to accept.</center>",
+                                                                     m_dlg->m_colTypeName.value(Column::Debit),
+                                                                     debit,
+                                                                     m_dlg->m_colTypeName.value(Column::Credit),
+                                                                     credit),
+                                                                i18n("CSV invalid field values"),
+                                                                KGuiItem(i18n("Accept %1", m_dlg->m_colTypeName.value(Column::Debit))),
+                                                                KGuiItem(i18n("Accept %1", m_dlg->m_colTypeName.value(Column::Credit))),
+                                                                KGuiItem(i18n("Cancel")));
                 switch(ret) {
                 case KMessageBox::Cancel:
                     return false;
-                case KMessageBox::Yes:
+                case KMessageBox::PrimaryAction:
                     m_imp->m_file->m_model->item(row, m_profile->m_colTypeNum.value(Column::Credit))->setText(QString());
                     break;
-                case KMessageBox::No:
+                case KMessageBox::SecondaryAction:
                     m_imp->m_file->m_model->item(row, m_profile->m_colTypeNum.value(Column::Debit))->setText(QString());
                     break;
                 }

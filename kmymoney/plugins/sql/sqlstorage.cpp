@@ -135,7 +135,7 @@ bool SQLStorage::open(const QUrl &url)
                                        reader->lastError());
             return false;
         case -1: // retryable error
-            if (KMessageBox::warningYesNo(nullptr, reader->lastError(), PACKAGE) == KMessageBox::No) {
+            if (KMessageBox::warningTwoActions(nullptr, reader->lastError(), PACKAGE) == KMessageBox::SecondaryAction) {
                 return false;
 
             } else {

@@ -506,7 +506,7 @@ public:
         if (isFileNotSaved && KMyMoneySettings::autoSaveOnClose()) {
             fileNeedsToBeSaved = true;
         } else if (isFileNotSaved || isNewFileNotSaved) {
-            switch (KMessageBox::warningYesNoCancel(q, i18n("The file has been changed, save it?"))) {
+            switch (KMessageBox::warningTwoActionsCancel(q, i18n("The file has been changed, save it?"))) {
             case KMessageBox::ButtonCode::Yes:
                 fileNeedsToBeSaved = true;
                 break;
@@ -2518,7 +2518,7 @@ void KMyMoneyApp::slotDeleteTransactions()
             "Do you really want to delete all %1 selected transactions?",
             d->m_selections.selection(SelectedObjects::JournalEntry).count());
 
-        if (KMessageBox::questionYesNo(this, msg, i18n("Delete transaction")) == KMessageBox::No) {
+        if (KMessageBox::questionTwoActions(this, msg, i18n("Delete transaction")) == KMessageBox::SecondaryAction) {
             return;
         }
     }
@@ -2866,7 +2866,7 @@ void KMyMoneyApp::slotMoveToToday()
                          "Do you really want to change all %1 selected transactions?",
                          d->m_selections.selection(SelectedObjects::JournalEntry).count());
 
-        if (KMessageBox::questionYesNo(this, msg, i18nc("@title:window Confirmation dialog", "Change transaction")) == KMessageBox::Cancel) {
+        if (KMessageBox::questionTwoActions(this, msg, i18nc("@title:window Confirmation dialog", "Change transaction")) == KMessageBox::Cancel) {
             return;
         }
     }
@@ -2988,12 +2988,13 @@ void KMyMoneyApp::slotEnterOverdueSchedules()
     auto schedules = file->scheduleList(accountId, eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any, QDate(), QDate(), true);
     if (!schedules.isEmpty()) {
         const auto accountName = accountIdx.data(eMyMoney::Model::AccountNameRole).toString();
-        if (KMessageBox::questionYesNo(this,
-                                       i18n("KMyMoney has detected some overdue scheduled transactions for the account <b>%1</b>. Do you want to enter those "
-                                            "scheduled transactions now?",
-                                            accountName),
-                                       i18n("Scheduled transactions found"))
-            == KMessageBox::Yes) {
+        if (KMessageBox::questionTwoActions(
+                this,
+                i18n("KMyMoney has detected some overdue scheduled transactions for the account <b>%1</b>. Do you want to enter those "
+                     "scheduled transactions now?",
+                     accountName),
+                i18n("Scheduled transactions found"))
+            == KMessageBox::PrimaryAction) {
             QSet<QString> skipMap;
             bool processedOne(false);
             auto rc = eDialogs::ScheduleResultCode::Enter;
@@ -3374,7 +3375,13 @@ bool KMyMoneyApp::okToWriteFile(const QUrl &url)
     bool reallySaveFile = true;
 
     if (KMyMoneyUtils::fileExists(url)) {
-        if (KMessageBox::warningYesNo(this, QLatin1String("<qt>") + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.toDisplayString(QUrl::PreferLocalFile)) + QLatin1String("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
+        if (KMessageBox::warningTwoActions(
+                this,
+                QLatin1String("<qt>")
+                    + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.toDisplayString(QUrl::PreferLocalFile))
+                    + QLatin1String("</qt>"),
+                i18n("File already exists"))
+            != KMessageBox::PrimaryAction)
             reallySaveFile = false;
     }
     return reallySaveFile;
@@ -3482,10 +3489,11 @@ void KMyMoneyApp::slotBackupFile()
     if (d->m_myMoneyView && d->dirty())
 
     {
-        if (KMessageBox::questionYesNo(this, i18n("The file must be saved first "
-                                       "before it can be backed up.  Do you want to continue?")) == KMessageBox::No) {
+        if (KMessageBox::questionTwoActions(this,
+                                            i18n("The file must be saved first "
+                                                 "before it can be backed up.  Do you want to continue?"))
+            == KMessageBox::SecondaryAction) {
             return;
-
         }
 
         slotFileSave();
@@ -3731,8 +3739,8 @@ void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
                                    , MyMoneyUtils::formatMoney(-openingBal, newAccount, sec)
                                    , MyMoneyUtils::formatMoney(openingBal, newAccount, sec));
 
-            int ans = KMessageBox::questionYesNoCancel(this, message);
-            if (ans == KMessageBox::Yes) {
+            int ans = KMessageBox::questionTwoActionsCancel(this, message);
+            if (ans == KMessageBox::PrimaryAction) {
                 openingBal = -openingBal;
 
             } else if (ans == KMessageBox::Cancel)

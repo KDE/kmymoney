@@ -453,7 +453,13 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
 
             if (encryptFile == true) {
                 QString msg = i18n("<p>You have configured to save your data in encrypted form using GPG. Make sure you understand that you might lose all your data if you encrypt it, but cannot decrypt it later on. If unsure, answer <b>No</b>.</p>");
-                if (KMessageBox::questionYesNo(nullptr, msg, i18n("Store GPG encrypted"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "StoreEncrypted") == KMessageBox::No) {
+                if (KMessageBox::questionTwoActions(nullptr,
+                                                    msg,
+                                                    i18n("Store GPG encrypted"),
+                                                    KStandardGuiItem::yes(),
+                                                    KStandardGuiItem::no(),
+                                                    "StoreEncrypted")
+                    == KMessageBox::SecondaryAction) {
                     encryptFile = false;
                 }
             }

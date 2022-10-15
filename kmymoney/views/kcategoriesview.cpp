@@ -324,7 +324,9 @@ void KCategoriesView::slotDeleteCategory()
 
         // case A - only a single, unused category without subcats selected
         if (d->m_currentCategory.accountList().isEmpty()) {
-            if (!needAskUser || (KMessageBox::questionYesNo(this, i18n("<qt>Do you really want to delete category <b>%1</b>?</qt>", selectedAccountName)) == KMessageBox::Yes)) {
+            if (!needAskUser
+                || (KMessageBox::questionTwoActions(this, i18n("<qt>Do you really want to delete category <b>%1</b>?</qt>", selectedAccountName))
+                    == KMessageBox::PrimaryAction)) {
                 try {
                     file->removeAccount(d->m_currentCategory);
                     d->m_currentCategory.clearId();
@@ -340,19 +342,21 @@ void KCategoriesView::slotDeleteCategory()
         auto parentAccount = file->account(d->m_currentCategory.parentAccountId());
 
         QStringList accountsToReparent;
-        int result = KMessageBox::questionYesNoCancel(this,
-                     i18n("<qt>Do you want to delete category <b>%1</b> with all its sub-categories or only "
-                          "the category itself? If you only delete the category itself, all its sub-categories "
-                          "will be made sub-categories of <b>%2</b>.</qt>", selectedAccountName, parentAccount.name()),
-                     QString(),
-                     KGuiItem(i18n("Delete all")),
-                     KGuiItem(i18n("Just the category")));
+        int result = KMessageBox::questionTwoActionsCancel(this,
+                                                           i18n("<qt>Do you want to delete category <b>%1</b> with all its sub-categories or only "
+                                                                "the category itself? If you only delete the category itself, all its sub-categories "
+                                                                "will be made sub-categories of <b>%2</b>.</qt>",
+                                                                selectedAccountName,
+                                                                parentAccount.name()),
+                                                           QString(),
+                                                           KGuiItem(i18n("Delete all")),
+                                                           KGuiItem(i18n("Just the category")));
         if (result == KMessageBox::Cancel)
             return; // cancel pressed? ok, no delete then...
         // "No" means "Just the category" and that means we need to reparent all subaccounts
         bool need_confirmation = false;
         // case C - User only wants to delete the category itself
-        if (result == KMessageBox::No)
+        if (result == KMessageBox::SecondaryAction)
             accountsToReparent = d->m_currentCategory.accountList();
         else {
             // case D - User wants to delete all subcategories, now check all subcats of
@@ -374,8 +378,12 @@ void KCategoriesView::slotDeleteCategory()
                 need_confirmation = true;
         }
         if (!accountsToReparent.isEmpty() && need_confirmation) {
-            if (KMessageBox::questionYesNo(this, i18n("<p>Some sub-categories of category <b>%1</b> cannot "
-                                           "be deleted, because they are still used. They will be made sub-categories of <b>%2</b>. Proceed?</p>", selectedAccountName, parentAccount.name())) != KMessageBox::Yes) {
+            if (KMessageBox::questionTwoActions(this,
+                                                i18n("<p>Some sub-categories of category <b>%1</b> cannot "
+                                                     "be deleted, because they are still used. They will be made sub-categories of <b>%2</b>. Proceed?</p>",
+                                                     selectedAccountName,
+                                                     parentAccount.name()))
+                != KMessageBox::PrimaryAction) {
                 return; // user gets wet feet...
             }
         }

@@ -590,8 +590,12 @@ void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule)
                             "want to reset the last payment date?</qt>",
                             QLocale().toString(next, QLocale::ShortFormat),
                             QLocale().toString(last, QLocale::ShortFormat));
-                        if (KMessageBox::questionYesNo(nullptr, questionText, i18n("Reset Last Payment Date"), KStandardGuiItem::yes(), KStandardGuiItem::no())
-                            == KMessageBox::Yes) {
+                        if (KMessageBox::questionTwoActions(nullptr,
+                                                            questionText,
+                                                            i18n("Reset Last Payment Date"),
+                                                            KStandardGuiItem::yes(),
+                                                            KStandardGuiItem::no())
+                            == KMessageBox::PrimaryAction) {
                             sched.setLastPayment(QDate());
                         }
                     }

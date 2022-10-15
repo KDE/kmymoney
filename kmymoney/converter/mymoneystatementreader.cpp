@@ -1013,7 +1013,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             s1.setPayeeId(payeeid);
         } catch (const MyMoneyException &) {
             MyMoneyPayee payee;
-            int rc = KMessageBox::Yes;
+            int rc = KMessageBox::PrimaryAction;
 
             if (m_autoCreatePayee == false) {
                 // Ask the user if that is what he intended to do?
@@ -1029,11 +1029,16 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 if (!m_dontAskAgain.contains(askKey)) {
                     m_dontAskAgain += askKey;
                 }
-                rc = KMessageBox::questionYesNoCancel(0, msg, i18n("New payee/receiver"),
-                                                      KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(), askKey);
+                rc = KMessageBox::questionTwoActionsCancel(0,
+                                                           msg,
+                                                           i18n("New payee/receiver"),
+                                                           KStandardGuiItem::yes(),
+                                                           KStandardGuiItem::no(),
+                                                           KStandardGuiItem::cancel(),
+                                                           askKey);
             }
 
-            if (rc == KMessageBox::Yes) {
+            if (rc == KMessageBox::PrimaryAction) {
                 // for now, we just add the payee to the pool and turn
                 // on simple name matching, so that future transactions
                 // with the same name don't get here again.
@@ -1110,12 +1115,11 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
                 }
 
-            } else if (rc == KMessageBox::No) {
+            } else if (rc == KMessageBox::SecondaryAction) {
                 s1.setPayeeId(QString());
 
             } else {
                 throw MYMONEYEXCEPTION_CSTRING("USERABORT");
-
             }
         }
 
@@ -1633,9 +1637,9 @@ bool MyMoneyStatementReader::askUserToEnterScheduleForMatching(const MyMoneySche
                             "Do you want KMyMoney to enter this schedule now so that the transaction can be matched?",
                             gap,scheduleName, splitValue, payeeName);
 
-    const int userAnswer = KMessageBox::questionYesNo(0, QLatin1String("<html>") + questionMsg + QLatin1String("</html>"), i18n("Schedule found"));
+    const int userAnswer = KMessageBox::questionTwoActions(0, QLatin1String("<html>") + questionMsg + QLatin1String("</html>"), i18n("Schedule found"));
 
-    return (userAnswer == KMessageBox::Yes);
+    return (userAnswer == KMessageBox::PrimaryAction);
 }
 
 void MyMoneyStatementReader::slotNewAccount(const MyMoneyAccount& acc)

@@ -335,7 +335,14 @@ void KMyMoneyPriceDlg::slotDeletePrice()
     Q_D(KMyMoneyPriceDlg);
     QList<QTreeWidgetItem*> listItems = d->ui->m_priceList->selectedItems();
     if (listItems.count() > 0) {
-        if (KMessageBox::questionYesNo(this, i18np("Do you really want to delete the selected price entry?", "Do you really want to delete the selected price entries?", listItems.count()), i18n("Delete price information"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "DeletePrice") == KMessageBox::Yes) {
+        if (KMessageBox::questionTwoActions(
+                this,
+                i18np("Do you really want to delete the selected price entry?", "Do you really want to delete the selected price entries?", listItems.count()),
+                i18n("Delete price information"),
+                KStandardGuiItem::yes(),
+                KStandardGuiItem::no(),
+                "DeletePrice")
+            == KMessageBox::PrimaryAction) {
             MyMoneyFileTransaction ft;
             try {
                 QList<QTreeWidgetItem*>::const_iterator price_it;

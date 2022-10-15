@@ -270,7 +270,8 @@ void KInstitutionsView::slotDeleteInstitution()
     const auto file = MyMoneyFile::instance();
     try {
         auto institution = file->institution(d->m_currentInstitution.id());
-        if ((KMessageBox::questionYesNo(this, i18n("<p>Do you really want to delete the institution <b>%1</b>?</p>", institution.name()))) == KMessageBox::No)
+        if ((KMessageBox::questionTwoActions(this, i18n("<p>Do you really want to delete the institution <b>%1</b>?</p>", institution.name())))
+            == KMessageBox::SecondaryAction)
             return;
         MyMoneyFileTransaction ft;
 

@@ -241,11 +241,11 @@ public:
                             }
                         } else {
                             if (autoEnter) {
-                                if (KMessageBox::warningYesNo(
+                                if (KMessageBox::warningTwoActions(
                                         q,
                                         i18n("Are you sure you wish to stop this scheduled transaction from being entered into the register?\n\nKMyMoney will "
                                              "prompt you again next time it starts unless you manually enter it later."))
-                                    == KMessageBox::No) {
+                                    == KMessageBox::SecondaryAction) {
                                     // the user has chosen 'No' for the above question,
                                     // we go back to the editor
                                     continue;
@@ -339,7 +339,12 @@ public:
                 if (!schedule.isFinished()) {
                     if (schedule.occurrence() != eMyMoney::Schedule::Occurrence::Once) {
                         QDate next = schedule.nextDueDate();
-                        if (!schedule.isFinished() && (KMessageBox::questionYesNo( parentWidget, i18n("<qt>Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?</qt>", schedule.name(), QLocale().toString(next, QLocale::ShortFormat)))) == KMessageBox::Yes) {
+                        if (!schedule.isFinished()
+                            && (KMessageBox::questionTwoActions(parentWidget,
+                                                                i18n("<qt>Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?</qt>",
+                                                                     schedule.name(),
+                                                                     QLocale().toString(next, QLocale::ShortFormat))))
+                                == KMessageBox::PrimaryAction) {
                             MyMoneyFileTransaction ft;
                             schedule.setLastPayment(next);
                             schedule.setNextDueDate(schedule.nextPayment(next));
