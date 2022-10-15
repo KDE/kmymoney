@@ -559,7 +559,7 @@ void LedgerView::reset()
     QMetaObject::invokeMethod(this, "reselectAfterReset", Qt::QueuedConnection);
 }
 
-void LedgerView::reselectAfterReset()
+void LedgerView::reselectAfterModelReset()
 {
     // make sure we stay in bounds
     if (d->lastSelectedRow > model()->rowCount()) {

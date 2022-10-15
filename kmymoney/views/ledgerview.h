@@ -166,7 +166,7 @@ protected Q_SLOTS:
 
     void slotMoveToAccount(const QString& accountId);
 
-    void reselectAfterReset();
+    void reselectAfterModelReset();
 
 Q_SIGNALS:
     void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;
