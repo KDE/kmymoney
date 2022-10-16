@@ -325,7 +325,11 @@ void KCategoriesView::slotDeleteCategory()
         // case A - only a single, unused category without subcats selected
         if (d->m_currentCategory.accountList().isEmpty()) {
             if (!needAskUser
-                || (KMessageBox::questionTwoActions(this, i18n("<qt>Do you really want to delete category <b>%1</b>?</qt>", selectedAccountName))
+                || (KMessageBox::questionTwoActions(this,
+                                                    i18n("<qt>Do you really want to delete category <b>%1</b>?</qt>", selectedAccountName),
+                                                    i18nc("@title:window", "Delete category"),
+                                                    KStandardGuiItem::yes(),
+                                                    KStandardGuiItem::no())
                     == KMessageBox::PrimaryAction)) {
                 try {
                     file->removeAccount(d->m_currentCategory);
@@ -382,7 +386,10 @@ void KCategoriesView::slotDeleteCategory()
                                                 i18n("<p>Some sub-categories of category <b>%1</b> cannot "
                                                      "be deleted, because they are still used. They will be made sub-categories of <b>%2</b>. Proceed?</p>",
                                                      selectedAccountName,
-                                                     parentAccount.name()))
+                                                     parentAccount.name()),
+                                                i18nc("@title:window", "Delete category"),
+                                                KStandardGuiItem::yes(),
+                                                KStandardGuiItem::no())
                 != KMessageBox::PrimaryAction) {
                 return; // user gets wet feet...
             }

@@ -1564,7 +1564,11 @@ bool KBankingExt::importAccountInfo(AB_IMEXPORTER_CONTEXT *ctx,
 
     // import them
     if (!m_parent->importStatement(ks)) {
-        if (KMessageBox::warningTwoActions(0, i18n("Error importing statement. Do you want to continue?"), i18n("Critical Error"))
+        if (KMessageBox::warningTwoActions(0,
+                                           i18n("Error importing statement. Do you want to continue?"),
+                                           i18n("Critical Error"),
+                                           KStandardGuiItem::yes(),
+                                           KStandardGuiItem::no())
             == KMessageBox::SecondaryAction) {
             DBG_ERROR(0, "User aborted");
             return false;

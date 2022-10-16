@@ -131,7 +131,9 @@ void KScheduledView::slotEnterOverdueSchedules(const MyMoneyAccount& acc)
         if (KMessageBox::questionTwoActions(
                 this,
                 i18n("KMyMoney has detected some overdue scheduled transactions for this account. Do you want to enter those scheduled transactions now?"),
-                i18n("Scheduled transactions found"))
+                i18n("Scheduled transactions found"),
+                KStandardGuiItem::yes(),
+                KStandardGuiItem::no())
             == KMessageBox::PrimaryAction) {
             QMap<QString, bool> skipMap;
             bool processedOne;
@@ -225,7 +227,8 @@ void KScheduledView::slotDeleteSchedule()
                 msg += QString(" ");
                 msg += i18n("In case of loan payments it is currently not possible to recreate the scheduled transaction.");
             }
-            if (KMessageBox::questionTwoActions(parentWidget(), msg) == KMessageBox::SecondaryAction)
+            if (KMessageBox::questionTwoActions(parentWidget(), msg, i18nc("@title:window", "Delete schedule"), KStandardGuiItem::yes(), KStandardGuiItem::no())
+                == KMessageBox::SecondaryAction)
                 return;
 
             MyMoneyFile::instance()->removeSchedule(sched);

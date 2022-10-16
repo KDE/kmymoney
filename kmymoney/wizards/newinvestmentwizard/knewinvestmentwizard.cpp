@@ -173,7 +173,9 @@ void KNewInvestmentWizard::slotCheckForExistingSymbol(const QString& symbol)
                 d->m_security = MyMoneySecurity();
                 if (KMessageBox::questionTwoActions(this,
                                                     i18n("The selected symbol is already on file. Do you want to reuse the existing security?"),
-                                                    i18n("Security found"))
+                                                    i18n("Security found"),
+                                                    KStandardGuiItem::yes(),
+                                                    KStandardGuiItem::no())
                     == KMessageBox::PrimaryAction) {
                     d->m_security = it_s;
                     d->init2();

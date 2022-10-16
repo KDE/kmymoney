@@ -281,7 +281,8 @@ bool KEditLoanWizard::validateCurrentPage()
                                  "KMyMoney will dismiss the changes you have just entered. "
                                  "Do you wish to proceed?", button->text());
 
-            if (KMessageBox::questionTwoActions(this, errMsg) == KMessageBox::SecondaryAction) {
+            if (KMessageBox::questionTwoActions(this, errMsg, i18nc("@title:window", "Confirmation"), KStandardGuiItem::yes(), KStandardGuiItem::no())
+                == KMessageBox::SecondaryAction) {
                 dontLeavePage = true;
             } else {
                 loadWidgets(d->m_account);

@@ -148,7 +148,10 @@ void KPayeesView::slotRenameSinglePayee(const QModelIndex& idx, const QVariant& 
                                                     i18n("A payee with the name '%1' already exists. It is not advisable to have "
                                                          "multiple payees with the same identification name. Are you sure you would like "
                                                          "to rename the payee?",
-                                                         new_name))
+                                                         new_name),
+                                                    i18nc("@title:window", "Duplicate payee name"),
+                                                    KStandardGuiItem::yes(),
+                                                    KStandardGuiItem::no())
                     != KMessageBox::PrimaryAction) {
                     // p->setText(d->m_payee.name());
                     return;
@@ -537,7 +540,7 @@ void KPayeesView::slotDeletePayee()
     else
         prompt = i18n("Do you really want to remove all selected payees?");
 
-    if (KMessageBox::questionTwoActions(this, prompt, i18n("Remove Payee")) == KMessageBox::SecondaryAction)
+    if (KMessageBox::questionTwoActions(this, prompt, i18n("Remove Payee"), KStandardGuiItem::yes(), KStandardGuiItem::no()) == KMessageBox::SecondaryAction)
         return;
 
     d->payeeReassign(KPayeeReassignDlg::TypeDelete);
@@ -550,7 +553,11 @@ void KPayeesView::slotMergePayee()
     if (payeesList.count() < 1)
         return; // shouldn't happen
 
-    if (KMessageBox::questionTwoActions(this, i18n("<p>Do you really want to merge the selected payees?"), i18n("Merge Payees"))
+    if (KMessageBox::questionTwoActions(this,
+                                        i18n("<p>Do you really want to merge the selected payees?"),
+                                        i18n("Merge Payees"),
+                                        KStandardGuiItem::yes(),
+                                        KStandardGuiItem::no())
         == KMessageBox::SecondaryAction)
         return;
 

@@ -286,7 +286,9 @@ public:
         if (m_havePendingChanges) {
             if (KMessageBox::questionTwoActions(q,
                                                 QString("<qt>%1</qt>").arg(i18n("Do you want to save the changes for <b>%1</b>?", m_newName)),
-                                                i18n("Save changes"))
+                                                i18n("Save changes"),
+                                                KStandardGuiItem::yes(),
+                                                KStandardGuiItem::no())
                 == KMessageBox::PrimaryAction) {
                 q->slotUpdateTag();
             }
@@ -373,7 +375,10 @@ void KTagsView::slotRenameSingleTag(const QModelIndex& idx, const QVariant& valu
                                                     i18n("A tag with the name '%1' already exists. It is not advisable to have "
                                                          "multiple tags with the same identification name. Are you sure you would like "
                                                          "to rename the tag?",
-                                                         new_name))
+                                                         new_name),
+                                                    i18nc("@title:window", "Duplicate tag name"),
+                                                    KStandardGuiItem::yes(),
+                                                    KStandardGuiItem::no())
                     != KMessageBox::PrimaryAction) {
                     return;
                 }

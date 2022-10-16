@@ -276,7 +276,9 @@ void KAccountsView::slotAccountUnmapOnline()
                                            .arg(i18n("Do you really want to remove the mapping of account <b>%1</b> to an online account? Depending on the "
                                                      "details of the online banking method used, this action cannot be reverted.",
                                                      d->m_currentAccount.name())),
-                                       i18n("Remove mapping to online account"))
+                                       i18n("Remove mapping to online account"),
+                                       KStandardGuiItem::yes(),
+                                       KStandardGuiItem::no())
         == KMessageBox::PrimaryAction) {
         MyMoneyFileTransaction ft;
         try {

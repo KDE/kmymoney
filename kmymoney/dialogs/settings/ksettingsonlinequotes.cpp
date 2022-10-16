@@ -254,7 +254,9 @@ void KSettingsOnlineQuotes::slotDumpCSVProfile()
                                                               i18n("CSV profile <b>%1</b> already exists.<br>"
                                                                    "Do you want to overwrite it?",
                                                                    d->m_currentItem.m_name),
-                                                              i18n("CSV Profile Already Exists"))
+                                                              i18n("CSV Profile Already Exists"),
+                                                              KStandardGuiItem::yes(),
+                                                              KStandardGuiItem::no())
                                 == KMessageBox::PrimaryAction
                             ? true
                             : false);
@@ -309,7 +311,9 @@ void KSettingsOnlineQuotes::slotDeleteEntry()
                                                 i18n("Security <b>%1</b> uses this quote source.<br>"
                                                      "Do you really want to remove it?",
                                                      security.name()),
-                                                i18n("Delete quote source"))
+                                                i18nc("@title:window", "Delete quote source"),
+                                                KStandardGuiItem::yes(),
+                                                KStandardGuiItem::no())
                 == KMessageBox::PrimaryAction)
                 break;  // webpricequote can handle missing online quotes, so proceed without any extra action
             else

@@ -506,7 +506,11 @@ public:
         if (isFileNotSaved && KMyMoneySettings::autoSaveOnClose()) {
             fileNeedsToBeSaved = true;
         } else if (isFileNotSaved || isNewFileNotSaved) {
-            switch (KMessageBox::warningTwoActionsCancel(q, i18n("The file has been changed, save it?"))) {
+            switch (KMessageBox::warningTwoActionsCancel(q,
+                                                         i18n("The file has been changed, save it?"),
+                                                         i18nc("@title:window", "Save file"),
+                                                         KStandardGuiItem::yes(),
+                                                         KStandardGuiItem::no())) {
             case KMessageBox::ButtonCode::Yes:
                 fileNeedsToBeSaved = true;
                 break;
@@ -2518,7 +2522,8 @@ void KMyMoneyApp::slotDeleteTransactions()
             "Do you really want to delete all %1 selected transactions?",
             d->m_selections.selection(SelectedObjects::JournalEntry).count());
 
-        if (KMessageBox::questionTwoActions(this, msg, i18n("Delete transaction")) == KMessageBox::SecondaryAction) {
+        if (KMessageBox::questionTwoActions(this, msg, i18n("Delete transaction"), KStandardGuiItem::yes(), KStandardGuiItem::no())
+            == KMessageBox::SecondaryAction) {
             return;
         }
     }
@@ -2866,7 +2871,12 @@ void KMyMoneyApp::slotMoveToToday()
                          "Do you really want to change all %1 selected transactions?",
                          d->m_selections.selection(SelectedObjects::JournalEntry).count());
 
-        if (KMessageBox::questionTwoActions(this, msg, i18nc("@title:window Confirmation dialog", "Change transaction")) == KMessageBox::Cancel) {
+        if (KMessageBox::questionTwoActions(this,
+                                            msg,
+                                            i18nc("@title:window Confirmation dialog", "Change transaction"),
+                                            KStandardGuiItem::yes(),
+                                            KStandardGuiItem::no())
+            == KMessageBox::SecondaryAction) {
             return;
         }
     }
@@ -2993,7 +3003,9 @@ void KMyMoneyApp::slotEnterOverdueSchedules()
                 i18n("KMyMoney has detected some overdue scheduled transactions for the account <b>%1</b>. Do you want to enter those "
                      "scheduled transactions now?",
                      accountName),
-                i18n("Scheduled transactions found"))
+                i18n("Scheduled transactions found"),
+                KStandardGuiItem::yes(),
+                KStandardGuiItem::no())
             == KMessageBox::PrimaryAction) {
             QSet<QString> skipMap;
             bool processedOne(false);
@@ -3380,7 +3392,9 @@ bool KMyMoneyApp::okToWriteFile(const QUrl &url)
                 QLatin1String("<qt>")
                     + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.toDisplayString(QUrl::PreferLocalFile))
                     + QLatin1String("</qt>"),
-                i18n("File already exists"))
+                i18n("File already exists"),
+                KStandardGuiItem::yes(),
+                KStandardGuiItem::no())
             != KMessageBox::PrimaryAction)
             reallySaveFile = false;
     }
@@ -3491,7 +3505,10 @@ void KMyMoneyApp::slotBackupFile()
     {
         if (KMessageBox::questionTwoActions(this,
                                             i18n("The file must be saved first "
-                                                 "before it can be backed up.  Do you want to continue?"))
+                                                 "before it can be backed up.  Do you want to continue?"),
+                                            i18nc("@title:window", "Confirmation of backup"),
+                                            KStandardGuiItem::yes(),
+                                            KStandardGuiItem::no())
             == KMessageBox::SecondaryAction) {
             return;
         }
@@ -3739,7 +3756,11 @@ void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
                                    , MyMoneyUtils::formatMoney(-openingBal, newAccount, sec)
                                    , MyMoneyUtils::formatMoney(openingBal, newAccount, sec));
 
-            int ans = KMessageBox::questionTwoActionsCancel(this, message);
+            int ans = KMessageBox::questionTwoActionsCancel(this,
+                                                            message,
+                                                            i18nc("@title:window", "Opening balance for liability"),
+                                                            KStandardGuiItem::yes(),
+                                                            KStandardGuiItem::no());
             if (ans == KMessageBox::PrimaryAction) {
                 openingBal = -openingBal;
 

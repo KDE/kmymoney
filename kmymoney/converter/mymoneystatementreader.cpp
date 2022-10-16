@@ -1637,7 +1637,11 @@ bool MyMoneyStatementReader::askUserToEnterScheduleForMatching(const MyMoneySche
                             "Do you want KMyMoney to enter this schedule now so that the transaction can be matched?",
                             gap,scheduleName, splitValue, payeeName);
 
-    const int userAnswer = KMessageBox::questionTwoActions(0, QLatin1String("<html>") + questionMsg + QLatin1String("</html>"), i18n("Schedule found"));
+    const int userAnswer = KMessageBox::questionTwoActions(0,
+                                                           QLatin1String("<html>") + questionMsg + QLatin1String("</html>"),
+                                                           i18n("Schedule found"),
+                                                           KStandardGuiItem::yes(),
+                                                           KStandardGuiItem::no());
 
     return (userAnswer == KMessageBox::PrimaryAction);
 }

@@ -408,7 +408,12 @@ void MyMoneyQifProfileEditor::slotDelete()
 {
     QString profile = m_profile.profileName().mid(8);
 
-    if (KMessageBox::questionTwoActions(this, i18n("Do you really want to delete profile '%1'?", profile)) == KMessageBox::PrimaryAction) {
+    if (KMessageBox::questionTwoActions(this,
+                                        i18n("Do you really want to delete profile '%1'?", profile),
+                                        i18nc("@title:window", "Delete QIF profile"),
+                                        KStandardGuiItem::yes(),
+                                        KStandardGuiItem::no())
+        == KMessageBox::PrimaryAction) {
         int idx = m_profileListBox->currentRow();
         m_profile.saveProfile();
         deleteProfile(profile);

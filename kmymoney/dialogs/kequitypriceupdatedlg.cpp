@@ -688,7 +688,9 @@ void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _kmmID, const QS
                                                                                  storedPrice.date().toString(Qt::ISODate),
                                                                                  QString().setNum(storedPrice.rate(storedPrice.to()).toDouble(), 'g', 10),
                                                                                  QString().setNum((*it).m_amount.toDouble(), 'g', 10)),
-                                                                            i18n("Price Already Exists"));
+                                                                            i18n("Price Already Exists"),
+                                                                            KStandardGuiItem::yes(),
+                                                                            KStandardGuiItem::no());
                         switch(result) {
                         case KMessageBox::ButtonCode::Yes:
                             ++it;

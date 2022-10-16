@@ -244,7 +244,10 @@ public:
                                 if (KMessageBox::warningTwoActions(
                                         q,
                                         i18n("Are you sure you wish to stop this scheduled transaction from being entered into the register?\n\nKMyMoney will "
-                                             "prompt you again next time it starts unless you manually enter it later."))
+                                             "prompt you again next time it starts unless you manually enter it later."),
+                                        i18nc("@title:window", "Stop entering schedule"),
+                                        KStandardGuiItem::yes(),
+                                        KStandardGuiItem::no())
                                     == KMessageBox::SecondaryAction) {
                                     // the user has chosen 'No' for the above question,
                                     // we go back to the editor
@@ -343,7 +346,10 @@ public:
                             && (KMessageBox::questionTwoActions(parentWidget,
                                                                 i18n("<qt>Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?</qt>",
                                                                      schedule.name(),
-                                                                     QLocale().toString(next, QLocale::ShortFormat))))
+                                                                     QLocale().toString(next, QLocale::ShortFormat)),
+                                                                i18nc("@title:window", "Skip scheduled transaction"),
+                                                                KStandardGuiItem::yes(),
+                                                                KStandardGuiItem::no()))
                                 == KMessageBox::PrimaryAction) {
                             MyMoneyFileTransaction ft;
                             schedule.setLastPayment(next);

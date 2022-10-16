@@ -130,7 +130,7 @@ if (${KF5_MIN_VERSION} VERSION_LESS "5.100")
         )
     endif()
 else()
-    message(FATAL_ERROR "Removes the above logic from CMakeLists.txt since it is not needed anymore")
+    message(FATAL_ERROR "Remove the above logic from CMakeLists.txt since it is not needed anymore")
 endif()
 
 find_package(KF5 ${KF5_MIN_VERSION} OPTIONAL_COMPONENTS DocTools Holidays Contacts Activities)

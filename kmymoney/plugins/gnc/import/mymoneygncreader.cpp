@@ -2321,7 +2321,7 @@ void MyMoneyGncReader::terminate()
 
         if (mainCurrency != "") {
             QString question = i18n("Your main currency seems to be %1 (%2); do you want to set this as your base currency?", mainCurrency, m_storage->currency(mainCurrency.toUtf8()).name());
-            if (KMessageBox::questionTwoActions(0, question, PACKAGE) == KMessageBox::PrimaryAction) {
+            if (KMessageBox::questionTwoActions(0, question, PACKAGE, KStandardGuiItem::yes(), KStandardGuiItem::no()) == KMessageBox::PrimaryAction) {
                 m_storage->setValue("kmm-baseCurrency", mainCurrency);
             }
         }
@@ -2359,7 +2359,7 @@ void MyMoneyGncReader::terminate()
             KMessageBox::information(0, i18n("Problems were encountered in converting schedule '%1'.", sc.name()), PACKAGE);
             //      TODO: return this feature
             //      switch (KMessageBox::warningTwoActions(0, i18n("Problems were encountered in converting schedule '%1'.\nDo you want to review or edit it
-            //      now?", sc.name()), PACKAGE)) {
+            //      now?", sc.name()), PACKAGE, KStandardGuiItem::yes(), KStandardGuiItem::no())) {
             //        case KMessageBox::PrimaryAction:
             //          auto s = new KEditScheduleDlg(sc);
             //          if (s->exec())
@@ -2655,7 +2655,11 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
                         break;
                     }
 #endif
-                    switch (KMessageBox::questionTwoActions(0, i18n("%1 is not an Investment Account. Do you wish to make it one?", invAcc.name()), PACKAGE)) {
+                    switch (KMessageBox::questionTwoActions(0,
+                                                            i18n("%1 is not an Investment Account. Do you wish to make it one?", invAcc.name()),
+                                                            PACKAGE,
+                                                            KStandardGuiItem::yes(),
+                                                            KStandardGuiItem::no())) {
                     case KMessageBox::PrimaryAction:
                         // convert it - but what if it has splits???
                         qWarning("Not yet implemented");
