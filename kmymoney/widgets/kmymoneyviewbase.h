@@ -24,6 +24,8 @@ class QPoint;
 
 #include "viewenums.h"
 
+#include "kmmyesno.h"
+
 class MyMoneyObject;
 class KPageWidgetItem;
 class SelectedObjects;

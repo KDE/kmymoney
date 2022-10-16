@@ -73,6 +73,8 @@
 #include "splitmodel.h"
 #include "accountsmodel.h"
 
+#include "kmmyesno.h"
+
 using namespace Icons;
 
 const QString KMyMoneyUtils::paymentMethodToString(eMyMoney::Schedule::PaymentType paymentType)
@@ -474,8 +476,7 @@ void KMyMoneyUtils::deleteSecurity(const MyMoneySecurity& security, QWidget* par
         dontAsk = "DeleteSecurity";
         dontAsk2 = "DeleteSecurityPrices";
     }
-    if (KMessageBox::questionTwoActions(parent, msg, i18n("Delete security"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk)
-        == KMessageBox::PrimaryAction) {
+    if (KMessageBox::questionTwoActions(parent, msg, i18n("Delete security"), KMMYesNo::yes(), KMMYesNo::no(), dontAsk) == KMessageBox::PrimaryAction) {
         MyMoneyFileTransaction ft;
         auto file = MyMoneyFile::instance();
 
@@ -483,8 +484,7 @@ void KMyMoneyUtils::deleteSecurity(const MyMoneySecurity& security, QWidget* par
         skip.fill(true);
         skip.clearBit((int)eStorage::Reference::Price);
         if (file->isReferenced(security, skip)) {
-            if (KMessageBox::questionTwoActions(parent, msg2, i18n("Delete prices"), KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk2)
-                == KMessageBox::PrimaryAction) {
+            if (KMessageBox::questionTwoActions(parent, msg2, i18n("Delete prices"), KMMYesNo::yes(), KMMYesNo::no(), dontAsk2) == KMessageBox::PrimaryAction) {
                 try {
                     QString secID = security.id();
                     Q_FOREACH (auto priceEntry, file->priceList()) {
@@ -563,7 +563,7 @@ bool KMyMoneyUtils::newPayee(const QString& newnameBase, QString& id)
         // Ask the user if that is what he intended to do?
         const auto msg = i18n("<qt>Do you want to add <b>%1</b> as payer/receiver?</qt>", newnameBase);
 
-        if (KMessageBox::questionTwoActions(nullptr, msg, i18n("New payee/receiver"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "NewPayee")
+        if (KMessageBox::questionTwoActions(nullptr, msg, i18n("New payee/receiver"), KMMYesNo::yes(), KMMYesNo::no(), "NewPayee")
             == KMessageBox::SecondaryAction) {
             doit = false;
             // we should not keep the 'no' setting because that can confuse people like
@@ -615,8 +615,7 @@ void KMyMoneyUtils::newTag(const QString& newnameBase, QString& id)
         // Ask the user if that is what he intended to do?
         const auto msg = i18n("<qt>Do you want to add <b>%1</b> as tag?</qt>", newnameBase);
 
-        if (KMessageBox::questionTwoActions(nullptr, msg, i18n("New tag"), KStandardGuiItem::yes(), KStandardGuiItem::no(), "NewTag")
-            == KMessageBox::SecondaryAction) {
+        if (KMessageBox::questionTwoActions(nullptr, msg, i18n("New tag"), KMMYesNo::yes(), KMMYesNo::no(), "NewTag") == KMessageBox::SecondaryAction) {
             doit = false;
             // we should not keep the 'no' setting because that can confuse people like
             // I have seen in some usability tests. So we just delete it right away.

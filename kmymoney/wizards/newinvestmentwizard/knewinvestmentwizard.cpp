@@ -31,6 +31,8 @@
 #include "kmymoneyutils.h"
 #include "mymoneyexception.h"
 
+#include "kmmyesno.h"
+
 class KNewInvestmentWizardPrivate
 {
     Q_DISABLE_COPY(KNewInvestmentWizardPrivate)
@@ -174,8 +176,8 @@ void KNewInvestmentWizard::slotCheckForExistingSymbol(const QString& symbol)
                 if (KMessageBox::questionTwoActions(this,
                                                     i18n("The selected symbol is already on file. Do you want to reuse the existing security?"),
                                                     i18n("Security found"),
-                                                    KStandardGuiItem::yes(),
-                                                    KStandardGuiItem::no())
+                                                    KMMYesNo::yes(),
+                                                    KMMYesNo::no())
                     == KMessageBox::PrimaryAction) {
                     d->m_security = it_s;
                     d->init2();
@@ -290,8 +292,8 @@ void KNewInvestmentWizard::newInvestment(MyMoneyAccount& account, const MyMoneyA
                                              account.name(),
                                              parent.name()),
                                         i18n("Create security"),
-                                        KStandardGuiItem::yes(),
-                                        KStandardGuiItem::no(),
+                                        KMMYesNo::yes(),
+                                        KMMYesNo::no(),
                                         dontShowAgain)
         == KMessageBox::PrimaryAction) {
         QPointer<KNewInvestmentWizard> dlg = new KNewInvestmentWizard;

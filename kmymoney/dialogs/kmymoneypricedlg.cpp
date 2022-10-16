@@ -30,19 +30,21 @@
 #include "ui_kmymoneypricedlg.h"
 #include "ui_kupdatestockpricedlg.h"
 
-#include "kupdatestockpricedlg.h"
+#include "icons.h"
 #include "kcurrencycalculator.h"
-#include "mymoneyprice.h"
 #include "kequitypriceupdatedlg.h"
 #include "kmymoneycurrencyselector.h"
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
-#include "mymoneymoney.h"
-#include "mymoneyexception.h"
 #include "kmymoneyutils.h"
 #include "kpricetreeitem.h"
-#include "icons/icons.h"
+#include "kupdatestockpricedlg.h"
+#include "mymoneyaccount.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "mymoneyprice.h"
+#include "mymoneysecurity.h"
+
+#include "kmmyesno.h"
 
 using namespace Icons;
 
@@ -339,8 +341,8 @@ void KMyMoneyPriceDlg::slotDeletePrice()
                 this,
                 i18np("Do you really want to delete the selected price entry?", "Do you really want to delete the selected price entries?", listItems.count()),
                 i18n("Delete price information"),
-                KStandardGuiItem::yes(),
-                KStandardGuiItem::no(),
+                KMMYesNo::yes(),
+                KMMYesNo::no(),
                 "DeletePrice")
             == KMessageBox::PrimaryAction) {
             MyMoneyFileTransaction ft;

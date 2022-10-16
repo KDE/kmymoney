@@ -30,6 +30,8 @@
 
 #include "ui_bankingwizardpage.h"
 
+#include "kmmyesno.h"
+
 // ----------------------------------------------------------------------------
 
 #define connectClearButton(col) \
@@ -249,8 +251,8 @@ void BankingPage::memoColSelected(int col)
                                                           "<center>If you wish to copy the Payee data to the memo field, click 'Yes'.</center>",
                                                           m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col))),
                                                      i18nc("@title:window", "Field assignment resolution"),
-                                                     KStandardGuiItem::yes(),
-                                                     KStandardGuiItem::no());
+                                                     KMMYesNo::yes(),
+                                                     KMMYesNo::no());
             if (rc == KMessageBox::PrimaryAction) {
                 ui->m_memoCol->setItemText(col, QString::number(col + 1) + QLatin1Char('*'));
                 if (!m_profile->m_memoColList.contains(col))

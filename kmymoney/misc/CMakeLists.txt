@@ -22,6 +22,10 @@ set ( kmm_keychain_SRCS
   kmmkeychain.cpp
 )
 
+set ( kmm_yesno_SRCS
+  kmmyesno.cpp
+)
+
 if( "${HAVE_UNISTD_H}" AND "${HAVE_PWD_H}" )
   set( kmm_utils_platformtools_SRCS
     platformtools_gnu.cpp
@@ -76,6 +80,7 @@ add_library(kmm_webconnect ${kmm_webconnect_SRCS})
 add_library(kmm_keychain ${kmm_keychain_SRCS})
 add_library(kmm_printer ${kmm_printer_SRCS})
 add_library(kmm_selections ${kmm_selections_SRCS})
+add_library(kmm_yesno ${kmm_yesno_SRCS})
 
 target_link_libraries( kmm_utils_validators
   PUBLIC
@@ -132,6 +137,11 @@ target_link_libraries( kmm_selections
   Qt::Core
 )
 
+target_link_libraries(kmm_yesno
+  PRIVATE
+    KF5::I18n
+    KF5::WidgetsAddons
+)
 
 set_target_properties(kmm_selections PROPERTIES
   VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
@@ -152,6 +162,11 @@ set_target_properties(kmm_keychain PROPERTIES
         VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
         )
 generate_export_header(kmm_keychain)
+
+set_target_properties(kmm_yesno PROPERTIES
+  VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
+)
+generate_export_header(kmm_yesno)
 
 
 if(ENABLE_GPG)
@@ -179,13 +194,13 @@ set_target_properties(kmm_gpgfile PROPERTIES
 )
 generate_export_header(kmm_gpgfile)
 
-
 install(TARGETS
         kmm_printer
         kmm_webconnect
         kmm_keychain
         kmm_selections
         kmm_gpgfile
+        kmm_yesno
         ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(FILES
@@ -194,5 +209,6 @@ install(FILES
         ${CMAKE_CURRENT_BINARY_DIR}/kmm_webconnect_export.h
         ${CMAKE_CURRENT_BINARY_DIR}/kmm_keychain_export.h
         ${CMAKE_CURRENT_BINARY_DIR}/kmm_gpgfile_export.h
+        ${CMAKE_CURRENT_BINARY_DIR}/kmm_yesno_export.h
   DESTINATION ${KDE_INSTALL_INCLUDEDIR}/kmymoney COMPONENT Devel)
 

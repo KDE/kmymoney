@@ -46,6 +46,8 @@
 #include "webpricequote.h"
 #include "widgethintframe.h"
 
+#include "kmmyesno.h"
+
 #define WEBID_COL       0
 #define NAME_COL        1
 #define PRICE_COL       2
@@ -571,8 +573,8 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _kmmID, const QString
                           _webID,
                           item->text(SOURCE_COL))),
             i18n("Price Update Failed"),
-            KStandardGuiItem::yes(),
-            KStandardGuiItem::no());
+            KMMYesNo::yes(),
+            KMMYesNo::no());
     }
 
     if (result == KMessageBox::SecondaryAction) {
@@ -689,8 +691,8 @@ void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _kmmID, const QS
                                                                                  QString().setNum(storedPrice.rate(storedPrice.to()).toDouble(), 'g', 10),
                                                                                  QString().setNum((*it).m_amount.toDouble(), 'g', 10)),
                                                                             i18n("Price Already Exists"),
-                                                                            KStandardGuiItem::yes(),
-                                                                            KStandardGuiItem::no());
+                                                                            KMMYesNo::yes(),
+                                                                            KMMYesNo::no());
                         switch(result) {
                         case KMessageBox::ButtonCode::Yes:
                             ++it;

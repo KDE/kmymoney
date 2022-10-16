@@ -28,4 +28,5 @@ target_link_libraries(gncimporter
     KF5::Completion
     KF5::Archive
     Alkimia::alkimia
+    kmm_yesno
 )

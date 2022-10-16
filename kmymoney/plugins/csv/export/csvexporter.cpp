@@ -31,6 +31,8 @@
 #include "kmymoneyplugin.h"
 #include "viewinterface.h"
 
+#include "kmmyesno.h"
+
 CSVExporter::CSVExporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     : KMyMoneyPlugin::Plugin(parent, metaData, args)
     , m_action(nullptr)
@@ -99,8 +101,8 @@ bool CSVExporter::okToWriteFile(const QUrl &url)
                 0,
                 i18n("<qt>The file <b>%1</b> already exists. Do you really want to overwrite it?</qt>", url.toDisplayString(QUrl::PreferLocalFile)),
                 i18n("File already exists"),
-                KStandardGuiItem::yes(),
-                KStandardGuiItem::no())
+                KMMYesNo::yes(),
+                KMMYesNo::no())
             != KMessageBox::PrimaryAction)
             reallySaveFile = false;
     }

@@ -44,6 +44,7 @@ target_link_libraries(csvimporter
     csvimporter_settings_static
     kmm_csvimportercore
     kmm_plugin
+    kmm_base_widgets
 )
 
 ########### install files ###############

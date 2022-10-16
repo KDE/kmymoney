@@ -41,6 +41,8 @@
 #include "kmymoneysettings.h"
 #include "kmymoneyenums.h"
 
+#include "kmmyesno.h"
+
 using namespace Icons;
 
 QUrlQuery SQLStorage::convertOldUrl(const QUrl& url)
@@ -135,8 +137,7 @@ bool SQLStorage::open(const QUrl &url)
                                        reader->lastError());
             return false;
         case -1: // retryable error
-            if (KMessageBox::warningTwoActions(nullptr, reader->lastError(), PACKAGE, KStandardGuiItem::yes(), KStandardGuiItem::no())
-                == KMessageBox::SecondaryAction) {
+            if (KMessageBox::warningTwoActions(nullptr, reader->lastError(), PACKAGE, KMMYesNo::yes(), KMMYesNo::no()) == KMessageBox::SecondaryAction) {
                 return false;
 
             } else {

@@ -59,6 +59,8 @@
 #include "scheduledtransactionmatchfinder.h"
 #include "transactionmatcher.h"
 
+#include "kmmyesno.h"
+
 using namespace eMyMoney;
 
 bool matchNotEmpty(const QString &l, const QString &r)
@@ -1032,8 +1034,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 rc = KMessageBox::questionTwoActionsCancel(0,
                                                            msg,
                                                            i18n("New payee/receiver"),
-                                                           KStandardGuiItem::yes(),
-                                                           KStandardGuiItem::no(),
+                                                           KMMYesNo::yes(),
+                                                           KMMYesNo::no(),
                                                            KStandardGuiItem::cancel(),
                                                            askKey);
             }
@@ -1640,8 +1642,8 @@ bool MyMoneyStatementReader::askUserToEnterScheduleForMatching(const MyMoneySche
     const int userAnswer = KMessageBox::questionTwoActions(0,
                                                            QLatin1String("<html>") + questionMsg + QLatin1String("</html>"),
                                                            i18n("Schedule found"),
-                                                           KStandardGuiItem::yes(),
-                                                           KStandardGuiItem::no());
+                                                           KMMYesNo::yes(),
+                                                           KMMYesNo::no());
 
     return (userAnswer == KMessageBox::PrimaryAction);
 }

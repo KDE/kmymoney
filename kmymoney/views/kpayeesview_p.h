@@ -756,8 +756,8 @@ public:
             if (KMessageBox::questionTwoActions(q,
                                                 i18n("<qt>Do you want to save the changes for <b>%1</b>?</qt>", m_newName),
                                                 i18n("Save changes"),
-                                                KStandardGuiItem::yes(),
-                                                KStandardGuiItem::no())
+                                                KMMYesNo::yes(),
+                                                KMMYesNo::no())
                 == KMessageBox::PrimaryAction) {
                 q->slotUpdatePayee();
             }

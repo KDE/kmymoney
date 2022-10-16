@@ -74,12 +74,14 @@ target_link_libraries(kmm_base_dialogs
     onlinetask_interfaces
     kmm_base_widgets
     kmm_utils_platformtools
+    kmm_yesno
   PRIVATE
     KF5::KIOGui
 )
 
 target_link_libraries(kmm_base_dialogs LINK_PUBLIC
   kmm_base_widgets
+  kmm_yesno
   kmm_mymoney
   onlinetask_interfaces
 )

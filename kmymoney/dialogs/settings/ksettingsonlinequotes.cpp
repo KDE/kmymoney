@@ -24,10 +24,12 @@
 
 #include "ui_ksettingsonlinequotes.h"
 
+#include "icons.h"
 #include "kmymoney/misc/webpricequote.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
-#include "icons/icons.h"
+
+#include "kmmyesno.h"
 
 using namespace Icons;
 
@@ -255,8 +257,8 @@ void KSettingsOnlineQuotes::slotDumpCSVProfile()
                                                                    "Do you want to overwrite it?",
                                                                    d->m_currentItem.m_name),
                                                               i18n("CSV Profile Already Exists"),
-                                                              KStandardGuiItem::yes(),
-                                                              KStandardGuiItem::no())
+                                                              KMMYesNo::yes(),
+                                                              KMMYesNo::no())
                                 == KMessageBox::PrimaryAction
                             ? true
                             : false);
@@ -312,8 +314,8 @@ void KSettingsOnlineQuotes::slotDeleteEntry()
                                                      "Do you really want to remove it?",
                                                      security.name()),
                                                 i18nc("@title:window", "Delete quote source"),
-                                                KStandardGuiItem::yes(),
-                                                KStandardGuiItem::no())
+                                                KMMYesNo::yes(),
+                                                KMMYesNo::no())
                 == KMessageBox::PrimaryAction)
                 break;  // webpricequote can handle missing online quotes, so proceed without any extra action
             else

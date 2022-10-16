@@ -36,6 +36,8 @@
 #include "ui_securitiesdlg.h"
 #include "ui_securitydlg.h"
 
+#include "kmmyesno.h"
+
 // ----------------------------------------------------------------------------
 
 InvestmentPage::InvestmentPage(CSVWizard *dlg, CSVImporterCore *imp) :
@@ -178,8 +180,8 @@ void InvestmentPage::memoColSelected(int col)
                                                       "<center>If you wish to copy that data to the memo field, click 'Yes'.</center>",
                                                       m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col))),
                                                  i18nc("@title:window", "Field assignment resolution"),
-                                                 KStandardGuiItem::yes(),
-                                                 KStandardGuiItem::no());
+                                                 KMMYesNo::yes(),
+                                                 KMMYesNo::no());
         if (rc == KMessageBox::PrimaryAction) {
             ui->m_memoCol->setItemText(col, QString::number(col + 1) + QLatin1Char('*'));
             if (!m_profile->m_memoColList.contains(col))

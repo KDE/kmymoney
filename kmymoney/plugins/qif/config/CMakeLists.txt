@@ -13,4 +13,5 @@ target_link_libraries(kcm_qif
                       KF5::ConfigWidgets
                       KF5::Completion
                       KF5::KIOWidgets
+                      kmm_yesno
                       )

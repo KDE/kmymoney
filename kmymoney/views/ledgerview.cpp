@@ -824,8 +824,8 @@ void LedgerView::mousePressEvent(QMouseEvent* event)
                 const auto iconIndex = d->iconClickIndex(idx, pos);
                 const auto statusRoles = this->statusRoles(idx);
 
-                KGuiItem buttonYes = KStandardGuiItem::yes();
-                KGuiItem buttonNo = KStandardGuiItem::no();
+                KGuiItem buttonYes = KMMYesNo::yes();
+                KGuiItem buttonNo = KMMYesNo::no();
                 KGuiItem buttonCancel = KStandardGuiItem::cancel();
                 KMessageBox::ButtonCode result;
 

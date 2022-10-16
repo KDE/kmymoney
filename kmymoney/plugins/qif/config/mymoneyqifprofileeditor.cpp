@@ -32,7 +32,10 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include <icons/icons.h>
+
+#include <icons.h>
+
+#include "kmmyesno.h"
 
 using namespace Icons;
 
@@ -411,8 +414,8 @@ void MyMoneyQifProfileEditor::slotDelete()
     if (KMessageBox::questionTwoActions(this,
                                         i18n("Do you really want to delete profile '%1'?", profile),
                                         i18nc("@title:window", "Delete QIF profile"),
-                                        KStandardGuiItem::yes(),
-                                        KStandardGuiItem::no())
+                                        KMMYesNo::yes(),
+                                        KMMYesNo::no())
         == KMessageBox::PrimaryAction) {
         int idx = m_profileListBox->currentRow();
         m_profile.saveProfile();

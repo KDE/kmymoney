@@ -76,6 +76,7 @@ target_link_libraries(kmymoney_common
     kmm_webconnect
     kmm_utils_platformtools
     kmm_url
+    kmm_yesno
     PRIVATE
     KF5::I18n
     kmm_settings

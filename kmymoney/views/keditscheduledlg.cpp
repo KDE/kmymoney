@@ -55,6 +55,8 @@
 #include "widgetenums.h"
 #include "widgethintframe.h"
 
+#include "kmmyesno.h"
+
 #include "ui_keditscheduledlg.h"
 
 using namespace eMyMoney;
@@ -590,11 +592,7 @@ void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule)
                             "want to reset the last payment date?</qt>",
                             QLocale().toString(next, QLocale::ShortFormat),
                             QLocale().toString(last, QLocale::ShortFormat));
-                        if (KMessageBox::questionTwoActions(nullptr,
-                                                            questionText,
-                                                            i18n("Reset Last Payment Date"),
-                                                            KStandardGuiItem::yes(),
-                                                            KStandardGuiItem::no())
+                        if (KMessageBox::questionTwoActions(nullptr, questionText, i18n("Reset Last Payment Date"), KMMYesNo::yes(), KMMYesNo::no())
                             == KMessageBox::PrimaryAction) {
                             sched.setLastPayment(QDate());
                         }

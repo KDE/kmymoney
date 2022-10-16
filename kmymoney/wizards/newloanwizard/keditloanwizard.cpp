@@ -50,6 +50,8 @@
 #include "mymoneyschedule.h"
 #include "mymoneytransactionfilter.h"
 
+#include "kmmyesno.h"
+
 class KEditLoanWizardPrivate : public KNewLoanWizardPrivate
 {
     Q_DISABLE_COPY(KEditLoanWizardPrivate)
@@ -281,7 +283,7 @@ bool KEditLoanWizard::validateCurrentPage()
                                  "KMyMoney will dismiss the changes you have just entered. "
                                  "Do you wish to proceed?", button->text());
 
-            if (KMessageBox::questionTwoActions(this, errMsg, i18nc("@title:window", "Confirmation"), KStandardGuiItem::yes(), KStandardGuiItem::no())
+            if (KMessageBox::questionTwoActions(this, errMsg, i18nc("@title:window", "Confirmation"), KMMYesNo::yes(), KMMYesNo::no())
                 == KMessageBox::SecondaryAction) {
                 dontLeavePage = true;
             } else {

@@ -36,6 +36,8 @@
 #include "transactionmatcher.h"
 #include "widgetenums.h"
 
+#include "kmmyesno.h"
+
 using namespace Icons;
 using namespace eWidgets;
 
@@ -122,8 +124,8 @@ public:
                 if (KMessageBox::questionTwoActions(q,
                                                     message,
                                                     i18n("Automatic reconciliation"),
-                                                    KStandardGuiItem::yes(),
-                                                    KStandardGuiItem::no(),
+                                                    KMMYesNo::yes(),
+                                                    KMMYesNo::no(),
                                                     "AcceptAutomaticReconciliation")
                     == KMessageBox::PrimaryAction) {
                     // Select the journal entries to be cleared
@@ -230,7 +232,7 @@ public:
                     "You are about to finish the reconciliation of this account with a difference between your bank statement and the transactions marked as "
                     "cleared.\n"
                     "Are you sure you want to finish the reconciliation?");
-                if (KMessageBox::questionTwoActions(q, message, i18n("Confirm end of reconciliation"), KStandardGuiItem::yes(), KStandardGuiItem::no())
+                if (KMessageBox::questionTwoActions(q, message, i18n("Confirm end of reconciliation"), KMMYesNo::yes(), KMMYesNo::no())
                     == KMessageBox::SecondaryAction) {
                     return false;
                 }

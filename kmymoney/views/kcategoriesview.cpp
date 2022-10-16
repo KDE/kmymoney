@@ -328,8 +328,8 @@ void KCategoriesView::slotDeleteCategory()
                 || (KMessageBox::questionTwoActions(this,
                                                     i18n("<qt>Do you really want to delete category <b>%1</b>?</qt>", selectedAccountName),
                                                     i18nc("@title:window", "Delete category"),
-                                                    KStandardGuiItem::yes(),
-                                                    KStandardGuiItem::no())
+                                                    KMMYesNo::yes(),
+                                                    KMMYesNo::no())
                     == KMessageBox::PrimaryAction)) {
                 try {
                     file->removeAccount(d->m_currentCategory);
@@ -388,8 +388,8 @@ void KCategoriesView::slotDeleteCategory()
                                                      selectedAccountName,
                                                      parentAccount.name()),
                                                 i18nc("@title:window", "Delete category"),
-                                                KStandardGuiItem::yes(),
-                                                KStandardGuiItem::no())
+                                                KMMYesNo::yes(),
+                                                KMMYesNo::no())
                 != KMessageBox::PrimaryAction) {
                 return; // user gets wet feet...
             }

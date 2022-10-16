@@ -45,6 +45,8 @@
 
 #include "mymoneystatement.h"
 
+#include "kmmyesno.h"
+
 // define this to debug the code. Using external filters
 // while debugging did not work too good for me, so I added
 // this code.
@@ -733,8 +735,8 @@ void MyMoneyQifReader::processMSAccountEntry(const eMyMoney::Account::Type accou
                                 KMyMoneyUtils::mainWindow(),
                                 i18n("The %1 account currently has an opening balance of %2. This QIF file reports an opening balance of %3. Would you like to overwrite the current balance with the one from the QIF file?", m_account.name(), split.shares().formatMoney(m_account, sec), balance.formatMoney(m_account, sec)),
                                 i18n("Overwrite opening balance"),
-                                KStandardGuiItem::yes(),
-                                KStandardGuiItem::no(),
+                                KMMYesNo::yes(),
+                                KMMYesNo::no(),
                                 "OverwriteOpeningBalance")
                             == KMessageBox::PrimaryAction) {
                         file->removeTransaction(openingtx);

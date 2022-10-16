@@ -246,8 +246,8 @@ public:
                                         i18n("Are you sure you wish to stop this scheduled transaction from being entered into the register?\n\nKMyMoney will "
                                              "prompt you again next time it starts unless you manually enter it later."),
                                         i18nc("@title:window", "Stop entering schedule"),
-                                        KStandardGuiItem::yes(),
-                                        KStandardGuiItem::no())
+                                        KMMYesNo::yes(),
+                                        KMMYesNo::no())
                                     == KMessageBox::SecondaryAction) {
                                     // the user has chosen 'No' for the above question,
                                     // we go back to the editor
@@ -348,8 +348,8 @@ public:
                                                                      schedule.name(),
                                                                      QLocale().toString(next, QLocale::ShortFormat)),
                                                                 i18nc("@title:window", "Skip scheduled transaction"),
-                                                                KStandardGuiItem::yes(),
-                                                                KStandardGuiItem::no()))
+                                                                KMMYesNo::yes(),
+                                                                KMMYesNo::no()))
                                 == KMessageBox::PrimaryAction) {
                             MyMoneyFileTransaction ft;
                             schedule.setLastPayment(next);

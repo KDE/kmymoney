@@ -116,7 +116,7 @@ void KBudgetView::slotDeleteBudget()
     } else
         prompt = i18n("Do you really want to remove all selected budgets?");
 
-    if (KMessageBox::questionTwoActions(this, prompt, i18nc("@title:window ", "Remove Budget"), KStandardGuiItem::yes(), KStandardGuiItem::no())
+    if (KMessageBox::questionTwoActions(this, prompt, i18nc("@title:window ", "Remove Budget"), KMMYesNo::yes(), KMMYesNo::no())
         == KMessageBox::SecondaryAction)
         return;
 

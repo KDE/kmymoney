@@ -45,6 +45,8 @@
 #include "mymoneymoney.h"
 #include "widgethintframe.h"
 
+#include "kmmyesno.h"
+
 using namespace eMyMoney;
 
 class KNewAccountDlgPrivate
@@ -1022,8 +1024,8 @@ void KNewAccountDlg::newCategory(MyMoneyAccount& account, const MyMoneyAccount& 
                                                       account.name(),
                                                       parent.name())),
                                         i18n("Create category"),
-                                        KStandardGuiItem::yes(),
-                                        KStandardGuiItem::no(),
+                                        KMMYesNo::yes(),
+                                        KMMYesNo::no(),
                                         "CreateNewCategories")
         == KMessageBox::PrimaryAction) {
         KNewAccountDlg::createCategory(account, parent);
@@ -1047,8 +1049,8 @@ void KNewAccountDlg::newAccount(MyMoneyAccount& account, const MyMoneyAccount& p
                           account.name(),
                           parent.name())),
             i18n("Create category"),
-            KStandardGuiItem::yes(),
-            KStandardGuiItem::no(),
+            KMMYesNo::yes(),
+            KMMYesNo::no(),
             "CreateNewAccounts")
         == KMessageBox::PrimaryAction) {
         KNewAccountDlg::createAccount(account, parent);

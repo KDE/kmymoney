@@ -34,6 +34,8 @@
 #include "kmymoneysettings.h"
 #include "mymoneyenums.h"
 
+#include "kmmyesno.h"
+
 class KBudgetValuesPrivate
 {
     Q_DISABLE_COPY(KBudgetValuesPrivate)
@@ -237,8 +239,8 @@ void KBudgetValues::slotChangePeriod(int id)
                                                                newValue.formatMoney(QString(), 2))
                                                         + QString("</qt>"),
                                                     i18nc("Auto assignment (caption)", "Auto assignment"),
-                                                    KStandardGuiItem::yes(),
-                                                    KStandardGuiItem::no(),
+                                                    KMMYesNo::yes(),
+                                                    KMMYesNo::no(),
                                                     "use_previous_budget_values")
                     == KMessageBox::PrimaryAction) {
                     d->ui->m_amountMonthly->setValue(newValue);
@@ -266,8 +268,8 @@ void KBudgetValues::slotChangePeriod(int id)
                                                                newValue.formatMoney(QString(), 2))
                                                         + QString("</qt>"),
                                                     i18nc("Auto assignment (caption)", "Auto assignment"),
-                                                    KStandardGuiItem::yes(),
-                                                    KStandardGuiItem::no(),
+                                                    KMMYesNo::yes(),
+                                                    KMMYesNo::no(),
                                                     "use_previous_budget_values")
                     == KMessageBox::PrimaryAction) {
                     d->ui->m_amountYearly->setValue(newValue);
@@ -295,8 +297,8 @@ void KBudgetValues::slotChangePeriod(int id)
                                                                newValue.formatMoney(QString(), 2))
                                                         + QString("</qt>"),
                                                     i18nc("Auto assignment (caption)", "Auto assignment"),
-                                                    KStandardGuiItem::yes(),
-                                                    KStandardGuiItem::no(),
+                                                    KMMYesNo::yes(),
+                                                    KMMYesNo::no(),
                                                     "use_previous_budget_values")
                     == KMessageBox::PrimaryAction) {
                     for (auto i = 0; i < 12; ++i)

@@ -273,8 +273,8 @@ void KInstitutionsView::slotDeleteInstitution()
         if ((KMessageBox::questionTwoActions(this,
                                              i18n("<p>Do you really want to delete the institution <b>%1</b>?</p>", institution.name()),
                                              i18nc("@title:window", "Delete institution"),
-                                             KStandardGuiItem::yes(),
-                                             KStandardGuiItem::no()))
+                                             KMMYesNo::yes(),
+                                             KMMYesNo::no()))
             == KMessageBox::SecondaryAction)
             return;
         MyMoneyFileTransaction ft;

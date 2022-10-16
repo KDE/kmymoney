@@ -84,6 +84,8 @@
 #include "phototan-demo.cpp"
 #endif
 
+#include "kmmyesno.h"
+
 class KBanking::Private
 {
 public:
@@ -1567,8 +1569,8 @@ bool KBankingExt::importAccountInfo(AB_IMEXPORTER_CONTEXT *ctx,
         if (KMessageBox::warningTwoActions(0,
                                            i18n("Error importing statement. Do you want to continue?"),
                                            i18n("Critical Error"),
-                                           KStandardGuiItem::yes(),
-                                           KStandardGuiItem::no())
+                                           KMMYesNo::yes(),
+                                           KMMYesNo::no())
             == KMessageBox::SecondaryAction) {
             DBG_ERROR(0, "User aborted");
             return false;

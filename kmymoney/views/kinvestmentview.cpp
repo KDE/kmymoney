@@ -256,8 +256,8 @@ void KInvestmentView::slotDeleteInvestment()
     if (KMessageBox::questionTwoActions(this,
                                         i18n("<p>Do you really want to delete the investment <b>%1</b>?</p>", d->currentEquity().name()),
                                         i18n("Delete investment"),
-                                        KStandardGuiItem::yes(),
-                                        KStandardGuiItem::no(),
+                                        KMMYesNo::yes(),
+                                        KMMYesNo::no(),
                                         "DeleteInvestment")
         == KMessageBox::PrimaryAction) {
         auto file = MyMoneyFile::instance();
