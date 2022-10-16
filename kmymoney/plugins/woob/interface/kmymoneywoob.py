@@ -12,6 +12,8 @@ import sys
 
 from woob.core import Woob
 from woob.capabilities.bank import CapBank
+from woob.exceptions import AppValidation, AppValidationCancelled, AppValidationExpired
+
 
 # based on https://stackoverflow.com/a/53257669/665932
 class _ExcludeErrorsFilter(logging.Filter):
@@ -53,6 +55,7 @@ config = {
 logging.config.dictConfig(config)
 LOGGER = logging.getLogger(__name__)
 
+
 def get_backends():
     w = Woob()
 
@@ -71,19 +74,36 @@ def get_backends():
 
     return result
 
+
 def get_accounts(bname):
     w = Woob()
-
     w.load_backends(names=[bname])
     backend = w.get_backend(bname)
-
     results = {}
-    for account in backend.iter_accounts():
-        results[account.id] = {'name':    account.label,
+    accounts = {}
+    try:
+        accounts = backend.iter_accounts()
+    except AppValidation:
+        # hacky copy from Woob's mfa.py do_double_authentication()
+        # See https://gitlab.com/woob/woob/-/issues/597
+        config_key = 'resume'
+        if config_key in backend.config:
+            for config_key, handle_method in backend.browser.AUTHENTICATION_METHODS.items():
+                try:
+                    handle_method()
+                except AppValidationCancelled:
+                    raise
+                except AppValidationExpired:
+                    raise
+
+            accounts = backend.iter_accounts()
+    for account in accounts:
+        results[account.id] = {'name': account.label,
                                'balance': int(account.balance * 100),
-                               'type':    int(account.type),
-                              }
+                               'type': int(account.type),
+                               }
     return results
+
 
 def get_transactions(bname, accid, maximum):
     w = Woob()
@@ -91,7 +111,21 @@ def get_transactions(bname, accid, maximum):
     w.load_backends(names=[bname])
     backend = w.get_backend(bname)
 
-    acc = backend.get_account(accid)
+    try:
+        acc = backend.get_account(accid)
+    except AppValidation:
+        config_key = 'resume'
+        if config_key in backend.config:
+            for config_key, handle_method in backend.browser.AUTHENTICATION_METHODS.items():
+                try:
+                    handle_method()
+                except AppValidationCancelled:
+                    raise
+                except AppValidationExpired:
+                    raise
+
+            acc = backend.get_account(accid)
+
     results = {}
     results['id'] = acc.id
     results['name'] = acc.label
