@@ -23,6 +23,7 @@
   <name xml:lang="ia">KMyMoney</name>
   <name xml:lang="id">KMyMoney</name>
   <name xml:lang="it">KMyMoney</name>
+  <name xml:lang="ka">KMyMoney</name>
   <name xml:lang="ko">KMyMoney</name>
   <name xml:lang="lt">KMyMoney</name>
   <name xml:lang="nl">KMyMoney</name>
@@ -52,6 +53,7 @@
   <summary xml:lang="fr">Gestionnaire de compte personnel reposant sur à une comptabilité à double entrée</summary>
   <summary xml:lang="id">Pengelola keuangan pribadi berdasarkan pembukuan entri ganda</summary>
   <summary xml:lang="it">Gestore delle finanze personali basato sulla contabilità in partita doppia</summary>
+  <summary xml:lang="ka">ჩანაწერების ორ-ადგილას-შენახვაზე ბაზირებული პერსონალური ფინანსების მმართველი</summary>
   <summary xml:lang="ko">복식 부기를 지원하는 개인 재무 관리자</summary>
   <summary xml:lang="nl">Persoonlijk financieel beheer gebaseerd op dubbel boekhouden</summary>
   <summary xml:lang="nn">Rekneskapsprogram for privatøkonomien basert på dobbel bokføring</summary>
@@ -80,6 +82,7 @@
     <p xml:lang="gl">KMyMoney é un xestor de finanzas persoais de KDE. Inclúe un gran número de funcionalidades sen renunciar a ser fácil de usar para personas non técnicas.</p>
     <p xml:lang="id">KMyMoney adalah pengelola keuangan personal oleh KDE. Ia menghadirkan sebuah set yang besar dari fitur yang mudah saat digunakan oleh pengguna nonteknis.</p>
     <p xml:lang="it">KMyMoney è un gestore delle finanza personali di KDE. È dotato di un ampio insieme funzionalità pur essendo facile da usare per l'utente non tecnico.</p>
+    <p xml:lang="ka">KMyMoney პირადი ფინანსების მმართველია KDE-სთვის. მას ფუნქციების დიდი რაოდენობა მოჰყვება და ამავე დროს ადვილი გამოსაყენებელია არატექნიკური მომხმარებლისთვის.</p>
     <p xml:lang="ko">KMyMoney는 개인 재무 관리자입니다. 이 제품은 비전문 사용자가 사용하기 쉽도록 다양한 기능과 함께 제공됩니다.</p>
     <p xml:lang="nl">KMyMoney is een persoonlijke financieelbeheerder door KDE. Het komt met een grote set aan functies terwijl het gemakkelijk is te gebruiken voor de niet-technische gebruiker.</p>
     <p xml:lang="nn">KMyMoney er eit rekneskapsprogram for privatøkonomien din, frå KDE. Det er funksjonsrikt men samtidig lett å bruka for ikkje-tekniske brukarar.</p>
@@ -177,6 +180,7 @@
       <caption xml:lang="ia">Le summario financial te da un superviio de tu financias</caption>
       <caption xml:lang="id">Ringkasan keuangan memberi Anda ikhtisar umum tentang keuangan Anda</caption>
       <caption xml:lang="it">Il riepilogo finanziario ti offre una panoramica delle tue finanze</caption>
+      <caption xml:lang="ka">ფინანსური შეჯამება თქვენი ფინანსების მიმოხილვის საშუალებას გაძლევთ</caption>
       <caption xml:lang="ko">재무 관리 요약을 통해 내 재정 상태를 대략적으로 보여 줍니다</caption>
       <caption xml:lang="nl">De financiële samenvatting geeft u een overzicht van uw financiën</caption>
       <caption xml:lang="pl">Podsumowanie finansowe daje pogląd na twoje finanse</caption>
