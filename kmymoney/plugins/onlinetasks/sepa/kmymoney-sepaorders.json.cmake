@@ -39,6 +39,7 @@
                 "Name[gl]": "Christian David",
                 "Name[ia]": "Christian David",
                 "Name[it]": "Christian David",
+                "Name[ka]": "Christian David",
                 "Name[ko]": "Christian David",
                 "Name[nl]": "Christian David",
                 "Name[pl]": "Christian David",
