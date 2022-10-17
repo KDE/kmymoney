@@ -694,10 +694,10 @@ void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _kmmID, const QS
                                                                             KMMYesNo::yes(),
                                                                             KMMYesNo::no());
                         switch(result) {
-                        case KMessageBox::ButtonCode::Yes:
+                        case KMessageBox::ButtonCode::PrimaryAction:
                             ++it;
                             break;
-                        case KMessageBox::ButtonCode::No:
+                        case KMessageBox::ButtonCode::SecondaryAction:
                             it = st.m_listPrices.erase(it);
                             break;
                         default:

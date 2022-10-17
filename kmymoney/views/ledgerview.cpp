@@ -840,7 +840,7 @@ void LedgerView::mousePressEvent(QMouseEvent* event)
                                                                  i18nc("@title:window", "Enter overdue schedule"),
                                                                  buttonYes,
                                                                  buttonNo);
-                        if (result == KMessageBox::ButtonCode::Yes) {
+                        if (result == KMessageBox::ButtonCode::PrimaryAction) {
                             pActions[eMenu::Action::EnterSchedule]->setData(idx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
                             pActions[eMenu::Action::EnterSchedule]->trigger();
                         }
@@ -869,10 +869,10 @@ void LedgerView::mousePressEvent(QMouseEvent* event)
                                 buttonNo,
                                 buttonCancel);
                             switch (result) {
-                            case KMessageBox::ButtonCode::Yes:
+                            case KMessageBox::ButtonCode::PrimaryAction:
                                 pActions[eMenu::Action::AcceptTransaction]->trigger();
                                 break;
-                            case KMessageBox::ButtonCode::No:
+                            case KMessageBox::ButtonCode::SecondaryAction:
                                 pActions[eMenu::Action::MatchTransaction]->trigger();
                                 break;
                             default:

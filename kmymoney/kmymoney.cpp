@@ -513,10 +513,10 @@ public:
                                                          i18nc("@title:window", "Save file"),
                                                          KMMYesNo::yes(),
                                                          KMMYesNo::no())) {
-            case KMessageBox::ButtonCode::Yes:
+            case KMessageBox::ButtonCode::PrimaryAction:
                 fileNeedsToBeSaved = true;
                 break;
-            case KMessageBox::ButtonCode::No:
+            case KMessageBox::ButtonCode::SecondaryAction:
                 fileNeedsToBeSaved = false;
                 break;
             case KMessageBox::ButtonCode::Cancel:
