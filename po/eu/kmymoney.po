@@ -1,6 +1,6 @@
 # Translation for kmymoney.po to Euskara/Basque (eu).
-# Copyright (C) 2010-2014, Free Software Foundation, Inc.
-# Copyright (C) 2015-2022, This file is copyright:
+# Copyright (C) 2010-2014 Free Software Foundation, Inc.
+# Copyright (C) 2015-2022 This file is copyright:
 # This file is distributed under the same license as the kmymoney package.
 # KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
 #
@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-17 00:47+0000\n"
-"PO-Revision-Date: 2022-10-09 20:14+0200\n"
+"PO-Revision-Date: 2022-10-17 07:13+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -3709,8 +3709,7 @@ msgstr ""
 "nahi duzu?"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:316
-#, fuzzy, kde-format
-#| msgid "Delete quote source"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete quote source"
 msgstr "Ezabatu kotizazio-iturria "
@@ -4654,11 +4653,10 @@ msgid "The file has been changed, save it?"
 msgstr "Fitxategia aldatu egin da. Gorde nahi duzu?"
 
 #: kmymoney/kmymoney.cpp:513
-#, fuzzy, kde-format
-#| msgid "Save to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save file"
-msgstr "Gorde fitxategian"
+msgstr "Gorde fitxategia"
 
 #: kmymoney/kmymoney.cpp:885
 #, kde-format
@@ -5476,7 +5474,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
-msgstr ""
+msgstr "Babes-kopiaren berrespena"
 
 #: kmymoney/kmymoney.cpp:3523
 #, kde-format
@@ -5562,11 +5560,10 @@ msgstr ""
 "Egin klik Utzi botoian, kontua sortzeko prozesua bertan behera uzteko."
 
 #: kmymoney/kmymoney.cpp:3757
-#, fuzzy, kde-format
-#| msgid "Opening balance problem"
+#, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
-msgstr "Arazoak hasierako saldoan"
+msgstr "Pasiboaren hasierako saldoa"
 
 #: kmymoney/kmymoney.cpp:3768
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
@@ -6144,16 +6141,13 @@ msgid "Uncaught error. Please report the details to the developers"
 msgstr "Detektatu gabeko errorea. Jakinarazi xehetasunak garatzaileei"
 
 #: kmymoney/misc/kmmyesno.cpp:21
-#, fuzzy, kde-format
-#| msgctxt "Is this a tax account?"
-#| msgid "Yes"
+#, kde-format
 msgctxt "@action:button"
 msgid "Yes"
 msgstr "Bai"
 
 #: kmymoney/misc/kmmyesno.cpp:26
-#, fuzzy, kde-format
-#| msgid "No"
+#, kde-format
 msgctxt "@action:button"
 msgid "No"
 msgstr "Ez"
@@ -9663,7 +9657,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Field assignment resolution"
-msgstr ""
+msgstr "Eremu esleipenaren ebazpena"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:293
 #, kde-format
@@ -13217,11 +13211,10 @@ msgid "Do you really want to delete profile '%1'?"
 msgstr "Benetan ezabatu nahi duzu '%1' profila?"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:416
-#, fuzzy, kde-format
-#| msgid "The default QIF profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete QIF profile"
-msgstr "QIF profil lehenetsia"
+msgstr "Ezabatu QIF profila"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabGeneral)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:53
@@ -14552,8 +14545,7 @@ msgid "Do you really want to remove all selected budgets?"
 msgstr "Ziur zaude aukeratutako aurrekontu guztiak ezabatu nahi dituzula?"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:119
-#, fuzzy, kde-format
-#| msgid "Remove Budget"
+#, kde-format
 msgctxt "@title:window "
 msgid "Remove Budget"
 msgstr "Kendu aurrekontua"
@@ -17075,7 +17067,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:116
 #, kde-format
 msgid "Skip value if price is zero"
-msgstr "Saltatu balioa prezioa zero bada"
+msgstr "Saihestu balioa prezioa zero bada"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:89
 #, kde-format
@@ -18900,11 +18892,10 @@ msgstr "<qt>Benetan ezabatu nahi duzu <b>%1</b> kategoria?</qt>"
 
 #: kmymoney/views/kcategoriesview.cpp:330
 #: kmymoney/views/kcategoriesview.cpp:390
-#, fuzzy, kde-format
-#| msgid "Delete category..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete category"
-msgstr "Kategoria ezabatu..."
+msgstr "Ezabatu kategoria"
 
 #: kmymoney/views/kcategoriesview.cpp:339
 #, kde-format
@@ -19157,8 +19148,8 @@ msgid ""
 "Do not enter or skip payments for this schedule but continue with the next "
 "schedule."
 msgstr ""
-"Ez sartu edo saltatu antolaketa honetako ordainketak baina jarraitu hurrengo "
-"antolaketarekin."
+"Ez sartu edo saihestu antolaketa honetako ordainketak baina jarraitu "
+"hurrengo antolaketarekin."
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonIgnore)
 #: kmymoney/views/kenterscheduledlg.ui:198
@@ -19213,7 +19204,7 @@ msgstr "Hurrengoa"
 #: kmymoney/views/khomeview_p.h:700
 #, kde-format
 msgid "Skip"
-msgstr "Saltatu"
+msgstr "Saihestu"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, ScheduleWizardPage)
 #: kmymoney/views/khomeview_p.h:601 kmymoney/views/khomeview_p.h:663
@@ -19260,7 +19251,7 @@ msgstr "Sartu antolaketa"
 #: kmymoney/views/khomeview_p.h:817
 #, kde-format
 msgid "Skip schedule"
-msgstr "Saltatu antolaketa"
+msgstr "Saihestu antolaketa"
 
 #: kmymoney/views/khomeview_p.h:821
 #, kde-format
@@ -19424,11 +19415,10 @@ msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>Benetan ezabatu nahi duzu <b>%1</b> erakundea?</p>"
 
 #: kmymoney/views/kinstitutionsview.cpp:275
-#, fuzzy, kde-format
-#| msgid "Delete institution..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete institution"
-msgstr "Erakundea ezabatu..."
+msgstr "Ezabatu erakundea"
 
 #: kmymoney/views/kinstitutionsview.cpp:286
 #: kmymoney/views/kinstitutionsview.cpp:289
@@ -19567,11 +19557,10 @@ msgstr ""
 "aldatu nahi duzula?"
 
 #: kmymoney/views/kpayeesview.cpp:152
-#, fuzzy, kde-format
-#| msgid "Duplicate open"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate payee name"
-msgstr "Bikoiztua irekitzea"
+msgstr "Onuradunaren izen bikoiztua"
 
 #: kmymoney/views/kpayeesview.cpp:176 kmymoney/views/kpayeesview.cpp:373
 #: kmymoney/views/kpayeesview.cpp:396
@@ -19898,11 +19887,10 @@ msgstr ""
 "sortu."
 
 #: kmymoney/views/kscheduledview.cpp:230
-#, fuzzy, kde-format
-#| msgid "Select Schedules"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
-msgstr "Hautatu antolaketak"
+msgstr "Ezabatu antolaketa"
 
 #: kmymoney/views/kscheduledview.cpp:238
 #, kde-format
@@ -19948,11 +19936,10 @@ msgstr ""
 "hurrengo aldian, baldin eta ez baduzu zuk zeuk geroago sartzen."
 
 #: kmymoney/views/kscheduledview_p.h:248
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Stop entering schedule"
-msgstr "Sartu antolaketa"
+msgstr "Gelditu antolaketa sartzetik"
 
 #: kmymoney/views/kscheduledview_p.h:347
 #, kde-format
@@ -19960,20 +19947,19 @@ msgid ""
 "<qt>Do you really want to skip the <b>%1</b> transaction scheduled for <b>"
 "%2</b>?</qt>"
 msgstr ""
-"<qt>Benetan saltatu nahi duzu <b>%2</b>(e)rako antolatutako <b>%1</b> "
+"<qt>Benetan saihestu nahi duzu <b>%2</b>(e)rako antolatutako <b>%1</b> "
 "transakzioa?</qt>"
 
 #: kmymoney/views/kscheduledview_p.h:350
-#, fuzzy, kde-format
-#| msgid "Edit scheduled transaction"
+#, kde-format
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
-msgstr "Editatu transakzio antolatua"
+msgstr "Saihestu antolatutako transakzio"
 
 #: kmymoney/views/kscheduledview_p.h:363
 #, kde-format
 msgid "<qt>Unable to skip scheduled transaction <b>%1</b>.</qt>"
-msgstr "<qt>Ezin da saltatu <b>%1</b> transakzio antolatua.</qt>"
+msgstr "<qt>Ezin da saihestu <b>%1</b> transakzio antolatua.</qt>"
 
 #: kmymoney/views/ksearchtransactiondlg.cpp:54
 #, kde-format
@@ -20058,11 +20044,10 @@ msgstr ""
 "bera duten etiketak izatea. Ziur zaude etiketa berrizendatu nahi duzula?"
 
 #: kmymoney/views/ktagsview.cpp:379
-#, fuzzy, kde-format
-#| msgid "Duplicate tag"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
-msgstr "Bikoiztu etiketa"
+msgstr "Bikoiztutako etiketa-izena"
 
 #: kmymoney/views/ktagsview.cpp:402 kmymoney/views/ktagsview.cpp:526
 #, kde-format
@@ -20915,7 +20900,7 @@ msgstr "Sartu..."
 #: kmymoney/widgets/kmymoneybriefschedule.ui:319
 #, kde-format
 msgid "Use this button to skip this transaction"
-msgstr "Erabili botoi hau transakzio hau saltatzeko"
+msgstr "Erabili botoi hau transakzio hau saihesteko"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_closeButton)
 #: kmymoney/widgets/kmymoneybriefschedule.ui:329
@@ -23835,11 +23820,10 @@ msgstr ""
 "k baztertu egingo ditu sartu berri dituzun aldaketak. Jarraitu nahi duzu?"
 
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:286
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirmation"
-msgstr "Informazioa"
+msgstr "Berrespena"
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:73
 #, kde-format

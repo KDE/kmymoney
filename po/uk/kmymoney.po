@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-17 00:47+0000\n"
-"PO-Revision-Date: 2022-09-12 07:15+0300\n"
+"PO-Revision-Date: 2022-10-17 13:58+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -3737,8 +3737,7 @@ msgstr ""
 "справді хочете його вилучити?"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:316
-#, fuzzy, kde-format
-#| msgid "Delete quote source"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete quote source"
 msgstr "Вилучити джерело курсів"
@@ -4685,11 +4684,10 @@ msgid "The file has been changed, save it?"
 msgstr "Вміст файла було змінено, зберегти його?"
 
 #: kmymoney/kmymoney.cpp:513
-#, fuzzy, kde-format
-#| msgid "Save to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save file"
-msgstr "Зберегти до файла"
+msgstr "Збереження файла"
 
 #: kmymoney/kmymoney.cpp:885
 #, kde-format
@@ -5509,7 +5507,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
-msgstr ""
+msgstr "Підтвердження резервного копіювання"
 
 #: kmymoney/kmymoney.cpp:3523
 #, kde-format
@@ -5594,11 +5592,10 @@ msgstr ""
 "Натисніть кнопку «Скасувати», щоб перервати створення рахунку."
 
 #: kmymoney/kmymoney.cpp:3757
-#, fuzzy, kde-format
-#| msgid "Opening balance problem"
+#, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
-msgstr "Проблема з відкриттям балансу"
+msgstr "Відкриття балансу для пасиву"
 
 #: kmymoney/kmymoney.cpp:3768
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
@@ -6181,17 +6178,13 @@ msgstr ""
 "розробникам"
 
 #: kmymoney/misc/kmmyesno.cpp:21
-#, fuzzy, kde-format
-#| msgctxt "Is this a tax account?"
-#| msgid "Yes"
+#, kde-format
 msgctxt "@action:button"
 msgid "Yes"
 msgstr "Так"
 
 #: kmymoney/misc/kmmyesno.cpp:26
-#, fuzzy, kde-format
-#| msgctxt "@item no payments were entered for a loan"
-#| msgid "No"
+#, kde-format
 msgctxt "@action:button"
 msgid "No"
 msgstr "Ні"
@@ -9708,7 +9701,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Field assignment resolution"
-msgstr ""
+msgstr "Рішення щодо прив'язки полів"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:293
 #, kde-format
@@ -13319,11 +13312,10 @@ msgid "Do you really want to delete profile '%1'?"
 msgstr "Ви справді бажаєте вилучити профіль «%1»?"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:416
-#, fuzzy, kde-format
-#| msgid "The default QIF profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete QIF profile"
-msgstr "Типовий профіль QIF"
+msgstr "Вилучення профілю QIF"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabGeneral)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:53
@@ -14680,8 +14672,7 @@ msgid "Do you really want to remove all selected budgets?"
 msgstr "Ви справді бажаєте вилучити всі позначені бюджети?"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:119
-#, fuzzy, kde-format
-#| msgid "Remove Budget"
+#, kde-format
 msgctxt "@title:window "
 msgid "Remove Budget"
 msgstr "Вилучити бюджет"
@@ -19070,11 +19061,10 @@ msgstr "<qt>Ви справді бажаєте вилучити категорі
 
 #: kmymoney/views/kcategoriesview.cpp:330
 #: kmymoney/views/kcategoriesview.cpp:390
-#, fuzzy, kde-format
-#| msgid "Delete category..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete category"
-msgstr "Вилучити категорію…"
+msgstr "Вилучення категорії"
 
 #: kmymoney/views/kcategoriesview.cpp:339
 #, kde-format
@@ -19597,11 +19587,10 @@ msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>Ви справді бажаєте вилучити дані установи <b>%1</b>?</p>"
 
 #: kmymoney/views/kinstitutionsview.cpp:275
-#, fuzzy, kde-format
-#| msgid "Delete institution..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete institution"
-msgstr "Вилучити установу…"
+msgstr "Вилучення установи"
 
 #: kmymoney/views/kinstitutionsview.cpp:286
 #: kmymoney/views/kinstitutionsview.cpp:289
@@ -19740,11 +19729,10 @@ msgstr ""
 "запис отримувача вказаним чином?"
 
 #: kmymoney/views/kpayeesview.cpp:152
-#, fuzzy, kde-format
-#| msgid "Duplicate open"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate payee name"
-msgstr "Дублювати відкритий"
+msgstr "Дублювання назви платника"
 
 #: kmymoney/views/kpayeesview.cpp:176 kmymoney/views/kpayeesview.cpp:373
 #: kmymoney/views/kpayeesview.cpp:396
@@ -20071,11 +20059,10 @@ msgstr ""
 "операцію."
 
 #: kmymoney/views/kscheduledview.cpp:230
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
-msgstr "Ввести розклад"
+msgstr "Вилучення розкладу"
 
 #: kmymoney/views/kscheduledview.cpp:238
 #, kde-format
@@ -20122,11 +20109,10 @@ msgstr ""
 "не додасте операцію до списку вручну."
 
 #: kmymoney/views/kscheduledview_p.h:248
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Stop entering schedule"
-msgstr "Ввести розклад"
+msgstr "Зупинення входу до розкладу"
 
 #: kmymoney/views/kscheduledview_p.h:347
 #, kde-format
@@ -20138,11 +20124,10 @@ msgstr ""
 "b>?</qt>"
 
 #: kmymoney/views/kscheduledview_p.h:350
-#, fuzzy, kde-format
-#| msgid "Edit scheduled transaction"
+#, kde-format
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
-msgstr "Змінити заплановану операцію"
+msgstr "Пропуск запланованого переказу"
 
 #: kmymoney/views/kscheduledview_p.h:363
 #, kde-format
@@ -20235,11 +20220,10 @@ msgstr ""
 "мітки вказаним чином?"
 
 #: kmymoney/views/ktagsview.cpp:379
-#, fuzzy, kde-format
-#| msgid "Duplicate number"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
-msgstr "Дублювати номер"
+msgstr "Дублювання назви мітки"
 
 #: kmymoney/views/ktagsview.cpp:402 kmymoney/views/ktagsview.cpp:526
 #, kde-format
@@ -24048,11 +24032,10 @@ msgstr ""
 "відкине щойно внесені вами зміни. Бажаєте, щоб програма зробила саме це?"
 
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:286
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirmation"
-msgstr "Інформація"
+msgstr "Підтвердження"
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:73
 #, kde-format

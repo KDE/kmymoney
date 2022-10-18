@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-17 00:47+0000\n"
-"PO-Revision-Date: 2022-09-18 15:57+0200\n"
+"PO-Revision-Date: 2022-10-17 10:40+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -3727,11 +3727,10 @@ msgstr ""
 "voleu eliminar?"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:316
-#, fuzzy, kde-format
-#| msgid "Delete quote source"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete quote source"
-msgstr "Suprimeix una font de cotitzacions"
+msgstr "Supressió d'una font de cotitzacions"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, groupParsing)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:36
@@ -4678,11 +4677,10 @@ msgid "The file has been changed, save it?"
 msgstr "El fitxer ha canviat. El deso?"
 
 #: kmymoney/kmymoney.cpp:513
-#, fuzzy, kde-format
-#| msgid "Save to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save file"
-msgstr "Desa a un fitxer"
+msgstr "Desament de fitxer"
 
 #: kmymoney/kmymoney.cpp:885
 #, kde-format
@@ -5501,7 +5499,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
-msgstr ""
+msgstr "Confirmació de còpia de seguretat"
 
 #: kmymoney/kmymoney.cpp:3523
 #, kde-format
@@ -5588,11 +5586,10 @@ msgstr ""
 "Si us plau, premeu «Cancel·lar» per a interrompre la creació del compte."
 
 #: kmymoney/kmymoney.cpp:3757
-#, fuzzy, kde-format
-#| msgid "Opening balance problem"
+#, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
-msgstr "Hi ha un problema amb el saldo d'obertura"
+msgstr "Obertura de saldo de passiu"
 
 #: kmymoney/kmymoney.cpp:3768
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
@@ -6172,17 +6169,13 @@ msgstr ""
 "Error no capturat. Si us plau, informeu dels detalls als desenvolupadors"
 
 #: kmymoney/misc/kmmyesno.cpp:21
-#, fuzzy, kde-format
-#| msgctxt "Is this a tax account?"
-#| msgid "Yes"
+#, kde-format
 msgctxt "@action:button"
 msgid "Yes"
 msgstr "Sí"
 
 #: kmymoney/misc/kmmyesno.cpp:26
-#, fuzzy, kde-format
-#| msgctxt "@item no payments were entered for a loan"
-#| msgid "No"
+#, kde-format
 msgctxt "@action:button"
 msgid "No"
 msgstr "No"
@@ -9714,7 +9707,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Field assignment resolution"
-msgstr ""
+msgstr "Resolució d'assignació de camp"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:293
 #, kde-format
@@ -13297,11 +13290,10 @@ msgid "Do you really want to delete profile '%1'?"
 msgstr "Esteu segur que voleu suprimir el perfil «%1»?"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:416
-#, fuzzy, kde-format
-#| msgid "The default QIF profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete QIF profile"
-msgstr "Perfil QIF predeterminat"
+msgstr "Supressió de perfil QIF"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabGeneral)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:53
@@ -14634,11 +14626,10 @@ msgid "Do you really want to remove all selected budgets?"
 msgstr "Esteu segur que voleu eliminar tots els pressupostos seleccionats?"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:119
-#, fuzzy, kde-format
-#| msgid "Remove Budget"
+#, kde-format
 msgctxt "@title:window "
 msgid "Remove Budget"
-msgstr "Elimina el pressupost"
+msgstr "Eliminació de pressupost"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:138
 #, kde-format
@@ -19022,11 +19013,10 @@ msgstr "<qt>Esteu segur que voleu suprimir la categoria <b>%1</b>?</qt>"
 
 #: kmymoney/views/kcategoriesview.cpp:330
 #: kmymoney/views/kcategoriesview.cpp:390
-#, fuzzy, kde-format
-#| msgid "Delete category..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete category"
-msgstr "Suprimeix la categoria..."
+msgstr "Supressió de categoria"
 
 #: kmymoney/views/kcategoriesview.cpp:339
 #, kde-format
@@ -19544,11 +19534,10 @@ msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>Esteu segur que voleu suprimir la institució <b>%1</b>?</p>"
 
 #: kmymoney/views/kinstitutionsview.cpp:275
-#, fuzzy, kde-format
-#| msgid "Delete institution..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete institution"
-msgstr "Suprimeix una institució..."
+msgstr "Supressió d'institució"
 
 #: kmymoney/views/kinstitutionsview.cpp:286
 #: kmymoney/views/kinstitutionsview.cpp:289
@@ -19687,11 +19676,10 @@ msgstr ""
 "voleu reanomenar el beneficiari?"
 
 #: kmymoney/views/kpayeesview.cpp:152
-#, fuzzy, kde-format
-#| msgid "Duplicate open"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate payee name"
-msgstr "Obertura duplicada"
+msgstr "Nom de beneficiari duplicat"
 
 #: kmymoney/views/kpayeesview.cpp:176 kmymoney/views/kpayeesview.cpp:373
 #: kmymoney/views/kpayeesview.cpp:396
@@ -20020,11 +20008,10 @@ msgstr ""
 "l'operació planificada."
 
 #: kmymoney/views/kscheduledview.cpp:230
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
-msgstr "Introdueix la planificació"
+msgstr "Supressió de planificació"
 
 #: kmymoney/views/kscheduledview.cpp:238
 #, kde-format
@@ -20071,11 +20058,10 @@ msgstr ""
 "que l'introduïu manualment més endavant."
 
 #: kmymoney/views/kscheduledview_p.h:248
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Stop entering schedule"
-msgstr "Introdueix la planificació"
+msgstr "Aturada d'introducció de planificació"
 
 #: kmymoney/views/kscheduledview_p.h:347
 #, kde-format
@@ -20087,11 +20073,10 @@ msgstr ""
 "%2</b>?</qt>"
 
 #: kmymoney/views/kscheduledview_p.h:350
-#, fuzzy, kde-format
-#| msgid "Edit scheduled transaction"
+#, kde-format
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
-msgstr "Edita l'operació planificada"
+msgstr "Omissió d'operació planificada"
 
 #: kmymoney/views/kscheduledview_p.h:363
 #, kde-format
@@ -20182,11 +20167,10 @@ msgstr ""
 "l'etiqueta?"
 
 #: kmymoney/views/ktagsview.cpp:379
-#, fuzzy, kde-format
-#| msgid "Duplicate open"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
-msgstr "Obertura duplicada"
+msgstr "Nom d'etiqueta duplicat"
 
 #: kmymoney/views/ktagsview.cpp:402 kmymoney/views/ktagsview.cpp:526
 #, kde-format
@@ -23996,11 +23980,10 @@ msgstr ""
 "KMyMoney descartarà els canvis que acabeu d'introduir. Voleu continuar?"
 
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:286
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirmation"
-msgstr "Informació"
+msgstr "Confirmació"
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:73
 #, kde-format
