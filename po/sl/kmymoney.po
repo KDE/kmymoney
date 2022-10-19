@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-17 00:47+0000\n"
-"PO-Revision-Date: 2022-09-13 07:20+0200\n"
+"PO-Revision-Date: 2022-10-18 08:47+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
 "X-Generator: Poedit 3.1.1\n"
 
 #, kde-format
@@ -3702,8 +3702,7 @@ msgstr ""
 "odstraniti?"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:316
-#, fuzzy, kde-format
-#| msgid "Delete quote source"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete quote source"
 msgstr "Briši vir kotacije"
@@ -4647,11 +4646,10 @@ msgid "The file has been changed, save it?"
 msgstr "Datoteka se je spremenila, naj jo shranim?"
 
 #: kmymoney/kmymoney.cpp:513
-#, fuzzy, kde-format
-#| msgid "Save to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save file"
-msgstr "Shrani na datoteko"
+msgstr "Shrani datoteko"
 
 #: kmymoney/kmymoney.cpp:885
 #, kde-format
@@ -5471,7 +5469,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
-msgstr ""
+msgstr "Potrditev varnostne kopije"
 
 #: kmymoney/kmymoney.cpp:3523
 #, kde-format
@@ -5557,11 +5555,10 @@ msgstr ""
 "Za preklic ustvarjanja računa kliknite Prekliči."
 
 #: kmymoney/kmymoney.cpp:3757
-#, fuzzy, kde-format
-#| msgid "Opening balance problem"
+#, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
-msgstr "Problem otvoritvene bilance"
+msgstr "Odpiranje bilance obveznosti"
 
 #: kmymoney/kmymoney.cpp:3768
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
@@ -6137,17 +6134,13 @@ msgid "Uncaught error. Please report the details to the developers"
 msgstr "Neulovljena napaka. Prosimo poročajte podrobnosti razvijalcem"
 
 #: kmymoney/misc/kmmyesno.cpp:21
-#, fuzzy, kde-format
-#| msgctxt "Is this a tax account?"
-#| msgid "Yes"
+#, kde-format
 msgctxt "@action:button"
 msgid "Yes"
 msgstr "Da"
 
 #: kmymoney/misc/kmmyesno.cpp:26
-#, fuzzy, kde-format
-#| msgctxt "@item no payments were entered for a loan"
-#| msgid "No"
+#, kde-format
 msgctxt "@action:button"
 msgid "No"
 msgstr "Ne"
@@ -9654,7 +9647,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Field assignment resolution"
-msgstr ""
+msgstr "Razreševanje dodeljevanja polja"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:293
 #, kde-format
@@ -13226,11 +13219,10 @@ msgid "Do you really want to delete profile '%1'?"
 msgstr "Ali zares želite zbrisati profil '%1'?"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:416
-#, fuzzy, kde-format
-#| msgid "The default QIF profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete QIF profile"
-msgstr "Privzeti profil QIF"
+msgstr "Briši profil QIF"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabGeneral)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:53
@@ -14573,8 +14565,7 @@ msgid "Do you really want to remove all selected budgets?"
 msgstr "Ali res želite odstraniti vse izbrane proračune?"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:119
-#, fuzzy, kde-format
-#| msgid "Remove Budget"
+#, kde-format
 msgctxt "@title:window "
 msgid "Remove Budget"
 msgstr "Odstrani proračun"
@@ -18926,11 +18917,10 @@ msgstr "<qt>Ali res želite izbrisati kategorijo <b>%1</b>?</qt>"
 
 #: kmymoney/views/kcategoriesview.cpp:330
 #: kmymoney/views/kcategoriesview.cpp:390
-#, fuzzy, kde-format
-#| msgid "Delete category..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete category"
-msgstr "Zbriši kategorijo..."
+msgstr "Zbriši kategorijo"
 
 #: kmymoney/views/kcategoriesview.cpp:339
 #, kde-format
@@ -19454,11 +19444,10 @@ msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>Ali res želite izbrisati institucijo<b>%1</b>?</p>"
 
 #: kmymoney/views/kinstitutionsview.cpp:275
-#, fuzzy, kde-format
-#| msgid "Delete institution..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete institution"
-msgstr "Zbriši institucijo..."
+msgstr "Zbriši institucijo"
 
 #: kmymoney/views/kinstitutionsview.cpp:286
 #: kmymoney/views/kinstitutionsview.cpp:289
@@ -19597,11 +19586,10 @@ msgstr ""
 "preimenovati prejemnika plačila?"
 
 #: kmymoney/views/kpayeesview.cpp:152
-#, fuzzy, kde-format
-#| msgid "Duplicate open"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate payee name"
-msgstr "Podvojeno odpiranje"
+msgstr "Podvoji ime prejemnika"
 
 #: kmymoney/views/kpayeesview.cpp:176 kmymoney/views/kpayeesview.cpp:373
 #: kmymoney/views/kpayeesview.cpp:396
@@ -19931,11 +19919,10 @@ msgstr ""
 "načrtovane transakcija."
 
 #: kmymoney/views/kscheduledview.cpp:230
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
-msgstr "Vnesi časovni načrt"
+msgstr "Briši časovni načrt"
 
 #: kmymoney/views/kscheduledview.cpp:238
 #, kde-format
@@ -19982,11 +19969,10 @@ msgstr ""
 "vnesete ročno pozneje."
 
 #: kmymoney/views/kscheduledview_p.h:248
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Stop entering schedule"
-msgstr "Vnesi časovni načrt"
+msgstr "Prenehaj vnašanje časovnega načrta"
 
 #: kmymoney/views/kscheduledview_p.h:347
 #, kde-format
@@ -19998,11 +19984,10 @@ msgstr ""
 "</qt>"
 
 #: kmymoney/views/kscheduledview_p.h:350
-#, fuzzy, kde-format
-#| msgid "Edit scheduled transaction"
+#, kde-format
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
-msgstr "Uredi načrtovano transakcijo"
+msgstr "Preskoči načrtovano transakcijo"
 
 #: kmymoney/views/kscheduledview_p.h:363
 #, kde-format
@@ -20095,11 +20080,10 @@ msgstr ""
 "identifikacijo. Ste prepričani, da bi radi preimenovati oznako?"
 
 #: kmymoney/views/ktagsview.cpp:379
-#, fuzzy, kde-format
-#| msgid "Duplicate open"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
-msgstr "Podvojeno odpiranje"
+msgstr "Podvojeno ime oznake"
 
 #: kmymoney/views/ktagsview.cpp:402 kmymoney/views/ktagsview.cpp:526
 #, kde-format
@@ -23880,11 +23864,10 @@ msgstr ""
 "zavrnil pravkar vnesene spremembe. Ali želite nadaljevati?"
 
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:286
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirmation"
-msgstr "Informacije"
+msgstr "Potrditev"
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:73
 #, kde-format
