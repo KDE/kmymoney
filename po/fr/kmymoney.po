@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-17 00:47+0000\n"
-"PO-Revision-Date: 2022-09-13 13:20+0200\n"
+"PO-Revision-Date: 2022-10-19 07:44+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
@@ -28,7 +28,7 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3757,11 +3757,10 @@ msgstr ""
 "vraiment la supprimer ?"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:316
-#, fuzzy, kde-format
-#| msgid "Delete quote source"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete quote source"
-msgstr "Supprimer la source de cotation"
+msgstr "Supprimer une source de cotation"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, groupParsing)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:36
@@ -4719,11 +4718,10 @@ msgid "The file has been changed, save it?"
 msgstr "Le fichier a été modifié, l'enregistrer ?"
 
 #: kmymoney/kmymoney.cpp:513
-#, fuzzy, kde-format
-#| msgid "Save to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save file"
-msgstr "Enregistrer dans un fichier"
+msgstr "Enregistrer le fichier"
 
 #: kmymoney/kmymoney.cpp:885
 #, kde-format
@@ -5547,7 +5545,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
-msgstr ""
+msgstr "Confirmation d'archivage"
 
 #: kmymoney/kmymoney.cpp:3523
 #, kde-format
@@ -5634,11 +5632,10 @@ msgstr ""
 "Veuillez appuyer sur Annuler pour interrompre la création du compte."
 
 #: kmymoney/kmymoney.cpp:3757
-#, fuzzy, kde-format
-#| msgid "Opening balance problem"
+#, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
-msgstr "Problème avec le solde d'ouverture"
+msgstr "Ouverture du solde du passif"
 
 #: kmymoney/kmymoney.cpp:3768
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
@@ -6224,19 +6221,16 @@ msgstr ""
 "Erreur non interceptée. Merci de rapporter les détails aux développeurs"
 
 #: kmymoney/misc/kmmyesno.cpp:21
-#, fuzzy, kde-format
-#| msgctxt "Is this a tax account?"
-#| msgid "Yes"
+#, kde-format
 msgctxt "@action:button"
 msgid "Yes"
 msgstr "Oui"
 
 #: kmymoney/misc/kmmyesno.cpp:26
-#, fuzzy, kde-format
-#| msgid "No"
+#, kde-format
 msgctxt "@action:button"
 msgid "No"
-msgstr "N°"
+msgstr "Non"
 
 #: kmymoney/misc/webpricequote.cpp:118 kmymoney/misc/webpricequote.cpp:243
 #, kde-format
@@ -9764,13 +9758,10 @@ msgstr ""
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:253
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:182
-#, fuzzy, kde-format
-#| msgid ""
-#| "_: Auto assignment (caption)\n"
-#| "Auto assignment"
+#, kde-format
 msgctxt "@title:window"
 msgid "Field assignment resolution"
-msgstr "Affectation automatique"
+msgstr "Résolution de l'affectation des champs"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:293
 #, kde-format
@@ -13384,11 +13375,10 @@ msgid "Do you really want to delete profile '%1'?"
 msgstr "Voulez-vous vraiment supprimer le profil « %1 » ?"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:416
-#, fuzzy, kde-format
-#| msgid "The default QIF profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete QIF profile"
-msgstr "Le profil QIF par défaut"
+msgstr "Supprimer un profil « QIF »"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabGeneral)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:53
@@ -14734,11 +14724,10 @@ msgid "Do you really want to remove all selected budgets?"
 msgstr "Voulez-vous vraiment supprimer tous les budgets sélectionnés ?"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:119
-#, fuzzy, kde-format
-#| msgid "Remove Budget"
+#, kde-format
 msgctxt "@title:window "
 msgid "Remove Budget"
-msgstr "Supprimer le budget"
+msgstr "Supprimer un budget"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:138
 #, kde-format
@@ -19127,11 +19116,10 @@ msgstr "<qt>Voulez-vous vraiment supprimer la catégorie <b>%1</b> ?</qt>"
 
 #: kmymoney/views/kcategoriesview.cpp:330
 #: kmymoney/views/kcategoriesview.cpp:390
-#, fuzzy, kde-format
-#| msgid "Delete category..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete category"
-msgstr "Supprimer la catégorie…"
+msgstr "Supprimer une catégorie"
 
 #: kmymoney/views/kcategoriesview.cpp:339
 #, kde-format
@@ -19652,11 +19640,10 @@ msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>Voulez-vous vraiment supprimer l'établissement <b>%1</b> ?</p>"
 
 #: kmymoney/views/kinstitutionsview.cpp:275
-#, fuzzy, kde-format
-#| msgid "Delete institution..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete institution"
-msgstr "Supprimer un établissement…"
+msgstr "Supprimer un établissement"
 
 #: kmymoney/views/kinstitutionsview.cpp:286
 #: kmymoney/views/kinstitutionsview.cpp:289
@@ -19795,11 +19782,10 @@ msgstr ""
 "le bénéficiaire ?"
 
 #: kmymoney/views/kpayeesview.cpp:152
-#, fuzzy, kde-format
-#| msgid "Duplicate open"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate payee name"
-msgstr "Ouverture dupliquée"
+msgstr "Nom du bénéficiaire en double"
 
 #: kmymoney/views/kpayeesview.cpp:176 kmymoney/views/kpayeesview.cpp:373
 #: kmymoney/views/kpayeesview.cpp:396
@@ -20132,11 +20118,10 @@ msgstr ""
 "recréer les opérations récurrentes."
 
 #: kmymoney/views/kscheduledview.cpp:230
-#, fuzzy, kde-format
-#| msgid "Delete schedule..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
-msgstr "Supprimer l'échéance ..."
+msgstr "Supprimer une échéance"
 
 #: kmymoney/views/kscheduledview.cpp:238
 #, kde-format
@@ -20183,11 +20168,10 @@ msgstr ""
 "vous saisissez l'opération plus tard."
 
 #: kmymoney/views/kscheduledview_p.h:248
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Stop entering schedule"
-msgstr "Saisir l'échéance"
+msgstr "Arrêter la saisie d'une échéance"
 
 #: kmymoney/views/kscheduledview_p.h:347
 #, kde-format
@@ -20198,11 +20182,10 @@ msgstr ""
 "<qt>Voulez-vous vraiment sauter l'échéance <b>%1</b> du <b>%2</b> ?</qt>"
 
 #: kmymoney/views/kscheduledview_p.h:350
-#, fuzzy, kde-format
-#| msgid "Edit scheduled transaction"
+#, kde-format
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
-msgstr "Éditer une opération récurrente"
+msgstr "Ignorer une opération programmée"
 
 #: kmymoney/views/kscheduledview_p.h:363
 #, kde-format
@@ -20293,11 +20276,10 @@ msgstr ""
 "renommer l'étiquette ?"
 
 #: kmymoney/views/ktagsview.cpp:379
-#, fuzzy, kde-format
-#| msgid "Duplicate tag"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
-msgstr "Étiquette en doublon"
+msgstr "Nom d'étiquette en doublon"
 
 #: kmymoney/views/ktagsview.cpp:402 kmymoney/views/ktagsview.cpp:526
 #, kde-format
@@ -24121,11 +24103,10 @@ msgstr ""
 "continuer ?"
 
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:286
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirmation"
-msgstr "Informations"
+msgstr "Confirmation"
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:73
 #, kde-format

@@ -2928,7 +2928,7 @@ msgstr ""
 #: kmymoney/dialogs/ksaveasquestion.ui:50
 #, kde-format
 msgid "Storage type to use for your data"
-msgstr "Tipus d'emmagatzematge a utilitzar per a les dades"
+msgstr "Tipus d'emmagatzematge que s'ha d'utilitzar per a les dades"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KSplitCorrectionDlg)
 #: kmymoney/dialogs/ksplitcorrectiondlg.ui:17
@@ -6123,7 +6123,7 @@ msgstr "KMyMoney"
 #: kmymoney/main.cpp:132
 #, kde-format
 msgid "language to be used"
-msgstr "l'idioma a emprar"
+msgstr "l'idioma que s'ha d'utilitzar"
 
 #: kmymoney/main.cpp:136
 #, kde-format
@@ -9771,7 +9771,7 @@ msgid ""
 "Please select the appropriate columns to use,\n"
 " corresponding to your data."
 msgstr ""
-"Seleccioneu les columnes adequades a utilitzar,\n"
+"Seleccioneu les columnes adequades que s'utilitzaran,\n"
 " corresponents a les dades."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_number)
@@ -10510,7 +10510,8 @@ msgid ""
 "If there is just a single security in the file, enter its name below.\n"
 "Otherwise, select the column for the symbol, and for the description or name."
 msgstr ""
-"Seleccioneu les columnes apropiades a utilitzar, corresponents a les dades.\n"
+"Seleccioneu les columnes apropiades que s'utilitzaran, corresponents a les "
+"dades.\n"
 "Si hi ha un títol simple en el fitxer, introduïu el seu nom davall.\n"
 "En cas contrari, seleccioneu la columna per al símbol, i per a la descripció "
 "o el nom."
@@ -10736,7 +10737,7 @@ msgstr "Determina si el format de dades es detectarà automàticament."
 #: kmymoney/plugins/csv/import/pluginsettings.kcfg:19
 #, kde-format
 msgid "The profile to be used for QIF exports."
-msgstr "El perfil a utilitzar per a les exportacions QIF."
+msgstr "El perfil que s'utilitzarà per a les exportacions QIF."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, PluginSettingsDecl)
 #: kmymoney/plugins/csv/import/pluginsettingsdecl.ui:14
@@ -10812,7 +10813,8 @@ msgstr "Pàgina de l'assistent de cotitzacions"
 msgid ""
 "Please select the appropriate columns to use, corresponding to your data.\n"
 msgstr ""
-"Seleccioneu les columnes adequades a utilitzar, corresponents a les dades.\n"
+"Seleccioneu les columnes adequades que s'utilitzaran, corresponents a les "
+"dades.\n"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, RowsPage)
 #: kmymoney/plugins/csv/import/rowswizardpage.ui:20
@@ -14862,7 +14864,7 @@ msgstr "Dies del cicle comptable normal"
 #: kmymoney/settings/kmymoney.kcfg:424
 #, kde-format
 msgid "Number of historic cycles to use in forecast"
-msgstr "Nombre de cicles històrics a utilitzar en la previsió"
+msgstr "Nombre de cicles històrics que s'han d'utilitzar en la previsió"
 
 #. i18n: ectx: label, entry (beginForecastDay), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:33
@@ -14959,7 +14961,7 @@ msgstr "Configuració per a la previsió basada en l'historial"
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:131
 #, kde-format
 msgid "Number of Cycles to use in Forecast:"
-msgstr "Nombre de cicles a utilitzar en la previsió:"
+msgstr "Nombre de cicles que s'han d'utilitzar en la previsió:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_historyMethodGroupBox)
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_historyMethod)
@@ -18113,7 +18115,7 @@ msgstr "Nom del programa extern de càlcul"
 #: kmymoney/settings/kmymoney.kcfg:66
 #, kde-format
 msgid "Name of region used for non-processing days"
-msgstr "Nom de la regió a emprar per als dies no hàbils"
+msgstr "Nom de la regió que s'ha d'utilitzar per als dies no hàbils"
 
 #. i18n: ectx: label, entry (EnterMovesBetweenFields), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:80

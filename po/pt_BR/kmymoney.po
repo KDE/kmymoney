@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-17 00:47+0000\n"
-"PO-Revision-Date: 2022-08-19 15:39-0300\n"
+"PO-Revision-Date: 2022-10-19 15:01-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -12023,22 +12023,19 @@ msgstr "Remover as quebras de linha do campo de memorando"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:211
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>Flag this account to be an opening balance account</"
-#| "p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>Add additional payee details found in the transaction "
 "to the memo.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Marcar esta conta como sendo uma conta com saldo de "
-"abertura</p></body></html>"
+"<html><head/><body><p>Adicionar detalhes adicionais do beneficiário "
+"encontrados na transação para o memorando.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:214
 #, kde-format
 msgid "Include the payee details in memo"
-msgstr ""
+msgstr "Incluir os detalhes do beneficiário no memorando"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, MapAccountWizard)
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBMapAccount)

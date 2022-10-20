@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-17 00:47+0000\n"
-"PO-Revision-Date: 2022-10-02 15:49\n"
+"PO-Revision-Date: 2022-10-19 13:22\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -3563,8 +3563,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:316
-#, fuzzy, kde-format
-#| msgid "Delete quote source"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete quote source"
 msgstr "删除报价源"
@@ -4478,11 +4477,10 @@ msgid "The file has been changed, save it?"
 msgstr "您已修改此文件，要保存该文件吗？"
 
 #: kmymoney/kmymoney.cpp:513
-#, fuzzy, kde-format
-#| msgid "Save to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save file"
-msgstr "保存到文件"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:885
 #, kde-format
@@ -5367,11 +5365,10 @@ msgstr ""
 "如果想终止创建当前账户，请按“取消”键"
 
 #: kmymoney/kmymoney.cpp:3757
-#, fuzzy, kde-format
-#| msgid "Opening balance"
+#, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
-msgstr "开户余额"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:3768
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
@@ -5929,20 +5926,16 @@ msgid "Uncaught error. Please report the details to the developers"
 msgstr "未捕捉到错误。请将详细情况报告给开发者"
 
 #: kmymoney/misc/kmmyesno.cpp:21
-#, fuzzy, kde-format
-#| msgctxt "Is this a tax account?"
-#| msgid "Yes"
+#, kde-format
 msgctxt "@action:button"
 msgid "Yes"
-msgstr "是"
+msgstr ""
 
 #: kmymoney/misc/kmmyesno.cpp:26
-#, fuzzy, kde-format
-#| msgctxt "@item no payments were entered for a loan"
-#| msgid "No"
+#, kde-format
 msgctxt "@action:button"
 msgid "No"
-msgstr "否"
+msgstr ""
 
 #: kmymoney/misc/webpricequote.cpp:118 kmymoney/misc/webpricequote.cpp:243
 #, kde-format
@@ -12829,11 +12822,10 @@ msgid "Do you really want to delete profile '%1'?"
 msgstr "您真的想删除配置“%1”吗？"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:416
-#, fuzzy, kde-format
-#| msgid "The default QIF profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete QIF profile"
-msgstr "默认 QIF 配置"
+msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabGeneral)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:53
@@ -14107,8 +14099,7 @@ msgid "Do you really want to remove all selected budgets?"
 msgstr "您真的要删除所有选中的预算吗？"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:119
-#, fuzzy, kde-format
-#| msgid "Remove Budget"
+#, kde-format
 msgctxt "@title:window "
 msgid "Remove Budget"
 msgstr "删除预算"
@@ -18305,11 +18296,10 @@ msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:330
 #: kmymoney/views/kcategoriesview.cpp:390
-#, fuzzy, kde-format
-#| msgid "Delete category..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete category"
-msgstr "删除交易类型..."
+msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:339
 #, kde-format
@@ -18806,11 +18796,10 @@ msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>您真的要删除金融机构<b>%1</b>吗？</p>"
 
 #: kmymoney/views/kinstitutionsview.cpp:275
-#, fuzzy, kde-format
-#| msgid "Delete institution..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete institution"
-msgstr "删除金融机构..."
+msgstr ""
 
 #: kmymoney/views/kinstitutionsview.cpp:286
 #: kmymoney/views/kinstitutionsview.cpp:289
@@ -18945,11 +18934,10 @@ msgstr ""
 "名为“%1”的交款人已存在。不建议多个交款人使用同一个名称。是否重命名该交款人？"
 
 #: kmymoney/views/kpayeesview.cpp:152
-#, fuzzy, kde-format
-#| msgid "Duplicate open"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate payee name"
-msgstr "重复打开文件"
+msgstr ""
 
 #: kmymoney/views/kpayeesview.cpp:176 kmymoney/views/kpayeesview.cpp:373
 #: kmymoney/views/kpayeesview.cpp:396
@@ -19266,11 +19254,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/kscheduledview.cpp:230
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
-msgstr "输入交易计划"
+msgstr ""
 
 #: kmymoney/views/kscheduledview.cpp:238
 #, kde-format
@@ -19312,11 +19299,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/kscheduledview_p.h:248
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Stop entering schedule"
-msgstr "输入交易计划"
+msgstr ""
 
 #: kmymoney/views/kscheduledview_p.h:347
 #, kde-format
@@ -19326,11 +19312,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/kscheduledview_p.h:350
-#, fuzzy, kde-format
-#| msgid "Edit scheduled transaction"
+#, kde-format
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
-msgstr "编辑计划交易"
+msgstr ""
 
 #: kmymoney/views/kscheduledview_p.h:363
 #, kde-format
@@ -19418,11 +19403,10 @@ msgstr ""
 "名为“%1”的交款人已存在。不建议多个交款人使用同一个名称。是否重命名该交款人？"
 
 #: kmymoney/views/ktagsview.cpp:379
-#, fuzzy, kde-format
-#| msgid "Duplicate open"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
-msgstr "重复打开文件"
+msgstr ""
 
 #: kmymoney/views/ktagsview.cpp:402 kmymoney/views/ktagsview.cpp:526
 #, kde-format
@@ -23026,11 +23010,10 @@ msgstr ""
 "动。 您确定要继续吗？"
 
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:286
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirmation"
-msgstr "信息"
+msgstr ""
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:73
 #, kde-format
