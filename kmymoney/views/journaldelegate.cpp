@@ -487,7 +487,9 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
                 // possibly draw horizontal line as separator
                 if (lineCount > 0) {
                     const auto yOffset(lineHeight * lineCount);
-                    painter->drawLine(opt.rect.x(), opt.rect.y() + yOffset, opt.rect.x() + opt.rect.width(), opt.rect.y() + yOffset);
+                    if (yOffset < opt.rect.height()) {
+                        painter->drawLine(opt.rect.x(), opt.rect.y() + yOffset, opt.rect.x() + opt.rect.width(), opt.rect.y() + yOffset);
+                    }
                 }
             }
         }
