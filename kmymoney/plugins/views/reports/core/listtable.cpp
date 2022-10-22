@@ -421,7 +421,7 @@ void ListTable::render(QString& result, QString& csv) const
                 result.append(QString::fromLatin1("<td class=\"left%4\">%2%1%3</td>").arg(data, tlinkBegin, tlinkEnd, QString::number(prevGrpNames.count() - 1)));
                 break;
             default:
-                result.append(QString::fromLatin1("<td class=\"left%4\">%2%1%3</td>").arg(data, tlinkBegin, tlinkEnd, QString::number(prevGrpNames.count() - 1)));
+                result.append(QString::fromLatin1("<td class=\"left0\">%2%1%3</td>").arg(data, tlinkBegin, tlinkEnd));
                 csv.append(QString::fromLatin1("\"%1\",").arg(data));
                 break;
             }
