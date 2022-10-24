@@ -113,7 +113,12 @@ public:
 
             } else {
                 rc.italicStartLine = 1;
-                rc.lines << index.data(m_singleLineRole).toString();
+                // make sure to not duplicate the payee information in the detail column
+                if (havePayeeColumn && (m_singleLineRole == eMyMoney::Model::SplitPayeeRole)) {
+                    rc.lines << index.data(eMyMoney::Model::TransactionCounterAccountRole).toString();
+                } else {
+                    rc.lines << index.data(m_singleLineRole).toString();
+                }
                 if (showAllSplits && isMultiSplitDisplay(index)) {
                     rc.italicStartLine = 0;
                     rc.lines.clear();
