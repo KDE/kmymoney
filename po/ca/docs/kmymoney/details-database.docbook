@@ -533,7 +533,7 @@
 <para
 >Cal tenir molta cura en editar les definicions de qualsevol de les taules o vistes bàsiques (aquelles amb noms que comencen amb «<literal
 >kmm</literal
->»). Alguns canvis com ara augmentar la longitud d'un camp de nombre sencer, poden tenir poc impacte, però no haureu d'eliminar ni canviar la seqüència de cap camp, o el &kmymoney; podria negar-se a funcionar, o podríeu corrompre les dades. </para>
+>»). Alguns canvis com ara augmentar la longitud d'un camp de nombre enter, poden tenir poc impacte, però no haureu d'eliminar ni canviar la seqüència de cap camp, o el &kmymoney; podria negar-se a funcionar, o podríeu corrompre les dades. </para>
 <para
 >Si bé afegir o eliminar índexs pot millorar el rendiment, també haureu de tenir en compte que pot succeir tot el contrari. Alguns coneixements sobre el funcionament intern de &kmymoney; podrien ajudar a obtenir el millor rendiment en aquestes circumstàncies. </para>
 </sect3>
