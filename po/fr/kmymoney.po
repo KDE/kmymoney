@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:47+0000\n"
+"POT-Creation-Date: 2022-10-25 00:47+0000\n"
 "PO-Revision-Date: 2022-10-19 07:44+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -2339,8 +2339,8 @@ msgid "Please select a parent account."
 msgstr "Veuillez sélectionner un compte père."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:699
-#: kmymoney/dialogs/knewaccountdlg.cpp:864
-#: kmymoney/dialogs/knewaccountdlg.cpp:879
+#: kmymoney/dialogs/knewaccountdlg.cpp:858
+#: kmymoney/dialogs/knewaccountdlg.cpp:873
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:517
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
@@ -2357,7 +2357,7 @@ msgstr ""
 "Une catégorie appelée <b>%1</b> existe déjà. Vous ne pouvez pas créer une "
 "deuxième catégorie avec le même nom."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:779
+#: kmymoney/dialogs/knewaccountdlg.cpp:780
 #, kde-format
 msgid ""
 "You have selected to suppress the display of unused categories in the "
@@ -2370,25 +2370,25 @@ msgstr ""
 "ne sera donc affichée que si elle est utilisée. Sinon, elle sera cachée dans "
 "la vue comptes/catégories."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:779
+#: kmymoney/dialogs/knewaccountdlg.cpp:780
 #, kde-format
 msgid "Hidden categories"
 msgstr "Catégories masquées"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:904
+#: kmymoney/dialogs/knewaccountdlg.cpp:898
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
 msgstr "Impossible d'ajouter l'établissement"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:941
+#: kmymoney/dialogs/knewaccountdlg.cpp:935
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
 msgstr ""
 "Veuillez fournir un nom pour une nouvelle catégorie ou un nouveau compte."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:946
+#: kmymoney/dialogs/knewaccountdlg.cpp:940
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
@@ -2396,19 +2396,19 @@ msgstr ""
 "Il vous est impossible de créer un compte ou une catégorie contenant %1 dans "
 "le nom."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:953
+#: kmymoney/dialogs/knewaccountdlg.cpp:947
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
 msgstr "Veuillez fournir un pourcentage supérieur à zéro et inférieur à 100."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:957
+#: kmymoney/dialogs/knewaccountdlg.cpp:951
 #, kde-format
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
 msgstr "Veuillez sélectionner une catégorie pour la TVA."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1022
+#: kmymoney/dialogs/knewaccountdlg.cpp:1016
 #, kde-format
 msgid ""
 "<p>The category <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2419,13 +2419,13 @@ msgstr ""
 "p><p><i>Le compte père par défaut sera <b>%2</b> mais peut être changé dans "
 "la fenêtre suivante</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1026
-#: kmymoney/dialogs/knewaccountdlg.cpp:1051
+#: kmymoney/dialogs/knewaccountdlg.cpp:1020
+#: kmymoney/dialogs/knewaccountdlg.cpp:1045
 #, kde-format
 msgid "Create category"
 msgstr "Créer une catégorie"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1047
+#: kmymoney/dialogs/knewaccountdlg.cpp:1041
 #, kde-format
 msgid ""
 "<p>The account <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2436,13 +2436,13 @@ msgstr ""
 "p><p><i>Le compte père par défaut sera <b>%2</b> mais peut être modifié dans "
 "la fenêtre suivante</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1069
+#: kmymoney/dialogs/knewaccountdlg.cpp:1063
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "Créer une nouvelle catégorie"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1074
+#: kmymoney/dialogs/knewaccountdlg.cpp:1068
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Account"

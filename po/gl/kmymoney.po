@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:47+0000\n"
+"POT-Creation-Date: 2022-10-25 00:47+0000\n"
 "PO-Revision-Date: 2020-03-07 08:15+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -2317,8 +2317,8 @@ msgid "Please select a parent account."
 msgstr "Escolla unha conta nai."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:699
-#: kmymoney/dialogs/knewaccountdlg.cpp:864
-#: kmymoney/dialogs/knewaccountdlg.cpp:879
+#: kmymoney/dialogs/knewaccountdlg.cpp:858
+#: kmymoney/dialogs/knewaccountdlg.cpp:873
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:517
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
@@ -2335,7 +2335,7 @@ msgstr ""
 "Xa existe unha categoría chamada <b>%1</b>. Non pode crear outra co mesmo "
 "nome."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:779
+#: kmymoney/dialogs/knewaccountdlg.cpp:780
 #, kde-format
 msgid ""
 "You have selected to suppress the display of unused categories in the "
@@ -2348,43 +2348,43 @@ msgstr ""
 "mostrará se for utilizada. En caso contrario, estará agochada na vista de "
 "contas/categorías."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:779
+#: kmymoney/dialogs/knewaccountdlg.cpp:780
 #, kde-format
 msgid "Hidden categories"
 msgstr "Categorías agochadas"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:904
+#: kmymoney/dialogs/knewaccountdlg.cpp:898
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
 msgstr "Non se pode engadir a entidade"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:941
+#: kmymoney/dialogs/knewaccountdlg.cpp:935
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:946
+#: kmymoney/dialogs/knewaccountdlg.cpp:940
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:953
+#: kmymoney/dialogs/knewaccountdlg.cpp:947
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:957
+#: kmymoney/dialogs/knewaccountdlg.cpp:951
 #, fuzzy, kde-format
 #| msgid "Please select a default category for payee '%1'"
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
 msgstr "Escolla unha categoría predeterminada para o beneficiario «%1»"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1022
+#: kmymoney/dialogs/knewaccountdlg.cpp:1016
 #, kde-format
 msgid ""
 "<p>The category <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2395,13 +2395,13 @@ msgstr ""
 "será <b>%2</b> de maneira predeterminada pero poderá cambiala no seguinte "
 "diálogo</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1026
-#: kmymoney/dialogs/knewaccountdlg.cpp:1051
+#: kmymoney/dialogs/knewaccountdlg.cpp:1020
+#: kmymoney/dialogs/knewaccountdlg.cpp:1045
 #, kde-format
 msgid "Create category"
 msgstr "Crear a categoría"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1047
+#: kmymoney/dialogs/knewaccountdlg.cpp:1041
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The category <b>%1</b> currently does not exist. Do you want to create "
@@ -2416,14 +2416,14 @@ msgstr ""
 "será <b>%2</b> de maneira predeterminada pero poderá cambiala no seguinte "
 "diálogo</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1069
+#: kmymoney/dialogs/knewaccountdlg.cpp:1063
 #, fuzzy, kde-format
 #| msgid "Create a new Category"
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "Crear unha categoría nova"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1074
+#: kmymoney/dialogs/knewaccountdlg.cpp:1068
 #, fuzzy, kde-format
 #| msgid "Create a new asset account"
 msgctxt "@title:window"
