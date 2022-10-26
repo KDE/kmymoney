@@ -697,9 +697,14 @@ void KNewAccountDlg::okClicked()
 
     d->m_account.setOpeningDate(d->ui->m_openingDateEdit->date());
 
-    if (!d->m_categoryEditor) {
+    // in case we edit a stock account, the currency is
+    // not visible and we should not override it. Same
+    // if the currency widget is not enabled
+    if (d->ui->m_currency->isVisible() && d->ui->m_currency->isEnabled()) {
         d->m_account.setCurrencyId(d->ui->m_currency->security().id());
+    }
 
+    if (!d->m_categoryEditor) {
         d->storeKVP("PreferredAccount", d->ui->m_qcheckboxPreferred);
         d->storeKVP("NoVat", d->ui->m_qcheckboxNoVat);
 
@@ -734,17 +739,7 @@ void KNewAccountDlg::okClicked()
         }
     }
 
-    accept();
-}
-
-
-MyMoneyAccount KNewAccountDlg::account()
-{
-    Q_D(KNewAccountDlg);
-    // assign the right currency to the account
-    d->m_account.setCurrencyId(d->ui->m_currency->security().id());
-
-    // and the price mode
+    // update the price mode
     switch (d->ui->m_priceMode->currentItem()) {
     case 0:
         d->m_account.deletePair("priceMode");
@@ -755,6 +750,12 @@ MyMoneyAccount KNewAccountDlg::account()
         break;
     }
 
+    accept();
+}
+
+MyMoneyAccount KNewAccountDlg::account()
+{
+    Q_D(KNewAccountDlg);
     return d->m_account;
 }
 
