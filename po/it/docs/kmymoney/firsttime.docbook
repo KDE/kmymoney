@@ -830,7 +830,7 @@
 
 <note>
 <para
->Queste istruzioni riguardano lo spostamento dei dati e delle impostazioni di &kmymoney;. Tuttavia, potrebbero esserci elementi importanti che sono memorizzati da &kde; e non da &kmymoney;, come le password conservate in kwallet. Lo spostamento di altre parti della configurazione di &kde; va oltre gli scopi di questo manuale, anche se molti dei file importanti sono memorizzati in <envar
+>Queste istruzioni servono esclusivamente per spostare i dati e le impostazioni di &kmymoney;.Tuttavia, potrebbero esserci elementi importanti che sono memorizzati da &kde; e non da &kmymoney;, come le password memorizzate nel portachiavi. Spostare altre parti della tua configurazione di &kde; va oltre lo scopo di questo manuale, sebbene molti dei file rilevanti siano archiviati anche in <envar
 >$KDEHOME</envar
 >. </para>
 </note>

@@ -1065,5 +1065,15 @@
 
 
 </sect2>
+<sect2 id="details.settings.plugins.kbanking">
+<title
+>KBanking</title>
+
+<para
+>Questa estensione aggiunge il supporto per HBCI/FinTs, OFX e PayPal online banking a KMyMoney. Dopo aver abilitato questa estensione, l'online banking può essere configurato nel menu <link linkend="reference.menus.settings.help"
+>Impostazioni</link
+>. </para>
+
+</sect2>
 </sect1>
 </chapter>

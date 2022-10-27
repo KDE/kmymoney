@@ -113,9 +113,9 @@
 >Eliminare una categoria</title>
 
 <para
->Per eliminare una categoria, selezionarla nell'albero e fare clic con il pulsante destro del mouse per far apparire il menu a comparsa e selezionare <guimenuitem
+>Per eliminare una categoria, selezionarla nell'albero e fare clic con il tasto destro del mouse per far apparire il menu a comparsa e selezionare <guimenuitem
 >Elimina</guimenuitem
->. Se la categoria non ha transazioni, pianificazioni o budget associati, sarà eliminata. </para>
+>. Se la categoria non ha transazioni, pianificazioni o budget associati e non è impostata come categoria predefinita per le nuove transazioni con qualsiasi beneficiario, sarà eliminata. </para>
 
 <para
 >Se la categoria contiene uno di questi elementi, sarà visualizzato una finestra a comparsa che consente di scegliere un'altra categoria alla quale tutti quegli elementi possono essere riassegnati prima che la categoria venga eliminata. </para>

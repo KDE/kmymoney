@@ -1302,6 +1302,28 @@
 ></para>
     </listitem>
   </varlistentry>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Impostazioni</guimenu
+><guimenuitem
+>Configura Aqbanking</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Configurare le impostazioni di online banking</action
+>, vedere <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
+>Come si configura l'online banking</ulink
+> per ulteriori dettagli. </para>
+      <para
+>Notare che questa selezione di menu è disponibile solo se il modulo KBanking è abilitato. Per ulteriori informazioni, vedere la sezione sulla configurazione del <link linkend="details.settings.plugins.kbanking"
+>estensione KBanking</link
+>. </para>
+    </listitem>
+  </varlistentry>
 
 </variablelist>
 </sect2>
