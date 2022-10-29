@@ -601,7 +601,7 @@
   <listitem>
     <para
 ><guilabel
->Preserva els canvis en seleccionar una operació/desglossat diferent</guilabel
+>Conserva els canvis en seleccionar una operació/desglossat diferent</guilabel
 >: en seleccionar la línia següent a la llista d'operacions o l'editor del desglossament, els canvis es mantindran, en lloc del comportament predeterminat en el qual s'ha de prémer la marca de selecció verda per a desar els canvis. </para>
   </listitem>
 </itemizedlist>
