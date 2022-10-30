@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-25 00:47+0000\n"
-"PO-Revision-Date: 2022-10-23 21:01+0200\n"
+"PO-Revision-Date: 2022-10-28 14:11+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -4123,7 +4123,7 @@ msgstr "Incrementa automàticament el número de xec"
 #: kmymoney/settings/kmymoney.kcfg:76
 #, kde-format
 msgid "Keep changes when selecting a different transaction/split"
-msgstr "Mantín els canvis en seleccionar una operació/desglossat diferent"
+msgstr "Conserva els canvis en seleccionar una operació/desglossat diferent"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnterMovesBetweenFields)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:217
@@ -11577,7 +11577,7 @@ msgstr[1] "S'han detectat %1 possibles problemes de planificació\n"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2411
 #, kde-format
 msgid "Small Business Features (Customers, Invoices, etc.)"
-msgstr "Funcionalitats per a negocis petits (Clients, Factures, etc.)"
+msgstr "Característiques per a negocis petits (Clients, Factures, etc.)"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2412
 #: kmymoney/plugins/views/budget/budgetview.cpp:53
@@ -22661,8 +22661,8 @@ msgstr ""
 "Els comptes gestionats per una institució normalment es referencien amb un "
 "número únic anomenat número de compte. Introduïu ací este número.\n"
 "\n"
-"Actualment, KMyMoney només utilitza este número per a algunes funcions de "
-"banca en línia."
+"Actualment, KMyMoney només utilitza este número per a algunes "
+"característiques de banca en línia."
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_iban)
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:97
