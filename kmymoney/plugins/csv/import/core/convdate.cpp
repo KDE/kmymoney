@@ -6,6 +6,7 @@
 
 #include "convdate.h"
 
+#include <QDebug>
 #include <QLocale>
 #include <QRegularExpression>
 
@@ -51,6 +52,7 @@ QDate ConvertDate::convertDate(const QString& txt)
     int count = buffer.count(QLatin1Char('/'), Qt::CaseSensitive);
     if (count == 0) {      //                              no separators so use QDate()
         QDate result  = QDate::fromString(buffer, dateFormatString);
+        qDebug() << "convertDate1" << txt << buffer << dateFormatString << result;
         if (result.year() < 1950) {
             result = QDate();
         }
@@ -201,8 +203,16 @@ QDate ConvertDate::convertDate(const QString& txt)
             }
         }
 
-        if (i == 13)
+        if (i == 13) {
+            QLocale locale;
+            qDebug() << "convertDate: Unable to find month" << aMonth << "in";
+            qDebug() << locale.name() << locale.bcp47Name() << locale.language() << locale.country() << locale.script();
+            for (i = 1; i <= 12; ++i) {
+                qDebug() << i << locale.standaloneMonthName(i, QLocale::ShortFormat) << locale.monthName(i, QLocale::ShortFormat)
+                         << locale.standaloneMonthName(i, QLocale::LongFormat) << locale.monthName(i, QLocale::LongFormat);
+            }
             return QDate();
+        }
         aMonth = QString::fromLatin1("%1").arg(i, 2, 10, QLatin1Char('0'));
         aFormat = QLatin1String("MM");
     }
@@ -211,9 +221,9 @@ QDate ConvertDate::convertDate(const QString& txt)
     // deal with Feb 30th
     if ((aMonth == QLatin1String("02")) && (aDay == QLatin1String("30"))) {
         if (QDate(aYear.toUInt(), 2, 29).isValid()) {
-            aDay = QStringLiteral("29");
+            aDay = QLatin1String("29");
         } else {
-            aDay = QStringLiteral("28");
+            aDay = QLatin1String("28");
         }
     }
     switch (m_dateFormatIndex) {
@@ -233,6 +243,7 @@ QDate ConvertDate::convertDate(const QString& txt)
         qDebug("ConvertDate - date format unknown");
     }
     aDate = QDate::fromString(dat, dateFormat);
+    qDebug() << "convertDate2" << txt << dat << dateFormat << aDate;
     return aDate;
 }
 
