@@ -140,6 +140,9 @@ public:
     bool isLoansOnly() const;
     void setLoansOnly(bool f);
 
+    bool isPropagateBudgetDifference() const;
+    void setPropagateBudgetDifference(bool f);
+
     eMyMoney::Report::DetailLevel detailLevel() const;
     void setDetailLevel(eMyMoney::Report::DetailLevel detail);
 

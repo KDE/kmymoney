@@ -230,7 +230,7 @@ void KReportConfigurationFilterDlg::slotSearch()
 
         d->m_currentState.setShowingColumnTotals(d->m_tabRowColPivot->ui->m_checkTotalRow->isChecked());
         d->m_currentState.setIncludingSchedules(d->m_tabRowColPivot->ui->m_checkScheduled->isChecked());
-
+        d->m_currentState.setPropagateBudgetDifference(d->m_tabRowColPivot->ui->m_propagateRemainder->isChecked());
         d->m_currentState.setIncludingTransfers(d->m_tabRowColPivot->ui->m_checkTransfers->isChecked());
 
         d->m_currentState.setIncludingUnusedAccounts(d->m_tabRowColPivot->ui->m_checkUnused->isChecked());
@@ -443,6 +443,22 @@ void KReportConfigurationFilterDlg::slotReset()
         }
         d->m_tabRowColPivot->ui->m_checkTotalColumn->setChecked(d->m_initialState.isShowingRowTotals());
         d->m_tabRowColPivot->ui->m_checkTotalRow->setChecked(d->m_initialState.isShowingColumnTotals());
+        d->m_tabRowColPivot->ui->m_propagateRemainder->setEnabled(d->m_initialState.rowType() == eMyMoney::Report::RowType::BudgetActual);
+        d->m_tabRowColPivot->ui->m_propagateRemainder->setChecked(d->m_initialState.isPropagateBudgetDifference());
+        d->m_tabRowColPivot->ui->m_checkTotalRow->setDisabled(d->m_initialState.isPropagateBudgetDifference());
+
+        connect(d->m_tabRowColPivot->ui->m_propagateRemainder, &QCheckBox::stateChanged, this, [&](int _state) {
+            Q_D(KReportConfigurationFilterDlg);
+            const auto state = static_cast<Qt::CheckState>(_state);
+            d->m_tabRowColPivot->ui->m_checkTotalColumn->setDisabled(state == Qt::Checked);
+            switch (state) {
+            case Qt::Checked:
+                d->m_tabRowColPivot->ui->m_checkTotalColumn->setChecked(false);
+                break;
+            default:
+                break;
+            }
+        });
 
         slotRowTypeChanged(combo->currentIndex());
 

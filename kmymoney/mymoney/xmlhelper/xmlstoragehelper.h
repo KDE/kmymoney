@@ -103,6 +103,7 @@ enum class Report {
     YLabelsPrecision,
     QueryColumns,
     Tax,
+    PropagateBudgetDiff,
     Loans,
     HideTransactions,
     InvestmentSum,

@@ -2021,6 +2021,7 @@ QString PivotTable::coloredAmount(const MyMoneyMoney& amount, const QString& cur
 void PivotTable::calculateBudgetDiff()
 {
     PivotGrid::iterator it_outergroup = m_grid.begin();
+    const auto propagateBudgetDifference = m_config.isPropagateBudgetDifference();
     while (it_outergroup != m_grid.end()) {
         PivotOuterGroup::iterator it_innergroup = (*it_outergroup).begin();
         while (it_innergroup != (*it_outergroup).end()) {
@@ -2033,6 +2034,9 @@ void PivotTable::calculateBudgetDiff()
                     while (column < m_numColumns) {
                         it_row.value()[eBudgetDiff][column] = PivotCell(it_row.value()[eActual][column] - it_row.value()[eBudget][column]);
                         ++column;
+                        if (propagateBudgetDifference && (column < m_numColumns)) {
+                            it_row.value()[eBudget][column] -= it_row.value()[eBudgetDiff][column - 1];
+                        }
                     }
                     break;
                 case eMyMoney::Account::Type::Expense:
@@ -2040,6 +2044,9 @@ void PivotTable::calculateBudgetDiff()
                     while (column < m_numColumns) {
                         it_row.value()[eBudgetDiff][column] = PivotCell(it_row.value()[eBudget][column] - it_row.value()[eActual][column]);
                         ++column;
+                        if (propagateBudgetDifference && (column < m_numColumns)) {
+                            it_row.value()[eBudget][column] += it_row.value()[eBudgetDiff][column - 1];
+                        }
                     }
                     break;
                 default:

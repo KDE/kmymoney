@@ -321,6 +321,18 @@ void MyMoneyReport::setTax(bool f)
     d->m_tax = f;
 }
 
+bool MyMoneyReport::isPropagateBudgetDifference() const
+{
+    Q_D(const MyMoneyReport);
+    return d->m_propagateBudgetDifference;
+}
+
+void MyMoneyReport::setPropagateBudgetDifference(bool f)
+{
+    Q_D(MyMoneyReport);
+    d->m_propagateBudgetDifference = f;
+}
+
 bool MyMoneyReport::isInvestmentsOnly() const
 {
     Q_D(const MyMoneyReport);

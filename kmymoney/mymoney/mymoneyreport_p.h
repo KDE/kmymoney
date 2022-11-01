@@ -32,55 +32,56 @@
 class MyMoneyReportPrivate : public MyMoneyObjectPrivate
 {
 public:
-    MyMoneyReportPrivate() :
-        m_name(QStringLiteral("Unconfigured Pivot Table Report")),
-        m_detailLevel(eMyMoney::Report::DetailLevel::None),
-        m_investmentSum(eMyMoney::Report::InvestmentSum::Sold),
-        m_hideTransactions(false),
-        m_convertCurrency(true),
-        m_favorite(false),
-        m_tax(false),
-        m_investments(false),
-        m_loans(false),
-        m_reportType(rowTypeToReportType(eMyMoney::Report::RowType::ExpenseIncome)),
-        m_rowType(eMyMoney::Report::RowType::ExpenseIncome),
-        m_columnType(eMyMoney::Report::ColumnType::Months),
-        m_columnsAreDays(false),
-        m_queryColumns(eMyMoney::Report::QueryColumn::None),
-        m_dateLock(eMyMoney::TransactionFilter::Date::UserDefined),
-        m_accountGroupFilter(false),
-        m_chartType(eMyMoney::Report::ChartType::Line),
-        m_chartPalette(eMyMoney::Report::ChartPalette::Application),
-        m_chartDataLabels(true),
-        m_chartCHGridLines(true),
-        m_chartSVGridLines(true),
-        m_chartByDefault(false),
-        m_chartLineWidth(MyMoneyReport::m_lineWidth),
-        m_logYaxis(false),
-        m_negExpenses(false),
-        m_dataRangeStart('0'),
-        m_dataRangeEnd('0'),
-        m_dataMajorTick('0'),
-        m_dataMinorTick('0'),
-        m_yLabelsPrecision(2),
-        m_dataLock(eMyMoney::Report::DataLock::Automatic),
-        m_includeSchedules(false),
-        m_includeTransfers(false),
-        m_includeBudgetActuals(false),
-        m_includeUnusedAccounts(false),
-        m_showRowTotals(false),
-        m_showColumnTotals(true),
-        m_includeForecast(false),
-        m_includeMovingAverage(false),
-        m_movingAverageDays(0),
-        m_includePrice(false),
-        m_includeAveragePrice(false),
-        m_mixedTime(false),
-        m_currentDateColumn(0),
-        m_settlementPeriod(3),
-        m_showSTLTCapitalGains(false),
-        m_tseparator(QDate::currentDate().addYears(-1)),
-        m_skipZero(false)
+    MyMoneyReportPrivate()
+        : m_name(QStringLiteral("Unconfigured Pivot Table Report"))
+        , m_detailLevel(eMyMoney::Report::DetailLevel::None)
+        , m_investmentSum(eMyMoney::Report::InvestmentSum::Sold)
+        , m_hideTransactions(false)
+        , m_convertCurrency(true)
+        , m_favorite(false)
+        , m_tax(false)
+        , m_propagateBudgetDifference(false)
+        , m_investments(false)
+        , m_loans(false)
+        , m_reportType(rowTypeToReportType(eMyMoney::Report::RowType::ExpenseIncome))
+        , m_rowType(eMyMoney::Report::RowType::ExpenseIncome)
+        , m_columnType(eMyMoney::Report::ColumnType::Months)
+        , m_columnsAreDays(false)
+        , m_queryColumns(eMyMoney::Report::QueryColumn::None)
+        , m_dateLock(eMyMoney::TransactionFilter::Date::UserDefined)
+        , m_accountGroupFilter(false)
+        , m_chartType(eMyMoney::Report::ChartType::Line)
+        , m_chartPalette(eMyMoney::Report::ChartPalette::Application)
+        , m_chartDataLabels(true)
+        , m_chartCHGridLines(true)
+        , m_chartSVGridLines(true)
+        , m_chartByDefault(false)
+        , m_chartLineWidth(MyMoneyReport::m_lineWidth)
+        , m_logYaxis(false)
+        , m_negExpenses(false)
+        , m_dataRangeStart('0')
+        , m_dataRangeEnd('0')
+        , m_dataMajorTick('0')
+        , m_dataMinorTick('0')
+        , m_yLabelsPrecision(2)
+        , m_dataLock(eMyMoney::Report::DataLock::Automatic)
+        , m_includeSchedules(false)
+        , m_includeTransfers(false)
+        , m_includeBudgetActuals(false)
+        , m_includeUnusedAccounts(false)
+        , m_showRowTotals(false)
+        , m_showColumnTotals(true)
+        , m_includeForecast(false)
+        , m_includeMovingAverage(false)
+        , m_movingAverageDays(0)
+        , m_includePrice(false)
+        , m_includeAveragePrice(false)
+        , m_mixedTime(false)
+        , m_currentDateColumn(0)
+        , m_settlementPeriod(3)
+        , m_showSTLTCapitalGains(false)
+        , m_tseparator(QDate::currentDate().addYears(-1))
+        , m_skipZero(false)
     {
     }
 
@@ -153,6 +154,10 @@ public:
       * Whether this report should only include categories marked as "Tax"="Yes"
       */
     bool m_tax;
+    /**
+     * Whether budget differences should be propagated into the next period
+     */
+    bool m_propagateBudgetDifference;
     /**
       * Whether this report should only include investment accounts
       */

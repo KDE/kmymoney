@@ -107,6 +107,7 @@ QString attributeName(Attribute::Report attributeID)
         {Attribute::Report::YLabelsPrecision,       QStringLiteral("yLabelsPrecision")},
         {Attribute::Report::QueryColumns,           QStringLiteral("querycolumns")},
         {Attribute::Report::Tax,                    QStringLiteral("tax")},
+        {Attribute::Report::PropagateBudgetDiff,    QStringLiteral("propBudgetDiff")},
         {Attribute::Report::Loans,                  QStringLiteral("loans")},
         {Attribute::Report::HideTransactions,       QStringLiteral("hidetransactions")},
         {Attribute::Report::InvestmentSum,          QStringLiteral("investmentsum")},
@@ -910,6 +911,7 @@ MyMoneyReport readReport(QXmlStreamReader* reader)
         report.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(qc));
 
         report.setTax(readBoolAttribute(reader, attributeName(Attribute::Report::Tax), false));
+        report.setPropagateBudgetDifference(readBoolAttribute(reader, attributeName(Attribute::Report::PropagateBudgetDiff), false));
         report.setInvestmentsOnly(readBoolAttribute(reader, attributeName(Attribute::Report::Investments), false));
         report.setLoansOnly(readBoolAttribute(reader, attributeName(Attribute::Report::Loans), false));
         report.setHideTransactions(readBoolAttribute(reader, attributeName(Attribute::Report::HideTransactions), false));
@@ -1070,7 +1072,7 @@ void writeReport(const MyMoneyReport& report, QXmlStreamWriter* writer)
 
     // write report's internals
     if (report.reportType() == eMyMoney::Report::ReportType::PivotTable)
-        writer->writeAttribute(attributeName(Attribute::Report::Type), "pivottable 1.15");
+        writer->writeAttribute(attributeName(Attribute::Report::Type), "pivottable 1.16");
     else if (report.reportType() == eMyMoney::Report::ReportType::QueryTable)
         writer->writeAttribute(attributeName(Attribute::Report::Type), "querytable 1.15");
     else if (report.reportType() == eMyMoney::Report::ReportType::InfoTable)
@@ -1147,6 +1149,7 @@ void writeReport(const MyMoneyReport& report, QXmlStreamWriter* writer)
         writer->writeAttribute(attributeName(Attribute::Report::QueryColumns), columns.join(","));
 
         writer->writeAttribute(attributeName(Attribute::Report::Tax), attrValue(report.isTax()));
+        writer->writeAttribute(attributeName(Attribute::Report::PropagateBudgetDiff), attrValue(report.isPropagateBudgetDifference()));
         writer->writeAttribute(attributeName(Attribute::Report::Investments), attrValue(report.isInvestmentsOnly()));
         writer->writeAttribute(attributeName(Attribute::Report::Loans), attrValue(report.isLoansOnly()));
         writer->writeAttribute(attributeName(Attribute::Report::HideTransactions), attrValue(report.isHideTransactions()));
