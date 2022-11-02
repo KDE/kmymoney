@@ -56,6 +56,7 @@
 #include "mymoneystatement.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneyutils.h"
+#include "payeesmodel.h"
 #include "scheduledtransactionmatchfinder.h"
 #include "transactionmatcher.h"
 
@@ -950,10 +951,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         d->assignUniqueBankID(s1, statementTransactionUnderImport);
     }
 
-
-    QString payeename = statementTransactionUnderImport.m_strPayee;
-    if (!payeename.isEmpty()) {
-        qDebug() << QLatin1String("Start matching payee") << payeename;
+    const auto importedPayeeName = statementTransactionUnderImport.m_strPayee;
+    if (!importedPayeeName.isEmpty()) {
+        qDebug() << QLatin1String("Start matching payee") << importedPayeeName;
         QString payeeid;
         try {
             QList<MyMoneyPayee> pList = file->payeeList();
@@ -980,9 +980,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 case eMyMoney::Payee::MatchType::Key:
                     for (it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
                         QRegularExpression exp(*it_s, ignoreCase ? QRegularExpression::CaseInsensitiveOption : QRegularExpression::NoPatternOption);
-                        QRegularExpressionMatch match(exp.match(payeename));
+                        QRegularExpressionMatch match(exp.match(importedPayeeName));
                         if (match.hasMatch()) {
-                            qDebug() << "Found match with" << payeename << "on" << (*it_p).name() << "for" << match.capturedLength();
+                            qDebug() << "Found match with" << importedPayeeName << "on" << (*it_p).name() << "for" << match.capturedLength();
                             matchMap[match.capturedLength()] = (*it_p).id();
                         }
                     }
@@ -1013,21 +1013,31 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 throw MYMONEYEXCEPTION_CSTRING("payee not matched");
 
             s1.setPayeeId(payeeid);
+
+            // in case the payee name differs from the match and the memo has
+            // not been changed then keep the original payee name which may contain
+            // some details which are otherwise lost
+            const auto payee = file->payeesModel()->itemById(payeeid);
+            if ((s1.memo() == transactionUnderImport.memo()) && (payee.name().toLower() != importedPayeeName.toLower())) {
+                s1.setMemo(i18nc("Prepend name of payee (%1) to orignal memo (%2)", "Original payee: %1\n%2", importedPayeeName, s1.memo()));
+            }
         } catch (const MyMoneyException &) {
             MyMoneyPayee payee;
             int rc = KMessageBox::PrimaryAction;
 
             if (m_autoCreatePayee == false) {
                 // Ask the user if that is what he intended to do?
-                QString msg = i18n("Do you want to add \"%1\" as payee/receiver?\n\n", payeename);
-                msg += i18n("Selecting \"Yes\" will create the payee, \"No\" will skip "
-                            "creation of a payee record and remove the payee information "
-                            "from this transaction. Selecting \"Cancel\" aborts the import "
-                            "operation.\n\nIf you select \"No\" here and mark the \"Do not ask "
-                            "again\" checkbox, the payee information for all following transactions "
-                            "referencing \"%1\" will be removed.", payeename);
+                QString msg = i18n("Do you want to add \"%1\" as payee/receiver?\n\n", importedPayeeName);
+                msg += i18n(
+                    "Selecting \"Yes\" will create the payee, \"No\" will skip "
+                    "creation of a payee record and remove the payee information "
+                    "from this transaction. Selecting \"Cancel\" aborts the import "
+                    "operation.\n\nIf you select \"No\" here and mark the \"Do not ask "
+                    "again\" checkbox, the payee information for all following transactions "
+                    "referencing \"%1\" will be removed.",
+                    importedPayeeName);
 
-                QString askKey = QString("Statement-Import-Payee-") + payeename;
+                QString askKey = QString("Statement-Import-Payee-") + importedPayeeName;
                 if (!m_dontAskAgain.contains(askKey)) {
                     m_dontAskAgain += askKey;
                 }
@@ -1049,8 +1059,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 // all the other attributes of the payee, but since this
                 // is called in the context of an automatic procedure it
                 // might distract the user.
-                payee.setName(payeename);
-                payee.setMatchData(eMyMoney::Payee::MatchType::Key, true, QStringList() << QString("^%1$").arg(QRegularExpression::escape(payeename)));
+                payee.setName(importedPayeeName);
+                payee.setMatchData(eMyMoney::Payee::MatchType::Key, true, QStringList() << QString("^%1$").arg(QRegularExpression::escape(importedPayeeName)));
                 if (m_askPayeeCategory) {
                     // We use a QPointer because the dialog may get deleted
                     // during exec() if the parent of the dialog gets deleted.
@@ -1063,7 +1073,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                     QVBoxLayout *topcontents = new QVBoxLayout(mainWidget);
 
                     //add in caption? and account combo here
-                    QLabel *label1 = new QLabel(i18n("Please select a default category for payee '%1'", payeename));
+                    QLabel* label1 = new QLabel(i18n("Please select a default category for payee '%1'", importedPayeeName));
                     topcontents->addWidget(label1);
 
                     auto filterProxyModel = new AccountNamesFilterProxyModel(this);
