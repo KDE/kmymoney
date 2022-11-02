@@ -41,6 +41,7 @@
 #include "journaldelegate.h"
 #include "journalmodel.h"
 #include "kmymoneyaccountselector.h"
+#include "kmymoneysettings.h"
 #include "kmymoneyview.h"
 #include "kmymoneyviewbase.h"
 #include "ledgerviewsettings.h"
@@ -418,6 +419,24 @@ public:
         return iconIndex;
     }
 
+    void setFonts()
+    {
+        q->horizontalHeader()->setMinimumSectionSize(20);
+
+        QFont font = KMyMoneySettings::listHeaderFontEx();
+        QFontMetrics fm(font);
+        int height = fm.lineSpacing() + 6;
+        q->horizontalHeader()->setMinimumHeight(height);
+        q->horizontalHeader()->setMaximumHeight(height);
+        q->horizontalHeader()->setFont(font);
+
+        // setup cell font
+        font = KMyMoneySettings::listCellFontEx();
+        q->setFont(font);
+
+        journalDelegate->resetLineHeight();
+    }
+
     LedgerView* q;
     JournalDelegate* journalDelegate;
     DelegateProxy* delegateProxy;
@@ -448,7 +467,7 @@ LedgerView::LedgerView(QWidget* parent)
     verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     verticalHeader()->hide();
 
-    horizontalHeader()->setMinimumSectionSize(20);
+    d->setFonts();
 
     // since we don't have a vertical header, it does not make sense
     // to use the first column to select all items in the view
@@ -1075,6 +1094,8 @@ int LedgerView::sizeHintForColumn(int col) const
 {
     if (col == JournalModel::Column::Reconciliation) {
         QStyleOptionViewItem opt;
+        opt.font = font();
+        opt.fontMetrics = fontMetrics();
         const QModelIndex index = model()->index(0, col);
         const auto delegate = d->delegateProxy->delegate(index);
         if (delegate) {
@@ -1105,6 +1126,8 @@ int LedgerView::sizeHintForRow(int row) const
 
         if (journalDelegate && (journalDelegate->editorRow() != row)) {
             QStyleOptionViewItem opt;
+            opt.font = font();
+            opt.fontMetrics = fontMetrics();
             opt.state |= (row == currentIndex().row()) ? QStyle::State_Selected : QStyle::State_None;
             int hint = delegate->sizeHint(opt, index).height();
             if (showGrid())
@@ -1169,8 +1192,10 @@ void LedgerView::slotSettingsChanged()
 {
     updateGeometries();
     Q_EMIT settingsChanged();
-#if 0
 
+    d->setFonts();
+
+#if 0
     // KMyMoneySettings::showGrid()
     // KMyMoneySettings::sortNormalView()
     // KMyMoneySettings::ledgerLens()

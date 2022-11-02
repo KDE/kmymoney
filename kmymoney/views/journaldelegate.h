@@ -75,6 +75,13 @@ public:
         return 3;
     }
 
+    /**
+     * This will force the next call to sizeHint to re-calculate
+     * the size of a single line. Should be called when the font
+     * characteristics change.
+     */
+    void resetLineHeight();
+
 protected:
     bool eventFilter(QObject* o, QEvent* event) final override;
 

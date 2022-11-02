@@ -548,6 +548,11 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
     painter->restore();
 }
 
+void JournalDelegate::resetLineHeight()
+{
+    d->m_lineHeight = -1;
+}
+
 QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
     // get parameters only once per update to speed things up
