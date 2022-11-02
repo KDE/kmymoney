@@ -194,7 +194,7 @@ QDate ConvertDate::convertDate(const QString& txt)
             }
         } else {
             for (i = 1; i <= 12; ++i)
-                if (aMonth.compare(QLocale().standaloneMonthName(i, QLocale::ShortFormat), Qt::CaseInsensitive) == 0)
+                if (aMonth.compare(QLocale().standaloneMonthName(i, QLocale::ShortFormat).remove(QLatin1String(".")), Qt::CaseInsensitive) == 0)
                     break;
             if (i == 13) {
                 for (i = 1; i <= 12; ++i)
