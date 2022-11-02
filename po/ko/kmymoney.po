@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-25 00:47+0000\n"
+"POT-Creation-Date: 2022-11-02 00:49+0000\n"
 "PO-Revision-Date: 2022-07-13 15:41+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1917,7 +1917,7 @@ msgstr "기본 통화"
 #. i18n: ectx: property (text), widget (QLabel, textLabel10)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:88
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:492
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:508
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:81
 #: kmymoney/views/kmymoneyview.cpp:177
 #: kmymoney/widgets/ktransactionfilter.cpp:155
@@ -4090,7 +4090,7 @@ msgstr "일"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:265
 #: kmymoney/plugins/views/reports/core/listtable.cpp:633
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:501
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:517
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:96
 #, kde-format
 msgid "Month"
@@ -5853,7 +5853,7 @@ msgstr "자산 및 부채"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:64
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:139
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
 #: kmymoney/views/khomeview_p.h:1489
 #, kde-format
 msgid "Budget"
@@ -8868,13 +8868,13 @@ msgctxt "@title:column Column heading for description"
 msgid "Description"
 msgstr "설명"
 
-#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:653
+#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:654
 #, kde-format
 msgctxt "Missing attribute %1 in xml file"
 msgid "Missing attribute %1 in line %2"
 msgstr ""
 
-#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:656
+#: kmymoney/mymoney/xmlhelper/xmlstoragehelper.cpp:657
 #, kde-format
 msgctxt "Empty attribute %1 in xml file"
 msgid "Empty attribute %1 in line %2"
@@ -13443,7 +13443,7 @@ msgstr "QIF 프로필"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxCategories)
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:254
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:483
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:499
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:66
 #: kmymoney/views/kmymoneyview.cpp:175
 #, kde-format
@@ -14769,7 +14769,7 @@ msgstr "모두"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:172
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:423
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:106
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:153
 #, kde-format
 msgid "Top-Level"
 msgstr "최상위 수준"
@@ -14777,7 +14777,7 @@ msgstr "최상위 수준"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:177
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:426
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:111
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:158
 #, kde-format
 msgid "Groups"
 msgstr "그룹"
@@ -14785,7 +14785,7 @@ msgstr "그룹"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:182
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:429
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:116
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:163
 #, kde-format
 msgid "Totals"
 msgstr "총액"
@@ -14805,7 +14805,7 @@ msgstr "방법"
 #. i18n: ectx: attribute (title), widget (QWidget, detail)
 #. i18n: ectx: property (text), widget (QLabel, textLabel6)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:361
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:30
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:134
 #, kde-format
 msgid "Detail"
 msgstr "자세한 정보"
@@ -15205,7 +15205,7 @@ msgstr "숫자"
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:621
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:489
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:505
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:76
 #: kmymoney/views/kmymoneyview.cpp:176 kmymoney/views/newspliteditor.ui:110
 #: kmymoney/views/newtransactioneditor.ui:205
@@ -15227,7 +15227,7 @@ msgstr "분류 형식"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:635
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:504
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:520
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:101
 #, kde-format
 msgid "Week"
@@ -15502,43 +15502,43 @@ msgctxt "@title:column report header"
 msgid "Account"
 msgstr "계좌"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2162
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2169
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "실제"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2167
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2174
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "예산"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2172
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2179
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "차액"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2177
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2184
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "예측"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2182
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2189
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "이동 평균"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2187
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2194
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "이동 평균 가격"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2192
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2199
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
@@ -15726,7 +15726,7 @@ msgstr "보고서"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:356
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:367
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:597
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:613
 #: kmymoney/plugins/views/reports/reporttabrange.ui:79
 #, kde-format
 msgctxt "@item the columns will display monthly data"
@@ -15741,20 +15741,20 @@ msgstr "모두"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:438
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:44
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:71
 #, kde-format
 msgid "Income & Expenses"
 msgstr "수입과 지출"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboRows)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:441
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:49
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:76
 #, kde-format
 msgid "Assets & Liabilities"
 msgstr "자산과 부채"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:486
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:502
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:71
 #, kde-format
 msgid "Top Categories"
@@ -15762,7 +15762,7 @@ msgstr "상위 분류"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:495
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:511
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:86
 #: kmymoney/views/kmymoneyview.cpp:173
 #: kmymoney/widgets/kaccounttemplateselector.ui:87
@@ -15771,14 +15771,14 @@ msgid "Accounts"
 msgstr "계좌"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:498
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:514
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:91
 #, kde-format
 msgid "Top Accounts"
 msgstr "상위 계좌"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:585
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:601
 #: kmymoney/plugins/views/reports/reporttabrange.ui:69
 #, kde-format
 msgctxt "@item the columns will display daily data"
@@ -15786,7 +15786,7 @@ msgid "Daily"
 msgstr "일별"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:588
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:604
 #: kmymoney/plugins/views/reports/reporttabrange.ui:74
 #, kde-format
 msgctxt "@item the columns will display weekly data"
@@ -15794,7 +15794,7 @@ msgid "Weekly"
 msgstr "주별"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:600
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:616
 #: kmymoney/plugins/views/reports/reporttabrange.ui:84
 #, kde-format
 msgctxt "@item the columns will display bi-monthly data"
@@ -15802,7 +15802,7 @@ msgid "Bi-Monthly"
 msgstr "격월별"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:603
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:619
 #: kmymoney/plugins/views/reports/reporttabrange.ui:89
 #, kde-format
 msgctxt "@item the columns will display quarterly data"
@@ -15810,31 +15810,31 @@ msgid "Quarterly"
 msgstr "분기별"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:606
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:622
 #: kmymoney/plugins/views/reports/reporttabrange.ui:94
 #, kde-format
 msgctxt "@item the columns will display yearly data"
 msgid "Yearly"
 msgstr "연도별"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:621
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:633
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:637
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:649
 #, kde-format
 msgid "Only owned"
 msgstr "소유한 것만"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:622
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:634
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:638
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:650
 #, kde-format
 msgid "Only sold"
 msgstr "판매한 것만"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:631
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:647
 #, kde-format
 msgid "From period"
 msgstr "기간으로부터"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:632
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:648
 #, kde-format
 msgid "Owned and sold"
 msgstr "소유와 판매"
@@ -17017,61 +17017,75 @@ msgid ""
 "selected and organized.</p>"
 msgstr "<p>이 탭에서 행과 열을 선택하고 구성하는 방법을 설정합니다.</p>"
 
+#. i18n: ectx: property (text), widget (QLabel, m_movingAverageLabel)
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:30
+#, kde-format
+msgid "Average days"
+msgstr "평균 일"
+
+#. i18n: ectx: property (text), widget (QLabel, m_rowsLabel)
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:50
+#, kde-format
+msgid "Rows"
+msgstr "행"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_checkTotalRow)
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:60
+#, kde-format
+msgid "Show totals row"
+msgstr "총액 행 표시"
+
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboRows)
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboDetail)
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:40
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:97
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:67
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:144
 #, kde-format
 msgid ""
 "<p>Choose what kind of accounts to display as the rows of this report.</p>"
 msgstr "<p>이 보고서의 행으로 표시할 계좌 종류를 선택하십시오.</p>"
 
-#. i18n: ectx: property (text), widget (QLabel, m_rowsLabel)
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:57
-#, kde-format
-msgid "Rows"
-msgstr "행"
-
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTotalColumn)
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:70
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:87
 #, kde-format
 msgid "Show totals column"
 msgstr "총액 열 표시"
 
-#. i18n: ectx: property (text), widget (QLabel, m_movingAverageLabel)
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:77
-#, kde-format
-msgid "Average days"
-msgstr "평균 일"
-
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:101
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:148
 #, kde-format
 msgctxt "@item all accounts"
 msgid "All"
 msgstr "모두"
 
-#. i18n: ectx: property (text), widget (QCheckBox, m_checkTotalRow)
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:155
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_propagateRemainder)
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:174
 #, kde-format
-msgid "Show totals row"
-msgstr "총액 행 표시"
+msgid ""
+"Check this to propagate the difference of one period to the budget of the "
+"next period."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_propagateRemainder)
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:177
+#, kde-format
+msgid "Propagate difference of budget to next period"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkScheduled)
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:182
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:204
 #, kde-format
 msgid "Include scheduled transactions"
 msgstr "예정된 거래 포함"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTransfers)
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:189
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:211
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:400
 #, kde-format
 msgid "Include transfers"
 msgstr "이체 포함"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkUnused)
-#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:196
+#: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:218
 #, kde-format
 msgid "Include unused accounts/categories"
 msgstr "사용하지 않은 계좌/분류 포함"
