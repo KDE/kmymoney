@@ -556,7 +556,7 @@ void LedgerView::setModel(QAbstractItemModel* model)
 void LedgerView::reset()
 {
     QTableView::reset();
-    QMetaObject::invokeMethod(this, "reselectAfterReset", Qt::QueuedConnection);
+    QMetaObject::invokeMethod(this, &LedgerView::reselectAfterModelReset, Qt::QueuedConnection);
 }
 
 void LedgerView::reselectAfterModelReset()
