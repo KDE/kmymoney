@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-02 00:49+0000\n"
+"POT-Creation-Date: 2022-11-03 00:46+0000\n"
 "PO-Revision-Date: 2019-01-19 19:46+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -20428,35 +20428,35 @@ msgstr "開啟現有的 KMyMoney 資料檔"
 msgid "Open the Handbook and learn how to use KMyMoney"
 msgstr "學習如何使用 KMyMoney"
 
-#: kmymoney/views/ledgerview.cpp:200
+#: kmymoney/views/ledgerview.cpp:201
 #, fuzzy, kde-format
 #| msgid "Go to account"
 msgctxt "@action:inmenu open account"
 msgid "Go to account"
 msgstr "前往帳戶"
 
-#: kmymoney/views/ledgerview.cpp:202
+#: kmymoney/views/ledgerview.cpp:203
 #, fuzzy, kde-format
 #| msgid "Go to payee"
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
 msgstr "前往收款人"
 
-#: kmymoney/views/ledgerview.cpp:247
+#: kmymoney/views/ledgerview.cpp:248
 #, fuzzy, kde-format
 #| msgid "Go to '%1'"
 msgctxt "@action:inmenu open account"
 msgid "Go to '%1'"
 msgstr "前往 '%1'"
 
-#: kmymoney/views/ledgerview.cpp:257
+#: kmymoney/views/ledgerview.cpp:258
 #, fuzzy, kde-format
 #| msgid "Go to '%1'"
 msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "前往 '%1'"
 
-#: kmymoney/views/ledgerview.cpp:635
+#: kmymoney/views/ledgerview.cpp:654
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -20464,41 +20464,41 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:732
+#: kmymoney/views/ledgerview.cpp:751
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "交易內沒有指定類別。"
 
-#: kmymoney/views/ledgerview.cpp:739
+#: kmymoney/views/ledgerview.cpp:758
 #, fuzzy, kde-format
 #| msgid "The transaction has a missing assignment of <b>%1</b>."
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "交易內沒有指定<b>%1</b>。"
 
-#: kmymoney/views/ledgerview.cpp:748
+#: kmymoney/views/ledgerview.cpp:767
 #, fuzzy, kde-format
 #| msgid "This schedule will end at some time"
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "此交易會在某個時間結束"
 
-#: kmymoney/views/ledgerview.cpp:754
+#: kmymoney/views/ledgerview.cpp:773
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:759
+#: kmymoney/views/ledgerview.cpp:778
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:835
+#: kmymoney/views/ledgerview.cpp:854
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -20506,14 +20506,14 @@ msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "您確定要刪除選取的價格項目嗎？"
 
-#: kmymoney/views/ledgerview.cpp:836
+#: kmymoney/views/ledgerview.cpp:855
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "輸入排程交易"
 
-#: kmymoney/views/ledgerview.cpp:839
+#: kmymoney/views/ledgerview.cpp:858
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -20521,7 +20521,7 @@ msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "您確定要刪除選取的價格項目嗎？"
 
-#: kmymoney/views/ledgerview.cpp:840
+#: kmymoney/views/ledgerview.cpp:859
 #, fuzzy, kde-format
 #| msgctxt "Dialog caption for 'Enter or schedule' dialog"
 #| msgid "Enter or schedule?"
@@ -20529,7 +20529,7 @@ msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "要輸入帳簿還是放入排程？"
 
-#: kmymoney/views/ledgerview.cpp:860
+#: kmymoney/views/ledgerview.cpp:879
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use this to schedule the transaction for later entry into the ledger."
@@ -20539,7 +20539,7 @@ msgid ""
 "the ledger again."
 msgstr "用這個將交易排入排程，稍後輸入分類簿中。"
 
-#: kmymoney/views/ledgerview.cpp:862
+#: kmymoney/views/ledgerview.cpp:881
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20547,7 +20547,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:866
+#: kmymoney/views/ledgerview.cpp:885
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -20555,7 +20555,7 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "您確定要刪除這 %1 筆選取的交易嗎？"
 
-#: kmymoney/views/ledgerview.cpp:867
+#: kmymoney/views/ledgerview.cpp:886
 #, fuzzy, kde-format
 #| msgid "Attempt to match similar transactions"
 msgctxt "@title:window"

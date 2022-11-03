@@ -1,6 +1,5 @@
 # Translation for kmymoney.po to Euskara/Basque (eu).
-# Copyright (C) 2010-2014 Free Software Foundation, Inc.
-# Copyright (C) 2015-2022 This file is copyright:
+# Copyright (C) 2010-2022 This file is copyright:
 # This file is distributed under the same license as the kmymoney package.
 # KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
 #
@@ -14,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-02 00:49+0000\n"
-"PO-Revision-Date: 2022-10-29 14:59+0200\n"
+"POT-Creation-Date: 2022-11-03 00:46+0000\n"
+"PO-Revision-Date: 2022-11-02 05:58+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -17282,12 +17281,13 @@ msgid ""
 "Check this to propagate the difference of one period to the budget of the "
 "next period."
 msgstr ""
+"Markatu hori, aldi bateko diferentzia hurrengo aldiko aurrekonturazabaltzeko."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_propagateRemainder)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:177
 #, kde-format
 msgid "Propagate difference of budget to next period"
-msgstr ""
+msgstr "Aurrekontuaren diferentzia hurrengo aldira arte zabaltzea"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkScheduled)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:204
@@ -20150,31 +20150,31 @@ msgstr "Ireki lehendik dagoen datu-fitxategi bat"
 msgid "Open the Handbook and learn how to use KMyMoney"
 msgstr "Zabaldu esku-liburua eta Ikasi KMyMoney erabiltzen"
 
-#: kmymoney/views/ledgerview.cpp:200
+#: kmymoney/views/ledgerview.cpp:201
 #, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to account"
 msgstr "Joan kontura"
 
-#: kmymoney/views/ledgerview.cpp:202
+#: kmymoney/views/ledgerview.cpp:203
 #, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
 msgstr "Joan onuradunera"
 
-#: kmymoney/views/ledgerview.cpp:247
+#: kmymoney/views/ledgerview.cpp:248
 #, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to '%1'"
 msgstr "Joan hona: '%1'"
 
-#: kmymoney/views/ledgerview.cpp:257
+#: kmymoney/views/ledgerview.cpp:258
 #, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Joan hona: '%1'"
 
-#: kmymoney/views/ledgerview.cpp:635
+#: kmymoney/views/ledgerview.cpp:654
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -20185,32 +20185,32 @@ msgstr ""
 "onartzen bi transakzio paraleloan editatzea. <a href=\"jumpToEditor"
 "\">Oraingo editorera joan</a>"
 
-#: kmymoney/views/ledgerview.cpp:732
+#: kmymoney/views/ledgerview.cpp:751
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Kategoria bat esleitzea falta zaio transakzioari."
 
-#: kmymoney/views/ledgerview.cpp:739
+#: kmymoney/views/ledgerview.cpp:758
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "<b>%1</b> esleitzea falta zaio transakzioari."
 
-#: kmymoney/views/ledgerview.cpp:748
+#: kmymoney/views/ledgerview.cpp:767
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr ""
 "Programazio hau %1(e)tik atzeratuta dago. Egin klik ikonoan hura sartzeko."
 
-#: kmymoney/views/ledgerview.cpp:754
+#: kmymoney/views/ledgerview.cpp:773
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Transakzio hau inportatu da. Egin klik ikonoan onartzeko."
 
-#: kmymoney/views/ledgerview.cpp:759
+#: kmymoney/views/ledgerview.cpp:778
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -20218,31 +20218,31 @@ msgid ""
 msgstr ""
 "Transakzio hau parekatu da. Egin klik ikonoan onartzeko edo hura desparekatu."
 
-#: kmymoney/views/ledgerview.cpp:835
+#: kmymoney/views/ledgerview.cpp:854
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Ez sartu programatutako transakzio atzeratuan."
 
-#: kmymoney/views/ledgerview.cpp:836
+#: kmymoney/views/ledgerview.cpp:855
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Sartu programatutako transakzio atzeratuan."
 
-#: kmymoney/views/ledgerview.cpp:839
+#: kmymoney/views/ledgerview.cpp:858
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Sartu nahi duzu programatutako transakzio atzeratuan orain?"
 
-#: kmymoney/views/ledgerview.cpp:840
+#: kmymoney/views/ledgerview.cpp:859
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Sartu programazio atzeratuan"
 
-#: kmymoney/views/ledgerview.cpp:860
+#: kmymoney/views/ledgerview.cpp:879
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -20252,7 +20252,7 @@ msgstr ""
 "Kendu ezkutuko (parekatuta) transakzioa erakutsitakotik eta sartu berriro "
 "liburu nagusian."
 
-#: kmymoney/views/ledgerview.cpp:862
+#: kmymoney/views/ledgerview.cpp:881
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20262,13 +20262,13 @@ msgstr ""
 "Onartu parekatzea erakusten den moduan eta kendu ezkutuko (bat datozen) "
 "transakzioaren datuak."
 
-#: kmymoney/views/ledgerview.cpp:866
+#: kmymoney/views/ledgerview.cpp:885
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Onartu edo desparekatu nahi duzu parekatuta transakzioa orain?"
 
-#: kmymoney/views/ledgerview.cpp:867
+#: kmymoney/views/ledgerview.cpp:886
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"

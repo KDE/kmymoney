@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-02 00:49+0000\n"
+"POT-Creation-Date: 2022-11-03 00:46+0000\n"
 "PO-Revision-Date: 2022-10-11 11:38+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -20134,31 +20134,31 @@ msgstr "Avaa olemassa oleva tiedosto"
 msgid "Open the Handbook and learn how to use KMyMoney"
 msgstr "Opettele käyttämään KMyMoneytä"
 
-#: kmymoney/views/ledgerview.cpp:200
+#: kmymoney/views/ledgerview.cpp:201
 #, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to account"
 msgstr "Siirry tiliin"
 
-#: kmymoney/views/ledgerview.cpp:202
+#: kmymoney/views/ledgerview.cpp:203
 #, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
 msgstr "Siirry maksunsaajaan"
 
-#: kmymoney/views/ledgerview.cpp:247
+#: kmymoney/views/ledgerview.cpp:248
 #, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to '%1'"
 msgstr "Siirry: ”%1”"
 
-#: kmymoney/views/ledgerview.cpp:257
+#: kmymoney/views/ledgerview.cpp:258
 #, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Siirry: ”%1”"
 
-#: kmymoney/views/ledgerview.cpp:635
+#: kmymoney/views/ledgerview.cpp:654
 #, fuzzy, kde-format
 #| msgid ""
 #| "You are already editing a transaction in another view. KMyMoney does not "
@@ -20171,19 +20171,19 @@ msgstr ""
 "Tapahtumaa muokataan jo toisessa näkymässä. KMyMoney ei tue tapahtuman "
 "rinnakkaista muokkaamista."
 
-#: kmymoney/views/ledgerview.cpp:732
+#: kmymoney/views/ledgerview.cpp:751
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Tapahtumalle ei ole määritelty kategoriaa."
 
-#: kmymoney/views/ledgerview.cpp:739
+#: kmymoney/views/ledgerview.cpp:758
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Tapahtumalla on puuttuva määritys <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:748
+#: kmymoney/views/ledgerview.cpp:767
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip icon description"
 #| msgid "This schedule is overdue. Click on the icon to enter it."
@@ -20192,13 +20192,13 @@ msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr ""
 "Tämä ajoitettu tapahtuma on myöhässä. Napauta kuvaketta syöttääksesi se."
 
-#: kmymoney/views/ledgerview.cpp:754
+#: kmymoney/views/ledgerview.cpp:773
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Tämä tapahtuma on tuotu. Napauta kuvaketta hyväksyäksesi se."
 
-#: kmymoney/views/ledgerview.cpp:759
+#: kmymoney/views/ledgerview.cpp:778
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -20207,31 +20207,31 @@ msgstr ""
 "Tämä tapahtuma on sovitettu. Napauta kuvaketta hyväksyäksesi sen, tai "
 "poistaaksesi täsmäytyksen."
 
-#: kmymoney/views/ledgerview.cpp:835
+#: kmymoney/views/ledgerview.cpp:854
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Älä syötä myöhästynyttä ajoitettua tapahtumaa."
 
-#: kmymoney/views/ledgerview.cpp:836
+#: kmymoney/views/ledgerview.cpp:855
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Kirjaa myöhästynyt ajoitettu tapahtuma."
 
-#: kmymoney/views/ledgerview.cpp:839
+#: kmymoney/views/ledgerview.cpp:858
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Syötetäänkö myöhästynyt ajoitettu tapahtuma nyt?"
 
-#: kmymoney/views/ledgerview.cpp:840
+#: kmymoney/views/ledgerview.cpp:859
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Syötä myöhästynyt ajoitettu tapahtuma"
 
-#: kmymoney/views/ledgerview.cpp:860
+#: kmymoney/views/ledgerview.cpp:879
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -20241,7 +20241,7 @@ msgstr ""
 "Poista liitos näytettävästä piilotetusta (sovitetusta) tapahtumasta ja syötä "
 "se tapahtumiin uudelleen."
 
-#: kmymoney/views/ledgerview.cpp:862
+#: kmymoney/views/ledgerview.cpp:881
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20251,13 +20251,13 @@ msgstr ""
 "Hyväksy näytettävä sovitus ja poista tiedot piilotetusta (sovitetusta) "
 "tapahtumasta."
 
-#: kmymoney/views/ledgerview.cpp:866
+#: kmymoney/views/ledgerview.cpp:885
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Hyväksytäänkö vai poistetaanko sovitus sovitetusta tapahtumasta?"
 
-#: kmymoney/views/ledgerview.cpp:867
+#: kmymoney/views/ledgerview.cpp:886
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
