@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-03 00:46+0000\n"
-"PO-Revision-Date: 2022-10-28 14:11+0200\n"
+"PO-Revision-Date: 2022-11-02 09:01+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -5741,7 +5741,7 @@ msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
-"No s'ha pogut llegir la font de dades. Verifiqueu en les opcions de "
+"No s'ha pogut llegir la font de dades. Verifiqueu les opcions de "
 "configuració de KMyMoney que el connector necessari està activat."
 
 #: kmymoney/kmymoney.cpp:4527
@@ -8403,7 +8403,7 @@ msgstr "Si el compte té una configuració vinculada en línia"
 #, kde-format
 msgctxt "@info:tooltip for 'Tax' column (YES/NO value)"
 msgid "Whether account is included in tax reports"
-msgstr "Si este compte està inclòs als informes d'impostos"
+msgstr "Si este compte està inclòs en els informes d'impostos"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:455
 #, kde-format
@@ -17380,12 +17380,14 @@ msgid ""
 "Check this to propagate the difference of one period to the budget of the "
 "next period."
 msgstr ""
+"Activeu-la per a propagar la diferència d'un període al pressupost del "
+"període següent."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_propagateRemainder)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:177
 #, kde-format
 msgid "Propagate difference of budget to next period"
-msgstr ""
+msgstr "Propaga la diferència del pressupost al període següent"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkScheduled)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:204
@@ -24835,7 +24837,7 @@ msgid ""
 "after finishing this wizard, you can do so by checking this box. If not just "
 "click <b>Next</b>."
 msgstr ""
-"Si voleu revisar o canviar qualsevol preferència a les opcions de "
+"Si voleu revisar o canviar qualsevol preferència en les opcions de "
 "configuració de KMyMoney després de finalitzar l'assistent, podreu fer-ho "
 "activant esta casella. Si no, cliqueu <b>Següent</b>."
 
