@@ -67,6 +67,29 @@ using namespace Icons;
 #define VIEW_REPORTS        "reports"
 
 /**
+ * Creates a unique file name in a specific directory
+ * @param rootDir Directory used to search for a unique file name
+ * @param reportName Name of the report to create a file name
+ * @param extension Extension to add to the file name
+ * @returns the absolute file path or an empty string if no free name was found after more than 100 attempts
+ */
+static QString createSaveFileName(const QString& rootDir, const QString& reportName, const QString& extension)
+{
+    static QRegularExpression rx(QLatin1String("\\s+"));
+    QString name(reportName);
+    name.replace(rx, "-");
+    QString suffix;
+    QFileInfo fi;
+    int index = 0;
+    do {
+        fi.setFile(rootDir + QDir::separator() + name + suffix + extension);
+        suffix = QString(QLatin1String("-%1")).arg(++index);
+    } while (fi.exists() && index < 100);
+
+    return index < 100 ? fi.absoluteFilePath() : QString();
+}
+
+/**
   * KReportsView Implementation
   */
 
@@ -717,6 +740,8 @@ void KReportsView::slotListContextMenu(const QPoint & p)
                            this, SLOT(slotPrintFromList()));
 
     if (tocItems.count() == 1) {
+        contextmenu->addAction(i18nc("To export a report", "&Export to PDF file"), this, SLOT(slotExportFromList()));
+
         contextmenu->addAction(i18nc("Configure a report", "&Configure"),
                                this, SLOT(slotConfigureFromList()));
 
@@ -734,6 +759,8 @@ void KReportsView::slotListContextMenu(const QPoint & p)
                                        this, SLOT(slotDeleteFromList()));
             }
         }
+    } else {
+        contextmenu->addAction(i18nc("To export reports", "&Export to PDF files"), this, SLOT(slotExportFromList()));
     }
 
     contextmenu->popup(d->ui.m_tocTreeWidget->viewport()->mapToGlobal(p));
@@ -773,6 +800,37 @@ void KReportsView::slotPrintFromList()
             slotItemDoubleClicked(tocItem, 0);
             slotPrintView();
         }
+    }
+}
+
+void KReportsView::slotExportFromList()
+{
+    Q_D(KReportsView);
+
+    const auto items = d->ui.m_tocTreeWidget->selectedItems();
+
+    if (items.isEmpty()) {
+        return;
+    }
+
+    QString rootDir = QFileDialog::getExistingDirectory(this, i18n("Export into directory"), KRecentDirs::dir(":kmymoney-export"), QFileDialog::ShowDirsOnly);
+    if (rootDir.isEmpty())
+        return;
+
+    for (const auto item : qAsConst(items)) {
+        const auto tocItem = dynamic_cast<TocItem*>(item);
+        if (!tocItem || !tocItem->isReport())
+            continue;
+
+        slotItemDoubleClicked(tocItem, 0);
+        const auto tab = dynamic_cast<KReportTab*>(d->ui.m_reportTabWidget->currentWidget());
+        if (!tab)
+            continue;
+
+        const auto reportTocItem = dynamic_cast<TocItemReport*>(tocItem);
+        auto report = reportTocItem->getReport();
+        auto name = createSaveFileName(rootDir, report.name(), QLatin1String(".pdf"));
+        tab->saveAs(name, "application/pdf");
     }
 }
 

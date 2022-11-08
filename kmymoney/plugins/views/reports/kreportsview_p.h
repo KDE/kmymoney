@@ -508,7 +508,7 @@ public:
         setColumnsAlreadyAdjusted(false);
         ui.setupUi(q);
         ui.m_tocTreeWidget->sortByColumn(0, Qt::AscendingOrder);
-
+        ui.m_tocTreeWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
         ui.m_closeButton->setIcon(Icons::get(Icon::DialogClose));
         ui.m_filterContainer->hide();
         ui.m_searchWidget->installEventFilter(q);
