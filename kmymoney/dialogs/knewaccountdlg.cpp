@@ -590,8 +590,8 @@ public:
     {
         const auto idx = ui->m_parentAccounts->currentIndex();
         const auto fullName = idx.data(eMyMoney::Model::AccountFullHierarchyNameRole).toString();
-        ui->m_subAccountLabel->setText(i18nc("@label:chooser %1 account name, %2 parent account name", "<b>%1</b> is a sub account of <b>%2</b>")
-                                           .arg(ui->accountNameEdit->text(), fullName));
+        ui->m_subAccountLabel->setText(
+            i18nc("@label:chooser %1 account name, %2 parent account name", "<b>%1</b> is a sub account of <b>%2</b>", ui->accountNameEdit->text(), fullName));
     }
 
     static void createAccount(MyMoneyAccount& account, const MyMoneyAccount& parent, bool isCategory, const QString& title)
