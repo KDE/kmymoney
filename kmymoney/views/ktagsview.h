@@ -44,6 +44,7 @@ public:
 public Q_SLOTS:
     void slotSelectTag(const QString& tagId);
     void slotHelp();
+    void slotSettingsChanged() override;
 
     void updateActions(const SelectedObjects& selections) override;
 

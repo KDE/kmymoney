@@ -504,6 +504,14 @@ void KPayeesView::executeAction(eMenu::Action action, const SelectedObjects& sel
     }
 }
 
+void KPayeesView::slotSettingsChanged()
+{
+    Q_D(KPayeesView);
+    if (d->ui->m_register) {
+        d->ui->m_register->slotSettingsChanged();
+    }
+}
+
 void KPayeesView::slotHelp()
 {
     KHelpClient::invokeHelp("details.payees");

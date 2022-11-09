@@ -55,6 +55,7 @@ public:
 
 public Q_SLOTS:
     void slotHelp();
+    void slotSettingsChanged() override;
 
 Q_SIGNALS:
     void transactionSelected(const QString& accountId, const QString& transactionId);

@@ -613,6 +613,14 @@ void KTagsView::slotSelectTag(const QString& tagId)
 
 }
 
+void KTagsView::slotSettingsChanged()
+{
+    Q_D(KTagsView);
+    if (d->ui->m_register) {
+        d->ui->m_register->slotSettingsChanged();
+    }
+}
+
 void KTagsView::slotHelp()
 {
     KHelpClient::invokeHelp("details.tags.attributes");
