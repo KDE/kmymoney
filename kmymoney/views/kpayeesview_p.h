@@ -604,21 +604,35 @@ public:
                 // TODO: it would be cool to somehow shrink the list to make better use
                 //       of regular expressions at this point. For now, we leave this task
                 //       to the user himeself.
+
+                // the deletedMatchPattern contains entries of MatchType::Key. Let's
+                // check if the destination entry needs to be converted to this formatMoney
+                switch (matchType) {
+                case eMyMoney::Payee::MatchType::Disabled:
+                case eMyMoney::Payee::MatchType::Key:
+                    break;
+                case eMyMoney::Payee::MatchType::Name:
+                    payeeNames.clear();
+                    payeeNames << newPayee.name();
+                    break;
+                case eMyMoney::Payee::MatchType::NameExact:
+                    payeeNames.clear();
+                    payeeNames << QStringLiteral("^%1$").arg(newPayee.name());
+                    break;
+                }
+
                 QStringList::const_iterator it_n;
                 for (it_n = deletedMatchPattern.constBegin(); it_n != deletedMatchPattern.constEnd(); ++it_n) {
-                    if (matchType == eMyMoney::Payee::MatchType::Key) {
-                        // make sure we really need it and it is not caught by an existing regexp
-                        QStringList::const_iterator it_k;
-                        for (it_k = payeeNames.constBegin(); it_k != payeeNames.constEnd(); ++it_k) {
-                            const QRegularExpression exp(*it_k, ignorecase ? QRegularExpression::CaseInsensitiveOption : QRegularExpression::NoPatternOption);
-                            const auto payee(exp.match(*it_n));
-                            if (payee.hasMatch())
-                                break;
-                        }
-                        if (it_k == payeeNames.constEnd())
-                            payeeNames << *it_n;
-                    } else if (payeeNames.contains(*it_n) == 0)
-                        payeeNames << QRegularExpression::escape(*it_n);
+                    // make sure we really need it and it is not caught by an existing regexp
+                    QStringList::const_iterator it_k;
+                    for (it_k = payeeNames.constBegin(); it_k != payeeNames.constEnd(); ++it_k) {
+                        const QRegularExpression exp(*it_k, ignorecase ? QRegularExpression::CaseInsensitiveOption : QRegularExpression::NoPatternOption);
+                        const auto payee(exp.match(*it_n));
+                        if (payee.hasMatch())
+                            break;
+                    }
+                    if (it_k == payeeNames.constEnd())
+                        payeeNames << *it_n;
                 }
 
                 // and update the payee in the engine context
