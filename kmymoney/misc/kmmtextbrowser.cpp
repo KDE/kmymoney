@@ -20,32 +20,22 @@ KMMTextBrowser::KMMTextBrowser(QWidget* parent)
     : QTextBrowser(parent)
 {
 }
-
+/*
+ * This implementation can be simplified with the port to Qt 6.3 by using
+ * QTextDocument::setMetaInformation(QTextDocument::CssMedia, "print"),
+ * see https://doc.qt.io/qt-6/qtextdocument.html#MetaInformation-enum
+ */
 void KMMTextBrowser::print(QPagedPaintDevice* printer)
 {
-    // TODO: QTBUG: https://bugreports.qt.io/browse/QTBUG-98408
-    auto printCss = QString(m_css).replace("@media screen", "@media _screen").replace("@media print", "@media screen");
-
     QTextDocument documentCopy;
-    documentCopy.setDefaultStyleSheet(printCss);
+    documentCopy.setDefaultStyleSheet("");
     documentCopy.setHtml(m_html);
-    // end QTBUG
-
     documentCopy.print(printer);
 }
 
-// https://invent.kde.org/office/kmymoney/-/merge_requests/118?commit_id=2e5d13137dbe391a4cb3ee1b57890c2973633c62#note_346468
 void KMMTextBrowser::setHtml(const QString& text)
 {
     m_html = text;
-
-    QRegularExpression re("<style.*?>(.*)<\\/style>", QRegularExpression::DotMatchesEverythingOption);
-    QRegularExpressionMatch match = re.match(text);
-
-    if (match.hasMatch()) {
-        m_css = match.captured(1);
-        m_html = m_html.remove(m_html.indexOf(match.captured(1)), match.captured(1).length());
-    }
-
+    m_html.replace("@media screen", "@media _screen").replace("@media print", "@media screen");
     QTextBrowser::setHtml(text);
 }
