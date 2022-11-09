@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-03 00:46+0000\n"
+"POT-Creation-Date: 2022-11-09 00:47+0000\n"
 "PO-Revision-Date: 2022-11-02 19:38+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -2296,7 +2296,7 @@ msgstr ""
 "La opción se ha desactivado porque hay otra cuenta marcada para ser una "
 "cuenta de saldo de apertura para esta moneda"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:593
+#: kmymoney/dialogs/knewaccountdlg.cpp:594
 #, kde-format
 msgctxt "@label:chooser %1 account name, %2 parent account name"
 msgid "<b>%1</b> is a sub account of <b>%2</b>"

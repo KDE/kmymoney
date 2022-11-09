@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-03 00:46+0000\n"
+"POT-Creation-Date: 2022-11-09 00:47+0000\n"
 "PO-Revision-Date: 2020-03-07 08:15+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -2295,7 +2295,7 @@ msgstr ""
 "A opción desactivouse porque hai outra conta marcada para ser unha conta de "
 "salde de apertura para esta divisa."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:593
+#: kmymoney/dialogs/knewaccountdlg.cpp:594
 #, fuzzy, kde-format
 #| msgid "Is a sub account of %1"
 msgctxt "@label:chooser %1 account name, %2 parent account name"

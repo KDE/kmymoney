@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-03 00:46+0000\n"
+"POT-Creation-Date: 2022-11-09 00:47+0000\n"
 "PO-Revision-Date: 2022-11-02 19:49+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -2312,7 +2312,7 @@ msgstr ""
 "Вимкнено, оскільки для цієї валюти визначено інший рахунок як рахунок "
 "початкового балансу"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:593
+#: kmymoney/dialogs/knewaccountdlg.cpp:594
 #, kde-format
 msgctxt "@label:chooser %1 account name, %2 parent account name"
 msgid "<b>%1</b> is a sub account of <b>%2</b>"
