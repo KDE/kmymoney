@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:47+0000\n"
+"POT-Creation-Date: 2022-11-10 00:47+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -6024,7 +6024,7 @@ msgstr "Hiba a(z) „%1” fájl betöltése során."
 msgid "File access error"
 msgstr "Fájlhozzáférési hiba"
 
-#: kmymoney/kmymoneyutils.cpp:562 kmymoney/views/kpayeesview.cpp:516
+#: kmymoney/kmymoneyutils.cpp:562 kmymoney/views/kpayeesview.cpp:524
 #, kde-format
 msgid "New Payee"
 msgstr "Kedvezményezett létrehozása"
@@ -6040,7 +6040,7 @@ msgstr "Hozzá akarja adni <b>%1</b>-t, mint fizető/fogadó?"
 msgid "Unable to add payee"
 msgstr "Nem lehet hozzáadni a kedvezményezettet"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:625
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "Új címke"
@@ -14923,14 +14923,14 @@ msgid "Include subaccounts"
 msgstr "Alszámlák hozzávétele"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:141
-#: kmymoney/views/kpayeesview_p.h:757
+#: kmymoney/views/kpayeesview_p.h:771
 #, fuzzy, kde-format
 #| msgid "Do you want to save the changes for <b>%1</b>?"
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "Menti a <b>%1</b> változtatásait?"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:142
-#: kmymoney/views/kpayeesview_p.h:758 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:772 kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Save changes"
 msgstr "Változtatások mentése"
@@ -19845,27 +19845,27 @@ msgstr "Duplikált megnyitás"
 msgid "Unable to modify payee"
 msgstr "Nem lehet módosítani a kedvezményezettet"
 
-#: kmymoney/views/kpayeesview.cpp:539
+#: kmymoney/views/kpayeesview.cpp:547
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>Valóban el akarja távolítani a kedvezményezettet: <b>%1</b>?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:541
+#: kmymoney/views/kpayeesview.cpp:549
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Valóban törölni akarja az összes kiválasztott kedvezményezettet?"
 
-#: kmymoney/views/kpayeesview.cpp:543
+#: kmymoney/views/kpayeesview.cpp:551
 #, kde-format
 msgid "Remove Payee"
 msgstr "Kedvezményezett eltávolítása"
 
-#: kmymoney/views/kpayeesview.cpp:557
+#: kmymoney/views/kpayeesview.cpp:565
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Valóban egyesíteni akarja az összes kiválasztott kedvezményezettet?"
 
-#: kmymoney/views/kpayeesview.cpp:558 kmymoney/views/kpayeesview_p.h:563
+#: kmymoney/views/kpayeesview.cpp:566 kmymoney/views/kpayeesview_p.h:563
 #, kde-format
 msgid "Merge Payees"
 msgstr "Kedvezményezettek egyesítése"
@@ -20143,7 +20143,7 @@ msgstr ""
 msgid "Nothing to merge."
 msgstr ""
 
-#: kmymoney/views/kpayeesview_p.h:632
+#: kmymoney/views/kpayeesview_p.h:646
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "Nem lehet eltávolítani a kedvezményezett(ek)et"
@@ -20354,12 +20354,12 @@ msgstr "Címke kettőzése"
 msgid "Unable to modify tag"
 msgstr "Nem lehet módosítani a címkét"
 
-#: kmymoney/views/ktagsview.cpp:793
+#: kmymoney/views/ktagsview.cpp:801
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr ""
 
-#: kmymoney/views/ktagsview.cpp:805
+#: kmymoney/views/ktagsview.cpp:813
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Nem lehet eltávolítani a címkéket"

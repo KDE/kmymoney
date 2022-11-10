@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:47+0000\n"
+"POT-Creation-Date: 2022-11-10 00:47+0000\n"
 "PO-Revision-Date: 2022-09-18 12:11+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -5997,7 +5997,7 @@ msgstr "Error while loading file '%1'."
 msgid "File access error"
 msgstr "File access error"
 
-#: kmymoney/kmymoneyutils.cpp:562 kmymoney/views/kpayeesview.cpp:516
+#: kmymoney/kmymoneyutils.cpp:562 kmymoney/views/kpayeesview.cpp:524
 #, kde-format
 msgid "New Payee"
 msgstr "New Payee"
@@ -6012,7 +6012,7 @@ msgstr "<qt>Do you want to add <b>%1</b> as payer/receiver?</qt>"
 msgid "Unable to add payee"
 msgstr "Unable to add payee"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:625
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "New Tag"
@@ -14675,13 +14675,13 @@ msgid "Include subaccounts"
 msgstr "Include subaccounts"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:141
-#: kmymoney/views/kpayeesview_p.h:757
+#: kmymoney/views/kpayeesview_p.h:771
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:142
-#: kmymoney/views/kpayeesview_p.h:758 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:772 kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Save changes"
 msgstr "Save changes"
@@ -19513,27 +19513,27 @@ msgstr "Duplicate open"
 msgid "Unable to modify payee"
 msgstr "Unable to modify payee"
 
-#: kmymoney/views/kpayeesview.cpp:539
+#: kmymoney/views/kpayeesview.cpp:547
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:541
+#: kmymoney/views/kpayeesview.cpp:549
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Do you really want to remove all selected payees?"
 
-#: kmymoney/views/kpayeesview.cpp:543
+#: kmymoney/views/kpayeesview.cpp:551
 #, kde-format
 msgid "Remove Payee"
 msgstr "Remove Payee"
 
-#: kmymoney/views/kpayeesview.cpp:557
+#: kmymoney/views/kpayeesview.cpp:565
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Do you really want to merge the selected payees?"
 
-#: kmymoney/views/kpayeesview.cpp:558 kmymoney/views/kpayeesview_p.h:563
+#: kmymoney/views/kpayeesview.cpp:566 kmymoney/views/kpayeesview_p.h:563
 #, kde-format
 msgid "Merge Payees"
 msgstr "Merge Payees"
@@ -19795,7 +19795,7 @@ msgstr "Unable to reassign payee of transaction/split"
 msgid "Nothing to merge."
 msgstr "Nothing to merge."
 
-#: kmymoney/views/kpayeesview_p.h:632
+#: kmymoney/views/kpayeesview_p.h:646
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "Unable to remove payee(s)"
@@ -20004,12 +20004,12 @@ msgstr "Duplicate tag"
 msgid "Unable to modify tag"
 msgstr "Unable to modify tag"
 
-#: kmymoney/views/ktagsview.cpp:793
+#: kmymoney/views/ktagsview.cpp:801
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Unable to reassign tag of transaction/split"
 
-#: kmymoney/views/ktagsview.cpp:805
+#: kmymoney/views/ktagsview.cpp:813
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Unable to remove tag(s)"

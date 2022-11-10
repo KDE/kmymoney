@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:47+0000\n"
+"POT-Creation-Date: 2022-11-10 00:47+0000\n"
 "PO-Revision-Date: 2022-11-02 21:41+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -6110,7 +6110,7 @@ msgstr "Erreur lors du chargement du fichier « %1 »."
 msgid "File access error"
 msgstr "Erreur d'accès au fichier"
 
-#: kmymoney/kmymoneyutils.cpp:562 kmymoney/views/kpayeesview.cpp:516
+#: kmymoney/kmymoneyutils.cpp:562 kmymoney/views/kpayeesview.cpp:524
 #, kde-format
 msgid "New Payee"
 msgstr "Nouveau bénéficiaire"
@@ -6125,7 +6125,7 @@ msgstr "<qt>Voulez-vous ajouter <b>%1</b> comme payeur ou bénéficiaire ?</qt>
 msgid "Unable to add payee"
 msgstr "Impossible d'ajouter le bénéficiaire"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:625
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "Nouvelle étiquette"
@@ -14902,13 +14902,13 @@ msgid "Include subaccounts"
 msgstr "Inclure les sous-comptes"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:141
-#: kmymoney/views/kpayeesview_p.h:757
+#: kmymoney/views/kpayeesview_p.h:771
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>Voulez-vous enregistrer les modifications pour <b>%1</b> ?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:142
-#: kmymoney/views/kpayeesview_p.h:758 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:772 kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
@@ -19809,27 +19809,27 @@ msgstr "Nom du bénéficiaire en double"
 msgid "Unable to modify payee"
 msgstr "Impossible de modifier le bénéficiaire"
 
-#: kmymoney/views/kpayeesview.cpp:539
+#: kmymoney/views/kpayeesview.cpp:547
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>Voulez-vous vraiment supprimer le bénéficiaire <b>%1</b> ? </p>"
 
-#: kmymoney/views/kpayeesview.cpp:541
+#: kmymoney/views/kpayeesview.cpp:549
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Voulez-vous vraiment supprimer tous les bénéficiaires sélectionnés ?"
 
-#: kmymoney/views/kpayeesview.cpp:543
+#: kmymoney/views/kpayeesview.cpp:551
 #, kde-format
 msgid "Remove Payee"
 msgstr "Supprimer le bénéficiaire"
 
-#: kmymoney/views/kpayeesview.cpp:557
+#: kmymoney/views/kpayeesview.cpp:565
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Voulez-vous vraiment fusionner les bénéficiaires sélectionnés ?"
 
-#: kmymoney/views/kpayeesview.cpp:558 kmymoney/views/kpayeesview_p.h:563
+#: kmymoney/views/kpayeesview.cpp:566 kmymoney/views/kpayeesview_p.h:563
 #, kde-format
 msgid "Merge Payees"
 msgstr "Fusionner les bénéficiaires"
@@ -20097,7 +20097,7 @@ msgstr ""
 msgid "Nothing to merge."
 msgstr "Rien à fusionner."
 
-#: kmymoney/views/kpayeesview_p.h:632
+#: kmymoney/views/kpayeesview_p.h:646
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "Impossible de supprimer le(s) bénéficiaire(s)"
@@ -20302,13 +20302,13 @@ msgstr "Nom d'étiquette en doublon"
 msgid "Unable to modify tag"
 msgstr "Impossible de modifier l'étiquette"
 
-#: kmymoney/views/ktagsview.cpp:793
+#: kmymoney/views/ktagsview.cpp:801
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr ""
 "Impossible de réassigner l'étiquette pour l'opération ou la répartition"
 
-#: kmymoney/views/ktagsview.cpp:805
+#: kmymoney/views/ktagsview.cpp:813
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Impossible de supprimer les étiquettes"

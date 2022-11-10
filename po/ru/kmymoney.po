@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:47+0000\n"
+"POT-Creation-Date: 2022-11-10 00:47+0000\n"
 "PO-Revision-Date: 2022-08-10 09:37+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -6042,7 +6042,7 @@ msgstr "Ошибка загрузки файла «%1»."
 msgid "File access error"
 msgstr "Ошибка доступа к файлу"
 
-#: kmymoney/kmymoneyutils.cpp:562 kmymoney/views/kpayeesview.cpp:516
+#: kmymoney/kmymoneyutils.cpp:562 kmymoney/views/kpayeesview.cpp:524
 #, kde-format
 msgid "New Payee"
 msgstr "Новый контрагент"
@@ -6057,7 +6057,7 @@ msgstr "<qt>Добавить <b>%1</b> в качестве контрагент�
 msgid "Unable to add payee"
 msgstr "Невозможно добавить контрагента"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:625
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "Новая метка"
@@ -14804,13 +14804,13 @@ msgid "Include subaccounts"
 msgstr "Учитывать субсчета"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:141
-#: kmymoney/views/kpayeesview_p.h:757
+#: kmymoney/views/kpayeesview_p.h:771
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>Сохранить изменения <b>%1</b>?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:142
-#: kmymoney/views/kpayeesview_p.h:758 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:772 kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Save changes"
 msgstr "Сохранить изменения"
@@ -19674,27 +19674,27 @@ msgstr "Открыт дубликат"
 msgid "Unable to modify payee"
 msgstr "Невозможно изменить данные контрагента"
 
-#: kmymoney/views/kpayeesview.cpp:539
+#: kmymoney/views/kpayeesview.cpp:547
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>Действительно удалить контрагента <b>%1</b>?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:541
+#: kmymoney/views/kpayeesview.cpp:549
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Действительно удалить всех выбранных контрагентов?"
 
-#: kmymoney/views/kpayeesview.cpp:543
+#: kmymoney/views/kpayeesview.cpp:551
 #, kde-format
 msgid "Remove Payee"
 msgstr "Удаление контрагента"
 
-#: kmymoney/views/kpayeesview.cpp:557
+#: kmymoney/views/kpayeesview.cpp:565
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Действительно объединить выбранных контрагентов?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:558 kmymoney/views/kpayeesview_p.h:563
+#: kmymoney/views/kpayeesview.cpp:566 kmymoney/views/kpayeesview_p.h:563
 #, kde-format
 msgid "Merge Payees"
 msgstr "Объединение контрагентов"
@@ -19958,7 +19958,7 @@ msgstr "Невозможно перераспределить операцию/�
 msgid "Nothing to merge."
 msgstr "Элементы для объединения отсутствуют."
 
-#: kmymoney/views/kpayeesview_p.h:632
+#: kmymoney/views/kpayeesview_p.h:646
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "Невозможно удалить контрагента(ов)"
@@ -20166,12 +20166,12 @@ msgstr "Дублировать метку"
 msgid "Unable to modify tag"
 msgstr "Невозможно изменить метку"
 
-#: kmymoney/views/ktagsview.cpp:793
+#: kmymoney/views/ktagsview.cpp:801
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Невозможно переназначить метку операции/разбивки"
 
-#: kmymoney/views/ktagsview.cpp:805
+#: kmymoney/views/ktagsview.cpp:813
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Невозможно удалить метку(и)"

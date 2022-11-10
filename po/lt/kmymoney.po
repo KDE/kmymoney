@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:47+0000\n"
+"POT-Creation-Date: 2022-11-10 00:47+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -5827,7 +5827,7 @@ msgstr ""
 msgid "File access error"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:562 kmymoney/views/kpayeesview.cpp:516
+#: kmymoney/kmymoneyutils.cpp:562 kmymoney/views/kpayeesview.cpp:524
 #, kde-format
 msgid "New Payee"
 msgstr "Naujas korespondentas"
@@ -5842,7 +5842,7 @@ msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
 msgid "Unable to add payee"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:625
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "Nauja žyma"
@@ -14613,13 +14613,13 @@ msgid "Include subaccounts"
 msgstr "Yra šalutinė sąskaita"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:141
-#: kmymoney/views/kpayeesview_p.h:757
+#: kmymoney/views/kpayeesview_p.h:771
 #, fuzzy, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:142
-#: kmymoney/views/kpayeesview_p.h:758 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:772 kmymoney/views/ktagsview.cpp:289
 #, fuzzy, kde-format
 msgid "Save changes"
 msgstr "Išsaugoti pakeitimus"
@@ -19423,27 +19423,27 @@ msgstr "Dublikuoti"
 msgid "Unable to modify payee"
 msgstr ""
 
-#: kmymoney/views/kpayeesview.cpp:539
+#: kmymoney/views/kpayeesview.cpp:547
 #, fuzzy, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
 
-#: kmymoney/views/kpayeesview.cpp:541
+#: kmymoney/views/kpayeesview.cpp:549
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr ""
 
-#: kmymoney/views/kpayeesview.cpp:543
+#: kmymoney/views/kpayeesview.cpp:551
 #, kde-format
 msgid "Remove Payee"
 msgstr "Šalinti korespondentą"
 
-#: kmymoney/views/kpayeesview.cpp:557
+#: kmymoney/views/kpayeesview.cpp:565
 #, fuzzy, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
 
-#: kmymoney/views/kpayeesview.cpp:558 kmymoney/views/kpayeesview_p.h:563
+#: kmymoney/views/kpayeesview.cpp:566 kmymoney/views/kpayeesview_p.h:563
 #, fuzzy, kde-format
 msgid "Merge Payees"
 msgstr "Sulieti korespondentus"
@@ -19707,7 +19707,7 @@ msgstr "Nepavyksta pašalinti operacijos"
 msgid "Nothing to merge."
 msgstr "Nėra ko apjungti."
 
-#: kmymoney/views/kpayeesview_p.h:632
+#: kmymoney/views/kpayeesview_p.h:646
 #, fuzzy, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "Nepavyksta pašalinti operacijos"
@@ -19909,12 +19909,12 @@ msgstr "Dublikuoti"
 msgid "Unable to modify tag"
 msgstr "Nepavyksta pakeisti tvarkaraščio: "
 
-#: kmymoney/views/ktagsview.cpp:793
+#: kmymoney/views/ktagsview.cpp:801
 #, fuzzy, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Nepavyksta pašalinti operacijos"
 
-#: kmymoney/views/ktagsview.cpp:805
+#: kmymoney/views/ktagsview.cpp:813
 #, fuzzy, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Nepavyksta pašalinti operacijos"

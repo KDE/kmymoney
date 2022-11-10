@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:47+0000\n"
+"POT-Creation-Date: 2022-11-10 00:47+0000\n"
 "PO-Revision-Date: 2022-03-11 20:26+0100\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
@@ -6069,7 +6069,7 @@ msgstr "Fehler beim Laden von „%1“."
 msgid "File access error"
 msgstr "Dateizugriffsfehler"
 
-#: kmymoney/kmymoneyutils.cpp:562 kmymoney/views/kpayeesview.cpp:516
+#: kmymoney/kmymoneyutils.cpp:562 kmymoney/views/kpayeesview.cpp:524
 #, kde-format
 msgid "New Payee"
 msgstr "Neuer Zahlungsempfänger"
@@ -6084,7 +6084,7 @@ msgstr "<qt>Möchten Sie <b>%1</b> als Zahlungsempfänger hinzufügen?</qt>"
 msgid "Unable to add payee"
 msgstr "Zahlungsempfänger kann nicht hinzugefügt werden"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:625
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "Neues Stichwort"
@@ -14849,13 +14849,13 @@ msgid "Include subaccounts"
 msgstr "Unterkonten einschließen"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:141
-#: kmymoney/views/kpayeesview_p.h:757
+#: kmymoney/views/kpayeesview_p.h:771
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>Möchten Sie die Änderungen für <b>%1</b> wirklich speichern?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:142
-#: kmymoney/views/kpayeesview_p.h:758 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:772 kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Save changes"
 msgstr "Änderungen speichern"
@@ -19806,28 +19806,28 @@ msgstr "Duplikat geöffnet"
 msgid "Unable to modify payee"
 msgstr "Zahlungsempfänger kann nicht geändert werden"
 
-#: kmymoney/views/kpayeesview.cpp:539
+#: kmymoney/views/kpayeesview.cpp:547
 #, kde-format
 msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
 msgstr "<p>Möchten Sie den Zahlungsempfänger <b>%1</b> wirklich entfernen?</p>"
 
-#: kmymoney/views/kpayeesview.cpp:541
+#: kmymoney/views/kpayeesview.cpp:549
 #, kde-format
 msgid "Do you really want to remove all selected payees?"
 msgstr "Möchten alle ausgewählten Zahlungsempfänger wirklich entfernen?"
 
-#: kmymoney/views/kpayeesview.cpp:543
+#: kmymoney/views/kpayeesview.cpp:551
 #, kde-format
 msgid "Remove Payee"
 msgstr "Zahlungsempfänger entfernen"
 
-#: kmymoney/views/kpayeesview.cpp:557
+#: kmymoney/views/kpayeesview.cpp:565
 #, kde-format
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr ""
 "<p>Möchten Sie die ausgewählten Zahlungsempfänger wirklich zusammenführen?"
 
-#: kmymoney/views/kpayeesview.cpp:558 kmymoney/views/kpayeesview_p.h:563
+#: kmymoney/views/kpayeesview.cpp:566 kmymoney/views/kpayeesview_p.h:563
 #, kde-format
 msgid "Merge Payees"
 msgstr "Empfänger zusammenführen"
@@ -20096,7 +20096,7 @@ msgstr "Kann Zahlungsempfänger der (Teil-)Buchung nicht neu zuweisen"
 msgid "Nothing to merge."
 msgstr "Nichts zum Zusammenführen."
 
-#: kmymoney/views/kpayeesview_p.h:632
+#: kmymoney/views/kpayeesview_p.h:646
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "Zahlungsempfänger kann nicht entfernt werden"
@@ -20309,12 +20309,12 @@ msgstr "Doppeltes Stichwort"
 msgid "Unable to modify tag"
 msgstr "Stichwort kann nicht geändert werden"
 
-#: kmymoney/views/ktagsview.cpp:793
+#: kmymoney/views/ktagsview.cpp:801
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Stichwort der (Teil-)Buchung kann nicht neu zugewiesen werden"
 
-#: kmymoney/views/ktagsview.cpp:805
+#: kmymoney/views/ktagsview.cpp:813
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Stichwörter können nicht entfernt werden"
