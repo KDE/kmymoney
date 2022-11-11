@@ -14480,12 +14480,12 @@ msgstr ""
 #: kmymoney/plugins/sql/sqlstorage.cpp:231
 #, kde-format
 msgid "Cannot save to current database."
-msgstr "No s'ha pogut guardar a la base de dades actual."
+msgstr "No s'ha pogut guardar en la base de dades actual."
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:236
 #, kde-format
 msgid "Cannot save to current database: %1"
-msgstr "No s'ha pogut guardar a la base de dades actual: %1"
+msgstr "No s'ha pogut guardar en la base de dades actual: %1"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:259
 #, kde-format
