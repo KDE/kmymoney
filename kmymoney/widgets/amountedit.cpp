@@ -426,7 +426,7 @@ void AmountEdit::resizeEvent(QResizeEvent* event)
 void AmountEdit::focusInEvent(QFocusEvent* event)
 {
     QLineEdit::focusInEvent(event);
-    if (event->reason() == Qt::MouseFocusReason) {
+    if ((event->reason() == Qt::MouseFocusReason) || (event->reason() == Qt::ActiveWindowFocusReason)) {
         if (!hasSelectedText()) {
             // we need to wait until all processing is done before
             // we can successfully call selectAll. Hence the
