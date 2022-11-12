@@ -692,10 +692,26 @@ public:
 
         const auto file = MyMoneyFile::instance();
         QModelIndex idx;
-        const auto list = ui->m_payees->model()->match(ui->m_payees->model()->index(0, 0), eMyMoney::Model::IdRole,
-                          payeeId,
-                          -1,                         // all splits
-                          Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+        QModelIndexList list;
+        do {
+            list = ui->m_payees->model()->match(ui->m_payees->model()->index(0, 0),
+                                                eMyMoney::Model::IdRole,
+                                                payeeId,
+                                                -1, // all splits
+                                                Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+
+            if (list.isEmpty()) {
+                if (!ui->m_searchWidget->text().isEmpty()) {
+                    ui->m_searchWidget->clear();
+                    continue;
+                }
+                if (m_renameProxyModel->referenceFilter() != ItemRenameProxyModel::eAllItem) {
+                    m_renameProxyModel->setReferenceFilter(ItemRenameProxyModel::eAllItem);
+                    continue;
+                }
+            }
+            break;
+        } while (true);
 
         if (list.isEmpty()) {
             qDebug() << "selectPayeeAndTransaction: Payee not found" << payeeId;
