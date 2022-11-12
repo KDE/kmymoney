@@ -70,6 +70,11 @@ void ItemRenameProxyModel::setReferenceFilter(ItemRenameProxyModel::ReferenceFil
     }
 }
 
+ItemRenameProxyModel::ReferenceFilterType ItemRenameProxyModel::referenceFilter() const
+{
+    return m_referenceFilter;
+}
+
 bool ItemRenameProxyModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
 {
     if (m_referenceFilter != eAllItem) {

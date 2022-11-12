@@ -67,6 +67,8 @@ public:
     void setReferenceFilter(ReferenceFilterType filterType);
     void setReferenceFilter(const QVariant& filterType);
 
+    ReferenceFilterType referenceFilter() const;
+
 protected:
     virtual bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 
