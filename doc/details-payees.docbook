@@ -132,10 +132,10 @@
 
 <para>
   For example, let's say your monthly mortgage payment comes in from your bank
-  like this <quote>SUNTRUST BANK MAPLE VALLEY, GA 111506</quote> one month and
-  then <quote>SUNTRUST BANK MAPLE VALLEY, GA 121606</quote> the next month.  You
+  like this <quote>SUN TRUST BANK MAPLE VALLEY, GA 111506</quote> one month and
+  then <quote>SUN TRUST BANK MAPLE VALLEY, GA 121606</quote> the next month.  You
   would really like both of those transactions to be assigned to your payee
-  <quote>SunTrust</quote>.  The transaction matching feature is for you!
+  <quote>Sun Trust</quote>.  The transaction matching feature is for you!
 </para>
 
 <para>
@@ -213,15 +213,15 @@
   transactions using the QIF import, or using a plugin such as OFX or AqBanking,
   If the Match Key for one of your payees is found anywhere in the payee of the
   imported transaction, the corresponding payee from your list will be assigned
-  to that transaction.  Thus, a Match Key of <quote>SunTrust</quote> will match
-  <quote>SUNTRUST BANK MAPLE VALLEY,GA</quote> or even
-  <quote>MORGENSUNTRUST&amp;LOAN</quote>.  So choose your Match Keys carefully.
-  <note>
+  to that transaction.  Thus, a Match Key of <quote>Sun Trust</quote> will match
+  <quote>SUN TRUST BANK MAPLE VALLEY,GA</quote> or even
+  <quote>MORGEN SUN TRUST&amp;LOAN</quote>.  So choose your Match Keys carefully.
+</para>
+<para><note>
     <para> If a transaction payee matches more than one Match Key, the behavior
     is undefined.  &kmymoney; will arbitrarily pick one of the matching
     payees.</para>
-  </note>
-</para>
+</note></para>
 </sect3>
 </sect2>
 </sect1>
