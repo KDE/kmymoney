@@ -114,7 +114,7 @@ private:
     QByteArray m_encoding;
 
 public:
-    KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KReportsView *eventHandler);
+    KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KReportsView* eventHandler, KReportsView::OpenOption openOption);
     ~KReportTab();
     const MyMoneyReport& report() const {
         return m_report;
@@ -195,7 +195,7 @@ public:
 /**
   * KReportTab Implementation
   */
-KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KReportsView* eventHandler)
+KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KReportsView* eventHandler, KReportsView::OpenOption openOption)
     : QWidget(parent)
     , m_tableView(new KMMTextBrowser(this))
     , m_chartView(new KReportChartView(this))
@@ -205,7 +205,7 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     , m_deleteMe(false)
     , m_chartEnabled(false)
     , m_showingChart(report.isChartByDefault())
-    , m_needReload(true)
+    , m_needReload(openOption == KReportsView::OpenImmediately)
     , m_isChartViewValid(false)
     , m_isTableViewValid(false)
     , m_table(0)
@@ -386,7 +386,7 @@ void KReportTab::updateReport()
     }
 
     delete m_table;
-    m_table = 0;
+    m_table = nullptr;
 
     if (m_report.reportType() == eMyMoney::Report::ReportType::PivotTable) {
         m_table = new PivotTable(m_report);
@@ -556,10 +556,10 @@ public:
                      reportName), i18n("Delete Report?"));
     }
 
-    void addReportTab(const MyMoneyReport& report)
+    void addReportTab(const MyMoneyReport& report, KReportsView::OpenOption openOption)
     {
         Q_Q(KReportsView);
-        auto reportTab = new KReportTab(ui.m_reportTabWidget, report, q);
+        auto reportTab = new KReportTab(ui.m_reportTabWidget, report, q, openOption);
         reportTab->installEventFilter(q);
     }
 

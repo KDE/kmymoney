@@ -61,7 +61,17 @@ class KReportsView : public KMyMoneyViewBase
 {
     Q_OBJECT
 
+    typedef enum {
+        NoConfigureOption,
+        LoadReportOnCancel,
+    } ConfigureOption;
+
 public:
+    typedef enum {
+        OpenImmediately,
+        OpenAfterConfiguration,
+    } OpenOption;
+
     /**
       * Standard constructor.
       *
@@ -118,7 +128,7 @@ public Q_SLOTS:
     void slotConfigure();
     void slotDuplicate();
     void slotToggleChart();
-    void slotItemDoubleClicked(QTreeWidgetItem* item, int);
+    void slotItemDoubleClicked(QTreeWidgetItem* item, int column);
     void slotOpenReport(const QString&);
     void slotOpenReport(const MyMoneyReport&);
     void slotCloseCurrent();
@@ -136,6 +146,13 @@ public Q_SLOTS:
 
 private:
     Q_DECLARE_PRIVATE(KReportsView)
+
+    /**
+     * internal handling of slotItemDoubleClicked
+     */
+    void doItemDoubleClicked(QTreeWidgetItem* item, int column, OpenOption openOption);
+
+    void doConfigure(ConfigureOption configureOption);
 
 private Q_SLOTS:
     /**

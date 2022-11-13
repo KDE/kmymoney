@@ -379,6 +379,11 @@ void KReportsView::slotExportView()
 
 void KReportsView::slotConfigure()
 {
+    doConfigure(NoConfigureOption);
+}
+
+void KReportsView::doConfigure(ConfigureOption configureOption)
+{
     Q_D(KReportsView);
     QString cm = "KReportsView::slotConfigure";
 
@@ -437,11 +442,13 @@ void KReportsView::slotConfigure()
                 // do not add TocItemReport to TocItemGroup here,
                 // this is done in loadView
 
-                d->addReportTab(newreport);
+                d->addReportTab(newreport, OpenImmediately);
             }
         } catch (const MyMoneyException &e) {
             KMessageBox::error(this, i18n("Failed to configure report: %1", QString::fromLatin1(e.what())));
         }
+    } else if (configureOption == LoadReportOnCancel) {
+        tab->loadTab();
     }
     delete dlg;
 }
@@ -494,7 +501,7 @@ void KReportsView::slotDuplicate()
             // do not add TocItemReport to TocItemGroup here,
             // this is done in loadView
 
-            d->addReportTab(newReport);
+            d->addReportTab(newReport, OpenImmediately);
         } catch (const MyMoneyException &e) {
             QString error = i18n("Cannot add report, reason: \"%1\"", e.what());
 
@@ -564,7 +571,7 @@ void KReportsView::slotOpenReport(const QString& id)
     if (page)
         d->ui.m_reportTabWidget->setCurrentIndex(index);
     else
-        d->addReportTab(MyMoneyFile::instance()->report(id));
+        d->addReportTab(MyMoneyFile::instance()->report(id), OpenImmediately);
 }
 
 void KReportsView::slotOpenReport(const MyMoneyReport& report)
@@ -591,14 +598,21 @@ void KReportsView::slotOpenReport(const MyMoneyReport& report)
     if (page)
         d->ui.m_reportTabWidget->setCurrentIndex(index);
     else
-        d->addReportTab(report);
+        d->addReportTab(report, OpenImmediately);
 
     if (!isVisible())
         Q_EMIT switchViewRequested(View::Reports);
 }
 
-void KReportsView::slotItemDoubleClicked(QTreeWidgetItem* item, int)
+void KReportsView::slotItemDoubleClicked(QTreeWidgetItem* item, int column)
 {
+    doItemDoubleClicked(item, column, OpenImmediately);
+}
+
+void KReportsView::doItemDoubleClicked(QTreeWidgetItem* item, int column, OpenOption openOption)
+{
+    Q_UNUSED(column)
+
     Q_D(KReportsView);
     auto tocItem = dynamic_cast<TocItem*>(item);
     if (tocItem && !tocItem->isReport()) {
@@ -644,7 +658,7 @@ void KReportsView::slotItemDoubleClicked(QTreeWidgetItem* item, int)
     if (page)
         d->ui.m_reportTabWidget->setCurrentIndex(index);
     else
-        d->addReportTab(report);
+        d->addReportTab(report, openOption);
 }
 
 void KReportsView::slotToggleChart()
@@ -793,8 +807,8 @@ void KReportsView::slotConfigureFromList()
 {
     Q_D(KReportsView);
     if (auto tocItem = dynamic_cast<TocItem*>(d->ui.m_tocTreeWidget->currentItem())) {
-        slotItemDoubleClicked(tocItem, 0);
-        slotConfigure();
+        doItemDoubleClicked(tocItem, 0, OpenAfterConfiguration);
+        doConfigure(LoadReportOnCancel);
     }
 }
 
