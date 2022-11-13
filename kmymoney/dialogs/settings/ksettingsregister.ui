@@ -72,16 +72,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="kcfg_AlwaysShowNrField">
-         <property name="text">
-          <string>Always show a No. field</string>
-         </property>
-         <property name="shortcut">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QCheckBox" name="kcfg_ShowFancyMarker">
          <property name="whatsThis">
           <string>Draws a larger header above each group of transactions. The grouping depends on the current sort order.</string>
