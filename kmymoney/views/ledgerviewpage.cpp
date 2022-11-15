@@ -238,14 +238,14 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
                     JournalModel::Column::Value,
                   };
         d->ui->m_ledgerView->setColumnsHidden(columns);
-        columns = { JournalModel::Column::Number,
-                    JournalModel::Column::Date,
-                    JournalModel::Column::Detail,
-                    JournalModel::Column::Reconciliation,
-                    JournalModel::Column::Payment,
-                    JournalModel::Column::Deposit,
-                    JournalModel::Column::Balance,
-                  };
+        columns = {
+            JournalModel::Column::Date,
+            JournalModel::Column::Detail,
+            JournalModel::Column::Reconciliation,
+            JournalModel::Column::Payment,
+            JournalModel::Column::Deposit,
+            JournalModel::Column::Balance,
+        };
         d->ui->m_ledgerView->setColumnsShown(columns);
 
         d->form = new NewTransactionForm(d->ui->m_formWidget);
