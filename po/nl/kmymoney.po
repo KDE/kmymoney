@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-14 00:46+0000\n"
-"PO-Revision-Date: 2022-11-02 09:23+0100\n"
+"PO-Revision-Date: 2022-11-14 12:59+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.08.3\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -3092,10 +3092,9 @@ msgstr "Gebruik systeemlettertypen"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_individualFontsFrame)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:27
-#, fuzzy, kde-format
-#| msgid "Individual font settings"
+#, kde-format
 msgid "Individual font settings for ledgers"
-msgstr "Individuele Lettertype opties"
+msgstr "Individuele instellingen voor lettertype voor grootboekrekeningen"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (listCellFont), group (List Options)

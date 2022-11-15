@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-14 00:46+0000\n"
-"PO-Revision-Date: 2022-11-02 05:58+0100\n"
+"PO-Revision-Date: 2022-11-14 06:13+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3086,10 +3086,9 @@ msgstr "Erabili sistemaren letra-tipoak"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_individualFontsFrame)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:27
-#, fuzzy, kde-format
-#| msgid "Individual font settings"
+#, kde-format
 msgid "Individual font settings for ledgers"
-msgstr "Letra-tipo indibidualen ezarpenak"
+msgstr "Kontabilitate-liburuetarako banakako letra-tipoak"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (listCellFont), group (List Options)
@@ -3594,7 +3593,7 @@ msgstr "Ezkutatu pasiboko zero balioko saldokoak"
 #: kmymoney/dialogs/settings/ksettingsicons.ui:20
 #, kde-format
 msgid "Individual icon settings"
-msgstr "Ikono indibidualen ezarpenak"
+msgstr "Ikonoen banakako ezarpenak"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (IconsTheme), group (List Options)
@@ -14508,7 +14507,7 @@ msgstr "Urtekoa"
 #, kde-format
 msgctxt "@action timeframe of the budget. month-by-month budget"
 msgid "Individual"
-msgstr "Indibiduala"
+msgstr "Banakakoa"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:74
 #, kde-format

@@ -133,11 +133,11 @@
 
 <para
 >Per exemple, suposem que el pagament mensual de la hipoteca prové un mes del banc com <quote
->SUNTRUST BANK MAPLE VALLEY, GA 111506</quote
+>SUN TRUST BANK MAPLE VALLEY, GA 111506</quote
 > i al mes següent <quote
->SUNTRUST BANK MAPLE VALLEY, GA 121606</quote
+>SUNT RUST BANK MAPLE VALLEY, GA 121606</quote
 >. En realitat voldreu que les dues operacions s'assignin al beneficiari <quote
->SunTrust</quote
+>Sun Trust</quote
 >. La característica per a la coincidència de les operacions és per a vosaltres! </para>
 
 <para>
@@ -210,16 +210,18 @@
 
 <para
 >Les Claus de coincidència que hàgiu establert es tindran en compte cada vegada que importeu operacions utilitzant la importació QIF, o utilitzant un connector com OFX o AqBanking, si la Clau de coincidència per a un dels seus beneficiaris es troba en qualsevol part de l'operació importada del beneficiari, s'assignarà el beneficiari corresponent de la llista a aquesta operació. Per tant, una Clau de coincidència com <quote
->SunTrust</quote
+>Sun Trust</quote
 > coincidirà amb <quote
->SUNTRUST BANK MAPLE VALLEY,GA</quote
+>SUN TRUST BANK MAPLE VALLEY,GA</quote
 > o fins i tot amb <quote
->MORGENSUNTRUST&amp;LOAN</quote
->. Així que trieu amb cura les Claus de coincidència. <note
-> <para
+>MORGEN SUN TRUST&amp;LOAN</quote
+>. Així que trieu amb cura les Claus de coincidència. </para>
+<para
+><note>
+    <para
 >Si un beneficiari de l'operació coincideix amb més d'una Clau de coincidència, el comportament no està definit. El &kmymoney; triarà arbitràriament un dels beneficiaris coincidents.</para>
-  </note>
-</para>
+</note
+></para>
 </sect3>
 </sect2>
 </sect1>

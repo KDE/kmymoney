@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-14 00:46+0000\n"
-"PO-Revision-Date: 2022-11-02 09:01+0100\n"
+"PO-Revision-Date: 2022-11-14 08:54+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -3095,10 +3095,9 @@ msgstr "Usa els tipus de lletra del sistema"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_individualFontsFrame)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:27
-#, fuzzy, kde-format
-#| msgid "Individual font settings"
+#, kde-format
 msgid "Individual font settings for ledgers"
-msgstr "Configuració individual del tipus de lletra"
+msgstr "Configuració individual del tipus de lletra per als llibres majors"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (listCellFont), group (List Options)
