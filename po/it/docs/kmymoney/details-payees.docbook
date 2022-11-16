@@ -131,9 +131,9 @@
 >Ad esempio, mettiamo che il pagamento mensile del mutuo venga registrato dalla banca come <quote
 >BANCA POPOLARE GALLARATE, VA 151106</quote
 > in un certo mese, e come <quote
->BANCA POPOLARE GALLARATE, VA 161206</quote
-> nel mese successivo. Si vorrebbe che queste transazioni vengano associate al beneficiario <quote
->Banca popolare</quote
+>BANCA POPOLARE GALLARATE, VA 121606</quote
+> nel mese successivo. Si potrebbe desiderare che queste transazioni vengano associate al beneficiario <quote
+>Banca Popolare</quote
 >: lo si può fare con la funzione di abbinamento delle transazioni. </para>
 
 <para>
@@ -195,17 +195,19 @@
 >Importazione di transazioni</title>
 
 <para
->Quando si importano transazioni nel formato QIF o attraverso un'estensione, come OFX o AqBanking, saranno considerate le chiavi di corrispondenza impostate. Se la chiave di corrispondenza di un beneficiario verifica una parte del nome del beneficiario nella transazione importata, il beneficiario corrispondente sarà assegnato alla transazione. La chiave è <quote
+>Quando si importano transazioni nel formato QIF o attraverso un'estensione, come OFX o AqBanking, saranno considerate le chiavi di corrispondenza impostate. Se la chiave di corrispondenza di un beneficiario verifica una parte del nome del beneficiario nella transazione importata, il beneficiario corrispondente sarà assegnato a quella transazione. La chiave <quote
 >Popolare</quote
->verificherà <quote
+> verificherà <quote
 >BANCA POPOLARE GALLARATE,VA</quote
 > e <quote
 >MUTUOBANCAPOPOLARE</quote
->. È bene fare attenzione nell'impostare le chiavi di corrispondenza. <note
-> <para
+>. È bene fare attenzione nell'impostare le chiavi di corrispondenza. </para>
+<para
+><note>
+    <para
 >Se il beneficiario di una transazione corrisponde a più chiavi di ricerca, il comportamento è indefinito. &kmymoney; sceglierà in modo arbitrario uno dei beneficiari corrispondenti.</para>
-  </note>
-</para>
+</note
+></para>
 </sect3>
 </sect2>
 </sect1>

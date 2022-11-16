@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-14 00:46+0000\n"
-"PO-Revision-Date: 2022-11-02 14:05+0000\n"
+"PO-Revision-Date: 2022-11-15 18:16+0000\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
 "Language: pt\n"
@@ -3175,10 +3175,9 @@ msgstr "Usar os tipos de letra do sistema"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_individualFontsFrame)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:27
-#, fuzzy, kde-format
-#| msgid "Individual font settings"
+#, kde-format
 msgid "Individual font settings for ledgers"
-msgstr "Configurações individuais do tipo de letra"
+msgstr "Configurações individuais do tipo de letra para os livros de registos"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (listCellFont), group (List Options)
@@ -24993,9 +24992,3 @@ msgstr ""
 "\n"
 "<p>Todas as informações são opcionais e são oferecidas apenas para "
 "personalizar o seu ficheiro KMyMoney.</p>"
-
-#~ msgid "Always show a No. field"
-#~ msgstr "Sempre mostrar um campo Nº."
-
-#~ msgid "Always show a No. field in transaction form"
-#~ msgstr "Sempre mostrar um campo Nº. no formulário da transacção"
