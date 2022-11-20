@@ -119,6 +119,19 @@ KCurrencyEditorDlg::~KCurrencyEditorDlg()
 
 MyMoneySecurity KCurrencyEditorDlg::currency() const
 {
+    // MyMoneySecurity handles the maximum fraction as
+    // int. mpz_class only supports conversion with 32bit
+    // ints so we limit the maximum fraction to a value
+    // representable by such a variable. Modifying the
+    // handling of fraction to mpz_class based integers
+    // could solve the problem.
+    auto maxFraction = [&](unsigned int f) {
+        if ((f == 0) || (f > 2147483647)) {
+            f = 1000000000;
+        }
+        return f;
+    };
+
     Q_D(const KCurrencyEditorDlg);
     MyMoneySecurity newCurrency = d->currency;
 
@@ -131,11 +144,11 @@ MyMoneySecurity KCurrencyEditorDlg::currency() const
     newCurrency.setTradingSymbol(d->ui->leSymbol->text());
 
     MyMoneyMoney value(d->ui->leCashFraction->text());
-    int fraction = static_cast<int>((MyMoneyMoney::ONE / value).toDouble());
+    int fraction = maxFraction(static_cast<unsigned int>((MyMoneyMoney::ONE / value.abs()).toDouble()));
     newCurrency.setSmallestCashFraction(fraction);
 
     value = MyMoneyMoney(d->ui->leAccountFraction->text());
-    fraction = static_cast<int>((MyMoneyMoney::ONE / value).toDouble());
+    fraction = maxFraction(static_cast<unsigned int>((MyMoneyMoney::ONE / value.abs()).toDouble()));
     newCurrency.setSmallestAccountFraction(fraction);
 
     newCurrency.setRoundingMethod(static_cast<AlkValue::RoundingMethod>(d->ui->comboRoundingMethod->currentIndex()));
