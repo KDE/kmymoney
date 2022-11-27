@@ -1565,6 +1565,9 @@ KMyMoneyApp::~KMyMoneyApp()
     // destroy printer object
     KMyMoneyPrinter::cleanup();
 
+    // destroy find transaction dialog
+    delete d->m_searchDlg;
+
     // make sure all settings are written to disk
     KMyMoneySettings::self()->save();
     delete d;
@@ -3037,8 +3040,6 @@ void KMyMoneyApp::slotFindTransaction()
     if (!d->m_searchDlg) {
         d->m_searchDlg = new KSearchTransactionDlg(this);
         connect(d->m_searchDlg, &QObject::destroyed, this, [&]() {
-            if (d->m_searchDlg)
-                d->m_searchDlg->deleteLater();
             d->m_searchDlg = nullptr;
         });
         connect(d->m_searchDlg, &KSearchTransactionDlg::requestSelectionChange, this, &KMyMoneyApp::slotSelectionChanged);
