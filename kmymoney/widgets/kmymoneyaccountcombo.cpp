@@ -127,7 +127,8 @@ public:
             // this for some reason does not work and I had to
             // add logic to the eventFilter below to catch this
             // key-sequence. Left it here, since it does not hurt either.
-            m_splitAction->setShortcut(QKeySequence(Qt::Key_Control, Qt::Key_Space));
+            m_splitAction->setShortcut(QKeySequence(QStringLiteral("Ctrl+ ")));
+            m_splitAction->setToolTip(i18nc("@info:tooltip icon in category to open the split editor", "Click this icon to open the split editor"));
             m_q->connect(m_splitAction, &QAction::triggered, m_q, &KMyMoneyAccountCombo::splitDialogRequest);
 
         } else if(!show && m_splitAction) {
