@@ -35,7 +35,6 @@ public:
 SpecialLedgerItemFilter::SpecialLedgerItemFilter(QObject* parent)
     : LedgerSortProxyModel(new SpecialLedgerItemFilterPrivate(this), parent)
 {
-    Q_D(SpecialLedgerItemFilter);
     setObjectName("SpecialLedgerItemFilter");
 }
 
