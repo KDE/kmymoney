@@ -1041,6 +1041,8 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
 
         d->ui->assetAccountCombo->setSelected(d->assetSplit.accountId());
 
+        d->ui->statusCombo->setCurrentIndex(static_cast<int>(d->stockSplit.reconcileFlag()));
+
         // Avoid updating other widgets (connected through signal/slot) during loading
         const auto indexes = d->securitiesModel->match(d->securitiesModel->index(0,0), eMyMoney::Model::IdRole, d->stockSplit.accountId(), 1, Qt::MatchFixedString);
         if (!indexes.isEmpty()) {
@@ -1241,6 +1243,12 @@ QStringList InvestTransactionEditor::saveTransaction(const QStringList& selected
             }
         }
     }
+
+    if (d->stockSplit.reconcileFlag() != eMyMoney::Split::State::Reconciled && !d->stockSplit.reconcileDate().isValid()
+        && d->ui->statusCombo->currentIndex() == (int)eMyMoney::Split::State::Reconciled) {
+        d->stockSplit.setReconcileDate(QDate::currentDate());
+    }
+    d->stockSplit.setReconcileFlag(static_cast<eMyMoney::Split::State>(d->ui->statusCombo->currentIndex()));
 
     t.addSplit(d->stockSplit);
 
