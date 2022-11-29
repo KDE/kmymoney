@@ -474,11 +474,13 @@ void KMyMoneyDateEdit::focusInEvent(QFocusEvent* event)
 {
     KDateComboBox::focusInEvent(event);
 
-    const auto reason = event->reason();
-    if (reason == Qt::TabFocusReason) {
+    switch (event->reason()) {
+    case Qt::TabFocusReason:
+    case Qt::BacktabFocusReason:
         d->selectSection(d->m_sections.at(0));
-    } else if (reason == Qt::BacktabFocusReason) {
-        d->selectSection(d->m_sections.at(2));
+        break;
+    default:
+        break;
     }
 }
 
