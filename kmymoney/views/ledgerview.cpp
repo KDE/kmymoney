@@ -1420,11 +1420,26 @@ void LedgerView::setSelectedJournalEntries(const QStringList& journalEntryIds)
         // of the transaction
         if ((row == -1) && baseIdx.isValid()) {
             const auto indexes = journalModel->indexesByTransactionId(baseIdx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
-            for (const auto idx : indexes) {
+            for (const auto& idx : indexes) {
                 if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == d->accountId) {
                     row = journalModel->mapFromBaseSource(model(), idx).row();
                     if (row != -1) {
                         break;
+                    }
+                }
+            }
+            // in case an investment account is selected as destination,
+            // it may not have been found. In that case, we check if we find the
+            // parent of one of the accounts and use it instead.
+            if (row == -1) {
+                for (const auto& idx : indexes) {
+                    const auto accountId = idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString();
+                    const auto account = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
+                    if (account.parentAccountId() == d->accountId) {
+                        row = journalModel->mapFromBaseSource(model(), idx).row();
+                        if (row != -1) {
+                            break;
+                        }
                     }
                 }
             }
