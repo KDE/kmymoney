@@ -28,7 +28,6 @@
 #include "menuenums.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
-#include "mymoneyfile.h"
 #include "reconciliationmodel.h"
 #include "schedulesjournalmodel.h"
 #include "specialdatesmodel.h"
@@ -227,6 +226,7 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
             JournalModel::Column::Balance,
         };
         d->ui->m_ledgerView->setColumnsShown(columns);
+        d->isInvestmentView = true;
         break;
 
     default:
@@ -452,11 +452,16 @@ QString LedgerViewPage::accountName()
 
 void LedgerViewPage::updateSummaryInformation(const QHash<QString, AccountBalances>& balances)
 {
-    const auto it = balances.find(d->accountId);
-    if (it != balances.cend()) {
-        d->totalBalance = (*it).m_totalBalance;
-        d->clearedBalance = (*it).m_clearedBalance;
+    if (d->isInvestmentView) {
         d->updateSummaryInformation();
+
+    } else {
+        const auto it = balances.find(d->accountId);
+        if (it != balances.cend()) {
+            d->totalBalance = (*it).m_totalBalance;
+            d->clearedBalance = (*it).m_clearedBalance;
+            d->updateSummaryInformation();
+        }
     }
 }
 

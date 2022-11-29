@@ -18,13 +18,18 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "accountsmodel.h"
 #include "ledgeraccountfilter.h"
 #include "ledgerfilter.h"
+#include "mymoneyfile.h"
 #include "mymoneymoney.h"
+#include "mymoneyprice.h"
+#include "mymoneysecurity.h"
 #include "mymoneyutils.h"
 #include "newtransactionform.h"
 #include "selectedobjects.h"
 #include "specialledgeritemfilter.h"
+
 #include <ui_ledgerviewpage.h>
 
 class LedgerViewPage::Private
@@ -40,6 +45,7 @@ public:
         , stackedView(nullptr)
         , needModelInit(true)
         , showEntryForNewTransaction(false)
+        , isInvestmentView(false)
         , precision(-1)
     {
     }
@@ -86,8 +92,52 @@ public:
         } else {
             ui->m_leftLabel->setText(i18nc("@label:textbox Reconciliation date", "Never reconciled"));
         }
-        ui->m_centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", clearedBalance.formatMoney("", precision)));
-        ui->m_rightLabel->setText(i18nc("@label:textbox Total balance", "Balance: %1", totalBalance.formatMoney("", precision)));
+
+        if (isInvestmentView) {
+            const auto file = MyMoneyFile::instance();
+            const auto account = file->accountsModel()->itemById(accountId);
+            const auto baseCurrency = file->baseCurrency();
+
+            // collect accounts and their balances
+            QMap<QString, MyMoneyMoney> actBalance;
+            actBalance[accountId] = file->balance(accountId);
+            for (const auto& accId : account.accountList()) {
+                actBalance[accId] = file->balance(accId);
+            }
+
+            MyMoneyMoney balance;
+            bool balanceIsApproximated = false;
+            QMap<QString, MyMoneyMoney>::const_iterator it_b;
+            for (it_b = actBalance.cbegin(); it_b != actBalance.cend(); ++it_b) {
+                MyMoneyAccount stock = file->account(it_b.key());
+                QString currencyId = stock.currencyId();
+                MyMoneySecurity sec = file->security(currencyId);
+                MyMoneyMoney rate(1, 1);
+
+                if (stock.isInvest()) {
+                    currencyId = sec.tradingCurrency();
+                    const MyMoneyPrice& priceInfo = file->price(sec.id(), currencyId);
+                    balanceIsApproximated |= !priceInfo.isValid();
+                    rate = priceInfo.rate(sec.tradingCurrency());
+                }
+
+                if (currencyId != baseCurrency.id()) {
+                    const MyMoneyPrice& priceInfo = file->price(sec.tradingCurrency(), baseCurrency.id());
+                    balanceIsApproximated |= !priceInfo.isValid();
+                    rate = (rate * priceInfo.rate(baseCurrency.id())).convertPrecision(sec.pricePrecision());
+                }
+                balance += ((*it_b) * rate).convert(baseCurrency.smallestAccountFraction());
+            }
+
+            ui->m_centerLabel->setText(QString());
+            ui->m_rightLabel->setText(i18nc("@label:textbox Total value of investment",
+                                            "Investment value: %1%2",
+                                            balanceIsApproximated ? QLatin1String("~") : QString(),
+                                            balance.formatMoney(baseCurrency.tradingSymbol(), precision)));
+        } else {
+            ui->m_centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", clearedBalance.formatMoney("", precision)));
+            ui->m_rightLabel->setText(i18nc("@label:textbox Total balance", "Balance: %1", totalBalance.formatMoney("", precision)));
+        }
     }
 
     virtual void clearFilter()
@@ -115,6 +165,7 @@ public:
     MyMoneyMoney clearedBalance;
     bool needModelInit;
     bool showEntryForNewTransaction;
+    bool isInvestmentView;
     int precision;
 };
 
