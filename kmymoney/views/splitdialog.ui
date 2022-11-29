@@ -33,7 +33,7 @@
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>72</height>
+         <height>82</height>
         </size>
        </property>
        <property name="palette">
@@ -621,6 +621,20 @@
         </property>
        </widget>
       </item>
+      
+      <item>
+       <widget class="QPushButton" name="adjustUnassigned">
+        <property name="toolTip">
+         <string>Apply 'Unassigned' or 'Overassigned' amount to the current split.
+'Unassigned' amount will be added or 'Overassigned' amount
+will be subtracted from the amount of the selected split.</string>
+        </property>
+        <property name="text">
+         <string>Apply Difference</string>
+        </property>
+       </widget>
+      </item>
+
       <item>
        <widget class="QPushButton" name="deleteZeroButton">
         <property name="toolTip">
@@ -631,6 +645,7 @@
         </property>
        </widget>
       </item>
+      
       <item>
        <widget class="QPushButton" name="deleteButton">
         <property name="text">

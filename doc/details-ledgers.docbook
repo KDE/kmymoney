@@ -473,6 +473,29 @@
 </para>
 
 <para>
+	<screenshot>
+	<screeninfo>Split with unassigned amount</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="split_unasigned.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>Split with unasssigned amount</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para>
+  To redistribute an 'Unassigned' or 'Overassigned' amount, select a split item that has to be adjusted.
+  After that click on a button <guibutton>Apply Difference</guibutton>.
+  If 'Unassigned' was previously shown and non-zero, that amount will be added to the selected line item value.
+  If 'Overassigned' was previously shown and non-zero, that amount will be subtracted from the selected line item value.
+  As the result, the 'Unassigned' amount will be set to zero and a transaction could be saved
+  successfully.
+</para>
+
+<para>
   Note that the category field in the transaction form or the transaction
   list now displays <emphasis>Split transaction</emphasis>.
 </para> 
@@ -729,4 +752,3 @@
 </para>
 </sect1>
 </chapter>
-

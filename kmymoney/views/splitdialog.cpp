@@ -15,9 +15,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KColorScheme>
+#include <KConfigGroup>
 #include <KLocalizedString>
 #include <KSharedConfig>
-#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -81,7 +82,8 @@ static const int DiffRow = 1;
 static const int AmountRow = 2;
 static const int HeaderCol = 0;
 static const int ValueCol = 1;
-
+static const int SummaryRows = 3;
+static const int SummaryCols = 2;
 
 void SplitDialog::Private::deleteSplits(QModelIndexList indexList)
 {
@@ -106,7 +108,7 @@ void SplitDialog::Private::deleteSplits(QModelIndexList indexList)
         if (!(id.isEmpty() || id.endsWith('-'))) {
             model->removeRow(*it);
         }
-    } while(it != sortedList.constBegin());
+    } while (it != sortedList.constBegin());
     blockEditorStart(false);
 }
 
@@ -125,7 +127,7 @@ void SplitDialog::Private::blockImmediateEditor()
 void SplitDialog::Private::selectRow(int row)
 {
     if (row >= ui->splitView->model()->rowCount())
-        row = ui->splitView->model()->rowCount()-1;
+        row = ui->splitView->model()->rowCount() - 1;
     if (row >= 0) {
         blockEditorStart(true);
         ui->splitView->selectRow(row);
@@ -165,6 +167,7 @@ SplitDialog::SplitDialog(const MyMoneySecurity& commodity,
     connect(d->ui->deleteAllButton, &QAbstractButton::pressed, this, &SplitDialog::deleteAllSplits);
     connect(d->ui->deleteButton, &QAbstractButton::pressed, this, &SplitDialog::deleteSelectedSplits);
     connect(d->ui->deleteZeroButton, &QAbstractButton::pressed, this, &SplitDialog::deleteZeroSplits);
+    connect(d->ui->adjustUnassigned, &QAbstractButton::pressed, this, &SplitDialog::adjustUnassigned);
     connect(d->ui->mergeButton, &QAbstractButton::pressed, this, &SplitDialog::mergeSplits);
     connect(d->ui->newSplitButton, &QAbstractButton::pressed, this, &SplitDialog::newSplit);
 
@@ -176,19 +179,24 @@ SplitDialog::SplitDialog(const MyMoneySecurity& commodity,
     size.setHeight(size.height() - 1);
     resize(size.expandedTo(minimumSizeHint()));
 
+    // m_unassigned_over = KColorScheme(QPalette::Normal).foreground(KColorScheme::PositiveText);
+    // m_unassigned_under = KColorScheme(QPalette::Normal).foreground(KColorScheme::NegativeText);
+    m_unassigned_error = KColorScheme(QPalette::Normal).foreground(KColorScheme::NegativeText);
+    m_unassigned_normal = KColorScheme(QPalette::Normal).foreground(KColorScheme::NormalText);
+
     // finish polishing the widgets
     QMetaObject::invokeMethod(this, "adjustSummary", Qt::QueuedConnection);
 }
 
 SplitDialog::~SplitDialog()
 {
-    auto grp =  KSharedConfig::openConfig()->group("SplitTransactionEditor");
+    auto grp = KSharedConfig::openConfig()->group("SplitTransactionEditor");
     grp.writeEntry("Geometry", size());
 }
 
 int SplitDialog::exec()
 {
-    if(!d->ui->splitView->model()) {
+    if (!d->ui->splitView->model()) {
         qWarning() << "SplitDialog::exec() executed without a model. Use setModel() before calling exec().";
         return QDialog::Rejected;
     }
@@ -202,15 +210,15 @@ void SplitDialog::accept()
     if (d->transactionTotal.isAutoCalc()) {
         d->transactionTotal = d->splitsTotal;
 
-    } else if(d->transactionTotal != d->splitsTotal) {
+    } else if (d->transactionTotal != d->splitsTotal) {
         QPointer<SplitAdjustDialog> dlg = new SplitAdjustDialog(this);
         dlg->setValues(d->ui->summaryView->item(AmountRow, ValueCol)->data(Qt::DisplayRole).toString(),
                        d->ui->summaryView->item(SumRow, ValueCol)->data(Qt::DisplayRole).toString(),
                        d->ui->summaryView->item(DiffRow, ValueCol)->data(Qt::DisplayRole).toString(),
                        d->ui->splitView->model()->rowCount());
         accept = false;
-        if(dlg->exec() == QDialog::Accepted && dlg) {
-            switch(dlg->selectedOption()) {
+        if (dlg->exec() == QDialog::Accepted && dlg) {
+            switch (dlg->selectedOption()) {
             case SplitAdjustDialog::SplitAdjustContinue:
                 break;
             case SplitAdjustDialog::SplitAdjustChange:
@@ -229,7 +237,7 @@ void SplitDialog::accept()
         delete dlg;
         updateButtonState();
     }
-    if(accept)
+    if (accept)
         QDialog::accept();
 }
 
@@ -248,7 +256,7 @@ void SplitDialog::setModel(SplitModel* model)
     d->splitModel = model;
     d->ui->splitView->setModel(model);
 
-    if(model->rowCount() > 0) {
+    if (model->rowCount() > 0) {
         QModelIndex index = model->index(0, 0);
         d->ui->splitView->setCurrentIndex(index);
     }
@@ -262,6 +270,15 @@ void SplitDialog::setModel(SplitModel* model)
 
 void SplitDialog::adjustSummary()
 {
+    // Apply color scheme to the summary panel
+    for (int row = 0; row < SummaryRows; row++) {
+        for (int col = 0; col < SummaryCols; col++) {
+            if (row == DiffRow && col == ValueCol)
+                continue;
+            d->ui->summaryView->item(row, col)->setForeground(m_unassigned_normal);
+        }
+    }
+
     // Only show the currency symbol when multiple currencies are involved
     QString currencySymbol = d->commoditySymbol;
     if (!d->splitModel->hasMultiCurrencySplits()) {
@@ -281,7 +298,7 @@ void SplitDialog::adjustSummary()
     QString formattedValue = (d->splitsTotal * d->inversionFactor).formatMoney(currencySymbol, denom);
     d->ui->summaryView->item(SumRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
 
-    if(d->transactionEditor) {
+    if (d->transactionEditor) {
         if (d->transactionTotal.isAutoCalc()) {
             formattedValue = (d->splitsTotal * d->inversionFactor).formatMoney(currencySymbol, denom);
         } else {
@@ -290,10 +307,17 @@ void SplitDialog::adjustSummary()
         d->ui->summaryView->item(AmountRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
 
         if (!d->transactionTotal.isAutoCalc()) {
-            if ((d->transactionTotal.abs() - d->splitsTotal.abs()).isNegative()) {
-                d->ui->summaryView->item(DiffRow, HeaderCol)->setData(Qt::DisplayRole, i18nc("Split editor summary", "Assigned too much"));
+            auto diff = d->transactionTotal.abs() - d->splitsTotal.abs();
+            if (diff.isNegative()) {
+                d->ui->summaryView->item(DiffRow, HeaderCol)->setData(Qt::DisplayRole, i18nc("Split editor summary", "Overassigned"));
+                d->ui->summaryView->item(DiffRow, ValueCol)->setForeground(m_unassigned_error);
             } else {
                 d->ui->summaryView->item(DiffRow, HeaderCol)->setData(Qt::DisplayRole, i18nc("Split editor summary", "Unassigned"));
+                if (diff.isZero()) {
+                    d->ui->summaryView->item(DiffRow, ValueCol)->setForeground(m_unassigned_normal);
+                } else {
+                    d->ui->summaryView->item(DiffRow, ValueCol)->setForeground(m_unassigned_error);
+                }
             }
             formattedValue = (d->transactionTotal - d->splitsTotal).abs().formatMoney(currencySymbol, denom);
             d->ui->summaryView->item(DiffRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
@@ -329,15 +353,15 @@ void SplitDialog::newSplit()
     // are on this row already with the editor closed things
     // are a bit more complicated.
     QModelIndex index = d->ui->splitView->currentIndex();
-    if(index.isValid()) {
+    if (index.isValid()) {
         int row = index.row();
-        if(row != d->ui->splitView->model()->rowCount()-1) {
-            d->ui->splitView->selectRow(d->ui->splitView->model()->rowCount()-1);
+        if (row != d->ui->splitView->model()->rowCount() - 1) {
+            d->ui->splitView->selectRow(d->ui->splitView->model()->rowCount() - 1);
         } else {
             d->ui->splitView->edit(index);
         }
     } else {
-        d->ui->splitView->selectRow(d->ui->splitView->model()->rowCount()-1);
+        d->ui->splitView->selectRow(d->ui->splitView->model()->rowCount() - 1);
     }
 }
 
@@ -357,6 +381,7 @@ void SplitDialog::updateButtonState()
     d->ui->deleteAllButton->setEnabled(false);
     d->ui->mergeButton->setEnabled(false);
     d->ui->deleteZeroButton->setEnabled(false);
+    d->ui->adjustUnassigned->setEnabled(false);
 
     if (!d->readOnly) {
         if (d->ui->splitView->selectionModel()->selectedRows().count() > 0) {
@@ -365,6 +390,13 @@ void SplitDialog::updateButtonState()
 
         if (d->ui->splitView->model()->rowCount() > 2) {
             d->ui->deleteAllButton->setEnabled(true);
+        }
+
+        if (d->ui->splitView->selectionModel()->selectedRows().count() == 1
+            && !d->ui->splitView->selectionModel()->selectedIndexes().at(0).data(eMyMoney::Model::IdRole).toString().isEmpty()) {
+            if (!d->transactionTotal.isAutoCalc()) {
+                d->ui->adjustUnassigned->setDisabled((d->transactionTotal.abs() - d->splitsTotal.abs()).isZero());
+            }
         }
 
         QAbstractItemModel* model = d->ui->splitView->model();
@@ -408,14 +440,35 @@ void SplitDialog::deleteAllSplits()
     d->selectRow(row);
 }
 
+void SplitDialog::adjustUnassigned()
+{
+    QModelIndex index = d->ui->splitView->currentIndex();
+    if (index.isValid()) {
+        // extract current values ...
+        auto shares = index.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+        auto value = index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
+        const auto price = value / shares;
+        const auto diff = d->transactionTotal - d->splitsTotal;
+        // ... and adjust shares and value ...
+        value += diff;
+        shares = value / price;
+        // ... and update the model
+        auto model = d->ui->splitView->model();
+        model->setData(index, QVariant::fromValue<MyMoneyMoney>(shares), eMyMoney::Model::SplitSharesRole);
+        model->setData(index, QVariant::fromValue<MyMoneyMoney>(value), eMyMoney::Model::SplitValueRole);
+
+        adjustSummary();
+    }
+}
+
 void SplitDialog::deleteZeroSplits()
 {
     QAbstractItemModel* model = d->ui->splitView->model();
     QModelIndexList list = model->match(model->index(0, 0), eMyMoney::Model::IdRole, QLatin1String(".+"), -1, Qt::MatchRegularExpression);
 
-    for(int row = 0; row < list.count();) {
+    for (int row = 0; row < list.count();) {
         const auto idx = list.at(row);
-        if(!idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().isZero()) {
+        if (!idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().isZero()) {
             list.removeAt(row);
         } else {
             ++row;

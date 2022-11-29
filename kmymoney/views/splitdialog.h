@@ -72,10 +72,15 @@ protected Q_SLOTS:
     void mergeSplits();
     void selectionChanged();
     void updateButtonState();
+    void adjustUnassigned();
 
 protected:
     void resizeEvent(QResizeEvent* ev) final override;
     void adjustSummaryWidth();
+    // QBrush m_unassigned_over;
+    // QBrush m_unassigned_under;
+    QBrush m_unassigned_normal;
+    QBrush m_unassigned_error;
 
 private:
     class Private;

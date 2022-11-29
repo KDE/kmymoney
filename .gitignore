@@ -21,3 +21,5 @@ CMakeSettings.json
 .idea
 .vs
 docker/.env
+.vscode
+
