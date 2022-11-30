@@ -923,7 +923,9 @@ bool InvestTransactionEditor::accepted() const
 
 void InvestTransactionEditor::updateTotalAmount()
 {
+    // update widget state according to current scenario
     d->updateWidgetState();
+
     if (d->currentActivity) {
         const auto totalAmount = d->currentActivity->totalAmount(d->stockSplit, d->feeSplitModel, d->interestSplitModel);
         const auto oldValue = d->ui->totalAmountEdit->value();
@@ -954,6 +956,8 @@ void InvestTransactionEditor::updateTotalAmount()
                 }
             }
         }
+        // update widget state again, because the conditions may have changed
+        d->updateWidgetState();
     }
 }
 
