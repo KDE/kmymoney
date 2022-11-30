@@ -124,6 +124,7 @@ public:
 
     void scheduleUpdateTotalAmount();
     void updateWidgetState();
+    void protectWidgetsForClosedAccount();
     void setupTabOrder();
 
     void editSplits(SplitModel* sourceSplitModel, AmountEdit* amountEdit, const MyMoneyMoney& transactionFactor);
@@ -506,6 +507,15 @@ QModelIndex InvestTransactionEditor::Private::adjustToSecuritySplitIdx(const QMo
     return {};
 }
 
+void InvestTransactionEditor::Private::protectWidgetsForClosedAccount()
+{
+    const auto securityAccont = MyMoneyFile::instance()->accountsModel()->itemById(stockSplit.accountId());
+    const bool closed = securityAccont.isClosed();
+    ui->sharesAmountEdit->setReadOnly(closed);
+    ui->securityAccountCombo->setDisabled(closed);
+    ui->activityCombo->setDisabled(closed);
+}
+
 void InvestTransactionEditor::Private::updateWidgetState()
 {
     WidgetHintFrame::hide(ui->feesCombo, i18nc("@info:tooltip", "Category for fees"));
@@ -514,7 +524,15 @@ void InvestTransactionEditor::Private::updateWidgetState()
     WidgetHintFrame::hide(ui->interestAmountEdit, i18nc("@info:tooltip", "Amount of interest"));
     WidgetHintFrame::hide(ui->assetAccountCombo, i18nc("@info:tooltip", "Asset or brokerage account"));
     WidgetHintFrame::hide(ui->priceAmountEdit, i18nc("@info:tooltip", "Price information for this transaction"));
-    WidgetHintFrame::hide(ui->securityAccountCombo, i18nc("@info:tooltip", "Security for this transaction"));
+
+    if (ui->securityAccountCombo->isEnabled()) {
+        WidgetHintFrame::hide(ui->securityAccountCombo, i18nc("@info:tooltip", "Security for this transaction"));
+        ui->activityCombo->setToolTip(i18nc("@info:tooltip", "Select the activity for this transaction."));
+    } else {
+        WidgetHintFrame::hide(ui->securityAccountCombo,
+                              i18nc("@info:tooltip", "The security for this transaction cannot be modified because the security account is closed."));
+        ui->activityCombo->setToolTip(i18nc("@info:tooltip", "This activity cannot be modified because the security account is closed."));
+    }
 
     // all the other logic needs a valid activity
     if (currentActivity == nullptr) {
@@ -524,7 +542,11 @@ void InvestTransactionEditor::Private::updateWidgetState()
     const auto widget = ui->sharesAmountEdit;
     switch(currentActivity->type()) {
     default:
-        WidgetHintFrame::hide(widget, i18nc("@info:tooltip", "Number of shares"));
+        if (ui->securityAccountCombo->isEnabled()) {
+            WidgetHintFrame::hide(widget, i18nc("@info:tooltip", "Number of shares"));
+        } else {
+            WidgetHintFrame::hide(widget, i18nc("@info:tooltip", "The number of shares cannot be modified because the security account is closed."));
+        }
         if (widget->isVisible()) {
             if (widget->value().isZero()) {
                 WidgetHintFrame::show(widget, i18nc("@info:tooltip", "Enter number of shares for this transaction"));
@@ -532,7 +554,11 @@ void InvestTransactionEditor::Private::updateWidgetState()
         }
         break;
     case eMyMoney::Split::InvestmentTransactionType::SplitShares:
-        WidgetHintFrame::hide(widget, i18nc("@info:tooltip", "Split ratio"));
+        if (ui->securityAccountCombo->isEnabled()) {
+            WidgetHintFrame::hide(widget, i18nc("@info:tooltip", "Split ratio"));
+        } else {
+            WidgetHintFrame::hide(widget, i18nc("@info:tooltip", "The split ratio cannot be modified because the security account is closed."));
+        }
         if (widget->isVisible()) {
             if (widget->value().isZero()) {
                 WidgetHintFrame::show(widget, i18nc("@info:tooltip", "Enter the split ratio for this transaction"));
@@ -895,6 +921,11 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
         Q_EMIT done();
     });
 
+    connect(accountsModel, &QAbstractItemModel::dataChanged, this, [&]() {
+        d->protectWidgetsForClosedAccount();
+        d->updateWidgetState();
+    });
+
     // handle some events in certain conditions different from default
     d->ui->activityCombo->installEventFilter(this);
     d->ui->statusCombo->installEventFilter(this);
@@ -1074,6 +1105,10 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         // Avoid updating other widgets (connected through signal/slot) during loading
         QSignalBlocker blockPrice(d->ui->priceAmountEdit);
         d->currentActivity->loadPriceWidget(d->stockSplit);
+
+        // check if security and amount of shares needs to be
+        // protected because the security account is closed
+        d->protectWidgetsForClosedAccount();
 
         updateTotalAmount();
     }
