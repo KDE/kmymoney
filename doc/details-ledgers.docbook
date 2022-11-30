@@ -480,7 +480,7 @@
 	<imagedata fileref="split_unasigned.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase>Split with unasssigned amount</phrase>
+	<phrase>Split with unassigned amount</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
