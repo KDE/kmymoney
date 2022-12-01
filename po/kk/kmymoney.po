@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-30 00:47+0000\n"
+"POT-Creation-Date: 2022-12-01 00:47+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -19121,14 +19121,14 @@ msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "Өсім кірісі"
 
-#: kmymoney/views/investtransactioneditor.cpp:263
+#: kmymoney/views/investtransactioneditor.cpp:264
 #: kmymoney/views/newtransactioneditor.cpp:216
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date of the transaction."
 msgstr "Транзакцияларсыз үзінді көшірмесін импорттау"
 
-#: kmymoney/views/investtransactioneditor.cpp:287
+#: kmymoney/views/investtransactioneditor.cpp:288
 #: kmymoney/views/newtransactioneditor.cpp:236
 #, fuzzy, kde-format
 #| msgid ""
@@ -19139,7 +19139,7 @@ msgstr ""
 "  * Ашылған '%3' күніне сәйкесті, ақшасы '%2', есепшоты '%1' дегенде баға "
 "мәліметі келтірілмеген."
 
-#: kmymoney/views/investtransactioneditor.cpp:383
+#: kmymoney/views/investtransactioneditor.cpp:384
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -19147,126 +19147,163 @@ msgid ""
 "price information invalid. Please check them."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:511
+#: kmymoney/views/investtransactioneditor.cpp:521
 #, fuzzy, kde-format
 #| msgid "Default Category for Payee"
 msgctxt "@info:tooltip"
 msgid "Category for fees"
 msgstr "Алушының әдетті санаты"
 
-#: kmymoney/views/investtransactioneditor.cpp:512
+#: kmymoney/views/investtransactioneditor.cpp:522
 #, fuzzy, kde-format
 #| msgid "Amount is:"
 msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "Сомасы:"
 
-#: kmymoney/views/investtransactioneditor.cpp:513
+#: kmymoney/views/investtransactioneditor.cpp:523
 #, fuzzy, kde-format
 #| msgid "Category options"
 msgctxt "@info:tooltip"
 msgid "Category for interest"
 msgstr "Санат параметрлері"
 
-#: kmymoney/views/investtransactioneditor.cpp:514
+#: kmymoney/views/investtransactioneditor.cpp:524
 #, fuzzy, kde-format
 #| msgid "Amount entered"
 msgctxt "@info:tooltip"
 msgid "Amount of interest"
 msgstr "Енгізген сома"
 
-#: kmymoney/views/investtransactioneditor.cpp:515
+#: kmymoney/views/investtransactioneditor.cpp:525
 #, fuzzy, kde-format
 #| msgid "Create brokerage account"
 msgctxt "@info:tooltip"
 msgid "Asset or brokerage account"
 msgstr "Делдал ақысы есепшотын құру"
 
-#: kmymoney/views/investtransactioneditor.cpp:516
+#: kmymoney/views/investtransactioneditor.cpp:526
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Price information for this transaction"
 msgstr "Транзакцияны жазып алуға арналған батырма"
 
-#: kmymoney/views/investtransactioneditor.cpp:517
+#: kmymoney/views/investtransactioneditor.cpp:529
 #, fuzzy, kde-format
 #| msgid "Skip this transaction"
 msgctxt "@info:tooltip"
 msgid "Security for this transaction"
 msgstr "Транзакцияны тастап кету"
 
-#: kmymoney/views/investtransactioneditor.cpp:527
+#: kmymoney/views/investtransactioneditor.cpp:530
+#, fuzzy, kde-format
+#| msgid "Use this button to record this transaction"
+msgctxt "@info:tooltip"
+msgid "Select the activity for this transaction."
+msgstr "Транзакцияны жазып алуға арналған батырма"
+
+#: kmymoney/views/investtransactioneditor.cpp:533
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"The security for this transaction cannot be modified because the security "
+"account is closed."
+msgstr ""
+
+#: kmymoney/views/investtransactioneditor.cpp:534
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"This activity cannot be modified because the security account is closed."
+msgstr ""
+
+#: kmymoney/views/investtransactioneditor.cpp:546
 #, fuzzy, kde-format
 #| msgid "Number of Days to Forecast:"
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Қанша күндік болжамы:"
 
-#: kmymoney/views/investtransactioneditor.cpp:530
+#: kmymoney/views/investtransactioneditor.cpp:548
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"The number of shares cannot be modified because the security account is "
+"closed."
+msgstr ""
+
+#: kmymoney/views/investtransactioneditor.cpp:552
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Транзакцияны жазып алуға арналған батырма"
 
-#: kmymoney/views/investtransactioneditor.cpp:535
+#: kmymoney/views/investtransactioneditor.cpp:558
 #, fuzzy, kde-format
 #| msgid "Split transaction"
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Транзакцияны бөлу"
 
-#: kmymoney/views/investtransactioneditor.cpp:538
+#: kmymoney/views/investtransactioneditor.cpp:560
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"The split ratio cannot be modified because the security account is closed."
+msgstr ""
+
+#: kmymoney/views/investtransactioneditor.cpp:564
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "Транзакцияны жазып алуға арналған батырма"
 
-#: kmymoney/views/investtransactioneditor.cpp:550
+#: kmymoney/views/investtransactioneditor.cpp:576
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "Транзакцияны жазып алуға арналған батырма"
 
-#: kmymoney/views/investtransactioneditor.cpp:566
+#: kmymoney/views/investtransactioneditor.cpp:592
 #, fuzzy, kde-format
 #| msgid "Select autofill transaction"
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "Автотолтыруға транзакцияны таңдау"
 
-#: kmymoney/views/investtransactioneditor.cpp:573
+#: kmymoney/views/investtransactioneditor.cpp:599
 #, fuzzy, kde-format
 #| msgid "Default Category for Payee"
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Алушының әдетті санаты"
 
-#: kmymoney/views/investtransactioneditor.cpp:576
+#: kmymoney/views/investtransactioneditor.cpp:602
 #, fuzzy, kde-format
 #| msgid "Enter additional fees"
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Қосымша ақысын келтіріңіз"
 
-#: kmymoney/views/investtransactioneditor.cpp:582
+#: kmymoney/views/investtransactioneditor.cpp:608
 #, fuzzy, kde-format
 #| msgid "Expense categories"
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Шығыс санаттар"
 
-#: kmymoney/views/investtransactioneditor.cpp:585
+#: kmymoney/views/investtransactioneditor.cpp:611
 #, fuzzy, kde-format
 #| msgid "Type of interest"
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Өсім мөшерлеме түрі"
 
-#: kmymoney/views/investtransactioneditor.cpp:590
+#: kmymoney/views/investtransactioneditor.cpp:616
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"

@@ -410,6 +410,27 @@
 >D'acord</guibutton
 > per a desar tota l'operació. Si encara hi ha un import sense assignar, se us demanarà que torneu a editar els desglossaments, canvieu l'import total de l'operació o deixeu part de l'operació sense assignar. </para>
 
+<para>
+	<screenshot>
+	<screeninfo
+>Desglossa amb un import sense assignar</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="split_unasigned.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Desglossa amb un import sense assignar</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Per a redistribuir una quantitat «Sense assignar» o «Sobreassignada», seleccioneu un element desglossat que s'ha d'ajustar. Després d'això, feu clic en el botó <guibutton
+>Aplica la diferència</guibutton
+>. Si s'ha mostrat prèviament «Sense assignar» i no és zero, aquesta quantitat s'afegirà al valor de l'element de la línia seleccionada. Si s'ha mostrat prèviament «Sobreassignada» i no és zero, aquesta quantitat es restarà del valor de l'element de la línia seleccionada. Com a resultat, l'import «Sense assignar» s'establirà a zero i l'operació es podrà desar correctament. </para>
+
 <para
 >Recordeu que el camp Categoria al formulari de l'operació o a la llista d'operacions ara mostrarà <emphasis
 >Operació desglossada</emphasis
@@ -646,4 +667,3 @@
 > de la barra de menús i podreu canviar els detalls del compte. També hi ha un element de menú perquè aparegui el menú Concilia, el qual permet comparar les operacions amb un extracte bancari oficial o un avís de la targeta de crèdit. </para>
 </sect1>
 </chapter>
-

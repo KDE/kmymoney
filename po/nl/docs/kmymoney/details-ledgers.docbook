@@ -390,6 +390,27 @@
 >OK</guibutton
 > om de gehele transactie op te slaan. Als er nog steeds een niet toegekende hoeveelheid is, zult u gevraagd worden om ofwel terug te keren naar het bewerken van het splitsen, de totale hoeveelheid in de transactie te wijzigen of een gedeelte van de transactie niet toegekend te laten. </para>
 
+<para>
+	<screenshot>
+	<screeninfo
+>Split with unassigned amount</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="split_unasigned.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Split with unassigned amount</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Om een 'niet-toegekend' of 'over-toegekend' bedrag te herverdelen, selecteert u een gesplitst item dat aangepast moet worden. Klik daarna op een knop <guibutton
+>Verschil toepassen</guibutton
+>. Als 'niet-toegekend' eerder werd getoond en niet-nul, zal die hoeveelheid opgeteld worden bij de waarde in het geselecteerde regelitem. Als 'over-toegekend' eerder werd getoond en niet-nul, zal die hoeveelheid afgetrokken worden van de waarde in het geselecteerde regelitem. Als resultaat zal de 'niet-toegekende' hoeveelheid ingesteld worden op nul en een transactie kan met succes opgeslagen worden. </para>
+
 <para
 >Merk op dat het veld categorie in het transactieformulier of de lijst met transacties nu <emphasis
 >Transactie splitsen</emphasis
@@ -616,4 +637,3 @@
 > kunt u de details van de rekening wijzigen. Er is ook een menu-item om om het menu Controleren te voorschijn te roepen, wat u toestaat transacties overeen te laten komen met een officieel bankafschrift of creditcardafschrift. </para>
 </sect1>
 </chapter>
-
