@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:47+0000\n"
-"PO-Revision-Date: 2022-12-01 00:13+0100\n"
+"PO-Revision-Date: 2022-12-01 16:34+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.11.80\n"
+"X-Generator: Lokalize 22.11.90\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -18721,15 +18721,13 @@ msgstr "Información de precio para esta transacción"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Security for this transaction"
-msgstr "Seguridad para esta transacción"
+msgstr "Valor bursátil para esta transacción"
 
 #: kmymoney/views/investtransactioneditor.cpp:530
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Select the security for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
-msgstr "Seleccione la seguridad para esta transacción"
+msgstr "Seleccione la actividad para esta transacción"
 
 #: kmymoney/views/investtransactioneditor.cpp:533
 #, kde-format
@@ -18738,6 +18736,8 @@ msgid ""
 "The security for this transaction cannot be modified because the security "
 "account is closed."
 msgstr ""
+"El valor bursátil para esta transacción no se puede modificar porque la "
+"cuenta de valores está cerrada."
 
 #: kmymoney/views/investtransactioneditor.cpp:534
 #, kde-format
@@ -18745,6 +18745,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "This activity cannot be modified because the security account is closed."
 msgstr ""
+"Esta actividad no se puede modificar porque la cuenta de valores está "
+"cerrada."
 
 #: kmymoney/views/investtransactioneditor.cpp:546
 #, kde-format
@@ -18759,6 +18761,8 @@ msgid ""
 "The number of shares cannot be modified because the security account is "
 "closed."
 msgstr ""
+"El número de participaciones no se puede modificar porque la cuenta de "
+"valores está cerrada."
 
 #: kmymoney/views/investtransactioneditor.cpp:552
 #, kde-format
@@ -18770,7 +18774,7 @@ msgstr "Introduzca el número de participaciones para esta transacción"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
-msgstr "Proporción de la división"
+msgstr "Proporción de la partida"
 
 #: kmymoney/views/investtransactioneditor.cpp:560
 #, kde-format
@@ -18778,12 +18782,14 @@ msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
+"La proporción de la partida no se puede modificar porque la cuenta de "
+"valores está cerrada."
 
 #: kmymoney/views/investtransactioneditor.cpp:564
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
-msgstr "Introduzca la proporción de la división para esta transacción"
+msgstr "Introduzca la proporción de la partida para esta transacción"
 
 #: kmymoney/views/investtransactioneditor.cpp:576
 #, kde-format
@@ -18825,7 +18831,7 @@ msgstr "Introduzca el importe del interés"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
-msgstr "Seleccione la seguridad para esta transacción"
+msgstr "Seleccione el valor bursátil para esta transacción"
 
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, priceAmountEdit)
 #: kmymoney/views/investtransactioneditor.ui:29

@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:47+0000\n"
-"PO-Revision-Date: 2022-11-15 06:55+0100\n"
+"PO-Revision-Date: 2022-12-01 09:13+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
 "X-Generator: Poedit 3.1.1\n"
 
 #, kde-format
@@ -18656,12 +18656,10 @@ msgid "Security for this transaction"
 msgstr "Vrednostni papir za to transakcijo"
 
 #: kmymoney/views/investtransactioneditor.cpp:530
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Select the security for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
-msgstr "Izberi vrednostni papir za to transakcijo"
+msgstr "Izberite dejavnost za to transakcijo."
 
 #: kmymoney/views/investtransactioneditor.cpp:533
 #, kde-format
@@ -18670,6 +18668,8 @@ msgid ""
 "The security for this transaction cannot be modified because the security "
 "account is closed."
 msgstr ""
+"Vrednostnega papirja za to transakcijo ni mogoče spremeniti, ker je račun za "
+"ta vrednostni papir zaprt."
 
 #: kmymoney/views/investtransactioneditor.cpp:534
 #, kde-format
@@ -18677,6 +18677,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "This activity cannot be modified because the security account is closed."
 msgstr ""
+"Te dejavnosti ni mogoče spremeniti, ker je račun za vrednostni papir zaprt."
 
 #: kmymoney/views/investtransactioneditor.cpp:546
 #, kde-format
@@ -18691,6 +18692,7 @@ msgid ""
 "The number of shares cannot be modified because the security account is "
 "closed."
 msgstr ""
+"Števila delnic ni mogoče spremeniti, ker je račun za vrednostni papir zaprt."
 
 #: kmymoney/views/investtransactioneditor.cpp:552
 #, kde-format
@@ -18710,6 +18712,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
+"Razmerja delitve ni mogoče spremeniti, ker je račun za vrednostni papir "
+"zaprt."
 
 #: kmymoney/views/investtransactioneditor.cpp:564
 #, kde-format
@@ -20360,11 +20364,10 @@ msgid "Never reconciled"
 msgstr "Nikoli usklajeno"
 
 #: kmymoney/views/ledgerviewpage_p.h:134
-#, fuzzy, kde-format
-#| msgid "Investment: %1"
+#, kde-format
 msgctxt "@label:textbox Total value of investment"
 msgid "Investment value: %1%2"
-msgstr "Naložbe: %1"
+msgstr "Vrednost naložbe: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:138
 #: kmymoney/views/reconciliationledgerviewpage.cpp:352
@@ -20611,12 +20614,10 @@ msgstr ""
 "na letvici zavihkov zgoraj, da bi izbrali račun.</p></body></html>"
 
 #: kmymoney/views/splitdialog.cpp:312
-#, fuzzy, kde-format
-#| msgctxt "Split editor summary"
-#| msgid "Unassigned"
+#, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
-msgstr "Nedodeljeno"
+msgstr "Predodeljeno"
 
 #: kmymoney/views/splitdialog.cpp:315
 #, kde-format
@@ -20674,13 +20675,15 @@ msgid ""
 "'Unassigned' amount will be added or 'Overassigned' amount\n"
 "will be subtracted from the amount of the selected split."
 msgstr ""
+"Uveljavi 'Nedodeljeno' ali 'Predodeljeno' za znesek trenutne delitve.\n"
+"'Nedodeljen' znesek bo dodan oz. 'Predodeljen' znesek bo odštet od zneska "
+"izbrane delitve."
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
 #: kmymoney/views/splitdialog.ui:633
-#, fuzzy, kde-format
-#| msgid "Difference"
+#, kde-format
 msgid "Apply Difference"
-msgstr "Razlika"
+msgstr "Uveljavi razliko"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
 #: kmymoney/views/splitdialog.ui:641
@@ -20880,11 +20883,10 @@ msgid "Name"
 msgstr "Ime"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
-#, fuzzy, kde-format
-#| msgid "Use this to open the profile editor"
+#, kde-format
 msgctxt "@info:tooltip icon in category to open the split editor"
 msgid "Click this icon to open the split editor"
-msgstr "Uporabi to, da odpreš urejevalnik profila"
+msgstr "Kliknite to ikono, da odprete urejevalnik delitve"
 
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:69
 #, kde-format

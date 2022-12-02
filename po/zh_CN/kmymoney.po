@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:47+0000\n"
-"PO-Revision-Date: 2022-11-19 14:48\n"
+"PO-Revision-Date: 2022-12-01 06:52\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -19669,11 +19669,10 @@ msgid "Never reconciled"
 msgstr "从未对账"
 
 #: kmymoney/views/ledgerviewpage_p.h:134
-#, fuzzy, kde-format
-#| msgid "Investment: %1"
+#, kde-format
 msgctxt "@label:textbox Total value of investment"
 msgid "Investment value: %1%2"
-msgstr "投资：%1"
+msgstr "投资值：%1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:138
 #: kmymoney/views/reconciliationledgerviewpage.cpp:352
@@ -19902,12 +19901,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/splitdialog.cpp:312
-#, fuzzy, kde-format
-#| msgctxt "Split editor summary"
-#| msgid "Unassigned"
+#, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
-msgstr "未指派"
+msgstr ""
 
 #: kmymoney/views/splitdialog.cpp:315
 #, kde-format
@@ -19965,10 +19962,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
 #: kmymoney/views/splitdialog.ui:633
-#, fuzzy, kde-format
-#| msgid "Difference"
+#, kde-format
 msgid "Apply Difference"
-msgstr "差额"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
 #: kmymoney/views/splitdialog.ui:641
@@ -20155,11 +20151,10 @@ msgid "Name"
 msgstr "名称"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
-#, fuzzy, kde-format
-#| msgid "Use this to open the profile editor"
+#, kde-format
 msgctxt "@info:tooltip icon in category to open the split editor"
 msgid "Click this icon to open the split editor"
-msgstr "打开配置文件对话框"
+msgstr ""
 
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:69
 #, kde-format

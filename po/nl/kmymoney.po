@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:47+0000\n"
-"PO-Revision-Date: 2022-11-30 10:37+0100\n"
+"PO-Revision-Date: 2022-12-01 10:33+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -18699,12 +18699,10 @@ msgid "Security for this transaction"
 msgstr "Waardepapier voor deze transactie"
 
 #: kmymoney/views/investtransactioneditor.cpp:530
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Select the security for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
-msgstr "Het waardepapier voor deze transactie selecteren"
+msgstr "De activiteit voor deze transactie selecteren."
 
 #: kmymoney/views/investtransactioneditor.cpp:533
 #, kde-format
@@ -18713,6 +18711,8 @@ msgid ""
 "The security for this transaction cannot be modified because the security "
 "account is closed."
 msgstr ""
+"Het waardepapier voor deze transactie kan niet gewijzigd worden omdat het "
+"account voor het waardepapier gesloten is."
 
 #: kmymoney/views/investtransactioneditor.cpp:534
 #, kde-format
@@ -18720,6 +18720,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "This activity cannot be modified because the security account is closed."
 msgstr ""
+"Deze activiteit kan niet gewijzigd worden omdat het account voor het "
+"waardepapier gesloten is."
 
 #: kmymoney/views/investtransactioneditor.cpp:546
 #, kde-format
@@ -18734,6 +18736,8 @@ msgid ""
 "The number of shares cannot be modified because the security account is "
 "closed."
 msgstr ""
+"Het aantal aandelen kan niet gewijzigd worden omdat het account voor het "
+"waardepapier gesloten is."
 
 #: kmymoney/views/investtransactioneditor.cpp:552
 #, kde-format
@@ -18753,6 +18757,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
+"De splitsverhouding kan niet gewijzigd worden omdat het account voor het "
+"waardepapier gesloten is."
 
 #: kmymoney/views/investtransactioneditor.cpp:564
 #, kde-format

@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:47+0000\n"
-"PO-Revision-Date: 2022-11-14 06:13+0100\n"
+"PO-Revision-Date: 2022-12-01 23:37+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -15865,7 +15865,7 @@ msgstr "Txostenaren konfigurazioa"
 #, kde-format
 msgctxt "@info:tooltip for report configuration apply button"
 msgid "Apply the configuration changes to the report"
-msgstr "Txostenari konfigurazio-aldaketak aplikatu"
+msgstr "Aplikatu txostenari konfigurazio-aldaketak"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:128
 #, kde-format
@@ -18630,12 +18630,10 @@ msgid "Security for this transaction"
 msgstr "Transakzio honentzako finantza-aktiboa"
 
 #: kmymoney/views/investtransactioneditor.cpp:530
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Select the security for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
-msgstr "Aukeratu transakzio honentzako finantza-aktiboa"
+msgstr "Aukeratu transakzio honetarako jarduera."
 
 #: kmymoney/views/investtransactioneditor.cpp:533
 #, kde-format
@@ -18644,13 +18642,15 @@ msgid ""
 "The security for this transaction cannot be modified because the security "
 "account is closed."
 msgstr ""
+"Transakzio honetarako finantza-aktiboa ezin da aldatu aktibo-kontua itxita "
+"dagoelako."
 
 #: kmymoney/views/investtransactioneditor.cpp:534
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This activity cannot be modified because the security account is closed."
-msgstr ""
+msgstr "Jarduera hau ezin da aldatu aktibo-kontua itxita dagoelako."
 
 #: kmymoney/views/investtransactioneditor.cpp:546
 #, kde-format
@@ -18664,13 +18664,13 @@ msgctxt "@info:tooltip"
 msgid ""
 "The number of shares cannot be modified because the security account is "
 "closed."
-msgstr ""
+msgstr "Akzio kopurua ezin da aldatu aktibo-kontua itxita dagoelako."
 
 #: kmymoney/views/investtransactioneditor.cpp:552
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
-msgstr "Transakzio honen akzio kopurua sartu."
+msgstr "Sartu transakzio honetarako akzio kopurua."
 
 #: kmymoney/views/investtransactioneditor.cpp:558
 #, kde-format
@@ -18683,7 +18683,7 @@ msgstr "Zatiketa erlazioa"
 msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
-msgstr ""
+msgstr "Zatiketa erlazioa ezin da aldatu aktibo-kontua itxita dagoelako."
 
 #: kmymoney/views/investtransactioneditor.cpp:564
 #, kde-format
@@ -20322,8 +20322,7 @@ msgid "Never reconciled"
 msgstr "Inoiz adostu gabe"
 
 #: kmymoney/views/ledgerviewpage_p.h:134
-#, fuzzy, kde-format
-#| msgid "Investment value: %1%2"
+#, kde-format
 msgctxt "@label:textbox Total value of investment"
 msgid "Investment value: %1%2"
 msgstr "Inbertsio-balioa: %1%2"
@@ -20572,12 +20571,10 @@ msgstr ""
 "barrako + botoia kontu bat hautatzeko.</p></body></html>"
 
 #: kmymoney/views/splitdialog.cpp:312
-#, fuzzy, kde-format
-#| msgctxt "Split editor summary"
-#| msgid "Unassigned"
+#, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
-msgstr "Esleitu gabe"
+msgstr "Gainesleitua"
 
 #: kmymoney/views/splitdialog.cpp:315
 #, kde-format
@@ -20636,13 +20633,15 @@ msgid ""
 "'Unassigned' amount will be added or 'Overassigned' amount\n"
 "will be subtracted from the amount of the selected split."
 msgstr ""
+"Aplikatu 'Esleitu gabea' edo 'Gainesleitua' kopurua uneko partidara.\n"
+"'Esleitu gabea' kopurua hautatutako partidara gehituko da edo 'Gainesleitua' "
+"kopurua hautatutako partidatik kenduko da."
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
 #: kmymoney/views/splitdialog.ui:633
-#, fuzzy, kde-format
-#| msgid "Difference"
+#, kde-format
 msgid "Apply Difference"
-msgstr "Aldea"
+msgstr "Aplikatu aldea"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
 #: kmymoney/views/splitdialog.ui:641
@@ -20841,11 +20840,10 @@ msgid "Name"
 msgstr "Izena"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
-#, fuzzy, kde-format
-#| msgid "Use this to open the profile editor"
+#, kde-format
 msgctxt "@info:tooltip icon in category to open the split editor"
 msgid "Click this icon to open the split editor"
-msgstr "Erabili hau profil-editorea irekitzeko"
+msgstr "Egin klik ikono horri partida-editorea irekitzeko"
 
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:69
 #, kde-format

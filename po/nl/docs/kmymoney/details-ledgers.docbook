@@ -393,14 +393,14 @@
 <para>
 	<screenshot>
 	<screeninfo
->Split with unassigned amount</screeninfo>
+>Splitsen met niet-toegekend bedrag</screeninfo>
 	<mediaobject>
 	<imageobject>
 	<imagedata fileref="split_unasigned.png" format="PNG"/>
 	</imageobject>
 	<textobject>
 	<phrase
->Split with unassigned amount</phrase>
+>Splitsen met niet-toegekend bedrag</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>

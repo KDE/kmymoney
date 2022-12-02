@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:47+0000\n"
-"PO-Revision-Date: 2022-11-30 06:59+0200\n"
+"PO-Revision-Date: 2022-12-01 10:48+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -18799,12 +18799,10 @@ msgid "Security for this transaction"
 msgstr "Цінний папір для цієї операції"
 
 #: kmymoney/views/investtransactioneditor.cpp:530
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Select the security for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
-msgstr "Виберіть цінний папір для цієї операції"
+msgstr "Виберіть дію для цієї операції"
 
 #: kmymoney/views/investtransactioneditor.cpp:533
 #, kde-format
@@ -18813,6 +18811,8 @@ msgid ""
 "The security for this transaction cannot be modified because the security "
 "account is closed."
 msgstr ""
+"Цінний папір для цієї операції змінювати не можна, оскільки рахунок цінних "
+"паперів закрито."
 
 #: kmymoney/views/investtransactioneditor.cpp:534
 #, kde-format
@@ -18820,6 +18820,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "This activity cannot be modified because the security account is closed."
 msgstr ""
+"Записі цієї дії не може бути змінено, оскільки рахунок цінних паперів "
+"закрито."
 
 #: kmymoney/views/investtransactioneditor.cpp:546
 #, kde-format
@@ -18834,6 +18836,8 @@ msgid ""
 "The number of shares cannot be modified because the security account is "
 "closed."
 msgstr ""
+"Кількість акцій не може бути змінено, оскільки рахунок цінних паперів "
+"закрито."
 
 #: kmymoney/views/investtransactioneditor.cpp:552
 #, kde-format
@@ -18853,6 +18857,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
+"Співвідношення дроблення не може бути змінено, оскільки рахунок цінних "
+"паперів закрито."
 
 #: kmymoney/views/investtransactioneditor.cpp:564
 #, kde-format

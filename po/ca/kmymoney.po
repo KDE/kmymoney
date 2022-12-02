@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:47+0000\n"
-"PO-Revision-Date: 2022-11-30 09:33+0100\n"
+"PO-Revision-Date: 2022-12-01 13:36+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -18748,12 +18748,10 @@ msgid "Security for this transaction"
 msgstr "Títol per a aquesta operació"
 
 #: kmymoney/views/investtransactioneditor.cpp:530
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Select the security for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
-msgstr "Seleccioneu el títol per a aquesta operació"
+msgstr "Seleccioneu l'activitat per a aquesta operació."
 
 #: kmymoney/views/investtransactioneditor.cpp:533
 #, kde-format
@@ -18762,6 +18760,8 @@ msgid ""
 "The security for this transaction cannot be modified because the security "
 "account is closed."
 msgstr ""
+"No s'ha pogut modificar el títol d'aquesta operació perquè el compte dels "
+"títols està tancat."
 
 #: kmymoney/views/investtransactioneditor.cpp:534
 #, kde-format
@@ -18769,6 +18769,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "This activity cannot be modified because the security account is closed."
 msgstr ""
+"No s'ha pogut modificar aquesta activitat perquè el compte dels títols està "
+"tancat."
 
 #: kmymoney/views/investtransactioneditor.cpp:546
 #, kde-format
@@ -18783,6 +18785,8 @@ msgid ""
 "The number of shares cannot be modified because the security account is "
 "closed."
 msgstr ""
+"No s'ha pogut modificar el nombre d'accions perquè el compte dels títols "
+"està tancat."
 
 #: kmymoney/views/investtransactioneditor.cpp:552
 #, kde-format
@@ -18794,7 +18798,7 @@ msgstr "Introduïu el nombre d'accions d'aquesta operació"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
-msgstr "Relació del desdoblament"
+msgstr "Relació de desdoblament"
 
 #: kmymoney/views/investtransactioneditor.cpp:560
 #, kde-format
@@ -18802,12 +18806,14 @@ msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
+"No s'ha pogut modificar la relació de desdoblament perquè el compte dels "
+"títols està tancat."
 
 #: kmymoney/views/investtransactioneditor.cpp:564
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
-msgstr "Introduïu la relació del desdoblament d'aquesta operació"
+msgstr "Introduïu la relació de desdoblament d'aquesta operació"
 
 #: kmymoney/views/investtransactioneditor.cpp:576
 #, kde-format
