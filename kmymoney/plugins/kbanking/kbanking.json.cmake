@@ -41,6 +41,7 @@
         "Description[fi]": "Lisää KMyMoneyyn HBCI/FinTs-, OFX- ja PayPal-verkkopankit",
         "Description[fr]": "Ajoute des capacités de banque HBCI/FinTs, OFS et PayPal en ligne à KMyMoney",
         "Description[it]": "Aggiungi servizi bancari in linea HBCI/FinTs, OFX e PayPal a KMyMoney",
+        "Description[ka]": "KMyMoney-ში HBCI/FinTs, OFX და PayPal-ის ონლაინ ბანკინგის დამატება",
         "Description[ko]": "KMyMoney에 HBCI/FinTs, OFX, PayPal 온라인 뱅킹 추가",
         "Description[nl]": "Voegt HBCI/FinTs, OFX en PayPal online bankieren toe aan KMyMoney",
         "Description[pl]": "Dodaje obsługę bankowości sieciowej HBCI/FinTs, OFX oraz PayPal do KMyMoney",

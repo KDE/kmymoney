@@ -44,6 +44,7 @@
         "Description[fr]": "Ajoute la vue Rapports à KMyMoney",
         "Description[gl]": "Engade unha vista de informes a KMyMoney",
         "Description[it]": "Aggiunge la vista dei report a KMyMoney",
+        "Description[ka]": "KMyMoney-ში ანგარიშის ხედების დამატება",
         "Description[ko]": "KMyMoney에 보고서 보기 추가",
         "Description[nl]": "Voegt weergave van rapporten toe aan KMyMoney",
         "Description[pl]": "Dodaje widok sprawozdań do KMyMoney",

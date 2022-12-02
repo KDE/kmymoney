@@ -43,6 +43,7 @@
         "Description[fr]": "Ajoute la prise en charge du stockage « XML » à KMyMoney",
         "Description[gl]": "Engade a posibilidade de almacenamento de XML en KMyMoney",
         "Description[it]": "Aggiunge il supporto per l'archiviazione XML a KMyMoney",
+        "Description[ka]": "KMyMoney-ში XML საცავის მხარდაჭერის დამატება",
         "Description[ko]": "KMyMoney에 XML 저장소 지원 추가",
         "Description[nl]": "Voegt ondersteuning toe voor XML-opslag aan KMyMoney",
         "Description[pl]": "Dodaje obsługę pamięci XML do KMyMoney",
