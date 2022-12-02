@@ -196,11 +196,11 @@ public:
 
         tmp += QString("<td>") + link(VIEW_LEDGER, QString("?id=%1").arg(acc.id()));
         if (acc.isClosed()) {
-            tmp += QLatin1String("<strike>");
+            tmp += QLatin1String("<s>");
         }
         tmp +=  acc.name().replace("<", "&lt;").replace(">", "&gt;");
         if (acc.isClosed()) {
-            tmp += QLatin1String("</strike>");
+            tmp += QLatin1String("</s>");
         }
         tmp += linkend() + "</td>";
 
