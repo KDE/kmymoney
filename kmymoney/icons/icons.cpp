@@ -69,6 +69,7 @@ const QHash<Icon, QString> iconMappings{
     {Icon::Help, QStringLiteral("help-contents")},
     {Icon::HideCategories, QStringLiteral("hide-categories")},
     {Icon::HideReconciled, QStringLiteral("view-financial-transfer-unreconciled")},
+    {Icon::ItemExchange, QStringLiteral("object-flip-vertical-symbolic")},
     {Icon::KMyMoney, QStringLiteral("kmymoney")},
     {Icon::KeyEnter, QStringLiteral("key-enter")},
     {Icon::Link, QStringLiteral("link")},

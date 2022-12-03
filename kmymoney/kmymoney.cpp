@@ -1322,17 +1322,15 @@ public:
             swap(remaining, toBeDeleted);
         }
 
-        bool doMatch = true;
-        // in case the transaction we are about to remove contains
-        // more than one split, we ask the user if this is what
-        // she really wants.
-        if (toBeDeleted.transaction().splitCount() > 1) {
-            KTransactionMergeDlg dlg(q);
-            dlg.addTransaction(remainingId);
-            dlg.addTransaction(toBeDeletedId);
-            doMatch = (dlg.exec() == QDialog::Accepted);
-        }
+        QPointer<KTransactionMergeDlg> dlg(new KTransactionMergeDlg(q));
+        dlg->addTransaction(remainingId);
+        dlg->addTransaction(toBeDeletedId);
+        const auto doMatch = ((dlg->exec() == QDialog::Accepted) && (dlg != nullptr));
+
         if (doMatch && (toBeDeleted.split().accountId() == remaining.split().accountId())) {
+            remaining = file->journalModel()->itemById(dlg->remainingTransactionId());
+            toBeDeleted = file->journalModel()->itemById(dlg->mergedTransactionId());
+
             MyMoneyFileTransaction ft;
             try {
                 if (remaining.transaction().id().isEmpty())
@@ -1350,6 +1348,8 @@ public:
             // inform views about the match (they may have to reselect some items)
             m_myMoneyView->executeAction(Action::MatchTransaction, priorSelection);
         }
+
+        delete dlg;
     }
 
     void unmatchTransaction()

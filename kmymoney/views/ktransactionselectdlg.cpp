@@ -16,6 +16,7 @@
 
 #include "ui_ktransactionselectdlg.h"
 
+#include "icons.h"
 #include "journalmodel.h"
 #include "ledgerjournalidfilter.h"
 #include "mymoneyfile.h"
@@ -29,6 +30,7 @@ public:
         : q_ptr(qq)
         , ui(new Ui::KTransactionSelectDlg)
         , filterModel(new LedgerJournalIdFilter(qq, QVector<QAbstractItemModel*>{}))
+        , sortOrder(Qt::AscendingOrder)
     {
     }
 
@@ -40,6 +42,7 @@ public:
     KTransactionSelectDlg* q_ptr;
     Ui::KTransactionSelectDlg* ui;
     LedgerJournalIdFilter* filterModel;
+    Qt::SortOrder sortOrder;
 };
 
 KTransactionSelectDlg::KTransactionSelectDlg(QWidget* parent)
@@ -48,9 +51,13 @@ KTransactionSelectDlg::KTransactionSelectDlg(QWidget* parent)
 {
     Q_D(KTransactionSelectDlg);
     d->ui->setupUi(this);
+    d->ui->switchButton->hide();
 
     d->filterModel->setSourceModel(MyMoneyFile::instance()->journalModel());
     d->ui->m_ledgerView->setModel(d->filterModel);
+    // don't show sort indicator and don't allow sorting via header
+    d->ui->m_ledgerView->horizontalHeader()->setSortIndicatorShown(false);
+    d->ui->m_ledgerView->setSortingEnabled(false);
 
     QVector<int> columns;
     columns = {
@@ -94,14 +101,30 @@ void KTransactionSelectDlg::addTransaction(const QString& journalEntryId)
 KTransactionMergeDlg::KTransactionMergeDlg(QWidget* parent)
     : KTransactionSelectDlg(parent)
 {
+    Q_D(KTransactionSelectDlg);
     // setup descriptive texts
     setWindowTitle(i18n("Merge Transactions"));
-    d_ptr->ui->label->setText(
-        i18n("Are you sure you wish to merge these transactions?  The one you "
-             "selected first is the top one, and its values will be used in "
-             "the merged transaction.  Cancel and select the other transaction "
-             "first, if you want its values to be used."));
+    d_ptr->ui->label->setText(i18nc("@info:label Description of merge transaction dialog",
+                                    "The two selected transactions to merge are shown. The one at "
+                                    "the top and its values will be used in the resulting "
+                                    "merged transaction.  If you want to use the other one "
+                                    "press the exchange button on the right."));
 
+    d->ui->switchButton->setIcon(Icons::get(Icons::Icon::ItemExchange));
+    d->ui->switchButton->setToolTip(i18nc("@info:tooltip Exchange transactions about to merge", "Press to exchange the two transactions."));
+    d->ui->switchButton->show();
+
+    connect(d->ui->switchButton, &QAbstractButton::clicked, this, [&]() {
+        Q_D(KTransactionSelectDlg);
+        // swap order
+        d->sortOrder = (d->sortOrder == Qt::DescendingOrder) ? Qt::AscendingOrder : Qt::DescendingOrder;
+        d->filterModel->setSortRole(eMyMoney::Model::IdRole);
+        d->filterModel->sort(0, d->sortOrder);
+
+        // and reselect the first entry
+        const auto idx = d->filterModel->index(0, 0);
+        d->ui->m_ledgerView->setSelectedJournalEntries(QStringList(idx.data(eMyMoney::Model::IdRole).toString()));
+    });
     // no selection possible
     // d_ptr->ui->m_register->setSelectionMode(QTableWidget::NoSelection);
 
@@ -116,4 +139,26 @@ void KTransactionMergeDlg::addTransaction(const QString& journalEntryId)
     KTransactionSelectDlg::addTransaction(journalEntryId);
     const auto idx = d->filterModel->index(0, 0);
     d->ui->m_ledgerView->setSelectedJournalEntries(QStringList(idx.data(eMyMoney::Model::IdRole).toString()));
+}
+
+QString KTransactionMergeDlg::remainingTransactionId() const
+{
+    Q_D(const KTransactionSelectDlg);
+
+    if (d->filterModel->rowCount() == 2) {
+        const auto idx = d->filterModel->index(0, 0);
+        return idx.data(eMyMoney::Model::IdRole).toString();
+    }
+    return {};
+}
+
+QString KTransactionMergeDlg::mergedTransactionId() const
+{
+    Q_D(const KTransactionSelectDlg);
+
+    if (d->filterModel->rowCount() == 2) {
+        const auto idx = d->filterModel->index(1, 0);
+        return idx.data(eMyMoney::Model::IdRole).toString();
+    }
+    return {};
 }

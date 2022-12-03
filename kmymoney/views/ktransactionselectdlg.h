@@ -46,5 +46,26 @@ public:
     explicit KTransactionMergeDlg(QWidget* parent = nullptr);
 
     void addTransaction(const QString& journalEntryId);
+
+    /**
+     * Returns the id of the transaction to remain.
+     * Returns the value only, if two transactions have
+     * been added using addTransaction(). Otherwise,
+     * the returned value is empty.
+     *
+     * @sa mergedTransactionId()
+     */
+    QString remainingTransactionId() const;
+
+    /**
+     * Returns the id of the transaction to be merged
+     * into the remaining transaction.
+     * Returns the value only, if two transactions have
+     * been added using addTransaction().  Otherwise,
+     * the returned value is empty.
+     *
+     * @sa remainingTransactionId()
+     */
+    QString mergedTransactionId() const;
 };
 #endif // KTRANSACTIONSELECTDLG_H

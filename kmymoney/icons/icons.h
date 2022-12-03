@@ -71,6 +71,7 @@ enum class Icon { OpenDatabase, Link, Unlink, Reconcile, Split, Tip, Performance
                   TransactionStateReconciled, Unknown,
                   Report, Refresh, PreferencesGeneral,
                   SortAscending, SortDescending,
+                  ItemExchange,
                   ArrowUp, ArrowDown, ArrowRight, ArrowLeft,
                   TaskComplete,
                   TaskReject, TaskAccepted, TaskOngoing, TaskPending,
