@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-01 00:47+0000\n"
+"POT-Creation-Date: 2022-12-04 00:46+0000\n"
 "PO-Revision-Date: 2022-12-01 23:37+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -1880,6 +1880,7 @@ msgstr "Egoera:"
 #. i18n: ectx: property (text), widget (QToolButton, m_closeButton)
 #. i18n: ectx: property (text), widget (QToolButton, m_collapseButton)
 #. i18n: ectx: property (text), widget (QToolButton, m_expandButton)
+#. i18n: ectx: property (text), widget (QToolButton, switchButton)
 #. i18n: ectx: property (text), widget (QToolButton, iconButton)
 #. i18n: ectx: property (text), widget (QToolButton, closeStatusButton)
 #. i18n: ectx: property (text), widget (QPushButton, choosePath)
@@ -1912,7 +1913,9 @@ msgstr "Egoera:"
 #: kmymoney/plugins/views/reports/kreportsview.ui:77
 #: kmymoney/settings/kmymoney.kcfg:452 kmymoney/views/kinstitutionsview.ui:53
 #: kmymoney/views/kinstitutionsview.ui:71
-#: kmymoney/views/kinstitutionsview.ui:81 kmymoney/views/ledgerviewpage.ui:123
+#: kmymoney/views/kinstitutionsview.ui:81
+#: kmymoney/views/ktransactionselectdlg.ui:50
+#: kmymoney/views/ledgerviewpage.ui:123
 #: kmymoney/widgets/kmymoneybriefschedule.ui:82
 #: kmymoney/widgets/kmymoneybriefschedule.ui:131
 #, kde-format
@@ -4679,7 +4682,7 @@ msgstr "Konpondu transakzioak"
 msgid "Untitled"
 msgstr "Izengabea"
 
-#: kmymoney/kmymoney.cpp:1347
+#: kmymoney/kmymoney.cpp:1345
 #, kde-format
 msgid "Unable to match the selected transactions"
 msgstr "Ezin dira parekatu hautatutako transakzioak"
@@ -20122,23 +20125,35 @@ msgstr "Etiketa-konfigurazioa"
 msgid "Tag color:"
 msgstr "Etiketaren kolorea:"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:98
+#: kmymoney/views/ktransactionselectdlg.cpp:106
 #, kde-format
 msgid "Merge Transactions"
 msgstr "Transakzioak batu"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:100
-#, kde-format
+#: kmymoney/views/ktransactionselectdlg.cpp:108
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you wish to merge these transactions?  The one you selected "
+#| "first is the top one, and its values will be used in the merged "
+#| "transaction.  Cancel and select the other transaction first, if you want "
+#| "its values to be used."
+msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
-"Are you sure you wish to merge these transactions?  The one you selected "
-"first is the top one, and its values will be used in the merged "
-"transaction.  Cancel and select the other transaction first, if you want its "
-"values to be used."
+"The two selected transactions to merge are shown. The one at the top and its "
+"values will be used in the resulting merged transaction.  If you want to use "
+"the other one press the exchange button on the right."
 msgstr ""
 "Ziur zaude eragiketa hauek bateratu nahi duzula? Zuk hautatu duzun  "
 "lehenengoa goikoa izango da eta bere baloreak erabiliko dira "
 "bateratzerakoan. Utzi eta aukeratu lehenengo beste eragiketa, bere baloreak "
 "erabiltzeko."
+
+#: kmymoney/views/ktransactionselectdlg.cpp:114
+#, fuzzy, kde-format
+#| msgid "Unable to match the selected transactions"
+msgctxt "@info:tooltip Exchange transactions about to merge"
+msgid "Press to exchange the two transactions."
+msgstr "Ezin dira parekatu hautatutako transakzioak"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14

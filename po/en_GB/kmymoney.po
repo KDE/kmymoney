@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-01 00:47+0000\n"
+"POT-Creation-Date: 2022-12-04 00:46+0000\n"
 "PO-Revision-Date: 2022-09-18 12:11+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -1863,6 +1863,7 @@ msgstr "Status:"
 #. i18n: ectx: property (text), widget (QToolButton, m_closeButton)
 #. i18n: ectx: property (text), widget (QToolButton, m_collapseButton)
 #. i18n: ectx: property (text), widget (QToolButton, m_expandButton)
+#. i18n: ectx: property (text), widget (QToolButton, switchButton)
 #. i18n: ectx: property (text), widget (QToolButton, iconButton)
 #. i18n: ectx: property (text), widget (QToolButton, closeStatusButton)
 #. i18n: ectx: property (text), widget (QPushButton, choosePath)
@@ -1895,7 +1896,9 @@ msgstr "Status:"
 #: kmymoney/plugins/views/reports/kreportsview.ui:77
 #: kmymoney/settings/kmymoney.kcfg:452 kmymoney/views/kinstitutionsview.ui:53
 #: kmymoney/views/kinstitutionsview.ui:71
-#: kmymoney/views/kinstitutionsview.ui:81 kmymoney/views/ledgerviewpage.ui:123
+#: kmymoney/views/kinstitutionsview.ui:81
+#: kmymoney/views/ktransactionselectdlg.ui:50
+#: kmymoney/views/ledgerviewpage.ui:123
 #: kmymoney/widgets/kmymoneybriefschedule.ui:82
 #: kmymoney/widgets/kmymoneybriefschedule.ui:131
 #, kde-format
@@ -4650,7 +4653,7 @@ msgstr "Fix transactions"
 msgid "Untitled"
 msgstr "Untitled"
 
-#: kmymoney/kmymoney.cpp:1347
+#: kmymoney/kmymoney.cpp:1345
 #, kde-format
 msgid "Unable to match the selected transactions"
 msgstr "Unable to match the selected transactions"
@@ -20059,23 +20062,35 @@ msgstr "Tag configuration"
 msgid "Tag color:"
 msgstr "Tag colour:"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:98
+#: kmymoney/views/ktransactionselectdlg.cpp:106
 #, kde-format
 msgid "Merge Transactions"
 msgstr "Merge Transactions"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:100
-#, kde-format
+#: kmymoney/views/ktransactionselectdlg.cpp:108
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you wish to merge these transactions?  The one you selected "
+#| "first is the top one, and its values will be used in the merged "
+#| "transaction.  Cancel and select the other transaction first, if you want "
+#| "its values to be used."
+msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
-"Are you sure you wish to merge these transactions?  The one you selected "
-"first is the top one, and its values will be used in the merged "
-"transaction.  Cancel and select the other transaction first, if you want its "
-"values to be used."
+"The two selected transactions to merge are shown. The one at the top and its "
+"values will be used in the resulting merged transaction.  If you want to use "
+"the other one press the exchange button on the right."
 msgstr ""
 "Are you sure you wish to merge these transactions?  The one you selected "
 "first is the top one, and its values will be used in the merged "
 "transaction.  Cancel and select the other transaction first, if you want its "
 "values to be used."
+
+#: kmymoney/views/ktransactionselectdlg.cpp:114
+#, fuzzy, kde-format
+#| msgid "Forget changes made to this transaction"
+msgctxt "@info:tooltip Exchange transactions about to merge"
+msgid "Press to exchange the two transactions."
+msgstr "Forget changes made to this transaction"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14
@@ -31286,9 +31301,6 @@ msgstr ""
 
 #~ msgid "Modify a transaction"
 #~ msgstr "Modify a transaction"
-
-#~ msgid "Forget changes made to this transaction"
-#~ msgstr "Forget changes made to this transaction"
 
 #~ msgid "Use this to abort the changes to the current transaction"
 #~ msgstr "Use this to abort the changes to the current transaction"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-01 00:47+0000\n"
+"POT-Creation-Date: 2022-12-04 00:46+0000\n"
 "PO-Revision-Date: 2022-12-01 10:48+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -1905,6 +1905,7 @@ msgstr "Стан:"
 #. i18n: ectx: property (text), widget (QToolButton, m_closeButton)
 #. i18n: ectx: property (text), widget (QToolButton, m_collapseButton)
 #. i18n: ectx: property (text), widget (QToolButton, m_expandButton)
+#. i18n: ectx: property (text), widget (QToolButton, switchButton)
 #. i18n: ectx: property (text), widget (QToolButton, iconButton)
 #. i18n: ectx: property (text), widget (QToolButton, closeStatusButton)
 #. i18n: ectx: property (text), widget (QPushButton, choosePath)
@@ -1937,7 +1938,9 @@ msgstr "Стан:"
 #: kmymoney/plugins/views/reports/kreportsview.ui:77
 #: kmymoney/settings/kmymoney.kcfg:452 kmymoney/views/kinstitutionsview.ui:53
 #: kmymoney/views/kinstitutionsview.ui:71
-#: kmymoney/views/kinstitutionsview.ui:81 kmymoney/views/ledgerviewpage.ui:123
+#: kmymoney/views/kinstitutionsview.ui:81
+#: kmymoney/views/ktransactionselectdlg.ui:50
+#: kmymoney/views/ledgerviewpage.ui:123
 #: kmymoney/widgets/kmymoneybriefschedule.ui:82
 #: kmymoney/widgets/kmymoneybriefschedule.ui:131
 #, kde-format
@@ -4711,7 +4714,7 @@ msgstr "Виправити операції"
 msgid "Untitled"
 msgstr "Без назви"
 
-#: kmymoney/kmymoney.cpp:1347
+#: kmymoney/kmymoney.cpp:1345
 #, kde-format
 msgid "Unable to match the selected transactions"
 msgstr "Не вдалося встановити відповідність позначених операцій"
@@ -20306,23 +20309,35 @@ msgstr "Налаштування міток"
 msgid "Tag color:"
 msgstr "Колір мітки:"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:98
+#: kmymoney/views/ktransactionselectdlg.cpp:106
 #, kde-format
 msgid "Merge Transactions"
 msgstr "Об'єднати операції"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:100
-#, kde-format
+#: kmymoney/views/ktransactionselectdlg.cpp:108
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you wish to merge these transactions?  The one you selected "
+#| "first is the top one, and its values will be used in the merged "
+#| "transaction.  Cancel and select the other transaction first, if you want "
+#| "its values to be used."
+msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
-"Are you sure you wish to merge these transactions?  The one you selected "
-"first is the top one, and its values will be used in the merged "
-"transaction.  Cancel and select the other transaction first, if you want its "
-"values to be used."
+"The two selected transactions to merge are shown. The one at the top and its "
+"values will be used in the resulting merged transaction.  If you want to use "
+"the other one press the exchange button on the right."
 msgstr ""
 "Ви справді хочете об'єднати ці записи операцій? Перша позначена операція "
 "вважатиметься пріоритетною — її значення буде використано у об'єднаному "
 "записі. Скасуйте об'єднання і виберіть першою іншу операцію, якщо ви хочете, "
 "щоб було використано її значення."
+
+#: kmymoney/views/ktransactionselectdlg.cpp:114
+#, fuzzy, kde-format
+#| msgid "Unable to match the selected transactions"
+msgctxt "@info:tooltip Exchange transactions about to merge"
+msgid "Press to exchange the two transactions."
+msgstr "Не вдалося встановити відповідність позначених операцій"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14

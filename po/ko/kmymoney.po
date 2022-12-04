@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-01 00:47+0000\n"
+"POT-Creation-Date: 2022-12-04 00:46+0000\n"
 "PO-Revision-Date: 2022-07-13 15:41+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1833,6 +1833,7 @@ msgstr "상태:"
 #. i18n: ectx: property (text), widget (QToolButton, m_closeButton)
 #. i18n: ectx: property (text), widget (QToolButton, m_collapseButton)
 #. i18n: ectx: property (text), widget (QToolButton, m_expandButton)
+#. i18n: ectx: property (text), widget (QToolButton, switchButton)
 #. i18n: ectx: property (text), widget (QToolButton, iconButton)
 #. i18n: ectx: property (text), widget (QToolButton, closeStatusButton)
 #. i18n: ectx: property (text), widget (QPushButton, choosePath)
@@ -1865,7 +1866,9 @@ msgstr "상태:"
 #: kmymoney/plugins/views/reports/kreportsview.ui:77
 #: kmymoney/settings/kmymoney.kcfg:452 kmymoney/views/kinstitutionsview.ui:53
 #: kmymoney/views/kinstitutionsview.ui:71
-#: kmymoney/views/kinstitutionsview.ui:81 kmymoney/views/ledgerviewpage.ui:123
+#: kmymoney/views/kinstitutionsview.ui:81
+#: kmymoney/views/ktransactionselectdlg.ui:50
+#: kmymoney/views/ledgerviewpage.ui:123
 #: kmymoney/widgets/kmymoneybriefschedule.ui:82
 #: kmymoney/widgets/kmymoneybriefschedule.ui:131
 #, kde-format
@@ -4597,7 +4600,7 @@ msgstr "거래 수정"
 msgid "Untitled"
 msgstr "제목 없음"
 
-#: kmymoney/kmymoney.cpp:1347
+#: kmymoney/kmymoney.cpp:1345
 #, kde-format
 msgid "Unable to match the selected transactions"
 msgstr "선택한 거래를 일치시킬 수 없음"
@@ -19852,22 +19855,34 @@ msgstr "태그 설정"
 msgid "Tag color:"
 msgstr "태그 색상:"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:98
+#: kmymoney/views/ktransactionselectdlg.cpp:106
 #, kde-format
 msgid "Merge Transactions"
 msgstr "거래 병합"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:100
-#, kde-format
+#: kmymoney/views/ktransactionselectdlg.cpp:108
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you wish to merge these transactions?  The one you selected "
+#| "first is the top one, and its values will be used in the merged "
+#| "transaction.  Cancel and select the other transaction first, if you want "
+#| "its values to be used."
+msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
-"Are you sure you wish to merge these transactions?  The one you selected "
-"first is the top one, and its values will be used in the merged "
-"transaction.  Cancel and select the other transaction first, if you want its "
-"values to be used."
+"The two selected transactions to merge are shown. The one at the top and its "
+"values will be used in the resulting merged transaction.  If you want to use "
+"the other one press the exchange button on the right."
 msgstr ""
 "이 거래 내역을 합치시겠습니까? 처음에 선택된 내역을 대표 내역으로 하고, 그 값"
 "을 합쳐진 거래 내역에 사용합니다. 다른 값을 사용하려면 취소하고 다른 거래 내"
 "역을 선택하십시오."
+
+#: kmymoney/views/ktransactionselectdlg.cpp:114
+#, fuzzy, kde-format
+#| msgid "Unable to match the selected transactions"
+msgctxt "@info:tooltip Exchange transactions about to merge"
+msgid "Press to exchange the two transactions."
+msgstr "선택한 거래를 일치시킬 수 없음"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14
