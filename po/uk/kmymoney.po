@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-04 00:46+0000\n"
-"PO-Revision-Date: 2022-12-01 10:48+0200\n"
+"PO-Revision-Date: 2022-12-04 08:50+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -20315,29 +20315,22 @@ msgid "Merge Transactions"
 msgstr "Об'єднати операції"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:108
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you wish to merge these transactions?  The one you selected "
-#| "first is the top one, and its values will be used in the merged "
-#| "transaction.  Cancel and select the other transaction first, if you want "
-#| "its values to be used."
+#, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
 "The two selected transactions to merge are shown. The one at the top and its "
 "values will be used in the resulting merged transaction.  If you want to use "
 "the other one press the exchange button on the right."
 msgstr ""
-"Ви справді хочете об'єднати ці записи операцій? Перша позначена операція "
-"вважатиметься пріоритетною — її значення буде використано у об'єднаному "
-"записі. Скасуйте об'єднання і виберіть першою іншу операцію, якщо ви хочете, "
-"щоб було використано її значення."
+"Показано дві позначені для об'єднання операції. В об'єднаній операції буде "
+"використано верхню операцію та її значення. Якщо ви хочете скористатися "
+"іншим значенням, натисніть кнопку обміну значень праворуч."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:114
-#, fuzzy, kde-format
-#| msgid "Unable to match the selected transactions"
+#, kde-format
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
-msgstr "Не вдалося встановити відповідність позначених операцій"
+msgstr "Натисніть, щоб обмінятися значеннями між двома операціями."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14

@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-04 00:46+0000\n"
-"PO-Revision-Date: 2022-12-01 10:33+0100\n"
+"PO-Revision-Date: 2022-12-04 12:33+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -20208,29 +20208,23 @@ msgid "Merge Transactions"
 msgstr "Voeg transacties samen"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:108
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you wish to merge these transactions?  The one you selected "
-#| "first is the top one, and its values will be used in the merged "
-#| "transaction.  Cancel and select the other transaction first, if you want "
-#| "its values to be used."
+#, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
 "The two selected transactions to merge are shown. The one at the top and its "
 "values will be used in the resulting merged transaction.  If you want to use "
 "the other one press the exchange button on the right."
 msgstr ""
-"Wilt u deze transacties samenvoegen?  De eerst geselecteerde is de bovenste "
-"en zijn waarden zullen gebruikt worden in de samengevoegde transactie.  "
-"Annuleer en selecteer de andere transactie eerst, als u die waarden wilt "
-"gebruiken."
+"De twee geselecteerde samen te voegen transacties worden getoond. De ene "
+"bovenaan en zijn waarden zullen gebruikt worden in de resulteren "
+"samengevoegde transactie.  Als u de andere wilt gebruiken, druk dan op de "
+"knop omwisselen rechts."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:114
-#, fuzzy, kde-format
-#| msgid "Unable to match the selected transactions"
+#, kde-format
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
-msgstr "Kan deze transacties niet vergelijken"
+msgstr "Druk om deze transacties te verwisselen."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14

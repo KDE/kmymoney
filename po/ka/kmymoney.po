@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-04 00:46+0000\n"
-"PO-Revision-Date: 2022-12-01 06:26+0100\n"
+"PO-Revision-Date: 2022-12-04 07:07+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3520,7 +3520,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:129
 #, kde-format
 msgid "Regular Expression to extract the date from the downloaded data"
-msgstr ""
+msgstr "გადმოწერილი მონაცემებიდან თარიღის გამოსაღები რეგულარული გამოსახულება"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_4)
@@ -3556,7 +3556,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:139
 #, kde-format
 msgid "Regular Expression to extract the price from the downloaded data"
-msgstr ""
+msgstr "გადმოწერილი მონაცემებიდან ფასის მისაღები რეგულარული გამოსახულება"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_skipStripping)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:155
@@ -3919,7 +3919,7 @@ msgstr ""
 #, kde-format
 msgctxt "@item reconciliation status"
 msgid "Cleared"
-msgstr ""
+msgstr "გასუფთავებულია"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkReconciled)
@@ -4516,7 +4516,7 @@ msgstr "ანგარიშის წაშლა..."
 #: kmymoney/kmymoney.cpp:1771
 #, kde-format
 msgid "Close account"
-msgstr "ანგარიშის დახურვა..."
+msgstr "ანგარიშის დახურვა"
 
 #: kmymoney/kmymoney.cpp:1772
 #, kde-format
@@ -5651,7 +5651,7 @@ msgstr "ფასების წაშლა"
 #: kmymoney/templates/templateloader.cpp:78
 #, kde-format
 msgid "Error while loading file '%1'."
-msgstr "შეცდომა ფაილის '%1' ჩატვირთვისას"
+msgstr "შეცდომა ფაილის '%1' ჩატვირთვისას."
 
 #: kmymoney/kmymoneyutils.cpp:545
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:138
@@ -8147,7 +8147,7 @@ msgstr ""
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "Cleared"
-msgstr ""
+msgstr "გასუფთავებულია"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:95
 #, kde-format
@@ -9917,7 +9917,7 @@ msgstr ""
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:624
 #, kde-format
 msgid "Rename"
-msgstr ""
+msgstr "გადარქმევა"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_profiles)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:241
@@ -13208,7 +13208,7 @@ msgstr "უსაფრთხოება"
 #, kde-format
 msgctxt "QIF tag for prices"
 msgid "Prices"
-msgstr ""
+msgstr "ფასები"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:556
 #, kde-format
@@ -14656,7 +14656,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1968
 #, kde-format
 msgid "Grand Total"
-msgstr ""
+msgstr "გრანდ-ჯამი"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:346
 #: kmymoney/plugins/views/reports/core/listtable.cpp:347
@@ -16120,7 +16120,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabchart.ui:37
 #, kde-format
 msgid "Chart Type"
-msgstr ""
+msgstr "გრაფიკის ტიპი"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:79
@@ -16306,7 +16306,7 @@ msgstr ""
 #, kde-format
 msgctxt "type of graphic chart"
 msgid "Pie"
-msgstr ""
+msgstr "სექტორი"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:93
 #, kde-format
@@ -17853,7 +17853,7 @@ msgstr ""
 #: kmymoney/views/newtransactioneditor.ui:223
 #, kde-format
 msgid "Cleared"
-msgstr ""
+msgstr "გასუფთავებულია"
 
 #. i18n: ectx: property (text), widget (QToolButton, enterButton)
 #. i18n: ectx: property (text), widget (QPushButton, buttonOk)
@@ -19229,13 +19229,13 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to account"
-msgstr ""
+msgstr "ანგარიშზე გადასვლა"
 
 #: kmymoney/views/ledgerview.cpp:204
 #, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
-msgstr ""
+msgstr "გადამხდელზე გადასვლა"
 
 #: kmymoney/views/ledgerview.cpp:249
 #, kde-format
@@ -20788,7 +20788,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:61
 #, kde-format
 msgid "Checking"
-msgstr ""
+msgstr "შემოწმება"
 
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:63
 #, kde-format
@@ -23381,7 +23381,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "ISO Code"
-msgstr ""
+msgstr "ISO კოდი"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_currencyList)
 #: kmymoney/wizards/wizardpages/currency.ui:41

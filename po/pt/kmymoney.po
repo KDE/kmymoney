@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-04 00:46+0000\n"
-"PO-Revision-Date: 2022-11-30 09:25+0000\n"
+"PO-Revision-Date: 2022-12-04 11:46+0000\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
 "Language: pt\n"
@@ -18821,12 +18821,10 @@ msgid "Security for this transaction"
 msgstr "Título desta transacção"
 
 #: kmymoney/views/investtransactioneditor.cpp:530
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Select the security for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
-msgstr "Seleccione o título desta transacção"
+msgstr "Seleccione a actividade desta transacção."
 
 #: kmymoney/views/investtransactioneditor.cpp:533
 #, kde-format
@@ -18835,6 +18833,8 @@ msgid ""
 "The security for this transaction cannot be modified because the security "
 "account is closed."
 msgstr ""
+"O título desta transacção não pode ser modificado, porque a conta do título "
+"está fechada."
 
 #: kmymoney/views/investtransactioneditor.cpp:534
 #, kde-format
@@ -18842,6 +18842,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "This activity cannot be modified because the security account is closed."
 msgstr ""
+"Esta actividade não pode ser modificada porque a conta do título está "
+"fechada."
 
 #: kmymoney/views/investtransactioneditor.cpp:546
 #, kde-format
@@ -18856,6 +18858,8 @@ msgid ""
 "The number of shares cannot be modified because the security account is "
 "closed."
 msgstr ""
+"Não é possível modificar o número de acções porque a conta do título está "
+"fechada."
 
 #: kmymoney/views/investtransactioneditor.cpp:552
 #, kde-format
@@ -18875,6 +18879,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
+"Não é possível modificar a proporção das parcelas porque a conta do título "
+"está fechada."
 
 #: kmymoney/views/investtransactioneditor.cpp:564
 #, kde-format
@@ -20330,29 +20336,22 @@ msgid "Merge Transactions"
 msgstr "Reunir as Transacções"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:108
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you wish to merge these transactions?  The one you selected "
-#| "first is the top one, and its values will be used in the merged "
-#| "transaction.  Cancel and select the other transaction first, if you want "
-#| "its values to be used."
+#, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
 "The two selected transactions to merge are shown. The one at the top and its "
 "values will be used in the resulting merged transaction.  If you want to use "
 "the other one press the exchange button on the right."
 msgstr ""
-"Tem a certeza que deseja reunir estas transacções? A que seleccionou "
-"primeiro é a de topo, sendo os seus valores usados na transacção reunida. "
-"Cancele e seleccione primeiro a outra  transacção, caso deseja usar os seus "
-"valores."
+"As duas transacções seleccionadas a reunir estão visíveis. A que seleccionou "
+"primeiro é a de topo, sendo os seus valores usados na transacção reunida. Se "
+"quiser usar a outra, carregue no botão para trocar à direita."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:114
-#, fuzzy, kde-format
-#| msgid "Unable to match the selected transactions"
+#, kde-format
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
-msgstr "Não foi possível fazer a correspondência das transacções seleccionadas"
+msgstr "Carregue para trocar as duas transacções."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14

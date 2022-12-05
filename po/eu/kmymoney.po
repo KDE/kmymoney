@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-04 00:46+0000\n"
-"PO-Revision-Date: 2022-12-01 23:37+0100\n"
+"PO-Revision-Date: 2022-12-04 10:24+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -3997,7 +3997,7 @@ msgstr "Erabili kontabilitate-liburuaren lenteak"
 #: kmymoney/settings/kmymoney.kcfg:244
 #, kde-format
 msgid "Show all split details in register"
-msgstr "Erakutsi erregistroaren xehetasun guztiak sareta batean"
+msgstr "Erakutsi erregistroko partida guztien xehetasunak"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TransactionForm)
 #. i18n: ectx: label, entry (TransactionForm), group (General Options)
@@ -4433,35 +4433,35 @@ msgid ""
 "The total amount of this transaction is %1 while the sum of the splits is "
 "%2. The remaining %3 are unassigned."
 msgstr ""
-"Transakzio honen totala %1 da; partida guztien batura, aldiz, %2. Gainerako "
-"%3 esleitu gabe dago."
+"Transakzio honen guztizkoa %1 da; partiden batura %2 den bitartean. "
+"Gainerako %3 esleitu gabe dago."
 
 #: kmymoney/dialogs/splitadjustdialog.cpp:58
 #, kde-format
 msgid "Change &total amount of transaction to %1."
-msgstr "Transakzioaren &totala %1 bihurtu."
+msgstr "Aldatu transakzioaren guz&tizkoa %1(e)ra."
 
 #: kmymoney/dialogs/splitadjustdialog.cpp:61
 #, kde-format
 msgid "&Distribute difference of %1 among all splits."
-msgstr "%1(r)en aldea partida guztien artean &banatu."
+msgstr "%1(e)ko diferentzia partida guztien artean banatu."
 
 #: kmymoney/dialogs/splitadjustdialog.cpp:69
 #, kde-format
 msgid "&Leave total amount of transaction at %1."
-msgstr "Transakzioaren totala %1 &utzi."
+msgstr "&Utzi transakzioaren guztizkoa %1(e)an."
 
 #: kmymoney/dialogs/splitadjustdialog.cpp:71
 #, kde-format
 msgid "&Leave %1 unassigned."
-msgstr "%1 esleitu &gabe utzi."
+msgstr "&Utzi %1 esleitu gabe."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitDialog)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitAdjustDialog)
 #: kmymoney/dialogs/splitadjustdialog.ui:14 kmymoney/views/splitdialog.ui:14
 #, kde-format
 msgid "Dialog"
-msgstr "Elkarrizketa"
+msgstr "Elkarrizketa-koadroa"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
@@ -6616,7 +6616,8 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:2580
 #, kde-format
 msgid "  * Sum of splits in transaction '%1' posted on %2 is not zero."
-msgstr "  * %2-n argitaratutako '%1' transakzioan zatiketen batura ez da zero."
+msgstr ""
+"  * %2(e)an argitaratutako '%1' transakzioko partiden batura ez da zero."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2586
 #, kde-format
@@ -6744,7 +6745,7 @@ msgstr "  *  akzioak ezarri zaizkio balioari '%1' antolaketaren partidan."
 #: kmymoney/mymoney/mymoneyfile.cpp:2779
 #, kde-format
 msgid "  * value set to shares in split in schedule '%1'."
-msgstr "*  balioa ezarri zaie akzioei '%1' antolaketaren partidan."
+msgstr "  * balioa ezarri zaie akzioei '%1' antolaketaren partidan."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2785
 #, kde-format
@@ -6752,8 +6753,8 @@ msgid ""
 "  * Split %2 in schedule '%1' contains a reference to invalid account %3. "
 "Please fix manually."
 msgstr ""
-"* '%1' antolaketako %2 partidak %3 kontu baliogabeari egiten dio "
-"erreferentzia. Konpondu eskuz."
+"  * '%1' antolaketako %2 partidak %3 kontu baliogabearen erreferentzia bat "
+"du. Mesedez, eskuz konpondu."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2794
 #, kde-format
@@ -8156,7 +8157,7 @@ msgstr "Kategoria"
 #, kde-format
 msgctxt "Split header"
 msgid "Memo"
-msgstr "Oharra"
+msgstr "Memoranduma"
 
 #: kmymoney/mymoney/splitmodel.cpp:38
 #, kde-format
@@ -8607,7 +8608,7 @@ msgid "Yield"
 msgstr "Etekina"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:120
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Split securities/shares/bonds"
 msgid "Split shares"
 msgstr "Zatitu akzioak"
@@ -9531,7 +9532,7 @@ msgstr "Egoera"
 #: kmymoney/views/newtransactionform.ui:124
 #, kde-format
 msgid "Memo"
-msgstr "Oharra"
+msgstr "Memoranduma"
 
 #. i18n: ectx: property (text), widget (QLabel, interestAmountLabel)
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, interestAmountEdit)
@@ -9614,17 +9615,17 @@ msgstr "Transakzio baliogabea"
 #: kmymoney/plugins/csv/export/csvwriter.cpp:236
 #, kde-format
 msgid "splitCategory"
-msgstr "partida-kategoria"
+msgstr "partidaren kategoria"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:236
 #, kde-format
 msgid "splitMemo"
-msgstr "partida-oharra"
+msgstr "partidaren memoranduma"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:236
 #, kde-format
 msgid "splitAmount"
-msgstr "partida-kopurua"
+msgstr "partidaren zenbatekoa"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:350
 #, kde-format
@@ -11331,8 +11332,8 @@ msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
 "please check"
 msgstr ""
-"Kontua edo kategoria %1, transakzio-eguna %2; partidak balio baliogabeak "
-"ditu; egiaztatu"
+"Kontua edo kategoria %1, transakzio-data %2; partidak balio baliogabea du; "
+"mesedez, egiaztatu"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1808
 #, kde-format
@@ -11362,7 +11363,7 @@ msgstr "%1 antolaketan ekintza ugari dago; bat bakarrik inportatu da"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2013
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
-msgstr "%1 antolaketan partida baliogabeak daude"
+msgstr "%1 antolaketak partida baliogabeak ditu"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2018
 #, kde-format
@@ -13360,7 +13361,7 @@ msgstr "0"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:431
 #, kde-format
 msgid "Split-Value"
-msgstr "Partida-Balioa"
+msgstr "Partidaren balioa"
 
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:434
@@ -17440,13 +17441,14 @@ msgstr "Sartu inbertsio-kontuak soilik"
 #, kde-format
 msgid ""
 "Do not display the individual transactions that make up a split transaction"
-msgstr "Ez erakutsi partidadun transakzioa osatzen duten transakzioak"
+msgstr ""
+"Ez azaldu partidadun transakzio bat osatzen duten banakako transakzioak"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkHideSplitDetails)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:366
 #, kde-format
 msgid "Hide Split Transaction Details"
-msgstr "Ezkutatu partidadun transakzioen xehetasunak"
+msgstr "Ezkutatu partidadun transakzioaren xehetasunak"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTax)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:376
@@ -18557,7 +18559,7 @@ msgid "Remove shares"
 msgstr "Kendu akzioak"
 
 #: kmymoney/views/investtransactioneditor.cpp:89
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Split shares"
 msgstr "Zatitu akzioak"
@@ -18645,7 +18647,7 @@ msgid ""
 "The security for this transaction cannot be modified because the security "
 "account is closed."
 msgstr ""
-"Transakzio honetarako finantza-aktiboa ezin da aldatu aktibo-kontua itxita "
+"Transakzio honetarako balorea ezin da aldatu baloreen kontua itxita "
 "dagoelako."
 
 #: kmymoney/views/investtransactioneditor.cpp:534
@@ -18653,7 +18655,7 @@ msgstr ""
 msgctxt "@info:tooltip"
 msgid ""
 "This activity cannot be modified because the security account is closed."
-msgstr "Jarduera hau ezin da aldatu aktibo-kontua itxita dagoelako."
+msgstr "Jarduera hau ezin da aldatu baloreen kontua itxita dagoelako."
 
 #: kmymoney/views/investtransactioneditor.cpp:546
 #, kde-format
@@ -18667,7 +18669,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "The number of shares cannot be modified because the security account is "
 "closed."
-msgstr "Akzio kopurua ezin da aldatu aktibo-kontua itxita dagoelako."
+msgstr "Titulu kopurua ezin da aldatu, baloreen kontua itxia dagoelako."
 
 #: kmymoney/views/investtransactioneditor.cpp:552
 #, kde-format
@@ -18679,20 +18681,20 @@ msgstr "Sartu transakzio honetarako akzio kopurua."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
-msgstr "Zatiketa erlazioa"
+msgstr "Partiden proportzioa"
 
 #: kmymoney/views/investtransactioneditor.cpp:560
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
-msgstr "Zatiketa erlazioa ezin da aldatu aktibo-kontua itxita dagoelako."
+msgstr "Zatiketa erlazioa ezin da aldatu baloreen kontua itxita dagoelako."
 
 #: kmymoney/views/investtransactioneditor.cpp:564
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
-msgstr "Sartu zatiketa erlazioa transakzio honentzat"
+msgstr "Sartu transakzio honetarako partiden proportzioa"
 
 #: kmymoney/views/investtransactioneditor.cpp:576
 #, kde-format
@@ -19887,7 +19889,7 @@ msgstr ""
 #: kmymoney/views/kpayeesview_p.h:559
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
-msgstr "Ezin da transakzioaren/partidaren onuraduna berriz esleitu"
+msgstr "Ez da transakzioaren/partidaren onuraduna berresleitzeko gai"
 
 #: kmymoney/views/kpayeesview_p.h:563
 #, kde-format
@@ -20020,8 +20022,8 @@ msgstr "Bilatu transakzioak"
 #, kde-format
 msgid "Found %1 matching splits"
 msgid_plural "Found %1 matching splits"
-msgstr[0] "Bat datorren zatiketa %1 aurkitu da"
-msgstr[1] "Bat datozen %1 zatiketak"
+msgstr[0] "Bat datorren partida %1 aurkitu da"
+msgstr[1] "Bat datozen %1 partida aurkitu dira"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_resultPage)
 #: kmymoney/views/ksearchtransactiondlg.ui:24
@@ -20100,7 +20102,7 @@ msgstr "Ezin da etiketa aldatu"
 #: kmymoney/views/ktagsview.cpp:801
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
-msgstr "Ezin da berriro esleitu transakzioaren/partidaren etiketa"
+msgstr "Ez da transakzioaren/partidaren etiketa berresleitzeko gai"
 
 #: kmymoney/views/ktagsview.cpp:813
 #, kde-format
@@ -20131,29 +20133,22 @@ msgid "Merge Transactions"
 msgstr "Transakzioak batu"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:108
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you wish to merge these transactions?  The one you selected "
-#| "first is the top one, and its values will be used in the merged "
-#| "transaction.  Cancel and select the other transaction first, if you want "
-#| "its values to be used."
+#, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
 "The two selected transactions to merge are shown. The one at the top and its "
 "values will be used in the resulting merged transaction.  If you want to use "
 "the other one press the exchange button on the right."
 msgstr ""
-"Ziur zaude eragiketa hauek bateratu nahi duzula? Zuk hautatu duzun  "
-"lehenengoa goikoa izango da eta bere baloreak erabiliko dira "
-"bateratzerakoan. Utzi eta aukeratu lehenengo beste eragiketa, bere baloreak "
-"erabiltzeko."
+"Bateratzeko hautatu diren bi transakzioak erakusten dira. Goian dagoena eta "
+"bere balioak erabiliko dira bateratutako transakzioan. Bestea erabili nahi "
+"baduzu, sakatu eskuineko trukatu botoia."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:114
-#, fuzzy, kde-format
-#| msgid "Unable to match the selected transactions"
+#, kde-format
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
-msgstr "Ezin dira parekatu hautatutako transakzioak"
+msgstr "Sakatu bi transakzioak trukatzeko."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14
@@ -20359,7 +20354,7 @@ msgstr "Saldoa: %1"
 #, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
-msgstr "Transakzio honen kostu-zentroa esleitu beharko litzateke."
+msgstr "Transakzio hau zein kostu-zentrora esleitu behar den."
 
 #: kmymoney/views/newspliteditor.cpp:151
 #, kde-format
@@ -20367,31 +20362,33 @@ msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
 "category."
-msgstr "Hautatutako kategorian kostu-zentroa esleitu behar zaie transakzioei."
+msgstr ""
+"Hautatutako kategoriako transakzio baterako kostu-zentro bat esleitu beharra "
+"dago."
 
 #: kmymoney/views/newspliteditor.cpp:162
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
-msgstr "Banaketa honi esleitu behar zaion kategoria."
+msgstr "Partida hau zein kategoriara esleitu behar den."
 
 #: kmymoney/views/newspliteditor.cpp:203
 #, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
-msgstr "Kategoria-esleipena behar da zatiketa egiteko."
+msgstr "Partida honetarako kategoria esleitzea beharrezkoa da."
 
 #: kmymoney/views/newspliteditor.cpp:212
 #: kmymoney/views/newtransactioneditor.cpp:362
 #, kde-format
 msgid "The check number used for this transaction."
-msgstr "Transakzio honetan erabilitako egiaztatzen zenbakia."
+msgstr "Transakzio honetan erabilitako txeke-zenbakia."
 
 #: kmymoney/views/newspliteditor.cpp:221
 #: kmymoney/views/newtransactioneditor.cpp:372
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
-msgstr " <b>%1</b> egiaztatze zenbakia jada erabili da kontu honetan."
+msgstr "<b>%1</b> txeke-zenbakia dagoeneko erabili da kontu honetan."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
@@ -20613,13 +20610,13 @@ msgstr "Transakzioaren zenbatekoa"
 #: kmymoney/views/splitdialog.ui:591
 #, kde-format
 msgid "Create a new split"
-msgstr "Zatiketa berria sortu"
+msgstr "Sortu partida berria"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, mergeButton)
 #: kmymoney/views/splitdialog.ui:614
 #, kde-format
 msgid "Merges splits with the same category to one split"
-msgstr "Kategoria berdinekoak partida bakar batean batzen ditu"
+msgstr "Kategoria bereko partidak partida bakarrean bateratzen ditu"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, mergeButton)
 #: kmymoney/views/splitdialog.ui:617
@@ -20629,16 +20626,15 @@ msgid ""
 "keep them as a single split, press this button. The amount for identical "
 "categories will be added and stored in a single split for that category."
 msgstr ""
-"Zatiketa bat baino gehiago badituzu sarrera berdinerako eta zatiketa bakar "
-"gisa izan nahi badituzu, sakatu botoi hau. Kategoria bera dutenen "
-"zenbatekoak batu egingo dira eta zatiketa bakarrean gordeko dira kategoria "
-"horretarako."
+"Kategoria bereko partida anizkoitzak izanda, partida bakar gisa mantendu "
+"nahi badituzu, sakatu botoi hori. Kategoria berbereko kopurua batu eta "
+"kategoria horretako partida bakarrean gordeko da."
 
 #. i18n: ectx: property (text), widget (QPushButton, mergeButton)
 #: kmymoney/views/splitdialog.ui:620
 #, kde-format
 msgid "&Merge"
-msgstr "&Batu"
+msgstr "&Bateratu"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, adjustUnassigned)
 #: kmymoney/views/splitdialog.ui:630
@@ -20648,15 +20644,15 @@ msgid ""
 "'Unassigned' amount will be added or 'Overassigned' amount\n"
 "will be subtracted from the amount of the selected split."
 msgstr ""
-"Aplikatu 'Esleitu gabea' edo 'Gainesleitua' kopurua uneko partidara.\n"
-"'Esleitu gabea' kopurua hautatutako partidara gehituko da edo 'Gainesleitua' "
+"Aplikatu 'Esleitu gabe' edo 'Gainesleitua' kopurua uneko partidara.\n"
+"'Esleitu gabe' kopurua hautatutako partidara gehituko da edo 'Gainesleitua' "
 "kopurua hautatutako partidatik kenduko da."
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
 #: kmymoney/views/splitdialog.ui:633
 #, kde-format
 msgid "Apply Difference"
-msgstr "Aplikatu aldea"
+msgstr "Aplikatu diferentzia"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
 #: kmymoney/views/splitdialog.ui:641
@@ -20680,7 +20676,7 @@ msgstr "Garbitu partida guztiak"
 #: kmymoney/views/splitdialog.ui:662
 #, kde-format
 msgid "Use this to delete all splits of this transaction."
-msgstr "Erabili hau transakzio honen zatiketa guztiak ezabatzeko"
+msgstr "Erabili hau transakzio honetako partida guztiak ezabatzeko."
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteAllButton)
 #: kmymoney/views/splitdialog.ui:665
@@ -20704,7 +20700,7 @@ msgstr "&Utzi"
 #, kde-format
 msgctxt "@title:menu split context menu"
 msgid "Split Options"
-msgstr "Banaketaren aukerak"
+msgstr "Partidaren aukerak"
 
 #: kmymoney/views/splitview.cpp:112
 #, kde-format
@@ -20904,7 +20900,7 @@ msgid "Remove shares"
 msgstr "Kendu akzioak"
 
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:50
-#, kde-format
+#, fuzzy, kde-format
 msgid "Split shares"
 msgstr "Zatitu akzioak"
 
