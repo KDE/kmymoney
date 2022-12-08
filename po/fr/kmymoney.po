@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-04 00:46+0000\n"
-"PO-Revision-Date: 2022-11-15 18:02+0100\n"
+"PO-Revision-Date: 2022-12-06 19:17+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
@@ -28,7 +28,7 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.11.90\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -18851,12 +18851,10 @@ msgid "Security for this transaction"
 msgstr "Sécurité pour cette opération"
 
 #: kmymoney/views/investtransactioneditor.cpp:530
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Select the security for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
-msgstr "Sélectionnez la sécurité pour cette opération"
+msgstr "Sélectionnez l'activité pour cette opération."
 
 #: kmymoney/views/investtransactioneditor.cpp:533
 #, kde-format
@@ -20384,11 +20382,10 @@ msgstr ""
 "transaction d'abord, si vous voulez que ses valeurs soient utilisées."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:114
-#, fuzzy, kde-format
-#| msgid "Unable to match the selected transactions"
+#, kde-format
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
-msgstr "Impossible de faire correspondre les opérations sélectionnées"
+msgstr "Appuyer pour échanger les deux opérations."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14
@@ -20577,11 +20574,10 @@ msgid "Never reconciled"
 msgstr "Jamais réconciliée"
 
 #: kmymoney/views/ledgerviewpage_p.h:134
-#, fuzzy, kde-format
-#| msgid "Investment value: %1%2"
+#, kde-format
 msgctxt "@label:textbox Total value of investment"
 msgid "Investment value: %1%2"
-msgstr "Valeur du placement : %1%2"
+msgstr "Valeur du placement : %1 %2"
 
 #: kmymoney/views/ledgerviewpage_p.h:138
 #: kmymoney/views/reconciliationledgerviewpage.cpp:352
@@ -20836,12 +20832,10 @@ msgstr ""
 "ajouter un compte.</p></body></html>"
 
 #: kmymoney/views/splitdialog.cpp:312
-#, fuzzy, kde-format
-#| msgctxt "Split editor summary"
-#| msgid "Unassigned"
+#, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
-msgstr "Non assigné"
+msgstr "Sur-assigné"
 
 #: kmymoney/views/splitdialog.cpp:315
 #, kde-format
@@ -20904,10 +20898,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
 #: kmymoney/views/splitdialog.ui:633
-#, fuzzy, kde-format
-#| msgid "Difference"
+#, kde-format
 msgid "Apply Difference"
-msgstr "Différence"
+msgstr "Appliquer la différence"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
 #: kmymoney/views/splitdialog.ui:641
@@ -21110,11 +21103,10 @@ msgid "Name"
 msgstr "Nom"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
-#, fuzzy, kde-format
-#| msgid "Use this to open the profile editor"
+#, kde-format
 msgctxt "@info:tooltip icon in category to open the split editor"
 msgid "Click this icon to open the split editor"
-msgstr "Utilisez cette option pour lancer l'éditeur de profil"
+msgstr "Cliquez sur cet icône pour ouvrir l'éditeur de scission"
 
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:69
 #, kde-format
