@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-04 00:46+0000\n"
+"POT-Creation-Date: 2022-12-09 00:46+0000\n"
 "PO-Revision-Date: 2020-01-02 16:30+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -26,52 +26,52 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "wizzardsk@gmail.com,matejm98mthw@gmail.com"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:130
+#: kmymoney/converter/mymoneystatementreader.cpp:131
 #, kde-format
 msgid "_Fees"
 msgstr "_Fees"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:136
+#: kmymoney/converter/mymoneystatementreader.cpp:137
 #, kde-format
 msgid "_Dividend"
 msgstr "_Dividend"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:371
+#: kmymoney/converter/mymoneystatementreader.cpp:372
 #, kde-format
 msgid "Error importing %1: This file is not a valid KMM statement file."
 msgstr "Chyba pri importe %1: Tento súbor nie je platný súbor výpisu KMM."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:371
+#: kmymoney/converter/mymoneystatementreader.cpp:372
 #, kde-format
 msgid "Invalid Statement"
 msgstr "Neplatné informácie"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:488
+#: kmymoney/converter/mymoneystatementreader.cpp:489
 #, kde-format
 msgid "Importing statement for account %1"
 msgstr "Príkaz importu pre účet %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:490
+#: kmymoney/converter/mymoneystatementreader.cpp:491
 #, kde-format
 msgid "Importing statement without transactions"
 msgstr "Príkaz importu bez transakcií"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:575
+#: kmymoney/converter/mymoneystatementreader.cpp:576
 #, kde-format
 msgid "  Statement balance is not contained in statement."
 msgstr "  Zostatok výpisu nie je zahrnutý vo výpise."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:577
+#: kmymoney/converter/mymoneystatementreader.cpp:578
 #, kde-format
 msgid "  Statement balance on %1 is reported to be %2"
 msgstr "  Zostatok výpisu na %1 uvádza, že je %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:579
+#: kmymoney/converter/mymoneystatementreader.cpp:580
 #, kde-format
 msgid "  Transactions"
 msgstr " Transakcie"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:580
+#: kmymoney/converter/mymoneystatementreader.cpp:581
 #, kde-format
 msgid "    %1 processed"
 msgid_plural "    %1 processed"
@@ -79,7 +79,7 @@ msgstr[0] "    %1 spracované"
 msgstr[1] "    %1 spracované"
 msgstr[2] "    %1 spracované"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:581
+#: kmymoney/converter/mymoneystatementreader.cpp:582
 #, kde-format
 msgctxt "x transactions have been added"
 msgid "    %1 added"
@@ -88,7 +88,7 @@ msgstr[0] "    %1 pridané"
 msgstr[1] "    %1 pridané"
 msgstr[2] "    %1 pridané"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:582
+#: kmymoney/converter/mymoneystatementreader.cpp:583
 #, kde-format
 msgid "    %1 matched"
 msgid_plural "    %1 matched"
@@ -96,7 +96,7 @@ msgstr[0] "    %1 zhodné"
 msgstr[1] "    %1 zhodné"
 msgstr[2] "    %1 zhodné"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:583
+#: kmymoney/converter/mymoneystatementreader.cpp:584
 #, kde-format
 msgid "    %1 duplicate"
 msgid_plural "    %1 duplicates"
@@ -104,12 +104,12 @@ msgstr[0] "Duplikovať"
 msgstr[1] "    %1 duplikáty"
 msgstr[2] "    %1 duplikáty"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:584
+#: kmymoney/converter/mymoneystatementreader.cpp:585
 #, kde-format
 msgid "  Payees"
 msgstr " Príjemcovia"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:585
+#: kmymoney/converter/mymoneystatementreader.cpp:586
 #, kde-format
 msgctxt "x transactions have been created"
 msgid "    %1 created"
@@ -118,12 +118,12 @@ msgstr[0] "    %1 vytvorené"
 msgstr[1] "    %1 vytvorené"
 msgstr[2] "    %1 vytvorené"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:649
+#: kmymoney/converter/mymoneystatementreader.cpp:650
 #, kde-format
 msgid "Error creating security record: %1"
 msgstr "Chyba pri vytváraní záznamu cenného papiera: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:649
+#: kmymoney/converter/mymoneystatementreader.cpp:650
 #: kmymoney/plugins/kbanking/kbanking.cpp:605
 #: kmymoney/plugins/kbanking/kbanking.cpp:627
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:60
@@ -131,7 +131,7 @@ msgstr "Chyba pri vytváraní záznamu cenného papiera: %1"
 msgid "Error"
 msgstr "Chyba"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:754
+#: kmymoney/converter/mymoneystatementreader.cpp:755
 #, kde-format
 msgid ""
 "This imported statement contains investment transactions with no security.  "
@@ -140,20 +140,20 @@ msgstr ""
 "Tento importovaný výpis obsahuje investičné transakcie bez cenného papiera.  "
 "Tieto transakcie budú ignorované."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:754
+#: kmymoney/converter/mymoneystatementreader.cpp:755
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1441
 #, kde-format
 msgid "Security not found"
 msgstr "Bezpečnosť nenájdená"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:799
-#: kmymoney/converter/mymoneystatementreader.cpp:802
+#: kmymoney/converter/mymoneystatementreader.cpp:800
+#: kmymoney/converter/mymoneystatementreader.cpp:803
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:1425
 #, kde-format
 msgid "Statement Importer"
 msgstr "Importer informácií"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:819
+#: kmymoney/converter/mymoneystatementreader.cpp:820
 #, kde-format
 msgid ""
 "This imported statement contains investment transactions with no share "
@@ -162,17 +162,26 @@ msgstr ""
 "Tento importovaný výpis obsahuje investičné transakcie bez sumy akcií. Tieto "
 "transakcie budú ignorované."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:819
+#: kmymoney/converter/mymoneystatementreader.cpp:820
 #, kde-format
 msgid "No share amount provided"
 msgstr "Neposkytnutá žiadna suma akcií"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:939
+#: kmymoney/converter/mymoneystatementreader.cpp:940
 #, kde-format
 msgid "(Fees) %1"
 msgstr "(Poplatky) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1022
+#, fuzzy, kde-format
+#| msgid "Additional Fees: %1"
+msgctxt "Prepend name of payee (%1) to orignal memo (%2)"
+msgid ""
+"Original payee: %1\n"
+"%2"
+msgstr "Ďalšie poplatky: %1"
+
+#: kmymoney/converter/mymoneystatementreader.cpp:1030
 #, kde-format
 msgid ""
 "Do you want to add \"%1\" as payee/receiver?\n"
@@ -181,7 +190,7 @@ msgstr ""
 "Chcete sa pridať \"%1\" ako doručiteľa/príjemcu?\n"
 "\n"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1023
+#: kmymoney/converter/mymoneystatementreader.cpp:1032
 #, kde-format
 msgid ""
 "Selecting \"Yes\" will create the payee, \"No\" will skip creation of a "
@@ -200,78 +209,78 @@ msgstr ""
 "o príjemcovi budú odstránené pre všetky nasledujúce transakcie odkazujúce na "
 "\"%1\"."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1036
+#: kmymoney/converter/mymoneystatementreader.cpp:1046
 #: kmymoney/kmymoneyutils.cpp:566
 #, kde-format
 msgid "New payee/receiver"
 msgstr "Nový doručiteľ/príjemca"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1059
+#: kmymoney/converter/mymoneystatementreader.cpp:1069
 #, kde-format
 msgid "Default Category for Payee"
 msgstr "Predvolená kategória pre príjemcu"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1066
+#: kmymoney/converter/mymoneystatementreader.cpp:1076
 #, kde-format
 msgid "Please select a default category for payee '%1'"
 msgstr "Prosím, vyberte predvolenú kategóriu pre príjemcu '%1'"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1088
+#: kmymoney/converter/mymoneystatementreader.cpp:1098
 #, kde-format
 msgid "Save Category"
 msgstr "Uložiť kategóriu"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1089
+#: kmymoney/converter/mymoneystatementreader.cpp:1099
 #, kde-format
 msgid "No Category"
 msgstr "Bez kategórie"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonAbort)
 #. i18n: ectx: property (text), widget (QPushButton, abortButton)
-#: kmymoney/converter/mymoneystatementreader.cpp:1090
+#: kmymoney/converter/mymoneystatementreader.cpp:1100
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:132
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:257
 #, kde-format
 msgid "Abort"
 msgstr "Prerušiť"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1116
+#: kmymoney/converter/mymoneystatementreader.cpp:1126
 #, kde-format
 msgid "Unable to add payee/receiver"
 msgstr "Nemožno pridať doručiteľa/príjemcu"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1363
+#: kmymoney/converter/mymoneystatementreader.cpp:1373
 #, kde-format
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr "Problém pridať alebo priradiť importovanú transakciu s id '%1': %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1418
+#: kmymoney/converter/mymoneystatementreader.cpp:1428
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>Stiahli ste výpis pre tento účet:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1419
+#: kmymoney/converter/mymoneystatementreader.cpp:1429
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Názov účtu: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1420
+#: kmymoney/converter/mymoneystatementreader.cpp:1430
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Typ účtu: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1421
+#: kmymoney/converter/mymoneystatementreader.cpp:1431
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Číslo účtu: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1426
+#: kmymoney/converter/mymoneystatementreader.cpp:1436
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Chcete importovať transakcie do tohto účtu?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1428
+#: kmymoney/converter/mymoneystatementreader.cpp:1438
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -282,7 +291,7 @@ msgstr ""
 "účet stlačením tlačidla <b>Vytvoriť</b> alebo ručne vybrať iný z výberového "
 "poľa nižšie."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1432
+#: kmymoney/converter/mymoneystatementreader.cpp:1442
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -293,12 +302,12 @@ msgstr ""
 "vyberte účet cez výberové pole v dialógu, alebo vytvorte nový účet stlačením "
 "tlačidla <b>Vytvoriť</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1459
+#: kmymoney/converter/mymoneystatementreader.cpp:1469
 #, kde-format
 msgid "Import transactions"
 msgstr "Import prevodu"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1489
+#: kmymoney/converter/mymoneystatementreader.cpp:1499
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -306,14 +315,14 @@ msgid ""
 msgstr ""
 "Musíte vybrať účet, vytvoriť nový, alebo stlačte tlačidlo <b>Prerušiť</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1601
+#: kmymoney/converter/mymoneystatementreader.cpp:1611
 #: kmymoney/views/kscheduledview_p.h:192 kmymoney/views/kscheduledview_p.h:307
 #: kmymoney/views/kscheduledview_p.h:311
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Nemožno zadať plánovanú transakciu '%1'"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1621
+#: kmymoney/converter/mymoneystatementreader.cpp:1631
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -326,7 +335,7 @@ msgstr ""
 "i><br/>Chcete, aby KMyMoney zadala tento harmonogram teraz tak, že "
 "transakcia môže byť zhodná? "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1630
+#: kmymoney/converter/mymoneystatementreader.cpp:1640
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has found a scheduled transaction which matches an imported "
@@ -359,7 +368,7 @@ msgstr[2] ""
 "i><br/>Chcete, aby KMyMoney zadala tento harmonogram teraz tak, že "
 "transakcia môže byť zhodná? "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1644
+#: kmymoney/converter/mymoneystatementreader.cpp:1654
 #, kde-format
 msgid "Schedule found"
 msgstr "Harmonogram nájdený"
