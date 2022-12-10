@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-09 00:46+0000\n"
-"PO-Revision-Date: 2022-11-14 14:05+0100\n"
+"PO-Revision-Date: 2022-12-09 14:13+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -171,13 +171,14 @@ msgid "(Fees) %1"
 msgstr "(Pagamenti) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1022
-#, fuzzy, kde-format
-#| msgid "Additional Fees: %1"
+#, kde-format
 msgctxt "Prepend name of payee (%1) to orignal memo (%2)"
 msgid ""
 "Original payee: %1\n"
 "%2"
-msgstr "Pagamenti aggiuntivi: %1"
+msgstr ""
+"Beneficiario originale: %1\n"
+"%2"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1030
 #, kde-format
@@ -18737,12 +18738,10 @@ msgid "Security for this transaction"
 msgstr "Strumento finanziario per questa transazione"
 
 #: kmymoney/views/investtransactioneditor.cpp:530
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Select the security for this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
-msgstr "Seleziona lo strumento finanziario per questa transazione"
+msgstr "Seleziona l'attività per questa transazione."
 
 #: kmymoney/views/investtransactioneditor.cpp:533
 #, kde-format
@@ -18751,6 +18750,8 @@ msgid ""
 "The security for this transaction cannot be modified because the security "
 "account is closed."
 msgstr ""
+"La sicurezza per questa transazione non può essere modificata perché il "
+"conto degli strumenti finanziari è chiuso."
 
 #: kmymoney/views/investtransactioneditor.cpp:534
 #, kde-format
@@ -18758,6 +18759,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "This activity cannot be modified because the security account is closed."
 msgstr ""
+"Questa attività non può essere modificata perché il conto degli strumenti "
+"finanziari è chiuso."
 
 #: kmymoney/views/investtransactioneditor.cpp:546
 #, kde-format
@@ -18772,6 +18775,8 @@ msgid ""
 "The number of shares cannot be modified because the security account is "
 "closed."
 msgstr ""
+"Il numero di condivisioni non può essere modificato perché il conto degli "
+"strumenti finanziari è chiuso."
 
 #: kmymoney/views/investtransactioneditor.cpp:552
 #, kde-format
@@ -18791,6 +18796,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
+"Il rapporto di suddivisione non può essere modificato perché il conto degli "
+"strumenti finanziari è chiuso."
 
 #: kmymoney/views/investtransactioneditor.cpp:564
 #, kde-format
@@ -20243,29 +20250,22 @@ msgid "Merge Transactions"
 msgstr "Unisci transazioni"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:108
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you wish to merge these transactions?  The one you selected "
-#| "first is the top one, and its values will be used in the merged "
-#| "transaction.  Cancel and select the other transaction first, if you want "
-#| "its values to be used."
+#, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
 "The two selected transactions to merge are shown. The one at the top and its "
 "values will be used in the resulting merged transaction.  If you want to use "
 "the other one press the exchange button on the right."
 msgstr ""
-"Sei sicuro di voler unire queste transazioni? Quella che hai selezionato per "
-"prima è quella in alto e i suoi valori saranno utilizzati nella transazione "
-"unita. Annulla e seleziona prima l'altra transazione, se desideri che "
-"vengano utilizzati i suoi valori."
+"Sono mostrate le due transazioni selezionate da unire. Quella in alto e i "
+"suoi valori saranno utilizzati nella transazione unita risultante. Se vuoi "
+"usare l'altra, premi il pulsante di scambio sulla destra."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:114
-#, fuzzy, kde-format
-#| msgid "Unable to match the selected transactions"
+#, kde-format
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
-msgstr "Impossibile verificare le transazioni selezionate"
+msgstr "Premi per scambiare le due transazioni."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14
@@ -20452,8 +20452,7 @@ msgid "Never reconciled"
 msgstr "Mai riconciliato"
 
 #: kmymoney/views/ledgerviewpage_p.h:134
-#, fuzzy, kde-format
-#| msgid "Investment value: %1%2"
+#, kde-format
 msgctxt "@label:textbox Total value of investment"
 msgid "Investment value: %1%2"
 msgstr "Valore dell'investimento: %1%2"
@@ -20710,12 +20709,10 @@ msgstr ""
 "conto.</p></body></html>"
 
 #: kmymoney/views/splitdialog.cpp:312
-#, fuzzy, kde-format
-#| msgctxt "Split editor summary"
-#| msgid "Unassigned"
+#, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
-msgstr "Non assegnato"
+msgstr "Sovra-assegnato"
 
 #: kmymoney/views/splitdialog.cpp:315
 #, kde-format
@@ -20774,13 +20771,15 @@ msgid ""
 "'Unassigned' amount will be added or 'Overassigned' amount\n"
 "will be subtracted from the amount of the selected split."
 msgstr ""
+"Applica l'importo «Non assegnato» o «Sovra-assegnato» al gruppo attuale.\n"
+"Sarà aggiunto l'importo «Non assegnato» o l'importo «Sovra-assegnato»\n"
+"sarà sottratto dall'importo della suddivisione selezionata."
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
 #: kmymoney/views/splitdialog.ui:633
-#, fuzzy, kde-format
-#| msgid "Difference"
+#, kde-format
 msgid "Apply Difference"
-msgstr "Differenza"
+msgstr "Applica la differenza"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
 #: kmymoney/views/splitdialog.ui:641
@@ -20983,11 +20982,10 @@ msgid "Name"
 msgstr "Nome"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
-#, fuzzy, kde-format
-#| msgid "Use this to open the profile editor"
+#, kde-format
 msgctxt "@info:tooltip icon in category to open the split editor"
 msgid "Click this icon to open the split editor"
-msgstr "Premi qui per aprire l'editor del profilo"
+msgstr "Fai clic su questa icona per aprire l'editor delle suddivisioni"
 
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:69
 #, kde-format
