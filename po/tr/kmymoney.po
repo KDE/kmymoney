@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-09 00:46+0000\n"
-"PO-Revision-Date: 2022-12-03 19:55+0300\n"
+"PO-Revision-Date: 2022-12-10 18:40+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -676,7 +676,7 @@ msgstr "Bağlanma noktasını seç"
 #: kmymoney/dialogs/kbackupdlg.ui:115
 #, kde-format
 msgid "Use this to browse to the mount point."
-msgstr "Bağlanma noktasına gözatmak için bunu kullanın."
+msgstr "Bağlama noktasına göz atmak için bunu kullanın."
 
 #. i18n: ectx: property (text), widget (QPushButton, chooseButton)
 #: kmymoney/dialogs/kbackupdlg.ui:118
@@ -9619,7 +9619,7 @@ msgstr "Dışa aktarımı başlatmak için bunu kullanın"
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:67
 #, kde-format
 msgid "&Browse..."
-msgstr "&Gözat..."
+msgstr "&Göz At..."
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:62
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:68
@@ -9664,13 +9664,13 @@ msgid ""
 "all the transactions between the specified dates,  or just choose to export "
 "Categories."
 msgstr ""
-"Bu pencereden aktarımları virgülle ayrılmış bir dosyaya aktarabilirsiniz, "
-"(uzantıdan dolayı, CSV dosyaları olarak bilinirler).  Ancak, aşağıda başka "
-"bir ayraç da belirtebilirsiniz.  Lütfen CSV dosyası için bir yol girin ya da "
-"Gözat düğmesini tıklayarak seçin.\n"
+"Bu pencereden aktarımları virgülle ayrılmış bir dosyaya dışa "
+"aktarabilirsiniz, (uzantıdan dolayı, CSV dosyaları olarak bilinirler).  "
+"Ancak, aşağıda başka bir ayraç da belirtebilirsiniz. Lütfen CSV dosyası için "
+"bir yol girin veya Göz At düğmesini tıklayarak seçin.\n"
 "\n"
 "Dosyanın yolunu, ve hesabı seçebilirsiniz. Belirtilen tarihler arasındaki "
-"bütün işlemleri dışa aktarmak için Hesap seçin,  ya da sadece Kategorileri "
+"bütün işlemleri dışa aktarmak için Hesap seçin, veya yalnızca Kategorileri "
 "dışa aktarmayı seçin."
 
 #. i18n: ectx: property (text), widget (QLabel, lblFileExport)
@@ -13958,15 +13958,15 @@ msgid ""
 "detailing how many transactions, categories and payees were exported."
 msgstr ""
 "Bu pencereden işlemlerini quicken uyumlu bir dosya olarak dışarı "
-"aktarabilirsin, (uzantısından dolayı QIF dosyası olarak bilinir).  Lütfen "
-"QIF dosyası için bir yol girin ya da yolu Gözat düğmesine tıklayarak girin.\n"
+"aktarabilirsiniz, (uzantısından dolayı QIF dosyası olarak bilinir).  Lütfen "
+"QIF dosyası için bir yol girin veya yolu Göz At düğmesine tıklayarak seçin.\n"
 "\n"
-"Dosyanın yolunu,  hesap ve QIF dosyasının biçimini (profil) seçebilirsin."
-"Belirtilen tarihlerde veya kategoriler arasındaki bütün işlemleri dışarı "
-"aktarmak için hesap seçin.  Ayrıca dışarı aktarılacak işlemleri başlama ve "
-"bitiş tarihleri ile sınırlandırabilirsin. Dışarı aktar düğmesine bastığında "
-"kaç tane işlem, kategori ve alacaklı dışarı aktarıldı detaylarını içeren bir "
-"mesaj kutusu ortaya çıkacak."
+"Dosyanın yolunu, hesap ve QIF dosyasının biçimini (profil) seçebilirsiniz."
+"Belirtilen tarihlerde veya kategoriler arasındaki bütün işlemleri dışa "
+"aktarmak için hesap seçin. Ayrıca dışarı aktarılacak işlemleri başlama ve "
+"bitiş tarihleri ile sınırlandırabilirsiniz. Dışa Aktar düğmesine bastığında "
+"kaç tane işlem, kategori ve alacaklı dışarı aktarıldı ayrıntılarını içeren "
+"bir ileti kutusu ortaya çıkacaktır."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel3)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel3_2)
@@ -14046,10 +14046,11 @@ msgid ""
 "p>"
 msgstr ""
 "<p>Bu pencereden Quicken<b>&trade;</b> uyumlu bir dosya ile işlemlerini "
-"içeri aktarabilirsin, (uzantısından dolayı QIF dosyası olarak bilinir).</p>\n"
-"<p> Lütfen QIF dosyası için bir yol girin ya da yolu Gözat düğmesine "
-"tıklayarak girin. İçeri Aktar düğmesine bastığınızda KMyMoney bütün "
-"işlemleri, kategorileri ve bulduğu alacaklıları içeri aktaracak.</p>"
+"içeri aktarabilirsiniz, (uzantısından dolayı QIF dosyası olarak bilinir).</"
+"p>\n"
+"<p> Lütfen QIF dosyası için bir yol girin ya da yolu Göz At düğmesine "
+"tıklayarak seçin. İçe Aktar düğmesine bastığınızda KMyMoney bütün işlemleri, "
+"kategorileri ve bulduğu alacaklıları içeri aktaracaktır.</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, lblImportFile)
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:54
@@ -17887,7 +17888,7 @@ msgstr "Aktarımları Gizle"
 #: kmymoney/plugins/woob/dialogs/accountsettings.ui:39
 #, kde-format
 msgid "Backend"
-msgstr "Arkaplan"
+msgstr "Arka Uç"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/plugins/woob/dialogs/accountsettings.ui:46
@@ -18603,13 +18604,13 @@ msgstr "Özel renkleri kullan"
 #: kmymoney/settings/kmymoney.kcfg:190
 #, kde-format
 msgid "Background color for imported transactions"
-msgstr "İçeri aktarılmış işlemler için arkaplan rengi"
+msgstr "İçe aktarılmış işlemler için arka plan rengi"
 
 #. i18n: ectx: label, entry (transactionMatchedColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:194
 #, kde-format
 msgid "Background color for matched transactions"
-msgstr "Eşlenmiş işlemler için arkaplan rengi"
+msgstr "Eşleşmiş işlemler için arka plan rengi"
 
 #. i18n: ectx: label, entry (transactionErroneousColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:198
@@ -18627,13 +18628,13 @@ msgstr "Eksik dönüşüm oranı için renk listesi"
 #: kmymoney/settings/kmymoney.kcfg:206
 #, kde-format
 msgid "Background color for group marker"
-msgstr "Grup etiketi için arkaplan rengi"
+msgstr "Grup etiketi arka plan rengi"
 
 #. i18n: ectx: label, entry (fieldRequiredColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:210
 #, kde-format
 msgid "Background color for required fields"
-msgstr "Zorunlu alanlar için arkaplan rengi"
+msgstr "Zorunlu alanlar arka plan rengi"
 
 #. i18n: ectx: label, entry (ShowCategoriesInAccountsView), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:224
@@ -18792,7 +18793,7 @@ msgstr "Grafik üzerinde göstermek için ögelerin maksimum miktarı"
 #: kmymoney/settings/kmymoney.kcfg:391
 #, kde-format
 msgid "The palette used to render charts"
-msgstr "Grafikleri oluşturmak için kullanılan palet"
+msgstr "Grafikleri sunmak için kullanılan palet"
 
 #. i18n: ectx: label, entry (CssFileDefault), group (Chart Settings)
 #: kmymoney/settings/kmymoney.kcfg:397
@@ -23367,7 +23368,7 @@ msgid ""
 msgstr ""
 "Bu alana kredinin miktarını girin. Bu alanın diğer değişkenler kullanılarak "
 "hesaplanmasını istiyorsanız lütfen boş bırakın. Eğer alan zorunlu olarak "
-"işaretlenmişse (renkli arkaplan ile) KMyMoney 'ye daha önce ödemeler "
+"işaretlenmemişse (renkli arka plan ile) KMyMoney 'ye daha önce ödemeler "
 "yapıldığını bildirmiş olmalısınız. Bu durumda lütfen son işleminizdeki "
 "kapanış bakiyesini girin."
 
