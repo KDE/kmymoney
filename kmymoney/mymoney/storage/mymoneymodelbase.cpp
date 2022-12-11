@@ -21,6 +21,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyenums.h"
 
 MyMoneyModelBase::MyMoneyModelBase(QObject* parent, const QString& idLeadin, quint8 idSize)
     : QAbstractItemModel(parent)
@@ -178,4 +179,12 @@ void MyMoneyModelBase::endResetModel()
 {
     blockSignals(m_blockedSignals);
     QAbstractItemModel::endResetModel();
+}
+
+QVariant MyMoneyModelBase::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if (role == eMyMoney::Model::LongDisplayRole) {
+        return this->headerData(section, orientation, Qt::DisplayRole);
+    }
+    return QAbstractItemModel::headerData(section, orientation, role);
 }

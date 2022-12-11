@@ -216,7 +216,7 @@ QVariant SplitModel::headerData(int section, Qt::Orientation orientation, int ro
         return QSize(10, 10);
     }
 
-    return QAbstractItemModel::headerData(section, orientation, role);
+    return MyMoneyModelBase::headerData(section, orientation, role);
 }
 
 Qt::ItemFlags SplitModel::flags(const QModelIndex& index) const

@@ -190,7 +190,7 @@ QVariant SchedulesModel::headerData(int section, Qt::Orientation orientation, in
         if (section < headers.count())
             return i18n(headers.at(section));
     }
-    return QAbstractItemModel::headerData(section, orientation, role);
+    return MyMoneyModelBase::headerData(section, orientation, role);
 }
 
 Qt::ItemFlags SchedulesModel::flags(const QModelIndex& index) const

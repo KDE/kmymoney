@@ -91,7 +91,7 @@ QVariant SecuritiesModel::headerData(int section, Qt::Orientation orientation, i
             return QVariant();
         }
     }
-    return QAbstractItemModel::headerData(section, orientation, role);
+    return MyMoneyModelBase::headerData(section, orientation, role);
 }
 
 QVariant SecuritiesModel::data(const QModelIndex& index, int role) const

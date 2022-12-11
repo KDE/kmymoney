@@ -80,6 +80,15 @@ public:
      */
     bool isValidId (const QString& id) const;
 
+    /**
+     * This is the default implementation that supports
+     * the role eMyMoney::Model::LongDisplayRole. It simply
+     * returns the models headerDate for Qt::DisplayRole if
+     * called with @a role LongDisplayRole.
+     * In all other cases it calls QAbstractItemModel::headerData()).
+     */
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
+
 protected:
     QString nextId();
 

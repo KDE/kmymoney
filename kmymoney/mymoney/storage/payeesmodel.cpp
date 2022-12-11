@@ -96,7 +96,7 @@ QVariant PayeesModel::headerData(int section, Qt::Orientation orientation, int r
             break;
         }
     }
-    return QAbstractItemModel::headerData(section, orientation, role);
+    return MyMoneyModelBase::headerData(section, orientation, role);
 }
 
 QVariant PayeesModel::data(const QModelIndex& index, int role) const

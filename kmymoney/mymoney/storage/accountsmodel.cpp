@@ -479,7 +479,7 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
             }
         }
     }
-    return QAbstractItemModel::headerData(section, orientation, role);
+    return MyMoneyModelBase::headerData(section, orientation, role);
 }
 
 QVariant AccountsModel::data(const QModelIndex& idx, int role) const

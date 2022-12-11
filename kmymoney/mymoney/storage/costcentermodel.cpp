@@ -52,7 +52,7 @@ QVariant CostCenterModel::headerData(int section, Qt::Orientation orientation, i
             break;
         }
     }
-    return QAbstractItemModel::headerData(section, orientation, role);
+    return MyMoneyModelBase::headerData(section, orientation, role);
 }
 
 QVariant CostCenterModel::data(const QModelIndex& index, int role) const

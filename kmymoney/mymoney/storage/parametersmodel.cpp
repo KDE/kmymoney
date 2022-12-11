@@ -64,7 +64,7 @@ QVariant ParametersModel::headerData(int section, Qt::Orientation orientation, i
             return i18nc("ParameterModel value", "Value");
         }
     }
-    return QAbstractItemModel::headerData(section, orientation, role);
+    return MyMoneyModelBase::headerData(section, orientation, role);
 }
 
 QVariant ParametersModel::data(const QModelIndex& index, int role) const

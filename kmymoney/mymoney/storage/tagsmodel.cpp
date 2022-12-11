@@ -52,7 +52,7 @@ QVariant TagsModel::headerData(int section, Qt::Orientation orientation, int rol
             break;
         }
     }
-    return QAbstractItemModel::headerData(section, orientation, role);
+    return MyMoneyModelBase::headerData(section, orientation, role);
 }
 
 QVariant TagsModel::data(const QModelIndex& index, int role) const

@@ -67,7 +67,7 @@ QVariant BudgetsModel::headerData(int section, Qt::Orientation orientation, int 
             return i18nc("Budget year", "Year");
         }
     }
-    return QAbstractItemModel::headerData(section, orientation, role);
+    return MyMoneyModelBase::headerData(section, orientation, role);
 }
 
 QVariant BudgetsModel::data(const QModelIndex& index, int role) const

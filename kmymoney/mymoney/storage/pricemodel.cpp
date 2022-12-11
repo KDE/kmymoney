@@ -81,7 +81,7 @@ QVariant PriceModel::headerData(int section, Qt::Orientation orientation, int ro
     if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
         return d->headerData.value(static_cast<Column>(section));
     }
-    return QAbstractItemModel::headerData(section, orientation, role);
+    return MyMoneyModelBase::headerData(section, orientation, role);
 }
 
 QVariant PriceModel::data(const QModelIndex& idx, int role) const

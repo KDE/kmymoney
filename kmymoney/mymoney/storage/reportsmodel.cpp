@@ -51,7 +51,7 @@ QVariant ReportsModel::headerData(int section, Qt::Orientation orientation, int 
             break;
         }
     }
-    return QAbstractItemModel::headerData(section, orientation, role);
+    return MyMoneyModelBase::headerData(section, orientation, role);
 }
 
 QVariant ReportsModel::data(const QModelIndex& index, int role) const

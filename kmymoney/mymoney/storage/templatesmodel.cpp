@@ -80,7 +80,7 @@ QVariant TemplatesModel::headerData(int section, Qt::Orientation orientation, in
             return QVariant();
         }
     }
-    return QAbstractItemModel::headerData(section, orientation, role);
+    return MyMoneyModelBase::headerData(section, orientation, role);
 }
 
 QVariant TemplatesModel::data(const QModelIndex& idx, int role) const
