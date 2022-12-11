@@ -219,7 +219,6 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
             JournalModel::Column::Date,
             JournalModel::Column::Security,
             JournalModel::Column::Detail,
-            JournalModel::Column::Reconciliation,
             JournalModel::Column::Quantity,
             JournalModel::Column::Price,
             JournalModel::Column::Value,
@@ -242,7 +241,6 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
         columns = {
             JournalModel::Column::Date,
             JournalModel::Column::Detail,
-            JournalModel::Column::Reconciliation,
             JournalModel::Column::Payment,
             JournalModel::Column::Deposit,
             JournalModel::Column::Balance,
