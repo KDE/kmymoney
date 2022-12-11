@@ -52,7 +52,7 @@ struct JournalModel::Private
               {Account, i18nc("@title:column", "Account")},
               {Payee, i18nc("@title:column", "Payee")},
               {Security, i18nc("@title:column", "Security")},
-              {CostCenter, i18nc("@title:column", "CC")},
+              {CostCenter, i18nc("@title:column Costcenter", "CC")},
               {Detail, i18nc("@title:column", "Detail")},
               {Reconciliation, i18nc("@title:column Reconciliation state", "C")},
               {Payment, i18nc("@title:column Payment made from account", "Payment")},
@@ -63,6 +63,12 @@ struct JournalModel::Private
               {Value, i18nc("@title:column", "Value")},
               {Balance, i18nc("@title:column", "Balance")},
               {EntryDate, i18nc("@title:column Entry date", "Entry")},
+          }))
+        , extendedHeaderData(QHash<Column, QString>({
+              {Number, i18nc("@title:column Cheque Number (ext)", "Number")},
+              {Reconciliation, i18nc("@title:column Reconciliation state (ext)", "Reconciliation")},
+              {CostCenter, i18nc("@title:column CostCenter (ext)", "Cost center")},
+              {EntryDate, i18nc("@title:column Entry date (ext)", "Entry date")},
           }))
     {
     }
@@ -416,6 +422,7 @@ struct JournalModel::Private
     JournalModelNewTransaction* newTransactionModel;
     QMap<QString, QString> transactionIdKeyMap;
     QHash<Column, QString> headerData;
+    QHash<Column, QString> extendedHeaderData;
     QHash<QString, AccountBalances> balanceCache;
     QHash<QString, MyMoneyAccount> accountCache;
     QSet<QString> fullBalanceRecalc;
@@ -496,13 +503,15 @@ QVariant JournalModel::headerData(int section, Qt::Orientation orientation, int 
 
         case Qt::SizeHintRole:
             return QSize(20, 20);
+
+        case eMyMoney::Model::LongDisplayRole:
+            return d->extendedHeaderData.value(static_cast<Column>(section), d->headerData.value(static_cast<Column>(section)));
         }
-        return {};
     }
     if (orientation == Qt::Vertical && role == Qt::SizeHintRole) {
         return QSize(10, 10);
     }
-    return QAbstractItemModel::headerData(section, orientation, role);
+    return MyMoneyModelBase::headerData(section, orientation, role);
 }
 
 Qt::ItemFlags JournalModel::flags(const QModelIndex& index) const

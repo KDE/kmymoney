@@ -24,6 +24,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyenums.h"
+
 /// @todo add feature to group multiple column selectors for the same view
 /// in different instances by group name.
 
@@ -202,7 +204,7 @@ void ColumnSelector::slotColumnsMenu(const QPoint)
         }
         auto a = new QAction(nullptr);
         a->setObjectName(QString::number(col));
-        a->setText(d->model->headerData(col, Qt::Horizontal).toString());
+        a->setText(d->model->headerData(col, Qt::Horizontal, eMyMoney::Model::LongDisplayRole).toString());
         a->setCheckable(true);
         a->setChecked(!d->isColumnHidden(col));
         actions.append(a);
