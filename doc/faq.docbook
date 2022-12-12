@@ -4,15 +4,15 @@
   <authorgroup>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2014-08-30</date>
-  <releaseinfo>4.7.01</releaseinfo>
+  <date>2022-12-10</date>
+  <releaseinfo>5.1.3</releaseinfo>
 </chapterinfo>
 
 <title>Questions and Answers</title>
 
 <para>
   This chapter addresses a number of issues that frequently cause confusion,
-  especially in new users of &kmymoney;. If you find that &kmymoney; is doing
+  especially for new users of &kmymoney;. If you find that &kmymoney; is doing
   something you don't understand (or sometimes not doing something you want it
   to do,) please check this list before asking for help on one of the mailing
   lists.  If your problem is not mentioned here, refer to the section on <link
@@ -29,12 +29,17 @@
  </question>
  <answer>
    <para>There are many reasons &kmymoney; might crash or give an error instead
-   of starting up normally.  You first need to determine if the problem is with
-   the software or with your data.  So, the first thing to try is to <link
-   linkend="firsttime.launch">launch &kmymoney;</link> without opening your data
-   file.  If the application starts up, but crashes when you try to load your
-   data file, try loading an older copy of your file.  (You did make a backup,
-   didn't you?)</para>
+   of starting up normally.  Sometimes an error message is shown, but if not,
+   you can run &kmymoney; from a command line, to see if any useful information
+   is output to the console.  On &Linux;, this just means typing "kmymoney" in a
+   shell.  &macOS; should be similar.  On &Windows;, you will need to type the
+   full path to the &kmymoney; executable.</para>
+   <para>If this does not show the cause of the problem, you need to determine
+   if there is an issue with the software or with your data.  To do this, you
+   need to <link linkend="firsttime.launch">launch &kmymoney;</link> without
+   opening your data file.  If the application starts up, but crashes when you
+   try to load your data file, try loading an older copy of your file.  (You did
+   make a backup, didn't you?)</para>
    <para>If &kmymoney; crashes on startup without trying to load a data file,
    there may be a problem with your installation.  See the section on <link
    linkend="firsttime.contact">getting help</link>.</para>
@@ -96,7 +101,7 @@
  </question>
  <answer>
    <para>A transaction is shown in red if any part of the amount has not been
-   assigned to a category. This is most commonly caused by importing a QIF or
+   assigned to a category.  This is most commonly caused by importing a QIF or
    OFX file or by downloading statement data online.  All you have to do is to
    modify the transaction such that the whole amount of the transaction is
    assigned to categories.</para>
@@ -127,17 +132,19 @@
    <para>You can easily change an account type between checking, savings, and
    cash.  However, because of the way &kmymoney; stores the account information,
    it does not allow other changes of account type.  The way around this is to
-   create a new account of the correct type, move all the transactions from the
-   old to the new account, and then delete the old account.</para>
-   <!-- this should have links to the sections on new acct, move transactions,
-        delete account. -->
+   <link linkend="details.accounts.create">create a new account of the correct
+   type</link>, move all the transactions from the old to the new account, and
+   then <link linkend="details.accounts.delete"> delete the old
+   account.</link></para>
+   <!-- this still needs a link to the section on moving transactions, which
+        does not yet exist. -->
  </answer>
 </qandaentry>
 
 <qandaentry>
  <question>
-   <para>I have a loan with 0% interest, but I get an error in the new loan
-   wizard that does not let me use this value.</para>
+   <para>I have a loan with 0% interest, but I get an error in the New Loan
+   Wizard that does not let me use this value.</para>
  </question>
  <answer>
    <para>The internal calculations of the new loan wizard do not allow a 0%
@@ -162,11 +169,11 @@
    status,</quote> then only transaction of the selected type will be shown.  In
    addition, there are two important settings in the <link
    linkend="details.settings.general.filter">filter options</link> section on
-   the &kmymoney; Settings dialog.  If the <guilabel>Do not show transactions prior
-   to</guilabel> field is set, only transactions on or after that date will be
-   shown in the ledger.  If the <guilabel>Do not show reconciled
-   transactions</guilabel> box is checked, then no reconciled transactions will be
-   shown.</para>
+   the &kmymoney; Settings dialog.  If the <guilabel>Do not show transactions
+   prior to</guilabel> field is set, only transactions on or after that date
+   will be shown in the ledger.  If the <guilabel>Do not show reconciled
+   transactions</guilabel> box is checked, then no reconciled transactions will
+   be shown.</para>
  </answer>
 </qandaentry>
 
@@ -177,11 +184,11 @@
  </question>
  <answer>
    <para>There is no global search and replace function in &kmymoney;.
-   Nevertheless, it is easy to change a payees name: select the Payees view and
+   Nevertheless, it is easy to change a payee's name: select the Payees View and
    find the entry with the name you want to change.  Click with the &RMB; on the
-   payee, and select <guimenuitem>Rename payee</guimenuitem> from the context menu.
-   Enter the new name. Since the transactions only use a reference to the payees
-   record, all transactions now show the new name.</para>
+   payee, select <guimenuitem>Rename payee</guimenuitem> from the context menu,
+   and enter the new name.  Since the transactions only use a reference to the
+   payees record, all transactions now show the new name.</para>
  </answer>
 </qandaentry>
 
@@ -191,11 +198,11 @@
  </question>
  <answer>
    <para>In order to delete an account, &kmymoney; can have no other references
-   to it.  That means you must delete all transactions, or move them to another
-   account.  If you still can't delete an account, there may be scheduled
-   transactions referring to that account, which may not be visible in the
-   ledger.  You need to delete any future transactions and the schedule itself,
-   or switch them to a different account.</para>
+   to it.  That means you must delete all transactions from that account or move
+   them to another account.  If you still can't delete an account, there may be
+   scheduled transactions referring to that account, which may not be visible in
+   the ledger.  You need to delete any future transactions and the schedule
+   itself, or switch them to a different account.</para>
  </answer>
 </qandaentry>
 
@@ -208,9 +215,10 @@
    <para>Where do I find some more information about OFX parameters?</para>
  </question>
  <answer>
-   <para>Here are some external sources which might give your more information:
-   <ulink url="https://ofxblog.wordpress.com/">OFX Blog</ulink> and <ulink
-   url="https://www.ofxhome.com/">OFX Home</ulink>.</para>
+   <para>Searching the web with specific questions can sometimes provide useful
+   results, but there is still one site which which might give you more
+   information: <ulink url="https://www.ofxhome.com/">OFX Home</ulink>.</para>
+   <!-- <ulink url="https://ofxblog.wordpress.com/">OFX Blog</ulink> -->
  </answer>
 </qandaentry>
 
@@ -223,19 +231,20 @@
    <para>Why is there no translation for 'my' language?</para>
  </question>
  <answer>
-   <para>&kmymoney; uses the &kde; settings for language, so first, make
-   sure that your region and language settings are correct.  If they are, the
-   most likely reason is that no one has offered to translate it yet.
-   Translating &kde;/&Qt;-based applications is very simple, and does not
-   require any programming skills. If you would like to translate &kmymoney;
-   into your language, please post a message to the proper <ulink
-   url="https://l10n.kde.org/teams-list.php">team mailing list</ulink>. Should
+   <para>&kmymoney; uses the &kde; settings for language, so first, make sure that
+   your region and language settings are correct.  If they are, the most likely
+   reason is that no one has offered to translate it yet.  Translating
+   &kde;/&Qt;-based applications is very simple, and does not require any
+   programming skills.  If you would like to translate &kmymoney; into your
+   language, please post a message to the proper <ulink
+   url="https://l10n.kde.org/teams-list.php">team mailing list</ulink>.  Should
    you fail to find your language in the list or could not contact the team
-   members please mail directly to the <ulink url="mailto:kde-i18n-doc@kde.org">&kde;
-   translation mailing list</ulink> (<ulink
+   members please mail directly to the <ulink
+   url="mailto:kde-i18n-doc@kde.org">&kde; translation mailing list</ulink>
+   (<ulink
    url="https://mail.kde.org/mailman/listinfo/kde-i18n-doc">subscription</ulink>
-   required) and we will give you the details on how you can
-   easily provide a translation for &kmymoney;.
+   required) and we will give you the details on how you can easily provide a
+   translation for &kmymoney;.
 </para>
  </answer>
 </qandaentry>
@@ -247,18 +256,17 @@
  </question>
  <answer>
    <para>The use of KMyMoney2 was a historical legacy from when the project went
-   from &kde; 1 to &kde; 2.  To avoid changing the name every time there was a
-   new &kde; version, we decided to stick with &kmymoney;.</para>
-   <para>The first version of &kmymoney; that was considered sufficiently stable
-   was labeled 1.0, even though it ran under &kde; 3.  As the project is now
-   becoming more closely aligned with &kde; we decided to use the same major
-   release number.</para>
+   from &kde; 1 to &kde; 2.  To avoid changing the name every time there was a new
+   &kde; version, we decided to stick with &kmymoney;.</para> <para>The first
+   version of &kmymoney; that was considered sufficiently stable was labeled 1.0,
+   even though it ran under &kde; 3.  As the project became more closely aligned
+   with &kde; we decided to use the same major release number.</para>
  </answer>
 </qandaentry>
 
 <qandaentry>
  <question>
-   <para>How can I report a bug? How can I request a new feature?</para>
+   <para>How can I report a bug?  How can I request a new feature?</para>
  </question>
  <answer>
    <para>The developers encourage your feedback.  See the section on <link
