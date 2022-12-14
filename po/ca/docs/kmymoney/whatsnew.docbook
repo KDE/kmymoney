@@ -14,10 +14,10 @@
 >Correcció d'errors i millores a les funcionalitats</title>
 
 <para
->Com a cada llançament, l'equip de desenvolupament del &kmymoney; ha estat treballant de valent per a fer que aquest llançament sigui millor i més fàcil d'emprar en tots els sentits. Aquesta és la quarta versió de la sèrie 5.0, i la major part de l'activitat s'ha dirigit a corregir els errors. </para>
+>Com a cada llançament, l'equip de desenvolupament del &kmymoney; continua treballant de valent per a fer cada versió sigui millor i més fàcil d'emprar en tots els sentits. Aquesta és la quarta versió de la sèrie 5.1, i la major part de l'activitat s'ha dirigit a corregir els errors. </para>
 
 <para
->En aquest punt, la conversió per a emprar els &kde-frameworks; està essencialment completa, encara que aquesta i el treball per a actualitzar moltes de les biblioteques subjacents emprades per l'aplicació són interns i l'usuari final no ho veu directament. L'aparença general ha de ser estable, encara que puguin ocórrer alguns canvis menors. La funcionalitat bàsica del programa també segueix sent la mateixa, a part de les millores i addicions intencionades. </para>
+>Des de la 5.1, la conversió per a emprar els &kde-frameworks; està essencialment completa, encara que aquesta i el treball per a actualitzar moltes de les biblioteques subjacents emprades per l'aplicació són interns i l'usuari final no ho veu directament. L'aparença general ha de ser estable, encara que puguin ocórrer alguns canvis menors. La funcionalitat bàsica del programa també segueix sent la mateixa, a part de les millores i addicions intencionades. </para>
 
 <para
 >A les versions anteriors, aquesta pàgina del manual ha inclòs una llista de moltes correccions d'errors específics i millores funcionals. No obstant això, en lloc de duplicar aquesta informació, la trobareu directament en el <ulink url="https://kmymoney.org/changelog.html"
@@ -25,12 +25,12 @@
 >. </para>
 
 <para
->Des del llançament de la 5.0, hi ha hagut alguns canvis que necessitaran ajustos per part de l'usuari si esteu actualitzant des de la 4.8.x o una versió anterior. </para>
+>Des del llançament de la 5.0, hi ha hagut alguns canvis que necessitaran ajustos per part de l'usuari si esteu actualitzant des de la 4.8.x o una versió anterior. Tanmateix, esperem que la majoria dels usuaris hagin actualitzat a 5.x per ara. </para>
 
 <itemizedlist>
   <listitem
 ><para
->El programa cerca les plantilles per al connector «printcheck» en diferents ubicacions. L'usuari haurà de tenir-ho en compte al diàleg de configuració del connector. Per a més detalls, <link linkend="details.settings.plugins"
+>Des de fa temps, el programa cerca les plantilles per al connector «printcheck» en diferents ubicacions que les d'abans. Si això encara és un problema per a vós, cal tenir-ho en compte al diàleg de configuració del connector. Per a més detalls, <link linkend="details.settings.plugins"
 >vegeu aquesta secció</link
 >. </para
 ></listitem>
@@ -45,7 +45,7 @@
 >Si bé continuem avançant, encara hi ha capítols d'aquest manual que no s'han actualitzat per a reflectir tots els canvis al programa que són visibles per l'usuari a partir de la 5.0. Cada capítol identifica el llançament del &kmymoney; per al qual es va actualitzar per darrera vegada, però presentem aquí la llista completa, com a referència ràpida. </para>
 
 <para
->Tanmateix, cal tenir en compte fins a quin punt els capítols que no s'han actualitzat explícitament reflecteixen o no l'operació actual del programa dependrà de com hagi canviat aquesta àrea del programa entre les versions 4.8 i 5.0. </para>
+>Tanmateix, cal tenir en compte fins a quin punt els capítols que no s'han actualitzat explícitament reflecteixen o no l'operació actual del programa dependrà de com hagi canviat aquesta àrea del programa entre les versions 4.8 i 5.0 i 5.1. </para>
   
 <informaltable frame="none">
   <tgroup cols="2">
@@ -118,6 +118,10 @@
 >Configuració</link
 ></member>
 	    <member
+><link linkend="faq"
+>Preguntes i respostes</link
+></member>
+	    <member
 ><link linkend="reference.menus"
 >Referència: Menús</link
 ></member>
@@ -168,10 +172,6 @@
 	    <member
 ><link linkend="details.database"
 >Base de dades</link
-></member>
-	    <member
-><link linkend="faq"
->Preguntes i respostes</link
 ></member>
 	    <member
 ><link linkend="reference.widgets"

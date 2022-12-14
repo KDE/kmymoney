@@ -6,9 +6,9 @@
 >&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->30 d'agost de 2014</date>
+>10 de desembre de 2022</date>
   <releaseinfo
->4.7.01</releaseinfo>
+>5.1.3</releaseinfo>
 </chapterinfo>
 
 <title
@@ -32,7 +32,9 @@
  </question>
  <answer>
    <para
->Hi ha moltes raons per les quals el &kmymoney; podria fallar o donar un error en lloc d'iniciar-se amb normalitat. Primer haureu de determinar si el problema és amb el programari o amb les dades. Per tant, el primer que haureu d'intentar és <link linkend="firsttime.launch"
+>Hi ha moltes raons per les quals el &kmymoney; podria fallar o donar un error en lloc d'iniciar-se amb normalitat. De vegades es mostra un missatge d'error, però si no, podreu executar el &kmymoney; des d'una línia d'ordres, per a veure si s'emet qualsevol informació útil a la consola. Al &Linux;, això significa escriure només «kmymoney» en un intèrpret d'ordres. El &macOS; hauria de ser similar. Al &Windows;, haureu d'escriure el camí complet a l'executable del &kmymoney;.</para>
+   <para
+>Si això no mostra la causa del problema, haureu de determinar si la incidència és amb el programari o amb les dades. Per fer-ho, cal <link linkend="firsttime.launch"
 >llançar el &kmymoney;</link
 > sense obrir el fitxer de dades. Si l'aplicació s'inicia, però es bloqueja quan intenteu carregar el fitxer de dades, proveu de carregar una còpia anterior del fitxer. (Heu fet una còpia de seguretat, no?)</para>
    <para
@@ -120,9 +122,13 @@
  </question>
  <answer>
    <para
->Ho podreu canviar amb facilitat entre xecs, estalvis i efectiu. No obstant això, a causa de la forma en què el &kmymoney; emmagatzema la informació del compte, no permet altres canvis de tipus de compte. La solució a això és crear un compte nou del tipus correcte, moure totes les operacions des del compte anterior cap al nou i després suprimir el compte anterior.</para>
-   <!-- this should have links to the sections on new acct, move transactions,
-        delete account. -->
+>Ho podreu canviar amb facilitat entre xecs, estalvis i efectiu. No obstant això, a causa de la forma en què el &kmymoney; emmagatzema la informació del compte, no permet altres canvis de tipus de compte. La solució a això és <link linkend="details.accounts.create"
+>crear un compte nou del tipus correcte</link
+>, moure totes les operacions des del compte anterior cap al nou i després <link linkend="details.accounts.delete"
+>suprimir el compte anterior</link
+>.</para>
+   <!-- this still needs a link to the section on moving transactions, which
+        does not yet exist. -->
  </answer>
 </qandaentry>
 
@@ -169,9 +175,9 @@
  </question>
  <answer>
    <para
->No hi ha cap funció de cerca i substitució global al &kmymoney;. No obstant això, és fàcil canviar el nom d'un beneficiari: seleccioneu la vista dels beneficiaris i cerqueu l'entrada amb el nom que voleu canviar. Feu clic amb el &BDR; sobre el beneficiari i seleccioneu <guimenuitem
+>No hi ha cap funció de cerca i substitució global al &kmymoney;. No obstant això, és fàcil canviar el nom d'un beneficiari: seleccioneu la vista dels beneficiaris i cerqueu l'entrada amb el nom que voleu canviar. Feu clic amb el &BDR; sobre el beneficiari, seleccioneu <guimenuitem
 >Reanomena el beneficiari</guimenuitem
-> des del menú contextual. Introduïu el nom nou. Atès que les operacions només fan servir una referència amb el registre de beneficiaris, totes les operacions ara mostraran el nom nou.</para>
+> des del menú contextual, i introduïu el nom nou. Atès que les operacions només fan servir una referència amb el registre de beneficiaris, totes les operacions ara mostraran el nom nou.</para>
  </answer>
 </qandaentry>
 
@@ -182,7 +188,7 @@
  </question>
  <answer>
    <para
->Per a suprimir un compte, el &kmymoney; no podrà tenir altres referències a ell. Això vol dir que haureu de suprimir totes les operacions o moure-les a un altre compte. Si encara no podeu suprimir un compte, podria haver-hi operacions planificades que hi facin referència, les quals poden no ser visibles al llibre major. Haureu de suprimir qualsevol operació futura i la planificació en si, o canviar-la a un compte diferent.</para>
+>Per a suprimir un compte, el &kmymoney; no podrà tenir altres referències a ell. Això vol dir que haureu de suprimir totes les operacions del compte o moure-les a un altre compte. Si encara no podeu suprimir un compte, podria haver-hi operacions planificades que hi facin referència, les quals poden no ser visibles al llibre major. Haureu de suprimir qualsevol operació futura i la planificació en si, o canviar-la a un compte diferent.</para>
  </answer>
 </qandaentry>
 
@@ -199,11 +205,12 @@
  </question>
  <answer>
    <para
->Aquí hi ha algunes fonts externes que poden oferir més informació: <ulink url="https://ofxblog.wordpress.com/"
->OFX Blog</ulink
-> i <ulink url="https://www.ofxhome.com/"
+>Una cerca a la web amb preguntes específiques de vegades pot proporcionar resultats útils, però encara hi ha un lloc que podria donar-vos més informació: <ulink url="https://www.ofxhome.com/"
 >OFX Home</ulink
 >.</para>
+   <!-- <ulink url="https://ofxblog.wordpress.com/"
+>OFX Blog</ulink
+> -->
  </answer>
 </qandaentry>
 
@@ -237,9 +244,9 @@
  </question>
  <answer>
    <para
->L'ús de KMyMoney2 va ser un llegat històric de quan el projecte va passar del &kde; 1 al &kde; 2. Per a evitar canviar el nom cada vegada que hi havia una nova versió del &kde;, vam decidir seguir amb &kmymoney;.</para>
-   <para
->La primera versió del &kmymoney; que es va considerar prou estable tenia l'etiqueta 1.0, tot i que s'executava sota el &kde; 3. Com el projecte ara s'està alineant més estretament amb el &kde;, vam decidir fer servir el mateix número de versió principal.</para>
+>L'ús de KMyMoney2 va ser un llegat històric de quan el projecte va passar del &kde; 1 al &kde; 2. Per a evitar canviar el nom cada vegada que hi havia una nova versió del &kde;, vam decidir seguir amb &kmymoney;.</para
+> <para
+>La primera versió del &kmymoney; que es va considerar prou estable tenia l'etiqueta 1.0, tot i que s'executava sota el &kde; 3. A mesura que el projecte es va alinear més estretament amb &kde;, hem decidit fer servir el mateix número de versió principal.</para>
  </answer>
 </qandaentry>
 

@@ -6,16 +6,16 @@
 >&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->2014-08-30</date>
+>2022-12-10</date>
   <releaseinfo
->4.7.01</releaseinfo>
+>5.1.3</releaseinfo>
 </chapterinfo>
 
 <title
 >Vragen en antwoorden</title>
 
 <para
->Dit hoofdstuk gaat over een aantal onderwerpen die vaak verwarring veroorzaken, speciaal bij nieuwe gebruikers van &kmymoney;. Als u vindt dat &kmymoney; iets doet dat u niet begrijpt (of soms iets niet doet waarvan u wilt dat het wordt gedaan,) lees dan deze sectie voordat u om hulp vraagt op een van de e-maillijsten. Als uw probleem hier niet genoemd wordt, ga dan naar de sectie op <link linkend="firsttime.contact"
+>Dit hoofdstuk gaat over een aantal onderwerpen die vaak verwarring veroorzaken, speciaal voor nieuwe gebruikers van &kmymoney;. Als u vindt dat &kmymoney; iets doet dat u niet begrijpt (of soms iets niet doet waarvan u wilt dat het wordt gedaan,) lees dan deze sectie voordat u om hulp vraagt op een van de e-maillijsten. Als uw probleem hier niet genoemd wordt, ga dan naar de sectie op <link linkend="firsttime.contact"
 >hulp verkrijgen</link
 >. </para>
 
@@ -32,8 +32,10 @@
  </question>
  <answer>
    <para
->Er zijn vele redenen waarom &kmymoney; zou kunnen crashen of een fout geeft in plaats van normaal op te starten. U moet eerst bepalen of het probleem aan de software ligt of aan uw gegevens. De eerste poging is dus om <link linkend="firsttime.launch"
->&kmymoney; te starten</link
+>Er zijn veel redenen waarom &kmymoney; kan crashen of een fout geeft in plaats van normaal op te starten. Soms wordt er een foutmelding getoond, maar indien niet, dan kunt u &kmymoney; starten vanaf een commandoregel, om te zien of er enige nuttige informatie wordt uitgevoerd naar de console. In &Linux; betekent dit dat gewoon "kmymoney" typt in een shell. In &macOS; zou het ook zo moeten zijn. Op &Windows; moet u het volledige pad naar het uitvoerbare programma &kmymoney; intypen.</para>
+   <para
+>Als dit niet de oorzaak van het probleem toont moet u bepalen of er een probleem is met de software of met uw gegevens. Om dit te doen moet u <link linkend="firsttime.launch"
+>&kmymoney; starten</link
 > zonder uw gegevensbestand te openen. Als de toepassing opstart, maar crasht wanneer u uw gegevensbestand probeert te openen, probeer dan een oudere kopie van uw bestand te openen. (U hebt toch een reservekopie gemaakt, toch?)</para>
    <para
 >Als &kmymoney; crasht bij opstarten zonder te proberen een gegevensbestand te laden, dan zou er een probleem met uw installatie kunnen zijn. Zie de sectie <link linkend="firsttime.contact"
@@ -124,16 +126,20 @@
  </question>
  <answer>
    <para
->U kunt makkelijk het rekeningtype omschakelen tussen cheques, spaarrekening, en contant. Maar vanwege de manier waarop &kmymoney; de informatie over de rekening opslaat, zijn andere wijzigingen van het rekeningtype niet mogelijk. Een manier om dit op te lossen is het creëren van een nieuwe rekening van het juiste type, het verplaatsen van alle transacties van de oude rekening naar de nieuwe rekening, en tenslotte het verwijderen van de oude rekening.</para>
-   <!-- this should have links to the sections on new acct, move transactions,
-        delete account. -->
+>U kunt makkelijk het rekeningtype omschakelen tussen cheques, spaarrekening, en contant. Maar vanwege de manier waarop &kmymoney; de informatie over de rekening opslaat, zijn andere wijzigingen van het rekeningtype niet mogelijk. Een manier om dit op te lossen is <link linkend="details.accounts.create"
+>het creëren van een nieuwe rekening van het juiste type</link
+>, het verplaatsen van alle transacties van de oude rekening naar de nieuwe rekening, en tenslotte <link linkend="details.accounts.delete"
+>het verwijderen van de oude rekening.</link
+></para>
+   <!-- this still needs a link to the section on moving transactions, which
+        does not yet exist. -->
  </answer>
 </qandaentry>
 
 <qandaentry>
  <question>
    <para
->Ik heb een lening met 0% rente, maar ik krijg een fout in de nieuwe lening wizard die mij deze waarde niet laat gebruiken.</para>
+>Ik heb een lening met 0% rente, maar ik krijg een fout in de nieuwe Leningassistent die mij deze waarde niet laat gebruiken.</para>
  </question>
  <answer>
    <para
@@ -173,7 +179,7 @@
  </question>
  <answer>
    <para
->Er is geen globale zoek en vervang functie in &kmymoney;. Desondanks is het makkelijk om de naam van een begunstigde te veranderen: selecteer de weergave voor begunstigden en zoek de naam die u wilt wijzigen. Klik met de &RMB; op de begunstigde, en selecteer uit het contextmenu <guimenuitem
+>Er is geen globale zoek en vervang functie in &kmymoney;. Desondanks is het makkelijk om de naam van een begunstigde (debiteur) te veranderen: selecteer de weergave voor begunstigden en zoek de naam die u wilt wijzigen. Klik met de &RMB; op de begunstigde, en selecteer uit het contextmenu <guimenuitem
 >Begunstigde hernoemen</guimenuitem
 >. Voer de nieuwe naam in. Omdat de transacties alleen een referentie gebruiken naar het record van de begunstigde, tonen nu alle transacties de nieuwe naam.</para>
  </answer>
@@ -203,11 +209,12 @@
  </question>
  <answer>
    <para
->Hier zijn enkele externe bronnen waar u meer informatie kunt vinden: <ulink url="http://ofxblog.wordpress.com/"
->OFX Blog</ulink
-> en <ulink url="http://www.ofxhome.com/"
+>Op het web met specifieke vragen te zoeken kan soms nuttige resultaten opleveren, maar er is nog steeds één site die u meer informatie kan leveren: <ulink url="https://www.ofxhome.com/"
 >OFX Home</ulink
 >.</para>
+   <!-- <ulink url="https://ofxblog.wordpress.com/"
+>OFX Blog</ulink
+> -->
  </answer>
 </qandaentry>
 
@@ -241,9 +248,9 @@
  </question>
  <answer>
    <para
->Het gebruik van KMyMoney2 was een historische overblijfsel van toen het project van&kde; 1 naar &kde; 2 ging. Om iedere keer de naamswijziging te vermijden als een nieuwe &kde; versie is, hebben we besloten om bij &kmymoney; te blijven.</para>
-   <para
->De eerste versie van &kmymoney; die stabiel genoeg werd geacht, kreeg de versie 1.0, alhoewel het onder &kde; 3 liep. Omdat het project dichter bij &kde; kwam, hebben we besloten om hetzelfde major versienummer te gebruiken.</para>
+>Het gebruik van KMyMoney2 was een historische overblijfsel van toen het project van&kde; 1 naar &kde; 2 ging. Om iedere keer de naamswijziging te vermijden als een nieuwe &kde; versie is, hebben we besloten om bij &kmymoney; te blijven.</para
+> <para
+>De eerste versie van &kmymoney; die stabiel genoeg werd geacht, kreeg de versie 1.0, alhoewel het onder &kde; 3 liep. Omdat het project meer in lijn kwam met &kde;, hebben we besloten om hetzelfde major versienummer te gebruiken.</para>
  </answer>
 </qandaentry>
 

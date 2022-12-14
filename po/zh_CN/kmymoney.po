@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-12 00:47+0000\n"
-"PO-Revision-Date: 2022-12-01 06:52\n"
+"PO-Revision-Date: 2022-12-13 12:21\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -160,13 +160,12 @@ msgid "(Fees) %1"
 msgstr "(费用) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1022
-#, fuzzy, kde-format
-#| msgid "Additional Fees: %1"
+#, kde-format
 msgctxt "Prepend name of payee (%1) to orignal memo (%2)"
 msgid ""
 "Original payee: %1\n"
 "%2"
-msgstr "附加费用: %1"
+msgstr ""
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1030
 #, kde-format
@@ -8235,14 +8234,10 @@ msgid "Security"
 msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:55
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@title:column Indicates whether a Cost Center assignment is necessary "
-#| "when entering a transaction"
-#| msgid "CC"
+#, kde-format
 msgctxt "@title:column Costcenter"
 msgid "CC"
-msgstr "开销中心"
+msgstr "抄送"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:56
 #, kde-format
@@ -8306,32 +8301,28 @@ msgid "Entry"
 msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:68
-#, fuzzy, kde-format
-#| msgid "Number"
+#, kde-format
 msgctxt "@title:column Cheque Number (ext)"
 msgid "Number"
-msgstr "编号"
+msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:69
-#, fuzzy, kde-format
-#| msgid "Reconciliation view"
+#, kde-format
 msgctxt "@title:column Reconciliation state (ext)"
 msgid "Reconciliation"
-msgstr "对账视图"
+msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:70
-#, fuzzy, kde-format
-#| msgid "Cost center"
+#, kde-format
 msgctxt "@title:column CostCenter (ext)"
 msgid "Cost center"
-msgstr "开销中心"
+msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:71
-#, fuzzy, kde-format
-#| msgid "Entry order"
+#, kde-format
 msgctxt "@title:column Entry date (ext)"
 msgid "Entry date"
-msgstr "条目顺序"
+msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:97
 #, kde-format
@@ -18085,11 +18076,10 @@ msgid "Security for this transaction"
 msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:530
-#, fuzzy, kde-format
-#| msgid "Use this button to record this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
-msgstr "用此按钮来记录交易"
+msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:533
 #, kde-format
@@ -19530,27 +19520,19 @@ msgid "Merge Transactions"
 msgstr "合并交易"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:108
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you wish to merge these transactions?  The one you selected "
-#| "first is the top one, and its values will be used in the merged "
-#| "transaction.  Cancel and select the other transaction first, if you want "
-#| "its values to be used."
+#, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
 "The two selected transactions to merge are shown. The one at the top and its "
 "values will be used in the resulting merged transaction.  If you want to use "
 "the other one press the exchange button on the right."
 msgstr ""
-"您确定要合并这几笔交易吗？合并交易的金额将为所选首笔交易金额。若要使用其他交"
-"易金额，请先取消并选择其他交易。"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:114
-#, fuzzy, kde-format
-#| msgid "Unable to match the selected transactions"
+#, kde-format
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
-msgstr "无法匹配选中的交易"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14
@@ -24010,7 +23992,3 @@ msgstr ""
 "<p>使用下面的各项来输入关于您本人的信息。</p>\n"
 "\n"
 "<p>所有的信息都可以不填，它们仅用来个性化您自己的KMyMoney文件。</p>"
-
-#~ msgctxt "@title:column"
-#~ msgid "CC"
-#~ msgstr "抄送"
