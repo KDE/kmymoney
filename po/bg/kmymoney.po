@@ -23475,8 +23475,3 @@ msgid ""
 "<p>All information is optional and only used to personalize your KMyMoney "
 "file.</p>"
 msgstr ""
-
-#, fuzzy
-#~ msgctxt "@title:column"
-#~ msgid "CC"
-#~ msgstr "C"

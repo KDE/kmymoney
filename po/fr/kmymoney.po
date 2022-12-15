@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-12 00:47+0000\n"
-"PO-Revision-Date: 2022-12-06 19:17+0100\n"
+"PO-Revision-Date: 2022-12-13 19:20+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
@@ -28,7 +28,7 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 22.11.90\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -185,13 +185,14 @@ msgid "(Fees) %1"
 msgstr "(Commissions) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1022
-#, fuzzy, kde-format
-#| msgid "Additional Fees: %1"
+#, kde-format
 msgctxt "Prepend name of payee (%1) to orignal memo (%2)"
 msgid ""
 "Original payee: %1\n"
 "%2"
-msgstr "Commissions supplémentaires : %1"
+msgstr ""
+"Bénéficiaire initial : %1 \n"
+"%2"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1030
 #, kde-format
@@ -8588,11 +8589,7 @@ msgid "Security"
 msgstr "Sécurité"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:55
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@title:column Indicates whether a Cost Center assignment is necessary "
-#| "when entering a transaction"
-#| msgid "CC"
+#, kde-format
 msgctxt "@title:column Costcenter"
 msgid "CC"
 msgstr "CC"
@@ -8659,33 +8656,28 @@ msgid "Entry"
 msgstr "Entrée"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:68
-#, fuzzy, kde-format
-#| msgid "Number"
+#, kde-format
 msgctxt "@title:column Cheque Number (ext)"
 msgid "Number"
 msgstr "Numéro"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "Ledger marker showing a reconciliation entry"
-#| msgid "Reconciliation"
+#, kde-format
 msgctxt "@title:column Reconciliation state (ext)"
 msgid "Reconciliation"
-msgstr "Reconciliation"
+msgstr "Réconciliation"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:70
-#, fuzzy, kde-format
-#| msgid "Cost center"
+#, kde-format
 msgctxt "@title:column CostCenter (ext)"
 msgid "Cost center"
 msgstr "Centre de coûts"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:71
-#, fuzzy, kde-format
-#| msgid "Entry order"
+#, kde-format
 msgctxt "@title:column Entry date (ext)"
 msgid "Entry date"
-msgstr "Saisir l'ordre"
+msgstr "Date d'entrée"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:97
 #, kde-format
@@ -18905,6 +18897,8 @@ msgid ""
 "The security for this transaction cannot be modified because the security "
 "account is closed."
 msgstr ""
+"Il est impossible de modifier la sécurité pour cette opération car le compte "
+"de sécurité est fermé."
 
 #: kmymoney/views/investtransactioneditor.cpp:534
 #, kde-format
@@ -18912,6 +18906,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "This activity cannot be modified because the security account is closed."
 msgstr ""
+"Il est impossible de modifier cette activité car le compte de sécurité est "
+"fermé."
 
 #: kmymoney/views/investtransactioneditor.cpp:546
 #, kde-format
@@ -18926,6 +18922,8 @@ msgid ""
 "The number of shares cannot be modified because the security account is "
 "closed."
 msgstr ""
+"Il est impossible de modifier le nombre de partages car le compte de "
+"sécurité est fermé."
 
 # Ancien: "Saisir la transaction suivante"
 #: kmymoney/views/investtransactioneditor.cpp:552
@@ -18946,6 +18944,8 @@ msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
+"Il est impossible de modifier le taux de fractionnement car le compte de "
+"sécurité est fermé."
 
 #: kmymoney/views/investtransactioneditor.cpp:564
 #, kde-format
@@ -20406,22 +20406,17 @@ msgid "Merge Transactions"
 msgstr "Fusionner les opérations"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:108
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you wish to merge these transactions?  The one you selected "
-#| "first is the top one, and its values will be used in the merged "
-#| "transaction.  Cancel and select the other transaction first, if you want "
-#| "its values to be used."
+#, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
 "The two selected transactions to merge are shown. The one at the top and its "
 "values will be used in the resulting merged transaction.  If you want to use "
 "the other one press the exchange button on the right."
 msgstr ""
-"Voulez-vous vraiment fusionner ces transactions ? Celle sélectionnée en "
-"premier est la principale et ses valeurs seront utilisées pour la "
-"transaction fusionnée. Veuillez annuler ou sélectionner une autre "
-"transaction d'abord, si vous voulez que ses valeurs soient utilisées."
+"Les deux transactions sélectionnées pour la fusion sont affichées. Celle en "
+"haut et ses valeurs seront utilisées dans la transaction fusionnée "
+"résultante. Si vous voulez utiliser l’autre, appuyez sur le bouton d’échange "
+"à droite."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:114
 #, kde-format
@@ -20937,6 +20932,11 @@ msgid ""
 "'Unassigned' amount will be added or 'Overassigned' amount\n"
 "will be subtracted from the amount of the selected split."
 msgstr ""
+"Appliquer le montant « Non alloué » ou « Sur-alloué » au fractionnement "
+"actuel. \n"
+"Le montant « Non alloué » sera ajouté ou le montant « Sur-alloué » sera "
+"ajouté \n"
+"sera soustraite du montant du fractionnement sélectionné."
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
 #: kmymoney/views/splitdialog.ui:633
