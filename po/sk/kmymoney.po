@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-12 00:47+0000\n"
+"POT-Creation-Date: 2022-12-17 11:09+0000\n"
 "PO-Revision-Date: 2020-01-02 16:30+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -2039,7 +2039,7 @@ msgstr "Ceny"
 #. i18n: ectx: property (text), widget (QLabel, TextLabel10)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:232
-#: kmymoney/dialogs/knewaccountdlg.ui:477
+#: kmymoney/dialogs/knewaccountdlg.ui:465
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:83
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:54
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:381
@@ -2572,7 +2572,7 @@ msgid "New..."
 msgstr "Nový..."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
-#: kmymoney/dialogs/knewaccountdlg.ui:374
+#: kmymoney/dialogs/knewaccountdlg.ui:362
 #, kde-format
 msgid "Number:"
 msgstr "Číslo:"
@@ -2580,7 +2580,7 @@ msgstr "Číslo:"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
 #. i18n: ectx: property (placeholderText), widget (KBicEdit, bicEdit)
 #. i18n: ectx: property (text), widget (QLabel, label_bic)
-#: kmymoney/dialogs/knewaccountdlg.ui:384
+#: kmymoney/dialogs/knewaccountdlg.ui:372
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:46
 #: kmymoney/widgets/payeeidentifier/ibanbic/ibanbicitemedit.ui:27
 #, kde-format
@@ -2592,7 +2592,7 @@ msgstr "BIC"
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #. i18n: ectx: property (placeholderText), widget (KIbanLineEdit, ibanEdit)
 #. i18n: ectx: property (text), widget (QLabel, label_iban)
-#: kmymoney/dialogs/knewaccountdlg.ui:397
+#: kmymoney/dialogs/knewaccountdlg.ui:385
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:33
 #: kmymoney/widgets/payeeidentifier/ibanbic/ibanbicitemedit.ui:17
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:94
@@ -2602,25 +2602,25 @@ msgid "IBAN"
 msgstr "IBAN"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_hierarchyTab)
-#: kmymoney/dialogs/knewaccountdlg.ui:439
+#: kmymoney/dialogs/knewaccountdlg.ui:427
 #, kde-format
 msgid "Hierarchy"
 msgstr "Hierarchia"
 
 #. i18n: ectx: property (text), widget (QLabel, m_subAccountLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:445
+#: kmymoney/dialogs/knewaccountdlg.ui:433
 #, kde-format
 msgid "Subaccount"
 msgstr "Podúčet"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_limitsTab)
-#: kmymoney/dialogs/knewaccountdlg.ui:459
+#: kmymoney/dialogs/knewaccountdlg.ui:447
 #, kde-format
 msgid "Limits"
 msgstr "Limity"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
-#: kmymoney/dialogs/knewaccountdlg.ui:465
+#: kmymoney/dialogs/knewaccountdlg.ui:453
 #, kde-format
 msgid ""
 "This page allows to setup certain limits. KMyMoney will warn you when the "
@@ -2630,81 +2630,81 @@ msgstr ""
 "upozorní, keď je zostatok na účte dosiahne limit."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
-#: kmymoney/dialogs/knewaccountdlg.ui:494
+#: kmymoney/dialogs/knewaccountdlg.ui:482
 #, kde-format
 msgid "Absolute limit"
 msgstr "Absolútny limit"
 
 #. i18n: ectx: property (text), widget (QLabel, m_maxCreditLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:504
+#: kmymoney/dialogs/knewaccountdlg.ui:492
 #, kde-format
 msgid "Maximum credit limit"
 msgstr "Maximálny kreditný limit"
 
 #. i18n: ectx: property (text), widget (QLabel, m_minBalanceLabel)
-#: kmymoney/dialogs/knewaccountdlg.ui:535
+#: kmymoney/dialogs/knewaccountdlg.ui:523
 #, kde-format
 msgid "Minimum balance"
 msgstr "Minimálny zostatok"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
-#: kmymoney/dialogs/knewaccountdlg.ui:555
+#: kmymoney/dialogs/knewaccountdlg.ui:543
 #, kde-format
 msgid "Early warning"
 msgstr "Včasné varovanie"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_taxTab)
-#: kmymoney/dialogs/knewaccountdlg.ui:584
+#: kmymoney/dialogs/knewaccountdlg.ui:572
 #: kmymoney/plugins/views/reports/core/listtable.cpp:711
 #, kde-format
 msgid "Tax"
 msgstr "Daň"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
-#: kmymoney/dialogs/knewaccountdlg.ui:590
+#: kmymoney/dialogs/knewaccountdlg.ui:578
 #, kde-format
 msgid "VAT details"
 msgstr "VAT detaily"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_vatCategory)
-#: kmymoney/dialogs/knewaccountdlg.ui:607
+#: kmymoney/dialogs/knewaccountdlg.ui:595
 #, kde-format
 msgid "VAT category"
 msgstr "VAT kategória"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/dialogs/knewaccountdlg.ui:627
+#: kmymoney/dialogs/knewaccountdlg.ui:615
 #, kde-format
 msgid "VAT percentage"
 msgstr "VAT percentá"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_vatAssignment)
-#: kmymoney/dialogs/knewaccountdlg.ui:693
+#: kmymoney/dialogs/knewaccountdlg.ui:681
 #, kde-format
 msgid "Enable auto VAT assignment"
 msgstr "Povoliť automatické priradenie VAT"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_amountGroupBox)
-#: kmymoney/dialogs/knewaccountdlg.ui:723
+#: kmymoney/dialogs/knewaccountdlg.ui:711
 #, kde-format
 msgid "Amount entered"
 msgstr "Suma zadaná"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_grossAmount)
-#: kmymoney/dialogs/knewaccountdlg.ui:738
+#: kmymoney/dialogs/knewaccountdlg.ui:726
 #, kde-format
 msgid "Gross amount"
 msgstr "Hrubá suma"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_netAmount)
-#: kmymoney/dialogs/knewaccountdlg.ui:751
+#: kmymoney/dialogs/knewaccountdlg.ui:739
 #, fuzzy, kde-format
 #| msgid "Net amount"
 msgid "Net a&mount"
 msgstr "Čistá suma"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxTax)
-#: kmymoney/dialogs/knewaccountdlg.ui:791
+#: kmymoney/dialogs/knewaccountdlg.ui:779
 #, kde-format
 msgid "Include on Tax Reports"
 msgstr "Zahrnúť na daňové výkazy"
