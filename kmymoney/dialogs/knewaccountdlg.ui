@@ -358,18 +358,6 @@
             </item>
             <item row="2" column="0">
              <widget class="QLabel" name="TextLabel2_2">
-              <property name="minimumSize">
-               <size>
-                <width>60</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>60</width>
-                <height>32767</height>
-               </size>
-              </property>
               <property name="text">
                <string>Number:</string>
               </property>
