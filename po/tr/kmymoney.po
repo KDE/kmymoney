@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-17 11:09+0000\n"
-"PO-Revision-Date: 2022-12-11 14:29+0300\n"
+"PO-Revision-Date: 2022-12-17 18:55+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -781,12 +781,12 @@ msgid ""
 "\n"
 "Once you have chosen an export type please press the OK button."
 msgstr ""
-"Lütfen gerçekleştirmek istediğiniz dışa aktarım türünü seçiniz.  Seçim "
+"Lütfen gerçekleştirmek istediğiniz dışa aktarım türünü seçin. Seçim "
 "kutusundan bir\n"
 "öge seçtiğinizde güncellenen dışa aktarım türünün basit açıklaması,\n"
-" ekranın alt kısmında mevcuttur.\n"
+" ekranın alt kısmında vardır.\n"
 "\n"
-"Bir dışarı aktarım türü seçtiğinizde lütfen Tamam düğmesine basınız."
+"Bir dışa aktarım türü seçtiğinizde lütfen Tamam düğmesine basın."
 
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:83
 #, kde-format
@@ -3124,7 +3124,7 @@ msgstr "Eksik dönüştürme değeri"
 #: kmymoney/dialogs/settings/ksettingsicons.ui:14
 #, kde-format
 msgid "Font settings"
-msgstr "Yazı tipi ayarları"
+msgstr "Yazıtipi ayarları"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_useSystemFont)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:20
@@ -3145,7 +3145,7 @@ msgstr "Kişisel yatı tipi ayarları"
 #: kmymoney/settings/kmymoney.kcfg:293
 #, kde-format
 msgid "Cell font"
-msgstr "Hücre yazı tipi"
+msgstr "Hücre yazıtipi"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #. i18n: ectx: label, entry (listHeaderFont), group (List Options)
@@ -3153,7 +3153,7 @@ msgstr "Hücre yazı tipi"
 #: kmymoney/settings/kmymoney.kcfg:296
 #, kde-format
 msgid "Header font"
-msgstr "Başlık yazı tipi"
+msgstr "Başlık yazıtipi"
 
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:78
 #, kde-format
@@ -5544,7 +5544,7 @@ msgstr "Şablon(lar) içeri aktarılamıyor: %1, %2 fırlatıldı:%3"
 #: kmymoney/kmymoney.cpp:3334
 #, kde-format
 msgid "Exporting account templates."
-msgstr "Hesap şablonları dışarıya aktarılıyor."
+msgstr "Hesap şablonları dışa aktarılıyor."
 
 #: kmymoney/kmymoney.cpp:3340
 #, kde-format
@@ -9706,7 +9706,7 @@ msgstr ""
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:114
 #, kde-format
 msgid "File to export to:"
-msgstr "Dışarıya aktarılacak dosya:"
+msgstr "Dışa aktarılacak dosya:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
@@ -9714,14 +9714,14 @@ msgstr "Dışarıya aktarılacak dosya:"
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:140
 #, kde-format
 msgid "Account to export"
-msgstr "Dışarıya aktarılacak hesap"
+msgstr "Dışa aktarılacak hesap"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_qgroupboxContents)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:150
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:226
 #, kde-format
 msgid "Contents to Export"
-msgstr "Dışarıya Aktarılacak İçerik"
+msgstr "Dışa Aktarılacak İçerik"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_radioButtonAccount)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:171
@@ -12084,7 +12084,7 @@ msgstr "Dışarı aktarılacak programın icalendar dosyası."
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:26
 #, kde-format
 msgid "Icalendar export settings"
-msgstr "Icalendar dışarıya aktarma ayarları"
+msgstr "Icalendar dışa aktarma ayarları"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_createAlarm)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:34
@@ -18729,7 +18729,7 @@ msgstr "Günlük dosyası yolu"
 #: kmymoney/settings/kmymoney.kcfg:289
 #, kde-format
 msgid "Use system font"
-msgstr "Sistem yazı tipini kullan"
+msgstr "Sistem yazıtipini kullan"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
 #. i18n: ectx: label, entry (sortReconcileView), group (List Options)

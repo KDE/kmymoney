@@ -3718,7 +3718,7 @@ msgstr "Font de cotitzacions nova"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:256
 #, kde-format
 msgid "CSV profile <b>%1</b> already exists.<br>Do you want to overwrite it?"
-msgstr "El perfil <b>%1</b> del CSV ja existix.<br>Voleu sobreescriure'l?"
+msgstr "El perfil <b>%1</b> de CSV ja existix.<br>Voleu sobreescriure'l?"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:259
 #, kde-format
@@ -3808,7 +3808,7 @@ msgstr "URL"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:112
 #, kde-format
 msgid "CSV URL"
-msgstr "URL del CSV"
+msgstr "URL de CSV"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editURL)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:119
@@ -3920,14 +3920,14 @@ msgid ""
 "Dumps CSV profile used for importing downloaded prices, which can be "
 "customized by user in CSV Importer."
 msgstr ""
-"Bolca el perfil del CSV utilitzat per a importar els preus baixats, el qual "
+"Bolca el perfil de CSV utilitzat per a importar els preus baixats, el qual "
 "pot personalitzar l'usuari a l'Importador CSV."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_dumpCSVProfile)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:222
 #, kde-format
 msgid "Dump CSV"
-msgstr "Bolca el CSV"
+msgstr "Bolca CSV"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_updateButton)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:229
@@ -6196,7 +6196,7 @@ msgstr "No s'ha pogut resoldre la data d'entrada."
 #: kmymoney/misc/webpricequote.cpp:168
 #, kde-format
 msgid "CSV source <placeholder>%1</placeholder> does not exist."
-msgstr "La font <placeholder>%1</placeholder> del CSV no existix."
+msgstr "La font <placeholder>%1</placeholder> de CSV no existix."
 
 #: kmymoney/misc/webpricequote.cpp:186
 #, kde-format
@@ -9783,7 +9783,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:394
 #, kde-format
 msgid "CSV invalid field values"
-msgstr "Valors de camp no vàlids del CSV"
+msgstr "Valors de camp no vàlids de CSV"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:395
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:396
@@ -10062,7 +10062,7 @@ msgid ""
 "Version of your CSV config file is %1.%2.%3 and is newer than supported "
 "version %4.%5.%6. Expect troubles."
 msgstr ""
-"La vostra versió del fitxer de configuració del CSV és %1.%2.%3 i és més "
+"La vostra versió del fitxer de configuració de CSV és %1.%2.%3 i és més "
 "recent que la versió %4.%5.%6 admesa. Hi haurà problemes."
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:294
