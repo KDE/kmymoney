@@ -184,6 +184,11 @@ SplitDialog::SplitDialog(const MyMoneySecurity& commodity,
     m_unassigned_error = KColorScheme(QPalette::Normal).foreground(KColorScheme::NegativeText);
     m_unassigned_normal = KColorScheme(QPalette::Normal).foreground(KColorScheme::NormalText);
 
+    const int rowHeight = d->ui->summaryView->verticalHeader()->fontMetrics().lineSpacing() + 2;
+    d->ui->summaryView->verticalHeader()->setMinimumSectionSize(20);
+    d->ui->summaryView->verticalHeader()->setDefaultSectionSize(rowHeight);
+    d->ui->summaryView->setMinimumHeight((d->ui->summaryView->model()->rowCount() * rowHeight) + 4);
+
     // finish polishing the widgets
     QMetaObject::invokeMethod(this, "adjustSummary", Qt::QueuedConnection);
 }
