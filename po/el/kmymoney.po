@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-17 11:09+0000\n"
+"POT-Creation-Date: 2022-12-20 00:46+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -2275,7 +2275,7 @@ msgstr "Διαγραφή της εγγραφής"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:196
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:617
 #: kmymoney/plugins/views/reports/reportcontrol.ui:105
-#: kmymoney/views/splitdialog.ui:652
+#: kmymoney/views/splitdialog.ui:688
 #, kde-format
 msgid "Delete"
 msgstr "Διαγραφή"
@@ -20647,7 +20647,7 @@ msgstr "Οι δικαιούχοι σας"
 #. i18n: ectx: property (text), widget (QToolButton, m_newButton)
 #. i18n: ectx: property (text), widget (QPushButton, newSplitButton)
 #: kmymoney/views/kpayeesview.ui:53 kmymoney/views/ktagsview.ui:58
-#: kmymoney/views/splitdialog.ui:594
+#: kmymoney/views/splitdialog.ui:633
 #, fuzzy, kde-format
 #| msgctxt "@action add new price"
 #| msgid "New"
@@ -21656,14 +21656,14 @@ msgid ""
 "on the tabbar above to select an account.</p></body></html>"
 msgstr ""
 
-#: kmymoney/views/splitdialog.cpp:312
+#: kmymoney/views/splitdialog.cpp:317
 #, fuzzy, kde-format
 #| msgid "Unassigned"
 msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "Χωρίς καταχώρηση"
 
-#: kmymoney/views/splitdialog.cpp:315
+#: kmymoney/views/splitdialog.cpp:320
 #, fuzzy, kde-format
 #| msgid "Unassigned"
 msgctxt "Split editor summary"
@@ -21671,33 +21671,33 @@ msgid "Unassigned"
 msgstr "Χωρίς καταχώρηση"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
-#: kmymoney/views/splitdialog.ui:517
+#: kmymoney/views/splitdialog.ui:547
 #, kde-format
 msgid "Sum of splits"
 msgstr "Άθροισμα διαχωρισμών"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
-#: kmymoney/views/splitdialog.ui:555
+#: kmymoney/views/splitdialog.ui:585
 #, kde-format
 msgid "Transaction amount"
 msgstr "Ποσό συναλλαγής"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSplitButton)
-#: kmymoney/views/splitdialog.ui:591
+#: kmymoney/views/splitdialog.ui:630
 #, fuzzy, kde-format
 #| msgid "Creates a new tag"
 msgid "Create a new split"
 msgstr "Δημιουργία νέας ετικέτας"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:614
+#: kmymoney/views/splitdialog.ui:653
 #, kde-format
 msgid "Merges splits with the same category to one split"
 msgstr ""
 "Συγχώνευση των διαχωρισμών που έχουν την ίδια κατηγορία σ' ένα διαχωρισμό"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:617
+#: kmymoney/views/splitdialog.ui:656
 #, fuzzy, kde-format
 #| msgid ""
 #| "In case you have multiple split entries to the same category and you like "
@@ -21715,13 +21715,13 @@ msgstr ""
 "διαχωρισμός γι' αυτήν την κατηγορία."
 
 #. i18n: ectx: property (text), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:620
+#: kmymoney/views/splitdialog.ui:659
 #, kde-format
 msgid "&Merge"
 msgstr "&Συγχώνευση"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, adjustUnassigned)
-#: kmymoney/views/splitdialog.ui:630
+#: kmymoney/views/splitdialog.ui:668
 #, kde-format
 msgid ""
 "Apply 'Unassigned' or 'Overassigned' amount to the current split.\n"
@@ -21730,33 +21730,33 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
-#: kmymoney/views/splitdialog.ui:633
+#: kmymoney/views/splitdialog.ui:671
 #, fuzzy, kde-format
 #| msgid "Difference"
 msgid "Apply Difference"
 msgstr "Διαφορά"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
-#: kmymoney/views/splitdialog.ui:641
+#: kmymoney/views/splitdialog.ui:678
 #, kde-format
 msgid "Removes all splits that have a value of zero"
 msgstr "Διαγραφή των διαχωρισμών των οποίων η τιμή είναι 0"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteZeroButton)
-#: kmymoney/views/splitdialog.ui:644
+#: kmymoney/views/splitdialog.ui:681
 #, fuzzy, kde-format
 #| msgid "Clear &Zero"
 msgid "Delete &Zero"
 msgstr "Καθαρισμός των &μηδενικών"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:659
+#: kmymoney/views/splitdialog.ui:695
 #, kde-format
 msgid "Clear all splits"
 msgstr "Καθαρισμός όλων των εγγραφών"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:662
+#: kmymoney/views/splitdialog.ui:698
 #, fuzzy, kde-format
 #| msgid "Use this to clear all splits of this transaction"
 msgid "Use this to delete all splits of this transaction."
@@ -21764,20 +21764,20 @@ msgstr ""
 "Χρησιμοποιήστε το για την διαγραφή όλων των διαχωρισμών αυτής της συναλλαγής"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:665
+#: kmymoney/views/splitdialog.ui:701
 #, fuzzy, kde-format
 #| msgid "Delete all"
 msgid "Delete &All"
 msgstr "Διαγραφή όλων"
 
 #. i18n: ectx: property (text), widget (QPushButton, okButton)
-#: kmymoney/views/splitdialog.ui:685
+#: kmymoney/views/splitdialog.ui:721
 #, kde-format
 msgid "&OK"
 msgstr "&Εντάξει"
 
 #. i18n: ectx: property (text), widget (QPushButton, cancelButton)
-#: kmymoney/views/splitdialog.ui:692 kmymoney/wizards/kmymoneywizard_p.h:76
+#: kmymoney/views/splitdialog.ui:728 kmymoney/wizards/kmymoneywizard_p.h:76
 #, kde-format
 msgid "&Cancel"
 msgstr "Ακύρωση"

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-17 11:09+0000\n"
+"POT-Creation-Date: 2022-12-20 00:46+0000\n"
 "PO-Revision-Date: 2022-12-13 19:20+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -2250,7 +2250,7 @@ msgstr "Supprimer cette saisie"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:196
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:617
 #: kmymoney/plugins/views/reports/reportcontrol.ui:105
-#: kmymoney/views/splitdialog.ui:652
+#: kmymoney/views/splitdialog.ui:688
 #, kde-format
 msgid "Delete"
 msgstr "Supprimer"
@@ -19912,7 +19912,7 @@ msgstr "Vos bénéficiaires"
 #. i18n: ectx: property (text), widget (QToolButton, m_newButton)
 #. i18n: ectx: property (text), widget (QPushButton, newSplitButton)
 #: kmymoney/views/kpayeesview.ui:53 kmymoney/views/ktagsview.ui:58
-#: kmymoney/views/splitdialog.ui:594
+#: kmymoney/views/splitdialog.ui:633
 #, kde-format
 msgid "New"
 msgstr "Nouveau"
@@ -20868,45 +20868,45 @@ msgstr ""
 "données. Utilisez le bouton « + » sur la barre d'onglets au-dessus pour "
 "ajouter un compte.</p></body></html>"
 
-#: kmymoney/views/splitdialog.cpp:312
+#: kmymoney/views/splitdialog.cpp:317
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "Sur-assigné"
 
-#: kmymoney/views/splitdialog.cpp:315
+#: kmymoney/views/splitdialog.cpp:320
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Unassigned"
 msgstr "Non assigné"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
-#: kmymoney/views/splitdialog.ui:517
+#: kmymoney/views/splitdialog.ui:547
 #, kde-format
 msgid "Sum of splits"
 msgstr "Somme des répartitions"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
-#: kmymoney/views/splitdialog.ui:555
+#: kmymoney/views/splitdialog.ui:585
 #, kde-format
 msgid "Transaction amount"
 msgstr "Montant de l'opération"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSplitButton)
-#: kmymoney/views/splitdialog.ui:591
+#: kmymoney/views/splitdialog.ui:630
 #, kde-format
 msgid "Create a new split"
 msgstr "Crée une nouvelle répartition"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:614
+#: kmymoney/views/splitdialog.ui:653
 #, kde-format
 msgid "Merges splits with the same category to one split"
 msgstr ""
 "Fusionner les répartitions ayant la même catégorie en une seule répartition"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:617
+#: kmymoney/views/splitdialog.ui:656
 #, kde-format
 msgid ""
 "In case you have multiple split entries to the same category and you like to "
@@ -20919,13 +20919,13 @@ msgstr ""
 "répartition pour cette catégorie."
 
 #. i18n: ectx: property (text), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:620
+#: kmymoney/views/splitdialog.ui:659
 #, kde-format
 msgid "&Merge"
 msgstr "&Fusionner"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, adjustUnassigned)
-#: kmymoney/views/splitdialog.ui:630
+#: kmymoney/views/splitdialog.ui:668
 #, kde-format
 msgid ""
 "Apply 'Unassigned' or 'Overassigned' amount to the current split.\n"
@@ -20939,31 +20939,31 @@ msgstr ""
 "sera soustraite du montant du fractionnement sélectionné."
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
-#: kmymoney/views/splitdialog.ui:633
+#: kmymoney/views/splitdialog.ui:671
 #, kde-format
 msgid "Apply Difference"
 msgstr "Appliquer la différence"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
-#: kmymoney/views/splitdialog.ui:641
+#: kmymoney/views/splitdialog.ui:678
 #, kde-format
 msgid "Removes all splits that have a value of zero"
 msgstr "Supprimer les répartitions qui ont une valeur de zéro"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteZeroButton)
-#: kmymoney/views/splitdialog.ui:644
+#: kmymoney/views/splitdialog.ui:681
 #, kde-format
 msgid "Delete &Zero"
 msgstr "Effacer les &Zéros"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:659
+#: kmymoney/views/splitdialog.ui:695
 #, kde-format
 msgid "Clear all splits"
 msgstr "Supprimer toutes les répartitions"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:662
+#: kmymoney/views/splitdialog.ui:698
 #, kde-format
 msgid "Use this to delete all splits of this transaction."
 msgstr ""
@@ -20971,19 +20971,19 @@ msgstr ""
 "opération."
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:665
+#: kmymoney/views/splitdialog.ui:701
 #, kde-format
 msgid "Delete &All"
 msgstr "&Tout supprimer"
 
 #. i18n: ectx: property (text), widget (QPushButton, okButton)
-#: kmymoney/views/splitdialog.ui:685
+#: kmymoney/views/splitdialog.ui:721
 #, kde-format
 msgid "&OK"
 msgstr "&Ok"
 
 #. i18n: ectx: property (text), widget (QPushButton, cancelButton)
-#: kmymoney/views/splitdialog.ui:692 kmymoney/wizards/kmymoneywizard_p.h:76
+#: kmymoney/views/splitdialog.ui:728 kmymoney/wizards/kmymoneywizard_p.h:76
 #, kde-format
 msgid "&Cancel"
 msgstr "A&nnuler"

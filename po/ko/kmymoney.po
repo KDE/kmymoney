@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-17 11:09+0000\n"
+"POT-Creation-Date: 2022-12-20 00:46+0000\n"
 "PO-Revision-Date: 2022-07-13 15:41+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2171,7 +2171,7 @@ msgstr "이 항목 삭제"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:196
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:617
 #: kmymoney/plugins/views/reports/reportcontrol.ui:105
-#: kmymoney/views/splitdialog.ui:652
+#: kmymoney/views/splitdialog.ui:688
 #, kde-format
 msgid "Delete"
 msgstr "삭제"
@@ -19422,7 +19422,7 @@ msgstr "수취인"
 #. i18n: ectx: property (text), widget (QToolButton, m_newButton)
 #. i18n: ectx: property (text), widget (QPushButton, newSplitButton)
 #: kmymoney/views/kpayeesview.ui:53 kmymoney/views/ktagsview.ui:58
-#: kmymoney/views/splitdialog.ui:594
+#: kmymoney/views/splitdialog.ui:633
 #, kde-format
 msgid "New"
 msgstr "새로 만들기"
@@ -20353,7 +20353,7 @@ msgstr ""
 "록된 계좌를 자동으로 엽니다. 탭 표시줄의 + 단추를 사용하여 계좌를 선택하십시"
 "오.</p></body></html>"
 
-#: kmymoney/views/splitdialog.cpp:312
+#: kmymoney/views/splitdialog.cpp:317
 #, fuzzy, kde-format
 #| msgctxt "Split editor summary"
 #| msgid "Unassigned"
@@ -20361,38 +20361,38 @@ msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "할당되지 않음"
 
-#: kmymoney/views/splitdialog.cpp:315
+#: kmymoney/views/splitdialog.cpp:320
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Unassigned"
 msgstr "할당되지 않음"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
-#: kmymoney/views/splitdialog.ui:517
+#: kmymoney/views/splitdialog.ui:547
 #, kde-format
 msgid "Sum of splits"
 msgstr "분할 액수"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
-#: kmymoney/views/splitdialog.ui:555
+#: kmymoney/views/splitdialog.ui:585
 #, kde-format
 msgid "Transaction amount"
 msgstr "거래 금액"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSplitButton)
-#: kmymoney/views/splitdialog.ui:591
+#: kmymoney/views/splitdialog.ui:630
 #, kde-format
 msgid "Create a new split"
 msgstr "새 분할 만들기"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:614
+#: kmymoney/views/splitdialog.ui:653
 #, kde-format
 msgid "Merges splits with the same category to one split"
 msgstr "동일한 분류의 분할을 하나의 분할로 병합"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:617
+#: kmymoney/views/splitdialog.ui:656
 #, kde-format
 msgid ""
 "In case you have multiple split entries to the same category and you like to "
@@ -20404,13 +20404,13 @@ msgstr ""
 "다."
 
 #. i18n: ectx: property (text), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:620
+#: kmymoney/views/splitdialog.ui:659
 #, kde-format
 msgid "&Merge"
 msgstr "병합(&M)"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, adjustUnassigned)
-#: kmymoney/views/splitdialog.ui:630
+#: kmymoney/views/splitdialog.ui:668
 #, kde-format
 msgid ""
 "Apply 'Unassigned' or 'Overassigned' amount to the current split.\n"
@@ -20419,50 +20419,50 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
-#: kmymoney/views/splitdialog.ui:633
+#: kmymoney/views/splitdialog.ui:671
 #, fuzzy, kde-format
 #| msgid "Difference"
 msgid "Apply Difference"
 msgstr "차액"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
-#: kmymoney/views/splitdialog.ui:641
+#: kmymoney/views/splitdialog.ui:678
 #, kde-format
 msgid "Removes all splits that have a value of zero"
 msgstr "값이 0인 모든 분할을 삭제합니다"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteZeroButton)
-#: kmymoney/views/splitdialog.ui:644
+#: kmymoney/views/splitdialog.ui:681
 #, kde-format
 msgid "Delete &Zero"
 msgstr "영 삭제(&Z)"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:659
+#: kmymoney/views/splitdialog.ui:695
 #, kde-format
 msgid "Clear all splits"
 msgstr "모든 분할 지우기"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:662
+#: kmymoney/views/splitdialog.ui:698
 #, kde-format
 msgid "Use this to delete all splits of this transaction."
 msgstr "이 거래의 모든 분할을 삭제합니다."
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:665
+#: kmymoney/views/splitdialog.ui:701
 #, kde-format
 msgid "Delete &All"
 msgstr "모두 삭제(&A)"
 
 #. i18n: ectx: property (text), widget (QPushButton, okButton)
-#: kmymoney/views/splitdialog.ui:685
+#: kmymoney/views/splitdialog.ui:721
 #, kde-format
 msgid "&OK"
 msgstr "확인(&O)"
 
 #. i18n: ectx: property (text), widget (QPushButton, cancelButton)
-#: kmymoney/views/splitdialog.ui:692 kmymoney/wizards/kmymoneywizard_p.h:76
+#: kmymoney/views/splitdialog.ui:728 kmymoney/wizards/kmymoneywizard_p.h:76
 #, kde-format
 msgid "&Cancel"
 msgstr "취소(&C)"

@@ -7,34 +7,34 @@
 # Iñigo Salvador Azurmendi <xalba@ni.eus>, 2010, 2011, 2013, 2014, 2018, 2020, 2022.
 # Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2013.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2013.
-# Ander Elortondo <ander.elor@gmail.com>, 2018, 2020.
+# Ander Elortondo <ander.elor@gmail.com>, 2018, 2020, 2022.
 # Jon Intxaurbe <joinzar@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-17 11:09+0000\n"
-"PO-Revision-Date: 2022-12-09 20:31+0100\n"
+"POT-Creation-Date: 2022-12-20 00:46+0000\n"
+"PO-Revision-Date: 2022-12-19 02:02+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
-"Language-Team: Basque\n"
+"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-"Iñigo Salvador Azurmendi,Hizkuntza Politikarako Sailburuordetza,Ander "
-"Elortondo,Jon Intxaurbe"
+"Ander Elortondo,Jon Intxaurbe,Iñigo Salvador Azurmendi,Hizkuntza "
+"Politikarako Sailburuordetza"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "xalba@ni.eus,hizpol@ej-gv.es,ander.elor@gmail.com,joinzar@gmail.com"
+msgstr "ander.elor@gmail.com,joinzar@gmail.com,xalba@ni.eus,hizpol@ej-gv.es"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:131
 #, kde-format
@@ -2219,7 +2219,7 @@ msgstr "Sarrera hau ezabatu"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:196
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:617
 #: kmymoney/plugins/views/reports/reportcontrol.ui:105
-#: kmymoney/views/splitdialog.ui:652
+#: kmymoney/views/splitdialog.ui:688
 #, kde-format
 msgid "Delete"
 msgstr "Ezabatu"
@@ -3717,8 +3717,8 @@ msgid ""
 "Security <b>%1</b> uses this quote source.<br>Do you really want to remove "
 "it?"
 msgstr ""
-"segurtasun <b>%1</b> kotizazio-iturri hau erabiltzen du. <br>Benetan ezabatu "
-"nahi duzu?"
+" <b>%1</b> burtsa-balioak kotizazio-iturri hau erabiltzen du. <br>Benetan "
+"ezabatu nahi duzu?"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:316
 #, kde-format
@@ -5117,12 +5117,12 @@ msgstr "Prezioa eskuz eguneratu..."
 #: kmymoney/kmymoney.cpp:1838
 #, kde-format
 msgid "Edit security..."
-msgstr "Editatu finantza-aktiboa..."
+msgstr "Editatu burtsa-balioa..."
 
 #: kmymoney/kmymoney.cpp:1839
 #, kde-format
 msgid "Delete security..."
-msgstr "Ezabatu finantza-aktiboa"
+msgstr "Ezabatu burtsa-balioa"
 
 #: kmymoney/kmymoney.cpp:1842
 #, kde-format
@@ -5856,7 +5856,7 @@ msgstr "Inbertsio-aukerak"
 #: kmymoney/kmymoneyui.rc:190
 #, kde-format
 msgid "Security options"
-msgstr "finantza-aktibo aukerak"
+msgstr "Burtsa-balio aukerak"
 
 #. i18n: ectx: Menu (schedule_context_menu)
 #: kmymoney/kmymoneyui.rc:195
@@ -6805,14 +6805,14 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:2911
 #, kde-format
 msgid "  * The security '%1' has no price set for the opening date '%2'."
-msgstr "* '%1' inbertsioak ez du preziorik ezarrita '%2' irekitze-datarako."
+msgstr "* '%1' burtsa-balioak ez du preziorik ezarrita '%2' irekitze-datarako."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2912
 #, kde-format
 msgid ""
 "    Please enter a price for the security on or before the opening date."
 msgstr ""
-"    Ezarri prezio bat inbertsioari irekitze-datan edo irekitze-data baino "
+"    Ezarri prezio bat burtsa-balioari irekitze-datan edo irekitze-data baino "
 "lehen."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2932
@@ -8447,7 +8447,7 @@ msgstr "Urtea"
 #: kmymoney/mymoney/storage/costcentermodel.cpp:51
 #, kde-format
 msgid "Cost center"
-msgstr "Kostu Zentroa"
+msgstr "Kostu-zentroa"
 
 #: kmymoney/mymoney/storage/institutionsmodel.cpp:229
 #, kde-format
@@ -8483,14 +8483,10 @@ msgstr "Onuraduna"
 #, kde-format
 msgctxt "@title:column"
 msgid "Security"
-msgstr "finantza-aktiboa"
+msgstr "Burtsa-balioa"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:55
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@title:column Indicates whether a Cost Center assignment is necessary "
-#| "when entering a transaction"
-#| msgid "CC"
+#, kde-format
 msgctxt "@title:column Costcenter"
 msgid "CC"
 msgstr "KK"
@@ -8557,39 +8553,34 @@ msgid "Entry"
 msgstr "Sarrera"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:68
-#, fuzzy, kde-format
-#| msgid "Number"
+#, kde-format
 msgctxt "@title:column Cheque Number (ext)"
 msgid "Number"
 msgstr "Zenbakia"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "Ledger marker showing a reconciliation entry"
-#| msgid "Reconciliation"
+#, kde-format
 msgctxt "@title:column Reconciliation state (ext)"
 msgid "Reconciliation"
-msgstr "Adospena"
+msgstr "Berdinkatzea"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:70
-#, fuzzy, kde-format
-#| msgid "Cost center"
+#, kde-format
 msgctxt "@title:column CostCenter (ext)"
 msgid "Cost center"
-msgstr "Kostu Zentroa"
+msgstr "Kostu-zentroa"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:71
-#, fuzzy, kde-format
-#| msgid "Entry order"
+#, kde-format
 msgctxt "@title:column Entry date (ext)"
 msgid "Entry date"
-msgstr "Sarrera-ordena"
+msgstr "Sarrera-data"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:97
 #, kde-format
 msgctxt "Reconciliation flag empty"
 msgid "Not reconciled"
-msgstr "Berdinkatugabeak"
+msgstr "Berdinkatu gabe"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:99
 #, kde-format
@@ -8651,10 +8642,10 @@ msgid "Yield"
 msgstr "Etekina"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:126
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Split securities/shares/bonds"
 msgid "Split shares"
-msgstr "Zatitu akzioak"
+msgstr "Akzioak zatitzea"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:128
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:51
@@ -18602,10 +18593,10 @@ msgid "Remove shares"
 msgstr "Kendu akzioak"
 
 #: kmymoney/views/investtransactioneditor.cpp:89
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Split shares"
-msgstr "Zatitu akzioak"
+msgstr "Akzioak zatitzea"
 
 #: kmymoney/views/investtransactioneditor.cpp:90
 #, kde-format
@@ -18675,7 +18666,7 @@ msgstr "Transakzio honen prezioari buruzko informazioa"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Security for this transaction"
-msgstr "Transakzio honentzako finantza-aktiboa"
+msgstr "Transakzio honetarako burtsa-balioa"
 
 #: kmymoney/views/investtransactioneditor.cpp:530
 #, kde-format
@@ -18724,7 +18715,7 @@ msgstr "Sartu transakzio honetarako akzio kopurua."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
-msgstr "Partiden proportzioa"
+msgstr "Zatiketa erlazioa"
 
 #: kmymoney/views/investtransactioneditor.cpp:560
 #, kde-format
@@ -18737,7 +18728,7 @@ msgstr "Zatiketa erlazioa ezin da aldatu baloreen kontua itxita dagoelako."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
-msgstr "Sartu transakzio honetarako partiden proportzioa"
+msgstr "Sartu transakzio honetarako zatiketa erlazioa"
 
 #: kmymoney/views/investtransactioneditor.cpp:576
 #, kde-format
@@ -18779,7 +18770,7 @@ msgstr "Sartu interesen zenbatekoa"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the security for this transaction"
-msgstr "Aukeratu transakzio honentzako finantza-aktiboa"
+msgstr "Aukeratu transakzio honentzako burtsa-balioa"
 
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, priceAmountEdit)
 #: kmymoney/views/investtransactioneditor.ui:29
@@ -19690,7 +19681,7 @@ msgstr "Onuradunak"
 #. i18n: ectx: property (text), widget (QToolButton, m_newButton)
 #. i18n: ectx: property (text), widget (QPushButton, newSplitButton)
 #: kmymoney/views/kpayeesview.ui:53 kmymoney/views/ktagsview.ui:58
-#: kmymoney/views/splitdialog.ui:594
+#: kmymoney/views/splitdialog.ui:633
 #, kde-format
 msgid "New"
 msgstr "Berria"
@@ -20625,44 +20616,44 @@ msgstr ""
 "dira KMyMoney-k fitxategia edo datu-basea ireki ondoren. Erabili goiko fitxa-"
 "barrako + botoia kontu bat hautatzeko.</p></body></html>"
 
-#: kmymoney/views/splitdialog.cpp:312
+#: kmymoney/views/splitdialog.cpp:317
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "Gainesleitua"
 
-#: kmymoney/views/splitdialog.cpp:315
+#: kmymoney/views/splitdialog.cpp:320
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Unassigned"
 msgstr "Esleitu gabe"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
-#: kmymoney/views/splitdialog.ui:517
+#: kmymoney/views/splitdialog.ui:547
 #, kde-format
 msgid "Sum of splits"
 msgstr "Partiden batura"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
-#: kmymoney/views/splitdialog.ui:555
+#: kmymoney/views/splitdialog.ui:585
 #, kde-format
 msgid "Transaction amount"
 msgstr "Transakzioaren zenbatekoa"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSplitButton)
-#: kmymoney/views/splitdialog.ui:591
+#: kmymoney/views/splitdialog.ui:630
 #, kde-format
 msgid "Create a new split"
 msgstr "Sortu partida berria"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:614
+#: kmymoney/views/splitdialog.ui:653
 #, kde-format
 msgid "Merges splits with the same category to one split"
 msgstr "Kategoria bereko partidak partida bakarrean bateratzen ditu"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:617
+#: kmymoney/views/splitdialog.ui:656
 #, kde-format
 msgid ""
 "In case you have multiple split entries to the same category and you like to "
@@ -20674,13 +20665,13 @@ msgstr ""
 "kategoria horretako partida bakarrean gordeko da."
 
 #. i18n: ectx: property (text), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:620
+#: kmymoney/views/splitdialog.ui:659
 #, kde-format
 msgid "&Merge"
 msgstr "&Bateratu"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, adjustUnassigned)
-#: kmymoney/views/splitdialog.ui:630
+#: kmymoney/views/splitdialog.ui:668
 #, kde-format
 msgid ""
 "Apply 'Unassigned' or 'Overassigned' amount to the current split.\n"
@@ -20692,49 +20683,49 @@ msgstr ""
 "kopurua hautatutako partidatik kenduko da."
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
-#: kmymoney/views/splitdialog.ui:633
+#: kmymoney/views/splitdialog.ui:671
 #, kde-format
 msgid "Apply Difference"
 msgstr "Aplikatu diferentzia"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
-#: kmymoney/views/splitdialog.ui:641
+#: kmymoney/views/splitdialog.ui:678
 #, kde-format
 msgid "Removes all splits that have a value of zero"
 msgstr "Zero balioa duten partida guztiak kentzen ditu"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteZeroButton)
-#: kmymoney/views/splitdialog.ui:644
+#: kmymoney/views/splitdialog.ui:681
 #, kde-format
 msgid "Delete &Zero"
 msgstr "Ezabatu &zero dutenak"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:659
+#: kmymoney/views/splitdialog.ui:695
 #, kde-format
 msgid "Clear all splits"
 msgstr "Garbitu partida guztiak"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:662
+#: kmymoney/views/splitdialog.ui:698
 #, kde-format
 msgid "Use this to delete all splits of this transaction."
 msgstr "Erabili hau transakzio honetako partida guztiak ezabatzeko."
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:665
+#: kmymoney/views/splitdialog.ui:701
 #, kde-format
 msgid "Delete &All"
 msgstr "&Ezabatu denak"
 
 #. i18n: ectx: property (text), widget (QPushButton, okButton)
-#: kmymoney/views/splitdialog.ui:685
+#: kmymoney/views/splitdialog.ui:721
 #, kde-format
 msgid "&OK"
 msgstr "&Ados"
 
 #. i18n: ectx: property (text), widget (QPushButton, cancelButton)
-#: kmymoney/views/splitdialog.ui:692 kmymoney/wizards/kmymoneywizard_p.h:76
+#: kmymoney/views/splitdialog.ui:728 kmymoney/wizards/kmymoneywizard_p.h:76
 #, kde-format
 msgid "&Cancel"
 msgstr "&Utzi"
@@ -20943,9 +20934,9 @@ msgid "Remove shares"
 msgstr "Kendu akzioak"
 
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:50
-#, fuzzy, kde-format
+#, kde-format
 msgid "Split shares"
-msgstr "Zatitu akzioak"
+msgstr "Akzioak zatitzea"
 
 #: kmymoney/widgets/kmymoneybriefschedule.cpp:64
 #, kde-format
@@ -23429,7 +23420,7 @@ msgstr ""
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:294
 #, kde-format
 msgid "Create security"
-msgstr "finantza-aktiboa sortu"
+msgstr "Burtsa-balioa sortu"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KNewInvestmentWizard)
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.ui:17

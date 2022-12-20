@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-17 11:09+0000\n"
+"POT-Creation-Date: 2022-12-20 00:46+0000\n"
 "PO-Revision-Date: 2022-09-26 20:31+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -2207,7 +2207,7 @@ msgstr "Ta bort posten"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:196
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:617
 #: kmymoney/plugins/views/reports/reportcontrol.ui:105
-#: kmymoney/views/splitdialog.ui:652
+#: kmymoney/views/splitdialog.ui:688
 #, kde-format
 msgid "Delete"
 msgstr "Ta bort"
@@ -19644,7 +19644,7 @@ msgstr "Dina betalningsmottagare"
 #. i18n: ectx: property (text), widget (QToolButton, m_newButton)
 #. i18n: ectx: property (text), widget (QPushButton, newSplitButton)
 #: kmymoney/views/kpayeesview.ui:53 kmymoney/views/ktagsview.ui:58
-#: kmymoney/views/splitdialog.ui:594
+#: kmymoney/views/splitdialog.ui:633
 #, kde-format
 msgid "New"
 msgstr "Ny"
@@ -20597,7 +20597,7 @@ msgstr ""
 "efter att KMyMoney har öppnat filen eller databasen. Använd knappen + på "
 "flikraden ovan för att välja ett konto.</p></body></html>"
 
-#: kmymoney/views/splitdialog.cpp:312
+#: kmymoney/views/splitdialog.cpp:317
 #, fuzzy, kde-format
 #| msgctxt "Split editor summary"
 #| msgid "Unassigned"
@@ -20605,38 +20605,38 @@ msgctxt "Split editor summary"
 msgid "Overassigned"
 msgstr "Ej tilldelad"
 
-#: kmymoney/views/splitdialog.cpp:315
+#: kmymoney/views/splitdialog.cpp:320
 #, kde-format
 msgctxt "Split editor summary"
 msgid "Unassigned"
 msgstr "Ej tilldelad"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
-#: kmymoney/views/splitdialog.ui:517
+#: kmymoney/views/splitdialog.ui:547
 #, kde-format
 msgid "Sum of splits"
 msgstr "Summa av delarna"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
-#: kmymoney/views/splitdialog.ui:555
+#: kmymoney/views/splitdialog.ui:585
 #, kde-format
 msgid "Transaction amount"
 msgstr "Transaktionsbelopp"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSplitButton)
-#: kmymoney/views/splitdialog.ui:591
+#: kmymoney/views/splitdialog.ui:630
 #, kde-format
 msgid "Create a new split"
 msgstr "Skapar en ny delning"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:614
+#: kmymoney/views/splitdialog.ui:653
 #, kde-format
 msgid "Merges splits with the same category to one split"
 msgstr "Sammanfogar delar med samma kategori till en del"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:617
+#: kmymoney/views/splitdialog.ui:656
 #, kde-format
 msgid ""
 "In case you have multiple split entries to the same category and you like to "
@@ -20648,13 +20648,13 @@ msgstr ""
 "adderas, och lagras i en enda del för kategorin."
 
 #. i18n: ectx: property (text), widget (QPushButton, mergeButton)
-#: kmymoney/views/splitdialog.ui:620
+#: kmymoney/views/splitdialog.ui:659
 #, kde-format
 msgid "&Merge"
 msgstr "Sa&mmanfoga"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, adjustUnassigned)
-#: kmymoney/views/splitdialog.ui:630
+#: kmymoney/views/splitdialog.ui:668
 #, kde-format
 msgid ""
 "Apply 'Unassigned' or 'Overassigned' amount to the current split.\n"
@@ -20663,50 +20663,50 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
-#: kmymoney/views/splitdialog.ui:633
+#: kmymoney/views/splitdialog.ui:671
 #, fuzzy, kde-format
 #| msgid "Difference"
 msgid "Apply Difference"
 msgstr "Skillnad"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
-#: kmymoney/views/splitdialog.ui:641
+#: kmymoney/views/splitdialog.ui:678
 #, kde-format
 msgid "Removes all splits that have a value of zero"
 msgstr "Tar bort alla delar som har värdet noll"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteZeroButton)
-#: kmymoney/views/splitdialog.ui:644
+#: kmymoney/views/splitdialog.ui:681
 #, kde-format
 msgid "Delete &Zero"
 msgstr "Ta bort &noll"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:659
+#: kmymoney/views/splitdialog.ui:695
 #, kde-format
 msgid "Clear all splits"
 msgstr "Rensa alla delningar"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:662
+#: kmymoney/views/splitdialog.ui:698
 #, kde-format
 msgid "Use this to delete all splits of this transaction."
 msgstr "Använd det här för att rensa transaktionens alla delningar."
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteAllButton)
-#: kmymoney/views/splitdialog.ui:665
+#: kmymoney/views/splitdialog.ui:701
 #, kde-format
 msgid "Delete &All"
 msgstr "Ta bort &alla"
 
 #. i18n: ectx: property (text), widget (QPushButton, okButton)
-#: kmymoney/views/splitdialog.ui:685
+#: kmymoney/views/splitdialog.ui:721
 #, kde-format
 msgid "&OK"
 msgstr "&Ok"
 
 #. i18n: ectx: property (text), widget (QPushButton, cancelButton)
-#: kmymoney/views/splitdialog.ui:692 kmymoney/wizards/kmymoneywizard_p.h:76
+#: kmymoney/views/splitdialog.ui:728 kmymoney/wizards/kmymoneywizard_p.h:76
 #, kde-format
 msgid "&Cancel"
 msgstr "&Avbryt"
