@@ -3160,7 +3160,7 @@ void KMyMoneyApp::slotExecuteAction()
 void KMyMoneyApp::slotHideReconciledTransactions()
 {
     KMyMoneySettings::setHideReconciledTransactions(pActions[Action::ViewHideReconciled]->isChecked());
-    d->m_myMoneyView->slotSettingsChanged();
+    LedgerViewSettings::instance()->setHideReconciledTransactions(KMyMoneySettings::hideReconciledTransactions());
 }
 
 void KMyMoneyApp::slotHideUnusedCategories()

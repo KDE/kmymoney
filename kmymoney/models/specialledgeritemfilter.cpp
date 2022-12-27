@@ -128,7 +128,7 @@ bool SpecialLedgerItemFilter::filterAcceptsRow(int source_row, const QModelIndex
         // a regular transaction
         int row = source_row + 1;
         const auto testIdx = sourceModel()->index(row, 0, source_parent);
-        return !d->isReconciliationModel(testIdx);
+        return !(d->isReconciliationModel(testIdx) || d->isSpecialDatesModel(testIdx));
 
     } else if (d->isAccountsModel(baseModel)) {
         // Don't show online balance items if display is not sorted by date

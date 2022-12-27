@@ -112,6 +112,7 @@ void LedgerViewPage::initModel()
     connect(LedgerViewSettings::instance(), &LedgerViewSettings::settingsChanged, this, [&]() {
         d->accountFilter->setHideReconciledTransactions(LedgerViewSettings::instance()->hideReconciledTransactions());
         d->accountFilter->setHideTransactionsBefore(LedgerViewSettings::instance()->hideTransactionsBefore());
+        d->specialItemFilter->forceReload();
     });
 
     // combine multiple row updates into one
