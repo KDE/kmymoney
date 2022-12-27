@@ -81,6 +81,7 @@ bool LedgerSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& 
     case eMyMoney::Model::TransactionEntryDateRole: {
         const auto leftDate = left.data(sortRole()).toDate();
         const auto rightDate = right.data(sortRole()).toDate();
+
         if (leftDate == rightDate) {
             const auto leftModel = model->baseModel(left);
             const auto rightModel = model->baseModel(right);
@@ -108,6 +109,28 @@ bool LedgerSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& 
                 }
                 // if we get here, both are transaction entries
             }
+            // So sort by cleared status
+            const auto leftState = left.data(eMyMoney::Model::SplitReconcileFlagRole).toInt();
+            const auto rightState = right.data(eMyMoney::Model::SplitReconcileFlagRole).toInt();
+
+            if (leftState > rightState)
+                return true;
+            if (rightState > leftState)
+                return false;
+
+            // Reconciliation state is the same, so sort by deposits first, then withdrawals
+            const auto leftDeposit = left.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
+            const auto rightDeposit = right.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
+
+            // It's a deposit if the deposit string isn't empty
+            bool leftIsDeposit = leftDeposit.isPositive();
+            bool rightIsDeposit = rightDeposit.isPositive();
+
+            if (leftIsDeposit)
+                return true;
+            if (rightIsDeposit)
+                return false;
+
             // same model and same post date, the ids decide
             return left.data(eMyMoney::Model::IdRole).toString() < right.data(eMyMoney::Model::IdRole).toString();
         }
