@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:46+0000\n"
+"POT-Creation-Date: 2022-12-28 00:49+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -2962,14 +2962,14 @@ msgstr "Ispravne podjele"
 
 #. i18n: ectx: property (text), widget (QLabel, question)
 #: kmymoney/dialogs/ksplitcorrectiondlg.ui:36
-#: kmymoney/dialogs/splitadjustdialog.ui:36
+#: kmymoney/dialogs/splitadjustdialog.ui:42
 #, kde-format
 msgid "How do you want to proceed?"
 msgstr "Kako želite nastaviti?"
 
 #. i18n: ectx: property (text), widget (QRadioButton, continueBtn)
 #: kmymoney/dialogs/ksplitcorrectiondlg.ui:55
-#: kmymoney/dialogs/splitadjustdialog.ui:58
+#: kmymoney/dialogs/splitadjustdialog.ui:64
 #, kde-format
 msgid "Continue to edit splits"
 msgstr "Nastavi sa uređivanjem podjela"

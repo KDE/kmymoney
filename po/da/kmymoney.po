@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:46+0000\n"
+"POT-Creation-Date: 2022-12-28 00:49+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -2987,14 +2987,14 @@ msgstr "Korrigér opdelinger"
 
 #. i18n: ectx: property (text), widget (QLabel, question)
 #: kmymoney/dialogs/ksplitcorrectiondlg.ui:36
-#: kmymoney/dialogs/splitadjustdialog.ui:36
+#: kmymoney/dialogs/splitadjustdialog.ui:42
 #, kde-format
 msgid "How do you want to proceed?"
 msgstr "Hvordan vil du fortsætte?"
 
 #. i18n: ectx: property (text), widget (QRadioButton, continueBtn)
 #: kmymoney/dialogs/ksplitcorrectiondlg.ui:55
-#: kmymoney/dialogs/splitadjustdialog.ui:58
+#: kmymoney/dialogs/splitadjustdialog.ui:64
 #, kde-format
 msgid "Continue to edit splits"
 msgstr "Fortsæt med at redigere opdelinger"

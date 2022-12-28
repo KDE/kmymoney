@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:46+0000\n"
+"POT-Creation-Date: 2022-12-28 00:49+0000\n"
 "PO-Revision-Date: 2009-05-18 00:20+0900\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -2731,14 +2731,14 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, question)
 #: kmymoney/dialogs/ksplitcorrectiondlg.ui:36
-#: kmymoney/dialogs/splitadjustdialog.ui:36
+#: kmymoney/dialogs/splitadjustdialog.ui:42
 #, kde-format
 msgid "How do you want to proceed?"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, continueBtn)
 #: kmymoney/dialogs/ksplitcorrectiondlg.ui:55
-#: kmymoney/dialogs/splitadjustdialog.ui:58
+#: kmymoney/dialogs/splitadjustdialog.ui:64
 #, kde-format
 msgid "Continue to edit splits"
 msgstr ""
