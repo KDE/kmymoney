@@ -1239,18 +1239,30 @@ void LedgerView::selectMostRecentTransaction()
 
 void LedgerView::editNewTransaction()
 {
-    const auto row = model()->rowCount() - 1;
-    const auto idx = model()->index(row, 0);
-    if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
-        scrollTo(idx, QAbstractItemView::EnsureVisible);
-        selectRow(idx.row());
-        // if the empty row is already selected, we have to start editing here
-        // otherwise, it will happen in currentChanged()
-        const auto currentRow = currentIndex().row();
-        setCurrentIndex(idx);
-        if (idx.row() == currentRow) {
-            edit(idx);
+    auto startEditing = [&](const QModelIndex& idx) {
+        if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
+            scrollTo(idx, QAbstractItemView::EnsureVisible);
+            selectRow(idx.row());
+            // if the empty row is already selected, we have to start editing here
+            // otherwise, it will happen in currentChanged()
+            const auto currentRow = currentIndex().row();
+            setCurrentIndex(idx);
+            if (idx.row() == currentRow) {
+                edit(idx);
+            }
+            return true;
         }
+        return false;
+    };
+
+    // sorting takes care that the new transaction
+    // (the one with an empty id) is either at the
+    // top or the bottom of the view. So we simply
+    // look in both locations and start editing if
+    // we find the transaction.
+    const auto row = model()->rowCount() - 1;
+    if (!startEditing(model()->index(row, 0))) {
+        startEditing(model()->index(0, 0));
     }
 }
 
