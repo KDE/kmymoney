@@ -47,6 +47,8 @@ public:
     QComboBox* tagCombo();
     const QList<QString> selectedTags();
 
+    bool eventFilter(QObject* o, QEvent* e) override;
+
 protected Q_SLOTS:
     void slotRemoveTagWidget();
 

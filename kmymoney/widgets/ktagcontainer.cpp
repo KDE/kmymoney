@@ -11,9 +11,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QHBoxLayout>
-#include <QComboBox>
 #include <QAbstractItemModel>
+#include <QAbstractItemView>
+#include <QComboBox>
+#include <QEvent>
+#include <QHBoxLayout>
+#include <QKeyEvent>
 #include <QLineEdit>
 
 // ----------------------------------------------------------------------------
@@ -38,13 +41,23 @@ public:
         : q_ptr(parent)
         , m_tagCombo(nullptr)
         , m_idFilter(new IdFilter(parent))
+        , m_skipSelection(true)
+        , m_selectAfterFocusOut(false)
     {
+    }
+
+    void addTagWidget(int row)
+    {
+        const auto idx = m_tagCombo->model()->index(row, 0);
+        const auto id = idx.data(eMyMoney::Model::IdRole).toString();
+        addTagWidget(id);
     }
 
     void addTagWidget(const QString& id)
     {
         Q_Q(KTagContainer);
 
+        m_skipSelection = true;
         if (id.isEmpty() || m_idFilter->filterList().contains(id))
             return;
 
@@ -58,6 +71,8 @@ public:
         m_tagLabelList.append(t);
         m_idFilter->addFilter(id);
         q->layout()->addWidget(t);
+
+        Q_EMIT q->tagsChanged(tagIdList());
     }
 
     QStringList tagIdList() const
@@ -69,10 +84,12 @@ public:
         return tags;
     }
 
-    KTagContainer*              q_ptr;
-    QComboBox*                  m_tagCombo;
-    QScopedPointer<IdFilter>    m_idFilter;
-    QList<KTagLabel*>           m_tagLabelList;
+    KTagContainer* q_ptr;
+    QComboBox* m_tagCombo;
+    QScopedPointer<IdFilter> m_idFilter;
+    QList<KTagLabel*> m_tagLabelList;
+    bool m_skipSelection;
+    bool m_selectAfterFocusOut;
 };
 
 KTagContainer::KTagContainer(QWidget* parent)
@@ -89,26 +106,67 @@ KTagContainer::KTagContainer(QWidget* parent)
     layout->setSpacing(0);
     layout->addWidget(d->m_tagCombo, 100);
     setLayout(layout);
-    setFocusPolicy(Qt::StrongFocus);
     setFocusProxy(d->m_tagCombo);
-    d->m_tagCombo->lineEdit()->setPlaceholderText(i18n("Tag"));
+    d->m_tagCombo->lineEdit()->setPlaceholderText(i18nc("@info:placeholder tag combo box", "Tag"));
 
     d->m_tagCombo->setModel(d->m_idFilter.data());
     d->m_idFilter.data()->setSortLocaleAware(true);
     d->m_idFilter.data()->sort(0);
 
     connect(d->m_tagCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int row) {
-        const auto idx = d->m_tagCombo->model()->index(row, 0);
-        const auto id = idx.data(eMyMoney::Model::IdRole).toString();
-        d->addTagWidget(id);
-        Q_EMIT tagsChanged(d->tagIdList());
+        Q_D(KTagContainer);
+        if (!d->m_skipSelection) {
+            d->addTagWidget(row);
+        }
     });
+
+    connect(d->m_tagCombo, QOverload<int>::of(&QComboBox::activated), [=](int row) {
+        Q_D(KTagContainer);
+        if (d->m_selectAfterFocusOut) {
+            d->addTagWidget(row);
+            d->m_selectAfterFocusOut = false;
+        }
+    });
+
+    d->m_tagCombo->installEventFilter(this);
+    d->m_tagCombo->view()->installEventFilter(this);
 }
 
 KTagContainer::~KTagContainer()
 {
     Q_D(KTagContainer);
     delete d;
+}
+
+bool KTagContainer::eventFilter(QObject* o, QEvent* e)
+{
+    Q_D(KTagContainer);
+    if (o == d->m_tagCombo->view()) {
+        if (e->type() == QEvent::KeyPress) {
+            QKeyEvent* kev = static_cast<QKeyEvent*>(e);
+            switch (kev->key()) {
+            case Qt::Key_Escape:
+            case Qt::Key_F4:
+                d->m_skipSelection = true;
+                break;
+            default:
+                break;
+            }
+        } else if (e->type() == QEvent::Show) {
+            d->m_skipSelection = false;
+        }
+
+    } else if (o == d->m_tagCombo) {
+        if (e->type() == QEvent::FocusOut) {
+            const auto row = d->m_tagCombo->currentIndex();
+            if (row > 0) {
+                d->addTagWidget(row);
+            } else {
+                d->m_selectAfterFocusOut = true;
+            }
+        }
+    }
+    return false;
 }
 
 void KTagContainer::setModel(QAbstractItemModel* model)
