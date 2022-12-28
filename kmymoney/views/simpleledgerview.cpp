@@ -451,6 +451,8 @@ public:
 SimpleLedgerView::SimpleLedgerView(QWidget *parent) :
     KMyMoneyViewBase(*new SimpleLedgerViewPrivate(this), parent)
 {
+    Q_D(SimpleLedgerView);
+    d->m_sharedToolbarActions.insert(eMenu::Action::FileNew, pActions[eMenu::Action::NewTransaction]);
 }
 
 SimpleLedgerView::~SimpleLedgerView()
