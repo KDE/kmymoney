@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2010-2015 Allan Anderson <agander93@gmail.com>
+    SPDX-FileCopyrightText: 2022 Alexander Kuznetsov <alx.kuzza@gmail.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -31,23 +32,49 @@ Parse::~Parse()
 QStringList Parse::parseLine(const QString& data)
 {
     QStringList listOut;
-    const QStringList listIn = data.split(m_fieldDelimiter);  // firstly, split on m_fieldDelimiterCharacter
     QString cell;
-    foreach (const auto it, listIn) {
-        cell.append(it);
-        // detect where a "quoted" string has been erroneously split, because of a comma,
-        // or in a value, a 'thousand separator' being mistaken for a field delimiter.
-        //Also, where a 'field separator' is within quotes and the quotes don't include the whole of the field.
-        if (cell.startsWith(m_textDelimiter)) {
-            if (!cell.endsWith(m_textDelimiter)) {
-                cell.append(m_fieldDelimiter);
-                continue;
+    int quoteCount = 0;
+    int increment = 1;
+    bool quoted = false;
+    auto fill_quotes = [&](const QChar& c) {
+        if (c == m_textDelimiter) {
+            if (quoteCount == 0 && cell.length() == 0) {
+                quoted = true;
+                increment = 2;
             }
-            cell.remove(m_textDelimiter);
+            quoteCount++;
+            return false;
         }
-        listOut.append(cell.trimmed());
-        cell.clear();
+
+        if (quoted) {
+            if (c == m_fieldDelimiter && quoteCount % 2 == 0 && quoteCount >= 2)
+                quoteCount -= 2;
+        }
+
+        while (quoteCount >= increment) {
+            cell += m_textDelimiter;
+            quoteCount -= increment;
+        }
+
+        if (c == m_fieldDelimiter && !quoteCount) {
+            listOut.append(cell.trimmed());
+            quoteCount = 0;
+            quoted = false;
+            increment = 1;
+            cell.clear();
+            return false;
+        }
+
+        return true;
+    };
+
+    for (const auto c : data) {
+        if (!fill_quotes(c))
+            continue;
+        cell.append(c);
     }
+    fill_quotes(m_fieldDelimiter);
+
     return listOut;
 }
 
