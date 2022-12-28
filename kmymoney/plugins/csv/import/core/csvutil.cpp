@@ -1,18 +1,19 @@
 /*
     SPDX-FileCopyrightText: 2010-2015 Allan Anderson <agander93@gmail.com>
     SPDX-License-Identifier: GPL-2.0-or-later
+    SPDX-FileCopyrightText: 2022 Alexander Kuznetsov <alx.kuzza@gmail.com>
 */
 
 #include "csvutil.h"
-//#include <QStringList>
-//#include <QVector>
-#include <QRegularExpression>
+// #include <QStringList>
+// #include <QVector>
 #include <QLocale>
+#include <QRegularExpression>
 
-Parse::Parse() :
-    m_lastLine(0),
-    m_symbolFound(false),
-    m_invalidConversion(false)
+Parse::Parse()
+    : m_lastLine(0)
+    , m_symbolFound(false)
+    , m_invalidConversion(false)
 {
     m_fieldDelimiters = {QLatin1Char(','), QLatin1Char(';'), QLatin1Char(':'), QLatin1Char('\t')};
     m_textDelimiters = {QLatin1Char('"'), QLatin1Char('\'')};
@@ -31,27 +32,53 @@ Parse::~Parse()
 QStringList Parse::parseLine(const QString& data)
 {
     QStringList listOut;
-    const QStringList listIn = data.split(m_fieldDelimiter);  // firstly, split on m_fieldDelimiterCharacter
     QString cell;
-    Q_FOREACH (const auto it, listIn) {
-        cell.append(it);
-        // detect where a "quoted" string has been erroneously split, because of a comma,
-        // or in a value, a 'thousand separator' being mistaken for a field delimiter.
-        //Also, where a 'field separator' is within quotes and the quotes don't include the whole of the field.
-        if (cell.startsWith(m_textDelimiter)) {
-            if (!cell.endsWith(m_textDelimiter)) {
-                cell.append(m_fieldDelimiter);
-                continue;
+    int quoteCount = 0;
+    int increment = 1;
+    bool quoted = false;
+    auto fill_quotes = [&](const QChar& c) {
+        if (c == m_textDelimiter) {
+            if (quoteCount == 0 && cell.length() == 0) {
+                quoted = true;
+                increment = 2;
             }
-            cell.remove(m_textDelimiter);
+            quoteCount++;
+            return false;
         }
-        listOut.append(cell.trimmed());
-        cell.clear();
+
+        if (quoted) {
+            if (c == m_fieldDelimiter && quoteCount % 2 == 0 && quoteCount >= 2)
+                quoteCount -= 2;
+        }
+
+        while (quoteCount >= increment) {
+            cell += m_textDelimiter;
+            quoteCount -= increment;
+        }
+
+        if (c == m_fieldDelimiter && !quoteCount) {
+            listOut.append(cell.trimmed());
+            quoteCount = 0;
+            quoted = false;
+            increment = 1;
+            cell.clear();
+            return false;
+        }
+
+        return true;
+    };
+
+    for (const auto c : data) {
+        if (!fill_quotes(c))
+            continue;
+        cell.append(c);
     }
+    fill_quotes(m_fieldDelimiter);
+
     return listOut;
 }
 
-QStringList Parse::parseFile(const QString &buf)
+QStringList Parse::parseFile(const QString& buf)
 {
     int lineCount = 0;
     bool inQuotes = false;
@@ -123,14 +150,14 @@ int Parse::lastLine()
     return m_lastLine;
 }
 
-QString Parse::possiblyReplaceSymbol(const QString&  str)
+QString Parse::possiblyReplaceSymbol(const QString& str)
 {
     // examples given if decimal symbol is '.' and thousand symbol is ','
     m_symbolFound = false;
     m_invalidConversion = true;
 
     QString txt = str.trimmed();
-    if (txt.isEmpty())  // empty strings not allowed
+    if (txt.isEmpty()) // empty strings not allowed
         return txt;
 
     bool parentheses = false;
@@ -141,28 +168,28 @@ QString Parse::possiblyReplaceSymbol(const QString&  str)
     int decimalIndex = txt.indexOf(m_decimalSymbol);
     int thouIndex = txt.lastIndexOf(m_thousandsSeparator);
 
-    txt.remove(QRegularExpression(QStringLiteral("\\D.,-+")));     // remove all non-digits
+    txt.remove(QRegularExpression(QStringLiteral("\\D.,-+"))); // remove all non-digits
     txt.remove(m_thousandsSeparator);
 
-    if (txt.isEmpty())  // empty strings not allowed
+    if (txt.isEmpty()) // empty strings not allowed
         return txt;
 
-    if (decimalIndex == -1) {                                         // e.g. 1 ; 1,234 ; 1,234,567; 12,
-        if (thouIndex == -1 || thouIndex == length - 4)  {              // e.g. 1 ; 1,234 ; 1,234,567
-            txt.append(QLocale().decimalPoint() + QLatin1String("00"));   // e.g. 1.00 ; 1234.00 ; 1234567.00
+    if (decimalIndex == -1) { // e.g. 1 ; 1,234 ; 1,234,567; 12,
+        if (thouIndex == -1 || thouIndex == length - 4) { // e.g. 1 ; 1,234 ; 1,234,567
+            txt.append(QLocale().decimalPoint() + QLatin1String("00")); // e.g. 1.00 ; 1234.00 ; 1234567.00
             m_invalidConversion = false;
         }
         return txt;
     }
-    m_symbolFound = true;             // decimal symbol found
+    m_symbolFound = true; // decimal symbol found
 
-    if (decimalIndex < thouIndex)     // e.g. 1.234,567 ; 1.23,45
+    if (decimalIndex < thouIndex) // e.g. 1.234,567 ; 1.23,45
         return txt;
 
-    m_invalidConversion = false;      // it cannot be true after this point
-    txt.replace(m_decimalSymbol, QLocale().decimalPoint());  // so swap it
+    m_invalidConversion = false; // it cannot be true after this point
+    txt.replace(m_decimalSymbol, QLocale().decimalPoint()); // so swap it
 
-    if (decimalIndex == length - 1)   // e.g. 1. ; 123.
+    if (decimalIndex == length - 1) // e.g. 1. ; 123.
         txt.append(QLatin1String("00"));
 
     if (parentheses)
