@@ -48,3 +48,9 @@ target_link_libraries(
                       KF5::CoreAddons
                       )
 
+file(GLOB TEMPLATE_FILES
+    templates/*.html
+)
+
+install(FILES ${TEMPLATE_FILES} 
+  DESTINATION ${DATA_INSTALL_DIR}/checkprinting)
