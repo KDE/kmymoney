@@ -235,7 +235,7 @@ void KReportConfigurationFilterDlg::slotSearch()
 
         d->m_currentState.setIncludingUnusedAccounts(d->m_tabRowColPivot->ui->m_checkUnused->isChecked());
 
-        if (d->m_tabRowColPivot->ui->m_comboBudget->isEnabled()) {
+        if (d->m_tabRowColPivot->ui->m_comboBudget->isEnabled() && (d->m_budgets.count() > 0)) {
             d->m_currentState.setBudget(d->m_budgets[d->m_tabRowColPivot->ui->m_comboBudget->currentItem()].id(), d->m_initialState.rowType() == eMyMoney::Report::RowType::BudgetActual);
         } else {
             d->m_currentState.setBudget(QString(), false);
