@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-28 00:49+0000\n"
+"POT-Creation-Date: 2022-12-29 00:53+0000\n"
 "PO-Revision-Date: 2022-10-08 11:24+0200\n"
 "Last-Translator: Grzegorz Koryga <rehork@tutamail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -17438,7 +17438,6 @@ msgstr "<p>Zaznacz tę opcję, żeby pokazała się kolumna znacznika</p>"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tagsView)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTag)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:249
-#: kmymoney/widgets/ktagcontainer.cpp:94
 #: kmymoney/widgets/ktransactionfilter.ui:336
 #: kmymoney/widgets/ktransactionfilter.ui:378
 #, kde-format
@@ -20618,12 +20617,12 @@ msgstr ""
 "Ta strona pokazuje księgę rachunkową. Obecnie nie wybrano żadnych kont,  "
 "więc zamiast tego wyświetlany jest ten tekst."
 
-#: kmymoney/views/simpleledgerview.cpp:644
+#: kmymoney/views/simpleledgerview.cpp:646
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Otwórz stronę <b>%1</b> w swojej przeglądarce."
 
-#: kmymoney/views/simpleledgerview.cpp:812
+#: kmymoney/views/simpleledgerview.cpp:814
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -20632,7 +20631,7 @@ msgstr ""
 "Nie możesz zamknąć tego widoku, bo uzgadniasz konto. Najpierw ukończ, anuluj "
 "lub przełóż uzgadnianie."
 
-#: kmymoney/views/simpleledgerview.cpp:813
+#: kmymoney/views/simpleledgerview.cpp:815
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
@@ -21236,6 +21235,13 @@ msgstr "ikona"
 #, kde-format
 msgid "Feedback content"
 msgstr "Zawartość informacji zwrotnej"
+
+#: kmymoney/widgets/ktagcontainer.cpp:110
+#, fuzzy, kde-format
+#| msgid "Tag"
+msgctxt "@info:placeholder tag combo box"
+msgid "Tag"
+msgstr "Znacznik"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_textTab)
 #: kmymoney/widgets/ktransactionfilter.cpp:104

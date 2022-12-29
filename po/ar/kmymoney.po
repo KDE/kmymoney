@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-28 00:49+0000\n"
+"POT-Creation-Date: 2022-12-29 00:53+0000\n"
 "PO-Revision-Date: 2022-01-04 22:18+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -17296,7 +17296,6 @@ msgstr "<p>حدّد هذا الخيار لعرض عمود الوسم</p>"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tagsView)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTag)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:249
-#: kmymoney/widgets/ktagcontainer.cpp:94
 #: kmymoney/widgets/ktransactionfilter.ui:336
 #: kmymoney/widgets/ktransactionfilter.ui:378
 #, kde-format
@@ -20426,19 +20425,19 @@ msgid ""
 "this text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:644
+#: kmymoney/views/simpleledgerview.cpp:646
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:812
+#: kmymoney/views/simpleledgerview.cpp:814
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
 "cancel or postpone the reconciliation first."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:813
+#: kmymoney/views/simpleledgerview.cpp:815
 #, fuzzy, kde-format
 #| msgid "Closed tags cannot be used."
 msgctxt "@title:info In reconciliation"
@@ -21045,6 +21044,13 @@ msgstr "أيقونة"
 #, kde-format
 msgid "Feedback content"
 msgstr ""
+
+#: kmymoney/widgets/ktagcontainer.cpp:110
+#, fuzzy, kde-format
+#| msgid "Tag"
+msgctxt "@info:placeholder tag combo box"
+msgid "Tag"
+msgstr "الوسم"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_textTab)
 #: kmymoney/widgets/ktransactionfilter.cpp:104

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-28 00:49+0000\n"
+"POT-Creation-Date: 2022-12-29 00:53+0000\n"
 "PO-Revision-Date: 2022-12-19 02:02+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -17415,7 +17415,6 @@ msgstr "<p>Hautatu aukera hau Etiketa zutabea erakusteko</p>"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tagsView)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTag)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:249
-#: kmymoney/widgets/ktagcontainer.cpp:94
 #: kmymoney/widgets/ktransactionfilter.ui:336
 #: kmymoney/widgets/ktransactionfilter.ui:378
 #, kde-format
@@ -20574,12 +20573,12 @@ msgstr ""
 "Orrialde honek kontuen liburua erakusten du. Momentuz, ez da konturik "
 "hautatu, beraz, testu hau erakusten da."
 
-#: kmymoney/views/simpleledgerview.cpp:644
+#: kmymoney/views/simpleledgerview.cpp:646
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "<b>%1</b>-(e)n webgunea ireki zure nabigatzailean."
 
-#: kmymoney/views/simpleledgerview.cpp:812
+#: kmymoney/views/simpleledgerview.cpp:814
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -20588,7 +20587,7 @@ msgstr ""
 "Ezin duzu ikuspegi hau itxi kontua adosten ari zarelako. Bukatu, bertan "
 "behera utzi edo atzeratu adostea lehenago."
 
-#: kmymoney/views/simpleledgerview.cpp:813
+#: kmymoney/views/simpleledgerview.cpp:815
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
@@ -21190,6 +21189,13 @@ msgstr "Ikonoa"
 #, kde-format
 msgid "Feedback content"
 msgstr "Berrelikatu edukia"
+
+#: kmymoney/widgets/ktagcontainer.cpp:110
+#, fuzzy, kde-format
+#| msgid "Tag"
+msgctxt "@info:placeholder tag combo box"
+msgid "Tag"
+msgstr "Etiketa"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_textTab)
 #: kmymoney/widgets/ktransactionfilter.cpp:104

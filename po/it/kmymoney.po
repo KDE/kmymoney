@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-28 00:49+0000\n"
+"POT-Creation-Date: 2022-12-29 00:53+0000\n"
 "PO-Revision-Date: 2022-12-16 10:53+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -17487,7 +17487,6 @@ msgstr "<p>Seleziona questa opzione per visualizzare la colonna Etichetta</p>"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tagsView)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTag)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:249
-#: kmymoney/widgets/ktagcontainer.cpp:94
 #: kmymoney/widgets/ktransactionfilter.ui:336
 #: kmymoney/widgets/ktransactionfilter.ui:378
 #, kde-format
@@ -20689,12 +20688,12 @@ msgstr ""
 "Questa pagina mostra il registro dei conti. Al momento, nessun conto è "
 "selezionato, quindi viene mostrato questo testo."
 
-#: kmymoney/views/simpleledgerview.cpp:644
+#: kmymoney/views/simpleledgerview.cpp:646
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Apri il sito web di <b>%1</b> nel tuo browser."
 
-#: kmymoney/views/simpleledgerview.cpp:812
+#: kmymoney/views/simpleledgerview.cpp:814
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -20703,7 +20702,7 @@ msgstr ""
 "Non puoi chiudere questa visualizzazione perché stai riconciliando il conto. "
 "Termina, annulla o posticipa prima la riconciliazione."
 
-#: kmymoney/views/simpleledgerview.cpp:813
+#: kmymoney/views/simpleledgerview.cpp:815
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
@@ -21307,6 +21306,13 @@ msgstr "icona"
 #, kde-format
 msgid "Feedback content"
 msgstr "Contenuto della segnalazione"
+
+#: kmymoney/widgets/ktagcontainer.cpp:110
+#, fuzzy, kde-format
+#| msgid "Tag"
+msgctxt "@info:placeholder tag combo box"
+msgid "Tag"
+msgstr "Etichetta"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_textTab)
 #: kmymoney/widgets/ktransactionfilter.cpp:104

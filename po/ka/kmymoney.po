@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-28 00:49+0000\n"
-"PO-Revision-Date: 2022-12-13 01:58+0100\n"
+"POT-Creation-Date: 2022-12-29 00:53+0000\n"
+"PO-Revision-Date: 2022-12-28 09:25+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2841,7 +2841,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingscolors.ui:56
 #, kde-format
 msgid "Required field"
-msgstr ""
+msgstr "ველის აუცილებელია"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:86
@@ -4350,7 +4350,7 @@ msgstr "CSV-ის შემოტანა/გატანა"
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:78
 #, kde-format
 msgid "Equity"
-msgstr ""
+msgstr "კაპიტალი"
 
 #: kmymoney/kmymoney.cpp:512
 #, kde-format
@@ -6016,7 +6016,7 @@ msgstr "გადახდა"
 #: kmymoney/models/ledgertransaction_p.h:66 kmymoney/mymoney/splitmodel.cpp:94
 #, kde-format
 msgid "Split transaction"
-msgstr ""
+msgstr "ტრანზაქციის გაყოფა"
 
 #: kmymoney/models/ledgertransaction_p.h:84 kmymoney/mymoney/splitmodel.cpp:112
 #: kmymoney/mymoney/storage/journalmodel.cpp:187
@@ -7713,7 +7713,7 @@ msgstr "მოყოლილი"
 #, kde-format
 msgctxt "Security type"
 msgid "Mutual Fund"
-msgstr ""
+msgstr "საერთო ფონდი"
 
 #: kmymoney/mymoney/mymoneysecurity.cpp:248
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:32
@@ -9615,7 +9615,7 @@ msgstr ""
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "buy"
-msgstr ""
+msgstr "შეძენა"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1552
 #, kde-format
@@ -13857,7 +13857,7 @@ msgstr "წლიურად"
 #, kde-format
 msgctxt "@action timeframe of the budget. month-by-month budget"
 msgid "Individual"
-msgstr ""
+msgstr "ინდივიდუალური"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:74
 #, kde-format
@@ -14757,7 +14757,7 @@ msgstr "კვირა"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:300
 #, kde-format
 msgid "Action"
-msgstr ""
+msgstr "პარამეტრები"
 
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, sharesAmountEdit)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkShares)
@@ -15025,7 +15025,7 @@ msgstr "ანგარიში"
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
-msgstr ""
+msgstr "მიმდინარე"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2174
 #, kde-format
@@ -15510,7 +15510,7 @@ msgstr "&ბეჭდვა"
 #, kde-format
 msgctxt "Configure a report"
 msgid "&Configure"
-msgstr ""
+msgstr "&მორგება"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:750
 #, kde-format
@@ -15979,7 +15979,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reportsview.cpp:233
 #, kde-format
 msgid "Actual"
-msgstr ""
+msgstr "მიმდინარე"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:199
 #: kmymoney/plugins/views/reports/reportsview.cpp:236
@@ -16641,7 +16641,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tagsView)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTag)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:249
-#: kmymoney/widgets/ktagcontainer.cpp:94
 #: kmymoney/widgets/ktransactionfilter.ui:336
 #: kmymoney/widgets/ktransactionfilter.ui:378
 #, kde-format
@@ -17608,7 +17607,7 @@ msgstr ""
 #: kmymoney/templates/templateloader.cpp:110
 #, kde-format
 msgid "File '%1' not found."
-msgstr ""
+msgstr "ფაილი ვერ ვიპოვე: %1."
 
 #: kmymoney/templates/templateloader.cpp:186
 #, kde-format
@@ -19549,7 +19548,7 @@ msgstr ""
 #, kde-format
 msgctxt "Ledger marker showing a reconciliation entry"
 msgid "Reconciliation"
-msgstr ""
+msgstr "შეთანხმების ანგარიში"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:123
 #, kde-format
@@ -19607,19 +19606,19 @@ msgid ""
 "this text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:644
+#: kmymoney/views/simpleledgerview.cpp:646
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:812
+#: kmymoney/views/simpleledgerview.cpp:814
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
 "cancel or postpone the reconciliation first."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:813
+#: kmymoney/views/simpleledgerview.cpp:815
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
@@ -20071,7 +20070,7 @@ msgstr ""
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:35
 #, kde-format
 msgid "Current month"
-msgstr ""
+msgstr "მიმდინარე თვე"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:36
 #, kde-format
@@ -20081,7 +20080,7 @@ msgstr ""
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:37
 #, kde-format
 msgid "Current year"
-msgstr ""
+msgstr "მიმდინარე წელი"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:39
 #, kde-format
@@ -20194,6 +20193,13 @@ msgstr "ხატულა"
 #, kde-format
 msgid "Feedback content"
 msgstr ""
+
+#: kmymoney/widgets/ktagcontainer.cpp:110
+#, fuzzy, kde-format
+#| msgid "Tag"
+msgctxt "@info:placeholder tag combo box"
+msgid "Tag"
+msgstr "იარლიყი"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_textTab)
 #: kmymoney/widgets/ktransactionfilter.cpp:104
@@ -20653,7 +20659,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:69
 #, kde-format
 msgid "Loan"
-msgstr ""
+msgstr "სესხი"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:111
 #, kde-format
@@ -20849,7 +20855,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:65
 #, kde-format
 msgid "Credit Card"
-msgstr ""
+msgstr "საკრედიტო ბარათი"
 
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:67
 #, kde-format
@@ -20859,7 +20865,7 @@ msgstr "ნაღდი ფული"
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:71
 #, kde-format
 msgid "Investment"
-msgstr ""
+msgstr "ინვესტიცია"
 
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:193
 #, kde-format
@@ -23271,13 +23277,13 @@ msgstr ""
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:143
 #, kde-format
 msgid "Number of the account"
-msgstr ""
+msgstr "ანგარიშის ნომერი"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:153
 #, kde-format
 msgid "Name of the account"
-msgstr ""
+msgstr "ანგარიშის სახელი"
 
 #. i18n: ectx: property (whatsThis), widget (AmountEdit, m_openingBalanceEdit)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:185
