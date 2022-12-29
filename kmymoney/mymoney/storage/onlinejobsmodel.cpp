@@ -42,6 +42,16 @@ struct OnlineJobsModel::Private
 {
     Private(OnlineJobsModel* qq)
         : q(qq)
+        , headerData(QHash<Columns, QString>({
+              {PostDate, i18nc("@title:column", "Date")},
+              {AccountName, i18nc("@title:column", "Account")},
+              {Action, i18nc("@title:column", "Action")},
+              {Destination, i18nc("@title:column", "Destination")},
+              {Value, i18nc("@title:column", "Value")},
+              {Purpose, i18nc("@title:column", "Purpose")},
+              {DestinationAccount, i18nc("@title:column", "Destination Account")},
+              {DestinationBic, i18nc("@title:column", "Destination BIC")},
+          }))
     {
     }
 
@@ -63,6 +73,7 @@ struct OnlineJobsModel::Private
     }
 
     OnlineJobsModel* q;
+    QHash<Columns, QString> headerData;
 };
 
 OnlineJobsModel::OnlineJobsModel(QObject* parent, QUndoStack* undoStack)
@@ -84,27 +95,16 @@ int OnlineJobsModel::columnCount(const QModelIndex& parent) const
 
 QVariant OnlineJobsModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-        switch (section) {
-        case PostDate:
-            return i18nc("@title:column", "Date");
-        case AccountName:
-            return i18nc("@title:column", "Account");
-        case Action:
-            return i18nc("@title:column", "Action");
-        case Destination:
-            return i18nc("@title:column", "Destination");
-        case Value:
-            return i18nc("@title:column", "Value");
-        case Purpose:
-            return i18nc("@title:column", "Purpose");
-        case DestinationAccount:
-            return i18nc("@title:column", "Destination Account");
-        case DestinationBic:
-            return i18nc("@title:column", "Destination BIC");
+    if (orientation == Qt::Horizontal) {
+        switch (role) {
+        case Qt::DisplayRole:
+            return d->headerData.value(static_cast<Columns>(section));
         }
     }
-    return {};
+    if (orientation == Qt::Vertical && role == Qt::SizeHintRole) {
+        return QSize(10, 10);
+    }
+    return MyMoneyModelBase::headerData(section, orientation, role);
 }
 
 QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
