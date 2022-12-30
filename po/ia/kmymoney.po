@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-29 00:53+0000\n"
+"POT-Creation-Date: 2022-12-30 00:53+0000\n"
 "PO-Revision-Date: 2022-10-12 15:43+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -8083,7 +8083,7 @@ msgid "Date"
 msgstr "Data"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:52
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:92
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:47
 #, kde-format
 msgctxt "@title:column"
 msgid "Account"
@@ -8154,7 +8154,7 @@ msgid "Amount"
 msgstr "Amonta"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:63
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:98
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:50
 #, kde-format
 msgctxt "@title:column"
 msgid "Value"
@@ -8324,38 +8324,38 @@ msgctxt "Reconciliation status unknown"
 msgid "unknown"
 msgstr "incognite"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:90
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:46
 #, kde-format
 msgctxt "@title:column"
 msgid "Date"
 msgstr "Data"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:94
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:48
 #, kde-format
 msgctxt "@title:column"
 msgid "Action"
 msgstr "Action"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:96
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:49
 #, kde-format
 msgctxt "@title:column"
 msgid "Destination"
 msgstr "Destination"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:100
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:51
 #, kde-format
 msgctxt "@title:column"
 msgid "Purpose"
 msgstr ""
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:102
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:52
 #, fuzzy, kde-format
 #| msgid "National Account"
 msgctxt "@title:column"
 msgid "Destination Account"
 msgstr "Conto National"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:104
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:53
 #, fuzzy, kde-format
 #| msgctxt "@title:column"
 #| msgid "Destination"

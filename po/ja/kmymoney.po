@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-29 00:53+0000\n"
+"POT-Creation-Date: 2022-12-30 00:53+0000\n"
 "PO-Revision-Date: 2009-05-18 00:20+0900\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -8053,7 +8053,7 @@ msgid "Date"
 msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:52
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:92
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:47
 #, kde-format
 msgctxt "@title:column"
 msgid "Account"
@@ -8120,7 +8120,7 @@ msgid "Amount"
 msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:63
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:98
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:50
 #, kde-format
 msgctxt "@title:column"
 msgid "Value"
@@ -8285,37 +8285,37 @@ msgctxt "Reconciliation status unknown"
 msgid "unknown"
 msgstr ""
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:90
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:46
 #, kde-format
 msgctxt "@title:column"
 msgid "Date"
 msgstr ""
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:94
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:48
 #, kde-format
 msgctxt "@title:column"
 msgid "Action"
 msgstr ""
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:96
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:49
 #, kde-format
 msgctxt "@title:column"
 msgid "Destination"
 msgstr ""
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:100
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:51
 #, kde-format
 msgctxt "@title:column"
 msgid "Purpose"
 msgstr ""
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:102
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:52
 #, kde-format
 msgctxt "@title:column"
 msgid "Destination Account"
 msgstr ""
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:104
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:53
 #, kde-format
 msgctxt "@title:column"
 msgid "Destination BIC"

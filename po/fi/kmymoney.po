@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-29 00:53+0000\n"
+"POT-Creation-Date: 2022-12-30 00:53+0000\n"
 "PO-Revision-Date: 2022-10-11 11:38+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -8477,7 +8477,7 @@ msgid "Date"
 msgstr "Päivämäärä"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:52
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:92
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:47
 #, kde-format
 msgctxt "@title:column"
 msgid "Account"
@@ -8546,7 +8546,7 @@ msgid "Amount"
 msgstr "Summa"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:63
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:98
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:50
 #, kde-format
 msgctxt "@title:column"
 msgid "Value"
@@ -8717,33 +8717,33 @@ msgctxt "Reconciliation status unknown"
 msgid "unknown"
 msgstr "tuntematon"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:90
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:46
 #, kde-format
 msgctxt "@title:column"
 msgid "Date"
 msgstr "Päivämäärä"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:94
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:48
 #, fuzzy, kde-format
 #| msgid "Action"
 msgctxt "@title:column"
 msgid "Action"
 msgstr "Toiminto"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:96
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:49
 #, kde-format
 msgctxt "@title:column"
 msgid "Destination"
 msgstr "Kohde"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:100
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:51
 #, fuzzy, kde-format
 #| msgid "Purpose"
 msgctxt "@title:column"
 msgid "Purpose"
 msgstr "Selitekenttä"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:102
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:52
 #, fuzzy, kde-format
 #| msgid ""
 #| "_: Deposit into account\n"
@@ -8752,7 +8752,7 @@ msgctxt "@title:column"
 msgid "Destination Account"
 msgstr "Talletus"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:104
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:53
 #, fuzzy, kde-format
 #| msgctxt "@title:column"
 #| msgid "Destination"

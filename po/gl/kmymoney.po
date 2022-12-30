@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-29 00:53+0000\n"
+"POT-Creation-Date: 2022-12-30 00:53+0000\n"
 "PO-Revision-Date: 2020-03-07 08:15+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -8637,7 +8637,7 @@ msgid "Date"
 msgstr "Data"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:52
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:92
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:47
 #, fuzzy, kde-format
 #| msgid "Account"
 msgctxt "@title:column"
@@ -8716,7 +8716,7 @@ msgid "Amount"
 msgstr "Importe"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:63
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:98
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:50
 #, fuzzy, kde-format
 #| msgid "Value"
 msgctxt "@title:column"
@@ -8890,42 +8890,42 @@ msgctxt "Reconciliation status unknown"
 msgid "unknown"
 msgstr "descoñecido"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:90
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:46
 #, fuzzy, kde-format
 #| msgid "Date"
 msgctxt "@title:column"
 msgid "Date"
 msgstr "Data"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:94
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:48
 #, fuzzy, kde-format
 #| msgid "Action"
 msgctxt "@title:column"
 msgid "Action"
 msgstr "Acción"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:96
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:49
 #, fuzzy, kde-format
 #| msgid "Destination"
 msgctxt "@title:column"
 msgid "Destination"
 msgstr "Destino"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:100
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:51
 #, fuzzy, kde-format
 #| msgid "Purpose"
 msgctxt "@title:column"
 msgid "Purpose"
 msgstr "Motivo"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:102
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:52
 #, fuzzy, kde-format
 #| msgid "National Account"
 msgctxt "@title:column"
 msgid "Destination Account"
 msgstr "Conta nacional"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:104
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:53
 #, fuzzy, kde-format
 #| msgid "Destination"
 msgctxt "@title:column"

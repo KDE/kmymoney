@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-29 00:53+0000\n"
+"POT-Creation-Date: 2022-12-30 00:53+0000\n"
 "PO-Revision-Date: 2022-12-17 18:55+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -8656,7 +8656,7 @@ msgid "Date"
 msgstr "Tarih"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:52
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:92
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:47
 #, fuzzy, kde-format
 #| msgid "Account"
 msgctxt "@title:column"
@@ -8734,7 +8734,7 @@ msgid "Amount"
 msgstr "Tutar"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:63
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:98
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:50
 #, fuzzy, kde-format
 #| msgid "Value"
 msgctxt "@title:column"
@@ -8913,42 +8913,42 @@ msgctxt "Reconciliation status unknown"
 msgid "unknown"
 msgstr "bilinmeyen"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:90
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:46
 #, fuzzy, kde-format
 #| msgid "Date"
 msgctxt "@title:column"
 msgid "Date"
 msgstr "Tarih"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:94
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:48
 #, fuzzy, kde-format
 #| msgid "Action"
 msgctxt "@title:column"
 msgid "Action"
 msgstr "Hareket"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:96
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:49
 #, fuzzy, kde-format
 #| msgid "Destination"
 msgctxt "@title:column"
 msgid "Destination"
 msgstr "Hedef"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:100
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:51
 #, fuzzy, kde-format
 #| msgid "Purpose"
 msgctxt "@title:column"
 msgid "Purpose"
 msgstr "Amaç"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:102
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:52
 #, fuzzy, kde-format
 #| msgid "National Account"
 msgctxt "@title:column"
 msgid "Destination Account"
 msgstr "Ulusal Hesap"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:104
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:53
 #, fuzzy, kde-format
 #| msgid "Destination"
 msgctxt "@title:column"
