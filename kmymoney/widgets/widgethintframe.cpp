@@ -117,25 +117,49 @@ void WidgetHintFrameCollection::updateWidgets()
 class WidgetHintFrame::Private
 {
 public:
-    QWidget* editWidget = nullptr;
-    bool status = false;
+    Private(WidgetHintFrame* qq)
+        : q(qq)
+        , editWidget(nullptr)
+        , status(false)
+        , style(Error)
+        , offset(2)
+    {
+    }
+
+    void updateStyle()
+    {
+        QString color("red");
+        QString width("2");
+        QString lineStyle("solid");
+
+        switch (style) {
+        case Error:
+            break;
+        case Warning:
+        case Info:
+            lineStyle = QLatin1String("dashed");
+            break;
+        case Focus:
+            color = QStringLiteral("#%1").arg(q->palette().color(QPalette::Active, QPalette::Highlight).rgb() & 0xFFFFFF, 6, 16, QLatin1Char('0'));
+            width = QLatin1String("1");
+            break;
+        }
+        q->setStyleSheet(
+            QStringLiteral("QFrame { background-color: none; padding: 1px; border: %1px %2 %3; border-radius: 4px; }").arg(width, lineStyle, color));
+    }
+
+    WidgetHintFrame* q;
+    QWidget* editWidget;
+    bool status;
     FrameStyle style;
+    int offset;
 };
 
 WidgetHintFrame::WidgetHintFrame(QWidget* editWidget, FrameStyle style, Qt::WindowFlags f)
     : QFrame(editWidget->parentWidget(), f)
-    , d(new Private)
+    , d(new Private(this))
 {
-    d->style = style;
-    switch (style) {
-    case Error:
-        setStyleSheet("QFrame { background-color: none; padding: 1px; border: 2px solid red; border-radius: 4px; }");
-        break;
-    case Warning:
-    case Info:
-        setStyleSheet("QFrame { background-color: none; padding: 1px; border: 2px dashed red; border-radius: 4px; }");
-        break;
-    }
+    setStyle(style);
     attachToWidget(editWidget);
 }
 
@@ -209,8 +233,9 @@ void WidgetHintFrame::attachToWidget(QWidget* w)
         // make sure we receive changes in position and size
         w->installEventFilter(this);
         // place frame around widget
-        move(w->pos() - QPoint(2, 2));
-        resize(w->width() + 4, w->height() + 4);
+        move(w->pos() - QPoint(d->offset, d->offset));
+        const auto increment = d->offset * 2;
+        resize(w->width() + increment, w->height() + increment);
         // make sure widget is on top of frame
         w->raise();
         // and hide frame for now
@@ -223,6 +248,7 @@ bool WidgetHintFrame::eventFilter(QObject* o, QEvent* e)
     if (o == d->editWidget) {
         QMoveEvent* mev = 0;
         QResizeEvent* sev = 0;
+        const auto increment = d->offset * 2;
         switch (e->type()) {
         case QEvent::EnabledChange:
         case QEvent::Hide:
@@ -235,16 +261,41 @@ bool WidgetHintFrame::eventFilter(QObject* o, QEvent* e)
 
         case QEvent::Move:
             mev = static_cast<QMoveEvent*>(e);
-            move(mev->pos() - QPoint(2, 2));
+            move(mev->pos() - QPoint(d->offset, d->offset));
             break;
 
         case QEvent::Resize:
             sev = static_cast<QResizeEvent*>(e);
-            resize(sev->size().width() + 4, sev->size().height() + 4);
+            resize(sev->size().width() + increment, sev->size().height() + increment);
             break;
         default:
             break;
         }
     }
     return QObject::eventFilter(o, e);
+}
+
+void WidgetHintFrame::setOffset(int offset)
+{
+    d->offset = offset;
+    // update frame position around widget
+    if (d->editWidget) {
+        move(d->editWidget->pos() - QPoint(d->offset, d->offset));
+        const auto increment = d->offset * 2;
+        resize(d->editWidget->width() + increment, d->editWidget->height() + increment);
+    }
+}
+
+void WidgetHintFrame::setStyle(WidgetHintFrame::FrameStyle style)
+{
+    d->style = style;
+    switch (style) {
+    default:
+        setOffset(2);
+        break;
+    case Focus:
+        setOffset(0);
+        break;
+    }
+    d->updateStyle();
 }

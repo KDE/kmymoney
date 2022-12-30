@@ -409,16 +409,26 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
     // show the focus only on the detail column
     opt.state &= ~QStyle::State_HasFocus;
 
+    QAbstractItemView* view = qobject_cast<QAbstractItemView*>(parent());
+    const auto editWidget = (d->m_view) ? d->m_view->indexWidget(index) : nullptr;
+
     // if selected, always show as active, so that the
     // background does not change when the editor is shown
-    if (opt.state & QStyle::State_Selected) {
+    if (opt.state & QStyle::State_Selected && (editWidget == nullptr)) {
         opt.state |= QStyle::State_Active;
+    } else {
+        opt.state &= ~QStyle::State_Active;
     }
 
+    // if the widget has a different size than what we can paint on
+    // then we adjust the size of the widget so that the focus frame
+    // can be painted correctly using a WidgetHintFrame
+    if (editWidget) {
+        if (editWidget->size() != opt.rect.size()) {
+            editWidget->resize(opt.rect.size());
+        }
+    }
     painter->save();
-
-    QAbstractItemView* view = qobject_cast< QAbstractItemView* >(parent());
-    const bool editWidgetIsVisible = d->m_view && d->m_view->indexWidget(index);
 
     // Background
     QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
@@ -430,7 +440,7 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
     QPalette::ColorGroup cg;
 
     // Do not paint text if the edit widget is shown
-    if (!editWidgetIsVisible) {
+    if (editWidget == nullptr) {
         if(view && (index.column() == JournalModel::Column::Detail)) {
             if(view->currentIndex().row() == index.row()) {
                 opt.state |= QStyle::State_HasFocus;

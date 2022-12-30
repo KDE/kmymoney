@@ -30,17 +30,54 @@ public:
         Error = 0,
         Warning,
         Info,
+        Focus,
     };
     Q_ENUM(FrameStyle)
 
     explicit WidgetHintFrame(QWidget* editWidget, FrameStyle style = Error, Qt::WindowFlags f = {});
     ~WidgetHintFrame();
 
+    /**
+     * Attach the WidgetHintFrame to the widget @a w.
+     */
     void attachToWidget(QWidget* w);
+
+    /**
+     * Remove the frame from the widget it is attached to.
+     * If no widget is attached, nothing will be done.
+     */
     void detachFromWidget();
 
+    /**
+     * Set the @a style of the frame. For the stlye @c Focus
+     * the @c offset will be set to 0 for all other styles
+     * it will be set to 2.
+     *
+     * @sa setOffset()
+     */
+    void setStyle(FrameStyle style);
+
+    /**
+     * Set the offset to be kept between the attached
+     * widget and the frame in pixels. The setting will
+     * be overridden by setStyle().
+     *
+     * @sa setStyle()
+     */
+    void setOffset(int offset);
+
+    /**
+     * Returns @c true when @c style is @c Error and
+     * the frame is visible. Returns @c false otherwise.
+     */
     bool isErroneous() const;
 
+    /**
+     * Returns a pointer to the widget surrounded by
+     * the frame or @c nullptr if none is attached.
+     *
+     * @sa attachToWidget(), detachFromWidget()
+     */
     QWidget* editWidget() const;
 
     /**

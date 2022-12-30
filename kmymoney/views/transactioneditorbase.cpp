@@ -31,12 +31,14 @@ public:
     Private()
         : cancelButton(nullptr)
         , enterButton(nullptr)
+        , focusFrame(nullptr)
         , readOnly(false)
     {
     }
 
     QAbstractButton* cancelButton;
     QAbstractButton* enterButton;
+    WidgetHintFrame* focusFrame;
     bool readOnly;
 };
 
@@ -45,10 +47,23 @@ TransactionEditorBase::TransactionEditorBase(QWidget* parent, const QString& acc
     , d(new TransactionEditorBase::Private)
 {
     Q_UNUSED(accountId)
+    d->focusFrame = new WidgetHintFrame(this, WidgetHintFrame::Focus);
+    WidgetHintFrame::show(this);
+    connect(d->focusFrame, &QObject::destroyed, this, [&]() {
+        d->focusFrame = nullptr;
+    });
 }
 
 TransactionEditorBase::~TransactionEditorBase()
 {
+    if (d->focusFrame) {
+        d->focusFrame->deleteLater();
+    }
+}
+
+TransactionEditorBase::QWidget* TransactionEditorBase::focusFrame() const
+{
+    return d->focusFrame;
 }
 
 bool TransactionEditorBase::focusNextPrevChild(bool next)

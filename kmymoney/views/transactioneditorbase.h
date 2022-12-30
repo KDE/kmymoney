@@ -41,6 +41,8 @@ public:
     virtual void setReadOnly(bool readOnly);
     bool isReadOnly() const;
 
+    QWidget* focusFrame() const;
+
     /**
      * This method is used to embed the transaction editor in other dialogs
      * e.g. KEditScheduleDlg. If the editor does not have a WidgetHintFrameCollection

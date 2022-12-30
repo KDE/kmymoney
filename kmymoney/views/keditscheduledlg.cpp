@@ -108,6 +108,9 @@ public:
         m_frameCollection->chainFrameCollection(transactionEditor->widgetHintFrameCollection());
 
         transactionEditor->setShowNumberWidget(true);
+
+        // we don't need the focus frame here
+        delete transactionEditor->focusFrame();
     }
 
     void updateState()
