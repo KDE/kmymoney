@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-30 00:53+0000\n"
-"PO-Revision-Date: 2022-12-29 10:10+0100\n"
+"PO-Revision-Date: 2022-12-30 07:15+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -6258,7 +6258,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:2562
 #, kde-format
 msgid "* Problems with transactions"
-msgstr ""
+msgstr "* ტრანზაქციის პრობლემები"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2573
 #, kde-format
@@ -6273,7 +6273,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:2586
 #, kde-format
 msgid "    Account: %1, Amount: %2"
-msgstr ""
+msgstr "    ანგარიში: %1, რაოდენობა: %2"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2597
 #, kde-format
@@ -6297,7 +6297,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:2630
 #, kde-format
 msgid "    Account opening date updated."
-msgstr ""
+msgstr "    ანგარიშის გახსნის თარიღი განახლდა."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2644
 #, kde-format
@@ -7449,34 +7449,34 @@ msgstr ""
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every other week"
-msgstr ""
+msgstr "ყოველკვირა"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:896
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every half month"
-msgstr ""
+msgstr "ყოველ ნახევარ თვეში"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:898
 #: kmymoney/mymoney/mymoneyschedule.cpp:947
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every three weeks"
-msgstr ""
+msgstr "ყოველ სამ კვირაში"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:900
 #: kmymoney/mymoney/mymoneyschedule.cpp:950
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every four weeks"
-msgstr ""
+msgstr "ყოველ ოთხ კვირაში"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:902
 #: kmymoney/mymoney/mymoneyschedule.cpp:935
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every thirty days"
-msgstr ""
+msgstr "ყოველ ოცდაათ დღეში"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:904
 #, kde-format
@@ -7489,14 +7489,14 @@ msgstr "თვეში ერთხელ"
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every eight weeks"
-msgstr ""
+msgstr "ყოველ რვა კვირაში"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:908
 #: kmymoney/mymoney/mymoneyschedule.cpp:965
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every two months"
-msgstr ""
+msgstr "ყოველ ორ თვეში"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:910
 #: kmymoney/mymoney/mymoneyschedule.cpp:968
@@ -7509,21 +7509,21 @@ msgstr "ყოველ 3 თვეში"
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Quarterly"
-msgstr ""
+msgstr "კვარტლურად"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:914
 #: kmymoney/mymoney/mymoneyschedule.cpp:971
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every four months"
-msgstr ""
+msgstr "ყოველ ოთხ თვეში"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:916
 #: kmymoney/mymoney/mymoneyschedule.cpp:974
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Twice yearly"
-msgstr ""
+msgstr "ორჯერ წელიწადში"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:918
 #, kde-format
@@ -7536,7 +7536,7 @@ msgstr "წლიურად"
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every other year"
-msgstr ""
+msgstr "ყოველ მეორე წელს"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:921
 #, kde-format
@@ -7603,7 +7603,7 @@ msgstr "კვირა"
 #: kmymoney/mymoney/mymoneyschedule.cpp:1005
 msgctxt "Schedule occurrence period"
 msgid "Half-month"
-msgstr ""
+msgstr "2 კვირაში ერთხელ"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1007
 msgctxt "Schedule occurrence period"
@@ -7618,7 +7618,7 @@ msgstr "წელი"
 #: kmymoney/mymoney/mymoneyschedule.cpp:1019
 msgctxt "Scheduled transaction type"
 msgid "Bill"
-msgstr ""
+msgstr "ჩეკი"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1022
 msgctxt "Scheduled transaction type"
@@ -7633,12 +7633,12 @@ msgstr "Გადაცემა"
 #: kmymoney/mymoney/mymoneyschedule.cpp:1028
 msgctxt "Scheduled transaction type"
 msgid "Loan payment"
-msgstr ""
+msgstr "სესხის გადახდა"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1032
 msgctxt "Scheduled transaction type"
 msgid "Unknown"
-msgstr ""
+msgstr "უცნობი"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1041
 msgctxt "Scheduled Transaction payment type"
@@ -7678,7 +7678,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyschedule.cpp:1062
 msgctxt "Scheduled Transaction payment type"
 msgid "Any (Error)"
-msgstr ""
+msgstr "ნებისმიერი (შეცდომა)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
 #: kmymoney/mymoney/mymoneyschedule.cpp:1074
@@ -7699,7 +7699,7 @@ msgstr ""
 #: kmymoney/views/keditscheduledlg.ui:159
 #, kde-format
 msgid "Do not change the date"
-msgstr ""
+msgstr "თარიღი არ შეიცვლება"
 
 #: kmymoney/mymoney/mymoneysecurity.cpp:244
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:30
@@ -8570,7 +8570,7 @@ msgstr "წელს"
 #: kmymoney/mymoney/storage/specialdatesmodel.cpp:90
 #, kde-format
 msgid "Future transactions"
-msgstr ""
+msgstr "მომავალი ტრანზაქციები"
 
 #: kmymoney/mymoney/storage/specialdatesmodel.cpp:91
 #, kde-format
@@ -8586,17 +8586,17 @@ msgstr "შემდეგი თვე"
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:38
 #, kde-format
 msgid "Current fiscal year"
-msgstr ""
+msgstr "მიმდინარე ფისკალური წელი"
 
 #: kmymoney/mymoney/storage/specialdatesmodel.cpp:96
 #, kde-format
 msgid "Previous fiscal year"
-msgstr ""
+msgstr "წინა ფისკალური წელი"
 
 #: kmymoney/mymoney/storage/specialdatesmodel.cpp:97
 #, kde-format
 msgid "Next fiscal year"
-msgstr ""
+msgstr "შემდეგი ფისკალური წელი"
 
 #: kmymoney/mymoney/storage/tagsmodel.cpp:51
 #, kde-format
@@ -8631,7 +8631,7 @@ msgstr ""
 #: kmymoney/plugins/checkprinting/checkprinting.cpp:183
 #, kde-format
 msgid "Print check"
-msgstr ""
+msgstr "ჩეკის დაბეჭდვა"
 
 #. i18n: ectx: label, entry (useCustomCheckTemplate), group (General)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_useCustomCheckTemplate)
@@ -8658,7 +8658,7 @@ msgstr ""
 #: kmymoney/plugins/checkprinting/checkprintingsettingsdecl.ui:20
 #, kde-format
 msgid "Checking settings"
-msgstr ""
+msgstr "პარამეტრების შემოწმება"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
@@ -8919,7 +8919,7 @@ msgstr "%1 და No/%2"
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:56
 #, kde-format
 msgid "Start operation"
-msgstr ""
+msgstr "ოპერაციის დაწყება"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:57
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
@@ -9203,7 +9203,7 @@ msgstr ""
 #: kmymoney/plugins/csv/export/csvwriter.cpp:100
 #, kde-format
 msgid "Action/Type"
-msgstr ""
+msgstr "ქმედება/ტიპი"
 
 #. i18n: ectx: property (text), widget (QLabel, numberLabel)
 #. i18n: ectx: property (text), widget (QLabel, label_4)
@@ -9224,7 +9224,7 @@ msgstr "ნომერი"
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #, kde-format
 msgid "Account/Cat"
-msgstr ""
+msgstr "ანგარიში/კატეგორია"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:173
 #, kde-format
@@ -9800,7 +9800,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/securitydlg.ui:112
 #, kde-format
 msgid "Do not ask next time"
-msgstr ""
+msgstr "მეტჯერ არ მკითხო"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:41
@@ -9820,7 +9820,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:124
 #, kde-format
 msgid "comma (,)"
-msgstr ""
+msgstr "მძიმე (,)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_thousandsDelimiter)
 #. i18n: ectx: property (text), item, widget (QComboBox, m_decimalSymbol)
@@ -9828,7 +9828,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:159
 #, kde-format
 msgid "dot (.)"
-msgstr ""
+msgstr "წერტილი (.)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_thousandsDelimiter)
 #. i18n: ectx: property (text), item, widget (QComboBox, m_decimalSymbol)
@@ -9846,7 +9846,7 @@ msgstr "ავტომატური"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:515
 #, kde-format
 msgid "Decimal Symbol"
-msgstr ""
+msgstr "ათობითის სიმბოლო"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_decimalSymbol)
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:152
@@ -9860,7 +9860,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:177
 #, kde-format
 msgid "Thousands Symbol"
-msgstr ""
+msgstr "ათასის სიმბოლო"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSet_dateFormat)
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:187
@@ -9874,21 +9874,21 @@ msgstr "თარიღის ფორმატი"
 #, kde-format
 msgctxt "abbreviation of 'year', 'month', 'day'."
 msgid "y m d"
-msgstr ""
+msgstr "წ თ დ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_dateFormat)
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:212
 #, kde-format
 msgctxt "abbreviation of 'month', 'day', 'year',"
 msgid "m d y"
-msgstr ""
+msgstr "თ დ წ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_dateFormat)
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:217
 #, kde-format
 msgctxt "abbreviation of  'day', 'month', 'year',"
 msgid "d m y"
-msgstr ""
+msgstr "დ თ წ"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, IntroPage)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:20
@@ -10260,7 +10260,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/pluginsettingsdecl.ui:32
 #, kde-format
 msgid "Field delimiter"
-msgstr ""
+msgstr "ველის გამყოფი"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoDecimalSymbol)
 #: kmymoney/plugins/csv/import/pluginsettingsdecl.ui:45
@@ -10405,7 +10405,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/securitydlg.ui:26
 #, kde-format
 msgid "Missing name and symbol"
-msgstr ""
+msgstr "აკლია სახელი და სიმბოლო"
 
 #. i18n: ectx: property (text), widget (QLabel, label_info)
 #: kmymoney/plugins/csv/import/securitydlg.ui:37
@@ -10419,13 +10419,13 @@ msgstr ""
 #: kmymoney/plugins/csv/import/securitydlg.ui:82
 #, kde-format
 msgid "Existing security"
-msgstr ""
+msgstr "არსებული უსაფრთხოება"
 
 #. i18n: ectx: property (text), widget (QLabel, lblNewSymbol)
 #: kmymoney/plugins/csv/import/securitydlg.ui:89
 #, kde-format
 msgid "New symbol"
-msgstr ""
+msgstr "ახალი სიმბოლო"
 
 #. i18n: ectx: property (text), widget (QLabel, lblNewName)
 #: kmymoney/plugins/csv/import/securitydlg.ui:96
@@ -10453,32 +10453,32 @@ msgstr ""
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:107
 #, kde-format
 msgid "Field Delimiter"
-msgstr ""
+msgstr "ველის გამყოფი"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_fieldDelimiter)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:129
 #, kde-format
 msgid "semiColon (;)"
-msgstr ""
+msgstr "წერტილმძიმე (;)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_fieldDelimiter)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:134
 #, kde-format
 msgid "colon (:)"
-msgstr ""
+msgstr "ორიწერტილი (:)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_fieldDelimiter)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:139
 #, kde-format
 msgid "tab (\\t)"
-msgstr ""
+msgstr "ტაბულაცია (\\t)"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSet_textDelim)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:150
 #, kde-format
 msgctxt "punctuation mark used as field delimiter"
 msgid "Text Delimiter"
-msgstr ""
+msgstr "ტექსტის გამყოფი"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_textDelimiter)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:167
@@ -10492,13 +10492,13 @@ msgstr ""
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:171
 #, kde-format
 msgid "quote (\")"
-msgstr ""
+msgstr "ბრჭყალი (\")"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_textDelimiter)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:176
 #, kde-format
 msgid "apostrophe (')"
-msgstr ""
+msgstr "აპოსტროფი (')"
 
 #. i18n: ectx: property (text), widget (QLabel, lblEncoding)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:187
@@ -10510,13 +10510,13 @@ msgstr "კოდირება"
 #: kmymoney/plugins/csv/import/transactiondlg.ui:14
 #, kde-format
 msgid "Transaction Type"
-msgstr ""
+msgstr "ტრანზაქციის ტიპი"
 
 #. i18n: ectx: property (text), widget (QLabel, label_title)
 #: kmymoney/plugins/csv/import/transactiondlg.ui:26
 #, kde-format
 msgid "Invalid Transaction Type"
-msgstr ""
+msgstr "ტრანზაქციის არასწორი ტიპი"
 
 #. i18n: ectx: property (text), widget (QLabel, label_info)
 #: kmymoney/plugins/csv/import/transactiondlg.ui:38
@@ -10532,7 +10532,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/transactiondlg.ui:80
 #, kde-format
 msgid "Select Transaction Type"
-msgstr ""
+msgstr "აირჩიეთ ტრანზაქციის ტიპი"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, cbActionTypes)
 #: kmymoney/plugins/csv/import/transactiondlg.ui:93
