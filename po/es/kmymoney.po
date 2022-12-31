@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-30 00:53+0000\n"
+"POT-Creation-Date: 2022-12-31 00:52+0000\n"
 "PO-Revision-Date: 2022-12-29 10:26+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -19123,35 +19123,35 @@ msgstr ""
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "No ha sido posible borrar la categoría: «%1». Motivo: %2"
 
-#: kmymoney/views/keditscheduledlg.cpp:120
+#: kmymoney/views/keditscheduledlg.cpp:123
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
 msgstr "El nombre es un campo requerido para un asiento programado"
 
-#: kmymoney/views/keditscheduledlg.cpp:123
+#: kmymoney/views/keditscheduledlg.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The account is a required field for a schedule"
 msgstr "La cuenta es un campo requerido para un asiento programado"
 
-#: kmymoney/views/keditscheduledlg.cpp:127
+#: kmymoney/views/keditscheduledlg.cpp:130
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "La categoría es un campo requerido para un asiento programado"
 
-#: kmymoney/views/keditscheduledlg.cpp:554
+#: kmymoney/views/keditscheduledlg.cpp:557
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "No ha sido posible añadir el asiento planificado: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:554
+#: kmymoney/views/keditscheduledlg.cpp:557
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Agregar asiento planificado"
 
-#: kmymoney/views/keditscheduledlg.cpp:590
+#: kmymoney/views/keditscheduledlg.cpp:593
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19166,14 +19166,14 @@ msgstr ""
 "fije una nueva fecha de último pago. ¿Desea fijar una nueva fecha de último "
 "pago?</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:595
+#: kmymoney/views/keditscheduledlg.cpp:598
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Reestablecer última fecha de pago"
 
-#: kmymoney/views/keditscheduledlg.cpp:604
-#: kmymoney/views/keditscheduledlg.cpp:620
-#: kmymoney/views/keditscheduledlg.cpp:630
+#: kmymoney/views/keditscheduledlg.cpp:607
+#: kmymoney/views/keditscheduledlg.cpp:623
+#: kmymoney/views/keditscheduledlg.cpp:633
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "No ha sido posible modificar el asiento planificado «%1»"

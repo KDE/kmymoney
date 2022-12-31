@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-30 00:53+0000\n"
+"POT-Creation-Date: 2022-12-31 00:52+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -19261,20 +19261,20 @@ msgstr "Nem lehet törölni a <b>%1</b> alkategóriáját. Ok: %2"
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Nem lehet törölni a <b>%1</b> kategóriát. Ok: %2"
 
-#: kmymoney/views/keditscheduledlg.cpp:120
+#: kmymoney/views/keditscheduledlg.cpp:123
 #, fuzzy, kde-format
 #| msgid "No name assigned for schedule"
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
 msgstr "Nincs név hozzárendelve az ütemezéshez"
 
-#: kmymoney/views/keditscheduledlg.cpp:123
+#: kmymoney/views/keditscheduledlg.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The account is a required field for a schedule"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:127
+#: kmymoney/views/keditscheduledlg.cpp:130
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip"
@@ -19282,17 +19282,17 @@ msgid "The category is a required field for a schedule"
 msgstr ""
 "Nem lehet ebben a kontextusban létrehozni tranzakciókat a kategóriának."
 
-#: kmymoney/views/keditscheduledlg.cpp:554
+#: kmymoney/views/keditscheduledlg.cpp:557
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Nem lehet hozzáadni az ütemezett tranzakciót: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:554
+#: kmymoney/views/keditscheduledlg.cpp:557
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Ütemezett tranzakció hozzáadása"
 
-#: kmymoney/views/keditscheduledlg.cpp:590
+#: kmymoney/views/keditscheduledlg.cpp:593
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19313,14 +19313,14 @@ msgstr ""
 "hacsak az utolsó fizetés dátumát vissza nem állítja.  Vissza szeretné "
 "állítani az utolsó fizetési dátumot?"
 
-#: kmymoney/views/keditscheduledlg.cpp:595
+#: kmymoney/views/keditscheduledlg.cpp:598
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Utolsó fizetési dátum visszaállítása"
 
-#: kmymoney/views/keditscheduledlg.cpp:604
-#: kmymoney/views/keditscheduledlg.cpp:620
-#: kmymoney/views/keditscheduledlg.cpp:630
+#: kmymoney/views/keditscheduledlg.cpp:607
+#: kmymoney/views/keditscheduledlg.cpp:623
+#: kmymoney/views/keditscheduledlg.cpp:633
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Nem lehet módosítani a(z) „%1” ütemezett tranzakciót"

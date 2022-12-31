@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-30 00:53+0000\n"
+"POT-Creation-Date: 2022-12-31 00:52+0000\n"
 "PO-Revision-Date: 2022-12-13 19:20+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -19255,35 +19255,35 @@ msgstr ""
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Impossible de supprimer la catégorie <b>%1</b>. Raison : %2"
 
-#: kmymoney/views/keditscheduledlg.cpp:120
+#: kmymoney/views/keditscheduledlg.cpp:123
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
 msgstr "Le nom est un champ nécessaire pour la planification."
 
-#: kmymoney/views/keditscheduledlg.cpp:123
+#: kmymoney/views/keditscheduledlg.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The account is a required field for a schedule"
 msgstr "Le compte est un champ nécessaire pour la planification."
 
-#: kmymoney/views/keditscheduledlg.cpp:127
+#: kmymoney/views/keditscheduledlg.cpp:130
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "La catégorie est un champ nécessaire pour la planification."
 
-#: kmymoney/views/keditscheduledlg.cpp:554
+#: kmymoney/views/keditscheduledlg.cpp:557
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Impossible d'ajouter l'opération récurrente : %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:554
+#: kmymoney/views/keditscheduledlg.cpp:557
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Ajouter une opération récurrente"
 
-#: kmymoney/views/keditscheduledlg.cpp:590
+#: kmymoney/views/keditscheduledlg.cpp:593
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19297,14 +19297,14 @@ msgstr ""
 "d'échéance à la prochaine date à moins que la date du dernier paiement soit "
 "réinitialisée. Voulez-vous réinitialiser la date du dernier paiement ?</qt>"
 
-#: kmymoney/views/keditscheduledlg.cpp:595
+#: kmymoney/views/keditscheduledlg.cpp:598
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Réinitialisation de la date du dernier versement"
 
-#: kmymoney/views/keditscheduledlg.cpp:604
-#: kmymoney/views/keditscheduledlg.cpp:620
-#: kmymoney/views/keditscheduledlg.cpp:630
+#: kmymoney/views/keditscheduledlg.cpp:607
+#: kmymoney/views/keditscheduledlg.cpp:623
+#: kmymoney/views/keditscheduledlg.cpp:633
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Impossible de modifier l'opération récurrente « %1 »"

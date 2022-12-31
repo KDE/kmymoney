@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-30 00:53+0000\n"
+"POT-Creation-Date: 2022-12-31 00:52+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -18859,36 +18859,36 @@ msgstr ""
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Nepavyksta pakeisti tvarkaraščio: "
 
-#: kmymoney/views/keditscheduledlg.cpp:120
+#: kmymoney/views/keditscheduledlg.cpp:123
 #, fuzzy, kde-format
 #| msgid "No name assigned for schedule"
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
 msgstr "Tvarkaraščiui nepriskirtas vardas"
 
-#: kmymoney/views/keditscheduledlg.cpp:123
+#: kmymoney/views/keditscheduledlg.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The account is a required field for a schedule"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:127
+#: kmymoney/views/keditscheduledlg.cpp:130
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:554
+#: kmymoney/views/keditscheduledlg.cpp:557
 #, fuzzy, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Nepavyksta pakeisti tvarkaraščio: "
 
-#: kmymoney/views/keditscheduledlg.cpp:554
+#: kmymoney/views/keditscheduledlg.cpp:557
 #, fuzzy, kde-format
 msgid "Add scheduled transaction"
 msgstr "Įvesti operaciją pagal tvarkaraštį"
 
-#: kmymoney/views/keditscheduledlg.cpp:590
+#: kmymoney/views/keditscheduledlg.cpp:593
 #, kde-format
 msgid ""
 "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -18898,14 +18898,14 @@ msgid ""
 "</qt>"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:595
+#: kmymoney/views/keditscheduledlg.cpp:598
 #, fuzzy, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Pranešimo data:"
 
-#: kmymoney/views/keditscheduledlg.cpp:604
-#: kmymoney/views/keditscheduledlg.cpp:620
-#: kmymoney/views/keditscheduledlg.cpp:630
+#: kmymoney/views/keditscheduledlg.cpp:607
+#: kmymoney/views/keditscheduledlg.cpp:623
+#: kmymoney/views/keditscheduledlg.cpp:633
 #, fuzzy, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Nepavyksta pakeisti tvarkaraščio: "

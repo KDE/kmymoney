@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-30 00:53+0000\n"
+"POT-Creation-Date: 2022-12-31 00:52+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -19706,37 +19706,37 @@ msgstr "Kan ikke slette en underkategori til kategorien <b>%1</b>. Årsag: %2"
 msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Kan ikke slette kategorien <b>%1</b>. Årsag: %2"
 
-#: kmymoney/views/keditscheduledlg.cpp:120
+#: kmymoney/views/keditscheduledlg.cpp:123
 #, fuzzy, kde-format
 #| msgid "No name assigned for schedule"
 msgctxt "@info:tooltip"
 msgid "The name is a required field for a schedule"
 msgstr "Intet navn tildelt skemaet"
 
-#: kmymoney/views/keditscheduledlg.cpp:123
+#: kmymoney/views/keditscheduledlg.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The account is a required field for a schedule"
 msgstr ""
 
-#: kmymoney/views/keditscheduledlg.cpp:127
+#: kmymoney/views/keditscheduledlg.cpp:130
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip"
 msgid "The category is a required field for a schedule"
 msgstr "Kan ikke oprette transaktioner i en kategoris kontekst."
 
-#: kmymoney/views/keditscheduledlg.cpp:554
+#: kmymoney/views/keditscheduledlg.cpp:557
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Kan ikke tilføje skemalagt transaktion: %1"
 
-#: kmymoney/views/keditscheduledlg.cpp:554
+#: kmymoney/views/keditscheduledlg.cpp:557
 #, kde-format
 msgid "Add scheduled transaction"
 msgstr "Tilføj skemalagt transaktion"
 
-#: kmymoney/views/keditscheduledlg.cpp:590
+#: kmymoney/views/keditscheduledlg.cpp:593
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have entered a scheduled transaction date of <b>%1</b>.  Because the "
@@ -19756,14 +19756,14 @@ msgstr ""
 "justere den skemalagte transaktionsdato til den næste dato, medmindre den "
 "seneste betalingsdato nulstilles. Vil du nulstille den seneste betalingsdato?"
 
-#: kmymoney/views/keditscheduledlg.cpp:595
+#: kmymoney/views/keditscheduledlg.cpp:598
 #, kde-format
 msgid "Reset Last Payment Date"
 msgstr "Nulstil seneste betalingsdato"
 
-#: kmymoney/views/keditscheduledlg.cpp:604
-#: kmymoney/views/keditscheduledlg.cpp:620
-#: kmymoney/views/keditscheduledlg.cpp:630
+#: kmymoney/views/keditscheduledlg.cpp:607
+#: kmymoney/views/keditscheduledlg.cpp:623
+#: kmymoney/views/keditscheduledlg.cpp:633
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
 msgstr "Kan ikke ændre skemalagt transaktion \"%1\""
