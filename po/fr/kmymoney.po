@@ -12,14 +12,15 @@
 # Pascal Billery-Schneider <pascal.billery-schneider@laposte.net>, 2014.
 # Johnny Jazeix <jazeix@gmail.com>, 2020.
 # jaaf, 2011.
+# Xavier BESNARD <xavier.besnard]neuf.fr>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-31 00:52+0000\n"
-"PO-Revision-Date: 2022-12-13 19:20+0100\n"
-"Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"POT-Creation-Date: 2023-01-01 00:58+0000\n"
+"PO-Revision-Date: 2022-12-31 10:44+0100\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
+"Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2923,20 +2924,37 @@ msgid "SQL"
 msgstr "SQL"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KSaveAsQuestion)
-#: kmymoney/dialogs/ksaveasquestion.ui:14
+#: kmymoney/dialogs/ksaveasquestion.ui:20
 #, kde-format
 msgid "Save storage as..."
 msgstr "Enregistrer le stockage sous…"
 
 #. i18n: ectx: property (toolTip), widget (QDialog, KSaveAsQuestion)
-#: kmymoney/dialogs/ksaveasquestion.ui:17
+#: kmymoney/dialogs/ksaveasquestion.ui:23
 #, kde-format
 msgid "Choose XML if unsure."
 msgstr "Choisissez XML si vous n'êtes pas certain."
 
 #. i18n: ectx: property (html), widget (QTextBrowser, textBrowser)
-#: kmymoney/dialogs/ksaveasquestion.ui:34
-#, kde-format
+#: kmymoney/dialogs/ksaveasquestion.ui:52
+#, fuzzy, kde-format
+#| msgid ""
+#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#| "REC-html40/strict.dtd\">\n"
+#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#| "css\">\n"
+#| "p, li { white-space: pre-wrap; }\n"
+#| "</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; "
+#| "font-weight:400; font-style:normal;\">\n"
+#| "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#| "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#| "\">KMyMoney supports multiple storage types. The availability of storage "
+#| "types depends on the presence of plugins and their activation in the "
+#| "application settings.</p>\n"
+#| "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
+#| "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /"
+#| ">If you are uncertain what to choose here, then <span style=\" font-"
+#| "weight:600;\">XML</span> is probably your best choice.</p></body></html>"
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
 "REC-html40/strict.dtd\">\n"
@@ -2945,15 +2963,13 @@ msgid ""
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-"
 "weight:400; font-style:normal;\">\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
-"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">KMyMoney "
-"supports multiple storage types. The availability of storage types depends "
-"on the presence of plugins and their activation in the application settings."
-"</p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
-"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br />If "
-"you are uncertain what to choose here, then <span style=\" font-weight:600;"
-"\">XML</span> is probably your best choice.</p></body></html>"
+"<p align=\"justify\" style=\" margin: 0; -qt-block-indent:0; text-indent:0px;"
+"\">KMyMoney supports multiple storage types. The availability of storage "
+"types depends on the presence of plugins and their activation in the "
+"application settings.</p>\n"
+"<p align=\"justify\" style=\" margin: 0; -qt-block-indent:0; text-indent:0px;"
+"\"><br />If you are uncertain what to choose here, then <span style=\" font-"
+"weight:600;\">XML</span> is probably your best choice.</p></body></html>"
 msgstr ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
 "REC-html40/strict.dtd\">\n"
@@ -2973,7 +2989,7 @@ msgstr ""
 "style=\" font-weight:600;\">XML</span>.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: kmymoney/dialogs/ksaveasquestion.ui:50
+#: kmymoney/dialogs/ksaveasquestion.ui:68
 #, kde-format
 msgid "Storage type to use for your data"
 msgstr "Type de stockage à utiliser pour vos données"
@@ -21447,8 +21463,7 @@ msgid "Feedback content"
 msgstr "Contenus du retour d'information"
 
 #: kmymoney/widgets/ktagcontainer.cpp:110
-#, fuzzy, kde-format
-#| msgid "Tag"
+#, kde-format
 msgctxt "@info:placeholder tag combo box"
 msgid "Tag"
 msgstr "Étiquette"

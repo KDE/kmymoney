@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-31 00:52+0000\n"
+"POT-Creation-Date: 2023-01-01 00:58+0000\n"
 "PO-Revision-Date: 2009-10-17 16:25+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -2688,19 +2688,19 @@ msgid "SQL"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KSaveAsQuestion)
-#: kmymoney/dialogs/ksaveasquestion.ui:14
+#: kmymoney/dialogs/ksaveasquestion.ui:20
 #, fuzzy, kde-format
 msgid "Save storage as..."
 msgstr "Запазване като…"
 
 #. i18n: ectx: property (toolTip), widget (QDialog, KSaveAsQuestion)
-#: kmymoney/dialogs/ksaveasquestion.ui:17
+#: kmymoney/dialogs/ksaveasquestion.ui:23
 #, kde-format
 msgid "Choose XML if unsure."
 msgstr ""
 
 #. i18n: ectx: property (html), widget (QTextBrowser, textBrowser)
-#: kmymoney/dialogs/ksaveasquestion.ui:34
+#: kmymoney/dialogs/ksaveasquestion.ui:52
 #, kde-format
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
@@ -2710,19 +2710,17 @@ msgid ""
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-"
 "weight:400; font-style:normal;\">\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
-"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">KMyMoney "
-"supports multiple storage types. The availability of storage types depends "
-"on the presence of plugins and their activation in the application settings."
-"</p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
-"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br />If "
-"you are uncertain what to choose here, then <span style=\" font-weight:600;"
-"\">XML</span> is probably your best choice.</p></body></html>"
+"<p align=\"justify\" style=\" margin: 0; -qt-block-indent:0; text-indent:0px;"
+"\">KMyMoney supports multiple storage types. The availability of storage "
+"types depends on the presence of plugins and their activation in the "
+"application settings.</p>\n"
+"<p align=\"justify\" style=\" margin: 0; -qt-block-indent:0; text-indent:0px;"
+"\"><br />If you are uncertain what to choose here, then <span style=\" font-"
+"weight:600;\">XML</span> is probably your best choice.</p></body></html>"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: kmymoney/dialogs/ksaveasquestion.ui:50
+#: kmymoney/dialogs/ksaveasquestion.ui:68
 #, kde-format
 msgid "Storage type to use for your data"
 msgstr ""
