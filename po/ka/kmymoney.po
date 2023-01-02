@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-01 00:58+0000\n"
-"PO-Revision-Date: 2022-12-30 07:15+0100\n"
+"PO-Revision-Date: 2023-01-01 07:05+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1632,7 +1632,7 @@ msgstr ""
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:596
 #, kde-format
 msgid "Price Update Failed"
-msgstr ""
+msgstr "ფასის განახლების შეცდომა"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:571
 #, kde-format
@@ -1839,7 +1839,7 @@ msgstr ""
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:128
 #, kde-format
 msgid "Accounts/Categories"
-msgstr ""
+msgstr "ანგარიშები/კატეგორიები"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #. i18n: ectx: property (title), widget (QGroupBox, transactionGroup)
@@ -1922,7 +1922,7 @@ msgstr[1] ""
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:343
 #, kde-format
 msgid "Delete price information"
-msgstr ""
+msgstr "ფასის ინფორმაციის წაშლა"
 
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:390
 #, kde-format
@@ -1937,7 +1937,7 @@ msgstr "ფასის ჩასწორება..."
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:392
 #, kde-format
 msgid "Online Price Update..."
-msgstr ""
+msgstr "ფასის ონლაინ განახლება ..."
 
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:393
 #, kde-format
@@ -2089,7 +2089,7 @@ msgstr ""
 #: kmymoney/dialogs/knewaccountdlg.cpp:230
 #, kde-format
 msgid "VAT account"
-msgstr ""
+msgstr "დღგ ანგარიში"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:516 kmymoney/kmymoney.cpp:427
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
@@ -2155,7 +2155,7 @@ msgstr ""
 #: kmymoney/dialogs/knewaccountdlg.cpp:693
 #, kde-format
 msgid "Please select a parent account."
-msgstr ""
+msgstr "აირჩიეთ მშობელი ანგარიში."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:699
 #: kmymoney/dialogs/knewaccountdlg.cpp:858
@@ -2339,13 +2339,13 @@ msgstr ""
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:195
 #, kde-format
 msgid "Price entry"
-msgstr ""
+msgstr "ფასის ჩანაწერი"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxPreferred)
 #: kmymoney/dialogs/knewaccountdlg.ui:261
 #, kde-format
 msgid "Preferred Account"
-msgstr ""
+msgstr "სასურველი ანგარიში"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_costCenterRequiredCheckBox)
 #: kmymoney/dialogs/knewaccountdlg.ui:268
@@ -2449,7 +2449,7 @@ msgstr ""
 #: kmymoney/dialogs/knewaccountdlg.ui:482
 #, kde-format
 msgid "Absolute limit"
-msgstr ""
+msgstr "აბსოლუტური ლიმიტი"
 
 #. i18n: ectx: property (text), widget (QLabel, m_maxCreditLabel)
 #: kmymoney/dialogs/knewaccountdlg.ui:492
@@ -2461,7 +2461,7 @@ msgstr ""
 #: kmymoney/dialogs/knewaccountdlg.ui:523
 #, kde-format
 msgid "Minimum balance"
-msgstr ""
+msgstr "მინიმალური ბალანსი"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: kmymoney/dialogs/knewaccountdlg.ui:543
@@ -7641,7 +7641,7 @@ msgstr "უცნობი"
 #: kmymoney/mymoney/mymoneyschedule.cpp:1041
 msgctxt "Scheduled Transaction payment type"
 msgid "Direct debit"
-msgstr ""
+msgstr "პირდაპირი სესხი"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1044
 msgctxt "Scheduled Transaction payment type"
@@ -15323,7 +15323,7 @@ msgstr ""
 #, kde-format
 msgctxt "@item the columns will display quarterly data"
 msgid "Quarterly"
-msgstr ""
+msgstr "კვარტლურად"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:622
@@ -21087,7 +21087,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:76
 #, kde-format
 msgid "Direct debit"
-msgstr ""
+msgstr "პირდაპირი სესხი"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:77
 #, kde-format
@@ -21972,7 +21972,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:277
 #, kde-format
 msgid "Loan payment"
-msgstr ""
+msgstr "სესხის გადახდა"
 
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:296
 #, kde-format
