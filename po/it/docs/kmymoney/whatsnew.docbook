@@ -14,10 +14,10 @@
 >Correzione di bug e miglioramenti delle funzionalità</title>
 
 <para
->Come per ogni rilascio, la squadra di sviluppo di &kmymoney; ha lavorato duramente per rendere questa versione migliore e più facile da usare in ogni modo. Questa è la quarta versione della serie 5.0, e la maggior parte dell'attività è stata indirizzata alla correzione dei bug. </para>
+>Come per ogni rilascio, la squadra di sviluppo di &kmymoney; ha lavorato duramente per rendere questa versione migliore e più facile da usare in ogni modo. Questa è la quarta versione della serie 5.1, e la maggior parte dell'attività è stata indirizzata alla correzione dei bug. </para>
 
 <para
->A questo punto, la conversione a &kde-frameworks; è praticamente completa. M Molte delle librerie sottostanti utilizzate dall'applicazione sono state riorganizzate e migliorate, ma, per la gran parte, è lavoro dietro le scene, e non direttamente visibile all'utente finale. L'aspetto generale dovrebbe essere stabile, anche se possono esserci ancora piccoli cambiamenti. La funzionalità di base del programma rimane la stessa, oltre a miglioramenti e aggiunte intenzionali. </para>
+>A questo punto, la conversione a &kde-frameworks; è praticamente completa, anche se questo e il lavoro di aggiornamento di molte librerie sottostanti utilizzate dall'applicazione sono dietro le quinte e non direttamente visibile all'utente finale. L'aspetto generale dovrebbe essere stabile, anche se possono esserci ancora piccoli cambiamenti. La funzionalità di base del programma rimane la stessa, oltre a miglioramenti e aggiunte intenzionali. </para>
 
 <para
 >Nelle versioni precedenti, questa pagina del manuale ha incluso un elenco di molte correzioni di bug e miglioramenti funzionali. Tuttavia, invece che duplicare queste informazioni, è possibile trovarle direttamente nelle <ulink url="https://kmymoney.org/changelog.html"
@@ -25,14 +25,14 @@
 >. </para>
 
 <para
->Dal rilascio della versione 5.0, ci sono stati alcuni cambiamenti che avranno bisogno di modifiche lato utente se si sta aggiornando dalla 4.8.x o da una versione più datata. </para>
+>Dal rilascio della versione 5.0, ci sono stati alcuni cambiamenti che avranno bisogno di modifiche lato utente se si sta aggiornando dalla 4.8.x o da una versione più datata. Tuttavia, prevediamo che ormai la maggior parte degli utenti sia passata alla versione 5.x. </para>
 
 <itemizedlist>
   <listitem
 ><para
->Il programma cerca i modelli per l'estensione di stampa degli assegni in diverse posizioni. L'utente deve tener conto di ciò nella finestra di configurazione delle estensioni, <link linkend="details.settings.plugins"
->vedere questa sezione per ulteriori dettagli.</link
-> </para
+>Da qualche tempo, il programma cerca i modelli per l'estensione  di stampa degli assegni in posizioni diverse rispetto a prima. Se questo è ancora un problema per te, devi tenerne conto nella finestra delle impostazioni delle estensioni, <link linkend="details.settings.plugins"
+>consulta questa sezione per maggiori dettagli</link
+>. </para
 ></listitem>
 </itemizedlist>
 </sect1>
@@ -45,7 +45,7 @@
 >Mentre continuiamo a sviluppare, ci sono ancora capitoli di questo manuale che non stono stati aggiornati per riflettere tutte le modifiche nel programma visibili all'utente, a partire dalla versione 5.0. Ogni capitolo identifica la versione di &kmymoney; per la quale è stato aggiornato, ma presentiamo qui l'elenco completo, come riferimento rapido. </para>
 
 <para
->Notare tuttavia che la misura in cui i capitoli che non sono stati aggiornati esplicitamente per riflettere o meno il funzionamento attuale del programma dipende da quanto quell'area del programma è cambiata tra la versione 4.8 e la 5.0. </para>
+>Notare tuttavia che la misura in cui i capitoli che non sono stati aggiornati esplicitamente per riflettere o meno il funzionamento attuale del programma dipende da quanto quell'area del programma è cambiata tra le versioni 4.8, 5.0 e 5.1. </para>
   
 <informaltable frame="none">
   <tgroup cols="2">
@@ -118,6 +118,10 @@
 >Impostazioni</link
 ></member>
 	    <member
+><link linkend="faq"
+>Domande e risposte</link
+></member>
+	    <member
 ><link linkend="reference.menus"
 >Riferimento: menu</link
 ></member>
@@ -168,10 +172,6 @@
 	    <member
 ><link linkend="details.database"
 >Banca dati</link
-></member>
-	    <member
-><link linkend="faq"
->Domande e risposte</link
 ></member>
 	    <member
 ><link linkend="reference.widgets"

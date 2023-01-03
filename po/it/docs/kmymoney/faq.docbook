@@ -6,16 +6,16 @@
 >&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->30/08/2014</date>
+>10/12/2022</date>
   <releaseinfo
->4.7.01</releaseinfo>
+>5.1.3</releaseinfo>
 </chapterinfo>
 
 <title
 >Domande e risposte</title>
 
 <para
->Questo capitolo tratta varie questioni che causano spesso confusione, specialmente tra i nuovi utenti di &kmymoney;. Se noti &kmymoney; fare qualcosa che non comprendi (o non fare qualcosa che ti aspetti), guarda questo elenco prima di chiedere aiuto in una delle liste di distribuzione. Se il tuo problema non è riportato qui, fai riferimento alla sezione <link linkend="firsttime.contact"
+>Questo capitolo tratta varie questioni che causano spesso confusione, specialmente tra i nuovi utenti di &kmymoney;. Se noti &kmymoney; fare qualcosa che non comprendi (o non fare qualcosa che ti aspetti), controlla questo elenco prima di chiedere aiuto in una delle liste di distribuzione. Se il tuo problema non è menzionato, fai riferimento alla sezione <link linkend="firsttime.contact"
 >ottenere aiuto</link
 >. </para>
 
@@ -32,9 +32,11 @@
  </question>
  <answer>
    <para
->Ci sono varie ragioni per cui &kmymoney; può chiudersi in modo inatteso o restituire un errore al posto di avviarsi normalmente. Per prima cosa, è necessario determinare se il problema è nel programma o nei dati. Quindi, prova ad <link linkend="firsttime.launch"
->aprire &kmymoney;</link
-> senza aprire il tuo file di dati. Se l'applicazione si apre, ma si chiude in modo inatteso all'apertura del file di dati, prova a caricare una versione precedente del file di dati. (Hai fatto delle copie di sicurezza, vero?)</para>
+>Ci sono molte ragioni per cui &kmymoney; potrebbe arrestarsi in modo anomalo o restituire un errore invece di avviarsi normalmente. A volte viene mostrato un messaggio di errore, ma in caso contrario, è possibile eseguire &kmymoney; da una riga di comando, per vedere se nella console vengono inviate informazioni utili. Su &Linux;, questo significa semplicemente digitare «kmymoney» in una shell. &macOS; dovrebbe essere simile. Su &Windows;, sarà necessario digitare il percorso completo del file &kmymoney; eseguibile.</para>
+   <para
+>Se questo non mostra la causa del problema, è necessario determinare se c'è un problema con il software o con i dati. Per fare questo, si deve <link linkend="firsttime.launch"
+>avviare &kmymoney;</link
+> senza aprire il proprio file di dati. Se l'applicazione si avvia, ma si arresta in modo anomalo quando si tenta di caricare il file di dati, provare a caricare una copia precedente del file. (Hai fatto un backup, vero?)</para>
    <para
 >Se &kmymoney; si chiude in modo inatteso all'avvio senza aprire un file di dati, ci potrebbe essere un problema con la propria installazione. Consultare la sezione relativa a come <link linkend="firsttime.contact"
 >ottenere aiuto</link
@@ -124,16 +126,20 @@
  </question>
  <answer>
    <para
->È possibile cambiare facilmente il tipo di un conto tra pagamento, risparmi e contante. Invece, per come le informazioni del conto vengono memorizzate da &kmymoney;, non sono permessi altri cambiamenti di tipo. Per risolvere il problema si può creare un nuovo conto del tipo desiderato, spostare tutte le transazioni dal vecchio al nuovo conto e poi cancellare il vecchio conto.</para>
-   <!-- this should have links to the sections on new acct, move transactions,
-        delete account. -->
+>È possibile cambiare facilmente il tipo di un conto tra pagamento, risparmi e contante. Tuttavia, per come le informazioni del conto vengono memorizzate da &kmymoney;, non sono consentiti altri cambiamenti del tipo di conto. Per risolvere il problema si può <link linkend="details.accounts.create"
+>creare un nuovo conto del tipo corretto</link
+>, spostare tutte le transazioni dal vecchio al nuovo conto e poi <link linkend="details.accounts.delete"
+>eliminare il vecchio conto.</link
+></para>
+   <!-- this still needs a link to the section on moving transactions, which
+        does not yet exist. -->
  </answer>
 </qandaentry>
 
 <qandaentry>
  <question>
    <para
->Ho un prestito con interesse dello 0%, ma ottengo un errore nella procedura guidata per i prestiti, che non mi lascia usare questo valore.</para>
+>Ho un prestito con interesse dello 0%, ma ottengo un errore nella procedura guidata Nuovo prestito, che non mi lascia usare questo valore.</para>
  </question>
  <answer>
    <para
@@ -173,7 +179,7 @@
  </question>
  <answer>
    <para
->Non c'è una funzione globale di ricerca e sostituzione in &kmymoney;. Ad ogni modo, è possibile cambiare facilmente il nome di un beneficiario: nella vista Beneficiari, selezionare la voce da modificare, fare clic con il &RMB; sul beneficiario e selezionare <guimenuitem
+>Non c'è una funzione globale di ricerca e sostituzione in &kmymoney;. Ad ogni modo, è possibile cambiare facilmente il nome di un beneficiario: nella vista Beneficiari, selezionare la voce da modificare. Fare clic con il &RMB; sul beneficiario e selezionare <guimenuitem
 >Rinomina beneficiario</guimenuitem
 > dal menu contestuale. Digitare il nuovo nome.  Poiché le transazioni utilizzano solo un riferimento al record del beneficiario, tutte le transazioni visualizzeranno il nuovo nome.</para>
  </answer>
@@ -186,7 +192,7 @@
  </question>
  <answer>
    <para
->Per eliminare un conto, &kmymoney; non può avere altri riferimenti a esso. Ciò significa che è necessario eliminare tutte le transazioni, o spostarle in un altro conto. Se non è ancora possibile eliminare un conto, potrebbero esserci transazioni pianificate che si riferiscono al conto, non visibili nel registro. Sarà necessario eliminare qualsiasi transazione futura e la pianificazione stessa o spostarle in un altro conto.</para>
+>Per eliminare un conto, &kmymoney; non può avere altri riferimenti a esso. Ciò significa che è necessario eliminare tutte le transazioni da quel conto o spostarle in un altro conto. Se non è ancora possibile eliminare un conto, potrebbero esserci transazioni pianificate che si riferiscono al conto, non visibili nel registro. Sarà necessario eliminare qualsiasi transazione futura e la pianificazione stessa o spostarle in un altro conto.</para>
  </answer>
 </qandaentry>
 
@@ -203,11 +209,12 @@
  </question>
  <answer>
    <para
->Ecco alcune fonti esterne che potrebbero fornire ulteriori informazioni: <ulink url="https://ofxblog.wordpress.com/"
->OFX Blog</ulink
-> e <ulink url="https://www.ofxhome.com/"
+>La ricerca sul web con domande specifiche a volte può fornire risultati utili, ma c'è ancora un sito che potrebbe darti maggiori informazioni: <ulink url="https://www.ofxhome.com/"
 >OFX Home</ulink
 >.</para>
+   <!-- <ulink url="https://ofxblog.wordpress.com/"
+>OFX Blog</ulink
+> -->
  </answer>
 </qandaentry>
 
@@ -241,9 +248,9 @@
  </question>
  <answer>
    <para
->L'uso del nome KMyMoney2 risale alla transizione da &kde; 1 a &kde; 2 avvenuta diversi anni fa. Per evitare di cambiare il nome ad ogni rilascio di &kde;, abbiamo deciso di usare il nome &kmymoney;.</para>
-   <para
->La prima versione di &kmymoney; considerata abbastanza stabile aveva la versione 1.0, anche se era per &kde; 3. Dato che il progetto si sta allineando sempre più a &kde;, abbiamo deciso di usare lo stesso numero di versione.</para>
+>L'uso del nome KMyMoney2 risale alla transizione da &kde; 1 a &kde; 2 avvenuta diversi anni fa. Per evitare di cambiare il nome ad ogni rilascio di &kde;, abbiamo deciso di usare il nome &kmymoney;.</para
+> <para
+>La prima versione di &kmymoney; considerata sufficientemente stabile aveva la versione 1.0, anche se era per &kde; 3. Dato che il progetto si sta allineando sempre più a &kde;, abbiamo deciso di usare lo stesso numero di versione principale.</para>
  </answer>
 </qandaentry>
 

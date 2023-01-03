@@ -390,6 +390,27 @@
 >OK</guibutton
 > per salvare l'intera transazione. Se una parte dell'importo non è ancora assegnata, verrà chiesto se si vogliono modificare le suddivisioni, modificare l'importo totale della transazione o lasciare una parte della transazione non assegnata. </para>
 
+<para>
+	<screenshot>
+	<screeninfo
+>Suddivisione con importo non assegnato</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="split_unasigned.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Suddivisione con importo non assegnato</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Per ridistribuire un importo «Non assegnato» o «Sovra-assegnato», seleziona un elemento suddiviso che deve essere rettificato. Dopodiché fai clic sul pulsante <guibutton
+>Applica differenza</guibutton
+>. Se in precedenza era mostrato «Non assegnato» e diverso da zero, tale importo sarà aggiunto al valore dell'elemento della riga selezionata. Se in precedenza era mostrato «Sovra-assegnato» e diverso da zero, tale importo sarà sottratto dal valore dell'elemento della riga selezionata. Di conseguenza, l'importo «Non assegnato» sarà impostato a zero e una transazione potrà essere salvata correttamente. </para>
+
 <para
 >Notare che il campo categoria nel modulo delle transazioni o l'elenco delle transazioni ora visualizzano <emphasis
 >Transazione divisa</emphasis
@@ -618,4 +639,3 @@
 >, è possibile cambiare i dettagli del conto. Esiste anche una voce di menu per aprire il menu di riconciliazione, che permette di far corrispondere le transazioni inserite con quelle di un estratto conto di un conto corrente o di una carta di credito. </para>
 </sect1>
 </chapter>
-

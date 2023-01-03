@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-01 00:58+0000\n"
-"PO-Revision-Date: 2023-01-01 07:05+0100\n"
+"PO-Revision-Date: 2023-01-02 05:31+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1081,7 +1081,7 @@ msgstr "ახალი ვალუტა"
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:211
 #, kde-format
 msgid "Cannot modify currency. %1"
-msgstr ""
+msgstr "ვალუტის ჩასწორების შეცდომა. %1"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:211
 #, kde-format
@@ -1113,7 +1113,7 @@ msgstr "ვალუტის მორგება"
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:648
 #, kde-format
 msgid "Cannot delete currency %1. %2"
-msgstr ""
+msgstr "ვალუტის %1 წაშლის შეცდომა. %2"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KCurrencyEditDlg)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:14
@@ -1169,7 +1169,7 @@ msgstr "ჩასწორება"
 #, kde-format
 msgctxt "@action:button"
 msgid "Remove unused currencies"
-msgstr ""
+msgstr "გამოუყენებელი ვალუტების წაშლა"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_closeButton)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:102
@@ -1183,7 +1183,7 @@ msgstr "დახურვა"
 #, kde-format
 msgctxt "@action:button"
 msgid "Select as base currency"
-msgstr ""
+msgstr "საბაზისო ვალუტად გამოყენება"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_newCurrencyButton)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:116
@@ -1214,13 +1214,13 @@ msgstr "სიმბოლო:"
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:39
 #, kde-format
 msgid "Smallest account unit:"
-msgstr ""
+msgstr "მინიმალური ანგარიშის ერთეული:"
 
 #. i18n: ectx: property (text), widget (QLabel, lblAccountFraction)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:46
 #, kde-format
 msgid "Smallest cash unit:"
-msgstr ""
+msgstr "მინიმალური ქეშის ერთეული:"
 
 #. i18n: ectx: property (text), widget (QLabel, lblRemainder)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:53
