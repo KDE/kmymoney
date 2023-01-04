@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-01 00:58+0000\n"
-"PO-Revision-Date: 2023-01-02 05:31+0100\n"
+"PO-Revision-Date: 2023-01-03 08:37+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1102,7 +1102,7 @@ msgstr "ვალუტის წაშლა"
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
 #, kde-format
 msgid "Select as base currency"
-msgstr ""
+msgstr "საბაზისო ვალუტად გამოყენება"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:517
 #, kde-format
@@ -14493,7 +14493,7 @@ msgstr "ისტორია"
 #, kde-format
 msgctxt "Unknown forecast method"
 msgid "Unknown"
-msgstr ""
+msgstr "უცნობ"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:196
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:284
@@ -20468,7 +20468,7 @@ msgstr ""
 #: kmymoney/widgets/transactionsortoption.cpp:30
 msgctxt "Unknown sort order"
 msgid "Unknown"
-msgstr ""
+msgstr "უცნობ"
 
 #: kmymoney/widgets/transactionsortoption.cpp:31
 msgid "Post date"

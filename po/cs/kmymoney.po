@@ -3,7 +3,7 @@
 # Vít Pelčák <vit@pelcak.org>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017.
 # Petr Bravenec <spravce@solartec.cz>, 2010.
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012, 2013.
-# Vit Pelcak <vpelcak@suse.cz>, 2015, 2018, 2019, 2020, 2021.
+# Vit Pelcak <vit@pelcak.org>, 2015, 2018, 2019, 2020, 2021.
 #
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-01 00:58+0000\n"
 "PO-Revision-Date: 2021-08-16 12:37+0200\n"
-"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -177,13 +177,12 @@ msgid "(Fees) %1"
 msgstr "(Poplatky) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1022
-#, fuzzy, kde-format
-#| msgid "Additional Fees: %1"
+#, kde-format
 msgctxt "Prepend name of payee (%1) to orignal memo (%2)"
 msgid ""
 "Original payee: %1\n"
 "%2"
-msgstr "Další poplatky: %1"
+msgstr ""
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1030
 #, kde-format
@@ -2784,18 +2783,7 @@ msgstr ""
 
 #. i18n: ectx: property (html), widget (QTextBrowser, textBrowser)
 #: kmymoney/dialogs/ksaveasquestion.ui:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#| "REC-html40/strict.dtd\">\n"
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#| "\"><br /></p></body></html>"
+#, kde-format
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
 "REC-html40/strict.dtd\">\n"
@@ -2812,16 +2800,6 @@ msgid ""
 "\"><br />If you are uncertain what to choose here, then <span style=\" font-"
 "weight:600;\">XML</span> is probably your best choice.</p></body></html>"
 msgstr ""
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-"REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
-"\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-"
-"weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-"\"><br /></p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/ksaveasquestion.ui:68
@@ -2981,10 +2959,9 @@ msgstr "Používat systémové fonty"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_individualFontsFrame)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:27
-#, fuzzy, kde-format
-#| msgid "Individual font settings"
+#, kde-format
 msgid "Individual font settings for ledgers"
-msgstr "Vlastní nastavení písem"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (listCellFont), group (List Options)
@@ -3585,11 +3562,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:316
-#, fuzzy, kde-format
-#| msgid "Quote source: %1"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete quote source"
-msgstr "Zdroj kurzu: %1"
+msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, groupParsing)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:36
@@ -4481,11 +4457,10 @@ msgid "The file has been changed, save it?"
 msgstr "Soubor byl změněn. Přejete si jej uložit?"
 
 #: kmymoney/kmymoney.cpp:513
-#, fuzzy, kde-format
-#| msgid "Save to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save file"
-msgstr "Uložit do souboru"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:885
 #, kde-format
@@ -5378,11 +5353,10 @@ msgstr ""
 "Prosím, klikněte na Zrušit, pokud si nepřejete účet vytvořit."
 
 #: kmymoney/kmymoney.cpp:3757
-#, fuzzy, kde-format
-#| msgid "Opening balance problem"
+#, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
-msgstr "Problém s počátečním zůstatkem"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:3768
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
@@ -5951,17 +5925,13 @@ msgid "Uncaught error. Please report the details to the developers"
 msgstr ""
 
 #: kmymoney/misc/kmmyesno.cpp:21
-#, fuzzy, kde-format
-#| msgctxt "Is this a tax account?"
-#| msgid "Yes"
+#, kde-format
 msgctxt "@action:button"
 msgid "Yes"
 msgstr "Ano"
 
 #: kmymoney/misc/kmmyesno.cpp:26
-#, fuzzy, kde-format
-#| msgctxt "@item no payments were entered for a loan"
-#| msgid "No"
+#, kde-format
 msgctxt "@action:button"
 msgid "No"
 msgstr "Ne"
@@ -8272,14 +8242,10 @@ msgid "Security"
 msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:55
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@title:column Indicates whether a Cost Center assignment is necessary "
-#| "when entering a transaction"
-#| msgid "CC"
+#, kde-format
 msgctxt "@title:column Costcenter"
 msgid "CC"
-msgstr "Kopie"
+msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:56
 #, kde-format
@@ -8343,33 +8309,28 @@ msgid "Entry"
 msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:68
-#, fuzzy, kde-format
-#| msgid "Number"
+#, kde-format
 msgctxt "@title:column Cheque Number (ext)"
 msgid "Number"
-msgstr "Číslo"
+msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "Ledger marker showing a reconciliation entry"
-#| msgid "Reconciliation"
+#, kde-format
 msgctxt "@title:column Reconciliation state (ext)"
 msgid "Reconciliation"
-msgstr "Rozvaha"
+msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:70
-#, fuzzy, kde-format
-#| msgid "Costcenter"
+#, kde-format
 msgctxt "@title:column CostCenter (ext)"
 msgid "Cost center"
-msgstr "Nákladové středisko"
+msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:71
-#, fuzzy, kde-format
-#| msgid "Entry order"
+#, kde-format
 msgctxt "@title:column Entry date (ext)"
 msgid "Entry date"
-msgstr "Pořadí zadání"
+msgstr ""
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:97
 #, kde-format
@@ -12879,11 +12840,10 @@ msgid "Do you really want to delete profile '%1'?"
 msgstr "Opravdu si přejete smazat profil \"%1\"?"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:416
-#, fuzzy, kde-format
-#| msgid "The default QIF profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete QIF profile"
-msgstr "Výchozí profil QIF"
+msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabGeneral)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:53
@@ -14178,11 +14138,10 @@ msgid "Do you really want to remove all selected budgets?"
 msgstr "Opravdu si přejete odstranit všechny vybrané rozpočty?"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:119
-#, fuzzy, kde-format
-#| msgid "Remove Budget"
+#, kde-format
 msgctxt "@title:window "
 msgid "Remove Budget"
-msgstr "Odstranit rozpočet"
+msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:138
 #, kde-format
@@ -18174,11 +18133,10 @@ msgid "Security for this transaction"
 msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:530
-#, fuzzy, kde-format
-#| msgid "Use this button to record this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
-msgstr "Použijte toto tlačítko pro zaznamenání transakce"
+msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:533
 #, kde-format
@@ -18466,11 +18424,10 @@ msgstr "<qt>Opravdu si přejete odstranit kategorii <b>%1</b>?</qt>"
 
 #: kmymoney/views/kcategoriesview.cpp:330
 #: kmymoney/views/kcategoriesview.cpp:390
-#, fuzzy, kde-format
-#| msgid "Delete category..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete category"
-msgstr "Odstranit kategorii..."
+msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:339
 #, kde-format
@@ -18980,11 +18937,10 @@ msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr "<p>Opravdu si přejete odstranit instituci <b>%1</b>?</p>"
 
 #: kmymoney/views/kinstitutionsview.cpp:275
-#, fuzzy, kde-format
-#| msgid "Delete institution..."
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete institution"
-msgstr "Odstranit instituci...."
+msgstr ""
 
 #: kmymoney/views/kinstitutionsview.cpp:286
 #: kmymoney/views/kinstitutionsview.cpp:289
@@ -19120,11 +19076,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/kpayeesview.cpp:152
-#, fuzzy, kde-format
-#| msgid "Duplicate open"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate payee name"
-msgstr "Duplikovat otevřené"
+msgstr ""
 
 #: kmymoney/views/kpayeesview.cpp:176 kmymoney/views/kpayeesview.cpp:373
 #: kmymoney/views/kpayeesview.cpp:396
@@ -19439,11 +19394,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/kscheduledview.cpp:230
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
-msgstr "Vložit finanční plán"
+msgstr ""
 
 #: kmymoney/views/kscheduledview.cpp:238
 #, kde-format
@@ -19489,11 +19443,10 @@ msgstr ""
 "transakci později."
 
 #: kmymoney/views/kscheduledview_p.h:248
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Stop entering schedule"
-msgstr "Vložit finanční plán"
+msgstr ""
 
 #: kmymoney/views/kscheduledview_p.h:347
 #, kde-format
@@ -19505,11 +19458,10 @@ msgstr ""
 "b>?</qt>"
 
 #: kmymoney/views/kscheduledview_p.h:350
-#, fuzzy, kde-format
-#| msgid "Edit scheduled transaction"
+#, kde-format
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
-msgstr "Změnit naplánovanou transakci"
+msgstr ""
 
 #: kmymoney/views/kscheduledview_p.h:363
 #, kde-format
@@ -19600,11 +19552,10 @@ msgstr ""
 "jména. Opravdu si přejete značku pojmenovat právě takto?"
 
 #: kmymoney/views/ktagsview.cpp:379
-#, fuzzy, kde-format
-#| msgid "Duplicate open"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
-msgstr "Duplikovat otevřené"
+msgstr ""
 
 #: kmymoney/views/ktagsview.cpp:402 kmymoney/views/ktagsview.cpp:526
 #, kde-format
@@ -19654,11 +19605,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ktransactionselectdlg.cpp:114
-#, fuzzy, kde-format
-#| msgid "Create scheduled transaction..."
+#, kde-format
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
-msgstr "Vytvořit naplánovanou transakci..."
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14
@@ -19833,11 +19783,10 @@ msgid "Never reconciled"
 msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:134
-#, fuzzy, kde-format
-#| msgid "Investment: %1"
+#, kde-format
 msgctxt "@label:textbox Total value of investment"
 msgid "Investment value: %1%2"
-msgstr "Investice: %1"
+msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:138
 #: kmymoney/views/reconciliationledgerviewpage.cpp:352
@@ -20067,12 +20016,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/splitdialog.cpp:317
-#, fuzzy, kde-format
-#| msgctxt "Split editor summary"
-#| msgid "Unassigned"
+#, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
-msgstr "Nepřiřazeno"
+msgstr ""
 
 #: kmymoney/views/splitdialog.cpp:320
 #, kde-format
@@ -20130,10 +20077,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
 #: kmymoney/views/splitdialog.ui:671
-#, fuzzy, kde-format
-#| msgid "Difference"
+#, kde-format
 msgid "Apply Difference"
-msgstr "Rozdíl"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
 #: kmymoney/views/splitdialog.ui:678
@@ -20330,11 +20276,10 @@ msgid "Name"
 msgstr "Název"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
-#, fuzzy, kde-format
-#| msgid "Use this to open the profile editor"
+#, kde-format
 msgctxt "@info:tooltip icon in category to open the split editor"
 msgid "Click this icon to open the split editor"
-msgstr "Otevření editoru profilů"
+msgstr ""
 
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:69
 #, kde-format
@@ -20636,11 +20581,10 @@ msgid "Feedback content"
 msgstr ""
 
 #: kmymoney/widgets/ktagcontainer.cpp:110
-#, fuzzy, kde-format
-#| msgid "Tag"
+#, kde-format
 msgctxt "@info:placeholder tag combo box"
 msgid "Tag"
-msgstr "Značka"
+msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_textTab)
 #: kmymoney/widgets/ktransactionfilter.cpp:104
@@ -23370,11 +23314,10 @@ msgstr ""
 "veškeré dosud provedené změny. Přejete si pokračovat?"
 
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:286
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirmation"
-msgstr "Informace"
+msgstr "Potvrzení"
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:73
 #, kde-format
@@ -24275,9 +24218,3 @@ msgstr ""
 "\n"
 "<p>Veškeré informace jsou volitelně a používají se pouze pro zosobnění "
 "vašeho KMyMoney.</p>"
-
-#~ msgid "Always show a No. field"
-#~ msgstr "Vždy zobrazovat sloupec s číslem dokladu (Č.)"
-
-#~ msgid "Always show a No. field in transaction form"
-#~ msgstr "Ve formuláři transakce vždy zobrazovat pole s číslem dokladu (Č.)"
