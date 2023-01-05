@@ -136,7 +136,11 @@ public:
                                             balance.formatMoney(baseCurrency.tradingSymbol(), precision)));
         } else {
             ui->m_centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", clearedBalance.formatMoney("", precision)));
-            ui->m_rightLabel->setText(i18nc("@label:textbox Total balance", "Balance: %1", totalBalance.formatMoney("", precision)));
+            if (selections.count(SelectedObjects::JournalEntry) > 1) {
+                ui->m_rightLabel->setText(i18nc("@label:textbox Selected total", "%1: %2", QChar(0x2211), selectedTotal.formatMoney("", -1)));
+            } else {
+                ui->m_rightLabel->setText(i18nc("@label:textbox Total balance", "Balance: %1", totalBalance.formatMoney("", precision)));
+            }
         }
     }
 
@@ -163,6 +167,7 @@ public:
     QDate reconciliationDate;
     MyMoneyMoney totalBalance;
     MyMoneyMoney clearedBalance;
+    MyMoneyMoney selectedTotal;
     bool needModelInit;
     bool showEntryForNewTransaction;
     bool isInvestmentView;
