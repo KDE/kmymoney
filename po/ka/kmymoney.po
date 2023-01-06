@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-01 00:58+0000\n"
-"PO-Revision-Date: 2023-01-04 07:48+0100\n"
+"PO-Revision-Date: 2023-01-05 05:15+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -891,7 +891,7 @@ msgstr "მომხმარებელი"
 #: kmymoney/dialogs/kcurrencycalculator.ui:17
 #, kde-format
 msgid "Exchange Rate/Price Editor"
-msgstr ""
+msgstr "გაცვლის კურსის/ფასის რედაქტორი"
 
 #. i18n: ectx: property (text), widget (QLabel, amountLabel)
 #. i18n: ectx: property (text), widget (QLabel, label_7)
@@ -1059,7 +1059,7 @@ msgstr "საბაზო ვალუტის დაყენება"
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:176
 #, kde-format
 msgid "Cannot update currency. %1"
-msgstr ""
+msgstr "ვალუტის განახლების შეცდომა. %1"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:172
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:176
@@ -1070,7 +1070,7 @@ msgstr "ვალუტის განახლება"
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:209
 #, kde-format
 msgid "Cannot create new currency. %1"
-msgstr ""
+msgstr "ახალი ვალუტის შექმნის შეცდომა. %1"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:209
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:504
@@ -2319,7 +2319,7 @@ msgstr "გამართვა"
 #: kmymoney/dialogs/knewaccountdlg.ui:185
 #, kde-format
 msgid "Last check number:"
-msgstr ""
+msgstr "ბოლო შემოწმების ნომერი"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: kmymoney/dialogs/knewaccountdlg.ui:207
@@ -2467,7 +2467,7 @@ msgstr "მინიმალური ბალანსი"
 #: kmymoney/dialogs/knewaccountdlg.ui:543
 #, kde-format
 msgid "Early warning"
-msgstr ""
+msgstr "ადრეული გაფრთხილება"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_taxTab)
 #: kmymoney/dialogs/knewaccountdlg.ui:572
@@ -2480,19 +2480,19 @@ msgstr "გადასახადი"
 #: kmymoney/dialogs/knewaccountdlg.ui:578
 #, kde-format
 msgid "VAT details"
-msgstr ""
+msgstr "დღგ-ს დეტალები"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_vatCategory)
 #: kmymoney/dialogs/knewaccountdlg.ui:595
 #, kde-format
 msgid "VAT category"
-msgstr ""
+msgstr "დღგ-ს კატეგორია"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/dialogs/knewaccountdlg.ui:615
 #, kde-format
 msgid "VAT percentage"
-msgstr ""
+msgstr "დღგ-ს პროცენტულობა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_vatAssignment)
 #: kmymoney/dialogs/knewaccountdlg.ui:681

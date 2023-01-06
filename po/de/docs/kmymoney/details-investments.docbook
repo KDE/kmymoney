@@ -2,523 +2,657 @@
 <chapter id="details.investments">
 <chapterinfo>
   <authorgroup>
-    <author
->&Ace.Jones; &Ace.Jones.mail; </author>
+    <author> &Ace.Jones; &Ace.Jones.mail; </author>
+    <author>
+      <personname><firstname>Michael</firstname><surname>Carpino</surname></personname>
+      <email>mfcarpino@gmail.com</email>
+    </author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date
->2014-08-30</date>
-  <releaseinfo
->4.7.01</releaseinfo>
+  <date>2019-12-30</date>
+  <releaseinfo>5.0.7</releaseinfo>
 </chapterinfo>
 
-<title
->Investitionen</title>
+<title>Investments</title>
 
 <sect1 id="details.investments.overview">
-<title
->Investitionen in &kappname;</title>
+<title>Investments in &kmymoney;</title>
 
 <sect2>
-<title
->Investitionen</title>
+<title>Investments</title>
 
-<para
->Investitionen sind Geldanlagen, die an einer Börse gehandelt werden. Aktien, Anleihen und Anlagefonds sind die gebräuchlichsten Investitionen und sie werden in &kappname; direkt unterstützt. Termingeschäfte, Warengeschäfte, Optionen und andere komplexe Derivate werden auch manchmal benutzt, es gibt für sie aber keine besonderen Funktionen in &kappname;. Solange sie sich wie Aktien oder Anleihen verhalten, können sie problemlos mit &kappname; verwaltet werden. </para>
+<para>
+  In very general terms, an investment is any allocation of money with the
+  expectation of a future benefit.  &kmymoney;'s Investment accounts are designed for
+  one particular type of investment: securities.  A security investment (or just a
+  security) is an instrument for investing money that is traded on a market with the
+  intention of a profitable return in the form of either appreciation in value, or
+  income such as interest or dividends.  Stocks and mutual funds are the most common
+  securities; and they are the ones specifically supported within &kmymoney;.  Bonds
+  have a different financial structure, but can usually be handled by &kmymoney;.
+  Futures, commodities, options, and more complex investment instruments like
+  derivatives are other types of investments, but &kmymoney; has no special
+  functionality for them.  As long an investment has similar characteristics to a
+  stock or mutual fund, it can be tracked.
+</para>
 </sect2>
 
 <sect2>
-<title
->Basis-Währung</title>
-<para
->Jede Investition hat eine Basiswährung, in der sie gehandelt wird. Ein notierter Kurs einer Investition wird immer in der Basiswährung eingegeben. Für eine Aktie an der NYSE (New York Stock Exchange - New Yorker Börse) ist die Basiswährung der US-Dollar, für eine in Australien an der Börse gehandelte Aktie ist der Australische Dollar die Basiswährung. </para>
+<title>Base Currency</title>
+<para>
+  Each security has a Base Currency.  This is the currency in which it is traded.
+  When a price quote is entered for an investment, the currency of the value given is
+  always its base currency.  A stock on the NYSE (New York Stock Exchange) would be
+  in US dollars (USD), and one on an Australian market would be in Australian dollars
+  (AUD).  The Base currency for a security does not need to be the same as the
+  default currency for the Investment account holding that security.
+</para>
 </sect2>
 
 <sect2>
-<title
->Investitionskonten</title>
-<para
->Investitionskonten enthalten eine Zusammenstellung von Investitionen, Ein Investitionskonto enthält Buchungen wie Kauf oder Verkauf dieser Investitionen. Alle Buchungen in einem Investitionskonto beziehen sich auf eine bestimmte Investition. Es gibt keinen getrennten <quote
->Kassenbestand</quote
-> in einem Investitionskonto, dazu wird ein Wertpapierkonto verwendet. </para>
+<title>Investment Accounts</title>
+<para>
+  An Investment Account holds a collection of Securities, also referred to as
+  Equities.  An Investment account contains transactions, recording activities such
+  as buys, sells, dividends, reinvestments, yields, splits and income of those
+  investments.  Each transaction in an Investment account must relate to a specific
+  security.
+</para>
+
+<para>
+  It is common for an account at a Brokerage Institution to contain both securities
+  and cash.  In &kmymoney;, an Investment account holds <emphasis>only</emphasis>
+  securities.  It cannot contain any cash balance.  This was a design decision made
+  when Investment accounts were first included in &kmymoney;, and it might be changed
+  in a future version.  For now, any cash needed to purchase a security or gained
+  from a sell or dividend transaction requires the use of a Brokerage Account.
+</para>
 </sect2>
 
-<sect2>
-<title
->Wertpapierhandelskonto</title>
-<para
->Ein Investitionskonto hat meistens ein zugehöriges Wertpapierkonto. Dies wird manchmal auch als <quote
->Kassenbestand</quote
-> bezeichnet. Investitionskonten können keine Geld-Buchungen wie zum Beispiel eine Überweisung ihrer Bank enthalten. Wird eine Aktie verkauft, dann wird der Erlös in dem Wertpapierkonto verbucht. </para>
+<sect2 id="details.investments.brokerage">
+<title>Brokerage Accounts</title>
+<para>
+  When an investment transaction uses (to buy a security) or produces (from a sell or
+  dividend) cash, that transaction must refer to another account which can hold the
+  money, most commonly a checking account.  You can specify any suitable account for
+  any investment transaction which requires one.  However, &kmymoney; has the concept
+  of a <emphasis>Brokerage Account</emphasis>, also sometimes referred to as
+  a <quote>Cash Account</quote>, which is the default account for such transactions.
+</para>
 
-<para
->Wenn Sie ein Investitionskonto erstellen, können Sie dazu ein Wertpapierhandelskonto eröffnen. </para>
-
+<para>
+  When you create an Investment Account, you have the option of creating an
+  associated Brokerage Account with it.  The default name of the Brokerage account
+  will be the name of the investment account with " (Brokerage)" appended.
+</para>
 </sect2>
-
 </sect1>
 
 <sect1 id="details.investments.investment">
-<title
->Anlegen eines Investitionskontos</title>
+<title>Creating an Investment Account</title>
 
-<para
->Als ersten Schritt zur Verwaltung von Investitionen müssen Sie eine Konto dafür erstellen. Wählen Sie <menuchoice
-><guimenu
->Konto</guimenu
-><guimenuitem
->Neues Konto ...</guimenuitem
-></menuchoice
-> aus dem Menü, um den Dialog „Neues Konto erstellen“ zu öffnen. Denken Sie daran, <quote
->Investition</quote
-> als Typ des Konto einzustellen. </para>
+<para>
+  The first step on the path to working with investments is to create an account
+  to hold your defined securities. Choose the <menuchoice><guimenu>Account</guimenu>
+  <guimenuitem>New account...</guimenuitem></menuchoice> menu item to begin the process.
+  Create an account as previously defined in the adding <guilabel>Account</guilabel>
+  section, making sure to choose <quote>Investment</quote> as the type of account.
+</para>
 
-<para
->Um mit dem neuen Investitionskonto zu arbeiten, gehen Sie zur Ansicht <guibutton
->Investitionen</guibutton
-> und wählen Sie das gerade erstellte Konto im Auswahlfeld <guilabel
->Konto wählen</guilabel
->. </para>
+<para>
+  To work with the new investment account, navigate to the
+  <guibutton>Investments</guibutton> view, and choose the account you have just
+  created from the <guilabel>Select Account</guilabel> dropdown box.
+</para>
 </sect1>
-            
-<sect1 id="details.investments.securities">
-<title
->Investitionen zu Ihrem Konto hinzufügen</title>
 
-<para
->Um einzelne Investitionen zu Ihren Investitionskonto hinzuzufügen, gehen Sie zur Ansicht <guibutton
->Investitionen</guibutton
->, wählen die Karteikarte <guibutton
->Eigenkapital</guibutton
-> und dann ein Konto für die Investition im Auswahlfeld. <screenshot>
-  <screeninfo
->Karteikarte Eigenkapital in der Investitions-Ansicht</screeninfo>
+<sect1 id="details.investments.securities">
+<title>Adding Investments to Your Account</title>
+
+<para>
+  To add individual securities to your Investment Account, navigate to the
+  <guibutton>Investments</guibutton> view, select the
+  <guibutton>Equities</guibutton> tab, and choose the Investment account where the
+  investment is held from the <guilabel>Select Account</guilabel> drop-down box.
+
+  <screenshot>
+  <screeninfo>Investment View, Equities Tab</screeninfo>
   <mediaobject>
   <imageobject>
-  <imagedata fileref="investments_summarytab.png" format="PNG"/>
+  <imagedata fileref="investments_summarytab.png" format="PNG" />
   </imageobject>
   <textobject>
-  <phrase
->Karteikarte Eigenkapital in der Investitions-Ansicht</phrase>
+  <phrase>Investment View, Equities Tab</phrase>
   </textobject>
   </mediaobject>
   </screenshot>
 </para>
 
-<para
->Klicken Sie mit der &RMB; in einen leeren Bereich der Ansicht. Damit wird das Kontextmenü <guimenu
->Investitions-Einstellungen</guimenu
-> angezeigt. Wählen Sie aus diesem Menü den Eintrag <guimenuitem
->Neue Investition ...</guimenuitem
->. Damit starten Sie den <guilabel
->Assistenten für neue Investitionen</guilabel
->, der Sie bei dieser Aufgabe unterstützt. </para>
+<para>
+  Right-click the mouse in the empty space in the view.  This brings up
+  the <guimenu>Investment Options</guimenu> context menu.  Choose
+  <guimenuitem>New investment...</guimenuitem> from this menu.  This launches the
+  <guilabel>New Investment Wizard</guilabel> which you use to create your new
+  Investment.
+</para>
 
 <sect2 id="details.investments.newinvestmentwizard">
-<title
->Assistent für neue Investitionen</title>
+<title>New Investment Wizard</title>
 
-<para
->Zuerst müssen Sie die Art der Investition (Wertpapier, Anleihe &etc;) auswählen. </para>
+<para>
+  The first thing you'll be asked to enter is the type of investment, whether
+  it's a stock, bond, &etc;
+</para>
 
-<para
->Als nächstes wird die Seite für die Investitionsdetails angezeigt. Folgende Informationen sollten auf dieser Seite eingegeben werden: </para>
-
-<itemizedlist>
-  <listitem
-><para
->Börsensymbol: Das in allen Börsen verwendete Aktien-Symbol für diese Investition. &kappname; benötigt ein Börsensymbol für alle Investitionen, aber für manche Investitionen gibt es kein Symbol. In diesen Fällen müssen Sie Symbol erstellen. </para
-></listitem>
-
-  <listitem
-><para
->Name: Der ausgeschriebenen Name der Investition, die Sie erstellen, &eg;, <quote
->Advanced Micro Devices, Inc.</quote
->. Dieser Name wird auch für das Wertpapier verwendet. </para
-></listitem>
-
-  <listitem
-><para
->Stückelung: Die Genauigkeit, mit der Ihr Aktienbesitz gemessen wird. Zum Beispiel in den USA geben die meisten Anlagefonds den Aktienbesitz mit drei Dezimalstellen an. Dann muss in diesem Feld der Wert „1000“ eingetragen werden. Aktien werden oft nur in ganzen Einheiten gerechnet. Für eine solche Aktie muss der Wert „1“ eingegeben werden.  </para
-></listitem>
-  
-  <listitem
-><para
->Handelsplatz: Die Börse, an der die Investition gehandelt wird. Angaben in diesem Feld sind freigestellt. Diese Information wird ansonsten nicht in &kappname; verwendet. </para
-></listitem>
-
-  <listitem
-><para
->Identifikation: Ein Feld für zusätzliche Informationen zur Identifizierung. Diese Feld kann leer gelassen werden. Auch diese Information wird im Programm nicht weiter benutzt. </para
-></listitem>
-
-  <listitem
-><para
->Handelswährung: Die Währung, in der diese Investition an Ihrem Markt gehandelt wird. </para
-></listitem>
-
-  <listitem
-><para
->Kurseintrag: Geben Sie an, ob der Preis als Preis pro Aktie oder als Preis aller Aktien eingetragen wird. </para
-></listitem>
-</itemizedlist>
-
-<para
->Benutzen Sie Online-Kursnotizen, dann überprüfen Sie, dass das hier eingetragene Symbol genau mit dem Symbol der Online-Quelle übereinstimmt. Yahoo liefert Informationen über die meisten weltweiten Börsen, für außerhalb der USA gehandelte Werte muss jedoch ein Zusatz an das Symbol angehängt werden. Rubicon Limited, das auf dem Neuseeländischen Markt gehandelt wird, muss daher als <quote
->RBC.NZ</quote
-> eingegeben werden. </para>
-
-<para
->Zum Schluß kommen die Einstellungen für die Aktualisierung der Online-Kurse. Hier stellen Sie ein, wie die Preise Ihrer Investition aktualisiert werden sollen. Folgenden Einstellungen sind vorhanden: </para>
+<para>
+  Next, the investment details page is presented.  The following information is
+  entered on this page:
+</para>
 
 <itemizedlist>
+  <listitem><para> Trading Symbol.  A trading or ticker symbol is an abbreviation
+      used to identify a publicly traded security of a particular instrument on a
+      particular stock market exchange.  &kmymoney; requires a trading symbol for all
+      securities; however some investments do not have symbols.  In this case, you
+      will need to make up a symbol for it.
+  </para></listitem>
+
+  <listitem><para> Full name.  The friendly, readable name of the investment you're
+    creating, &eg;, <quote>Advanced Micro Devices, Inc.</quote> This name is also
+    referred to as the security.
+  </para></listitem>
+
+  <listitem><para> Fraction.  This indicates the degree of precision to which your
+    holdings are measured.  For example, in the US most mutual funds measure holdings
+    to three decimal places, so you would enter 1000 in this field.  Stocks are often
+    measured to only whole units, so you could enter 1 for a stock like this.  You'll
+    want to mirror the same decimal places that your brokerage uses to record your
+    securities so the transactions amounts match within &kmymoney;.  Using extra
+    precision will not cause a problem, but using too little precision can cause
+    rounding errors which can make &kmymoney; unable to exactly match the information
+    shown by your brokerage institution.
+  </para></listitem>
+
+  <listitem><para> Trading market.  Where the stock trades.  This is an optional
+    field which is provided for your convenience.  This information is not used
+    anywhere else within &kmymoney;.
+  </para></listitem>
+
+  <listitem><para>Identification.  An optional field to enter additional
+    identification information you might like to keep track of.  Again, this
+    information is not used anywhere else.
+  </para></listitem>
+
+  <listitem><para>Trading currency. The market exchange currency in which this
+      investment trades.  This is typically the country that the security trades
+      within.  It is usually, but not necessarily, the same as the default currency
+      for the Investment account holding that security.
+  </para></listitem>
+
+  <listitem><para> Price entry.  Choose whether the price will be entered as the
+      price per share or as the total for all shares when entering a transaction.
+  </para></listitem>
+</itemizedlist>
+
+<para>
+  If you are using Online Quotes, ensure that the symbol exactly matches the symbol
+  used by your quote source.  Yahoo covers most of the world's markets, and requires
+  a suffix on the end of symbols outside the US, to specify the country or market.
+  For example, Rubicon Limited on the New Zealand market should be entered as
+  <quote>RBC.NZ</quote>.
+</para>
+
+<para>
+  Finally, you're presented with the Online Update screen.  This is where you
+  tell &kmymoney; how you would like to update the prices of your investment.
+  The following items are set here:
+</para>
+
+<itemizedlist>
   <listitem>
-    <para
->Finance::Quote verwenden: Dies ist eine Einstellung für GnuCash-Benutzer, die mit dieser Art von Kursnotizen vertraut sind. Die meisten Benutzer können diese Einstellung deaktiviert lassen. </para>
+    <para>
+      Use Finance::Quote.  This is an option for &gnucash; users who are used to
+      this style of quotes.  Most users can leave this unchecked.
+    </para>
   </listitem>
 
   <listitem>
-    <para
->Online-Quelle: Die Online-Quelle, die Sie für diese Investition benutzen möchten. Meistens wird hier <quote
->Yahoo</quote
-> gewählt. Probieren Sie zuerst, ob die Investition hier gefunden wird. Ansonsten probieren Sie andere Quellen aus. </para>
+    <para>
+      Online Source.  The online source you'd like to use for this particular
+      investment.  The most common choice is <quote>Yahoo</quote>.  Try that first,
+      and if the investment cannot be found using this source, then experiment with
+      the others.
+    </para>
   </listitem>
 
   <listitem>
-    <para
->Faktor: Ein Faktor, mit dem die Kursnotizen für diese Investition multipliziert werden sollen. Dies ist normalerweise für Aktion aus Grossbritannien erforderlich, wo der Preis in Pence (1/100) angegeben und die Aktie in Pfund notiert wird. In diesen Fall geben Sie 0,01 als Faktor ein. </para>
+    <para>
+      Factor.  A multiplier that should be applied to quotes retrieved for this
+      investment.  This is most commonly needed for UK stocks where the price
+      quoted is in pence (1/100), and the stock is denominated in pounds.  In
+      this case, enter 0,01 for the Factor.
+    </para>
   </listitem>
 </itemizedlist>
+</sect2>
+
+<sect2 id="details.investments.reuse">
+  <title>Using a Security in more than one Investment Account</title>
+
+<note>
+  <para>
+    This section has been added just in time for the release of Version 5.0.8.  The
+    author felt it was important to include at least the basic information now, since
+    this topic has been a source of difficulty for some time.  The discussion will be
+    expanded and screenshots of the New Security Wizard will be added as soon as
+    possible.
+  </para>
+</note>
+
+<para>
+  It is possible to own shares of the same security in different investment accounts,
+  such as a regular investment account and also a retirement account.  If you follow the
+  instructions above, you will have that security show up in both accounts, but
+  &kmymoney; will actually treat them as if each of the securities is a different
+  underlying equity.  This results in duplicate storage, such as having two copies of
+  the entire price history of the equity.  Therefore, you may prefer to have both
+  securities refer to the same underlying equity.
+</para>
+
+<para>
+  When you add a security to an investment account, and that security already exists in
+  another investment account, you need to be careful if you want to reuse it rather than
+  creating a new, duplicate security.  When you see the <guilabel>New Investment
+  Wizard</guilabel>, after selecting the type of investment and clicking
+  <guibutton>Next</guibutton>, you need to be sure the <guilabel>Full Name</guilabel>
+  field is empty before entering the <guilabel>Trading Symbol</guilabel>.  When you hit
+  <keycap>Tab</keycap>, if &kmymoney; already has a security using that symbol, it will
+  ask if you wish to reuse it.  If you click <guibutton>Yes</guibutton>, it will fill in
+  the rest of that dialog, and you can then just click <guibutton>Next</guibutton>.
+</para>
+
 </sect2>
 </sect1>
 
 <sect1 id="details.investments.edit">
-<title
->Bearbeitung von Investitionen</title>
+<title>Editing an Investment</title>
 
-<para
->Auf der Karteikarte <guilabel
->Eigenkapital</guilabel
-> in der Ansicht „Investitionen“ wird der Inhalt eines Kontos zusammen mit dem Handelssymbol, dem Wert, der Menge und dem Preis angezeigt. Klicken Sie mit der &RMBn; auf eine Investition, um das Kontextmenü <guimenu
->Investitions-Einstellungen</guimenu
-> zu öffnen. Mit den Aktionen in diesem Menü können Sie einzelne Investitionen zu diesem Konto hinzufügen, zu bearbeiten oder zu löschen. Außerdem können Sie den Preis manuell oder Online aktualisieren. Ein leeres Konto kann geschlossen und geschlossene Konten können wieder geöffnet werden. </para>
+<para>
+  The <guilabel>Equities</guilabel> tab of the Investments view window lists your
+  current holdings in this account, along with their symbol, value, quantity, and
+  price.  Right-click the mouse on any of the investments to bring up the
+  <guimenu>Investment Options</guimenu> context menu, where you have the option
+  to add, edit, or delete individual investments from this account. Also, you
+  can update the price of your investments here either manually or via their
+  online source.  In addition, it is possible to close an empty account, or to
+  reopen a closed account.  The order for value, quantity and price can be changed
+  on the screen by selecting any of them by left clicking on the item in the top bar and
+  dragging it to the left or right.
+</para>
+<para>
+  If you choose to Edit an Investment, you will use the <guilabel>Investment detail
+  wizard</guilabel>, which looks and functions just like the <guilabel>New Investment
+  Wizard</guilabel>, as described in the previous section.
+</para>
 </sect1>
 
 <sect1 id="details.investments.ledger">
-<title
->Investitions-Buchungen</title>
+<title>Investment Transactions</title>
 
 <para>
 	<screenshot>
-	<screeninfo
->Investitions-Buchungsformular</screeninfo>
+	<screeninfo>Investment Transaction Form</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="investment-transactionform.png" format="PNG"/>
+	<imagedata fileref="investment-transactionform.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase
->Investitions-Buchungsformular</phrase>
+	<phrase>Investment Transaction Form</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para
->Investitions-Buchungen werden im <link linkend="details.ledgers"
->Kontenbuch</link
-> wie andere Konten eingeben oder bearbeitet. Die zu bearbeitenden Felder sind jedoch anders und hängen von der Art der Buchung oder Aktivität ab. Für Investitions-Buchungen gibt es einige zusätzliche Elemente. </para>
+<para>
+  Investment transactions are entered and edited in the
+  <link linkend="details.ledgers">Ledger</link> view, as with other kinds of
+  accounts.  However, the fields will appear different, and vary depending on the
+  transaction type or activity.  Investment transactions have some additional
+  elements:
+</para>
 
 <itemizedlist>
-	<listitem
-><para
->Aktivität</para
-></listitem>
-	<listitem
-><para
->Wertpapier</para
-></listitem>
-	<listitem
-><para
->Konto</para
-></listitem>
-	<listitem
-><para
->Aktien, Preise &amp; Gesamtbetrag</para
-></listitem>
-	<listitem
-><para
->Gebühren</para
-></listitem>
-	<listitem
-><para
->Zinskategorie</para
-></listitem>
+	<listitem><para>Activity</para></listitem>
+	<listitem><para>Security</para></listitem>
+	<listitem><para>Account</para></listitem>
+	<listitem><para>Shares, Price, &amp; Total Amount</para></listitem>
+	<listitem><para>Fees</para></listitem>
+	<listitem><para>Interest category</para></listitem>
 </itemizedlist>
 
 <sect2>
-<title
->Aktivität</title>
-<para
->Die Aktivität einer Investitionsbuchung beschreibt die Aktion für ein Wertpapier. Folgende Aktivitäten sind möglich: </para>
+<title>Activity</title>
+<para>
+  The Activity for an investment transaction describes what action is happening
+  to the security.  The following activities are supported:
+</para>
 
 <variablelist>
   <varlistentry>
-  <term
->Kaufen/Verkaufen</term>
+  <term>Buy/Sell</term>
   <listitem>
-    <para
->Wird für den Verkauf oder Kauf von einzelnen Investitionen verwendet. Diese Aktion benötigt ein Konto, in das die Gelder ein- oder ausgebucht werden. </para>
+    <para>
+      Use to record purchases or sales of individual securities.  This action
+      requires an account to transfer the funds from/to, which defaults to the
+      Brokerage account, if one has been created.
+    </para>
   </listitem>
   </varlistentry>
 
   <varlistentry>
-  <term
->Dividende/Gewinn</term>
+  <term>Dividend/Yield</term>
   <listitem>
-    <para
->Diese Aktion wird auch <quote
->ausgeschüttete Dividende</quote
-> genannt und wird benutzt, wenn Sie Zinsen oder Dividendenausschüttungen für Ihre Investition erhalten. Für diese Aktion ist ein Konto für die Buchung der Beträge nötig. </para>
+    <para>
+      Also known as a <quote>Cash Dividend</quote>, this action is used when you
+      receive an interest or dividend disbursement from your security.  This action
+      also requires an account to transfer the funds to.
+    </para>
   </listitem>
   </varlistentry>
 
   <varlistentry>
-  <term
->Wiederanlage der Dividende</term>
+  <term>Reinvest Dividend</term>
   <listitem>
-    <para
->Dies ist eine Dividende, bei der Erträge wieder in der Investition angelegt werden. </para>
+    <para>
+      Reinvest Dividend.  This is a dividend where the proceeds are used to purchase
+      additional shares of the security.
+    </para>
   </listitem>
   </varlistentry>
 
   <varlistentry>
-  <term
->Aktien hinzufügen/entfernen</term>
+  <term>Add/Remove Shares</term>
   <listitem>
-    <para
->Eine Änderung der Anzahl Ihrer Investition. Dies sollten selten benutzt werden, da es sehr ungewöhnlich ist, dass sich die Zahl der Aktien ändert, es sei denn durch Kauf oder Verkauf. </para>
+    <para>
+      A simple increase or decrease in the number of shares you own.  This should be
+      used very rarely, because it's uncommon for shares to just show up in your
+      account (or disappear) unless it's a purchase or a sale.  One use of these
+      activities is for some situations &kmymoney; does not natively handle, such as
+      the exchange of some number of shares of a security for a different number of
+      shares of a different class of the same security.
+    </para>
   </listitem>
   </varlistentry>
 
   <varlistentry>
-  <term
->Aktien-Stückelung</term>
+  <term>Split Shares</term>
   <listitem>
-    <para
->Wird bei der Teilung einer Aktie benutzt. Geben Sie das Verhältnis im Feld <quote
->Aufteilungsverhältnis</quote
-> ein, zum Beispiel bei einer Teilung im Verhältnis 3:, geben Sie den Faktor 1,5 ein. </para>
+    <para>
+      This is used when the stock is split.  Enter the ratio of the split in
+      the <quote>Split Ratio</quote> field.  For example, in a 3:2 split, enter 1.5.
+      Reverse splits, where the ration is less than one, such as 2:3, although
+      uncommon, are also allowed.
+    </para>
   </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
 <sect2>
-<title
->Wertpapier</title>
-<para
->Jede Investitions-Buchung muss einem bestimmten Wertpapier, hier nur ein anderer Name für eine Investition, zugeordnet werden. Wählen Sie den Namen für eine Investition, wenn Sie eine Buchung hinzufügen oder bearbeiten. Das Symbol wird mit der Investition angezeigt. </para>
+<title>Security</title>
+<para>
+  Each investment transaction must be associated with an individual security.  Choose
+  the security name when adding or editing a transaction.  The symbol will be
+  displayed when viewing it.
+</para>
 </sect2>
 
 <sect2>
-<title
->Konto</title>
-<para
->Für alle Buchungen, bei denen Geldbeträge verschoben werden, muss ein Konto eingegeben werden, aus dem der Betrag entnommen oder dem er hinzugefügt wird. Gibt es für Ihr Investionskonto ein zugeordnetes Wertpapierkonto, dann sollten Sie die Beträge dort verbuchen. Dies betrifft  gezahlte Gebühren, Zinsen oder erhaltene Dividenden. </para>
+<title>Account</title>
+<para>
+  For any transaction which generates or requires money, you must enter the account
+  where the money is transferred to/from.  If your investment account has an
+  associated Brokerage account, it is usually best to transfer the funds there.  This
+  applies to funds for purchase or sale of the security, as well as for fees paid or
+  interest or dividends earned.
+</para>
 </sect2>
 
 <sect2>
-<title
->Aktien, Preise &amp; Gesamtbetrag</title>
-<para
->Für die Buchung von Käufen, Verkäufen und ausgeschüttete Dividende muss die Anzahl der Aktien, der Preis je Aktie und der Gesamtbetrag der Buchung ermittelt werden. Geben Sie zwei dieser Werte ein, &kappname; berechnet dann den dritten Wert. Am Besten geben Sie den Gesamtbetrag und die Anzahl der Aktien ein, da diese beiden Werte für die Buchung bekannt sind. Der Preis je Aktie kann aus diesen Angaben berechnet werden. </para>
+<title>Shares, Price &amp; Total Amount</title>
+<para>
+  For buy, sell, and reinvestment transactions, the number of shares, the price per
+  share, and the total amount of the transaction must be established.  You can enter
+  any two of these, and &kmymoney; will calculate the third.  It's usually best to
+  enter just the total amount and the number of shares, because these are the known
+  facts of the transaction.  &kmymoney; will automatically calculate the price per
+  share.  Note that there is only one entry field for the price, and it will be
+  labeled
+  <quote>Transaction amount</quote> or <quote>Price/share</quote> depending on the
+  setting of the <guilabel>Price entry</guilabel> option when the account
+  was <link linkend="details.investments.newinvestmentwizard">set up</link>.
+</para>
 </sect2>
 
 <sect2>
-<title
->Gebühren</title>
-<para
->Bei Investitions-Buchungen können Sie die Gebühren oder Kommission, die Sie dem Händler gezahlt haben, mit eingeben. Haben Sie eine Kategorie für die Gebühren ausgewählt, wird rechts ein Feld angezeigt, in dem der Betrag eingegeben wird. Müssen Sie mehrere Gebühren für diese Buchung eingeben, benutzen Sie die Funktion <link linkend="details.ledgers.split"
->Split-Buchungen</link
->. Haben Sie in diesem Fall alle einzelnen Buchungen eingegeben, wird die Gesamtsumme aller Gebühren rechts im Feld angezeigt. </para>
+<title>Fees</title>
+<para>
+  With many investment transactions you can include the fees (or commission) you
+  paid the broker.  If you enter a category for the fee, then a field will be
+  shown to the right where you can enter the amount of the fee.  If you need to
+  enter more than one fee for the transaction, you can use
+  the <link linkend="details.ledgers.split">Split Transactions</link> feature.
+  In this case, when you complete entering all the splits, the total amount of
+  the fees will be shown to the right.
+</para>
 </sect2>
 
 <sect2>
-<title
->Zinsen</title>
-<para
->In diesem Feld geben Sie die Zinsen oder Dividendenzahlungen einer Investition ein. Wie bei den Gebühren wählen Sie eine Kategorie, dann wird recht ein Feld zur Eingabe des Betrages angezeigt. Falls erforderlich, können Sie hier ebenfalls Split-Buchungen eingeben. </para>
+<title>Interest</title>
+<para>
+  This is how you enter an interest or dividend payment from a security.  As
+  with fees, if you enter a category, then  a field will be shown to the right
+  where you can enter the amount.  You can also use the split transaction
+  feature, if required.
+</para>
 </sect2>
-
 </sect1>
 
 <sect1 id="details.investments.foreign">
-<title
->Arbeiten mit ausländischen Investitionen</title>
+<title>Working With Foreign Investments</title>
 
-<para
->&kappname; kann verschiedene Währungen und verschiedene Investitionen verarbeiten, Um diese Funktionen gemeinsam zu benutzen, sind zusätzliche Überlegungen nötig. Wie bereits vorher erläutert, muss beim Hinzufügen einer Investition eine Handelswährung angegeben werden. Diese Handelswährung kann sich von Ihrer Basiswährung oder von der Währung des Kontos für die Aktien oder der Währung des Wertpapierkontos für Käufe/Verkäufe unterscheiden. </para>
+<para>
+  &kmymoney; supports multiple currencies and securities, and you may want to combine
+  the two.  However, doing so requires extra care to assure accurate records.  As
+  noted above, when you add a security, you must specify its trading currency.  This
+  might not be the same as the base currency for your &kmymoney; file, and it also
+  might not be the same as the default currency for the investment account in which
+  you hold the stock or the account where you transfer your funds to/from for
+  buys/sells.
+</para>
 
-<para
->Angenommen Ihre Basiswährung ist USD (US-Dollar). Sie haben ein Investitionskonto und ein Wertpapierkonto in der Währung EUR. Diese Konto enthält Aktien von TietoEnator, die in SEK (schwedischen Kronen) gehandelt werden. </para>
+<para>
+  Consider a hypothetical case, where your base currency is USD.  You have an
+  investment account in EUR, and a brokerage account also in EUR.  In that investment
+  account, you hold shares of TietoEnator, which is traded in SEK.
+</para>
 
-<para
->Wenn Sie eine Kauf-Aktion für diese Investition eingeben, verwenden Sie als Währung SEK. Wenn Sie also 100 Aktien zu einem Preis von 248,00 SEK/Aktie mit dem Gesamtbetrag von 24.800,00 SEK kaufen, geben Sie diese Werte für die Buchung ein. </para>
+<para>
+  When you enter a buy transaction for this investment, use SEK as the currency.  So
+  if you buy 100 shares at a price of SEK 248.00, for a total of SEK 24,800.00, enter
+  these values in the transaction.
+</para>
 
 <para>
 	<screenshot>
-	<screeninfo
->Währungs-Hinweis</screeninfo>
+	<screeninfo>Currency Warning</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="investment-currencywarning.png" format="PNG"/>
+	<imagedata fileref="investment-currencywarning.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase
->Währungs-Hinweis</phrase>
+	<phrase>Currency Warning</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para
->Wenn Sie das Wertpapierkonto für diesen Vorgang auswählen, erhalten Sie eine Warnung, wenn das Konto in einer anderen Währung geführt wird. </para>
+<para>
+  When you choose the brokerage account to fund the transfer, you'll be warned
+  that it's in a different currency.
+</para>
 
 <para>
 	<screenshot>
-	<screeninfo
->Umtauschkurs-Editor</screeninfo>
+	<screeninfo>Exchange Rate Editor</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="investment-exchangerateeditor.png" format="PNG"/>
+	<imagedata fileref="investment-exchangerateeditor.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase
->Umtauschkurs-Editor</phrase>
+	<phrase>Exchange Rate Editor</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para
->Wenn Sie die Buchung abgeschlossen haben, können Sie den Währungskurs des Investitionskontos aktualisieren. In diesem Beispiel ist das der Wechselkurs SEK zu EUR. Ausführliche Informationen über den Umtauschkurs-Editor finden Sie im Abschnitt <link linkend="details.currencies.prices"
->Manuelle Preisaktualisierung</link
->. </para>
+<para>
+  When you finish entering the transaction, you will be prompted for a price update
+  to the investment account's currency, in this case, SEK -> EUR.  Review the
+  documentation on <link linkend="details.currencies.prices">Entering Prices
+  Manually</link> for more information on the price dialog.
+</para>
 
-<para
->Wechseln Sie zum Wertpapierkonto, dann sehen Sie bei einem angenommenen Wechselkurs von 11,000 SEK / EUR einen Buchungsbetrag von 2.254,54 EUR. </para>
+<para>
+  If you then switch over to the brokerage account, you will see the transaction as
+  EUR 2,254.54, assuming an exchange rate is 11.0000 SEK/EUR.
+</para>
 </sect1>
 
 <sect1 id="details.investments.prices">
-<title
->Aktualisierung von Preisen</title>
-<para
->Es gibt zwei Möglichkeiten, um Preise für Ihre Investitionen zu aktualisieren. Sie können entweder die neuen Preise von Hand eingeben oder sie &kappname; aus dem Internet holen lassen. </para>
+<title>Updating Prices</title>
+
+<para>
+  There are two ways of updating the prices for your investments.  You can
+  either enter the price manually or have &kmymoney; fetch it from the web.
+</para>
 
 <sect2>
-<title
->Manuelle Preisaktualisierung </title>
-<para
->Sie können Preise für Ihre Investitionen mit dem gleichen <link linkend="details.currencies.prices"
->Preis-Editor</link
-> wie für Währungen eingeben. </para>
+<title>Manual Price Updates</title>
+
+<para>
+  You can enter prices for your investments using the same
+  <link linkend="details.currencies.prices">Price Editor</link> as used for
+  currencies.
+</para>
 </sect2>
 
 <sect2 id="details.investments.onlinequotes">
-<title
->Online-Kursnotizen</title>
-<para
->&kappname; kann die aktuellen Preise Ihrer Investitionen und Währungen aus dem Internet herunterladen. </para>
+<title>Online Price Quotes</title>
+<para>
+  &kmymoney; has the ability to download the latest prices for your securities
+  and currencies via the web.
+</para>
 
 <sect3>
-<title
->Wie Online-Kursnotizen funktionieren</title>
-<para
->Auf Anforderung lädt &kappname; eine Seite aus dem Internet mit den neuesten Preisen für alle Einträge. Als Voreinstellung werden die Preise von <ulink url="http://finance.yahoo.com"
->finance.yahoo.com</ulink
-> heruntergeladen und unterliegen den allgemeinen Geschäftsbedingungen dieser Seite. </para>
+<title>How Online Quotes Work</title>
+<para>
+  At your request, &kmymoney; will fetch a page from the web that contains the
+  latest price for each security.  By default, prices are fetched from
+  <ulink url="https://finance.yahoo.com">finance.yahoo.com</ulink>, and are
+  subject to the terms and conditions of that site.
+</para>
 
-<para
->Die Online-Kursnotizen suchen über das Handelssymbol der Investition nach dem aktuellen Preis. Deshalb muss das richtige Symbol benutzt werden. Auf Yahoo finden Sie Aktien für die meisten Weltmärkte, daher müssen Sie nur das richtige Symbol finden. TietoEnator zum Beispiel wird an der Stockholmer Börse gehandelt und das auf Yahoo benutzte Symbol dafür ist TIEN.ST. </para>
+<para>
+  The online quote lookup uses the security's trading symbol to find the price.
+  Therefore, it is important to set the symbol correctly.  Yahoo supports stocks from
+  most major world markets, so it's usually just a matter of finding the correct
+  symbol.  For example, TietoEnator trades on the Stockholm Stock Exchange market,
+  and its Yahoo symbol is TIEN.ST.
+</para>
 
-<para
->Um das Börsensymbol eines bei Yahoo geführten Wertpapiers zu finden, benutzen Sie die Funktion <quote
->Symbol Lookup</quote
-> auf der Internetseite <ulink url="http://finance.yahoo.com"
->finance.yahoo.com</ulink
->. </para>
+<para>
+  To find the trading symbol for a security supported by Yahoo, use the
+  <quote>Symbol Lookup</quote> feature
+  at <ulink url="https://finance.yahoo.com">finance.yahoo.com</ulink>.
+</para>
 </sect3>
 
 <sect3>
-<title
->Zuweisung einer Kursnotiz-Quelle</title>
+<title>Assigning a Quote Source</title>
 
-<para
->Um Online-Preise verwenden zu können, müssen Sie zuerst für jede Investition oder Währung eine <quote
->Online-Quelle</quote
-> angeben. Das ist der Name des Dienstes, der die Preise zu Verfügung stellt, &kappname; enthält mehrere Quellen zur Auswahl. Es wird empfohlen, Yahoo als Standardquelle zu verwenden. Diese Quelle sollte für die meisten Investitionen und alle Währungen funktionieren. </para>
+<para>
+  In order to get online price quotes, you first have to enable it for each
+  security or currency you want updated, by setting a <quote>Online Quote
+  Source</quote>.  This is the name of the service from which the quote should
+  be fetched.  &kmymoney; ships with several sources to choose from.  Yahoo is the
+  recommended default source, and should work for most investments and all
+  currencies.
+</para>
 
-<para
->Um einer Investition eine Online-Quelle zuzuweisen, gehen Sie zur Investitions-Ansicht des Kontos für das Wertpapier. Öffnen Sie das Kontextmenü mit der &RMBn; und wählen Sie <guimenuitem
->Investition bearbeiten ...</guimenuitem
->. Im „Investitionendetail-Assistent“ drücken Sie zweimal auf <guibutton
->Weiter</guibutton
->, um zur Seite mit den Online-Quellen zu kommen. Wählen Sie hier im Auswahlfeld <guilabel
->Online-Quelle</guilabel
-> eine neue Einstellung. </para>
+<para>
+  To assign a quote source for an investment, navigate to the investment summary view
+  for the account in which the security is held.  Edit the security by right-clicking
+  it and selecting <guimenuitem>Edit Investment ...</guimenuitem>.  In the Investment
+  Detail Wizard, click <guibutton>Next</guibutton> twice, for the Online Update
+  section.  In the Online source dropdown box, select the online source for your
+  needs.
+</para>
 
-<para
->Ab Version 0.9 kann &kappname; Onlinekurse mit dem Paket Finance::Quote herunterladen. Dies ist in erster Linie für Benutzer gedacht, die Daten aus dem Finanzprogramm GnuCash importieren. GnuCash verwendet das Paket Finance::Quote als Standardmethode für Onlinekurse. Wenn Sie diese Einstellung auswählen, wird eine andere Liste mit Onlinequellen für das Paket Finance::Quote angezeigt. Ist diese Liste leer, dann ist das Paket wahrscheinlich nicht richtig installiert. Weitere Informationen zu diesem Paket finden Sie auf der Webseite <ulink url="http://finance-quote.sourceforge.net"
-> http://finance-quote.sourceforge.net</ulink
->. </para>
+<para>
+  Versions of &kmymoney; starting with 0.9 contain support for the Finance::Quote
+  package for obtaining online quotes.  This is intended primarily as a convenience
+  for those users converting from the &gnucash; finance package, which uses it as its
+  native method.  If you do select this option, you should see a different list of
+  sources, those supported by Finance::Quote. If the list is empty, it suggests that
+  the package is not properly installed.  See their web site at
+  <ulink url="http://finance-quote.sourceforge.net">
+  http://finance-quote.sourceforge.net</ulink> for more information.
+</para>
 </sect3>
 
 <sect3>
-<title
->Anpassung der Kursnotiz-Quellen</title>
+<title>Adjusting a quote</title>
 
-<para
->Einige Online-Quellen geben den Preis nicht in einer Basiseinheit wie &eg; EUR, sondern in Untereinheiten wie &eg; Cent an. Mit dieser Information als Preis ergeben sich falsche Werte für Ihre Investitionen. </para>
+<para>
+  Some online sources do not report the price in a base quantity (&eg;, EUR) but
+  in a fraction (&eg;, Cent). Using this information as price will produce wrong
+  values for your investments.
+</para>
 
-<para
->Trifft das auf Ihre Online-Quelle zu, dann können Sie das Feld <guilabel
->Faktor</guilabel
-> zur Anpassung verwenden. Im oben genannten Beispiel muss ein Faktor von 0,01 eingegeben werden. </para>
+<para>
+  If this is the case for your online source, you can use the
+  <guilabel>Factor</guilabel> field to enter an adjusting factor. For the above
+  mentioned example the factor would be 0.01.
+</para>
 
-<para
->Das Feld <guilabel
->Faktor</guilabel
-> kann nur dann ausgewählt werden, wenn eine <guibutton
->Kursnotiz-Quelle</guibutton
-> ausgewählt wurde. </para>
+<para>
+  The <guilabel>Factor</guilabel> field is only available if a
+  <guibutton>Quote Source</guibutton> has been selected.
+</para>
 </sect3>
 
 <sect3>
-<title
->Kursnotizen abrufen</title>
+<title>Fetching Quotes</title>
 
-<para
->Normalerweise werden Sie die Preise für alle Ihre Investitionen und Währungen auf einmal aktualisieren. Wählen Sie <menuchoice
-><guimenu
->Extras</guimenu
-><guimenuitem
->Aktien- und Währungspreise aktualisieren ...</guimenuitem
-></menuchoice
-> aus dem Menü und öffnen Sie damit einen Dialog. Drücken Sie auf <guibutton
->Alles aktualisieren</guibutton
->, um die Kurse aller Investitionen und Währungen in Ihre &kappname;-Datei zu laden. </para>
+<para>
+  Typically, you will update the prices for all your securities and currencies as a
+  single operation.  Choose the
+  <menuchoice><guimenu>Tools</guimenu><guimenuitem>Update Stock and Currency
+  Prices...</guimenuitem></menuchoice> menu item to bring up the online price
+  quotes dialog.  Press <guibutton>Update All</guibutton> to fetch quotes for all
+  securities and currencies in your &kmymoney; file.
+</para>
 
 <para>
 	<screenshot>
-	<screeninfo
->Aktualisierung von Aktien- und Währungskursen</screeninfo>
+	<screeninfo>Update Stock and Currency Prices</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="investment-onlineupdate.png" format="PNG"/>
+	<imagedata fileref="investment-onlineupdate.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase
->Aktualisierung von Aktien- und Währungskursen</phrase>
+	<phrase>Online Stock and Currency Price Update</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
@@ -526,51 +660,75 @@
 </sect3>
 
 <sect3>
-<title
->Hinzufügen oder Bearbeiten von Kursnotiz-Quellen</title>
+<title>Adding or Editing Quote Sources</title>
 
-<para
->Das Hinzufügen oder Bearbeiten von Online-Quellen wird nur technisch erfahrenen Benutzern empfohlen. Sie sollten HTML-Quelltext verstehen und komplexe reguläre Ausdrücke entwickeln können. Haben Sie diese Kenntnisse nicht, schreiben Sie an die Mailingliste der Entwickler, wenn keine der Online-Quellen bei Ihnen richtig funktioniert. Geben Sie möglichst auch eine Webseite an, von der die Kurse heruntergeladen werden können. </para>
+<para>
+  Adding or editing quote sources is not recommended for anyone but the most
+  technical user.  You should feel comfortable reading HTML and writing complex
+  regular expressions.  If this doesn't sound like you, we recommend writing to the
+  developer's list if none of the quote sources work for you.  Ideally, please point
+  us to a web page where these quotes can be obtained.  Additionally you can consult
+  with members of the KDE Community Forum for &kmymoney; as they may already have a
+  solution available for your needs.
+</para>
 
-<para
->Die Online-Quellen finden Sie im Einrichtungsdialog. Wählen Sie <menuchoice
-><guimenu
->Einstellungen</guimenu
-><guimenuitem
->&kappname; einrichten ...</guimenuitem
-></menuchoice
-> und gehen Sie zur Seite <guilabel
->Online-Kursnotizen</guilabel
->. Sie können eine vorhandene Quelle zur Bearbeitung auswählen oder eine neue Quelle erstellen. Haben Sie alle Änderungen durchgeführt, müssen Sie auf <guibutton
->Aktualisieren</guibutton
-> drücken, ehe Sie den Dialog beenden. Änderungen werden nicht automatisch gespeichert. </para>
+<para>
+  If you do feel up to the challenge, here's how it works.  The quote sources are
+  contained in the settings dialog. Choose the
+  <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+  &kmymoney;</guimenuitem></menuchoice> menu item. From there, choose the <guilabel>Online
+  Quotes</guilabel> section.  You can choose an existing source to edit, or create a
+  new one.  When you are done with your changes, be sure to press
+  the <guibutton>Update</guibutton> button before exiting the dialog.  Your changes
+  are not saved by default.
+</para>
 
-<para
->Als erstes müssen Sie sich mit der Adresse oder URL der Online-Kursnotizen befassen. Das ist die Adresse der Seite, die aus dem Internet geladen wird. Alle Quellen haben den Platzhalter „%1“ in der URL, Quellen für Währungskurse zusätzlich den Platzhalter „%2“. Bei Investitionen wird „%1“ durch das Handelssymbol ersetzt. Bei Währungskursen wird „%1“ durch den Kaufpreis und „%2“ durch den Verkaufspreis ersetzt. Die Webseite mit der angegebenen URL wird heruntergeladen, alle HTML-Tags werden entfernt und die verbleibende Datei wird an die Funktion übergeben, die die Preise aus der Seite ermittelt. </para>
+<para>
+  The first thing to consider in an online quote source is the URL.  This is the page
+  that is fetched from the web.  You will see a %1 in all sources, and a %2 in
+  currency sources.  For investments, %1 is replaced by the trading symbol.  For
+  currencies, %1 is replaced by the From currency, and %2 is replaced by the To
+  currency.  This URL is then fetched, all HTML tags are (optionally) removed, and
+  that stripped file is then sent to the page parser.
+</para>
 
-<para
->Beachten Sie, dass als URL auch eine ausführbare Datei angegeben werden kann. Dieser ausführbaren Datei werden alle eingetragenen Argumente übergeben und die Standardausgabe des Skripts wird an die Funktion zur Ermittlung der Preise übergeben. Sie können zum Beispiel ein eigenes Skript mit dem Namen „getquote.sh“ schreiben, das das Handelssymbol als Parameter übernimmt und den Preis ermittelt. Als URL muss dafür <quote
->file:/path/to/getquote.sh %1</quote
-> eingegeben werden. </para>
+<para>
+  Note that the URL can also be a file: URL, which the quote fetcher takes to be the
+  path to an executable script.  It will pass any command-line arguments to it that
+  you have specified, and feed the stdout to the page parser.  For example, you might
+  have a script called getquote.sh that contains custom quote logic, taking the
+  symbol as a single parameter.  Your URL would be
+  <quote>file:/path/to/getquote.sh %1</quote>.
+</para>
 
-<para
->Die Funktion sucht nach einem Symbol, einem Datum und einem Preis. Reguläre Ausdrücke geben an, wie diese Werte aus den Daten der Seite ermittelt werden. Informationen über die hier verwendeten regulären Ausdrücke finden Sie auf der Seite <ulink url="http://qt-project.org/doc/qt-4.8/qregexp.html#1"
->QRegExp-Klasse</ulink
->. In jedem regulären Ausdruck sollte genau ein zutreffender Ausdruck, der von Klammern eingeschlossen ist, enthalten sein. Das Datumsformat gibt außerdem die Reihenfolge von Jahr, Monat und Datum an. Dieses Format sollte immer in der Form „%x %x %x“ angeben werden, dabei ist x entweder y, m oder d. Die Funktion arbeitet ziemlich gut und kann mit <quote
->%m %d %y</quote
-> sowohl <quote
->December 31st, 2005</quote
-> als auch <quote
->12/31/05</quote
-> richtig verarbeiten. Zweistellige Jahresangaben werden immer als Zeitraum von 1950-2049 angenommen. </para>
+<para>
+  The page parser looks for a symbol, a date, and a price.  Regular expressions tell
+  it how to extract those items from the page.  Please review the documentation for
+  the <ulink url="https://doc.qt.io/qt-5/qregularexpression.html">QRegularExpression
+  class</ulink> for the exact syntax regular expressions used by &kmymoney;.  There
+  should be exactly one capture expression, surrounded by parentheses, in each regexp
+  field.  The date format further tells the date parser the order of year, month, and
+  day.  This date format should always be in the form "%x %x %x". where x is y, m, or
+  d.  The date parser is very smart.  <quote>%m %d %y</quote> will
+  parse <quote>December 31st, 2005</quote> as easily as <quote>12/31/05</quote>.  Two
+  digit years are interpreted as being in the range of 1950-2049.
+</para>
 </sect3>
 </sect2>
 </sect1>
 
 <sect1 id="details.investments.unimplemented">
-<title
->Fehlende Funktionen</title>
-<para
->Bestimmte häufig benutzte Funktionen für Investitionen sind noch nicht in &kappname; implementiert, insbesondere die Bearbeitung von Derivaten (Optionen, Termingeschäfte &etc;) und Steuerberichte über Investitionen. </para>
+<title>Unimplemented Features</title>
+
+<para>
+  There are some features that are normally associated with investments which are not
+  yet implemented in &kmymoney;.  These include, but are not limited to derivatives,
+  options, and futures.  In addition, when you sell a security, &kmymoney; does not
+  know which specific shares you are selling, &ie;, the oldest or the most recently
+  purchased, so it cannot calculate return on investment.  Finally, it has no direct
+  knowledge about any country's specific tax reporting requirements, but these can
+  usually be handled by marking as Tax related all the categories you use for
+  transactions which might have tax consequences.
+</para>
 </sect1>
 </chapter>

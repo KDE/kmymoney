@@ -2,247 +2,184 @@
 <chapter id="details.impexp">
 <chapterinfo>
   <authorgroup>
-    <author
->&Ace.Jones; &Ace.Jones.mail; </author>
+    <author> &Ace.Jones; &Ace.Jones.mail; </author>
   </authorgroup>
-  <date
->2011-07-3</date>
-  <releaseinfo
->4.6</releaseinfo>
+  <date>2011-07-03</date>
+  <releaseinfo>4.6</releaseinfo>
 </chapterinfo>
 
-<title
->Importieren und Exportieren</title>
+<title>Importing and Exporting</title>
 
 <sect1 id="details.impexp.gnucash">
 <sect1info>
-  <author
->&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
+  <author>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
 </sect1info>
 
-<title
->GnuCash-Import</title>
+<title>&gnucash; Importer</title>
 
 <sect2>
-<title
->GnuCash-Dateien</title>
+<title>&gnucash; Files</title>
 
-<para
->Das GnuCash-Importmodul von &kappname; kann Standard-&XML;-Dateien von GnuCash Version 1.8 und 2.0 direkt einlesen. Die folgenden Formate können nicht importiert werden: </para>
+<para>
+  The &kmymoney; &gnucash; importer handles direct
+  reading of standard (&XML;) files as produced by &gnucash;
+  versions 1.8 and 2.0. The following are not supported:
+</para>
 
 <itemizedlist>
-  <listitem
-><para
->Import aus Datenbanken (Postgres)</para
-></listitem>
-  <listitem
-><para
->Import von „multi-book“-Dateien</para
-></listitem>
-  <listitem
-><para
->Import in eine vorhandene &kappname;-Datei</para
-></listitem>
-  <listitem
-><para
->Import von Funktionen für kleine und mittlere Unternehmen (Beschäftigte, Kunden, Rechnungen &etc;)</para
-></listitem>
-  <listitem
-><para
->Export in GnuCash-Dateien</para
-></listitem>
+  <listitem><para>import of database (Postgres) data</para></listitem>
+  <listitem><para>import of 'multi-book' files</para></listitem>
+  <listitem><para>import into an existing &kmymoney; file</para></listitem>
+  <listitem><para>import of small-business specific features (Employees,
+    Invoices, &etc;)</para></listitem>
+  <listitem><para>export to &gnucash; files.</para></listitem>
 </itemizedlist>
 
-<para
->Der Import funktioniert wahrscheinlich nur richtig, wenn eine gültige und fehlerfreie Datei angegeben wird. Es wird empfohlen, in GnuCash die Funktion <menuchoice
-><guisubmenu
->Überprüfen</guisubmenu
-><guimenuitem
->Alle überprüfen</guimenuitem
-></menuchoice
-> im Menü <guimenu
->Aktionen</guimenu
-> vor dem Export aufzurufen. </para>
+<para>
+  The import will probably only work correctly if presented with a valid file.
+  It is recommended that the <menuchoice><guimenu>Actions</guimenu><guimenuitem>Check
+  &amp; Repair All</guimenuitem></menuchoice> menu item of &gnucash; be run
+  before attempting to import.
+</para>
 
-<para
->Dateien können durch die Angabe des Dateinamens auf der Befehlszeile (<command
->kmymoney &lt;pfad/zu/datei&gt;</command
->), über das Menü mit <menuchoice
-> <shortcut
-><keycombo
->&Ctrl;<keycap
->O</keycap
-></keycombo
-></shortcut
-> <guimenu
->Datei</guimenu
-><guimenuitem
->Öffnen</guimenuitem
-> </menuchoice
-> oder mit <menuchoice
-> <guimenu
->Datei</guimenu
-><guimenuitem
->Importieren</guimenuitem
-> </menuchoice
-> geöffnet werden. </para>
+<para>
+  Files can be opened by specifying the filename on the command line
+  (<command>kmymoney &lt;path to file&gt;</command>), or by means of the &kmymoney;
+  <menuchoice>
+    <shortcut><keycombo>&Ctrl;<keycap>O</keycap></keycombo></shortcut>
+    <guimenu>File</guimenu><guimenuitem>Open</guimenuitem>
+  </menuchoice> or
+  <menuchoice>
+    <guimenu>File</guimenu><guisubmenu>Import</guisubmenu>
+  </menuchoice> menu items.
+</para>
 
-<para
->Wegen der Ähnlichkeit zwischen beiden Programmen können viele alltägliche Daten ohne Probleme importiert werden. Es gibt jedoch einige Bereiche, die in beiden Programmen unterschiedlich verarbeitet werden. Dafür gibt es mehrere Einstellungen. Im Folgenden werden einige der Unterschiede erläutert, damit werden diese Unterschiede verständlich und können beim Import berücksichtigt werden. </para>
+<para>
+  The similarity between the two products means that much day-to-day data can be
+  imported in a straightforward fashion. However, there are some areas where
+  differences arise, and various options are provided to deal with these. The
+  following sections will describe some of these differences; understanding them
+  should lead to a smoother importation.
+</para>
 </sect2>
 
 <sect2>
-<title
->Ähnlichkeiten, Unterschiede und Fachausdrücke</title>
+<title>Similarities, Differences, and Terminology</title>
 
 <sect3>
-<title
->Funktionen für kleine und mittlere Unternehmen</title>
+<title>Small Business Usage</title>
 
-<para
->&kappname; ist ein Finanzverwaltungsprogramm für den <emphasis
->persönlichen</emphasis
-> Gebrauch, daher werden die geschäftlichen Funktionen in GnuCash wie Steuertabellen, Gehaltsabrechnungen und die Überwachung von Lieferungen nicht direkt unterstützt. Alle Verbindlichkeiten oder Forderungen in einer Datei werden als Verbindlichkeits- oder Anlagenkonto importiert. </para>
+<para>
+  It should be noted that &kmymoney; is a <emphasis>personal</emphasis> finance
+  manager, and as such, does not directly support any of the business features
+  of &gnucash;, such as tax tables, payroll, and tracking of lots. Any Accounts
+  Payable or Receivable accounts found in a file will be imported as Liability
+  or Asset accounts respectively.
+</para>
 </sect3>
 
 <sect3>
-<title
->Konten</title>
+<title>Accounts</title>
 
 <sect4>
-<title
->Kontenarten</title>
+<title>Account types</title>
 
-<para
->In beiden Produkten ist ein Konto die oberste Strukturebene in der Datei. &kappname; unterstützt fünf Hauptarten von Konten: Anlagen, Verbindlichkeiten, Einnahmen, Ausgaben und Eigenkapital. Jeder dieser Kontotypen kann mehrere Untertypen haben, &eg; Scheckkonto, Kreditkartenkonto &etc; &kappname; enthält ein Standardkonto mit allen fünf Kontentypen und alle anderen Konten werden diesen Konten untergeordnet. Dadurch erzwingt &kappname; mehr Konsistenz oder weniger Flexibilität, je nach Betrachtungsweise, zwischen den Kontentypen als GnuCash. Das Importmodul korrigiert alle erkannten Inkonsistenzen. Das kann zu einer geringfügig abweichenden Kontenstruktur führen, lässt sich aber innerhalb gewisser Grenzen nach dem Import korrigieren. </para>
+<para>
+  For both products, the highest level of structure in the file is the
+  account. &kmymoney; supports 5 main types of account: Asset, Liability,
+  Income, Expense and Equity, each of which may have various subtypes, &eg;,
+  Checking, Credit Card, &etc;  &kmymoney; includes a 'standard' account for
+  each of these five types, and all other accounts are held subordinate to one
+  of these. &kmymoney; enforces more consistency (or less flexibility, depending
+  on your point of view) between account types than does &gnucash;, and the
+  importer will correct any inconsistencies it detects. This may result in a
+  slightly different account structure, though this can, within reason, be
+  amended after the import is complete.
+</para>
 </sect4>
 
 <sect4>
-<title
->Kategorien</title>
+<title>Categories</title>
 
-<para
->&kappname; benutzt den Begriff Kategorie für Konten vom Typ Einnahme oder Ausgabe. Anders als in GnuCash werden diese Konten nicht als reale Konten betrachtet, die Eingabe von Buchungen für Kategorien ist nicht möglich. Zuweisungen während der Buchungseingabe erfolgen für andere Kontentypen. </para>
+<para>
+  &kmymoney; uses the term Category to denote an account of an Income or Expense
+  type. Unlike &gnucash;, these are not considered as 'ledger' accounts, and entry
+  of transactions folder into categories is not supported; allocations are made
+  during transaction entry into other account types.
+</para>
 </sect4>
 
 <sect4>
-<title
->Strukturen und Platzhalter</title>
+<title>Structure and Placeholders</title>
 
-<para
->GnuCash verwendet Platzhalterkonten. Tatsächlich handelt es sich dabei um nur lesbare Konten, es können keine Buchungen eingegeben werden. Diese Konten funktionieren wie Ordner in einem Verzeichnis als Platzhalter für andere Konten. Obwohl &kappname; diese Funktion nicht direkt unterstützt, erstellt das Importmodul eine Kontenstruktur mit über- und untergeordneten Konten und simuliert diese Platzhalter, indem es leere Konten erstellt. </para>
+<para>
+  &gnucash; supports the use of Placeholder accounts. In effect, these are just
+  read-only accounts into which no transactions can be entered, but which function
+  in an analogous fashion to folders in a folder structure, as a holder for other
+  accounts. Though &kmymoney; does not support this feature as such, it does
+  provide a parent/child account relationship, so the importer simulates
+  placeholders by creating empty accounts.
+</para>
 </sect4>
 
 <sect4>
-<title
->Zuordnung der Kontoart</title>
+<title>Account Type map</title>
 
 <informaltable frame='all'>
 <tgroup cols='2' align='left' colsep='1' rowsep='1'>
 <thead>
   <row>
-    <entry
->GnuCash-Typ</entry
-><entry
->&kappname;-Typ</entry>
+    <entry>&gnucash; type</entry><entry>&kmymoney; type</entry>
   </row>
 </thead>
 <tbody>
   <row>
-    <entry
->BANK</entry
-><entry
->Checking (Girokonto)</entry>
+    <entry><literal>BANK</literal></entry><entry><literal>Checking</literal></entry>
   </row>
   <row>
-    <entry
->CHECKING</entry
-><entry
->Checking (Girokonto)</entry>
+    <entry><literal>CHECKING</literal></entry><entry><literal>Checking</literal></entry>
   </row>
   <row>
-    <entry
->SAVINGS</entry
-><entry
->Savings (Sparkonto)</entry>
+    <entry><literal>SAVINGS</literal></entry><entry><literal>Savings</literal></entry>
   </row>
   <row>
-    <entry
->ASSET</entry
-><entry
->Asset (Anlagen)</entry>
+    <entry><literal>ASSET</literal></entry><entry><literal>Asset</literal></entry>
   </row>
   <row>
-    <entry
->CASH</entry
-><entry
->Cash (Bargeld)</entry>
+    <entry><literal>CASH</literal></entry><entry><literal>Cash</literal></entry>
   </row>
   <row>
-    <entry
->CURRENCY</entry
-><entry
->Cash (Bargeld)</entry>
+    <entry><literal>CURRENCY</literal></entry><entry><literal>Cash</literal></entry>
   </row>
   <row>
-    <entry
->MONEYMRKT</entry
-><entry
->MoneyMarket</entry>
+    <entry><literal>MONEYMRKT</literal></entry><entry><literal>MoneyMarket</literal></entry>
   </row>
   <row>
-    <entry
->STOCK</entry
-><entry
->Stock (Wertpapier)</entry>
+    <entry><literal>STOCK</literal></entry><entry><literal>Stock</literal></entry>
   </row>
   <row>
-    <entry
->MUTUAL</entry
-><entry
->Stock (Wertpapier)</entry>
+    <entry><literal>MUTUAL</literal></entry><entry><literal>Stock</literal></entry>
   </row>
   <row>
-    <entry
->EQUITY</entry
-><entry
->Equity (Eigenkapital)</entry>
+    <entry><literal>EQUITY</literal></entry><entry><literal>Equity</literal></entry>
   </row>
   <row>
-    <entry
->LIABILITY</entry
-><entry
->Liability (Verbindlichkeiten)</entry>
+    <entry><literal>LIABILITY</literal></entry><entry><literal>Liability</literal></entry>
   </row>
   <row>
-    <entry
->CREDIT</entry
-><entry
->CreditCard (Kreditkarte)</entry>
+    <entry><literal>CREDIT</literal></entry><entry><literal>CreditCard</literal></entry>
   </row>
   <row>
-    <entry
->INCOME</entry
-><entry
->Income (Einnahmen)</entry>
+    <entry><literal>INCOME</literal></entry><entry><literal>Income</literal></entry>
   </row>
   <row>
-    <entry
->EXPENSE</entry
-><entry
->Expense (Ausgaben)</entry>
+    <entry><literal>EXPENSE</literal></entry><entry><literal>Expense</literal></entry>
   </row>
   <row>
-    <entry
->RECEIVABLE</entry
-><entry
->Asset (Anlagen)</entry>
+    <entry><literal>RECEIVABLE</literal></entry><entry><literal>Asset</literal></entry>
   </row>
   <row>
-    <entry
->PAYABLE</entry
-><entry
->Liability (Verbindlichkeiten)</entry>
+    <entry><literal>PAYABLE</literal></entry><entry><literal>Liability</literal></entry>
   </row>
 </tbody>
 </tgroup>
@@ -251,117 +188,156 @@
 </sect3>
 
 <sect3>
-<title
->Buchungen und Split-Buchungen</title>
+<title>Transactions and Splits</title>
 
 <sect4>
-<title
->Ausgeglichene Buchungen</title>
+<title>Balanced transactions</title>
 
-<para
->Wie in GnuCash werden Daten als Buchungen eingegeben. Im Allgemeinen besteht jede Buchung aus zwei Einträgen. Gültige Buchungen in GnuCash bestehen immer aus mindestens zwei Einträgen, da eine doppelte Buchführung verwendet wird und beide Einträge wertmäßig ausgeglichen sein müssen. &kappname; unterstützt diesen Standard, er ist aber nicht zwingend erforderlich. Jede nicht ausgeglichene importierte Buchung wird im Kontenbuch als möglicherweise fehlerhaft markiert. </para>
+<para>
+  As with &gnucash;, data is entered in the form of transactions, each generally
+  consisting of 2 or more split entries. In fact, valid &gnucash; transactions
+  will always contain at least 2 splits, and to conform to &gnucash;'s
+  double-entry bookkeeping standard, these must be in monetary balance (&ie;,
+  they must balance out to zero). &kmymoney; encourages, but does not enforce,
+  this standard, but any imported transaction which is not balanced will be
+  marked in the ledger view as having a problem.
+</para>
 </sect4>
 
 <sect4>
-<title
->Zahlungsempfänger</title>
+<title>Payees</title>
 
-<para
->In &kappname; sollten alle Buchungen einen Zahler/Zahlungsempfänger haben und im Gegensatz zu GnuCash wird eine Liste der Zahler/Zahlungsempfänger geführt. Die Namen der Zahler/Zahlungsempfänger werden vom Importmodul aus der Beschreibung der  GnuCash-Buchung generiert. </para>
+<para>
+  &kmymoney; prefers that all transactions have a Payee (a generic term that
+  encompasses both payees and payers), and unlike &gnucash;, a list of these
+  payees is maintained. Payee names are generated by the importer from the
+  &gnucash; transaction's Description field.
+</para>
 </sect4>
 
 <sect4>
-<title
->Buchungen</title>
+<title>Transfers</title>
 
-<para
->In &kappname; wird der Begriff Umbuchung für eine Buchung benutzt, in der keine Kategorien betroffen sind. Dabei werden nur Geldbeträge zwischen Anlagen- und/oder Verbindlichkeitskonten verschoben. </para>
+<para>
+  &kmymoney; uses the term Transfer to describe a transaction which does not
+  involve a Category, but only transfers money between Asset and/or Liability
+  accounts.
+</para>
 </sect4>
 
 <sect4>
-<title
->Abgleichen </title>
+<title>Reconcile</title>
 
-<para
->&kappname; enthält eine Abgleichfunktion wie GnuCash, der zugehörige Buchungsstatus wird importiert. </para>
+<para>
+  &kmymoney; provides an account reconciliation function similar to that of
+  &gnucash;, and the corresponding transaction status will be imported.
+</para>
 </sect4>
 </sect3>
 
 <sect3>
-<title
->Wertpapiere und Währungen</title>
+<title>Commodities</title>
 
-<para
->GnuCash benutzt den Begriff Waren sowohl für Währungen wie auch für Anlagen ohne Währung. In &kappname; werden beide gesondert behandelt. </para>
+<para>
+  &gnucash; uses the term Commodity to cover both currencies and non-currency
+  assets. These are treated separately in &kmymoney;.
+</para>
 
 <sect4>
-<title
->Währungen</title>
+<title>Currencies</title>
 
-<para
->&kappname; kann alle ausländischen <link linkend="details.currencies"
->Währungen</link
-> verarbeiten. Es ist erforderlich, eine Basiswährung als Standard für neue Konten einzustellen. Das Importmodul versucht die wahrscheinlichste Basiswährung dafür zu ermitteln. Die vorgeschlagene Währung kann aber geändert werden. </para>
+<para>
+  &kmymoney; has built-in support for all foreign 
+  <link linkend="details.currencies">currency</link> types.  &kmymoney; also
+  requires that the user specify a base currency, this being the default
+  currency for new accounts. The importer will attempt to determine the most
+  likely base currency, though this choice may be rejected in favor of an
+  alternative.
+</para>
 
-<para
->Hinweis: In &kappname; kann zurzeit kein Konto in nicht mehr existierenden Währungen mit Ausnahme der durch den Euro ersetzten Währungen geführt werden. Daher müssen alle Konten mit solchen Währungen aus der GnuCash-Datei vor dem Export gelöscht werden. </para>
+<note><para>
+  &kmymoney; does not currently support accounts denominated in 'defunct'
+  currencies (except those replaced by the Euro). At present, it will be
+  necessary to remove any such accounts from your &gnucash; file before
+  importing. We hope to improve on this situation in a future release.
+</para></note>
 </sect4>
 
 <sect4 id="gncsecurities">
-<title
->Wertpapiere und Investitionen</title>
+<title>Securities and Investments</title>
 
-<para
->Anlagen ohne Währung, normalerweise Aktien und Anleihen, werden in &kappname; als Wertpapiere bezeichnet. Der wichtigste Unterschied zwischen den beiden Produkten besteht darin, dass in &kappname; jedes Wertpapierkonto einem Investitionskonto zugeordnet werden muss. Weitere Details dazu finden Sie im Kapitel <link linkend="details.investments"
->Investitionen</link
->. Obwohl auch in GnuCash solche Beziehungen durch den Benutzer definiert werden können, enthält GnuCash keine definierten Strukturen dafür. Daher kann das Importmodul diese Beziehung nicht erkennen und führt eine automatische Umwandlung durch. Deshalb gibt es für diesen Fall folgende Optionen: </para>
+<para>
+  Non-currency assets (normally stocks and bonds) are called Securities by
+  &kmymoney;, and represent the main difference between the two products, in
+  that &kmymoney; requires any account denominated in a security to be
+  subordinate to an Investment Account. This is described in more detail in the
+  chapter on <link linkend="details.investments">Investments</link>. Though
+  users may have implemented such a relationship, &gnucash; imposes no defined
+  structure on it, so the importer is unable to detect it and perform an
+  automatic conversion. Three options are therefore made available:
+</para>
 
 <itemizedlist>
   <listitem>
-    <para
->Erstellen Sie ein eigenes Investmentkonto für jedes Wertpapier und geben Sie ihm den gleichen Namen wie das Wertpapier.</para>
+    <para>Create a separate Investment account for each security, with the same
+    name as the security</para>
   </listitem>
 
   <listitem>
-    <para
->Erstellen Sie ein eigenes Investmentkonto, das als übergeordnetes Konto für alle Wertpapierkonten dient.</para>
+    <para>Create a single Investment account which will act as 'parent' for all
+    security accounts</para>
   </listitem>
 
   <listitem>
-    <para
->Erstellen Sie mehrere Investmentkonten und weisen Sie ihnen nach Ihren Vorstellungen Wertpapiere zu</para>
+    <para>Create several Investment accounts, and assign securities to them as
+    directed by the user.</para>
   </listitem>
 </itemizedlist>
 
-<para
->Es hängt ganz von Ihren Anforderungen ab, welche dieser Optionen Sie wählen sollten. In einigen Fällen ist das manuelle Umstrukturieren der Konten nach dem Import nötig. </para>
+<para>
+  It depends entirely on user requirements which of these options is relevant in
+  each situation, and in some cases, manual restructuring of accounts after
+  importation may be necessary.
+</para>
 </sect4>
 
 <sect4>
-<title
->Preise und Währungskurse</title>
+<title>Prices and currency rates</title>
 
-<para
->Wertpapierpreise und Währungskurse aus dem Preiseditor in GnuCash werden importiert. Zusätzlich werden Einträge für Preise und Umtauschkurse aus allen Buchungen von Wertpapieren und in mehreren Währungen generiert. </para>
+<para>
+  Security prices and currency exchange rates as displayed in the &gnucash; Price
+  Editor will be imported. In addition, price and rate entries will be generated
+  from all transactions involving securities and multiple currencies.
+</para>
 </sect4>
 
 <sect4 id="details.impexp.gncquotes">
-<title
->Online-Kursnotizen</title>
+<title>Online Quotes</title>
 
-<para
->GnuCash verwendet das Paket „Finance::Quote“, um Aktien- und Währungskurse aus dem Internet herunterzuladen. Aktuelle Versionen von &kappname; unterstützen ebenfalls dieses Paket, daher wird diese Methode als Standard beim Import benutzt. Sie können jedoch die &kappname;-Funktion benutzen, die im Abschnitt <link linkend="details.investments.onlinequotes"
->Online-Kursnotizen</link
-> erläutert wird. </para>
+<para>
+  For obtaining online price and currency rate quotations, &gnucash; uses a
+  package called <literal>Finance::Quote</literal>. Recent versions of &kmymoney;
+  contain support for this package for obtaining stock quotes, and this will be
+  used by default when importing data. You may however select to convert to the
+  native method used by &kmymoney; which is covered in more detail in
+  <link linkend="details.investments.onlinequotes">online quotes</link>.
+</para>
 
-<para
->Im folgenden Dialog können Sie eine der in &kappname; bekannten Online-Quellen auswählen oder eigene Quellen definieren. Das Börsensymbol wird jedoch unverändert importiert. Das dies Symbol im mehreren Paketen sehr wahrscheinlich nicht übereinstimmt, muss es später nach Abschluß des Imports von Hand bearbeitet werden. Spätere Aktualisierungen von Währungskursen verwenden das Paket Finance::Quote dann nicht mehr, sondern die in &kappname; eingebaute Funktion. </para>
+<para>
+  If you choose to do so, the following dialog will allow selection of a
+  'native' &kmymoney; price source, or a user-defined source, for each account
+  for which online quotes are required. However, the stock (ticker) symbol will
+  be imported unchanged. Since this symbol will almost certainly be different in
+  the two packages, it will need to be manually edited after completion of the
+  import process. Future currency rate updates will not use <literal>Finance::Quote</literal>,
+  and will always use the native retrieval method.
+</para>
 
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="gnucash-select_price_source.png" format="PNG"/>
+	<imagedata fileref="gnucash-select_price_source.png" format="PNG" />
 	</imageobject>
 	</mediaobject>
 	</screenshot>
@@ -370,153 +346,183 @@
 </sect3>
 
 <sect3 id="gncschedules">
-<title
->Geplante Buchungen</title>
+<title>Scheduled Transactions</title>
 
-<para
->&kappname; unterstützt die in GnuCash benutzte Unterscheidung zwischen Buchungsvorlagen und Häufigkeit der Buchung nicht. Buchungen werden doppelt importiert, wenn die gleiche Vorlage für verschiedene Wiederholungszeiträume verwendet wird, das ist aber wahrscheinlich unwichtig. </para>
+<para>
+  &kmymoney; does not retain the separation made in &gnucash; between template
+  transactions and their frequency of occurrence. Transaction data will be
+  duplicated if the same template is used in different schedules, but this is
+  not likely to be of great significance.
+</para>
 
 <sect4>
-<title
->Arten von geplanten Buchungen</title>
+<title>Schedule types</title>
 
-<para
->&kappname; kennt drei Arten von geplanten Buchungen. Gutschrift, Belastung und Umbuchung. In GnuCash gibt es diese Unterscheidung nicht. Das Importmodul versucht die Art der Buchungen aus den Konten und Richtungen des Geldflusses zu ermitteln. Das gelingt nicht in allen Fällen und muss dann manuell korrigiert werden.  </para>
+<para>
+  &kmymoney; classifies all schedules as one of three types, Bills, Deposits, or
+  Transfers. Since &gnucash; does not make such a distinction, the importer
+  attempts to determine the classification from the accounts and direction of
+  money movements. It may be that in some cases incorrect assumptions are made,
+  and these will need manual correction.
+</para>
 </sect4>
 
 <sect4>
-<title
->Möglicherweise fehlerhafte geplante Buchungen</title>
+<title>Suspect Schedules</title>
 
-<para
->Einige Funktionen von geplanten Buchungen in GnuCash sind in &kappname; nicht verfügbar. Dann versucht das Importmodul in diesen Fällen, die Daten sinnvoll zu konvertieren. Diese Buchungen werden als möglicherweise fehlerhaft gekennzeichnet. Sie können vom Benutzer beim Import direkt bearbeitet werden. Beispiele für möglicherweise falsche Buchungen sind: </para>
+<para>
+  Some features of &gnucash; scheduled transactions are not available in
+  &kmymoney;, so the importer tries in each case to reach a reasonable
+  compromise in converting the data. These transactions will be flagged as
+  suspect, and the user will be given the option of editing them directly during
+  the import process. Examples of situations which may cause this are:
+</para>
 
 <itemizedlist>
   <listitem>
-    <para
->Einige in GnuCash unterstützte Wiederholungszeiträume können zurzeit in &kappname; nicht eingestellt werden.</para>
+    <para>some frequency intervals supported in &gnucash; are not currently
+    available in &kmymoney;</para>
   </listitem>
 
   <listitem>
-    <para
->&kappname; erlaubt keine Formeln und Variablen in Wertefeldern</para>
+    <para>&kmymoney; does not support the use of formulae and variables in
+    amount fields</para>
   </listitem>
 
   <listitem>
-    <para
->Schwierige Fälle, die zurzeit beim Import noch nicht erkannt werden.</para>
+    <para>complex cases which have not yet been identified for import.</para>
   </listitem>
 </itemizedlist>
 
-<para
->Wegen der vielen möglichen Einstellungen kann es vorkommen, dass eine geplante Buchung einen schwerwiegenden Fehler in &kappname; auslöst. In diesen Fällen können im Importmodul alle möglicherweise fehlerhaften Buchungen ausgelassen werden. </para>
+<para>
+  Despite best efforts, it is possible that, due to the many options involved, a
+  scheduled transaction may cause a fatal error within &kmymoney;.  If this sort
+  of problem seems to be occurring, the importer offers the option to drop all
+  suspect schedules.
+</para>
 </sect4>
 </sect3>
 
 <sect3>
-<title
->Berichte</title>
+<title>Reports</title>
 
-<para
->&kappname; bietet eine umfassende Auswahl an einstellbaren Berichten. Ausführliche Informationen dazu finden Sie im Abschnitt <link linkend="details.reports"
->Berichte</link
->. Die Berichte in &kappname; entsprechen nicht unbedingt genau den Berichten in GnuCash. </para>
+<para>
+  &kmymoney; provides a comprehensive selection of configurable reports,
+  described in more detail in <link linkend="details.reports">Reports.</link>
+  These will not necessarily, however, match precisely those reports available
+  in &gnucash;.
+</para>
 </sect3>
 </sect2>
 
 <sect2>
-<title
->Auswahl der Import-Einstellungen</title>
+<title>Selecting Importer Options</title>
 
 <para id="details.impexp.gncoptions">
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="gnucash-import_options.png" format="PNG"/>
+	<imagedata fileref="gnucash-import_options.png" format="PNG" />
 	</imageobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
 <sect3>
-<title
->Verarbeitung von Investitionen</title>
+<title>Investment Handling</title>
 
-<para
->Siehe <link linkend="gncsecurities"
->Wertpapiere und Investitionen</link
-> weiter oben. </para>
+<para>
+  See <link linkend="gncsecurities">"Securities and Investments"</link> above.
+</para>
 </sect3>
 
 <sect3>
-<title
->Online-Kursnotizen</title>
+<title>Online Quotes</title>
 
-<para
->Schalten Sie diese Einstellung aus, wenn Sie die Standardmethode für zukünftige Online-Kursnotizen verwenden möchten. </para>
+<para>
+  Turn this off if you wish to use the native method for future online price
+  quotes.
+</para>
 
-<para
->Siehe <link linkend="details.impexp.gncquotes"
->Online-Kursnotizen</link
-> weiter oben. </para>
+<para>
+  See <link linkend="details.impexp.gncquotes">"Online Quotes"</link> above.
+</para>
 </sect3>
 
 <sect3>
-<title
->Geplante Buchungen</title>
+<title>Scheduled Transactions</title>
 
-<para
->Siehe <link linkend="gncschedules"
->Geplante Buchungen</link
-> weiter oben. </para>
+<para>
+  See <link linkend="gncschedules">"Scheduled Transactions"</link> above.
+</para>
 </sect3>
 
 <sect3>
-<title
->Kodierungs-Einstellungen</title>
+<title>Decoding Options</title>
 
-<para
->Werden in Ihrer Sprache Buchstaben oder Symbole in anderen Kodierungen als „Latin“ (Westeuropäisch) geschrieben, dann sind Sie in der GnuCash-Datei kodiert. Werden diese Buchstaben auf dem Bildschirm nicht korrekt angezeigt, dann müssen Sie dekodiert werden. Oft ist es nicht möglich, die richtige Kodierung zu erkennen. Dann muss diese Einstellung gewählt und ein Eintrag aus der Liste gewählt werden. Als erstes Element in der Liste wird die in den Regionaleinstellungen benutzte Kodierung angeführt und sollte zuerst ausprobiert werden. Da beim Import keine Daten in der GnuCash-Datei überschrieben werden, können Sie problemlos alle Einstellungen ausprobieren. </para>
+<para>
+  If your native language is written in letters or symbols which are different
+  from those used in the 'Latin' languages (&ie;, generally Western European),
+  these are represented in a special fashion ('encoded') in your &gnucash; file.
+  If these letters are not displayed correctly on your screen, then they must be
+  decoded.  Currently, it is often not possible to detect accurately which form
+  of decoding must be used, so you may need to set this option and select an
+  entry from the list.  In general, the first item in the list will be that
+  which is considered appropriate for your locale (&ie;, the country and
+  language which was selected as native when your operating system was
+  installed), so this should be tried first.  Since the import process does not
+  overwrite your &gnucash; file, you are free to experiment with any of these
+  selections.
+</para>
 </sect3>
 
 <sect3>
-<title
->Einstellungen der Buchungsnotizen</title>
+<title>Transaction Notes option</title>
 
-<para
->Manchmal enthalten nicht geteilte GnuCash-Buchungen noch restliche Memodaten, die normalerweise nicht angezeigt werden. Beim Import in &kappname; kann es wegen der unterschiedlichen Anzeige vorkommen, dass diese Daten angezeigt werden. Häufig haben diese Buchungen ein Notizfeld mit Hinweisen zum Grund der Buchung. Mit der Einstellung Buchungsnotizen werden diese belanglosen Memodaten durch den Inhalt des Notizfeldes überschrieben. </para>
+<para>
+  Under some usage conditions, non-split &gnucash; transactions may contain
+  residual, often incorrect, memo data which is not normally visible to the
+  user. When imported into &kmymoney; however, due to display differences, this
+  data can become visible. Often, these transactions will have a Notes field
+  describing the real purpose of the transaction. If this option is selected,
+  these notes, if present, will be used to override the extraneous memo data.
+</para>
 </sect3>
 
 <sect3>
-<title
->Einstellungen zur Fehlersuche</title>
+<title>Debug Options</title>
 
-<para
->Diese Einstellungen sind nur bei Problemen mit dem Import erforderlich. In diesen Fällen sollten Sie diese Probleme auch an die Liste &devlist; der &kappname;-Entwickler schicken. Denken Sie daran, dass die Fehlerprotokolle vertrauliche Daten enthalten können. Daher sollten Sie die Funktion zur Anonymisierung der Daten benutzen, ehe Sie sie an eine öffentliche Mailingliste schicken. </para>
+<para>
+  These need only be used in the event of import problems.  If you have such
+  problems, you should also report them to the &kmymoney; developer list
+  &devlist;.  Note that the traces produced by these options may contain data of
+  a confidential nature, and the <guilabel>Anonymize data</guilabel> option
+  should be used if they are to be made publicly available.
+</para>
 </sect3>
 </sect2>
 
 <sect2>
-<title
->Importbericht</title>
+<title>Import Report</title>
 
-<para
->Am Ende des Importprozesses wird ein Bericht mit der Anzahl der bearbeiteten Einträge, Fehlern oder ungewöhnlichen Vorkommnissen erstellt. Dieser Bericht wird auf dem Bildschirm angezeigt und kann zur späteren Überprüfung in einer Datei gespeichert werden. Ein vollständiger Bericht beinhaltet folgende Abschnitte: </para>
+<para>
+  At the end of processing, the importer produces a report showing the number of
+  different entities processed, and any errors or anomalies encountered. This
+  report will be displayed on screen, and may be saved to a file for later
+  review. A full report may contain the following sections:
+</para>
 
 <itemizedlist>
   <listitem>
-    <para
->Anzahl der Datensätze</para>
+    <para>Record counts</para>
   </listitem>
 
   <listitem>
-    <para
->Widersprüche bei Kontenarten und durchgeführten Aktionen</para>
+    <para>Inconsistencies in account types and actions taken</para>
   </listitem>
 
   <listitem>
-    <para
->Einzelheiten für ungewöhnliche geplante Buchungen</para>
+    <para>Details of suspect schedules</para>
   </listitem>
 </itemizedlist>
 
@@ -524,7 +530,7 @@
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="gnucash-report.png" format="PNG"/>
+	<imagedata fileref="gnucash-report.png" format="PNG" />
 	</imageobject>
 	</mediaobject>
 	</screenshot>
@@ -534,146 +540,166 @@
 
 <sect1 id="details.impexp.qifimp">
 <sect1info>
-  <author
->&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+  <author>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
 </sect1info>
 
-<title
->QIF-Importer</title>
+<title>QIF Importer</title>
 
 <sect2>
-<title
->Warum das QIF-Format nicht benutzt werden sollte</title>
+<title>QIF format considered harmful</title>
 
-<para
->Im allgemeinen sollte das QIF-Format, wenn möglich, nicht benutzt werden. Es ist eine schlechte Wahl für die Übertragung von Finanzdaten. Unter anderem gibt es folgende Probleme mit dem Format: </para>
+<para>
+  Generally speaking, the QIF format should be avoided wherever possible.  It is
+  a poor choice for transporting financial data.  Among other things, QIF suffers
+  from these problems:
+</para>
 
 <itemizedlist>
   <listitem>
-    <para
->Fehlende Standardisierung des Formats: Verschiedene Versionen des gleichen Programms können gleichen Elementen verschiedenen Bedeutungen zuweisen.</para>
+    <para>Lack of standardized format: Different versions of the same program
+    will impart different meanings to the same element.</para>
   </listitem>
 
   <listitem>
-    <para
->Kennung für Buchungen fehlt: Da es keine Kennung für einzelne Buchungen gibt, können doppelte Buchungen nur durch Raten festgestellt werden.</para>
+    <para>Lack of transaction identifier: Because there is no ID number
+    associated with each transaction, matching duplicate transactions is
+    haphazard at best.</para>
   </listitem>
 
   <listitem>
-    <para
->Mangelnde Ausdrucksfähigkeit: Die Grammatik des Formats ist ziemlich einfach und kann die komplexen Informationen nicht darstellen, die heute für eine Finanzverwaltung gebraucht werden.</para>
+    <para>Lack of expressiveness: The grammar is really simple, and cannot
+    portray the depth of financial information found in today's financial
+    environment.</para>
   </listitem>
 </itemizedlist>
 
-<para
->Aus diesen Gründen hat Intuit die Unterstützung des QIF-Formats in Quicken 2005 vollständig eingestellt. Können Sie Daten in anderen Formaten wie zum Beispiel QFX erhalten, sollten Sie das QIF-Format nicht benutzen. </para>
+<para>
+  This is generally why Intuit stopped supporting QIF input at all with
+  <application>Quicken</application> 2005. If you have the option of getting
+  data some other way, like OFX, always choose that option.
+</para>
 </sect2>
 
 <sect2>
-<title
->Import einer QIF-Datei</title>
+<title>How to import a QIF file</title>
 
-<para
->Um eine QIF-Datei zu importieren, müssen Sie zuerst eine gültige &kappname;-Datei geöffnet haben. Wählen Sie dann <menuchoice
-><guimenuitem
->Importieren</guimenuitem
-> <guimenuitem
->QIF ...</guimenuitem
-> </menuchoice
-> aus dem Menü <guimenu
->Datei</guimenu
->. </para>
+<para>
+  To import a QIF file, first ensure you have a valid &kmymoney; file open.
+  Then select <menuchoice><guimenu>File</guimenu><guisubmenu>Import</guisubmenu>
+  <guimenuitem>QIF...</guimenuitem> </menuchoice> menu item.
+</para>
 	
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="qifopen.png" format="PNG"/>
+	<imagedata fileref="qifopen.png" format="PNG" />
 	</imageobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para
->Im nächsten Dialog müssen Sie den Namen der QIF-Datei eingeben. Klicken Sie auf <guibutton
->Durchsuchen</guibutton
->, um die Datei zu finden. </para>
+<para>
+  The resulting dialog prompts for the QIF filename allowing you to locate the
+  file by clicking on the <guibutton>Browse</guibutton> button.
+</para>
 
-<para
->&kappname; unterscheidet zwischen dem Import einer Datei mit dem Kontoauszug einer Bank und einer Datei mit Daten, die von einem anderem Programm exportiert wurden. Möchten Sie die Daten aus Ihren früheren Finanzverwaltungsprogramm importieren, dann wählen Sie die passende Einstellung. </para>
+<para>
+  Also, &kmymoney; differentiates between the import of a bank statement file
+  and historic data exported from another application. The default is to import
+  a bank statement file. In case you are importing data from your previous personal
+  finance manager application select the appropriate option.
+</para>
 
-<para
->Normalerweise funktioniert das QIF-Standardprofil mit den meisten QIF-Daten zufriedenstellend. In manchen Fällen ist es nötig, ein angepasstes QIF-Profil zu verwenden. Weitere Informationen dazu finden Sie im <link linkend="details.impexp.qifimp.profile"
->nächsten Abschnitt</link
->. </para>
+<para>
+  In general the default QIF profile should work with your QIF data. In some
+  cases it might become necessary to use a modified QIF profile. See
+  the <link linkend="details.impexp.qifimp.profile">next section</link> for more
+  details on that subject.
+</para>
 
-<para
->Klicken Sie auf <guibutton
->Importieren</guibutton
->, um die Daten aus der QIF-Datei einzufügen. </para>
+<para>
+  Click on <guibutton>Import</guibutton> to import the QIF file.
+</para>
 
-<para
->&kappname; startet das Einlesen der Datei und versucht, das verwendete Format für Datum und Zahlen zu bestimmen. Kann ein Datum nicht eindeutig bestimmt werden, müssen Sie das richtige Format aus einer Liste von möglicherweise passenden Formaten auswählen. </para>
+<para>
+  &kmymoney; will start scanning the file to determine the formats used to
+  represent dates and numbers. In case it cannot determine a date format
+  unambiguously, &kmymoney; will ask the user to select one from the list of
+  possible date formats.
+</para>
 
-<para
->Als nächstes importiert &kappname; die Daten und erzeugt alle nötigen Objekte, wie zum Beispiel Zahler/Zahlungsempfänger, Konten, Kategorien  und Aktienkurse. Soweit möglich werden die importierten Informationen an vorhandene Buchungen angepasst. Während des Imports wird der Fortschritt des Vorgangs angezeigt und laufend aktualisiert. </para>
+<para>
+  Next, &kmymoney; imports the data and creates all necessary objects, such as
+  payee information, accounts and category records, and stock price information.
+  Wherever possible, existing transactions will be matched against the imported
+  information. A progress bar is shown and updated during the import process.
+</para>
 
-<para
->Wenn &kappname; den Namen des zu importierenden Kontos nicht ermitteln kann, muss der Benutzer angeben, in welches Konto die Daten importiert werden sollen. Ist das Konto noch nicht in Ihrer Datei vorhanden, kann mit dem Knopf <guibutton
->Erstellen</guibutton
-> das neue Konto angelegt werden. </para>
+<para>
+  In case &kmymoney; could not detect the name of the account to be imported,
+  the user will be asked to select the account into which the data should be
+  imported. If the account does not already exist in your file, a new account
+  can be created by clicking on <guibutton>Create</guibutton>.
+</para>
 
-<para
->Am Ende des Imports zeigt &kappname; eine Zusammenfassung der Ergebnisse an. </para>
+<para>
+  At the end of the import, &kmymoney; shows a statement import statistics
+  window.
+</para>
 
 <para>
 <screenshot>
-	<screeninfo
->Statistik der Zusammenfassung</screeninfo>
+	<screeninfo>Statement statistics</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="qif_report.png" format="PNG"/>
+	<imagedata fileref="qif_report.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase
->Statistik der Zusammenfassung</phrase>
+	<phrase>Statement statistics</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<para
->Nach dem Import werden alle importierten Buchungen in einer gelben Hintergrundfarbe in der Kontenbuchansicht angezeigt. Konnten die importierten Buchungen bereits vorhandenen Buchungen zugeordnet werden, wird ein helles Grün als Hintergrundfarbe verwendet. </para>
+<para>
+  After importing, all of the imported transactions will be shown with a yellow
+  background in the ledger view.  In case &kmymoney; was able to match an
+  imported transaction with an already existing transaction, the background is
+  shown in light green.
+</para>
 
-<para
->Als nächstes müssen die importierten Daten überprüft und übernommen werden. Dieser Schritt muss immer ausgeführt werden, auch beim Import aus anderen Quellen. Informationen dazu finden Sie in einem extra Abschnitt dieses Handbuchs. </para>
+<para>
+  The next step is to verify the imported data and accept it. This is a general
+  process and also applies to imports from other sources. It is outlined in a
+  separate section of this document.
+</para>
 
 <note>
-<para
->Die Farben für importierte und zugeordnete Buchungen können angepasst werden und weichen bei Ihnen möglicherweise ab. </para>
+<para>
+  The colors used to mark imported and matched transactions are customizable and
+  may be different in your environment.
+</para>
 </note>
 </sect2>
 
 <!--
 <sect2>
-<title
->Accepting the imported transactions</title>
+<title>Accepting the imported transactions</title>
 <para>
   
-	When &kappname; has finished importing the QIF transactions the account will be shown with the imported transactions listed in Yellow.
+	When &kmymoney; has finished importing the QIF transactions the account will be shown with the imported transactions listed in Yellow.
 </para>
 
 <para>
 <screenshot>
-	<screeninfo
->Imported transactions</screeninfo>
+	<screeninfo>Imported transactions</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="qifimportverify.png" format="PNG"/>
+	<imagedata fileref="qifimportverify.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase
->Imported transactions</phrase>
+	<phrase>Imported transactions</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
@@ -685,54 +711,52 @@
 	The importer was not able to automatically assign a category based on your past transaction history.
 </para>
 
-<para
->	
-	Transaction data can be edited or even deleted if needed.  To edit a transaction simply double click on the entry or hit enter when the entry is highlighted.  Once finished click on <guibutton
->OK</guibutton
-> to accept the imported transactions or <guibutton
->Cancel</guibutton
-> to remove the imported transactions.
+<para>	
+	Transaction data can be edited or even deleted if needed.  To edit a transaction simply double click on the entry or hit enter when the entry is highlighted.  Once finished click on <guibutton>OK</guibutton> to accept the imported transactions or <guibutton>Cancel</guibutton> to remove the imported transactions.
 </para>
 
 </sect2>
 
-<sect2
-><title
->Importing Investments</title>
+<sect2><title>Importing Investments</title>
 
 <para>
-	Please note that if you are importing a file with investment transactions, those investments must first exist in your &kappname; file.
-	The trading symbol is used to match, so please ensure that the symbol in &kappname; is exactly the same as the one in the file you're importing.
+	Please note that if you are importing a file with investment transactions, those investments must first exist in your &kmymoney; file.
+	The trading symbol is used to match, so please ensure that the symbol in &kmymoney; is exactly the same as the one in the file you're importing.
 </para>
 </sect2>
 -->
 
 <sect2 id="details.impexp.qifimp.profile">
-<title
->Einrichtung eines QIF-Profils</title>
+<title>Setting up a QIF profile</title>
 
-<para
->Da es kein allgemeines Standardformat für eine QIF-Datei gibt, haben mehrere Softwareanbieter das Format verändert und eigenen Versionen benutzt. Mit einem QIF-Profil können Sie &kappname; angeben, wie die Ihre veränderte Datei verarbeitet werden soll. Um ein vorhandenes QIF-Profil zu bearbeiten oder ein neues Profil zu erstellen, wählen Sie den Knopf <guibutton
->Neu</guibutton
-> im QIF-Importdialog neben der Profilauswahl. </para>
+<para>
+  Because there is no universally standard format for a QIF file, different
+  vendors have taken liberties with the format, and introduced their own
+  nuances.  The QIF Profile allows &kmymoney; to know about the peculiarities of
+  your file.  To edit an existing QIF Profile, or to create a new one, press the
+  <guibutton>New</guibutton> button on the QIF Import dialog, near the profile selector.
+</para>
 
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="qifimport-qifprofileeditor.png" format="PNG"/>
+	<imagedata fileref="qifimport-qifprofileeditor.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase
->QIF-Profileditor</phrase>
+	<phrase>QIF Profile Editor</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
 <note>
-<para
->In früheren Versionen von &kappname; wurden Karteikarten für Datum und Betrag benutzt. Jetzt bestimmt &kappname; diese Einstellungen beim Einlesen der Datei. Werden nicht alle Einstellungen erkannt, dann werden die fehlenden Informationen beim Import abgefragt. </para>
+<para>
+  Previous versions of &kmymoney; used to have a tab for date and amount
+  specifications. &kmymoney; now determines those settings by scanning the
+  file. If it cannot figure out all settings, it will interrogate the user
+  during import.
+</para>
 </note>
 <!--
 <para>
@@ -745,11 +769,10 @@
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="qifimport-qifprofiledate.png" format="PNG"/>
+	<imagedata fileref="qifimport-qifprofiledate.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase
->QIF Profile Date</phrase>
+	<phrase>QIF Profile Date</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
@@ -757,9 +780,7 @@
 
 </sect2>
 
-<sect2
-><title
->Apostrophe format</title>
+<sect2><title>Apostrophe format</title>
 
 <para>
 	Many common QIF writers use a 2-digit representation for the year. 
@@ -779,84 +800,109 @@
 -->
 </sect2>
 
-<sect2
-><title
->Buchungs-Zuordnung</title>
+<sect2><title>Transaction matching</title>
 
-<para
->Wie bereits vorher erklärt, ist die fehlende einzigartige Kennung jeder Buchung eines der Hauptprobleme des QIF-Formats. Daher können beim Import von QIF-Dateien doppelte Buchungen auftreten, wenn Sie bereits einige Buchungen in Ihrem Kontenbuch vorhanden sind. &kappname; versucht, beim Import Buchungen ähnlich bereits vorhanden zu erkennen. Werden anscheinend gleiche Buchungen festgestellt, dann werden sie als möglicherweise doppelte Buchungen markiert. </para>
+<para>
+  As noted previously, one of the major drawbacks of the QIF format is the lack
+  of a unique identifier for each transaction.  Thus, if you import a QIF file
+  and some of the transactions are already in your ledger, you may get
+  duplicates.  &kmymoney; attempts to get around this by looking for
+  transactions that look similar to those you already have.  If it finds
+  something that looks like the same transaction, it will match the apparent
+  duplicate.
+</para>
 
-<para
->Das ist ein Problem bei ähnlichen aussehenden Buchungen, die aber tatsächlich verschieden sind. In diesen Fällen können Sie diese Buchungen später im Kontenbuch wieder trennen. </para>
+<para>
+  This can be a problem if you have transactions that look too similar but are
+  actually different.  In this case, you can unmatch those transactions later in
+  the ledger view.
+</para>
 </sect2>
 
 <sect2>
-<title
->Entwicklung eines Importfilters</title>
+<title>Writing an import filter</title>
 
-<para
->Möglicherweise liegen Ihre Daten in einem benutzerdefinierten Format vor, wie zum Beispiel als durch Komma getrennte Werte (CSV) oder anderen Formaten. Ab Version 4.6 enthält &kappname; ein CSV-Importmodul. Sie können aber auch andere Datenformate mit dem QIF-Importfilter in &kappname; importieren. Ein Filter ist ein selbst geschriebenes Programm, das die Importdatei als Eingabe liest und eine QIF-Datei als Ausgabe schreibt. Der Filter kann ein Bash-Skript, ein Perl-Skript oder ein kompiliertes in C/C++ geschriebenes Programm sein. </para>
+<para>
+  Sometimes you may have data in a custom format, like comma-separated-values
+  (CSV) or something else unique to your situation.  As of version 4.6,
+  &kmymoney; includes a CSV Importer Plugin, but you can still import other
+  types of files into &kmymoney; using a QIF Import Filter.  A filter is a
+  custom program you write which takes your special file as input, and produces
+  a QIF file as output.  This can be a shell script, a perl script, a compiled
+  program written in C/C++, or anything else you can dream of, as long as the
+  system can run it.
+</para>
 
-<para
->Um einen eigenen Importfilter einzusetzen, bearbeiten Sie Ihr bevorzugtes QIF-Profil und gehen zur Karteikarte „Filter“. Geben Sie dort den Speicherort des Filterprogramms ein. Wenn Sie dann eine QIF-Datei mit diesem Profil importieren, werden die Daten zuerst vom angegebenem Filterprogramm bearbeitet. </para>
+<para>
+  To use it, edit your favorite QIF Profile, and select the Filter tab.  Enter
+  the location of your filter program where prompted.  Then, whenever you do a
+  QIF import using this profile, the file you select for importing will be run
+  through your filter first.
+</para>
 
-<para
->Ein häufiges Problem ist die Umwandlung einer Liste von durch Kommata getrennten Werten in das QIF-Format. Dies ist ein typischer Anwendungsfall für das Programm „awk“. Erstellen Sie ein Skript mit den Namen csv2qif.awk und fügen Sie folgende Zeilen ein: </para>
+<para>
+  A common problem is to convert a list of comma-separated-values into a QIF
+  file. This is a textbook case for the <command>awk</command> tool. Create
+  a script called <filename>csv2qif.awk</filename>, with the following two
+  lines as contents:
+</para>
 
-<programlisting
->BEGIN { FS=&quot;,&quot;; print &quot;!Type:Bank&quot; }
+<programlisting>
+	BEGIN { FS=&quot;,&quot;; print &quot;!Type:Bank&quot; }
 
-        { print &quot;D&quot;$1; print &quot;T&quot;$2; print &quot;N&quot;$3; print &quot;P&quot;$4; print &quot;M&quot;$5; print &quot;^&quot; }
+	{ print &quot;D&quot;$1; print &quot;T&quot;$2; print &quot;N&quot;$3; print &quot;P&quot;$4; print &quot;M&quot;$5; print &quot;^&quot; }
 </programlisting>
 
-<para
->Ändern Sie dann die QIF-Schlüssel (D,T,N,P,M) passend zur Reihenfolge der CSV-Daten. Stellen Sie als Eingabefilter <userinput
->awk -f csv2qif.awk</userinput
-> ein. </para>
+<para>
+  Then, change the QIF keys (D,T,N,P,M) to match the order of your CSV data.
+  Set the input filter to <userinput>awk -f csv2qif.awk</userinput>.
+</para>
 
-<para
->Ein anderes Problem tritt manchmal mit der Zeichenkodierung von QIF-Dateien auf. &kappname; nimmt an, dass Dateien im Format UTF8 kodiert sind. Haben Sie eine QIF-Datei in einem abweichenden Format, sollten Sie die Kodierung in UTF8 ändern. Um zum Beispiel eine Datei im Format iso-8859-1 zu importieren, setzen Sie den Eingabefilter auf <userinput
->recode iso-8859-1..utf-8</userinput
->. </para>
+<para>
+  Another problem sometimes arises in the encoding of QIF files.  &kmymoney;
+  expects files to be UTF8 encoded.  If your file is encoded in something else,
+  it can be useful to convert it to UTF8.  For example to convert it from
+  iso-8859-1, you would set the input filter to <userinput>recode
+  iso-8859-1..utf-8</userinput>.
+</para>
 
 </sect2>
 <sect2>
-<title
->Besondere &kappname;-Erweiterungen für das QIF-Format</title>
+<title>Special &kmymoney; QIF extensions</title>
 
-<para
->Wie bereits vorher erwähnt, ist die fehlende einzigartige Kennung jeder Buchung eines der Hauptprobleme des QIF-Formats. Schreiben Sie Ihr eigenes Programm oder Filter für das QIF-Format, können Sie diese Problem umgehen, indem Sie das Feld „#“ von &kappname; benutzen. Das Importmodul interpretiert dies als eindeutige Buchungskennung und übergeht den Datensatz, wenn die Buchung bereits im System vorhanden ist. </para>
+<para>
+  As already mentioned, one of the major drawbacks of the QIF format is the lack
+  of a unique identifier for each transaction.  If you are writing your own QIF
+  file creator (or filter, as described above), you can overcome this problem.
+  &kmymoney; supports the '#' field.  The importer will interpret this as a
+  unique transaction ID, and disregard the record if the transaction is already
+  in the system.
+</para>
 </sect2>
 </sect1>
 
 <sect1 id="details.impexp.qifexp">
-<title
->QIF-Export</title>
-<para
->Um ein Konto in eine QIF-Datei zu exportieren, wählen Sie <menuchoice
-><guimenuitem
->Exportieren</guimenuitem
-> <guimenuitem
->QIF ...</guimenuitem
-></menuchoice
-> aus dem Menü <guimenu
->Datei</guimenu
->. Im Dialog müssen Sie dann das Konto für den Export, eine Ausgabedatei und das zu verwendende QIF-Profil angeben. </para>
+<title>QIF Exporter</title>
+<para>
+  To export one of your accounts to a QIF file, choose
+  the <menuchoice><guimenu>File</guimenu><guisubmenu>Export</guisubmenu>
+  <guimenuitem>QIF...</guimenuitem></menuchoice> menu item. You will be prompted for
+  which single account to export, what file to export it to, and what QIF Profile
+  to use.
+</para>
 
-<note
-><para
->Zur Zeit können noch keine Investitionen mit dem QIF-Modul exportiert werden. </para
-></note>
+<note><para>
+  At the moment, QIF Exporter does not handle export of investments.
+</para></note>
 
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="qifimport-export.png" format="PNG"/>
+	<imagedata fileref="qifimport-export.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase
->QIF-Export</phrase>
+	<phrase>QIF Export</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
@@ -865,571 +911,244 @@
 
 <sect1 id="details.impexp.ofx">
 <sect1info>
-  <author
->&Ace.Jones; &Ace.Jones.mail;</author>
-  <author
->&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+  <author>&Ace.Jones; &Ace.Jones.mail;</author>
+  <author>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
 </sect1info>
-<title
->OFX-Importmodul</title>
+<title>OFX Importer Plugin</title>
 
 <sect2>
-<title
->Installation des Moduls</title>
+<title>Getting the plugin</title>
 
-<para
->&kappname; importiert QFX-Dateien ohne Probleme. diese Funktion ist aber nicht im eigentlichen Programm enthalten. Sie müssen das QFX-Importmodul besorgen und installieren. Dann ist diese Aktion automatisch im Menü <menuchoice
-><guimenu
->Datei</guimenu
-> <guimenuitem
->Importieren</guimenuitem
-></menuchoice
-> verfügbar. </para>
+<para>
+  &kmymoney; will import OFX files painlessly.  However, this functionality is
+  not built into the core program.  You must obtain and install the OFX Importer
+  Plugin.  Once that is installed, the command to import OFX files will
+  automatically show up under the <menuchoice><guimenu>File</guimenu>
+  <guisubmenu>Import</guisubmenu></menuchoice> submenu.
+</para>
 
-<para
->Es gibt fertige Pakete für &kappname;. die bereits das OFX-Modul enthalten oder als getrenntes Paket bereitstellen. Ist das OFX-Importmodul anscheinend nicht auf Ihren System installiert, sollten Sie zuerst überprüfen, ob es in der Paketquelle Ihres &kappname;-Programms erhältlich ist. </para>
+<para>
+  Note that many prepackaged versions of &kmymoney; were built with the OFX
+  importer already included or available as a separate package.  If the OFX
+  importer does not seem to be installed in your version, the first place to
+  check is in the same place you got your base &kmymoney; package.
+</para>
 
-<para
->Haben Sie das Programm aus RPM-Paketen installiert, dann ist das OFX-Importmodul im RPM-Paket kmymoney-ofx enthalten. Dieses Paket finden Sie im Archiv, aus dem Sie das Programm &kappname; installiert haben. Installieren Sie &kappname; aus den Quelltexten, dann muss die Entwicklerversion der Bibliothek libOFX Version 0.9 auf Ihrem System installiert sein. Beim Kompilieren von &kappname; werden dann diese Bibliotheken gefunden und das Modul erstellt. Mit der Version 4.6 von &kappname; ist mindestens die Version 0.9.4 der Bibliothek libofx erforderlich. </para>
+<para>
+  If you have installed from RPM, the OFX Importer Plugin is contained within
+  the kmymoney-ofx package. It should be available from whatever source you got the
+  base &kmymoney; package. If you have built from sources, all you need to do is
+  have preferably the libOFX 0.9 development headers and libraries installed on
+  your system.  The &kmymoney; build process will detect these and compile the
+  plugin.  At the time of release of &kmymoney; 4.6, the latest libofx version
+  was 0.9.4, which is also the minimum required version.
+</para>
 
-<para
->Haben Sie Probleme beim Kompilieren von &kappname;, aber die richtige Version der Bibliothek libOFX ist installiert, bitten Sie auf der Entwicklerliste &devlist; um Hilfe. Fügen Sie der E-Mail eine Kopie Ihrer Protokolldatei der Kompilierung als komprimierte GZip-Datei hinzu. </para>
+<para>
+  Should you run into trouble trying to compile &kmymoney;, and you are certain
+  you have the correct version of libOFX installed, please contact the
+  developers list &devlist; for assistance. Include a copy of your
+  <filename>config.log</filename> file, compressed first via <command>gzip</command>.
+</para>
 </sect2>
 
 <sect2>
-<title
->Import einer OFX-Datei</title>
+<title>What is OFX</title>
 
-<para
->Um eine OFX-Datei zu importieren,wählen Sie das Importmodul aus der Menüleiste <menuchoice
-><guimenu
->Datei</guimenu
-> <guisubmenu
->Importieren</guisubmenu
-><guimenuitem
->OFX ...</guimenuitem
-></menuchoice
->. Wird der Menüeintrag <guimenuitem
->OFX ...</guimenuitem
-> nicht angezeigt, ist kein OFX-Importmodul installiert. Im vorherigen Abschnitt finden Sie Hinweise zur Installation des OFX-Importmoduls. </para>
+<para>
+  OFX stands for <quote>Open Financial Exchange</quote>.  According to the
+  <ulink url="https://www.ofx.net/">OFX web site</ulink> <quote>Open Financial
+  Exchange (OFX) is a unified specification for the electronic exchange of
+  financial data between financial institutions, businesses and consumers via
+  the Internet. OFX is not a financial institution.</quote> The specification
+  defines formats for transfer of financial data both by file and by direct
+  interchange.
+</para>
 
-<para
->Zuerst müssen Sie im Importmodul das Konto für den Import der Buchungen angeben. Enthält die Datei Buchungen aus mehreren Konten, muss diese Angabe auch mehrfach erfolgen. </para>
+<para>
+  Although the standard is much more complete and robust than QIF, there are
+  still variations, depending on the specific implementation used by any
+  institution.  OFX files may have an extension of <quote>OFX</quote> or
+  <quote>QFX</quote> (upper or lower case); this does not imply any particular
+  difference in the content.  The specification is based on &XML;, so the files
+  can be read in any text editor, but as whitespace is not relevant to the
+  content itself, some implementations do not use any, making it very hard for a
+  human to read.
+</para>
 
-<para
->Nach dem Import werden möglicherweise einige Buchungen mit einen Ausrufungszeichen in einem gelben Dreieck im Kontenbuch angezeigt. Die Ursache dafür liegt darin, dass diese Buchungen einer Kategorie zugeordnet werden müssen. Das Importmodul konnte keine passende Kategorie auf der Basis der vorherigen Buchungen ermitteln. Sie können jede Buchung im Kontenbuch bearbeiten und ihr eine Kategorie zuweisen, dann wird diese Markierung entfernt. </para>
-
-<para
->Bitte beachten Sie, dass in diesem Abschnitt das in &kappname; <quote
->eingebaute</quote
-> OFX-Importmodul beschrieben wird. OFX-Dateien können auch mit dem AqBanking-Importmodul importiert werden, wenn es auf Ihren System installiert ist. Beide Module verhalten sich unterschiedlich, sie wurden von verschiedenen Entwicklern geschrieben. </para>
+<para>
+  Another site with good information is <ulink url="https:/ofxhome.com/">OFX
+  Home</ulink>.  They maintain a directory of financial institutions that
+  support OFX.  This can be useful if you have problems setting up <link
+  linkend="details.impexp.ofxdirectconnect">OFX direct connect.</link> They also
+  have a forum for discussions about OFX issues.
+</para>
 </sect2>
 
 <sect2>
-<title
->Import von Investitionen</title>
+<title>Importing an OFX file</title>
 
-<para
->Denken Sie daran, dass beim Import von Investitionsbuchungen Konten für diese Investitionen bereits in Ihrer &kappname;-Datei vorhanden sein müssen. Das Handelssymbol wird für die Zuordnung der Buchungen verwendet. Überprüfen Sie daher, ob das in &kappname; verwendete Symbol mit dem Symbol in der Importdatei übereinstimmt. </para>
+<para>
+  The most basic way to import an OFX file is to choose the importer from the
+  menu bar. From the <menuchoice><guimenu>File</guimenu><guisubmenu>Import</guisubmenu>
+  <guimenuitem>OFX...</guimenuitem></menuchoice> menu item. If OFX does not show
+  up under Import, you do not have the OFX Importer Plugin installed correctly.
+  Please see the previous section.
+</para>
+
+<para>
+  The first thing the importer will do is ask you into which account to import
+  the transactions.  If there are transactions from multiple accounts in your
+  file, you will be asked this question multiple times.
+</para>
+
+<para>
+  After importing, some of your transactions may be shown with an exclamation
+  mark on a yellow triangle in the ledger.  This is because they need to be
+  assigned a category.  The importer was not able to automatically assign a
+  category based on your past transaction history.  You can edit each
+  transaction in the ledger to assign a category, and the mark will be removed.
+</para>
+
+<para>
+  Please note that this section describes the <quote>native</quote> OFX
+  importer.  OFX files may also be imported using the AqBanking Importer Plugin
+  if you have installed that.  Note that the two importers do behave slightly
+  differently, and they are written and supported by two different developers.
+</para>
+</sect2>
+
+<sect2>
+<title>Importing Investments</title>
+
+<para>
+  Please note that if you are importing a file with investment transactions,
+  those investments must first exist in your &kmymoney; file.  The trading
+  symbol is used to match, so please ensure that the symbol in &kmymoney; is
+  exactly the same as the one in the file you're importing.
+</para>
 </sect2>
 
 <sect2 id="details.impexp.webconnect">
-<title
->Verbindung zum Internet</title>
+<title>Web Connect</title>
 
-<para
->Am einfachsten ist der Import einer QFX-Datei über eine Internetverbindung. Gehen Sie zur Webseite Ihrer Bank und klicken Sie auf eine Verknüpfung zum Herunterladen einer QFX-Datei. In Ihrem Browser sollte die Abfrage erscheinen, mit welchem Programm Sie heruntergeladene Datei öffnen möchten. Geben Sie dafür das Programm &kappname; an. Die heruntergeladene QFX-Datei wird in die letzte mit &kappname; geöffnete Datei importiert. Sie können auch die Dateizuordnung Ihrer Arbeitsumgebung ändern und hier &kappname; angeben. Dann werden OFX-Dateien automatisch ohne Nachfrage in &kappname; geöffnet. </para>
+<para>
+  The easiest way to import an OFX file is to set up Web Connect.  Visit your
+  bank's web site, and click on a link to download an OFX file.  Your browser
+  should ask you what program you would like to use to open the file.  Point
+  your browser to &kmymoney;.  It will then import the downloaded OFX file into
+  the &kmymoney; file you most recently had open.  You can also change the file
+  associations of your desktop environment, and have &kmymoney; open the OFX
+  file automatically for you.
+</para>
 
-<para
->Möchten Sie die QFX-Datei in eine &kappname;-Datei importieren, laden Sie zuerst diese Datei in &kappname; und gehen Sie dann zur Webseite Ihrer Bank. </para>
+<para>
+  If you need to import the OFX file into some other &kmymoney; file, load up
+  that file in &kmymoney; first, and then visit your bank's web site.
+</para>
 </sect2>
 
 <sect2 id="details.impexp.ofxdirectconnect">
-<title
->Direktverbindung</title>
+<title>Direct Connect</title>
 
-<para
->Die OFX-Direktverbindung ist jetzt in &kappname; verfügbar. Damit haben Sie die Möglichkeit, Verbindung mit Ihrer Bank aufzunehmen und Kontoauszüge abzurufen. In den nächsten Versionen des Handbuchs finden Sie zu diesem Thema mehr Informationen in einem eigenen Kapitel. </para>
+<para>
+  OFX Direct Connect is now supported in &kmymoney;.  This gives you the ability
+  to contact your bank directly to obtain statements.  In the future, there will
+  be more help written, and this will be moved to its own section.
+</para>
 
-<para
->Um diese Funktion nutzen zu können, muss &kappname; mit der Option --enable-ofxbanking kompiliert werden, das ist die Standardeinstellung. </para>
+<para>
+  To enable this feature, you must compile &kmymoney; with the
+  <userinput><option>--enable-ofxbanking</option></userinput> switch (now the default).
+</para>
 
-<para
->Hinweis: Manche Banken verlangen eine getrennte Anmeldung, ein eigenes Passwort oder PIN und berechnen Ihnen möglicherweise eine zusätzliche Gebühr für diesen Dienst. Keine Bank unterstützt &kappname;, Sie müssen angeben, dass Sie die Programme MS Money oder Quicken verwenden. </para>
+<para>
+  Please be warned: Many banks require a separate signup, will give you a
+  separate password or PIN, and may even charge you a separate fee for this
+  service.  No bank directly supports &kmymoney;.  You will have to tell them
+  you want to bank directly from <application>MS Money</application> or
+  <application>Quicken</application>.
+</para>
 
-<para
->Zuerst muss jedes Konto, für das Sie Auszüge herunterladen möchten, dafür eingerichtet werden. Hegen Sie zur Ansicht <guilabel
->Konten</guilabel
->, klicken Sie mit der &RMBn; auf ein Konto und wählen im Kontextmenü <guimenuitem
->Einem Onlinekonto zuordnen</guimenuitem
->. Haben Sie mehrere Module für Online-Banking installiert, müssen Sie das gewünschte Modul angeben, zum Beispiel <guimenuitem
->KMyMoney OFX</guimenuitem
-> für die interne OFX-Methode. Dann wird eine Liste von Banken aus dem Internet heruntergeladen. Ein Assistent unterstützt Sie bei der Auswahl der Bank und des Kontos sowie bei der Eingabe von Benutzername und Passwort. Ist Ihre Bank in der heruntergeladenen Liste nicht enthalten, fragen Sie Ihre Bank nach den erforderlichen Daten und nutzen die manuelle Eingabe. </para>
-
-<para
->Haben Sie ein Konto mit Online-Banking eingerichtet, wechseln Sie zur Kontenbuchansicht für diese Konto. Wählen Sie dann aus dem Menü <menuchoice
-><guimenu
->Konto</guimenu
-><guimenuitem
->Konto aktualisieren ...</guimenuitem
-></menuchoice
->. Dann wird die Verbiegung zur Bank hergestellt und die Kontoauszüge der letzten 60 Tage werden heruntergeladen. </para>
+<para>
+  The first step is to configure each account for which you wish to download
+  statements. Go to the Accounts view, right click on the account you wish to
+  configure, and choose <guimenuitem>Map to online account...</guimenuitem>. 
+  In case more than one online banking plugin is installed on your system
+  you will be asked which one to use. For the internal OFX method select
+  <guimenuitem>&kmymoney; OFX</guimenuitem>. A list of banks will be downloaded
+  from the Internet and a wizard will guide you through choosing a bank,
+  entering your username and password, and selecting an account.  Should you
+  find that your bank is not listed, then it may still be possible to use the
+  manual option. Your bank may be able to provide the required parameters, or
+  you may have to do some research to find them.
+</para>
 
 <note>
-  <para
->In Versionen von &kappname; vor 4.6 wurde der Name des Zahlungsempfänger immer aus dem Feld PAYEEID genommen. Ab Version 4.6 kann der Name des Zahlungsempfängers aus dem Feld PAYEEID, NAME, oder MEMO der OFX-Buchung verwendet werden. Die Auswahl des zu verwendenden Feldes und weitere Einstellungen zur OFX-Direktverbindung können Sie im Dialog <link linkend="details.accounts.edit"
->Konto bearbeiten</link
-> auf der Karteikarte <guilabel
->Online-Einstellungen</guilabel
-> ändern. </para>
+  <para>
+    Setting up OFX Direct Connect can sometimes be a challenge, especially as
+    the implementation at most institutions do not provide sufficient details in
+    error messages.  One particular issue to note is that many institutions
+    require you to change your password the first time you access it online
+    using this method.  Unfortunately, at this time, the library that &kmymoney;
+    uses (libofx) does not have a way to interactively change a password.  In
+    some cases, it is possible to get a technical support person at the
+    institution to change the password for you.  Until we are able to expand
+    this section with more detailed troubleshooting information, if you have
+    trouble getting this to work for you, you can ask for help on the &kmymoney;
+    developer list &devlist;.
+  </para>
+</note>
+
+<para>
+  Once you have an account set up with online banking, go to the ledger for that
+  account. Then choose <menuchoice><guimenu>Account</guimenu><guimenuitem>Update
+  account...</guimenuitem></menuchoice> menu item. This will connect to your bank,
+  and download a statement for the last 60 days.
+</para>
+
+<note>
+  <para>
+    In version of &kmymoney; prior to 4.6, the payee name was always taken from the
+    <literal>PAYEEID</literal> field. As of version 4.6, the payee name can be based
+    on either the <literal>PAYEEID</literal>, <literal>NAME</literal>, or
+    <literal>MEMO</literal> field in the OFX transaction. You can configure this
+    feature and some other OFX direct connect settings by selecting the appropriate
+    tab in the <link linkend="details.accounts.edit">Edit account</link> dialog.
+  </para>
 </note>
 </sect2>
 
 <sect2>
-<title
->Export einer OFX-Datei</title>
+<title>Exporting an OFX file</title>
 
-<para
->Zur Zeit ist es nicht möglich, Ihre Finanzdaten im QFX-Format zu exportieren. Wenn Sie mithelfen möchten, diese Funktion mit zu entwickeln, nehmen Sie Kontakt mit den Libofx-Entwicklern auf. </para>
+<para>
+  It is not possible to export your data as an OFX file currently.  If you are
+  interested to contribute in this area, please contact the libofx development
+  team for details.
+</para>
 </sect2>
 </sect1>
 
-<sect1 id="details.impexp.csv">
-<sect1info>
-  <author
->&Allan.Anderson; &Allan.Anderson.mail; </author>
-</sect1info>
-<title
->CSV-Importmodul</title>
-
-<sect2>
-<title
->Gründe für den Import von CSV-Dateien</title>
-
-<para
->Normalerweise ist der OFX-Import zu bevorzugen. Leider liefern nicht alle Banken die Daten in diesem Format. CSV-Dateien (durch Komma getrennte Werte) sind immer verfügbar, manchmal wird dieses Format Excel oder Tabellenkalkulation genannt. Außerdem dann dieses Format einfach durch Aufnehmen der Daten, die Sie importieren möchten, und manuelles Bearbeiten erstellt werden. </para>
-
-<para
->Die wichtigste Anwendung des Moduls ist der Import von Kontoauszügen einer Bank, es können aber auch einige Kontoauszüge von Investitionen importiert werden. Zusätzlich können Sie mit diesem Modul CSV-Daten in das QIF-Format umwandeln. </para>
-</sect2>
-
-<sect2>
-<title
->Installation des Moduls</title>
-
-<para
->&kappname; kann CSV-Dateien mit durch Komma getrennten Werten importieren. Diese Funktion ist jedoch nicht im Kernprogramm enthalten, der Quelltext dieses Importmoduls ist jetzt im Quelltextarchiv (Tarball) von &kappname;. Dieses Importmodul muss installiert werden, dann ist diese Aktion automatisch im Menü <menuchoice
-><guimenu
->Datei</guimenu
-> <guimenuitem
->Importieren</guimenuitem
-></menuchoice
-> verfügbar. </para>
-
-<para
->Das CSV-Importmodul ist neuer als das OFX-Modul, daher kann es einige Zeit dauern, bis Pakete von &kappname; für Ihre Distribution mit dem CSV-Importmodul oder mit dem CSV-Importmodul als eigenes Paket zu Verfügung stehen. Um zu überprüfen, ob Ihre Version von &kappname; dieses Modul bereits enthält, öffnen Sie die Seite <menuchoice
-><guimenu
->Einstellungen</guimenu
-><guimenuitem
->&kappname; einrichten ...</guimenuitem
-><guimenuitem
->Erweiterungen</guimenuitem
-></menuchoice
->. Fehlt hier das CSV-Importmodul, sollten Sie als erstes in der Bezugsquelle des &kappname;-Pakets nach diesem Modul suchen. </para>
-
-<para
->Haben Sie das Programm aus RPM-Paketen installiert, dann ist das CSV-Importmodul im RPM-Paket kmymoney-csv enthalten. Dieses Paket finden Sie im Archiv, aus dem Sie das Programm &kappname; installiert haben. Installieren Sie &kappname; aus den Quelltexten, dann gibt es keine zusätzlichen Anforderungen. Beim Kompilieren von &kappname; werden dann die Quelltexte des Moduls gefunden und das Modul erstellt. </para>
-
-<para
->Haben Sie Probleme beim Kompilieren von &kappname;, aber der Quelltext des Moduls ist vorhanden, bitten Sie auf der Entwicklerliste &devlist; um Hilfe. Fügen Sie der E-Mail eine Kopie Ihrer Protokolldatei der Kompilierung als komprimierte GZip-Datei hinzu. </para>
-</sect2>
-
-<sect2>
-<title
->Import einer CSV-Datei</title>
-
-<para
->Um eine CSV-Datei zu importieren, wählen Sie aus dem Menü <menuchoice
-><guimenu
->Datei</guimenu
-><guimenuitem
->Importieren</guimenuitem
-><guimenuitem
->CSV ...</guimenuitem
-></menuchoice
->. Ist dieser Menüeintrag bei Ihnen nicht vorhanden, ist das Modul nicht  installiert. Im vorherigen Abschnitt finden Sie Hinweise zur Installation des CSV-Importmoduls. </para>
-
-<para
->Das Fenster für den CSV-Import besteht aus drei Bereichen. </para>
-
-<itemizedlist>
-<listitem>
-<para
->Oben links finden Sie die drei Karteikarten <guilabel
->Bank</guilabel
->, <guilabel
->Investition</guilabel
-> und <guilabel
->Allgemein</guilabel
->. Bank- und Investitionsdaten werden unterschiedlich verarbeitet, daher müssen Sie vor der Auswahl der Importdatei die Art der Daten angeben. Dazu klicken Sie entweder auf <guilabel
->Bank</guilabel
-> oder <guilabel
->Investition</guilabel
->. Die gewählte Karteikarte wird durch das Symbol „*“ hinter dem Namen markiert. Wechseln Sie zu einer anderen Karteikarte, erscheint ein Warnhinweis, das Ihre aktuellen Einstellungen verworfen werden. Sie können das Wechseln dann abbrechen. Alle drei Karteikarten werden weiter unten ausführlich beschrieben. </para>
-</listitem>
-
-<listitem>
-<para
->im unteren Teil des Fensters wird der Inhalt der zu importierenden CSV-Datei angezeigt. </para>
-</listitem>
-
-<listitem>
-<para
->Oben rechts befinden sich einige Knöpfe, um den Importprozess zu steuern. </para>
-
-<formalpara
-><title
->Datei öffnen</title>
-  <para
->Mit diesem Knopf wird die Datei für den Import ausgewählt. Wie bereits vorher erläutert, werden die Datei entweder als Bank- oder Investitionsdaten importiert. Dies wird durch ein angehängten Stern ("*") am Namen der Karteikarte angezeigt. </para>
-</formalpara>
-
-<formalpara
-><title
->Importieren</title>
-  <para
->Mit diesem Knopf starten Sie tatsächlich den Import der Daten aus der Datei. Dabei werden die Einstellungen auf den Karteikarten <guilabel
->Bank</guilabel
-> oder <guilabel
->Investition</guilabel
-> und auf der Karteikarte <guilabel
->Allgemein</guilabel
-> verwendet, die im nächsten Abschnitt erläutert werden. </para>
-</formalpara>
-
-<formalpara
-><title
->Als QIF-Datei speichern</title>
-  <para
->Nach dem Beenden des Imports können Sie mit diesem Knopf die Daten der CSV-Datei im QIF-Format speichern, falls Sie die Daten in diesem Format benötigen. </para>
-</formalpara>
-
-<formalpara
-><title
->Beenden</title>
-  <para
->Beendet das Modul, nachdem Ihre Einstellungen gespeichert wurden. </para>
-</formalpara>
-
-<formalpara
-><title
->Auswahl löschen</title>
-  <para
->Löscht alle Spalten und Einstellungen, die ausgewählt oder geändert wurden. </para>
-</formalpara>
-</listitem>
-</itemizedlist>
-
-<para
->Der Import von CSV-Dateien wird in mehreren Schritten durchgeführt. Nicht immer sind alle Schritte erforderlich. Die genaue Reihenfolge dieser Schritte hängt von den zu importierenden Daten ab. </para>
-
-<orderedlist>
-  <listitem>
-    <para
->Wählen Sie aus. ob Sie Bank- oder Investitionsdaten importieren möchten </para>
-  </listitem>
-
-  <listitem>
-    <para
->Öffnen Sie die Datei mit den Daten.</para>
-  </listitem>
-
-  <listitem>
-    <para
->Passen Sie die Einstellungen für das Feldtrennzeichen und das Textbegrenzungszeichen an und geben Sie die erste und letzte Zeile für den Import an. </para>
-  </listitem>
-
-  <listitem>
-    <para
->Geben Sie an, welche Felder oder Spalten bestimmte Datentypen für den Importtyp enthalten. </para>
-  </listitem>
-
-  <listitem>
-    <para
->Passen Sie die Einstellungen für das Datumsformat und das Dezimalzeichen an. </para>
-  </listitem>
-
-  <listitem>
-    <para
->Bestätigen Sie den Import</para>
-  </listitem>
-</orderedlist>
-
-<para
->Haben Sie eine der Karteikarten <guilabel
->Bank</guilabel
-> oder <guilabel
->Investition</guilabel
-> ausgewählt, klicken Sie auf <guibutton
->Datei öffnen</guibutton
-> und wählen Sie die CSV-Datei für den Import. Ehe der Import tatsächlich beginnen kann, müssen Sie die Anordnung der Datei in der Datei angeben. Diese Anordnung ist bei Bank- und Investitionsdaten verschieden. Zuerst sollten Sie jedoch die gemeinsamen Einstellungen für beide Dateiarten anpassen. </para>
-
-<sect3>
-<title
->Einstellungen für das CSV-Importmodul</title>
-
-<para
->Wählen Sie im Importdialog die Karteikarte <guilabel
->Allgemein</guilabel
->. Die Einstellungen hier sind für die richtige Interpretation der Daten erforderlich. Normalerweise bearbeiten Sie diese Einstellungen, nachdem Sie Bank- oder Investitionsdaten ausgewählt und die Datei geöffnet haben. Ist die Anzeige der Daten offensichtlich falsch, korrigieren Sie als erstes Feldtrennzeichen. Dann weisen Sie den Spalten bestimmte Felder zu. Diese Einstellungen werden gespeichert und können daher wiederverwendet werden, wenn die Einstellungen in der CSV-Datei unverändert sind. Einige Felder werden mit den Vorgaben der Regionaleinstellungen belegt. </para>
-
-<formalpara
-><title
->Feldtrennzeichen</title>
-  <para
->Auch wenn die Datei als "durch Komma getrennt" bezeichnet wird, können beliebige Zeichen wie Komma, Semikolon oder Tabulatoren als Feldtrennzeichen benutzt werden. Ist hier das richtige Zeichen eingestellt, werden Ihre Daten mit der korrekten Aufteilung in einzelne Felder angezeigt. </para>
-</formalpara>
-
-<formalpara
-><title
->Textbegrenzungszeichen</title>
-  <para
->Dies ist normalerweise ein einfaches oder doppeltes Anführungszeichen. Diese Einstellung ist wichtig, wenn Feldtrennzeichen in einer Spalte wie zum Beispiel in einem Notizfeld vorkommen. </para>
-</formalpara>
-
-<!-- I am not sure whether the following should be a note, tip, caution,
-     warning, or mportant.  I did remove several guilabel tags, because they
-     looked excessive within the emphasis of the note tag. -->
-<note>
-  <para
->Werden die Felder richtig angezeigt, müssen Sie als nächstes die Anordnung der Spalten in der Importdatei auf der Karteikarte <guilabel
->Bank</guilabel
-> oder <guilabel
->Investition</guilabel
-> angeben. Sie können zwischen den Karteikarten Allgemein und einer der beiden Datenarten wechseln, ohne Ihre Einstellungen zu verlieren. Haben Sie auf den Karteikarten <guilabel
->Bank</guilabel
-> oder <guilabel
->Investition</guilabel
-> eine Spaltennummer falsch angegeben, korrigieren Sie diesen Fehler. Alternativ klicken Sie den Knopf <guibutton
->Auswahl leeren</guibutton
->, um alle Spalteneinstellungen zurückzusetzen. </para>
-</note>
-
-<formalpara
-><title
->Dezimalzeichen</title>
-  <para
->Bei jedem Import sollte nach der Auswahl der Felder das richtige Dezimalzeichen eingestellt werden. Die löst eine Überprüfung der Spalten mit Geldbeträgen auf den Karteikarten <guilabel
->Bank</guilabel
-> oder <guilabel
->Investition</guilabel
-> aus. Passen Sie das Dezimalzeichen an das in der Importdatei benutzte Zeichen an, nicht an das Zeichen aus den Regionaleinstellungen. Verwenden Sie in den Regionaleinstellungen ein anderes Zeichen, wird das Dezimalzeichen in der Importdatei beim Einlesen passend geändert. Im unteren Bereich des Dialogfensters mit den Daten aus der Datei werden numerische Felder grün hervorgehoben angezeigt, wenn mit dem eingestellten Dezimalzeichen gültige Werte erzeugt werden, ansonsten werden die numerischen Felder in roter Farbe hervorgehoben. Die Hervorhebung zeigt auch die Einstellung der Start- und Endzeilen an.Enthalten einige der ausgewählten Zellen anscheinend nicht das ausgewählte Zeichen, wird ein Warnhinweis angezeigt. </para>
-</formalpara>
-
-<formalpara
-><title
->Tausender-Unterteilung</title>
-  <para
->Diese Einstellung kann nicht geändert werden, sie wird automatisch aus der Einstellung des <guilabel
->Dezimalzeichens</guilabel
-> abgeleitet. Dieses Feld ist nur ein Hinweis für den Benutzer. </para>
-</formalpara>
-
-<formalpara
-><title
->Datumsformat</title>
-  <para
->Hier muss die Reihenfolge von Jahr, Monat und Tag passend zum Datumsformat in der Datei eingestellt werden. Stimmen diese Formate nicht überein, erhalten Sie beim Import einen Warnhinweis. Wenn die Einstellung zwar falsch ist, aber keine ungültigen Daten ergibt, erhalten Sie falsche Daten. Dies passiert zum Beispiel wenn alle Tagesdaten in der Datei kleiner als 12 sind. Dann können beim Import Tag und Monat vertauscht werden und dieser Fehler wird vom Importmodul nicht erkannt. Nach dem Import sind diese Fehler im Kontenbuch offensichtlich zu erkennen. </para>
-</formalpara>
-
-<formalpara
-><title
->Erste Zeile</title>
-  <para
->Stellen Sie hier den richtigen Wert ein, so dass beim Import die Vorspannzeilen in der Datei übersprungen werden. </para>
-</formalpara>
-
-<formalpara
-><title
->Letzte Zeile</title>
-  <para
->Das Importmodul nimmt automatisch die letzte Zeile der Datei als Voreinstellung an. Sie müssen diesen Wert nur dann anpassen, wenn es Fußzeilen in der Datei gibt, die beim Import ausgelassen werden sollen, da diese Fußzeilen wahrscheinlich zu Warnungen über Datenfehler führen. </para>
-</formalpara>
-</sect3>
-
-<sect3>
-<title
->Bankdaten importieren</title>
-
-<para
->Der Import von Bankdaten ist ziemlich unkompliziert, Sie müssen nur die passenden Spaltennummern auswählen. Dies erfolgt auf der Karteikarte <guilabel
->Bank</guilabel
->. </para>
-
-<itemizedlist>
-<listitem>
-<para
->Enthält Ihre Datei nur eine einzelne Spalte mit dem Betrag, aktivieren Sie den Auswahlknopf <guilabel
->Betragspalte</guilabel
-> und stellen die richtige Spaltennummer im Auswahlfeld <guilabel
->Betrag</guilabel
-> ein. </para>
-</listitem>
-
-<listitem>
-<para
->Gibt es zwei Spalten mit Soll und Haben, dann drücken Sie den Auswahlknopf <guilabel
->Soll- / Haben-Spalten</guilabel
->. Stellen Sie dann die passenden Spaltennummern in den Auswahlfeldern <guilabel
->Soll</guilabel
-> und <guilabel
->Haben</guilabel
-> ein.  </para>
-</listitem>
-
-<listitem>
-<para
->Möchten Sie Werte von mehreren Spalten in das Notizfeld einfügen, wählen Sie diese Spalten nacheinander aus. Als Hinweis wird ein Sternsymbol an den ausgewählten Spaten angezeigt. </para>
-</listitem>
-
-<listitem>
-<para
->Das Modul stellt fest, ob die gleiche Spalte für zwei verschiedene Felder ausgewählt wurde. Da die richtige Spalte nicht bestimmt werden kann, wird die Auswahl beider Felder gelöscht. </para>
-</listitem>
-</itemizedlist>
-
-<para
->Haben Sie alle Einstellungen und angepasst die Spalten richtig ausgewählt, können Sie den Import beginnen. Dies wird im Folgenden beschrieben. </para>
-</sect3>
-
-<sect3>
-<title
->Import von Investitionsdaten</title>
-
-<para
->Um Investitionsdaten zu importieren, klicken Sie auf die Karteikarte <guilabel
->Investitionen</guilabel
->. Die Vorgehensweise ist ähnlich wie bei Bankdaten. </para>
-
-<itemizedlist>
-<listitem>
-<para
->Wählen Sie eine Spalte, die das <guilabel
->Datum</guilabel
-> der Buchung enthält. </para>
-</listitem>
-
-<listitem>
-<para
->Wählen Sie die Spalte, die den <guilabel
->Preis</guilabel
-> enthält. Mit der Einstellung <guilabel
->Preisfaktor</guilabel
-> passen Sie die Einheit der importierten Preise an die vorhandenen Preise an, wenn zum Beispiel $ und cent oder £ und pence &etc; benutzt werden. Haben die Preise in Ihrer &kappname;-Datei die Einheit Dollar wie auch die Preise in der CSV-Datei, setzen Sie diesen Wert auf 1.0. Sind aber die Preise in der CSV-Datei in cent angegeben, stellen Sie 0,01 als Preisfaktor ein. </para>
-</listitem>
-
-<listitem>
-<para
->In der Spalte <guilabel
->Typ/Aktion</guilabel
-> wird die Aktivität beschrieben: kaufen, verkaufen, wieder anlegen &etc; </para>
-</listitem>
-
-<listitem>
-<para
->Wählen Sie die Spalte, die die <guilabel
->Menge</guilabel
-> oder Anzahl der Aktien der Buchung enthält. </para>
-</listitem>
-
-<listitem>
-<para
->Enthält die Buchung Gebühren, wählen Sie eine <guilabel
->Gebühren-Spalte</guilabel
-> aus und aktivieren Sie <guilabel
->Gebühren in Prozent</guilabel
->, wenn prozentuale Gebühren und nicht ein absoluter Betrag vorliegt. Es kann sein, dass Gebühren bereits im Einheitspreis enthalten sind. Wählen Sie in diesem Fall keine Spalte für Gebühren, obwohl jede angezeigte Gebühr beibehalten werden kann, wenn die Gebühren-Spalte als weitere Memo-Spalte ausgewählt wird. </para>
-</listitem>
-
-<listitem>
-<para
->Wie bei den Bankdaten kann das Feld <guilabel
->Notiz</guilabel
-> benutzt werden, um fortlaufend mehr als eine Spalte zu wählen. Damit können mehrere Werte in das Notizfeld der importierten Buchung eingefügt werden. </para>
-</listitem>
-
-<listitem>
-<para
->Wählen Sie die Spalte, die den <guilabel
->Betrag</guilabel
-> enthält. </para>
-</listitem>
-
-<listitem>
-<para
->Tragen Sie den Namen des Wertpapiers in das angegeben Feld ein. Achten Sie darauf, dass der Name genauso schrieben ist wie das vorhandene Wertpapier in &kappname;. Erscheint der Name des Wertpapiers in der importierten Datei, wählen Sie ihn durch Doppelklicken aus und kopieren und bearbeiten ihn. Achten Sie darauf in &kappname; keine abweichenden Schreibweisen oder Abkürzungen zu verwenden. Nach der Eingabe der Namen werden diese in die Ressourcendatei eingefügt, weitere Details zu dieser Datei finden Sie weiter <link linkend="details.impexp.csv.config"
->unten</link
->. Benutzen Sie das Importmodul das nächste Mal, werden alle vorher eingegebenen Name im Auswahlfeld angezeigt. Sie können aber auch die Ressourcendatei direkt bearbeiten und eine Liste aller Wertpapiere eingeben, die in Ihren Importdateien vorkommen. Haben Sie einen Namen falsch eingegeben, drücken Sie den Knopf <guilabel
->Wertpapier ausblenden</guilabel
->. Damit wird der Name aus der im Modul verwendeten Liste entfernt. Das hat keinen Einfluß auf die Daten in &kappname;. </para
->  
-
-<para
->Wegen der fehlenden Standardisierung des Formats kann die aktuelle Version des Moduls auf einmal nur Daten eines Wertpapiers in ein Konto importieren. Enthält Ihre Datei Daten mehrere Wertpapiere, importieren Sie die Daten in mehreren Schritten, indem Sie den Datenbereich mit passenden Werten für die erste und letzte Zeile auf ein Wertpapier beschränken. </para>
-</listitem>
-</itemizedlist>
-</sect3>
-
-<sect3>
-<title
->Import fertigstellen</title>
-
-<para
->Haben Sie die Spalten für die Bank- oder Investitionsdaten richtig zugeordnet, klicken Sie auf <guibutton
->Importieren</guibutton
->. Dann wird ein Auswahlfeld angezeigt, in dem Sie das richtige Konto für den Import der Daten auswählen. Benötigen Sie die Daten auch im QIF-Format, drücken Sie den Knopf <guibutton
->QIF-Datei speichern</guibutton
->. </para>
-
-<para
->Betrifft bei Investitionsdaten eine Buchung ein anderes Konto, &eg; ein Scheck- oder Wertpapierkonto für eine ausgeschüttete Dividende oder ein Zahlung, erscheint ein Dialog, in dem der Kontenname für die Buchung eingegeben werden kann. Können in dem Investitionskonto Schecks ausgestellt werden, geben Sie den Namen eines vorhandenen Scheck- oder Wertpapierkontos ein, ebenso die Nummer der Spalte mit dem Zahler/Zahlungsempfänger. Fehler bei der Eingabe des Kontennamens werden übergangen, aber nicht erkannt. Diese Buchungen werden wegen fehlender Zuweisung einer Kategorie als fehlerhaft markiert. Ist der einzugebende Kontenname sehr lang, geben Sie nur einige Zeichen ein. Der Import wird fortgesetzt. aber die Buchung wird als fehlerhaft markiert und das richtige Buchungskonto muss noch ausgewählt werden. </para>
-
-<para
->Findet das Modul beim Import einer Buchung keinen gültigen Buchungstyp, wird die betreffende Buchung angezeigt und Sie können einen passenden Typ abhängig von der Kombination von Menge, Preis und Betrag als Ersatz auswählen. Bei jeder Buchung überprüft das Modul, ob der Inhalt der Spalte zu dem Aktivitätstyp passt. Wenn zum Beispiel eine Menge ohne Preis oder Betrag vorkommt, wird angenommen, das bei der Buchung nur die Anzahl der Aktien geändert wird. Kommt nur ein Betrag ohne Preis und Menge vor, wird das als Dividendenzahlung eingestuft. </para>
-
-<para
->Enthalten Ihre Investitionsbuchungen Aktivitätstypen, die nicht erkannt werden, fügen Sie sie in den entsprechenden Abschnitt der Ressourcendatei ein. Weitere Informationen zu dieser Datei finden Sie im <link linkend="details.impexp.csv.config"
->folgenden Abschnitt</link
->. Der Abschnitt [InvestmentSettings] in der Ressourcendatei enthält zum Beispiel das Feld „BuyParam“ mit Einträgen für „Purchase“, „Buy“, „New Inv“ und „Switch In“. Benötigen Sie einen weiteren Aktivitätstyp, fügen Sie ihn in die richtige Liste ein und starten das Importmodul neu. Es gibt ähnliche Einträge in verschiedenen Feldern, daher wird manchmal der falsche Aktivitätstyp ausgewählt. Das Importmodul überprüft die Liste in folgender Reihenfolge: „Shrsin“, „DivX“, „Reinvdiv“, „Brokerage“, „Buy“, „Sell“, „Remove“. Eine Änderung dieser Reihenfolge in der Liste funktioniert nicht, da die Einträge in der Ressourcendatei in alphabetischer Reihenfolge sortiert werden. Benötigen Sie den störenden Parameter nicht, löschen Sie ihn aus der Datei. Ist das nicht möglich, müssen Sie die Datei vor dem Import bearbeiten. </para>
-
-<caution>
-<para
->Beachten Sie, dass die im unteren Bereich des Importdialogs zwar bearbeitet werden können, diese Änderungen aber nicht benutzt werden. Dieser Bereich ist nur für die Anzeige und nicht für das Bearbeiten von Daten vorgesehen. Die Daten in der Importdatei werden vom Modul nicht geändert. Tatsächlich werden die Daten aus der Datei und nicht aus der Anzeige importiert. </para
-> 
-</caution>
-</sect3>
-
-<sect3 id="details.impexp.csv.config">
-<title
->Einrichtung des CSV-Importmoduls</title>
-
-<para
->Ein bekannter Nachteil von QIF-Daten ist das ziemlich unbestimmte Format. Mit CSV-Daten gibt es das noch größere Problem, dass überhaupt kein allgemein anerkannter Standard existiert. Besonders bei Investitionsdaten gibt es einen weiten Spielraum für die Spezifizierung der verschiedenen Arten von Aktivitäten in den Daten. Das Importmodul verwendet eine Liste von Aktivitäten, die in der Ressourcendatei „csvimporterrc“ gespeichert werden. Der Speicherort dieser Datei ist je nach Ihrer Distribution normalerweise in „~/.kde4/share/config/“ oder „~/.kde/share/config/“. In dieser Ressourcendatei können Sie neue Aktivitätstypen einfügen. Gibt es diese Datei nicht, wird Sie bei der ersten Ausführung des Importmoduls in einer Standardversion mit den am häufigsten benötigten Werten erstellt. </para>
-
-<para
->Im Ordner „kmymoney/contrib/csvimporter/“ im Quelltextarchiv finden Sie einige Beispiele von CSV-Dateien, die vielleicht hilfreich sind. Im Beispiel einer CSV-Datei für Investitionen gibt es die Aktivität „ReInvestorContract Buy : ReInvested Units“. Bei der Überprüfung wird zuerst „ReInv“ in „ReInvestorContract Buy“ gefunden, daher wird diese Buchung als „Reinvdiv“eingestuft, obwohl auch „Buy“ in dem Begriff vorkommt. Ein weiteres Beispiel ist der Aktivitätstyp Reinvest bei einer Buchung ohne Preis oder Betrag, aber nur mit einer Menge. Dies muss als „Add Shares“ oder „Shrsin“ eingestuft werden. </para>
-
-<para
->Als dieses Modul entwickelt wurde, gab es nur wenige Beispiele von Investitions-Formaten. Daher wird Ihr Format möglicherweise nicht richtig verarbeitet. Haben Sie ein Beispiel für eine solche Datei, senden Sie sie bitte ohne persönliche Daten an die Benutzerliste &userlist; oder die Entwicklerliste &devlist;. Dann können die Entwickler diese Datei untersuchen und das Modul anpassen. </para>
-</sect3>
-</sect2>
-</sect1>
+<!-- here goes the new csv impexp section.  New entity is only a temporary 
+     workaround, although might be good to keep it in a separate file -->
+<!-- entity defined in index.docbook -->
+&details-impexp-csv;
+&details-impexp-csvexp;
+
+<!-- here goes the new Woob impexp section.  New entity is only a temporary
+     workaround, although might be good to keep it in a separate file -->
+<!-- entity defined in index.docbook -->
+&details-impexp-woob;
 
 <sect1 id="details.impexp.plugins">
-<title
->Entwicklung von Importmodulen</title>
+<title>Writing Importer Plugins</title>
 
-<para
->&kappname; enthält eine Schnittstelle, um Importmodule einzubinden. Benutzen Sie eine benutzerdefiniertes Format und Sie möchten ein Importmodul dafür schreiben, dann nehmen es die Entwickler gern in &kappname; auf. Zur Entwicklung des Moduls müssen Sie das Programm aus dem Quelltext kompilieren. Nehmen Sie das OFX-Importmodul als Vorlage für die Entwicklung. </para>
+<para>
+  &kmymoney; contains explicit support for importer plugins.  If you have a
+  custom format, and you would like to write an importer plugin, we would value
+  your contribution.  To do so, you'll need to compile the program from source.
+  Then use the OFX Importer Plugin as an example.
+</para>
 </sect1>
 </chapter>

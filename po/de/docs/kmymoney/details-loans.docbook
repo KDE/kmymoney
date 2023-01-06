@@ -2,196 +2,223 @@
 <chapter id="details.loans">
 <chapterinfo>
   <authorgroup>
-    <author
->&Darin.Strait; &Darin.Strait.mail; </author>
+    <author> &Darin.Strait;	&Darin.Strait.mail; </author>
   </authorgroup>
-  <date
->2010-07-25</date>
-  <releaseinfo
->4.5</releaseinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
-<title
->Kredite</title>
+<title>Loans</title>
 
 <sect1 id="details.loans.general">
-<title
->Kredite verstehen</title>
+<title>Understanding Loans</title>
 
-<para
->Dieser Abschnitt gibt Ihnen einen Überblick darüber, wie &kmymoney; Kredite behandelt. Die Bedingungen für Bankkredit-Regelungen variieren und sind ortsabhängig. Für detaillierte Erläuterungen zu Krediten und Informationen über örtliche Regelungen und Abgaben schauen Sie bitte in andere Quellen. </para>
+<para>
+  This section provides an overview of how &kmymoney; handles loans.  Loan
+  regulations and customs vary from locality to locality. For detailed
+  explanations of loans, as well as information on local regulations and
+  customs, please see other resources.
+</para>
 
-<para
->Ein Kredit ist eine Vereinbarung, bei der ein Kreditnehmer von einem Kreditgeber Geld erhält und sich bereit erklärt, das Geld zu einem späteren Zeitpunkt zurückzuzahlen. &kmymoney; erlaubt es Ihnen, Kredite zu verfolgen, bei denen Sie selbst der Kreditgeber sind und Geld verliehen haben, oder Sie als Kreditnehmer einen Kredit aufgenommen haben. Die meisten Privatpersonen nehmen eher Kredite auf, als dass sie Geld verleihen, sodass Sie in der Regel der Kreditnehmer und ein Geldinstitut der Kreditgeber sind. Wenn Sie Geld an ein Familienmitglied oder einen Freund verleihen, können Sie natürlich &kmymoney; dazu verwenden, auch diesen Kredit zu überwachen. </para>
+<para>
+  A loan is an agreement under which a borrower receives money from a lender and
+  agrees to repay the money at some future date. &kmymoney; allows you to track
+  loans by which you, as borrower, borrow money from or, as lender, lend money
+  to someone else. Most individuals borrow more than they lend, so you will
+  generally be the borrower and a finance company will generally be the
+  lender. If you lend money to a family member or a friend, you can use
+  &kmymoney; to keep track of this loan as well.
+</para>
 
-<para
->Im Rahmen dieser Anleitung nehmen wir an, dass Sie sich Geld bei einem Kreditinstitut leihen, aber die angesprochenen Punkte gelten analog auch für einen Kredit, den Sie jemandem als Kreditgeber einräumen. Die Hauptunterschied zwischen dem Leihen und dem Verleihen von Geld liegt darin, dass Sie eine Ausgabenkategorie für das Verwalten eines Kredits, den Sie aufnehmen, verwenden und eine Einnahmenkategorie, wenn Sie das Geld verleihen. </para>
+<para>
+  This guide will assume that you are borrowing from some sort of finance
+  company, but the topics discussed here apply equally well to loans that you
+  might make to a person. The main difference between borrowing and lending
+  money is that an expense category is used to keep track of interest when
+  borrowing money and an income category is used to keep track of interest when
+  lending money.
+</para>
 
-<formalpara
-><title
->Grundlagen eines Kredits</title>
-<para
->Der Betrag, der geliehen wurde, wird <quote
->Kreditsumme</quote
-> oder <quote
->Kreditschuld</quote
-> genannt. </para>
+<formalpara><title>Loan Principal</title>
+<para>
+  The amount that is lent out is called the <quote>loan amount</quote> or
+  <quote>principal</quote>.
+</para>
 </formalpara>
 
-<formalpara
-><title
->Laufzeit</title>
-<para
->Die Zeitspanne, in der der Kredit läuft wird <quote
->Laufzeit</quote
-> des Kredits genannt. Am Ende der Kreditlaufzeit ist die Gesamtkreditsumme an den Geldgeber zurückgezahlt.  Kreditlaufzeiten werden in der Regel in Wochen, Monaten oder Jahren vereinbart. Eine Kreditlaufzeit kann aber auch durch eine Anzahl an Zahlungen definiert werden. Ein Jahreskredit mit wöchentlicher Rückzahlung kann entweder als Kredit mit einer Laufzeit von einem Jahr, oder als Kredit mit 52 Zahlungen beschrieben werden. </para>
+<formalpara><title>Term</title>
+<para>
+  The period of a loan is called its <quote>term</quote> of the loan. At the end
+  of the term, the entirety of the principal will have been returned to the
+  borrower. Terms are generally expressed in weeks, months, or years. A term can
+  also be expressed by the number of payments. For example, a one year loan with
+  weekly repayments could be described as a one year loan or a loan with 52
+  repayments.
+</para>
 </formalpara>
 
-<formalpara
-><title
->Rückzahlungen</title>
-<para
->Die Rückzahlung der Kreditsumme an den Kreditgeber erfolgt normalerweise nicht auf einmal in einer Summe. Stattdessen wird es eine Reihe von Zahlungen geben, jede zur Tilgung eines Teils der Kreditschuld. Solche Rückzahlungen werden manchmal auch <quote
->Tilgungsleistung</quote
-> genannt und in &kmymoney; wird der Begriff <quote
->Kredittilgung</quote
-> verwendet, um das Rückzahlen eines Kredits in Raten zu beschreiben. </para>
+<formalpara><title>Repayments</title>
+<para>
+  The repayment of the principal to the lender is generally not done as a lump
+  sum. Instead, a series of repayments are made, each representing a portion of
+  the principal. Such repayments are sometimes known as <quote>amortization
+  payments</quote> and in &kmymoney; <quote>Amortization</quote> is defined as
+  the act of paying off a loan in installments.
+</para>
 </formalpara>
 
-<formalpara
-><title
->Zahlungshäufigkeit</title>
-<para
->Die Häufigkeit der Rückzahlung wird in &kmymoney; <quote
->Zahlungshäufigkeit</quote
-> genannt, wie z.B. wöchentlich, zweiwöchentlich, monatlich, quartalsweise oder jährlich. In Deutschland werden regelmäßige Zahlungen meist jeden Monat geleistet, sodass die Zahlungshäufigkeit von Krediten einen Monat beträgt. </para>
+<formalpara><title>Payment Frequency</title>
+<para>
+  The frequency of installments is referred to as <quote>Payment
+  Frequency</quote> in &kmymoney;. Examples of period might be weekly,
+  bi-weekly, monthly, quarterly, or yearly. In the US, periodic payments are
+  most commonly made every month, therefore the loan's period is one month.
+</para>
 </formalpara>
 
-<formalpara
-><title
->Zinssatz</title>
-<para
->Für die Tatsache, dass man sich Geld leihen darf, bezahlt der Kreditnehmer dem Kreditgeber ein Entgelt, das <quote
->Zins</quote
-> genannt wird. Der Zins wird üblicherweise als Prozentsatz auf die Kreditsumme über die festgelegte Laufzeit berechnet. Zinssätze können fest sein und sich während der Kreditlaufzeit nicht verändern, oder aber variabel und sich während der Laufzeit verändern. Zinszahlungen werden normalerweise zusammen mit der monatlichen Tilgung geleistet. </para>
+<formalpara><title>Interest Rate</title>
+<para>
+  For the privilege of being able to use the money, the borrower will pay the
+  lender a fee called the <quote>interest</quote>, normally expressed as a
+  percentage of the amount of the principal over a defined period.  Interest
+  rates can be fixed, where the interest rate does not change over the lifetime
+  of the loan, or variable, where the interest rate can change over
+  time. Typically, interest payments are included with each periodic repayment.
+</para>
 </formalpara>
 
-<formalpara
-><title
->Regelmäßige Rückzahlungen</title>
-<para
->Da Rückzahlungen normalerweise auf einer regelmäßigen Basis, wie wöchentlich, monatlich, quartalsweise oder jährlich, erfolgen, werden sie <quote
->Periodische Rückzahlungen</quote
-> genannt. Die Summe aller periodischen Rückzahlungen plus der Abschlussrate ergeben zusammen die Kreditsumme plus den Zinsen. </para>
+<formalpara><title>Periodic Repayments</title>
+<para>
+  Since these repayments are generally made on some sort of scheduled basis,
+  such as weekly, monthly, quarterly, or yearly, they are referred to as
+  <quote>periodic repayments</quote>. The sum of all periodic repayments plus
+  the final repayment will add up to the loan principal plus the interest.
+</para>
 </formalpara>
 
-<formalpara
-><title
->Gebühren</title>
-<para
->Es können weitere Gebühren vereinbart sind, die zusätzlich mit jeder Tilgung gezahlt werden müssen. Diese werden <quote
->wiederholende Gebühren</quote
-> genannt. Beispiele für sich wiederholende Gebühren (aber nicht nur beschränkt auf diese): <itemizedlist>
+<formalpara><title>Fees</title>
+<para>
+  There may be other fees besides interest that are required to be paid with
+  every installment. These are called <quote>recurring fees</quote>. Examples of
+  recurring fees include (but are not necessarily limited to):
+
+<!--would prefer itemized list not in para, but formalpara requires para-->
+<itemizedlist>
   <listitem>
-    <para
-><quote
->Pfand</quote
->- oder <quote
->Treuhand</quote
->- Kontenzahlungen. Zahlungen dieser Art werden üblicherweise dafür verwendet, um Fonds zu halten und jährliche oder zweijährliche Steuern zu zahlen. </para>
+    <para>
+      <quote>Impound</quote> or <quote>escrow</quote> account
+      payments. (Payments of this sort are commonly used to hold funds to pay
+      annual or bi-annual property taxes.)
+    </para>
   </listitem>
 
-  <listitem
-><para
->Hypothekenversicherung</para
-></listitem>
+  <listitem><para>Mortgage insurance</para></listitem>
 
-  <listitem
-><para
->Berufsunfähigkeitsversicherung</para
-></listitem>
+  <listitem><para>Disability insurance</para></listitem>
 
-  <listitem
-><para
->Gebühren für Kreditkonten</para
-></listitem>
+  <listitem><para>Loan account maintenance fees</para></listitem>
 </itemizedlist>
 </para>
 </formalpara>
 
-<formalpara
-><title
->Zusammenfassung</title>
-<para
->Zusammengefasst erhält der Kreditnehmer eine Gesamtsumme vom Kreditgeber am Beginn des Kredits. Der Kreditnehmer tätigt eine periodische Zahlung an den Geldgeber. Die periodische Zahlung ist die Summe aus der Tilgung (die zur Rückzahlung des Kredites dient), den Zinsen (wodurch der Geldgeber für das Verleihen des Geldes belohnt wird) und sonstige regelmäßige Gebühren (welche sonstige Nebenausgaben abdecken). Am Ende des Kredits hat der Kreditnehmer den Gesamtbetrag zurückgezahlt. </para>
+<formalpara><title>Summary</title>
+<para>
+  In summary, the borrower receives a lump sum from the lender at the start of
+  the loan. The borrower makes a periodic payment to the lender. The periodic
+  payment is the sum of the principal payment (which is used to pay down the
+  balance of the loan) plus the interest payment (which rewards the lender for
+  allowing the use of the money by the borrower) plus any recurring fees (which
+  cover any incidentals.) At the end of the loan, the borrower has paid back the
+  entire principal.
+</para>
 </formalpara>
 </sect1>
 
 <sect1 id="details.loans.example">
-<title
->Beispiel</title>
-<para
->Nehmen wir an, Sie benötigen 25.000 EUR für ein neues Auto und vereinbaren mit Ihrer Bank eine monatliche Zahlung über insgesamt 60 Monate. Der Zinssatz des Kredits soll 5,5 % betragen. </para>
+<title>Example</title>
+<para>
+  For an example, you might borrow $25,000.00 for a new auto and agree to pay
+  the bank one payment each month for 60 months. The interest rate on the loan
+  might be 5.5%.
+</para>
 
-<para
->In diesem Beispiel beläuft sich die Kreditsumme 25.000 EUR. Die Kreditlaufzeit beträgt 60 Monate oder 5 Jahre. Die Ratenzahlung erfolgt monatlich, solange jeden Monate eine regelmäßig Rückzahlung erfolgt. Die regelmäßige Rückzahlung, die &kmymoney; berechnet, beträgt 477,53 EUR. </para>
+<para>
+  In this scenario, the loan amount is $25,000.00. The term of the loan is 60
+  months or 5 years.  The term of the loan could also be described as 60
+  payments since there will be one payment per month for 5 years. The repayment
+  frequency is one month since periodic repayments will be made once a
+  month. The periodic repayment, which is calculated by &kmymoney;, would be
+  $477.53.
+</para>
 
-<para
->Ein <quote
->Tilgungsplan</quote
-> ist ein Diagramm oder eine Tabelle, die angibt, wie oft und wann eine Ratenzahlung zu erfolgen hat. Oftmals wird die regelmäßige Rate noch in ihre Bestandteile aufgeschlüsselt: die Tilgung, der Zinsanteil und die regelmäßigen Gebühren. </para>
+<para>
+  A <quote>loan schedule</quote> is a chart or table that shows the date that a
+  repayment should be made and the amount of each periodic repayment.  Often,
+  these schedules break the periodic payment down into its constituent parts:
+  the principal repayment, the interest payment, and the recurring fees payment.
+</para>
 </sect1>
 
 <sect1 id="details.loans.creation">
-<title
->Einen neuen Kredit anlegen</title>
+<title>Creating a New Loan</title>
 
-<para
->In &kmymoney; ist ein Kredit einfach ein bestimmter Kontentyp. Um also einen neuen Kredit anzulegen, wählen Sie den Menüeintrag <menuchoice
-><guimenu
->Konten</guimenu
-><guimenuitem
->Neues Konto</guimenuitem
-></menuchoice
->. Fahren Sie fort und beantworten Sie die Fragen, die Ihnen der Assistent nun stellt. </para>
+<para>
+  In &kmymoney;, a loan is a type of account. Therefore, to create a new loan,
+  you begin by selecting the <menuchoice><guimenu>Account</guimenu><guimenuitem>New
+  Account</guimenuitem></menuchoice> menu item. Continue by answering the questions that
+  the wizard poses to you.
+</para>
 
-<para
->Optional kann ein Kredit auch einem bestimmten Geldinstitut zugeordnet werden. Wenn Sie sich Geld von einer Pfandbriefbank oder einer Autokreditbank leihen, können Sie ein neues Geldinstitut anlegen, das das Unternehmen beschreibt und dieses dann dem Kredit zuordnen. Wenn Sie sich dagegen Geld von Ihrem Onkel Herbert leihen, besteht keine Notwendigkeit, ein neues Geldinstitut anzulegen. </para>
+<para>
+  Optionally, a loan can be associated with a particular institution. If you are
+  borrowing from a mortgage company or a car loan company, you could create an
+  institution entry that describes this firm and associate the institution with
+  your loan. If you are borrowing from your Uncle Ted, there is no requirement
+  to set up an institution.
+</para>
 </sect1>
 
 <sect1 id="details.loans.extra-payments">
-<title
->Sondertilgungen auf Kredite</title>
+<title>Making Extra Principle Repayments On Loans</title>
 
-<para
->Sie können jederzeit Sondertilgungszahlungen leisten. Geben Sie einfach <link linkend="details.ledger.transactions"
->eine neue Buchung</link
-> im Kontenbuch ein. Diese Sondertilgung wird bei der nächsten Zinsberechnung am nächsten regelmäßigen Zahlungstermin berücksichtigt. </para>
+<para>
+  If you would like to make an extra principal repayment, you can do so.
+  Simply <link linkend="details.ledger.transactions">enter a transaction</link>
+  using the ledger.  This extra repayment of principal will be taken into
+  account for the interest calculation that happens for the next periodic
+  payment.
+</para>
 
-<para
->Beispiele von Sondertilgungszahlungen beinhalten (aber nicht beschränkt darauf): </para>
+<para>
+  Examples of extra principal payments include (but are not necessarily limited
+  to):
+</para>
 
 <itemizedlist>
-  <listitem
-><para
->das Beisteuern von zusätzlichen 50 EUR pro Monat</para
-></listitem>
+  <listitem><para>Contributing an extra $50 a month</para></listitem>
 
   <listitem>
-    <para
->Verdopplung der regelmäßigen Rückzahlung für jede Zahlungsperiode, die Tilgung für jede Zahlungsperiode kann in der regelmäßigen Kreditbuchung gefunden werden. </para>
+    <para>
+      Doubling the periodic principal repayment for every period. (The principal
+      repayment can be found for any particular period by referring to the loan
+      schedule.)
+    </para>
   </listitem>
 
   <listitem>
-    <para
->Ausführen einer 13. Tilgungszahlung pro Jahr, das setzt einen Kredit mit monatlichen Zahlungen voraus. </para>
+    <para>
+      Making a 13th principal repayment every year. (This assumes a loan that is
+      repaid in monthly installments.)
+    </para>
   </listitem>
 </itemizedlist>
 
-<note
-><para
->Wenn Sie die Tilgung bei jeder periodischen Zahlung verdoppeln, müssen Sie die regelmäßige Kreditzahlung für jede Rate neu berechnen. Dies ist die Voraussetzung für einen korrekten Tilgungsbetrag für jede Rate. </para
-></note>
+<note><para>
+  If you are doubling the principal repaid with every periodic payment,
+  you will need to recalculate the loan schedule for each installment. This will
+  allow there to be an accurate value for the required principal repayment with
+  each installment.
+</para></note>
 </sect1>
 </chapter>
 

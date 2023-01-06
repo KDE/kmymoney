@@ -2,198 +2,80 @@
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
   <!-- Define an entity for your application if it is not part of KDE
        CVS -->
-  <!-- in general.entities   ENTITY kmymoney "<application
->KMyMoney</application
->" -->
-  <!ENTITY package "office"
-><!-- kdebase, kdeadmin, etc.  Leave
+  <!-- in general.entities   ENTITY kmymoney "<application>KMyMoney</application>" -->
+  <!ENTITY package "office"><!-- kdebase, kdeadmin, etc.  Leave
                                      this unchanged if your
                                      application is not maintained in KDE CVS -->
   <!ENTITY % addindex "IGNORE">
-  <!ENTITY % German "INCLUDE"
-> <!-- ONLY If you are writing non-English
+  <!ENTITY % English "INCLUDE"> <!-- ONLY If you are writing non-English
                                      original documentation, change
                                      the language here -->
   <!-- Do not define any other entities; instead, use the entities
        from entities/general.entities and $LANG/user.entities. -->
-  <!ENTITY devlist "<email
->kmymoney-devel@kde.org</email
->">
-  <!ENTITY userlist "<email
->kmymoney@kde.org</email
->">
-  <!-- Support for bulding against old kdoctools versions, included in 5.69 -->
-  <!ENTITY gnucash "<application
->GnuCash</application
->">
+  <!ENTITY devlist "<email>kmymoney-devel@kde.org</email>">
+  <!ENTITY userlist "<email>kmymoney@kde.org</email>">
+  <!-- Support for building against old kdoctools versions, included in 5.69 -->
+  <!ENTITY gnucash "<application>GnuCash</application>">
 
   <!-- the following author entity was added to contributor.entities in 4.5 branch and trunk of svn
        they can be removed from this file once they are present in the kdelibs minimum version required by &kmymoney; -->
 
-  <!ENTITY Ace.Jones "  <personname
-><firstname
->Ace</firstname
-><surname
->Jones</surname
-></personname
->">
-  <!ENTITY Ace.Jones.mail "<email
->acejones@users.sourceforge.net</email
->">
+  <!ENTITY Ace.Jones "  <personname><firstname>Ace</firstname><surname>Jones</surname></personname>">
+  <!ENTITY Ace.Jones.mail "<email>acejones@users.sourceforge.net</email>">
 
   <!-- the following author entity was added to contributor.entities in trunk and probably 4.6 branch of svn
        it can be removed from this file once it is present in the kdelibs minimum version required by &kmymoney; -->
 
-  <!ENTITY Allan.Anderson "<personname
-><firstname
->Allan</firstname
-><surname
->Anderson</surname
-></personname
->">
-  <!ENTITY Allan.Anderson.mail "<email
->agander93@gmail.com</email
->">
+  <!ENTITY Allan.Anderson "<personname><firstname>Allan</firstname><surname>Anderson</surname></personname>">
+  <!ENTITY Allan.Anderson.mail "<email>agander93@gmail.com</email>">
 
   <!-- the following author entities were added to contributor.entities for the 5.0 release
        they can be removed from this file once they are present in the kdelibs minimum version required by &kmymoney; -->
 
-  <!ENTITY Lukasz.Wojnilowiczs "<personname
-><firstname
->Łukasz</firstname
-><surname
->Wojniłowicz</surname
-></personname
->">
-  <!ENTITY Lukasz.Wojnilowicz.mail "<email
->lukasz.wojnilowicz@gmail.com</email
->">
+  <!ENTITY Lukasz.Wojnilowiczs "<personname><firstname>Łukasz</firstname><surname>Wojniłowicz</surname></personname>">
+  <!ENTITY Lukasz.Wojnilowicz.mail "<email>lukasz.wojnilowicz@gmail.com</email>">
 
-  <!ENTITY Ralf.Habacker "<personname
-><firstname
->Ralf</firstname
-><surname
->Habacker</surname
-></personname
->">
-  <!ENTITY Ralf.Habacker.mail "<email
->ralf.habacker@freenet.de</email
->">
+  <!ENTITY Ralf.Habacker "<personname><firstname>Ralf</firstname><surname>Habacker</surname></personname>">
+  <!ENTITY Ralf.Habacker.mail "<email>ralf.habacker@freenet.de</email>">
 
-  <!ENTITY Christian.David "<personname
-><firstname
->Christian</firstname
-><surname
->Dávid</surname
-></personname
->">
-  <!ENTITY Christian.David.mail "<email
->christian-david@web.de</email
->">
+  <!ENTITY Christian.David "<personname><firstname>Christian</firstname><surname>Dávid</surname></personname>">
+  <!ENTITY Christian.David.mail "<email>christian-david@web.de</email>">
 
-  <!-- the following author entity was added to contributor.entities for the 5.0 release
-       it can be removed from this file once it is present in the kdelibs minimum version required by &kmymoney; -->
+  <!ENTITY Michael.Carpino "<personname><firstname>Michael</firstname><surname>Carpino</surname></personname>">
+  <!ENTITY Michael.Carpino.mail "<email>mfcarpino@gmail.com</email>">
 
-  <!ENTITY Michael.Carpino "<personname
-><firstname
->Michael</firstname
-><surname
->Carpino</surname
-></personname
->">
-  <!ENTITY Michael.Carpino.mail "<email
->mfcarpino@gmail.com</email
->">
+  <!ENTITY Dawid.Wrobel "<personname><firstname>Dawid</firstname><surname>Wróbel</surname></personname>">
+  <!ENTITY Dawid.Wrobel.mail "<email>me@dawidwrobel.com</email>">
 
   <!-- the following entities have been added to user.entities in trunk and probably 4.7 branch of svn
        they are only in the french branch, and are required for processing of the french documentation
        they can be removed from this file once they are present in the kdelibs minimum version required by &kmymoney; -->
 
   <!ENTITY traducteurJoseFournier
-     '<othercredit role="translator"
-><firstname
->José</firstname
-><surname
->Fournier</surname>
-      <affiliation
-><address
-><email
->jaaf.forums@zoraldia.com</email
-></address
-></affiliation>
-      <contrib
->Traduction française&nbsp;</contrib
-></othercredit
->'>
+     '<othercredit role="translator"><firstname>José</firstname><surname>Fournier</surname>
+      <affiliation><address><email>jaaf.forums@zoraldia.com</email></address></affiliation>
+      <contrib>Traduction française&nbsp;</contrib></othercredit>'>
   <!ENTITY relecteurJoseFournier
-     '<othercredit role="reviewer"
-><firstname
->José</firstname
-><surname
->Fournier</surname>
-      <affiliation
-><address
-><email
->jaaf.forums@zoraldia.com</email
-></address
-></affiliation>
-      <contrib
->Relecture de la documentation française&nbsp;</contrib
-></othercredit
->'>
-  <!ENTITY JoseFournier 'José Fournier <email
->jaaf.forums@zoraldia.com</email
->'>
+     '<othercredit role="reviewer"><firstname>José</firstname><surname>Fournier</surname>
+      <affiliation><address><email>jaaf.forums@zoraldia.com</email></address></affiliation>
+      <contrib>Relecture de la documentation française&nbsp;</contrib></othercredit>'>
+  <!ENTITY JoseFournier 'José Fournier <email>jaaf.forums@zoraldia.com</email>'>
 
   <!ENTITY traducteurSimonDepiets
-     '<othercredit role="translator"
-><firstname
->Simon</firstname
-><surname
->Depiets</surname>
-      <affiliation
-><address
-><email
->2df@tuxfamily.org</email
-></address
-></affiliation>
-      <contrib
->Traduction française&nbsp;</contrib
-></othercredit
->'>
+     '<othercredit role="translator"><firstname>Simon</firstname><surname>Depiets</surname>
+      <affiliation><address><email>2df@tuxfamily.org</email></address></affiliation>
+      <contrib>Traduction française&nbsp;</contrib></othercredit>'>
   <!ENTITY relecteurSimonDepiets
-     '<othercredit role="reviewer"
-><firstname
->Simon</firstname
-><surname
->Depiets</surname>
-      <affiliation
-><address
-><email
->2df@tuxfamily.org</email
-></address
-></affiliation>
-      <contrib
->Relecture de la documentation française&nbsp;</contrib
-></othercredit
->'>
-  <!ENTITY SimonDepiets    'Simon Depiets <email
->2df@tuxfamily.org</email
->'>
+     '<othercredit role="reviewer"><firstname>Simon</firstname><surname>Depiets</surname>
+      <affiliation><address><email>2df@tuxfamily.org</email></address></affiliation>
+      <contrib>Relecture de la documentation française&nbsp;</contrib></othercredit>'>
+  <!ENTITY SimonDepiets    'Simon Depiets <email>2df@tuxfamily.org</email>'>
 
 <!-- entities to allow use of icons inline in describing some configuration dialogs -->
-  <!ENTITY infoicon "<inlinemediaobject
-><imageobject
-><imagedata fileref='icon-dialog-information.png' format='PNG'/>
-    </imageobject
-></inlinemediaobject
->">
-  <!ENTITY configicon "<inlinemediaobject
-><imageobject
-><imagedata fileref='icon-dialog-configure.png' format='PNG'/>
-    </imageobject
-></inlinemediaobject
->">
+  <!ENTITY infoicon "<inlinemediaobject><imageobject><imagedata fileref='icon-dialog-information.png' format='PNG'/>
+    </imageobject></inlinemediaobject>">
+  <!ENTITY configicon "<inlinemediaobject><imageobject><imagedata fileref='icon-dialog-configure.png' format='PNG'/>
+    </imageobject></inlinemediaobject>">
 
 <!-- the chapters -->
   <!ENTITY introduction SYSTEM "introduction.docbook">
@@ -215,6 +97,7 @@
   <!ENTITY details-impexp SYSTEM "details-impexp.docbook">
   <!ENTITY details-impexp-csv SYSTEM "details-impexp-csv.docbook">
   <!ENTITY details-impexp-csvexp SYSTEM "details-impexp-csvexp.docbook">
+  <!ENTITY details-impexp-woob SYSTEM "details-impexp-woob.docbook">
   <!ENTITY details-reconciliation SYSTEM "details-reconciliation.docbook">
   <!ENTITY details-search SYSTEM "details-search.docbook">
   <!ENTITY details-reports SYSTEM "details-reports.docbook">
@@ -231,72 +114,36 @@
 <book id="kmymoney" lang="&language;">
 
 <bookinfo>
-<title
->Das Handbuch zu &kmymoney;</title>
-<subtitle
->für &kmymoney; Version 5.0</subtitle>
+<title>The &kmymoney; Handbook</title>
+<subtitle>for &kmymoney; version 5.0</subtitle>
 
 <authorgroup>
 <!-- This is just put in as an example.  For real documentation, please
      define a general entity in entities/contributor.entities, e.g.
-<!ENTITY George.N.Ugnacious "<personname
-><firstname
->George</firstname
-><othername
->N.</othername
-><surname
->Ugnacious</surname
-></personname
->">
-<!ENTITY George.N.Ugnacious.mail "<email
->gnu@kde.org</email
->">
+<!ENTITY George.N.Ugnacious "<personname><firstname>George</firstname><othername>N.</othername><surname>Ugnacious</surname></personname>">
+<!ENTITY George.N.Ugnacious.mail "<email>gnu@kde.org</email>">
 and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
  -->
-<author
->&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
-<author
->&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
-<author
->&Ace.Jones; &Ace.Jones.mail; </author>
-<author
->&Tony.Bloomfield; &Tony.Bloomfield.mail; </author>
-<author
->&Robert.Wadley; &Robert.Wadley.mail; </author>
-<author
->&Darin.Strait; &Darin.Strait.mail; </author>
-<author
->&Roger.Lum; &Roger.Lum.mail; </author>
-<author
->&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
-<othercredit role="translator"
-><firstname
->Burkhard</firstname
-><surname
->Lück</surname
-><affiliation
-><address
-><email
->lueck@hube-lueck.de</email
-></address
-></affiliation
-><contrib
->Übersetzung</contrib
-></othercredit
-> 
+<author> &Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+<author> &Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+<author> &Ace.Jones; &Ace.Jones.mail; </author>
+<author> &Tony.Bloomfield; &Tony.Bloomfield.mail; </author>
+<author> &Robert.Wadley; &Robert.Wadley.mail; </author>
+<author> &Darin.Strait;	&Darin.Strait.mail; </author>
+<author> &Roger.Lum; &Roger.Lum.mail; </author>
+<author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+<author> &Dawid.Wrobel; &Dawid.Wrobel.mail; </author>
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 
 <copyright>
-<year
->2000-2018</year>
-<holder
->Das &kmymoney;-Entwicklerteam</holder>
+<year>2000-2018</year>
+<holder>The &kmymoney; Development Team</holder>
 </copyright>
 <!-- Translators: put here the copyright notice of the translation -->
 <!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook
      and in the FDL itself on how to use it. -->
-<legalnotice
->&FDLNotice;</legalnotice>
+<legalnotice>&FDLNotice;</legalnotice>
 
 <!-- Date and version information of the documentation
 Don't forget to include this last date and this last revision number, we
@@ -305,47 +152,36 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date
->2018-01-13</date>
-<releaseinfo
->5.0.0</releaseinfo>
+<date>2018-01-13</date>
+<releaseinfo>5.0.0</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
 <abstract>
-<para
->&kmymoney;, die persönliche Finanzverwaltung von &kde;. </para>
+<para>
+  &kmymoney;, the personal finance manager by &kde;.
+</para>
 
-<para
->Dieses Handbuch beschreibt &kmymoney; Version 5.0. </para>
+<para>
+  This handbook describes &kmymoney; version 5.0.
+</para>
 </abstract>
 
 <!-- This is a set of Keywords for indexing by search engines.
 Please at least include KDE, the KDE package it is in, the name
  of your application, and a few relevant keywords. -->
 <keywordset>
-<keyword
->KDE</keyword>
-<keyword
->Büro</keyword>
-<keyword
->KMyMoney4</keyword>
-<keyword
->KMyMoney</keyword>
-<keyword
->kmymoney4</keyword>
-<keyword
->kmymoney</keyword>
-<keyword
->Finanzen</keyword>
-<keyword
->Konten</keyword>
-<keyword
->Kontoführung</keyword>
-<keyword
->Finanzen</keyword>
-<keyword
->Buchführung</keyword>
+<keyword>KDE</keyword>
+<keyword>office</keyword>
+<keyword>KMyMoney4</keyword>
+<keyword>KMyMoney</keyword>
+<keyword>kmymoney4</keyword>
+<keyword>kmymoney</keyword>
+<keyword>finance</keyword>
+<keyword>accounts</keyword>
+<keyword>accounting</keyword>
+<keyword>financial</keyword>
+<keyword>bookkeeping</keyword>
 </keywordset>
 
 </bookinfo>

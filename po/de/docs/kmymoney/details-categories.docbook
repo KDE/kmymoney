@@ -2,116 +2,188 @@
 <chapter id="details.categories">
 <chapterinfo>
   <authorgroup>
-    <author
->&Roger.Lum; &Roger.Lum.mail;</author>
+    <author>&Roger.Lum; &Roger.Lum.mail;</author>
+    <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
   </authorgroup>
-  <date
->2014-08-30</date>
-  <releaseinfo
->4.7.01</releaseinfo>
+  <date>2020-02-06</date>
+  <releaseinfo>5.0.8</releaseinfo>
 </chapterinfo>
 
-<title
->Kategorien</title>
+<title>Categories</title>
 
-<para
->Die Kategorienansicht gibt eine Übersicht über alle existierenden Kategorien, die den Buchungen zugeordnet wurden. Die Kategorien sind aufgeteilt in Einnahmen und Ausgaben. Hinter jeder Kategorie wird der zugehörige Kontostand angezeigt. </para>
+<para>
+  The Categories view provides a summary of all the existing categories in your
+  current database.  The categories are split into income and expense, sorted
+  alphabetically, and shown along with the respective balance for each.
+</para>
 
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="categories.png" format="PNG"/>
+	<imagedata fileref="categories.png" format="PNG" />
 	</imageobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
 <sect1 id="details.categories.create">
-<title
->Erstellen einer Kategorie</title>
+<title>Creating a category</title>
 
-<para
->Um eine neue Kategorie zu erstellen, wählen Sie entweder <menuchoice
-><guimenu
->Kategorie</guimenu
-> <guimenuitem
->Neue Kategorie</guimenuitem
-></menuchoice
-> im Menü, oder wählen Sie in den Kategorienansicht eine übergeordnete Kategorie und klicken Sie auf diese mit der rechten Maustaste. Wählen Sie dann die Option <guimenuitem
->Neue Kategorie</guimenuitem
->. Es öffnet sich ein Assistent zum Erstellen einer neuen Kategorie. Geben Sie den Namen der neuen Kategorie ein und wählen Sie eine andere Währung aus, wenn die Voreinstellung nicht zutrifft. Stellen Sie sicher, dass im Unterfenster "Hierarchie" die richtige übergeordnete Kategorie ausgewählt ist. Im Unterfenster "Steuer" können Sie schließlich noch die Mehrwertsteuer-Unterstützung aktivieren, sowie auswählen, ob diese Kategorie in Steuerberichten erscheinen soll. </para>
+<para>
+  There are 3 ways to create a new category: either select the
+  <menuchoice><guimenu>Category</guimenu><guimenuitem>New
+  category</guimenuitem></menuchoice> menu item; select a parent in the tree
+  in the Categories view, right-click and select the <guimenuitem>New
+  Category</guimenuitem> option, or directly type the name of the new category
+  when adding or editing a transaction in the Ledger.  Doing any of these steps
+  will direct you to the <guilabel>Create new Category</guilabel> dialog.  The
+  dialog contains three tabs: <guilabel>General</guilabel>,
+  <guilabel>Hierarchy</guilabel>, and <guilabel>Tax</guilabel>.  The General tab
+  includes editable fields for the new category name, type, and currency (with
+  the default currency preselected,) as well as options for Last check number,
+  Notes, and a checkbox for Cost center assignment required.  In the Hierarchy
+  tab, you are able to select the appropriate parent account for the category.
+  Finally, in the Tax tab, there are fields to enable and configure VAT support,
+  and a checkbox to include this category in tax related reports.
+</para>
 
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="categoryedit.png" format="PNG"/>
+	<imagedata fileref="categoryedit.png" format="PNG" />
 	</imageobject>
 	</mediaobject>
 	</screenshot>
- </para>
-
-<para
->Geben Sie den Kategorienamen und bei Bedarf Ihre Notizen ein. Anschließend klicken Sie auf <guibutton
->OK</guibutton
-> um die neue Kategorie zu speichern. Um eine ganze Konten-Hierarchie zu erstellen, trennen Sie die Unterkategorien durch Doppelpunkte (:), wie zum Beispiel in <emphasis
->Rechnungen:Auto:Benzin</emphasis
->. </para>
+</para>
 </sect1>
 
 <sect1 id="details.categories.edit">
-<title
->Eine Kategorie bearbeiten</title>
+<title>Editing a Category</title>
 
-<para
->Um eine Kategorie zu bearbeiten klicken Sie mit der rechten Maustaste auf den Kategorienamen und wählen <guimenuitem
->Kategorie bearbeiten</guimenuitem
-> aus dem erscheinenden Menü. Es erscheint ein Fenster mit drei Karteikarten: Allgemein, Hierarchie und Steuer. </para>
+<para>
+  To edit a category, right-click on a category name, and choose
+  <guimenuitem>Edit category</guimenuitem>.  A window appears with the same
+  three tabs as the new category dialog: General, Hierarchy and Tax.  Each tab
+  allows you to edit certain details of the category.
+</para>
 
-<para
->Das Karteikarte "Allgemein" erlaubt es Ihnen, den Namen der Kategorie und Ihre Notizen zu bearbeiten, die Sie beim Anlegen eingegeben haben. </para>
+<para>
+  The General tab allows you to edit the name of the category, any notes you
+  entered when you created the category, the Last check number, and the state of
+  the Cost Center assignment required checkbox.  The Type, Currency, and Price
+  entry cannot be changed from their initial values.
+</para>
 
-<para
->Auf der Karteikarte „Hierarchie“ können Sie die übergeordnete Kategorie ändern. Dazu klicken Sie in dieser Ansicht der Kategorienhierarchie auf eine andere Kategorie. In früheren Versionen von &kmymoney; konnte dies auch durch Ziehen und Ablegen ausgeführt werden. Diese Funktion wird in einer zukünftige Version wieder eingeführt, aber wahrscheinlich nicht vor der Portierung von &kmymoney; zu &kde;-Frameworks. </para>
+<para>
+<!-- not ported to kde4 yet, much less Frameworks.  Uncomment once that is done.
+     See https://bugs.kde.org/show_bug.cgi?id=272737 
+     You can also change the parent category from the main category page by
+     dragging the category to a different parent. -->
+  The Hierarchy tab allows you to change the parent category by clicking on
+  another category in this view of the category hierarchy.  In an earlier
+  version of &kmymoney; it was possible to change the parent of a category by
+  dragging and dropping.  This functionality is expected to return in a future
+  version of the application.
+</para>
 
-<para
->Die Karteikarte „Steuer“ erlaubt das Zuweisen oder Ändern der Mehrwertsteuerkategorie oder das Verändern der automatischen Mehrwertsteuerzuordnung. Weiterhin können Sie auswählen, ob die Kategorie in Steuerberichten erscheint oder nicht. </para>
+<para>
+  The Tax tab allows you to assign or change VAT details, or to alter the
+  automatic VAT assignment.  It also allows the ability to toggle whether or not
+  the category is included in tax related reports.
+</para>
 </sect1>
 
 <sect1 id="details.categories.vat">
 <sect1info>
-  <author
->&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+  <author>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
 </sect1info>
 
-<title
->Mehrwertsteuer-Unterstützung</title>
+<title>VAT Support</title>
 	
-<para
->Sie können eine Einnahmen-/Ausgaben-Kategorie in eine Mehrwertsteuerkategorie verwandeln, was dazu führt, dass alle Splitt-Buchungen auf diese Kategorie gebucht werden, um die Mehrwertsteuer-Zahlungen an das Finanzamt zu sammeln. Sie können weiterhin einen Mehrwertsteuersatz hinterlegen. </para>
+<para>
+  You can turn an expense/income category into a VAT category, which means that
+  it receives all the splits that actually make up the VAT payment towards the
+  government. You can also enter a specific percentage rate.
+</para>
  
-<para
->Kategorien können einer Mehrwertsteuerkategorie zugeordnet werden, sodass &kmymoney; eine Buchung in zwei Buchungen splittet: eine für die Kategorie und eine für die Mehrwertsteuer. Abhängig von der Brutto/Netto-Einstellung im Unterfenster "Steuer" ist der eingegebene Betrag der Buchung ein Brutto- oder Nettobetrag. </para>
+<para>
+  Categories can be assigned a VAT category, which allows &kmymoney; to split a
+  transaction for a category into two parts, one for the category and one for
+  the VAT. Depending on the setting of the gross/net amount switch, the amount
+  you enter for the transaction is the gross or net amount.
+</para>
  
-<para
->Beispiel: In Deutschland gibt es drei Mehrwertsteuersätze (0 %, 7 % und 19 %). Dann wird eine Hauptkategorie „Gezahlte MwSt.“ und drei Unterkategorien, jeweils eine für jeden Mehrwertsteuersatz, angelegt, sowohl für die Einnahmen- als auch die Ausgabenseite, sodass insgesamt acht Kategorien entstehen. Für die gekauften Waren wird eine der oben genannten Kategorien als „automatische MwSt. Zuweisung“ ausgewählt. </para>
+<para>
+  Example: In Germany, there are three VAT percentages (0%, 7%, and 19%). So I
+  have a main category "VAT paid" and three subcategories, one for each
+  percentage rate. I create these on both the income and the expense sides so
+  that I have six categories in total.  For the goods I buy, I select one of
+  the above mentioned categories as the "VAT category assignment".
+</para>
  
-<para
->Werden Waren gekauft, wird dies in eine Buchung eingegeben. Angenommen, die Eingabe von Bruttobeträgen ist ausgewählt. Sobald die Kategorie gewählt und der Betrag eingegeben wurde, wird &kmymoney; feststellen, dass die Kategorie eine automatische MwSt.-Zuweisung besitzt. &kmymoney; wird nun den Mehrwertsteuerbetrag berechnen, eine Split-Buchung für das angegebene MwSt.-Konto erzeugen und den errechneten Mehrwertsteuerbetrag zuweisen. Anschließend wird der um die MwSt. reduzierte Restbetrag der eigentlichen Kategorie als Split-Buchung zugeordnet. </para>
+<para>
+  When I buy goods, I enter them into a transaction. Let's assume I have
+  selected the gross amount entry method, once I enter the category and amount,
+  &kmymoney; will recognize that there's a VAT assignment and calculate the VAT
+  part, create a second split with the VAT account and VAT amount and reduce the
+  category amount.
+</para>
  
-<para
->Das gleiche geschieht ebenfalls für Einnahmen-Kategorien in umgekehrter Weise. </para>
+<para>
+  The same applies to income categories but the other way around. Hope that
+  makes sense.
+</para>
 
 </sect1>
 
 <sect1 id="details.categories.delete">
-<title
->Löschen einer Kategorie</title>
+<title>Deleting a category</title>
 
-<para
->Um eine Kategorie zu löschen, klicken Sie diese mit der rechten Maustaste an und wählen <guimenuitem
->Kategorie löschen</guimenuitem
-> aus dem erscheinenden Menü. Wenn die Kategorie noch zugeordnete Buchungen enthält, erscheint ein Fenster, mit dessen Hilfe Sie den Buchungen eine neue übergeordnete Kategorie zuordnen können. Wenn Sie eine übergeordnete Kategorie löschen, erscheint ein Dialogfenster, in dem Sie auswählen können, ob Sie entweder alle Kategorien unterhalb der zu löschenden Kategorie eine Ebene nach oben verschieben, oder sie komplett löschen möchten. </para>
+<para>
+  To delete a category, select it in the tree, right click to bring up the popup
+  menu, and select <guimenuitem>Delete</guimenuitem>.  If the category has no
+  transactions, schedules, or budgets associated with it, and it is not set as the
+  default category for new transactions with any payee, it will be deleted.
+</para>
+
+<para>
+  If the category has any of those items, a popup will be displayed allowing you
+  to choose another category to which all those items can be reassigned before
+  the category is deleted.
+</para>
+
+<para>
+  If you delete a category which is the parent of any other categories, a dialog
+  will be displayed for you to choose whether to delete that category and all
+  its sub-categories or just the parent category.  If you choose to just delete
+  the parent category, then all its sub-categories will be moved to its parent
+  category.
+</para>
+
+<para>
+  Note that deleting some categories may prompt both for where to reassign its
+  data and also whether or not to delete any sub-categories.
+</para>
+</sect1>
+
+<sect1 id="details.categories.open_ledger">
+<title>Open ledger for a category</title>
+
+<para>
+  By right-clicking on any category there is an option to open a ledger for that
+  category.  You can also double-click on the category.  When this option is
+  selected &kmymoney; will display a ledger with all the transactions for the
+  selected category.  This allows you to quickly review all the transactions in
+  detail for the selected category.  You can then right-click on any transaction
+  to obtain additional details about the specific transaction ultimately allowing
+  any editing that may be required.  Note that you cannot edit a transaction in
+  the Category ledger; you need to switch to the ledger display for the other
+  account, using one of the selections in the popup menu when you right click on
+  the transaction.
+  
+</para>
 </sect1>
 </chapter>
+

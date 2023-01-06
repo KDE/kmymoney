@@ -2,850 +2,985 @@
 <chapter id="firsttime">
 <chapterinfo>
   <authorgroup>
-    <author
->&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author> &Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date
->2010-07-25</date>
-  <releaseinfo
->4.5</releaseinfo>
+  <date>2018-02-01</date>
+  <releaseinfo>5.0.0</releaseinfo>
 </chapterinfo>
 
-<title
->&kappname; zum ersten Mal starten</title>
+<title>Using &kmymoney; for the first time</title>
 
 <sect1 id="firstime-1">
-<title
->&kappname; zum ersten Mal starten</title>
-
-<para
->Wenn &kappname; vollständig gestartet ist, werden zwei Fenster angezeigt. Das oberste Fenster „Tipp des Tages “ zeigt eine Reihe von wichtigen und nützlichen Informationen über das Programm. <screenshot>
-	<screeninfo
->Tipp des Tages</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="tipofday.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
->Tipp des Tages</phrase>
-	</textobject>
-	</mediaobject>
-  </screenshot>
-</para>
-
-<para
->Es wird empfohlen, diese Hinweise durchzulesen, indem Sie die Knöpfe <guibutton
->Zurück</guibutton
-> und <guibutton
->Nächster</guibutton
-> unten im Dialogfenster benutzen. </para>
-
-<para
->Haben Sie diese Tipps durchgelesen, können Sie das Fenster schließen. Es wird bei jedem Start von &kappname; wieder geöffnet. Um dieses Standardverhalten abzustellen, deaktivieren Sie das Ankreuzfeld <guilabel
->Tipps beim Start anzeigen</guilabel
-> im Dialogfenster, </para>
+<title>Running &kmymoney; for the first time</title>
 
 <note>
-  <para
->Die Tipps können Sie jederzeit lesen, indem Sie in &kappname; <guimenuitem
->Tipp des Tages anzeigen</guimenuitem
-> aus dem Menü <guimenu
->Hilfe</guimenu
-> wählen. </para>
+  <para>
+    When you run &kmymoney;, it might not look exactly like the screenshots in
+    this manual.  Many details, such as fonts, colors, and icons, can be
+    customized, either using the
+    <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+    &kmymoney;...</guimenuitem></menuchoice> menu item or the &kde; &systemsettings;
+    application, depending on your operating system.
+  </para>
 </note>
 
-<para
->Alle Tipps wurden aus der Liste „Häufig gestellter Fragen“ (FAQ) erstellt, in der Sie ausführliche Hilfen finden. Diese FAQ finden Sie auf der <ulink url="http://kmymoney2.sourceforge.net/faq.html"
->Webseite</ulink
-> und in diesem Handbuch.d  </para>
-
-<para
->Bitte klicken Sie auf <guibutton
->Schließen</guibutton
->, um den Dialog „Tipp des Tages“ zu beenden. </para>
 </sect1>
 
 <sect1 id="firsttime.mainwindow">
-<title
->Das Hauptfenster</title>
+<title>The main window</title>
 
 <para>
 	<screenshot>
-	<screeninfo
->Das Hauptfenster</screeninfo>
+	<screeninfo>The Main Window</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="mainwindow_numbered.png" format="PNG"/>
+	<imagedata fileref="mainwindow_numbered.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase
->Das Hauptfenster</phrase>
+	<phrase>The Main Window</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para
->Das Hauptfenster von &kappname; besteht aus vier Bereichen: </para>
+<para>
+  The &kmymoney; main window consists of four major parts
+</para>
 
 <itemizedlist>
-  <listitem
-><para
->A. Die Menüleiste</para
-></listitem>
-  <listitem
-><para
->B. Die Werkzeugleiste</para
-></listitem>
-  <listitem
-><para
->C. Die Ansichtsauswahl</para
-></listitem>
-  <listitem
-><para
->D. Die Ansicht</para
-></listitem>
+  <listitem><para>A. The menu bar</para></listitem>
+  <listitem><para>B. The toolbar</para></listitem>
+  <listitem><para>C. The View selector</para></listitem>
+  <listitem><para>D. The view</para></listitem>
 </itemizedlist>
 
-<para
->Über das Menü und die Werkzeugleisten können Sie die Funktionen von &kappname; erreichen und zum Beispiel Dateien <link linkend="firsttime.3"
->erstellen</link
-> oder die Arbeitsweise von &kappname; einrichten.  </para>
+<para>
+  The menu and toolbars provide access to the features of &kmymoney; and allow
+  you to <link linkend="firsttime.3">Create</link> files or configure how
+  &kmymoney; operates.
+</para>
 
-<para
->In der Ansichtsauswahl an der linken Seite des Hauptfensters finden Sie mindestens elf Symbole, abhängig von den auf Ihrem System installierten Programmen. Weitere Symbole können durch zusätzliche Module hinzukommen. Klicken Sie auf ein Symbol, dann erscheint diese Ansicht Ihrer Finanzdaten im rechten Teil des Hauptfensters. Jede Ansicht zeigt Ihre finanzielle Situation in einer anderen Form an und ermöglicht das Bearbeiten den Daten. </para>
+<para>
+  On the left side of the main window, the view selector consists of at least
+  eleven icons with optional labels, depending upon the software provided by
+  your system.  More icons could be added by various plugins.  By clicking on an
+  icon, the view window on the right hand side is loaded with the appropriate
+  view of your financial data.  Each view provides a unique representation of
+  your financial situation and allows you to view or edit the information shown.
+</para>
 
-<para
->Die Ansichtsauswahl enthält folgende Symbole: </para>
+<para>
+  The view selector may contain the following icons
+</para>
 
 <itemizedlist>
   <listitem>
-    <para
-><guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="home_view.png" format="PNG"/> </imageobject
-> <textobject
-> <phrase
->Übersicht</phrase
-> </textobject
-> </inlinemediaobject
-> </guiicon
-> Übersicht: Eine einstellbare Übersicht Ihrer aktuellen finanziellen Situation oder die Einführungsseite, wenn keine Datendatei geöffnet ist. </para>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="home_view.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Home View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Home: A configurable overview of your current financial situation (or an
+      introduction page when no data file is open).
+    </para>
   </listitem>
 
   <listitem>
-    <para
-><guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="institutions_view.png" format="PNG"/> </imageobject
-> <textobject
-> <phrase
->Geldinstitute</phrase
-> </textobject
-> </inlinemediaobject
-> </guiicon
-> Geldinstitute: Alle Geldinstitute und Konten werden in einer Baumansicht angezeigt. </para>
+    <para>
+      <guiicon>
+        <inlinemediaobject>
+          <imageobject>
+	    <imagedata fileref="institutions_view.png" format="PNG"/>
+          </imageobject>
+	  <textobject>
+	    <phrase>Institutions View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Institutions: All of your institutions and accounts displayed in a
+      hierarchy.
+    </para>
   </listitem>
 
   <listitem>
-    <para
-><guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="accounts_view.png" format="PNG"/> </imageobject
-> <textobject
-> <phrase
->Konten</phrase
-> </textobject
-> </inlinemediaobject
-> </guiicon
-> Konten: Alle Konten werden in einer Baumansicht angezeigt. </para>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="accounts_view.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Accounts View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Accounts: All of your accounts displayed in a hierarchy.
+    </para>
   </listitem>
 
   <listitem>
-    <para
-><guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="schedule_view.png" format="PNG"/> </imageobject
-> <textobject
-> <phrase
->Geplante Buchungen</phrase
-> </textobject
-> </inlinemediaobject
-> </guiicon
-> Geplante Buchungen: Ihre wiederkehrenden Rechnungen und Zahlungen. </para>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="schedule_view.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Schedules View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Scheduled Transactions: Your recurring bills and deposits.
+    </para>
   </listitem>
 
   <listitem>
-    <para
-><guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="categories_view.png" format="PNG"/> </imageobject
-> <textobject
-> <phrase
->Kategorien</phrase
-> </textobject
-> </inlinemediaobject
-> </guiicon
-> Kategorien: Eine besondere Kontenart, die es Ihnen ermöglicht, zusammengehörende Buchungen in Gruppen zusammenzufassen. </para>
+    <para>
+      <guiicon>
+        <inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="categories_view.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Categories View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Categories: Special accounts that provide a means for you to group
+      associated transactions.
+    </para>
   </listitem>
 
   <listitem>
-    <para
-><guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="payees_view.png" format="PNG"/> </imageobject
-> <textobject
-> <phrase
->Empfänger</phrase
-> </textobject
-> </inlinemediaobject
-> </guiicon
-> Empfänger: Alle Zahlungsempfänger, die in &kappname; verwendet werden. </para>
+    <para>
+      <guiicon>
+        <inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="mail-tagged.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Tags View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Tags: Special accounts that provide an additional means to Categories for
+      you to group associated transactions.
+    </para>
   </listitem>
 
   <listitem>
-    <para
-><guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="ledgers_view.png" format="PNG"/> </imageobject
-> <textobject
-> <phrase
->Kontenbuch</phrase
-> </textobject
-> </inlinemediaobject
-> </guiicon
-> Kontenbuch: Übersicht der Buchungen aller Konten. </para>
+    <para>
+      <guiicon>
+        <inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="payees_view.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Payees View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Payees: All Payees used by &kmymoney;.  These are all the people or
+      organizations you pay money to or receive money from.
+    </para>
   </listitem>
 
   <listitem>
-    <para
-><guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="investments_view.png" format="PNG"/> </imageobject
-> <textobject
-> <phrase
->Investitionen</phrase
-> </textobject
-> </inlinemediaobject
-> </guiicon
-> Investitionen: Eine Zusammenfassung Ihrer Anlagen. </para>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="ledgers_view.png" format="PNG"/>
+      </imageobject>
+	  <textobject>
+	    <phrase>Ledgers View</phrase>
+      </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Ledgers: Your account transactions.
+    </para>
   </listitem>
 
   <listitem>
-    <para
-><guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="reports_view.png" format="PNG"/> </imageobject
-> <textobject
-> <phrase
->Berichte</phrase
-> </textobject
-> </inlinemediaobject
-> </guiicon
-> Berichte: Eine Sammlung von nützlichen Berichten, die alternative Übersichten Ihrer Finanzdaten bieten. </para>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="investments_view.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+        <phrase>Investments View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Investments: Your portfolio summary.
+    </para>
   </listitem>
 
   <listitem>
-    <para
-><guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="budgets_view.png" format="PNG"/> </imageobject
-> <textobject
-> <phrase
->Budgets</phrase
-> </textobject
-> </inlinemediaobject
-> </guiicon
-> Budgets: Eine Übersicht über Ihre Budgets. </para>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="reports_view.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Reports View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Reports: A collection of useful reports, providing alternate, customizable
+      views of your financial data.
+    </para>
   </listitem>
 
   <listitem>
-    <para
-><guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="forecast_view.png" format="PNG"/> </imageobject
-> <textobject
-> <phrase
->Vorhersage</phrase
-> </textobject
-> </inlinemediaobject
-> </guiicon
-> Vorhersage: Diese Ansicht zeigt eine Vorhersage Ihrer Konten und Kategorien. </para>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="budgets_view.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Budgets View</phrase>
+      </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Budgets: Your budgets.
+    </para>
   </listitem>
 
   <listitem>
-    <para
-><guiicon
-> <inlinemediaobject
-> <imageobject
-> <imagedata fileref="outbox_view.png" format="PNG"/> </imageobject
-> <textobject
-> <phrase
->Ausgang</phrase
-> </textobject
-> </inlinemediaobject
-> </guiicon
-> Ausgang: In dieser Ansicht werden die laufenden Prozesse des Online-Bankingmoduls angezeigt. Diese Ansicht liefert das KBanking-Modul. Ist es auf Ihrem System nicht installiert, fehlt diese Ansicht. </para>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="forecast_view.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Forecast View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Forecast: This view provides a forecast of your accounts and categories.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <guiicon>
+	<inlinemediaobject>
+	  <imageobject>
+	    <imagedata fileref="outbox_view.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Outbox View</phrase>
+	  </textobject>
+	</inlinemediaobject>
+      </guiicon>
+      Outbox: Used by the online banking module to provide feedback on running
+      processes.  This view is provided by the KBanking plugin and may not be
+      present on your system.
+    </para>
   </listitem>
 </itemizedlist>
 </sect1>
 
 <sect1 id="firsttime.3">
-<title
->Erstellen einer neuen Datei</title>
+<title>Creating a new file</title>
 
-<para
->&kappname; speichert alle Finanzdaten in einer Datei. Wie bereits im Kapitel <link linkend="makingmostof.basicaccounting.personalaccounts"
->Definition der Konten (private Nutzung)</link
-> erläutert, können Sie mehr als eine Gruppe von Konten verwenden, aber die Daten jeder einzelnen Gruppe werden in getrennten Dateien gespeichert und in &kappname; kann nur eine Datei geöffnet sein. Weitere Informationen über die &kappname;-Dateien finden Sie im Kapitel <link linkend="details.formats"
->Dateiformate</link
->. </para>
+<para>
+  &kmymoney; keeps all the data about your finances in a file.  As was stated in
+  <link linkend="makingmostof.basicaccounting.personalaccounts">Defining the
+  accounts (personal records)</link>, you can keep more than one set of
+  accounts, but the data for each will be kept in a separate file, and
+  &kmymoney; can only have one file open at a time.  See the chapter on <link
+  linkend="details.formats">File Formats</link> for more details about
+  &kmymoney;'s data files.
+</para>
 
-<para
->Um eine neue Datei zu erstellen, wählen Sie entweder <menuchoice
-><guimenu
->Datei</guimenu
-><guimenuitem
->Neu</guimenuitem
-></menuchoice
-> aus dem Menü oder das Symbol <inlinemediaobject
-><imageobject
-><imagedata fileref="new.png"/></imageobject
-><textobject
-><phrase
->Neu</phrase
-></textobject
-></inlinemediaobject
-> aus der Werkzeugleiste. </para>
+<para>
+  To create a new file you can either select
+  <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice>
+  menu item or choose the <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="new.png" format="PNG"/></imageobject></inlinemediaobject></guiicon> new
+  icon from the toolbar. In addition, if the main welcome page is displayed,
+  you can also select the first link: "Get started and setup accounts."
+</para>
 
-<para
->&kappname; öffnet dann den <quote
->Assistenten zur Erstellung einer neuen Datei</quote
->, der Sie bei dieser Aufgabe unterstützt. </para>
+<para>
+  &kmymoney; will then open the <quote>New File Setup Wizard</quote> which will
+  guide you through the process of creating the file.
+</para>
 
 <para>
 	<screenshot>
-	<screeninfo
->Die Seite „Persönliche Daten“</screeninfo>
+	<screeninfo>Personal Data Page</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="newfile.png" format="PNG"/>
+	<imagedata fileref="newfile.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase
->Die Seite „Persönliche Daten“</phrase>
+	<phrase>Personal Data Page</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para
->Alle Einträge auf dieser Seite sind nicht zwingend erforderlich, Sie können &kappname; auch ohne diese persönlichen Daten benutzen. Alle hier eingegebenen Informationen werden zur individuellen Anpassung Ihrer Daten benutzt. In weiteren Versionen können diese Daten für Berichte und das Online-Banking gebraucht werden. Sind in zukünftigen Versionen von &kappname; persönliche Daten für einige Funktionen erforderlich, aber noch nicht eingegeben, dann werden diese Daten abgefragt. </para>
+<para>
+  Since all fields are optional, you can use &kmymoney; without entering any
+  information now.  Any information entered here is used only to personalize
+  your file.  In the future, it may be used in some reports and for online
+  banking. If &kmymoney; requires any personal information in future releases
+  and finds none, you will be prompted to enter the relevant data then.
+</para>
 
-<para
->Bitte geben Sie Ihren Namen und die Adresse ein, oder lassen alle Felder leer und drücken den Knopf <guibutton
->Weiter</guibutton
->. </para>
+<para>
+  Please enter your name and address or nothing and press
+  <guibutton>Next</guibutton>.
+</para>
 
-<para
->Haben Sie Ihre Adresse in &kaddressbook; eingegeben, dann ist der Knopf <guibutton
->Aus dem Adressbuch laden</guibutton
-> aktiviert, klicken Sie darauf, um alle Daten in &kappname; einzufügen. </para>
+<para>
+  In case you have an address for yourself stored in the &kaddressbook;, the
+  button <guibutton>Load from Addressbook</guibutton> is enabled and pressing it
+  imports all information into &kmymoney;.
+</para>
 
-<para
->In &kappname; können Sie mehrere Währungen verwenden. Um die Basiswährung einzustellen, die Sie am häufigsten verwenden und die für Berichte benutzt wird, wählen Sie den passenden Eintrag aus der Liste und drücken dann auf <guibutton
->Weiter</guibutton
->. Als Voreinstellung ist die in den &systemsettings; gewählte Währung vorgegeben. </para>
+<para>
+  &kmymoney; supports multiple currencies.  To set your base currency (the
+  currency you use day to day and which will be used for your reports), select
+  the appropriate entry from the list provided and press
+  <guibutton>Next</guibutton>. A default will be selected from &kmymoney; based
+  upon your locale settings.
+</para>
+
+<para>
+  In the following example, US Dollar has been selected as the base currency.
+</para>
 
 <para>
 	<screenshot>
-	<screeninfo
->Auswahl der Basiswährung</screeninfo>
+	<screeninfo>Base currency selection Page</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="newfile-2.png" format="PNG"/>
+	<imagedata fileref="newfile-2.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase
->Auswahl der Basiswährung</phrase>
+	<phrase>Base currency selection page</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para
->Auf der nächsten Seite können Sie ein erstes Konto erstellen. Für den normalen Benutzer von &kappname; ist das ein Girokonto. </para>
+<para>
+  The following page allows you to create an initial account. For the typical
+  &kmymoney; user this is a checking account.
+</para>
 
 <para>
 	<screenshot>
-	<screeninfo
->Erstellung des Girokontos</screeninfo>
+	<screeninfo>Checking account creation Page</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="newfile-3.png" format="PNG"/>
+	<imagedata fileref="newfile-3.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase
->Erstellung des Girokontos</phrase>
+	<phrase>Checking account creation page</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para
->Geben Sie den Namen des Kontos und möglicherweise eine Kontonummer an, die von der Bank, die diese Konto verwaltet, zugewiesen wurde. Tragen Sie das Eröffnungsdatum und das Eröffnungssaldo des Kontos ein. Möchten Sie zum Beispiel mit &kappname; alle Finanzen ab dem 01.01.2011 verwalten, tragen Sie den Eröffnungssaldo am Beginn dieses Tages ein. Den Wert finden Sie möglicherweise auf einem Kontoauszug. Geben Sie noch den Namen und die Bankleitzahl der Bank an. Die Bankleitzahl ist nicht erforderlich und nur für das Online-Banking nötig. </para>
+<para>
+  Enter the name of the account and a possible account or reference number
+  assigned by the institution managing the account.  Enter the opening date of
+  the account and the opening balance of the account.  For example, you want to
+  use &kmymoney; to manage all your finances as of 2008-01-01, then enter the
+  balance of the account at the beginning of this date.  The number can possibly
+  be obtained from a paper statement.  You may also enter the name and the bank
+  code of the institution.  The latter, known as the routing number in the US or
+  the sort code in the UK, is optional and only required for online banking
+  purposes, but it may also be helpful when importing bank statements in some of
+  the formats supported (OFX, QFX).
+</para>
 
-<para
->Möchten Sie zu Anfang kein Girokonto einrichten, deaktivieren Sie das Ankreuzfeld <guilabel
->Ich habe ein Girokonto, das ich mit KMyMoney verwalten möchte</guilabel
->. </para>
+<para>
+  In case you don't want to setup an initial account, please uncheck the check box.
+</para>
 
-<para
->Haben Sie alle Daten eingegeben, klicken Sie auf <guibutton
->Weiter</guibutton
->. </para>
+<para>
+  Once finished, press <guibutton>Next</guibutton> to proceed.
+</para>
 
 <para>
 	<screenshot>
-	<screeninfo
->Die Seite Auswahl einer Kontovorlage</screeninfo>
+	<screeninfo>Account template selection Page</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="newfile-4.png" format="PNG"/>
+	<imagedata fileref="newfile-4.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase
->Die Seite Auswahl einer Kontovorlage</phrase>
+	<phrase>Account template selection page</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
 
-<para
->Wählen Sie ein passendes Land und eine oder mehrere Kontenvorlagen. Mehrere Vorlagen aus verschiedenen Ländern  können Sie mit der &Ctrl;- und &Shift;taste zusammen mit der Maus auswählen. Die eingestellte Kontenhierarchie wird als Vorschau angezeigt. Finden Sie keine passende Vorlage, gehen Sie weiter zur nächsten Seite. </para>
+<para>
+  Choose the appropriate country and account template(s). Each template provides
+  a different set of categories for organizing your finances. Multiple
+  templates, even from different countries, can be selected using a combination
+  of &Ctrl; and &Shift; together with the &LMB;.  The account
+  hierarchy to be setup will be shown in a preview part of the wizard. In case
+  you cannot find a template that suits your needs, don't select a template at
+  this time, and you can manually set up categories later.
+</para>
 
-<para
->Haben Sie eine Kontenvorlage ausgewählt, drücken Sie auf <guibutton
->Weiter</guibutton
->. </para>
+<para>
+  Once finished with the template selection press <guibutton>Next</guibutton> to
+  proceed.
+</para>
 
-<para
->Auf der nächsten Seite des Assistenten können Sie Ihre benutzerdefinierten Präferenzen setzen. Drücken Sie auf <guibutton
->Weiter</guibutton
->, um zur nächsten Seite zu kommen. </para>
+<para>
+  The next page of the wizard allows you to setup user preferences. If you
+  select the checkbox, the application settings dialog will be displayed after
+  you have completed the account setup wizard.  Press
+  <guibutton>Next</guibutton> if you are done and want to proceed.
+</para>
 
 <para>
 	<screenshot>
-	<screeninfo
->Die Seite Präferenzen</screeninfo>
+	<screeninfo>Preference Page</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="newfile-5.png" format="PNG"/>
+	<imagedata fileref="newfile-5.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase
->Die Seite Präferenzen</phrase>
+	<phrase>Preference page</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para
->Auf der letzten Seite des Assistenten können Sie den Dateinamen für die Speicherung Ihrer Finanzdaten auswählen. Als Voreinstellung wird Ihr persönlicher Ordner und Benutzername vorgeschlagen. Ist diese Datei bereits vorhanden, werden Sie darauf hingewiesen und Sie müssen einen anderen Namen oder Ordner wählen. </para>
+<para>
+  The last page of the wizard allows you to select the location and filename
+  that will be used to store your financial data. Initial values will be
+  constructed out of your HOME folder and user name. In case the file exists, a
+  warning will be displayed which reminds you to select a name of a non-existing
+  file.
+</para>
 
 <para>
 	<screenshot>
-	<screeninfo
->Auswahl des Dateinamens</screeninfo>
+	<screeninfo>Filename selection Page</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="newfile-6.png" format="PNG"/>
+	<imagedata fileref="newfile-6.png" format="PNG" />
 	</imageobject>
 	<textobject>
-	<phrase
->Auswahl des Dateinamens</phrase>
+	<phrase>Filename selection page</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para
->Jetzt sind alle notwendigen Daten zur Erstellung der Datei eingegeben. Klicken Sie auf <guibutton
->Fertigstellen</guibutton
-> und &kappname; erzeugt die Datei und öffnet sie. </para>
+<para>
+  Now you have entered all relevant information to create the file. Press
+  <guibutton>Finish</guibutton> and &kmymoney; will create the file for you and
+  open it.
+</para>
 
-<!--
-<para
->After &kappname; has finished loading the default accounts your financial
-summary will be displayed.  As you have defined no accounts to hold your
-transactions this is currently empty.</para>
--->
 </sect1>
 
 <sect1 id="firsttime.4">
-<title
->Konten erstellen</title>
+<title>Creating accounts</title>
 
-<para
->Es gibt zwei Möglichkeiten, um ein Konto zu erstellen, beide werden im Folgenden beschrieben: </para>
+<para>
+  There are multiple ways you can create an account, which are described here:
+</para>
 
 <variablelist>
   <varlistentry>
-    <term
->Verwendung des Menüs</term>
+    <term>Using the menu</term>
     <listitem>
-      <para
->Wählen Sie dazu im Menü <menuchoice
-><guimenu
->Konten</guimenu
-><guimenuitem
->Neues Konto</guimenuitem
-></menuchoice
->. </para>
+      <para>
+        To create an account using the menu select
+        <menuchoice><guimenu>Accounts</guimenu><guimenuitem>New
+        account</guimenuitem></menuchoice> menu item.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Die Kontenansicht benutzen</term>
+    <term>Using the Accounts view</term>
     <listitem>
-      <para
->Sie können zum Anlegen eines neuen Kontos auch auf das Symbol „Konten“ auf der linken Seite des &kappname;-Fensters klicken und dann mit der rechten Maustaste auf das Anlagen-Symbol klicken. Im Kontextmenü wählen Sie <guimenuitem
->Neues Konto</guimenuitem
->. Der Zweig „Anlagen“ beinhaltet alle Ihre Konten, die Ihr Vermögen darstellen. Anlagen und alle anderen Kontentypen werden im Verlauf des Handbuches detaillierter erklärt. </para>
+      <para>
+        To create an account using the accounts view click on the <guiicon>
+        <inlinemediaobject><imageobject><imagedata fileref="accounts_view.png"
+        format="PNG"/></imageobject></inlinemediaobject></guiicon> accounts icon
+        in the view selector to display the Accounts View.  Right click on the
+        either the Asset tree icon or the Liability tree icon in the right hand
+        view and select <guimenuitem>New account</guimenuitem> from the popup
+        menu.  The Asset tree holds all of your accounts that are an asset, such
+        as savings and investments.  Liabilities are accounts that represent
+        money you owe, such as loans and credit cards.  These and all the other
+        account types are discussed in more detail later in this manual.
+      </para>
     </listitem>
   </varlistentry>
+
+  <varlistentry>
+    <term>Using the toolbar</term>
+    <listitem>
+      <para>
+        If the <guibutton>New Account...</guibutton> button is displayed on the
+        toolbar, you can click it to create an account.
+      </para>
+    </listitem>
+  </varlistentry>
+
 </variablelist>
 
 <tip>
-  <para
->In &kappname; wird das Kontextmenü überall sehr oft verwendet. Kommen Sie an einer Stelle nicht weiter, klicken Sie mit der &RMBn; auf einen Bereich, in dem Sie Funktionen erwarten. </para>
+  <para>
+    Note that &kmymoney; uses context menus a lot throughout the whole
+    application.  If you find yourself stuck trying to figure out how to do
+    something, try right-clicking where you would expect to see a feature.
+  </para>
 </tip>
 
-<para
->Jede dieser Methoden startet den <emphasis
->Assistenten für ein neues Konto</emphasis
->. In diesem Dialog werden Sie durch alle notwendigen Schritte für ein neues Konto geführt, dabei werden alle erforderlichen Informationen abgefragt. Um zwischen den Seiten zu wechseln, klicken Sie auf <guibutton
->Zurück</guibutton
-> oder <guibutton
->Weiter</guibutton
->. </para>
+<para>
+  Creating a new account by either method opens the <emphasis>New Account
+  Wizard</emphasis>.  This wizard will take you step by step through the process
+  of creating an account, gathering the required information at each step.  To
+  navigate through the pages click on the <guibutton>Next</guibutton> and
+  <guibutton>Back</guibutton> buttons.
+</para>
 
-<para
->Erstellen Sie ein Konto mit einer der vorher genannten Methoden, um weiterzumachen. Eine vollständige Beschreibung zur Erstellung von Konten finden Sie im Abschnitt <link linkend="details.accounts"
->Konten</link
->. </para>
+<para>
+  Create an account using any of the previously mentioned methods to continue.
+  A full description of creating accounts can be found in the <link
+  linkend="details.accounts">Accounts</link> section.
+</para>
 
-<para
->Wenn mindestens ein Konto erstellt worden ist, wird die Zusammenfassung der Daten aller Konten in der Übersicht angezeigt. Sie können einzelne Buchungen im <link linkend="details.ledgers"
->Kontenbuch</link
-> oder Daueraufträge in der Ansicht <guilabel
->Geplante Buchungen</guilabel
-> eingeben. </para>
+<para>
+  Now that one or more accounts exist in &kmymoney;, your account summary is
+  shown in the Home view.  You can create transactions manually in the <link
+  linkend="details.ledgers">Ledgers</link> view, or set up automatic
+  transactions through the <link linkend="details.schedules">Schedules</link>
+  view.
+</para>
 </sect1>
 
 <sect1 id="firsttime.schedules">
-<title
->Geplante Buchungen</title>
+<title>Schedules</title>
 
-<para
-><link linkend="details.schedules"
->Geplante Buchungen</link
->, auch wiederholte Buchungen genannt, sind Buchungen die mehrmals in einen bestimmten Zeitraum ausgeführt werden. Ein typisches Beispiel is Ihre wöchentliche oder monatliche Lohnzahlung. Anstatt alle Details dieser Buchung jedesmal wieder neu einzugeben, können Sie in &kappname; eine geplante Buchung ausführen, die zu den angegebenen Terminen ausgeführt wird. </para>
+<para>
+  Sometimes called a recurring transaction, a <link
+  linkend="details.schedules">Schedule</link> is a transaction that occurs one
+  or more times over a certain period of time.  A typical example is your pay
+  check that you receive every month or week.  Rather than have to enter the
+  transaction details each time you get paid, you can instruct &kmymoney; to
+  create a schedule that will enter a transaction for you when you get paid.
+</para>
 
-<para
->Um <link linkend="details.schedules"
->Buchungen</link
-> zu verwalten, klicken Sie auf das Symbol <guiicon
-><inlinemediaobject
-><imageobject
-><imagedata fileref="schedule_view.png"/></imageobject
-></inlinemediaobject
->Geplante Buchungen</guiicon
-> in der Ansichtsauswahl. </para>
+<para>
+  To maintain <link linkend="details.schedules">schedules</link> click on the
+  <guiicon><inlinemediaobject><imageobject><imagedata fileref="schedule_view.png"
+  format="PNG"/></imageobject></inlinemediaobject></guiicon> schedules icon in
+  the view selector.
+</para>
 </sect1>
 
 <sect1 id="firsttime.categories">
-<title
->Kategorien</title>
+<title>Categories</title>
 
-<para
->Um <link linkend="details.schedules"
->Kategorien</link
-> zu verwalten, klicken Sie auf das Symbol <guiicon
-><inlinemediaobject
-><imageobject
-><imagedata fileref="schedule_view.png"/></imageobject
-></inlinemediaobject
->Kategorien</guiicon
-> in der Ansichtsauswahl. </para>
+<para>
+  To maintain <link linkend="details.categories">categories</link> click on the
+  <guiicon><inlinemediaobject><imageobject><imagedata fileref="categories_view.png"
+  format="PNG"/></imageobject></inlinemediaobject></guiicon> categories icon in
+  the view selector.
+</para>
 
-<para
->Eine umfangreiche Erläuterung zu diesem Thema finden Sie im Abschnitt <link linkend="details.categories"
->Kategorien</link
->. </para>
+<para>
+  A full description of this topic can be found in the <link
+  linkend="details.categories">Categories</link> section.
+</para>
+</sect1>
+
+<sect1 id="firsttime.tags">
+<title>Tags</title>
+
+<para>
+  To maintain <link linkend="details.tags">tags</link> click on the <guiicon>
+  <inlinemediaobject><imageobject><imagedata fileref="mail-tagged.png" format="PNG"/>
+  </imageobject></inlinemediaobject></guiicon> tags icon in the view selector.
+</para>
+
+<para>
+  A full description of this topic can be found in the <link
+  linkend="details.tags">Tags</link> section.
+</para>
 </sect1>
 
 <sect1 id="firsttime.payees">
-<title
->Zahlungsempfänger</title>
+<title>Payees</title>
 
-<para
->Um Ihre Liste der Zahlungsempfänger zu verwalten, klicken Sie auf das Symbol <guiicon
-><inlinemediaobject
-><imageobject
-><imagedata fileref="schedule_view.png"/></imageobject
-></inlinemediaobject
->Empfänger</guiicon
-> in der Ansichtsauswahl. </para>
+<para>
+  To maintain your list of payees click on the <guiicon><inlinemediaobject>
+  <imageobject><imagedata fileref="payees_view.png" format="PNG"/></imageobject>
+  </inlinemediaobject></guiicon> payees icon in the view selector.
+</para>
 
-<para
->Eine umfangreiche Erläuterung zu diesem Thema finden Sie im Abschnitt <link linkend="details.payees"
->Zahlungsempfänger</link
->. </para>
+<para>
+  A full description of this topic can be found in the <link
+  linkend="details.payees">Payees</link> section.
+</para>
 </sect1>
 
 <sect1 id="firsttime.import">
-<title
->Import des „Quicken Interchange Formats“ (QIF)</title>
+<title>Quicken Interchange Format (QIF) Import</title>
 
-<para
->Haben Sie vorher bereits ein Finanzverwaltungsprogramm benutzt, dann können Sie die Buchungen eines Kontos in &kappname; importieren, wenn diese Daten im „Quicken Interchange“-Format (QIF) vorliegen. Die meisten Finanzprogramme haben eine Exportfunktion für das QIF-Format, informieren Sie sich in der Dokumentation zum Programm, wie Sie den Export durchführen können. </para>
+<para>
+  If you currently use another financial manager application, &kmymoney; can
+  import an account's transactions as long as they can be exported or saved in a
+  format &kmymoney; understands. The most common of these is the Quicken
+  Interchange Format (QIF).  Most financial programs can export this format,
+  although the different applications' methods of exporting QIF is not discussed
+  here for brevity.
+</para>
 
-<para
->Eine umfangreiche Erläuterung zu diesem Thema finden Sie im Abschnitt <link linkend="details.impexp.qifimp"
->QIF-Import</link
->. </para>
+<para>
+  A full description of this topic can be found in the <link
+  linkend="details.impexp.qifimp">QIF Import</link> section.
+</para>
 </sect1>
 
 <sect1 id="firsttime.find">
-<title
->Suche nach Buchungen</title>
+<title>Searching for transactions</title>
 
-<para
->&kappname; bietet eine nützliche und leistungsfähige Funktion zur Suchen mit dem Dialog „Suchen“. </para>
+<para>
+  &kmymoney; provides a useful and powerful transaction search facility in the
+  form of the search dialog.
+</para>
 
-<para
->Den Suchdialog können Sie mit <guiicon
-><inlinemediaobject
-><imageobject
-><imagedata fileref="transaction_find.png"/></imageobject
-></inlinemediaobject
->Buchung suchen</guiicon
-> aus der Werkzeugleiste oder <guimenuitem
->Buchung suchen</guimenuitem
-> aus dem Menü <guimenu
->Bearbeiten</guimenu
-> öffnen. </para>
+<para>
+  The search dialog can be opened from the toolbar using the <guiicon>
+  <inlinemediaobject><imageobject><imagedata fileref="transaction_find.png"
+  format="PNG"/></imageobject></inlinemediaobject></guiicon> find icon or by
+  selecting the <menuchoice><guimenu>Edit</guimenu><guimenuitem>Find
+  Transaction</guimenuitem></menuchoice> menu item.
+</para>
 
-<para
->Eine umfangreiche Erläuterung zu diesem Thema finden Sie im Abschnitt <link linkend="details.search"
->Suchen</link
->. </para>
+<para>
+  A full description of this topic can be found in the <link
+  linkend="details.search">Search</link> section.
+</para>
 
 </sect1>
 
 <sect1 id="firsttime.reconcile">
-<title
->Kontenabgleich</title>
+<title>Reconciliation</title>
 
-<para
->Irgendwann möchten Sie Ihre eingegebenen Buchungen mit den Buchungen auf Kontoauszügen wie zum Beispiel Bankauszügen, Kreditartenkonten, Gehaltskonten usw. abgleichen. Dieser Vorgang erfordert die Abstimmung der eingegebenen Buchungen mit den Buchungen auf den Auszügen. Treten dabei Abweichungen auf, haben entweder Sie oder die Person, die die Kontoauszüge erstellt hat, einen Fehler gemacht. </para>
+<para>
+  At some point you will want to reconcile the transactions you have entered
+  with the transactions listed in a statement, be it a bank statement, credit
+  card statement, loan statement, or any other statement.  Reconciliation
+  involves matching what you have entered with what the statement lists.  If any
+  discrepancies are found then either you or the person who created the
+  statement have made a mistake.
+</para>
 
-<para
->Um ein Konto abzugleichen, wählen Sie zuerst das Konto entweder aus der Ansicht <guiicon
->Konten</guiicon
-> oder <guiicon
->Kontenbuch</guiicon
->. Klicken Sie dann entweder auf das Symbol <guiicon
->Abgleichen</guiicon
-> in der Werkzeugleiste oder wählen Sie <guimenuitem
->Abgleichen</guimenuitem
-> aus dem Menü <guimenu
->Konto</guimenu
->. </para>
+<para>
+  To reconcile an account, first select the account, either from
+  <guiicon>Accounts</guiicon> view or from <guiicon>Ledgers</guiicon>
+  view. Then, either click on the <guiicon>Reconcile</guiicon> icon on the
+  Toolbar, or select the <menuchoice><guimenu>Account</guimenu>
+  <guimenuitem>Reconcile</guimenuitem></menuchoice> menu item.
+</para>
 
-<para
->Eine umfangreiche Erläuterung zu diesem Thema finden Sie im Abschnitt <link linkend="details.reconcile"
->Kontenabgleich</link
->. </para>
-
+<para>
+  A full description of this topic can be found in the <link
+  linkend="details.reconcile">Reconciliation</link> section.
+</para>
 </sect1>
 
 <sect1 id="firsttime.backup">
-<title
->Sicherung</title>
+<title>Backing up</title>
 
-<para
->Da Sie jetzt einige Konten erstellt und Buchungen eingegeben haben, wird empfohlen, eine Sicherung der Daten durchzuführen. Da &kappname; eine normale Datei verwendet, kann als Sicherung eine Kopie an einem anderen Speicherort erstellt werden. Außerdem können Sie auch den Dialog „Sicherung“ benutzen. Es wird empfohlen, die Sicherung mit dem Dialog auszuführen, da es viel schwieriger ist, die Daten von Hand zu kopieren, wenn &kappname; andere Speicherformate wie zum Beispiel eine SQL-Datenbank benutzt. </para>
+<para>
+  Now that you have created some accounts and entered transactions it's a good
+  idea to perform a backup.  Because the file used by &kmymoney; is a standard
+  Unix file you can just copy the file to another location to back it up or use
+  the dialog provided by &kmymoney;.  Using the dialog is the preferred method
+  because if &kmymoney; ever starts using other file formats, such as SQL, then
+  it would be much harder to copy the file manually.
+</para>
 
-<para
->Um Ihre Datei mit &kappname; zu sichern, wählen Sie <guimenuitem
->Sicherung</guimenuitem
-> aus dem Menü <guimenu
->Datei</guimenu
-> und geben Sie den Ordner an, in den die Datei kopiert werden soll. Muss der Ordner zuerst eingebunden werden, aktivieren Sie <guilabel
->Dieses Gerät einhängen, bevor die Sicherung durchgeführt wird</guilabel
->, sofern Sie die Berechtigung für diese Aktion haben. Drücken Sie dann den Knopf <guibutton
->OK</guibutton
->.  </para>
+<para>
+  To backup your file through &kmymoney; Select
+  <menuchoice><guimenu>File</guimenu><guimenuitem>Backup</guimenuitem></menuchoice>
+  menu item and enter the folder where you wish the file to be saved. If the folder
+  needs mounting first and you have the sufficient privileges then check the
+  tick box labeled <guilabel>Mount this folder before backing up</guilabel>
+  and click on <guibutton>OK</guibutton>.
+</para>
 
-<para
->Die Datei wird mir dem aktuellen Datum als Ergänzung des Dateinamens in dem angegebenen Ordner gespeichert, so dass Sie am Dateinamen sofort das Datum der Sicherung erkennen können.  </para>
+<para>
+  The file will be saved to the folder specified with the current date appended
+  to the filename so it is easy to see the date the file was backed up.
+</para>
 </sect1>
 
 <sect1 id="firsttime.launch">
-<title
->&kappname; starten</title>
+<title>Launching &kmymoney;</title>
 
-<para
->Normalerweise starten Sie &kappname; durch Anklicken eines Symbols auf Ihrer Arbeitsfläche oder aus einen Startmenü Ihres Fenstermanagers. In diesem Fall öffnet &kappname; die beim letzten Start geladene Datei. Unter bestimmten Bedingungen aber möchten oder müssen Sie &kappname; vielleicht von der Befehlszeile aufrufen. </para>
+<para>
+  Most commonly, you will launch &kmymoney; from an icon or a start menu of your
+  window manager.  In this case, the default behavior is that &kmymoney; will
+  open the last file you had open.  However, in some circumstances, you will
+  want or need to launch &kmymoney; from the command line.
+</para>
 
-<para
->Eine umfassende Beschreibung aller vorhandenen Befehlszeilenoptionen finden Sie in den Handbuchseiten zu &kappname;. Zwei besondere Optionen werden hier kurz beschrieben. </para>
+<para>
+  For a complete description of all the available command line options, see the
+  man page for &kmymoney;.  However, there are two special cases which we
+  describe here.
+</para>
 
-<formalpara
-><title
-><command
->kmymoney -n</command
-></title>
-  <para
->Mit der Option -n startet &kappname; nicht mit der zuletzt geöffneten Datei. Diese Einstellung kann dann nützlich sein, wenn das Programm beim Start abstürzt. </para>
+<formalpara><title><command>kmymoney -n</command></title>
+  <para>
+    The -n option tells &kmymoney; not to open the last file it had open.  This
+    can be useful if the program crashes on startup.
+  </para>
 </formalpara>
 
-<formalpara
-><title
-><command
->kmymoney &lt;pfad/zu/datei&gt;</command
-></title>
-  <para
->Geben Sie beim Start von &kappname; auf der Befehlszeile einen Dateinamen an, wird diese Datei anstelle der zuletzt geöffneten Datei geladen. Sie können hier den Namen jeder gültigen &kappname;-Datei angeben, die im Kapitel <link linkend="details.formats"
->Dateiformate</link
-> beschrieben sind. Zusätzlich können Sie diese Option benutzen um eine <link linkend="details.impexp.gnucash"
->GnuCash</link
->-Datei zu importieren. </para>
+<formalpara><title><command>kmymoney &lt;path to file&gt;</command></title>
+  <para>
+    Giving &kmymoney; a filename on the command line tells it to open that file
+    instead of the last file it had open.  You can use the name of any valid
+    &kmymoney; file, as described in the chapter on <link
+    linkend="details.formats">file formats</link>.  In addition, this can be
+    used to import a <link linkend="details.impexp.gnucash">&gnucash;</link> file.
+  </para>
 </formalpara>
+</sect1>
 
+<sect1 id="firsttime.newpc">
+<title>How to move &kmymoney; to a new computer</title>
+
+<sect2 id="firsttime.newpc.data">
+<title>Moving your data</title>
+
+<para>
+  If you get a new computer, it's very easy to move your data.  In fact, all you
+  have to do is to copy your &kmymoney; data file.  The name of the file is
+  shown in the title bar when &kmymoney; is running, it usually ends in <filename
+  class="extension">.kmy</filename>. The first time you run the application on the
+  new computer you will have to tell it where you have put the data file, either
+  by running from the command line, or from the
+  <menuchoice><guimenu>File</guimenu><guimenuitem>Open...</guimenuitem></menuchoice>
+  menu item. You should even be able to move between &Windows;, &MacOS;, and &Linux; systems.
+</para>
+
+<para>
+  If you have encrypted your data file, be sure the appropriate software and
+  keys have also been set up on the new computer.
+</para>
+
+<para>
+  If your data is in an SQL database, refer to documentation for your database
+  software for guidance on migrating your data.
+</para>
+
+<para>
+  Note that this assumes you have installed the same version of &kmymoney; on the new
+  computer as you were running on the old computer.  Installing a newer version should
+  also be safe, but you need to be aware of any issues related to that upgrade.  Any such
+  issues should be noted in the release notes for the new version.
+</para>
+</sect2>
+
+<sect2 id="firsttime.newpc.settings">
+<title>Moving your settings</title>
+
+<para>
+  If you only move your data file to the new machine, as described in the
+  previous section, &kmymoney; will work correctly, but you will have lost any
+  settings you changed from the default on your old machine.  To maintain these
+  settings, you also need to copy your configuration file.  This file is called
+  <filename>kmymoneyrc</filename>. This file will be in a folder with other &kde;
+  application configuration files. On a &Linux; system, this will be in
+  <filename class="directory">$KDEHOME/share/config</filename> where <envar>$KDEHOME</envar> is usually
+  <quote>.config</quote> within your home folder. If you are migrating from
+  a version of &kmymoney; prior to 5.0 or later, the old location
+  of <envar>$KDEHOME</envar> was <filename class="directory">.kde4</filename>.
+</para>
+
+<sect3 id="firsttime.newpc.settings.plugins">
+<title>Moving plugin settings</title>
+
+<para>
+  If you have run any &kmymoney; plugin, such as the csv importer or exporter,
+  it may also have created a configuration file in that same folder, such as
+  <filename>csvimporterrc</filename> or <filename>csvexporterrc</filename>.
+  These should also be copied to the new computer.
+</para>
+
+<para>
+  As with the main data file, this assumes the same version of the plugin on
+  both computers.  Upgrades are generally safe, but if the functionality of the
+  plugin has changed greatly, it is advisable to carefully test using the old
+  configuration file, to be sure the plugin behaves as you expect.
+</para>
+
+<para>
+  Note that when upgrading from a previous version to version 5.0 or higher, the
+  location of the template files used by the plugin for printing checks has
+  changed.  Please consult the release notes or the project <ulink
+  url="https://www.kmymoney.org/faq.php">website</ulink> for more details.
+</para>
+
+<note>
+<para>
+  These instructions are solely for moving your &kmymoney; data and settings.
+  However, there may be important items which are stored by &kde; and not by
+  &kmymoney;, such as passwords stored in Keychain.  Moving other parts of
+  your &kde; setup is beyond the scope of this manual, although many of the
+  relevant files are also stored under <envar>$KDEHOME</envar>.
+</para>
+</note>
+</sect3>
+</sect2>
 </sect1>
 
 <sect1 id="firsttime.contact">
-<title
->Kontakt mit den Entwicklern aufnehmen und Fehler berichten</title>
+<title>Contacting the Developers / Reporting Bugs</title>
 
 <sect2>
-<title
->Kontakt mit den Entwicklern aufnehmen</title>
+<title>Contacting the developers</title>
 
-<para
->Die Entwickler erreichen Sie auf der Mailingliste &devlist;. </para>
+<para>
+  For general questions or comments about &kmymoney;, there is a users' mailing
+  list &userlist;. (<ulink
+  url="https://mail.kde.org/mailman/listinfo/kmymoney">more details
+  here</ulink>.) In addition, you can contact the developers through their
+  mailing list &devlist;. (<ulink
+  url="https://mail.kde.org/mailman/listinfo/kmymoney-devel">more details
+  here</ulink>.)  Since replies are often sent only to the list, you may not get
+  any response unless you subscribe to one of the lists before sending to it.
+</para>
 
-<para
->Bitte schicken Sie Ihre Erfahrungsberichte mit &kappname;. </para>
+<para>
+  We're happy to hear about your experiences using &kmymoney;.
+</para>
 </sect2>
 
 <sect2>
-<title
->Berichten von Fehlern</title>
+<title>Reporting bugs</title>
 
-<para
->Für einen Fehlerbericht benutzen Sie bitte den Menüeintrag <menuchoice
-><guimenu
->Hilfe</guimenu
-><guimenuitem
->Probleme oder Wünsche berichten</guimenuitem
-></menuchoice
-> und geben Sie alle nötigen Informationen ein. Bei Problemen mit diese Methode können Sie einen Fehler, einen Wunsch oder einen Verbesserungsvorschlag auch direkt auf der <ulink url="http://bugs.kde.org"
->&kde;-Internetseite für Fehlerberichte</ulink
-> eingeben. Benutzen Sie dass Produkt <quote
->kmymoney4</quote
->. <quote
->kmymoney2</quote
-> sollte nur für Fehler der Version 1.x des Programms benutzt werden. </para>
+<para>
+  To report a bug please use the interface provided by &kmymoney; by selecting
+  <menuchoice><guimenu>Help</guimenu><guimenuitem>Report
+  Bug</guimenuitem></menuchoice> menu item and filling in the required information.
+  However, in case you have any difficulties with that method, you can report a
+  bug (or file a wish-list or enhancement request) directly at the <ulink
+  url="https://bugs.kde.org">&kde; bug reporting web site</ulink>.  Reports
+  should be filed against the product <quote>kmymoney</quote>.
+</para>
 
-<para
->Ehe Sie einen Fehler berichten, lesen Sie bitte die folgenden Anleitungen. Folgen Sie diesen Anleitungen, können Entwickler wahrscheinlich schneller das Problem erkennen, ohne Sie mit weiteren Fragen belästigen zu müssen. </para>
+<para>
+  In any case, before reporting a bug, please read through the guidelines below.
+  Following them will make it more likely that the developers will be able to
+  quickly identify the problem without having to ask you for more information.
+</para>
 
 <sect3 id="firsttime.bugs.quality">
-<title
->Nützliche Fehlerberichte schreiben</title>
+<title>Writing High Quality Bug Reports</title>
 
-<para
->Wir empfehlen unseren Benutzern, sich zusätzliche Zeit zu nehmen, um hochwertige Fehlerberichte zu schreiben, ehe sie eingeschickt werden. Dadurch reduziert sich der Aufwand sowohl für den Reporter als auch für den Entwickler, da keine weiteren E-Mails ausgetauscht werden müssen, bis alle notwendigen Informationen zu Behebung des Fehlers wirklich vorhanden sind. </para>
+<para>
+  We encourage users to take extra time to write high-quality bug reports when
+  submitting them.  This reduces wasted effort on all sides, as the reporter and
+  the developer who will fix it trade emails until this information is really
+  in place.
+</para>
 
-<para
->Eli Goldberg schrieb eine anerkannte Anleitung für das Schreiben von Fehlerberichten, die sie auf <ulink url="http://issues.apache.org/bugwritinghelp.html"
->http://issues.apache.org/bugwritinghelp.html</ulink
-> finden. Folgen Sie dieser Anleitung, um nützliche Fehlerberichte zu schreiben. </para>
+<para>
+  Eli Goldberg wrote the canonical Bug-Writing Guideline, available at <ulink
+  url="https://issues.apache.org/bugwritinghelp.html">https://issues.apache.org/bugwritinghelp.html</ulink>.
+  Generally, you'll be well-served by following these guidelines:
+</para>
 
-<formalpara
-><title
->Systeminformationen einfügen</title>
-  <para
->Mit der Menüauswahl <menuchoice
-><guimenu
->Hilfe</guimenu
-><guimenuitem
->Probleme oder Wünsche berichten ...</guimenuitem
-></menuchoice
-> werden diese Informationen automatisch ausgefüllt. Möchten Sie diese Funktion nicht benutzen, dann müssen Sie die Version von &kappname;, die &kde;-Version, den Namen und die Version Ihrer Distribution und die Version des Kernels kennen. </para>
+<formalpara><title>Include your system information</title>
+  <para>
+    The <menuchoice><guimenu>Help</guimenu><guimenuitem>Report
+    Bug</guimenuitem></menuchoice> menu item will fill this in automatically,
+    but if you would prefer not to use this interface, there are several items
+    you need to include in the report.  We will need to know what operating
+    system you are using (&Linux;, &MacOS;, or &Windows;), the version of &kde;,
+    and the version of &kmymoney; you're running, and either the version of
+    &MacOS; or &Windows; or the name and version of your &Linux; distribution
+    and the version of your kernel.
+  </para>
 </formalpara>
 
-<formalpara
-><title
->Rückverfolgung für Abstürze einfügen</title>
-  <para
->Die Rückverfolgung ist meistens die einzige hilfreiche Information, um die Fehler für solche Abstürze zu beseitigen. </para>
+<formalpara><title>Include a backtrace for crashes</title>
+  <para>
+    The backtrace is often the single most useful piece of information in
+    solving crashes.
+  </para>
 </formalpara>
 
-<formalpara
-><title
->Versuchen Sie, den Fehler zu reproduzieren</title>
-  <para
->Geben Sie an, ob Sie den Fehler reproduzieren können. Es ist hilfreich zu wissen, ob der Fehler nur einmal auftrat und dann nie wieder, oder jedesmal oder nur manchmal. </para>
+<formalpara><title>Try to reproduce it</title>
+  <para>
+    Let us know if you were able to do so.  It's useful to know whether the bug
+    only happened once and you couldn't get it to happen again or happens every
+    time or happens sometimes but not others.
+  </para>
 </formalpara>
 
-<formalpara
-><title
->Geben Sie alle nötigen Schritte an, um den Fehler reproduzieren zu können.</title>
-  <para
->Die ist ein nutzloser Fehlerbericht: <quote
->Ich habe eine Buchung eingeben und &kappname; ist abgestürzt.</quote
-> Viel besser ist dieser Fehlerbericht: <quote
->Im Buchungsformular habe ich einen Buchung für mein Kreditkartenkonto eingegeben. Auf der Karteikarte Umbuchung habe ich einen Betrag eingegeben, dann wechselte ich zur Karteikarte Gutschrift und wieder zurück zur Karteikarte Umbuchung. Als ich zurück zu Umbuchung wechselte, ist &kappname; abgestürzt. Diesen Fehler kann ich jederzeit reproduzieren.</quote
-> </para>
+<formalpara><title>Include specific steps</title>
+  <para>
+    This is a bad bug report: <quote>I entered a transaction, and &kmymoney;
+    crashed.</quote> A much better bug report is: <quote>Using the transaction
+    form, I entered a new transaction in my Credit Card account.  I selected the
+    Transfer tab, entered in an amount, then changed to the Deposit tab, and
+    back to the Transfer tab.  When I returned to the Transfer tab, &kmymoney;
+    crashed.  This bug is fully reproducible for me.</quote>
+  </para>
 </formalpara>
 
-<formalpara
-><title
->Was haben Sie erwartet?</title>
-  <para
->In manchen Fällen ist das offensichtlich, aber bei subtilen Fehlerberichten ist nicht immer ersichtlich, was vom Programm erwartet wurde. Daher geben Sie diese Information immer an. </para>
+<formalpara><title>Tell us what you expected to happen</title>
+  <para>
+    In some cases, this is obvious, but in more subtle bugs, sometimes you'll
+    see a bug report where it is not obvious what the reporter expected to
+    happen.  Always tell us what you think should have happened.
+  </para>
 </formalpara>
 
-<formalpara
-><title
->Ausführung mit Symbolen zur Fehlersuche</title>
-  <para
->Kompilieren Sie ein Programm mit  --enable-debug=full können Sie sicherstellen, das nützliche Absturzinformationen erstellt werden. Stürzt &kappname; ab, starten Sie es im Programm gdb und wiederholen Sie den Absturz. Dann geben Sie <quote
->bt</quote
-> ein. um die Absturzinformationen zu sammeln. </para>
+<formalpara><title>Consider running with debugging enabled</title>
+  <para>
+    By compiling a version configured with --enable-debug=full you can ensure
+    that the best possible backtraces are generated.  If you encounter a crash,
+    run &kmymoney; again from within gdb, and reproduce the crash.  When it
+    crashes, type <quote>bt</quote> to generate a backtrace.
+  </para>
 </formalpara>
 
-<para
->Diese Art der Ausführung des Programms ist etwas schwieriger, daher wird das nicht von allen Benutzer erwartet. Möchten Sie jedoch mithelfen, dass &kappname; so stabil wie möglich läuft, ist dies der beste Weg, um Fehler im Quelltext zu finden und Korrekturen des Quelltexts zu schicken. </para>
+<para>
+  Running this way is a bit more difficult, so we don't expect all users to do
+  this.  However, if you're interested in helping &kmymoney; become as stable as
+  possible, this is the best way to do it short of finding the bug in the code
+  and sending in a patch.
+</para>
 </sect3>
 </sect2>
 </sect1>

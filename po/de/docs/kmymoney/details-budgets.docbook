@@ -2,517 +2,514 @@
 <chapter id="details.budgets">
 <chapterinfo>
   <authorgroup>
-    <author
->&Colin.Wright; &Colin.Wright.mail; </author>
-    <author
->&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+    <author> &Colin.Wright; &Colin.Wright.mail; </author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date
->2011-06-29</date>
-  <releaseinfo
->4.6</releaseinfo>
+  <date>2011-06-29</date>
+  <releaseinfo>4.6</releaseinfo>
 </chapterinfo>
 
-<title
->Budgets</title>
+<title>Budgets</title>
 
 <sect1 id="details.budgets.define">
-<title
->Was ist ein Budget?</title>
+<title>What is a budget?</title>
 
-<para
->Ein Budget ist eine kategorisierte Liste der erwarteten Einnahmen und Ausgaben für eine bestimmte Zeitperiode. </para>
+<para>
+  A budget is a categorized list of expected income and expenses for a period.
+</para>
 
-<para
->Die Budget-Funktionalität von &kmymoney; erlaubt es Ihnen, jährliche Budgets zu verwalten, wobei mehrere Budgets pro Jahr erzeugt werden können. Sie definieren dabei monatliche Budgetwerte für beliebige Einnahmen- oder Ausgabenkategorien, die existieren. Diese Budgetwerte können auf drei verschiedene Arten gesetzt werden, abhängig von der Periode: </para>
+<para>
+  The Budget facility of &kmymoney; allows you to create annual budgets.  More
+  than one Budget can be created for any year. You set monthly Budget values
+  against any Income or Expense categories that you have defined. The values can
+  be set in three ways, depending on the Period:
+</para>
 
 <variablelist>
   <varlistentry>
-    <term
->Monatlich</term>
-    <listitem
-><para
->Eingabe eines einzelnen Wertes, der jedem Monat des Budgets zugeordnet wird. Dies ist die Voreinstellung.</para
-></listitem>
+    <term>Monthly</term>
+    <listitem><para>(Default) specify a single value applied to every month in
+      the Budget</para></listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Jährlich</term>
-    <listitem
-><para
->Geben Sie einen Wert ein, der auf die einzelnen Monate eines Jahres im Budget aufgeteilt wird.</para
-></listitem>
+    <term>Yearly</term>
+    <listitem><para>Specify a single value to divide evenly across each month in
+      the Budget</para></listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Individuell</term>
-    <listitem
-><para
->Geben Sie für jeden Monat einen beliebigen Wert ein.</para>
-      <para
->Dies wird verwendet, um Einnahmen und Ausgaben unregelmäßig über das Jahr zu verteilen.</para
-></listitem>
+    <term>Individual</term>
+    <listitem><para>Specify separate values for each month.</para>
+      <para>This is used for income and expenses spread irregularly through the
+          year.</para></listitem>
   </varlistentry>
 </variablelist>
 
-<para
->&kmymoney; bietet zahlreiche Berichte an, um aktuelle Einnahmen und Ausgaben mit den Budgetwerten zu vergleichen. Diese Berichte ausführlich in <link linkend="budget.details.reports"
->diesem Abschnitt</link
-> beschrieben. </para>
+<para>
+  &kmymoney; provides a number of reports which compare actual income
+  and expenses against the entered Budgets.  These are described in
+  more detail in 
+  <link linkend="budget.details.reports">another section</link>.
+</para>
 </sect1>
 
-<sect1 id="details.budgets.create">
-<title
->Ihre Budgets</title>
+<sect1 id="details.budgets.create" >
+<title>Your budgets</title>
 
-<para
->Sie können auf Ihre Budgets durch Anklicken des entsprechenden Symbols im linken Navigationsbereich des &kmymoney;-Fensters zugreifen. </para>
+<para>
+  You can access your budgets by clicking the appropriate icon in the navigation
+  pane at the left hand side of your &kmymoney; window.
+</para>
 
-<para
->Es gibt zwei Hauptbereiche im Budgetfenster. Diese werden im folgenden genauer beschrieben. Links wird eine Liste aller von Ihnen erstellen Budget angezeigt. Darüber finden Sie Knöpfe, mit denen Sie Budgets erzeugen, umbenennen und löschen können. Auf der rechten Seite gibt es drei Bereiche. Oben sehen Sie die Kontenliste. Unten werden die Beträge angezeigt, die zum Budget der in der Kontenliste ausgewählten Kategorie gehört. Dazwischen gibt es zwei Bereiche mit weiteren Bedienungselementen zur Verwaltung der Budgets. </para>
+<para>
+  There are two major sections to the budget window.  These are
+  described in more detail below.  On the left, the main section
+  displays the list of budgets you have created.  Above that are
+  buttons for creating, renaming, and deleting budgets.  On the right,
+  there are three sections.  At the top is the Accounts List.  At the
+  bottom is a display of the amounts assigned to the budget for the
+  category selected in the Accounts List above.  Between those two
+  areas are some additional controls for managing the budget.
+</para>
 
 <sect2>
-<title
->Budgets erstellen, umbenennen, ändern und löschen</title>
+<title>Viewing, creating, renaming, and deleting budgets</title>
 
-<para
->Dieser Bereich des Fensters „Budget“ zeigt eine Liste aller Budgets, die in der aktuellen &kmymoney;-Datei vorhanden sind. Wurde bisher noch kein Budget erzeugt, ist diese Liste leer. Die Budgetliste hat zwei Spalten: </para>
+<para>
+  This section of the Budgets window displays the list of Budgets
+  contained in the current &kmymoney; file. If no Budget has yet been
+  created the list will be empty.  The list of Budgets has two
+  columns:
+</para>
 
 <variablelist>
   <varlistentry>
-    <term
->Name</term>
+    <term>Name</term>
     <listitem>
-      <para
->Name des Budgets</para>
+      <para>Name of the Budget</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Jahr</term>
+    <term>Year</term>
     <listitem>
-      <para
->Geschäftsjahr für das Budget. Sie können den Beginn des Geschäftsjahres (Monat und Tag) im <link linkend="details.settings.general.global"
->Einrichtungsdialog von &kmymoney;</link
-> festlegen.</para>
+      <para>Fiscal year of the Budget.  Note that the starting month
+        and day of the fiscal year can be specified in
+        the <link linkend="details.settings.general.global">Configure
+        &kmymoney; dialog.</link></para>
     </listitem>
   </varlistentry>
 </variablelist>
 
-<para
->Die Werte des in der Liste gewählten Budgets werden rechts angezeigt. Um ein anderes Budget auszuwählen, klicken Sie den entsprechenden Eintrag der Liste mit der Maus an. Wenn die Liste den Fokus besitzt, können Sie alternativ auch mit den Cursor-Steuertasten "Hoch" und "Runter" einen anderen Listeneintrag auswählen. Haben Sie ein Budget geändert und wählen dann ein anderes Budget, öffnet &kmymoney; einen Dialog mit der Abfrage, ob die Änderungen gespeichert oder verworfen werden sollen. </para>
+<para>
+  Values from the selected Budget are displayed to the right. To select a
+  different Budget you can click on the Budget in the list.  Alternatively, when
+  the list has focus, you can select a different Budget using the &Up; and &Down;
+  keys. If you have made changes to a Budget and then select a different budget
+  &kmymoney; will ask you whether you want to save or discard the changes.
+</para>
 
-<para
->Oberhalb der Budgetliste gibt es drei Knöpfe. </para>
+<para>
+  There are three buttons above the list of Budgets.
+</para>
 
 <variablelist>
   <varlistentry>
-    <term
->Neu</term>
+    <term>New</term>
     <listitem>
-      <para
->Erstellt ein neues leeres Budget. Der Standardname des neuen Budgets ist „Budget &lt;Jahr&gt;“, dabei ist Jahr das aktuelle Geschäftsjahr. </para>
+      <para>
+	Create a new, empty budget.  The default name of a new budget
+	is "Budget &lt;year&gt;" where &lt;year&gt; is the current
+	fiscal year.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Umbenennen</term>
+    <term>Rename</term>
     <listitem>
-      <para
->Den Namen des ausgewählten Budgets ändern</para>
+      <para>Edit the name of the selected Budget.</para>
 
-      <para
->Sie können den Namen eines Budgets ändern, in dem Sie auf den Namen eines Budgets in der Liste doppelklicken.</para>
+      <para>You can also edit the name of a Budget by double-clicking
+        on the name of a Budget in the list.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Löschen</term>
+    <term>Delete</term>
     <listitem>
-      <para
->Löscht das in der Liste ausgewählte Budget</para>
+      <para>Delete the selected Budget.</para>
     </listitem>
   </varlistentry>
 
 <!--  buttons moved in the UI - they are now described below.  Will remove
       from here after this chapter has been reviewed.
   <varlistentry>
-    <term
->Revert</term>
+    <term>Revert</term>
     <listitem>
-      <para
->Reverts the selected Budget to its last stored state.</para>
+      <para>Reverts the selected Budget to its last stored state.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Save</term>
+    <term>Save</term>
     <listitem>
-      <para
->Accepts any unsaved changes to the selected Budget and
+      <para>Accepts any unsaved changes to the selected Budget and
         stores them.</para>
     </listitem>
   </varlistentry>
  -->
 </variablelist>
 
-<para
->Über einen rechten Mausklick auf ein Budget erreichen Sie ein Menü mit weiteren Optionen. </para>
+<para>
+  Additional options are available on a menu accessed by right-clicking on a
+  Budget.
+</para>
 
 <variablelist>
   <varlistentry>
-    <term
->Neues Budget</term>
+    <term>New Budget</term>
     <listitem>
-      <para
->Erzeugt ein neues, leeres Budget.</para>
+      <para>Create a new, empty Budget.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Budget umbenennen</term>
+    <term>Rename Budget</term>
     <listitem>
-      <para
->Benennt das ausgewählte Budget um.</para>
+      <para>Rename the selected Budget.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Jahr des Budgets ändern</term>
+    <term>Change budget year</term>
     <listitem>
-      <para
->Es öffnet sich ein Fenster mit einer Jahresliste, aus der Sie ein Geschäftsjahr für das Budget auswählen können.</para>
+      <para>Displays a window with a list of years to select a
+        different fiscal year for the budget.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Budget löschen</term>
+    <term>Delete budget</term>
     <listitem>
-      <para
->Löscht das ausgewählte Budget.</para>
+      <para>Delete the selected Budget.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Budget kopieren</term>
+    <term>Copy budget</term>
     <listitem>
-      <para
->Erzeugt eine Kopie des ausgewählten Budgets mit dem neuen Namen "Kopie von &lt;Budget&gt;", wobei &lt;Budget&gt; der Name des kopierten Budgets ist.</para>
+      <para>Creates a copy of the selected Budget. The new Budget has the name
+        "Copy of &lt;budget&gt;", where &lt;budget&gt; is the name of the copied
+        Budget.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Budget basierend auf Vorhersage</term>
+    <term>Budget based on forecast</term>
     <listitem>
-      <para
->Erstellt ein Budget mit Werten aus der Vorhersagefunktion von &kmymoney; Weitere Informationen finden Sie im Abschnitt <link linkend="details.forecast.define"
->Vorhersage</link
-> . </para>
+      <para>Fills in budget amounts based on data from &kmymoney;'s
+	Forecast values.  See the section on
+	<link linkend="details.forecast.define">Forecasts</link> for
+	more information.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
 <sect2>
-<title
->Kontenliste</title>
+<title>Account List</title>
 
-<para
->Die Kontenliste zeigt alle Einnahmen- und Ausgabenkategorien an. Kategorien werden in &kmymoney; als besondere Arten von Konten behandelt. Wie auch an anderer Stelle in &kmymoney; wird die Liste in Form einer Baumstruktur angezeigt. Die Zweige des Baumes können ein- oder ausgeklappt werden, sodass die entsprechenden Unterkategorien ein- oder ausgeblendet werden. Die Kontenliste hat zahlreiche Spalten: </para>
+<para>
+  The Accounts List displays the list of Income and Expense Categories.
+  (Remember, within &kmymoney;, categories are treated as a special type of
+  account.)  As in other places in &kmymoney;, the list is organized in a tree
+  structure. The list can be expanded or collapsed to show or hide Subcategories
+  within a Category. The Accounts List has a number of columns:
+</para>
 
 <variablelist>
   <varlistentry>
-    <term
->Konto</term>
+    <term>Account</term>
     <listitem>
-      <para
->Kontenname (Kategorie)</para>
+      <para>Account (Category) name</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Typ</term>
+    <term>Type</term>
     <listitem>
-      <para
->Kategorietyp (Einnahme oder Ausgabe)</para>
+      <para>Category Type (Income or Expense)</para>
     </listitem>
   </varlistentry>
 
 <!-- these seem to have been removed from the display.  Remove from here
      once this is confirmed by the programmers.
   <varlistentry>
-    <term
->Tax</term>
+    <term>Tax</term>
     <listitem>
-      <para
->Checked if a Category included in Tax Reports</para>
+      <para>Checked if a Category included in Tax Reports</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->VAT</term>
+    <term>VAT</term>
     <listitem>
-      <para
->Checked if a Category marked as a VAT Category</para>
+      <para>Checked if a Category marked as a VAT Category</para>
     </listitem>
   </varlistentry>
 -->
 
   <varlistentry>
-    <term
->Gesamtsaldo</term>
+    <term>Total Balance</term>
     <listitem>
-      <para
->Der aktuelle Saldo des Kontos. Bei Kategorien ist diese Angabe nicht vorhanden, es sei denn, die Kategorie ist in einer ausländischen Währung definiert. Dann wird als Gesamtsaldo der Wert der Kategorie in der definierten Währung angezeigt.</para>
+      <para>Current balance of Account.  This will be blank for Categories, unless the Category
+        is defined in a foreign currency.  In this case, Total Balance will show the value for the
+        Category in its defined currency.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Gesamtwert</term>
+    <term>Total Value</term>
     <listitem>
-      <para
->Jährlicher Gesamtwert des Budgets. Wenn eine Kategorie weitere Unterkategorien enthält und diese eingeklappt sind, so wird die Summe der Kategorie und aller Unterkategorien angezeigt. Ist eine Kategorie in ausländischer Währung definiert, wird der Gesamtwert in der Basiswährung angezeigt.</para>
+      <para>Total yearly value in the Budget. If a Category has Subcategories
+        and the Category's list of Subcategories is collapsed the value displayed
+        is the sum of the values for the Category and all of its Subcategories.
+        If a Category is defined in a foreign currency, the Total Value will show
+        the value in the base currency.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 
 <!-- It would be nice to include the actual button icons here to confirm
      which buttons are referred to.  -->
-<para
->Unter der Kontenliste finden Sie mehrere Knöpfe. Die Knöpfe zum Aktualisieren und Zurücksetzen werden im Folgenden näher erläutert. Mit den beiden rechten Knöpfen können Sie die gesamte Kontenliste ein- und ausklappen. </para>
+<para>
+  Below the Accounts List are several controls. The <guibutton>Update</guibutton>
+  and <guibutton>Revert</guibutton> buttons are described further below. The collapse
+  and expand buttons collapse or expand the entire Accounts List.
+</para>
 
-<para
->Die Kontenliste kann auf zwei Arten gefiltert werden. Mit dem Ankreuzfeld "Ungenutzte Budget-Kategorien ausblenden" werden alle Kategorien ausgefiltert, denen der Kategorie oder allen Unterkategorien kein Wert zugewiesen ist. Rechts  daneben finden Sie ein unbeschriftetes Eingabefeld. Geben Sie hier Text ein, dann werden nur Kategorien einschließlich der übergeordneten Kategorien angezeigt, deren Name diesen Text enthält. </para>
+<para>
+  The Accounts List can be filtered in two ways. Checking the <guilabel>Hide
+  unused categories</guilabel> checkbox hides any Categories for which no value
+  has been assigned to the Category or any of its Subcategories.  To
+  the right of this, is an unlabelled text box.  Only categories which
+  include whatever is typed in this box are listed, but their parent
+  categories are also listed.
+</para>
 
-<para
->Beachten Sie, dass sowohl das Ausblenden ungenutzter Kategorien als auch der im Filter eingegebene Text die Liste der angezeigten Kategorien verändert. Eine eingeklappte Liste müssen Sie wieder ausklappen, um die mit den aktuellen Einstellungen gefilterten Kategorien zu sehen. </para>
+<para>
+  Note that changing either the <guilabel>Hide unused budget categories</guilabel>
+  or the filter value is likely to change the list of Categories display.
+  You may need to re-expand the list to see all the Categories that
+  should be displayed with the current settings.
+</para>
 
 </sect2>
 
 <sect2>
-<title
->Anlagen</title>
+<title>Assignments</title>
 
-<para
->Der Bereich „Anlagen“ zeigt die zugewiesenen Budgetwerte der ausgewählten Kategorien in der Kontenliste. </para>
+<para>
+  The Assignments area shows the values for the Category selected in
+  the Accounts List.
+</para>
 
 <variablelist>
   <varlistentry>
-    <term
->Konto</term>
+    <term>Account</term>
     <listitem>
-      <para
->Zeigt den Namen der ausgewählten Kategorie. Handelt es sich um eine Unterkategorie, dann wird der vollständige Name der ausgewählten Kategorie in der Form "Kategorie:Unterkategorie" angezeigt.</para>
+      <para>Displays the name of the selected Category. If the
+        Category is a Subcategory, its full name is displayed in the
+        Category:Subcategory format.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Summe</term>
+    <term>Total</term>
     <listitem>
-      <para
->Zeigt die der Kategorie zugeordnete jährliche Summe an.</para>
+      <para>Displays the total yearly value assigned to the Category.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Unterkonten einschließen</term>
+    <term>Include subaccounts</term>
     <listitem>
-      <para
->Ist das Feld angekreuzt, so werden auch die Einnahmen und Ausgaben der Unterkategorien mit dem Budget der übergeordneten Kategorie verrechnet.</para>
+      <para>If this is checked, then Reports show actual income or
+        expenses in Subcategories belonging to the Category against
+        the Category instead of the Subcategory.</para>
 
-      <para
->Wenn in einer Unterkategorie ein Budgetwert definiert wird, so werden die Einnahmen und Ausgaben zusätzlich gegen das Budget der Unterkategorie verrechnet.</para>
+      <para>If a Subcategory has a value defined in the Budget, then
+        the income and expenses are shown against the
+        Subcategory.</para>
 
-      <para
->Wenn die Unterkategorien einer in der Kontenliste ausgewählten Kategorie eingeklappt sind und obwohl der Gesamtwert der Kategorien die Summe der Gesamtwerte der Unterkategorien anzeigt, kann als Summe in Bereich Anlagen trotzdem ein Wert von 0 angezeigt werden, wenn dieses Ankreuzfeld nicht aktiviert wurde oder der Kategorie direkt ein Wert zugewiesen wurde.</para>
+      <para>If the Category selected in the Accounts List has its
+        Subcategories collapsed, although its Total Value will show the
+        sum of the Total Values for all its Subcategories, the amounts
+        in the Assignments area may still show 0, unless this box has
+        been checked or an amount has explicitly been assigned to the
+        Category.</para>
 
-      <para
->Im Allgemeinen sollten Sie entweder dieses Ankreuzfeld aktivieren und den Kategorien und nicht den Unterkategorien Werte zuweisen, oder Sie sollten dieses Ankreuzfeld deaktivieren und den Unterkategorien und nicht den Kategorien Werte zuweisen. Ist irgendeiner Unterkategorie ein Wert zugewiesen und dieses Ankreuzfeld ist aktiviert, werden alle Werte der Unterkategorien aufsummiert und in der Kategorie angezeigt.</para>
+      <para>In general, for you will either check this box and assign
+        values to the Category and not to any of its Subcategories, or
+        not check the box, and assign values to the Subcategories but
+        not the Category.  If any Subcategories have assigned amounts
+        when this box is checked, then those amounts are rolled up to
+        the Category.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Eingabefeld leeren</term>
+    <term>Clear</term>
     <listitem>
-      <para
->Der Knopf „Eingabefeld leeren“ setzt die Eingabefelder für die budgetierten Kategoriewerte zurück auf 0.</para>
+      <para>The <guibutton>Clear</guibutton> button resets the budgeted
+        category value or values to zero.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Periode</term>
+    <term>Period</term>
     <listitem>
-      <para
->Mit dem Auswahlknöpfen im Abschnitt „Periode“ geben Sie an, für welche Periode der rechts eingegebene Wert gilt.</para>
+      <para>The <guilabel>Period</guilabel> radio buttons allow you to
+        select the period for which the value applies</para>
 
       <variablelist>
 	<varlistentry>
-	  <term
->Monatlich</term>
+	  <term>Monthly</term>
 	  <listitem>
-	    <para
->Ein einzelner Wert, der den monatlichen Budgetwert angibt, wird eingegeben. Dies ist die Standardeinstellung.</para>
+	    <para>A single value is entered, specifying the amount per
+              month. This is the default setting.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
-	  <term
->Jährlich</term>
+	  <term>Yearly</term>
 	  <listitem>
-	    <para
->Ein einzelner Wert für einen Jahresbudgetwert wird eingegeben.</para>
+	    <para>A single value is entered, specifying the amount per
+              year.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry>
-	  <term
->Individuell</term>
+	  <term>Individual</term>
 	  <listitem>
-	    <para
->Für jeden Kalendermonat kann ein individueller Budgetwert eingetragen werden. Dies wird verwendet, wenn die Einnahmen oder Ausgaben unregelmäßig auf das Jahr verteilt sind.</para>
+	    <para>Values are specified for each Calendar month. This is used
+              where expense or income is spread irregularly through the
+              year.</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
 
-      <para
->Wenn ein oder mehrere Werte bereits eingetragen sind und eine andere Periode ausgewählt wird, wird abgefragt, ob der errechnete Jahresbudgetwert für die neuen Werte verwenden soll. </para>
+      <para>
+        If a value is or values are already specified and the Period is changed
+        &kmymoney; will ask whether to use the current total yearly value to
+        assign the new values.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
 <sect2>
-<title
->Aktualisieren und Rückgängig machen</title>
+<title>Update and Revert</title>
 
-<para
->Aus Geschwindigkeits-Gründen werden Änderungen an den Budgets nicht sofort abgespeichert. Stattdessen werden sie erst dann übernommen, wenn der Knopf „Aktualisieren“ gedrückt und anschließend die &kmymoney;-Datei gespeichert wird. </para>
+<para>
+  For performance reasons, changes made to a Budget are not saved immediately.
+  Instead, they must first be stored using the <guibutton>Update</guibutton>
+  button and then permanently saved using the <guibutton>Save</guibutton> button.
+</para>
 
-<para
->Sobald die Werte eines Budgets zum ersten mal verändert werden, werden die Knöpfe „Aktualisieren“ und „Rückgängig“ aktiviert. Änderungen an den Budgets können vorgenommen werden und ein Druck auf den Knopf „Aktualisieren“ wird die Änderungen übernehmen und anschließend die Knöpfe „Aktualisieren“ und „Rückgängig“ deaktivieren </para>
+<para>
+  When a Budget's values are first modified, the <guibutton>Update</guibutton>
+  and <guibutton>Revert</guibutton> buttons are enabled. Multiple changes can be
+  made to the Budget. Pressing <guibutton>Update</guibutton> will store the changes
+  and disable these buttons.
+</para>
 
-<para
->Die Funktion „Speichern“ von &kmymoney; speichert nur Änderungen, die über den Knopf „Aktualisieren“ im Budget-Fenster übernommen wurden. Das bedeutet, dass Ihre Änderungen an Budgets nicht gespeichert werden, wenn Sie den Knopf „Aktualisieren“ nicht drücken. In diesem Fall bleiben trotz des Abspeicherns der &kmymoney; Datei die Knöpfe „Aktualisieren“ und „Rückgängig“ im Budget-Fenster aktiv. </para>
+<para>
+  The <guibutton>Save</guibutton> button only saves changes that have been stored
+  using the <guibutton>Update</guibutton> button. Thus, if you have modified a Budget
+  but not yet stored the changes <guibutton>Save</guibutton> button will not affect
+  the modified Budget and the <guibutton>Update</guibutton> and <guibutton>Revert</guibutton>
+  buttons remain enabled.
+</para>
 
-<para
->Der Knopf „Rückgängig“ macht alle Änderungen an einem Budget rückgängig, die seit dem letzten Aktualisieren erfolgten. Nach Drücken des Knopfes „Rückgängig“sind die beiden Knöpfe „Aktualisieren“ und „Rückgängig“ deaktiviert. </para>
+<para>
+  Revert undoes any changes made to a Budget since the last Update and disables
+  the <guibutton>Update</guibutton> and <guibutton>Revert</guibutton> buttons.
+</para>
 
-<para
->Änderungen der Budgets, die zwar mit „Aktualisieren“ übernommen, aber noch nicht über die Funktion „Speichern “von &kmymoney; gesichert sind, können nur durch Neuladen der &kmymoney;-Datei wieder rückgängig gemacht werden. </para>
+<para>
+  Changes stored using <guibutton>Update</guibutton> but not yet saved using
+  <guibutton>Save</guibutton> can only be reverted by reloading the &kmymoney; file.
+</para>
 </sect2>
 </sect1>
 
 <sect1 id="budget.details.reports">
-<title
->Budgetberichte</title>
+<title>Budget Reports</title>
 
-<para
->&kmymoney; bietet zahlreiche Berichte an, um aktuelle Einnahmen und Ausgaben mit den Budgetwerten zu vergleichen. Diese Berichte sind unter „Budgetierung“ zu finden. Es gibt zwei Arten von Berichten für Budgets: </para>
+<para>
+  &kmymoney; provides a number of reports to compare actual income and expenses
+  against a Budget. These are listed in Reports under "Budgeting". There are two
+  types of Budget Reports:
+</para>
 
 <variablelist>
   <varlistentry>
-    <term
->Nur Budgets</term>
-    <listitem
-><para
->Diese Berichte zeigen die Werte eines Budgets an.</para>
+    <term>Budget only</term>
+    <listitem><para>These reports display values from a Budget.</para>
       <variablelist>
         <varlistentry>
-          <term
->Monatliches Budget</term
-> 
-          <listitem
-><para
->Zeigt die Monatswerte eines Budgets an.</para>
-          </listitem
-></varlistentry>
+          <term>Monthly Budget</term> 
+          <listitem><para>Displays the monthly values from a Budget.</para>
+          </listitem></varlistentry>
         <varlistentry>
-          <term
->Jährliches Budget</term
-> 
-          <listitem
-><para
->Zeigt die Jahreswerte eines Budgets mit der Summe für das Jahr an.</para>
-          </listitem
-></varlistentry>
+          <term>Yearly Budget</term> 
+          <listitem><para>Displays the monthly values from a Budget,
+              with yearly total.</para>
+          </listitem></varlistentry>
       </variablelist>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
->Vergleiche zwischen Budget und Ist</term>
-    <listitem
-><para
->In diesen Berichten werden die Werte eines Budgets mit den tatsächlichen Einnahmen und Ausgaben verglichen. In jedem Budgetbericht finden Sie die Spalten Budget, Ist und die Differenz. Jeder Bericht umfasst unterschiedliche Zeiträume.</para>
+    <term>Budget vs. Actual</term>
+    <listitem><para>These reports compare values from a Budget to
+      actual income and expenses.  In each budget report you can find
+      the columns Budget, Actual, and Difference. Each report differs
+      in the period that is shown.</para>
       <variablelist>
       <varlistentry>
-      <term
->Budget und Ist für das aktuelle Jahr</term
-> 
-      <listitem
-><para
->Vom Jahresbeginn bis heute</para>
-      </listitem
-></varlistentry>
+      <term>Budget vs. Actual This Year</term> 
+      <listitem><para>From the beginning of the year until today</para>
+      </listitem></varlistentry>
       <varlistentry>
-      <term
->Budget und Ist für das aktuelle Jahr (YTM)</term
-> 
-      <listitem
-><para
->Vom Jahresbeginn bis zum letzten Tag des vorherigen Monats</para>
-      </listitem
-></varlistentry>
+      <term>Budget vs. Actual This Year (YTM)</term> 
+      <listitem><para>From the beginning of the year until the last
+	  day of the previous month</para>
+      </listitem></varlistentry>
       <varlistentry>
-      <term
->Monatlich Budgetiert und Ist</term
-> 
-      <listitem
-><para
->Vom Jahresbeginn bis zum letzten Tag des jetzigen Monats</para>
-      </listitem
-></varlistentry>
+      <term>Monthly Budgeted vs. Actual</term> 
+      <listitem><para>From the beginning of the year until the last
+	  day of the current month</para>
+      </listitem></varlistentry>
       <varlistentry>
-      <term
->Jährlich budgetiert über Ist</term
-> 
-      <listitem
-><para
->Vom 01. Januar bis zum 31. Dezember</para>
-      </listitem
-></varlistentry>
+      <term>Yearly Budgeted vs. Actual</term> 
+      <listitem><para>From January 1st until December 31st</para>
+      </listitem></varlistentry>
       <varlistentry>
-      <term
->Jährlich Budgetiert und Ist (Grafik)</term
-> 
-      <listitem
-><para
->Wie der vorherige Bericht, aber mit einer grafischen Darstellung der Werte als Standard</para>
-      </listitem
-></varlistentry>
+      <term>Yearly Budgeted vs. Actual (Graph)</term> 
+      <listitem><para>Same as the previous report but it shows the
+	  graph by default</para>
+      </listitem></varlistentry>
       </variablelist>
 
-      <para
->Auf der Grundlage dieser Berichte können benutzerdefinierte Berichte erzeugt werden, indem der neben vielen weiteren Einstellungen der  Datenbereich und das Budget verändert werden. </para>
+      <para>These reports provide a base from which custom reports can
+	be created by changing the date range and Budget, among other
+	options. </para>
     </listitem>
   </varlistentry>
 </variablelist>

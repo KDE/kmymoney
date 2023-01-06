@@ -2,171 +2,200 @@
 <chapter id="details.formats">
 <chapterinfo>
   <authorgroup>
-    <author
->&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+    <author> &Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
   </authorgroup>
-  <date
->2014-08-30</date>
-  <releaseinfo
->4.7.01</releaseinfo>
+  <date>2014-08-30</date>
+  <releaseinfo>4.7.01</releaseinfo>
 </chapterinfo>
 
-<title
->Dateiformate</title>
+<title>File Formats</title>
 
-<para
->Wenn Sie keine <link linkend="details.database"
->relationale Datenbank</link
-> verwenden, speichert &kmymoney; alle Daten in einer Datei mit der Erweiterung <filename class="extension"
->.kmy</filename
->. &kmymoney; öffnet beim Starten normalerweise automatisch die zuletzt geöffnete Datei, wenn Sie nicht die <link linkend="firsttime.launch"
->Befehlszeilenoption</link
-> für den Start ohne Öffner einer Datei benutzen. Sie sollten wissen, das es mehrere Dateitypen gibt, in der &kmymoney; Ihre Finanzdaten speichern kann. </para>
+<para>
+  Unless you choose to use a <link linkend="details.database">relational
+  database</link>, &kmymoney; will store all your financial information in a
+  file ending in <filename class="extension">.kmy</filename>. Also, unless you use a <link
+  linkend="firsttime.launch">command line option</link> that tells it not to do
+  so, when you launch &kmymoney;, it will open the last file it had open.
+  However, it is important to know that there is more than one type of file
+  &kmymoney; can use to hold your financial data.
+</para>
 
-<para
->Dieses Kapitel beschreibt die Formate, in denen &kmymoney; die Daten ständig auf dem Datenträger des Benutzers abspeichert. Im Allgemeinen speichert &kmymoney; die Informationen in einem &XML;-Dokument. Dieses wird abhängig vom aktuellen Format geschrieben: <itemizedlist>
-  <listitem
-><para
->als eine <link linkend="details.formats.plain"
->Textdatei</link
-> kodiert im Zeichensatz UTF-8,</para
-></listitem>
+<para>
+  This chapter describes the formats in which &kmymoney; stores its data in
+  permanent form on the user's storage device. In general, &kmymoney; stores its
+  information in form of an &XML; document. Depending on the actual format, this
+  &XML; document will be written:
 
-  <listitem
-><para
->als eine mit GZIP <link linkend="details.formats.compressed"
->komprimierte Datei</link
->,</para
-></listitem>
+<itemizedlist>
+  <listitem><para>as a <link linkend="details.formats.plain">plain text
+    file</link> encoded in UTF-8,</para></listitem>
 
-  <listitem
-><para
->als eine mit GPG <link linkend="details.formats.encrypted"
->verschlüsselte Datei</link
->, oder</para
-></listitem>
+  <listitem><para>as a <link linkend="details.formats.compressed">compressed
+    file</link> using GZIP compression,</para></listitem>
 
-  <listitem
-><para
->als eine <link linkend="details.formats.anonymous"
->anonymisierte Textdatei</link
-> kodiert im Zeichensatz UTF-8, in der alle persönlichen Daten unkenntlich gemacht wurden.</para
-></listitem>
+  <listitem><para>as an <link linkend="details.formats.encrypted">encrypted
+  file</link> using GPG encryption, or</para></listitem>
+
+  <listitem><para>as an <link linkend="details.formats.anonymous">anonymous
+    plain text file</link> encoded in UTF-8 but with all your personal data
+    scrambled.</para></listitem>
 </itemizedlist>
 </para>
 
 <sect1 id="details.formats.plain">
-<title
->Textdatei</title>
-<para
->Das ist das Format mit dem größten Speicherbedarf, da keine Komprimierung erfolgt. Es ist nicht für den normalen Gebrauch gedacht, sondern für Fehleranalysen (Debugging) und gibt Ihnen die Möglichkeit, die Datei manuell zu verändern. Wenn Sie als Dateierweiterung <filename class="extension"
->.xml</filename
-> wählen, wird die Datei im Textformat gespeichert. <caution
-> <para
->Eine manuelle Änderung der Datei wird normalen Benutzern nicht empfohlen und sollte nur durchgeführt werden, wenn die interne Arbeitsweise von &kmymoney; vollständig verstanden wurde, oder nachdem Ihnen ein Entwickler eine Anweisung gibt, was genau geändert werden soll. Geben Sie nicht den Entwicklern von &kmymoney; die Schuld, wenn Sie Ihre Daten unbrauchbar machen. </para>
+<title>Plain text file</title>
+<para>
+  This is the most space consuming format supported, as no compression is
+  performed. It is not intended for normal use, and is provided to support
+  debugging purposes and the capability to modify the file manually. If you end
+  a filename in <filename class="extension">.xml</filename>, the file will be
+  stored in this format.
+
+<caution>
+  <para>
+    Manual modification of the file is not recommended to the normal user, and
+    should only be performed if the internal working of &kmymoney; is fully
+    understood or if instructions from the developers tell you what to do. Don't
+    blame the &kmymoney; developers if you screw up your data: You have been
+    warned!
+  </para>
 </caution>
 </para>
 </sect1>
 
 <sect1 id="details.formats.compressed">
-<title
->GZIP-komprimierte Datei</title>
-<para
->Dies ist das normale Speicherformat von &kmymoney;, wenn Sie eine Datei mit der Erweiterung <filename class="extension"
->.kmy</filename
-> abspeichern. </para>
+<title>GZIP-compressed file</title>
+<para>
+  This is the normal format used by &kmymoney; when you store a file with the
+  extension <filename class="extension">.kmy</filename>.
+</para>
 
 <note>
-  <para
->Wenn <link linkend="details.formats.encrypted"
->verschlüsselt</link
-> ausgewählt wurde, wird die Datei verschlüsselt abgespeichert. </para>
+  <para>
+    If <link linkend="details.formats.encrypted">encryption</link> has been
+    selected, the file will be stored encrypted.
+  </para>
 </note>
 
-<para
->Wenn Sie sich eine mit GZIP komprimierte Datei ansehen möchten, benennen Sie sie einfach um, sodass sie mit <filename class="extension"
->
->.gz</filename
-> endet (&eg; Umbenennen von <filename
->meinefinanzen.kmy</filename
-> in <filename
->meinefinanzen.kmy.gz</filename
->). Anschließend entpacken Sie die Datei mit <command
->gunzip</command
-> und Sie können sie sich anschauen. Sie müssen die Daten nicht wieder komprimieren, bevor Sie sie in &kmymoney; beim nächsten mal öffnen, da &kmymoney; auch die unkomprimierten Dateien lesen kann. Nichtsdestotrotz wird &kmymoney; sie beim nächsten Speichern wieder komprimiert speichern. Verwenden Sie die Dateierweiterung <link linkend="details.formats.plain"
-><filename class="extension"
->.xml</filename
-></link
->, um sie im unkomprimierten Format zu speichern. </para>
+<para>
+  If you want to look at the contents of a GZIP compressed file, rename it to a
+  filename ending in <filename class="extension">.gz</filename> (&eg;,
+  rename <filename>myfinances.kmy</filename>
+  to <filename>myfinances.kmy.gz</filename>), then use <command>gunzip</command>
+  to uncompress the file and look at it. You don't have to compress it before
+  loading it into &kmymoney; the next time, because &kmymoney; can read the
+  uncompressed data as well. Nevertheless, if you save it thereafter, it will be
+  saved compressed again. Use the <link linkend="details.formats.plain"><filename
+  class="extension">.xml</filename></link> extension to write it in uncompressed
+  format.
+</para>
 </sect1>
 
 <sect1 id="details.formats.encrypted">
-<title
->GPG-verschlüsselte Datei</title>
-<para
->Die Verwendung der GPG-Verschlüsselung ist eine sehr sichere Art, Ihre persönlichen Finanzdaten auf Ihrer Festplatte zu speichern. Wenn in den Einstellungen die Verschlüsselung aktiviert ist, werden Ihre Daten mit GPG und Ihrem Schlüssel verschlüsselt. Wenn Sie eine verschlüsselte Datei öffnen möchten, müssen Sie eine Passphrase zum Zugriff auf Ihren Schlüsselbund eingeben. Die verschlüsselte Datei wird im Format <emphasis
->&ASCII; armored</emphasis
-> von GPG gespeichert. <note
-> <para
->GPG komprimiert die gespeicherten Daten automatisch, sodass keine separate Komprimierung erforderlich ist. </para>
+<title>GPG-encrypted file</title>
+<para>
+  Using the GPG-encrypted file format is a very secure method of storing your
+  personal finance data on your storage device. When &kmymoney; has been
+  instructed through the settings dialog to store your data encrypted, it will
+  cipher the data using GPG and the key you provided before actually storing
+  it. When opening an encrypted file, you have to provide the passphrase
+  necessary to open your keyring. The encrypted file itself will be stored in
+  GPG's <emphasis>&ASCII; armored</emphasis> format.
+  <note>
+    <para>
+      When using GPG encryption, GPG also compresses the file, so no extra
+      compression is necessary.
+    </para>
   </note>
 </para>
 
 <sect2 id="details.formats.encrypted.gpgkeys">
-<title
->GPG-Schlüssel</title>
-<para
->Wenn Sie nicht bereits für Ihre E-Mail-Verschlüsselung ein GPG-Schlüsselpaar erzeugt haben, so müssen Sie eines erzeugen, um die GPG-Verschlüsselung von &kmymoney; nutzen zu können. <application
->GPG</application
-> muss dafür auf Ihrem System installiert sein. </para>
+<title>GPG-Keys</title>
+<para>
+  If you have not done so already for mail encryption, you need to generate a
+  key-pair in order to use the GPG encryption feature of
+  &kmymoney;. Also, <application>GPG</application> must be installed on your
+  system.
+</para>
 
-<para
->Alle Details, wie ein Schlüsselpaar erzeugt wird und wie damit umgegangen wird, können nicht in diesem Dokument erklärt werden. Ein kleine Anleitung darüber finden Sie hier: <ulink url="https://www.gnupg.org/documentation/howtos.en.html"
->http://www.gnupg.org/documentation/howtos.en.html</ulink
->. </para>
+<para>
+  The details about how to generate a key-pair and how to take care of it are
+  beyond the scope of this document.  A Mini Howto on this subject can be found
+  at <ulink url="https://www.gnupg.org/documentation/howtos.en.html">https://www.gnupg.org/documentation/howtos.en.html</ulink>.
+</para>
 </sect2>
 
 <sect2 id="details.formats.encrypted.keysettings">
-<title
->Die Schlüssel in &kmymoney; einstellen</title>
-<para
->Auf der Seite "Verschlüsselung" im Einrichtungsdialog ist eine Auswahlliste zu finden, aus der der zu verwendende Schlüssel ausgewählt werden kann. Zusätzlich befindet sich dort ein Feld zur Eingabe einer Schlüssel-ID eines nicht im Listenfeld vorhandenen Schlüssels. Man kann entweder die Schlüssel-ID, die mit einem Schlüssel verbundene E-Mail-Adresse oder eine andere gültige GPG-Schlüssel-Identifikation eingeben. Wenn Sie eine Schlüssel-ID eingegeben haben, prüft &kmymoney; die Gültigkeit und zeigt ein grünes LED Symbol an, wenn der Schlüssel gefunden werden konnte. <caution
-> <para
->Stellen Sie sicher, dass Sie sowohl den öffentlichen als auch den privaten Schlüssel für die gewählte ID besitzen. Wenn Sie den privaten Schlüssel der ID nicht besitzen, ist es nicht mehr möglich, die Datei wieder zu öffnen. </para>
+<title>Setting the keys in &kmymoney;</title>
+<para>
+  On the encryption page of the settings dialog, there is a drop down 
+  list where you can select the key that should be used for encryption and 
+  decryption. Additionally you can find a field where you can enter the 
+  key-id of a key not in the listbox. You can use either the key-id, the 
+  email address associated with this key, or any other valid GPG key 
+  identification as the value for this field. When you enter the key-id, 
+  &kmymoney; will check its validity and display a green LED icon in the 
+  dialog if a key is found.
+  <caution>
+    <para>
+      Make sure you have both the public and the private key for this id. If you
+      do not own the private key for the id entered, you will not be able to
+      open the file again.
+    </para>
   </caution>
 </para>
 </sect2>
 
 <sect2 id="details.formats.encrypted.recoverkey">
-<title
->Der &kmymoney;-Wiederherstellungsschlüssel</title>
-<para
->Auf der gleichen Einstellungsseite haben Sie die Möglichkeit, eine zusätzliche Verschlüsselung mit dem &kmymoney;-Wiederherstellungsschlüssel anzuwenden. Diese Option ist verfügbar, wenn der Schlüssel in Ihrem <application
->GPG</application
->-Schlüsselbund abgelegt ist. Das Anwählen dieser Option erlaubt es Ihnen, Ihre Daten wiederherzustellen, falls Sie einmal Ihren privaten Schlüssel verlieren sollten. Dies ist möglich, da die Daten nicht nur für Ihren Schlüssel, sondern zusätzlich für den &kmymoney;-Wiederherstellungsschlüssel verschlüsselt werden. Dieser Schlüssel ist nur ausgewählten &kmymoney;-Entwicklern zugänglich. In &kmymoney; Version 4.7 läuft dieser Schlüssel am 03. Januar 2015 ab. </para>
+<title>The &kmymoney; recover key</title>
+<para>
+  Also on this page of the settings dialog you have the choice of selecting
+  supplemental encryption with the &kmymoney; recover key. This option is
+  available to you if that key is stored in your <application>GPG</application>
+  keyring. Selecting this option will allow you to recover your data even in the
+  case you lose your own private key. This is possible because the data is not
+  only encrypted for your own key, but also for the &kmymoney; recover key. This
+  key is only available to selected &kmymoney; developers (at the time of
+  writing only to the author).  As of the release of &kmymoney; version 4.7, the
+  recover key is set to expire on 3 January 2015.
+</para>
 
-<para
->Unter normalen Umständen werden Sie Ihre Datei wie gewohnt öffnen, speichern und schließen. Im Fall des Verlustes Ihres Schlüssels haben Sie die Möglichkeit, Kontakt zu einem der Entwickler aufzunehmen, der Zugriff auf den &kmymoney;-Wiederherstellungsschlüssel hat und ihn um Hilfe zur Wiederherstellung Ihrer Daten zu bitten. Sie können die Entwickler per E-Mail über die &kmymoney;-Entwickler-Mailingliste erreichen (&devlist;). </para>
+<para>
+  Under normal circumstances, you will open/save/close your file as usual. In
+  the abnormal case of loss of your key, you have the chance to contact one of
+  the developers who has access to the &kmymoney; recover key and request help
+  to recover your data. You may contact the developers via email to the
+  &kmymoney; developer mailing list at &devlist;.
+</para>
 </sect2>
 </sect1>
 
 <sect1 id="details.formats.anonymous">
-<title
->Anonymisierte Datei</title>
-<para
->Dieses Format ist nicht für den normalen Fall der Datenspeicherung gedacht. Es soll nur dann verwendet werden, um dem Entwicklerteam von &kmymoney; bei Fehler und Problemen Ihre Datei übergaben zu können, ohne alle Ihre vertraulichen Finanzdaten offenlegen zu müssen. In diesem Format werden zum Beispiel die Daten über Banken, Konten, Zahlungsempfänger und Kategorien in Texte wie „I000001“ und „A000001“ geändert. In ähnlicher Weise werden Daten wie Kontonummern verändert, auch die Beträge von Überweisungen werden zufällig verändert. </para>
+<title>Anonymous file</title>
+<para>
+  This format is not intended to be used for normal data storage.  It is
+  supported so that in case of a problem, you can supply the &kmymoney;
+  development team with your file without disclosing any of the confidential
+  details in your financial data.  For example, it changes institution, account,
+  payee, and category names to strings such as "I000001" and "A000001", it makes
+  similar changes to all data such as account numbers, and it also randomly
+  changes the amounts of transactions.
+</para>
 
-<para
->Werden Sie von den Entwickler aufgefordert, eine anonymisierte Datei zu schicken, speichern Sie Ihre Finanzdaten mit <guimenuitem
->Speichern unter ...</guimenuitem
-> und stellen dabei als Filter <literal role="filter"
->Anonyme Dateien</literal
-> ein. Die so gespeicherte Datei hat die Erweiterung <filename class="extension"
->anon.xml</filename
->. </para>
+<para>
+  If instructed by the developers, use the <guimenuitem>Save as...</guimenuitem>
+  menu item to store your data in anonymous format by selecting <literal
+  role="filter">Anonymous files</literal> as the filter. This also changes the
+  file extension to <filename class="extension">.anon.xml</filename>.
+</para>
 
-<para
->Um zu überprüfen, ob Ihr Problem auch mit der anonymisierten Datei immer noch auftritt, laden Sie sie und versuchen Sie das Problem zu reproduzieren. Tritt der Fehler auch mit der anonymisierten Datei auf, schicken Sie diese an die Mailingliste der Entwickler &devlist; zur weiteren Untersuchung.  </para>
+<para>
+  To verify that your problem still exists, reload this anonymized
+  file and try to duplicate your problem. If the problem is still
+  present, send the file to the developer mailing list at &devlist;
+  for further investigation. If the problem does not show ... well, I
+  don't want to think about this scenario right now.
+</para>
 </sect1>
 </chapter>
 

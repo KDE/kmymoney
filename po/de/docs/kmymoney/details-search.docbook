@@ -2,376 +2,342 @@
 <chapter id="details.search">
 <chapterinfo>
   <authorgroup>
-    <author
->&Darin.Strait; &Darin.Strait.mail; </author>
+    <author> &Darin.Strait; &Darin.Strait.mail; </author>
   </authorgroup>
-  <date
->2010-07-25</date>
-  <releaseinfo
->4.5</releaseinfo>
+  <date>2010-07-25</date>
+  <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
-<title
->Buchungen suchen</title>
+<title>Search Transactions</title>
 
 <sect1 id="details.search.general">
-<title
->Allgemein</title>
+<title>General</title>
 
-<para
->Im Dialog <guilabel
->Buchungen suchen</guilabel
-> können Sie Ihre Datenbasis nach den von Ihnen angegebenen Kriterien durchsuchen. Sie gelangen dorthin, indem Sie im Menü <guimenu
->Bearbeiten</guimenu
-> den Punkt <guimenuitem
->Buchung suchen ...</guimenuitem
-> auswählen. </para>
+<para>
+  The <guilabel>Search Transactions</guilabel> dialog searches your data based
+  on criteria that you specify. You can access the dialog by going to
+  the <guimenu>Edit</guimenu> menu and selecting
+  <guimenuitem>Find transaction...</guimenuitem>.
+</para>
 
-<para
->Es gibt zwei Karteikarte in diesem Dialogfenster. Die Karteikarte <quote
->Kriterien</quote
-> zeigt einige weitere Karteikarten, um die Suchkriterien einzugeben. </para>
+<para>
+  There are two main tabs in this dialog. The <quote>Criteria</quote> tab
+  displays a number of sub-tabs for specifying the search criteria.
+</para>
 
-<para
->Die Suchergebnisse werden auf der Karteikarte <quote
->Resultat</quote
-> angezeigt, nachdem die Suche abgeschlossen ist. Unterhalb der Ergebnisliste zeigt &kmymoney; die Anzahl der gefundenen Buchungen, die den Suchkriterien entsprechen. Ein Doppelklick auf eine Buchung in der Ergebnisliste öffnet das zugehörige Kontenbuch und zeigt die Buchung dort. </para>
+<para>
+  The results will be displayed under the <quote>Result</quote> tab after the
+  search has completed. Below the list of results, &kmymoney; shows the number
+  of transactions that met the search criteria.  Double-clicking on an
+  individual transaction in the result list will bring up the appropriate ledger
+  and display the transaction.
+</para>
 
-<para
->Sobald der Knopf <guibutton
->Suchen</guibutton
-> gedrückt wird, wird die Suche auf Basis aller eingegebenen Suchkriterien gestartet. </para>
+<para>
+  When the <guibutton>Find</guibutton> button is pressed, the search is
+  initiated and all criteria that have been entered on any tab will be taken
+  into account.
+</para>
 
-<para
->Der Knopf <guibutton
->Zurücksetzen</guibutton
-> setzt alle Eingabefelder der Suchkriterien auf den Karteikarten zurück auf die Standardwerte. Hierdurch können Sie neue Suchkriterien festlegen. </para>
+<para>
+ The <guibutton>Reset</guibutton> button resets all of the fields on all of the
+ criteria sub-tabs back to the defaults. This allows you to specify new search
+ criteria.
+</para>
 
-<para
->Mit dem Knopf <guibutton
->Schließen</guibutton
-> wird das Fenster <guilabel
->Buchungen suchen</guilabel
-> geschlossen. </para>
+<para>
+  The <guibutton>Close</guibutton> button closes the <guilabel>Search
+  Transactions</guilabel> dialog box.
+</para>
 
 </sect1>
 
 <sect1 id="details.search.criteria">
-<title
->Suchkriterien</title>
+<title>Search Criteria</title>
 
-<para
->Auf der Karteikarte <quote
->Kriterien</quote
-> befinden sich weitere Karteikarten, in denen Sie verschiedene Typen von Suchkriterien festlegen können. Unterhalb der Kriterien-Karteikarte zeigt &kmymoney; an, welche Kriterien für die Suche festgelegt wurden ("Aktuelle Auswahl"). </para>
+<para>
+  There are several sub-tabs under the main <quote>Criteria</quote> tab, each of
+  which allows you to specify different types of search criteria.  Below the
+  area for specifying the criteria, &kmymoney; lists each of the different types
+  of criteria that are currently specified for the search.
+</para>
 
 <sect2 id="details.search.text">
-<title
->Text</title>
+<title>Text</title>
 
 <screenshot>
 <mediaobject>
 <imageobject>
-<imagedata fileref="find-text.png" format="PNG"/>
+<imagedata fileref="find-text.png" format="PNG" />
 </imageobject>
 <textobject>
-<phrase
->Dialogfenster "Buchungen suchen", Karteikarte "Text"</phrase>
+<phrase>Search transactions Dialog, Text tab</phrase>
 </textobject>
 </mediaobject>
 </screenshot>
 
-<para
->Auf dieser Karteikarte können Sie den Text angeben, nach dem in den Buchungen gesucht werden soll. Über die beiden Ankreuzfelder können Sie beeinflussen, wie der eingegebene Text für die Suche verwendet wird. </para>
+<para>
+  This tab allows you to specify text to search for.  There are also two check
+  boxes that control how the text is used in the search.
+</para>
 
-<para
->In der Standardeinstellung wird nach einem beliebigen Vorkommen innerhalb der Textfelder gesucht. Zum Beispiel: </para>
+<para>
+  By default, this will match on simple substrings. For example:
+</para>
 
 <para>
 <itemizedlist>
   <listitem>
-    <para
-><quote
->Beste</quote
-> findet <quote
->Beste Kuchen GmbH</quote
-></para>
+    <para><quote>Best</quote> will find <quote>Best Cakes, Inc.</quote></para>
   </listitem>
   <listitem>
-    <para
-><quote
->este</quote
-> wird ebenfalls <quote
->Beste Kuchen GmbH</quote
-> finden. </para>
+    <para>
+      <quote>est</quote> will also find <quote>Best Cakes, Inc.</quote>
+    </para>
   </listitem>
 </itemizedlist>
 </para>
 
-<para
->Wählen Sie in der Auswahlliste direkt neben dem Texteingabefeld den Eintrag <guilabel
->Enthält</guilabel
-> aus, so werden alle Buchungen nach dem Vorkommen des eingegebenen Textes durchsucht. Bei der Option <guilabel
->Enthält nicht</guilabel
-> werden alle Buchungen in die Trefferliste übernommen, die den eingegebenen Text nicht enthalten. </para>
+<para>
+  In the dropdown field next to the text field,
+  select <guilabel>Contains</guilabel> if you want to find transactions that
+  contain the text, or select <guilabel>Does not contain</guilabel> if you want
+  to find transactions that do not contain the specified text.
+</para>
 
-<para
->Wenn Sie die Option <guilabel
->Groß-/Kleinschreibung beachten</guilabel
-> ankreuzen, muss auch die Groß- und Kleinschreibung beim Vergleich übereinstimmend sein. So wird zum Beispiel die Eingabe <quote
->best</quote
-> die Buchung <quote
->Beste Kuchen GmbH</quote
-> nicht finden, wenn die Option gesetzt ist. </para>
+<para>
+  If you check the <guilabel>Case Sensitive</guilabel> box, the search will be
+  case sensitive.  For example, <quote>best</quote> would not find <quote>Best
+  Cakes, Inc.</quote> if this option is set.
+</para>
 
-<para
->Sobald die Option <guilabel
->Text als regulären Ausdruck interpretieren</guilabel
-> gesetzt ist, wird der eingegebene Text als regulärer Ausdruck interpretiert. Um zu erfahren, was "reguläre Ausdrücke" sind und wie man sie erstellt, schauen Sie zum Beispiel in die &Qt;-Dokumentation in den Abschnitt <ulink url="https://doc.qt.io/qt-5/qregexp.html"
->QRegExp-Klasse</ulink
->. </para>
+<para>
+  If you check the <guilabel>Treat Text as regular expression</guilabel> box,
+  the text will be treated as a regular expression.  For details on how to
+  craft a regular expression, visit the &Qt; documentation about the
+  <ulink url="https://doc.qt.io/qt-5/qregularexpression.html">QRegularExpression
+  class</ulink>.
+</para>
 </sect2>
 
 <sect2 id="details.search.account">
-<title
->Konto</title>
+<title>Account</title>
 
 <screenshot>
 <mediaobject>
 <imageobject>
-<imagedata fileref="find-account.png" format="PNG"/>
+<imagedata fileref="find-account.png" format="PNG" />
 </imageobject>
 <textobject>
-<phrase
->Dialogfenster "Buchungen suchen", Karteikarte "Konto"</phrase>
+<phrase>Search transactions Dialog, Account tab</phrase>
 </textobject>
 </mediaobject>
 </screenshot>
 
-<para
->Auf dieser Karteikarte können Sie angeben, welche Konten durchsucht werden sollen. </para>
+<para>
+  This tab allows you to specify the accounts that should be searched.
+</para>
 
-<para
->Die Konten werden als Baumansicht dargestellt, wobei die angekreuzten Konten durchsucht werden. Durch Klick auf den Knopf <guibutton
->Alle</guibutton
-> werden alle Konten angekreuzt, durch den Knopf <guibutton
->Keine</guibutton
-> werden alle Kreuze entfernt. Einzelne Konten können durch Anklicken der kleinen Box direkt neben dem Kontennamen mit der &LMBn; angekreuzt werden. Einen ganzen Zweig der Baumhierarchie kann durch Anklicken mit der &RMBn; zum Durchsuchen markiert werden. </para>
+<para>
+  Accounts are displayed in a tree format. Accounts that are marked for search
+  are indicated with a check box. If you click the <guibutton>All</guibutton>
+  button, all accounts are marked for searching. If you click the
+  <guibutton>None</guibutton> button, no accounts will be marked for
+  searching. Individual accounts can be marked or unmarked by clicking on the
+  box next to the account name using the &LMB;. A complete hierarchy of accounts
+  can be marked or unmarked by clicking on the box using the &RMB;.
+</para>
 </sect2>
 
 <sect2 id="details.search.date">
-<title
->Datum</title>
+<title>Date</title>
 
 <screenshot>
 <mediaobject>
 <imageobject>
-<imagedata fileref="find-date.png" format="PNG"/>
+<imagedata fileref="find-date.png" format="PNG" />
 </imageobject>
 <textobject>
-<phrase
->Dialogfenster "Buchungen suchen", Karteikarte "Datum"</phrase>
+<phrase>Search transactions Dialog, Date tab</phrase>
 </textobject>
 </mediaobject>
 </screenshot>
 
-<para
->Hier können Sie angeben, in welchem Zeitbereich die Suche durchgeführt wird. </para>
+<para>
+  This tab allows you to specify which dates should be searched.
+</para>
 
-<para
->Die Auswahlliste <quote
->Bereich</quote
-> bietet eine komfortable Möglichkeit, die Eingabefelder Von und Bis vorzubelegen. Zusätzlich können beide Eingabefelder auch separat bearbeitet werden, indem Sie individuelle Daten festlegen. Die Eingabefelder verhindern die Eingabe von nicht existierenden Daten. Durch beiden Pfeile hoch und runter kann das Datum ebenfalls variiert werden. Über das kleine Kalendersymbol gelangen Sie zu einem Kalender, in dem Sie sehr einfach Daten auswählen können. </para>
+<para>
+  The <quote>Range</quote> control provides a convenient way to set the From and
+  To controls.  The From and To controls can be manipulated individually. Dates
+  can be entered manually. The controls will prevent you from entering
+  non-existing dates. Date values can also be changed by clicking on the up and
+  down arrows when a particular part of a date is highlighted.  Clicking on the
+  small calendar icon will bring up a calendar to easily select dates.
+</para>
 </sect2>
 
 
 <sect2 id="details.search.amount">
-<title
->Betrag</title>
+<title>Amount</title>
 
 <screenshot>
 <mediaobject>
 <imageobject>
-<imagedata fileref="find-amount.png" format="PNG"/>
+<imagedata fileref="find-amount.png" format="PNG" />
 </imageobject>
 <textobject>
-<phrase
->Dialogfenster "Buchungen suchen", Karteikarte "Betrag"</phrase>
+<phrase>Search transactions Dialog, Amount tab</phrase>
 </textobject>
 </mediaobject>
 </screenshot>
 
-<para
->Mit Hilfe dieser Karteikarte legen Sie fest, welche Beträge gesucht werden sollen. </para>
+<para>
+  This tab allows you to specify what amounts should be searched for.
+</para>
 
-<para
->Sie können entweder einen festen Betrag, oder einen Bereich angeben, in dem sich das Suchergebnis befinden soll. Über das Taschenrechnersymbol öffnet sich ein kleiner Taschenrechner, der Ihnen bei der Eingabe der Werte behilflich ist. </para>
+<para>
+  You can search for an exact amount or for a range of amounts. If you click on
+  the calculator icon, a small on-screen calculator will pop up to assist you in
+  entering a value.
+</para>
 </sect2>
 
 <sect2 id="details.search.category">
-<title
->Kategorie</title>
+<title>Category</title>
 
 <screenshot>
 <mediaobject>
 <imageobject>
-<imagedata fileref="find-category.png" format="PNG"/>
+<imagedata fileref="find-category.png" format="PNG" />
 </imageobject>
 <textobject>
-<phrase
->Dialogfenster "Buchungen suchen", Karteikarte "Kategorie"</phrase>
+<phrase>Search transactions Dialog, Category tab</phrase>
 </textobject>
 </mediaobject>
 </screenshot>
 
-<para
->Hier können Sie festlegen, welche Kategorien durchsucht werden sollen. </para>
+<para>
+  This tab allows you to specify which categories should be searched.
+</para>
 
-<para
->Die Kategorien werden als Baumansicht dargestellt, wobei die angekreuzten Kategorien durchsucht werden. Durch Klick auf den Knopf <guibutton
->Alle</guibutton
-> werden alle Kategorien angekreuzt, durch den Knopf <guibutton
->Keine</guibutton
-> werden alle Kreuze entfernt. Durch den Knopf <guibutton
->Einnahme</guibutton
-> werden alle Einnahme-Kategorien markiert und alle Ausgabekategorien abgewählt. Durch den Knopf <guibutton
->Ausgabe</guibutton
-> werden alle Ausgaben-Kategorien markiert und die Kreuzchen bei den Einnahme-Kategorien entfernt. </para>
+<para>
+  Categories are displayed in a tree format. Categories that are marked for
+  search are indicated with a box. If you click the <guibutton>All</guibutton>
+  button, all categories are marked for searching. If you click
+  the <guibutton>None</guibutton> button, no categories will be marked for
+  searching. If you click the <guibutton>Income</guibutton> button, income
+  categories will be marked and expense categories will be unmarked. If you
+  click the <guibutton>Expense</guibutton> button, income categories will be
+  unmarked and expense categories will be marked.
+</para>
 
-<para
->Einzelne Kategorien können durch Anklicken des Ankreuzfelds direkt neben dem Kategoriennamen mit der &LMBn; angekreuzt werden. Einen ganzen Zweig der Baumhierarchie kann durch Anklicken mit der &RMBn; zum Durchsuchen markiert werden. </para>
+<para>
+  Individual categories can be marked or unmarked by clicking on the box next to
+  the category name using the &LMB;. A complete hierarchy of categories can be
+  marked or unmarked by clicking on the box using the &RMB;.
+</para>
 </sect2>
 
 <sect2 id="details.search.payee">
-<title
->Zahlungsempfänger</title>
+<title>Payee</title>
 
 <screenshot>
 <mediaobject>
 <imageobject>
-<imagedata fileref="find-payee.png" format="PNG"/>
+<imagedata fileref="find-payee.png" format="PNG" />
 </imageobject>
 <textobject>
-<phrase
->Dialogfenster "Buchungen suchen", Karteikarte "Zahlungsempfänger"</phrase>
+<phrase>Search transactions Dialog, Payee tab</phrase>
 </textobject>
 </mediaobject>
 </screenshot>
 
-<para
->Auf dieser Karteikarte wählen Sie die Zahlungsempfänger aus, nach denen gesucht werden soll.  </para>
+<para>
+  This tab allows you to specify which payees should be searched.
+</para>
 
-<para
->Zahlungsempfänger, nach denen gesucht werden soll, werden mit einem Kreuzchen gekennzeichnet. Durch Klick auf den Knopf <guibutton
->Alle</guibutton
-> werden alle Zahlungsempfänger angekreuzt, durch den Knopf <guibutton
->Keine</guibutton
-> werden alle Kreuze entfernt. Einzelne Zahlungsempfänger können durch Anklicken des Ankreuzfelds direkt neben dem Namen des Empfängers mit der linken Maustaste angekreuzt werden. </para>
+<para>
+  Payees that are marked for search are indicated with a box. If you click
+  the <guibutton>All</guibutton> button, all payees are marked for searching. If
+  you click the <guibutton>None</guibutton> button, no payees will be marked for
+  searching. Individual payees can be marked or unmarked by clicking on the box
+  next to the payee name.
+</para>
 
-<para
->Wenn Sie <guilabel
->Buchungen ohne Empfänger auswählen</guilabel
-> ankreuzen, werden nur Buchungen ohne Empfänger ermittelt. </para>
+<para>
+  If you check the <guilabel>Select transactions without payees</guilabel> box,
+  only transactions with no payee will be selected.
+</para>
 
 </sect2>
 
 <sect2 id="details.search.details">
-<title
->Details</title>
+<title>Details</title>
 
-<para
->Hier können Sie einige zusätzliche Suchkriterien festlegen. </para>
+<para>
+  This tab allows you to specify various additional search criteria.
+</para>
 
 <screenshot>
 <mediaobject>
 <imageobject>
-<imagedata fileref="find-details.png" format="PNG"/>
+<imagedata fileref="find-details.png" format="PNG" />
 </imageobject>
 <textobject>
-<phrase
->Dialogfenster "Buchungen suchen", Karteikarte "Details"</phrase>
+<phrase>Search transactions Dialog, Details tab</phrase>
 </textobject>
 </mediaobject>
 </screenshot>
 
 <para>
 <itemizedlist>
-  <title
->In der Auswahlliste "Typ" können Sie zwischen folgenden Werten wählen:</title>
-  <listitem
-><para
->Alle Typen</para
-></listitem>
-  <listitem
-><para
->Zahlungen</para
-></listitem>
-  <listitem
-><para
->Einzahlungen</para
-></listitem>
-  <listitem
-><para
->Umbuchungen</para
-></listitem>
+  <title>Type can be one of the following:</title>
+  <listitem><para>All Types</para></listitem>
+  <listitem><para>Payments</para></listitem>
+  <listitem><para>Deposits</para></listitem>
+  <listitem><para>Transfers</para></listitem>
 </itemizedlist>
 
 <itemizedlist>
-  <title
->Im Feld "Zustand" können Sie auswählen:</title>
-  <listitem
-><para
->Alle Zustände</para
-></listitem>
-  <listitem
-><para
->Nicht abgeglichen</para
-></listitem>
-  <listitem
-><para
->Verrechnet</para
-></listitem>
-  <listitem
-><para
->Abgeglichen</para
-></listitem>
+  <title>State can be one of the following:</title>
+  <listitem><para>All states</para></listitem>
+  <listitem><para>Not reconciled</para></listitem>
+  <listitem><para>Cleared</para></listitem>
+  <listitem><para>Reconciled</para></listitem>
 </itemizedlist>
 
 <itemizedlist>
-  <title
->Im Feld Gültigkeit haben Sie die Wahl zwischen:</title>
-  <listitem
-><para
->Jede Buchung</para
-></listitem>
-  <listitem
-><para
->Gültige Buchung</para
-></listitem>
-  <listitem
-><para
->Ungültige Buchung</para
-></listitem>
+  <title>Validity can be one of the following:</title>
+  <listitem><para>Any transaction</para></listitem>
+  <listitem><para>Valid transaction</para></listitem>
+  <listitem><para>Invalid transaction</para></listitem>
 </itemizedlist>
 </para>
 
-<para
->Des weiteren können Sie entweder nach einer bestimmten Buchungsnummer oder einen Bereich von Buchungsnummern suchen. </para>
+<para>
+  You can search for a particular transaction number or search for a range of
+  transaction numbers.
+</para>
 
 </sect2>
 </sect1>
 
 <sect1 id="details.search.results">
-<title
->Suchergebnisse</title>
+<title>Search results</title>
 
-<para
->Die Karteikarte <quote
->Resultat</quote
-> zeigt das Datum, das Konto, einige Details, den Abgleichstatus, Auszahlungs- und Einzahlungsbetrag für jede gefundene Buchung an. Durch Anklicken der Spaltenüberschriften können Sie die Sortierreihenfolge verändern. </para>
+<para>
+  The <quote>Result</quote> tab displays the Date, Account, Details,
+  Reconciliation status, Payment, and Deposit for each transaction
+  that matches the search criteria you have entered.  Right clicking
+  on the header row of the results list allows you to alter the sort
+  order of the results.
+</para>
 
-<para
->Ein Doppelklick auf eine Buchung öffnet das zugehörige Kontenbuch und die angeklickte Buchung erhält dort den Fokus. </para>
+<para>
+  Double-clicking on a transaction will display the corresponding
+  account ledger and focus on the selected transaction.
+</para>
 
 </sect1>
 

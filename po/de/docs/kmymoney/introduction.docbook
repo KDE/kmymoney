@@ -1,50 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="introduction">
 <chapterinfo>
-  <date
->2018-01-13</date>
-  <releaseinfo
->5.0.0</releaseinfo>
+  <date>2018-01-13</date>
+  <releaseinfo>5.0.0</releaseinfo>
 </chapterinfo>
 
-<title
->Einführung</title>
+<title>Introduction</title>
 
 <sect1 id="what-is-kmymoney">
-<title
->Was ist &kmymoney;?</title>
+<title>What is &kmymoney;?</title>
 
-<para
->&kmymoney; ist ein persönliches Finanzverwaltungsprogramm von &kde;. Es ermöglicht es Benutzern von quelloffenen Betriebssystemen und Programmen, Ihre persönlichen Finanzen zu verwalten, indem es eine große Anzahl an Finanzfunktionen und Hilfsmitteln dafür bereitstellt. </para>
+<para>
+  Put simply, &kmymoney; is a personal finance manager by &kde;.  It enables
+  users of open source operating systems and applications to keep careful track
+  of their personal finances by providing a broad array of financial features
+  and tools.
+</para>
 
-<para
->Die wichtigsten Ziele des Projekts sind: </para>
+<para>
+  The principal goals of the project are:
+</para>
 
 <itemizedlist>
   <listitem>
-    <formalpara
-><title
->Gleichwertige Funktionalität</title>
-      <para
->&kmymoney; will alle wichtigen Finanzfunktionen bereitstellen, die in kommerziellen Finanzverwaltungsprogrammen für den privaten Bereich enthalten sind. &kmymoney; nähert sich mit jeder neuen Version diesem Ziel, es fehlen aber immer noch einige Funktionen. </para>
+    <formalpara><title>Feature Parity</title>
+      <para>
+        &kmymoney; intends to provide all important features found in the
+        commercially available personal finance managers.  Although every release
+        of &kmymoney; gets closer and closer to that goal, there is still work to
+	be done.
+      </para>
     </formalpara>
   </listitem>
 
   <listitem>
-    <formalpara
-><title
->Benutzerfreundlich</title>
-      <para
->&kmymoney; soll das am einfachsten zu bedienende Finanzverwaltungsprogramm werden, vor allem für unerfahrene Benutzer. </para>
+    <formalpara><title>Ease of Use</title>
+      <para>
+        &kmymoney; strives to be the easiest open source personal finance
+        manager to use, especially for the non-technical user.
+      </para>
     </formalpara>
   </listitem>
 
   <listitem>
-    <formalpara
-><title
->Fehlerfreiheit</title>
-      <para
->Auf der Grundlage von getesteten und überprüften Prinzipien der doppelten Buchführung stellt &kmymoney; sicher, dass Ihre Finanzdaten korrekt verarbeitet und verwaltet werden. </para>
+    <formalpara><title>Correctness</title>
+      <para>
+        Based on tried and tested double entry accounting principles &kmymoney;
+        ensures that your finances are kept in correct order.
+      </para>
     </formalpara>
   </listitem>
 </itemizedlist>
@@ -52,14 +55,22 @@
 </sect1>
 
 <sect1 id="what-kmymoney-is-not">
-<title
->Was &kmymoney; nicht ist</title>
+<title>What &kmymoney; is not</title>
 
-<para
->Als Finanzverwaltungsprogramm für den persönlichen Bereich ist &kmymoney; nicht für die Erfordernisse eines normalen Unternehmens geeignet. Für kleine Unternehmen bietet es möglicherweise ausreichende Funktionen, aber zum Beispiel Debitoren- und Kreditorenkonten werden nicht direkt unterstützt. Es ist jedoch möglich, diese Funktionen für Kunden, Lieferanten und Belege usw. durch Module bereitzustellen. </para>
+<para>
+  As a personal finance manager, &kmymoney; is not intended to scale to the
+  needs of an average business.  A small business might find sufficient
+  functionality to use &kmymoney;, but features such as accounts-receivable and
+  accounts-payable are not directly supported.  However, it would be possible to
+  create client, supplier, document, or other features through plugins.
+</para>
 
-<para
->&kmymoney; ist nicht einfach nur eine Kopie von kommerziell verfügbaren Finanzprogrammen für den persönlichen Bereich. Obwohl viele Funktionen von &kmymoney; auch in ähnlichen Programmen zu finden sind, soll &kmymoney; Ihnen eine individuelle und einzigartige Sicht auf Ihre Finanzen ermöglichen. </para>
+<para>
+  &kmymoney; is not simply a clone of the commercially available personal
+  finance programs. Although many of the features present in &kmymoney; can be
+  found in other similar applications, &kmymoney; strives to present an
+  individual and unique view of your finances.
+</para>
 
 </sect1>
 </chapter>

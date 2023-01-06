@@ -1,779 +1,465 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="reference">
 <chapterinfo>
-  <date
->2016-12-05</date>
-  <releaseinfo
->5.0</releaseinfo>
+  <date>2016-12-05</date>
+  <releaseinfo>5.0</releaseinfo>
 </chapterinfo>
 
-<title
->Referenz</title>
+<title>Reference</title>
 
 <sect1 id="reference.menus">
 <sect1info>
-  <author
->&Roger.Lum; &Roger.Lum.mail; </author>
+  <author> &Roger.Lum; &Roger.Lum.mail; </author>
 </sect1info>
-<title
->Menüs</title>
+<title>Menus</title>
 
-<para
->Im Folgenden finden Sie eine vollständige Aufstellung aller Menüeinträge von &kmymoney; mit einer kurzen Beschreibung ihrer Funktion. Abhängig von der aktuellen Anzeige oder dem Status des Programms können viele Menüeinträge nicht verfügbar oder in Grau als Inaktiv angezeigt werden. Sie können zum Beispiel kein Konto bearbeiten, bevor ein Konto ausgewählt wurde oder in der aktuellen Ansicht angezeigt wird. </para>
+<para>
+  Below is a complete list of the menu selections in &kmymoney;, with a very
+  brief description of what each one does.  Note that many of these menu choices
+  will be unavailable, or grayed out, depending on the current display or state
+  of the application.  For example, you are not able to edit an account unless
+  you have an account selected or displayed in the current view.
+</para>
 
 <sect2 id="reference.menus.file">
-<title
->Menü Datei</title>
+<title>File Menu</title>
 
 <variablelist>
   <varlistentry>
-    <term
-><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;<keycap
->N</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Datei</guimenu
-> <guimenuitem
->Neu</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;<keycap>N</keycap></keycombo>
+      </shortcut>
+      <guimenu>File</guimenu><guimenuitem>New</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Erstellt eine neue leere &kmymoney;-Datei. Es kann immer nur eine &kmymoney;-Datei geöffnet sein. Daher wird eine bereits geöffnete Datei geschlossen.  </action
-></para>
+      <para><action> Creates a new empty &kmymoney; data file. Only one
+      &kmymoney; file can be open at once, so this will close your current file
+      first, if one is open.  </action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><shortcut
-> <keycombo
->&Ctrl;<keycap
->O</keycap
-></keycombo
-> </shortcut
-> <guimenu
->Datei</guimenu
-> <guimenuitem
->Öffnen ...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;<keycap>O</keycap></keycombo>
+      </shortcut>
+      <guimenu>File</guimenu><guimenuitem>Open</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Öffnet eine vorhandene &kmymoney;-Datei.</action
-></para>
+      <para><action>Opens an existing &kmymoney; data file.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Datei</guimenu
-> <guisubmenu
->Zuletzt geöffnete Dateien</guisubmenu
-> <guimenuitem
->...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>File</guimenu>
+        <guimenuitem>Open Recent</guimenuitem>
+        <guimenuitem>...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Ermöglicht den schnellen Zugriff auf kürzlich geöffnete Dateien.</action
-></para>
+      <para><action>Allows quick access to recently opened
+        files.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Datei</guimenu
-> <guimenuitem
->Datenbank öffnen ...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>File</guimenu><guimenuitem>Open Database...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Öffnet eine vorhandene Datenbank.</action
-></para>
+      <para><action>Opens an existing database.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><shortcut
-><keycombo
->&Ctrl;<keycap
->S</keycap
-></keycombo
-></shortcut
-> <guimenu
->Datei</guimenu
-> <guimenuitem
->Speichern</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;<keycap>S</keycap></keycombo>
+      </shortcut>
+      <guimenu>File</guimenu><guimenuitem>Save</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Speichert die gerade geöffnete Datei.</action
-></para>
+      <para><action>Saves the currently open file.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><shortcut
-><keycombo
->&Ctrl;&Shift;<keycap
->S</keycap
-></keycombo
-></shortcut
-> <guimenu
->Datei</guimenu
-> <guimenuitem
->Speichern unter ...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;&Shift;<keycap>S</keycap></keycombo>
+      </shortcut>
+      <guimenu>File</guimenu><guimenuitem>Save As...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Speichert die gerade geöffnete Datei unter einem anderen Dateinamen.</action
-></para>
+      <para><action>Saves the currently open file with a different
+        filename.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Datei</guimenu
-> <guimenuitem
->Speichern in Datenbank ...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+    <guimenu>File</guimenu><guimenuitem>Save As Database...</guimenuitem>
+  </menuchoice></term>
     <listitem>
-      <para
-><action
->Speichert die gerade geöffnete Datei in einer <link linkend="details.database"
->Datenbank</link
->.</action
-></para>
+      <para><action>Saves the currently open file in a <link
+        linkend="details.database">Database</link>.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Datei</guimenu
-> <guisubmenu
->Importieren</guisubmenu
-><guimenuitem
->...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>File</guimenu>
+        <guisubmenu>Import</guisubmenu>
+        <guimenuitem>...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Importiert Finanzdaten aus anderen Dateiformaten wie QIF und &gnucash; oder eine Dateivorlage mit Konten und Kategorien, die für die Einrichtung eines neuen Kontos verwendet werden kann.</action
-></para>
+      <para><action>Imports financial data from other file types, such as QIF
+        and &gnucash;, or a template file of accounts and categories that can be
+        used in setting up new accounts.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Datei</guimenu
-> <guimenuitem
->Exportieren</guimenuitem
-><guimenuitem
->...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>File</guimenu>
+        <guimenuitem>Export</guimenuitem>
+        <guimenuitem>...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Exportiert die aktuelle Datei in ein anderes Format wie zum Beispiel QIF oder exportiert eine Liste Ihrer Konten und Kategorien als Vorlage. </action
-></para>
+      <para><action>Exports the current file as a different file type, such as
+        QIF, or exports a list of your accounts and categories as an template.
+        </action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl;<keycap
->P</keycap
-></keycombo
-></shortcut
-> <guimenu
->Datei</guimenu
-><guimenuitem
->Drucken ...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;<keycap>P</keycap></keycombo>
+      </shortcut>
+      <guimenu>File</guimenu><guimenuitem>Print</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Druckt die aktuelle Datei.</action
-></para>
+      <para><action>Prints the current file.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Datei</guimenu
-><guimenuitem
->Sicherung</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>File</guimenu><guimenuitem>Backup</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Speichert eine Sicherung der gerade geöffneten Datei.</action
-></para>
+      <para><action>Saves a backup the current file.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Datei</guimenu
-> <guimenuitem
->Persönliche Daten</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>File</guimenu><guimenuitem>Personal Data</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Ermöglicht die Bearbeitung der persönlichen Daten.</action
-></para>
+      <para><action>Allows to edit personal data.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Datei</guimenu
-> <guimenuitem
->Datei-Information</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>File</guimenu><guimenuitem>File information</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Zeigt Informationen über die gerade geöffnete &kmymoney;-Datei.</action
-></para>
+      <para><action>Displays information about the currently open &kmymoney;
+        file.</action></para>
     </listitem>
   </varlistentry>
   <!--Dump Memory what i sthis?-->
   <varlistentry>
-    <term
-><menuchoice
-><shortcut
-><keycombo
->&Ctrl;<keycap
-> W</keycap
-></keycombo
-></shortcut
-> <guimenu
->Datei</guimenu
-><guimenuitem
->Schließen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;<keycap>W</keycap></keycombo>
+      </shortcut>
+      <guimenu>File</guimenu><guimenuitem>Close</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Schließt die aktuell geöffnete Datei.</action
-></para>
+      <para><action>Closes the current file.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl;<keycap
->Q</keycap
-></keycombo
-> </shortcut
-><guimenu
->Datei</guimenu
-><guimenuitem
->Beenden</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;<keycap>Q</keycap></keycombo>
+      </shortcut>
+      <guimenu>File</guimenu><guimenuitem>Quit</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
-><action
->Beendet</action
-> &kmymoney;.</action
-></para>
+      <para><action>Quit &kmymoney;.</action></para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
 <sect2 id="reference.menus.edit">
-<title
->Menü Bearbeiten</title>
+<title>Edit Menu</title>
 
 <variablelist>
   <varlistentry>
-    <term
-><menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl;<keycap
->F</keycap
-></keycombo
-></shortcut
-> <guimenu
->Bearbeiten</guimenu
-><guimenuitem
->Buchung suchen ...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;<keycap>F</keycap></keycombo>
+      </shortcut>
+      <guimenu>Edit</guimenu><guimenuitem>Find transaction...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Sucht nach Buchungen.</action
-></para>
+      <para><action>Search transactions.</action></para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
 <sect2 id="reference.menus.view">
-<title
->Menü Ansicht</title>
+<title>View Menu</title>
 
 <variablelist>
   <varlistentry id="reference.menus.settings.transactiondetail">
-    <term
-><menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl;<keycap
->T</keycap
-></keycombo
-></shortcut
-> <guimenu
->Ansicht</guimenu
-><guimenuitem
->Buchungsdetails anzeigen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;<keycap>T</keycap></keycombo>
+      </shortcut>
+      <guimenu>View</guimenu>
+        <guimenuitem>Show Transaction Detail</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Zeigt die Buchungsdetails in der <link linkend="details.ledgers"
->Kontenbuch</link
->-Ansicht. Mit dieser Einstellung werden alle Zeilen einer Buchung im Kontenbuch dargestellt. Ist diese Einstellung deaktiviert, erscheint nur eine Zeile je Buchung. </action
-></para>
-      <para
->Möchten Sie nur die Einzelheiten der gerade ausgewählten Buchung sehen, aber nur eine Zeile für alle anderen Buchungen, dann benutzen Sie die Einstellung <link linkend="details.settings.register.lens"
->Buchungsdetails der ausgewählten Buchung anzeigen</link
->. </para>
+      <para><action>
+        Shows transaction details in the <link
+        linkend="details.ledgers">Ledger</link> view.  With this option turned
+        on, all lines of the transaction will be shown in the ledger.  When it
+        is turned off, only one line will be shown.
+      </action></para>
+      <para>
+        If you only want to see details for the currently selected transaction,
+        but only one line for the others, you can turn on the <link
+        linkend="details.settings.register.lens">Ledger Lens</link>.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl;<keycap
->R</keycap
-></keycombo
-></shortcut
-> <guimenu
->Ansicht</guimenu
-><guimenuitem
->Abgeglichene Buchungen ausblenden</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;<keycap>R</keycap></keycombo>
+      </shortcut>
+      <guimenu>View</guimenu>
+        <guimenuitem>Hide reconciled transactions</guimenuitem>
+      </menuchoice></term>
     <listitem>
-      <para
-><action
->Blendet alle abgeglichenen Buchungen in der Ansicht aus.</action
-></para>
+      <para><action>Hides reconciled transactions on the
+        register.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl;<keycap
->U</keycap
-></keycombo
-></shortcut
-> <guimenu
->Ansicht</guimenu
-><guimenuitem
->Ungenutzte Kategorien ausblenden</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;<keycap>U</keycap></keycombo>
+      </shortcut>
+      <guimenu>View</guimenu>
+        <guimenuitem>Hide unused categories</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Blendet ungenutzte Kategorien in den Ansichten aus.</action
-></para>
+      <para><action>Hides unused categories in the views.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><shortcut
-><keycombo action="simul"
-> &Ctrl;&Shift;<keycap
->A</keycap
-> </keycombo
-></shortcut
-> <guimenu
->Ansicht</guimenu
-> <guimenuitem
->Alle Konten anzeigen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>
+          &Ctrl;&Shift;<keycap>A</keycap>
+        </keycombo>
+      </shortcut>
+      <guimenu>View</guimenu><guimenuitem>Show all accounts</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Zeigt alle Konten in den Ansichten.</action
-></para>
+      <para><action>Shows all accounts in the views.</action></para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
 <sect2 id="reference.menus.institution">
-<title
->Menü Geldinstitut</title>
+<title>Institution Menu</title>
 
 <variablelist>
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Geldinstitut</guimenu
-> <guimenuitem
->Neues Geldinstitut ...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Institution</guimenu>
+        <guimenuitem>New institution...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Fügt ein neues Geldinstitut hinzu.</action
-></para>
+      <para><action>Add a new institution.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Geldinstitut</guimenu
-> <guimenuitem
->Geldinstitut bearbeiten ...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Institution</guimenu>
+        <guimenuitem>Edit institution...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Öffnet den Dialog zur Bearbeitung eines Geldinstituts.</action
-></para>
+      <para><action>Edit an institution.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Geldinstitut</guimenu
-> <guimenuitem
->Geldinstitut löschen ...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Institution</guimenu>
+        <guimenuitem>Delete institution...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Löscht ein Geldinstitut.</action
-></para>
+      <para><action>Delete an institution.</action></para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
 <sect2 id="reference.menus.account">
-<title
->Menü Konto</title>
+<title>Account Menu</title>
 
 <variablelist>
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Konto</guimenu
-> <guimenuitem
->Neues Konto ...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Account</guimenu>
+        <guimenuitem>New account...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Fügt ein neues Konto hinzu.</action
-></para>
+      <para><action>Adds a new account.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Konto</guimenu
-> <guimenuitem
->Konto bearbeiten ...</guimenuitem
->  </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Account</guimenu><guimenuitem>Edit account...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Bearbeitet ein Konto.</action
-></para>
+      <para><action>Edits an account.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Konto</guimenu
-> <guimenuitem
->Konto löschen ...</guimenuitem
->  </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Account</guimenu><guimenuitem>Delete account...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Löscht ein vorhandenes Konto.</action
-></para>
+      <para><action>Deletes an account.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Konto</guimenu
-> <guimenuitem
->Kontenbuch öffnen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Account</guimenu><guimenuitem>Open ledger</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Zeigt die Kontenbuchansicht eines Kontos an.</action
-></para>
+      <para><action>Displays the ledger view of an account.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><shortcut
-><keycombo action="simul"
-> &Ctrl;&Shift;<keycap
->R</keycap
-> </keycombo
-></shortcut
-> <guimenu
->Konto</guimenu
-> <guimenuitem
->Abgleichen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>
+          &Ctrl;&Shift;<keycap>R</keycap>
+        </keycombo>
+      </shortcut>
+      <guimenu>Account</guimenu><guimenuitem>Reconcile...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Gleicht ein Konto mit Hilfe des Assistenten ab.</action
-></para>
+      <para><action>Reconciles an account through the reconciliation
+        wizard.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Konto</guimenu
-> <guimenuitem
->Abgleich zurückstellen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Account</guimenu><guimenuitem>Postpone reconciliation</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Stellt das Abgleichen eines Kontos zurück.</action
-></para>
+      <para><action>Postpones reconciliation of an account.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Konto</guimenu
-> <guimenuitem
->Fertigstellen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Account</guimenu><guimenuitem>Finish</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Beendet das Abgleichen eines Kontos.</action
-></para>
+      <para><action>Finishes reconciliation of an account.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Konto</guimenu
-> <guimenuitem
->Buchungs-Bericht</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Account</guimenu><guimenuitem>Transaction report</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Öffnet den Buchungsbericht des Kontos.</action
-></para>
+      <para><action>Opens a transaction report of an account.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Konto</guimenu
-> <guimenuitem
->Konto schließen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Account</guimenu><guimenuitem>Close account</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Schließt ein Konto.</action
-></para>
+      <para><action>Closes an account.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Konto</guimenu
-> <guimenuitem
->Konto neu eröffnen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Account</guimenu><guimenuitem>Reopen account</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Öffnet ein vorher geschlossenes Konto wieder.</action
-></para>
+      <para><action>Reopens an account, if closed.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Konto</guimenu
-> <guimenuitem
->Kontenzuordnung löschen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Account</guimenu><guimenuitem>Unmap account</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Löscht die Zuordnung zu einem Onlinekonto.</action
-></para>
+      <para><action>Unmaps an online account.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Konto</guimenu
-> <guimenuitem
->Einem Onlinekonto zuordnen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Account</guimenu><guimenuitem>Map to online account</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Weist ein Onlinekonto einem Konto zu.</action
-></para>
+      <para><action>Maps an account to an online account.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Konto</guimenu
-> <guimenuitem
->Konto aktualisieren</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Account</guimenu><guimenuitem>Update account...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Importiert Buchungen von Online-Banking für ein Konto.</action
-></para>
+      <para><action>Imports transactions from online banking for an
+        account.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Konten</guimenu
-> <guimenuitem
->Alle Konten aktualisieren ...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Account</guimenu>
+        <guimenuitem>Update all accounts...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Importiert Buchungen von Online-Banking für alle Konten.</action
-></para>
+      <para><action>Import transactions from online banking for all
+        accounts.</action></para>
     </listitem>
   </varlistentry>
   <!--New credit transfer-->
@@ -781,493 +467,296 @@
 </sect2>
 
 <sect2 id="reference.menus.category">
-<title
->Menü Kategorie</title>
+<title>Category Menu</title>
 
 <variablelist>
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Kategorie</guimenu
-> <guimenuitem
->Neue Kategorie ...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Category</guimenu><guimenuitem>New category...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Fügt eine neue Kategorie hinzu.</action
-></para>
+      <para><action>Adds a new category.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Kategorie</guimenu
-> <guimenuitem
->Kategorie bearbeiten ...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Category</guimenu><guimenuitem>Edit category...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Bearbeitet eine Kategorie.</action
-></para>
+      <para><action>Edits a category.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Kategorie</guimenu
-> <guimenuitem
->Kategorie löschen ...</guimenuitem
->  </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Category</guimenu><guimenuitem>Delete category...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Löscht eine Kategorie.</action
-></para>
+      <para><action>Deletes a category.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Kategorie</guimenu
-> <guimenuitem
->Kontenbuch öffnen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Category</guimenu><guimenuitem>Open ledger</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Zeigt die Kontenbuchansicht einer Kategorie.</action
-></para>
+      <para><action>Displays the ledger view of a category.</action></para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
 <sect2 id="reference.menus.transaction">
-<title
->Menü Buchung</title>
+<title>Transaction Menu</title>
 
 <variablelist>
   <varlistentry>
-    <term
-><menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl; &Ins;</keycombo
-></shortcut
-> <guimenu
->Buchung</guimenu
-> <guimenuitem
->New</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;&Ins;</keycombo>
+      </shortcut>
+      <guimenu>Transaction</guimenu><guimenuitem>New</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Legt eine neue Buchung an.</action
-></para>
+      <para><action>Adds a new transaction.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Buchung</guimenu
-> <guimenuitem
->Bearbeiten</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Transaction</guimenu><guimenuitem>Edit</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Bearbeitet eine Buchung.</action
-></para>
+      <para><action>Edits a transaction.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Buchung</guimenu
-> <guimenuitem
->Split-Buchungen bearbeiten</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Transaction</guimenu><guimenuitem>Edit splits</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Bearbeitet die Aufteilung einer Buchung.</action
-></para>
+      <para><action>Edits the splits of a transaction.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Buchung</guimenu
-> <guimenuitem
->Löschen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Transaction</guimenu><guimenuitem>Delete</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Löscht eine Buchung.</action
-></para>
+      <para><action>Deletes a transaction.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Buchung</guimenu
-> <guimenuitem
->Duplizieren</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Transaction</guimenu><guimenuitem>Duplicate</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Dupliziert eine Buchung.</action
-></para>
+      <para><action>Duplicates a transaction.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Buchung</guimenu
-> <guimenuitem
->Buchung markieren als ...</guimenuitem
-> <guimenuitem
->Nicht abgeglichen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Transaction</guimenu>
+        <guimenuitem>Mark transaction as ...</guimenuitem>
+        <guimenuitem>Not Reconciled</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Ändert den Status einer Buchung zu „Nicht abgeglichen“,</action
-></para>
+      <para><action>Changes a transaction to Not Reconciled
+        status.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><shortcut
-> <keycombo
-> &Ctrl;&Alt;&Space; </keycombo
-> </shortcut
-> <guimenu
->Buchung</guimenu
-> <guimenuitem
->Buchung markieren als ...</guimenuitem
-> <guimenuitem
->Verrechnet</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>
+          &Ctrl;&Alt;&Space;
+        </keycombo>
+      </shortcut>
+      <guimenu>Transaction</guimenu>
+        <guimenuitem>Mark transaction as ...</guimenuitem>
+        <guimenuitem>Cleared</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Ändert den Status einer Buchung zu „Verrechnet“.</action
-></para>
+      <para><action>Changes a transaction to Cleared status.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><shortcut
-> <keycombo
-> &Ctrl;&Shift;&Space; </keycombo
-> </shortcut
-> <guimenu
->Buchung</guimenu
-> <guimenuitem
->Buchung markieren als ...</guimenuitem
-> <guimenuitem
->Abgeglichen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>
+          &Ctrl;&Shift;&Space;
+        </keycombo>
+      </shortcut>
+      <guimenu>Transaction</guimenu>
+        <guimenuitem>Mark transaction as ...</guimenuitem>
+        <guimenuitem>Reconciled</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Ändert den Status einer Buchung zu „Abgeglichen“,</action
-></para>
+      <para><action>Changes a transaction to Reconciled status.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Buchung</guimenu
-><guimenuitem
->Gehe zu Konto</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Transaction</guimenu><guimenuitem>Go to account</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Zeigt das andere Konto einer Buchung.</action
-></para>
+      <para><action>Displays the other account of a transaction.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Buchung</guimenu
-> <guimenuitem
->Gehe zu Zahlungsempfänger</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Transaction</guimenu><guimenuitem>Go to payee</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Zeigt die Ansicht der Zahlungsempfänger und beschränkt dies auf den Zahlungsempfänger der ausgewählten Buchung.</action
-></para>
+      <para><action>Displays the Payee view and focuses on the payee of the
+        selected transaction.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Buchung</guimenu
-> <guimenuitem
->Geplante Buchung erstellen ...</guimenuitem
->  </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Transaction</guimenu>
+        <guimenuitem>Create scheduled transaction...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Erstellt eine neue geplante Buchung.</action
-></para>
+      <para><action>Creates a new scheduled transaction.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Buchung</guimenu
-><guimenuitem
->Zuordnen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Transaction</guimenu><guimenuitem>Match</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Zuordnung von importierten Buchungen.</action
-></para>
+      <para><action>Matches imported transactions.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Buchung</guimenu
-><guimenuitem
->Zuordnung rückgängig machen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Transaction</guimenu><guimenuitem>Unmatch</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Macht die Zuordnung einer Buchung wieder rückgängig, die von &kmymoney; zur Zuordnung von importierten Buchungen vorgeschlagen wurde</action
->. Dieser Menüeintrag ist nur vorhanden, wenn eine zugeordnete Buchung vorhanden ist. </para>
+      <para>
+        <action>Unmatches a transactions that &kmymoney; has proposed
+        as a match of imported transactions.</action> Note that this
+        menu choice is only present if a matched transaction exists.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Buchung</guimenu
-> <guimenuitem
->Annehmen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Transaction</guimenu><guimenuitem>Accept</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Annahme einer vorgeschlagenen Zusammenführung von importierten Buchungen.</action
-></para>
+      <para><action>Accepts a proposed merge of imported
+        transactions.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl; <keycap
->A</keycap
-></keycombo
-></shortcut
-> <guimenu
->Buchung</guimenu
-> <guimenuitem
->Alle auswählen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <shortcut>
+        <keycombo>&Ctrl;<keycap>A</keycap></keycombo>
+      </shortcut>
+      <guimenu>Transaction</guimenu><guimenuitem>Select all</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Wählt alle Buchung in der Ansicht.</action
-></para>
+      <para><action>Selects all transactions on the register.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Buchung</guimenu
-><guimenuitem
->Scheck ausdrucken</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Transaction</guimenu><guimenuitem>Print check</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Druckt den Inhalt der ausgewählten Buchung im angezeigten Register mit den Formatierungen der gewählten Vorlage.</action
-> Dieser Menüeintrag ist nur vorhanden, wenn eine Buchung im Register ausgewählt ist. Im Abschnitt über die Einrichtung des Moduls <link linkend="details.settings.plugins"
->Scheck ausdrucken</link
-> finden Sie weitere Informationen. </para>
+      <para>
+        <action>Prints the contents of the selected transaction in the displayed
+        register, formatted according to the selected template.</action> Note
+        that this menu choice is only present if a transaction is selected in
+        the register.  See the section on configuring the <link
+        linkend="details.settings.plugins">Print check</link> plugin for more
+        information.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
 <sect2 id="reference.menus.tools">
-<title
->Menü Extras</title>
+<title>Tools Menu</title>
 
 <variablelist>
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Extras</guimenu
-> <guimenuitem
->QIF-Einstellungen</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Tools</guimenu><guimenuitem>QIF Profile Editor...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Ändert das QIF-Profil, das zum Import oder Export von QIF-Dateien verwendet wird.</action
-></para>
+      <para><action>Modifies the QIF profile used to import or export QIF
+        files.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Extras</guimenu
-> <guimenuitem
->Währungen ...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Tools</guimenu><guimenuitem>Currencies...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Zeigt alle in &kmymoney; definierten Währungen.</action
-></para>
+      <para><action>Lists the currencies known to &kmymoney;.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Extras</guimenu
-> <guimenuitem
->Preise ...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Tools</guimenu><guimenuitem>Prices...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Zeigt Aktien- und Währungspreise an.</action
-></para>
+      <para><action>Lists stock and currency prices.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Extras</guimenu
-> <guimenuitem
->Aktien- und Währungspreise aktualisieren ...</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+    <guimenu>Tools</guimenu>
+      <guimenuitem>Update Stock and Currency Prices...</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Aktualisiert Aktien- und Währungspreise aus Online-Quellen mit der Funktion <link linkend="details.investments.onlinequotes"
->Online-Kursnotizen</link
->.</action
-></para>
+      <para><action>Updates stock and currency prices from online sources using
+        the <link linkend="details.investments.onlinequotes">Online Price
+        Quotes</link> feature.</action></para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Extras</guimenu
-> <guimenuitem
->Konsistenzüberprüfung</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Tools</guimenu><guimenuitem>Consistency Check</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Startet eine Überprüfung Ihrer Datei und versucht alle gefundenen Probleme zu beheben.</action
-></para>
-      <para
->Erstellen Sie eine Sicherung Ihrer Daten, bevor Sie diese Funktion benutzen.</para>
+      <para><action>Runs a check on your file and tries to fix any problem it
+        finds, if possible.</action></para>
+      <para>Make a backup of your file before running this option.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Extras</guimenu
-><guimenuitem
->Leistungstest</guimenuitem
-> </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Tools</guimenu><guimenuitem>Performance-Test</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Startet einen Leistungstest für Ihre Datei und zeigt das Ergebnis an.</action
-></para>
+      <para><action>Runs a performance test on your file and displays the
+        results.</action></para>
     </listitem>
   </varlistentry>
   <!--Generate Database SQL
@@ -1277,36 +766,45 @@
 </sect2>
 
 <sect2 id="reference.menus.settings.help">
-<title
->Die Menüs Einstellungen und Hilfe</title>
+<title>Settings and Help Menu</title>
 
-<para
->&kmymoney; hat die bekannten &kde;-Menüs Einstellungen und Hilfe aus den <ulink url="help:/fundamentals/menus.html"
->&kde;-Grundlagen</ulink
-> mit einem zusätzlichen Eintrag:</para>
+<para>&kmymoney; has the default &kde; Settings and Help menu as described in the
+<ulink url="help:/fundamentals/menus.html">&kde; Fundamentals</ulink>
+with one additional entry:</para>
 
 <variablelist>
   <varlistentry>
-    <term
-><menuchoice
-><guimenu
->Einstellungen</guimenu
-> <guimenuitem
->Meldungen wieder anzeigen ...</guimenuitem
->  </menuchoice
-></term>
+    <term><menuchoice>
+      <guimenu>Settings</guimenu><guimenuitem>Enable all messages</guimenuitem>
+    </menuchoice></term>
     <listitem>
-      <para
-><action
->Zeigt wieder alle Meldungen an, wenn Sie vorher in irgendeinem Dialog <guimenuitem
->Diese Meldung nicht mehr anzeigen</guimenuitem
-> ausgewählt haben.</action
-></para>
+      <para><action>Re-enables any messages you may have turned off by checking
+        <guimenuitem>Don't tell me about this again</guimenuitem> in a dialog
+        box.</action></para>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term><menuchoice>
+      <guimenu>Settings</guimenu><guimenuitem>Configure Aqbanking</guimenuitem>
+    </menuchoice></term>
+    <listitem>
+      <para><action>Configure online banking settings</action>, see
+        <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F">How do I configure online banking</ulink>
+        for further details.
+      </para>
+      <para>Note that this menu selection is only available if the KBanking
+        module is enabled. See the section on configuring the
+        <link linkend="details.settings.plugins.kbanking">KBanking plugin</link>
+        for more information.
+      </para>
     </listitem>
   </varlistentry>
 
 </variablelist>
 </sect2>
 
-</sect1
->&details-widgets; </chapter>
+</sect1>
+
+&details-widgets;
+
+</chapter>
