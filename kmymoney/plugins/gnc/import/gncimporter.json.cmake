@@ -45,6 +45,7 @@
         "Description[gl]": "Engadir a posibilidade de importar GnuCash en KMyMoney",
         "Description[ia]": "Adde importar de GnuCash a KMyMoney",
         "Description[it]": "Aggiunge l'importazione GnuCash a KMymoney",
+        "Description[ka]": "KMyMoney-ში GnuCash -ს შემოტანის დამატება",
         "Description[ko]": "KMyMoney에 GnuCash 가져오기 추가",
         "Description[nl]": "Voeg GnuCash importeren toe aan KMyMoney",
         "Description[pl]": "Dodaje importowanie GnuCash do KMyMoney",

@@ -45,6 +45,7 @@
         "Description[gl]": "Engadir a posibilidade de exportar CSV desde KMyMoney",
         "Description[ia]": "Adde exportar de CSV a KMyMoney",
         "Description[it]": "Aggiunge l'esportazione CSV a KMymoney",
+        "Description[ka]": "KMyMoney-ში CSV გატანის დამატება",
         "Description[ko]": "KMyMoney에 CSV 내보내기 추가",
         "Description[nl]": "Voeg CSV exporteren toe aan KMyMoney",
         "Description[pl]": "Dodaje eksportowanie CSV do KMyMoney",
