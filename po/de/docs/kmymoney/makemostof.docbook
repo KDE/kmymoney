@@ -2,244 +2,233 @@
 <chapter id="makingmostof">
 <chapterinfo>
   <authorgroup>
-    <author><personname><firstname>Joe</firstname><surname>(joe1011010)</surname></personname>
-            <email>joe1011010_km@users.sourceforge.net</email>
-    </author>
+    <author
+><personname
+><firstname
+>Joe</firstname
+><surname
+>(joe1011010)</surname
+></personname
+> <email
+>joe1011010_km@users.sourceforge.net</email
+> </author>
   </authorgroup>
-  <date>2010-04-05</date>
-  <releaseinfo>5.0.4</releaseinfo>
+  <date
+>2010-04-05</date>
+  <releaseinfo
+>5.0.4</releaseinfo>
 </chapterinfo>
 
-<title>Making the most of &kmymoney;</title>
+<title
+>&kmymoney; so gut wie möglich nutzen</title>
 
-<para>
-  While you could go ahead, clicking some buttons and filling in some data,
-  after a time, you could decide you have done it wrong and start again, even if
-  you did read the documentation on each part of &kmymoney;.
-</para>
+<para
+>Wenn Sie einfach loslegen und hier einige Knöpfe drücken und dort einige Daten eingeben, werden Sie nach kurzer Zeit feststellen, dass Sie falsch angefangen haben. Sie beginnen nochmal neu, obwohl Sie die Dokumention zu allen Teilen von &kmymoney; gelesen hatten. </para>
 
-<para>
-  You will get a more effective system if you spend a little time planning how
-  you are going to use &kmymoney;, so follow the steps given here.
-</para>
+<para
+>Sie werden effektiver mit dem Programm arbeiten, wenn Sie zuerst überlegen, wie und wofür Sie &kmymoney; verwenden möchten. Daher halten Sie sich an die folgenden Hinweise. </para>
 
 <sect1 id="makingmostof.basicaccounting">
-<title>Basic Accounting</title>
+<title
+>Grundlagen der Buchführung</title>
 
-<para>
-  Imagine your money as balls, or beans, and to stop them rolling around you
-  keep them in a box, or pot. Accounting, or Bookkeeping, is the process of
-  counting and keeping track of the beans in the pot, or several pots.
-</para>
+<para
+>Stellen Sie sich Ihr Geld als Bälle vor und um zu verhindern, dass sie wegrollen, packen Sie sie in eine Kiste. Kontenführung und Buchhaltung ist der Prozess des Zählens und Verwaltens der Bälle in einer oder mehrerer Kisten. </para>
 
-<para>
-  You have some money in the pot marked <quote>Cash</quote>. You buy some goods,
-  so you take some beans out of the cash pot and place them into another pot
-  marked <quote>Supplier</quote>. The supplier gives you some goods in exchange
-  for the cash, so you take the beans out of the pot marked
-  <quote>Supplier</quote> and put them in the pot marked <quote>Goods</quote>.
-</para>
+<para
+>Sie haben Geld bzw. einige Bälle in der Kiste <quote
+>Bargeld</quote
+>. Sie kaufen Waren, dazu nehmen Sie einige Bälle aus der Bargeldkiste und legen Sie in eine andere Kiste, die mit <quote
+>Lieferant</quote
+> beschriftet ist. Der Lieferant gibt Ihnen Waren im Austausch gegen Bargeld, daher nehmen Sie die Bälle aus der Kiste <quote
+>Lieferant</quote
+> und legen Sie in die Kiste <quote
+>Waren</quote
+>. </para>
 
-<para>
-  The goods have a value (the price you paid) so you still have the same amount
-  of beans, some representing cash and some representing goods.
-</para>
+<para
+>Die Waren haben einen Wert, den gezahlten Preis, daher haben Sie immer noch die gleiche Anzahl Bälle. Einige der Bälle stellen das Bargeld und andere die Waren dar. </para>
 
-<para>
-  In this case you have two movements of beans, or transactions. Each
-  transaction needs two entries, one to take beans out and one to put beans
-  in. This is called <quote>double entry bookkeeping</quote> or <quote>double
-  entry accounting</quote>. The recording of the transactions is done in a
-  <quote>Ledger</quote>; each pot is known as an <quote>Account</quote> or
-  <quote>Ledger code</quote>.
-</para>
+<para
+>In diesem Fall gibt es zwei Verschiebungen von Bällen, auch Buchungen genannt. Jede Buchung besteht aus zwei Schritten, einen um die Bälle heraus zu nehmen und eine andere um die Bälle herein zulegen. Dies wird auch <quote
+>doppelte Buchführung</quote
+> genannt. Die Aufzeichnung der Buchungen erfolgt in einem Kontenbuch und jede Kiste entspricht einem <quote
+>Konto</quote
+>. </para>
 
-<para>
-  Now you take some goods and give them to a customer, who gives you some cash
-  in exchange. The goods were worth some beans and, hopefully, the customer has
-  given us more beans than that, so making a profit. To over simplify, the beans
-  from the Goods pot come back as Cash, but we can split that as the <quote>Cost
-  of Goods sold</quote> and <quote>Profit</quote>. This transaction has three
-  entries; one side of the <quote>double entry</quote> has been split.
-</para>
+<para
+>Nun nehmen Sie einige Waren und geben sie einem Kunden, der Ihnen im Gegenzug Bargeld gibt. Der Wert der Waren entsprach einer bestimmten Anzahl an Bällen. Hat Ihnen der Kunde mehr Bälle zurückgegeben, dann haben Sie einen Gewinn erzielt. Vereinfacht gesagt kommen die Bälle aus der Kiste <quote
+>Waren</quote
+> als Bargeld zurück, das in die <quote
+>Kosten der verkauften Waren</quote
+> und den <quote
+>Gewinn</quote
+> aufgeteilt werden kann. Diese Buchung besteht aus drei Vorgängen, eine Seite der <quote
+>doppelten Einträge</quote
+> wurde aufgeteilt. </para>
 
-<para>
-  This will be covered in more detail later on in this handbook.
-</para>
+<para
+>Weitere Informationen dazu finden Sie später in diesem Handbuch. </para>
 <!-- **** don't forget to make sure this is actually covered, and linked to from
      here.  Also, I have removed "in setting up accounts for Businesses." and
      modified the section below, since we explicitly say that KMM is not for
      business use. -->
 
 <sect2 id="makingmostof.basicaccounting.personalaccounts">
-<title>Defining the accounts (personal records)</title>
+<title
+>Definition der Konten (private Nutzung)</title>
 
-<para>
-  Most accounts, or pots, above represent a measure of our <quote>Worth</quote>.
-  The cash and goods represent our <quote>Assets</quote>; so does what we are
-  owed if our customers have not yet given us the money. The money we owe, say
-  if we had not paid our suppliers, are our <quote>Liabilities</quote>. These
-  accounts are transferable to Cash and have a value.
-</para>
+<para
+>Die meisten oben genannten Konten oder Bälle bilden einen Maßstab für deren <quote
+>Wert</quote
+>. Das Bargeld und die Waren repräsentieren die <quote
+>Anlagen</quote
+>, also das was man besitzt, wenn die Kunden noch nicht bezahlt haben. Das Geld, das anderen geschuldet ist, weil zum Beispiel die Lieferanten noch nicht bezahlt sind, sind die <quote
+>Verbindlichkeiten</quote
+>. Diese Konten können in Bargeld umgesetzt werden und haben einen Wert. </para>
 
-<para>
-  Any pots that cannot be valued are <quote>Income</quote> or
-  <quote>Expense</quote>. Our phone bill (or the phone company to which we pay
-  the bill) cannot be valued; we know how much we have paid, but not how much
-  anyone else has paid.  We know how much our employer has paid us, but we do
-  not know how much they have paid anybody else, or how much money they have
-  left to pay us next month.  Although we cannot determine an actual value for
-  these pots, it is useful to monitor how much we have put into or taken out of
-  each of them.
-</para>
+<para
+>Alle „Kisten“ können als <quote
+>Einnahmen</quote
+> oder <quote
+>Ausgaben</quote
+> bewertet werden. Die Telefonrechnung oder die Telefongesellschaft, der Sie die Rechnung bezahlen, kann nicht bewertet werden. Sie wissen, wie viel Sie bezahlt haben, aber nicht was andere zahlten. Sie wissen, was Ihr Arbeitgeber Ihnen zahlt, aber nicht, was er allen anderen zahlt oder wieviel Geld im nächsten Monat für die Löhne zur Verfügung steht. Obwohl der aktuelle Wert für diese „Kisten“ nicht zu bestimmen ist, ist eine Kontrolle darüber sinnvoll, was Sie eingegeben oder herausgenommen haben. </para>
 
-<para>
-  In some cases a supplier is a <quote>Liability,</quote> in others it is an
-  <quote>Expense</quote>. This is something we need to consider and decide for
-  each case. Similarly, you may set up a loan as a Liability, particularly if
-  you transfer the money into your bank account, but it could be an Expense if
-  it was to buy some furniture.
-</para>
+<para
+>In einigen Fällen ist ein Lieferant eine <quote
+>Verbindlichkeit</quote
+>, in anderen ist es eine <quote
+>Ausgabe</quote
+>. Dies muss für jeden einzelnen Fall beurteilt und entschieden werden. Ebenso können Sie einen Kredit als Verbindlichkeit einrichten, insbesondere wenn Sie das Geld auf Ihr Bankkonto überweisen. Es kann aber auch eine Ausgabe sein, wenn Sie einige Möbel kaufen. </para>
 
-<para>
-  Consider how you want to track and analyze your income and expenses. This will
-  help you decide how to set them up in &kmymoney;.
-</para>
+<para
+>Überlegen Sie sich, wie Sie Ihre Einnahmen und Ausgaben überwachen und analysieren möchten. Dies erleichtert Ihnen die Einstellung für &kmymoney;. </para>
 
-<para>
-  Finally, consider if you want everything in one set of accounts, or two or
-  more. This may depend on the legal framework or just how you want to analyze
-  things. Each set of accounts would be handled separately.
-</para>
+<para
+>Schließlich müssen Sie entscheiden, ob Sie nur eine oder mehrere Gruppen von Konten benutzen möchten. Diese Entscheidung kann von gesetzlichen Rahmenbedingen oder davon bestimmt werden, wie Sie Ihre Finanzen analysieren möchten. Jede Gruppe von Konten wird getrennt verwaltet. </para>
 </sect2>
 
 <sect2 id="makingmostof.basicaccounting.businessaccounts">
-<title>Defining the accounts (business records)</title>
+<title
+>Definition der Konten (geschäftliche Nutzung)</title>
 
-<para>
-  There are similarities to setting up accounts for personal use, but there are
-  additional considerations, including legal guidelines and requirements.
-  &kmymoney; does not explicitly address any of these issues, as it has been
-  designed as a <quote>personal</quote> finance manager.  In addition, these
-  additional issues are not addressed in this handbook, but you must be aware of
-  them if you are going to attempt to use &kmymoney; for a business.
-</para>
+<para
+>Es gibt Ähnlichkeiten zur Einrichtung von Konten für den persönlichen Gebrauch, aber es gibt Zusätzliches zu bedenken, wie zum Beispiel gesetzliche Vorschriften und Anforderungen. &kmymoney; hat keine besonderen Funktionen für diese Belange, da es als Finanzverwaltung für den <quote
+>persönlichen</quote
+> Gebrauch entwickelt wurde. Auf diese Belange wird auch in der Dokumentation nicht weiter eingegangen, aber Sie müssen sich darüber im Klaren sein, wenn Sie &kmymoney; für den geschäftlichen Bereich verwenden möchten. </para>
 </sect2>
 </sect1>
 
 <sect1 id="makingmostof.mapping">
-<title>Mapping your finances to &kmymoney;</title>
+<title
+>Einrichtung von &kmymoney; für Ihre Finanzen</title>
 
-<para>
-  So, collect up your papers and see the following sections for each item in
-  &kmymoney;.
-</para>
+<para
+>Stellen Sie also Ihre Unterlagen zusammen und lesen Sie die nächsten Abschnitte über die einzelnen Elemente in &kmymoney;. </para>
 
 <sect2 id="makingmostof.mapping.accounts">
-<title>Accounts</title>
+<title
+>Konten</title>
 
-<para>
-  These hold a value. Transactions are created against one or more accounts.
-</para>
+<para
+>Diese enthalten Werte. Buchungen werden gegen ein oder mehrere Konten durchgeführt. </para>
 
 <sect3 id="makingmostof.mapping.accounts.asset">
-<title>Accounts - Asset</title>
+<title
+>Konten - Vermögen</title>
 
-<para>
-  These are the accounts which hold your money and possessions that you wish to
-  monitor. The following types are available:
-</para>
+<para
+>Auf diesen Konten befindet sich Ihr Geld und Ihr Besitz, die sie überwachen möchten. Es gibt folgende Kontenarten: </para>
 
 <variablelist>
   <varlistentry>
-    <term>Checking</term>
+    <term
+>Girokonto</term>
     <listitem>
-      <para>
-        Standard bank checking account.
-      </para>
+      <para
+>Standard-Girokonto bei einer Bank </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Savings</term>
+    <term
+>Sparkonto</term>
     <listitem>
-      <para>
-        Standard bank savings account.
-      </para>
+      <para
+>Standard-Sparkonto bei einer Bank </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Cash</term>
+    <term
+>Bargeld</term>
     <listitem>
-      <para>
-        Money in your hand or wallet.
-      </para>
+      <para
+>Das Geld in Ihrer Hand oder Brieftasche. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Loan</term>
+    <term
+>Kredit</term>
     <listitem>
-      <para>
-        Loans you make to someone else.
-      </para>
+      <para
+>Kredite, die Sie anderen gegeben haben. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Investment</term>
+    <term
+>Investitionen</term>
     <listitem>
-      <para>
-        Money you invest.
-      </para>
+      <para
+>Ihr investiertes Geld. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Asset</term>
+    <term
+>Anlagen</term>
     <listitem>
-      <para>
-        Property, collections, &etc;
-      </para>
+      <para
+>Besitz, Sammlungen &etc; </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect3>
 
 <sect3 id="makingmostof.mapping.accounts.liability">
-<title>Accounts - Liability</title>
+<title
+>Konten - Verbindlichkeiten</title>
 
-<para>
-  These are the accounts which represent your debts and money owed that you wish
-  to monitor. The following types are available:
-</para>
+<para
+>Diese Konten zeigen Ihre Schulden und geliehenes Geld, das sie überwachen möchten. Es gibt folgende Kontenarten: </para>
 
 <variablelist>
   <varlistentry>
-    <term>Credit card</term>
+    <term
+>Kreditkarte</term>
     <listitem>
-      <para>
-        Standard credit card account.
-      </para>
+      <para
+>Standard-Kreditkartenkonto bei einer Bank </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Loan</term>
+    <term
+>Kredit</term>
     <listitem>
-      <para>
-        Loans made to you, mortgages, &etc;
-      </para>
+      <para
+>Ihre Kredite, Hypotheken &etc; </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Liability</term>
+    <term
+>Verbindlichkeiten</term>
     <listitem>
-      <para>
-        Anything else you owe that is not a loan.
-      </para>
+      <para
+>Alle sonstigen Verbindlichkeiten, die kein Kredit sind. </para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -247,136 +236,96 @@
 </sect2>
 
 <sect2 id="makingmostof.mapping.institutions">
-<title>Institutions</title>
+<title
+>Geldinstitute</title>
 
-<para>
-  These are completely optional and can be used to group accounts, and show a
-  total value for all accounts in each group.
-</para>
+<para
+>Geldinstitute können wahlweise benutzt werden, um Ihre Konten in Gruppen zusammenzufassen. Für jede Gruppe wird der Gesamtwert aller Konten angezeigt. </para>
 </sect2>
 
 <sect2 id="makingmostof.mapping.categories">
-<title>Categories</title>
+<title
+>Kategorien</title>
 
-<para>
-  These represent non-managed income and expense accounts that do not have a
-  value. The total value of transactions is shown against each category. A
-  category or transfer account is required for each transaction.
-</para>
+<para
+>Kategorien stellen nicht verwaltete Konten für Einnahmen und Ausgaben ohne Wert dar. In jeder Kategorie wird die Gesamtsumme aller Buchungen angezeigt. Jede Buchung benötigt eine Kategorie oder ein Buchungskonto. </para>
 </sect2>
 
 <sect2 id="makingmostof.mapping.subcategories">
-<title>Sub-Categories</title>
+<title
+>Unterkategorien</title>
 
-<para>
-  Categories can be split into sub-categories, but this relationship is only for
-  display purposes, as the sub-category totals are not included in the higher
-  level category total.
-</para>
+<para
+>Kategorien können in Unterkategorien aufgeteilt werden, aber diese Beziehung wird nur zur Ansicht benutzt, da die Summen von Unterkategorien nicht in der Summe der übergeordneten Kategorie enthalten sind. </para>
 </sect2>
 
 <sect2 id="makingmostof.mapping.tags">
-<title>Tags</title>
+<title
+>Stichwörter</title>
 
-<para>
-  Tags are very similar to Categories, as they are also non-managed accounts
-  that do not have a value.  However, unlike Categories, the use of Tags is
-  completely optional.
-</para>
+<para
+>Stichwörter ähneln den Kategorien, da sie ebenfalls nicht verwaltete Konten ohne Wert darstellen. Im Gegensatz zu Kategorien jedoch ist die Benutzung von Stichwörter optional. </para>
 </sect2>
 
 <sect2 id="makingmostof.mapping.payees">
-<title>Payees</title>
+<title
+>Zahlungsempfänger</title>
 
-<para>
-  These are optional for transactions. They are required for Scheduled
-  transactions. A transaction history, with category, is shown against each
-  payee.
-</para>
+<para
+>Für normale Buchungen ist die Angabe eines Zahlungsempfängers freigestellt, für geplante Buchungen ist diese Angabe jedoch erforderlich. Der Verlauf aller Buchungen einschließlich der Kategorien wird für jeden Zahlungsempfänger angezeigt. </para>
 </sect2>
 
 <sect2 id="makingmostof.mapping.schedules">
-<title>Scheduled transactions</title>
+<title
+>Geplante Buchungen</title>
 
-<para>
-  Where transactions occur on a regular basis, these can be set up against a
-  Schedule. Transactions are created from a schedule; any that are overdue can
-  be seen on the home page.
-</para>
+<para
+>Haben Sie regelmäßig wiederkehrende Buchungen, können Sie dafür geplante Buchungen erstellen. Diese Buchungen werden anhand eines Zahlungsplans ausgeführt. Alle überfälligen Buchungen werden auf der Übersichtsseite angezeigt. </para>
 </sect2>
 </sect1>
 
 <sect1 id="makingmostof.usefultips">
-<title>Useful Tips</title>
+<title
+>Nützliche Tipps</title>
 
-<para>
-  Unless you keep your money under your mattress or under the floorboards, you
-  probably make use of one or more institutions where you have accounts, which
-  may be in credit or debit. In order to familiarize yourself with the way
-  &kmymoney; works, choose an account you want to track with &kmymoney; and
-  select the <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem>
-  </menuchoice> menu item in order to set up an account file.
-</para>
+<para
+>Wenn Sie Ihr Geld nicht unter Ihrer Matratze oder im Sparstrumpf aufbewahren, haben Sie wahrscheinlich einige oder mehrere Banken, bei denen Sie Konten im Guthaben oder im Soll haben. Um mit der Arbeitsweise von &kmymoney; vertraut zu werden, wählen Sie ein Konto, das Sie mit &kmymoney; verwalten möchten und wählen <menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>Neu</guimenuitem
+></menuchoice
+>, um eine neue Kontendatei zu erstellen. </para>
 
-<para>
-  If you have used another personal finance manager, you may be able to import
-  the data from it into &kmymoney;.
-</para>
+<para
+>Haben Sie bereits ein anderes Finanzverwaltungsprogramm benutzt, können Sie möglicherweise die Daten in &kmymoney; importieren. </para>
 
-<para>
-  If you have some regular receipts into or outgoings from this account, go to
-  Payee and enter the names of both the payers and the payees involved; then go
-  to Schedule and fill in a New Schedule for each recurring transaction. If you
-  haven't entered the payee or payer, &kmymoney; will offer you the opportunity
-  to do this in the middle of entering the schedule.
-</para>
+<para
+>Haben Sie einige regelmäßig auszuführende Eingangs- oder Ausgangsbuchungen von diesem Konto, gehen Sie zur Ansicht „Zahlungsempfänger“ und geben Sie die Namen der betroffenen Zahler und Zahlungsempfänger ein. Dann wechseln Sie zur Ansicht „Geplante Buchungen“ und geben Sie für jede wiederkehrende Buchung einen Zahlungsplan ein. Haben Sie bisher noch keinen Zahler und Zahlungsempfänger eingegeben, können Sie diese Angaben während der Eingabe des Zahlungsplans vornehmen. </para>
 
-<para>
-  To add other new transactions go to Ledgers; you can add new payees and
-  categories in the middle of a transaction or by going to Payees or Categories
-  before entering the transaction.
-</para>
+<para
+>Um weitere neue Buchungen einzugeben, verwenden Sie das Kontenbuch. Neue Zahlungsempfänger und Kategorien können Sie bei der Eingabe der  Buchungsdaten oder vor der Buchung auf den Ansichten „Zahlungsempfänger“ und „Kategorien“ hinzufügen. </para>
 
-<para>
-  You will probably find that the default Categories do not exactly match your
-  needs; you can easily delete ones you know you are never going to need and add
-  others that you need. But when you are entering a transaction, you only have
-  to type a few letters of a category and &kmymoney; will offer you a drop down
-  list of the matching categories from which to choose.
-</para>
+<para
+>Möglicherweise passen die Standardkategorien nicht zu Ihren Bedürfnissen. Sie können die Kategorien löschen, die sie wahrscheinlich nie brauchen werden, und beliebige neue Kategorien hinzufügen. Wenn Sie eine Buchung eingeben, müssen Sie nur einige Buchstaben einer Kategorie eingeben. Dann werden alle passenden Kategorien in einem Auswahlfeld angezeigt. </para>
 
-<para>
-  You can add different accounts managed by different institutions; the
-  preferred one will show when you open &kmymoney; but you can quickly switch to
-  any of the others.
-</para>
+<para
+>Sie können mehrere Konten von verschiedenen Banken hinzufügen. Das bevorzugte Konto wird beim Start von &kmymoney; angezeigt. Sie können aber schnell zu anderen Konten wechseln. </para>
 
-<para>
-  When you make a payment, &kmymoney; will work out what the next check number
-  should be; delete this if you are not making a check payment or edit it if
-  the first check you enter is not check number 1. Alternatively, it is
-  possible to switch off auto-increment of check numbers.
-</para>
+<para
+>Wenn Sie Zahlungen ausführen, ermittelt &kmymoney; die nächstfolgende Schecknummer, schalten Sie dies ab, wenn es keine Scheckzahlung ist oder bearbeiten Sie diese Nummer, falls der erste Scheck, den Sie eingeben, nicht die Nummer 1 hat. Außerdem können Sie das automatische Erhöhen der Schecknummern im Einrichtungsdialog abschalten. </para>
 
-<para>
-  Every so often you may get statements of your account from the institutions
-  you use; you can reconcile your &kmymoney; accounts against these statements
-  so that you have an accurate statement of the current state of your finances.
-</para>
+<para
+>Jedesmal wenn Sie Kontoauszüge von den Banken erhalten, können Sie die Konten in &kmymoney; mit diesen Auszügen abgleichen. Dann haben Sie einen korrekten Auszug des aktuellen Status Ihrer Finanzen. </para>
 
-<para>
-  If you go to Reports, you will find several default reports; to customize
-  these, open one similar to the sort you prefer and then select 'New' (not
-  'Copy'); you can then customize this to your needs and mark it as a preferred
-  report if you wish.
-</para>
+<para
+>Auf der Ansicht „Berichte“ finden Sie mehrere Standardvorlagen. Um einen benutzerdefinierten Bericht zu erstellen, öffnen Sie den am besten passenden Bericht aus und wählen dann <guilabel
+>Neu</guilabel
+>, nicht <guilabel
+>Kopieren</guilabel
+>. Passen Sie die Einstellungen diese Berichts an Ihre Bedürfnisse an und markieren Sie ihn gegebenenfalls als bevorzugten Bericht. </para>
 
-<para>
-  Though &kmymoney; is not intended for use in a business context, if you are
-  running a business on your own and so do not need payroll functions, you will
-  probably find that &kmymoney; is sufficiently customizable to meet your needs
-  particularly as it comes with budgeting and forecasting features and you can
-  export your customized reports via CSV into other applications.
-</para>
+<para
+>Obwohl &kmymoney; nicht für die geschäftliche Nutzung entwickelt wurde, kann es unter Umständen für Selbstständige, die keine Gehaltsabrechnung benötigen, benutzt werden. &kmymoney; kann für diese Nutzung angepasst werden, insbesondere da es Funktionen für Budgets und Vorhersagen enthält und der Export von benutzerdefinierten Berichten im CSV-Format an andere Programme möglich ist. </para>
 </sect1>
 </chapter>

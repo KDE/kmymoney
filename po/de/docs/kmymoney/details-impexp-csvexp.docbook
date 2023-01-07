@@ -1,20 +1,28 @@
 <sect1 id="details.impexp.csvexp">
-<title>CSV Exporter</title>
-<para>
-  To export one of your accounts to a CSV file, choose the
-  <menuchoice><guimenu>File</guimenu><guisubmenu>Export</guisubmenu>
-  <guimenuitem>CSV...</guimenuitem></menuchoice> menu item. You will
-  be prompted for some options.
-</para>
+<title
+>CSV-Export</title>
+<para
+>Um ein Konto in eine CSV-Datei zu exportieren, wählen Sie <menuchoice
+><guimenuitem
+>Datei</guimenuitem
+> <guisubmenu
+>Exportieren</guisubmenu
+> <guimenuitem
+>CSV</guimenuitem
+></menuchoice
+> aus dem Menü <guimenu
+>Datei</guimenu
+>. Im Dialog werden dann einige Einstellungen abgefragt. </para>
 
 <para>
   <screenshot>
     <mediaobject>
       <imageobject>
-        <imagedata fileref="csvexport.png" format="PNG" />
+        <imagedata fileref="csvexport.png" format="PNG"/>
       </imageobject>
       <textobject>
-        <phrase>CSV Export</phrase>
+        <phrase
+>CSV-Export</phrase>
       </textobject>
     </mediaobject>
   </screenshot>

@@ -2,437 +2,471 @@
 <chapter id="details.reports">
 <chapterinfo>
   <authorgroup>
-    <author> &Ace.Jones; &Ace.Jones.mail; </author>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
   </authorgroup>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
 </chapterinfo>
 
-<title>Reports</title>
+<title
+>Berichte</title>
 
 <sect1 id="details.reports.avail">
-<title>Available Reports</title>
+<title
+>Verfügbare Berichte</title>
 
 <para>
 <screenshot>
-	<screeninfo>Reports View</screeninfo>
+	<screeninfo
+>Berichts-Ansicht</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="reports_view-all.png" format="PNG" />
+	<imagedata fileref="reports_view-all.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Reports View</phrase>
+	<phrase
+>Berichts-Ansicht</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<para>
-  The Reports View lists all available reports, grouped under the following
-  headings.
-</para>
+<para
+>Die Berichts-Ansicht zeigt alle verfügbaren Berichte, gruppiert nach den folgenden Themenbereichen. </para>
 
 <sect2>
-<title>Income and Expenses</title>
-<para>
-  The reports in this section show your income and expenses either for the
-  current month or for each month in the current year.  Of course, the duration
-  of the overall report and the duration captured by each column can be
-  configured to your liking. Graphs and Pie Charts also may be produced.
-</para>
+<title
+>Einnahmen und Ausgaben</title>
+<para
+>Die Berichte in diesem Abschnitt zeigen Ihre Einnahmen und Ausgaben im aktuellen Monat oder für jeden Monat des laufenden Jahres. Natürlich kann der Zeitraum des gesamten Berichts, sowie der einzelnen Spalten nach Ihren Bedürfnissen angepasst werden. Weiterhin können Sie Diagramme aus Ihren Berichten erzeugen. </para>
 </sect2>
 
 <sect2>
-<title>Net Worth</title>
-<para>
-  Here there are reports that describe your net worth, either at the current
-  moment, every month for the current year, or every year of your history. In
-  addition, there is a 7-day Cash Flow Forecast and a Net Worth Graph.  There
-  are also reports to get the balances for all of your accounts at any given
-  point in time.
-</para>
+<title
+>Eigenkapital</title>
+<para
+>Hier befinden sich die Berichte, die Ihr Eigenkapitel entweder zum aktuellen Zeitpunkt, für jeden Monat des aktuellen Jahres oder für jedes zurückliegende Jahr darstellen. Zusätzlich gibt es eine 7-Tages-Geldfluss-Vorhersage und ein Eigenkapital-Diagramm. Weiterhin gibt es Berichte zu Ihren Kontoständen für alle Ihre Konten zu vorgebbaren Zeitpunkten. </para>
 </sect2>
 
 <sect2>
-<title>Transactions</title>
-<para>
-  This section includes reports that list individual transactions.  This is the
-  best way to print your account register for a specific period of time.  The
-  transactions printed can be grouped together according to your liking by
-  choosing the appropriate report, such as:
-<itemizedlist>
-  <listitem><para>By Account</para></listitem>
-  <listitem><para>By Category</para></listitem>
-  <listitem><para>By Month or Week</para></listitem>
-  <listitem><para>By Payee</para></listitem>
+<title
+>Buchungen</title>
+<para
+>In diesem Bereich finden Sie Berichte, die Ihnen eine Auflistung von Buchungen anzeigen. Dies ist die beste Möglichkeit, Ihr Kontenblatt für einen gewählten Zeitbereich auszudrucken. Die ausgedruckten Buchungen können nach Bedarf gruppiert werden, in dem Sie den entsprechenden Bericht auswählen, wie z. B.: <itemizedlist>
+  <listitem
+><para
+>Nach Konto</para
+></listitem>
+  <listitem
+><para
+>Nach Kategorie</para
+></listitem>
+  <listitem
+><para
+>Nach Monaten oder Wochen</para
+></listitem>
+  <listitem
+><para
+>Nach Zahlungsempfänger</para
+></listitem>
 </itemizedlist>
 </para>
 
 </sect2>
 
 <sect2>
-<title>Cash Flow</title>
-<para>
-  The Cash Flow report is similar to a Transaction report, but it displays all
-  cash-flow related transactions.
-</para>
+<title
+>Geldfluß</title>
+<para
+>Der Geldfluß-Bericht ist identisch mit den Buchungsberichten, nur werden alle Geldfluß-relevanten Buchungen angezeigt. </para>
 </sect2>
 
 <sect2>
-<title>Investments</title>
-<para>
-  These reports help you keep track of your investments.  They only include
-  investment accounts.  There are a variety of presentation filters and styles,
-  as shown in this partial list.
-</para>
+<title
+>Investitionen</title>
+<para
+>Diese Berichte helfen Ihnen dabei, einen Überblick über Ihre Investitionen zu bekommen. Sie berücksichtigen nur Investitions-Konten. Es gibt eine Vielzahl an Darstellungs-Filtern und Erscheinungsbildern, wie z.B.: </para>
 <itemizedlist>
-  <listitem><para>Investment Transactions:  Similar to a Transactions report,
-    and includes the share price and quantities.</para></listitem>
-  <listitem><para>Investment Holdings by Account:  Shows the current shares,
-    price, and value for each account.</para></listitem>
-  <listitem><para>Investment Holdings by Type:  Same as the previous report, but
-    organizes the accounts by type (Stock, Mutual Fund, &etc;)</para></listitem>
-  <listitem><para>Investment Performance by Account: Shows the annualized
-    performance over any period of time.  This performs a cash flow analysis of
-    all money coming into and going out of the account.  As a result, this is a
-    very accurate picture of how well your investments are
-    doing.</para></listitem>
-  <listitem><para>Investment Performance by Type:  Same as the previous report,
-    but organizes the accounts by type (Stock, Mutual Fund,
-    &etc;)</para></listitem>
+  <listitem
+><para
+>Investitions-Buchungen: Identisch wie ein Buchungsreport. Er enthält die Aktienpreise und Anzahl.</para
+></listitem>
+  <listitem
+><para
+>Investitionen nach Konten: Zeigt die aktuellen Aktien, Preise und Werte für jedes Konto.</para
+></listitem>
+  <listitem
+><para
+>Investitionen nach Typen: wie der vorherige Bericht, nur werden die Konten nach Typ gruppiert (Aktiendepot, Fonds, &etc;)</para
+></listitem>
+  <listitem
+><para
+>Investitionsentwicklung nach Konten: Zeigt die jährliche Performance für einen beliebig wählbaren Zeitbereich. Dies ermöglicht eine Geldflußanalyse des gesamten eingehenden und ausgehenden Geldes des Kontos. Hieraus ergibt sich ein sehr akkurates Bild, wie profitabel Ihre Investitionen sind.</para
+></listitem>
+  <listitem
+><para
+>Investitionsentwicklung nach Typen: wie der vorherige Bericht, nur werden die Konten nach Typ gruppiert (Aktiendepot, Fonds, &etc;)</para
+></listitem>
 </itemizedlist>
 
-<para>
-  There are also graphs for Investment Prices and Investment Worth.
-</para>
+<para
+>Es gibt außerdem Diagramme für Preis und Wert von Investitionen. </para>
 </sect2>
 
 <sect2>
-<title>Taxes</title>
-<para>
-  The tax reports are just like the transactions reports, with the addition that
-  only Tax related categories are included.  This allows you to flag certain
-  categories as being tax-related, and then get one big report at the end of the
-  year to see them all in one place. They may be listed either by Category or by
-  Payee, and for the last fiscal year.
-</para>
+<title
+>Steuern</title>
+<para
+>Die Steuer-Berichte sind wie die Buchungsberichte, wobei hier aber nur steuerrelevante Kategorien berücksichtigt werden. Dies erlaubt Ihnen, bestimmte Kategorien als steuerrelevant zu kennzeichnen, um dann am Jahresende einen großen Bericht mit allen steuerrelevanten Buchungen zu erhalten. Sie können entweder nach Kategorie oder Zahlungsempfänger gruppiert und für das vergangene Geschäftsjahr angezeigt werden. </para>
 </sect2>
 
 <sect2>
-<title>Budgeting</title>
-<para>
-  The budgeting reports are similar to net worth reports, but the reports can
-  display the budget for a given year, or even compare it to the actual income
-  and expenses for the same period.
-</para>
+<title
+>Budgetierung</title>
+<para
+>Die Budgetberichte sind ähnlich wie die Eigenkapitalberichte, allerdings können hier die Budgets für ein vorgegebenes Jahr, oder auch ein Vergleich zwischen Einnahmen und Ausgaben im gleichen Zeitbereich angezeigt werden. </para>
 </sect2>
 
 <sect2>
-<title>Forecast</title>
-<para>
-  The forecast reports are just like the net worth reports, but they use the
-  information to display forecast information.  You can display the information
-  at various levels and for the time frame of your choosing.
-</para>
+<title
+>Vorhersage</title>
+<para
+>Die Vorhersageberichte sind ähnlich wie die Eigenkapitalberichte, es werden allerdings Vorhersagen angezeigt. Sie können diese Berichte in verschiedenen Ebenen und Zeitabschnitten erzeugen. </para>
 </sect2>
 
 <sect2>
-<title>Information</title>
-<para>
-  These reports display non-transaction information about schedules, accounts,
-  and loans.
-</para>
+<title
+>Information</title>
+<para
+>Diese Berichte zeigen nicht buchungsbezogene Informationen über geplante Buchungen, Konten und Kredite. </para>
 </sect2>
 
 <sect2>
-<title>Charts</title>
-<para>
-  If <link linkend="details.reports.charts">Charts</link> are enabled, this
-  section lists all the reports which are marked to display a graphical chart as
-  the default.  They are also listed in one of the other sections, but they are
-  also aggregated here for your easy reference.
-</para>
+<title
+>Diagramme</title>
+<para
+>Wenn <link linkend="details.reports.charts"
+>Diagramme</link
+> aktiviert sind, zeigt Ihnen dieser Abschnitt eine Liste aller Berichte, die standardmäßig eine Grafik erzeugen. Sie weiterhin zusätzlich in einer der anderen Rubriken dargestellt und sind hier zusätzlich an zentraler Stelle zu finden, den Zugriff zu erleichtern. </para>
 </sect2>
 
 <sect2>
-<title>Favorite Reports</title>
-<para>
-  This section lists all the reports you have marked as a favorite in the report
-  configuration dialog.  They are still listed in one of the other sections, but
-  they are also aggregated here for your easy reference.  Favorite reports are
-  also included on the financial summary page for even easier reference.
-</para>
+<title
+>Bevorzugte Berichte</title>
+<para
+>In dieser Rubrik werden alle Berichte aufgelistet, die Sie im Einrichtungsdialog eines Berichtes als bevorzugt gekennzeichnet habe. Sie werden weiterhin in einer der anderen Rubriken gelistet, sind aber hier zusätzlich an zentraler Stelle zusammengefasst, um sie schneller zu finden. Bevorzugte Berichte werden auch in der Finanzübersichtsseite angezeigt, um sie schnell erreichen zu können. </para>
 </sect2>
 
 <sect2>
-<title>Configuring Reports</title>
-<para>
-  To access the report configuration dialog, bring up the report you wish to
-  configure, and press the <guibutton>Configure</guibutton> button at the top of
-  the report.
-</para>
+<title
+>Berichte einrichten</title>
+<para
+>Um den Einrichtungsdialog zu erreichen, öffnen Sie den gewünschten Bericht und drücken Sie den Knopf <guibutton
+>Einrichten</guibutton
+> im oberen Bereich des Berichts. </para>
 </sect2>
 
 </sect1>
 
 <sect1 id="details.reports.working">
-<title>Working With Reports</title>
+<title
+>Arbeiten mit Berichten</title>
 
-<para>
-  There are a number of actions you can take on each report.  You can access
-  these by right-clicking the report name in the list of reports.  Alternately,
-  once you have run a report, there are buttons across the top of the view to
-  invoke each of these:
-</para>
+<para
+>Sie können einige Aktionen auf jeden Bericht anwenden. Durch einen rechten Mausklick auf den Namen des Berichts in der Berichtsliste können Sie die gewünschte Aktion auswählen. Alternativ dazu finden Sie entsprechende Aktionsknöpfe auch im oberen Bereich des Anzeigefensters, wenn Sie einen Bericht geöffnet haben: </para>
 
 <itemizedlist>
-  <listitem><para>Chart: Only present if the report is capable of displaying a
-    chart. Clicking this option toggles between the report and the
-    chart.</para></listitem>
-  <listitem><para>Configure: Change the properties of this report. You can
-    customize the report to your liking and save it for future
-    use.</para></listitem>
-  <listitem><para>New: Create a new customized report based on the selected
-    report.</para></listitem>
-  <listitem><para>Copy: The report output can be copied to the clipboard to
-    paste them in another application, like a spreadsheet, for further
-    analysis.</para></listitem>
-  <listitem><para>Export: Reports can be saved in &HTML; or CSV
-    format.</para></listitem>
-  <listitem><para>Delete: Customized reports can be deleted.  The default
-    reports that ship with &kmymoney; cannot be deleted.</para></listitem>
-  <listitem><para>Close: Close the current report.</para></listitem>
+  <listitem
+><para
+>Diagramm: ist nur zu sehen, wenn der Bericht als Diagramm angezeigt werden kann. Durch Klicken auf diesen Knopf wechseln Sie zwischen der Diagramm- und der Berichtsansicht.</para
+></listitem>
+  <listitem
+><para
+>Einrichten: Ändern der Einstellungen für diesen Bericht. Sie können den Bericht nach Ihren Wünschen anpassen und für den späteren Gebrauch auch abspeichern.</para
+></listitem>
+  <listitem
+><para
+>Neu: erzeugt einen neuen benutzerdefinierten Bericht auf Basis des ausgewählten Berichts.</para
+></listitem>
+  <listitem
+><para
+>Kopieren: kopiert die Ausgabe des Berichts in die Zwischenablage, um sie in einer anderen Anwendung wie einer Tabellenkalkulation für weitere Analysen einzufügen.</para
+></listitem>
+  <listitem
+><para
+>Exportieren: Berichte können im &HTML; oder CSV-Format abgespeichert werden.</para
+></listitem>
+  <listitem
+><para
+>Löschen: Benutzerdefinierte Berichte können gelöscht werden. Die standardmäßigen Berichte, die mit &kmymoney; mitgeliefert werden, können nicht gelöscht werden.</para
+></listitem>
+  <listitem
+><para
+>Schließen: Schließt den aktuellen Bericht.</para
+></listitem>
 </itemizedlist>
 </sect1>
 
 <sect1 id="details.reports.config">
-<title>Configuring Reports</title>
+<title
+>Berichte einrichten</title>
 
 <sect2>
-<title>Working with custom reports</title>
-<para>
-  You can configure the default reports or create your own from them by
-  selecting 'New' and then configuring the new report. When you select
-  'Configure' you will be presented with the Report Tab. Initially, it is named
-  the same as the old report with <quote>(Customized)</quote> added to the end. You
-  can change the name to whatever you want.  You can even name your custom
-  reports the same as a default report, or the same as another custom
-  report. Also, you can always use the Comment field to further distinguish
-  reports.
-</para>
+<title
+>Arbeiten mit benutzerdefinierten Berichten</title>
+<para
+>Sie können die Standardberichte anpassen, oder Ihren eigenen aus diesen erzeugen, indem Sie den Knopf <guibutton
+>Neu</guibutton
+> betätigen und den neu erzeugten Bericht dann anpassen. Durch den Knopf <guibutton
+>Einrichten</guibutton
+> gelangen Sie in den Einrichtungsdialog. Standardmäßig wird der neue Bericht benannt wie der alte, auf dem er beruht. Dem Namen wird das Kennzeichen <quote
+>(Angepasst)</quote
+> am Ende des Berichtsnamens hinzugefügt. Sie können den Namen beliebig ändern. Sie können ihm den gleichen Namen wie ein Standardbericht geben, oder den gleichen Namen wie ein anderer benutzerdefinierter Bericht. Weiterhin können Sie im Kommentar-Feld weitere Informationen hinterlegen, um die Berichte voneinander unterscheiden zu können. </para>
 
-<para>
-  The Report Configuration dialog has a number of tabs across the top.  Each tab
-  displays options for configuring different aspects of the report.
-</para>
+<para
+>Der Einstellungsdialog für Berichte besitzt mehrere Karteikarten. Jede Karteikarte zeigt Optionen, um verschiedene Einstellungen des Berichts vorzunehmen. </para>
 
 </sect2>
 
-<sect2><title>Report Tab</title>
+<sect2
+><title
+>Karteikarte "Bericht"</title>
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="report_configuration-reporttab.png" format="PNG" />
+	<imagedata fileref="report_configuration-reporttab.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Report Configuration -Report</phrase>
+	<phrase
+>Einstellungen für Berichte - Bericht</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para>
-  On this tab, you set the basic properties of this report.
-<itemizedlist>
-  <listitem><para>Report Name: Choose a name for this report.</para></listitem>
-  <listitem><para>Comment: Enter a comment to help you remember the details of
-    this report.</para></listitem>
-  <listitem><para>Convert values to base currency: Select this option to convert
-    all values in the report to your base currency. Leave it unchecked if you'd
-    like to see values in their original currency. If currencies are not
-    converted, then subtotals will not be shown.</para></listitem>
-  <listitem><para>Mark as favorite report: Check this to cause this report to
-    show up on the home page and in the group of <guilabel>Favorite
-    Reports</guilabel>.</para></listitem>
+<para
+>Auf dieser Karteikarte nehmen Sie die grundlegenden Einstellungen des Berichts vor. <itemizedlist>
+  <listitem
+><para
+>Berichtsname: Geben Sie dem Bericht einen Namen.</para
+></listitem>
+  <listitem
+><para
+>Kommentar: Hier können Sie weitere Informationen zum Bericht hinterlegen.</para
+></listitem>
+  <listitem
+><para
+>Werte in die Basiswährung umrechnen: Mit dieser Option werden alle Werte des Berichts in Ihre Basiswährung umgerechnet. Deaktivieren Sie diese Option, wenn Sie die Werte in ihrer Originalwährung sehen möchten. Werden die Währungen nicht umgerechnet, wird keine Gesamtsumme angezeigt.</para
+></listitem>
+  <listitem
+><para
+>Als bevorzugten Bericht markieren: Wenn diese Option angekreuzt wird, so taucht der Bericht sowohl auf der Übersichtsseite von &kappname;, als auch in der Gruppe <guilabel
+>Bevorzugte Berichte</guilabel
+> auf.</para
+></listitem>
 </itemizedlist>
 </para>
 
 </sect2>
 
 <sect2 id="details.reports.config.rowscolumns">
-<title>Rows/Columns Tab</title>
-<para>
-  On this tab, you configure how you would like the rows and columns to be selected
-  and organized.  This tab presents different configuration options depending on
-  the style of report you have selected.
-</para>
+<title
+>Karteikarte "Zeilen/Spalten"</title>
+<para
+>Hier können Sie einstellen, wie die Zeilen und Spalten im Bericht ausgewählt und organisiert werden. Abhängig von der Berichtsart können hier verschiedene Einstellungen vorgenommen werden. </para>
 
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="report_configuration-rowscolumns.png" format="PNG" />
+	<imagedata fileref="report_configuration-rowscolumns.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Report Configuration -Rows and Columns</phrase>
+	<phrase
+>Einstellungen für Berichte - Zeilen und Spalten</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para>
-  For income/expense and net worth reports:
-<itemizedlist>
-  <listitem><para>Columns: Choose how large of a time period each column should
-    encompass</para></listitem>
-  <listitem><para>Rows: Choose what kind of accounts to display as the rows of
-    this report</para></listitem>
-  <listitem><para>Detail: Choose the level of detail required for this
-    report.</para></listitem>
+<para
+>Bei Einnahmen/Ausgaben- und Geldflussberichten: <itemizedlist>
+  <listitem
+><para
+>Spalten: Wählen Sie aus, wie groß die Zeitperiode ist, die jede Spalte umfassen soll</para
+></listitem>
+  <listitem
+><para
+>Zeilen: Wählen Sie die Kontenarten aus, die in den Zeilen des Berichts erscheinen sollen</para
+></listitem>
+  <listitem
+><para
+>Details: Wählen Sie den Detaillierungsgrad des Berichts aus.</para
+></listitem>
 </itemizedlist>
 </para>
 
-<para>The following levels of detail are available:
-<itemizedlist>
-  <listitem><para>All: Show every category or account.</para></listitem>
-  <listitem><para>Top-Level: Show only the highest-level categories or accounts,
-    and roll up the sums of the subordinates categories or accounts into those
-    values.</para></listitem>
-  <listitem><para>Groups: Show only the totals of the income, expenses, assets,
-    or liabilities.</para></listitem>
-  <listitem><para>Total: Show only the grand totals line.</para></listitem>
+<para
+>Folgende Detaillierungsgrade sind verfügbar: <itemizedlist>
+  <listitem
+><para
+>Alle: Zeigt jede Kategorie, bzw. jedes Konto.</para
+></listitem>
+  <listitem
+><para
+>Oberstes Level: Zeigt nur die obersten Kategorie- oder Kontenebene an und summiert die darunterliegenden Kategorien bzw. Konten auf.</para
+></listitem>
+  <listitem
+><para
+>Gruppen: Zeigt nur die Gesamtsummen der Einnahmen, Ausgaben, Anlagen oder Verbindlichkeiten.</para
+></listitem>
+  <listitem
+><para
+>Summen: Zeigt nur die Zeile mit den Gesamtsummen.</para
+></listitem>
 </itemizedlist>
 </para>
 
-<para>
-  For transaction reports:
-<itemizedlist>
-  <listitem><para>Organize by: Choose how to group the transactions in this
-    report.</para></listitem>
-  <listitem><para>Show Columns: Choose which columns should be shown in the
-    report. The date and transaction amount are always shown.</para></listitem>
-  <listitem><para>Include only Tax Categories: Only show categories which have
-    been marked as tax-related.</para></listitem>
-  <listitem><para>Include only Investment Accounts: Only show transactions from
-    investment accounts.</para></listitem>
-  <listitem><para>Include only Loan Accounts: Only show transactions from loan
-    accounts.</para></listitem>
+<para
+>Bei Buchungsberichten: <itemizedlist>
+  <listitem
+><para
+>Organisiert nach: Wählen Sie aus, wie die Buchungen in diesem Bericht gruppiert werden sollen.</para
+></listitem>
+  <listitem
+><para
+>Spalten anzeigen: Kreuzen Sie die Spalten an, die im Bericht erscheinen sollen. Das Datum und der Wert der Buchung werden immer angezeigt.</para
+></listitem>
+  <listitem
+><para
+>Nur Steuerkategorien einschließen: Zeigt nur die Kategorien, die als steuerrelevant markiert wurden.</para
+></listitem>
+  <listitem
+><para
+>Nur Investmentkonten einschließen: Zeigt nur Buchungen von Anlagekonten an.</para
+></listitem>
+  <listitem
+><para
+>Nur Kreditkonten einschließen: Zeigt nur Buchungen aus Kreditkonten an.</para
+></listitem>
 </itemizedlist>
 </para>
 
 </sect2>
 
 <sect2>
-<title>Chart Tab</title>
+<title
+>Karteikarte „Diagramm“</title>
 
-<para>
-  This tab allows you to configure what the report should look like when it is
-  displayed as a chart.  See the <link linkend="details.reports.charts">Graphs
-  &amp; Charts</link> section for more explanation of the charting functions.
-<itemizedlist>
-  <listitem><para>Chart Type: The visual format of chart
-    desired.</para></listitem>
-  <listitem><para>Show grid lines: Whether to print horizontal and vertical grid
-    lines on the chart.</para></listitem>
-  <listitem><para>Draw values on chart: Whether to print the data values on the
-    chart itself for chosen data points.</para></listitem>
-  <listitem><para>Show chart by default: Whether this report should first be
-    displayed as a chart when it's opened.</para></listitem>
-  <listitem><para>Line width: The width of data lines on the
-    chart.</para></listitem>
+<para
+>Hier können Sie einstellen, wie der Bericht aussehen soll, wenn er als Diagramm angezeigt wird. Eine nähere Erläuterung der Diagrammfunktionen finden Sie im Kapitel <link linkend="details.reports.charts"
+>Grafiken &amp; Diagramme</link
+>. <itemizedlist>
+  <listitem
+><para
+>Diagrammtyp: Wählen Sie hier, welche Art von Diagramm der Bericht zeigen soll (Linien-, Balken-, Tortendiagramm, etc.).</para
+></listitem>
+  <listitem
+><para
+>Gitterlinien anzeigen: Auswahl, ob die horizontalen und vertikalen Gitterlinien im Diagramm angezeigt werden.</para
+></listitem>
+  <listitem
+><para
+>Werte im Diagramm anzeigen: Ist die Option angekreuzt, werden die Werte für die gewählten Datenpunkte im Diagramm selbst angezeigt.</para
+></listitem>
+  <listitem
+><para
+>Standardmäßig als Diagramm zeigen: Beim Öffnen des Berichts wird sofort ein Diagramm angezeigt.</para
+></listitem>
+  <listitem
+><para
+>Linienbreite: Die Breite der gezeichneten Linien im Diagramm.</para
+></listitem>
 </itemizedlist>
 </para>
 
 </sect2>
 
 <sect2>
-<title>Other Tabs</title>
-<para>
-  The other tabs in this dialog are the same as in the Search Transactions
-  interface.  Please refer to
-  the <link linkend="details.search">documentation</link> on that interface for
-  details on the other tabs.</para>
+<title
+>Andere Karteikarten</title>
+<para
+>Die anderen Unterfenster in diesem Dialog sind die gleichen wie im Suchformular für Buchungen. Bitte schauen Sie in das <link linkend="details.search"
+>Kapitel</link
+> für weitere Informationen.</para>
 </sect2>
 
 </sect1>
 
 <sect1 id="details.reports.charts">
-<title>Graphs &amp; Charts</title>
+<title
+>Grafiken &amp; Diagramme</title>
 
 <sect2>
-<title>Viewing as a Chart</title>
+<title
+>Anzeige als Diagramm</title>
 
-<para>
-  Each report can be viewed in either textual form or graphical (chart) form.
-  The same report configuration parameters are used in either case.  You can
-  easily jump back and forth between the textual and graphical forms by pressing
-  the <guibutton>Chart</guibutton> or <guibutton>Report</guibutton> buttons
-  along the top of the report view.
-</para>
+<para
+>Jeder Bericht kann entweder in Textform oder in grafischer Form als Diagramm betrachtet werden. Für beide Darstellungsvarianten werden die gleichen Berichtkonfigurationen verwendet. Sie können ganz einfach zwischen beiden Darstellungsformen wechseln, indem Sie den Knopf <guibutton
+>Diagramm</guibutton
+> oder <guibutton
+>Bericht</guibutton
+> am oberen Rand des Fensters drücken. </para>
 
-<para>
-  Care should be taken to limit the amount of data you choose to display on a
-  chart. If you are not careful, using the same configuration for both textual
-  and graphical forms means it's possible to configure a chart to be visually
-  cluttered, unappealing, and uninformative. &kmymoney; will not force you to
-  keep your charts readable and useful!
-</para>
+<para
+>Sie sollten auf die Menge der in Ihrem Diagramm anzuzeigenden Daten achten. Wenn Sie nicht entsprechend umsichtig sind und die gleiche Konfiguration für die Text- und Diagrammdarstellung verwenden, kann es passieren, dass das angezeigte Diagramm unaufgeräumt, unansehnlich und wenig informativ wird. &kmymoney; kann Sie nicht zwingen, dass die Diagramme les- und brauchbar bleiben. </para>
 
 </sect2>
 
 <sect2>
-<title>Available Chart Types</title>
+<title
+>Verfügbare Diagrammtypen</title>
 
 <sect3>
-<title>Line Graph</title>
+<title
+>Liniendiagramm</title>
 
-<para>
-  A line graph is one of the most simple forms of a chart.  There is one line
-  for each series. (Usually a series is a single account or category; see below
-  for more details on that.) The time periods stretch out along the bottom axis,
-  and the currency values are along the left.
-</para>
+<para
+>Ein Liniendiagramm ist eines der einfachsten Arten eines Diagramms. Es gibt für jede Datenreihe eine Linie. Normalerweise ist eine Datenreihe ein einzelnes Konto oder eine Kategorie; weiter unten finden Sie weitere Informationen darüber. Die Zeitperiode erstreckt sich über die horizontale Achse (X-Achse), die Werte über die vertikale Achse (Y-Achse) auf der linken Seite. </para>
 
-<para>
-  The detail level for each line is controlled in the <link
-  linkend="details.reports.config.rowscolumns">Rows/Columns</link> Tab of chart
-  configuration.  If you choose the <quote>Top-Level</quote> detail level, there
-  will be one line for each of the top-most accounts or categories which show
-  the sum total of all underlying accounts or categories.  If you choose
-  <quote>Groups</quote> it will instead show one line each for Income, Expenses,
-  Assets, or Liabilities, depending on the other settings.
-</para>
+<para
+>Der Detaillierungsgrad für jede Zeile wird im Unterfenster <link linkend="details.reports.config.rowscolumns"
+>Zeilen/Spalten</link
+> der Berichtskonfiguration festgelegt. Wenn Sie dort <quote
+>Oberstes Level</quote
+> auswählen, wird für jedes Konto auf der obersten Ebene eine Linie dargestellt und zeigt die Gesamtsumme aller darunterliegenden Kategorien oder Konten. Wenn Sie stattdessen  <quote
+>Gruppen</quote
+> auswählen, wird das Diagramm jeweils eine Linie für Einnahmen, Ausgaben, Anlagen und Verbindlichkeiten (abhängig von den anderen Einstellungen) anzeigen. </para>
 </sect3>
 
 <sect3>
-<title>Bar Graph</title>
+<title
+>Balkendiagramm</title>
 
-<para>
-  The bar graph works exactly the same as the line graph, except there is one
-  bar for each series in each time slice.
-</para>
+<para
+>Das Balkendiagramm arbeitet exakt so wie das Liniendiagramm, außer dass es einen Balken für jede Datenreihe pro Zeitabschnitt gibt. </para>
 </sect3>
 
 <sect3>
-<title>Pie Chart</title>
+<title
+>Tortendiagramm</title>
 
-<para>
-  The pie chart is the most simple chart available.  It shows only one time
-  slice, as opposed to showing the values across time.  This chart shows only
-  the totals column of whatever report is selected.  If your report is
-  configured to NOT convert values to the base currency, there will be no totals
-  column, and therefore this report is not useful.
-</para>
+<para
+>Das Tortendiagramm ist das einfachste verfügbare Diagramm. Es zeigt nur einen einzigen Zeitabschnitt, anstatt die Werte über einen Zeitbereich anzuzeigen. Dieser Bericht zeigt nur die Gesamtsummen eines beliebigen ausgewählten Berichts. Wenn Ihr Bericht so konfiguriert wurde, dass die Währungen nicht in die Basiswährung umgerechnet werden, dann werden keine Gesamtsummen berechnet und somit ist dieser Bericht wenig hilfreich. </para>
 </sect3>
 
 <sect3>
-<title>Ring Chart</title>
+<title
+>Ringdiagramm</title>
 
-<para>
-  The ring chart is very similar to a pie chart, except there is one
-  <quote>ring</quote> for each time slice in the report.
-</para>
+<para
+>Ein Ringdiagramm ist dem Tortendiagramm sehr ähnlich, außer dass jeder <quote
+>Ring</quote
+> einen Zeitbereich im Bericht repräsentiert. </para>
 </sect3>
 
 </sect2>

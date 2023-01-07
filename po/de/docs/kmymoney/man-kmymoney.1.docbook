@@ -1,189 +1,310 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-<!ENTITY % English "INCLUDE">
+<!ENTITY % German "INCLUDE">
 ]>
 
 <refentry lang="&language;">
 <refentryinfo>
 
-<author>
-  <firstname>Michael</firstname><othername>T.</othername><surname>Edwardes</surname>
-  <contrib>Original concept, much initial source code.  Project administration</contrib>
-  <email>mte@users.sourceforge.net</email>
-</author>
+<author
+><firstname
+>Michael</firstname
+><othername
+>T.</othername
+><surname
+>Edwardes</surname
+> <contrib
+>Ursprüngliche Idee, viel ursprünglicher Quellcode, Projektverwalter</contrib
+><email
+>mte@users.sourceforge.net</email
+> </author>
 
-<author>
-  <firstname>Thomas</firstname><surname>Baumgart</surname>
-  <contrib>Release manager and de-facto Maintainer.  Core engine.  Project administration</contrib>
-  <email>ipwizard@users.sourceforge.net</email>
-</author>
+<author
+><firstname
+>Thomas</firstname
+><surname
+>Baumgart</surname
+> <contrib
+>Release-Manager und aktueller Betreuer. Kernmodul. Projektverwalter</contrib
+><email
+>ipwizard@users.sourceforge.net</email
+> </author>
 
-<author>
-  <firstname>Tony</firstname><surname>Bloomfield</surname>
-  <contrib>GnuCash Importer.  Database support.</contrib>
-  <email>tonybloom@users.sourceforge.net</email>
-</author>
+<author
+><firstname
+>Tony</firstname
+><surname
+>Bloomfield</surname
+><contrib
+>GnuCash-Import. Datenbank-Unterstützung</contrib
+><email
+>tonybloom@users.sourceforge.net</email
+> </author>
 
-<author>
-  <firstname>Robert</firstname><surname>Wadley</surname>
-  <contrib>Artist.  Icons, splash screen, home view.  Screenshots.</contrib>
-  <email>robntina@users.sourceforge.net</email>
-</author>
+<author
+><firstname
+>Robert</firstname
+><surname
+>Wadley</surname
+> <contrib
+>Künstler. Symbole, Startbildschirm, Bildschirmfotos</contrib
+><email
+>robntina@users.sourceforge.net</email
+> </author>
 
-<author>
-  <firstname>Alvaro</firstname><surname>Soliverez</surname>
-  <contrib>Forecast.  Reports.</contrib>
-  <email>asoliverez@users.sourceforge.net</email>
-</author>
+<author
+><firstname
+>Alvaro</firstname
+><surname
+>Soliverez</surname
+><contrib
+>Vorhersagen und Berichte</contrib
+><email
+>asoliverez@users.sourceforge.net</email
+> </author>
 
-<author>
-  <firstname>Fernando</firstname><surname>Vilas</surname>
-  <contrib>Database support.</contrib>
-  <email>fvilas@users.sourceforge.net</email>
-</author>
+<author
+><firstname
+>Fernando</firstname
+><surname
+>Vilas</surname
+> <contrib
+>Datenbankunterstützung</contrib
+><email
+>fvilas@users.sourceforge.net</email
+> </author>
 
-<author>
-  <firstname>Cristian</firstname><surname>Oneț</surname>
-  <contrib>Patches and plugins.</contrib>
-  <email>onet.cristian@gmail.com</email>
-</author>
+<author
+><firstname
+>Cristian</firstname
+><surname
+>Oneț</surname
+> <contrib
+>Fehlerberichtigungen und Module</contrib
+><email
+>onet.cristian@gmail.com</email
+> </author>
 
-<author>
-  <firstname>Jack</firstname><othername>H.</othername><surname>Ostroff</surname>
-  <contrib>Documentation.</contrib>
-  <email>ostroffjh@users.sourceforge.net</email>
-</author>
+<author
+><firstname
+>Jack</firstname
+><othername
+>H.</othername
+><surname
+>Ostroff</surname
+> <contrib
+>Dokumentation</contrib
+><email
+>ostroffjh@users.sourceforge.net</email
+> </author>
 
-<author>
-  <firstname>Felix</firstname><surname>Rodriguez</surname>
-  <contrib>Project administration, previous versions.</contrib>
-  <email>frodriguez@users.sourceforge.net</email>
-</author>
+<author
+><firstname
+>Felix</firstname
+><surname
+>Rodriguez</surname
+> <contrib
+>Projektverwalter, Mitarbeit bei den ersten Versionen</contrib
+><email
+>frodriguez@users.sourceforge.net</email
+> </author>
 
-<author>
-  <firstname>Kevin</firstname><surname>Tambascio</surname>
-  <contrib>Initial investment support.</contrib>
-  <email>ktambascio@users.sourceforge.net</email>
-</author>
+<author
+><firstname
+>Kevin</firstname
+><surname
+>Tambascio</surname
+> <contrib
+>Ursprüngliche Unterstützung für Investitionen</contrib
+> <email
+>ktambascio@users.sourceforge.net</email
+> </author>
 
 <!-- This person was previously listed as an author here, but is not currently
      included in credits.docbook.  He should either be dropped from here or
      included there.
 
-    <author><firstname>Arni</firstname><surname>Ingimundarson</surname>
-    <contrib>Developer, previous versions.</contrib>
-    <email>arniing@users.sourceforge.net</email></author>
+    <author
+><firstname
+>Arni</firstname
+><surname
+>Ingimundarson</surname>
+    <contrib
+>Developer, previous versions.</contrib>
+    <email
+>arniing@users.sourceforge.net</email
+></author>
 
     These persons were not previously listed as authors here, but are included
     in credits.docbook.  They should either be dropped from there or included
     here.
 
-    <author><firstname>Ace</firstname><surname>Jones</surname>
-    <contrib>Reports.  OFX Import.  Online Quotes.  Documentatation.  Previous versions.</contrib>
-    <email>acejones@users.sourceforge.net</email></author>
+    <author
+><firstname
+>Ace</firstname
+><surname
+>Jones</surname>
+    <contrib
+>Reports.  OFX Import.  Online Quotes.  Documentatation.  Previous versions.</contrib>
+    <email
+>acejones@users.sourceforge.net</email
+></author>
 
-    <author><firstname>John</firstname><surname>C</surname>
-    <contrib>Developer, previous versions.</contrib>
-    <email>tacoturtle@users.sourceforge.net</email></author>
+    <author
+><firstname
+>John</firstname
+><surname
+>C</surname>
+    <contrib
+>Developer, previous versions.</contrib>
+    <email
+>tacoturtle@users.sourceforge.net</email
+></author>
 
     There are eight additional people in credits.docbook for "Special Thanks."
     Should any of them be included here?  -->
-<date>2016-06-17</date>
-<releaseinfo>KMyMoney 5.0</releaseinfo>
+<date
+>2016-06-17</date>
+<releaseinfo
+>KMyMoney 5.0</releaseinfo>
 </refentryinfo>
 
 <refmeta>
-<refentrytitle><command>kmymoney</command></refentrytitle>
-<manvolnum>1</manvolnum>
-<refmiscinfo class="source">&kmymoney;</refmiscinfo>
-<refmiscinfo class="manual">Executable programs</refmiscinfo>
+<refentrytitle
+><command
+>kmymoney</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+<refmiscinfo class="source"
+>&kmymoney;</refmiscinfo>
+<refmiscinfo class="manual"
+>Ausführbare Programme</refmiscinfo>
 </refmeta>
 
 <refnamediv>
-<refname><command>kmymoney</command></refname>
-<refpurpose>the personal finances manager by &kde;</refpurpose>
+<refname
+><command
+>kmymoney</command
+></refname>
+<refpurpose
+>Die persönliche Finanzverwaltung von &kde;</refpurpose>
 </refnamediv>
 
 <refsynopsisdiv>
-<cmdsynopsis>
-<command>kmymoney</command>
-<group choice="opt"><option>--lang</option></group>
-<group choice="opt"><option>-n</option></group>
-<group choice="opt"><option>--timers</option>
-<replaceable> column</replaceable></group>
-<group choice="opt"><option>--nocatch</option></group>
-<group choice="opt"><option>--trace</option></group>
-<group choice="opt"><option><replaceable>file</replaceable></option></group>
-</cmdsynopsis>
+<cmdsynopsis
+><command
+>kmymoney</command
+> <group choice="opt"
+><option
+>--lang</option
+></group
+> <group choice="opt"
+><option
+>-n</option
+></group
+> <group choice="opt"
+><option
+>--timers</option
+> <replaceable
+> column</replaceable
+></group
+> <group choice="opt"
+><option
+>--nocatch</option
+></group
+> <group choice="opt"
+><option
+>--trace</option
+></group
+> <group choice="opt"
+><option
+><replaceable
+>file</replaceable
+></option
+></group
+> </cmdsynopsis>
 
 </refsynopsisdiv>
 
 <refsect1>
-<title>Description</title>
+<title
+>Beschreibung</title>
 
-<para>&kmymoney; is the Personal Finance Manager by &kde;.  It
-provides the functions required to balance your checkbooks, manage your personal
-loans and categories your incomes and expenses using a checkbook style graphical
-user interface.</para>
+<para
+>&kmymoney; ist die persönliche Finanzverwaltung von KDE. Das Programm bietet alle nötigen Funktionen, um Ihre Scheckhefte abzugleichen, Ihre persönlichen Kredite und Ihre Ein und Ausgaben zu verwalten. Dazu stellt das Programm eine grafische Oberfläche im Stil eines Scheckhefts zu Verfügung.</para>
 
 </refsect1>
 
 <refsect1>
-<title>Options</title>
+<title
+>Optionen</title>
 
 <variablelist>
 
 <varlistentry>
-<term><option>--lang</option></term>
+<term
+><option
+>--lang</option
+></term>
 <listitem>
-<para>
-Language to be used
-</para>
+<para
+>Zu verwendende Sprache </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>-n</option></term>
+<term
+><option
+>-n</option
+></term>
 <listitem>
-<para>
-Do not open last used file
-</para>
+<para
+>Zuletzt benutzte Datei nicht öffnen </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--timers</option></term>
+<term
+><option
+>--timers</option
+></term>
 <listitem>
-<para>
-Enable performance timers
-</para>
+<para
+>Performance-Timer erlauben </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--nocatch</option></term>
+<term
+><option
+>--nocatch</option
+></term>
 <listitem>
-<para>
-Do not globally catch uncaught exceptions
-</para>
+<para
+>Unbehandelte Ausnahmen nicht global abfangen </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--trace</option></term>
+<term
+><option
+>--trace</option
+></term>
 <listitem>
-<para>
-Turn on program traces. This option is only available when &kmymoney; is compiled in debug mode.
-</para>
+<para
+>Programm-Ablaufverfolgung einschalten. Diese Option ist nur verfügbar, wenn &kmymoney; im Debug-Modus kompiliert wurde. </para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--dump-actions</option></term>
+<term
+><option
+>--dump-actions</option
+></term>
 <listitem>
-<para>
-Dump the names of all defined QAction objects to stdout and quit. This option is only available when &kmymoney; is compiled in debug mode.
-</para>
+<para
+>Die Namen aller definierten QAction-Objekte auf der Standardausgabe (stdout) ausgeben und beenden. Diese Option ist nur verfügbar, wenn &kmymoney; im Debug-Modus kompiliert wurde. </para>
 </listitem>
 </varlistentry>
 
@@ -193,18 +314,26 @@ Dump the names of all defined QAction objects to stdout and quit. This option is
 
 
 <refsect1>
-<title>See Also</title>
+<title
+>Siehe auch</title>
 
 <simplelist>
-<member>The full documentation for &kmymoney; is maintained as a docbook manual.
-If the &khelpcenter; program is properly installed at your site, the command
-<userinput><command>khelpcenter</command>
-<parameter>help:/kmymoney</parameter></userinput> should give you access to the
-complete manual.  Alternatively the manual can be browsed in &konqueror; giving
-it the <acronym>URL</acronym> <ulink
-url="help:/kmymoney">help:/kmymoney</ulink></member>
-<member>kf5options(7)</member>
-<member>qt5options(7)</member>
+<member
+>Die vollständige Dokumentation für &kmymoney; wird als Handbuch im Docbook-Format betreut. Wenn das Programm installiert ist, zeigt der Befehl <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/kmymoney</parameter
+></userinput
+> das vollständige Handbuch an. Alternativ können Sie in der Adressleiste von &konqueror;  <acronym
+>URL</acronym
+> <ulink url="help:/kmymoney"
+>help:/kmymoney</ulink
+> eingeben.</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
 </simplelist>
 
 </refsect1>

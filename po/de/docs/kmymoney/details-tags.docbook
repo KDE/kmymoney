@@ -2,157 +2,140 @@
 <chapter id="details.tags">
 <chapterinfo>
   <authorgroup>
-    <author>&Cristian.Onet; &Cristian.Onet.mail;</author>
-    <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author
+>&Cristian.Onet; &Cristian.Onet.mail;</author>
   </authorgroup>
-  <date>2020-02-06</date>
-  <releaseinfo>5.0.8</releaseinfo>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
 </chapterinfo>
 
-<title>Tags</title>
+<title
+>Stichwörter</title>
 
-<para>
-  The Tags View provides information about all the tags that have been added by
-  the user.  The Tags screen is split into two main areas: a list of tags and a
-  detail area, which has two tabs: Transactions and Details.  The
-  <guilabel>Transactions</guilabel> tab displays all the transactions associated
-  with the tag.  The <guilabel>Details</guilabel> tab includes a user-defined
-  color, as well as Notes, which are not used elsewhere.  Note that if you
-  change the color, which is used in the symbol displayed before the tag name in
-  any associated transactions, you need to click the check button at the lower
-  right of the Details area for it to be saved.
-  </para>
+<para
+>Die Stichwortübersicht zeigt detaillierte Informationen über alle Stichwörter aus Ihren Buchungen. Die Übersicht ist in zwei Hauptbereiche aufgeteilt: eine Stichwortliste und ein Detailbereich. </para>
 
 <sect1 id="details.tags.list">
-<title>Tags List</title>
+<title
+>Stichwortliste</title>
 
-<para>
-  A list of all tags, sorted alphabetically, is displayed on the left side of
-  this screen.
-
-  <screenshot>
-  <mediaobject>
-  <imageobject>
-  <imagedata fileref="tags.png" format="PNG" />
+<para
+>Eine Liste der Stichwörter befindet sich auf der linken Seite des Fensters. Sie ist alphabetisch sortiert. <screenshot
+> <mediaobject
+> <imageobject>
+  <imagedata fileref="tags.png" format="PNG"/>
   </imageobject>
   </mediaobject>
   </screenshot>
 </para>
 
 <sect2>
-<title>Adding a Tag</title>
-<para>
-  There are three different ways to create a new tag.  First, you can click on
-  the <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="list-add.png"/></imageobject></inlinemediaobject></guiicon> new tag
-  icon.  Second, you can right-click on any tag and choose <guimenuitem>New
-  tag</guimenuitem>. This creates a new tag called <quote>New tag.</quote>
-  Right-click on this tag and select <guimenuitem>Rename tag</guimenuitem> to
-  enter the name of the new tag.  Finally, you can add a new tag directly into
-  the ledger page or within a split transaction by typing the name of the tag in
-  the tag field.  &kmymoney; will ask if you want to add this tag and after
-  selecting <quote>yes</quote> it will be added.
-</para>
+<title
+>Hinzufügen eines Stichworts</title>
+<para
+>Um ein Stichwort hinzuzufügen, klicken Sie auf das Symbol <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="list-add.png"/></imageobject
+></inlinemediaobject
+></guiicon
+> oder klicken Sie mit der &RMBn; auf irgend ein Stichwort und wählen dann aus dem Kontextmenü <guimenuitem
+>Neues Stichwort</guimenuitem
+>, um ein neues Stichwort mit diesem Namen zu erstellen. Klicken Sie dann mit der &RMBn; auf dieses Stichwort und wählen <guimenuitem
+>Stichwort umbenennen</guimenuitem
+> und geben den neuen Namen ein. </para>
 </sect2>
 
 <sect2>
-<title>Renaming a Tag</title>
-<para>
-  To rename a tag, either click on the tag name to select it and click on the
-  <guiicon>Rename tag</guiicon> (between the add and remove icons) or
-  right-click on the name and then select <guimenuitem>Rename tag</guimenuitem>.
-  The name then becomes editable. Changing the name will affect the name in all
-  the transactions in which it appears.
-</para>
+<title
+>Umbenennen eines Stichworts</title>
+<para
+>Um ein Stichwort umzubenennen, klicken Sie auf den Namen, um es auszuwählen. Klicken Sie dann auf das Symbol <guiicon
+>Stichwort umbenennen</guiicon
+> zwischen den Symbolen Hinzufügen oder Entfernen. Alternativ können Sie auch mit der &RMBn; auf den Namen klicken und dann <guimenuitem
+>Stichwort umbenennen</guimenuitem
+> im Kontextmenü auswählen. Die Änderung des Namens wird in allen zugehörigen Buchungen angewendet. </para>
 </sect2>
 
 <sect2>
-<title>Deleting a Tag</title>
-<para>
-  To remove a tag, either click on the <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="list-remove.png" format="PNG"/></imageobject></inlinemediaobject></guiicon>
-  delete tag icon or right-click the name and select <guimenuitem>Delete tag</guimenuitem>.
-  If the tag has any transactions, you will be presented with a dialog that allows you
-  to reassign them to a different tag.
-</para>
+<title
+>Löschen eines Stichworts</title>
+<para
+>Um ein Stichwort zu löschen, klicken Sie entweder auf das Symbol <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="list-remove.png"/></imageobject
+></inlinemediaobject
+></guiicon
+> oder klicken Sie mit der &RMBn; auf den Namen und wählen <guimenuitem
+>Stichwort löschen</guimenuitem
+> aus dem Kontextmenü. Wurde das Sprichwort bereits einigen Buchungen zugewiesen, erscheint ein Dialog, in dem Sie diesen Buchungen ein anderes Stichwort zuweisen können. </para>
 
 <note>
-<para>
-  As Tags were only introduced to &kmymoney; in version 4.7, none of the methods
-  for importing data are able to import tags.  It is understood that this is an
-  important feature, and each import method is likely to introduce it in an
-  upcoming release.
-</para>
+<para
+>Da Stichwörter gerade erst in &kmymoney; in der Version 4.7 eingeführt wurden, können beim Importieren von Daten noch keine Stichwörter mit importiert werden. Da dies eine wichtige Funktion ist, wird diese Importmethode wahrscheinlich in den nächsten Versionen hinzugefügt. </para>
 </note>
 </sect2>
 </sect1>
 
 <sect1 id="details.tags.info">
-<title>Tagged transactions and Tag details</title>
-<para>
-  To view the transactions or view and edit the information associated with a
-  particular tag, select the tag from the list and select the appropriate tab on
-  the right side of the dialog.
-
-<screenshot>
-  <screeninfo>The tag details tab</screeninfo>
+<title
+>Buchungen mit Stichwörtern und Stichwortdetails</title>
+<para
+>Um eine Buchung anzuzeigen oder die zu einem bestimmten Stichwort gehörende Informationen anzuzeigen und zu bearbeiten, wählen Sie ein Stichwort in der Liste und die Karteikarte auf der rechten Seite des Dialogs. <screenshot>
+  <screeninfo
+>Die Karteikarte Stichwortdetails</screeninfo>
   <mediaobject>
   <imageobject>
-  <imagedata fileref="tag_details.png" format="PNG" />
+  <imagedata fileref="tag_details.png" format="PNG"/>
   </imageobject>
   <textobject>
-  <phrase>Tag details</phrase>
+  <phrase
+>Stichwortdetails</phrase>
   </textobject>
   </mediaobject>
 </screenshot>
 </para>
 
 <sect2 id="details.tags.info.transactions">
-<title>Tagged transactions</title>
-<para>
-  To see a list of the transactions associated with the selected tag, select the
-  <guilabel>Transactions</guilabel> tab.  This list is similar to the list of
-  transactions for a Payee.  You can double-click on a transaction, and you will
-  be taken to the ledger view of that transaction for the account in which the
-  transaction has been tagged.
-</para>
+<title
+>Buchungen mit Stichwörtern</title>
+<para
+>Um eine Liste aller Buchungen mit dem ausgewählten Stichwort anzuzeigen, gehen Sie zur Karteikarte <guilabel
+>Buchungen</guilabel
+>. Diese Liste ähnelt der Ansicht der Buchungen für einen Zahlungsempfänger. Doppelklicken Sie auf eine Buchung, damit gehen Sie zum Kontenbuch der Buchung mit dem zugehörigen Konto, in dem der Buchung dieses Stichwort zugewiesen ist. </para>
 </sect2>
 
 
 <sect2 id="details.tags.info.details">
-<title>Tag details</title>
-<para>
-  To view and edit the information associated with a particular tag, select the
-  <guilabel>Details</guilabel> tab.
-</para>
+<title
+>Stichwortdetails</title>
+<para
+>Auf der Karteikarte <guilabel
+>Details</guilabel
+> können Sie die Informationen zu einem bestimmten Stichwort anzeigen oder bearbeiten. </para>
   <itemizedlist>
     <listitem>
-      <para>
-        You can select the color used to highlight transactions with which this
-        tag has been associated.  If you click on the color bar, you will get a
-        color chooser dialog.
-      </para>
+      <para
+>Um die Farbe für die Hervorhebung einer Buchung mit diesem Stichwort zu ändern </para>
     </listitem>
     <listitem>
-      <para>
-        Clicking the <guilabel>Closed</guilabel> checkbox will not alter any
-        transactions already associated with the tag, but it will prevent
-        assigning the tag to any additional transactions.
-      </para>
+      <para
+>Um die Notizen zu einem Stichwort zu ändern, bearbeiten Sie den Text im Feld. </para>
     </listitem>
     <listitem>
-      <para>
-        To modify the notes associated with the tag, just edit the text in the
-        box.
-      </para>
+      <para
+>Klicken Sie auf <guilabel
+>Schließen</guilabel
+>, wird keine Buchung mit diesem Stichwort verändert. Dann können Sie dieses Stichwort keinen weiteren Buchungen zuweisen. </para>
     </listitem>
   </itemizedlist>
-<para>
-  When you are done, don't forget to click the <guiicon>Update</guiicon> button,
-  at the lower right of the window, although you will be prompted if you leave
-  the dialog without having done so.
-</para>
+<para
+>Möchten Sie die Bearbeitung beenden, klicken Sie auf das Symbol <guiicon
+>Aktualisieren</guiicon
+>., andernfalls werden Sie beim Schließen des Dialogs gefragt, ob Sie die Ihre Eingaben speichern möchten. </para>
 </sect2>
 </sect1>
 </chapter>
-

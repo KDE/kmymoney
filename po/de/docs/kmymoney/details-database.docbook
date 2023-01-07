@@ -2,527 +2,470 @@
 <chapter id="details.database">
 <chapterinfo>
   <authorgroup>
-    <author>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
+    <author
+>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
   </authorgroup>
-  <date>2011-07-21</date>
-  <releaseinfo>4.6</releaseinfo>
+  <date
+>2011-07-21</date>
+  <releaseinfo
+>4.6</releaseinfo>
 </chapterinfo>
 
-<title>Database</title>
+<title
+>Datenbank</title>
 
 <sect1 id="details.database.usage">
-<title>Using relational databases</title>
+<title
+>Relationale Datenbank verwenden</title>
 
 <sect2>
-<title>Introduction</title>
-<para>
-  As of release 1.0, &kmymoney; allows you to hold your data in a relational
-  database. One of the advantages of using this industry-standard format is that
-  it may allow you to view your data using one of the graphic front ends such as
-  <trademark>OpenOffice.org</trademark> or <trademark>LibreOffice</trademark>,
-  perhaps in some format that &kmymoney; currently doesn't
-  provide. Also, a little knowledge of SQL (Structured Query Language, the
-  language used world-wide to access relational databases) should enable you
-  more easily to export data to an external program, for example, a budgeting
-  application.
-</para>
+<title
+>Einleitung</title>
+<para
+>Seit der Version 1.0 ermöglicht es &kmymoney;, Ihre Daten in einer relationalen Datenbank zu speichern. Ein Vorteil der Nutzung dieses Industriestandards ist, dass Sie mit anderen Softwareprodukten auf Ihre Daten zugreifen und sie visualisieren können, z.B. mit OpenOffice<trademark class="copyright"
+></trademark
+> oder LibreOffice<trademark class="copyright"
+></trademark
+>, vielleicht in einem Format, das &kmymoney; derzeit noch nicht bietet. Ein wenig SQL-Kenntnisse (SQL - Structured Query Language, die weltweit verwendete Standardsprache, um auf relationale Datenbanken zuzugreifen) sollten es Ihnen erleichtern, Ihre Daten zu externen Programm zu exportieren, &eg; zu Budgetierungs-Programmen. </para>
 <para/>
 </sect2>
 
-<sect2><title>Preparation</title>
+<sect2
+><title
+>Vorbereitung</title>
 
-<para>
-  To access the database, &kmymoney; uses the SQL module supplied by &Qt;
-  Software as part of their &Qt; programming system. This module supports a
-  number of different database systems through a collection of drivers. Among
-  the more popular open-source systems for which drivers are available are
-  <trademark>MySQL</trademark>, SQLite (version 3 and upwards only), and PostgreSQL.
-  The module also supports the 'heavier', more industrial, systems such as <trademark
-  class="registered">Oracle</trademark> and IBM <trademark class="registered">DB2</trademark>.
-</para>
+<para
+>Um auf die Datenbank zuzugreifen, nutzt &kmymoney; das SQL-Modul der &Qt; Software als Teil der &Qt;-Bibliotheken. Dieses Modul unterstützt diverse Datenbanksysteme durch eine Auswahl an Datenbanktreibern. Für verbreitete Open-Source Systeme sind diese Treiber verfügbar: MySQL<trademark class="registered"
+></trademark
+>, SQLite (Nur Version 3 und höher) und PostgreSQL. Das Modul unterstützt ebenso größere, vorwiegend in der Industrie genutzte Systeme, wie Oracle<trademark class="registered"
+></trademark
+> und IBM DB2<trademark class="registered"
+></trademark
+>. </para>
 
-<para>
-  With the exception of SQLite, these systems use a client/server model, where
-  the 'client' software sits on 'your' machine, while the server lives on the
-  same machine as the database itself, which may be elsewhere on a network. Of
-  course, in the normal scenario for a personal finance application such as
-  &kmymoney;, 'your' machine acts as both client and server. Your first task
-  therefore, having decided which database system you wish to use, is to install
-  the client, and most probably server, software.
-</para>
+<para
+>Mit Ausnahme von SQLite arbeiten alle Systeme nach dem Client/Server Modell, wobei die Client-Software auf "Ihrer" Maschine läuft, während der Server auf der gleichen Maschine läuft wie die eigentliche Datenbank, welche aber auch irgendwo anders im Netzwerk platziert werden kann. Natürlich wird Ihr Computer bei &kmymoney; als "Persönlicher Finanzmanager" in einem normalen Szenario sowohl als Server, als auch Client fungieren. Nachdem Sie sich für ein Datenbankprodukt entschieden haben, ist der Schritt die Installation die Installation der Client und i.d.R. auch Server-Software. </para>
 
-<para>
-  In addition to the database software itself, you must also install the
-  corresponding &Qt; driver module. Most distributions will include driver
-  modules for the more popular databases. Otherwise, check with the <ulink
-  url="https://www.qt.io/">&Qt; software web site</ulink> and search for
-  'SQL drivers'.
-</para>
+<para
+>Zusätzlich zur eigentlichen Datenbanksoftware müssen Sie das entsprechende &Qt;-Treibermodul installieren. Die meisten Distributionen bieten passende Treibermodule für die bekannten Datenbanken an. Ansonsten schauen Sie auf die <ulink url="http://qt-project.org"
+>&Qt;-Software-Webseite</ulink
+> und suchen Sie dort nach SQL-Treibern. </para>
 
 <note>
-  <para>
-    SQLite does not operate on a client/server model; each database is held in a
-    regular file, local or remote, accessed using the normal methods supplied by
-    the underlying operating system. In this case, therefore, there is only one
-    software package and the driver to install. Also, some of the following information,
-    particularly that related to administration, may not apply to SQLite.
-  </para>
+  <para
+>SQLite arbeitet nicht nach dem Client-/Server-Modell. Jede Datenbank befindet sich in einer herkömmlichen Datei, lokal oder in einem Netzwerk, auf die über die normalen Dateizugriffsfunktionen des Betriebssystem zugegriffen wird. In diesem Fall ist nur ein Softwarepaket und der Datenbanktreiber zu installieren. Weiterhin sind einige der nachfolgenden Informationen, speziell zur Administration, nicht für SQLite relevant. </para>
 </note>
 </sect2>
 
 <sect2>
-<title>Administration</title>
+<title
+>Verwaltung</title>
 
-<para>
-  Looking after databases is a little more complex than dealing with regular
-  files. Each system has different methods for performing those necessary
-  administrative tasks such as creating databases, assigning permissions to
-  various users, producing backups, &etc; Describing these tasks is outside the
-  scope of this manual, but all of the supported products provide comprehensive
-  reference documentation, and a quick search of the web will point you at many
-  tutorials on the subject.
-</para>
+<para
+>Datenbanken sind etwas komplexer als die Verwendung einfacher Dateien. Jedes System hat unterschiedliche Methoden zur Verwaltung der Datenbank, wie das Erzeugen einer neuen Datenbank, die Zuordnung von Zugriffsrechten für verschiedene Datenbankbenutzer, das Erstellen von Datensicherungen, &etc; Diese Dinge werden nicht in diesem Handbuch beschrieben, aber für alle der unterstützten Datenbankprodukte sind im Internet eine Vielzahl an Anleitungen und Handbücher zu finden. </para>
 
 <sect3>
-<title>Creating the database</title>
+<title
+>Die Datenbank erstellen</title>
 
-<para>
-  Code has been included to create an initial database to hold your data if one
-  doesn't exist. However, it is strongly recommended that you pre-create a
-  database, because most of the products provide a number of options which may
-  be relevant. One that may be of particular importance to some would be the
-  designation of the character set (&eg;, UTF-8) to be used for text
-  fields.
-</para>
+<para
+>Es wird Code bereitgestellt, um eine initiale Datenbank, die Ihre Daten aufnehmen wird, zu erzeugen, wenn noch keine existiert. Es wird dringend angeraten, dass Sie vorher eine Datenbank erstellen, da die meisten Datenbankprodukte eine Vielzahl an Optionen verwendet, die relevant sein können. Eine solche wichtige Eigenschaft ist der verwendete Zeichensatz (&eg; UTF-8) für Textfelder. </para>
 
-<para>
-  At this time, you will also need to specify permissions for various users to
-  perform different operations on the database. In most systems, the user who
-  creates the database will be automatically assigned all permissions, but this
-  is an area in which the documentation should be consulted.
-</para>
+<para
+>Zum gleichen Zeitpunkt müssen Sie auch Zugriffsrechte für verschiedene Datenbanknutzer definieren, um unterschiedliche Datenbankoperationen durchführen zu können. Bei den meisten Systemen wird dem Benutzer, der die Datenbank anlegt, automatisch sämtliche Rechte auf die Datenbank eingeräumt, aber näheres hierzu finden Sie in der Dokumentation der von Ihnen verwendeten Datenbank. </para>
 
-<para>
-  For your first use of the database, and occasionally at other times when the
-  database layout changes, you will need permission (also called privileges) to
-  create and alter tables and views (see next paragraph). There may be different
-  names for the permission/privilege in different systems, but something like
-  <literal>CREATE</literal> and <literal>ALTER</literal> should be commonplace.
-  For normal running, you will need to be able to read and write records; these
-  are normally defined in SQL as <literal>SELECT</literal>, <literal>INSERT</literal>,
-  <literal>UPDATE</literal>, and <literal>DELETE</literal> permissions.
-</para>
+<para
+>Beim ersten Zugriff auf die Datenbank, und evtl. zu einem späteren Zeitpunkt wenn sich die Datenbankstruktur ändert, benötigen Sie Rechte (auch Privilegien, eng. "privileges" genannt), um Tabellen und Ansichten (views) anzulegen und zu ändern. Es können verschiedene Bezeichnung für diese Rechte bei den unterschiedlichen Datenbankprodukten verwendet werden, aber meist ist die Rede von CREATE und ALTER. Für die tägliche Arbeit benötigen Sie Zugriffsrechte zum Lesen und Schreiben von Datensätzen. Diese werden in SQL als SELECT, INSERT, UPDATE und DELETE Berechtigungen bezeichnet. </para>
 </sect3>
 
 <sect3>
-<title>Creating Tables</title>
+<title
+>Tabellen erstellen</title>
 
-<para>
-  On your first use, &kmymoney; will attempt to create the necessary table
-  structures. In order to achieve the maximum compatibility between various
-  database types, only a subset of common data types are used. There may
-  nevertheless be situations where a particular type is not supported, and in
-  this case, provision has been made to generate the SQL code necessary to
-  create tables. This code can then be modified as required and used to create
-  the tables outside of &kmymoney;. Should you find yourself in this situation,
-  help can usually be obtained from &devlist;. See <link
-  linkend="details.database.generatesql">Manual Database Creation</link> for more information.
-</para>
+<para
+>Bei der ersten Verwendung wird &kmymoney; versuchen, die benötigten Tabellenstrukturen anzulegen. Um eine größtmögliche Kompatibilität zu möglichst vielen Datenbanken zu erreichen, wird nur eine Teilmenge von gängigen Datentypen verwendet. Nichtsdestotrotz kann es vorkommen, dass ein bestimmter Datentyp von Ihrem Datenbankprodukt nicht unterstützt wird. In diesem Fall müssen Sie den notwendigen SQL-Code zur Erzeugung der Tabellen selbst bereitstellen. Dieser Code kann dann nach den eigenen Bedürfnissen modifiziert werden und außerhalb von &kmymoney; zur Erzeugung der Tabellen verwendet werden. Sollten Sie sich in einer solchen Situation befinden, wird Ihnen in der &devlist; sicherlich geholfen. Weitere Informationen finden Sie unter <link linkend="details.database.generatesql"
+>Manuelle Erstellung der Datenbank</link
+>. </para>
 </sect3>
 </sect2>
 
 <sect2 id="details.database.selectdatabase">
-<title>Creating a Database</title>
+<title
+>Erstellen einer Datenbank</title>
 
-<para>
-  Using &kmymoney;, open or import an existing data file, or create a new
-  one. Then select <menuchoice><guimenu>File</guimenu><guimenuitem>Save as Database</guimenuitem></menuchoice>
-  menu item. This will present the following dialog:
-</para>
+<para
+>Öffnen oder importieren Sie eine existierende Datei in &kmymoney;, oder erzeugen Sie eine Neue. Anschließend wählen Sie <guimenuitem
+>Speichern in Datenbank</guimenuitem
+> aus dem Menü <guimenu
+>Datei</guimenu
+>. Dann öffnet sich folgendes Dialogfenster: </para>
 
 <screenshot>
   <mediaobject>
   <imageobject>
-  <imagedata fileref="select_database.png" format="PNG" />
+  <imagedata fileref="select_database.png" format="PNG"/>
   </imageobject>
   </mediaobject>
 </screenshot>
 
-<para>
-  Complete the fields appropriate to the database type you have selected
-  (as usual, mandatory fields will be highlighted)
-  and click <guibutton>OK</guibutton> to create the database.
-</para>
+<para
+>Vervollständigen Sie die Eingaben für den ausgewählten Datenbanktyp, Pflichtfelder werden hervorgehoben. Klicken Sie dann auf <guibutton
+>OK</guibutton
+>, um die Datenbank zu erstellen. </para>
 
 <sect3>
-<title>Database Type</title>
+<title
+>Datenbank-Typ</title>
 
-<para>
-  This box lists all &Qt; SQL drivers installed on your system. Select the
-  driver for your database type. If the one you want is not in the list, you
-  need to install the appropriate driver. See your distribution documentation,
-  or visit the <ulink url="https://www.qt.io/">&Qt; software web site</ulink>
-  and search for 'SQL drivers'.
-</para>
+<para
+>Dieses Auswahlfeld zeigt alle &Qt;-SQL-Treiber, die auf Ihrem System installiert sind, Wählen Sie den für Ihre Datenbank passenden Treiber aus. Wenn ein passender Treiber nicht in der Liste aufgeführt wird, müssen Sie ihn installieren. Schauen Sie in der Dokumentation zu Ihrer Distribution, oder besuchen Sie die <ulink url="http://qt-project.org/" type=""
+>&Qt;-Software-Webseite</ulink
+> und suchen Sie nach "SQL drivers". </para>
 </sect3>
 
 <sect3>
-<title>File (SQLite only)</title>
-<para>
-  SQLite has one database per file so enter the filename in which you wish to
-  create the database.  To browse the file system, click the icon to the right
-  of the filename.  For SQLite databases, the <guilabel>Host name</guilabel>,
-  <guilabel>Username</guilabel>, and <guilabel>Password</guilabel> fields are
-  not relevant. The SQLite file must have the appropriate read/write permissions
-  set by the underlying file system to enable the appropriate access for the
-  currently logged-in user.
-</para>
+<title
+>Datei (nur SQLite)</title>
+<para
+>SQLite speichert eine Datenbank in einer Datei, geben Sie daher den Dateinamen für die Datenbank an. Klicken Sie auf das Symbol rechts neben dem Eingabefeld, damit öffnen Sie den Dateidialog, mit dessen Hilfe Sie eine bestehende Datei auswählen oder eine neue Datei erzeugen können. Für SQLite Datenbanken sind die Felder <guilabel
+>Rechnername</guilabel
+>, <guilabel
+>Benutzername</guilabel
+> und <guilabel
+>Passwort</guilabel
+> nicht relevant. Die SQLite-Datei muss die entsprechenden Schreib-/Leserechte auf der Betriebssystemebene besitzen, damit der gerade angemeldete Benutzer darauf zugreifen kann. </para>
 </sect3>
 
 <sect3>
-<title>Database name (others)</title>
-<para>
-  The default database name is <literal>KMyMoney</literal>, but you may choose some other
-  name if you like. For some database types, &kmymoney; may not be able to create the
-  database, so it must be pre-created using the appropriate administrative procedure.
-  However, &kmymoney; will usually be able to create all table structures where necessary.
-  If not, you can create them yourself. See <link linkend="details.database.generatesql">Manual
-  Database Creation</link> for more information.
-</para>
+<title
+>Datenbank-Name (Andere)</title>
+<para
+>Der Datenbankname ist in der Voreinstellung "KMyMoney", aber Sie können auch einen anderen wählen. Für einige Datenbanken ist &kmymoney; eventuell nicht in der Lage, die Datenbank zu erzeugen, sodass sie vorher mit den zugehörigen Programmen erstellt werden muss. Normalerweise kann &kmymoney; die benötigten Tabellenstrukturen generieren. Funktioniert es doch einmal nicht, müssen Sie dies manuell durchführen. Weitere Informationen dazu finden Sie im Abschnitt <link linkend="details.database.generatesql"
+>Manuelle Erstellung der Datenbank</link
+>. </para>
 </sect3>
 
-<sect3><title>Host name</title>
-<para>
-  For the average user, the default name of <quote>localhost</quote>, being the
-  machine you are currently using, is correct. For networked databases, enter
-  the connected host name.
-</para>
+<sect3
+><title
+>Rechnername</title>
+<para
+>Für den normalen Benutzer ist der vorgegebene Name <quote
+>localhost</quote
+>, der für Ihren Rechner steht an dem Sie gerade arbeiten, korrekt. Für eine Datenbank im Netzwerk müssen Sie den entsprechenden Rechnernamen eingeben. </para>
 
 </sect3>
 
 <sect3>
-<title>User name and password</title>
-<para>
-  Check the permissions set up on your database, or contact the database
-  administrator, for the correct values to use here. The user name must be
-  capable of selecting, inserting, updating, and deleting records. If the user
-  name is the same as your login name, a password is not normally required.
-</para>
+<title
+>Benutzername und -passwort</title>
+<para
+>In den Einstellungen der Zugriffsrechte in Ihrer Datenbank finden Sie die notwendigen Informationen, die Sie hier eintragen müssen, oder kontaktieren Sie Ihren Datenbankadministrator. Der hier eingegebene Datenbankbenutzer muss die Berechtigungen für SELECT, INSERT, UPDATE und DELETE haben. Wenn der Benutzername der gleiche ist wie Ihr Anmeldungs-Name, ist ein Passwort normalerweise nicht notwendig. </para>
 </sect3>
 </sect2>
 
 <sect2>
-<title>Accessing your data</title>
+<title
+>Auf Ihre Daten zugreifen</title>
 
 <sect3>
-<title>Table design</title>
+<title
+>Tabellenentwurf</title>
 
-<para>
-  To access your data in &kmymoney;, use the <menuchoice><guimenu>File</guimenu><guimenuitem>Open
-  Database</guimenuitem></menuchoice> menu item. This will
-  open a dialog similar to the above.
-</para>
+<para
+>Um auf Ihre Daten in &kmymoney; zuzugreifen, wählen Sie aus dem Menü <guimenu
+>Datei</guimenu
+> den Menüpunkt <guimenuitem
+>Datenbank öffnen ...</guimenuitem
+>. Es öffnet sich ein ähnliches Dialogfenster wie oben beschrieben. </para>
 
 <note>
-<para>
-  If you created your database by first opening a file, and then doing
-  <guimenuitem>Save as Database</guimenuitem>, as described above, then any
-  subsequent changes to your data are saved only in the database, not in the
-  file.  This means that you can use the file as a backup or snapshot of your
-  data at a particular time.  To make a new backup like this, open your
-  database, choose the <menuchoice><guimenu>File</guimenu><guimenuitem>Save
-  As...</guimenuitem></menuchoice> menu item, giving an appropriate file name.  Remember
-  to re-open your database, so &kmymoney; does not continue to use the file.
-</para>
+<para
+>Haben Sie Ihre Datenbank erstellt, indem Sie zuerst eine Datei geöffnet haben und dann wie vorher beschrieben die Funktion <guimenuitem
+>Speichern in Datenbank</guimenuitem
+> benutzt haben, dann werden alle nachfolgenden Änderungen nur noch in der Datenbank, aber nicht mehr in der Datei gespeichert. Damit können Sie die Datei als Sicherung oder Momentaufnahme Ihrer Daten zu einem bestimmten Zeitpunkt verwenden. Um wie vorher eine neue Sicherung zu erstellen, öffnen Sie die Datenbank, benutzen die Aktion <menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Speichern unter ...</guimenuitem
+></menuchoice
+> und vergeben einen passenden Dateinamen. Öffnen Sie dann wieder die Datenbank, damit &kmymoney; alle Änderungen darin und nicht in der Datei speichert. </para>
 </note>
 
-<para>
-  To access your data in other formats, you will need to know a little about how
-  it is held in relational databases. By far the easiest way to get a feel for
-  this is to open the database in a front-end such as <trademark>OpenOffice.org</trademark>.
-  This provides a list of the various tables which make up the database, and
-  enables you to see the layout of each of them.
-</para>
+<para
+>Um auf Ihre Daten in anderen Formaten zuzugreifen, müssen Sie wissen, wie sie in der relationalen Datenbank gespeichert sind. Am einfachsten ist es, die Datenbank mit einem Programm wie OpenOffice zu öffnen. Sie werden eine Liste der verschiedenen Tabellen sehen, aus denen die Datenbank besteht. Weiterhin können Sie sich die Tabellenstrukturen anschauen. </para>
 
-<para>
-  To extract data, &eg;, into a spreadsheet or external file, it is almost
-  invariably necessary to select linked data from more than one table. This is
-  done by 'joining' the tables, using a field which is common to each. You can
-  find a lot more information about how this is done from the online database
-  tutorials mentioned above. The following table lists the fields used to define
-  these inter-table relationships.
-</para>
+<para
+>Um Daten &eg; in eine Tabellenkalkulation oder eine externe Datei zu extrahieren ist es meist unausweichlich, die Daten nicht nur aus einer, sondern aus mehreren Tabellen auszulesen. Dies wird erreicht, in dem die Tabellen miteinander Verknüpft werden (engl. JOIN). Die verknüpften Tabellen müssen jeweils Felder mit identischen Inhalten haben. Viele weitere Informationen über diese grundlegenden Themen finden Sie in den weiter oben schon erwähnten Anleitungen. Die nachfolgende Tabelle listet alle Felder auf, die für die Tabellenverknüpfungen verwendet werden. </para>
 
 <informaltable>
   <tgroup cols="3">
     <thead>
       <row>
         <entry valign="top">
-          <para>Relationship</para>
+          <para
+>Beziehung</para>
         </entry>
         <entry valign="top">
-          <para>Match</para>
+          <para
+>Übereinstimmung</para>
         </entry>
         <entry valign="top">
-          <para>With</para>
+          <para
+>mit</para>
         </entry>
       </row>
     </thead>
     <tbody>
       <row>
         <entry valign="top">
-          <para>Institutions and Accounts</para>
+          <para
+>Geldinstitute und Konten</para>
         </entry>
         <entry valign="top">
-          <para><literal>kmmInstitutions.id</literal></para>
+          <para
+>kmmInstitutions.id</para>
         </entry>
         <entry valign="top">
-          <para><literal>kmmAccounts.institutionId</literal></para>
-        </entry>
-      </row>
-      <row>
-        <entry valign="top">
-          <para>Accounts Parent/Child</para>
-        </entry>
-        <entry valign="top">
-          <para><literal>kmmAccounts.id</literal></para>
-        </entry>
-        <entry valign="top">
-          <para><literal>kmmAccounts.parentId</literal></para>
+          <para
+>kmmAccounts.institutionId</para>
         </entry>
       </row>
       <row>
         <entry valign="top">
-          <para>Transactions and Splits (see Note 1)</para>
+          <para
+>Über-/untergeordnete Konten</para>
         </entry>
         <entry valign="top">
-          <para><literal>kmmTransactions.id</literal></para>
+          <para
+>kmmAccounts.id</para>
         </entry>
         <entry valign="top">
-          <para><literal>kmmSplits.transactionId</literal></para>
-        </entry>
-      </row>
-      <row>
-        <entry valign="top">
-          <para>Accounts and Splits</para>
-        </entry>
-        <entry valign="top">
-          <para><literal>kmmAccounts.id</literal></para>
-        </entry>
-        <entry valign="top">
-          <para><literal>kmmSplits.accountId</literal></para>
+          <para
+>kmmAccounts.parentId</para>
         </entry>
       </row>
       <row>
         <entry valign="top">
-          <para>Payees and Splits</para>
+          <para
+>Buchungen und Split-Buchungen (siehe Fußnote 1)</para>
         </entry>
         <entry valign="top">
-          <para><literal>kmmPayees.id</literal></para>
+          <para
+>kmmTransactions.id</para>
         </entry>
         <entry valign="top">
-          <para><literal>kmmSplits.payeeId</literal></para>
-        </entry>
-      </row>
-      <row>
-        <entry valign="top">
-          <para>Schedules and Transactions</para>
-        </entry>
-        <entry valign="top">
-          <para><literal>kmmSchedules.id</literal></para>
-        </entry>
-        <entry valign="top">
-          <para><literal>kmmTransactions.id</literal></para>
+          <para
+>kmmSplits.transactionId</para>
         </entry>
       </row>
       <row>
         <entry valign="top">
-          <para>Transactions and Currencies</para>
+          <para
+>Konten und Split-Konten</para>
         </entry>
         <entry valign="top">
-          <para><literal>kmmTransactions.currencyId</literal></para>
+          <para
+>kmmAccounts.id</para>
         </entry>
         <entry valign="top">
-          <para><literal>kmmCurrencies.ISOCode</literal></para>
-        </entry>
-      </row>
-      <row>
-        <entry valign="top">
-          <para><literal>Accounts and Securities (see Note 2)</literal></para>
-        </entry>
-        <entry valign="top">
-          <para><literal>kmmAccounts.currencyId</literal></para>
-        </entry>
-        <entry valign="top">
-          <para><literal>kmmSecurities.id</literal></para>
+          <para
+>kmmSplits.accountId</para>
         </entry>
       </row>
       <row>
         <entry valign="top">
-          <para>Securities and Prices</para>
+          <para
+>Empfänger und Split-Buchungen</para>
         </entry>
         <entry valign="top">
-          <para><literal>kmmSecurities.id</literal></para>
+          <para
+>kmmPayees.id</para>
         </entry>
         <entry valign="top">
-          <para><literal>kmmPrices.fromId</literal> or <literal>kmmPrices.toId</literal></para>
+          <para
+>kmmSplits.payeeId</para>
         </entry>
       </row>
       <row>
         <entry valign="top">
-          <para>Currency Rates</para>
+          <para
+>Geplante Buchungen und Buchungen</para>
         </entry>
         <entry valign="top">
-          <para><literal>kmmCurrencies.ISOCode</literal></para>
+          <para
+>kmmSchedules.id</para>
         </entry>
         <entry valign="top">
-          <para><literal>kmmPrices.fromId</literal> or <literal>kmmPrices.toId</literal></para>
+          <para
+>kmmTransactions.id</para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Buchungen und Währungen</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmTransactions.currencyId</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmCurrencies.ISOCode</para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Konten und Wertpapiere (siehe Fußnote 2)</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmAccounts.currencyId</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmSecurities.id</para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Wertpapiere und Preise</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmSecurities.id</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmPrices.fromId oder kmmPrices.toId</para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Währungskurse</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmCurrencies.ISOCode</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmPrices.fromId oder kmmPrices.toId</para>
         </entry>
       </row>
     </tbody>
   </tgroup>
 </informaltable>
 
-<para>
-  Notes:
-</para>
+<para
+>Fußnoten: </para>
 
-<para>
-  1 &#x2013; txType = &#x201C;N&#x201D; for normal transactions,
-  &#x201C;S&#x201D; for scheduled transactions
-</para>
+<para
+>1 &#x2013; txType = &#x201C;N&#x201D; für normale Buchungen, &#x201C;S&#x201D; für geplante Buchungen </para>
 
-<para>
-2 &#x2013; if kmmAccounts.isStockAccount = &#x201C;Y&#x201D;
-</para>
+<para
+>2 &#x2013; wenn kmmAccounts.isStockAccount = &#x201C;Y&#x201D; </para>
 </sect3>
 
 <sect3>
-<title>Field formats</title>
+<title
+>Feldformate</title>
 
-<para>
-  Several of the data fields are held in an internal format which may not be
-  immediately useful to external programs. In these cases, the information has
-  been duplicated in both internal and external formats.
-</para>
+<para
+>Einige Datenfelder werden in einem internen Datenformat vorgehalten, welche nicht direkt für externe Programme nutzbar sind. In diesen Fällen werden die Informationen doppelt, einmal im internen und externen Format, vorgehalten. </para>
 
-<para>
-  Monetary amounts and share values are shown both in numerator/denominator
-  format, and, with a field name suffixed with '<literal>Formatted</literal>',
-  in the form as shown on your screens.
-</para>
-
-<para>
-  Similarly, some fields, such as account type appear both as a numeric code,
-  and in a field suffixed '<literal>String</literal>' in the form and language
-  of the application.
-</para>
+<para
+>Geldbeträge und Aktienkurse werden beide im Format Zähler/Nenner und zusätzlich, wenn der Feldname mit dem Suffix "Formatted" beginnt, in dem Format wie Sie es am Bildschirm sehen, gespeichert. </para>
+  
+<para
+>Ebenso werden einige Felder, wie &eg; der Kontotyp, sowohl als numerische ID als auch zusätzlich in einem Feld mit der Nachsilbe "String" im Format und Sprache der Anwendung gespeichert. </para>
 </sect3>
 
 <sect3>
-<title>Updating your data</title>
+<title
+>Ihre Daten aktualisieren</title>
 
-<para>
-  Having data in an industry standard format does give you the ability to modify
-  it outside the &kmymoney; application. DO NOT DO IT unless you really know
-  what you are doing, and always be certain to make a backup copy of your data
-  first. If you get it wrong, &kmymoney; may not be able to access your data,
-  and you could even end up losing it altogether. You have been warned!
-</para>
+<para
+>Da Ihre Daten in einem Standardformat gespeichert sind, können Sie diese auch mit anderen Programmen als &kmymoney; bearbeiten. Möchten Sie das wirklich tun, sollten Sie stets eine Sicherung Ihrer Daten erstellen. Wenn etwas schief geht, wird &kmymoney; nicht mehr in der Lage sein, Ihre Daten zu lesen und im schlimmsten Fall wären diese komplett verloren. </para>
 </sect3>
 
 <sect3>
-<title>Stored queries</title>
+<title
+>Gespeicherte Abfragen</title>
 
-<para>
-  Most database systems allow you to store commonly used queries and procedures,
-  and in some cases, these may be held as tables or other objects within your
-  database itself. As you will have guessed from the above, all the tables used
-  by &kmymoney; begin with the lowercase letters '<literal>kmm</literal>'. This
-  standard will be maintained, and only tables beginning with these letters will
-  be updated. Thus, provided you avoid these in the naming of your queries &etc;,
-  you should not experience any problems.
-</para>
+<para
+>Viele Datenbanksysteme erlauben es, gemeinsam genutzte Abfragen und Prozeduren zu hinterlegen. In einigen Fällen werden diese als Tabellen oder andere Objekte innerhalb der Datenbank vorgehalten. Wie Sie sicherlich aus dem oben genannten schon sehen, beginnen die Namen aller von &kmymoney; verwendeten Tabellen mit den Kleinbuchstaben "kmm".  Dieser Standard wird gepflegt und nur solche Tabellen, die damit beginnen, werden aktualisiert. Wenn Sie sich bei der Benennung Ihrer eigenen Abfragen, etc. an diese Konvention halten, sind keine Probleme zu erwarten. </para>
 </sect3>
 </sect2>
 
 <sect2 id="details.database.generatesql">
-<title>Manual database creation</title>
+<title
+>Manuelle Erstellung der Datenbank</title>
 <note>
-  <para>
-    This section covers more advanced database usage and may be skipped by the general user.
-  </para>
+  <para
+>Dieser Abschnitt bietet weitere Informationen für erfahrene Datenbank-Benutzer und kann im allgemeinen übersprungen werden. </para>
 </note>
 
 <sect3>
-<title>When to use</title>
-<para>
-  There may be occasions when &kmymoney; is unable to create the database automatically, or creates it without some
-  options required by the user. For example, the database system used may not completely conform
-  to standard SQL usage, or support may be introduced for new systems which have not been fully tested in &kmymoney;.
-</para>
-<para>
-  Prior to using this facility, you should try just creating the database
-  entry itself (&ie; with the <literal>CREATE DATABASE</literal> statement).
-  Provided the database exists, &kmymoney; may well be able to create the
-  tables, &etc; in the normal database save procedure described above.
-</para>
+<title
+>Anwendungsfälle</title>
+<para
+>Manchmal ist &kmymoney; nicht in der Lage, die Datenbank automatisch richtig zu erstellen oder erstellt sie ohne von Benutzer gewünschte Optionen. Das verwendete Datenbanksystem ist zum Beispiel nicht vollständig kompatibel zum SQL-Standard oder es gibt neue Systeme, die in &kmymoney; noch nicht umfassend getestet wurden. </para>
+<para
+>Dann sollten Sie versuchen, nur die Datenbank selbst mit der Anweisung CREATE DATABASE zu erzeugen. Wenn die Datenbank existiert, kann &kmymoney; möglicherweise die Tabellen &etc; mit der normalen vorher beschriebenen Speicherprozedur der Datenbank generieren. </para>
 </sect3>
 
 <sect3>
-<title>Generating the SQL</title>
-<para>
-  If this fails, it is possible to generate the basic SQL commands needed to
-  create the various tables, views and indexes required by the application.
-  Select the <menuchoice><guimenu>Tools</guimenu><guimenuitem>Generate Database
-  SQL</guimenuitem></menuchoice> menu item. This will present the following dialog:
-</para>
+<title
+>SQL-Befehle für die Erstellung der Datenbank</title>
+<para
+>Gelingt die automatische Erstellung der SQL-Datenbank nicht, dann können die grundlegenden SQL-Befehle zur Anlage der verschiedenen Tabellen, Ansichten und Indizes für das Programm direkt eingegeben werden. Wählen Sie <guimenuitem
+>SQL-Datenbank erzeugen</guimenuitem
+> aus dem Menü <guimenu
+>Extras</guimenu
+>. Dann öffnet sich folgendes Dialogfenster: </para>
 <screenshot>
   <mediaobject>
   <imageobject>
-  <imagedata fileref="generate_sql.png" format="PNG" />
+  <imagedata fileref="generate_sql.png" format="PNG"/>
   </imageobject>
   </mediaobject>
 </screenshot>
 
-<para>
-  On selecting the database type, the appropriate SQL will appear in the <guilabel>SQL for creation</guilabel> text box; this can be edited by the user,
-  or saved to a text file by clicking <guibutton>Save SQL</guibutton>. In the latter case, the database
-  must be created using the administrative functions provided by the database system.
-</para>
-<para>
-  If after editing the text in the dialog, you want &kmymoney; to create the database,
-  you will need to complete the other fields in the dialog, as detailed in <link
-  linkend="details.database.selectdatabase">Creating a Database</link> above,
-  and click <guibutton>Create Tables</guibutton>. Note that, except in the case of
-  SQLite, you will need either to include a suitable <literal>CREATE DATABASE</literal> statement
-  as the first command, or have previously issued such a command externally to &kmymoney;.
-</para>
+<para
+>Nach Auswahl des Datenbanktyps werden die zugehörigen <guilabel
+>SQL-Befehle für die Erstellung der Datenbank</guilabel
+> im Textfeld angezeigt. Diese Befehle können bearbeitet oder mit <guibutton
+>SQL speichern</guibutton
+> in eine Textdatei geschrieben werden. Mit den Befehle in der Textdatei kann die Datenbank mit den Verwaltungsfunktionen des Datenbanksystems erzeugt werden. </para>
+<para
+>Nach der Bearbeitung des SQL-Befehle müssen Sie noch die anderen Felder im Dialog ausfüllen. Informationen dazu finden Sie im vorherigen Abschnitt <link linkend="details.database.selectdatabase"
+>Erstellen einer Datenbank</link
+>. Dann kann &kmymoney; die Datenbank erzeugen. Klicken Sie dazu auf den Knopf <guibutton
+>Tabellen erzeugen</guibutton
+>. Für alle Datenbanken außer SQLite müssen Sie entweder eine Anweisung CREATE DATABASE als ersten Befehl einfügen oder diesen Befehl vorher unabhängig von &kmymoney; bereits ausgeführt haben. </para>
 </sect3>
 
 <sect3>
-<title>Warning</title>
-<para>
-  You should be very careful editing the definitions of any of the basic tables or views
-  (those with names beginning with '<literal>kmm</literal>'). Some changes,
-  such as increasing the length of an integer field, may have little impact, but you should not
-  remove or change the sequence of any fields, or &kmymoney; may refuse to function, or may corrupt your data.
-</para>
-<para>
-  Whilst adding or removing indexes may improve performance, you should also be aware that the opposite
-  may happen. Some knowledge of the internal operation of &kmymoney; may help to get the
-  best performance in these circumstances.
-</para>
+<title
+>Warnung</title>
+<para
+>Sie sollten bei der Bearbeitung der Definitionen aller grundlegenden Tabellen und Ansichten, deren Namen mit „kmm“beginnt, sehr vorsichtig sein. Einige Änderungen wie die Vergrößerung der Länge eines Felds für ein ganze Zahl haben nur geringe Auswirkungen. Sie sollten die Reihenfolge aller Felder aber auf keinen Fall verändern, da &kmymoney; dann möglicherweise nicht mehr richtig arbeitet oder Ihre Daten zerstört. </para>
+<para
+>Während das Hinzufügen oder Entfernen von Indizes manchmal die Arbeitsgeschwindigkeit verbessert, kann aber auch das Gegenteil eintreten. Es sind Kenntnisse der internen Funktionsweise von &kmymoney; nötig, um unter diesen Bedingen die beste Arbeitsgeschwindigkeit zu erreichen. </para>
 </sect3>
 
 </sect2>
 
 <sect2>
-<title>Encryption</title>
+<title
+>Verschlüsselung</title>
 
-<para>
-  Encryption of data in your database is not currently supported.
-</para>
+<para
+>Eine Verschlüsselung Ihrer Daten in der Datenbank wird derzeit nicht unterstützt. </para>
 </sect2>
 </sect1>
 </chapter>

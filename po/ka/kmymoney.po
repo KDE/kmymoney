@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-01 00:58+0000\n"
-"PO-Revision-Date: 2023-01-05 05:15+0100\n"
+"PO-Revision-Date: 2023-01-06 06:50+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2319,7 +2319,7 @@ msgstr "გამართვა"
 #: kmymoney/dialogs/knewaccountdlg.ui:185
 #, kde-format
 msgid "Last check number:"
-msgstr "ბოლო შემოწმების ნომერი"
+msgstr "ბოლო შემოწმების ნომერი:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: kmymoney/dialogs/knewaccountdlg.ui:207
@@ -2544,17 +2544,17 @@ msgstr ""
 #: kmymoney/dialogs/knewequityentrydlg.ui:123
 #, kde-format
 msgid "Name of the company, or mutual fund."
-msgstr ""
+msgstr "კომპანიის ან საერთო ფონდის სახელი."
 
 #: kmymoney/dialogs/knewinstitutiondlg.cpp:130
 #, kde-format
 msgid "The institution name field is empty.  Please enter the name."
-msgstr ""
+msgstr "დაწესებულების სახელის ველი ცარიელია.  შეიყვანეთ სახელი."
 
 #: kmymoney/dialogs/knewinstitutiondlg.cpp:130
 #, kde-format
 msgid "Adding New Institution"
-msgstr ""
+msgstr "ახალი დაწესებულების დამაება"
 
 #: kmymoney/dialogs/knewinstitutiondlg.cpp:178
 #, kde-format
@@ -2568,13 +2568,13 @@ msgstr ""
 #: kmymoney/dialogs/knewinstitutiondlg.ui:14
 #, kde-format
 msgid "New Institution Dialog"
-msgstr ""
+msgstr "ახალი დაწესებულების ფანჯარა"
 
 #. i18n: ectx: property (title), widget (QGroupBox, GroupBox1)
 #: kmymoney/dialogs/knewinstitutiondlg.ui:26
 #, kde-format
 msgid "Institution Details"
-msgstr ""
+msgstr "დაწესებულების დეტალები"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/knewinstitutiondlg.ui:32
@@ -2587,7 +2587,7 @@ msgstr "https://"
 #: kmymoney/dialogs/knewinstitutiondlg.ui:45 kmymoney/views/kpayeesview.ui:261
 #, kde-format
 msgid "Telephone/Fax:"
-msgstr ""
+msgstr "ტელეფონი/ფაქსი:"
 
 #. i18n: Tooltip for 'Bank Code' field. Include an example of the culture-specific term for 'Bank Code' here, if one is common (https://en.wikipedia.org/wiki/Bank_code).
 #. i18n: ectx: property (toolTip), widget (KLineEdit, bankCodeEdit)
@@ -14740,7 +14740,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/core/listtable.cpp:631
 #, kde-format
 msgid "Category Type"
-msgstr ""
+msgstr "კატეგორიის ტიპი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:635
@@ -15877,7 +15877,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/newgeneralinfowizardpage.ui:6
 #, kde-format
 msgid "General Information"
-msgstr ""
+msgstr "ზოგადი ინფორმაცია"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:1385
 #, kde-format
@@ -17588,7 +17588,7 @@ msgstr ""
 #: kmymoney/templates/templateloader.cpp:96
 #, kde-format
 msgid "Filetype Error"
-msgstr ""
+msgstr "ფაილის ტიპის შეცდომა"
 
 #: kmymoney/templates/templateloader.cpp:104
 #, kde-format

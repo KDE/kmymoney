@@ -2,78 +2,90 @@
 <chapter id="details.reconcile">
 <chapterinfo>
   <authorgroup>
-    <author> &Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
   </authorgroup>
-  <date>2010-07-21</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date
+>2010-07-21</date>
+  <releaseinfo
+>4.5</releaseinfo>
 </chapterinfo>
 
-<title>Reconciliation</title>
+<title
+>Kontenabgleich</title>
 
 <sect1 id="details.reconcile.whatis">
-<title>What is reconciliation?</title>
+<title
+>Was ist ein Kontenabgleich?</title>
 
-<para>
-  Reconciliation is the process of matching the transactions you have entered
-  into &kmymoney; with the transactions listed for that account by the
-  institution.  This is most commonly done with the list of transactions in a
-  statement, be it a bank statement, credit card statement, loan statement, or
-  any other statement. It can also be done against an on-line listing of the
-  account, although this is less common.  If any discrepancies are found, then
-  either you or the person who created the statement have made a mistake.
-</para>
+<para
+>Der Kontenabgleich dient dazu, die Buchungen, die Sie in &kmymoney; eingetragen haben, den Buchungen Ihres Bankkontos zuzuordnen. Dies wird normalerweise mit den Buchungen gemacht, die sich auf Ihrem Kontoauszug befinden, sei es der Auszug Ihres Girokontos, Ihrer Kreditkarte oder eines Kredits. Ein Kontenabgleich kann auch gegen eine Online-Liste des Kontos durchgeführt werden, was aber seltener vorkommt. Sollte es irgendwelche Diskrepanzen geben, haben entweder Sie oder die Person, die den Auszug erstellt hat, einen Fehler gemacht. </para>
 
-<para>
-  To reconcile an account, choose your account from the drop down box and click
-  on the <guiicon><inlinemediaobject><imageobject><imagedata fileref="reconcile.png"
-  format="PNG"/></imageobject></inlinemediaobject></guiicon> reconcile icon, select
-  the <menuchoice><guimenu>Account</guimenu> <guimenuitem>Reconcile...</guimenuitem>
-  </menuchoice> menu item or use the <keycombo>&Ctrl;&Shift;<keycap>R</keycap></keycombo>
-  shortcut.
-</para>
+<para
+>Um ein Konto abzugleichen, wählen Sie es aus der Auswahlliste aus und klicken Sie auf das Symbol <guiicon
+><inlinemediaobject
+> <imageobject
+><imagedata fileref="reconcile.png"/></imageobject
+> </inlinemediaobject
+>Abgleichen</guiicon
+>. Alternativ können Sie aus dem Menü den Punkt <menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Abgleichen ...</guimenuitem
+></menuchoice
+> auswählen oder über die Tastenkombination <keycombo
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+>. </para>
 </sect1>
 
 <sect1 id="details.reconcile.wizard">
-<title>The reconciliation wizard</title>
-<para>
-  This will open the reconciliation wizard.  The first page of the wizard
-  briefly describes the process you will follow.  Click
-  on <guibutton>Next</guibutton> to actually start the wizard.
-</para>
+<title
+>Der Abgleich-Assistent </title>
+<para
+>Es öffnet sich der Abgleich-Assistent. Auf der ersten Seite des Assistenten wird kurz erläutert, wie der Prozess des Kontenabgleichs abläuft. Klicken Sie auf den Knopf <guibutton
+>Weiter</guibutton
+>, um den Assistenten zu starten. </para>
 
 <para>
 <screenshot>
-	<screeninfo>Reconciliation wizard</screeninfo>
+	<screeninfo
+>Abgleich-Assistent</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="reconcile1.png" format="PNG" />
+	<imagedata fileref="reconcile1.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Reconciliation wizard</phrase>
+	<phrase
+>Abgleich-Assistent</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
 <sect2 id="details.reconcile.wizard.statement">
-<title>Statement details</title>
-<para>
-  The statement date, starting balance, and ending balance can be found in your
-  statement.  Make sure that the figures match and click on
-  the <guibutton>Next</guibutton> button.  If the figures do not match then
-  enter the figures as listed on your statement and click on
-  the <guibutton>Next</guibutton> button.
-</para>
+<title
+>Auszugsinformationen</title>
+<para
+>Das Auszugsdatum, der Anfangs- und der Endsaldo können Sie auf Ihrem Kontoauszug finden. Stellen Sie sicher, dass die angezeigten Werte stimmen und klicken Sie den Knopf <guibutton
+>Weiter</guibutton
+>. Sollten die Werte von denen auf Ihrem Kontoauszug abweichen, dann geben Sie die Werte von Ihrem Kontoauszug ein und klicken Sie anschließend auf den Knopf <guibutton
+>Weiter</guibutton
+>. </para>
 
 <para>
 <screenshot>
-	<screeninfo>Reconciliation wizard</screeninfo>
+	<screeninfo
+>Abgleich-Assistent</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="reconcile2.png" format="PNG" />
+	<imagedata fileref="reconcile2.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Reconciliation wizard</phrase>
+	<phrase
+>Abgleich-Assistent</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
@@ -81,130 +93,113 @@
 </sect2>
 
 <sect2 id="details.reconcile.wizard.interest">
-<title>Interest</title>
-<para>
-  If the statement reconciliation is on a bank account or any account with
-  interest and/or charges fees, then enter these values in the appropriate
-  fields.  A category can be assigned for each of these amounts.
-</para>
+<title
+>Zinsen</title>
+<para
+>Wenn der Kontenabgleich auf einem Bankkonto oder einem Konto mit Zinsen und/oder Gebühren stattfindet, dann geben Sie diese in die entsprechenden Eingabefelder ein. Jedem der Werte kann eine passende Kategorie zugeordnet werden. </para>
 
 <note>
-<para>
-  The interest field is for interest you gained. If you have to pay interest,
-  &eg;, for a credit card account, this has to be entered as a charge.
-</para>
+<para
+>Das Eingabefeld "Zinsen" ist vorgesehen für Zinsen, die Sie erhalten. Wenn Sie dagegen Zinsen bezahlen müssen, &eg; für ein Kreditkartenkonto, können Sie diese in das Feld "Gebühren" eintragen. </para>
 </note>
 
 <para>
 <screenshot>
-	<screeninfo>Reconciliation wizard</screeninfo>
+	<screeninfo
+>Abgleich-Assistent</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="reconcile3.png" format="PNG" />
+	<imagedata fileref="reconcile3.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Reconciliation wizard</phrase>
+	<phrase
+>Abgleich-Assistent</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<para>
-  Click on <guibutton>Continue</guibutton> to start matching your statement to
-  what you have entered.  Note that this completes the Reconciliation Wizard,
-  but not the process of reconciliation.  It also changes the ledger display by
-  only showing transactions that have not already been marked as reconciled.  As
-  described below, you still need to clear transactions and then tell &kmymoney;
-  that the account is reconciled.
-</para>
+<para
+>Klicken Sie auf <guibutton
+>Fortsetzen</guibutton
+>, um den Abgleich des Kontoauszugs mit den eingegebenen Buchungen zu beginnen. Beachten Sie, dass hierdurch nur das Fenster des Abgleich-Assistenten geschlossen wird, nicht aber der Abgleichprozess beendet ist. Auch die Ansicht im Kontenbuch ändert sich, es werden nur Buchungen angezeigt, die noch nicht als abgeglichen markiert wurden. Wie weiter unten beschrieben, müssen Sie noch Ihre Buchungen verrechnen und &kmymoney; abschließend mitteilen, dass das Konto abgeglichen wurde. </para>
 </sect2>
 
 <sect2 id="details.reconcile.wizard.clearing">
-<title>Clearing transactions</title>
-<para>
-  During the reconciliation, any transaction can be edited to make it match the
-  statement, and new transactions can be created as usual.  To mark a
-  transaction as cleared, click on the <guilabel>C</guilabel> column in the list
-  view.  A transaction is cleared when it matches the transaction on your
-  statement.
-</para>
+<title
+>Buchungen verrechnen</title>
+<para
+>Während des Abgleichs kann jede Buchung bearbeitet werden, damit Sie dem Kontoauszug zugeordnet werden kann. Neue Buchungen können wie sonst auch erstellt  werden. Um eine Buchung als verrechnet zu kennzeichnen, klicken Sie auf die Spalte <guilabel
+>V</guilabel
+> in der Listenansicht. Eine Buchung ist dann verrechnet, wenn Sie einer Buchung auf Ihrem Kontoauszug zugeordnet werden konnte. </para>
 
-<para>
-  The command frame (just below the transaction list area) displays the
-  statement amount on the left, the cleared amount in the center, and the
-  difference on the right.  As you mark transactions cleared, these values
-  update to show the change.
-</para>
+<para
+>Der Bereich gleich unterhalb der Buchungsliste zeigt den Saldo des Kontoauszugs links, die Summe der bereits verrechneten Buchungen in der Mitte und die Differenz auf der rechten Seite. Wenn Sie Buchungen als verrechnet markieren, werden diese Werte aktualisiert, um die Änderungen anzuzeigen. </para>
 
-<para>
-  Note, however, that as reconciliation is the process of matching the data in
-  your account with that on a statement, changes to any transaction with dates
-  after the statement date you entered in the wizard will be saved, but will not
-  have any effect on the cleared amount shown in the command frame.
-</para>
+<para
+>Denken Sie daran, Abgleichen ist der Prozess der Zuordnung von Daten in Ihrem Konto zu den Buchungen auf dem Kontoauszug. Änderungen an Buchungen zu einem späteren Datum als dem Datum des Kontoauszugs, das Sie im Assistenten eingegeben haben, werden gespeichert, aber nicht im Befehlsbereich als abgeglichene Summe angezeigt. </para>
 
 <screenshot>
-	<screeninfo>Reconciliation wizard</screeninfo>
+	<screeninfo
+>Abgleich-Assistent</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="reconcile4.png" format="PNG" />
+	<imagedata fileref="reconcile4.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Reconciliation wizard</phrase>
+	<phrase
+>Abgleich-Assistent</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
 </sect2>
 
 <sect2 id="details.reconcile.complete">
-<title>Completing Reconciliation</title>
+<title
+>Den Kontenabgleich abschließen</title>
 
 <sect3 id="details.reconcile.finish">
-<title>Finishing Reconciliation</title>
-<para>
-  When the difference between the statement and the cleared balance is zero then
-  the account is reconciled and you can click the <guibutton>Finish</guibutton>
-  button.  When you do this, &kmymoney; takes all the transactions which have
-  been marked as cleared and marks them as reconciled, and the value in the
-  <guilabel>C</guilabel> column changes from <quote>C</quote> to
-  <quote>R</quote> to reflect the change. In addition, it saves the changes and
-  records that the account has been reconciled. (You still need to save the file
-  to permanently save all the changes.)
-</para>
+<title
+>Den Kontenabgleich beenden</title>
+<para
+>Wenn die Differenz zwischen dem Saldo des Kontoauszugs und der Summe der bereits verrechneten Buchungen 0 beträgt, ist das Konto abgeglichen und Sie können den Knopf <guibutton
+>Fertigstellen</guibutton
+> betätigen. Wenn Sie den Abgleich dadurch abschließen, wird &kmymoney; alle Buchungen, die als "Verrechnet" markiert wurden in den Status "Abgeglichen" überführen. Der Wert in der Spalte <guilabel
+>V</guilabel
+>  wechselt dann von <guilabel
+>V</guilabel
+> zu <guilabel
+>A</guilabel
+>. Zusätzlich speichert &kmymoney; die Änderungen ab und vermerkt, dass das Konto abgeglichen wurde. Um diese Änderungen dauerhaft zu speichern, muss die Datei gespeichert werden. </para>
 </sect3>
 
 <sect3 id="details.reconcile.postpone">
-<title>Postponing Reconciliation</title>
-<para>
-  If you're having trouble completing the reconciliation, or you need to gather
-  some additional information before you can complete the process, you can
-  postpone the process to a later time by clicking on the
-  <guibutton>Postpone</guibutton> button. When you do this, &kmymoney; remembers
-  the values you entered when you started the wizard, it does not mark cleared
-  transactions as reconciled, and it returns the ledger to its normal view.  If
-  you exit &kmymoney; before clicking either <guibutton>Finish</guibutton> or
-  <guibutton>Postpone</guibutton>, it has the same effect as clicking
-  <guibutton>Postpone</guibutton>.  Any edits you have made, such as marking
-  transactions cleared or entering new transactions, are not touched, and you
-  can still save them before you exit &kmymoney;.  However, you will have to run
-  the reconciliation wizard again in order to reconcile the account.
-</para>
+<title
+>Den Abgleich zurückstellen</title>
+<para
+>Haben Sie Probleme bei der Fertigstellung eines Abgleichs oder benötigen Sie weitere Informationen, ehe Sie das Abgleichen fertigstellen können, dann verschieben Sie den Abgleich mit <guibutton
+>Abgleich zurückstellen</guibutton
+> auf einen späteren Termin. Dann werden die eingegebenen Werte seit dem Start des Assistenten gespeichert, verrechnete Buchungen werden nicht als abgeglichen markiert und die Ansicht wechselt zum Kontenbuch. Beenden Sie &kmymoney;, ehe Sie <guibutton
+>Fertigstellen</guibutton
+> oder <guibutton
+>Abgleich zurückstellen</guibutton
+> gedrückt haben, hat das die gleichen Auswirkungen als wenn Sie <guibutton
+>Abgleich zurückstellen</guibutton
+> gedrückt hätten. Alle Änderungen wie das Markieren von Buchungen als verrechnet oder die Eingabe neuer Buchungen sind nicht betroffen, Sie können diese Änderungen immer noch speichern, ehe Sie &kmymoney; beenden. Sie müssen den Abgleichprozess jedoch wiederholen, um die Konten abzugleichen. </para>
 
-<para>
-  When you run the reconciliation wizard on this account the next time,
-  &kmymoney; remembers the values you entered when you previously ran the
-  wizard, and you will be able to change them, if necessary.  In this case, the
-  initial screen of the wizard is different, to remind you of this.
-</para>
+<para
+>Starten Sie diesen Abgleich-Assistenten beim nächsten Mal, wird &kmymoney; die beim letzten Abgleich eingegebenen Daten wieder als Vorgabe einsetzen. Sie können diese Vorgaben dann ändern, wenn nötig. In diesem Fall werden Sie durch einen anderen Startbildschirm des Assistenten an diese Tatsache erinnert. </para>
 
 <screenshot>
-	<screeninfo>Reconciliation wizard</screeninfo>
+	<screeninfo
+>Abgleich-Assistent</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="reconcile-redo.png" format="PNG" />
+	<imagedata fileref="reconcile-redo.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Reconciliation wizard</phrase>
+	<phrase
+>Abgleich-Assistent</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>

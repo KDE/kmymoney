@@ -2,808 +2,704 @@
 <chapter id="details.accounts">
 <chapterinfo>
   <authorgroup>
-    <author> &Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
-    <author> &Roger.Lum; &Roger.Lum.mail; </author>
-    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
   </authorgroup>
-  <date>2018-02-01</date>
-  <releaseinfo>5.0.0</releaseinfo>
+  <date
+>2011-07-21</date>
+  <releaseinfo
+>4.6</releaseinfo>
 </chapterinfo>
-
-<title>Accounts</title>
+  
+<title
+>Konten</title>
 
 <sect1 id="details.accounts.view">
-<title>The Accounts View</title>
+<title
+>Die Kontenansicht</title>
 
-<para>
-  The Accounts view provides a summary of all the accounts. It is similar to the
-  Institutions view, except accounts are grouped under the Asset and Liability
-  asset categories.  Typical asset accounts include bank accounts, cash, and
-  investments, while typical liability accounts include credit cards and loans.
-</para>
+<para
+>Die Kontenansicht gibt Ihnen einen Überblick über alle vorhandenen Konten. Es gibt vier verschiedene Kategorien: die Anlagen, die Verbindlichkeiten, Einnahmen und Ausgaben. Typischerweise werden unter Aktivposten Ihre Bankkonten, Ihr Bargeld und Investitionen zusammengefasst, während typische Verbindlichkeiten Dinge sind wie Kreditkarten oder Darlehen. </para>
 
-<para>
-  There are actually two other account categories: Income and
-  Expense. Categories are a way to organize your transaction; they are grouped
-  under either the Income or Expense account category and are treated
-  internally by &kmymoney; as accounts. They are described in more detail in
-  the chapter on <link linkend="details.categories">Categories</link>. The
-  Income and Expense account categories are always displayed in the Categories
-  view, but it is possible to <link linkend="details.settings">configure
-  &kmymoney;</link> to also display them on the Accounts view.
-</para>
+<para
+>Es gibt zwei verschiedene Ansichten der Konten: eine Listenansicht oder eine Symbolansicht, welche durch den jeweiligen Karteireiter im oberen Fensterbereich auswählbar sind. </para>
 
-<para>
-<screenshot>
-    	<screeninfo>account view</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="account_view.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>account view</phrase>
-	</textobject>
-	</mediaobject>
-</screenshot>
-</para>
+<para
+>In der Listenansicht werden die Konten unter vier Überschriften gruppiert: Anlagen, Verbindlichkeiten, Einnahmen und Ausgaben. Die Listenansicht zeigt den Namen und den Kontostand jedes Kontos. Unter Einnahmen und Ausgaben werden die Kategorien aufgelistet, die jeder Transaktion zugeordnet wurden, wobei die Funktionalität der Kategorienansicht ähnelt. Die Optionen und Funktionalitäten der Einnahmen- und Ausgabenkonten werden detailliert im Kapitel <link linkend="details.categories"
+>Kategorien</link
+> erläutert. In diesem Kapitel liegt der Fokus auf den Funktionalitäten der Anlagen- und Verbindlichkeitenkonten. </para>
 
-<para>
-  Similar to the Institutions view, the Accounts view displays several columns
-  with descriptive and summary information about each account.  The rest of this
-  chapter will focus on Asset and Liability account functionality.  Income and
-  Expense accounts, &ie;, Categories, are described in the chapter on <link
-  linkend="details.categories">Categories</link>.
-</para>
-
+<para
+>In der Symbolansicht werden die Verbindlichkeiten- und Anlagenkonten durch entsprechende Symbole dargestellt. &kappname; sortiert die Symbole zu Beginn in alphabetischer Reihenfolge, doch Sie können sie mit der Maus an eine beliebige Stelle verschieben. Beachten Sie, dass &kappname; das reine Verschieben der Symbole nicht als Änderung erkennt. Das bedeutet, dass die Anordnung der Symbole erst beim nächsten Speichervorgang gesichert wird, &eg; durch das Editieren eines Kontos oder einer Buchung. Die gespeicherte Datei enthält dann auch die Position der Symbole. </para>
 </sect1>
 
 <sect1 id="details.accounts.create">
-<title>Creating an Account</title>
-
-<note><para>
-    You must have a file open before you can create a new account. If you
-    do not have an existing file, you will need to <link
-    linkend="firsttime.3">create one</link>.
-</para></note>
+<title
+>Anlegen eines Kontos</title>
 
 <para>
-  To create a new account, you can either select the <menuchoice>
-  <guimenu>Account</guimenu><guimenuitem>New account...</guimenuitem></menuchoice>
-  menu item or choose the <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="newacct.png" format="PNG"/></imageobject></inlinemediaobject>
-  </guiicon> new account icon from the toolbar. You can also create an account
-  from the Accounts view; click on the Accounts icon in the view selector and
-  then right click on the Asset or Liability tree icon and select <guimenuitem>New
-  account...</guimenuitem> from the popup menu.
+  <emphasis
+>Anmerkung: Es muss eine Datei geöffnet sein, wenn Sie ein neues Konto anlegen möchten. Wenn Sie noch keine bestehende Datei haben, so müssen Sie zunächst eine <link linkend="firsttime.3"
+>neue Datei erzeugen</link
+>. </emphasis>
 </para>
 
+<para
+>Um ein neues Konto anzulegen, können Sie entweder aus dem Menü den Punkt <menuchoice
+><guimenu
+>Konto</guimenu
+><guimenuitem
+>Neues Konto...</guimenuitem
+></menuchoice
+>, oder das Symbol <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="newacct.png" format="PNG"/></imageobject
+><textobject
+> <phrase
+>Neues Konto</phrase
+></textobject
+></inlinemediaobject
+></guiicon
+> aus der Symbolleiste auswählen. </para>
+
+<para
+>Alternativ können Sie zum Anlegen eines neuen Kontos auch auf das Symbol „Konten“ auf der linken Seite des &kappname;-Fensters klicken und dann mit der rechten Maustaste auf das Anlagen-Symbol klicken. Im erscheinenden Menü wählen Sie <guimenuitem
+>Neues Konto</guimenuitem
+>. Der Zweig „Anlagen“ beinhaltet alle Ihre Konten, die Ihr Vermögen darstellen. Anlagen und alle anderen Kontentypen werden im Verlauf des Handbuches detaillierter erklärt. </para>
+
 <sect2 id="details.accounts.create.institution">
-<title>The Institution (Bank) name</title>
+<title
+>Der Institutsname (Bankname)</title>
 
 <para>
   <screenshot>
     <mediaobject>
       <imageobject>
-        <imagedata fileref="accwiz1.png" format="PNG" />
+        <imagedata fileref="accwiz1.png" format="PNG"/>
       </imageobject>
       <textobject>
-        <phrase>Account Wizard</phrase>
+        <phrase
+>Kontenassistent</phrase>
       </textobject>
     </mediaobject>
   </screenshot>
 </para>
 
-<para>
-  The first step involves selecting an institution for the account.  If this is
-  an account for an institution you have already created, you can select the
-  institution from the dropdown list.  If you want to create a new institution,
-  click on the <guibutton>New Institution</guibutton> button.  This will bring
-  up the New Institution Dialog, as described in the previous section.  If this
-  is not a bank account, or if you do not want to use online banking, you do not
-  need to specify an institution.
-</para>
+<para
+>Zuerst wählen Sie ein Geldinstitut für das Konto aus. Wenn es sich um ein Konto bei einem bereits vorhandenen Geldinstitut handelt, können Sie dieses aus der Liste auswählen. Wenn Sie ein neues Geldinstitut anlegen möchten, klicken Sie auf den Knopf <guibutton
+>Neues Geldinstitut</guibutton
+>. Hierüber erreichen Sie das Dialogfenster zum Anlegen eines neuen Geldinstituts, wie es im vorhergehenden Kapitel beschrieben wurde. Wenn Sie kein Bankkonto anlegen möchten, oder wenn Sie kein Online-Banking nutzen möchten, müssen Sie kein Geldinstitut angeben. </para>
 
-<para>
-  The Account Number and the <ulink
-  url="https://en.wikipedia.org/wiki/International_Bank_Account_Number"><acronym>IBAN</acronym>
-  (International Bank Account Number)</ulink> are not currently used
-  by &kmymoney;.  These fields may be left blank and filled in at a later time;
-  they are only required for online banking.
-</para>
+<para
+>Die Kontonummer und die <acronym
+><ulink url="http://en.wikipedia.org/wiki/International_Bank_Account_Number"
+>IBAN (International Bank Account Number)</ulink
+></acronym
+> werden derzeit von &kappname; nicht verwendet. Diese Felder können frei bleiben und später ausgefüllt werden. Sie werden nur für Online-Banking-Funktionen benötigt. </para>
 
-<para>
-  To proceed to the next step click on <guibutton>Next</guibutton>.
-</para>
+<para
+>Um zum nächsten Schritt zu gelangen, klicken Sie auf die Schaltfläche <guibutton
+>Weiter</guibutton
+>. </para>
 </sect2>
 
 <sect2 id="details.accounts.create.account">
-<title>Account</title>
+<title
+>Konto</title>
 
 <para>
   <screenshot>
           <mediaobject>
             <imageobject>
-              <imagedata fileref="accwiz2.png" format="PNG" />
+              <imagedata fileref="accwiz2.png" format="PNG"/>
             </imageobject>
             <textobject>
-              <phrase>Account Wizard</phrase>
+              <phrase
+>Kontenassistent</phrase>
             </textobject>
           </mediaobject>
   </screenshot>
 </para>
 
-<para>
-  First, enter a name for the account. This name will be used to identify it.
-</para>
+<para
+>Diese Seite wird verwendet, um den Kontotyp festzulegen. </para>
 
-<para>
-  Next, select the type of account from one of the types available from the
-  dropdown list.  Different account types are handled differently within
-  &kmymoney;, so it is important to choose the correct type when creating the
-  account.  Also, different types of accounts require different setup
-  information, and may display different pages in the new account setup wizard
-  to collect that information.
-</para>
+<para
+>Geben Sie als erstes den Namen des Kontos an. Dieser Name wird verwendet, um das Konto eindeutig zu identifizieren. </para>
+
+<para
+>Als nächstes wählen Sie aus dem Auswahlfeld den Typ des Kontos aus: </para>
 
 <variablelist>
   <varlistentry>
-    <term>Checking</term>
+    <term
+>Girokonto</term>
     <listitem>
-      <para>
-        A normal checking account, the type you get with any bank or credit union.
-      </para>
+      <para
+>Ein normales Girokonto, wie Sie es alle bekannten Banken und Sparkassen anbieten. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Savings</term>
+    <term
+>Sparkonto</term>
     <listitem>
-      <para>
-        A normal savings account, the type you get with any bank or credit union.
-      </para>
+      <para
+>Ein normales Sparkonto, wie es alle bekannten Banken und Sparkassen anbieten. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Credit Card</term>
+    <term
+>Kreditkarte</term>
     <listitem>
-      <para>
-        An account to represent your credit card.
-      </para>
+      <para
+>Ein Konto das Ihre Kreditkarte repräsentiert. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Cash</term>
+    <term
+>Bargeld</term>
     <listitem>
-      <para>
-        A general purpose account, typically used for accounts not held at a
-        bank, such as the cash in your wallet.
-      </para>
+      <para
+>Ein allgemeines Konto, das man verwendet, wenn kein Bankkonto verwaltet werden soll, z.B. das Portemonnaie in Ihrer Tasche oder ein Haushaltsbuch. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Loan</term>
+    <term
+>Kredit</term>
     <listitem>
-      <para>
-        An account to manage a loan for money either borrowed or lent.  With a
-        Loan account &kmymoney; automatically calculates interest payments to
-        help you track the remaining principal on the loan.  Loans with no
-        interest might use the plain Asset or Liability type below, depending on
-        whether the money is lent or borrowed.
-      </para>
+      <para
+>Ein Konto, mit dem man in Anspruch genommene oder selbst vergebene Kredite verwalten kann. Mit Kreditkonten können automatische Zinsberechnungen durchgeführt werden, um den Verlauf des Kredits zu verfolgen. Geringfügige Kredite können auch mit dem Kontotyp Anlage oder Verbindlichkeit verwaltet werden, abhängig davon ob das Geld ge- oder verliehen wurde. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Investment</term>
+    <term
+>Investition</term>
     <listitem>
-      <para>
-        An account to manage an investment such as stocks, bonds, or mutual
-        funds.
-      </para>
+      <para
+>Ein Konto zur Verwaltung von Wertpapierdepots, wie Aktien oder Fonds. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Asset</term>
+    <term
+>Anlagen</term>
     <listitem>
-      <para>
-        An account to manage an asset that does not fit in one of the above
-        types.
-      </para>
+      <para
+>Ein Konto zur Verwaltung von Anlagen, die nicht zu einer der oben genannten Kontotypen passen. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Liability</term>
+    <term
+>Verbindlichkeiten</term>
     <listitem>
-      <para>
-        An account to manage a money you owe or a future expense that does not
-        fit in one of the above types.  This is most commonly used for loans
-        with no interest.  If interest needs to be calculated, you might be
-        better using the Loan type above.
-      </para>
+      <para
+>Mit diesem Konto können Sie Verbindlichkeiten verwalten, z.B. geliehenes Geld oder eine in der Zukunft zu erwartende Ausgabe. Wenn Sie Zinsen kalkulieren möchten, sollten Sie besser den Kontotyp „Kredit“ verwenden. </para>
     </listitem>
   </varlistentry>
 </variablelist>
 
-<para>
-  Select the currency to be used for the account from the dropdown list.
-</para>
+<para
+>Wählen Sie die zu verwendende Währung des Kontos aus der Liste aus. </para>
+
+<para
+>Geben Sie das Eröffnungsdatum des Kontos ein, oder wählen Sie es aus dem Kalender durch Klick auf das Symbol auf der rechten Seite. </para>
+
+<para
+>Geben Sie den Anfangskontostand ein. Wenn es sich um ein reales Bankkonto handelt finden Sie diese Information auf Ihrem Kontoauszug. Wenn es sich um ein neues Konto handelt, können Sie den Anfangskontostand auf 0 belassen. </para>
+
+<para
+>Durch Auswahl der Option <emphasis
+>Bevorzugtes Konto</emphasis
+> können Sie auf dieses Konto in einigen Dialogfenstern von &kappname; bevorzugt zugreifen. </para>
+
+<para
+>Um zum nächsten Schritt zu gelangen klicken Sie auf <guibutton
+>Weiter</guibutton
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Kreditkartenkonten</title>
+
+<para
+>Wenn Sie ein Kreditkartenkonto eröffnen, so haben Sie die Möglichkeit, dass &kappname; für Sie automatisch eine <link linkend="details.schedules"
+>geplante Buchung</link
+> anlegt. </para>
 
 <para>
-  Enter the date the account was opened or select it from the calendar using the
-  icon to the right.  You will not be able to enter any transaction with a date
-  earlier than the account opening date, but you can change this date later, if
-  necessary.
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz6.png" format="PNG"/>
+              </imageobject>
+
+              <textobject>
+                <phrase
+>Kontenassistent</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
 </para>
 
-<para>
-  Enter the opening balance for the account. If this is an existing bank
-  account, this information can be found on your statement. If it is a new
-  account, the opening balance can be left at zero.
-</para>
+<para
+>Wenn Sie eine solche geplante Buchung anlegen lassen möchten, kreuzen Sie das Optionsfeld an und geben Sie die benötigten Informationen ein. </para>
+
+<para
+>Zum Fortfahren klicken Sie auf <guibutton
+>Weiter</guibutton
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Investitionskonten</title>
+
+<para
+>Bei Investmentkonten haben Sie die Möglichkeit, ein zugehöriges Wertpapierhandelskonto zu eröffnen. Weitere Informationen finden Sie unter <link linkend="details.investments"
+>Investitionen</link
+>. </para>
 
 <para>
-  Selecting the <emphasis>Preferred Account</emphasis> check box will allow
-  preferred access in some dialogs and views of &kmymoney;.
-</para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz7.png" format="PNG"/>
+              </imageobject>
 
-<para>
-  To proceed to the next step click on <guibutton>Next</guibutton>.
+              <textobject>
+                <phrase
+>Kontenassistent</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
 </para>
 </sect2>
 
 <sect2>
-<title>Credit Card Accounts</title>
+<title
+>Kreditkonten</title>
 
-<para>
-  When creating a Credit Card account, after entering the basic information and
-  clicking <guibutton>Next</guibutton>, you can optionally have &kmymoney;
-  create a <link linkend="details.schedules">scheduled transaction</link> for
-  you.
-</para>
+<para
+>Kreditkonten sind spezielle Konten, die Ihnen helfen, Kredite mit Zinsberechnungen und Tilgungen zu verwalten. Indem Sie &kappname; mit den entsprechenden Informationen über den Kredit versorgen, kann &kappname; Ihnen dabei helfen, die Entwicklung der Zinszahlungen und der verbleibenden Verbindlichkeiten des Kredits zu beobachten. </para>
 
 <para>
   <screenshot>
             <mediaobject>
               <imageobject>
-                <imagedata fileref="accwiz6.png" format="PNG" />
+                <imagedata fileref="accwiz8_1.png" format="PNG"/>
               </imageobject>
+
               <textobject>
-                <phrase>Account Wizard</phrase>
+                <phrase
+>Kontenassistent</phrase>
               </textobject>
             </mediaobject>
   </screenshot>
 </para>
+	
+<para
+>Auf der Detail-Seite geben Sie generelle Informationen des Kredits ein. </para>
 
-<para>
-  If you want such a transaction generated, make sure the check box is selected
-  and enter the required information.
-</para>
+<para
+>Zuerst geben Sie an, ob Sie einen Kredit aufnehmen, oder Geld verleihen. Wenn es sich um einen aufgenommenen Kredit handelt, erscheint dieser in der Kontenansicht unter „Verbindlichkeiten“. Wenn Sie Geld verliehen haben, taucht es unter „Anlagen“ auf. </para>
+	
+<para
+>Als nächstes geben Sie den Empfänger oder den Zahlenden des Kredits an. Wie gewohnt erzeugt &kappname; automatisch einen Empfänger-Datensatz, wenn dieser noch nicht vorhanden ist. </para>
 
-<para>
-  Click on <guibutton>Next</guibutton> to continue.
-</para>
-</sect2>
+<para
+>Die folgenden drei Elemente sind für Kredite relevant, bei denen Sie bereits Zahlungen geleistet oder empfangen haben. Wenn Sie „Ja"“ im Feld „Wurden schon Zahlungen geleistet“ auswählen, so können Sie im folgenden Feld auswählen, ob Sie alle Zahlungen oder nur die Zahlungen ab Jahresanfang des aktuellen Jahres erfassen möchten. Möchten Sie die Zahlungen ab Jahresanfang erfassen, so müssen Sie noch den aktuellen Saldo des Kredits am Anfang des Jahres eintragen. </para>
+	
+<para
+>Als nächstes geben Sie an, wie oft Zahlungen erfolgen und wie häufig sich der Zinssatz ändert. Bei der Zinseszinsberechnung werden auf die angefallenen Zinsen zum nächsten Abrechnungszeitpunkt erneut Zinsen berechnet. Es ist üblich, dass die Zinsen zum gleichen Zeitpunkt entrichtet werden, wie die Tilgung,  </para>
 
-<sect2>
-<title>Investment Accounts</title>
-
-<para>
-  In &kmymoney;, Investment accounts contain only equities (stocks, bonds,
-  &etc;) but do not contain cash.  (This is why you cannot specify a Opening
-  balance for an Investment account.)  If a transaction in an Investment account
-  requires or generates cash (such as to buy or sell stock,) a Brokerage account
-  is used for the cash.  Brokerage accounts are described further in the chapter
-  on <link linkend="details.investments">Investments</link>.  When you create a
-  new Investment account, after entering the basic information, and clicking
-  <guibutton>Next</guibutton>, you have the option to create an associated
-  Brokerage account.
-</para>
-
+<para
+>Nun geben Sie das Datum an, an dem die erste Zahlung erfolgt. </para>
+	
+<para
+>Zum Schluss geben Sie noch an, wie sich der Zinssatz ändert. Wenn der Kredit einen festen Zinssatz hat, ist hier nichts einzutragen. Wenn der Zinssatz aber variabel ist, wählen Sie „Variabel“ im Feld „Art der Zinsen“ aus und geben an, wie häufig sich der Zinssatz ändert und das Datum der nächsten Zinssatzänderung. &kappname; wird Sie nach dem neuen Zinssatz fragen, wenn das Datum erreicht ist. </para>
+	
 <para>
   <screenshot>
             <mediaobject>
               <imageobject>
-                <imagedata fileref="accwiz7.png" format="PNG" />
+                <imagedata fileref="accwiz8_2.png" format="PNG"/>
               </imageobject>
+
               <textobject>
-                <phrase>Account Wizard</phrase>
+                <phrase
+>Kontenassistent</phrase>
               </textobject>
             </mediaobject>
   </screenshot>
 </para>
+  
+<para
+>Auf der Seite „Zahlungen“ können Sie den Kreditbetrag, die Laufzeit, die Tilgungsrate und den Zinssatz für den Kredit eingeben. </para>
 
-<para>
-  It is generally best to create the Brokerage account here, which will be given
-  the same name as the Investment account, with "(Brokerage)" appended.
-  Currently it is not possible to specify the opening date or balance for the
-  Brokerage account at this point; you may do by editing the account details
-  after the account has been created.
-</para>
-</sect2>
+<para
+>Geben Sie zuerst an, ob die Zinsen berechnet werden, nachdem die Zahlung erfolgt ist, oder wenn diese fällig ist. Wenn Sie sich nicht sicher sind, belassen Sie den Vorgabewert. </para>
 
-<sect2>
-<title>Loan Accounts</title>
-
-<para>
-  Loan accounts are special accounts used to help you manage Loans with interest
-  and scheduled repayments.  By providing &kmymoney; with information about the
-  loan, &kmymoney; can help you track interest payments and the remaining
-  principal of the loan.
-</para>
-
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_1.png" format="PNG" />
-              </imageobject>
-              <textobject>
-                <phrase>Account Wizard</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
-
-<para>
-  On the Details page you enter the general information about the loan.
-</para>
-
-<para>
-  First, select whether you are borrowing or lending money.  If you are
-  borrowing money the loan will be listed in Accounts under Liabilities.  If you
-  are lending money the loan will be listed under Assets.
-</para>
-
-<para>
-  Next, select the payee or payer of the loan.  As always, if the name doesn't
-  yet exist in the Payees list, enter it here and &kmymoney; will create it for
-  you.
-</para>
-
-<para>
-  The next three items are for handling Loans on which you've already made
-  payments.  If you select <guibutton>Yes</guibutton> in the <guilabel>Did you make/receive any
-  payments yet?</guilabel> dropdown, you can then select whether you want to
-  record all payments or just those from the beginning of the current year.  If
-  you want to record from the beginning of the current year, you are than asked
-  to input the balance at the beginning of this year.
-</para>
-
-<para>
-  Next, select how often payments will be made and how often interest is
-  compounded.  Compounding is where the interest is added to the amount owed on
-  the loan so that when the interest is next calculated there will be more
-  interest paid on the interest.  It's common for interest to be compounded at
-  the same frequency that payments are made.
-</para>
-
-<para>
-  Next, enter the date the first payment to be recorded.
-</para>
-
-<para>
-  Finally, enter information about how the interest rate varies.  If the loan is
-  fixed-rate there is nothing to do.  If the rate varies, select Variable in
-  <guilabel>Type of interest rate</guilabel> and then enter the interval
-  between interest rate changes and the date the first change of interest rate
-  is due: &kmymoney; will ask you to update the interest rate when that date
-  arrives.  Click <guibutton>Next</guibutton> to continue.
-</para>
-
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_2.png" format="PNG" />
-              </imageobject>
-              <textobject>
-                <phrase>Account Wizard</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
-
-<para>
-  The Payments page is where you enter the payment and interest values for the
-  loan.
-</para>
-
-<para>
-  First, select whether the interest rate is calculated when the payment is
-  received or when it becomes due.  If you don't know, leave it on the default
-  value.
-</para>
-
-<para>
-  Next, enter the following values:
-</para>
+<para
+>Als nächstes geben Sie die folgenden Werte ein: </para>
 
 <variablelist>
   <varlistentry>
-    <term>Loan amount</term>
+    <term
+>Kreditbetrag</term>
     <listitem>
-      <para>The amount of the loan.</para>
+      <para
+>Der Betrag des Kredits.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Interest rate</term>
+    <term
+>Zinssatz</term>
     <listitem>
-      <para>The annual percentage interest rate of the loan.</para>
+      <para
+>Der jährliche Zinssatz des Kredits in Prozent.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Term</term>
+    <term
+>Laufzeit</term>
     <listitem>
-      <para>
-        The length of the loan.  Enter a number and select either Months or
-        Years.
-      </para>
+      <para
+>Die Laufzeit des Kredits. Geben Sie eine Zahl ein und wählen Sie entweder Monate oder Jahre aus. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Payment (principal and interest)</term>
+    <term
+>Zahlung (Tilgung und Zins)</term>
     <listitem>
-      <para>
-        The amount of each loan payment.  This is the total of the principal and
-        interest paid with each payment.
-      </para>
+      <para
+>Der Betrag jeder Kreditzahlung. Er setzt sich zusammen aus der Tilgung und den Zinsen. </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Balloon payment</term>
+    <term
+>Einmalzahlung</term>
     <listitem>
-      <para>
-        Additional final payment made at the end of the term to pay off the
-        remaining principal of the loan.  For a repayment loan this is often
-        zero.  For an interest-only loan this will be the same as the loan
-        amount.
-      </para>
+      <para
+>Einmalzahlung am Ende der Kreditlaufzeit, mit der die Restschuld des Kredits beglichen wird. Für einen normalen Kredit ist diese üblicherweise 0.  </para>
     </listitem>
   </varlistentry>
 </variablelist>
 
-<para>
-  Finally, use the <guibutton>Calculate</guibutton> button to check the values
-  you have entered.  You must have entered either all or all but one of the
-  values listed above.  If you omit two or more values the button is disabled
-  because it is not possible to check that the entered values are consistent: in
-  that case you will not be able to use the Loan account facility in &kmymoney;
-  and will instead have to use a Liability or Asset account to track the loan
-  manually.
-</para>
-
-<para>
-  If you omit one value, &kmymoney; will try to calculate it for you.  If you
-  have entered all values &kmymoney; will check the values are consistent.
-  &kmymoney; will not adjust entered values other than the "Balloon payment",
-  which it may adjust slightly to deal with rounding.  If the values are
-  inconsistent or &kmymoney; cannot calculate the omitted value, &kmymoney; will
-  let you know so that you can correct any errors and repeat the calculation.
-</para>
-
-<para>
-  Once the values are consistent, the <guibutton>Next</guibutton> button is
-  enabled and you can advance to the next page.
-</para>
-
+<para
+>Über die Schaltfläche <guibutton
+>Berechnen</guibutton
+> können Sie die eingegebenen Werte überprüfen. Sie müssen entweder alle, oder alle außer einem Wert eingegeben haben. Wenn Sie zwei oder mehr Werte nicht eingegeben haben, ist die Schaltfläche deaktiviert, da es dann nicht möglich ist, die eingegebenen Werte auf Plausibilität zu prüfen: in diesem Fall können Sie die Kreditkonten-Funktion in &kappname; nicht nutzen und müssen stattdessen den Kontotyp Anlagen oder Verbindlichkeiten verwenden und den Kredit manuell überwachen. </para>
+	
+<para
+>Wenn Sie einen Wert nicht eingeben, wird &kappname; ihn für Sie berechnen. Wenn Sie alle Werte eingegeben haben, wird &kappname; diese auf Konsistenz überprüfen. &kappname; wird die eingegebenen Werte nicht verändern, außer dem Wert „Einmalzahlung“, welcher minimal durch Rundungsfehler verändert werden kann. Wenn die Werte nicht konsistent sind, oder &kappname; den ausgelassenen Wert nicht berechnen kann, werden Sie darüber informiert und können etwaige Fehler korrigieren und die Berechnung wiederholen. </para>
+	
+<para
+>Sobald die Werte konsistent sind, können Sie über den Knopf <guibutton
+>Weiter</guibutton
+> zur nächsten Seite gehen. </para>
+	
 <para>
   <screenshot>
             <mediaobject>
               <imageobject>
-                <imagedata fileref="accwiz8_3.png" format="PNG" />
+                <imagedata fileref="accwiz8_3.png" format="PNG"/>
               </imageobject>
+
               <textobject>
-                <phrase>Account Wizard</phrase>
+                <phrase
+>Kontenassistent</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+	 
+<para
+>Auf der Seite „Gebühren“ können Sie alle zusätzlichen Kosten und Gebühren hinterlegen, die zu den Kreditzahlungen addiert werden. </para>
+	
+<para
+>Wenn irgendwelche Gebühren zu zahlen sind, drücken Sie den Knopf <guibutton
+>Zusätzliche Kosten</guibutton
+>. Es öffnet sich der Editor für Split-Buchungen, in dem Sie die Kosten hinterlegen können. Alle Zeilen, die Sie hier eintragen, werden in der geplanten Buchung des Kredits eingetragen. Wenn Sie den Split-Editor schließen, werden Ihnen die Kosten für Zins und Tilgung, die im Split-Editor hinterlegten zusätzlichen Kosten und die Gesamtrate angezeigt. </para>
+	
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_4.png" format="PNG"/>
+              </imageobject>
+
+              <textobject>
+                <phrase
+>Kontenassistent</phrase>
+              </textobject>
+            </mediaobject>
+  </screenshot>
+</para>
+	  
+<para
+>&kappname; erzeugt automatisch eine <link linkend="details.schedules"
+>geplante Buchung</link
+> für Ihren Kredit. Im Bearbeitungsfenster für geplante Buchungen können Sie weitere Details hinterlegen, um die geplante Buchung zu erzeugen. </para>
+	
+<para
+>Zuerst geben Sie die Kategorie für die anfallenden Zinsen ein. Im zweiten Eingabefeld hinterlegen Sie das Konto, von dem die Zahlungen erfolgen. </para>
+	
+<para
+>Auf der Seite können Sie weiterhin das Datum der ersten Zahlung hinterlegen, das von der erzeugten geplanten Buchung übernommen wird. </para>
+	
+<para>
+  <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="accwiz8_5.png" format="PNG"/>
+              </imageobject>
+
+              <textobject>
+                <phrase
+>Kontenassistent</phrase>
               </textobject>
             </mediaobject>
   </screenshot>
 </para>
 
-<para>
-  The Fees page is where you can enter any fees added to the loan payments.
-</para>
-
-<para>
-  If there are any fees press the <guibutton>Additional Fees</guibutton> button.
-  The Transaction Split editor will be displayed for entry of the fees.  Any
-  lines added here will be included in the payment schedule for the loan.  When
-  you save the splits the Fees page will display the principal and interest
-  payment, the total additional fees, and the total periodic payment.
-</para>
-
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_4.png" format="PNG" />
-              </imageobject>
-              <textobject>
-                <phrase>Account Wizard</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
-
-<para>
-  &kmymoney; will create a <link linkend="details.schedules">scheduled
-  transaction</link> for your loan.  The Schedule page is where you enter the
-  remaining details needed to create the schedule.
-</para>
-
-<para>
-  First enter the Category to which loan interest will be assigned.  Then enter
-  the account from which the loan payment will be made.
-</para>
-
-<para>
-  The page also displays the first payment date for which the Schedule will be
-  created.
-</para>
-
-<para>
-  <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_5.png" format="PNG" />
-              </imageobject>
-              <textobject>
-                <phrase>Account Wizard</phrase>
-              </textobject>
-            </mediaobject>
-  </screenshot>
-</para>
-
-<para>
-  Optionally, &kmymoney; can create a transaction representing what was received
-  or paid when the loan was created.
-</para>
-
-<para>
-  If you borrowed or lent cash select the account from which or to which the
-  loan amount was paid.
-</para>
-
-<para>
-  If you borrowed money to purchase a car you can select or create an Asset
-  account to help you track the value of the new car.
-</para>
-
-<para>
-  If you re-financed an existing Loan, check the <guilabel>Refinance existing
-  loan</guilabel> check box, select the Loan account and &kmymoney; will create
-  a transfer transaction paying off the existing loan.
-</para>
-
-<para>
-  If you don't want to create the payout transaction, check the <guilabel>Do
-  not create payout transaction</guilabel> check box.
-</para>
+<para
+>Optional kann &kappname; eine Auszahlungsbuchung erzeugen, die den Betrag repräsentiert, der bei Aufnahme des Kredits gezahlt wurde oder den Sie erhalten haben. </para>
+	
+<para
+>Wenn Sie einen Kredit aufgenommen oder vergeben haben, geben Sie bitte an, von welchem bzw. auf welches Konto der Kreditbetrag gezahlt wurde. </para>
+	
+<para
+>Wenn Sie das geliehene Geld verwenden, um &eg; ein Auto zu kaufen, können Sie ein neues Anlagenkonto erzeugen, das Ihnen hilft, den Wert des neuen Autos zu beobachten. </para>
+	
+<para
+>Wenn Sie einen bestehenden Kredit ablösen, kreuzen Sie das Feld „Refinanzierung eines bestehenden Darlehens“ an, wählen ein Kreditkonto aus und &kappname; wird automatisch eine Transferbuchung zur Ablösung des existierenden Kredits erzeugen. </para>
+	
+<para
+>Möchten Sie keine Auszahlungsbuchung erstellen, so kreuzen Sie das Feld „Keine Auszahlungsbuchung erzeugen“ an. </para>
 </sect2>
 
 <sect2 id="details.accounts.create.parent">
-<title>Parent Account</title>
+<title
+>Übergeordnetes Konto</title>
 
 <para>
   <screenshot>
-	<screeninfo>Parent Account</screeninfo>
+	<screeninfo
+>Übergeordnetes Konto</screeninfo>
 	<mediaobject>
 	  <imageobject>
-            <imagedata fileref="accwiz10.png" format="PNG" />
+            <imagedata fileref="accwiz10.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase>Account Wizard</phrase>
+	    <phrase
+>Kontenassistent</phrase>
 	  </textobject>
 	</mediaobject>
   </screenshot>
 </para>
 
-<para>
-  This is the penultimate step in creating any new account except a loan.
-  Depending on the type of account that is being created, a tree of your Asset
-  or Liability accounts will be displayed.
-</para>
+<para
+>Dies ist der allerletzte Schritt, um ein neues Konto zu erzeugen. Eine Baumansicht aller Konten wird angezeigt. Der Baum besteht aus Ihren Anlagen- oder Verbindlichkeiten-Konten, abhängig davon, welchen Kontotyp Sie gerade erzeugen möchten. </para>
 
-<para>
-  The Parent Account page is not currently shown for Loans because they cannot
-  be created as subaccounts.  Also, Investment accounts cannot contain other
-  accounts so they are not shown in the tree.
-</para>
+<para
+>Wählen Sie das Konto aus, unterhalb dessen das neue Konto angelegt werden soll. Wenn Sie kein übergeordnetes Konto auswählen, wird das neue Konto auf der obersten Ebene angelegt. </para>
 
-<para>
-  Select the account you wish contain the new account.  If you do not select a
-  parent account, the new account will be created at the top level.
-</para>
-
+<para
+>Das Fenster zur Auswahl eines übergeordneten Kontos wird derzeit nicht bei Kreditkonten angezeigt, da Kreditkonten nicht als Unterkonten angelegt werden können. Auch Investmentkonten können keine weiteren untergeordneten Konten enthalten, sodass sie ebenfalls nicht in der Baumansicht angezeigt werden. </para>
 </sect2>
 
 <sect2>
-<title>Review and save the account details</title>
+<title
+>Überprüfung und Speicherung der Kontodetails</title>
 
 <para>
   <screenshot>
-          <screeninfo>Review</screeninfo>
+          <screeninfo
+>Überprüfung</screeninfo>
           <mediaobject>
             <imageobject>
-              <imagedata fileref="accwiz9.png" format="PNG" />
+              <imagedata fileref="accwiz9.png" format="PNG"/>
             </imageobject>
             <textobject>
-              <phrase>Account Wizard</phrase>
+              <phrase
+>Kontenassistent</phrase>
             </textobject>
           </mediaobject>
   </screenshot>
 </para>
 
-<para>
-  This is the final step in creating a new account. A summary of the information
-  entered is displayed. Review it, and if everything is OK press
-  <guibutton>Finish</guibutton>. Otherwise, either press
-  <guibutton>Back</guibutton> to make corrections or
-  <guibutton>Cancel</guibutton> to abandon creating the new account.
-</para>
+<para
+>Dies ist der letzte Schritt zur Erzeugung des neuen Kontos. Eine Zusammenfassung der von Ihnen eingegebenen Informationen wird angezeigt. Prüfen Sie Ihre Eingaben nochmals und drücken Sie die Schaltfläche <guibutton
+>Fertigstellen</guibutton
+>, wenn alles in Ordnung ist. Ansonsten drücken Sie den Knopf <guibutton
+>Zurück</guibutton
+>, um Korrekturen vorzunehmen, oder <guibutton
+>Abbrechen</guibutton
+> zum Abbrechen des gesamten Vorgangs. </para>
 
-<note><para>
-  The Type and Currency cannot at present be changed after the account is created.
-</para></note>
+<para
+>Hinweis: Der Typ und die Währung können derzeit nicht geändert werden, sobald das Konto angelegt wurde. </para>
 </sect2>
 </sect1>
 
 <sect1 id="details.accounts.viewing">
-<title>Opening / viewing accounts</title>
+<title
+>Öffnen / Ansehen der Konten</title>
 
-<para>
-  To open an account in the Ledger view you can either click on the link to the
-  account from the Home view, or click on the <guiicon><inlinemediaobject>
-  <imageobject><imagedata fileref="ledgers_view.png" format="PNG"/></imageobject>
-  </inlinemediaobject></guiicon> ledgers icon in the view selector and select the
-  account in the drop down box at the top of the view. Alternatively, in the
-  <guiicon>Account</guiicon> view, either double-click the account entry or
-  right click and select <guimenuitem>Open ledger</guimenuitem>.
-</para>
+<para
+>Um ein Konto im Kontenbuch zu betrachten, können Sie entweder den Link im Startfenster anklicken, oder Sie wählen das <guiicon
+><inlinemediaobject
+> <imageobject
+> <imagedata fileref="ledgers_view.png"/> </imageobject
+> </inlinemediaobject
+>Kontenbuch</guiicon
+> Symbol in der linken Navigationsleiste und wählen anschließend das gewünschte Konto aus der Liste im oberen Bereich des Fensters. Alternativ können Sie in der <guiicon
+>Konten</guiicon
+> Übersicht entweder das gewünschte Konto per Doppelklick öffnen, oder durch Auswählen von <guimenuitem
+>Kontenbuch öffnen</guimenuitem
+> mit der rechten Maustaste. </para>
 </sect1>
 
 <sect1 id="details.accounts.edit">
-<title>Editing Account Information</title>
+<title
+>Konto bearbeiten</title>
 
-<para>
-  To edit a particular account, right-click that account and choose
-  <guimenuitem>Edit account...</guimenuitem> or with that account open in the
-  ledger, select <menuchoice><guimenu>Account</guimenu><guimenuitem>Edit
-  Account...</guimenuitem></menuchoice>. A window will pop-up with several
-  tabs, each allowing you to view and change certain information about the
-  account.  For more information on any of these details, see the section on
-  <link linkend="details.accounts.create">creating a new account</link>.
-</para>
+<para
+>Um ein bestimmtes Konto zu bearbeiten, klicken Sie mit der &RMBn; darauf und wählen aus dem Kontextmenü <guimenuitem
+>Konto bearbeiten ...</guimenuitem
+>. Haben Sie ein Konto im Kontenbuch geöffnet, können Sie auch <menuchoice
+><guimenu
+>Konto</guimenu
+><guimenuitem
+>Konto bearbeiten ...</guimenuitem
+></menuchoice
+>im Menü verwenden. Dann wird ein Dialog mit mehreren Karteikarten geöffnet, auf jeder Karte können Sie bestimmte Informationen über das Konto ansehen und bearbeiten. Weitere Informationen dazu finden Sie im Abschnitt <link linkend="details.accounts.create"
+>Erstellen eines neuen Kontos</link
+>. </para>
 
 <para>
   <screenshot>
-        <screeninfo>Edit an account</screeninfo>
+        <screeninfo
+>Konto bearbeiten</screeninfo>
 
         <mediaobject>
           <imageobject>
-            <imagedata fileref="account_edit.png" format="PNG" />
+            <imagedata fileref="account_edit.png" format="PNG"/>
           </imageobject>
 
           <textobject>
-            <phrase>Edit account information</phrase>
+            <phrase
+>Kontoinformationen ändern</phrase>
           </textobject>
         </mediaobject>
   </screenshot>
 </para>
 
-<formalpara><title>General</title>
-<para>
-  View the general information about the account, and change the name,
-  start or opening date, as well as some of the other basic settings
-  of the account.
-</para>
+<formalpara
+><title
+>Allgemein</title>
+<para
+>Zeigt die allgemeinen Informationen zum Konto. Der Name, das Eröffnungsdatum wie auch einige weitere grundlegende Einstellungen des Kontos können hier geändert werden. </para>
 </formalpara>
 
-<formalpara><title>Institution</title>
-<para>
-  View and change the associated banking institution and account
-  numbers.  You can also create a new institution here.
-</para>
+<formalpara
+><title
+>Geldinstitut</title>
+<para
+>Zeigt das zugehörige Geldinstitut an. Die Kontonummern können hier geändert werden, außerdem lässt sich auch ein neues Geldinstitut anlegen. </para>
 </formalpara>
 
-<formalpara><title>Hierarchy</title>
-<para>
-<!-- not ported to kde4 yet, uncomment if that is done,
-     see https://bugs.kde.org/show_bug.cgi?id=272737
-  You can change the parent account by dragging the account in this
-  view of the account hierarchy.  Changing the parent account is also
-  possible in the main Accounts screen, by dragging the account and
-  dropping it on a different parent account.
--->
-  You can change the parent account by clicking on another parent account in
-  this view of the account hierarchy.
-</para>
+<formalpara
+><title
+>Hierarchie</title>
+<para
+>Um ein Konto in der Hierarchie zu einem neuen übergeordneten Konto zu verschieben, klicken Sie auf das neue übergeordnete Konto </para>
 </formalpara>
 
-<formalpara><title>Limits</title>
-<para>
-  This tab is only present for asset and liability accounts.  If you
-  enter amounts in the available fields, &kmymoney; will warn you when
-  the account balance reaches those values.
-</para>
+<formalpara
+><title
+>Grenzwerte</title>
+<para
+>Diese Karteikarte ist nur bei Anlage- und Verbindlichkeitskonten vorhanden. Geben Sie Werte in die verfügbaren Felder ein, werden Sie durch &kappname; gewarnt, wenn der Kontostand diese Werte erreicht. </para>
 </formalpara>
 
-<formalpara><title>Tax</title>
-<para>
-  Here you can check whether this is a VAT account, and whether to
-  include this account on tax reports.
-</para>
+<formalpara
+><title
+>Steuer</title>
+<para
+>Hier können Sie einstellen, ob es sich um ein Mehrwertsteuer-Konto handelt und ob dies Konto in Steuerberichte aufgenommen werden soll. </para>
 </formalpara>
 
-<formalpara><title>Online Settings</title>
-<para>
-  This tab is only be present if the account has been mapped to an <link
-  linkend="details.impexp.ofxdirectconnect">online account</link>.  It has
-  three subtabs.
-</para>
+<formalpara
+><title
+>Online-Einstellungen</title>
+<para
+>Diese Karteikarte ist nur vorhanden, wenn das Konto einem <link linkend="details.impexp.ofxdirectconnect"
+>Onlinekonto</link
+> zugeordnet wurde. Es gibt hier drei Unterkarteikarten. </para>
 </formalpara>
 
 <itemizedlist>
 <listitem>
-<para>
-  <emphasis>Account Details</emphasis>: This shows the status of the
-  online connection, the bank/broker and account number, and allows
-  you to store or change the password for the online account.
-</para>
+<para
+><emphasis
+>Konten-Details</emphasis
+> Hier wird der Status der Onlineverbindung, die Bank bzw. Makler und die Kontonummer angezeigt. Das Passwort für das Onlinekonto kann geändert und gespeichert werden. </para>
 </listitem>
 
 <listitem>
-<para>
-  <emphasis>OFX Details</emphasis>: Here you can adjust certain details
-  &kmymoney; uses when it establishes an OFX connection with the
-  institution.  This should only be necessary if you get certain
-  errors when you first set up the online account, or perhaps if your
-  institution changes its OFX server software.
-</para>
+<para
+><emphasis
+>OFX-Details</emphasis
+> Hier können Sie die Einstellungen ändern, die &kappname; für eine OFX-Verbindung mit der Bank benutzt. Diese Einstellungen sollten Sie nur dann ändern, wenn Sie Fehler beim Einrichten des Onlinekontos erhalten oder wenn die Bank die Software des OFX-Servers ändert. </para>
 </listitem>
 
 <listitem>
-<para>
-  <emphasis>Import Details</emphasis>: Here you can tell &kmymoney;
- what to use as the start date for the import.  In addition, starting
- with version 4.6, you can choose whether the payee's name is based
- on the PAYEEID, NAME, or MEMO field of the imported transaction.
-</para>
+<para
+><emphasis
+>Import-Details</emphasis
+> Das Startdatum für den Import wird hier eingegeben. Ab &kappname; Version 4.6 können Sie außerdem einstellen, ob der Name des Zahlungsempfängers aus dem Feld PAYEEID, NAME, oder MEMO der importierten Buchung bestimmt werden soll. </para>
 </listitem>
 </itemizedlist>
 </sect1>
 
 <sect1 id="details.accounts.delete">
-<title>Deleting accounts</title>
+<title
+>Konten löschen</title>
 
-<para>
-  To delete an account, first remove all the transactions from that account in
-  the ledger. Next, find the account in the accounts view and after right
-  clicking on the entry to show the popup menu select <guimenuitem>Delete
-  account...</guimenuitem> from the popup menu.
-</para>
+<para
+>Um ein Konto zu löschen, müssen zuerst alle Buchungen dieses Kontos im Kontenbuch entfernt werden. Als nächstes suchen Sie das zu löschende Konto in der Kontenübersicht und wählen mit der rechten Maustaste den Punkt <guimenuitem
+>Konto löschen...</guimenuitem
+>. </para>
 
-<para>
-  If you are unable to delete an account which looks like it has no transactions
-  in it, check your filter. See <menuchoice> <guimenu>Settings</guimenu>
-  <guimenuitem>Configure &kmymoney;</guimenuitem>
-  <guimenuitem>General</guimenuitem> <guimenuitem>Filter</guimenuitem>
-  </menuchoice>. Clear all filters. Set the start date to 1.1.1900 or so.
-</para>
+<para
+>Wenn Sie ein Konto nicht löschen können, das scheinbar keine Buchungen mehr enthält, überprüfen Sie bitte, ob Sie eventuell einen Filter gesetzt haben. Siehe <menuchoice
+> <guimenu
+>Einstellungen</guimenu
+> <guimenuitem
+>&kappname; einrichten ...</guimenuitem
+> <guimenuitem
+>Allgemein</guimenuitem
+> <guimenuitem
+>Filter</guimenuitem
+> </menuchoice
+>. Löschen Sie alle Filter. Setzen Sie das Startdatum auf &eg; 01.01.1900. </para>
 
-<para>
-  There may be transactions in your ledger that are not shown, for example, if
-  you have inadvertently typed in the wrong year when making an entry so that an
-  entry remains outside the opening date of &kmymoney;. This appears beneath the
-  ledger page as remaining funds.
-</para>
+<para
+>Es könnte auch sein, dass Buchungen im Kontenbuch nicht angezeigt werden, weil Sie &eg; beim Anlegen einer Buchung aus Versehen ein falsches Jahr eingetragen haben, das vor der Eröffnungsdatum in &kappname; liegt. Diese Buchungen erscheinen unterhalb der Kontenbuchseite als übrige Funde. </para>
 </sect1>
 </chapter>

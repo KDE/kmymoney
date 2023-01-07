@@ -1,122 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="whatsnew">
 <chapterinfo>
-  <date>2019-04-04</date>
-  <releaseinfo>5.0.4</releaseinfo>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
 </chapterinfo>
-<title>What's new in this release</title>
 
-<sect1>
-<title>Bug fixes and enhancements to functionality</title>
+<title
+>Neuigkeiten in dieser Version</title>
 
-<para>
-  As with every release, the &kmymoney; development team continues to work hard
-  to make each version better and easier to use in every way.  This is the third
-  release in the 5.1 series, and most of the activity has been directed to
-  fixing bugs.
-</para>
+<para
+>Wie bei jeder neuen Version hat das Entwicklerteam hart daran gearbeitet, das Programm zu verbessern. Einige Funktionen wurden weiter entwickelt. </para>
 
-<para>
-  As of 5.1, the conversion to using &kde-frameworks; is essentially complete,
-  although that and the work to update many of the underlying libraries used by
-  the application are behind the scenes and not directly visible to the end
-  user.  The general look and feel should be stable, although some minor changes
-  may still occur.  The basic functionality of the program also remains the
-  same, aside from intentional improvements and additions.
-</para>
+<para
+>Zusätzlich zu vielen Fehlerkorrekturen enthält diese Version auch neue Funktionen und Funktionalitäten. Obwohl alle neuen Funktionen bereits einige Zeit getestet wurden, sollten Sie dies als Entwicklerversion und Vorbereitung für eine vollständige Version Anfang 2015 ansehen. </para>
 
-<para>
-  In past releases, this page of the manual has included a list of many of the
-  specific bug fixes and functional enhancements.  However, rather than
-  duplicating that information, you can find it directly in the <ulink
-  url="https://kmymoney.org/changelog.html">Changelog</ulink>.
-</para>
-
-<para>
-  Since the release of 5.0, there have been some changes which will need
-  adjustments on the user's side if you are upgrading from 4.8.x or an older
-  version.  However, we expect that most users have converted to 5.x by now.
-</para>
+<para
+>Neue Fähigkeiten und Verbesserungen in dieser Version: </para>
 
 <itemizedlist>
-  <listitem><para> For some time now, the program searches for the templates for
-  the printcheck plugin in different locations than previously.  If this is
-  still an issue for you, you need to account for this in the plugins setting
-  dialog, <link linkend="details.settings.plugins">see this section for more
-  details</link>.  </para></listitem>
+  <listitem>
+    <para
+>Stichwörter für Buchungen wurden hinzugefügt. Diese Funktion wurde häufig gewünscht und erlaubt eine verbesserte Kategorisierung von Buchungen. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Verbessertes Leistungsverhalten der Benutzerschnittstelle. Die Arbeitsgeschwindigkeit wurde allgemein durch Profiling verbessert. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Unterstützung für korrekte Eingabemethoden wurde hinzugefügt. &kappname; kann jetzt in Sprachen benutzt werden, die besondere Eingabemethoden erfordern. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Es wurde eine gesperrte Spalte hinzugefügt, um die Visualisierung von Details bei Vorhersagen zu verbessern. Damit wird der Kontenname nicht aus den Anzeigebereich geschoben, wenn Sie waagerecht zu Details der Vorhersage rollen. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Die Programmsymbole wurden verbessert. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Viele Verbesserungen an dem Import- und Online-Banking-Modulen: </para>
+  </listitem>
+
+  <listitem>
+    <itemizedlist>
+      <listitem>
+        <para
+>Auf der Übersichtsseite kann der Status von Online-Banking-Konten angezeigt werden. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Im OFX-Modul kann jetzt eine benutzerdefinierte Programmversion benutzt werden. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Es gibt ein neues Modul zum Export von CSV-Dateien. </para>
+      </listitem>
+    </itemizedlist>
+  </listitem>
 </itemizedlist>
-</sect1>
 
-<sect1>
-<title>Updates to this Handbook</title>
-
-<para>
-  While we continue to make progress, there are still chapters of this handbook which
-  have not been updated to reflect all changes in the program which are visible to
-  the user as of 5.0.  Each chapter does identify the release of &kmymoney; for which
-  it was last updated, but we present the complete list here, as a quick reference.
-</para>
-
-<para>
-  However, please note that extent to which the chapters which have not been
-  explicitly updated do or do not reflect the current operation of the program
-  depends on how much that area of the program has changed between the 4.8 and the
-  5.0 and 5.1 releases.  
-</para>
-  
-<informaltable frame="none">
-  <tgroup cols="2">
-    <thead>
-      <row>
-	<entry><para>Chapters updated for 5.x</para></entry>
-	<entry><para>Chapters not yet updated for 5.x</para></entry>
-      </row>
-    </thead>
-    <tbody>
-      <row>
-	<entry valign="top">
-	  <simplelist>
-	    <member><link linkend="introduction">Introduction</link></member>
-	    <member><link linkend="whatsnew">What's new in this release</link></member>
-	    <member><link linkend="makingmostof">Making the most of &kmymoney;</link></member>
-	    <member><link linkend="firsttime">Using &kmymoney; for the first time</link></member>
-	    <member><link linkend="details.institutions">Institutions</link></member>
-	    <member><link linkend="details.accounts">Accounts</link></member>
-	    <member><link linkend="details.categories">Categories</link></member>
-	    <member><link linkend="details.tags">Tags</link></member>
-	    <member><link linkend="details.payees">Payees</link></member>
-	    <member><link linkend="details.reconcile">Schedules</link></member>
-	    <member><link linkend="details.ledgers">Ledgers</link></member>
-	    <member><link linkend="details.investments">Investments</link></member>
-	    <member><link linkend="details.settings">Settings</link></member>
-	    <member><link linkend="faq">Questions and Answers</link></member>
-	    <member><link linkend="reference.menus">Reference: Menus</link></member>
-	    <member><link linkend="credits">Credits</link></member>
-	  </simplelist>
-	</entry>
-	<entry valign="top">
-	  <simplelist>
-	    <member><link linkend="details.currencies">Currencies</link></member>
-	    <member><link linkend="details.reconcile">Reconciliation</link></member>
-	    <member><link linkend="details.reports">Reports</link></member>
-	    <member><link linkend="details.impexp">Importing and Exporting</link></member>
-	    <member><link linkend="details.loans">Loans</link></member>
-	    <member><link linkend="details.budgets">Budgets</link></member>
-	    <member><link linkend="details.forecast">Forecast</link></member>
-	    <member><link linkend="details.search">Search Transactions</link></member>
-	    <member><link linkend="details.formats">File Formats</link></member>
-	    <member><link linkend="details.database">Database</link></member>
-	    <member><link linkend="reference.widgets">Reference: Widgets</link></member>
-	  </simplelist>
-	</entry>
-      </row>
-    </tbody>
-  </tgroup>
-</informaltable>
-<para>
-
-</para>
-</sect1>
-
-  
 </chapter>

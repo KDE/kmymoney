@@ -2,373 +2,424 @@
 <chapter id="details.schedules">
 <chapterinfo>
   <authorgroup>
-    <author> &Roger.Lum; &Roger.Lum.mail; </author>
-    <author> &Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
-    <author>
-      <personname><firstname>Michael</firstname><surname>Carpino</surname></personname>
-      <email>mfcarpino@gmail.com</email>
-    </author>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
   </authorgroup>
-  <date>2019-04-01</date>
-  <releaseinfo>5.0.3</releaseinfo>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
 </chapterinfo>
 
-<title>Schedules</title>
+<title
+>Geplante Buchungen</title>
 
 <sect1 id="details.schedules.intro">
-<title>Introduction</title>
+<title
+>Einführung</title>
 
 <para>
-  <quote>
-    Schedules maintain information about transactions that occur one or more
-    times over a specified period of time.
-  </quote>
+  <quote
+>Geplante Buchungen enthalten Informationen über Buchungen, die ein- oder mehrmalig in einer bestimmten Zeitperiode vorkommen. </quote>
 </para>
 
-<para>
-  Sometimes called a recurring transaction, a schedule provides a means to
-  record information about a transaction that happen on a regular basis.  You 
-  can schedule deposit, transfer, withdrawal, and loan transactions.  There is
-  a lot of flexibility built in with scheduling transactions that include doing
-  it Once, or on a basis of number of Day(s), Week(s), Half-month(s), Month(s), 
-  or Year(s).
-</para>
+<para
+>Geplante Buchungen sind regelmäßig wiederkehrende Buchung und werden deshalb auch manchmal sich "wiederholende Buchungen" genannt. Eine bekannte geplante Buchung ist zum Beispiel Ihr Gehalt. Einmal pro Monat oder vielleicht auch wöchentlich zahlt Ihnen Ihre Firma Geld für die von Ihnen geleistete Arbeit. Diese Zahlung kann auf verschiedenen Wegen erfolgen, aber Sie erhalten monatlich oder wöchentlich eine Zahlung, die aufgezeichnet werden muss. </para>
 
-<para>
-  Because you know these transactions are regularly made, whether they are
-  payments made to you or payments you make to someone else, you can create a
-  Schedule to record information about the recurring details to simplify and
-  easily remember when the event will occur.
-</para>
+<para
+>Sie wissen, dass diese Zahlungen regelmäßig erfolgen, sodass Sie eine geplante Buchung anlegen können, sodass die Buchung automatisch für Sie erzeugt wird, sobald das Gehalt gezahlt wird. </para>
 
-<para>
-  Schedules can be considered to reflect money coming in or out of your accounts
-  on a consistent basis.  Common uses include paychecks, taxes, insurance,
-  credit cards, dues, interest, loans, mortgage, and rents.  Scheduling a
-  payment like these provides for a useful reminder so you can manage expected
-  future financial matters effectively.
-</para>
+<para
+>Auch andere Arten von geplanten Buchungen können hinterlegt werden, um den Ein- und Ausgang von Geld auf Ihren Konten zu hinterlegen. Allgemeine Ausgaben, wie Dienstleisterrechnungen oder Überweisungen, können genauso als geplante Buchung hinterlegt werden, wie z.B. Lohnzahlungen. Eine geplante Buchung bietet Ihnen außerdem eine gute Möglichkeit, um Sie an fällige Zahlungen zu erinnern. </para>
 
-<para>
-  A schedule consists of two main parts: the transaction data and the scheduling
-  data.  The scheduling data records the occurrence of the schedule, &ie;, when
-  the transaction is to be entered into the ledger and how.  The transaction
-  data records the normal details about the transaction.  These include options
-  for Payment method, Account, Pay to/from, Category, Tags, Memo, Due date,
-  Amount and status.  Along with this, you can also select additional options
-  based on when to process the transaction.
-</para>
+<para
+>Eine geplante Buchung besteht aus zwei Hauptteilen: den Daten zum Zeitpunkt, sowie dem Inhalt der Buchung. Die Daten des Zeitpunkts geben an, wann und wie die Buchung in das Kontenblatt eingetragen wird. Die Buchungsdaten enthalten die üblichen Details zur Buchung und werden so wie sie sind in das Kontenbuch übernommen. </para>
 </sect1>
 
 <sect1 id="details.schedules.type">
-<title>Types of schedules</title>
+<title
+>Arten von geplanten Buchungen</title>
 
-<para>
-  There are four different types of schedules in the current version of
-  &kmymoney;:
-</para>
+<para
+>In der aktuellen Version von &kappname; gibt es vier verschiedene Arten von geplanten Buchungen: </para>
 
 <itemizedlist>
-  <listitem><para>Deposits</para></listitem>
-  <listitem><para>Bills</para></listitem>
-  <listitem><para>Transfers</para></listitem>
-  <listitem><para>Loans</para></listitem>
+  <listitem
+><para
+>Rechnungen</para
+></listitem>
+  <listitem
+><para
+>Einzahlungen</para
+></listitem>
+  <listitem
+><para
+>Kredite</para
+></listitem>
+  <listitem
+><para
+>Buchungen</para
+></listitem>
 </itemizedlist>
 
 <sect2>
-<title>Deposit</title>
+<title
+>Rechnungen</title>
 
-<para>
-  A Deposit is for money coming into your account, such as paychecks,
-  bonuses, or interest income. 
-</para>
+<para
+>Eine geplante Buchung vom Typ "Rechnung" wird immer dann verwendet, wenn Geld von Ihrem Konto abfließt, z.B. für die Mitgliedschaft im Fitness-Studio oder eine Rechnung für eine Dienstleistung. </para>
 </sect2>
 
 <sect2>
-<title>Bills/Withdrawals</title>
+<title
+>Einzahlungen</title>
 
-<para>	
-  A Bill or Withdrawal is for money going out of your account, such as a
-  membership, utility bill, taxes, or car registration.
-</para>
+<para
+>Eine geplante Buchung vom Typ "Einzahlung" wird verwendet, wenn Geld auf Ihr Konto kommt, z.B. Ihr Gehalt. </para>
 </sect2>
 
 <sect2>
-<title>Transfer</title>
+<title
+>Kredite</title>
 
-<para>
-  A Transfer is for money going out of one account and into another,
-  such as making a credit card payment from your checking account.
-</para>
+<para
+>Eine geplante Kreditzahlung ist eine spezielle geplante Buchung und wird erstellt, wenn Sie ein <link linkend="details.loans"
+>Kreditkonto</link
+> erstellen. </para>
 </sect2>
 
 <sect2>
-<title>Loans</title>
+<title
+>Buchungen</title>
 
-<para>
-  A Loan Schedule is a special type of schedule and is created when dealing with a
-  <link linkend="details.loans">Loan account</link>.
-</para>
+<para
+>Eine geplante Buchung des Typs "Buchung" wird verwendet, wenn Geld von einem Konto zum anderen fließt, z.B. wenn eine Kreditkartenabrechnung von Ihrem Girokonto abgebucht wird. </para>
 </sect2>
+
 </sect1>
 
 <sect1 id="details.schedules.view">
-<title>The Schedules View</title>
+<title
+>Die Ansicht der geplanten Buchungen</title>
 
-<para>
-  Open the Schedules View by clicking on the <guiicon><inlinemediaobject><imageobject>
-  <imagedata fileref="schedule_view.png" format="PNG"/></imageobject></inlinemediaobject>
-  </guiicon> schedule icon in the view selector.
-</para>
+<para
+>Öffnen Sie die Ansicht der geplanten Buchungen, indem Sie auf das <guiicon
+>geplante Buchungen<inlinemediaobject
+><imageobject
+><imagedata fileref="schedule_view.png"/></imageobject
+></inlinemediaobject
+></guiicon
+> Symbol in der linken Navigationsleiste klicken. </para>
 
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="scheduleview.png" format="PNG" />
+	<imagedata fileref="scheduleview.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Schedule View</phrase>
+	<phrase
+>Die Ansicht der geplanten Buchungen</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 	
-<para>
-  The Schedules View consists of a view area with <guibutton>New
-  Schedule</guibutton> button and <guibutton>Filter</guibutton> and
-  <guilabel>Filter:</guilabel> text box above it.
-</para>
+<para
+>Die Ansicht „Geplante Buchungen“ besteht aus zwei Karteikarten, die über entsprechende Karteireiter erreicht werden können, sowie dem Knopf <guibutton
+>Neue Buchung planen</guibutton
+> darüber. Die erste Karteikarte <guibutton
+>Listenansicht</guibutton
+> zeigt alle geplanten Buchungen, gruppiert nach dem Typ der Buchung. Die zweite Karteikarte <guibutton
+>Kalenderansicht</guibutton
+> wird in einem separaten Abschnitt weiter unten erläutert. </para>
 	
-<para>
-  To create a new schedule click on the button.  For Deposit, Transfer, and Withdrawal/Bills
-  schedules, &kmymoney; will display the new schedule dialog.  Loan schedules are
-  handled differently, as described in the Loans section of this manual.
-</para>
+<para
+>Um eine neue geplante Buchung anzulegen, klicken Sie auf den entsprechenden Knopf. Für Rechnungen, Einzahlungen und Umbuchungen zeigt Ihnen &kappname; das Dialogfenster für neue geplante Buchungen. Kreditbuchungen werden anders behandelt und im Abschnitt über Kreditkonten näher erläutert. </para>
 </sect1>
 
 <sect1 id="details.schedules.new">
-<title>The New Schedule dialog</title>
+<title
+>Das Dialogfenster „Geplante Buchung bearbeiten“</title>
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="newsched_numbered.png" format="PNG" />
+	<imagedata fileref="newsched_numbered.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>New Schedule</phrase>
+	<phrase
+>Neue geplante Buchung</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 	
-<para>
-  A New Schedule dialog is now shown, prompting for the schedule and transaction
-  details.  The requested data include the following:
-</para>
+<para
+>Es öffnet sich ein Dialogfenster, in das Sie die Daten zum Zeitpunkt und dem Inhalt der geplanten Buchung eingeben können.  Hierzu gehören: </para>
 
 <orderedlist numeration="upperalpha">
-  <listitem><para>Schedule Name</para></listitem>
-  <listitem><para>Next due date</para></listitem>
-  <listitem><para>Frequency</para></listitem>
-  <listitem><para>Payment method</para></listitem>
-  <listitem><para>Amount</para></listitem>
-  <listitem><para>Other transaction details</para></listitem>
-  <listitem><para>Schedule options</para></listitem>
+  <listitem
+><para
+>Name der geplanten Buchung</para
+></listitem>
+  <listitem
+><para
+>Nächste Fälligkeit am</para
+></listitem>
+  <listitem
+><para
+>Häufigkeit</para
+></listitem>
+  <listitem
+><para
+>Zahlungsmethode</para
+></listitem>
+  <listitem
+><para
+>Betrag</para
+></listitem>
+  <listitem
+><para
+>Weitere Buchungsdetails</para
+></listitem>
+  <listitem
+><para
+>Optionen der geplanten Buchung</para
+></listitem>
 </orderedlist>
 
 <sect2>
-<title>Filling in the Schedule name, Frequency, and Payment information.</title>
+<title
+>Ausfüllen der Felder</title>
 
-<para>
-  Enter the name of the schedule and the date of the next occurrence into their
-  respective fields.  The name is how the schedule will be labelled in the
-  Schedules View, and other displays.  Specify how often the schedule should
-  occur, using the Frequency field and drop down list.  For example "every 6
-  weeks" or "every 3 months."  If the amount varies transaction to transaction
-  make sure to check the <guilabel>Estimate</guilabel> check box and you will be
-  prompted for the correct amount when it is entered into the ledger.  The other
-  required fields in the Payment information section include the Account and
-  Category.  The remaining fields in this section are optional.
-</para> 
+<para
+>Geben Sie den Namen und das nächste Fälligkeitsdatum dieser geplanten Buchung in die entsprechenden Eingabefelder ein. Der Name der geplanten Buchung wird in der Liste der geplanten Buchungen angezeigt. Geben Sie an, wie oft die geplante Buchung fällig ist, indem Sie die entsprechende Häufigkeit in das Eingabefeld eintragen und aus der Auswahlliste auswählen. Zum Beispiel "alle 6 Wochen" oder "alle 3 Monate". Wenn der Betrag von Buchung zu Buchung variiert, markieren Sie die Option <guilabel
+>Dies ist eine Schätzung, da der Betrag für jede Zahlung schwankt</guilabel
+>. Sie werden dann nach dem genauen Betrag gefragt, wenn &kappname; die Buchung in das Kontenbuch eintragen möchte. Füllen Sie alle Buchungsfelder so aus, als würden Sie die Buchung im Kontenbuch eintragen. </para>
 </sect2>
 
 <sect2>
-<title>Modifying the Schedule Options section</title>
-<para>
-  You can choose how to handle non-processing days.  If the schedule occurs on a
-  non-processing day you can choose whether to <guilabel>Do not change the
-  date</guilabel>, <guilabel>Change the date to the previous processing
-  day</guilabel>, or <guilabel>Change the date to the next processing
-  day</guilabel>. This option is available to replicate some of the real world
-  banking operational processing.  Non-processing days include weekends and
-  holidays known to &kmymoney; for the region specified in the <link
-  linkend="details.settings.schedules.calendar">appropriate configuration
-  option</link>.
-</para>
+<title
+>Das Verhalten der geplanten Buchung verändern</title>
+<para
+>Im unteren Bereich des Fensters gibt es einige Optionen, die das Verhalten der geplanten Buchung verändern. Wenn das Fälligkeitsdatum auf ein Wochenende fällt, können Sie auswählen, ob das Datum unverändert bestehen bleibt, ob die Buchung am vorhergehenden Freitag oder am darauf folgenden Montag gebucht wird. Normalerweise wird diese Option verwendet, um die reale Welt in Form von Bankbuchungen abzubilden. </para>
+</sect2>
 
-<para>
-  You can also select whether or not the amount is an estimate so you'll be
-  prompted to update the amount when the schedule is due. Selecting the process
-  at the last day of the month allows for scheduling for irregular month-end
-  date processing. By checking the box for automatically enter when the it's due
-  provides for &kmymoney; to enter the transaction into the ledger without human
-  intervention.  Otherwise, when the transaction is due to be entered,
-  &kmymoney; will open a dialog box asking you to confirm that you want it to be
-  entered.  This behavior is configurable, and more information can be found in
-  the <link linkend="details.settings.schedules">Settings</link> section.
-</para>
+<sect2>
+<title
+>Buchungen von &kappname; automatisch eintragen lassen</title>
 
-<para>
-  If you know how many transactions are left or when they are due to finish,
-  this information can be entered so the transactions are not entered
-  indefinitely.  Checking the schedule will end box and enter either the number
-  of transactions remaining or date of final transaction will end the scheduled
-  transaction based on this criteria. 
-</para>
+<para
+>&kappname; kann die Buchungen automatisch bei Fälligkeit in das Kontenbuch eintragen. Aktivieren Sie dafür die Kontrollbox <guilabel
+>Buchung bei Fälligkeit automatisch in das Kontenbuch eintragen</guilabel
+>.  Ansonsten wird &kappname; ein Dialogfenster öffnen, sobald das Fälligkeitsdatum der geplanten Buchung erreicht ist und Sie auffordern, die Buchung in das Kontenbuch eintragen zu lassen.  Dieses Verhalten ist konfigurierbar, weitere Informationen dazu finden Sie im Abschnitt über die Programmeinstellungen. </para>
+</sect2>
 
-<para>
-  When you have entered all the necessary information click on
-  <guibutton>OK</guibutton> to continue.
-</para>
+<sect2>
+<title
+>&kappname;  wissen lassen, wann eine geplante Buchung endet</title>
+
+<para
+>Wenn Sie wissen, wie viele Buchungen noch übrig sind oder wann die regelmäßige Buchung endet, so können Sie diese Information hinterlegen, sodass die geplante Buchung nicht unendlich ist. Klicken Sie die entsprechende Option an und geben Sie das Ende der geplanten Buchung ein. Nur das Enddatum oder die verbleibende Anzahl der Buchungen müssen eingegeben werden, der jeweils andere Wert kann daraus errechnet werden.  </para>
+
+<para
+>Wenn Sie alle notwendigen Daten eingegeben haben, klicken Sie auf den Knopf <guibutton
+>OK</guibutton
+> um fortzufahren. </para>
 </sect2>
 
 </sect1>
 
 <sect1 id="details.schedules.edit">
-<title>Editing schedules</title>
+<title
+>Geplante Buchungen bearbeiten</title>
 
-<para>
-  To edit a schedule simply select the entry in the list and right click to
-  bring up the context menu and select <guimenuitem>Edit scheduled transaction</guimenuitem>.  This
-  will bring up a dialog similar to the Edit Schedule transaction dialog, where you can update
-  the necessary data.
-</para>
+<para
+>Um eine geplante Buchung zu editieren, wählen Sie diese in der Liste und klicken mit der rechten Maustaste darauf. Aus dem erscheinenden Kontextmenü wählen Sie <guimenuitem
+>Bearbeiten</guimenuitem
+> aus. Es erscheint der bereits vom Anlegen der geplanten Buchung bekannte Dialog, mit dessen Hilfe Sie die Daten der geplanten Buchungen verändern können. </para>
 </sect1>
 
 <sect1 id="details.schedules.delete">
-<title>Deleting schedules</title>
+<title
+>Geplante Buchungen löschen</title>
 
-<para>
-  To delete a schedule simply select the entry in the list and right click to
-  bring up the context menu and select <guimenuitem>Delete scheduled transaction</guimenuitem>.
-</para>
+<para
+>Um eine geplante Buchung zu löschen, wählen Sie den gewünschten Eintrag in der Liste und wählen mit der rechten Maustaste aus dem Kontextmenü den Punkt <guimenuitem
+>Löschen</guimenuitem
+>. </para>
 </sect1>
 
-<sect1 id="details.schedules.duplicate">
-<title>Duplicating schedules</title>
+<sect1 id="details.schedules.calendar">
+<title
+>Die Kalenderansicht</title>
+
+<para
+>Die Kalenderansicht zeigt Ihnen alle geplanten Buchungen in einem Kalender, sodass Sie sehr übersichtlich sehen können, wann diese fällig sind. Um in die Kalenderansicht zu gelangen klicken Sie einfach auf den Karteireiter <guibutton
+>Kalenderansicht</guibutton
+>.  </para>
 
 <para>
-  To duplicate a schedule simply select the entry in the list and right click to
-  bring up the context menu and select <guimenuitem>Duplicate scheduled transaction</guimenuitem>.
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="calendarview.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Kalenderansicht</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
 </para>
+	
+<para
+>Der Kalendertyp kann mit Hilfe des Knopfs <guibutton
+>Darstellung auswählen</guibutton
+> verändert werden. Derzeit gibt es nur zwei Typen: Woche und Monat. Die Monatsansicht ist die Voreinstellung und die wohl hilfreichste Darstellungsform. Navigieren Sie durch den Kalender, indem Sie die Steuerelemente rechts oben verwenden. </para>
+
+<para
+>An Tagen mit geplanten Buchungen wird die Anzahl der Buchungen für den betreffenden Tag im Kalender angezeigt. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="schedmonthday.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Um die geplanten Buchungen, die auf den gewählten Tag fallen, anzusehen, bewegen Sie den Mauszeiger über den Eintrag. Es erscheint ein Fenster, in dem die Zusammenfassung der geplanten Buchung angezeigt wird. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="schedpopup.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Wenn mehrere geplante Buchung auf einen Tag fallen, können Sie die einzelnen geplanten Buchungen durch die Schaltflächen in den oberen Ecken des Fensters durchblättern. </para>
+
+<para
+>Wenn Ansicht mit geplanten Buchungen übersät ist und Sie nur einen bestimmten Typ an geplanten Buchungen sehen möchten, können Sie diese durch den Knopf <guibutton
+>Planungen wählen</guibutton
+> filtern. Nachdem Sie diesen Knopf anklicken, sehen Sie die verschiedenen Buchungstypen und diese sind standardmäßig alle ausgewählt. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="schedcaltypes.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Um einen Buchungstyp aus dem Kalender auszublenden, entfernen Sie das gewünschte Kreuzchen aus der Liste. </para>
+
 </sect1>
 
 <sect1 id="details.schedules.entering">
-<title>Entering scheduled transactions</title>
+<title
+>Geplante Buchungen eintragen</title>
 
-<para>
-  Entering a scheduled transaction means actually entering a transaction into
-  the appropriate ledger, using the details specified in the schedule.
-  Scheduled transactions can be entered in one of 3 different ways:
-</para>
+<para
+>Eine geplante Buchung eintragen bedeutet, im entsprechenden Kontenbuch eine neue Buchung auf Basis der in der geplanten Buchung hinterlegten Informationen anzulegen. Geplante Buchungen können auf eine von vier verschiedenen Weisen eingetragen werden: </para>
 
 <itemizedlist>
+  <listitem
+><para
+>Manuell durch Klick mit der rechten Maustaste auf den Listeneintrag</para
+></listitem>
+  <listitem
+><para
+>Manuell über das Aufklapp-Fenster in der Kalenderansicht</para
+></listitem>
   <listitem>
-    <para>
-    Manually by right clicking on the entry in the Schedules View</para>
+    <para
+>&kappname; kann sie aber auch mit oder ohne Ihr Zutun beim Starten eintragen </para>
   </listitem>
-
   <listitem>
-    <para>
-      &kmymoney; can enter them with or without your interaction upon startup
-    </para>
-  </listitem>
-  <listitem>
-    <para>
-      &kmymoney; can enter them with your interaction during online banking or
-      import of an electronic bank statement
-    </para>
+    <para
+>&kappname; kann sie mit Ihrer Interaktion während des Online-Bankings oder Imports von elektronischen Kontoauszügen anlegen </para>
   </listitem>
 </itemizedlist>
 
 <sect2>
-<title>Manually entering scheduled transactions</title>
+<title
+>Manuelles Eintragen von geplanten Buchungen</title>
 
-<para>	
-  You can enter a scheduled transaction manually by right clicking on the list
-  entry and selecting <guimenuitem>Enter</guimenuitem> from the popup menu.
-</para>
+<para
+>Sie können eine geplante Buchung manuell eintragen lassen, indem Sie mit der rechten Maustaste die gewünschte geplante Buchung anklicken und aus dem Kontextmenü <guimenuitem
+>Nächste Zahlung eintragen</guimenuitem
+> auswählen., oder indem Sie den Knopf <guibutton
+>Eintragen</guibutton
+> im erscheinenden Kontextmenü in der Kalenderansicht betätigen. </para>
 </sect2>
 
 <sect2>
-<title>Confirming the transaction to enter</title>
+<title
+>Die einzutragende Buchung bestätigen</title>
 
-<para>
-  After selecting either method the Enter Scheduled Transaction dialog window is
-  shown prompting you with the required information that was entered when you
-  created the schedule.
-</para>
+<para
+>Nachdem Sie das Eintragen der geplanten Buchungen auf eine der beschriebenen Arten angestoßen haben, erscheint das Dialogfenster zum Eintragen einer geplanten Buchung mit den dort hinterlegten Informationen. </para>
 
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="enterschedule.png" format="PNG" />
+	<imagedata fileref="enterschedule.png" format="PNG"/>
 	</imageobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para>		
-  This information can be changed, and the changes can be applied to just this
-  one instance of the schedule or to all subsequent transactions.  After
-  checking that all the data is correct clicking <guibutton>OK</guibutton>
-  will add the transaction to the ledger and update the next due date of the
-  schedule to the next occurrence.  If you have changed any of the transaction
-  data a further confirmation of what you changed will be displayed, giving you
-  a final chance to accept or reject the changes.
-</para>
+<para
+>Diese Informationen können nun nach Bedarf verändert und entweder für diese eine oder auch für alle zukünftigen Buchungen übernommen werden. Nachdem Sie geprüft haben, dass alles in Ordnung ist, klicken Sie den Knopf <guibutton
+>OK</guibutton
+>, um die Buchung ins Kontenbuch zu übernehmen und das nächste Fälligkeitsdatum der geplanten Buchung auf den nächsten Termin zu setzen. Wenn Sie irgendein Feld der Buchung geändert haben, werden Sie nochmals gefragt, ob die angezeigten Änderungen übernommen oder verworfen werden sollen. </para>
 
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="confirmenter.png" format="PNG" />
+	<imagedata fileref="confirmenter.png" format="PNG"/>
 	</imageobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para>	
-  Select what you want to do with the information presented and click
-  <guibutton>OK</guibutton> or <guibutton>Cancel</guibutton>.
-</para>
+<para
+>Wählen Sie die gewünschte Aktion aus und klicken Sie den Knopf <guibutton
+>OK</guibutton
+> oder <guibutton
+>Abbrechen</guibutton
+>. </para>
 </sect2>
 
 <sect2>
-<title>Letting &kmymoney; enter the scheduled transaction(s) for you</title>
+<title
+>Lassen Sie &kappname; Ihre geplante(n) Buchung(en) für Sie eintragen</title>
 
-<para>	
-  Alternatively, &kmymoney; can check which schedules are due upon startup and
-  enter them for you if the appropriate option was checked when setting up the
-  schedule.
-</para>
+<para
+>Als Alternative zum manuellen Eintragen kann &kappname; beim Programmstart überprüfen, welche geplanten Buchungen fällig sind und diese automatisch in das Kontenbuch eintragen, wenn Sie die entsprechende Option beim Anlegen der geplanten Buchung aktiviert haben. </para>
 
-<para>
-  If the option was not checked then &kmymoney; will open the previously
-  mentioned dialog and you can follow the steps mentioned there.  &kmymoney;
-  will also open the dialog if the amount is an estimate so you can enter the
-  real amount.
-</para>
+<para
+>Wenn das automatische Eintragen nicht aktiviert wurde, öffnet &kappname; das oben beschriebene Dialogfenster und Sie können die Buchung über den beschriebenen Weg ins Kontenbuch eintragen lassen. Das gleiche Fenster öffnet sich, wenn Sie beim Anlegen der geplanten Buchung angegeben haben, dass der Betrag eine Schätzung ist. Sie können nun den tatsächlichen Geldbetrag der Buchung eintragen. </para>
 
-<para>
-  You can also opt to have &kmymoney; not check which transactions are scheduled
-  on startup by deselecting the option in the Settings dialog and any overdue
-  transaction or transactions due 'today' will be shown in the Home view for you
-  to enter manually.
-</para>
+<para
+>Sie können &kappname; auch so konfigurieren, dass beim Programmstart nicht geprüft wird, ob fällige geplante Buchungen vorhanden sind. Verwenden Sie hierfür im Einstellungsdialog von &kappname; die Option "Geplante Buchungen beim Start überprüfen". </para>
 </sect2>
 </sect1>
 </chapter>
-

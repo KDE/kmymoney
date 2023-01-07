@@ -2,210 +2,196 @@
 <sect1 id="reference.widgets">
 <sect1info>
   <authorgroup>
-    <author> &Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
   </authorgroup>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
 </sect1info>
 
-<title>Widgets</title>
+<title
+>Bedienelemente</title>
 
-<para>
-  &kmymoney; has some specific widgets not found in other applications. The
-  usage of these widgets is explained in this chapter.
-</para>
+<para
+>&kmymoney; hat einige spezielle Bedienelemente, die man in anderen Applikation so nicht findet. Die Verwendung dieser Bedienelemente wird in diesem Kapitel erläutert. </para>
 
 <sect2 id="reference.widgets.datepicker">
-<title>Date entry widget</title>
+<title
+>Datumseingabe-Bedienelement</title>
 
-<para>
-  Whenever &kmymoney; needs information about a specific date, &eg;, the posting
-  date of a transaction or the opening date of an account, it offers the user
-  the <emphasis>date entry widget</emphasis>. This widget consists of three
-  fields and a button. The fields present the <emphasis>day</emphasis>, the
-  <emphasis>month</emphasis>, and the <emphasis>year</emphasis>, separated by
-  the date separator characters specified by your locale settings. If you push
-  the button, will open the <emphasis>datepicker</emphasis> widget.
-</para>
+<para
+>Wann immer &kmymoney; eine Information über ein spezifisches Datum benötigt, &eg; das Datum einer Buchung oder das Eröffnungsdatum eines Kontos, wird dem Benutzer ein <emphasis
+>Datumseingabe-Bedienelement</emphasis
+> angeboten. Es besteht aus drei Feldern und einem Knopf. Die Felder stellen den <emphasis
+>Tag</emphasis
+>, den <emphasis
+>Monat</emphasis
+> und das <emphasis
+>Jahr</emphasis
+> getrennt durch Datumstrennzeichen dar. Wird der Knopf gedrückt, öffnet sich ein <emphasis
+>Datumsauswahl</emphasis
+> Bedienelement. </para>
 
 <para>
 <screenshot>
-	<screeninfo>Tip of the Day</screeninfo>
+	<screeninfo
+>Tipp des Tages</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="date_widget.png" format="PNG" />
+	<imagedata fileref="date_widget.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Date widget</phrase>
+	<phrase
+>Datums-Bedienelement</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<para>
-  Within the date entry widget, the &Left;/&Right; cursor keys can be used to switch
-  between the <emphasis>day</emphasis>, the <emphasis>month</emphasis>, and the
-  <emphasis>year</emphasis> fields. Using the &Up;/&Down; cursor keys, the value of
-  the selected field can be incremented/decremented.  The <keycap>+</keycap> and
-  <keycap>-</keycap> keys can be used to increment/decrement a single day.
-  Month and year boundaries are considered and incremented/decremented if
-  necessary. Pressing <keycap>T</keycap> will set the date to today's date.
-</para>
+<para
+>Innerhalb des Datum-Bedienelements können Sie mit Hilfe der Cursor-Tasten &Left; und &Right; zwischen dem <emphasis
+>Tag</emphasis
+>, <emphasis
+>Monat</emphasis
+> und <emphasis
+>Jahr</emphasis
+> Feld wechseln. Mit den Cursor-Tasten Hoch und Runter wird der Wert des aktuellen Feldes erhöht oder erniedrigt. Die Tasten <keycap
+>+</keycap
+> und <keycap
+>-</keycap
+> können genutzt werden, um einen einzelnen Tag zu ändern. Die Monat- und Jahresgrenzen werden erkannt und entsprechend erhöht oder erniedrigt, wenn es notwendig ist. Mit der Taste <keycap
+>T</keycap
+> wird das heutige Datum eingestellt. </para>
 
-<para>
-  The date can also be changed using the mouse. Clicking on the
-  <emphasis>day</emphasis>, <emphasis>month</emphasis>, or
-  <emphasis>year</emphasis> field selects the field. The value can then be
-  incremented/decremented using the arrow buttons on the right of the
-  widget. They act exactly the same as the &Up;/&Down; cursor keys.
-</para>
+<para
+>Das Datum kann auch mit der Maus verändert werden. Durch Anklicken des <emphasis
+>Tag</emphasis
+>, <emphasis
+>Monat</emphasis
+> oder <emphasis
+>Jahr</emphasis
+> Feldes wird das entsprechende Feld ausgewählt. Der Wert des Feldes kann anschließend mit den entsprechenden Knöpfen auf der rechten Seite des Bedienelements erhöht und erniedrigt werden. Sie bewirken genau das gleiche wie die &Up;/&Down;-Tasten. </para>
 
-<para>
-  The datepicker opens when the button to the right of the arrow buttons is
-  pressed. It shows four arrow buttons at the top, two on each side of the
-  currently selected month name and year. The leftmost buttons are used to
-  decrement the year and the month; the buttons to the right of the year are
-  used to increment the month and the year. The button to the very right closes
-  the datepicker.
-</para>
+<para
+>Der Datumsauswähler öffnet sich, wenn der Knopf rechts des Pfeilknopfes gedrückt wird. Er enthält vier Pfeilknöpfe im oberen Bereich, sowie zwei auf jeder Seite des gerade gewählten Monatsnamens und der Jahreszahl. Die Knöpfe ganz links dienen zum verringern des Monats und der Jahreszahl, die Knöpfe rechts der Jahreszahl dienen zum Erhöhen des Monats und des Jahres. Der Knopf ganz rechts schließt den Datumsauswähler. </para>
 
-<para>
-  Beneath the buttons, the widget presents a calendar page for the selected 
-  month. Clicking a day on the calendar selects that date, closes the
-  datepicker, and transfers the selected date into the <emphasis>day</emphasis>,
-  <emphasis>month</emphasis>, and <emphasis>year</emphasis> fields.
-</para>
+<para
+>Neben den Knöpfen zeigt das Bedienelement ein Kalenderblatt für den ausgewählten Monat. Beim Anklicken eines Tages wird dieses Datum übernommen, der Datumsauswähler wird geschlossen und das ausgewählte Datum wird in die <emphasis
+>Tag</emphasis
+>, <emphasis
+>Monat</emphasis
+> und <emphasis
+>Jahr</emphasis
+> Felder übernommen. </para>
 
-<para>
-  At the bottom of the datepicker widget, there are a button, a text edit field,
-  and a combo box. Pressing the button selects today's date in the
-  datepicker. The text field can be used to enter a specific date. Pressing the
-  &Enter; key shows that date in the datepicker widget.  The
-  combo box allows the user to select a specific week, and continue to pick a
-  date from there.
-</para>
+<para
+>Im unteren Bereich des Datumsauswählers befindet sich ein Knopf, ein Texteingabefeld und eine Auswahlliste. Durch Drücken des Knopfes wird der heutige Tag in den Datumsauswähler übernommen. Das Textfeld kann genutzt werden, um ein bestimmtes Datum einzugeben. Durch Drücken der &Enter;-taste wird das Datum im Datumsauswähler-Bedienelement angezeigt. Die Auswahlliste ermöglicht die Auswahl einer bestimmten Woche, um anschließend einen Tag dieser Woche zu wählen. </para>
 </sect2>
 
 <sect2 id="reference.widgets.value">
-<title>Value entry</title>
-<para>
-  The value entry widget consists of a text field (that accepts digits,
-  thousands separators, and decimal symbols) as well as a button to the
-  right. Use the digits to enter the value. Separate the fractional part by
-  entering the decimal separator for your locale. If you click on the button to
-  the right or press a key representing a numeric operation (&eg;, <keycap>+</keycap>,
-  <keycap>-</keycap>, <keycap>/</keycap>, <keycap>*</keycap> or <keycap>%</keycap>)
-  a little calculator will pop up and allow you to calculate the final value.
-</para>
+<title
+>Werteingaben</title>
+<para
+>Das Werteingabe Bedienelement besteht aus einem Texteingabefeld (welches Zahlen, Tausendertrennzeichen und Dezimaltrennzeichen akzeptiert) und einem Knopf auf der rechten Seite. Verwenden Sie die Zahlen, um den gewünschten Wert einzugeben. Geben Sie die Nachkommastellen durch Eingabe des Dezimaltrennzeichens Ihrer Ländereinstellungen ein. Wenn den Knopf rechts oder eine Taste die eine arithmetische Operation darstellt (&eg; <keycap
+>+</keycap
+>, <keycap
+>-</keycap
+>, <keycap
+>/</keycap
+>, <keycap
+>*</keycap
+> oder <keycap
+>%</keycap
+>), so erscheint ein kleiner Taschenrechner und ermöglicht Ihnen die Berechnung des Ergebnisses. </para>
 
-<para>
-  Negative values can be entered by preceding the value with a minus sign. In
-  case your locale is set to display negative numbers with parentheses around
-  the value, the value can also be enclosed in parenthesis in the value entry
-  widget.
-</para>
+<para
+>Negative Werte können durch Eingabe eines vorangestellten Minuszeichens eingegeben werden. Ist in Ihren Ländereinstellungen festgelegt, dass negative Zahlen durch einen in Klammern eingeschlossenen Wert dargestellt wird, so kann dieser Wert genauso in Klammern eingeschlossen eingegeben werden. </para>
 
 <para>
 <screenshot>
-	<screeninfo>Tip of the Day</screeninfo>
+	<screeninfo
+>Tipp des Tages</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="value_widget.png" format="PNG" />
+	<imagedata fileref="value_widget.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Value widget</phrase>
+	<phrase
+>Werteingabe-Bedienelement</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<para>
-  Use the calculator widget just like a normal calculator and once done leave
-  it by clicking on the <guibutton>=</guibutton> button or press the <keycap>=</keycap>
-  key on your keyboard.
-</para>
+<para
+>Verwenden Sie das Taschenrechner Bedienelement wie einen normalen Taschenrechner und verlassen Sie ihn durch Drücken des Knopfes <guibutton
+>=</guibutton
+> oder durch Drücken der Taste <keycap
+>=</keycap
+> auf Ihrer Tastatur. </para>
 </sect2>
 
 <sect2 id="reference.widgets.payee">
-<title>Payee/Payer entry</title>
+<title
+>Zahler/Zahlungsempfänger-Eingabe</title>
 
-<para>
-  When you are requested to enter a payee/payer for a transaction, you can start
-  entering the name by pressing keys on your keyboard.  As long as matching
-  entries exist in the list of payees/payers maintained by &kmymoney; they will
-  be presented in a box beneath or above the text entry area. Using the mouse or
-  the &Up;/&Down; keys one can select a name from that list. Using the keyboard
-  additionally requires you to select the entry by pressing the &Enter; key.
-</para>
+<para
+>Wenn Sie aufgefordert werden, einen Zahlenden/Zahlungsempfänger für eine Buchung einzugeben, so können Sie beginnen, den Namen mit der Tastatur einzutippen. Solange übereinstimmende Einträge in der von &kmymoney; verwalteten Empfängerliste existieren, so werden diese in einer Box neben oder über dem Eingabefeld angezeigt. Mit der Maus oder den &Up;/&Down;-Tasten kann ein Eintrag aus der Liste ausgewählt werden. Wenn Sie die Tastatur verwenden, müssen Sie den gewählten Eintrag noch durch Drücken der Eingabetaste bestätigen. </para>
 
 <para>
 <screenshot>
-	<screeninfo>Tip of the Day</screeninfo>
+	<screeninfo
+>Tipp des Tages</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="payee_widget.png" format="PNG" />
+	<imagedata fileref="payee_widget.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Payee widget</phrase>
+	<phrase
+>Empfänger Bedienelement</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<para>
-  If a name is entered that is not yet known to &kmymoney; you will be asked if
-  you want to create a new payee/payer record.  If you do not wish to do so,
-  then the field will be blanked. Otherwise, the record will be created and
-  added to the list.
-</para>
+<para
+>Wenn der eingegebene Name &kmymoney; noch nicht bekannt ist, werden Sie gefragt, ob Sie einen neuen Empfänger-Datensatz anlegen möchten. Wenn Sie sich dagegen entscheiden, so wird das Feld geleert. Ansonsten wird der Datensatz erzeugt und zur Liste hinzugefügt. </para>
 
-<para>
-  Once the edit field contains characters, the list only shows those payees that
-  match the character sequence entered. Double-click on the arrow of the combo
-  box to show all payees in the list.
-</para>
+<para
+>Sobald das Eingabefeld die ersten Zeichen enthält, zeigt die Liste nur noch diejenigen Empfänger, die auf die eingegebene Zeichenfolge zutrifft. Klicken Sie doppelt auf den Pfeil der Auswahlliste, um eine Gesamtliste der Empfänger zu sehen. </para>
 
 </sect2>
 
 <sect2 id="reference.widgets.category">
-<title>Category/account entry</title>
+<title
+>Kategorie/Konto Eingabe</title>
 
-<para>
-  When you are requested to enter the name of a category or account, you can
-  start entering the name by pressing keys on your keyboard.  As long as
-  matching entries exist in the list of categories/accounts known to &kmymoney;
-  they will be presented in a box beneath or above the text entry area. Using
-  the mouse or the &Up;/&Down; keys one can select a name from that list. Using the
-  keyboard additionally requires you to select the entry by pressing the &Enter;
-  key.
-</para>
+<para
+>Wenn Sie aufgefordert werden, eine Kategorie oder ein Konto einzugeben, so können Sie beginnen, den Namen mit der Tastatur einzutippen. Solange übereinstimmende Einträge in der von &kmymoney; verwalteten Kategorien-/Kontenliste existieren, so werden diese in einer Box neben oder über dem Eingabefeld angezeigt. Mit der Maus oder den &Up;/&Down;-Tasten kann ein Eintrag aus der Liste ausgewählt werden. Wenn Sie die Tastatur verwenden, müssen Sie den gewählten Eintrag noch durch Drücken der &Enter;taste bestätigen. </para>
 
 <para>
 <screenshot>
-	<screeninfo>Tip of the Day</screeninfo>
+	<screeninfo
+>Tipp des Tages</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="category_widget.png" format="PNG" />
+	<imagedata fileref="category_widget.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Category widget</phrase>
+	<phrase
+>Kategorien-Bedienelement</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<para>
-  If a name is entered that is not yet known to &kmymoney; you will be asked if
-  you want to create a new category record.  If you do not wish to do so, then
-  the field will be blanked. Otherwise, the record will be created and added to
-  the list.
-</para>
+<para
+>Wenn der eingegebene Name &kmymoney; noch nicht bekannt ist, werden Sie gefragt, ob Sie einen neuen Kategorien-Datensatz anlegen möchten. Wenn Sie sich dagegen entscheiden, so wird das Feld geleert. Ansonsten wird der Datensatz erzeugt und zur Liste hinzugefügt. </para>
 
-<para>
-  Once the edit field is filled with characters, the list only shows those
-  categories/accounts that match the character sequence entered. Double-click on
-  the arrow of the combo box to show the complete list.
-</para>
+<para
+>Sobald das Eingabefeld die ersten Zeichen enthält, zeigt die Liste nur noch diejenigen Kategorien/Konten, die auf die eingegebene Zeichenfolge zutreffen. Klicken Sie doppelt auf den Pfeil der Auswahlliste, um eine Gesamtliste der Kategorien/Konten zu sehen. </para>
 
 </sect2>
 </sect1>

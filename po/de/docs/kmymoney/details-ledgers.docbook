@@ -2,513 +2,407 @@
 <chapter id="details.ledgers">
 <chapterinfo>
   <authorgroup>
-    <author> &Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
-    <author> &Roger.Lum; &Roger.Lum.mail; </author>
-    <author>
-      <personname><firstname>Michael</firstname><surname>Carpino</surname></personname>
-      <email>mfcarpino@gmail.com</email>
-    </author>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
   </authorgroup>
-  <date>2019-04-02</date>
-  <releaseinfo>5.0.3</releaseinfo>
+  <date
+>2010-07-23</date>
+  <releaseinfo
+>4.5</releaseinfo>
 </chapterinfo>
 
-<title>Ledgers</title>
+<title
+>Kontenbuch</title>
 
 <sect1 id="details.ledgers.view">
-<title>The Ledger View</title>
+<title
+>Die Kontenbuchansicht</title>
 
-<para>
-  The Ledger view is functionally the data integration center of &kmymoney;.  This
-  view is for entering, examining, deleting, and editing transactions in your defined
-  accounts.  The view is split into three main areas: the filter area, the
-  transaction list, and the input area.
-</para>
+<para
+>In der Kontenbuchansicht liegt das Herz der Funktionalität von &kmymoney;. Diese Ansicht dient dazu, in den verschiedenen Konten Buchungen zu überprüfen und neue Buchungen anzulegen. Die Ansicht ist in drei Bereiche aufgeteilt: der Filterbereich, die Buchungsliste und der Eingabebereich. </para>
 
-<para>
-  This view allows for several key actions: searching and viewing transactions;
-  entering new transaction; and editing, duplicating, deleting, and scheduling
-  existing transactions.  Along with this it also provides the ability to move,
-  mark, and go to additional account transaction details.  Other functionality
-  within the Ledgers View includes modifying and reconciling the account.
-</para>
+<para
+>Diese Ansicht erlaubt Ihnen zahlreiche Schlüsselfunktionen: Suchen und Ansehen von Buchungen, Eingabe neuer Buchungen und das Bearbeiten oder Löschen von existierenden Buchungen. Weiterhin können Sie Details der Konten bearbeiten und Ihre Konten mit den Kontoauszügen Ihrer Bank abgleichen. </para>
   
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="ledgerview-numbered.png" format="PNG" />
+	<imagedata fileref="ledgerview-numbered.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Ledger View</phrase>
+	<phrase
+>Kontenbuchansicht</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para>
-  The view has three elements:
-</para>
+<para
+>Die Ansicht besteht aus drei Elementen: </para>
 
 <itemizedlist>
-  <listitem><para>The filter area</para></listitem>
-  <listitem><para>The transaction list</para></listitem>
+  <listitem
+><para
+>Der Filterbereich</para
+></listitem>
+  <listitem
+><para
+>Die Buchungsliste</para
+></listitem>
   <listitem>
-    <para>
-      The transaction form, which may or may not appear, depending upon
-      your configuration as selected in the Configure &kmymoney; Ledger section.
-    </para>
+    <para
+>Das Eingabeformular für Buchungen, welches abhängig von den &kappname; Einstellungen sichtbar ist. </para>
   </listitem>
 </itemizedlist>
 
 <sect2 id="details.ledgers.view.filter">
-<title>The filter area</title>
+<title
+>Der Filterbereich</title>
 
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="accountdropdown.png" format="PNG" />
+	<imagedata fileref="accountdropdown.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Filter area</phrase>
+	<phrase
+>Filterbereich</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 	
-<para>
-  You can easily select any account via the account dropdown list at the top of
-  the view area.  Note that depending upon the type of the account the <link
-  linkend="details.ledger.transactionform">transaction form</link> at the
-  bottom of the view may change.
-</para>
+<para
+>Sie können ein Konto über die Auswahlliste im oberen Bereich des Fensters auswählen. Achten Sie einmal darauf, wie sich das <link linkend="details.ledger.transactionform"
+>Buchungs-Eingabeformular</link
+> im unteren Bereich des Kontenbuches abhängig vom Kontentyp ändert. </para>
 
-<para>
-  To the right of the account dropdown list, are two additional fields. The
-  filter box provides the ability to search for matching transactions
-  that will be displayed in the list view. The text specified can be in any
-  of the fields of the transaction for the specific account. The status field
-  is a dropdown list. The status field list allows for the selection of:
-  Any status, Imported, Matched, Erroneous, Not marked, Not reconciled, 
-  Cleared, and scheduled transactions.
-</para>
+<para
+>Rechts von der Kontenauswahlliste gibt zwei weitere Felder. Das Such-Feld fungiert als Filter für die in der Liste anzuzeigenden Buchungen: es werden nur die Buchungen angezeigt, die den in das Suchfeld eingegebenen Text enthalten.  Es ist dabei unerheblich, in welchem der Eingabefelder einer Buchung der Text vorhanden ist. Ganz rechts befindet sich eine Status-Auswahlliste. Es wurden nur die Buchungen angezeigt, die dem ausgewählten Eintrag entsprechen. </para>
 
 </sect2>
 
 <sect2>
-<title>The transaction list</title>
+<title
+>Die Buchungsliste</title>
 
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="translist.png" format="PNG" />
+	<imagedata fileref="translist.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Transaction list</phrase>
+	<phrase
+>Buchungsliste</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 	
-<para>
-  After a transaction has been entered, it is displayed in the transaction list.
-  You can also change transaction properties or even create new transactions
-  directly in the list.  In the transactions list, the default order of
-  transactions is sorted by date with the most recent transaction on the bottom.
-  Clicking the &RMB; on the header of the transaction list brings
-  up a dialog box that will allow  the ability to change the sort order of the
-  transactions. For instructions on how to change the default sort order, see the <link
-  linkend="details.settings.register.sorting">Sorting tab</link> section of the
-  <link linkend="details.settings">&kmymoney; Settings</link> Chapter.
-</para>
+<para
+>Nachdem Sie eine Buchung eingegeben haben, erscheint sie in der Buchungsliste. Sie können die Eigenschaften einer Buchung oder das Anlegen einer neuen Buchung auch direkt in der Liste durchführen. Die Buchungsliste ist standardmäßig nach Datum aufsteigend sortiert, d.h. die neueste Buchung befindet sich am Ende der Liste. Durch einen Klick mit der rechten Maustaste auf die Kopfzeile der Buchungsliste können Sie die Sortierkriterien ändern.  Wie Sie das Standardsortierkriterium ändern können, finden Sie im Abschnitt <link linkend="details.settings.register.sorting"
+>Unterfenster "Sortierung"</link
+>  im Kapitel <link linkend="details.settings"
+>&kmymoney;-Einstellungen</link
+>. </para>
 
-<para>
-   Note that the balance column is based on the currently displayed sort order,
-   and will not be calculated if the display is filtered by the searching within
-   the filter box or transaction type dropdown, as described above.
-</para>
+<para
+>Beachten Sie, dass das die Spalte „Saldo“ auf der aktuell angezeigten Sortierreihenfolge basiert und nicht berechnet wird, wenn die Anzeige mit dem Suchfeld oder dem Auswahlfeld „Buchung“ wie vorher beschrieben gefiltert wird. </para>
 
-<para>
-  At the bottom of the transaction list, &kmymoney; displays three values:
-</para>
+<para
+>Unter der Buchungsliste werden drei Werte angezeigt: </para>
 
-<formalpara><title>Last reconciled</title>
-  <para>
-    This is the most recent date when you reconciled this account.
-    Reconciliation is an important process for many accounts, and is described
-    <link linkend="details.reconcile">here</link>.
-  </para>
+<formalpara
+><title
+>Zuletzt abgeglichen</title>
+  <para
+>Diese ist das Datum des letzten Abgleichs des Kontos. Das Abgleichen ist ein wichtiger Prozess für viele Konten, weitere Informationen dazu finden Sie  <link linkend="details.reconcile"
+>hier</link
+>. </para>
 </formalpara>
 
-<formalpara><title>Cleared</title>
-  <para>
-    This is the total of all cleared and reconciled transactions in this
-    account.  See <link linkend="details.ledgers.cleared">this section</link>
-    for more information about the cleared and reconciled states of
-    transactions.
-  </para>
+<formalpara
+><title
+>Verrechnet</title>
+  <para
+>Dies ist die Gesamtsumme aller verrechneten und abgeglichenen Buchungen für dieses Konto. in diesem <link linkend="details.ledgers.cleared"
+>Abschnitt</link
+> finden Sie weitere Informationen über den Status Verrechnet und Abgeglichen von Buchungen. </para>
 </formalpara>
 
-<formalpara><title>Balance</title>
-  <para>
-    This is where &kmymoney; displays the total balance of the account, which is
-    the sum of all transactions in the account.  However, if you select more
-    than one transaction in the transaction list, this changes to display the
-    sum of the selected transactions.  This returns to the balance when only one
-    transaction is selected.
-  </para>
+<formalpara
+><title
+>Saldo</title>
+  <para
+>Hier wird der Gesamtsaldo des Kontos angezeigt, der sich aus der Summe aller Buchungen für dieses Konto ergibt. Wenn Sie jedoch mehrere Konten in der Kontenliste ausgewählt haben, wird hier die Summe der Buchungen aller ausgewählten Konten gezeigt. Ist nur ein Konto gewählt, wird auch nur der Gesamtsaldo diese Kontos gezeigt.  </para>
 </formalpara>
 </sect2>
 
 <sect2>
-<title>The transaction form</title>
+<title
+>Das Buchungseingabeformular</title>
 
-<para>
-  The exact layout of the bottom area of the ledger view depends on your
-  configuration and the type of account being displayed.  However, it generally
-  includes fields for all the details of a single transaction, as well as
-  buttons for various actions that can apply to a transaction.  It is described
-  in more detail in the following sections.
-</para>
+<para
+>Das genaue Aussehen des Bereiches unterhalb der Buchungsliste hängt von den Einstellungen und dem Kontentyp ab, der angezeigt wird. Grundsätzlich enthält der Bereich Eingabefelder für alle Details einer einzelnen Buchung, sowie Knöpfe für verschiedenen Aktionen, die man auf eine Buchung anwenden kann. Dies wird in den folgenden Abschnitten näher beschrieben. </para>
 </sect2>
 </sect1>
 
 <sect1 id="details.ledger.transactions">
-<title>Entering Transactions</title>
+<title
+>Buchungen eingeben</title>
 
-<para>
-  There are two methods of entering transactions into the ledger: using the
-  transaction form or entering the data directly into the transaction
-  list.  The transaction form is displayed by default and this is the
-  method we will discuss first. Turning off the transaction form can be 
-  accomplished by going to the Ledger section in the Configure &kmymoney; that's
-  within the Settings.
-</para>
+<para
+>Es gibt zwei Möglichkeiten, Buchungen in das Kontenbuch einzutragen: entweder über das Buchungsformular unterhalb der Buchungsliste, oder durch das Eingeben direkt in die Buchungsliste. Standardmäßig wird das Buchungsformular unterhalb der Buchungsliste angezeigt und deshalb soll zunächst diese Methode erläutert werden. </para>
 
-<para>
-  The fields in the input area match the information fields in the transaction
-  list. Additional fields include the Memo field, for a more detailed
-  description of the transaction, and a Category selection. The Split button
-  allows you to split the transaction into multiple categories.
-</para>
+<para
+>Die Felder im Buchungsformular entsprechenden den in der Buchungsliste angezeigten Feldern. Zusätzliche Felder, wie ein Bemerkungsfeld zum Hinterlegen detaillierterer Informationen zur Buchung und eine Kategorieauswahl. Über den Split-Knopf können Sie eine Buchung mehreren Kategorien zuordnen ("splitten"). </para>
 </sect1>
 
 <sect1 id="details.ledger.transactionform">
-<title>Using the transaction form</title>
+<title
+>Das Buchungsformular verwenden</title>
 
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="transactionform.png" format="PNG" />
+	<imagedata fileref="transactionform.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Transaction Form</phrase>
+	<phrase
+>Buchungsformular</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 	
-<para>
-  The transaction form at the bottom of the ledger view is the interface
-  for manually creating transactions.
-</para>
+<para
+>Das Buchungsformular im unteren Bereich des Kontenbuches ist die Bedienungsoberfläche zum Anlegen von Buchungen. </para>
 
-<para>
-  Depending upon the type of transaction you wish to enter there are
-  several tabs available on the transaction form.  Click on the tab that best
-  defines your transaction (deposit, transfer, or withdrawal) and the form
-  will load several fields available for your input.
-</para>
+<para
+>Abhängig davon, welchen Typ oder welche Art einer Buchung Sie anlegen möchten, sind verschiedene Unterfenster im Buchungsformular verfügbar. Klicken Sie auf das Unterfenster, das Ihre Buchung am ehesten beschreibt (Gutschrift, Umbuchung, Belastung) und es erscheinen die entsprechenden Eingabefelder, die Sie nun füllen können. </para>
 
-<para>
-  Please note that the actual transaction method is not used directly by
-  &kmymoney; but is purely for grouping/reporting purposes.
-</para>
+<para
+>Beachten Sie, dass die gewählte Art der Buchung von &kmymoney; nicht direkt verwendet wird. Die Information ist notwendig, um Buchungen in Berichten zu gruppieren. </para>
 
-<para>
-  If you are unsure which method to choose simply use Deposit for any money
-  coming into the account, Withdrawal for money going out of the account, and
-  Transfer for money moving from one account to another.  The transaction
-  methods and the differences between them are discussed in more detail
-  elsewhere.
-</para>
+<para
+>Wenn Sie sich nicht sicher sind, welche Buchungsart Sie auswählen sollen, verwenden Sie "Gutschrift" für auf dem Konto eingehende Zahlungen, "Belastung" für vom Konto abgehende Zahlungen und "Umbuchung" für Zahlungen zwischen verschiedenen Konten. Die verschiedenen Buchungsarten und ihre Unterschiede werden an anderer Stelle intensiver erläutert. </para>
 
-<para>
-  Select the transaction method by clicking on the appropriate tab.
-</para>
+<para
+>Wählen Sie eine Buchungsart durch Klicken auf eine der Karteikarten. </para>
 
 <sect2>
-<title>The fields of a transaction</title>
+<title
+>Die Daten einer Buchung</title>
 
-<para>
-  Enter the information using the following notes on the available fields.  Note
-  that many fields have 'Auto Completion' turned on.  That is, if you start
-  typing, &kmymoney; will offer alternatives matching the characters you begin
-  to enter.  To select the matching content simply click on the entry by using
-  your mouse or selecting the appropriate keyboard keys.  If the entry is not
-  listed finish typing the content to add the new value.  The next time you type
-  the content, &kmymoney; will find it for you as you begin to enter the initial
-  characters.
-</para>
+<para
+>Geben Sie Ihre Daten anhand der folgenden Informationen in die Eingabefelder ein. Viele Eingabefelder haben eine automatische Vervollständigs-Funktion eingeschaltet. Das bedeutet, dass Ihnen &kmymoney; nach Eingabe der ersten Buchstaben automatisch alle übereinstimmenden Einträgen anzeigt. Um einen Eintrag auszuwählen, klicken Sie ihn mit der Maus an oder wählen Sie ihn mit der Tastatur aus. Sollte sich der gewünschte Text nicht in der Liste mit übereinstimmenden Einträgen befinden, fahren Sie einfach mit der Eingabe fort, um die Einträge in der Liste mit übereinstimmenden Einträgen einzugrenzen. Wenn Sie nun später den gleichen Text eingeben möchten, wird &kmymoney; ihn automatisch für Sie finden und ihn in der Liste mit übereinstimmenden Einträgen anbieten, nachdem Sie die ersten Zeichen des Textes eingegeben haben. </para>
 
 <sect3>
-<title>The Payee</title>
+<title
+>Der Empfänger</title>
 
-<para>
-  The Payee is who the money came from/to.  If the payee is a new entry
-  &kmymoney; will ask if you wish to add this to the list of Payees.  Any other
-  information related to a payee or payer, such as address, phone number and account
-  number as well as notes can be updated in the Payees view.
-</para>
+<para
+>Der Empfänger/Zahlungsempfänger ist derjenige, von dem das Geld kam, bzw. an den das Geld gezahlt wurde. Wenn der Zahlungsempfänger &kmymoney; noch nicht bekannt ist, werden Sie gefragt, ob Sie ihn als neuen Datensatz in die Liste der Zahlungsempfänger aufnehmen möchten. Alle weiteren Informationen zum Zahlungsempfänger oder Zahlenden, wie seine Adresse, können später in der Empfänger Ansicht hinzugefügt werden. </para>
 </sect3>
 
 <sect3>
-<title>The Category</title>
+<title
+>Die Kategorie</title>
 
-<para>
-  The Category associates a transaction with an income or expense category for
-  accounting and reporting purposes, and enables you to group certain
-  transactions. Type the name of the category into the defined field.  If you
-  have entered the category and it does not exist then &kmymoney; will ask if
-  you want to create a new one.  If the selection is Yes &kmymoney; will then
-  open a dialog box that allows for the further definition of the category based 
-  on General, Hierarchy and Tax characteristics. 
-</para>
+<para
+>Die Kategorie ordnet eine Buchung für Berichts- und Buchhaltungszwecke einer Einnahmen- oder Ausgabenkategorie zu. Dies ermöglicht es Ihnen, bestimmte Buchungen zu gruppieren. Geben Sie den Namen der Kategorie in das entsprechende Feld ein. Wenn Sie eine noch nicht existierende Kategorie eingeben, wird &kmymoney; fragen, ob Sie die Kategorie neu anlegen möchten. </para>
 
-<para>
-  If you wish to associate parts of the transaction with different categories,
-  &kmymoney; can handle this need.  An example transaction might be a cash
-  withdrawal of 50 of which you use 10 on food, 20 on beer and 20 as
-  cash.  The transaction will therefore be assigned three categories:
-  Food, Beer, and Cash.  To do this, you need to use <link
-  linkend="details.ledgers.split">Split Transactions</link>, which is described
-  in more detail below.
-</para>
+<para
+>Wenn Sie einer Buchung mehrere verschiedene Kategorien zuordnen möchten, erlaubt Ihnen &kmymoney; dies auch. Ein Beispiel hierfür wäre eine Rechnung für ein Abendessen in einem Restaurant über 50 EUR, wobei Sie 10 EUR für das Essen, 20 EUR für Getränke und 20 EUR Trinkgeld gezahlt haben. Die Transaktion könnte demnach drei Kategorien zugewiesen werden: Essen, Getränke und Trinkgeld. Um dies zu tun, müssen Sie eine <link linkend="details.ledgers.split"
+>Split-Buchung</link
+> erzeugen. Wie das funktioniert, wird weiter unten beschrieben. </para>
 
-<para>
-  See the special <link linkend="reference.widgets">&kmymoney; fields</link>
-  section for more information on how to use this field.
-</para>
+<para
+>Schauen Sie in den Abschnitt spezielle <link linkend="reference.widgets"
+>&kmymoney;-Felder</link
+> für weitere Informationen zum Gebrauch dieses Feldes. </para>
 </sect3>
 
 <sect3>
-<title>The Tag</title>
+<title
+>Stichwörter</title>
 
-<para>
-  Tags are similar to Categories, and can be used to maintain an orthogonal view
-  to Categories.  They provide the ability to group transactions within a Category based
-  on your defined needs.  This need could be defined by a specifics to Person, Place, or
-  Thing. For example, you might have a Category for each different type of automotive
-  expenses, and then have a Tag for each vehicle.  As with Categories, you can select
-  from the dropdown list, or type a new Tag name, and be prompted if you want to create
-  a new Tag with that name.  Within the Tag field &kmymoney; will allow for multiple tags
-  entered within a single transaction.  Also, you can enter a tag on an individual split.
-</para>
+<para
+>Stichwörter wurden in Version 4.7 von &kmymoney; eingeführt und sind bisher noch nicht vollständig in diesem Handbuch dokumentiert. Stichwörter ähneln Kategorien und können zur Verwaltung von orthogonalen Ansichten zu Kategorien verwendet werden. Sie könnten zum Beispiel eine Kategorie für jede unterschiedliche Arten von Ausgaben für Autos und dann ein Stichwort für jedes einzelne Fahrzeug benutzen. Wie bei den Kategorien können Sie einen Eintrag im Auswahlfeld wählen oder einen neuen Namen für ein Stichwort eingeben. Dann werden Sie gefragt, ob Sie ein neues Stichwort mit diesem Namen erstellen möchten. </para>
 </sect3>
 
 <sect3>
-<title>The Memo</title>
+<title
+>Die Notiz</title>
 
-<para>
-  A multi-line memo can be entered if you wish to help you remember further
-  details of a specific transaction.
-</para>
+<para
+>Eine mehrzeilige Notiz kann in das Notizfeld eingetragen werden, um zu vermerken, wofür genau die Buchung gut war. </para>
 </sect3>
 
 <sect3>
-<title>The Check Number</title>
+<title
+>Die Schecknummer</title>
 
-<para>
-  The check number can be entered if needed.  Note that the check number field can
-  be made visible or invisible in the ledger if desired.  This is configured in 
-  the Ledger Settings dialog.
-</para>
+<para
+>Eine Schecknummer kann bei Bedarf eingegeben werden. Die Schecknummer kann ständig sichtbar geschaltet werden. Dies kann im Einstellungsdialog von &kappname; konfiguriert werden. </para>
 </sect3>
 
 <sect3>
-<title>The Date</title>
+<title
+>Das Datum</title>
 
-<para>
-  The transaction's date must be entered to specify when the transaction took
-  place.  See the special <link linkend="reference.widgets">&kmymoney;
-  fields</link> section for more information on how the date input field can be
-  used to make entering dates quicker and easier.  For transactions in checking
-  and credit card accounts, it is your choice whether to use the actual date
-  (when you wrote the check or made the purchase) or the posting date as
-  reported by the bank or credit card company.  Using the actual date can help
-  you track when you made the purchase, for example, but the statement or
-  downloaded data from the bank is more likely to use the posting date.
-</para>
+<para
+>Das Buchungsdatum muss eingegeben werden, wann die Buchung stattfand. Schauen Sie in den Abschnitt spezielle <link linkend="reference.widgets"
+>&kmymoney;-Felder</link
+>, um mehr darüber zu erfahren, wie Sie in Datumsfelder schneller und einfacher ein Datum eintragen können. </para>
 </sect3>
 
 <sect3>
-<title>The Amount</title>
+<title
+>Der Betrag</title>
 
-<para>
-  Finally, enter the transaction amount into the required field. Note that a
-  simple calculator can be displayed, either by clicking the icon to the right
-  of the amount field, or by entering the % character into the field, or by
-  entering any of these mathematical symbols: + - * / in a formula, as in
-  <emphasis>12 + 3</emphasis>. When entering the plus sign, the calculator will
-  be opened.  Note that only the final result of any calculation will be saved
-  as the amount of the transaction.
-</para>
+<para
+>Zum Schluss geben Sie noch den Betrag der Buchung in das entsprechende Eingabefeld ein. Ein einfacher Taschenrechner steht Ihnen zur Verfügung, wenn Sie den kleinen Knopf rechts neben dem Eingabefeld drücken. Alternativ können Sie auch das Prozentzeichen % oder eine Formel, wie <emphasis
+>12 + 3</emphasis
+>. Sobald das Pluszeichen eingegeben wird, öffnet sich automatisch der Taschenrechner. </para>
 
-<para>
-  When you are satisfied that all the fields have been adequately filled in,
-  click on <guibutton>Enter</guibutton>. If you accidentally press or click on
-  <guibutton>Enter</guibutton> before you have finished entering all the data,
-  click on <guibutton>Edit</guibutton> to resume entering the data.
-</para>
+<para
+>Wenn Sie sich versichert haben, dass alle Felder korrekt ausgefüllt sind, klicken Sie den Knopf <guibutton
+>Eintragen</guibutton
+>. Wenn Sie aus Versehen auf <guibutton
+>Eintragen</guibutton
+> gedrückt haben, bevor Sie alle Daten eingegeben haben, drücken Sie einfach auf <guibutton
+>Bearbeiten</guibutton
+>, um die Eingabe Ihrer Daten fortzusetzen. </para>
 </sect3>
 </sect2>
 </sect1>
 
 <sect1 id="details.ledger.direct">
-<title>Directly inputting transactions into the list</title>
+<title
+>Direkte Eingabe einer Buchung in die Liste</title>
 
 <para>
 	<screenshot>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="transactionform-off.png" format="PNG" />
+	<imagedata fileref="transactionform-off.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Direct Transaction Entry</phrase>
+	<phrase
+>Direkte Buchungseingabe</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para>
-  The second method of entering transactions into the ledger involves editing
-  the transaction list directly.
-</para>
+<para
+>Die zweite Methode eine Buchung im Kontenbuch anzulegen erfolgt in der Liste der Buchungen. </para>
 
-<para>
-  To do this you must first let &kmymoney; know that you don't want to use the
-  transaction form by opening the settings dialog and unchecking the
-  <guilabel>Show transaction form</guilabel> option.
-</para>
+<para
+>Damit Sie diese Funktion nutzen können, müssen Sie &kmymoney; zunächst mitteilen, dass Sie das Buchungsformular nicht mehr nutzen möchten. Öffnen Sie den Einrichtungsdialog und deaktivieren Sie die Option <guilabel
+>Buchungsformular anzeigen</guilabel
+>. </para>
 
-<para>
-  This is performed by selecting the <menuchoice><guimenu>Settings</guimenu>
-  <guimenuitem>Configure &kmymoney;...</guimenuitem></menuchoice> menu item and
-  selecting the <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="ledgers_view.png" format="PNG"/></imageobject></inlinemediaobject>
-  </guiicon> register icon from the list on the left. The option to uncheck is
-  labeled <guilabel>Show transaction form</guilabel>. When finished click on
-  <guibutton>OK</guibutton> to be ready to directly enter or edit transactions.
-</para>
+<para
+>Dies geschieht durch den Menüpunkt <menuchoice
+><guimenu
+>Einstellungen</guimenu
+> <guimenuitem
+>&kmymoney; einrichten ...</guimenuitem
+></menuchoice
+>. Wählen Sie im erscheinenden Einstellungs-Dialog das Symbol <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="ledgers_view.png"/></imageobject
+></inlinemediaobject
+> Kontenbuch</guiicon
+> aus der Liste auf der linken Seite. Die Option, die Sie deaktivieren müssen lautet <guilabel
+>Buchungsformular anzeigen</guilabel
+>. Anschließend klicken Sie auf den Knopf <guibutton
+>OK</guibutton
+>, um dann Ihre Buchungen direkt in die Buchungsliste im Kontenbuch eintragen zu können. </para>
 
 <sect2>
-<title>Starting the edit</title>
+<title
+>Bearbeitung starten</title>
 
-<para>	
-  To enter a new transaction into the register you can now either click on an
-  empty entry, press <keycombo
-  action="simul">&Ctrl;&Ins;</keycombo>, or click
-  <guibutton>New</guibutton> at the foot of the window. The &Up;
-  and &Down; arrow keys let you navigate through the list.  After
-  pressing &Enter; or double clicking on an entry, the transaction list displays
-  the fields required to enter the transaction and waits for input.
-</para>
+<para
+>Um eine neue Buchung in das Kontenbuch einzutragen, klicken Sie entweder einen leeren Eintrag an, drücken die Taste <keycombo action="simul"
+>&Ctrl;<keycap
+>Einfg</keycap
+></keycombo
+>, oder Sie betätigen den Knopf <guibutton
+>Neu</guibutton
+> am unteren Rand des Fensters. Die Tasten <keycap
+>Pfeil hoch</keycap
+> und <keycap
+>Pfeil runter</keycap
+> erlaubt Ihnen das Navigieren durch die Liste. Nach Drücken der &Enter;taste oder einem Doppelklick auf die gewünschte Buchung werden die Eingabefelder angezeigt und Sie können Ihre Eingaben vornehmen. </para>
 
-<para>
-  To move through the fields press the &Tab; key and when done
-  press &Enter; to save the changes or &Esc; to
-  cancel.
-</para>
+<para
+>Um zum nächsten Feld zu wechseln, drücken Sie die Tabulatortaste. Wenn Sie alles eingegeben haben, drücken Sie &Enter;, um Ihre Änderungen zu speichern oder &Esc;, um die Bearbeitung abzubrechen. </para>
 
-<para>
-  In case the option <guilabel>Use Enter to move between fields</guilabel> is
-  selected, the &Enter; key moves to the next field just as the
-  &Tab; key except for the last entry field where it saves the
-  data.
-</para>
+<para
+>Falls die Option <guilabel
+>Eingabetaste wechselt zwischen den Feldern</guilabel
+> aktiviert ist, können Sie mit Hilfe von &Enter; zum nächsten Eingabefeld wechseln, anstatt die &Tab;-Taste zu verwenden. Wenn Sie beim letzten Eingabefeld &Enter; drücken wird die Buchung gespeichert. </para>
 
-<para>
-  Which method you use to enter transactions is up to you and is a matter of
-  personal preference.
-</para>
+<para
+>Welche der beiden Eingabemethoden Sie verwenden, liegt ganz bei Ihnen und ist nur eine Frage Ihrer persönlichen Vorliebe. </para>
 </sect2>
 </sect1>
 
 <sect1 id="details.ledgers.split">
-<title id="details.ledgers.split.title">Split Transactions</title>
+<title id="details.ledgers.split.title"
+>Split-Buchungen</title>
 
-<para>
-  The Split transaction feature allows you to divide up a transaction into
-  multiple categories, representing, for example, the different items bought
-  with a single purchase at a store.
-</para> 
+<para
+>Die Funktionalität der Split-Buchungen erlaubt es Ihnen, einer Buchung mehrere Kategorien zuzuordnen, beispielsweise um verschiedene während eines einzelnen Einkaufs erworbenen Dinge einer separaten Kategorie zuzuordnen. </para
+> 
 
-<para>
-  To enter a split transaction, using either the transaction form or the
-  transaction list, start a new transaction, including entering the total
-  amount. Then, instead of selecting a category, click the
-  <guibutton>Split</guibutton> button to the right of the
-  <guilabel>Category</guilabel> field.  If you have already selected a category,
-  that becomes the first entry in the split editor screen.
-</para> 
+<para
+>Um eine Split-Buchung anzulegen, erstellen Sie wie gewohnt eine neue Buchung und geben Sie auch den Gesamtbetrag ein. Nun drücken Sie, anstatt eine einzelne Kategorie auszuwählen, den Knopf <guibutton
+>Splitten</guibutton
+>. Wenn Sie bereits eine einzelne Kategorie eingetragen haben, wird diese der erste Eintrag im Split-Buchungs-Editor. </para
+> 
  
-<para>
-  In the split editor screen, double-click an empty line to enter a new
-  sub-transaction or press <keycombo
-  action="simul">&Ctrl;&Ins;</keycombo>. Specify the category,
-  add an (optional) memo, and enter the amount. To save this part of the split,
-  press the green check mark under the category. To cancel, press the red cross.
-</para> 
+<para
+>Im Split-Buchungs-Editor klicken Sie doppelt auf eine leere Zeile, um eine neue Split-Buchung einzutragen, oder drücken Sie <keycombo action="simul"
+>&Ctrl;<keycap
+>Einfg</keycap
+></keycombo
+>.  Wählen Sie die passende Kategorie, hinterlegen Sie auf Wunsch eine kurze Bemerkung und geben Sie zum Schluss noch den Betrag der Split-Buchung ein. Um die Splitzeile zu speichern, drücken Sie den grünen Haken unter der Kategorie. Um die Eingabe abzubrechen drücken Sie auf das rote Kreuz. </para
+> 
  
-<para>
-  After entering a split, the bottom of the split editor shows how much of the
-  total transaction is still unassigned. After entering all the splits, press
-  the <guibutton>OK</guibutton> button to save the entire transaction. If there
-  is still an unassigned amount, you will be prompted to either return to
-  editing the splits, change the total transaction amount, or leave part of the
-  transaction unassigned.
-</para>
+<para
+>Nach Eingabe einer Splitzeile wird im unteren Bereich des Split-Buchungs-Editor angezeigt, welche Restsumme der Buchung noch nicht einer Kategorie zugewiesen wurde. Nach Eingabe aller gewünschten Splitzeilen drücken Sie den Knopf <guibutton
+>OK</guibutton
+>, um die gesamte Buchung zu speichern. Wenn immer noch eine nicht zugewiesene Restsumme verblieben ist, werden Sie gefragt, ob Sie zum Split-Buchungs-Editor zurückkehren, die Gesamtsumme der Buchung anpassen oder einen Rest der Buchung keiner Kategorie zuweisen möchten. </para>
+
+<para
+>Das Kategoriefeld im Buchungsformular oder der Buchungsliste zeigt nun den Text <emphasis
+>Split-Buchung</emphasis
+> an. </para
+> 
 
 <para>
 	<screenshot>
-	<screeninfo>Split with unassigned amount</screeninfo>
+	<screeninfo
+>Split-Buchungen</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="split_unasigned.png" format="PNG" />
+	<imagedata fileref="split_transaction.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Split with unassigned amount</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
-<para>
-  To redistribute an 'Unassigned' or 'Overassigned' amount, select a split item that has to be adjusted.
-  After that click on a button <guibutton>Apply Difference</guibutton>.
-  If 'Unassigned' was previously shown and non-zero, that amount will be added to the selected line item value.
-  If 'Overassigned' was previously shown and non-zero, that amount will be subtracted from the selected line item value.
-  As the result, the 'Unassigned' amount will be set to zero and a transaction could be saved
-  successfully.
-</para>
-
-<para>
-  Note that the category field in the transaction form or the transaction
-  list now displays <emphasis>Split transaction</emphasis>.
-</para> 
-
-<para>
-	<screenshot>
-	<screeninfo>Split transactions</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="split_transaction.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Split transaction</phrase>
+	<phrase
+>Split-Buchung</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
@@ -517,186 +411,161 @@
 </sect1>
 
 <sect1 id="details.ledger.edit">
-<title>Editing transactions</title>
-
-<para>
-  To edit a transaction, select it in the list view and either click on
-  <guibutton>Edit</guibutton> in the transaction form or right click on the
-  entry and select <guimenuitem>Edit</guimenuitem> from the popup menu.  If you
-  are editing transactions directly in the list you can edit the transaction
-  simply by double clicking on an entry or by pressing &Enter; when a
-  transaction is highlighted.
-</para>
+<title
+>Buchungen bearbeiten</title>
+<para
+>Um eine Buchung zu bearbeiten, wählen Sie die entsprechende Buchung in der Buchungsliste und drücken den Knopf <guibutton
+>Bearbeiten</guibutton
+> im Buchungsformular, oder klicken Sie mit der rechten Maustaste auf die Buchung wählen Sie <guimenuitem
+>Bearbeiten</guimenuitem
+> aus dem Kontextmenü. Wenn Sie den Modus entsprechenden Modus aktiviert haben und die Buchungen direkt in der Buchungsliste bearbeiten, können Sie auch einfach mit der Maus doppelt auf die gewünschte Buchung klicken, oder &Enter; drücken, wenn die betreffende Buchung ausgewählt ist. </para>
 </sect1>
 
 <sect1 id="details.ledger.delete">
-<title>Deleting transactions</title>
+<title
+>Buchungen löschen</title>
 
-<para>
-  To delete a transaction, select it in the list view, right click on the entry,
-  and select <guimenuitem>Delete</guimenuitem> from the popup menu when it
-  appears, or click <guibutton>Delete</guibutton> on the transaction form.
-</para>
+<para
+>Um eine Buchung zu löschen, wählen Sie sie in der Buchungsliste aus und klicken Sie sie mit der rechten Maustaste an. Im erscheinenden Kontextmenü wählen Sie <guimenuitem
+>Löschen</guimenuitem
+>, oder Sie klicken auf <guibutton
+>Löschen</guibutton
+> im Buchungsformular. </para>
 </sect1>
 
 <sect1 id="details.ledgers.match">
-<title id="details.ledgers.match.title">Matching Transactions</title>
+<title id="details.ledgers.match.title"
+>Buchungen zuordnen</title>
 
-<para>
-  Generally, when you import transactions, either via QIF, OFX, or HBCI, &kmymoney;
-  will automatically attempt to match them against existing transactions. To
-  allow for differences in the dates, there is a default setting of 4 days,
-  which may be changed in the settings - Register/Import. Any transactions so
-  matched will be highlighted in green. On completion of the import, you should
-  review these and either accept or unmatch them.
-</para>
+<para
+>Wenn Sie Buchungen importieren (z.B. QIF, OFX oder HBCI), versucht &kmymoney; die importierten Buchungen automatisch den bereits im Kontenbuch vorhandenen Buchungen zuzuordnen. Standardmäßig darf sich das Datum der Buchungen bei der automatischen Zuordnung um 4 Tage unterscheiden. Diese Voreinstellung kann in den Einstellungen zum Kontenbuch auf der Karteikarte <guilabel
+>Importieren</guilabel
+> geändert werden. Jede Buchung, die automatisch zugeordnet werden konnte, wird grün markiert. Nach Abschluss des Imports sollten Sie die automatisch zugeordneten Buchungen überprüfen und entweder akzeptieren oder sie wieder trennen. </para>
 
-<para>
-  If you should find that an imported transaction was not automatically matched
-  with an existing transaction when it should have matched, then it is possible
-  to match them manually. Note there is a difference between manually
-  matching two transactions and simply deleting one of them, even though they
-  may appear to have the same effect.  Specifically with OFX or HBCI, it is
-  important not to delete the imported transaction, because you will find that
-  the next time you import your transactions, the deleted transaction may show up
-  again.  This is because modern import formats like OFX and HBCI use a
-  <quote>Transaction ID</quote> to identify transactions.  When you delete the
-  imported transaction, the transaction ID goes with it, so the importer has no
-  way to know this transaction was already imported.
-</para> 
+<para
+>Sollten Sie importierte Buchungen finden, die nicht automatisch zu bereits bestehenden Buchungen im Kontenbuch zugeordnet wurden, besteht die Möglichkeit diese manuell zuzuordnen. Beachten Sie, dass es einen Unterschied macht, ob Sie zwei Buchungen zuordnen, oder eine der beiden einfach löschen, auch wenn es auf den ersten Blick zum gleichen Ergebnis führt, nämlich dass nur eine Buchung übrig bleibt. Gerade bei OFX und HBCI ist es besonders wichtig, dass Sie die importierte Buchung nicht einfach löschen, denn beim nächsten Import würden die gelöschten Buchungen erneut auftauchen. Der Grund ist, dass moderne Formate wie OFX und HBCI sogenannte <quote
+>Transaktions-IDs</quote
+> verwenden, um Buchungen eindeutig zu identifizieren. Wenn Sie nun eine so importierte Buchung löschen, wird natürlich auch die Transaktions-ID gelöscht, sodass der Importer beim nächsten Import nicht mehr weiss, dass die Buchung bereits importiert wurde. Also wird sie erneut importiert und taucht wieder im Kontenbuch auf. </para
+> 
 
-<para>
-  The solution is to tell &kmymoney; that the transactions are the same, using
-  the manual matching interface. This allows you to match an imported
-  transaction with a hand-entered (non-imported) transaction. To do so, select
-  one of the transactions to be matched by clicking on it, then select the other
-  by left clicking on it while pressing the &Ctrl; key, and then select
-  <guimenuitem>Match</guimenuitem> from the context menu. This will match and
-  combine the two transactions together. The values of both transactions must be
-  the same for the match to work, except that the dates may differ by the window
-  specified in the settings, as described above. If you are happy with the
-  result, right click the matched transaction, then select
-  <guibutton>Accept</guibutton>.
-</para>
+<para
+>Die Lösung besteht darin, &kmymoney; durch eine manuelle Zuordnung mitzuteilen, dass die beiden Buchungen identisch sind. Dies ermöglicht Ihnen, eine importierte Buchung mit einer manuell eingegebenen (nicht importierten) Buchung zu verknüpfen/zuzuordnen. Um zwei Buchungen manuell zuzuordnen, markieren Sie die erste Buchung, indem Sie sie mit der Maus anklicken. Anschließend markieren Sie auch die zweite Buchung genauso, nur drücken Sie dabei gleichzeitig die &Ctrl;-Taste und wählen <guimenuitem
+>Zuordnen</guimenuitem
+> aus dem Kontextmenü. Die Hintergrundfarbe der Buchung ändert sich zu einem blassen Grün. Hierdurch werden die beiden Buchungen einander zugeordnet und zusammengeführt. Die Beträge der beiden Buchungen müssen identisch sein, damit die Zuordnung funktioniert. Nur das Datum der beiden Buchungen darf sich um das oben erwähnte eingestellte Zeitfenster unterscheiden. Wenn Sie mit dem Ergebnis zufrieden sind, klicken Sie die zugeordnete Buchung mit der rechten Maustaste an und wählen Sie den Knopf <guibutton
+>Annehmen</guibutton
+>. </para>
 
-<para>
-  During import of online statements, either directly or by importing a
-  downloaded file, &kmymoney; performs matching as best as it can based on the
-  name of the payee and the amount of the transaction. In case of an invalid
-  match, a matched transaction can be unmatched.
-</para>
+<para
+>Während des Imports von Onlinebuchungen, entweder direkt oder durch das Einlesen einer heruntergeladenen Datei, versucht &kmymoney; nach seinen Möglichkeiten eine automatische Zuordnung, basierend auf dem Namen des Zahlungsempfängers und dem Betrag der Buchung. Im Falle einer falschen automatischen Zuordnung kann die zugeordnete Buchung wieder getrennt werden. </para>
 
 <note>
-  <para>
-    The matching interface will not allow you to match two transactions which
-    have both been imported.  Likewise, it won't allow matching between two
-    transactions which have both been entered by hand.
-  </para>
+  <para
+>Es ist nicht möglich, zwei Buchungen einander zuzuordnen, die beide importiert wurden. Genauso ist es nicht möglich, zwei Buchungen einander zuzuordnen, die beide manuell eingegeben wurden. </para>
 </note>
 </sect1>
 
 <sect1 id="details.ledgers.cleared">
-<title>Understanding the State of a transaction</title>
+<title
+>Der Status "Verrechnet"</title>
 
-<para>
-  A transaction can have one of three states: non-reconciled (blank), cleared
-  (C), or reconciled (R). When a transaction is entered, it has state of
-  non-reconciled.  Once the bank posts the transaction, the user can clear it
-  and thus transform it to state (C). When you receive a statement from the
-  bank, all cleared transactions should be on the statement.
-</para>
+<para
+>Eine Buchung kann einen von folgenden drei möglichen Zustände haben: nicht abgeglichen (N), verrechnet (V) und abgeglichen (A). Wenn Sie eine neue Buchung eingeben, hat diese den Status "nicht abgeglichen". Sobald die Buchung der Bank ankommt, können Sie sie mit Ihrem Kontenbuch verrechnen und die Buchung in den Status "V" setzen. Sobald Sie einen Kontoauszug von Ihrer Bank erhalten, sollten alle verrechneten Buchungen darauf zu finden sein. </para>
 
 <para>
 	<screenshot>
-	<screeninfo>Understanding the cleared state</screeninfo>
+	<screeninfo
+>Der Status "Verrechnet"</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="cleared_state.png" format="PNG" />
+	<imagedata fileref="cleared_state.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>cleared state</phrase>
+	<phrase
+>Verrechnet-Status</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para>
-  When you <link linkend="details.reconcile">reconcile</link> your account, you
-  actually mark the statements as cleared and check that the difference between
-  the beginning balance and the cleared transactions equals the ending balance
-  of the statement. When this is the case, you can 'finish reconciling' which
-  actually changes the state of all cleared transactions (C) to reconciled (R).
-</para>
+<para
+>Wenn Sie Ihr Konto <link linkend="details.reconcile"
+>abgleichen</link
+>, markieren Sie alle Buchungen als "verrechnet" und überprüfen, ob die Differenz zwischen dem Anfangskontostand und dem Endkontostand der Summe der verrechneten Buchungen entspricht und mit dem Endkontostand des Kontoauszugs übereinstimmt. Wenn das der Fall ist, können Sie den "Abgleich beenden", wobei automatisch der Status aller verrechneten Buchungen von "Verrechnet" (V) in "Abgeglichen" (A) geändert wird. </para>
 
-<para>
-  If you try to edit a transaction with at least one split marked as reconciled
-  (R), you will be warned.
-</para>
+<para
+>Wenn Sie eine Buchung bearbeiten möchten, die mindestens eine Split-Buchung enthält die bereits als abgeglichen (A) gekennzeichnet wurde, werden Sie gewarnt. </para>
+
+<para
+>Es existiert noch ein vierter Status ("eingefroren"), der aber nicht gesetzt werden kann. Dieser ist für einen späteren Gebrauch vorgesehen. Wenn eine Buchung mindestens eine Splitzeile im Status "eingefroren" besitzt, kann die Buchung nicht mehr bearbeitet werden. </para>
+
 </sect1>
 
-<sect1 id="details.ledgers.settings">
-<title>Changing Transaction Settings</title>
+<sect1 id="details.ledgers.settings"
+><title id="details.ledgers.settings.title"
+>Buchungseinstellungen verändern</title>
 
-<para>
-  There are several options that change the appearance and behavior of the
-  Ledger view in terms of transactions. These settings are found by selecting
-  <guimenu>Settings</guimenu><guimenuitem>Configure &kmymoney;</guimenuitem>
-  from the menu bar, and selecting the <guiicon><inlinemediaobject><imageobject>
-  <imagedata fileref="ledgers_view.png" format="PNG"/></imageobject>
-  </inlinemediaobject></guiicon> ledger icon from the list on the left.
-</para> 
+<para
+>Es gibt mehrere Optionen, die das Aussehen und das Verhalten der Buchungen in der Kontenbuchansicht beeinflussen. Diese Einstellungen finden Sie durch Auswahl von <menuchoice
+><guimenu
+>Einstellungen</guimenu
+> <guimenuitem
+>&kmymoney; einrichten ...</guimenuitem
+> </menuchoice
+>aus dem Menü und durch Auswahl des <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="ledgers_view.png"/> </imageobject
+></inlinemediaobject
+>Kontenbuch</guiicon
+> Symbols aus der Liste auf der linken Seite des Einstellungs-Dialogfensters. </para
+> 
 
-<para>
-  Most of the settings are self explanatory. For clarity, several of the
-  settings are explained below.
-</para>
-<!-- FIXME - if these are explained in the chapter on settings, just refer to that
-     as is done above, and don't duplicate here.  Leaving for now, but should clean
-     up later. -->
+<para
+>Die meisten Einstellungen sind selbsterklärend. Zur Veranschaulichung werden einige der möglichen Einstellungen aber trotzdem nachfolgend beschrieben. </para>
 
 <itemizedlist>
   <listitem>
-    <para>
-      Show transaction form (under the Display tab) - toggle to hide the
-      transaction form at the bottom of this screen. Transactions can still be
-      entered directly into an empty line at the end of the transaction list,
-      through an automatic compact entry area.
-    </para>
+    <para
+>Buchungsformular anzeigen (auf der Karteikarte "Anzeige") - schaltet die Anzeige des Buchungsformulars für die Eingabe einer Buchung im unteren Bereich des Bildschirms an oder aus. Buchungen können trotzdem direkt in eine leere Zeile am Ende der Buchungsliste durch eine kompakte automatischen Eingabebereich direkt in der Liste eingegeben werden. </para>
   </listitem>
 </itemizedlist>
 
-<para>
-  These images show what direct transaction entry looks like compared to the
-  transaction form.
-</para>
+<para
+>Die Bilder zeigen, wie die direkte Eingabemöglichkeit in der Buchungsliste im Vergleich zum Buchungsformular im unteren Bereich aussieht. </para>
 
-<para>The transaction form</para>
+<para
+>Das Buchungseingabeformular</para>
 
 <para>
 	<screenshot>
-	<screeninfo>The transaction form</screeninfo>
+	<screeninfo
+>Das Buchungsformular</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="transactionform.png" format="PNG" />
+	<imagedata fileref="transactionform.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Transaction form</phrase>
+	<phrase
+>Buchungsformular</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para>Transactions entered directly</para>
+<para
+>Buchungen werden direkt eingegeben</para>
 
 <para>
 	<screenshot>
-	<screeninfo>Transactions entered directly</screeninfo>
+	<screeninfo
+>Buchungen direkt eingegeben</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="transactionform-off.png" format="PNG" />
+	<imagedata fileref="transactionform-off.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Direct input</phrase>
+	<phrase
+>Direkte Eingabe</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
@@ -704,51 +573,44 @@
 
 <itemizedlist>
   <listitem>
-    <para>
-      Keep changes when selecting a different transaction/split - by selecting
-      the next line in the transaction list or split editor, the changes are
-      kept, instead of the default behavior where you have to push the green
-      check mark to save changes.
-    </para>
+    <para
+>Änderungen beibehalten, wenn eine andere Buchung ausgewählt wird - durch das Auswählen der nächsten Zeile in der Buchungsliste oder dem Split-Buchungs-Editor werden die vorher durchgeführten Änderungen beibehalten, anstatt der Standardeinstellung, dass Änderungen erst durch Klick auf den grünen Haken gespeichert werden. </para>
   </listitem>
 </itemizedlist>
 
 </sect1>
 
 <sect1 id="details.ledgers.other">
-<title id="details.ledgers.other.title">Other Functionality</title>
+<title id="details.ledgers.other.title"
+>Andere Funktionen</title>
 
-<para>
-  Additional options are available from the <guimenu>Transaction
-  Options</guimenu> menu, accessed by right-clicking any transaction in the
-  list.
-</para>
+<para
+>Weitere Optionen sind im Kontextmenü <guimenu
+>Buchungsoptionen</guimenu
+> verfügbar, das sich durch einen Klick mit der rechten Maustaste auf eine beliebige Buchung in der Liste öffnet. </para>
 
 <para>
 	<screenshot>
-	<screeninfo>The transaction options sub-menu</screeninfo>
+	<screeninfo
+>Das Kontextmenü Buchungsoptionen</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="ledger_more.png" format="PNG" />
+	<imagedata fileref="ledger_more.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Transaction options</phrase>
+	<phrase
+>Buchungsoptionen</phrase>
 	</textobject>
 	</mediaobject>
 	</screenshot>
 </para>
 
-<para>
-  Options include jumping to the Payees view for the Payee in the transaction,
-  creating a schedule, and changing the reconciled or cleared status.
-</para>
+<para
+>Mithilfe dieser Optionen können Sie zur Zahlungsempfänger-Seite springen, eine geplante Buchung anlegen und den Status "Verrechnet" oder "Abgeglichen" verändern. </para>
 
-<para>
-  To edit the account information from the ledger view, select
-  <guimenu>Account</guimenu> from the menu bar. From the <guimenuitem>Edit
-  Account...</guimenuitem> menu item, you can change the account details.  There
-  is also a menu item to bring up the Reconcile menu, which allows you to match
-  transactions against an official bank statement or credit card notice.
-</para>
+<para
+>Um die Kontoinformationen aus dem Kontenbuch heraus zu bearbeiten, wählen Sie aus dem Menü den Punkt <guimenu
+>Konto</guimenu
+>. Aus diesem Menü können Sie die Kontendetails bearbeiten, sowie das Menü zum Abgleich des Kontos erreichen, welches Ihnen erlaubt, die Buchungen den Buchungen des Bankkontoauszugs oder der Kreditkartenabrechnung zuzuordnen. </para>
 </sect1>
 </chapter>

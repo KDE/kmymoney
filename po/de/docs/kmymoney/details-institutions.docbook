@@ -2,251 +2,131 @@
 <chapter id="details.institutions">
 <chapterinfo>
   <authorgroup>
-    <author> &Roger.Lum; &Roger.Lum.mail; </author>
-    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
   </authorgroup>
-  <date>2018-02-01</date>
-  <releaseinfo>5.0.0</releaseinfo>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
 </chapterinfo>
 
-<title>Institutions</title>
+<title
+>Geldinstitute</title>
 
-<para>
-  The Institutions view provides a summary of all the accounts grouped under
-  their respective institutions.  The list of accounts under any institution can be
-  expanded or collapsed by clicking on the arrow to the left of the institution
-  name.  The last listed institution is "Accounts with no institution assigned."
-</para>
+<para
+>Die Ansicht "Geldinstitute" zeigt alle Konten gruppiert nach den eingetragenen Geldinstituten. Anlagenkonten sind mit einem schwarzen, Verbindlichkeitenkonten mit einem roten Pfeil gekennzeichnet. </para>
 
-<para>
-  The Institutions view displays several columns, showing information about the
-  account.  It also shows the total value of all accounts in each institution.
-  You can select which columns are shown by right clicking on any column heading
-  and selecting or unselecting the checkbox next to the name of the column.
-</para>
+<para
+>Diese Ansicht enthält mehrere Spalten, wie den Kontentyp und den Kontostand jedes Kontos. Die Ansicht zeigt darüber hinaus auch die Gesamtsumme aller Konten eines Geldinstituts. </para>
 
 <para>
 <screenshot>
-    	<screeninfo>institution view</screeninfo>
+    	<screeninfo
+>Ansicht „Geldinstitute“</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="institution_view.png" format="PNG" />
+	<imagedata fileref="institution_view.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>institution view</phrase>
+	<phrase
+>Ansicht „Geldinstitute“</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<para>
-  The following columns are available in the Institutions view.
-</para>
-
-<variablelist>
-  <varlistentry>
-    <term>Account</term>
-    <listitem>
-      <para>
-        The name of the institution or account.
-      </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term>Type</term>
-    <listitem>
-      <para>
-        The type of account, &eg;, Savings, Checking, Credit Card, ...
-      </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term>Tax</term>
-    <listitem>
-      <para>
-        An indication whether this account has been configured as important for
-        tax purposes.
-      </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term>VAT</term>
-    <listitem>
-      <para>
-        An indication whether this account has been configured to apply a VAT on
-        transaction.
-      </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term>CC (Cost Center)</term>
-    <listitem>
-      <para>
-        An indication that a cost center assignment is necessary under certain
-        conditions when entering a transaction for this account.  This is a new
-        feature, which is not yet implemented, so this column is not currently
-        used.
-      </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term>Total Balance</term>
-    <listitem>
-      <para>
-        Another new feature, not yet implemented.
-      </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term>Posted Value</term>
-    <listitem>
-      <para>
-        This is the balance of the account as provided by the institution.
-      </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term>Total Value</term>
-    <listitem>
-      <para>
-        The balance of the account in &kmymoney;.  Note that for Institutions,
-        this is the total of the balances for all accounts in that institution.
-      </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term>Number</term>
-    <listitem>
-      <para>
-        The account number, if one was entered.
-      </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term>Sort Code</term>
-    <listitem>
-      <para>
-        This shows the IBAN number, if there is a value entered in the
-        appropriate field on the Account information dialog.
-      </para>
-    </listitem>
-  </varlistentry>
-
-</variablelist>
-
-<para>
-  Note that many of these same columns are also available in other views, such
-  as the Accounts view.  When you select or unselect a checkbox to display or
-  remove a column, you will see a popup asking if you want to show or remove
-  that column from all other views where it is present. If you check "No," you
-  will only change the display of that column in the current view.
-</para>
-
 <sect1 id="details.institutions.institution">
-<title>Institution Options</title>
+<title
+>Einstellungen für Geldinstitut</title>
 
-<para>
-  Right-clicking an institution name brings up an Institution Options sub-menu,
-  providing you with several choices. Selecting <guimenuitem>New
-  Institution...</guimenuitem> opens the New Institution Dialog, where you can
-  enter all the necessary information to create a new institution.  Selecting
-  <guimenuitem>Edit Institution...</guimenuitem> brings up an editable window
-  with institution details such as name and address. Selecting
-  <guimenuitem>Delete Institution</guimenuitem> removes the entire institution
-  and all its associated accounts. Keep in mind that you will only be able to
-  delete an institution if you can delete all of its accounts, and you will only
-  be able to delete each associated account if it has no transactions and no
-  schedules refers to it.  Selecting <guimenuitem>New account...</guimenuitem>
-  steps you through the new account process, which is described in more detail
-  in the next section.
-</para>
+<para
+>Ein rechter Mausklick auf den Namen eines Geldinstituts zeigt ein Untermenü mit mehreren Optionen. Der Menüpunkt <guimenuitem
+>Neues Geldinstitut ...</guimenuitem
+> öffnet das Dialogfenster zum Anlegen eines neuen Geldinstituts, in dem Sie alle notwendigen Informationen der neuen Bank eingeben können. Mit <guimenuitem
+>Geldinstitut bearbeiten ...</guimenuitem
+> können Sie die Details, wie Name und Adresse, des angewählten Instituts ändern. Über <guimenuitem
+>Geldinstitut löschen</guimenuitem
+> kann des Geldinstitut samt allen zugeordneten Konten aus &kappname; komplett gelöscht werden. Beachten Sie, dass Sie ein Kreditinstitut nur löschen können, wenn auch alle zugeordneten Konten gelöscht werden können. Dies ist nur möglich, wenn die Konten keine Buchungen beinhalten und ihnen keine geplanten Buchungen zugeordnet sind. Über <guimenuitem
+>Neues Konto ...</guimenuitem
+> gelangen Sie in den Assistenten zum Anlegen neuer Konten, der im nächsten Abschnitt näher beschrieben wird. </para>
 
 <para>
 <screenshot>
-	<screeninfo>Institution options sub-menu</screeninfo>
+	<screeninfo
+>Kontextmenü „Geldinstitut“</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="institution_options.png" format="PNG" />
+	<imagedata fileref="institution_options.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>Institution options sub-menu</phrase>
+	<phrase
+>Kontextmenü „Geldinstitut“</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
 <sect2 id="details.institutions.new">
-<title>New Institution</title>
+<title
+>Neues Geldinstitut</title>
 
 <para>
   <screenshot>
     <mediaobject>
       <imageobject>
-        <imagedata fileref="newinst.png" format="PNG" />
+        <imagedata fileref="newinst.png" format="PNG"/>
       </imageobject>
       <textobject>
-        <phrase>New Institution</phrase>
+        <phrase
+>Neues Geldinstitut</phrase>
       </textobject>
     </mediaobject>
   </screenshot>
 </para>
 
-<note><para>
-  You must have a file open before you can create a new institution. If
-  you do not have an existing file, you will need to <link
-  linkend="firsttime.3">create one</link>.
-</para></note>
-
 <para>
-  Only the name is required in the New Institution Dialog, all other fields are
-  optional.  As with the personal information dialog, this data is not currently
-  used by &kmymoney;, but will be required by future releases for certain
-  features.  In particular, the <ulink
-  url="https://en.wikipedia.org/wiki/Bank_code">Bank Code</ulink> and the <acronym>
-  <ulink url="https://en.wikipedia.org/wiki/ISO_9362">BIC (Bank Identifier
-  Code)</ulink></acronym> will be required for online banking.
+  <emphasis
+>Hinweis: Sie müssen eine Datei geöffnet haben, bevor Sie ein neues Geldinstitut anlegen können. Wenn Sie keine vorhandene Datei zur Verfügung haben, müssen eine <link linkend="firsttime.3"
+>neue Datei</link
+> erzeugen. </emphasis>
 </para>
+
+<para
+>Die Eingabe eines Namens für das neue Geldinstitut ist obligatorisch, die übrigen Felder sind optional. Genauso wie die Daten aus dem Eingabedialog für die persönlichen Informationen, werden auch die Daten des neuen Geldinstituts derzeit von &kappname; nicht verwendet. Dies wird sich in zukünftigen Versionen aber ändern, so wird zukünftig auf die Bankleitzahl (BLZ) und die <acronym
+><ulink url="http://en.wikipedia.org/wiki/ISO_9362"
+>BIC (Bank Identifier Code)</ulink
+></acronym
+> für das Online-Banking zurückgegriffen. </para>
 </sect2>
 </sect1>
 
 <sect1 id="details.institutions.account">
-<title>Account Options</title>
+<title
+>Konto-Einstellungen</title>
 
-<para>
-  Right-clicking an account name brings up an Account Options sub-menu.
-  Selecting <guimenuitem>New account...</guimenuitem> steps you through the new
-  account process. Selecting <guimenuitem>Open Ledger</guimenuitem> brings you
-  directly to the Ledgers view or Investments view, depending on the account
-  type. Simply double-clicking an account name also opens the account. Selecting
-  <guimenuitem>Edit account</guimenuitem> brings up a window allowing you to
-  change an account's name, start date, associated banking institution, and
-  parent account. Deleting an account is only possible if there are no
-  transactions associated with that account, and the account is not referred to
-  in any scheduled transaction.  Selecting
-  <guimenuitem>Reconcile...</guimenuitem> opens up the Reconcile Wizard, which
-  steps you through the process of comparing your account statement to your
-  electronic entries. More details, as well as information about the other
-  options, are presented in the appropriate sections of this manual.
-</para>
+<para
+>Ein rechter Mausklick auf einen Kontennamen öffnet ein Kontextmenü. Durch die Auswahl von <guimenuitem
+>Neues Konto ...</guimenuitem
+> öffnet sich der Assistent für neue Konten. Mit <guimenuitem
+>Kontenbuch öffnen</guimenuitem
+> gelangen Sie direkt zum Kontenbuch oder zur Investitionenliste, abhängig vom Kontentyp. Das gleiche geschieht bei einem Doppelklick auf den Kontennamen. Durch den Menüpunkt <guimenuitem
+>Konto bearbeiten ...</guimenuitem
+> öffnet sich ein Dialogfenster, in dem Sie den Kontennamen, das Eröffnungsdatum, das zugeordnete Geldinstitut und das Elternkonto ändern können. Ein Konto kann nur gelöscht werden, wenn es keine Buchungen mehr enthält. Das Auswählen von <guimenuitem
+>Abgleichen ...</guimenuitem
+> öffnet den Abgleich-Assistenten, worüber Sie Schritt für Schritt die Buchungen Ihres Bankkontoauszugs mit denen in Ihrem Kontenbuch vergleichen können. Weitere Informationen hierzu, sowie Informationen über die anderen Optionen finden Sie in dem entsprechenden Kapitel dieses Handbuchs. </para>
 
 <para>
 <screenshot>
-	<screeninfo>account options sub-menu</screeninfo>
+	<screeninfo
+>Kontextmenü „Konto“</screeninfo>
 	<mediaobject>
 	<imageobject>
-	<imagedata fileref="account_options.png" format="PNG" />
+	<imagedata fileref="account_options.png" format="PNG"/>
 	</imageobject>
 	<textobject>
-	<phrase>account options sub-menu</phrase>
+	<phrase
+>Kontextmenü „Konto“</phrase>
 	</textobject>
 	</mediaobject>
 </screenshot>

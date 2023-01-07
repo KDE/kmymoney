@@ -2,141 +2,131 @@
 <chapter id="details.forecast">
 <chapterinfo>
   <authorgroup>
-    <author> &Colin.Wright; &Colin.Wright.mail; </author>
+    <author
+>&Colin.Wright; &Colin.Wright.mail; </author>
   </authorgroup>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
 </chapterinfo>
 
-<title>Forecast</title>
+<title
+>Vorhersage</title>
 
 <sect1 id="details.forecast.define">
-<title>What is a Forecast?</title>
+<title
+>Was ist eine Vorhersage?</title>
 
-<para>
-  In &kmymoney;, a Forecast is a prediction of the balances of Accounts during a
-  specified future period of time.</para>
+<para
+>In &kmymoney; ist eine Vorhersage eine Vorausberechnung der Kontostände von Konten während des angegebenen Zeitraums in der Zukunft.</para>
 
-<para>
-  Forecasts can be predicted using one of two methods.
-</para>
+<para
+>Vorhersagen können durch eine von zwei Methoden berechnet werden. </para>
 
 <variablelist>
   <varlistentry>
-    <term>Scheduled and Future Transactions</term>
+    <term
+>Geplante und zukünftige Buchungen</term>
     <listitem>
-      <para>&kmymoney; uses a combination of future transactions already entered
-        into the ledgers and the entries in the Schedule.</para>
+      <para
+>&kmymoney; verwendet eine Kombination aus zukünftigen Buchungen, die bereits im Kontenbuch eingetragen sind, sowie den Einträgen unter geplanten Buchungen.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>History-based</term>
+    <term
+>Vergangenheitsbasiert</term>
     <listitem>
-      <para>&kmymoney; uses values from past transactions in the ledgers to
-        predict future transactions.</para>
+      <para
+>&kmymoney; verwendet Werte aus vergangenen Buchungen im Kontenbuch um zukünftige Buchungen zu berechnen.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 
-<para>
-  The forecast method and forecast period can be set in the &kmymoney; Settings,
-  in the Forecast pane.
-</para>
+<para
+>Die Vorhersagemethode und der Vorhersagezeitraum lässt sich in den Einstellung von &kmymoney; auf der Seite „Vorhersage“ wählen. </para>
 
-<para>
-  &kmymoney; Forecast provides a summary, showing the predicted balances at
-  account cycle dates and the expected difference between the starting and
-  ending balances.  The length of the account cycle can be set by the user.  The
-  summary also displays messages about significant predicted changes to the
-  accounts during the forecast period.
-</para>
+<para
+>Die Vorhersage erstellt eine Zusammenfassung bestehend aus den vorhergesagten Kontoständen zu den Abrechnungszeitpunkten der Konten, sowie der erwarteten Differenz der Kontostände zwischen Beginn und Ende des Vorhersagezeitraums. Die Länge der Abrechnungszeitpunkte können vom Benutzer angegeben werden. Die Zusammenfassung zeigt auch entsprechende Warnungen, wenn signifikante Änderungen der Kontostände innerhalb des Vorhersagezeitraums errechnet werden. </para>
 
-<para>
-  As well as the summary, &kmymoney; Forecast also allows you to view day-by-day
-  balances and view the minimum and maximum balances for each forecast account
-  cycle.
-</para>
+<para
+>Neben der Zusammenfassung erlaubt es die Vorhersage auch tagesaktuelle Kontostände, sowie Minimal- und Maximalkontostände für jeden Abrechnungszeitraum zu ermitteln und anzuzeigen. </para>
 
-<para>
-  By default the Forecast is created for 90-days, with 30-day account cycles
-  using Scheduled and Future Transactions.
-</para>
+<para
+>Standardmäßig wird die Vorhersage für 90 Tage erstellt mit Abrechnungszeitraum für das Konto von 30 Tagen unter Verwendung der Methode mittels geplanter und zukünftiger Buchungen. </para>
 </sect1>
 
-<sect1 id="details.forecast.view" >
-<title>Viewing Forecasts</title>
+<sect1 id="details.forecast.view">
+<title
+>Vorhersagen anzeigen</title>
 
-<para>
-  You can view a Forecast by clicking the appropriate icon in the navigation
-  pane at the left hand side of your &kmymoney; window.
-</para>
+<para
+>Sie können eine Vorhersage anzeigen, indem Sie das entsprechende Symbol in der Navigationsleiste auf der linken Seite des &kmymoney;-Fensters anklicken. </para>
 
-<para>
-  The Forecast window is split into five tabs:
-</para>
+<para
+>Das Vorhersagebereich ist in fünf Karteikarten unterteilt.: </para>
 
 <sect2>
-<title>Summary Tab</title>
+<title
+>Karteikarte „Zusammenfassung“</title>
 
-<para>
-  The Summary tab is split vertically into two halves.
-</para>
+<para
+>Das Unterfenster "Zusammenfassung" ist vertikal in zwei Hälften geteilt. </para>
 
 <sect3>
-<title>Account Summary</title>
+<title
+>Kontozusammenfassung</title>
 
-<para>
-  The Account Summary contains a grid displaying a row of information for each
-  Asset and Liability.
-</para>
+<para
+>Die Kontozusammenfassung zeigt in jeder Zeile Informationen für jede Anlage und Verbindlichkeit. </para>
 
-<para>
-  The following columns are displayed:
-</para>
+<para
+>Die folgenden Spalten sind zu sehen: </para>
 
 <variablelist>
   <varlistentry>
-    <term>Account</term>
+    <term
+>Konto</term>
     <listitem>
-      <para>The name of the Asset or Liability account</para>
+      <para
+>Der Name des Anlage- oder Verbindlichkeitenkontos</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Current Balance (Current)</term>
+    <term
+>Aktuell</term>
     <listitem>
-      <para>The current balance of the account is displayed.</para>
+      <para
+>Der aktuelle Kontostand des angezeigten Kontos.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Account Cycle Balance</term>
+    <term
+>Abrechnungszeitraum, z.B. "30 Tage"</term>
     <listitem>
-      <para>The Forecast period is split into account cycles.  The default
-        account cycle length is 30 days, but can be set by the user.</para>
+      <para
+>Der Vorhersagezeitraum ist aufgeteilt in Kontozyklen (Abrechnungszyklen). Der standardmäßige Abrechnungszeitraum beträgt 30 Tage, kann aber vom Benutzer geändert werden.</para>
 
-      <para>The first account cycle date is the first Forecast date.  By default
-        this is the current date plus one account cycle, but can change
-        depending on the "Day of Month to start Forecast" setting.</para>
+      <para
+>Der erste Tag des Abrechnungszyklus ist der erste Vorhersagetag. Standardmäßig ist dies der heutige Tag plus einem Abrechnungszyklus, was aber abhängig von der Einstellung "Start-Tag (des Monats) der Vorhersage" variieren kann.</para>
 
-      <para>Remaining account cycle dates are determined by adding the account
-        cycle length to the previous account cycle date.  This is continued
-        until the calculated account cycle date would be beyond the Forecast
-        period.</para>
+      <para
+>Verbleibende Abrechnungszyklus-Daten werden ermittelt, indem zum vorherigen Abrechnungszyklus-Datum ein weiterer Abrechnungszyklus hinzugezählt wird. Dies wiederholt sich, bis das errechnete Abrechnungszyklus-Datum hinter dem Vorhersagezeitraum liegt.</para>
 
-      <para>For each account cycle date the predicted balance is
-        displayed.</para>
+      <para
+>Für jeden Abrechnungszyklus wird der errechnete Kontostand angezeigt.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Total Variation</term>
+    <term
+>Gesamtvariation</term>
     <listitem>
-      <para>The rightmost column displays the predicted difference in value
-        between the balances at the start and end of the forecast.  If the
-        predicted end value of the account (in terms of net worth) is less than
-        the start value the whole row is highlighted in red.</para>
+      <para
+>Die Spalte ganz rechts zeigt die berechnete Differenz der Werte zwischen den Kontoständen am Anfang und am Ende der Vorhersage. Wenn der vorhergesagte Endsaldo des Kontos (im Sinne des Eigenkapitals) geringer ist als der Startsaldo, wird die gesamte Zeile rot hervorgehoben.</para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -144,29 +134,28 @@
 </sect3>
 
 <sect3>
-<title>Key Summary Information</title>
+<title
+>Schlüsselinformationen der Zusammenfassung</title>
 
-<para>
-  The bottom half of the Summary tab displays noteworthy information about
-  accounts.  This includes:
-</para>
+<para
+>Die rechte Hälfte der Karteikarte "Zusammenfassung" zeigt einige nennenswerte Informationen über die Konten. Dazu gehören: </para>
 
 <variablelist>
   <varlistentry>
-    <term>Assets below zero</term>
+    <term
+>Anlagen im Soll</term>
     <listitem>
-      <para>A message is displayed for any asset for which the value starts or
-        will drop below zero during the forecast period.</para>
+      <para
+>Eine Nachricht wird für alle Anlagen angezeigt, deren Salden während der Vorhersageperiode unter 0 sinken oder unter 0 starten.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Liabilities above zero</term>
+    <term
+>Verbindlichkeiten im Haben</term>
     <listitem>
-      <para>A message is displayed for any liability for which the value starts
-        or will rise above zero during the forecast period.  Note that the value
-        of a liability is the negative of its ledger balance, since a positive
-        balance indicates money owed.</para>
+      <para
+>Für alle Verbindlichkeiten, deren Salden während der Vorhersageperiode über 0 steigen, oder über 0 starten, wird ebenfalls eine Meldung ausgegeben. Beachten Sie, dass der Wert einer Verbindlichkeit der negierte Wert der Kontenbuch-Saldos ist, während eine positiver Betrag bedeutet, dass Geld geschuldet wird.</para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -174,76 +163,81 @@
 </sect2>
 
 <sect2>
-<title>Details Tab</title>
+<title
+>Die Karteikarte "Details"</title>
 
-<para>
-  The Details tab contains a grid displaying a row of information for each Asset
-  and Liability.
-</para>
+<para
+>Die Karteikarte "Details" enthält eine Tabelle mit Informationen zu jeder Anlage und jeder Verbindlichkeit pro Zeile. </para>
 
 <variablelist>
   <varlistentry>
-    <term>Account</term>
+    <term
+>Konto</term>
     <listitem>
-      <para>The name of the Asset or Liability account</para>
+      <para
+>Der Name des Anlage- oder Verbindlichkeitenkontos</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Dates</term>
+    <term
+>Daten</term>
     <listitem>
-      <para>For each date in the Forecast period a column displays the predicted
-        balance of the account on that date.  The date columns are in ascending
-        order from left to right.</para>
+      <para
+>Für jedes Datum der Vorhersageperiode wird eine Spalte erzeugt, die den vorausberechneten Kontostand an diesem Tag zeigt. Die Datum-Spalten sind aufsteigend von links nach rechts sortiert.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Total Variation</term>
+    <term
+>Gesamtvariation</term>
     <listitem>
-      <para>The rightmost column displays the predicted difference in value
-        between the balances at the start and end of the forecast.  If the
-        predicted end value of the account (in terms of net worth) is less than
-        the start value the whole row is highlighted in red.</para>
+      <para
+>Die Spalte ganz rechts zeigt die berechnete Differenz der Werte zwischen den Kontoständen am Anfang und am Ende der Vorhersage. Wenn der vorhergesagte Endsaldo des Kontos (im Sinne des Eigenkapitals) geringer ist als der Startsaldo, wird die gesamte Zeile rot hervorgehoben.</para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
 <sect2>
-<title>Advanced Tab</title>
+<title
+>Karteikarte "Erweitert"</title>
 
-<para>
-  The Advanced tab contains a grid displaying a row of information for each
-  Asset and Liability.  The information is split into columns as follows:
-</para>
+<para
+>Unter "Erweitert" werden pro Zeile Informationen für alle Verbindlichkeiten und Anlagen angezeigt. Die Informationen befinden sich in folgenden Spalten: </para>
 
 <variablelist>
   <varlistentry>
-    <term>Account</term>
+    <term
+>Konto</term>
     <listitem>
-      <para>The name of the Asset or Liability account</para>
+      <para
+>Der Name des Anlage- oder Verbindlichkeitenkontos</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Minimum Account Cycle Balance</term>
+    <term
+>Minimal-Saldo</term>
     <listitem>
-      <para>For each account cycle number &lt;n&gt; in the Forecast period
-      the following columns are displayed:</para>
+      <para
+>Für jeden Abrechnungszyklus &lt;n&gt; des Vorhersagezeitraums werden die folgenden Spalten angezeigt:</para>
 
       <variablelist>
 	<varlistentry>
-	  <term>Minimum Balance (Min Bal &lt;n&gt;)</term>
+	  <term
+>Minimal-Saldo &lt;n&gt;</term>
 	  <listitem>
-	    <para>The minimum predicted balance during the account cycle</para>
+	    <para
+>Der minimale vorhergesagte Kontostand im Abrechnungszyklus</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term>Minimum Balance Date (Min Date &lt;n&gt;)</term>
+	  <term
+>Minimal-Datum &lt;n&gt;</term>
 	  <listitem>
-	    <para>The date on which the balance reaches its predicted
-	    minimum.</para>
+	    <para
+>Das Datum, an dem der Kontostand das errechnete Minimum erreicht.</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
@@ -251,24 +245,28 @@
   </varlistentry>
 
   <varlistentry>
-    <term>Maximum Account Cycle Balance</term>
+    <term
+>Maximaler Kontostand innerhalb des Abrechnungszyklus.</term>
 
     <listitem>
-      <para>For each account cycle number &lt;n&gt; in the Forecast period
-      the following columns are displayed:</para>
+      <para
+>Für jeden Abrechnungszyklus &lt;n&gt; des Vorhersagezeitraums werden die folgenden Spalten angezeigt:</para>
 
       <variablelist>
 	<varlistentry>
-	  <term>Maximum Balance (Max Bal &lt;n&gt;)</term>
+	  <term
+>Maximal-Saldo &lt;n&gt;</term>
 	  <listitem>
-	    <para>The maximum predicted balance during the account cycle</para>
+	    <para
+>Der maximale berechnete Kontostand während des Abrechnungszyklus</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term>Maximum Balance Date (Max Date &lt;n&gt;)</term>
+	  <term
+>Maximal-Datum &lt;n&gt;</term>
 	  <listitem>
-	    <para>The date on which the balance reaches its predicted
-	    maximum.</para>
+	    <para
+>Das Datum, an dem der Saldo das vorausgesagte Maximum erreicht.</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
@@ -276,10 +274,12 @@
   </varlistentry>
 
   <varlistentry>
-    <term>Average</term>
+    <term
+>Mittelwert</term>
 
     <listitem>
-      <para>The average balance of the account during the forecast period</para>
+      <para
+>Der mittlere Kontostand während der Vorhersagezeitraums.</para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -287,20 +287,20 @@
 </sect2>
 
 <sect2>
-<title>Budget Forecast Tab</title>
+<title
+>Die Karteikarte Budget-Vorhersage</title>
 
-<para>
-  The Budget tab displays a forecast calculation for the Income and Expense categories. The columns are similar to the Summary and Details tabs.
-</para>
+<para
+>Auf dieser Karteikarte wird eine Berechnung der Vorhersage für Einnahmen und Ausgaben als Tabelle angezeigt. Es werden ähnliche Spalten wie auf den Karteikarten Zusammenfassung und Details verwendet. </para>
 
 </sect2>
 
 <sect2>
-<title>Chart Tab</title>
+<title
+>Die Karteikarte Diagramm</title>
 
-<para>
-  It displays a chart showing the forecast. The level of detail varies depending on the detail level selected on the option above.
-</para>
+<para
+>Hier wird ein Diagramm mit der grafischen Darstellung der Vorhersage angezeigt. Den Umfang und die Detaillierung des Diagramms legen Sie mit den Einstellungen oben im Fenster fest. </para>
 
 </sect2>
 
