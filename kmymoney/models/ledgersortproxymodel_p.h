@@ -106,10 +106,10 @@ public:
             {JournalModel::Column::Reconciliation, Qt::DisplayRole},
             {JournalModel::Column::Payment, eMyMoney::Model::SplitValueRole},
             {JournalModel::Column::Deposit, eMyMoney::Model::SplitValueRole},
-            {JournalModel::Column::Quantity, eMyMoney::Model::SplitSharesRole},
-            {JournalModel::Column::Price, eMyMoney::Model::SplitPriceRole},
+            {JournalModel::Column::Quantity, eMyMoney::Model::JournalSplitQuantitySortRole},
+            {JournalModel::Column::Price, eMyMoney::Model::JournalSplitPriceSortRole},
             {JournalModel::Column::Amount, Qt::DisplayRole},
-            {JournalModel::Column::Value, Qt::DisplayRole},
+            {JournalModel::Column::Value, eMyMoney::Model::JournalSplitValueSortRole},
             {JournalModel::Column::Balance, eMyMoney::Model::JournalBalanceRole},
         };
 

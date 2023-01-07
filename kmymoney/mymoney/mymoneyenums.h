@@ -603,6 +603,9 @@ enum Roles {
     JournalSplitNumberRole,
     JournalBalanceRole,
     JournalSplitMaxLinesCountRole,
+    JournalSplitQuantitySortRole,
+    JournalSplitPriceSortRole,
+    JournalSplitValueSortRole,
 
     // Ledger
     LedgerDisplayOrderRole,

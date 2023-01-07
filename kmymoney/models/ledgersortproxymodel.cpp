@@ -139,12 +139,20 @@ bool LedgerSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& 
         return leftDate < rightDate;
     }
 
+    case eMyMoney::Model::JournalSplitQuantitySortRole:
+    case eMyMoney::Model::JournalSplitPriceSortRole:
+    case eMyMoney::Model::JournalSplitValueSortRole:
     case eMyMoney::Model::SplitValueRole:
     case eMyMoney::Model::SplitSharesRole: {
         const auto role = sortRole();
         const auto lValue = left.data(role).value<MyMoneyMoney>();
         const auto rValue = right.data(role).value<MyMoneyMoney>();
-        return lValue < rValue;
+        if (lValue != rValue) {
+            return lValue < rValue;
+        }
+        // same value means that the ids decide
+        return left.data(eMyMoney::Model::IdRole).toString() < right.data(eMyMoney::Model::IdRole).toString();
+
     } break;
     default:
         break;

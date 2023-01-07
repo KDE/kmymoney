@@ -222,9 +222,8 @@ QVariant LedgerAccountFilter::data(const QModelIndex& index, int role) const
                 if (!index.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
                     return d->balances.at(index.row()).formatMoney(d->account.fraction());
                 }
-                return {};
             }
-            return QLatin1String("---");
+            return {};
 
         case Qt::TextAlignmentRole:
             return QVariant(Qt::AlignRight | Qt::AlignTop);

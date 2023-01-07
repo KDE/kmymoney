@@ -293,7 +293,7 @@ QVariant SpecialLedgerItemFilter::data(const QModelIndex& index, int role) const
     if (index.column() == JournalModel::Balance) {
         switch (role) {
         case Qt::DisplayRole:
-            if (!d->showBalance()) {
+            if (!d->showBalance() && !index.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
                 return QLatin1String("---");
             }
             break;

@@ -910,6 +910,59 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::JournalSplitMaxLinesCountRole:
         return journalEntry.linesInLedger();
 
+    case eMyMoney::Model::JournalSplitQuantitySortRole:
+        switch (split.investmentTransactionType()) {
+        case eMyMoney::Split::InvestmentTransactionType::Dividend:
+        case eMyMoney::Split::InvestmentTransactionType::Yield:
+        case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
+            return QVariant::fromValue(MyMoneyMoney());
+        case eMyMoney::Split::InvestmentTransactionType::SplitShares:
+        default:
+            return QVariant::fromValue(split.shares().abs());
+        }
+        break;
+
+    case eMyMoney::Model::JournalSplitPriceSortRole:
+        switch (split.investmentTransactionType()) {
+        case eMyMoney::Split::InvestmentTransactionType::BuyShares:
+        case eMyMoney::Split::InvestmentTransactionType::SellShares:
+        case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
+            if (!split.shares().isZero()) {
+                return QVariant::fromValue(split.price());
+            }
+            return QVariant::fromValue(MyMoneyMoney());
+        default:
+            return QVariant::fromValue(MyMoneyMoney());
+        }
+        break;
+
+    case eMyMoney::Model::JournalSplitValueSortRole: {
+        MyMoneySplit assetAccountSplit;
+        QList<MyMoneySplit> feeSplits, interestSplits;
+        MyMoneySecurity security, currency;
+        MyMoneyMoney amount;
+        eMyMoney::Split::InvestmentTransactionType transactionType;
+        MyMoneyUtils::dissectTransaction(transaction, split, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+        switch (transactionType) {
+        case eMyMoney::Split::InvestmentTransactionType::BuyShares:
+        case eMyMoney::Split::InvestmentTransactionType::SellShares:
+        case eMyMoney::Split::InvestmentTransactionType::Dividend:
+        case eMyMoney::Split::InvestmentTransactionType::Yield:
+        case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
+            return QVariant::fromValue(assetAccountSplit.value().abs());
+
+        case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
+            for (const auto& sp : qAsConst(interestSplits)) {
+                amount += sp.value();
+            }
+            return QVariant::fromValue(-amount);
+
+        default:
+            break;
+        }
+        return QVariant::fromValue(MyMoneyMoney());
+    }
+
     default:
         if (role >= Qt::UserRole)
             qDebug() << "JournalModel::data(), role" << role << "offset" << role-Qt::UserRole << "not implemented";
