@@ -30,12 +30,17 @@ class SpecialLedgerItemFilterPrivate : public LedgerSortProxyModelPrivate
         Qt::SortOrder sortOrder;
         int startRow;
         int lastRow;
-        int increment;
-        int firstRow = -1;
+        int firstRow;
+        bool valid = false;
 
+        void setFirstRow(int row)
+        {
+            firstRow = row;
+            valid = true;
+        }
         bool isValid() const
         {
-            return firstRow != -1;
+            return valid;
         }
     };
 
@@ -62,22 +67,31 @@ public:
         return isSortingByDate() && !filterActive;
     }
 
+    /**
+     * initializeBalanceCalculation sets up the BalanceParameter structure
+     * with the row values to be visited for balance calculation. If sort order
+     * is ascending, rows are positive. If sort order is descending, row values
+     * are negative, so that startRow is always smaller than lastRow. This
+     * simplifies the calculation of the balance.
+     *
+     * @Note One must pay attention to use @c qAbs(x) when creating the QModelIndex
+     * to access the data.
+     */
     BalanceParameter initializeBalanceCalculation() const
     {
         BalanceParameter parameter;
         // we only display balances when sorted by a date field
         if ((sourceModel->sortRole() == eMyMoney::Model::TransactionEntryDateRole) || (sourceModel->sortRole() == eMyMoney::Model::TransactionPostDateRole)) {
-            const auto rows = sourceModel->rowCount();
+            const auto rows = q->rowCount();
             if (rows > 0) {
                 parameter.sortOrder = sourceModel->sortOrder();
-                parameter.startRow = (parameter.sortOrder == Qt::AscendingOrder) ? 0 : rows - 1;
+                parameter.startRow = (parameter.sortOrder == Qt::AscendingOrder) ? 0 : -(rows - 1);
                 parameter.lastRow = (parameter.sortOrder == Qt::AscendingOrder) ? rows - 1 : 0;
-                parameter.increment = (parameter.sortOrder == Qt::AscendingOrder) ? 1 : -1;
 
-                for (int row = parameter.startRow; (row >= parameter.startRow) && (row <= parameter.lastRow); row += parameter.increment) {
-                    const auto idx = q->index(row, 0);
-                    if (isJournalModel(idx)) {
-                        parameter.firstRow = row;
+                for (int row = parameter.startRow; (row >= parameter.startRow) && (row <= parameter.lastRow); ++row) {
+                    const auto idx = q->index(qAbs(row), 0);
+                    if (isJournalModel(idx) || isSchedulesJournalModel(idx)) {
+                        parameter.setFirstRow(row);
                         break;
                     }
                 }
@@ -93,7 +107,7 @@ public:
         const auto parameter = initializeBalanceCalculation();
 
         if (parameter.isValid()) {
-            auto idx = q->index(parameter.firstRow, 0);
+            auto idx = q->index(qAbs(parameter.firstRow), 0);
             const bool showValuesInverted(idx.data(eMyMoney::Model::ShowValueInvertedRole).toBool());
             auto accountId = idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString();
             const auto account = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
@@ -102,25 +116,27 @@ public:
             QDate startDate = idx.data(eMyMoney::Model::TransactionPostDateRole).toDate();
             if (sourceModel->sortRole() == eMyMoney::Model::TransactionEntryDateRole) {
                 // if sorted by entry date, we need to find the balance of the oldest
-                // transaction shown. This may not be the date of the first transaction
-                for (int row = parameter.firstRow; (row >= parameter.startRow) && (row <= parameter.lastRow); row += parameter.increment) {
-                    if (idx.data(eMyMoney::Model::TransactionEntryDateRole).toDate() < startDate) {
-                        startDate = idx.data(eMyMoney::Model::TransactionPostDateRole).toDate();
+                // transaction shown. This may not be the date of the first transaction entered
+                for (int row = parameter.firstRow; (row >= parameter.startRow) && (row <= parameter.lastRow); ++row) {
+                    idx = q->index(qAbs(row), 0);
+                    if (!idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
+                        if (idx.data(eMyMoney::Model::TransactionPostDateRole).toDate() < startDate) {
+                            startDate = idx.data(eMyMoney::Model::TransactionPostDateRole).toDate();
+                        }
                     }
                 }
             }
 
-            // in case we are sorting ascending, we need to get the balance
-            // of the previous day
-            if (sourceModel->sortOrder() == Qt::AscendingOrder) {
-                startDate = startDate.addDays(-1);
-            }
+            // we need to get the balance of the day prior to the first day found
+            startDate = startDate.addDays(-1);
 
-            for (int row = parameter.firstRow; (row >= parameter.startRow) && (row <= parameter.lastRow); row += parameter.increment) {
+            // take care of
+            for (int row = parameter.firstRow; (row >= parameter.startRow) && (row <= parameter.lastRow); ++row) {
                 // check if we have the balance for this account
-                idx = q->index(row, 0);
-                if (!isJournalModel(idx))
+                idx = q->index(qAbs(row), 0);
+                if (!(isJournalModel(idx) || isSchedulesJournalModel(idx))) {
                     continue;
+                }
 
                 accountId = idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString();
                 if (balances.constFind(accountId) == balances.constEnd()) {
@@ -128,42 +144,21 @@ public:
                 }
 
                 const auto shares = idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-                if (parameter.sortOrder == Qt::AscendingOrder) {
-                    if (isInvestmentAccount) {
-                        if (idx.data(eMyMoney::Model::TransactionIsStockSplitRole).toBool()) {
-                            balances[accountId] = MyMoneyFile::instance()->journalModel()->stockSplitBalance(accountId, balances[accountId], shares);
-                        } else {
-                            balances[accountId] += shares;
-                        }
-
+                if (isInvestmentAccount) {
+                    if (idx.data(eMyMoney::Model::TransactionIsStockSplitRole).toBool()) {
+                        balances[accountId] = MyMoneyFile::instance()->journalModel()->stockSplitBalance(accountId, balances[accountId], shares);
                     } else {
-                        if (showValuesInverted) {
-                            balances[accountId] -= shares;
-                        } else {
-                            balances[accountId] += shares;
-                        }
+                        balances[accountId] += shares;
+                    }
+
+                } else {
+                    if (showValuesInverted) {
+                        balances[accountId] -= shares;
+                    } else {
+                        balances[accountId] += shares;
                     }
                 }
-
                 q->setData(idx, QVariant::fromValue(balances[accountId]), eMyMoney::Model::JournalBalanceRole);
-
-                if (parameter.sortOrder == Qt::DescendingOrder) {
-                    if (isInvestmentAccount) {
-                        if (idx.data(eMyMoney::Model::TransactionIsStockSplitRole).toBool()) {
-                            balances[accountId] =
-                                MyMoneyFile::instance()->journalModel()->stockSplitBalance(accountId, balances[accountId], MyMoneyMoney(1) / shares);
-                        } else {
-                            balances[accountId] -= shares;
-                        }
-
-                    } else {
-                        if (showValuesInverted) {
-                            balances[accountId] += shares;
-                        } else {
-                            balances[accountId] -= shares;
-                        }
-                    }
-                }
             }
         }
     }
@@ -196,11 +191,13 @@ void SpecialLedgerItemFilter::setSourceModel(LedgerSortProxyModel* model)
     if (sourceModel()) {
         disconnect(sourceModel(), &QAbstractItemModel::rowsRemoved, this, &SpecialLedgerItemFilter::forceReload);
         disconnect(sourceModel(), &QAbstractItemModel::rowsInserted, this, &SpecialLedgerItemFilter::forceReload);
+        disconnect(sourceModel(), &QAbstractItemModel::modelReset, this, &SpecialLedgerItemFilter::forceReload);
     }
     LedgerSortProxyModel::setSourceModel(model);
-    if (sourceModel()) {
+    if (model) {
         connect(model, &QAbstractItemModel::rowsRemoved, this, &SpecialLedgerItemFilter::forceReload);
         connect(model, &QAbstractItemModel::rowsInserted, this, &SpecialLedgerItemFilter::forceReload);
+        connect(model, &QAbstractItemModel::modelReset, this, &SpecialLedgerItemFilter::forceReload);
     }
     d->sourceModel = model;
 }

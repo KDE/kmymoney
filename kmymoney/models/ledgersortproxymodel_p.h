@@ -72,6 +72,11 @@ public:
         return (model == static_cast<void*>(MyMoneyFile::instance()->schedulesJournalModel()));
     }
 
+    inline bool isSchedulesJournalModel(const QModelIndex& idx) const
+    {
+        return isSchedulesJournalModel(MyMoneyModelBase::baseModel(idx));
+    }
+
     QString modelType(const QAbstractItemModel* model) const
     {
         if (isAccountsModel(model))
