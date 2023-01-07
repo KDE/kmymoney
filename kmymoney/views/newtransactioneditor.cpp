@@ -1129,9 +1129,12 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
     // set focus to first tab field once we return to event loop
     const auto tabOrder = property("kmm_currenttaborder").toStringList();
     if (!tabOrder.isEmpty()) {
-        const auto focusWidget = findChild<QWidget*>(tabOrder.first());
-        if (focusWidget) {
-            QMetaObject::invokeMethod(focusWidget, "setFocus", Qt::QueuedConnection);
+        for (const auto& widgetName : tabOrder) {
+            const auto focusWidget = findChild<QWidget*>(widgetName);
+            if (focusWidget && focusWidget->isVisibleTo(this)) {
+                QMetaObject::invokeMethod(focusWidget, "setFocus", Qt::QueuedConnection);
+                break;
+            }
         }
     }
 }
