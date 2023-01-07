@@ -48,6 +48,7 @@ LedgerAccountFilter::LedgerAccountFilter(QObject* parent, QVector<QAbstractItemM
 {
     Q_D(LedgerAccountFilter);
     d->onlinebalanceproxymodel = new OnlineBalanceProxyModel(parent);
+    setMaintainBalances(true);
 
     setObjectName("LedgerAccountFilter");
 
@@ -203,4 +204,34 @@ void LedgerAccountFilter::doSort()
     LedgerFilterBase::doSort();
     // trigger a recalculation of the balances after sorting
     recalculateBalancesOnIdle(d->account.id());
+}
+
+QVariant LedgerAccountFilter::data(const QModelIndex& index, int role) const
+{
+    Q_D(const LedgerAccountFilter);
+    if (role == eMyMoney::Model::ShowValueInvertedRole) {
+        return d->showValuesInverted;
+    }
+
+    if (index.column() == JournalModel::Balance) {
+        switch (role) {
+        case Qt::DisplayRole:
+            if (index.row() < d->balances.size()) {
+                // only report a balance for transactions and schedules but
+                // not for the empty (new) transaction
+                if (!index.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
+                    return d->balances.at(index.row()).formatMoney(d->account.fraction());
+                }
+                return {};
+            }
+            return QLatin1String("---");
+
+        case Qt::TextAlignmentRole:
+            return QVariant(Qt::AlignRight | Qt::AlignTop);
+
+        default:
+            break;
+        }
+    }
+    return LedgerFilterBase::data(index, role);
 }

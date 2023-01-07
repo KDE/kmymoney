@@ -33,6 +33,8 @@ public:
 
     void setAccount(const MyMoneyAccount& acc);
 
+    QVariant data(const QModelIndex& index, int role) const override;
+
 public Q_SLOTS:
     void recalculateBalancesOnIdle(const QString& accountId);
 

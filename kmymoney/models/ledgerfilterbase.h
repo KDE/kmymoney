@@ -46,6 +46,15 @@ public:
      */
     QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
+    /**
+     * This method is used to update the balance data. All other
+     * roles are forwarded to the source model. The balance can
+     * be retrieved using the derived model.
+     *
+     * @sa LedgerAccountFilter::data()
+     */
+    bool setData(const QModelIndex& index, const QVariant& value, int role) override;
+
     void setShowEntryForNewTransaction(bool show);
 
     void setShowScheduledTransactions(bool show);
@@ -59,6 +68,11 @@ public:
      * remove @a model from the source models
      */
     void removeSourceModel(QAbstractItemModel* model);
+
+    /**
+     * Use to control maintenance of balance information
+     */
+    void setMaintainBalances(bool maintainBalances);
 
 protected:
     explicit LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent);

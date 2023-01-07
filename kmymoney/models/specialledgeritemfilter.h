@@ -38,6 +38,14 @@ public:
 
     void setSourceModel(LedgerSortProxyModel* model);
 
+    /**
+     * This method returns the data from the base model and
+     * intercepts the balance column and returns a fixed string
+     * in case a balance cannot be provided (e.g. sorting is
+     * not by date or some data is filtered)
+     */
+    QVariant data(const QModelIndex& index, int role) const override;
+
 public Q_SLOTS:
     void forceReload();
 

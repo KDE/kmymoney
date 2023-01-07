@@ -644,11 +644,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         break;
 
         case Balance:
-        {
-            auto acc = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
-            return journalEntry.balance().formatMoney(acc.fraction());
-        }
-        break;
+            return QLatin1String("n/a");
 
         case EntryDate:
             return MyMoneyUtils::formatDate(transaction.entryDate());

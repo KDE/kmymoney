@@ -49,6 +49,14 @@ public:
     void setStateFilter(LedgerFilter::State state);
     void setFilterFixedString(const QString &pattern);
 
+    /**
+     * This method returns information about an active
+     * filter (@c true or @c false) when @a role is
+     * @c ActiveFilterRole. Otherwise it returns the
+     * return value of the base class implementation.
+     */
+    QVariant data(const QModelIndex& index, int role) const override;
+
 protected:
     /**
      * @note Does not call base class implementation

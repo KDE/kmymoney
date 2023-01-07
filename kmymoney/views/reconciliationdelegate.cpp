@@ -112,7 +112,7 @@ void ReconciliationDelegate::paint(QPainter* painter, const QStyleOptionViewItem
         break;
     case JournalModel::Column::Balance:
         painter->setPen(opt.palette.color(QPalette::Normal, QPalette::Text));
-        painter->drawText(textArea, opt.displayAlignment, opt.text);
+        painter->drawText(textArea, opt.displayAlignment, index.data(eMyMoney::Model::ReconciliationBalanceRole).toString());
         break;
     }
 

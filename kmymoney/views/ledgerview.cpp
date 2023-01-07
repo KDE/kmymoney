@@ -82,6 +82,8 @@ public:
         , infoMessage(new KMessageWidget(q))
         , adjustableColumn(JournalModel::Column::Detail)
         , lastSelectedRow(-1)
+        , sortColumn(-1)
+        , sortOrder(Qt::AscendingOrder)
         , adjustingColumn(false)
         , showValuesInverted(false)
         , newTransactionPresent(false)
@@ -447,6 +449,8 @@ public:
     QHash<const QAbstractItemModel*, QStyledItemDelegate*>   delegates;
     int adjustableColumn;
     int lastSelectedRow;
+    int sortColumn;
+    Qt::SortOrder sortOrder;
     bool adjustingColumn;
     bool showValuesInverted;
     bool newTransactionPresent;
@@ -475,11 +479,6 @@ LedgerView::LedgerView(QWidget* parent)
     // to use the first column to select all items in the view
     setCornerButtonEnabled(false);
 
-    // This will allow the user to move the columns, but
-    // the delegate cannot handle it yet and it requires to
-    // reset the spans as well.
-    // horizontalHeader()->setMovable(true);
-
     // make sure to get informed about resize operations on the columns
     // but delay the execution of adjustDetailColumn() until we return
     // to the main event loop. Also emit information about the change
@@ -492,6 +491,18 @@ LedgerView::LedgerView(QWidget* parent)
 
     connect(horizontalHeader(), &QHeaderView::sectionMoved, this, [&](int logicalIndex, int oldIndex, int newIndex) {
         Q_EMIT sectionMoved(this, logicalIndex, oldIndex, newIndex);
+    });
+
+    connect(horizontalHeader(), &QHeaderView::sortIndicatorChanged, this, [&](int logicalIndex, Qt::SortOrder order) {
+        // Prevent selection of balance column for sorting
+        if (logicalIndex == JournalModel::Column::Balance) {
+            horizontalHeader()->setSortIndicator(d->sortColumn, d->sortOrder);
+            return;
+        }
+        // remember the current setting so that we can revert to
+        // it in case someone selects the balance column later
+        d->sortColumn = logicalIndex;
+        d->sortOrder = order;
     });
 
     // get notifications about setting changes

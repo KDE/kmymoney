@@ -133,6 +133,7 @@ QVariant SpecialDatesModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::IdRole:
         return dateEntry.id();
 
+    case eMyMoney::Model::TransactionEntryDateRole:
     case eMyMoney::Model::TransactionPostDateRole:
         return dateEntry.date();
 

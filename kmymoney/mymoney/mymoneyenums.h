@@ -623,7 +623,8 @@ enum Roles {
     TagNameRole,
 
     // Reconciliation
-    ReconciliationAmountRole,
+    ReconciliationAmountRole, // the reconciliation balance as MyMoneyMoney object
+    ReconciliationBalanceRole, // the reconciliation balance as formatted string
 
     // General state
     ClosedRole,
@@ -638,6 +639,10 @@ enum Roles {
     OnlineJobPurposeRole,
     OnlineJobPostDateRole,
     OnlineJobValueAsDoubleRole,
+
+    // LedgerStack special roles
+    ActiveFilterRole,
+    ShowValueInvertedRole,
 };
 } // namespace Model
 } // namespace eMyMoney

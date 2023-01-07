@@ -30,6 +30,7 @@ public:
         , concatModel(nullptr)
         , accountType(eMyMoney::Account::Type::Asset)
         , showValuesInverted(false)
+        , maintainBalances(false)
     {
     }
 
@@ -52,7 +53,9 @@ public:
     eMyMoney::Account::Type accountType;
     QStringList filterIds;
     bool showValuesInverted;
+    bool maintainBalances;
     QSet<QAbstractItemModel*> sourceModels;
+    QVector<MyMoneyMoney> balances;
 };
 
 #endif

@@ -102,6 +102,28 @@ QVariant LedgerFilterBase::headerData(int section, Qt::Orientation orientation, 
     return QSortFilterProxyModel::headerData(section, orientation, role);
 }
 
+void LedgerFilterBase::setMaintainBalances(bool maintainBalances)
+{
+    Q_D(LedgerFilterBase);
+    d->maintainBalances = maintainBalances;
+}
+
+bool LedgerFilterBase::setData(const QModelIndex& index, const QVariant& value, int role)
+{
+    Q_D(LedgerFilterBase);
+    if ((d->maintainBalances) && (role == eMyMoney::Model::JournalBalanceRole)) {
+        if (index.isValid()) {
+            if (rowCount() > d->balances.capacity()) {
+                d->balances.resize(rowCount());
+            }
+            d->balances[index.row()] = qvariant_cast<MyMoneyMoney>(value);
+            return true;
+        }
+        return false;
+    }
+    return LedgerSortProxyModel::setData(index, value, role);
+}
+
 bool LedgerFilterBase::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
 {
     Q_D(const LedgerFilterBase);
