@@ -137,7 +137,7 @@ public:
         } else {
             ui->m_centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", clearedBalance.formatMoney("", precision)));
             if (selections.count(SelectedObjects::JournalEntry) > 1) {
-                ui->m_rightLabel->setText(i18nc("@label:textbox Selected total", "%1: %2", QChar(0x2211), selectedTotal.formatMoney("", -1)));
+                ui->m_rightLabel->setText(i18nc("@label:textbox Selected total", "%1: %2", QChar(0x2211), selectedTotal.formatMoney("", precision)));
             } else {
                 ui->m_rightLabel->setText(i18nc("@label:textbox Total balance", "Balance: %1", totalBalance.formatMoney("", precision)));
             }
