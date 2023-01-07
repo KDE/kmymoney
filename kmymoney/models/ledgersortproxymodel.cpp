@@ -113,10 +113,11 @@ bool LedgerSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& 
             const auto leftState = left.data(eMyMoney::Model::SplitReconcileFlagRole).toInt();
             const auto rightState = right.data(eMyMoney::Model::SplitReconcileFlagRole).toInt();
 
-            if (leftState > rightState)
-                return true;
-            if (rightState > leftState)
+            if (leftState != rightState) {
+                if (leftState > rightState)
+                    return true;
                 return false;
+            }
 
             // Reconciliation state is the same, so sort by deposits first, then withdrawals
             const auto leftDeposit = left.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
@@ -126,12 +127,13 @@ bool LedgerSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& 
             bool leftIsDeposit = leftDeposit.isPositive();
             bool rightIsDeposit = rightDeposit.isPositive();
 
-            if (leftIsDeposit)
-                return true;
-            if (rightIsDeposit)
+            if (leftIsDeposit != rightIsDeposit) {
+                if (leftIsDeposit)
+                    return true;
                 return false;
+            }
 
-            // same model and same post date, the ids decide
+            // same model, same dates, and same everything else means that the ids decide
             return left.data(eMyMoney::Model::IdRole).toString() < right.data(eMyMoney::Model::IdRole).toString();
         }
         return leftDate < rightDate;
