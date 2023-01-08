@@ -781,6 +781,7 @@ protected:
             delete m_rootItem;
             m_rootItem = new TreeItem<T>(T());
         }
+        doUpdateReferencedObjects();
     }
 
     virtual void doUpdateReferencedObjects() override
