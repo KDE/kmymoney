@@ -796,7 +796,9 @@ protected:
             QModelIndex idx;
             for (int row = 0; row < rows; ++row) {
                 idx = index(row, 0);
-                m_referencedObjects.unite(static_cast<TreeItem<T>*>(idx.internalPointer())->constDataRef().referencedObjects());
+                if (idx.isValid()) {
+                    m_referencedObjects.unite(static_cast<TreeItem<T>*>(idx.internalPointer())->constDataRef().referencedObjects());
+                }
             }
         }
     }
