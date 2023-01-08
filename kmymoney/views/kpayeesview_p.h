@@ -341,12 +341,13 @@ public:
 
         const auto selection = selectedPayees();
 
+        QStringList payeeIds;
         if (selection.isEmpty() || !ui->m_tabWidget->isEnabled()) {
+            m_transactionFilter->setPayeeIdList(payeeIds);
             ui->m_balanceLabel->setText(i18n("Balance: %1", balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
             return;
         }
 
-        QStringList payeeIds;
         if (clearDisplay == eTransactionDisplay::ShowTransactions) {
             for (const auto& payee : selection) {
                 payeeIds.append(payee.id());
