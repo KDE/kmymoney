@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-01 00:58+0000\n"
+"POT-Creation-Date: 2023-01-08 00:59+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -20872,35 +20872,35 @@ msgstr "Бар KMyMoney дерек файлын ашу"
 msgid "Open the Handbook and learn how to use KMyMoney"
 msgstr "KMyMoney қолдануын үйрену"
 
-#: kmymoney/views/ledgerview.cpp:202
+#: kmymoney/views/ledgerview.cpp:204
 #, fuzzy, kde-format
 #| msgid "Go to account"
 msgctxt "@action:inmenu open account"
 msgid "Go to account"
 msgstr "Есепшотына өту..."
 
-#: kmymoney/views/ledgerview.cpp:204
+#: kmymoney/views/ledgerview.cpp:206
 #, fuzzy, kde-format
 #| msgid "Go to payee"
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
 msgstr "Алушысына ауысу"
 
-#: kmymoney/views/ledgerview.cpp:249
+#: kmymoney/views/ledgerview.cpp:251
 #, fuzzy, kde-format
 #| msgid "Go to '%1'"
 msgctxt "@action:inmenu open account"
 msgid "Go to '%1'"
 msgstr "'%1' дегенге өту"
 
-#: kmymoney/views/ledgerview.cpp:259
+#: kmymoney/views/ledgerview.cpp:261
 #, fuzzy, kde-format
 #| msgid "Go to '%1'"
 msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "'%1' дегенге өту"
 
-#: kmymoney/views/ledgerview.cpp:662
+#: kmymoney/views/ledgerview.cpp:673
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -20908,35 +20908,35 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:759
+#: kmymoney/views/ledgerview.cpp:770
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Транзакция санатқа жатқызылмаған."
 
-#: kmymoney/views/ledgerview.cpp:766
+#: kmymoney/views/ledgerview.cpp:777
 #, fuzzy, kde-format
 #| msgid "The transaction has a missing assignment of <b>%1</b>."
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Транзакцияда <b>%1</b> тағайындалмаған."
 
-#: kmymoney/views/ledgerview.cpp:775
+#: kmymoney/views/ledgerview.cpp:786
 #, fuzzy, kde-format
 #| msgid "This schedule will end at some time"
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "Бул жоспарда аяктау кезі бар"
 
-#: kmymoney/views/ledgerview.cpp:781
+#: kmymoney/views/ledgerview.cpp:792
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Бірінші транзакция сәйкестік талабына сай келмейді"
 
-#: kmymoney/views/ledgerview.cpp:786
+#: kmymoney/views/ledgerview.cpp:797
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
@@ -20944,7 +20944,7 @@ msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr "Бірінші транзакция сәйкестік талабына сай келмейді"
 
-#: kmymoney/views/ledgerview.cpp:862
+#: kmymoney/views/ledgerview.cpp:873
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -20952,14 +20952,14 @@ msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Таңдалған баға жазу(лар)ды шын өшірмексіз бе?"
 
-#: kmymoney/views/ledgerview.cpp:863
+#: kmymoney/views/ledgerview.cpp:874
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Транзакция жоспарын енгізу"
 
-#: kmymoney/views/ledgerview.cpp:866
+#: kmymoney/views/ledgerview.cpp:877
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -20967,7 +20967,7 @@ msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Таңдалған баға жазу(лар)ды шын өшірмексіз бе?"
 
-#: kmymoney/views/ledgerview.cpp:867
+#: kmymoney/views/ledgerview.cpp:878
 #, fuzzy, kde-format
 #| msgctxt "Dialog caption for 'Enter or schedule' dialog"
 #| msgid "Enter or schedule?"
@@ -20975,7 +20975,7 @@ msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Енгізу ме жоспарлау ма?"
 
-#: kmymoney/views/ledgerview.cpp:887
+#: kmymoney/views/ledgerview.cpp:898
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use this to schedule the transaction for later entry into the ledger."
@@ -20985,7 +20985,7 @@ msgid ""
 "the ledger again."
 msgstr "Бұл кейін гроссбухқа жазып алатын транзакцияны жоспарлауы. "
 
-#: kmymoney/views/ledgerview.cpp:889
+#: kmymoney/views/ledgerview.cpp:900
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20993,7 +20993,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:893
+#: kmymoney/views/ledgerview.cpp:904
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -21001,7 +21001,7 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Бүкіл таңдалған %1 транзакцияны өшіргіңіз келе ме?"
 
-#: kmymoney/views/ledgerview.cpp:894
+#: kmymoney/views/ledgerview.cpp:905
 #, fuzzy, kde-format
 #| msgid "Attempt to match similar transactions"
 msgctxt "@title:window"
@@ -21048,7 +21048,14 @@ msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
 msgstr "Салыстырып тексерілген: %1"
 
-#: kmymoney/views/ledgerviewpage_p.h:139
+#: kmymoney/views/ledgerviewpage_p.h:141
+#, fuzzy, kde-format
+#| msgid "%1 of %2"
+msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
+msgid "%1 of %2: %3"
+msgstr "%1 / %2"
+
+#: kmymoney/views/ledgerviewpage_p.h:146
 #, fuzzy, kde-format
 #| msgid "Balance: %1"
 msgctxt "@label:textbox Total balance"

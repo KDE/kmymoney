@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-01 00:58+0000\n"
+"POT-Creation-Date: 2023-01-08 00:59+0000\n"
 "PO-Revision-Date: 2009-10-17 16:25+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -19294,31 +19294,31 @@ msgstr "Краен баланс:"
 msgid "Open the Handbook and learn how to use KMyMoney"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:202
+#: kmymoney/views/ledgerview.cpp:204
 #, fuzzy, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to account"
 msgstr "сметка"
 
-#: kmymoney/views/ledgerview.cpp:204
+#: kmymoney/views/ledgerview.cpp:206
 #, fuzzy, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
 msgstr "Ясен Праматаров"
 
-#: kmymoney/views/ledgerview.cpp:249
+#: kmymoney/views/ledgerview.cpp:251
 #, fuzzy, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to '%1'"
 msgstr "Копие на %1"
 
-#: kmymoney/views/ledgerview.cpp:259
+#: kmymoney/views/ledgerview.cpp:261
 #, fuzzy, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Копие на %1"
 
-#: kmymoney/views/ledgerview.cpp:662
+#: kmymoney/views/ledgerview.cpp:673
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -19326,62 +19326,62 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:759
+#: kmymoney/views/ledgerview.cpp:770
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:766
+#: kmymoney/views/ledgerview.cpp:777
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:775
+#: kmymoney/views/ledgerview.cpp:786
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:781
+#: kmymoney/views/ledgerview.cpp:792
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:786
+#: kmymoney/views/ledgerview.cpp:797
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:862
+#: kmymoney/views/ledgerview.cpp:873
 #, fuzzy, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Да не се показват закритите сметки"
 
-#: kmymoney/views/ledgerview.cpp:863
+#: kmymoney/views/ledgerview.cpp:874
 #, fuzzy, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Да не се показват закритите сметки"
 
-#: kmymoney/views/ledgerview.cpp:866
+#: kmymoney/views/ledgerview.cpp:877
 #, fuzzy, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Да не се показват закритите сметки"
 
-#: kmymoney/views/ledgerview.cpp:867
+#: kmymoney/views/ledgerview.cpp:878
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Планирано"
 
-#: kmymoney/views/ledgerview.cpp:887
+#: kmymoney/views/ledgerview.cpp:898
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -19389,7 +19389,7 @@ msgid ""
 "the ledger again."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:889
+#: kmymoney/views/ledgerview.cpp:900
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -19397,13 +19397,13 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:893
+#: kmymoney/views/ledgerview.cpp:904
 #, fuzzy, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Да не се показват закритите сметки"
 
-#: kmymoney/views/ledgerview.cpp:894
+#: kmymoney/views/ledgerview.cpp:905
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
@@ -19444,7 +19444,14 @@ msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
 msgstr "Изчистено"
 
-#: kmymoney/views/ledgerviewpage_p.h:139
+#: kmymoney/views/ledgerviewpage_p.h:141
+#, fuzzy, kde-format
+#| msgid "%1 of %2"
+msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
+msgid "%1 of %2: %3"
+msgstr "%1 от %2"
+
+#: kmymoney/views/ledgerviewpage_p.h:146
 #, fuzzy, kde-format
 msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
