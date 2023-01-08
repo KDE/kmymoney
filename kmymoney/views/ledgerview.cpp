@@ -533,6 +533,12 @@ LedgerView::LedgerView(QWidget* parent)
         Q_EMIT requestView(s_globalEditData()->basePage, s_globalEditData()->accountId, s_globalEditData()->journalEntryId);
     });
 
+    connect(this, &LedgerView::doubleClicked, this, [&](const QModelIndex& index) {
+        // double click on a schedule causes the schedule editor to be opened
+        if (MyMoneyModelBase::baseModel(index) == MyMoneyFile::instance()->schedulesJournalModel()) {
+            pActions[eMenu::Action::EditSchedule]->trigger();
+        }
+    });
     setTabKeyNavigation(false);
 }
 
