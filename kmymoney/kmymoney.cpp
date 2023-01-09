@@ -2732,12 +2732,14 @@ void KMyMoneyApp::slotMarkTransactions()
                     if (flag == eMyMoney::Split::State::Unknown) {
                         if (!isReconciliationMode) {
                             // in normal mode we cycle through all states
+                            // except when reconciled transactions are hidden
                             switch (sp.reconcileFlag()) {
                                 case eMyMoney::Split::State::NotReconciled:
                                     sp.setReconcileFlag(eMyMoney::Split::State::Cleared);
                                     break;
                                 case eMyMoney::Split::State::Cleared:
-                                    sp.setReconcileFlag(eMyMoney::Split::State::Reconciled);
+                                    sp.setReconcileFlag(KMyMoneySettings::hideReconciledTransactions() ? eMyMoney::Split::State::NotReconciled
+                                                                                                       : eMyMoney::Split::State::Reconciled);
                                     t.setImported(false);
                                     break;
                                 case eMyMoney::Split::State::Reconciled:
