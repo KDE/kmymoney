@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-08 00:59+0000\n"
+"POT-Creation-Date: 2023-01-09 00:56+0000\n"
 "PO-Revision-Date: 2022-07-13 15:41+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -14597,13 +14597,13 @@ msgid "Include subaccounts"
 msgstr "하위 계좌 포함"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:141
-#: kmymoney/views/kpayeesview_p.h:787
+#: kmymoney/views/kpayeesview_p.h:788
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt><b>%1</b>의 변경 사항을 저장하시겠습니까?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:142
-#: kmymoney/views/kpayeesview_p.h:788 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:789 kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Save changes"
 msgstr "변경 사항 저장"
@@ -19422,7 +19422,7 @@ msgstr "수취인 삭제"
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>선택한 수취인을 병합하시겠습니까?"
 
-#: kmymoney/views/kpayeesview.cpp:566 kmymoney/views/kpayeesview_p.h:563
+#: kmymoney/views/kpayeesview.cpp:566 kmymoney/views/kpayeesview_p.h:564
 #, kde-format
 msgid "Merge Payees"
 msgstr "수취인 병합"
@@ -19650,17 +19650,17 @@ msgctxt "Placeholder text"
 msgid "Search"
 msgstr "검색"
 
-#: kmymoney/views/kpayeesview_p.h:345 kmymoney/views/ktagsview.cpp:212
+#: kmymoney/views/kpayeesview_p.h:347 kmymoney/views/ktagsview.cpp:212
 #, kde-format
 msgid "Balance: %1"
 msgstr "잔액: %1"
 
-#: kmymoney/views/kpayeesview_p.h:390 kmymoney/views/ktagsview.cpp:256
+#: kmymoney/views/kpayeesview_p.h:391 kmymoney/views/ktagsview.cpp:256
 #, kde-format
 msgid "Balance: %1%2"
 msgstr "잔액: %1%2"
 
-#: kmymoney/views/kpayeesview_p.h:474
+#: kmymoney/views/kpayeesview_p.h:475
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -19672,17 +19672,17 @@ msgstr ""
 "다. 현재 모든 수취인을 선택했습니다. 그러나 해당 거래/예정된 거래 및 대출 계"
 "좌를 재할당할 수취인이 하나 이상 남아 있어야 합니다."
 
-#: kmymoney/views/kpayeesview_p.h:559
+#: kmymoney/views/kpayeesview_p.h:560
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr "거래/분할 수취인을 재할당할 수 없음"
 
-#: kmymoney/views/kpayeesview_p.h:563
+#: kmymoney/views/kpayeesview_p.h:564
 #, kde-format
 msgid "Nothing to merge."
 msgstr "병합할 항목이 없습니다."
 
-#: kmymoney/views/kpayeesview_p.h:646
+#: kmymoney/views/kpayeesview_p.h:647
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "수취인을 삭제할 수 없음"
@@ -20000,7 +20000,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "'%1'(으)로 이동"
 
-#: kmymoney/views/ledgerview.cpp:673
+#: kmymoney/views/ledgerview.cpp:679
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -20010,19 +20010,19 @@ msgstr ""
 "다른 보기에서 거래를 편집하고 있습니다. KMyMoney에서는 거래 두 개를 동시에 편"
 "집할 수 없습니다. <a href=\"jumpToEditor\">현재 편집기로 이동</a>"
 
-#: kmymoney/views/ledgerview.cpp:770
+#: kmymoney/views/ledgerview.cpp:776
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "거래에 할당된 분류가 없습니다."
 
-#: kmymoney/views/ledgerview.cpp:777
+#: kmymoney/views/ledgerview.cpp:783
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "거래에 <b>%1</b> 할당이 누락되었습니다."
 
-#: kmymoney/views/ledgerview.cpp:786
+#: kmymoney/views/ledgerview.cpp:792
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip icon description"
 #| msgid "This schedule is overdue. Click on the icon to enter it."
@@ -20030,14 +20030,14 @@ msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "이 일정의 만료 기한이 지났습니다. 아이콘을 클릭하면 편집합니다."
 
-#: kmymoney/views/ledgerview.cpp:792
+#: kmymoney/views/ledgerview.cpp:798
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 "이 거래는 가져온 거래입니다. 아이콘을 클릭하면 수락한 것으로 표시합니다."
 
-#: kmymoney/views/ledgerview.cpp:797
+#: kmymoney/views/ledgerview.cpp:803
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -20045,31 +20045,31 @@ msgid ""
 msgstr ""
 "이 거래가 일치합니다. 아이콘을 클릭하면 수락하거나 일치를 해제할 수 있습니다."
 
-#: kmymoney/views/ledgerview.cpp:873
+#: kmymoney/views/ledgerview.cpp:879
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "기한이 지난 거래를 입력하지 않습니다."
 
-#: kmymoney/views/ledgerview.cpp:874
+#: kmymoney/views/ledgerview.cpp:880
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "기한이 지난 거래를 입력합니다."
 
-#: kmymoney/views/ledgerview.cpp:877
+#: kmymoney/views/ledgerview.cpp:883
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "기한이 지난 일정을 입력하시겠습니까?"
 
-#: kmymoney/views/ledgerview.cpp:878
+#: kmymoney/views/ledgerview.cpp:884
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "기한이 지난 일정 입력"
 
-#: kmymoney/views/ledgerview.cpp:898
+#: kmymoney/views/ledgerview.cpp:904
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -20079,7 +20079,7 @@ msgstr ""
 "숨겨진(일치하는) 거래를 표시된 거래에서 분리하고 원장에 나중에 다시 입력합니"
 "다."
 
-#: kmymoney/views/ledgerview.cpp:900
+#: kmymoney/views/ledgerview.cpp:906
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20088,13 +20088,13 @@ msgid ""
 msgstr ""
 "표시된 대로 거래 일치를 수락하고 숨겨진(일치하는) 거래의 데이터를 삭제합니다."
 
-#: kmymoney/views/ledgerview.cpp:904
+#: kmymoney/views/ledgerview.cpp:910
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "일치하는 거래를 수락하거나 일치를 해제하시겠습니까?"
 
-#: kmymoney/views/ledgerview.cpp:905
+#: kmymoney/views/ledgerview.cpp:911
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"

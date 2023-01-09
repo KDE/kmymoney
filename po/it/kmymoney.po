@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-08 00:59+0000\n"
+"POT-Creation-Date: 2023-01-09 00:56+0000\n"
 "PO-Revision-Date: 2022-12-16 10:53+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -14830,13 +14830,13 @@ msgid "Include subaccounts"
 msgstr "Includi sottoconti"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:141
-#: kmymoney/views/kpayeesview_p.h:787
+#: kmymoney/views/kpayeesview_p.h:788
 #, kde-format
 msgid "<qt>Do you want to save the changes for <b>%1</b>?</qt>"
 msgstr "<qt>Vuoi salvare le modifiche per <b>%1</b>?</qt>"
 
 #: kmymoney/plugins/views/budget/kbudgetview_p.h:142
-#: kmymoney/views/kpayeesview_p.h:788 kmymoney/views/ktagsview.cpp:289
+#: kmymoney/views/kpayeesview_p.h:789 kmymoney/views/ktagsview.cpp:289
 #, kde-format
 msgid "Save changes"
 msgstr "Salva le modifiche"
@@ -19784,7 +19784,7 @@ msgstr "Elimina beneficiario"
 msgid "<p>Do you really want to merge the selected payees?"
 msgstr "<p>Vuoi davvero unire i beneficiari selezionati?"
 
-#: kmymoney/views/kpayeesview.cpp:566 kmymoney/views/kpayeesview_p.h:563
+#: kmymoney/views/kpayeesview.cpp:566 kmymoney/views/kpayeesview_p.h:564
 #, kde-format
 msgid "Merge Payees"
 msgstr "Unisci beneficiari"
@@ -20014,17 +20014,17 @@ msgctxt "Placeholder text"
 msgid "Search"
 msgstr "Ricerca"
 
-#: kmymoney/views/kpayeesview_p.h:345 kmymoney/views/ktagsview.cpp:212
+#: kmymoney/views/kpayeesview_p.h:347 kmymoney/views/ktagsview.cpp:212
 #, kde-format
 msgid "Balance: %1"
 msgstr "Saldo: %1"
 
-#: kmymoney/views/kpayeesview_p.h:390 kmymoney/views/ktagsview.cpp:256
+#: kmymoney/views/kpayeesview_p.h:391 kmymoney/views/ktagsview.cpp:256
 #, kde-format
 msgid "Balance: %1%2"
 msgstr "Saldo: %1%2"
 
-#: kmymoney/views/kpayeesview_p.h:474
+#: kmymoney/views/kpayeesview_p.h:475
 #, kde-format
 msgid ""
 "At least one transaction/scheduled transaction or loan account is still "
@@ -20038,17 +20038,17 @@ msgstr ""
 "transazione/transazione pianificata o conto di prestito possa essere "
 "riassegnato."
 
-#: kmymoney/views/kpayeesview_p.h:559
+#: kmymoney/views/kpayeesview_p.h:560
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
 msgstr "Impossibile riassegnare il beneficiario della transazione/suddivisione"
 
-#: kmymoney/views/kpayeesview_p.h:563
+#: kmymoney/views/kpayeesview_p.h:564
 #, kde-format
 msgid "Nothing to merge."
 msgstr "Niente da unire."
 
-#: kmymoney/views/kpayeesview_p.h:646
+#: kmymoney/views/kpayeesview_p.h:647
 #, kde-format
 msgid "Unable to remove payee(s)"
 msgstr "Impossibile eliminare il beneficiario"
@@ -20365,7 +20365,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Vai a «%1»"
 
-#: kmymoney/views/ledgerview.cpp:673
+#: kmymoney/views/ledgerview.cpp:679
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -20376,32 +20376,32 @@ msgstr ""
 "supporta la modifica di due transazioni in parallelo. <a href=\"jumpToEditor"
 "\">Passa all'editor attuale</a>"
 
-#: kmymoney/views/ledgerview.cpp:770
+#: kmymoney/views/ledgerview.cpp:776
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "La transazione non è assegnata a una categoria."
 
-#: kmymoney/views/ledgerview.cpp:777
+#: kmymoney/views/ledgerview.cpp:783
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "La transazione ha un assegnazione mancante di <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:786
+#: kmymoney/views/ledgerview.cpp:792
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr ""
 "Questa pianificazione è scaduta dal %1. Fai clic sull'icona per accedervi."
 
-#: kmymoney/views/ledgerview.cpp:792
+#: kmymoney/views/ledgerview.cpp:798
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Questa transazione è importata. Fai clic sull'icona per accettarla."
 
-#: kmymoney/views/ledgerview.cpp:797
+#: kmymoney/views/ledgerview.cpp:803
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -20410,31 +20410,31 @@ msgstr ""
 "Questa transazione ha una corrispondenza. Fai clic sull'icona per accettarla "
 "o rimuovere l'associazione."
 
-#: kmymoney/views/ledgerview.cpp:873
+#: kmymoney/views/ledgerview.cpp:879
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Non inserire la transazione pianificata scaduta."
 
-#: kmymoney/views/ledgerview.cpp:874
+#: kmymoney/views/ledgerview.cpp:880
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Inserisci la transazione pianificata scaduta."
 
-#: kmymoney/views/ledgerview.cpp:877
+#: kmymoney/views/ledgerview.cpp:883
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Vuoi inserire ora la transazione pianificata scaduta?"
 
-#: kmymoney/views/ledgerview.cpp:878
+#: kmymoney/views/ledgerview.cpp:884
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Inserisci la pianificazione scaduta"
 
-#: kmymoney/views/ledgerview.cpp:898
+#: kmymoney/views/ledgerview.cpp:904
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -20444,7 +20444,7 @@ msgstr ""
 "Sgancia la transazione nascosta (associata) da quella mostrata e inseriscila "
 "di nuovo nel registro."
 
-#: kmymoney/views/ledgerview.cpp:900
+#: kmymoney/views/ledgerview.cpp:906
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20454,7 +20454,7 @@ msgstr ""
 "Accetta la corrispondenza come mostrato e rimuovi i dati della transazione "
 "nascosta (associata)."
 
-#: kmymoney/views/ledgerview.cpp:904
+#: kmymoney/views/ledgerview.cpp:910
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
@@ -20462,7 +20462,7 @@ msgstr ""
 "Vuoi accettare o rimuovere la corrispondenza della transazione verificata "
 "ora?"
 
-#: kmymoney/views/ledgerview.cpp:905
+#: kmymoney/views/ledgerview.cpp:911
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
