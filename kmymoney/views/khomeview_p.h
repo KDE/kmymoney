@@ -33,6 +33,8 @@
 #include <QVBoxLayout>
 #include <QWheelEvent>
 
+#include <cmath>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -177,9 +179,9 @@ public:
 
         if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
             //show account's online-status
-            pathOK = QPixmapToDataUri(Icons::get(Icon::DialogOKApply).pixmap(QSize(8, 8)));
-            pathTODO = QPixmapToDataUri(Icons::get(Icon::MailReceive).pixmap(QSize(8, 8)));
-            pathNotOK = QPixmapToDataUri(Icons::get(Icon::DialogCancel).pixmap(QSize(8, 8)));
+            pathOK = QPixmapToDataUri(Icons::get(Icon::DialogOKApply).pixmap(QSize(adjustedIconSize, adjustedIconSize)));
+            pathTODO = QPixmapToDataUri(Icons::get(Icon::MailReceive).pixmap(QSize(adjustedIconSize, adjustedIconSize)));
+            pathNotOK = QPixmapToDataUri(Icons::get(Icon::DialogCancel).pixmap(QSize(adjustedIconSize, adjustedIconSize)));
 
             if (acc.value("lastImportedTransactionDate").isEmpty() || acc.value("lastStatementBalance").isEmpty())
                 cellStatus = '-';
@@ -431,6 +433,8 @@ public:
 
         m_html += QString("<div class=\"gap\">&nbsp;</div>");
 
+        prepareIcons();
+
         QStringList settings = KMyMoneySettings::listOfItems();
 
         QStringList::ConstIterator it;
@@ -525,6 +529,28 @@ public:
 
         m_html += "</tr></table></td></tr>";
         m_html += "</table>";
+    }
+
+    void prepareIcons()
+    {
+        // calculate "enter" ans "skip" icon sizes
+        auto fsize = m_view->fontMetrics().height();
+        // consider icon to be 75% of the label size
+        auto isize = fsize * 3 / 4 + 1;
+
+        // check whether we have a device scaling enabled
+        // if a device ratio is 2 (200% scale), we need to create a pixmap using half of the target size,
+        // resulted pixmaps will be twice as large as provided in the QSize(...)
+        auto ic = Icons::get(Icon::KeyEnter).pixmap(QSize(isize, isize));
+        auto devRatio = ic.devicePixelRatio();
+        if (devRatio > 1)
+            isize = round(isize / devRatio);
+
+        pathEnterIcon = QPixmapToDataUri(Icons::get(Icon::KeyEnter).pixmap(QSize(isize, isize)));
+        pathSkipIcon = QPixmapToDataUri(Icons::get(Icon::SkipForward).pixmap(QSize(isize, isize)));
+        pathStatusHeader = QPixmapToDataUri(Icons::get(Icon::Download).pixmap(QSize(isize, isize)));
+
+        adjustedIconSize = isize;
     }
 
     void showScheduledPayments()
@@ -802,20 +828,18 @@ public:
                 if (!sched.isFinished()) {
                     MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
-                    QString pathEnter = QPixmapToDataUri(Icons::get(Icon::KeyEnter).pixmap(QSize(8,8)));
-                    QString pathSkip = QPixmapToDataUri(Icons::get(Icon::SkipForward).pixmap(QSize(8, 8)));
-
                     //show payment date
                     tmp =
-                        QString("<td class=\"nowrap\">") + QLocale().toString(sched.adjustedNextDueDate(), QLocale::ShortFormat) + "</td><td align=\"center\">";
+                        QString("<td class=\"nowrap\">") + QLocale().toString(sched.adjustedNextDueDate(), QLocale::ShortFormat) + "</td><td class=\"center\">";
 
                     // show Enter Next and Skip Next buttons
-                    if (!pathEnter.isEmpty())
-                        tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=enter").arg(sched.id()), i18n("Enter schedule")) + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathEnter) + linkend();
-                    tmp += "</td><td align=\"center\">";
-                    if (!pathSkip.isEmpty())
+                    if (!pathEnterIcon.isEmpty())
+                        tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=enter").arg(sched.id()), i18n("Enter schedule"))
+                            + QString("<img src=\"%1\" border=\"0\" style=\"height:%2px;\" ></a>").arg(pathEnterIcon).arg(adjustedIconSize) + linkend();
+                    tmp += "</td><td class=\"center\">";
+                    if (!pathSkipIcon.isEmpty())
                         tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=skip").arg(sched.id()), i18n("Skip schedule"))
-                            + QString("<img src=\"%1\" border=\"0\"></a>").arg(pathSkip) + linkend();
+                            + QString("<img src=\"%1\" border=\"0\" style=\"height:%2px;\"></a>").arg(pathSkipIcon).arg(adjustedIconSize) + linkend();
                     tmp += "</td><td>";
 
                     tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=edit").arg(sched.id()), i18n("Edit schedule")) + sched.name() + linkend();
@@ -948,7 +972,6 @@ public:
             m_html += "<tr class=\"item\">";
 
             if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
-                QString pathStatusHeader = QPixmapToDataUri(Icons::get(Icon::Download).pixmap(QSize(8, 8)));
                 m_html += QString("<td class=\"center\"><img src=\"%1\" border=\"0\"></td>").arg(pathStatusHeader);
             }
 
@@ -1287,8 +1310,6 @@ public:
             std::stable_sort(liabilities.begin(), liabilities.end(), accountNameLess);
             QString statusHeader;
             if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
-                QString pathStatusHeader;
-                pathStatusHeader = QPixmapToDataUri(Icons::get(Icon::Download).pixmap(QSize(8, 8)));
                 statusHeader = QString("<img src=\"%1\" border=\"0\">").arg(pathStatusHeader);
             }
 
@@ -1903,6 +1924,12 @@ public:
     QMap<QString, dailyBalances> m_accountList;
     int       m_scrollBarPos;
     bool      m_fileOpen;
+
+    // Enter and Skip data pixmaps
+    QString pathEnterIcon;
+    QString pathSkipIcon;
+    QString pathStatusHeader;
+    int adjustedIconSize;
 };
 
 #endif
