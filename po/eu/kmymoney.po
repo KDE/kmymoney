@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-09 00:56+0000\n"
+"POT-Creation-Date: 2023-01-10 00:56+0000\n"
 "PO-Revision-Date: 2023-01-08 08:59+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -613,10 +613,10 @@ msgid "Backup location:"
 msgstr "Babeskopiaren kokapena:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3598
-#: kmymoney/kmymoney.cpp:3662 kmymoney/kmymoney.cpp:3678
-#: kmymoney/kmymoney.cpp:3684 kmymoney/kmymoney.cpp:3698
-#: kmymoney/kmymoney.cpp:3700
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3600
+#: kmymoney/kmymoney.cpp:3664 kmymoney/kmymoney.cpp:3680
+#: kmymoney/kmymoney.cpp:3686 kmymoney/kmymoney.cpp:3700
+#: kmymoney/kmymoney.cpp:3702
 #, kde-format
 msgid "Backup"
 msgstr "Babeskopia"
@@ -1018,8 +1018,8 @@ msgstr "Kanbio-tasen/Prezioen editorea"
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:246
 #: kmymoney/plugins/views/reports/core/listtable.cpp:615
-#: kmymoney/views/khomeview_p.h:607 kmymoney/views/khomeview_p.h:669
-#: kmymoney/views/khomeview_p.h:709 kmymoney/views/newspliteditor.ui:32
+#: kmymoney/views/khomeview_p.h:633 kmymoney/views/khomeview_p.h:695
+#: kmymoney/views/khomeview_p.h:735 kmymoney/views/newspliteditor.ui:32
 #: kmymoney/views/newtransactioneditor.ui:56
 #: kmymoney/views/newtransactionform.ui:145
 #: kmymoney/widgets/ktransactionfilter.cpp:131
@@ -1103,8 +1103,8 @@ msgstr "xxx"
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:120
 #: kmymoney/plugins/views/reports/core/listtable.cpp:613
 #: kmymoney/views/investtransactioneditor.ui:245
-#: kmymoney/views/khomeview_p.h:592 kmymoney/views/khomeview_p.h:654
-#: kmymoney/views/khomeview_p.h:694 kmymoney/views/newtransactioneditor.ui:78
+#: kmymoney/views/khomeview_p.h:618 kmymoney/views/khomeview_p.h:680
+#: kmymoney/views/khomeview_p.h:720 kmymoney/views/newtransactioneditor.ui:78
 #: kmymoney/views/newtransactionform.ui:110
 #: kmymoney/widgets/ktransactionfilter.cpp:122
 #: kmymoney/widgets/ktransactionfilter.ui:138
@@ -2057,7 +2057,7 @@ msgstr "Mota"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:237
 #: kmymoney/views/investtransactioneditor.ui:51
 #: kmymoney/views/investtransactioneditor.ui:221
-#: kmymoney/views/khomeview_p.h:993
+#: kmymoney/views/khomeview_p.h:1016
 #, kde-format
 msgid "Total"
 msgstr "Totala"
@@ -2265,7 +2265,7 @@ msgid "Liability"
 msgstr "Pasiboa"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:520 kmymoney/kmymoney.cpp:429
-#: kmymoney/models/ledgerfilterbase.cpp:72 kmymoney/views/khomeview_p.h:1753
+#: kmymoney/models/ledgerfilterbase.cpp:72 kmymoney/views/khomeview_p.h:1774
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:379
@@ -4221,8 +4221,8 @@ msgstr "Kitatuak"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:308
 #: kmymoney/plugins/views/reports/core/listtable.cpp:637
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:969 kmymoney/views/khomeview_p.h:1326
-#: kmymoney/views/khomeview_p.h:1355
+#: kmymoney/views/khomeview_p.h:992 kmymoney/views/khomeview_p.h:1347
+#: kmymoney/views/khomeview_p.h:1376
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -5322,12 +5322,12 @@ msgstr "Ezabatu transakzioa"
 msgid "Unable to duplicate transaction(s)"
 msgstr "Ezin da bikoiztu transakzio antolaturik"
 
-#: kmymoney/kmymoney.cpp:2774
+#: kmymoney/kmymoney.cpp:2776
 #, kde-format
 msgid "Unable to modify transaction"
 msgstr "Ezin da transakziorik aldatu"
 
-#: kmymoney/kmymoney.cpp:2866
+#: kmymoney/kmymoney.cpp:2868
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5336,31 +5336,31 @@ msgstr ""
 "Hautatutako transakzioen partida bat bederen adostu da. Hala ere, "
 "transakzioak aldatu nahi dituzu?"
 
-#: kmymoney/kmymoney.cpp:2868
+#: kmymoney/kmymoney.cpp:2870
 #, kde-format
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "Transakzioa dagoeneko adostuta dago"
 
-#: kmymoney/kmymoney.cpp:2873
+#: kmymoney/kmymoney.cpp:2875
 #, kde-format
 msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
 msgstr[0] "Benetan aldatu nahi duzu hautatutako transakzioa?"
 msgstr[1] "Benetan ezabatu nahi dituzu hautatutako %1 transakzio guztiak?"
 
-#: kmymoney/kmymoney.cpp:2877
+#: kmymoney/kmymoney.cpp:2879
 #, kde-format
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Aldatu transakzio"
 
-#: kmymoney/kmymoney.cpp:2962
+#: kmymoney/kmymoney.cpp:2964
 #, kde-format
 msgid "Unable to accept transaction"
 msgstr "Ezin da transakziorik onartu"
 
-#: kmymoney/kmymoney.cpp:3002
+#: kmymoney/kmymoney.cpp:3004
 #, kde-format
 msgid ""
 "KMyMoney has detected some overdue scheduled transactions for the account <b>"
@@ -5369,12 +5369,12 @@ msgstr ""
 "KMyMoney-k <b>%1</b> konturako programatutako transakzio atzeratuak "
 "detektatu ditu. Orain sartu nahi dituzu programatutako transakzio horiek?"
 
-#: kmymoney/kmymoney.cpp:3005 kmymoney/views/kscheduledview.cpp:134
+#: kmymoney/kmymoney.cpp:3007 kmymoney/views/kscheduledview.cpp:134
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Transakzio antolatuak aurkitu dira"
 
-#: kmymoney/kmymoney.cpp:3076
+#: kmymoney/kmymoney.cpp:3078
 #, kde-format
 msgid ""
 "<qt>You have closed this account. It remains in the system because you have "
@@ -5387,17 +5387,17 @@ msgstr ""
 "bistaratzen. Kontua berriz ikusgai jarri nahi baduzu, joan Ikusi menura eta "
 "hautatu <b>Erakutsi kontu guztiak</b>.</qt>"
 
-#: kmymoney/kmymoney.cpp:3078
+#: kmymoney/kmymoney.cpp:3080
 #, kde-format
 msgid "Information"
 msgstr "Informazioa"
 
-#: kmymoney/kmymoney.cpp:3182 kmymoney/kmymoney.cpp:3278
+#: kmymoney/kmymoney.cpp:3184 kmymoney/kmymoney.cpp:3280
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "Ez dago KMyMoney-ren fitxategi irekirik"
 
-#: kmymoney/kmymoney.cpp:3215 kmymoney/kmymoney.cpp:3217
+#: kmymoney/kmymoney.cpp:3217 kmymoney/kmymoney.cpp:3219
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1360
 #: kmymoney/plugins/xml/xmlstorage.cpp:407
 #, kde-format
@@ -5405,65 +5405,65 @@ msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Prest."
 
-#: kmymoney/kmymoney.cpp:3282
+#: kmymoney/kmymoney.cpp:3284
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Datu pertsonalak bistaratzen..."
 
-#: kmymoney/kmymoney.cpp:3289
+#: kmymoney/kmymoney.cpp:3291
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Editatu datu pertsonalak"
 
-#: kmymoney/kmymoney.cpp:3304
+#: kmymoney/kmymoney.cpp:3306
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Ezin da gorde erabiltzaile-informazioa: %1"
 
-#: kmymoney/kmymoney.cpp:3312
+#: kmymoney/kmymoney.cpp:3314
 #, kde-format
 msgid "Importing account templates."
 msgstr "Kontu-txantiloiak inportatzen."
 
-#: kmymoney/kmymoney.cpp:3326
+#: kmymoney/kmymoney.cpp:3328
 #, kde-format
 msgid "Unable to import template(s)"
 msgstr "Ezin d(ir)a txantiloia(k) inportatu"
 
-#: kmymoney/kmymoney.cpp:3334
+#: kmymoney/kmymoney.cpp:3336
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Kontu-txantiloiak esportatzen."
 
-#: kmymoney/kmymoney.cpp:3340
+#: kmymoney/kmymoney.cpp:3342
 #, kde-format
 msgid "Save as..."
 msgstr "Gorde honela..."
 
-#: kmymoney/kmymoney.cpp:3341
+#: kmymoney/kmymoney.cpp:3343
 #, kde-format
 msgid "KMyMoney template files (*.kmt);;All files (*)"
 msgstr "(*.kmt) KMyMoney txantiloi-fitxategiak;;(*) Fitxategi guztiak"
 
-#: kmymoney/kmymoney.cpp:3372
+#: kmymoney/kmymoney.cpp:3374
 #, kde-format
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Txantiloia esportatze"
 
-#: kmymoney/kmymoney.cpp:3390
+#: kmymoney/kmymoney.cpp:3392
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr ""
 "Lehendik badago <b>%1</b> fitxategia.\n"
 "Benetan gainidatzi nahi duzu?"
 
-#: kmymoney/kmymoney.cpp:3392 kmymoney/plugins/csv/export/csvexporter.cpp:103
+#: kmymoney/kmymoney.cpp:3394 kmymoney/plugins/csv/export/csvexporter.cpp:103
 #, kde-format
 msgid "File already exists"
 msgstr "Lehendik badago fitxategi hori"
 
-#: kmymoney/kmymoney.cpp:3504
+#: kmymoney/kmymoney.cpp:3506
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5472,13 +5472,13 @@ msgstr ""
 "Fitxategia gorde egin behar da, haren babeskopia egin ahal izateko. Jarraitu "
 "nahi duzu?"
 
-#: kmymoney/kmymoney.cpp:3506
+#: kmymoney/kmymoney.cpp:3508
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr "Babes-kopiaren berrespena"
 
-#: kmymoney/kmymoney.cpp:3523
+#: kmymoney/kmymoney.cpp:3525
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5488,63 +5488,63 @@ msgstr ""
 "lokalak baino ez ditu onartzen iturburu-fitxategi gisa. Zure uneko iturburu-"
 "fitxategia '%1' da."
 
-#: kmymoney/kmymoney.cpp:3525
+#: kmymoney/kmymoney.cpp:3527
 #, kde-format
 msgid "Local files only"
 msgstr "Fitxategi lokalak soilik"
 
-#: kmymoney/kmymoney.cpp:3564
+#: kmymoney/kmymoney.cpp:3566
 #, kde-format
 msgid "Mounting %1"
 msgstr "%1 muntatzen"
 
-#: kmymoney/kmymoney.cpp:3598
+#: kmymoney/kmymoney.cpp:3600
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr "Gaurko babeskopia lehendik badago gailu horretan. Ordeztu nahi duzu?"
 
-#: kmymoney/kmymoney.cpp:3598
+#: kmymoney/kmymoney.cpp:3600
 #, kde-format
 msgid "&Replace"
 msgstr "&Ordeztu"
 
-#: kmymoney/kmymoney.cpp:3604
+#: kmymoney/kmymoney.cpp:3606
 #, kde-format
 msgid "Writing %1"
 msgstr "%1 idazten"
 
-#: kmymoney/kmymoney.cpp:3625
+#: kmymoney/kmymoney.cpp:3627
 #, kde-format
 msgid "Unmounting %1"
 msgstr "%1 desmuntatzen"
 
-#: kmymoney/kmymoney.cpp:3662
+#: kmymoney/kmymoney.cpp:3664
 #, kde-format
 msgid "Error mounting device"
 msgstr "Errorea gertatu da gailua muntatzean"
 
-#: kmymoney/kmymoney.cpp:3677 kmymoney/kmymoney.cpp:3696
+#: kmymoney/kmymoney.cpp:3679 kmymoney/kmymoney.cpp:3698
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Eginda"
 
-#: kmymoney/kmymoney.cpp:3678 kmymoney/kmymoney.cpp:3698
+#: kmymoney/kmymoney.cpp:3680 kmymoney/kmymoney.cpp:3700
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Fitxategiaren babeskopia behar bezala egin da"
 
-#: kmymoney/kmymoney.cpp:3684
+#: kmymoney/kmymoney.cpp:3686
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Errorea gertatu da fitxategia gailuan kopiatzean"
 
-#: kmymoney/kmymoney.cpp:3700
+#: kmymoney/kmymoney.cpp:3702
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Errorea gertatu da gailua desmuntatzean"
 
-#: kmymoney/kmymoney.cpp:3747
+#: kmymoney/kmymoney.cpp:3749
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5561,29 +5561,29 @@ msgstr ""
 "Egin klik Ez botoian, zenbatekoa %2 uzteko,\n"
 "Egin klik Utzi botoian, kontua sortzeko prozesua bertan behera uzteko."
 
-#: kmymoney/kmymoney.cpp:3757
+#: kmymoney/kmymoney.cpp:3759
 #, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Pasiboaren hasierako saldoa"
 
-#: kmymoney/kmymoney.cpp:3768
+#: kmymoney/kmymoney.cpp:3770
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Ezin da kontua gehitu: %1"
 
-#: kmymoney/kmymoney.cpp:3891
+#: kmymoney/kmymoney.cpp:3893
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Koherentzia-egiaztapena exekutatzen..."
 
-#: kmymoney/kmymoney.cpp:3898
+#: kmymoney/kmymoney.cpp:3900
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Huts egin du koherentzia-egiaztapenak: %1"
 
-#: kmymoney/kmymoney.cpp:3908
+#: kmymoney/kmymoney.cpp:3910
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5592,7 +5592,7 @@ msgstr ""
 "Koherentzia-egiaztapenak ez du arazorik aurkitu datuetan; ikus xehetasunak "
 "beherago."
 
-#: kmymoney/kmymoney.cpp:3910
+#: kmymoney/kmymoney.cpp:3912
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5603,17 +5603,17 @@ msgstr ""
 "xehetasunak beherago. Erabiltzaileak konpondu behar ditu automatikoki "
 "zuzendu ezin izan diren arazoak."
 
-#: kmymoney/kmymoney.cpp:3913
+#: kmymoney/kmymoney.cpp:3915
 #, kde-format
 msgid "Consistency check result"
 msgstr "Koherentzia-egiaztapenaren emaitza"
 
-#: kmymoney/kmymoney.cpp:3979
+#: kmymoney/kmymoney.cpp:3981
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Atzeratutako transakzio antolatuak egiaztatzen..."
 
-#: kmymoney/kmymoney.cpp:4169
+#: kmymoney/kmymoney.cpp:4171
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
@@ -5621,12 +5621,12 @@ msgstr ""
 "KMyMoney fitxategi bat hautatu behar duzu kontu-laburpenak inportatu ahal "
 "izateko."
 
-#: kmymoney/kmymoney.cpp:4174
+#: kmymoney/kmymoney.cpp:4176
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Kontu-laburpena webeko konexioaren bidez inportatzen"
 
-#: kmymoney/kmymoney.cpp:4186
+#: kmymoney/kmymoney.cpp:4188
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5635,69 +5635,69 @@ msgid ""
 msgstr ""
 "Ezin da %1 inportatu %2 plugina erabiliz. Pluginak errore hau itzuli du: %3"
 
-#: kmymoney/kmymoney.cpp:4186 kmymoney/plugins/ofx/import/ofximporter.cpp:1012
+#: kmymoney/kmymoney.cpp:4188 kmymoney/plugins/ofx/import/ofximporter.cpp:1012
 #, kde-format
 msgid "Importing error"
 msgstr "Inportatze-errorea"
 
-#: kmymoney/kmymoney.cpp:4213
+#: kmymoney/kmymoney.cpp:4215
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Mezu guztiak gaitu dira."
 
-#: kmymoney/kmymoney.cpp:4213
+#: kmymoney/kmymoney.cpp:4215
 #, kde-format
 msgid "All messages"
 msgstr "Mezu guztiak"
 
-#: kmymoney/kmymoney.cpp:4249
+#: kmymoney/kmymoney.cpp:4251
 #, kde-format
 msgid "Auto saving..."
 msgstr "Automatikoki gordetzen..."
 
-#: kmymoney/kmymoney.cpp:4369
+#: kmymoney/kmymoney.cpp:4371
 #, kde-format
 msgid "Creating new document..."
 msgstr "Dokumentu berria sortzen..."
 
-#: kmymoney/kmymoney.cpp:4429
+#: kmymoney/kmymoney.cpp:4431
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Ezin da fitxategi berria sortu."
 
-#: kmymoney/kmymoney.cpp:4440
+#: kmymoney/kmymoney.cpp:4442
 #, kde-format
 msgid "Open a file."
 msgstr "Fitxategi bat ireki."
 
-#: kmymoney/kmymoney.cpp:4454
+#: kmymoney/kmymoney.cpp:4456
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "Biltegia irekitzeko ez da pluginik aurkitzen."
 
-#: kmymoney/kmymoney.cpp:4458
+#: kmymoney/kmymoney.cpp:4460
 #, kde-format
 msgid "All files (*)"
 msgstr "Fitxategi guztiak (*)"
 
-#: kmymoney/kmymoney.cpp:4471
+#: kmymoney/kmymoney.cpp:4473
 #, kde-format
 msgid "Loading file..."
 msgstr "Fitxategia zamatzen..."
 
-#: kmymoney/kmymoney.cpp:4477
+#: kmymoney/kmymoney.cpp:4479
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr ""
 "<p><b>%1</b> fitxategia dagoeneko irekita dago KMyMoney-ren beste instantzia "
 "batean</p>"
 
-#: kmymoney/kmymoney.cpp:4477
+#: kmymoney/kmymoney.cpp:4479
 #, kde-format
 msgid "Duplicate open"
 msgstr "Bikoiztua irekitzea"
 
-#: kmymoney/kmymoney.cpp:4484
+#: kmymoney/kmymoney.cpp:4486
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5706,17 +5706,17 @@ msgstr ""
 "<p><b>%1</b> fitxategia baliogabea da edo ez da existitzen. Beste fitxategi "
 "bat ireki edo sor dezakezu.</p>"
 
-#: kmymoney/kmymoney.cpp:4484
+#: kmymoney/kmymoney.cpp:4486
 #, kde-format
 msgid "File not found"
 msgstr "Fitxategia ez da aurkitu"
 
-#: kmymoney/kmymoney.cpp:4511
+#: kmymoney/kmymoney.cpp:4513
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Ezin da fitxategia ireki eskatu den bezala."
 
-#: kmymoney/kmymoney.cpp:4517
+#: kmymoney/kmymoney.cpp:4519
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -5725,27 +5725,27 @@ msgstr ""
 "Ezin da zure datu biltegiratuak irakurri. Kmymoney ezarpenak berrikusi behar "
 "den plugina gaitzeko."
 
-#: kmymoney/kmymoney.cpp:4527
+#: kmymoney/kmymoney.cpp:4529
 #, kde-format
 msgid "Saving file..."
 msgstr "Fitxategia gordetzen..."
 
-#: kmymoney/kmymoney.cpp:4539 kmymoney/kmymoney.cpp:4596
+#: kmymoney/kmymoney.cpp:4541 kmymoney/kmymoney.cpp:4598
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Huts egin zure biltegia gordetzea."
 
-#: kmymoney/kmymoney.cpp:4545
+#: kmymoney/kmymoney.cpp:4547
 #, kde-format
 msgid "Couldn't find suitable plugin to save your storage."
 msgstr "Biltegia gordetzeko ez da pluginik aurkitzen."
 
-#: kmymoney/kmymoney.cpp:4551
+#: kmymoney/kmymoney.cpp:4553
 #, kde-format
 msgid "Saving file as...."
 msgstr "Fitxategia honela gordetzen..."
 
-#: kmymoney/kmymoney.cpp:4567
+#: kmymoney/kmymoney.cpp:4569
 #, kde-format
 msgid "Couldn't find any plugin for saving storage."
 msgstr "Biltegia gordetzeko ez da pluginik aurkitzen."
@@ -5950,7 +5950,7 @@ msgstr "Aktiboak eta pasiboak"
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:64
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1489
+#: kmymoney/views/khomeview_p.h:1510
 #, kde-format
 msgid "Budget"
 msgstr "Aurrekontua"
@@ -9515,9 +9515,9 @@ msgstr "Kontu mota:"
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:92
-#: kmymoney/views/khomeview_p.h:604 kmymoney/views/khomeview_p.h:666
-#: kmymoney/views/khomeview_p.h:706 kmymoney/views/khomeview_p.h:956
-#: kmymoney/views/khomeview_p.h:1084 kmymoney/views/newtransactioneditor.ui:17
+#: kmymoney/views/khomeview_p.h:630 kmymoney/views/khomeview_p.h:692
+#: kmymoney/views/khomeview_p.h:732 kmymoney/views/khomeview_p.h:979
+#: kmymoney/views/khomeview_p.h:1107 kmymoney/views/newtransactioneditor.ui:17
 #: kmymoney/widgets/ktransactionfilter.cpp:116
 #: kmymoney/widgets/ktransactionfilter.ui:113
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:73
@@ -9859,8 +9859,8 @@ msgstr "Garbitu ohar-eremu hautapena."
 #: kmymoney/plugins/views/reports/core/listtable.cpp:683
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:972 kmymoney/views/khomeview_p.h:1329
-#: kmymoney/views/khomeview_p.h:1358
+#: kmymoney/views/khomeview_p.h:995 kmymoney/views/khomeview_p.h:1350
+#: kmymoney/views/khomeview_p.h:1379
 #, kde-format
 msgid "Balance"
 msgstr "Saldoa"
@@ -15062,13 +15062,13 @@ msgstr[0] "Egun 1"
 msgstr[1] "%1 egun"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:379
-#: kmymoney/views/khomeview_p.h:1153
+#: kmymoney/views/khomeview_p.h:1176
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "%1(e)ko saldoa gutxieneko saldoa (%2) baino txikiagoa da gaur."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:384
-#: kmymoney/views/khomeview_p.h:1157
+#: kmymoney/views/khomeview_p.h:1180
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
 msgid_plural ""
@@ -15077,19 +15077,19 @@ msgstr[0] "%2(e)ko saldoa %3 baino txikiago izango da egun %1 barru."
 msgstr[1] "%2(e)ko saldoa %3 baino txikiago izango da %1 egun barru."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:403
-#: kmymoney/views/khomeview_p.h:1175
+#: kmymoney/views/khomeview_p.h:1198
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "%1(e)ko saldoa %2 baino txikiagoa da gaur."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:408
-#: kmymoney/views/khomeview_p.h:1180
+#: kmymoney/views/khomeview_p.h:1203
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "%1(e)ko saldoa %2 baino handiagoa da gaur."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:415
-#: kmymoney/views/khomeview_p.h:1186
+#: kmymoney/views/khomeview_p.h:1209
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
@@ -15097,7 +15097,7 @@ msgstr[0] "%2(e)ko saldoa %3 baino txikiago izango da egun %1 barru."
 msgstr[1] "%2(e)ko saldoa %3 baino txikiago izango da %1 egun barru."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:422
-#: kmymoney/views/khomeview_p.h:1193
+#: kmymoney/views/khomeview_p.h:1216
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
@@ -15160,7 +15160,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "Txosten pluginak ez du eman daturik diagrama honetarako."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:660
-#: kmymoney/views/khomeview_p.h:523 kmymoney/views/khomeview_p.h:1493
+#: kmymoney/views/khomeview_p.h:527 kmymoney/views/khomeview_p.h:1514
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Gaitu grafiko honen txosten-bertsioa"
@@ -15933,7 +15933,7 @@ msgstr "Barrutia"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:171
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
 #: kmymoney/plugins/views/reports/kreportsview_p.h:430
-#: kmymoney/views/khomeview_p.h:1027
+#: kmymoney/views/khomeview_p.h:1050
 #, kde-format
 msgid "Report"
 msgstr "Txostena"
@@ -16250,7 +16250,7 @@ msgstr "Txostenak"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:51
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:49
-#: kmymoney/views/khomeview_p.h:1029
+#: kmymoney/views/khomeview_p.h:1052
 #, kde-format
 msgid "Comment"
 msgstr "Iruzkina"
@@ -16281,7 +16281,7 @@ msgid "Charts"
 msgstr "Diagramak"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:660
-#: kmymoney/views/khomeview_p.h:1022
+#: kmymoney/views/khomeview_p.h:1045
 #, kde-format
 msgid "Favorite Reports"
 msgstr "Txosten gogokoak"
@@ -16326,7 +16326,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Diru-sarreren eta gastuen diagrama zirkularra"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:867
-#: kmymoney/views/khomeview_p.h:1465
+#: kmymoney/views/khomeview_p.h:1486
 #, kde-format
 msgid "Net Worth"
 msgstr "Kapital garbia"
@@ -16657,7 +16657,7 @@ msgstr "Itxi"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:82
 #: kmymoney/plugins/views/reports/reportsview.cpp:118
-#: kmymoney/views/khomeview_p.h:509
+#: kmymoney/views/khomeview_p.h:513
 #, kde-format
 msgid "Net Worth Forecast"
 msgstr "Kapital garbiaren aurreikuspena"
@@ -19248,121 +19248,121 @@ msgstr ""
 "izateko, kontu bat sortu behar duzu gutxienez. Kontua sortu arte, ongietorri-"
 "orria erakutsiko du KMyMoney-k."
 
-#: kmymoney/views/khomeview_p.h:449
+#: kmymoney/views/khomeview_p.h:453
 #, kde-format
 msgid "Preferred Accounts"
 msgstr "Kontu hobetsiak"
 
-#: kmymoney/views/khomeview_p.h:455 kmymoney/views/khomeview_p.h:457
+#: kmymoney/views/khomeview_p.h:459 kmymoney/views/khomeview_p.h:461
 #, kde-format
 msgid "Payment Accounts"
 msgstr "Ordainketa-kontuak"
 
-#: kmymoney/views/khomeview_p.h:579
+#: kmymoney/views/khomeview_p.h:605
 #, kde-format
 msgid "Scheduled Payments"
 msgstr "Antolatutako ordainketak"
 
-#: kmymoney/views/khomeview_p.h:589
+#: kmymoney/views/khomeview_p.h:615
 #, kde-format
 msgid "Overdue payments"
 msgstr "Atzeratutako ordainketak"
 
-#: kmymoney/views/khomeview_p.h:595 kmymoney/views/khomeview_p.h:657
-#: kmymoney/views/khomeview_p.h:697
+#: kmymoney/views/khomeview_p.h:621 kmymoney/views/khomeview_p.h:683
+#: kmymoney/views/khomeview_p.h:723
 #, kde-format
 msgid "Next"
 msgstr "Hurrengoa"
 
-#: kmymoney/views/khomeview_p.h:598 kmymoney/views/khomeview_p.h:660
-#: kmymoney/views/khomeview_p.h:700
+#: kmymoney/views/khomeview_p.h:624 kmymoney/views/khomeview_p.h:686
+#: kmymoney/views/khomeview_p.h:726
 #, kde-format
 msgid "Skip"
 msgstr "Saihestu"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, ScheduleWizardPage)
-#: kmymoney/views/khomeview_p.h:601 kmymoney/views/khomeview_p.h:663
-#: kmymoney/views/khomeview_p.h:703
+#: kmymoney/views/khomeview_p.h:627 kmymoney/views/khomeview_p.h:689
+#: kmymoney/views/khomeview_p.h:729
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:78
 #: kmymoney/wizards/newloanwizard/schedulewizardpage.ui:6
 #, kde-format
 msgid "Schedule"
 msgstr "Antolaketa"
 
-#: kmymoney/views/khomeview_p.h:610 kmymoney/views/khomeview_p.h:672
-#: kmymoney/views/khomeview_p.h:712
+#: kmymoney/views/khomeview_p.h:636 kmymoney/views/khomeview_p.h:698
+#: kmymoney/views/khomeview_p.h:738
 #, kde-format
 msgid "Balance after"
 msgstr "Saldoa ondoren"
 
-#: kmymoney/views/khomeview_p.h:651
+#: kmymoney/views/khomeview_p.h:677
 #, kde-format
 msgid "Today's due payments"
 msgstr "Gaurko mugaeguna duten ordainketak"
 
-#: kmymoney/views/khomeview_p.h:691
+#: kmymoney/views/khomeview_p.h:717
 #, kde-format
 msgid "Future payments"
 msgstr "Etorkizuneko ordainketak"
 
-#: kmymoney/views/khomeview_p.h:779
+#: kmymoney/views/khomeview_p.h:805
 #, kde-format
 msgctxt "Less..."
 msgid "Show fewer schedules on the list"
 msgstr "Erakutsi antolaketa gutxiago zerrendan"
 
-#: kmymoney/views/khomeview_p.h:781
+#: kmymoney/views/khomeview_p.h:807
 #, kde-format
 msgctxt "More..."
 msgid "Show more schedules on the list"
 msgstr "Erakutsi antolaketa gehiago zerrendan"
 
-#: kmymoney/views/khomeview_p.h:814
+#: kmymoney/views/khomeview_p.h:837
 #, kde-format
 msgid "Enter schedule"
 msgstr "Sartu antolaketa"
 
-#: kmymoney/views/khomeview_p.h:817
+#: kmymoney/views/khomeview_p.h:841
 #, kde-format
 msgid "Skip schedule"
 msgstr "Saihestu antolaketa"
 
-#: kmymoney/views/khomeview_p.h:821
+#: kmymoney/views/khomeview_p.h:845
 #, kde-format
 msgid "Edit schedule"
 msgstr "Editatu antolaketa"
 
-#: kmymoney/views/khomeview_p.h:825
+#: kmymoney/views/khomeview_p.h:849
 #, kde-format
 msgid " (%1 payment)"
 msgid_plural " (%1 payments)"
 msgstr[0] " (ordainketa %1)"
 msgstr[1] " (%1 ordainketa)"
 
-#: kmymoney/views/khomeview_p.h:960
+#: kmymoney/views/khomeview_p.h:983
 #, kde-format
 msgctxt "Header not marked"
 msgid "!M"
 msgstr "M"
 
-#: kmymoney/views/khomeview_p.h:963
+#: kmymoney/views/khomeview_p.h:986
 #, kde-format
 msgctxt "Header cleared"
 msgid "C"
 msgstr "G"
 
-#: kmymoney/views/khomeview_p.h:966
+#: kmymoney/views/khomeview_p.h:989
 #, kde-format
 msgctxt "Header not reconciled"
 msgid "!R"
 msgstr "B"
 
-#: kmymoney/views/khomeview_p.h:978
+#: kmymoney/views/khomeview_p.h:1001
 #, kde-format
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "Gutxieneko saldora<br>/ Gehieneko kreditura"
 
-#: kmymoney/views/khomeview_p.h:1078
+#: kmymoney/views/khomeview_p.h:1101
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 Day Forecast"
@@ -19370,7 +19370,7 @@ msgid_plural "%1 Day Forecast"
 msgstr[0] "%1 eguneko aurreikuspena"
 msgstr[1] "%1 eguneko aurreikuspena"
 
-#: kmymoney/views/khomeview_p.h:1089
+#: kmymoney/views/khomeview_p.h:1112
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 day"
@@ -19378,97 +19378,97 @@ msgid_plural "%1 days"
 msgstr[0] "egun %1"
 msgstr[1] "%1 egun"
 
-#: kmymoney/views/khomeview_p.h:1299
+#: kmymoney/views/khomeview_p.h:1320
 #, kde-format
 msgid "Assets and Liabilities Summary"
 msgstr "Aktiboen eta pasiboen laburpena"
 
-#: kmymoney/views/khomeview_p.h:1313
+#: kmymoney/views/khomeview_p.h:1334
 #, kde-format
 msgid "Asset Accounts"
 msgstr "Aktiboko kontuak"
 
-#: kmymoney/views/khomeview_p.h:1342
+#: kmymoney/views/khomeview_p.h:1363
 #, kde-format
 msgid "Liability Accounts"
 msgstr "Pasiboko kontuak"
 
-#: kmymoney/views/khomeview_p.h:1444
+#: kmymoney/views/khomeview_p.h:1465
 #, kde-format
 msgid "Total Assets"
 msgstr "Aktiboak guztira"
 
-#: kmymoney/views/khomeview_p.h:1454
+#: kmymoney/views/khomeview_p.h:1475
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Pasiboak guztira"
 
-#: kmymoney/views/khomeview_p.h:1743
+#: kmymoney/views/khomeview_p.h:1764
 #, kde-format
 msgid "Cash Flow Summary"
 msgstr "Kutxako fluxuaren laburpena"
 
-#: kmymoney/views/khomeview_p.h:1748
+#: kmymoney/views/khomeview_p.h:1769
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Hilabete honetako diru-sarrerak eta gastuak"
 
-#: kmymoney/views/khomeview_p.h:1756
+#: kmymoney/views/khomeview_p.h:1777
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Diru-sarrera antolatua"
 
-#: kmymoney/views/khomeview_p.h:1759
+#: kmymoney/views/khomeview_p.h:1780
 #, kde-format
 msgid "Expenses"
 msgstr "Gastuak"
 
-#: kmymoney/views/khomeview_p.h:1762
+#: kmymoney/views/khomeview_p.h:1783
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Gastu antolatuak"
 
-#: kmymoney/views/khomeview_p.h:1790
+#: kmymoney/views/khomeview_p.h:1811
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Aktibo eta pasibo likidoak"
 
-#: kmymoney/views/khomeview_p.h:1795
+#: kmymoney/views/khomeview_p.h:1816
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Aktibo likidoak"
 
-#: kmymoney/views/khomeview_p.h:1798
+#: kmymoney/views/khomeview_p.h:1819
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Pasibo likidoetarako transferentziak"
 
-#: kmymoney/views/khomeview_p.h:1801
+#: kmymoney/views/khomeview_p.h:1822
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Pasibo likidoak"
 
-#: kmymoney/views/khomeview_p.h:1804
+#: kmymoney/views/khomeview_p.h:1825
 #, kde-format
 msgid "Other Transfers"
 msgstr "Bestelako transferentziak"
 
-#: kmymoney/views/khomeview_p.h:1847
+#: kmymoney/views/khomeview_p.h:1868
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Kutxako fluxuaren egoera"
 
-#: kmymoney/views/khomeview_p.h:1852
+#: kmymoney/views/khomeview_p.h:1873
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Espero diren aktibo likidoak"
 
-#: kmymoney/views/khomeview_p.h:1855
+#: kmymoney/views/khomeview_p.h:1876
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Espero diren pasibo likidoak"
 
-#: kmymoney/views/khomeview_p.h:1858
+#: kmymoney/views/khomeview_p.h:1879
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Espero diren irabaziak/galerak"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-09 00:56+0000\n"
+"POT-Creation-Date: 2023-01-10 00:56+0000\n"
 "PO-Revision-Date: 2022-08-10 09:37+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -628,10 +628,10 @@ msgid "Backup location:"
 msgstr "Расположение резервных копий:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3598
-#: kmymoney/kmymoney.cpp:3662 kmymoney/kmymoney.cpp:3678
-#: kmymoney/kmymoney.cpp:3684 kmymoney/kmymoney.cpp:3698
-#: kmymoney/kmymoney.cpp:3700
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3600
+#: kmymoney/kmymoney.cpp:3664 kmymoney/kmymoney.cpp:3680
+#: kmymoney/kmymoney.cpp:3686 kmymoney/kmymoney.cpp:3700
+#: kmymoney/kmymoney.cpp:3702
 #, kde-format
 msgid "Backup"
 msgstr "Резервное копирование"
@@ -1030,8 +1030,8 @@ msgstr "Редактор курсов"
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:246
 #: kmymoney/plugins/views/reports/core/listtable.cpp:615
-#: kmymoney/views/khomeview_p.h:607 kmymoney/views/khomeview_p.h:669
-#: kmymoney/views/khomeview_p.h:709 kmymoney/views/newspliteditor.ui:32
+#: kmymoney/views/khomeview_p.h:633 kmymoney/views/khomeview_p.h:695
+#: kmymoney/views/khomeview_p.h:735 kmymoney/views/newspliteditor.ui:32
 #: kmymoney/views/newtransactioneditor.ui:56
 #: kmymoney/views/newtransactionform.ui:145
 #: kmymoney/widgets/ktransactionfilter.cpp:131
@@ -1115,8 +1115,8 @@ msgstr "xxx"
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:120
 #: kmymoney/plugins/views/reports/core/listtable.cpp:613
 #: kmymoney/views/investtransactioneditor.ui:245
-#: kmymoney/views/khomeview_p.h:592 kmymoney/views/khomeview_p.h:654
-#: kmymoney/views/khomeview_p.h:694 kmymoney/views/newtransactioneditor.ui:78
+#: kmymoney/views/khomeview_p.h:618 kmymoney/views/khomeview_p.h:680
+#: kmymoney/views/khomeview_p.h:720 kmymoney/views/newtransactioneditor.ui:78
 #: kmymoney/views/newtransactionform.ui:110
 #: kmymoney/widgets/ktransactionfilter.cpp:122
 #: kmymoney/widgets/ktransactionfilter.ui:138
@@ -2070,7 +2070,7 @@ msgstr "Тип"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:237
 #: kmymoney/views/investtransactioneditor.ui:51
 #: kmymoney/views/investtransactioneditor.ui:221
-#: kmymoney/views/khomeview_p.h:993
+#: kmymoney/views/khomeview_p.h:1016
 #, kde-format
 msgid "Total"
 msgstr "Всего"
@@ -2280,7 +2280,7 @@ msgid "Liability"
 msgstr "Пассив"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:520 kmymoney/kmymoney.cpp:429
-#: kmymoney/models/ledgerfilterbase.cpp:72 kmymoney/views/khomeview_p.h:1753
+#: kmymoney/models/ledgerfilterbase.cpp:72 kmymoney/views/khomeview_p.h:1774
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:379
@@ -4250,8 +4250,8 @@ msgstr "Учтено"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:308
 #: kmymoney/plugins/views/reports/core/listtable.cpp:637
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:969 kmymoney/views/khomeview_p.h:1326
-#: kmymoney/views/khomeview_p.h:1355
+#: kmymoney/views/khomeview_p.h:992 kmymoney/views/khomeview_p.h:1347
+#: kmymoney/views/khomeview_p.h:1376
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -5356,12 +5356,12 @@ msgstr "Удаление операций"
 msgid "Unable to duplicate transaction(s)"
 msgstr "Невозможно дублировать операцию(и)"
 
-#: kmymoney/kmymoney.cpp:2774
+#: kmymoney/kmymoney.cpp:2776
 #, kde-format
 msgid "Unable to modify transaction"
 msgstr "Невозможно изменить операцию"
 
-#: kmymoney/kmymoney.cpp:2866
+#: kmymoney/kmymoney.cpp:2868
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5370,13 +5370,13 @@ msgstr ""
 "Как минимум одна из разбивок выделенных операций была сверена. Изменить "
 "операции?"
 
-#: kmymoney/kmymoney.cpp:2868
+#: kmymoney/kmymoney.cpp:2870
 #, kde-format
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "Операция уже сверена"
 
-#: kmymoney/kmymoney.cpp:2873
+#: kmymoney/kmymoney.cpp:2875
 #, kde-format
 msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
@@ -5385,18 +5385,18 @@ msgstr[1] "Действительно изменить все %1 выбранн�
 msgstr[2] "Действительно изменить все %1 выбранных операций?"
 msgstr[3] "Действительно изменить выбранную операцию?"
 
-#: kmymoney/kmymoney.cpp:2877
+#: kmymoney/kmymoney.cpp:2879
 #, kde-format
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Изменение операции"
 
-#: kmymoney/kmymoney.cpp:2962
+#: kmymoney/kmymoney.cpp:2964
 #, kde-format
 msgid "Unable to accept transaction"
 msgstr "Невозможно принять операцию"
 
-#: kmymoney/kmymoney.cpp:3002
+#: kmymoney/kmymoney.cpp:3004
 #, kde-format
 msgid ""
 "KMyMoney has detected some overdue scheduled transactions for the account <b>"
@@ -5405,12 +5405,12 @@ msgstr ""
 "Обнаружены просроченные запланированные операции по счёту <b>%1</b>. Ввести "
 "эти операции сейчас?"
 
-#: kmymoney/kmymoney.cpp:3005 kmymoney/views/kscheduledview.cpp:134
+#: kmymoney/kmymoney.cpp:3007 kmymoney/views/kscheduledview.cpp:134
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Обнаружены запланированные операции"
 
-#: kmymoney/kmymoney.cpp:3076
+#: kmymoney/kmymoney.cpp:3078
 #, kde-format
 msgid ""
 "<qt>You have closed this account. It remains in the system because you have "
@@ -5423,17 +5423,17 @@ msgstr ""
 "Счёт можно сделать видимым, выбрав пункт <b>Показать все счета</b> в меню "
 "«Вид».</qt>"
 
-#: kmymoney/kmymoney.cpp:3078
+#: kmymoney/kmymoney.cpp:3080
 #, kde-format
 msgid "Information"
 msgstr "Информация"
 
-#: kmymoney/kmymoney.cpp:3182 kmymoney/kmymoney.cpp:3278
+#: kmymoney/kmymoney.cpp:3184 kmymoney/kmymoney.cpp:3280
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "Нет открытого файла KMyMoney"
 
-#: kmymoney/kmymoney.cpp:3215 kmymoney/kmymoney.cpp:3217
+#: kmymoney/kmymoney.cpp:3217 kmymoney/kmymoney.cpp:3219
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1360
 #: kmymoney/plugins/xml/xmlstorage.cpp:407
 #, kde-format
@@ -5441,63 +5441,63 @@ msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Готово."
 
-#: kmymoney/kmymoney.cpp:3282
+#: kmymoney/kmymoney.cpp:3284
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Просмотр персональных данных..."
 
-#: kmymoney/kmymoney.cpp:3289
+#: kmymoney/kmymoney.cpp:3291
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Редактирование персональных данных"
 
-#: kmymoney/kmymoney.cpp:3304
+#: kmymoney/kmymoney.cpp:3306
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Невозможно сохранить данные пользователя: %1"
 
-#: kmymoney/kmymoney.cpp:3312
+#: kmymoney/kmymoney.cpp:3314
 #, kde-format
 msgid "Importing account templates."
 msgstr "Импорт шаблонов счетов."
 
-#: kmymoney/kmymoney.cpp:3326
+#: kmymoney/kmymoney.cpp:3328
 #, kde-format
 msgid "Unable to import template(s)"
 msgstr "Невозможно импортировать шаблон(ы)"
 
-#: kmymoney/kmymoney.cpp:3334
+#: kmymoney/kmymoney.cpp:3336
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Экспорт шаблонов счетов."
 
-#: kmymoney/kmymoney.cpp:3340
+#: kmymoney/kmymoney.cpp:3342
 #, kde-format
 msgid "Save as..."
 msgstr "Сохранить как..."
 
-#: kmymoney/kmymoney.cpp:3341
+#: kmymoney/kmymoney.cpp:3343
 #, kde-format
 msgid "KMyMoney template files (*.kmt);;All files (*)"
 msgstr "Файлы шаблонов KMyMoney (*.kmt);;Все файлы (*)"
 
-#: kmymoney/kmymoney.cpp:3372
+#: kmymoney/kmymoney.cpp:3374
 #, kde-format
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Экспорт шаблона"
 
-#: kmymoney/kmymoney.cpp:3390
+#: kmymoney/kmymoney.cpp:3392
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "Файл с именем <b>%1</b> уже существует. Действительно заменить его?"
 
-#: kmymoney/kmymoney.cpp:3392 kmymoney/plugins/csv/export/csvexporter.cpp:103
+#: kmymoney/kmymoney.cpp:3394 kmymoney/plugins/csv/export/csvexporter.cpp:103
 #, kde-format
 msgid "File already exists"
 msgstr "Файл уже существует"
 
-#: kmymoney/kmymoney.cpp:3504
+#: kmymoney/kmymoney.cpp:3506
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5505,13 +5505,13 @@ msgid ""
 msgstr ""
 "Файл должен быть сохранён перед его резервным копированием. Продолжить?"
 
-#: kmymoney/kmymoney.cpp:3506
+#: kmymoney/kmymoney.cpp:3508
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3523
+#: kmymoney/kmymoney.cpp:3525
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5521,64 +5521,64 @@ msgstr ""
 "поддерживается использование только локальных файлов. Текущий исходный файл: "
 "«%1»."
 
-#: kmymoney/kmymoney.cpp:3525
+#: kmymoney/kmymoney.cpp:3527
 #, kde-format
 msgid "Local files only"
 msgstr "Только локальные файлы"
 
-#: kmymoney/kmymoney.cpp:3564
+#: kmymoney/kmymoney.cpp:3566
 #, kde-format
 msgid "Mounting %1"
 msgstr "Подключение %1"
 
-#: kmymoney/kmymoney.cpp:3598
+#: kmymoney/kmymoney.cpp:3600
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr ""
 "На диске обнаружен созданный сегодня файл резервной копии. Заменить его?"
 
-#: kmymoney/kmymoney.cpp:3598
+#: kmymoney/kmymoney.cpp:3600
 #, kde-format
 msgid "&Replace"
 msgstr "&Заменить"
 
-#: kmymoney/kmymoney.cpp:3604
+#: kmymoney/kmymoney.cpp:3606
 #, kde-format
 msgid "Writing %1"
 msgstr "Запись %1"
 
-#: kmymoney/kmymoney.cpp:3625
+#: kmymoney/kmymoney.cpp:3627
 #, kde-format
 msgid "Unmounting %1"
 msgstr "Отключение %1"
 
-#: kmymoney/kmymoney.cpp:3662
+#: kmymoney/kmymoney.cpp:3664
 #, kde-format
 msgid "Error mounting device"
 msgstr "Ошибка подключения диска"
 
-#: kmymoney/kmymoney.cpp:3677 kmymoney/kmymoney.cpp:3696
+#: kmymoney/kmymoney.cpp:3679 kmymoney/kmymoney.cpp:3698
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Готово"
 
-#: kmymoney/kmymoney.cpp:3678 kmymoney/kmymoney.cpp:3698
+#: kmymoney/kmymoney.cpp:3680 kmymoney/kmymoney.cpp:3700
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Резервное копирование выполнено успешно"
 
-#: kmymoney/kmymoney.cpp:3684
+#: kmymoney/kmymoney.cpp:3686
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Ошибка копирования файла на диск"
 
-#: kmymoney/kmymoney.cpp:3700
+#: kmymoney/kmymoney.cpp:3702
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Ошибка отключения диска"
 
-#: kmymoney/kmymoney.cpp:3747
+#: kmymoney/kmymoney.cpp:3749
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5595,30 +5595,30 @@ msgstr ""
 "Нажмите кнопку «Нет», чтобы оставить начальный остаток %2,\n"
 "Нажмите кнопку «Отмена», чтобы прервать создание счёта."
 
-#: kmymoney/kmymoney.cpp:3757
+#: kmymoney/kmymoney.cpp:3759
 #, fuzzy, kde-format
 #| msgid "Opening balance problem"
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Проблема начального баланса"
 
-#: kmymoney/kmymoney.cpp:3768
+#: kmymoney/kmymoney.cpp:3770
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Невозможно добавить счёт: %1"
 
-#: kmymoney/kmymoney.cpp:3891
+#: kmymoney/kmymoney.cpp:3893
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Выполняется проверка целостности..."
 
-#: kmymoney/kmymoney.cpp:3898
+#: kmymoney/kmymoney.cpp:3900
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Ошибка проверки целостности: %1"
 
-#: kmymoney/kmymoney.cpp:3908
+#: kmymoney/kmymoney.cpp:3910
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5627,7 +5627,7 @@ msgstr ""
 "Проверка целостности не обнаружила никаких проблем в данных. Подробности "
 "представлены ниже."
 
-#: kmymoney/kmymoney.cpp:3910
+#: kmymoney/kmymoney.cpp:3912
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5638,28 +5638,28 @@ msgstr ""
 "Подробности представлены ниже. Несоответствия, которые не могут быть "
 "исправлены автоматически, должны быть исправлены пользователем."
 
-#: kmymoney/kmymoney.cpp:3913
+#: kmymoney/kmymoney.cpp:3915
 #, kde-format
 msgid "Consistency check result"
 msgstr "Результаты проверки целостности"
 
-#: kmymoney/kmymoney.cpp:3979
+#: kmymoney/kmymoney.cpp:3981
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Проверка наличия просроченных платежей..."
 
-#: kmymoney/kmymoney.cpp:4169
+#: kmymoney/kmymoney.cpp:4171
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr "Перед началом импорта выписки необходимо выбрать файл KMyMoney."
 
-#: kmymoney/kmymoney.cpp:4174
+#: kmymoney/kmymoney.cpp:4176
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Импорт выписки через Web Connect"
 
-#: kmymoney/kmymoney.cpp:4186
+#: kmymoney/kmymoney.cpp:4188
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5667,68 +5667,68 @@ msgid ""
 "error: %3"
 msgstr "Невозможно импортировать %1 с помощью модуля %2. Ошибка: %3"
 
-#: kmymoney/kmymoney.cpp:4186 kmymoney/plugins/ofx/import/ofximporter.cpp:1012
+#: kmymoney/kmymoney.cpp:4188 kmymoney/plugins/ofx/import/ofximporter.cpp:1012
 #, kde-format
 msgid "Importing error"
 msgstr "Ошибка импорта"
 
-#: kmymoney/kmymoney.cpp:4213
+#: kmymoney/kmymoney.cpp:4215
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Будут показываться все сообщения."
 
-#: kmymoney/kmymoney.cpp:4213
+#: kmymoney/kmymoney.cpp:4215
 #, kde-format
 msgid "All messages"
 msgstr "Все сообщения"
 
-#: kmymoney/kmymoney.cpp:4249
+#: kmymoney/kmymoney.cpp:4251
 #, kde-format
 msgid "Auto saving..."
 msgstr "Автоматическое сохранение..."
 
-#: kmymoney/kmymoney.cpp:4369
+#: kmymoney/kmymoney.cpp:4371
 #, kde-format
 msgid "Creating new document..."
 msgstr "Создание нового документа..."
 
-#: kmymoney/kmymoney.cpp:4429
+#: kmymoney/kmymoney.cpp:4431
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Невозможно создать новый файл."
 
-#: kmymoney/kmymoney.cpp:4440
+#: kmymoney/kmymoney.cpp:4442
 #, kde-format
 msgid "Open a file."
 msgstr "Открыть файл."
 
-#: kmymoney/kmymoney.cpp:4454
+#: kmymoney/kmymoney.cpp:4456
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 "Невозможно найти модуль, используемый для открытия запоминающего устройства."
 
-#: kmymoney/kmymoney.cpp:4458
+#: kmymoney/kmymoney.cpp:4460
 #, kde-format
 msgid "All files (*)"
 msgstr "Все файлы (*)"
 
-#: kmymoney/kmymoney.cpp:4471
+#: kmymoney/kmymoney.cpp:4473
 #, kde-format
 msgid "Loading file..."
 msgstr "Загрузка файла..."
 
-#: kmymoney/kmymoney.cpp:4477
+#: kmymoney/kmymoney.cpp:4479
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr "<p>Файл <b>%1</b> открыт в другом экземпляре KMyMoney</p>"
 
-#: kmymoney/kmymoney.cpp:4477
+#: kmymoney/kmymoney.cpp:4479
 #, kde-format
 msgid "Duplicate open"
 msgstr "Открыт дубликат"
 
-#: kmymoney/kmymoney.cpp:4484
+#: kmymoney/kmymoney.cpp:4486
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5737,17 +5737,17 @@ msgstr ""
 "<p>Файл <b>%1</b> имеет недопустимое имя или не существует. Откройте другой "
 "файл или создайте новый.</p>"
 
-#: kmymoney/kmymoney.cpp:4484
+#: kmymoney/kmymoney.cpp:4486
 #, kde-format
 msgid "File not found"
 msgstr "Файл не найден"
 
-#: kmymoney/kmymoney.cpp:4511
+#: kmymoney/kmymoney.cpp:4513
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Невозможно открыть запрашиваемый файл."
 
-#: kmymoney/kmymoney.cpp:4517
+#: kmymoney/kmymoney.cpp:4519
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -5756,28 +5756,28 @@ msgstr ""
 "Чтение информации из источника данных невозможно. Проверьте наличие "
 "необходимого модуля в параметрах настройки KMyMoney."
 
-#: kmymoney/kmymoney.cpp:4527
+#: kmymoney/kmymoney.cpp:4529
 #, kde-format
 msgid "Saving file..."
 msgstr "Сохранение файла..."
 
-#: kmymoney/kmymoney.cpp:4539 kmymoney/kmymoney.cpp:4596
+#: kmymoney/kmymoney.cpp:4541 kmymoney/kmymoney.cpp:4598
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Не удалось сохранить запоминающее устройство."
 
-#: kmymoney/kmymoney.cpp:4545
+#: kmymoney/kmymoney.cpp:4547
 #, kde-format
 msgid "Couldn't find suitable plugin to save your storage."
 msgstr ""
 "Невозможно найти модуль, подходящий для сохранения запоминающего устройства."
 
-#: kmymoney/kmymoney.cpp:4551
+#: kmymoney/kmymoney.cpp:4553
 #, kde-format
 msgid "Saving file as...."
 msgstr "Сохранение файла...."
 
-#: kmymoney/kmymoney.cpp:4567
+#: kmymoney/kmymoney.cpp:4569
 #, kde-format
 msgid "Couldn't find any plugin for saving storage."
 msgstr ""
@@ -5984,7 +5984,7 @@ msgstr "Активы и пассивы"
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:64
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1489
+#: kmymoney/views/khomeview_p.h:1510
 #, kde-format
 msgid "Budget"
 msgstr "Бюджет"
@@ -9580,9 +9580,9 @@ msgstr "Тип счёта:"
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:92
-#: kmymoney/views/khomeview_p.h:604 kmymoney/views/khomeview_p.h:666
-#: kmymoney/views/khomeview_p.h:706 kmymoney/views/khomeview_p.h:956
-#: kmymoney/views/khomeview_p.h:1084 kmymoney/views/newtransactioneditor.ui:17
+#: kmymoney/views/khomeview_p.h:630 kmymoney/views/khomeview_p.h:692
+#: kmymoney/views/khomeview_p.h:732 kmymoney/views/khomeview_p.h:979
+#: kmymoney/views/khomeview_p.h:1107 kmymoney/views/newtransactioneditor.ui:17
 #: kmymoney/widgets/ktransactionfilter.cpp:116
 #: kmymoney/widgets/ktransactionfilter.ui:113
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:73
@@ -9924,8 +9924,8 @@ msgstr "Отмените выбор поля примечания."
 #: kmymoney/plugins/views/reports/core/listtable.cpp:683
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:972 kmymoney/views/khomeview_p.h:1329
-#: kmymoney/views/khomeview_p.h:1358
+#: kmymoney/views/khomeview_p.h:995 kmymoney/views/khomeview_p.h:1350
+#: kmymoney/views/khomeview_p.h:1379
 #, kde-format
 msgid "Balance"
 msgstr "Баланс"
@@ -15173,13 +15173,13 @@ msgstr[2] "%1 дней"
 msgstr[3] "%1 день"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:379
-#: kmymoney/views/khomeview_p.h:1153
+#: kmymoney/views/khomeview_p.h:1176
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "Остаток на счёте %1 сегодня ниже минимального остатка в %2."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:384
-#: kmymoney/views/khomeview_p.h:1157
+#: kmymoney/views/khomeview_p.h:1180
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
 msgid_plural ""
@@ -15194,19 +15194,19 @@ msgstr[3] ""
 "Остаток на счёте %2 опустится ниже минимального остатка в %3 через %1 день."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:403
-#: kmymoney/views/khomeview_p.h:1175
+#: kmymoney/views/khomeview_p.h:1198
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "Остаток на счёте %1 сегодня меньше %2."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:408
-#: kmymoney/views/khomeview_p.h:1180
+#: kmymoney/views/khomeview_p.h:1203
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "Остаток на счёте %1 сегодня больше %2."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:415
-#: kmymoney/views/khomeview_p.h:1186
+#: kmymoney/views/khomeview_p.h:1209
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
@@ -15216,7 +15216,7 @@ msgstr[2] "Остаток на счёте %2 опустится ниже %3 че
 msgstr[3] "Остаток на счёте %2 опустится ниже %3 через %1 день."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:422
-#: kmymoney/views/khomeview_p.h:1193
+#: kmymoney/views/khomeview_p.h:1216
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
@@ -15281,7 +15281,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "Для этой диаграммы отсутствуют данные от модуля создания отчётов."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:660
-#: kmymoney/views/khomeview_p.h:523 kmymoney/views/khomeview_p.h:1493
+#: kmymoney/views/khomeview_p.h:527 kmymoney/views/khomeview_p.h:1514
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Включить модуль создания отчётов для просмотра диаграммы."
@@ -16056,7 +16056,7 @@ msgstr "Период"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:171
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
 #: kmymoney/plugins/views/reports/kreportsview_p.h:430
-#: kmymoney/views/khomeview_p.h:1027
+#: kmymoney/views/khomeview_p.h:1050
 #, kde-format
 msgid "Report"
 msgstr "Отчёт"
@@ -16373,7 +16373,7 @@ msgstr "Отчёты"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:51
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:49
-#: kmymoney/views/khomeview_p.h:1029
+#: kmymoney/views/khomeview_p.h:1052
 #, kde-format
 msgid "Comment"
 msgstr "Комментарий"
@@ -16404,7 +16404,7 @@ msgid "Charts"
 msgstr "Диаграммы"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:660
-#: kmymoney/views/khomeview_p.h:1022
+#: kmymoney/views/khomeview_p.h:1045
 #, kde-format
 msgid "Favorite Reports"
 msgstr "Избранные отчёты"
@@ -16449,7 +16449,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Круговая диаграмма доходов и расходов"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:867
-#: kmymoney/views/khomeview_p.h:1465
+#: kmymoney/views/khomeview_p.h:1486
 #, kde-format
 msgid "Net Worth"
 msgstr "Чистый капитал"
@@ -16782,7 +16782,7 @@ msgstr "Закрыть"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:82
 #: kmymoney/plugins/views/reports/reportsview.cpp:118
-#: kmymoney/views/khomeview_p.h:509
+#: kmymoney/views/khomeview_p.h:513
 #, kde-format
 msgid "Net Worth Forecast"
 msgstr "Прогноз показателей чистого капитала"
@@ -19358,91 +19358,91 @@ msgstr ""
 "Чтобы получить сводку о финансовом состоянии, необходимо создать хотя бы "
 "один счёт. До этого вместо сводки будет отображаться страница приветствия."
 
-#: kmymoney/views/khomeview_p.h:449
+#: kmymoney/views/khomeview_p.h:453
 #, kde-format
 msgid "Preferred Accounts"
 msgstr "Предпочтительные счета"
 
-#: kmymoney/views/khomeview_p.h:455 kmymoney/views/khomeview_p.h:457
+#: kmymoney/views/khomeview_p.h:459 kmymoney/views/khomeview_p.h:461
 #, kde-format
 msgid "Payment Accounts"
 msgstr "Платёжные счета"
 
-#: kmymoney/views/khomeview_p.h:579
+#: kmymoney/views/khomeview_p.h:605
 #, kde-format
 msgid "Scheduled Payments"
 msgstr "Запланированные платежи"
 
-#: kmymoney/views/khomeview_p.h:589
+#: kmymoney/views/khomeview_p.h:615
 #, kde-format
 msgid "Overdue payments"
 msgstr "Просроченные платежи"
 
-#: kmymoney/views/khomeview_p.h:595 kmymoney/views/khomeview_p.h:657
-#: kmymoney/views/khomeview_p.h:697
+#: kmymoney/views/khomeview_p.h:621 kmymoney/views/khomeview_p.h:683
+#: kmymoney/views/khomeview_p.h:723
 #, kde-format
 msgid "Next"
 msgstr "Далее"
 
-#: kmymoney/views/khomeview_p.h:598 kmymoney/views/khomeview_p.h:660
-#: kmymoney/views/khomeview_p.h:700
+#: kmymoney/views/khomeview_p.h:624 kmymoney/views/khomeview_p.h:686
+#: kmymoney/views/khomeview_p.h:726
 #, kde-format
 msgid "Skip"
 msgstr "Пропустить"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, ScheduleWizardPage)
-#: kmymoney/views/khomeview_p.h:601 kmymoney/views/khomeview_p.h:663
-#: kmymoney/views/khomeview_p.h:703
+#: kmymoney/views/khomeview_p.h:627 kmymoney/views/khomeview_p.h:689
+#: kmymoney/views/khomeview_p.h:729
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:78
 #: kmymoney/wizards/newloanwizard/schedulewizardpage.ui:6
 #, kde-format
 msgid "Schedule"
 msgstr "График"
 
-#: kmymoney/views/khomeview_p.h:610 kmymoney/views/khomeview_p.h:672
-#: kmymoney/views/khomeview_p.h:712
+#: kmymoney/views/khomeview_p.h:636 kmymoney/views/khomeview_p.h:698
+#: kmymoney/views/khomeview_p.h:738
 #, kde-format
 msgid "Balance after"
 msgstr "Баланс после"
 
-#: kmymoney/views/khomeview_p.h:651
+#: kmymoney/views/khomeview_p.h:677
 #, kde-format
 msgid "Today's due payments"
 msgstr "К оплате сегодня"
 
-#: kmymoney/views/khomeview_p.h:691
+#: kmymoney/views/khomeview_p.h:717
 #, kde-format
 msgid "Future payments"
 msgstr "Ожидаемые платежи"
 
-#: kmymoney/views/khomeview_p.h:779
+#: kmymoney/views/khomeview_p.h:805
 #, kde-format
 msgctxt "Less..."
 msgid "Show fewer schedules on the list"
 msgstr "Показывать меньше графиков в списке"
 
-#: kmymoney/views/khomeview_p.h:781
+#: kmymoney/views/khomeview_p.h:807
 #, kde-format
 msgctxt "More..."
 msgid "Show more schedules on the list"
 msgstr "Показывать больше графиков в списке"
 
-#: kmymoney/views/khomeview_p.h:814
+#: kmymoney/views/khomeview_p.h:837
 #, kde-format
 msgid "Enter schedule"
 msgstr "Ввести график"
 
-#: kmymoney/views/khomeview_p.h:817
+#: kmymoney/views/khomeview_p.h:841
 #, kde-format
 msgid "Skip schedule"
 msgstr "Пропустить график"
 
-#: kmymoney/views/khomeview_p.h:821
+#: kmymoney/views/khomeview_p.h:845
 #, kde-format
 msgid "Edit schedule"
 msgstr "Редактировать график"
 
-#: kmymoney/views/khomeview_p.h:825
+#: kmymoney/views/khomeview_p.h:849
 #, kde-format
 msgid " (%1 payment)"
 msgid_plural " (%1 payments)"
@@ -19451,30 +19451,30 @@ msgstr[1] " (%1 платежа)"
 msgstr[2] " (%1 платежей)"
 msgstr[3] " (%1 платёж)"
 
-#: kmymoney/views/khomeview_p.h:960
+#: kmymoney/views/khomeview_p.h:983
 #, kde-format
 msgctxt "Header not marked"
 msgid "!M"
 msgstr "!О"
 
-#: kmymoney/views/khomeview_p.h:963
+#: kmymoney/views/khomeview_p.h:986
 #, kde-format
 msgctxt "Header cleared"
 msgid "C"
 msgstr "У"
 
-#: kmymoney/views/khomeview_p.h:966
+#: kmymoney/views/khomeview_p.h:989
 #, kde-format
 msgctxt "Header not reconciled"
 msgid "!R"
 msgstr "!С"
 
-#: kmymoney/views/khomeview_p.h:978
+#: kmymoney/views/khomeview_p.h:1001
 #, kde-format
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "Минимальный баланс / максимальный кредит"
 
-#: kmymoney/views/khomeview_p.h:1078
+#: kmymoney/views/khomeview_p.h:1101
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 Day Forecast"
@@ -19484,7 +19484,7 @@ msgstr[1] "%1-дневный прогноз"
 msgstr[2] "%1-дневный прогноз"
 msgstr[3] "%1-дневный прогноз"
 
-#: kmymoney/views/khomeview_p.h:1089
+#: kmymoney/views/khomeview_p.h:1112
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 day"
@@ -19494,97 +19494,97 @@ msgstr[1] "%1 дня"
 msgstr[2] "%1 дней"
 msgstr[3] "%1 день"
 
-#: kmymoney/views/khomeview_p.h:1299
+#: kmymoney/views/khomeview_p.h:1320
 #, kde-format
 msgid "Assets and Liabilities Summary"
 msgstr "Сводка по активам и пассивам"
 
-#: kmymoney/views/khomeview_p.h:1313
+#: kmymoney/views/khomeview_p.h:1334
 #, kde-format
 msgid "Asset Accounts"
 msgstr "Активные счета"
 
-#: kmymoney/views/khomeview_p.h:1342
+#: kmymoney/views/khomeview_p.h:1363
 #, kde-format
 msgid "Liability Accounts"
 msgstr "Пассивные счета"
 
-#: kmymoney/views/khomeview_p.h:1444
+#: kmymoney/views/khomeview_p.h:1465
 #, kde-format
 msgid "Total Assets"
 msgstr "Всего активов"
 
-#: kmymoney/views/khomeview_p.h:1454
+#: kmymoney/views/khomeview_p.h:1475
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Всего пассивов"
 
-#: kmymoney/views/khomeview_p.h:1743
+#: kmymoney/views/khomeview_p.h:1764
 #, kde-format
 msgid "Cash Flow Summary"
 msgstr "Сводка по наличным средствам"
 
-#: kmymoney/views/khomeview_p.h:1748
+#: kmymoney/views/khomeview_p.h:1769
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Доходы и расходы в этом месяце"
 
-#: kmymoney/views/khomeview_p.h:1756
+#: kmymoney/views/khomeview_p.h:1777
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Планируемые доходы"
 
-#: kmymoney/views/khomeview_p.h:1759
+#: kmymoney/views/khomeview_p.h:1780
 #, kde-format
 msgid "Expenses"
 msgstr "Расходы"
 
-#: kmymoney/views/khomeview_p.h:1762
+#: kmymoney/views/khomeview_p.h:1783
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Планируемые расходы"
 
-#: kmymoney/views/khomeview_p.h:1790
+#: kmymoney/views/khomeview_p.h:1811
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Ликвидные активы и пассивы"
 
-#: kmymoney/views/khomeview_p.h:1795
+#: kmymoney/views/khomeview_p.h:1816
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Ликвидные активы"
 
-#: kmymoney/views/khomeview_p.h:1798
+#: kmymoney/views/khomeview_p.h:1819
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Переводы в ликвидные пассивы"
 
-#: kmymoney/views/khomeview_p.h:1801
+#: kmymoney/views/khomeview_p.h:1822
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Ликвидные пассивы"
 
-#: kmymoney/views/khomeview_p.h:1804
+#: kmymoney/views/khomeview_p.h:1825
 #, kde-format
 msgid "Other Transfers"
 msgstr "Другие переводы"
 
-#: kmymoney/views/khomeview_p.h:1847
+#: kmymoney/views/khomeview_p.h:1868
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Состояние наличных средств"
 
-#: kmymoney/views/khomeview_p.h:1852
+#: kmymoney/views/khomeview_p.h:1873
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Ожидаемые ликвидные активы"
 
-#: kmymoney/views/khomeview_p.h:1855
+#: kmymoney/views/khomeview_p.h:1876
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Ожидаемые ликвидные пассивы"
 
-#: kmymoney/views/khomeview_p.h:1858
+#: kmymoney/views/khomeview_p.h:1879
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Ожидаемая прибыль/убыток"
