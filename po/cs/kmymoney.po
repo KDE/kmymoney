@@ -19796,11 +19796,10 @@ msgid "Cleared: %1"
 msgstr "Ověřeno: %1"
 
 #: kmymoney/views/ledgerviewpage_p.h:141
-#, fuzzy, kde-format
-#| msgid "%1 of %2"
+#, kde-format
 msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
 msgid "%1 of %2: %3"
-msgstr "%1 z %2"
+msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:146
 #, kde-format
