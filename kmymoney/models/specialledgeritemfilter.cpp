@@ -177,6 +177,29 @@ SpecialLedgerItemFilter::SpecialLedgerItemFilter(QObject* parent)
         invalidateFilter();
         d->recalculateBalances();
     });
+
+    connect(MyMoneyFile::instance()->journalModel(), &JournalModel::balanceChanged, this, [&](const QString& accountId) {
+        Q_D(SpecialLedgerItemFilter);
+        const auto model = sourceModel();
+        // in case we have a model assigned and
+        // then we check if accountId is referring this account
+        if (model) {
+            const auto rows = model->rowCount();
+            // we scan the rows for the first one containing a split
+            // referencing an account to check if it is ours
+            for (int row = 0; row < rows; ++row) {
+                const auto idx = model->index(row, 0);
+                if (!idx.data(eMyMoney::Model::IdRole).toString().isEmpty() && d->isJournalModel(idx)) {
+                    if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == accountId) {
+                        forceReload();
+                    }
+                    // we found an account id in the ledger
+                    // so we can stop scanning
+                    break;
+                }
+            }
+        }
+    });
 }
 
 void SpecialLedgerItemFilter::setSourceModel(QAbstractItemModel* model)
