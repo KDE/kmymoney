@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:56+0000\n"
-"PO-Revision-Date: 2023-01-01 19:36+0100\n"
+"PO-Revision-Date: 2023-01-10 07:03+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -29,7 +29,7 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -20622,11 +20622,10 @@ msgid "Cleared: %1"
 msgstr "Effacé : %1"
 
 #: kmymoney/views/ledgerviewpage_p.h:141
-#, fuzzy, kde-format
-#| msgid "%1 of %2"
+#, kde-format
 msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
 msgid "%1 of %2: %3"
-msgstr "%1 de %2"
+msgstr "%1 de %2 : %3"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
 #, kde-format
