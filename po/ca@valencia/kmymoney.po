@@ -2312,7 +2312,7 @@ msgid ""
 "Please fill in this field."
 msgstr ""
 "No s'ha especificat cap nom.\n"
-"Ompliu-lo en este camp."
+"Empleneu-lo en este camp."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:693
 #, kde-format
@@ -24114,7 +24114,7 @@ msgid ""
 msgstr ""
 "L'assistent per al préstec no pot calcular alhora dos valors diferents per "
 "al vostre préstec. Introduïu ací un valor per a %1 o torneu arrere fins a la "
-"pàgina on es definix la dada que es calcularà i ompliu-la amb algun valor."
+"pàgina on es definix la dada que es calcularà i empleneu-la amb algun valor."
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:107
 #, kde-format

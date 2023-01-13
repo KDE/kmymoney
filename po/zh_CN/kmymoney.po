@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:56+0000\n"
-"PO-Revision-Date: 2023-01-02 07:11\n"
+"PO-Revision-Date: 2023-01-12 10:30\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -4314,7 +4314,7 @@ msgstr ""
 #: kmymoney/kcreditswindow.cpp:41
 #, kde-format
 msgid "(c) 2000-2022 The KMyMoney development team"
-msgstr ""
+msgstr "(c) 2000-2022 KMyMoney开发团队"
 
 #: kmymoney/kcreditswindow.cpp:44
 #, kde-format
@@ -19703,11 +19703,10 @@ msgid "Cleared: %1"
 msgstr "已结清：%1"
 
 #: kmymoney/views/ledgerviewpage_p.h:141
-#, fuzzy, kde-format
-#| msgid "%1 of %2"
+#, kde-format
 msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
 msgid "%1 of %2: %3"
-msgstr "%1 of %2"
+msgstr ""
 
 #: kmymoney/views/ledgerviewpage_p.h:146
 #, kde-format
