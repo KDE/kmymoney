@@ -28,7 +28,6 @@
 #include <KShell>
 #include <KConfigGroup>
 #include <KEncodingProber>
-#include <KIO/Scheduler>
 #include <KIO/Job>
 #include <KJobWidgets>
 

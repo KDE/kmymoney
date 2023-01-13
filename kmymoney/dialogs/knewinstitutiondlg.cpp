@@ -20,7 +20,6 @@
 
 #include <KIO/FavIconRequestJob>
 #include <KIO/Job>
-#include <KIO/Scheduler>
 #include <KLineEdit>
 #include <KLocalizedString>
 #include <KMessageBox>
