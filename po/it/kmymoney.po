@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 11:31+0000\n"
+"POT-Creation-Date: 2023-01-14 16:34+0000\n"
 "PO-Revision-Date: 2022-12-16 10:53+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -6902,942 +6902,942 @@ msgctxt ""
 msgid "Finished: %1 %2"
 msgstr "Finito: %1 %2"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3167
+#: kmymoney/mymoney/mymoneyfile.cpp:3168
 #, kde-format
 msgid "Austrian Schilling"
 msgstr "Scellino austriaco"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3168
+#: kmymoney/mymoney/mymoneyfile.cpp:3170
 #, kde-format
 msgid "German Mark"
 msgstr "Marco tedesco"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3169
+#: kmymoney/mymoney/mymoneyfile.cpp:3172
 #, kde-format
 msgid "French Franc"
 msgstr "Franco francese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3170
+#: kmymoney/mymoney/mymoneyfile.cpp:3174
 #, kde-format
 msgid "Italian Lira"
 msgstr "Lira italiana"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3171
+#: kmymoney/mymoney/mymoneyfile.cpp:3176
 #, kde-format
 msgid "Spanish Peseta"
 msgstr "Peseta spagnola"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3172
+#: kmymoney/mymoney/mymoneyfile.cpp:3178
 #, kde-format
 msgid "Dutch Guilder"
 msgstr "Guilder olandese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3173
+#: kmymoney/mymoney/mymoneyfile.cpp:3180
 #, kde-format
 msgid "Belgian Franc"
 msgstr "Franco belga"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3174
+#: kmymoney/mymoney/mymoneyfile.cpp:3182
 #, kde-format
 msgid "Luxembourg Franc"
 msgstr "Franco lussemburghese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3175
+#: kmymoney/mymoney/mymoneyfile.cpp:3184
 #, kde-format
 msgid "Portuguese Escudo"
 msgstr "Escudo portoghese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3176
+#: kmymoney/mymoney/mymoneyfile.cpp:3186
 #, kde-format
 msgid "Irish Pound"
 msgstr "Sterlina irlandese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3177
+#: kmymoney/mymoney/mymoneyfile.cpp:3188
 #, kde-format
 msgid "Finnish Markka"
 msgstr "Markka finlandese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3178
+#: kmymoney/mymoney/mymoneyfile.cpp:3190
 #, kde-format
 msgid "Greek Drachma"
 msgstr "Dracma greca"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3181
+#: kmymoney/mymoney/mymoneyfile.cpp:3194
 #, kde-format
 msgid "Bulgarian Lev"
 msgstr "Lev bulgaro"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3183
+#: kmymoney/mymoney/mymoneyfile.cpp:3197
 #, kde-format
 msgid "Romanian Leu"
 msgstr "Leu romeno"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3185
+#: kmymoney/mymoney/mymoneyfile.cpp:3200
 #, kde-format
 msgid "Russian Ruble (old)"
 msgstr "Rublo russo (vecchio)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3187
+#: kmymoney/mymoney/mymoneyfile.cpp:3203
 #, kde-format
 msgid "Slovenian Tolar"
 msgstr "Tallero sloveno"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3190
+#: kmymoney/mymoney/mymoneyfile.cpp:3207
 #, kde-format
 msgid "Turkish Lira (old)"
 msgstr "Lira turca (vecchia)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3193
+#: kmymoney/mymoney/mymoneyfile.cpp:3211
 #, kde-format
 msgid "Maltese Lira"
 msgstr "Lira maltese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3194
+#: kmymoney/mymoney/mymoneyfile.cpp:3213
 #, kde-format
 msgid "Cyprus Pound"
 msgstr "Sterlina di Cipro"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3197
+#: kmymoney/mymoney/mymoneyfile.cpp:3217
 #, kde-format
 msgid "Slovak Koruna"
 msgstr "Corona slovacca"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3200 kmymoney/mymoney/mymoneyfile.cpp:3320
+#: kmymoney/mymoney/mymoneyfile.cpp:3221 kmymoney/mymoney/mymoneyfile.cpp:3349
 #, kde-format
 msgid "Mozambique Metical"
 msgstr "Metical del Mozambico"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3203 kmymoney/mymoney/mymoneyfile.cpp:3231
+#: kmymoney/mymoney/mymoneyfile.cpp:3225 kmymoney/mymoney/mymoneyfile.cpp:3261
 #, kde-format
 msgid "Azerbaijani Manat"
 msgstr "Manat azerbaigiano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3206
+#: kmymoney/mymoney/mymoneyfile.cpp:3229
 #, kde-format
 msgid "Lithuanian Litas"
 msgstr "Litas lituano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3209
+#: kmymoney/mymoney/mymoneyfile.cpp:3233
 #, kde-format
 msgid "Belarusian Ruble (old)"
 msgstr "Rublo bielorusso (vecchio)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3212
+#: kmymoney/mymoney/mymoneyfile.cpp:3237
 #, kde-format
 msgid "Zambian Kwacha (old)"
 msgstr "Kwacha zambiano (vecchio)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3221
-#, kde-format
-msgid "Afghanistan Afghani"
-msgstr "Afghani afghanistano"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3222
-#, kde-format
-msgid "Albanian Lek"
-msgstr "Lek albanese"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3223
-#, kde-format
-msgid "Netherland Antillian Guilder"
-msgstr "Guilder delle Antille Olandesi"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3224
-#, kde-format
-msgid "Algerian Dinar"
-msgstr "Dinaro algerino"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3225
-#, kde-format
-msgid "Andorran Franc"
-msgstr "Franco di Andorra"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3226
-#, kde-format
-msgid "Andorran Peseta"
-msgstr "Peseta di Andorra"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3227
-#, kde-format
-msgid "Angolan Kwanza"
-msgstr "Kwanza angolano"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3228
-#, kde-format
-msgid "Argentine Peso"
-msgstr "Peso argentino"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3229
-#, kde-format
-msgid "Aruban Florin"
-msgstr "Fiorino Aruban"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3230
-#, kde-format
-msgid "Australian Dollar"
-msgstr "Dollaro australiano"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3232
-#, kde-format
-msgid "Bahamian Dollar"
-msgstr "Dollaro bahamense"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3233
-#, kde-format
-msgid "Bahraini Dinar"
-msgstr "Dinaro bahrainiano"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3234
-#, kde-format
-msgid "Bangladeshi Taka"
-msgstr "Taka del Bangladesh"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3235
-#, kde-format
-msgid "Barbados Dollar"
-msgstr "Dollaro delle Barbados"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3236
-#, kde-format
-msgid "Bitcoin"
-msgstr "Bitcoin"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3237
-#, kde-format
-msgid "Belarusian Ruble"
-msgstr "Rublo bielorusso"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3238
-#, kde-format
-msgid "Belize Dollar"
-msgstr "Dollaro del Belize"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3239
-#, kde-format
-msgid "Bermudian Dollar"
-msgstr "Dollaro delle Bermuda"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3240
-#, kde-format
-msgid "Bhutan Ngultrum"
-msgstr "Ngultrum del Bhutan"
-
 #: kmymoney/mymoney/mymoneyfile.cpp:3241
-#, kde-format
-msgid "Bolivian Boliviano"
-msgstr "Boliviano della Bolivia"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3242
-#, kde-format
-msgid "Bosnian Convertible Mark"
-msgstr "Valuta convertibile bosniaca"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3243
-#, kde-format
-msgid "Botswana Pula"
-msgstr "Pula del Botswana"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3244
-#, kde-format
-msgid "Brazilian Real"
-msgstr "Real brasiliano"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3245
-#, kde-format
-msgid "British Pound"
-msgstr "Sterlina britannica"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3246
-#, kde-format
-msgid "Brunei Dollar"
-msgstr "Dollaro del Brunei"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3247
-#, kde-format
-msgid "Bulgarian Lev (new)"
-msgstr "Lev bulgaro (nuovo)"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3248
-#, kde-format
-msgid "Burundi Franc"
-msgstr "Franco del Burundi"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3249
-#, kde-format
-msgid "CFA Franc BEAC"
-msgstr "Franco BEAC del CFA"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3250
-#, kde-format
-msgid "CFA Franc BCEAO"
-msgstr "Franco BCEAO del CFA"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3251
-#, kde-format
-msgid "CFP Franc Pacifique"
-msgstr "Franco CFP del Pacifico"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3252
-#, kde-format
-msgid "Cambodia Riel"
-msgstr "Riel cambogiano"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3253
-#, kde-format
-msgid "Canadian Dollar"
-msgstr "Dollaro canadese"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3254
-#, kde-format
-msgid "Cape Verde Escudo"
-msgstr "Scudo di Capo Verde"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3255
-#, kde-format
-msgid "Cayman Islands Dollar"
-msgstr "Dollaro delle Isole Cayman"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3256
-#, kde-format
-msgid "Chilean Peso"
-msgstr "Peso cileno"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3257
-#, kde-format
-msgid "Chinese Yuan Renminbi"
-msgstr "Yuan Renminbi cinese"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3258
-#, kde-format
-msgid "Colombian Peso"
-msgstr "Peso colombiano"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3259
-#, kde-format
-msgid "Comoros Franc"
-msgstr "Franco delle Comore"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3260
-#, kde-format
-msgid "Costa Rican Colon"
-msgstr "Colon della Costa Rica"
-
-#: kmymoney/mymoney/mymoneyfile.cpp:3261
 #, kde-format
 msgid "Croatian Kuna"
 msgstr "Kuna croata"
 
+#: kmymoney/mymoney/mymoneyfile.cpp:3251
+#, kde-format
+msgid "Afghanistan Afghani"
+msgstr "Afghani afghanistano"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3252
+#, kde-format
+msgid "Albanian Lek"
+msgstr "Lek albanese"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3253
+#, kde-format
+msgid "Netherland Antillian Guilder"
+msgstr "Guilder delle Antille Olandesi"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3254
+#, kde-format
+msgid "Algerian Dinar"
+msgstr "Dinaro algerino"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3255
+#, kde-format
+msgid "Andorran Franc"
+msgstr "Franco di Andorra"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3256
+#, kde-format
+msgid "Andorran Peseta"
+msgstr "Peseta di Andorra"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3257
+#, kde-format
+msgid "Angolan Kwanza"
+msgstr "Kwanza angolano"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3258
+#, kde-format
+msgid "Argentine Peso"
+msgstr "Peso argentino"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3259
+#, kde-format
+msgid "Aruban Florin"
+msgstr "Fiorino Aruban"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3260
+#, kde-format
+msgid "Australian Dollar"
+msgstr "Dollaro australiano"
+
 #: kmymoney/mymoney/mymoneyfile.cpp:3262
+#, kde-format
+msgid "Bahamian Dollar"
+msgstr "Dollaro bahamense"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3263
+#, kde-format
+msgid "Bahraini Dinar"
+msgstr "Dinaro bahrainiano"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3264
+#, kde-format
+msgid "Bangladeshi Taka"
+msgstr "Taka del Bangladesh"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3265
+#, kde-format
+msgid "Barbados Dollar"
+msgstr "Dollaro delle Barbados"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3266
+#, kde-format
+msgid "Bitcoin"
+msgstr "Bitcoin"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3267
+#, kde-format
+msgid "Belarusian Ruble"
+msgstr "Rublo bielorusso"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3268
+#, kde-format
+msgid "Belize Dollar"
+msgstr "Dollaro del Belize"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3269
+#, kde-format
+msgid "Bermudian Dollar"
+msgstr "Dollaro delle Bermuda"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3270
+#, kde-format
+msgid "Bhutan Ngultrum"
+msgstr "Ngultrum del Bhutan"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3271
+#, kde-format
+msgid "Bolivian Boliviano"
+msgstr "Boliviano della Bolivia"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3272
+#, kde-format
+msgid "Bosnian Convertible Mark"
+msgstr "Valuta convertibile bosniaca"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3273
+#, kde-format
+msgid "Botswana Pula"
+msgstr "Pula del Botswana"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3274
+#, kde-format
+msgid "Brazilian Real"
+msgstr "Real brasiliano"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3275
+#, kde-format
+msgid "British Pound"
+msgstr "Sterlina britannica"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3276
+#, kde-format
+msgid "Brunei Dollar"
+msgstr "Dollaro del Brunei"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3277
+#, kde-format
+msgid "Bulgarian Lev (new)"
+msgstr "Lev bulgaro (nuovo)"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3278
+#, kde-format
+msgid "Burundi Franc"
+msgstr "Franco del Burundi"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3279
+#, kde-format
+msgid "CFA Franc BEAC"
+msgstr "Franco BEAC del CFA"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3280
+#, kde-format
+msgid "CFA Franc BCEAO"
+msgstr "Franco BCEAO del CFA"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3281
+#, kde-format
+msgid "CFP Franc Pacifique"
+msgstr "Franco CFP del Pacifico"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3282
+#, kde-format
+msgid "Cambodia Riel"
+msgstr "Riel cambogiano"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3283
+#, kde-format
+msgid "Canadian Dollar"
+msgstr "Dollaro canadese"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3284
+#, kde-format
+msgid "Cape Verde Escudo"
+msgstr "Scudo di Capo Verde"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3285
+#, kde-format
+msgid "Cayman Islands Dollar"
+msgstr "Dollaro delle Isole Cayman"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3286
+#, kde-format
+msgid "Chilean Peso"
+msgstr "Peso cileno"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3287
+#, kde-format
+msgid "Chinese Yuan Renminbi"
+msgstr "Yuan Renminbi cinese"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3288
+#, kde-format
+msgid "Colombian Peso"
+msgstr "Peso colombiano"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3289
+#, kde-format
+msgid "Comoros Franc"
+msgstr "Franco delle Comore"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3290
+#, kde-format
+msgid "Costa Rican Colon"
+msgstr "Colon della Costa Rica"
+
+#: kmymoney/mymoney/mymoneyfile.cpp:3291
 #, kde-format
 msgid "Cuban Peso"
 msgstr "Peso cubano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3263
+#: kmymoney/mymoney/mymoneyfile.cpp:3292
 #, kde-format
 msgid "Cuban Convertible Peso"
 msgstr "Peso convertibile cubano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3264
+#: kmymoney/mymoney/mymoneyfile.cpp:3293
 #, kde-format
 msgid "Czech Koruna"
 msgstr "Corona ceca"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3265
+#: kmymoney/mymoney/mymoneyfile.cpp:3294
 #, kde-format
 msgid "Danish Krone"
 msgstr "Corona danese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3266
+#: kmymoney/mymoney/mymoneyfile.cpp:3295
 #, kde-format
 msgid "Djibouti Franc"
 msgstr "Franco Djibouti"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3267
+#: kmymoney/mymoney/mymoneyfile.cpp:3296
 #, kde-format
 msgid "Dominican Peso"
 msgstr "Peso dominicano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3268
+#: kmymoney/mymoney/mymoneyfile.cpp:3297
 #, kde-format
 msgid "East Caribbean Dollar"
 msgstr "Dollaro dei Caraibi dell'Est"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3269
+#: kmymoney/mymoney/mymoneyfile.cpp:3298
 #, kde-format
 msgid "Egyptian Pound"
 msgstr "Sterlina egiziana"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3270
+#: kmymoney/mymoney/mymoneyfile.cpp:3299
 #, kde-format
 msgid "El Salvador Colon"
 msgstr "Colon di El Salvador"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3271
+#: kmymoney/mymoney/mymoneyfile.cpp:3300
 #, kde-format
 msgid "Eritrean Nakfa"
 msgstr "Nakfa dell'Eritrea"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3272
+#: kmymoney/mymoney/mymoneyfile.cpp:3301
 #, kde-format
 msgid "Estonian Kroon"
 msgstr "Corona estone"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3273
+#: kmymoney/mymoney/mymoneyfile.cpp:3302
 #, kde-format
 msgid "Ethiopian Birr"
 msgstr "Birr etiope"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3274
+#: kmymoney/mymoney/mymoneyfile.cpp:3303
 #, kde-format
 msgid "Euro"
 msgstr "Euro"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3275
+#: kmymoney/mymoney/mymoneyfile.cpp:3304
 #, kde-format
 msgid "Falkland Islands Pound"
 msgstr "Sterlina delle Isole Falkland"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3276
+#: kmymoney/mymoney/mymoneyfile.cpp:3305
 #, kde-format
 msgid "Fiji Dollar"
 msgstr "Dollaro delle Fiji"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3277
+#: kmymoney/mymoney/mymoneyfile.cpp:3306
 #, kde-format
 msgid "Gambian Dalasi"
 msgstr "Dalasi del Gambia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3278
+#: kmymoney/mymoney/mymoneyfile.cpp:3307
 #, kde-format
 msgid "Georgian Lari"
 msgstr "Lari georgiano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3279
+#: kmymoney/mymoney/mymoneyfile.cpp:3308
 #, kde-format
 msgid "Ghanaian Cedi"
 msgstr "Cedi ghanese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3280
+#: kmymoney/mymoney/mymoneyfile.cpp:3309
 #, kde-format
 msgid "Gibraltar Pound"
 msgstr "Sterlina di Gibilterra"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3281
+#: kmymoney/mymoney/mymoneyfile.cpp:3310
 #, kde-format
 msgid "Guatemalan Quetzal"
 msgstr "Quetzal guatemalteco"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3282
+#: kmymoney/mymoney/mymoneyfile.cpp:3311
 #, kde-format
 msgid "Guinea-Bissau Peso"
 msgstr "Peso della Guinea-Bissau"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3283
+#: kmymoney/mymoney/mymoneyfile.cpp:3312
 #, kde-format
 msgid "Guyanan Dollar"
 msgstr "Dollaro della Guyana"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3284
+#: kmymoney/mymoney/mymoneyfile.cpp:3313
 #, kde-format
 msgid "Haitian Gourde"
 msgstr "Gourde haitiano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3285
+#: kmymoney/mymoney/mymoneyfile.cpp:3314
 #, kde-format
 msgid "Honduran Lempira"
 msgstr "Lempira dell'Honduras"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3286
+#: kmymoney/mymoney/mymoneyfile.cpp:3315
 #, kde-format
 msgid "Hong Kong Dollar"
 msgstr "Dollaro di Hong Kong"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3287
+#: kmymoney/mymoney/mymoneyfile.cpp:3316
 #, kde-format
 msgid "Hungarian Forint"
 msgstr "Fiorino ungherese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3288
+#: kmymoney/mymoney/mymoneyfile.cpp:3317
 #, kde-format
 msgid "Iceland Krona"
 msgstr "Corona islandese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3289
+#: kmymoney/mymoney/mymoneyfile.cpp:3318
 #, kde-format
 msgid "Indian Rupee"
 msgstr "Rupia indiana"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3290
+#: kmymoney/mymoney/mymoneyfile.cpp:3319
 #, kde-format
 msgid "Indonesian Rupiah"
 msgstr "Rupiah indonesiana"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3291
+#: kmymoney/mymoney/mymoneyfile.cpp:3320
 #, kde-format
 msgid "Iranian Rial"
 msgstr "Real iraniano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3292
+#: kmymoney/mymoney/mymoneyfile.cpp:3321
 #, kde-format
 msgid "Iraqi Dinar"
 msgstr "Dinaro iracheno"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3293
+#: kmymoney/mymoney/mymoneyfile.cpp:3322
 #, kde-format
 msgid "Israeli New Shekel"
 msgstr "Nuovo Shekel israeliano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3294
+#: kmymoney/mymoney/mymoneyfile.cpp:3323
 #, kde-format
 msgid "Jamaican Dollar"
 msgstr "Dollaro giamaicano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3295
+#: kmymoney/mymoney/mymoneyfile.cpp:3324
 #, kde-format
 msgid "Japanese Yen"
 msgstr "Yen giapponese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3296
+#: kmymoney/mymoney/mymoneyfile.cpp:3325
 #, kde-format
 msgid "Jordanian Dinar"
 msgstr "Dinaro giordano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3297
+#: kmymoney/mymoney/mymoneyfile.cpp:3326
 #, kde-format
 msgid "Kazakhstan Tenge"
 msgstr "Tenge del Kazakistan"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3298
+#: kmymoney/mymoney/mymoneyfile.cpp:3327
 #, kde-format
 msgid "Kenyan Shilling"
 msgstr "Scellino keniota"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3299
+#: kmymoney/mymoney/mymoneyfile.cpp:3328
 #, kde-format
 msgid "Kuwaiti Dinar"
 msgstr "Dinaro kuwaitiano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3300
+#: kmymoney/mymoney/mymoneyfile.cpp:3329
 #, kde-format
 msgid "Kyrgyzstan Som"
 msgstr "Som del Kyrgyzstan"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3301
+#: kmymoney/mymoney/mymoneyfile.cpp:3330
 #, kde-format
 msgid "Laos Kip"
 msgstr "Kip del Laos"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3302
+#: kmymoney/mymoney/mymoneyfile.cpp:3331
 #, kde-format
 msgid "Latvian Lats"
 msgstr "Lats lettone"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3303
+#: kmymoney/mymoney/mymoneyfile.cpp:3332
 #, kde-format
 msgid "Lebanese Pound"
 msgstr "Sterlina libanese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3304
+#: kmymoney/mymoney/mymoneyfile.cpp:3333
 #, kde-format
 msgid "Lesotho Loti"
 msgstr "Loti del Lesotho"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3305
+#: kmymoney/mymoney/mymoneyfile.cpp:3334
 #, kde-format
 msgid "Liberian Dollar"
 msgstr "Dollaro liberiano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3306
+#: kmymoney/mymoney/mymoneyfile.cpp:3335
 #, kde-format
 msgid "Libyan Dinar"
 msgstr "Dinaro libico"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3307
+#: kmymoney/mymoney/mymoneyfile.cpp:3336
 #, kde-format
 msgid "Macau Pataca"
 msgstr "Pataca di Macau"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3308
+#: kmymoney/mymoney/mymoneyfile.cpp:3337
 #, kde-format
 msgid "Macedonian Denar"
 msgstr "Dinaro macedone"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3309
+#: kmymoney/mymoney/mymoneyfile.cpp:3338
 #, kde-format
 msgid "Malagasy Franc"
 msgstr "Franco di Malagasy"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3310
+#: kmymoney/mymoney/mymoneyfile.cpp:3339
 #, kde-format
 msgid "Malawi Kwacha"
 msgstr "Kwacha di Malawi"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3311
+#: kmymoney/mymoney/mymoneyfile.cpp:3340
 #, kde-format
 msgid "Malaysian Ringgit"
 msgstr "Ringgit malese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3312
+#: kmymoney/mymoney/mymoneyfile.cpp:3341
 #, kde-format
 msgid "Maldive Rufiyaa"
 msgstr "Rufiyaa delle Maldive"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3313
+#: kmymoney/mymoney/mymoneyfile.cpp:3342
 #, kde-format
 msgid "Mali Republic Franc"
 msgstr "Franco della Repubblica di Mali"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3314
+#: kmymoney/mymoney/mymoneyfile.cpp:3343
 #, kde-format
 msgid "Mauritanian Ouguiya"
 msgstr "Ouguiya mauritano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3315
+#: kmymoney/mymoney/mymoneyfile.cpp:3344
 #, kde-format
 msgid "Mauritius Rupee"
 msgstr "Rupia delle Mauritius"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3316
+#: kmymoney/mymoney/mymoneyfile.cpp:3345
 #, kde-format
 msgid "Mexican Peso"
 msgstr "Peso messicano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3317
+#: kmymoney/mymoney/mymoneyfile.cpp:3346
 #, kde-format
 msgid "Moldavian Leu"
 msgstr "Leu moldavo"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3318
+#: kmymoney/mymoney/mymoneyfile.cpp:3347
 #, kde-format
 msgid "Mongolian Tugrik"
 msgstr "Tugrik mongolo"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3319
+#: kmymoney/mymoney/mymoneyfile.cpp:3348
 #, kde-format
 msgid "Moroccan Dirham"
 msgstr "Dirham marocchino"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3321
+#: kmymoney/mymoney/mymoneyfile.cpp:3350
 #, kde-format
 msgid "Myanmar Kyat"
 msgstr "Kyat di Myanmar"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3322
+#: kmymoney/mymoney/mymoneyfile.cpp:3351
 #, kde-format
 msgid "Namibian Dollar"
 msgstr "Dollaro della Namibia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3323
+#: kmymoney/mymoney/mymoneyfile.cpp:3352
 #, kde-format
 msgid "Nepalese Rupee"
 msgstr "Rupia nepalese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3324
+#: kmymoney/mymoney/mymoneyfile.cpp:3353
 #, kde-format
 msgid "New Zealand Dollar"
 msgstr "Dollaro neozelandese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3325
+#: kmymoney/mymoney/mymoneyfile.cpp:3354
 #, kde-format
 msgid "Nicaraguan Cordoba Oro"
 msgstr "Cordoba d'oro nicaraguense"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3326
+#: kmymoney/mymoney/mymoneyfile.cpp:3355
 #, kde-format
 msgid "Nigerian Naira"
 msgstr "Naira nigeriano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3327
+#: kmymoney/mymoney/mymoneyfile.cpp:3356
 #, kde-format
 msgid "North Korean Won"
 msgstr "Won della Nord Corea"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3328
+#: kmymoney/mymoney/mymoneyfile.cpp:3357
 #, kde-format
 msgid "Norwegian Kroner"
 msgstr "Corona norvegese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3329
+#: kmymoney/mymoney/mymoneyfile.cpp:3358
 #, kde-format
 msgid "Omani Rial"
 msgstr "Real omanita"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3330
+#: kmymoney/mymoney/mymoneyfile.cpp:3359
 #, kde-format
 msgid "Pakistan Rupee"
 msgstr "Rupia pakistana"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3331
+#: kmymoney/mymoney/mymoneyfile.cpp:3360
 #, kde-format
 msgid "Panamanian Balboa"
 msgstr "Balboa panamense"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3332
+#: kmymoney/mymoney/mymoneyfile.cpp:3361
 #, kde-format
 msgid "Papua New Guinea Kina"
 msgstr "Kina di Papua Nuova Guinea"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3333
+#: kmymoney/mymoney/mymoneyfile.cpp:3362
 #, kde-format
 msgid "Paraguay Guarani"
 msgstr "Guarani paraguaiano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3334
+#: kmymoney/mymoney/mymoneyfile.cpp:3363
 #, kde-format
 msgid "Peruvian Nuevo Sol"
 msgstr "Nuevo Sol peruviano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3335
+#: kmymoney/mymoney/mymoneyfile.cpp:3364
 #, kde-format
 msgid "Philippine Peso"
 msgstr "Peso delle Filippine"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3336
+#: kmymoney/mymoney/mymoneyfile.cpp:3365
 #, kde-format
 msgid "Polish Zloty"
 msgstr "Zloty polacco"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3337
+#: kmymoney/mymoney/mymoneyfile.cpp:3366
 #, kde-format
 msgid "Qatari Rial"
 msgstr "Real del Qatar"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3338
+#: kmymoney/mymoney/mymoneyfile.cpp:3367
 #, kde-format
 msgid "Romanian Leu (new)"
 msgstr "Leu romeno (nuovo)"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3339
+#: kmymoney/mymoney/mymoneyfile.cpp:3368
 #, kde-format
 msgid "Russian Ruble"
 msgstr "Rublo russo"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3340
+#: kmymoney/mymoney/mymoneyfile.cpp:3369
 #, kde-format
 msgid "Rwanda Franc"
 msgstr "Franco ruandese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3341
+#: kmymoney/mymoney/mymoneyfile.cpp:3370
 #, kde-format
 msgid "Samoan Tala"
 msgstr "Tala samoano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3342
+#: kmymoney/mymoney/mymoneyfile.cpp:3371
 #, kde-format
 msgid "Sao Tome and Principe Dobra"
 msgstr "Dobra di Sao Tome e Principe"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3343
+#: kmymoney/mymoney/mymoneyfile.cpp:3372
 #, kde-format
 msgid "Saudi Riyal"
 msgstr "Riyal saudita"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3344
+#: kmymoney/mymoney/mymoneyfile.cpp:3373
 #, kde-format
 msgid "Serbian Dinar"
 msgstr "Dinaro serbo"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3345
+#: kmymoney/mymoney/mymoneyfile.cpp:3374
 #, kde-format
 msgid "Seychelles Rupee"
 msgstr "Rupia delle Seychelles"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3346
+#: kmymoney/mymoney/mymoneyfile.cpp:3375
 #, kde-format
 msgid "Sierra Leone Leone"
 msgstr "Leone della Sierra Leone"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3347
+#: kmymoney/mymoney/mymoneyfile.cpp:3376
 #, kde-format
 msgid "Singapore Dollar"
 msgstr "Dollaro di Singapore"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3348
+#: kmymoney/mymoney/mymoneyfile.cpp:3377
 #, kde-format
 msgid "Solomon Islands Dollar"
 msgstr "Dollaro delle Isole Salomone"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3349
+#: kmymoney/mymoney/mymoneyfile.cpp:3378
 #, kde-format
 msgid "Somali Shilling"
 msgstr "Scellino somalo"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3350
+#: kmymoney/mymoney/mymoneyfile.cpp:3379
 #, kde-format
 msgid "South African Rand"
 msgstr "Rand sudafricano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3351
+#: kmymoney/mymoney/mymoneyfile.cpp:3380
 #, kde-format
 msgid "South Korean Won"
 msgstr "Won della Sud Corea"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3352
+#: kmymoney/mymoney/mymoneyfile.cpp:3381
 #, kde-format
 msgid "Sri Lanka Rupee"
 msgstr "Rupia dello Sri Lanka"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3353
+#: kmymoney/mymoney/mymoneyfile.cpp:3382
 #, kde-format
 msgid "St. Helena Pound"
 msgstr "Sterlina di St. Helena"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3354
+#: kmymoney/mymoney/mymoneyfile.cpp:3383
 #, kde-format
 msgid "Sudanese Dinar"
 msgstr "Dinaro sudanese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3355
+#: kmymoney/mymoney/mymoneyfile.cpp:3384
 #, kde-format
 msgid "Suriname Guilder"
 msgstr "Guilder del Suriname"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3356
+#: kmymoney/mymoney/mymoneyfile.cpp:3385
 #, kde-format
 msgid "Swaziland Lilangeni"
 msgstr "Lilangeni dello Swaziland"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3357
+#: kmymoney/mymoney/mymoneyfile.cpp:3386
 #, kde-format
 msgid "Swedish Krona"
 msgstr "Corona svedese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3358
+#: kmymoney/mymoney/mymoneyfile.cpp:3387
 #, kde-format
 msgid "Swiss Franc"
 msgstr "Franco svizzero"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3359
+#: kmymoney/mymoney/mymoneyfile.cpp:3388
 #, kde-format
 msgid "Syrian Pound"
 msgstr "Sterlina siriana"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3360
+#: kmymoney/mymoney/mymoneyfile.cpp:3389
 #, kde-format
 msgid "Taiwan Dollar"
 msgstr "Dollaro di Taiwan"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3361
+#: kmymoney/mymoney/mymoneyfile.cpp:3390
 #, kde-format
 msgid "Tajikistan Somoni"
 msgstr "Somoni del Tajikistan"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3362
+#: kmymoney/mymoney/mymoneyfile.cpp:3391
 #, kde-format
 msgid "Tanzanian Shilling"
 msgstr "Scellino della Tanzania"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3363
+#: kmymoney/mymoney/mymoneyfile.cpp:3392
 #, kde-format
 msgid "Thai Baht"
 msgstr "Baht Thailandese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3364
+#: kmymoney/mymoney/mymoneyfile.cpp:3393
 #, kde-format
 msgid "Tongan Pa'anga"
 msgstr "Pa'anga di Tonga"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3365
+#: kmymoney/mymoney/mymoneyfile.cpp:3394
 #, kde-format
 msgid "Trinidad and Tobago Dollar"
 msgstr "Dollaro di Trinidad e Tobago"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3366
+#: kmymoney/mymoney/mymoneyfile.cpp:3395
 #, kde-format
 msgid "Tunisian Dinar"
 msgstr "Dinaro tunisino"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3367
+#: kmymoney/mymoney/mymoneyfile.cpp:3396
 #, kde-format
 msgid "Turkish Lira"
 msgstr "Lira turca"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3368
+#: kmymoney/mymoney/mymoneyfile.cpp:3397
 #, kde-format
 msgid "Turkmenistan Manat"
 msgstr "Manat del Turkmenistan"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3369
+#: kmymoney/mymoney/mymoneyfile.cpp:3398
 #, kde-format
 msgid "US Dollar"
 msgstr "Dollaro USA"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3370
+#: kmymoney/mymoney/mymoneyfile.cpp:3399
 #, kde-format
 msgid "Uganda Shilling"
 msgstr "Scellino ugandese"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3371
+#: kmymoney/mymoney/mymoneyfile.cpp:3400
 #, kde-format
 msgid "Ukraine Hryvnia"
 msgstr "Hryvnia ucraino"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3372
+#: kmymoney/mymoney/mymoneyfile.cpp:3401
 #, kde-format
 msgid "Unidad de Fometo"
 msgstr "Unidad de Fomento"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3373
+#: kmymoney/mymoney/mymoneyfile.cpp:3402
 #, kde-format
 msgid "United Arab Emirates Dirham"
 msgstr "Dirham degli Emirati Arabi Uniti"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3374
+#: kmymoney/mymoney/mymoneyfile.cpp:3403
 #, kde-format
 msgid "Uruguayan Peso"
 msgstr "Peso uruguaiano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3375
+#: kmymoney/mymoney/mymoneyfile.cpp:3404
 #, kde-format
 msgid "Uzbekistani Sum"
 msgstr "Sum uzbeko"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3376
+#: kmymoney/mymoney/mymoneyfile.cpp:3405
 #, kde-format
 msgid "Vanuatu Vatu"
 msgstr "Vatu di Vanuatu"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3377
+#: kmymoney/mymoney/mymoneyfile.cpp:3406
 #, kde-format
 msgid "Venezuelan Bolivar"
 msgstr "Bolivar venezuelano"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3378
+#: kmymoney/mymoney/mymoneyfile.cpp:3407
 #, kde-format
 msgid "Vietnamese Dong"
 msgstr "Dong vietnamita"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3379
+#: kmymoney/mymoney/mymoneyfile.cpp:3408
 #, kde-format
 msgid "Zambian Kwacha"
 msgstr "Kwacha dello Zambia"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3380
+#: kmymoney/mymoney/mymoneyfile.cpp:3409
 #, kde-format
 msgid "Zimbabwe Dollar"
 msgstr "Dollaro dello Zimbabwe"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3392
+#: kmymoney/mymoney/mymoneyfile.cpp:3421
 #, kde-format
 msgid "Gold"
 msgstr "Oro"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3393
+#: kmymoney/mymoney/mymoneyfile.cpp:3422
 #, kde-format
 msgid "Palladium"
 msgstr "Palladio"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3394
+#: kmymoney/mymoney/mymoneyfile.cpp:3423
 #, kde-format
 msgid "Platinum"
 msgstr "Platino"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:3395
+#: kmymoney/mymoney/mymoneyfile.cpp:3424
 #, kde-format
 msgid "Silver"
 msgstr "Argento"
 
-#: kmymoney/mymoney/mymoneyfile.cpp:4008
+#: kmymoney/mymoney/mymoneyfile.cpp:4037
 #, kde-format
 msgid "Opening Balances"
 msgstr "Saldi iniziali"
