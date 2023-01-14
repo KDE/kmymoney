@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-10 00:56+0000\n"
+"POT-Creation-Date: 2023-01-14 11:31+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1719,7 +1719,7 @@ msgid "%1 units in %2"
 msgstr ""
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:303
-#: kmymoney/misc/webpricequote.cpp:228
+#: kmymoney/misc/webpricequote.cpp:227
 #, fuzzy, kde-format
 #| msgid "Bank entry:"
 msgid "[No identifier]"
@@ -2690,17 +2690,17 @@ msgstr ""
 msgid "Name of the company, or mutual fund."
 msgstr ""
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:130
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:129
 #, kde-format
 msgid "The institution name field is empty.  Please enter the name."
 msgstr "Az intézménynév mező üres. Kérjük adjon meg egy nevet."
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:130
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:129
 #, kde-format
 msgid "Adding New Institution"
 msgstr "Új intézmény hozzáadása"
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:178
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:177
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -6159,40 +6159,40 @@ msgctxt "@action:button"
 msgid "No"
 msgstr "Nem"
 
-#: kmymoney/misc/webpricequote.cpp:118 kmymoney/misc/webpricequote.cpp:243
+#: kmymoney/misc/webpricequote.cpp:117 kmymoney/misc/webpricequote.cpp:242
 #, kde-format
 msgid "Source <placeholder>%1</placeholder> does not exist."
 msgstr "<placeholder>%1</placeholder> forrás nem létezik."
 
-#: kmymoney/misc/webpricequote.cpp:151
+#: kmymoney/misc/webpricequote.cpp:150
 #, fuzzy, kde-format
 #| msgid "Cannot open database %1\n"
 msgid "Cannot resolve input date."
 msgstr "A %1 adatbázist nem lehet megnyitni\n"
 
-#: kmymoney/misc/webpricequote.cpp:168
+#: kmymoney/misc/webpricequote.cpp:167
 #, fuzzy, kde-format
 #| msgid "Source <placeholder>%1</placeholder> does not exist."
 msgid "CSV source <placeholder>%1</placeholder> does not exist."
 msgstr "<placeholder>%1</placeholder> forrás nem létezik."
 
-#: kmymoney/misc/webpricequote.cpp:186
+#: kmymoney/misc/webpricequote.cpp:185
 #, fuzzy, kde-format
 #| msgid "Cannot update currency. %1"
 msgid "Cannot find from and to currency."
 msgstr "Nem lehet frissíteni a pénznemet. %1"
 
-#: kmymoney/misc/webpricequote.cpp:199
+#: kmymoney/misc/webpricequote.cpp:198
 #, kde-format
 msgid "Local quote sources aren't supported."
 msgstr ""
 
-#: kmymoney/misc/webpricequote.cpp:204 kmymoney/misc/webpricequote.cpp:300
+#: kmymoney/misc/webpricequote.cpp:203 kmymoney/misc/webpricequote.cpp:299
 #, kde-format
 msgid "Fetching URL %1..."
 msgstr ""
 
-#: kmymoney/misc/webpricequote.cpp:229
+#: kmymoney/misc/webpricequote.cpp:228
 #, fuzzy, kde-format
 #| msgid "Source <placeholder>%1</placeholder> does not exist."
 msgid ""
@@ -6200,58 +6200,58 @@ msgid ""
 "number."
 msgstr "<placeholder>%1</placeholder> forrás nem létezik."
 
-#: kmymoney/misc/webpricequote.cpp:268
+#: kmymoney/misc/webpricequote.cpp:267
 #, kde-format
 msgctxt "The process x is executing"
 msgid "Executing %1..."
 msgstr "%1 végrehajtása…"
 
-#: kmymoney/misc/webpricequote.cpp:295 kmymoney/misc/webpricequote.cpp:402
+#: kmymoney/misc/webpricequote.cpp:294 kmymoney/misc/webpricequote.cpp:401
 #, kde-format
 msgid "Unable to launch: %1"
 msgstr "Nem lehet elindítani: %1"
 
-#: kmymoney/misc/webpricequote.cpp:331 kmymoney/misc/webpricequote.cpp:360
+#: kmymoney/misc/webpricequote.cpp:330 kmymoney/misc/webpricequote.cpp:359
 #, kde-format
 msgid "Failed to open downloaded file"
 msgstr "Nem sikerült megnyitni a letöltött fájlt"
 
-#: kmymoney/misc/webpricequote.cpp:389
+#: kmymoney/misc/webpricequote.cpp:388
 #, kde-format
 msgctxt "Executing 'script' 'online source' 'investment symbol' "
 msgid "Executing %1 %2 %3..."
 msgstr "Végrehajtás %1 %2 %3..."
 
-#: kmymoney/misc/webpricequote.cpp:427
+#: kmymoney/misc/webpricequote.cpp:426
 #, fuzzy, kde-format
 #| msgid "Unable to update price for %1 (empty quote data)"
 msgid "Unable to update price for %1"
 msgstr "Nem lehet frissíteni az %1 árfolyamát (üres árajánlat adat)"
 
-#: kmymoney/misc/webpricequote.cpp:461
+#: kmymoney/misc/webpricequote.cpp:460
 #, fuzzy, kde-format
 #| msgid "Date found: %1"
 msgid "Identifier found: '%1'"
 msgstr "Talált dátum: %1"
 
-#: kmymoney/misc/webpricequote.cpp:502
+#: kmymoney/misc/webpricequote.cpp:501
 #, fuzzy, kde-format
 #| msgid "Price found: %1 (%2)"
 msgid "Price found: '%1' (%2)"
 msgstr "Talált árfolyam: %1 (%2)"
 
-#: kmymoney/misc/webpricequote.cpp:513
+#: kmymoney/misc/webpricequote.cpp:512
 #, fuzzy, kde-format
 #| msgid "Date found: %1"
 msgid "Date found: '%1'"
 msgstr "Talált dátum: %1"
 
-#: kmymoney/misc/webpricequote.cpp:524
+#: kmymoney/misc/webpricequote.cpp:523
 #, kde-format
 msgid "Unable to update price for %1 (no price or no date)"
 msgstr "Nem lehet frissíteni a %1 árfolyamot (nincs ár, vagy dátum)"
 
-#: kmymoney/misc/webpricequote.cpp:528
+#: kmymoney/misc/webpricequote.cpp:527
 #, kde-format
 msgid "Unable to update price for %1 (empty quote data)"
 msgstr "Nem lehet frissíteni az %1 árfolyamát (üres árajánlat adat)"

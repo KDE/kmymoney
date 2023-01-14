@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-10 00:56+0000\n"
+"POT-Creation-Date: 2023-01-14 11:31+0000\n"
 "PO-Revision-Date: 2022-07-13 15:41+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1704,7 +1704,7 @@ msgid "%1 units in %2"
 msgstr "%2의 %1 단위"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:303
-#: kmymoney/misc/webpricequote.cpp:228
+#: kmymoney/misc/webpricequote.cpp:227
 #, kde-format
 msgid "[No identifier]"
 msgstr "[식별자 없음]"
@@ -2673,17 +2673,17 @@ msgstr "주식 또는 투자 신탁의 종목 코드입니다. 선택 사항입�
 msgid "Name of the company, or mutual fund."
 msgstr "회사나 투자 신탁의 이름입니다."
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:130
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:129
 #, kde-format
 msgid "The institution name field is empty.  Please enter the name."
 msgstr "금융기관 이름 필드가 비어 있습니다.  이름을 입력하십시오."
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:130
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:129
 #, kde-format
 msgid "Adding New Institution"
 msgstr "새 금융기관 추가"
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:178
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:177
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -6078,37 +6078,37 @@ msgctxt "@action:button"
 msgid "No"
 msgstr "번호"
 
-#: kmymoney/misc/webpricequote.cpp:118 kmymoney/misc/webpricequote.cpp:243
+#: kmymoney/misc/webpricequote.cpp:117 kmymoney/misc/webpricequote.cpp:242
 #, kde-format
 msgid "Source <placeholder>%1</placeholder> does not exist."
 msgstr "원본 <placeholder>%1</placeholder>이(가) 없습니다."
 
-#: kmymoney/misc/webpricequote.cpp:151
+#: kmymoney/misc/webpricequote.cpp:150
 #, kde-format
 msgid "Cannot resolve input date."
 msgstr "입력 날짜를 처리할 수 없습니다."
 
-#: kmymoney/misc/webpricequote.cpp:168
+#: kmymoney/misc/webpricequote.cpp:167
 #, kde-format
 msgid "CSV source <placeholder>%1</placeholder> does not exist."
 msgstr "CSV 원본 <placeholder>%1</placeholder>이(가) 없습니다."
 
-#: kmymoney/misc/webpricequote.cpp:186
+#: kmymoney/misc/webpricequote.cpp:185
 #, kde-format
 msgid "Cannot find from and to currency."
 msgstr "원본과 대상 통화를 찾을 수 없습니다."
 
-#: kmymoney/misc/webpricequote.cpp:199
+#: kmymoney/misc/webpricequote.cpp:198
 #, kde-format
 msgid "Local quote sources aren't supported."
 msgstr "로컬 시세 출처는 지원되지 않습니다."
 
-#: kmymoney/misc/webpricequote.cpp:204 kmymoney/misc/webpricequote.cpp:300
+#: kmymoney/misc/webpricequote.cpp:203 kmymoney/misc/webpricequote.cpp:299
 #, kde-format
 msgid "Fetching URL %1..."
 msgstr "URL %1을(를) 가져오는 중..."
 
-#: kmymoney/misc/webpricequote.cpp:229
+#: kmymoney/misc/webpricequote.cpp:228
 #, kde-format
 msgid ""
 "<placeholder>%1</placeholder> skipped because it doesn't have identification "
@@ -6116,54 +6116,54 @@ msgid ""
 msgstr ""
 "식별 번호가 없으므로 <placeholder>%1</placeholder>을(를) 건너뛰었습니다."
 
-#: kmymoney/misc/webpricequote.cpp:268
+#: kmymoney/misc/webpricequote.cpp:267
 #, kde-format
 msgctxt "The process x is executing"
 msgid "Executing %1..."
 msgstr "%1 실행 중..."
 
-#: kmymoney/misc/webpricequote.cpp:295 kmymoney/misc/webpricequote.cpp:402
+#: kmymoney/misc/webpricequote.cpp:294 kmymoney/misc/webpricequote.cpp:401
 #, kde-format
 msgid "Unable to launch: %1"
 msgstr "시작할 수 없음: %1"
 
-#: kmymoney/misc/webpricequote.cpp:331 kmymoney/misc/webpricequote.cpp:360
+#: kmymoney/misc/webpricequote.cpp:330 kmymoney/misc/webpricequote.cpp:359
 #, kde-format
 msgid "Failed to open downloaded file"
 msgstr "다운로드한 파일을 열 수 없음"
 
-#: kmymoney/misc/webpricequote.cpp:389
+#: kmymoney/misc/webpricequote.cpp:388
 #, kde-format
 msgctxt "Executing 'script' 'online source' 'investment symbol' "
 msgid "Executing %1 %2 %3..."
 msgstr "%1 %2 %3 실행 중..."
 
-#: kmymoney/misc/webpricequote.cpp:427
+#: kmymoney/misc/webpricequote.cpp:426
 #, kde-format
 msgid "Unable to update price for %1"
 msgstr "%1의 가격을 업데이트할 수 없음"
 
-#: kmymoney/misc/webpricequote.cpp:461
+#: kmymoney/misc/webpricequote.cpp:460
 #, kde-format
 msgid "Identifier found: '%1'"
 msgstr "식별자를 찾았음: '%1'"
 
-#: kmymoney/misc/webpricequote.cpp:502
+#: kmymoney/misc/webpricequote.cpp:501
 #, kde-format
 msgid "Price found: '%1' (%2)"
 msgstr "발견된 가격: '%1'(%2)"
 
-#: kmymoney/misc/webpricequote.cpp:513
+#: kmymoney/misc/webpricequote.cpp:512
 #, kde-format
 msgid "Date found: '%1'"
 msgstr "발견된 날짜: '%1'"
 
-#: kmymoney/misc/webpricequote.cpp:524
+#: kmymoney/misc/webpricequote.cpp:523
 #, kde-format
 msgid "Unable to update price for %1 (no price or no date)"
 msgstr "%1의 가격을 업데이트할 수 없음(가격 또는 날짜 없음)"
 
-#: kmymoney/misc/webpricequote.cpp:528
+#: kmymoney/misc/webpricequote.cpp:527
 #, kde-format
 msgid "Unable to update price for %1 (empty quote data)"
 msgstr "%1의 가격을 업데이트할 수 없음(빈 시세 데이터)"

@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-10 00:56+0000\n"
+"POT-Creation-Date: 2023-01-14 11:31+0000\n"
 "PO-Revision-Date: 2023-01-10 07:03+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -1781,7 +1781,7 @@ msgid "%1 units in %2"
 msgstr "%1 unités dans %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:303
-#: kmymoney/misc/webpricequote.cpp:228
+#: kmymoney/misc/webpricequote.cpp:227
 #, kde-format
 msgid "[No identifier]"
 msgstr "[Pas d'identifiant]"
@@ -2760,17 +2760,17 @@ msgstr "Symbole de l'action ou du fond commun de placement, non requis."
 msgid "Name of the company, or mutual fund."
 msgstr "Nom de l'entreprise, ou du fond commun de placement."
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:130
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:129
 #, kde-format
 msgid "The institution name field is empty.  Please enter the name."
 msgstr "Le nom de l'établissement est vide. Veuillez saisir le nom."
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:130
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:129
 #, kde-format
 msgid "Adding New Institution"
 msgstr "Ajouter un nouvel établissement"
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:178
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:177
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -6238,37 +6238,37 @@ msgctxt "@action:button"
 msgid "No"
 msgstr "Non"
 
-#: kmymoney/misc/webpricequote.cpp:118 kmymoney/misc/webpricequote.cpp:243
+#: kmymoney/misc/webpricequote.cpp:117 kmymoney/misc/webpricequote.cpp:242
 #, kde-format
 msgid "Source <placeholder>%1</placeholder> does not exist."
 msgstr "La source <placeholder>%1</placeholder> n'existe pas."
 
-#: kmymoney/misc/webpricequote.cpp:151
+#: kmymoney/misc/webpricequote.cpp:150
 #, kde-format
 msgid "Cannot resolve input date."
 msgstr "Impossible de résoudre la date de saisie."
 
-#: kmymoney/misc/webpricequote.cpp:168
+#: kmymoney/misc/webpricequote.cpp:167
 #, kde-format
 msgid "CSV source <placeholder>%1</placeholder> does not exist."
 msgstr "La source CSV <placeholder>%1</placeholder> n'existe pas."
 
-#: kmymoney/misc/webpricequote.cpp:186
+#: kmymoney/misc/webpricequote.cpp:185
 #, kde-format
 msgid "Cannot find from and to currency."
 msgstr "Impossible de trouver la devise source et la devise de destination."
 
-#: kmymoney/misc/webpricequote.cpp:199
+#: kmymoney/misc/webpricequote.cpp:198
 #, kde-format
 msgid "Local quote sources aren't supported."
 msgstr "Les sources de cotation locales ne sont pas prises en charge."
 
-#: kmymoney/misc/webpricequote.cpp:204 kmymoney/misc/webpricequote.cpp:300
+#: kmymoney/misc/webpricequote.cpp:203 kmymoney/misc/webpricequote.cpp:299
 #, kde-format
 msgid "Fetching URL %1..."
 msgstr "Réception de l'URL %1…"
 
-#: kmymoney/misc/webpricequote.cpp:229
+#: kmymoney/misc/webpricequote.cpp:228
 #, kde-format
 msgid ""
 "<placeholder>%1</placeholder> skipped because it doesn't have identification "
@@ -6277,55 +6277,55 @@ msgstr ""
 "<placeholder>%1</placeholder> n'a pas été pris en compte car il ne dispose "
 "pas de numéro d'identification."
 
-#: kmymoney/misc/webpricequote.cpp:268
+#: kmymoney/misc/webpricequote.cpp:267
 #, kde-format
 msgctxt "The process x is executing"
 msgid "Executing %1..."
 msgstr "Exécution de %1…"
 
-#: kmymoney/misc/webpricequote.cpp:295 kmymoney/misc/webpricequote.cpp:402
+#: kmymoney/misc/webpricequote.cpp:294 kmymoney/misc/webpricequote.cpp:401
 #, kde-format
 msgid "Unable to launch: %1"
 msgstr "Impossible de lancer : %1"
 
-#: kmymoney/misc/webpricequote.cpp:331 kmymoney/misc/webpricequote.cpp:360
+#: kmymoney/misc/webpricequote.cpp:330 kmymoney/misc/webpricequote.cpp:359
 #, kde-format
 msgid "Failed to open downloaded file"
 msgstr "Impossible d'ouvrir le fichier téléchargé"
 
-#: kmymoney/misc/webpricequote.cpp:389
+#: kmymoney/misc/webpricequote.cpp:388
 #, kde-format
 msgctxt "Executing 'script' 'online source' 'investment symbol' "
 msgid "Executing %1 %2 %3..."
 msgstr "Exécution de %1 %2 %3…"
 
-#: kmymoney/misc/webpricequote.cpp:427
+#: kmymoney/misc/webpricequote.cpp:426
 #, kde-format
 msgid "Unable to update price for %1"
 msgstr "Impossible de mettre à jour le prix pour %1"
 
-#: kmymoney/misc/webpricequote.cpp:461
+#: kmymoney/misc/webpricequote.cpp:460
 #, kde-format
 msgid "Identifier found: '%1'"
 msgstr "Identifiant trouvé : « %1 »"
 
-#: kmymoney/misc/webpricequote.cpp:502
+#: kmymoney/misc/webpricequote.cpp:501
 #, kde-format
 msgid "Price found: '%1' (%2)"
 msgstr "Cours trouvé : « %1 » (%2)"
 
-#: kmymoney/misc/webpricequote.cpp:513
+#: kmymoney/misc/webpricequote.cpp:512
 #, kde-format
 msgid "Date found: '%1'"
 msgstr "Date trouvée : « %1 »"
 
-#: kmymoney/misc/webpricequote.cpp:524
+#: kmymoney/misc/webpricequote.cpp:523
 #, kde-format
 msgid "Unable to update price for %1 (no price or no date)"
 msgstr ""
 "Impossible de mettre à jour le cours de %1 (pas de cours ou pas de date)"
 
-#: kmymoney/misc/webpricequote.cpp:528
+#: kmymoney/misc/webpricequote.cpp:527
 #, kde-format
 msgid "Unable to update price for %1 (empty quote data)"
 msgstr "Impossible de mettre à jour le cours de %1 (pas de données de cours)"

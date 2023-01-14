@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-10 00:56+0000\n"
+"POT-Creation-Date: 2023-01-14 11:31+0000\n"
 "PO-Revision-Date: 2019-01-19 19:46+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -1728,7 +1728,7 @@ msgid "%1 units in %2"
 msgstr "%1 個單位於 %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:303
-#: kmymoney/misc/webpricequote.cpp:228
+#: kmymoney/misc/webpricequote.cpp:227
 #, fuzzy, kde-format
 #| msgid "Bank entry:"
 msgid "[No identifier]"
@@ -2697,17 +2697,17 @@ msgstr ""
 msgid "Name of the company, or mutual fund."
 msgstr "公司或共同基金名稱。"
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:130
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:129
 #, kde-format
 msgid "The institution name field is empty.  Please enter the name."
 msgstr "「機構名稱」欄位是空白的。請輸入名稱。"
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:130
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:129
 #, kde-format
 msgid "Adding New Institution"
 msgstr "新增機構"
 
-#: kmymoney/dialogs/knewinstitutiondlg.cpp:178
+#: kmymoney/dialogs/knewinstitutiondlg.cpp:177
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -6157,40 +6157,40 @@ msgctxt "@action:button"
 msgid "No"
 msgstr "否"
 
-#: kmymoney/misc/webpricequote.cpp:118 kmymoney/misc/webpricequote.cpp:243
+#: kmymoney/misc/webpricequote.cpp:117 kmymoney/misc/webpricequote.cpp:242
 #, kde-format
 msgid "Source <placeholder>%1</placeholder> does not exist."
 msgstr "來源 <placeholder>%1</placeholder> 不存在。"
 
-#: kmymoney/misc/webpricequote.cpp:151
+#: kmymoney/misc/webpricequote.cpp:150
 #, fuzzy, kde-format
 #| msgid "Cannot save to current database."
 msgid "Cannot resolve input date."
 msgstr "無法儲存到目前的資料庫。"
 
-#: kmymoney/misc/webpricequote.cpp:168
+#: kmymoney/misc/webpricequote.cpp:167
 #, fuzzy, kde-format
 #| msgid "Source <placeholder>%1</placeholder> does not exist."
 msgid "CSV source <placeholder>%1</placeholder> does not exist."
 msgstr "來源 <placeholder>%1</placeholder> 不存在。"
 
-#: kmymoney/misc/webpricequote.cpp:186
+#: kmymoney/misc/webpricequote.cpp:185
 #, fuzzy, kde-format
 #| msgid "Cannot rename currency. %1"
 msgid "Cannot find from and to currency."
 msgstr "無法重新命名貨幣。%1"
 
-#: kmymoney/misc/webpricequote.cpp:199
+#: kmymoney/misc/webpricequote.cpp:198
 #, kde-format
 msgid "Local quote sources aren't supported."
 msgstr ""
 
-#: kmymoney/misc/webpricequote.cpp:204 kmymoney/misc/webpricequote.cpp:300
+#: kmymoney/misc/webpricequote.cpp:203 kmymoney/misc/webpricequote.cpp:299
 #, kde-format
 msgid "Fetching URL %1..."
 msgstr "抓取網址 %1 中..."
 
-#: kmymoney/misc/webpricequote.cpp:229
+#: kmymoney/misc/webpricequote.cpp:228
 #, fuzzy, kde-format
 #| msgid "Source <placeholder>%1</placeholder> does not exist."
 msgid ""
@@ -6198,58 +6198,58 @@ msgid ""
 "number."
 msgstr "來源 <placeholder>%1</placeholder> 不存在。"
 
-#: kmymoney/misc/webpricequote.cpp:268
+#: kmymoney/misc/webpricequote.cpp:267
 #, kde-format
 msgctxt "The process x is executing"
 msgid "Executing %1..."
 msgstr "執行 %1 中..."
 
-#: kmymoney/misc/webpricequote.cpp:295 kmymoney/misc/webpricequote.cpp:402
+#: kmymoney/misc/webpricequote.cpp:294 kmymoney/misc/webpricequote.cpp:401
 #, kde-format
 msgid "Unable to launch: %1"
 msgstr "無法啟動：%1"
 
-#: kmymoney/misc/webpricequote.cpp:331 kmymoney/misc/webpricequote.cpp:360
+#: kmymoney/misc/webpricequote.cpp:330 kmymoney/misc/webpricequote.cpp:359
 #, kde-format
 msgid "Failed to open downloaded file"
 msgstr "無法開啟已下載的檔案"
 
-#: kmymoney/misc/webpricequote.cpp:389
+#: kmymoney/misc/webpricequote.cpp:388
 #, kde-format
 msgctxt "Executing 'script' 'online source' 'investment symbol' "
 msgid "Executing %1 %2 %3..."
 msgstr "執行 %1 %2 %3 中..."
 
-#: kmymoney/misc/webpricequote.cpp:427
+#: kmymoney/misc/webpricequote.cpp:426
 #, fuzzy, kde-format
 #| msgid "Unable to update price for %1 (empty quote data)"
 msgid "Unable to update price for %1"
 msgstr "無法更新 %1 的價格（空白的報價資料）"
 
-#: kmymoney/misc/webpricequote.cpp:461
+#: kmymoney/misc/webpricequote.cpp:460
 #, fuzzy, kde-format
 #| msgid "Date found: %1"
 msgid "Identifier found: '%1'"
 msgstr "找到日期：%1"
 
-#: kmymoney/misc/webpricequote.cpp:502
+#: kmymoney/misc/webpricequote.cpp:501
 #, fuzzy, kde-format
 #| msgid "Price found: %1 (%2)"
 msgid "Price found: '%1' (%2)"
 msgstr "找到價格：%1（%2）"
 
-#: kmymoney/misc/webpricequote.cpp:513
+#: kmymoney/misc/webpricequote.cpp:512
 #, fuzzy, kde-format
 #| msgid "Date found: %1"
 msgid "Date found: '%1'"
 msgstr "找到日期：%1"
 
-#: kmymoney/misc/webpricequote.cpp:524
+#: kmymoney/misc/webpricequote.cpp:523
 #, kde-format
 msgid "Unable to update price for %1 (no price or no date)"
 msgstr "無法更新 %1 的價格（沒有價格或沒有日期）"
 
-#: kmymoney/misc/webpricequote.cpp:528
+#: kmymoney/misc/webpricequote.cpp:527
 #, kde-format
 msgid "Unable to update price for %1 (empty quote data)"
 msgstr "無法更新 %1 的價格（空白的報價資料）"
