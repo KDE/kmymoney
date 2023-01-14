@@ -2751,6 +2751,10 @@ QMap<MyMoneySecurity, MyMoneyPrice> MyMoneyFile::ancientCurrencies() const
     // Source: https://en.wikipedia.org/wiki/Zambian_kwacha, triggered by b.k.o ticket #425530
     ancientCurrencies.insert(MyMoneySecurity("ZMK", i18n("Zambian Kwacha (old)"), "K"), MyMoneyPrice("ZMK", "ZMW", QDate(2013, 1, 1), MyMoneyMoney(1, 1000), QLatin1Literal("KMyMoney")));
 
+    // Source: https://www.ecb.europa.eu/press/pr/date/2022/html/ecb.pr220712~b97dd38de3.en.html
+    ancientCurrencies.insert(MyMoneySecurity("HRK", i18n("Croatian Kuna")),
+                             MyMoneyPrice("HRK", "EUR", QDate(2023, 1, 1), MyMoneyMoney(100000, 753450), source));
+
     return ancientCurrencies;
 }
 
@@ -2797,7 +2801,6 @@ QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
     currencyList.append(MyMoneySecurity("COP", i18n("Colombian Peso")));
     currencyList.append(MyMoneySecurity("KMF", i18n("Comoros Franc")));
     currencyList.append(MyMoneySecurity("CRC", i18n("Costa Rican Colon"),      QChar(0x20A1)));
-    currencyList.append(MyMoneySecurity("HRK", i18n("Croatian Kuna")));
     currencyList.append(MyMoneySecurity("CUP", i18n("Cuban Peso")));
     currencyList.append(MyMoneySecurity("CUC", i18n("Cuban Convertible Peso")));
     currencyList.append(MyMoneySecurity("CZK", i18n("Czech Koruna")));
