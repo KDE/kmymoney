@@ -39,7 +39,7 @@ class KMM_MODELS_EXPORT EquitiesModel : public QStandardItemModel
 
 public:
     enum Column { Equity = 0, Symbol, Value, Quantity, Price };
-    enum Role { InvestmentID = Qt::UserRole, EquityID = Qt::UserRole, SecurityID = Qt::UserRole + 1 };
+    enum Role { InvestmentID = Qt::UserRole, EquityID = Qt::UserRole, SecurityID = Qt::UserRole + 1, SortRole };
 
     ~EquitiesModel();
 
@@ -87,6 +87,7 @@ public Q_SLOTS:
 protected:
     bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override;
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+    bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
 
 private:
     class Private;

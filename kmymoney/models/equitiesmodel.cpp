@@ -77,6 +77,7 @@ public:
         getCell(colNum);
         if (columns.contains(Column::Equity)) {
             cell->setData(account.name(), Qt::DisplayRole);
+            cell->setData(account.name(), Role::SortRole);
             cell->setData(account.id(), Role::EquityID);
             cell->setData(account.currencyId(), Role::SecurityID);
         }
@@ -136,8 +137,10 @@ public:
                     auto value = balance * price.rate(tradingCurrency.id());
                     auto strValue = QVariant(value.formatMoney(tradingCurrency.tradingSymbol(), prec));
                     cell->setData(strValue, Qt::DisplayRole);
+                    cell->setData(QVariant::fromValue<MyMoneyMoney>(value), Role::SortRole);
                 } else {
                     cell->setData(QVariant("---"), Qt::DisplayRole);
+                    cell->setData(QVariant::fromValue<MyMoneyMoney>(MyMoneyMoney()), Role::SortRole);
                 }
                 cell->setData(QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
             }
@@ -151,6 +154,7 @@ public:
                 auto prec = MyMoneyMoney::denomToPrec(security.smallestAccountFraction());
                 auto strQuantity = QVariant(balance.formatMoney(QString(), prec));
                 cell->setData(strQuantity, Qt::DisplayRole);
+                cell->setData(QVariant::fromValue<MyMoneyMoney>(balance), Role::SortRole);
                 cell->setData(QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
             }
         }
@@ -162,10 +166,13 @@ public:
                 getCell(colNum);
                 if (price.isValid()) {
                     auto prec = security.pricePrecision();
-                    auto strPrice = QVariant(price.rate(tradingCurrency.id()).formatMoney(tradingCurrency.tradingSymbol(), prec));
+                    const auto rate = price.rate(tradingCurrency.id());
+                    auto strPrice = QVariant(rate.formatMoney(tradingCurrency.tradingSymbol(), prec));
                     cell->setData(strPrice, Qt::DisplayRole);
+                    cell->setData(QVariant::fromValue<MyMoneyMoney>(rate), Role::SortRole);
                 } else {
                     cell->setData(QVariant("---"), Qt::DisplayRole);
+                    cell->setData(QVariant::fromValue<MyMoneyMoney>(MyMoneyMoney()), Role::SortRole);
                 }
                 cell->setData(QVariant(Qt::AlignRight | Qt::AlignVCenter), Qt::TextAlignmentRole);
             }
@@ -201,6 +208,7 @@ void EquitiesModel::init()
     foreach (const auto column, d->m_columns)
         headerLabels.append(getHeaderName(column));
     setHorizontalHeaderLabels(headerLabels);
+    setSortRole(Role::SortRole);
 }
 
 void EquitiesModel::load()
@@ -478,5 +486,24 @@ void EquitiesFilterProxyModel::slotColumnsMenu(const QPoint)
             emit columnToggled(idColumn, false);
             invalidate();
         }
+    }
+}
+
+bool EquitiesFilterProxyModel::lessThan(const QModelIndex& left, const QModelIndex& right) const
+{
+    switch (left.column()) {
+    case EquitiesModel::Column::Value:
+    case EquitiesModel::Column::Price:
+    case EquitiesModel::Column::Quantity: {
+        const auto leftValue = left.data(EquitiesModel::Role::SortRole).value<MyMoneyMoney>();
+        const auto rightValue = right.data(EquitiesModel::Role::SortRole).value<MyMoneyMoney>();
+        if (leftValue != rightValue) {
+            return leftValue < rightValue;
+        }
+    }
+        // intentional fall through
+
+    default:
+        return QSortFilterProxyModel::lessThan(left, right);
     }
 }
