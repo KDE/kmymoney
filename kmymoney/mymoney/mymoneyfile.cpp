@@ -3165,7 +3165,8 @@ QMap<MyMoneySecurity, MyMoneyPrice> MyMoneyFile::ancientCurrencies() const
     QMap<MyMoneySecurity, MyMoneyPrice> ancientCurrencies;
 
     ancientCurrencies.insert(MyMoneySecurity("ATS", i18n("Austrian Schilling"), QString::fromUtf8("ÖS")),     MyMoneyPrice("ATS", "EUR", QDate(1998, 12, 31), MyMoneyMoney(10000, 137603), QStringLiteral("KMyMoney")));
-    ancientCurrencies.insert(MyMoneySecurity("DEM", i18n("German Mark"), "DM"),            MyMoneyPrice("ATS", "EUR", QDate(1998, 12, 31), MyMoneyMoney(100000, 195583), QStringLiteral("KMyMoney")));
+    ancientCurrencies.insert(MyMoneySecurity("DEM", i18n("German Mark"), "DM"),
+                             MyMoneyPrice("DEM", "EUR", QDate(1998, 12, 31), MyMoneyMoney(100000, 195583), QStringLiteral("KMyMoney")));
     ancientCurrencies.insert(MyMoneySecurity("FRF", i18n("French Franc"), "FF"),           MyMoneyPrice("FRF", "EUR", QDate(1998, 12, 31), MyMoneyMoney(100000, 655957), QStringLiteral("KMyMoney")));
     ancientCurrencies.insert(MyMoneySecurity("ITL", i18n("Italian Lira"), QChar(0x20A4)),  MyMoneyPrice("ITL", "EUR", QDate(1998, 12, 31), MyMoneyMoney(100, 193627), QStringLiteral("KMyMoney")));
     ancientCurrencies.insert(MyMoneySecurity("ESP", i18n("Spanish Peseta"), QString()),    MyMoneyPrice("ESP", "EUR", QDate(1998, 12, 31), MyMoneyMoney(1000, 166386), QStringLiteral("KMyMoney")));
