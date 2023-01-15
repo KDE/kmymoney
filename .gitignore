@@ -22,4 +22,4 @@ CMakeSettings.json
 .vs
 docker/.env
 .vscode
-
+CMakeLists.txt.user
