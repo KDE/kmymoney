@@ -2753,7 +2753,7 @@ QMap<MyMoneySecurity, MyMoneyPrice> MyMoneyFile::ancientCurrencies() const
 
     // Source: https://www.ecb.europa.eu/press/pr/date/2022/html/ecb.pr220712~b97dd38de3.en.html
     ancientCurrencies.insert(MyMoneySecurity("HRK", i18n("Croatian Kuna")),
-                             MyMoneyPrice("HRK", "EUR", QDate(2023, 1, 1), MyMoneyMoney(100000, 753450), source));
+                             MyMoneyPrice("HRK", "EUR", QDate(2023, 1, 1), MyMoneyMoney(100000, 753450), QLatin1Literal("KMyMoney")));
 
     return ancientCurrencies;
 }
