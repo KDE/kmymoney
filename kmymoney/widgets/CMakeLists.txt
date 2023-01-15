@@ -36,7 +36,6 @@ set(kmm_base_widgets_SOURCES
   kmymoneyaccounttreeview.cpp
   kmymoneyactivitycombo.cpp
   kmymoneycalculator.cpp
-  kmymoneycashflowcombo.cpp
   kmymoneycategory.cpp
   kmymoneycombo.cpp
   kmymoneycompletion.cpp
@@ -62,7 +61,6 @@ set(kmm_base_widgets_SOURCES
   passstore.cpp
   popuppositioner.cpp
   styleditemdelegateforwarder.cpp
-  tabbar.cpp
   kmymoneytreeview.cpp
   widgethintframe.cpp
   )
