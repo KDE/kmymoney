@@ -502,8 +502,8 @@ public:
 
         // Adjust the size
         QSize netWorthGraphSize = q->size();
-        netWorthGraphSize /= qreal(q->physicalDpiX()) / qreal(q->logicalDpiX());
-        netWorthGraphSize -= QSize(80, 30);
+        netWorthGraphSize -= QSize(122, 30);
+        netWorthGraphSize /= devRatio;
         m_netWorthGraphLastValidSize = netWorthGraphSize;
 
         // print header
@@ -542,7 +542,7 @@ public:
         // if a device ratio is 2 (200% scale), we need to create a pixmap using half of the target size,
         // resulted pixmaps will be twice as large as provided in the QSize(...)
         auto ic = Icons::get(Icon::KeyEnter).pixmap(QSize(isize, isize));
-        auto devRatio = ic.devicePixelRatio();
+        devRatio = ic.devicePixelRatio();
         if (devRatio > 1)
             isize = round(isize / devRatio);
 
@@ -1354,7 +1354,7 @@ public:
             m_html += "<td width=\"5%\" class=\"setcolor\"></td>";
 
             if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
-                m_html += "<td class=\"setcolor\">";
+                m_html += "<td class=\"setcolor center\">";
                 m_html += statusHeader;
                 m_html += "</td>";
             }
@@ -1928,8 +1928,9 @@ public:
     // Enter and Skip data pixmaps
     QString pathEnterIcon;
     QString pathSkipIcon;
-    QString pathStatusHeader;
+    QString pathStatusHeader; // online download status
     int adjustedIconSize;
+    double devRatio;
 };
 
 #endif
