@@ -37,7 +37,6 @@ target_link_libraries(reportsview
     KF5::KIOCore
     KF5::KIOFileWidgets
     KF5::KIOWidgets
-    KF5::KIONTLM
     reports
     kmm_widgets
     kmm_menus

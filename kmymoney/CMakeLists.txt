@@ -70,7 +70,6 @@ target_link_libraries(kmymoney_common
     KF5::KIOCore
     KF5::KIOFileWidgets
     KF5::KIOWidgets
-    KF5::KIONTLM
     Alkimia::alkimia
     kmm_mymoney
     kmm_webconnect
