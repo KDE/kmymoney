@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 16:34+0000\n"
+"POT-Creation-Date: 2023-01-16 00:57+0000\n"
 "PO-Revision-Date: 2023-01-09 18:34+0000\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -21235,31 +21235,6 @@ msgstr "Use este botão para ignorar esta transacção"
 msgid "&Close"
 msgstr "Fe&char"
 
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:48
-#, kde-format
-msgctxt "Activity for income categories"
-msgid "Received"
-msgstr "Recebida"
-
-# TODO: Verify
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:49
-#, kde-format
-msgctxt "Activity for expense categories"
-msgid "Paid"
-msgstr "Paga"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:51
-#, kde-format
-msgctxt "Payee"
-msgid "Pay to"
-msgstr "Pagar a"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:52
-#, kde-format
-msgctxt "Payer"
-msgid "From"
-msgstr "De"
-
 #: kmymoney/widgets/kmymoneydateedit.cpp:452
 #: kmymoney/widgets/kmymoneydateedit.cpp:521
 #, kde-format
@@ -25117,3 +25092,20 @@ msgstr ""
 "\n"
 "<p>Todas as informações são opcionais e são oferecidas apenas para "
 "personalizar o seu ficheiro KMyMoney.</p>"
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Recebida"
+
+# TODO: Verify
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Paga"
+
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Pagar a"
+
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "De"

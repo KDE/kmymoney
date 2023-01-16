@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 16:34+0000\n"
+"POT-Creation-Date: 2023-01-16 00:57+0000\n"
 "PO-Revision-Date: 2023-01-08 11:53+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -21163,30 +21163,6 @@ msgstr "Utilitzeu este botó per a ometre esta operació"
 msgid "&Close"
 msgstr "Tan&ca"
 
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:48
-#, kde-format
-msgctxt "Activity for income categories"
-msgid "Received"
-msgstr "Rebuda"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:49
-#, kde-format
-msgctxt "Activity for expense categories"
-msgid "Paid"
-msgstr "Pagada"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:51
-#, kde-format
-msgctxt "Payee"
-msgid "Pay to"
-msgstr "Paga a"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:52
-#, kde-format
-msgctxt "Payer"
-msgid "From"
-msgstr "Des de"
-
 #: kmymoney/widgets/kmymoneydateedit.cpp:452
 #: kmymoney/widgets/kmymoneydateedit.cpp:521
 #, kde-format
@@ -25027,3 +25003,19 @@ msgstr ""
 "\n"
 "<p>Tota la informació és optativa i s'utilitza per a personalitzar el fitxer "
 "de KMyMoney.</p>"
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Rebuda"
+
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Pagada"
+
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Paga a"
+
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "Des de"

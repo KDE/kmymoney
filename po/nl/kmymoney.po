@@ -11,15 +11,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 16:34+0000\n"
-"PO-Revision-Date: 2023-01-08 23:10+0100\n"
+"POT-Creation-Date: 2023-01-16 00:57+0000\n"
+"PO-Revision-Date: 2023-01-15 15:17+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -16670,7 +16670,7 @@ msgstr "Configureer dit rapport"
 #: kmymoney/plugins/views/reports/reportcontrol.ui:57
 #, kde-format
 msgid "Configure"
-msgstr "Instellen"
+msgstr "Configureren"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonNew)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:70
@@ -21115,30 +21115,6 @@ msgstr "Gebruik deze knop om deze transactie over te slaan"
 msgid "&Close"
 msgstr "Sl&uiten"
 
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:48
-#, kde-format
-msgctxt "Activity for income categories"
-msgid "Received"
-msgstr "Ontvangen"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:49
-#, kde-format
-msgctxt "Activity for expense categories"
-msgid "Paid"
-msgstr "Betaald"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:51
-#, kde-format
-msgctxt "Payee"
-msgid "Pay to"
-msgstr "Betalen aan"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:52
-#, kde-format
-msgctxt "Payer"
-msgid "From"
-msgstr "Van"
-
 #: kmymoney/widgets/kmymoneydateedit.cpp:452
 #: kmymoney/widgets/kmymoneydateedit.cpp:521
 #, kde-format
@@ -24966,6 +24942,22 @@ msgstr ""
 "\n"
 "<p>Alle informatie is optioneel en wordt gebruikt voor het persoonlijk maken "
 "van uw KMyMoney bestand.</p>"
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Ontvangen"
+
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Betaald"
+
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Betalen aan"
+
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "Van"
 
 #~ msgctxt "@title:column"
 #~ msgid "CC"

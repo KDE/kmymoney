@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 16:34+0000\n"
+"POT-Creation-Date: 2023-01-16 00:57+0000\n"
 "PO-Revision-Date: 2023-01-10 08:36+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -21067,30 +21067,6 @@ msgstr "S tem gumbom preskoči to transakcijo"
 msgid "&Close"
 msgstr "Zapri"
 
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:48
-#, kde-format
-msgctxt "Activity for income categories"
-msgid "Received"
-msgstr "Prejeto"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:49
-#, kde-format
-msgctxt "Activity for expense categories"
-msgid "Paid"
-msgstr "Plačano"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:51
-#, kde-format
-msgctxt "Payee"
-msgid "Pay to"
-msgstr "Plačaj"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:52
-#, kde-format
-msgctxt "Payer"
-msgid "From"
-msgstr "Od"
-
 #: kmymoney/widgets/kmymoneydateedit.cpp:452
 #: kmymoney/widgets/kmymoneydateedit.cpp:521
 #, kde-format
@@ -24906,6 +24882,22 @@ msgstr ""
 "\n"
 "<p>Vse informacije niso obvezne in se uporabljajo samo za prilagajanje "
 "datoteke KMyMoney.</p>"
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Prejeto"
+
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Plačano"
+
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Plačaj"
+
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "Od"
 
 #~ msgctxt "@title:column"
 #~ msgid "CC"

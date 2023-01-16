@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 16:34+0000\n"
+"POT-Creation-Date: 2023-01-16 00:57+0000\n"
 "PO-Revision-Date: 2022-08-14 16:08+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -22076,32 +22076,6 @@ msgstr "Folosește acest buton pentru a omite această tranzacție"
 msgid "&Close"
 msgstr "În&chide"
 
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:48
-#, kde-format
-msgctxt "Activity for income categories"
-msgid "Received"
-msgstr "Primit"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:49
-#, kde-format
-msgctxt "Activity for expense categories"
-msgid "Paid"
-msgstr "Plătit"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:51
-#, fuzzy, kde-format
-#| msgid "Pay to"
-msgctxt "Payee"
-msgid "Pay to"
-msgstr "Plătit către"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:52
-#, fuzzy, kde-format
-#| msgid "From"
-msgctxt "Payer"
-msgid "From"
-msgstr "De la"
-
 #: kmymoney/widgets/kmymoneydateedit.cpp:452
 #: kmymoney/widgets/kmymoneydateedit.cpp:521
 #, kde-format
@@ -26015,6 +25989,26 @@ msgstr ""
 "\n"
 "<p>Toate informațiile sînt opționale și sînt folosite doar pentru a vă "
 "personaliza fișierul KMyMoney.</p>"
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Primit"
+
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Plătit"
+
+#, fuzzy
+#~| msgid "Pay to"
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Plătit către"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "De la"
 
 #, fuzzy
 #~| msgid "C"

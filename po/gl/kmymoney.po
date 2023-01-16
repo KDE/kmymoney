@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 16:34+0000\n"
+"POT-Creation-Date: 2023-01-16 00:57+0000\n"
 "PO-Revision-Date: 2020-03-07 08:15+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -21500,32 +21500,6 @@ msgstr "Use este botón para omitir esta transacción"
 msgid "&Close"
 msgstr "&Pechar"
 
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:48
-#, kde-format
-msgctxt "Activity for income categories"
-msgid "Received"
-msgstr "Recibido"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:49
-#, kde-format
-msgctxt "Activity for expense categories"
-msgid "Paid"
-msgstr "Pago de"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:51
-#, fuzzy, kde-format
-#| msgid "Pay to"
-msgctxt "Payee"
-msgid "Pay to"
-msgstr "Pagar a"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:52
-#, fuzzy, kde-format
-#| msgid "From"
-msgctxt "Payer"
-msgid "From"
-msgstr "De"
-
 #: kmymoney/widgets/kmymoneydateedit.cpp:452
 #: kmymoney/widgets/kmymoneydateedit.cpp:521
 #, kde-format
@@ -25347,6 +25321,26 @@ msgstr ""
 "\n"
 "<p>Toda a información é opcional e só serve para personalizar\n"
 "o ficheiro do KMyMoney.</p>"
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Recibido"
+
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Pago de"
+
+#, fuzzy
+#~| msgid "Pay to"
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Pagar a"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "De"
 
 #, fuzzy
 #~| msgid "CC"

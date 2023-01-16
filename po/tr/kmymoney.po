@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 16:34+0000\n"
+"POT-Creation-Date: 2023-01-16 00:57+0000\n"
 "PO-Revision-Date: 2022-12-17 18:55+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -21568,32 +21568,6 @@ msgstr "Bu aktarımı atlamak için bu düğmeyi kullanın"
 msgid "&Close"
 msgstr "&Kapat"
 
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:48
-#, kde-format
-msgctxt "Activity for income categories"
-msgid "Received"
-msgstr "Alınan"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:49
-#, kde-format
-msgctxt "Activity for expense categories"
-msgid "Paid"
-msgstr "Ödenmiş"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:51
-#, fuzzy, kde-format
-#| msgid "Pay to"
-msgctxt "Payee"
-msgid "Pay to"
-msgstr "Alacaklı"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:52
-#, fuzzy, kde-format
-#| msgid "From"
-msgctxt "Payer"
-msgid "From"
-msgstr "Kimden:"
-
 #: kmymoney/widgets/kmymoneydateedit.cpp:452
 #: kmymoney/widgets/kmymoneydateedit.cpp:521
 #, kde-format
@@ -25416,6 +25390,26 @@ msgstr ""
 "\n"
 "<p>Tüm bilgiler isteğe bağlıdır ve KMyMoney dosyanızı kişiselleştimeye yarar."
 "</p>"
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Alınan"
+
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Ödenmiş"
+
+#, fuzzy
+#~| msgid "Pay to"
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Alacaklı"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "Kimden:"
 
 #, fuzzy
 #~| msgid "CC"

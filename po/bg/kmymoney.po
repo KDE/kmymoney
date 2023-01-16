@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 16:34+0000\n"
+"POT-Creation-Date: 2023-01-16 00:57+0000\n"
 "PO-Revision-Date: 2009-10-17 16:25+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -20054,30 +20054,6 @@ msgstr ""
 msgid "&Close"
 msgstr "&Затваряне"
 
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:48
-#, kde-format
-msgctxt "Activity for income categories"
-msgid "Received"
-msgstr "Получено"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:49
-#, kde-format
-msgctxt "Activity for expense categories"
-msgid "Paid"
-msgstr ""
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:51
-#, fuzzy, kde-format
-msgctxt "Payee"
-msgid "Pay to"
-msgstr "Копие на %1"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:52
-#, fuzzy, kde-format
-msgctxt "Payer"
-msgid "From"
-msgstr "От"
-
 #: kmymoney/widgets/kmymoneydateedit.cpp:452
 #: kmymoney/widgets/kmymoneydateedit.cpp:521
 #, kde-format
@@ -23485,3 +23461,17 @@ msgid ""
 "<p>All information is optional and only used to personalize your KMyMoney "
 "file.</p>"
 msgstr ""
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Получено"
+
+#, fuzzy
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Копие на %1"
+
+#, fuzzy
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "От"

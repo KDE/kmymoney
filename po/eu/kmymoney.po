@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 16:34+0000\n"
+"POT-Creation-Date: 2023-01-16 00:57+0000\n"
 "PO-Revision-Date: 2023-01-08 08:59+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -21024,30 +21024,6 @@ msgstr "Erabili botoi hau transakzio hau saihesteko"
 msgid "&Close"
 msgstr "It&xi"
 
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:48
-#, kde-format
-msgctxt "Activity for income categories"
-msgid "Received"
-msgstr "Jasota"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:49
-#, kde-format
-msgctxt "Activity for expense categories"
-msgid "Paid"
-msgstr "Ordainduta"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:51
-#, kde-format
-msgctxt "Payee"
-msgid "Pay to"
-msgstr "Ordaindu honi:"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:52
-#, kde-format
-msgctxt "Payer"
-msgid "From"
-msgstr "Hemendik:"
-
 #: kmymoney/widgets/kmymoneydateedit.cpp:452
 #: kmymoney/widgets/kmymoneydateedit.cpp:521
 #, kde-format
@@ -24863,6 +24839,22 @@ msgstr ""
 "\n"
 "<p>Informazio hori aukerakoa da, eta zure KMyMoney fitxategia "
 "pertsonalizatzeko baino ez da erabiliko.</p>"
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Jasota"
+
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Ordainduta"
+
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Ordaindu honi:"
+
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "Hemendik:"
 
 #~ msgctxt "@title:column"
 #~ msgid "CC"

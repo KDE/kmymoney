@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 16:34+0000\n"
+"POT-Creation-Date: 2023-01-16 00:57+0000\n"
 "PO-Revision-Date: 2020-01-02 16:30+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -21627,32 +21627,6 @@ msgstr "Použiť toto tlačidlo na preskočenie tejto transakcie."
 msgid "&Close"
 msgstr "&Zavrieť"
 
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:48
-#, kde-format
-msgctxt "Activity for income categories"
-msgid "Received"
-msgstr "Prijaté"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:49
-#, kde-format
-msgctxt "Activity for expense categories"
-msgid "Paid"
-msgstr "Vyplatené"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:51
-#, fuzzy, kde-format
-#| msgid "Pay to"
-msgctxt "Payee"
-msgid "Pay to"
-msgstr "Zaplatiť do"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:52
-#, fuzzy, kde-format
-#| msgid "From"
-msgctxt "Payer"
-msgid "From"
-msgstr "Od"
-
 #: kmymoney/widgets/kmymoneydateedit.cpp:452
 #: kmymoney/widgets/kmymoneydateedit.cpp:521
 #, kde-format
@@ -25494,6 +25468,26 @@ msgstr ""
 "\n"
 "<p>Všetky informácie sú voliteľné a poskytnuté len pre prispôsobenie vášho "
 "súboru KMyMoney.</p>"
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Prijaté"
+
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Vyplatené"
+
+#, fuzzy
+#~| msgid "Pay to"
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Zaplatiť do"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "Od"
 
 #, fuzzy
 #~| msgid "CC"

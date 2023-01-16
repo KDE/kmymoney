@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 16:34+0000\n"
+"POT-Creation-Date: 2023-01-16 00:57+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -20840,32 +20840,6 @@ msgstr "Išrinkti operacijas be korespondento"
 msgid "&Close"
 msgstr "&Užverti"
 
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:48
-#, kde-format
-msgctxt "Activity for income categories"
-msgid "Received"
-msgstr "Gauta"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:49
-#, fuzzy, kde-format
-msgctxt "Activity for expense categories"
-msgid "Paid"
-msgstr "Galioja nuo:"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:51
-#, fuzzy, kde-format
-#| msgid "Pay to"
-msgctxt "Payee"
-msgid "Pay to"
-msgstr "Kam mokėti"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:52
-#, fuzzy, kde-format
-#| msgid "From"
-msgctxt "Payer"
-msgid "From"
-msgstr "Nuo"
-
 #: kmymoney/widgets/kmymoneydateedit.cpp:452
 #: kmymoney/widgets/kmymoneydateedit.cpp:521
 #, kde-format
@@ -24443,6 +24417,27 @@ msgstr ""
 "\n"
 "<p>Informaciją įvesti nėra būtina, ji naudojama tik KMyMoney failo "
 "personalizacijai.</p>"
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Gauta"
+
+#, fuzzy
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Galioja nuo:"
+
+#, fuzzy
+#~| msgid "Pay to"
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Kam mokėti"
+
+#, fuzzy
+#~| msgid "From"
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "Nuo"
 
 #, fuzzy
 #~| msgid "C"

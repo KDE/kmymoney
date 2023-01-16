@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 16:34+0000\n"
+"POT-Creation-Date: 2023-01-16 00:57+0000\n"
 "PO-Revision-Date: 2022-10-11 11:38+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -21081,30 +21081,6 @@ msgstr "Tämän avulla voidaan ohittaa tämä tapahtuma"
 msgid "&Close"
 msgstr "&Sulje"
 
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:48
-#, kde-format
-msgctxt "Activity for income categories"
-msgid "Received"
-msgstr "Vastaanotettu"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:49
-#, kde-format
-msgctxt "Activity for expense categories"
-msgid "Paid"
-msgstr "Maksettu"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:51
-#, kde-format
-msgctxt "Payee"
-msgid "Pay to"
-msgstr "Maksunsaaja"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:52
-#, kde-format
-msgctxt "Payer"
-msgid "From"
-msgstr "Mistä"
-
 #: kmymoney/widgets/kmymoneydateedit.cpp:452
 #: kmymoney/widgets/kmymoneydateedit.cpp:521
 #, kde-format
@@ -24882,6 +24858,22 @@ msgstr ""
 "\n"
 "<p>Mitkään tiedot eivät ole pakollisia. Niitä käytetään vain KMyMoney-"
 "kirjanpitosi mukauttamiseen.</p>"
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Vastaanotettu"
+
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Maksettu"
+
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Maksunsaaja"
+
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "Mistä"
 
 #, fuzzy
 #~| msgid "CC"

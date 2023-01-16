@@ -1,13 +1,13 @@
 # translation of kmymoney to Italian
 # Samuel Algisi <woodhouse@member.fsf.org>, 2005.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2005, 2006, 2007, 2008, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Vincenzo Reale <smart2128vr@gmail.com>, 2005, 2006, 2007, 2008, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Sandro Bonazzola <sandrobonazzola@users.sourceforge.net>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 16:34+0000\n"
-"PO-Revision-Date: 2022-12-16 10:53+0100\n"
+"POT-Creation-Date: 2023-01-16 00:57+0000\n"
+"PO-Revision-Date: 2023-01-09 09:35+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2899,24 +2899,7 @@ msgstr "Scegli XML se non sicuro."
 
 #. i18n: ectx: property (html), widget (QTextBrowser, textBrowser)
 #: kmymoney/dialogs/ksaveasquestion.ui:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#| "REC-html40/strict.dtd\">\n"
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
-#| "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#| "\">KMyMoney supports multiple storage types. The availability of storage "
-#| "types depends on the presence of plugins and their activation in the "
-#| "application settings.</p>\n"
-#| "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
-#| "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /"
-#| ">If you are uncertain what to choose here, then <span style=\" font-"
-#| "weight:600;\">XML</span> is probably your best choice.</p></body></html>"
+#, kde-format
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
 "REC-html40/strict.dtd\">\n"
@@ -2940,15 +2923,14 @@ msgstr ""
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-"
 "weight:400; font-style:normal;\">\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
-"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">KMyMoney "
-"supporta diversi tipo di archiviazione. La disponibilità dei tipi di "
-"archiviazione dipende dalla presenza di estensioni e dalla loro attivazione "
-"nelle impostazioni dell'applicazione.</p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
-"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br />Se "
-"non sei sicuro su cosa scegliere qui, lo <span style=\" font-weight:600;"
-"\">XML</span> è probabilmente la tua scelta migliore.</p></body></html>"
+"<p align=\"justify\" style=\" margin: 0; -qt-block-indent:0; text-indent:0px;"
+"\">KMyMoney supporta diversi tipo di archiviazione. La disponibilità dei "
+"tipi di archiviazione dipende dalla presenza di estensioni e dalla loro "
+"attivazione nelle impostazioni dell'applicazione.</p>\n"
+"<p align=\"justify\" style=\" margin: 0; -qt-block-indent:0; text-indent:0px;"
+"\"><br />Se non sei sicuro su cosa scegliere qui, <span style=\" font-"
+"weight:600;\">XML</span> è probabilmente la tua scelta migliore.</p></body></"
+"html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/ksaveasquestion.ui:68
@@ -20503,11 +20485,10 @@ msgid "Cleared: %1"
 msgstr "Compensata: %1"
 
 #: kmymoney/views/ledgerviewpage_p.h:141
-#, fuzzy, kde-format
-#| msgid "%1 of %2"
+#, kde-format
 msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
 msgid "%1 of %2: %3"
-msgstr "%1 di %2"
+msgstr "%1 di %2: %3"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
 #, kde-format
@@ -21161,30 +21142,6 @@ msgstr "Premi qui per saltare questa transazione"
 msgid "&Close"
 msgstr "&Chiudi"
 
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:48
-#, kde-format
-msgctxt "Activity for income categories"
-msgid "Received"
-msgstr "Ricevuto"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:49
-#, kde-format
-msgctxt "Activity for expense categories"
-msgid "Paid"
-msgstr "Pagato"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:51
-#, kde-format
-msgctxt "Payee"
-msgid "Pay to"
-msgstr "Paga a"
-
-#: kmymoney/widgets/kmymoneycashflowcombo.cpp:52
-#, kde-format
-msgctxt "Payer"
-msgid "From"
-msgstr "Da"
-
 #: kmymoney/widgets/kmymoneydateedit.cpp:452
 #: kmymoney/widgets/kmymoneydateedit.cpp:521
 #, kde-format
@@ -21330,8 +21287,7 @@ msgid "Feedback content"
 msgstr "Contenuto della segnalazione"
 
 #: kmymoney/widgets/ktagcontainer.cpp:110
-#, fuzzy, kde-format
-#| msgid "Tag"
+#, kde-format
 msgctxt "@info:placeholder tag combo box"
 msgid "Tag"
 msgstr "Etichetta"
@@ -25031,6 +24987,22 @@ msgstr ""
 "\n"
 "<p>Tutte le informazioni sono facoltative e sono utilizzate solo per \n"
 "personalizzare il file di KMyMoney.</p>"
+
+#~ msgctxt "Activity for income categories"
+#~ msgid "Received"
+#~ msgstr "Ricevuto"
+
+#~ msgctxt "Activity for expense categories"
+#~ msgid "Paid"
+#~ msgstr "Pagato"
+
+#~ msgctxt "Payee"
+#~ msgid "Pay to"
+#~ msgstr "Paga a"
+
+#~ msgctxt "Payer"
+#~ msgid "From"
+#~ msgstr "Da"
 
 #~ msgctxt "@title:column"
 #~ msgid "CC"
