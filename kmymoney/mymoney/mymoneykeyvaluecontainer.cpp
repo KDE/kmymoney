@@ -36,7 +36,7 @@ MyMoneyKeyValueContainer::~MyMoneyKeyValueContainer()
     delete d;
 }
 
-QString MyMoneyKeyValueContainer::value(const QString& key) const
+QString MyMoneyKeyValueContainer::value(const QString& key, const QString& defaultValue) const
 {
     Q_D(const MyMoneyKeyValueContainer);
     QMap<QString, QString>::ConstIterator it;
@@ -44,7 +44,12 @@ QString MyMoneyKeyValueContainer::value(const QString& key) const
     it = d->m_kvp.find(key);
     if (it != d->m_kvp.end())
         return (*it);
-    return *nullString;
+    return defaultValue;
+}
+
+QString MyMoneyKeyValueContainer::value(const QString& key) const
+{
+    return value(key, *nullString);
 }
 
 void MyMoneyKeyValueContainer::setValue(const QString& key, const QString& value)

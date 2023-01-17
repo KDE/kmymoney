@@ -42,6 +42,22 @@ void MyMoneyKeyValueContainerTest::testRetrieveValue()
     QVERIFY(m->value("key").isEmpty());
 }
 
+void MyMoneyKeyValueContainerTest::testRetrieveDefaultValue()
+{
+    // make sure container is empty
+    QCOMPARE(m->d_func()->m_kvp.count(), 0);
+
+    // check to retrieve the default value
+    QCOMPARE(m->value("Key", "KMyMoney"), "KMyMoney");
+    // now add a value
+    m->d_func()->m_kvp["Key"] = "Value";
+    // check to retrieve the stored value
+    QCOMPARE(m->value("Key", "KMyMoney"), "Value");
+    // now delete it and check to get the default value again
+    m->deletePair("Key");
+    QCOMPARE(m->value("Key", "KMyMoney"), "KMyMoney");
+}
+
 void MyMoneyKeyValueContainerTest::testSetValue()
 {
     m->setValue("Key", "Value");

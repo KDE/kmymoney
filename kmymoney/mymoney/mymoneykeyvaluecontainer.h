@@ -57,13 +57,26 @@ public:
     virtual ~MyMoneyKeyValueContainer();
 
     /**
-      * This method can be used to retrieve the value for a specific @p key.
-      * If the key is unknown in this container, an empty string will be returned.
-      *
-      * @param key const reference to QString with the key to search for
-      * @return reference to value of this key. If the key does not exist,
-      *         an empty string is returned.
-      */
+     * This method can be used to retrieve the value for a specific @p key.
+     * If the key is unknown in this container, an empty string will be returned.
+     *
+     * @param key const reference to QString with the key to search for
+     * @param defaultValue const reference to the default value
+     * @return value of this key. If the key does not exist,
+     *         the @a defaultValue is returned.
+     */
+    QString value(const QString& key, const QString& defaultValue) const;
+
+    /**
+     * This method can be used to retrieve the value for a specific @p key.
+     * If the key is unknown in this container, an empty string will be returned.
+     *
+     * @param key const reference to QString with the key to search for
+     * @return value of this key. If the key does not exist,
+     *         an empty string is returned.
+     *
+     * This is a convenience function for value(key, defaultValue)
+     */
     QString value(const QString& key) const;
 
     /**

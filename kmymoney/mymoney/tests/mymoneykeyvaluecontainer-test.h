@@ -21,6 +21,7 @@ private Q_SLOTS:
     void cleanup();
     void testEmptyConstructor();
     void testRetrieveValue();
+    void testRetrieveDefaultValue();
     void testSetValue();
     void testDeletePair();
     void testClear();
