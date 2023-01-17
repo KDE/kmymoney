@@ -1,0 +1,55 @@
+<sect1 id="details.impexp.woob">
+  <sect1info>
+    <author
+>&Dawid.Wrobel; &Dawid.Wrobel.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+  </sect1info>
+
+  <title
+>Importatore Woob</title>
+  <sect2>
+    <title
+>Che cos'è Woob?</title>
+    <para
+><ulink url="https://woob.tech/"
+>Woob</ulink
+> (abbreviazione per <quote
+>Web outside of browsers</quote
+>) è <quote
+>una raccolta di applicazioni in grado di interagire con i siti web, senza richiedere all'utente di aprirli in un browser</quote
+>. Una di <ulink url="https://woob.tech/applications/"
+>tali applicazioni</ulink
+> consente specificamente di interagire con <ulink url="https://woob.tech/applications/bank"
+>istituti finanziari</ulink
+>. &kmymoney; fornisce un'estensione che lo utilizza direttamente, permettendo quindi di importare transazioni da quei conti che altrimenti non offrono supporto per nessun altro protocollo finanziario gestito da &kmymoney;. </para>
+
+    <note>
+      <para
+>&kmymoney; attualmente richiede l'installazione indipendente di Woob. Fai riferimento alle sezioni seguenti per i dettagli. </para>
+    </note>
+  </sect2>
+  <sect2>
+    <title
+>Installare Woob</title>
+    <para
+>Un numero crescente di distribuzioni Linux fornisce un pacchetto per Woob, e questo è preferibile, se disponibile per te. </para>
+    <para
+>È necessario installare Python 3 prima di continuare. Tutte le distribuzioni Linux forniscono pacchetti per Python, ma puoi sempre scaricare un pacchetto per il tuo sistema dal <ulink url="https://www.python.org/downloads/"
+>sito web ufficiale</ulink
+>. </para>
+
+    <para
+>Con Python 3 installato, ora dovrebbe essere possibile scaricare e installare facilmente i moduli Woob richiesti. Fare riferimento alle istruzioni sul <ulink url="https://woob.tech/install/"
+>sito Web Woob</ulink
+>. </para>
+  </sect2>
+  <sect2>
+    <title
+>Utilizzo di Woob</title>
+    <para
+>&kmymoney; utilizza il modulo <quote
+>woob bank</quote
+>. </para>
+  </sect2>
+</sect1>

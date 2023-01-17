@@ -1,0 +1,55 @@
+<sect1 id="details.impexp.woob">
+  <sect1info>
+    <author
+>&Dawid.Wrobel; &Dawid.Wrobel.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+  </sect1info>
+
+  <title
+>Importador de Woob</title>
+  <sect2>
+    <title
+>Què és Woob?</title>
+    <para
+>El <ulink url="https://woob.tech/"
+>Woob</ulink
+> (abreviatura de <quote
+>Web outside of browsers (Web fora dels navegadors)</quote
+>) és <quote
+>una col·lecció d'aplicacions capaces d'interactuar amb els llocs web, sense requerir que l'usuari les obri en un navegador</quote
+>. Una d'<ulink url="https://woob.tech/applications/"
+>aquestes aplicacions</ulink
+> permet interactuar específicament amb les <ulink url="https://woob.tech/applications/bank"
+>institucions financeres</ulink
+>. El &kmymoney; proporciona un connector que l'empra directament, el qual permet importar operacions des d'aquests comptes en aquestes institucions, que d'altra manera no és admès per cap altre protocol financer que gestioni el &kmymoney;. </para>
+
+    <note>
+      <para
+>Actualment, el &kmymoney; requereix que instal·leu el Woob de forma independent. Per a més detalls, vegeu les seccions següents. </para>
+    </note>
+  </sect2>
+  <sect2>
+    <title
+>Instal·lar el Woob</title>
+    <para
+>Un nombre creixent de distribucions del Linux proporcionen paquets per al Woob, i això és preferible, si n'hi ha un de disponible. </para>
+    <para
+>Abans de continuar, primer cal instal·lar el Python 3. Totes les distribucions del Linux proporcionen paquets del Python, però sempre podreu descarregar un paquet per al vostre sistema des del <ulink url="https://www.python.org/downloads/"
+>lloc web oficial</ulink
+>. </para>
+
+    <para
+>Amb el Python 3 instal·lat, ara hauríeu de poder descarregar i instal·lar amb facilitat els mòduls de Woob requerits. Vegeu les instruccions en el <ulink url="https://woob.tech/install/"
+>lloc web de Woob</ulink
+>. </para>
+  </sect2>
+  <sect2>
+    <title
+>Ús del Woob</title>
+    <para
+>El &kmymoney; usa el mòdul <quote
+>woob bank</quote
+>. </para>
+  </sect2>
+</sect1>

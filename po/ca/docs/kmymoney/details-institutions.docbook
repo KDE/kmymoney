@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.institutions">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>1 de febrer de 2018</date>
+  <releaseinfo
+>5.0.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Institucions</title>
+
+<para
+>La vista de les institucions proporciona un resum de tots els comptes agrupats sota les seves respectives institucions. La llista de comptes sota qualsevol institució es pot expandir o contraure fent clic a la fletxa que hi ha a l'esquerra del nom de la institució. L'última institució llistada és «Comptes sense una institució assignada». </para>
+
+<para
+>La vista de les institucions mostra diverses columnes, mostrant la informació sobre el compte. També mostra el valor total de tots els comptes en cada institució. Podreu seleccionar quines columnes es mostraran fent clic dret en qualsevol capçalera de columna i seleccionant o desmarcant la casella de selecció al costat del nom de la columna. </para>
+
+<para>
+<screenshot>
+    	<screeninfo
+>La vista de la institució</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_view.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>La vista de la institució</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Hi ha disponibles les columnes següents a la vista de les institucions. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Compte</term>
+    <listitem>
+      <para
+>El nom de la institució o compte. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Tipus</term>
+    <listitem>
+      <para
+>El tipus de compte, &pex;, Estalvis, Comptes corrents, Targeta de crèdit... </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Impostos</term>
+    <listitem>
+      <para
+>Una indicació de si aquest compte s'ha configurat com a important a efectes d'impostos. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>IVA</term>
+    <listitem>
+      <para
+>Una indicació de si aquest compte s'ha configurat per a aplicar un IVA sobre l'operació. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>CD (centre de despesa)</term>
+    <listitem>
+      <para
+>Una indicació que una assignació de centre de despesa és necessària sota certes condicions en introduir una operació per a aquest compte. Aquesta és una característica nova, la qual encara no està implementada, de manera que actualment aquesta columna no s'utilitza. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Saldo total</term>
+    <listitem>
+      <para
+>Una altra característica nova que encara no s'ha implementat. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Valor publicat</term>
+    <listitem>
+      <para
+>Aquest és el saldo del compte segons ha proporcionat la institució. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Valor total</term>
+    <listitem>
+      <para
+>El saldo del compte en el &kmymoney;. Recordeu que per a les institucions, aquest és el total dels saldos de tots els comptes en aquesta institució. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Número</term>
+    <listitem>
+      <para
+>El número de compte, si se n'ha introduït un. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Codi d'ordenació</term>
+    <listitem>
+      <para
+>Mostra el número IBAN, si s'ha introduït un valor al camp apropiat al diàleg Informació del compte. </para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+
+<para
+>Cal tenir en compte que moltes d'aquestes mateixes columnes també estan disponibles a les altres vistes, com la vista dels comptes. Quan seleccioneu o desseleccioneu una casella de selecció per a mostrar o eliminar una columna, veureu una finestra emergent que us demanarà si voleu mostrar o eliminar aquesta columna de totes les altres vistes on es troba present. Si marqueu «No», només es canviarà la visualització d'aquesta columna a la vista actual. </para>
+
+<sect1 id="details.institutions.institution">
+<title
+>Opcions de la institució</title>
+
+<para
+>En fer clic dret sobre el nom d'una institució, apareixerà un submenú Opcions de la institució, el qual proporcionarà diverses opcions. En seleccionar <guimenuitem
+>Institució nova...</guimenuitem
+> s'obrirà el diàleg Institució nova, on podreu introduir tota la informació necessària per a crear una institució nova. En seleccionar <guimenuitem
+>Edita la institució...</guimenuitem
+> apareixerà una finestra editable amb detalls de la institució, com el nom i l'adreça. En seleccionar <guimenuitem
+>Suprimeix la institució</guimenuitem
+>, s'eliminarà tota la institució i tots els seus comptes associats. Recordeu que només podreu suprimir una institució si podeu suprimir tots els seus comptes, i només podreu suprimir cada compte associat si no teniu operacions i cap planificació que s'hi refereixi. En seleccionar <guimenuitem
+>Compte nou...</guimenuitem
+> anireu a través del procés per a un compte nou, el qual es descriu amb més detall a la secció següent. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Submenú amb les opcions de la Institució</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_options.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Submenú amb les opcions de la Institució</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.institutions.new">
+<title
+>Institució nova</title>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="newinst.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>Institució nova</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<note
+><para
+>Haureu de tenir un fitxer obert abans de poder crear una institució nova. Si no n'hi ha un, l'<link linkend="firsttime.3"
+>haureu de crear</link
+>. </para
+></note>
+
+<para
+>Només es requereix el nom al diàleg Institució nova, tots els altres camps són opcionals. Com amb el diàleg per a la informació personal, actualment el &kmymoney; no empra aquestes dades, però seran requerides per les versions futures per a certes característiques. En particular, es requerirà el Codi de banc i el BIC (codi d'identificació del banc) per a la banca en línia. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.institutions.account">
+<title
+>Opcions del compte</title>
+
+<para
+>En fer clic dret al nom d'un compte, apareixerà un submenú Opcions del compte. En seleccionar <guimenuitem
+>Compte nou...</guimenuitem
+> us durà a través del procés per al compte nou. En seleccionar <guimenuitem
+>Obre el llibre major</guimenuitem
+>, s'accedirà directament a la vista del llibre major o a la vista de les inversions, segons el tipus de compte. Simplement fent doble clic al nom d'un compte també s'obrirà el compte. En seleccionar <guimenuitem
+>Edita el compte</guimenuitem
+>, apareixerà una finestra que permet canviar el nom d'un compte, la data d'inici, la institució bancària associada i el compte pare. Suprimir un compte només serà possible si no hi ha operacions associades amb aquest, i el compte no s'esmenta en cap operació planificada. En seleccionar <guimenuitem
+>Concilia...</guimenuitem
+> s'obrirà l'Assistent de conciliació, el qual us durà a través del procés de comparar l'extracte amb les vostres entrades electròniques. Es presenten més detalls a les seccions corresponents d'aquest manual, així com informació sobre les altres opcions. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Submenú amb les opcions del compte</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="account_options.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Submenú amb les opcions del compte</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect1>
+</chapter>

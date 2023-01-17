@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.budgets">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Colin.Wright; &Colin.Wright.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>29/06/2011</date>
+  <releaseinfo
+>4.6</releaseinfo>
+</chapterinfo>
+
+<title
+>Budget</title>
+
+<sect1 id="details.budgets.define">
+<title
+>Cos'è un budget?</title>
+
+<para
+>Un budget è una lista, divisa per categorie, delle entrate e delle uscite previste in un certo periodo. </para>
+
+<para
+>La funzionalità di &kmymoney; per i budget permette di creare budget annuali. È possibile creare più di un budget per ogni anno. Si impostano i valori di budget mensili per ogni categoria di entrate ed uscite. I valori possono essere impostati in tre modi, in base al periodo: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Mensile</term>
+    <listitem
+><para
+>(Predefinito) specifica un singolo valore associato ad ogni mese nel budget.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Annuale</term>
+    <listitem
+><para
+>Specifica un singolo valore da dividere in parti uguali per i mesi nel budget</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Individuale</term>
+    <listitem
+><para
+>Specifica valori separati per ogni mese.</para>
+      <para
+>Questo viene usato se le entrate e le uscite non sono distribuite in modo uniforme nell'anno.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>&kmymoney; fornisce diversi report che permettono di confrontare le entrate e le uscite ai relativi budget. Questi report sono descritti dettagliatamente in un'<link linkend="budget.details.reports"
+>altra sezione</link
+>. </para>
+</sect1>
+
+<sect1 id="details.budgets.create">
+<title
+>I tuoi budget</title>
+
+<para
+>È possibile accedere ai budget facendo clic sulla relativa icona nel selettore della vista nella parte sinistra della finestra di &kmymoney;. </para>
+
+<para
+>Ci sono due sezioni principali nella finestra del budget. Sono descritte in modo più dettagliato in seguito. A sinistra, la sezione principale visualizza l'elenco dei budget creati. Sopra sono presenti pulsanti per creare, rinominare ed eliminare i budget. A destra, ci sono tre sezioni. In alto c'è l'elenco dei conti. In basso sono visualizzati i totali assegnati al budget per la categoria selezionata nell'elenco dei conti. Tra queste due aree ci sono controlli aggiuntivi per gestire il budget. </para>
+
+<sect2>
+<title
+>Visualizzazione, creazione, modifica ed eliminazione dei budget</title>
+
+<para
+>Questa sezione della finestra Budget elenca i budget contenuti nel file corrente di &kmymoney;. Se non sono ancora stati creati dei budget, l'elenco sarà vuoto. L'elenco dei budget ha due colonne: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Nome</term>
+    <listitem>
+      <para
+>Nome del budget</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Anno</term>
+    <listitem>
+      <para
+>Anno fiscale del budget. Notare che il mese e il giorno iniziali dell'anno fiscale possono essere specificati nella <link linkend="details.settings.general.global"
+>finestra Configura &kmymoney;.</link
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>Sulla destra sono visualizzati i valori del budget selezionato. Per selezionare un budget diverso, è possibile fare clic sulla voce corrispondente nell'elenco. In alternativa, se l'elenco è l'elemento attivo della finestra, è possibile selezionare un budget diverso con i tasti &Up; e &Down;. Se si effettuano delle modifiche a un budget e si seleziona un budget diverso, &kmymoney; chiederà se si vogliono salvare le modifiche o scartarle. </para>
+
+<para
+>Ci sono tre pulsanti sopra l'elenco dei budget. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Nuovo</term>
+    <listitem>
+      <para
+>Crea un nuovo budget. Il nome predefinito per un nuovo budget è «Budget &lt;anno&gt;» dove &lt;anno&gt; è l'anno fiscale attuale. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Rinomina</term>
+    <listitem>
+      <para
+>Modifica il nome del budget selezionato.</para>
+
+      <para
+>È possibile anche modificare il nome di un budget facendo doppio clic sul nome di un budget nell'elenco.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Elimina</term>
+    <listitem>
+      <para
+>Elimina il budget selezionato.</para>
+    </listitem>
+  </varlistentry>
+
+<!--  buttons moved in the UI - they are now described below.  Will remove
+      from here after this chapter has been reviewed.
+  <varlistentry>
+    <term
+>Revert</term>
+    <listitem>
+      <para
+>Reverts the selected Budget to its last stored state.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Save</term>
+    <listitem>
+      <para
+>Accepts any unsaved changes to the selected Budget and
+        stores them.</para>
+    </listitem>
+  </varlistentry>
+ -->
+</variablelist>
+
+<para
+>Si possono ottenere opzioni aggiuntive nel menu che si apre facendo clic con il &RMB; su un budget. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Nuovo budget</term>
+    <listitem>
+      <para
+>Crea un nuovo budget vuoto.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Rinomina budget</term>
+    <listitem>
+      <para
+>Rinomina il budget selezionato.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Cambia anno del budget</term>
+    <listitem>
+      <para
+>Visualizza una finestra con un elenco di anni che permette di selezionare un anno fiscale diverso per il budget.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Elimina budget</term>
+    <listitem>
+      <para
+>Elimina il budget selezionato.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Copia budget</term>
+    <listitem>
+      <para
+>Crea una copia del budget selezionato. Il nuovo budget avrà come nome «Copia di &lt;budget&gt;», dove &lt;budget&gt; è il nome del budget copiato.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Budget basato su previsione</term>
+    <listitem>
+      <para
+>Compila i totali di budget sulla base dei dati dei valori di previsione di &kmymoney;. Vedere la sezione su <link linkend="details.forecast.define"
+>Previsioni</link
+> per ulteriori informazioni. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Lista dei conti</title>
+
+<para
+>L'elenco dei conti visualizza l'elenco delle categorie di entrata e di uscita. (Ricordare che all'interno di &kmymoney;, le categorie sono trattate come un tipo di conto speciale.) Come in altre parti di &kmymoney;, l'elenco è organizzato in una struttura ad albero. L'elenco può essere espanso o contratto per visualizzare o nascondere le sotto-categorie di una categoria. L'elenco dei conti ha molte colonne: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Conto</term>
+    <listitem>
+      <para
+>Nome del conto (categoria)</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Tipo</term>
+    <listitem>
+      <para
+>Tipo di categoria (entrata o uscita).</para>
+    </listitem>
+  </varlistentry>
+
+<!-- these seem to have been removed from the display.  Remove from here
+     once this is confirmed by the programmers.
+  <varlistentry>
+    <term
+>Tax</term>
+    <listitem>
+      <para
+>Checked if a Category included in Tax Reports</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>VAT</term>
+    <listitem>
+      <para
+>Checked if a Category marked as a VAT Category</para>
+    </listitem>
+  </varlistentry>
+-->
+
+  <varlistentry>
+    <term
+>Saldo totale</term>
+    <listitem>
+      <para
+>Il saldo attuale del conto. Sarà vuoto per le categorie, a meno che la categoria sia definita in una valuta estera. In questo caso, il saldo totale mostrerà il valore della categoria nella valuta definita.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Valore totale</term>
+    <listitem>
+      <para
+>Valore annuo totale nel budget. Se una categoria ha sottocategorie e l'elenco delle sottocategorie di una categoria è contratto, il valore visualizzato è la somma dei valori della categoria e delle sue sottocategorie. Se una categoria è definita in una valuta straniera, il valore totale sarà mostrato nella valuta base.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<!-- It would be nice to include the actual button icons here to confirm
+     which buttons are referred to.  -->
+<para
+>Sotto l'elenco dei conti sono presenti diversi controlli. I pulsanti <guibutton
+>Aggiorna</guibutton
+> e <guibutton
+>Ripristina</guibutton
+> sono descritti più in basso. I pulsanti Contrai ed Espandi servono a contrarre o espandere l'elenco dei conti. </para>
+
+<para
+>L'elenco dei conti può essere filtrato in due modi.  Marcando la casella di selezione <guilabel
+>Nascondi le categorie inutilizzate</guilabel
+>, si nasconderanno tutte le categorie per le quali non è stato assegnato alcun valore alla categoria o alle sue sottocategorie. A destra della casella, c'è un riquadro di testo senza etichetta. Saranno elencate solo le categorie che contengono ciò che è stato digitato, e saranno elencate anche le categorie superiori. </para>
+
+<para
+>Nota che cambiando <guilabel
+>Nascondi le categorie di budget non utilizzate</guilabel
+> o il valore del filtro cambierà l'elenco delle categorie visualizzate. Potresti dover espandere nuovamente l'elenco per vedere tutte le categorie che dovrebbero essere mostrate con le impostazioni attuali. </para>
+
+</sect2>
+
+<sect2>
+<title
+>Assegnazioni</title>
+
+<para
+>L'area delle assegnazioni visualizza i valori delle categorie selezionate nell'elenco dei conti. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Conto</term>
+    <listitem>
+      <para
+>Visualizza il nome della categoria selezionata. Se la categoria è contenuta in un'altra categoria, verrà visualizzato il nome completo, nel formato «Categoria:Sottocategoria».</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Totale</term>
+    <listitem>
+      <para
+>Visualizza il valore totale annuale assegnato alla categoria.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Includi sottoconti</term>
+    <listitem>
+      <para
+>Se questa casella è marcata, Report mostra le entrate e le uscite effettive in sottocategorie che appartengono alla categoria principale al posto della sottocategoria.</para>
+
+      <para
+>Se una sottocategoria ha un valore specificato nel budget, le entrate e le uscite vengono visualizzate in relazione alla sottocategoria.</para>
+
+      <para
+>Se la categoria selezionata nell'elenco dei conti ha le sue sottocategorie contratte, mostrerà la somma dei valori totali delle sottocategorie nonostante il suo valore totale, i totali nell'area delle assegnazioni potrebbero essere uguali a 0, a meno che questa casella sia stata marcata o che il totale sia stato assegnato esplicitamente alla categoria.</para>
+
+      <para
+>In generale, dovrai marcare questa casella e assegnare i valori alla categoria e non a ciascuna delle sue sottocategorie, o non marcare la casella e assegnare i valori alle sottocategorie e non alla categoria. Se ogni sottocategoria ha i totali assegnati quando questa casella è marcata, tali totali saranno inglobati nella categoria.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Pulisci</term>
+    <listitem>
+      <para
+>Il pulsante <guibutton
+>Pulisci</guibutton
+> azzera il valore o i valori delle categorie di budget.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Periodo</term>
+    <listitem>
+      <para
+>I pulsanti a scelta singola <guilabel
+>Periodo</guilabel
+> consentono di scegliere il periodo a cui si applica il valore</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>Mensile</term>
+	  <listitem>
+	    <para
+>Viene inserito un singolo valore, che specifica il totale mensile. Questa è l'impostazione predefinita.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term
+>Annuale</term>
+	  <listitem>
+	    <para
+>Viene inserito un singolo valore, che specifica il totale annuale.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term
+>Individuale</term>
+	  <listitem>
+	    <para
+>Sono specificati valori per ogni mese. Questo è utile se le entrate o le uscite non sono distribuite in modo uniforme nell'anno.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+
+      <para
+>Se si sono già specificati uno o più valori e si modifica il Periodo, &kmymoney; chiederà se si vuole usare il totale annuale corrente per riempire i nuovi campi. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Accetta e ripristina</title>
+
+<para
+>Per ragioni relative alle prestazioni, le modifiche apportate a un budget non sono salvate immediatamente. Invece, devono prima essere memorizzate con il pulsante <guibutton
+>Aggiorna</guibutton
+> e poi salvate in modo permanente con la funzione <guibutton
+>Salva</guibutton
+>. </para>
+
+<para
+>Alla prima modifica dei valori del budget, vengono abilitati i pulsanti <guibutton
+>Aggiorna</guibutton
+> e <guibutton
+>Ripristina</guibutton
+>. Possono essere fatte più modifiche al budget. Premendo <guibutton
+>Aggiorna</guibutton
+> si salveranno i cambiamenti e si disabiliteranno tali pulsanti. </para>
+
+<para
+>Il pulsante <guibutton
+>Salva</guibutton
+> salva solo le modifiche che sono state memorizzate con il pulsante <guibutton
+>Aggiorna</guibutton
+>. Quindi, se si modifica un budget, ma non si fa clic su <guibutton
+>Aggiorna</guibutton
+>, la funzione <guibutton
+>Salva</guibutton
+> non memorizzerà il budget modificato e i pulsanti <guibutton
+>Aggiorna</guibutton
+> e <guibutton
+>Ripristina</guibutton
+> rimarranno abilitati. </para>
+
+<para
+>La funzione Ripristina annulla le modifiche fatte a un budget dall'ultima volta che si è selezionato Aggiorna, e disabilita i pulsanti <guibutton
+>Aggiorna</guibutton
+> e <guibutton
+>Ripristina</guibutton
+>. </para>
+
+<para
+>Le modifiche archiviate utilizzando <guibutton
+>Aggiorna</guibutton
+>, ma non salvate con il pulsante <guibutton
+>Salva</guibutton
+> possono essere ripristinate solo ricaricando il file di &kmymoney;. </para>
+</sect2>
+</sect1>
+
+<sect1 id="budget.details.reports">
+<title
+>Report dei budget</title>
+
+<para
+>&kmymoney; fornisce diversi report che permettono di confrontare le entrate e le uscite ai relativi budget. Questi report sono elencati nel gruppo «Budget». Ci sono due tipi di report di budget: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Solo budget</term>
+    <listitem
+><para
+>Questi report visualizzano i valori di un budget.</para>
+      <variablelist>
+        <varlistentry>
+          <term
+>Budget mensile</term
+> 
+          <listitem
+><para
+>Visualizza i valori mensili da un budget.</para>
+          </listitem
+></varlistentry>
+        <varlistentry>
+          <term
+>Budget annuale</term
+> 
+          <listitem
+><para
+>Visualizza i valori mensili da un budget, con il totale annuale.</para>
+          </listitem
+></varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Preventivato vs. Attuale</term>
+    <listitem
+><para
+>Questi report confrontano i valori di un budget alle entrate e alle uscite effettive. In ogni report di budget sono presenti le colonne Budget, Effettivo e Differenza. La differenza tra i report è il periodo mostrato.</para>
+      <variablelist>
+      <varlistentry>
+      <term
+>Preventivato vs. Anno in corso</term
+> 
+      <listitem
+><para
+>Dall'inizio dell'anno a oggi</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Preventivato vs. Anno in corso (fino all'ultimo mese)</term
+> 
+      <listitem
+><para
+>Dall'inizio dell'anno all'ultimo giorno del mese scorso</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Preventivato Mensile vs. Attuale</term
+> 
+      <listitem
+><para
+>Dall'inizio dell'anno all'ultimo giorno del mese corrente</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Preventivato annuale vs. Attuale</term
+> 
+      <listitem
+><para
+>Dal 1 gennaio al 31 dicembre</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Preventivato annuale vs. Attuale (grafico)</term
+> 
+      <listitem
+><para
+>Simile al report precedente, ma l'impostazione predefinita è di visualizzare il grafico.</para>
+      </listitem
+></varlistentry>
+      </variablelist>
+
+      <para
+>Questi report forniscono una base da cui creare report personalizzati cambiando, tra le altre opzioni, l'intervallo di date e il budget. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+</chapter>

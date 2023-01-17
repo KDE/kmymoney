@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.budgets">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Colin.Wright; &Colin.Wright.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.6</releaseinfo>
+</chapterinfo>
+
+<title
+>Budgetar</title>
+
+<sect1 id="details.budgets.define">
+<title
+>Vad är en budget?</title>
+
+<para
+>En budget är en kategoriserad lista av förväntade inkomster och utgifter under en period. </para>
+
+<para
+>Budgetfunktionen i &kmymoney; låter dig skapa årliga budgetar. Mer än en budget kan skapas för ett givet år. Du anger månatliga budgetvärden för alla inkomst- eller utgiftskategorier du har definierat. Värdena kan anges på tre sätt, beroende på perioden: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Månadsvis</term>
+    <listitem
+><para
+>(normalvärde) ange ett enstaka värde som gäller för varje månad i budgeten</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Årsvis</term>
+    <listitem
+><para
+>Ange ett enstaka värde att dela upp jämnt över varje månad i budgeten</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Individuellt</term>
+    <listitem
+><para
+>Ange separata värden för varje månad.</para>
+      <para
+>Det används för inkomster och utgifter som är oregelbundet utspridda över året.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>&kmymoney; tillhandahåller ett antal rapporter för att jämföra verkliga inkomster och utgifter med budgetar. De beskrivs mer detaljerat i <link linkend="budget.details.reports"
+>ett annat avsnitt</link
+>. </para>
+</sect1>
+
+<sect1 id="details.budgets.create">
+<title
+>Dina budgetar</title>
+
+<para
+>Du kan komma åt dina budgetar genom att klicka på lämplig ikon i navigeringsrutan till vänster i &kmymoney;s fönster. </para>
+
+<para
+>Det finns två huvuddelar i budgetfönster. De beskrivs mer detaljerat nedan. Till vänster, huvuddelen visar listan med budgetar du har skapat. Ovanför finns knappar för att skapa, byta namn och ta bort budgetar. Till höger finns tre delar. Längst upp finns kontolistan. Längst ner visas beloppen för kategorin vald i kontolistan ovan. Däremellan finns några ytterligare knappar för att hantera budgeten. </para>
+
+<sect2>
+<title
+>Visa, skapa, byta namn på och ta bort budgetar</title>
+
+<para
+>Den här delen av budgetfönstret visar listan med budgetar som ingår i den aktuella &kmymoney;-filen. Om ingen budget ännu har skapats, är listan tom. Budgetlistan har två kolumner: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Namn</term>
+    <listitem>
+      <para
+>Budgetens namn</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>År</term>
+    <listitem>
+      <para
+>Budgetens budgetår. Observera att första månaden och dagen i budgetåret kan anges i <link linkend="details.settings.general.global"
+>&kmymoney;s inställningsdialogruta</link
+>.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>Värden från den valda budgeten visas till höger. För att välja en annan budget kan du klicka på budgeten i listan. Som alternativ, när listan har fokus, kan du välja en annan budget med användning av uppåtpil och neråtpil. Om du har gjort ändringar i en budget, och därefter väljer en annan budget, frågar &kmymoney; om du vill spara eller kasta ändringarna. </para>
+
+<para
+>Det finns tre knappar ovan för listan med budgetar. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Ny</term>
+    <listitem>
+      <para
+>Skapa en ny tom budget. Förvalt namn på en ny budget är "Budget &lt;år&gt;" där &lt;år&gt; är det aktuella budgetåret. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Byt namn</term>
+    <listitem>
+      <para
+>Redigera namnet på den valda budgeten.</para>
+
+      <para
+>Du kan också redigera namnet på en budget genom att dubbelklicka på en annan budgets namn i listan.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Ta bort</term>
+    <listitem>
+      <para
+>Tar bort den valda budgeten.</para>
+    </listitem>
+  </varlistentry>
+
+<!--  buttons moved in the UI - they are now described below.  Will remove
+      from here after this chapter has been reviewed.
+  <varlistentry>
+    <term
+>Revert</term>
+    <listitem>
+      <para
+>Reverts the selected Budget to its last stored state.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Save</term>
+    <listitem>
+      <para
+>Accepts any unsaved changes to the selected Budget and
+        stores them.</para>
+    </listitem>
+  </varlistentry>
+ -->
+</variablelist>
+
+<para
+>Ytterligare alternativ är tillgängliga i en meny som kan kommas åt genom att högerklicka på en budget. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Ny budget</term>
+    <listitem>
+      <para
+>Skapa en ny, tom budget.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Byt namn på budget</term>
+    <listitem>
+      <para
+>Byt namn på den valda budgeten.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Ändra budgetår</term>
+    <listitem>
+      <para
+>Visar ett fönster med en lista av år, för att välja ett annat budgetår för budgeten.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Ta bort budget</term>
+    <listitem>
+      <para
+>Tar bort den valda budgeten.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Kopiera budget</term>
+    <listitem>
+      <para
+>Skapar en kopia av den valda budgeten. Den nya budgeten har namnet "Kopia av &lt;budget&gt;", där &lt;budget&gt; är namnet på den kopierade budgeten.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Budget baserad på prognos</term>
+    <listitem>
+      <para
+>Fyller i budgetbelopp baserat på data från &kmymoney;s prognosvärden. Se avsnittet om <link linkend="details.forecast.define"
+>Prognoser</link
+> för mer information. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Kontolista</title>
+
+<para
+>Kontolistan visar listan med inkomst- och utgiftskategorier. (Kom ihåg att kategorier behandlas som särskilda sorters konton i &kmymoney;.) Som på andra ställen i &kmymoney; är listan organiserad i en trädstruktur. Listan kan expanderas eller dras ihop för att visa eller dölja delkategorier inne i en kategori. Kontolistan har ett antal kolumner: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Konto</term>
+    <listitem>
+      <para
+>Kontonamn (kategorinamn)</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Typ</term>
+    <listitem>
+      <para
+>Kategorityp (inkomst eller utgift)</para>
+    </listitem>
+  </varlistentry>
+
+<!-- these seem to have been removed from the display.  Remove from here
+     once this is confirmed by the programmers.
+  <varlistentry>
+    <term
+>Tax</term>
+    <listitem>
+      <para
+>Checked if a Category included in Tax Reports</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>VAT</term>
+    <listitem>
+      <para
+>Checked if a Category marked as a VAT Category</para>
+    </listitem>
+  </varlistentry>
+-->
+
+  <varlistentry>
+    <term
+>Totalbehållning</term>
+    <listitem>
+      <para
+>Kontots aktuella behållning. Den är tom för kategorier, om inte kategorin är definierad i en utländsk valuta. I detta fall visar totalbehållning värdet på kategorin i dess definierade valuta.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Totalvärde</term>
+    <listitem>
+      <para
+>Totalt årligt värde i budgeten. Om en kategori har delkategorier och kategorilistan med delkategorier är ihopdragen, är värdet som visas summan av värdena för kategorin och alla dess delkategorier. Om en kategori är definierad i en utländsk valuta, visas totalvärdet i basvalutan.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<!-- It would be nice to include the actual button icons here to confirm
+     which buttons are referred to.  -->
+<para
+>Under kontolistan finns ett antal knappar. Knapparna <guibutton
+>Uppdatera</guibutton
+> och <guibutton
+>Återställ</guibutton
+> beskrivs ytterligare nedan. Knapparna för att dra ihop och expandera drar ihop eller expanderar hela kontolistan. </para>
+
+<para
+>Kontolistan kan filtreras på två sätt. Att markera rutan <guilabel
+>Dölj oanvända kategorier</guilabel
+> gör att alla kategorier som inte har något värde tilldelat till kategorin eller någon av dess delkategorier döljes. Till höger om denna, finns en textruta utan beteckning. Bara kategorier som innehåller vad som än skrivs in i rutan listas, men deras överliggande kategorier listas också. </para>
+
+<para
+>Observera att antingen ändra <guilabel
+>Dölj oanvända budgetkategorier</guilabel
+> eller filtervärdet leder troligen till att listan med visade kategorier ändras. Listan kan behöva expanderas igen för att se alla kategorier som ska visas med nuvarande inställningar. </para>
+
+</sect2>
+
+<sect2>
+<title
+>Tilldelningar</title>
+
+<para
+>Tilldelningsområdet visar värdet för kategorin som är vald i kontolistan. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Konto</term>
+    <listitem>
+      <para
+>Visar namnet på den valda kategorin. Om kategorin är en delkategori, visas dess fullständiga namn med formatet Kategori:Delkategori.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Totalt</term>
+    <listitem>
+      <para
+>Visar det totala årliga värdet tilldelat till kategorin.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Inkludera delkonton</term>
+    <listitem>
+      <para
+>Om det här är markerat, då visar rapporter verkliga inkomster eller utgifter i delkategorier som hör till kategorin för kategorin istället för delkategorin.</para>
+
+      <para
+>Om en delkategori har ett värde definierat i budgeten, då visas inkomster och utgifter för delkategorin.</para>
+
+      <para
+>Om kategorin som väljes i kontolistan har sina delkategorier ihopdragna, kan värdena i tilldelningsområdet visa 0, även om dess totalvärde visar summan av alla delkategoriernas totalvärden, om inte den här rutan har markerats eller ett belopp har explicit tilldelats kategorin.</para>
+
+      <para
+>I allmänhet markeras antingen rutan och värden tilldelas till kategorin och inte till någon av dess delkategorier, eller markeras rutan inte och värden tilldelas till delkategorierna med inte till kategorin. Om några delkategorier har tilldelade värden när rutan markeras, kommer de beloppen att flyttas upp till kategorin.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Rensa</term>
+    <listitem>
+      <para
+>Knappen <guibutton
+>Rensa</guibutton
+> återställer det budgeterade kategorivärdet eller värdena till noll.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Period</term>
+    <listitem>
+      <para
+>Alternativknapparna <guilabel
+>Period</guilabel
+> låter dig välja perioden som värdet gäller</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>Månadsvis</term>
+	  <listitem>
+	    <para
+>Ett enstaka värde anges, som definierar summan per månad. Det är normalinställningen.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term
+>Årsvis</term>
+	  <listitem>
+	    <para
+>Ett enstaka värde anges, som definierar summan per år.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term
+>Individuellt</term>
+	  <listitem>
+	    <para
+>Värden anges för varje kalendermånad. Det används när utgifter eller inkomster är oregelbundet utspridda över året.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+
+      <para
+>Om ett värde eller värden redan har angivits och perioden ändras, frågar &kmymoney; om det nuvarande totala årsvärdet ska användas för att tilldela de nya värdena. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Uppdatera och Återställ</title>
+
+<para
+>Av prestandaskäl sparas inte ändringar av en budget omedelbart. Istället måste de först lagras med knappen <guibutton
+>Uppdatera</guibutton
+>, och därefter sparas permanent med <guibutton
+>Spara</guibutton
+> i &kmymoney;. </para>
+
+<para
+>När värden i en budget först ändras, aktiveras knapparna <guibutton
+>Uppdatera</guibutton
+> och <guibutton
+>Återställ</guibutton
+>. Flera ändringar kan göras i budgeten. Att klicka på <guibutton
+>Uppdatera</guibutton
+> lagrar ändringarna, och inaktiverar knapparna. </para>
+
+<para
+>Knappen <guibutton
+>Spara</guibutton
+> sparar bara ändringar som har lagrats med knappen <guibutton
+>Uppdatera</guibutton
+>. Om du alltså har ändrat en budget men ännu inte lagrat ändringarna, påverkar inte <guibutton
+>Spara</guibutton
+> den ändrade budgeten och knapparna <guibutton
+>Uppdatera</guibutton
+> och <guibutton
+>Återställ</guibutton
+> förblir aktiva. </para>
+
+<para
+>Återställ ångrar alla ändringar gjorda i en budget sedan den senaste uppdateringen, och inaktiverar knapparna <guibutton
+>Uppdatera</guibutton
+> och <guibutton
+>Återställ</guibutton
+>. </para>
+
+<para
+>Ändringar lagrade med <guibutton
+>Uppdatera</guibutton
+> men ännu inte sparade med <guibutton
+>Spara</guibutton
+> kan bara återställas genom att ladda &kmymoney;s fil igen. </para>
+</sect2>
+</sect1>
+
+<sect1 id="budget.details.reports">
+<title
+>Budgetrapporter</title>
+
+<para
+>&kmymoney; tillhandahåller ett antal rapporter för att jämföra verkliga inkomster och utgifter med en budget. De listas i rapporter under "Budgetering". Det finns två typer av budgetrapporter: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Bara budget</term>
+    <listitem
+><para
+>Dessa rapporter visar värden från en budget.</para>
+      <variablelist>
+        <varlistentry>
+          <term
+>Månatlig budget</term
+> 
+          <listitem
+><para
+>Visar de månatliga värdena från en budget.</para>
+          </listitem
+></varlistentry>
+        <varlistentry>
+          <term
+>Årlig budget</term
+> 
+          <listitem
+><para
+>Visar de månatliga värdena från en budget, med årsvisa totalvärden.</para>
+          </listitem
+></varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Budget mot utfall</term>
+    <listitem
+><para
+>Dessa rapporter som jämför värden från en budget med verkliga inkomster och utgifter. Varje budgetrapport innehåller kolumnerna Budget, Utfall och Skillnad. Varje rapport skiljer sig åt med avseende på perioden som visas.</para>
+      <variablelist>
+      <varlistentry>
+      <term
+>Budget mot utfall innevarande år</term
+> 
+      <listitem
+><para
+>Från årets början till idag</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Budget mot utfall innevarande år (ÅTM)</term
+> 
+      <listitem
+><para
+>Från årets början till sista dagen i föregående månad</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Månadsbudget mot utfall</term
+> 
+      <listitem
+><para
+>Från årets början till sista dagen i innevarande månad</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Årlig budget mot utfall</term
+> 
+      <listitem
+><para
+>Från 1:a januari till 31:a december</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Årlig budget mot utfall (diagram)</term
+> 
+      <listitem
+><para
+>Samma som föregående rapport, men visar normalt diagrammet</para>
+      </listitem
+></varlistentry>
+      </variablelist>
+
+      <para
+>Rapporterna utgör en grund för att skapa egna rapporter, genom att ändra datumintervall och budget, bland andra alternativ. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+</chapter>

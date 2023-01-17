@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.search">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Darin.Strait; &Darin.Strait.mail; </author>
+  </authorgroup>
+  <date
+>25/07/2010</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Ricerca di transazioni</title>
+
+<sect1 id="details.search.general">
+<title
+>Generale</title>
+
+<para
+>La finestra di dialogo <guilabel
+>Ricerca transazioni</guilabel
+> permette di cercare le transazioni che corrispondono ai criteri che hai indicato. Puoi accedervi dal menu <guimenu
+>Modifica</guimenu
+>, selezionando <guimenuitem
+>Trova transazione...</guimenuitem
+>. </para>
+
+<para
+>Ci sono due schede principali nella finestra di dialogo. La scheda <quote
+>Criteri</quote
+> contiene delle sotto-schede che permettono di specificare i criteri di ricerca. </para>
+
+<para
+>I risultati verranno visualizzati nella scheda <quote
+>Risultati</quote
+> alla fine della ricerca. Sotto alla lista dei risultati, &kmymoney; visualizza il numero delle transazioni corrispondenti ai criteri di ricerca. Facendo doppio clic su una transazione verrà visualizzata nel relativo registro. </para>
+
+<para
+>Quando si fa clic su <guibutton
+>Trova</guibutton
+>, partirà la ricerca, considerando tutti i criteri inseriti, nelle varie schede. </para>
+
+<para
+>Il pulsante <guibutton
+>Azzera</guibutton
+> ripristina i valori predefiniti dei campi, in tutte le schede. Questo serve per specificare nuovi criteri di ricerca. </para>
+
+<para
+>Il pulsante <guibutton
+>Chiudi</guibutton
+> permette di chiudere la finestra di dialogo <guilabel
+>Ricerca transazioni</guilabel
+>. </para>
+
+</sect1>
+
+<sect1 id="details.search.criteria">
+<title
+>Criteri di ricerca</title>
+
+<para
+>Ci sono diverse sotto-schede nella scheda <quote
+>Criteri</quote
+>, ognuna relativa ad un tipo di criteri. Sotto all'area che permette di specificare il criterio, &kmymoney; elenca i criteri specificati per la ricerca. </para>
+
+<sect2 id="details.search.text">
+<title
+>Testo</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-text.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Finestra Ricerca transazioni, scheda Testo</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Questa scheda permette di specificare il testo da cercare. Ci sono anche due caselle di spunta che modificano l'utilizzo del testo nella ricerca. </para>
+
+<para
+>Come impostazione predefinita, verrà cercato come sottostringa. Ad esempio: </para>
+
+<para>
+<itemizedlist>
+  <listitem>
+    <para
+>Con <quote
+>Migliori</quote
+> si potrà trovare <quote
+>I Biscotti Migliori s.p.a.</quote
+>.</para>
+  </listitem>
+  <listitem>
+    <para
+>Anche con <quote
+>gliori</quote
+> si potrà trovare <quote
+>I Biscotti Migliori s.p.a.</quote
+>. </para>
+  </listitem>
+</itemizedlist>
+</para>
+
+<para
+>Nel menu a discesa vicino al campo di testo, selezionare <guilabel
+>Contiene</guilabel
+> se si vogliono trovare le transazioni contenenti questo testo o <guilabel
+>Non contiene</guilabel
+> se si vogliono trovare le transazioni che non contengono il testo specificato. </para>
+
+<para
+>Marcando la casella <guilabel
+>Maiuscole/Minuscole</guilabel
+>, la ricerca distinguerà le maiuscole dalle minuscole. Ad esempio, se si imposta questa opzione, con <quote
+>migliori</quote
+> non si troverà <quote
+>I Biscotti Migliori s.p.a.</quote
+>. </para>
+
+<para
+>Se si marca la casella <guilabel
+>Tratta il testo come un'espressione regolare</guilabel
+>, il testo sarà trattato come espressione regolare. Per maggiori informazioni su come comporre un'espressione regolare, vedere la documentazione di &Qt; sulla <ulink url="https://doc.qt.io/qt-5/qregexp.html"
+>classe QRegExp</ulink
+>. </para>
+</sect2>
+
+<sect2 id="details.search.account">
+<title
+>Conto</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-account.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Finestra Ricerca transazioni, scheda Conto</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Questa scheda permette di specificare i conti in cui cercare. </para>
+
+<para
+>I conti vengono visualizzati ad albero. La casella di ogni conto indica se la ricerca in quel conto è abilitata. Facendo clic sul pulsante <guibutton
+>Tutti</guibutton
+>, vengono selezionati tutti i conti per la ricerca. Se si fa clic sul pulsante <guibutton
+>Niente</guibutton
+>, nessun conto verrà abilitato per la ricerca. I singoli conti possono essere selezionati e deselezionati facendo clic sulla casella di fianco al nome del conto. È possibile abilitare e disabilitare una gerarchia di conti facendo clic su di una casella con il &RMB;. </para>
+</sect2>
+
+<sect2 id="details.search.date">
+<title
+>Data</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-date.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Finestra Ricerca transazioni, scheda Data</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Questa scheda permette di specificare le date in cui cercare. </para>
+
+<para
+>Il controllo <quote
+>Intervallo</quote
+> fornisce un modo conveniente di impostare i controlli Da e A. I controlli Da e A possono anche essere impostati in modo manuale e impediranno di inserire date non esistenti. Le date possono anche essere inserite facendo clic sulle frecce su e giù, dopo aver selezionato una parte della data. Facendo clic sull'icona del calendario verrà aperto un piccolo calendario che permette di selezionare facilmente la data. </para>
+</sect2>
+
+
+<sect2 id="details.search.amount">
+<title
+>Importo</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-amount.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Finestra Ricerca transazioni, scheda Importo</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Questa scheda permette di specificare l'importo da cercare. </para>
+
+<para
+>È possibile cercare un importo esatto o un intervallo di importi. Se si fa clic sull'icona della calcolatrice, verrà aperta una piccola calcolatrice per aiutare nell'immissione del valore. </para>
+</sect2>
+
+<sect2 id="details.search.category">
+<title
+>Categoria</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-category.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Finestra Ricerca transazioni, scheda Categoria</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Questa scheda permette di specificare le categorie in cui cercare. </para>
+
+<para
+>Le categorie vengono visualizzate ad albero. La casella di ogni categoria indica se la ricerca in quella categoria è abilitata. Facendo clic sul pulsante <guibutton
+>Tutti</guibutton
+>, vengono selezionate tutte le categorie per la ricerca. Se si fa clic sul pulsante <guibutton
+>Niente</guibutton
+>, nessuna categoria verrà abilitata per la ricerca. Se si fa clic sul pulsante <guibutton
+>Entrate</guibutton
+>, verranno abilitate per la ricerca le categorie relative alle entrate. Se si fa clic sul pulsante <guibutton
+>Uscite</guibutton
+>, verranno abilitate per la ricerca le categorie relative alle uscite. </para>
+
+<para
+>Le singole categorie possono essere selezionate e deselezionate facendo clic sulla casella di fianco al nome della categoria. È possibile abilitare e disabilitare una gerarchia di categorie facendo clic su di una casella con il &RMB;. </para>
+</sect2>
+
+<sect2 id="details.search.payee">
+<title
+>Beneficiario</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-payee.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Finestra Ricerca transazioni, scheda Beneficiario</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Questa scheda permette di specificare i beneficiari associati alle transazioni da cercare. </para>
+
+<para
+>Le caselle indicano i beneficiari selezionati per la ricerca. Se si fa clic sul pulsante <guibutton
+>Tutti</guibutton
+>, verranno selezionati per la ricerca tutti i beneficiari. Se si fa clic sul pulsante <guibutton
+>Niente</guibutton
+>, nessun beneficiario sarà selezionato per la ricerca. I singoli beneficiari possono essere selezionati e deselezionati facendo clic sulla casella accanto al nome della categoria. </para>
+
+<para
+>Se si fa clic su <guilabel
+>Seleziona transazioni senza beneficiari</guilabel
+>, verranno selezionate solo le transazioni senza beneficiari. </para>
+
+</sect2>
+
+<sect2 id="details.search.details">
+<title
+>Dettagli</title>
+
+<para
+>Questa scheda permette di specificare criteri di ricerca aggiuntivi. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-details.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Finestra Ricerca transazioni, scheda Dettagli</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para>
+<itemizedlist>
+  <title
+>I possibili tipi sono:</title>
+  <listitem
+><para
+>Tutti i tipi</para
+></listitem>
+  <listitem
+><para
+>Pagamenti</para
+></listitem>
+  <listitem
+><para
+>Depositi</para
+></listitem>
+  <listitem
+><para
+>Trasferimenti</para
+></listitem>
+</itemizedlist>
+
+<itemizedlist>
+  <title
+>I possibili stati sono:</title>
+  <listitem
+><para
+>Tutti gli stati</para
+></listitem>
+  <listitem
+><para
+>Non riconciliato</para
+></listitem>
+  <listitem
+><para
+>Compensata</para
+></listitem>
+  <listitem
+><para
+>Riconciliato</para
+></listitem>
+</itemizedlist>
+
+<itemizedlist>
+  <title
+>Le possibili validità sono:</title>
+  <listitem
+><para
+>Qualsiasi transazione</para
+></listitem>
+  <listitem
+><para
+>Transazione valida</para
+></listitem>
+  <listitem
+><para
+>Transazione non valida</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>È possibile cercare un particolare numero di transazione o un intervallo di numeri di transazione. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="details.search.results">
+<title
+>Risultati della ricerca</title>
+
+<para
+>La scheda <quote
+>Risultato</quote
+> visualizza la data, il conto, i dettagli, lo stato di riconciliazione, il pagamento e il deposito per ogni transazione che corrisponde ai criteri di ricerca inseriti. Facendo clic con il &RMB; sulla riga di intestazione di una colonna si può modificare l'ordinamento dei risultati. </para>
+
+<para
+>Facendo doppio clic su una transazione verrà visualizzata nel relativo registro. </para>
+
+</sect1>
+
+</chapter>

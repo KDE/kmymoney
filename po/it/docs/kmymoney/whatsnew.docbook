@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="whatsnew">
+<chapterinfo>
+  <date
+>04/04/2019</date>
+  <releaseinfo
+>5.0.4</releaseinfo>
+</chapterinfo>
+<title
+>Cosa c'è di nuovo in questa versione</title>
+
+<sect1>
+<title
+>Correzione di bug e miglioramenti delle funzionalità</title>
+
+<para
+>Come per ogni rilascio, la squadra di sviluppo di &kmymoney; ha lavorato duramente per rendere questa versione migliore e più facile da usare in ogni modo. Questa è la quarta versione della serie 5.0, e la maggior parte dell'attività è stata indirizzata alla correzione dei bug. </para>
+
+<para
+>A questo punto, la conversione a &kde-frameworks; è praticamente completa. M Molte delle librerie sottostanti utilizzate dall'applicazione sono state riorganizzate e migliorate, ma, per la gran parte, è lavoro dietro le scene, e non direttamente visibile all'utente finale. L'aspetto generale dovrebbe essere stabile, anche se possono esserci ancora piccoli cambiamenti. La funzionalità di base del programma rimane la stessa, oltre a miglioramenti e aggiunte intenzionali. </para>
+
+<para
+>Nelle versioni precedenti, questa pagina del manuale ha incluso un elenco di molte correzioni di bug e miglioramenti funzionali. Tuttavia, invece che duplicare queste informazioni, è possibile trovarle direttamente nelle <ulink url="https://kmymoney.org/changelog.html"
+>Novità</ulink
+>. </para>
+
+<para
+>Dal rilascio della versione 5.0, ci sono stati alcuni cambiamenti che avranno bisogno di modifiche lato utente se si sta aggiornando dalla 4.8.x o da una versione più datata. </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Il programma cerca i modelli per l'estensione di stampa degli assegni in diverse posizioni. L'utente deve tener conto di ciò nella finestra di configurazione delle estensioni, <link linkend="details.settings.plugins"
+>vedere questa sezione per ulteriori dettagli.</link
+> </para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1>
+<title
+>Aggiornamento a questo manuale</title>
+
+<para
+>Mentre continuiamo a sviluppare, ci sono ancora capitoli di questo manuale che non stono stati aggiornati per riflettere tutte le modifiche nel programma visibili all'utente, a partire dalla versione 5.0. Ogni capitolo identifica la versione di &kmymoney; per la quale è stato aggiornato, ma presentiamo qui l'elenco completo, come riferimento rapido. </para>
+
+<para
+>Notare tuttavia che la misura in cui i capitoli che non sono stati aggiornati esplicitamente per riflettere o meno il funzionamento attuale del programma dipende da quanto quell'area del programma è cambiata tra la versione 4.8 e la 5.0. </para>
+  
+<informaltable frame="none">
+  <tgroup cols="2">
+    <thead>
+      <row>
+	<entry
+><para
+>Capitoli aggiornati per la 5.x</para
+></entry>
+	<entry
+><para
+>Capitoli non ancora aggiornati per la 5.x</para
+></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry valign="top">
+	  <simplelist>
+	    <member
+><link linkend="introduction"
+>Introduzione</link
+></member>
+	    <member
+><link linkend="whatsnew"
+>Cosa c'è di nuovo in questa versione</link
+></member>
+	    <member
+><link linkend="makingmostof"
+>Usare al meglio &kmymoney;</link
+></member>
+	    <member
+><link linkend="firsttime"
+>Utilizzare &kmymoney; per la prima volta</link
+></member>
+	    <member
+><link linkend="details.institutions"
+>Istituti</link
+></member>
+	    <member
+><link linkend="details.accounts"
+>Conti</link
+></member>
+	    <member
+><link linkend="details.categories"
+>Categorie</link
+></member>
+	    <member
+><link linkend="details.tags"
+>Etichette</link
+></member>
+	    <member
+><link linkend="details.payees"
+>Beneficiari</link
+></member>
+	    <member
+><link linkend="details.schedules"
+>Pianificazioni</link
+></member>
+	    <member
+><link linkend="details.ledgers"
+>Registri</link
+></member>
+	    <member
+><link linkend="details.investments"
+>Investimenti</link
+></member>
+	    <member
+><link linkend="details.currencies"
+>Valute</link
+></member>
+	    <member
+><link linkend="details.reconcile"
+>Riconciliazione</link
+></member>
+	    <member
+><link linkend="details.impexp"
+>Importazione ed esportazione</link
+></member>
+	    <member
+><link linkend="details.settings"
+>Impostazioni</link
+></member>
+	    <member
+><link linkend="reference.menus"
+>Riferimento: menu</link
+></member>
+	    <member
+><link linkend="credits"
+>Ringraziamenti</link
+></member>
+	  </simplelist>
+	</entry>
+	<entry valign="top">
+	  <simplelist>
+	    <member
+><link linkend="details.reports"
+>Report</link
+></member>
+	    <member
+><link linkend="details.loans"
+>Prestiti</link
+></member>
+	    <member
+><link linkend="details.budgets"
+>Budget</link
+></member>
+	    <member
+><link linkend="details.forecast"
+>Previsioni</link
+></member>
+	    <member
+><link linkend="details.search"
+>Cercare transazioni</link
+></member>
+	    <member
+><link linkend="details.formats"
+>Formati dei file</link
+></member>
+	    <member
+><link linkend="details.database"
+>Banca dati</link
+></member>
+	    <member
+><link linkend="faq"
+>Domande e risposte</link
+></member>
+	    <member
+><link linkend="reference.widgets"
+>Riferimento: widget</link
+></member>
+	  </simplelist>
+	</entry>
+      </row>
+    </tbody>
+  </tgroup>
+</informaltable>
+ 
+</sect1>
+
+  
+</chapter>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="faq">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>30/08/2014</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Domande e risposte</title>
+
+<para
+>Questo capitolo tratta varie questioni che causano spesso confusione, specialmente tra i nuovi utenti di &kmymoney;. Se noti &kmymoney; fare qualcosa che non comprendi (o non fare qualcosa che ti aspetti), guarda questo elenco prima di chiedere aiuto in una delle liste di distribuzione. Se il tuo problema non è riportato qui, fai riferimento alla sezione <link linkend="firsttime.contact"
+>ottenere aiuto</link
+>. </para>
+
+<qandaset>
+
+<qandadiv
+><title
+>Domande sull'installazione e sull'avvio</title>
+
+<qandaentry>
+ <question>
+   <para
+>&kmymoney; si chiude in modo inatteso all'apertura.</para>
+ </question>
+ <answer>
+   <para
+>Ci sono varie ragioni per cui &kmymoney; può chiudersi in modo inatteso o restituire un errore al posto di avviarsi normalmente. Per prima cosa, è necessario determinare se il problema è nel programma o nei dati. Quindi, prova ad <link linkend="firsttime.launch"
+>aprire &kmymoney;</link
+> senza aprire il tuo file di dati. Se l'applicazione si apre, ma si chiude in modo inatteso all'apertura del file di dati, prova a caricare una versione precedente del file di dati. (Hai fatto delle copie di sicurezza, vero?)</para>
+   <para
+>Se &kmymoney; si chiude in modo inatteso all'avvio senza aprire un file di dati, ci potrebbe essere un problema con la propria installazione. Consultare la sezione relativa a come <link linkend="firsttime.contact"
+>ottenere aiuto</link
+>.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>&kmymoney; funzionerà sul mio desktop X/&ubuntu;? Funzionerà senza un ambiente desktop &kde; completo?</para>
+ </question>
+ <answer>
+   <para
+>Sì, &kmymoney; può funzionare senza un desktop &kde; completo, ma è comunque necessario installare le librerie di base di &kde;. Il modo più semplice di farlo è usare il sistema di gestione pacchetti della propria distribuzione, che gestirà, in automatico, questi requisiti. Se si desidera installare dai sorgenti, è probabile che siano necessarie le versioni di sviluppo di queste librerie.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Domande sulla configurazione</title>
+
+<qandaentry>
+ <question>
+   <para
+>Posso cambiare l'inizio dell'anno finanziario, per verificare il mio anno fiscale o l'anno contabile?</para>
+ </question>
+ <answer>
+   <para
+>Sì, è possibile impostare facilmente l'inizio dell'anno nella sezione <link linkend="details.settings.general.global"
+>Opzioni globali</link
+> della finestra <guilabel
+>Configura &kmymoney;</guilabel
+>.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Domande sui conti e sulle transazioni</title>
+
+<qandaentry>
+ <question
+><para
+>Perché non posso modificare una transazione? </para
+></question>
+ <answer>
+   <para
+>Non puoi modificare le transazioni che hanno una data precedente alla data di apertura del conto che le contiene. La causa più comune è l'importazione dei dati del conto. Se il file importato non contiene una data di apertura del conto, &kmymoney; userà la data attuale. Per correggere questa situazione, modifica il conto e <link linkend="details.accounts.edit"
+>cambia la data di apertura</link
+> in modo da renderla precedente alla data di tutte le transazioni di quel conto.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Perché una transazione è visualizzata in rosso e non riesco a togliere questo colore?</para>
+ </question>
+ <answer>
+   <para
+>Le transazioni sono visualizzate in rosso se una parte dell'importo non è stato assegnato a nessuna categoria. Questa situazione può essere causata dall'importazione di un file QIF o OFX, o dallo scaricamento dell'estratto conto da Internet. Basta modificare la transazione in modo che l'intero importo sia assegnato a delle categorie.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Perché non posso aggiungere un bilancio iniziale per un conto?</para>
+ </question>
+ <answer>
+   <para
+>Se specifichi un bilancio iniziale alla creazione del conto, viene visualizzato come la prima transazione di quel conto. Se non lo fai, la transazione non ci sarà. Essendo una transazione speciale, non è possibile inserirla come deposito o prelievo. Si può inserirla in un secondo momento <link linkend="details.accounts.edit"
+>modificando il conto</link
+>.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Quando ho creato un conto, ho usato il tipo sbagliato, e adesso non me lo lascia cambiare. Posso modificare il conto, ma il menu a discesa per il tipo del conto è disabilitato, o non elenca tutti i tipi possibili.</para>
+ </question>
+ <answer>
+   <para
+>È possibile cambiare facilmente il tipo di un conto tra pagamento, risparmi e contante. Invece, per come le informazioni del conto vengono memorizzate da &kmymoney;, non sono permessi altri cambiamenti di tipo. Per risolvere il problema si può creare un nuovo conto del tipo desiderato, spostare tutte le transazioni dal vecchio al nuovo conto e poi cancellare il vecchio conto.</para>
+   <!-- this should have links to the sections on new acct, move transactions,
+        delete account. -->
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Ho un prestito con interesse dello 0%, ma ottengo un errore nella procedura guidata per i prestiti, che non mi lascia usare questo valore.</para>
+ </question>
+ <answer>
+   <para
+>Il calcolo del prestito non permette un interesse dello 0%. Il modo migliore di gestire questa situazione è di <link linkend="details.accounts.create.account"
+>creare un semplice conto di passività</link
+> con l'importo del prestito come bilancio iniziale, e poi creare <link linkend="details.schedules.new"
+>delle pianificazioni</link
+> per i pagamenti richiesti.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Perché non vedo tutte le mie transazioni nel registro?</para>
+ </question>
+ <answer>
+   <para
+>Ci sono varie impostazioni che controllano quali transazioni vengono visualizzate nel registro di un conto. Per prima cosa, controlla l'<link linkend="details.ledgers.view.filter"
+>area di ricerca nel registro</link
+>. Se c'è qualcosa digitato nella casella di ricerca, solo le transazioni contenenti quel testo verranno visualizzate. Se il menu a discesa dello stato ha un valore diverso da <quote
+>Qualsiasi stato</quote
+>, verranno visualizzate solo transazioni del tipo selezionato. Inoltre, ci sono due opzioni importanti nella sezione <link linkend="details.settings.general.filter"
+>opzioni del filtro</link
+> della finestra di configurazione di &kmymoney;. Se è marcato <guilabel
+>Non mostrare le transazioni precedenti a</guilabel
+>, verranno visualizzate solo le transazioni con quella data e quelle successive.Se è marcato <guilabel
+>Non visualizzare le transazioni riconciliate</guilabel
+>, non verranno visualizzate le transazioni riconciliate.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Ho sbagliato a digitare il nome di un beneficiario e voglio cambiarlo in tutte le transazioni. C'è una funzione automatica per la sostituzione?</para>
+ </question>
+ <answer>
+   <para
+>Non c'è una funzione globale di ricerca e sostituzione in &kmymoney;. Ad ogni modo, è possibile cambiare facilmente il nome di un beneficiario: nella vista Beneficiari, selezionare la voce da modificare, fare clic con il &RMB; sul beneficiario e selezionare <guimenuitem
+>Rinomina beneficiario</guimenuitem
+> dal menu contestuale. Digitare il nuovo nome.  Poiché le transazioni utilizzano solo un riferimento al record del beneficiario, tutte le transazioni visualizzeranno il nuovo nome.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Perché non posso eliminare un conto?</para>
+ </question>
+ <answer>
+   <para
+>Per eliminare un conto, &kmymoney; non può avere altri riferimenti a esso. Ciò significa che è necessario eliminare tutte le transazioni, o spostarle in un altro conto. Se non è ancora possibile eliminare un conto, potrebbero esserci transazioni pianificate che si riferiscono al conto, non visibili nel registro. Sarà necessario eliminare qualsiasi transazione futura e la pianificazione stessa o spostarle in un altro conto.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Domande sull'importazione e sull'esportazione</title>
+
+<qandaentry>
+ <question>
+   <para
+>Dove trovo maggiori informazioni sui parametri OFX?</para>
+ </question>
+ <answer>
+   <para
+>Ecco alcune fonti esterne che potrebbero fornire ulteriori informazioni: <ulink url="https://ofxblog.wordpress.com/"
+>OFX Blog</ulink
+> e <ulink url="https://www.ofxhome.com/"
+>OFX Home</ulink
+>.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv
+><title
+>Domande varie</title>
+
+<qandaentry>
+ <question>
+   <para
+>Perché non c'è la traduzione nella mia lingua?</para>
+ </question>
+ <answer>
+   <para
+>&kmymoney; usa le impostazioni della lingua di &kde;, quindi assicurarsi prima che le impostazioni di localizzazione e della lingua siano corrette. Se lo sono, la ragione più probabile è che nessuno si sia ancora offerto di tradurre il programma in quella lingua. La traduzione delle applicazioni basate su &kde;/&Qt; è molto semplice, e non richiede conoscenze di programmazione. Se si desidera tradurre &kmymoney; nella propria lingua, inviare un messaggio alla <ulink url="https://l10n.kde.org/teams-list.php"
+>lista di distribuzione del gruppo di traduzione</ulink
+> appropriata. Se non si trova la propria lingua nell'elenco o non si riesce a contattare i membri del gruppo, inviare un messaggio direttamente alla <ulink url="mailto:kde-i18n-doc@kde.org"
+>lista di distribuzione dei traduttori di &kde;</ulink
+> (è necessario <ulink url="https://mail.kde.org/mailman/listinfo/kde-i18n-doc"
+>registrarsi</ulink
+>) e saranno fornite tutte le informazioni per poterci inviare facilmente una traduzione di &kmymoney;. </para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Perché il numero della versione è saltato da 1.0.5 a 4.5? Cos'è successo a KMyMoney2?</para>
+ </question>
+ <answer>
+   <para
+>L'uso del nome KMyMoney2 risale alla transizione da &kde; 1 a &kde; 2 avvenuta diversi anni fa. Per evitare di cambiare il nome ad ogni rilascio di &kde;, abbiamo deciso di usare il nome &kmymoney;.</para>
+   <para
+>La prima versione di &kmymoney; considerata abbastanza stabile aveva la versione 1.0, anche se era per &kde; 3. Dato che il progetto si sta allineando sempre più a &kde;, abbiamo deciso di usare lo stesso numero di versione.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Come posso segnalare un bug? Come posso richiedere una nuova funzionalità?</para>
+ </question>
+ <answer>
+   <para
+>Agli sviluppatori fanno piacere le segnalazioni degli utenti. Guarda la sezione su come <link linkend="firsttime.contact"
+>Contattare gli sviluppatori / Segnalare bug</link
+>.</para>
+ </answer>
+</qandaentry>
+
+<qandaentry>
+ <question>
+   <para
+>Perché non esiste un modo semplice per stampare alcune transazioni pianificate, parte del registro o ...</para>
+ </question>
+ <answer>
+   <para
+>Vedere nella sezione <link linkend="details.reports.avail"
+>Report</link
+>. Molti report forniscono, a dire il vero, un modo semplice per stampare cose che non è possibile fare dal registro o da altre schermate.</para>
+ </answer>
+</qandaentry>
+
+</qandadiv>
+
+</qandaset>
+
+</chapter>

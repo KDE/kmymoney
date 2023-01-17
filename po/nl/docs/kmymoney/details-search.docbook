@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.search">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Darin.Strait; &Darin.Strait.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Transacties doorzoeken</title>
+
+<sect1 id="details.search.general">
+<title
+>Algemeen</title>
+
+<para
+>Met het dialoog <guilabel
+>Transacties doorzoeken</guilabel
+> kunt u uw database doorzoeken met door u opgegeven criteria. U opent het dialoog door naar het menu <guimenu
+>Bewerken</guimenu
+> te gaan en <guimenuitem
+>Zoek transactie...</guimenuitem
+> te openen. </para>
+
+<para
+>Er zijn twee hoofdtabbladen in deze dialoog. Het tabblad <quote
+>Criteria</quote
+> toont een aantal subtabbladen Voor het specificeren van de zoekcriteria. </para>
+
+<para
+>Nadat de zoekopdracht is uitgevoerd, zijn de resultaten te zien in de tab <quote
+>Resultaat</quote
+>. Onder de lijst met resultaten, geeft &kmymoney; het aantal transacties op die overeenkomen met de zoekcriteria. Als u in de lijst dubbelklikt op een individuele transactie dan opent de betreffende kasboek en krijgt u de transactie te zien. </para>
+
+<para
+>Wanneer de knop <guibutton
+>Zoeken</guibutton
+> wordt ingedrukt, wordt het zoeken geïnitieerd en alle criteria die zijn ingevoerd in elk tabblad zullen in rekening worden gebracht. </para>
+
+<para
+>De knop <guibutton
+>Reset</guibutton
+> resets alle velden in alle subtabbladen van de criteria naar de standaard. Dit stelt u in staat nieuwe zoekcriteria te specificeren. </para>
+
+<para
+>De knop <guibutton
+>Sluiten</guibutton
+> het sluit het dialoogvak <guilabel
+>Transacties zoeken</guilabel
+>. </para>
+
+</sect1>
+
+<sect1 id="details.search.criteria">
+<title
+>Zoekcriteria</title>
+
+<para
+>Er zijn meerdere sub-tabs in de hoofdtab <quote
+>Criteria</quote
+>, in elk daarvan kunt u een andere type zoekcriteria opgeven. Onder het veld voor het opgeven van de zoekcriteria, toont &kmymoney; de verschillende voor de zoekopdracht opgegeven types criteria. </para>
+
+<sect2 id="details.search.text">
+<title
+>Tekst</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-text.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialoog Transacties zoeken, tabblad tekst</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Dit tabblad stelt u in staat om tekst te specificeren om naar te zoeken. Er zijn ook twee activeringsvakjes die bepalen hoe de tekst gebruikt wordt bij het zoeken. </para>
+
+<para
+>Standaard gaat dit om eenvoudige overeenkomsten met subtekenreeksen. Bijvoorbeeld: </para>
+
+<para>
+<itemizedlist>
+  <listitem>
+    <para
+><quote
+>Best</quote
+> zal <quote
+>Best Cakes, Inc.</quote
+> vinden</para>
+  </listitem>
+  <listitem>
+    <para
+><quote
+>est</quote
+> zal ook <quote
+>Best Cakes, Inc.</quote
+> vinden </para>
+  </listitem>
+</itemizedlist>
+</para>
+
+<para
+>In de keuzelijst naast het tekstveld, selecteert u <guilabel
+>Bevat</guilabel
+> als u de transacties wilt vinden waarin de tekst voorkomt, of u selecteert <guilabel
+>Bevat niet</guilabel
+> als u de transacties wilt vinden waarin de opgegeven tekst juist niet voorkomt. </para>
+
+<para
+>Als u het vakje <guilabel
+>Hoofdlettergevoelig</guilabel
+> inschakelt, dan is de zoekopdracht hoofdlettergevoelig. Voorbeeld, <quote
+>best</quote
+> zal niet <quote
+>Best Cakes, Inc.</quote
+> vinden als deze optie is ingeschakeld. </para>
+
+<para
+>Als u het vakje <guilabel
+>Tekst behandelen als reguliere expressie</guilabel
+> inschakelt, dan zal de tekst worden behandeld als een reguliere expressie. Voor details hoe u een reguliere expressie creëert, leest u de &Qt; documentatie over de <ulink url="https://www.qt.io/doc/qt-5/qregexp.html"
+>QRegExp class</ulink
+>. </para>
+</sect2>
+
+<sect2 id="details.search.account">
+<title
+>Account</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-account.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialoog Transacties zoeken, tabblad rekening</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>In deze tab kunt u opgeven welke rekeningen moeten worden doorzocht. </para>
+
+<para
+>Rekeningen worden in een boomstructuur getoond. Als doorzoekbaar gemarkeerde rekeningen zijn gemarkeerd met een vinkje. Als u op de knop <guibutton
+>Alles</guibutton
+> klikt, dan worden alle rekeningen als doorzoekbaar gemarkeerd. Als u klikt op de knop <guibutton
+>Geen</guibutton
+>, dan worden geen rekeningen als doorzoekbaar gemarkeerd. U kunt bij rekeningen individueel de markering plaatsen of verwijderen door op het vakje naast de rekeningnaam met de &LMB; te klikken. U kunt bij een complete hierarchy van rekeningen een markering plaatsen of verwijderen door op het vakje met de &RMB; te klikken. </para>
+</sect2>
+
+<sect2 id="details.search.date">
+<title
+>Datum</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-date.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialoog Transacties zoeken, tabblad datum</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>In deze tab kunt u opgeven welke data moeten worden doorzocht. </para>
+
+<para
+>De regeling <quote
+>Reeks</quote
+> geeft een handige manier om de velden VAN en Tot in te stellen. U kunt de velden Van en Tot apart handmatig instellen. U kunt de datums handmatig invoeren. De velden voorkomen dat u niet bestaande datums invoert. Nadat een datum is gemarkeerd, kunt u de datums wijzigen door op de pijlvormige knoppen te klikken. Als u klikt op de kleine kalender dan opent een kalender waarin u makkelijk datums kunt selecteren. </para>
+</sect2>
+
+
+<sect2 id="details.search.amount">
+<title
+>Hoeveelheid</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-amount.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialoog Transacties zoeken, tabblad hoeveelheid</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>In deze tab kunt u opgeven naar welke bedragen moet worden gezocht. </para>
+
+<para
+>U kunt zoeken naar een exact bedrag of naar een bereik van bedragen. Als u klikt op het pictogram met de calculator, dan opent op het scherm een calculator voor assistentie bij het invoeren van een waarde. </para>
+</sect2>
+
+<sect2 id="details.search.category">
+<title
+>Categorie</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-category.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialoog Transacties zoeken, tabblad categorie</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>In deze tab kunt u opgeven naar welke categorieën moet worden gezocht. </para>
+
+<para
+>Categorieën worden in een boomstructuur getoond. Als opzoekbare gemarkeerde categorieën zijn gemarkeerd met een vinkje. Als u op de knop <guibutton
+>Alles</guibutton
+> klikt, dan worden alle categorieën als opzoekbaar gemarkeerd. Als u klikt op de knop <guibutton
+>Geen</guibutton
+>, dan worden geen categorieën als opzoekbaar gemarkeerd. Als u klikt op de knop <guibutton
+>Inkomsten</guibutton
+>, dan worden inkomenscategorieën gemarkeerd en bij uitgavencategorieën de markering verwijderd. Als u klikt op de knop <guibutton
+>Uitgaven</guibutton
+>, dan worden bij de inkomenscategorieën de markering verwijderd en worden de uitgavencategorieën gemarkeerd. </para>
+
+<para
+>U kunt bij categorieën individueel de markering plaatsen of verwijderen door op het vakje naast de categorienaam met de &LMB; te klikken. U kunt bij een complete hierarchy van categorieën een markering plaatsen of verwijderen door op het vakje met de &RMB; te klikken. </para>
+</sect2>
+
+<sect2 id="details.search.payee">
+<title
+>Begunstigde</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-payee.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialoog Transacties zoeken, tabblad begunstigde</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>In deze tab kunt u opgeven naar welke begunstigden moet worden gezocht. </para>
+
+<para
+>Als opzoekbare gemarkeerde begunstigden zijn gemarkeerd met een vinkje. Als u op de knop <guibutton
+>Alles</guibutton
+> klikt, dan worden alle begunstigden als opzoekbaar gemarkeerd. Als u klikt op de knop <guibutton
+>Geen</guibutton
+>, dan worden geen begunstigden als opzoekbaar gemarkeerd. U kunt bij begunstigden individueel de markering plaatsen of verwijderen door op het vakje naast de begunstigden met de &LMB; te klikken.  </para>
+
+<para
+>Als u het vakje <guilabel
+>Selecteer transacties zonder begunstigden</guilabel
+> markeert, dan worden alleen transacties zonder begunstigden gemarkeerd. </para>
+
+</sect2>
+
+<sect2 id="details.search.details">
+<title
+>Details</title>
+
+<para
+>In deze tab kunt u verschillende andere zoekcriteria opgeven. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-details.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialoog Transacties zoeken, tabblad details</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para>
+<itemizedlist>
+  <title
+>Het kan een van de volgende types zijn:</title>
+  <listitem
+><para
+>Alle typen</para
+></listitem>
+  <listitem
+><para
+>Betalingen</para
+></listitem>
+  <listitem
+><para
+>Stortingen</para
+></listitem>
+  <listitem
+><para
+>Overboekingen</para
+></listitem>
+</itemizedlist>
+
+<itemizedlist>
+  <title
+>Het kan een van de volgende statussen zijn:</title>
+  <listitem
+><para
+>Alle toestanden</para
+></listitem>
+  <listitem
+><para
+>Niet gecontroleerd</para
+></listitem>
+  <listitem
+><para
+>Opgeschoond</para
+></listitem>
+  <listitem
+><para
+>Gecontroleerd</para
+></listitem>
+</itemizedlist>
+
+<itemizedlist>
+  <title
+>U kunt op de volgende controle-statussen zoeken:</title>
+  <listitem
+><para
+>Elke transactie</para
+></listitem>
+  <listitem
+><para
+>Geldige transactie</para
+></listitem>
+  <listitem
+><para
+>Ongeldige transactie</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>U kunt naar een bepaalde transactienummer zoeken of naar een reeks van transactienummers. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="details.search.results">
+<title
+>Zoekresultaten</title>
+
+<para
+>In de tab <quote
+>Resultaat</quote
+> is voor elke transactie die met de door u ingevoerde zoekcriteria overeenkomt de Datum, Rekening, Details, Controle-status, Betaling, en Bijschrijving te zien. Door met de &RMB; op de kop van de kolommen te klikken verandert u de sorteervolgorde van de resultaten. </para>
+
+<para
+>Door te dubbelklikken op de transactie, ziet u de bijbehorende rekeninginformatie en opent u de geselecteerde transactie. </para>
+
+</sect1>
+
+</chapter>

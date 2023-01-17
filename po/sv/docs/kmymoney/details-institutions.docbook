@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.institutions">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2018-02-01</date>
+  <releaseinfo
+>5.0.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Institutioner</title>
+
+<para
+>Institutionsfönstret tillhandahåller en sammanfattning av alla konton grupperade under respektive institutioner. Listan över konton under en institution kan expanderas eller dras ihop genom att klicka på pilen till vänster om institutionsnamnet. Den sista listade institutionen är "Konton utan någon tilldelad institution". </para>
+
+<para
+>Institutionsvyn visar flera kolumner, med information om kontot. Den visar också det totala värdet av alla konton på varje institution. Du kan välja vilka kolumner som visas genom att högerklicka på vilken kolumnrubrik som helst och markera eller avmarkera kryssrutan intill kolumnnamnet. </para>
+
+<para>
+<screenshot>
+    	<screeninfo
+>Institutionsvyn</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_view.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Institutionsvyn</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Följande kolumner är tillgängliga i institutionsvyn. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Konto</term>
+    <listitem>
+      <para
+>Namnet på institutionen eller kontot. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Typ</term>
+    <listitem>
+      <para
+>Typ av konto, t.ex. sparkonto, checkkonto, kreditkort, ... </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Skatt</term>
+    <listitem>
+      <para
+>En indikation av om kontot har ställts in som viktigt rörande skatter. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Moms</term>
+    <listitem>
+      <para
+>En indikation av om kontot har ställts in att lägga till moms för transaktioner. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Ks (Kostnadsställe)</term>
+    <listitem>
+      <para
+>En indikation av att en tilldelning av ett kostnadsställe är nödvändigt vid vissa villkor när en transaktion matas in för kontot. Det är en ny funktion, som inte ännu är implementerad, alltså används kolumnen inte för närvarande. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Totalbehållning</term>
+    <listitem>
+      <para
+>En annan ny funktion, ännu ej implementerad. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Inlagt värde</term>
+    <listitem>
+      <para
+>Det här är kontots behållning, som tillhandahålls av institutionen. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Totalvärde</term>
+    <listitem>
+      <para
+>Behållningen av kontot i &kmymoney;. Observera att för institutioner är det summan av behållningen för alla institutionens konton. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Nummer</term>
+    <listitem>
+      <para
+>Kontonumret, om något matats in. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Sorteringskod</term>
+    <listitem>
+      <para
+>Visar IBAN-numret, om det finns ett värde inmatat i lämpligt fält i dialogrutan för kontoinformation. </para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+
+<para
+>Observera att flera av samma kolumner är också tillgängliga i andra vyer, såsom kontovyn. När du markerar eller avmarkerar en kryssruta för att visa eller dölja en kolumn, dyker en ruta upp som frågar om du också vill visa eller dölja kolumnen i alla andra vyer där den finns. Om du väljer "Nej", ändras bara visningen av kolumnen i aktuell vy. </para>
+
+<sect1 id="details.institutions.institution">
+<title
+>Institutionsalternativ</title>
+
+<para
+>Att högerklicka på institutionsnamnet visar en undermeny med institutionsalternativ, som ger dig flera olika möjligheter. Att välja <guimenuitem
+>Nytt konto</guimenuitem
+> stegar dig igenom processen för ett nytt konto, där du väljer institution, typ, datum, namn och ursprungligt behållning. Du kan skapa en ny institution i inställningen av nytt konto. Genom att välja <guimenuitem
+>Redigera institution...</guimenuitem
+> visas ett redigerbart fönster med information om institutionen som namn och adress. Genom att välja <guimenuitem
+>Ta bort institution</guimenuitem
+> tas hela institutionen och alla dess tillhörande konton bort. Kom ihåg att du kommer bara att kunna ta bort tillhörande konton om de inte har några transaktioner eller schemalagda åtgärder som hänvisar till dem. Att välja <guimenuitem
+>Nytt konto</guimenuitem
+> stegar dig igenom processen för nytt konto, som beskrivs utförligare i nästa avsnitt. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Undermeny med institutionsalternativ</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_options.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Undermeny med institutionsalternativ</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.institutions.new">
+<title
+>Ny institution</title>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="newinst.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>Ny institution</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<note
+><para
+>En fil måste vara öppen innan en ny institution kan skapas. Om du inte har en befintlig fil, måste du <link linkend="firsttime.3"
+>skapa en</link
+>. </para
+></note>
+
+<para
+>Only the name is required in the New Institution Dialog, all other fields are optional. As with the personal information dialog, this data is not currently used by &kmymoney;, but will be required by future releases for certain features. In particular, the <ulink url="https://en.wikipedia.org/wiki/Bank_code"
+>Bank Code</ulink
+> and the <acronym
+> <ulink url="https://en.wikipedia.org/wiki/ISO_9362"
+>BIC (Bank Identifier Code)</ulink
+></acronym
+> will be required for online banking. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.institutions.account">
+<title
+>Kontoalternativ</title>
+
+<para
+>Att högerklicka på ett kontonamn visar en undermeny med kontoalternativ. Att välja <guimenuitem
+>Nytt konto...</guimenuitem
+> stegar dig igenom processen för ett nytt konto. Att välja <guimenuitem
+>Öppna huvudbok</guimenuitem
+> tar dig direkt till huvudboksvyn eller investeringsvyn, beroende på kontots typ. Att helt enkelt dubbelklicka på ett kontonamn öppnar också kontot. Att välja <guimenuitem
+>Redigera konto</guimenuitem
+> visas ett fönster som låter dig ändra ett kontos namn, startdatum, tillhörande bankinstitution, och överliggande konto. Att ta bort ett konto är bara möjligt om det inte finns några transaktioner förknippade med det. Att välja <guimenuitem
+>Stäm av...</guimenuitem
+> öppnar avstämningsguiden, som stegar dig igenom processen att jämföra utdragen från bankkontot med dina elektroniska poster. Mer detaljerad information, samt information om övriga alternativ presenteras i lämpliga avsnitt i den här handboken. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Undermeny med kontoalternativ</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="account_options.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Undermeny med kontoalternativ</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect1>
+</chapter>

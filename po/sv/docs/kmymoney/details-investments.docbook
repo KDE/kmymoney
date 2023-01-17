@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.investments">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2019-12-30</date>
+  <releaseinfo
+>5.0.7</releaseinfo>
+</chapterinfo>
+
+<title
+>Investeringar</title>
+
+<sect1 id="details.investments.overview">
+<title
+>Investeringar i &kmymoney;</title>
+
+<sect2>
+<title
+>Investeringar</title>
+
+<para
+>I mycket allmänna ordalag är en investering vilken fördelning av pengar som helst med förväntan om framtida fördelar. &kmymoney; investeringskonton är konstruerade för en särskild typ av investeringar: värdepapper. En investering i värdepapper (eller bara ett värdepapper) är ett sätt att investera medel som handlas med på en marknad med avsikten att få en lönsam avkastning antingen i form av värdeförbättring, eller inkomst såsom ränta eller utdelning. Aktier och fonder är de vanligaste värdepappren, och det är de som &kmymoney; specifikt stöder. Obligationer har en annan ekonomisk struktur, men kan oftast hanteras av &kmymoney;. Terminer, råvaror, optioner och mer komplexa investeringar som derivat är andra investeringstyper, men &kmymoney; har inga särskilda funktioner för dem. Så länge som en investering har liknande egenskaper som en aktie eller fond, kan den följas. </para>
+</sect2>
+
+<sect2>
+<title
+>Basvaluta</title>
+<para
+>Varje värdepapper har en basvaluta. Det är valutan som handel av den bedrivs med. När en kurs skrivs in för ett värdepapper är det angivna värdets valuta alltid dess basvaluta. En aktie på New York-börsen (NYSE) skulle anges i amerikanska dollar, och en på den australiska marknaden skulle anges i australiska dollar (AUD). Basvalutan för ett värdepapper behöver inte vara samma som investeringskontot som innehåller värdepappret. </para>
+</sect2>
+
+<sect2>
+<title
+>Investeringskonton</title>
+<para
+>Ett investeringskonto innehåller en samling värdepapper, som också kallas aktier. Ett investeringskonto innehåller transaktioner, som registrerar inköp och försäljningar, av dessa värdepapper. Alla transaktioner i ett investeringskonto måste vara relaterade till ett specifikt värdepapper. </para>
+
+<para
+>Det är vanligt att ett konto hos en mäklare innehåller både värdepapper och kontanter. I &kmymoney; innehåller ett investeringskonto <emphasis
+>bara</emphasis
+> värdepapper. Det kan inte innehålla någon kontantkassa. Det är ett designbeslut som gjordes när investeringskonton först inkluderades i &kmymoney;, och det kan komma att ändras i en framtida version. För närvarande kräver kontanter använda för att köpa ett värdepapper, eller som erhålls från en försäljning eller utdelning, användning av ett mäklarkonto. </para>
+</sect2>
+
+<sect2 id="details.investments.brokerage">
+<title
+>Mäklarkonton</title>
+<para
+>När en investeringstransaktion använder kontanter (för att köpa ett värdepapper) eller producerar kontanter (från en försäljning eller utdelning), måste transaktionen referera till ett annat konto som kan innehålla kontanterna, oftast ett checkkonto. Vilket lämpligt konto som helst kan anges för alla investeringstransaktioner som kräver ett. Dock har &kmymoney; konceptet <emphasis
+>mäklarkonto</emphasis
+>, som också ibland kallas <quote
+>kontantkonto</quote
+>, som är förvalt konto för sådana transaktioner. </para>
+
+<para
+>När du skapar ett investeringskonto, får du alternativet att skapa ett tillhörande mäklarkonto tillsammans med det. Det fördefinierade namnet på mäklarkontot är investeringskontots namn med " (kontantdepå)" tillagt. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.investment">
+<title
+>Skapa ett investeringskonto</title>
+
+<para
+>Första steget på vägen att arbeta med investeringar är att skapa ett konto som ska innehålla värdepappren. Välj menyalternativet <menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Nytt konto...</guimenuitem
+></menuchoice
+> för att påbörja processen. Skapa ett konto som tidigare definierats i avsnittet om att lägga till ett <guilabel
+>Konto</guilabel
+>, och försäkra dig om att du väljer kontotyp <quote
+>Investering</quote
+>. </para>
+
+<para
+>För att arbeta med det nya investeringskontot, gå till <guibutton
+>investeringsvyn</guibutton
+>, och välj kontot du just har skapat i kombinationsrutan <guilabel
+>Välj konto</guilabel
+>. </para>
+</sect1>
+
+<sect1 id="details.investments.securities">
+<title
+>Lägga till investeringar i kontot</title>
+
+<para
+>För att lägga till enskilda värdepapper i investeringskontot, gå till vyn <guibutton
+>Investeringar</guibutton
+>, välj fliken <guibutton
+>Värdepapper</guibutton
+>, och välj kontot där investeringen ska finnas i kombinationsrutan <guilabel
+>Välj konto</guilabel
+>. <screenshot>
+  <screeninfo
+>Investeringsvyn, fliken Värdepapper</screeninfo>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="investments_summarytab.png" format="PNG"/>
+  </imageobject>
+  <textobject>
+  <phrase
+>Investeringsvyn, fliken Värdepapper</phrase>
+  </textobject>
+  </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Högerklicka med musen på det tomma utrymmet i vyn. Det visar den sammanhangsberoende menyn <guimenu
+>Investeringsalternativ</guimenu
+>. Välj <guimenuitem
+>Ny investering...</guimenuitem
+> i menyn. Det startar <guilabel
+>Guiden för ny investering</guilabel
+> som du använder för att skapa den nya investeringen. </para>
+
+<sect2 id="details.investments.newinvestmentwizard">
+<title
+>Guiden för ny investering</title>
+
+<para
+>Det första du blir tillfrågad om att skriva in är investeringstypen, om det är en aktie, obligation, etc. </para>
+
+<para
+>Därefter visas investeringens informationssida. Följande information skrivs in på sidan: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Aktiesymbol. Telegrafsymbolen är en förkortning som används för att identifiera ett börsnoterat värdepapper på en viss aktiebörs. &kmymoney; kräver en aktiesymbol för alla värdepapper, dock har vissa värdepapper inte symboler. I detta fall måste du hitta på en symbol för dem. </para
+></listitem>
+
+  <listitem
+><para
+>Fullständigt namn. Det vanliga läsbara namnet på investeringen du skapar, t.ex. <quote
+>Advanced Micro Devices, Inc.</quote
+>. </para
+></listitem>
+
+  <listitem
+><para
+>Bråkdel. Den anger precisionen som innehavet mäts med. Exempelvis i Förenta staterna, mäter de flesta värdepappersfonder innehav med tre decimaler, alltså skulle du då skriva in 1000 i fältet. Aktier mäts oftast bara i hela enheter, så för en sådan aktie skulle du kunna skriva in 1. Du bör spegla samma antal decimaler som mäklaren använder för att registrera dina värdepapper så att transaktionsbeloppen stämmer i &kmymoney;. Att använda extra precision orsakar inga problem, men att använda för låg precision kan orsaka avrundningsfel som kan göra det omöjligt för &kmymoney; att exakt matcha informationen som visas av mäklaren. </para
+></listitem>
+
+  <listitem
+><para
+>Handelsmarknad. Var handel bedrivs med aktien. Det är ett valfritt fält, som tillhandahålls för din bekvämlighet. Informationen används inte någon annanstans i &kmymoney;. </para
+></listitem>
+
+  <listitem
+><para
+>Identifikation. Ett valfritt fält för att ange ytterligare identifikationsinformation, som du kan vilja hålla reda på. Återigen, används inte informationen någon annanstans. </para
+></listitem>
+
+  <listitem
+><para
+>Handelsvalutan. Marknadens handelsvaluta som används för att handla med investeringen. Det är oftast landet där värdepappret handlas med. Det är oftast, men inte nödvändigtvis, samma som den förvalda valutan för investeringskontot som innehåller värdepappret. </para
+></listitem>
+
+  <listitem
+><para
+>Kursinmatning. Välj om kursen skrivs in som kursen per aktie, eller totalt för alla aktier, när en transaktion matas in. </para
+></listitem>
+</itemizedlist>
+
+<para
+>Om du använder direktkurser, försäkra dig om att symbolen stämmer exakt med symbolen som används av kurskällan. Yahoo täcker de flesta marknader i världen, och kräver ett suffix för symboler utanför Förenta staterna för att ange landet eller marknaden. Till exempel ska Rubicon Limited på marknaden i Nya Zeeland skrivas in som <quote
+>RBC.NZ</quote
+>. </para>
+
+<para
+>Till sist visas direktuppdateringsfönstret. Här talar du om för &kmymoney; hur du vill uppdatera investeringens kurs. Följande värden ställs in här: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Använd Finance::Quote. Det är ett alternativ för användare av &gnucash;, som är vana vid denna typ av kurser. De flesta användare kan lämna det utan markering. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Direktkälla. Källan på nätet som du vill använda för den här specifika investeringen. Det vanligaste valet är <quote
+>Yahoo</quote
+>. Prova det först, och om investeringen inte kan hittas med denna källa, experimentera med de andra. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Faktor. En multiplikationsfaktor som ska användas för kurser som hämtas för den här investeringen. Det behövs oftast för brittiska aktier, där kursen anges med pence (1/100), och aktiens värde anges med pund. I detta fall, skriv in 0,01 som faktor. </para>
+  </listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="details.investments.reuse">
+  <title
+>Använda ett värdepapper i mer än ett investeringskonto</title>
+
+<note>
+  <para
+>Det här avsnittet har lagts till precis i tid för utgivningen av version 5.0.8. Författaren anser att det är viktigt att inkludera åtminstone grundläggande information nu, eftersom ämnet har varit en källa till svårigheter en längre tid. Beskrivningen kommer att utökas, och skärmbilder av den nya värdepappersguiden kommer att läggas till så snart som möjligt. </para>
+</note>
+
+<para
+>Det är möjligt att äga aktier av samma värdepapper i olika investeringskonton, såsom ett vanligt investeringskonto och även ett pensionskonto. Om du följer instruktionerna ovan, gör du att värdepappret dyker upp i båda kontona, men &kmymoney; behandlar dem i själva verket som om vart och ett av värdepappren är olika underliggande aktier. Det leder till duplicerad lagring, såsom två kopior av hela aktiens kurshistorik. Därför kan man hellre vilja att båda värdepappren refererar till samma underliggande aktie. </para>
+
+<para
+>När du lägger till ett värdepapper i ett investeringskonto, och det värdepappret redan finns i ett annat investeringskonto, måste du vara försiktig om du vill återanvända det istället för att skapa ett nytt, duplicerat, värdepapper. När <guilabel
+>Ny investeringsguide</guilabel
+> visas efter att ha valt typ av investering och klickat på <guibutton
+>Nästa</guibutton
+>, måste du säkerställa att fältet <guilabel
+>Fullständigt namn</guilabel
+> är tomt innan <guilabel
+>Aktiesymbol</guilabel
+> matas in. När du trycker på <keycap
+>Tabulator</keycap
+>, och &kmymoney; redan har ett värdepapper som använder den symbolen, blir du tillfrågad om du vill återanvända det. Om du klickar på <guibutton
+>Ja</guibutton
+>, fylls resten av dialogrutan i, och du kan därefter bara klicka på <guibutton
+>Nästa</guibutton
+>. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.edit">
+<title
+>Redigera en investering</title>
+
+<para
+>Fliken <guilabel
+>Värdepapper</guilabel
+> i fönstret med investeringsvyn listar aktuellt innehav på kontot, tillsammans med deras symboler, värde, antal och kurs. Högerklicka med musen på någon av investeringarna för att visa den sammanhangsberoende menyn <guimenu
+>Investeringsalternativ</guimenu
+>, där det finns alternativ för att lägga till, redigera, eller ta bort enskilda investeringar från kontot. Du kan också uppdatera investeringens kurs här, antingen manuellt eller via dess direktkälla. Dessutom är det möjligt att stänga ett tomt konto, eller öppna ett stängt konto igen. Ordningen för värde, antal och kurs kan ändras på skärmen genom att markera något av dem genom att vänsterklicka på objektet i raden längst upp och dra det åt vänster eller höger. </para>
+<para
+>Om du väljer att redigera en investering använder du <guilabel
+>Guide för investeringsinformation</guilabel
+>, som ser ut och fungerar precis som <guilabel
+>Ny investeringsguide</guilabel
+>, som beskrivs i föregående avsnitt. </para>
+</sect1>
+
+<sect1 id="details.investments.ledger">
+<title
+>Investeringstransaktioner</title>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Transaktionsformulär för investeringar</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transaktionsformulär för investeringar</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Investeringstransaktioner skrivs in och redigeras i vyn <link linkend="details.ledgers"
+>Huvudbok</link
+>, som för andra typer av konton. Dock är fälten annorlunda, och varierar beroende på typ av transaktion eller aktivitet. Investeringstransaktioner har några ytterligare element: </para>
+
+<itemizedlist>
+	<listitem
+><para
+>Aktivitet</para
+></listitem>
+	<listitem
+><para
+>Värdepapper</para
+></listitem>
+	<listitem
+><para
+>Konto</para
+></listitem>
+	<listitem
+><para
+>Aktier, kurser och totalvärde</para
+></listitem>
+	<listitem
+><para
+>Avgifter</para
+></listitem>
+	<listitem
+><para
+>Räntekategori</para
+></listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Aktivitet</title>
+<para
+>Aktiviteten för en investeringstransaktion beskriver vilken åtgärd som sker med aktien. Följande aktiviteter stöds: </para>
+
+<variablelist>
+  <varlistentry>
+  <term
+>Köp eller sälj</term>
+  <listitem>
+    <para
+>Används för att registrera inköp eller försäljning av enskilda värdepapper. Åtgärden kräver ett konto att överföra kapitalet från eller till, vilket normalt är mäklarkontot om något har skapats. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Utdelning eller avkastning</term>
+  <listitem>
+    <para
+>Åtgärden används när du tar emot ränta eller utbetalning av utdelning från investeringen, också kallad <quote
+>kontantutdelning</quote
+>. Åtgärden kräver också ett konto att överföra kapitalet till. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Återinvestera utdelning</term>
+  <listitem>
+    <para
+>Återinvestera utdelning. Det här är en utdelning där vinsterna används för att köpa ytterligare aktier i värdepappret. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Lägg till eller ta bort aktier</term>
+  <listitem>
+    <para
+>En enkel ökning eller minskning av antal aktier du äger. Det bör användas mycket sällan, eftersom det är ovanligt att aktier bara dyker upp i kontot (eller försvinner) om det inte är ett inköp eller försäljning. En användning av aktiviteterna är för vissa situationer som &kmymoney; inte hanterar själv, såsom utbyte av ett visst antal aktier i ett värdepapper mot ett annat antal aktier i en annan klass av samma värdepapper. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Aktiesplit</term>
+  <listitem>
+    <para
+>Används när en aktiesplit sker. Skriv in splitförhållandet i fältet <quote
+>Splitförhållande</quote
+>. Exempelvis, vid en split 3:2, skriv in 1,5. Omvända aktiespliter där förhållandet är mindre än ett, såsom 2:3, tillåts också även om de är ovanliga. </para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Värdepapper</title>
+<para
+>Varje investeringstransaktion måste höra ihop med ett enskilt värdepapper. Välj investeringens namn när en transaktion läggs till eller redigeras. Symbolen anges när den visas. </para>
+</sect2>
+
+<sect2>
+<title
+>Konto</title>
+<para
+>För alla transaktioner som skapar eller kräver pengar, måste du ange kontot som pengarna överförs från eller till. Om investeringskontot har ett tillhörande mäklarkonto, är det oftast bäst att överföra kapitalet dit. Det gäller pengar för inköp eller försäljning av investeringen, samt betalade avgifter eller intjänad ränta och utdelning. </para>
+</sect2>
+
+<sect2>
+<title
+>Aktier, kurser och totalvärde</title>
+<para
+>För transaktionerna köp, sälj och återinvestera, måste antal aktier, kursen och transaktionens totala belopp fastställas. Du kan skriva in vilka två som helst av dem, så beräknar &kmymoney; den tredje. Det är oftast bäst att bara skriva in totalbeloppet och antal aktier, eftersom de är transaktionens kända fakta. &kmymoney; beräknar automatiskt kursen. Observera att det bara finns ett inmatningsfält för beloppet, som betecknas <quote
+>Transaktionsbelopp</quote
+> eller <quote
+>Kurs</quote
+> beroende på inställningen av alternativet <guilabel
+>Kursinmatning</guilabel
+> när kontot <link linkend="details.investments.newinvestmentwizard"
+>skapades</link
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Avgifter</title>
+<para
+>Med många investeringstransaktioner kan du inkludera avgiften (eller Courtaget) du betalade mäklaren. Om du skriver in en kategori för avgiften, visas ett fält till höger där du kan skriva in avgiftens storlek. Om du behöver skriva in mer än en avgift för transaktionen kan du använda funktionen <link linkend="details.ledgers.split"
+>Dela transaktioner</link
+>. I detta fall, när du är klar med att skriva in alla delar, visas det totala avgiftsbeloppet till höger. </para>
+</sect2>
+
+<sect2>
+<title
+>Ränta</title>
+<para
+>Detta är sättet du skriver in en ränte- eller utdelningsbetalning för en investering. Liksom med avgifter, om du skriver in en kategori, visas ett fält till höger där du kan skriva in beloppet. Du kan också använda funktionen med delade transaktioner, om det behövs. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.foreign">
+<title
+>Arbeta med utländska investeringar</title>
+
+<para
+>&kmymoney; stöder flera valutor och investeringar, och du vill kanske kombinera båda. Att göra det kräver extra försiktighet för att säkerställa korrekta poster. Som noterades ovan, när du lade till en investering var du tvungen att ange handelsvalutan. Den kanske inte är samma som basvalutan i &kmymoney;-filen, och den kanske inte heller är samma som standardvalutan i investeringskontot där du har aktierna eller kontot du överför kapital till eller från vid inköp eller försäljning. </para>
+
+<para
+>Föreställ dig ett hypotetiskt fall där din basvaluta är USD. Du har ett investeringskonto i EUR, och ett mäklarkonto också i EUR. I investeringskontot finns aktier i TietoEnator, som handlas med i SEK. </para>
+
+<para
+>När du registrerar en köptransaktion för den här investeringen, använd då SEK som valuta. Om du köper 100 aktier till priset SEK 248,00, för totalt SEK 24 800,00, skriv in dessa värden i transaktionen. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Valutavarning</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-currencywarning.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Valutavarning</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>När du väljer mäklarkontot för att hantera överföringen, blir du varnad om att det använder en annan valuta. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Valutakurseditor</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-exchangerateeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Valutakurseditor</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>När du slutför inmatning av transaktionen, blir du tillfrågad om en kursuppdatering i investeringskontots valuta, i detta fall, SEK -> EUR. Gå igenom dokumentationen under <link linkend="details.currencies.prices"
+>Skriva in kurser manuellt</link
+> för mer information om kursdialogrutan. </para>
+
+<para
+>Om du därefter byter till mäklarkontot, ser du transaktionen i EUR, eller 2 254,54, med antagandet att växlingskursen är 11,0000 SEK/EUR. </para>
+</sect1>
+
+<sect1 id="details.investments.prices">
+<title
+>Uppdatera kurser</title>
+
+<para
+>Det finns två sätt att uppdatera kurserna för investeringar. Man kan antingen skriva in den nya kursen för hand, eller låta &kmymoney; hämta den från webben. </para>
+
+<sect2>
+<title
+>Manuell uppdatering av kurser</title>
+
+<para
+>Du kan skriva in kurser för investeringar med samma <link linkend="details.currencies.prices"
+>kurseditor</link
+> som används för valutor. </para>
+</sect2>
+
+<sect2 id="details.investments.onlinequotes">
+<title
+>Direktuppdatering av kurser</title>
+<para
+>&kmymoney; har möjlighet att ladda ner de senaste kurserna för investeringar och valutor via webben. </para>
+
+<sect3>
+<title
+>Hur direktuppdatering av kurser fungerar</title>
+<para
+>På begäran hämtar &kmymoney; en sida från webben som innehåller den senaste kursen för varje värdepapper. Normalt hämtas kurserna från <ulink url="https://finance.yahoo.com"
+>finance.yahoo.com</ulink
+>, och lyder under den webbplatsens villkor och bestämmelser. </para>
+
+<para
+>Uppslagningen av direktkurser använder investeringens aktiesymbol för att hitta kursen. Därför är det viktigt att ställa in symbolen rätt. Yahoo stöder aktier från de flesta större världsmarknader, så det är oftast bara en fråga om att hitta rätt symbol. Exempelvis sker handel med TietoEnator på Stockholmsbörsen, och dess symbol i Yahoo är TIEN.ST. </para>
+
+<para
+>För att hitta aktiesymbolen för ett värdepapper som stöds av Yahoo, använd funktionen <quote
+>Symbol Lookup</quote
+> på <ulink url="https://finance.yahoo.com"
+>finance.yahoo.com</ulink
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Tilldela en kurskälla</title>
+
+<para
+>För att få direktuppdatering av kurser, måste du först aktivera den för varje investering eller valuta du vill uppdatera, genom att ställa in en <quote
+>direktkurskälla</quote
+>. Det är namnet på tjänsten som kursen ska hämtas från. &kmymoney; levereras med flera källor att välja bland. Yahoo är källan som normalt rekommenderas, och bör fungera för de flesta investeringar och alla valutor. </para>
+
+<para
+>För att tilldela en kurskälla till en investering, gå till investeringens sammanfattningsvy för kontot där värdepappret finns. Redigera värdepappret genom att högerklicka på det, och välja <guimenuitem
+>Redigera investering...</guimenuitem
+>. Klicka på <guibutton
+>Nästa</guibutton
+> två gånger i guiden för investeringsinformation, för att komma till sidan med direktuppdatering. Välj direktkälla efter behov i kombinationsrutan med direktkällor. </para>
+
+<para
+>Versioner av &kmymoney; från och med 0.9 innehåller stöd för paketet Finance::Quote för att erhålla direktkurser. Det är i huvudsak avsett som bekvämlighet för de användare som konverterar från ekonomiprogrammet &gnucash;, som använder det som sin inbyggda metod. Om du markerar alternativet, ska du se en annorlunda lista med källor, de som stöds av Finance::Quote. Om listan är tom, indikerar det att paketet inte är riktigt installerat. Se webbplatsen på <ulink url="http://finance-quote.sourceforge.net"
+>http://finance-quote.sourceforge.net</ulink
+> för ytterligare information. </para>
+</sect3>
+
+<sect3>
+<title
+>Justera en kurs</title>
+
+<para
+>Vissa direktkällor rapporterar inte kursen i basvärdet (t.ex. EUR) utan med en bråkdel (t.ex. cent). Används den informationen som kurs, ger det fel värden på investeringarna. </para>
+
+<para
+>Om det är fallet för din direktkälla, kan du använda fältet <guilabel
+>Faktor</guilabel
+> för att ange en justeringsfaktor, för exemplet som nämns ovan skulle faktorn vara 0,01. </para>
+
+<para
+>Fältet <guilabel
+>Faktor</guilabel
+> är bara tillgängligt om en <guibutton
+>Kurskälla</guibutton
+> har valts. </para>
+</sect3>
+
+<sect3>
+<title
+>Hämta kurser</title>
+
+<para
+>Oftast uppdaterar man kurser för alla investeringar och valutor på en gång. Välj menyalternativet <menuchoice
+><guimenu
+>Verktyg</guimenu
+> <guimenuitem
+>Uppdatera aktiekurser och valutakurser...</guimenuitem
+> </menuchoice
+> för att visa dialogrutan för direktuppdatering av kurser. Klicka på <guibutton
+>Uppdatera alla</guibutton
+> för att hämta kurser för alla investeringar och valutor i &kmymoney;-filen. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Uppdatera aktiekurser och valutakurser</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-onlineupdate.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Direktuppdatering av aktiekurser och valutakurser</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect3>
+
+<sect3>
+<title
+>Lägga till eller redigera kurskällor</title>
+
+<para
+>Att lägga till eller redigera kurskällor rekommenderas inte för någon utom de mest tekniska användarna. Du måste trivas med att läsa HTML, och skriva komplexa reguljära uttryck. Om det inte låter bekant, rekommenderar vi att skriva till utvecklarnas e-postlista om ingen av kurskällorna fungerar för dig. Ge oss allra helst en webbsida där kurserna kan erhållas. Dessutom kan du rådgöra med KDE:s gemenskapsforum för &kmymoney;, eftersom de kanske redan har en lösning tillgänglig för det du behöver. </para>
+
+<para
+>Om du känner att du klarar utmaningen, fungerar det så här. Kurskällorna ingår i inställningsdialogrutan. Välj menyalternativet <menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Anpassa &kmymoney;</guimenuitem
+></menuchoice
+>. Välj där sidan med <guilabel
+>Direktkurser</guilabel
+>. Du kan markera en befintlig källa att redigera, eller skapa en ny. När du är klar med dina ändringar, försäkra dig om att du klickar på knappen <guibutton
+>Uppdatera</guibutton
+> innan du avslutar dialogrutan. Dina ändringar sparas inte av sig själv. </para>
+
+<para
+>Det första att ta hand om i en kurskälla är webbadressen. Det är sidan som hämtas från webben. Du ser %1 i alla källor, och %2 i valutakällor. För investeringar ersätts %1 med aktiesymbolen. För valutor, ersätts %1 med från-valutan, och %2 med till-valutan. Webbadressen hämtas därefter, alla HTML-taggar tas (valfritt) bort, och den rensade filen skickas sedan till sidtolken. </para>
+
+<para
+>Observera att webbadressen också kan vara en webbadress med file:, som kurshämtningen anser innebär ett körbart skript. Den skickar alla kommandoradsväljare till det som du har angivit, och skickar standardutmatningen till sidtolken. Du kan till exempel har ett skript som heter getquote.sh, som innehåller egen kurslogik, och har symbolen som enda parameter. Webbadressen skulle då vara <quote
+>file:/sökväg/till/getquote.sh %1</quote
+>. </para>
+
+<para
+>The page parser looks for a symbol, a date, and a price. Regular expressions tell it how to extract those items from the page. Please review the documentation for the <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
+>QRegularExpression class</ulink
+> for the exact syntax regular expressions used by &kmymoney;. There should be exactly one capture expression, surrounded by parentheses, in each regexp field. The date format further tells the date parser the order of year, month, and day. This date format should always be in the form "%x %x %x". where x is y, m, or d. The date parser is very smart. <quote
+>%m %d %y</quote
+> will parse <quote
+>December 31st, 2005</quote
+> as easily as <quote
+>12/31/05</quote
+>. Two digit years are interpreted as being in the range of 1950-2049. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.unimplemented">
+<title
+>Funktioner som inte är implementerade</title>
+
+<para
+>Det finns några funktioner som normalt hör ihop med investeringar som ännu inte är implementerade i &kmymoney;. De omfattar, men är inte begränsade till derivat, optioner, och terminer. Dessutom vet inte &kmymoney; vilka specifika aktier som säljes, när du säljer ett värdepapper, dvs. det äldsta eller senast inköpta, så det går inte att beräkna avkastningen på investeringen. Slutligen finns ingen kunskap om den specifika skattedeklarationen i något land, men det kan oftast hanteras genom att markera alla kategorier använda för transaktioner som kan ha skattekonsekvenser som skatterelaterade. </para>
+</sect1>
+</chapter>

@@ -1,0 +1,28 @@
+<sect1 id="details.impexp.csvexp">
+<title
+>CSV-exportprogramma</title>
+<para
+>Om een van uw accounts naar een CSV-bestand te exporteren, kies menu-item <menuchoice
+><guimenu
+>Bestand</guimenu
+><guisubmenu
+>Exporteren</guisubmenu
+> <guimenuitem
+>CSV</guimenuitem
+></menuchoice
+>. U zult gevraagd worden naar enige opties. </para>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="csvexport.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>CSV-export</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+</sect1>

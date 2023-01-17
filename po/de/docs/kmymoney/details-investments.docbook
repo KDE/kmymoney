@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.investments">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Investitionen</title>
+
+<sect1 id="details.investments.overview">
+<title
+>Investitionen in &kappname;</title>
+
+<sect2>
+<title
+>Investitionen</title>
+
+<para
+>Investitionen sind Geldanlagen, die an einer Börse gehandelt werden. Aktien, Anleihen und Anlagefonds sind die gebräuchlichsten Investitionen und sie werden in &kappname; direkt unterstützt. Termingeschäfte, Warengeschäfte, Optionen und andere komplexe Derivate werden auch manchmal benutzt, es gibt für sie aber keine besonderen Funktionen in &kappname;. Solange sie sich wie Aktien oder Anleihen verhalten, können sie problemlos mit &kappname; verwaltet werden. </para>
+</sect2>
+
+<sect2>
+<title
+>Basis-Währung</title>
+<para
+>Jede Investition hat eine Basiswährung, in der sie gehandelt wird. Ein notierter Kurs einer Investition wird immer in der Basiswährung eingegeben. Für eine Aktie an der NYSE (New York Stock Exchange - New Yorker Börse) ist die Basiswährung der US-Dollar, für eine in Australien an der Börse gehandelte Aktie ist der Australische Dollar die Basiswährung. </para>
+</sect2>
+
+<sect2>
+<title
+>Investitionskonten</title>
+<para
+>Investitionskonten enthalten eine Zusammenstellung von Investitionen, Ein Investitionskonto enthält Buchungen wie Kauf oder Verkauf dieser Investitionen. Alle Buchungen in einem Investitionskonto beziehen sich auf eine bestimmte Investition. Es gibt keinen getrennten <quote
+>Kassenbestand</quote
+> in einem Investitionskonto, dazu wird ein Wertpapierkonto verwendet. </para>
+</sect2>
+
+<sect2>
+<title
+>Wertpapierhandelskonto</title>
+<para
+>Ein Investitionskonto hat meistens ein zugehöriges Wertpapierkonto. Dies wird manchmal auch als <quote
+>Kassenbestand</quote
+> bezeichnet. Investitionskonten können keine Geld-Buchungen wie zum Beispiel eine Überweisung ihrer Bank enthalten. Wird eine Aktie verkauft, dann wird der Erlös in dem Wertpapierkonto verbucht. </para>
+
+<para
+>Wenn Sie ein Investitionskonto erstellen, können Sie dazu ein Wertpapierhandelskonto eröffnen. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="details.investments.investment">
+<title
+>Anlegen eines Investitionskontos</title>
+
+<para
+>Als ersten Schritt zur Verwaltung von Investitionen müssen Sie eine Konto dafür erstellen. Wählen Sie <menuchoice
+><guimenu
+>Konto</guimenu
+><guimenuitem
+>Neues Konto ...</guimenuitem
+></menuchoice
+> aus dem Menü, um den Dialog „Neues Konto erstellen“ zu öffnen. Denken Sie daran, <quote
+>Investition</quote
+> als Typ des Konto einzustellen. </para>
+
+<para
+>Um mit dem neuen Investitionskonto zu arbeiten, gehen Sie zur Ansicht <guibutton
+>Investitionen</guibutton
+> und wählen Sie das gerade erstellte Konto im Auswahlfeld <guilabel
+>Konto wählen</guilabel
+>. </para>
+</sect1>
+            
+<sect1 id="details.investments.securities">
+<title
+>Investitionen zu Ihrem Konto hinzufügen</title>
+
+<para
+>Um einzelne Investitionen zu Ihren Investitionskonto hinzuzufügen, gehen Sie zur Ansicht <guibutton
+>Investitionen</guibutton
+>, wählen die Karteikarte <guibutton
+>Eigenkapital</guibutton
+> und dann ein Konto für die Investition im Auswahlfeld. <screenshot>
+  <screeninfo
+>Karteikarte Eigenkapital in der Investitions-Ansicht</screeninfo>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="investments_summarytab.png" format="PNG"/>
+  </imageobject>
+  <textobject>
+  <phrase
+>Karteikarte Eigenkapital in der Investitions-Ansicht</phrase>
+  </textobject>
+  </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Klicken Sie mit der &RMB; in einen leeren Bereich der Ansicht. Damit wird das Kontextmenü <guimenu
+>Investitions-Einstellungen</guimenu
+> angezeigt. Wählen Sie aus diesem Menü den Eintrag <guimenuitem
+>Neue Investition ...</guimenuitem
+>. Damit starten Sie den <guilabel
+>Assistenten für neue Investitionen</guilabel
+>, der Sie bei dieser Aufgabe unterstützt. </para>
+
+<sect2 id="details.investments.newinvestmentwizard">
+<title
+>Assistent für neue Investitionen</title>
+
+<para
+>Zuerst müssen Sie die Art der Investition (Wertpapier, Anleihe &etc;) auswählen. </para>
+
+<para
+>Als nächstes wird die Seite für die Investitionsdetails angezeigt. Folgende Informationen sollten auf dieser Seite eingegeben werden: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Börsensymbol: Das in allen Börsen verwendete Aktien-Symbol für diese Investition. &kappname; benötigt ein Börsensymbol für alle Investitionen, aber für manche Investitionen gibt es kein Symbol. In diesen Fällen müssen Sie Symbol erstellen. </para
+></listitem>
+
+  <listitem
+><para
+>Name: Der ausgeschriebenen Name der Investition, die Sie erstellen, &eg;, <quote
+>Advanced Micro Devices, Inc.</quote
+>. Dieser Name wird auch für das Wertpapier verwendet. </para
+></listitem>
+
+  <listitem
+><para
+>Stückelung: Die Genauigkeit, mit der Ihr Aktienbesitz gemessen wird. Zum Beispiel in den USA geben die meisten Anlagefonds den Aktienbesitz mit drei Dezimalstellen an. Dann muss in diesem Feld der Wert „1000“ eingetragen werden. Aktien werden oft nur in ganzen Einheiten gerechnet. Für eine solche Aktie muss der Wert „1“ eingegeben werden.  </para
+></listitem>
+  
+  <listitem
+><para
+>Handelsplatz: Die Börse, an der die Investition gehandelt wird. Angaben in diesem Feld sind freigestellt. Diese Information wird ansonsten nicht in &kappname; verwendet. </para
+></listitem>
+
+  <listitem
+><para
+>Identifikation: Ein Feld für zusätzliche Informationen zur Identifizierung. Diese Feld kann leer gelassen werden. Auch diese Information wird im Programm nicht weiter benutzt. </para
+></listitem>
+
+  <listitem
+><para
+>Handelswährung: Die Währung, in der diese Investition an Ihrem Markt gehandelt wird. </para
+></listitem>
+
+  <listitem
+><para
+>Kurseintrag: Geben Sie an, ob der Preis als Preis pro Aktie oder als Preis aller Aktien eingetragen wird. </para
+></listitem>
+</itemizedlist>
+
+<para
+>Benutzen Sie Online-Kursnotizen, dann überprüfen Sie, dass das hier eingetragene Symbol genau mit dem Symbol der Online-Quelle übereinstimmt. Yahoo liefert Informationen über die meisten weltweiten Börsen, für außerhalb der USA gehandelte Werte muss jedoch ein Zusatz an das Symbol angehängt werden. Rubicon Limited, das auf dem Neuseeländischen Markt gehandelt wird, muss daher als <quote
+>RBC.NZ</quote
+> eingegeben werden. </para>
+
+<para
+>Zum Schluß kommen die Einstellungen für die Aktualisierung der Online-Kurse. Hier stellen Sie ein, wie die Preise Ihrer Investition aktualisiert werden sollen. Folgenden Einstellungen sind vorhanden: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Finance::Quote verwenden: Dies ist eine Einstellung für GnuCash-Benutzer, die mit dieser Art von Kursnotizen vertraut sind. Die meisten Benutzer können diese Einstellung deaktiviert lassen. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Online-Quelle: Die Online-Quelle, die Sie für diese Investition benutzen möchten. Meistens wird hier <quote
+>Yahoo</quote
+> gewählt. Probieren Sie zuerst, ob die Investition hier gefunden wird. Ansonsten probieren Sie andere Quellen aus. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Faktor: Ein Faktor, mit dem die Kursnotizen für diese Investition multipliziert werden sollen. Dies ist normalerweise für Aktion aus Grossbritannien erforderlich, wo der Preis in Pence (1/100) angegeben und die Aktie in Pfund notiert wird. In diesen Fall geben Sie 0,01 als Faktor ein. </para>
+  </listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.edit">
+<title
+>Bearbeitung von Investitionen</title>
+
+<para
+>Auf der Karteikarte <guilabel
+>Eigenkapital</guilabel
+> in der Ansicht „Investitionen“ wird der Inhalt eines Kontos zusammen mit dem Handelssymbol, dem Wert, der Menge und dem Preis angezeigt. Klicken Sie mit der &RMBn; auf eine Investition, um das Kontextmenü <guimenu
+>Investitions-Einstellungen</guimenu
+> zu öffnen. Mit den Aktionen in diesem Menü können Sie einzelne Investitionen zu diesem Konto hinzufügen, zu bearbeiten oder zu löschen. Außerdem können Sie den Preis manuell oder Online aktualisieren. Ein leeres Konto kann geschlossen und geschlossene Konten können wieder geöffnet werden. </para>
+</sect1>
+
+<sect1 id="details.investments.ledger">
+<title
+>Investitions-Buchungen</title>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Investitions-Buchungsformular</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Investitions-Buchungsformular</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Investitions-Buchungen werden im <link linkend="details.ledgers"
+>Kontenbuch</link
+> wie andere Konten eingeben oder bearbeitet. Die zu bearbeitenden Felder sind jedoch anders und hängen von der Art der Buchung oder Aktivität ab. Für Investitions-Buchungen gibt es einige zusätzliche Elemente. </para>
+
+<itemizedlist>
+	<listitem
+><para
+>Aktivität</para
+></listitem>
+	<listitem
+><para
+>Wertpapier</para
+></listitem>
+	<listitem
+><para
+>Konto</para
+></listitem>
+	<listitem
+><para
+>Aktien, Preise &amp; Gesamtbetrag</para
+></listitem>
+	<listitem
+><para
+>Gebühren</para
+></listitem>
+	<listitem
+><para
+>Zinskategorie</para
+></listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Aktivität</title>
+<para
+>Die Aktivität einer Investitionsbuchung beschreibt die Aktion für ein Wertpapier. Folgende Aktivitäten sind möglich: </para>
+
+<variablelist>
+  <varlistentry>
+  <term
+>Kaufen/Verkaufen</term>
+  <listitem>
+    <para
+>Wird für den Verkauf oder Kauf von einzelnen Investitionen verwendet. Diese Aktion benötigt ein Konto, in das die Gelder ein- oder ausgebucht werden. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Dividende/Gewinn</term>
+  <listitem>
+    <para
+>Diese Aktion wird auch <quote
+>ausgeschüttete Dividende</quote
+> genannt und wird benutzt, wenn Sie Zinsen oder Dividendenausschüttungen für Ihre Investition erhalten. Für diese Aktion ist ein Konto für die Buchung der Beträge nötig. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Wiederanlage der Dividende</term>
+  <listitem>
+    <para
+>Dies ist eine Dividende, bei der Erträge wieder in der Investition angelegt werden. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Aktien hinzufügen/entfernen</term>
+  <listitem>
+    <para
+>Eine Änderung der Anzahl Ihrer Investition. Dies sollten selten benutzt werden, da es sehr ungewöhnlich ist, dass sich die Zahl der Aktien ändert, es sei denn durch Kauf oder Verkauf. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Aktien-Stückelung</term>
+  <listitem>
+    <para
+>Wird bei der Teilung einer Aktie benutzt. Geben Sie das Verhältnis im Feld <quote
+>Aufteilungsverhältnis</quote
+> ein, zum Beispiel bei einer Teilung im Verhältnis 3:, geben Sie den Faktor 1,5 ein. </para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Wertpapier</title>
+<para
+>Jede Investitions-Buchung muss einem bestimmten Wertpapier, hier nur ein anderer Name für eine Investition, zugeordnet werden. Wählen Sie den Namen für eine Investition, wenn Sie eine Buchung hinzufügen oder bearbeiten. Das Symbol wird mit der Investition angezeigt. </para>
+</sect2>
+
+<sect2>
+<title
+>Konto</title>
+<para
+>Für alle Buchungen, bei denen Geldbeträge verschoben werden, muss ein Konto eingegeben werden, aus dem der Betrag entnommen oder dem er hinzugefügt wird. Gibt es für Ihr Investionskonto ein zugeordnetes Wertpapierkonto, dann sollten Sie die Beträge dort verbuchen. Dies betrifft  gezahlte Gebühren, Zinsen oder erhaltene Dividenden. </para>
+</sect2>
+
+<sect2>
+<title
+>Aktien, Preise &amp; Gesamtbetrag</title>
+<para
+>Für die Buchung von Käufen, Verkäufen und ausgeschüttete Dividende muss die Anzahl der Aktien, der Preis je Aktie und der Gesamtbetrag der Buchung ermittelt werden. Geben Sie zwei dieser Werte ein, &kappname; berechnet dann den dritten Wert. Am Besten geben Sie den Gesamtbetrag und die Anzahl der Aktien ein, da diese beiden Werte für die Buchung bekannt sind. Der Preis je Aktie kann aus diesen Angaben berechnet werden. </para>
+</sect2>
+
+<sect2>
+<title
+>Gebühren</title>
+<para
+>Bei Investitions-Buchungen können Sie die Gebühren oder Kommission, die Sie dem Händler gezahlt haben, mit eingeben. Haben Sie eine Kategorie für die Gebühren ausgewählt, wird rechts ein Feld angezeigt, in dem der Betrag eingegeben wird. Müssen Sie mehrere Gebühren für diese Buchung eingeben, benutzen Sie die Funktion <link linkend="details.ledgers.split"
+>Split-Buchungen</link
+>. Haben Sie in diesem Fall alle einzelnen Buchungen eingegeben, wird die Gesamtsumme aller Gebühren rechts im Feld angezeigt. </para>
+</sect2>
+
+<sect2>
+<title
+>Zinsen</title>
+<para
+>In diesem Feld geben Sie die Zinsen oder Dividendenzahlungen einer Investition ein. Wie bei den Gebühren wählen Sie eine Kategorie, dann wird recht ein Feld zur Eingabe des Betrages angezeigt. Falls erforderlich, können Sie hier ebenfalls Split-Buchungen eingeben. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.investments.foreign">
+<title
+>Arbeiten mit ausländischen Investitionen</title>
+
+<para
+>&kappname; kann verschiedene Währungen und verschiedene Investitionen verarbeiten, Um diese Funktionen gemeinsam zu benutzen, sind zusätzliche Überlegungen nötig. Wie bereits vorher erläutert, muss beim Hinzufügen einer Investition eine Handelswährung angegeben werden. Diese Handelswährung kann sich von Ihrer Basiswährung oder von der Währung des Kontos für die Aktien oder der Währung des Wertpapierkontos für Käufe/Verkäufe unterscheiden. </para>
+
+<para
+>Angenommen Ihre Basiswährung ist USD (US-Dollar). Sie haben ein Investitionskonto und ein Wertpapierkonto in der Währung EUR. Diese Konto enthält Aktien von TietoEnator, die in SEK (schwedischen Kronen) gehandelt werden. </para>
+
+<para
+>Wenn Sie eine Kauf-Aktion für diese Investition eingeben, verwenden Sie als Währung SEK. Wenn Sie also 100 Aktien zu einem Preis von 248,00 SEK/Aktie mit dem Gesamtbetrag von 24.800,00 SEK kaufen, geben Sie diese Werte für die Buchung ein. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Währungs-Hinweis</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-currencywarning.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Währungs-Hinweis</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Wenn Sie das Wertpapierkonto für diesen Vorgang auswählen, erhalten Sie eine Warnung, wenn das Konto in einer anderen Währung geführt wird. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Umtauschkurs-Editor</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-exchangerateeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Umtauschkurs-Editor</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Wenn Sie die Buchung abgeschlossen haben, können Sie den Währungskurs des Investitionskontos aktualisieren. In diesem Beispiel ist das der Wechselkurs SEK zu EUR. Ausführliche Informationen über den Umtauschkurs-Editor finden Sie im Abschnitt <link linkend="details.currencies.prices"
+>Manuelle Preisaktualisierung</link
+>. </para>
+
+<para
+>Wechseln Sie zum Wertpapierkonto, dann sehen Sie bei einem angenommenen Wechselkurs von 11,000 SEK / EUR einen Buchungsbetrag von 2.254,54 EUR. </para>
+</sect1>
+
+<sect1 id="details.investments.prices">
+<title
+>Aktualisierung von Preisen</title>
+<para
+>Es gibt zwei Möglichkeiten, um Preise für Ihre Investitionen zu aktualisieren. Sie können entweder die neuen Preise von Hand eingeben oder sie &kappname; aus dem Internet holen lassen. </para>
+
+<sect2>
+<title
+>Manuelle Preisaktualisierung </title>
+<para
+>Sie können Preise für Ihre Investitionen mit dem gleichen <link linkend="details.currencies.prices"
+>Preis-Editor</link
+> wie für Währungen eingeben. </para>
+</sect2>
+
+<sect2 id="details.investments.onlinequotes">
+<title
+>Online-Kursnotizen</title>
+<para
+>&kappname; kann die aktuellen Preise Ihrer Investitionen und Währungen aus dem Internet herunterladen. </para>
+
+<sect3>
+<title
+>Wie Online-Kursnotizen funktionieren</title>
+<para
+>Auf Anforderung lädt &kappname; eine Seite aus dem Internet mit den neuesten Preisen für alle Einträge. Als Voreinstellung werden die Preise von <ulink url="http://finance.yahoo.com"
+>finance.yahoo.com</ulink
+> heruntergeladen und unterliegen den allgemeinen Geschäftsbedingungen dieser Seite. </para>
+
+<para
+>Die Online-Kursnotizen suchen über das Handelssymbol der Investition nach dem aktuellen Preis. Deshalb muss das richtige Symbol benutzt werden. Auf Yahoo finden Sie Aktien für die meisten Weltmärkte, daher müssen Sie nur das richtige Symbol finden. TietoEnator zum Beispiel wird an der Stockholmer Börse gehandelt und das auf Yahoo benutzte Symbol dafür ist TIEN.ST. </para>
+
+<para
+>Um das Börsensymbol eines bei Yahoo geführten Wertpapiers zu finden, benutzen Sie die Funktion <quote
+>Symbol Lookup</quote
+> auf der Internetseite <ulink url="http://finance.yahoo.com"
+>finance.yahoo.com</ulink
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Zuweisung einer Kursnotiz-Quelle</title>
+
+<para
+>Um Online-Preise verwenden zu können, müssen Sie zuerst für jede Investition oder Währung eine <quote
+>Online-Quelle</quote
+> angeben. Das ist der Name des Dienstes, der die Preise zu Verfügung stellt, &kappname; enthält mehrere Quellen zur Auswahl. Es wird empfohlen, Yahoo als Standardquelle zu verwenden. Diese Quelle sollte für die meisten Investitionen und alle Währungen funktionieren. </para>
+
+<para
+>Um einer Investition eine Online-Quelle zuzuweisen, gehen Sie zur Investitions-Ansicht des Kontos für das Wertpapier. Öffnen Sie das Kontextmenü mit der &RMBn; und wählen Sie <guimenuitem
+>Investition bearbeiten ...</guimenuitem
+>. Im „Investitionendetail-Assistent“ drücken Sie zweimal auf <guibutton
+>Weiter</guibutton
+>, um zur Seite mit den Online-Quellen zu kommen. Wählen Sie hier im Auswahlfeld <guilabel
+>Online-Quelle</guilabel
+> eine neue Einstellung. </para>
+
+<para
+>Ab Version 0.9 kann &kappname; Onlinekurse mit dem Paket Finance::Quote herunterladen. Dies ist in erster Linie für Benutzer gedacht, die Daten aus dem Finanzprogramm GnuCash importieren. GnuCash verwendet das Paket Finance::Quote als Standardmethode für Onlinekurse. Wenn Sie diese Einstellung auswählen, wird eine andere Liste mit Onlinequellen für das Paket Finance::Quote angezeigt. Ist diese Liste leer, dann ist das Paket wahrscheinlich nicht richtig installiert. Weitere Informationen zu diesem Paket finden Sie auf der Webseite <ulink url="http://finance-quote.sourceforge.net"
+> http://finance-quote.sourceforge.net</ulink
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Anpassung der Kursnotiz-Quellen</title>
+
+<para
+>Einige Online-Quellen geben den Preis nicht in einer Basiseinheit wie &eg; EUR, sondern in Untereinheiten wie &eg; Cent an. Mit dieser Information als Preis ergeben sich falsche Werte für Ihre Investitionen. </para>
+
+<para
+>Trifft das auf Ihre Online-Quelle zu, dann können Sie das Feld <guilabel
+>Faktor</guilabel
+> zur Anpassung verwenden. Im oben genannten Beispiel muss ein Faktor von 0,01 eingegeben werden. </para>
+
+<para
+>Das Feld <guilabel
+>Faktor</guilabel
+> kann nur dann ausgewählt werden, wenn eine <guibutton
+>Kursnotiz-Quelle</guibutton
+> ausgewählt wurde. </para>
+</sect3>
+
+<sect3>
+<title
+>Kursnotizen abrufen</title>
+
+<para
+>Normalerweise werden Sie die Preise für alle Ihre Investitionen und Währungen auf einmal aktualisieren. Wählen Sie <menuchoice
+><guimenu
+>Extras</guimenu
+><guimenuitem
+>Aktien- und Währungspreise aktualisieren ...</guimenuitem
+></menuchoice
+> aus dem Menü und öffnen Sie damit einen Dialog. Drücken Sie auf <guibutton
+>Alles aktualisieren</guibutton
+>, um die Kurse aller Investitionen und Währungen in Ihre &kappname;-Datei zu laden. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Aktualisierung von Aktien- und Währungskursen</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-onlineupdate.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Aktualisierung von Aktien- und Währungskursen</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect3>
+
+<sect3>
+<title
+>Hinzufügen oder Bearbeiten von Kursnotiz-Quellen</title>
+
+<para
+>Das Hinzufügen oder Bearbeiten von Online-Quellen wird nur technisch erfahrenen Benutzern empfohlen. Sie sollten HTML-Quelltext verstehen und komplexe reguläre Ausdrücke entwickeln können. Haben Sie diese Kenntnisse nicht, schreiben Sie an die Mailingliste der Entwickler, wenn keine der Online-Quellen bei Ihnen richtig funktioniert. Geben Sie möglichst auch eine Webseite an, von der die Kurse heruntergeladen werden können. </para>
+
+<para
+>Die Online-Quellen finden Sie im Einrichtungsdialog. Wählen Sie <menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>&kappname; einrichten ...</guimenuitem
+></menuchoice
+> und gehen Sie zur Seite <guilabel
+>Online-Kursnotizen</guilabel
+>. Sie können eine vorhandene Quelle zur Bearbeitung auswählen oder eine neue Quelle erstellen. Haben Sie alle Änderungen durchgeführt, müssen Sie auf <guibutton
+>Aktualisieren</guibutton
+> drücken, ehe Sie den Dialog beenden. Änderungen werden nicht automatisch gespeichert. </para>
+
+<para
+>Als erstes müssen Sie sich mit der Adresse oder URL der Online-Kursnotizen befassen. Das ist die Adresse der Seite, die aus dem Internet geladen wird. Alle Quellen haben den Platzhalter „%1“ in der URL, Quellen für Währungskurse zusätzlich den Platzhalter „%2“. Bei Investitionen wird „%1“ durch das Handelssymbol ersetzt. Bei Währungskursen wird „%1“ durch den Kaufpreis und „%2“ durch den Verkaufspreis ersetzt. Die Webseite mit der angegebenen URL wird heruntergeladen, alle HTML-Tags werden entfernt und die verbleibende Datei wird an die Funktion übergeben, die die Preise aus der Seite ermittelt. </para>
+
+<para
+>Beachten Sie, dass als URL auch eine ausführbare Datei angegeben werden kann. Dieser ausführbaren Datei werden alle eingetragenen Argumente übergeben und die Standardausgabe des Skripts wird an die Funktion zur Ermittlung der Preise übergeben. Sie können zum Beispiel ein eigenes Skript mit dem Namen „getquote.sh“ schreiben, das das Handelssymbol als Parameter übernimmt und den Preis ermittelt. Als URL muss dafür <quote
+>file:/path/to/getquote.sh %1</quote
+> eingegeben werden. </para>
+
+<para
+>Die Funktion sucht nach einem Symbol, einem Datum und einem Preis. Reguläre Ausdrücke geben an, wie diese Werte aus den Daten der Seite ermittelt werden. Informationen über die hier verwendeten regulären Ausdrücke finden Sie auf der Seite <ulink url="http://qt-project.org/doc/qt-4.8/qregexp.html#1"
+>QRegExp-Klasse</ulink
+>. In jedem regulären Ausdruck sollte genau ein zutreffender Ausdruck, der von Klammern eingeschlossen ist, enthalten sein. Das Datumsformat gibt außerdem die Reihenfolge von Jahr, Monat und Datum an. Dieses Format sollte immer in der Form „%x %x %x“ angeben werden, dabei ist x entweder y, m oder d. Die Funktion arbeitet ziemlich gut und kann mit <quote
+>%m %d %y</quote
+> sowohl <quote
+>December 31st, 2005</quote
+> als auch <quote
+>12/31/05</quote
+> richtig verarbeiten. Zweistellige Jahresangaben werden immer als Zeitraum von 1950-2049 angenommen. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.unimplemented">
+<title
+>Fehlende Funktionen</title>
+<para
+>Bestimmte häufig benutzte Funktionen für Investitionen sind noch nicht in &kappname; implementiert, insbesondere die Bearbeitung von Derivaten (Optionen, Termingeschäfte &etc;) und Steuerberichte über Investitionen. </para>
+</sect1>
+</chapter>

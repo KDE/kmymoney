@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.reconcile">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-21</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Kontenabgleich</title>
+
+<sect1 id="details.reconcile.whatis">
+<title
+>Was ist ein Kontenabgleich?</title>
+
+<para
+>Der Kontenabgleich dient dazu, die Buchungen, die Sie in &kmymoney; eingetragen haben, den Buchungen Ihres Bankkontos zuzuordnen. Dies wird normalerweise mit den Buchungen gemacht, die sich auf Ihrem Kontoauszug befinden, sei es der Auszug Ihres Girokontos, Ihrer Kreditkarte oder eines Kredits. Ein Kontenabgleich kann auch gegen eine Online-Liste des Kontos durchgeführt werden, was aber seltener vorkommt. Sollte es irgendwelche Diskrepanzen geben, haben entweder Sie oder die Person, die den Auszug erstellt hat, einen Fehler gemacht. </para>
+
+<para
+>Um ein Konto abzugleichen, wählen Sie es aus der Auswahlliste aus und klicken Sie auf das Symbol <guiicon
+><inlinemediaobject
+> <imageobject
+><imagedata fileref="reconcile.png"/></imageobject
+> </inlinemediaobject
+>Abgleichen</guiicon
+>. Alternativ können Sie aus dem Menü den Punkt <menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Abgleichen ...</guimenuitem
+></menuchoice
+> auswählen oder über die Tastenkombination <keycombo
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+>. </para>
+</sect1>
+
+<sect1 id="details.reconcile.wizard">
+<title
+>Der Abgleich-Assistent </title>
+<para
+>Es öffnet sich der Abgleich-Assistent. Auf der ersten Seite des Assistenten wird kurz erläutert, wie der Prozess des Kontenabgleichs abläuft. Klicken Sie auf den Knopf <guibutton
+>Weiter</guibutton
+>, um den Assistenten zu starten. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Abgleich-Assistent</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile1.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Abgleich-Assistent</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.reconcile.wizard.statement">
+<title
+>Auszugsinformationen</title>
+<para
+>Das Auszugsdatum, der Anfangs- und der Endsaldo können Sie auf Ihrem Kontoauszug finden. Stellen Sie sicher, dass die angezeigten Werte stimmen und klicken Sie den Knopf <guibutton
+>Weiter</guibutton
+>. Sollten die Werte von denen auf Ihrem Kontoauszug abweichen, dann geben Sie die Werte von Ihrem Kontoauszug ein und klicken Sie anschließend auf den Knopf <guibutton
+>Weiter</guibutton
+>. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Abgleich-Assistent</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile2.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Abgleich-Assistent</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect2>
+
+<sect2 id="details.reconcile.wizard.interest">
+<title
+>Zinsen</title>
+<para
+>Wenn der Kontenabgleich auf einem Bankkonto oder einem Konto mit Zinsen und/oder Gebühren stattfindet, dann geben Sie diese in die entsprechenden Eingabefelder ein. Jedem der Werte kann eine passende Kategorie zugeordnet werden. </para>
+
+<note>
+<para
+>Das Eingabefeld "Zinsen" ist vorgesehen für Zinsen, die Sie erhalten. Wenn Sie dagegen Zinsen bezahlen müssen, &eg; für ein Kreditkartenkonto, können Sie diese in das Feld "Gebühren" eintragen. </para>
+</note>
+
+<para>
+<screenshot>
+	<screeninfo
+>Abgleich-Assistent</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile3.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Abgleich-Assistent</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Klicken Sie auf <guibutton
+>Fortsetzen</guibutton
+>, um den Abgleich des Kontoauszugs mit den eingegebenen Buchungen zu beginnen. Beachten Sie, dass hierdurch nur das Fenster des Abgleich-Assistenten geschlossen wird, nicht aber der Abgleichprozess beendet ist. Auch die Ansicht im Kontenbuch ändert sich, es werden nur Buchungen angezeigt, die noch nicht als abgeglichen markiert wurden. Wie weiter unten beschrieben, müssen Sie noch Ihre Buchungen verrechnen und &kmymoney; abschließend mitteilen, dass das Konto abgeglichen wurde. </para>
+</sect2>
+
+<sect2 id="details.reconcile.wizard.clearing">
+<title
+>Buchungen verrechnen</title>
+<para
+>Während des Abgleichs kann jede Buchung bearbeitet werden, damit Sie dem Kontoauszug zugeordnet werden kann. Neue Buchungen können wie sonst auch erstellt  werden. Um eine Buchung als verrechnet zu kennzeichnen, klicken Sie auf die Spalte <guilabel
+>V</guilabel
+> in der Listenansicht. Eine Buchung ist dann verrechnet, wenn Sie einer Buchung auf Ihrem Kontoauszug zugeordnet werden konnte. </para>
+
+<para
+>Der Bereich gleich unterhalb der Buchungsliste zeigt den Saldo des Kontoauszugs links, die Summe der bereits verrechneten Buchungen in der Mitte und die Differenz auf der rechten Seite. Wenn Sie Buchungen als verrechnet markieren, werden diese Werte aktualisiert, um die Änderungen anzuzeigen. </para>
+
+<para
+>Denken Sie daran, Abgleichen ist der Prozess der Zuordnung von Daten in Ihrem Konto zu den Buchungen auf dem Kontoauszug. Änderungen an Buchungen zu einem späteren Datum als dem Datum des Kontoauszugs, das Sie im Assistenten eingegeben haben, werden gespeichert, aber nicht im Befehlsbereich als abgeglichene Summe angezeigt. </para>
+
+<screenshot>
+	<screeninfo
+>Abgleich-Assistent</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile4.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Abgleich-Assistent</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="details.reconcile.complete">
+<title
+>Den Kontenabgleich abschließen</title>
+
+<sect3 id="details.reconcile.finish">
+<title
+>Den Kontenabgleich beenden</title>
+<para
+>Wenn die Differenz zwischen dem Saldo des Kontoauszugs und der Summe der bereits verrechneten Buchungen 0 beträgt, ist das Konto abgeglichen und Sie können den Knopf <guibutton
+>Fertigstellen</guibutton
+> betätigen. Wenn Sie den Abgleich dadurch abschließen, wird &kmymoney; alle Buchungen, die als "Verrechnet" markiert wurden in den Status "Abgeglichen" überführen. Der Wert in der Spalte <guilabel
+>V</guilabel
+>  wechselt dann von <guilabel
+>V</guilabel
+> zu <guilabel
+>A</guilabel
+>. Zusätzlich speichert &kmymoney; die Änderungen ab und vermerkt, dass das Konto abgeglichen wurde. Um diese Änderungen dauerhaft zu speichern, muss die Datei gespeichert werden. </para>
+</sect3>
+
+<sect3 id="details.reconcile.postpone">
+<title
+>Den Abgleich zurückstellen</title>
+<para
+>Haben Sie Probleme bei der Fertigstellung eines Abgleichs oder benötigen Sie weitere Informationen, ehe Sie das Abgleichen fertigstellen können, dann verschieben Sie den Abgleich mit <guibutton
+>Abgleich zurückstellen</guibutton
+> auf einen späteren Termin. Dann werden die eingegebenen Werte seit dem Start des Assistenten gespeichert, verrechnete Buchungen werden nicht als abgeglichen markiert und die Ansicht wechselt zum Kontenbuch. Beenden Sie &kmymoney;, ehe Sie <guibutton
+>Fertigstellen</guibutton
+> oder <guibutton
+>Abgleich zurückstellen</guibutton
+> gedrückt haben, hat das die gleichen Auswirkungen als wenn Sie <guibutton
+>Abgleich zurückstellen</guibutton
+> gedrückt hätten. Alle Änderungen wie das Markieren von Buchungen als verrechnet oder die Eingabe neuer Buchungen sind nicht betroffen, Sie können diese Änderungen immer noch speichern, ehe Sie &kmymoney; beenden. Sie müssen den Abgleichprozess jedoch wiederholen, um die Konten abzugleichen. </para>
+
+<para
+>Starten Sie diesen Abgleich-Assistenten beim nächsten Mal, wird &kmymoney; die beim letzten Abgleich eingegebenen Daten wieder als Vorgabe einsetzen. Sie können diese Vorgaben dann ändern, wenn nötig. In diesem Fall werden Sie durch einen anderen Startbildschirm des Assistenten an diese Tatsache erinnert. </para>
+
+<screenshot>
+	<screeninfo
+>Abgleich-Assistent</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile-redo.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Abgleich-Assistent</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+
+</sect3>
+</sect2>
+</sect1>
+
+</chapter>
+

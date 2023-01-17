@@ -1,0 +1,564 @@
+<sect1 id="details.impexp.csv">
+<sect1info>
+   <author
+>&Allan.Anderson; &Allan.Anderson.mail; </author>
+</sect1info>
+<title
+>Connector Importador de CSV</title>
+
+<sect2>
+<title
+>Raons per a importar fitxers CSV</title>
+
+<para
+>En general, és preferible importar OFX. No obstant això, no totes les institucions proporcionen dades en aquest format. Gairebé sempre estaran disponibles els fitxers CSV (valors separats per comes), de vegades es descriuen com a fitxers Excel o de full de càlcul. A més, sovint es poden crear amb força facilitat capturant les dades que voleu importar, com en un fitxer de text, i editant-lo manualment. </para>
+
+<para
+>L'enfocament principal del connector és importar les dades dels extractes bancaris, però també hi ha la capacitat d'importar alguns extractes d'inversió. Aquest connector es va crear inicialment, abans de convertir-se en un importador de CSV, per a produir fitxers QIF a partir de CSV, que després es podrien importar. Aquesta funcionalitat encara està present, però és probable que s'elimini, ja que ara el connector se centra a importar directament fitxers CSV. A més, el &kmymoney; té la capacitat nativa d'exportar fitxers QIF, de manera que no hi ha una raó real per a produir un fitxer QIF a partir d'un fitxer CSV. </para>
+</sect2>
+
+<sect2>
+<title
+>Obtenir el connector</title>
+
+<para
+>El &kmymoney; importarà fitxers CSV. Aquesta funcionalitat està proporcionada com un connector i ara està integrada al nucli del programa, tant als paquets de les distribucions com al codi font. Una vegada s'instal·la el paquet d'una distribució, o es compila i s'instal·la des del codi font, l'opció de menú per a importar fitxers CSV apareixerà automàticament sota el submenú <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guisubmenu
+>Importa</guisubmenu
+></menuchoice
+>. </para>
+
+<para
+>El connector importador de CSV és molt més nou que el connector OFX, però ara la majoria de les distribucions es creen amb l'importador de CSV ja inclòs o disponible com un paquet separat. Assegureu-vos que està habilitat dins del &kmymoney;. Comproveu l'element de menú <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura el &kmymoney;...</guimenuitem
+><guimenuitem
+>Connectors</guimenuitem
+></menuchoice
+>. Si l'importador de CSV no sembla estar instal·lat a la versió, el primer lloc per a comprovar-ho serà al mateix lloc on vàreu obtenir el paquet base del &kmymoney;. Vegeu si hi ha disponible una versió posterior o si l'importador està disponible com a un paquet separat. </para>
+
+<para
+>Si heu instal·lat des de RPM o Deb, el connector Importador de CSV s'haurà de trobar dins del paquet «kmymoney». Si l'heu construït des del codi font, no hi hauria d'haver requisits addicionals. El procés de compilació del &kmymoney; hauria de detectar el codi font del connector i compilar-lo. </para>
+</sect2>
+
+<sect2>
+<title
+>Importar un fitxer CSV</title>
+
+<para
+>Per a importar un fitxer CSV, trieu l'importador des de la barra de menús: <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guisubmenu
+>Importa</guisubmenu
+> <guimenuitem
+>CSV...</guimenuitem
+></menuchoice
+>. Si no apareix CSV, serà que no teniu instal·lat correctament el connector Importador de CSV. Consulteu la secció anterior. </para>
+
+<para
+>L'Importador de CSV té la forma d'un assistent, amb una pàgina separada per a cada pas individual del procés. Hi poden haver algunes diferències menors entre el text d'aquest manual, les etiquetes en les captures de pantalla i les etiquetes que realment veieu en l'assistent. En aquests casos, el manual descriu com es veurà l'assistent en la versió següent. </para>
+
+<sect3>
+<title
+>Assistent de la importació de CSV: Inici</title>
+
+<para
+>Quan s'inicia, l'Importador de CSV mostrarà la pàgina <guilabel
+>Inici</guilabel
+>. L'àrea superior, on es mostraran les dades, estarà inicialment buida. A sota, a l'esquerra, hi haurà una llista dels passos del procés d'importació, amb l'actual ressaltat. A la dreta hi haurà algunes instruccions breus i dos botons d'opció, els quals permeten triar entre <guilabel
+>Banca</guilabel
+> o <guilabel
+>Inversió</guilabel
+>. Al costat hi haurà un quadre de selecció del perfil, el qual s'habilitarà una vegada hàgiu seleccionat un dels botons d'opció. A la part inferior de la pantalla hi ha els botons <guibutton
+>Següent</guibutton
+> per a passar al pas següent de l'assistent, <guibutton
+>Enrere</guibutton
+> per a tornar al pas anterior o <guilabel
+>Cancel·la</guilabel
+> per a interrompre la importació. Al pas inicial, també hi haurà un botó <guibutton
+>Tria el fitxer</guibutton
+> per a seleccionar inicialment el fitxer a importar. </para>
+<!-- want to use inlinemediaobject to avoid lines above and below. -->
+  <screenshot>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="csvImporter_1.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+  </screenshot>
+
+<para
+>A més, cal tenir en compte la casella de selecció <guilabel
+>Omet la configuració</guilabel
+> que hi ha al costat del selector del perfil. Inicialment, no haureu de seleccionar aquest quadre de selecció. Una vegada hàgiu configurat un perfil i hàgiu finalitzat l'assistent, aquests paràmetres es desaran al fitxer de recursos. La vegada següent que utilitzeu aquest mateix perfil, els paràmetres es carregaran a la interfície d'usuari. L'assistent anirà a través de les pàgines següents de paràmetres que no necessitareu canviar. Per tant, una vegada esteu satisfet amb un perfil, podria ser útil marcar aquest quadre. L'assistent es mourà directament a la pàgina final i, suposant que no es trobin problemes, només haureu de fer clic a <guilabel
+>Importa</guilabel
+>. </para>
+
+<para
+>Primer seleccioneu <guilabel
+>Banca</guilabel
+> o <guilabel
+>Inversió</guilabel
+>, després feu clic al quadre de selecció, el qual mostra «Afegeix un perfil nou». Si ja heu creat algun perfil, podreu seleccionar-ne un, en cas contrari, introduïu un nom nou de perfil, possiblement el nom del compte al qual voleu importar. Si introduïu un nom nou de perfil, premeu &Intro; per a crear-lo. Després, feu clic a <guilabel
+>Tria el fitxer</guilabel
+>, i s'obrirà un quadre estàndard per a la selecció de fitxers, des del qual haureu de seleccionar el fitxer CSV que voleu importar. </para>
+</sect3>
+
+<sect3>
+<title
+>Assistent de la importació de CSV: Separadors</title>
+<para
+>Ara, l'assistent haurà avançat a la pàgina <guilabel
+>Separadors</guilabel
+>, i hauríeu de veure les dades. </para>
+
+  <screenshot>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="csvImporter_2.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+  </screenshot>
+
+  <warning>
+    <para
+>Podria semblar que les entrades que es mostren a la secció superior de la finestra del connector poden editar-se, i de fet es pot, però no es conservarà l'edició. La taula només és per a mostrar, no per a editar. El connector no alterarà mai el fitxer d'entrada, i les dades realment importades provenen del fitxer d'entrada, no de la pantalla. L'única excepció a això està coberta en <link linkend="details.impexp.csv.secsym"
+>Títols i símbols</link
+> a continuació. </para
+> 
+  </warning>
+
+<para
+>El connector hauria d'haver detectat el <guilabel
+>Separador de camp</guilabel
+> apropiat per a utilitzar, i generalment no és possible seleccionar-ne un de diferent. De fet, intentar fer-ho restablirà qualsevol elecció de camp que ja hàgiu realitzat. També hi ha un selector per al <guilabel
+>Delimitador de text</guilabel
+>, però en general les cometes dobles (") són correctes. Ara feu clic al botó <guibutton
+>Següent</guibutton
+>. Depenent de la selecció anterior que hàgiu realitzat, ara estareu a la pàgina de Banca o a la pàgina d'Inversió. </para>
+</sect3>
+
+<sect3>
+<title
+>Assistent de la importació de CSV: Banca</title>
+<para
+>En aquesta pàgina, seleccionareu els números de columna des dels quals importar els camps rellevants. </para>
+
+  <screenshot>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="csvImporter_3.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+  </screenshot>
+
+<para
+>Per a la majoria dels camps, només necessitareu fer servir la llista desplegable apropiada per a seleccionar la columna apropiada. No obstant això, hi ha algunes consideracions especials. </para>
+
+<itemizedlist>
+<listitem>
+<para
+>Al centre hi ha dos botons d'opció. Si el fitxer té una sola columna per a tots els valors, seleccioneu la columna <guilabel
+>Import</guilabel
+>. No obstant això, si hi ha columnes separades per a dèbits i crèdits, seleccioneu la columna de <guilabel
+>Dèbit/crèdit</guilabel
+>. Això habilitarà el selector de columna <guilabel
+>Import</guilabel
+> o els selectors de columna <guilabel
+>Dèbit</guilabel
+> i <guilabel
+>Crèdit</guilabel
+>. </para>
+</listitem>
+
+<listitem>
+<para
+>És possible seleccionar més d'una columna per al camp Recordatori, per a les seleccions consecutives. Les columnes Recordatori ja seleccionades estaran marcades a la llista desplegable amb un asterisc (*). Si seleccioneu múltiples columnes d'aquesta manera, el seu contingut es concatenarà al camp Recordatori. </para>
+</listitem>
+
+<listitem>
+<para
+>Si voleu triar el mateix número de columna per a dos camps, el connector us alertarà i esborrarà ambdues seleccions. No obstant això, és possible, si ho voleu, fer servir la mateixa columna als camps <guilabel
+>Beneficiari/Descripció</guilabel
+> i <guilabel
+>Recordatori</guilabel
+>. Si seleccioneu una columna per al camp <guilabel
+>Beneficiari/Descripció</guilabel
+> i després seleccioneu el mateix camp per al camp <guilabel
+>Recordatori</guilabel
+>, rebreu un avís que s'han seleccionat columnes duplicades, però us demanarà si voleu continuar. Si ho feu, feu clic a <guibutton
+>Sí</guibutton
+>. </para>
+</listitem>
+
+<listitem>
+<para
+>Una raó particular per a capturar també el camp Beneficiari/Descripció al camp Recordatori és que el camp Beneficiari/Descripció podria canviar completament a la importació quan el &kmymoney; realitzi la coincidència de les operacions. En seleccionar aquest camp també com Recordatori, es conservaran aquestes dades, d'altra manera es perdrien. </para>
+</listitem>
+</itemizedlist>
+
+<para
+>Si noteu que heu realitzat una elecció incorrecta, simplement canvieu aquesta selecció. Si cal realitzar diversos canvis, feu clic al botó <guibutton
+>Neteja</guibutton
+>. </para>
+
+<para
+>Un cop s'hagin triat les columnes per a tots els camps necessaris, s'habilitarà el botó <guibutton
+>Següent</guibutton
+>, i en fer-hi clic s'avançarà en l'assistent. </para>
+</sect3>
+
+<sect3>
+<title
+>Assistent de la importació de CSV: Inversió</title>
+<para
+>Aquesta pàgina és similar a la pàgina <guilabel
+>Banca</guilabel
+>, encara que és una mica més complexa. La majoria de les seleccions són força òbvies, però hi ha alguns elements que poden semblar confusos fins que hàgiu completat el procés una o dues vegades. <screenshot
+> <mediaobject
+> <imageobject>
+  <imagedata fileref="csvImporter_4.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+  </screenshot>
+</para>
+
+<para>
+<itemizedlist>
+<listitem>
+<para
+>Com a la pàgina <guilabel
+>Banca</guilabel
+>, podreu seleccionar més d'una columna per al camp Recordatori. </para>
+</listitem>
+
+<listitem>
+<para
+>El selector <guilabel
+>Tipus/Acció</guilabel
+> és per a identificar la columna que conté el tipus d'acció, com Comprar, Vendre, Dividend, &etc; </para>
+</listitem>
+
+<listitem>
+<para
+>El selector <guilabel
+>Fracció del preu</guilabel
+> és per a indicar la fracció/multiplicador per a la compatibilitat entre els preus importats i emmagatzemats. Per exemple, si el preu del fitxer d'importació està en centaus, però el compte del &kmymoney; té un preu en dòlars, seleccioneu 0,01. O, si el preu del fitxer de dades del &kmymoney; està en dòlars, i també esteu important el fitxer CSV, seleccioneu 1,0. </para>
+</listitem>
+
+<listitem>
+<para
+>Utilitzeu el selector <guilabel
+>Columna de comissió</guilabel
+> si el fitxer té una columna diferent per a les comissions. No obstant això, cal tenir en compte que la comissió podria haver-se tingut en compte al preu. Si n'hi ha una, i és una xifra percentual, en lloc d'un valor, feu clic a la casella de selecció <guilabel
+>La comissió és en percentatge</guilabel
+>. Cal tenir en compte que en aquesta pàgina, aquest serà l'únic camp que inclourà explícitament «columna» a l'etiqueta, per a posar en èmfasi que és per a la columna de comissions, no per a cap comissió real. </para>
+</listitem>
+
+<listitem>
+<para
+>A sota dels selectors de columna hi ha dues àrees per a la identitat del títol. Depenent del corredor o institució financera, el fitxer podria contenir entrades per a només un o per a diversos títols. <itemizedlist>
+  <listitem>
+  <para
+>Si el fitxer conté les operacions per a un sol títol, amb el nom possiblement en una fila de capçalera, el nom s'haurà d'introduir al quadre <guilabel
+>Nom del títol</guilabel
+>. El nom que introduïu s'afegirà a la llista desplegable per a ús futur. És possible que posteriorment vulgueu eliminar aquest nom de la llista. Si és així, seleccioneu-lo i després feu clic al botó <guibutton
+>Oculta el títol</guibutton
+>. Això només l'eliminarà d'aquesta llista i no tindrà cap efecte al fitxer principal del &kmymoney;. </para>
+  </listitem>
+
+  <listitem>
+  <para
+>Si el fitxer inclou les operacions per a diversos títols, cadascun s'identificarà pel seu símbol borsari en una columna amb més detalls en una altra columna. Seleccioneu aquestes columnes als selectors <guilabel
+>Símbol</guilabel
+> i <guilabel
+>Detall</guilabel
+>. Podria ser que un títol no tingui un símbol oficial, i en aquest cas es podrà inventar un pseudosímbol. Això no és un problema, sempre que identifiqui de forma exclusiva aquest títol al fitxer d'importació. De vegades, el tipus d'activitat real estarà incrustat a la columna de detalls, possiblement precedit per un text estàndard. Per exemple, si el camp conté <quote
+>tipus: dividend</quote
+>, aneu al quadre de text <guilabel
+>Filtre</guilabel
+> i introduïu-hi <quote
+>tipus: </quote
+> incloent l'espai final. </para>
+  </listitem>
+  </itemizedlist>
+</para>
+</listitem>
+</itemizedlist>
+</para>
+
+<para
+>Quan se seleccionin tots els camps obligatoris, s'habilitarà el botó <guibutton
+>Següent</guibutton
+>, i en fer-hi clic s'avançarà en l'assistent. </para>
+</sect3>
+
+<sect3>
+<title
+>Assistent de la importació de CSV: Línies</title>
+<para
+>En aquesta pàgina, indicareu si s'han d'ignorar les línies al començament o al final del fitxer. També indicareu el format de qualsevol columna de data. <screenshot
+> <mediaobject
+> <imageobject>
+  <imagedata fileref="csvImporter_5.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+  </screenshot>
+</para>
+
+<formalpara
+><title
+>Línia inicial</title>
+<para
+>Establiu això perquè l'importador ometi qualsevol línia de capçalera al fitxer. L'elecció es desarà en aquest perfil per a ús futur. Les línies inicial i final interactuen, i la línia inicial no podrà ser més gran que la línia final. Si el selector de la <guilabel
+>Línia inicial</guilabel
+> no respon, comproveu la configuració de la línia final. </para>
+</formalpara>
+
+<formalpara
+><title
+>Línia final</title>
+<para
+>L'importador configurarà això automàticament a l'última línia del fitxer o a l'última configuració desada. Només haureu d'ajustar-ho si hi ha línies de peu de pàgina al fitxer que l'importador hagi d'ignorar. Altrament, és probable que rebeu un avís d'error en les dades quan el connector intenti analitzar les dades incorrectes. De nou, si no respon el selector de <guilabel
+>Línia final</guilabel
+>, comproveu la configuració de la <guilabel
+>Línia inicial</guilabel
+>. </para>
+</formalpara>
+
+<formalpara
+><title
+>Format de la data</title>
+<para
+>Això s'haurà d'establir segons l'ordre de l'any, mes i dia en les dates del fitxer. Si el connector troba dades incompatibles amb aquesta opció, es queixarà quan intenti importar. No obstant això, si l'opció és incorrecta, però produeix resultats no vàlids sense detectar (com dades sense dies superiors a 12, de manera que es podrien haver alternat el mes i el dia), simplement obteniu dades incorrectes, això es deu al fet que el connector no podrà saber que ha comès un error. En aquest cas, l'error serà obvi al llibre major després de la importació. </para>
+</formalpara>
+
+<para
+>Un cop llest, s'habilitarà el botó <guibutton
+>Següent</guibutton
+>, i en fer-hi clic s'avançarà a l'assistent. </para>
+</sect3>
+
+<sect3 id="details.impexp.csv.secsym">
+<title
+>Assistent de la importació de CSV: Títols i Símbols</title>
+
+<para
+>Per a un fitxer d'Inversió, una vegada s'hagi acceptat la pàgina <guilabel
+>Línies</guilabel
+>, abans que pugueu continuar amb la importació, assegureu-vos que cada títol al fitxer coincideixi amb el títol correcte al fitxer del &kmymoney;. En aquest punt, s'obrirà una altra finestra mostrant els títols i símbols continguts al fitxer d'importació. Recordeu que, a diferència de la visualització de les dades en les finestres principals de l'assistent, els canvis que realitzeu en aquesta pàgina <emphasis
+>seran</emphasis
+> importants. </para>
+
+<para
+>Completar aquesta pàgina és senzill, si teniu en consideració aquests elements: <itemizedlist>
+    <listitem>
+    <para
+>Cada fila representa una operació, de manera que podria semblar que hi ha files duplicades. Això està bé. </para>
+    </listitem>
+
+    <listitem>
+    <para
+>Cada nom de títol haurà de coincidir exactament amb el títol existent com s'especifica al &kmymoney;. Si no coincideix, es crearà com a un títol nou, el qual probablement no voldreu, llevat que representi la compra d'un títol nou. </para>
+    </listitem>
+
+    <listitem>
+    <para
+>S'haurà de mostrar un símbol per a cada títol. </para>
+    </listitem>
+
+    <listitem>
+    <para
+>L'<emphasis
+>única</emphasis
+> informació en aquesta pàgina haurà de ser el símbol i el nom del títol. Qualsevol altra informació mostrada inicialment (com la data o el tipus d'activitat) encara es trobarà al fitxer real d'importació, però no s'haurà de mostrar aquí. </para>
+    </listitem>
+  </itemizedlist>
+</para>
+
+<para
+>Podreu editar un símbol o nom del títol fent doble clic a la cel·la. Per a cada títol, si cal, editeu el nom en una de les seves files. Si apareix el nom correcte del títol al fitxer importat, feu doble clic per a seleccionar-lo, després copieu i enganxeu/editeu, tenint en compte si heu utilitzat una variació o abreujament dins del &kmymoney;. Si editeu un nom de títol, aquesta edició s'aplicarà a totes les files amb el mateix símbol. </para>
+
+<para
+>Qualsevol línia sense símbol es tractarà com un element de selecció del tipus de valor. Si alguna operació involucra un altre compte, &pex;, un compte corrent o de valors per a un dividend rebut o per a realitzar un pagament, apareixerà un quadre de missatge perquè introduïu el nom del compte per a la transferència. En general, aquest serà el compte de valors que vàreu triar o crear quan es va crear el compte d'inversió. De la mateixa manera, si se us demana, introduïu el número de columna que conté el beneficiari. Si cometeu un error en introduir el nom del compte, la importació continuarà, però el &kmymoney; no ho reconeixerà i marcarà aquestes operacions com que els hi manca l'assignació de la categoria. Si el nom del compte requerit és massa llarg, introduïu només alguns caràcters. La importació continuarà, però el &kmymoney; marcarà les operacions com que els hi manca l'assignació de la categoria, i haureu de seleccionar el compte correcte per a la transferència després de la importació. Feu clic a <guibutton
+>D'acord</guibutton
+> quan hàgiu finalitzat. Després s'entregarà el procés d'importació al &kmymoney;. </para>
+
+<para
+>Si teniu més d'una operació que es refereix al mateix títol, podreu editar-les totes alhora, utilitzant la selecció múltiple. Per exemple, per a afegir un símbol per a diverses línies, manteniu premuda la tecla &Ctrl; i, a la columna de símbols, seleccioneu cada operació. Mentre la manteniu premuda, totes aquestes cel·les de símbols encara s'hauran de seleccionar, de manera que feu clic sobre una i introduïu el símbol. Feu clic dins de la finestra però fora d'aquesta columna, o premeu &Intro; (no a <guibutton
+>D'acord</guibutton
+>). Ara que totes aquestes operacions tenen el mateix símbol, feu doble clic en una entrada de detalls i editeu el nom del títol que vulgueu. Feu clic en una altra part de la finestra (o premeu &Intro;) per a acceptar l'edició, el qual canviarà totes aquestes entrades. Les entrades restants mostraran els símbols recollits des de les operacions al fitxer d'importació. </para>
+
+<para
+>Ara feu clic a <guibutton
+>D'acord</guibutton
+>, després a <guibutton
+>Importa</guibutton
+>. Al quadre <guilabel
+>Introduïu un compte</guilabel
+>, introduïu el nom d'un compte de valors/compte corrent per a fons. Si introduïu un nom vàlid, s'utilitzarà aquest compte. Si no podeu molestar-vos a introduir un nom correcte per ser llarg, introduïu alguns caràcters. La importació ho acceptarà, però les operacions del llibre major després de la importació necessitaran un compte adequat per a ser seleccionades. Per al quadre <guilabel
+>Valors</guilabel
+>, introduïu el número de la columna que conté aquest detall. Ara, al quadre <guilabel
+>Operació no vàlida</guilabel
+>, podria obtenir algunes entrades perquè el tipus d'activitat no coincideix amb la combinació de quantitat/preu/import. A cada missatge, feu clic a <guilabel
+>Selecciona el tipus d'operació</guilabel
+>, i apareixerà una llista desplegable indicant els tipus d'activitat vàlids per a aquesta combinació de valors. </para>
+
+<para
+>Ara s'ha produït la importació i esteu al &kmymoney; per a seleccionar el compte d'inversió que voleu utilitzar. Després el compte corrent, si hi havia cap operació de valors. </para>
+</sect3>
+
+<sect3>
+<title
+>Assistent de la importació de CSV: Final</title>
+<para
+>En arribar a la pàgina Final, el connector validarà automàticament els valors. Si la/es columna/es de valor numèric està/an ressaltada/es en verd, llavors la validació serà amb èxit i tot el que caldrà és fer clic a <guibutton
+>Importa CSV</guibutton
+> i el control després passarà al programa principal del &kmymoney;. No obstant això, si les línies inicial i/o final estan configurades incorrectament, o si es varen seleccionar les columnes incorrectes, el ressaltat estarà en vermell i apareixerà un missatge d'error indicant a on es troba l'error. L'usuari haurà de fer clic a <guibutton
+>Enrere</guibutton
+> per a accedir a la pàgina corresponent per a corregir l'error. </para>
+
+<para
+>També podria ser que si les columnes de dèbit i crèdit estan en ús, una d'aquestes columnes legítimament podria no contenir entrades. Això voldrà dir que aquesta columna no té cap símbol decimal present, i això generarà un avís. Si veieu que aquest és el cas, podreu fer clic a qualsevol dels botons per a acceptar (<guibutton
+>Accepta això</guibutton
+> o <guibutton
+>Accepta-ho tot</guibutton
+>). </para>
+ 
+<formalpara
+><title
+>Símbol decimal</title>
+<para
+>Un altre possible problema podria ser que el símbol decimal seleccionat sigui incorrecte. Per a esborrar aquest error cal seleccionar el símbol perquè coincideixi amb les dades. Normalment, no hauríeu de necessitar canviar aquesta selecció. Recordeu que el símbol decimal s'ha d'establir perquè coincideixi amb el fitxer, no amb la vostra configuració regional. Si la configuració regional té un valor diferent, tindrà lloc la conversió. La visualització del fitxer a la part superior de la finestra mostrarà camps numèrics ressaltats en verd si la configuració actual produeix resultats vàlids, en cas contrari en vermell. El ressaltat també reflectirà les opcions de la <guilabel
+>Línia inicial</guilabel
+> i la <guilabel
+>Línia final</guilabel
+>. Hi podrien haver avisos si alguna de les cel·les seleccionades sembla no contenir el símbol seleccionat. </para>
+</formalpara>
+
+<formalpara
+><title
+>Separador de milers</title>
+<para
+>No cal seleccionar-lo, ja que es configura automàticament en funció del <guilabel
+>Símbol decimal</guilabel
+>. Es proporciona únicament com una guia. A més, el selector estarà inactiu si cap dels valors a importar és major o igual que 1.000. </para>
+</formalpara>
+
+<formalpara
+><title
+>Importar CSV</title>
+<para
+>En fer clic en aquest botó, se li indicarà al connector que importi realment les dades des del fitxer, en funció de les seleccions que hàgiu fet anteriorment. El &kmymoney; us demanarà el compte correcte al qual importar les dades. </para>
+</formalpara>
+</sect3>
+
+<sect3>
+<title
+>Crear un fitxer QIF</title>
+<para
+>Aquest botó ofereix la possibilitat, una vegada hàgiu completat la importació, de desar les dades del fitxer CSV com un fitxer QIF, en cas que en necessiteu un per qualsevol motiu. Aquesta va ser en realitat la funcionalitat original que va impulsar la creació d'aquest connector. No obstant això, com que el &kmymoney; pot exportar un fitxer QIF, la capacitat ara és de poca utilitat i és probable que amb el temps sigui eliminada. </para>
+</sect3>
+
+<sect3>
+<title
+>Finalitzant</title>
+<para
+>Per a una importació de <guilabel
+>Banca</guilabel
+>, el connector haurà finalitzat i el &kmymoney; us demanarà, com s'ha indicat anteriorment, el compte correcte al qual importar les dades. No obstant això, per a una importació d'<guilabel
+>Inversió</guilabel
+>, es podria requerir una mica més. Si, durant la importació d'una operació, el connector no troba un tipus vàlid d'operació, mostrarà l'operació infractora i l'usuari podrà seleccionar un tipus vàlid per a substituir, segons la combinació dels valors per a quantitat, preu i import. Per a cada operació, el connector validarà el contingut de la columna per a garantir que coincideixi amb el tipus d'acció. Per exemple, si apareix una quantitat però no hi ha preu o import, se suposa que l'operació només podrà ser afegir accions o eliminar les accions. O, si hi ha un import però no hi ha cap quantitat o preu, llavors s'assumirà un Dividend, &etc; </para>
+
+<para
+>Si voleu desar les opcions, recordeu fer clic al botó <guibutton
+>Finalitza</guibutton
+>, i es tancarà el connector. </para>
+</sect3>
+
+<sect3>
+<title
+>Afegir els tipus d'activitat de les inversions</title>
+<para
+>Si trobeu que els extractes d'inversió segueixen incloent els tipus d'activitat que no s'han reconegut, simplement afegiu-los a la secció al fitxer de recursos. (Vegeu <link linkend="details.impexp.csv.config"
+>a continuació</link
+> per a obtenir més detalls sobre aquest fitxer). Per exemple, a la secció <literal
+>[InvestmentSettings]</literal
+> del fitxer, el camp <literal
+>BuyParam</literal
+> inclourà entrades per a <literal
+>Purchase</literal
+>, <literal
+>Buy</literal
+>, <literal
+>New Inv</literal
+> i <literal
+>Switch In</literal
+>. Si en trobeu un de diferent, afegiu-lo a la llista correcta i torneu a iniciar el connector. Podríeu notar que hi ha similituds en les entrades en diferents camps, i podríeu trobar que s'està seleccionant el tipus d'activitat incorrecte. El connector comprovarà aquestes llistes en l'ordre següent: <literal
+>Shrsin</literal
+>, <literal
+>DivX</literal
+>, <literal
+>Reinvdiv</literal
+>, <literal
+>Brokerage</literal
+>, <literal
+>Buy</literal
+>, <literal
+>Sell</literal
+> i <literal
+>Remove</literal
+>. Tornar a ordenar les llistes per a adaptar-les no funciona com podria esperar-se, ja que les entrades al fitxer de recursos s'ordenaran alfabèticament. Si el paràmetre infractor és un que no necessiteu, simplement suprimiu-lo del fitxer. Si això no és possible, possiblement haureu d'editar el fitxer abans d'introduir-lo. </para>
+</sect3>
+
+<sect3 id="details.impexp.csv.config">
+<title
+>Configuració del connector de l'importador de CSV</title>
+
+<para
+>Un inconvenient ben conegut del format QIF és que es tracta un format força fluix. Amb els fitxers CSV, hi ha el mateix problema, només que encara més, ja que no existeix un estàndard acordat. Amb els fitxers d'inversió, en particular, hi ha moltes més possibilitats de variació en especificar els diferents tipus d'activitat representats en les dades. El connector ho maneja llistant aquests tipus d'activitat en un fitxer de recursos, anomenat <filename
+>csvimporterrc</filename
+>. La ubicació d'aquest fitxer dependrà de la distribució. En un sistema &Linux;, aquest estarà a <filename class="directory"
+>$KDEHOME/share/config</filename
+> on <envar
+>$KDEHOME</envar
+> generalment és <filename class="directory"
+>.config</filename
+> dins de la carpeta d'inici. Si esteu migrant des d'una versió anterior del &kmymoney; 5.0 o posterior, la ubicació anterior de <envar
+>$KDEHOME</envar
+> era <filename class="directory"
+>.kde4</filename
+>. L'ús d'aquest fitxer de recursos permetrà a l'usuari afegir un tipus d'activitat que el desenvolupador no havia trobat. Si el fitxer no existeix quan s'executa l'importador per primera vegada, el connector crearà una versió predeterminada, la qual contindrà algunes de les descripcions més òbvies. </para>
+
+<para
+>Es proporcionen diversos fitxers CSV de mostra (a la carpeta <filename class="directory"
+>kmymoney/contrib/csvimporter/</filename
+> a l'arbre del codi font) amb l'esperança que puguin ajudar. Per exemple, en la mostra d'inversió, un tipus d'activitat és «<literal
+>ReInvestorContract Buy : ReInvested Units</literal
+>». En el procés de validació, la primera coincidència amb èxit sobre la <literal
+>ReInv</literal
+> a <literal
+>ReInvestorContract Buy</literal
+>, de manera que l'operació es classificarà com a <literal
+>Reinvdiv</literal
+>, tot i que també s'esmenta <literal
+>Buy</literal
+>. Un altre exemple que s'ha observat és un tipus d'activitat <literal
+>Reinvest</literal
+> tot i que l'operació no incloïa ni el preu ni l'import, sinó només una quantitat, així que s'haurà de tractar com <literal
+>Add Shares</literal
+> o <literal
+>Shrsin</literal
+>. </para>
+
+<para
+>Quan es va crear aquest connector, només s'havien vist com a exemples alguns formats d'inversió, i és molt possible que en trobeu algun que no es pugui gestionar correctament. Si el trobeu, envieu-ne un exemple adequat (editant-lo per a eliminar o substituir la informació personal) a la llista d'usuaris &userlist; o a la llista de desenvolupadors &devlist; del &kmymoney;, el desenvolupador farà tot el que pugui per a modificar el connector perquè el gestioni. </para>
+</sect3>
+</sect2>
+</sect1>
+

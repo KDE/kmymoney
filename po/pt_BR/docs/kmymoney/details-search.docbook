@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.search">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Darin.Strait; &Darin.Strait.mail; </author>
+  </authorgroup>
+  <date
+>25/07/2010</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Pesquisar Transações</title>
+
+<sect1 id="details.search.general">
+<title
+>Geral</title>
+
+<para
+>A janela para <guilabel
+>Procurar transações</guilabel
+> pesquisa os seus dados com base nos critérios que você definiu. Você poderá acessar à janela se for ao menu <guimenu
+>Editar</guimenu
+> e selecionar a opção <guimenuitem
+>Procurar transação...</guimenuitem
+>. </para>
+
+<para
+>Existem duas abas principais nesta janela. A aba <quote
+>Critérios</quote
+> mostra um conjunto de subabas para indicar os critérios de pesquisa. </para>
+
+<para
+>Os resultados serão apresentados na página <quote
+>Resultado</quote
+>, após a pesquisa ter terminado. Abaixo da lista de resultados, o &kappname; mostra o número das transações que correspondem ao critério de pesquisa. Se fizer duplo-clique numa transação individual, na janela de resultado, será apresentado o item de registro apropriado com a respectiva transação. </para>
+
+<para
+>Quando clicar no botão <guibutton
+>Procurar</guibutton
+>, a pesquisa é iniciada e todos os critérios inseridos em qualquer uma das páginas serão levados em conta. </para>
+
+<para
+>O botão <guibutton
+>Restaurar</guibutton
+> restaura todos os campos das subabas de critérios em todas as abas com os seus valores predefinidos. Isto permite-lhe indicar novos critérios de pesquisa. </para>
+
+<para
+>O botão <guibutton
+>Fechar</guibutton
+> fecha a janela para <guilabel
+>Procurar as Transações</guilabel
+>. </para>
+
+</sect1>
+
+<sect1 id="details.search.criteria">
+<title
+>Critério de Procura</title>
+
+<para
+>Existem diversas subabas sob a página principal <quote
+>Critérios</quote
+>, em que cada uma lhe permite definir diferentes tipos de critérios de pesquisa. Abaixo da área de definição do critério, o &kappname; apresenta cada um dos diferentes tipos de critérios atualmente definidos para a pesquisa. </para>
+
+<sect2 id="details.search.text">
+<title
+>Texto</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-text.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Janela para Procurar Transações, página de Texto</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Esta página permite-lhe definir o texto a usar na pesquisa. Existem também duas opções que controlam a forma como texto é usado na pesquisa. </para>
+
+<para
+>Por padrão, isto irá corresponder a subsequências de texto simples. Por exemplo: </para>
+
+<para>
+<itemizedlist>
+  <listitem>
+    <para
+><quote
+>Melhores</quote
+> irá encontrar <quote
+>Melhores Bolos Ltda.</quote
+></para>
+  </listitem>
+  <listitem>
+    <para
+><quote
+>lho</quote
+> também irá encontrar <quote
+>Melhores Bolos Ltda.</quote
+> </para>
+  </listitem>
+</itemizedlist>
+</para>
+
+<para
+>No campo de listagem a seguir ao campo de texto, selecione <guilabel
+>Contém</guilabel
+> se quiser procurar transações que contenham o texto indicado, ou selecione <guilabel
+>Não contém</guilabel
+> se quiser procurar transações que não contenham o texto indicado. </para>
+
+<para
+>Se você assinalar a opção <guilabel
+>Diferenciar maiúsculas de minúsculas</guilabel
+>, a pesquisa fará a distinção entre maiúsculas e minúsculas. Por exemplo, o <quote
+>melhor</quote
+> não iria encontrar o texto <quote
+>Melhores Bolos Ltda.</quote
+> se esta opção estiver ativada. </para>
+
+<para
+>Se assinalar a opção <guilabel
+>Tratar o Texto como uma Expressão Regular</guilabel
+>, o texto será tratado como uma expressão regular Para saber mais detalhes sobre como ajustar uma data expressão regular, veja a documentação do &Qt; sobre a <ulink url="http://qt-project.org/doc/qt-4.8/qregexp.html#1"
+>classe QRegExp</ulink
+>. </para>
+</sect2>
+
+<sect2 id="details.search.account">
+<title
+>Conta</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-account.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Página para Procurar Transações, página da Conta</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Esta página permite-lhe definir as contas que seriam pesquisadas. </para>
+
+<para
+>As contas são apresentadas em árvore. As contas que estejam marcadas para a pesquisa estão assinaladas. Se você clicar no botão <guibutton
+>Tudo</guibutton
+>, todas as contas serão marcadas para serem pesquisadas. Se clicar no botão <guibutton
+>Nada</guibutton
+>, nenhuma conta será marcada para ser pesquisada. As contas individuais poderão ser assinaladas ou desmarcadas, clicando para isso na opção ao lado do nome da conta com o &LMB;. Você poderá marcar ou desmarcar uma hierarquia completa de contas ao clicar na opção de marcação com o &RMB;. </para>
+</sect2>
+
+<sect2 id="details.search.date">
+<title
+>Data</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-date.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Janela para Procurar as Transações, página da Data</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Esta página permite-lhe definir as datas em que deseja pesquisar. </para>
+
+<para
+>O controle do <quote
+>Intervalo</quote
+> oferece uma forma conveniente de configurar os controles De e Até. Estes controles poderão ser manipulados individualmente. As datas poderão ser introduzidas manualmente. Os controles irão impedi-lo de inserir datas não existentes. Os valores das datas também poderão ser alterados se clicar nas setas para cima e baixo. Ao clicar no pequeno ícone de calendário, será mostrado um calendário que lhe permitirá selecionar as datas. </para>
+</sect2>
+
+
+<sect2 id="details.search.amount">
+<title
+>Quantidade</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-amount.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Página para Procurar Transações, página da Quantia</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Esta página permite-lhe definir os montantes que deseja procurar. </para>
+
+<para
+>Você poderá procurar por uma quantia exata ou por um intervalo de quantias. Se você clicar no ícone da calculadora, irá aparecer uma pequena máquina de calcular que o ajudará a inserir um valor. </para>
+</sect2>
+
+<sect2 id="details.search.category">
+<title
+>Categoria</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-category.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Janela para Procurar as Transações, página da Categoria</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Esta página permite-lhe definir as categorias que deseja pesquisar. </para>
+
+<para
+>As categorias são apresentadas em árvore. As categorias que estejam marcadas para a pesquisa estão assinaladas. Se você clicar no botão <guibutton
+>Tudo</guibutton
+>, todas as categorias serão marcadas para serem pesquisadas. Se clicar no botão <guibutton
+>Nada</guibutton
+>, nenhuma categoria será marcada para ser pesquisada. Ao clicar no botão <guibutton
+>Receita</guibutton
+>, serão marcadas as categorias de receitas, sendo desligadas as categorias de despesa. Ao clicar no botão <guibutton
+>Despesa</guibutton
+>, as categorias de receita serão desligadas, ficando as categorias de despesa. </para>
+
+<para
+>Você poderá marcar ou desmarcar as categorias individualmente, clicando na opção de marcação ao lado do nome da categoria com o &LMB;. Poderá marcar ou desmarcar uma hierarquia completa de categorias, clicando na opção de marcação com o &RMB;. </para>
+</sect2>
+
+<sect2 id="details.search.payee">
+<title
+>Beneficiário</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-payee.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Janela para Procurar as Transações, página do Beneficiário</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Esta página permite-lhe definir os beneficiários que deseja pesquisar. </para>
+
+<para
+>Os beneficiários que estejam marcados na pesquisa estão assinalados com uma opção. Se você clicar no botão <guibutton
+>Tudo</guibutton
+>, todos os beneficiários serão marcados para serem pesquisados. Se clicar no botão <guibutton
+>Nada</guibutton
+>, nenhum beneficiário será marcado para a pesquisa. Os beneficiários poderão ser marcados ou desmarcados individualmente, clicando-se na opção ao lado do nome do beneficiário. </para>
+
+<para
+>Se você assinalar a opção <guilabel
+>Selecionar as transações sem beneficiários</guilabel
+>, só serão selecionadas as transações sem beneficiários. </para>
+
+</sect2>
+
+<sect2 id="details.search.details">
+<title
+>Detalhes</title>
+
+<para
+>Esta página permite-lhe indicar diversos critérios adicionais de pesquisa. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-details.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Janela para Procurar Transações, página de Detalhes</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para>
+<itemizedlist>
+  <title
+>O tipo poderá ser um dos seguintes:</title>
+  <listitem
+><para
+>Todos os Tipos</para
+></listitem>
+  <listitem
+><para
+>Pagamentos</para
+></listitem>
+  <listitem
+><para
+>Depósitos</para
+></listitem>
+  <listitem
+><para
+>Transferências</para
+></listitem>
+</itemizedlist>
+
+<itemizedlist>
+  <title
+>O estado poderá ser um dos seguintes:</title>
+  <listitem
+><para
+>Todos os estados</para
+></listitem>
+  <listitem
+><para
+>Não reconciliada</para
+></listitem>
+  <listitem
+><para
+>Compensado</para
+></listitem>
+  <listitem
+><para
+>Reconciliado</para
+></listitem>
+</itemizedlist>
+
+<itemizedlist>
+  <title
+>A validade poderá ser uma das seguintes:</title>
+  <listitem
+><para
+>Qualquer transação</para
+></listitem>
+  <listitem
+><para
+>Transação válida</para
+></listitem>
+  <listitem
+><para
+>Transação inválida</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Você poderá procurar por um determinado número de transação ou por um intervalo de números de transações. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="details.search.results">
+<title
+>Resultados da procura</title>
+
+<para
+>A página de <quote
+>Resultados</quote
+> mostra a Data, a Conta, os Detalhes, o Estado de Reconciliação, o Pagamento e o Depósito de cada transação que corresponda ao critério de pesquisa que inseriu. Se clicar com o botão direito na linha de cabeçalho da lista de resultados, você poderá alterar o critério de ordenação dos mesmos. </para>
+
+<para
+>Se fizer duplo-clique sobre uma transação, será mostrado o registro da conta correspondente, ficando a transação selecionada em primeiro plano. </para>
+
+</sect1>
+
+</chapter>

@@ -1,0 +1,998 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="firsttime">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>01/02/2018</date>
+  <releaseinfo
+>5.0.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Primo utilizzo di &kmymoney;</title>
+
+<sect1 id="firstime-1">
+<title
+>Eseguire &kmymoney; per la prima volta</title>
+
+<para
+>Una volta che &kmymoney; si è caricato completamente, si apriranno due finestre. La finestra in primo piano, «Suggerimento del giorno», offre una serie di informazioni importanti o utili per l'utilizzo del programma. <screenshot>
+	<screeninfo
+>Suggerimento del giorno</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="tipofday.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Suggerimento del giorno</phrase>
+	</textobject>
+	</mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Si raccomanda di dare una letta veloce a questi suggerimenti, premendo i pulsanti <guibutton
+>Precedente</guibutton
+> e <guibutton
+>Successivo</guibutton
+> nella parte bassa della finestra. </para>
+
+<para
+>Una volta letti i suggerimenti si può chiudere la finestra; verrà riaperta ogni volta che si avvierà &kmymoney;. Per modificare questo, deselezionare l'opzione corrispondente nella finestra Suggerimento del giorno. </para>
+
+<note>
+  <para
+>I suggerimenti possono essere letti in qualsiasi momento, selezionando la voce di menu <guimenuitem
+>Suggerimento del giorno</guimenuitem
+> dal menu <guimenu
+>Aiuto</guimenu
+> all'interno di &kmymoney;. </para>
+</note>
+
+<para
+>Tutti i suggerimenti sono stati presi dall'elenco delle domande frequenti (&FAQ;) che fornisce un aiuto più dettagliato ed è disponibile sul <ulink url="https://www.kmymoney.org/faq.php"
+>sito web</ulink
+> del progetto e in <link linkend="faq"
+>questo manuale</link
+>. </para>
+
+<para
+>Fare clic sul pulsante <guibutton
+>Chiudi</guibutton
+> per chiudere la finestra di dialogo Suggerimento del giorno. </para>
+
+<note>
+  <para
+>Quando si esegue &kmymoney;, potrebbe non apparire esattamente come le schermate in questo manuale. Molti dettagli, come caratteri, colori e icone possono essere personalizzati, sia utilizzando la voce di menu <menuchoice
+><guimenu
+>Impostazioni</guimenu
+><guimenuitem
+>Configura &kmymoney;...</guimenuitem
+></menuchoice
+>, sia dall'applicazione &systemsettings; di &kde;, in base al proprio sistema operativo. </para>
+</note>
+
+</sect1>
+
+<sect1 id="firsttime.mainwindow">
+<title
+>La finestra principale</title>
+
+<para>
+	<screenshot>
+	<screeninfo
+>La finestra principale</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="mainwindow_numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>La finestra principale</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>La finestra principale di &kmymoney; consiste di quattro parti principali </para>
+
+<itemizedlist>
+  <listitem
+><para
+>A. La barra dei menu</para
+></listitem>
+  <listitem
+><para
+>B. La barra degli strumenti</para
+></listitem>
+  <listitem
+><para
+>C. Il selettore della vista</para
+></listitem>
+  <listitem
+><para
+>D. La vista</para
+></listitem>
+</itemizedlist>
+
+<para
+>Il menu e le barre degli strumenti permettono di accedere alle funzionalità di &kmymoney; permettono di <link linkend="firsttime.3"
+>Creare</link
+> file e configurare il funzionamento di &kmymoney;. </para>
+
+<para
+>Sul lato sinistro della finestra principale, il selettore della vista consiste in almeno undici icone nella parte con etichette opzionali, in base ai programmi installati nel sistema in uso. Varie estensioni possono aggiungere altre icone. Facendo clic su un'icona, la finestra di visualizzazione nella parte destra viene caricata con la vista appropriata dei propri dati finanziari. Ogni vista fornisce una propria rappresentazione della situazione finanziaria e permette di vedere o modificare le informazioni. </para>
+
+<para
+>Il selettore della vista può contenere le icone seguenti </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="home_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Inizio</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Inizio: un riepilogo configurabile della situazione finanziaria corrente (o una pagina introduttiva se non è aperto alcun file dati). </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="institutions_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Vista degli istituti</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Istituti: tutti i tuoi conti e istituti vengono visualizzati in una gerarchia. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="accounts_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Vista dei conti</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Conti: tutti i tuoi conti visualizzati in una gerarchia. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="schedule_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Vista delle pianificazioni</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Transazioni pianificate: le fatture e i pagamenti ricorrenti. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="categories_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Vista delle categorie</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Categorie: conti speciali che permettono di raggruppare le transazioni associate. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="mail-tagged.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Vista delle etichette</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Etichette: conti speciali che aggiungono altri modi alle categorie per raggruppare le transazioni associate. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="payees_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Vista dei beneficiari</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Beneficiari: tutti i beneficiari usati da &kmymoney; Ci sono tutte le persone o organizzazioni ai quali effettui pagamenti in moneta o ricevi pagamenti in moneta. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="ledgers_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Vista dei registri</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Registri: lista delle transazioni di un conto. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="investments_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Vista degli investimenti</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Investimenti: un riepilogo del tuo paniere di titoli. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="reports_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Vista dei report</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Report: un'insieme di report utili, che forniscono visualizzazioni alternative dei dati finanziari. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="budgets_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Vista dei budget</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Budget: i tuoi budget. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="forecast_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Vista delle previsioni</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Previsione: questa vista fornisce una previsione dei conti e delle categorie. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="outbox_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Vista uscita</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Usata dal modulo di online banking per fornire informazioni sui processi in corso. Questa vista viene fornita dall'estensione KBanking e potrebbe non essere disponibile sul tuo sistema. </para>
+  </listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="firsttime.3">
+<title
+>Creazione di un nuovo file</title>
+
+<para
+>&kmymoney; memorizza tutti i dati riguardanti le tue finanze in un file. Come viene spiegato in <link linkend="makingmostof.basicaccounting.personalaccounts"
+>Definizione dei conti (registrazioni personali)</link
+>, è possibile avere più di un insieme di conti, ma i dati relativi ad ogni insieme saranno memorizzati in file diversi e &kmymoney; può aprire solo un file per volta. Per maggiori informazioni sui file dati di &kmymoney;, vedere il capitolo <link linkend="details.formats"
+>Formati dei file</link
+>. </para>
+
+<para
+>Per creare un nuovo file si può selezionare la voce di menu <menuchoice
+><guimenu
+>File</guimenu
+><guimenuitem
+>Nuovo</guimenuitem
+></menuchoice
+> o scegliere l'icona Nuovo <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="new.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> dalla barra degli strumenti. Inoltre, se la pagina principale di benvenuto è visualizzata, è possibile selezionare il primo collegamento: «Inizia e configura i conti». </para>
+
+<para
+>&kmymoney; aprirà la <quote
+>Procedura guidata di creazione di un nuovo file</quote
+> che guiderà nella creazione di un nuovo file. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Pagina dei dati personali</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Pagina dei dati personali</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Tutti i campi sono opzionali, quindi è possibile usare &kmymoney; senza inserire nessuna informazione in questo momento. Le informazioni inserite qui servono solo a personalizzare il proprio file di dati. In futuro, potrebbero essere usate per i report e l'online banking. Se alcuni campi diventeranno obbligatori nelle prossime versioni di &kmymoney; e adesso vengono lasciati vuoti, saranno richieste le informazioni necessarie. </para>
+
+<para
+>Inserire il nome e l'indirizzo (o lasciare vuoto) e fare clic su<guibutton
+>Avanti</guibutton
+>. </para>
+
+<para
+>Se il proprio indirizzo è memorizzato in &kaddressbook;, il pulsante<guibutton
+>Carica dalla rubrica</guibutton
+> sarà abilitato e permetterà di importare tutte le informazioni in &kmymoney;. </para>
+
+<para
+>&kmymoney; supporta diverse valute. Per impostare la valuta di base (quella si usa normalmente e verrà utilizzata nei report), selezionare la voce corrispondente nella lista e fare clic su <guibutton
+>Avanti</guibutton
+>. &kmymoney; selezionerà la valuta predefinita in base alle impostazioni della lingua. </para>
+
+<para
+>Nell'esempio seguente, il dollaro statunitense è stato selezionato come valuta di base. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Pagina della selezione della valuta di base</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-2.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Pagina della selezione della valuta di base</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>La pagina seguente permette di creare un conto di base. Normalmente, per gli utenti di &kmymoney; è un conto corrente. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Pagina di creazione di un conto corrente</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-3.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Pagina di creazione di un conto corrente</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Inserire il nome del conto e (se si vuole) il numero di riferimento assegnato dall'istituto che gestisce il conto. Inserire la data di apertura del conto e il bilancio di apertura. Per esempio, se si vuole che &kmymoney; gestisca le finanze a partire dal 01/01/2008, inserire questa data e il bilancio del conto in questa data. Il bilancio si può ottenere da un estratto conto. Inserire anche il nome ed il numero identificativo dell'istituto, anche se questa informazione è facoltativa e richiesta solo per l'online banking. </para>
+
+<para
+>Se non si desidera configurare un conto iniziale, deselezionare la casella relativa. </para>
+
+<para
+>Una volta completato questo passo, premere <guibutton
+>Avanti</guibutton
+> per continuare. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Pagina di selezione dei gruppi di conti</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-4.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Pagina di selezione dei gruppi di conti</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+
+<para
+>Scegliere il Paese e i modelli di conti appropriati. Ogni modello fornisce un insieme diverso di categorie per organizzare le proprie finanze. Usando &Ctrl; e &Shift;, insieme al &LMB;, è possibile selezionare diversi modelli, anche di nazioni diverse. Verrà visualizzata un'anteprima della gerarchia dei conti. Se non si trova un modello che corrisponde alle proprie esigenze, non selezionare nulla in quel momento e configurare manualmente le categorie successivamente. </para>
+
+<para
+>Una volta completata la selezione dei gruppi di conti, premere <guibutton
+>Avanti</guibutton
+> per continuare. </para>
+
+<para
+>La pagina successiva della procedura guidata permette di configurare le preferenze dell'utente. Se si marca la casella di selezione, sarà visualizzata la finestra delle impostazioni dell'applicazione al termine della procedura guidata di configurazione. Premere <guibutton
+>Avanti</guibutton
+> quando si vuole continuare. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Pagina delle preferenze</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-5.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Pagina delle preferenze</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>L'ultima pagina della procedura guidata permette di selezionare la posizione e il nome del file che sarà utilizzato per memorizzare i dati finanziari. I valori iniziali saranno costruiti a partire dalla propria cartella principale e dal nome utente. Se il file esiste già, sarà visualizzato un avvertimento che ricorda di selezionare un nome di file non esistente. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Pagina della selezione del nome del file</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-6.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Pagina della selezione del nome del file</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Sono state inserite tutte le informazioni necessarie alla creazione del file. Premere <guibutton
+>Fine</guibutton
+> e &kmymoney; creerà il file e lo aprirà. </para>
+
+</sect1>
+
+<sect1 id="firsttime.4">
+<title
+>Creazione di conti</title>
+
+<para
+>È possibile creare un conto in diversi modi, descritti qui: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Usando il menu</term>
+    <listitem>
+      <para
+>Per creare un conto utilizzando il menu, selezionare la voce di menu <menuchoice
+><guimenu
+>Conti</guimenu
+><guimenuitem
+>Nuovo conto...</guimenuitem
+></menuchoice
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Usando la vista dei Conti</term>
+    <listitem>
+      <para
+>Per creare un conto utilizzando la vista dei conti, fare clic sull'icona Conti <guiicon
+> <inlinemediaobject
+><imageobject
+><imagedata fileref="accounts_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> nel selettore della vista. Fare clic con il tasto destro del mouse sull'icona dell'albero delle Attività o delle Passività nella vista di destra e selezionare <guimenuitem
+>Nuovo conto</guimenuitem
+> dal menu a comparsa. L'albero delle Attività contiene tutti i conti relativi alle attività, come risparmi e investimenti. Le passività sono conti che rappresentano il denaro da restituire, come prestiti e carte di credito. Questi e gli altri tipi di conto sono spiegati in dettaglio più avanti in questo manuale. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Utilizzare la barra degli strumenti</term>
+    <listitem>
+      <para
+>Se il pulsante <guibutton
+>Nuovo conto...</guibutton
+> è visualizzato nella barra degli strumenti, è possibile fare clic per creare un conto. </para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+
+<tip>
+  <para
+>È bene notare che &kmymoney; usa molto i menu contestuali, in tutto il programma. Se non si riesce a capire come fare qualcosa, provare a fare clic con il tasto destro del mouse dove ci si aspetta di avere una certa funzione. </para>
+</tip>
+
+<para
+>La creazione di un nuovo conto con uno dei due metodi descritti aprirà la finestra <emphasis
+>Procedura guidata di creazione di un nuovo conto</emphasis
+>. Questa procedura guiderà passo passo nel processo di creazione di un conto, richiedendo man mano le informazioni necessarie. Per spostarsi tra le pagine fare clic sui pulsanti <guibutton
+>Avanti</guibutton
+> e <guibutton
+>Indietro</guibutton
+>. </para>
+
+<para
+>Creare un conto con uno dei due metodi descritti in precedenza per continuare. Nella sezione <link linkend="details.accounts"
+>Conti</link
+> si può trovare una descrizione completa del processo di creazione di un conto. </para>
+
+<para
+>Adesso che ci sono uno o più conti in &kmymoney;, il riepilogo dei conti viene visualizzato nella vista Inizio. È possibile creare transazioni manualmente nella vista dei <link linkend="details.ledgers"
+>Registri</link
+>, o impostare transazioni automatiche attraverso la vista <link linkend="details.schedules"
+>Pianificazioni</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.schedules">
+<title
+>Pianificazioni</title>
+
+<para
+>Detta anche transazione ricorrente, una <link linkend="details.schedules"
+>Pianificazione</link
+> è una transazione che avviene una o più volte in un certo periodo di tempo. Un esempio tipico sono gli stipendi settimanali o mensili. Al posto di dover aggiungere i dettagli della transazione ad ogni pagamento, si può creare una pianificazione in &kmymoney; in modo da inserire automaticamente una transazione quando si viene pagati. </para>
+
+<para
+>Per gestire le <link linkend="details.schedules"
+>pianificazioni</link
+>, fare clic sull'icona delle pianificazioni <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="schedule_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> nel selettore della vista. </para>
+</sect1>
+
+<sect1 id="firsttime.categories">
+<title
+>Categorie</title>
+
+<para
+>Per gestire le <link linkend="details.categories"
+>categorie</link
+> fare clic sull'icona delle categorie <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="categories_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> nel selettore della vista. </para>
+
+<para
+>Si possono trovare maggiori informazioni su questo argomento nella sezione <link linkend="details.categories"
+>Categorie</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.tags">
+<title
+>Etichette</title>
+
+<para
+>Per gestire le <link linkend="details.tags"
+>etichette</link
+>, fare clic sull'icona delle etichette <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="mail-tagged.png"/></imageobject
+></inlinemediaobject
+></guiicon
+> nel selettore della vista. </para>
+
+<para
+>Una descrizione completa di questo argomento è disponibile nella sezione <link linkend="details.tags"
+>Etichette</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.payees">
+<title
+>Beneficiari</title>
+
+<para
+>Per gestire il proprio elenco di beneficiari, fare clic sull'icona dei beneficiari <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="payees_view.png"/></imageobject
+></inlinemediaobject
+></guiicon
+> nel selettore della vista. </para>
+
+<para
+>Si possono trovare maggiori informazioni su questo argomento nella sezione <link linkend="details.payees"
+>Beneficiari</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.import">
+<title
+>Importazione da Quicken Interchange Format (QIF)</title>
+
+<para
+>Se si usa già un programma per la gestione delle finanze, &kmymoney; può importare le transazioni dei conti, così come può esportarle o salvarle in un formato che &kmymoney; comprende. Il più comune è il Quicken Interchange Format (QIF). La maggior parte dei programmi finanziari è in grado di esportare in questo formato, ma qui, per brevità, non viene spiegato come farlo. </para>
+
+<para
+>Si possono trovare maggiori informazioni su questo argomento nella sezione <link linkend="details.impexp.qifimp"
+>Importazione da QIF</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.find">
+<title
+>Ricerca di transazioni</title>
+
+<para
+>&kmymoney; fornisce un'utile e potente funzione di ricerca, nella finestra di dialogo di ricerca. </para>
+
+<para
+>La finestra di ricerca può essere aperta dalla barra degli strumenti, utilizzando l'icona Trova <guiicon
+> <inlinemediaobject
+><imageobject
+><imagedata fileref="transaction_find.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> o selezionando la voce di menu <menuchoice
+><guimenu
+>Modifica</guimenu
+><guimenuitem
+>Trova transazione</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Si possono trovare maggiori informazioni su questo argomento nella sezione <link linkend="details.search"
+>Ricerca</link
+>. </para>
+
+</sect1>
+
+<sect1 id="firsttime.reconcile">
+<title
+>Riconciliazione</title>
+
+<para
+>Ad un certo punto, si vorranno riconciliare le transazioni inserite con quelle elencate in un estratto conto, ad esempio di un conto corrente, di una carta di credito o di un prestito. La riconciliazione consiste nel mettere in corrispondenza le transazioni inserite con quelle elencate nell'estratto conto. Se si trovano delle differenze, è stato commesso un errore, o da te o da chi ha fatto l'estratto conto. </para>
+
+<para
+>Per riconciliare un conto, selezionarlo dalla vista <guiicon
+>Conti</guiicon
+> o dalla vista <guiicon
+>Registri</guiicon
+> o dalla vista <guiicon
+>Registri</guiicon
+>. Poi fare clic sull'icona <guiicon
+>Riconcilia</guiicon
+> della barra degli strumenti o selezionare la voce di menu <menuchoice
+><guimenu
+>Conto</guimenu
+> <guimenuitem
+>Riconcilia</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Si possono trovare maggiori informazioni su questo argomento nella sezione <link linkend="details.reconcile"
+>Riconciliazione</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.backup">
+<title
+>Copie di sicurezza</title>
+
+<para
+>Una volta creati dei conti e inserite delle transazioni, è una buona idea creare un copia di sicurezza. Il file utilizzato da &kmymoney; è un file standard Unix, quindi basta copiarlo in un'altra posizione per creare una copia di sicurezza, oppure si può usare la funzione specifica di &kmymoney;. Il metodo consigliato è quest'ultimo, perché se &kmymoney; dovesse iniziare ad usare altri formati, come SQL, diventerebbe molto più difficile la copia manuale del file. </para>
+
+<para
+>Per creare una copia di sicurezza del file tramite &kmymoney;, selezionare la voce di menu <menuchoice
+><guimenu
+>File</guimenu
+><guimenuitem
+>Backup</guimenuitem
+></menuchoice
+> e digitare la cartella in cui si vuole salvare il file. Se la cartella ha bisogno di essere montata e si hanno i privilegi richiesti, marcare l'opzione <guilabel
+>Monta questa cartella prima di effettuare il backup</guilabel
+> e fare clic su <guibutton
+>OK</guibutton
+>. </para>
+
+<para
+>Il file sarà copiato nella cartella specificata, aggiungendo al nome la data attuale, in modo da poter vedere facilmente la data di creazione della copia di sicurezza. </para>
+</sect1>
+
+<sect1 id="firsttime.launch">
+<title
+>Avviare &kmymoney;</title>
+
+<para
+>Il modo più comune di avviare &kmymoney; consiste nell'utilizzare un'icona o il menu di avvio del tuo gestore delle finestre. In questo caso, il comportamento predefinito di &kmymoney; è di riaprire l'ultimo file aperto. Ad ogni modo, in alcuni casi si può voler eseguire &kmymoney; da riga di comando. </para>
+
+<para
+>Per una descrizione completa di tutte le opzioni a riga di comando disponibili, consultare la pagina di man relativa a &kmymoney;. Comunque, ci sono due casi speciali descritti qui di seguito. </para>
+
+<formalpara
+><title
+><command
+>kmymoney -n</command
+></title>
+  <para
+>L'opzione -n indica a &kmymoney; di non riaprire l'ultimo file aperto. Questo può essere utile se il programma si chiude in modo inatteso all'avvio. </para>
+</formalpara>
+
+<formalpara
+><title
+><command
+>kmymoney &lt;file&gt;</command
+></title>
+  <para
+>Se si passa a &kmymoney; un nome file sulla riga di comando, sarà aperto quel file al posto dell'ultimo file aperto. Si può specificare il nome di qualsiasi file valido di &kmymoney;, come descritto nel capitolo sui <link linkend="details.formats"
+>formati di file</link
+>. Inoltre, questa modalità può essere utilizzata per importare un file di <link linkend="details.impexp.gnucash"
+>&gnucash;</link
+>. </para>
+</formalpara>
+</sect1>
+
+<sect1 id="firsttime.newpc">
+<title
+>Come spostare &kmymoney; su un nuovo computer</title>
+
+<sect2 id="firsttime.newpc.data">
+<title
+>Spostare i propri dati</title>
+
+<para
+>Se si acquista un nuovo computer, è molto semplice spostare i propri dati. Infatti, tutto ciò che bisogna fare è copiare il proprio file di dati di &kmymoney;. Il nome del file è mostrato nella barra del titolo quando &kmymoney; è in esecuzione, e normalmente ha estensione <filename class="extension"
+>.kmy</filename
+>. La prima volta che si esegue l'applicazione sul nuovo computer, sarà necessario indicare dove è stato posizionato il file di dati, sia eseguendo il programma dalla riga di comando che dalla voce di menu <menuchoice
+><guimenu
+>File</guimenu
+><guimenuitem
+>Apri...</guimenuitem
+></menuchoice
+>. Dovrebbe essere inoltre possibile spostarsi tra sistemi &Windows;, &MacOS; e &Linux;. </para>
+
+<para
+>Se il proprio file di dati è stato cifrato, assicurarsi di aver configurato, in modo appropriato, il programma e le chiavi su un altro computer. </para>
+
+<para
+>Se i propri dati sono in una base di dati SQL, fare riferimento alla documentazione della base di dati per le istruzioni sulla migrazione dei dati. </para>
+
+<para
+>Notare che ciò presume che sul nuovo computer sia stata installata la stessa versione di &kmymoney; che era eseguita sul vecchio computer. Installare una nuova versione dovrebbe essere ugualmente sicuro, ma è necessario essere informati su qualsiasi possibile problema relativo a tale aggiornamento. Ogni possibile problema dovrebbe essere descritto nelle note di rilascio per la nuova versione. </para>
+</sect2>
+
+<sect2 id="firsttime.newpc.settings">
+<title
+>Spostare le impostazioni</title>
+
+<para
+>Se si sposta solo il proprio file di dati nella nuova macchina, come descritto nella sezione precedente, &kmymoney; funzionerà correttamente, ma si perderanno tutte le impostazioni modificate dai valori predefiniti sulla vecchia macchina. Per conservare queste impostazioni, sarà necessario copiare anche il proprio file di configurazione. Questo file si chiama <filename
+>kmymoneyrc</filename
+>. Il file sarà in una cartella con gli altri file di configurazione delle applicazioni di &kde;. Su un sistema &Linux;, sarà in <filename class="directory"
+>$KDEHOME/share/config</filename
+> dove <envar
+>$KDEHOME</envar
+> è normalmente <quote
+>.config</quote
+> all'interno della propria cartella home. Se si sta migrando da una versione di &kmymoney; che precedente alla 5.0 o successive, la vecchia posizione di <envar
+>$KDEHOME</envar
+> era <filename class="directory"
+>.kde4</filename
+>. </para>
+
+<sect3 id="firsttime.newpc.settings.plugins">
+<title
+>Spostare le impostazioni delle estensioni</title>
+
+<para
+>Se si esegue una qualsiasi estensione di &kmymoney;, come lo strumento di importazione o di esportazione csv, potrebbe essere stato creato un file di configurazione nella stessa cartella, come <filename
+>csvimporterrc</filename
+> o <filename
+>csvexporterrc</filename
+>. Anche questi dovrebbero essere copiati sul nuovo computer. </para>
+
+<para
+>Come per il file di dati principale, ciò assume la stessa versione dell'estensione su entrambi i computer. Gli aggiornamenti sono normalmente sicuri, ma se la funzionalità dell'estensione è stata modificata in modo sostanziale, è consigliabile provare con attenzione a utilizzare il vecchio file di configurazione, per essere sicuri che l'estensione si comporti come previsto. </para>
+
+<para
+>Notare che quando si aggiorna da una versione precedente alla versione 5.0 o superiore, la posizione dei file di modello utilizzati dall'estensione di stampa degli assegni cambia. Consultare le note di rilascio o il <ulink url="https://www.kmymoney.org/faq.php"
+>sito web</ulink
+> del progetto per ulteriori dettagli. </para>
+
+<note>
+<para
+>Queste istruzioni riguardano lo spostamento dei dati e delle impostazioni di &kmymoney;. Tuttavia, potrebbero esserci elementi importanti che sono memorizzati da &kde; e non da &kmymoney;, come le password conservate in kwallet. Lo spostamento di altre parti della configurazione di &kde; va oltre gli scopi di questo manuale, anche se molti dei file importanti sono memorizzati in <envar
+>$KDEHOME</envar
+>. </para>
+</note>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="firsttime.contact">
+<title
+>Come contattare gli sviluppatori / Segnalare errori</title>
+
+<sect2>
+<title
+>Contattare gli sviluppatori</title>
+
+<para
+>Per domande generiche e commenti su &kmymoney;, esiste una lista di distribuzione degli utenti &userlist;. (<ulink url="https://mail.kde.org/mailman/listinfo/kmymoney"
+>ulteriori dettagli qui</ulink
+>.) In aggiunta, è possibile contattare gli sviluppatori tramite la loro lista di distribuzione &devlist;. (<ulink url="https://mail.kde.org/mailman/listinfo/kmymoney-devel"
+>ulteriori dettagli qui</ulink
+>). Dato che le risposte sono spesso inviate solo alla lista, potresti non ricevere risposta se non ti iscrivi a una delle liste prima di inviare. </para>
+
+<para
+>Siamo felici di conoscere le tue esperienze con &kmymoney;. </para>
+</sect2>
+
+<sect2>
+<title
+>Segnalare gli errori</title>
+
+<para
+>Per segnalare un bug, utilizzare l'interfaccia fornita da &kmymoney; selezionando <menuchoice
+><guimenu
+>Aiuto</guimenu
+><guimenuitem
+>Segnala un bug</guimenuitem
+></menuchoice
+> e inserire le informazioni richieste. In caso si abbiano delle difficoltà con questo metodo, è possibile segnalare un bug (o richiedere miglioramenti o nuove funzionalità) direttamente al <ulink url="https://bugs.kde.org"
+>sito web di segnalazione dei bug di &kde;</ulink
+>. I bug segnalati devono essere associati al prodotto <quote
+>kmymoney</quote
+>. </para>
+
+<para
+>In ogni caso, prima di segnalare un bug, leggere le linee guida che seguono. Queste linee guida servono per aiutare gli sviluppatori a identificare velocemente il problema, senza doverti chiedere maggiori informazioni. </para>
+
+<sect3 id="firsttime.bugs.quality">
+<title
+>Scrittura di segnalazioni di qualità</title>
+
+<para
+>Incoraggiamo gli utenti a usare tutto il tempo necessario per scrivere una buona segnalazione degli errori. Questo riduce lo speco di tempo per entrambi, perché lo sviluppatore e il segnalatore devono scambiarsi messaggi email finché non vengono fornite abbastanza informazioni. </para>
+
+<para
+>Eli Goldberg ha scritto le linee guida per la scrittura di bug, disponibili all'indirizzo <ulink url="https://issues.apache.org/bugwritinghelp.html"
+>https://issues.apache.org/bugwritinghelp.html</ulink
+>. Generalmente, basta seguire queste regole: </para>
+
+<formalpara
+><title
+>Includere informazioni sul sistema in uso</title>
+  <para
+>La voce di menu <menuchoice
+><guimenu
+>Aiuto</guimenu
+><guimenuitem
+>Segnala un bug</guimenuitem
+></menuchoice
+> compilerà automaticamente le informazioni, ma se si preferisce evitare l'utilizzo di questa interfaccia, ci sono diversi elementi da includere nella segnalazione. Sarà necessario conoscere la versione del sistema operativo utilizzato (&Linux;, &MacOS; o &Windows;), la versione di &kde; e di &kmymoney;, la versione di &MacOS; o di &Windows; o il nome e la versione della distribuzione &Linux; e la versione del kernel. </para>
+</formalpara>
+
+<formalpara
+><title
+>Includere un backtrace per i crash</title>
+  <para
+>Il backtrace è spesso l'informazione più utile che si può fornire per risolvere i crash. </para>
+</formalpara>
+
+<formalpara
+><title
+>Provare a riprodurre il problema</title>
+  <para
+>Facci sapere se si è in grado di riprodurre il problema. È utile sapere se il problema è capitato solo una volta, capita sempre o solo a volte. </para>
+</formalpara>
+
+<formalpara
+><title
+>Includere passi specifici</title>
+  <para
+>Questa non è una buona segnalazione di errori: <quote
+>Ho inserito una transazione e &kmymoney; è andato in crash.</quote
+>. Una segnalazione molto migliore potrebbe essere: <quote
+>Usando il modulo per l'inserimento delle transazioni, ho inserito una nuova transazione nel mio conto della carta di credito. Ho selezionato la scheda Trasferimenti e inserito il valore, poi sono andato nella scheda Deposito e poi sono tornato nella scheda Trasferimenti. Quando sono tornato nella scheda Trasferimenti, &kmymoney; è andato in crash. Questo problema è sempre riproducibile.</quote
+> </para>
+</formalpara>
+
+<formalpara
+><title
+>Dì cosa ti aspettavi che succedesse</title>
+  <para
+>In alcuni casi questo è ovvio, ma nei problemi più sottili, a volte ci sono delle segnalazioni in cui non si capisce bene cosa si aspettava di ottenere chi ha segnalato il problema. Dì sempre quello che ti aspettavi che sarebbe successo. </para>
+</formalpara>
+
+<formalpara
+><title
+>Considerare la possibilità di eseguire il programma in modalità di correzione errori</title>
+  <para
+>Compilando il programma con l'opzione --enable-debug=full è possibile assicurarsi di generare backtrace migliori. Se si incontra un crash, avviare &kmymoney; da gdb e provare a riprodurre il problema. Quando si incontra il crash, digitare <quote
+>bt</quote
+> per generare un backtrace. </para>
+</formalpara>
+
+<para
+>L'esecuzione in questa modalità è più difficoltosa, non ci aspettiamo che la maggior parte degli utenti lo facciano. Comunque, se sei interessato ad aiutare &kmymoney; a diventare più stabile possibile, questo è il modo migliore per farlo, a parte trovare il problema nel sorgente e inviare una patch. </para>
+</sect3>
+</sect2>
+</sect1>
+</chapter>

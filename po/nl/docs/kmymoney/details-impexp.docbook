@@ -1,0 +1,1141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.impexp">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2022-06-05</date>
+  <releaseinfo
+>5.1.2</releaseinfo>
+</chapterinfo>
+
+<title
+>Importeren en exporteren</title>
+
+<sect1 id="details.impexp.gnucash">
+<sect1info>
+  <author
+>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
+</sect1info>
+
+<title
+>&gnucash;-importeerprogramma</title>
+
+<sect2>
+<title
+>&gnucash;-bestanden</title>
+
+<para
+>Het importeerprogramma van &kmymoney; voor &gnucash; behandelt het direct lezen van standaard (&XML;) bestanden zoals geproduceerd door de versies 1.8 en 2.0 van &gnucash;. De volgenden worden niet ondersteund: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>importeren van gegevens uit een database (Postgres)</para
+></listitem>
+  <listitem
+><para
+>importeren van 'multi-book'-bestanden</para
+></listitem>
+  <listitem
+><para
+>importeren naar een bestaand bestand van &kmymoney;</para
+></listitem>
+  <listitem
+><para
+>importeren van specifieke functies voor kleine bedrijven (personeel, rekeningen, &etc;)</para
+></listitem>
+  <listitem
+><para
+>exporteren naar bestanden van &gnucash;.</para
+></listitem>
+</itemizedlist>
+
+<para
+>Het importeren zal waarschijnlijk alleen juist werken als het een geldig bestand krijgt aangeboden. Het is aanbevolen om het menu-item van &gnucash; <menuchoice
+><guimenu
+>Acties</guimenu
+><guimenuitem
+>Alles controleren &amp; repareren</guimenuitem
+></menuchoice
+> uit te voeren alvorens importeren te proberen. </para>
+
+<para
+>Bestanden kunnen geopend worden door de bestandsnaam op de opdrachtregel te specificeren (<command
+>kmymoney &lt;pad naar bestand&gt;</command
+>) of met de menu-items van &kmymoney; <menuchoice
+> <shortcut
+><keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bestand</guimenu
+><guimenuitem
+>Openen</guimenuitem
+> </menuchoice
+> of <menuchoice
+> <guimenu
+>Bestand</guimenu
+><guisubmenu
+>Importeren</guisubmenu
+> </menuchoice
+>. </para>
+
+<para
+>De overeenkomst tussen de twee producten betekent dat veel dagelijkse gegevens op een rechtstreekse manier geïmporteerd kunnen worden. Er zijn echter enige gebieden waar zich verschillen voordoen en verschillende mogelijkheden geboden worden om hiermee om te gaan. De volgende secties zullen enkele van deze verschillen beschrijven; ze begrijpen zou moeten leiden tot beter importeren. </para>
+</sect2>
+
+<sect2>
+<title
+>Overeenkomsten, verschillen en terminologie</title>
+
+<sect3>
+<title
+>Gebruik in midden en klein bedrijf</title>
+
+<para
+>Het moet opgemerkt worden dat &kmymoney; een <emphasis
+>persoonlijke</emphasis
+> financiële beheerder is, end op zich niet direct elke van de zakelijke functies van &gnucash; ondersteunt, zoals belastingtabellen, salarissen en opzoekwerk. Elke crediteuren of debiteurenrekening die wordt gevonden in een bestand zal respectievelijk geïmporteerd worden als schulden- of bezittingenrekening. </para>
+</sect3>
+
+<sect3>
+<title
+>Rekeningen</title>
+
+<sect4>
+<title
+>Typen rekeningen</title>
+
+<para
+>Voor beide producten is het hoogste structuurniveau in het bestand de rekening. &kmymoney; ondersteunt 5 hoofdtypen rekeningen: Bezit, Verplichtingen, Inkomen, uitgaven en Vermogen, elk ervan kan verschillen subtypen hebben, &eg;, Controle, Creditcard, &etc; &kmymoney; bevat een 'standaard' rekening voor elk van deze vijf typen en alle andere rekeningen zijn ondergeschikt aan een van dezen. &kmymoney; dwingt meer consistentie af (of is minder flexibel, afhankelijk van uw gezichtspunt) tussen rekeningtypen dan &gnucash; doet en het importprogramma zal elke inconsistentie die het ontdekt corrigeren. Dit kan resulteren in een licht verschillende rekeningstructuur, maar dit kan, in redelijke grenzen, worden aangepast nadat het importeren is voltooid. </para>
+</sect4>
+
+<sect4>
+<title
+>Categorieën</title>
+
+<para
+>&kmymoney; gebruikt de term categorie om een rekening van het type Inkomen of Uitgaven aan te duiden. Anders dan &gnucash; worden deze niet beschouwd als 'grootboek' rekeningen, en direct invoeren uit transacties in categorieën wordt niet ondersteund; toekenningen worden gedaan gedurende invoer van transacties in andere rekeningtypen. </para>
+</sect4>
+
+<sect4>
+<title
+>Structuur en plaatshouders</title>
+
+<para
+>&gnucash; ondersteunt het gebruik van plaatshouderrekeningen. In feite zijn dat alleen-lezen rekeningen waarin geen transacties ingevoerd kunnen worden, maar die functioneert op een analoge manier als mappen in een mappenstructuur, als een houder voor andere rekeningen. Hoewel &kmymoney; deze functie op zich niet ondersteunt, biedt het wel een ouder/kind relatie voor rekeningen, het importprogramma simuleert dus plaatshouders door lege rekeningen aan te maken. </para>
+</sect4>
+
+<sect4>
+<title
+>Rekeningtype overeenkomst</title>
+
+<informaltable frame='all'>
+<tgroup cols='2' align='left' colsep='1' rowsep='1'>
+<thead>
+  <row>
+    <entry
+>&gnucash;-type</entry
+><entry
+>&kmymoney;-type</entry>
+  </row>
+</thead>
+<tbody>
+  <row>
+    <entry
+><literal
+>BANK</literal
+></entry
+><entry
+><literal
+>Controleren</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>CONTROLEREN...</literal
+></entry
+><entry
+><literal
+>Controleren</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>SPAARREKENING</literal
+></entry
+><entry
+><literal
+>Spaarrekening</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>BEZIT</literal
+></entry
+><entry
+><literal
+>Bezit</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>KAS</literal
+></entry
+><entry
+><literal
+>Kas</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>VALUTA</literal
+></entry
+><entry
+><literal
+>Kas</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>MONEYMRKT</literal
+></entry
+><entry
+><literal
+>MoneyMarket</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>AANDEEL</literal
+></entry
+><entry
+><literal
+>Aandeel</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>MUTUAL</literal
+></entry
+><entry
+><literal
+>Aandeel</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>AANDEEL</literal
+></entry
+><entry
+><literal
+>Aandeel</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>VERPLICHTINGEN</literal
+></entry
+><entry
+><literal
+>Verplichtingen</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>KREDIET</literal
+></entry
+><entry
+><literal
+>Creditcard</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>INKOMEN</literal
+></entry
+><entry
+><literal
+>Inkomsten</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>UITGAVEN</literal
+></entry
+><entry
+><literal
+>Uitgaven</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>DEBITEUREN</literal
+></entry
+><entry
+><literal
+>Bezit</literal
+></entry>
+  </row>
+  <row>
+    <entry
+><literal
+>CREDITEUREN</literal
+></entry
+><entry
+><literal
+>Verplichtingen</literal
+></entry>
+  </row>
+</tbody>
+</tgroup>
+</informaltable>
+</sect4>
+</sect3>
+
+<sect3>
+<title
+>Transacties en splitsingen</title>
+
+<sect4>
+<title
+>Gebalanceerde transacties</title>
+
+<para
+>Zoals met &gnucash; worden gegevens ingevoerd in de vorm van transacties, elk in het algemeen bestaande uit 2 of meer gesplitste items. In feite zullen geldige &gnucash; transacties altijd minstens 2 gesplitste bevatten en in overeenstemming zijn met de boekhoudstandaard van &gnucash;, dubbele items, deze moeten in cijfermatige balans zijn (&ie; ze moeten samen nul zijn). &kmymoney; moedigt deze standaard aan, maar forceert deze niet, maar elke geïmporteerde transactie die niet gebalanceerd is zal de weergave van de boekhouding gemarkeerd worden als een probleem. </para>
+</sect4>
+
+<sect4>
+<title
+>Begunstigden</title>
+
+<para
+>&kmymoney; geeft er de voorkeur aan dat alle transacties een begunstigde hebben (een algemene term die zowel betalers als betaalden omvat) en anders dan &gnucash;, wordt een lijst van deze begunstigden bijgehouden. Namen van begunstigden worden gegenereerd door het importeerprogramma uit het veld Beschrijving van de &gnucash; transaction. </para>
+</sect4>
+
+<sect4>
+<title
+>Overboekingen</title>
+
+<para
+>&kmymoney; gebruikt de term Overdracht om een transactie te beschrijven waarbij geen Categorie is betrokken, maar alleen overdracht van geld tussen rekeningen Vermogen en/of Verplichting. </para>
+</sect4>
+
+<sect4>
+<title
+>Transactie controle</title>
+
+<para
+>&kmymoney; biedt een account de verificatiefunctie gelijk aan die van &gnucash; en de overeenkomstige transactiestatus zal geïmporteerd worden. </para>
+</sect4>
+</sect3>
+
+<sect3>
+<title
+>Producten</title>
+
+<para
+>&gnucash; gebruikt de term Product om zowel geld als niet-geld bezittingen te dekken. Deze worden in &kmymoney; apart behandeld. </para>
+
+<sect4>
+<title
+>Valuta's</title>
+
+<para
+>&kmymoney; heeft ingebouwde ondersteuning voor alle vreemde typen <link linkend="details.currencies"
+>valuta</link
+>. &kmymoney; vereist ook dat de gebruiker een basis valuta definieert, dit is de standaard valuta voor nieuwe rekeningen. Het importprogramma zal proberen de meest waarschijnlijke valuta te bepalen, hoewel deze keuze afgewezen kan worden ten goede van een alternatief. </para>
+
+<note
+><para
+>&kmymoney; ondersteunt op dit moment geen rekeningen in 'defunct' valuta (behalve die vervangen door de Euro). Op dit moment zal het nodig zijn om zulke rekeningen uit uw &gnucash;-bestand te verwijderen vóór het importeren. We hopen deze situatie in een toekomstige uitgave te verbeteren. </para
+></note>
+</sect4>
+
+<sect4 id="gncsecurities">
+<title
+>Waardepapieren en investeringen</title>
+
+<para
+>Bezittingen zonder valuta (normaal aandelen en obligaties) worden door &kmymoney; waardepapieren genoemd en representeren het hoofdverschil tussen de twee producten, zodanig dat &kmymoney; vereist dat elke rekening aangeduid als een waardepapier ondergeschikt is aan een investeringsrekening. Dit wordt in meer detail beschreven in het hoofdstuk op <link linkend="details.investments"
+>Investments</link
+>. Hoewel gebruikers zo'n relatie geïmplementeerd zouden kunnen hebben, verplicht &gnucash; niet zo'n gedefinieerde structuur er op, het importprogramma is dus niet in staat om het te detecteren en er een automatische conversie op te doen. Er zijn daarom drie opties beschikbaar gemaakt: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Maak een aparte investeringsrekening voor elk waardepapier, met dezelfde naam als het waardepapier</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Maak een enkele investeringsrekening die op zal treden als 'ouder' voor alle waardepapierenrekeningen</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Maak verschillende Investeringsrekeningen aan en hang er waardepapieren aan zoals aangegeven door de gebruiker.</para>
+  </listitem>
+</itemizedlist>
+
+<para
+>De vereisten en voorkeuren van de gebruiker bepalen welke van deze opties relevant zijn in elke situatie en in sommige gevallen kan handmatige herstructurering van rekeningen na importeren nodig zijn. </para>
+</sect4>
+
+<sect4>
+<title
+>Koersen en valutawaarden</title>
+
+<para
+>Prijzen van waardepapieren en wisselkoersen zoals getoond in de &gnucash; prijsbewerker zullen geïmporteerd worden. Bovendien zullen items met prijzen en koersen gegenereerd worden uit alle transacties waarin waardepapieren en meerdere valuta zijn betrokken. </para>
+</sect4>
+
+<sect4 id="details.impexp.gncquotes">
+<title
+>Online koersen</title>
+
+<para
+>Voor het verkrijgen van online prijzen en wisselkoersen gebruikt &gnucash; een perl-pakket genaamd <literal
+>Finance::Quote</literal
+>. &kmymoney; bevat ondersteuning voor dit pakket voor het verkrijgen van aandelenkoersen en dit zal standaard gebruikt worden bij importeren van gegevens. U kunt echter selecteren om te converteren naar de inheemse methode gebruikt door &kmymoney; die in meer detail behandeld wordt in <link linkend="details.investments.onlinequotes"
+>online koersen</link
+>. </para>
+
+<para
+>Als u dat zo wilt doen zal de volgende dialoog u in staat stellen om een 'inheemse' prijsbron van &kmymoney; te selecteren of een door de gebruiker gedefinieerde bron voor elke rekening waarvoor online koersen zijn vereist. Het aandeel(ticker)symbool zal ongewijzigd worden geïmporteerd. Omdat dit symbool misschien zal verschillen in de twee pakketten, zal het nodig zijn om dit te bewerken na voltooiing van het importeren. Toekomstig bijwerken van de wisselkoersen zullen <literal
+>Finance::Quote</literal
+> niet gebruiken en zullen altijd de inheemse ophaalmethode gebruiken. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="gnucash-select_price_source.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect4>
+</sect3>
+
+<sect3 id="gncschedules">
+<title
+>Periodieke Transacties</title>
+
+<para
+>&kmymoney; behoudt niet de scheiding gemaakt in &gnucash; tussen sjabloontransacties en hun frequentie van gebeuren. Transactiegegevens zullen gedupliceerd worden als hetzelfde sjabloon wordt gebruikt in verschillende periodieke transacties, maar dat is waarschijnlijk niet van grote betekenis. </para>
+
+<sect4>
+<title
+>Typen periodieke transacties</title>
+
+<para
+>&kmymoney; classificeert alle periodieke transacties als een van drie typen: Rekeningen, Inleggen of Overdrachten. Omdat &gnucash; zo'n onderscheid niet maakt probeert het importprogramma om de classificatie uit de rekeningen en richting van verplaatsingen van geld af te leiden. Het kan zijn dat in sommige gevallen onjuiste aannamen zijn gemaakt en deze zullen handmatige correctie nodig hebben. </para>
+</sect4>
+
+<sect4>
+<title
+>Verdachte periodieke transacties</title>
+
+<para
+>Sommige functies van periodieke transacties van &gnucash; zijn niet beschikbaar in &kmymoney;, het importprogramma probeert in elk geval een redelijk compromi bij het converteren van de gegevens te bereiken. Deze transacties zullen aangeduid worden als verdacht en de gebruiker zal de mogelijkheid gegeven worden om ze direct te bewerken tijdens het importproces. Voorbeelden van situaties die dit kunnen veroorzaken zijn: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>sommige in &gnucash; ondersteunde frequentie-intervallen zijn op dit moment niet beschikbaar in &kmymoney;</para>
+  </listitem>
+
+  <listitem>
+    <para
+>&kmymoney; ondersteunt niet het gebruik van formules en variabelen in velden met hoeveelheden</para>
+  </listitem>
+
+  <listitem>
+    <para
+>complexe gevallen die nog niet geïdentificeerd zijn voor importeren.</para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Ondanks de beste inspanningen is het mogelijk dat, vanwege de vele betrokken opties, een periodieke transactie een fatale fout binnen &kmymoney; kan veroorzaken. Als dit soort probleem zich lijkt voor te doen, biedt het imporprogramma de optie om alle verdachte periodieke transacties te laten vallen. </para>
+</sect4>
+</sect3>
+
+<sect3>
+<title
+>Rapporten</title>
+
+<para
+>&kmymoney; levert een uitgebreide selectie van te configureren rapporten, in meer detail beschreven in <link linkend="details.reports"
+>Rapporten.</link
+> Deze zullen echter niet noodzakelijk precies overeenkomen met de in &gnucash; beschikbare rapporten. </para>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Importopties selecteren</title>
+
+<para id="details.impexp.gncoptions">
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="gnucash-import_options.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect3>
+<title
+>Investerings handeling</title>
+
+<para
+>Zie bovenstaand <link linkend="gncsecurities"
+>"Waardepapieren en investeringen"</link
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Online koersen</title>
+
+<para
+>Zet dit uit als u de inheemse methode voor toekomstige online koersen wilt gebruiken. </para>
+
+<para
+>Zie bovenstaand <link linkend="details.impexp.gncquotes"
+>"Online koersen"</link
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Periodieke Transacties</title>
+
+<para
+>Zie bovenstaand <link linkend="gncschedules"
+>"Periodieke transacties"</link
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Opties voor decodering</title>
+
+<para
+>Als uw eigen taal wordt geschreven in letters of symbolen die anders zijn dan gebruikt worden in de 'Latijnse' talen (d.w.z., algemeen West Europees), dan worden die gerepresenteerd op een special manier ('gecodeerd') in uw &gnucash;-bestand. Als deze letters niet juist op uw scherm getoond worden, dan moeten ze gedecodeerd worden. Op dit moment is het vaak niet mogelijk om accuraat te detecteren welke vorm van decodering gebruikt moet worden, het zou nodig kunnen zijn om deze optie in te stellen en een item uit de lijst te selecteren. In het algemeen zal het eerste item in de lijst diegene zijn die geschouwd wordt als behorende bij uw taalregio (&ie;, het land en de taal die geselecteerd zijn als uw eigen toen uw besturingssysteem is geïnstalleerd), dit zou u dus als eerste moeten proberen. Omdat het importproces does uw &gnucash;-bestand niet overschrijft, bent u vrij om te experimenteren met elk van deze selecties. </para>
+</sect3>
+
+<sect3>
+<title
+>Optie voor transactienotitie</title>
+
+<para
+>Onder sommige gebruiksomstandigheden kunnen niet gesplitste &gnucash;-transacties restanten bevatten, vaak onjuiste memo-gegevens die normaal niet zichtbaar zijn voor de gebruiker. Bij importeren in &kmymoney; echter, vanwege een andere manier van tonen, kunnen deze gegevens zichtbaar worden. Vaak hebben deze transacties een notitieveld die het echte doel van de transactie beschrijft. Als deze optie is geselecteerd zullen deze notities, indien aanwezig, gebruikt worden om de overbodige memo-gegevens te overschrijven. </para>
+</sect3>
+
+<sect3>
+<title
+>Debug Opties</title>
+
+<para
+>Deze zijn alleen nodig in het geval van importproblemen. Als u zulke problemen hebt, zou u ze ook moeten rapporteren aan de ontwikkelaarslijst &devlist; van &kmymoney;. Let er op dat de sporen geproduceerd door deze opties gegevens kunnen bevatten van vertrouwelijke aard en de optie <guilabel
+>Gegevens anoniem maken</guilabel
+> zou gebruikt moeten worden als ze publiek gemaakt moeten worden. </para>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Importrapport</title>
+
+<para
+>Aan het eind van de bewerking produceert het importprogramma een rapport dat het aantal verschillende bewerkte entiteiten processed toont en de fouten of ontdekte afwijkingen. Dit rapport zal op het scherm getoond worden en kan opgeslagen worden in een bestand voor later bekijken. Een volledig rapport kan de volgende secties bevatten: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Aantallen records</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Inconsistenties in typen rekeningen en genomen acties</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Details van verdachte periodieke transacties</para>
+  </listitem>
+</itemizedlist>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="gnucash-report.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="details.impexp.qifimp">
+<sect1info>
+  <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+</sect1info>
+
+<title
+>QIF importeren</title>
+
+<sect2>
+<title
+>QIF-formaat beschouwd als schadelijk</title>
+
+<para
+>In het algemeen gesproken zou het QIF-formaat waar mogelijk vermeden moeten worden. Het is een slechte keuzee voor het transporteren van financiële gegevens. Naast andere dingen leidt QIF aan deze problemen: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Gebrek aan gestandaardiseerd formaat: verschillende versies van hetzelfde programma zal verschillende betekenissen geven aan hetzelfde element.</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Gebrek aan transactie-identifier: omdat er geen ID-nummer geassocieerd is aan elke transactie, is het overeen laten komen van duplicaat transacties op zijn best bemoeilijkt.</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Gebrek aan uitdrukkingsvaardigheid: de grammatica is erg eenvoudig en kan niet de diepte van financiële informatie gevonden in de financiële omgeving van vandaag weergeven.</para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Dit is in het algemeen waarom Intuit helemaal gestopt is met ondersteuning van QIF-invoer met <application
+>Quicken</application
+> 2005. Als u de optie hebt om gegevens op een andere manier te krijgen, zoals OFX, kies dan altijd voor die optie. </para>
+</sect2>
+
+<sect2>
+<title
+>Hoe een QIF-bestand importeren</title>
+
+<para
+>Om een QIF-bestand te importeren, ga eerst na dat u een geldig &kmymoney;-bestand open hebt. Selecteer daarna menu-item <menuchoice
+><guimenu
+>Bestand</guimenu
+><guisubmenu
+>Importeren</guisubmenu
+> <guimenuitem
+>QIF...</guimenuitem
+> </menuchoice
+>. </para>
+	
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifopen.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>De resulterende dialoog vraagt om de QIF-bestandsnaam en stelt u in staat het bestand te lokaliseren door op de knop <guibutton
+>Browse</guibutton
+> te klikken. </para>
+
+<para
+>&kmymoney; maakt verschil tussen het importeren van een bankafschriftbestand en historische gegevens geëxporteerd uit een andere toepassing. De standaard is om een bankafschriftbestand te importeren. In het geval dat u gegevens importeert uit uw vorige persoonlijke financiële beheertoepassing selecteer de van toepassing zijnde optie. </para>
+
+<para
+>In het algemeen zal het standaard QIF-profiel moeten werken met uw QIF-gegevens. In sommige gevallen kan het noodzakelijk zijn om een gewijzigd QIF-profief te gebruiken. Zie de <link linkend="details.impexp.qifimp.profile"
+>volgende sectie</link
+> voor meer details over dat onderwerp. </para>
+
+<para
+>Klik op <guibutton
+>Importeren</guibutton
+> om het QIF-bestand te importeren. </para>
+
+<para
+>&kmymoney; zal beginnen met het scannen van het bestand om de formaten te bepalen die gebruikt zijn om datums en getallen te representeren. In het geval een datumformaat niet eenduidig bepaald kan worden zal &kmymoney; de gebruiker vragen om er een te selecteren uit de lijst van mogelijke datumformaten. </para>
+
+<para
+>Vervolgens importeert &kmymoney; de gegevens en maakt alle noodzakelijke objecten aan, zoals debiteuren, rekeningen, categorieën en informatie over koersen. Waar mogelijk zullen overeenkomsten met bestaande transacties gezocht worden tegen de geïmporteerde informatie. Een voortgangsbalk wordt getoond en bijgewerkt tijdens het importproces. </para>
+
+<para
+>In het geval &kmymoney; de naam van de te importeren rekening niet kan bepalen zal de gebruiker gevraagd worden om de rekening te selecteren waarin de gegevens geïmporteerd moeten worden. Als de rekening niet al bestaat in uw bestand kan een nieuwe rekening aangemaakt worden door te klikken op de knop <guibutton
+>Aanmaken</guibutton
+>. </para>
+
+<para
+>Aan het einde van het importeren toont &kmymoney; een venster met een statistiek van het importeren van afschriften. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Statistiek van afschriften</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qif_report.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Statistiek van afschriften</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Na importeren zullen alle geïmporteerde transacties getoond worden met een gele achtergrond in de grootboekweergave. In het geval dat &kmymoney; in staat was om een geïmporteerde transactie te koppelen aan een al bestaande transactie, zal de achtergrond in lichtgroen getoond worden. </para>
+
+<para
+>De volgende stap is om de geïmporteerde gegevens te verifiëren en te accepteren. Dit is een algemeen proces en is ook van toepassing op importeren uit andere bronnen. Het wordt uitgelegd in een aparte sectie van dit document. </para>
+
+<note>
+<para
+>De kleuren die worden gebruikt om geïmporteerde en overeenkomende transacties te markeren zijn aan te passen en kunnen anders zijn in uw omgeving. </para>
+</note>
+</sect2>
+
+<!--
+<sect2>
+<title
+>Accepting the imported transactions</title>
+<para>
+  
+	When &kmymoney; has finished importing the QIF transactions the account will be shown with the imported transactions listed in Yellow.
+</para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Imported transactions</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifimportverify.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Imported transactions</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+	Some of your transactions may be flashing red in the ledger.  
+	This is because they need to be assigned a category.  
+	The importer was not able to automatically assign a category based on your past transaction history.
+</para>
+
+<para
+>	
+	Transaction data can be edited or even deleted if needed.  To edit a transaction simply double click on the entry or hit enter when the entry is highlighted.  Once finished click on <guibutton
+>OK</guibutton
+> to accept the imported transactions or <guibutton
+>Cancel</guibutton
+> to remove the imported transactions.
+</para>
+
+</sect2>
+
+<sect2
+><title
+>Importing Investments</title>
+
+<para>
+	Please note that if you are importing a file with investment transactions, those investments must first exist in your &kmymoney; file.
+	The trading symbol is used to match, so please ensure that the symbol in &kmymoney; is exactly the same as the one in the file you're importing.
+</para>
+</sect2>
+-->
+
+<sect2 id="details.impexp.qifimp.profile">
+<title
+>Een QIF-profiel instellen</title>
+
+<para
+>Omdat er geen universele standaardformaat is voor een QIF-bestand, hebben leveranciers vrijheden genomen met het formaat en hun eigen nuances geïntroduceerd. Het QIF-profiel biedt &kmymoney; de kennis over de precieze details van uw bestand. Om een bestaand QIF-profiel te bewerken, gebruik de verschillende velden in de QIF-invoerdialoog. Om een nieuwe aan te maken, druk op de knop <guibutton
+>Nieuw</guibutton
+> op de dialoog QIF-importeren, bij de profielkiezer. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifimport-qifprofileeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>QIF profiel editor</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<note>
+<para
+>Recente versies van &kmymoney; hebben niet langer tabbladen voor het specificeren van datum en hoeveelheid. &kmymoney; bepaalt nu deze instellingen door het bestand te scannen. Als het niet alle instellingen kan uitvogelen, zal het aan de gebruiker tijdens importeren worden gevraagd. </para>
+</note>
+<!--
+<para>
+	The most commonly changed thing between QIF implementations is the date format.  
+	So if this is the first time you're importing a QIF file, spend a few moments to figure out what format the dates are in, and set the QIF Profile accordingly.  
+	See the discussion below on apostrophe format for more details.
+</para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifimport-qifprofiledate.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>QIF Profile Date</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+</sect2>
+
+<sect2
+><title
+>Apostrophe format</title>
+
+<para>
+	Many common QIF writers use a 2-digit representation for the year. 
+	This is ambiguous, because the importer cannot know which century the date belongs in.
+	To make things even more complicated, QIF files will often used an apostrophe as a year separator to indicate that the date belongs in the OTHER century from the default.
+</para>
+<para>
+	For example, if the default century is 1900-1999, the date 12/31/95 would mean 1995.  The date 12/31'05 would mean 2005.
+</para>
+<para>
+	Because the QIF format is not standardized, it's impossible to know which century is desired.
+	This is why you have to explicitly state it in the QIF profile.
+	You do this by specifying which century is intended when an apostrophe is found.
+	In the example above, you would set the Apostrophe Format to &quot;2000-2099&quot;, so dates with an apostrophe will be interpreted as being &gt; year 2000.
+	In this case, dates without an apostrophe will be treated as being in the 1900's.
+</para>
+-->
+</sect2>
+
+<sect2
+><title
+>Transactie vergelijking</title>
+
+<para
+>Zoals eerder opgemerkt is een van de belangrijkste nadelen van het QIF-formaat het ontbreken van een unieke identifier voor elke transactie. Als u dus een QIF-bestand importeert en enige van de transacties zijn al in uw grootboek, dan kunt u duplicaten krijgen. &kmymoney; probeert hier omheen te werken door te zoeken naar bestaande transacties die er hetzelfde uitzien als die u aan het importeren bent. Als het iets vindt dat lijkt op dezelfde transactie, zal het het een overeenkomst met het gelijkende duplicaat aangeven. </para>
+
+<para
+>Dit kan een probleem zijn als u transacties hebt die er hetzelfde uit lijken te zien maar in werkelijkheid verschillend zijn. In dat geval kunt u het overeenkomen van deze transacties later ongedaan maken in de grootboekweergave. </para>
+</sect2>
+
+<sect2>
+<title
+>Een importfilter schrijven</title>
+
+<para
+>Soms hebt u gegevens in een aangepast formaat, zoals komma-gescheiden waarden (CSV) of iets anders uniek aan uw situatie. Vanaf version 4.6, bevat &kmymoney; een CSV importplug-in, maar u kunt nog steeds andere typen bestanden in &kmymoney; importeren met een QIF-importfilter. Een filter is een eigen programma dat u schrijft die uw speciale bestand als invoer neemt en een QIF-bestand als uitvoer. Dit kan een shell-script, een perl-script, een gecompileerd programma geschreven in C/C++ of iets anders dat u bedenkt, zolang als het systeem het kan uitvoeren. </para>
+
+<para
+>Om dit te gebruiken bewerkt u uw favoriete QIF-profiel en selecteert het tabblad Filter. Voer de locatie van uw filterprogramma in  waar er om gevraagd wordt. Wanneer u daarna een QIF importeren doet met dit profiel, zal het bestand dat u hebt geselecteerd voor importeren uitgevoerd worden eerst via uw filter. </para>
+
+<para
+>Een gemeenschappelijk probleem is om een lijst met komma-gescheiden-waarden te converteren in een QIF-bestand. Dit is een tekstboek geval voor het hulpmiddel <command
+>awk</command
+>. Maak een script genaamd <filename
+>csv2qif.awk</filename
+>, met de volgende twee regels als inhoud: </para>
+
+<programlisting
+>BEGIN { FS=&quot;,&quot;; print &quot;!Type:Bank&quot; }
+
+        { print &quot;D&quot;$1; print &quot;T&quot;$2; print &quot;N&quot;$3; print &quot;P&quot;$4; print &quot;M&quot;$5; print &quot;^&quot; }
+</programlisting>
+
+<para
+>Wijzig daarna de QIF-sleutels (D,T,N,P,M) om overeen te komen met de volgorde van uw CSV-gegevens. Stel het invoerfilter in om uit te voeren <userinput
+>awk -f csv2qif.awk</userinput
+>. </para>
+
+<para
+>Een ander probleem treedt soms op in de codering van QIF-bestanden. &kmymoney; verwacht bestanden gecodeerd in UTF8. Als uw bestand gecodeerd is in iets anders, kan het nuttig zijn het te converteren naar UTF8. Om het bijvorbeeld te converteren van iso-8859-1, dan zou u het invoerfilter in kunnen stellen op <userinput
+>recode iso-8859-1..utf-8</userinput
+>. </para>
+
+</sect2>
+<sect2>
+<title
+>Speciale &kmymoney; QIF-extensies</title>
+
+<para
+>Zoals al genoemd is een van de grote nadelen van het QIF-formaat het ontbreken van een unieke identifier voor elke transactie. Als u uw eigen maker van een QIF-bestand schrijft (of filter, zoals boven beschreven), dan kunt u dit probleem aanpakken. &kmymoney; ondersteunt het veld '#'. Het importprogramma zal dit interpreteren als een uniek transactie-ID en het record negeren als de transactie al in het systeem zit. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.impexp.qifexp">
+<title
+>QIF-exportprogramma</title>
+<para
+>Om een van uw rekeningen naar een QIF-bestand te exporteren, kies het menu-item <menuchoice
+><guimenu
+>Bestand</guimenu
+><guisubmenu
+>Exporteren</guisubmenu
+> <guimenuitem
+>QIF...</guimenuitem
+></menuchoice
+>. U zult gevraagd worden naar welke enkele rekening te exporteren, naar welk bestand te exporteren en welk QIF-profiel te gebruiken. </para>
+
+<note
+><para
+>Op dit moment behandelt het QIF-exportprogramma niet het exporteren van investeringen. </para
+></note>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifimport-export.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>QIF Export</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect1>
+
+<sect1 id="details.impexp.ofx">
+<sect1info>
+  <author
+>&Ace.Jones; &Ace.Jones.mail;</author>
+  <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+  <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+</sect1info>
+<title
+>OFX-plug-in voor importeren</title>
+
+<sect2>
+<title
+>De plug-in ophalen</title>
+
+<para
+>&kmymoney; zal OFX-bestanden pijnloos importeren. Deze functionaliteit is niet ingebouwd in het kernprogramma - het wordt geleverd als plug-in. U moet het ophalen en de OFX-importplug-in installeren om deze functionaliteit beschikbaar te maken. Nadat het is geïnstalleerd, zal het commando om OFX-bestanden te importeren automatisch verschijnen onder het submenu <menuchoice
+><guimenu
+>Bestand</guimenu
+> <guisubmenu
+>Importeren</guisubmenu
+></menuchoice
+>. </para>
+
+<para
+>Merk op dat de broncode van de plug-in geleverd wordt als onderdeel van de broncode van &kmymoney; en de meeste voorverpakte versies van &kmymoney; zijn gebouwd met het importprogramma OFX al ingevoegd of beschikbaar als een apart pakket. Als het importprogramma OFX niet geïnstalleerd lijkt te zijn in uw versie, is de eerste plaats om te controleren dezelfde plaats waar u uw basis &kmymoney; pakket ontving. U kunt controleren of het geïnstalleerd is ofwel door te proberen het bovenstaande submenu aan te roepen of door het menu <menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guisubmenu
+>KMyMoney configureren...</guisubmenu
+></menuchoice
+>, door <guilabel
+>Plugins</guilabel
+> te selecteren in het linker paneel en uit te kijken naar het importprogramma OFX in de lijst met geïnstalleerde plug-ins. </para>
+
+<para
+>Als u het hebt geïnstalleerd via een RPM is de OFX-importplug-in gevat in het pakket kmymoney-ofx. Het zou beschikbaar moeten zijn uit elke bron waaruit het basis pakket van &kmymoney; kwam. Als u het hebt gebouwd uit broncode is alles wat u moet doen de recentste versie van de ontwikkelingsheaders en bibliotheken van libOFX te installeren op uw systeem. Het bouwproces van &kmymoney; zal deze detecteren en de plug-in compileren. Vanaf september 2021 is versie 0.10.3 beschikbaar, hoewel de minimaal vereiste versie van &kmymoney; nog steeds 0.9.4 is. </para>
+
+<para
+>Als u problemen ondervindt om &kmymoney; te compileren en u bent er zeker van dat de juiste versie van libOFX is geïnstalleerd, neem dan contact op met de ontwikkelaarslijst &devlist; voor assistentie. Voeg een kopie van uw <filename
+>config.log</filename
+> bestand in, eerst gecomprimeerd via <command
+>gzip</command
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Wat is OFX</title>
+
+<para
+>OFX staat voor <quote
+>Open Financial Exchange,</quote
+> hoewel in 2019, het OFX Consortium ging meedoen met de <quote
+>Financial Data Exchange (FDX).</quote
+> Volgens de <ulink url="https://finincialdataexchange.org/"
+>FDX website</ulink
+> is <quote
+>Open Financial Exchange een open standaard voor client-server systemen en op cloud gebaseerde API s voor uitwisseling van financiële gegevens en het doen van financiële transacties tussen financiële instituten en financiële toepassingen.</quote
+> De specificaties definiëren formaten voor overdracht van financiële gegevens zowel per bestand als per directe uitwisseling. </para>
+
+<para
+>Hoewel de standaard vollediger en robuuster is dan QIF, zijn er nog steeds variaties, afhankelijk van de specifieke implementatie gebruikt door een instituut. OFX-bestanden kunnen een extensie <quote
+>OFX</quote
+> hebben of <quote
+>QFX</quote
+> (hoofd- of kleine letters); dit impliceert geen specifiek verschil in de inhoud. De specificatie is gebaseerd op &XML;, de bestanden kunnen dus gelezen worden in elke tekstbewerker, maar omdat witruimte niet relevant is voor de inhoud zelf, gebruiken sommige implementaties dit niet, waarmee het erg moeilijk is om het als mens te lezen. </para>
+
+<para
+>Een andere site met goede informatie is <ulink url="https:/ofxhome.com/"
+>OFX Home</ulink
+>. Ze onderhouden een catalogus van financiële instituten die OFX ondersteunen. Dit kan nuttig zijn als u problemen hebt om <link linkend="details.impexp.ofxdirectconnect"
+>OFX direct connect</link
+> op te zetten. Ze hebben ook een forum voor discussies over problemen met OFX. Er is echter een bericht op de site dat verwacht wordt dat het gesloten wordt in februari 2022, als de huidige onderhouder niet iemand vindt om hem te vervangen en het draaien van de site over te nemen. </para>
+</sect2>
+
+<sect2>
+<title
+>Een OFX-bestand importeren</title>
+
+<para
+>De meest simpele manier om een OFX-bestand te importeren is om het importprogramma te kiezen uit de menubalk. Kies <menuchoice
+><guimenu
+>Bestand</guimenu
+><guisubmenu
+>Importeren</guisubmenu
+> <guimenuitem
+>OFX...</guimenuitem
+></menuchoice
+>. Als OFX niet getoond wordt onder Importeren, dan hebt u de plug-in OFX-importprogramma ofwel niet juist of verkeerd geïnstalleerd. Zie de vorige sectie. </para>
+
+<para
+>Het eerste wat het importprogramma u zal vragen is in welke rekening de transacties te importeren. Als er transacties zijn uit meerdere rekeningen in uw bestand, zal u deze vraag meerdere keren gesteld worden. Merk op dat wanneer u gegevens importeert voor een investeringsrekening, alleen cash-transacties geïmporteerd zullen worden naar de bijbehorende effectenrekening, als er een is geconfigureerd. Als geen effectenrekening is geconfigureerd (of geen standaard naam heeft) kunt u gevraagd  worden om de te gebruikten rekening te identificeren. </para>
+
+<para
+>Na het importeren kunnen sommige van uw transacties getoond worden met een uitroepteken op een gele driehoek in het grootboek. Dit betekent dat er een categorie aan moet worden toegekend. Het importprogramma was niet in staat om automatisch een categorie gebaseerd op uw voorbije transactiegeschiedenis toe te kennen. U kunt elke transactie in het grootboek bewerken om een categorie toe te kennen en het merkteken zal verwijderd worden. </para>
+
+<para
+>Merk op dat deze sectie de <quote
+>inheemse</quote
+> OFX-importplug-in beschrijft. OFX-bestanden kunnen ook geïmporteerd worden met de AqBanking Importplug-in als u die hebt geïnstalleerd. De twee importprogramma's gedragen zich enigszins verschillend en ze zijn geschreven en worden ondersteund door twee verschillende ontwikkelaars. </para>
+</sect2>
+
+<sect2>
+<title
+>Investeringen importeren</title>
+
+<para
+>Merk op dat als u een bestand met investeringstransacties importeert, die investeringen eerst moeten bestaan in uw &kmymoney;-bestand. Het handelssymbool wordt gebruikt om overeen te laten komen, ga dus na dat het symbool in &kmymoney; exact hetzelfde is als die in het bestand dat u importeert. </para>
+</sect2>
+
+<sect2 id="details.impexp.webconnect">
+<title
+>Webverbinding</title>
+
+<para
+>De gemakkelijkste manier om een OFX-bestand te importeren is om een webverbinding op te zetten. Bezoek de website van de bank en klik op een koppeling om een OFX-bestand te downloaden. Uw browser zou moeten vragen welk programma u wilt gebruiken om het bestand te openen. Laat uw browser wijzen naar &kmymoney;. Het zal dan het gedownloade OFX-bestand importeren in hetnu geopende &kmymoney;-bestand of die u het meest recent open had. U kunt ook de bestandsassociaties van uw bureaubladomgeving wijzigen en &kmymoney; het OFX-bestand automatisch voor u te laten openen. </para>
+
+<para
+>Als u het nodig heeft het OFX-bestand in een ander &kmymoney; bestand te importeren, upload dat bestand eerst in &kmymoney; en bezoek daarna de website van uw bank. </para>
+</sect2>
+
+<sect2 id="details.impexp.ofxdirectconnect">
+<title
+>Direct verbinden</title>
+
+<para
+>OFX Direct Connect wordt nu ondersteund in &kmymoney;. Dit geeft &kmymoney; de mogelijkheid om direct contact te maken met uw bank om transacties op te halen. Om deze mogelijkheid in te schakelen moet u &kmymoney; compileren met de schakelaar <userinput
+><option
+>--enable-ofxbanking</option
+></userinput
+>. Dit is nu de standaard en deze mogelijkheid is ingeschakeld in de versie geleverd door de meeste indien niet alle Linux distributies en de versies geleverd op de website van &kmymoney;. </para>
+
+<para
+>Wees gewaarschuwd: sommige banken vereisen een andere aanmelding dan die via hoofdtoegangswebpagina, en zullen u een apart wachtwoord of PIN geven en kunnen u aparte kosten in rekening brengen voor deze service. Geen enkele bank ondersteunt direct &kmymoney;. U zult ze moeten vertellen dat u direct wilt bankieren vanuit <application
+>MS Money</application
+> of <application
+>Quicken</application
+>. </para>
+
+<para
+>De eerste stap is om elke rekening waarvoor u afschriften wilt downloaden te configureren. Ga naar de Rekeningenweergave, klik rechts op de rekening die u wilt configureren en kies <guimenuitem
+>Aan online rekening koppelen...</guimenuitem
+>. In het geval dat er meer dan één online plug-in voor bankieren is geïnstalleerd op uw systeem, zult u gevraagd worden welke te gebruiken. Voor de interne OFX-methode selecteert u <guimenuitem
+>&kmymoney; OFX</guimenuitem
+>. Een lijst met banken zal gedownload worden uit het internet en een assistent zal u leiden door het kiezen van een bank, door uw gebruikersnaam en wachtwoord in te voeren en een rekening te selecteren. Als uw bank niet in de lijst staat, dan kan het nog steeds mogelijk zijn om de handmatige optie te gebruiken. Uw bank kan in staat zijn om de gewenste parameters te leveren of u moet enig zoekwerk verrichten om ze te vinden. </para>
+
+<note>
+  <para
+>Een OFX directe verbinding kan soms een uitdaging zijn, speciaal als de implementaties bij de meeste instituten niet voldoende details levert in foutmeldingen. Eén speciaal probleem om te melden is dat veel instituten van u eisen om uw wachtwoord, de eerste keer dat u online toegang met deze methode gebruikt, te wijzigen. Helaas kan de bibliotheek die &kmymoney; gebruikt (libofx) op dat moment geen manier heeft om interactief een wachtwoord te wijzigen. In sommige gevallen is het mogelijk om een technische ondersteuner in het instituut het wachtwoord voor u te wijzigen. Totdat we in staat zijn om deze sectie uit te breiden met meer gedetailleerde informatie voor probleemoplossing, als u problemen heeft om dit voor u te laten werken, kunt u vragen om hulp op de e-maillijst voor ontwikkelaars van &kmymoney; &devlist;. </para>
+</note>
+
+<para
+>Nadat u een rekening hebt ingesteld met online bankieren, ga naar het grootboek voor die rekening en kies daarna het menu-item <menuchoice
+><guimenu
+>Rekening</guimenu
+><guimenuitem
+>Rekening bijwerken...</guimenuitem
+></menuchoice
+>. Dit zal u verbinden met uw bank en beschikbare transacties downloaden.  U kunt de dialoog <link linkend="details.accounts.edit"
+>Rekening bewerken</link
+> (onder het tabblad <guilabel
+>Online instellingen</guilabel
+>, subtabblad <guilabel
+>Details importeren</guilabel
+> subtab) gebruiken om aan te geven of u transacties wilt downloaden sinds de laatste keer bijwerken, sinds een gespecificeerd aantal dagen geleden of sinds een gespecificeerde datum. </para>
+
+<note>
+  <para
+>In versies van &kmymoney; vóór 4.6, werd de naam van de debiteur altijd uit het veld PAYEEID genomen. Vanaf versie 4.6 kan de naam van de debiteur gebaseerd zijn op of de velden <literal
+>PAYEEID</literal
+>, <literal
+>NAME</literal
+> of <literal
+>MEMO</literal
+> in de OFX-transactie. U kunt deze mogelijkheid configureren en enige andere OFX-direct-connect instellingen in de dialoog <guilabel
+>Rekening bewerken</guilabel
+> zojuist bovenstaand genoemd. </para>
+</note>
+</sect2>
+
+<sect2>
+<title
+>Een OFX-bestand exporteren</title>
+
+<para
+>Het is op dit moment niet mogelijk om uw gegevens als een OFX-bestand te exporteren. Als u geïnteresseerd bent om in dit gebied bij te dragen, neem dan contact op met het ontwikkelteam van libofx voor details. </para>
+</sect2>
+</sect1
+>&details-impexp-csv; &details-impexp-csvexp; &details-impexp-woob; <sect1 id="details.impexp.plugins">
+<title
+>Importerenplug-ins schrijven</title>
+
+<para
+>&kmymoney; bevat expliciete ondersteuning voor additionele import- of exportplug-ins. Als u een plug-in wilt schrijven om een eigen formaat te behandelen, dan zouden we uw bijdrage zeer waarderen. Om dat te doen moet u het programma vanuit de broncode compileren. Gebruik daarna de OFX importplug-in als een voorbeeld. </para>
+</sect1>
+</chapter>

@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.investments">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>30 de desembre de 2019</date>
+  <releaseinfo
+>5.0.7</releaseinfo>
+</chapterinfo>
+
+<title
+>Inversions</title>
+
+<sect1 id="details.investments.overview">
+<title
+>Inversions al &kmymoney;</title>
+
+<sect2>
+<title
+>Inversions</title>
+
+<para
+>En termes molt generals, una inversió és qualsevol assignació de diners amb l'expectativa d'un benefici futur. Els comptes d'inversió del &kmymoney; estan dissenyats per a un tipus particular d'inversió: els títols. Una inversió en títols (o simplement un títol) és un instrument per a invertir diners que cotitzen en un mercat amb la intenció d'obtenir una rendibilitat en forma d'apreciació del valor, o ingressos com interessos o dividends. Les accions i els fons d'inversió són els títols més habituals, i estan específicament admesos pel &kmymoney;. Els bons tenen una estructura financera diferent, però en general poden ser manejats pel &kmymoney;. Els futurs, les matèries primeres, les opcions i els instruments d'inversió més complexos com els derivats són altres tipus d'inversions, però el &kmymoney; no té cap funcionalitat especial per a ells. Sempre que una inversió tingui característiques similars a una acció o fons d'inversió, es podrà fer un seguiment. </para>
+</sect2>
+
+<sect2>
+<title
+>Divisa base</title>
+<para
+>Cada títol té una Divisa base. Aquesta serà la divisa en la qual cotitza. Quan s'introdueixi una oferta de preu per a una inversió, la divisa del valor indicat sempre serà la seva divisa base. Un valor a la Borsa de Nova York (NYSE) estaria en dòlars nord-americans (USD), i una en un mercat australià estaria en dòlars australians (AUD). La divisa base per a un títol no cal que sigui la mateixa que la divisa predeterminada per al compte d'inversió que posseeix aquest títol. </para>
+</sect2>
+
+<sect2 id="details.investments.accounts">
+<title
+>Comptes d'inversió</title>
+<para
+>Un compte d'inversió té una col·lecció de títols, també coneguts com a accions. Un compte d'Inversió conté operacions, registrant les activitats com ara compres, vendes, dividends, reinversions, rendiments, desglossaments i ingressos d'aquestes inversions. Cada operació en un compte d'Inversió es relacionarà amb un títol específic. </para>
+
+<para
+>És habitual que un compte en una agència de borsa contingui tant títols com efectiu. En el &kmymoney;, un compte d'Inversió <emphasis
+>només</emphasis
+> manté títols. No podrà contenir cap saldo en efectiu. Aquesta va ser una decisió de disseny presa quan es van incloure per primera vegada els comptes d'Inversió en el &kmymoney;, i es podria canviar en una versió futura. Per ara, qualsevol efectiu necessari per a comprar un títol o obtingut d'una operació de venda o dividend requerirà l'ús d'un compte de Valors. </para>
+</sect2>
+
+<sect2 id="details.investments.brokerage">
+<title
+>Comptes de valors</title>
+<para
+>Quan una operació d'inversió fa servir (per a comprar un títol) o produeix (a partir d'una venda o dividend) efectiu, aquesta operació haurà de fer referència a un altre compte que pugui mantenir diners, més habitualment un compte corrent. Podreu especificar qualsevol compte adequat per a qualsevol operació d'inversió que en requereixi un. No obstant això, el &kmymoney; té el concepte d'un <emphasis
+>Compte de valors</emphasis
+>, de vegades també anomenat <quote
+>Compte d'efectiu</quote
+>, el qual serà el compte predeterminat per a aquestes operacions. </para>
+
+<para
+>Quan creeu un compte d'Inversió, tindreu l'opció de crear un compte de Valors associat amb ell. El nom predeterminat del compte de Valors serà el nom del compte d'inversió amb «(valors)» annexat. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.investment">
+<title
+>Crear un compte d'inversió</title>
+
+<para
+>El primer pas en el camí per a treballar amb les inversions és crear un compte per a mantenir els títols definits. Trieu l'element de menú <menuchoice
+><guimenu
+>Compte</guimenu
+> <guimenuitem
+>Compte nou...</guimenuitem
+></menuchoice
+> per a començar el procés. Creeu un compte com es va definir anteriorment a la secció afegir un <guilabel
+>Compte</guilabel
+>, assegureu-vos de triar <quote
+>Inversió</quote
+> com a tipus de compte. </para>
+
+<para
+>Per a treballar amb el nou compte d'inversió, navegueu fins a la vista de les <guibutton
+>Inversions</guibutton
+> i trieu el compte que acabeu de crear des de la llista desplegable <guilabel
+>Selecciona un compte</guilabel
+>. </para>
+</sect1>
+
+<sect1 id="details.investments.securities">
+<title
+>Afegir inversions al compte</title>
+
+<para
+>Per a afegir títols individuals al Compte d'inversió, navegueu fins a la vista de les <guibutton
+>Inversions</guibutton
+>, seleccioneu la pestanya <guibutton
+>Accions</guibutton
+> i trieu el compte d'Inversió on es manté la inversió des de la llista desplegable <guilabel
+>Selecciona un compte</guilabel
+>. <screenshot>
+  <screeninfo
+>La vista de les inversions, la pestanya Accions</screeninfo>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="investments_summarytab.png" format="PNG"/>
+  </imageobject>
+  <textobject>
+  <phrase
+>La vista de les inversions, la pestanya Accions</phrase>
+  </textobject>
+  </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Feu clic dret a l'espai buit de la vista. Això obrirà el menú contextual per a les <guimenu
+>Opcions de la inversió</guimenu
+>. Trieu <guimenuitem
+>Inversió nova...</guimenuitem
+>. Això llançarà l'<guilabel
+>Assistent per a una inversió nova</guilabel
+>, el qual s'utilitzarà per a crear la Inversió nova. </para>
+
+<sect2 id="details.investments.newinvestmentwizard">
+<title
+>Assistent d'inversió nova</title>
+
+<para
+>El primer que se us demanarà és que introduïu el tipus d'inversió, sigui una acció, un bo, &etc; </para>
+
+<para
+>A continuació, es presenta la pàgina de detalls de la inversió. La informació següent s'introduirà en aquesta pàgina: </para>
+
+<itemizedlist>
+  <listitem
+><para
+><guilabel
+>Símbol comercial</guilabel
+>: un símbol de cotització o borsari és un abreujament emprat per a identificar un títol cotitzat públicament d'un instrument en particular en un mercat de valors en particular. El &kmymoney; requereix un símbol comercial per a tots els valors. No obstant això, algunes inversions no tenen símbol. En aquest cas, haureu d'inventar un símbol. </para
+></listitem>
+
+  <listitem
+><para
+><guilabel
+>Nom complet</guilabel
+>: el nom fàcil d'emprar i intel·ligible de la inversió que esteu creant, &pex;, <quote
+>Advanced Micro Devices, Inc.</quote
+> També es fa referència a aquest nom com a títol. </para
+></listitem>
+
+  <listitem
+><para
+><guilabel
+>Fracció</guilabel
+>: indica el grau de precisió amb què es valoren les participacions. Per exemple, als Estats Units, la majoria dels fons d'inversió valoren les participacions amb tres decimals, de manera que introduïu 1.000 en aquest camp. Els valors sovint només es valoraran en unitats senceres, així que podreu introduir 1 per a un valor com aquest. Voldreu reflectir els mateixos llocs per als decimals que utilitza els valors per a enregistrar els títols, de manera que els imports de les operacions coincideixin amb el &kmymoney;. L'ús d'una precisió addicional no causarà cap problema, però emprar una precisió massa petita podria causar errors d'arrodoniment que podrien fer que el &kmymoney; no pugui coincidir exactament amb la informació mostrada per l'agència de borsa. </para
+></listitem>
+  
+  <listitem
+><para
+><guilabel
+>Mercat borsari</guilabel
+>: on es negocien els valors. Aquest és un camp opcional que es proporciona per motius d'utilitat. Aquesta informació no s'utilitzarà en cap altre lloc dins del &kmymoney;. </para
+></listitem>
+
+  <listitem
+><para
+><guilabel
+>Identificació</guilabel
+>: un camp opcional per a introduir la informació d'identificació addicional que us agradaria tenir per a fer un seguiment. Altra vegada, aquesta informació no s'utilitzarà en cap altre lloc. </para
+></listitem>
+
+  <listitem
+><para
+><guilabel
+>Divisa del mercat</guilabel
+>: la divisa de canvi del mercat on es negocia aquesta inversió. Aquest típicament serà el país on opera el títol. Normalment és, però no necessàriament, la mateixa divisa predeterminada que per al compte d'Inversió que posseeix aquest títol. </para
+></listitem>
+
+  <listitem
+><para
+><guilabel
+>Entrada de cotitzacions</guilabel
+>: trieu si el preu s'introduirà com el preu per acció o com el total de totes les accions en introduir una operació. </para
+></listitem>
+</itemizedlist>
+
+<para
+>Si utilitzeu cotitzacions en línia, assegureu-vos que el símbol coincideixi exactament amb el símbol utilitzat per la font de cotització. Yahoo cobreix la majoria dels mercats mundials i requereix un sufix al final dels símbols fora dels EUA, per a especificar el país o el mercat. Per exemple, Rubicon Limited en el mercat de Nova Zelanda s'haurà d'introduir com a <quote
+>RBC.NZ</quote
+>. </para>
+
+<para
+>Finalment, es presentarà la pantalla <guilabel
+>Actualització en línia</guilabel
+>. Aquí és a on li indicareu al &kmymoney; com us agradaria actualitzar els preus de la inversió. Aquí s'estableixen els elements següents: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+><guilabel
+>Usa «Finance::Quote»</guilabel
+>: aquesta és una opció per als usuaris del &gnucash; que estan acostumats a aquest estil de cotitzacions. La majoria dels usuaris la podran deixar sense marcar. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guilabel
+>Font en línia</guilabel
+>: la font en línia que us agradaria emprar per a aquesta inversió en particular. L'opció més habitual és <quote
+>Yahoo</quote
+>. Proveu això primer, i si no trobeu la inversió utilitzant aquesta font, després experimenteu amb les altres. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guilabel
+>Factor</guilabel
+>: un multiplicador que s'haurà d'aplicar a les cotitzacions obtingudes per a aquesta inversió. Habitualment és més necessari per als valors en el Regne Unit, on el preu cotitzat és en penics (1/100), i els valors estaran denominats en lliures. En aquest cas, introduïu 0,01 per al Factor. </para>
+  </listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="details.investments.reuse">
+  <title
+>Usar un Títol en més d'un Compte d'inversió</title>
+
+<note>
+  <para
+>Aquesta secció s'ha afegit just a temps per al llançament de la versió 5.0.8. L'autor va considerar que era important incloure almenys la informació bàsica ara, ja que aquest tema ha estat una font de dificultats durant algun temps. El debat s'ampliarà i s'afegiran captures de pantalla de l'Assistent per a un títol nou com més aviat millor. </para>
+</note>
+      
+<para
+>És possible tenir accions del mateix valor en diferents comptes d'inversió, com un compte d'inversió i també un compte de jubilació. Si seguiu les anteriors instruccions, tindreu aquest títol en dos comptes, però el &kmymoney; els tractarà com si cadascun dels títols fos una acció subjacent diferent. Això resultarà en un emmagatzematge per duplicat, com tenir dues còpies de tot l'historial de preus de les accions. Per tant, podríeu preferir que ambdós títols es refereixin a la mateixa acció subjacent. </para>
+
+<para
+>Quan afegiu un títol a un compte d'inversió, i aquest títol ja existeixi en un altre compte d'inversió, haureu de tenir cura si voleu reutilitzar-lo en lloc de crear un títol nou i duplicat. Quan vegeu l'<guilabel
+>Assistent per a una inversió nova</guilabel
+>, una vegada seleccionat el tipus d'inversió i fer clic a <guibutton
+>Següent</guibutton
+>, haureu d'assegurar-vos que el camp <guilabel
+>Nom complet</guilabel
+> estigui buit abans d'introduir el <guilabel
+>Símbol comercial</guilabel
+>. Quan es prem &Tab;, si el &kmymoney; ja té un títol utilitzant aquest símbol, us demanarà si voleu reutilitzar-lo. Si feu clic a <guibutton
+>Sí</guibutton
+>, completeu la resta d'aquest diàleg i després podreu fer clic a <guibutton
+>Següent</guibutton
+>. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.edit">
+<title
+>Editar una inversió</title>
+
+<para
+>La pestanya <guilabel
+>Accions</guilabel
+> de la finestra vista de les inversions llista les participacions actuals en aquest compte, juntament amb el seu símbol, valor, import i preu. Feu clic dret sobre qualsevol de les inversions per a obrir el menú contextual per a les <guimenu
+>Opcions de la inversió</guimenu
+>, on tindreu l'opció d'afegir, editar o suprimir inversions individuals d'aquest compte. A més, podreu actualitzar el preu de les inversions, ja sigui manualment o mitjançant la font en línia. A més, és possible tancar un compte buit o tornar a obrir un compte tancat. L'ordre del valor, import i preu es podrà canviar a la pantalla seleccionant-ne qualsevol fent clic esquerre sobre l'element a la barra superior i arrossegant-lo cap a l'esquerra o cap a la dreta. </para>
+<para
+>Si trieu editar una inversió, s'utilitzarà l'<guilabel
+>Assistent per al detall de la inversió</guilabel
+>, el qual es veu i funciona igual que l'<guilabel
+>Assistent per a una inversió nova</guilabel
+>, i que es descriu a la secció anterior. </para>
+</sect1>
+
+<sect1 id="details.investments.ledger">
+<title
+>Operacions d'inversió</title>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Formulari per a l'operació d'inversió</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Formulari per a l'operació d'inversió</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Les operacions d'inversió s'introdueixen i editen a la vista del <link linkend="details.ledgers"
+>llibre major</link
+>, com els altres tipus de compte. No obstant això, els camps apareixeran diferents i variaran segons el tipus d'operació o activitat. Les operacions d'inversió tenen alguns elements addicionals: </para>
+
+<itemizedlist>
+	<listitem
+><para
+>Activitat</para
+></listitem>
+	<listitem
+><para
+>Títols</para
+></listitem>
+	<listitem
+><para
+>Compte</para
+></listitem>
+	<listitem
+><para
+>Accions, preu i import total</para
+></listitem>
+	<listitem
+><para
+>Despeses</para
+></listitem>
+	<listitem
+><para
+>Categoria de l'interès</para
+></listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Activitat</title>
+<para
+>L'Activitat per a una operació d'inversió descriu quina acció està succeint amb el títol. S'admeten les activitats següents: </para>
+
+<variablelist>
+  <varlistentry>
+  <term
+>Compra/Venda</term>
+  <listitem>
+    <para
+>Utilitzeu-la per a enregistrar compres o vendes de títols individuals. Aquesta acció requereix un compte per a transferir els fons de/a, el predeterminat és el compte de Valors, si se n'ha creat un. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Dividend/Rendiment</term>
+  <listitem>
+    <para
+>També conegut com a <quote
+>dividend en efectiu</quote
+>, aquesta acció s'utilitza quan rebeu un desemborsament d'interessos o dividends des del títol. Aquesta acció també requerirà un compte per a transferir els fons. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Reinversió del dividend</term>
+  <listitem>
+    <para
+>Reinversió del dividend. Aquest serà un dividend en què els ingressos s'utilitzen per a comprar accions addicionals del títol. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Afegir/Eliminar accions</term>
+  <listitem>
+    <para
+>Un simple augment o disminució en el nombre d'accions que posseïu. Això haurà d'emprar-se molt rarament, perquè és estrany que les accions només apareguin al compte (o desapareguin) llevat que sigui una compra o una venda. Un ús d'aquestes activitats és per a algunes situacions en què el &kmymoney; no les gestiona de forma nativa, com l'intercanvi de cert nombre d'accions d'un títol per a un nombre diferent d'accions d'una classe diferent del mateix títol. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Desglossament de les accions</term>
+  <listitem>
+    <para
+>Això es fa servir quan els valors estan desglossats. Introduïu la relació del desglossament en el camp <quote
+>Relació del desglossament</quote
+>. Per exemple, en una divisió 3:2, introduïu 1,5. Les divisions inverses, on la relació serà inferior a un, com 2:3, encara que poc habituals, també es permeten. </para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Títols</title>
+<para
+>Cada operació d'inversió haurà d'estar associada amb un títol individual. Trieu el nom del títol en afegir o editar una operació. Es mostrarà el símbol. </para>
+</sect2>
+
+<sect2>
+<title
+>Compte</title>
+<para
+>Per a qualsevol operació que generi o requereixi diners, haureu d'introduir el compte al/des del qual es transfereixen els diners. Si el compte d'inversió té associat un compte de Valors, en general serà millor transferir-hi els fons. Això s'aplicarà als fons per a la compra o venda del títol, així com les despeses pagades, els interessos o els dividends guanyats. </para>
+</sect2>
+
+<sect2>
+<title
+>Accions, preu i import total</title>
+<para
+>Per a les operacions de compra, venda i reinversió s'hauran d'establir el nombre d'accions, el preu per acció i l'import total de l'operació. Podreu introduir qualsevol d'aquests dos, i el &kmymoney; calcularà el tercer. En general, és millor introduir només l'import total i el nombre d'accions, perquè aquests són els fets coneguts de l'operació. El &kmymoney; calcularà automàticament el preu per acció. Recordeu que només hi ha un camp d'entrada per al preu, i que està etiquetat com <quote
+>Import de l'operació</quote
+> o <quote
+>Preu per acció</quote
+>, segons l'opció de configuració <guilabel
+>Entrada de cotitzacions</guilabel
+> quan es va <link linkend="details.investments.newinvestmentwizard"
+>configurar</link
+> el compte. </para>
+</sect2>
+
+<sect2>
+<title
+>Despeses</title>
+<para
+>Amb moltes operacions d'inversió podríeu incloure els impostos (o comissions) que vàreu pagar al corredor. Si introduïu una categoria per a l'impost, es mostrarà un camp a la dreta on podreu introduir l'import. Si necessiteu introduir-ne més d'un per a l'operació, podreu utilitzar la característica <link linkend="details.ledgers.split"
+>Desglossar les operacions</link
+>. En aquest cas, quan completeu la introducció de tots els desglossaments, l'import total dels impostos es mostrarà a la dreta. </para>
+</sect2>
+
+<sect2>
+<title
+>Interès</title>
+<para
+>És com introduireu un pagament d'interessos o dividends d'un títol. Com amb les despeses, si introduïu una categoria, es mostrarà un camp a la dreta on podreu introduir l'import. Si cal, també podreu utilitzar la característica desglossar les operacions. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.foreign">
+<title
+>Treballar amb inversions estrangeres</title>
+
+<para
+>El &kmymoney; admet múltiples divises i títols, i és possible que vulgueu combinar ambdós. No obstant això, fer-ho requereix una cura addicional per a assegurar registres precisos. Com s'ha assenyalat anteriorment, quan afegiu un títol, haureu d'especificar la seva divisa de negociació. És possible que aquesta no sigui la mateixa que la divisa base per al fitxer del &kmymoney;, i també podria no ser la mateixa que la divisa predeterminada per al compte d'inversió on manteniu els valors o el compte a/des d'on transferiu els fons per a les compres/vendes. </para>
+
+<para
+>Penseu en un cas hipotètic, on la divisa base és USD (dòlar dels Estats Units d'Amèrica). Teniu un compte d'inversió en EUR (euro de la Unió Europea) i un compte de valors també en EUR. En aquest compte d'inversió, hi teniu les accions de TietoEnator, les quals es cotitzen en SEK (corona sueca). </para>
+
+<para
+>Quan introduïu una operació de compra per a aquesta inversió, utilitzeu SEK com a divisa. De manera que si compreu 100 accions a un preu de 248,00 SEK, per un total de 24.800,00 SEK, introduïu aquests valors a l'operació. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Avís de divisa</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-currencywarning.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Avís de divisa</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Quan trieu el compte de valors per a finançar la transferència, s'avisarà que esteu en una divisa diferent. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Editor del tipus de canvi</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-exchangerateeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Editor del tipus de canvi</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Quan acabeu d'introduir l'operació, es demanarà una actualització al preu de la divisa del compte d'inversió, en aquest cas, de SEK a EUR. Reviseu la documentació sobre <link linkend="details.currencies.prices"
+>Introduir manualment els preus</link
+> per a obtenir més informació sobre el diàleg de preus. </para>
+
+<para
+>Si després canvieu al compte de valors, veureu l'operació com 2.254,54 EUR, suposant que el tipus de canvi sigui d'11.000 SEK/EUR. </para>
+</sect1>
+
+<sect1 id="details.investments.prices">
+<title
+>Actualitzar els preus</title>
+
+<para
+>Hi ha dues maneres d'actualitzar els preus de les inversions. Podreu introduir manualment el preu o fer que el &kmymoney; l'obtingui des del web. </para>
+
+<sect2>
+<title
+>Actualitzar manualment els preus</title>
+
+<para
+>Podreu introduir els preus de les inversions utilitzant el mateix <link linkend="details.currencies.prices"
+>Editor de preus</link
+> que l'utilitzat per a les divises. </para>
+</sect2>
+
+<sect2 id="details.investments.onlinequotes">
+<title
+>Cotització en línia dels preus</title>
+<para
+>El &kmymoney; té la capacitat de baixar els últims preus per als títols i divises mitjançant el web. </para>
+
+<sect3>
+<title
+>Com funcionen les cotitzacions en línia</title>
+<para
+>A petició vostra, el &kmymoney; cercarà a una pàgina del web que conté l'últim preu per a cada títol. De manera predeterminada, els preus s'obtenen des de <ulink url="https://finance.yahoo.com"
+>finance.yahoo.com</ulink
+> i estan subjectes als termes i condicions d'aquest lloc. </para>
+
+<para
+>La cerca en línia de les cotitzacions utilitza el símbol comercial del títol per a trobar el preu. Per tant, és important establir el símbol correcte. Yahoo admet accions des de la majoria dels principals mercats mundials, de manera que en general només es tracta de trobar el símbol correcte. Per exemple, TietoEnator cotitza en el mercat de valors de la Borsa d'Estocolm, i el seu símbol de Yahoo és TIEN.ST. </para>
+
+<para
+>Per a trobar el símbol comercial d'un títol admès per Yahoo, feu servir la característica <quote
+>Cerca de símbols</quote
+> a <ulink url="https://finance.yahoo.com"
+>finance.yahoo.com</ulink
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Assignar una font de cotització</title>
+
+<para
+>Per a obtenir les cotitzacions en línia dels preus, primer haureu d'habilitar-ho per a cada títol o divisa que vulgueu actualitzar, establint una <quote
+>Font per a la font de cotització en línia</quote
+>. Aquest és el nom del servei des del qual s'haurà d'obtenir la cotització. El &kmymoney; es distribueix amb diverses fonts per a triar. Yahoo és la font predeterminada recomanada, i hauria de funcionar per a la majoria de les inversions i totes les divises. </para>
+
+<para
+>Per a assignar una font de cotització a una inversió, navegueu fins a la vista del resum de les inversions per al compte que manté el títol. Editeu el títol fent clic dret i seleccionant <guimenuitem
+>Edita la inversió...</guimenuitem
+>. A l'Assistent per als detalls de la inversió, feu clic a <guibutton
+>Següent</guibutton
+> dues vegades, per a la secció Actualització en línia. A la llista desplegable Font en línia, escolliu la font en línia segons les vostres necessitats. </para>
+
+<para
+>Les versions del &kmymoney; que comencen amb 0.9 contenen una implementació per al paquet Finance::Quote per a obtenir les cotitzacions en línia. Això està pensat principalment com un avantatge per a aquells usuaris que converteixen des del paquet financer &gnucash;, el qual l'utilitza com el seu mètode natiu. Si seleccioneu aquesta opció, hauria d'aparèixer una llista diferent de fonts, les admeses per Finance::Quote. Si la llista està buida, indicarà que el paquet no es troba correctament instal·lat. Vegeu el lloc web a <ulink url="http://finance-quote.sourceforge.net"
+>http://finance-quote.sourceforge.net</ulink
+> per a obtenir més informació. </para>
+</sect3>
+
+<sect3>
+<title
+>Ajustar una cotització</title>
+
+<para
+>Algunes fonts en línia no informen del preu en una quantitat base (&pex;, EUR) sinó en una fracció (&pex;, Cent -cèntims-). Emprar aquesta informació com a preu produirà valors incorrectes per a les inversions. </para>
+
+<para
+>Si aquest és el cas de la font en línia, podreu utilitzar el camp <guilabel
+>Factor</guilabel
+> per a introduir un factor d'ajust. Per a l'exemple esmentat, el factor serà 0,01. </para>
+
+<para
+>El camp <guilabel
+>Factor</guilabel
+> només estarà disponible si heu seleccionat una <guibutton
+>Font de cotització</guibutton
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Obtenir les cotitzacions</title>
+
+<para
+>En general, actualitzareu el preu de tots els títols i divises com a una sola operació. Trieu l'element de menú <menuchoice
+><guimenu
+>Eines</guimenu
+><guimenuitem
+>Actualitza la cotització dels valors i divises...</guimenuitem
+></menuchoice
+> perquè aparegui el diàleg de cotitzacions en línia dels preus. Premeu <guibutton
+>Actualitza-ho tot</guibutton
+> per a obtenir la cotització de tots els títols i divises en el fitxer del &kmymoney;. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Actualitzant la cotització dels valors i divises</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-onlineupdate.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Actualitzant en línia la cotització dels valors i divises</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect3>
+
+<sect3>
+<title
+>Afegir o editar les fonts de cotització</title>
+
+<para
+>No es recomana afegir o editar les fonts de cotització a ningú excepte l'usuari més tècnic. Haureu de sentir-vos còmode llegint &HTML; i escrivint expressions regulars complexes. Si això no us sona, us recomanem escriure a la llista de desenvolupadors si no funciona cap de les fonts de cotització. De manera ideal, indiqueu-nos una pàgina web on es puguin obtenir aquestes cotitzacions. A més, podreu consultar amb els membres del Fòrum de la comunitat &kde; per al &kmymoney;, ja que podrien tenir disponible una solució per a les vostres necessitats. </para>
+
+<para
+>Si us sentiu preparat per al desafiament, així és com funciona. Les fonts de cotització estan contingudes al diàleg de configuració. Trieu l'element de menú <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura el &kmymoney;...</guimenuitem
+></menuchoice
+>. Des d'allà, aneu a la secció <guilabel
+>Cotitzacions en línia</guilabel
+>. Trieu una font existent per a editar o creeu-ne una de nova. En acabar amb els canvis, assegureu-vos de prémer el botó <guibutton
+>Actualitza</guibutton
+> abans de sortir del diàleg. Cal tenir en compte que els canvis no es desaran de manera predeterminada. </para>
+
+<para
+>El primer a considerar en una font de cotització en línia és l'&URL;. Aquest serà la pàgina que s'obté des del web. Veureu un %1 a totes les fonts i un %2 a les fonts de divises. Per a les inversions, %1 se substitueix pel símbol comercial. Per a les divises, %1 se substitueix per la divisa d'origen i %2 se substitueix per la divisa de destinació. S'obtindrà aquest &URL;, s'eliminaran totes les etiquetes &HTML; (opcional) i aquest fitxer esbudellat s'enviarà a l'analitzador de pàgines. </para>
+
+<para
+>Recordeu que l'&URL; també podrà ser un fitxer: l'&URL;, el qual el cercador de cotitzacions prendrà com a camí a un script executable. Li passarà tots els arguments de la línia d'ordres que hàgiu especificat i alimentarà la sortida estàndard a l'analitzador de la pàgina. Per exemple, teniu un script anomenat <filename
+>getquote.sh</filename
+> que conté una lògica personalitzada per a les cotitzacions, prenent el símbol com a únic paràmetre. L'&URL; serà <quote
+>file:/camí/al/getquote.sh %1</quote
+>. </para>
+
+<para
+>L'analitzador de la pàgina cercarà un símbol, una data i un preu. Les expressions regulars li indicaran com extreure aquests elements de la pàgina. Reviseu la documentació de la <ulink url="https://doc.qt.io/qt-5/qregexp.html"
+>classe QRegExp</ulink
+> per a conèixer la sintaxi exacta de les expressions regulars utilitzades pel &kmymoney;. Cal que hi hagi exactament una expressió de captura, entre parèntesis, a cada camp «<literal
+>regexp</literal
+>». El format de la data li indicarà a l'analitzador de la data l'ordre any, mes i dia. Aquest format de la data sempre haurà de tenir el format <quote
+>%x %x %x</quote
+>. on <quote
+>x</quote
+> serà <quote
+>a</quote
+>, <quote
+>m</quote
+> o <quote
+>d</quote
+>. L'analitzador de dates és molt intel·ligent. <quote
+>%M %d %i</quote
+> analitzarà el <quote
+>31 de desembre de 2005</quote
+> amb tanta facilitat com <quote
+>12/31/05</quote
+>. Els anys amb dos dígits s'interpretaran com en l'interval des de 1950 fins a 2049. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.unimplemented">
+<title
+>Característiques sense implementar</title>
+
+<para
+>Hi ha algunes característiques que normalment estan associades amb les inversions que encara no s'implementen al &kmymoney;. Aquestes inclouen, entre altres; derivats, opcions i futurs. A més, quan veneu un títol, el &kmymoney; no sabrà quines accions específiques esteu venent, &ead;, la més antiga o la més recent, així que no podrà calcular la rendibilitat de la inversió. Finalment, no tindrà coneixement directe sobre cap dels requisits específics del país per als informes d'impostos, però generalment aquests es poden manejar marcant com Impostos totes les categories que empreu per a les operacions que podrien tenir conseqüències fiscals. </para>
+</sect1>
+</chapter>

@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="makingmostof">
+<chapterinfo>
+  <authorgroup>
+    <author
+><personname
+><firstname
+>Joe</firstname
+><surname
+>(joe1011010)</surname
+></personname
+> <email
+>joe1011010_km@users.sourceforge.net</email
+> </author>
+  </authorgroup>
+  <date
+>2010-04-05</date>
+  <releaseinfo
+>5.0.4</releaseinfo>
+</chapterinfo>
+
+<title
+>Het beste ervan maken met &kmymoney;</title>
+
+<para
+>Terwijl u door kunt gaan, klikken op enige knoppen en enige gegevens invullen, na enige tijd, kunt u concluderen dat u het verkeerd hebt gedaan en opnieuw gaat beginnen, zelfs als u de documentatie over elk onderdeel van &kmymoney; hebt gelezen. </para>
+
+<para
+>U zult een meer effectief systeem krijgeb als u een beetje tijd neem om te plannen hoe u &kmymoney; gaat gebruiken, volg dus de stappen hier gegeven. </para>
+
+<sect1 id="makingmostof.basicaccounting">
+<title
+>Eenvoudige boekhouding</title>
+
+<para
+>Bekijk uw geld als ballen of bonen en om ze niet te laten rollen houdt u ze in een doos of pot. Boekhouden is het proces van tellen en de bonen in de pot of verschillende potten volgen. </para>
+
+<para
+>U hebt enig geld in de pot gemarkeerd als <quote
+>Kas</quote
+>. U koopt enige goederen, en dus neemt u enige bonen uit de kaspot en plaatst ze in een andere pot gemarkeerd <quote
+>Leverancier</quote
+>. De leverancier geeft u enige goederen in ruil voor het kasgeld, u neemt de bonen uit de pot gemarkeerd <quote
+>Leverancier</quote
+> en stopt ze in de pot gemarkeerd <quote
+>Goederen</quote
+>. </para>
+
+<para
+>De goederen hebben een waarde (de prijs die u betaalde) u hebt dus nog steeds dezelfde hoeveelheid bonen, sommige vertegenwoordigen kasgeld en sommige goederen. </para>
+
+<para
+>In dit geval hebt u twee bewegingen van de bonen of transacties. Elke transactie heeft twee items, een om de bonen uit te nemen en een om bonen in te stoppen. Dit wordt <quote
+>dubbelboekhouden</quote
+> genoemd. Het vastleggen van de transacties wordt gedaan in een <quote
+>Grootboek</quote
+>; elke pot staat bekend als een <quote
+>Rekening</quote
+> of <quote
+>Grootboekcode</quote
+>. </para>
+
+<para
+>Nu neemt u enige goederen en geeft ze aan een klant, die u enig kasgeld teruggeeft. De goederen waren enige bonen waard en, hopelijk, heeft de klant ons meer bonen gegevens dan die waarde, waarmee u winst maakt. Om het erg eenvoudig te stellen, de bonen uit de pot Goederen kwamen terug als Kasgeld, maar we kunnen dat splitsen als de <quote
+>kosten van verkochte goederen</quote
+> en <quote
+>Winst</quote
+>. Deze transactie heeft drie ingangen; één aan de kant van de <quote
+>dubbele ingang</quote
+> is gesplitst. </para>
+
+<para
+>Dit zal in meer detail worden gedaan later in dit handboek. </para>
+<!-- **** don't forget to make sure this is actually covered, and linked to from
+     here.  Also, I have removed "in setting up accounts for Businesses." and
+     modified the section below, since we explicitly say that KMM is not for
+     business use. -->
+
+<sect2 id="makingmostof.basicaccounting.personalaccounts">
+<title
+>De rekeningen definiëren (persoonlijke records)</title>
+
+<para
+>De meeste rekeningen, of potten, hierboven representeren een maat van onze <quote
+>Waarde</quote
+>. Het kasgeld en de goederen representeren onze <quote
+>Bezittingen</quote
+>; evenals wat tegoed hebben als onze klanten ons ons geld nog niet hebben gegeven. Het geld dat we tegoed hebben, stel dat we onze leveranciers nog niet hebben betaald, zijn onze <quote
+>Schulden</quote
+>. Deze rekeningen zijn overdraagbaar naar Kasgeld en hebben een waarde. </para>
+
+<para
+>Potten waaraan geen waarde toegekend kunnen worden zijn <quote
+>Inkomen</quote
+> of <quote
+>Uitgaven</quote
+>. Aan onze telefoonrekening (of het telefoonbedrijf waaraan we de rekening betalen) kan geen waarde worden toegekend; we weten hoeveel we hebben betaald, maar niet hoeveel ieder ander heeft betaald. We weten hoeveel onze werkgever ons heeft betaald, maar we weten niet hoeveel deze iemand anders heeft betaald, of hoeveel geld ze hebben om ons de volgende maand te betalen. Ook kunnen we niet een actuele waarde voor deze potten bepalen, het is nuttig om te monitoren hoeveel we in elk ervan hebben ingestopt of hebben uitgehaald. </para>
+
+<para
+>In sommige gevallen is een leverancier een <quote
+>Schuld</quote
+>, in andere is het een <quote
+>Uitgave</quote
+>. Dit is iets dat we moeten bekijken en beslissen voor elk geval. Op dezelfde manier kunt u een lening als een Schuld instellen, speciaal als u het geld op uw bankrekening zet, maar het zou ook een Uitgave kunnen zijn als het is gebruikt om meubels te kopen. </para>
+
+<para
+>Overweeg hoe u uw inkomsten en uitgaven wilt volgen en analyseren. Dat zal u helpen om te beslissen hoe ze in te stellen in &kmymoney;. </para>
+
+<para
+>Bekijk tenslotte of u alles in één set rekeningen wilt hebben of twee of meer. Dit kan afhangen van het wettelijke framework of gewoon hoe u dingen wilt analyseren. Elke set rekeningen zou apart behandeld moeten worden. </para>
+</sect2>
+
+<sect2 id="makingmostof.basicaccounting.businessaccounts">
+<title
+>De rekeningen definiëren (zakelijke records)</title>
+
+<para
+>Er zijn overeenkomsten met het creëren van rekeningen voor persoonlijk gebruik, maar er zijn extra overwegingen, zoals juridische richtlijnen en vereisten. &kmymoney; behandelt deze issues niet, omdat het is ontworpen als <quote
+>persoonlijk</quote
+> boekhoudprogramma. In dit handboek worden deze issues ook niet behandelt, maar u moet er wel aan denken als u gaat proberen om &kmymoney; zakelijk te gebruiken. </para>
+</sect2>
+</sect1>
+
+<sect1 id="makingmostof.mapping">
+<title
+>Uw financiën laten samenvallen met &kmymoney;</title>
+
+<para
+>Verzamel dus uw papieren en kijk in de volgende secties naar elk item in &kmymoney;. </para>
+
+<sect2 id="makingmostof.mapping.accounts">
+<title
+>Rekeningen</title>
+
+<para
+>Deze bevat een waarde. Transacties worden aangemaakt tegen een of meer accounts. </para>
+
+<sect3 id="makingmostof.mapping.accounts.asset">
+<title
+>Accounts - bezittingen</title>
+
+<para
+>Dit zijn de rekeningen met uw geld en uw bezittingen waarop u toezicht wilt houden. De volgende types zijn beschikbaar: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Controleren</term>
+    <listitem>
+      <para
+>Standaard betaalrekening. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Spaarrekening</term>
+    <listitem>
+      <para
+>Standaard spaarrekening. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Kasrekening</term>
+    <listitem>
+      <para
+>Geld in uw hand of portemonnee. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Lening</term>
+    <listitem>
+      <para
+>Leningen die u uitgeeft aan iemand anders. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Investering</term>
+    <listitem>
+      <para
+>Geld dat u investeert. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Bezitting</term>
+    <listitem>
+      <para
+>Eigendommen, verzamelingen, &etc; </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+
+<sect3 id="makingmostof.mapping.accounts.liability">
+<title
+>Rekeningen - Verplichtingen</title>
+
+<para
+>Dit zijn de rekeningen die uw schulden en terug te betalen gelden voorstellen waarop u toezicht wilt houden. De volgende types zijn beschikbaar: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Creditcard</term>
+    <listitem>
+      <para
+>Standaard creditcard rekening. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Lening</term>
+    <listitem>
+      <para
+>Leningen aan u gegeven, hypotheken, &etc; </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Verplichtingen</term>
+    <listitem>
+      <para
+>Alles wat u schuldig bent en geen lening is. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+<sect2 id="makingmostof.mapping.institutions">
+<title
+>Instituten</title>
+
+<para
+>Deze zijn compleet optioneel en kunt u gebruiken om rekeningen als groep samen te vatten, en om de totale waarde voor alle rekeningen in een groep te tonen. </para>
+</sect2>
+
+<sect2 id="makingmostof.mapping.categories">
+<title
+>Categorieën</title>
+
+<para
+>Deze stellen niet beheerde inkomsten- en uitgaven-rekeningen voor die geen waarde hebben. U krijgt voor elke categorie de totale waarde van de transacties te zien. Een categorie of overboeking-rekening is voor elke transactie vereist. </para>
+</sect2>
+
+<sect2 id="makingmostof.mapping.subcategories">
+<title
+>Subcategorieën</title>
+
+<para
+>Categorieën kunt u onderverdelen in subcategorieën, maar deze relatie is alleen voor de weergave, omdat het totaal van de subcategorie niet worden meegenomen bij het totaal van de hogere categorie. </para>
+</sect2>
+
+<sect2 id="makingmostof.mapping.tags">
+<title
+>Tags</title>
+
+<para
+>Tags zijn vergelijkbaar met categorieën, omdat ze ook niet beheerde rekeningen zijn die geen waarde hebben. Maar in tegenstelling tot categorieën, is het gebruik van tags compleet optioneel. </para>
+</sect2>
+
+<sect2 id="makingmostof.mapping.payees">
+<title
+>Begunstigden</title>
+
+<para
+>Deze zijn optioneel voor transacties. Ze zijn vereist voor periodieke transacties. Voor elke begunstigde kunt u een transactiegeschiedenis met categorieën te zien krijgen. </para>
+</sect2>
+
+<sect2 id="makingmostof.mapping.schedules">
+<title
+>Periodieke transacties</title>
+
+<para
+>Als transacties regelmatig voorkomen, dan kunt u ze in een schema plaatsen. Transacties worden dan gecreëerd vanaf een periodieke transactie; en alle achterstallige zijn dan op de startpagina zichtbaar. </para>
+</sect2>
+</sect1>
+
+<sect1 id="makingmostof.usefultips">
+<title
+>Bruikbare tips</title>
+
+<para
+>Tenzij u uw geld onder uw matras of onder de vloer bewaart, maakt u waarschijnlijk gebruik van een of meer instituten waar u rekeningen heeft, die credit of debit kunnen zijn. Om u zelf bekend te maken met de manier waarop &kmymoney; werkt, kiest u een rekening die u met &kmymoney; wilt volgen en selecteert u menu-item <menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Nieuw</guimenuitem
+></menuchoice
+> om een boekhoudbestand aan te maken. </para>
+
+<para
+>Als u een ander financieel beheersprogramma heeft gebruikt, dan kunt u wellicht de data daarvan importeren naar &kmymoney;. </para>
+
+<para
+>Als u regelmatig rekeningen voor deze bankrekening krijgt of ervan verstuurt, ga dan naar begunstigde en voer de namen in van de betreffende betaler en de begunstigde; ga daarna naar periodieke transactie en maak een nieuwe periodieke transactie voor elke herhalende transactie. Als u nog geen begunstigde of betaler heeft ingevoerd, dan zal &kmymoney; u gelegenheid bieden om dit te doen tijdens de aanmaak van periodieke transactie. </para>
+
+<para
+>Om nieuwe transacties toe te voegen, gaat u naar het grootboek; tijdens de aanmaak van een transactie kunt u nieuwe begunstigde en nieuwe categorieën toevoegen maar ook door naar Begunstigde of Categorieën te gaan voordat u een transactie aanmaakt. </para>
+
+<para
+>U zult waarschijnlijk vinden dat de standaard categorieën niet precies overeenkomen met uw wensen; U kan makkelijk diegene verwijderen waarvan u weet dat u ze nooit nodig zal hebben en andere die u wel nodig heeft toevoegen. Als u een transactie aanmaakt, dan hoeft u alleen een paar letters van een categorie in te voeren en &kmymoney; zal u in een keuzelijst de overeenkomende categorieën geven waaruit u kunt kiezen. </para>
+
+<para
+>U kunt meerdere rekeningen beheert door verschillende instituten toe te voegen; u krijgt de voorkeursrekening te zien als u &kmymoney; opent maar u kunt net zo makkelijk naar een van de andere omschakelen. </para>
+
+<para
+>Als u een betaling doet, dan zal &kmymoney; proberen vast te stellen wat het volgende chequenummer zou moeten zijn; verwijder deze als u de betaling niet via een cheque doet of bewerk het als de eerste cheque die u invoerde niet het nummer 1 heeft. Als alternatief kunt u ook het automatisch doortellen van de chequenummers uitschakelen. </para>
+
+<para
+>U krijgt wellicht regelmatig bankafschriften over uw rekening van de instituten die u gebruikt; u kunt uw &kmymoney;-rekeningen controleren tegenover deze verklaringen zodat u een accurate verklaring van de huidige status van uw financiën krijgt. </para>
+
+<para
+>Als u naar rapporten gaat, dan vindt u verschillende standaard rapporten; om deze naar wens aan te passen, opent u een die vergelijkbaar is met de gewenste soort en selecteert u vervolgens 'Nieuw' (niet 'Kopiëren'); U kunt dan deze naar wens aanpassen en deze indien gewenst als voorkeur-rapport markeren. </para>
+
+<para
+>Ofschoon &kmymoney; niet is bedoeld om bedrijfsmatig te gebruiken, maar als u een bedrijf zonder personeel heeft en daarom geen salaris-functies nodig heeft, dan zal u waarschijnlijk merken dat u &kmymoney; genoeg kunt aanpassen om aan uw wensen tegemoet te komen, met name omdat u er mee kunt budgetteren en prognoses maken en u de aangepaste rapporten via CSV naar andere programma's kunt exporteren </para>
+</sect1>
+</chapter>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.payees">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+  </authorgroup>
+  <date
+>24 de juny de 2019</date>
+  <releaseinfo
+>5.0.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Beneficiaris</title>
+
+<para
+>La vista dels beneficiaris proporciona informació detallada sobre tots els beneficiaris i pagadors involucrats en les operacions. Aquests seran les entitats cap a i des de les quals transferiu els diners. El &kmymoney; emmagatzemarà la informació sobre tots els beneficiaris i pagadors de totes les operacions existents. Això farà possible triar un beneficiari des d'una llista en lloc d'haver d'escriure tot el nom, el qual també disminuirà la possibilitat d'escriure malament o teclejar un nom incorrecte. </para>
+
+<para
+>Aquesta vista es divideix en dues àrees principals: una llista de beneficiaris i pagadors a l'esquerra, i una àrea de detalls a la dreta. La secció <guilabel
+>Els vostres beneficiaris</guilabel
+> permet afegir, suprimir, canviar el nom i fusionar els beneficiaris. L'àrea de detalls té diverses pestanyes, les quals mostren les operacions, les adreces, la informació coincident, la categoria predeterminada i els números de compte del beneficiari seleccionat a la llista. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payeeview.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect1 id="details.payees.list">
+<title
+>Llista de beneficiaris</title>
+
+<para
+>La llista de tots els beneficiaris i pagadors a les dades es mostra al costat esquerre d'aquesta vista. La llista dels beneficiaris estarà ordenada alfabèticament. </para>
+
+<sect2>
+<title
+>Afegir un beneficiari o pagador</title>
+
+<para
+>Per a afegir un beneficiari o pagador, trieu <guibutton
+>+Nou</guibutton
+>. Això crearà un beneficiari nou anomenat <quote
+>Beneficiari nou</quote
+>. També podreu fer clic dret sobre qualsevol beneficiari existent i seleccionar <guimenuitem
+>Afegeix un beneficiari</guimenuitem
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Canviar el nom d'un beneficiari o pagador</title>
+
+<para
+>Per a canviar el nom d'un beneficiari o pagador, feu doble clic sobre el nom o feu clic dret sobre el nom i seleccioneu <guimenuitem
+>Reanomena el beneficiari</guimenuitem
+>. El nom esdevindrà editable. El canvi del nom afectarà el nom a totes les operacions en què apareix. </para>
+</sect2>
+
+<sect2>
+<title
+>Suprimir un beneficiari o pagador</title>
+
+<para
+>Per a eliminar un beneficiari o pagador, feu clic dret sobre el nom i seleccioneu <guimenuitem
+>Suprimeix el beneficiari</guimenuitem
+>. Si el beneficiari té alguna operació, es presentarà un diàleg que permetrà reassignar-la a un beneficiari diferent, i també una casella de selecció per a permetre que el nom suprimit s'afegeixi a la llista de coincidència del beneficiari nou. Una altra opció per a suprimir un beneficiari existent és seleccionar el beneficiari o pagador fent-hi clic esquerre i després fent clic a <guibutton
+>Supr</guibutton
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.payees.personalinformation">
+<title
+>Detalls addicionals del beneficiari</title>
+
+<sect2>
+<title
+>Informació personal</title>
+
+<para
+>Per a veure i editar la informació personal associada amb un beneficiari en particular, seleccioneu el beneficiari des de la llista i seleccioneu la pestanya <guilabel
+>Adreça</guilabel
+>. Juntament amb la informació de l'adreça, també podreu emmagatzemar un número de telèfon, una adreça de correu electrònic i les notes relacionades amb el beneficiari seleccionat. Per a modificar aquesta informació, editeu l'àrea de detalls directament i premeu el botó <guibutton
+>Actualitza</guibutton
+> quan hàgiu acabat. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>La pestanya de la informació personal</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_info.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Informació personal</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect2>
+
+<sect2 id="details.payees.personalinformation.matching">
+<title
+>Configuració de la coincidència de les operacions</title>
+
+<sect3>
+<title
+>Resum</title>
+
+<para
+>El &kmymoney; té la capacitat d'assignar automàticament el beneficiari adequat a les operacions importades. Això pot ser útil en importar operacions des del banc, quan el nom del beneficiari conté caràcters addicionals innecessaris, o pitjor encara, si es canvien els noms dels beneficiaris. La capacitat de fer coincidir les operacions amb un beneficiari en particular ajudarà a proporcionar un nom consistent als beneficiaris dins del llibre major i dels informes. </para>
+
+<para
+>Per exemple, suposem que el pagament mensual de la hipoteca prové un mes del banc com <quote
+>SUN TRUST BANK MAPLE VALLEY, GA 111506</quote
+> i al mes següent <quote
+>SUNT RUST BANK MAPLE VALLEY, GA 121606</quote
+>. En realitat voldreu que les dues operacions s'assignin al beneficiari <quote
+>Sun Trust</quote
+>. La característica per a la coincidència de les operacions és per a vosaltres! </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>La pestanya de coincidència del beneficiari</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_match.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Detalls de la coincidència del beneficiari</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect3>
+
+<sect3>
+<title
+>Configurar</title>
+
+<para
+>Des de la pestanya <guilabel
+>Coincidència</guilabel
+>, podreu establir les opcions de configuració de coincidència de les operacions. Podreu seleccionar una de les quatre opcions amb la llista desplegable <guilabel
+>Mètode de coincidència</guilabel
+>. </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+><guilabel
+>Sense coincidència</guilabel
+>: inhabilitarà la característica per a aquest beneficiari. Aquesta és la configuració predeterminada per a tots els beneficiaris. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guilabel
+>Coincidència en el nom dels beneficiaris (parcial)</guilabel
+>: habilitarà la característica basada en una coincidència parcial del nom del Beneficiari i utilitzarà el nom de la persona beneficiària com a Clau de coincidència. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guilabel
+>Coincidència en el nom dels beneficiaris (exacta)</guilabel
+>: habilitarà la característica basada en una coincidència exacta del Beneficiari. Utilitzareu aquesta capacitat de coincidència quan vulgueu fer un seguiment de diferents beneficiaris que tenen el mateix nom comercial, però que tenen ubicacions diferents. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guilabel
+>Coincidència en un nom que es llista a sota</guilabel
+>: permet la coincidència basada en múltiples noms diferents o opcionals per a un Beneficiari. Utilitzareu aquesta capacitat de coincidència quan es tingui un Beneficiari en particular que tingui diferents noms comercials, però voleu que totes les operacions importades identificades per qualsevol d'aquests noms s'associïn amb un únic Beneficiari al &kmymoney;. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Amb qualsevol d'aquestes opcions, podreu decidir si ignorar o no les majúscules i minúscules a l'ortografia del beneficiari en funció de si marqueu <guilabel
+>Ignora majúscules/minúscules</guilabel
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Importar les operacions</title>
+
+<para
+>Les Claus de coincidència que hàgiu establert es tindran en compte cada vegada que importeu operacions utilitzant la importació QIF, o utilitzant un connector com OFX o AqBanking, si la Clau de coincidència per a un dels seus beneficiaris es troba en qualsevol part de l'operació importada del beneficiari, s'assignarà el beneficiari corresponent de la llista a aquesta operació. Per tant, una Clau de coincidència com <quote
+>Sun Trust</quote
+> coincidirà amb <quote
+>SUN TRUST BANK MAPLE VALLEY,GA</quote
+> o fins i tot amb <quote
+>MORGEN SUN TRUST&amp;LOAN</quote
+>. Així que trieu amb cura les Claus de coincidència. </para>
+<para
+><note>
+    <para
+>Si un beneficiari de l'operació coincideix amb més d'una Clau de coincidència, el comportament no està definit. El &kmymoney; triarà arbitràriament un dels beneficiaris coincidents.</para>
+</note
+></para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.payees.transactionhistory">
+<title
+>Veure l'historial de les operacions</title>
+
+<para
+>Per a veure totes les operacions associades amb un beneficiari en particular, seleccioneu el beneficiari de la llista i seleccioneu la pestanya <guilabel
+>Operació</guilabel
+> a l'àrea de detalls. En fer doble clic sobre una operació en particular, s'accedirà directament a aquesta operació a la vista del llibre major per al compte corresponent. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>La pestanya Operació</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_history.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Historial de les operacions</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect1>
+</chapter>
+

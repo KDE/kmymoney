@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="reference.widgets">
+<sect1info>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</sect1info>
+
+<title
+>Elementos</title>
+
+<para
+>O &kappname; tem alguns elementos específicos que não são encontrados nas outras aplicações. A utilização destes itens é explicada neste capítulo. </para>
+
+<sect2 id="reference.widgets.datepicker">
+<title
+>Elemento de introdução de datas</title>
+
+<para
+>Sempre que o &kappname; necessita de informações acerca de uma determinada data, &eg; a data de publicação de uma transacção ou a data de abertura de uma conta, oferece ao utilizador o <emphasis
+>elemento ou item de introdução de datas</emphasis
+>. Este item consiste em três campos e um botão. Os campos apresentam o <emphasis
+>dia</emphasis
+>, o <emphasis
+>mês</emphasis
+> e o <emphasis
+>ano</emphasis
+>, separados pelos devidos caracteres de separação de datas, dependendo da sua configuração regional. O botão - se carregado - irá abrir o <emphasis
+>item de selecção de datas</emphasis
+>. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Dica do Dia</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="date_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Elemento de datas</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>No campo de introdução de datas, as teclas de cursores para a esquerda/direita poderão ser usadas para mudar entre os campos do <emphasis
+>dia</emphasis
+>, do <emphasis
+>mês</emphasis
+> e do <emphasis
+>ano</emphasis
+>. Se usar as teclas de cursores para cima/baixo,o valor do campo seleccionado poderá ser aumentado/diminuído. As teclas <keycap
+>+</keycap
+> e <keycap
+>-</keycap
+> poderão ser usadas para aumentar/diminuir um dia. Os limites dos meses e anos são tidos em consideração e são aumentados/diminuídos se necessário. Se carregar em <keycap
+>T</keycap
+>, irá configurar o campo com a data de hoje. </para>
+
+<para
+>A data também pode ser alterada com o rato. Se carregar no campo do <emphasis
+>dia</emphasis
+>, <emphasis
+>mês</emphasis
+> ou <emphasis
+>ano</emphasis
+>, seleccioná-lo-á. O valor poderá então ser incrementado/decrementado com as setas à direita do elemento. Elas funcionam exactamente como a tecla para cima/baixo. </para>
+
+<para
+>O selector de datas abre-se quando o botão à direita das setas for carregado. Irá mostrar quatro botões de setas no topo, que definem o mês e ano seleccionados de momento. Os botões mais à esquerda são usados para diminuir o ano e o mês, enquanto os botões à direita são usados para aumentar o mês e o ano. O botão mais à direita fecha o selector de datas. </para>
+
+<para
+>Por baixo dos botões, o item apresenta uma página de calendário para o mês respectivo. Se carregar num dia do mês seleccionado, irá seleccionar essa data, fecha o selector de datas e transfere a data seleccionada para os campos do <emphasis
+>dia</emphasis
+>, <emphasis
+>mês</emphasis
+> ou <emphasis
+>ano</emphasis
+>. </para>
+
+<para
+>No fundo do item, os utilizadores poderão encontrar um botão, um campo de edição de texto e uma lista. Se carregar no botão, irá seleccionar a data de hoje no selector, enquanto o campo de texto poderá ser usado para introduzir uma data específica. Se carregar na tecla <keycap
+>RETURN</keycap
+>, irá mostrar essa data no item de selecção de datas. A lista permite ao utilizador seleccionar uma semana específica, podendo seleccionar uma data a partir daí. </para>
+</sect2>
+
+<sect2 id="reference.widgets.value">
+<title
+>Introdução de valores</title>
+<para
+>O item de introdução de valores consiste num campo de texto (que aceita números, separadores de milhares e separadores decimais), assim como um botão à direita. Use os números para introduzir o valor. Separe a parte fraccionária, introduzindo para tal o separador decimal para a sua região. Se carregar no botão à direita ou carregar numa tecla que representa uma operação numérica (&eg;, +,-,/,* ou %), irá aparecer uma pequena calculadora que lhe permite calcular o valor final. </para>
+
+<para
+>Poderá introduzir valores negativos, antecedendo o valor com um sinal '-' (menos). No caso de a sua configuração regional definir que os números negativos devem aparecer entre parêntesis, o valor também poderá ser envolvido com parêntesis no campo de introdução do valor. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Dica do Dia</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="value_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Elemento de valores</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Use o item da calculadora como se fosse uma calculadora normal, assim que terminar, deixe-a ao carregar no botão '=' ou carregue na tecla '=' do seu teclado. </para>
+</sect2>
+
+<sect2 id="reference.widgets.payee">
+<title
+>Item de Pagador/Beneficiário</title>
+
+<para
+>Quando lhe for pedido para introduzir um pagador/beneficiário para uma dada transacção, poderá começar a introduzir o nome, carregando nas teclas do seu teclado. Enquanto forem existindo itens na lista de pagadores/beneficiários mantidos pelo &kappname;, os mesmos são apresentados numa área abaixo ou acima do campo de texto. Se usar o rato ou as teclas para cima/baixo, poderá seleccionar um nome dessa lista. Se usar adicionalmente o teclado, será obrigado a seleccionar o item com a tecla RETURN. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Dica do Dia</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Elemento de pagador</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Se for introduzido um nome que não seja conhecido do &kappname;, ser-lhe-á questionado se deseja criar ou não um registo novo de pagador/beneficiário. Se não o quiser fazer, então o campo ficará em branco. Caso contrário, será criado o registo e adicionado à lista. </para>
+
+<para
+>Assim que o campo de texto tiver caracteres, a lista só irá apresentar os beneficiários que correspondam à sequência de caracteres introduzida. Faça duplo-click sobre a seta da lista para mostrar todos os beneficiários na lista. </para>
+
+</sect2>
+
+<sect2 id="reference.widgets.category">
+<title
+>Item de categoria/conta</title>
+
+<para
+>Quando lhe for pedido para introduzir uma categoria ou conta, poderá começar a introduzir o nome, carregando nas teclas do seu teclado. Enquanto forem existindo itens na lista de itens correspondentes mantidos pelo &kappname;, os mesmos são apresentados numa área abaixo ou acima do campo de texto. Se usar o rato ou as teclas para cima/baixo, poderá seleccionar um nome dessa lista. Se usar adicionalmente o teclado, será obrigado a seleccionar o item com a tecla RETURN. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Dica do Dia</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="category_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Elemento de categorias</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Se for introduzido um nome que não seja conhecido do &kappname;, ser-lhe-á questionado se deseja criar ou não um registo novo de categoria. Se não o quiser fazer, então o campo ficará em branco. Caso contrário, será criado o registo e adicionado à lista. </para>
+
+<para
+>Assim que o campo de texto tiver caracteres, a lista só irá apresentar as categorias/contas que correspondam à sequência de caracteres introduzida. Faça duplo-click sobre a seta da lista para mostrar a lista completa. </para>
+
+</sect2>
+</sect1>

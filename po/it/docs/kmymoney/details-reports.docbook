@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.reports">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+  </authorgroup>
+  <date
+>25/07/2010</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Report</title>
+
+<sect1 id="details.reports.avail">
+<title
+>Report disponibili</title>
+
+<para>
+<screenshot>
+	<screeninfo
+>Vista dei Report</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reports_view-all.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Vista dei Report</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>La vista dei Report visualizza tutti i report disponibili, raggruppandoli in base alle intestazioni seguenti. </para>
+
+<sect2>
+<title
+>Entrate e uscite</title>
+<para
+>I report in queste sezioni visualizzano le entrate e le uscite per il mese corrente o per ogni mese dell'anno in corso. Ovviamente, la durata totale del report e la durata riferita ad ogni colonna è configurabile in base alle tue preferenze. Possono essere prodotti anche grafici e grafici a torta. </para>
+</sect2>
+
+<sect2>
+<title
+>Patrimonio netto</title>
+<para
+>Questi report descrivono il patrimonio netto: quello attuale, quello di ogni mese dell'anno in corso o quello di ogni anno nello storico. In aggiunta, ci sono anche le previsioni del flusso di denaro per i prossimi 7 giorni e un grafico del patrimonio netto. Ci sono anche dei report che permettono di visualizzare la variazione del bilancio dei conti nel tempo. </para>
+</sect2>
+
+<sect2>
+<title
+>Transazioni</title>
+<para
+>Questa sezione contiene dei report che visualizzano le singole transazioni. Questo è il modo migliore per stampare il registro del conto per uno specifico lasso di tempo. Le transazioni visualizzate possono essere raggruppate, in base alle proprie preferenze, scegliendo il report appropriato, ad esempio: <itemizedlist>
+  <listitem
+><para
+>Per conto</para
+></listitem>
+  <listitem
+><para
+>Per categoria</para
+></listitem>
+  <listitem
+><para
+>Per mese o settimana</para
+></listitem>
+  <listitem
+><para
+>Per beneficiario</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Flusso di cassa</title>
+<para
+>Il report di flusso di cassa è simile ai report delle transazioni, ma visualizza tutte le transazioni relative ai flussi di denaro. </para>
+</sect2>
+
+<sect2>
+<title
+>Investimenti</title>
+<para
+>Questi report permettono di tenere traccia dei propri investimenti. Includono solo i conti degli investimenti. Ci sono tanti filtri e stili possibili, ad esempio questi: </para>
+<itemizedlist>
+  <listitem
+><para
+>Transazioni degli investimenti: simile ad un report sulle transazioni; vengono incluse le quotazioni e le quantità.</para
+></listitem>
+  <listitem
+><para
+>Titoli di investimento per conto: visualizza la quantità posseduta, il prezzo e il valore per ogni conto.</para
+></listitem>
+  <listitem
+><para
+>Titoli di investimento per tipo: come il report precedente, ma organizza i conti per tipo (azioni, fondi, &etc;)</para
+></listitem>
+  <listitem
+><para
+>Rendimento degli investimenti per conto: visualizza il rendimento annuale in ogni periodo di tempo. Analizza il flusso di denaro in entrata e in uscita dal conto. Questo permette una visualizzazione accurata del rendimento degli investimenti.</para
+></listitem>
+  <listitem
+><para
+>Rendimento degli investimenti per tipo: come il report precedente, ma organizza i conti per tipo (azioni, fondi, &etc;)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Ci sono anche grafici dei prezzi degli investimenti e del loro valore. </para>
+</sect2>
+
+<sect2>
+<title
+>Imposte</title>
+<para
+>Il report delle imposte è come i report delle transazioni, ma include solo le categorie affette da imposte. Questo permette di marcare certe categorie come affette da imposte e vedere un grande report alla fine dell'anno per vederle tutte insieme. Possono essere visualizzate per categoria o per Beneficiario, e sono relative all'ultimo anno fiscale. </para>
+</sect2>
+
+<sect2>
+<title
+>Budget</title>
+<para
+>I report dei budget sono simili a quelli sul patrimonio netto, ma possono visualizzare il budget per un certo anno, o anche confrontarlo con le entrate e le uscite di quel periodo. </para>
+</sect2>
+
+<sect2>
+<title
+>Previsioni</title>
+<para
+>I report sulle previsioni sono come quelli sul patrimonio netto, ma usano le informazioni disponibili per visualizzare le previsioni. È possibile visualizzare le informazioni a diversi livelli e nel periodo desiderato. </para>
+</sect2>
+
+<sect2>
+<title
+>Informazioni</title>
+<para
+>Questi report visualizzano informazioni che non sono transazioni, come le transazioni pianificate, i conti e i prestiti. </para>
+</sect2>
+
+<sect2>
+<title
+>Grafici</title>
+<para
+>Se i <link linkend="details.reports.charts"
+>Grafici</link
+> sono abilitati, questa sezione, come impostazione predefinita, elenca tutti i report che sono impostati per visualizzare un grafico. Sono presenti anche in una delle altre sezioni, ma vengono raggruppati qui per comodità. </para>
+</sect2>
+
+<sect2>
+<title
+>Report preferiti</title>
+<para
+>Questa sezione elenca i report che sono stati marcati come preferiti nella finestra di configurazione dei report. Sono elencati anche in una delle altre sezioni, ma sono raggruppati qui per comodità. I report preferiti vengono anche visualizzati nella pagina del riepilogo finanziario per essere ancora più facilmente reperibili. </para>
+</sect2>
+
+<sect2>
+<title
+>Configurazione dei report</title>
+<para
+>Per accedere alla funzione di configurazione dei report, aprire il report che si vuole configurare e premere il pulsante <guibutton
+>Configura</guibutton
+> sopra il report. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.reports.working">
+<title
+>Gestione dei report</title>
+
+<para
+>Ci sono tante azioni che si possono eseguire sui report. È possibile accedervi facendo clic con il &RMB; sul nome del report nella lista dei report. In alternativa, una volta aperto un report, ci sono dei pulsanti nella parte superiore della vista per eseguire le seguenti operazioni: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Grafico: presente solo se il report è in grado di visualizzare un grafico. Facendo clic su questa opzione si alterna tra la visualizzazione del report e quella del grafico associato.</para
+></listitem>
+  <listitem
+><para
+>Configura: modifica il comportamento del report. È possibile personalizzare il report come lo si desidera e salvarlo per usarlo in seguito.</para
+></listitem>
+  <listitem
+><para
+>Nuovo: crea un report personalizzato basato sul report corrente.</para
+></listitem>
+  <listitem
+><para
+>Copia: copia il risultato del report negli appunti, in modo da poterlo incollare in un'altra applicazione, come un foglio di calcolo, per ulteriori analisi.</para
+></listitem>
+  <listitem
+><para
+>Esporta: i report possono essere esportati nei formati &HTML; e CSV.</para
+></listitem>
+  <listitem
+><para
+>Elimina: i report personalizzati possono essere cancellati. I report predefiniti di &kmymoney; non possono essere eliminati.</para
+></listitem>
+  <listitem
+><para
+>Chiudi: chiude il report corrente.</para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="details.reports.config">
+<title
+>Configurazione dei report</title>
+
+<sect2>
+<title
+>Gestione dei report personalizzati</title>
+<para
+>È possibile configurare i report predefiniti o creare i propri a partire da essi, selezionando «Nuovo» e configurando il nuovo report. Quando si seleziona «Configura», si aprirà la scheda Report. Inizialmente, ha lo stesso nome del report di partenza, con l'aggiunta di <quote
+>(personalizzato)</quote
+> alla fine. È possibile modificare il nome a piacimento. È possibile anche assegnare un nome che è già in uso da un report predefinito o da un report personalizzato. È anche possibile usare il campo Commento per distinguere ulteriormente i report. </para>
+
+<para
+>La finestra di dialogo di configurazione del report contiene tante linguette nella parte alta. Ogni scheda visualizza delle opzioni relative ad un certo aspetto del report. </para>
+
+</sect2>
+
+<sect2
+><title
+>Scheda Report</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="report_configuration-reporttab.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Configurazione report - Report</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>In questa scheda è possibile impostare le proprietà fondamentali di questo report. <itemizedlist>
+  <listitem
+><para
+>Nome del report: permette di scegliere il nome del report</para
+></listitem>
+  <listitem
+><para
+>Commento: Permette di inserire un commento per aiutare a ricordare i dettagli del report.</para
+></listitem>
+  <listitem
+><para
+>Converti valori alla valuta di base: marcando questa opzione, tutti i valori del report verranno convertiti alla valuta di base impostata. Altrimenti, i valori verranno visualizzati nella valuta originale. Se le valute non vengono convertite, non verranno visualizzati i subtotali.</para
+></listitem>
+  <listitem
+><para
+>Segna come report predefinito: marcare questa opzione per visualizzare questo report nella pagina iniziale e nel gruppo dei <guilabel
+>Report preferiti</guilabel
+>.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2 id="details.reports.config.rowscolumns">
+<title
+>Scheda Righe/Colonne</title>
+<para
+>In questa scheda è possibile configurare come vengono selezionate e organizzate le righe e le colonne. Questa scheda presenta opzioni diverse di configurazione, in base allo stile selezionato per il report. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="report_configuration-rowscolumns.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Configurazione del report - Righe/Colonne</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Per i report delle entrate/uscite e del patrimonio netto: <itemizedlist>
+  <listitem
+><para
+>Colonne: permette di selezionare l'intervallo di tempo associato ad ogni colonna.</para
+></listitem>
+  <listitem
+><para
+>Righe: permette di selezionare i tipi di conti da visualizzare come righe del report.</para
+></listitem>
+  <listitem
+><para
+>Dettagli: permette di scegliere il livello di accuratezza desiderato per questo report.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Sono disponibili i seguenti livelli di dettaglio: <itemizedlist>
+  <listitem
+><para
+>Tutti: visualizza tutti i conti e le categorie.</para
+></listitem>
+  <listitem
+><para
+>Livello principale: permette di visualizzare solo le categorie e i conti di livello più alto, e includere in questi valori la somma dei conti contenuti e delle sotto-categorie.</para
+></listitem>
+  <listitem
+><para
+>Gruppi: permette di visualizzare solo i totali delle entrate, delle uscite, delle attività e delle passività.</para
+></listitem>
+  <listitem
+><para
+>Totali: visualizza solo la linea dei totali.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Per i report delle transazioni: <itemizedlist>
+  <listitem
+><para
+>Organizza per: scegliere come raggruppare le transazioni nel report.</para
+></listitem>
+  <listitem
+><para
+>Colonne visualizzate: permette di scegliere le colonne da visualizzare nel report. La data e l'importo della transazione vengono sempre visualizzati.</para
+></listitem>
+  <listitem
+><para
+>Includi solo le categorie delle imposte: visualizza solo le categorie marcate come imposte.</para
+></listitem>
+  <listitem
+><para
+>Includi solo i conti Investimento: permette di visualizzare solo le transazioni dei conti di investimento.</para
+></listitem>
+  <listitem
+><para
+>Includi solo i conti di prestito: permette di visualizzare solo le transazioni dei conti di prestito.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Scheda Grafico</title>
+
+<para
+>Questa scheda permette di configurare il grafico relativo al report. Vedere la sezione <link linkend="details.reports.charts"
+>Grafici</link
+> per maggiori informazioni sulle funzionalità dei grafici. <itemizedlist>
+  <listitem
+><para
+>Tipo di grafico: permette di selezionare il formato desiderato per il grafico.</para
+></listitem>
+  <listitem
+><para
+>Mostra linee della griglia: permette di visualizzare le linee verticali e orizzontali della griglia nel grafico.</para
+></listitem>
+  <listitem
+><para
+>Disegna i valori sul grafico: permette di visualizzare i valori all'interno del grafico, per i punti dati selezionati.</para
+></listitem>
+  <listitem
+><para
+>Mostra un grafico in modo predefinito: permette di visualizzare il grafico del report quando lo si apre.</para
+></listitem>
+  <listitem
+><para
+>Spessore della linea: la larghezza delle linee dati nel grafico.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Altre schede</title>
+<para
+>Le altre schede di questa finestra sono le stesse presenti nell'interfaccia di Ricerca delle transazioni. Vedere la <link linkend="details.search"
+>documentazione</link
+> di quell'interfaccia per maggiori informazioni sulle altre schede.</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.reports.charts">
+<title
+>Grafici</title>
+
+<sect2>
+<title
+>Visualizzazione come grafico</title>
+
+<para
+>Ogni report può essere visualizzato come testo o come grafico. Sono usate le stesse opzioni di configurazione, per entrambe le visualizzazioni. È possibile cambiare velocemente la modalità di visualizzazione con i pulsanti <guibutton
+>Grafico</guibutton
+> e <guibutton
+>Report</guibutton
+> nella parte superiore della vista. </para>
+
+<para
+>È bene avere cura di limitare i dati visualizzati nel grafico. Se non si sta attenti, l'utilizzo della stessa configurazione per la rappresentazione grafica e quella testuale permette di avere grafici con una gran confusione, brutti e poco espressivi. Non sarà &kmymoney; a obbligarti ad avere dei grafici leggibili! </para>
+
+</sect2>
+
+<sect2>
+<title
+>Tipi di grafico disponibili</title>
+
+<sect3>
+<title
+>Grafico a linea</title>
+
+<para
+>Un grafico a linea è uno dei tipi di grafico più semplici. C'è una linea per ogni serie di dati. (Di solito una serie di dati è associata a un singolo conto o categoria; vedere sotto per maggiori informazioni.) Il tempo viene rappresentato sull'asse inferiore, e i valori sono visualizzati sulla sinistra. </para>
+
+<para
+>È possibile modificare il livello di dettaglio di ogni linea nella scheda <link linkend="details.reports.config.rowscolumns"
+>Righe/Colonne</link
+> della configurazione del grafico. Se si sceglie il livello di dettaglio <quote
+>Livello principale</quote
+>, ci sarà solo una linea per ogni conto o categoria principale, che include anche la somma dei conti contenuti e delle sotto-categorie. Se si sceglie <quote
+>Gruppi</quote
+>, verrà invece visualizzata una riga per le entrate, una per le uscite, una per le attività e una per le passività, in base alle altre impostazioni. </para>
+</sect3>
+
+<sect3>
+<title
+>Grafico a barre</title>
+
+<para
+>Il grafico a barre funziona come il grafico a linea, ma visualizza una barra per ogni serie, in ogni intervallo di tempo. </para>
+</sect3>
+
+<sect3>
+<title
+>Grafico a torta</title>
+
+<para
+>Il grafico a torta è il tipo di grafico più semplice possibile. Visualizza solo un intervallo di tempo, al posto di visualizzare la variazione nel tempo. Questo grafico visualizza solo la colonna dei totali del report selezionato. Se il report è configurato in modo da NON convertire i valori alla valuta di base, non ci sarà una colonna dei totali, quindi questo grafico sarà inutile. </para>
+</sect3>
+
+<sect3>
+<title
+>Grafico ad anello</title>
+
+<para
+>Il grafico ad anello è molto simile al grafico a torta, ma c'è un <quote
+>Anello</quote
+> per ogni intervallo di tempo del report. </para>
+</sect3>
+
+</sect2>
+
+</sect1>
+</chapter>

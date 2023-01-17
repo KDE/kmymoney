@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="whatsnew">
+<chapterinfo>
+  <date
+>2019-04-04</date>
+  <releaseinfo
+>5.0.4</releaseinfo>
+</chapterinfo>
+<title
+>Wat is er nieuw in deze uitgave</title>
+
+<sect1>
+<title
+>Reparatie van bugs en verbeteringen in functionaliteit</title>
+
+<para
+>Zoals met elke uitgave heeft het ontwikkelteam van &kmymoney; erg hard gewerkt om deze uitgave op elke manier beter en gemakkelijker in het gebruikt te maken. Dit is de vierde uitgave in de 5.0 serie en de meeste activiteit was gericht op bugs repareren. </para>
+
+<para
+>op dit punt is de conversie om &kde-frameworks; te gebruiken in essentie compleet, hoewel dat en het werk om veel van de onderliggende bibliotheken gebruikt door de toepassing bij te werken zich achter de schermen bevinden en niet direct zichtbaar zijn voor de eindgebruiker. Het algemen uiterlijk en gevoel zou stabiel moeten zijn, hoewel enige kleine wijzigingen kunnen gebeuren. De basis functionaliteit van het programma blijft ook hetzelfde, naast de intentionele verbeteringen en toevoegingen. </para>
+
+<para
+>In voorgaande uitgaven bevatte deze pagina van de handleiding een lijst vele van de specifieke reparaties van bugs en functionele verbeteringen. In plaats van deze informatie te dupliceren, kunt u deze direct vinden in de <ulink url="https://kmymoney.org/changelog.html"
+>Log met wijzigingen</ulink
+>. </para>
+
+<para
+>Sinds de uitgave van 5.0 zijn er enkele wijzigingen waarbij aanpassingen aan de gebruikerszijde nodig zijn als u opwaardeert van versie 4.8.x of ouder. </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Het programma zoekt voor de printcheck plugin op diverse plaatsen naar sjablonen. De gebruiker moet hiermee rekening houden in het instellingendialoog van de plugin,<link linkend="details.settings.plugins"
+>zie deze  sectie voor meer details</link
+>. </para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1>
+<title
+>Zaken die zijn bijgewerkt in dit handboek</title>
+
+<para
+>Terwijl we voortgang boeken, zijn er nog steeds hoofdstukken van dit handboek die niet zijn bijgewerkt om alle wijzigingen in het programma weer te geven die zichtbaar zijn voor de gebruiker vanaf 5.0. Elk hoofdstuk geeft aan welke uitgave van &kmymoney; waarvoor het als laatste is bijgewerkt, maar we presenteren de complete lijst hier, als een snelle referentie. </para>
+
+<para
+>Merk echter op dat in hoeverre de hoofdstukken die niet expliciet zijn bijgewerkt, wel of niet weergeven hoe het huidige programma werkt, afhangt vann hoeveel dat gebied van het programma is gewijzigd tussen de uitgave 4.8 en 5.0. </para>
+  
+<informaltable frame="none">
+  <tgroup cols="2">
+    <thead>
+      <row>
+	<entry
+><para
+>Bijgewerkte hoofdstukken voor 5.x</para
+></entry>
+	<entry
+><para
+>Hoofdstukken nog niet bijgewerkt voor 5.x</para
+></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry valign="top">
+	  <simplelist>
+	    <member
+><link linkend="introduction"
+>Inleiding</link
+></member>
+	    <member
+><link linkend="whatsnew"
+>Wat is er nieuw in deze uitgave</link
+></member>
+	    <member
+><link linkend="makingmostof"
+>Het beste uit &kmymoney; halen</link
+></member>
+	    <member
+><link linkend="firsttime"
+>&kmymoney; voor de eerste keer gebruiken</link
+></member>
+	    <member
+><link linkend="details.institutions"
+>Instituten</link
+></member>
+	    <member
+><link linkend="details.accounts"
+>Rekeningen</link
+></member>
+	    <member
+><link linkend="details.categories"
+>Categorieën</link
+></member>
+	    <member
+><link linkend="details.tags"
+>Tags</link
+></member>
+	    <member
+><link linkend="details.payees"
+>Debiteuren</link
+></member>
+	    <member
+><link linkend="details.schedules"
+>Periodieke transacties</link
+></member>
+	    <member
+><link linkend="details.ledgers"
+>Grootboeken</link
+></member>
+	    <member
+><link linkend="details.investments"
+>Investeringen</link
+></member>
+	    <member
+><link linkend="details.currencies"
+>Valuta</link
+></member>
+	    <member
+><link linkend="details.reconcile"
+>Transactiecontrole</link
+></member>
+	    <member
+><link linkend="details.impexp"
+>Importeren en exporteren</link
+></member>
+	    <member
+><link linkend="details.settings"
+>Instellingen</link
+></member>
+	    <member
+><link linkend="reference.menus"
+>Referentie: Menu's</link
+></member>
+	    <member
+><link linkend="credits"
+>Dankbetuigingen</link
+></member>
+	  </simplelist>
+	</entry>
+	<entry valign="top">
+	  <simplelist>
+	    <member
+><link linkend="details.reports"
+>Rapporten</link
+></member>
+	    <member
+><link linkend="details.loans"
+>Leningen</link
+></member>
+	    <member
+><link linkend="details.budgets"
+>Budgetten</link
+></member>
+	    <member
+><link linkend="details.forecast"
+>Prognose</link
+></member>
+	    <member
+><link linkend="details.search"
+>Transacties doorzoeken</link
+></member>
+	    <member
+><link linkend="details.formats"
+>Bestandsformaten</link
+></member>
+	    <member
+><link linkend="details.database"
+>Database</link
+></member>
+	    <member
+><link linkend="faq"
+>Vragen en antwoorden</link
+></member>
+	    <member
+><link linkend="reference.widgets"
+>Referentie: Widgets</link
+></member>
+	  </simplelist>
+	</entry>
+      </row>
+    </tbody>
+  </tgroup>
+</informaltable>
+ 
+</sect1>
+
+  
+</chapter>

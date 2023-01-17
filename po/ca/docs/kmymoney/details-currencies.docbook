@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.currencies">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+    <author
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+  </authorgroup>
+  <date
+>8 d'agost de 2022</date>
+  <releaseinfo
+>5.1.3</releaseinfo>
+</chapterinfo>
+
+<title
+>Divises</title>
+
+<para
+>El &kmymoney; admet l'ús de múltiples divises en diferents comptes. Per exemple, podreu configurar un compte bancari en euros, un altre en lliures esterlines i així i tot tenir el compte de la targeta de crèdit en dòlars nord-americans. </para>
+
+<sect1 id="details.currencies.basecurrency">
+<title
+>Divisa base</title>
+
+<para
+>Durant la <link linkend="firsttime.3"
+>Configuració de fitxer nou</link
+> inicial del &kmymoney;, se us demanarà que seleccioneu la divisa base. En general, la divisa base és la divisa que utilitzeu al vostre país. La divisa base és la que s'utilitzarà com a predeterminada per a tots els comptes i categories noves i en la qual es basaran els informes. Quan configureu un compte nou, el &kmymoney; canviarà automàticament a la divisa base. Si el compte requereix que empreu una divisa diferent, podreu canviar-la durant la <link linkend="details.accounts.create"
+>Configuració d'un compte nou</link
+>. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>El diàleg de selecció de divisa</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="select_currency.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Escollint la divisa</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect2 id="details.currencies.newcurrency">
+<title
+>Afegir una divisa nova</title>
+
+<para
+>Encara que no passa sovint, de vegades s'introdueix una divisa nova. Aquesta pot ser una moneda virtual nova, com el Bitcoin, o un canvi introduït per a un país per raons de política financera. Si bé aquesta divisa s'afegirà a la versió següent del &kmymoney;, és possible afegir-la manualment, en el cas que necessiteu començar a emprar-la immediatament. </para>
+
+<para
+>Per a afegir una divisa manualment, seleccioneu l'element de menú <menuchoice
+><guimenu
+>Eines</guimenu
+><guimenuitem
+>Divises...</guimenuitem
+></menuchoice
+> per a mostrar el diàleg <guilabel
+>Divises</guilabel
+>, com es mostra a dalt. Feu un clic sobre el botó <guibutton
+>+ Afegeix</guibutton
+> o un clic dret sobre qualsevol divisa existent i seleccioneu <guimenuitem
+>Divisa nova</guimenuitem
+> des del menú contextual <guilabel
+>Opcions de la divisa</guilabel
+>. Això obrirà un diàleg a on podreu introduir el codi ISO, nom i altres detalls de la divisa. Quan estigui llest, feu clic a <guilabel
+>D'acord</guilabel
+>. La divisa es crearà amb el nom especificat. Per a canviar el nom o altres detalls, feu clic al botó <guibutton
+>Edita</guibutton
+>. També podeu canviar el nom prement <keycap
+>F2</keycap
+> o feu-hi clic dret i seleccionar <guimenuitem
+>Reanomena la divisa</guimenuitem
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.currencies.accountsetup">
+<title
+>Configurar el compte</title>
+
+<para
+>Quan creeu un compte nou, especifiqueu la divisa en què es gestionarà. L'assistent de Compte nou estableix aquesta configuració predeterminada a la <link linkend="details.currencies.basecurrency"
+>divisa base</link
+>. Si necessiteu una divisa diferent, haureu de seleccionar-la durant aquesta configuració inicial. El llibre major del compte mostrarà tots els valors en la divisa seleccionada. No es pot canviar la divisa d'un compte una vegada s'hagi creat el compte. </para>
+</sect1>
+
+<sect1 id="details.currencies.transactions">
+<title
+>Introduir operacions emprant divises diferents</title>
+
+<para
+>Cada vegada que s'introdueix una operació que es refereix a més d'una divisa, que inclou usar una divisa diferent de la predeterminada del compte, apareixerà l'editor per al tipus de canvi i us permetrà introduir un tipus de canvi per a aquesta operació. Inicialment, s'emprarà com a tipus de canvi el preu actual disponible a la base de dades de preus. Consulteu <link linkend="details.currencies.prices"
+>Introduir tipus de canvi per a les divises</link
+> per a obtenir més informació sobre com proporcionar manualment el tipus de canvi i obtenir informació dels preus en línia. </para>
+
+<para
+>De manera opcional, el tipus de canvi es desa a la base de dades de preus un cop introduït per l'usuari. </para>
+</sect1>
+
+<sect1 id="details.currencies.prices">
+<title
+>Tipus de canvi per a les divises</title>
+
+<sect2>
+<title
+>Introduir manualment els preus</title>
+
+<para
+>L'<guilabel
+>Editor de preus</guilabel
+> us permet introduir els tipus de canvis entre divises o preus per a inversions. Podreu obrir-lo utilitzant l'element de menú <menuchoice
+><guimenu
+>Eines</guimenu
+><guimenuitem
+>Preus...</guimenuitem
+></menuchoice
+>. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="currency_priceeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Editor per al preu de les divises</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>En el &kmymoney;, un <quote
+>Preu</quote
+> és el cost d'una divisa en termes d'una segona divisa. Per exemple, mentre escric això, el preu d'1 USD en termes d'1 EUR és de 0,83, això és, 1 USD costa 0,83 EUR. La primera divisa és la que es compra o ven, i la segona és la divisa utilitzada per a comprar-la o vendre-la. </para>
+
+<para
+>Quan premeu el botó <guibutton
+>Nou</guibutton
+>, apareixerà el diàleg <guilabel
+>Entrada de cotització nova</guilabel
+>. Introduïu la primera divisa (USD en l'exemple anterior) al camp Títols. Introduïu la segona divisa (EUR en l'exemple anterior) al camp Divisa. Introduïu la data efectiva del preu en el camp Data. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="currency_newpriceentry.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Entrada de cotització nova</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect2>
+
+<sect2>
+<title
+>Actualitzacions en línia de les divises</title>
+
+<para
+>El &kmymoney; pot obtenir les conversions entre les divises des del web. Una vegada hàgiu introduït un únic preu per a un parell de divises, la funció de cotització en línia sempre inclourà aquest parell entre les seves opcions. </para>
+
+<para
+>Per a més detalls, vegeu la secció sobre la <link linkend="details.investments.onlinequotes"
+>Cotització en línia dels preus</link
+> en el capítol <guilabel
+>Inversions</guilabel
+>. </para>
+</sect2>
+</sect1>
+</chapter>
+

@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.budgets">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Colin.Wright; &Colin.Wright.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2011-06-29</date>
+  <releaseinfo
+>4.6</releaseinfo>
+</chapterinfo>
+
+<title
+>Orçamentos</title>
+
+<sect1 id="details.budgets.define">
+<title
+>O que é um orçamento?</title>
+
+<para
+>Um orçamento é uma lista categorizada da receita e despesa esperada para um dado período. </para>
+
+<para
+>A funcionalidade de Orçamento do &kappname; permite-lhe criar orçamentos anuais. Poderá criar mais de um orçamento para qualquer ano. Você pode definir valores mensais do orçamento para quaisquer categorias de Receita ou Despesa que tenha criado. Os valores podem ser definidos de três formas, dependendo do período: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Mensal</term>
+    <listitem
+><para
+>(Por omissão) indique um único valor aplicado a todos os meses no Orçamento</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Anual</term>
+    <listitem
+><para
+>indique um único valor a dividir de forma uniforme por todos os meses no orçamento</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Individual</term>
+    <listitem
+><para
+>indique valores separados para cada mês.</para>
+      <para
+>Isto é usado para as receitas e despesas dispostas irregularmente ao longo do ano.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>O &kappname; oferece um conjunto de relatórios para comparar as receitas e despesas actuais, face aos orçamentos. Estes são apresentados com mais detalhe <link linkend="budget.details.reports"
+>noutra secção</link
+>. </para>
+</sect1>
+
+<sect1 id="details.budgets.create">
+<title
+>Os seus orçamentos</title>
+
+<para
+>Poderá aceder aos seus orçamentos, carregando no ícone grande da área de navegação, do lado esquerdo da sua janela do &kappname;. </para>
+
+<para
+>Existem duas secções principais na janela de orçamentos. Estas estão descritas com mais detalhe em baixo. À esquerda, a secção principal mostra a lista de orçamentos que criou. Por cima, existem botões para criar, mudar o nome e apagar orçamentos. À direita, existe uma área com os montantes atribuídos ao orçamento para a categoria seleccionada na Lista de Contas acima. Entre essas duas áreas, existem alguns controlos adicionais para gerir o orçamento. </para>
+
+<sect2>
+<title
+>Ver, criar, modificar e apagar orçamentos</title>
+
+<para
+>Esta secção da janela de Orçamentos mostra a lista de orçamentos existentes no ficheiro actual do &kappname;. Se não tiver sido criado nenhum orçamento, a lista irá aparecer vazia. A lista de orçamentos tem duas colunas: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Nome</term>
+    <listitem>
+      <para
+>Nome do Orçamento</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Ano</term>
+    <listitem>
+      <para
+>Ano fiscal do orçamento. Repare que o mês e dia iniciais do ano fiscal poderão ser indicados na <link linkend="details.settings.general.global"
+>janela para Configurar o &kappname;.</link
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>Os valores do orçamento seleccionado são apresentados à direita. Para seleccionar um orçamento diferente, poderá carregar no orçamento dentro da lista. Em alternativa, quando a lista estiver em primeiro plano, poderá seleccionar um orçamento diferente com os cursores para cima ou para baixo. Se tiver feito alterações a um orçamento e depois seleccionar outro diferente, o &kappname; perguntar-lhe-á se deseja esquecer as alterações. </para>
+
+<para
+>Existem três botões por cima da lista de orçamentos. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Novos</term>
+    <listitem>
+      <para
+>Cria um novo orçamento vazio. O nome por omissão de um novo orçamento é "Orçamento &lt;ano&gt;" onde o &lt;ano&gt; é o ano fiscal actual. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Mudar o Nome</term>
+    <listitem>
+      <para
+>Edita o nome do orçamento seleccionado.</para>
+
+      <para
+>Poderá também editar o nome de um orçamento, fazendo duplo-click sobre o nome de um orçamento da lista.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Apagar</term>
+    <listitem>
+      <para
+>Apaga o orçamento seleccionado</para>
+    </listitem>
+  </varlistentry>
+
+<!--  buttons moved in the UI - they are now described below.  Will remove
+      from here after this chapter has been reviewed.
+  <varlistentry>
+    <term
+>Revert</term>
+    <listitem>
+      <para
+>Reverts the selected Budget to its last stored state.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Save</term>
+    <listitem>
+      <para
+>Accepts any unsaved changes to the selected Budget and
+        stores them.</para>
+    </listitem>
+  </varlistentry>
+ -->
+</variablelist>
+
+<para
+>Estão disponíveis opções adicionais num menu que é acedido com o botão direito sobre um orçamento. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Novo Orçamento</term>
+    <listitem>
+      <para
+>Cria um novo orçamento em branco.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Mudar o Nome do Orçamento</term>
+    <listitem>
+      <para
+>Muda o nome do orçamento seleccionado.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Modificar o ano do orçamento</term>
+    <listitem>
+      <para
+>Mostra uma janela com uma lista de anos, para que possa seleccionar um novo ano fiscal para o orçamento.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Apagar o orçamento</term>
+    <listitem>
+      <para
+>Apaga o orçamento seleccionado.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Copiar o orçamento</term>
+    <listitem>
+      <para
+>Cria uma cópia do orçamento seleccionado. O novo orçamento tem o nome "Cópia de &lt;orçamento&gt;", onde o &lt;orçamento&gt; é o nome do orçamento copiado.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Orçamento com base na previsão</term>
+    <listitem>
+      <para
+>Preenche os montantes do orçamento com base nos dados dos valores de Previsão do &kappname;. Veja a secção sobre as <link linkend="details.forecast.define"
+>Previsões</link
+> para obter mais informações. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Lista de Contas</title>
+
+<para
+>A lista de contas mostra a lista de categorias de Receitas e Despesas (lembre-se que, dentro do &kappname;, as categorias são tratadas como um tipo especial de conta). Como nos outros locais do &kappname;, a lista está organizada como uma árvore. A lista poderá ser expandida ou recolhida para mostrar ou esconder as sub-categorias de uma categoria. A lista de contas tem um conjunto com as colunas: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Conta</term>
+    <listitem>
+      <para
+>Nome da conta (categoria)</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Tipo</term>
+    <listitem>
+      <para
+>Tipo de Categoria (Receita ou Despesa)</para>
+    </listitem>
+  </varlistentry>
+
+<!-- these seem to have been removed from the display.  Remove from here
+     once this is confirmed by the programmers.
+  <varlistentry>
+    <term
+>Tax</term>
+    <listitem>
+      <para
+>Checked if a Category included in Tax Reports</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>VAT</term>
+    <listitem>
+      <para
+>Checked if a Category marked as a VAT Category</para>
+    </listitem>
+  </varlistentry>
+-->
+
+  <varlistentry>
+    <term
+>Saldo Total</term>
+    <listitem>
+      <para
+>O saldo actual da conta. Este valor estará em branco para as Categorias, a menos que a categoria esteja definida numa moeda estrangeira. Nesse caso, o Saldo Total irá mostrar o valor para a categoria na sua moeda definida.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Valor Total</term>
+    <listitem>
+      <para
+>O valor anual total no orçamento. Se uma categoria tiver sub-categorias, e se a lista das sub-categorias estiver fechada, o valor apresentado é o somatório dos valores para a conta e todas as suas sub-categorias. Se uma categoria estiver definida numa moeda estrangeira, o Valor Total irá mostrar o valor na moeda de base.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<!-- It would be nice to include the actual button icons here to confirm
+     which buttons are referred to.  -->
+<para
+>Por baixo da Lista de Contas existem várias opções. Os botões Reverter e Actualizar estão descritos mais em baixo. Os botões para fechar e expandir abrem ou fecham a lista inteira. </para>
+
+<para
+>A lista de contas poderá ser filtrada de duas. formas. Se assinalar a opção "Esconder as categorias não-usadas", irá esconder as categorias que não tenham valor atribuído à categoria ou a qualquer das suas sub-categorias. À direita desta, existe um campo de texto sem descrição. Só as categorias que incluírem o que for escrito neste campo é que aparecem, para além das suas categorias-mães. </para>
+
+<para
+>Lembre-se que a mudança da opção "Esconder as categorias de orçamentos não-usadas" ou o valor do filtro provavelmente irá alterar a visualização da lista de categorias. Poderá ter de expandir de novo a lista para ver todas as categorias que deverão aparecer com a configuração actual. </para>
+
+</sect2>
+
+<sect2>
+<title
+>Atribuições</title>
+
+<para
+>A área de Atribuições mostra os valores da categoria seleccionada na lista de contas. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Conta</term>
+    <listitem>
+      <para
+>Mostra o nome da categoria seleccionada. Se a categoria for uma sub-categoria, o nome completo da categoria seleccionada aparece no formato Categoria:Sub-Categoria.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Total</term>
+    <listitem>
+      <para
+>Mostra o valor anual total atribuído à categoria</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Incluir as sub-contas</term>
+    <listitem>
+      <para
+>Se esta opção estiver assinalada, os Relatórios mostram a receita ou despesa actual nas sub-categorias pertencentes à categoria, face à categoria em vez da sub-categoria.</para>
+
+      <para
+>Se uma sub-categoria tiver um valor definido no orçamento, a receita e a despesa são apresentadas face à sub-categoria.</para>
+
+      <para
+>Se a categoria seleccionada na Lista de Contas tiver as suas sub-categorias recolhidas, ainda que o Valor Total apresente a soma dos Valores Totais de todas as suas sub-categorias, os montantes na área de atribuições irá mostrar 0 à mesma, a menos que esta opção tenha sido assinalada ou tenha atribuído explicitamente um montante à categoria.</para>
+
+      <para
+>De um modo geral, ou irá assinalar esta opção e atribuir valores à categoria e não a nenhuma das suas sub-categorias, ou então não irá assinalar a mesma, atribuindo então valores às sub-categorias mas não à categoria em si. Se alguma sub-categoria tiver valores atribuídos com esta opção assinalada, então esses valores serão agregados à categoria.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Limpar</term>
+    <listitem>
+      <para
+>O botão Limpar repõe os valores orçamentados na categoria a zero.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Período</term>
+    <listitem>
+      <para
+>As opções exclusivas do Período permitem-lhe seleccionar o período onde se aplica o valor</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>Mensal</term>
+	  <listitem>
+	    <para
+>É introduzido um único valor, definindo o montante por mês. Esta é a configuração por omissão.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term
+>Anual</term>
+	  <listitem>
+	    <para
+>É introduzido um valor, definindo o montante por ano.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term
+>Individual</term>
+	  <listitem>
+	    <para
+>Os valores são definidos para cada mês do calendário. Isto é usado onde a despesa ou a receita estão dispostas de forma irregular ao longo do ano.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+
+      <para
+>Se um valor ou valores já estiverem definidos e o Período for alterado, o &kappname; irá perguntar se deseja usar o total anual actual, de modo a atribuir os valores novos. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Actualizar e Reverter</title>
+
+<para
+>Por razões de performance, as alterações feitas a um orçamento não são gravadas imediatamente. Em vez disso, terão primeiro de ser guardadas, usando o botão Actualizar e depois gravadas, de forma permanente, com a opção 'Gravar' do &kappname;. </para>
+
+<para
+>Quando os valores de um orçamento são modificados pela primeira vez, os botões Actualizar e Reverter estão activos. Poderá fazer várias alterações ao orçamento. Se carregar em Actualizar irá gravar as alterações e desactivar os botões Actualizar e Reverter. </para>
+
+<para
+>A opção 'Gravar' do &kappname; só grava as alterações que foram guardadas com o botão Actualizar. Deste modo, se tiver modificado um orçamento, mas ainda não tiver guardado as alterações, o Gravar do &kappname; não irá afectar o orçamento modificado e os botões Actualizar e Reverter irão continuar activos. </para>
+
+<para
+>O Reverter anula todas as alterações feitas a um orçamento, desde a última actualização, e desactiva os botões Actualizar e Reverter. </para>
+
+<para
+>As alterações gravadas com o Actualizar, mas que ainda não tenham sido gravadas com o 'Gravar' do &kappname; só poderão ser revertidas, carregando de novo o ficheiro do &kappname;. </para>
+</sect2>
+</sect1>
+
+<sect1 id="budget.details.reports">
+<title
+>Relatórios de Orçamentos</title>
+
+<para
+>O &kappname; oferece um conjunto de relatórios para comparar as receitas e despesas actuais, face a um dado orçamento. Estes são apresentados nos Relatórios em "Orçamentos". Existem dois tipos de relatórios: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Apenas orçamentos</term>
+    <listitem
+><para
+>Estes relatórios mostram alguns valores sobre um orçamento.</para>
+      <variablelist>
+        <varlistentry>
+          <term
+>Orçamento Mensal</term
+> 
+          <listitem
+><para
+>Mostra os valores mensais de um dado orçamento.</para>
+          </listitem
+></varlistentry>
+        <varlistentry>
+          <term
+>Orçamento Anual</term
+> 
+          <listitem
+><para
+>Mostra os valores mensais de um orçamento, com um total anual.</para>
+          </listitem
+></varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Orçamentado vs. Actual</term>
+    <listitem
+><para
+>Estes relatórios comparam os valores de um orçamento face à receita e despesa actual. Em cada relatório de orçamento, poderá encontrar as colunas de Orçamento, o Valor Actual e Diferença. Cada relatório difere no período em que é apresentado.</para>
+      <variablelist>
+      <varlistentry>
+      <term
+>Orçamento vs. Actual Este Ano</term
+> 
+      <listitem
+><para
+>Desde o início do ano até hoje</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Orçamento vs. Actual Este Ano (YTM)</term
+> 
+      <listitem
+><para
+>Desde o início do ano até ao último dia do mês anterior</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Orçamento Mensal contra Real</term
+> 
+      <listitem
+><para
+>Desde o início do ano até ao último dia do mês actual</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Orçamento Anual contra Real</term
+> 
+      <listitem
+><para
+>Desde o 1º de Janeiro até ao 31 de Dezembro</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Orçamentado vs. Actual Anual (Gráfico)</term
+> 
+      <listitem
+><para
+>Igual ao relatório anterior, se bem que mostra o gráfico por omissão</para>
+      </listitem
+></varlistentry>
+      </variablelist>
+
+      <para
+>Estes relatórios oferecem uma base a partir da qual poderá criar os relatórios personalizados, alterando o intervalo de datas e o orçamento, entre outras opções. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+</chapter>

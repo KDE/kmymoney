@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.reconcile">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+  </authorgroup>
+  <date
+>21/07/2010</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Reconciliação</title>
+
+<sect1 id="details.reconcile.whatis">
+<title
+>O que é reconciliação?</title>
+
+<para
+>A reconciliação, também chamada de consolidação, é o processo de correspondência das operações inseridas no &kappname; com as operações que constam em um extrato, seja ele um extrato bancário, de cartão de crédito, de empréstimo ou outro qualquer. Também poderá ser feita contra um extrato online, se bem que esta situação é menos comum. Se forem encontradas divergências, então você ou quem elaborou o extrato poderão ter cometido um erro. </para>
+
+<para
+>Para reconciliar uma conta, escolha-a na lista respectiva e clique no ícone <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="reconcile.png"/></imageobject
+></inlinemediaobject
+> Reconciliar as Listas de Registros</guiicon
+>, selecione a opção <menuchoice
+><guimenu
+>Conta</guimenu
+> <guimenuitem
+>Reconciliar...</guimenuitem
+></menuchoice
+> ou use a combinação de teclas <keycombo
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+>. </para>
+</sect1>
+
+<sect1 id="details.reconcile.wizard">
+<title
+>Assistente de Reconciliação</title>
+<para
+>O Assistente de Reconciliação será aberto, onde a primeira página descreve um breve resumo do procedimento que será realizado. Clique em <guibutton
+>Próximo</guibutton
+> para iniciar de fato o assistente. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Assistente de Reconciliação</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile1.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Assistente de Reconciliação</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.reconcile.wizard.statement">
+<title
+>Detalhes do extrato</title>
+<para
+>A data, o saldo inicial e o saldo final podem ser encontrados no seu extrato. Certifique-se de que os valores correspondem e clique no botão <guibutton
+>Próximo</guibutton
+>. Se os valores não estiverem corretos, então insira-os tal como constam no seu extrato e clique depois no botão <guibutton
+>Próximo</guibutton
+>. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Assistente de Reconciliação</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile2.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Assistente de Reconciliação</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect2>
+
+<sect2 id="details.reconcile.wizard.interest">
+<title
+>Juros</title>
+<para
+>Se a reconciliação for de uma conta bancária ou de qualquer outra conta com juros e/ou encargos, então insira esses valores nos campos necessários. Você poderá atribuir uma categoria para cada um desses valores. </para>
+
+<note>
+<para
+>O campo dos juros corresponde aos juros que ganhou. Se tiver que pagar juros para &eg; uma conta de cartão de crédito, estes terão que ser inseridos como encargo. </para>
+</note>
+
+<para>
+<screenshot>
+	<screeninfo
+>Assistente de Reconciliação</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile3.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Assistente de Reconciliação</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Clique em <guibutton
+>Continuar</guibutton
+> para começar a reconciliação do seu extrato com os dados inseridos. Lembre-se de que isso irá encerrar o Assistente de Reconciliação, mas não o processo em si. Isso também altera a visualização do livro de registro, que passa a exibir somente as operações que ainda não foram reconciliadas. Como descrito a seguir, você ainda deverá limpar as operações e depois informar ao &kappname; que a conta está reconciliada. </para>
+</sect2>
+
+<sect2 id="details.reconcile.wizard.clearing">
+<title
+>Limpar as transações</title>
+<para
+>Durante a reconciliação, qualquer operação poderá ser editada para fazê-la corresponder ao extrato, sendo possível criar novas operações, como de costume. Para marcar uma operação como verificada, clique na coluna <guilabel
+>C</guilabel
+> da lista. Uma transação torna-se verificada quando corresponder à operação no seu extrato. </para>
+
+<para
+>A área de comandos (logo abaixo da lista de transações) mostra o montante do extrato à esquerda, o montante consolidado ao centro e a diferença à direita. À medida que você marca as transações consolidadas, estes valores vão sendo atualizados para refletir a alteração. </para>
+
+<para
+>Observe, contudo, que uma vez que a reconciliação é o processo de correspondência dos dados da sua conta face a um extrato, serão salvas as alterações em qualquer transação com datas após a data do extrato que inseriu no assistente, mas isto não terá qualquer efeito no montante consolidado que aparece na área de comandos. </para>
+
+<screenshot>
+	<screeninfo
+>Assistente de Reconciliação</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile4.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Assistente de Reconciliação</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="details.reconcile.complete">
+<title
+>Concluir a reconciliação</title>
+
+<sect3 id="details.reconcile.finish">
+<title
+>Encerramento da reconciliação</title>
+<para
+>Quando a diferença entre o extrato e o saldo verificado for zero, então a conta está reconciliada e você poderá então clicar no botão <guibutton
+>Concluir</guibutton
+>. Quando fizer isso, o &kappname; pegará todas as operações que foram marcadas como limpas e então marcá-las como reconciliadas, sendo que o valor da coluna <guilabel
+>C</guilabel
+> será alterado de <quote
+>C</quote
+> para <quote
+>R</quote
+>, refletindo essa alteração. Além disso, ele salva as alterações e registra que a conta foi reconciliada. (Você ainda precisa salvar o arquivo para armazenar todas as alterações.) </para>
+</sect3>
+
+<sect3 id="details.reconcile.postpone">
+<title
+>Adiar a reconciliação</title>
+<para
+>Se você tiver problemas para completar a reconciliação, ou se precisar recolher algumas informações adicionais antes de completar o processo, poderá adiá-la para uma data posterior clicando no botão <guibutton
+>Adiar</guibutton
+>. Quando fizer isso, o &kappname; recupera os valores inseridos ao iniciar o assistente, não marca as transações validadas como reconciliadas e restaura o livro de registro ao seu modo de exibição normal. Se sair do &kappname; antes de clicar em <guibutton
+>Concluir</guibutton
+> ou <guibutton
+>Adiar</guibutton
+>, terá o mesmo efeito que clicar em <guibutton
+>Adiar</guibutton
+>. Todas as edições que tiver feito, como a marcação das transações consolidadas ou a inserção de transações novas, serão deixadas como tal, podendo ainda salvá-las antes de sair do &kappname;. Contudo, você deverá executar o assistente de reconciliação outra vez para reconciliar a conta. </para>
+
+<para
+>Na próxima vez que executar o assistente de reconciliação sobre esta conta, o &kappname; irá recuperar os valores inseridos quando executou anteriormente o assistente, mas é possível alterá-los, caso seja necessário. Nesse caso, a configuração inicial do assistente é diferente, de modo a lembrá-lo disso. </para>
+
+<screenshot>
+	<screeninfo
+>Assistente de Reconciliação</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile-redo.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Assistente de Reconciliação</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+
+</sect3>
+</sect2>
+</sect1>
+
+</chapter>
+

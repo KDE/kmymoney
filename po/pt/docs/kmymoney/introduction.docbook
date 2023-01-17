@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="introduction">
+<chapterinfo>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Introdução</title>
+
+<sect1 id="what-is-kmymoney">
+<title
+>O que é o &kappname;?</title>
+
+<para
+>De um modo simples, o &kappname; é um gestor de finanças pessoais feito pelo &kde;. Permite aos utilizadores dos sistemas operativos 'open-source' manterem um registo cuidadoso das suas finanças pessoais, oferecendo uma grande lista de funcionalidades e ferramentas financeiras. </para>
+
+<para
+>Os principais objectivos do projecto são: </para>
+
+<itemizedlist>
+  <listitem>
+    <formalpara
+><title
+>Acompanhamento de Funcionalidades</title>
+      <para
+>O &kappname; pretende oferecer todas as funcionalidades existentes nos gestores de finanças pessoais disponíveis a nível comercial. Ainda que esta versão esteja mais próxima que nunca desse objectivo, ainda há muito trabalho pela frente. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara
+><title
+>Facilidade de Utilização.</title>
+      <para
+>O &kappname; tenta ser o gestor de finanças pessoais 'open-source' mais simples de usar, especialmente para os utilizadores não-técnicos. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara
+><title
+>Correcção.</title>
+      <para
+>Baseando-se em princípios de contabilidade testados de forma extensa, o &kappname; garante que as suas finanças são mantidas na ordem correcta. </para>
+    </formalpara>
+  </listitem>
+</itemizedlist>
+
+</sect1>
+
+<sect1 id="what-kmymoney-is-not">
+<title
+>O que o &kappname; não é</title>
+
+<para
+>Como um gestor de finanças pessoais, o &kappname; não pretende aumentar a sua escala para as necessidades de um negócio de média escala. Um pequeno negócio poderá achar suficiente a funcionalidade do &kappname; e não necessitar do suporte directo de créditos e débitos. Contudo, seria possível criar funcionalidades de clientes / fornecedores / documentos, usando para tal 'plugins'. </para>
+
+<para
+>O &kappname; não é apenas uma cópia dos programas de finanças pessoais comerciais. ainda que muitas das funcionalidades presentes no &kappname; possam existir também nas outras aplicações do género, o &kappname; tenta apresentar uma visão individual e única das suas finanças. </para>
+
+</sect1>
+</chapter>

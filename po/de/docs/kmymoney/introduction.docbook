@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="introduction">
+<chapterinfo>
+  <date
+>2018-01-13</date>
+  <releaseinfo
+>5.0.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Einführung</title>
+
+<sect1 id="what-is-kmymoney">
+<title
+>Was ist &kmymoney;?</title>
+
+<para
+>&kmymoney; ist ein persönliches Finanzverwaltungsprogramm von &kde;. Es ermöglicht es Benutzern von quelloffenen Betriebssystemen und Programmen, Ihre persönlichen Finanzen zu verwalten, indem es eine große Anzahl an Finanzfunktionen und Hilfsmitteln dafür bereitstellt. </para>
+
+<para
+>Die wichtigsten Ziele des Projekts sind: </para>
+
+<itemizedlist>
+  <listitem>
+    <formalpara
+><title
+>Gleichwertige Funktionalität</title>
+      <para
+>&kmymoney; will alle wichtigen Finanzfunktionen bereitstellen, die in kommerziellen Finanzverwaltungsprogrammen für den privaten Bereich enthalten sind. &kmymoney; nähert sich mit jeder neuen Version diesem Ziel, es fehlen aber immer noch einige Funktionen. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara
+><title
+>Benutzerfreundlich</title>
+      <para
+>&kmymoney; soll das am einfachsten zu bedienende Finanzverwaltungsprogramm werden, vor allem für unerfahrene Benutzer. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara
+><title
+>Fehlerfreiheit</title>
+      <para
+>Auf der Grundlage von getesteten und überprüften Prinzipien der doppelten Buchführung stellt &kmymoney; sicher, dass Ihre Finanzdaten korrekt verarbeitet und verwaltet werden. </para>
+    </formalpara>
+  </listitem>
+</itemizedlist>
+
+</sect1>
+
+<sect1 id="what-kmymoney-is-not">
+<title
+>Was &kmymoney; nicht ist</title>
+
+<para
+>Als Finanzverwaltungsprogramm für den persönlichen Bereich ist &kmymoney; nicht für die Erfordernisse eines normalen Unternehmens geeignet. Für kleine Unternehmen bietet es möglicherweise ausreichende Funktionen, aber zum Beispiel Debitoren- und Kreditorenkonten werden nicht direkt unterstützt. Es ist jedoch möglich, diese Funktionen für Kunden, Lieferanten und Belege usw. durch Module bereitzustellen. </para>
+
+<para
+>&kmymoney; ist nicht einfach nur eine Kopie von kommerziell verfügbaren Finanzprogrammen für den persönlichen Bereich. Obwohl viele Funktionen von &kmymoney; auch in ähnlichen Programmen zu finden sind, soll &kmymoney; Ihnen eine individuelle und einzigartige Sicht auf Ihre Finanzen ermöglichen. </para>
+
+</sect1>
+</chapter>

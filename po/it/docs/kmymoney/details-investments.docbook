@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.investments">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>30/12/2019</date>
+  <releaseinfo
+>5.0.7</releaseinfo>
+</chapterinfo>
+
+<title
+>Investimenti</title>
+
+<sect1 id="details.investments.overview">
+<title
+>Investimenti in &kmymoney;</title>
+
+<sect2>
+<title
+>Investimenti</title>
+
+<para
+>In termini molto generali, un investimento è una qualsiasi allocazione di denaro con l'aspettativa di un beneficio futuro. I conti di investimento di &kmymoney; sono progettati per un tipo particolare di investimento: gli strumenti finanziari. Uno strumento finanziario è uno strumento per investire denaro che è scambiato su un mercato con l'intenzione di ritorno profittevole nella forma di apprezzamento del valore, o entrata come interessi o dividendi. Le azioni e i fondi comuni sono gli strumenti finanziari più comuni, e sono quelli specificatamente supportati da &kmymoney;. Le obbligazioni hanno una struttura finanziaria diversa, ma normalmente possono essere da &kmymoney;. I future, le materie prime, le opzioni e altri strumenti di investimento complessi come i derivati sono altri tipi di investimento, ma &kmymoney; non ha funzionalità speciali per essi. Fino a quando un investimento ha caratteristiche simili alle azioni o ai fondi comuni, può essere tracciato. </para>
+</sect2>
+
+<sect2>
+<title
+>Valuta di base</title>
+<para
+>Ogni investimento ha una valuta di base. Questa è la valuta utilizzata per scambiarlo. Quando viene inserita una quotazione di un investimento, la valuta utilizzata è sempre quella di base. Un'azione del NYSE (New York Stock Exchange) sarà in dollari americani, mentre una del mercato australiano sarà in dollari australiani (AUD). La valuta base per uno strumento finanziario non deve essere la stessa della valuta predefinita per il conto di investimento che contiene lo strumento finanziario. </para>
+</sect2>
+
+<sect2 id="details.investments.accounts">
+<title
+>Conti di tipo Investimento</title>
+<para
+>Un conto di investimento contiene un insieme di strumenti finanziari. Un conto di investimento contiene transazioni, attività di registrazione come acquisti, vendite, dividendi, re-investimenti, rendimenti, suddivisioni e entrate di questi investimenti. Ogni transazione di un conto di investimento deve riferirsi a uno specifico strumento finanziario. </para>
+
+<para
+>È normale per un conto di un istituto di intermediazione contenere sia strumenti finanziari che contante. In &kmymoney;, un conto di investimento contiene <emphasis
+>solo</emphasis
+> strumenti finanziari. Non può contenere contanti. Questa è stata una decisione progettuale quando i conti di investimento sono stati inclusi in &kmymoney;, e potrebbe cambiare in una versione futura. Per ora, qualsiasi contante necessario per acquistare uno strumento finanziario o guadagnato da una transazione di vendita o dividendo richiede l'utilizzo di un conto di intermediazione. </para>
+</sect2>
+
+<sect2 id="details.investments.brokerage">
+<title
+>Conti di intermediazione</title>
+<para
+>Quando una transazione di investimento utilizza (per comprare uno strumento finanziario) o produce (per una vendita o dividendo) contante, tale transazione deve riferirsi a un altro conto che può contenere il denaro, comunemente un conto corrente. È possibile specificare qualsiasi conto appropriato per una transazione di investimento che ne richiede uno. Tuttavia, &kmymoney; ha il concetto di <emphasis
+>Conto di intermediazione</emphasis
+>, a volte indicato come <quote
+>Conto di cassa</quote
+>, che è il conto predefinito per questo tipo di transazioni. </para>
+
+<para
+>Quando si crea un conto di investimento, viene offerta la possibilità di creare un conto di intermediazione associato. Il nome predefinito per il contro di intermediazione sarà il nome del conto d'intermediazione con l'aggiunta di «(Intermediazione)». </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.investment">
+<title
+>Creazione di un conto di investimento</title>
+
+<para
+>Il primo passo per lavorare con gli investimenti è creare un conto per contenere gli strumenti finanziari definiti. Scegliere la voce di menu <menuchoice
+><guimenu
+>Conto</guimenu
+> <guimenuitem
+>Nuovo conto...</guimenuitem
+></menuchoice
+> per iniziare il processo. Creare un conto come definito in precedenza nella sezione di aggiunta <menuchoice
+><guimenu
+>Conto</guimenu
+></menuchoice
+>, assicurandosi di selezionare <quote
+>Investimento</quote
+> come tipo del conto. </para>
+
+<para
+>Per gestire il nuovo conto di investimento, andare nella vista <guibutton
+>Investimenti</guibutton
+> e selezionare il conto appena creato nel menu a discesa <guilabel
+>Seleziona conto</guilabel
+>. </para>
+</sect1>
+
+<sect1 id="details.investments.securities">
+<title
+>Aggiunta di investimenti al conto</title>
+
+<para
+>Per aggiungere singoli strumenti finanziari al conto di investimento, andare nella vista <guibutton
+>Investimenti</guibutton
+>, selezionare la scheda <guibutton
+>Patrimonio</guibutton
+>, scegliere il conto d'investimento che contiene l'investimento dal menu a discesa <guilabel
+>Seleziona conto</guilabel
+>. <screenshot>
+  <screeninfo
+>Vista Investimenti, scheda Patrimonio</screeninfo>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="investments_summarytab.png" format="PNG"/>
+  </imageobject>
+  <textobject>
+  <phrase
+>Vista Investimenti, scheda Patrimonio</phrase>
+  </textobject>
+  </mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Fai clic con il tasto destro del mouse nello spazio vuoto della vista. Verrà visualizzato il menu contestuale <guimenu
+>Opzioni investimento</guimenu
+>. Seleziona <guimenuitem
+>Nuovo investimento...</guimenuitem
+>. Verrà avviata la <guilabel
+>Procedura guidata di creazione di un nuovo investimento</guilabel
+>, che userai per creare il tuo nuovo investimento. </para>
+
+<sect2 id="details.investments.newinvestmentwizard">
+<title
+>Procedura guidata di creazione di un nuovo investimento</title>
+
+<para
+>La prima cosa richiesta è di inserire il tipo di investimento, sia esso un'azione, un obbligazione, &etc;. </para>
+
+<para
+>Poi viene visualizzata la pagina dei dettagli dell'investimento, con le seguenti informazioni: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Simbolo di scambio. Il simbolo usato per identificare uno strumento finanziario scambiato pubblicamente nel mercato in cui è quotato. &kmymoney; richiede il simbolo di scambio per tutti gli strumenti finanziari, anche se alcuni non hanno un simbolo associato. In questi casi, è necessario crearne uno. </para
+></listitem>
+
+  <listitem
+><para
+>Nome completo. Il nome descrittivo, leggibile dell'investimento che si sta creando, per esempio <quote
+>Advanced Micro Devices, Inc.</quote
+>. Questo nome viene chiamato anche nome del titolo. </para
+></listitem>
+
+  <listitem
+><para
+>Frazione. Indica il grado di precisione usato nella misurazione delle proprie quote. Ad esempio, negli Stati Uniti la maggior parte dei fondi comuni misurano le quote con tre cifre decimali, quindi si dovrebbe inserire 1000 in questo campo. Le azioni sono spesso misurate come unità intere, quindi si dovrebbe inserire 1 in questo caso. È consigliabile riflettere le stesse posizioni decimali utilizzate dalla propria società di intermediazione per registrare i propri strumenti finanziari in modo che gli importi delle transazioni corrispondano in &kmymoney;. L'utilizzo di una precisione aggiuntiva non causerà problemi, ma l'utilizzo di una precisione troppo piccola può causare errori di arrotondamento che possono rendere &kmymoney; incapace di verificare esattamente le informazioni mostrate dal proprio istituto di intermediazione. </para
+></listitem>
+  
+  <listitem
+><para
+>Mercato di scambio. Il mercato in cui il titolo è quotato. È un campo facoltativo, fornito per comodità. Questa informazione non viene usata in altre parti di &kmymoney;. </para
+></listitem>
+
+  <listitem
+><para
+>Identificativo. Un campo facoltativo per l'inserimento di informazioni aggiuntive che si vogliono memorizzare. Anche queste informazioni non sono utilizzate altrove. </para
+></listitem>
+
+  <listitem
+><para
+>Negoziazione di valute. La valuta di scambio del mercato nel quale questo investimento viene negoziato. Questo è solitamente il mercato nazionale in cui lo strumento finanziario è negoziato. Generalmente, ma non necessariamente, la stessa della valuta predefinita per il conto di investimento al quale si riferisce tale strumento finanziario. </para
+></listitem>
+
+  <listitem
+><para
+>Prezzo di entrata. Scegliere se il prezzo sarà inserito come prezzo di ogni quota o come totale di tutte le quote quando si inserisce una transazione. </para
+></listitem>
+</itemizedlist>
+
+<para
+>Se si usano le quotazioni in linea, assicurarsi che il simbolo corrisponda esattamente a quello usato nella propria sorgente delle quotazioni. Yahoo copre la maggior parte dei mercati mondiali, e richiede un suffisso alla fine del simbolo, se il mercato di scambio non è negli Stati Uniti, per specificare la nazione o il mercato. Ad esempio, il titolo Rubicon Limited del mercato della Nuova Zelanda deve essere inserito come <quote
+>RBC.NZ</quote
+>. </para>
+
+<para
+>Infine, viene visualizzata la schermata di aggiornamento in linea. Qui si indica a &kmymoney; come aggiornare le quotazioni dell'investimento. Vengono impostati i seguenti campi: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Usa Finance::Quote. Questa è un'opzione per gli utenti di &gnucash; che sono abituati a questo stile di quotazioni. La maggior parte degli utenti possono lasciare questa casella deselezionata. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Fonte in linea. La fonte da utilizzare per questo investimento. La scelta più comune è <quote
+>Yahoo</quote
+>. Se l'investimento non viene trovato, provare un'altra fonte. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Fattore. Un fattore da applicare alle quotazioni di questo investimento. Questa impostazione viene usata spesso per i titoli inglesi, dove le quotazioni sono in pence (centesimi), mentre il titolo è in sterline. In questo caso, inserire il fattore 0,01. </para>
+  </listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="details.investments.reuse">
+  <title
+>Utilizzare uno strumento finanziario in più di un conto di investimento</title>
+
+<note>
+  <para
+>Questa sezione è stata aggiunta appena in tempo per il rilascio della versione 5.0.8. L'autore l'ha ritenuta importante per includere almeno per ora le informazioni di base, poiché questo argomento è stato fonte di difficoltà per diverso tempo. La discussione sarà ampliata e schermate della procedura guidata per gli strumenti finanziari saranno aggiunte appena possibile. </para>
+</note>
+      
+<para
+>È possibile possedere quote dello stesso strumento finanziario in diversi conti di investimento, come un normale conto di investimento e anche un conto pensione. Se si seguono le istruzioni descritte in precedenza, tale strumento finanziario sarà mostrato in entrambi i conti, ma &kmymoney; li tratterà effettivamente come se ogni strumento sia un titolo sottostante diverso. Questo risulta in una registrazione duplicata, come avere due copie dell'intero storico dei prezzi del titolo. Perciò, potrebbe essere preferibile che entrambi gli strumenti finanziari si riferiscano allo stesso titolo sottostante. </para>
+
+<para
+>Quando si aggiunge uno strumento finanziario a un conto di investimento, e tale strumento esiste già in un altro conto di investimento, è necessario fare attenzione se si desidera riutilizzarlo anziché crearne uno strumento finanziario nuovo e duplicato. Quando si vede la <guilabel
+>Procedura guidata per i nuovi investimenti</guilabel
+>, dopo aver selezionato il tipo di investimento e fatto clic su <guibutton
+>Avanti</guibutton
+>, è necessario assicurarsi che il campo <guilabel
+>Nome completo</guilabel
+> sia vuoto prima di digitare il <guilabel
+>Simbolo di scambio</guilabel
+>. Quando si preme <keycap
+>Tab</keycap
+>, se &kmymoney; ha già uno strumento finanziario che utilizza quel simbolo, chiederà se si desidera riutilizzarlo. Se si fa clic su <guibutton
+>Sì</guibutton
+>, compilerà i campi restanti, e basterà solo fare clic su <guibutton
+>Avanti</guibutton
+>. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.edit">
+<title
+>Modifica di un investimento</title>
+
+<para
+>La scheda <guilabel
+>Patrimonio</guilabel
+> della finestra della vista Investimenti elenca i titoli attuali detenuti in questo conto, con il rispettivo simbolo, valore, quantità e prezzo. Fare clic con il tasto destro del mouse su uno degli investimenti per aprire il menu contestuale <guimenu
+>Opzioni investimento</guimenu
+>, che permette di aggiungere, modificare o eliminare i singoli investimenti di questo conto. Inoltre, qui è possibile aggiornare le i prezzi degli investimenti, manualmente o usando una fonte in linea. È anche possibile chiudere un conto vuoto o riaprire un conto chiuso. L'ordine per valore, quantità e prezzo può essere cambiato sullo schermo selezionando uno di questi facendo clic con il tasto sinistro sull'elemento nella barra in alto e trascinandolo a sinistra o a destra. </para>
+<para
+>Se si sceglie di modificare un investimento, si utilizzerà la <guilabel
+>Procedura guidata per i dettagli dell'investimento</guilabel
+>, che assomiglia e funziona proprio come la <guilabel
+>Procedura guidata per i nuovi investimenti</guilabel
+>, come descritto nella sezione precedente. </para>
+</sect1>
+
+<sect1 id="details.investments.ledger">
+<title
+>Transazioni di tipo investimento</title>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Modulo delle transazioni degli investimenti</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Modulo delle transazioni degli investimenti</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Le transazioni degli investimenti vengono inserite e modificate nella vista <link linkend="details.ledgers"
+>Registro</link
+>, come per gli altri tipi di conti. Tuttavia, i campi sono diversi e variano in base al tipo di transazione o attività. Le transazioni degli investimenti hanno alcuni campi aggiuntivi: </para>
+
+<itemizedlist>
+	<listitem
+><para
+>Attività</para
+></listitem>
+	<listitem
+><para
+>Strumenti finanziari</para
+></listitem>
+	<listitem
+><para
+>Conto</para
+></listitem>
+	<listitem
+><para
+>Quote, prezzo e totale</para
+></listitem>
+	<listitem
+><para
+>Tasse</para
+></listitem>
+	<listitem
+><para
+>Interesse</para
+></listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Attività</title>
+<para
+>L'Attività di una transazione di investimento descrive l'azione compiuta sullo strumento finanziario. Sono supportate le seguenti attività: </para>
+
+<variablelist>
+  <varlistentry>
+  <term
+>Compra/Vendi</term>
+  <listitem>
+    <para
+>Usate per registrare l'acquisto o la vendita di singoli strumenti finanziari. Questa azione richiede un conto da cui o a cui trasferire il denaro, che si riferisce in modo predefinito al conto di intermediazione, se ne è stato creato uno. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Dividendo/Prodotto</term>
+  <listitem>
+    <para
+>Conosciuta anche come <quote
+>Dividendo in contanti</quote
+>, questa azione è utilizzata quando si riceve il pagamento di un interesse o di un dividendo dal proprio strumento finanziario. Questa azione richiede inoltre un conto a cui trasferire il denaro. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Reinvesti dividendo</term>
+  <listitem>
+    <para
+>Dividendo reinvestito. Questo è un dividendo il cui ricavato è utilizzato per acquistare quote aggiuntive dello strumento finanziario. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Aggiungi/Rimuovi quote</term>
+  <listitem>
+    <para
+>Un semplice aumento o riduzione nel numero delle quote che si possiedono. Questo dovrebbe essere utilizzato molto raramente, poiché è difficile che le azioni appaiano nel tuo conto (o scompaiano) a meno che sia un acquisto o una vendita. Un uso di queste attività per alcune situazioni che &kmymoney; non gestisce nativamente, come lo scambio di un numero di quote di uno strumento finanziario per un numero diverso di quote di una classe differente dello stesso strumento finanziario. </para>
+  </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+>Dividi quote</term>
+  <listitem>
+    <para
+>Utilizzato quando la quota viene divisa. Inserire il rapporto della divisione nel campo <quote
+>Rapporto</quote
+>. Ad esempio, per una divisione 3:2, inserire 1,5. Le divisioni inverse, dove il rapporto è inferiore a 1, come 2:3, nonostante non siano comuni, sono consentite </para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Strumenti finanziari</title>
+<para
+>Ogni transazione di investimento deve essere associata a un singolo strumento finanziario. Scegliere il nome dello strumento finanziario quando si aggiunge o modifica una transazione. Quando la si visualizza, sarà visualizzato il simbolo. </para>
+</sect2>
+
+<sect2>
+<title
+>Conto</title>
+<para
+>È necessario inserire il conto da cui si preleva o su cui si deposita il denaro, per le transazioni che generano o richiedono denaro. Se il conto di investimento ha un conto di intermediazione associato, di solito è meglio trasferire lì i fondi. Questo si applica sia ai fondi per gli acquisti e le vendite dello strumento finanziario, sia alle tasse pagate, agli interessi e ai dividendi guadagnati. </para>
+</sect2>
+
+<sect2>
+<title
+>Quote, prezzo e totale</title>
+<para
+>Per le transazioni di acquisto, vendita e di re-investimento, bisogna stabilire il numero di quote, il prezzo per quota e l'importo della transazione. Basta inserire due di questi dati e &kmymoney; calcolerà automaticamente il terzo. Spesso è meglio inserire l'importo e il numero di quote, perché questi sono i dati conosciuti della transazione. &kmymoney; calcolerà automaticamente il prezzo per quota. Notare che c'è solo un campo per l'inserimento del prezzo, e sarà etichettato come <quote
+>Importo della transazione</quote
+>o <quote
+>Prezzo/quota</quote
+> in base all'impostazione dell'opzione <guilabel
+>Prezzo di entrata</guilabel
+> al momento della <link linkend="details.investments.newinvestmentwizard"
+>configurazione</link
+> del conto. </para>
+</sect2>
+
+<sect2>
+<title
+>Commissioni</title>
+<para
+>Con diverse transazioni di investimento è possibile includere le commissioni pagate all'agente. Se si inserisce una categoria per la commissione, verrà visualizzato un campo sulla destra che permette di inserire l'importo. Se è necessario inserire più di una commissione per la stessa transazione è possibile usare la funzione <link linkend="details.ledgers.split"
+>Dividi transazione</link
+>. In questo caso, quando si completa l'inserimento delle suddivisioni, viene visualizzato sulla destra il totale delle commissioni. </para>
+</sect2>
+
+<sect2>
+<title
+>Interessi</title>
+<para
+>Questo è come si inserisce il pagamento di un interesse o di un dividendo di un strumento finanziario. Come per le commissioni, quando si inserisce una categoria sarà visualizzato un campo sulla destra, in cui si può inserire l'importo. È anche possibile utilizzare la funzione di divisione delle transazioni, se necessario. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.foreign">
+<title
+>Gestione degli investimenti esteri</title>
+
+<para
+>&kmymoney; supporta più valute e strumenti finanziari, e si potrebbe voler combinare le due cose. Comunque, ciò richiede più attenzione per assicurare registrazioni accurate. Come evidenziato sopra, all'aggiunta di uno strumento finanziario, si deve specificare la sua valuta di scambio. Questa valuta potrebbe essere diversa dalla valuta base del proprio file di &kmymoney;, e potrebbe anche essere diversa da quella del conto di investimento nel quale si tengono le azioni o del conto usato per trasferire i fondi necessari all'acquisto o provenienti dalla vendita. </para>
+
+<para
+>Consideriamo un caso ipotetico, la valuta di base è il dollaro americano (USD) e il conto dell'investimento e quello di intermediazione sono in euro (EUR). In quel conto di investimento, si tengono delle quote di TietoEnator, scambiate in corone svedesi (SEK). </para>
+
+<para
+>Quando si inserisce una transazione di acquisto per questo investimento, si usa SEK come valuta. Quindi, se si comprano 100 quote al prezzo di 248,00 SEK, per un totale di 24.800,00 SEK, bisogna inserire questi valori nella transazione. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Avvertimento della valuta</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-currencywarning.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Avvertimento della valuta</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Quando si sceglie il conto di intermediazione da cui prendere i fondi per la transazione, si verrà avvertiti che usa una valuta diversa. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Editor dei tassi di cambio</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-exchangerateeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Editor dei tassi di cambio</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Quando si finisce di inserire la transazione, sarà richiesto l'aggiornamento del tasso di cambio tra le due valute (in questo caso, SEK -> EUR). Vedere la documentazione sull'<link linkend="details.currencies.prices"
+>Inserimento manuale dei prezzi</link
+> per maggiori informazioni sulla finestra dei prezzi. </para>
+
+<para
+>Se si passa al conto di intermediazione, si vedrà la transazione come 2.254,54 EUR, assumendo che il tasso di cambio sia 11,0000 SEK / EUR. </para>
+</sect1>
+
+<sect1 id="details.investments.prices">
+<title
+>Aggiornamento dei prezzi</title>
+
+<para
+>Ci sono due modi di aggiornare i prezzi per i tuoi investimenti: è possibile inserire manualmente il nuovo prezzo o lasciare che &kmymoney; lo recuperi dal web. </para>
+
+<sect2>
+<title
+>Aggiornamenti manuali dei prezzi</title>
+
+<para
+>Per inserire i prezzi per gli investimenti si può usare lo stesso <link linkend="details.currencies.prices"
+>Editor dei prezzi</link
+> usato per le valute. </para>
+</sect2>
+
+<sect2 id="details.investments.onlinequotes">
+<title
+>Quotazioni in linea</title>
+<para
+>&kmymoney; può scaricare dal web gli ultimi prezzi per gli strumenti finanziari e per le valute. </para>
+
+<sect3>
+<title
+>Funzionamento delle quotazioni in linea</title>
+<para
+>Se lo si desidera, &kmymoney; scaricherà dal web una pagina che contiene le ultime quotazioni per ogni strumento finanziario. In modo predefinito, vengono prese le quotazioni da <ulink url="https://finance.yahoo.com"
+>finance.yahoo.com</ulink
+>, e sono soggette ai termini d'uso del sito. </para>
+
+<para
+>La ricerca di quotazioni in linea usa il simbolo di scambio dello strumento finanziario per trovare la quotazione. Quindi, è importante che il simbolo sia corretto. Yahoo supporta i titoli quotati nella maggior parte dei mercati mondiali, quindi spesso basta cercare il simbolo giusto. Ad esempio, TietoEnator è quotato nel mercato azionario di Stoccolma, e il suo simbolo su Yahoo è TIEN.ST. </para>
+
+<para
+>Per trovare il simbolo di scambio di Yahoo associato a uno strumento finanziario, utilizzare la funzione <quote
+>Symbol Lookup</quote
+> disponibile sul sito <ulink url="https://finance.yahoo.com"
+>finance.yahoo.com</ulink
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Impostazione di una sorgente delle quotazioni</title>
+
+<para
+>Per ottenere le quotazioni in linea, bisogna prima abilitarle per ogni strumento finanziario o valuta che si desideri aggiornare, impostando una <quote
+>Sorgente delle quotazioni in linea</quote
+>. Questa sorgente è il nome del servizio da cui recuperare le quotazioni. &kmymoney; supporta diversi servizi, tra cui si può scegliere. Yahoo è quello predefinito e dovrebbe andar bene per la maggior parte degli investimenti e per tutte le valute. </para>
+
+<para
+>Per assegnare una sorgente delle quotazioni in linea a un investimento, bisogna visualizzare il conto a cui appartiene lo strumento finanziario nella vista di riepilogo degli investimenti. Modificare lo strumento finanziario facendo clic con il tasto destro del mouse e selezionando <guimenuitem
+>Modifica investimento...</guimenuitem
+>. Nella procedura guidata, fare clic due volte su <guibutton
+>Successivo</guibutton
+>, arrivando nella sezione Aggiornamento in linea. Nel menu a tendina Fonte in linea, selezionare la fonte desiderata. </para>
+
+<para
+>Dalla versione 0.9, &kmymoney; supporta il pacchetto Finance::Quote per ottenere le quotazioni in linea. Questa funzione serve principalmente agli utenti che prima usavano &gnucash;, perché in quel programma Finance::Quote è il metodo nativo. Se si seleziona questa opzione si dovrebbe vedere un elenco diverso di fonti, quelle supportate appunto da Finance::Quote. Se l'elenco è vuoto, probabilmente il pacchetto non è installato correttamente. Vedere il sito web di Finance::Quote: <ulink url="http://finance-quote.sourceforge.net"
+>http://finance-quote.sourceforge.net</ulink
+> per ulteriori informazioni. </para>
+</sect3>
+
+<sect3>
+<title
+>Correggere una quotazione</title>
+
+<para
+>Alcune sorgenti in linea non forniscono la quotazione in una valuta base (come EUR), ma in un sottomultiplo (come i centesimi). Se si usa come prezzo questa informazione si otterranno valori errati per i propri investimenti. </para>
+
+<para
+>Se si è in questa situazione, si può usare il campo <guilabel
+>Fattore</guilabel
+> per inserire un fattore di correzione. Nell'esempio sopra si dovrebbe inserire 0,01. </para>
+
+<para
+>Il campo <guilabel
+>Fattore</guilabel
+> viene abilitato solo dopo aver selezionato una <guibutton
+>Fonte in linea</guibutton
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Scaricamento delle quotazioni</title>
+
+<para
+>Tipicamente, si aggiorneranno i prezzi di tutti gli strumenti finanziari e delle valute in una singola operazione. Scegliere la voce di menu <menuchoice
+><guimenu
+>Strumenti</guimenu
+><guimenuitem
+>Aggiorna prezzi di titoli e valute...</guimenuitem
+></menuchoice
+> per aprire la finestra delle quotazioni in linea dei prezzi. Premere il pulsante <guibutton
+>Aggiorna tutti</guibutton
+> per recuperare i prezzi di tutti gli strumenti finanziari e delle valute nel tuo file di &kmymoney;. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Aggiorna i prezzi di titoli e valute</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="investment-onlineupdate.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Aggiornamento in linea delle quotazioni dei titoli e delle valute</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect3>
+
+<sect3>
+<title
+>Aggiunta e modifica delle sorgenti delle quotazioni</title>
+
+<para
+>L'aggiunta o la modifica delle fonti di quotazioni non è consigliata, tranne agli utenti più esperti. Per usarla, si dovrebbe essere a proprio agio nella lettura dell'HTML e nella scrittura di espressioni regolari complesse. Altrimenti, è meglio scrivere alla mailing-list degli sviluppatori se non si trova una sorgente delle quotazioni per i propri titoli. È meglio indicare nel messaggio una pagina web da cui è possibile ottenere queste quotazioni. Inoltre, è possibile consultare i membri del forum della comunità di KDE di &kmymoney; poiché potrebbero già avere una soluzione disponibile per le proprie esigenze. </para>
+
+<para
+>Se ci si sente pronti per la sfida, ecco come funziona. Le fonti delle quotazioni sono contenute nella finestra delle impostazioni. Scegliere la voce di menu <menuchoice
+><guimenu
+>Impostazioni</guimenu
+><guimenuitem
+>Configura &kmymoney;</guimenuitem
+></menuchoice
+>. Da qui, scegliere la sezione <guilabel
+>Quotazioni in linea</guilabel
+>. È possibile scegliere una fonte esistente da modificare, o crearne una nuova. Una volta completate le modifiche, premere il pulsante <guibutton
+>Aggiorna</guibutton
+> prima di chiudere la finestra. Le modifiche non sono salvate in modo predefinito. </para>
+
+<para
+>La prima cosa da considerare è l'URL della pagina con le quotazioni in lineare. Questa è la pagina che viene scaricata dal web. In tutte le sorgenti si vede la sequenza «%1» e nelle sorgenti che offrono le quotazioni delle valute si vede «%2». Per gli investimenti, «%1» viene sostituito dal simbolo di scambio. Per le valute, «%1»con la valuta di origine e «%2» con quella di destinazione. Viene quindi recuperata la pagina, rimossi i tag HTML (facoltativamente) e inviato questo file al parser della pagina. </para>
+
+<para
+>Notare che l'URL può anche essere «file: URL» e in questo caso viene trattato come uno script eseguibile. Verranno passati i parametri specificati sulla riga di comando e inviato lo stdout al parser. Ad esempio, si può avere uno script chiamato ottieni_quot.sh che contiene il codice necessario a prelevare la quotazione e prende come unico parametro il simbolo. In questo caso l'URL sarebbe «file:/percorso/a/ottieni_quot.sh %1». </para>
+
+<para
+>L'analizzatore della pagina cerca un simbolo, una data e un prezzo. Queste informazioni vengono estratte dalla pagina usando delle espressioni regolari. Vedere la documentazione della <ulink url="https://doc.qt.io/qt-5/qregexp.html"
+>Classe QRegExp</ulink
+> per conoscere la sintassi delle espressioni regolari utilizzate da &kmymoney;. Ci deve essere solo una espressione di cattura, fra parentesi, in ogni espressione regolare. Il formato della data indica all'analizzatore l'ordine di anno, mese e giorno. Questo formato della data deve essere sempre nella forma «%x %x %x», con x sostituito da «y», «m» o «d». L'analizzatore delle date è molto intelligente. <quote
+>%m %d %y</quote
+> corrisponderà sia a <quote
+>Dicembre 31, 2005</quote
+> sia a <quote
+>12/31/05</quote
+>. Gli anni di due cifre sono interpretati come appartenenti all'intervallo 1950-2049. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.unimplemented">
+<title
+>Funzionalità non implementate</title>
+
+<para
+>Ci sono alcune funzionalità che sono normalmente associate agli investimenti che non sono ancora state implementate in &kmymoney;. Queste includono, ma non sono limitate a derivati, opzioni e future. In aggiunta, quando si vende uno strumento finanziario, &kmymoney; non sa quali quote specifiche si stiano vendendo, &ie; le più vecchie o quelle acquistate più di recente, per cui non può calcolare il ritorno sull'investimento. Infine, non ha conoscenza diretta degli obblighi fiscali di ogni nazione, ma ciò può essere normalmente gestito marcando come relative alla tassazione tutte le categorie che si utilizzano per le transazioni che potrebbero avere conseguenze fiscali. </para>
+</sect1>
+</chapter>

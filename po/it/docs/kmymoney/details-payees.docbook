@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.payees">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+  </authorgroup>
+  <date
+>24/06/2019</date>
+  <releaseinfo
+>5.0.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Beneficiari</title>
+
+<para
+>La vista dei beneficiari fornisce informazioni dettagliate su tutti i beneficiari e paganti coinvolti in questa transazione. Queste sono le entità alle quali e dalle quali si trasferisce il denaro. &kmymoney; memorizza le informazioni su tutti i beneficiari e paganti da tutte le transazioni esistenti. Questo rende possibile selezionare un beneficiario da un elenco invece di dover digitare il nome completo, riducendo anche la possibilità di errori di digitazione dei nomi. </para>
+
+<para
+>La vista dei beneficiari è divisa in due aree principali: un elenco di beneficiari e paganti sulla sinistra, e un'area dei dettagli sulla destra. La sezione <guilabel
+>I tuoi beneficiari</guilabel
+> consente di aggiungere, eliminare, rinominare e unire i beneficiari. L'area dei dettagli ha diverse schede, che mostrano le transazioni, l'indirizzo, le informazioni corrispondenti, la categoria predefinita e i numeri di conto dei beneficiari selezionati nell'elenco. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payeeview.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect1 id="details.payees.list">
+<title
+>Lista dei beneficiari</title>
+
+<para
+>L'elenco di tutti i beneficiari e paganti è mostrato sul lato sinistro di questa vista. L'elenco dei beneficiari è in ordine alfabetico. </para>
+
+<sect2>
+<title
+>Aggiunta di un beneficiario o di un pagante</title>
+
+<para
+>Per aggiungere un beneficiario o un pagante, scegliere <guimenuitem
+>+Nuovo</guimenuitem
+>. In questo modo viene creato un beneficiario chiamato <quote
+>Nuovo beneficiario</quote
+>. È anche possibile fare clic con il tasto destro del mouse su un beneficiario esistente e selezionare <guimenuitem
+>Aggiungi beneficiario</guimenuitem
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Rinominare un beneficiario o pagante</title>
+
+<para
+>Per rinominare un beneficiario o un pagante, fare doppio clic sul nome o fare clic con il &RMB; sul nome e selezionare <guimenuitem
+>Rinomina beneficiario</guimenuitem
+>. Sarà quindi possibile modificare il nome. Se si cambia il nome del beneficiario, sarà modificato in tutte le transazioni associate. </para>
+</sect2>
+
+<sect2>
+<title
+>Eliminazione di un beneficiario o di un pagante</title>
+
+<para
+>Per rimuovere un beneficiario o un pagante, fare clic con il tasto destro del mouse sul nome e selezionare <guimenuitem
+>Elimina beneficiario</guimenuitem
+>. Se il beneficiario ha delle transazioni, sarà visualizzata una finestra che permette di riassegnare le transazioni a un altro beneficiario, e anche una casella di selezione che permette di far corrispondere il nome del beneficiario scelto al nome del beneficiario da eliminare. Un'altra opzione per eliminare un beneficiario esistente consiste nel selezionare il beneficiario o il pagante facendo clic con il tasto sinistro e poi facendo clic sempre con il tasto sinistro su <guibutton
+>-Canc</guibutton
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.payees.personalinformation">
+<title
+>Dettagli aggiuntivi del beneficiario</title>
+
+<sect2>
+<title
+>Informazioni personali</title>
+
+<para
+>Per visualizzare o modificare le informazioni personali associate ad un beneficiario, selezionare il beneficiario dall'elenco e selezionare la linguetta Indirizzo. Oltre alle informazioni relative all'indirizzo, è possibile memorizzare anche un numero di telefono, un indirizzo di posta elettronica e delle note riguardanti il beneficiario selezionato. Per modificare queste informazioni, modificare direttamente nell'area dei dettagli e premere il pulsante Aggiorna alla fine. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>La scheda Informazioni personali</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_info.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Informazioni personali</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect2>
+
+<sect2 id="details.payees.personalinformation.matching">
+<title
+>Impostazioni di abbinamento delle transazioni</title>
+
+<sect3>
+<title
+>Riepilogo</title>
+
+<para
+>&kmymoney; ha la possibilità di assegnare automaticamente il beneficiario corretto alle transazioni importate. Questa funzione può essere utile per l'importazione di transazioni dalla banca, se il nome del beneficiario contiene caratteri aggiuntivi non necessari o, peggio, se il nome del beneficiario cambia. La possibilità di abbinare le transazioni a un particolare beneficiario aiuta a mantenere una coerenza tra i nomi dei beneficiari nel registro e nei report. </para>
+
+<para
+>Ad esempio, mettiamo che il pagamento mensile del mutuo venga registrato dalla banca come <quote
+>BANCA POPOLARE GALLARATE, VA 151106</quote
+> in un certo mese, e come <quote
+>BANCA POPOLARE GALLARATE, VA 121606</quote
+> nel mese successivo. Si potrebbe desiderare che queste transazioni vengano associate al beneficiario <quote
+>Banca Popolare</quote
+>: lo si può fare con la funzione di abbinamento delle transazioni. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>La scheda di abbinamento delle transazioni</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_match.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Dettagli di abbinamento dei beneficiari</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect3>
+
+<sect3>
+<title
+>Configurazione iniziale</title>
+
+<para
+>Dalla scheda Abbinamento è possibile impostare le impostazioni di abbinamento delle transazioni.È possibile selezionare una delle quattro opzioni con il menu a tendina <guilabel
+>Metodo di abbinamento</guilabel
+>. </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Nessun abbinamento. Questa opzione disabilita questa funzione per il beneficiario selezionato. È l'impostazione predefinita per tutti i beneficiari. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Abbina al nome del beneficiario (parziale). Abilita la funzione in base a una corrispondenza parziale del beneficiario e utilizza il nome del beneficiario come chiave di corrispondenza. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Verifica il nome beneficiario (esatta). Questa opzione abilita la funzionalità basata sulla corrispondenza esatta del beneficiario. Si può utilizzare questa capacità di corrispondenza quando si vuole tenere traccia di diversi beneficiari che hanno la stessa ragione sociale, ma diversa ubicazione. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Verifica un nome elencato in seguito. Questa opzione abilita la corrispondenza basata su nomi diversi o facoltativi per un beneficiario. Si può utilizzare questa capacità di corrispondenza quando si ha un beneficiario con diverse ragioni sociali, ma si desidera che tutte le transazioni importate identificate da una di queste ragioni sociali siano associate con un singolo beneficiario in &kmymoney;. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Con ognuna di queste opzioni, è possibile scegliere se ignorare o meno la distinzione tra maiuscole e minuscole nei nomi dei beneficiari se si marca l'opzione <guilabel
+>Ignora maiuscole</guilabel
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Importazione di transazioni</title>
+
+<para
+>Quando si importano transazioni nel formato QIF o attraverso un'estensione, come OFX o AqBanking, saranno considerate le chiavi di corrispondenza impostate. Se la chiave di corrispondenza di un beneficiario verifica una parte del nome del beneficiario nella transazione importata, il beneficiario corrispondente sarà assegnato a quella transazione. La chiave <quote
+>Popolare</quote
+> verificherà <quote
+>BANCA POPOLARE GALLARATE,VA</quote
+> e <quote
+>MUTUOBANCAPOPOLARE</quote
+>. È bene fare attenzione nell'impostare le chiavi di corrispondenza. </para>
+<para
+><note>
+    <para
+>Se il beneficiario di una transazione corrisponde a più chiavi di ricerca, il comportamento è indefinito. &kmymoney; sceglierà in modo arbitrario uno dei beneficiari corrispondenti.</para>
+</note
+></para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.payees.transactionhistory">
+<title
+>Visualizzazione dello storico delle transazioni</title>
+
+<para
+>Per visualizzare le transazioni associate con un certo beneficiario, selezionare il beneficiario dall'elenco e scegliere la scheda Transazioni nell'area dei dettagli. Facendo doppio clic su una transazione si visualizzerà quella transazione nella vista Registri per il conto appropriato. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>La scheda Transazioni</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_history.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Storico delle transazioni</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect1>
+</chapter>
+

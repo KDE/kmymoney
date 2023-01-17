@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="whatsnew">
+<chapterinfo>
+  <date
+>4 апреля 2019 г.</date>
+  <releaseinfo
+>5.0.4</releaseinfo>
+</chapterinfo>
+<title
+>Новые возможности этой версии</title>
+
+<sect1>
+<title
+>Исправления и улучшения</title>
+
+<para
+>При создании каждой новой версии &kmymoney; команда разработчиков прилагает все усилия для всестороннего улучшения и повышения удобства использования приложения. Это четвёртая версия в серии 5.0, и большинство изменений представляют собой исправления ошибок. </para>
+
+<para
+>На данный момент переход к использованию &kde-frameworks; фактически завершён, хотя он и работа по обновлению многих используемых приложением библиотек были выполнены незаметно для пользователя. В целом внешний вид и удобство использования приложения остались прежними, изменения незначительны. Базовая функциональность программы также не претерпела изменений (но были внесены запланированные улучшения и дополнения). </para>
+
+<para
+>В прошлых версиях приложения эта страница руководства содержала перечень конкретных исправлений ошибок и улучшений функциональности, дублируя журнал изменений. Теперь эти сведения возможно просмотреть непосредственно в самом <ulink url="https://kmymoney.org/changelog.html"
+>журнале изменений</ulink
+>. </para>
+
+<para
+>Начиная с версии 5.0, в приложении имеются некоторые изменения, для работы которых пользователю требуется выполнить определённую настройку в случае выполнения обновления с версии 4.8.x или предшествующей версии. </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Приложение выполняет поиск шаблонов для модуля printcheck в различных расположениях. Пользователю необходимо указать их в диалоге настройки модулей. <link linkend="details.settings.plugins"
+>Подробные сведения доступны в этом разделе</link
+>. </para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1>
+<title
+>Обновления этого руководства пользователя</title>
+
+<para
+>В то время как приложение продолжает развиваться, в настоящем руководстве всё ещё присутствуют главы, в которые не была добавлена информация обо всех изменениях, внесённых в интерфейс программы при выходе версии 5.0. В каждой главе указана версия &kmymoney;, которой она соответствует. Здесь для удобства представлен полный перечень глав. </para>
+
+<para
+>Обратите внимание, что количество сведений, не включённых в какую-либо главу или не отражающих текущее поведение приложения, зависит от того, насколько сильно изменилась соответствующая часть приложения между выходом версий 4.8 и 5.0. </para>
+  
+<informaltable frame="none">
+  <tgroup cols="2">
+    <thead>
+      <row>
+	<entry
+><para
+>Главы, содержащие обновлённые сведения для версии 5.x</para
+></entry>
+	<entry
+><para
+>Главы, ещё не содержащие обновлённые сведения для версии 5.x</para
+></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry valign="top">
+	  <simplelist>
+	    <member
+><link linkend="introduction"
+>Введение</link
+></member>
+	    <member
+><link linkend="whatsnew"
+>Новые возможности этой версии</link
+></member>
+	    <member
+><link linkend="makingmostof"
+>Эффективное использование &kmymoney;</link
+></member>
+	    <member
+><link linkend="firsttime"
+>Начало работы с &kmymoney;</link
+></member>
+	    <member
+><link linkend="details.institutions"
+>Учреждения</link
+></member>
+	    <member
+><link linkend="details.accounts"
+>Счета</link
+></member>
+	    <member
+><link linkend="details.categories"
+>Статьи</link
+></member>
+	    <member
+><link linkend="details.tags"
+>Метки</link
+></member>
+	    <member
+><link linkend="details.payees"
+>Контрагенты</link
+></member>
+	    <member
+><link linkend="details.reconcile"
+>Графики</link
+></member>
+	    <member
+><link linkend="details.ledgers"
+>Книга учёта</link
+></member>
+	    <member
+><link linkend="details.investments"
+>Инвестиции</link
+></member>
+	    <member
+><link linkend="details.settings"
+>Параметры</link
+></member>
+	    <member
+><link linkend="reference.menus"
+>Справка: меню</link
+></member>
+	    <member
+><link linkend="credits"
+>Благодарности</link
+></member>
+	  </simplelist>
+	</entry>
+	<entry valign="top">
+	  <simplelist>
+	    <member
+><link linkend="details.currencies"
+>Валюты</link
+></member>
+	    <member
+><link linkend="details.reconcile"
+>Сверка</link
+></member>
+	    <member
+><link linkend="details.reports"
+>Отчёты</link
+></member>
+	    <member
+><link linkend="details.impexp"
+>Импорт и экспорт</link
+></member>
+	    <member
+><link linkend="details.loans"
+>Кредиты</link
+></member>
+	    <member
+><link linkend="details.budgets"
+>Бюджеты</link
+></member>
+	    <member
+><link linkend="details.forecast"
+>Прогноз</link
+></member>
+	    <member
+><link linkend="details.search"
+>Поиск операций</link
+></member>
+	    <member
+><link linkend="details.formats"
+>Форматы файлов</link
+></member>
+	    <member
+><link linkend="details.database"
+>База данных</link
+></member>
+	    <member
+><link linkend="faq"
+>Вопросы и ответы</link
+></member>
+	    <member
+><link linkend="reference.widgets"
+>Справка: виджеты</link
+></member>
+	  </simplelist>
+	</entry>
+      </row>
+    </tbody>
+  </tgroup>
+</informaltable>
+ 
+</sect1>
+
+  
+</chapter>

@@ -1,0 +1,1365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="reference">
+<chapterinfo>
+  <date
+>5 грудня 2016 року</date>
+  <releaseinfo
+>5.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Довідник</title>
+
+<sect1 id="reference.menus">
+<sect1info>
+  <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+</sect1info>
+<title
+>Меню</title>
+
+<para
+>Нижче наведено повний список пунктів меню &kmymoney; з короткими описами призначення кожного з цих пунктів. Зауважте, що багато з цих пунктів меню можуть бути недоступними (позначеними сірим кольором). Перелік активних пунктів залежатиме від поточного показу або стану програми. Наприклад, ви не зможете змінити параметри рахунку, якщо у поточному перегляді не позначено або не показано жодного рахунку. </para>
+
+<sect2 id="reference.menus.file">
+<title
+>Меню «Файл»</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Створити</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Створює порожній файл даних &kmymoney;. Програма здатна одночасно працювати лише з одним файлом &kmymoney;, отже, їй доведеться спочатку закрити ваш поточний файл, якщо якийсь файл було відкрито. </action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Відкрити</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Відкрити наявний файл даних &kmymoney;.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Відкрити недавній</guimenuitem
+><guimenuitem
+>…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Пришвидшує доступ до нещодавно відкритих файлів.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Відкрити базу даних...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Відкриває наявну базу даних.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Зберегти</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Зберігає поточний відкритий файл.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+><guimenuitem
+>Зберегти як...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Надає змогу зберегти поточний відкритий файл з іншою назвою.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Зберегти як базу даних...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Надає змогу зберегти поточний відкритий файл у <link linkend="details.database"
+>базі даних</link
+>.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guisubmenu
+>Імпортувати</guisubmenu
+> <guimenuitem
+>…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Надає змогу імпортувати фінансові дані з файлів стороннього типу, зокрема файлів QIF та &gnucash;, або файла шаблону рахунків і категорій, яким можна скористатися для налаштування нових рахунків.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Експортувати</guimenuitem
+><guimenuitem
+>…</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Надає змогу експортувати файл до іншого формату, наприклад QIF, або експортувати список ваших рахунків і категорій як шаблон. </action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>P</keycap
+> </keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Друкувати...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Друкує поточний файл.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Резервна копія</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Зберігає резервну копію поточного файла.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Особисті дані</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Надає змогу змінити особисті дані.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Інформація про файл</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Показує інформацію щодо поточного відкритого у &kmymoney; файла.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <!--Dump Memory what i sthis?-->
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Закрити</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Закриває поточний файл.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Вийти</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Завершує роботу &kmymoney;.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.edit">
+<title
+>Меню «Зміни»</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Знайти операцію...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Пошук операцій</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.view">
+<title
+>Меню «Перегляд»</title>
+
+<variablelist>
+  <varlistentry id="reference.menus.settings.transactiondetail">
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Показати параметри операції</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Показати параметри операції у перегляді <link linkend="details.ledgers"
+>Облікової книги</link
+>. Якщо буде цей пункт позначено, програма покаже всі рядки операції у обліковій книзі. Якщо пункт не буде позначено, буде показано лише один рядок. </action
+></para>
+      <para
+>Якщо ви бажаєте бачити параметри лише поточної вибраної операції, для інших операцій слід показувати лише один рядок, ви можете скористатися <link linkend="details.settings.register.lens"
+>Лінзою облікової книги</link
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Сховати узгоджені операції</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Сховати узгоджені операції зі списку.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Показувати узгоджені баланси</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Показувати узгоджені баланси і останній етап узгодження у бухгалтерській книзі.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Сховати категорії без записів</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Сховати незадіяні категорії у переглядах.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Показати всі рахунки</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Показати всі рахунки у переглядах.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.institution">
+<title
+>Меню «Установа»</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Установа</guimenu
+> <guimenuitem
+>Створити установу...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Додати нову установу.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Установа</guimenu
+> <guimenuitem
+>Змінити установу...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Надає змогу змінити параметри установи.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Установа</guimenu
+> <guimenuitem
+>Вилучити установу...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Вилучити запис установи.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.account">
+<title
+>Меню «Рахунок»</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Рахунок</guimenu
+> <guimenuitem
+>Створити рахунок...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Додати новий рахунок</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Рахунок</guimenu
+> <guimenuitem
+>Змінити рахунок...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Надає змогу змінити рахунок.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Рахунок</guimenu
+> <guimenuitem
+>Вилучити рахунок</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Вилучити рахунок.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Рахунок</guimenu
+> <guimenuitem
+>Відкрити облікову книгу</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Перейти до перегляду облікової книги рахунку.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Рахунок</guimenu
+> <guimenuitem
+>Узгодити...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Узгодити рахунок за допомогою майстра узгодження.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Рахунок</guimenu
+> <guimenuitem
+>Відкласти узгодження</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Відкласти узгодження рахунку.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Рахунок</guimenu
+> <guimenuitem
+>Завершити</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Завершити узгодження рахунку.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Рахунок</guimenu
+> <guimenuitem
+>Звіт щодо операцій</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Відкрити звіт щодо операцій на рахунку.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Рахунок</guimenu
+> <guimenuitem
+>Закрити рахунок</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Закрити рахунок.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Рахунок</guimenu
+> <guimenuitem
+>Повторно відкрити рахунок</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Повторно відкрити раніше закритий рахунок.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Рахунок</guimenu
+> <guimenuitem
+>Вилучити прив’язку рахунку</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Вилучити прив’язку до рахунку мережевої роботи з банком.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Рахунок</guimenu
+> <guimenuitem
+>Пов’язати з мережевим рахунком</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Пов’язати рахунок з мережевим рахунком.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Рахунок</guimenu
+> <guimenuitem
+>Оновити рахунок...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Імпортувати список операцій з мережі банку для певного рахунку.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Рахунок</guimenu
+> <guimenuitem
+>Оновити всі рахунки...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Імпортувати операції з мережі банку для всіх рахунків.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <!--New credit transfer-->
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.category">
+<title
+>Меню «Категорія»</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Категорія</guimenu
+> <guimenuitem
+>Створити категорію...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Додати нову категорію.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Категорія</guimenu
+> <guimenuitem
+>Змінити категорію...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Змінити категорію.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Категорія</guimenu
+> <guimenuitem
+>Вилучити категорію...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Вилучити категорію.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Категорія</guimenu
+> <guimenuitem
+>Відкрити облікову книгу</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Перейти до перегляду облікової книги певної категорії.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.transaction">
+<title
+>Меню «Операція»</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Ins</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Операція</guimenu
+><guimenuitem
+>Створити</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Додати нову операцію.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Операція</guimenu
+> <guimenuitem
+>Змінити</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Змінити операцію.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Операція</guimenu
+> <guimenuitem
+>Змінити дроблення</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Змінити дроблення операції.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Операція</guimenu
+> <guimenuitem
+>Вилучити</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Вилучити операцію.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Операція</guimenu
+> <guimenuitem
+>Здублювати</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Дублювати операцію.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Операція</guimenu
+> <guimenuitem
+>Позначити операцію як…</guimenuitem
+><guimenuitem
+>Не узгоджено</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Змінити стан операції на «Неузгоджена».</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;<keycap
+>Пробіл</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Операція</guimenu
+> <guimenuitem
+>Позначити операцію як...</guimenuitem
+><guimenuitem
+> Звірено</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Змінити стан операції на «Звірено».</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>Пробіл</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Операція</guimenu
+> <guimenuitem
+>Позначити операцію як...</guimenuitem
+><guimenuitem
+> Узгоджено</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Змінити стан операції на «Узгоджена».</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Операція</guimenu
+> <guimenuitem
+>Перейти до рахунку</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Показати інший рахунок операції.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Операція</guimenu
+> <guimenuitem
+>Перейти до отримувача</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Перейти до перегляду отримувачів з фокусуванням пункту отримувача у позначеній операції.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Операція</guimenu
+> <guimenuitem
+>Створити заплановану операцію...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Створити нову заплановану операцію.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Операція</guimenu
+> <guimenuitem
+>Відповідність</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Встановлює відповідність імпортованих операцій.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Операція</guimenu
+> <guimenuitem
+>Невідповідність</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Скасовує відповідність операцій, запропоновану &kmymoney; під час встановлення відповідності імпортованих операцій.</action
+> Зауважте, що цей пункт буде у меню, лише якщо існують записи операцій, для яких встановлено відповідність. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Операція</guimenu
+> <guimenuitem
+>Прийняти</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Підтвердити запропоноване об’єднання імпортованих записів операцій.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Операція</guimenu
+><guimenuitem
+>Вибрати всі</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Вибрати всі операції у списку.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Операція</guimenu
+> <guimenuitem
+>Надрукувати чек</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Надрукувати вміст позначеної операції у показаній обліковій книзі з форматуванням відповідно до вибраного шаблона.</action
+> Зауважте, що доступ до цього пункту меню буде відкрито, лише якщо у книзі позначено якийсь із записів операцій. Щоб дізнатися більше, зверніться до розділу щодо <link linkend="details.settings.plugins"
+>додатка друку</link
+>. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.tools">
+<title
+>Меню «Інструменти»</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Інструменти</guimenu
+> <guimenuitem
+>Редактор профілів QIF...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Змінює профіль QIF, який буде використано для імпортування або експортування файлів QIF.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Інструменти</guimenu
+> <guimenuitem
+>Валюти...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Показує список валют, відомих &kmymoney;.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Інструменти</guimenu
+> <guimenuitem
+>Ціни...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Показує ціни фондового ринку та курси валют.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Інструменти</guimenu
+> <guimenuitem
+>Оновити ринкові курси і курси валют...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Оновлює ціни фондових та валютних ринків на основі даних джерел у мережі за допомогою можливості <link linkend="details.investments.onlinequotes"
+>Інтерактивні курси</link
+>.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Інструменти</guimenu
+> <guimenuitem
+>Перевірка коректності</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Виконує перевірку вашого файла і намагається виправити знайдені проблеми, якщо це можливо.</action
+></para>
+      <para
+>Перед використанням цього пункту варто створити резервну копію вашого файла.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Інструменти</guimenu
+> <guimenuitem
+>Перевірка швидкодії</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Виконує перевірку швидкодії за допомогою вашого файла і показує результати.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <!--Generate Database SQL
+  Debug Traces
+  Debug Timers-->
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.settings.help">
+<title
+>Меню «Параметри» і «Довідка»</title>
+
+<para
+>У &kmymoney; передбачено типові меню <guimenu
+>Параметри</guimenu
+> і <guimenu
+>Довідка</guimenu
+> &kde;, які описано у <ulink url="help:/fundamentals/menus.html"
+>підручнику з основ &kde;</ulink
+>, з одним додатковим пунктом:</para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Увімкнути всі повідомлення</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Вмикає показ всіх повідомлень, які ви, можливо, вимкнули позначенням пункту <guimenuitem
+>Більше не повідомляти мене про це</guimenuitem
+> у діалоговому вікні.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Параметри</guimenu
+><guimenuitem
+>Налаштувати Aqbanking</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Налаштувати параметри інтернет-банкінгу</action
+>, див. <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
+>як налаштувати інтернет-банкінг</ulink
+>, щоб дізнатися більше. </para>
+      <para
+>Зауважте, що цим пунктом меню можна скористатися, лише якщо увімкнено модуль KBanking. Див. розділ щодо налаштовування <link linkend="details.settings.plugins.kbanking"
+>додатка KBanking</link
+>, щоб дізнатися більше. </para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+</sect2>
+
+</sect1
+>&details-widgets; </chapter>

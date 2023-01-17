@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.institutions">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>1 февраля 2018 г.</date>
+  <releaseinfo
+>5.0.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Учреждения</title>
+
+<para
+>Представление «Учреждения» содержит сводные данные всех счетов, которые сгруппированы по соответствующим учреждениям. Список счетов, относящийся к учреждению, возможно развернуть или свернуть (нажмите стрелку, расположенную слева от названия учреждения). Последнее учреждение в списке — «Счета без привязки учреждений». </para>
+
+<para
+>В представлении «Учреждения» показаны несколько столбцов со сведениями о счёте. Также показана общая сумма по всем счетам в каждом учреждении. Чтобы показать или скрыть столбец, щёлкните по его заголовку правой кнопкой мыши и установите или снимите флажок, который расположен рядом с названием столбца. </para>
+
+<para>
+<screenshot>
+    	<screeninfo
+>представление «Учреждения»</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_view.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>представление «Учреждения»</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Представление «Учреждения» содержит следующие столбцы. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Счёт</term>
+    <listitem>
+      <para
+>Название учреждения или счёта. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Тип</term>
+    <listitem>
+      <para
+>Тип счёта (например, «Сберегательный счёт», «Текущий счёт», «Кредитная карта» и так далее). </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Налог</term>
+    <listitem>
+      <para
+>Указывает на то, учитывается ли этот счёт в целях налогообложения. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>НДС</term>
+    <listitem>
+      <para
+>Указывает на то, применяется ли НДС к операциям по этому счёту. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>ЦЗ (центр затрат)</term>
+    <listitem>
+      <para
+>Указывает на то, что в некоторых условиях при вводе операции по этому счёту необходимо назначить центр затрат. Это новая возможность, которая ещё не реализована, поэтому в настоящее время этот столбец не используется. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Общий баланс</term>
+    <listitem>
+      <para
+>Другая новая возможность, которая ещё не реализована. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Вынесенное значение</term>
+    <listitem>
+      <para
+>Это баланс счёта, предоставленный учреждением. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Итого</term>
+    <listitem>
+      <para
+>Баланс счёта в &kmymoney;. Обратите внимание, что в представлении «Учреждения» он является общей суммой балансов всех счетов в конкретном учреждении. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Номер</term>
+    <listitem>
+      <para
+>Номер счёта, если он был указан. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Код сортировки</term>
+    <listitem>
+      <para
+>Номер IBAN, если его значение было указано в соответствующем поле диалога «Сведения о счёте». </para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+
+<para
+>Обратите внимание, что многие из этих столбцов также доступны в других представлениях (например, в представлении «Счета»). При установке или снятии флажка для показа или скрытия какого-либо столбца появится всплывающее окно, в котором будет предложено выбрать, следует ли скрыть этот столбец во всех остальных представлениях, в которых он присутствует. Если выбрать вариант «Нет», то столбец будет скрыт только в текущем представлении. </para>
+
+<sect1 id="details.institutions.institution">
+<title
+>Действия с учреждениями</title>
+
+<para
+>Чтобы вызвать контекстное меню «Действия с учреждениями», щёлкните по названию учреждения правой кнопкой мыши. При выборе пункта <guimenuitem
+>Новое учреждение...</guimenuitem
+> будет открыто диалоговое окно «Новое учреждение», в котором возможно указать все сведения, необходимые для создания нового учреждения. При выборе пункта <guimenuitem
+>Редактировать учреждение...</guimenuitem
+> появится окно, в котором возможно изменить такие свойства учреждения, как его название и адрес. При выборе пункта <guimenuitem
+>Удалить учреждение...</guimenuitem
+> будут удалены все сведения об учреждении и связанные с этим учреждением счета. Следует учитывать, что удалить учреждение возможно только в том случае, если могут быть удалены все связанные с ним счета (а они могут быть удалены только при условии, что с ними не связаны операции и графики платежей). При выборе пункта <guimenuitem
+>Новый счёт...</guimenuitem
+> будет запущен мастер создания нового счёта (подробные сведения доступны в следующем разделе). </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Контекстное меню «Действия с учреждениями»</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_options.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Контекстное меню «Действия с учреждениями»</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.institutions.new">
+<title
+>Новое учреждение</title>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="newinst.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>Новое учреждение</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<note
+><para
+>Перед созданием нового учреждения необходимо открыть файл. Если файл отсутствует, потребуется <link linkend="firsttime.3"
+>создать его</link
+>. </para
+></note>
+
+<para
+>Only the name is required in the New Institution Dialog, all other fields are optional. As with the personal information dialog, this data is not currently used by &kmymoney;, but will be required by future releases for certain features. In particular, the <ulink url="https://en.wikipedia.org/wiki/Bank_code"
+>Bank Code</ulink
+> and the <acronym
+> <ulink url="https://en.wikipedia.org/wiki/ISO_9362"
+>BIC (Bank Identifier Code)</ulink
+></acronym
+> will be required for online banking. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.institutions.account">
+<title
+>Действия со счетами</title>
+
+<para
+>При щелчке правой кнопкой мыши по названию счёта появится контекстное меню «Действия со счетами». При выборе пункта <guimenuitem
+>Новый счёт...</guimenuitem
+> появится окно мастера создания нового счёта. При выборе пункта <guimenuitem
+>Открыть книгу учёта</guimenuitem
+> будет выполнен переход в представление «Книга учёта» или представление «Инвестиции», в зависимости от типа счёта. Обычный двойной щелчок по названию счёта также позволяет открыть этот счёт. При выборе пункта <guimenuitem
+>Редактировать счёт...</guimenuitem
+> появится окно, в котором возможно изменить название счёта, дату начала, связанное со счётом банковское учреждение и родительский счет. Удалить возможно только тот счёт, с которым не связаны операции или график платежей. При выборе пункта <guimenuitem
+>Сверить...</guimenuitem
+> будет запущен мастер сверки, с помощью которого возможно сравнить полученную выписку по счёту с электронными записями в программе. Дополнительные сведения, а также информация о других параметрах, доступны в соответствующих разделах этого руководства. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>контекстное меню «Действия со счетами»</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="account_options.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>контекстное меню «Действия со счетами»</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect1>
+</chapter>

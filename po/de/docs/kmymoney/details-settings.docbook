@@ -1,0 +1,949 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.settings">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title id="details.settings.title"
+>&kappname; Einstellungen</title>
+
+<para
+>Die im folgenden beschriebenen Einstellungen verändern das Verhalten von &kappname; und werden über den Menüpunkt <menuchoice
+><guimenu
+>Einstellungen</guimenu
+><guimenuitem
+>&kappname; einrichten ...</guimenuitem
+></menuchoice
+> vorgenommen. </para>
+
+<sect1 id="details.settings.general">
+<title id="details.settings.general.title"
+>Allgemein</title>
+
+<sect2 id="details.settings.general.global">
+<title
+>Globale Einstellungen</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Preisgenauigkeit</guilabel
+></term>
+    <listitem>
+      <para
+>Geben Sie ein, wie viele Nachkommastellen Genauigkeit Ihre Preise haben. Die Eingabe von 2 führt beispielsweise zum Ergebnis 35,18. Setzt man die Genauigkeit auf 4 Nachkommastellen würde derselbe Preis mit 35,1791 dargestellt werden.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Automatisch speichern alle</guilabel
+></term>
+    <listitem>
+      <para
+>Wählen Sie diese Option, wenn &kappname; Ihre Datei automatisch im gewählten Zeitintervall speichern soll. Der Vorgabewert beträgt alle 10 Minuten.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Aktuelles Geschäftsjahr beginnt am</guilabel
+></term>
+    <listitem>
+      <para
+>Geben Sie den ersten Tag und Monat Ihres Finanzjahres ein.</para>
+    </listitem>
+  </varlistentry>
+  <!-- FIXME missing Calculator -->
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.general.views">
+<title
+>Ansichts-Einstellungen</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Programmstart</guilabel
+></term>
+    <listitem>
+      <para
+>Wählen Sie die Ansicht aus, die beim Programmstart zu sehen ist.</para>
+      <itemizedlist>
+        <listitem
+><para
+>Nach dem Starten <link linkend="firsttime.mainwindow"
+>Übersicht</link
+>-Seite anzeigen</para
+></listitem>
+        <listitem
+><para
+>Nach dem Starten zuletzt gewählte Seite anzeigen</para
+></listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <!-- FIXME missing Type of KMyMoney view -->
+  <varlistentry>
+    <term
+><guilabel
+>Titelleiste in jeder Ansicht anzeigen</guilabel
+></term>
+    <listitem>
+      <para
+>Gibt an, ob die Kopfzeile der aktuellen Ansicht auf jeder Seite angezeigt wird.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Kontenbuch-Auswahl und Investment-Ansicht abgleichen</guilabel
+></term>
+    <listitem>
+      <para
+>Wenn diese Option aktiviert ist, führt das Auswählen eines Kontos in der Investitionen-Ansicht dazu, dass dieses Konto auch im Kontenbuch ausgewählt wird und umgekehrt.</para>
+    </listitem>
+  </varlistentry>
+<!-- FIXME not in master
+  <varlistentry>
+    <term
+><guilabel
+>Icon size of navigation bar</guilabel
+></term>
+    <listitem>
+      <para
+>Select the size of the icons of the left-side navigation bar.</para>
+    </listitem>
+  </varlistentry>
+  -->
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.general.filter">
+<title
+>Filteroptionen</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Nicht verwendete Kategorien ausblenden</guilabel
+></term>
+    <listitem>
+      <para
+>Ungenutzte Kategorien ausblenden.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Geschlossene Konten nicht anzeigen</guilabel
+></term>
+    <listitem>
+      <para
+>Geschlossene Konten ausblenden</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Eigenkapitalkonten anzeigen</guilabel
+></term>
+    <listitem>
+      <para
+>Eigenkapitalkonten sind normalerweise ausgeblendet. Wählen Sie diese Option, um sie anzuzeigen.</para>
+    </listitem>
+  </varlistentry>
+  <!--FIXME missing Show in categories account list view-->
+  <varlistentry>
+    <term
+><guilabel
+>Abgelaufene Zahlungspläne nicht anzeigen</guilabel
+></term>
+    <listitem>
+      <para
+>Abgeschlossene geplante Buchungen ausblenden</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Ausblenden der Buchungen vor</guilabel
+></term>
+    <listitem>
+      <para
+>Verbirgt alle Buchungen vor dem gewählten Datum.</para>
+      <para
+>Diese Option auf den 1. Januar 1900 zu setzen stellte eine gute Möglichkeit dar, datumsbedingte Probleme beim Import zu finden.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Abgeglichene Buchungen ausblenden</guilabel
+></term>
+    <listitem>
+      <para
+>Filtert Buchungen auf Basis des Abgleichstatus.  Abgeglichene Buchungen werden nicht mehr angezeigt.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.home">
+<title id="details.settings.home.title"
+>Übersicht</title>
+
+<para
+>Hier können Sie das Aussehen der Übersichtsseite von &kappname; anpassen und auswählen, welche Informationen in welcher Reihenfolge angezeigt werden. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Anlagen und Verbindlichkeiten</guilabel
+></term>
+    <listitem>
+      <para
+>Zeigt die Kontostände aller Ihrer Anlagen und Verbindlichkeiten</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Zahlungen</guilabel
+></term>
+    <listitem>
+      <para
+>Zeigt die ersten 5 fälligen geplanten Buchungen an</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Bevorzugte Konten</guilabel
+></term>
+    <listitem>
+      <para
+>Zeigt den Kontostand und die Differenz zum Minimum-Saldo / Maximum-Kredit an</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Zahlungskonten</guilabel
+></term>
+    <listitem>
+      <para
+>Zeigt die Kontostände Ihrer Vermögens- und Verbindlichkeitenkonten mit Ausnahme der Wertpapierkonten.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Bevorzugte Berichte</guilabel
+></term>
+    <listitem>
+      <para
+>Zeigt alle Ihre als Favoriten markierten Berichte</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Vorhersage (geplante Buchungen)</guilabel
+></term>
+    <listitem>
+      <para
+>Es wird eine Vorhersage Ihrer Vermögens- und Verbindlichkeitenkonten angezeigt</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Eigenkapitalvorhersage</guilabel
+></term>
+    <listitem>
+      <para
+>Zeigt eine Vorhersage Ihres Eigenkapitals für die nächsten 90 Tage</para>
+    </listitem>
+  </varlistentry>
+<!--FIXME
+  <varlistentry>
+    <term
+><guilabel
+>Forecast (history)</guilabel
+></term>
+    <listitem>
+      <para
+>???</para>
+    </listitem>
+  </varlistentry>
+-->
+  <varlistentry>
+    <term
+><guilabel
+>Budget</guilabel
+></term>
+    <listitem>
+      <para
+>Es zeigt die Budgets des aktuellen Monats mit einem negativen Wert verglichen mit den aktuellen Einnahmen oder Ausgaben.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Geldfluß</guilabel
+></term>
+    <listitem>
+      <para
+>Zeigt eine Analyse des Geldflusses im aktuellen Monat</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Prozentanteil der Standardschriftgröße</guilabel
+></term>
+    <listitem>
+      <para
+>Gibt die Schriftgröße auf der Startseite an</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Wiederherstellen der Schriftgröße bei Verlassen des Programms, falls manuelle Änderung mit Mausrad erfolgte</guilabel
+></term>
+    <listitem>
+      <para
+>Hierdurch wird die Schriftgrößeneinstellung der Startseite gespeichert, wenn Sie sie mit dem Mausrad verändert haben</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Grenzwerten für Konten anzeigen</guilabel
+></term>
+    <listitem>
+      <para
+>Zeigt die Grenzwerte der Konten im Bereich Zahlungskonten und Favoritenkonten der Startseite</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Saldo-Status von zugeordneten Online-Konten anzeigen</guilabel
+></term>
+    <listitem>
+      <para
+>Zeigt den Saldo-Status von zugeordneten Online-Konten in der Zusammenfassung der Anlagen und Verbindlichkeiten und in den Abschnitten Zahlungskonten und bevorzugte Konten auf der Startseite an. Der Saldo-Status wird durch ein Symbol in den Spalten vor dem Kontennamen dargestellt. Ein grünes Häkchen zeigt an, dass der Online-Saldo und der Saldo in der lokalen Datei abgeglichen sind. Gibt es in der lokalen Datei neuere Buchungen als vorher mit dem Online Saldo abgeglichen, wird ein Postfach mit einem grünen Pfeil angezeigt. Die ist ein Hinweis an den Benutzer, eine Online-Aktualisierung zu starten. Stimmen die Salden in der lokalen Datei nicht dem dem Online-Status überein, erscheint ein rotes Warnzeichen. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Anzahl der nicht markierten Buchungen je Konto anzeigen [!M]</guilabel
+></term>
+    <listitem>
+      <para
+>Fügt eine zusätzliche Spalte zwischen dem Namen des Kontos und dem aktuellen Saldo, in der die Anzahl der nicht markierten Buchungen für die Konten in der Zusammenfassung der Anlagen und Verbindlichkeiten und in den Abschnitten Zahlungskonten und bevorzugte Konten auf der Startseite angezeigt werden. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Anzahl der verrechneten Buchungen je Konto anzeigen [!V]</guilabel
+></term>
+    <listitem>
+      <para
+>Fügt eine zusätzliche Spalte zwischen dem Namen des Kontos und dem aktuellen Saldo, in der die Anzahl der verrechneten Buchungen für die Konten in der Zusammenfassung der Anlagen und Verbindlichkeiten und in den Abschnitten Zahlungskonten und bevorzugte Konten auf der Startseite angezeigt werden. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Anzahl der nicht abgeglichenen (nicht markiert und nicht verrechnet) Buchungen je Konto anzeigen [!A]</guilabel
+></term>
+    <listitem>
+      <para
+>Fügt eine zusätzliche Spalte zwischen dem Namen des Kontos und dem aktuellen Saldo, in der die Anzahl der nicht abgeglichenen, d. h. die Summe aller nicht markierten und nicht verrechneten Buchungen für die Konten in der Zusammenfassung der Anlagen und Verbindlichkeiten und in den Abschnitten Zahlungskonten und bevorzugte Konten auf der Startseite angezeigt werden.</para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="details.settings.register">
+<title id="details.settings.register.title"
+>Kontenbuch</title>
+
+<para
+>Hier können Sie alle Einstellungen rund um das Kontenbuch vornehmen. </para>
+
+<sect2 id="details.settings.register.display"
+><title
+>Karteikarte "Anzeige"</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Gitterlinien im Kontenbuch anzeigen</guilabel
+></term>
+    <listitem>
+      <para
+>Blendet die Tabellenrahmen im Kontenbuch ein oder aus.</para>
+    </listitem>
+  </varlistentry>
+  <!--FIXME missing Show all register entries in full detail-->
+  <varlistentry id="details.settings.register.lens">
+    <term
+><guilabel
+>Buchungsdetails der ausgewählten Buchung anzeigen</guilabel
+></term>
+    <listitem>
+      <para
+>Ist diese Option aktiviert, zeigt das Kontenbuch alle Details einer gerade ausgewählten Buchung an, auch wenn der Menüpunkt <link linkend="reference.menus.settings.transactiondetail"
+>Buchungsdetails anzeigen</link
+> deaktiviert ist.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+><guilabel
+>Buchungsformular anzeigen</guilabel
+></term>
+    <listitem>
+      <para
+>Zeigt das <link linkend="details.ledger.transactionform"
+>Buchungsformular</link
+> am unteren Rand des Kontenbuches zum Eingeben und Ändern von Buchungen. Ist diese Option ausgeschaltet, so bearbeiten Sie die Buchungen direkt im Kontenbuch.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Immer ein Nummernfeld anzeigen</guilabel
+></term>
+    <listitem>
+      <para
+>Blendet immer ein Nummernfeld (<quote
+>Nr.</quote
+>) ein, wenn eine Buchung eingegeben oder geändert wird.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Gruppen-Titel zwischen Buchungen anzeigen</guilabel
+></term>
+    <listitem>
+      <para
+>Zeigt Gruppen-Überschriften im Kontenbuch an.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Titelzeile für vergangenes und aktuelles Geschäftsjahr anzeigen </guilabel
+></term>
+    <listitem>
+      <para
+>Zeigt Gruppenüberschriften für das aktuelle und das vergangene Geschäftsjahr an.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.register.sorting">
+<title
+>Karteikarte "Sortierung"</title>
+<sect3 id="details.settings.register.sorting.normal">
+<title
+>Karteikarte "Normale Ansicht"</title>
+
+<para
+>Wählen Sie hier die Sortierkriterien des Kontenbuches in der normalen Ansicht aus. </para>
+</sect3>
+
+<sect3 id="details.settings.register.sorting.reconciliation">
+<title
+>Karteikarte "Abgleich-Ansicht"</title>
+
+<para
+>Hier können Sie die Sortierkriterien des Kontenbuches einstellen, wenn es sich im Konten-Abgleich-Modus befindet. </para>
+</sect3>
+
+<sect3 id="details.settings.register.sorting.search">
+<title
+>Karteikarte "Such-Ansicht"</title>
+<para
+>Geben Sie Sortierkriterien des Kontenbuches ein, wenn es sich im Such-Modus befindet. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.settings.register.dataentry">
+<title
+>Karteikarte "Datenerfassung"</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Nummernfeld für neue Buchungen mit Buchungstyp vorbelegen</guilabel
+></term>
+    <listitem>
+      <para
+>Trägt automatisch den Typ der Buchung, &eg; Einzahlung, Auszahlung, Umbuchung &etc; in das Nummernfeld ein.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Schecknummern automatisch erhöhen</guilabel
+></term>
+    <listitem>
+      <para
+>Erhöht automatisch die nächste Schecknummer, wenn eine neue Buchung vom Typ "Scheck" eingegeben wird.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Änderungen beibehalten, wenn eine andere Buchung ausgewählt wird</guilabel
+></term>
+    <listitem>
+      <para
+>Ist diese Option aktiviert, wird eine gerade bearbeitete Buchung oder Split-Buchung gespeichert, wenn eine andere Buchung ausgewählt wird.</para>
+      <para
+>Ansonsten werden Änderungen an der eben bearbeiteten Buchung verworfen. Sie müssen Änderungen dann immer explizit übernehmen, damit sie gespeichert werden.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Eingabetaste wechselt zwischen den Feldern</guilabel
+></term>
+    <listitem
+><para
+>Hierdurch gelangen Sie durch die Eingabetaste zum nächsten Eingabefeld im Buchungsformular.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Vergleich immer am Anfang beginnen</guilabel
+></term>
+    <listitem>
+      <para
+>Markieren Sie diese Option, wenn bei der Suche &eg; nach Zahlungsempfängern der eingegebene Text immer mit dem Beginn der Namen von Zahlungsempfänger übereinstimmen muss. Ansonsten wird jedes Vorkommen innerhalb des Textes als Übereinstimmung gewertet. </para>
+    </listitem>
+  </varlistentry>
+  <!--FIXME missing Automatic reconciliation-->
+  <varlistentry>
+    <term
+><guilabel
+>Standard für Abgleichstatus</guilabel
+></term>
+    <listitem>
+      <para
+>Wählen Sie den Abgleichstatus aus, den neue Buchungen automatisch annehmen.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Automatisches Ausfüllen</guilabel
+></term>
+    <listitem>
+      <para
+>Wählen Sie das gewünschte Verhalten für das automatische Ausfüllen aus, oder deaktivieren Sie die Option.</para>
+      <itemizedlist>
+        <listitem>
+          <para
+>Kein automatisches Ausfüllen</para>
+        </listitem>
+        <listitem>
+          <para
+>Gleiche Transaktion wenn der Betrag nicht mehr als X Prozent abweicht</para>
+          <para
+>Beim Eingeben einer neuen Buchung mit dieser aktivierten Option wird &kappname; eine Liste mit existierenden Buchungen dieses Zahlungsempfängers im aktuellen Konto anzeigen. Wenn der Buchungsbetrag weniger als X Prozent vom aktuellen Buchungsbetrag abweicht, so wird die Buchung als identisch betrachtet. Sind die Beträge identisch (0 Prozent Abweichung), so werden alle vergangenen Buchungen dieses Zahlungsempfängers im aktuellen Konto angezeigt. Wenn Sie nun eine Buchung aus der Liste auswählen, so übernimmt &kappname; alle Details der Buchung, außer dem Datum.</para>
+        </listitem>
+        <listitem>
+          <para
+>Mit den Daten der zuvor am meisten verwendeten Buchungen des Zahlungsempfängers</para>
+          <para
+>Ist diese Option aktiviert, so wird &kappname; beim Eingeben einer neuen Buchung alle Detail-Felder der neuen Buchung mit denen der am häufigsten verwendeten Buchungen automatisch ausfüllen.</para>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.register.import">
+<title
+>Karteikarte "Importieren"</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Buchungen innerhalb von Tagen zuordnen</guilabel
+></term>
+    <listitem>
+      <para
+>Suche nach beim Importieren einer Buchung übereinstimmenden Buchungen im Kontenbuch innerhalb der gewählten Zeitspanne (+/- der angegebenen Anzahl an Tagen).</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Nach der Standard-Kategorie für neue Empfänger fragen</guilabel
+></term>
+    <listitem>
+      <para
+>Immer dann, wenn ein neuer Zahlungsempfänger beim Importieren erkannt wird, wird der Benutzer nach einer Standard-Kategorie für den neuen Zahlungsempfänger gefragt.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.schedules">
+<title id="details.settings.schedules.title"
+>Geplante Buchungen</title>
+
+<para
+>Mit dieser Option können Sie das Verhalten der Funktion <link linkend="details.schedules"
+>Geplante Buchungen</link
+> verändern. </para>
+
+<sect2 id="details.settings.schedules.startupoptions">
+<title
+>Einstellungen der geplanten Buchungen beim Programmstart</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Geplante Buchungen beim Start überprüfen</guilabel
+></term>
+    <listitem>
+      <para
+>Wenn aktiviert, prüft &kappname; beim Programmstart auf fällige geplante Buchungen</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Anzahl Tage, die Zahlungen im voraus eingetragen werden</guilabel
+></term>
+    <listitem
+><para
+>Geben Sie hier an, wie viele Tage im Voraus die geplanten Buchungen ins Kontenbuch eingetragen werden sollen.</para>
+    </listitem>
+  </varlistentry>
+  <!--FIXME missing Processing Days-->
+  <varlistentry>
+    <term
+><guilabel
+>Anzahl Tage für die Buchungsvorschau im Kontenbuch</guilabel
+></term>
+    <listitem>
+      <para
+>Gibt an, wie viele Tage in der Zukunft geplante Buchungen im Kontenbuch angezeigt werden.</para>
+      <para
+>Die geplanten Buchungen werden im Kontenbuch aufgelistet. Sie können diese dann mit der rechten Maustaste eintragen oder verwerfen.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.onlinequote">
+<title id="details.settings.onlinequote.title"
+>Online-Kursnotizen</title>
+
+<para
+>Diese Einstellung gibt an, wie Online-Kursnotizen von den verschiedenen Online-Quellen empfangen werden. </para>
+
+<para
+>Hier können Sie die Quellen für die Online-Kursnotizen in &kappname; ändern. Es handelt sich hier um erweiterte Einstellungen, die nur von technisch versierten Anwendern, die die Bedeutung der Einstellungen kennen, geändert werden sollten. </para>
+
+<para
+>Weitere Details finden Sie im Kapitel <link linkend="details.investments.onlinequotes"
+>Online Kursnotizen</link
+>. </para>
+</sect1>
+
+ <!-- FIXME Reports page missing-->
+
+<sect1 id="details.settings.forecast">
+<title id="details.settings.forecast.title"
+>Vorhersage</title>
+
+<para
+>Hier können Sie einstellen, wie die Vorhersagen berechnet werden. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Anzahl der vorherzusagenden Tage</guilabel
+></term>
+    <listitem>
+      <para
+>Geben Sie an, wieviele Tage die Vorhersage umfassen soll. Der Standardwert beträgt 90 Tage.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Anzahl der Tage für Konto-Zyklus</guilabel
+></term>
+    <listitem>
+      <para
+>Die übliche Anzahl an Tagen, während der Ihre vorwiegend genutzten Konten einen Einnahmen/Ausgaben-Zyklus durchlaufen. Wenn Sie Ihr Gehalt monatlich erhalten, sollten Sie hier 30 Tage eingeben.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Start-Tag (des Monats) der Vorhersage</guilabel
+></term>
+    <listitem>
+      <para
+>Wählen Sie den Tag des Monats aus, an dem Sie die Vorhersage starten möchten. Dies ist üblicherweise der Tag, an dem Sie Ihr Gehalt oder andere Einnahmen erhalten.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Vorhersage-Methode</guilabel
+></term>
+    <listitem>
+      <para
+>Die verwendete Vorhersage-Methode</para>
+      <para
+>Geplante und zukünftige Buchungen sagt Ihren zukünftigen Kontostand auf Basis der vorhandenen geplanten und zukünftigen Buchungen vorher.</para>
+      <para
+>Vergangenheitsbasiert nutzt Ihre bisherigen Buchungen, um eine Vorhersage zu extrapolieren.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Anzahl zu verwendender Zyklen für Vorhersage</guilabel
+></term>
+    <listitem>
+      <para
+>Wenn Sie die vergangenheitsbasierte Vorhersage-Methode verwenden, geben Sie hier an, wie viele vorhergehende Kontozyklen &kappname; verwenden soll, um die Vorhersage zu berechnen.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Vergangenheitsbasierte Vorhersage-Methode</guilabel
+></term>
+    <listitem>
+      <para
+>Auswahl der Methode, um eine Vorhersage auf Basis von historischen Informationen durchzuführen.</para>
+      <para
+>Einfaches gleitendes Mittel verwendet Durchschnittswerte Ihrer vergangenen Transaktionen, um eine Vorhersage zu berechnen.</para>
+      <para
+>Gewichtetes gleitendes Mittel verwendet Durchschnittswerte Ihrer vergangenen Transaktionen, legt aber größeres Gewicht auf die jüngst zurückliegenden Buchungen.</para>
+      <para
+>Lineare Regression verwendet eine Formel der linearen Regression auf Basis Ihrer vergangenen Buchungen, um eine Vorhersage zu berechnen.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="details.settings.encryption">
+<title id="details.settings.encryption.title"
+>Verschlüsselung</title>
+
+<para
+>Diese Option erlaubt es Ihnen, die Verschlüsselungseinstellungen Ihrer Daten vorzunehmen. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>GPG-Verschlüsselung verwenden</guilabel
+></term>
+    <listitem>
+      <para
+>Aktiviert die Nutzung von GPG um Ihre Datei zu verschlüsseln. Im Kapitel <link linkend="details.formats.encrypted"
+>GPG Verschlüsselung</link
+> finden Sie weitere Details hierzu.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<sect2 id="details.settings.encryption.gpgencryption">
+<title
+>GPG-Verschlüsselung</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Ihr Schlüssel</guilabel
+></term>
+    <listitem>
+      <para
+>Geben Sie die E-Mail-Adresse oder die hexadezimale Schlüssel ID ein, die für die Verschlüsselung genutzt werden soll.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Zusätzliche Schlüssel</guilabel
+></term>
+    <listitem>
+      <para
+>Wählen Sie zusätzliche Schlüssel für die Verschlüsselung der Daten aus.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Auch mit &kappname;-Wiederherstellungsschlüssel verschlüsseln</guilabel
+></term>
+    <listitem>
+      <para
+>Verschlüsselt die Daten mit dem &kappname; Wiederherstellungsschlüssel. Die Auswahl dieser Option erlaubt es den Kernentwicklern von &kappname;, Ihre Daten wiederherzustellen, wenn Sie Ihren Schlüssel verloren haben.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.colors">
+<title id="details.settings.colors.title"
+>Farben</title>
+
+<para
+>Hier können Sie die in &kappname; verwendeten Farben ändern. </para>
+
+<sect2 id="details.settings.colors.foreground">
+<title
+>Karteikarte "Vordergrund"</title>
+
+<para
+>Ändern Sie die Vordergrundfarben durch Anklicken der Farben-Knöpfe und Auswahl einer Farbe aus der erscheinenden Farbpalette. </para>
+</sect2>
+
+<sect2 id="details.settings.colors.background">
+<title
+>Karteikarte "Hintergrund"</title>
+
+<para
+>Ändern Sie die Hintergrundfarben durch Anklicken der Farben-Knöpfe und Auswahl einer Farbe aus der erscheinenden Farbpalette. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.fonts">
+<title
+>Schriftarten</title>
+
+<para
+>Diese Option erlaubt Ihnen das Ändern der Schriftarten. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Systemzeichensätze verwenden</guilabel
+></term>
+    <listitem>
+      <para
+>Aktivieren Sie diese Option, um die Systemzeichensätze zu verwenden. Wenn die Option nicht aktiv ist, können Sie benutzerdefinierte Schriften verwenden.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Listen-Zeichensatz</guilabel
+></term>
+    <listitem>
+      <para
+>Die in den Listen verwendete Schriftart</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Kopfzeilen-Zeichensatz</guilabel
+></term>
+    <listitem>
+      <para
+>Die in den Listen als Spaltenüberschrift verwendete Schriftart</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="details.settings.plugins">
+<title id="details.settings.plugins.title"
+>Module</title>
+
+<para
+>Hier können Sie Einstellungen für alle installierten Erweiterungen (Module) vornehmen. Derzeit beschränkt sich die Einstellmöglichkeiten auf das Aktivieren oder Deaktivieren der installierten Erweiterungen für &kappname;. </para>
+</sect1>
+</chapter>

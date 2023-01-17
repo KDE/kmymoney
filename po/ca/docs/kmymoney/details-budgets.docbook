@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.budgets">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Colin.Wright; &Colin.Wright.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>29 de juny de 2011</date>
+  <releaseinfo
+>4.6</releaseinfo>
+</chapterinfo>
+
+<title
+>Pressupostos</title>
+
+<sect1 id="details.budgets.define">
+<title
+>Què és un pressupost?</title>
+
+<para
+>Un pressupost és una llista categoritzada d'ingressos i despeses esperats per a un període. </para>
+
+<para
+>La facilitat de Pressupost del &kmymoney; permet crear pressupostos anuals. Es pot crear més d'un Pressupost per a qualsevol any. Establiu els valors del Pressupost mensual contra qualsevol categoria d'Ingressos o Despeses que hàgiu definit. Els valors es podran establir de tres maneres, segons el Període: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Mensual</term>
+    <listitem
+><para
+>(La predeterminada) s'especifica un valor únic aplicat a cada mes al Pressupost.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Anual</term>
+    <listitem
+><para
+>S'especifica un valor únic per a dividir equitativament entre cada mes al Pressupost.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Individual</term>
+    <listitem
+><para
+>S'especifiquen valors separats per a cada mes.</para>
+      <para
+>Això s'utilitza per a ingressos i despeses distribuïts irregularment al llarg de l'any.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>El &kmymoney; proporciona una sèrie d'informes que comparen els ingressos i despeses reals amb els Pressupostos introduïts. Aquests es descriuen amb més detall en una <link linkend="budget.details.reports"
+>altra secció</link
+>. </para>
+</sect1>
+
+<sect1 id="details.budgets.create">
+<title
+>Els pressupostos</title>
+
+<para
+>Podreu accedir als pressupostos fent clic a la icona apropiada a la subfinestra de navegació al costat esquerre de la finestra del &kmymoney;. </para>
+
+<para
+>Hi ha dues seccions majors a la finestra del pressupost. Aquestes estan descrites en més detall a continuació. A l'esquerra, la secció principal mostra la llista dels pressupostos que heu creat. A dalt hi ha botons per a crear, canviar el nom i suprimir els pressupostos. A la dreta, hi ha tres seccions. A la part superior hi ha la llista de Comptes. A la part inferior, es mostren els imports assignats al pressupost per a la categoria seleccionada a l'anterior Llista de comptes. Entre aquestes dues àrees hi ha alguns controls addicionals per a gestionar el pressupost. </para>
+
+<sect2>
+<title
+>Veure, crear, canviar el nom i suprimir els pressupostos</title>
+
+<para
+>Aquesta secció de la finestra Pressupostos mostra la llista de Pressupostos que conté el fitxer actual del &kmymoney;. Si encara no heu creat cap pressupost, la llista estarà buida. La llista de Pressupostos té dues columnes: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Nom</term>
+    <listitem>
+      <para
+>El nom del pressupost.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Any</term>
+    <listitem>
+      <para
+>L'any fiscal del pressupost. Recordeu que el mes i el dia d'inici de l'any fiscal es poden especificar al <link linkend="details.settings.general.global"
+>diàleg Configuració del &kmymoney;</link
+>.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>Els valors des del pressupost seleccionat es mostren a la dreta. Per a seleccionar un Pressupost diferent, podreu fer clic sobre el Pressupost a la llista. De manera alternativa, quan la llista té el focus, podreu seleccionar un Pressupost diferent amb les tecles &Up; i &Down;. Si heu fet canvis en un Pressupost i després seleccioneu un pressupost diferent, el &kmymoney; us demanarà si voleu desar o descartar els canvis. </para>
+
+<para
+>Hi ha tres botons sobre la llista de Pressupostos. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Nou</term>
+    <listitem>
+      <para
+>Crea un pressupost nou buit. El nom predeterminat d'un pressupost nou és «Pressupost &lt;any&gt;» on &lt;any&gt; serà l'any fiscal actual. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Reanomena</term>
+    <listitem>
+      <para
+>Edita el nom del pressupost seleccionat.</para>
+
+      <para
+>També podreu editar el nom d'un Pressupost fent doble clic sobre el nom d'un Pressupost a la llista.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Suprimeix</term>
+    <listitem>
+      <para
+>Suprimeix el pressupost seleccionat.</para>
+    </listitem>
+  </varlistentry>
+
+<!--  buttons moved in the UI - they are now described below.  Will remove
+      from here after this chapter has been reviewed.
+  <varlistentry>
+    <term
+>Revert</term>
+    <listitem>
+      <para
+>Reverts the selected Budget to its last stored state.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Save</term>
+    <listitem>
+      <para
+>Accepts any unsaved changes to the selected Budget and
+        stores them.</para>
+    </listitem>
+  </varlistentry>
+ -->
+</variablelist>
+
+<para
+>Les opcions addicionals estan disponibles en un menú al qual s'accedeix fent clic dret sobre un Pressupost. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Pressupost nou</term>
+    <listitem>
+      <para
+>Crea un pressupost buit nou.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Reanomena el pressupost</term>
+    <listitem>
+      <para
+>Canvia el nom del pressupost seleccionat.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Canvia l'any del pressupost</term>
+    <listitem>
+      <para
+>Mostra una finestra amb una llista d'anys per a seleccionar un any fiscal diferent per al pressupost.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Suprimeix el pressupost</term>
+    <listitem>
+      <para
+>Suprimeix el pressupost seleccionat.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Copia el pressupost</term>
+    <listitem>
+      <para
+>Crea una còpia del Pressupost seleccionat. El Pressupost nou tindrà el nom «Còpia del &lt;pressupost&gt;», on &lt;pressupost&gt; serà el nom del Pressupost copiat.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Pressupost basat en la previsió</term>
+    <listitem>
+      <para
+>Omple els imports del pressupost en funció de les dades dels valors de la Previsió del &kmymoney;. Per a més informació vegeu la secció de <link linkend="details.forecast.define"
+>Previsions</link
+>. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Llista de comptes</title>
+
+<para
+>La Llista de comptes mostra la llista de les categories d'Ingressos i Despeses. (Recordeu, dins del &kmymoney;, les categories es tracten com un tipus especial de compte). Com en altres llocs del &kmymoney;, la llista està organitzada en una estructura en arbre. La llista es pot expandir o contraure per a mostrar o ocultar les subcategories dins d'una categoria. La Llista de comptes té diverses columnes: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Compte</term>
+    <listitem>
+      <para
+>El nom (categoria) del compte.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Tipus</term>
+    <listitem>
+      <para
+>El tipus de categoria (Ingressos o Despeses).</para>
+    </listitem>
+  </varlistentry>
+
+<!-- these seem to have been removed from the display.  Remove from here
+     once this is confirmed by the programmers.
+  <varlistentry>
+    <term
+>Tax</term>
+    <listitem>
+      <para
+>Checked if a Category included in Tax Reports</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>VAT</term>
+    <listitem>
+      <para
+>Checked if a Category marked as a VAT Category</para>
+    </listitem>
+  </varlistentry>
+-->
+
+  <varlistentry>
+    <term
+>Saldo total</term>
+    <listitem>
+      <para
+>El saldo actual del compte. Estarà en blanc per a les Categories, llevat que la Categoria es defineixi en una divisa estrangera. En aquest cas, el saldo total mostrarà el valor de la Categoria en la seva divisa definida.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Valor total</term>
+    <listitem>
+      <para
+>El valor total anual al Pressupost. Si una Categoria té subcategories i la llista de subcategories de la Categoria està plegada, el valor mostrat serà la suma dels valors per a la Categoria i totes les seves subcategories. Si es defineix una categoria en una divisa estrangera, el valor total mostrarà el valor en la divisa base.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<!-- It would be nice to include the actual button icons here to confirm
+     which buttons are referred to.  -->
+<para
+>A sota de la Llista de comptes hi ha diversos controls. Els botons <guibutton
+>Actualitza</guibutton
+> i <guibutton
+>Reverteix</guibutton
+> es descriuen a continuació. Els botons <guibutton
+>Contrau</guibutton
+> i <guibutton
+>Expandeix</guibutton
+> contrauran o expandiran tota la Llista de comptes. </para>
+
+<para
+>La Llista de comptes es pot filtrar de dues maneres. Marcant la casella de selecció <guilabel
+>Oculta les categories no emprades</guilabel
+>, s'ocultaran les Categories per a les quals no s'ha assignat cap valor a la Categoria ni a cap de les seves subcategories. A la dreta d'això, hi ha un quadre de text sense etiquetar. Només es llistaran les categories que inclouen el que s'escriu en aquest quadre, però també es llistaran les seves categories pare. </para>
+
+<para
+>Recordeu que si canvieu l'opció <guilabel
+>Oculta les categories de pressupost no emprades</guilabel
+> o el valor del filtre, és probable que canviï la visualització de la llista de Categories. És possible que hàgiu de tornar a expandir la llista per a veure totes les Categories que s'han de mostrar amb la configuració actual. </para>
+
+</sect2>
+
+<sect2>
+<title
+>Assignacions</title>
+
+<para
+>L'àrea Assignacions mostra els valors per a la Categoria seleccionada a la Llista de comptes. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Compte</term>
+    <listitem>
+      <para
+>Mostra el nom de la categoria seleccionada. Si la Categoria és una subcategoria, es mostrarà tot el seu nom al format Categoria:Subcategoria.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Total</term>
+    <listitem>
+      <para
+>Mostra el valor anual total assignat a la Categoria.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Inclou els subcomptes</term>
+    <listitem>
+      <para
+>Si està marcada, els Informes mostraran els ingressos o despeses reals en les subcategories que pertanyen a la Categoria contra la Categoria en lloc de la subcategoria.</para>
+
+      <para
+>Si una subcategoria té un valor definit al Pressupost, llavors els ingressos i despeses es mostraran a la subcategoria.</para>
+
+      <para
+>Si la Categoria seleccionada a la Llista de comptes té les seves subcategories plegades, encara que el seu Valor total mostri la suma dels Valors totals per a totes les seves subcategories, els imports a l'àrea Assignacions encara podrien mostrar 0, llevat que aquesta casella hagi estat marcada o que s'hagi assignat explícitament un import a la Categoria.</para>
+
+      <para
+>En general, ja sigui que marqueu aquesta casella i assigneu valors a la Categoria i no a cap de les seves subcategories, o que no marqueu la casella i assigneu valors a les subcategories però no a la Categoria. Si qualsevol subcategoria té assignat un import quan aquesta casella està marcada, aquests imports s'acumularan a la Categoria.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Neteja</term>
+    <listitem>
+      <para
+>El botó <guibutton
+>Neteja</guibutton
+> restablirà a zero el valor o els valors de la categoria pressupostada.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Període</term>
+    <listitem>
+      <para
+>Els botons d'opció <guilabel
+>Període</guilabel
+> permeten seleccionar el període per al qual s'aplicarà el valor.</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>Mensual</term>
+	  <listitem>
+	    <para
+>Si s'introdueix un sol valor, especificant l'import per mes. Aquesta és la configuració predeterminada.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term
+>Anual</term>
+	  <listitem>
+	    <para
+>Si s'introdueix un sol valor, especificant l'import per any.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term
+>Individual</term>
+	  <listitem>
+	    <para
+>Els valors s'especifiquen per a cada mes al Calendari. Això es fa servir quan les despeses o ingressos es distribueixen de manera irregular al llarg de l'any.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+
+      <para
+>Si ja s'ha especificat un valor o valors i es canvia el Període, el &kmymoney; us demanarà si voleu fer servir el valor anual total actual per a assignar els nous valors. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Actualitzar i revertir</title>
+
+<para
+>Per raons de rendiment, els canvis realitzats en un Pressupost no es desaran immediatament. En canvi, primer s'han d'emmagatzemar utilitzant el botó <guibutton
+>Actualitza</guibutton
+> i després desar-los permanentment amb el botó <guibutton
+>Desa</guibutton
+>. </para>
+
+<para
+>Quan es modifiquen per primera vegada els valors d'un Pressupost, s'habilitaran els botons <guibutton
+>Actualitza</guibutton
+> i <guibutton
+>Reverteix</guibutton
+>. Es podran fer múltiples canvis al Pressupost. En prémer <guibutton
+>Actualitza</guibutton
+> s'emmagatzemaran els canvis i s'inhabilitaran aquests botons. </para>
+
+<para
+>El botó <guibutton
+>Desa</guibutton
+> només desarà els canvis que s'han emmagatzemat amb el botó <guibutton
+>Actualitza</guibutton
+>. Per tant, si heu modificat un Pressupost però encara no heu emmagatzemat els canvis, el botó <guibutton
+>Desa</guibutton
+> no afectarà el Pressupost modificat i els botons <guibutton
+>Actualitza</guibutton
+> i <guibutton
+>Reverteix</guibutton
+> romandran habilitats. </para>
+
+<para
+>Reverteix desfarà qualsevol canvi realitzat en un Pressupost des de l'última actualització i inhabilitarà els botons <guibutton
+>Actualitza</guibutton
+> i <guibutton
+>Reverteix</guibutton
+>. </para>
+
+<para
+>Els canvis s'emmagatzemaran emprant <guibutton
+>Actualitza</guibutton
+> però sense emprar encara <guibutton
+>Desa</guibutton
+>, fent-ho així es podran revertir només tornant a carregar el fitxer del &kmymoney;. </para>
+</sect2>
+</sect1>
+
+<sect1 id="budget.details.reports">
+<title
+>Informes de pressupost</title>
+
+<para
+>El &kmymoney; proporciona una sèrie d'informes per a comparar els ingressos i despeses reals amb un Pressupost. Aquests es llisten als Informes sota «Pressupostos». Hi ha dos tipus d'Informes de Pressupost: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Només el pressupost</term>
+    <listitem
+><para
+>Aquests informes mostren els valors d'un Pressupost.</para>
+      <variablelist>
+        <varlistentry>
+          <term
+>Pressupost mensual</term
+> 
+          <listitem
+><para
+>Mostra els valors mensuals d'un pressupost.</para>
+          </listitem
+></varlistentry>
+        <varlistentry>
+          <term
+>Pressupost anual</term
+> 
+          <listitem
+><para
+>Mostra els valors mensuals d'un pressupost, amb un total anual.</para>
+          </listitem
+></varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Pressupost vs. real</term>
+    <listitem
+><para
+>Aquests informes comparen els valors des d'un Pressupost amb els ingressos i despeses reals. A cada informe de pressupost, trobareu les columnes Pressupost, Real i Diferència. Cada informe diferirà en el període que es mostra.</para>
+      <variablelist>
+      <varlistentry>
+      <term
+>Pressupost vs. real aquest any</term
+> 
+      <listitem
+><para
+>Des del començament de l'any fins avui.</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Pressupost vs. real aquest any (YTM)</term
+> 
+      <listitem
+><para
+>Des de principis d'any fins a l'últim dia del mes anterior.</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Pressupost mensual vs. realitzat</term
+> 
+      <listitem
+><para
+>Des de principis d'any fins a l'últim dia del mes actual.</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Pressupost anual vs. realitzat</term
+> 
+      <listitem
+><para
+>Des de l'1 de gener fins al 31 de desembre.</para>
+      </listitem
+></varlistentry>
+      <varlistentry>
+      <term
+>Pressupost anual vs. realitzat (gràfic)</term
+> 
+      <listitem
+><para
+>Igual que l'informe anterior però mostra el gràfic predeterminat.</para>
+      </listitem
+></varlistentry>
+      </variablelist>
+
+      <para
+>Aquests informes proporcionen una base a partir de la qual es poden crear informes personalitzats canviant l'interval de les dates i el Pressupost, entre altres opcions. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+</chapter>

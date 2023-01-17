@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="whatsnew">
+<chapterinfo>
+  <date
+>30/08/2014</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>O que há de novo nesta versão</title>
+
+<para
+>Como em cada nova versão, a equipe de desenvolvimento do &kappname; tenta ao máximo tornar esta versão melhor e mais simples de usar de todas as formas. Também foram feitas algumas melhorias. Estamos confiantes de que você gostará do que irá ver. </para>
+
+<para
+>Além de inúmeras correções de erros, esta versão também inclui novas funcionalidades. Ainda que todas elas estejam sujeitas a alguns testes, esta é considerada uma versão de desenvolvimento, como preparação para o lançamento da versão 4.8 completa no início de 2015. </para>
+
+<para
+>Aqui estão algumas das novas funcionalidades desta versão: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Foram adicionadas as etiquetas das transações. Isso era uma funcionalidade solicitada há muito tempo e permite melhorar a classificação das transações. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Melhor desempenho da interface do usuário. O desempenho foi melhorado de um modo geral, resolvendo a degradação que foi detectada com ferramentas adequadas. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Foi adicionado suporte adequado para métodos de introdução de caracteres. O &kappname; pode agora ser usado sem problemas com idiomas que exijam métodos de introdução de caracteres específicos de forma mais fácil. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Foi adicionada uma coluna fixa que melhora a visualização dos detalhes da previsão. Dessa forma, o nome da conta não será retirado da visualização quando deslocar os detalhes na horizontal. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Os ícones do aplicativo foram melhorados. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Muitas melhorias na importação de módulos de bancos online, incluindo: </para>
+  </listitem>
+
+  <listitem>
+    <itemizedlist>
+      <listitem>
+        <para
+>A Página Inicial pode mostrar o status das contas bancárias online. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>O plugin de OFX agora permite uma versão personalizada do aplicativo. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Existe um novo plugin para exportar arquivos csv. </para>
+      </listitem>
+    </itemizedlist>
+  </listitem>
+</itemizedlist>
+
+</chapter>

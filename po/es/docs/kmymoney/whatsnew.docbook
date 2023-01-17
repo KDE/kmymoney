@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="whatsnew">
+<chapterinfo>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Novedades de esta versión</title>
+
+<para
+>Como con cada lanzamiento, el equipo de desarrollo de &kappname; ha trabajado duro para hacer esta versión mejor y más fácil de usar en todos los aspectos. También hemos hecho bastantes mejoras. Confiamos en que le guste lo que vea. </para>
+
+<para
+>Además de numerosas correcciones de errores, esta versión también incluye nuevas características y funcionalidades. Aunque todas las nuevas funcionalidades se han probado a algún nivel, esta versión se considera una versión de desarrollo, en preparación a la versión completa 4.8 que aparecerá a principios de 2015. </para>
+
+<para
+>Estas son algunas de las nuevas características que se encuentran en esta versión: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Se añadieron etiquetas para las transacciones. Esta era una característica largamente solicitada y permite una categorización mejorada de las transacciones. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Mejor rendimiento de la interfaz de usuario. El rendimiento en general se ha mejorado solucionando cuestiones de rendimiento detectadas utilizando un generador de perfiles. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Se añadió soporte para métodos de entrada apropiadas. &kappname; ahora puede utilizarse de manera segura con idiomas que necesitan métodos de entradas para un uso más fácil. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Se añadió una columna fija para mejorar la visualización de los detalles de la previsión. De esta manera, el nombre de la cuenta no se desplazará fuera de la vista cuando se desplacen horizontalmente los detalles de la previsión. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Se mejoraron los iconos de la aplicación. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Muchas mejoras en los módulos de importación y de banca electrónica, incluyendo: </para>
+  </listitem>
+
+  <listitem>
+    <itemizedlist>
+      <listitem>
+        <para
+>La página de bienvenida puede mostrar el estado bancario en línea de las cuentas. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>El complemento OFX ahora permite una versión personalizada de la aplicación. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Hay un nuevo complemento para exportar archivos csv. </para>
+      </listitem>
+    </itemizedlist>
+  </listitem>
+</itemizedlist>
+
+</chapter>

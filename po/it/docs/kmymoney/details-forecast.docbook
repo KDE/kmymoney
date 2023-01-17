@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.forecast">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Colin.Wright; &Colin.Wright.mail; </author>
+  </authorgroup>
+  <date
+>25/07/2010</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Previsioni</title>
+
+<sect1 id="details.forecast.define">
+<title
+>Cosa sono le previsioni?</title>
+
+<para
+>In &kmymoney;, una previsione riguarda i bilanci dei conti, in un tempo futuro specificato.</para>
+
+<para
+>Ci sono due metodi per fare le previsioni. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Transazioni pianificate e future</term>
+    <listitem>
+      <para
+>&kmymoney; usa una combinazione delle transazioni future inserite nei registri e di quelle pianificate.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Basata sullo storico</term>
+    <listitem>
+      <para
+>&kmymoney; usa i valori delle transazioni passate nei registri per prevedere le transazioni future.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>Il metodo di previsione e il periodo di previsione possono essere impostati nelle impostazioni di &kmymoney;, nel pannello Previsione. </para>
+
+<para
+>Le previsioni di &kmymoney; forniscono un riepilogo con il bilancio previsto con la frequenza specificata e la differenza prevista tra il bilancio iniziale e quello finale. La frequenza delle previsioni può essere impostata dall'utente. Il sommario visualizza anche dei messaggi riguardanti i cambiamenti significativi previsti nel conto durante il periodo di previsione. </para>
+
+<para
+>Oltre al riepilogo, le previsioni di &kmymoney; permettono anche di vedere i bilanci giornalieri e il bilancio minimo e massimo per ogni ciclo di previsioni. </para>
+
+<para
+>Le impostazioni predefinite visualizzano una previsione di 90 giorni con ciclo di previsione di 30 giorni, usando le transazioni pianificate e future. </para>
+</sect1>
+
+<sect1 id="details.forecast.view">
+<title
+>Visualizzazione delle previsioni</title>
+
+<para
+>È possibile vedere le previsioni facendo clic sulla relativa icona nel selettore della vista nella parte sinistra della finestra di &kmymoney;. </para>
+
+<para
+>La finestra delle previsioni è divisa in cinque schede: </para>
+
+<sect2>
+<title
+>Scheda Riepilogo</title>
+
+<para
+>La scheda Riepilogo è divisa verticalmente in due parti. </para>
+
+<sect3>
+<title
+>Riepilogo del conto</title>
+
+<para
+>Il riepilogo del conto contiene una tabella che visualizza una riga di informazioni per ogni conto di attività o passività. </para>
+
+<para
+>Sono visualizzate le colonne seguenti: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Conto</term>
+    <listitem>
+      <para
+>Il nome del conto di attività o passività</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Bilancio corrente (Attuale)</term>
+    <listitem>
+      <para
+>Viene visualizzato il bilancio corrente del conto.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Bilancio durante il ciclo di previsione</term>
+    <listitem>
+      <para
+>Il periodo di previsione è diviso in cicli di previsione. La lunghezza predefinita del ciclo di previsione è 30 giorni, ma può essere impostata dall'utente.</para>
+
+      <para
+>La data in cui finisce il primo ciclo di previsione è la prima data in cui viene fatta la previsione. Come impostazione predefinita, questa è la data attuale più la durata di un ciclo di previsione ma può essere diversa, in base all'impostazione «Giorno del mese di inizio della previsione».</para>
+
+      <para
+>Le date di fine dei cicli di previsione successivi vengono calcolate aggiungendo alla data precedente la lunghezza di un ciclo di previsione. Questo processo continua finché non si supera la data di fine della previsione.</para>
+
+      <para
+>Viene visualizzato il bilancio previsto dopo ogni ciclo di previsione.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Variazione totale</term>
+    <listitem>
+      <para
+>La colonna più a destra visualizza la differenza prevista tra il bilancio all'inizio e alla fine della previsione. Se il valore previsto del conto (in termini di patrimonio netto) è minore di quello iniziale, la riga viene evidenziata in rosso.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+</sect3>
+
+<sect3>
+<title
+>Informazioni principali del riepilogo</title>
+
+<para
+>La parte inferiore della scheda Riepilogo visualizza informazioni utili sui conti. Queste includono: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Attività sotto lo zero</term>
+    <listitem>
+      <para
+>Viene visualizzato un messaggio per tutte le attività il cui valore parte negativo o scende sotto lo zero durante il periodo di previsione.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Passività sopra lo zero</term>
+    <listitem>
+      <para
+>Viene visualizzato un messaggio per le passività il cui valore parte positivo o sale sopra lo zero durante il periodo di previsione. È bene notare che il valore delle passività è l'opposto del suo bilancio, quindi un bilancio positivo significa che si devono dei soldi a qualcuno.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Scheda Dettagli</title>
+
+<para
+>La scheda Dettagli contiene una tabella che visualizza una riga di informazioni per ogni conto di attività o passività. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Conto</term>
+    <listitem>
+      <para
+>Il nome del conto di attività o passività</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Date</term>
+    <listitem>
+      <para
+>Per ogni data nel periodo di previsione, viene visualizzata una colonna con il bilancio previsto in quella data. Le colonne con le date sono ordinate in senso crescente, da sinistra a destra.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Variazione totale</term>
+    <listitem>
+      <para
+>La colonna più a destra visualizza la differenza prevista tra il bilancio all'inizio e alla fine della previsione. Se il valore previsto del conto (in termini di patrimonio netto) è minore di quello iniziale, la riga viene evidenziata in rosso.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Scheda Avanzate</title>
+
+<para
+>La scheda Avanzate contiene una tabella che visualizza una riga di informazioni per ogni attività e passività. Le informazioni sono divise in colonne come segue: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Conto</term>
+    <listitem>
+      <para
+>Il nome del conto di attività o passività</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Bilancio minimo del ciclo di previsione</term>
+    <listitem>
+      <para
+>Per l'ennesimo ciclo di previsione nel periodo di previsione, sono visualizzate le colonne seguenti:</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>Bilancio minimo (Bil min &lt;n&gt;)</term>
+	  <listitem>
+	    <para
+>Il bilancio minimo previsto durante il ciclo di previsione</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term
+>Data del bilancio minimo (Data min &lt;n&gt;)</term>
+	  <listitem>
+	    <para
+>La data in cui il bilancio previsto raggiunge il minimo.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Bilancio massimo del ciclo di previsione</term>
+
+    <listitem>
+      <para
+>Per l'ennesimo ciclo di previsione nel periodo di previsione, sono visualizzate le colonne seguenti:</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>Bilancio massimo (Bil max &lt;n&gt;)</term>
+	  <listitem>
+	    <para
+>Il bilancio massimo previsto durante il ciclo di previsione</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term
+>Data del bilancio massimo (Data max &lt;n&gt;)</term>
+	  <listitem>
+	    <para
+>La data in cui il bilancio previsto raggiunge il massimo.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Media</term>
+
+    <listitem>
+      <para
+>Il bilancio medio del conto durante il periodo di previsione</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2>
+<title
+>Scheda Previsione di budget</title>
+
+<para
+>La scheda del budget mostra il calcolo di una previsione per le categorie di entrate e uscite. Le colonne sono simili a quelle delle schede Riepilogo e Dettagli. </para>
+
+</sect2>
+
+<sect2>
+<title
+>Scheda Grafico</title>
+
+<para
+>Visualizza un grafico che mostra la previsione. Il livello di dettaglio dipende ciò che si è selezionato nell'opzione relativa. </para>
+
+</sect2>
+
+</sect1>
+</chapter>

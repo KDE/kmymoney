@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.currencies">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Divisas</title>
+
+<para
+>&kappname; acepta el uso de varias monedas en distintas cuentas. Por ejemplo, puede configurar una cuenta bancaria en euros, otra en libras esterlinas, y su cuenta de tarjeta de crédito en dólares de EE. UU. </para>
+
+<sect1 id="details.currencies.basecurrency">
+<title
+>Divisa base</title>
+
+<para
+>Una vez cree un archivo de &kappname;, se le preguntará por la divisa base. La divisa base es la que usarán todas las categorías de ingresos y gastos, y en la que estarán basados los informes. Habitualmente, la divisa base es la que se utiliza en su país. Si no se selecciona otra, las nuevas cuentas usarán esta divisa de manera predeterminada. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>El diálogo de selección de moneda</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="select_currency.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>seleccionar divisa</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect2 id="details.currencies.newcurrency">
+<title
+>Añadir una nueva divisa</title>
+
+<para
+>Aunque no ocurre a menudo, de vez en cuando aparece una nueva divisa. Puede ser una nueva divisa virtual, tal como Bitcoin, o un cambio introducido por un país por razones de política financiera. A pesar de que estas divisas se añadirán a la siguiente versión de &kappname; es posible añadirlas manualmente, en el caso de que tenga la necesidad de empezar a utilizarla de manera inmediata. </para>
+
+<para
+>Para añadir manualmente una divisa, seleccione <menuchoice
+><guimenu
+>Herramientas</guimenu
+><guimenuitem
+>Divisas...</guimenuitem
+></menuchoice
+> para mostrar el diálogo <guilabel
+>Divisas</guilabel
+> tal como se muestra arriba. Haga clic derecho sobre cualquier divisa existente y seleccione <menuchoice
+><guimenuitem
+>Nueva divisa</guimenuitem
+></menuchoice
+> desde el menú contextual <menuchoice
+><guimenu
+>Opciones de divisa</guimenu
+></menuchoice
+> Introduzca el código oficial de la divisa y haga clic en <guilabel
+>Aceptar</guilabel
+>. La divisa se creará con el nombre <quote
+>Nueva divisa</quote
+>. Para cambiar el nombre, pulse <keycap
+>F2</keycap
+> o haga clic derecho y seleccione <menuchoice
+><guimenuitem
+>Renombrar divisa</guimenuitem
+></menuchoice
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.currencies.accountsetup">
+<title
+>Configuración de cuenta</title>
+
+<para
+>Si crea una nueva cuenta, tiene la opción de especificar la divisa en la que será gestionada. El libro mayor para la cuenta mostrará todos los valores en la divisa seleccionada. El asistente para cuentas nuevas hará que la <link linkend="details.currencies.basecurrency"
+>divisa base</link
+> sea la configurada por defecto. </para>
+</sect1>
+
+<sect1 id="details.currencies.transactions">
+<title
+>Introducir transacciones usando diferentes monedas</title>
+
+<para
+>Cada vez que se introduce un asiento que se refiere a más de una divisa, aparece el editor de cotizaciones y le permite introducir esta. Inicialmente, el precio actual disponible de la base de datos de precios será utilizado como cotización. Vea <link linkend="details.currencies.prices"
+>Introducir cotizaciones para las divisas</link
+> para más información sobre cómo proporcionar cotizaciones manualmente y obtener información sobre precios en línea. </para>
+
+<para
+>Opcionalmente, la cotización se guarda en la base de datos de precios una vez introducida por el usuario. </para>
+</sect1>
+
+<sect1 id="details.currencies.prices">
+<title
+>Cotizaciones para las divisas</title>
+
+<sect2>
+<title
+>Introducir precios manualmente</title>
+
+<para
+>El editor de la base de datos de precios le permite introducir cotizaciones entre divisas o precios para las inversiones. Puede activarlo usando la opción de menú <menuchoice
+><guimenu
+>Herramientas</guimenu
+> <guimenuitem
+>Precios...</guimenuitem
+></menuchoice
+> </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="currency_priceeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Editor de precios de divisas</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>En &kappname;, un <quote
+>precio</quote
+> es el precio de una divisa en los términos de otra. Por ejemplo, en el momento de escribir esto el precio de 1 USD en términos de 1 EUR es 0,83; esto es, 1 USD cuesta 0,83 EUR. La primera divisa es la que se compra o se vende, y la segunda es la que se usa para comprarla o venderla. </para>
+
+<para
+>Cuando presiona el botón <guibutton
+>Nuevo</guibutton
+>, obtiene el diálogo de Entrada de Nuevo Precio. Introduzca la primera divisa (USD en el ejemplo anterior) en el campo de Valor bursátil. Introduzca la segunda divisa (EUR en el ejemplo anterior) en el campo de Divisa. Introduzca la fecha en la que ese precio es efectivo en el campo Fecha. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="currency_newpriceentry.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Entrada de Nuevo Precio</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect2>
+
+<sect2>
+<title
+>Actualizaciones de divisas en línea</title>
+
+<para
+>&kappname; obtendrá las conversiones de divisas de la web. Una vez haya introducido un precio para un par de divisas, la funcionalidad de cotización en línea siempre listará ese par entre sus opciones. </para>
+
+<para
+>Vea la sección sobre <link linkend="details.investments.onlinequotes"
+>Cotizaciones de precios en línea</link
+> en el capítulo de Inversiones para más detalles. </para>
+</sect2>
+</sect1>
+</chapter>

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="makingmostof">
+<chapterinfo>
+  <authorgroup>
+    <author
+><personname
+><firstname
+>Joe</firstname
+><surname
+>(joe1011010)</surname
+></personname
+> <email
+>joe1011010_km@users.sourceforge.net</email
+> </author>
+  </authorgroup>
+  <date
+>19/07/2010</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Extraindo o máximo do &kappname;</title>
+
+<para
+>Embora você possa seguir em frente, clicar em alguns botões e preencher alguns dados, ao final de algum tempo, poderia concluir que cometeu um erro e ter que começar tudo de novo, mesmo lendo a documentação de cada parte do &kappname;. </para>
+
+<para
+>Você irá obter um sistema muito mais eficiente se tirar algum tempo planejando como irá usar o &kappname;, por isso, siga as etapas aqui indicadas. </para>
+
+<sect1 id="makingmostof.basicaccounting">
+<title
+>Contabilidade Básica</title>
+
+<para
+>Imagine o seu dinheiro como se fossem bolas ou feijões e, para pará-los de rolar, você poderá colocá-los numa caixa, pote ou algo do gênero. A contabilidade é o processo de contar e manter o controle dos feijões em um ou vários potes. </para>
+
+<para
+>Você tem algum dinheiro no seu pote <quote
+>Dinheiro</quote
+>. Você poderá comprar alguns bens, tirando assim alguns feijões do pote de dinheiro e colocando-os em outro pote, chamado <quote
+>Fornecedor</quote
+>. O fornecedor lhe dará alguns bens em troca do dinheiro, bens estes que serão retirados do pote <quote
+>Fornecedor</quote
+> e colocados no pote dos <quote
+>Bens</quote
+>. </para>
+
+<para
+>Os bens possuem um determinado valor (o preço que pagou), assim você ainda terá o mesmo número de feijões, onde alguns representam o dinheiro e outros os bens. </para>
+
+<para
+>Nesse caso, você terá dois movimentos de feijões, ou transações. Cada transação precisa de dois itens, um de onde retirar os feijões e outro onde os colocar. Isso é chamado de <quote
+>Método das Partidas Dobradas</quote
+> ou <quote
+>contabilidade por registro duplo</quote
+>. O registro das transações é feito em um <quote
+>Livro de Registros</quote
+>; cada pote é conhecido como uma <quote
+>Conta</quote
+> ou <quote
+>Código de registro</quote
+>. </para>
+
+<para
+>Agora pegue alguns dos bens e os dê a um cliente, que lhe dará algum dinheiro em troca. Os bens valerão alguns feijões e, assim esperamos, o cliente irá dar-lhe mais alguns feijões do que o previsto, fazendo com que obtenha algum lucro. Para simplificar, os feijões do pote dos Bens voltarão como Dinheiro, mas estes poderão ser divididos como o <quote
+>Custo dos bens vendidos</quote
+> e o <quote
+>Lucro</quote
+>. Esta transação possui três itens; um dos lados dos <quote
+>itens duplos</quote
+> foi dividido. </para>
+
+<para
+>Isto será tratado com mais detalhes neste manual. </para>
+<!-- **** don't forget to make sure this is actually covered, and linked to from
+     here.  Also, I have removed "in setting up accounts for Businesses." and
+     modified the section below, since we explicitly say that KMM is not for
+     business use. -->
+
+<sect2 id="makingmostof.basicaccounting.personalaccounts">
+<title
+>Definir as contas (registros pessoais)</title>
+
+<para
+>A maioria das contas ou potes explicados acima, representam uma medida do nosso <quote
+>Valor</quote
+>. O dinheiro e os bens representam os nossos <quote
+>Ativos</quote
+>; o mesmo acontece com o dinheiro que nos é devido, no caso de os nossos clientes não nos terem pago. O dinheiro que devemos, por exemplo se não pagarmos aos nossos fornecedores, são o nosso <quote
+>Passivo</quote
+>. Estas contas podem ser transferidas para dinheiro e ter um valor. </para>
+
+<para
+>Todos os potes que não puderem ser quantificados são <quote
+>Receitas</quote
+> ou <quote
+>Despesas</quote
+>. A nossa conta de telefone (ou da empresa a quem pagamos a conta) não pode ser quantificada; sabemos quanto pagamos, mas não sabemos o que os outros pagaram. Sabemos quanto o nosso patrão nos pagou, mas não sabemos quanto pagou a todos os outros, ou quanto ele têm ainda para nos poder pagar no mês seguinte. Ainda que não seja possível determinar um valor atual para esses potes, é útil vigiar quando foi colocado ou retirado. </para>
+
+<para
+>Em alguns casos, um fornecedor é um <quote
+>Passivo</quote
+>, enquanto noutros é uma <quote
+>Despesa</quote
+>. Isto é algo que tem que ser considerado e decidido caso-a-caso. Do mesmo modo, você poderá ter configurado um financiamento como um Passivo, em particular se transferir o dinheiro para a sua conta bancária, mas poderia ser uma despesa, caso fosse para comprar alguma mobília. </para>
+
+<para
+>Pense como deseja monitorar e analisar as suas receitas e despesas. Isto irá ajudá-lo a decidir como irá configurá-las no &kappname;. </para>
+
+<para
+>Finalmente, decida se deseja tudo num único conjunto de contas, em dois ou mais. Isso poderá depender da base legal ou da forma como deseja analisar as coisas. Cada conjunto de contas seria então tratado em separado. </para>
+</sect2>
+
+<sect2 id="makingmostof.basicaccounting.businessaccounts">
+<title
+>Definindo as contas (registros de negócio)</title>
+
+<para
+>Existem algumas semelhanças para configurar as contas para uso pessoal, mas existem outras considerações adicionais, incluindo algumas recomendações e requisitos legais. O &kappname; não lida explicitamente com nenhuma dessas questões, uma vez que foi projetado como um gerenciador de finanças <quote
+>pessoal</quote
+>. Além disso, essas questões adicionais não são tratadas neste manual, mas você deverá estar ciente das mesmas, caso queira usar o &kappname; em atividades comerciais. </para>
+</sect2>
+</sect1>
+
+<sect1 id="makingmostof.mapping">
+<title
+>Aplicar as suas finanças no &kappname;</title>
+
+<para
+>Para isso, recolha os seus papéis e veja as seções a seguir para cada item no &kappname;. </para>
+
+<sect2 id="makingmostof.mapping.accounts">
+<title
+>Contas</title>
+
+<para
+>Elas contêm um valor. As transações são criadas para uma ou mais contas. </para>
+
+<sect3 id="makingmostof.mapping.accounts.asset">
+<title
+>Contas - Ativo</title>
+
+<para
+>Estas são as contas que mantém o seu dinheiro e posses que deseja acompanhar. Estão disponíveis os seguintes tipos: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Corrente</term>
+    <listitem>
+      <para
+>Uma conta-corrente normal. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Poupança</term>
+    <listitem>
+      <para
+>Uma conta-poupança normal. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Dinheiro</term>
+    <listitem>
+      <para
+>O dinheiro na sua mão ou carteira. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Empréstimo</term>
+    <listitem>
+      <para
+>Empréstimos obtidos de outras pessoas. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Investimento</term>
+    <listitem>
+      <para
+>O dinheiro que você investe. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Ativo</term>
+    <listitem>
+      <para
+>As propriedades, coleções, etc. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+
+<sect3 id="makingmostof.mapping.accounts.liability">
+<title
+>Contas - Passivo</title>
+
+<para
+>São as contas que representam suas obrigações e dívidas que deseja controlar. Estão disponíveis os seguintes tipos: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Cartão de crédito</term>
+    <listitem>
+      <para
+>Uma conta de cartão de crédito padrão. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Empréstimo</term>
+    <listitem>
+      <para
+>Empréstimos obtidos, hipotecas, etc. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Passivo</term>
+    <listitem>
+      <para
+>Tudo o que você deve que não seja um empréstimo. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+<sect2 id="makingmostof.mapping.institutions">
+<title
+>Instituições</title>
+
+<para
+>São opcionais e poderão ser usadas para agrupar as contas, mostrando um valor total para todas as contas em cada grupo. </para>
+</sect2>
+
+<sect2 id="makingmostof.mapping.categories">
+<title
+>Categorias</title>
+
+<para
+>Representam as contas de receita e despesa não gerenciadas e que não têm um valor. O valor total das transações é apresentado para cada categoria. É necessária uma categoria ou conta de transferência para cada transação. </para>
+</sect2>
+
+<sect2 id="makingmostof.mapping.subcategories">
+<title
+>Subcategorias</title>
+
+<para
+>As categorias poderão ser divididas em sub-categorias, mas essa relação é usada apenas para fins de apresentação, uma vez que os totais das sub-categorias não estão incluídos no total da categoria-mãe. </para>
+</sect2>
+
+<sect2 id="makingmostof.mapping.tags">
+<title
+>Etiquetas</title>
+
+<para
+>São muito semelhantes às Categorias, porque também são contas não-gerenciadas e não têm nenhum valor. Contudo, ao contrário das Categorias, o uso de Etiquetas é completamente opcional. </para>
+</sect2>
+
+<sect2 id="makingmostof.mapping.payees">
+<title
+>Beneficiários</title>
+
+<para
+>São opcionais para as transações normais, mas obrigatórios para as agendadas. É apresentado um histórico com a categoria das transações para cada beneficiário. </para>
+</sect2>
+
+<sect2 id="makingmostof.mapping.schedules">
+<title
+>Transações agendadas</title>
+
+<para
+>Onde as transações ocorrem regularmente e podem ser configuradas com base em uma agenda. As transações são criadas a partir de um agendamento e as agendadas que estejam atrasadas podem ser vistas na página inicial. </para>
+</sect2>
+</sect1>
+
+<sect1 id="makingmostof.usefultips">
+<title
+>Dicas Úteis</title>
+
+<para
+>A menos que guarde seu dinheiro embaixo do colchão ou sob o assoalho, provavelmente você usará uma ou mais instituições, nas quais poderá ter contas de crédito ou débito. Para se familiarizar com a forma como o &kappname; funciona, escolha uma conta que deseja acompanhar com o programa e selecione a opção <menuchoice
+><guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Novo</guimenuitem
+></menuchoice
+> para configurar o arquivo de uma conta. </para>
+
+<para
+>Se você tiver usado outro gerenciador de finanças pessoais, poderá importar os dados do mesmo para o &kappname;. </para>
+
+<para
+>Se você tiver recebido ou enviado alguns recibos regulares desta conta, vá ao Beneficiário e indique os nomes de ambos os beneficiários e de outros beneficiários envolvidos, depois vá ao Evento Recorrente e preencha um Novo Evento Recorrente para cada transação. Se não tiver inserido o devedor ou o beneficiário, o &kappname; dará uma oportunidade para fazer isso durante a inserção do evento recorrente. </para>
+
+<para
+>Para adicionar as outras transações novas, vá ao Livro de Registros; você poderá adicionar novos beneficiários e categorias no meio de uma transação ou indo aos Beneficiários ou Categorias, antes de inserir a transação. </para>
+
+<para
+>Provavelmente você irá descobrir que as categorias padrão não correspondem exatamente às suas necessidades; você poderá apagar então as que sabe que não irá usar com facilidade, assim como criar outras que necessitar. Mas, ao inserir uma transação, você só terá que escrever algumas letras de uma categoria, para que o &kappname; lhe ofereça uma lista das categorias correspondentes onde escolher. </para>
+
+<para
+>Você poderá adicionar contas diferentes, gerenciadas por instituições também diferentes. A preferida irá aparecer quando abrir o &kappname;, mas você poderá mudar facilmente para qualquer uma das outras. </para>
+
+<para
+>Quando fizer um pagamento, o &kappname; irá descobrir qual será o próximo número do cheque; apague isto se não estiver fazendo um pagamento por cheque ou edite-o, caso o primeiro cheque que inserir não for o número 1. Em alternativa, também é possível desligar o incremento automático dos números de cheques. </para>
+
+<para
+>Frequentemente, você poderá obter extratos das suas contas, a partir das instituições que usa; você poderá consolidar as suas contas no &kappname;, face a esses extratos, de modo a ter um extrato exato do estado atual das suas finanças. </para>
+
+<para
+>Se você for aos Relatórios, irá encontrar diversos relatórios padrão; para personalizá-los, abra o mais adequado às suas preferências e depois selecione a opção 'Novo' (não o 'Copiar'); você poderá então personalizá-lo conforme desejar e marcá-lo como um relatório preferido, se assim quiser. </para>
+
+<para
+>Ainda que o &kappname; não pretenda ser usado num contexto de negócio, se você estiver tocando o seu próprio negócio e não necessitar de funções de processamento de salários, você poderá concluir que o &kappname; é ajustável o suficiente para as suas necessidades em particular, uma vez que vem com funcionalidades de orçamentos e previsões e por permitir a exportação dos seus relatórios personalizados em CSV para outros aplicativos. </para>
+</sect1>
+</chapter>

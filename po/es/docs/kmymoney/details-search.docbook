@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.search">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Darin.Strait; &Darin.Strait.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Buscar asientos</title>
+
+<sect1 id="details.search.general">
+<title
+>General</title>
+
+<para
+>El diálogo de <guilabel
+>Buscar asientos</guilabel
+> busca sus datos basándose en los criterios que usted especifique. Puede acceder al diálogo yendo al menú <guimenu
+>Editar</guimenu
+> y seleccionando <guimenuitem
+>Buscar asientos...</guimenuitem
+>. </para>
+
+<para
+>Hay dos pestañas principales en este diálogo. La pestaña de <quote
+>Criterios</quote
+> muestra un número de subpestañas para especificar los criterios de búsqueda. </para>
+
+<para
+>Los resultados se mostrarán bajo la pestaña <quote
+>Resultados</quote
+> después de que se haya completado la búsqueda. Bajo la lista de resultados, &kappname; muestra el número de transacciones que coinciden con los criterios de búsqueda. Hacer doble clic en un asiento individual de la lista de resultados hará aparecer el libro mayor apropiado y mostrará la transacción. </para>
+
+<para
+>Cuando el botón <guibutton
+>Buscar</guibutton
+> está presionado, la búsqueda está iniciada y todos los criterios que se hayan introducido en una pestaña serán tenidos en cuenta. </para>
+
+<para
+>El botón <guibutton
+>Reestablecer</guibutton
+> devuelve todos los campos de todas las pestañas de criterios a los valores predeterminados. Esto le permite especificar nuevos criterios de búsqueda. </para>
+
+<para
+>El botón <guibutton
+>Cerrar</guibutton
+> cierra el cuadro de diálogo <guilabel
+>Buscar asientos</guilabel
+>. </para>
+
+</sect1>
+
+<sect1 id="details.search.criteria">
+<title
+>Criterios de búsqueda</title>
+
+<para
+>Hay varias subpestañas bajo la pestaña principal <quote
+>Criterios</quote
+>, cada una de las cuales le permite especificar diferentes tipos de criterios de búsqueda. Debajo del área para especificar criterios, &kappname; lista cada uno de los diferentes tipos de criterios que están especificados actualmente para la búsqueda. </para>
+
+<sect2 id="details.search.text">
+<title
+>Texto</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-text.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Buscar diálogo de asientos. Pestaña Texto</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Esta pestaña le permite especificar el texto para buscar. Hay también dos casillas de verificación que controlan cómo se usa el texto en esta búsqueda. </para>
+
+<para
+>Por defecto, solo coincidirá con subcadenas sencillas. Por ejemplo: </para>
+
+<para>
+<itemizedlist>
+  <listitem>
+    <para
+><quote
+>Mejores</quote
+> encontrará <quote
+>Mejores Pasteles, S.A.</quote
+></para>
+  </listitem>
+  <listitem>
+    <para
+><quote
+>ejor</quote
+> también encontrará <quote
+>Mejores Pasteles, S.A.</quote
+> </para>
+  </listitem>
+</itemizedlist>
+</para>
+
+<para
+>En el campo desplegable al lado del campo de texto, seleccione <guilabel
+>Contiene</guilabel
+> si desea encontrar asientos que contengan el texto, o seleccione <guilabel
+>No contiene</guilabel
+> si desea encontrar asientos que no contengan el texto especificado. </para>
+
+<para
+>Si selecciona la casilla <guilabel
+>Sensible a mayúsculas</guilabel
+>, la búsqueda distinguirá entre mayúsculas y minúsculas. Por ejemplo, <quote
+>mejores</quote
+> no encontrará <quote
+>Mejores Pasteles, S.A.</quote
+> si está seleccionada esta opción. </para>
+
+<para
+>Si marca la casilla <guilabel
+>Tratar el texto como una expresión regular</guilabel
+>, el texto se tratará como una expresión regular. Para más detalles sobre cómo construir una expresión regular, visite la documentación de &Qt; sobre la <ulink url="http://qt-project.org/doc/qt-4.8/qregexp.html#1"
+>clase QRegExp</ulink
+>. </para>
+</sect2>
+
+<sect2 id="details.search.account">
+<title
+>Cuenta</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-account.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Diálogo de búsqueda de asientos. Pestaña cuentas.</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Esta pestaña le permite especificar las cuentas que se deberían buscar. </para>
+
+<para
+>Las  cuentas se muestran en forma de árbol. Las cuentas que están marcadas para la búsqueda se indican con una marca de verificación. Si hace clic en el botón <guibutton
+>Todas</guibutton
+>, todas las cuentas se marcarán para búsqueda. Si hace clic en <guibutton
+>Ninguna</guibutton
+>, ninguna cuenta se marcará para búsqueda. Las cuentas individuales se pueden marcar o desmarcar haciendo clic en la casilla junto al nombre de la cuenta usando el &LMB;. Se puede marcar o desmarcar una jerarquía completa de cuentas haciendo clic en la casilla usando el &RMB;. </para>
+</sect2>
+
+<sect2 id="details.search.date">
+<title
+>Fecha</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-date.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Diálogo de búsqueda de asientos. Pestaña Fecha</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Esta pestaña le permite especificar qué fechas se deberían buscar. </para>
+
+<para
+>El control de <quote
+>Intervalo</quote
+> proporciona una forma conveniente de establecer los controles Desde y Hasta. Los controles Desde y Hasta se pueden manipular individualmente. Las fechas se pueden establecer a mano. Los controles evitarán que introduzca fechas que no existen. Los valores de las fechas se pueden cambiar haciendo clic en las flechas arriba y abajo cuando una parte de la fecha esté resaltada. Hacer clic en el pequeño icono del calendario hará aparecer un calendario para seleccionar fechas fácilmente. </para>
+</sect2>
+
+
+<sect2 id="details.search.amount">
+<title
+>Cantidad</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-amount.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Diálogo de búsqueda de asientos. Pestaña Cantidad</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Esta pestaña le permite especificar qué cantidades se deben buscar. </para>
+
+<para
+>Puede buscar una cantidad exacta o un intervalo de cantidades. Si hace clic en el icono de la calculadora, aparecerá una pequeña calculadora en la pantalla para ayudarle a introducir un valor. </para>
+</sect2>
+
+<sect2 id="details.search.category">
+<title
+>Categoría</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-category.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Diálogo de búsqueda de asientos. Pestaña Categoría</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Esta pestaña le permite especificar qué categorías se deberían buscar. </para>
+
+<para
+>Las categorías se muestran en forma de árbol. Las categorías que están marcadas para la búsqueda están indicadas con una casilla. Si hace clic en <guibutton
+>Todas</guibutton
+>, todas las categorías se marcan para la búsqueda. Si hace clic en <guibutton
+>Ninguna</guibutton
+>, ninguna categoría se marcará para la búsqueda. Si hace clic en el botón <guibutton
+>Ingresos</guibutton
+>, se marcarán las categorías de ingresos, y las de gastos permanecerán sin marcar. si hace clic en el botón <guibutton
+>Gastos</guibutton
+>, las categorías de ingresos estarán sin  marcar y las de gastos estarán marcadas. </para>
+
+<para
+>Las categorías individuales se pueden marcar o desmarcar haciendo clic en la casilla junto al nombre de la categoría usando el &LMB;. Una jerarquía completa de categorías se puede marcar o desmarcar haciendo clic en la casilla usando el &RMB;. </para>
+</sect2>
+
+<sect2 id="details.search.payee">
+<title
+>Beneficiario</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-payee.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Diálogo de búsqueda de asientos. Pestaña Beneficiario</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Esta pestaña le permite especificar qué beneficiarios se deben buscar. </para>
+
+<para
+>Los beneficiarios que están marcados para buscar se indican con una casilla. Si hace clic en el botón <guibutton
+>Todos</guibutton
+>, todos los beneficiaros se marcarán para la búsqueda. Si hace clic en el botón <guibutton
+>Ninguno</guibutton
+>, ningún beneficiario se marcará para la búsqueda. Se pueden marcar o desmarcar beneficiarios individuales haciendo clic en la casilla junto al nombre del beneficiario. </para>
+
+<para
+>Si marca la casilla <guilabel
+>Seleccionar asientos sin beneficiarios</guilabel
+>, solo se seleccionarán los asientos que no tengan un beneficiario. </para>
+
+</sect2>
+
+<sect2 id="details.search.details">
+<title
+>Detalles</title>
+
+<para
+>Esta pestaña le permite especificar varios criterios de búsqueda adicionales. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-details.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Diálogo de búsqueda de asientos. Pestaña Detalles</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para>
+<itemizedlist>
+  <title
+>El tipo puede ser uno de los siguientes:</title>
+  <listitem
+><para
+>Todos los tipos</para
+></listitem>
+  <listitem
+><para
+>Pagos</para
+></listitem>
+  <listitem
+><para
+>Depósitos</para
+></listitem>
+  <listitem
+><para
+>Transferencias</para
+></listitem>
+</itemizedlist>
+
+<itemizedlist>
+  <title
+>El estado puede ser uno de los siguientes:</title>
+  <listitem
+><para
+>Todos los estados</para
+></listitem>
+  <listitem
+><para
+>No conciliados</para
+></listitem>
+  <listitem
+><para
+>Librados</para
+></listitem>
+  <listitem
+><para
+>Conciliados</para
+></listitem>
+</itemizedlist>
+
+<itemizedlist>
+  <title
+>La validez puede ser una de las siguientes:</title>
+  <listitem
+><para
+>Cualquier transacción</para
+></listitem>
+  <listitem
+><para
+>Transacción válida</para
+></listitem>
+  <listitem
+><para
+>Transacción no válida</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Puede buscar un número de asiento particular o buscar en un intervalo de números de asiento. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="details.search.results">
+<title
+>Resultado de la búsqueda</title>
+
+<para
+>La pestaña <quote
+>Resultado</quote
+> muestra la fecha, la cuenta, los detalles, el estado de conciliación, el pago y el depósito para cada asiento que coincide con los criterios de búsqueda que ha introducido. Haciendo clic derecho en la fila de encabezado de la lista de resultados le permite alterar el orden de los resultados. </para>
+
+<para
+>Hacer doble clic sobre un asiento mostrará el correspondiente libro mayor de la cuenta y fijará el foco en el asiento seleccionado. </para>
+
+</sect1>
+
+</chapter>

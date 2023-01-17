@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.ledgers">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+  </authorgroup>
+  <date
+>23/07/2010</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Livro de registros</title>
+
+<sect1 id="details.ledgers.view">
+<title
+>Área do Livro de Registros</title>
+
+<para
+>A área do Livro de Registros é onde se encontra a maior parte das funcionalidades do &kappname;. Essa área serve para examinar e inserir os dados da transação nas várias contas. A área está dividida em três áreas principais: a área do filtro, a lista de transações e a área de inserção de dados. </para>
+
+<para
+>Esta área permite várias ações-chave: pesquisar e ver as transações, introduzir transações e editar ou remover as transações existentes. As outras funcionalidades incluem a modificação dos detalhes da conta ou a consolidação da mesma. </para>
+  
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="ledgerview-numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Área do Livro de Registros</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>A área possui três elementos: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>A área do filtro</para
+></listitem>
+  <listitem
+><para
+>A lista de transações</para
+></listitem>
+  <listitem>
+    <para
+>O formulário de inserção da transação, que poderá ou não aparecer, dependendo da sua configuração. </para>
+  </listitem>
+</itemizedlist>
+
+<sect2 id="details.ledgers.view.filter">
+<title
+>A área do filtro</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="accountdropdown.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Área do filtro</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Você poderá selecionar uma conta através da lista de contas, no topo da área de visualização. Lembre-se de que, dependendo do tipo de conta, o <link linkend="details.ledger.transactionform"
+>formulário de inserção das transações</link
+>, no fundo da janela, vai mudando. </para>
+
+<para
+>À direita da lista de contas existem dois campos adicionais. O campo de pesquisa atua como um filtro para as transações que aparecem na lista. Somente as transações que incluam o texto escrito neste campo serão apresentadas. O texto indicado poderá dizer respeito a qualquer um dos campos da transação. O campo de estado é uma lista. Somente as transações do tipo selecionado nessa lista irão aparecer. </para>
+
+</sect2>
+
+<sect2>
+<title
+>A lista de transações</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="translist.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Lista de transações</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Depois de inserir uma transação, ela aparecerá na lista de transações. Então, você também poderá alterar as propriedades da transação ou mesmo criar transações novas diretamente na lista. Se usar o botão direito do mouse no cabeçalho da lista de transações, poderá alterar o critério de ordenação. Para instruções sobre como alterar o critério de ordenação, leia a seção da <link linkend="details.settings.register.sorting"
+>Página de Ordenação</link
+> do capítulo <link linkend="details.settings"
+>Configurações do &kappname;</link
+>. </para>
+
+<para
+>Note que a coluna de saldo é baseada na ordem de classificação atualmente exibida, e não será calculada se a exibição for filtrada pela caixa de pesquisa ou pela lista de tipo de transação, como descrito acima. </para>
+
+<para
+>Na parte inferior da lista de transações, o &kappname; apresentada três valores: </para>
+
+<formalpara
+><title
+>Última reconciliação</title>
+  <para
+>Esta é a data mais recente na qual você reconciliou esta conta. A reconciliação é um processo importante para muitas contas, como está descrito <link linkend="details.reconcile"
+>aqui</link
+>. </para>
+</formalpara>
+
+<formalpara
+><title
+>Compensado</title>
+  <para
+>Isto é o total de todas as transações reconciliadas e compensadas nesta conta. Veja <link linkend="details.ledgers.cleared"
+>esta seção</link
+> para mais informações sobre os estados de transação compensado e reconciliado. </para>
+</formalpara>
+
+<formalpara
+><title
+>Saldo</title>
+  <para
+>Aqui é onde o &kappname; exibe o saldo total da conta, que é a soma de todas as transações na conta. No entanto, se você selecionar mais de uma transação na lista de transações, isto muda para exibir a soma das transações selecionadas. Isto retorna para o saldo quando somente uma transação está selecionada. </para>
+</formalpara>
+</sect2>
+
+<sect2>
+<title
+>Formulário para inserir transações</title>
+
+<para
+>A disposição exata da área inferior do livro de registros depende da sua configuração e do tipo de conta apresentada. Contudo, inclui de um modo geral os campos para todos os detalhes de uma única transação, assim como os botões para as várias ações que podem ser aplicadas a uma transação. Esta área está descrita com mais detalhes nas próximas seções. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledger.transactions">
+<title
+>Inserir transações</title>
+
+<para
+>Estão disponíveis dois métodos para inserir transações no livro de registros: usando o formulário de inserção de transações ou inserir os dados diretamente na lista de transações. O formulário para inserir a transação aparece por padrão é o método que será apresentado primeiro. </para>
+
+<para
+>Os campos na área de inserção de dados correspondem aos campos de informação na lista de transações. Os campos adicionais incluem o campo do Memorando, para uma descrição mais detalhada da transação, e a seleção de uma Categoria. O botão Dividir permite a divisão da transação em várias categorias. </para>
+</sect1>
+
+<sect1 id="details.ledger.transactionform">
+<title
+>Usar o formulário de inserção da transação</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Formulário de transação</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>O formulário para inserir transações existente na parte inferior da área do livro de registros é a interface para criação de transações. </para>
+
+<para
+>Dependendo da transação que quiser inserir, existem diversas páginas diferentes disponíveis no formulário de transações. Clique na aba que melhor descreve a sua transação (depósito, transferência ou retirada), para que o formulário carregue diversos campos prontos para a inserção dos seus dados. </para>
+
+<para
+>Lembre-se de que o método da transação atual não é usado diretamente pelo &kappname;, mas serve apenas para fins de agrupamento/relatórios. </para>
+
+<para
+>Se não tiver certeza sobre qual método usar, use o Depósito para qualquer dinheiro que entre na conta, Retirada para o dinheiro que sai, e Transferência para movimentar dinheiro de uma conta para outra. Os métodos da transação e as diferenças entre eles são discutidos com mais detalhes em outras partes deste manual. </para>
+
+<para
+>Selecione o método da transação, clicando numa das páginas. </para>
+
+<sect2>
+<title
+>Os campos de uma transação</title>
+
+<para
+>Insira a informação usando as notas a seguir nos campos disponíveis. Lembre-se de que muitos dos campos tem 'Completamento Automático' ativado. Isto é, ao começar a escrever, o &kappname; irá oferecer alternativas que correspondam aos caracteres que tenha inserido até aquele momento. Para selecionar um item, basta clicar sobre ele com o mouse ou usar o teclado. Caso o seu item não aparecer, continue digitando para adicionar o novo valor. Da próxima vez que inserir o valor, o &kappname; irá encontrá-lo para você, após inserir os primeiros caracteres. </para>
+
+<sect3>
+<title
+>Beneficiário</title>
+
+<para
+>Beneficiário é quem de/para onde vem/vai o dinheiro. Se o beneficiário for um novo item, o &kappname; perguntará se deseja adicioná-lo à lista de Beneficiários. Todas as outras informações relacionadas com um credor ou devedor, como os detalhes de endereço, poderão ser atualizados mais tarde na área de Beneficiários. </para>
+</sect3>
+
+<sect3>
+<title
+>Categoria</title>
+
+<para
+>A Categoria associa uma transação com uma determinada categoria de receita ou despesa, para fins de contabilidade e relatórios, permitindo-lhe também agrupar certas transações. Digite o nome da categoria no campo obrigatório. Se tiver inserido uma categoria inexistente, o &kappname; irá perguntar se deseja criar uma nova. </para>
+
+<para
+>Se quiser associar partes da operação com diferentes categorias, poderá fazer isso com o &kappname;. Por exemplo, uma operação poderá ser uma retirada de 50 reais de um caixa eletrônico, dos quais você usou 10 para alimentação, 20 para compra de cerveja e ainda sobraram 20. A transação será então atribuídas à três categorias: Alimentação, Cerveja e Dinheiro. Para fazer isso, é necessário usar as <link linkend="details.ledgers.split"
+>Transações Parceladas</link
+>, que estão descritas com mais detalhes a seguir. </para>
+
+<para
+>Veja a seção especial sobre os <link linkend="reference.widgets"
+>campos do &kappname;</link
+> para obter mais informações sobre a utilização deste campo. </para>
+</sect3>
+
+<sect3>
+<title
+>Etiqueta</title>
+
+<para
+>As funcionalidade Etiquetas foi introduzida no &kappname; versão 4.7, não estando ainda completamente documentada neste manual. As etiquetas funcionam de forma similar às categorias, podendo ser usadas para manter uma visão ortogonal das categorias. Por exemplo, você pode ter uma categoria para cada tipo de despesa com veículos, tendo ainda uma etiqueta para cada veículo. Como nas categorias, você pode selecionar as etiquetas a partir da lista, indicar o novo nome de uma etiqueta e ser questionado se deseja criar uma nova etiqueta com esse nome. </para>
+</sect3>
+
+<sect3>
+<title
+>Memorando</title>
+
+<para
+>Você poderá inserir um memorando de várias linhas, se isso ajudá-lo a lembrar para que foi a transação. </para>
+</sect3>
+
+<sect3>
+<title
+>Número do Cheque</title>
+
+<para
+>Se for necessário, o número do cheque poderá ser inserido. Lembre-se de que o número do cheque poderá sempre ser visível, se assim desejar. Isso é definido na janela de Configuração. </para>
+</sect3>
+
+<sect3>
+<title
+>Data</title>
+
+<para
+>Você também poderá inserir a data da transação, para saber quando ela ocorreu. Veja a seção especial sobre os <link linkend="reference.widgets"
+>campos do &kappname;</link
+> para obter mais informações sobre como usar o campo de inserção de datas para indicá-las de forma mais rápida e simples. </para>
+</sect3>
+
+<sect3>
+<title
+>Montante</title>
+
+<para
+>Finalmente, insira o montante da transação no campo obrigatório. Lembre-se de que uma calculadora simples poderá ser apresentada, clicando-se no ícone à direita do campo de montante, ao digitar o símbolo % no campo, ou ainda digitando uma fórmula do tipo <emphasis
+>12 + 3</emphasis
+>. Ao inserir o sinal de soma, a calculadora será exibida. </para>
+
+<para
+>Quando você estiver satisfeito com o preenchimento de todos os campos, clique em <guibutton
+>Inserir</guibutton
+>. Se você acidentalmente clicar em <guibutton
+>Inserir</guibutton
+>, antes de terminar a inserção de todos os dados, clique em <guibutton
+>Editar</guibutton
+> para prosseguir com a inserção dos dados. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledger.direct">
+<title
+>Inserir as transações diretamente na lista</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform-off.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Inserção direta da transação</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>O segundo método de inserção de transações no livro de registro envolve a edição direta da própria lista de transações. </para>
+
+<para
+>Para fazer isso, você deve primeiro indicar ao &kappname; que não deseja usar o formulário de transação, abrindo, para isso, a janela de configuração e desmarcando a opção <guilabel
+>Mostrar o formulário da transação</guilabel
+>. </para>
+
+<para
+>Isto é feito ao selecionar a opção <menuchoice
+><guimenu
+>Configurações</guimenu
+><guimenuitem
+>Configurar o &kappname;</guimenuitem
+></menuchoice
+> no menu e selecionar o ícone <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="ledgers_view.png"/></imageobject
+></inlinemediaobject
+>Registro</guiicon
+> na lista à esquerda. A opção para desligar chama-se <guilabel
+>Mostrar o formulário da transação</guilabel
+>. Quando terminar, clique em <guibutton
+>OK</guibutton
+> e prepare-se para inserir diretamente as transações. </para>
+
+<sect2>
+<title
+>Iniciar a edição</title>
+
+<para
+>Para inserir uma transação no livro de registro, você poderá agora usar o clique duplo sobre o item, pressionar <keycombo action="simul"
+>&Ctrl;<keycap
+>Ins</keycap
+></keycombo
+> ou clicar em <guibutton
+>Novo</guibutton
+> na parte inferior da janela. As teclas de cursores para <keycap
+>Cima</keycap
+> e <keycap
+>Baixo</keycap
+> permitem-lhe navegar pela lista. Depois de pressionar &Enter; ou clicar duas vezes sobre um item, a lista de transações mostra os campos necessários para inserir a transação e esperar pela inserção de dados. </para>
+
+<para
+>Para percorrer os campos, pressione a tecla &Tab; e, quando terminar, pressione &Enter; para salvar as alterações ou &Esc; para cancelar. </para>
+
+<para
+>Caso a opção <guilabel
+>Usar a tecla Enter para mover-se entre os campos</guilabel
+> esteja selecionada, a tecla &Enter; passa para o campo seguinte, assim como acontece com o <keycap
+>TAB</keycap
+>, excetuando o caso do último campo, onde então irá gravar os dados. </para>
+
+<para
+>O método de inserção de transações é conforme seu critério e representa uma escolha baseada em preferências pessoais. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledgers.split">
+<title id="details.ledgers.split.title"
+>Dividir transações</title>
+
+<para
+>A funcionalidade para dividir as transações em parcelas permite-lhe atribuir várias categorias a uma transação, como por exemplo, na compra de várias mercadorias em uma única loja. </para
+> 
+
+<para
+>Para inserir uma nova transação dividida em parcelas, inicie uma transação como de costume, incluindo a informação do montante. Em vez de selecionar uma categoria, clique no botão <guibutton
+>Dividir</guibutton
+>. Se já tiver selecionado uma categoria, ela será indicada como primeiro item da janela de edição das parcelas. </para
+> 
+ 
+<para
+>Na janela de edição de parcelas, clique duas vezes em uma linha vazia para inserir uma nova subtransação ou pressione <keycombo action="simul"
+>&Ctrl;<keycap
+>Ins</keycap
+></keycombo
+>. Indique a categoria, adicione um memorando (opcional) e indique o montante. Para salvar esta parte da parcela, clique na marcação em verde abaixo da categoria. Para cancelar, clique na cruz vermelha. </para
+> 
+ 
+<para
+>Depois de inserir uma parcela, a parte inferior do editor de parcelas mostra o valor da transação que ainda permanece sem atribuição. Depois de inserir todas as parcelas, clique no botão <guibutton
+>OK</guibutton
+> para salvar a transação completa. Se ainda existirem valores a atribuir, você será questionado se quer voltar à edição das parcelas, alterar o montante ou deixar de atribuir parte da transação. </para>
+
+<para
+>Lembre-se de que o campo da categoria, no formulário de dados da transação ou na lista de transações, agora indica <emphasis
+>Transação dividida</emphasis
+>. </para
+> 
+
+<para>
+	<screenshot>
+	<screeninfo
+>Transações divididas</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="split_transaction.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transação dividida</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+</sect1>
+
+<sect1 id="details.ledger.edit">
+<title
+>Editar transações</title>
+<para
+>Para editar uma transação, selecione-a na lista e depois clique no botão <guibutton
+>Editar</guibutton
+> no formulário de inserção da transação ou clique com o botão direito do mouse no item e selecione a opção <guimenuitem
+>Editar</guimenuitem
+> no menu de contexto. Se você estiver editando as transações diretamente na lista, poderá editar a transação, fazendo apenas um duplo-clique sobre um item e pressionando &Enter;, quando uma determinada transação estiver selecionada. </para>
+</sect1>
+
+<sect1 id="details.ledger.delete">
+<title
+>Excluir transações</title>
+
+<para
+>Para excluir uma transação, selecione-a na área e clique com o botão direito no item. No menu de contexto que aparece, selecione a opção <guimenuitem
+>Excluir</guimenuitem
+> ou clique no botão <guibutton
+>Excluir</guibutton
+> no formulário da transação. </para>
+</sect1>
+
+<sect1 id="details.ledgers.match">
+<title id="details.ledgers.match.title"
+>Fazer a Correspondência de Transações</title>
+
+<para
+>De modo geral, ao importar as transações através do QIF, OFX ou HBCI, o &kappname; irá tentar automaticamente correspondê-las com as transações existentes. Para permitir diferenças nas datas, existe uma opção padrão de 4 dias, que poderá ser alterada na configuração - Registrar/Importar. Todas as transações que corresponderem desta forma irão aparecer em verde. Ao terminar a importação, você deverá revisá-las para aceitá-las ou dissociá-las. </para>
+
+<para
+>Se descobrir que uma transação importada não foi correspondida automaticamente com uma existente, quando deveria ter acontecido, então é possível correspondê-las manualmente. Lembre-se de que existe uma diferença entre corresponder manualmente duas transações e simplesmente excluir uma delas, mesmo que a operação pareça ter o mesmo efeito. Especificamente com OFX ou HBCI, é importante não excluir a transação importada, uma vez que, da próxima vez que importar suas transações, a transação excluída reaparecerá. Isso acontece porque os formatos de importação modernos, como OFX e HBCI, usam um <quote
+>ID de Transação</quote
+> para identificar as transações. Quando você excluiu a transação importada, o ID da mesma também foi excluído, e o módulo de importação não terá como saber se essa transação já foi importada. </para
+> 
+
+<para
+>A solução é dizer ao &kappname; que as transações são as mesmas, usando a interface de correspondência manual. Ela permite-lhe corresponder uma transação importada com uma transação inserida manualmente (não-importada). Para fazer isso, selecione uma das transações a corresponder, clicando nela com o botão esquerdo, e depois selecione a outra, clicando também nela com o botão esquerdo enquanto mantém pressionada a tecla &Ctrl;, selecionando depois a opção <guimenuitem
+>Corresponder</guimenuitem
+> no menu de contexto. Isso fará com que a cor de fundo mude para um verde pálido. Esta ação irá corresponder e combinar as duas transações em conjunto. Os valores de ambas as transações devem ser os mesmos para efetuar a correspondência, a única diferença permitida refere-se às datas, e que pode ser definida na configuração como descrito acima. Se estiver satisfeito com o resultado, clique com o botão direito do mouse na transação correspondida e selecione <guibutton
+>Aceitar</guibutton
+>. </para>
+
+<para
+>Durante a importação de extratos online - seja de forma direta ou através da importação de um arquivo transferido - o &kappname; efetua uma correspondência da melhor forma possível, com base no nome do beneficiário e no montante da transação. No caso de uma correspondência ser inválida, uma transação correspondida poderá ser dissociada. </para>
+
+<note>
+  <para
+>A interface de correspondência não permitirá corresponder duas transações que tenham sido importadas. Do mesmo modo, também não permitirá a correspondência de duas transações inseridas manualmente. </para>
+</note>
+</sect1>
+
+<sect1 id="details.ledgers.cleared">
+<title
+>Compreender o Estado 'Confirmada'</title>
+
+<para
+>Uma transação poderá ter três estados: não-reconciliada (N), confirmada (C) e reconciliada (R). Quando inserir uma transação, ela possui o estado (N). Assim que o banco publicar a transação, o usuário poderá limpá-la e transformá-la no estado (C). Quando receber um extrato do banco, todas as transações confirmadas deverão constar no mesmo. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Compreender o estado de confirmação</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="cleared_state.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>estado confirmado</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Quando <link linkend="details.reconcile"
+>reconciliar ou consolidar a sua conta</link
+>, você irá marcar de fato os extratos como confirmados e verificar que a diferença entre o saldo final e as transações confirmadas é igual ao saldo final do extrato. Quando é este o caso, você poderá 'terminar a reconciliação', que irá de fato mudar o estado de todas as transações em (C) para (R). </para>
+
+<para
+>Se tentar editar uma transação com pelo menos uma parcela marcada como reconciliada (R), você receberá um aviso. </para>
+
+<para
+>Está definido um quarto estado (congelado (F - Frozen)), mas não existe neste momento uma forma de atribuí-lo. Ele está reservado para uso futuro. Contudo, se uma transação tiver pelo menos uma parcela no estado congelado, ela não poderá ser mais editada. </para>
+
+</sect1>
+
+<sect1 id="details.ledgers.settings"
+><title id="details.ledgers.settings.title"
+>Mudar a Configuração da Transação</title>
+
+<para
+>Isto é feito ao selecionar a opção <guimenu
+>Configurações</guimenu
+> <guimenuitem
+>Configurar o &kappname;</guimenuitem
+> no menu e selecionar o ícone <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="ledgers_view.png"/></imageobject
+></inlinemediaobject
+>Registro</guiicon
+> na lista à esquerda. </para
+> 
+
+<para
+>A maior parte das opções é realmente intuitiva. Para esclarecer melhor, algumas das opções são explicadas abaixo. </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Mostrar o formulário da transação (na página Visualização) - ative/desative para ocultar a área de inserção da transação, no fundo desta janela. As transações poderão ainda ser inseridas diretamente numa linha em branco, no fim da lista de transações, através de uma área compacta de inserção automática. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Estas imagens mostram como se parece a inserção direta da transação, em comparação com o formulário da transação. </para>
+
+<para
+>O formulário de inserção das transações</para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>O formulário da transação</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Formulário da transação</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Transações inseridas diretamente</para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Transações inseridas diretamente</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform-off.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Inserção direta</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Manter as alterações ao selecionar uma transação/parcela diferente - ao selecionar a linha seguinte, na lista de transações ou no editor de parcelas, as modificações são mantidas em vez do comportamento padrão, onde terá que assinalar a marcação em verde para salvar as alterações. </para>
+  </listitem>
+</itemizedlist>
+
+</sect1>
+
+<sect1 id="details.ledgers.other">
+<title id="details.ledgers.other.title"
+>Outras funcionalidades</title>
+
+<para
+>Estão disponíveis outras opções no menu de <guimenu
+>Opções da Transação</guimenu
+>, que pode ser acessado com o botão direito sobre uma transação na lista. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>O submenu de opções da transação</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="ledger_more.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Opções da transação</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>As opções incluem o salto para a página do Beneficiário, a criação de um evento recorrente e a alteração da indicação de reconciliada ou confirmada. </para>
+
+<para
+>Para editar a informação da conta nesta área, selecione <guimenu
+>Conta</guimenu
+> na barra do menu. Nesse menu, você poderá alterar os detalhes da conta ou invocar o menu de Reconciliação, que lhe permite fazer a correspondência das transações com um extrato oficial do banco ou fatura do cartão de crédito. </para>
+</sect1>
+</chapter>

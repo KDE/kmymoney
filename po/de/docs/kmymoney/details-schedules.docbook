@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.schedules">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Geplante Buchungen</title>
+
+<sect1 id="details.schedules.intro">
+<title
+>Einführung</title>
+
+<para>
+  <quote
+>Geplante Buchungen enthalten Informationen über Buchungen, die ein- oder mehrmalig in einer bestimmten Zeitperiode vorkommen. </quote>
+</para>
+
+<para
+>Geplante Buchungen sind regelmäßig wiederkehrende Buchung und werden deshalb auch manchmal sich "wiederholende Buchungen" genannt. Eine bekannte geplante Buchung ist zum Beispiel Ihr Gehalt. Einmal pro Monat oder vielleicht auch wöchentlich zahlt Ihnen Ihre Firma Geld für die von Ihnen geleistete Arbeit. Diese Zahlung kann auf verschiedenen Wegen erfolgen, aber Sie erhalten monatlich oder wöchentlich eine Zahlung, die aufgezeichnet werden muss. </para>
+
+<para
+>Sie wissen, dass diese Zahlungen regelmäßig erfolgen, sodass Sie eine geplante Buchung anlegen können, sodass die Buchung automatisch für Sie erzeugt wird, sobald das Gehalt gezahlt wird. </para>
+
+<para
+>Auch andere Arten von geplanten Buchungen können hinterlegt werden, um den Ein- und Ausgang von Geld auf Ihren Konten zu hinterlegen. Allgemeine Ausgaben, wie Dienstleisterrechnungen oder Überweisungen, können genauso als geplante Buchung hinterlegt werden, wie z.B. Lohnzahlungen. Eine geplante Buchung bietet Ihnen außerdem eine gute Möglichkeit, um Sie an fällige Zahlungen zu erinnern. </para>
+
+<para
+>Eine geplante Buchung besteht aus zwei Hauptteilen: den Daten zum Zeitpunkt, sowie dem Inhalt der Buchung. Die Daten des Zeitpunkts geben an, wann und wie die Buchung in das Kontenblatt eingetragen wird. Die Buchungsdaten enthalten die üblichen Details zur Buchung und werden so wie sie sind in das Kontenbuch übernommen. </para>
+</sect1>
+
+<sect1 id="details.schedules.type">
+<title
+>Arten von geplanten Buchungen</title>
+
+<para
+>In der aktuellen Version von &kappname; gibt es vier verschiedene Arten von geplanten Buchungen: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Rechnungen</para
+></listitem>
+  <listitem
+><para
+>Einzahlungen</para
+></listitem>
+  <listitem
+><para
+>Kredite</para
+></listitem>
+  <listitem
+><para
+>Buchungen</para
+></listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Rechnungen</title>
+
+<para
+>Eine geplante Buchung vom Typ "Rechnung" wird immer dann verwendet, wenn Geld von Ihrem Konto abfließt, z.B. für die Mitgliedschaft im Fitness-Studio oder eine Rechnung für eine Dienstleistung. </para>
+</sect2>
+
+<sect2>
+<title
+>Einzahlungen</title>
+
+<para
+>Eine geplante Buchung vom Typ "Einzahlung" wird verwendet, wenn Geld auf Ihr Konto kommt, z.B. Ihr Gehalt. </para>
+</sect2>
+
+<sect2>
+<title
+>Kredite</title>
+
+<para
+>Eine geplante Kreditzahlung ist eine spezielle geplante Buchung und wird erstellt, wenn Sie ein <link linkend="details.loans"
+>Kreditkonto</link
+> erstellen. </para>
+</sect2>
+
+<sect2>
+<title
+>Buchungen</title>
+
+<para
+>Eine geplante Buchung des Typs "Buchung" wird verwendet, wenn Geld von einem Konto zum anderen fließt, z.B. wenn eine Kreditkartenabrechnung von Ihrem Girokonto abgebucht wird. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.schedules.view">
+<title
+>Die Ansicht der geplanten Buchungen</title>
+
+<para
+>Öffnen Sie die Ansicht der geplanten Buchungen, indem Sie auf das <guiicon
+>geplante Buchungen<inlinemediaobject
+><imageobject
+><imagedata fileref="schedule_view.png"/></imageobject
+></inlinemediaobject
+></guiicon
+> Symbol in der linken Navigationsleiste klicken. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="scheduleview.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Die Ansicht der geplanten Buchungen</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Die Ansicht „Geplante Buchungen“ besteht aus zwei Karteikarten, die über entsprechende Karteireiter erreicht werden können, sowie dem Knopf <guibutton
+>Neue Buchung planen</guibutton
+> darüber. Die erste Karteikarte <guibutton
+>Listenansicht</guibutton
+> zeigt alle geplanten Buchungen, gruppiert nach dem Typ der Buchung. Die zweite Karteikarte <guibutton
+>Kalenderansicht</guibutton
+> wird in einem separaten Abschnitt weiter unten erläutert. </para>
+	
+<para
+>Um eine neue geplante Buchung anzulegen, klicken Sie auf den entsprechenden Knopf. Für Rechnungen, Einzahlungen und Umbuchungen zeigt Ihnen &kappname; das Dialogfenster für neue geplante Buchungen. Kreditbuchungen werden anders behandelt und im Abschnitt über Kreditkonten näher erläutert. </para>
+</sect1>
+
+<sect1 id="details.schedules.new">
+<title
+>Das Dialogfenster „Geplante Buchung bearbeiten“</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newsched_numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Neue geplante Buchung</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Es öffnet sich ein Dialogfenster, in das Sie die Daten zum Zeitpunkt und dem Inhalt der geplanten Buchung eingeben können.  Hierzu gehören: </para>
+
+<orderedlist numeration="upperalpha">
+  <listitem
+><para
+>Name der geplanten Buchung</para
+></listitem>
+  <listitem
+><para
+>Nächste Fälligkeit am</para
+></listitem>
+  <listitem
+><para
+>Häufigkeit</para
+></listitem>
+  <listitem
+><para
+>Zahlungsmethode</para
+></listitem>
+  <listitem
+><para
+>Betrag</para
+></listitem>
+  <listitem
+><para
+>Weitere Buchungsdetails</para
+></listitem>
+  <listitem
+><para
+>Optionen der geplanten Buchung</para
+></listitem>
+</orderedlist>
+
+<sect2>
+<title
+>Ausfüllen der Felder</title>
+
+<para
+>Geben Sie den Namen und das nächste Fälligkeitsdatum dieser geplanten Buchung in die entsprechenden Eingabefelder ein. Der Name der geplanten Buchung wird in der Liste der geplanten Buchungen angezeigt. Geben Sie an, wie oft die geplante Buchung fällig ist, indem Sie die entsprechende Häufigkeit in das Eingabefeld eintragen und aus der Auswahlliste auswählen. Zum Beispiel "alle 6 Wochen" oder "alle 3 Monate". Wenn der Betrag von Buchung zu Buchung variiert, markieren Sie die Option <guilabel
+>Dies ist eine Schätzung, da der Betrag für jede Zahlung schwankt</guilabel
+>. Sie werden dann nach dem genauen Betrag gefragt, wenn &kappname; die Buchung in das Kontenbuch eintragen möchte. Füllen Sie alle Buchungsfelder so aus, als würden Sie die Buchung im Kontenbuch eintragen. </para>
+</sect2>
+
+<sect2>
+<title
+>Das Verhalten der geplanten Buchung verändern</title>
+<para
+>Im unteren Bereich des Fensters gibt es einige Optionen, die das Verhalten der geplanten Buchung verändern. Wenn das Fälligkeitsdatum auf ein Wochenende fällt, können Sie auswählen, ob das Datum unverändert bestehen bleibt, ob die Buchung am vorhergehenden Freitag oder am darauf folgenden Montag gebucht wird. Normalerweise wird diese Option verwendet, um die reale Welt in Form von Bankbuchungen abzubilden. </para>
+</sect2>
+
+<sect2>
+<title
+>Buchungen von &kappname; automatisch eintragen lassen</title>
+
+<para
+>&kappname; kann die Buchungen automatisch bei Fälligkeit in das Kontenbuch eintragen. Aktivieren Sie dafür die Kontrollbox <guilabel
+>Buchung bei Fälligkeit automatisch in das Kontenbuch eintragen</guilabel
+>.  Ansonsten wird &kappname; ein Dialogfenster öffnen, sobald das Fälligkeitsdatum der geplanten Buchung erreicht ist und Sie auffordern, die Buchung in das Kontenbuch eintragen zu lassen.  Dieses Verhalten ist konfigurierbar, weitere Informationen dazu finden Sie im Abschnitt über die Programmeinstellungen. </para>
+</sect2>
+
+<sect2>
+<title
+>&kappname;  wissen lassen, wann eine geplante Buchung endet</title>
+
+<para
+>Wenn Sie wissen, wie viele Buchungen noch übrig sind oder wann die regelmäßige Buchung endet, so können Sie diese Information hinterlegen, sodass die geplante Buchung nicht unendlich ist. Klicken Sie die entsprechende Option an und geben Sie das Ende der geplanten Buchung ein. Nur das Enddatum oder die verbleibende Anzahl der Buchungen müssen eingegeben werden, der jeweils andere Wert kann daraus errechnet werden.  </para>
+
+<para
+>Wenn Sie alle notwendigen Daten eingegeben haben, klicken Sie auf den Knopf <guibutton
+>OK</guibutton
+> um fortzufahren. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.schedules.edit">
+<title
+>Geplante Buchungen bearbeiten</title>
+
+<para
+>Um eine geplante Buchung zu editieren, wählen Sie diese in der Liste und klicken mit der rechten Maustaste darauf. Aus dem erscheinenden Kontextmenü wählen Sie <guimenuitem
+>Bearbeiten</guimenuitem
+> aus. Es erscheint der bereits vom Anlegen der geplanten Buchung bekannte Dialog, mit dessen Hilfe Sie die Daten der geplanten Buchungen verändern können. </para>
+</sect1>
+
+<sect1 id="details.schedules.delete">
+<title
+>Geplante Buchungen löschen</title>
+
+<para
+>Um eine geplante Buchung zu löschen, wählen Sie den gewünschten Eintrag in der Liste und wählen mit der rechten Maustaste aus dem Kontextmenü den Punkt <guimenuitem
+>Löschen</guimenuitem
+>. </para>
+</sect1>
+
+<sect1 id="details.schedules.calendar">
+<title
+>Die Kalenderansicht</title>
+
+<para
+>Die Kalenderansicht zeigt Ihnen alle geplanten Buchungen in einem Kalender, sodass Sie sehr übersichtlich sehen können, wann diese fällig sind. Um in die Kalenderansicht zu gelangen klicken Sie einfach auf den Karteireiter <guibutton
+>Kalenderansicht</guibutton
+>.  </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="calendarview.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Kalenderansicht</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Der Kalendertyp kann mit Hilfe des Knopfs <guibutton
+>Darstellung auswählen</guibutton
+> verändert werden. Derzeit gibt es nur zwei Typen: Woche und Monat. Die Monatsansicht ist die Voreinstellung und die wohl hilfreichste Darstellungsform. Navigieren Sie durch den Kalender, indem Sie die Steuerelemente rechts oben verwenden. </para>
+
+<para
+>An Tagen mit geplanten Buchungen wird die Anzahl der Buchungen für den betreffenden Tag im Kalender angezeigt. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="schedmonthday.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Um die geplanten Buchungen, die auf den gewählten Tag fallen, anzusehen, bewegen Sie den Mauszeiger über den Eintrag. Es erscheint ein Fenster, in dem die Zusammenfassung der geplanten Buchung angezeigt wird. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="schedpopup.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Wenn mehrere geplante Buchung auf einen Tag fallen, können Sie die einzelnen geplanten Buchungen durch die Schaltflächen in den oberen Ecken des Fensters durchblättern. </para>
+
+<para
+>Wenn Ansicht mit geplanten Buchungen übersät ist und Sie nur einen bestimmten Typ an geplanten Buchungen sehen möchten, können Sie diese durch den Knopf <guibutton
+>Planungen wählen</guibutton
+> filtern. Nachdem Sie diesen Knopf anklicken, sehen Sie die verschiedenen Buchungstypen und diese sind standardmäßig alle ausgewählt. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="schedcaltypes.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Um einen Buchungstyp aus dem Kalender auszublenden, entfernen Sie das gewünschte Kreuzchen aus der Liste. </para>
+
+</sect1>
+
+<sect1 id="details.schedules.entering">
+<title
+>Geplante Buchungen eintragen</title>
+
+<para
+>Eine geplante Buchung eintragen bedeutet, im entsprechenden Kontenbuch eine neue Buchung auf Basis der in der geplanten Buchung hinterlegten Informationen anzulegen. Geplante Buchungen können auf eine von vier verschiedenen Weisen eingetragen werden: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Manuell durch Klick mit der rechten Maustaste auf den Listeneintrag</para
+></listitem>
+  <listitem
+><para
+>Manuell über das Aufklapp-Fenster in der Kalenderansicht</para
+></listitem>
+  <listitem>
+    <para
+>&kappname; kann sie aber auch mit oder ohne Ihr Zutun beim Starten eintragen </para>
+  </listitem>
+  <listitem>
+    <para
+>&kappname; kann sie mit Ihrer Interaktion während des Online-Bankings oder Imports von elektronischen Kontoauszügen anlegen </para>
+  </listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Manuelles Eintragen von geplanten Buchungen</title>
+
+<para
+>Sie können eine geplante Buchung manuell eintragen lassen, indem Sie mit der rechten Maustaste die gewünschte geplante Buchung anklicken und aus dem Kontextmenü <guimenuitem
+>Nächste Zahlung eintragen</guimenuitem
+> auswählen., oder indem Sie den Knopf <guibutton
+>Eintragen</guibutton
+> im erscheinenden Kontextmenü in der Kalenderansicht betätigen. </para>
+</sect2>
+
+<sect2>
+<title
+>Die einzutragende Buchung bestätigen</title>
+
+<para
+>Nachdem Sie das Eintragen der geplanten Buchungen auf eine der beschriebenen Arten angestoßen haben, erscheint das Dialogfenster zum Eintragen einer geplanten Buchung mit den dort hinterlegten Informationen. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="enterschedule.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Diese Informationen können nun nach Bedarf verändert und entweder für diese eine oder auch für alle zukünftigen Buchungen übernommen werden. Nachdem Sie geprüft haben, dass alles in Ordnung ist, klicken Sie den Knopf <guibutton
+>OK</guibutton
+>, um die Buchung ins Kontenbuch zu übernehmen und das nächste Fälligkeitsdatum der geplanten Buchung auf den nächsten Termin zu setzen. Wenn Sie irgendein Feld der Buchung geändert haben, werden Sie nochmals gefragt, ob die angezeigten Änderungen übernommen oder verworfen werden sollen. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="confirmenter.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Wählen Sie die gewünschte Aktion aus und klicken Sie den Knopf <guibutton
+>OK</guibutton
+> oder <guibutton
+>Abbrechen</guibutton
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Lassen Sie &kappname; Ihre geplante(n) Buchung(en) für Sie eintragen</title>
+
+<para
+>Als Alternative zum manuellen Eintragen kann &kappname; beim Programmstart überprüfen, welche geplanten Buchungen fällig sind und diese automatisch in das Kontenbuch eintragen, wenn Sie die entsprechende Option beim Anlegen der geplanten Buchung aktiviert haben. </para>
+
+<para
+>Wenn das automatische Eintragen nicht aktiviert wurde, öffnet &kappname; das oben beschriebene Dialogfenster und Sie können die Buchung über den beschriebenen Weg ins Kontenbuch eintragen lassen. Das gleiche Fenster öffnet sich, wenn Sie beim Anlegen der geplanten Buchung angegeben haben, dass der Betrag eine Schätzung ist. Sie können nun den tatsächlichen Geldbetrag der Buchung eintragen. </para>
+
+<para
+>Sie können &kappname; auch so konfigurieren, dass beim Programmstart nicht geprüft wird, ob fällige geplante Buchungen vorhanden sind. Verwenden Sie hierfür im Einstellungsdialog von &kappname; die Option "Geplante Buchungen beim Start überprüfen". </para>
+</sect2>
+</sect1>
+</chapter>

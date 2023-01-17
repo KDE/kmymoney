@@ -1,0 +1,28 @@
+<sect1 id="details.impexp.csvexp">
+<title
+>Strumento di esportazione CSV</title>
+<para
+>Per esportare uno dei propri conti in un file CSV, scegliere la voce di menu <menuchoice
+><guimenu
+>File</guimenu
+><guisubmenu
+>Esporta</guisubmenu
+> <guimenuitem
+>CSV...</guimenuitem
+></menuchoice
+>. Saranno richieste alcune opzioni. </para>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="csvexport.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>Esportazione CSV</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+</sect1>

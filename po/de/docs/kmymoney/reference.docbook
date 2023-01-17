@@ -1,0 +1,1312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="reference">
+<chapterinfo>
+  <date
+>2016-12-05</date>
+  <releaseinfo
+>5.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Referenz</title>
+
+<sect1 id="reference.menus">
+<sect1info>
+  <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+</sect1info>
+<title
+>Menüs</title>
+
+<para
+>Im Folgenden finden Sie eine vollständige Aufstellung aller Menüeinträge von &kmymoney; mit einer kurzen Beschreibung ihrer Funktion. Abhängig von der aktuellen Anzeige oder dem Status des Programms können viele Menüeinträge nicht verfügbar oder in Grau als Inaktiv angezeigt werden. Sie können zum Beispiel kein Konto bearbeiten, bevor ein Konto ausgewählt wurde oder in der aktuellen Ansicht angezeigt wird. </para>
+
+<sect2 id="reference.menus.file">
+<title
+>Menü Datei</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Neu</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Erstellt eine neue leere &kmymoney;-Datei. Es kann immer nur eine &kmymoney;-Datei geöffnet sein. Daher wird eine bereits geöffnete Datei geschlossen.  </action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Öffnen ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Öffnet eine vorhandene &kmymoney;-Datei.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guisubmenu
+>Zuletzt geöffnete Dateien</guisubmenu
+> <guimenuitem
+>...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Ermöglicht den schnellen Zugriff auf kürzlich geöffnete Dateien.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>Datenbank öffnen ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Öffnet eine vorhandene Datenbank.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Speichern</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Speichert die gerade geöffnete Datei.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Speichern unter ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Speichert die gerade geöffnete Datei unter einem anderen Dateinamen.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>Speichern in Datenbank ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Speichert die gerade geöffnete Datei in einer <link linkend="details.database"
+>Datenbank</link
+>.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guisubmenu
+>Importieren</guisubmenu
+><guimenuitem
+>...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Importiert Finanzdaten aus anderen Dateiformaten wie QIF und &gnucash; oder eine Dateivorlage mit Konten und Kategorien, die für die Einrichtung eines neuen Kontos verwendet werden kann.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>Exportieren</guimenuitem
+><guimenuitem
+>...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Exportiert die aktuelle Datei in ein anderes Format wie zum Beispiel QIF oder exportiert eine Liste Ihrer Konten und Kategorien als Vorlage. </action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datei</guimenu
+><guimenuitem
+>Drucken ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Druckt die aktuelle Datei.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Sicherung</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Speichert eine Sicherung der gerade geöffneten Datei.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>Persönliche Daten</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Ermöglicht die Bearbeitung der persönlichen Daten.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>Datei-Information</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Zeigt Informationen über die gerade geöffnete &kmymoney;-Datei.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <!--Dump Memory what i sthis?-->
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo
+>&Ctrl;<keycap
+> W</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datei</guimenu
+><guimenuitem
+>Schließen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Schließt die aktuell geöffnete Datei.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+><guimenu
+>Datei</guimenu
+><guimenuitem
+>Beenden</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+><action
+>Beendet</action
+> &kmymoney;.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.edit">
+<title
+>Menü Bearbeiten</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Bearbeiten</guimenu
+><guimenuitem
+>Buchung suchen ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Sucht nach Buchungen.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.view">
+<title
+>Menü Ansicht</title>
+
+<variablelist>
+  <varlistentry id="reference.menus.settings.transactiondetail">
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>T</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Buchungsdetails anzeigen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Zeigt die Buchungsdetails in der <link linkend="details.ledgers"
+>Kontenbuch</link
+>-Ansicht. Mit dieser Einstellung werden alle Zeilen einer Buchung im Kontenbuch dargestellt. Ist diese Einstellung deaktiviert, erscheint nur eine Zeile je Buchung. </action
+></para>
+      <para
+>Möchten Sie nur die Einzelheiten der gerade ausgewählten Buchung sehen, aber nur eine Zeile für alle anderen Buchungen, dann benutzen Sie die Einstellung <link linkend="details.settings.register.lens"
+>Buchungsdetails der ausgewählten Buchung anzeigen</link
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Abgeglichene Buchungen ausblenden</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Blendet alle abgeglichenen Buchungen in der Ansicht aus.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+><guimenuitem
+>Ungenutzte Kategorien ausblenden</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Blendet ungenutzte Kategorien in den Ansichten aus.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> &Ctrl;&Shift;<keycap
+>A</keycap
+> </keycombo
+></shortcut
+> <guimenu
+>Ansicht</guimenu
+> <guimenuitem
+>Alle Konten anzeigen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Zeigt alle Konten in den Ansichten.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.institution">
+<title
+>Menü Geldinstitut</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Geldinstitut</guimenu
+> <guimenuitem
+>Neues Geldinstitut ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Fügt ein neues Geldinstitut hinzu.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Geldinstitut</guimenu
+> <guimenuitem
+>Geldinstitut bearbeiten ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Öffnet den Dialog zur Bearbeitung eines Geldinstituts.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Geldinstitut</guimenu
+> <guimenuitem
+>Geldinstitut löschen ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Löscht ein Geldinstitut.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.account">
+<title
+>Menü Konto</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Neues Konto ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Fügt ein neues Konto hinzu.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Konto bearbeiten ...</guimenuitem
+>  </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Bearbeitet ein Konto.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Konto löschen ...</guimenuitem
+>  </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Löscht ein vorhandenes Konto.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Kontenbuch öffnen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Zeigt die Kontenbuchansicht eines Kontos an.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> &Ctrl;&Shift;<keycap
+>R</keycap
+> </keycombo
+></shortcut
+> <guimenu
+>Konto</guimenu
+> <guimenuitem
+>Abgleichen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Gleicht ein Konto mit Hilfe des Assistenten ab.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Abgleich zurückstellen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Stellt das Abgleichen eines Kontos zurück.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Fertigstellen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Beendet das Abgleichen eines Kontos.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Buchungs-Bericht</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Öffnet den Buchungsbericht des Kontos.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Konto schließen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Schließt ein Konto.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Konto neu eröffnen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Öffnet ein vorher geschlossenes Konto wieder.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Kontenzuordnung löschen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Löscht die Zuordnung zu einem Onlinekonto.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Einem Onlinekonto zuordnen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Weist ein Onlinekonto einem Konto zu.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Konto aktualisieren</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Importiert Buchungen von Online-Banking für ein Konto.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konten</guimenu
+> <guimenuitem
+>Alle Konten aktualisieren ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Importiert Buchungen von Online-Banking für alle Konten.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <!--New credit transfer-->
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.category">
+<title
+>Menü Kategorie</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Kategorie</guimenu
+> <guimenuitem
+>Neue Kategorie ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Fügt eine neue Kategorie hinzu.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Kategorie</guimenu
+> <guimenuitem
+>Kategorie bearbeiten ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Bearbeitet eine Kategorie.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Kategorie</guimenu
+> <guimenuitem
+>Kategorie löschen ...</guimenuitem
+>  </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Löscht eine Kategorie.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Kategorie</guimenu
+> <guimenuitem
+>Kontenbuch öffnen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Zeigt die Kontenbuchansicht einer Kategorie.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.transaction">
+<title
+>Menü Buchung</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; &Ins;</keycombo
+></shortcut
+> <guimenu
+>Buchung</guimenu
+> <guimenuitem
+>New</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Legt eine neue Buchung an.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Buchung</guimenu
+> <guimenuitem
+>Bearbeiten</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Bearbeitet eine Buchung.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Buchung</guimenu
+> <guimenuitem
+>Split-Buchungen bearbeiten</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Bearbeitet die Aufteilung einer Buchung.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Buchung</guimenu
+> <guimenuitem
+>Löschen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Löscht eine Buchung.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Buchung</guimenu
+> <guimenuitem
+>Duplizieren</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Dupliziert eine Buchung.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Buchung</guimenu
+> <guimenuitem
+>Buchung markieren als ...</guimenuitem
+> <guimenuitem
+>Nicht abgeglichen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Ändert den Status einer Buchung zu „Nicht abgeglichen“,</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+> &Ctrl;&Alt;&Space; </keycombo
+> </shortcut
+> <guimenu
+>Buchung</guimenu
+> <guimenuitem
+>Buchung markieren als ...</guimenuitem
+> <guimenuitem
+>Verrechnet</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Ändert den Status einer Buchung zu „Verrechnet“.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+> &Ctrl;&Shift;&Space; </keycombo
+> </shortcut
+> <guimenu
+>Buchung</guimenu
+> <guimenuitem
+>Buchung markieren als ...</guimenuitem
+> <guimenuitem
+>Abgeglichen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Ändert den Status einer Buchung zu „Abgeglichen“,</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Buchung</guimenu
+><guimenuitem
+>Gehe zu Konto</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Zeigt das andere Konto einer Buchung.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Buchung</guimenu
+> <guimenuitem
+>Gehe zu Zahlungsempfänger</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Zeigt die Ansicht der Zahlungsempfänger und beschränkt dies auf den Zahlungsempfänger der ausgewählten Buchung.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Buchung</guimenu
+> <guimenuitem
+>Geplante Buchung erstellen ...</guimenuitem
+>  </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Erstellt eine neue geplante Buchung.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Buchung</guimenu
+><guimenuitem
+>Zuordnen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Zuordnung von importierten Buchungen.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Buchung</guimenu
+><guimenuitem
+>Zuordnung rückgängig machen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Macht die Zuordnung einer Buchung wieder rückgängig, die von &kmymoney; zur Zuordnung von importierten Buchungen vorgeschlagen wurde</action
+>. Dieser Menüeintrag ist nur vorhanden, wenn eine zugeordnete Buchung vorhanden ist. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Buchung</guimenu
+> <guimenuitem
+>Annehmen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Annahme einer vorgeschlagenen Zusammenführung von importierten Buchungen.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; <keycap
+>A</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Buchung</guimenu
+> <guimenuitem
+>Alle auswählen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Wählt alle Buchung in der Ansicht.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Buchung</guimenu
+><guimenuitem
+>Scheck ausdrucken</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Druckt den Inhalt der ausgewählten Buchung im angezeigten Register mit den Formatierungen der gewählten Vorlage.</action
+> Dieser Menüeintrag ist nur vorhanden, wenn eine Buchung im Register ausgewählt ist. Im Abschnitt über die Einrichtung des Moduls <link linkend="details.settings.plugins"
+>Scheck ausdrucken</link
+> finden Sie weitere Informationen. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.tools">
+<title
+>Menü Extras</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Extras</guimenu
+> <guimenuitem
+>QIF-Einstellungen</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Ändert das QIF-Profil, das zum Import oder Export von QIF-Dateien verwendet wird.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Extras</guimenu
+> <guimenuitem
+>Währungen ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Zeigt alle in &kmymoney; definierten Währungen.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Extras</guimenu
+> <guimenuitem
+>Preise ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Zeigt Aktien- und Währungspreise an.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Extras</guimenu
+> <guimenuitem
+>Aktien- und Währungspreise aktualisieren ...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Aktualisiert Aktien- und Währungspreise aus Online-Quellen mit der Funktion <link linkend="details.investments.onlinequotes"
+>Online-Kursnotizen</link
+>.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Extras</guimenu
+> <guimenuitem
+>Konsistenzüberprüfung</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Startet eine Überprüfung Ihrer Datei und versucht alle gefundenen Probleme zu beheben.</action
+></para>
+      <para
+>Erstellen Sie eine Sicherung Ihrer Daten, bevor Sie diese Funktion benutzen.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Extras</guimenu
+><guimenuitem
+>Leistungstest</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Startet einen Leistungstest für Ihre Datei und zeigt das Ergebnis an.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <!--Generate Database SQL
+  Debug Traces
+  Debug Timers-->
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.settings.help">
+<title
+>Die Menüs Einstellungen und Hilfe</title>
+
+<para
+>&kmymoney; hat die bekannten &kde;-Menüs Einstellungen und Hilfe aus den <ulink url="help:/fundamentals/menus.html"
+>&kde;-Grundlagen</ulink
+> mit einem zusätzlichen Eintrag:</para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+> <guimenuitem
+>Meldungen wieder anzeigen ...</guimenuitem
+>  </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Zeigt wieder alle Meldungen an, wenn Sie vorher in irgendeinem Dialog <guimenuitem
+>Diese Meldung nicht mehr anzeigen</guimenuitem
+> ausgewählt haben.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+</sect2>
+
+</sect1
+>&details-widgets; </chapter>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="introduction">
+<chapterinfo>
+  <date
+>2018-01-13</date>
+  <releaseinfo
+>5.0.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Inledning</title>
+
+<sect1 id="what-is-kmymoney">
+<title
+>Vad är &kmymoney;?</title>
+
+<para
+>Med enkla ord är &kmymoney; en hemekonomihanterare av &kde;. Den låter en användare av operativsystem och program med öppen källkod noggrant följa upp sin personliga ekonomi, genom att tillhandahålla en stor mängd ekonomiska funktioner och verktyg. </para>
+
+<para
+>De huvudsakliga målen med projektet är: </para>
+
+<itemizedlist>
+  <listitem>
+    <formalpara
+><title
+>Funktionslikhet</title>
+      <para
+>&kmymoney; avser att tillhandahålla alla viktiga funktioner som man hittar i kommersiellt tillgängliga hemekonomihanterare. Även om varje utgåva av &kmymoney; kommer närmare och närmare målet, finns det fortfarande arbete kvar. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara
+><title
+>Lättanvänt</title>
+      <para
+>&kmymoney; strävar efter att vara den mest lättanvända hemekonomihanteraren med öppen källkod, särskilt för icke-tekniska användare. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara
+><title
+>Riktighet</title>
+      <para
+>Baserat på den väl utprovade principen med dubbel bokföring, försäkrar &kmymoney; att din ekonomi hålls i riktig ordning. </para>
+    </formalpara>
+  </listitem>
+</itemizedlist>
+
+</sect1>
+
+<sect1 id="what-kmymoney-is-not">
+<title
+>Vad &kmymoney; inte är</title>
+
+<para
+>Som hemekonomihanterare, är inte &kmymoney; avsett att att skala upp till behoven hos ett typiskt företag. Ett mindre företag kan finna tillräckligt med funktioner för att använda &kmymoney;, men funktioner som kundfordringar och leverantörsskulder stöds inte direkt. Dock vore det möjligt att skapa funktioner för kunder, leverantörer och dokumentation, eller andra funktioner, via insticksprogram. </para>
+
+<para
+>&kmymoney; är inte bara en klon av kommersiellt tillgängliga program för hemekonomi. Även om många av funktionerna som finns i &kmymoney; också kan hittas i andra liknande program, strävar &kmymoney; efter att presentera en individuell och unik vy av din ekonomi. </para>
+
+</sect1>
+</chapter>

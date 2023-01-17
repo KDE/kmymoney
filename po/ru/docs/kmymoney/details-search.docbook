@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.search">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Darin.Strait; &Darin.Strait.mail; </author>
+  </authorgroup>
+  <date
+>25 июля 2010 г.</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Поиск операций</title>
+
+<sect1 id="details.search.general">
+<title
+>Общие сведения</title>
+
+<para
+>С помощью диалога <guilabel
+>Поиск операций</guilabel
+> возможно выполнять поиск операций на основе указанных пользователем критериев. Чтобы открыть этот диалог, выберите в меню <guimenu
+>Правка</guimenu
+> пункт <guimenuitem
+>Найти операцию...</guimenuitem
+>. </para>
+
+<para
+>В этом диалоге две основные вкладки. На вкладке <quote
+>Критерии поиска</quote
+> доступны вложенные вкладки для указания критериев поиска. </para>
+
+<para
+>Результаты поиска будут показаны на вкладке <quote
+>Результат</quote
+> по завершении поиска. Под списком результатов программа &kmymoney; отображает количество операций, которые соответствуют заданным критериям поиска. По двойному щелчку по какой-либо операции в списке результатов будет открыта соответствующая книга учёта, в которой будет показана запись этой операции. </para>
+
+<para
+>При нажатии кнопки <guibutton
+>Поиск</guibutton
+> начнётся поиск с учётом всех указанных на вкладке критериев. </para>
+
+<para
+>При нажатии кнопки <guibutton
+>Сброс</guibutton
+> для всех полей на вложенных вкладках будут восстановлены значения по умолчанию. Это позволяет указать новые критерии поиска. </para>
+
+<para
+>При нажатии кнопки <guibutton
+>Закрыть</guibutton
+> диалог <guilabel
+>Поиск операций</guilabel
+> будет закрыт. </para>
+
+</sect1>
+
+<sect1 id="details.search.criteria">
+<title
+>Критерии поиска</title>
+
+<para
+>На вкладке <quote
+>Критерии поиска</quote
+> доступны несколько вложенных вкладок. На каждой из них возможно указать критерии поиска соответствующего типа. Под областью указания критериев в окне &kmymoney; показан список всех тех критериев, которые заданы для поиска в настоящий момент. </para>
+
+<sect2 id="details.search.text">
+<title
+>Текст</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-text.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Диалог «Поиск операций», вкладка «Текст»</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>На этой вкладке возможно указать текст для поиска. Также доступны два флажка для настройки того, каким образом указанный текст используется при поиске. </para>
+
+<para
+>По умолчанию поиск будет выполнен по простым подстрокам. Пример: </para>
+
+<para>
+<itemizedlist>
+  <listitem>
+    <para
+>Для запроса <quote
+>Best</quote
+> будет найдено соответствие <quote
+>Best Cakes, Inc.</quote
+></para>
+  </listitem>
+  <listitem>
+    <para
+>Для запроса <quote
+>est</quote
+> также будет найдено соответствие <quote
+>Best Cakes, Inc.</quote
+> </para>
+  </listitem>
+</itemizedlist>
+</para>
+
+<para
+>Если записи операций должны содержать указанный текст, выберите в раскрывающемся списке, который расположен рядом с текстовым полем, вариант <guilabel
+>Содержит</guilabel
+>. Если же операции не должны содержать указанный текст, выберите вариант <guilabel
+>Не содержит</guilabel
+>. </para>
+
+<para
+>Если флажок <guilabel
+>С учётом регистра</guilabel
+> установлен, поиск будет выполняться с учётом регистра: например, запросу <quote
+>best</quote
+> не будет соответствовать запись <quote
+>Best Cakes, Inc.</quote
+>. </para>
+
+<para
+>If you check the <guilabel
+>Treat Text as regular expression</guilabel
+> box, the text will be treated as a regular expression. For details on how to craft a regular expression, visit the &Qt; documentation about the <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
+>QRegularExpression class</ulink
+>. </para>
+</sect2>
+
+<sect2 id="details.search.account">
+<title
+>Счёт</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-account.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Диалог «Поиск операций», вкладка «Счёт»</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>На этой вкладке возможно указать счёта для поиска. </para>
+
+<para
+>Счета показаны в виде дерева. Счета, отмеченные для поиска, обозначаются флажками. Если нажать кнопку <guibutton
+>Все</guibutton
+>, для поиска будут отмечены все счета. Если нажать кнопку <guibutton
+>Не указано</guibutton
+>, для поиска не будет отмечен ни один из счетов. Чтобы установить или снять отметку с какого-либо из счетов, щёлкните по полю, расположенному рядом с названием счёта, левой кнопкой мыши. Чтобы установить или снять отметки со всего дерева иерархии счетов, щёлкните по полю правой кнопкой мыши. </para>
+</sect2>
+
+<sect2 id="details.search.date">
+<title
+>Дата</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-date.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Диалог «Поиск операций», вкладка «Дата»</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>На этой вкладке возможно указать даты для поиска. </para>
+
+<para
+>В поле <quote
+>Период</quote
+> возможно указать период с помощью удобных элементов управления «с» и «по». Эти элементы могут использоваться по отдельности. Даты возможно вводить вручную. Использование элементов управления позволяет предотвратить ввод несуществующих дат. Для изменения значений дат следует нажимать кнопки со стрелками вверх и вниз, когда выделена определённая часть даты. При щелчке по маленькому значку календаря появится окно календаря, в котором возможно легко выбрать даты. </para>
+</sect2>
+
+
+<sect2 id="details.search.amount">
+<title
+>Сумма</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-amount.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Диалог «Поиск операций», вкладка «Сумма»</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>На этой вкладке возможно указать суммы для поиска. </para>
+
+<para
+>Возможно выполнить поиск точной суммы или суммы в заданном диапазоне. При щелчке по значку калькулятора появится окно с экранным калькулятором, с помощью которого возможно ввести необходимое значение. </para>
+</sect2>
+
+<sect2 id="details.search.category">
+<title
+>Статья бюджета</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-category.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Диалог «Поиск операций», вкладка «Статья бюджета»</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>На этой вкладке возможно указать статьи бюджета для поиска. </para>
+
+<para
+>Статьи бюджета представлены в виде дерева. Статьи, отмеченные для поиска, обозначаются флажком. При нажатии кнопки <guibutton
+>Все</guibutton
+> для поиска будут отмечены все статьи. При нажатии кнопки <guibutton
+>Не указано</guibutton
+> не будет отмечена ни одна из статей. При нажатии кнопки <guibutton
+>Доход</guibutton
+> будут отмечены статьи доходов, а со статей расходов отметки будут сняты. При нажатии кнопки <guibutton
+>Расход</guibutton
+> отметки будут сняты со статей доходов, а на статьи расходов — установлены. </para>
+
+<para
+>Чтобы установить или снять отметку с какой-либо из статей, щёлкните по полю, расположенному рядом с названием статьи, левой кнопкой мыши. Чтобы установить или снять отметки со всего дерева иерархии статей, щёлкните по полю правой кнопкой мыши. </para>
+</sect2>
+
+<sect2 id="details.search.payee">
+<title
+>Контрагент</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-payee.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Диалог «Поиск операций», вкладка «Контрагент»</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>На этой вкладке возможно указать контрагентов для поиска. </para>
+
+<para
+>Контрагенты, отмеченные для поиска, обозначаются флажком. При нажатии кнопки <guibutton
+>Все</guibutton
+> для поиска будут отмечены все контрагенты. При нажатии кнопки <guibutton
+>Не указано</guibutton
+> не будет отмечен ни один из контрагентов. Чтобы установить или снять отметку с какой-либо из записей контрагентов, щёлкните по полю, расположенному рядом с названием соответствующего контрагента. </para>
+
+<para
+>Если флажок <guilabel
+>Найти операции без контрагентов</guilabel
+> установлен, будут выбраны только операции без контрагентов. </para>
+
+</sect2>
+
+<sect2 id="details.search.details">
+<title
+>Подробно</title>
+
+<para
+>На этой вкладке возможно указать различные дополнительные критерии поиска. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-details.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Диалог «Поиск операций», вкладка «Подробно»</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para>
+<itemizedlist>
+  <title
+>Параметр «Тип» может принимать одно из следующих значений:</title>
+  <listitem
+><para
+>Все типы</para
+></listitem>
+  <listitem
+><para
+>Платежи</para
+></listitem>
+  <listitem
+><para
+>Зачисления</para
+></listitem>
+  <listitem
+><para
+>Переводы</para
+></listitem>
+</itemizedlist>
+
+<itemizedlist>
+  <title
+>Параметр «Состояние» может принимать одно из следующих значений:</title>
+  <listitem
+><para
+>Все состояния</para
+></listitem>
+  <listitem
+><para
+>Не сверено</para
+></listitem>
+  <listitem
+><para
+>Учтено</para
+></listitem>
+  <listitem
+><para
+>Сверено</para
+></listitem>
+</itemizedlist>
+
+<itemizedlist>
+  <title
+>Параметр «Валидность» может принимать одно из следующих значений:</title>
+  <listitem
+><para
+>Любая операция</para
+></listitem>
+  <listitem
+><para
+>Подтверждённая операция</para
+></listitem>
+  <listitem
+><para
+>Недопустимая операция</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Возможно выполнить поиск операции с определённым номером или поиск операции, номер которой находится в заданном диапазоне. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="details.search.results">
+<title
+>Результаты поиска</title>
+
+<para
+>На вкладке <quote
+>Результат</quote
+> показаны дата, счёт, описание, состояние сверки, платёж и зачисления, которые относятся к операциям, соответствующим заданным пользователем условиям поиска. Чтобы изменить порядок сортировки результатов поиска, щёлкните правой кнопкой мыши по столбцу заголовка списка результатов. </para>
+
+<para
+>При двойном щелчке по операции будет показана соответствующая книга учёта (при этом в фокусе будет находиться запись выбранной операции). </para>
+
+</sect1>
+
+</chapter>

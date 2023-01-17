@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="firsttime">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Usar o &kappname; pela primeira vez</title>
+
+<sect1 id="firstime-1">
+<title
+>Executar o &kappname; pela primeira vez</title>
+
+<para
+>Assim que o &kappname; tenha sido completamente carregando, serão abertas duas janelas. A janela de topo, a 'Dica do Dia', oferece uma série de peças informativas importantes ou úteis acerca da aplicação. <screenshot>
+	<screeninfo
+>Dica do Dia</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="tipofday.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Dica do Dia</phrase>
+	</textobject>
+	</mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Recomenda-se que leia rapidamente estas dicas, carregando nos botões <guibutton
+>Anterior</guibutton
+> e <guibutton
+>Seguinte</guibutton
+>, no fundo da janela. </para>
+
+<para
+>Assim que tenha lido as dicas, a janela poderá ser fechadas e será aberta de novo, sempre que o &kappname; for iniciado. Para parar este comportamento predefinido, desligue a opção apropriada na janela da Dica do Dia. </para>
+
+<note>
+  <para
+>As dicas poderão ser lidas em qualquer altura, seleccionando a opção <guimenuitem
+>Mostrar a dica do dia</guimenuitem
+> no menu <guimenu
+>Ajuda</guimenu
+>, dentro do &kappname;. </para>
+</note>
+
+<para
+>Todas as dicas foram extraídas da FAQ (lista de perguntas mais frequentes) que oferece mais alguma ajuda detalhada, e que poderá ser encontrada na <ulink url="http://www.kmymoney.org/faq.php"
+>página Web</ulink
+> e neste manual. </para>
+
+<para
+>Por favor, carregue em <guibutton
+>Fechar</guibutton
+> para encerrar a janela da Dica do Dia. </para>
+</sect1>
+
+<sect1 id="firsttime.mainwindow">
+<title
+>A janela principal</title>
+
+<para>
+	<screenshot>
+	<screeninfo
+>A Janela Principal</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="mainwindow_numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>A Janela Principal</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>A janela principal do &kappname; consiste em quatro partes importantes </para>
+
+<itemizedlist>
+  <listitem
+><para
+>A. A barra do menu</para
+></listitem>
+  <listitem
+><para
+>A. A barra de ferramentas</para
+></listitem>
+  <listitem
+><para
+>C. O selector de áreas</para
+></listitem>
+  <listitem
+><para
+>D. A área seleccionada</para
+></listitem>
+</itemizedlist>
+
+<para
+>O menu e as barras de ferramentas oferecem o acesso às funcionalidades do &kappname;, permitindo-lhe <link linkend="firsttime.3"
+>Criar</link
+> ficheiros ou configurar o funcionamento do &kappname;. </para>
+
+<para
+>O selector de áreas consiste em pelo menos onze ícones do lado esquerdo da janela principal, dependendo do 'software' fornecido pelo seu sistema. Poderá adicionar mais ícones através de vários 'plugins'. Se carregar num ícone, a janela da área do lado direito é carregada com a área apropriada a mostrar os seus dados financeiros. Cada área oferece uma vista única sobre a sua situação financeira e permite-lhe ver ou editar a informação apresentada. </para>
+
+<para
+>O selector de áreas contém os seguintes ícones </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="home_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Área Inicial</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Início: Uma visão geral configurável sobre a sua situação financeira actual (ou uma página introdutória, quando não existirem dados). </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="institutions_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Área de Instituições</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Instituições: Todas as suas instituições e contas, apresentadas de forma hierárquica. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="accounts_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Área de Contas</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Contas: Todas as suas contas, apresentadas de forma hierárquica. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="schedule_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Área de Calendarização</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Eventos Recorrentes: Os seus depósitos e movimentos recorrentes. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="categories_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Área de Categorias</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Categorias: Contas especiais que oferecem a si a possibilidade de agrupar as transacções associadas. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="mail-tagged.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Área de Marcas</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Marcas: Contas especiais que oferecem uma forma adicional de agrupar as transacções associadas, para além das categorias. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="payees_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Área de Beneficiários</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Beneficiários: Todos os beneficiários usados pelo &kappname;. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="ledgers_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Área do Livro de Registos</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Livros de Registos: As suas transacções na conta. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="investments_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Área de Investimentos</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Investimentos: O resumo do seu portfólio. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="reports_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Área de Relatórios</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Relatórios: Uma colecção de relatórios úteis, oferecendo vistas alternativas sobre os seus dados financeiros. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="budgets_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Área de Orçamentos</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Orçamentos: Os seus orçamentos </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="forecast_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Área de Previsão</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Previsão: Esta vista oferece uma antevisão sobre as suas contas e categorias </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="outbox_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Área de Saída</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Usada pelo módulo da banca 'online', de modo a oferecer o 'feedback' sobre os processos em execução. Esta é uma vista fornecida pelo 'plugin' KBanking e poderá não estar presente no seu sistema. </para>
+  </listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="firsttime.3">
+<title
+>Criar um novo ficheiro</title>
+
+<para
+>O &kappname; mantém todos os dados acerca das suas finanças num ficheiro. Como foi definido em <link linkend="makingmostof.basicaccounting.personalaccounts"
+>Definir as contas (registos pessoais)</link
+>, poderá manter mais de um conjunto de contas, mas os dados de cada um será guardado num ficheiro separado, sendo que o &kappname; só pode ter um ficheiro aberto de cada vez. Veja o capítulo sobre <link linkend="details.formats"
+>Formatos de Ficheiros</link
+> para obter mais detalhes sobre os ficheiros de dados do &kappname;. </para>
+
+<para
+>Para criar um novo ficheiro, poderá tanto seleccionar a opção <menuchoice
+><guimenu
+>Ficheiro</guimenu
+><guimenuitem
+>Novo</guimenuitem
+></menuchoice
+> no menu ou escolher a opção <inlinemediaobject
+><imageobject
+><imagedata fileref="new.png"/></imageobject
+><textobject
+><phrase
+>Novo</phrase
+></textobject
+></inlinemediaobject
+> da barra de ferramentas. </para>
+
+<para
+>O &kappname; irá então abrir o <quote
+>Assistente de Configuração dos Novos Ficheiros</quote
+>, que o guiará pelo processo de criação do ficheiro. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Página de Dados Pessoais</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Página de Dados Pessoais</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Dado que todos os campos são opcionais, poderá usar o &kappname; sem introduzir qualquer informação agora. Toda a informação que for aqui introduzida só é usada para personalizar o seu ficheiro. De futuro, poderá ser usada em alguns relatórios e para a banca 'online'. Se o &kappname; necessitar de alguma informação pessoal nas versões futuras e não encontrar nada, ser-lhe-á pedido para introduzir então os dados relevantes. </para>
+
+<para
+>Introduza por favor o seu nome e endereço, ou então não introduza nada de todo, e carregue em <guibutton
+>Seguinte</guibutton
+>. </para>
+
+<para
+>No caso de ter um endereço próprio registado no &kaddressbook;, o botão <guibutton
+>Carregar a Partir do Livro de Endereços</guibutton
+> ficará activo e, caso carregue nele, irá importar toda a informação para o &kappname;. </para>
+
+<para
+>O &kappname; suporta várias moedas. Para definir a sua moeda de base (a que usa no dia-a-dia e que será usada para os seus relatórios), seleccione o item apropriado na lista oferecida e carregue em <guibutton
+>Seguinte</guibutton
+>. Será seleccionada uma por omissão do &kappname;, baseando-se na sua configuração regional. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Página de selecção da moeda de base</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-2.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Página de selecção da moeda de base</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>A seguinte página permite-lhe criar uma conta inicial. Para o utilizador típico do &kappname;, esta é uma conta à ordem. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Página de criação de uma conta à ordem</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-3.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Página de criação de uma conta à ordem</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Indique o nome da conta e um possível número de referência, atribuído pela instituição que faz a gestão da conta. Indique a data de abertura da conta e o saldo inicial da mesma. Por exemplo, se quiser usar o &kappname; para gerir todas as suas finanças desde 01-01-2008, indique então o saldo da conta no início dessa data. O número poderá ser obtido num extracto em papel. Indique depois o nome e o número da agência, ainda que esta informação só seja necessária para a banca 'online'. </para>
+
+<para
+>No caso de não querer configurar uma conta inicial, desligue por favor a opção </para>
+
+<para
+>Assim que terminar, carregue em <guibutton
+>Seguinte</guibutton
+> para prosseguir. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Página de selecção do modelo de contas</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-4.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Página de selecção do modelo de contas</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+
+<para
+>Escolha o país e modelos de conta apropriados. Poderá seleccionar vários modelos, incluindo de vários países, com uma combinação das teclas &Ctrl; e &Shift;, em conjunto com o botão esquerdo do rato. A hierarquia de contas a configurar será apresentada numa área de antevisão do assistente. No caso de não conseguir encontrar um modelo adequado às suas necessidades, não seleccione nenhum modelo. </para>
+
+<para
+>Assim que terminar a selecção do modelo, carregue em <guibutton
+>Seguinte</guibutton
+> para prosseguir. </para>
+
+<para
+>A página seguinte do assistente permite-lhe configurar as preferências do utilizador. Carregue em <guibutton
+>Seguinte</guibutton
+> se tiver terminado e quiser prosseguir. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Página de Preferências</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-5.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Página de preferências</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>A última página do assistente permite-lhe seleccionar o nome do ficheiro que será usado para guardar os seus dados financeiros. Será criado um nome inicial para o ficheiro, com base na sua pasta HOME e o seu nome de utilizador. No caso de o ficheiro existir, será apresentado um aviso que lhe diz para seleccionar o nome de um ficheiro inexistente. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Página de selecção do nome do ficheiro</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-6.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Página de selecção do nome do ficheiro</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Agora que terminou de recolher toda a informação relevante para criar o ficheiro, carregue em <guibutton
+>Terminar</guibutton
+> para que o &kappname; crie o ficheiro para si e o abra. </para>
+
+<!--
+<para
+>After &kappname; has finished loading the default accounts your financial
+summary will be displayed.  As you have defined no accounts to hold your
+transactions this is currently empty.</para>
+-->
+</sect1>
+
+<sect1 id="firsttime.4">
+<title
+>Criar contas</title>
+
+<para
+>Poderá criar uma conta numa de duas formas, as quais são descritas aqui: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Usar o menu</term>
+    <listitem>
+      <para
+>Para criar uma conta com o menu, seleccione a opção <menuchoice
+><guimenu
+>Contas</guimenu
+><guimenuitem
+>Nova conta</guimenuitem
+></menuchoice
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Usar a área de contas</term>
+    <listitem>
+      <para
+>Para criar uma conta com a área de contas, carregue no ícone de Contas <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="accounts_view.png"/></imageobject
+></inlinemediaobject
+></guiicon
+> no selector de áreas e depois carregue com o botão direito no ícone da árvore de Activos, do lado direito, e escolha a opção <guimenuitem
+>Nova conta</guimenuitem
+> no menu de contexto. A árvore de Activos mantém todas as as contas que sejam activos. Os activos, assim como todos os outros tipos de contas, serão discutidos com mais detalhe neste manual. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<tip>
+  <para
+>Repare que o &kappname; usa os menus de contexto de um modo geral em toda a aplicação. Se não conseguir perceber como tentar fazer algo, tente carregar com o botão direito do rato onde estaria à espera de uma dada funcionalidade. </para>
+</tip>
+
+<para
+>Ao criar uma conta nova, com qualquer um dos métodos, abre o <emphasis
+>Assistente de Novas Contas</emphasis
+>. Este assistente irá conduzi-lo, passo-a-passo, pelo processo de criação de uma conta, recolhendo a informação necessária em cada passo. Para navegar pelas páginas, carregue nos botões <guibutton
+>Anterior</guibutton
+> e <guibutton
+>Seguinte</guibutton
+>. </para>
+
+<para
+>Crie uma conta com qualquer um dos dois métodos mencionados anteriormente para continuar. Poderá encontrar uma descrição completa da criação de contas na secção de <link linkend="details.accounts"
+>Contas</link
+>. </para>
+
+<para
+>Agora que uma ou mais contas já existem no &kappname;, o seu resumo de contas aparece na área inicial. Poderá criar transacções manualmente na área do <link linkend="details.ledgers"
+>Livro de Registos</link
+> ou configurar as transacções automáticas com a área de <link linkend="details.schedules"
+>Calendarização</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.schedules">
+<title
+>Escalonamentos</title>
+
+<para
+>Uma <link linkend="details.schedules"
+>Calendarização</link
+> ou evento recorrente é uma transacção que ocorre uma ou mais vezes, durante um dado período de tempo. Algumas vezes chamadas de transacções recorrentes, um exemplo típico é o cheque do seu salário, que recebe todos os meses ou semanas. Em vez de ter de introduzir os detalhes da transacção sempre que é pago, poderá dizer ao &kappname; para criar um evento recorrente que irá introduzir uma transacção para si, quando for pago. </para>
+
+<para
+>Para fazer a manutenção das <link linkend="details.schedules"
+>calendarizações</link
+>, carregue no ícone <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="schedule_view.png"/></imageobject
+></inlinemediaobject
+>Eventos Recorrentes</guiicon
+> no selector de áreas. </para>
+</sect1>
+
+<sect1 id="firsttime.categories">
+<title
+>Categorias</title>
+
+<para
+>Para fazer a manutenção das <link linkend="details.categories"
+>categorias</link
+>, carregue no ícone <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="categories_view.png"/></imageobject
+></inlinemediaobject
+>Categorias</guiicon
+> no selector de áreas. </para>
+
+<para
+>Poderá encontrar uma descrição completa sobre este tópico na secção de <link linkend="details.categories"
+>Categorias</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.tags">
+<title
+>Marcas</title>
+
+<para
+>Para fazer a manutenção das <link linkend="details.tags"
+>marcas</link
+>, carregue no ícone <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="mail_tagged.png"/></imageobject
+></inlinemediaobject
+>Marcas</guiicon
+> no selector de áreas. </para>
+
+<para
+>Poderá encontrar uma descrição completa sobre este tópico na secção de <link linkend="details.tags"
+>Marcas</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.payees">
+<title
+>Beneficiários</title>
+
+<para
+>Para manter a sua lista de beneficiários, carregue no ícone de <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="payees_view.png"/></imageobject
+></inlinemediaobject
+>Beneficiários</guiicon
+> no selector de áreas. </para>
+
+<para
+>Poderá encontrar uma descrição completa sobre este tópico na secção de <link linkend="details.payees"
+>Beneficiários</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.import">
+<title
+>Importação do Formato de Intercâmbio do Quicken (QIF)</title>
+
+<para
+>Se usar de momento uma aplicação de gestão financeira, o &kappname; poderá então importar as transacções de uma conta, desde que estejam no formato de intercâmbio do Quicken (QIF). A maioria dos programas financeiros poderá exportar este formato, e os diferentes métodos das aplicações para exportar em QIF não são aqui explicados, por razões de brevidade. </para>
+
+<para
+>Poderá encontrar uma descrição completa sobre este tópico na secção de <link linkend="details.impexp.qifimp"
+>Importação do QIF</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.find">
+<title
+>Procurar por transacções</title>
+
+<para
+>O &kappname; oferece uma funcionalidade útil e poderosa de pesquisa de transacções, sob a forma de uma janela de pesquisa. </para>
+
+<para
+>A janela de pesquisa poderá ser aberta na barra de ferramentas, usando o ícone <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="transaction_find.png"/></imageobject
+></inlinemediaobject
+>Procurar</guiicon
+> ou seleccionando a opção <guimenuitem
+>Procurar a Transacção</guimenuitem
+> do menu <guimenu
+>Editar</guimenu
+>. </para>
+
+<para
+>Poderá encontrar uma descrição completa sobre este tópico na secção <link linkend="details.search"
+>Procurar</link
+>. </para>
+
+</sect1>
+
+<sect1 id="firsttime.reconcile">
+<title
+>Reconciliação</title>
+
+<para
+>Em alguma altura, irá querer reconciliar as transacções que introduziu com as transacções que constam num extracto, seja este um extracto bancário, do cartão de crédito, do financiamento ou outro qualquer. A reconciliação envolve fazer a correspondência do que introduziu com o que o extracto apresenta. Se existirem discrepâncias, então você ou a pessoa que criou o extracto cometeram um erro. </para>
+
+<para
+>Para reconciliar uma conta, seleccione-a primeiro, quer na área de <guiicon
+>Contas</guiicon
+> quer na área de <guiicon
+>Livros de Registos</guiicon
+>. Depois, tanto poderá carregar no ícone <guiicon
+>Reconciliar</guiicon
+> da barra de ferramentas como seleccionar a opção <guimenuitem
+>Reconciliar</guimenuitem
+> do menu <guimenu
+>Conta</guimenu
+>. </para>
+
+<para
+>Poderá encontrar uma descrição completa sobre este tópico na secção de <link linkend="details.reconcile"
+>Reconciliação</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.backup">
+<title
+>Fazer cópias de segurança</title>
+
+<para
+>Agora que criou algumas contas e introduziu as transacções, é uma boa ideia fazer uma cópia de segurança. Dado que o ficheiro usado pelo &kappname; é um ficheiro normal do Unix, poderá simplesmente copiar o ficheiro para outra localização, de modo a fazer uma cópia de segurança, ou usar a janela oferecida pelo &kappname;. A utilização da janela é o método preferido, porque mesmo se o &kappname; começar a usar outros formatos de ficheiros, como o SQL, seria então muito mais complicado de copiar o ficheiro manualmente. </para>
+
+<para
+>Para fazer uma cópia de segurança pelo &kappname;: Seleccione a <guimenuitem
+>Cópia de Segurança</guimenuitem
+> no menu <guimenu
+>Ficheiro</guimenu
+> e introduza a pasta para onde deseja copiar o ficheiro. Se a pasta necessitar de ser montada, e se tiver os privilégios suficientes, então assinale a opção chamada <guilabel
+>Montar esta pasta antes de fazer a cópia de segurança</guilabel
+> e carregue em <guibutton
+>OK</guibutton
+>. </para>
+
+<para
+>O ficheiro será copiado para a pasta indicada, com a data actual adicionada ao nome do ficheiro, para que seja fácil de ver a data em que a cópia de segurança foi criada. </para>
+</sect1>
+
+<sect1 id="firsttime.launch">
+<title
+>Invocar o &kappname;</title>
+
+<para
+>Geralmente, irá lançar o &kappname; a partir de um ícone ou do menu inicial do seu gestor de janelas. Nesse caso, o comportamento por omissão do &kappname; é abrir o último ficheiro aberto por si. Contudo, em algumas circunstâncias, irá querer ou precisar de invocar o &kappname; a partir da linha de comandos. </para>
+
+<para
+>Para uma descrição completa de todas as opções da linha de comandos, veja a página do 'man' para o &kappname;. Contudo, existem dois casos especiais que serão aqui descritos. </para>
+
+<formalpara
+><title
+><command
+>kmymoney -n</command
+></title>
+  <para
+>A opção '-n' diz ao &kappname; para não abrir o último ficheiro aberto na ocasião anterior. Isto pode ser útil se o programa estoirar no arranque. </para>
+</formalpara>
+
+<formalpara
+><title
+><command
+>kmymoney &lt;localização do ficheiro&gt;</command
+></title>
+  <para
+>A indicação ao &kappname; de um nome de ficheiro na linha de comandos diz a ele para abrir esse ficheiro, em vez de abrir o último ficheiro aberto. Poderá usar o nome de qualquer ficheiro válido do &kappname;, tal como está descrito no capítulo de <link linkend="details.formats"
+>formatos de ficheiros</link
+>. Para além disso, poderá ser usado para importar um ficheiro do <link linkend="details.impexp.gnucash"
+>GnuCash</link
+>. </para>
+</formalpara>
+</sect1>
+
+<sect1 id="firsttime.newpc">
+<title
+>Como mover o &kappname; para um novo computador</title>
+
+<sect2 id="firsttime.newpc.data">
+<title
+>Mover os seus dados</title>
+
+<para
+>Se tiver recebido um computador novo, é bastante simples mover os seus dados. De facto, tudo o que terá de fazer é copiar o seu ficheiro de dados do &kappname;. O nome do ficheiro aparece na barra de título quando o &kappname; está em execução, terminando normalmente em '.kmy'. Da primeira vez que executar a aplicação no novo computador, terá de lhe indicar onde é que colocou o ficheiro de dados, quer através da linha de comandos quer através da opção do menu <menuchoice
+><guimenu
+>Ficheiro</guimenu
+><guimenuitem
+>Abrir...</guimenuitem
+></menuchoice
+>. Até deverá conseguir mudar entre sistemas &Windows;, &MacOS; e &Linux;. </para>
+
+<para
+>Se tiver cifrado ou encriptado o seu ficheiro de dados, certifique-se que as aplicações e as chaves apropriadas também foram configuradas no novo computador. </para>
+
+<para
+>Se os seus dados estiverem numa base de dados SQL, consulte a documentação da sua base de dados para saber como migrar os seus dados. </para>
+
+<para
+>Lembre-se que isto assume que instalou a mesma versão do &kappname; no computador novo que se encontrava no antigo. A instalação de uma versão mais recente também deverá ser segura, mas terá de ter atenção a quaisquer questões relacionadas com essa actualização. Todas essas questões deverão ser referenciadas nas notas de lançamento da nova versão. </para>
+</sect2>
+
+<sect2 id="firsttime.newpc.settings">
+<title
+>Mover a sua configuração</title>
+
+<para
+>Se só mover o seu ficheiro de dados para a nova máquina, como foi descrito na secção anterior, o &kappname; irá funcionar correctamente, mas terá perdido todas as definições que tenha alterado no seu computador antigo. Para manter essas definições, também terá de copiar o seu ficheiro de configuração. Esse ficheiro chama-se <quote
+>kmymoneyrc</quote
+>. Este ficheiro irá estar numa pasta com outros ficheiros de configuração das aplicações do &kde;. Num sistema &Linux;, esta será a <quote
+>$KDEHOME/share/config</quote
+>, onde a <quote
+>$KDEHOME</quote
+> normalmente é a <quote
+>.kde4</quote
+> dentro da sua pasta pessoal. </para>
+
+<sect3 id="firsttime.newpc.settings.plugins">
+<title
+>Mover a configuração do 'plugin'</title>
+
+<para
+>Se tiver executado alguns 'plugins' do &kappname;, como a importação ou exportação de CSV, também poderá ter criado um ficheiro de configuração na mesma pasta, como por exemplo 'csvimporterrc' ou 'csvexporterrc'. Estes deverão também ser copiados para o novo computador. </para>
+
+<para
+>Assim como no ficheiro de dados principal, isto assume a mesma versão do 'plugin' em ambos os computadores. As actualizações normalmente são seguras, mas se a funcionalidade do 'plugin' tiver mudado em grande medida, aconselha-se que teste com cuidado o ficheiro de configuração antigo, para se certificar que o 'plugin' se comporta como será de esperar. </para>
+
+<note>
+<para
+>Estas instruções servem apenas para mover os seus dados e configurações do &kappname;. Contudo, poderão existir itens importantes que são guardados pelo &kde; e não pelo &kappname;, como as senhas guardadas no KWallet. A replicação de outras partes da sua configuração do &kde; estão além do âmbito deste manual, ainda que boa parte dos ficheiros de configuração relevantes também são guardados sob a pasta <quote
+>$KDEHOME</quote
+>. </para>
+</note>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="firsttime.contact">
+<title
+>Contactar os Programadores / Comunicar Erros</title>
+
+<sect2>
+<title
+>Contactar os programadores</title>
+
+<para
+>Para questões ou comentários gerais sobre o &kappname;, existe uma lista de correio para utilizadores em &userlist;. Para além disso, poderá contactar os programadores através da sua lista de correio em &devlist;. </para>
+
+<para
+>Ficamos ansiosos por ouvir as suas experiências com a utilização do &kappname;. </para>
+</sect2>
+
+<sect2>
+<title
+>Comunicar erros</title>
+
+<para
+>Para comunicar um erro, use a interface oferecida pelo &kappname; em <menuchoice
+><guimenu
+>Ajuda</guimenu
+><guimenuitem
+>Comunicar um Erro</guimenuitem
+></menuchoice
+> e preencha a informação necessária. Contudo, no caso de ter algumas dificuldades com esse método, poderá comunicar um erro (ou enviar um pedido de funcionalidade ou melhoria) directamente na <ulink url="http://bugs.kde.org"
+>página Web de relatórios de erros do &kde;</ulink
+>. Os relatórios deverão ser enviados para o produto <quote
+>kmymoney4</quote
+>. O <quote
+>kmymoney2</quote
+> corresponde de forma específica às versões 1.0.x da aplicação, sendo que essas versões já não são mais suportadas, pelo que está fechado a novos relatórios de erros. </para>
+
+<para
+>Em qualquer dos casos, antes de comunicar um erro, leia por favor as instruções abaixo. Se as seguir, será mais provável que os programadores consigam identificar rapidamente o problema, sem que tenham de lhe pedir mais informações. </para>
+
+<sect3 id="firsttime.bugs.quality">
+<title
+>Criar Relatórios de Erros de Qualidade</title>
+
+<para
+>Encorajamos os utilizadores a ocuparem algum tempo extra a escrever relatórios de erros de qualidade, quando os enviarem. Isto reduz o esforço dispensado por ambas as partes, dado que o utilizador que relata e o programador que irá corrigir irão trocar e-mails até toda esta informação estar realmente no lugar. </para>
+
+<para
+>Eli Goldberg escreveu as Recomendações de Escrita de Erros, disponível em <ulink url="http://issues.apache.org/bugwritinghelp.html"
+>http://issues.apache.org/bugwritinghelp.html</ulink
+>. De um modo geral, ficará bem servido com estas recomendações: </para>
+
+<formalpara
+><title
+>Inclua a informação do seu sistema</title>
+  <para
+>O menu <menuchoice
+><guimenu
+>Ajuda</guimenu
+><guimenuitem
+>Comunicar um Erro</guimenuitem
+></menuchoice
+> irá preencher isto automaticamente mas, se preferir não usar esta interface, existem diversos itens que terá de incluir no relatório. Teremos de saber qual o sistema operativo que está a usar (&Linux;, &MacOS; ou &Windows;), a versão do &kde; e do &kappname; que você está a correr, o nome e a versão da sua distribuição de &Linux;, bem como a versão do seu 'kernel'. </para>
+</formalpara>
+
+<formalpara
+><title
+>Incluir um registo de chamadas nos estoiros</title>
+  <para
+>O registo de chamadas é normalmente a única e mais útil peça de informação na resolução de estoiros. </para>
+</formalpara>
+
+<formalpara
+><title
+>Tentar reproduzi-lo</title>
+  <para
+>Deixe-nos saber se é capaz de o fazer. É útil saber se o erro só ocorreu uma vez, e se não o consegue reproduzir de novo, ou se acontece sempre ou muitas vezes, mas não noutras. </para>
+</formalpara>
+
+<formalpara
+><title
+>Incluir passos específicos</title>
+  <para
+>Este é um mau relatório de erros: <quote
+>Eu inseri uma transacção, e o &kappname; estoirou.</quote
+> Um relatório de erros muito melhor é: <quote
+>Ao usar o formulário da transacção, introduzi uma nova transacção na minha conta de Cartão de Crédito. Seleccionei a página de Transferências, introduzi um montante, depois mudei para a página do Depósito e voltei à página de Transferência. Quando regressei à página de Transferência, o &kappname; estoirou. Este erro pode ser completamente reproduzido por mim.</quote
+> </para>
+</formalpara>
+
+<formalpara
+><title
+>Diga-nos o que esperava que acontecesse</title>
+  <para
+>Nos estoiros, isso é óbvio, mas em alguns erros mais subtis, poderá ver um relatório de erros onde não seja óbvio o que a pessoa que relatou o erro esperava que acontecesse. Diga-nos sempre o que estava à espera que tivesse acontecido. </para>
+</formalpara>
+
+<formalpara
+><title
+>Pense em executá-lo com a depuração activa</title>
+  <para
+>Ao compilar uma versão com a opção '--enable-debug=full', poderá garantir que serão gerados os melhores registos de chamadas. Se encontrar um estoiro, execute o &kappname; de novo dentro do 'gdb' e reproduza o estoiro. Quando estoirar, escreva <quote
+>bt</quote
+> para gerar um registo de chamadas. </para>
+</formalpara>
+
+<para
+>Executar a aplicação desta forma é um pouco mais complicado, por isso não se espera que todos os utilizadores façam isto. Contudo, se estiver interessado em ajudar o &kappname; a ficar o mais estável possível, esta é a melhor forma de o fazer para descobrir o erro no código e a enviar uma correcção. </para>
+</sect3>
+</sect2>
+</sect1>
+</chapter>

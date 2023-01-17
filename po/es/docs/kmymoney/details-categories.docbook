@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.categories">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail;</author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title id="details.categories.title"
+>Categorías</title>
+
+<para
+>La pantalla de Categorías muestra un resumen de todas las categorías existentes cuyas transacciones están archivadas. Las categorías se dividen en ingresos y gastos, y se muestra el balance de cada categoría. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="categories.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect1 id="details.categories.create">
+<title
+>Creación de categorías</title>
+
+<para
+>Para crear una nueva categoría, seleccione <menuchoice
+><guimenu
+>Categoría</guimenu
+> <guimenuitem
+>Nueva categoría</guimenuitem
+></menuchoice
+> en el menú o, en la vista de Categorías, seleccione una categoría madre en el árbol, haga clic derecho y seleccione la opción <guimenuitem
+>Nueva Categoría</guimenuitem
+>. De cualquiera de las dos formas se abrirá el asistente para crear nuevas categorías. Introduzca el nombre de la categoría nueva, y seleccione la divisa si la que se muestra por defecto no es la correcta. En la pestaña de Jerarquía, asegúrese de que la cuenta madre requerida está seleccionada. Finalmente, en la pestaña de Impuestos, hay una casilla de verificación para habilitar el uso del IVA, y una casilla de verificación para incluir esta categoría en ciertos informes relacionados con los impuestos. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="categoryedit.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+ </para>
+
+<para
+>Introduzca el nombre de la categoría y haga clic en <guibutton
+>Aceptar</guibutton
+> para guardarla. Para crear una jerarquía completa de cuentas, separe los nombres mediante dos puntos (:), como en <emphasis
+>Facturas:Coche:Gasolina</emphasis
+>. </para>
+</sect1>
+
+<sect1 id="details.categories.edit">
+<title
+>Editar una categoría</title>
+
+<para
+>Para editar una categoría, haga clic derecho en el nombre de una categoría y elija <guimenuitem
+>Editar categoría</guimenuitem
+>. Aparecerá una ventana con tres pestañas: General, Jerarquía e Impuestos. </para>
+
+<para
+>La pestaña General le permite editar el nombre de la categoría y las notas que hubiese añadido cuando la creó. </para>
+
+<para
+>La pestaña Jerarquía le permite cambiar la categoría padre. Puede cambiar la categoría padre haciendo clic sobre otra categoría en esta vista de la jerarquía de categorías. En una versión anterior de &kappname; era posible cambiar el padre de una categoría arrastrando y soltando. Esta funcionalidad regresará en una versión futura, pero posiblemente no hasta que tenga lugar la conversión de &kappname; a &kde; Frameworks. </para>
+
+<para
+>La pestaña Impuestos le permite asignar o cambiar la categoría de IVA, o alterar la asignación automática del IVA. También le permite activar o desactivar si la categoría se incluye o no en ciertos informes relacionados con los impuestos. </para>
+</sect1>
+
+<sect1 id="details.categories.vat">
+<sect1info>
+  <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+</sect1info>
+
+<title
+>Reconocimiento del IVA</title>
+	
+<para
+>Puede convertir una categoría de gastos/ingresos en una categoría de IVA, lo que significa que recibe todas las partidas que en realidad hacen efectivo el pago del IVA al gobierno. También puede introducir in porcentaje específico. </para>
+ 
+<para
+>Las categorías se pueden asignar a una categoría de IVA, lo que le permite a &kappname; dividir el asiento en una categoría en dos partes: una para la categoría y otra para el IVA. Dependiendo de la configuración de la cantidad de bruto/neto, la cantidad que introduzca para el asiento será bruta o neta. </para>
+ 
+<para
+>Por ejemplo: en Alemania hay tres porcentajes de IVA (0%, 7% y 19%). Así, tengo una categoría principal, «IVA pagado», y tres subcategorías, una para cada porcentaje. He creado estas tanto en los ingresos como en los gastos, así que en total tengo ocho categorías. Para los bienes que compro, selecciono una de las categorías mencionadas anteriormente como «Asignación a la categoría de IVA». </para>
+ 
+<para
+>Cuando compro bienes, los introduzco en un asiento. Supongamos que tengo seleccionado el método de entrada de la cantidad bruta. Una vez que introduzco la categoría y la cantidad, &kappname; reconocerá que hay una asignación al IVA y calculará la parte que le corresponde, creará una segunda partida con la cuenta y la cantidad para el IVA, y reducirá la cantidad de la categoría. </para>
+ 
+<para
+>Lo mismo se aplica a las categorías de ingresos, pero al revés. Espero que esto tenga sentido. </para>
+
+</sect1>
+
+<sect1 id="details.categories.delete">
+<title
+>Borrar una categoría</title>
+
+<para
+>Para eliminar una categoría, selecciónela en el árbol, haga clic derecho para hacer salir el menú y seleccione <guimenuitem
+>Eliminar</guimenuitem
+>. Si hay algún asiento asignado a esta categoría, una ventana emergente le permitirá moverlo a otra categoría madre. Si intenta eliminar una categoría madre, un diálogo le permitirá elegir si las subcategorías suben un nivel o si se borran al mismo tiempo que la principal. </para>
+</sect1>
+</chapter>

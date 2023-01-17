@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="whatsnew">
+<chapterinfo>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Neuigkeiten in dieser Version</title>
+
+<para
+>Wie bei jeder neuen Version hat das Entwicklerteam hart daran gearbeitet, das Programm zu verbessern. Einige Funktionen wurden weiter entwickelt. </para>
+
+<para
+>Zusätzlich zu vielen Fehlerkorrekturen enthält diese Version auch neue Funktionen und Funktionalitäten. Obwohl alle neuen Funktionen bereits einige Zeit getestet wurden, sollten Sie dies als Entwicklerversion und Vorbereitung für eine vollständige Version Anfang 2015 ansehen. </para>
+
+<para
+>Neue Fähigkeiten und Verbesserungen in dieser Version: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Stichwörter für Buchungen wurden hinzugefügt. Diese Funktion wurde häufig gewünscht und erlaubt eine verbesserte Kategorisierung von Buchungen. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Verbessertes Leistungsverhalten der Benutzerschnittstelle. Die Arbeitsgeschwindigkeit wurde allgemein durch Profiling verbessert. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Unterstützung für korrekte Eingabemethoden wurde hinzugefügt. &kappname; kann jetzt in Sprachen benutzt werden, die besondere Eingabemethoden erfordern. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Es wurde eine gesperrte Spalte hinzugefügt, um die Visualisierung von Details bei Vorhersagen zu verbessern. Damit wird der Kontenname nicht aus den Anzeigebereich geschoben, wenn Sie waagerecht zu Details der Vorhersage rollen. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Die Programmsymbole wurden verbessert. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Viele Verbesserungen an dem Import- und Online-Banking-Modulen: </para>
+  </listitem>
+
+  <listitem>
+    <itemizedlist>
+      <listitem>
+        <para
+>Auf der Übersichtsseite kann der Status von Online-Banking-Konten angezeigt werden. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Im OFX-Modul kann jetzt eine benutzerdefinierte Programmversion benutzt werden. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Es gibt ein neues Modul zum Export von CSV-Dateien. </para>
+      </listitem>
+    </itemizedlist>
+  </listitem>
+</itemizedlist>
+
+</chapter>

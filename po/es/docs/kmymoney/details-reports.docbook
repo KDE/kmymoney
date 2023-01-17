@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.reports">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Informes</title>
+
+<sect1 id="details.reports.avail">
+<title
+>Informes disponibles</title>
+
+<para>
+<screenshot>
+	<screeninfo
+>Vista de informes</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reports_view-all.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Vista de informes</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>La vista de informes muestra todos los disponibles, agrupados bajo los siguientes encabezados. </para>
+
+<sect2>
+<title
+>Ingresos y gastos</title>
+<para
+>Los informes de esta sección muestran sus ingresos y gastos, tanto del mes actual como de cada mes en el año en curso. Por supuesto, la duración del informe general y la duración recogida por cada columna se puede configurar a su gusto. También se pueden generar gráficos y gráficos de tarta. </para>
+</sect2>
+
+<sect2>
+<title
+>Valor neto</title>
+<para
+>Aquí hay informes que describen su valor neto, tanto en el momento actual como cada mes del año en curso, o cada año de su historial. Además, hay un pronóstico de flujo de caja para los próximos 7 días y un gráfico de valor neto. También hay informes para obtener los saldos de todas sus cuentas en cualquier momento del tiempo. </para>
+</sect2>
+
+<sect2>
+<title
+>Transacciones</title>
+<para
+>Esta sección incluye informes que listan asientos individuales. Esta es la mejor manera de imprimir su registro de cuentas para un periodo específico de tiempo. Los asientos impresos se pueden agrupar a su gusto eligiendo el informe apropiado, como: <itemizedlist>
+  <listitem
+><para
+>Por cuenta</para
+></listitem>
+  <listitem
+><para
+>Por categoría</para
+></listitem>
+  <listitem
+><para
+>Por mes o semana</para
+></listitem>
+  <listitem
+><para
+>Por beneficiario</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Flujo de caja</title>
+<para
+>El informe de flujo de caja es similar a un informe de asientos, pero muestra todas las transacciones relacionadas con el flujo de caja. </para>
+</sect2>
+
+<sect2>
+<title
+>Inversiones</title>
+<para
+>Estos informes le permiten llevar un control de sus inversiones. Solo se incluyen las cuentas de inversión. Existen varios filtros y estilos de presentación, como se muestran en esta lista parcial. </para>
+<itemizedlist>
+  <listitem
+><para
+>Asientos de inversiones: Similares al informe de asientos, e incluyen el valor de las participaciones y sus cantidades.</para
+></listitem>
+  <listitem
+><para
+>Participaciones de la inversión por cuenta: Muestra las participaciones actuales, su precio y el valor de cada cuenta.</para
+></listitem>
+  <listitem
+><para
+>Participaciones de la inversión por tipo: Lo mismo que el informe anterior, pero organiza las cuentas por tipo (acción, fondo de inversión, etc.)</para
+></listitem>
+  <listitem
+><para
+>Rendimiento de la inversión por cuenta: Muestra el rendimiento anual de cada periodo de tiempo. Efectúa un análisis de flujo de caja de todo el dinero que entra o sale de la cuenta. Como resultado, da una imagen muy precisa de cómo están rindiendo sus inversiones.</para
+></listitem>
+  <listitem
+><para
+>Rendimiento de la inversión por tipo: Igual que el informe anterior, pero organiza las cuentas por tipo (acción, fondo de inversión, etc.)</para
+></listitem>
+</itemizedlist>
+
+<para
+>También hay gráficos para los precios de las inversiones y el valor de la inversión. </para>
+</sect2>
+
+<sect2>
+<title
+>Impuestos</title>
+<para
+>Los informes de impuestos son como los informes de asientos, con la salvedad de que solo se incluyen las categorías relacionadas con los impuestos. Esto le permite marcar ciertas categorías como relacionadas con impuestos, y entonces obtener un gran informe a final de año para verlas todas en el mismo lugar. Esto se puede listar tanto por categoría como por beneficiario, y por el último año fiscal. </para>
+</sect2>
+
+<sect2>
+<title
+>Presupuestos</title>
+<para
+>Los informes de presupuestos son parecidos a los informes de valor neto, pero los informes pueden mostrar el presupuesto para un año determinado, o incluso compararlo con los ingresos y los gastos reales del mismo periodo. </para>
+</sect2>
+
+<sect2>
+<title
+>Pronóstico</title>
+<para
+>Los informes de pronóstico son como los informes de valor neto, pero utilizan la información para mostrar una previsión. Puede mostrar la información en varios niveles y para el periodo de tiempo de su elección. </para>
+</sect2>
+
+<sect2>
+<title
+>Información</title>
+<para
+>Estos informes muestran información no relacionada con las transacciones acerca de programaciones, cuentas y préstamos. </para>
+</sect2>
+
+<sect2>
+<title
+>Gráficos</title>
+<para
+>Si los <link linkend="details.reports.charts"
+>gráficos</link
+> están habilitados, esta sección listará todos los informes que están marcados para mostrar un gráfico de forma predeterminada. También están listados en una de las otras secciones, pero se agregan aquí igualmente para una referencia más fácil. </para>
+</sect2>
+
+<sect2>
+<title
+>Informes favoritos</title>
+<para
+>Esta sección lista todos los informes que ha marcado como favoritos en el diálogo de configuración de informes. También se listan en una de las otras secciones, pero se agregan aquí para una referencia más fácil. Los informes favoritos también se incluyen en la página de resumen financiero para referencia todavía más sencilla. </para>
+</sect2>
+
+<sect2>
+<title
+>Configurar los informes</title>
+<para
+>Para acceder al cuadro de diálogo de configuración del informe, marque el informe que desea configurar, y presiones el botón <guibutton
+>Configurar</guibutton
+> que hay sobre él. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.reports.working">
+<title
+>Trabajar con informes</title>
+
+<para
+>Puede realizar varias acciones sobre cada informe, a las que puede acceder haciendo clic con el botón derecho sobre el nombre del informe en la lista de ellos. También puede, una vez ejecutado un informe, utilizar los botones en la parte superior de la vista para invocar las siguientes: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Gráfico: Solo visible si el informe puede mostrar algún gráfico. Al hacer clic sobre esta opción se conmuta entre el informe y el gráfico.</para
+></listitem>
+  <listitem
+><para
+>Configurar: Modifica las propiedades de este informe. Puede personalizar el informe a su gusto y guardarlo para su uso en el futuro.</para
+></listitem>
+  <listitem
+><para
+>Nuevo: Crea un nuevo informe personalizado basado en el que haya seleccionado.</para
+></listitem>
+  <listitem
+><para
+>Copiar: Puede copiar la salida del informe en el portapapeles y pegarla en otra aplicación, como una hoja de cálculo, para analizarla a posteriori.</para
+></listitem>
+  <listitem
+><para
+>Exportar: Puede guardar los informes en formato &HTML; o CSV.</para
+></listitem>
+  <listitem
+><para
+>Eliminar: Puede borrar los informes personalizados. Los informes que se distribuyen con &kappname; de manera predefinida no se pueden eliminar.</para
+></listitem>
+  <listitem
+><para
+>Cerrar: Cierra el informe actual.</para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="details.reports.config">
+<title
+>Configurar los informes</title>
+
+<sect2>
+<title
+>Trabajar con informes personalizados</title>
+<para
+>Puede configurar los informes predeterminados o crear los suyos propios a partir de ellos seleccionando «Nuevo» y configurando el nuevo informe. Cuando seleccione «Configurar», se le mostrará la pestaña de informes. Inicialmente, tiene el mismo nombre que el informe antiguo con <quote
+>(Personalizado)</quote
+> añadido al final. Puede cambiar el nombre por el que desee. Incluso puede llamar a su informe personalizado de la misma manera que al informe por defecto, o igual que otro informe personalizado. Además, siempre puede usar el campo «Comentario» para distinguir aún más los informes. </para>
+
+<para
+>El diálogo de Configuración de informes tiene varias pestañas en la parte superior. Cada pestaña muestra opciones para configurar diferentes aspectos del informe. </para>
+
+</sect2>
+
+<sect2
+><title
+>Pestaña Informe</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="report_configuration-reporttab.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Configuración del informe - Informe</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>En esta pestaña, se establecen las propiedades básicas de este informe. <itemizedlist>
+  <listitem
+><para
+>Nombre del informe: Elija un nombre para este informe.</para
+></listitem>
+  <listitem
+><para
+>Comentario: Introduzca un comentario para ayudarle a recordar los detalles de este informe.</para
+></listitem>
+  <listitem
+><para
+>Convertir valores a su divisa base: Seleccione esta opción para convertir todos los valores del informe en su divisa base. Déjelo sin marcar si prefiere ver los valores en su divisa original. Si las divisas no se han convertido, entonces no se mostrarán los subtotales.</para
+></listitem>
+  <listitem
+><para
+>Marcar como informe favorito: Marque esto para hacer que este informe se muestre en la página principal y en el grupo de <guilabel
+>Informes favoritos</guilabel
+>.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2 id="details.reports.config.rowscolumns">
+<title
+>Pestaña Filas/columnas</title>
+<para
+>En esta pestaña, puede configurar cómo quiere que se seleccionen y se organicen las filas y las columnas. Esta pestaña presenta diferentes opciones de configuración, dependiendo del estilo de informe que haya seleccionado. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="report_configuration-rowscolumns.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Configuración del informe -Filas y columnas</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Para informes de ingresos/gastos y valor neto: <itemizedlist>
+  <listitem
+><para
+>Columnas: Escoja la longitud del periodo de tiempo que debe comprender cada columna</para
+></listitem>
+  <listitem
+><para
+>Filas: Escoja qué clase de cuentas quiere que se muestren en las filas de este informe</para
+></listitem>
+  <listitem
+><para
+>Detalle: elija el nivel de detalle requerido para este informe.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Están disponibles los siguientes niveles de detalle: <itemizedlist>
+  <listitem
+><para
+>Todo: Muestra cada categoría o cuenta.</para
+></listitem>
+  <listitem
+><para
+>Nivel superior: Muestra solo las categorías o cuentas de nivel más alto, e incluye las sumas de las categorías o cuentas subordinadas en esos valores.</para
+></listitem>
+  <listitem
+><para
+>Grupos: Muestra solo los totales de los ingresos, gastos, activos o pasivos.</para
+></listitem>
+  <listitem
+><para
+>Total: Muestra solo la línea de totales.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Para informes de asientos: <itemizedlist>
+  <listitem
+><para
+>Organizar por: Elija cómo agrupar los asientos de este informe</para
+></listitem>
+  <listitem
+><para
+>Mostrar columnas: Elija qué columnas se deben mostrar en el informe. La fecha y la cantidad de la transacción se muestran siempre.</para
+></listitem>
+  <listitem
+><para
+>Incluir solo categorías de impuestos: Mostrar solo las categorías que se han marcado como relacionadas con impuestos.</para
+></listitem>
+  <listitem
+><para
+>Incluir solo cuentas de inversiones: Mostrar solo los asientos de las cuentas de inversiones.</para
+></listitem>
+  <listitem
+><para
+>Incluir solo cuentas de préstamos: Mostrar solo los asientos de las cuentas de préstamos.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Pestaña Gráfico</title>
+
+<para
+>Esta pestaña le permite configurar el aspecto que debería tener el informe cuando se muestre como gráfico. Vea la sección <link linkend="details.reports.charts"
+>Gráficos</link
+> para más explicaciones sobre las funciones de las gráficas. <itemizedlist>
+  <listitem
+><para
+>Tipo de gráfico: El formato visual del gráfico deseado.</para
+></listitem>
+  <listitem
+><para
+>Mostrar líneas de rejilla: Si mostrar las líneas horizontales y verticales de la rejilla en el gráfico.</para
+></listitem>
+  <listitem
+><para
+>Dibujar valores en el gráfico: Si mostrar los valores de los datos en el propio gráfico en los puntos de datos elegidos.</para
+></listitem>
+  <listitem
+><para
+>Mostrar gráfico por defecto: Si este informe debería mostrarse primero como un gráfico cuando se abre.</para
+></listitem>
+  <listitem
+><para
+>Anchura de línea: La anchura de las líneas de datos en el gráfico.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Otras pestañas</title>
+<para
+>Las otras pestañas de este diálogo son las mismas que en la interfaz de Búsqueda de asientos. Por favor, consulte la <link linkend="details.search"
+>documentación</link
+> de esa interfaz para detalles sobre las otras pestañas.</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.reports.charts">
+<title
+>Gráficos</title>
+
+<sect2>
+<title
+>Ver como gráfico</title>
+
+<para
+>Cada informe se puede ver de forma tanto textual como gráfica. Se utilizan los mismos parámetros de configuración del informe en ambos casos. Usted puede saltar fácilmente entre las formas textual y gráfica presionando los botones <guibutton
+>Gráfica</guibutton
+> o <guibutton
+>Informe</guibutton
+> en la parte superior de la vista de informe. </para>
+
+<para
+>Se debe tener cuidado de limitar la cantidad de datos que se eligen para mostrar en un gráfico. Si no es cuidadoso, usar la misma configuración tanto para la forma gráfica como para la textual significa que es posible configurar un gráfico de forma que quede abigarrado, poco atractivo y que no dé información. ¡&kappname; no le obligará a que sus gráficas sean legibles y útiles! </para>
+
+</sect2>
+
+<sect2>
+<title
+>Tipos de gráficos disponibles</title>
+
+<sect3>
+<title
+>Gráfico lineal</title>
+
+<para
+>Un gráfico lineal es una de las formas más sencillas para un gráfico. Solo hay una línea para cada serie. (Habitualmente una serie es una sola cuenta o categoría; vea más abajo para más detalles sobre eso). Los periodos de tiempo se extienden a lo largo del eje inferior, y los valores de la divisa a lo largo del eje izquierdo. </para>
+
+<para
+>El nivel de detalle para cada línea se controla en la pestaña <link linkend="details.reports.config.rowscolumns"
+>Filas/columnas</link
+> de la configuración del gráfico. Si elige el nivel de detalle <quote
+>Nivel superior</quote
+>, solo habrá una línea por cada una de las cuentas superiores, que le mostrarán la suma de todas las cuentas o categorías que comprenden. Si elige <quote
+>Grupos</quote
+>, en su lugar mostrará una línea por cada Ingreso, Gasto, Activo o Pasivo, dependiendo de las otras configuraciones. </para>
+</sect3>
+
+<sect3>
+<title
+>Gráfico de barras</title>
+
+<para
+>El gráfico de barras funciona exactamente igual que el gráfico lineal, excepto que hay una barra para cada serie por cada intervalo de tiempo. </para>
+</sect3>
+
+<sect3>
+<title
+>Gráfico de tarta</title>
+
+<para
+>El gráfico de tarta es el gráfico más sencillo de los disponibles. Muestra solo un intervalo de tiempo, en lugar de mostrar los valores a lo largo del tiempo. Este gráfico muestra solo las columnas totales de cualquier informe seleccionado. Si su informe se ha configurado para NO convertir los valores a la divisa base, no habrá columna de totales, y por lo tanto este informe no será útil. </para>
+</sect3>
+
+<sect3>
+<title
+>Gráfico de anillo</title>
+
+<para
+>El gráfico de anillo es muy parecido al gráfico de tarta, salvo que hay un <quote
+>anillo</quote
+> para cada intervalo de tiempo del informe. </para>
+</sect3>
+
+</sect2>
+
+</sect1>
+</chapter>

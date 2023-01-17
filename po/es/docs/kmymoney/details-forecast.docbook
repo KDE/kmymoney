@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.forecast">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Colin.Wright; &Colin.Wright.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title id="details.forecast.title"
+>Pronóstico</title>
+
+<sect1 id="details.forecast.define">
+<title
+>¿Qué es un pronóstico?</title>
+
+<para
+>En &kappname;, un pronóstico es una predicción de los saldos de las cuentas durante un periodo de tiempo futuro especificado.</para>
+
+<para
+>Los pronósticos se pueden predecir usando uno de dos métodos. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Asientos futuros y programados</term>
+    <listitem>
+      <para
+>&kappname; utiliza una combinación de asientos futuros ya introducidos en el libro mayor como entradas en una programación.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Basado en historial</term>
+    <listitem>
+      <para
+>&kappname; utiliza valores de asientos pasados del libro mayor para predecir transacciones futuras.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>El método y el periodo de pronóstico se pueden establecer en las Preferencias de &kappname;, en el panel de Pronóstico. </para>
+
+<para
+>El pronóstico de &kappname; proporciona un resumen que muestra los saldos previstos en las fechas del ciclo de la cuenta, y la diferencia esperada entre los saldos inicial y final. La longitud de un ciclo de cuenta puede ser establecida por el usuario. El resumen también muestra mensajes sobre cambios significativos en las cuentas predichos durante el periodo del pronóstico. </para>
+
+<para
+>Además del resumen, el pronóstico de &kappname; también le permite ver saldos día a día y ver los saldos mínimos y máximos para cada pronóstico del ciclo de cuenta. </para>
+
+<para
+>Por defecto, el pronóstico se crea a 90 días, con ciclos de cuenta de 30 días, utilizando los asientos programados y futuros. </para>
+</sect1>
+
+<sect1 id="details.forecast.view">
+<title
+>Ver pronósticos</title>
+
+<para
+>Puede ver un pronóstico haciendo clic en el icono apropiado en el panel de navegación a la izquierda de su ventana de &kappname;. </para>
+
+<para
+>La ventana de pronóstico está dividida en cinco pestañas </para>
+
+<sect2>
+<title
+>Pestaña Resumen</title>
+
+<para
+>La pestaña Resumen se divide verticalmente en dos mitades. </para>
+
+<sect3>
+<title
+>Resumen de cuentas</title>
+
+<para
+>El resumen de cuentas contiene una rejilla que muestra una fila de información para cada Activo y Pasivo. </para>
+
+<para
+>Se muestran las siguientes columnas: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Cuenta</term>
+    <listitem>
+      <para
+>El nombre de la cuenta de Activo o de Pasivo</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Saldo actual (actual)</term>
+    <listitem>
+      <para
+>Se muestra el saldo actual de la cuenta.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Saldo del ciclo de cuenta</term>
+    <listitem>
+      <para
+>El periodo del pronóstico se divide en ciclos de cuenta. El ciclo de cuenta predeterminado es de 30 días, pero puede ser establecido por el usuario.</para>
+
+      <para
+>La primera fecha del ciclo de cuenta es la primera fecha del pronóstico. De manera predeterminada, es la fecha actual más un ciclo de cuenta, pero puede cambiar dependiendo de la configuración del «Día del mes para iniciar el pronóstico».</para>
+
+      <para
+>Las fechas restantes del ciclo de cuenta se determinan añadiendo la longitud del ciclo de cuenta a la fecha anterior del ciclo de cuenta. Esto continúa hasta que la fecha calculada para el ciclo de cuenta esté fuera del periodo del pronóstico.</para>
+
+      <para
+>Para cada fecha del ciclo de cuenta, se muestra el saldo pronosticado.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Variación total</term>
+    <listitem>
+      <para
+>La columna más a la derecha muestra la diferencia de valor pronosticada entre los saldos en las fechas inicial y final del pronóstico. Si el valor final predicho para la cuenta (en términos de valor neto) es menor que el valor inicial, toda la fila se resalta en rojo.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+</sect3>
+
+<sect3>
+<title
+>Información clave del resumen</title>
+
+<para
+>La mitad inferior de la pestaña Resumen muestra información destacable sobre las cuenta. Esta incluye: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Activos bajo cero</term>
+    <listitem>
+      <para
+>Se muestra un mensaje por cada activo para el que el valor se inicia o cae por debajo de cero durante el periodo del pronóstico.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Pasivos superiores a cero</term>
+    <listitem>
+      <para
+>Se muestra un mensaje para cada pasivo para el que el valor se inicia o sube por encima de cero durante el periodo del pronóstico. Tenga en cuenta que el valor de un pasivo es el negativo en el saldo del libro mayor, ya que un saldo positivo indica que se debe dinero.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Pestaña Detalles</title>
+
+<para
+>La pestaña Detalles contiene una rejilla que muestra una fila de información para cada Activo y Pasivo. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Cuenta</term>
+    <listitem>
+      <para
+>El nombre de la cuenta de Activo o de Pasivo</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Fechas</term>
+    <listitem>
+      <para
+>Para cada fecha en el periodo del pronóstico, una columna muestra el saldo pronosticado de la cuenta para esa fecha. Las columnas de fecha se sitúan en orden ascendente de izquierda a derecha.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Variación total</term>
+    <listitem>
+      <para
+>La columna más a la derecha muestra la diferencia de valor pronosticada entre los saldos en las fechas inicial y final del pronóstico. Si el valor final predicho para la cuenta (en términos de valor neto) es menor que el valor inicial, toda la fila se resalta en rojo.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Pestaña Avanzado</title>
+
+<para
+>La pestaña Avanzado contiene una rejilla que muestra una fila de información para cada Activo y Pasivo. La información se divide en columnas como sigue:  </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Cuenta</term>
+    <listitem>
+      <para
+>El nombre de la cuenta de Activo o de Pasivo</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Saldo mínimo del ciclo de cuenta</term>
+    <listitem>
+      <para
+>Para cada número &lt;n&gt; de ciclo de cuenta en el periodo de pronóstico, se muestran las siguientes columnas:</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>Saldo mínimo  (Sal Min &lt;n&gt;)</term>
+	  <listitem>
+	    <para
+>El saldo mínimo predicho durante el ciclo de cuenta</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term
+>Fecha del saldo mínimo (Fecha Min &lt;n&gt;)</term>
+	  <listitem>
+	    <para
+>La fecha en la que el saldo alcanza su mínimo previsto.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Saldo máximo del ciclo de cuenta</term>
+
+    <listitem>
+      <para
+>Para cada número &lt;n&gt; de ciclo de cuenta en el periodo de pronóstico, se muestran las siguientes columnas:</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>Saldo máximo (Sal Max &lt;n&gt;)</term>
+	  <listitem>
+	    <para
+>El máximo saldo predicho durante el ciclo de cuenta</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term
+>Fecha del saldo máximo (Fecha Max &lt;n&gt;)</term>
+	  <listitem>
+	    <para
+>La fecha en la que el saldo alcanza su máximo previsto.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Media</term>
+
+    <listitem>
+      <para
+>El saldo medio de la cuenta durante el periodo del pronóstico</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2>
+<title
+>Pestaña Pronóstico del presupuesto</title>
+
+<para
+>La pestaña Presupuesto muestra un cálculo pronosticado para las categorías de Ingresos y Gastos. Las columnas son similares a las de las pestañas de Resumen y Detalles. </para>
+
+</sect2>
+
+<sect2>
+<title
+>Pestaña Gráfico</title>
+
+<para
+>Muestra un gráfico que muestra el pronóstico. El nivel de detalle varía dependiendo del nivel de detalle seleccionado en la opción de arriba. </para>
+
+</sect2>
+
+</sect1>
+</chapter>

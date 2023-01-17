@@ -1,0 +1,1316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="reference">
+<chapterinfo>
+  <date
+>2016-12-05</date>
+  <releaseinfo
+>5.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Referens</title>
+
+<sect1 id="reference.menus">
+<sect1info>
+  <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+</sect1info>
+<title
+>Menyer</title>
+
+<para
+>Nedan är en fullständig lista med alla menyalternativ i &kmymoney;, med en mycket kortfattad beskrivning av vad vart och ett gör. Observera att många av menyalternativen inte är tillgängliga, eller gråa, beroende på nuvarande visningsstatus i programmet. Du kan till exempel inte redigera ett konto om du inte har markerat ett konto, eller det inte visas i den nuvarande vyn. </para>
+
+<sect2 id="reference.menus.file">
+<title
+>Menyn Arkiv</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Ny</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Skapar en ny tom &kmymoney;-datafil. Bara en fil kan vara öppen åt gången i &kmymoney;, så detta stänger först den nuvarande filen, om någon är öppen. </action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Öppna</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Öppnar en befintlig &kmymoney;-datafil.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Öppna senaste</guimenuitem
+> <guimenuitem
+>...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Tillåter snabb åtkomst av de senast öppnade filerna.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Öppna databas...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Öppnar en befintlig databas.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Spara</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Sparar filen som för närvarande är öppen.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Spara som...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Sparar filen som för närvarande är öppen med ett annat filnamn.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Spara som databas...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Sparar filen som för närvarande är öppen i en <link linkend="details.database"
+>databas</link
+>.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guisubmenu
+>Importera</guisubmenu
+> <guimenuitem
+>...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Importerar ekonomidata från andra filtyper, som QIF och &gnucash;, eller en mallfil med konton och kategorier som kan användas för att ställa in nya konton.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Exportera</guimenuitem
+> <guimenuitem
+>...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Exportera nuvarande fil med en annan filtyp, som QIF, eller exporterar en lista med konton och kategorier som en mall. </action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Skriv ut</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Skriver ut nuvarande fil.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Säkerhetskopiera</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Sparar en säkerhetskopia av nuvarande fil.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Personlig information</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Gör det möjligt att redigera personlig information.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Filinformation</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Visar information om filen som för närvarande är öppen i &kmymoney;.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <!--Dump Memory what i sthis?-->
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Stäng</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Stänger nuvarande fil.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Avsluta</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Avslutar &kmymoney;.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.edit">
+<title
+>Menyn Redigera</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Redigera</guimenu
+><guimenuitem
+>Sök transaction...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Sök efter transaktioner.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.view">
+<title
+>Menyn Visa</title>
+
+<variablelist>
+  <varlistentry id="reference.menus.settings.transactiondetail">
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Visa</guimenu
+> <guimenuitem
+>Visa transaktionsinformation</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Visa transaktionsinformation i <link linkend="details.ledgers"
+>huvudboksvyn</link
+>. När alternativet är aktiverat, visas transaktionens alla rader i huvudboken. När det är avstängt, visas bara en rad. </action
+></para>
+      <para
+>Om du bara vill se information för transaktionen som för närvarande är markerad, men bara en rad för de övriga, kan du aktivera <link linkend="details.settings.register.lens"
+>huvudbokens lins</link
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Visa</guimenu
+> <guimenuitem
+>Dölj avstämda transaktioner</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Döljer avstämda transaktioner i registret</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Visa</guimenu
+> <guimenuitem
+>Dölj oanvända kategorier</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Döljer oanvända kategorier i vyerna.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Visa</guimenu
+> <guimenuitem
+>Visa alla konton</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Visar alla konton i vyerna.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.institution">
+<title
+>Menyn Institution</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Institution</guimenu
+> <guimenuitem
+>Ny institution...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Lägg till en ny institution.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Institution</guimenu
+> <guimenuitem
+>Redigera institution...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Redigera en institution.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Institution</guimenu
+> <guimenuitem
+>Ta bort institution...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Ta bort en institution.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.account">
+<title
+>Menyn Konto</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Nytt konto...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Lägger till ett nytt konto.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Redigera konto...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Redigerar ett konto.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Ta bort konto...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Tar bort ett konto.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Öppna huvudbok</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Visar huvudboksvyn för ett konto.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Konto</guimenu
+> <guimenuitem
+>Stäm av...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Stämmer av ett konto via avstämningsguiden.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Senarelägg avstämning</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Senarelägger avstämningen av ett konto.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Slutför</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Slutför avstämningen av ett konto.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Transaktionsrapport</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Öppnar en transaktionsrapport för ett konto.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Stäng konto</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Stänger ett konto.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Återöppna konto</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Återöppnar ett konto, om stängt.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Ta bort kontoanslutning</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Tar bort kontoanslutning för nätkonto.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Koppla till direktkonto</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Ansluter ett konto till ett Internetbankkonto på nätet.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Uppdatera konto...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Importerar transaktioner från en Internetbank för ett konto.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Konto</guimenu
+> <guimenuitem
+>Uppdatera alla konton...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Importera transaktioner från Internetbank för alla konton.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <!--New credit transfer-->
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.category">
+<title
+>Menyn Kategori</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Kategori</guimenu
+> <guimenuitem
+>Ny kategori...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Lägger till en ny kategori.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Kategori</guimenu
+> <guimenuitem
+>Redigera kategori...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Redigerar en kategori.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Kategori</guimenu
+> <guimenuitem
+>Ta bort kategori...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Tar bort en kategori.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Kategori</guimenu
+> <guimenuitem
+>Öppna huvudbok</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Visar huvudboksvyn för en kategori.</action
+></para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.transaction">
+<title
+>Menyn Transaktion</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Insert</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Transaktion</guimenu
+> <guimenuitem
+>Ny</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Lägger till en ny transaktion</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transaktion</guimenu
+> <guimenuitem
+>Redigera</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Redigerar en transaktion.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transaktion</guimenu
+> <guimenuitem
+>Redigera delningar</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Redigerar delningarna i en transaktion.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transaktion</guimenu
+> <guimenuitem
+>Ta bort</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Tar bort en transaktion.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transaktion</guimenu
+> <guimenuitem
+>Duplicera</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Duplicerar en transaktion.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transaktion</guimenu
+> <guimenuitem
+>Markera transaktion som...</guimenuitem
+> <guimenuitem
+>Inte avstämd</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Ändrar en transaktion till status inte avstämd.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Alt;<keycap
+>Mellanslag</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Transaktion</guimenu
+> <guimenuitem
+>Markera transaktion som...</guimenuitem
+> <guimenuitem
+>Kontrollerad</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Ändrar en transaktion till status kontrollerad.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>Mellanslag</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Transaktion</guimenu
+> <guimenuitem
+>Markera transaktion som...</guimenuitem
+> <guimenuitem
+>Avstämd</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Ändrar en transaktion till status avstämd.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transaktion</guimenu
+> <guimenuitem
+>Gå till konto</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Visar transaktionens andra konto.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transaktion</guimenu
+> <guimenuitem
+>Gå till betalare</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Visar betalarvyn och fokusera på betalaren för den markerade transaktionen.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transaktion</guimenu
+> <guimenuitem
+>Skapa schemalagd transaktion...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Skapar en ny schemalagd transaktion.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transaktion</guimenu
+> <guimenuitem
+>Matcha</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Matchar importerade transaktioner.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transaktion</guimenu
+> <guimenuitem
+>Ta bort matchning</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Tar bort matchning för en transaktion som &kmymoney; har föreslagit som en matchning för en importerad transaktion.</action
+> Observera att menyalternativet är bara tillgängligt om det finns en matchad transaktion. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transaktion</guimenu
+> <guimenuitem
+>Acceptera</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Accepterar en föreslagen sammanfogning av importerade transaktioner.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Transaktion</guimenu
+> <guimenuitem
+>Markera alla</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Markerar alla transaktioner i registret.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Transaktion</guimenu
+> <guimenuitem
+>Skriv ut check</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Skriver ut innehållet av den markerade transaktionen i det visade registret, formaterade enligt den valda mallen.</action
+> Observera att menyalternativet bara är tillgängligt om en transaktion är markerad i registret. Se avsnittet om hur insticksprogrammet <link linkend="details.settings.plugins"
+>Skriv ut check</link
+> anpassas för mer information. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.tools">
+<title
+>Menyn Verktyg</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Verktyg</guimenu
+> <guimenuitem
+>QIF-profileditor...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Ändrar QIF-profilen som används för att importera eller exportera QIF-filer.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Verktyg</guimenu
+> <guimenuitem
+>Valutor...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Listar valutor som är kända av &kmymoney;.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Verktyg</guimenu
+> <guimenuitem
+>Kurser...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Listar aktiekurser och valutakurser.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Verktyg</guimenu
+> <guimenuitem
+>Uppdatera aktiekurser och valutakurser...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Uppdaterar aktiekurser och valutakurser från källor på nätet med användning av funktionen <link linkend="details.investments.onlinequotes"
+>direktuppdatering av kurser</link
+>.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Verktyg</guimenu
+> <guimenuitem
+>Överensstämmelsekontroll</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Utför en kontroll av filen och försöker rätta eventuella problem som hittas, om möjligt.</action
+></para>
+      <para
+>Skapa en säkerhetskopia av filen innan alternativet utförs.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Verktyg</guimenu
+> <guimenuitem
+>Prestandakontroll</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Utför en prestandakontroll av filen och visar resultaten.</action
+></para>
+    </listitem>
+  </varlistentry>
+  <!--Generate Database SQL
+  Debug Traces
+  Debug Timers-->
+</variablelist>
+</sect2>
+
+<sect2 id="reference.menus.settings.help">
+<title
+>Menyerna Inställningar och Hjälp</title>
+
+<para
+>&kmymoney; har &kde;:s vanliga inställnings- och hjälpmenyer som beskrivs i <ulink url="help:/fundamentals/menus.html"
+>&kde;:s grunder</ulink
+>, med ytterligare ett alternativ:</para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Aktivera alla meddelanden</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Aktiverar alla meddelanden igen som du kan ha stängt av genom att markera <guimenuitem
+>Visa inte det här meddelandet igen</guimenuitem
+> i en dialogruta.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+</sect2>
+
+</sect1
+>&details-widgets; </chapter>

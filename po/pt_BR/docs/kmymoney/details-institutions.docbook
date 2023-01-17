@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.institutions">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+  </authorgroup>
+  <date
+>25/07/2010</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Instituições</title>
+
+<para
+>A janela Instituições oferece um resumo de todas as contas agrupadas nas suas respectivas instituições. As contas de ativos são simbolizadas com uma seta preta, enquanto as contas de passivos são simbolizadas com uma seta vermelha. </para>
+
+<para
+>A janela Instituições apresenta diversas colunas, incluindo o tipo e o valor de cada conta, bem como o valor total de todas as contas em cada instituição. </para>
+
+<para>
+<screenshot>
+    	<screeninfo
+>área de instituições</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_view.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>área de instituições</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="details.institutions.institution">
+<title
+>Opções da Instituição</title>
+
+<para
+>Ao clicar com o botão direito no nome de uma instituição, será mostrado um submenu de Opções da Instituição, oferecendo-lhe várias opções. Se selecionar a <guimenuitem
+>Nova instituição...</guimenuitem
+>, será conduzido pelos passos do processo de criação de uma nova conta, onde irá indicar a instituição, o tipo, a data, o nome e o saldo inicial. Na configuração da nova conta, poderá criar uma nova instituição. Se selecionar a opção <guimenuitem
+>Editar instituição...</guimenuitem
+>, irá abrir uma janela editável com os detalhes da instituição, como o nome e o endereço. Se selecionar a opção <guimenuitem
+>Excluir instituição</guimenuitem
+>, irá remover a instituição inteira, bem como as suas contas associadas. Lembre-se de que só será capaz de excluir as contas associadas, se estas não tiverem transações nem eventos agendados que façam referência às mesmas. Se selecionar <guimenuitem
+>Nova conta...</guimenuitem
+>, será conduzido pelo processo de criação de uma conta, o qual está descrito com mais detalhes na próxima seção. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Submenu de opções da instituição</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_options.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Submenu de opções da instituição</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.institutions.new">
+<title
+>Nova Instituição</title>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="newinst.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>Nova Instituição</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<para>
+  <emphasis
+>NOTA: Você deverá ter um arquivo aberto antes de criar uma nova instituição. Se não tiver um arquivo existente, terá de criar um <link linkend="firsttime.3"
+>arquivo novo</link
+>. </emphasis>
+</para>
+
+<para
+>Apenas o nome na Janela de Nova Instituição é obrigatório, sendo todos os outros campos opcionais. Como acontece na janela de informações pessoais, esses dados não são usados atualmente pelo &kappname;, mas serão necessários para certas funcionalidades das versões futuras. Em particular, o Número de Encaminhamento e o <acronym
+><ulink url="http://en.wikipedia.org/wiki/ISO_9362"
+>BIC (Código Identificador do Banco)</ulink
+></acronym
+> serão obrigatórios no banco online. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.institutions.account">
+<title
+>Opções da Conta</title>
+
+<para
+>Se clicar no nome da conta com o botão direito, irá aparecer o submenu de Opções da Conta. Se selecionar a opção <guimenuitem
+>Nova conta...</guimenuitem
+>, será conduzido pelo processo de criação de uma nova conta. Se selecionar <guimenuitem
+>Abrir o Livro de Registros</guimenuitem
+>, será remetido para a área de Livro de Registros ou de Investimentos, dependendo do tipo de conta. Basta fazer duplo-clique sobre o nome de uma conta para conseguir abri-la. Se selecionar a opção <guimenuitem
+>Reconciliar...</guimenuitem
+>, irá abrir o Assistente de Reconciliação, que o conduz pelo processo de comparação dos extratos da sua conta e dos seus registros eletrônicos. Se clicar em <guimenuitem
+>Editar a conta</guimenuitem
+>, irá mostrar uma janela que lhe permite alterar o nome, a data inicial, a instituição bancária associada e a conta-mãe da conta selecionada. A remoção de uma conta só é possível se não existirem transações associadas à mesma. Mais detalhes, assim como informações sobre as outras opções, são apresentadas nas seções apropriadas deste manual. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>submenu de opções da conta</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="account_options.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>submenu de opções da conta</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect1>
+</chapter>

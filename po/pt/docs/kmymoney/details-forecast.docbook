@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.forecast">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Colin.Wright; &Colin.Wright.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title id="details.forecast.title"
+>Previsão</title>
+
+<sect1 id="details.forecast.define">
+<title
+>O que é uma previsão?</title>
+
+<para
+>No &kappname;, uma Previsão é a antevisão dos saldos das contas, durante um determinado período de tempo no futuro.</para>
+
+<para
+>As previsões poderão ser determinadas com um de dois métodos. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Transacções Agendadas e Futuras</term>
+    <listitem>
+      <para
+>O &kappname; usa uma combinação das transacções futuras já introduzidas nos livros de registos com os itens no Plano de Pagamentos ou nas agendas.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Baseado no Histórico</term>
+    <listitem>
+      <para
+>O &kappname; usa os valores das transacções passadas nos livros de registos para prever as transacções futuras.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para
+>O método e o período de previsão poderão ser definidos na Configuração do &kappname;, na área de Previsão. </para>
+
+<para
+>A Previsão do &kappname; oferece um resumo que mostra os saldos previstos nas datas do ciclo de facturação, assim como a diferença esperada entre os saldos inicial e final. A duração do ciclo de facturação poderá ser definida pelo utilizador. O resumo também mostra mensagens sobre as alterações previstas e significativas para as contas durante o período de antevisão. </para>
+
+<para
+>Assim como o resumo, a Previsão do &kappname; também lhe permite ver os saldos no dia-a-dia, bem como ver os saldos mínimo e máximo para cada ciclo de facturação da previsão. </para>
+
+<para
+>Por omissão, a previsão é criada para 90-dias, com ciclos de facturação de 30 dias, usando as Transacções Agendadas e Futuras. </para>
+</sect1>
+
+<sect1 id="details.forecast.view">
+<title
+>Ver as Previsões</title>
+
+<para
+>Poderá ver uma Previsão se carregar no ícone apropriado na área de navegação, do lado esquerdo da sua janela do &kappname;. </para>
+
+<para
+>A janela de Previsão está dividida em cinco páginas </para>
+
+<sect2>
+<title
+>Página de Resumo</title>
+
+<para
+>A página de Resumo está dividida na vertical em duas metades. </para>
+
+<sect3>
+<title
+>Resumo da Conta</title>
+
+<para
+>O Resumo da Conta contém uma grelha que mostra uma linha de informação por cada Activo e Passivo. </para>
+
+<para
+>São apresentadas as seguintes colunas: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Conta</term>
+    <listitem>
+      <para
+>O nome da conta de Activo ou Passivo</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Saldo Actual</term>
+    <listitem>
+      <para
+>É apresentado o saldo actual da conta.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Saldo do Ciclo de Facturação</term>
+    <listitem>
+      <para
+>O período de previsão é dividido em ciclos de facturação. O ciclo de facturação por omissão é de 30 dias, poderá ser definido pelo utilizador.</para>
+
+      <para
+>A data do primeiro ciclo de facturação é a data da primeira previsão. Por omissão, esta é a data actual, mais um ciclo de facturação, mas poderá alterar, dependendo da configuração do "Dia do Mês onde Iniciar a Previsão".</para>
+
+      <para
+>As datas dos restantes ciclos de facturação são determinadas, adicionando a duração do ciclo de facturação à data do ciclo anterior. Isto prossegue até que a data do ciclo calculada fique além do período de Previsão.</para>
+
+      <para
+>Para cada data do ciclo de facturação, é apresentado o saldo previsto.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Variação Actual</term>
+    <listitem>
+      <para
+>A coluna mais à direita mostra a diferença prevista no valor entre os saldos, para o início e o fim da previsão. Se o valor final previsto da conta (em termos de valor líquido) for menor que o valor inicial, a linha inteira será apresentada a vermelho.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+</sect3>
+
+<sect3>
+<title
+>Informação-Chave do Resumo</title>
+
+<para
+>A parte inferior da área do Resumo mostra as informações importantes acerca das contas. Isto inclui: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Activos abaixo de zero</term>
+    <listitem>
+      <para
+>Aparece uma mensagem por cada activo, no caso em que o valor começa ou desce abaixo de zero durante o período de previsão.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Passivo acima de zero</term>
+    <listitem>
+      <para
+>Aparece uma mensagem por cada passivo, no caso em que o valor começa ou sobre acima de zero durante o período de previsão. Lembre-se que o valor de um passivo é o negativo do seu saldo no registo, dado que um saldo positivo normalmente indica dinheiro em dívida.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Página de Detalhes</title>
+
+<para
+>A página de Detalhes contém uma grelha que mostra um grupo de informações para cada Activo e Passivo. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Conta</term>
+    <listitem>
+      <para
+>O nome da conta de Activo ou Passivo</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Datas</term>
+    <listitem>
+      <para
+>Para cada data no período de Previsão, aparece uma coluna que mostra o saldo previsto da conta nessa data. As colunas das datas estão por ordem ascendente, da esquerda para a direita.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Variação Actual</term>
+    <listitem>
+      <para
+>A coluna mais à direita mostra a diferença prevista no valor entre os saldos, para o início e o fim da previsão. Se o valor final previsto da conta (em termos de valor líquido) for menor que o valor inicial, a linha inteira será apresentada a vermelho.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Página Avançado</title>
+
+<para
+>A página Avançado contém uma grelha que mostra um grupo de informações para cada Activo e Passivo. A informação está dividida por colunas, da seguinte forma: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Conta</term>
+    <listitem>
+      <para
+>O nome da conta de Activo ou Passivo</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Saldo Mínimo do Ciclo de Facturação</term>
+    <listitem>
+      <para
+>Para cada número do ciclo de facturação &lt;n&gt;, no período de Previsão, são apresentadas as seguintes colunas:</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>Saldo Mínimo (Saldo Mín &lt;n&gt;)</term>
+	  <listitem>
+	    <para
+>O saldo mínimo previsto durante o ciclo de facturação</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term
+>Data do Saldo Mínimo (Data Mín &lt;n&gt;)</term>
+	  <listitem>
+	    <para
+>A data em que o saldo atinge o seu valor mínimo previsto.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Saldo Máximo do Ciclo de Facturação</term>
+
+    <listitem>
+      <para
+>Para cada número do ciclo de facturação &lt;n&gt;, no período de Previsão, são apresentadas as seguintes colunas:</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term
+>Saldo Máximo (Saldo Máx &lt;n&gt;)</term>
+	  <listitem>
+	    <para
+>O saldo máximo previsto durante o ciclo de facturação</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term
+>Data do Saldo Máximo (Data Máx &lt;n&gt;)</term>
+	  <listitem>
+	    <para
+>A data em que o saldo atinge o seu valor máximo previsto.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Média</term>
+
+    <listitem>
+      <para
+>O saldo médio da conta durante o período de previsão</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2>
+<title
+>Página de Previsão do Orçamento</title>
+
+<para
+>A área do Orçamento mostra um cálculo de previsão das categorias de Receita e Despesa. As colunas são semelhantes às páginas de Resumo e Detalhada. </para>
+
+</sect2>
+
+<sect2>
+<title
+>Página de Gráficos</title>
+
+<para
+>Mostra um gráfico que apresenta a previsão. O nível de detalhe varia de acordo com o nível de detalhe seleccionado na opção acima. </para>
+
+</sect2>
+
+</sect1>
+</chapter>

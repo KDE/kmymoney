@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="introduction">
+<chapterinfo>
+  <date
+>2018-01-13</date>
+  <releaseinfo
+>5.0.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Inleiding</title>
+
+<sect1 id="what-is-kmymoney">
+<title
+>Wat is &kmymoney;?</title>
+
+<para
+>Eenvoudig gezegd, is &kmymoney; een persoonlijke financiële beheerder door &kde;. Het stelt gebruikers van opensource besturingssystemen en toepassingen in staat om zorgvuldig hun persoonlijke financiën bij te houden door een breed spectrum van financiële functies en hulpmiddelen te bieden. </para>
+
+<para
+>De hoofddoelen van het project zijn: </para>
+
+<itemizedlist>
+  <listitem>
+    <formalpara
+><title
+>Gelijkheid van functie</title>
+      <para
+>&kmymoney; heeft de bedoeling om alle belangrijke functies te leveren die in commercieel beschikbare, persoonlijke financiënbeheerders worden gevonden. Hoewel elke uitgave van &kmymoney; dichter dan ooit bij dit doel is, is er nog steeds werk te doen. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara
+><title
+>Gebruiksgemak</title>
+      <para
+>&kmymoney; streeft er naar om de gemakkelijkst te gebruiken opensource persoonlijke financiële beheerder te zijn, speciaal voor de niet-technische gebruiker. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara
+><title
+>Correctheid</title>
+      <para
+>Gebaseerd op op het beproefde en geteste dubbele boekhoudprincipe verzekert &kmymoney; dat uw financiën prima in orde worden gehouden. </para>
+    </formalpara>
+  </listitem>
+</itemizedlist>
+
+</sect1>
+
+<sect1 id="what-kmymoney-is-not">
+<title
+>Wat is &kmymoney; niet</title>
+
+<para
+>Als een persoonlijke financiën beheerder, is &kmymoney; niet bedoeld om op te schalen tot de behoeften van een gemiddeld bedrijf. Een klein bedrijf zou voldoende bruikbare functionaliteit kunnen vinden in &kmymoney;, maar functies zoals nog te ontvangen rekeningen en te betalen rekeningen worden niet direct ondersteund. Het is echter mogelijk om klant, leverancier, document of andere functies aan te maken door plugins. </para>
+
+<para
+>&kmymoney; is niet een eenvoudige kloon van de commercieel beschikbare persoonlijke financiële programma's. Hoewel veel van de functies aanwezig in &kmymoney; gevonden kunnen worden in andere gelijksoortige applicaties, streeft &kmymoney; na om een individueel en uniek beeld van uw financiën te geven. </para>
+
+</sect1>
+</chapter>

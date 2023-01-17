@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.ledgers">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+  </authorgroup>
+  <date
+>02/04/2019</date>
+  <releaseinfo
+>5.0.3</releaseinfo>
+</chapterinfo>
+
+<title
+>Registri</title>
+
+<sect1 id="details.ledgers.view">
+<title
+>La vista Registri</title>
+
+<para
+>La vista Registri è funzionalmente il centro di integrazione dei dati di &kmymoney;. Questa vista serve a inserire, esaminare, eliminare e modificare le transazioni nei propri conti. La vista è divisa in tre aree principali: l'area del filtro, l'elenco delle transazioni e l'area di inserimento. </para>
+
+<para
+>Questa vista consente diverse azioni fondamentali: ricerca e visualizzazione delle transazioni, inserimento di nuove transazioni, modifica, eliminazione e pianificazione di transazioni esistenti. Inoltre, fornisce la possibilità di spostare, marcare e mostrare dettagli delle transazioni di conti aggiuntivi. Un'altra funzionalità all'interno della vista Registro include la modifica e la riconciliazione del conto. </para>
+  
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="ledgerview-numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>La vista Registri</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Questa vista contiene tre parti: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>L'area del filtro</para
+></listitem>
+  <listitem
+><para
+>La lista delle transazioni</para
+></listitem>
+  <listitem>
+    <para
+>Il modulo delle transazioni, che può essere visualizzato o nascosto, in base alla propria configurazione come selezionato nella sezione Registro in Configura &kmymoney;. </para>
+  </listitem>
+</itemizedlist>
+
+<sect2 id="details.ledgers.view.filter">
+<title
+>L'area del filtro</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="accountdropdown.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>L'area del filtro</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>È possibile selezionare qualsiasi conto dal menu a discesa nella parte superiore della vista. È bene notare che in base al tipo del conto, potrebbe cambiare il <link linkend="details.ledger.transactionform"
+>modulo delle transazioni</link
+> nella parte inferiore della vista. </para>
+
+<para
+>Alla destra dell'elenco a discesa dei conti, ci sono due campi aggiuntivi. La casella del filtro fornisce la possibilità di cercare le transazioni corrispondenti che saranno visualizzate nell'elenco. Il testo specificato può essere in un campo qualsiasi della transazione per il conto. L'elenco dei campi di stato consente la selezione di: Qualsiasi stato, Importata, Verificata, Errata, Non marcata, Non riconciliata, Compensata e transazioni pianificate. </para>
+
+</sect2>
+
+<sect2>
+<title
+>La lista delle transazioni</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="translist.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>La lista delle transazioni</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Dopo aver inserito una transazione, essa viene visualizzata nell'elenco delle transazioni. È possibile modificare le proprietà della transazione o anche creare nuove transazioni, direttamente dall'elenco. Nell'elenco delle transazioni, l'ordinamento predefinito è quello cronologico, con la transazione più recente in fondo. Facendo clic con il &RMB; sull'intestazione dell'elenco delle transazioni si aprirà una finestra che permette di modificare l'ordinamento delle transazioni. Per le istruzioni su come modificare l'ordinamento predefinito, vedere la sezione <link linkend="details.settings.register.sorting"
+>Ordinamento delle schede</link
+> del capitolo <link linkend="details.settings"
+>Impostazioni di &kmymoney;</link
+>. </para>
+
+<para
+>Nota che la colonna del saldo è basata sull'ordinamento attualmente visualizzato e non sarà calcolata se la schermata è filtrata tramite la ricerca nella casella del filtro o dal menu a tendina del tipo di transazione, come descritto in precedenza. </para>
+
+<para
+>In fondo all'elenco delle transazioni, &kmymoney; visualizza tre valori: </para>
+
+<formalpara
+><title
+>Ultimo riconciliato</title>
+  <para
+>Questa è la data più recente di riconciliazione di questo conto. La riconciliazione è un processo importante per molti conti, ed è descritta <link linkend="details.reconcile"
+>qui</link
+>. </para>
+</formalpara>
+
+<formalpara
+><title
+>Compensata</title>
+  <para
+>Questo è il totale delle transazioni compensate e riconciliate in questo conto. Vedere <link linkend="details.ledgers.cleared"
+>questa sezione</link
+> per ulteriori informazioni sugli stati di compensazione e riconciliazione delle transazioni. </para>
+</formalpara>
+
+<formalpara
+><title
+>Saldo</title>
+  <para
+>Qui &kmymoney; visualizza il saldo totale del conto, che è la somma di tutte le transazioni nel conto. Tuttavia, se si seleziona più di una transazione nell'elenco, visualizzerà la somma delle transazioni selezionate. Tornerà al saldo quando sarà selezionata solo una transazione. </para>
+</formalpara>
+</sect2>
+
+<sect2>
+<title
+>Il modulo delle transazioni</title>
+
+<para
+>I campi contenuti nella parte inferiore della vista Registri variano in base alla configurazione e al tipo di conto visualizzato. Di solito, sono presenti i campi relativi a tutti i dettagli sulla transazione, e alcuni pulsanti per eseguire operazioni sulla transazione. Si possono trovare maggiori informazioni nelle sezioni seguenti. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledger.transactions">
+<title
+>Inserimento di transazioni</title>
+
+<para
+>Ci sono due modi di inserire transazioni nel registro: usando il modulo delle transazioni o inserendo i dati direttamente nella lista delle transazioni. Il modulo delle transazioni è visualizzato in modo predefinito ed è il primo metodo che affronteremo. La disattivazione del modulo delle transazioni può essere eseguita dalla sezione Registro in Configura &kmymoney; nelle impostazioni. </para>
+
+<para
+>I campi nell'area di inserimento corrispondono nell'elenco delle transazioni. Campi aggiuntivi includono il campo Promemoria, per una descrizione più dettagliata della transazione e Categoria. Il pulsante Dividi permette di dividere la transazione in più categorie. </para>
+</sect1>
+
+<sect1 id="details.ledger.transactionform">
+<title
+>Utilizzo del modulo delle transazioni</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Modulo di inserimento</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Il modulo delle transazioni nella parte inferiore del registro fornisce un'interfaccia per la creazione manuale di transazioni. </para>
+
+<para
+>In base al tipo della transazione che si vuole inserire, ci sono diverse schede nel modulo delle transazioni. Fare clic sulla scheda che meglio definisce la propria transazione (deposito, trasferimento o prelievo) e il modulo caricherà diversi campi disponibili per l'inserimento. </para>
+
+<para
+>È bene notare che il metodo della transazione non viene usato direttamente da &kmymoney; ma solo per raggruppare e visualizzare le transazioni. </para>
+
+<para
+>Se non si è sicuri del metodo da scegliere, scegliere semplicemente Deposito quando si immette denaro nel conto, Prelievo quando il denaro esce dal conto e Trasferimento quando si sposta denaro da un conto ad un altro. I metodi delle transazioni e le loro differenze vengono spiegati più in dettaglio in altre parti di questo manuale. </para>
+
+<para
+>Selezionare il metodo della transazione facendo clic sulla scheda appropriata. </para>
+
+<sect2>
+<title
+>I campi di una transazione</title>
+
+<para
+>Inserire le informazioni utilizzando le seguenti note sui campi disponibili. È bene notare che molti campi hanno abilitato il completamento automatico. Questo significa che quando si inizia a digitare qualcosa &kmymoney; offrirà delle alternative che corrispondono ai caratteri inseriti. Per selezionare il contenuto corrispondente, è sufficiente fare clic sulla voce con il mouse o con la tastiera. Se la voce non è elencata completare la digitazione del contenuto per aggiungere un nuovo valore. La prossima volta che si digiterà questo contenuto, &kmymoney; lo visualizzerà nell'elenco, dopo avere digitato alcuni caratteri. </para>
+
+<sect3>
+<title
+>Il beneficiario</title>
+
+<para
+>Il beneficiario è chi riceve o cede il denaro. Se questo beneficiario non è stato inserito in precedenza, &kmymoney; chiederà se lo si vuole aggiungere all'elenco dei beneficiari. È possibile aggiornare qualsiasi altra informazione relativa al beneficiario, come indirizzo, numero di telefono e numero di conto, nella vista Beneficiari. </para>
+</sect3>
+
+<sect3>
+<title
+>La categoria</title>
+
+<para
+>La Categoria associa una transazione con una categoria di entrate o uscite per scopi relativi alla contabilità e ai report; permette anche di raggruppare determinate transazioni. Digitare il nome della categoria nel campo definito. Se la categoria inserita non esiste, &kmymoney; chiederà se la si vuole creare. Se la selezione è Sì, &kmymoney; aprirà quindi una finestra che consente ulteriormente di definire la categoria sulla base delle caratteristiche Generale, Gerarchia e Tassa. </para>
+
+<para
+>Se si desidera associare parti della transazione a categorie diverse, &kmymoney; permette di farlo. Ad esempio, si possono ritirare 50€ e usare 10€ per del cibo, 20€ per della birra e tenere 20€ di contanti. In questo caso, la transazione verrà assegnata a tre categorie: Cibo, Birra e Contanti. Per inserire la transazione, sarà necessario utilizzare la funzione <link linkend="details.ledgers.split"
+>Transazioni divise</link
+>, spiegata più dettagliatamente in seguito. </para>
+
+<para
+>Vedere la sezione <link linkend="reference.widgets"
+>campi di &kmymoney;</link
+> per maggiori informazioni sull'uso di questo campo. </para>
+</sect3>
+
+<sect3>
+<title
+>L'etichetta</title>
+
+<para
+>Le etichette sono simili alle categorie e possono essere utilizzate per mantenere una visualizzazione ortogonale delle categorie. Esse forniscono la possibilità di raggruppare le transazioni in una categoria sulla base delle proprie esigenze specifiche. Queste esigenze possono essere definite a partire da Persone, Luoghi o Cose. Ad esempio, è possibile avere una categoria per ogni tipo diverso di spesa automobilistica, e poi avere un'etichetta per ogni veicolo. Così come per le categorie, è possibile selezionare dall'elenco a tendina o digitare il nome di una nuova etichetta e ricevere la richiesta di creazione di una nuova etichetta con quel nome. Nel campo Etichetta, &kmymoney; consentirà la digitazione di più etichette per una singola transazione. Inoltre, è possibile digitare un'etichetta su una singola suddivisione. </para>
+</sect3>
+
+<sect3>
+<title
+>Il promemoria</title>
+
+<para
+>È possibile inserire un promemoria con più righe, per ricordare ulteriori dettagli di una specifica transazione. </para>
+</sect3>
+
+<sect3>
+<title
+>Il numero dell'assegno</title>
+
+<para
+>È possibile inserire il numero dell'assegno, se necessario. È bene notare che il campo del numero dell'assegno può essere visualizzato o meno nel registro. È possibile configurare questo aspetto nella finestra Impostazioni del registro. </para>
+</sect3>
+
+<sect3>
+<title
+>La data</title>
+
+<para
+>La data della transazione deve essere inserita per specificare quando la transazione ha avuto luogo. Vedere la sezione speciale <link linkend="reference.widgets"
+>campi di &kmymoney; </link
+> per ulteriori informazioni su come utilizzare il campo di inserimento della data per inserire rapidamente le date. Per le transazioni nei conti correnti e nei conti della carte di credito, si può scegliere se utilizzare la data effettiva (quando è stato emesso l'assegno o eseguito l'acquisto) o la data registrata dalla banca o dalla società della carta di credito. L'utilizzo della data effettiva può essere utile per tracciare il momento dell'acquisto, ad esempio, ma l'estratto conto o i dati scaricati dalla banca recheranno la data di registrazione. </para>
+</sect3>
+
+<sect3>
+<title
+>L'importo</title>
+
+<para
+>Infine, digitare l'importo della transazione nell'apposito campo. Notare che può essere visualizzata una semplice calcolatrice, facendo clic sull'icona a destra del campo dell'importo, inserendo il carattere % nel campo o inserendo uno qualsiasi di questi simboli matematici: + - * / in una formula, come <emphasis
+>12 + 3</emphasis
+>. Quando si digita il segno +, si aprirà la calcolatrice. Notare che solo il risultato finale di un qualsiasi calcolo sarà salvato come importa della transazione. </para>
+
+<para
+>Quando si sono riempiti tutti i campi desiderati, premere <guibutton
+>Inserisci</guibutton
+>. Se si preme <guibutton
+>Inserisci</guibutton
+> per sbaglio, prima di aver inserito tutti i dati, fare clic su <guibutton
+>Modifica</guibutton
+> per riprendere l'inserimento dei dati. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledger.direct">
+<title
+>Inserimento diretto delle transazioni nella lista</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform-off.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Inserimento diretto delle transazioni</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Il secondo metodo di inserire le transazioni nel registro prevede la modifica diretta dell'elenco delle transazioni. </para>
+
+<para
+>Per fare ciò, bisogna prima configurare &kmymoney; in modo da non usare il modulo di inserimento delle transazioni, andando nella finestra delle impostazioni e disabilitando l'opzione <guilabel
+>Mostra modulo transazione</guilabel
+>. </para>
+
+<para
+>Questa operazione è eseguita selezionando la voce di menu <menuchoice
+><guimenu
+>Impostazioni</guimenu
+> <guimenuitem
+>Configura &kmymoney;...</guimenuitem
+></menuchoice
+> dalla e selezionando l'icona del registro <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="ledgers_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+> </guiicon
+> dall'elenco a sinistra. L'opzione da disabilitare è <guilabel
+>Mostra modulo delle transazioni</guilabel
+>. Al termine, fare clic su <guibutton
+>OK</guibutton
+> per inserire direttamente o modificare le transazioni. </para>
+
+<sect2>
+<title
+>Iniziare la modifica</title>
+
+<para
+>Ora, per inserire una nuova transazione nel registro, è possibile fare clic su una riga vuota, premere <keycombo action="simul"
+>&Ctrl;&Ins;</keycombo
+> o fare clic su <guibutton
+>Nuova</guibutton
+> nella parte inferiore della finestra. Ci si può spostare nell'elenco con le frecce direzionali &Up; e &Down;. Dopo aver premuto &Enter; o aver fatto doppio clic su una riga, l'elenco delle transazioni visualizzerà i campi richiesti per l'inserimento della transazione e attenderà l'inserimento dei valori. </para>
+
+<para
+>Ci si può spostare tra i campi con &Tab;. Alla fine, premere &Enter; per confermare i cambiamenti o &Esc; per annullarli. </para>
+
+<para
+>Se è selezionata l'opzione <guilabel
+>Usa Invio per spostarti tra i campi</guilabel
+>, il tasto &Enter; passa al campo successivo, come il tasto &Tab;, tranne se il campo selezionato è l'ultimo: in questo caso salva i dati. </para>
+
+<para
+>Scegli il metodo di inserimento delle transazioni che preferisci, è questione di gusti. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledgers.split">
+<title id="details.ledgers.split.title"
+>Transazioni divise</title>
+
+<para
+>La funzione di divisione delle transazioni permette di dividere una transazione in più categorie, che possono rappresentare, ad esempio, oggetti diversi comprati insieme in un negozio. </para
+> 
+
+<para
+>Per inserire una transazione divisa, usando il modulo di inserimento delle transazioni o dalla lista delle transazioni, inserire una transazione come al solito, compreso l'importo totale. Poi, al posto di inserire la categoria, fare clic sul pulsante <guibutton
+>Dividi</guibutton
+> a destra del campo <guilabel
+>Categoria</guilabel
+>. Se si è già selezionata una categoria, questa diventa la prima voce nella schermata di modifica delle divisioni. </para
+> 
+ 
+<para
+>Nella schermata di modifica delle divisioni, fare doppio clic su una linea vuota per inserire una sotto-transazione o premere <keycombo action="simul"
+>&Ctrl;&Ins;</keycombo
+>. Specificare la categoria, aggiungere un promemoria (facoltativo) e digitare l'importo. Per salvare questa parte della suddivisione, premere il pulsante con il simbolo di spunta verde sotto alla categoria. Per annullare, premere il pulsante con la croce rossa. </para
+> 
+ 
+<para
+>Dopo l'inserimento di una suddivisione, la parte inferiore della finestra mostra quanto dell'importo della transazione non è ancora assegnato. Dopo aver inserito tutte le suddivisioni, premere il pulsante <guibutton
+>OK</guibutton
+> per salvare l'intera transazione. Se una parte dell'importo non è ancora assegnata, verrà chiesto se si vogliono modificare le suddivisioni, modificare l'importo totale della transazione o lasciare una parte della transazione non assegnata. </para>
+
+<para
+>Notare che il campo categoria nel modulo delle transazioni o l'elenco delle transazioni ora visualizzano <emphasis
+>Transazione divisa</emphasis
+>. </para
+> 
+
+<para>
+	<screenshot>
+	<screeninfo
+>Transazioni divise</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="split_transaction.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transazione divisa</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+</sect1>
+
+<sect1 id="details.ledger.edit">
+<title
+>Modifica di transazioni</title>
+
+<para
+>Per modificare una transazione, selezionarla nell'elenco e fare clic su <guibutton
+>Modifica</guibutton
+> nel modulo delle transazioni, o fare clic con il tasto destro del mouse sulla voce e scegliere <guimenuitem
+>Modifica</guimenuitem
+> dal menu a comparsa. Se si stanno modificando le transazioni direttamente nella lista, è possibile iniziare la modifica facendo doppio clic su una voce o premendo &Enter; dopo aver evidenziato una transazione. </para>
+</sect1>
+
+<sect1 id="details.ledger.delete">
+<title
+>Eliminazione di transazioni</title>
+
+<para
+>Per eliminare una transazione, selezionarla nella lista, fare clic con il &RMB; e selezionare <guimenuitem
+>Elimina</guimenuitem
+> dal menu oppure fare clic su <guibutton
+>Elimina</guibutton
+> nel modulo di inserimento. </para>
+</sect1>
+
+<sect1 id="details.ledgers.match">
+<title id="details.ledgers.match.title"
+>Transazioni corrispondenti</title>
+
+<para
+>Normalmente, quando si importano le transazioni da QIF, OFX o HBCI, &kmymoney; cercherà automaticamente le corrispondenze con le transazioni esistenti. Per permettere differenze nelle date, c'è un'impostazione predefinita di 4 giorni, che può essere cambiata nelle impostazioni, nella sezione Registro/Importazione. Le transazioni corrispondenti saranno evidenziate in verde. Prima di completare l'importazione, si dovrebbero controllare queste corrispondenze e rimuoverle, se necessario. </para>
+
+<para
+>Se ci si accorge che una transazione corrispondente non è stata verificata automaticamente con una transazione esistente, è possibile verificarla manualmente. Notare che c'è una differenza tra la corrispondenza manuale di due transazioni e l'eliminazione di una delle due, nonostante possa sembrare che abbiano lo stesso effetto. In particolare con OFX e HBCI, è importante non eliminare la transazione importata, perché altrimenti apparirà nuovamente alla successiva importazione delle proprie transazioni. Ciò è dovuto al fatto che i formati moderni di importazione, come OFX e HBCI, utilizzano un <quote
+>ID di transazione</quote
+> per identificare le transazioni. Se si elimina la transazione importata, viene eliminato anche l'<quote
+>ID di transazione</quote
+>, per cui lo strumento di importazione non ha modo di sapere che quella transazione sia già stata importata. </para
+> 
+
+<para
+>La soluzione a questo problema è indicare a &kmymoney; che le transazioni corrispondono, usando l'interfaccia per la corrispondenza manuale. Questo permette di far corrispondere una transazione importata con una transazione inserita manualmente (non importata). Per fare ciò, selezionare una delle transazioni da far corrispondere facendo clic su di essa, poi selezionare l'altra, facendo clic su di essa con il tasto sinistro del mouse mentre si tiene premuto il tasto &Ctrl;, e selezionare <guimenuitem
+>Verifica</guimenuitem
+> dal menu contestuale. Questo verificherà e combinerà le due transazioni. I valori delle due transazioni deve essere gli stessi affinché la corrispondenza avvenga correttamente. eccetto le date che possono differire del numero di giorni specificato nelle impostazioni, come descritto sopra. Se il risultato è accettabile, fare clic sulla transazione combinata e selezionare <guibutton
+>Accetta</guibutton
+>. </para>
+
+<para
+>Durante l'importazione degli estratti in linea - direttamente o importando un file scaricato - &kmymoney; cerca di rilevare le corrispondenze delle transazioni, in base al nome del beneficiario e all'importo della transazione. In caso di corrispondenza non valida, tale corrispondenza può essere rimossa. </para>
+
+<note>
+  <para
+>L'interfaccia per la corrispondenza delle transazioni non permette di combinare due transazioni importate o due transazioni inserite manualmente.  </para>
+</note>
+</sect1>
+
+<sect1 id="details.ledgers.cleared">
+<title
+>Comprendere lo stato di una transazione</title>
+
+<para
+>Una transazione può avere uno di tre stati: non riconciliata (vuota), compensata (C) e riconciliata (R). Quando si inserisce una transazione, le viene assegnato lo stato Non riconciliata. Una volta che la banca registra la transazione, l'utente può marcarla come Compensata (C). Quando si riceve l'estratto conto dalla banca, dovrebbe contenere tutte le transazioni compensate. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Lo stato Compensata</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="cleared_state.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>stato compensata</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Quando si <link linkend="details.reconcile"
+>riconcilia</link
+> un conto, si marcano le transazioni come Compensate e si controlla che la differenza tra il saldo iniziale e le transazioni compensate corrisponda al saldo finale presente sull'estratto conto. In questo caso, si «termina la riconciliazione», cioè si segnano tutte le transazioni Compensate (C) come Riconciliate (R). </para>
+
+<para
+>Se si prova a modificare una transazione con almeno una suddivisione marcata come riconciliata (R), verrà visualizzato un avvertimento. </para>
+</sect1>
+
+<sect1 id="details.ledgers.settings">
+<title
+>Impostazioni delle transazioni</title>
+
+<para
+>Ci sono diverse opzioni che modificano l'aspetto e il comportamento della vista Registro riguardo alle transazioni.Queste impostazioni sono disponibili, selezionando <guimenu
+>Impostazioni</guimenu
+> <guimenuitem
+>Configura &kmymoney;</guimenuitem
+> dalla barra dei menu e selezionando l'icona del registro <guiicon
+><inlinemediaobject
+><imageobject
+> <imagedata fileref="ledgers_view.png" format="PNG"/></imageobject
+> </inlinemediaobject
+></guiicon
+> dall'elenco a sinistra. </para
+> 
+
+<para
+>La maggior parte delle impostazioni si spiegano da sole. Per chiarezza, spieghiamo alcune delle impostazioni. </para>
+<!-- FIXME - if these are explained in the chapter on settings, just refer to that
+     as is done above, and don't duplicate here.  Leaving for now, but should clean
+     up later. -->
+
+<itemizedlist>
+  <listitem>
+    <para
+>Mostra modulo transazione (nella scheda Visualizza) - deselezionare questa opzione per nascondere il modulo delle transazioni nella parte bassa della finestra. Le transazioni possono essere comunque inserite, direttamente in una riga vuota alla fine dell'elenco delle transazioni, attraverso un'area di inserimento automatica più compatta. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Queste immagini visualizzano l'inserimento diretto delle transazioni e, a confronto, il modulo di inserimento. </para>
+
+<para
+>Il modulo delle transazioni</para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Il modulo delle transazioni</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Modulo di inserimento delle transazioni</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Transazioni inserite direttamente</para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Transazioni inserite direttamente</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform-off.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Inserimento diretto</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Mantieni le modifiche quando si seleziona un'altra transazione/suddivisione - selezionando la riga seguente nella finestra di modifica delle suddivisioni le modifiche verranno mantenute; altrimenti sarebbe necessario premere il pulsante con il segno di spunta verde per confermare le modifiche. </para>
+  </listitem>
+</itemizedlist>
+
+</sect1>
+
+<sect1 id="details.ledgers.other">
+<title id="details.ledgers.other.title"
+>Altre funzionalità</title>
+
+<para
+>Sono disponibili altre opzioni nel menu <guimenu
+>Opzioni della transazione</guimenu
+>, a cui si può accedere facendo clic con il &RMB; su una transazione nell'elenco. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Il menu contestuale Opzioni della transazione</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="ledger_more.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Opzioni transazione</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Le opzioni includono: la visualizzazione della vista Beneficiari per il beneficiario nella transazione, la creazione di una pianificazione e la modifica dello stato riconciliato o compensato. </para>
+
+<para
+>Per modificare le informazioni del conto dalla vista Registri, selezionare <guimenu
+>Conto</guimenu
+> dalla barra dei menu. Dalla voce di menu <guimenuitem
+>Modifica conto...</guimenuitem
+>, è possibile cambiare i dettagli del conto. Esiste anche una voce di menu per aprire il menu di riconciliazione, che permette di far corrispondere le transazioni inserite con quelle di un estratto conto di un conto corrente o di una carta di credito. </para>
+</sect1>
+</chapter>
+

@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.reports">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Berichte</title>
+
+<sect1 id="details.reports.avail">
+<title
+>Verfügbare Berichte</title>
+
+<para>
+<screenshot>
+	<screeninfo
+>Berichts-Ansicht</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reports_view-all.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Berichts-Ansicht</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Die Berichts-Ansicht zeigt alle verfügbaren Berichte, gruppiert nach den folgenden Themenbereichen. </para>
+
+<sect2>
+<title
+>Einnahmen und Ausgaben</title>
+<para
+>Die Berichte in diesem Abschnitt zeigen Ihre Einnahmen und Ausgaben im aktuellen Monat oder für jeden Monat des laufenden Jahres. Natürlich kann der Zeitraum des gesamten Berichts, sowie der einzelnen Spalten nach Ihren Bedürfnissen angepasst werden. Weiterhin können Sie Diagramme aus Ihren Berichten erzeugen. </para>
+</sect2>
+
+<sect2>
+<title
+>Eigenkapital</title>
+<para
+>Hier befinden sich die Berichte, die Ihr Eigenkapitel entweder zum aktuellen Zeitpunkt, für jeden Monat des aktuellen Jahres oder für jedes zurückliegende Jahr darstellen. Zusätzlich gibt es eine 7-Tages-Geldfluss-Vorhersage und ein Eigenkapital-Diagramm. Weiterhin gibt es Berichte zu Ihren Kontoständen für alle Ihre Konten zu vorgebbaren Zeitpunkten. </para>
+</sect2>
+
+<sect2>
+<title
+>Buchungen</title>
+<para
+>In diesem Bereich finden Sie Berichte, die Ihnen eine Auflistung von Buchungen anzeigen. Dies ist die beste Möglichkeit, Ihr Kontenblatt für einen gewählten Zeitbereich auszudrucken. Die ausgedruckten Buchungen können nach Bedarf gruppiert werden, in dem Sie den entsprechenden Bericht auswählen, wie z. B.: <itemizedlist>
+  <listitem
+><para
+>Nach Konto</para
+></listitem>
+  <listitem
+><para
+>Nach Kategorie</para
+></listitem>
+  <listitem
+><para
+>Nach Monaten oder Wochen</para
+></listitem>
+  <listitem
+><para
+>Nach Zahlungsempfänger</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Geldfluß</title>
+<para
+>Der Geldfluß-Bericht ist identisch mit den Buchungsberichten, nur werden alle Geldfluß-relevanten Buchungen angezeigt. </para>
+</sect2>
+
+<sect2>
+<title
+>Investitionen</title>
+<para
+>Diese Berichte helfen Ihnen dabei, einen Überblick über Ihre Investitionen zu bekommen. Sie berücksichtigen nur Investitions-Konten. Es gibt eine Vielzahl an Darstellungs-Filtern und Erscheinungsbildern, wie z.B.: </para>
+<itemizedlist>
+  <listitem
+><para
+>Investitions-Buchungen: Identisch wie ein Buchungsreport. Er enthält die Aktienpreise und Anzahl.</para
+></listitem>
+  <listitem
+><para
+>Investitionen nach Konten: Zeigt die aktuellen Aktien, Preise und Werte für jedes Konto.</para
+></listitem>
+  <listitem
+><para
+>Investitionen nach Typen: wie der vorherige Bericht, nur werden die Konten nach Typ gruppiert (Aktiendepot, Fonds, &etc;)</para
+></listitem>
+  <listitem
+><para
+>Investitionsentwicklung nach Konten: Zeigt die jährliche Performance für einen beliebig wählbaren Zeitbereich. Dies ermöglicht eine Geldflußanalyse des gesamten eingehenden und ausgehenden Geldes des Kontos. Hieraus ergibt sich ein sehr akkurates Bild, wie profitabel Ihre Investitionen sind.</para
+></listitem>
+  <listitem
+><para
+>Investitionsentwicklung nach Typen: wie der vorherige Bericht, nur werden die Konten nach Typ gruppiert (Aktiendepot, Fonds, &etc;)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Es gibt außerdem Diagramme für Preis und Wert von Investitionen. </para>
+</sect2>
+
+<sect2>
+<title
+>Steuern</title>
+<para
+>Die Steuer-Berichte sind wie die Buchungsberichte, wobei hier aber nur steuerrelevante Kategorien berücksichtigt werden. Dies erlaubt Ihnen, bestimmte Kategorien als steuerrelevant zu kennzeichnen, um dann am Jahresende einen großen Bericht mit allen steuerrelevanten Buchungen zu erhalten. Sie können entweder nach Kategorie oder Zahlungsempfänger gruppiert und für das vergangene Geschäftsjahr angezeigt werden. </para>
+</sect2>
+
+<sect2>
+<title
+>Budgetierung</title>
+<para
+>Die Budgetberichte sind ähnlich wie die Eigenkapitalberichte, allerdings können hier die Budgets für ein vorgegebenes Jahr, oder auch ein Vergleich zwischen Einnahmen und Ausgaben im gleichen Zeitbereich angezeigt werden. </para>
+</sect2>
+
+<sect2>
+<title
+>Vorhersage</title>
+<para
+>Die Vorhersageberichte sind ähnlich wie die Eigenkapitalberichte, es werden allerdings Vorhersagen angezeigt. Sie können diese Berichte in verschiedenen Ebenen und Zeitabschnitten erzeugen. </para>
+</sect2>
+
+<sect2>
+<title
+>Information</title>
+<para
+>Diese Berichte zeigen nicht buchungsbezogene Informationen über geplante Buchungen, Konten und Kredite. </para>
+</sect2>
+
+<sect2>
+<title
+>Diagramme</title>
+<para
+>Wenn <link linkend="details.reports.charts"
+>Diagramme</link
+> aktiviert sind, zeigt Ihnen dieser Abschnitt eine Liste aller Berichte, die standardmäßig eine Grafik erzeugen. Sie weiterhin zusätzlich in einer der anderen Rubriken dargestellt und sind hier zusätzlich an zentraler Stelle zu finden, den Zugriff zu erleichtern. </para>
+</sect2>
+
+<sect2>
+<title
+>Bevorzugte Berichte</title>
+<para
+>In dieser Rubrik werden alle Berichte aufgelistet, die Sie im Einrichtungsdialog eines Berichtes als bevorzugt gekennzeichnet habe. Sie werden weiterhin in einer der anderen Rubriken gelistet, sind aber hier zusätzlich an zentraler Stelle zusammengefasst, um sie schneller zu finden. Bevorzugte Berichte werden auch in der Finanzübersichtsseite angezeigt, um sie schnell erreichen zu können. </para>
+</sect2>
+
+<sect2>
+<title
+>Berichte einrichten</title>
+<para
+>Um den Einrichtungsdialog zu erreichen, öffnen Sie den gewünschten Bericht und drücken Sie den Knopf <guibutton
+>Einrichten</guibutton
+> im oberen Bereich des Berichts. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.reports.working">
+<title
+>Arbeiten mit Berichten</title>
+
+<para
+>Sie können einige Aktionen auf jeden Bericht anwenden. Durch einen rechten Mausklick auf den Namen des Berichts in der Berichtsliste können Sie die gewünschte Aktion auswählen. Alternativ dazu finden Sie entsprechende Aktionsknöpfe auch im oberen Bereich des Anzeigefensters, wenn Sie einen Bericht geöffnet haben: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Diagramm: ist nur zu sehen, wenn der Bericht als Diagramm angezeigt werden kann. Durch Klicken auf diesen Knopf wechseln Sie zwischen der Diagramm- und der Berichtsansicht.</para
+></listitem>
+  <listitem
+><para
+>Einrichten: Ändern der Einstellungen für diesen Bericht. Sie können den Bericht nach Ihren Wünschen anpassen und für den späteren Gebrauch auch abspeichern.</para
+></listitem>
+  <listitem
+><para
+>Neu: erzeugt einen neuen benutzerdefinierten Bericht auf Basis des ausgewählten Berichts.</para
+></listitem>
+  <listitem
+><para
+>Kopieren: kopiert die Ausgabe des Berichts in die Zwischenablage, um sie in einer anderen Anwendung wie einer Tabellenkalkulation für weitere Analysen einzufügen.</para
+></listitem>
+  <listitem
+><para
+>Exportieren: Berichte können im &HTML; oder CSV-Format abgespeichert werden.</para
+></listitem>
+  <listitem
+><para
+>Löschen: Benutzerdefinierte Berichte können gelöscht werden. Die standardmäßigen Berichte, die mit &kmymoney; mitgeliefert werden, können nicht gelöscht werden.</para
+></listitem>
+  <listitem
+><para
+>Schließen: Schließt den aktuellen Bericht.</para
+></listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="details.reports.config">
+<title
+>Berichte einrichten</title>
+
+<sect2>
+<title
+>Arbeiten mit benutzerdefinierten Berichten</title>
+<para
+>Sie können die Standardberichte anpassen, oder Ihren eigenen aus diesen erzeugen, indem Sie den Knopf <guibutton
+>Neu</guibutton
+> betätigen und den neu erzeugten Bericht dann anpassen. Durch den Knopf <guibutton
+>Einrichten</guibutton
+> gelangen Sie in den Einrichtungsdialog. Standardmäßig wird der neue Bericht benannt wie der alte, auf dem er beruht. Dem Namen wird das Kennzeichen <quote
+>(Angepasst)</quote
+> am Ende des Berichtsnamens hinzugefügt. Sie können den Namen beliebig ändern. Sie können ihm den gleichen Namen wie ein Standardbericht geben, oder den gleichen Namen wie ein anderer benutzerdefinierter Bericht. Weiterhin können Sie im Kommentar-Feld weitere Informationen hinterlegen, um die Berichte voneinander unterscheiden zu können. </para>
+
+<para
+>Der Einstellungsdialog für Berichte besitzt mehrere Karteikarten. Jede Karteikarte zeigt Optionen, um verschiedene Einstellungen des Berichts vorzunehmen. </para>
+
+</sect2>
+
+<sect2
+><title
+>Karteikarte "Bericht"</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="report_configuration-reporttab.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Einstellungen für Berichte - Bericht</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Auf dieser Karteikarte nehmen Sie die grundlegenden Einstellungen des Berichts vor. <itemizedlist>
+  <listitem
+><para
+>Berichtsname: Geben Sie dem Bericht einen Namen.</para
+></listitem>
+  <listitem
+><para
+>Kommentar: Hier können Sie weitere Informationen zum Bericht hinterlegen.</para
+></listitem>
+  <listitem
+><para
+>Werte in die Basiswährung umrechnen: Mit dieser Option werden alle Werte des Berichts in Ihre Basiswährung umgerechnet. Deaktivieren Sie diese Option, wenn Sie die Werte in ihrer Originalwährung sehen möchten. Werden die Währungen nicht umgerechnet, wird keine Gesamtsumme angezeigt.</para
+></listitem>
+  <listitem
+><para
+>Als bevorzugten Bericht markieren: Wenn diese Option angekreuzt wird, so taucht der Bericht sowohl auf der Übersichtsseite von &kappname;, als auch in der Gruppe <guilabel
+>Bevorzugte Berichte</guilabel
+> auf.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2 id="details.reports.config.rowscolumns">
+<title
+>Karteikarte "Zeilen/Spalten"</title>
+<para
+>Hier können Sie einstellen, wie die Zeilen und Spalten im Bericht ausgewählt und organisiert werden. Abhängig von der Berichtsart können hier verschiedene Einstellungen vorgenommen werden. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="report_configuration-rowscolumns.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Einstellungen für Berichte - Zeilen und Spalten</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Bei Einnahmen/Ausgaben- und Geldflussberichten: <itemizedlist>
+  <listitem
+><para
+>Spalten: Wählen Sie aus, wie groß die Zeitperiode ist, die jede Spalte umfassen soll</para
+></listitem>
+  <listitem
+><para
+>Zeilen: Wählen Sie die Kontenarten aus, die in den Zeilen des Berichts erscheinen sollen</para
+></listitem>
+  <listitem
+><para
+>Details: Wählen Sie den Detaillierungsgrad des Berichts aus.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Folgende Detaillierungsgrade sind verfügbar: <itemizedlist>
+  <listitem
+><para
+>Alle: Zeigt jede Kategorie, bzw. jedes Konto.</para
+></listitem>
+  <listitem
+><para
+>Oberstes Level: Zeigt nur die obersten Kategorie- oder Kontenebene an und summiert die darunterliegenden Kategorien bzw. Konten auf.</para
+></listitem>
+  <listitem
+><para
+>Gruppen: Zeigt nur die Gesamtsummen der Einnahmen, Ausgaben, Anlagen oder Verbindlichkeiten.</para
+></listitem>
+  <listitem
+><para
+>Summen: Zeigt nur die Zeile mit den Gesamtsummen.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Bei Buchungsberichten: <itemizedlist>
+  <listitem
+><para
+>Organisiert nach: Wählen Sie aus, wie die Buchungen in diesem Bericht gruppiert werden sollen.</para
+></listitem>
+  <listitem
+><para
+>Spalten anzeigen: Kreuzen Sie die Spalten an, die im Bericht erscheinen sollen. Das Datum und der Wert der Buchung werden immer angezeigt.</para
+></listitem>
+  <listitem
+><para
+>Nur Steuerkategorien einschließen: Zeigt nur die Kategorien, die als steuerrelevant markiert wurden.</para
+></listitem>
+  <listitem
+><para
+>Nur Investmentkonten einschließen: Zeigt nur Buchungen von Anlagekonten an.</para
+></listitem>
+  <listitem
+><para
+>Nur Kreditkonten einschließen: Zeigt nur Buchungen aus Kreditkonten an.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Karteikarte „Diagramm“</title>
+
+<para
+>Hier können Sie einstellen, wie der Bericht aussehen soll, wenn er als Diagramm angezeigt wird. Eine nähere Erläuterung der Diagrammfunktionen finden Sie im Kapitel <link linkend="details.reports.charts"
+>Grafiken &amp; Diagramme</link
+>. <itemizedlist>
+  <listitem
+><para
+>Diagrammtyp: Wählen Sie hier, welche Art von Diagramm der Bericht zeigen soll (Linien-, Balken-, Tortendiagramm, etc.).</para
+></listitem>
+  <listitem
+><para
+>Gitterlinien anzeigen: Auswahl, ob die horizontalen und vertikalen Gitterlinien im Diagramm angezeigt werden.</para
+></listitem>
+  <listitem
+><para
+>Werte im Diagramm anzeigen: Ist die Option angekreuzt, werden die Werte für die gewählten Datenpunkte im Diagramm selbst angezeigt.</para
+></listitem>
+  <listitem
+><para
+>Standardmäßig als Diagramm zeigen: Beim Öffnen des Berichts wird sofort ein Diagramm angezeigt.</para
+></listitem>
+  <listitem
+><para
+>Linienbreite: Die Breite der gezeichneten Linien im Diagramm.</para
+></listitem>
+</itemizedlist>
+</para>
+
+</sect2>
+
+<sect2>
+<title
+>Andere Karteikarten</title>
+<para
+>Die anderen Unterfenster in diesem Dialog sind die gleichen wie im Suchformular für Buchungen. Bitte schauen Sie in das <link linkend="details.search"
+>Kapitel</link
+> für weitere Informationen.</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.reports.charts">
+<title
+>Grafiken &amp; Diagramme</title>
+
+<sect2>
+<title
+>Anzeige als Diagramm</title>
+
+<para
+>Jeder Bericht kann entweder in Textform oder in grafischer Form als Diagramm betrachtet werden. Für beide Darstellungsvarianten werden die gleichen Berichtkonfigurationen verwendet. Sie können ganz einfach zwischen beiden Darstellungsformen wechseln, indem Sie den Knopf <guibutton
+>Diagramm</guibutton
+> oder <guibutton
+>Bericht</guibutton
+> am oberen Rand des Fensters drücken. </para>
+
+<para
+>Sie sollten auf die Menge der in Ihrem Diagramm anzuzeigenden Daten achten. Wenn Sie nicht entsprechend umsichtig sind und die gleiche Konfiguration für die Text- und Diagrammdarstellung verwenden, kann es passieren, dass das angezeigte Diagramm unaufgeräumt, unansehnlich und wenig informativ wird. &kmymoney; kann Sie nicht zwingen, dass die Diagramme les- und brauchbar bleiben. </para>
+
+</sect2>
+
+<sect2>
+<title
+>Verfügbare Diagrammtypen</title>
+
+<sect3>
+<title
+>Liniendiagramm</title>
+
+<para
+>Ein Liniendiagramm ist eines der einfachsten Arten eines Diagramms. Es gibt für jede Datenreihe eine Linie. Normalerweise ist eine Datenreihe ein einzelnes Konto oder eine Kategorie; weiter unten finden Sie weitere Informationen darüber. Die Zeitperiode erstreckt sich über die horizontale Achse (X-Achse), die Werte über die vertikale Achse (Y-Achse) auf der linken Seite. </para>
+
+<para
+>Der Detaillierungsgrad für jede Zeile wird im Unterfenster <link linkend="details.reports.config.rowscolumns"
+>Zeilen/Spalten</link
+> der Berichtskonfiguration festgelegt. Wenn Sie dort <quote
+>Oberstes Level</quote
+> auswählen, wird für jedes Konto auf der obersten Ebene eine Linie dargestellt und zeigt die Gesamtsumme aller darunterliegenden Kategorien oder Konten. Wenn Sie stattdessen  <quote
+>Gruppen</quote
+> auswählen, wird das Diagramm jeweils eine Linie für Einnahmen, Ausgaben, Anlagen und Verbindlichkeiten (abhängig von den anderen Einstellungen) anzeigen. </para>
+</sect3>
+
+<sect3>
+<title
+>Balkendiagramm</title>
+
+<para
+>Das Balkendiagramm arbeitet exakt so wie das Liniendiagramm, außer dass es einen Balken für jede Datenreihe pro Zeitabschnitt gibt. </para>
+</sect3>
+
+<sect3>
+<title
+>Tortendiagramm</title>
+
+<para
+>Das Tortendiagramm ist das einfachste verfügbare Diagramm. Es zeigt nur einen einzigen Zeitabschnitt, anstatt die Werte über einen Zeitbereich anzuzeigen. Dieser Bericht zeigt nur die Gesamtsummen eines beliebigen ausgewählten Berichts. Wenn Ihr Bericht so konfiguriert wurde, dass die Währungen nicht in die Basiswährung umgerechnet werden, dann werden keine Gesamtsummen berechnet und somit ist dieser Bericht wenig hilfreich. </para>
+</sect3>
+
+<sect3>
+<title
+>Ringdiagramm</title>
+
+<para
+>Ein Ringdiagramm ist dem Tortendiagramm sehr ähnlich, außer dass jeder <quote
+>Ring</quote
+> einen Zeitbereich im Bericht repräsentiert. </para>
+</sect3>
+
+</sect2>
+
+</sect1>
+</chapter>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.categories">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail;</author>
+    <author
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+  </authorgroup>
+  <date
+>6 de febrer de 2020</date>
+  <releaseinfo
+>5.0.8</releaseinfo>
+</chapterinfo>
+
+<title
+>Categories</title>
+
+<para
+>La vista de les categories proporciona un resum de totes les categories existents a la base de dades actual. Les categories es desglossen en Ingressos i Despeses, i es mostrarà un saldo per a cada categoria. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="categories.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect1 id="details.categories.create">
+<title
+>Crear una categoria</title>
+
+<para
+>Hi ha tres maneres per a crear una categoria nova: seleccioneu l'element de menú <menuchoice
+><guimenu
+>Categoria</guimenu
+> <guimenuitem
+>Categoria nova</guimenuitem
+></menuchoice
+>, seleccioneu un pare en l'arbre a la vista de les categories, feu-hi clic dret i seleccioneu l'opció <guimenuitem
+>Categoria nova</guimenuitem
+> o escriviu directament el nom de la categoria nova en afegir o editeu una operació en el Llibre major. Fer qualsevol d'aquests passos us dirigirà al diàleg <guilabel
+>Crea una categoria nova</guilabel
+>. Aquest diàleg conté tres pestanyes: <guilabel
+>General</guilabel
+>, <guilabel
+>Jerarquia</guilabel
+> i <guilabel
+>Impostos</guilabel
+>. La pestanya <guilabel
+>General</guilabel
+> inclou camps editables per al nom nou de la categoria, tipus i divisa (amb la divisa predeterminada preseleccionada), així com opcions per a l'Últim número de xec, Notes i una casella de selecció per a l'assignació del Centre de despesa requerit. A la pestanya <guilabel
+>Jerarquia</guilabel
+>, podreu seleccionar el compte pare adequat per a la categoria. Finalment, a la pestanya <guilabel
+>Impostos</guilabel
+>, hi ha camps per a habilitar i configurar l'IVA, i una casella de selecció per a incloure aquesta categoria en els informes relacionats amb els impostos. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="categoryedit.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect1>
+
+<sect1 id="details.categories.edit">
+<title
+>Editar una categoria</title>
+
+<para
+>Per a editar una categoria, feu clic dret sobre un nom de categoria i trieu <guimenuitem
+>Edita la categoria</guimenuitem
+>. Apareixerà una finestra amb les mateixes tres pestanyes que en el diàleg categoria nova: <guilabel
+>General</guilabel
+>, <guilabel
+>Jerarquia</guilabel
+> i <guilabel
+>Impostos</guilabel
+>. Cada pestanya permet editar certs detalls de la categoria. </para>
+
+<para
+>La pestanya <guilabel
+>General</guilabel
+> permet editar el nom de la categoria, qualsevol nota que vàreu introduir en crear-la, l'Últim número de xec i l'estat de la casella de selecció Centre de despesa amb l'assignació requerida. A les entrades Tipus, Divisa i Preu no es podran canviar des dels seus valors inicials. </para>
+
+<para
+>La pestanya <guilabel
+>Jerarquia</guilabel
+> permet canviar la categoria pare fent clic sobre una altra categoria en aquesta vista de la jerarquia de les categories. En una versió anterior del &kmymoney;, era possible canviar el pare d'una categoria arrossegant i deixant anar. Aquesta funcionalitat tornarà en una versió futura. </para>
+
+<para
+>La pestanya <guilabel
+>Impostos</guilabel
+> permet assignar o canviar els detalls de l'IVA, o alterar l'assignació automàtica de l'IVA. També permet alternar si la categoria s'inclourà o no en certs informes relacionats amb els impostos. </para>
+</sect1>
+
+<sect1 id="details.categories.vat">
+<sect1info>
+  <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+</sect1info>
+
+<title
+>Implementació de l'IVA</title>
+	
+<para
+>Podreu crear una categoria de despeses/ingressos a dins d'una categoria d'IVA, el qual vol dir que rebreu tots els desglossaments que en realitat conformen el pagament de l'IVA al govern. També podreu introduir un percentatge específic. </para>
+ 
+<para
+>A les categories se'ls pot assignar una categoria per a l'IVA, la qual permetrà al &kmymoney; fer el desglossament en dues parts d'una operació per a una categoria, una per a la categoria i una altra per a l'IVA. Depenent de la configuració de l'indicador per a l'import brut/net, l'import que introduïu per a l'operació serà l'import brut o net. </para>
+ 
+<para
+>Exemple: a Alemanya, hi ha tres percentatges per a l'IVA (0%, 7% i 19%). De manera que tinc una categoria principal «IVA pagat» i tres subcategories, una per a cada percentatge. Les creo tant a la banda dels ingressos com de les despeses, tenint sis categories en total. Per als productes que compro, selecciono una de les categories esmentades anteriorment com «assignació de la categoria per a l'IVA». </para>
+ 
+<para
+>Quan compro productes, els introdueixo en una operació. Suposem que he seleccionat el mètode d'introducció import brut, un cop introdueixi la categoria i l'import, el &kmymoney; reconeixerà que hi ha una assignació per a l'IVA i calcularà la part de l'IVA, crearà un segon desglossament amb el compte per a l'IVA i l'import de l'IVA, i reduirà l'import de la categoria. </para>
+ 
+<para
+>El mateix s'aplica a les categories d'ingressos, però a l'inrevés. Espero que tingui sentit. </para>
+
+</sect1>
+
+<sect1 id="details.categories.delete">
+<title
+>Suprimir una categoria</title>
+
+<para
+>Per a suprimir una categoria, seleccioneu-la a l'arbre, feu-hi clic dret perquè aparegui el menú emergent i seleccioneu <guimenuitem
+>Suprimeix</guimenuitem
+>. Si la categoria no té operacions, planificacions o pressupostos associats, i no s'ha definit com a categoria predeterminada per a les operacions noves amb qualsevol beneficiari, se suprimirà. </para>
+
+<para
+>Si la categoria té algun d'aquests elements, es mostrarà una finestra emergent que us permetrà triar una altra categoria a la qual es podran reassignar tots aquests elements abans de suprimir la categoria. </para>
+
+<para
+>Si suprimiu una categoria que és la pare de qualsevol altra categoria, es mostrarà un diàleg perquè trieu si voleu suprimir aquesta categoria i totes les seves subcategories o només la categoria pare. Si trieu suprimir la categoria pare, totes les seves subcategories es mouran a la seva categoria pare. </para>
+
+<para
+>Recordeu que la supressió d'algunes categories pot demanar on reassignar les seves dades i també si cal suprimir o no les subcategories. </para>
+</sect1>
+
+<sect1 id="details.categories.open_ledger">
+<title
+>Obrir el llibre major per a una categoria</title>
+
+<para
+>En fer clic dret sobre qualsevol categoria, hi ha una opció per a obrir un llibre major per a aquesta categoria. També podreu fer doble clic sobre la categoria. Quan se selecciona aquesta opció, el &kmymoney; mostrarà un llibre major amb totes les operacions per a la categoria seleccionada. Això us permetrà revisar amb rapidesa totes les operacions en detall per a la categoria seleccionada. A continuació, feu clic dret sobre qualsevol operació per a obtenir detalls addicionals sobre l'operació específica i, en última instància, permetre qualsevol edició que sigui necessària. Cal tenir en compte que no podreu editar una operació en el llibre major de la categoria. Haureu de canviar a la vista del llibre major per a l'altre compte, utilitzant una de les seleccions al menú emergent quan feu clic dret sobre l'operació. </para>
+</sect1>
+</chapter>
+

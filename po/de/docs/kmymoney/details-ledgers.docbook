@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.ledgers">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-23</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Kontenbuch</title>
+
+<sect1 id="details.ledgers.view">
+<title
+>Die Kontenbuchansicht</title>
+
+<para
+>In der Kontenbuchansicht liegt das Herz der Funktionalität von &kmymoney;. Diese Ansicht dient dazu, in den verschiedenen Konten Buchungen zu überprüfen und neue Buchungen anzulegen. Die Ansicht ist in drei Bereiche aufgeteilt: der Filterbereich, die Buchungsliste und der Eingabebereich. </para>
+
+<para
+>Diese Ansicht erlaubt Ihnen zahlreiche Schlüsselfunktionen: Suchen und Ansehen von Buchungen, Eingabe neuer Buchungen und das Bearbeiten oder Löschen von existierenden Buchungen. Weiterhin können Sie Details der Konten bearbeiten und Ihre Konten mit den Kontoauszügen Ihrer Bank abgleichen. </para>
+  
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="ledgerview-numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Kontenbuchansicht</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Die Ansicht besteht aus drei Elementen: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Der Filterbereich</para
+></listitem>
+  <listitem
+><para
+>Die Buchungsliste</para
+></listitem>
+  <listitem>
+    <para
+>Das Eingabeformular für Buchungen, welches abhängig von den &kappname; Einstellungen sichtbar ist. </para>
+  </listitem>
+</itemizedlist>
+
+<sect2 id="details.ledgers.view.filter">
+<title
+>Der Filterbereich</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="accountdropdown.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Filterbereich</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Sie können ein Konto über die Auswahlliste im oberen Bereich des Fensters auswählen. Achten Sie einmal darauf, wie sich das <link linkend="details.ledger.transactionform"
+>Buchungs-Eingabeformular</link
+> im unteren Bereich des Kontenbuches abhängig vom Kontentyp ändert. </para>
+
+<para
+>Rechts von der Kontenauswahlliste gibt zwei weitere Felder. Das Such-Feld fungiert als Filter für die in der Liste anzuzeigenden Buchungen: es werden nur die Buchungen angezeigt, die den in das Suchfeld eingegebenen Text enthalten.  Es ist dabei unerheblich, in welchem der Eingabefelder einer Buchung der Text vorhanden ist. Ganz rechts befindet sich eine Status-Auswahlliste. Es wurden nur die Buchungen angezeigt, die dem ausgewählten Eintrag entsprechen. </para>
+
+</sect2>
+
+<sect2>
+<title
+>Die Buchungsliste</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="translist.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Buchungsliste</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Nachdem Sie eine Buchung eingegeben haben, erscheint sie in der Buchungsliste. Sie können die Eigenschaften einer Buchung oder das Anlegen einer neuen Buchung auch direkt in der Liste durchführen. Die Buchungsliste ist standardmäßig nach Datum aufsteigend sortiert, d.h. die neueste Buchung befindet sich am Ende der Liste. Durch einen Klick mit der rechten Maustaste auf die Kopfzeile der Buchungsliste können Sie die Sortierkriterien ändern.  Wie Sie das Standardsortierkriterium ändern können, finden Sie im Abschnitt <link linkend="details.settings.register.sorting"
+>Unterfenster "Sortierung"</link
+>  im Kapitel <link linkend="details.settings"
+>&kmymoney;-Einstellungen</link
+>. </para>
+
+<para
+>Beachten Sie, dass das die Spalte „Saldo“ auf der aktuell angezeigten Sortierreihenfolge basiert und nicht berechnet wird, wenn die Anzeige mit dem Suchfeld oder dem Auswahlfeld „Buchung“ wie vorher beschrieben gefiltert wird. </para>
+
+<para
+>Unter der Buchungsliste werden drei Werte angezeigt: </para>
+
+<formalpara
+><title
+>Zuletzt abgeglichen</title>
+  <para
+>Diese ist das Datum des letzten Abgleichs des Kontos. Das Abgleichen ist ein wichtiger Prozess für viele Konten, weitere Informationen dazu finden Sie  <link linkend="details.reconcile"
+>hier</link
+>. </para>
+</formalpara>
+
+<formalpara
+><title
+>Verrechnet</title>
+  <para
+>Dies ist die Gesamtsumme aller verrechneten und abgeglichenen Buchungen für dieses Konto. in diesem <link linkend="details.ledgers.cleared"
+>Abschnitt</link
+> finden Sie weitere Informationen über den Status Verrechnet und Abgeglichen von Buchungen. </para>
+</formalpara>
+
+<formalpara
+><title
+>Saldo</title>
+  <para
+>Hier wird der Gesamtsaldo des Kontos angezeigt, der sich aus der Summe aller Buchungen für dieses Konto ergibt. Wenn Sie jedoch mehrere Konten in der Kontenliste ausgewählt haben, wird hier die Summe der Buchungen aller ausgewählten Konten gezeigt. Ist nur ein Konto gewählt, wird auch nur der Gesamtsaldo diese Kontos gezeigt.  </para>
+</formalpara>
+</sect2>
+
+<sect2>
+<title
+>Das Buchungseingabeformular</title>
+
+<para
+>Das genaue Aussehen des Bereiches unterhalb der Buchungsliste hängt von den Einstellungen und dem Kontentyp ab, der angezeigt wird. Grundsätzlich enthält der Bereich Eingabefelder für alle Details einer einzelnen Buchung, sowie Knöpfe für verschiedenen Aktionen, die man auf eine Buchung anwenden kann. Dies wird in den folgenden Abschnitten näher beschrieben. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledger.transactions">
+<title
+>Buchungen eingeben</title>
+
+<para
+>Es gibt zwei Möglichkeiten, Buchungen in das Kontenbuch einzutragen: entweder über das Buchungsformular unterhalb der Buchungsliste, oder durch das Eingeben direkt in die Buchungsliste. Standardmäßig wird das Buchungsformular unterhalb der Buchungsliste angezeigt und deshalb soll zunächst diese Methode erläutert werden. </para>
+
+<para
+>Die Felder im Buchungsformular entsprechenden den in der Buchungsliste angezeigten Feldern. Zusätzliche Felder, wie ein Bemerkungsfeld zum Hinterlegen detaillierterer Informationen zur Buchung und eine Kategorieauswahl. Über den Split-Knopf können Sie eine Buchung mehreren Kategorien zuordnen ("splitten"). </para>
+</sect1>
+
+<sect1 id="details.ledger.transactionform">
+<title
+>Das Buchungsformular verwenden</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Buchungsformular</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Das Buchungsformular im unteren Bereich des Kontenbuches ist die Bedienungsoberfläche zum Anlegen von Buchungen. </para>
+
+<para
+>Abhängig davon, welchen Typ oder welche Art einer Buchung Sie anlegen möchten, sind verschiedene Unterfenster im Buchungsformular verfügbar. Klicken Sie auf das Unterfenster, das Ihre Buchung am ehesten beschreibt (Gutschrift, Umbuchung, Belastung) und es erscheinen die entsprechenden Eingabefelder, die Sie nun füllen können. </para>
+
+<para
+>Beachten Sie, dass die gewählte Art der Buchung von &kmymoney; nicht direkt verwendet wird. Die Information ist notwendig, um Buchungen in Berichten zu gruppieren. </para>
+
+<para
+>Wenn Sie sich nicht sicher sind, welche Buchungsart Sie auswählen sollen, verwenden Sie "Gutschrift" für auf dem Konto eingehende Zahlungen, "Belastung" für vom Konto abgehende Zahlungen und "Umbuchung" für Zahlungen zwischen verschiedenen Konten. Die verschiedenen Buchungsarten und ihre Unterschiede werden an anderer Stelle intensiver erläutert. </para>
+
+<para
+>Wählen Sie eine Buchungsart durch Klicken auf eine der Karteikarten. </para>
+
+<sect2>
+<title
+>Die Daten einer Buchung</title>
+
+<para
+>Geben Sie Ihre Daten anhand der folgenden Informationen in die Eingabefelder ein. Viele Eingabefelder haben eine automatische Vervollständigs-Funktion eingeschaltet. Das bedeutet, dass Ihnen &kmymoney; nach Eingabe der ersten Buchstaben automatisch alle übereinstimmenden Einträgen anzeigt. Um einen Eintrag auszuwählen, klicken Sie ihn mit der Maus an oder wählen Sie ihn mit der Tastatur aus. Sollte sich der gewünschte Text nicht in der Liste mit übereinstimmenden Einträgen befinden, fahren Sie einfach mit der Eingabe fort, um die Einträge in der Liste mit übereinstimmenden Einträgen einzugrenzen. Wenn Sie nun später den gleichen Text eingeben möchten, wird &kmymoney; ihn automatisch für Sie finden und ihn in der Liste mit übereinstimmenden Einträgen anbieten, nachdem Sie die ersten Zeichen des Textes eingegeben haben. </para>
+
+<sect3>
+<title
+>Der Empfänger</title>
+
+<para
+>Der Empfänger/Zahlungsempfänger ist derjenige, von dem das Geld kam, bzw. an den das Geld gezahlt wurde. Wenn der Zahlungsempfänger &kmymoney; noch nicht bekannt ist, werden Sie gefragt, ob Sie ihn als neuen Datensatz in die Liste der Zahlungsempfänger aufnehmen möchten. Alle weiteren Informationen zum Zahlungsempfänger oder Zahlenden, wie seine Adresse, können später in der Empfänger Ansicht hinzugefügt werden. </para>
+</sect3>
+
+<sect3>
+<title
+>Die Kategorie</title>
+
+<para
+>Die Kategorie ordnet eine Buchung für Berichts- und Buchhaltungszwecke einer Einnahmen- oder Ausgabenkategorie zu. Dies ermöglicht es Ihnen, bestimmte Buchungen zu gruppieren. Geben Sie den Namen der Kategorie in das entsprechende Feld ein. Wenn Sie eine noch nicht existierende Kategorie eingeben, wird &kmymoney; fragen, ob Sie die Kategorie neu anlegen möchten. </para>
+
+<para
+>Wenn Sie einer Buchung mehrere verschiedene Kategorien zuordnen möchten, erlaubt Ihnen &kmymoney; dies auch. Ein Beispiel hierfür wäre eine Rechnung für ein Abendessen in einem Restaurant über 50 EUR, wobei Sie 10 EUR für das Essen, 20 EUR für Getränke und 20 EUR Trinkgeld gezahlt haben. Die Transaktion könnte demnach drei Kategorien zugewiesen werden: Essen, Getränke und Trinkgeld. Um dies zu tun, müssen Sie eine <link linkend="details.ledgers.split"
+>Split-Buchung</link
+> erzeugen. Wie das funktioniert, wird weiter unten beschrieben. </para>
+
+<para
+>Schauen Sie in den Abschnitt spezielle <link linkend="reference.widgets"
+>&kmymoney;-Felder</link
+> für weitere Informationen zum Gebrauch dieses Feldes. </para>
+</sect3>
+
+<sect3>
+<title
+>Stichwörter</title>
+
+<para
+>Stichwörter wurden in Version 4.7 von &kmymoney; eingeführt und sind bisher noch nicht vollständig in diesem Handbuch dokumentiert. Stichwörter ähneln Kategorien und können zur Verwaltung von orthogonalen Ansichten zu Kategorien verwendet werden. Sie könnten zum Beispiel eine Kategorie für jede unterschiedliche Arten von Ausgaben für Autos und dann ein Stichwort für jedes einzelne Fahrzeug benutzen. Wie bei den Kategorien können Sie einen Eintrag im Auswahlfeld wählen oder einen neuen Namen für ein Stichwort eingeben. Dann werden Sie gefragt, ob Sie ein neues Stichwort mit diesem Namen erstellen möchten. </para>
+</sect3>
+
+<sect3>
+<title
+>Die Notiz</title>
+
+<para
+>Eine mehrzeilige Notiz kann in das Notizfeld eingetragen werden, um zu vermerken, wofür genau die Buchung gut war. </para>
+</sect3>
+
+<sect3>
+<title
+>Die Schecknummer</title>
+
+<para
+>Eine Schecknummer kann bei Bedarf eingegeben werden. Die Schecknummer kann ständig sichtbar geschaltet werden. Dies kann im Einstellungsdialog von &kappname; konfiguriert werden. </para>
+</sect3>
+
+<sect3>
+<title
+>Das Datum</title>
+
+<para
+>Das Buchungsdatum muss eingegeben werden, wann die Buchung stattfand. Schauen Sie in den Abschnitt spezielle <link linkend="reference.widgets"
+>&kmymoney;-Felder</link
+>, um mehr darüber zu erfahren, wie Sie in Datumsfelder schneller und einfacher ein Datum eintragen können. </para>
+</sect3>
+
+<sect3>
+<title
+>Der Betrag</title>
+
+<para
+>Zum Schluss geben Sie noch den Betrag der Buchung in das entsprechende Eingabefeld ein. Ein einfacher Taschenrechner steht Ihnen zur Verfügung, wenn Sie den kleinen Knopf rechts neben dem Eingabefeld drücken. Alternativ können Sie auch das Prozentzeichen % oder eine Formel, wie <emphasis
+>12 + 3</emphasis
+>. Sobald das Pluszeichen eingegeben wird, öffnet sich automatisch der Taschenrechner. </para>
+
+<para
+>Wenn Sie sich versichert haben, dass alle Felder korrekt ausgefüllt sind, klicken Sie den Knopf <guibutton
+>Eintragen</guibutton
+>. Wenn Sie aus Versehen auf <guibutton
+>Eintragen</guibutton
+> gedrückt haben, bevor Sie alle Daten eingegeben haben, drücken Sie einfach auf <guibutton
+>Bearbeiten</guibutton
+>, um die Eingabe Ihrer Daten fortzusetzen. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledger.direct">
+<title
+>Direkte Eingabe einer Buchung in die Liste</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform-off.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Direkte Buchungseingabe</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Die zweite Methode eine Buchung im Kontenbuch anzulegen erfolgt in der Liste der Buchungen. </para>
+
+<para
+>Damit Sie diese Funktion nutzen können, müssen Sie &kmymoney; zunächst mitteilen, dass Sie das Buchungsformular nicht mehr nutzen möchten. Öffnen Sie den Einrichtungsdialog und deaktivieren Sie die Option <guilabel
+>Buchungsformular anzeigen</guilabel
+>. </para>
+
+<para
+>Dies geschieht durch den Menüpunkt <menuchoice
+><guimenu
+>Einstellungen</guimenu
+> <guimenuitem
+>&kmymoney; einrichten ...</guimenuitem
+></menuchoice
+>. Wählen Sie im erscheinenden Einstellungs-Dialog das Symbol <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="ledgers_view.png"/></imageobject
+></inlinemediaobject
+> Kontenbuch</guiicon
+> aus der Liste auf der linken Seite. Die Option, die Sie deaktivieren müssen lautet <guilabel
+>Buchungsformular anzeigen</guilabel
+>. Anschließend klicken Sie auf den Knopf <guibutton
+>OK</guibutton
+>, um dann Ihre Buchungen direkt in die Buchungsliste im Kontenbuch eintragen zu können. </para>
+
+<sect2>
+<title
+>Bearbeitung starten</title>
+
+<para
+>Um eine neue Buchung in das Kontenbuch einzutragen, klicken Sie entweder einen leeren Eintrag an, drücken die Taste <keycombo action="simul"
+>&Ctrl;<keycap
+>Einfg</keycap
+></keycombo
+>, oder Sie betätigen den Knopf <guibutton
+>Neu</guibutton
+> am unteren Rand des Fensters. Die Tasten <keycap
+>Pfeil hoch</keycap
+> und <keycap
+>Pfeil runter</keycap
+> erlaubt Ihnen das Navigieren durch die Liste. Nach Drücken der &Enter;taste oder einem Doppelklick auf die gewünschte Buchung werden die Eingabefelder angezeigt und Sie können Ihre Eingaben vornehmen. </para>
+
+<para
+>Um zum nächsten Feld zu wechseln, drücken Sie die Tabulatortaste. Wenn Sie alles eingegeben haben, drücken Sie &Enter;, um Ihre Änderungen zu speichern oder &Esc;, um die Bearbeitung abzubrechen. </para>
+
+<para
+>Falls die Option <guilabel
+>Eingabetaste wechselt zwischen den Feldern</guilabel
+> aktiviert ist, können Sie mit Hilfe von &Enter; zum nächsten Eingabefeld wechseln, anstatt die &Tab;-Taste zu verwenden. Wenn Sie beim letzten Eingabefeld &Enter; drücken wird die Buchung gespeichert. </para>
+
+<para
+>Welche der beiden Eingabemethoden Sie verwenden, liegt ganz bei Ihnen und ist nur eine Frage Ihrer persönlichen Vorliebe. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledgers.split">
+<title id="details.ledgers.split.title"
+>Split-Buchungen</title>
+
+<para
+>Die Funktionalität der Split-Buchungen erlaubt es Ihnen, einer Buchung mehrere Kategorien zuzuordnen, beispielsweise um verschiedene während eines einzelnen Einkaufs erworbenen Dinge einer separaten Kategorie zuzuordnen. </para
+> 
+
+<para
+>Um eine Split-Buchung anzulegen, erstellen Sie wie gewohnt eine neue Buchung und geben Sie auch den Gesamtbetrag ein. Nun drücken Sie, anstatt eine einzelne Kategorie auszuwählen, den Knopf <guibutton
+>Splitten</guibutton
+>. Wenn Sie bereits eine einzelne Kategorie eingetragen haben, wird diese der erste Eintrag im Split-Buchungs-Editor. </para
+> 
+ 
+<para
+>Im Split-Buchungs-Editor klicken Sie doppelt auf eine leere Zeile, um eine neue Split-Buchung einzutragen, oder drücken Sie <keycombo action="simul"
+>&Ctrl;<keycap
+>Einfg</keycap
+></keycombo
+>.  Wählen Sie die passende Kategorie, hinterlegen Sie auf Wunsch eine kurze Bemerkung und geben Sie zum Schluss noch den Betrag der Split-Buchung ein. Um die Splitzeile zu speichern, drücken Sie den grünen Haken unter der Kategorie. Um die Eingabe abzubrechen drücken Sie auf das rote Kreuz. </para
+> 
+ 
+<para
+>Nach Eingabe einer Splitzeile wird im unteren Bereich des Split-Buchungs-Editor angezeigt, welche Restsumme der Buchung noch nicht einer Kategorie zugewiesen wurde. Nach Eingabe aller gewünschten Splitzeilen drücken Sie den Knopf <guibutton
+>OK</guibutton
+>, um die gesamte Buchung zu speichern. Wenn immer noch eine nicht zugewiesene Restsumme verblieben ist, werden Sie gefragt, ob Sie zum Split-Buchungs-Editor zurückkehren, die Gesamtsumme der Buchung anpassen oder einen Rest der Buchung keiner Kategorie zuweisen möchten. </para>
+
+<para
+>Das Kategoriefeld im Buchungsformular oder der Buchungsliste zeigt nun den Text <emphasis
+>Split-Buchung</emphasis
+> an. </para
+> 
+
+<para>
+	<screenshot>
+	<screeninfo
+>Split-Buchungen</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="split_transaction.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Split-Buchung</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+</sect1>
+
+<sect1 id="details.ledger.edit">
+<title
+>Buchungen bearbeiten</title>
+<para
+>Um eine Buchung zu bearbeiten, wählen Sie die entsprechende Buchung in der Buchungsliste und drücken den Knopf <guibutton
+>Bearbeiten</guibutton
+> im Buchungsformular, oder klicken Sie mit der rechten Maustaste auf die Buchung wählen Sie <guimenuitem
+>Bearbeiten</guimenuitem
+> aus dem Kontextmenü. Wenn Sie den Modus entsprechenden Modus aktiviert haben und die Buchungen direkt in der Buchungsliste bearbeiten, können Sie auch einfach mit der Maus doppelt auf die gewünschte Buchung klicken, oder &Enter; drücken, wenn die betreffende Buchung ausgewählt ist. </para>
+</sect1>
+
+<sect1 id="details.ledger.delete">
+<title
+>Buchungen löschen</title>
+
+<para
+>Um eine Buchung zu löschen, wählen Sie sie in der Buchungsliste aus und klicken Sie sie mit der rechten Maustaste an. Im erscheinenden Kontextmenü wählen Sie <guimenuitem
+>Löschen</guimenuitem
+>, oder Sie klicken auf <guibutton
+>Löschen</guibutton
+> im Buchungsformular. </para>
+</sect1>
+
+<sect1 id="details.ledgers.match">
+<title id="details.ledgers.match.title"
+>Buchungen zuordnen</title>
+
+<para
+>Wenn Sie Buchungen importieren (z.B. QIF, OFX oder HBCI), versucht &kmymoney; die importierten Buchungen automatisch den bereits im Kontenbuch vorhandenen Buchungen zuzuordnen. Standardmäßig darf sich das Datum der Buchungen bei der automatischen Zuordnung um 4 Tage unterscheiden. Diese Voreinstellung kann in den Einstellungen zum Kontenbuch auf der Karteikarte <guilabel
+>Importieren</guilabel
+> geändert werden. Jede Buchung, die automatisch zugeordnet werden konnte, wird grün markiert. Nach Abschluss des Imports sollten Sie die automatisch zugeordneten Buchungen überprüfen und entweder akzeptieren oder sie wieder trennen. </para>
+
+<para
+>Sollten Sie importierte Buchungen finden, die nicht automatisch zu bereits bestehenden Buchungen im Kontenbuch zugeordnet wurden, besteht die Möglichkeit diese manuell zuzuordnen. Beachten Sie, dass es einen Unterschied macht, ob Sie zwei Buchungen zuordnen, oder eine der beiden einfach löschen, auch wenn es auf den ersten Blick zum gleichen Ergebnis führt, nämlich dass nur eine Buchung übrig bleibt. Gerade bei OFX und HBCI ist es besonders wichtig, dass Sie die importierte Buchung nicht einfach löschen, denn beim nächsten Import würden die gelöschten Buchungen erneut auftauchen. Der Grund ist, dass moderne Formate wie OFX und HBCI sogenannte <quote
+>Transaktions-IDs</quote
+> verwenden, um Buchungen eindeutig zu identifizieren. Wenn Sie nun eine so importierte Buchung löschen, wird natürlich auch die Transaktions-ID gelöscht, sodass der Importer beim nächsten Import nicht mehr weiss, dass die Buchung bereits importiert wurde. Also wird sie erneut importiert und taucht wieder im Kontenbuch auf. </para
+> 
+
+<para
+>Die Lösung besteht darin, &kmymoney; durch eine manuelle Zuordnung mitzuteilen, dass die beiden Buchungen identisch sind. Dies ermöglicht Ihnen, eine importierte Buchung mit einer manuell eingegebenen (nicht importierten) Buchung zu verknüpfen/zuzuordnen. Um zwei Buchungen manuell zuzuordnen, markieren Sie die erste Buchung, indem Sie sie mit der Maus anklicken. Anschließend markieren Sie auch die zweite Buchung genauso, nur drücken Sie dabei gleichzeitig die &Ctrl;-Taste und wählen <guimenuitem
+>Zuordnen</guimenuitem
+> aus dem Kontextmenü. Die Hintergrundfarbe der Buchung ändert sich zu einem blassen Grün. Hierdurch werden die beiden Buchungen einander zugeordnet und zusammengeführt. Die Beträge der beiden Buchungen müssen identisch sein, damit die Zuordnung funktioniert. Nur das Datum der beiden Buchungen darf sich um das oben erwähnte eingestellte Zeitfenster unterscheiden. Wenn Sie mit dem Ergebnis zufrieden sind, klicken Sie die zugeordnete Buchung mit der rechten Maustaste an und wählen Sie den Knopf <guibutton
+>Annehmen</guibutton
+>. </para>
+
+<para
+>Während des Imports von Onlinebuchungen, entweder direkt oder durch das Einlesen einer heruntergeladenen Datei, versucht &kmymoney; nach seinen Möglichkeiten eine automatische Zuordnung, basierend auf dem Namen des Zahlungsempfängers und dem Betrag der Buchung. Im Falle einer falschen automatischen Zuordnung kann die zugeordnete Buchung wieder getrennt werden. </para>
+
+<note>
+  <para
+>Es ist nicht möglich, zwei Buchungen einander zuzuordnen, die beide importiert wurden. Genauso ist es nicht möglich, zwei Buchungen einander zuzuordnen, die beide manuell eingegeben wurden. </para>
+</note>
+</sect1>
+
+<sect1 id="details.ledgers.cleared">
+<title
+>Der Status "Verrechnet"</title>
+
+<para
+>Eine Buchung kann einen von folgenden drei möglichen Zustände haben: nicht abgeglichen (N), verrechnet (V) und abgeglichen (A). Wenn Sie eine neue Buchung eingeben, hat diese den Status "nicht abgeglichen". Sobald die Buchung der Bank ankommt, können Sie sie mit Ihrem Kontenbuch verrechnen und die Buchung in den Status "V" setzen. Sobald Sie einen Kontoauszug von Ihrer Bank erhalten, sollten alle verrechneten Buchungen darauf zu finden sein. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Der Status "Verrechnet"</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="cleared_state.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Verrechnet-Status</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Wenn Sie Ihr Konto <link linkend="details.reconcile"
+>abgleichen</link
+>, markieren Sie alle Buchungen als "verrechnet" und überprüfen, ob die Differenz zwischen dem Anfangskontostand und dem Endkontostand der Summe der verrechneten Buchungen entspricht und mit dem Endkontostand des Kontoauszugs übereinstimmt. Wenn das der Fall ist, können Sie den "Abgleich beenden", wobei automatisch der Status aller verrechneten Buchungen von "Verrechnet" (V) in "Abgeglichen" (A) geändert wird. </para>
+
+<para
+>Wenn Sie eine Buchung bearbeiten möchten, die mindestens eine Split-Buchung enthält die bereits als abgeglichen (A) gekennzeichnet wurde, werden Sie gewarnt. </para>
+
+<para
+>Es existiert noch ein vierter Status ("eingefroren"), der aber nicht gesetzt werden kann. Dieser ist für einen späteren Gebrauch vorgesehen. Wenn eine Buchung mindestens eine Splitzeile im Status "eingefroren" besitzt, kann die Buchung nicht mehr bearbeitet werden. </para>
+
+</sect1>
+
+<sect1 id="details.ledgers.settings"
+><title id="details.ledgers.settings.title"
+>Buchungseinstellungen verändern</title>
+
+<para
+>Es gibt mehrere Optionen, die das Aussehen und das Verhalten der Buchungen in der Kontenbuchansicht beeinflussen. Diese Einstellungen finden Sie durch Auswahl von <menuchoice
+><guimenu
+>Einstellungen</guimenu
+> <guimenuitem
+>&kmymoney; einrichten ...</guimenuitem
+> </menuchoice
+>aus dem Menü und durch Auswahl des <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="ledgers_view.png"/> </imageobject
+></inlinemediaobject
+>Kontenbuch</guiicon
+> Symbols aus der Liste auf der linken Seite des Einstellungs-Dialogfensters. </para
+> 
+
+<para
+>Die meisten Einstellungen sind selbsterklärend. Zur Veranschaulichung werden einige der möglichen Einstellungen aber trotzdem nachfolgend beschrieben. </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Buchungsformular anzeigen (auf der Karteikarte "Anzeige") - schaltet die Anzeige des Buchungsformulars für die Eingabe einer Buchung im unteren Bereich des Bildschirms an oder aus. Buchungen können trotzdem direkt in eine leere Zeile am Ende der Buchungsliste durch eine kompakte automatischen Eingabebereich direkt in der Liste eingegeben werden. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Die Bilder zeigen, wie die direkte Eingabemöglichkeit in der Buchungsliste im Vergleich zum Buchungsformular im unteren Bereich aussieht. </para>
+
+<para
+>Das Buchungseingabeformular</para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Das Buchungsformular</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Buchungsformular</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Buchungen werden direkt eingegeben</para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Buchungen direkt eingegeben</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform-off.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Direkte Eingabe</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Änderungen beibehalten, wenn eine andere Buchung ausgewählt wird - durch das Auswählen der nächsten Zeile in der Buchungsliste oder dem Split-Buchungs-Editor werden die vorher durchgeführten Änderungen beibehalten, anstatt der Standardeinstellung, dass Änderungen erst durch Klick auf den grünen Haken gespeichert werden. </para>
+  </listitem>
+</itemizedlist>
+
+</sect1>
+
+<sect1 id="details.ledgers.other">
+<title id="details.ledgers.other.title"
+>Andere Funktionen</title>
+
+<para
+>Weitere Optionen sind im Kontextmenü <guimenu
+>Buchungsoptionen</guimenu
+> verfügbar, das sich durch einen Klick mit der rechten Maustaste auf eine beliebige Buchung in der Liste öffnet. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Das Kontextmenü Buchungsoptionen</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="ledger_more.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Buchungsoptionen</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Mithilfe dieser Optionen können Sie zur Zahlungsempfänger-Seite springen, eine geplante Buchung anlegen und den Status "Verrechnet" oder "Abgeglichen" verändern. </para>
+
+<para
+>Um die Kontoinformationen aus dem Kontenbuch heraus zu bearbeiten, wählen Sie aus dem Menü den Punkt <guimenu
+>Konto</guimenu
+>. Aus diesem Menü können Sie die Kontendetails bearbeiten, sowie das Menü zum Abgleich des Kontos erreichen, welches Ihnen erlaubt, die Buchungen den Buchungen des Bankkontoauszugs oder der Kreditkartenabrechnung zuzuordnen. </para>
+</sect1>
+</chapter>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appendix id="installation">
+<appendixinfo>
+  <authorgroup>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+  </authorgroup>
+  <date
+>30/08/2014</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</appendixinfo>
+
+<title
+>Instalação</title>
+
+<para
+>Este apêndice descreve principalmente a instalação do &kappname; no sistema operacional &Linux;. A <link linkend="installation.nonlinux"
+>seção final</link
+> fala sobre os outros sistemas operacionais. </para>
+
+<sect1 id="installation.getting">
+<title
+>Como obter o &kappname;</title>
+
+<para
+>O &kappname; já existe há muito tempo e nós trabalhamos muito para uma integração completa no &kde;. As versões estáveis iniciais (1.0.x) necessitavam de bibliotecas do &kde; 3 e, por isso, não estavam disponíveis nas distribuições mais recentes do Linux, que já migraram para o &kde; 4. Contudo, com o lançamento da versão 4.5 em agosto de 2010, o &kappname; passou a ser facilmente compilado e instalado em qualquer versão do &kde; 4.3 ou superior. A versão atual, a 4.7, necessita do &kde; 4.6, especificamente do kdelibs e kdepimlibs. </para>
+
+<para
+>Embora o trabalho de migração do &kappname; para o novo KDE Frameworks 5 já tenha começado, o estado está muito preliminar e ainda não é possível usar o aplicativo. Esperamos que fique disponível na versão 5.0, que tem previsão de lançamento para o início de 2015. Até lá, se estiver interessado especificamente nesse trabalho, você deverá se inscrever na lista de discussão para desenvolvedores &devlist;. </para>
+
+<para
+>O resto desta seção irá descrever a instalação do &kappname; com o processo normal de instalação de aplicações na sua distribuição de Linux. A seção seguinte irá discutir a compilação a partir do código-fonte. </para>
+
+<sect2 id="installation.distribution">
+<title
+>Pacotes oficiais da distribuição</title>
+<para
+>A melhor forma de instalar o &kappname; é usar o gerenciador de pacotes da sua distribuição, como o 'apt-get', o 'yum', o 'portage' ou o 'pacman'. Ele irá tratar de todas as dependências e bibliotecas necessárias. Ainda que leve algum tempo após o lançamento de uma nova versão para que todas as distribuições adicionem o &kappname; aos seus repositórios oficiais, cheque aí inicialmente. </para>
+</sect2>
+
+<sect2 id="installation.unsupported">
+<title
+>Repositórios não suportados</title>
+<para
+>Muitas distribuições de Linux possuem usuário que fornecem repositórios não-suportados mas que possuem pacotes mais atualizados que os repositórios oficiais. Você poderá encontrar uma lista destes na <ulink url="http://www.kmymoney.org"
+>página Web do &kappname;</ulink
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="installation.fromsource">
+<title
+>Compilando o &kappname; a partir do código-fonte</title>
+
+<para
+>Você poderá encontrar informações mais atualizadas sobre a última versão disponível e sobre outros problemas de instalação na <ulink url="http://www.kmymoney.org"
+>página Web do &kappname;</ulink
+>. Essa página terá também referências para pacotes TAR de versões mais recentes, assim como instruções para obter o código a partir do Git do &kde;, no caso de querer compilar a última versão em desenvolvimento. </para>
+
+<para
+>Como observado no parágrafo anterior, existem duas razões distintas para compilar o &kappname; a partir do código. Se não conseguir encontrar uma versão com um pacote especificamente criado para a sua distribuição, baixe por favor o pacote TAR da versão estável mais recente. Esta é a versão 4.6.0, no momento em que o documento foi escrito. Esta é a opção de compilação recomendada para os usuários normais. </para>
+
+<para
+>Por outro lado, se você quiser ver o estado atual do desenvolvimento, para ver uma correção de erro ou funcionalidade recente, poderá obter um pacote TAR com uma imagem do repositório de desenvolvimento. Também poderá obter o código diretamente a partir do repositório. O código da versão 4.x está no Git do &kde;. (O código das versões 1.0.x estava no CVS do SourceForge, mas não há mais suporte e seu desenvolvimento foi descontinuado). As instruções de acesso estão na página Web do projeto. </para>
+
+<warning>
+ <para
+>O código nos repositórios Git e imagens de desenvolvimento está em constante mudança: poderá conter erros, poderá estourar ou você poderá corromper ou perder dados. Se usá-lo, certifique-se de fazer cópias de segurança adequadas. A menos que tenha uma boa razão para usar esta versão, opte por uma versão estável. </para>
+</warning>
+
+<sect2
+><title
+>Bibliotecas necessárias</title>
+<para
+>O &kappname; depende de determinadas bibliotecas para que seja compilado e executado adequadamente. Inicialmente, ele depende do KDE na versão 4.3.5 ou posterior, especificamente do 'kdelibs' e do 'kdepimlibs'. Dependendo da sua distribuição, você poderá ter que carregar de forma explícita as versões <quote
+>-devel</quote
+> para poder compilar o &kappname;, em vez de executar apenas uma versão pré-compilada. A partir da versão 4.6.0, o &kappname; também depende da libalkimia, versão 4.3.1 ou superior. Requisitos adicionais podem ser detectados durante o passo do <quote
+>cmake</quote
+> abaixo. </para>
+
+<para
+>Funcionalidades adicionais podem ser obtidas se bibliotecas extras estiverem disponíveis no momento da compilação. As mais comuns são </para>
+
+<itemizedlist>
+<listitem>
+  <para
+>libofx, versão 0.9.4 ou superior, para ser capaz de importar dados financeiros no formato OFX, e</para>
+</listitem>
+
+<listitem>
+  <para
+>AqBanking, versão 5.0.0 ou superior, para ser capaz de usar determinadas funcionalidades de bancos on-line. Observe que a versão 5.0.14 ou superior é altamente recomendável, devido a erros nas versões anteriores.</para>
+</listitem>
+</itemizedlist>
+</sect2>
+
+<sect2
+><title
+>Instruções de compilação</title>
+<para
+>O &kappname; usa o sistema de compilação 'cmake'. Você poderá encontrar mais informações no arquivo 'README.cmake' na pasta de topo do código. Os passos básicos são os seguintes: </para>
+
+<simplelist>
+<member
+><command
+>$ mkdir build</command
+></member>
+<member
+><command
+>$ cd build</command
+></member>
+<member
+><command
+>$ cmake .. -DCMAKE_INSTALL_PREFIX=/usr/</command
+></member>
+<member
+><command
+>$ make</command
+></member>
+<member
+><command
+>$ sudo make install/fast</command
+></member>
+</simplelist>
+
+<important
+><para
+>Repare que o último passo é obrigatório. O &kappname; espera encontrar determinados componentes nas localizações-padrão e, caso execute o programa a partir da pasta de compilação, você terá ícones faltando ou outras surpresas. </para
+></important>
+
+<para
+>Se você tiver compilado o código a partir do git, e quiser estar com a última versão atualizada, na maior parte dos casos poderá fazer o seguinte: </para>
+
+<simplelist>
+<member
+><command
+>$ cd &lt;pasta de topo do código&gt;</command
+></member>
+<member
+><command
+>$ git pull --rebase</command
+></member>
+<member
+><command
+>$ cd build</command
+></member>
+<member
+><command
+>$ make</command
+></member>
+<member
+><command
+>$ sudo make install/fast</command
+></member>
+</simplelist>
+
+<para
+>Contudo, as alterações feitas pelos programadores poderão provocar alguns problemas de compilação, caso não comece com uma base de código limpa. Nesses casos, você precisará fazer o seguinte: </para>
+
+<simplelist>
+<member
+><command
+>$ cd &lt;pasta de topo do código&gt;</command
+></member>
+<member
+><command
+>$ git pull --rebase</command
+></member>
+<member
+><command
+>$ rm -r build</command
+></member>
+<member
+><command
+>$ mkdir build</command
+></member>
+<member
+><command
+>$ cd build</command
+></member>
+<member
+><command
+>$ cmake .. -DCMAKE_INSTALL_PREFIX=/usr/</command
+></member>
+<member
+><command
+>$ make</command
+></member>
+<member
+><command
+>$ sudo make install/fast</command
+></member>
+</simplelist>
+</sect2>
+</sect1>
+
+<sect1 id="installation.nonlinux">
+<title
+>Instalando o &kappname; sem Linux</title>
+
+<para
+>O &kappname; foi compilado com sucesso no &MacOS; X e está disponível na <ulink url="http://www.macports.com"
+>página Web MacPorts</ulink
+>. </para>
+<para
+>O &kappname; também está disponível para &Windows;. Essa iniciativa ainda é um trabalho em progresso, mas já foram feitas grandes melhorias no ano passado. Para mais informações sobre a execução do &kde;, incluindo o &kappname; no &Windows;, consulte a página <ulink url="http://windows.kde.org"
+>Iniciativa do KDE no Windows</ulink
+>. Para um instalador independente que apenas instala o &kappname;, consulte o link de download à direita da <ulink url="http://www.kmymoney.org"
+>página Web do &kappname;</ulink
+>. Lembre-se de que a versão mais recente desse instalador já não funciona mais no &Windows; XP. Na altura desta versão, ainda não se sabia se isso poderia vir a ser alterado, porque esse problema estava relacionado com as ferramentas usadas para compilar o aplicativo, não com o aplicativo em si. </para>
+
+<para
+>Se você souber que o &kappname; está sendo compilado com sucesso e disponibilizado em outro sistema operacional, comunique-nos, para que possamos difundir isso. </para>
+
+</sect1>
+</appendix>

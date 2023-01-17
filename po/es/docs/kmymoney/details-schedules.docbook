@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.schedules">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Programaciones</title>
+
+<sect1 id="details.schedules.intro">
+<title
+>Introducción</title>
+
+<para>
+  <quote
+>Las programaciones mantienen información sobre asientos que aparecen una o más veces durante un periodo de tiempo especificado. </quote>
+</para>
+
+<para
+>A veces llamada un asiento recurrente, una programación proporciona un medio de registrar información sobre un asiento que ocurre regularmente. Una programación común es su sueldo. Una vez un mes, o quizás semanalmente, la compañía para la que trabaja le paga por sus servicios. Este pago puede ocurrir de diferentes maneras, pero cada mes o cada semana recibirá un pago que necesita registrarse. </para>
+
+<para
+>Porque usted sabe que estos pagos se le hacen regularmente, puede crear una programación para registrar información sobre el pago e incluso crear el asiento por usted cuando llegue el día de cobro. </para>
+
+<para
+>Otros tipos de programaciones también se pueden registrar para reflejar el dinero que entra y sale de sus cuentas. Gastos comunes, como facturas de utilidades o transferencias de dinero, se pueden registrar con programaciones, junto con pagos de préstamos. Programar un pago también puede ser un útil recordatorio de que necesita hacer un pago. </para>
+
+<para
+>Una programación consiste de dos partes principales: los datos de programación y los datos del asiento. Los datos de programación registran la aparición de la programación, esto es, cuándo se introducirá el asiento en el libro mayor y cómo. Los datos del asiento registran los detalles normales de la transacción, y se introducirán en el libro mayor tal cual. </para>
+</sect1>
+
+<sect1 id="details.schedules.type">
+<title
+>Tipos de programaciones</title>
+
+<para
+>Hay cuatro tipos diferentes de programaciones en la versión actual de &kappname;: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Facturas</para
+></listitem>
+  <listitem
+><para
+>Depósitos</para
+></listitem>
+  <listitem
+><para
+>Préstamos</para
+></listitem>
+  <listitem
+><para
+>Transferencias</para
+></listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Facturas</title>
+
+<para
+>Una programación de factura se utiliza para el dinero que sale de su cuenta, como la cuota del gimnasio o la factura de un servicio. </para>
+</sect2>
+
+<sect2>
+<title
+>Depósitos</title>
+
+<para
+>Una programación de depósitos es para el dinero que entra en su cuenta, como su sueldo. </para>
+</sect2>
+
+<sect2>
+<title
+>Préstamos</title>
+
+<para
+>Una programación de préstamos es un tipo especial de programación, y se crea cuando se trata de cuentas de <link linkend="details.loans"
+>Préstamo</link
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Transferencias</title>
+
+<para
+>Una programación de transferencias se usa para el dinero que sale de una cuenta y entra en otra, como hacer un pago con tarjeta de crédito de su cuenta corriente. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.schedules.view">
+<title
+>La vista de programación</title>
+
+<para
+>Abra la vista de programación haciendo clic en el icono <guiicon
+>Programación <inlinemediaobject
+><imageobject
+><imagedata fileref="schedule_view.png"/> </imageobject
+></inlinemediaobject
+></guiicon
+> en el selector de vistas. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="scheduleview.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Vista de programación</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>La vista de programación consiste en un área de visualización con dos pestañas, junto con un botón de <guibutton
+>Nueva programación</guibutton
+> sobre ellas. La primera pestaña, <guibutton
+>Vista de lista</guibutton
+> muestra todas las programaciones agrupadas por tipos. La segunda pestaña, <guibutton
+>Vista de calendario</guibutton
+> se describe en su propia sección más abajo. </para>
+	
+<para
+>Para crear una programación nueva, haga click en el botón. Para programaciones de facturas, depósitos y transferencias, &kappname; mostrará el diálogo para la nueva programación. Las programaciones de préstamos se manejan de forma diferente, y se describen en la sección sobre préstamos. </para>
+</sect1>
+
+<sect1 id="details.schedules.new">
+<title
+>El diálogo de Nueva programación</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newsched_numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Nueva programación</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Ahora se muestra una nueva ventana de diálogo, pidiendo datos sobre la programación y la transacción. Los datos requeridos incluyen los siguientes: </para>
+
+<orderedlist numeration="upperalpha">
+  <listitem
+><para
+>Nombre de la programación</para
+></listitem>
+  <listitem
+><para
+>Próxima fecha de vencimiento</para
+></listitem>
+  <listitem
+><para
+>Frecuencia</para
+></listitem>
+  <listitem
+><para
+>Forma de pago</para
+></listitem>
+  <listitem
+><para
+>Cantidad</para
+></listitem>
+  <listitem
+><para
+>Otros detalles de la transacción</para
+></listitem>
+  <listitem
+><para
+>Opciones de programación</para
+></listitem>
+</orderedlist>
+
+<sect2>
+<title
+>Rellenar los campos</title>
+
+<para
+>Introduzca el nombre y la fecha de la próxima aparición de esta programación en sus campos respectivos. El nombre es cómo se conocerá a esta programación en la vista de lista. Especifique con qué frecuencia ocurre esta programación, usando el campo Frecuencia y la lista desplegable; por ejemplo, «cada 6 semanas» o «cada 3 meses». Si la cantidad varía entre transacciones, asegúrese de marcar la casilla de verificación <guilabel
+>Estimado</guilabel
+> y se le preguntará la cantidad correcta cuando se introduzca en el libro mayor. Rellene todos los campos del asiento tal como lo haría en la vista de libro mayor. </para>
+</sect2>
+
+<sect2>
+<title
+>Modificar el comportamiento de la programación</title>
+<para
+>En la parte inferior del diálogo hay algunos campos opcionales que pueden modificar cómo se comporta la programación. Si esta aparece en fin de semana, puede elegir si introducir el asiento el día del fin de semana, el viernes anterior o el lunes siguiente. Típicamente, esta opción se utiliza para imitar una operación en el mundo real, como una transacción bancaria. </para>
+</sect2>
+
+<sect2>
+<title
+>Permitir que &kappname; introduzca el asiento en el registro.</title>
+
+<para
+>Para dejar que &kappname; introduzca automáticamente el asiento por usted cuando sea necesario, asegúrese de que la casilla de verificación <guilabel
+>Introducir esta programación en el libro mayor automáticamente cuando esté vencida</guilabel
+> está marcada. De otra forma, cuando venza el plazo de la transacción, &kappname; abrirá un cuadro de diálogo pidiéndole que confirme que quiere que sea introducida. Este comportamiento es configurable, y se puede encontrar más información en la sección Preferencias. </para>
+</sect2>
+
+<sect2>
+<title
+>Permitir que &kappname; sepa cuándo terminará la programación</title>
+
+<para
+>Si sabe cuántas transacciones quedan o cuándo se espera que finalicen, se puede introducir esta información, de forma que los asientos no se introduzcan indefinidamente. Marque la casilla de verificación apropiada e introduzca la información correcta. Solo se necesitan la fecha final o el número de asientos restantes, porque los demás datos se pueden calcular. </para>
+
+<para
+>Cuando haya introducido toda la información necesaria, haga clic en <guibutton
+>Aceptar</guibutton
+> para continuar. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.schedules.edit">
+<title
+>Editar programaciones</title>
+
+<para
+>Para editar una programación, simplemente seleccione la entrada en la lista y haga clic derecho para hacer aparecer el menú contextual y seleccione <guimenuitem
+>Editar</guimenuitem
+>. Esto hará aparecer un diálogo similar al de Nueva programación, donde puede cambiar todos los datos necesarios. </para>
+</sect1>
+
+<sect1 id="details.schedules.delete">
+<title
+>Eliminar programaciones</title>
+
+<para
+>Para eliminar una programación, simplemente seleccione la entrada de la lista, haga clic derecho para hacer aparecer el menú contextual y seleccione <guimenuitem
+>Eliminar</guimenuitem
+>. </para>
+</sect1>
+
+<sect1 id="details.schedules.calendar">
+<title
+>La vista de calendario</title>
+
+<para
+>La pestaña Calendario muestra las programaciones en formato de calendario, de manera que es más fácil ver cuándo aparecen. Para cambiar a la vista de calendario, haga clic en la pestaña <guibutton
+>Vista de calendario</guibutton
+>. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="calendarview.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Vista de calendario</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>El tipo de calendario se puede cambiar usando el botón <guibutton
+>Seleccionar estilo</guibutton
+>. Actualmente solo existen dos tipos: Semana y Mes. La vista mensual es la predeterminada, y habitualmente es la más útil. Navegue por las fechas usando los controles igual que lo haría con el control de entrada de fecha. </para>
+
+<para
+>Para cualquier día con asientos programados, se muestra el número de ellos para ese día en el calendario. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="schedmonthday.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Para ver la(s) programación(es) que caen en ese día, mueva el cursor del ratón sobre la zona resaltada, y aparecerá una ventana emergente que le permitirá ver el resumen de programaciones. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="schedpopup.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Si más de una programación cae en ese día, puede recorrerlas cíclicamente usando los botones de flecha en las esquinas superiores de la ventana emergente. </para>
+
+<para
+>Si encuentra que la visualización está abigarrada de programaciones y solo quiere ver un tipo de ellas, es posible hacerlo con la lista desplegable <guibutton
+>Seleccionar programaciones</guibutton
+>. Después de hacer clic en este botón, se listan todos los tipos diferentes de programación, que estarán marcados por defecto. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="schedcaltypes.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Para eliminar un tipo del calendario, simplemente desmárquelo de la lista. </para>
+
+</sect1>
+
+<sect1 id="details.schedules.entering">
+<title
+>Introducir asientos programados</title>
+
+<para
+>Introducir un asiento programado en realidad significa introducir una transacción en el libro mayor apropiado, usando los detalles especificados en la programación. Los asientos programados se pueden introducir de una de cuatro maneras diferentes: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Manualmente, haciendo clic derecho en la entrada de la lista</para
+></listitem>
+  <listitem
+><para
+>Manualmente, mediante la ventana emergente en la vista de calendario</para
+></listitem>
+  <listitem>
+    <para
+>&kappname; puede introducirlas con o sin su interacción al inicio </para>
+  </listitem>
+  <listitem>
+    <para
+>&kappname; las puede introducir con su interacción durante el uso de la banca en línea o la importación de un extracto electrónico del banco </para>
+  </listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Introducir manualmente asientos programados</title>
+
+<para
+>Puede introducir manualmente un asiento programado haciendo clic derecho en la entrada de la lista y seleccionando <guimenuitem
+>Introducir</guimenuitem
+> en el menú emergente, o haciendo clic en el botón  <guibutton
+>Introducir</guibutton
+> en la ventana emergente de la vista de calendario. </para>
+</sect2>
+
+<sect2>
+<title
+>Confirmar el asiento a introducir</title>
+
+<para
+>Después de seleccionar cualquier método, se mostrará la ventana de diálogo Introducir asiento programado preguntándole la información necesaria que fue introducida cuando usted creó la programación. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="enterschedule.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Esta información se puede cambiar, y los cambios se pueden aplicar a solo una aparición de la programación o a todas las siguientes. Después de comprobar que todos los datos son correctos, hacer clic en <guibutton
+>Aceptar</guibutton
+> añadirá el asiento al libro mayor y actualizará la próxima fecha de vencimiento de la programación para la próxima aparición. Si ha cambiado cualquiera de los datos de la transacción, se mostrará una confirmación posterior de lo que ha cambiado, dándole una última oportunidad de rechazar los cambios. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="confirmenter.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Seleccione lo que quiera hacer con la información presentada y haga clic en <guibutton
+>Aceptar</guibutton
+> o en <guibutton
+>Cancelar</guibutton
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>Permitir que &kappname; introduzca los asientos programados por usted</title>
+
+<para
+>Alternativamente, &kappname; puede comprobar al inicio qué programaciones van a vencer e introducirlas por usted si se ha marcado la opción apropiada al configurar la programación. </para>
+
+<para
+>Si la opción no fue marcada, entonces &kappname; abrirá el diálogo antes mencionado y usted podrá seguir los pasos mencionados allí. &kappname; abrirá también el diálogo si la cantidad es una estimación, de forma que usted pueda introducir la cantidad real. </para>
+
+<para
+>También puede optar por que &kappname; no compruebe al inicio qué asientos están programados, deseleccionando la opción en el diálogo de Configuración, y cualquier asiento o asientos que venzan «hoy» se mostrarán en la vista de inicio para que las introduzca manualmente. </para>
+</sect2>
+</sect1>
+</chapter>

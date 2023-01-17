@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Dutch "INCLUDE">
+]>
+
+<refentry lang="&language;">
+<refentryinfo>
+
+<author
+><firstname
+>Michael</firstname
+><othername
+>T.</othername
+><surname
+>Edwardes</surname
+> <contrib
+>Originele concept, veel initiële broncode. Projectbeheer</contrib
+> <email
+>mte@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Thomas</firstname
+><surname
+>Baumgart</surname
+> <contrib
+>Uitgavemanager en de-facto onderhouder. Core-engine. Projectbeheer</contrib
+> <email
+>ipwizard@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Tony</firstname
+><surname
+>Bloomfield</surname
+> <contrib
+>GnuCash importeren. Databaseondersteuning.</contrib
+> <email
+>tonybloom@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Robert</firstname
+><surname
+>Wadley</surname
+> <contrib
+>Artist. Pictogrammen, beginscherm, hoofdweergave. Schermafdrukken.</contrib
+> <email
+>robntina@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Alvaro</firstname
+><surname
+>Soliverez</surname
+> <contrib
+>Prognose. Rapporten.</contrib
+> <email
+>asoliverez@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Fernando</firstname
+><surname
+>Vilas</surname
+> <contrib
+>Database-ondersteuning.</contrib
+> <email
+>fvilas@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Cristian</firstname
+><surname
+>Oneț</surname
+> <contrib
+>Patches en plug-ins.</contrib
+> <email
+>onet.cristian@gmail.com</email
+> </author>
+
+<author
+><firstname
+>Jack</firstname
+><othername
+>H.</othername
+><surname
+>Ostroff</surname
+> <contrib
+>Documentatie.</contrib
+> <email
+>ostroffjh@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Felix</firstname
+><surname
+>Rodriguez</surname
+> <contrib
+>Projectbeheer, eerdere versies.</contrib
+> <email
+>frodriguez@users.sourceforge.net</email
+> </author>
+
+<author
+><firstname
+>Kevin</firstname
+><surname
+>Tambascio</surname
+> <contrib
+>Ondersteuning voor initiële investeringen.</contrib
+> <email
+>ktambascio@users.sourceforge.net</email
+> </author>
+
+<!-- This person was previously listed as an author here, but is not currently
+     included in credits.docbook.  He should either be dropped from here or
+     included there.
+
+    <author
+><firstname
+>Arni</firstname
+><surname
+>Ingimundarson</surname>
+    <contrib
+>Developer, previous versions.</contrib>
+    <email
+>arniing@users.sourceforge.net</email
+></author>
+
+    These persons were not previously listed as authors here, but are included
+    in credits.docbook.  They should either be dropped from there or included
+    here.
+
+    <author
+><firstname
+>Ace</firstname
+><surname
+>Jones</surname>
+    <contrib
+>Reports.  OFX Import.  Online Quotes.  Documentatation.  Previous versions.</contrib>
+    <email
+>acejones@users.sourceforge.net</email
+></author>
+
+    <author
+><firstname
+>John</firstname
+><surname
+>C</surname>
+    <contrib
+>Developer, previous versions.</contrib>
+    <email
+>tacoturtle@users.sourceforge.net</email
+></author>
+
+    There are eight additional people in credits.docbook for "Special Thanks."
+    Should any of them be included here?  -->
+<date
+>2022-06-05</date>
+<releaseinfo
+>KMyMoney 5.1</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kmymoney</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+<refmiscinfo class="source"
+>&kmymoney;</refmiscinfo>
+<refmiscinfo class="manual"
+>Uitvoerbare programma's</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kmymoney</command
+></refname>
+<refpurpose
+>de persoonlijke beheerder van financiën door &kde;</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis
+><command
+>kmymoney</command
+> <group choice="opt"
+><option
+>--lang</option
+></group
+> <group choice="opt"
+><option
+>-n</option
+></group
+> <group choice="opt"
+><option
+>--timers</option
+> <replaceable
+> kolom</replaceable
+></group
+> <group choice="opt"
+><option
+>--nocatch</option
+></group
+> <group choice="opt"
+><option
+>--trace</option
+></group
+> <group choice="opt"
+><option
+>--dump-actions</option
+></group
+> <group choice="opt"
+><option
+><replaceable
+>bestand</replaceable
+></option
+></group
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title
+>Beschrijving</title>
+
+<para
+>&kmymoney; is de Persoonlijke financiënbeheerder door &kde;. Het biedt de functies vereist voor bijhouden van uw betalingen, het beheren van uw persoonlijke leningen en stopt uw inkomsten en uitgaven in categorieën, en meer, met een grafische gebruikersinterface in de stijl van boekje met cheques. </para>
+</refsect1>
+
+<refsect1>
+<title
+>Opties</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><option
+>--lang</option
+></term>
+<listitem>
+<para
+>Te gebruiken taal </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>-n</option
+></term>
+<listitem>
+<para
+>Laatst gebruikte bestand niet openen </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--timers</option
+></term>
+<listitem>
+<para
+>Schakel prestatietimers in </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--nocatch</option
+></term>
+<listitem>
+<para
+>Opgevangen uitzonderingen niet globaal opvangen </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--trace</option
+></term>
+<listitem>
+<para
+>Zet programmatraces aan. Deze optie is alleen beschikbaar wanneer &kmymoney; gecompileerd is in modus debug. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><option
+>--dump-actions</option
+></term>
+<listitem>
+<para
+>Dump de namen van alle gedefinieerde QAction-objecten naar stdout en stop. Deze optie is alleen beschikbaar wanneer &kmymoney; gecompileerd is in modus debug. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</refsect1>
+
+<refsect1>
+<title
+>Zie ook</title>
+
+<simplelist>
+<member
+>De volledige documentatie voor &kmymoney; wordt beheerd als een handboek in docbook-formaat. Als het programma voor &khelpcenter; op uw systeem juist is geïnstalleerd zal het commando <userinput
+><command
+>khelpcenter</command
+> <parameter
+>help:/kmymoney</parameter
+></userinput
+> u toegang geven tot de complete handboek. In het handboek kan ook gebladerd worden in &konqueror; met de <acronym
+>URL</acronym
+> <ulink url="help:/kmymoney"
+>help:/kmymoney</ulink
+>. Er zijn ook online versies voor zowel de stabiele als de ontwikkelversies van &kmymoney; op <ulink url="https://docs.kde.org/index.php?application=kmymoney"
+>https://docs.kde.org/index.php?application=kmymoney"</ulink
+> </member>
+
+  <member
+>kf5options(7)</member>
+  <member
+>qt5options(7)</member>
+</simplelist>
+
+</refsect1>
+
+</refentry>

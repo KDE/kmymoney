@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.tags">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Cristian.Onet; &Cristian.Onet.mail;</author>
+  </authorgroup>
+  <date
+>30/08/2014</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Etiquetas</title>
+
+<para
+>A tela Etiquetas oferece informações detalhadas sobre todas as etiquetas aplicadas sobre as transações. A tela Etiquetas está dividida em duas áreas principais: uma lista de etiquetas e uma área de detalhes. </para>
+
+<sect1 id="details.tags.list">
+<title
+>Lista de etiquetas</title>
+
+<para
+>Uma lista de etiquetas aparece no lado esquerdo desta tela. A lista de etiquetas está ordenada de forma alfabética. <screenshot
+> <mediaobject
+> <imageobject>
+  <imagedata fileref="tags.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+  </screenshot>
+</para>
+
+<sect2>
+<title
+>Adicionando uma etiqueta</title>
+<para
+>Para adicionar uma etiqueta, clique no ícone Adicionar etiqueta <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="list-add.png"/></imageobject
+></inlinemediaobject
+></guiicon
+> ou clique com o botão direito sobre qualquer etiqueta e escolha <guimenuitem
+>Nova etiqueta</guimenuitem
+>. Isso irá criar uma etiqueta nova chamada <quote
+>Nova etiqueta</quote
+>. Clique com o botão direito do mouse sobre essa etiqueta e selecione a opção <guimenuitem
+>Renomear etiqueta</guimenuitem
+> para inserir o nome da nova etiqueta. </para>
+</sect2>
+
+<sect2>
+<title
+>Renomeando uma etiqueta</title>
+<para
+>Para renomear uma etiqueta, clique no nome da etiqueta para selecioná-la e depois em <guiicon
+>Renomear etiqueta</guiicon
+> (entre os ícones adicionar e remover) ou clique o botão direito sobre o nome e selecione a opção <guimenuitem
+>Renomear etiqueta</guimenuitem
+>, para que este nome possa ser editado. A alteração do nome irá afetá-lo em todas as transações em que aparece. </para>
+</sect2>
+
+<sect2>
+<title
+>Removendo uma etiqueta</title>
+<para
+>Para remover uma etiqueta, clique no ícone Excluir etiqueta <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="list-remove.png"/></imageobject
+></inlinemediaobject
+></guiicon
+> ou clique com o botão direito do mouse sobre o nome e selecione a opção <guimenuitem
+>Excluir etiqueta</guimenuitem
+>. Se ela estiver associada a alguma transação, será apresentada uma caixa de diálogo que permite-lhe associar as transações afetadas a uma etiqueta diferente. </para>
+
+<note>
+<para
+>Como a possibilidade de uso de etiquetas só foram introduzidas na versão 4.7 do &kappname;, nenhum dos métodos de importação de dados são capazes de importá-las. Sabemos que é uma funcionalidade importante e cada método de importação provavelmente irá introduzi-la em uma versão futura. </para>
+</note>
+</sect2>
+</sect1>
+
+<sect1 id="details.tags.info">
+<title
+>Transações com etiquetas e detalhes das etiquetas</title>
+<para
+>Para ver as transações ou ver e editar a informação associada a uma determinada etiqueta, selecione-a na lista e depois selecione a aba apropriada ao lado direito da caixa de diálogo. <screenshot>
+  <screeninfo
+>A aba de detalhes da etiqueta</screeninfo>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="tag_details.png" format="PNG"/>
+  </imageobject>
+  <textobject>
+  <phrase
+>Detalhes da etiqueta</phrase>
+  </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.tags.info.transactions">
+<title
+>Transações com etiquetas</title>
+<para
+>Para ver uma lista com as transações associadas à etiqueta selecionada, clique na aba <guilabel
+>Transações</guilabel
+>. Essa lista é semelhante à lista de transações de um beneficiário. Você pode usar o clique duplo sobre uma transação para que seja remetido à área do livro de registros dessa transação, para a conta em que a transação recebeu as etiquetas. </para>
+</sect2>
+
+
+<sect2 id="details.tags.info.details">
+<title
+>Detalhes da etiqueta</title>
+<para
+>Para ver e editar a informação associada a uma determinada etiqueta, selecione a aba <guilabel
+>Detalhes</guilabel
+>. </para>
+  <itemizedlist>
+    <listitem>
+      <para
+>Você pode selecionar a cor usada para realçar as transações associadas a essa etiqueta. Se clicar na barra de cores, será aberta uma caixa de diálogo para seleção das cores. </para>
+    </listitem>
+    <listitem>
+      <para
+>Para modificar as notas associadas à etiqueta, basta editar o texto no campo. </para>
+    </listitem>
+    <listitem>
+      <para
+>Se assinalar a opção <guilabel
+>Fechado</guilabel
+>, nenhuma das transações associadas à etiqueta será alterada, mas impedirá a atribuição da etiqueta a outras transações adicionais. </para>
+    </listitem>
+  </itemizedlist>
+<para
+>Quanto terminar, não esqueça de clicar no botão <guiicon
+>Atualizar</guiicon
+>, ainda que seja questionado, caso saia da caixa de diálogo ter feito isso. </para>
+</sect2>
+</sect1>
+</chapter>

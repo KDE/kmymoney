@@ -1,0 +1,996 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="firsttime">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>2018-02-01</date>
+  <releaseinfo
+>5.0.0</releaseinfo>
+</chapterinfo>
+
+<title
+>&kmymoney; voor de eerste keer gebruiken</title>
+
+<sect1 id="firstime-1">
+<title
+>&kmymoney; voor de eerste keer uitvoeren</title>
+
+<para
+>Nadat &kmymoney; volledig is geladen zullen er twee vensters worden geopend. Het bovenste venster, 'Tip van de dag' biedt een van een serie van belangrijke of bruikbare stukjes informatie over de toepassing. <screenshot>
+	<screeninfo
+>Tip van de dag</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="tipofday.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Tip van de dag</phrase>
+	</textobject>
+	</mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Wij bevelen aan om snel door deze tips te lopen door op de knoppen <guibutton
+>Vorige</guibutton
+> en <guibutton
+>volgende</guibutton
+> onderaan het venster te drukken. </para>
+
+<para
+>Nadat u de tips hebt gelezen kan het venster worden gesloten; het zal opnieuw worden geopend elke keer dat &kmymoney; wordt gestart. Om dit standaard gedrag te stoppen, vinkt u de betreffende optie in het venster 'Tip ban de dag' uit. </para>
+
+<note>
+  <para
+>Tips kunnen op elk moment weer worden gelezen door menu-item <menuchoice
+><guimenu
+>Help</guimenu
+> <guimenuitem
+>Tip van de dag tonen</guimenuitem
+></menuchoice
+> te kiezen in in &kmymoney;. </para>
+</note>
+
+<para
+>Alle tips zijn overgenomen van de lijst Frequently Asked Questions (&FAQ;) die meer gedetailleerde hulp biedt en gevonden kan worden op de <ulink url="https://www.kmymoney.org/faq.php"
+>website</ulink
+> van het project en in <link linkend="faq"
+>dit handboek</link
+>. </para>
+
+<para
+>Gaarne op <guibutton
+>Sluiten</guibutton
+> klikken om de dialoog Tip of de dag te sluiten. </para>
+
+<note>
+  <para
+>Wanneer u &kmymoney; uitvoert kan het niet exact gelijk zijn aan de schermafdrukken in deze handleiding. Veel details, zoals lettertypen, kleuren en pictogrammen, kunnen aangepast worden, ofwel met het menu-item <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>&kmymoney; configureren...</guimenuitem
+></menuchoice
+> of de toepassing &systemsettings; van &kde;, afhankelijk van uw besturingssysteem. </para>
+</note>
+
+</sect1>
+
+<sect1 id="firsttime.mainwindow">
+<title
+>Het hoofdvenster</title>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Het hoofdvenster</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="mainwindow_numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Het hoofdvenster</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Het hoofdvenster van &kmymoney; bestaat uit vier hoofddelen </para>
+
+<itemizedlist>
+  <listitem
+><para
+>A. De menubalk</para
+></listitem>
+  <listitem
+><para
+>B. De werkbalk</para
+></listitem>
+  <listitem
+><para
+>C. De weergavekiezer</para
+></listitem>
+  <listitem
+><para
+>D. Het beeld/de weergave</para
+></listitem>
+</itemizedlist>
+
+<para
+>Het menu en de werkbalken bieden toegang tot de mogelijkheden van &kmymoney; en bieden u <link linkend="firsttime.3"
+>Bestanden aanmaken</link
+> of hoe &kmymoney; instellen voor het ermee werken. </para>
+
+<para
+>Aan de linkerkant van het hoofdvenster bestaat de beeldselectie uit minstens elf pictogrammen met optionele labels, afhankelijk van de software in uw systeem. Meer pictogrammen kunnen worden toegevoegd door verschillende plug-ins. Door op een pictogram te klikken wordt het weergavevenster aan de rechterkant geladen met de bijbehorende weergave van uw financiële gegevens. Elke weergave levert een unieke representatie van uw financiële situatie en stelt u in staat deze informatie te bekijken of te tonen. </para>
+
+<para
+>De beeldselectie bevat de volgende pictogrammen </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="home_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Thuisweergave</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Thuis: een in te stellen overzicht van uw huidige financiële situatie (of een introductiepagina wanneer er geen gegevensbestand open is). </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="institutions_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Bankenoverzicht</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Banken: Al uw banken en accounts weergegeven in een hiërarchie. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="accounts_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Rekeningoverzicht</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Rekeningen: Al uw rekeningen weergegeven in een hiërarchie. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="schedule_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Periodieke transacties</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Periodieke transacties: uw terugkerende rekeningen en stortingen. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="categories_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Beeld van categorieën</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Categorieën: speciale rekeningen die u een middel bieden om bij elkaar horende transacties te groeperen. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="mail-tagged.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Tagsweergave</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Tags: Speciale accounts die aan u een extra betekenis biedt aan categorieën om bij elkaar behorende transactions te groeperen. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="payees_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Beeld van begunstigden</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Begunstigden: alle door &kmymoney; gebruikte begunstigden. Dit zijn alle mensen of organisaties waaraan u geld betaalt of geld van ontvangt. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="ledgers_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Beeld van Grootboek</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Grootboek: transacties op uw rekening. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="investments_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Investeringenoverzicht</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Investeringen: Overzicht van uw waardepapieren. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="reports_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Rapporten overzicht</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Rapporten: Een verzameling van handige rapporten, die andere, aanpasbare, overzichten geven van uw financiële data. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="budgets_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Budget overzicht</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Budgets: Uw budgetten. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="forecast_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Prognoseweergave</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Prognose: Deze weergave geeft een prognose van uw rekeningen en categorieën. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="outbox_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Postvak uit weergave</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Postvak uit: Gebruikt door de module voor online bankieren voor het geven van meldingen over lopende processen. Deze weergave wordt aangemaakt door de KBanking plugin en deze hoeft niet op uw systeem aanwezig te zijn. </para>
+  </listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="firsttime.3">
+<title
+>Een nieuw bestand aanmaken</title>
+
+<para
+>&kmymoney; slaat alle data over uw financiën op in een bestand. Zoals al uitgelegd in <link linkend="makingmostof.basicaccounting.personalaccounts"
+>De rekeningen definiëren (persoonlijke records)</link
+>, kunt u meerdere sets rekeningen bewaren, maar de data voor elk daarvan zal in een apart bestand worden bewaard, en &kmymoney; kan maar een bestand tegelijk geopend hebben. Lees het hoofdstuk over <link linkend="details.formats"
+>Bestandsformaten</link
+> voor meer details over de databestanden van &kmymoney;. </para>
+
+<para
+>Om een nieuw bestand aan te maken, selecteert u ofwel in menu-item <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Nieuw</guimenuitem
+></menuchoice
+> of in de werkbalk het pictogram nieuw <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="new.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> te kiezen. Bovendien kunt u, als de hoofd-welkomstpagina wordt getoond, ook de eerste koppeling: "Begin en stel uw rekeningen in" selecteren. </para>
+
+<para
+>&kmymoney; zal dan de <quote
+>Nieuw bestand Wizard</quote
+> openen waarmee u door het proces van het aanmaken van het bestand zal worden geleid. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Pagina met persoonlijke gegevens</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Pagina met persoonlijke gegevens</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Omdat geen enkel veld verplicht is, kunt u &kmymoney; nu gebruiken zonder dat u enkele informatie heeft ingevuld. Alle informatie die u hier invult, wordt alleen gebruikt om uw bestand te personaliseren. In de toekomst, kan het gebruikt worden in sommige rapporten en voor online bankieren. Als &kmymoney; in toekomstige releases persoonlijke informatie nodig heeft en niets vindt, dan zal u worden gevraagd om dan de relevante data in te voeren. </para>
+
+<para
+>Voer uw naam en adres in of niets en druk op de knop <guibutton
+>Volgende</guibutton
+>. </para>
+
+<para
+>In het geval dat u een adres voor uzelf in het &kaddressbook; heeft opgeslagen, dan is de knop <guibutton
+>Laden uit Adresboek</guibutton
+> ingeschakeld en wordt alle informatie naar &kmymoney; geïmporteerd. </para>
+
+<para
+>&kmymoney; kan met meerdere valuta's werken. Om uw basis valuta (de valuta waarmee u iedere dag werkt en welke gebruikt zal worden in uw rapporten) in te stellen, selecteert u het juiste item in lijst en drukt u op <guibutton
+>Volgende</guibutton
+>. Afhankelijk van uw lokale instellingen zal door &kmymoney; een standaard waarde worden voorgesteld. </para>
+
+<para
+>In het volgende voorbeeld is US Dollar geselecteerd als de basisvaluta. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Selectiepagina van basis valuta</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-2.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Selectiepagina van basis valuta</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Op de volgende pagina kunt u een eerste rekening aanmaken. Voor de meeste &kmymoney;-gebruikers zal dit een bankrekening zijn. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Pagina voor aanmaken rekening</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-3.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Pagina voor aanmaken rekening</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Voer de naam van de rekening en wellicht ook het rekeningnummer die door het instituut dat de rekening beheert is toegewezen. Voer de startdatum en de startsaldo van de rekening in. Bijvoorbeeld, u wilt &kmymoney; gebruiken om al uw financiën te gaan beheren vanaf 2008-01-01, Voer dan het saldo van de rekening op die datum in als beginsaldo. Dit getal kunt wellicht op een papieren bankafschrift vinden. Voer ook de naam en IBAN nummer van de bank in, maar deze informatie is optioneel en alleen nodig voor online bankieren. </para>
+
+<para
+>In het geval dat u geen bankrekening wilt instellen, haalt u in het keuzevakje het vinkje weg. </para>
+
+<para
+>Als u klaar bent, dan drukt u op <guibutton
+>Volgende</guibutton
+> om verder te gaan. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Selectiepagina van projectsjablonen</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-4.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Selectiepagina van projectsjablonen</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+
+<para
+>Kies het toepasselijke land en sjablo(o)nen. Elk sjabloon biedt verschillende sets categorieën voor het organiseren van uw financiën. U kunt met behulp van de &Ctrl; en de &Shift; samen met de &LMB; meerdere sjablonen, zelfs uit verschillende landen, selecteren. U krijgt in het voorbeeld-gedeelte van de wizard een overzicht te zien van de hiërarchie van de rekeningen. In het geval dat u geen geschikte sjabloon kan vinden, selecteert u op dat moment gewoon geen sjabloon en kunt u later handmatig uw categorieën instellen. </para>
+
+<para
+>Als u het gewenste sjabloon heeft geselecteerd, dan drukt u op <guibutton
+>Volgende</guibutton
+> om verder te gaan. </para>
+
+<para
+>In de volgende pagina van de wizard kunt gebruikersvoorkeuren instellen. Als u het keuzevakje selecteert, zal de instellingendialoog van de toepassing getoond worden nadat u de assistent voor het instellen van de rekening hebt voltooid.Druk op <guibutton
+>Volgende</guibutton
+> als u klaar bent en verder wilt gaan. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Pagina met gebruikersvoorkeuren</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-5.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Pagina met gebruikersvoorkeuren</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Op de laatste pagina van de wizard kunt u een een locatie en bestandsnaam kiezen dat zal worden gebruikt om uw financiële data op te slaan. Een voorstel voor de initiële waarden zal bestaan uit de naam van uw persoonlijke map en uw gebruikersnaam. In het geval dat het bestand al bestaat, krijgt u een waarschuwing te zien met de vraag of u een naam wilt kiezen die nog niet in gebruik is. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Selectiepagina van de bestandsnaam</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-6.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Selectiepagina van de bestandsnaam</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Nu heeft genoeg relevante informatie gegeven om het bestand aan te maken. Als u op <guibutton
+>Voltooien</guibutton
+> drukt dan zal &kmymoney; het bestand voor u aanmaken en deze openen. </para>
+
+</sect1>
+
+<sect1 id="firsttime.4">
+<title
+>Accounts aanmaken</title>
+
+<para
+>Er zijn meerdere manieren waarop een rekening kunt aanmaken, die hier worden beschreven: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Met behulp van het menu</term>
+    <listitem>
+      <para
+>Om een rekening aan te maken met behulp van het menu selecteert u menu-item <menuchoice
+><guimenu
+>Rekening</guimenu
+><guimenuitem
+>Nieuwe rekening</guimenuitem
+></menuchoice
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Gebruik van het rekeningen overzicht</term>
+    <listitem>
+      <para
+>Om in het rekeningen overzicht een rekening aan te maken, klikt u in het weergave-overzicht op het rekeningen-pictogram <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="accounts_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> in de weergaveselectie om de Rekeningenweergave te tonen. Klik met de &RMB; op het boomstructuur-pictogram van Bezittingen of Verplichtingen aan de rechterkant en selecteert in het contextmenu <guimenuitem
+>Nieuwe rekening</guimenuitem
+>. De Bezittingenboomstructuur zitten al uw rekeningen die een bezitting/vermogen voorstellen, zoals spaarrekeningen en investeringen. Verplichtingen zijn rekeningen die geld dat u schuldig bent representeren, zoals leningen en creditcards. Deze en alle andere rekeningtypen worden later in deze handleiding in meer detail behandeld. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>De werkbalk gebruiken</term>
+    <listitem>
+      <para
+>Als de knop <guibutton
+>Nieuwe rekening...</guibutton
+> getoond wordt in de werkbalk kunt u er op klikken om een rekening aan te maken. </para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+
+<tip>
+  <para
+>Merk op dat &kmymoney; contextmenu's veel in het hele programma gebruikt. Als u vastloopt met hoe u iets moet doen, probeer dan met de &RMB; te klikken zodat u nieuwe hulpmiddel kunt zien </para>
+</tip>
+
+<para
+>Beide methoden om een nieuwe rekening aan te maken openen de <emphasis
+>Nieuwe rekening Wizard</emphasis
+>. Deze wizard zal u stap voor stap door het proces nemen van het aanmaken van een rekening, bij elke stap verzamelt het de benodigde informatie. Om door deze pagina's te navigeren, klikt u op de knoppen <guibutton
+>Volgende</guibutton
+> and <guibutton
+>Vorige</guibutton
+>. </para>
+
+<para
+>Maak een rekening aan via een van de eerder genoemde manieren om verder te gaan. Een volledige beschrijving van de aanmaak van rekeningen kunt u vinden in de sectie <link linkend="details.accounts"
+>Rekeningen</link
+>. </para>
+
+<para
+>Nu er een of meerdere rekeningen in &kmymoney; aanwezig zijn, wordt het rekeningoverzicht in het basisoverzicht zichtbaar. U kunt handmatig transacties aanmaken in het <link linkend="details.ledgers"
+>Kasboeken</link
+>-overzicht, of automatische transacties instellen in het <link linkend="details.schedules"
+>Periodieke transacties</link
+>-overzicht. </para>
+</sect1>
+
+<sect1 id="firsttime.schedules">
+<title
+>Periodieke transacties</title>
+
+<para
+>Soms herhalende transactie genoemd, een <link linkend="details.schedules"
+>periodieke transactie</link
+> is een transactie die in een bepaalde periode een of meer keren voorkomt. Een goed voorbeeld is uw salaris die u iedere maand of week ontvangt. In plaats van de details van de transactie iedere keer dat u salaris ontvangt weer in te voeren, kunt u aan &kmymoney; de opdracht geven om een tijdschema te maken dat als u uw salaris ontvangt, een transactie aanmaakt. </para>
+
+<para
+>Voor het beheren van de <link linkend="details.schedules"
+>periodieke transacties</link
+> klikt u op het pictogram voor periodieke transacties <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="schedule_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> in de beeldselectie. </para>
+</sect1>
+
+<sect1 id="firsttime.categories">
+<title
+>Categorieën</title>
+
+<para
+>Voor het beheren van de <link linkend="details.categories"
+>categorieën</link
+> klikt u op het pictogram voor categorieën <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="categories_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> in de beeldselectie. </para>
+
+<para
+>Een volledige beschrijving van dit onderwerp kunt u vinden in de sectie <link linkend="details.categories"
+>Categorieën</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.tags">
+<title
+>Tags</title>
+
+<para
+>Voor het beheren van de <link linkend="details.tags"
+>tags</link
+> klikt u op het pictogram voor tags <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="mail-tagged.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> in de beeldselectie. </para>
+
+<para
+>Een volledige beschrijving van dit onderwerp kunt u vinden in de sectie <link linkend="details.tags"
+>Tags</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.payees">
+<title
+>Begunstigden</title>
+
+<para
+>Voor het beheren van de lijst met begunstigden klikt u op het pictogram voor begunstigden <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="payees_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> in de beeldselectie. </para>
+
+<para
+>Een volledige beschrijving van dit onderwerp kunt u vinden in de sectie <link linkend="details.payees"
+>Begunstigden</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.import">
+<title
+>Quicken Interchange Format (QIF) Importeren</title>
+
+<para
+>Als u op dit moment al een ander programma voor financieel beheer gebruikt, dan kan &kmymoney; de transactiegegevens van een rekening importeren zolang ze geëxporteerd of opgeslagen kunnen worden in een formaat dat &kmymoney; begrijpt. De meest gebruikelijke is het Quicken Interchange Format (QIF). De meeste financiële programma's kunnen in dit formaat exporteren, echter de methodes waarmee de verschillende programma's exporteren worden hier vanwege beknoptheid niet behandeld. </para>
+
+<para
+>Een volledige beschrijving van dit onderwerp kunt u vinden in de sectie <link linkend="details.impexp.qifimp"
+>QIF Import</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.find">
+<title
+>Zoeken naar transacties</title>
+
+<para
+>&kmymoney; heeft een uitgebreide en krachtige mogelijkheid voor het doorzoeken van transacties in de form van een zoek-dialoog. </para>
+
+<para
+>U kunt de zoekdialoog openen door in de werkbalk het zoekpictogram <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="transaction_find.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> te gebruiken of door het menu-item <menuchoice
+><guimenu
+>Bewerken</guimenu
+><guimenuitem
+>Zoek transactie</guimenuitem
+></menuchoice
+> te selecteren. </para>
+
+<para
+> Een volledige beschrijving van dit onderwerp kunt u vinden in de sectie <link linkend="details.search"
+>Zoeken</link
+>. </para>
+
+</sect1>
+
+<sect1 id="firsttime.reconcile">
+<title
+>Transactiecontrole</title>
+
+<para
+>Op een gegeven moment wilt u een Saldo Controle uitvoeren op de door u ingevoerde transacties met op een afschrift voorkomende transacties, dit kan zijn een bankafschrift, creditcard afschrift, lening afschrift, of elk ander soort afschrift. Saldo Controle houdt in het vergelijken van wat u heeft ingevoerd met wat op de afschriften staat. Als u afwijkingen heeft gevonden dan heeft of u of de persoon die de afschrift heeft gemaakt een vergissing gemaakt. </para>
+
+<para
+>Om een Saldo Controle op een rekening uit te voeren, selecteert u eerst de rekening, naar keuze in de <guiicon
+>Rekeningen</guiicon
+> overzicht of in het  <guiicon
+>Kasboeken</guiicon
+> overzicht. Klik dan naar keuze op het pictogram <guiicon
+>Saldo Controle</guiicon
+> in de Werkbalk, of selecteer het menu-item <menuchoice
+><guimenu
+>Rekening</guimenu
+> <guimenuitem
+>Transactiecontrole</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Een volledige beschrijving van dit onderwerp kunt u vinden in de sectie <link linkend="details.reconcile"
+>Saldo Controle</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.backup">
+<title
+>Maakt reservekopie</title>
+
+<para
+>Nu u enkele rekeningen heeft aangemaakt en transacties heeft ingevoerd, is het een goed idee om een backup uit te voeren. Omdat het bestand dat &kmymoney; gebruikt een standaard Unix bestand is, kunt u om een backup te maken het bestand gewoon naar een andere locatie kopiëren maar u kunt ook het dialoogvenster van &kmymoney; gebruiken. Het gebruik van het dialoogvenster is de voorkeursmethode omdat als &kmymoney; ooit een ander bestandsformaat, zoals SQL, gaat gebruiken, dan zal het veel moeilijker zijn om het bestand handmatig te kopiëren. </para>
+
+<para
+>Om uw bestand via &kmymoney; te backuppen selecteert u in het menu-item <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Backup</guimenuitem
+></menuchoice
+> en vult hier de map in waarin het bestand wordt opgeslagen. Als de map eerst moet worden aangekoppeld en u heeft voldoende rechten daarvoor, schakel het keuzevakje met de naam <guilabel
+>Deze map koppelen voor het maken van een back-up</guilabel
+> in en klik op <guibutton
+>OK</guibutton
+>. </para>
+
+<para
+>Het bestand zal in de opgegeven map worden opgeslagen waarbij de huidige datum aan de bestandsnaam wordt toegevoegd zodat het makkelijk is om te zien wanneer het bestand is gebackupd. </para>
+</sect1>
+
+<sect1 id="firsttime.launch">
+<title
+>&kmymoney; starten</title>
+
+<para
+>Meestal zal u &kmymoney; starten via een pictogram of het startmenu van uw windowmanager. In dat geval zal het standaard gedrag zijn dat &kmymoney; opent met het laatst geopende bestand. Maar, in bepaalde omstandigheden wilt u &kmymoney; vanaf de commandoregel opstarten. </para>
+
+<para
+>Voor een complete beschrijving van alle beschikbare opdrachtregelopties, verwijzen wij u naar de man-pagina van &kmymoney;. Maar er zijn twee speciale gevallen die we hier beschrijven. </para>
+
+<formalpara
+><title
+><command
+>kmymoney -n</command
+></title>
+  <para
+>De -n optie geeft opdracht aan &kmymoney; het laatst geopende bestand niet te openen. Dit kan handig zijn als het programma bij het opstarten crashte. </para>
+</formalpara>
+
+<formalpara
+><title
+><command
+>kmymoney &lt;pad naar bestand&gt;</command
+></title>
+  <para
+>Als u &kmymoney; bij het opstarten vanaf de commandoregel een bestandsnaam meegeeft, dan zal dit bestand worden geopend in plaats van het laatst geopende bestand. U kunt de naam van elk geldig &kmymoney;-bestand opgeven, zoals beschreven in het hoofdstuk over <link linkend="details.formats"
+>bestandsformaten</link
+>. U kunt dit ook gebruiken om een <link linkend="details.impexp.gnucash"
+>&gnucash;</link
+>-bestand te importeren. </para>
+</formalpara>
+</sect1>
+
+<sect1 id="firsttime.newpc">
+<title
+>Hoe u &kmymoney; naar een nieuwe computer kan verplaatsen</title>
+
+<sect2 id="firsttime.newpc.data">
+<title
+>Uw data verplaatsen</title>
+
+<para
+>Als u een nieuwe computer heeft, dan is uw data verplaatsen erg makkelijk. Het enige wat u hoeft te doen is uw &kmymoney; databestand kopiëren. Als &kmymoney; is gestart, ziet u de naam van het bestand in de titelbalk, Normaal gesproken eindigt het op <filename class="extension"
+>.kmy</filename
+>. De eerste keer dat u het programma op de nieuwe computer start, moet u opgeven waar u het databestand heeft opgeslagen, u kunt dat door naar keuze vanaf de commandoregel of in het menu-item <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Open...</guimenuitem
+></menuchoice
+>. U zou zelfs moeten kunnen omschakelen tussen &Windows;, &MacOS; en &Linux; systemen. </para>
+
+<para
+>Als u uw databestand heeft versleutelt, let er dan op dat u ook de van toepassing zijnde software en codes op uw nieuwe computer heeft geïnstalleerd. </para>
+
+<para
+>Als uw data in een SQL database is, bestudeer dan de documentatie van uw database software voor advies over het migreren van uw data. </para>
+
+<para
+>Dit gaat ervan uit dat u de zelfde versie van &kmymoney; op de nieuwe computer geïnstalleerd heeft als dat u op de oude computer had geïnstalleerd. Het installeren van een nieuwere versie zou geen problemen moeten geven, maar u moet zich bewust zijn van problemen die samenhangen met een upgrade. Alle dergelijke problemen zouden beschreven moeten zijn in de release notes van de nieuwe versie. </para>
+</sect2>
+
+<sect2 id="firsttime.newpc.settings">
+<title
+>Uw instellingen verplaatsen</title>
+
+<para
+>Als u zoals in vorige sectie beschreven alleen uw data naar de nieuwe machine verplaatst, dan zal &kmymoney; correct werken, maar heeft u wel alle instellingen op uw oude machine die afwijken van de standaard verloren. Om deze instellingen te behouden, moet u ook dit configuratiebestand kopiëren. Dit bestand heet <filename
+>kmymoneyrc</filename
+>. U kunt dit bestand vinden in een map met daarin ook andere &kde;-programma configuratiebestanden. In een &Linux; systeem, zal dit zijn in <filename
+>$KDEHOME/share/config</filename
+> waar <filename class="directory"
+>$KDEHOME</filename
+> zich in uw thuismap bevindt. Als u migreert van een versie van &kmymoney; van vóór 5.0 naar 5.0 of later, was de oude locatie van <filename
+>$KDEHOME</filename
+> <filename
+>.kde4</filename
+>. </para>
+
+<sect3 id="firsttime.newpc.settings.plugins">
+<title
+>Uw plugin instellingen verplaatsen</title>
+
+<para
+>Als u een plug-in van &kmymoney; heeft gebruikt, zoals de csv importer of exporter, dan zal het ook een configuratiebestand in die zelfde map hebben aangemaakt, zoals <filename
+>csvimporterrc</filename
+> of <filename
+>csvexporterrc</filename
+>. Deze zou u ook naar de nieuwe computer moeten kopiëren. </para>
+
+<para
+>Net zoals bij het hoofddatabestand, gaat dit ervan uit dat dezelfde versie van de plugin op beide computers wordt gebruikt. Upgrades zijn in het algemeen veilig, maar als de functionaliteit van de plugin veel is gewijzigd, dan is het verstandig om voorzichtig het oude configuratiebestand uit te testen, zodat u er zeker van bent dat de plugin naar verwachting werkt. </para>
+
+<para
+>Merk op dat bij opwaardering van een vorige versie naar versie 5.0 of hoger, de locatie van de sjabloonbestanden gebruikt door de plugin voor afdrukken van checks is gewijzigd. Lees de uitgavenotities of de <ulink url="https://www.kmymoney.org/faq.php"
+>website</ulink
+> van het project voor meer details. </para>
+
+<note>
+<para
+>Deze instructie zijn uitsluitend voor het verplaatsen van uw &kmymoney;-data en instellingen. Maar er kunnen belangrijke items zijn die door &kde; worden opgeslagen en niet door &kmymoney;, zoals wachtwoorden die in kwallet zijn opgeslagen. Het verplaatsen van andere onderdelen van uw &kde; instellingen valt buiten het doel van deze handleiding, ofschoon veel van de relevante bestanden ook in <envar
+>$KDEHOME</envar
+> zijn opgeslagen. </para>
+</note>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="firsttime.contact">
+<title
+>Contact maken met de ontwikkelaars / Bugs (programmafouten) melden</title>
+
+<sect2>
+<title
+>Contact maken met de ontwikkelaars</title>
+
+<para
+>Voor algemene vragen of commentaar over &kmymoney;, is er een e-maillijst voor gebruikers &userlist;. (<ulink url="https://mail.kde.org/mailman/listinfo/kmymoney"
+>meer details hier</ulink
+>). Bovendien kunt u contact opnemen met de ontwikkelaars via hun e-maillijst &devlist;. (<ulink url="https://mail.kde.org/mailman/listinfo/kmymoney-devel"
+>meer details hier</ulink
+>.) Omdat antwoorden vaak alleen verzonden worden naar de lijst, zou u geen respons kunnen krijgen tenzij u ingeschreven bent op een van de lijsten voordat u iets verzendt. </para>
+
+<para
+>We horen graag over uw ervaringen met het gebruik van &kmymoney;. </para>
+</sect2>
+
+<sect2>
+<title
+>Bugs (programmafouten) melden</title>
+
+<para
+>Wij verzoeken u om voor het melden van een bug de interface in &kmymoney; te gebruiken door menu-item <menuchoice
+><guimenu
+>Help</guimenu
+><guimenuitem
+>Bug rapporteren</guimenuitem
+></menuchoice
+> te selecteren en daar de verlangde informatie in te vullen. Maar, als u problemen heeft met het gebruik van deze methode, dan kunt ook een bug rapporteren (of wensenlijstje dan wel een verbetering) direct op de <ulink url="https://bugs.kde.org"
+>&kde; bug rapportage website</ulink
+>. Rapporten moeten ingediend worden bij het product <quote
+>kmymoney</quote
+>. </para>
+
+<para
+>Lees in elk geval voordat u een bug gaat rapporteren de aanwijzingen hieronder. Als deze volgt, is de kans groter dat de ontwikkelaars in staat zijn om het probleem te identificeren zonder dat ze u om meer informatie hoeven te vragen. </para>
+
+<sect3 id="firsttime.bugs.quality">
+<title
+>Het maken van een goede bug rapport</title>
+
+<para
+>Wij moedigen gebruikers aan om extra tijd uit te trekken zodat als ze bug rapport indienen deze van goede kwaliteit is. Dit beperkt voor iedereen de verspilde tijd, omdat de indiener en de ontwikkelaar die het gaat repareren emails moeten gaan uitwisselen totdat deze informatie compleet is. </para>
+
+<para
+>Eli Goldberg heeft de canonical Bug-Writing richtlijn geschreven, beschikbaar op <ulink url="http://issues.apache.org/bugwritinghelp.html"
+>https://issues.apache.org/bugwritinghelp.html</ulink
+> (in het Engels). In het algemeen doet u er verstandig aan om de volgende richtlijnen te volgen: </para>
+
+<formalpara
+><title
+>Geef informatie over uw systeem</title>
+  <para
+>Het menu-item <menuchoice
+><guimenu
+>Help</guimenu
+><guimenuitem
+>Bug rapporteren</guimenuitem
+></menuchoice
+> zal dit automatisch invullen, maar als u de voorkeur eraan geeft om dit dialoogvenster niet te gebruiken, dan zijn er enkele items die u in uw rapport moet vermelden. We moeten weten welk besturingssysteem u gebruikt (&Linux;, &MacOS;, of &Windows;), de versie van &kde; en de versie van &kmymoney; die u gebruikt, en de versie van &MacOS; of &Windows; of de naam en versie van uw &Linux; distributie en de versie van uw kernel. </para>
+</formalpara>
+
+<formalpara
+><title
+>Bij crashes, voeg een backtrace toe</title>
+  <para
+>De backtrace is vaak het meest bruikbare stuk informatie bij het oplossen van crashes. </para>
+</formalpara>
+
+<formalpara
+><title
+>Probeer het te reproduceren</title>
+  <para
+>Laat het ons weten of u in staat was om dat te doen. Het is belangrijk om te weten of de bug maar een keer optrad en u kon het niet nog een keer op laten treden of dat het elke keer optreed of dat het af en toe optreed. </para>
+</formalpara>
+
+<formalpara
+><title
+>Geef de nodige stappen op</title>
+  <para
+>Dit is een slecht bug rapport: <quote
+>I entered a transaction, and &kmymoney; crashed.</quote
+> Een veel beter bug rapport is: <quote
+>Using the transaction form, I entered a new transaction in my Credit Card account. I selected the Transfer tab, entered in an amount, then changed to the Deposit tab, and back to the Transfer tab. When I returned to the Transfer tab, &kmymoney; crashed. This bug is fully reproducible for me.</quote
+> </para>
+</formalpara>
+
+<formalpara
+><title
+>Vertel ons wat u verwachte dat zou gaan gebeuren</title>
+  <para
+>In sommige gevallen is dit duidelijk, maar bij meer subtiele bugs, zijn er soms echter bug rapporten waarbij het niet duidelijk is wat de indiener verwachtte dat er zou gaan gebeuren. Vertel ons altijd wat u dacht dat er zou gaan gebeuren. </para>
+</formalpara>
+
+<formalpara
+><title
+>Overweeg om met debugging ingeschakeld het programma te starten</title>
+  <para
+>Als u een versie heeft gecompileerd met de optie --enable-debug=full dan kunt er zeker van zijn dat de best mogelijke backtraces worden gegenereerd. Als het programma crashte, start dan &kmymoney; opnieuw vanuit gdb, en reproduceer de crash opnieuw. Als het crasht, type dan <quote
+>bt</quote
+> om een backtrace te genereren. </para>
+</formalpara>
+
+<para
+>Het programma op deze manier gebruiken is een beetje moeilijker, we verwachten daarom niet dat alle gebruikers dit doen. Maar, als u geïnteresseerd bent in het helpen van &kmymoney; zo stabiel mogelijk te maken, dan is dit de best mogelijke manier voor het vinden van de bug in de code en een patch in te sturen. </para>
+</sect3>
+</sect2>
+</sect1>
+</chapter>

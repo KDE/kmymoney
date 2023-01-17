@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="credits">
+<chapterinfo>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Créditos</title>
+
+<para
+>Programa com 'copyright' &copy; 2000, 2001, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014 da Equipa de Desenvolvimento do KMyMoney </para>
+
+<para
+>Documentação com 'copyright' &copy; 2000, 2001, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014 da Equipa de Desenvolvimento do KMyMoney </para>
+
+<sect1 id="credits.original">
+<title
+>Autor Original</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title
+>Michael Edwardes &Michael.T.Edwardes.mail;</title>
+      <para
+>Ideia original, muito do código-fonte inicial. Administrador do projecto. </para>
+    </formalpara>
+  </listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="credits.active">
+<title
+>Programadores Activos</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title
+>Thomas Baumgart &Thomas.Baumgart.mail;</title>
+      <para
+>Gestor de versões e manutenção oficial. Motor de base. Administrador do projecto. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Tony Bloomfield &Tony.Bloomfield.mail;</title>
+      <para
+>Importação do GnuCash. Suporte para bases de dados.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Robert Wadley &Robert.Wadley.mail;</title>
+      <para
+>Artista. Ícones, ecrã inicial, página inicial. Capturas de imagens.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Alvaro Soliverez &Alvaro.Soliverez.mail;</title>
+      <para
+>Previsão. Relatórios.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Fernando Vilas &Fernando.Vilas.mail;</title>
+      <para
+>Suporte para bases de dados.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Cristian Oneţ &Cristian.Onet.mail;</title>
+      <para
+>Correcções e 'Plugins'</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Jack H. Ostroff &Jack.H.Ostroff.mail;</title>
+      <para
+>Documentação.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Migração para o &kde;4/&Qt;4</title>
+      <para
+>Este foi um enorme esforço, com a contribuição de muitos programadores. Pedimos desculpas se nos esquecemos de indicar alguém explicitamente.</para>
+    </formalpara>
+  </listitem>
+</itemizedlist>
+
+</sect1>
+<sect1 id="credits.past">
+<title
+>Programadores das Versões Anteriores</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title
+>Ace Jones &Ace.Jones.mail;</title>
+      <para
+>Relatórios. Importação de OFX. Cotações 'Online'. Editor de documentação.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Kevin Tambascio <email
+>ktambascio@users.sourceforge.net</email
+></title>
+      <para
+>Suporte inicial a investimentos.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Felix Rodriguez <email
+>frodriguez@users.sourceforge.net</email
+></title>
+      <para
+>Administrador do projecto.</para>
+    </formalpara>
+  </listitem>
+ 
+  <listitem>
+    <formalpara>
+      <title
+>John C <email
+>tacoturtle@users.sourceforge.net</email
+></title>
+      <para
+>Desenvolvimento.</para>
+    </formalpara>
+  </listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="credits.special">
+<title
+>Muitos Agradecimentos</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title
+>Javier Campos Morales <email
+>javi_c@users.sourceforge.net</email
+></title>
+      <para
+>Programador &amp; Artista.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Laurent Montel <email
+>montel@kde.org</email
+></title>
+      <para
+>Correcções.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Roger Lum &Roger.Lum.mail;</title>
+      <para
+>Documentação.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Darin Strait &Darin.Strait.mail;</title>
+      <para
+>Documentação.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Allan Anderson &Allan.Anderson.mail;</title>
+      <para
+>Correcções. 'Plugin' de Importação de CSV.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Colin Wright &Colin.Wright.mail;</title>
+      <para
+>Correcções e Documentação.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Bernd Gonsior <email
+>bernd.gonsior@googlemail.com</email
+></title>
+      <para
+>Relatórios. Migração para o &kde;4/&Qt;4.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Ian Neal <email
+>iann_bugzilla@blueyonder.co.uk</email
+></title>
+      <para
+>Transacções agendadas e calendários.</para>
+    </formalpara>
+  </listitem>
+</itemizedlist>
+
+<para
+>Tradução de José Nuno Pires <email
+>zepires@gmail.com</email
+></para
+> 
+&underFDL; &underGPL; </sect1>
+</chapter>

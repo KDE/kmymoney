@@ -1,0 +1,55 @@
+<sect1 id="details.impexp.woob">
+  <sect1info>
+    <author
+>&Dawid.Wrobel; &Dawid.Wrobel.mail;</author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+  </sect1info>
+
+  <title
+>Woob-importeerprogramma</title>
+  <sect2>
+    <title
+>Wat is Woob?</title>
+    <para
+><ulink url="https://woob.tech/"
+>Woob</ulink
+> (afkorting voor <quote
+>Web outside of browsers</quote
+>) is <quote
+>een verzameling toepassingen die kunnen samenwerken met websites, zonder dat de gebruiker ze in een browser opent</quote
+>. Eén van <ulink url="https://woob.tech/applications/"
+>zo'n toepassing</ulink
+> biedt specifiek de interactie met <ulink url="https://woob.tech/applications/bank"
+>financiële instituten</ulink
+>. &kmymoney; biedt een plug-in die dat direct gebruikt, en daarom toestaat transacties uit die rekeningen van die instituten te importeren die anders geen ondersteuning bieden voor elk ander financieel protocol dat &kmymoney; behandelt. </para>
+
+    <note>
+      <para
+>&kmymoney; vereist nu dat u Woob onafhankelijk installeert. Kijk in de volgende secties voor details. </para>
+    </note>
+  </sect2>
+  <sect2>
+    <title
+>Woob installeren</title>
+    <para
+>Een toenemend aantal Linux distributies leveren een pakket voor Woob, en dit heeft de voorkeur, als er een voor u beschikbaar is. </para>
+    <para
+>U moet Python 3 eerst installeren alvorens door te gaan. Alle Linux distributies leveren pakketten voor Python, maar u kunt altijd een pakket voor uw systeem downloaden van de <ulink url="https://www.python.org/downloads/"
+>officiële website</ulink
+>. </para>
+
+    <para
+>Met Python 3 geïnstalleerd zou u in staat moeten zijn om de vereiste Woob modules gemakkelijk te downloaden en te installeren. Kijk in de instructies op de <ulink url="https://woob.tech/install/"
+>Woobwebsite</ulink
+>. </para>
+  </sect2>
+  <sect2>
+    <title
+>Woob gebruiken</title>
+    <para
+>&kmymoney; gebruikt de module <quote
+>woob bank</quote
+>. </para>
+  </sect2>
+</sect1>

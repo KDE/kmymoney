@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="reference.widgets">
+<sect1info>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</sect1info>
+
+<title
+>Bedienelemente</title>
+
+<para
+>&kmymoney; hat einige spezielle Bedienelemente, die man in anderen Applikation so nicht findet. Die Verwendung dieser Bedienelemente wird in diesem Kapitel erläutert. </para>
+
+<sect2 id="reference.widgets.datepicker">
+<title
+>Datumseingabe-Bedienelement</title>
+
+<para
+>Wann immer &kmymoney; eine Information über ein spezifisches Datum benötigt, &eg; das Datum einer Buchung oder das Eröffnungsdatum eines Kontos, wird dem Benutzer ein <emphasis
+>Datumseingabe-Bedienelement</emphasis
+> angeboten. Es besteht aus drei Feldern und einem Knopf. Die Felder stellen den <emphasis
+>Tag</emphasis
+>, den <emphasis
+>Monat</emphasis
+> und das <emphasis
+>Jahr</emphasis
+> getrennt durch Datumstrennzeichen dar. Wird der Knopf gedrückt, öffnet sich ein <emphasis
+>Datumsauswahl</emphasis
+> Bedienelement. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Tipp des Tages</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="date_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Datums-Bedienelement</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Innerhalb des Datum-Bedienelements können Sie mit Hilfe der Cursor-Tasten &Left; und &Right; zwischen dem <emphasis
+>Tag</emphasis
+>, <emphasis
+>Monat</emphasis
+> und <emphasis
+>Jahr</emphasis
+> Feld wechseln. Mit den Cursor-Tasten Hoch und Runter wird der Wert des aktuellen Feldes erhöht oder erniedrigt. Die Tasten <keycap
+>+</keycap
+> und <keycap
+>-</keycap
+> können genutzt werden, um einen einzelnen Tag zu ändern. Die Monat- und Jahresgrenzen werden erkannt und entsprechend erhöht oder erniedrigt, wenn es notwendig ist. Mit der Taste <keycap
+>T</keycap
+> wird das heutige Datum eingestellt. </para>
+
+<para
+>Das Datum kann auch mit der Maus verändert werden. Durch Anklicken des <emphasis
+>Tag</emphasis
+>, <emphasis
+>Monat</emphasis
+> oder <emphasis
+>Jahr</emphasis
+> Feldes wird das entsprechende Feld ausgewählt. Der Wert des Feldes kann anschließend mit den entsprechenden Knöpfen auf der rechten Seite des Bedienelements erhöht und erniedrigt werden. Sie bewirken genau das gleiche wie die &Up;/&Down;-Tasten. </para>
+
+<para
+>Der Datumsauswähler öffnet sich, wenn der Knopf rechts des Pfeilknopfes gedrückt wird. Er enthält vier Pfeilknöpfe im oberen Bereich, sowie zwei auf jeder Seite des gerade gewählten Monatsnamens und der Jahreszahl. Die Knöpfe ganz links dienen zum verringern des Monats und der Jahreszahl, die Knöpfe rechts der Jahreszahl dienen zum Erhöhen des Monats und des Jahres. Der Knopf ganz rechts schließt den Datumsauswähler. </para>
+
+<para
+>Neben den Knöpfen zeigt das Bedienelement ein Kalenderblatt für den ausgewählten Monat. Beim Anklicken eines Tages wird dieses Datum übernommen, der Datumsauswähler wird geschlossen und das ausgewählte Datum wird in die <emphasis
+>Tag</emphasis
+>, <emphasis
+>Monat</emphasis
+> und <emphasis
+>Jahr</emphasis
+> Felder übernommen. </para>
+
+<para
+>Im unteren Bereich des Datumsauswählers befindet sich ein Knopf, ein Texteingabefeld und eine Auswahlliste. Durch Drücken des Knopfes wird der heutige Tag in den Datumsauswähler übernommen. Das Textfeld kann genutzt werden, um ein bestimmtes Datum einzugeben. Durch Drücken der &Enter;-taste wird das Datum im Datumsauswähler-Bedienelement angezeigt. Die Auswahlliste ermöglicht die Auswahl einer bestimmten Woche, um anschließend einen Tag dieser Woche zu wählen. </para>
+</sect2>
+
+<sect2 id="reference.widgets.value">
+<title
+>Werteingaben</title>
+<para
+>Das Werteingabe Bedienelement besteht aus einem Texteingabefeld (welches Zahlen, Tausendertrennzeichen und Dezimaltrennzeichen akzeptiert) und einem Knopf auf der rechten Seite. Verwenden Sie die Zahlen, um den gewünschten Wert einzugeben. Geben Sie die Nachkommastellen durch Eingabe des Dezimaltrennzeichens Ihrer Ländereinstellungen ein. Wenn den Knopf rechts oder eine Taste die eine arithmetische Operation darstellt (&eg; <keycap
+>+</keycap
+>, <keycap
+>-</keycap
+>, <keycap
+>/</keycap
+>, <keycap
+>*</keycap
+> oder <keycap
+>%</keycap
+>), so erscheint ein kleiner Taschenrechner und ermöglicht Ihnen die Berechnung des Ergebnisses. </para>
+
+<para
+>Negative Werte können durch Eingabe eines vorangestellten Minuszeichens eingegeben werden. Ist in Ihren Ländereinstellungen festgelegt, dass negative Zahlen durch einen in Klammern eingeschlossenen Wert dargestellt wird, so kann dieser Wert genauso in Klammern eingeschlossen eingegeben werden. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Tipp des Tages</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="value_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Werteingabe-Bedienelement</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Verwenden Sie das Taschenrechner Bedienelement wie einen normalen Taschenrechner und verlassen Sie ihn durch Drücken des Knopfes <guibutton
+>=</guibutton
+> oder durch Drücken der Taste <keycap
+>=</keycap
+> auf Ihrer Tastatur. </para>
+</sect2>
+
+<sect2 id="reference.widgets.payee">
+<title
+>Zahler/Zahlungsempfänger-Eingabe</title>
+
+<para
+>Wenn Sie aufgefordert werden, einen Zahlenden/Zahlungsempfänger für eine Buchung einzugeben, so können Sie beginnen, den Namen mit der Tastatur einzutippen. Solange übereinstimmende Einträge in der von &kmymoney; verwalteten Empfängerliste existieren, so werden diese in einer Box neben oder über dem Eingabefeld angezeigt. Mit der Maus oder den &Up;/&Down;-Tasten kann ein Eintrag aus der Liste ausgewählt werden. Wenn Sie die Tastatur verwenden, müssen Sie den gewählten Eintrag noch durch Drücken der Eingabetaste bestätigen. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Tipp des Tages</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Empfänger Bedienelement</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Wenn der eingegebene Name &kmymoney; noch nicht bekannt ist, werden Sie gefragt, ob Sie einen neuen Empfänger-Datensatz anlegen möchten. Wenn Sie sich dagegen entscheiden, so wird das Feld geleert. Ansonsten wird der Datensatz erzeugt und zur Liste hinzugefügt. </para>
+
+<para
+>Sobald das Eingabefeld die ersten Zeichen enthält, zeigt die Liste nur noch diejenigen Empfänger, die auf die eingegebene Zeichenfolge zutrifft. Klicken Sie doppelt auf den Pfeil der Auswahlliste, um eine Gesamtliste der Empfänger zu sehen. </para>
+
+</sect2>
+
+<sect2 id="reference.widgets.category">
+<title
+>Kategorie/Konto Eingabe</title>
+
+<para
+>Wenn Sie aufgefordert werden, eine Kategorie oder ein Konto einzugeben, so können Sie beginnen, den Namen mit der Tastatur einzutippen. Solange übereinstimmende Einträge in der von &kmymoney; verwalteten Kategorien-/Kontenliste existieren, so werden diese in einer Box neben oder über dem Eingabefeld angezeigt. Mit der Maus oder den &Up;/&Down;-Tasten kann ein Eintrag aus der Liste ausgewählt werden. Wenn Sie die Tastatur verwenden, müssen Sie den gewählten Eintrag noch durch Drücken der &Enter;taste bestätigen. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Tipp des Tages</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="category_widget.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Kategorien-Bedienelement</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Wenn der eingegebene Name &kmymoney; noch nicht bekannt ist, werden Sie gefragt, ob Sie einen neuen Kategorien-Datensatz anlegen möchten. Wenn Sie sich dagegen entscheiden, so wird das Feld geleert. Ansonsten wird der Datensatz erzeugt und zur Liste hinzugefügt. </para>
+
+<para
+>Sobald das Eingabefeld die ersten Zeichen enthält, zeigt die Liste nur noch diejenigen Kategorien/Konten, die auf die eingegebene Zeichenfolge zutreffen. Klicken Sie doppelt auf den Pfeil der Auswahlliste, um eine Gesamtliste der Kategorien/Konten zu sehen. </para>
+
+</sect2>
+</sect1>

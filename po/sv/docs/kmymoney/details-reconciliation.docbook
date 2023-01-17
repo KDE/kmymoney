@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.reconcile">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-21</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Avstämning</title>
+
+<sect1 id="details.reconcile.whatis">
+<title
+>Vad är avstämning?</title>
+
+<para
+>Avstämning omfattar att jämföra transaktionerna du har skrivit in i &kmymoney; med transaktioner listade för det kontot av institutionen. Det görs oftast med transaktionslistan på ett utdrag, vare sig det är ett bankutdrag, kreditkortsutdrag, låneutdrag eller något annat utdrag. Det kan också göras med en kontolista från nätet, även om det är mindre vanligt. Om några avvikelser hittas, så har antingen du eller den som skapade utdraget gjort ett misstag. </para>
+
+<para
+>To reconcile an account, choose your account from the drop down box and click on the <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="reconcile.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> reconcile icon, select the <menuchoice
+><guimenu
+>Account</guimenu
+> <guimenuitem
+>Reconcile...</guimenuitem
+> </menuchoice
+> menu item or use the <keycombo
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> shortcut. </para>
+</sect1>
+
+<sect1 id="details.reconcile.wizard">
+<title
+>Avstämningsguiden</title>
+<para
+>This will open the reconciliation wizard. The first page of the wizard briefly describes the process you will follow. Click on <guibutton
+>Next</guibutton
+> to actually start the wizard. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Avstämningsguiden</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile1.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Avstämningsguiden</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.reconcile.wizard.statement">
+<title
+>Utdragsinformation</title>
+<para
+>The statement date, starting balance, and ending balance can be found in your statement. Make sure that the figures match and click on the <guibutton
+>Next</guibutton
+> button. If the figures do not match then enter the figures as listed on your statement and click on the <guibutton
+>Next</guibutton
+> button. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Avstämningsguiden</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile2.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Avstämningsguiden</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect2>
+
+<sect2 id="details.reconcile.wizard.interest">
+<title
+>Ränta</title>
+<para
+>If the statement reconciliation is on a bank account or any account with interest and/or charges fees, then enter these values in the appropriate fields. A category can be assigned for each of these amounts. </para>
+
+<note>
+<para
+>Räntefältet är till för ränteinkomster. Om du exempelvis måste betala ränta för ett kreditkortskonto, måste det skrivas in som en avgift. </para>
+</note>
+
+<para>
+<screenshot>
+	<screeninfo
+>Avstämningsguiden</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile3.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Avstämningsguiden</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Click on <guibutton
+>Continue</guibutton
+> to start matching your statement to what you have entered. Note that this completes the Reconciliation Wizard, but not the process of reconciliation. It also changes the ledger display by only showing transactions that have not already been marked as reconciled. As described below, you still need to clear transactions and then tell &kmymoney; that the account is reconciled. </para>
+</sect2>
+
+<sect2 id="details.reconcile.wizard.clearing">
+<title
+>Kontrollera transaktioner</title>
+<para
+>During the reconciliation, any transaction can be edited to make it match the statement, and new transactions can be created as usual. To mark a transaction as cleared, click on the <guilabel
+>C</guilabel
+> column in the list view. A transaction is cleared when it matches the transaction on your statement. </para>
+
+<para
+>Kommandoramen (precis under området med transaktionslistan) visar utdragets belopp till vänster, det avstämda beloppet i mitten och skillnaden till höger. När transaktioner markeras som avstämda, uppdateras värdena för att visa ändringen. </para>
+
+<para
+>Observera dock, att eftersom avstämning är processen då information i kontot matchas med den på ett utdrag, kommer ändringar av transaktioner efter utdragets datum som skrevs in i guiden att sparas, men får ingen effekt på det avstämda beloppet som visas i kommandoramen. </para>
+
+<screenshot>
+	<screeninfo
+>Avstämningsguiden</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile4.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Avstämningsguiden</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="details.reconcile.complete">
+<title
+>Slutföra avstämningen</title>
+
+<sect3 id="details.reconcile.finish">
+<title
+>Göra färdigt avstämningen</title>
+<para
+>När skillnaden är noll är kontot avstämt, och du kan klicka på knappen <guibutton
+>Slutför</guibutton
+>. När du gör det, tar &kmymoney; alla transaktioner som markerats som kontrollerade och markerar dem som avstämda, och värdet i <guilabel
+>K</guilabel
+>-kolumnen ändras från <quote
+>K</quote
+> till <quote
+>A</quote
+> för att visa ändringen. Dessutom sparar det ändringarna och registrerar att kontot har stämts av. (Filen måste fortfarande sparas för att spara alla ändringar permanent.) </para>
+</sect3>
+
+<sect3 id="details.reconcile.postpone">
+<title
+>Senarelägga avstämningen</title>
+<para
+>If you're having trouble completing the reconciliation, or you need to gather some additional information before you can complete the process, you can postpone the process to a later time by clicking on the <guibutton
+>Postpone</guibutton
+> button. When you do this, &kmymoney; remembers the values you entered when you started the wizard, it does not mark cleared transactions as reconciled, and it returns the ledger to its normal view. If you exit &kmymoney; before clicking either <guibutton
+>Finish</guibutton
+> or <guibutton
+>Postpone</guibutton
+>, it has the same effect as clicking <guibutton
+>Postpone</guibutton
+>. Any edits you have made, such as marking transactions cleared or entering new transactions, are not touched, and you can still save them before you exit &kmymoney;. However, you will have to run the reconciliation wizard again in order to reconcile the account. </para>
+
+<para
+>När avstämningsguiden används för det här kontot nästa gång, kommer &kmymoney; ihåg värdena du skrev in när guiden användes förra gången, och du kommer att kunna ändra dem, om det behövs. I detta fall är guidens inledande skärm annorlunda, för att påminna dig om det. </para>
+
+<screenshot>
+	<screeninfo
+>Avstämningsguiden</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="reconcile-redo.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Avstämningsguiden</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+
+</sect3>
+</sect2>
+</sect1>
+
+</chapter>
+

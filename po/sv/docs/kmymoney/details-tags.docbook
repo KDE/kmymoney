@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.tags">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Cristian.Onet; &Cristian.Onet.mail;</author>
+    <author
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+  </authorgroup>
+  <date
+>2020-02-06</date>
+  <releaseinfo
+>5.0.8</releaseinfo>
+</chapterinfo>
+
+<title
+>Etiketter</title>
+
+<para
+>Etikettvyn tillhandahåller information om alla etiketter som har lagts till av användaren. Etikettskärmen är uppdelad i två huvudområden: en lista över etiketter och ett detaljområde. Fliken <guilabel
+>Transaktioner</guilabel
+> visar alla transaktioner som hör ihop med etiketten. Fliken <guilabel
+>Detaljinformation</guilabel
+> inkluderar en användardefinierad färg, samt anteckningar, som inte används någon annanstans. Observera att om du ändrar färgen, som används i symbolen som visas framför etikettnamnet i alla associerade transaktioner, måste du klicka på knappen längst ner till höger om detaljinformationsområdet för att den ska sparas. </para>
+
+<sect1 id="details.tags.list">
+<title
+>Etikettlista</title>
+
+<para
+>En lista över alla etiketter, sorterade alfabetiskt, visas på vänster sida om skärmen. <screenshot
+> <mediaobject
+> <imageobject>
+  <imagedata fileref="tags.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+  </screenshot>
+</para>
+
+<sect2>
+<title
+>Lägga till en etikett</title>
+<para
+>Det finns tre olika sätt att skapa en ny etikett. För det första kan du klicka på ikonen ny etikett <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="list-add.png"/></imageobject
+></inlinemediaobject
+></guiicon
+>. För det andra kan du högerklicka på någon etikett och välja <guimenuitem
+>Ny etikett</guimenuitem
+>. Det skapar en ny etikett som kallas <quote
+>Ny etikett</quote
+>. Högerklicka på etiketten och välj <guimenuitem
+>Byt namn på etikett</guimenuitem
+> för att skriva in namnet på den nya etiketten. Till sist kan du direkt lägga till en ny etikett på huvudboksidan eller med en delad transaktion genom att skriva in etikettens namn i etikettfältet. &kmymoney; frågar om du vill lägga till etiketten, och efter att ha valt <quote
+>ja</quote
+> läggs den till. </para>
+</sect2>
+
+<sect2>
+<title
+>Byta namn på en etikett</title>
+<para
+>För att byta namn på en etikett, klicka antingen på etikettens namn för att markera den och klicka på <guiicon
+>Byt namn på etikett</guiicon
+> (mellan ikonerna för att lägga till och ta bort etiketter), eller högerklicka på namnet och välj <guimenuitem
+>Byt namn på etikett</guimenuitem
+> så blir namnet redigerbart. Ändras namnet påverkar det namnet i alla transaktioner där det visas. </para>
+</sect2>
+
+<sect2>
+<title
+>Ta bort en etikett</title>
+<para
+>För att ta bort en etikett, klicka antingen på ikonen ta bort etikett <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="list-remove.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> eller högerklicka på namnet och välj <guimenuitem
+>Ta bort etikett</guimenuitem
+>. Om etiketten har några transaktioner, visas en dialogruta som låter dig tilldela dem till en annan etikett. </para>
+
+<note>
+<para
+>Eftersom etiketter bara introducerades i &kmymoney; version 4.7, klarar inga metoder för dataimport av att importera etiketter. Det är klart att det är en viktig funktion, och alla importmetoder kommer troligen att introducera det i en kommande utgåva. </para>
+</note>
+</sect2>
+</sect1>
+
+<sect1 id="details.tags.info">
+<title
+>Transaktioner med etikett och Etikettinformation</title>
+<para
+>För att visa transaktionerna eller visa och redigera informationen som hör ihop med en viss etikett, markera etiketten i listan och välj lämplig flik på höger sida av dialogrutan. <screenshot>
+  <screeninfo
+>Fliken Etikettinformation</screeninfo>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="tag_details.png" format="PNG"/>
+  </imageobject>
+  <textobject>
+  <phrase
+>Etikettinformation</phrase>
+  </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.tags.info.transactions">
+<title
+>Transaktioner med etikett</title>
+<para
+>Välj fliken <guilabel
+>Transaktioner</guilabel
+> för att se en lista med transaktionerna som hör ihop med den markerade etiketten. Listan liknar listan över transaktioner för en betalningsmottagare. Det går att dubbelklicka på en transaktion, för att komma till huvudbokens vy av transaktionen för kontot där transaktionen har etiketterats. </para>
+</sect2>
+
+
+<sect2 id="details.tags.info.details">
+<title
+>Etikettinformation</title>
+<para
+>För att visa och redigera informationen som hör ihop med en viss etikett, välj fliken <guilabel
+>Information</guilabel
+>. </para>
+  <itemizedlist>
+    <listitem>
+      <para
+>Du kan välja färg som används för att markera transaktioner som etiketten hör ihop med. Om du klickar på färgraden, visas en färgvalsdialogruta. </para>
+    </listitem>
+    <listitem>
+      <para
+>Genom att klicka på kryssrutan <guilabel
+>Stängd</guilabel
+> ändras inte några transaktioner som redan hör ihop med etiketten, men det förhindrar att etiketten tilldelas till några ytterligare transaktioner. </para>
+    </listitem>
+    <listitem>
+      <para
+>Redigera helt enkelt texten i rutan för att ändra anteckningarna som hör ihop med etiketten. </para>
+    </listitem>
+  </itemizedlist>
+<para
+>Glöm inte bort att klicka på knappen <guiicon
+>Uppdatera</guiicon
+> när du är klar, även om du blir tillfrågad om du lämnar dialogrutan utan att ha gjort det. </para>
+</sect2>
+</sect1>
+</chapter>
+

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.tags">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Cristian.Onet; &Cristian.Onet.mail;</author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Stichwörter</title>
+
+<para
+>Die Stichwortübersicht zeigt detaillierte Informationen über alle Stichwörter aus Ihren Buchungen. Die Übersicht ist in zwei Hauptbereiche aufgeteilt: eine Stichwortliste und ein Detailbereich. </para>
+
+<sect1 id="details.tags.list">
+<title
+>Stichwortliste</title>
+
+<para
+>Eine Liste der Stichwörter befindet sich auf der linken Seite des Fensters. Sie ist alphabetisch sortiert. <screenshot
+> <mediaobject
+> <imageobject>
+  <imagedata fileref="tags.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+  </screenshot>
+</para>
+
+<sect2>
+<title
+>Hinzufügen eines Stichworts</title>
+<para
+>Um ein Stichwort hinzuzufügen, klicken Sie auf das Symbol <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="list-add.png"/></imageobject
+></inlinemediaobject
+></guiicon
+> oder klicken Sie mit der &RMBn; auf irgend ein Stichwort und wählen dann aus dem Kontextmenü <guimenuitem
+>Neues Stichwort</guimenuitem
+>, um ein neues Stichwort mit diesem Namen zu erstellen. Klicken Sie dann mit der &RMBn; auf dieses Stichwort und wählen <guimenuitem
+>Stichwort umbenennen</guimenuitem
+> und geben den neuen Namen ein. </para>
+</sect2>
+
+<sect2>
+<title
+>Umbenennen eines Stichworts</title>
+<para
+>Um ein Stichwort umzubenennen, klicken Sie auf den Namen, um es auszuwählen. Klicken Sie dann auf das Symbol <guiicon
+>Stichwort umbenennen</guiicon
+> zwischen den Symbolen Hinzufügen oder Entfernen. Alternativ können Sie auch mit der &RMBn; auf den Namen klicken und dann <guimenuitem
+>Stichwort umbenennen</guimenuitem
+> im Kontextmenü auswählen. Die Änderung des Namens wird in allen zugehörigen Buchungen angewendet. </para>
+</sect2>
+
+<sect2>
+<title
+>Löschen eines Stichworts</title>
+<para
+>Um ein Stichwort zu löschen, klicken Sie entweder auf das Symbol <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="list-remove.png"/></imageobject
+></inlinemediaobject
+></guiicon
+> oder klicken Sie mit der &RMBn; auf den Namen und wählen <guimenuitem
+>Stichwort löschen</guimenuitem
+> aus dem Kontextmenü. Wurde das Sprichwort bereits einigen Buchungen zugewiesen, erscheint ein Dialog, in dem Sie diesen Buchungen ein anderes Stichwort zuweisen können. </para>
+
+<note>
+<para
+>Da Stichwörter gerade erst in &kmymoney; in der Version 4.7 eingeführt wurden, können beim Importieren von Daten noch keine Stichwörter mit importiert werden. Da dies eine wichtige Funktion ist, wird diese Importmethode wahrscheinlich in den nächsten Versionen hinzugefügt. </para>
+</note>
+</sect2>
+</sect1>
+
+<sect1 id="details.tags.info">
+<title
+>Buchungen mit Stichwörtern und Stichwortdetails</title>
+<para
+>Um eine Buchung anzuzeigen oder die zu einem bestimmten Stichwort gehörende Informationen anzuzeigen und zu bearbeiten, wählen Sie ein Stichwort in der Liste und die Karteikarte auf der rechten Seite des Dialogs. <screenshot>
+  <screeninfo
+>Die Karteikarte Stichwortdetails</screeninfo>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="tag_details.png" format="PNG"/>
+  </imageobject>
+  <textobject>
+  <phrase
+>Stichwortdetails</phrase>
+  </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.tags.info.transactions">
+<title
+>Buchungen mit Stichwörtern</title>
+<para
+>Um eine Liste aller Buchungen mit dem ausgewählten Stichwort anzuzeigen, gehen Sie zur Karteikarte <guilabel
+>Buchungen</guilabel
+>. Diese Liste ähnelt der Ansicht der Buchungen für einen Zahlungsempfänger. Doppelklicken Sie auf eine Buchung, damit gehen Sie zum Kontenbuch der Buchung mit dem zugehörigen Konto, in dem der Buchung dieses Stichwort zugewiesen ist. </para>
+</sect2>
+
+
+<sect2 id="details.tags.info.details">
+<title
+>Stichwortdetails</title>
+<para
+>Auf der Karteikarte <guilabel
+>Details</guilabel
+> können Sie die Informationen zu einem bestimmten Stichwort anzeigen oder bearbeiten. </para>
+  <itemizedlist>
+    <listitem>
+      <para
+>Um die Farbe für die Hervorhebung einer Buchung mit diesem Stichwort zu ändern </para>
+    </listitem>
+    <listitem>
+      <para
+>Um die Notizen zu einem Stichwort zu ändern, bearbeiten Sie den Text im Feld. </para>
+    </listitem>
+    <listitem>
+      <para
+>Klicken Sie auf <guilabel
+>Schließen</guilabel
+>, wird keine Buchung mit diesem Stichwort verändert. Dann können Sie dieses Stichwort keinen weiteren Buchungen zuweisen. </para>
+    </listitem>
+  </itemizedlist>
+<para
+>Möchten Sie die Bearbeitung beenden, klicken Sie auf das Symbol <guiicon
+>Aktualisieren</guiicon
+>., andernfalls werden Sie beim Schließen des Dialogs gefragt, ob Sie die Ihre Eingaben speichern möchten. </para>
+</sect2>
+</sect1>
+</chapter>

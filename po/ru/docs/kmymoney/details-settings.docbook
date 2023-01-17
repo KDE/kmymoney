@@ -1,0 +1,1069 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.settings">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>31 марта 2019 г.</date>
+  <releaseinfo
+>5.0.3</releaseinfo>
+</chapterinfo>
+
+<title
+>Настройка &kmymoney;</title>
+
+<para
+>Параметры, описание которых приводится далее, позволяют настроить &kmymoney; для обеспечения наилучшего соответствия потребностям пользователя. Для выполнения настройки выберите пункт меню <menuchoice
+><guimenu
+>Настройка</guimenu
+><guimenuitem
+>Настроить &kmymoney;...</guimenuitem
+></menuchoice
+> или воспользуйтесь комбинацией клавиш <keycombo action="simul"
+>&Ctrl; &Shift;<keycap
+>,</keycap
+></keycombo
+>. Для применения изменений необходимо нажать кнопку <guibutton
+>Применить</guibutton
+>. </para>
+
+<para
+>Слева от диалога настройки параметров располагается ряд значков и подписей, которые соответствуют определённым частям программы. При щелчке по значку в правой части диалога будут показаны элементы управления, с помощью которых возможно настроить соответствующую часть программы. Они часто располагаются на нескольких вкладках. </para>
+
+<sect1 id="details.settings.general">
+<title
+>Основное</title>
+
+<sect2 id="details.settings.general.global">
+<title
+>Глобальная вкладка</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Автоматическое сохранение</guilabel
+></term>
+<!-- I would prefer to use a more consistent hierarchy and use of levels on this
+     page, but for now, I'm minimizing changes. -->
+    <listitem>
+      <para
+>Если флажок <guilabel
+>Сохранять автоматически каждые</guilabel
+> установлен, &kmymoney; будет автоматически сохранять файлы с заданным интервалом. По умолчанию сохранение выполняется каждые 10 минут. Значение этого параметра возможно изменять в диапазоне от 0 (резервное копирование сразу после ввода операции) до 60 минут.</para>
+
+      <para
+>Если флажок <guilabel
+>Автоматически сохранять изменённые файлы при закрытии</guilabel
+> установлен, &kmymoney; будет автоматически сохранять файлы при закрытии программы. Также возможно настроить резервное копирование файла &kmymoney;. Чтобы задать количество резервных копий, выберите число от 0 (без копирования) до 20. Файлы резервных копий будут храниться в той же папке, что и основной файл. Они будут последовательно пронумерованы, при этом файл с номером «1» является самым новым.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Финансовый год</guilabel
+></term>
+    <listitem>
+      <para
+>Введите день и месяц начала финансового года. Это значение используется для бюджетов и некоторых отчётов.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Внешние программы</guilabel
+></term>
+    <listitem>
+      <para
+>Этот параметр не влияет напрямую на работу &kmymoney;, но позволяет легко запустить внешний инструмент, например калькулятор с расширенными возможностями. Сначала необходимо указать полный путь к выбранной программе в поле <guilabel
+>Калькулятор</guilabel
+>. После этого программу будет возможно запустить двумя способами.</para>
+      <para
+>Первый: воспользоваться пунктом меню <menuchoice
+><guimenu
+>Настройка</guimenu
+><guimenuitem
+>Панели инструментов...</guimenuitem
+></menuchoice
+> для размещения значка <guilabel
+>Калькулятор</guilabel
+> на панели инструментов. После этого при щелчке по этому значку на панели инструментов программа &kmymoney; будет запускать выбранное приложение.</para>
+      <!-- FIXME since the Settings menu is deferred to the Frameworks docs and
+           not explicitly described in this manual, it would at least be nice to
+           refer to the actual Calculator icon here, but I cannot find the
+           source png.  It might also be nice to have a link to Settings Menu
+           doc page. -->
+      <para
+>Второй: воспользоваться пунктом меню <menuchoice
+><guimenu
+>Настройка</guimenu
+><guimenuitem
+>Комбинации клавиш...</guimenuitem
+></menuchoice
+> для создания пользовательской комбинации клавиш. (Соответствующая запись озаглавлена «&kmymoney;/Калькулятор...».) Эту комбинацию клавиш затем будет возможно использовать для запуска приложения.</para>
+      <!-- FIXME is not currently possible to launch the calculator from some menu
+           item.  I have filed a wishlist, and when implemented, it should be
+           described here, probably as the first choice. -->
+       
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.general.views">
+<title
+>Вкладка «Разделы»</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Действия при запуске программы</guilabel
+></term>
+    <listitem>
+      <para
+>Этот флажок определяет, что будет показано при запуске &kmymoney;: домашняя страница или то представление, которое использовалось в момент закрытия программы.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+><guilabel
+>Представление разделов &kmymoney;</guilabel
+></term>
+    <listitem>
+      <para
+>Возможно выбрать одно из трёх представлений для использования в &kmymoney;. Если выбрано представление «Список» или «Иерархический список», значки и подписи к ним будут расположены в левой части окна. В представлении «Список» значки крупнее, а в представлении «Иерархический список» — мельче. В представлении «Вкладки» значки и подписи к ним располагаются в верхней части окна.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Показывать строку заголовка на каждой странице</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот флажок установлен, голубая строка заголовка &kmymoney; будет показана в верхней части каждой страницы. Если флажок снят, эта строка не будет отображаться, что предоставит больше места для показа содержимого страницы.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Синхронизировать выбор счёта в разделах «Книга учёта» и «Инвестиции»</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот флажок установлен, отображаемые в представлении «Книга учёта» и представлении «Инвестиции» счета будут синхронизированы. Это означает, что при изменении счёта в одном из представлений и последующем переходе в другое представление будут показаны сведения о том же самом счёте. Это делает переключение между этими двумя представлениями эффективнее. Если флажок не установлен, при переходе в любое из этих представлений будет показан тот счёт, который был ранее выбран в этом представлении.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.general.filter">
+<title
+>Вкладка «Фильтры»</title>
+
+<sect3>
+<title
+>Счета / Статьи бюджета</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Скрыть неиспользуемые статьи</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот флажок установлен, в представлении «Статьи бюджета» будут скрыты неиспользуемые статьи. Эти статьи будет по-прежнему возможно использовать в операциях. Если ввести скрытую статью в книгу учёта, она станет доступна для использования.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Показывать счета собственного капитала</guilabel
+></term>
+    <listitem>
+      <para
+>По умолчанию в представлении «Счета» счета собственного капитала скрыты. Если этот флажок установлен, они будут показаны. Эти счета используются для отслеживания отдельных финансовых инструментов или инвестиций, хранящихся на инвестиционном счёте. Не следует путать их с группой счетов верхнего уровня <emphasis
+>Собственный капитал</emphasis
+>, которая включает счета, содержащие начальные балансы других счетов.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+><guilabel
+>Показывать статьи бюджета во вкладке «Список» раздела «Счета»</guilabel
+></term>
+    <listitem>
+      <para
+>По умолчанию в представлении «Счета» статьи бюджета скрыты. Если этот флажок установлен, они будут показаны.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+><guilabel
+>Не показывать счета с нулевым балансом</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот флажок установлен, счета собственного капитала с нулевым балансом не будут отображаться в представлении «Счета».</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+
+<sect3>
+<title
+>Графики</title>
+<variablelist>
+    <varlistentry>
+    <term
+><guilabel
+>Не показывать выполненные графики платежей</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот флажок установлен, в представлении «Графики платежей» не будут показаны выполненные графики платежей.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+
+<sect3>
+<title
+>Операции</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Не показывать операции, предшествующие</guilabel
+></term>
+    <listitem>
+      <para
+>Операции, предшествующие указанной дате, не будут показаны в представлении «Книга учёта». Это может быть полезно, если в данных представлены операции за многие годы; установка значения равным одному или двум годам позволит скрыть более старые операции.</para>
+      <para
+>Установка этого параметра в значение «01.01.1900» (значение по умолчанию) позволяет облегчить поиск связанных с датами проблем импорта данных, которые возникают в том случае, когда некоторые даты по ошибке относятся к далёкому прошлому.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Не показывать сверенные операции</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот флажок установлен, операции будут фильтроваться по состоянию сверки. Операции с отметкой <emphasis
+>Сверено</emphasis
+> не будут показаны в представлении «Книга учёта».</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.home">
+<title
+>Домашняя страница</title>
+
+<sect2>
+<title
+>Разделы для отображения на домашней странице</title>
+<para
+>Эти параметры позволяют настроить внешний вид <link linkend="firsttime.mainwindow"
+>домашней страницы</link
+> (главного окна): для этого следует выбрать отображаемые сведения и порядок их отображения. Порядок показа выбранных разделов возможно изменять путём нажатия кнопок <guibutton
+>Вверх</guibutton
+> и <guibutton
+>Вниз</guibutton
+>. </para>
+<!-- FIXME Many of these sections need a <link
+> to the doc section actually
+     describing the content. -->
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Активы и пассивы</guilabel
+></term>
+    <listitem>
+      <para
+>Будут показаны открытые счета активов и пассивов и их текущие балансы. Этот и другие списки счетов на домашней странице упорядочены в алфавитном порядке, если не указаны иные параметры упорядочения.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Платежи</guilabel
+></term>
+    <listitem>
+      <para
+>Будут показаны предстоящие запланированные платежи, с отделением просроченных выплат и будущих выплат. Отображается дата, название графика, счёт и сумма платежа, а также остаток на счету после платежа. По умолчанию в списке показано не более шести записей операций. Если отображаются шесть записей, также будет доступна ссылка для просмотра остальных операций (возможно просмотреть записи ближайших 30 дней).</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Предпочтительные счета</guilabel
+></term>
+    <listitem>
+      <para
+>Будут показаны счета, которые отмечены как предпочтительные в диалоге настройки <menuchoice
+><guimenu
+>Счёт</guimenu
+><guimenuitem
+>Редактировать счёт... </guimenuitem
+></menuchoice
+>.</para>
+      <para
+>Для этого и других разделов списка счетов, которых касается этот набор параметров, будет показано название счета и текущий баланс, а также другие столбцы, которые являются специфическими для соответствующего типа отчётов, и, в некоторых случаях, настроенные дополнительно данные.</para>
+      <!-- FIXME - the menu item (or maybe link to actual doc page) should point
+           to the actual other config location and perhaps which items for
+           which account type. -->
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Платёжные счета</guilabel
+></term>
+    <listitem>
+      <para
+>Будут показаны все платёжные счета, то есть все счета, которые позволяют размещать доход и/или производить выплаты по счетам на оплату.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Избранные отчёты</guilabel
+></term>
+    <listitem>
+      <para
+>Будет показан список всех отчётов, которые были отмечены как избранные в диалоге настройки отчёта. Список упорядочен в хронологическом порядке по дате соответствующей отметки отчёта.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Прогноз (по графику платежей)</guilabel
+></term>
+    <listitem>
+      <para
+>Будет показан прогноз на 30, 60 и 90 дней для счетов активов и пассивов с ненулевыми балансами и несверенными операциями.</para>
+      <!-- FIXME What are the real criteria for inclusion in this (and these other) list(s). -->
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Прогноз показателей чистого капитала</guilabel
+></term>
+    <listitem>
+      <para
+>Будет показана диаграмма прогнозируемого чистого капитала на следующие 90 дней.</para>
+    </listitem>
+  </varlistentry>
+
+  <!-- FIXME "Forecast (history) removed as apparently not actually used. -->
+
+  <varlistentry>
+    <term
+><guilabel
+>Бюджет</guilabel
+></term>
+    <listitem>
+      <para
+>Будет показана сводка по текущему месяцу и перерасходы по заданному бюджету или бюджетам. Если бюджет не задан, бюджеты и перерасходы не будут показаны; программа отобразит только расходы текущего месяца.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Наличные средства</guilabel
+></term>
+    <listitem>
+      <para
+>Будет показана сводка по наличным средствам для текущего месяца.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Масштаб домашней страницы/сводки</title>
+<variablelist>
+
+  <varlistentry>
+    <term
+><guilabel
+>Масштаб</guilabel
+></term>
+    <listitem>
+      <para
+>Этот параметр позволяет выбрать размер шрифта в процентах, чтобы установить размер шрифта домашней страницы на основе предпочтений пользователя.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>При выходе из программы запоминать изменения масштаба, выполненные при помощи колеса мыши</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот флажок установлен, программа будет сохранять параметры размеров шрифтов, которые были изменены на домашней странице с помощью прокрутки колеса мыши.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Сведения о счёте</title>
+<para
+>С помощью этих параметров возможно выбрать сведения, которые будут включены в списки счетов.</para>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Показывать лимиты счетов</guilabel
+></term>
+    <listitem>
+      <para
+>Отображает лимит счёта, заданный в диалоге редактирования счёта. Применяется к любому списку, который содержит платёжные счета.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Показывать остаток на онлайн-счетах</guilabel
+></term>
+    <listitem>
+      <para
+>Отображает балансы связанных счетов (состояние баланса обозначается значком перед названием счёта). Значок зелёной галочки означает, что онлайн-баланс и локальный баланс совпадают. Значок почтового ящика с зелёной стрелкой означает, что локальный файл содержит более новые операции, чем в источнике в Интернете. Это сообщает пользователю о том, что стоит обновить онлайн-данные. Красный предупреждающий значок свидетельствует о наличии расхождений между локальным файлом и данными из Интернета.</para>
+      <!-- Note: the colors might be different depending on the selected theme
+           -->
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Показывать количество неотмеченных операций по счёту [!M]</guilabel
+></term>
+    <listitem>
+      <para
+>Добавляет рядом с названием счёта дополнительный столбец, в котором показано количество неотмеченных операций по этому счёту.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Показывать количество учтённых операций по счёту [C]</guilabel
+></term>
+    <listitem>
+      <para
+>Добавляет дополнительный столбец, в котором показано количество учтённых операций по этому счёту.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Показывать количество несверенных (не отмеченных + учтённых) операций по счёту [!R]</guilabel
+></term>
+    <listitem>
+      <para
+>Добавляет дополнительный столбец, в котором показано количество несверенных операций по этому счёту, то есть сумма всех неотмеченных и учтённых операций.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Показывать дату последней сверки</guilabel
+></term>
+    <listitem>
+      <para
+>Добавляет дополнительный столбец, в котором показана дата последней сверки операций по этому счёту.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.register">
+<title
+>Книга учёта</title>
+
+<para
+>Параметры, доступные в этом разделе, позволяют изменять реестр операций, который будет показан на вкладке представления «Книга учёта». </para>
+
+<sect2 id="details.settings.register.display">
+<title
+>Вкладка «Вид»</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Показывать сетку</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот флажок установлен, программа будет показывать линии сетки в списке операций или в представлении «Книга учёта». Это дополнительный параметр просмотра, который позволяет упростить визуализацию отдельных операций и их составляющих.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Показывать все записи в развёрнутом виде</guilabel
+></term>
+    <listitem>
+      <para
+>При установке этого флажка в реестре будут показаны все сведения обо всех отображаемых операциях. В столбце «Подробно» будут отдельно показаны статьи, метки и примечания. Если флажок не установлен, статьи, метки и примечания показаны не будут.</para>
+      <para
+>При включении этого параметра достигается тот же эффект, что и при выборе пункта меню <link linkend="reference.menus.settings.transactiondetail"
+>Показывать сведения об операциях</link
+>.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry id="details.settings.register.lens">
+    <term
+><guilabel
+>Показывать подробные сведения для выделенной строки таблицы</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот флажок установлен, для выбранной операции будут показаны все подробные сведения (даже если флажок <guilabel
+>Показывать все записи в развёрнутом виде</guilabel
+> не установлен).</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+><guilabel
+>Показывать форму ввода операций</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот флажок установлен, в нижней части реестра будет показана <link linkend="details.ledger.transactionform"
+>форма ввода операций</link
+>, которая позволяет редактировать операции. Если форма не отображается, редактирование выполняется непосредственно в самой книге учёта. Когда этот параметр включён, в реестре будет показано меньше операций.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Всегда показывать номер записи</guilabel
+></term>
+    <listitem>
+      <para
+>Всегда показывать поле с номером (<quote
+>Номер</quote
+>) при вводе или редактировании операции. Если этот параметр включён, будет возможно проверять номера, указанные в этом поле, для выявления соответствующих текущих счетов.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Показывать заголовки групп операций</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот флажок установлен, в реестре будут показаны заголовки групп операций. Они связаны с периодами времени или этапами, такими как «Прошлый месяц», «Прошлая неделя», «Текущий месяц», «Последняя сверка», «Следующая неделя» и «Следующий месяц».</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Отделять заголовком предыдущий и текущий финансовые годы </guilabel
+></term>
+    <listitem>
+      <para
+>При выборе этого параметра в реестре будут показаны заголовки групп, соответствующие текущему и предыдущему финансовым годам.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Показывать запланированную дату для просроченных платежей</guilabel
+></term>
+    <listitem>
+      <para
+>В представлении «Книга учёта» для соответствующего счёта отображаются запланированные операции, даты которых относятся к будущему. Когда эти даты наступают и запланированная операция становится просроченной, она прекращает отображаться в книге учёта. Если включить этот параметр, она по-прежнему будет показана.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.register.sorting">
+<title
+>Вкладка «Сортировка»</title>
+<para
+>С помощью этих трёх разделов возможно задать используемый по умолчанию порядок сортировки операций в представлении «Книга учёта». Независимо от раздела, в списке, находящемся слева, будут показаны все доступные поля сортировки. Для выполнения сортировки по какому-либо из этих полей, выберите его (одним щелчком мыши) и щёлкните по стрелке вправо, расположенной между двумя списками. В списке, находящемся справа, показаны все поля, по которым будет выполняться сортировка в соответствующем представлении. Чтобы изменить относительный порядок полей, выберите одно из них и переместите его в списке с помощью кнопок со стрелками вверх и вниз, расположенных справа от списка. При двойном щелчке по полю выполняется переключение между сортировкой по возрастанию и сортировкой по убыванию. </para>
+<para
+>Поля сортировки одни и те же во всех трёх разделах: «Сумма», «Статья бюджета», «Порядок ввода» (дата создания операции), «Номер», «Контрагент», «Дата проводки», «Состояние сверки», «Ценная бумага» и «Тип». </para>
+
+<sect3 id="details.settings.register.sorting.normal">
+<title
+>Вкладка «Обычный вид»</title>
+<para
+>На этой вкладке возможно настроить используемый по умолчанию порядок сортировки записей для обычного вида представления «Книга учёта». </para>
+</sect3>
+
+<sect3 id="details.settings.register.sorting.reconciliation">
+<title
+>Вкладка «Сверка»</title>
+<para
+>На этой вкладке возможно настроить используемый по умолчанию порядок сортировки записей для вида «Сверка» представления «Книга учёта». Это режим показа операций во время процесса <link linkend="details.reconcile"
+>сверки</link
+>. </para>
+</sect3>
+
+<sect3 id="details.settings.register.sorting.search">
+<title
+>Вкладка «Поиск»</title>
+<para
+>На этой вкладке возможно настроить используемый по умолчанию порядок сортировки записей в книге учёта, когда активен <link linkend="details.search"
+>режим поиска</link
+>. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.settings.register.dataentry">
+<title
+>Вкладка «Ввод данных»</title>
+<para
+>Эти параметры влияют на процесс создания новых операций.</para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Автоматическая нумерация чеков</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот флажок установлен, номер чека будет автоматически увеличен при вводе новой чековой операции. Работает одинаково как для режима показа подробных сведений об операции, так и для формы ввода операций.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Сохранять изменения при выборе другой операции/разбивки</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот флажок установлен, изменения, внесённые в текущую операцию, будут сохранены при выборе другой операции или разбивки. Если флажок снят, при выборе другой операции или разбивки появится запрос на подтверждение сохранения изменений.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Перемещаться между полями с помощью клавиши «Ввод»</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот флажок установлен, при нажатии клавиши «Ввод» фокус будет передан следующему полю операции. По достижении последнего поля операция будет сохранена. Если флажок снят, переход между полями будет выполняться по нажатию клавиши &Tab; или с помощью мыши. Нажатие клавиши «Ввод» приведёт к сохранению операции независимо от того, какое поле находится в фокусе. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Начинать поиск совпадений с имени</guilabel
+></term>
+    <listitem>
+      <para
+>Этот параметр управляет <link linkend="details.payees.personalinformation.matching"
+>сопоставлением контрагентов.</link
+> Если флажок установлен, соответствие имён контрагентов всегда будет устанавливаться с начала. Если флажок снят, соответствие будет устанавливаться по любой подстроке. Кроме того, при включении этого параметра будет возможно задать дополнительные параметры сопоставления (на вкладке «Совмещение» представления «Контрагенты»).</para>
+    </listitem>
+  </varlistentry>
+
+  <!--FIXME missing Automatic reconciliation-->
+  <varlistentry>
+    <term
+><guilabel
+>Автоматическая сверка</guilabel
+></term>
+    <listitem>
+      <para
+>Этот параметр ещё не задокументирован. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Состояние операций при сверке по умолчанию</guilabel
+></term>
+    <listitem>
+      <para
+>Выбор состояния сверки для новых операций: «Не сверено», «Учтено» и «Сверено».</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Автозаполнение</guilabel
+></term>
+    <listitem>
+      <para
+>Этот параметр позволяет выбрать необходимое поведение функции автозаполнения. Он управляет тем, какие предыдущие операции будут показаны для контрагента (и будут ли показаны вообще), и какие из них будут использоваться для автоматического заполнения сведений о новой операции (и будут ли они использоваться вообще).</para>
+      <itemizedlist>
+        <listitem>
+          <para
+>Без автозаполнения</para>
+          <para
+>Включение этого параметра приведёт к отключению автозаполнения: заполнять все сведения о новой операции потребуется вручную.</para>
+        </listitem>
+        <listitem>
+          <para
+>Считать операции одинаковыми, если их суммы отличаются не более, чем на</para>
+          <para
+>Если этот параметр включён, при вводе данных новой операции  &kmymoney; отобразит список предыдущих операций для этого контрагента и счёта. Если сумма предыдущих операций отличается от введённой пользователем суммы меньше, чем на указанное количество процентов (X), записи операций будут считаться идентичными, а сведения о предыдущей операции будут использованы для автоматического заполнения параметров новой операции. Значение «X», упомянутое выше, возможно указать в поле, расположенном рядом с подписью <guilabel
+>Считать операции одинаковыми, если их суммы отличаются не более, чем на</guilabel
+>. Оно должно находиться в диапазоне от 0 до 100%. Если указано значение, равное нулю, будут показаны все предыдущие операции для контрагента и счёта: чтобы выбрать одну из этих операций для автоматического заполнения, щёлкните по соответствующему пункту.</para>
+        </listitem>
+        <listitem>
+          <para
+>Заполнять данными наиболее частых операций с выбранным контрагентом</para>
+          <para
+>Если этот параметр включён, при вводе новой операции &kmymoney; заполнит все её параметры на основе предыдущих наиболее частых операций с выбранным контрагентом.</para>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Использовать примечания к последней операции</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот флажок установлен, примечание из ранее введённой операции будет автоматически введено как примечание к новой операции. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.register.import">
+<title
+>Вкладка «Импорт»</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Совмещать операции в пределах (дней)</guilabel
+></term>
+    <listitem>
+      <para
+>Поиск соответствующих операций в диапазоне даты расчёта импортируемой операции +/- указанное количество дней (его возможно установить в пределах от 0 до 99).</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Запрашивать стандартные статьи бюджета для нового контрагента</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот флажок установлен, при обнаружении нового контрагента во время импорта пользователю будет предложено указать для него статью бюджета по умолчанию.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.schedules">
+<title
+>Графики платежей</title>
+
+<para
+>Эти параметры позволяют настроить работу представления <link linkend="details.schedules"
+>Графики платежей</link
+>. </para>
+
+<sect2>
+<title
+>Startup options</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Проверять графики платежей при запуске</guilabel
+></term>
+    <listitem>
+      <para
+>Если этот параметр включён, при запуске &kmymoney; будет выполняться проверка графиков платежей. Если запланированная операция соответствует заданным критериям, &kmymoney; отобразит уведомление с запросом на обработку этой операции. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Вводить операции за указанное количество дней до планируемой даты</guilabel
+></term>
+    <listitem
+><para
+>Позволяет указать количество дней, за которое следует ввести запланированную операцию (то есть период «опережения»).</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.schedules.calendar">
+<title
+>Банковские дни</title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Использовать выходные дни и праздники региона</guilabel
+></term>
+    <listitem
+><para
+>Позволяет выбрать наиболее подходящий регион мира.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2
+><title
+></title>
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Количество дней графика, отображаемых в книге учёта</guilabel
+></term>
+    <listitem>
+      <para
+>Позволяет указать количество дней, в течение которого запланированные операции будут отображаться в книге учёта.</para>
+      <para
+>Запланированные операции будут показаны в книге учёта. По щелчку правой кнопкой мыши возможно вводить или пропускать их.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.onlinequote">
+<title
+>Онлайн-котировки</title>
+
+<para
+>Эти параметры позволяют настроить получение финансовых котировок из различных сетевых источников. Котировки включают котировки акций, облигаций и других инструментов, а также цены на драгоценные металлы и обменные курсы валют. </para>
+
+<para
+>На этой вкладке возможно настроить сетевые источники котировок &kmymoney;. В целом, эта возможность требует технических знаний и должна использоваться только в том случае, если пользователь обладает таковыми. </para>
+
+<para
+>Более подробные сведения доступны в разделе <link linkend="details.investments.onlinequotes"
+>Онлайн-котировки</link
+>. </para>
+</sect1>
+
+
+<sect1 id="details.settings.colors">
+<title
+>Цвета</title>
+
+<para
+>В этом разделе возможно настроить цвета, которые используются в &kmymoney;. Если флажок <guilabel
+>Пользовательские цвета</guilabel
+> не установлен, будут использоваться цвета по умолчанию. </para>
+
+<para
+>Чтобы настроить цвета, установите флажок «Пользовательские цвета». </para>
+
+<para
+>Для изменения цвета следует нажать на кнопку с этим цветом: появится палитра для выбора цвета. Это предоставляет широкие возможности выбора. Возможно выбрать определённый базовый цвет, выбрать цвет щелчком по экрану, указать цвет в кодировке &HTML;, задать значения тона, насыщенности, яркости, а также красного, зелёного и синего каналов. </para>
+</sect1>
+
+<sect1 id="details.settings.fonts">
+<title
+>Шрифты</title>
+
+<para
+>Эти параметры позволяют настроить шрифты, которые используются в полях ячеек и заголовков столбцов. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Использовать системные шрифты</guilabel
+></term>
+    <listitem>
+      <para
+>Установите этот флажок для использования системных шрифтов. Если флажок снят, будет возможно выбрать другие шрифты.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Шрифт ячеек</guilabel
+></term>
+    <listitem>
+      <para
+>Возможно указать пользовательский шрифт, который будет использоваться в каждой из ячеек реестров.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Шрифт заголовков столбцов</guilabel
+></term>
+    <listitem>
+      <para
+>Позволяет указать пользовательский шрифт, который следует использовать для заголовков каждого из представлений внутри регистра.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="details.settings.icons">
+<title
+>Значки</title>
+
+<para
+>Этот параметр позволяет выбрать значки, которые будут показаны. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Настройка значков</guilabel
+></term>
+    <listitem>
+      <para
+>В раскрывающемся списке представлены доступные для использования значки. В зависимости от установленной операционной системы, для загрузки и использования также могут быть доступны дополнительные значки.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="details.settings.plugins">
+<title
+>Расширения</title>
+
+<para
+>В этом разделе представлена информация о доступных модулях. Поведение установленных модулей возможно настроить. Обратите внимание, что список отображаемых модулей зависит от того, какие модули были обнаружены программой &kmymoney; при запуске. То, был ли модуль собран как часть приложения или же добавлен с помощью отдельного пакета, не играет никакой роли. <screenshot
+> <screeninfo
+>Настройка модулей</screeninfo
+> <mediaobject
+> <imageobject
+> <imagedata fileref="configure_plugins.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Настройка модулей</phrase
+> </textobject
+> </mediaobject
+> </screenshot
+> Каждый модуль возможно включить или отключить (установив или сняв флажок рядом с названием этого модуля). Кроме того, справа от названия каждого модуля находится кнопка <guibutton
+>О расширении</guibutton
+> (&infoicon;): при её нажатии будет показана информация о версии и авторе модуля. Для некоторых модулей также доступны сведения о настройке и использовании. Чтобы просмотреть их, нажмите кнопку настройки, расположенную слева от кнопки информации. В настройке нуждается только модуль печати чеков. </para>
+
+<sect2 id="details.settings.plugins.printchecks">
+<title
+>Модуль печати чеков</title>
+
+<para
+>As one example, there is a plugin for printing checks, which is included with the source of &kmymoney;, and should always be enabled. It allows printing of a check based on the data from a selected transaction, with the layout controlled by an &HTML; template. You need to use a template which is matched to your pre-printed checks. A default, built-in template is provided. You may also choose a custom template. To do so, click on the <guibutton
+>configure</guibutton
+> (&configicon;) button to get the <guilabel
+>Check printing</guilabel
+> configuration dialog displayed. At the top you can check the box to use a custom template. To the right of that is a button which brings up a file chooser, to select an alternate template file. </para>
+
+<para
+>A template file is an &HTML; file, in which specific strings are used to reference the fields from the transaction and from the current account and institution to show where they will be printed on the check. &kmymoney; ships with a default, built-in template. At <ulink url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/"
+>this</ulink
+> address you can find the HTML source file of default template, as well as some additional templates. You should either be able to use one of them, or modify one to suit your needs. Note that only a <emphasis
+>subset</emphasis
+> of the HTML standard is supported — the detailed documentation on that can be found <ulink url="https://doc.qt.io/qt-5/richtext-html-subset.html"
+>here</ulink
+>. </para>
+
+
+<!-- info from source code on substitution variables
+    // data about the user
+    checkHTML.replace("$OWNER_NAME", file->user().name());
+    checkHTML.replace("$OWNER_ADDRESS", file->user().address());
+    checkHTML.replace("$OWNER_CITY", file->user().city());
+    checkHTML.replace("$OWNER_STATE", file->user().state());
+    // data about the account institution
+    checkHTML.replace("$INSTITUTION_NAME", institution.name());
+    checkHTML.replace("$INSTITUTION_STREET", institution.street());
+    checkHTML.replace("$INSTITUTION_TELEPHONE", institution.telephone());
+    checkHTML.replace("$INSTITUTION_TOWN", institution.town());
+    checkHTML.replace("$INSTITUTION_CITY", institution.city());
+    checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
+    checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
+    // data about the transaction
+    checkHTML.replace("$DATE", KGlobal::locale()->formatDate(QDate::currentDate(), KLocale::LongDate));
+    checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
+    checkHTML.replace("$PAYEE_NAME", file->payee((*it).split().payeeId()).name());
+    checkHTML.replace("$PAYEE_ADDRESS", file->payee((*it).split().payeeId()).address());
+    checkHTML.replace("$PAYEE_CITY", file->payee((*it).split().payeeId()).city());
+    checkHTML.replace("$PAYEE_POSTCODE", file->payee((*it).split().payeeId()).postcode());
+    checkHTML.replace("$PAYEE_STATE", file->payee((*it).split().payeeId()).state());
+    checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().shares().abs()));
+    checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
+    checkHTML.replace("$MEMO", (*it).split().memo());
+-->
+
+
+</sect2>
+</sect1>
+</chapter>

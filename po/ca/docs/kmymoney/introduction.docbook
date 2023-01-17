@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="introduction">
+<chapterinfo>
+  <date
+>13 de gener de 2018</date>
+  <releaseinfo
+>5.0.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Introducció</title>
+
+<sect1 id="what-is-kmymoney">
+<title
+>Què és el &kmymoney;?</title>
+
+<para
+>En poques paraules, el &kmymoney; és un gestor de finances personals per al &kde;. Permet als usuaris de sistemes operatius i aplicacions de codi obert realitzar un seguiment acurat de les seves finances personals en proporcionar una àmplia gamma de característiques i eines financeres. </para>
+
+<para
+>Els objectius principals del projecte són: </para>
+
+<itemizedlist>
+  <listitem>
+    <formalpara
+><title
+>Paritat de característiques</title>
+      <para
+>El &kmymoney; té la intenció de proporcionar totes les característiques importants que es troben en els gestors de finances personals disponibles comercialment. Tot i que cada llançament del &kmymoney; s'acosta cada vegada més a aquest objectiu, encara queda feina per a fer. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara
+><title
+>Facilitat d'ús</title>
+      <para
+>El &kmymoney; s'esforça per a ser el gestor de finances personals de codi obert més fàcil d'emprar, especialment per a l'usuari sense coneixements tècnics. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara
+><title
+>Correcció</title>
+      <para
+>Basat en els principis de comptabilitat de doble entrada totalment provats, el &kmymoney; garanteix que les vostres finances es mantinguin en l'ordre correcte. </para>
+    </formalpara>
+  </listitem>
+</itemizedlist>
+
+</sect1>
+
+<sect1 id="what-kmymoney-is-not">
+<title
+>Què no és el &kmymoney;</title>
+
+<para
+>Com a gestor de finances personals, el &kmymoney; no està dissenyat per a adaptar-se a les necessitats d'una empresa mitjana. Una empresa petita pot trobar suficient funcionalitat per a utilitzar el &kmymoney;, però les característiques com comptes a cobrar i comptes a pagar no estan admeses directament. No obstant això, seria possible crear clients, proveïdors, documents o altres característiques mitjançant connectors. </para>
+
+<para
+>El &kmymoney; no és simplement un clon dels programes de finances personals disponibles comercialment. Encara que moltes de les característiques presents en el &kmymoney; es poden trobar en altres aplicacions similars, el &kmymoney; s'esforça a presentar una visió individual i única de les vostres finances. </para>
+
+</sect1>
+</chapter>

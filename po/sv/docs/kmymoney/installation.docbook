@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appendix id="installation">
+<appendixinfo>
+  <authorgroup>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</appendixinfo>
+
+<title
+>Installation</title>
+
+<para
+>Detta appendix beskriver huvudsakligen installation av &kmymoney; på operativsystemet &Linux;. Det <link linkend="installation.nonlinux"
+>sista avsnittet</link
+> beskriver andra operativsystem. </para>
+
+<sect1 id="installation.getting">
+<title
+>Hur man skaffar &kmymoney;</title>
+
+<para
+>&kmymoney; har funnits ett antal år, och vi har arbetat hårt med fullständig integrering i &kde;. Den tidigaste stabila versioner (1.0.x) krävde bibliotek från &kde; 3, och var alltså inte tillgängligt i många Linux-distributionerna, som redan hade flyttat till &kde; 4. När version 4.5 släpptes i augusti 2010, kunde &kmymoney; enkelt kompileras och installeras på godtycklig version av &kde; 4.3 eller senare. Den nuvarande versionen, 4.7, kräver &kde; 4.6, i synnerhet kdelibs och kdepimlibs. </para>
+
+<para
+>Även om arbetet att konvertera &kmymoney; till det nya KDE Ramverk 5, är det ännu mycket tidigt och inte ännu användbart. Förhoppningsvis kommer det att vara tillgängligt i version 5.0, som vi förväntar oss ska ges ut tidigt under 2015. Innan dess, om du är särskilt intresserad av att följa arbetet, kan du prenumerera på utvecklarnas e-postlista, &devlist;. </para>
+
+<para
+>Resten av det här avsnittet beskriver hur &kmymoney; installeras med den vanliga metoden för programvaruinstallation för din Linux-distribution. Följande avsnitt beskriver att kompilera från källkod. </para>
+
+<sect2 id="installation.distribution">
+<title
+>Officiella distributionspaket</title>
+<para
+>Det bästa sättet att installera &kmymoney; är att använda distributionens pakethanterare, som apt-get, yum, portage eller pacman. Det tar hand om alla beroenden och bibliotek som krävs. Även om det tar en viss tid innan alla distributioner har lagt till en ny version av &kmymoney; i sina officiella arkiv efter den har givits ut, kontrollera helst där först. </para>
+</sect2>
+
+<sect2 id="installation.unsupported">
+<title
+>Arkiv som inte stöds</title>
+<para
+>Många Linux-distributioner har användare som tillhandahåller arkiv som inte stöds officielt, som erbjuder mer aktuella paket än distributörens officiella arkiv. En lista på sådana finns på <ulink url="http://www.kmymoney.org"
+>&kmymoney;s hemsida</ulink
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="installation.fromsource">
+<title
+>Kompilera &kmymoney; från källkod</title>
+
+<para
+>Aktuell information om den senaste tillgängliga versionen och eventuella kända installationsproblem kommer att finnas tillgängliga på <ulink url="http://www.kmymoney.org"
+>&kmymoney;s hemsida</ulink
+>. Sidan kommer också att ha länkar till komprimerade tar-arkiv av de senaste versionerna, samt instruktioner om hur man erhåller källkoden från &kde; &git;, om man vill kompilera den senaste utvecklingsversionen. </para>
+
+<para
+>Som föregående stycke antydde, finns det två distinkta orsaker att kompilera &kmymoney; från källkod. Om du inte kan hitta en version särskilt paketerad för din distribution, ladda ner det komprimerade tar-arkivet för den senaste stabila utgåvan. Det är version 4.6.0 när det här skrivs. Det är kompileringsalternativet som rekommenderas för vanliga användare. </para>
+
+<para
+>Å andra sidan, om du vill se det aktuella utvecklingstillståndet, för att titta på en felrättning som nyligen gjorts, eller en ny funktion, kan du ladda ner ett komprimerat tar-arkiv som är en ögonblicksbild av utvecklingsarkivet. Du kan också checka ut källkoden direkt från arkivet. Källkoden för version 4.x finns i &kde; &git;. (Källkoden för version 1.0.x fanns i SourceForge cvs, men den utvecklas inte längre eller stöds överhuvudtaget.) Instruktioner för att komma åt källkoden finns på projektets hemsida. </para>
+
+<warning>
+ <para
+>Koden i &git;-arkivet och i ögonblicksbilderna av utvecklingen är under aktiv utveckling. Den kan ha fel, den kan krascha, och den kan göra att data blir skadad eller går förlorad. Om du använder den, försäkra dig om att du verkligen har gjort tillräckliga säkerhetskopior. Om du inte har god anledning att använda den, håll dig till en stabil utgiven version. </para>
+</warning>
+
+<sect2
+><title
+>Nödvändiga bibliotek</title>
+<para
+>&kmymoney; beror på vissa bibliotek för att kompilera och köra korrekt. De första är KDE version 4.3.5 eller senare, i synnerhet kdelibs och kdepimlibs. Beroende på din distribution kan du behöva ladda utvecklingsversionerna, <quote
+>-devel</quote
+>, för att kunna kompilera &kmymoney; istället för att bara köra en färdigkompilerad version. Från och med version 4.6.0 beror &kmymoney; också på libalkimia, version 4.3.1 eller senare. Ytterligare systemkrav kan upptäckas vid <quote
+>cmake</quote
+>-steget nedan. </para>
+
+<para
+>Ytterligare funktionalitet kan erhållas om extrabibliotek är tillgängliga vid kompileringstillfället. De två vanligaste är </para>
+
+<itemizedlist>
+<listitem>
+  <para
+>libofx, version 0.9.4 eller senare, för att kunna importera finansdata i OFX-format, och</para>
+</listitem>
+
+<listitem>
+  <para
+>AqBanking, version 5.0.0 eller senare, för att kunna använda vissa funktioner i Internetbanker. Observera att version 5.0.14 eller senare rekommenderas starkt, eftersom tidigare versioner innehåller fel.</para>
+</listitem>
+</itemizedlist>
+</sect2>
+
+<sect2
+><title
+>Bygginstruktioner</title>
+<para
+>&kmymoney; använder byggsystemet cmake. Ytterligare information finns i filen README.cmake i källkodens rotkatalog. De grundläggande stegen är följande: </para>
+
+<simplelist>
+<member
+><command
+>$ mkdir build</command
+></member>
+<member
+><command
+>$ cd build</command
+></member>
+<member
+><command
+>$ cmake .. -DCMAKE_INSTALL_PREFIX=/usr/</command
+></member>
+<member
+><command
+>$ make</command
+></member>
+<member
+><command
+>$ sudo make install/fast</command
+></member>
+</simplelist>
+
+<important
+><para
+>Observera att det sista steget är nödvändigt. &kmymoney; förväntar sig att hitta vissa komponenter på standardplatser, och om du kör det från byggkatalogen utan installationssteget, får du saknade ikoner eller andra överraskningar. </para
+></important>
+
+<para
+>Om du har kompilerat källkoden från &git;, och vill uppdatera till den senaste versionen, kan du för det mesta göra följande: </para>
+
+<simplelist>
+<member
+><command
+>$ cd &lt;sökväg till källkodens rotkatalog&gt;</command
+></member>
+<member
+><command
+>$ git pull --rebase</command
+></member>
+<member
+><command
+>$ cd build</command
+></member>
+<member
+><command
+>$ make</command
+></member>
+<member
+><command
+>$ sudo make install/fast</command
+></member>
+</simplelist>
+
+<para
+>Dock kan ändringar som utvecklarna gör ibland orsaka kompileringsproblem om du inte börjar med en ren källkodsbas. I dessa fall, måste du göra följande: </para>
+
+<simplelist>
+<member
+><command
+>$ cd &lt;sökväg till källkodens rotkatalog&gt;</command
+></member>
+<member
+><command
+>$ git pull --rebase</command
+></member>
+<member
+><command
+>$ rm -r build</command
+></member>
+<member
+><command
+>$ mkdir build</command
+></member>
+<member
+><command
+>$ cd build</command
+></member>
+<member
+><command
+>$ cmake .. -DCMAKE_INSTALL_PREFIX=/usr/</command
+></member>
+<member
+><command
+>$ make</command
+></member>
+<member
+><command
+>$ sudo make install/fast</command
+></member>
+</simplelist>
+</sect2>
+</sect1>
+
+<sect1 id="installation.nonlinux">
+<title
+>Installera &kmymoney; utan Linux</title>
+
+<para
+>&kmymoney; har kompilerats med lyckat resultat på &MacOS; X, och är tillgänglig på <ulink url="http://www.macports.com"
+>webbplatsen MacPorts</ulink
+>. </para>
+<para
+>&kmymoney; är också tillgängligt på &Windows;. Initiativet är ännu ett pågående arbete, men stora förbättringar har gjorts under det senaste året. För mer information om att köra &kde;, inklusive &kmymoney;, på &Windows; se sidan <ulink url="http://windows.kde.org"
+>Initiativet för KDE på Windows</ulink
+>. För ett fristående installationsprogram som bara installerar &kmymoney;, se nerladdningslänken till höger på <ulink url="http://www.kmymoney.org"
+>&kmymoney;s hemsida</ulink
+>. Observera att den senaste versionen av installationsprogrammet inte längre fungerar på &Windows; XP. När den här utgåvan gjordes var det inte känt om det går att ändra, eftersom problemet är relaterat till verktygen som används för att bygga programmet, inte programmet själv. </para>
+
+<para
+>Om du känner till att &kmymoney; kompileras med lyckat resultat och görs tillgänglig för något annat operativsystem, låt oss få redan på det, så att vi kan sprida informationen vidare. </para>
+
+</sect1>
+</appendix>

@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="credits">
+<chapterinfo>
+  <date
+>05/04/2019</date>
+  <releaseinfo
+>5.0.4</releaseinfo>
+</chapterinfo>
+
+<title
+>Riconoscimenti</title>
+
+<para
+>Copyright del programma &copy; 2000-2019 La squadra di sviluppo di &kmymoney; </para>
+
+<para
+>&underGPL; </para>
+
+<para
+>Copyright della documentazione &copy; 2000-2019 La squadra di sviluppo di &kmymoney; </para>
+
+<para
+>Traduzione italiana di Vincenzo Reale <email
+>smart2128vr@gmail.com</email
+></para
+><para
+>Marco Poletti <email
+>poletti.marco@gmail.com</email
+></para
+> 
+<para
+>&underFDL; </para>
+
+<sect1 id="credits.active">
+<title
+>Sviluppatori attivi</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title
+>Thomas Baumgart &Thomas.Baumgart.mail;</title>
+      <para
+>Coordinatore dei rilasci e manutentore di fatto. Motore principale. Amministratore del progetto. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Ralf Habacker &Ralf.Habacker.mail;</title>
+      <para
+>Sviluppatore.</para>
+    </formalpara>
+  </listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="credits.special">
+<title
+>Ringraziamenti speciali</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title
+>Jack Ostroff &Jack.H.Ostroff.mail;</title>
+      <para
+>Documentazione e supporto utenti.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Kevin Tambascio <email
+>ktambascio@users.sourceforge.net</email
+></title>
+      <para
+>Supporto iniziale agli investimenti.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Javier Campos Morales <email
+>javi_c@users.sourceforge.net</email
+></title>
+      <para
+>Sviluppatore e artista.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Robert Wadley &Robert.Wadley.mail;</title>
+      <para
+>Artista. Icone, schermata iniziale, vista iniziale.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Laurent Montel <email
+>montel@kde.org</email
+></title>
+      <para
+>Patch e conversione a &kde;4.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Wolfgang Rohdewald <email
+>woro@users.sourceforge.net</email
+></title>
+      <para
+>Varie patch.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Marko Käning <email
+>mk-lists@email.de</email
+></title>
+      <para
+>Patch, creazione pacchetti e KF5-CI per OS-X.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Allan Anderson ✝&Allan.Anderson.mail;</title>
+      <para
+>Patch. Importazione/esportazione CSV.</para>
+    </formalpara>
+  </listitem>
+
+</itemizedlist>
+</sect1>
+
+<sect1 id="credits.past">
+<title
+>Sviluppatori inattivi e collaboratori delle versioni precedenti</title>
+
+<itemizedlist>
+  <listitem>
+    <formalpara>
+      <title
+>Cristian Oneţ &Cristian.Onet.mail;</title>
+      <para
+>Patch ed estensioni.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Cristian Dávid &Christian.David.mail;</title>
+      <para
+>Sviluppatore.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Łukasz Wojniłowicz &Lukasz.Wojnilowicz.mail;</title>
+      <para
+>Sviluppatore.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Michael Edwardes &Michael.T.Edwardes.mail;</title>
+      <para
+>Autore originale, la maggior parte del codice sorgente iniziale. Amministratore del progetto. </para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Alvaro Soliverez &Alvaro.Soliverez.mail;</title>
+      <para
+>Previsioni e report.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Ace Jones &Ace.Jones.mail;</title>
+      <para
+>Logica dei report, importazione OFX, quotazioni in linea. Modifiche alla documentazione.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Tony Bloomfield &Tony.Bloomfield.mail;</title>
+      <para
+>Strumento di importazione di &gnucash;. Supporto ai database.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Felix Rodriguez <email
+>frodriguez@users.sourceforge.net</email
+></title>
+      <para
+>Amministratore del progetto.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>John C <email
+>tacoturtle@users.sourceforge.net</email
+></title>
+      <para
+>Sviluppatore.</para>
+    </formalpara>
+  </listitem>
+ 
+  <listitem>
+    <formalpara>
+      <title
+>Fernando Vilas &Fernando.Vilas.mail;</title>
+      <para
+>Supporto ai database.</para>
+    </formalpara>
+  </listitem>
+
+
+  <listitem>
+    <formalpara>
+      <title
+>Roger Lum &Roger.Lum.mail;</title>
+      <para
+>Documentazione.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Darin Strait &Darin.Strait.mail;</title>
+      <para
+>Documentazione.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Colin Wright &Colin.Wright.mail;</title>
+      <para
+>Patch e documentazione.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Bernd Gonsior <email
+>bernd.gonsior@googlemail.com</email
+></title>
+      <para
+>Rapporti. Migrazione a &kde;4/&Qt;4.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Ian Neal <email
+>iann_bugzilla@blueyonder.co.uk</email
+></title>
+      <para
+>Transazioni pianificate e calendari.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title
+>Migrazione a &kde;4/&Qt;4</title>
+      <para
+>Questo ha richiesto un impegno massiccio, e molti sviluppatori hanno contribuito. Ci scusiamo con quelli che ci siamo dimenticati di nominare in questo elenco.</para>
+    </formalpara>
+  </listitem>
+
+</itemizedlist>
+
+</sect1>
+</chapter>

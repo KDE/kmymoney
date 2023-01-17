@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.database">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
+  </authorgroup>
+  <date
+>2011-07-21</date>
+  <releaseinfo
+>4.6</releaseinfo>
+</chapterinfo>
+
+<title
+>Database</title>
+
+<sect1 id="details.database.usage">
+<title
+>Gebruik van relationele databases</title>
+
+<sect2>
+<title
+>Inleiding</title>
+<para
+>Vanaf uitgave 1.0 biedt &kmymoney; u het bewaren van uw gegevens in een relationele database. Een van de voordelen van het gebruiken van dit industriestandaardformaat is dat het u biedt om uw gegevens te bekijken in een van de grafische front-ends zoals <trademark
+>OpenOffice.org</trademark
+> of <trademark
+>LibreOffice</trademark
+>, misschien in een formaat dat &kmymoney; nu niet levert. Een beetje kennis van SQL (Structured Query Language, the taal wereldwijd gebruikt om toegang te hebben tot relationele databases) zou u in staat stellen gemakkelijker gegevens te exporteren naar een extern programma, bijvoorbeeld, een toepassing voor budgettering. </para>
+<para/>
+</sect2>
+
+<sect2
+><title
+>Voorbereiding</title>
+
+<para
+>Voor toegang tot de database gebruikt &kmymoney; de SQL-module geleverd door &Qt; Software als onderdeel van hun &Qt; programmeringssysteem. Deze module ondersteunt een aantal verschillende databasesystemen via een verzameling stuurprogramma's. Onder de meer populaire open-source systemen waarvoor stuurprogramma's beschikbaar zijn zijn <trademark
+>MySQL</trademark
+>, SQLite (alleen versie 3 en hoger) en PostgreSQL. De module ondersteunt ook de 'zwaardere', meer industriële, systemen zoals <trademark
+>Oracle</trademark
+> en <trademark
+>IBM DB2</trademark
+>. </para>
+
+<para
+>Met de uitzondering van SQLite gebruiken deze systemen een client/server-model, waar de 'client' software in 'uw' machine zit, terwijl de server aanwezig is op dezelfde machine als de database zelf, wat elders in een netwerk kan zijn. Natuurlijk, in the normaal scenario voor een persoonlijke financiële toepassing zoals &kmymoney; is 'uw' machine zowel client als server. Uw eerste taak is daarom te beslissen welk databasesysteem u wilt gaan gebruiken, om de client te installeren en meest waarschijnlijke serversoftware. </para>
+
+<para
+>Naast de databasesoftware zelf moet u ook de overeenkomstige &Qt; stuurprogrammamodule installeren. De meeste distributies zullen stuurprogrammamodulen voor de meer populaire databases leveren. Kijk anders op de <ulink url="https://www.qt.io"
+>&Qt; software website</ulink
+> en zoek naar 'SQL drivers'. </para>
+
+<note>
+  <para
+>SQLite werkt niet met een client/server-model; elke database zit in een gewoon bestand, lokaal of op afstand, met toegang met de normale methoden geboden door het onderliggende besturingssysteem. In dit geval is er daarom slechts één softwarepakket en het stuurprogramma te installeren. Ook zal iets van de volgende informatie, speciaal gerelateerd aan administratie, niet van toepassing zijn op SQLite. </para>
+</note>
+</sect2>
+
+<sect2>
+<title
+>Administratie</title>
+
+<para
+>Zorgen voor databases is iets complexer dan werken met reguliere bestanden. Elk systeem heeft verschillende methoden voor uitvoeren van de noodzakelijke administratieve taken, zoals databases aanmaken, rechten toekennen aan verschillende gebruikers, backups maken, &etc; Beschrijven van deze taken ligt buiten de scope van dit handboek, maar alle ondersteunde producten bieden uitgebreide referentiedocumentatie en een snelle zoektocht op het web zal u naar vele inleidingen over het onderwerp leiden. </para>
+
+<sect3>
+<title
+>Een database aanmaken</title>
+
+<para
+>Code is beschikbaar om een initiële database aan te maken om uw gegevens vast te leggen als zoiets nog niet bestaat. Het is echter sterk aanbevolen dat u vooraf een database aanmaakt, omdat de meeste producten een aantal opties leveren die relevant kunnen zijn. Een die speciaal belangrijk voor sommigen zou kunnen zijn is het bepalen van de tekenset (&eg;, UTF-8) om te gebruiken voor tekstvelden. </para>
+
+<para
+>Op dit moment zal het ook nodig zijn om rechten voor verschillende gebruikers toe te kennen om verschillende bewerkingen op de database uit te kunnen voeren. In de meeste systemen zal de gebruiker die de database aanmaakt automatisch alle rechten krijgen toegekend, maar dit is een gebied waarin de documentatie geraadpleegd zou moeten worden. </para>
+
+<para
+>Voor uw eerste gebruik van de database en af en toe op andere tijden wanneer de indeling van de database wijzigt, zult u rechten nodig hebben (ook privileges genoemd) om tabellen en views te wijzigen of aan te maken (zie de volgende paragraaf). Er kunnen verschillende namen voor de rechten/privileges in verschillende systemen zijn, maar zoiets als <literal
+>CREATE</literal
+> en <literal
+>ALTER</literal
+> zouden algemeen moeten zijn. Voor normaal gebruik zult u in staat moeten zijn om records te lezen en te schrijven; deze zijn normaal gedefinieerd in SQL als <literal
+>SELECT</literal
+>, <literal
+>INSERT</literal
+>, <literal
+>UPDATE</literal
+> en <literal
+>DELETE</literal
+> rechten. </para>
+</sect3>
+
+<sect3>
+<title
+>Tabellen aanmaken</title>
+
+<para
+>Bij uw eerste gebruik zal &kmymoney; proberen om de noodzakelijke tabelstructuren aan te maken. Om maximale compatibiliteit tussen verschillende typen databases te verkrijgen, zal alleen een subset van gemeenschappelijke typen gegevens worden gebruikt. Er kunnen toch situaties zijn waar een speciaal type is niet wordt ondersteund en in dat geval, zijn er voorzieningen gemaakt om de noodzakelijke SQL-code te genereren om tabellen aan te maken. Deze code kan dan naar behoefte gewijzigd worden en gebruikt om de tabellen buiten &kmymoney; aan te maken. Als u zich in deze situatie bevindt, kan gewoonlijk hulp verkregen worden op de &devlist;. Zie <link linkend="details.database.generatesql"
+>Handmatig aanmaken van een database</link
+> voor meer informatie. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.database.selectdatabase">
+<title
+>Een database aanmaken</title>
+
+<para
+>&kmymoney; gebruiken, open of importeer een bestaand gegevensbestand of maak een nieuwe. Selecteer daarna menu-item <menuchoice
+><guimenu
+>Bestand</guimenu
+><guimenuitem
+>Als database opslaan</guimenuitem
+></menuchoice
+>. Dit zal de volgende dialoog tonen: </para>
+
+<screenshot>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="select_database.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Completeer de toepasselijke velden in het type database dat u hebt geselecteerd (zoals gebruikelijk zijn verplichte velden geaccentueerd) en druk op <guibutton
+>OK</guibutton
+> om de database aan te maken. </para>
+
+<sect3>
+<title
+>Type database</title>
+
+<para
+>Dit vak geeft een lijst met alle &Qt; SQL-stuurprogramma's geïnstalleerd op uw systeem. Selecteer het stuurprogramma voor uw type database. Als degene die u wilt niet in de lijst staat, dan moet u het toepasselijke stuurprogramma installeren. Zie de documentatie van uw distributie of bezoek de <ulink url="https://www.qt.io/"
+>&Qt; softwarewebsite</ulink
+> en zoek naar 'SQL drivers'. </para>
+</sect3>
+
+<sect3>
+<title
+>Bestand (alleen SQLite)</title>
+<para
+>SQLite heeft één database per bestand voer dus de bestandsnaam in waarin u de database wilt aanmaken. Om in het bestandssysteem te bladeren, druk op het pictogram rechts van de bestandsnaam. Voor SQLite databases zijn de velden <guilabel
+>Hostnaam</guilabel
+>, <guilabel
+>Gebruikersnaam</guilabel
+> en <guilabel
+>Wachtwoord</guilabel
+> niet relevant. Het SQLite-bestand moet de toepasselijke lees-/schrijfrechten bezitten van het onderliggende bestandssysteem om de toepasselijke toegang in te schakelen voor de huidige aangemelde gebruiker. </para>
+</sect3>
+
+<sect3>
+<title
+>Databasenaam (anderen)</title>
+<para
+>De standaard databasenaam is <literal
+>KMyMoney</literal
+>, maar u kunt een andere naam kiezen als u dat wilt. Voor sommige typen databases kan &kmymoney; niet in staat zijn om de database aan te maken, deze moet dus vooraf aangemaakt worden met de toepasselijke administratieve procedure. &kmymoney; zal gewoonlijk in staat zijn om alle tabelstructuren waar nodig aan te maken. Zo niet, dan kunt u ze zelf aanmaken. Zie <link linkend="details.database.generatesql"
+>Handmatig aanmaken van de database</link
+> voor meer informatie. </para>
+</sect3>
+
+<sect3
+><title
+>Hostnaam</title>
+<para
+>Voor de gemiddelde gebruiker is de standaardnaam <quote
+>localhost</quote
+>, wat de machine is waarop u nu werkt, juist. Voor databases via het netwerk, voer de verbonden hostnaam in. </para>
+
+</sect3>
+
+<sect3>
+<title
+>Gebruikersnaam en wachtwoord</title>
+<para
+>Controleer de ingestelde rechtenset op uw database of neem contact op met de beheerder van de database voor de juiste hier te gebruiken waarden. De gebruikersnaam moet in staat zijn om records te selecteren, in te voegen, bij te werken en te verwijderen. Als de gebruikersnaam hetzelfde is als de naam waarmee u zich aanmeldt, dan is een wachtwoord normaal niet vereist. </para>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Toegang tot uw gegevens</title>
+
+<sect3>
+<title
+>Tabelontwerp</title>
+
+<para
+>Om toegang te hebben tot uw gegevens in &kmymoney;, gebruik het menu-item <menuchoice
+><guimenu
+>bestand</guimenu
+><guimenuitem
+>Database openen</guimenuitem
+></menuchoice
+>. Dit zal een dialoog openen lijkend op de bovenstaande. </para>
+
+<note>
+<para
+>Als u uw database hebt geopend door eerst een bestand te openen en daarna <guimenuitem
+>Als database opslaan</guimenuitem
+>, zoals bovenstaand beschreven, dan worden alle volgende wijzigingen in uw gegevens alleen in de database opgeslagen en niet in het bestand. Dit betekent dat u het bestand als een reservebestand of momentopname van uw gegevens op een specifieke tijd kunt gebruiken. Om een nieuwe reservekopie te maken zoals deze, open uw database, kies menu-item <menuchoice
+><guimenu
+>bestand</guimenu
+><guimenuitem
+>Opslaan als...</guimenuitem
+></menuchoice
+>, geef een toepasselijke bestandsnaam. Denk er aan om uw database opnieuw te openen, zodat &kmymoney; niet doorgaat om het bestand te gebruiken. </para>
+</note>
+
+<para
+>Om toegang tot uw gegevens te krijgen in andere formaten zult u een beetje meer moeten weten over hoe deze in een relationele databases worden bewaard. De aller gemakkelijkste manier om hiervoor gevoel te krijgen is om de database te openen in een front-end zoals <trademark
+>OpenOffice.org</trademark
+>. Dit levert een lijst met de verschillende tabellen op die samen de database vormen en stelt u in staat om de indeling van elk van hen te zien. </para>
+
+<para
+>Om &eg;, gegevens op te halen naar een rekenblad of extern bestand is het bijna altijd nodig om gekoppelde gegevens uit meer dan één tabel te halen. Dit wordt gedaan door 'joining' van de tabellen door een veld te gebruiken dat gemeenschappelijk is in elk. U kunt heel wat meer informatie over hoe dit te doen uit de online database inleidingen hierboven genoemd. De volgende tabel geeft een lijst met de velden gebruikt om deze inter-tabel relaties te definiëren. </para>
+
+<informaltable>
+  <tgroup cols="3">
+    <thead>
+      <row>
+        <entry valign="top">
+          <para
+>Relatie</para>
+        </entry>
+        <entry valign="top">
+          <para
+>Komt overeen</para>
+        </entry>
+        <entry valign="top">
+          <para
+>Met</para>
+        </entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+        <entry valign="top">
+          <para
+>Banken en rekeningen</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmInstitutions.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmAccounts.institutionId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Rekeningen moeder/dochter</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmAccounts.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmAccounts.parentId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Transactioes en splitsingen (zie Note 1)</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmTransactions.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSplits.transactionId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Rekeningen en splitsingen</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmAccounts.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSplits.accountId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Begunstigden en splitsingen</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmPayees.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSplits.payeeId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Periodieken en transacties</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSchedules.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmTransactions.id</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Transacties en valuta</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmTransactions.currencyId</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmCurrencies.ISOCode</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+><literal
+>Rekeningen en waardepapieren (zie Note 2)</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmAccounts.currencyId</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSecurities.id</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Waardepapieren en prijzen</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmSecurities.id</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmPrices.fromId</literal
+> of <literal
+>kmmPrices.toId</literal
+></para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Koersen</para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmCurrencies.ISOCode</literal
+></para>
+        </entry>
+        <entry valign="top">
+          <para
+><literal
+>kmmPrices.fromId</literal
+> of <literal
+>kmmPrices.toId</literal
+></para>
+        </entry>
+      </row>
+    </tbody>
+  </tgroup>
+</informaltable>
+
+<para
+>Notities: </para>
+
+<para
+>1 &#x2013; txType = &#x201C;N&#x201D; voor normale transacties, &#x201C;S&#x201D; voor periodieke transacties </para>
+
+<para
+>2 &#x2013; if kmmAccounts.isStockAccount = &#x201C;Y&#x201D; </para>
+</sect3>
+
+<sect3>
+<title
+>Veld-indelingen</title>
+
+<para
+>Verschillende gegevensvelden bevatten een intern formaat die niet onmiddellijk bruikbaar zijn in externe programma's. In deze gevallen, is de informatie gedupliceerd in zowel interne als externe formaten. </para>
+
+<para
+>Geldhoeveelheden en waarden van aandelen worden getoond zowel in teller/noemer formaat als met een veldnaam met achtervoegsel '<literal
+>Formatted</literal
+>', in de vorm zoals op uw scherm getoond. </para>
+
+<para
+>Sommige velden zoals een type rekening verschijnen zowel als een numerieke code als in een veld met achtervoegsel '<literal
+>String</literal
+>' in de vorm en taal van de toepassing. </para>
+</sect3>
+
+<sect3>
+<title
+>Uw gegevens bijwerken</title>
+
+<para
+>Gegevens in een industriestandaardformaat hebben geeft u de mogelijkheid om het buiten de toepassing &kmymoney; te wijzigen. DOE DAT NIET tenzij u echt weet wat u doet en maak altijd eerst een reservekopie van uw gegevens. Als u het fout doet kan &kmymoney; mogelijk niet in staat om toegang tot uw gegevens te hebben en u zou zelfs kunnen eindigen met alles verliezen. U bent gewaarschuwd! </para>
+</sect3>
+
+<sect3>
+<title
+>Opgeslagen zoekopdrachten</title>
+
+<para
+>De meeste databasesystemen stellen u in staat om algemeen gebruikte queries en procedures op te slaan en, in sommige gevallen, kunnen deze behouden worden als tabellen of andere objecten binnen uw database zelf. Zoals u uit het bovenstaande geraden kunt hebben, beginnen alle door &kmymoney; gebruikte tabellen met de kleine letters '<literal
+>kmm</literal
+>'. Deze standaard zal worden gehandhaafd en alleen tabellen die met deze letters beginnen zullen bijgewerkt worden. Als u deze in de naamgeving van uw queries &etc; nalaat, zou u geen problemen hoeven te ondervinden. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.database.generatesql">
+<title
+>Handmatig aanmaken van een database</title>
+<note>
+  <para
+>Deze sectie dekt het meer geavanceerd gebruik van een database en kan overgeslagen worden voor de algemene gebruiker. </para>
+</note>
+
+<sect3>
+<title
+>Wanneer te gebruiken</title>
+<para
+>Er kunnen gevallen zijn wanneer &kmymoney; niet in staat is om de database automatisch aan te maken of het aanmaken zonder sommige opties vereist door de gebruiker. Het gebruikte databasesysteem kan bijvoorbeeld niet volledig conform het standaard SQL-gebruik zijn of ondersteuning kan geïntroduceerd worden voor nieuwe systemen die niet volledig getest zijn in &kmymoney;. </para>
+<para
+>Voordat u deze faciliteit gaat gebruiken zou u zelf eens moeten proberen een item in de database aan te maken (&ie; met het statement <literal
+>CREATE DATABASE</literal
+>). Aangenomen dat de database bestaat zal &kmymoney; heel goed in staat zijn om de tabellen &etc; aan te maken in de normale opslagprocedure van de database zoals bovenstaand beschreven. </para>
+</sect3>
+
+<sect3>
+<title
+>De SQL genereren</title>
+<para
+>Als dit mislukt is het mogelijk om de basis SQL-commando's nodig voor het aanmaken van de verschillende tabellen, views en indexen vereist door de toepassing. Selecteer het menu-item <menuchoice
+><guimenu
+>Hulpmiddelen</guimenu
+><guimenuitem
+>Database SQL genereren</guimenuitem
+></menuchoice
+>. Dit geeft de volgende dialoog: </para>
+<screenshot>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="generate_sql.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Bij selecteren van het type database zal de van toepassing zijnde SQL in het tekstvak <guilabel
+>SQL voor aanmaken</guilabel
+> verschijnen; dit kan door de gebruiker worden bewerkt of opgeslagen in een tekstbestand door te drukken op <guibutton
+>SQL opslaan</guibutton
+>. In het laatste geval moet de database aangemaakt worden met de administratieve functies geleverd door het databasesysteem. </para>
+<para
+>Als u, na bewerking van de tekst in de dialoog, wilt dat &kmymoney; de database aanmaakt, dan moet u de andere velden in de dialoog invullen, zoals bovenstaand gedetailleerd in <link linkend="details.database.selectdatabase"
+>Een database aanmaken</link
+> en druk op <guibutton
+>Tabellen aanmaken</guibutton
+>. Merk op dat u, behalve in het geval van SQLite, ofwel een toepasselijk statement <literal
+>CREATE DATABASE</literal
+> als het eerste commando moet invoegen of eerder zo'n commando extern van &kmymoney; hebt uitgevoerd. </para>
+</sect3>
+
+<sect3>
+<title
+>Waarschuwing</title>
+<para
+>U moet erg voorzichtig zijn bij bewerken van de definities van elk van de basis tabellen of views (die met namen beginnend met '<literal
+>kmm</literal
+>'). Sommige wijzigingen, zoals de lengte van een integer-veld, kan weinig gevolgen hebben, maar u zou niets moeten verwijderen of de volgorde van een veld veranderen, of &kmymoney; zou niet meer kunnen functioneren of gegevens verminken. </para>
+<para
+>Terwijl toevoegen of verwijderen van indexen prestaties zouden kunnen verbeteren, zou u er ook voor moeten oppassen dat het tegenovergestelde kan gebeuren. Enige kennis van de interne werking van &kmymoney; zou kunnen helpen om de best mogelijke prestaties in deze omstandigheden te krijgen. </para>
+</sect3>
+
+</sect2>
+
+<sect2>
+<title
+>Versleuteling</title>
+
+<para
+>Versleuteling van gegevens in uw database wordt op dit moment niet ondersteund. </para>
+</sect2>
+</sect1>
+</chapter>

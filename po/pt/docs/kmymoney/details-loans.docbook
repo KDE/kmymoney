@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.loans">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Darin.Strait; &Darin.Strait.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Financiamentos</title>
+
+<sect1 id="details.loans.general">
+<title
+>Compreender os Financiamentos</title>
+
+<para
+>Esta secção pretende fornecer uma muito breve introdução como o &kappname; lida com os financiamentos. As regras e costumes de financiamentos variam de localidade para localidade. Para explicações mais detalhadas sobre os empréstimos, assim como alguma informação sobre as regras e regimes locais, veja por favor outros recursos. </para>
+
+<para
+>Um financiamento é um acordo no qual uma entidade requerente recebe dinheiro de outra entidade que empresta, na qual se concorda em pagar de volta o dinheiro numa data posterior. O &kappname; permite-lhe seguir os financiamentos nos quais você, como devedor, pede dinheiro emprestado ou, como beneficiário, empresta dinheiro a outros. A maior parte das pessoas pedem mais do que emprestam. Por isso, normalmente você será tipicamente quem pedirá dinheiro emprestado e onde uma companhia financeira será normalmente quem empresta. Se emprestar dinheiro a um membro da família ou um amigo, poderá usar o &kappname; para manter um registo também deste financiamento. </para>
+
+<para
+>Este guia irá assumir que está a pedir emprestado dinheiro a alguma espécie de companhia financeira, mas os tópicos aqui discutidos aplicam-se de igual forma aos empréstimo que possa contrair com uma pessoa. A diferença pessoal entre pedir emprestado e emprestar é que é usada uma categoria de despesa para seguir os juros ao pedir dinheiro emprestado, e é usada uma categoria de receita quando se empresta dinheiro. </para>
+
+<formalpara
+><title
+>Principal do Financiamento</title>
+<para
+>A quantidade que é emprestada é chamada de <quote
+>valor do empréstimo</quote
+> ou <quote
+>principal</quote
+>. </para>
+</formalpara>
+
+<formalpara
+><title
+>Prazo</title>
+<para
+>O período de um empréstimo é chamado o seu <quote
+>prazo</quote
+> de financiamento. No fim desse prazo, terá sido já devolvida a totalidade do montante à entidade que emprestou. Os prazos são indicados normalmente em semanas, meses ou anos. Um prazo também poderá ser definido com o número de pagamentos. Por exemplo, um empréstimo a um ano com prestações semanais poderá ser descrito como um empréstimo a um ano ou um empréstimo com 52 prestações. </para>
+</formalpara>
+
+<formalpara
+><title
+>Prestações</title>
+<para
+>A prestação do montante para quem emprestou não é normalmente uma soma irregular. Em vez disso, é feita uma série de prestações que representam uma parte do montante. Essas prestações são normalmente conhecidas por  <quote
+>amortizações</quote
+> e, no &kappname;, a <quote
+>Amortização</quote
+> é definida como o acto de pagar um financiamento a prestações regulares. </para>
+</formalpara>
+
+<formalpara
+><title
+>Frequência de Pagamento</title>
+<para
+>A frequência das prestações é referida como sendo a <quote
+>Frequência de Pagamento</quote
+> no &kappname;. Os exemplos de períodos poderão ser semanais, quinzenais, mensais, trimestrais ou anuais. Nos EUA, os pagamentos periódicos são feitos todos os meses; como tal, o período do empréstimo é de um mês. </para>
+</formalpara>
+
+<formalpara
+><title
+>Taxa de Juro</title>
+<para
+>Para ter o privilégio de poder usar o dinheiro, o devedor irá pagar ao credor uma taxa que se chama normalmente de <quote
+>juro</quote
+>, que normalmente é expressa como uma percentagem do montante principal do empréstimo, ao longo de um período bem definido. As taxas de juro poderão ser fixas, onde a taxa não irá variar ao longo do empréstimo, ou variáveis, onde a taxa de juro poderá ir variando ao longo do tempo. Tipicamente, os pagamentos de juros estão incluídos em cada prestação periódica. </para>
+</formalpara>
+
+<formalpara
+><title
+>Prestações Periódicas</title>
+<para
+>Dado que estas prestações são feitas, de certa forma, numa base periódica, seja ela semanal, mensal, trimestral ou anual, são referidas normalmente como <quote
+>prestações periódicas</quote
+>. O somatório de todas as prestações periódicas, mais a prestação final, somar-se-ão ao valor principal mais os juros. </para>
+</formalpara>
+
+<formalpara
+><title
+>Taxas</title>
+<para
+>Poderão existir outras taxas, para além dos juros, que seja necessário pagar com cada prestação. Chamam-se as <quote
+>taxas ou encargos recorrentes</quote
+>. Alguns exemplos de encargos recorrentes incluem (mas não se limitam necessariamente a): <itemizedlist>
+  <listitem>
+    <para
+>Pagamentos de contas <quote
+>impostas</quote
+> ou <quote
+>acessórias</quote
+>. (Os pagamentos deste tipo são normalmente usados para manter fundos, para pagar taxas de propriedade anuais ou bienais.) </para>
+  </listitem>
+
+  <listitem
+><para
+>Seguros de empréstimo</para
+></listitem>
+
+  <listitem
+><para
+>Seguros por incapacidade</para
+></listitem>
+
+  <listitem
+><para
+>Taxas de manutenção da conta de empréstimo</para
+></listitem>
+</itemizedlist>
+</para>
+</formalpara>
+
+<formalpara
+><title
+>Resumo</title>
+<para
+>Em resumo, o devedor recebe uma soma massiva do credor no início do financiamento. O devedor fará então um pagamento periódico ao credor. O pagamento periódico é a soma do pagamento principal de amortização (que é usado para pagar o saldo do financiamento) mais o pagamento dos juros (que recompensa o credor por permitir usar o dinheiro por parte do devedor), mais ainda algumas taxas recorrentes (que possam cobrir alguns incidentes). No fim do financiamento, o devedor já terá pago de volta o montante completo. </para>
+</formalpara>
+</sect1>
+
+<sect1 id="details.loans.example">
+<title
+>Exemplo</title>
+<para
+>Por exemplo, poderá pedir um empréstimo de 25 000,00 € por um novo automóvel e acordar em pagar ao banco uma prestação mensal durante 60 meses. A taxa de juro do empréstimo poderá ser de 5,5%. </para>
+
+<para
+>Neste cenário, o montante do empréstimo é de 25 000,00 €. O prazo do financiamento é de 60 meses ou 5 anos. O prazo também poderá ser descrito como de 60 pagamentos, dado que existirá um pagamento por mês durante 5 anos. A frequência da prestação será de um mês, dado que a prestação mensal será cobrada mensalmente. A prestação periódica, que é calculada pelo &kappname;, seria de 477,53 €. </para>
+
+<para
+>Um <quote
+>plano de pagamentos</quote
+> é um gráfico ou tabela que mostra a data em que deverá ser paga uma prestação, bem como o montante de cada prestação periódica. Normalmente, estes planos dividem o pagamento periódico nas suas partes constituintes: o pagamento da amortização e o dos juros, acrescido dos encargos recorrentes. </para>
+</sect1>
+
+<sect1 id="details.loans.creation">
+<title
+>Criar um Novo Financiamento</title>
+
+<para
+>No &kappname;, um financiamento é um tipo de conta. Como tal, para criar um novo financiamento, comece por seleccionar a opção <menuchoice
+><guimenu
+>Conta</guimenu
+><guimenuitem
+>Nova Conta</guimenuitem
+></menuchoice
+>. Continue a responder às perguntas que o assistente lhe irá fazer. </para>
+
+<para
+>Opcionalmente, um financiamento poderá estar associado a uma instituição em particular. Se estiver a pedir o empréstimo a uma companhia de crédito ou a uma companhia de aluguer de carros, poderá criar um item de instituição que descreva esta firma e associá-la ao seu financiamento. Se estiver a pedir um empréstimo ao seu tio Tiago, não será necessário configurar uma instituição. </para>
+</sect1>
+
+<sect1 id="details.loans.extra-payments">
+<title
+>Criar Prestações Extraordinárias nos Financiamentos</title>
+
+<para
+>Se quiser criar uma prestação extra, podê-lo-á fazer. Basta <link linkend="details.ledger.transactions"
+>introduzir uma transacção</link
+>, usando os livros de registos. Esta prestação extra será tida em conta no cálculo dos juros que irão ocorrer no próximo pagamento periódico. </para>
+
+<para
+>Alguns exemplos de pagamentos extra incluem (mas não se limitam necessariamente): </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Contribuição com 50 € extra por mês</para
+></listitem>
+
+  <listitem>
+    <para
+>A duplicação da prestação de amortização para cada período. (A prestação de amortização poderá ser encontrada, para qualquer período em particular, se consultar o plano de pagamentos do empréstimo.) </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Criação de um 13º pagamento de prestação todos os anos. (Isto assume um financiamento pago em prestações mensais.) </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Nota: Se estiver a duplicar o pagamento da amortização, terá de calcular de novo o plano de pagamento de cada prestação. Isto permitirá que haja um valor adequado para a prestação de amortização necessária com cada prestação. </para>
+</sect1>
+</chapter>
+

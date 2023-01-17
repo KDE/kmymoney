@@ -1,0 +1,949 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="firsttime">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  </authorgroup>
+  <date
+>1 февраля 2018 г.</date>
+  <releaseinfo
+>5.0.0</releaseinfo>
+</chapterinfo>
+
+<title
+>Начало работы с &kmymoney;</title>
+
+<sect1 id="firstime-1">
+<title
+>Первый запуск &kmymoney;</title>
+
+<note>
+  <para
+>Вероятно, внешний вид программы &kmymoney; не будет в точности соответствовать снимкам в этом руководстве. Многие параметры (например, шрифты, цвета и значки) возможно настроить с помощью пункта меню <menuchoice
+><guimenu
+>Настройка</guimenu
+><guimenuitem
+>Настроить &kmymoney;...</guimenuitem
+></menuchoice
+> или программы «Параметры системы» &kde;, в зависимости от операционной системы. </para>
+</note>
+
+</sect1>
+
+<sect1 id="firsttime.mainwindow">
+<title
+>Главное окно</title>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Главное окно</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="mainwindow_numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Главное окно</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Главное окно &kmymoney; содержит четыре части. </para>
+
+<itemizedlist>
+  <listitem
+><para
+>A. Строка меню</para
+></listitem>
+  <listitem
+><para
+>B. Панель инструментов</para
+></listitem>
+  <listitem
+><para
+>C. Меню выбора представления</para
+></listitem>
+  <listitem
+><para
+>D. Область просмотра</para
+></listitem>
+</itemizedlist>
+
+<para
+>Меню и панели инструментов предоставляют доступ к функциям &kmymoney;. С их помощью возможно <link linkend="firsttime.3"
+>создавать</link
+> файлы и настраивать работу &kmymoney;. </para>
+
+<para
+>В левой части главного окна расположено меню выбора представления. Оно содержит как минимум одиннадцать значков (также могут быть показаны соответствующие подписи), перечень которых зависит от установленного в системе программного обеспечения. Модули, подключённые к программе, могут увеличить количество значков. При щелчке по значку в области просмотра появится соответствующее представление финансовых данных. Каждое представление предоставляет определённый уникальный взгляд на финансовое состояние, а также  позволяет просмотреть и изменить показанные данные. </para>
+
+<para
+>Меню выбора представления содержит следующие значки. </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="home_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Домашняя страница</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Домашняя страница: настраиваемые сводные данные по текущему финансовому состоянию (или вступительная страница, если не открыт файл данных). </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="institutions_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Учреждения</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Учреждения: все учреждения и счета, показанные в иерархическом виде. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="accounts_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Счета</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Счета: все счета, показанные в иерархическом виде. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="schedule_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Графики</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Графики платежей: повторяющиеся выплаты и поступления. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="categories_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Статьи бюджета</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Статьи бюджета: специальные счета, которые позволяют группировать связанные операции. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="mail-tagged.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Метки</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Метки: специальные счета, которые возможно использовать в дополнение к «Статьям бюджета» для группировки связанных операций. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="payees_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Контрагенты</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Контрагенты: все контрагенты, которые имеются в &kmymoney;. Это перечень всех лиц и учреждений, которым пользователь платит или от которых он получает деньги. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="ledgers_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Книга учёта</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Книга учёта: операции по счетам. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="investments_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Инвестиции</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Инвестиции: сводка по портфелю ценных бумаг. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="reports_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Отчёты</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Отчёты: набор полезных отчётов, который позволяет увидеть финансовые данные под различными углами. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="budgets_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Бюджеты</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Бюджеты: бюджеты пользователя. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="forecast_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Прогноз</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Прогноз: это представление позволяет просмотреть прогноз для счетов и статей. </para>
+  </listitem>
+
+  <listitem>
+    <para
+><guiicon
+> <inlinemediaobject
+> <imageobject
+> <imagedata fileref="outbox_view.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Исходящие</phrase
+> </textobject
+> </inlinemediaobject
+> </guiicon
+> Исходящие: используется модулем сетевой работы с банками для показа сообщений о выполненных операциях. Это представление формируется модулем KBanking, который может отсутствовать в системе. </para>
+  </listitem>
+</itemizedlist>
+</sect1>
+
+<sect1 id="firsttime.3">
+<title
+>Создание файла</title>
+
+<para
+>&kmymoney; сохраняет все данные о финансах в файле. Как было отмечено в разделе <link linkend="makingmostof.basicaccounting.personalaccounts"
+>Определение счетов (личных записей)</link
+>, возможно создать несколько наборов счетов, но данные каждого из наборов будут сохранены в отдельном файле, а в &kmymoney; возможно одновременно открыть только один файл. Подробные сведения о форматах файлов данных &kmymoney; доступны в разделе <link linkend="details.formats"
+>Форматы файлов</link
+>. </para>
+
+<para
+>Чтобы создать файл, выберите пункт меню <menuchoice
+><guimenu
+>Файл</guimenu
+><guimenuitem
+>Создать</guimenuitem
+></menuchoice
+> или щёлкните по значку<guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="new.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> на панели инструментов. Кроме того, если отображается главная приветственная страница, также возможно перейти по первой ссылке на ней: «Начать работу и настроить счета». </para>
+
+<para
+>После этого в &kmymoney; будет открыт диалог <quote
+>Настройка нового файла &kmymoney;</quote
+>, который позволяет создать файл. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Страница «Персональные данные»</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Страница «Персональные данные»</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Так как все поля являются необязательными, возможно оставить их пустыми и продолжить использовать &kmymoney;. Введённые данные используются исключительно для персонификации файла. В будущих версиях программы эти данные могут быть использованы для создания некоторых отчётов и для сетевой работы с банками. Если для работы будущих версий &kmymoney; потребуются персональные данные, которых не будет обнаружено, пользователю будет предложено указать эти данные. </para>
+
+<para
+>Укажите имя и адрес (или оставьте поля пустыми) и нажмите кнопку <guibutton
+>Далее</guibutton
+>. </para>
+
+<para
+>Если адрес электронной почты пользователя хранится в &kaddressbook;, будет возможно нажать кнопку <guibutton
+>Загрузить из адресной книги</guibutton
+> и импортировать данные в &kmymoney;. </para>
+
+<para
+>В &kmymoney; возможно работать с несколькими валютами. Чтобы задать базовую валюту (ту, которая используется на повседневной основе и задействуется в отчётах), выберите подходящий пункт в списке и нажмите кнопку <guibutton
+>Далее</guibutton
+>. В &kmymoney; стандартное значение определяется на основе параметров языкового стандарта системы. </para>
+
+<para
+>В следующем примере в качестве базовой валюты выбран доллар США. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Страница выбора базовой валюты</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-2.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Страница выбора базовой валюты</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>На следующей странице возможно создать первоначальный счёт. Для обычного пользователя KMyMoney им будет текущий счёт. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Страница создания текущего счёта</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-3.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Страница создания текущего счёта</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Enter the name of the account and a possible account or reference number assigned by the institution managing the account. Enter the opening date of the account and the opening balance of the account. For example, you want to use &kmymoney; to manage all your finances as of 2008-01-01, then enter the balance of the account at the beginning of this date. The number can possibly be obtained from a paper statement. You may also enter the name and the bank code of the institution. The latter, known as the routing number in the US or the sort code in the UK, is optional and only required for online banking purposes, but it may also be helpful when importing bank statements in some of the formats supported (OFX, QFX). </para>
+
+<para
+>Если создавать начальный счёт не требуется, снимите соответствующий флажок. </para>
+
+<para
+>По завершении ввода данных перейдите к следующему шагу, нажав кнопку <guibutton
+>Далее</guibutton
+>. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Страница выбора шаблона счёта</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-4.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Страница выбора шаблона счёта</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+
+<para
+>Выберите подходящую страну и один или несколько шаблонов. В каждом шаблоне предусмотрен свой набор статей бюджета для организации финансовых данных. Чтобы выбрать несколько шаблонов (возможно указать даже те шаблоны, которые относятся к разным странам), зажмите клавиши &Ctrl; и &Shift;, и щёлкайте по нужным шаблонам левой кнопкой мыши. Программа отобразит иерархию счетов, которую следует установить, в области предварительного просмотра окна мастера. Если не удастся найти отвечающий потребностям шаблон, на этом этапе возможно не выбирать шаблон (статьи бюджета будет возможно настроить вручную позже). </para>
+
+<para
+>По завершении выбора шаблона перейдите к следующему шагу, нажав кнопку <guibutton
+>Далее</guibutton
+>. </para>
+
+<para
+>На следующей странице мастера возможно настроить пользовательские предпочтения. Если соответствующий флажок установлен, после окончания работы мастера будет показан диалог настройки параметров приложения. После ввода всех необходимых данных нажмите кнопку <guibutton
+>Далее</guibutton
+>. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Страница настройки пользовательских предпочтений</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-5.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Страница настройки пользовательских предпочтений</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>На последней странице мастера возможно выбрать расположение и имя файла, в котором будут храниться финансовые данные. По умолчанию будет предложено использовать в качестве имени файла имя пользователя, а в качестве расположения — домашний каталог. Если файл с таким именем уже существует, программа покажет предупреждение о том, что следует выбирать еще не использованные имена файлов. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Страница выбора файла</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newfile-6.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Страница выбора файла</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Теперь указаны все необходимые для создания файла сведения. Нажмите кнопку <guibutton
+>Готово</guibutton
+>, и &kmymoney; создаст и откроет файл. </para>
+
+</sect1>
+
+<sect1 id="firsttime.4">
+<title
+>Создание счетов</title>
+
+<para
+>Существует несколько способов создания счёта: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>С помощью меню</term>
+    <listitem>
+      <para
+>Чтобы создать счёт с помощью меню, выберите пункт меню <menuchoice
+><guimenu
+>Счёт</guimenu
+><guimenuitem
+>Новый счёт...</guimenuitem
+></menuchoice
+>. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>С помощью представления «Счета»</term>
+    <listitem>
+      <para
+>Чтобы создать счёт с помощью представления счетов, откройте представление «Счета» щелчком по значку счетов <guiicon
+> <inlinemediaobject
+><imageobject
+><imagedata fileref="accounts_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> в меню выбора представления. Щёлкните правой кнопкой мыши по значку дерева «Пассивы» или «Активы» в правой части области просмотра и выберите в контекстном меню пункт <guimenuitem
+>Новый счёт...</guimenuitem
+>. Дерево «Активы» содержит все счета, относящиеся к активам, например, сбережениям и инвестициям. Дерево «Пассивы» содержит счета, представляющие задолженности пользователя, такие как кредиты и кредитные карты. Об этих и других типах счетов более подробно рассказывается далее в руководстве. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>С помощью панели инструментов</term>
+    <listitem>
+      <para
+>Если на панели инструментов отображается кнопка <guibutton
+>Новый счёт...</guibutton
+>, возможно нажать её для создания счёта. </para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+
+<tip>
+  <para
+>Обратите внимание, что в &kmymoney; повсеместно используются контекстные меню. Если какое-либо действие вызывает затруднения, попробуйте щёлкнуть правой кнопкой мыши в том месте, где должна находиться нужная функция. </para>
+</tip>
+
+<para
+>Какой бы способ ни был выбран, для создания счёта всегда используется <emphasis
+>мастер создания нового счёта</emphasis
+>. Этот мастер позволяет поэтапно указать все сведения, необходимые для создания счёта. Для перемещения между страницами мастера предназначены кнопки <guibutton
+>Далее</guibutton
+> и <guibutton
+>Назад</guibutton
+>. </para>
+
+<para
+>Создайте счёт с помощью одного из вышеперечисленных способов. Полное описание процесса создания счетов доступно в разделе <link linkend="details.accounts"
+>Счета</link
+>. </para>
+
+<para
+>Теперь, когда в &kmymoney; имеется один или несколько счетов, на домашней странице показана сводная информация по ним. Операции возможно создавать как вручную в представлении <link linkend="details.ledgers"
+>Книга учёта</link
+>, так и автоматически (выполнив соответствующую настройку параметров в представлении <link linkend="details.schedules"
+>Графики</link
+>). </para>
+</sect1>
+
+<sect1 id="firsttime.schedules">
+<title
+>Графики</title>
+
+<para
+>Повторяющиеся операции или <link linkend="details.schedules"
+>графики платежей</link
+> — это те операции, которые выполняются один или несколько раз в течение определённого периода времени. Примером может служить получение заработной платы раз в месяц или в неделю. Чтобы пользователю не приходилось каждый раз указывать данные операции, возможно просто создать с помощью &kmymoney; график платежей, с помощью которого эти данные и будут указываться при получении заработной платы. </para>
+
+<para
+>Чтобы настроить <link linkend="details.schedules"
+>графики платежей</link
+>, щёлкните по значку <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="schedule_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> в меню выбора представления. </para>
+</sect1>
+
+<sect1 id="firsttime.categories">
+<title
+>Статьи бюджета</title>
+
+<para
+>Чтобы настроить <link linkend="details.categories"
+>статьи бюджета</link
+>, щёлкните по значку <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="categories_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> в меню выбора представления. </para>
+
+<para
+>Полное описание этой темы содержится в разделе <link linkend="details.categories"
+>Статьи бюджета</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.tags">
+<title
+>Метки</title>
+
+<para
+>Чтобы настроить <link linkend="details.tags"
+>метки</link
+>, щёлкните по значку <guiicon
+> <inlinemediaobject
+><imageobject
+><imagedata fileref="mail-tagged.png" format="PNG"/> </imageobject
+></inlinemediaobject
+></guiicon
+> в меню выбора представления. </para>
+
+<para
+>Полное описание этой темы содержится в разделе <link linkend="details.tags"
+>Метки</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.payees">
+<title
+>Контрагенты</title>
+
+<para
+>Чтобы настроить список контрагентов, щёлкните по значку <guiicon
+><inlinemediaobject
+> <imageobject
+><imagedata fileref="payees_view.png" format="PNG"/></imageobject
+> </inlinemediaobject
+></guiicon
+> в меню выбора представления. </para>
+
+<para
+>Полное описание этой темы содержится в разделе <link linkend="details.payees"
+>Контрагенты</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.import">
+<title
+>Импорт файлов Quicken Interchange Format (QIF)</title>
+
+<para
+>В &kmymoney; возможно импортировать операции по счёту из другой программы учёта личных финансов, если эта программа позволяет экспортировать или сохранить их в одном из форматов, которые поддерживаются в &kmymoney;. Наиболее распространён формат Quicken Interchange Format (QIF). Большинство программ для работы с финансами поддерживают экспорт в этом формате. Информация о способах экспорта данных в различных программах в формате QIF не приводится, чтобы не перегружать это руководство лишними сведениями. </para>
+
+<para
+>Полное описание этой темы содержится в разделе <link linkend="details.impexp.qifimp"
+>Импорт QIF</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.find">
+<title
+>Поиск операций</title>
+
+<para
+>В &kmymoney; в качестве средства поиска операций выступает соответствующее диалоговое окно, которое предоставляет удобные функции поиска. </para>
+
+<para
+>Диалог поиска возможно открыть с помощью панели инструментов (щёлкните по значку <guiicon
+> <inlinemediaobject
+><imageobject
+><imagedata fileref="transaction_find.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+>) или с помощью меню (выберите пункт меню <menuchoice
+><guimenu
+>Правка</guimenu
+><guimenuitem
+>Найти операцию...</guimenuitem
+></menuchoice
+>). </para>
+
+<para
+>Полное описание этой темы содержится в разделе <link linkend="details.search"
+>Поиск</link
+>. </para>
+
+</sect1>
+
+<sect1 id="firsttime.reconcile">
+<title
+>Сверка</title>
+
+<para
+>В определённый момент потребуется сверить операции, введённые в программу, с операциями, перечисленными в выписке (банковской, по счёту кредитной карты, по кредиту или любой другой). Сверка предполагает соотнесение введённых данных с данными в выписке. Если обнаруживаются расхождения, это означает, что была допущена ошибка: либо пользователем, либо тем человеком, который сформировал выписку. </para>
+
+<para
+>Чтобы проверить соответствие счёта, сначала выберите счёт (в представлении <guiicon
+>Счета</guiicon
+> или <guiicon
+>Книга учёта</guiicon
+>). Затем нажмите на панели инструментов кнопку <guiicon
+>Сверить...</guiicon
+> или выберите в меню пункт <menuchoice
+><guimenu
+>Счёт</guimenu
+> <guimenuitem
+>Сверить...</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Полное описание этой темы содержится в разделе <link linkend="details.reconcile"
+>Сверка</link
+>. </para>
+</sect1>
+
+<sect1 id="firsttime.backup">
+<title
+>Резервное копирование</title>
+
+<para
+>После создания счетов и ввода операций рекомендуется сохранить резервную копию. Так как файл, который используется &kmymoney;, представляет собой обычный файл Unix, возможно просто скопировать его в другое расположение. Также возможно воспользоваться специальным диалогом в &kmymoney; (это рекомендуемый способ: если в дальнейшем в &kmymoney; будут использоваться файлы в других форматах, например SQL-файлы, окажется намного сложнее скопировать файл вручную). </para>
+
+<para
+>Чтобы сохранить резервную копию файла с помощью &kmymoney;, выберите пункт меню <menuchoice
+><guimenu
+>Файл</guimenu
+><guimenuitem
+>Резервное копирование...</guimenuitem
+></menuchoice
+> и укажите папку, в которой следует сохранить файл. Если папку требуется сначала подключить (и пользователь обладает соответствующими правами), установите флажок <guilabel
+>Подключить диск перед резервным копированием</guilabel
+> и нажмите кнопку <guibutton
+>OK</guibutton
+>. </para>
+
+<para
+>Файл будет сохранён в указанную папку, при этом его имя будет содержать текущую дату. В дальнейшем это позволит сразу же определить дату резервного копирования. </para>
+</sect1>
+
+<sect1 id="firsttime.launch">
+<title
+>Запуск &kmymoney;</title>
+
+<para
+>Обычно запуск &kmymoney; выполняется с помощью щелчка по значку программы или с помощью меню приложений диспетчера окон. В этом случае после запуска в &kmymoney; будет открыт последний открытый файл. Но иногда требуется выполнить запуск &kmymoney; с помощью командной строки. </para>
+
+<para
+>Полное описание всех доступных параметров командной строки доступно на man-странице &kmymoney;. Тем не менее, имеется два особых случая, которые рассматриваются далее. </para>
+
+<formalpara
+><title
+><command
+>kmymoney -n</command
+></title>
+  <para
+>Параметр -n сообщает &kmymoney;, что не следует открывать последний открытый файл. Это может быть полезно, если программа аварийно завершает работу при запуске. </para>
+</formalpara>
+
+<formalpara
+><title
+><command
+>kmymoney &lt;путь к файлу&gt;</command
+></title>
+  <para
+>Если указать в командной строке имя файла, в &kmymoney; будет открыт именно этот файл, а не последний открытый. Возможно использовать имя любого файла, который способна обработать программа &kmymoney;. Перечень форматов доступен в главе о <link linkend="details.formats"
+>форматах файлов</link
+>. Кроме того, этим способом возможно воспользоваться для импорта файла <link linkend="details.impexp.gnucash"
+>&gnucash;</link
+>. </para>
+</formalpara>
+</sect1>
+
+<sect1 id="firsttime.newpc">
+<title
+>Как перенести данные &kmymoney; на другой компьютер</title>
+
+<sect2 id="firsttime.newpc.data">
+<title
+>Перенос данных</title>
+
+<para
+>При необходимости данные очень легко перенести на новый компьютер. Потребуется только скопировать файл данных &kmymoney;. Имя файла отображается в строке заголовка программы &kmymoney;, оно обычно заканчивается суффиксом <filename class="extension"
+>.kmy</filename
+>. При первом запуске программы на новом компьютере следует указать расположение файла данных (либо с помощью командной строки, либо с помощью пункта меню <menuchoice
+><guimenu
+>Файл</guimenu
+><guimenuitem
+>Открыть...</guimenuitem
+></menuchoice
+>). В &Windows;, &MacOS; и &Linux; используется один и тот же формат файла. </para>
+
+<para
+>Если файл данных был зашифрован, на новом компьютере потребуется настроить соответствующее ПО и ключи. </para>
+
+<para
+>Если данные содержатся в базе данных SQL, информацию о переносе данных следует искать в соответствующей документации программного обеспечения этой базы данных. </para>
+
+<para
+>Обратите внимание, что на обоих компьютерах — новом и старом — должна быть установлена одна и та же версия &kmymoney;. На новом компьютере также возможно установить и более новую версию, но следует учитывать, что при обновлении версии могут возникнуть определённые недостатки. О таких недостатках должно быть упомянуто в заметках о выпуске новой версии. </para>
+</sect2>
+
+<sect2 id="firsttime.newpc.settings">
+<title
+>Перенос параметров программы</title>
+
+<para
+>Если на новый компьютер был перенесён только файл данных (как описано в предыдущем разделе), это обеспечит правильность работы &kmymoney;, но будут потеряны все установленные на старом компьютере значения параметров, отличные от используемых по умолчанию. Чтобы сохранить настроенные параметры, потребуется скопировать также и файл конфигурации. Это файл с именем <filename
+>kmymoneyrc</filename
+>. Он расположен в той же папке, что и другие файлы конфигурации &kde;. В операционной системе &Linux; это папка <filename class="directory"
+>$KDEHOME/share/config</filename
+> (где <envar
+>$KDEHOME</envar
+>, как правило, является каталогом <quote
+>.config</quote
+> в домашней папке). Если выполняется переход с версии KMyMoney, предшествующей 5.0, прежним расположением <envar
+>$KDEHOME</envar
+> был каталог <filename class="directory"
+>.kde4</filename
+>. </para>
+
+<sect3 id="firsttime.newpc.settings.plugins">
+<title
+>Перенос параметров модулей</title>
+
+<para
+>Запуск любого модуля &kmymoney; (например, средства импорта или экспорта CSV) может привести к созданию файла конфигурации в той же самой папке (например, файла <filename
+>csvimporterrc</filename
+> или <filename
+>csvexporterrc</filename
+>). Такие файлы также следует скопировать на новый компьютер. </para>
+
+<para
+>Как и в случае основного файла данных, предполагается, что на обоих компьютерах используется одна и та же версия модуля. Обычно новые версии модуля допускают использование файлов старых версий, но если функционал модуля претерпел значительные изменения, следует тщательно проверить работу старого файла конфигурации, чтобы убедиться в том, что модуль работает должным образом. </para>
+
+<para
+>Обратите внимание, что в случае обновления с предыдущей версии до версии 5.0 или выше изменится расположение файлов шаблонов, которые используются модулем печати чеков. Более подробные сведения доступны в заметках о выпуске или на <ulink url="https://www.kmymoney.org/faq.php"
+>веб-сайте</ulink
+> проекта. </para>
+
+<note>
+<para
+>Эти инструкции касаются исключительно переноса данных и параметров настройки &kmymoney;. Тем не менее, существуют некоторые важные данные, которые хранятся в самой среде &kde;, а не в файлах &kmymoney;, в том числе пароли, хранящиеся в системе kwallet. Перенос таких элементов настройки &kde; в этом руководстве не описан. Впрочем, большинство файлов подобных элементов настройки также хранятся в каталоге <envar
+>$KDEHOME</envar
+>. </para>
+</note>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="firsttime.contact">
+<title
+>Связь с разработчиками и отчёты об ошибках</title>
+
+<sect2>
+<title
+>Связь с разработчиками</title>
+
+<para
+>Общие вопросы или комментарии, касающиеся &kmymoney;, возможно направить в пользовательский список рассылки &userlist;. (<ulink url="https://mail.kde.org/mailman/listinfo/kmymoney"
+>Более подробные сведения доступны здесь</ulink
+>.) Чтобы связаться с разработчиками, напишите письмо в список рассылки разработчиков &devlist;. (<ulink url="https://mail.kde.org/mailman/listinfo/kmymoney-devel"
+>Более подробные сведения доступны здесь</ulink
+>.) Так как ответы часто присылают только в сам список рассылки, рекомендуется заранее подписаться на соответствующий список. </para>
+
+<para
+>Для разработчиков &kmymoney; очень важна обратная связь от пользователей. </para>
+</sect2>
+
+<sect2>
+<title
+>Отчёты об ошибках</title>
+
+<para
+>Чтобы отправить отчёт об ошибке, воспользуйтесь соответствующей функцией &kmymoney;: выберите пункт меню <menuchoice
+><guimenu
+>Справка</guimenu
+><guimenuitem
+>Сообщить об ошибке...</guimenuitem
+></menuchoice
+> и укажите необходимую информацию. Если же при использовании этого способа возникнут сложности, возможно сообщить об ошибке (или направить предложения по совершенствованию возможностей программы) непосредственно с помощью <ulink url="https://bugs.kde.org"
+>веб-сайта отчётов об ошибках &kde;</ulink
+>. Отчёты следует связывать с продуктом <quote
+>kmymoney</quote
+>. </para>
+
+<para
+>Независимо от выбранного способа, перед сообщением об ошибке необходимо ознакомиться с приведёнными далее инструкциями. Если они будут учтены, разработчики с большей вероятностью смогут оперативно определить проблему, не запрашивая дополнительные сведения. </para>
+
+<sect3 id="firsttime.bugs.quality">
+<title
+>Создание качественных отчётов об ошибках</title>
+
+<para
+>Пользователям рекомендуется уделять время составлению информативных отчётов об ошибках. Это упростит процесс работы для всех, так как в ином случае автору отчёта и разработчику, который будет исправлять ошибку, придётся обмениваться письмами до тех пор, пока не будут переданы соответствующие сведения. </para>
+
+<para
+>Классическое руководство по написанию отчётов об ошибках (автор — Eli Goldberg) доступно здесь: <ulink url="https://issues.apache.org/bugwritinghelp.html"
+>https://issues.apache.org/bugwritinghelp.html</ulink
+>. Обычно достаточно придерживаться следующих принципов: </para>
+
+<formalpara
+><title
+>Предоставить сведения о системе</title>
+  <para
+>При отправке отчёта об ошибке с помощью пункта меню <menuchoice
+><guimenu
+>Справка</guimenu
+><guimenuitem
+>Сообщить об ошибке...</guimenuitem
+></menuchoice
+> эти сведения будут указаны автоматически. Если же отправка отчёта выполняется другим способом, потребуется включить в него следующие сведения: название используемой операционной системы (&Linux;, &MacOS; или &Windows;), версия &kde;, версия &kmymoney;, версия &MacOS; или &Windows;, название и версия дистрибутива &Linux; и версия его ядра. </para>
+</formalpara>
+
+<formalpara
+><title
+>Предоставить обратную трассировку аварийных завершений работы программы</title>
+  <para
+>Обратная трассировка часто содержит наиболее полезные данные для решения проблем. </para>
+</formalpara>
+
+<formalpara
+><title
+>Попытаться воспроизвести ошибку</title>
+  <para
+>Сообщите разработчикам, удалось ли воспроизвести ошибку. Важно знать, произошла ли ошибка один раз и не повторялась, повторяется ли она всегда или только при определённых условиях. </para>
+</formalpara>
+
+<formalpara
+><title
+>Предоставить конкретные шаги</title>
+  <para
+>Пример неудачного отчёта об ошибке: <quote
+>I entered a transaction, and &kmymoney; crashed.</quote
+> (Я ввёл операцию, и программа &kmymoney; аварийно завершила работу.) Намного лучше сформулировать отчёт так: <quote
+>Using the transaction form, I entered a new transaction in my Credit Card account. I selected the Transfer tab, entered in an amount, then changed to the Deposit tab, and back to the Transfer tab. When I returned to the Transfer tab, &kmymoney; crashed. This bug is fully reproducible for me.</quote
+> (С помощью формы ввода операций я ввёл новую операцию по счёту кредитной карты. Я открыл вкладку «Перевод», указал сумму, затем перешёл на вкладку «Зачисление» и обратно на вкладку «Перевод». При возврате на вкладку «Перевод» программа &kmymoney; аварийно завершила работу. Эта ошибка повторяется каждый раз при выполнении этих действий.) </para>
+</formalpara>
+
+<formalpara
+><title
+>Сообщить об ожидаемом поведении</title>
+  <para
+>Иногда ожидаемые результаты очевидны, но в тех случаях, когда ошибка является трудно обнаруживаемой, бывает сложно понять, какой именно результат ожидался пользователем. Всегда сообщайте разработчикам о том, какой результат ожидался от программы. </para>
+</formalpara>
+
+<formalpara
+><title
+>Попытаться выполнить запуск с включённой отладкой</title>
+  <para
+>Если собрать версию с использованием команды --enable-debug=full, это обеспечит создание наилучших обратных трассировок. В случае аварийного завершения работы программы снова запустите &kmymoney; с помощью gdb и воспроизведите действия, которые привели к сбою. После аварийного завершения работы программы введите команду <quote
+>bt</quote
+> для создания данных обратной трассировки. </para>
+</formalpara>
+
+<para
+>Запуск программы таким образом намного сложнее обычного запуска, поэтому разработчики не рассчитывают, что все пользователи смогут его выполнить. Тем не менее, именно этот способ наиболее эффективен с точки зрения совершенствования стабильности работы &kmymoney; (за исключением самостоятельного обнаружения пользователем ошибки в коде и отправки исправления). </para>
+</sect3>
+</sect2>
+</sect1>
+</chapter>

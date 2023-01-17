@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.institutions">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Geldinstitute</title>
+
+<para
+>Die Ansicht "Geldinstitute" zeigt alle Konten gruppiert nach den eingetragenen Geldinstituten. Anlagenkonten sind mit einem schwarzen, Verbindlichkeitenkonten mit einem roten Pfeil gekennzeichnet. </para>
+
+<para
+>Diese Ansicht enthält mehrere Spalten, wie den Kontentyp und den Kontostand jedes Kontos. Die Ansicht zeigt darüber hinaus auch die Gesamtsumme aller Konten eines Geldinstituts. </para>
+
+<para>
+<screenshot>
+    	<screeninfo
+>Ansicht „Geldinstitute“</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_view.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Ansicht „Geldinstitute“</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="details.institutions.institution">
+<title
+>Einstellungen für Geldinstitut</title>
+
+<para
+>Ein rechter Mausklick auf den Namen eines Geldinstituts zeigt ein Untermenü mit mehreren Optionen. Der Menüpunkt <guimenuitem
+>Neues Geldinstitut ...</guimenuitem
+> öffnet das Dialogfenster zum Anlegen eines neuen Geldinstituts, in dem Sie alle notwendigen Informationen der neuen Bank eingeben können. Mit <guimenuitem
+>Geldinstitut bearbeiten ...</guimenuitem
+> können Sie die Details, wie Name und Adresse, des angewählten Instituts ändern. Über <guimenuitem
+>Geldinstitut löschen</guimenuitem
+> kann des Geldinstitut samt allen zugeordneten Konten aus &kappname; komplett gelöscht werden. Beachten Sie, dass Sie ein Kreditinstitut nur löschen können, wenn auch alle zugeordneten Konten gelöscht werden können. Dies ist nur möglich, wenn die Konten keine Buchungen beinhalten und ihnen keine geplanten Buchungen zugeordnet sind. Über <guimenuitem
+>Neues Konto ...</guimenuitem
+> gelangen Sie in den Assistenten zum Anlegen neuer Konten, der im nächsten Abschnitt näher beschrieben wird. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Kontextmenü „Geldinstitut“</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="institution_options.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Kontextmenü „Geldinstitut“</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect2 id="details.institutions.new">
+<title
+>Neues Geldinstitut</title>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="newinst.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>Neues Geldinstitut</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<para>
+  <emphasis
+>Hinweis: Sie müssen eine Datei geöffnet haben, bevor Sie ein neues Geldinstitut anlegen können. Wenn Sie keine vorhandene Datei zur Verfügung haben, müssen eine <link linkend="firsttime.3"
+>neue Datei</link
+> erzeugen. </emphasis>
+</para>
+
+<para
+>Die Eingabe eines Namens für das neue Geldinstitut ist obligatorisch, die übrigen Felder sind optional. Genauso wie die Daten aus dem Eingabedialog für die persönlichen Informationen, werden auch die Daten des neuen Geldinstituts derzeit von &kappname; nicht verwendet. Dies wird sich in zukünftigen Versionen aber ändern, so wird zukünftig auf die Bankleitzahl (BLZ) und die <acronym
+><ulink url="http://en.wikipedia.org/wiki/ISO_9362"
+>BIC (Bank Identifier Code)</ulink
+></acronym
+> für das Online-Banking zurückgegriffen. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.institutions.account">
+<title
+>Konto-Einstellungen</title>
+
+<para
+>Ein rechter Mausklick auf einen Kontennamen öffnet ein Kontextmenü. Durch die Auswahl von <guimenuitem
+>Neues Konto ...</guimenuitem
+> öffnet sich der Assistent für neue Konten. Mit <guimenuitem
+>Kontenbuch öffnen</guimenuitem
+> gelangen Sie direkt zum Kontenbuch oder zur Investitionenliste, abhängig vom Kontentyp. Das gleiche geschieht bei einem Doppelklick auf den Kontennamen. Durch den Menüpunkt <guimenuitem
+>Konto bearbeiten ...</guimenuitem
+> öffnet sich ein Dialogfenster, in dem Sie den Kontennamen, das Eröffnungsdatum, das zugeordnete Geldinstitut und das Elternkonto ändern können. Ein Konto kann nur gelöscht werden, wenn es keine Buchungen mehr enthält. Das Auswählen von <guimenuitem
+>Abgleichen ...</guimenuitem
+> öffnet den Abgleich-Assistenten, worüber Sie Schritt für Schritt die Buchungen Ihres Bankkontoauszugs mit denen in Ihrem Kontenbuch vergleichen können. Weitere Informationen hierzu, sowie Informationen über die anderen Optionen finden Sie in dem entsprechenden Kapitel dieses Handbuchs. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Kontextmenü „Konto“</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="account_options.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Kontextmenü „Konto“</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect1>
+</chapter>

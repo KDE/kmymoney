@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.ledgers">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+  </authorgroup>
+  <date
+>2019-04-02</date>
+  <releaseinfo
+>5.0.3</releaseinfo>
+</chapterinfo>
+
+<title
+>Huvudböcker</title>
+
+<sect1 id="details.ledgers.view">
+<title
+>Huvudboksvyn</title>
+
+<para
+>Huvudboksvyn är funktionsmässigt dataintegreringscentrum i &kmymoney;. Vyn är till för att skriva in, granska, ta bort och redigera transaktionsdata i definierade konton. Vyn är uppdelad i tre huvudområden: filterområdet, transaktionslistan, och inmatningsområdet. </para>
+
+<para
+>Vyn tillåter flera viktiga åtgärder: söka och visa transaktioner, skriva in nya transaktioner och redigera, duplicera eller ta bort befintliga transaktioner. Förutom detta, tillhandahåller den också möjlighet att flytta, markera och gå till ytterligare transaktionsinformation. Övriga funktioner i huvudboksvyn inkluderar att ändra och stämma av kontot. </para>
+  
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="ledgerview-numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Huvudboksvyn</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Vyn har tre element: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Filterområdet</para
+></listitem>
+  <listitem
+><para
+>Transaktionslistan</para
+></listitem>
+  <listitem>
+    <para
+>Transaktionsformuläret, som kan visas eller inte, beroende på inställningen som valts i sektionen Anpassa &kmymoney; huvudbok. </para>
+  </listitem>
+</itemizedlist>
+
+<sect2 id="details.ledgers.view.filter">
+<title
+>Filterområdet</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="accountdropdown.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Filterområde</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Du kan enkelt välja vilket konto som helst via kombinationsrutan med konton längst upp i vyområdet. Observera att <link linkend="details.ledger.transactionform"
+>transaktionsformuläret</link
+> längst ner i vyn, kan ändras beroende på kontotyp. </para>
+
+<para
+>Till höger om kombinationsrutan med konton, finns ytterligare två fält. Filterrutan tillhandahåller möjlighet att söka efter matchande transaktioner som visas i listvyn. Texten som anges kan vara i vilket fält som helst i transaktionen för det specifika kontot. Statusfältet är en kombinationsruta. Statusfältets lista tillåter att följande värden väljes: Godtycklig status, Importerad, Matchad, Felaktig, Inte markerad, Inte avstämd, Kontrollerad, och schemalagda transaktioner. </para>
+
+</sect2>
+
+<sect2>
+<title
+>Transaktionslistan</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="translist.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transaktionslistan</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Efter att du har skrivit in en transaktion, visas den i transaktionslistan. Du kan också ändra transaktionens egenskaper, eller till och med skapa nya transaktioner direkt i listan. I transaktionslistan är transaktionerna normalt sorterade enligt datum med den senaste transaktionen längst ner. Genom att klicka med höger musknapp på transaktionslistans rubriker visas en dialogruta som låter dig ändra transaktionernas sorteringsordning. För instruktioner om hur den normala sorteringsordningen kan ändras, se avsnittet om <link linkend="details.settings.register.sorting"
+>sorteringsfliken</link
+> i kapitlet <link linkend="details.settings"
+>&kmymoney;s inställningar</link
+>. </para>
+
+<para
+>Observera att behållningskolumnen är baserad på sorteringsordningen som för närvarande används, och beräknas inte om visningen är filtrerad av en sökning i filterrutan eller kombinationsrutan med transaktionstyp, som beskrivs ovan. </para>
+
+<para
+>Längst ner i transaktionslistan visar &kmymoney; tre värden: </para>
+
+<formalpara
+><title
+>Senaste avstämning</title>
+  <para
+>Det här är det senaste datum som kontot avstämdes. Avstämning är en viktig process för många konton, och beskrivs <link linkend="details.reconcile"
+>här</link
+>. </para>
+</formalpara>
+
+<formalpara
+><title
+>Kontrollerad</title>
+  <para
+>Det här är summan av alla kontrollerade och avstämda transaktioner i kontot. Se <link linkend="details.ledgers.cleared"
+>detta avsnitt</link
+> för mer information om transaktionstillstånden kontrollerad och avstämd. </para>
+</formalpara>
+
+<formalpara
+><title
+>Behållning</title>
+  <para
+>Det är här &kmymoney; visar kontots totala behållning, som är summan av alla transaktioner i kontot. Om du dock markerar mer än en transaktion i transaktionslistan, ändras det så att summan av de markerade transaktionerna visas. Det återgår till behållningen när bara en transaktion är markerad. </para>
+</formalpara>
+</sect2>
+
+<sect2>
+<title
+>Transaktionsformuläret</title>
+
+<para
+>Den exakta layouten av det nedre området i huvudboksvyn beror på inställningarna och vilken typ av konto som visas. Dock innehåller det i allmänhet fält för all information i en enskild transaktion, samt knappar för diverse åtgärder som kan utföras med en transaktion. Det beskrivs mer detaljerat i följande avsnitt. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledger.transactions">
+<title
+>Skriva in transaktioner</title>
+
+<para
+>Det finns två metoder för att skriva in transaktioner i huvudboken: Använda inmatningsformuläret för transaktioner eller skriva in data direkt i transaktionslistan. Transaktionsformuläret visas normalt, och vi beskriver den metoden först. Avstängning av transaktionsformuläret kan åstadkommas genom att gå till huvudboksektionen i Anpassa &kmymoney;, dvs. i inställningarna. </para>
+
+<para
+>Fälten i inmatningsområdet motsvarar informationsfälten i transaktionslistan. Ytterligare fält inkluderar anteckningsfältet, för en mer detaljerad beskrivning av transaktionen, och ett kategorival. Delningsknappen tillåter att transaktionen delas i flera kategorier. </para>
+</sect1>
+
+<sect1 id="details.ledger.transactionform">
+<title
+>Använda transaktionsformuläret</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transaktionsformulär</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>Transaktionsformuläret längst ner i huvudboksvyn är gränssnittet för att skapa transaktioner manuellt. </para>
+
+<para
+>Beroende på transaktionstyp som du vill skriva in, finns det flera olika flikar tillgängliga i transaktionsformuläret. Klicka på fliken som bäst beskriver din transaktion (insättning, överföring eller uttag), så visar transaktionsformuläret olika fält redo att fyllas i. </para>
+
+<para
+>Observera att själva transaktionsmetoden inte används direkt av &kmymoney;, utan bara är till för grupperings- och rapporteringssyfte. </para>
+
+<para
+>Om du är osäker på vilken metod du ska välja, använd helt enkelt Insättning för alla pengar som sätts in på kontot, Uttag för pengar som tas från kontot, och Överföring för pengar som flyttas från ett konto till ett annat. Transaktionsmetoderna och skillnaden mellan dem beskrivs mer detaljerat på andra ställen. </para>
+
+<para
+>Välj transaktionsmetod genom att klicka på lämplig flik. </para>
+
+<sect2>
+<title
+>Fälten i en transaktion</title>
+
+<para
+>Skriv in informationen med användning av följande anmärkningar i de tillgängliga fälten. Observera att många fält har 'Automatisk komplettering' aktiverad. Det vill säga, när du börjar skriva erbjuder &kmymoney; alternativ som motsvarar de tecken du hittills har skrivit in. För att välja matchande innehåll, klicka helt enkelt på posten med musen eller använda lämpliga tangenter på tangentbordet.Om posten inte listas, fortsätt skriva för att lägga till det nya värdet. Nästa gång du skriver in värdet, hittar &kmymoney; det åt dig när några av de första tecknen har skrivits in. </para>
+
+<sect3>
+<title
+>Betalaren</title>
+
+<para
+>Betalaren är den som pengarna ska till, eller kommer från. Om betalaren är en ny post, frågar &kmymoney; om du vill lägga till den i listan med betalare. All annan information som hör ihop med en betalningsmottagare eller betalare, såsom adress, telefonnummer och kontonummer, samt anmärkningar, kan uppdateras i betalarvyn. </para>
+</sect3>
+
+<sect3>
+<title
+>Kategorin</title>
+
+<para
+>Kategorin kopplar ihop en transaktion med en inkomst- eller utgiftskategori för bokförings- och rapportsyfte, och gör det möjligt att gruppera vissa transaktioner. Skriv in kategorins namn i definierat fält. Om du har skrivit in en kategori som inte finns, frågar &kmymoney; om du vill skapa en ny. Om valet är jakande, visar &kmymoney; en dialogruta som gör det möjligt att definiera kategorin i detalj baserat på allmänna, hierarkiska och skatteegenskaper. </para>
+
+<para
+>Om du vill koppla ihop delar av transaktionen med olika kategorier, låter &kmymoney; dig göra det. Ett exempel på transaktion kan vara ett kontantuttag av 500, där du använder 100 för mat, 200 för öl och 200 som kontanter. Transaktionen ska därför tilldelas tre kategorier: mat, öl och kontanter. För att göra det, måste du använda <link linkend="details.ledgers.split"
+>Delade transaktioner</link
+>, som beskrivs mer detaljerat nedan. </para>
+
+<para
+>Se det särskilda avsnittet <link linkend="reference.widgets"
+>&kmymoney;s fält</link
+> för mer information om hur fältet används. </para>
+</sect3>
+
+<sect3>
+<title
+>Etiketter</title>
+
+<para
+>Etiketter liknar kategorier, och kan användas för att upprätthålla en ortogonal vy till kategorier. De ger möjlighet att gruppera transaktioner inom en kategori baserat på olika behov. Behovet kan gälla en specifik person, plats eller sak. Du kan exempelvis ha en kategori för varje typ av fordonsrelaterad utgift, och en etikett för varje fordon. Liksom med kategorier kan du välja i kombinationsrutan, eller skriva in ett nytt etikettnamn, och bli tillfrågad om du vill skapa en ny etikett med det namnet. Inom etikettfältet tillåter &kmymoney; att flera etiketter matas in för en enskild transaktion. Det går också att mata in en etikett för en individuell delning. </para>
+</sect3>
+
+<sect3>
+<title
+>Anteckning</title>
+
+<para
+>En flerraders anteckning kan skrivas in om du vill ha hjälp att komma ihåg ytterligare detaljer om en specifik transaktion. </para>
+</sect3>
+
+<sect3>
+<title
+>Checknummer</title>
+
+<para
+>Checknumret kan skrivas in om det behövs. Observera att checknummerfältet kan göras synligt eller osynligt i huvudboken om så önskas. Det ställs in i huvudbokens inställningsdialogruta. </para>
+</sect3>
+
+<sect3>
+<title
+>Datumet</title>
+
+<para
+>Transaktionsdatum måste matas in för att ange när transaktionen skedde. Se det särskilda avsnittet <link linkend="reference.widgets"
+>Fält i &kmymoney;</link
+> för mer information om hur datuminmatningsfältet kan användas för att göra det snabbare och enklare att mata in datum. För transaktioner i check- och kreditkortskonton, är det ditt val om det verkliga datumet (när du skrev checken eller gjorde inköpet) eller bokföringsdatumet som rapporteras av banken eller kreditkortsutfärdaren. Att använda det verkliga datumet kan exempelvis hjälpa dig hålla reda på när inköpet gjordes, men det är troligare att utdraget eller nerladdad data från banken använder bokföringsdatumet. </para>
+</sect3>
+
+<sect3>
+<title
+>Beloppet</title>
+
+<para
+>Ange till sist transaktionens belopp i det obligatoriska fältet. Observera att en enkel räknare kan visas, antingen genom att klicka på ikonen till höger om beloppsfältet, genom att skriva in tecknet % i fältet, eller genom att skriva in någon av följande matematiska symbolerna: + - * / i en formel, som <emphasis
+>12 + 3</emphasis
+>. När plustecknet skrivs in, visas räknaren. Observera att bara beräkningens slutresultat sparas som transaktionsbelopp. </para>
+
+<para
+>När du är övertygad om att alla fält har fyllts i riktigt, klicka på <guibutton
+>Registrera</guibutton
+>. Om du klickade på <guibutton
+>Registrera</guibutton
+> av misstag innan du var klar med inmatning av all data, klicka på <guibutton
+>Redigera</guibutton
+> för att fortsätta skriva in data. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledger.direct">
+<title
+>Direktinmatning av transaktioner i listan</title>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform-off.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Direktinmatning av transaktioner</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Den andra metoden att skriva in transaktioner i huvudboken omfattar direktredigering av själva transaktionslistan. </para>
+
+<para
+>För att göra det, måste du först tala om för &kmymoney; att du inte vill använda transaktionsformuläret, genom att öppna inställningsdialogrutan och avmarkera alternativet <guilabel
+>Visa transaktionsformulär</guilabel
+>. </para>
+
+<para
+>Det utförs genom att välja menyalternativet <menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Anpassa &kmymoney;</guimenuitem
+></menuchoice
+>och klicka på <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="ledgers_view.png"/></imageobject
+></inlinemediaobject
+></guiicon
+> registreringsikonen i listan till vänster. Alternativet att avmarkera heter <guilabel
+>Visa transaktionsformulär</guilabel
+>. När du är klar, klicka på <guibutton
+>Ok</guibutton
+> för att vara redo att skriva in eller redigera transaktioner direkt. </para>
+
+<sect2>
+<title
+>Starta redigering</title>
+
+<para
+>För att skriva in en ny transaktion i registret kan du nu antingen klicka på en tom post, trycka på <keycombo action="simul"
+>&Ctrl;<keycap
+>Insert</keycap
+></keycombo
+>, eller klicka på <guibutton
+>Ny</guibutton
+> längst ner i fönstret. Piltangenterna <keycap
+>Uppåt</keycap
+> och <keycap
+>Neråt</keycap
+> låter dig gå igenom listan. Efter att ha tryckt på returtangenten eller dubbelklickat på en post, visar transaktionslistan fälten som krävs för att skriva in transaktionen och väntar på inmatning. </para>
+
+<para
+>För att flytta dig genom fälten, tryck på tabulatortangenten, och när du är klar tryck på returtangenten för att spara ändringarna eller <keycap
+>Esc</keycap
+> för att avbryta. </para>
+
+<para
+>Om alternativet <guilabel
+>Använd returtangenten för att gå mellan fält</guilabel
+> är valt, går <keycap
+>Retur</keycap
+> till nästa fält precis som <keycap
+>Tabulator</keycap
+>, utom för det sista inmatningsfältet där den sparar data. </para>
+
+<para
+>Vilken metod du använder för att skriva in transaktioner är upp till dig, och är en fråga om vad du personligen föredrar. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.ledgers.split">
+<title id="details.ledgers.split.title"
+>Delade transaktioner</title>
+
+<para
+>Funktionen för delade transaktioner låter dig dela upp en transaktion i flera kategorier, som till exempel representerar olika saker inköpta vid ett enda inköpstillfälle i en affär. </para
+> 
+
+<para
+>För att skriva in en delad transaktion, antingen genom att använda transaktionsformuläret eller transaktionslistan, påbörja en ny transaktion som vanligt, inklusive inmatning av totalbeloppet. Därefter, istället för att välja en kategori, klicka på knappen <guibutton
+>Dela</guibutton
+> till höger om fältet <guilabel
+>Kategori</guilabel
+>. Om du redan har valt en kategori, blir den första posten i delningseditorns fönster. </para
+> 
+ 
+<para
+>I delningseditorns fönster, dubbelklicka på en tom rad för att skriva in en ny deltransaktion eller tryck på <keycombo action="simul"
+>&Ctrl;<keycap
+>Insert</keycap
+></keycombo
+>. Ange kategorin, lägg till en (valfri) anteckning, och skriv in beloppet. För att spara den här delen av transaktionen, klicka på den gröna bocken under kategorin. För att avbryta klicka på det röda krysset. </para
+> 
+ 
+<para
+>Efter att en del har skrivits in, visas hur mycket av hela transaktionen som fortfarande inte har tilldelats längst ner i delningseditorn. Efter att alla delar har skrivits in, klicka på knappen <guibutton
+>Ok</guibutton
+> för att spara hela transaktionen. Om det fortfarande finns belopp som inte har tilldelats, blir du tillfrågad om du antingen vill återgå till att redigera delningen, ändra transaktionens totala belopp, eller lämna en del av transaktionen utan tilldelning. </para>
+
+<para
+>Observera att kategorifältet i transaktionsformuläret eller transaktionslistan nu visar <emphasis
+>Delad transaktion</emphasis
+>. </para
+> 
+
+<para>
+	<screenshot>
+	<screeninfo
+>Delade transaktioner</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="split_transaction.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Delad transaktion</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+</sect1>
+
+<sect1 id="details.ledger.edit">
+<title
+>Redigera transaktioner</title>
+
+<para
+>För att redigera en transaktion, markera den i listvyn och klicka antingen på <guibutton
+>Redigera</guibutton
+> i transaktionsformuläret, eller högerklicka på posten och välj <guimenuitem
+>Redigera</guimenuitem
+> i den sammanhangsberoende menyn. Om du redigerar transaktioner direkt i listan, kan du redigera transaktionen genom att helt enkelt dubbelklicka på en post eller trycka på returtangenten när en transaktion är markerad. </para>
+</sect1>
+
+<sect1 id="details.ledger.delete">
+<title
+>Ta bort transaktioner</title>
+
+<para
+>För att ta bort transaktionen, markera den i listvyn, högerklicka på posten och välj <guimenuitem
+>Ta bort</guimenuitem
+> i den sammanhangsberoende menyn när den visas, eller tryck på tangenten <keycap
+>Delete</keycap
+> på transaktionsformuläret. </para>
+</sect1>
+
+<sect1 id="details.ledgers.match">
+<title id="details.ledgers.match.title"
+>Matcha transaktioner</title>
+
+<para
+>När transaktioner importeras, antingen via QIF, OFX eller HBCI, försöker &kmymoney; i allmänhet automatiskt matcha dem mot befintliga transaktioner. För att hantera skillnader i datum, finns en förvald inställning av fyra dagar, som kan ändras i inställningarna, Registrera, Import. Alla transaktioner som matchas på detta sätt kommer att färgläggas i grönt. När importen är färdig, bör du granska dem och antingen acceptera eller ta bort deras matchning. </para>
+
+<para
+>Om du skulle märka att en importerad transaktion inte automatiskt matchades med en befintlig när det skulle ha gjorts, är det möjligt att matcha dem manuellt. Observera att det är skillnad att matcha två transaktioner manuellt och att helt enkelt ta bort en av dem, även om det verkar som om effekten är likadan. I synnerhet med OFX eller HBCI är det viktigt att inte ta bort den importerade transaktionen, eftersom att du kommer att märka att nästa gång du importerar transaktioner, kan den borttagna transaktionen dyka upp igen. Det beror på att moderna importformat som OFX och HBCI använder ett <quote
+>transaktions-id</quote
+> för att identifiera transaktioner. När du tar bort den importerade transaktionen, försvann också dess transaktions-id med den, så importen har inget sätt att veta att transaktionen redan hade importerats. </para
+> 
+
+<para
+>Lösningen är att tala om för &kmymoney; att transaktionerna är samma, genom att använda gränssnittet för manuell matchning. Det låter dig matcha en importerad transaktion med en handinmatad (icke-importerad) transaktion. För att göra det, markera en av transaktionerna som ska matchas genom att klicka på den, markera därefter den andra genom att klicka på den med tangenten &Ctrl; nertryckt, och välj därefter <guimenuitem
+>Matcha</guimenuitem
+> i den sammanhangsberoende menyn. Det matchar och kombinerar ihop transaktionerna. Båda transaktionernas värden måste vara samma för att matchning ska fungera, utom att datumen kan skilja sig åt med fönstret angivet i inställningarna, som beskrivs ovan. Om du är nöjd med resultatet, högerklicka på den matchade transaktionen och välj därefter <guibutton
+>Acceptera</guibutton
+>. </para>
+
+<para
+>Under import av kontoutdrag via Internet, antingen direkt eller genom att importera en nerladdad fil, utför &kmymoney; matchning så bra som möjligt baserat på betalarens namn och transaktionens belopp. I händelse av en ogiltig matchning, kan en matchning av en transaktion tas bort. </para>
+
+<note>
+  <para
+>Matchningsgränssnittet tillåter inte att matcha två transaktioner som har importerats. På liknande sätt, tillåter det inte heller att matcha två transaktioner som båda har skrivits in för hand. </para>
+</note>
+</sect1>
+
+<sect1 id="details.ledgers.cleared">
+<title
+>Att förstå en transaktions tillstånd</title>
+
+<para
+>En transaktion kan ha ett av tre tillstånd: inte avstämd (tom), kontrollerad (K) eller avstämd (A). När en transaktion skrivs in har den tillståndet inte avstämd. När banken väl skickar transaktionen, kan användaren kontrollera den och på så sätt ändra den till tillståndet (K). När du får ett utdrag från banken, ska alla kontrollerade transaktioner finnas på utdraget. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Att förstå det kontrollerade tillståndet</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="cleared_state.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>kontrollerat tillstånd</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>När du <link linkend="details.reconcile"
+>stämmer av</link
+>  ett konto, markerar du utdragen som kontrollerade och verifierar att skillnaden mellan ingående behållning och den kontrollerade transaktionen är lika med utdragets utgående behållning. Om det är fallet, kan du 'slutföra avstämningen', vilket i själva verket ändrar tillstånd för alla kontrollerade transaktioner (K) till avstämda (A). </para>
+
+<para
+>Om du försöker redigera en transaktion med minst en delning markerad som avstämd (A), får du en varning. </para>
+</sect1>
+
+<sect1 id="details.ledgers.settings">
+<title
+>Ändra transaktionsinställningar</title>
+
+<para
+>Det finns flera inställningsalternativ som ändrar utseende och beteende hos huvudboksvyn när det gäller transaktioner. Inställningarna hittas genom att välja <guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Anpassa &kmymoney;</guimenuitem
+> i menyraden, och välja <guiicon
+><inlinemediaobject
+><imageobject
+> <imagedata fileref="ledgers_view.png" format="PNG"/></imageobject
+> </inlinemediaobject
+></guiicon
+> huvudboksikonen i listan till vänster. </para
+> 
+
+<para
+>De flesta inställningar är självförklarliga. Av tydlighetsskäl, förklaras flera av inställningarna nedan. </para>
+<!-- FIXME - if these are explained in the chapter on settings, just refer to that
+     as is done above, and don't duplicate here.  Leaving for now, but should clean
+     up later. -->
+
+<itemizedlist>
+  <listitem>
+    <para
+>Visa transaktionsformulär (under fliken Visning): Ändra för att dölja inmatningsområdet av transaktioner längst ner i fönstret. Transaktioner kan fortfarande skrivas in direkt på en tom rad i slutet av transaktionslistan, via ett automatiskt kompakt inmatningsområde. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Dessa bilder visar hur direkt inmatning av transaktioner ser ut, jämfört med transaktionsformuläret. </para>
+
+<para
+>Transaktionsformuläret</para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Transaktionsformuläret</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transaktionsformulär</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Direktinmatade transaktioner</para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Direktinmatade transaktioner</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="transactionform-off.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Direktinmatning</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Behåll ändringar när en annan transaktion eller delning väljes: Genom att markera nästa rad i transaktionslistan eller delningseditorn, behålls ändringarna istället för det normala beteendet där du måste klicka på den gröna bocken för att spara ändringarna. </para>
+  </listitem>
+</itemizedlist>
+
+</sect1>
+
+<sect1 id="details.ledgers.other">
+<title id="details.ledgers.other.title"
+>Andra funktioner</title>
+
+<para
+>Ytterligare alternativ är tillgängliga i menyn <guimenu
+>Transaktionsalternativ</guimenu
+>, som antingen kan kommas åt genom att högerklicka på en transaktion i listan. </para>
+
+<para>
+	<screenshot>
+	<screeninfo
+>Undermenyn för transaktionsalternativ</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="ledger_more.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Transaktionsalternativ</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Alternativ omfattar att gå till sidan med betalare, skapa ett schema och ändra status till avstämd eller kontrollerad. </para>
+
+<para
+>För att redigera kontoinformation i huvudboksvyn, välj <guimenu
+>Konto</guimenu
+> i menyraden. Med menyalternativet <guimenuitem
+>Redigera konto...</guimenuitem
+> kan kontots detaljinformation ändras. Det finns också ett menyalternativ för att visa menyn Avstämning, som låter dig matcha transaktioner med ett officiellt bankutdrag eller kreditkortsutdrag. </para>
+</sect1>
+</chapter>
+

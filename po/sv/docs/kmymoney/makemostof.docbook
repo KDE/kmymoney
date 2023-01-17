@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="makingmostof">
+<chapterinfo>
+  <authorgroup>
+    <author
+><personname
+><firstname
+>Joe</firstname
+><surname
+>(joe1011010)</surname
+></personname
+> <email
+>joe1011010_km@users.sourceforge.net</email
+> </author>
+  </authorgroup>
+  <date
+>2010-04-05</date>
+  <releaseinfo
+>5.0.4</releaseinfo>
+</chapterinfo>
+
+<title
+>Få ut så mycket som möjligt av &kmymoney;</title>
+
+<para
+>Du skulle kunna sätta igång, klicka på några knappar och fylla i lite information. Efter en stund, skulle du kunna bestämma dig för att du har gjort fel och börja om igen, även om du har läst dokumentationen om varje del av &kmymoney;. </para>
+
+<para
+>Du får ett effektivare system om du tillbringar lite tid med att planera hur du tänker använda &kmymoney;, så följ stegen som ges här. </para>
+
+<sect1 id="makingmostof.basicaccounting">
+<title
+>Grundläggande bokföring</title>
+
+<para
+>Föreställ dig dina pengar som kulor, eller bönor, och för att förhindra att de rullar omkring har du dem i en låda, eller burk. Räkenskaper, eller bokföring, är processen att räkna och hålla reda på bönorna i burken, eller i flera burkar. </para>
+
+<para
+>Du har en del pengar i burken som är uppmärkt med <quote
+>Kontanter</quote
+>. Du köper några varor, så du tar ut några bönor ur kontantburken och lägger dem i en annan burk uppmärkt med <quote
+>Leverantör</quote
+>. Leverantören ger dig några varor i utbyte mot pengarna, så du tar ut bönorna ur burken uppmärkt med <quote
+>Leverantör</quote
+> och lägger dem i burken uppmärkt med <quote
+>Varor</quote
+>. </para>
+
+<para
+>Varorna har ett värde (priset du betalade) så du har fortfarande samma mängd bönor, några som representerar kontanter och andra som representerar varor. </para>
+
+<para
+>I detta fall har du två förflyttningar av bönor, eller transaktioner. Varje transaktion behöver två poster, en för att ta ut bönor och en för att stoppa in bönor. Det kallas <quote
+>dubbel bokföring</quote
+>. Transaktionerna skrivs in i en <quote
+>huvudbok</quote
+>. Varje burk är känt som ett <quote
+>konto</quote
+>. </para>
+
+<para
+>Nu tar du några varor och ger dem till en kund, som ger dig kontanter i utbyte. Varorna var värda några bönor, och förhoppningsvis har kunden gett oss fler bönor än så, vilket ger en vinst. För att förenkla, kommer bönorna från varuburken tillbaka som kontanter, men vi kan dela upp dem som <quote
+>Kostnad för sålda varor</quote
+> och <quote
+>Vinst</quote
+>. Transaktionen har tre poster, ena sidan av den <quote
+>dubbla bokföringsposten</quote
+> har delats. </para>
+
+<para
+>Detta täcks mer detaljerat senare i handboken. </para>
+<!-- **** don't forget to make sure this is actually covered, and linked to from
+     here.  Also, I have removed "in setting up accounts for Businesses." and
+     modified the section below, since we explicitly say that KMM is not for
+     business use. -->
+
+<sect2 id="makingmostof.basicaccounting.personalaccounts">
+<title
+>Definiera konton (personlig registrering)</title>
+
+<para
+>De flesta konton, eller burkar, ovan representerar ett mått på vårt <quote
+>värde</quote
+>. Kontanterna och varorna representerar våra <quote
+>tillgångar</quote
+>, liksom det våra kunder är skyldiga oss om de inte ännu har gett oss pengarna. Pengarna vi är skyldiga, ifall vi inte har betalat våra leverantörer, är våra <quote
+>skulder</quote
+>. Dessa konton kan överföras till kontanter och har ett värde. </para>
+
+<para
+>Alla burkar som inte har värden är <quote
+>inkomst</quote
+> eller <quote
+>utgift</quote
+>. Vår telefonräkning (eller telefonbolaget som vi betalar räkningen till) kan inte värderas. Vi vet hur mycket vi har betalt, men inte hur mycket någon annan har betalt. Vi vet hur mycket vår arbetsgivare har betalt oss, men vi vet inte hur mycket de har betalt någon annan, eller hur mycket pengar de har kvar att betala oss nästa månad. Även om vi inte kan bestämma ett verkligt värde för burkarna, är det användbart att övervaka hur mycket som vi har lagt i eller tagit ur var och en av dem. </para>
+
+<para
+>I vissa fall är en leverantör en <quote
+>skuld</quote
+>, i andra fall är den en <quote
+>utgift</quote
+>. Det är något vi måste överväga och bestämma i varje enskilt fall. På liknande sätt kan du ange ett lån som en skuld, särskilt om du överför pengarna till ett bankkonto, men det skulle kunna vara en utgift om det användes för att köpa ett antal möbler. </para>
+
+<para
+>Överväg hur du vill spåra och analysera dina inkomster och utgifter. Det bestämmer hur du anger dem i &kmymoney;. </para>
+
+<para
+>Till sist, överväg om du vill ha allting i en uppsättning konton, eller två eller flera. Det kan bero på den rättsliga ramen eller bara hur du vill analysera saker och ting. Varje uppsättning konton skulle hanteras separat. </para>
+</sect2>
+
+<sect2 id="makingmostof.basicaccounting.businessaccounts">
+<title
+>Definiera konton (affärsregistrering)</title>
+
+<para
+>Det finns likheter mellan att skapa konton för personlig användning, men det finns ytterligare överväganden, inlusive juridiska regler och krav. &kmymoney; tar inte explicit hand om några av dessa ting, eftersom det är konstruerat som en <quote
+>personlig</quote
+> ekonomihanterare. Dessutom beskrivs inte dessa ytterligare ting i handboken, men man måste vara medveten om dem om man ska försöka använda &kmymoney; i ett företag. </para>
+</sect2>
+</sect1>
+
+<sect1 id="makingmostof.mapping">
+<title
+>Avbilda din ekonomi i &kmymoney;</title>
+
+<para
+>Samla alltså ihop dina papper och läs följande avsnitt för varje objekt i &kmymoney;. </para>
+
+<sect2 id="makingmostof.mapping.accounts">
+<title
+>Konton</title>
+
+<para
+>Dessa innehåller ett värde. Transaktioner skapas i ett eller flera konton. </para>
+
+<sect3 id="makingmostof.mapping.accounts.asset">
+<title
+>Konton - Tillgångar</title>
+
+<para
+>Detta är de konton som innehåller pengar och ägodelar, som du vill övervaka. Följande typer är tillgängliga: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Lönekonto</term>
+    <listitem>
+      <para
+>Vanligt rörelsekonto på en bank. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Sparkonto</term>
+    <listitem>
+      <para
+>Vanligt sparkonto på en bank. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Kontanter</term>
+    <listitem>
+      <para
+>Pengar i handen eller plånboken. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Lån</term>
+    <listitem>
+      <para
+>Lån du ger någon annan. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Investering</term>
+    <listitem>
+      <para
+>Pengar du investerar. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Tillgångar</term>
+    <listitem>
+      <para
+>Ägodelar, samlingar, etc. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+
+<sect3 id="makingmostof.mapping.accounts.liability">
+<title
+>Konton - Skulder</title>
+
+<para
+>Detta är de konton som representerar dina skulder och pengar du är skyldig, som du vill övervaka. Följande typer är tillgängliga: </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+>Kreditkort</term>
+    <listitem>
+      <para
+>Vanligt kreditkortskonto. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Lån</term>
+    <listitem>
+      <para
+>Lån du har tagit, hypotek, etc. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>Skuld</term>
+    <listitem>
+      <para
+>Allt annat du är skyldig som inte är ett lån. </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect3>
+</sect2>
+
+<sect2 id="makingmostof.mapping.institutions">
+<title
+>Institutioner</title>
+
+<para
+>De är fullständigt valfria, och kan användas som gruppkonton, och visar ett totalt värde för alla konton i varje grupp. </para>
+</sect2>
+
+<sect2 id="makingmostof.mapping.categories">
+<title
+>Kategorier</title>
+
+<para
+>De representerar icke-hanterade inkomst- och utgiftskonton, som inte har ett värde. Det totala värdet av transaktioner visas för varje kategori. En kategori eller ett överföringskonto krävs för varje transaktion. </para>
+</sect2>
+
+<sect2 id="makingmostof.mapping.subcategories">
+<title
+>Delkategorier</title>
+
+<para
+>Kategorier kan delas upp i delkategorier, men förhållandet är bara i visningssyfte, eftersom delkategoriernas summor inte ingår i summan för överliggande kategori. </para>
+</sect2>
+
+<sect2 id="makingmostof.mapping.tags">
+<title
+>Etiketter</title>
+
+<para
+>Etiketter är mycket lika kategorier, eftersom de också är icke-hanterade konton som inte har ett värde. Dock är användningen av etiketter, i motsats till kategorier, fullständigt valfritt. </para>
+</sect2>
+
+<sect2 id="makingmostof.mapping.payees">
+<title
+>Betalare</title>
+
+<para
+>De är valfria för transaktioner. De krävs för schemalagda transaktioner. En transaktionshistorik, med kategori, visas för varje betalare. </para>
+</sect2>
+
+<sect2 id="makingmostof.mapping.schedules">
+<title
+>Schemalagda transaktioner</title>
+
+<para
+>När transaktioner sker regelbundet kan det anges i ett schema. Transaktioner skapas från ett schema. Alla som är försenade kan ses på hemsidan. </para>
+</sect2>
+</sect1>
+
+<sect1 id="makingmostof.usefultips">
+<title
+>Användbara tips</title>
+
+<para
+>Om du inte har pengarna under madrassen, använder du troligen en eller flera institutioner där du har konton, som kan gälla kredit eller debet. För att bli bekant med sättet som &kmymoney; fungerar på, välj ett konto du vill följa med &kmymoney; och använd menyalternativet <menuchoice
+><guimenu
+>Arkiv</guimenu
+><guimenuitem
+>Ny</guimenuitem
+></menuchoice
+> för att ställa in en kontofil. </para>
+
+<para
+>Om du har använt en annan hemekonomihanterare, kanske du kan importera data från den till &kmymoney;. </para>
+
+<para
+>Om du har några regelbundna kvitton eller utbetalningar från kontot, gå till Betalare och skriv in namn på både utbetalarna och betalningsmottagarna som är inblandade. Gå därefter till Schemalägg och fyll i Nytt schema för varje återkommande transaktion. Om du inte har skrivit in betalningsmottagaren eller utbetalaren, erbjuder &kmymoney; dig möjlighet att göra det under tiden du skriver in schemat. </para>
+
+<para
+>För att lägga till andra nya transaktioner, gå till Huvudbok. Du kan lägga till nya betalare och kategorier mitt i en transaktion, eller genom att gå till Betalare eller Kategorier innan du skriver in transaktionen. </para>
+
+<para
+>Du märker troligtvis att standardkategorierna inte exakt motsvarar dina behov. Du kan enkelt ta bort sådana du vet att du aldrig kommer att behöva, och lägga till andra du behöver. Men när du skriver in en transaktion, behöver du bara skriva några få tecken i en kategori, så erbjuder &kmymoney; en kombinationsruta med kategorierna som passar in att välja bland. </para>
+
+<para
+>Du kan lägga till andra konton hanterade av andra institutioner. De föredragna visas när du öppnar &kmymoney;, men du kan snabbt byta till vilket som helst av de andra. </para>
+
+<para
+>När du gör en utbetalning, räknar &kmymoney; ut vad nästa checknummer ska vara. Ta bort det om du inte betalar med check, eller redigera det om den första checken du skriver in inte har checknummer 1. Som alternativ är det möjligt att stänga av automatik uppräkning av checknummer. </para>
+
+<para
+>Då och då kanske du får utdrag för dina konton från institutionerna du använder. Du kan stämma av dina konton i &kmymoney; med dessa utdrag, så att du har en korrekt bild av det nuvarande tillståndet i din ekonomi. </para>
+
+<para
+>Om du går till Rapporter, hittar du flera standardrapporter. För att anpassa dem, öppna en som liknar sorten du föredrar och välj därefter 'Ny' (inte 'Kopiera'). Därefter kan du anpassa den efter dina behov och markera den som en föredragen rapport om du vill. </para>
+
+<para
+>Även om &kmymoney; inte är avsett att använda i företagssammanhang, om du har ett egenföretag och alltså inte behöver någon funktion för lönelistor, märker du troligtvis att &kmymoney; är tillräckligt anpassningsbart för att uppfylla dina behov, i synnerhet som det levereras med funktioner för budgetering och prognoser, och du kan exportera dina anpassade rapporter via CSV till andra program. </para>
+</sect1>
+</chapter>

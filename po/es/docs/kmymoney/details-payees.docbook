@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.payees">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title id="details.payees.title"
+>Beneficiarios</title>
+
+<para
+>La pantalla de Beneficiarios proporciona una información detallada sobre todos los beneficiarios y pagadores implicados en la transacción. La pantalla de Beneficiarios está dividida en dos áreas principales: una lista de beneficiarios y pagadores y un área de detalle. </para>
+
+<para
+>La pantalla de Beneficiarios permite ver las transacciones para un beneficiario seleccionado, actualizando la información personal asociada con ese beneficiario o pagador en particular, y especificando los criterios de coincidencia del asiento. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payeeview.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect1 id="details.payees.list">
+<title
+>Lista de beneficiarios</title>
+
+<para
+>La lista de beneficiarios y pagadores está en el lado izquierdo de esta pantalla. La lista de beneficiarios está ordenada alfabéticamente. </para>
+
+<sect2>
+<title
+>Añadir un beneficiario o pagador</title>
+
+<para
+>Para añadir un beneficiario o pagador, haga clic derecho en cualquier nombre de beneficiario y elija <guimenuitem
+>Nuevo beneficiario</guimenuitem
+>. Esto crea un nuevo beneficiario llamado <quote
+>Nuevo beneficiario</quote
+>. Haga clic derecho en este beneficiario y seleccione <guimenuitem
+>Renombrar beneficiario</guimenuitem
+> para introducir el nombre del nuevo beneficiario o pagador. </para>
+</sect2>
+
+<sect2>
+<title
+>Renombrar un beneficiario o pagador.</title>
+
+<para
+>Para renombrar un beneficiario o pagador, simplemente haga clic derecho en el nombre, seleccione <guimenuitem
+>Renombrar beneficiario</guimenuitem
+> y el nombre se vuelve editable. Cambiar el nombre afectará el nombre en todos los asientos en los que aparezca. </para>
+</sect2>
+
+<sect2>
+<title
+>Eliminar un beneficiario o pagador</title>
+
+<para
+>Para eliminar un beneficiario o pagador, haga clic derecho en el nombre y seleccione <guimenuitem
+>Eliminar beneficiario</guimenuitem
+>. Si el beneficiario tiene algún asiento, se le mostrará un diálogo que le permitirá reasignárselo a un beneficiario diferente, y también una casilla de verificación para habilitar el que un nombre eliminado se añada a la lista de coincidencias del nuevo beneficiario. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.payees.personalinformation">
+<title
+>Detalles adicionales del beneficiario</title>
+
+<sect2>
+<title
+>Información personal</title>
+
+<para
+>Para ver y editar la información personal asociada con un beneficiario en particular, selecciónelo de la lista y vaya a la pestaña de Dirección. Para modificar esta información, edite el área de detalles directamente y presione el botón Actualizar cuando haya terminado. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>La pestaña de información personal</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_info.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Información personal</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect2>
+
+<sect2>
+<title
+>Preferencias de coincidencias de asiento</title>
+
+<sect3>
+<title
+>Vista general</title>
+
+<para
+>&kappname; tiene la habilidad de asignar automáticamente el beneficiario correspondiente a un asiento importado. Esto puede ser útil cuando se importen asientos desde su banco, cuando el nombre del beneficiario tiene varios caracteres extra innecesarios o, aún peor, si el nombre de los beneficiarios cambia. </para>
+
+<para
+>Por ejemplo, digamos que su pago mensual de la hipoteca viene de su banco así <quote
+>SUNTRUST BANK MAPLE VALLEY, GA 111506</quote
+> un mes y así <quote
+>SUNTRUST BANK MAPLE VALLEY, GA 121606</quote
+> al mes siguiente. A usted le gustaría que ambos asientos estuvieran asignados simplemente a su beneficiario <quote
+>SunTrust</quote
+>. ¡La característica de coincidencia de asientos es para usted! </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>La pestaña de coincidencia de beneficiarios</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_match.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Detalles de la coincidencia de beneficiarios</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect3>
+
+<sect3>
+<title
+>Configuración</title>
+
+<para
+>Para la pestaña de Coincidencia, puede establecer la configuración de las Coincidencias de asientos. Tiene tres opciones principales: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Sin coincidencia. Deshabilita esta característica para este beneficiario. Esta es la configuración por defecto para todos los beneficiarios. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Coincidencia por nombre de beneficiario. Habilita la funcionalidad, y usa el propio nombre del beneficiario como clave de coincidencia. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Coincidencia por clave. Habilita la funcionalidad, y le permite introducir una o más claves de coincidencia de su elección. En general, introducir una cadena sencilla funcionará perfectamente. Sin embargo, las claves de coincidencia son en realidad expresiones regulares, así que es posible hacer coincidir patrones más complicados. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>También puede elegir si desea ignorar las mayúsculas o minúsculas en la clave de coincidencia. Si escoge esta opción, la Clave de coincidencia <quote
+>SunTrust</quote
+> concordaría con <quote
+>SUNTRUST BANK</quote
+> o <quote
+>SunTrust Bank</quote
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Importar asientos</title>
+
+<para
+>Cuando importe asientos usando la importación QIF, o utilizando un complemento como OFX o AqBanking, se tomarán en consideración las claves de coincidencia que ha establecido . Si la clave de coincidencia de uno de sus beneficiarios se encuentra en algún lugar en el beneficiario del asiento importado, el beneficiario correspondiente de su lista será asignado a ese asiento. Así, una clave de coincidencia de <quote
+>SunTrust</quote
+> concordará con <quote
+>SUNTRUST BANK MAPLE VALLEY,GA</quote
+> o incluso con <quote
+>MORGENSUNTRUST&amp;LOAN</quote
+>. Así que elija sus claves de coincidencia con cuidado. <note
+><para
+>Si el beneficiario de un asiento coincide con más de una clave de coincidencia, el comportamiento no está definido. &kappname; escogerá al azar uno de los beneficiarios coincidentes. </para
+></note>
+</para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.payees.transactionhistory">
+<title
+>Ver historial de asientos</title>
+
+<para
+>Para ver todos los asientos asociados con un beneficiario en particular, seleccione el beneficiario de la lista y la pestaña Asiento en el área de detalle. Hacer doble clic en un asiento determinado le llevará directamente a ese mismo asiento en la pantalla de Libro mayor. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>La pestaña de asiento</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_history.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Historial de asientos</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect1>
+</chapter>

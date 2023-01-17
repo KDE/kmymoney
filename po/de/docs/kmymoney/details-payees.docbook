@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.payees">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title id="details.payees.title"
+>Zahlungsempfänger</title>
+
+<para
+>Die Zahlungsempfängerübersicht zeigt detaillierte Informationen über alle Zahlenden und Zahlungsempfänger aus Ihren Buchungen. Die Übersicht ist in zwei Hauptbereiche aufgeteilt: eine Empfängerliste und ein Detailbereich. </para>
+
+<para
+>Die Zahlungsempfängerübersicht erlaubt das Ansehen aller Buchungen eines Empfängers, das Aktualisieren der hinterlegten Informationen zum Empfänger und das Angeben von Kriterien für die automatische Zuordnung von Buchungen. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payeeview.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect1 id="details.payees.list">
+<title
+>Liste der Zahlungsempfänger</title>
+
+<para
+>Eine Liste der Zahlungsempfänger befindet sich auf der linken Seite des Fensters. Sie ist alphabetisch sortiert. </para>
+
+<sect2>
+<title
+>Zahlungsempfänger hinzufügen</title>
+
+<para
+>Um einen Zahlungsempfänger hinzuzufügen, klicken Sie mit der rechten Maustaste auf einen beliebigen Empfängernamen und wählen Sie <guimenuitem
+>Neuer Zahlungsempfänger</guimenuitem
+>. Hiermit wird ein neuer Empfänger mit dem Namen <quote
+>Neuer Zahlungsempfänger</quote
+> angelegt. Klicken Sie mit der rechten Maustaste auf den neu angelegten Empfänger und wählen Sie <guimenuitem
+>Zahlungsempfänger umbenennen</guimenuitem
+>, um den Namen des neuen Zahlungsempfängers einzugeben. </para>
+</sect2>
+
+<sect2>
+<title
+>Zahlungsempfänger umbenennen</title>
+
+<para
+>Um einen Zahlungsempfänger umzubenennen, klicken Sie mit der rechten Maustaste auf den Namen und wählen Sie aus dem Kontextmenü den Punkt <guimenuitem
+>Zahlungsempfänger umbenennen</guimenuitem
+>. Der Name des Empfänger lässt sich nun bearbeiten. Das Ändern des Namens wirkt sich auf sämtliche Buchungen aus, in denen er vorkommt. </para>
+</sect2>
+
+<sect2>
+<title
+>Zahlungsempfänger löschen</title>
+
+<para
+>Um einen Zahlungsempfänger zu löschen, klicken Sie mit der rechten Maustaste auf den Namen des gewünschten Empfängers und wählen anschließend <guimenuitem
+>Zahlungsempfänger löschen</guimenuitem
+> aus dem erscheinenden Kontextmenü. Sollten noch Buchungen existieren, die dem zu löschenden Empfänger zugeordnet sind, so werden Sie gefragt, ob Sie diese einem anderen Empfänger zuordnen möchten. Weiterhin können Sie über das Optionsfeld angeben, ob die Kriterienliste für die automatische Zuordnung von Buchungen des zu löschenden Empfängers zum ausgewählten neuen Zahlungsempfänger hinzugefügt werden soll.  </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.payees.personalinformation">
+<title
+>Zusätzliche Details zum Zahlungsempfänger</title>
+
+<sect2>
+<title
+>Persönliche Angaben</title>
+
+<para
+>Um die persönlichen Informationen eines Zahlungsempfängers anzusehen und zu editieren, wählen Sie ihn aus der Liste aus und klicken Sie auf den Karteireiter "Adresse". Sie können die Informationen direkt in den Feldern bearbeiten und die Änderungen anschließend durch Drücken des Knopf mit dem grünen Haken (unten rechts) übernehmen. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Die Karteikarte Persönliche Angaben</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_info.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Persönliche Angaben</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect2>
+
+<sect2>
+<title
+>Einstellungen zur automatischen Buchungs-Zuordnung</title>
+
+<sect3>
+<title
+>Übersicht</title>
+
+<para
+>&kappname; hat die Fähigkeit, eine automatische Zuordnung der passenden Zahlungsempfänger zu importierten Buchungen vorzunehmen. Das kann sehr hilfreich sein, wenn Sie Buchungen von Ihrer Bank (z.B. per HBCI) importieren und der angegebene Zahlungsempfänger weitere unnötige Zeichen enthält, oder noch schlimmer der Name des Zahlungsempfängers ändert sich. </para>
+
+<para
+>Nehmen wir an, Ihr monatliches Gehalt kommt bei Ihnen von Ihrer Bank folgendermaßen an: <quote
+>SUNTRUST BANK MAPLE VALLEY, GA 111506</quote
+> im einen Monat und im anderen mit <quote
+>SUNTRUST BANK MAPLE VALLEY, GA 121606</quote
+>. Sie möchten aber dass beide Buchungen mit Ihrem Zahlungsempfänger <quote
+>SunTrust</quote
+> verbunden wird. Die Funktion der automatischen Buchungs-Zuordnung ist genau das Richtige für Sie! </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Die Karteikarte "Zuordnung"</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_match.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Zuordnungsdetails für Zahlungsempfänger</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect3>
+
+<sect3>
+<title
+>Einrichtung</title>
+
+<para
+>Auf der Karteikarte "Zuordnung" können Sie die Einstellungen für automatische Zuordnung vornehmen. Sie haben drei Hauptoptionen zur Verfügung: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Keine Zuordnung. Deaktiviert diese Funktion für diesen Zahlungsempfänger. Dies ist die Standardeinstellung für alle Zahlungsempfänger. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Nach Zahlungsempfänger zuordnen. Aktiviert die Funktion unter Verwendung des Zahlungsempfänger Feldes als Zuordnungskriterium. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Nach einem unten aufgelisteten Namen zuordnen. Aktiviert die Funktion und erlaubt es Ihnen, ein oder mehrere beliebige Zuordnungskriterien einzugeben. Normalerweise funktioniert dies durch einfache Eingabe eines Textes perfekt. Trotzdem haben Sie Möglichkeit, statt eines Textes einen regulären Ausdruck einzugeben, sodass komplexe Muster als Kriterium hinterlegt werden können. </para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Sie können ebenfalls angeben, ob die Groß-/Kleinschreibung des Zuordnungskriteriums berücksichtigt werden soll oder nicht. Wenn Sie "Groß/Klein ignorieren" aktivieren, so würde das Kriterium <quote
+>SunTrust</quote
+> sowohl auf <quote
+>SUNTRUST BANK</quote
+> als auch auf <quote
+>SunTrust Bank</quote
+> passen. </para>
+</sect3>
+
+<sect3>
+<title
+>Buchungen importieren</title>
+
+<para
+>Sobald Sie Buchungen per QIF oder einem Modul wie OFX oder AqBanking (HBCI) importieren, werden die eingegeben Zuordnungskriterien verwendet. Sobald ein Kriterium Ihrer Zahlungsempfänger auf eine importierte Buchung zutrifft, wird der entsprechende Zahlungsempfänger aus Ihrer Liste der Buchung zugeordnet. So würde das Kriterium <quote
+>SunTrust</quote
+> zutreffen auf <quote
+>SUNTRUST BANK MAPLE VALLEY,GA</quote
+> aber auch <quote
+>MORGENSUNTRUST&amp;LOAN</quote
+>. Wählen Sie die Zuordnungskriterien also sorgfältig aus. <note
+><para
+>Wenn eine Buchung auf die Zuordnungskriterien mehrerer Zahlungsempfänger zutrifft, ist das Ergebnis nicht vorhersehbar: &kappname; wird sich einen der zutreffenden Empfänger herauspicken und diesen zuordnen. </para
+></note>
+</para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="details.payees.transactionhistory">
+<title
+>Buchungen ansehen</title>
+
+<para
+>Um alle Buchungen eines Zahlungsempfängers anzusehen, wählen Sie den gewünschten Empfänger aus der Liste und gehen Sie auf die Karteikarte "Buchungen". Ein Doppelklick auf eine der Buchungen bringt Sie direkt zu dieser Buchung im Kontenbuch. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Die Karteikarte "Buchungen"</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="payee_history.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Buchungsverlauf</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+</sect1>
+</chapter>

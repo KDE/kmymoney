@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.formats">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Bestandsformaten</title>
+
+<para
+>Tenzij u er voor kiest om een <link linkend="details.database"
+>relationele database</link
+> te gebruiken, zal &kmymoney; al uw financiële informatie opslaan in een bestand eindigend op <filename class="extension"
+>.kmy</filename
+>. Ook als u een <link linkend="firsttime.launch"
+>optie op de opdrachtregel</link
+> gebruikt die zegt dat niet te doen, wanneer u &kmymoney; start, zal het het laatste geopende bestand openen. Het is echter belangrijk te weten dat er meer dan één type bestand is dat &kmymoney; kan gebruiken om uw financiële gegevens te bewaren. </para>
+
+<para
+>Dit hoofdstuk beschrijft de formaten waarin &kmymoney; zijn gegevens in permanente vorm opslaat op het opslagapparaat van de gebruiker. In het algemeen slaat &kmymoney; zijn informatie op in de vorm van een &XML;-document. Afhankelijk van het actuele formaat zal dit &XML;-document worden geschreven: <itemizedlist>
+  <listitem
+><para
+>als een <link linkend="details.formats.plain"
+>platte tekst bestand</link
+> gecodeerd in UTF-8,</para
+></listitem>
+
+  <listitem
+><para
+>als een <link linkend="details.formats.compressed"
+>gecomprimeerd bestand</link
+> met GZIP-compressie,</para
+></listitem>
+
+  <listitem
+><para
+>als een <link linkend="details.formats.encrypted"
+>versleuteld bestand</link
+> met GPG-versleuteling of</para
+></listitem>
+
+  <listitem
+><para
+>als een <link linkend="details.formats.anonymous"
+>anoniem platte tekst bestand</link
+> gecodeerd in UTF-8 maar met alle uw persoonlijke gegevens door elkaar gehusseld.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<sect1 id="details.formats.plain">
+<title
+>Platte-tekstbestand</title>
+<para
+>Dit is het ondersteunde, meest ruimte gebruikende formaat, omdat er geen compressie wordt uitgevoerd. Het is niet bedoeld voor normaal gebruik en wordt geleverd om ondersteuning voor debuggen te leveren en de mogelijkheid om het bestand handmatig te wijzigen. Als u een bestandsnaam laat eindigen op <filename class="extension"
+>.xml</filename
+>, dan zal het bestand in dit formaat worden opgeslagen. <caution
+> <para
+>Handmatige wijziging van het bestand wordt voor de normale gebruiker niet aanbevolen en zou alleen uitgevoerd moeten worden als de interne werking van &kmymoney; volledig wordt begrepen of als instructies van de ontwikkelaars u vertellen wat u moet doen. Verwijt het niet de ontwikkelaars van &kmymoney; als u uw gegevens verminkt: u bent gewaarschuwd! </para>
+</caution>
+</para>
+</sect1>
+
+<sect1 id="details.formats.compressed">
+<title
+>GZIP-gecomprimeerd bestand</title>
+<para
+>Dit is het normale formaat dat door &kmymoney; wordt gebruikt wanneer u een bestand opslaat met de extensie <filename class="extension"
+>.kmy</filename
+>. </para>
+
+<note>
+  <para
+>Als <link linkend="details.formats.encrypted"
+>versleuteling</link
+> is geselecteerd, zal het bestand versleuteld worden opgeslagen. </para>
+</note>
+
+<para
+>Als u de inhoud van een met GZIP gecomprimeerd bestand wilt bekijken, hernoem het naar een bestandsnaam eindigend op <filename class="extension"
+>.gz</filename
+> (&eg;, hernoem <filename
+>myfinances.kmy</filename
+> naar <filename
+>myfinances.kmy.gz</filename
+>), gebruik daarna <command
+>gunzip</command
+> om het bestand uit te pakken en bekijk het. U hoeft het niet te comprimeren alvorens het de volgende keer in &kmymoney; te laden, omdat &kmymoney; de uitgepakte gegevens ook kan lezen. Als u het daarna weer opslaat zal het weer gecomprimeerd worden opgeslagen. Gebruik de extensie <link linkend="details.formats.plain"
+><filename class="extension"
+>.xml</filename
+></link
+> om het in niet gecomprimeerd formaat weg te schrijven. </para>
+</sect1>
+
+<sect1 id="details.formats.encrypted">
+<title
+>GPG-versleuteld bestand</title>
+<para
+>Het met GPG versleutelde bestandsformaat is een erg veilige methode om uw persoonlijke financiële gegevens op uw opslagapparaat te bewaren. Wanneer &kmymoney; geïnstrueerd is via de instellingendialoog om uw gegevens versleuteld op te slaan, zal het de gegevens met GPG en de sleutel die u aanleverde, versleutelen alvorens deze echt op te slaan. Bij het openen van een versleuteld bestand moet u de wachtwoordzin leveren om uw sleutelring te openen. Het versleutelde bestand zelf zal opgeslagen worden in <emphasis
+>&ASCII; armored</emphasis
+> formaat van GPG. <note
+> <para
+>Bij gebruik van GPG-versleuteling comprimeert GPG ook het bestand, er is dus geen extra compressie nodig. </para>
+  </note>
+</para>
+
+<sect2 id="details.formats.encrypted.gpgkeys">
+<title
+>GPG-sleutels</title>
+<para
+>Als u dat nog niet hebt gedaan voor versleuteling van e-mail, moet u een sleutelpaar genereren om de GPG versleutelingsfunctie van &kmymoney; te kunnen gebruiken. Ook moet <application
+>GPG</application
+> geïnstalleerd zijn op uw systeem. </para>
+
+<para
+>De details over hoe een sleutelpaar te genereren en hoe deze te beheren is buiten de scope van dit document. Een Mini Howto over dit onderwerp is te vinden op <ulink url="http://www.gnupg.org/documentation/howtos.en.html"
+>https://www.gnupg.org/documentation/howtos.en.html</ulink
+>. </para>
+</sect2>
+
+<sect2 id="details.formats.encrypted.keysettings">
+<title
+>Instellen van de sleutels in &kmymoney;</title>
+<para
+>Op de pagina van de instellingendialoog voor versleuteling, is een afrollijst waar u de sleutel die gebruikt moet worden voor versleuteling en ontcijfering kunt selecteren. Bovendien is hier een veld te vinden waar u can de sleutel-id van een sleutel kunt invoeren die niet in het vak staat. U kunt ofwel de sleutel-id of het e-mailadres behorende bij deze sleutel gebruiken ofwel elke ander geldige GPG-sleutelidentificatie als de waarde voor dit veld. Wanneer u de sleutel-id invoert zal &kmymoney; zijn geldigheid controleren en een groen LED-pictogram in de dialoog tonen als een sleutel is gevonden. <caution
+> <para
+>Ga na dat u zowel de publieke als de private sleutel voor deze id hebt. Als u geen eigenaar bent van de private sleutel voor de ingevoerde id, dan zult u niet in staat zijn om het bestand opnieuw te openen. </para>
+  </caution>
+</para>
+</sect2>
+
+<sect2 id="details.formats.encrypted.recoverkey">
+<title
+>De herstelsleutel van &kmymoney;</title>
+<para
+>Ook op deze pagina van de instellingendialoog hebt u de keuze om aanvullende versleuteling met de herstelsleutel van &kmymoney; te selecteren. Deze optie is voor u beschikbaar als die sleutel is opgeslagen in uw <application
+>GPG</application
+>-sleutelring. Deze optie selecteren stelt u in staat uw gegevens te herstellen zelfs in het geval u uw eigen private sleutel hebt verloren. Dit is mogelijk omdat de gegevens niet alleen versleuteld zijn met uw eigen sleutel, maar ook met de herstelsleutel van &kmymoney;. Deze sleutel is alleen beschikbaar voor geselecteerde &kmymoney; ontwikkelaars (op het moment van schrijven alleen voor de auteur). Vanaf de uitgave van &kmymoney; versie 4.7 is de herstelsleutel ingesteld om op 3 januari 2015 te verlopen. </para>
+
+<para
+>Onder normale omstandigheden zult u uw bestand zoals gewoonlijk openen/opslaan/sluiten. In het abnormale geval van verlies van uw sleutel hebt u de kans om met een van de ontwikkelaars contact op te nemen die toegang hebben tot de herstelsleutel van &kmymoney; en te verzoeken te helpen bij het herstellen van uw gegevens. U kunt contact opnemen met de ontwikkelaars via een e-mail naar de e-maillijst van de ontwikkelaars van &kmymoney; op &devlist;. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.formats.anonymous">
+<title
+>Anoniem bestand</title>
+<para
+>Dit formaat is niet bedoeld om gebruikt te worden voor normale opslag van gegevens. Het wordt ondersteund zodat in geval van een probleem, u het ontwikkelteam van &kmymoney; uw bestand kunt sturen zonder enige vertrouwelijke details in uw financiële gegevens vrij te geven. Het verandert bijvoorbeeld namen van instituut, rekening, begunstigde en categorie in tekenreeksen zoals "I000001" en "A000001", het maakt vergelijkbare wijzigingen in alle gegevens zoals rekeningnummers, en wijzigt ook willekeurig hoeveelheden in transacties. </para>
+
+<para
+>Indien geïnstrueerd door de ontwikkelaars, gebruik het menu-item <guimenuitem
+>Opslaan als...</guimenuitem
+> om uw gegevens in een anoniem formaat op te slaan door <literal role="filter"
+>Anonieme bestanden</literal
+> als het filter te selecteren. Dit wijzigt ook de bestandsextensie naar <filename class="extension"
+>.anon.xml</filename
+>. </para>
+
+<para
+>Om te verifiëren dat uw probleem nog steeds bestaat, laad dit geanonimiseerde bestand en probeer uw probleem te dupliceren. Als het probleem nog steeds aanwezig is, stuur het bestand naar de e-maillijst van de ontwikkelaars op &devlist; voor verder onderzoek. As het probleem zich niet vertoont... welnu, ik wil nu niet aan dit scenario denken. </para>
+</sect1>
+</chapter>
+

@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.search">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Darin.Strait; &Darin.Strait.mail; </author>
+  </authorgroup>
+  <date
+>2010-07-25</date>
+  <releaseinfo
+>4.5</releaseinfo>
+</chapterinfo>
+
+<title
+>Sök efter transaktioner</title>
+
+<sect1 id="details.search.general">
+<title
+>Allmänt</title>
+
+<para
+>Dialogrutan <guilabel
+>Sök transaktion</guilabel
+> söker igenom data baserat på kriterier du anger. Du kan komma åt dialogrutan genom att gå till menyn <guimenu
+>Redigera</guimenu
+> och välja <guimenuitem
+>Sök transaktion...</guimenuitem
+>. </para>
+
+<para
+>Det finns två huvudflikar i dialogrutan. Fliken <quote
+>Kriterier</quote
+> visar ett antal delflikar för att ange sökkriterier. </para>
+
+<para
+>Resultaten visas under fliken <quote
+>Resultat</quote
+> efter sökningen är färdig. Under resultatlistan visar &kmymoney; antal transaktioner som uppfyllde sökkriterierna. Ett dubbelklick på en enskild transaktion i resultatlistan tar fram lämplig liggare och visar transaktionen. </para>
+
+<para
+>När knappen <guibutton
+>Sök</guibutton
+> klickas, påbörjas sökningen och alla kriterier som har skrivits in under någon flik tas hänsyn till. </para>
+
+<para
+>Knappen <guibutton
+>Återställ</guibutton
+> återställer alla fält på alla delflikar med kriterier till standardvärden. Det låter dig ange nya sökkriterier. </para>
+
+<para
+>Knappen <guibutton
+>Stäng</guibutton
+> stänger dialogrutan <guilabel
+>Sök transaktion</guilabel
+>. </para>
+
+</sect1>
+
+<sect1 id="details.search.criteria">
+<title
+>Sökkriterier</title>
+
+<para
+>Det finns flera delflikar under huvudfliken <quote
+>Kriterier</quote
+>, där var och en låter dig ange olika sorters sökkriterier. Under området för att ange kriteriet, listar &kmymoney; vart och ett av de olika kriterier som för närvarande är angivna för sökningen. </para>
+
+<sect2 id="details.search.text">
+<title
+>Text</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-text.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialogrutan sök transaktion, textflik</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Den här fliken låter dig ange text att söka efter. Det finns också två kryssrutor som styr hur texten används i sökningen. </para>
+
+<para
+>Normalt, matchar det enkla delsträngar. Till exempel: </para>
+
+<para>
+<itemizedlist>
+  <listitem>
+    <para
+><quote
+>Volvo</quote
+> hittar <quote
+>Volvo Personvagnar AB</quote
+></para>
+  </listitem>
+  <listitem>
+    <para
+><quote
+>olvo</quote
+> hittar också <quote
+>Volvo Personvagnar AB</quote
+> </para>
+  </listitem>
+</itemizedlist>
+</para>
+
+<para
+>Markera <guilabel
+>Innehåller</guilabel
+> i kombinationsrutan intill textfältet om du vill hitta transaktioner som innehåller texten, eller välj <guilabel
+>Innehåller inte</guilabel
+> om du vill hitta transaktioner som inte innehåller den angivna texten. </para>
+
+<para
+>Om du markerar rutan <guilabel
+>Skiftlägeskänslig</guilabel
+>, blir sökningen skiftlägeskänslig. Exempelvis skulle inte <quote
+>volvo</quote
+> hitta <quote
+>Volvo Personvagnar AB</quote
+> om alternativet är markerat. </para>
+
+<para
+>If you check the <guilabel
+>Treat Text as regular expression</guilabel
+> box, the text will be treated as a regular expression. For details on how to craft a regular expression, visit the &Qt; documentation about the <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
+>QRegularExpression class</ulink
+>. </para>
+</sect2>
+
+<sect2 id="details.search.account">
+<title
+>Konto</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-account.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialogrutan sök transaktion, kontoflik</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Den här fliken låter dig ange vilka konton som ska sökas efter. </para>
+
+<para
+>Konton visas i ett trädformat. Konton som är markerade att sökas igenom anges med ett kryss. Om du klickar på knappen <guibutton
+>Alla</guibutton
+>, markeras alla konton för genomsökning. Om du klickar på knappen <guibutton
+>Inga</guibutton
+>, markeras inga konton för genomsökning. Enskilda konton kan markeras eller avmarkeras genom att klicka på rutan intill kontonamnet med vänster musknapp. En fullständig hierarki med konton kan markeras eller avmarkeras genom att klicka på rutan med höger musknapp. </para>
+</sect2>
+
+<sect2 id="details.search.date">
+<title
+>Datum</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-date.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialogrutan sök transaktion, datumflik</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Den här fliken låter dig ange vilka datum som ska sökas efter. </para>
+
+<para
+>Komponenten <quote
+>Intervall</quote
+> tillhandahåller ett bekvämt sätt att ställa in Från och Till. Från och Till kan ändras individuellt. Datum kan skrivas in för hand. Komponenterna förhindrar att du skriver in datum som inte existerar. Datumvärden kan också ändras genom att klicka på uppåtpilen eller neråtpilen. Genom att klicka på den lilla kalenderikonen visar en kalender, där datum enkelt kan väljas. </para>
+</sect2>
+
+
+<sect2 id="details.search.amount">
+<title
+>Belopp</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-amount.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialogrutan sök transaktion, beloppsflik</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Den här fliken låter dig ange vilka belopp som ska sökas efter. </para>
+
+<para
+>Du kan söka efter ett exakt belopp eller för ett intervall av belopp. Om du klicka på räknarikonen, visas en liten räknare på skärmen som hjälper dig att skriva in ett värde. </para>
+</sect2>
+
+<sect2 id="details.search.category">
+<title
+>Kategori</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-category.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialogrutan sök transaktion, kategoriflik</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Den här fliken låter dig ange vilka kategorier som ska sökas efter. </para>
+
+<para
+>Kategorier visas i ett trädformat. Kategorier som är markerade att sökas igenom anges med en ruta. Om du klickar på knappen <guibutton
+>Alla</guibutton
+>, markeras alla kategorier för genomsökning. Om du klickar på knappen <guibutton
+>Inga</guibutton
+>, markeras inga kategorier för genomsökning. Om du klickar på knappen <guibutton
+>Inkomst</guibutton
+>, markeras inkomstkategorier och utgiftskategorier avmarkeras. Om du klickar på knappen <guibutton
+>Utgift</guibutton
+>, avmarkeras inkomstkategorier och utgiftskategorier markeras. </para>
+
+<para
+>Enskilda kategorier kan markeras eller avmarkeras genom att klicka på rutan intill kategorinamnet med vänster musknapp. En fullständig hierarki av kategorier kan markeras eller avmarkeras genom att klicka på rutan med höger musknapp. </para>
+</sect2>
+
+<sect2 id="details.search.payee">
+<title
+>Betalare</title>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-payee.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialogrutan sök transaktion, betalarflik</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>Den här fliken låter dig ange vilka betalare som ska sökas efter. </para>
+
+<para
+>Betalare som är markerade att sökas igenom anges med en ruta. Om du klickar på knappen <guibutton
+>Alla</guibutton
+>, markeras alla betalare för genomsökning. Om du klickar på knappen <guibutton
+>Inga</guibutton
+>, markeras inga betalare för genomsökning. Enskilda betalare kan markeras eller avmarkeras genom att klicka på rutan intill betalarens namn. </para>
+
+<para
+>Om du kryssar i rutan <guilabel
+>Markera transaktioner utan betalare</guilabel
+>, markeras transaktioner som saknar betalare. </para>
+
+</sect2>
+
+<sect2 id="details.search.details">
+<title
+>Detaljinformation</title>
+
+<para
+>Den här fliken låter dig ange diverse ytterligare sökkriterier. </para>
+
+<screenshot>
+<mediaobject>
+<imageobject>
+<imagedata fileref="find-details.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Dialogrutan sök transaktion, detaljinformationsflik</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<para>
+<itemizedlist>
+  <title
+>Typ kan vara något av följande:</title>
+  <listitem
+><para
+>Alla typer</para
+></listitem>
+  <listitem
+><para
+>Betalningar</para
+></listitem>
+  <listitem
+><para
+>Insättningar</para
+></listitem>
+  <listitem
+><para
+>Överföringar</para
+></listitem>
+</itemizedlist>
+
+<itemizedlist>
+  <title
+>Tillstånd kan vara något av följande:</title>
+  <listitem
+><para
+>Alla tillstånd</para
+></listitem>
+  <listitem
+><para
+>Inte avstämd</para
+></listitem>
+  <listitem
+><para
+>Kontrollerad</para
+></listitem>
+  <listitem
+><para
+>Avstämd</para
+></listitem>
+</itemizedlist>
+
+<itemizedlist>
+  <title
+>Giltighet kan vara något av följande:</title>
+  <listitem
+><para
+>Alla transaktioner</para
+></listitem>
+  <listitem
+><para
+>Giltig transaktion</para
+></listitem>
+  <listitem
+><para
+>Ogiltig transaktion</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>Du kan söka efter ett visst transaktionsnummer eller söka efter ett intervall av transaktionsnummer. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="details.search.results">
+<title
+>Sökresultat</title>
+
+<para
+>Fliken <quote
+>Resultat</quote
+> visar datum, konton, detaljinformation, avstämningsstatus, utbetalningar och insättningar för varje transaktion som uppfyller sökkriterierna du har skrivit in. Att högerklicka på rubrikraden i resultatlistan låter dig ändra resultatens sorteringsordning. </para>
+
+<para
+>Att dubbelklicka på en transaktion visar motsvarande kontoliggare och fokuserar på den valda transaktionen. </para>
+
+</sect1>
+
+</chapter>

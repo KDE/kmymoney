@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.formats">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title
+>Formatos de archivo</title>
+
+<para
+>A menos que elija utilizar una <link linkend="details.database"
+>base de datos relacional</link
+>, &kappname; almacenará toda su información financiera en un archivo terminado en .kmy. Además, si no usa una <link linkend="firsttime.launch"
+>opción de línea de órdenes</link
+> que le pida no hacerlo, cuando inicie &kappname; este abrirá el último archivo que hubiera abierto. Sin embargo, es importante saber que hay más de un tipo de archivo que &kappname; puede utilizar para guardar sus datos financieros. </para>
+
+<para
+>Este capítulo describe los formatos con los que &kappname; almacena sus datos de manera permanente en dispositivos de almacenamiento. En general, &kappname; almacena la información en un documento &XML;. Según el formato real, este documento &XML; se escribirá <itemizedlist>
+  <listitem
+><para
+>como un <link linkend="details.formats.plain"
+>archivo de texto plano</link
+> codificado en UTF-8,</para
+></listitem>
+
+  <listitem
+><para
+>como un <link linkend="details.formats.compressed"
+>archivo comprimido</link
+> mediante compresión GZIP,</para
+></listitem>
+
+  <listitem
+><para
+>como un <link linkend="details.formats.encrypted"
+>archivo cifrado</link
+> mediante cifrado GPG, o</para
+></listitem>
+
+  <listitem
+><para
+>como un <link linkend="details.formats.anonymous"
+>archivo anónimo de texto plano</link
+> codificado en UTF-8 pero sin ninguno de sus datos personales.</para
+></listitem>
+</itemizedlist>
+</para>
+
+<sect1 id="details.formats.plain">
+<title
+>Archivo de texto plano</title>
+<para
+>Este es el formato que más espacio consume, pues no se realiza ninguna compresión. No está enfocado a un uso habitual, y se proporciona para facilitar la depuración y para brindar la posibilidad de modificarlo a mano. Si termina el nombre de un archivo en <literal role="extension"
+>.xml</literal
+>, se almacenará en este formato. <caution
+> <para
+>No se recomienda a los usuarios típicos que modifiquen a mano el archivo, solo debería hacerse si se comprende totalmente el funcionamiento interno de &kappname; o si los desarrolladores le han dado instrucciones para ello. No culpe a los desarrolladores de &kappname; si estropea sus datos: ¡ya ha sido advertido! </para>
+</caution>
+</para>
+</sect1>
+
+<sect1 id="details.formats.compressed">
+<title
+>Archivo comprimido con GZIP</title>
+<para
+>Este es el formato que se suele utilizar en &kappname; cuando almacena un archivo con la extensión <literal role="extension"
+>.kmy</literal
+>. </para>
+
+<note>
+  <para
+>Si ha seleccionado que se <link linkend="details.formats.encrypted"
+>cifre</link
+>, el archivo se guardará de dicha manera. </para>
+</note>
+
+<para
+>Si quiere explorar el contenido de un archivo comprimido con GZIP, renómbrelo con otro nombre terminado en <literal role="extension"
+>.gz</literal
+> (&eg;, renombre <filename
+>misfinanzas.kmy</filename
+> a <filename
+>misfinanzas.kmy.gz</filename
+>), y use <command
+>gunzip</command
+> para descomprimirlo y explorarlo. No hace falta que lo recomprima antes de volver a cargarlo en &kappname;, porque &kappname; también puede leer los datos descomprimidos. Sin embargo, si posteriormente lo guarda, volverá a estar comprimido. Utilice la extensión <link linkend="details.formats.plain"
+>.xml</link
+> para guardarlo en un formato sin compresión. </para>
+</sect1>
+
+<sect1 id="details.formats.encrypted">
+<title
+>Archivo cifrado con GPG</title>
+<para
+>El uso de archivos cifrados con GPG es una manera muy segura de almacenar sus datos financieros en dispositivos de almacenamiento. Si en el diálogo de preferencias indicó a &kappname; que cifrase sus datos, lo hará mediante GPG y la clave que haya facilitado antes del guardado. Al abrir un archivo cifrado, deberá indicar la frase de acceso a su anillo de claves. El archivo en sí se almacenará en el formato <emphasis
+>armadura ASCII</emphasis
+> de GPG. <note
+> <para
+>Al usar el cifrado GPG, el archivo también se comprime, por lo que no necesita realizar ninguna compresión adicional. </para>
+  </note>
+</para>
+
+<sect2 id="details.formats.encrypted.gpgkeys">
+<title
+>Claves GPG</title>
+<para
+>Si no lo ha hecho ya para el cifrado de correo, debe generar un par de claves para usar el cifrado GPC de &kappname;. También debe haber instalado <application
+>GPG</application
+> en su equipo. </para>
+
+<para
+>Los detalles sobre cómo generar un par de claves y gestionar queda fuera del ámbito de este documento. Puede encontrar un mini-tutorial en <ulink url="http://www.gnupg.org/documentation/howtos.en.html"
+>http://www.gnupg.org/documentation/howtos.en.html</ulink
+>. </para>
+</sect2>
+
+<sect2 id="details.formats.encrypted.keysettings">
+<title
+>Establecer las claves en &kappname;</title>
+<para
+>En la página sobre cifrado del cuadro de diálogo de preferencias, hay una lista desplegable donde puede seleccionar qué clave usar para cifrar y descifrar. Además encontrará un campo donde introducir el ID de una clave que no esté en la lista. Puede utilizar el ID de la clave, la dirección de correo electrónico asociada a ella, o cualquier otra identificación válida de GPG como valor para este campo. Cuando introduzca el ID de la clave, &kappname; comprobará su validez y mostrará un icono de LED verde en el diálogo si encuentra la clave. <caution
+> <para
+>Asegúrese de tener las claves pública y privada para este ID. SI no es el propietario de la clave privada del ID introducido, no podrá volver a abrir el archivo. </para>
+  </caution>
+</para>
+</sect2>
+
+<sect2 id="details.formats.encrypted.recoverkey">
+<title
+>La clave de recuperación de &kappname;</title>
+<para
+>En esta página del diálogo de preferencias también puede seleccionar un cifrado suplementario con la clave de recuperación de &kappname;. Esta opción estará disponible si dicha clave se encuentra en su almacén de claves <application
+>GPG</application
+>. Seleccionar esta opción le permitirá recuperar sus datos incluso en el caso de que pierda su clave privada. Esto es posible porque los datos no se cifran solo con su propia clave, sino también con la clave de recuperación de &kappname;. Esta clave solo está disponible para ciertos desarrolladores de &kappname; (en este momento solo para el autor). A partir del lanzamiento de &kappname; versión 4.7, la clave de recuperación está programada para que caduque el 3 de enero de 2015. </para>
+
+<para
+>En circunstancias normales, abrirá/guardará/cerrará los archivos de manera normal. En el caso de que hubiese perdido su clave, puede contactar con uno de los desarrolladores que tenga acceso a la clave de recuperación de &kappname; y pedir ayuda para recuperar sus datos. Puede contactar con ellos por correo electrónico en la lista de desarrolladores de &kappname;, &devlist;. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.formats.anonymous">
+<title
+>Archivo anónimo</title>
+<para
+>Este formato no está pensado para que se use en el almacenamiento normal de los datos. Está admitido para que, en caso de problemas, pueda remitirles al equipo de desarrollo de &kappname; su archivo sin revelar ninguno de los detalles confidenciales de sus datos financieros. Por ejemplo, cambia los nombres de las entidades, cuentas, beneficiarios y categorías a cadenas como «I000001» y «A000001»; hace cambios similares a todos los datos como los números de cuenta, y también cambia aleatoriamente las cantidades de las transacciones. </para>
+
+<para
+>Si se lo indican los desarrolladores, utilice el elemento de menú <guimenuitem
+>Guardar como...</guimenuitem
+> para almacenar sus datos en un formato anónimo seleccionando <literal role="filter"
+>Archivos anónimos</literal
+> como filtro. Esto también cambia la extensión del archivo a <literal role="extension"
+>.anon.xml</literal
+>. </para>
+
+<para
+>Para verificar que todavía existe el problema, vuelva a cargar este archivo anonimizado e intente duplicar su problema. Si el problema sigue presente, envíe el archivo a la lista de correo de los desarrolladores en &devlist; para una posterior investigación. Si el problema no se muestra... Bueno, no quiero pensar en esta posibilidad ahora mismo. </para>
+</sect1>
+</chapter>
+

@@ -1,0 +1,1020 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.settings">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+  </authorgroup>
+  <date
+>2014-08-30</date>
+  <releaseinfo
+>4.7.01</releaseinfo>
+</chapterinfo>
+
+<title id="details.settings.title"
+>Configuração do &kappname;</title>
+
+<para
+>As opções de configuração descritas abaixo modificam o comportamento do &kappname;. Esta configuração poderá ser alterada na opção <menuchoice
+><guimenu
+>Configuração</guimenu
+><guimenuitem
+>Configurar o &kappname;...</guimenuitem
+></menuchoice
+>. </para>
+
+<sect1 id="details.settings.general">
+<title id="details.settings.general.title"
+>Geral</title>
+
+<sect2 id="details.settings.general.global">
+<title
+>Opções globais</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Precisão do Preço</guilabel
+></term>
+    <listitem>
+      <para
+>Indique quantas casas decimais terão os seus preços a seguir ao ponto decimal. Por exemplo, se configurar este valor como 2 irá obter preços do tipo 35,18, enquanto se configurar o valor como 4 faria com que o mesmo preço aparecesse como 35,1791</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Gravação automática periódica</guilabel
+></term>
+    <listitem>
+      <para
+>Assinale esta opção se quiser que o &kappname; grave automaticamente os seus ficheiros. O valor por omissão de 10 minutos.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>O ano fiscal começa em</guilabel
+></term>
+    <listitem>
+      <para
+>Indique o dia e mês inicial do seu ano fiscal</para>
+    </listitem>
+  </varlistentry>
+  <!-- FIXME missing Calculator -->
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.general.views">
+<title
+>Opções das áreas</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Arranque</guilabel
+></term>
+    <listitem>
+      <para
+>Escolha a área inicial quando arranca a aplicação.</para>
+      <itemizedlist>
+        <listitem
+><para
+>Iniciar com a <link linkend="firsttime.mainwindow"
+>página principal</link
+></para
+></listitem>
+        <listitem
+><para
+>Iniciar com a última página seleccionada</para
+></listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+  <!-- FIXME missing Type of KMyMoney view -->
+  <varlistentry>
+    <term
+><guilabel
+>Mostrar a barra de título em cada página</guilabel
+></term>
+    <listitem>
+      <para
+>Se o título da área actual deverá ser apresentado em cada página.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Sincronizar a selecção da conta nas áreas do registo e do investimento</guilabel
+></term>
+    <listitem>
+      <para
+>Se esta opção for seleccionada, ao escolher uma conta na área de investimentos irá mudar a selecção da conta na área de registos, e vice-versa.</para>
+    </listitem>
+  </varlistentry>
+<!-- FIXME not in master
+  <varlistentry>
+    <term
+><guilabel
+>Icon size of navigation bar</guilabel
+></term>
+    <listitem>
+      <para
+>Select the size of the icons of the left-side navigation bar.</para>
+    </listitem>
+  </varlistentry>
+  -->
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.general.filter">
+<title
+>Opções do filtro</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Não mostrar as categorias não-usadas</guilabel
+></term>
+    <listitem>
+      <para
+>Esconder as categorias não usadas.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Não mostrar as contas encerradas</guilabel
+></term>
+    <listitem>
+      <para
+>Esconder as contas fechadas.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostrar as contas de património</guilabel
+></term>
+    <listitem>
+      <para
+>As contas de património estão normalmente escondidas. Seleccione esta opção para as mostrar.</para>
+    </listitem>
+  </varlistentry>
+  <!--FIXME missing Show in categories account list view-->
+  <varlistentry>
+    <term
+><guilabel
+>Não mostrar os eventos recorrentes encerrados</guilabel
+></term>
+    <listitem>
+      <para
+>Esconder os eventos recorrentes terminados.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Não mostrar as transacções anteriores a</guilabel
+></term>
+    <listitem>
+      <para
+>Esconder as transacções anteriores à data seleccionada.</para>
+      <para
+>Se configurar esta opção como 1 de Janeiro de 1900, será uma boa forma de depurar problemas de importação de ficheiros relacionados com datas.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Não mostrar as transacções reconciliadas</guilabel
+></term>
+    <listitem>
+      <para
+>Filtrar as transacções pelo estado de reconciliação. As transacções marcadas como <emphasis
+>Reconciliadas</emphasis
+> não serão mais apresentadas.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.home">
+<title id="details.settings.home.title"
+>Início</title>
+
+<para
+>Estas opções permitem-lhe personalizar a aparência da página Inicial, escolhendo os itens a mostrar na página Inicial e a ordem pela qual aparecem. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Activos e Passivos</guilabel
+></term>
+    <listitem>
+      <para
+>Mostra o saldo de todos os seus activos e passivos</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Pagamentos</guilabel
+></term>
+    <listitem>
+      <para
+>Mostra as primeiras 5 ocorrências das suas transacções agendadas</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Contas preferidas</guilabel
+></term>
+    <listitem>
+      <para
+>Mostra o saldo e o crédito das suas contas favoritas</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Contas de pagamento</guilabel
+></term>
+    <listitem>
+      <para
+>Mostra o saldo das suas contas de activos e passivos, exceptuando as contas de investimento</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Relatórios Favoritos</guilabel
+></term>
+    <listitem>
+      <para
+>Mostra uma lista com os seus relatórios favoritos</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Previsão (agendada)</guilabel
+></term>
+    <listitem>
+      <para
+>Mostra uma previsão das suas contas de activos e passivos</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Previsão do património líquido</guilabel
+></term>
+    <listitem>
+      <para
+>Mostra um gráfico da sua previsão de valor líquido para os próximos 90 dias</para>
+    </listitem>
+  </varlistentry>
+<!--FIXME
+  <varlistentry>
+    <term
+><guilabel
+>Forecast (history)</guilabel
+></term>
+    <listitem>
+      <para
+>???</para>
+    </listitem>
+  </varlistentry>
+-->
+  <varlistentry>
+    <term
+><guilabel
+>Orçamento</guilabel
+></term>
+    <listitem>
+      <para
+>Mostra os itens do orçamento para o mês actual que tenham uma diferença negativa em comparação com a receita ou despesa actual</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Tesouraria</guilabel
+></term>
+    <listitem>
+      <para
+>Mostra uma análise do seu fluxo de dinheiro na tesouraria para o mês actual</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Percentagem do tamanho de letra predefinido</guilabel
+></term>
+    <listitem>
+      <para
+>Seleccionar o tamanho do texto para a página Inicial</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Recordar o tamanho do texto ao sair do programa, caso seja alterado manualmente com a roda do rato</guilabel
+></term>
+    <listitem>
+      <para
+>Se seleccionar esta opção, irá gravar as suas preferências de tamanho do texto, caso a tenha alterado na paǵina Inicial, usando a roda do rato</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostrar a informação do limite da conta</guilabel
+></term>
+    <listitem>
+      <para
+>Mostra o limite das contas nas Contas de Pagamento e Contas Preferidas na página Inicial</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostrar o estado do saldo das contas 'online'</guilabel
+></term>
+    <listitem>
+      <para
+>Mostra o estado do saldo das contas associadas ao Resumo de Activos e Passivos, às Contas de Pagamento e às Contas Preferidas da página inicial. O estado do saldo aparece com um ícone nas colunas que antecedem os nomes das contas. Um sinal a verde aparece quando os saldos 'online' e locais estão sincronizados. Se o ficheiro local tiver transacções posteriores às existentes a nível 'online', aparece uma caixa de correio com uma seta verde. Isto diz ao utilizador para iniciar uma actualização 'online'. Os saldos inconsistentes entre a versão local e a 'online' aparecem com um sinal de aviso vermelho. </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostrar o número de transacções não marcadas por conta [!M]</guilabel
+></term>
+    <listitem>
+      <para
+>Insere uma coluna adicional entre o nome e o saldo actual da conta, indicando a quantidade de transacções não marcadas para as contas no Resumo de Activos e Passivos, nas Contas de Pagamentos e nas Contas Preferidas da página inicial </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostrar o número de transacções confirmadas por conta [C]</guilabel
+></term>
+    <listitem>
+      <para
+>Insere uma coluna adicional entre o nome e o saldo actual da conta, indicando a quantidade de transacções confirmadas para as contas no Resumo de Activos e Passivos, nas Contas de Pagamentos e nas Contas Preferidas da página inicial </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostrar o número de transacções não consolidadas (não marcadas + confirmadas) por conta [!R]</guilabel
+></term>
+    <listitem>
+      <para
+>Insere uma coluna adicional entre o nome e o saldo actual da conta, indicando a quantidade de transacções não consolidadas (i.e., o somatório de todas as transacções confirmadas e não marcadas) para as contas no Resumo de Activos e Passivos, nas Contas de Pagamentos e nas Contas Preferidas da página inicial</para>
+    </listitem>
+  </varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="details.settings.register">
+<title id="details.settings.register.title"
+>Folheto</title>
+
+<para
+>Estas opções permitem-lhe modificar o comportamento dos registos das transacções. </para>
+
+<sect2 id="details.settings.register.display"
+><title
+>Página de Apresentação</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Mostrar uma grelha no registo</guilabel
+></term>
+    <listitem>
+      <para
+>Mostrar as linhas da grelha no registo de transacções.</para>
+    </listitem>
+  </varlistentry>
+  <!--FIXME missing Show all register entries in full detail-->
+  <varlistentry id="details.settings.register.lens">
+    <term
+><guilabel
+>Usar a lupa do livro de registos</guilabel
+></term>
+    <listitem>
+      <para
+>Com esta opção activa, o livro de registos irá mostrar todas as linhas de detalhe para a transacção que tiver seleccionado de momento, mesmo se tiver desligado a opção <link linkend="reference.menus.settings.transactiondetail"
+>Mostrar o Detalhe da Transacção</link
+>.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+  <term
+><guilabel
+>Mostrar o formulário da transacção</guilabel
+></term>
+    <listitem>
+      <para
+>Mostrar o <link linkend="details.ledger.transactionform"
+>formulário da transacção</link
+> no fundo do registo da transacção, de modo a introduzir e editar transacções. Com esta opção desligada, poderá editar a transacção dentro do registo em si.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Sempre mostrar um campo Nº.</guilabel
+></term>
+    <listitem>
+      <para
+>Mostrar sempre o campo do número (<quote
+>No.</quote
+>) ao introduzir ou editar uma transacção.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostrar o cabeçalho do grupo entre as transacções</guilabel
+></term>
+    <listitem>
+      <para
+>Mostrar os cabeçalhos dos grupos no registo</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Mostrar o cabeçalho para os anos fiscais anteriores e actual </guilabel
+></term>
+    <listitem>
+      <para
+>Mostrar os cabeçalhos dos grupo para o ano fiscal anterior e actual</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.register.sorting">
+<title
+>Página de Ordenação</title>
+<sect3 id="details.settings.register.sorting.normal">
+<title
+>Página da Vista normal</title>
+
+<para
+>Escolha o critério de ordenação do livro de registos no modo de vista Normal. </para>
+</sect3>
+
+<sect3 id="details.settings.register.sorting.reconciliation">
+<title
+>Página da área de Reconciliação</title>
+
+<para
+>Escolha o critério de ordenação do livro de registos no modo de vista de Reconciliação. </para>
+</sect3>
+
+<sect3 id="details.settings.register.sorting.search">
+<title
+>Página da área de Pesquisa</title>
+<para
+>Escolha o critério de ordenação do livro de registos no modo da área de Pesquisa. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.settings.register.dataentry">
+<title
+>Página de Introdução de Dados</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Inserir o tipo da transacção no campo Nº. para as transacções novas</guilabel
+></term>
+    <listitem>
+      <para
+>Coloca automaticamente o tipo da transacção, &eg;, Depósito, Levantamento, etc., no campo Nº.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Incrementar automaticamente o número do cheque</guilabel
+></term>
+    <listitem>
+      <para
+>Se deseja ter o número do cheque a aumentar automaticamente, sempre que introduzir uma transacção para um novo cheque.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Manter as mudanças ao seleccionar uma transacção/parcela diferente</guilabel
+></term>
+    <listitem>
+      <para
+>Quando estiver activada a opção, se seleccionar uma transacção ou parcela diferente, irá gravar as edições na transacção actual.</para>
+      <para
+>Quando estiver desactivada, a selecção de uma transacção diferente irá cancelar essas modificações. Em vez disso, terá de aceitar explicitamente as alterações.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Use o Enter para percorrer os campos</guilabel
+></term>
+    <listitem
+><para
+>Quando a opção estiver activa, ao carregar em Enter irá colocar o campo seguinte em primeiro plano no formulário da transacção.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Corresponder os nomes desde o início</guilabel
+></term>
+    <listitem>
+      <para
+>Assinale esta opção se quiser sempre fazer a correspondência &eg; dos beneficiários desde o início. Se estiver desligada, qualquer sub-sequência do texto irá corresponder</para>
+    </listitem>
+  </varlistentry>
+  <!--FIXME missing Automatic reconciliation-->
+  <varlistentry>
+    <term
+><guilabel
+>Estado por omissão da reconciliação</guilabel
+></term>
+    <listitem>
+      <para
+>Selecciona o estado de reconciliação por omissão para as transacções novas.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Preencher automaticamente</guilabel
+></term>
+    <listitem>
+      <para
+>Selecciona o comportamento desejado para o preenchimento automático ou desactiva-o</para>
+      <itemizedlist>
+        <listitem>
+          <para
+>Não preencher automaticamente</para>
+        </listitem>
+        <listitem>
+          <para
+>Mesma transacção se o montante variar em menos de X por cento</para>
+          <para
+>Ao introduzir uma nova transacção com esta opção, o &kappname; irá mostrar uma lista das transacções anteriores para o beneficiário e a conta. Se as transacções anteriores tiverem uma diferença inferior a X por cento, serão consideradas idênticas. Se a percentagem for 0, todas as transacções anteriores para o beneficiário e a conta serão apresentadas. Ao seleccionar uma transacção, todos os detalhes das transacções, excepto a data, serão preenchidos automaticamente com os da transacção seleccionada.</para>
+        </listitem>
+        <listitem>
+          <para
+>Com a transacção anterior mais usada para o beneficiário</para>
+          <para
+>Ao introduzir uma nova transacção com esta opção activada, o &kappname; irá preencher todos os detalhes da transacção com base na transacção usada mais frequentemente com o beneficiário seleccionado.</para>
+        </listitem>
+      </itemizedlist>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="details.settings.register.import">
+<title
+>Página de Importação</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Corresponder à transacção dentro do período em dias</guilabel
+></term>
+    <listitem>
+      <para
+>Procurar por transacções correspondentes dentro do período da transacção importada +/- os dias indicados</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Perguntar a categoria predefinida de um novo beneficiário</guilabel
+></term>
+    <listitem>
+      <para
+>Sempre que for detectado um novo beneficiário durante uma importação, será pedida ao utilizador a categoria predefinida do beneficiário.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.schedules">
+<title id="details.settings.schedules.title"
+>Transacções Agendadas</title>
+
+<para
+>Estas opções permitem-lhe modificar o comportamento das funcionalidades de <link linkend="details.schedules"
+>eventos recorrentes</link
+>. </para>
+
+<sect2 id="details.settings.schedules.startupoptions">
+<title
+>Opções iniciais da calendarização</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Verificar os eventos recorrentes ao iniciar</guilabel
+></term>
+    <listitem>
+      <para
+>Activa a verificação do evento recorrente no arranque do &kappname;.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Introduzir as transacções com este número de dias de antecedência</guilabel
+></term>
+    <listitem
+><para
+>Indicar com quantos dias de avanço deverão ser introduzidas as transacções agendadas.</para>
+    </listitem>
+  </varlistentry>
+  <!--FIXME missing Processing Days-->
+  <varlistentry>
+    <term
+><guilabel
+>Dias de antecipação das calendarizações no registo</guilabel
+></term>
+    <listitem>
+      <para
+>Indique durante quantos dias deverão ser apresentados os eventos recorrentes no livro de registos.</para>
+      <para
+>As transacções agendadas serão apresentadas no livro de registos. Poderá introduzir ou ignorar as transacções agendadas, carregando com o botão direito do rato nelas.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.onlinequote">
+<title id="details.settings.onlinequote.title"
+>Cotações 'Online'</title>
+
+<para
+>Estas opções modificam a forma como as cotações 'online' são obtidas das várias fontes 'online'. </para>
+
+<para
+>Esta página permite-lhe alterar as fontes de cotações 'online' para o &kappname;. De um modo geral, esta é uma opção avançada, devendo apenas ser alterada pelos utilizadores mais técnicos. </para>
+
+<para
+>Para mais detalhes, por favor veja a secção sobre as <link linkend="details.investments.onlinequotes"
+>Cotações de Preços 'Online'</link
+>. </para>
+</sect1>
+
+ <!-- FIXME Reports page missing-->
+
+<sect1 id="details.settings.forecast">
+<title id="details.settings.forecast.title"
+>Previsão</title>
+
+<para
+>Estas opções permitem-lhe modificar a forma de cálculo da previsão. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Número de dias a prever</guilabel
+></term>
+    <listitem>
+      <para
+>Seleccione quantos dias deseja prever. O valor por omissão são 90 dias</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Número de dias do ciclo de facturação</guilabel
+></term>
+    <listitem>
+      <para
+>O número normal de dias que a sua conta de uso comum passa num ciclo de receita-despesa. Por exemplo, se recebe o seu salário mensalmente, deverá seleccionar aqui 30 dias.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Dia do mês onde começar a previsão</guilabel
+></term>
+    <listitem>
+      <para
+>Seleccione o dia do mês em que deseja começar a previsão. Normalmente será o dia em que recebe o seu salário ou outra receita.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Método de Previsão</guilabel
+></term>
+    <listitem>
+      <para
+>O método de previsão a usar.</para>
+      <para
+>As transacções agendadas e futuras prevêem o seu saldo, com base na informação das suas transacções agendadas e futuras.</para>
+      <para
+>O método baseado no histórico usa as suas transacções passadas para extrapolar uma previsão.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Número de ciclos a usar na previsão</guilabel
+></term>
+    <listitem>
+      <para
+>Se estiver a usar um método baseado no histórico, quantos ciclos contabilísticos deverá o &kappname; calcular na previsão.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Método baseado no histórico</guilabel
+></term>
+    <listitem>
+      <para
+>Seleccione o método a usar, ao calcular a previsão com base na informação histórica</para>
+      <para
+>A média simples móvel calcula a média das suas transacções passadas, de modo a calcular uma previsão.</para>
+      <para
+>A média ponderada móvel calcula a média das suas transacções passadas, mas atribui mais importância às transacções mais recentes.</para>
+      <para
+>A regressão linear usa uma fórmula de regressão linear, com base nas suas transacções passadas, de modo a calcular a previsão</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="details.settings.encryption">
+<title id="details.settings.encryption.title"
+>Encriptação</title>
+
+<para
+>Estas opções permitem-lhe modificar as opções de encriptação dos dados. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Usar a encriptação por GPG</guilabel
+></term>
+    <listitem>
+      <para
+>Activa a utilização do GPG para encriptar o ficheiro de dados. Veja a secção sobre a <link linkend="details.formats.encrypted"
+>Encriptação com o GPG</link
+> para mais detalhes.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<sect2 id="details.settings.encryption.gpgencryption">
+<title
+>Encriptação com o GPG</title>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>A sua chave</guilabel
+></term>
+    <listitem>
+      <para
+>Indique o endereço de e-mail ou o ID hexadecimal da chave a usar na encriptação dos dados.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Chaves adicionais</guilabel
+></term>
+    <listitem>
+      <para
+>Seleccione as chaves adicionais a usar na encriptação dos dados.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Encriptar também com a chave de recuperação do KMyMoney</guilabel
+></term>
+    <listitem>
+      <para
+>Encripta os dados com a chave de recuperação do &kappname;, permitindo aos programadores de base do &kappname; descodificarem os dados, no caso de perder a sua chave de encriptação.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.colors">
+<title id="details.settings.colors.title"
+>Cores</title>
+
+<para
+>Estas opções permitem-lhe alterar as cores dentro do &kappname;. </para>
+
+<sect2 id="details.settings.colors.foreground">
+<title
+>Página Principal</title>
+
+<para
+>Modifica as cores principais, carregando no botão de cores e abrindo uma paleta de selecção de cores. </para>
+</sect2>
+
+<sect2 id="details.settings.colors.background">
+<title
+>Página do Fundo</title>
+
+<para
+>Modifica as cores do fundo, carregando no botão de cores e abrindo uma paleta de selecção de cores. </para>
+
+<para
+>Repare na opção <guilabel
+>Usar as cores do sistema</guilabel
+>, no topo da página. Se esta estiver assinalada, o &kappname; usa as cores fornecidas pelo sistema, como as que estão associadas a um dado tema seleccionado, ainda que os detalhes dependam do sistema operativo e, provavelmente, do sistema ou gestor de janelas em execução. De um modo geral, se estiver a obter cores ou combinações de cores esquisitas, a mudança do estado desta opção poderá ajudar. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.settings.fonts">
+<title
+>Tipos de Letra</title>
+
+<para
+>Estas opções permitem-lhe modificar o tipo de letra. </para>
+
+<variablelist>
+  <varlistentry>
+    <term
+><guilabel
+>Usar os tipos de letra do sistema</guilabel
+></term>
+    <listitem>
+      <para
+>Seleccione isto para usar os tipos de letra do sistema. Se desligar esta opção, poderá personalizar os tipos de letra.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Tipo de letra das células</guilabel
+></term>
+    <listitem>
+      <para
+>Indique o tipo de letra personalizado a usar em cada célula.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
+>Tipo de letra do cabeçalho</guilabel
+></term>
+    <listitem>
+      <para
+>Indique o tipo de letra personalizado a usar nos cabeçalhos de cada área.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="details.settings.plugins">
+<title
+>'Plugins'</title>
+
+<para
+>Estas opções permitem-lhe modificar o comportamento dos 'plugins' instalados. Lembre-se que a lista de 'plugins' apresentados irá depender dos 'plugins' que o &kappname; encontrou quando foi iniciado. Não interessa se o 'plugin' foi compilado como parte da aplicação ou se foi adicionado como um pacote em separado. <screenshot
+> <screeninfo
+>Configurar os 'Plugins'</screeninfo
+> <mediaobject
+> <imageobject
+> <imagedata fileref="configure_plugins.png" format="PNG"/> </imageobject
+> <textobject
+> <phrase
+>Configurar os 'Plugins'</phrase
+> </textobject
+> </mediaobject
+> </screenshot
+> Para a maioria dos 'plugins', a única opção é activá-los ou desactivá-los, de acordo com a marcação a seguir ao nome do 'plugin'. Para além disso, existe também um botão de <guibutton
+>informações</guibutton
+> (&infoicon;) para cada um deles, o qual irá mostrar a versão do 'plugin' e o seu autor. Poderá encontrar mais informações sobre a configuração e utilização desses 'plugins' nas secções separadas da <link linkend="details.impexp.csv"
+>Importação de CSV</link
+> e de <link linkend="details.impexp.ofx"
+>Importação do OFX</link
+>. Também se aplica no <link linkend="details.reconcile"
+>relatório de reconciliação</link
+>, ainda que esse relatório seja apenas uma parte pequena do processo maior de reconciliação. Um dos 'plugins' que precisa de um passo de configuração é o 'plugin' para Imprimir um Cheque. </para>
+
+<sect2 id="details.settings.plugins.printchecks">
+<title
+>'Plugin' de impressão do cheque</title>
+
+<para
+>Este 'plugin' vem incluído no código-fonte do &kappname;, devendo estar sempre activo. Permite a impressão de um cheque com base nos dados de uma transacção seleccionada, sendo o formato controlado por um modelo em HTML. Terá de usar um modelo correspondente aos seus cheques pré-impressos. Quando carregar no botão <guibutton
+>Configurar</guibutton
+> (&configicon;), aparece a janela de configuração para <guilabel
+>Imprimir um cheque</guilabel
+>. No topo existe um campo de texto com a localização do modelo seleccionado. À direita do mesmo existe um botão que invoca uma janela de selecção de ficheiros, onde poderá seleccionar um ficheiro de modelos alternativo. </para>
+
+<para
+>Um ficheiro de modelo é um ficheiro em HTML onde são colocadas sequências de texto específicas para referenciar os campos da transacção, da conta e da instituição actuais, para demonstrar onde serão impressos no cheque. O &kappname; vem com alguns ficheiros de modelos de exemplo. Deverá ser capaz de usar um deles ou de o modificar a seu gosto. Quando for seleccionado o modelo predefinido, a janela de configuração mostrar-lhe-á a pasta que contém os ficheiros de exemplo. </para>
+ 
+<!-- info from source code on substitution variables
+    // data about the user
+    checkHTML.replace("$OWNER_NAME", file->user().name());
+    checkHTML.replace("$OWNER_ADDRESS", file->user().address());
+    checkHTML.replace("$OWNER_CITY", file->user().city());
+    checkHTML.replace("$OWNER_STATE", file->user().state());
+    // data about the account institution
+    checkHTML.replace("$INSTITUTION_NAME", institution.name());
+    checkHTML.replace("$INSTITUTION_STREET", institution.street());
+    checkHTML.replace("$INSTITUTION_TELEPHONE", institution.telephone());
+    checkHTML.replace("$INSTITUTION_TOWN", institution.town());
+    checkHTML.replace("$INSTITUTION_CITY", institution.city());
+    checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
+    checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
+    // data about the transaction
+    checkHTML.replace("$DATE", KGlobal::locale()->formatDate(QDate::currentDate(), KLocale::LongDate));
+    checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
+    checkHTML.replace("$PAYEE_NAME", file->payee((*it).split().payeeId()).name());
+    checkHTML.replace("$PAYEE_ADDRESS", file->payee((*it).split().payeeId()).address());
+    checkHTML.replace("$PAYEE_CITY", file->payee((*it).split().payeeId()).city());
+    checkHTML.replace("$PAYEE_POSTCODE", file->payee((*it).split().payeeId()).postcode());
+    checkHTML.replace("$PAYEE_STATE", file->payee((*it).split().payeeId()).state());
+    checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().shares().abs()));
+    checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
+    checkHTML.replace("$MEMO", (*it).split().memo());
+-->
+
+
+</sect2>
+</sect1>
+</chapter>

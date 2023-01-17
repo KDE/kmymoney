@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.database">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
+  </authorgroup>
+  <date
+>2011-07-21</date>
+  <releaseinfo
+>4.6</releaseinfo>
+</chapterinfo>
+
+<title
+>Base de datos</title>
+
+<sect1 id="details.database.usage">
+<title
+>Usar bases de datos relacionales</title>
+
+<sect2>
+<title
+>Introducción</title>
+<para
+>En su versión 1.0, &kappname; le permite almacenar sus datos en una base de datos relacional. Una de las ventajas del uso de este estándar industrial es que le permite ver sus datos utilizando cualquier interfaz gráfica como OpenOffice.org<trademark class="copyright"
+></trademark
+> o LibreOffice<trademark class="copyright"
+></trademark
+>, quizá en un formato aún no proporcionado por &kappname;. Además, con un ligero conocimiento de SQL (Structured Query Language, el lenguaje usado mundialmente para acceder a bases de datos relacionales) le permitiría exportar más fácilmente datos a un programa externo, por ejemplo, una aplicación de presupuestos. </para>
+<para/>
+</sect2>
+
+<sect2
+><title
+>Preparativos</title>
+
+<para
+>Para acceder a la base de datos, &kappname; usa el módulo de SQL proporcionado por &Qt; Software como parte del sistema de programación de &Qt;. Este módulo acepta varios sistemas de bases de datos a través de una colección de controladores (drivers). Entre los sistemas de código abierto más populares para los que se dispone de un controlador son MySQL<trademark class="registered"
+></trademark
+>, SQLite (versiones 3 o superior) y PostgreSQL. El módulo también acepta sistemas más «pesados» e industriales como Oracle<trademark class="registered"
+></trademark
+> e IBM DB2<trademark class="registered"
+></trademark
+>. </para>
+
+<para
+>Exceptuando SQLite, estos sistemas usan un modelo cliente/servidor, donde el software «cliente» se encuentra en «su» máquina y el servidor reside en la misma máquina que la base de datos, que puede ser en cualquier lugar de la red. Por supuesto, en el escenario típico de una aplicación personal como &kappname;, «su» máquina actúa como cliente y servidor. Su primera tarea será, por tanto, decidir qué sistema de base de datos desea usar, instalar el cliente y, probablemente, también el servidor. </para>
+
+<para
+>Además del propio software de base de datos, también es necesario instalar el correspondiente módulo de controladores de &Qt;. La mayoría de distribuciones incluyen los módulos de controladores para las bases de datos más populares. Si fuera así en su caso, acceda al <ulink url="http://qt-project.org"
+>sitio web de software &Qt;</ulink
+> y busque «SQL drivers». </para>
+
+<note>
+  <para
+>SQLite no sigue el modelo cliente/servidor; cada base de datos se almacena en un archivo regular, local o remoto, al que se accede con los mecanismos típicos facilitados por el sistema operativo. En este caso, por tanto, solo hay un paquete de software y el controlador a instalar. Además, parte de la información siguiente, en concreto la relativa a la administración, puede no aplicarse a SQLite. </para>
+</note>
+</sect2>
+
+<sect2>
+<title
+>Administración</title>
+
+<para
+>La gestión de bases de datos es algo más compleja que la de archivos regulares. En cada sistema las tareas administrativas como la creación de bases de datos, asignación de permisos a usuarios, generación de copias de respaldo, &etc;, se realizan de diferente manera. La descripción de estas tareas queda fuera del ámbito de este manual, pero todos los productos aceptados poseen una exhaustiva documentación de referencia, y una búsqueda rápida en la web le dirigirá a los tutoriales sobre el tema. </para>
+
+<sect3>
+<title
+>Crear la base de datos</title>
+
+<para
+>Se ha incluido código para crear una base de datos inicial si no existiese ninguna. Sin embargo, se recomienda que pre-cree una base de datos, porque la mayoría de productos proporcionan varias opciones que podrían ser pertinentes. Una que puede resultar especialmente importante es la decisión de qué conjunto de caracteres (&eg; UTF-8) utilizar en los campos de texto. </para>
+
+<para
+>Ahora también deberá especificar los permisos para que los usuarios puedan realizar tareas sobre la base de datos. En la mayoría de sistemas, al usuario que cree que la base de datos se le asignarán automáticamente todos los permisos, pero es un área en la que debería consultar la documentación al respecto. </para>
+
+<para
+>La primera vez que utilice la base de datos, y en las ocasiones en que modifique el esquema de la base de datos, necesitarán permisos (también llamados privilegios) para crear y modificar tablas y vistas (vea el siguiente párrafo). Los permisos/privilegios pueden tener distinto nombre según el sistema, pero CREATE y ALTER deberían ser comunes. En una ejecución normal, debería poder leer y escribir registros; en SQL se suelen definir con los permisos SELECT, INSERT, UPDATE y DELETE. </para>
+</sect3>
+
+<sect3>
+<title
+>Crear las tablas</title>
+
+<para
+>La primera vez que lo use, &kappname; intentará crear la estructura de tablas necesaria. Para obtener la máxima compatibilidad entre tipos de bases de datos, se utiliza solo un subconjunto común de tipos de datos, aunque siguen pudiendo darse situaciones en que un tipo determinado no esté aceptado, en cuyo caso se proporciona una manera de generar el código SQL necesario para crear las tablas. Este código se puede modificar cuanto se requiera y usarlo para crear las tablas fuera de &kappname;. Si se encontrase en esta situación, puede buscar ayuda en &devlist;. Para más información consulte la <link linkend="details.database.generatesql"
+>Creación manual de bases de datos</link
+>. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.database.selectdatabase">
+<title
+>Crear una base de datos</title>
+
+<para
+>Usando &kappname;, abra o importe un archivo de datos existente, o cree uno nuevo. Después, seleccione <guimenuitem
+>Guardar como base de datos</guimenuitem
+> en el menú <guimenu
+>Archivo</guimenu
+>. Esto le mostrará el siguiente diálogo: </para>
+
+<screenshot>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="select_database.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Rellene los campos procedentes para el tipo de base de datos seleccionado (como siempre, los campos obligatorios se resaltarán) y presione <guibutton
+>Aceptar</guibutton
+> para crear la base de datos. </para>
+
+<sect3>
+<title
+>Tipo de base de datos</title>
+
+<para
+>Este cuadro lista todos los controladores SQL de &Qt; instalados en el sistema. Seleccione el controlador correspondiente al tipo de base de datos que utilice. Si el controlador apropiado no se encuentra en la lista, deberá instalarlo. Consulte la documentación de su distribución, o visite el <ulink url="http://qt-project.org/" type=""
+>sitio web de software &Qt;</ulink
+> y busque «SQL drivers». </para>
+</sect3>
+
+<sect3>
+<title
+>Archivo (solo Sqlite)</title>
+<para
+>SQLite almacena una base de datos por archivo, así que introduzca el nombre de aquel donde quiera crear la base de datos. Para explorar el sistema de archivo, presione sobre el icono a la derecha del nombre. En las bases de datos SQLite, los campos de <guilabel
+>Nombre del equipo</guilabel
+>, <guilabel
+>Nombre de usuario</guilabel
+> y <guilabel
+>Contraseña</guilabel
+> no son pertinentes. El archivo SQLite debe tener asignados en el sistema de archivos los permisos de lectura/escritura apropiados para acceder con el usuario actual. </para>
+</sect3>
+
+<sect3>
+<title
+>Nombre de base de datos (otras)</title>
+<para
+>El nombre de base de datos predefinido es KMyMoney, aunque puede seleccionar otro si lo desea. Para algunos tipos de bases de datos, &kappname; no podrá crear la base de datos, así que deberá pre-crearla mediante un procedimiento administrativo. Sin embargo, lo normal es que &kappname; pueda crear todas las tablas cuando se necesite. Si no, puede crearlas usted mismo. Para más información consulte la <link linkend="details.database.generatesql"
+>Creación manual de bases de datos</link
+>. </para>
+</sect3>
+
+<sect3
+><title
+>Nombre de equipo</title>
+<para
+>Para el usuario típico, el nombre predeterminado es <quote
+>localhost</quote
+>, es decir, la máquina que está utilizando en ese momento. Para bases de datos en red, introduzca un nombre de equipo válido. </para>
+
+</sect3>
+
+<sect3>
+<title
+>Nombre de usuario y contraseña</title>
+<para
+>Compruebe la configuración de los permisos de su base de datos o contacte con el administrador para saber cuáles son los valores que debe utilizar. El usuario debe poder consultar, insertar, actualizar y eliminar registros. Si el usuario es el mismo que aquel con el que inicia sesión, no suele necesitarse una contraseña. </para>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Acceder a sus datos</title>
+
+<sect3>
+<title
+>Diseño de tablas</title>
+
+<para
+>Para acceder a sus datos en &kappname;, utilice la entrada <guimenuitem
+>Abrir base de datos</guimenuitem
+> del menú <guimenu
+>Archivo</guimenu
+>. Con esto abrirá un diálogo similar al superior. </para>
+
+<note>
+<para
+>Si ha creado su base de datos abriendo primero un archivo y después seleccionando <guimenuitem
+>Guardar como base de datos</guimenuitem
+>, tal como se describe arriba, entonces cualquier cambio posterior a sus datos solo se guardará en la base de datos, no en el archivo. Esto significa que puede usar el archivo como copia de respaldo o como instantánea de sus datos en un momento particular. Para hacer una nueva copia de seguridad así, abra su base de datos, seleccione <menuchoice
+><guimenu
+>Archivo</guimenu
+><guimenuitem
+>Guardar como...</guimenuitem
+></menuchoice
+> y dele un nombre de archivo apropiado. Recuerde abrir su base de datos, de forma que &kappname; no continúe usando el archivo. </para>
+</note>
+
+<para
+>Para acceder a sus datos en otros formatos, necesitará saber un npoco sobre cómo se maneja esto en las bases de datos relacionales. La manera más fácil, con diferencia, de cogerle el truco a esto es abrir la base de datos en un programa como OpenOffice.org. Esto le proporciona una lista de las diferentes tablas que componen la base de datos, y le permite ver la distribución de cada una. </para>
+
+<para
+>Para extraer datos, &eg; a una hoja de cálculo o a un archivo externo, es casi invariablemente necesario seleccionar los datos vinculados de más de una tabla. Esto se hace «juntando» las tablas utilizando un campo que sea común a ambas. Puede encontrar mucha más información sobre cómo se hace esto en los tutoriales sobre bases de datos mencionados antes. La siguiente tabla lista los campos utilizados para definir estas relaciones entre tablas: </para>
+
+<informaltable>
+  <tgroup cols="3">
+    <thead>
+      <row>
+        <entry valign="top">
+          <para
+>Relación</para>
+        </entry>
+        <entry valign="top">
+          <para
+>Coincidencia</para>
+        </entry>
+        <entry valign="top">
+          <para
+>Con</para>
+        </entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+        <entry valign="top">
+          <para
+>Organizaciones y cuentas</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmInstitutions.id</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmAccounts.institutionId</para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Cuentas madre/hija</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmAccounts.id</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmAccounts.parentId</para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Asientos y partidas (ver nota 1)</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmTransactions.id</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmSplits.transactionId</para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Cuentas y partidas</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmAccounts.id</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmSplits.accountId</para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Beneficiarios y partidas</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmPayees.id</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmSplits.payeeId</para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Planificaciones y asientos</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmSchedules.id</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmTransactions.id</para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Transacciones y divisas</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmTransactions.currencyId</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmCurrencies.ISOCode</para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Cuentas y valores bursátiles (ver nota 2)</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmAccounts.currencyId</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmSecurities.id</para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Valores bursátiles y precios</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmSecurities.id</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmPrices.fromId o kmmPrices.toId</para>
+        </entry>
+      </row>
+      <row>
+        <entry valign="top">
+          <para
+>Tasas de divisas</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmCurrencies.ISOCode</para>
+        </entry>
+        <entry valign="top">
+          <para
+>kmmPrices.fromId o kmmPrices.toId</para>
+        </entry>
+      </row>
+    </tbody>
+  </tgroup>
+</informaltable>
+
+<para
+>Notas: </para>
+
+<para
+>1 &#x2013; txType = &#x201C;N&#x201D; para transacciones normales, &#x201C;S&#x201D; para transacciones planificadas </para>
+
+<para
+>2 &#x2013; if kmmAccounts.isStockAccount = &#x201C;Y&#x201D; </para>
+</sect3>
+
+<sect3>
+<title
+>Formato de campos</title>
+
+<para
+>Varios de los campos de datos se guardan en un formato interno que puede no ser útil de modo inmediato para un programa externo. En estos casos, la información se ha duplicado en ambos formatos, interno y externo. </para>
+
+<para
+>Las cantidades monetarias y los valores de las participaciones se muestran tanto en forma de numerador/denominador  y, con un campo con el sufijo «Formateado», en la forma en que se muestra en su pantalla. </para>
+  
+<para
+>Similarmente, algunos campos como el del tipo de cuenta aparecen tanto como código numérico como en un campo con el sufijo «Cadena», en la forma e idioma de la aplicación. </para>
+</sect3>
+
+<sect3>
+<title
+>Actualizar sus datos</title>
+
+<para
+>Tener los datos en un formato estándar le da la posibilidad de modificarlos fuera de la aplicación &kappname;. NO LO HAGA a menos que sepa de verdad lo que está haciendo, y asegúrese siempre de tener una copia de respaldo de sus datos. Si le sale mal, &kappname; puede no ser capaz de acceder a sus datos, y podría incluso perderlos todos. ¡Se lo hemos advertido! </para>
+</sect3>
+
+<sect3>
+<title
+>Consultas almacenadas</title>
+
+<para
+>La mayoría de los sistemas de bases de datos le permiten almacenar consultas y procedimientos comúnmente utilizados y, en algunos casos, se pueden mantener como tablas u otros objetos dentro de la propia base de datos. Como se habrá figurado por lo anterior, todas las tablas utilizadas por &kappname; empiezan por las letras minúsculas «kmm». Este estándar se mantendrá, y solo las tablas que comiencen por esas letras serán actualizadas. Así, siempre que las evite al nombrar sus consultas, &etc;, no debería experimentar ningún problema. </para>
+</sect3>
+</sect2>
+
+<sect2 id="details.database.generatesql">
+<title
+>Creación manual de bases de datos</title>
+<note>
+  <para
+>Esta sección cubre aspectos más avanzados del uso de base de datos y los usuarios típicos pueden ignorarla. </para>
+</note>
+
+<sect3>
+<title
+>Cuándo utilizarla</title>
+<para
+>Puede haber ocasiones en las que &kappname; es incapaz de crear la base de datos automáticamente, o la crea sin algunas de las opciones requeridas por el usuario. Por ejemplo, el sistema de base de datos utilizado pueden o ajustarse completamente al uso estándar de SQL, o se puede introducir el reconocimiento de sistemas nuevos que aún no han sido totalmente probados por &kappname;. </para>
+<para
+>Antes de utilizar esta característica, debería intentar crear la entrada de la propia base de datos (&ie;, con la opción CREAR BASE DE DATOS). En el caso de que la base de datos exista, &kappname; podrá crear las tablas, &etc; en el procedimiento normal de guardado de la base de datos descrito anteriormente. </para>
+</sect3>
+
+<sect3>
+<title
+>Generar el SQL</title>
+<para
+>Si esto falla, es posible generar las órdenes básicas de SQL necesarias para crear las diferentes tablas, vistas e índices requeridos por la aplicación. Seleccione <guimenuitem
+>Generar base de datos SQL</guimenuitem
+> en el menú <guimenu
+>Herramientas</guimenu
+>. Esto le mostrará el siguiente diálogo: </para>
+<screenshot>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="generate_sql.png" format="PNG"/>
+  </imageobject>
+  </mediaobject>
+</screenshot>
+
+<para
+>Al seleccionar el tipo de base de datos, el SQL apropiado aparecerá en el recuadro de texto <guilabel
+>SQL para la creación</guilabel
+>; esto puede editarlo el usuario, o guardarlo en un archivo de texto haciendo click en <guibutton
+>Guardar SQL</guibutton
+>. En este último caso, la base de datos debe ser creada usando las funciones administrativas proporcionadas por el sistema de bases de datos. </para>
+<para
+>Si, tras editar el texto en el diálogo, desea que &kappname; cree la base de datos, necesitará completar los otros campos del diálogo, tal como se detalla en <link linkend="details.database.selectdatabase"
+>Crear una base de datos</link
+>, y hacer clic en <guibutton
+>Crear tablas</guibutton
+>. Tenga en cuenta que, salvo en el caso de SQlite, necesitará incluir una sentencia CREAR BASE DE DATOS apropiada como la primera orden, o haber lanzado previamente la orden de forma externa a &kappname;. </para>
+</sect3>
+
+<sect3>
+<title
+>Advertencia</title>
+<para
+>Debería tener mucho cuidado editando las definiciones de cualquiera de las tablas o vistas básicas (aquellas con nombres que empiezan por «kmm»). Algunos cambios, como aumentar la longitud de un campo de número entero, pueden tener poco impacto; pero no debería eliminar o cambiar la secuencia de ningún campo, o &kappname; podría negarse a funcionar o corromper sus datos. </para>
+<para
+>Mientras que añadir o eliminar índices puede mejorar el rendimiento, también debería tener en cuenta que puede pasar lo contrario. Algo de conocimiento sobre el funcionamiento interno de &kappname; puede ayudar a conseguir el mejor rendimiento en estas circunstancias. </para>
+</sect3>
+
+</sect2>
+
+<sect2>
+<title
+>Cifrado</title>
+
+<para
+>El cifrado de datos de su base de datos aún no está implementado. </para>
+</sect2>
+</sect1>
+</chapter>

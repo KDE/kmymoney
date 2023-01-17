@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.schedules">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail; </author>
+    <author
+>&Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
+    <author
+><personname
+><firstname
+>Michael</firstname
+><surname
+>Carpino</surname
+></personname
+> <email
+>mfcarpino@gmail.com</email
+> </author>
+  </authorgroup>
+  <date
+>2019-04-01</date>
+  <releaseinfo
+>5.0.3</releaseinfo>
+</chapterinfo>
+
+<title
+>Periodieke transacties</title>
+
+<sect1 id="details.schedules.intro">
+<title
+>Inleiding</title>
+
+<para>
+  <quote
+>Periodieke transacties beheert informatie over transacties die een of meer keren gebeuren over een gespecificeerde tijdsperiode. </quote>
+</para>
+
+<para
+>Soms een terugkomende transactie genoemd, geeft een schema een manier om informatie op te slaan over een transactie die regelmatig gebeurt. U kunt stortingen, overschrijvingen, opnames en leentransacties plannen. Er is veel flexibiliteit ingebouwd met plannen van transacties wat omvat het eenmalig doen or op basis van het aantal dag(en), we(e)k(en), halve maand(en), maand(en) of ja(a)r(en). </para>
+
+<para
+>Omdat u weet dat deze transacties regelmatig worden gedaan, of ze betalingen aan u zijn of door u aan iemand anders, kunt u een planning maken om de informatie op te slaan over details van de herhalingen om de gebeurtenis te vereenvoudigen en gemakkelijk te herinneren. </para>
+
+<para
+>Periodieke betalingen kunnen beschouwd worden als inkomend geld of uit uw rekeningen op een consistente basis. Algemeen gebruik omvat betaalcheques, belasting, verzekeringen, creditcards, verplichtingen, rente, leningen, hypotheek en rentes. Een betaling plannen zoals deze biedt een nuttige herinnering zodat u verwachte toekomstige financiële zaken effectief kunt beheren. </para>
+
+<para
+>Een planning bestaat uit twee hoofdgedeelten: het transactie-gedeelte en het planning-gedeelte. Het planning-gedeelte legt vast wanneer een gebeurtenis voorkomt, &ie;. een transactie in het grooboek wordt ingevoerd en hoe. De  transactie data legt de normale details over de transactie vast, en zal in het grootboek zoals het is worden vastgelegd. Dit omvat opties voor betalingsmethode, rekening, betalen aan/ontvangen van, categorie, tags, memo, uiterste datum, hoeveelheid en status. Naast dit kunt u ook extra opties selecteren gebaseerd op wanneer de transactie te bewerken. </para>
+</sect1>
+
+<sect1 id="details.schedules.type">
+<title
+>Typen periodieke transacties</title>
+
+<para
+>Er zijn vier verschillende soorten planningen in de huidige versie van &kmymoney;: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>Stortingen</para
+></listitem>
+  <listitem
+><para
+>Rekeningen</para
+></listitem>
+  <listitem
+><para
+>Overboekingen</para
+></listitem>
+  <listitem
+><para
+>Leningen</para
+></listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Bijschrijving</title>
+
+<para
+>Een Storting u voor geld dat naar uw rekening gaat, zoals salaris bonussen of rente. </para>
+</sect2>
+
+<sect2>
+<title
+>Rekeningen/opnamen</title>
+
+<para
+>Een rekening of opname is voor geld dat van uw rekening gaat, zoals een lidmaatschap, energierekening, belasting of autoregistratie. </para>
+</sect2>
+
+<sect2>
+<title
+>Overboeking</title>
+
+<para
+>Een transactie voor overboekingen wordt gebruikt voor geld dat van een rekening naar een andere rekening gaat, zoals geld dat van uw betaalrekening naar uw creditcard gaat. </para>
+</sect2>
+
+<sect2>
+<title
+>Leningen</title>
+
+<para
+>Een periodieke transactie voor leningen is een speciaal soort periodieke transactie welke u creëert als u bezig bent met <link linkend="details.loans"
+>Leningenrekeningen</link
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.schedules.view">
+<title
+>Het periodieke transactie venster</title>
+
+<para
+>Open het periodieke transactie venster door te klikken op het pictogram voor periodieke transactie <guiicon
+><inlinemediaobject
+><imageobject
+><imagedata fileref="schedule_view.png" format="PNG"/></imageobject
+></inlinemediaobject
+></guiicon
+> in de beeldselectie. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="scheduleview.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Periodieke transactie venster</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>De periodieke transactie weergave bestaat uit een venster met de knop <guibutton
+>Nieuwe periodieke transactie</guibutton
+> en <guibutton
+>Filter</guibutton
+> en een tekstvak <guilabel
+>Filter:</guilabel
+> erboven. </para>
+	
+<para
+>Klik op de knop om een nieuwe periodieke transactie te creëren. Bij periodieke Rekeningen, Stortingen, en Overboekingen, opent &kmymoney; het dialoog voor nieuwe periodieke transacties. Leningen worden op een andere manier afgehandeld, en worden beschreven in de sectie over leningen. </para>
+</sect1>
+
+<sect1 id="details.schedules.new">
+<title
+>De dialoog voor nieuwe periodieke transacties</title>
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="newsched_numbered.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Nieuwe periodieke transactie</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+	
+<para
+>U krijgt nu een nieuw dialoogvenster te zien, waarin u de details van de periodieke transactie en de planning kunt invoeren. U moet de volgende gegevens invoeren: </para>
+
+<orderedlist numeration="upperalpha">
+  <listitem
+><para
+>Naam planning</para
+></listitem>
+  <listitem
+><para
+>Volgende betaal datum</para
+></listitem>
+  <listitem
+><para
+>Frequentie</para
+></listitem>
+  <listitem
+><para
+>Wijze van betalen</para
+></listitem>
+  <listitem
+><para
+>Hoeveelheid</para
+></listitem>
+  <listitem
+><para
+>Andere details van de transacties</para
+></listitem>
+  <listitem
+><para
+>Opties van periodieke transacties</para
+></listitem>
+</orderedlist>
+
+<sect2>
+<title
+>De naam van de Periodieke transactie, frequentie en betalingsinformatie.</title>
+
+<para
+>Voer de naam en datum in van de volgende gebeurtenis van deze periodieke transactie in de desbetreffende velden. De naam is voor de weergave van de periodieke transactie in de lijst. Geef op hoe vaak de periodieke transactie moet gebeuren, gebruik daarvoor het vak voor frequentie en keuzelijst. Bijvoorbeeld "elke 6 weken" of "elke 3 maanden". Als het bedrag varieert van transactie naar transactie, zorg er dan voor dat het keuzevakje <guilabel
+>Schatting</guilabel
+> is ingeschakeld zodat u wordt gevraagd om het correcte bedrag in te voeren als het in het grootboek wordt toegevoegd. De andere vereiste velden in de sectie betalingsinformatie omvatten de rekening en categorie. De overige velden in deze sectie zijn optioneel. </para
+> 
+</sect2>
+
+<sect2>
+<title
+>De sectie opties voor periodieke transacties wijzigen</title>
+<para
+>U kunt kiezen hoe dagen dat geen verwerking plaatsvindt worden behandeld. Als de periodieke transactie op een dag zonder verwerking valt, kunt u kiezen uit <guilabel
+>De datum niet wijzigen</guilabel
+>, <guilabel
+>De datum wijzigen naar de vorige verwerkingsdag</guilabel
+> of <guilabel
+>De datum wijzigen naar de volgende verwerkingsdag</guilabel
+>. Deze optie is beschikbaar om te voldoen aan enige in de echte wereld gebruikelijke operationele verwerking door banken. Dagen zonder verwerking omvatten weekeinden en vakantiedagen bekend bij &kmymoney; voor de regio gespecificeerd in de <link linkend="details.settings.schedules.calendar"
+>toepasselijke configuratieoptie</link
+>. </para>
+
+<para
+>U kunt ook selecteren of al dan niet de hoeveelheid een schatting is zodat u gebraagd zal worden om de hoeveelheid bij te werken wanneer de transactie verloopt. De verwerking selecteren op de laatste dag van de maand biedt plannen op onregelmatige datums op maandeinden. Door het vakje voor automatisch invoeren te activeren wanneer het afloopt biedt &kmymoney; om de transactie in te voeren in het grootboek zonder menselijke interventie. Wanneer anders de transactie afloopt om ingevoerd te worden zal &kmymoney; een dialoogvenster openen om u te vragen te bevestigen dat u het ingevoerd wilt hebben. Dit gedrag is te configureren en meer informatie is te vinden in de sectie <link linkend="details.settings.schedules"
+>Instellingen</link
+>. </para>
+
+<para
+>Als u weet hoeveel transacties nog moeten worden aangemaakt of wanneer ze moeten stoppen, dan kunt u deze informatie invoeren zodat de transacties niet oneindig lang worden aangemaakt. Activeren van de planning zal een eindvak geven en of het aantal overblijvende transactions invoeren of de datum van de laatste transactie zal de periodieke transactie laten eindigen gebaseerd op dit criterium. </para>
+
+<para
+>Als u de nodige informatie heeft ingevoerd, kunt u op <guibutton
+>OK</guibutton
+> klikken om verder te gaan. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="details.schedules.edit">
+<title
+>Periodieke transacties wijzigen</title>
+
+<para
+>Om een periodieke transactie te wijzigen, selecteert u eenvoudig het item in de lijst en klikt u er met de &RMB; op zodat het contextmenu opent waarin u <guimenuitem
+>Periodieke transacties bewerken</guimenuitem
+> kunt selecteren. Dit opent een dialoogvenster dat vergelijkbaar is met het dialoogvenster voor periodieke transacties, waarin u de gewenste wijzigingen aan de data kunt aanbrengen. </para>
+</sect1>
+
+<sect1 id="details.schedules.delete">
+<title
+>Periodieke transacties verwijderen</title>
+
+<para
+>Om een periodieke transactie te wijzigen, selecteert u eenvoudig het item in de lijst en klikt u er met de &RMB; op zodat het contextmenu opent waarin u <guimenuitem
+>Periodieke transactie verwijderen</guimenuitem
+> selecteert. </para>
+</sect1>
+
+<sect1 id="details.schedules.duplicate">
+<title
+>Periodieke transacties dupliceren</title>
+
+<para
+>Om een periodieke transactie te dupliceren, selecteert u eenvoudig het item in de lijst en klikt u er met de &RMB; op zodat het contextmenu opent waarin u <guimenuitem
+>Periodieke transactie dupliceren</guimenuitem
+> selecteert. </para>
+</sect1>
+
+<sect1 id="details.schedules.entering">
+<title
+>Periodieke transacties invoeren</title>
+
+<para
+>De invoer van een periodieke transactie houdt eigenlijk in dat u een transactie in het desbetreffende kasboek invoert met de details aanwezig in de periodieke transactie. U kunt periodieke transacties op drie verschillende manieren invoeren: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Handmatig door met de &RMB; te klikken op De Periodieke transactieweergave</para>
+  </listitem>
+
+  <listitem>
+    <para
+>&kmymoney; kan ze tijdens het opstarten met of zonder uw tussenkomst invoeren </para>
+  </listitem>
+  <listitem>
+    <para
+>&kmymoney; kan ze tijdens het contact met de online bank of tijdens de import van een elektronische bankafschrift met of zonder uw tussenkomst invoeren </para>
+  </listitem>
+</itemizedlist>
+
+<sect2>
+<title
+>Handmatig periodieke transacties invoeren</title>
+
+<para
+>U kunt handmatig een periodieke transactie invoeren door met de &RMB; op het item in de lijst te klikken en daarna in het contextmenu <guimenuitem
+>Invoeren</guimenuitem
+> te selecteren. </para>
+</sect2>
+
+<sect2>
+<title
+>De ingevoerde transactie bevestigen</title>
+
+<para
+>Na een van de gekozen methodes, opent het dialoog voor periodieke transacties met de nodige informatie die u al invoerde bij de creatie van de periodieke transactie. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="enterschedule.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>U kunt deze informatie wijzigen, en deze wijzigingen kunt u op deze ene keer van de planning toepassen of op alle latere transacties. Nadat u heeft gecontroleerd of alle data correct zijn, zal het klikken op <guibutton
+>OK</guibutton
+> de transactie toevoegen aan het kasboek en de volgende verval datum bijwerken naar de volgende gebeurtenis in de planning. Als u gegevens van de transactie heeft gewijzigd dan krijgt u een bevestiging van wat u heeft gewijzigd te zien, om u de kans te geven om deze wijzigingen te accepteren of te annuleren. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="confirmenter.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>Beslis wat u wilt doen met de getoonde informatie en klik op <guibutton
+>OK</guibutton
+> of <guibutton
+>Annuleren</guibutton
+>. </para>
+</sect2>
+
+<sect2>
+<title
+>&kmymoney; deze periodieke transactie in het kasboek laten opslaan</title>
+
+<para
+>Als alternatief kan &kmymoney; als bij dit bij het maken van de planning is ingeschakeld, bij het opstarten controleren welke transacties binnenkort een vervaldatum hebben en deze u tonen. </para>
+
+<para
+>Als dit niet is ingeschakeld, dan zal &kmymoney; het eerder genoemde dialoogvenster openen zodat u de hier genoemde stappen kunt volgen. &kmymoney; als het bedrag een schatting is zodat u het werkelijke bedrag kunt invoeren. </para>
+
+<para
+>U kunt in het instellingendialoog van &kmymoney; ook zodanig instellen dat het bij het opstarten niet controleert welke transacties in de planning staan waarna u in de startpagina te zien krijgt van welke transacties de vervaldatum vandaag of eerder is zodat u ze handmatig kunt invoeren. </para>
+</sect2>
+</sect1>
+</chapter>
+

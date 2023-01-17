@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.categories">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Roger.Lum; &Roger.Lum.mail;</author>
+    <author
+>&Michael.Carpino; &Michael.Carpino.mail;</author>
+  </authorgroup>
+  <date
+>2020-02-06</date>
+  <releaseinfo
+>5.0.8</releaseinfo>
+</chapterinfo>
+
+<title
+>Kategorier</title>
+
+<para
+>Kategorivyn tillhandahåller en sammanfattning av alla befintliga kategorier den aktuella databasen. Kategorierna är uppdelade i inkomster och utgifter, sorterade alfabetiskt, och visade med respektive behållning för varje kategori. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="categories.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect1 id="details.categories.create">
+<title
+>Skapa en kategori</title>
+
+<para
+>Det finns tre sätt att skapa en ny kategori: Välj antingen <menuchoice
+><guimenu
+>Kategori</guimenu
+> <guimenuitem
+>Ny kategori</guimenuitem
+></menuchoice
+> i menyn, eller markera en överliggande kategori i kategorivyns träd, högerklicka och välj alternativet <guimenuitem
+>Ny kategori</guimenuitem
+>, eller skriv direkt in namnet på den nya kategorin vid tillägg eller redigering av en transaktion i huvudboken. Att utföra något av stegen leder till dialogrutan <guilabel
+>Skapa ny kategori</guilabel
+>. Dialogrutan innehåller tre flikar: <guilabel
+>Allmänt</guilabel
+>, <guilabel
+>Hierarki</guilabel
+> och <guilabel
+>Skatt</guilabel
+>. Fliken Allmänt innehåller redigerbara fält för den nya kategorins namn, typ och valuta (med den förvalda redan ifylld), samt alternativ för Senaste checknummer, Anteckningar, och en kryssruta för Tilldelning av kostnadsställe krävs. Under fliken Hierarki går det att välja lämplig överliggande konto för hierarkin. Till sist, under fliken Skatt, finns fält för att aktivera och anpassa momsstöd, och en kryssruta för att inkludera kategorin i skatterelaterade rapporter. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="categoryedit.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect1>
+
+<sect1 id="details.categories.edit">
+<title
+>Redigera en kategori</title>
+
+<para
+>Högerklicka på ett kategorinamn och välj <guimenuitem
+>Redigera kategori</guimenuitem
+> för att redigera en kategori. Ett fönster visas med samma tre flikar som i dialogrutan för ny kategori: Allmänt, Hierarki och Skatt. Varje flik låter dig redigera viss information om kategorin. </para>
+
+<para
+>Fliken Allmänt låter dig redigera kategorins namn, eventuella anteckningar du skrev in när du skapade kategorin, Senaste checknummer, och tillståndet på kryssrutan Tilldelning av kostnadsställe krävs. Typ, valuta och kurs kan inte ändras från sina ursprungliga värden. </para>
+
+<para
+>Fliken Hierarki låter dig ändra överliggande kategori genom att klicka på en annan kategori i den här vyn av kategoriernas hierarki. I en tidigare version av &kmymoney; var det möjligt att ändra den överliggande kategorin genom att dra och släppa. Denna funktionalitet förväntas komma tillbaka i en framtida version av programmet. </para>
+
+<para
+>Fliken Skatt låter dig tilldela eller ändra momsinformation, eller ändra den automatiska momstilldelningen. Den låter dig också välja om kategorin ingår i skatterelaterade rapporter eller inte. </para>
+</sect1>
+
+<sect1 id="details.categories.vat">
+<sect1info>
+  <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+</sect1info>
+
+<title
+>Stöd för moms</title>
+	
+<para
+>Du kan ändra en utgifts- eller inkomstkategori till en momskategori, vilket betyder att den tar emot alla delar som i själva verket utgör momsinbetalningar till staten. Du kan också skriva in en specifik procentsats. </para>
+ 
+<para
+>Kategorier kan tilldelas en momskategori, vilket låter &kmymoney; dela upp en transaktion för en kategori i två delar, en för kategorin och en för momsen. Beroende på inställningen av brutto- och nettobelopp, är beloppet du skriver in för transaktionen brutto- eller nettobeloppet. </para>
+ 
+<para
+>Ett exempel: I Tyskland finns det tre procentsatser för moms (0 %, 7 % och 19 %). Jag har alltså huvudkategorin "Inbetald moms", och tre underkategorier, en för varje procentsats. Jag skapar dem både på inkomst- och utgiftssidan, så att jag har totalt sex kategorier. För varor jag köper, väljer jag en av kategorierna som nämns ovan som "Tilldelning av momskategori". </para>
+ 
+<para
+>När jag köper varor, skriver jag in dem i en transaktion. Låt oss anta att jag har valt bruttoinmatningsmetoden. När jag välj har skrivit in kategori och belopp, känner &kmymoney; igen att det finns en momstilldelning och beräknar momsdelen, skapar en andra uppdelning med momskontot och momsbeloppet och reducerar kategoribeloppet. </para>
+ 
+<para
+>Samma sak gäller inkomstkategorier men åt andra hållet. Jag hoppas att det låter vettigt. </para>
+
+</sect1>
+
+<sect1 id="details.categories.delete">
+<title
+>Ta bort en kategori</title>
+
+<para
+>För att ta bort en kategori, välj den i trädet och högerklicka för att visa den sammanhangsberoende menyn. Välj därefter <guimenuitem
+>Ta bort</guimenuitem
+>. Om kategorin inte har några associerade transaktioner, scheman eller budgetar, kommer den att tas bort. </para>
+
+<para
+>Om en kategori har någon av de tre objekten, visas en meddelanderuta som låter dig välja en annan kategori som alla objekten kan tilldelas till istället innan kategorin tas bort. </para>
+
+<para
+>Om du tar bort en kategori som är överliggande till någon annan kategori, visas en dialogruta där du kan välja om kategorin och alla dess delkategorier, eller bara den överliggande kategorin. Om du väljer att bara ta bort den överliggande kategorin, flyttas alla delkategorier till dess överliggande kategori. </para>
+
+<para
+>Observera att borttagning av vissa kategorier kan leda till både frågor om vart data ska tilldelas istället och om eventuella delkategorier ska tas bort eller inte. </para>
+</sect1>
+
+<sect1 id="details.categories.open_ledger">
+<title
+>Öppna huvudbok för en kategori</title>
+
+<para
+>Genom att högerklicka på en kategori visas ett alternativ för att öppna en huvudbok för kategorin. Du kan också dubbelklicka på kategorin. När alternativet väljes visar &kmymoney; en huvudbok med alla transaktioner för den valda kategorin. Det låter dig snabbt detaljgranska alla transaktioner för den valda kategorin. Därefter kan du högerklicka på vilken transaktion som helst för att erhålla ytterligare detaljinformation om den specifika transaktionen, vilket i slutändan tillåter eventuell nödvändig redigering. Observera att du inte kan redigera en transaktion i kategorihuvudboken, utan du måste byta till huvudboksvisningen för det andra kontot, genom att använda något av alternativen i den sammanhangsberoende menyn efter att ha högerklickat på transaktionen. </para>
+</sect1>
+</chapter>
+

@@ -1,0 +1,1022 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="details.impexp">
+<chapterinfo>
+  <authorgroup>
+    <author
+>&Ace.Jones; &Ace.Jones.mail; </author>
+  </authorgroup>
+  <date
+>03/07/2011</date>
+  <releaseinfo
+>4.6</releaseinfo>
+</chapterinfo>
+
+<title
+>Importação e Exportação</title>
+
+<sect1 id="details.impexp.gnucash">
+<sect1info>
+  <author
+>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
+</sect1info>
+
+<title
+>Importação do GnuCash</title>
+
+<sect2>
+<title
+>Arquivos do GnuCash</title>
+
+<para
+>O módulo de importação do GnuCash para o &kappname; trata da leitura direta dos arquivos padrão (em &XML;) produzidos pelo GnuCash nas versões 1.8 e 2.0. Não há suporte para: </para>
+
+<itemizedlist>
+  <listitem
+><para
+>importação dos dados do banco de dados (Postgres)</para
+></listitem>
+  <listitem
+><para
+>importação dos arquivos 'multi-livro'</para
+></listitem>
+  <listitem
+><para
+>importação para um arquivo do &kappname; existente</para
+></listitem>
+  <listitem
+><para
+>importação das funcionalidades específicas para pequenas empresas (Empregados, Faturas, etc.)</para
+></listitem>
+  <listitem
+><para
+>exportar para arquivos do GnuCash.</para
+></listitem>
+</itemizedlist>
+
+<para
+>Provavelmente, a importação só irá funcionar corretamente se receber um arquivo válido. Recomenda-se executar a função <guimenuitem
+>Verificar &amp; Reparar Tudo</guimenuitem
+> (no menu <guimenu
+>Ações</guimenu
+> do GnuCash) antes de tentar a importação. </para>
+
+<para
+>Os arquivos poderão ser abertos se indicar o nome do arquivo na linha de comando (<command
+>kmymoney &lt;caminho do arquivo&gt;</command
+>), ou através das opções do menu <menuchoice
+> <shortcut
+> <keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Abrir</guimenuitem
+> </menuchoice
+> ou <menuchoice
+> <guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Importar</guimenuitem
+> </menuchoice
+>. </para>
+
+<para
+>A semelhança entre os dois produtos significa que muitos dos dados do dia a dia poderão ser importados de uma forma relativamente simples. Contudo, existem algumas áreas onde as diferenças se sobressaem, existindo várias opções para lidar com elas. As seções a seguir descrevem algumas dessas diferenças e sua compreensão deverá conduzir a uma importação mais suave. </para>
+</sect2>
+
+<sect2>
+<title
+>Semelhanças, diferenças e terminologia</title>
+
+<sect3>
+<title
+>Uso em pequenos negócios</title>
+
+<para
+>Deverá ser observado que o &kappname; é um gerenciador de finanças <emphasis
+>pessoais</emphasis
+> e, como tal, não suporta diretamente nenhuma das funcionalidades para negócios do GnuCash, como as tabelas de impostos, processamento de salários e o rastreamento de lotes. Todas as contas de Pagamento ou Recebimento serão importadas como contas de Passivos e Ativos, respectivamente. </para>
+</sect3>
+
+<sect3>
+<title
+>Contas</title>
+
+<sect4>
+<title
+>Tipos de conta</title>
+
+<para
+>Para ambos os produtos, o nível mais alto na estrutura do arquivo é a conta O &kappname; suporta 5 tipos principais de contas: Ativos, Passivos, Receitas, Despesas e Fundos, tendo cada uma delas vários sub-tipos, &eg;, Cheque, Cartão de Crédito, &etc; O &kappname; inclui uma conta 'padrão' para cada um destes cinco tipos, sendo todas as outras subordinadas a uma destas. O &kappname; aplica mais consistência (ou menos flexibilidade, dependendo do seu ponto de vista) entre os tipos de contas em relação ao GnuCash, sendo que o módulo de importação irá corrigir as inconsistências que detectar. Isto poderá conduzir a uma estrutura de contas relativamente diferente, ainda que esta possa, sem qualquer razão, ser alterada após o fim da importação. </para>
+</sect4>
+
+<sect4>
+<title
+>Categorias</title>
+
+<para
+>O &kappname; usa o termo Categoria para identificar uma conta como sendo do tipo Receita ou Despesa. Ao contrário do GnuCash, estas não são consideradas como contas de 'registro' e a inserção das transações diretamente em categorias não é suportada; as alocações são feitas durante a inserção da transação nos outros tipos de conta. </para>
+</sect4>
+
+<sect4>
+<title
+>Estrutura e Substituições</title>
+
+<para
+>O GnuCash suporta o uso de contas de Substituição. De fato, são contas apenas para leitura, nas quais não poderão ser inseridas operações, mas cuja função é semelhante às pastas numa estrutura de diretórios, como portadora das outras contas. Ainda que o &kappname; não suporte esta funcionalidade, oferece uma relação mãe/filha entre contas, simulando as substituições através da criação de contas vazias durante a importação. </para>
+</sect4>
+
+<sect4>
+<title
+>Mapa do tipo de contas</title>
+
+<informaltable frame='all'>
+<tgroup cols='2' align='left' colsep='1' rowsep='1'>
+<thead>
+  <row>
+    <entry
+>Tipo do GnuCash</entry
+><entry
+>Tipo do &kappname;</entry>
+  </row>
+</thead>
+<tbody>
+  <row>
+    <entry
+>BANCO</entry
+><entry
+>Corrente</entry>
+  </row>
+  <row>
+    <entry
+>CORRENTE</entry
+><entry
+>Corrente</entry>
+  </row>
+  <row>
+    <entry
+>SAVINGS</entry
+><entry
+>Poupança</entry>
+  </row>
+  <row>
+    <entry
+>ATIVO</entry
+><entry
+>Ativo</entry>
+  </row>
+  <row>
+    <entry
+>DINHEIRO</entry
+><entry
+>Dinheiro</entry>
+  </row>
+  <row>
+    <entry
+>CURRENCY</entry
+><entry
+>Dinheiro</entry>
+  </row>
+  <row>
+    <entry
+>MONEYMRKT</entry
+><entry
+>Mercado Monetário</entry>
+  </row>
+  <row>
+    <entry
+>STOCK</entry
+><entry
+>Ação</entry>
+  </row>
+  <row>
+    <entry
+>MUTUAL</entry
+><entry
+>Ação</entry>
+  </row>
+  <row>
+    <entry
+>EQUITY</entry
+><entry
+>Ação Ordinária</entry>
+  </row>
+  <row>
+    <entry
+>LIABILITY</entry
+><entry
+>Passivo</entry>
+  </row>
+  <row>
+    <entry
+>CREDIT</entry
+><entry
+>Cartão de Crédito</entry>
+  </row>
+  <row>
+    <entry
+>INCOME</entry
+><entry
+>Receita</entry>
+  </row>
+  <row>
+    <entry
+>EXPENSE</entry
+><entry
+>Despesa</entry>
+  </row>
+  <row>
+    <entry
+>RECEIVABLE</entry
+><entry
+>Ativo</entry>
+  </row>
+  <row>
+    <entry
+>PAYABLE</entry
+><entry
+>Passivo</entry>
+  </row>
+</tbody>
+</tgroup>
+</informaltable>
+</sect4>
+</sect3>
+
+<sect3>
+<title
+>Transações e Parcelas</title>
+
+<sect4>
+<title
+>Transações balanceadas</title>
+
+<para
+>Como no GnuCash, os dados são inseridos sob a forma de operações, cada uma delas consistindo geralmente em 2 ou mais parcelas. De fato, as operações válidas do GnuCash sempre conterão pelo menos 2 parcelas e, para estar em conformidade com a norma de contabilidade por partidas dobradas, estas deverão estar balanceadas no saldo (i.e., o resultado final deverá ser zero). O &kappname; encoraja, mas não obriga o uso desta norma; contudo, todas as operações importadas que não estejam balanceadas serão marcadas no livro de registros como tendo problemas. </para>
+</sect4>
+
+<sect4>
+<title
+>Beneficiários</title>
+
+<para
+>O &kappname; prefere que todas as transações tenham um Beneficiário (um termo genérico que se refere tanto aos credores como aos devedores) e, ao contrário do GnuCash, é mantida uma lista com estes credores. Os nomes dos credores são gerados pelo módulo de importação, a partir do campo de Descrição da transação do GnuCash. </para>
+</sect4>
+
+<sect4>
+<title
+>Transferências</title>
+
+<para
+>O &kappname; usa o termo Transferência para descrever uma transação que não envolva uma Categoria, mas que só transfere dinheiro entre as contas de Ativos e/ou Passivos. </para>
+</sect4>
+
+<sect4>
+<title
+>Reconciliação</title>
+
+<para
+>O &kappname; oferece uma função de reconciliação ou consolidação semelhante à do GnuCash, e o estado correspondente da transação será importado. </para>
+</sect4>
+</sect3>
+
+<sect3>
+<title
+>Mercadorias</title>
+
+<para
+>O GnuCash usa o termo Mercadorias para cobrir os ativos monetários e não-monetários. Estes são tratados de forma separada no &kappname;. </para>
+
+<sect4>
+<title
+>Moedas</title>
+
+<para
+>O &kappname; possui o suporte incorporado para todos os tipos de <link linkend="details.currencies"
+>moedas</link
+> estrangeiras. O &kappname; também necessita que o usuário defina uma moeda base, sendo esta a moeda padrão para as contas novas. O módulo de importação tentará determinar a moeda base mais provável, ainda que esta escolha possa ser rejeitada em detrimento de uma alternativa. </para>
+
+<para
+>(NOTA: O &kappname; ainda não tem suporte a contas expressas em moedas 'mortas' (exceto as que foram substituídas pelo Euro). No momento, será necessário remover todas essas contas do seu arquivo do GnuCash, antes de iniciar a importação. Esperamos melhorar essa situação em uma versão futura.) </para>
+</sect4>
+
+<sect4 id="gncsecurities">
+<title
+>Títulos e Investimentos</title>
+
+<para
+>Os ativos não-monetários (normalmente os fundos e ações) são chamados de Títulos pelo &kappname; e representa a principal diferença entre os dois produtos, na medida em que o &kappname; exige que qualquer conta associada a um título seja subordinada a uma Conta de Investimento. Isto está descrito com mais detalhes no capítulo sobre <link linkend="details.investments"
+>Investimentos</link
+>. Ainda que os usuários possam ter criado uma relação assim, o GnuCash não impõe qualquer estrutura definida sobre ele; como tal, o módulo de importação é incapaz de detectá-la e de efetuar uma conversão automática. Assim, estão disponíveis três opções: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Criar uma conta de Investimento separada para cada título, com o mesmo nome do título</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Criar uma única conta de Investimento que irá atuar como 'mãe' de todas as contas de título</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Criar várias contas de Investimento, atribuindo títulos a elas de acordo com o indicado pelo usuário.</para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Depende completamente dos requisitos do usuário, definir quais destas opções é relevante para cada uma das situações e, em alguns casos, poderá ser necessária a reestruturação manual das contas após a importação. </para>
+</sect4>
+
+<sect4>
+<title
+>Preços e taxas de câmbio</title>
+
+<para
+>As taxas dos preços dos títulos e de câmbio das moedas, tal como aparecem no Editor de Preços do GnuCash, serão importadas. Além disso, os itens de preços e das taxas serão gerados a partir de todas as transações que envolvam títulos e várias moedas. </para>
+</sect4>
+
+<sect4 id="details.impexp.gncquotes">
+<title
+>Cotações online</title>
+
+<para
+>Para obter as cotações dos preços e taxas de câmbio online, o GnuCash usa um pacote chamado Finance::Quote. As versões mais recentes do &kappname; possuem suporte para este pacote, de modo a obter a cotação das ações, e este será usado como padrão para importação dos dados. Contudo, você poderá optar por converter para o método nativo usado pelo &kappname;, o qual está descrito com mais detalhes em <link linkend="details.investments.onlinequotes"
+>cotações online</link
+>. </para>
+
+<para
+>Se optar por fazer isso, a próxima janela permitirá a seleção de uma fonte de preços nativa do &kappname;, ou uma fonte definida pelo usuário, para todas as contas onde sejam necessárias cotações online. Contudo, o símbolo financeiro será importado sem qualquer alteração. Uma vez que este símbolo será quase com certeza diferente nos dois pacotes, será necessário editá-lo manualmente, após finalizar o processo de importação. As atualizações futuras das taxas de câmbio não usarão o Finance::Quote, mas o método de obtenção nativo. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="gnucash-select_price_source.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect4>
+</sect3>
+
+<sect3 id="gncschedules">
+<title
+>Transações Agendadas</title>
+
+<para
+>O &kappname; não retém a separação feita no GnuCash entre as transações-modelo e a sua frequência das ocorrências. Os dados das transações serão duplicados se o mesmo modelo for usado em diferentes agendamentos, mas isso não parece ser muito significativo. </para>
+
+<sect4>
+<title
+>Tipos de eventos recorrentes</title>
+
+<para
+>O &kappname; classifica todos os agendamentos como um de três tipos: Contas, Depósitos e Transferências. Uma vez que o GnuCash não faz essa distinção, o módulo de importação tenta determinar a classificação a partir das contas e da direção do movimento do dinheiro. Poderão existir alguns casos em que são feitas escolhas incorretas, sendo necessário corrigi-las manualmente. </para>
+</sect4>
+
+<sect4>
+<title
+>Agendamentos suspeitos</title>
+
+<para
+>Algumas funcionalidades das transações agendadas do GnuCash não estão disponíveis no &kappname;, pelo que o módulo de importação tenta, em cada um dos casos, atingir um meio termo razoável na conversão dos dados. Estas transações serão marcadas como suspeitas, e o usuário terá a opção de editá-las diretamente, durante o processo de importação. Alguns exemplos de situações que possam provocar isto são: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>alguns intervalos de frequência suportados no GnuCash não estão disponíveis atualmente no &kappname;</para>
+  </listitem>
+
+  <listitem>
+    <para
+>o &kappname; não suporta a utilização de fórmulas e variáveis nos campos do montante</para>
+  </listitem>
+
+  <listitem>
+    <para
+>os casos complexos que ainda não foram identificados para a importação.</para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Apesar do enorme esforço, é possível que, devido às muitas opções envolvidas, uma operação agendada possa provocar um erro fatal dentro do &kappname;. Se esse tipo de problema ocorrer, o módulo de importação oferece a opção para ignorar todos os agendamentos suspeitos. </para>
+</sect4>
+</sect3>
+
+<sect3>
+<title
+>Relatórios</title>
+
+<para
+>O &kappname; oferece uma seleção abrangente de relatórios configuráveis, descritos com mais detalhes em <link linkend="details.reports"
+>Relatórios</link
+>. Estes não irão corresponder, necessariamente, aos que estão disponíveis no GnuCash. </para>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Selecionar as opções de importação</title>
+
+<para id="details.impexp.gncoptions">
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="gnucash-import_options.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<sect3>
+<title
+>Manipulação do Investimento</title>
+
+<para
+>Veja acima em <link linkend="gncsecurities"
+>"Títulos e Investimentos"</link
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Cotações online</title>
+
+<para
+>Desmarque isto se quiser usar o método nativo para as cotações de preços futuras. </para>
+
+<para
+>Veja acima em <link linkend="details.impexp.gncquotes"
+>"Cotações online"</link
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Transações Agendadas</title>
+
+<para
+>Veja acima em <link linkend="gncschedules"
+>"Transações Agendadas"</link
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>Opções de decodificação</title>
+
+<para
+>Se o seu idioma nativo é escrito em letras ou símbolos que sejam diferentes dos usados em idiomas 'Latinos' (i.e., como acontece na Europa Ocidental), estes serão representados num formato especial ('codificados') no seu arquivo do GnuCash. Se essas letras não forem apresentas corretamente na sua tela, então terão que ser decodificadas. Atualmente, não é possível detectar com precisão qual o formato de decodificação a usar, por isso você poderá ter que definir esta opção e selecionar um item na lista. De modo geral, o primeiro item na lista será considerado o apropriado para sua região (i.e., o país e idioma selecionados como nativos na instalação do seu sistema operacional), e deve ser o escolhido como primeira tentativa. Uma vez que o processo de importação não sobrepõe o seu arquivo do GnuCash, fique à vontade para experimentar qualquer uma destas seleções. </para>
+</sect3>
+
+<sect3>
+<title
+>Opção de Notas de Transação</title>
+
+<para
+>Em algumas condições de uso, as operações não-divididas do GnuCash poderão conter dados de memorandos residuais, e muitas vezes incorretos, que normalmente não estão visíveis ao usuário. Contudo, quando são importadas para o &kappname;, essas operações terão um campo de Notas que descreve o objetivo real da operação. Se esta opção estiver selecionada, essas notas, se estiverem presentes, serão usadas para substituir os dados estranhos do memorando. </para>
+</sect3>
+
+<sect3>
+<title
+>Opções de depuração</title>
+
+<para
+>Estas opções só precisam ser usadas em caso de problemas na importação, os quais deverão ser comunicados à lista de programadores do &kappname;. Lembre-se de que os registros produzidos por essas opções poderão conter dados de natureza confidencial, devendo assim ser usada a opção Anônima, caso esses registros precisem ficar disponíveis publicamente. </para>
+</sect3>
+</sect2>
+
+<sect2>
+<title
+>Relatório de importação</title>
+
+<para
+>No fim do processamento, o módulo de importação produz um relatório que mostra o número de entidades diferentes processadas, assim como todos os erros ou anomalias encontrados. Este relatório será apresentado na tela, podendo ser gravado num arquivo para revisão posterior. Um relatório completo poderá conter as seguintes seções: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Quantidade de registros</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Inconsistências nos tipos de contas e ações tomadas</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Detalhes dos agendamentos suspeitos</para>
+  </listitem>
+</itemizedlist>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="gnucash-report.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="details.impexp.qifimp">
+<sect1info>
+  <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+</sect1info>
+
+<title
+>Importação de QIF</title>
+
+<sect2>
+<title
+>O formato QIF é considerado perigoso</title>
+
+<para
+>De um modo geral, o formato QIF deverá ser evitado sempre que possível. É uma má escolha para transferir dados financeiros. Entre outras coisas, o QIF sofre dos seguintes problemas: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Falta de um formato-padrão: As diferentes versões do mesmo programa irão importar diferentes significados para o mesmo elemento.</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Falta de um identificador de transação: Uma vez que não existe nenhum número ID associado a cada transação, a correspondência de duplicados será muito mais dificultada.</para>
+  </listitem>
+
+  <listitem>
+    <para
+>Falta de expressividade: A gramática é realmente simples, e não consegue refletir a profundidade de informação financeira que existe num ambiente de finanças da atualidade.</para>
+  </listitem>
+</itemizedlist>
+
+<para
+>Esses são os motivos, de modo geral, que a Intuit deixou de dar suporte a importação em QIF no Quicken 2005. Se tiver a opção de obter os dados de outra forma, como no formato OFX, escolha sempre esta opção. </para>
+</sect2>
+
+<sect2>
+<title
+>Como importar um arquivo QIF</title>
+
+<para
+>Para importar um arquivo QIF, certifique-se primeiro que tem um arquivo válido do &kappname; aberto. Depois, selecione a opção <menuchoice
+><guimenuitem
+>Importar</guimenuitem
+> <guimenuitem
+>QIF...</guimenuitem
+> </menuchoice
+> do menu <guimenu
+>Arquivo</guimenu
+>. </para>
+	
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifopen.png" format="PNG"/>
+	</imageobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>A janela resultante pede o nome do arquivo QIF, permitindo-lhe localizar o arquivo clicando no botão <guibutton
+>Escolher</guibutton
+>. </para>
+
+<para
+>Do mesmo modo, o &kappname; diferencia a importação de um arquivo de extrato bancário e dos dados históricos exportados a partir de outro aplicativo. Por padrão, importa um arquivo de extrato bancário. Se estiver importando os dados a partir do seu aplicativo de gerenciamento de finanças pessoais, selecione a opção apropriada. </para>
+
+<para
+>De modo geral, o perfil QIF padrão deverá funcionar com seus dados QIF, mas em alguns casos, pode ser necessário usar um perfil QIF modificado. Consulte a <link linkend="details.impexp.qifimp.profile"
+>próxima seção</link
+> para obter mais detalhes sobre o assunto. </para>
+
+<para
+>Clique em <guibutton
+>Importar</guibutton
+> para importar o arquivo QIF. </para>
+
+<para
+>O &kappname; irá começar a analisar o arquivo, de modo a determinar os formatos usados para representar as datas e os números. Se não conseguir determinar um formato de data de forma unívoca, o &kappname; pedirá que o usuário selecione um dos formatos de data possíveis. </para>
+
+<para
+>Em seguida, o &kappname; irá importar os dados e criar todos os objetos necessários, como informações do beneficiário, os registros das contas e das categorias e a informação dos preços das ações. Sempre que possível, as transações existentes serão correspondidas com a informação importada. É apresentada uma barra de progresso que vai sendo atualizada durante o processo de importação. </para>
+
+<para
+>Caso o &kappname; não consiga detectar o nome da conta a importar, será solicitado ao usuário para selecionar a conta para onde os dados serão importados. Se a conta não existir no seu arquivo, você poderá criar uma nova conta clicando no botão <guibutton
+>Criar</guibutton
+>. </para>
+
+<para
+>No fim da importação, o &kappname; mostra uma janela com as estatísticas de importação do extrato. </para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Estatísticas do extrato</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qif_report.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Estatísticas do extrato</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Após a importação, todas as operações importadas serão apresentadas com um fundo amarelo no livro de registros. Caso o &kappname; consiga corresponder uma operação importada com uma existente, o fundo aparece em verde claro. </para>
+
+<para
+>O próximo passo é verificar os dados importados e aceitá-los. Esse é um processo geral e também se aplica às importações de outras fontes. Está em destaque numa seção separada deste documento. </para>
+
+<note>
+<para
+>As cores usadas para marcar as transações importadas e correspondidas são personalizadas e poderão ser diferentes no seu ambiente. </para>
+</note>
+</sect2>
+
+<!--
+<sect2>
+<title
+>Accepting the imported transactions</title>
+<para>
+  
+	When &kappname; has finished importing the QIF transactions the account will be shown with the imported transactions listed in Yellow.
+</para>
+
+<para>
+<screenshot>
+	<screeninfo
+>Imported transactions</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifimportverify.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Imported transactions</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+	Some of your transactions may be flashing red in the ledger.  
+	This is because they need to be assigned a category.  
+	The importer was not able to automatically assign a category based on your past transaction history.
+</para>
+
+<para
+>	
+	Transaction data can be edited or even deleted if needed.  To edit a transaction simply double click on the entry or hit enter when the entry is highlighted.  Once finished click on <guibutton
+>OK</guibutton
+> to accept the imported transactions or <guibutton
+>Cancel</guibutton
+> to remove the imported transactions.
+</para>
+
+</sect2>
+
+<sect2
+><title
+>Importing Investments</title>
+
+<para>
+	Please note that if you are importing a file with investment transactions, those investments must first exist in your &kappname; file.
+	The trading symbol is used to match, so please ensure that the symbol in &kappname; is exactly the same as the one in the file you're importing.
+</para>
+</sect2>
+-->
+
+<sect2 id="details.impexp.qifimp.profile">
+<title
+>Configurar um perfil QIF</title>
+
+<para
+>Uma vez que não existe nenhum formato-padrão universal para arquivos QIF, diversos fabricantes tomaram a liberdade de introduzir suas próprias particularidades ao formato. Assim, você deverá criar um Perfil QIF antes de importar um arquivo QIF. Esse perfil informará ao &kappname; quais as particularidades do seu arquivo. Para editar um Perfil QIF existente ou criar um novo, clique no botão <guibutton
+>Novo</guibutton
+> na caixa de diálogo Importação de QIF, próximo ao quadro de seleção de perfis. </para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifimport-qifprofileeditor.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Editor de Perfis QIF</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<note>
+<para
+>As versões anteriores do &kappname; possuíam uma página para a definição das datas e dos montantes. O &kappname; agora determina esses valores ao analisar o arquivo. Se não conseguir detectar a configuração correta, ela será solicitada ao usuário. </para>
+</note>
+<!--
+<para>
+	The most commonly changed thing between QIF implementations is the date format.  
+	So if this is the first time you're importing a QIF file, spend a few moments to figure out what format the dates are in, and set the QIF Profile accordingly.  
+	See the discussion below on apostrophe format for more details.
+</para>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifimport-qifprofiledate.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>QIF Profile Date</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+</sect2>
+
+<sect2
+><title
+>Apostrophe format</title>
+
+<para>
+	Many common QIF writers use a 2-digit representation for the year. 
+	This is ambiguous, because the importer cannot know which century the date belongs in.
+	To make things even more complicated, QIF files will often used an apostrophe as a year separator to indicate that the date belongs in the OTHER century from the default.
+</para>
+<para>
+	For example, if the default century is 1900-1999, the date 12/31/95 would mean 1995.  The date 12/31'05 would mean 2005.
+</para>
+<para>
+	Because the QIF format is not standardized, it's impossible to know which century is desired.
+	This is why you have to explicitly state it in the QIF profile.
+	You do this by specifying which century is intended when an apostrophe is found.
+	In the example above, you would set the Apostrophe Format to &quot;2000-2099&quot;, so dates with an apostrophe will be interpreted as being &gt; year 2000.
+	In this case, dates without an apostrophe will be treated as being in the 1900's.
+</para>
+-->
+</sect2>
+
+<sect2
+><title
+>Correspondência de transações</title>
+
+<para
+>Como foi apontado anteriormente, uma das maiores desvantagens do formato QIF é a falta de um identificador único para cada transação. Por isso, se estiver importando um arquivo QIF e algumas das transações já estiverem no seu livro de registro, você poderá obter algumas duplicações. O &kappname; tenta contornar isto, procurando por transações que se assemelhem às que já tem. Se encontrar algo que se pareça com a mesma transação, irá eliminar a aparente duplicação. </para>
+
+<para
+>Isto poderá ser um problema se você tiver transações que sejam muito parecidas, mas que sejam diferentes, de fato. Nesse caso, você poderá optar por dissociar essas transações mais tarde na área do livro de registros. </para>
+</sect2>
+
+<sect2>
+<title
+>Escrever um filtro de importação</title>
+
+<para
+>Algumas vezes você poderá ter dados num formato personalizado, como os valores separados por vírgulas (CSV), ou algo único para a sua situação em particular. A partir da versão 4.6, o &kappname; inclui um plugin para importação de CSV, mas você ainda poderá importar outros tipos de arquivo no &kappname; usando um Filtro de Importação de QIF. Um filtro é um programa personalizado, feito por você, que recebe o seu arquivo especial como entrada, produzindo um arquivo QIF como resultado. Este poderá ser um programa da 'shell', em Perl, um programa compilado e feito em C/C++ ou qualquer coisa que imaginar, desde que o sistema o consiga executar. </para>
+
+<para
+>Para usá-lo, edite o seu Perfil QIF favorito, e selecione a aba Filtro. Indique a localização do seu programa de filtragem, quando for solicitado. Sempre que fizer uma importação de QIF usando este perfil, o arquivo que selecionar para a importação será primeiramente executado através do seu filtro. </para>
+
+<para
+>Um problema comum é converter uma lista de valores separados por vírgulas num arquivo QIF. Este é um caso de estudo para a ferramenta 'awk'. Crie um programa chamado 'csv2qif.awk', com as seguintes linhas como conteúdo: </para>
+
+<programlisting
+>BEGIN { FS=&quot;,&quot;; print &quot;!Type:Bank&quot; }
+
+        { print &quot;D&quot;$1; print &quot;T&quot;$2; print &quot;N&quot;$3; print &quot;P&quot;$4; print &quot;M&quot;$5; print &quot;^&quot; }
+</programlisting>
+
+<para
+>Depois, mude as chaves do QIF (D,T,N,P,M) para corresponder à ordem dos seus dados CSV. Configure o filtro de entrada como sendo <userinput
+>awk -f csv2qif.awk</userinput
+>. </para>
+
+<para
+>Outro problema também ocorre normalmente na codificação dos arquivos QIF. O &kappname; espera que os arquivos estejam codificados em UTF-8. Se o seu arquivo estiver codificado em outro formato qualquer, pode ser útil convertê-lo para UTF-8. Por exemplo, para converter de ISO-8859-1, poderá indicar o filtro de entrada como sendo <userinput
+>recode iso-8859-1..utf-8</userinput
+>. </para>
+
+</sect2>
+<sect2>
+<title
+>Extensões especiais do QIF no &kappname;</title>
+
+<para
+>Como foi apontado anteriormente, uma das grandes desvantagens do formato QIF é a falta de um identificador único para cada operação. Se estiver escrevendo seu próprio criador de arquivos QIF (ou filtro, como foi descrito acima), poderá contornar esse problema. O &kappname; tem suporte ao campo '#'. O módulo de importação irá interpretá-lo como um ID de operação único e irá ignorar a operação se ela já estiver no sistema. </para>
+</sect2>
+</sect1>
+
+<sect1 id="details.impexp.qifexp">
+<title
+>Exportação para QIF</title>
+<para
+>Para exportar uma das suas contas para um arquivo QIF, escolha a opção do menu <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Exportar</guimenuitem
+><guimenuitem
+>QIF</guimenuitem
+></menuchoice
+>. Será solicitada a conta individual, o arquivo de destino e qual o Perfil QIF a serem usados na exportação. </para>
+
+<note
+><para
+>No momento, o módulo de exportação para QIF não consegue exportar investimentos. </para
+></note>
+
+<para>
+	<screenshot>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="qifimport-export.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Exportar o QIF</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+</sect1>
+
+<sect1 id="details.impexp.ofx">
+<sect1info>
+  <author
+>&Ace.Jones; &Ace.Jones.mail;</author>
+  <author
+>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+</sect1info>
+<title
+>Plugin de Importação de OFX</title>
+
+<sect2>
+<title
+>Obtendo o plugin</title>
+
+<para
+>O &kappname; irá importar os arquivos OFX sem qualquer problema. Contudo, esta funcionalidade não está incluída no programa base. Você deverá obter e instalar o plugin de Importação de OFX. Assim que estiver instalado, o comando para importar arquivos OFX irá aparecer automaticamente no menu <menuchoice
+><guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Importar</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>Lembre-se que muitas versões em pacotes binários do &kappname; foram compiladas com a importação de OFX já incluída ou então disponível num pacote à parte. Se a importação do OFX parecer não estar instalada na sua versão, o primeiro passo é verificar se está no mesmo local onde obteve o seu pacote base do &kappname;. </para>
+
+<para
+>Se você tiver instalado a partir do RPM, o plugin Importação de OFX está contido dentro do pacote RPM 'kmymoney-ofx'. Ele deverá estar disponível na mesma fonte em que obteve o RPM base do &kappname;. Se tiver compilado a partir do código-fonte, tudo o que necessita são as bibliotecas e cabeçalhos da libOFX 0.9 instalados no seu sistema. O processo de compilação do &kappname; irá detectá-la e compilar o plugin. No momento do lançamento do &kappname; 4.6, a última versão do libofx era a 0.9.4, que também é a versão mínima requerida. </para>
+
+<para
+>Se você tiver problemas em tentar compilar o &kappname;, e se tiver certeza de que tem a versão correta da libOFX instalada, contacte por favor a lista dos programadores &devlist; para mais assistência. Inclua uma cópia do seu arquivo 'config.log', comprimida primeiro com o 'gzip'. </para>
+</sect2>
+
+<sect2>
+<title
+>O que é OFX</title>
+
+<para
+>OFX significa <quote
+>Open Financial Exchange</quote
+>. De acordo com a <ulink url="http://www.ofx.net/"
+>página Web do OFX</ulink
+> <quote
+>Open Financial Exchange (OFX) é uma especificação unificada para intercâmbio eletrônico de dados financeiros entre instituições financeiras, empresas e consumidores pela Internet. OFX não é uma instituição financeira.</quote
+> A especificação define formatos para transferência de dados financeiros através de arquivos ou por intercâmbio direto. </para>
+
+<para
+>Ainda que o padrão seja muito mais completo e robusto que o QIF, ainda existem variações, dependendo da implementação específica usada por uma determinada instituição. Os arquivos OFX podem ter uma extensão <quote
+>OFX</quote
+> ou <quote
+>QFX</quote
+> (em maiúsculas ou minúsculas); isso não implica nenhuma diferença em particular para o conteúdo. O padrão é baseado em XML, permitindo que os arquivos possam ser lidos em qualquer editor de texto. Contudo, uma vez que os espaços em branco não são relevantes para o conteúdo em si, algumas implementações não usam espaços, tornando difícil a leitura dos dados por uma pessoa. </para>
+
+<para
+>Outra página com boas informações é a <ulink url="http:/ofxhome.com/"
+>OFX Home</ulink
+>. Ela mantém um diretório de instituições financeiras que utilizam o OFX. Isso pode ser útil se tiver problemas na configuração da <link linkend="details.impexp.ofxdirectconnect"
+>conexão direta com OFX</link
+>. Ela também tem um fórum de discussão para questões sobre o OFX. </para>
+</sect2>
+
+<sect2>
+<title
+>Importar um arquivo OFX</title>
+
+<para
+>A forma mais básica de importar um arquivo OFX é escolher o módulo de importação no menu. No menu <guimenu
+>Arquivo</guimenu
+>, escolha a opção <guimenuitem
+>Importar</guimenuitem
+> e depois a <guimenuitem
+>OFX...</guimenuitem
+>. Se a opção OFX não aparecer em Importar, você não possui o plugin Importação de OFX instalado corretamente. Leia a seção anterior. </para>
+
+<para
+>A primeira coisa que o módulo de importação irá fazer é perguntar-lhe a conta para onde importar as transações. Se existirem transações de várias contas no seu arquivo, será feita esta pergunta várias vezes. </para>
+
+<para
+>Depois da importação, algumas das suas transações poderão estar em vermelho intermitente no livro de registros. Isto acontece porque necessitam ter uma categoria atribuída. O módulo de importação não foi capaz de detectar automaticamente uma categoria com base no seu histórico de transações passadas. Você poderá editar cada uma das transações intermitentes para atribuir uma categoria, para que então deixe de piscar em vermelho. </para>
+
+<para
+>Lembre-se de que esta seção descreve o módulo de importação <quote
+>nativo</quote
+> de OFX. Os arquivos OFX também poderão ser importados se usar o plugin Importação do AqBanking, se o tiver instalado. Repare que os dois módulos se comportam de forma ligeiramente diferente, sendo também feitos e suportados por dois programadores diferentes. </para>
+</sect2>
+
+<sect2>
+<title
+>Importar os Investimentos</title>
+
+<para
+>Lembre-se por favor que, se estiver importando um arquivo com transações de investimentos, estes deverão existir em primeiro lugar no seu arquivo do &kappname;. O símbolo comercial é usado para fazer a correspondência, por isso garanta que o símbolo no &kappname; é exatamente igual ao mesmo existente no arquivo que está importando. </para>
+</sect2>
+
+<sect2 id="details.impexp.webconnect">
+<title
+>Conexão à Web</title>
+
+<para
+>A forma mais simples de importar um arquivo OFX é configurar a Conexão à Web. Vá à página Web do seu banco e clique numa ligação para transferir um arquivo OFX. O seu navegador perguntará qual o programa que deseja para abrir o arquivo. Indique o &kappname; ao seu navegador. Ele irá então importar o arquivo OFX indicado para o arquivo do &kappname; que você tenha aberto mais recentemente. Você poderá também alterar as associações de arquivos do seu ambiente de trabalho, de modo a que seja o &kappname; a abrir o arquivo OFX automaticamente. </para>
+
+<para
+>Se você precisar importar o arquivo OFX para outro arquivo qualquer do &kappname;, carregue então esse arquivo no &kappname;, indo depois à página Web do seu banco. </para>
+</sect2>
+
+<sect2 id="details.impexp.ofxdirectconnect">
+<title
+>Conexão Direta</title>
+
+<para
+>A Conexão Direta do OFX agora é suportada pelo &kappname;. Isto lhe fornece a oportunidade de se ligar diretamente ao seu banco para obter os extratos. No futuro, existirá mais ajuda escrita, sendo criada uma seção específica para esta funcionalidade. </para>
+
+<para
+>Para ativar esta funcionalidade, você deverá compilar o &kappname; com a opção '--enable-ofxbanking' (agora ativada por padrão). </para>
+
+<para
+>Por favor, aceite este aviso: Muitos bancos necessitam de um registro separado, o qual lhe atribuirá uma senha ou PIN separado, podendo até cobrar-lhe uma taxa separada por este serviço. Nenhum banco suporta diretamente o &kappname;. Você terá que lhes dizer que deseja fazer a contabilidade no MS Money ou no Quicken. </para>
+
+<para
+>O primeiro passo é configurar cada uma das contas para as quais deseja obter os extratos. Vá à área de Contas, clique com o botão direito na conta que deseja configurar e escolha a opção <guimenuitem
+>Associar a uma Conta Online...</guimenuitem
+>. No caso de possuir mais de um plugin de banco online instalado no seu computador, ser-lhe-á questionado qual deseja usar. Para o método interno por OFX, selecione <guimenuitem
+>OFX do KMyMoney</guimenuitem
+>. Será então obtida uma lista de bancos e um assistente irá guiá-lo na seleção de um banco, na inserção do seu usuário e senha e na seleção da conta. Se concluir que o seu banco não consta, então será possível ainda usar a opção manual. O seu banco poderá ser capaz de oferecer os parâmetros necessários, ou então poderá ter que investigar um pouco para descobri-los. </para>
+
+<note>
+  <para
+>A configuração da Conexão Direta com OFX pode ser um desafio, especialmente porque a implementação da maioria das instituições não fornece detalhes suficientes nas mensagens de erro. Uma questão em particular a ser percebida é que muitas das instituições obrigam o usuário a mudar sua senha na primeira vez que acessar o serviço usando esse método. Infelizmente, a biblioteca usada pelo &kappname; (libofx) ainda não disponibiliza uma maneira de alterar a senha de forma interativa. Em alguns dos casos, é possível conseguir que uma pessoa do suporte técnico da instituição altere a senha para você. Até que possamos ampliar esta seção com mais informações, caso tenha problemas em conseguir configurar esta funcionalidade, poderá pedir ajuda na lista de desenvolvimento do &kappname; em &devlist;. </para>
+</note>
+
+<para
+>Assim que tiver uma conta configurada com o banco 'online', vá ao livro de registro dessa conta. Depois, no menu <guimenu
+>Categoria</guimenu
+>, escolha a opção <guimenuitem
+>Atualizar a conta...</guimenuitem
+>. Isto irá conectá-lo ao seu banco, obtendo um extrato para os últimos 60 dias. </para>
+
+<note>
+  <para
+>Nas versões do &kappname; anteriores a 4.6, o nome do beneficiário era sempre obtido do campo BENEFICIÁRIO. A partir da versão 4.6, o nome do beneficiário pode baseado nos campos BENEFICIÁRIO, NOME ou MEMO da transação OFX. Você pode configurar esta funcionalidade e algumas outras configurações da conexão direta com o OFX selecionando a aba apropriada na janela <link linkend="details.accounts.edit"
+>Editar cona</link
+>. </para>
+</note>
+</sect2>
+
+<sect2>
+<title
+>Exportar um arquivo OFX</title>
+
+<para
+>Não é possível exportar os seus dados como um arquivo OFX atualmente. Se você estiver interessado em contribuir nessa área, contacte por favor a equipe de desenvolvimento da biblioteca libofx para mais detalhes. </para>
+</sect2>
+</sect1>
+&details-impexp-csv; <sect1 id="details.impexp.plugins">
+<title
+>Criar 'Plugins' de Importação</title>
+
+<para
+>O &kappname; contém o suporte explícito para 'plugins' de importação. Se você tiver um formato personalizado, e gostaria de criar um 'plugin' de importação, daremos valor à sua contribuição. Para fazer isso, você terá de compilar o programa a partir do código-fonte. Depois, use o 'plugin' de importação do OFX como exemplo. </para>
+</sect1>
+</chapter>
