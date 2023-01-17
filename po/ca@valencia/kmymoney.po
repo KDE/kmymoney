@@ -3038,7 +3038,7 @@ msgstr "Títol"
 #: kmymoney/dialogs/settings/ksettingscolors.ui:14
 #, kde-format
 msgid "Color settings"
-msgstr "Configuració del color"
+msgstr "Configureu el color"
 
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_useCustomColors)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:20
@@ -3088,7 +3088,7 @@ msgstr "Falta el tipus de canvi"
 #: kmymoney/dialogs/settings/ksettingsicons.ui:14
 #, kde-format
 msgid "Font settings"
-msgstr "Configuració del tipus de lletra"
+msgstr "Configureu el tipus de lletra"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_useSystemFont)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:20
@@ -3480,7 +3480,7 @@ msgstr "Registra les operacions OFX"
 #: kmymoney/dialogs/settings/ksettingshome.ui:14
 #, kde-format
 msgid "Homepage Settings"
-msgstr "Configuració de la pàgina principal"
+msgstr "Configureu la pàgina principal"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_upButton)
 #: kmymoney/dialogs/settings/ksettingshome.ui:40
@@ -3965,7 +3965,7 @@ msgstr "Operacions de banca en línia"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:14
 #, kde-format
 msgid "Register settings"
-msgstr "Configuració del llibre"
+msgstr "Configureu el llibre"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab1)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:24
@@ -4404,7 +4404,7 @@ msgstr "Cap"
 #: kmymoney/dialogs/settings/ksettingsschedules.ui:17
 #, kde-format
 msgid "Schedule Settings"
-msgstr "Configuració de la planificació"
+msgstr "Configureu la planificació"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox6)
 #: kmymoney/dialogs/settings/ksettingsschedules.ui:23
@@ -5645,7 +5645,7 @@ msgstr ""
 #: kmymoney/kmymoney.cpp:4176
 #, kde-format
 msgid "Importing a statement via Web Connect"
-msgstr "Importació d'un extracte via Web Connect"
+msgstr "Importeu un extracte via Web Connect"
 
 #: kmymoney/kmymoney.cpp:4188
 #, kde-format
@@ -5761,7 +5761,7 @@ msgstr "No s'ha pogut guardar l'emmagatzematge."
 #, kde-format
 msgid "Couldn't find suitable plugin to save your storage."
 msgstr ""
-"No s'ha pogut carregar cap connector adequat per a guardar en "
+"No s'ha pogut carregar cap connector adequat per que es guardarà a "
 "l'emmagatzematge."
 
 #: kmymoney/kmymoney.cpp:4553
@@ -5772,7 +5772,7 @@ msgstr "S'està guardant el fitxer com a..."
 #: kmymoney/kmymoney.cpp:4569
 #, kde-format
 msgid "Couldn't find any plugin for saving storage."
-msgstr "No s'ha trobat cap connector per a guardar en l'emmagatzematge."
+msgstr "No s'ha trobat cap connector per que es guardarà a l'emmagatzematge."
 
 #. i18n: ectx: Menu (import)
 #: kmymoney/kmymoneyui.rc:8 kmymoney/plugins/qif/import/kimportdlg.cpp:54
@@ -9084,7 +9084,7 @@ msgstr "Una llista que conté els ID dels xecs ja impresos."
 #: kmymoney/plugins/checkprinting/checkprintingsettingsdecl.ui:20
 #, kde-format
 msgid "Checking settings"
-msgstr "Configuració dels xecs"
+msgstr "Configureu els xecs"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
@@ -10772,7 +10772,7 @@ msgstr "El perfil que s'utilitzarà per a les exportacions QIF."
 #: kmymoney/plugins/csv/import/pluginsettingsdecl.ui:14
 #, kde-format
 msgid "CSV Importer settings"
-msgstr "Configuració de l'importador de CSV"
+msgstr "Configureu l'importador de CSV"
 
 #. i18n: ectx: property (title), widget (QGroupBox, autodetect)
 #: kmymoney/plugins/csv/import/pluginsettingsdecl.ui:20
@@ -11793,7 +11793,7 @@ msgstr "El fitxer iCalendar en el qual s'exportaran les planificacions."
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:26
 #, kde-format
 msgid "Icalendar export settings"
-msgstr "Configuració de l'exportació d'iCalendar"
+msgstr "Configureu l'exportació d'iCalendar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_createAlarm)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:34
@@ -12586,7 +12586,7 @@ msgstr "ERROR %1"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:14
 #, kde-format
 msgid "Online Banking Account Setup"
-msgstr "Configuració del compte de banca en línia"
+msgstr "Configureu el compte de banca en línia"
 
 #. i18n: ectx: property (title), widget (QWizardPage, FIPage)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:18
@@ -13103,7 +13103,7 @@ msgstr "OFX..."
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:162
 #, kde-format
 msgid "OFX import file selection"
-msgstr "Seleccioneu el fitxer d'importació OFX"
+msgstr "Seleccioneu un fitxer d'importació OFX"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:182
 #, kde-format
@@ -15986,7 +15986,7 @@ msgstr[1] "Hi ha hagut alguns problemes amb el fitxer %1"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:102
 #, kde-format
 msgid "Report Configuration"
-msgstr "Configuració de l'informe"
+msgstr "Configureu l'informe"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:109
 #, kde-format
@@ -16161,7 +16161,7 @@ msgstr "Busca les operacions"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:33
 #, kde-format
 msgid "Configure your report"
-msgstr "Configuració de l'informe"
+msgstr "Configureu l'informe"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:311
 #, kde-format
@@ -16706,7 +16706,7 @@ msgstr "Informació dels préstecs"
 #: kmymoney/plugins/views/reports/reportcontrol.ui:54
 #, kde-format
 msgid "Configure this report"
-msgstr "Configuració d'este informe"
+msgstr "Configureu este informe"
 
 #. i18n: ectx: property (text), widget (QToolButton, buttonConfigure)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:57
@@ -16803,7 +16803,7 @@ msgstr "No hi ha cap categoria del pressupost excedida"
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:14
 #, kde-format
 msgid "Report Settings"
-msgstr "Configuració dels informes"
+msgstr "Configureu els informes"
 
 #. i18n: ectx: property (text), widget (QLabel, label_1)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:26
@@ -17614,7 +17614,7 @@ msgstr "Historial"
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:127
 #, kde-format
 msgid "Loading Woob backend..."
-msgstr "S'està carregant el dorsal del Woob..."
+msgstr "S'està carregant el dorsal de Woob..."
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:128
 #, kde-format
@@ -17714,7 +17714,7 @@ msgstr ""
 #: kmymoney/plugins/woob/woob.cpp:119
 #, kde-format
 msgid "Woob configuration"
-msgstr "Configuració del Woob"
+msgstr "Configureu Woob"
 
 #: kmymoney/plugins/woob/woob.cpp:171
 #, kde-format
@@ -17778,7 +17778,7 @@ msgid ""
 "You have configured KMyMoney to save your data secured with GPG. Please "
 "choose the key you want to use for encryption of your data."
 msgstr ""
-"Heu configurat KMyMoney per a guardar les dades assegurades amb GPG. "
+"Heu configurat KMyMoney per que es guardarà les dades assegurades amb GPG. "
 "Seleccioneu la clau que voleu utilitzar per a encriptar les dades."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -17959,7 +17959,7 @@ msgstr "La clau de recuperació caducarà prompte"
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:14
 #, kde-format
 msgid "GPG encryption settings"
-msgstr "Configuració de l'encriptació GPG"
+msgstr "Configureu l'encriptació GPG"
 
 #. i18n: ectx: property (whatsThis), widget (QWidget, XMLStorageSettings)
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:19
@@ -19204,7 +19204,7 @@ msgstr "No s'ha pogut modificar l'operació planificada: «%1»"
 #: kmymoney/views/keditscheduledlg.ui:14
 #, kde-format
 msgid "Edit Scheduled transaction"
-msgstr "Edició d'operacions planificades"
+msgstr "Editeu les operacions planificades"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/views/keditscheduledlg.ui:24
@@ -20275,7 +20275,7 @@ msgstr "Les vostres etiquetes"
 #: kmymoney/views/ktagsview.ui:193
 #, kde-format
 msgid "Tag configuration"
-msgstr "Configuració d'etiquetes"
+msgstr "Configureu les etiquetes"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #: kmymoney/views/ktagsview.ui:246
@@ -20310,7 +20310,7 @@ msgstr "Premeu per a intercanviar les dues operacions."
 #: kmymoney/views/ktransactionselectdlg.ui:14
 #, kde-format
 msgid "Select Transaction"
-msgstr "Selecció d'operació"
+msgstr "Seleccioneu una operació"
 
 #: kmymoney/views/kwelcomepage.cpp:55
 #, kde-format
@@ -23273,7 +23273,7 @@ msgstr "El primer pagament venç el"
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:71
 #, kde-format
 msgid "KMyMoney New Account Setup"
-msgstr "Configuració d'un compte nou de KMyMoney"
+msgstr "Configureu un compte nou de KMyMoney"
 
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:74
 #, kde-format
