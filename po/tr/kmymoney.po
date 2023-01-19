@@ -3,13 +3,13 @@
 # Serdar Soytetir <tulliana@gmail.com>, 2007, 2008, 2009, 2012, 2013.
 # Volkan Gezer <volkangezer@gmail.com>, 2013, 2014, 2015, 2017, 2021.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-16 00:57+0000\n"
-"PO-Revision-Date: 2022-12-17 18:55+0300\n"
+"PO-Revision-Date: 2023-01-18 22:41+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -987,7 +987,7 @@ msgstr "&Değişiklikleri iptal et ve asıl aktarımı kayda ekle."
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:77
 #, kde-format
 msgid "Enter &these new values this one time, for this occurrence only."
-msgstr "Sadece bu olay için &bir kez bu yeni değerleri girin."
+msgstr "Yalnızca bu olay için &bir kez bu yeni değerleri girin."
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_setRadio)
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:90
@@ -1485,7 +1485,7 @@ msgid ""
 "and 1.5 -&gt; 2.0</p></body></html>"
 msgstr ""
 "<html><head/><body><p><span style=\" font-weight:600;\">RoundNever</span></"
-"p><p>Yuvarlama yapmayın, sadece kısalt ve bir kalan durumunda uyarı yap. "
+"p><p>Yuvarlama yapmayın, yalnızca kısalt ve bir kalan durumunda uyarı yap. "
 "Aksi takdirde RoundTrunc ile aynıdır.</p><p><span style=\" font-weight:600;"
 "\">RoundFloor</span></p><p>Değerden büyük olmayan en büyük integral değerine "
 "yuvarlayın. Örneğin. 0,5 -gt; 0.0 ve -0.5 -gt; -1.0</p><p><span style=\" "
@@ -3216,7 +3216,7 @@ msgstr "Kapatılırken değiştirilmiş dosyayı otomatik kayıt etme"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:98
 #, kde-format
 msgid "Setup number of backups to keep (local file only)"
-msgstr "Saklanacak yedeğin sayısı (yerel dosyalar sadece)"
+msgstr "Saklanacak yedeğin sayısı (yerel dosyalar yalnızca)"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_AutoBackupCopies)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:103
@@ -5608,13 +5608,13 @@ msgid ""
 "The current implementation of the backup functionality only supports local "
 "files as source files. Your current source file is '%1'."
 msgstr ""
-"Yedekleme işlevinin mevcut uygulaması kaynak dosya olarak sadece yerel "
+"Yedekleme işlevinin mevcut uygulaması kaynak dosya olarak yalnızca yerel "
 "dosyaları destekler. Sizin mevcut kaynak dosyanız '%1'."
 
 #: kmymoney/kmymoney.cpp:3527
 #, kde-format
 msgid "Local files only"
-msgstr "Sadece yerel dosyalar"
+msgstr "Yalnızca yerel dosyalar"
 
 #: kmymoney/kmymoney.cpp:3566
 #, kde-format
@@ -6674,7 +6674,7 @@ msgstr "  * Bu hesap ve '%1' hesabı arasında döngü alıgılandı."
 #: kmymoney/mymoney/mymoneyfile.cpp:2338
 #, kde-format
 msgid "    Reparenting account '%2' to top level account '%1'."
-msgstr "    '%2' hesabını yüksek seviye '%1' hesabına ata."
+msgstr "    '%2' hesabını yüksek düzey '%1' hesabına ata."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2370
 #, kde-format
@@ -6684,7 +6684,7 @@ msgstr "  * '%1' ana hesabı farklı bir gruba aittir."
 #: kmymoney/mymoney/mymoneyfile.cpp:2371 kmymoney/mymoney/mymoneyfile.cpp:2401
 #, kde-format
 msgid "    New parent account is the top level account '%1'."
-msgstr "    Yeni ana hesap, '%1' yüksek seviye hesaptır."
+msgstr "    Yeni ana hesap, '%1' yüksek düzey hesaptır."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2387
 #, kde-format
@@ -10740,7 +10740,7 @@ msgid ""
 "Only useful if a profile has already been setup."
 msgstr ""
 "Profil kurulumunu atlamak için seç.\n"
-"Sadece önceden profil kurulumu yapılmışsa bu özellikle yararlıdır."
+"Yalnızca önceden profil kurulumu yapılmışsa bu özellikle yararlıdır."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_skipSetup)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:187
@@ -11755,7 +11755,7 @@ msgstr "Program %1 bilinmeyen eylem içeriyor (anahtar = %2, tür = %3)"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2007
 #, kde-format
 msgid "Schedule %1 contains multiple actions; only one has been imported"
-msgstr "Program %1 çoklu eylem içeriyor; sadece bir tanesi içe aktarıldı"
+msgstr "Program %1 çoklu eylem içeriyor; yalnızca bir tanesi içe aktarıldı"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2013
 #, kde-format
@@ -14636,7 +14636,7 @@ msgstr "Veritabanı Detayları"
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:67
 #, kde-format
 msgid "Database File (SQLite only)"
-msgstr "Veritabanı Dosyası (Sadece SQLite)"
+msgstr "Veritabanı Dosyası (Yalnızca SQLite)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:77
@@ -14825,7 +14825,7 @@ msgstr "Geçerli veritabanına kaydedilemedi: %1"
 #, fuzzy, kde-format
 #| msgid "Database File (SQLite only)"
 msgid "Database files (*.db *.sql)"
-msgstr "Veritabanı Dosyası (Sadece SQLite)"
+msgstr "Veritabanı Dosyası (Yalnızca SQLite)"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:265
 #, kde-format
@@ -15365,7 +15365,7 @@ msgstr "Çizelge Ayrıntıları:"
 #: kmymoney/plugins/views/forecast/kforecastview.ui:160
 #, kde-format
 msgid "<p>Choose what level of detail to show on the chart.</p>"
-msgstr "<p>Grafikte gösterilmesini istediğiniz ayrıntı seviyesini seçin.</p>"
+msgstr "<p>Grafikte gösterilmesini istediğiniz ayrıntı düzeyini seçin.</p>"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:167
@@ -15380,7 +15380,7 @@ msgstr "Tümü"
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:153
 #, kde-format
 msgid "Top-Level"
-msgstr "Üst Seviye"
+msgstr "Üst Düzey"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:177
@@ -16465,13 +16465,13 @@ msgstr "Yıllık"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:649
 #, kde-format
 msgid "Only owned"
-msgstr "Sadece sahibi"
+msgstr "Yalnızca sahibi"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:638
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:650
 #, kde-format
 msgid "Only sold"
-msgstr "Sadece sat"
+msgstr "Yalnızca sat"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:647
 #, kde-format
@@ -17489,11 +17489,11 @@ msgstr ""
 "\n"
 "              <p>\n"
 "              Bu seçenek yatırım raporları içindir\n"
-"              diğer raporların hepsinin yaptığı gibi bakiyeler yerine sadece "
-"fiyatları gösterir.\n"
+"              diğer raporların hepsinin yaptığı gibi bakiyeler yerine "
+"yalnızca fiyatları gösterir.\n"
 "              </p>\n"
 "              <p>\n"
-"              Eğer o tarih için güncel fiyat varsa, sadece o fiyatları "
+"              Eğer o tarih için güncel fiyat varsa, yalnızca o fiyatları "
 "eklemek için bu seçeneği seç.\n"
 "              Eğer yoksa 0 gösterilecektir. Grafikte bu değer atlanacaktır.\n"
 "              </p>\n"
@@ -17875,7 +17875,7 @@ msgstr "<p>Aktif bakiye sütununu göstermek için bu seçeneği seçin</p>"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:346
 #, kde-format
 msgid "Include only Loan accounts"
-msgstr "Sadece Kredi hesaplarını içer"
+msgstr "Yalnızca Kredi hesaplarını içer"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkInvestments)
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkTax)
@@ -17886,14 +17886,14 @@ msgid ""
 "<p>Check this box to include only those categories which have been marked to "
 "\"Include on Tax Reports\"</p>"
 msgstr ""
-"<p>Sadece \"Vergi raporlarına Ekle \" olarak işaretlenmiş kategori eklemek "
+"<p>Yalnızca \"Vergi raporlarına Ekle \" olarak işaretlenmiş kategori eklemek "
 "için bu kutuyu işaretle</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:356
 #, kde-format
 msgid "Include only Investment accounts"
-msgstr "Sadece Yatırım hesaplarını içer"
+msgstr "Yalnızca Yatırım hesaplarını içer"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkHideSplitDetails)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:363
@@ -17912,7 +17912,7 @@ msgstr "Ayrılmış Aktarım Ayrıntılarını Gizle"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:376
 #, kde-format
 msgid "Include only Tax categories"
-msgstr "Sadece Vergi sınıflarını içer"
+msgstr "Yalnızca Vergi sınıflarını içer"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkHideTransactions)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:383
@@ -18393,7 +18393,7 @@ msgid ""
 "the contents of your data before we will send it out."
 msgstr ""
 "Verileri şifrelemek için KMyMoney kurtarma anahtarını da belirtebilirsin. "
-"Sadece KMyMoney iç geliştiricileri şifrelenmiş verilerin geri okunabilmesi "
+"Yalnızca KMyMoney iç geliştiricileri şifrelenmiş verilerin geri okunabilmesi "
 "için gerekli özel anahtarı bulundurmaktadır.<p>\n"
 "\n"
 "Bu işleyiş anahtarınızı kaybettiğiniz ve verilerinize artık erişemediğiniz "
@@ -18551,7 +18551,7 @@ msgid ""
 "Match strings in auto-completion only from the first letter on. A substring "
 "behind the first letter is not found."
 msgstr ""
-"Sadece ilk harf girildiğinde otomatik tamamlama ile karakter dizilerini "
+"Yalnızca ilk harf girildiğinde otomatik tamamlama ile karakter dizilerini "
 "eşleştir. İlk harfin ait olduğu bir dizi bulunamadı."
 
 #. i18n: ectx: label, entry (stdTransactionFormTabOrder), group (General Options)
@@ -18918,7 +18918,7 @@ msgstr ""
 msgid ""
 "<p>Invalid top-level account type <b>%1</b> in template file <b>%2</b></p>"
 msgstr ""
-"<p><b>%2</b> şablon dosyasında geçersiz üst seviye hesap türü<b>%1</b></p>"
+"<p><b>%2</b> şablon dosyasında geçersiz üst düzey hesap türü<b>%1</b></p>"
 
 #: kmymoney/templates/templatewriter.cpp:178
 #, fuzzy, kde-format
@@ -19459,7 +19459,7 @@ msgid ""
 "only the category itself? If you only delete the category itself, all its "
 "sub-categories will be made sub-categories of <b>%2</b>.</qt>"
 msgstr ""
-"Tüm alt kategorileriyle kategori <b>%1</b> i mi yoksa sadece kendisini mi "
+"Tüm alt kategorileriyle kategori <b>%1</b> i mi yoksa yalnızca kendisini mi "
 "silmek istersiniz? Kategorinin kendisini silerseniz, tüm alt kategoriler <b>"
 "%2</b> nin alt kategorileri yapılacaktır."
 
@@ -19471,7 +19471,7 @@ msgstr "Tümünü sil"
 #: kmymoney/views/kcategoriesview.cpp:357
 #, kde-format
 msgid "Just the category"
-msgstr "Sadece kategori"
+msgstr "Yalnızca kategori"
 
 #: kmymoney/views/kcategoriesview.cpp:386
 #, kde-format
@@ -19652,7 +19652,7 @@ msgid ""
 "dialog)</p>"
 msgstr ""
 "<p>Aşağıdaki pencerede doğru olan bütün detayları seçin ve Tamam düğmesine "
-"basın.</p><p>Düzenlenebilir veriler değiştirilebilir ve sadece bu olaya ya "
+"basın.</p><p>Düzenlenebilir veriler değiştirilebilir ve yalnızca bu olaya ya "
 "da bu programdaki bütün sonraki olaylara uygulanabilir. (Aşağıdaki pencerede "
 "Tamam düğmesine bastıktan sonra neleri seçeceğiniz size sorulacaktır)</p>"
 
@@ -19728,7 +19728,7 @@ msgid ""
 "the welcome page instead."
 msgstr ""
 "KMyMoney size mali durumunuzla ilgili ayrıntılı bilgi vermeden önce en "
-"azından bir hesap oluşturmanız gerekir. O zamana kadar KMyMoney sadece "
+"azından bir hesap oluşturmanız gerekir. O zamana kadar KMyMoney yalnızca "
 "karşılama sayfasını gösterecektir."
 
 #: kmymoney/views/khomeview_p.h:453
@@ -22994,7 +22994,7 @@ msgid ""
 "Since prior transactions will not be recorded, you need to supply the "
 "balance of the loan on January 1st of this year."
 msgstr ""
-"Sadece bu yılın başlangıcından beri yapılan ödemeleri girmeyi tercih "
+"Yalnızca bu yılın başlangıcından beri yapılan ödemeleri girmeyi tercih "
 "ettiniz. Önceki işlemler kaydedilmeyeceğinden bu yılın 1 Ocak tarihindeki "
 "bakiyeyi girmeniz gerekmektedir."
 
@@ -23202,7 +23202,7 @@ msgstr ""
 "Daha fazla bilgi için http://en.wikipedia.org/wiki/"
 "International_Bank_Account_Number adresine de bakınız.\n"
 "\n"
-"KMyMoney bu alanı sadece belge işlem amaçlı saklar, aksi durumlarda "
+"KMyMoney bu alanı yalnızca belge işlem amaçlı saklar, aksi durumlarda "
 "kullanmaz."
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:101
@@ -23621,8 +23621,8 @@ msgstr ""
 "zamanı size hatırlatacaktır. Lütfen ödemelerin yapılacağı hesabı ve faizin "
 "atanacağı kategoriyi seçin.<p>\n"
 "Eğer tüm ödemelerin kaydedilmesini seçmişseniz bu tarih saptanmıştır. Eğer "
-"sadece bu yılın ödemelerinin kaydedilmesini seçmişseniz <b>İlk ödeme vadesi</"
-"b> bu yıl yapılacak ilk ödemenin tarihidir."
+"yalnızca bu yılın ödemelerinin kaydedilmesini seçmişseniz <b>İlk ödeme "
+"vadesi</b> bu yıl yapılacak ilk ödemenin tarihidir."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, InterestCategoryWizardPage)
 #. i18n: ectx: property (text), widget (QLabel, textLabel7)
@@ -24872,7 +24872,7 @@ msgstr "Evet, tüm ödemeleri kaydet."
 #, kde-format
 msgid "No, only record payments since the beginning of this year."
 msgstr ""
-"Hayır, sadece bu yılın başlangıcından bu yana yapılan ödemeleri kaydet."
+"Hayır, yalnızca bu yılın başlangıcından bu yana yapılan ödemeleri kaydet."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel22_2)
 #: kmymoney/wizards/newloanwizard/schedulewizardpage.ui:19
@@ -24887,7 +24887,7 @@ msgstr ""
 "KMyMoney bu ödeme için bir program oluşturacak ve ödemelerin ne zaman "
 "yapılması gerektiğini hatırlatacaktır.<p>\n"
 "Eğer tüm ödemeleri kaydet seçeneğini işaretlediyseniz bugün zaten "
-"belirlenmiştir. Sadece bu yılın ödemelerini kaydetmeyi seçmişseniz <b>İlk "
+"belirlenmiştir. Yalnızca bu yılın ödemelerini kaydetmeyi seçmişseniz <b>İlk "
 "ödeme zamanı</b> bu yıl ilk ödemenin yapılacağı tarih olacaktır."
 
 #. i18n: ectx: property (text), widget (QLabel, m_dueLabel)
@@ -25227,8 +25227,9 @@ msgid ""
 msgstr ""
 "Lütfen kendi hakkınızda bazı bilgileri girin.<br><br>\n"
 "\n"
-"Bu bilgiler sadece sizin tarafınızdan görülebilecek ve kullanılabilecektir. "
-"Tüm bilgiler isteğe bağlıdır ve KMyMoney dosyanızı kişiselleştimeye yarar."
+"Bu bilgiler yalnızca sizin tarafınızdan görülebilecek ve "
+"kullanılabilecektir. Tüm bilgiler isteğe bağlıdır ve KMyMoney dosyanızı "
+"kişiselleştimeye yarar."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel7)
 #: kmymoney/wizards/newuserwizard/kgeneralpage.ui:104
@@ -25266,7 +25267,7 @@ msgstr ""
 "bazı bilgiler alması gerekiyor.<p>\n"
 "\n"
 "Sonraki birkaç sayfada uygulamayı yapılandırmanız için size yol "
-"gösterilecek. Bu sihirbaz sadece bir kez çalıştırılır."
+"gösterilecek. Bu sihirbaz yalnızca bir kez çalıştırılır."
 
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:54
 #, kde-format
