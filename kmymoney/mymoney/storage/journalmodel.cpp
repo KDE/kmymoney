@@ -1286,7 +1286,13 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
         // the journal entry and the m_idToItemMapper to use
         // the new date, though.
         if ((destRow != srcIdx.row()) && (destRow != (srcIdx.row() + newSplitCount))) {
-            beginMoveRows(QModelIndex(), srcIdx.row(), srcIdx.row() + newSplitCount - 1, QModelIndex(), destRow);
+            // Moving rows using moveRows() in a source model which is used by
+            // a QConcatenateTablesProxyModel does not get propagated through
+            // it which destructs the information.
+            //
+            // A workaround is to remove and insert the item(s) which is supported
+            // by the QConcatenateTablesProxyModel.
+            beginRemoveRows(QModelIndex(), srcIdx.row(), srcIdx.row() + newSplitCount - 1);
 
             d->removeIdKeyMapping(oldTransaction.id());
 
@@ -1304,10 +1310,15 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
                 journalEntry->dataRef().m_linesInLedger = 0;
                 entries.append(journalEntry);
             }
+
+            endRemoveRows();
+
             // check if the destination row must be adjusted
             // since we removed the splits already
             if (srcIdx.row() < destRow)
                 destRow -= newSplitCount;
+
+            beginInsertRows(QModelIndex(), destRow, destRow + newSplitCount - 1);
 
             // insert the items at the new location
             m_rootItem->insertChildren(destRow, entries);
@@ -1318,23 +1329,17 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
                 for (row = destRow; row <= lastRow; ++row) {
                     const auto idx = index(row, 0);
                     m_idToItemMapper->insert(idx.data(eMyMoney::Model::IdRole).toString(), static_cast<TreeItem<JournalEntry>*>(idx.internalPointer()));
+                    // moveing the transaction in the ledger may have an impact on
+                    // the total balance if the transaction is e.g. moved around a
+                    // stock split. we simply force a recalc of balances in this
+                    // account.
+                    d->fullBalanceRecalc.insert(static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->dataRef().split().accountId());
                 }
             }
 
             d->addIdKeyMapping(oldTransaction.id(), newKey);
 
-            endMoveRows();
-
-            int firstRow, lastRow;
-            if (srcRow < destRow) {
-                firstRow = srcRow;
-                lastRow = destRow + newSplitCount - 1;
-            } else {
-                firstRow = destRow;
-                lastRow = srcRow + newSplitCount - 1;
-            }
-
-            Q_EMIT dataChanged(index(firstRow, 0), index(lastRow, columnCount()-1));
+            endInsertRows();
 
             // update the index of the transaction
             srcIdx = index(destRow, 0);
