@@ -24200,11 +24200,3 @@ msgstr ""
 "\n"
 "<p>Veškeré informace jsou volitelně a používají se pouze pro zosobnění "
 "vašeho KMyMoney.</p>"
-
-#~ msgctxt "Activity for income categories"
-#~ msgid "Received"
-#~ msgstr "Přijato"
-
-#~ msgctxt "Activity for expense categories"
-#~ msgid "Paid"
-#~ msgstr "Placeno"
