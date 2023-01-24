@@ -1167,6 +1167,7 @@ void JournalModel::doAddItem(const JournalEntry& item, const QModelIndex& parent
     // add the splits to the balance cache
     d->addTransactionToBalance(startIdx.row(), rows);
 
+    doUpdateReferencedObjects();
     Q_EMIT dataChanged(startIdx, endIdx);
 
     d->finishBalanceCacheOperation();
@@ -1196,6 +1197,7 @@ void JournalModel::doRemoveItem(const JournalEntry& before)
     d->removeIdKeyMapping(transaction.id());
 
     d->finishBalanceCacheOperation();
+    doUpdateReferencedObjects();
     setDirty();
 }
 
@@ -1381,6 +1383,7 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
     d->addTransactionToBalance(srcIdx.row(), newTransaction.splitCount());
 
     d->finishBalanceCacheOperation();
+    doUpdateReferencedObjects();
 
     if (oldKey != newKey) {
         Q_EMIT idChanged(newKey, oldKey);

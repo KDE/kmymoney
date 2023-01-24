@@ -82,13 +82,14 @@ bool ItemRenameProxyModel::filterAcceptsRow(int source_row, const QModelIndex& s
         const auto itemId = idx.data(eMyMoney::Model::IdRole).toString();
         if (!itemId.isEmpty()) {
             QVariant rc;
+            const auto objectList = MyMoneyFile::instance()->referencedObjects();
             switch(m_referenceFilter) {
             case eReferencedItems:
-                if (!MyMoneyFile::instance()->referencedObjects().contains(itemId))
+                if (!objectList.contains(itemId))
                     return false;
                 break;
             case eUnReferencedItems:
-                if (MyMoneyFile::instance()->referencedObjects().contains(itemId))
+                if (objectList.contains(itemId))
                     return false;
                 break;
             case eOpenedItems:
