@@ -31,6 +31,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KDescendantsProxyModel>
 #include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
@@ -151,7 +152,8 @@ public:
         , specialDatesModel(qq, &undoStack)
         , schedulesJournalModel(qq, &undoStack)
         , statusModel(qq)
-          /// @note add new models here
+        /// @note add new models here
+        , flatAccountsModel(qq)
     {
 #ifdef KMM_MODELTEST
         new QAbstractItemModelTester(&payeesModel, QAbstractItemModelTester::FailureReportingMode::Warning);
@@ -173,6 +175,8 @@ public:
         new QAbstractItemModelTester(&schedulesJournalModel, QAbstractItemModelTester::FailureReportingMode::Warning);
         /// @note add new models here
 #endif
+        flatAccountsModel.setSourceModel(&accountsModel);
+
         qq->connect(qq, &MyMoneyFile::modelsReadyToUse, &journalModel, &JournalModel::updateBalances);
         qq->connect(qq, &MyMoneyFile::modelsReadyToUse, qq, &MyMoneyFile::finalizeFileOpen);
         qq->connect(&journalModel, &JournalModel::balancesChanged, &accountsModel, &AccountsModel::updateAccountBalances);
@@ -365,6 +369,11 @@ public:
     StatusModel         statusModel;
     ReconciliationModel reconciliationModel;
     /// @note add new models here
+
+    /**
+     * Special proxy models
+     */
+    KDescendantsProxyModel flatAccountsModel;
 };
 
 
@@ -1693,6 +1702,11 @@ BudgetsModel* MyMoneyFile::budgetsModel() const
 AccountsModel* MyMoneyFile::accountsModel() const
 {
     return &d->accountsModel;
+}
+
+KDescendantsProxyModel* MyMoneyFile::flatAccountsModel() const
+{
+    return &d->flatAccountsModel;
 }
 
 InstitutionsModel* MyMoneyFile::institutionsModel() const

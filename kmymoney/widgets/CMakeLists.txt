@@ -62,6 +62,7 @@ set(kmm_base_widgets_SOURCES
   popuppositioner.cpp
   styleditemdelegateforwarder.cpp
   kmymoneytreeview.cpp
+  transactionsortoption.cpp
   widgethintframe.cpp
   )
 
@@ -74,7 +75,6 @@ set(kmm_widgets_SOURCES
   ktransactionfilter.cpp
   ktreewidgetfilterlinewidget.cpp
   onlinejobmessagesview.cpp
-  transactionsortoption.cpp
   )
 
 set(nationalAccountWidget_SOURCES
@@ -116,6 +116,7 @@ ki18n_wrap_ui(kmm_base_widgets_SOURCES
   kmymoneyvalidationfeedback.ui
   ./payeeidentifier/nationalaccount/nationalaccountedit.ui
   ./payeeidentifier/ibanbic/ibanbicitemedit.ui
+  transactionsortoption.ui
 )
 
 
@@ -124,7 +125,6 @@ ki18n_wrap_ui(kmm_widgets_SOURCES
   onlinejobmessagesview.ui
   daterangedlg.ui
   ktransactionfilter.ui
-  transactionsortoption.ui
 )
 
 add_library(kmm_base_widgets ${kmm_base_widgets_SOURCES})
@@ -146,7 +146,6 @@ set_target_properties(kmm_base_widgets PROPERTIES
 )
 
 generate_export_header(kmm_base_widgets BASE_NAME kmm_base_widgets)
-
 
 
 

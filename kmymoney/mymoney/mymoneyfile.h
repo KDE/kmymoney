@@ -158,6 +158,7 @@ class ReconciliationModel;
 class SpecialDatesModel;
 class SchedulesJournalModel;
 class StatusModel;
+class KDescendantsProxyModel;
 /// @note add new models here
 
 namespace eMyMoney {
@@ -934,6 +935,11 @@ public:
      * The accounts model instance
      */
     AccountsModel* accountsModel() const;
+
+    /**
+     * The accountsModel as a flat model
+     */
+    KDescendantsProxyModel* flatAccountsModel() const;
 
     /**
      * The institutions model instance

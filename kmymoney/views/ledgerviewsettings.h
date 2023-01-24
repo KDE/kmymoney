@@ -18,12 +18,24 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ledgersortorder.h"
+#include "mymoneyenums.h"
+#include "widgetenums.h"
+
 class LedgerViewSettingsPrivate;
 class LedgerViewSettings : public QObject
 {
     Q_OBJECT
 
 public:
+    typedef enum {
+        SortOrderStd,
+        SortOrderSearch,
+        SortOrderInvest = SortOrderStd, // in future use separate sort order
+        SortOrderReconcileStd,
+        SortOrderReconcileInvest,
+    } SortOrderType;
+
     static LedgerViewSettings* instance();
     ~LedgerViewSettings();
 
@@ -32,6 +44,8 @@ public:
     bool showAllSplits() const;
     bool hideReconciledTransactions() const;
     QDate hideTransactionsBefore() const;
+    LedgerSortOrder sortOrder(SortOrderType type) const;
+    void flushChanges();
 
 public Q_SLOTS:
     void setShowLedgerLens(bool show);
@@ -53,6 +67,8 @@ public Q_SLOTS:
      * filter out any reconciled transaction.
      */
     void setHideReconciledTransactions(bool hide);
+
+    void setSortOrder(SortOrderType type, const QString& sortOrder);
 
 Q_SIGNALS:
     void settingsChanged();

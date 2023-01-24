@@ -9,12 +9,16 @@
 // QT Includes
 
 #include <QDate>
+#include <QHash>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "journalmodel.h"
 
 class LedgerViewSettingsPrivate
 {
@@ -25,9 +29,18 @@ public:
         , m_showAllSplits(false)
         , m_hideReconciledTransactions(false)
     {
+        m_settingsChangedTimer.setSingleShot(true);
+        m_settingsChangedTimer.setInterval(20);
+    }
+
+    void settingsChanged()
+    {
+        m_settingsChangedTimer.start();
     }
 
     QDate m_hideTransactionsBefore;
+    QHash<LedgerViewSettings::SortOrderType, LedgerSortOrder> m_sortOrder;
+    QTimer m_settingsChangedTimer;
     bool m_showLedgerLens;
     bool m_showTransactionDetails;
     bool m_showAllSplits;
@@ -48,6 +61,9 @@ LedgerViewSettings::LedgerViewSettings()
     : QObject(nullptr)
     , d(new LedgerViewSettingsPrivate)
 {
+    connect(&d->m_settingsChangedTimer, &QTimer::timeout, this, [&]() {
+        Q_EMIT settingsChanged();
+    });
 }
 
 LedgerViewSettings::~LedgerViewSettings()
@@ -64,7 +80,7 @@ void LedgerViewSettings::setShowLedgerLens(bool show)
 {
     if (d->m_showLedgerLens != show) {
         d->m_showLedgerLens = show;
-        Q_EMIT settingsChanged();
+        d->settingsChanged();
     }
 }
 
@@ -77,7 +93,7 @@ void LedgerViewSettings::setShowTransactionDetails(bool show)
 {
     if (d->m_showTransactionDetails != show) {
         d->m_showTransactionDetails = show;
-        Q_EMIT settingsChanged();
+        d->settingsChanged();
     }
 }
 
@@ -90,7 +106,7 @@ void LedgerViewSettings::setShowAllSplits(bool show)
 {
     if (d->m_showAllSplits != show) {
         d->m_showAllSplits = show;
-        Q_EMIT settingsChanged();
+        d->settingsChanged();
     }
 }
 
@@ -103,7 +119,7 @@ void LedgerViewSettings::setHideReconciledTransactions(bool hide)
 {
     if (d->m_hideReconciledTransactions != hide) {
         d->m_hideReconciledTransactions = hide;
-        Q_EMIT settingsChanged();
+        d->settingsChanged();
     }
 }
 
@@ -116,6 +132,29 @@ void LedgerViewSettings::setHideTransactionsBefore(const QDate& date)
 {
     if (d->m_hideTransactionsBefore != date) {
         d->m_hideTransactionsBefore = date;
+        d->settingsChanged();
+    }
+}
+
+LedgerSortOrder LedgerViewSettings::sortOrder(SortOrderType type) const
+{
+    return d->m_sortOrder.value(type, LedgerSortOrder());
+}
+
+void LedgerViewSettings::setSortOrder(LedgerViewSettings::SortOrderType type, const QString& sortOrder)
+{
+    LedgerSortOrder sortOrderItemList;
+    sortOrderItemList.setSortOrder(sortOrder);
+    if (d->m_sortOrder[type] != sortOrderItemList) {
+        d->m_sortOrder[type] = sortOrderItemList;
+        d->settingsChanged();
+    }
+}
+
+void LedgerViewSettings::flushChanges()
+{
+    if (d->m_settingsChangedTimer.isActive()) {
+        d->m_settingsChangedTimer.stop();
         Q_EMIT settingsChanged();
     }
 }

@@ -450,6 +450,9 @@ QVariant JournalModelNewTransaction::data(const QModelIndex& idx, int role) cons
 {
     Q_UNUSED(idx)
     Q_UNUSED(role)
+    if (role == eMyMoney::Model::DelegateRole) {
+        return static_cast<int>(eMyMoney::Delegates::Types::JournalDelegate);
+    }
     // never show any data for the empty transaction
     return {};
 }
@@ -688,9 +691,6 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::JournalSplitIdRole:
         return split.id();
 
-    case eMyMoney::Model::JournalSplitNumberRole:
-        return split.number();
-
     case eMyMoney::Model::JournalSplitAccountIdRole:
         return split.accountId();
 
@@ -892,6 +892,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         return d->formatShares(split);
 
     case eMyMoney::Model::SplitNumberRole:
+    case eMyMoney::Model::JournalSplitNumberRole:
         return split.number();
 
     case eMyMoney::Model::SplitActivityRole:
@@ -962,6 +963,16 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         }
         return QVariant::fromValue(MyMoneyMoney());
     }
+
+    case eMyMoney::Model::JournalSplitSecurityNameRole:
+        return d->security(journalEntry).name();
+
+    case eMyMoney::Model::DelegateRole:
+        return static_cast<int>(eMyMoney::Delegates::Types::JournalDelegate);
+
+    case eMyMoney::Model::OnlineBalanceEntryRole:
+    case eMyMoney::Model::SecurityAccountNameEntryRole:
+        return false;
 
     default:
         if (role >= Qt::UserRole)

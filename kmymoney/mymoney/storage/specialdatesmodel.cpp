@@ -137,6 +137,9 @@ QVariant SpecialDatesModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::TransactionPostDateRole:
         return dateEntry.date();
 
+    case eMyMoney::Model::DelegateRole:
+        return static_cast<int>(eMyMoney::Delegates::Types::SpecialDateDelegate);
+
     default:
         break;
     }

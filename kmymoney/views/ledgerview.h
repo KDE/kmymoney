@@ -18,6 +18,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ledgerviewsettings.h"
 #include "mymoneyenums.h"
 
 class MyMoneyAccount;
@@ -83,6 +84,8 @@ public:
      * acts as a nop.
      */
     void showEditor();
+
+    void setSortOrder(LedgerSortOrder sortOrder);
 
 public Q_SLOTS:
     /**
@@ -178,6 +181,9 @@ Q_SIGNALS:
     void sectionMoved(QWidget* view, int section, int oldIndex, int newIndex) const;
     void requestView(QWidget* viewWidget, const QString& accountId, const QString& journalEntryId);
     void settingsChanged();
+    void sortOrderChanged(QList<int> sortOrder);
+
+    void modifySortOrder();
 
 protected:
     class Private;

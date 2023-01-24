@@ -7,7 +7,7 @@
 #ifndef TRANSACTIONSORTOPTIONIMPL_H
 #define TRANSACTIONSORTOPTIONIMPL_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -29,7 +29,7 @@ enum class SortField;
 
 class QListWidget;
 class QListWidgetItem;
-class KMM_WIDGETS_EXPORT TransactionSortOption : public QWidget
+class KMM_BASE_WIDGETS_EXPORT TransactionSortOption : public QWidget
 {
     Q_OBJECT
     Q_DISABLE_COPY(TransactionSortOption)

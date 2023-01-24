@@ -52,14 +52,52 @@ public:
         updateDelayTimer.setInterval(20);
     }
 
+    bool isSortingByDateFirst() const
+    {
+        if (sourceModel) {
+            const auto sourceLedgerSortOrder = sourceModel->ledgerSortOrder();
+            if (!sourceLedgerSortOrder.isEmpty()) {
+                const auto role = sourceLedgerSortOrder.at(0).sortRole;
+                return ((role == eMyMoney::Model::TransactionPostDateRole) || (role == eMyMoney::Model::TransactionEntryDateRole));
+            }
+        }
+        return false;
+    }
+    /**
+     * Returns true if the main sort key is a date (post or entry)
+     * or second and the main sort key is security
+     */
     bool isSortingByDate() const
     {
         if (sourceModel) {
-            const auto role = sourceModel->sortRole();
-            return (role == eMyMoney::Model::TransactionPostDateRole) || (role == eMyMoney::Model::TransactionEntryDateRole);
+            const auto sourceLedgerSortOrder = sourceModel->ledgerSortOrder();
+            const int maxIndex = qMin(sourceLedgerSortOrder.count(), 2);
+            for (int i = 0; i < maxIndex; ++i) {
+                const auto role = sourceLedgerSortOrder.at(i).sortRole;
+                if ((role == eMyMoney::Model::TransactionPostDateRole) || (role == eMyMoney::Model::TransactionEntryDateRole)) {
+                    return true;
+                }
+                // if the first one is security then
+                // check next sorting parameter too
+                if ((i == 0) && (role == eMyMoney::Model::JournalSplitSecurityNameRole)) {
+                    continue;
+                }
+                break;
+            }
         }
         return false;
     };
+
+    bool isSortingBySecurity() const
+    {
+        if (sourceModel) {
+            const auto sourceLedgerSortOrder = sourceModel->ledgerSortOrder();
+            if (!sourceLedgerSortOrder.isEmpty()) {
+                return (sourceLedgerSortOrder.at(0).sortRole == eMyMoney::Model::JournalSplitSecurityNameRole);
+            }
+        }
+        return false;
+    }
 
     bool showBalance() const
     {
@@ -81,7 +119,8 @@ public:
     {
         BalanceParameter parameter;
         // we only display balances when sorted by a date field
-        if ((sourceModel->sortRole() == eMyMoney::Model::TransactionEntryDateRole) || (sourceModel->sortRole() == eMyMoney::Model::TransactionPostDateRole)) {
+        const auto order = sourceModel->ledgerSortOrder();
+        if (isSortingByDate()) {
             const auto rows = q->rowCount();
             if (rows > 0) {
                 parameter.sortOrder = sourceModel->sortOrder();
@@ -114,9 +153,9 @@ public:
             const bool isInvestmentAccount = (account.accountType() == eMyMoney::Account::Type::Investment) || account.isInvest();
 
             QDate startDate = idx.data(eMyMoney::Model::TransactionPostDateRole).toDate();
-            if (sourceModel->sortRole() == eMyMoney::Model::TransactionEntryDateRole) {
-                // if sorted by entry date, we need to find the balance of the oldest
-                // transaction shown. This may not be the date of the first transaction entered
+            if (isSortingByDate()) {
+                // if sorted by entry date or by security, we need to find the balance of the oldest
+                // transaction in the set. This may not be the date of the first transaction displayed
                 for (int row = parameter.firstRow; (row >= parameter.startRow) && (row <= parameter.lastRow); ++row) {
                     idx = q->index(qAbs(row), 0);
                     if (!idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
@@ -192,10 +231,10 @@ SpecialLedgerItemFilter::SpecialLedgerItemFilter(QObject* parent)
                 if (!idx.data(eMyMoney::Model::IdRole).toString().isEmpty() && d->isJournalModel(idx)) {
                     if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == accountId) {
                         forceReload();
+                        // we found an account id in the ledger
+                        // so we can stop scanning
+                        break;
                     }
-                    // we found an account id in the ledger
-                    // so we can stop scanning
-                    break;
                 }
             }
         }
@@ -214,32 +253,68 @@ void SpecialLedgerItemFilter::setSourceModel(LedgerSortProxyModel* model)
     if (sourceModel()) {
         disconnect(sourceModel(), &QAbstractItemModel::rowsRemoved, this, &SpecialLedgerItemFilter::forceReload);
         disconnect(sourceModel(), &QAbstractItemModel::rowsInserted, this, &SpecialLedgerItemFilter::forceReload);
+        disconnect(sourceModel(), &QAbstractItemModel::rowsMoved, this, &SpecialLedgerItemFilter::forceReload);
         disconnect(sourceModel(), &QAbstractItemModel::modelReset, this, &SpecialLedgerItemFilter::forceReload);
     }
     LedgerSortProxyModel::setSourceModel(model);
     if (model) {
         connect(model, &QAbstractItemModel::rowsRemoved, this, &SpecialLedgerItemFilter::forceReload);
         connect(model, &QAbstractItemModel::rowsInserted, this, &SpecialLedgerItemFilter::forceReload);
+        connect(model, &QAbstractItemModel::rowsMoved, this, &SpecialLedgerItemFilter::forceReload);
         connect(model, &QAbstractItemModel::modelReset, this, &SpecialLedgerItemFilter::forceReload);
     }
     d->sourceModel = model;
 }
 
+void SpecialLedgerItemFilter::setLedgerSortOrder(LedgerSortOrder sortOrder)
+{
+    Q_D(SpecialLedgerItemFilter);
+    if (d->sourceModel) {
+        d->ledgerSortOrder = sortOrder;
+        d->sourceModel->setLedgerSortOrder(sortOrder);
+    }
+}
+
+LedgerSortOrder SpecialLedgerItemFilter::ledgerSortOrder() const
+{
+    Q_D(const SpecialLedgerItemFilter);
+    if (d->sourceModel) {
+        return d->sourceModel->ledgerSortOrder();
+    }
+    return {};
+}
 void SpecialLedgerItemFilter::sort(int column, Qt::SortOrder order)
 {
     Q_D(SpecialLedgerItemFilter);
 
     if (column >= 0) {
-        // propagate the sorting to the source model and make
-        // sure the right sort role is set
-        const auto role = d->columnToSortRole(column);
-        if (role != d->sourceModel->sortRole()) {
-            // setting a different sort role implies sorting
-            d->sourceModel->setSortRole(role);
-        }
+        // propagate the sorting to the source model and
+        // update balances
         d->sourceModel->sort(column, order);
         d->recalculateBalances();
     }
+}
+
+void SpecialLedgerItemFilter::setSortingEnabled(bool enable)
+{
+    Q_D(SpecialLedgerItemFilter);
+
+    if (d->sortEnabled != enable) {
+        d->sortEnabled = enable;
+        // propagate setting to source model. This
+        // will do the sorting if needed. We only
+        // need to recalc the balance afterwards.
+        d->sourceModel->setSortingEnabled(enable);
+        if (enable) {
+            d->recalculateBalances();
+        }
+    }
+}
+
+void SpecialLedgerItemFilter::doSortOnIdle()
+{
+    Q_D(SpecialLedgerItemFilter);
+    d->sourceModel->doSortOnIdle();
 }
 
 bool SpecialLedgerItemFilter::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
@@ -251,7 +326,7 @@ bool SpecialLedgerItemFilter::filterAcceptsRow(int source_row, const QModelIndex
 
     if (d->isSpecialDatesModel(baseModel)) {
         // Don't show them if display is not sorted by date
-        if (!d->isSortingByDate())
+        if (!d->isSortingByDateFirst())
             return false;
         // make sure we don't show trailing special date entries
         const auto rows = sourceModel()->rowCount(source_parent);
@@ -288,18 +363,26 @@ bool SpecialLedgerItemFilter::filterAcceptsRow(int source_row, const QModelIndex
 
     } else if (d->isReconciliationModel(baseModel)) {
         // Don't show them if display is not sorted by date
-        if (!d->isSortingByDate())
+        if (!d->isSortingByDate()) {
             return false;
+        }
         // make sure we only show reconciliation entries that are followed by
         // a regular transaction
         int row = source_row + 1;
         const auto testIdx = sourceModel()->index(row, 0, source_parent);
         return !(d->isReconciliationModel(testIdx) || d->isSpecialDatesModel(testIdx));
 
-    } else if (d->isAccountsModel(baseModel)) {
+    } else if (idx.data(eMyMoney::Model::OnlineBalanceEntryRole).toBool()) {
         // Don't show online balance items if display is not sorted by date
-        if (!d->isSortingByDate())
+        if (!d->isSortingByDate()) {
             return false;
+        }
+
+    } else if (idx.data(eMyMoney::Model::SecurityAccountNameEntryRole).toBool()) {
+        // Don't show online balance items if display is not sorted by date
+        if (!d->isSortingBySecurity()) {
+            return false;
+        }
     }
     return true;
 }
@@ -313,6 +396,12 @@ void SpecialLedgerItemFilter::forceReload()
 QVariant SpecialLedgerItemFilter::data(const QModelIndex& index, int role) const
 {
     Q_D(const SpecialLedgerItemFilter);
+    if (index.column() == JournalModel::Column::Value && index.row() == 0) {
+        if (role == Qt::BackgroundRole) {
+            qDebug() << "Hit";
+        }
+    }
+
     if (index.column() == JournalModel::Balance) {
         switch (role) {
         case Qt::DisplayRole:

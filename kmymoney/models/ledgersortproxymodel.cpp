@@ -31,34 +31,22 @@ LedgerSortProxyModel::LedgerSortProxyModel(LedgerSortProxyModelPrivate* dd, QObj
     , d_ptr(dd)
 {
     setSortRole(-1); // no sorting
+    setDynamicSortFilter(false);
 }
 
 LedgerSortProxyModel::~LedgerSortProxyModel()
 {
 }
 
-void LedgerSortProxyModel::setSourceModel(QAbstractItemModel* sourceModel)
+void LedgerSortProxyModel::setSourceModel(QAbstractItemModel* model)
 {
-    connect(sourceModel, &QAbstractItemModel::rowsInserted, this, [&](const QModelIndex& /* parent */, int first, int last) {
-        Q_UNUSED(first)
-        Q_UNUSED(last)
-
-        Q_D(LedgerSortProxyModel);
-        // mark this view for sorting but don't actually start sorting
-        // until we come back to the main event loop. This allows to collect
-        // multiple row insertions into the model into a single sort run.
-        // This is important during import of multiple transactions.
-        if (!d->sortPending) {
-            d->sortPending = true;
-            // in case a recalc operation is pending, we turn it off
-            // since we need to sort first. Once sorting is done,
-            // the recalc will be triggered again
-            d->balanceCalculationPending = false;
-            QMetaObject::invokeMethod(this, &LedgerSortProxyModel::doSort, Qt::QueuedConnection);
-        }
-    });
-
-    QSortFilterProxyModel::setSourceModel(sourceModel);
+    if (sourceModel()) {
+        disconnect(model, &QAbstractItemModel::rowsInserted, this, &LedgerSortProxyModel::sortOnIdle);
+    }
+    if (model) {
+        connect(model, &QAbstractItemModel::rowsInserted, this, &LedgerSortProxyModel::sortOnIdle);
+    }
+    QSortFilterProxyModel::setSourceModel(model);
 }
 
 bool LedgerSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& right) const
@@ -76,89 +64,145 @@ bool LedgerSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& 
     const auto model = MyMoneyFile::baseModel();
     // make sure that the online balance is the last entry of a day
     // and the date headers are the first
-    switch (sortRole()) {
-    case eMyMoney::Model::TransactionPostDateRole:
-    case eMyMoney::Model::TransactionEntryDateRole: {
-        const auto leftDate = left.data(sortRole()).toDate();
-        const auto rightDate = right.data(sortRole()).toDate();
+    for (const auto sortOrderItem : d->ledgerSortOrder) {
+        //                   SortOrder of item
+        //                ascending    descending
+        // trueValue        true         false
+        // falseValue       false        true
+        const auto trueValue = sortOrderItem.lessThanIs(true);
+        const auto falseValue = sortOrderItem.lessThanIs(false);
 
-        if (leftDate == rightDate) {
-            const auto leftModel = model->baseModel(left);
-            const auto rightModel = model->baseModel(right);
-            if (leftModel != rightModel) {
-                // schedules will always be presented last on the same day
-                // before that the online balance is shown
-                // before that the reconciliation records are displayed
-                // special date records are shown on top
-                if (d->isSchedulesJournalModel(leftModel)) {
-                    return false;
-                } else if (d->isSchedulesJournalModel(rightModel)) {
-                    return true;
-                } else if (d->isAccountsModel(leftModel)) {
-                    return false;
-                } else if (d->isAccountsModel(rightModel)) {
-                    return true;
-                } else if (d->isSpecialDatesModel(leftModel)) {
-                    return true;
-                } else if (d->isSpecialDatesModel(rightModel)) {
-                    return false;
-                } else if (d->isReconciliationModel(leftModel)) {
-                    return false;
-                } else if (d->isReconciliationModel(rightModel)) {
-                    return true;
+        switch (sortOrderItem.sortRole) {
+        case eMyMoney::Model::TransactionPostDateRole:
+        case eMyMoney::Model::TransactionEntryDateRole: {
+            const auto leftDate = left.data(sortOrderItem.sortRole).toDate();
+            const auto rightDate = right.data(sortOrderItem.sortRole).toDate();
+
+            if (leftDate == rightDate) {
+                const auto leftModel = model->baseModel(left);
+                const auto rightModel = model->baseModel(right);
+                if (leftModel != rightModel) {
+                    // schedules will always be presented last on the same day
+                    // before that the online balance is shown
+                    // before that the reconciliation records are displayed
+                    // special date records are shown on top
+                    // account names are shown on top
+                    if (d->isSchedulesJournalModel(leftModel)) {
+                        return falseValue;
+                    } else if (d->isSchedulesJournalModel(rightModel)) {
+                        return trueValue;
+                    } else if (left.data(eMyMoney::Model::OnlineBalanceEntryRole).toBool()) {
+                        return falseValue;
+                    } else if (right.data(eMyMoney::Model::OnlineBalanceEntryRole).toBool()) {
+                        return trueValue;
+                    } else if (d->isSpecialDatesModel(leftModel)) {
+                        return trueValue;
+                    } else if (d->isSpecialDatesModel(rightModel)) {
+                        return falseValue;
+                    } else if (d->isReconciliationModel(leftModel)) {
+                        return falseValue;
+                    } else if (d->isReconciliationModel(rightModel)) {
+                        return trueValue;
+                    }
+                    // if we get here, both are transaction entries
                 }
-                // if we get here, both are transaction entries
+
+                // same date and same model means that the next item
+                // in the sortOrderList needs to be evaluated
+                break;
             }
-            // So sort by cleared status
-            const auto leftState = left.data(eMyMoney::Model::SplitReconcileFlagRole).toInt();
-            const auto rightState = right.data(eMyMoney::Model::SplitReconcileFlagRole).toInt();
-
-            if (leftState != rightState) {
-                if (leftState > rightState)
-                    return true;
-                return false;
-            }
-
-            // Reconciliation state is the same, so sort by deposits first, then withdrawals
-            const auto leftDeposit = left.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
-            const auto rightDeposit = right.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
-
-            // It's a deposit if the deposit string isn't empty
-            bool leftIsDeposit = leftDeposit.isPositive();
-            bool rightIsDeposit = rightDeposit.isPositive();
-
-            if (leftIsDeposit != rightIsDeposit) {
-                if (leftIsDeposit)
-                    return true;
-                return false;
-            }
-
-            // same model, same dates, and same everything else means that the ids decide
-            return left.data(eMyMoney::Model::IdRole).toString() < right.data(eMyMoney::Model::IdRole).toString();
+            return sortOrderItem.lessThanIs(leftDate < rightDate);
         }
-        return leftDate < rightDate;
+        case eMyMoney::Model::SplitSharesRole: {
+            const auto lValue = left.data(sortOrderItem.sortRole).value<MyMoneyMoney>();
+            const auto rValue = right.data(sortOrderItem.sortRole).value<MyMoneyMoney>();
+            if (lValue != rValue) {
+                return sortOrderItem.lessThanIs(lValue < rValue);
+            }
+            break;
+        }
+        case eMyMoney::Model::SplitPayeeRole:
+        case eMyMoney::Model::TransactionCounterAccountRole:
+        case eMyMoney::Model::SplitSharesSuffixRole:
+        case eMyMoney::Model::IdRole: {
+            const auto lValue = left.data(sortOrderItem.sortRole).toString();
+            const auto rValue = right.data(sortOrderItem.sortRole).toString();
+            if (lValue != rValue) {
+                return sortOrderItem.lessThanIs(QString::localeAwareCompare(lValue, rValue) == -1);
+            }
+            break;
+        }
+
+        case eMyMoney::Model::JournalSplitSecurityNameRole: {
+            const auto leftSecurity = left.data(sortOrderItem.sortRole).toString();
+            const auto rightSecurity = right.data(sortOrderItem.sortRole).toString();
+            if (leftSecurity == rightSecurity) {
+                const auto leftModel = model->baseModel(left);
+                const auto rightModel = model->baseModel(right);
+                if (leftModel != rightModel) {
+                    if (left.data(eMyMoney::Model::SecurityAccountNameEntryRole).toBool()) {
+                        return trueValue;
+                    } else if (right.data(eMyMoney::Model::SecurityAccountNameEntryRole).toBool()) {
+                        return falseValue;
+                    }
+                    // if we get here, both are transaction entries
+                }
+                // same security and same model means that the next item
+                // in the sortOrderList needs to be evaluated
+                break;
+            }
+            return sortOrderItem.lessThanIs(leftSecurity < rightSecurity);
+        }
+
+        case eMyMoney::Model::SplitReconcileFlagRole: {
+            const auto lValue = left.data(sortOrderItem.sortRole).toInt();
+            const auto rValue = right.data(sortOrderItem.sortRole).toInt();
+            if (lValue != rValue) {
+                return sortOrderItem.lessThanIs(lValue < rValue);
+            }
+            break;
+        }
+
+        case eMyMoney::Model::SplitNumberRole: {
+            const auto lValue = left.data(sortOrderItem.sortRole).toString();
+            const auto rValue = right.data(sortOrderItem.sortRole).toString();
+            if (lValue != rValue) {
+                // convert both values to numbers
+                bool ok1(false);
+                bool ok2(false);
+                const auto n1 = lValue.toULongLong(&ok1);
+                const auto n2 = rValue.toULongLong(&ok2);
+                // the following four cases exist:
+                // a) both are converted correct
+                //    compare them directly
+                // b) n1 is numeric, n2 is not
+                //    numbers come first, so trueValue
+                // c) n1 is not numeric, n2 is
+                //    numbers come first, so falseValue
+                // d) both are non numbers
+                //    compare using localeAwareCompare
+                if (ok1 && ok2) { // case a)
+                    return sortOrderItem.lessThanIs(n1 < n2);
+
+                } else if (ok1 && !ok2) { // case b)
+                    return trueValue;
+
+                } else if (!ok1 && ok2) { // case c)
+                    return falseValue;
+
+                } else { // case d)
+                    return sortOrderItem.lessThanIs(QString::localeAwareCompare(lValue, rValue) == -1);
+                }
+            }
+            break;
+        }
+        default:
+            break;
+        }
     }
 
-    case eMyMoney::Model::JournalSplitQuantitySortRole:
-    case eMyMoney::Model::JournalSplitPriceSortRole:
-    case eMyMoney::Model::JournalSplitValueSortRole:
-    case eMyMoney::Model::SplitValueRole:
-    case eMyMoney::Model::SplitSharesRole: {
-        const auto role = sortRole();
-        const auto lValue = left.data(role).value<MyMoneyMoney>();
-        const auto rValue = right.data(role).value<MyMoneyMoney>();
-        if (lValue != rValue) {
-            return lValue < rValue;
-        }
-        // same value means that the ids decide
-        return left.data(eMyMoney::Model::IdRole).toString() < right.data(eMyMoney::Model::IdRole).toString();
-
-    } break;
-    default:
-        break;
-    }
-    // otherwise use normal sorting
-    return QSortFilterProxyModel::lessThan(left, right);
+    // same everything, let the id decide
+    return left.data(eMyMoney::Model::IdRole).toString() < right.data(eMyMoney::Model::IdRole).toString();
 }
 
 bool LedgerSortProxyModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
@@ -207,19 +251,79 @@ void LedgerSortProxyModel::setHideReconciledTransactions(bool hide)
     }
 }
 
+void LedgerSortProxyModel::setSortingEnabled(bool enable)
+{
+    Q_D(LedgerSortProxyModel);
+    if (d->sortEnabled != enable) {
+        d->sortEnabled = enable;
+        if (enable && d->sortPending) {
+            doSort();
+        }
+    }
+}
 void LedgerSortProxyModel::sort(int column, Qt::SortOrder order)
 {
+    Q_UNUSED(column)
+    Q_UNUSED(order)
+    Q_D(LedgerSortProxyModel);
+
     // call the actual sorting only if we really need to sort
-    if (sortRole() >= 0 && column >= 0) {
-        QSortFilterProxyModel::sort(column, order);
+    if (sortRole() >= 0) {
+        if (d->sortEnabled) {
+            // LedgerSortProxyModel::lessThan takes care of the sort
+            // order and is based on a general ascending order
+            QSortFilterProxyModel::sort(0, Qt::AscendingOrder);
+            d->sortPending = false;
+        } else {
+            d->sortPending = true;
+        }
+        d->sortPostponed = false;
+    }
+}
+
+void LedgerSortProxyModel::sortOnIdle()
+{
+    Q_D(LedgerSortProxyModel);
+    if (!d->sortPostponed) {
+        d->sortPostponed = true;
+        // in case a recalc operation is pending, we turn it off
+        // since we need to sort first. Once sorting is done,
+        // the recalc will be triggered again
+        d->balanceCalculationPending = false;
+        QMetaObject::invokeMethod(this, &LedgerSortProxyModel::doSortOnIdle, Qt::QueuedConnection);
     }
 }
 
 void LedgerSortProxyModel::doSort()
 {
     Q_D(LedgerSortProxyModel);
-    sort(sortColumn(), sortOrder());
-    d->sortPending = false;
+    sort(0, Qt::AscendingOrder);
+}
+
+void LedgerSortProxyModel::doSortOnIdle()
+{
+    Q_D(LedgerSortProxyModel);
+    if (d->sortPostponed) {
+        doSort();
+    }
+}
+
+void LedgerSortProxyModel::setLedgerSortOrder(LedgerSortOrder sortOrder)
+{
+    Q_D(LedgerSortProxyModel);
+    if (sortOrder != d->ledgerSortOrder) {
+        // the next line will turn on sorting for this model
+        // but is otherwise not used (see lessThan())
+        setSortRole(eMyMoney::Model::TransactionPostDateRole);
+        d->ledgerSortOrder = sortOrder;
+        doSort();
+    }
+}
+
+LedgerSortOrder LedgerSortProxyModel::ledgerSortOrder() const
+{
+    Q_D(const LedgerSortProxyModel);
+    return d->ledgerSortOrder;
 }
 
 void LedgerSortProxyModel::dumpSourceModel() const

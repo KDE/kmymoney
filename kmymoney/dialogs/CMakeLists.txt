@@ -23,6 +23,7 @@ set(kmm_base_dialogs_SOURCES
   kpayeereassigndlg.cpp
   ksaveasquestion.cpp
   ktagreassigndlg.cpp
+  ktransactionsortoptionsdlg.cpp
   kupdatestockpricedlg.cpp
   payeecreator.cpp
   transactionmatcher.cpp
@@ -46,6 +47,7 @@ set(base_dialogs_UI
   kpayeereassigndlg.ui
   ksaveasquestion.ui
   ktagreassigndlg.ui
+  ktransactionsortoptionsdlg.ui
   kupdatestockpricedlg.ui
   splitadjustdialog.ui
 )

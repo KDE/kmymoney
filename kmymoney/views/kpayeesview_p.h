@@ -253,6 +253,8 @@ public:
         clearItemData();
 
         m_focusWidget = ui->m_searchWidget;
+
+        specialItemFilter->setSortingEnabled(true);
     }
 
     void ensurePayeeVisible(const QString& id)

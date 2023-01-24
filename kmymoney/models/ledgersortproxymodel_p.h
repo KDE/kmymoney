@@ -28,7 +28,9 @@ public:
         : q(qq)
         , hideReconciledTransactions(false)
         , balanceCalculationPending(false)
+        , sortEnabled(false)
         , sortPending(false)
+        , sortPostponed(false)
     {
     }
 
@@ -118,9 +120,30 @@ public:
 
     LedgerSortProxyModel* q;
     QDate firstVisiblePostDate;
+    LedgerSortOrder ledgerSortOrder;
     bool hideReconciledTransactions;
     bool balanceCalculationPending;
+    /**
+     * This flag controls if sorting is enabled or not. It is
+     * used to temporarily bypass sorting to avoid sorting a
+     * model multiple times with the same state.
+     */
+    bool sortEnabled;
+
+    /**
+     * This flag is set when a call to sort() happened while
+     * sorting was disabled so that it can be fetched later.
+     *
+     * @sa sortEnabled
+     */
     bool sortPending;
+
+    /**
+     * Some sort operations are postponed until the next
+     * run of the event loop. This flag controls if such
+     * a sort is still pending.
+     */
+    bool sortPostponed;
 };
 
 #endif // LEDGERSORTPROXYMODEL_P_H

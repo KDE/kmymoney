@@ -117,6 +117,7 @@ void LedgerPayeeFilter::setPayeeIdList(const QStringList& payeeIds)
 
     setFilterFixedStrings(payeeIds);
 
+    /// @todo sorting - move to new sort definition
     setSortRole(eMyMoney::Model::TransactionPostDateRole);
     sort(JournalModel::Column::Date, sortOrder());
 

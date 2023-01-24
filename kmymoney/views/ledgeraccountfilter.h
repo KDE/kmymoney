@@ -35,14 +35,10 @@ public:
 
     QVariant data(const QModelIndex& index, int role) const override;
 
-public Q_SLOTS:
-    void recalculateBalancesOnIdle(const QString& accountId);
-
-protected Q_SLOTS:
-    void recalculateBalances();
-
 protected:
     bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
+
+    // Overridden to suppress sorting on this model
     void doSort() override;
 
 private:

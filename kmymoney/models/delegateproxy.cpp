@@ -22,7 +22,7 @@ class QStyleOption;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymodelbase.h"
+#include "mymoneyenums.h"
 #include "mymoneyfile.h"
 
 class DelegateProxyPrivate
@@ -40,15 +40,13 @@ public:
     {
         // create an index for column 0
         if (idx.isValid()) {
-            const QModelIndex baseIdx = idx.model()->index(idx.row(), 0, idx.parent());
-            const QAbstractItemModel* model = MyMoneyFile::baseModel()->baseModel(baseIdx);
-            return mapping.value(model, nullptr);
+            return mapping.value(idx.data(eMyMoney::Model::DelegateRole).toInt(), nullptr);
         }
         return nullptr;
     }
 
-    DelegateProxy*                                                  q_ptr;
-    QHash<const QAbstractItemModel*, const KMMStyledItemDelegate*>  mapping;
+    DelegateProxy* q_ptr;
+    QHash<int, const KMMStyledItemDelegate*> mapping;
 };
 
 
@@ -58,19 +56,17 @@ DelegateProxy::DelegateProxy(QObject* parent)
 {
 }
 
-void DelegateProxy::addDelegate(const QAbstractItemModel* model, KMMStyledItemDelegate* delegate)
+void DelegateProxy::addDelegate(eMyMoney::Delegates::Types role, KMMStyledItemDelegate* delegate)
 {
     Q_D(DelegateProxy);
-    if (model == nullptr) {
-        return;
-    }
+    const auto roleAsInt = static_cast<int>(role);
 
     // in case we have a mapping for the model, we remove it
-    if (d->mapping.contains(model)) {
-        d->mapping.remove(model);
+    if (d->mapping.contains(roleAsInt)) {
+        d->mapping.remove(roleAsInt);
     }
     if (delegate) {
-        d->mapping[model] = delegate;
+        d->mapping[roleAsInt] = delegate;
         connect(delegate, &QAbstractItemDelegate::commitData, this, &QAbstractItemDelegate::commitData, Qt::UniqueConnection);
         connect(delegate, &QAbstractItemDelegate::closeEditor, this, &QAbstractItemDelegate::closeEditor, Qt::UniqueConnection);
         connect(delegate, &QAbstractItemDelegate::sizeHintChanged, this, &QAbstractItemDelegate::sizeHintChanged, Qt::UniqueConnection);
@@ -81,7 +77,7 @@ const QStyledItemDelegate * DelegateProxy::delegate(const QModelIndex& idx) cons
 {
     Q_D(const DelegateProxy);
     if (idx.isValid()) {
-        return d->mapping.value(MyMoneyFile::baseModel()->baseModel(idx), nullptr);
+        return d->mapping.value(idx.data(eMyMoney::Model::DelegateRole).toInt(), nullptr);
     }
     return nullptr;
 }

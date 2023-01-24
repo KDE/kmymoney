@@ -463,6 +463,17 @@ enum signPosition : int {
 };
 }
 
+namespace Delegates {
+enum class Types {
+    JournalDelegate,
+    OnlineBalanceDelegate,
+    SpecialDateDelegate,
+    ReconciliationDelegate,
+    SecurityAccountNameDelegate,
+    SchedulesDelegate,
+};
+}
+
 namespace Model {
 enum Roles {
     // The IdRole is used by all model items whereas the id of all other roles id unique
@@ -606,6 +617,7 @@ enum Roles {
     JournalSplitQuantitySortRole,
     JournalSplitPriceSortRole,
     JournalSplitValueSortRole,
+    JournalSplitSecurityNameRole,
 
     // Ledger
     LedgerDisplayOrderRole,
@@ -646,6 +658,9 @@ enum Roles {
     // LedgerStack special roles
     ActiveFilterRole,
     ShowValueInvertedRole,
+    OnlineBalanceEntryRole, // true if entry is an online balance record
+    SecurityAccountNameEntryRole, // true if entry is a security account name record
+    DelegateRole,
 };
 } // namespace Model
 } // namespace eMyMoney

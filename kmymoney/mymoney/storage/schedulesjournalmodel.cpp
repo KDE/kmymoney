@@ -82,6 +82,9 @@ QVariant SchedulesJournalModel::data(const QModelIndex& index, int role) const
     case eMyMoney::Model::JournalSplitIsMatchedRole:
         return false;
 
+    case eMyMoney::Model::DelegateRole:
+        return static_cast<int>(eMyMoney::Delegates::Types::SchedulesDelegate);
+
     default:
         break;
     }

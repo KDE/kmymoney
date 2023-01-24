@@ -24,7 +24,6 @@
 #include "icons.h"
 #include "journalmodel.h"
 #include "kmymoneysettings.h"
-#include "ledgerviewsettings.h"
 #include "menuenums.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
@@ -43,6 +42,10 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
 {
     d->initWidgets(configGroupName);
     d->ui->m_ledgerView->setModel(MyMoneyFile::instance()->journalModel()->newTransaction());
+
+    connect(d->ui->m_ledgerView, &LedgerView::modifySortOrder, this, [&]() {
+        d->selectSortOrder();
+    });
 }
 
 LedgerViewPage::LedgerViewPage(LedgerViewPage::Private& dd, QWidget* parent, const QString& configGroupName)
@@ -51,6 +54,10 @@ LedgerViewPage::LedgerViewPage(LedgerViewPage::Private& dd, QWidget* parent, con
 {
     d->initWidgets(configGroupName);
     d->ui->m_ledgerView->setModel(MyMoneyFile::instance()->journalModel()->newTransaction());
+
+    connect(d->ui->m_ledgerView, &LedgerView::modifySortOrder, this, [&]() {
+        d->selectSortOrder();
+    });
 }
 
 void LedgerViewPage::showEvent(QShowEvent* event)
@@ -71,7 +78,6 @@ void LedgerViewPage::initModel()
     d->accountFilter =
         new LedgerAccountFilter(d->ui->m_ledgerView,
                                 QVector<QAbstractItemModel*>{file->specialDatesModel(), file->schedulesJournalModel(), file->reconciliationModel()});
-    connect(file->journalModel(), &JournalModel::balanceChanged, d->accountFilter, &LedgerAccountFilter::recalculateBalancesOnIdle);
     d->accountFilter->setHideReconciledTransactions(LedgerViewSettings::instance()->hideReconciledTransactions());
     d->accountFilter->setHideTransactionsBefore(LedgerViewSettings::instance()->hideTransactionsBefore());
 
@@ -104,15 +110,18 @@ void LedgerViewPage::initModel()
     // does not get propagated through it which destructs our ledger in such cases.
     //
     // A workaround is to invalidate the sort filter.
-    connect(file->journalModel(), &JournalModel::rowsAboutToBeMoved, this, &LedgerViewPage::keepSelection);
-    connect(file->journalModel(), &JournalModel::rowsMoved, this, &LedgerViewPage::reloadFilter, Qt::QueuedConnection);
+    // connect(file->journalModel(), &JournalModel::rowsAboutToBeMoved, this, &LedgerViewPage::keepSelection);
+    // connect(file->journalModel(), &JournalModel::rowsMoved, this, &LedgerViewPage::reloadFilter, Qt::QueuedConnection);
 
     d->ui->m_ledgerView->setModel(d->specialItemFilter);
 
     connect(LedgerViewSettings::instance(), &LedgerViewSettings::settingsChanged, this, [&]() {
         d->accountFilter->setHideReconciledTransactions(LedgerViewSettings::instance()->hideReconciledTransactions());
         d->accountFilter->setHideTransactionsBefore(LedgerViewSettings::instance()->hideTransactionsBefore());
-        d->specialItemFilter->forceReload();
+
+        // make sure sorting is updated
+        const auto acc = MyMoneyFile::instance()->accountsModel()->itemById(d->accountId);
+        d->updateAccountData(acc);
     });
 
     // combine multiple row updates into one
@@ -151,6 +160,12 @@ void LedgerViewPage::initModel()
     this->setAccount(acc);
 
     setShowEntryForNewTransaction(d->showEntryForNewTransaction);
+
+    // now sort everything
+    d->accountFilter->setSortingEnabled(true);
+    // the next call will also take care of enabling
+    // sorting on the stateFilter.
+    d->specialItemFilter->setSortingEnabled(true);
 }
 
 LedgerViewPage::~LedgerViewPage()
@@ -172,6 +187,10 @@ bool LedgerViewPage::eventFilter(QObject* watched, QEvent* event)
     return QWidget::eventFilter(watched, event);
 }
 
+/**
+ * @todo need to update that in the case when the journalId changes
+ * due to a change of the TransactionPostDate
+ */
 void LedgerViewPage::keepSelection()
 {
     d->selections.setSelection(SelectedObjects::JournalEntry, d->ui->m_ledgerView->selectedJournalEntries());
@@ -275,14 +294,14 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
 
     connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::dataChanged, this, [&]() {
         const auto account = MyMoneyFile::instance()->accountsModel()->itemById(d->accountId);
-        d->reconciliationDate = account.lastReconciliationDate();
-        d->precision = MyMoneyMoney::denomToPrec(account.fraction());
-        d->accountName = account.name();
+        if (!account.id().isEmpty()) {
+            d->updateAccountData(account);
+        }
     });
 
-    d->reconciliationDate = acc.lastReconciliationDate();
-    d->precision = MyMoneyMoney::denomToPrec(acc.fraction());
-    d->accountName = acc.name();
+    d->updateAccountData(acc);
+
+    d->ui->m_ledgerView->setSortOrder(d->sortOrder);
 
     const auto file = MyMoneyFile::instance();
     d->totalBalance = file->balance(d->accountId, QDate());

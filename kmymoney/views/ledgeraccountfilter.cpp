@@ -13,6 +13,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KDescendantsProxyModel>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -24,6 +26,7 @@
 #include "mymoneymoney.h"
 #include "onlinebalanceproxymodel.h"
 #include "schedulesjournalmodel.h"
+#include "securityaccountsproxymodel.h"
 #include "specialdatesmodel.h"
 
 class LedgerAccountFilterPrivate : public LedgerFilterBasePrivate
@@ -32,13 +35,17 @@ public:
     explicit LedgerAccountFilterPrivate(LedgerAccountFilter* qq)
         : LedgerFilterBasePrivate(qq)
         , onlinebalanceproxymodel(nullptr)
-    {}
+        , securityAccountsProxyModel(nullptr)
+    {
+    }
 
     ~LedgerAccountFilterPrivate()
     {
     }
 
     OnlineBalanceProxyModel*    onlinebalanceproxymodel;
+    SecurityAccountsProxyModel* securityAccountsProxyModel;
+
     MyMoneyAccount              account;
 };
 
@@ -47,17 +54,22 @@ LedgerAccountFilter::LedgerAccountFilter(QObject* parent, QVector<QAbstractItemM
     : LedgerFilterBase(new LedgerAccountFilterPrivate(this), parent)
 {
     Q_D(LedgerAccountFilter);
-    d->onlinebalanceproxymodel = new OnlineBalanceProxyModel(parent);
     setMaintainBalances(true);
-
     setObjectName("LedgerAccountFilter");
+
+    d->onlinebalanceproxymodel = new OnlineBalanceProxyModel(parent);
+    d->securityAccountsProxyModel = new SecurityAccountsProxyModel(parent);
+
+    const auto accountsModel = MyMoneyFile::instance()->flatAccountsModel();
+    d->onlinebalanceproxymodel->setObjectName("OnlineBalanceProxyModel");
+    d->onlinebalanceproxymodel->setSourceModel(accountsModel);
+    d->securityAccountsProxyModel->setObjectName("SecurityAccountsProxyModel");
+    d->securityAccountsProxyModel->setSourceModel(accountsModel);
 
     d->concatModel->setObjectName("LedgerView concatModel");
     d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel());
-
-    d->onlinebalanceproxymodel->setObjectName("OnlineBalanceProxyModel");
-    d->onlinebalanceproxymodel->setSourceModel(MyMoneyFile::instance()->accountsModel());
     d->concatModel->addSourceModel(d->onlinebalanceproxymodel);
+    d->concatModel->addSourceModel(d->securityAccountsProxyModel);
 
     for (const auto model : specialJournalModels) {
         d->concatModel->addSourceModel(model);
@@ -78,91 +90,6 @@ void LedgerAccountFilter::setShowBalanceInverted(bool inverted)
     d->showValuesInverted = inverted;
 }
 
-void LedgerAccountFilter::recalculateBalancesOnIdle(const QString& accountId)
-{
-    Q_D(LedgerAccountFilter);
-    // only start recalc if the caller means us
-    bool updateCausedBySubAccount = false;
-    if (d->account.accountType() == eMyMoney::Account::Type::Investment) {
-        updateCausedBySubAccount = d->account.accountList().contains(accountId);
-    }
-    if ((accountId.compare(d->account.id()) == 0) || updateCausedBySubAccount) {
-        // make sure the balances are recalculated but trigger only once
-        // if sorting is pending, we don't trigger recalc as it is part of sorting
-        if(!d->balanceCalculationPending && !d->sortPending) {
-            d->balanceCalculationPending = true;
-            QMetaObject::invokeMethod(this, &LedgerAccountFilter::recalculateBalances, Qt::QueuedConnection);
-        }
-    }
-}
-
-void LedgerAccountFilter::recalculateBalances()
-{
-    Q_D(LedgerAccountFilter);
-
-    // false alert. we could end up here in case a recalc is triggered
-    // and turned off by sorting afterwards. In this case, we simply
-    // skip the calculation as it is in vain.
-    if(!d->balanceCalculationPending) {
-        return;
-    }
-
-    if (sourceModel() == nullptr || d->account.id().isEmpty())
-        return;
-
-    // we need to operate on our own source model (not filtered,
-    // sorted by date and including schedules)
-    // and update only the selected account(s). In case of investment
-    // accounts, we also update the balance of the underlying stock
-    // accounts.
-    bool isInvestmentAccount = false;
-    QStringList accountIds;
-    accountIds << d->account.id();
-    if (d->account.accountType() == eMyMoney::Account::Type::Investment) {
-        isInvestmentAccount = true;
-        accountIds << d->account.accountList();
-    }
-
-    QHash<QString, MyMoneyMoney> balances;
-    const auto rows = sourceModel()->rowCount();
-    QModelIndex idx;
-    QString accountId;
-    const auto file = MyMoneyFile::instance();
-
-    for (int row = 0; row < rows; ++row) {
-        idx = sourceModel()->index(row, 0);
-        const auto baseModel = MyMoneyModelBase::baseModel(idx);
-        if (baseModel) {
-            if (baseModel == file->journalModel() || baseModel == file->schedulesJournalModel()) {
-                accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
-                if (accountIds.contains(accountId)) {
-                    if (isInvestmentAccount) {
-                        if (idx.data(eMyMoney::Model::TransactionIsStockSplitRole).toBool()) {
-                            balances[accountId] =
-                                MyMoneyFile::instance()->journalModel()->stockSplitBalance(accountId,
-                                                                                           balances[accountId],
-                                                                                           idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>());
-                        } else {
-                            balances[accountId] += idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-                        }
-
-                    } else {
-                        if (d->showValuesInverted) {
-                            balances[accountId] -= idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-                        } else {
-                            balances[accountId] += idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-                        }
-                    }
-                    const auto dispIndex = sourceModel()->index(row, JournalModel::Column::Balance);
-                    sourceModel()->setData(dispIndex, QVariant::fromValue(balances[accountId]), Qt::DisplayRole);
-                }
-            }
-        }
-    }
-    Q_EMIT dataChanged(index(0, JournalModel::Column::Balance), index(rows - 1, JournalModel::Column::Balance));
-    d->balanceCalculationPending = false;
-}
-
 void LedgerAccountFilter::setAccount(const MyMoneyAccount& acc)
 {
     Q_D(LedgerAccountFilter);
@@ -177,9 +104,6 @@ void LedgerAccountFilter::setAccount(const MyMoneyAccount& acc)
 
     setAccountType(d->account.accountType());
     setFilterFixedString(d->account.id());
-
-    // if balance calculation has not been triggered, then run it immediately
-    recalculateBalancesOnIdle(d->account.id());
 }
 
 bool LedgerAccountFilter::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
@@ -199,11 +123,7 @@ bool LedgerAccountFilter::filterAcceptsRow(int source_row, const QModelIndex& so
 
 void LedgerAccountFilter::doSort()
 {
-    Q_D(LedgerAccountFilter);
-
-    LedgerFilterBase::doSort();
-    // trigger a recalculation of the balances after sorting
-    recalculateBalancesOnIdle(d->account.id());
+    // we don't do any sorting on this model by design
 }
 
 QVariant LedgerAccountFilter::data(const QModelIndex& index, int role) const

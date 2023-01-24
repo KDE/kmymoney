@@ -46,6 +46,18 @@ public:
      */
     QVariant data(const QModelIndex& index, int role) const override;
 
+    /**
+     * Reimplemented to propagate setting of sort order to sourceModel
+     */
+    void setLedgerSortOrder(LedgerSortOrder sortOrder) override;
+
+    LedgerSortOrder ledgerSortOrder() const override;
+
+    /**
+     * Reimplemented to propagate setting to sourceModel
+     */
+    void setSortingEnabled(bool enable) override;
+
 public Q_SLOTS:
     void forceReload();
 
@@ -54,6 +66,11 @@ protected:
      * @note Does not call base class implementation
      */
     bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
+
+    /**
+     * Reimplemented to propagate setting to sourceModel
+     */
+    void doSortOnIdle() override;
 
 private:
     // make sure that only LedgerSortProxyModel models can be used as sources

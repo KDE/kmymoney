@@ -20,6 +20,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ledgerviewsettings.h"
 #include "mymoneyenums.h"
 
 class LedgerSortProxyModelPrivate;
@@ -30,19 +31,17 @@ class KMM_MODELS_EXPORT LedgerSortProxyModel : public QSortFilterProxyModel
     Q_DISABLE_COPY(LedgerSortProxyModel)
 
 public:
-    enum GroupSortOrder {
-        PostDateGrouping = 0,
-        PayeeGrouping,
-        JournalEntry,
-        OnlineBalance,
-    };
-
     virtual ~LedgerSortProxyModel();
 
     /**
-     * Reimplemented
+     * Reimplemented to support KMyMoney specific sort options
      */
     void sort(int column, Qt::SortOrder order = Qt::AscendingOrder) override;
+
+    /**
+     * Sorts the model on the next return to the event loop
+     */
+    void sortOnIdle();
 
     /**
      * This method changes the global filter for
@@ -65,8 +64,26 @@ public:
      */
     void setSourceModel(QAbstractItemModel* sourceModel) override;
 
+    virtual void setLedgerSortOrder(LedgerSortOrder sortOrder);
+
+    virtual LedgerSortOrder ledgerSortOrder() const;
+
+    /**
+     * This method can be used to temporarily prevent
+     * sorting of the model. Once turned back on and
+     * sort() was called in the meantime it will be
+     * performed upon the run of the next event loop.
+     *
+     * @sa doSort()
+     */
+    virtual void setSortingEnabled(bool enable);
+
+    /**
+     * This method is used to process postponed sorting
+     */
+    virtual void doSortOnIdle();
+
 protected:
-    LedgerSortProxyModelPrivate* d_ptr;
     explicit LedgerSortProxyModel(LedgerSortProxyModelPrivate* dd, QObject* parent);
 
     bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
@@ -76,12 +93,18 @@ protected:
      */
     bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 
+    /**
+     * This is a convenience method for sort()
+     */
     virtual void doSort();
 
     /**
      * This is a debugging function for developers
      */
     void dumpSourceModel() const;
+
+protected:
+    LedgerSortProxyModelPrivate* d_ptr;
 };
 
 #endif // LEDGERSORTPROXYMODEL_H

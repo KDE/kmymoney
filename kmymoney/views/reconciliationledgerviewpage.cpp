@@ -342,6 +342,24 @@ public:
         }
     }
 
+    void updateAccountData(const MyMoneyAccount& account) override
+    {
+        LedgerViewPage::Private::updateAccountData(account);
+
+        if (account.accountType() == eMyMoney::Account::Type::Investment) {
+            sortOrderType = LedgerViewSettings::SortOrderReconcileInvest;
+        } else {
+            sortOrderType = LedgerViewSettings::SortOrderReconcileStd;
+        }
+
+        // check if we have a specific sort order or rely on the default
+        if (!account.value("kmm-sort-reconcile").isEmpty()) {
+            sortOrder = LedgerSortOrder(account.value("kmm-sort-reconcile"));
+        } else {
+            sortOrder = LedgerViewSettings::instance()->sortOrder(sortOrderType);
+        }
+    }
+
     void updateSummaryInformation() const override
     {
         ui->m_reconciliationContainer->setVisible(endingBalanceDlg != nullptr);

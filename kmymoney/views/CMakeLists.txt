@@ -38,6 +38,7 @@ set(libviews_a_SOURCES
   ktransactionselectdlg.cpp
   newtransactioneditor.cpp
   newtransactionform.cpp
+  securityaccountnamedelegate.cpp
   splitview.cpp
   splitdialog.cpp
   splitdelegate.cpp

@@ -7,6 +7,8 @@
 #ifndef DELEGATEPROXY_H
 #define DELEGATEPROXY_H
 
+#include "kmm_models_export.h"
+
 // ----------------------------------------------------------------------------
 // Qt Includes
 
@@ -19,7 +21,7 @@
 // Project Includes
 
 #include "kmmstyleditemdelegate.h"
-#include "kmm_models_export.h"
+#include "mymoneyenums.h"
 
 class DelegateProxyPrivate;
 
@@ -43,11 +45,11 @@ public:
 
     /**
      * This method adds @a delegate as the delegate to be used when the item
-     * to be shown/edited is located in @a model. The delegate and model are
-     * still owned by the caller. They are not destroyed when the DelegateProxy
-     * is destroyed.
+     * to be shown/edited is located in a model that returns @a role when asked
+     * for DelegateRole. The delegate is still owned by the caller. It is not
+     * destroyed when the DelegateProxy is destroyed.
      */
-    void addDelegate(const QAbstractItemModel* model, KMMStyledItemDelegate* delegate);
+    void addDelegate(eMyMoney::Delegates::Types role, KMMStyledItemDelegate* delegate);
 
     /**
      * Retrieve the delegate for objects stored in @a model. In case no

@@ -8,12 +8,14 @@ set(libmodels_a_SOURCES
     itemrenameproxymodel.cpp
     ledgerfilter.cpp
     ledgerfilterbase.cpp
+    ledgersortorder.cpp
     ledgersortproxymodel.cpp
     onlinebankingaccountsfilterproxymodel.cpp
     onlinebalanceproxymodel.cpp
     payeeidentifiercontainermodel.cpp
     scheduleproxymodel.cpp
     securitiesfilterproxymodel.cpp
+    securityaccountsproxymodel.cpp
     specialledgeritemfilter.cpp
 )
 

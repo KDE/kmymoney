@@ -3451,8 +3451,9 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
         break;
     }
 
-    LedgerViewSettings::instance()->setHideReconciledTransactions(KMyMoneySettings::hideReconciledTransactions());
-    LedgerViewSettings::instance()->setHideTransactionsBefore(KMyMoneySettings::startDate().date());
+    const auto ledgerViewSettings = LedgerViewSettings::instance();
+    ledgerViewSettings->setHideReconciledTransactions(KMyMoneySettings::hideReconciledTransactions());
+    ledgerViewSettings->setHideTransactionsBefore(KMyMoneySettings::startDate().date());
 
     MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
     MyMoneyReport::setLineWidth(KMyMoneySettings::lineWidth());
@@ -3466,9 +3467,16 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
     MyMoneyFile::instance()->schedulesJournalModel()->setPreviewPeriod(KMyMoneySettings::schedulePreview());
     MyMoneyFile::instance()->schedulesJournalModel()->setShowPlannedDate(KMyMoneySettings::showPlannedScheduleDates());
 
-    LedgerViewSettings::instance()->setShowLedgerLens(KMyMoneySettings::ledgerLens());
-    LedgerViewSettings::instance()->setShowTransactionDetails(KMyMoneySettings::showRegisterDetailed());
-    LedgerViewSettings::instance()->setShowAllSplits(KMyMoneySettings::showAllSplits());
+    ledgerViewSettings->setShowLedgerLens(KMyMoneySettings::ledgerLens());
+    ledgerViewSettings->setShowTransactionDetails(KMyMoneySettings::showRegisterDetailed());
+    ledgerViewSettings->setShowAllSplits(KMyMoneySettings::showAllSplits());
+    ledgerViewSettings->setSortOrder(LedgerViewSettings::SortOrderStd, KMyMoneySettings::sortNormalView());
+    ledgerViewSettings->setSortOrder(LedgerViewSettings::SortOrderInvest, KMyMoneySettings::sortNormalView());
+    ledgerViewSettings->setSortOrder(LedgerViewSettings::SortOrderReconcileStd, KMyMoneySettings::sortReconcileView());
+    ledgerViewSettings->setSortOrder(LedgerViewSettings::SortOrderReconcileInvest, KMyMoneySettings::sortReconcileView());
+    ledgerViewSettings->setSortOrder(LedgerViewSettings::SortOrderSearch, KMyMoneySettings::sortSearchView());
+    ledgerViewSettings->flushChanges();
+
     MyMoneyFile::instance()->journalModel()->resetRowHeightInformation();
 
     pActions[Action::ViewTransactionDetail]->setChecked(KMyMoneySettings::showRegisterDetailed());

@@ -212,6 +212,9 @@ QVariant ReconciliationModel::data(const QModelIndex& idx, int role) const
         // the reconciliation entries should not be shown during reconciliation
         return QVariant::fromValue<eMyMoney::Split::State>(eMyMoney::Split::State::Reconciled);
 
+    case eMyMoney::Model::DelegateRole:
+        return static_cast<int>(eMyMoney::Delegates::Types::ReconciliationDelegate);
+
     default:
         break;
     }

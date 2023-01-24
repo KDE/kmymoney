@@ -45,6 +45,7 @@
 #include "kmymoneysettings.h"
 #include "kmymoneyview.h"
 #include "kmymoneyviewbase.h"
+#include "ledgersortproxymodel.h"
 #include "ledgerviewsettings.h"
 #include "menuenums.h"
 #include "mymoneyenums.h"
@@ -56,6 +57,8 @@
 #include "reconciliationdelegate.h"
 #include "reconciliationmodel.h"
 #include "schedulesjournalmodel.h"
+#include "securityaccountnamedelegate.h"
+#include "securityaccountsproxymodel.h"
 #include "selectedobjects.h"
 #include "specialdatedelegate.h"
 #include "specialdatesmodel.h"
@@ -82,22 +85,18 @@ public:
         , infoMessage(new KMessageWidget(q))
         , adjustableColumn(JournalModel::Column::Detail)
         , lastSelectedRow(-1)
-        , sortColumn(-1)
-        , sortOrder(Qt::AscendingOrder)
         , adjustingColumn(false)
         , showValuesInverted(false)
         , newTransactionPresent(false)
     {
         infoMessage->hide();
 
-        const auto file = MyMoneyFile::instance();
-
-        delegateProxy->addDelegate(file->journalModel(), journalDelegate);
-        delegateProxy->addDelegate(file->journalModel()->newTransaction(), journalDelegate);
-        delegateProxy->addDelegate(file->accountsModel(), new OnlineBalanceDelegate(q));
-        delegateProxy->addDelegate(file->specialDatesModel(), new SpecialDateDelegate(q));
-        delegateProxy->addDelegate(file->schedulesJournalModel(), journalDelegate);
-        delegateProxy->addDelegate(file->reconciliationModel(), new ReconciliationDelegate(q));
+        delegateProxy->addDelegate(eMyMoney::Delegates::Types::JournalDelegate, journalDelegate);
+        delegateProxy->addDelegate(eMyMoney::Delegates::Types::OnlineBalanceDelegate, new OnlineBalanceDelegate(q));
+        delegateProxy->addDelegate(eMyMoney::Delegates::Types::SpecialDateDelegate, new SpecialDateDelegate(q));
+        delegateProxy->addDelegate(eMyMoney::Delegates::Types::SchedulesDelegate, journalDelegate);
+        delegateProxy->addDelegate(eMyMoney::Delegates::Types::ReconciliationDelegate, new ReconciliationDelegate(q));
+        delegateProxy->addDelegate(eMyMoney::Delegates::Types::SecurityAccountNameDelegate, new SecurityAccountNameDelegate(q));
 
         q->setItemDelegate(delegateProxy);
     }
@@ -449,8 +448,6 @@ public:
     QHash<const QAbstractItemModel*, QStyledItemDelegate*>   delegates;
     int adjustableColumn;
     int lastSelectedRow;
-    int sortColumn;
-    Qt::SortOrder sortOrder;
     bool adjustingColumn;
     bool showValuesInverted;
     bool newTransactionPresent;
@@ -459,6 +456,7 @@ public:
     QPersistentModelIndex editIndex;
     SelectedObjects selection;
     QString firstSelectedId;
+    LedgerSortOrder sortOrder;
 };
 
 
@@ -471,7 +469,7 @@ LedgerView::LedgerView(QWidget* parent)
     verticalHeader()->setMinimumSectionSize(1);
     verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     verticalHeader()->hide();
-    setSortingEnabled(true);
+    setSortingEnabled(false);
 
     d->setFonts();
 
@@ -491,18 +489,6 @@ LedgerView::LedgerView(QWidget* parent)
 
     connect(horizontalHeader(), &QHeaderView::sectionMoved, this, [&](int logicalIndex, int oldIndex, int newIndex) {
         Q_EMIT sectionMoved(this, logicalIndex, oldIndex, newIndex);
-    });
-
-    connect(horizontalHeader(), &QHeaderView::sortIndicatorChanged, this, [&](int logicalIndex, Qt::SortOrder order) {
-        // Prevent selection of balance column for sorting
-        if (logicalIndex == JournalModel::Column::Balance) {
-            horizontalHeader()->setSortIndicator(d->sortColumn, d->sortOrder);
-            return;
-        }
-        // remember the current setting so that we can revert to
-        // it in case someone selects the balance column later
-        d->sortColumn = logicalIndex;
-        d->sortOrder = order;
     });
 
     // get notifications about setting changes
@@ -538,6 +524,9 @@ LedgerView::LedgerView(QWidget* parent)
         if (MyMoneyModelBase::baseModel(index) == MyMoneyFile::instance()->schedulesJournalModel()) {
             pActions[eMenu::Action::EditSchedule]->trigger();
         }
+    });
+    connect(horizontalHeader(), &QHeaderView::sectionClicked, this, [&]() {
+        Q_EMIT modifySortOrder();
     });
     setTabKeyNavigation(false);
 }
@@ -590,11 +579,10 @@ void LedgerView::setModel(QAbstractItemModel* model)
         }
     });
 
-    // make sure to show sort indicator
-    if (!horizontalHeader()->isSortIndicatorShown()) {
-        horizontalHeader()->setSortIndicator(JournalModel::Column::Date, Qt::AscendingOrder);
-        horizontalHeader()->setSortIndicatorShown(true);
-    }
+    horizontalHeader()->setSortIndicatorShown(false);
+    horizontalHeader()->setSortIndicator(-1, Qt::AscendingOrder);
+
+    horizontalHeader()->setSectionsClickable(true);
 }
 
 void LedgerView::reset()
@@ -1604,4 +1592,13 @@ void LedgerView::moveSection(QWidget* view, int section, int oldIndex, int newIn
 
     QSignalBlocker block(horizontalHeader());
     horizontalHeader()->moveSection(oldIndex, newIndex);
+}
+
+void LedgerView::setSortOrder(LedgerSortOrder sortOrder)
+{
+    d->sortOrder = sortOrder;
+    auto sortModel = qobject_cast<LedgerSortProxyModel*>(model());
+    if (sortModel) {
+        sortModel->setLedgerSortOrder(sortOrder);
+    }
 }

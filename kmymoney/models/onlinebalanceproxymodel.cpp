@@ -18,7 +18,6 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <KDescendantsProxyModel>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -36,21 +35,16 @@ class OnlineBalanceProxyModelPrivate
 public:
     OnlineBalanceProxyModelPrivate(OnlineBalanceProxyModel* qq)
         : q_ptr(qq)
-        , accountsListModel(new KDescendantsProxyModel(qq))
     {
     }
 
     ~OnlineBalanceProxyModelPrivate() {}
-
-    KDescendantsProxyModel*   accountsListModel;
 };
 
 OnlineBalanceProxyModel::OnlineBalanceProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)
     , d_ptr(new OnlineBalanceProxyModelPrivate(this))
 {
-    Q_D(OnlineBalanceProxyModel);
-    QSortFilterProxyModel::setSourceModel(d->accountsListModel);
 }
 
 OnlineBalanceProxyModel::~OnlineBalanceProxyModel()
@@ -62,10 +56,11 @@ OnlineBalanceProxyModel::~OnlineBalanceProxyModel()
 void OnlineBalanceProxyModel::setSourceModel(QAbstractItemModel* sourceModel)
 {
     Q_D(OnlineBalanceProxyModel);
-    d->accountsListModel->setSourceModel(sourceModel);
+
+    QSortFilterProxyModel::setSourceModel(sourceModel);
 
     // make sure that data changes in the source model invalidate our filter
-    connect(d->accountsListModel, &QAbstractItemModel::dataChanged, this, [&]() {
+    connect(sourceModel, &QAbstractItemModel::dataChanged, this, [&]() {
         invalidateFilter();
     });
 }
@@ -92,6 +87,12 @@ QVariant OnlineBalanceProxyModel::data(const QModelIndex& idx, int role) const
 {
     if (idx.isValid()) {
         switch(role) {
+        case eMyMoney::Model::OnlineBalanceEntryRole:
+            return true;
+
+        case eMyMoney::Model::DelegateRole:
+            return static_cast<int>(eMyMoney::Delegates::Types::OnlineBalanceDelegate);
+
         case Qt::DisplayRole:
             switch (idx.column()) {
             case JournalModel::Column::EntryDate:
