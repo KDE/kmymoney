@@ -55,8 +55,6 @@ OnlineBalanceProxyModel::~OnlineBalanceProxyModel()
 
 void OnlineBalanceProxyModel::setSourceModel(QAbstractItemModel* sourceModel)
 {
-    Q_D(OnlineBalanceProxyModel);
-
     QSortFilterProxyModel::setSourceModel(sourceModel);
 
     // make sure that data changes in the source model invalidate our filter
