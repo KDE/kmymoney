@@ -28,7 +28,10 @@ LedgerSortOrder::LedgerSortOrder(const QString& sortOrder)
 LedgerSortOrder::LedgerSortOrder()
     : QList<ColumnSortItem>()
 {
-    ColumnSortItem defaultSortColumnItem({.sortRole = eMyMoney::Model::TransactionPostDateRole, .sortOrder = Qt::AscendingOrder});
+    ColumnSortItem defaultSortColumnItem;
+    defaultSortColumnItem.sortRole = eMyMoney::Model::TransactionPostDateRole;
+    defaultSortColumnItem.sortOrder = Qt::AscendingOrder;
+
     append(defaultSortColumnItem);
 }
 
@@ -51,9 +54,9 @@ void LedgerSortOrder::setSortOrder(const QString& sortOrder)
     const auto sortOrderList = sortOrder.split(QLatin1Char(','), Qt::SkipEmptyParts);
     for (const auto& sortOrderEntry : sortOrderList) {
         const int numericEntry = sortOrderEntry.toInt();
-        ColumnSortItem item = {.sortRole =
-                                   sortFieldToColumn.value(static_cast<eWidgets::SortField>(qAbs(numericEntry)), eMyMoney::Model::TransactionPostDateRole),
-                               .sortOrder = numericEntry >= 0 ? Qt::AscendingOrder : Qt::DescendingOrder};
+        ColumnSortItem item;
+        item.sortRole = sortFieldToColumn.value(static_cast<eWidgets::SortField>(qAbs(numericEntry)), eMyMoney::Model::TransactionPostDateRole);
+        item.sortOrder = (numericEntry >= 0) ? Qt::AscendingOrder : Qt::DescendingOrder;
         append(item);
     }
 }

@@ -296,7 +296,6 @@ void LedgerSortProxyModel::sortOnIdle()
 
 void LedgerSortProxyModel::doSort()
 {
-    Q_D(LedgerSortProxyModel);
     sort(0, Qt::AscendingOrder);
 }
 
