@@ -29,14 +29,12 @@ MyMoneyTransaction::MyMoneyTransaction() :
     MyMoneyObject(*new MyMoneyTransactionPrivate)
 {
     Q_D(MyMoneyTransaction);
-    d->m_nextSplitID = 1;
 }
 
 MyMoneyTransaction::MyMoneyTransaction(const QString &id) :
     MyMoneyObject(*new MyMoneyTransactionPrivate, id)
 {
     Q_D(MyMoneyTransaction);
-    d->m_nextSplitID = 1;
 }
 
 MyMoneyTransaction::MyMoneyTransaction(const MyMoneyTransaction& other) :
@@ -249,7 +247,6 @@ void MyMoneyTransaction::removeSplits()
 {
     Q_D(MyMoneyTransaction);
     d->m_splits.clear();
-    d->m_nextSplitID = 1;
 }
 
 MyMoneySplit MyMoneyTransaction::splitByPayee(const QString& payeeId) const

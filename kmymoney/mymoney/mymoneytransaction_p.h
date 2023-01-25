@@ -36,18 +36,15 @@ public:
       */
     QString nextSplitID()
     {
-        QSet<QString> usedIds;
+        int lastIdUsed(0);
         for (const auto& split : m_splits) {
-            usedIds.insert(split.id());
-        }
-        for (int i = 1; true; ++i) {
-            QString id;
-            id = 'S' + id.setNum(i).rightJustified(SPLIT_ID_SIZE, '0');
-            if (!usedIds.contains(id)) {
-                return id;
+            const int id = split.id().midRef(1).toInt();
+            if (id > lastIdUsed) {
+                lastIdUsed = id;
             }
         }
-        return {};
+
+        return QStringLiteral("S%1").arg(lastIdUsed + 1, SPLIT_ID_SIZE, 10, QLatin1Char('0'));
     }
 
     static const int SPLIT_ID_SIZE = 4;
@@ -76,13 +73,6 @@ public:
       * This member contains the splits for this transaction
       */
     QList<MyMoneySplit> m_splits;
-
-    /**
-      * This member keeps the unique numbers of splits within this
-      * transaction. Upon creation of a MyMoneyTransaction object this
-      * value will be set to 1.
-      */
-    uint m_nextSplitID;
 
     /**
       * This member keeps the base commodity (e.g. currency) for this transaction
