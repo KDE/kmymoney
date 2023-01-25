@@ -396,12 +396,6 @@ void SpecialLedgerItemFilter::forceReload()
 QVariant SpecialLedgerItemFilter::data(const QModelIndex& index, int role) const
 {
     Q_D(const SpecialLedgerItemFilter);
-    if (index.column() == JournalModel::Column::Value && index.row() == 0) {
-        if (role == Qt::BackgroundRole) {
-            qDebug() << "Hit";
-        }
-    }
-
     if (index.column() == JournalModel::Balance) {
         switch (role) {
         case Qt::DisplayRole:
