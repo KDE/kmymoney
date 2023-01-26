@@ -337,7 +337,7 @@
 <para>
   The configuration dialog for reports which display amounts over time may
   include budget related settings.  These are only enabled if you do have one or
-  more budgets defined, and include a drop-down to to select one of those
+  more budgets defined, and include a drop-down to select one of those
   budgets.  If one is selected, the report will show the budgeted amount per
   time period rather that the actual amounts from transaction in that period.
   In addition, some reports may also give you the option of displaying both the
