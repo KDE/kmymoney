@@ -28,13 +28,11 @@
 MyMoneyTransaction::MyMoneyTransaction() :
     MyMoneyObject(*new MyMoneyTransactionPrivate)
 {
-    Q_D(MyMoneyTransaction);
 }
 
 MyMoneyTransaction::MyMoneyTransaction(const QString &id) :
     MyMoneyObject(*new MyMoneyTransactionPrivate, id)
 {
-    Q_D(MyMoneyTransaction);
 }
 
 MyMoneyTransaction::MyMoneyTransaction(const MyMoneyTransaction& other) :
