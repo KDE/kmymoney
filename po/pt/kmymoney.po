@@ -3111,11 +3111,9 @@ msgstr "Opções da ordenação"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useDefault)
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Reset to application defaults"
-#| msgid "Reset to default"
+#, kde-format
 msgid "Use default"
-msgstr "Repor a predefinição"
+msgstr "Usar a predefinição"
 
 # TODO: Verify
 #. i18n: ectx: property (windowTitle), widget (QDialog, KUpdateStockPriceDlg)

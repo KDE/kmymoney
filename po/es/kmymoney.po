@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-25 00:58+0000\n"
-"PO-Revision-Date: 2023-01-08 12:11+0100\n"
+"PO-Revision-Date: 2023-01-26 00:51+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -3029,15 +3029,13 @@ msgstr ""
 #: kmymoney/widgets/transactionsortoption.ui:23
 #, kde-format
 msgid "Sort options"
-msgstr "Opciones de ordenación"
+msgstr "Opciones de orden"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useDefault)
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Reset to application defaults"
-#| msgid "Reset to default"
+#, kde-format
 msgid "Use default"
-msgstr "Volver a los valores predeterminados"
+msgstr "Usar la predeterminada"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KUpdateStockPriceDlg)
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:14

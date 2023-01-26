@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-25 00:58+0000\n"
-"PO-Revision-Date: 2023-01-08 11:53+0100\n"
+"PO-Revision-Date: 2023-01-25 09:27+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -3030,11 +3030,9 @@ msgstr "Opcions d'ordenació"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useDefault)
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Reset to application defaults"
-#| msgid "Reset to default"
+#, kde-format
 msgid "Use default"
-msgstr "Restableix als valors predeterminats"
+msgstr "Usa els valors predeterminats"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KUpdateStockPriceDlg)
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:14
@@ -25022,19 +25020,3 @@ msgstr ""
 "\n"
 "<p>Tota la informació és optativa i s'usa per a personalitzar el fitxer del "
 "KMyMoney.</p>"
-
-#~ msgctxt "Activity for income categories"
-#~ msgid "Received"
-#~ msgstr "Rebuda"
-
-#~ msgctxt "Activity for expense categories"
-#~ msgid "Paid"
-#~ msgstr "Pagada"
-
-#~ msgctxt "Payee"
-#~ msgid "Pay to"
-#~ msgstr "Paga a"
-
-#~ msgctxt "Payer"
-#~ msgid "From"
-#~ msgstr "Des de"
