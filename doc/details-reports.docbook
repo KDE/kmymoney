@@ -107,12 +107,14 @@
   your account register for a specific period of time.  The transactions
   included in a report can be grouped together according to your liking by
   choosing the appropriate report, such as:
+</para>
   <itemizedlist>
     <listitem><para>By Account</para></listitem>
     <listitem><para>By Category</para></listitem>
     <listitem><para>By Month or Week</para></listitem>
     <listitem><para>By Payee</para></listitem>
   </itemizedlist>
+<para>
   You can also choose the time period for the report.
 </para>
 </sect2>
@@ -642,7 +644,7 @@
 
     <listitem>
       <para>
-        Logarithmic vertial axis: Only enabled when relevant - use a logarithmic
+        Logarithmic vertical axis: Only enabled when relevant - use a logarithmic
         instead of linear scale for the vertical axis.
       </para>
     </listitem>
@@ -668,7 +670,7 @@
 <para>
   Use this section to specify the date range of transactions to be included in
   the report.  The <guilabel>Range</guilabel> dropdown includes a large number
-  of predfined ranges, but you cans select <quote>User defined</quote> and
+  of predefined ranges, but you cans select <quote>User defined</quote> and
   manually set <guilabel>From</guilabel> and <guilabel>To</guilabel>.  The
   <guilabel>Ticks</guilabel> dropdown specifies the placement of tick marks on
   the horizontal (time)  axis of the chart.  
