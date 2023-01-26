@@ -669,18 +669,18 @@
 <sect4><title>Date range</title>
 <para>
   Use this section to specify the date range of transactions to be included in
-  the report.  The <guilabel>Range</guilabel> dropdown includes a large number
-  of predefined ranges, but you cans select <quote>User defined</quote> and
+  the report.  The <guilabel>Range</guilabel> drop-down includes a large number
+  of predefined ranges, but you can select <quote>User defined</quote> and
   manually set <guilabel>From</guilabel> and <guilabel>To</guilabel>.  The
-  <guilabel>Ticks</guilabel> dropdown specifies the placement of tick marks on
-  the horizontal (time)  axis of the chart.  
+  <guilabel>Ticks</guilabel> drop-down specifies the placement of tick marks on
+  the horizontal (time) axis of the chart.
 </para>
 </sect4>
 
 <sect4><title>Data range</title>
 <para>
   This specifies the tick marks and divisions on the vertical axis of the chart.
-  It is generally best to leave the <guilabel>Range</guilabel> dropdown set to
+  It is generally best to leave the <guilabel>Range</guilabel> drop-down set to
   <quote>Automatic</quote>.
 </para>
 </sect4>
