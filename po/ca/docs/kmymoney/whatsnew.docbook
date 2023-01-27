@@ -122,6 +122,10 @@
 >Conciliació</link
 ></member>
 	    <member
+><link linkend="details.reports"
+>Informes</link
+></member>
+	    <member
 ><link linkend="details.impexp"
 >Importar i exportar</link
 ></member>
@@ -141,10 +145,6 @@
 	</entry>
 	<entry valign="top">
 	  <simplelist>
-	    <member
-><link linkend="details.reports"
->Informes</link
-></member>
 	    <member
 ><link linkend="details.loans"
 >Préstecs</link

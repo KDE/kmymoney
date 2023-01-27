@@ -129,11 +129,11 @@
 
 <para
 >Laten we aannemen dat uw maandelijkse hypotheekbetaling inkomt van uw bank zoals deze <quote
->SUNTRUST BANK MAPLE VALLEY, GA 111506</quote
+>SUN TRUST BANK MAPLE VALLEY, GA 111506</quote
 > de ene maand en de volgende maand van <quote
->SUNTRUST BANK MAPLE VALLEY, GA 121606</quote
+>SUN TRUST BANK MAPLE VALLEY, GA 121606</quote
 >. U wilt echt dat beiden van deze transacties toegekend worden aan uw debiteur <quote
->SunTrust</quote
+>Sun Trust</quote
 >. De functie transactieovereenkomst is er voor u! </para>
 
 <para>
@@ -195,17 +195,19 @@
 >Transacties importeren</title>
 
 <para
->De indentificatiesleutels, die u hebt ingesteld, zullen meegenomen worden wanneer u transacties importeert met het QIF importeren of een plug-in gebruikt zoals OFX of AqBanking. Als de identificatiesleutel voor een van uw debiteuren ergens is gevonden in de debiteur van de geïmporteerde transactie, zal de overeenkomende debiteur uit uw lijst toegekend worden aan die transactie. Dus een identificatiesleutel van <quote
->SunTrust</quote
+>De identificatiesleutels, die u hebt ingesteld, zullen meegenomen worden wanneer u transacties importeert met het QIF importeren of een plug-in gebruikt zoals OFX of AqBanking. Als de identificatiesleutel voor een van uw debiteuren ergens is gevonden in de debiteur van de geïmporteerde transactie, zal de overeenkomende debiteur uit uw lijst toegekend worden aan die transactie. Dus een identificatiesleutel van <quote
+>Sun Trust</quote
 > zal overeenkomen met <quote
->SUNTRUST BANK MAPLE VALLEY,GA</quote
+>SUN TRUST BANK MAPLE VALLEY,GA</quote
 > of zelfs <quote
->MORGENSUNTRUST&amp;LOAN</quote
->. Kies uw indentificatiesleutels dus zorgvuldig. <note
-> <para
+>MORGEN SUN TRUST&amp;LOAN</quote
+>. Kies uw identificatiesleutels dus zorgvuldig. </para>
+<para
+><note>
+    <para
 >Als een debiteur in een transactie overeenkomt met meer dan één identificatiesleutel, is het gedrag ongedefinieerd. &kmymoney; zal willekeurig een van de overeenkomende debiteuren kiezen.</para>
-  </note>
-</para>
+</note
+></para>
 </sect3>
 </sect2>
 </sect1>

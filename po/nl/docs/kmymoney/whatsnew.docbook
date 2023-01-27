@@ -122,6 +122,10 @@
 >Transactiecontrole</link
 ></member>
 	    <member
+><link linkend="details.reports"
+>Rapporten</link
+></member>
+	    <member
 ><link linkend="details.impexp"
 >Importeren en exporteren</link
 ></member>
@@ -141,10 +145,6 @@
 	</entry>
 	<entry valign="top">
 	  <simplelist>
-	    <member
-><link linkend="details.reports"
->Rapporten</link
-></member>
 	    <member
 ><link linkend="details.loans"
 >Leningen</link

@@ -122,6 +122,10 @@
 >Узгодження</link
 ></member>
 	    <member
+><link linkend="details.reports"
+>Звіти</link
+></member>
+	    <member
 ><link linkend="details.impexp"
 >Імпортування та експортування</link
 ></member>
@@ -141,10 +145,6 @@
 	</entry>
 	<entry valign="top">
 	  <simplelist>
-	    <member
-><link linkend="details.reports"
->Звіти</link
-></member>
 	    <member
 ><link linkend="details.loans"
 >Кредити</link

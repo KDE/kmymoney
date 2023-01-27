@@ -6,9 +6,9 @@
 >&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->30 d'agost de 2014</date>
+>20 de desembre de 2022</date>
   <releaseinfo
->4.7.01</releaseinfo>
+>5.1.3</releaseinfo>
 </chapterinfo>
 
 <title
@@ -165,13 +165,13 @@
 <qandaentry>
  <question>
    <para
->Vaig escriure malament el nom d'un beneficiari i vull canviar-lo en totes les operacions. Hi ha una cerca/substitució global?</para>
+>Vaig escriure malament el nom d'un beneficiari i vull canviar-lo en totes les operacions Hi ha una cerca/substitució global?</para>
  </question>
  <answer>
    <para
 >No hi ha cap funció de cerca i substitució global al &kmymoney;. No obstant això, és fàcil canviar el nom d'un beneficiari: seleccioneu la vista dels beneficiaris i cerqueu l'entrada amb el nom que voleu canviar. Feu clic amb el &BDR; sobre el beneficiari i seleccioneu <guimenuitem
 >Reanomena el beneficiari</guimenuitem
-> des del menú contextual. Introduïu el nom nou. Atès que les operacions només fan servir una referència amb el registre de beneficiaris, totes les operacions ara mostraran el nom nou.</para>
+> des del menú contextual i introduïu el nom nou. Com una alternativa a fer servir el &BDR; podeu prémer F2 després de seleccionar el beneficiari. Atès que les operacions només fan servir una referència amb el registre de beneficiaris, totes les operacions ara mostraran el nom nou.</para>
  </answer>
 </qandaentry>
 

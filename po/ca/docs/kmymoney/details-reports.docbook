@@ -4,15 +4,41 @@
   <authorgroup>
     <author
 >&Ace.Jones; &Ace.Jones.mail; </author>
+    <author
+>&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->25 de juliol de 2010</date>
+>31 de desembre de 2022</date>
   <releaseinfo
->4.5</releaseinfo>
+>5.1</releaseinfo>
 </chapterinfo>
 
 <title
 >Informes</title>
+
+<sect1 id="details.reports.issues">
+<title
+>Problemes coneguts</title>
+  <para
+>Les actualitzacions recents d'aquest capítol l'han posat al dia pel que fa a seleccionar, configurar, visualitzar, exportar i desar informes. No obstant això, hi ha problemes coneguts amb el contingut d'alguns informes que s'abordaran amb més detall en una futura actualització, tant del propi &kmymoney; com d'aquest manual. Aquests es llisten a continuació per a la vostra informació i per a evitar sorpreses i informes d'error innecessaris. </para>
+
+  <itemizedlist>
+    <listitem>
+      <para
+>En alguns informes d'inversió, s'han plantejat preguntes sobre els mètodes utilitzats en els càlculs relacionats amb els guanys de capital, especialment els guanys o pèrdues no realitzats (la diferència de valor dels valors actualment retinguts en comparació amb el seu cost de compra original). Això és especialment cert quan el període de l'informe no s'estén abans de la compra i després de la venda de qualsevol títol. </para>
+    </listitem>
+
+    <listitem>
+      <para
+>En els informes que impliquen un pivot de dades (on les columnes representen períodes de temps) si hi ha implicades conversions de divisa, les conversions no es poden aplicar en les mateixes dates quan les operacions no s'agrupen per dates. Això pot donar lloc a diferents valors en diferents informes, on es podria esperar que els valors siguin els mateixos. </para>
+    </listitem>
+    
+    <listitem>
+      <para
+>L'especificació de comptes tancats per a la inclusió en els informes no sempre funciona com s'esperaria. A causa de les interaccions entre les diferents parts de la configuració i la generació de l'informe, no sempre és possible incloure dades dels comptes que ara estan tancats, però que estaven obertes durant l'interval de temps especificat de l'informe. </para>
+    </listitem>
+  </itemizedlist>
+</sect1>
 
 <sect1 id="details.reports.avail">
 <title
@@ -41,40 +67,41 @@
 <title
 >Ingressos i despeses</title>
 <para
->Els informes en aquesta secció mostren els ingressos i despeses per al mes actual o per a cada mes de l'any actual. Per descomptat, la durada de l'informe general i la durada capturada per cada columna es podran configurar al vostre gust. També es poden produir gràfics i gràfics de sectors. </para>
+>Aquests informes secció mostren els ingressos i despeses per al mes actual o per a cada mes de l'any actual. Per descomptat, la durada de l'informe general i la durada capturada per cada columna es podran configurar al vostre gust. També es poden produir gràfics i gràfics de sectors. </para>
 </sect2>
 
 <sect2>
 <title
 >Valor net</title>
 <para
->Aquí hi ha informes que descriuen el valor net, ja sigui en el moment actual, cada mes de l'any actual o cada any de l'historial. A més, hi ha una previsió del flux de caixa de 7 dies i un gràfic del valor net. També hi ha informes per a obtenir els saldos de tots els comptes en un moment donat. </para>
+>Aquests informes descriuen el valor net, ja sigui en el moment actual, cada mes de l'any actual o cada any de l'historial. A més, hi ha una previsió del flux de caixa de 7 dies i un gràfic del valor net. També hi ha informes per a obtenir els saldos de tots els comptes en un moment donat del temps. Igual que amb els informes d'ingressos i despeses, els períodes de temps i els agrupaments es poden configurar com es desitgi. </para>
 </sect2>
 
 <sect2>
 <title
 >Operacions</title>
 <para
->Aquesta secció inclou els informes que llisten les operacions individuals. Aquesta és la millor manera d'imprimir el registre del compte durant un període de temps específic. Les operacions impreses es podran agrupar segons el vostre gust triant l'informe apropiat, per exemple: <itemizedlist>
-  <listitem
+>These reports list individual transactions. This is the best way to print your account register for a specific period of time. The transactions included in a report can be grouped together according to your liking by choosing the appropriate report, such as: </para>
+  <itemizedlist>
+    <listitem
 ><para
->Per compte</para
+>By Account</para
 ></listitem>
-  <listitem
+    <listitem
 ><para
->Per categoria</para
+>By Category</para
 ></listitem>
-  <listitem
+    <listitem
 ><para
->Per mes o setmana</para
+>By Month or Week</para
 ></listitem>
-  <listitem
+    <listitem
 ><para
->Per beneficiari</para
+>By Payee</para
 ></listitem>
-</itemizedlist>
-</para>
-
+  </itemizedlist>
+<para
+>You can also choose the time period for the report. </para>
 </sect2>
 
 <sect2>
@@ -92,33 +119,23 @@
 <itemizedlist>
   <listitem
 ><para
-><guilabel
->Operacions d'inversió</guilabel
->: similar a un informe d'Operacions, i inclourà el preu de l'acció i les quantitats.</para
+>Operacions d'inversió: similar a un informe d'Operacions, i inclourà el preu de l'acció i les quantitats. </para
 ></listitem>
   <listitem
 ><para
-><guilabel
->Participacions en inversions per compte</guilabel
->: mostrarà les accions, el preu i el valor actual de cada compte.</para
+>Participacions en inversions per compte: mostrarà les accions, el preu i el valor actual de cada compte.</para
 ></listitem>
   <listitem
 ><para
-><guilabel
->Participacions d'inversió per tipus</guilabel
->: igual que amb l'informe anterior, però organitza els comptes per tipus (accions, fons d'inversió, &etc;)</para
+>Participacions d'inversió per tipus: igual que amb l'informe anterior, però organitza els comptes per tipus (accions, fons d'inversió, &etc;)</para
 ></listitem>
   <listitem
 ><para
-><guilabel
->Rendiment de la inversió per compte</guilabel
->: mostrarà el rendiment anual durant qualsevol període de temps. Farà una anàlisi del flux de caixa de tots els diners que entren i surten del compte. Com a resultat, es tractarà d'una imatge molt precisa del funcionament de les inversions.</para
+>Rendiment de la inversió per compte: mostrarà el rendiment anual durant qualsevol període de temps. Farà una anàlisi del flux de caixa de tots els diners que entren i surten del compte. Com a resultat, es tractarà d'una imatge molt precisa del funcionament de les inversions.</para
 ></listitem>
   <listitem
 ><para
-><guilabel
->Rendiment de la inversió per tipus</guilabel
->: igual que amb l'informe anterior, però organitza els comptes per tipus (accions, fons d'inversió, &etc;)</para
+>Rendiment de la inversió per tipus: igual que amb l'informe anterior, però organitza els comptes per tipus (accions, fons d'inversió, &etc;)</para
 ></listitem>
 </itemizedlist>
 
@@ -130,21 +147,21 @@
 <title
 >Impostos</title>
 <para
->Els informes d'impostos són com els informes d'operacions, amb l'addició que només s'inclouran les categories relacionades amb els impostos. Això permet marcar certes categories com a relacionades amb els impostos, i després obtenir un gran informe al final de l'any per a veure-les totes en un sol lloc. Es podran llistar per Categoria o per Beneficiari, i per a l'últim any fiscal. </para>
+>Els informes d'impostos són com els informes d'operacions, però només s'inclouen les categories relacionades amb els impostos. Això permet marcar certes categories com a relacionades amb els impostos, i després obtenir un gran informe al final de l'any per a veure-les totes en un sol lloc. Es podran llistar per Categoria o per Beneficiari, i per a l'últim any fiscal. </para>
 </sect2>
 
 <sect2>
 <title
 >Pressupostos</title>
 <para
->Els informes de pressupost són similars als informes de valor net, però els informes podran mostrar el pressupost per a un any determinat, o fins i tot comparar-lo amb els ingressos i despeses reals per al mateix període. </para>
+>Aquest informes són similars als informes de valor net, però podran mostrar el pressupost per a un any determinat, i comparar-lo amb els ingressos i despeses reals del mateix període. </para>
 </sect2>
 
 <sect2>
 <title
 >Previsió</title>
 <para
->Els informes de la previsió són com els informes de valor net, però utilitzen la informació per a mostrar la informació de la previsió. Podreu mostrar la informació en diversos nivells i durant el període de temps que trieu. </para>
+>Aquests informes són com els informes de valor net, però utilitzen la informació per a mostrar la informació de la previsió. Podreu mostrar la informació en diversos nivells i durant el període de temps que trieu. </para>
 </sect2>
 
 <sect2>
@@ -169,16 +186,6 @@
 <para
 >Aquesta secció llistarà tots els informes que heu marcat com a preferits al diàleg de configuració de l'informe. Encara es llistaran a una de les altres seccions, però també s'afegeix aquí per a una referència fàcil. Els informes preferits també s'inclouen a la pàgina del resum financer per a una referència encara més fàcil. </para>
 </sect2>
-
-<sect2>
-<title
->Configurar els informes</title>
-<para
->Per a accedir al diàleg de configuració de l'informe, obriu l'informe que voleu configurar i premeu el botó <guibutton
->Configura</guibutton
-> que hi ha a la part superior de l'informe. </para>
-</sect2>
-
 </sect1>
 
 <sect1 id="details.reports.working">
@@ -186,51 +193,75 @@
 >Treballar amb els informes</title>
 
 <para
->Hi ha una sèrie d'accions que podreu realitzar a cada informe. Podreu accedir-hi fent clic dret sobre el nom de l'informe a la llista d'informes. Altrament, una vegada hàgiu executat un informe, hi haurà botons a la part superior de la vista per a invocar cadascuna d'aquestes: </para>
+>Hi ha una sèrie d'accions que podreu realitzar a cada informe. Podreu accedir-hi fent clic dret sobre el nom de l'informe a la llista d'informes, i seleccionar l'acció des del menú contextual. Aquestes inclouen: </para>
 
 <itemizedlist>
-  <listitem
-><para
-><guibutton
->Gràfic</guibutton
->: només estarà present si l'informe és capaç de mostrar un gràfic. En seleccionar aquesta opció, s'alternarà entre l'informe i el gràfic.</para
-></listitem>
-  <listitem
-><para
-><guibutton
->Configura</guibutton
->: per a canviar les propietats d'aquest informe. Podreu personalitzar l'informe al vostre gust i desar-lo per a emprar-lo en el futur.</para
-></listitem>
-  <listitem
-><para
-><guibutton
->Nou</guibutton
->: per a crear un informe personalitzat nou basat en l'informe seleccionat.</para
-></listitem>
-  <listitem
-><para
-><guibutton
->Copia</guibutton
->: la sortida de l'informe es podrà copiar al porta-retalls per a enganxar-la a una altra aplicació, com un full de càlcul, per a una anàlisi amb més detall.</para
-></listitem>
-  <listitem
-><para
-><guibutton
->Exporta</guibutton
->: els informes es podran desar en el format &HTML; o CSV.</para
-></listitem>
-  <listitem
-><para
-><guibutton
->Suprimeix</guibutton
->: els informes personalitzats es podran suprimir. Els que són distribuïts amb el &kmymoney; no es podran suprimir.</para
-></listitem>
-  <listitem
-><para
-><guibutton
->Tanca</guibutton
->: tanca l'informe actual.</para
-></listitem>
+  <listitem>
+    <para
+>Obre: executa l'informe i mostra els resultats. Aquesta és la mateixa acció que si feu doble clic al nom de l'informe. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Imprimeix: és el mateix que executar l'informe i després seleccionar l'element de menú <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Imprimeix</guimenuitem
+></menuchoice
+>. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Configura: per a canviar les propietats d'aquest informe. Podreu personalitzar l'informe al vostre gust i desar-lo per a emprar-lo en el futur. Vegeu la secció següent per a més detalls. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Informe nou: això crea una còpia de l'informe i obre el diàleg de configuració. </para>
+  </listitem>
+
+</itemizedlist>
+
+<para
+>Alternativament, una vegada hàgiu executat un informe, hi haurà botons a la part superior de la vista per a invocar cadascuna d'aquestes accions: </para>
+
+<itemizedlist>
+  <listitem>
+    <para
+>Gràfic: només estarà present si l'informe és capaç de mostrar un gràfic. En fer-hi clic, s'alternarà entre l'informe i el gràfic. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Configura: com s'ha descrit anteriorment. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Nou: com s'ha descrit anteriorment. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Copia: aquesta copia la sortida de l'informe al porta-retalls per a enganxar-la en una altra aplicació, com un full de càlcul, per a una anàlisi o manipulació posterior. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Exporta: el contingut d'un informe es pot desar en el format &HTML; o CSV. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Suprimeix: els informes personalitzats es podran suprimir. Els que són distribuïts amb el &kmymoney; no es podran suprimir. </para>
+  </listitem>
+
+  <listitem>
+    <para
+>Tanca: tanca l'informe actual. </para>
+  </listitem>
 </itemizedlist>
 </sect1>
 
@@ -242,228 +273,309 @@
 <title
 >Treballar amb els informes personalitzats</title>
 <para
->Podreu configurar els informes predeterminats o crear els vostres seleccionant <guibutton
->Nou</guibutton
-> i després configurant l'informe nou. Quan seleccioneu <guibutton
->Configura</guibutton
->, es presentarà la pestanya de l'informe. Inicialment, s'anomenarà igual que l'informe anterior amb «(Personalitzat)» annexat al final. Podreu canviar el nom quan vulgueu. Fins i tot podreu anomenar els vostres informes personalitzats de la mateixa manera que un informe predeterminat, o igual que un altre informe personalitzat. A més, sempre podreu fer servir el camp Comentari per a distingir encara més entre els informes. </para>
+>Podreu configurar els informes predeterminats o crear els vostres seleccionant «Nou» i després configurant l'informe nou. Quan seleccioneu «Configura», es presentarà el diàleg de configuració d'informe, amb la pestanya d'informe seleccionada. Inicialment, l'informe nou s'anomenarà igual que l'informe anterior amb «(Personalitzat)» annexat al final. Podreu canviar el nom quan vulgueu. Fins i tot podreu anomenar els vostres informes personalitzats de la mateixa manera que un informe predeterminat, o igual que un altre informe personalitzat. A més, sempre podreu fer servir el camp Comentari per a distingir encara més entre els informes. </para>
 
 <para
->El diàleg Configuració de l'informe té diverses pestanyes a la part superior. Cada pestanya mostra les opcions per a configurar diferents aspectes de l'informe. </para>
-
+>El diàleg Configuració de l'informe té diverses pestanyes a la part superior, amb subpestanyes sota d'elles. Cada pestanya mostra les opcions per a configurar diferents aspectes de l'informe. </para>
 </sect2>
 
 <sect2
 ><title
->La pestanya General</title>
+>Pressupostos</title>
+<para
+>The configuration dialog for reports which display amounts over time may include budget related settings. These are only enabled if you do have one or more budgets defined, and include a drop-down to select one of those budgets. If one is selected, the report will show the budgeted amount per time period rather that the actual amounts from transaction in that period. In addition, some reports may also give you the option of displaying both the bugdeted and actual amounts, so you can compare them. </para>
+</sect2>
+
+<sect2
+><title
+>Pestanya d'informe</title>
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="report_configuration-reporttab.png" format="PNG"/>
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase
 >Configuració de l'informe: General</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+      </textobject>
+    </mediaobject
+></screenshot
+> Tingueu en compte que aquesta captura de pantalla mostra els noms antics de les pestanyes Criteris i Resultat, que s'han canviat a Informe i Filtres. Els diferents informes mostraran subconjunts diferents de subpestanyes, apropiats per configurar aquest informe en particular. A més, moltes de les subpestanyes s'han mogut des de la pestanya Informe a la pestanya Filtres. </para>
 
+<sect3>
+<title
+>Subpestanya general</title>
 <para
->En aquesta pestanya, establireu les propietats bàsiques d'aquest informe. <itemizedlist>
-  <listitem
-><para
-><guilabel
->Nom de l'informe</guilabel
->: per a triar un nom per a aquest informe.</para
-></listitem>
-  <listitem
-><para
-><guilabel
->Comentari</guilabel
->: per a introduir un comentari que us ajudarà a recordar els detalls d'aquest informe.</para
-></listitem>
-  <listitem
-><para
-><guilabel
->Converteix els valors a la divisa base</guilabel
->: seleccioneu aquesta opció per a convertir tots els valors de l'informe a la divisa base. Deixeu-la sense marcar si voleu veure els valors en la seva divisa original. Si no es converteix entre les divises, llavors no es mostraran els subtotals.</para
-></listitem>
-  <listitem
-><para
-><guilabel
->Marca com a informe preferit</guilabel
->: marqueu-la perquè aquest informe aparegui a la pàgina principal i en el grup <guilabel
+>Aquí establireu les propietats bàsiques d'aquest informe. <itemizedlist>
+    <listitem>
+      <para
+>Nom de l'informe: trieu un nom per a aquest informe. </para>
+    </listitem>
+
+    <listitem>
+      <para
+>Comentari: introduïu un comentari per a ajudar-vos a recordar els detalls d'aquest informe, o per a distingir informes amb el mateix nom. </para>
+    </listitem>
+
+    <listitem>
+      <para
+>Converteix els valors a la divisa base: seleccioneu aquesta opció per a convertir tots els valors de l'informe a la divisa base. Deixeu-la sense marcar per a veure els valors en la seva divisa original. Si no es converteix entre les divises, llavors no es mostraran els subtotals. </para>
+    </listitem>
+
+    <listitem>
+      <para
+>Marca com a informe preferit: marqueu-la perquè aquest informe aparegui a la pàgina principal i en el grup <guilabel
 >Informes preferits</guilabel
->.</para
-></listitem>
-</itemizedlist>
+>. </para>
+    </listitem>
+
+    <listitem>
+      <para
+>Omet el valor si el preu és zero: això només està habilitat per als informes d'inversions que mostren preus en lloc de saldos. Seleccioneu aquesta opció per a incloure els preus només si hi ha un preu real per a la data. Si no, es mostrarà 0. Al gràfic, s'ometrà el valor. </para>
+    </listitem>
+  </itemizedlist>
 </para>
+</sect3>
 
-</sect2>
-
-<sect2 id="details.reports.config.rowscolumns">
+<sect3 id="details.reports.config.rowscolumns">
 <title
->La pestanya Files/Columnes</title>
-<para
->En aquesta pestanya, es configura com us agradaria seleccionar i organitzar les files i columnes. Aquesta pestanya presenta diferents opcions de configuració segons l'estil de l'informe que hàgiu seleccionat. </para>
+>La subpestanya Files/Columnes</title>
+  <para
+>Aquí és a on es configura la selecció i organització de les files i les columnes que es mostren a l'informe. Aquesta pestanya presenta opcions de configuració diferents segons l'estil de l'informe que hàgiu seleccionat. </para>
 
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="report_configuration-rowscolumns.png" format="PNG"/>
-	</imageobject>
-	<textobject>
-	<phrase
+  <para>
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+	  <imagedata fileref="report_configuration-rowscolumns.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+	  <phrase
 >Configuració de l'informe: Files i columnes</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
+        </textobject>
+      </mediaobject>
+    </screenshot>
+  </para>
 
-<para
->Per a informes d'ingressos/despeses i valor net: <itemizedlist>
-  <listitem
-><para
-><guilabel
->Columnes</guilabel
->: trieu la longitud del període de temps que haurà d'abastar cada columna.</para
-></listitem>
-  <listitem
-><para
-><guilabel
->Files</guilabel
->: trieu la classe de comptes a mostrar com a files d'aquest informe.</para
-></listitem>
-  <listitem
-><para
-><guilabel
->Detall</guilabel
->: trieu el nivell de detall requerit per a aquest informe.</para
-></listitem>
-</itemizedlist>
-</para>
+  <para
+>Per a informes d'ingressos i despeses i valor net: <itemizedlist>
+      <listitem>
+        <para
+>Pressupost: vegeu el debat anterior </para>
+      </listitem>
 
-<para
->Hi ha disponibles els elements de detall següents: <itemizedlist>
-  <listitem
-><para
-><guilabel
->Tots</guilabel
->: es mostrarà cada categoria o compte.</para
-></listitem>
-  <listitem
-><para
-><guilabel
->Nivell superior</guilabel
->: per a mostrar només les categories o comptes de nivell més alt i acumular les sumes de les categories o comptes subordinats a aquests valors.</para
-></listitem>
-  <listitem
-><para
-><guilabel
->Grups</guilabel
->: per a mostrar només els totals dels ingressos, despeses, actius o passius.</para
-></listitem>
-  <listitem
-><para
-><guilabel
->Total</guilabel
->: per a mostrar només la línia dels totals finals.</para
-></listitem>
-</itemizedlist>
-</para>
+      <listitem>
+        <para
+>Mostra la columna de totals: activeu-ho per a visualitzar una columna que mostri el total de cada fila. </para>
+      </listitem>
 
-<para
+      <listitem>
+        <para
+>Mostra la fila de totals: activeu-ho per a visualitzar una fila que mostri el total de cada columna. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Files: trieu la classe de comptes a mostrar com a files d'aquest informe. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Detall: trieu el nivell de detall requerit per a aquest informe. Hi ha disponibles els nivells de detall següents: <itemizedlist>
+            <listitem>
+              <para
+>Tots: es mostrarà cada categoria o compte. </para>
+            </listitem>
+
+            <listitem>
+              <para
+>Nivell superior: per a mostrar només les categories o comptes de nivell més alt i acumular les sumes de les categories o comptes subordinats a aquests valors. </para>
+            </listitem>
+
+            <listitem>
+              <para
+>Grups: només mostra els totals de les categories i comptes. </para>
+            </listitem>
+
+            <listitem>
+              <para
+>Total: només mostra la línia dels totals finals. </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Dies de mitjana: només està activat per als informes rellevants. Estableix la durada del període de temps que haurà d'abastar cada columna. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Columnes: trieu la durada del període de temps que haurà d'abastar cada columna. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Inclou les operacions planificades: activeu-ho per a incloure les operacions planificades que encara no s'han introduït. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Inclou les transferències: a menys que activeu això, les transferències s'exclouen dels informes de les operacions. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Inclou els comptes/categories sense ús: a menys que ho activeu, les files que tindrien valor zero no es mostraran. </para>
+      </listitem>
+    </itemizedlist>
+  </para>
+
+
+  <para
 >Per als informes de les operacions: <itemizedlist>
-  <listitem
-><para
-><guilabel
->Organitza per</guilabel
->: trieu com agrupar les operacions en aquest informe.</para
-></listitem>
-  <listitem
-><para
-><guilabel
->Mostra les columnes</guilabel
->: trieu les columnes que s'hauran de mostrar en l'informe. Sempre es mostraran la data i l'import de l'operació.</para
-></listitem>
-  <listitem
-><para
-><guilabel
->Inclou només les categories d'impostos</guilabel
->: només mostra les categories que s'han marcat com a relacionades amb els impostos.</para
-></listitem>
-  <listitem
-><para
-><guilabel
->Inclou només els comptes d'inversió</guilabel
->: només mostra les operacions dels comptes d'inversió.</para
-></listitem>
-  <listitem
-><para
-><guilabel
->Inclou només els comptes de préstecs</guilabel
->: només mostra les operacions dels comptes de préstec.</para
-></listitem>
-</itemizedlist>
-</para>
+      <listitem>
+        <para
+>Organitza per: trieu com agrupar les operacions en aquest informe. </para>
+      </listitem>
 
-</sect2>
+      <listitem>
+        <para
+>Mostra les columnes: trieu les columnes que s'hauran de mostrar en l'informe. Sempre es mostraran la data i l'import de l'operació. </para>
+      </listitem>
 
-<sect2>
+      <listitem>
+        <para
+>Inclou només les categories d'impostos: només mostra les categories que s'han marcat com a relacionades amb els impostos. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Inclou només els comptes d'inversió: només mostra les operacions dels comptes d'inversió. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Inclou només els comptes de préstecs: només mostra les operacions dels comptes de préstec. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Inclou les transferències: a menys que activeu això, les transferències s'exclouen dels informes de les operacions. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Oculta els detalls de les transaccions desglossades: no mostra els desglossaments detallats, només els detalls del compte general. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Oculta les operacions: no mostra les operacions, deixant només els totals mostrats. </para>
+      </listitem>
+
+      <listitem>
+        <para
+>Oculta els totals: només mostra les operacions, no els totals. </para>
+      </listitem>
+    </itemizedlist>
+  </para>
+</sect3>
+
+<sect3>
 <title
->La pestanya Gràfic</title>
+>La subpestanya Gràfic</title>
 
 <para
 >Aquesta pestanya permet configurar l'aspecte de l'informe quan es mostra com un gràfic. Vegeu la secció de <link linkend="details.reports.charts"
 >Gràfics i diagrames</link
 > per a més explicacions de les funcions dels diagrames. <itemizedlist>
-  <listitem
-><para
-><guilabel
->Tipus de gràfic</guilabel
->: el format visual del gràfic desitjat.</para
-></listitem>
-  <listitem
-><para
-><guilabel
->Mostra les línies de la quadrícula</guilabel
->: si s'hauran d'imprimir en el gràfic les línies horitzontals i verticals de la quadrícula.</para
-></listitem>
-  <listitem
-><para
-><guilabel
->Dibuixa els valors en el gràfic</guilabel
->: si s'hauran d'imprimir en el gràfic els valors de les dades per als punts de dades escollits.</para
-></listitem>
-  <listitem
-><para
-><guilabel
->Mostra el gràfic predeterminat</guilabel
->: si quan s'obri aquest informe s'haurà de mostrar primer com un gràfic.</para
-></listitem>
-  <listitem
-><para
-><guilabel
->Amplada de les línies</guilabel
->: l'amplada de les línies de dades en el gràfic.</para
-></listitem>
-</itemizedlist>
-</para>
+    <listitem>
+      <para
+>Tipus de gràfic: el format visual del gràfic desitjat. </para>
+    </listitem>
 
+    <listitem>
+      <para
+>Paleta del gràfic: seleccioneu d'entre diverses paletes de colors possibles per al gràfic. </para>
+    </listitem>
+
+    <listitem>
+      <para
+>Mostra les línies de la quadrícula: si s'han de mostrar les línies horitzontals i verticals de la quadrícula en el gràfic per als gràfics de línies, barres i barres apilades; línies de la quadrícula circular i sagital per als diagrames de sectors i anells. </para>
+    </listitem>
+
+    <listitem>
+      <para
+>Dibuixa els valors en el gràfic: si s'hauran d'imprimir en el gràfic els valors de les dades per als punts de dades escollits. </para>
+    </listitem>
+
+    <listitem>
+      <para
+>Mostra el gràfic predeterminat: si quan s'obri aquest informe s'haurà de mostrar primer com un gràfic en lloc d'un informe tabular. </para>
+    </listitem>
+
+    <listitem>
+      <para
+>Logarithmic vertical axis: Only enabled when relevant - use a logarithmic instead of linear scale for the vertical axis. </para>
+    </listitem>
+
+    <listitem>
+      <para
+>Dibuixa les despeses cap avall: si no està activat, els ingressos i les despeses es dibuixaran cap amunt. </para>
+    </listitem>
+
+    <listitem>
+      <para
+>Amplada de les línies: l'amplada de les línies de dades en el gràfic. </para>
+    </listitem>
+  </itemizedlist>
+</para>
+</sect3>
+
+<sect3
+><title
+>Subpestanya d'interval</title>
+<sect4
+><title
+>Interval de dates</title>
+<para
+>Use this section to specify the date range of transactions to be included in the report. The <guilabel
+>Range</guilabel
+> drop-down includes a large number of predefined ranges, but you can select <quote
+>User defined</quote
+> and manually set <guilabel
+>From</guilabel
+> and <guilabel
+>To</guilabel
+>. The <guilabel
+>Ticks</guilabel
+> drop-down specifies the placement of tick marks on the horizontal (time) axis of the chart. </para>
+</sect4>
+
+<sect4
+><title
+>Interval de dades</title>
+<para
+>This specifies the tick marks and divisions on the vertical axis of the chart. It is generally best to leave the <guilabel
+>Range</guilabel
+> drop-down set to <quote
+>Automatic</quote
+>. </para>
+</sect4>
+</sect3>
 </sect2>
 
 <sect2>
 <title
->Altres pestanyes</title>
+>Pestanya de filtres</title>
 <para
->Les altres pestanyes en aquest diàleg són les mateixes que a la interfície Cerca les operacions. Consulteu la <link linkend="details.search"
+>Les subpestanyes d'aquí són les mateixes que a la interfície Cerca les operacions. Consulteu la <link linkend="details.search"
 >documentació</link
-> en aquesta interfície per a obtenir els detalls sobre les altres pestanyes.</para>
+> en aquesta interfície per a obtenir els detalls sobre el seu ús. </para>
 </sect2>
-
 </sect1>
 
 <sect1 id="details.reports.charts">
@@ -479,11 +591,10 @@
 >Gràfic</guibutton
 > o <guibutton
 >Informe</guibutton
-> que hi ha a la part superior de la vista de l'informe. </para>
+> que hi ha a la part superior de l'informe. </para>
 
 <para
 >S'haurà de tenir cura per a limitar la quantitat de dades que escolliu mostrar a un gràfic. D'altra manera, en fer servir la mateixa configuració per als formularis de text i gràfics voldrà dir que és possible configurar un gràfic perquè estigui visualment desordenat, poc atractiu i poc informatiu. El &kmymoney; no us obligarà a mantenir els gràfics intel·ligibles i útils! </para>
-
 </sect2>
 
 <sect2>
@@ -502,7 +613,7 @@
 >Files/Columnes</link
 > de la configuració del gràfic. Si escolliu el nivell de detall <guilabel
 >Nivell superior</guilabel
->, hi haurà una línia per a cadascun dels comptes o categories superiors, les quals mostraran la suma total de tots els comptes o categories subjacents. Si escolliu <guilabel
+>, hi haurà una línia per a cadascun dels comptes o categories superiors, la qual mostrarà la suma total de tots els comptes o categories subjacents. Si escolliu <guilabel
 >Grups</guilabel
 >, en el seu lloc es mostrarà una línia per a Ingressos, Despeses, Actius o Passius, depenent de les altres opcions de configuració. </para>
 </sect3>
@@ -520,7 +631,7 @@
 >Gràfic de sectors</title>
 
 <para
->El gràfic de sectors és el gràfic més senzill que hi ha disponible. Només mostrarà un segment de temps, en lloc de mostrar els valors al llarg del temps. Aquest gràfic només mostrarà la columna de totals de qualsevol informe seleccionat. Si l'informe està configurat per a NO convertir els valors a la divisa base, no hi haurà cap columna de totals i, per tant, aquest informe no serà útil. </para>
+>El gràfic de sectors és el gràfic més senzill que hi ha disponible. Mostra les dades només en un segment de temps, en lloc de mostrar els valors al llarg del temps. Aquest gràfic només mostrarà els valors només de la columna de totals de qualsevol informe seleccionat. Si l'informe està configurat per a NO convertir els valors a la divisa base, no hi haurà cap columna de totals i, per tant, aquest informe no serà útil. </para>
 </sect3>
 
 <sect3>
@@ -530,8 +641,6 @@
 <para
 >El gràfic d'anells és molt similar a un gràfic de sectors, excepte que hi ha un «anell» per a cada segment de temps a l'informe. </para>
 </sect3>
-
 </sect2>
-
 </sect1>
 </chapter>
