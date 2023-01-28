@@ -33,6 +33,8 @@ FinalPaymentWizardPage::FinalPaymentWizardPage(QWidget *parent)
     registerField("duration5", ui->m_duration5, "text");
     registerField("payment5", ui->m_payment5, "text");
     registerField("balloon5", ui->m_balloon5, "text");
+
+    ui->m_finalPaymentEdit->setAllowEmpty(true);
 }
 
 FinalPaymentWizardPage::~FinalPaymentWizardPage()

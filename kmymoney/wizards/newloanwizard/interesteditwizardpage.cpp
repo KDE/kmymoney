@@ -28,6 +28,8 @@ InterestEditWizardPage::InterestEditWizardPage(QWidget *parent)
     // appropriate signals to update the "Next" button correctly
     registerField("newInterestRateEdit", ui->m_newInterestRateEdit, "value", SIGNAL(textChanged(QString)));
     connect(ui->m_newInterestRateEdit, &AmountEdit::textChanged, this, &QWizardPage::completeChanged);
+
+    ui->m_newInterestRateEdit->setAllowEmpty(true);
 }
 
 InterestEditWizardPage::~InterestEditWizardPage()

@@ -34,6 +34,8 @@ PaymentWizardPage::PaymentWizardPage(QWidget *parent)
     registerField("duration4", ui->m_duration4, "text");
     registerField("payment4", ui->m_payment4, "text");
     registerField("balloon4", ui->m_balloon4, "text");
+
+    ui->m_paymentEdit->setAllowEmpty(true);
 }
 
 PaymentWizardPage::~PaymentWizardPage()

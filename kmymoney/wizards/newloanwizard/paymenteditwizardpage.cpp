@@ -29,6 +29,8 @@ PaymentEditWizardPage::PaymentEditWizardPage(QWidget *parent)
     registerField("newPaymentEditValid", ui->m_newPaymentEdit, "valid", SIGNAL(textChanged()));
 
     connect(ui->m_newPaymentEdit, &AmountEdit::textChanged, this, &QWizardPage::completeChanged);
+
+    ui->m_newPaymentEdit->setAllowEmpty(true);
 }
 
 PaymentEditWizardPage::~PaymentEditWizardPage()
