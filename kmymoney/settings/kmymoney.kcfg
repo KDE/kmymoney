@@ -260,6 +260,15 @@
    <label>Show fancy markers for previous and current fiscal year</label>
    <default>true</default>
   </entry>
+  <entry name ="ShowReconciliationMarker" type="Enum">
+   <label>Show reconciliation entries with date and balance</label>
+   <default>All</default>
+   <choices name="ReconciliationHeader">
+     <choice name="Off"/>
+     <choice name="Last"/>
+     <choice name="All"/>
+   </choices>
+  </entry>
   <entry name="FiscalYearBegin" type="Int">
    <label>Starting month of the fiscal year</label>
    <default>0</default>

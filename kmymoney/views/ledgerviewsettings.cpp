@@ -28,6 +28,7 @@ public:
         , m_showTransactionDetails(false)
         , m_showAllSplits(false)
         , m_hideReconciledTransactions(false)
+        , m_showReconciliationEntries(LedgerViewSettings::DontShowReconciliationHeader)
     {
         m_settingsChangedTimer.setSingleShot(true);
         m_settingsChangedTimer.setInterval(20);
@@ -45,6 +46,7 @@ public:
     bool m_showTransactionDetails;
     bool m_showAllSplits;
     bool m_hideReconciledTransactions;
+    LedgerViewSettings::ReconciliationHeader m_showReconciliationEntries;
 };
 
 LedgerViewSettings* LedgerViewSettings::instance()
@@ -132,6 +134,19 @@ void LedgerViewSettings::setHideTransactionsBefore(const QDate& date)
 {
     if (d->m_hideTransactionsBefore != date) {
         d->m_hideTransactionsBefore = date;
+        d->settingsChanged();
+    }
+}
+
+LedgerViewSettings::ReconciliationHeader LedgerViewSettings::showReconciliationEntries() const
+{
+    return d->m_showReconciliationEntries;
+}
+
+void LedgerViewSettings::setShowReconciliationEntries(ReconciliationHeader showHeader)
+{
+    if (d->m_showReconciliationEntries != showHeader) {
+        d->m_showReconciliationEntries = showHeader;
         d->settingsChanged();
     }
 }

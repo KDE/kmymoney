@@ -110,13 +110,17 @@ void ReconciliationModel::doLoad()
         const auto history = account.reconciliationHistory();
         if (!history.isEmpty()) {
             const auto& accountId = account.id();
-
-            insertRows(0, history.count());
+            const auto rows = history.count();
+            insertRows(0, rows);
 
             int row = 0;
             QMap<QDate, MyMoneyMoney>::const_iterator it;
             for (it = history.constBegin(); it != history.constEnd(); ++it) {
-                ReconciliationEntry entry(nextId(), accountId, it.key(), *it);
+                ReconciliationEntry entry(nextId(),
+                                          accountId,
+                                          it.key(),
+                                          *it,
+                                          ((row + 1) < rows) ? eMyMoney::Model::StdFilter : eMyMoney::Model::DontFilterLast);
                 static_cast<TreeItem<ReconciliationEntry>*>(index(row, 0).internalPointer())->dataRef() = entry;
                 ++row;
             }
@@ -130,7 +134,8 @@ void ReconciliationModel::doLoad()
             ReconciliationEntry entry(nextId(),
                                       account.id(),
                                       QDate::fromString(account.value("statementDate"), Qt::ISODate),
-                                      MyMoneyMoney(account.value("statementBalance")));
+                                      MyMoneyMoney(account.value("statementBalance")),
+                                      eMyMoney::Model::DontFilter);
             insertRows(0, 1);
             static_cast<TreeItem<ReconciliationEntry>*>(index(0, 0).internalPointer())->dataRef() = entry;
         }
@@ -214,6 +219,9 @@ QVariant ReconciliationModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::DelegateRole:
         return static_cast<int>(eMyMoney::Delegates::Types::ReconciliationDelegate);
+
+    case eMyMoney::Model::ReconciliationFilterHintRole:
+        return QVariant::fromValue<eMyMoney::Model::ReconciliationFilterHint>(reconciliationEntry.filterHint());
 
     default:
         break;

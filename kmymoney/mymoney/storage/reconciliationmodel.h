@@ -33,14 +33,20 @@ public:
         , m_accountId(other.m_accountId)
         , m_amount(other.m_amount)
         , m_date(other.m_date)
+        , m_filterHint(other.m_filterHint)
     {
     }
 
-    ReconciliationEntry(const QString& id, const QString& accountId, const QDate& date, const MyMoneyMoney& amount)
+    ReconciliationEntry(const QString& id,
+                        const QString& accountId,
+                        const QDate& date,
+                        const MyMoneyMoney& amount,
+                        eMyMoney::Model::ReconciliationFilterHint filterHint)
         : m_id(id)
         , m_accountId(accountId)
         , m_amount(amount)
         , m_date(date)
+        , m_filterHint(filterHint)
     {
     }
 
@@ -64,6 +70,10 @@ public:
     {
         return false;
     }
+    inline eMyMoney::Model::ReconciliationFilterHint filterHint() const
+    {
+        return m_filterHint;
+    }
 
     /**
      * @copydoc MyMoneyObject::referencedObjects
@@ -78,6 +88,7 @@ private:
     QString m_accountId;
     MyMoneyMoney m_amount;
     QDate m_date;
+    eMyMoney::Model::ReconciliationFilterHint m_filterHint;
 };
 
 class QUndoStack;

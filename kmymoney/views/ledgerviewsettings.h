@@ -36,12 +36,19 @@ public:
         SortOrderReconcileInvest,
     } SortOrderType;
 
+    typedef enum {
+        DontShowReconciliationHeader,
+        ShowLastReconciliationHeader,
+        ShowAllReconciliationHeader,
+    } ReconciliationHeader;
+
     static LedgerViewSettings* instance();
     ~LedgerViewSettings();
 
     bool showLedgerLens() const;
     bool showTransactionDetails() const;
     bool showAllSplits() const;
+    ReconciliationHeader showReconciliationEntries() const;
     bool hideReconciledTransactions() const;
     QDate hideTransactionsBefore() const;
     LedgerSortOrder sortOrder(SortOrderType type) const;
@@ -67,6 +74,11 @@ public Q_SLOTS:
      * filter out any reconciled transaction.
      */
     void setHideReconciledTransactions(bool hide);
+
+    /**
+     * Controls visibility of the reconciliation entries in the ledgers
+     */
+    void setShowReconciliationEntries(ReconciliationHeader showHeader);
 
     void setSortOrder(SortOrderType type, const QString& sortOrder);
 

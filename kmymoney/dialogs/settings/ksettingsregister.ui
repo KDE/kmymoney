@@ -27,40 +27,10 @@
        <item>
         <widget class="QCheckBox" name="kcfg_ShowGrid">
          <property name="text">
-          <string>Show a grid in the register</string>
+          <string>Show a grid in the ledger</string>
          </property>
          <property name="shortcut">
           <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="kcfg_ShowRegisterDetailed">
-         <property name="text">
-          <string>Show all register entries in full detail</string>
-         </property>
-         <property name="shortcut">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="kcfg_LedgerLens">
-         <property name="whatsThis">
-          <string>Using the ledger lens shows the details for the transaction that has focus in the ledger. Usually, when using the transaction form, only a one line summary is displayed for each transaction as the details are shown in the form.</string>
-         </property>
-         <property name="text">
-          <string>Use the ledger lens</string>
-         </property>
-         <property name="shortcut">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="kcfg_ShowAllSplits">
-         <property name="text">
-          <string>Show all split details in register</string>
          </property>
         </widget>
        </item>
@@ -72,26 +42,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="kcfg_ShowFancyMarker">
-         <property name="whatsThis">
-          <string>Draws a larger header above each group of transactions. The grouping depends on the current sort order.</string>
-         </property>
-         <property name="text">
-          <string>Show group header between transactions</string>
-         </property>
-         <property name="shortcut">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="kcfg_ShowFiscalMarker">
-         <property name="text">
-          <string>Show header for the previous and current fiscal year</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QCheckBox" name="kcfg_ShowPlannedScheduleDates">
          <property name="whatsThis">
           <string>If a planned transaction is overdue, today's date is used by default as the posting date. With this option, the originally planned date is used instead.</string>
@@ -99,6 +49,93 @@
          <property name="text">
           <string>Display overdue schedules with planned date</string>
          </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Ledger entry details</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QCheckBox" name="kcfg_ShowRegisterDetailed">
+            <property name="text">
+             <string>Show all ledger entries in full detail</string>
+            </property>
+            <property name="shortcut">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="kcfg_LedgerLens">
+            <property name="whatsThis">
+             <string>Using the ledger lens shows the details for the transaction that has focus in the ledger. Usually, when using the transaction form, only a one line summary is displayed for each transaction as the details are shown in the form.</string>
+            </property>
+            <property name="text">
+             <string>Use the ledger lens</string>
+            </property>
+            <property name="shortcut">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="kcfg_ShowAllSplits">
+            <property name="text">
+             <string>Show all split details in ledger</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Information headers</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QCheckBox" name="kcfg_ShowFancyMarker">
+            <property name="whatsThis">
+             <string>Draws a larger header above each group of transactions. The grouping depends on the current sort order.</string>
+            </property>
+            <property name="text">
+             <string>Show group headers between transactions</string>
+            </property>
+            <property name="shortcut">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="kcfg_ShowFiscalMarker">
+            <property name="text">
+             <string>Show header for the previous and current fiscal year</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="kcfg_ShowReconciliationMarker">
+            <item>
+             <property name="text">
+              <string>Don't show reconciliation entries</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Show last reconciliation entry with date and balance in ledger</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Show all reconciliation entries with date and balance in ledger</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>

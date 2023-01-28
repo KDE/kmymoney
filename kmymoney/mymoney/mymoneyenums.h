@@ -640,6 +640,7 @@ enum Roles {
     // Reconciliation
     ReconciliationAmountRole, // the reconciliation balance as MyMoneyMoney object
     ReconciliationBalanceRole, // the reconciliation balance as formatted string
+    ReconciliationFilterHintRole, // filtering hint for the entry
 
     // General state
     ClosedRole,
@@ -662,6 +663,13 @@ enum Roles {
     SecurityAccountNameEntryRole, // true if entry is a security account name record
     DelegateRole,
 };
+
+typedef enum {
+    DontFilter, // Always display
+    DontFilterLast, // Don't filter, this is the latest entry
+    StdFilter, // No special filter handling
+} ReconciliationFilterHint;
+
 } // namespace Model
 } // namespace eMyMoney
 
@@ -669,5 +677,6 @@ Q_DECLARE_METATYPE(eMyMoney::Split::State)
 Q_DECLARE_METATYPE(eMyMoney::Split::InvestmentTransactionType)
 Q_DECLARE_METATYPE(eMyMoney::Schedule::Occurrence)
 Q_DECLARE_METATYPE(eMyMoney::Schedule::PaymentType)
+Q_DECLARE_METATYPE(eMyMoney::Model::ReconciliationFilterHint)
 
 #endif

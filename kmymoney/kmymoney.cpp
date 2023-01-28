@@ -1394,6 +1394,18 @@ public:
             file->modifyAccount(subAccount);
         }
     }
+
+    LedgerViewSettings::ReconciliationHeader showReconciliationMarker() const
+    {
+        switch (KMyMoneySettings::showReconciliationMarker()) {
+        case KMyMoneySettings::Off:
+            return LedgerViewSettings::DontShowReconciliationHeader;
+        case KMyMoneySettings::Last:
+            return LedgerViewSettings::ShowLastReconciliationHeader;
+        default:
+            return LedgerViewSettings::ShowAllReconciliationHeader;
+        }
+    }
 };
 
 KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
@@ -3475,6 +3487,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
     ledgerViewSettings->setSortOrder(LedgerViewSettings::SortOrderReconcileStd, KMyMoneySettings::sortReconcileView());
     ledgerViewSettings->setSortOrder(LedgerViewSettings::SortOrderReconcileInvest, KMyMoneySettings::sortReconcileView());
     ledgerViewSettings->setSortOrder(LedgerViewSettings::SortOrderSearch, KMyMoneySettings::sortSearchView());
+    ledgerViewSettings->setShowReconciliationEntries(d->showReconciliationMarker());
     ledgerViewSettings->flushChanges();
 
     MyMoneyFile::instance()->journalModel()->resetRowHeightInformation();

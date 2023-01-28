@@ -47,6 +47,7 @@ class SpecialLedgerItemFilterPrivate : public LedgerSortProxyModelPrivate
 public:
     SpecialLedgerItemFilterPrivate(SpecialLedgerItemFilter* qq)
         : LedgerSortProxyModelPrivate(qq)
+        , showReconciliationEntries(LedgerViewSettings::DontShowReconciliationHeader)
     {
         updateDelayTimer.setSingleShot(true);
         updateDelayTimer.setInterval(20);
@@ -204,6 +205,7 @@ public:
 
     LedgerSortProxyModel* sourceModel;
     QTimer updateDelayTimer;
+    LedgerViewSettings::ReconciliationHeader showReconciliationEntries;
 };
 
 SpecialLedgerItemFilter::SpecialLedgerItemFilter(QObject* parent)
@@ -311,6 +313,16 @@ void SpecialLedgerItemFilter::setSortingEnabled(bool enable)
     }
 }
 
+void SpecialLedgerItemFilter::setShowReconciliationEntries(LedgerViewSettings::ReconciliationHeader show)
+{
+    Q_D(SpecialLedgerItemFilter);
+
+    if (d->showReconciliationEntries != show) {
+        d->showReconciliationEntries = show;
+        invalidateFilter();
+    }
+}
+
 void SpecialLedgerItemFilter::doSortOnIdle()
 {
     Q_D(SpecialLedgerItemFilter);
@@ -362,10 +374,31 @@ bool SpecialLedgerItemFilter::filterAcceptsRow(int source_row, const QModelIndex
         return visible;
 
     } else if (d->isReconciliationModel(baseModel)) {
-        // Don't show them if display is not sorted by date
+        // Don't show them if view is not sorted by date
         if (!d->isSortingByDate()) {
             return false;
         }
+        // Depending on the setting we only show a subset
+        if (d->showReconciliationEntries != LedgerViewSettings::ShowAllReconciliationHeader) {
+            const auto filterHint = idx.data(eMyMoney::Model::ReconciliationFilterHintRole).value<eMyMoney::Model::ReconciliationFilterHint>();
+            switch (d->showReconciliationEntries) {
+            case LedgerViewSettings::DontShowReconciliationHeader:
+                if (filterHint != eMyMoney::Model::DontFilter) {
+                    return false;
+                }
+                break;
+
+            case LedgerViewSettings::ShowLastReconciliationHeader:
+                if (filterHint == eMyMoney::Model::StdFilter) {
+                    return false;
+                }
+                // intentional fall through
+
+            case LedgerViewSettings::ShowAllReconciliationHeader:
+                break;
+            }
+        }
+
         // make sure we only show reconciliation entries that are followed by
         // a regular transaction
         int row = source_row + 1;

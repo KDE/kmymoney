@@ -75,11 +75,12 @@ void LedgerViewPage::initModel()
 {
     // setup the model stack
     const auto file = MyMoneyFile::instance();
+    const auto viewSettings = LedgerViewSettings::instance();
     d->accountFilter =
         new LedgerAccountFilter(d->ui->m_ledgerView,
                                 QVector<QAbstractItemModel*>{file->specialDatesModel(), file->schedulesJournalModel(), file->reconciliationModel()});
-    d->accountFilter->setHideReconciledTransactions(LedgerViewSettings::instance()->hideReconciledTransactions());
-    d->accountFilter->setHideTransactionsBefore(LedgerViewSettings::instance()->hideTransactionsBefore());
+    d->accountFilter->setHideReconciledTransactions(viewSettings->hideReconciledTransactions());
+    d->accountFilter->setHideTransactionsBefore(viewSettings->hideTransactionsBefore());
 
     d->stateFilter = new LedgerFilter(d->ui->m_ledgerView);
     d->stateFilter->setSourceModel(d->accountFilter);
@@ -90,6 +91,7 @@ void LedgerViewPage::initModel()
     d->specialItemFilter = new SpecialLedgerItemFilter(this);
     d->specialItemFilter->setSourceModel(d->stateFilter);
     d->specialItemFilter->setSortRole(eMyMoney::Model::TransactionPostDateRole);
+    d->specialItemFilter->setShowReconciliationEntries(viewSettings->showReconciliationEntries());
 
     // prepare the filter container
     d->ui->m_closeButton->setIcon(Icons::get(Icon::DialogClose));
@@ -115,9 +117,11 @@ void LedgerViewPage::initModel()
 
     d->ui->m_ledgerView->setModel(d->specialItemFilter);
 
-    connect(LedgerViewSettings::instance(), &LedgerViewSettings::settingsChanged, this, [&]() {
-        d->accountFilter->setHideReconciledTransactions(LedgerViewSettings::instance()->hideReconciledTransactions());
-        d->accountFilter->setHideTransactionsBefore(LedgerViewSettings::instance()->hideTransactionsBefore());
+    connect(viewSettings, &LedgerViewSettings::settingsChanged, this, [&]() {
+        const auto viewSettings = LedgerViewSettings::instance();
+        d->accountFilter->setHideReconciledTransactions(viewSettings->hideReconciledTransactions());
+        d->accountFilter->setHideTransactionsBefore(viewSettings->hideTransactionsBefore());
+        d->specialItemFilter->setShowReconciliationEntries(viewSettings->showReconciliationEntries());
 
         // make sure sorting is updated
         const auto acc = MyMoneyFile::instance()->accountsModel()->itemById(d->accountId);

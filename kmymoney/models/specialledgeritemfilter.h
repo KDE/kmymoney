@@ -58,6 +58,11 @@ public:
      */
     void setSortingEnabled(bool enable) override;
 
+    /**
+     * Control visibility of reconciliation entries in ledger
+     */
+    void setShowReconciliationEntries(LedgerViewSettings::ReconciliationHeader show);
+
 public Q_SLOTS:
     void forceReload();
 
