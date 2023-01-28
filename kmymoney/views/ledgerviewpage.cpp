@@ -118,7 +118,6 @@ void LedgerViewPage::initModel()
     d->ui->m_ledgerView->setModel(d->specialItemFilter);
 
     connect(viewSettings, &LedgerViewSettings::settingsChanged, this, [&]() {
-        const auto viewSettings = LedgerViewSettings::instance();
         d->accountFilter->setHideReconciledTransactions(viewSettings->hideReconciledTransactions());
         d->accountFilter->setHideTransactionsBefore(viewSettings->hideTransactionsBefore());
         d->specialItemFilter->setShowReconciliationEntries(viewSettings->showReconciliationEntries());
