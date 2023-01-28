@@ -23469,17 +23469,3 @@ msgid ""
 "<p>All information is optional and only used to personalize your KMyMoney "
 "file.</p>"
 msgstr ""
-
-#~ msgctxt "Activity for income categories"
-#~ msgid "Received"
-#~ msgstr "Получено"
-
-#, fuzzy
-#~ msgctxt "Payee"
-#~ msgid "Pay to"
-#~ msgstr "Копие на %1"
-
-#, fuzzy
-#~ msgctxt "Payer"
-#~ msgid "From"
-#~ msgstr "От"
