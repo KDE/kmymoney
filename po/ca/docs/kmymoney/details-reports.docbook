@@ -81,27 +81,27 @@
 <title
 >Operacions</title>
 <para
->These reports list individual transactions. This is the best way to print your account register for a specific period of time. The transactions included in a report can be grouped together according to your liking by choosing the appropriate report, such as: </para>
+>Aquests informes llisten les operacions individuals. Aquesta és la millor manera d'imprimir el registre del compte durant un període de temps específic. Les operacions incloses en l'informe es podran agrupar segons el vostre gust triant l'informe apropiat, per exemple: </para>
   <itemizedlist>
     <listitem
 ><para
->By Account</para
+>Per compte</para
 ></listitem>
     <listitem
 ><para
->By Category</para
+>Per categoria</para
 ></listitem>
     <listitem
 ><para
->By Month or Week</para
+>Per mes o setmana</para
 ></listitem>
     <listitem
 ><para
->By Payee</para
+>Per beneficiari</para
 ></listitem>
   </itemizedlist>
 <para
->You can also choose the time period for the report. </para>
+>També podeu triar el període de temps de l'informe. </para>
 </sect2>
 
 <sect2>
@@ -283,7 +283,7 @@
 ><title
 >Pressupostos</title>
 <para
->The configuration dialog for reports which display amounts over time may include budget related settings. These are only enabled if you do have one or more budgets defined, and include a drop-down to select one of those budgets. If one is selected, the report will show the budgeted amount per time period rather that the actual amounts from transaction in that period. In addition, some reports may also give you the option of displaying both the bugdeted and actual amounts, so you can compare them. </para>
+>El diàleg de configuració per als informes que mostren quantitats amb el temps pot incloure la configuració relacionada amb el pressupost. Aquests només estan habilitats si teniu un o més pressupostos definits, i inclouen una llista desplegable per a seleccionar un d'aquests pressupostos. Si se'n selecciona un, l'informe mostrarà l'import pressupostat per període de temps en lloc dels imports reals de la transacció en aquest període. A més, alguns informes també poden donar l'opció de mostrar tant els imports pressupostats com els reals, de manera que els podreu comparar. </para>
 </sect2>
 
 <sect2
@@ -519,7 +519,7 @@
 
     <listitem>
       <para
->Logarithmic vertical axis: Only enabled when relevant - use a logarithmic instead of linear scale for the vertical axis. </para>
+>Eix vertical logarítmic: només habilitat quan sigui rellevant. Useu una escala logarítmica en lloc d'una lineal per a l'eix vertical. </para>
     </listitem>
 
     <listitem>
@@ -542,27 +542,27 @@
 ><title
 >Interval de dates</title>
 <para
->Use this section to specify the date range of transactions to be included in the report. The <guilabel
->Range</guilabel
-> drop-down includes a large number of predefined ranges, but you can select <quote
->User defined</quote
-> and manually set <guilabel
->From</guilabel
-> and <guilabel
->To</guilabel
->. The <guilabel
->Ticks</guilabel
-> drop-down specifies the placement of tick marks on the horizontal (time) axis of the chart. </para>
+>Utilitzeu aquesta secció per a especificar l'interval de dates de les operacions que s'inclouran en l'informe. El desplegable <guilabel
+>Interval</guilabel
+> inclou un gran nombre d'intervals predefinits, però podeu seleccionar <quote
+>Definit per l'usuari</quote
+> i establir manualment <guilabel
+>Des de</guilabel
+> i <guilabel
+>A</guilabel
+>. El desplegable <guilabel
+>Marques</guilabel
+> especifica la col·locació de les marques a l'eix horitzontal (temps) del gràfic. </para>
 </sect4>
 
 <sect4
 ><title
 >Interval de dades</title>
 <para
->This specifies the tick marks and divisions on the vertical axis of the chart. It is generally best to leave the <guilabel
->Range</guilabel
-> drop-down set to <quote
->Automatic</quote
+>Això especifica les marques i les divisions en l'eix vertical del gràfic. En general, és millor deixar el desplegable <guilabel
+>Interval</guilabel
+> establert a <quote
+>Automàtic</quote
 >. </para>
 </sect4>
 </sect3>
