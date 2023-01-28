@@ -402,6 +402,7 @@ void ReconciliationLedgerViewPage::setAccount(const MyMoneyAccount& account)
 
     d->selections.setSelection(SelectedObjects::ReconciliationAccount, account.id());
     d->stateFilter->setStateFilter(LedgerFilter::State::NotReconciled);
+    d->specialItemFilter->setFilterBalanceMode(SpecialLedgerItemFilter::FilterBalanceMode::FilterBalanceReconciliation);
 }
 
 bool ReconciliationLedgerViewPage::executeAction(eMenu::Action action, const SelectedObjects& selections)

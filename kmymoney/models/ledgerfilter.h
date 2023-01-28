@@ -68,5 +68,7 @@ protected:
     void setFilterRegExp(const QString &pattern);
 };
 
+Q_DECLARE_METATYPE(LedgerFilter::State)
+
 #endif // LEDGERFILTER_H
 

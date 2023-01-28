@@ -225,9 +225,14 @@ bool LedgerFilter::filterAcceptsRow(int source_row, const QModelIndex& source_pa
 
 QVariant LedgerFilter::data(const QModelIndex& index, int role) const
 {
-    if (role == eMyMoney::Model::ActiveFilterRole) {
-        Q_D(const LedgerFilter);
+    Q_D(const LedgerFilter);
+    switch (role) {
+    case eMyMoney::Model::ActiveFilterRole:
         return !d->filterString.isEmpty() || (d->state != State::Any);
+    case eMyMoney::Model::ActiveFilterTextRole:
+        return !d->filterString.isEmpty();
+    case eMyMoney::Model::ActiveFilterStateRole:
+        return QVariant::fromValue<LedgerFilter::State>(d->state);
     }
     return LedgerSortProxyModel::data(index, role);
 }

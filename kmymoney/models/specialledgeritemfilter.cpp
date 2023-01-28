@@ -17,6 +17,7 @@
 // Project Includes
 
 #include "journalmodel.h"
+#include "ledgerfilter.h"
 #include "ledgersortproxymodel_p.h"
 #include "mymoneyfile.h"
 #include "reconciliationmodel.h"
@@ -48,6 +49,7 @@ public:
     SpecialLedgerItemFilterPrivate(SpecialLedgerItemFilter* qq)
         : LedgerSortProxyModelPrivate(qq)
         , showReconciliationEntries(LedgerViewSettings::DontShowReconciliationHeader)
+        , filterBalanceMode(SpecialLedgerItemFilter::FilterBalanceNormal)
     {
         updateDelayTimer.setSingleShot(true);
         updateDelayTimer.setInterval(20);
@@ -102,7 +104,16 @@ public:
 
     bool showBalance() const
     {
-        const auto filterActive = q->sourceModel()->data(QModelIndex(), eMyMoney::Model::ActiveFilterRole).toBool();
+        bool filterActive(false);
+
+        if (filterBalanceMode == SpecialLedgerItemFilter::FilterBalanceNormal) {
+            filterActive = q->sourceModel()->data(QModelIndex(), eMyMoney::Model::ActiveFilterRole).toBool();
+
+        } else if (filterBalanceMode == SpecialLedgerItemFilter::FilterBalanceReconciliation) {
+            filterActive = q->sourceModel()->data(QModelIndex(), eMyMoney::Model::ActiveFilterTextRole).toBool();
+            filterActive |= (q->sourceModel()->data(QModelIndex(), eMyMoney::Model::ActiveFilterStateRole).value<LedgerFilter::State>()
+                             != LedgerFilter::State::NotReconciled);
+        }
         return isSortingByDate() && !filterActive;
     }
 
@@ -206,6 +217,7 @@ public:
     LedgerSortProxyModel* sourceModel;
     QTimer updateDelayTimer;
     LedgerViewSettings::ReconciliationHeader showReconciliationEntries;
+    SpecialLedgerItemFilter::FilterBalanceMode filterBalanceMode;
 };
 
 SpecialLedgerItemFilter::SpecialLedgerItemFilter(QObject* parent)
@@ -327,6 +339,12 @@ void SpecialLedgerItemFilter::doSortOnIdle()
 {
     Q_D(SpecialLedgerItemFilter);
     d->sourceModel->doSortOnIdle();
+}
+
+void SpecialLedgerItemFilter::setFilterBalanceMode(SpecialLedgerItemFilter::FilterBalanceMode mode)
+{
+    Q_D(SpecialLedgerItemFilter);
+    d->filterBalanceMode = mode;
 }
 
 bool SpecialLedgerItemFilter::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const

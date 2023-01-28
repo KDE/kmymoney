@@ -658,6 +658,8 @@ enum Roles {
 
     // LedgerStack special roles
     ActiveFilterRole,
+    ActiveFilterTextRole,
+    ActiveFilterStateRole,
     ShowValueInvertedRole,
     OnlineBalanceEntryRole, // true if entry is an online balance record
     SecurityAccountNameEntryRole, // true if entry is a security account name record

@@ -29,6 +29,11 @@ class KMM_MODELS_EXPORT SpecialLedgerItemFilter : public LedgerSortProxyModel
     Q_DISABLE_COPY(SpecialLedgerItemFilter)
 
 public:
+    typedef enum {
+        FilterBalanceNormal,
+        FilterBalanceReconciliation,
+    } FilterBalanceMode;
+
     explicit SpecialLedgerItemFilter(QObject* parent);
 
     /**
@@ -62,6 +67,15 @@ public:
      * Control visibility of reconciliation entries in ledger
      */
     void setShowReconciliationEntries(LedgerViewSettings::ReconciliationHeader show);
+
+    /**
+     * Setup how the balance display shall be filtered. In @a FilterBalanceNormal mode
+     * balances will be filtered if any filter is active or the transactions are
+     * not sorted by date. In @a FilterBalanceReconciliation mode balances
+     * will be filtered if any text filter is active, the state filter is not
+     * equal to NotReconciled or the transactions are not sorted by date.
+     */
+    void setFilterBalanceMode(FilterBalanceMode mode);
 
 public Q_SLOTS:
     void forceReload();
