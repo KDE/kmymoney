@@ -148,13 +148,18 @@ bool LedgerFilter::filterAcceptsRow(int source_row, const QModelIndex& source_pa
                     return false;
                 }
                 break;
+
             case State::Scheduled:
-                if (!idx.data(eMyMoney::Model::TransactionScheduleRole).toBool()) {
-                    return false;
-                }
-                break;
+                return false;
+
             default:
                 break;
+            }
+        }
+
+        if (isScheduleItem) {
+            if (d->state != State::Scheduled) {
+                return false;
             }
         }
     }
