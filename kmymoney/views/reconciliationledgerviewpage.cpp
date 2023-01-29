@@ -369,6 +369,7 @@ public:
             ui->m_leftLabel->setText(i18nc("@label:textbox Statement balance", "Statement: %1", endingBalance.formatMoney("", precision)));
             ui->m_centerLabel->setText(i18nc("@label:textbox Cleared balance", "Cleared: %1", balance.formatMoney("", precision)));
             ui->m_rightLabel->setText(i18nc("@label:textbox Difference to statement", "Difference: %1", (balance - endingBalance).formatMoney("", precision)));
+            stateFilter->setEndDate(endingBalanceDlg->startDate());
         }
     }
 
@@ -376,6 +377,7 @@ public:
     {
         LedgerViewPage::Private::clearFilter();
         stateFilter->setStateFilter(LedgerFilter::State::NotReconciled);
+        stateFilter->setEndDate(endingBalanceDlg->startDate());
     }
 
     KEndingBalanceDlg* endingBalanceDlg;

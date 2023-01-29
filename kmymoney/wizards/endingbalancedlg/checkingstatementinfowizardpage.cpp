@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2010 Fernando Vilas <kmymoney-devel@kde.org>
+    SPDX-FileCopyrightText: 2023 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -53,4 +54,8 @@ CheckingStatementInfoWizardPage::~CheckingStatementInfoWizardPage()
 bool CheckingStatementInfoWizardPage::isComplete() const
 {
     return ui->m_statementDate->isValid() && !ui->m_endingBalance->text().isEmpty();
+}
+
+void CheckingStatementInfoWizardPage::cleanupPage()
+{
 }

@@ -47,11 +47,12 @@ public:
         delayTimer.setSingleShot(true);
     }
 
-    QLineEdit*            lineEdit;
-    QComboBox*            comboBox;
-    LedgerFilter::State   state;
-    QString               filterString;
-    QTimer                delayTimer;
+    QLineEdit* lineEdit;
+    QComboBox* comboBox;
+    LedgerFilter::State state;
+    QString filterString;
+    QTimer delayTimer;
+    QDate endDate;
 };
 
 LedgerFilter::LedgerFilter(QObject* parent)
@@ -114,37 +115,39 @@ bool LedgerFilter::filterAcceptsRow(int source_row, const QModelIndex& source_pa
     const auto idx = sourceModel()->index(source_row, 0, source_parent);
     const bool isJournalItem = MyMoneyModelBase::baseModel(idx) == MyMoneyFile::instance()->journalModel();
     const bool isScheduleItem = MyMoneyModelBase::baseModel(idx) == qobject_cast<QAbstractItemModel*>(MyMoneyFile::instance()->schedulesJournalModel());
+    // a transaction is in date range if no date range is set or the post date is older than the end of the range
+    const auto inDateRange = !d->endDate.isValid() || (idx.data(eMyMoney::Model::TransactionPostDateRole).toDate() < d->endDate);
     if (d->state != State::Any) {
         if (isJournalItem) {
             const auto splitState = idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>();
             switch (d->state) {
             case State::NotMarked:
-                if (splitState != eMyMoney::Split::State::NotReconciled) {
+                if ((splitState != eMyMoney::Split::State::NotReconciled) && inDateRange) {
                     return false;
                 }
                 break;
             case State::Cleared:
-                if (splitState != eMyMoney::Split::State::Cleared) {
+                if ((splitState != eMyMoney::Split::State::Cleared) && inDateRange) {
                     return false;
                 }
                 break;
             case State::NotReconciled:
-                if ((splitState == eMyMoney::Split::State::Reconciled) || (splitState == eMyMoney::Split::State::Frozen)) {
+                if (((splitState == eMyMoney::Split::State::Reconciled) || (splitState == eMyMoney::Split::State::Frozen)) && inDateRange) {
                     return false;
                 }
                 break;
             case State::Erroneous:
-                if (!idx.data(eMyMoney::Model::TransactionErroneousRole).toBool()) {
+                if (!idx.data(eMyMoney::Model::TransactionErroneousRole).toBool() && inDateRange) {
                     return false;
                 }
                 break;
             case State::Imported:
-                if (!idx.data(eMyMoney::Model::TransactionIsImportedRole).toBool()) {
+                if (!idx.data(eMyMoney::Model::TransactionIsImportedRole).toBool() && inDateRange) {
                     return false;
                 }
                 break;
             case State::Matched:
-                if (!idx.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool()) {
+                if (!idx.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool() && inDateRange) {
                     return false;
                 }
                 break;
@@ -256,9 +259,16 @@ void LedgerFilter::clearFilter()
     Q_D(LedgerFilter);
     d->filterString.clear();
     d->state = State::Any;
+    d->endDate = QDate();
     if (d->lineEdit)
         d->lineEdit->clear();
     if (d->comboBox)
         d->comboBox->setCurrentIndex(0);
     invalidateFilter();
+}
+
+void LedgerFilter::setEndDate(const QDate& endDate)
+{
+    Q_D(LedgerFilter);
+    d->endDate = endDate;
 }

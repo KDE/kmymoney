@@ -1,6 +1,6 @@
 /*
-    SPDX-FileCopyrightText: 2000, 2003 Michael Edwardes Thomas Baumgart <mte@users.sourceforge.net>
-    ipwizard@users.sourceforge.net
+    SPDX-FileCopyrightText: 2000, 2003 Michael Edwardes <mte@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2003, 2023 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -9,53 +9,54 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QAbstractButton>
+#include <QBitArray>
 #include <QDate>
 #include <QList>
-#include <QBitArray>
-#include <QAbstractButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KStandardGuiItem>
 #include <KHelpClient>
+#include <KMessageBox>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kendingbalancedlg.h"
 #include "ui_checkingstatementinfowizardpage.h"
 #include "ui_interestchargecheckingswizardpage.h"
+#include "ui_kendingbalancedlg.h"
 
-#include "mymoneymoney.h"
+#include "kcurrencycalculator.h"
+#include "kmymoneyaccountselector.h"
+#include "kmymoneycategory.h"
+#include "kmymoneysettings.h"
+#include "kmymoneyutils.h"
+#include "knewaccountdlg.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
 #include "mymoneyexception.h"
-#include "mymoneyutils.h"
-#include "mymoneytracer.h"
-#include "mymoneysplit.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
-#include "mymoneyaccount.h"
+#include "mymoneymoney.h"
 #include "mymoneypayee.h"
 #include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytracer.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
-#include "kmymoneycategory.h"
-#include "kmymoneyaccountselector.h"
-#include "kmymoneyutils.h"
-#include "kcurrencycalculator.h"
-#include "kmymoneysettings.h"
-#include "knewaccountdlg.h"
-#include "mymoneyenums.h"
+#include "mymoneyutils.h"
 
 class KEndingBalanceDlgPrivate
 {
     Q_DISABLE_COPY(KEndingBalanceDlgPrivate)
 
 public:
-
-    KEndingBalanceDlgPrivate(int numPages) :
-        ui(new Ui::KEndingBalanceDlg),
-        m_pages(numPages, true)
+    KEndingBalanceDlgPrivate(KEndingBalanceDlg* qq, int numPages)
+        : q(qq)
+        , ui(new Ui::KEndingBalanceDlg)
+        , m_pages(numPages, true)
     {
     }
 
@@ -64,17 +65,19 @@ public:
         delete ui;
     }
 
-    Ui::KEndingBalanceDlg    *ui;
-    MyMoneyTransaction        m_tInterest;
-    MyMoneyTransaction        m_tCharges;
-    MyMoneyAccount            m_account;
-    QMap<QWidget*, QString>   m_helpAnchor;
+    KEndingBalanceDlg* q;
+    Ui::KEndingBalanceDlg* ui;
+    MyMoneyTransaction m_tInterest;
+    MyMoneyTransaction m_tCharges;
+    MyMoneyAccount m_account;
+    QMap<QWidget*, QString> m_helpAnchor;
     QBitArray m_pages;
+    QDate m_startDate;
 };
 
-KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *parent) :
-    QWizard(parent),
-    d_ptr(new KEndingBalanceDlgPrivate(Page_InterestChargeCheckings + 1))
+KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget* parent)
+    : QWizard(parent)
+    , d_ptr(new KEndingBalanceDlgPrivate(this, Page_InterestChargeCheckings + 1))
 {
     Q_D(KEndingBalanceDlg);
     setModal(true);
@@ -129,13 +132,14 @@ KEndingBalanceDlg::KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *par
     d->m_helpAnchor[d->ui->m_statementInfoPageCheckings] = QString("details.reconcile.wizard.statement");
 
     value = account.value("statementDate");
-    if (!value.isEmpty())
+    if (!value.isEmpty()) {
         setField("statementDate", QDate::fromString(value, Qt::ISODate));
-
+    }
     //FIXME: port
     d->ui->m_statementInfoPageCheckings->ui->m_lastStatementDate->setText(QString());
     if (account.lastReconciliationDate().isValid()) {
-        d->ui->m_statementInfoPageCheckings->ui->m_lastStatementDate->setText(i18n("Last reconciled statement: %1", QLocale().toString(account.lastReconciliationDate())));
+        d->ui->m_statementInfoPageCheckings->ui->m_lastStatementDate->setText(
+            i18n("Last reconciled statement: %1", MyMoneyUtils::formatDate(account.lastReconciliationDate())));
     }
 
     // connect the signals with the slots
@@ -202,14 +206,18 @@ void KEndingBalanceDlg::slotUpdateBalances()
     it = transactionList.constBegin();
     if (it != transactionList.constEnd()) {
         oldestTransactionDate = (*it).first.postDate();
-        d->ui->m_statementInfoPageCheckings->ui->m_oldestTransactionDate->setText(i18n("Oldest unmarked transaction: %1", QLocale().toString(oldestTransactionDate)));
+        d->ui->m_statementInfoPageCheckings->ui->m_oldestTransactionDate->setText(
+            i18n("Oldest unmarked transaction: %1", MyMoneyUtils::formatDate(oldestTransactionDate)));
     }
 
-    filter.addState((int)eMyMoney::TransactionFilter::State::Cleared);
+    filter.clear();
+    filter.addAccount(d->m_account.id());
 
     // retrieve the list from the engine to calculate the starting and ending balance
     MyMoneyFile::instance()->transactionList(transactionList, filter);
 
+    // set the balance to the value of the account at the end of the ledger
+    // This includes all transactions even those past the statement date.
     MyMoneyMoney balance = MyMoneyFile::instance()->balance(d->m_account.id());
     MyMoneyMoney factor(1, 1);
     if (d->m_account.accountGroup() == eMyMoney::Account::Type::Liability)
@@ -221,24 +229,65 @@ void KEndingBalanceDlg::slotUpdateBalances()
 
     tracer.printf("total balance = %s", qPrintable(endBalance.formatMoney(QString(), 2)));
 
+    d->m_startDate = d->m_account.lastReconciliationDate();
+
+    // now adjust the balances by reading all transactions referencing the account
+    // from beginning to the end of the ledger
     for (it = transactionList.constBegin(); it != transactionList.constEnd(); ++it) {
         const MyMoneySplit& split = (*it).second;
         balance -= split.shares() * factor;
         if ((*it).first.postDate() > field("statementDate").toDate()) {
+            // in case the transaction's post date is younger than the statement date
+            // we need to subtract the value from the balances.
+
             tracer.printf("Reducing balances by %s because postdate of %s/%s(%s) is past statement date", qPrintable((split.shares() * factor).formatMoney(QString(), 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
             endBalance -= split.shares() * factor;
             startBalance -= split.shares() * factor;
+
         } else {
+            // in case the transaction's post date is older or equal to
+            // the statement date we need to check what to do
             switch (split.reconcileFlag()) {
             case eMyMoney::Split::State::NotReconciled:
+                // in case it is not marked at all we need to check if
+                // it is necessary to adjust the start date of the
+                // display.
+                if ((*it).first.postDate() < d->m_startDate) {
+                    d->m_startDate = (*it).first.postDate();
+                }
+
+                // subtract it from the balances
                 tracer.printf("Reducing balances by %s because %s/%s(%s) is not reconciled", qPrintable((split.shares() * factor).formatMoney(QString(), 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
                 endBalance -= split.shares() * factor;
                 startBalance -= split.shares() * factor;
                 break;
+
             case eMyMoney::Split::State::Cleared:
-                tracer.printf("Reducing start balance by %s because %s/%s(%s) is cleared", qPrintable((split.shares() * factor).formatMoney(QString(), 2)), qPrintable((*it).first.id()), qPrintable(split.id()), qPrintable((*it).first.postDate().toString(Qt::ISODate)));
-                startBalance -= split.shares() * factor;
+                // in case it is marked as cleared we need to check if
+                // it is necessary to adjust the start date of the
+                // display. It could be, that this transaction is
+                // older than the statement date.
+                if ((*it).first.postDate() < d->m_startDate) {
+                    d->m_startDate = (*it).first.postDate();
+                }
+                Q_FALLTHROUGH();
+
+            case eMyMoney::Split::State::Reconciled:
+            case eMyMoney::Split::State::Frozen:
+                // in case it is marked as cleared, reconciled or frozen
+                // we need to check if the transaction is found after
+                // the current start date. If so, we need to adjust the
+                // startBalance but don't touch the endBalance
+                if ((*it).first.postDate() >= d->m_startDate) {
+                    tracer.printf("Reducing start balance by %s because %s/%s(%s) is cleared/reconciled",
+                                  qPrintable((split.shares() * factor).formatMoney(QString(), 2)),
+                                  qPrintable((*it).first.id()),
+                                  qPrintable(split.id()),
+                                  qPrintable((*it).first.postDate().toString(Qt::ISODate)));
+                    startBalance -= split.shares() * factor;
+                }
                 break;
+
             default:
                 break;
             }
@@ -420,4 +469,10 @@ int KEndingBalanceDlg::nextId() const
             return pageIds()[i];
     }
     return -1;
+}
+
+QDate KEndingBalanceDlg::startDate() const
+{
+    Q_D(const KEndingBalanceDlg);
+    return d->m_startDate;
 }

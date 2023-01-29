@@ -45,9 +45,25 @@ public:
 
     void setComboBox(QComboBox* filterBox);
     void setLineEdit(QLineEdit* lineEdit);
+
+    /**
+     * Clear all filter settings. This will cause the
+     * pattern of the filterFixedString to be cleared,
+     * the stateFilter to be set to State::Any and the
+     * endDate to be set to QDate().
+     */
     void clearFilter();
+
     void setStateFilter(LedgerFilter::State state);
     void setFilterFixedString(const QString &pattern);
+
+    /**
+     * Set the end date of the state filter for transactions.
+     * Transactions with a postdate after @a date will not be filtered.
+     * When the object is created, the setting is QDate() which
+     * causes the filter to be applied to all transactions.
+     */
+    void setEndDate(const QDate& endDate);
 
     /**
      * This method returns information about an active

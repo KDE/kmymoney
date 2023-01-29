@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2000 Michael Edwardes <mte@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2023 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -48,7 +49,15 @@ public:
 
     MyMoneyMoney endingBalance() const;
     MyMoneyMoney previousBalance() const;
+
     QDate statementDate() const;
+
+    /**
+     * This returns the date of the last statement or the
+     * first non-cleared, non-reconciled transaction
+     * whichever is older.
+     */
+    QDate startDate() const;
 
     MyMoneyTransaction interestTransaction();
     MyMoneyTransaction chargeTransaction();

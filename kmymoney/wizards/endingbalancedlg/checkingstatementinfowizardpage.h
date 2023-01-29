@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2010 Fernando Vilas <kmymoney-devel@kde.org>
+    SPDX-FileCopyrightText: 2023 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -38,6 +39,12 @@ public:
     Ui::CheckingStatementInfoWizardPage *ui;
 
     bool isComplete() const override;
+
+    /**
+     * Overridden to suppress modifying the statement date
+     * when back button is pressed.
+     */
+    void cleanupPage() override;
 };
 
 #endif
