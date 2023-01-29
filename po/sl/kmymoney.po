@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-25 00:58+0000\n"
+"POT-Creation-Date: 2023-01-29 00:58+0000\n"
 "PO-Revision-Date: 2023-01-26 10:35+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -623,10 +623,10 @@ msgid "Backup location:"
 msgstr "Mesto varnostne kopije:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3608
-#: kmymoney/kmymoney.cpp:3672 kmymoney/kmymoney.cpp:3688
-#: kmymoney/kmymoney.cpp:3694 kmymoney/kmymoney.cpp:3708
-#: kmymoney/kmymoney.cpp:3710
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3621
+#: kmymoney/kmymoney.cpp:3685 kmymoney/kmymoney.cpp:3701
+#: kmymoney/kmymoney.cpp:3707 kmymoney/kmymoney.cpp:3721
+#: kmymoney/kmymoney.cpp:3723
 #, kde-format
 msgid "Backup"
 msgstr "Varnostna kopija"
@@ -1923,7 +1923,7 @@ msgstr "Stanje:"
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:612
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:657
 #: kmymoney/plugins/views/reports/kreportsview.ui:77
-#: kmymoney/settings/kmymoney.kcfg:452 kmymoney/views/kinstitutionsview.ui:53
+#: kmymoney/settings/kmymoney.kcfg:461 kmymoney/views/kinstitutionsview.ui:53
 #: kmymoney/views/kinstitutionsview.ui:71
 #: kmymoney/views/kinstitutionsview.ui:81
 #: kmymoney/views/ktransactionselectdlg.ui:50
@@ -3116,7 +3116,7 @@ msgstr "Posamična nastavitev pisav za glavne knjige"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (listCellFont), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:71
-#: kmymoney/settings/kmymoney.kcfg:293
+#: kmymoney/settings/kmymoney.kcfg:302
 #, kde-format
 msgid "Cell font"
 msgstr "Pisava celice"
@@ -3124,7 +3124,7 @@ msgstr "Pisava celice"
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #. i18n: ectx: label, entry (listHeaderFont), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:81
-#: kmymoney/settings/kmymoney.kcfg:296
+#: kmymoney/settings/kmymoney.kcfg:305
 #, kde-format
 msgid "Header font"
 msgstr "Pisava naslova"
@@ -3465,7 +3465,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logImportedStatements)
 #. i18n: ectx: label, entry (logImportedStatements), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:587
-#: kmymoney/settings/kmymoney.kcfg:283
+#: kmymoney/settings/kmymoney.kcfg:292
 #, kde-format
 msgid "Log imported statements"
 msgstr "Zapiši v dnevnik uvožene izkaze"
@@ -3473,7 +3473,7 @@ msgstr "Zapiši v dnevnik uvožene izkaze"
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logOfxTransactions)
 #. i18n: ectx: label, entry (logOfxTransactions), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:594
-#: kmymoney/settings/kmymoney.kcfg:286
+#: kmymoney/settings/kmymoney.kcfg:295
 #, kde-format
 msgid "Log OFX transactions"
 msgstr "Zapiši v dnevnik transakcije OFX"
@@ -3617,7 +3617,7 @@ msgstr "Individualne nastavitve ikon"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (IconsTheme), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsicons.ui:52
-#: kmymoney/settings/kmymoney.kcfg:299
+#: kmymoney/settings/kmymoney.kcfg:308
 #, kde-format
 msgid "Icon theme"
 msgstr "Tema ikon"
@@ -3968,23 +3968,53 @@ msgid "Display"
 msgstr "Prikaz"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowGrid)
-#. i18n: ectx: label, entry (ShowGrid), group (List Options)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:30
-#: kmymoney/settings/kmymoney.kcfg:252
-#, kde-format
-msgid "Show a grid in the register"
+#, fuzzy, kde-format
+#| msgid "Show a grid in the register"
+msgid "Show a grid in the ledger"
 msgstr "Prikaži mrežo v registru"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowRegisterDetailed)
-#. i18n: ectx: label, entry (ShowRegisterDetailed), group (List Options)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TransactionForm)
+#. i18n: ectx: label, entry (TransactionForm), group (General Options)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:40
-#: kmymoney/settings/kmymoney.kcfg:240
+#: kmymoney/settings/kmymoney.kcfg:88
 #, kde-format
-msgid "Show all register entries in full detail"
+msgid "Show transaction form"
+msgstr "Prikaži obrazec transakcije"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowPlannedScheduleDates)
+#: kmymoney/dialogs/settings/ksettingsregister.ui:47
+#, kde-format
+msgid ""
+"If a planned transaction is overdue, today's date is used by default as the "
+"posting date. With this option, the originally planned date is used instead."
+msgstr ""
+"Če je načrtovana transakcija zapadla, je današnji datum privzeto uporabljen "
+"kot datum objave. Pri tej možnosti je namesto tega uporabljen prvotno "
+"načrtovani datum."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowPlannedScheduleDates)
+#: kmymoney/dialogs/settings/ksettingsregister.ui:50
+#, kde-format
+msgid "Display overdue schedules with planned date"
+msgstr "Prikaži zapadle časovne načrte s planiranim datumom"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: kmymoney/dialogs/settings/ksettingsregister.ui:57
+#, fuzzy, kde-format
+#| msgid "Investment details"
+msgid "Ledger entry details"
+msgstr "Podrobnosti naložbe"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowRegisterDetailed)
+#: kmymoney/dialogs/settings/ksettingsregister.ui:63
+#, fuzzy, kde-format
+#| msgid "Show all register entries in full detail"
+msgid "Show all ledger entries in full detail"
 msgstr "Prikaži vse vnose registra z vsemi podrobnostmi"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_LedgerLens)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:50
+#: kmymoney/dialogs/settings/ksettingsregister.ui:73
 #, kde-format
 msgid ""
 "Using the ledger lens shows the details for the transaction that has focus "
@@ -3998,30 +4028,28 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_LedgerLens)
 #. i18n: ectx: label, entry (LedgerLens), group (General Options)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:53
+#: kmymoney/dialogs/settings/ksettingsregister.ui:76
 #: kmymoney/settings/kmymoney.kcfg:80
 #, kde-format
 msgid "Use the ledger lens"
 msgstr "Uporabi lečo glavne knjige"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllSplits)
-#. i18n: ectx: label, entry (ShowAllSplits), group (List Options)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:63
-#: kmymoney/settings/kmymoney.kcfg:244
-#, kde-format
-msgid "Show all split details in register"
+#: kmymoney/dialogs/settings/ksettingsregister.ui:86
+#, fuzzy, kde-format
+#| msgid "Show all split details in register"
+msgid "Show all split details in ledger"
 msgstr "Prikaži vse podrobnosti delitev v registru"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TransactionForm)
-#. i18n: ectx: label, entry (TransactionForm), group (General Options)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:70
-#: kmymoney/settings/kmymoney.kcfg:88
-#, kde-format
-msgid "Show transaction form"
-msgstr "Prikaži obrazec transakcije"
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: kmymoney/dialogs/settings/ksettingsregister.ui:96
+#, fuzzy, kde-format
+#| msgid "Information"
+msgid "Information headers"
+msgstr "Informacije"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowFancyMarker)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:77
+#: kmymoney/dialogs/settings/ksettingsregister.ui:102
 #, kde-format
 msgid ""
 "Draws a larger header above each group of transactions. The grouping depends "
@@ -4031,60 +4059,64 @@ msgstr ""
 "odvisno od trenutnega vrstnega reda razvrščanja."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFancyMarker)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:80
-#, kde-format
-msgid "Show group header between transactions"
+#: kmymoney/dialogs/settings/ksettingsregister.ui:105
+#, fuzzy, kde-format
+#| msgid "Show group header between transactions"
+msgid "Show group headers between transactions"
 msgstr "Prikazuj naslov skupine med transakcijami"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFiscalMarker)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:90
+#: kmymoney/dialogs/settings/ksettingsregister.ui:115
 #, kde-format
 msgid "Show header for the previous and current fiscal year"
 msgstr "Prikazuj naslov za prejšnje in sedanje fiskalno leto"
 
-#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowPlannedScheduleDates)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:97
-#, kde-format
-msgid ""
-"If a planned transaction is overdue, today's date is used by default as the "
-"posting date. With this option, the originally planned date is used instead."
-msgstr ""
-"Če je načrtovana transakcija zapadla, je današnji datum privzeto uporabljen "
-"kot datum objave. Pri tej možnosti je namesto tega uporabljen prvotno "
-"načrtovani datum."
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
+#: kmymoney/dialogs/settings/ksettingsregister.ui:123
+#, fuzzy, kde-format
+#| msgid "Do not show reconciled transactions"
+msgid "Don't show reconciliation entries"
+msgstr "Ne prikazuj usklajenih transakcij"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowPlannedScheduleDates)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:100
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
+#: kmymoney/dialogs/settings/ksettingsregister.ui:128
+#, fuzzy, kde-format
+#| msgid "Show date of last reconciliation on the Homepage"
+msgid "Show last reconciliation entry with date and balance in ledger"
+msgstr "Prikažite datum zadnje uskladitve na domači strani"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
+#: kmymoney/dialogs/settings/ksettingsregister.ui:133
 #, kde-format
-msgid "Display overdue schedules with planned date"
-msgstr "Prikaži zapadle časovne načrte s planiranim datumom"
+msgid "Show all reconciliation entries with date and balance in ledger"
+msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, sorting)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:124
+#: kmymoney/dialogs/settings/ksettingsregister.ui:161
 #, kde-format
 msgid "Sorting"
 msgstr "Razvrščanje v vrsto"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab3)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:131
+#: kmymoney/dialogs/settings/ksettingsregister.ui:168
 #, kde-format
 msgid "Normal view"
 msgstr "Normalni pogled"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab4)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:144
+#: kmymoney/dialogs/settings/ksettingsregister.ui:181
 #, kde-format
 msgid "Reconciliation view"
 msgstr "Pogled usklajevanja"
 
 #. i18n: ectx: attribute (title), widget (QWidget, TabPage)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:157
+#: kmymoney/dialogs/settings/ksettingsregister.ui:194
 #, kde-format
 msgid "Search view"
 msgstr "Iskalni pogled"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:173
+#: kmymoney/dialogs/settings/ksettingsregister.ui:210
 #, kde-format
 msgid ""
 "Use the <i>left</i> and <i>right</i> buttons to add and remove sort options. "
@@ -4098,14 +4130,14 @@ msgstr ""
 "razvrščanja med <i>naraščajoče</i> in<i>padajoče</i>."
 
 #. i18n: ectx: attribute (title), widget (QWidget, TabPage1)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:184
+#: kmymoney/dialogs/settings/ksettingsregister.ui:221
 #, kde-format
 msgid "Data entry"
 msgstr "Vnos podatkov"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoIncCheckNumber)
 #. i18n: ectx: label, entry (AutoIncCheckNumber), group (General Options)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:190
+#: kmymoney/dialogs/settings/ksettingsregister.ui:227
 #: kmymoney/settings/kmymoney.kcfg:21
 #, kde-format
 msgid "Auto increment check number"
@@ -4113,20 +4145,20 @@ msgstr "Samodejno povečajte številko čeka"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusChangeIsEnter)
 #. i18n: ectx: label, entry (FocusChangeIsEnter), group (General Options)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:200
+#: kmymoney/dialogs/settings/ksettingsregister.ui:237
 #: kmymoney/settings/kmymoney.kcfg:72
 #, kde-format
 msgid "Keep changes when selecting a different transaction/split"
 msgstr "Ohrani spremembe ob izbiri drugačne delitve transakcije"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnterMovesBetweenFields)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:207
+#: kmymoney/dialogs/settings/ksettingsregister.ui:244
 #, kde-format
 msgid "Use Enter to move between fields"
 msgstr "Uporabi tipko Enter za pomikanje med polji"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_stringMatchFromStart)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:217
+#: kmymoney/dialogs/settings/ksettingsregister.ui:254
 #, kde-format
 msgid ""
 "Mark this option, if you always want to match names e.g. for payees from the "
@@ -4137,13 +4169,13 @@ msgstr ""
 "katerimkoli podnizom."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_stringMatchFromStart)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:220
+#: kmymoney/dialogs/settings/ksettingsregister.ui:257
 #, kde-format
 msgid "Match names from start"
 msgstr "Imena naj se ujemajo od začetka"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_AutoReconciliation)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:227
+#: kmymoney/dialogs/settings/ksettingsregister.ui:264
 #, kde-format
 msgid ""
 "After entering the reconciliation data automatically detect the transactions "
@@ -4153,7 +4185,7 @@ msgstr ""
 "temi podatki (v nekaterih primerih to morda ni mogoče)."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoReconciliation)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:230
+#: kmymoney/dialogs/settings/ksettingsregister.ui:267
 #: kmymoney/views/reconciliationledgerviewpage.cpp:126
 #, kde-format
 msgid "Automatic reconciliation"
@@ -4161,21 +4193,21 @@ msgstr "Samodejno usklajevanje"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_1)
 #. i18n: ectx: label, entry (initialDateFieldCursorPosition), group (List Options)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:242
-#: kmymoney/settings/kmymoney.kcfg:315
+#: kmymoney/dialogs/settings/ksettingsregister.ui:279
+#: kmymoney/settings/kmymoney.kcfg:324
 #, kde-format
 msgid "Initial cursor position within the date field"
 msgstr "Začetna pozicija kazalke znotraj datumskega polja"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_initialDateFieldCursorPosition)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:250
+#: kmymoney/dialogs/settings/ksettingsregister.ui:287
 #, kde-format
 msgid "Day"
 msgstr "Dan"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_initialDateFieldCursorPosition)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:255
+#: kmymoney/dialogs/settings/ksettingsregister.ui:292
 #: kmymoney/plugins/views/reports/core/listtable.cpp:633
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:517
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:96
@@ -4185,20 +4217,20 @@ msgstr "Mesec"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_initialDateFieldCursorPosition)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:260
+#: kmymoney/dialogs/settings/ksettingsregister.ui:297
 #: kmymoney/plugins/views/budget/knewbudgetdlg.ui:39
 #, kde-format
 msgid "Year"
 msgstr "Leto"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:284
+#: kmymoney/dialogs/settings/ksettingsregister.ui:321
 #, kde-format
 msgid "Default reconciliation state"
 msgstr "Privzeto stanje usklajevanja"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, kcfg_defaultReconciliationState)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:294
+#: kmymoney/dialogs/settings/ksettingsregister.ui:331
 #, kde-format
 msgid ""
 "Default reconciliation state for transactions entered during reconciliation "
@@ -4207,7 +4239,7 @@ msgstr ""
 "Privzeto stanje uskladitve za transakcije, vnesene med usklajevanjem računa"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:298
+#: kmymoney/dialogs/settings/ksettingsregister.ui:335
 #: kmymoney/models/ledgerfilter.cpp:77
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
 #, kde-format
@@ -4216,7 +4248,7 @@ msgstr "Neusklajeno"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:303
+#: kmymoney/dialogs/settings/ksettingsregister.ui:340
 #: kmymoney/widgets/ktransactionfilter.ui:595
 #, kde-format
 msgctxt "@item reconciliation status"
@@ -4225,7 +4257,7 @@ msgstr "Očiščeno"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkReconciled)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:308
+#: kmymoney/dialogs/settings/ksettingsregister.ui:345
 #: kmymoney/plugins/views/reports/core/listtable.cpp:637
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
 #: kmymoney/views/khomeview_p.h:992 kmymoney/views/khomeview_p.h:1347
@@ -4236,25 +4268,25 @@ msgid "Reconciled"
 msgstr "Usklajeno"
 
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_AutoFillTransaction)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:334
+#: kmymoney/dialogs/settings/ksettingsregister.ui:371
 #, kde-format
 msgid "Autofill"
 msgstr "Samodejno polnjenje"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioButton1)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:343
+#: kmymoney/dialogs/settings/ksettingsregister.ui:380
 #, kde-format
 msgid "Do not auto-fill transaction data at all."
 msgstr "Sploh ne izpolnjuj samodejno podatkov o transakcijah."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton1)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:346
+#: kmymoney/dialogs/settings/ksettingsregister.ui:383
 #, kde-format
 msgid "No Autofill"
 msgstr "Brez samodejnega polnjenja"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioButton2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:355
+#: kmymoney/dialogs/settings/ksettingsregister.ui:392
 #, no-c-format, kde-format
 msgid ""
 "Collect all transactions for the given payee. Treat all transactions that "
@@ -4272,7 +4304,7 @@ msgstr ""
 "Če izberete 0%, bodo prikazane vse transakcije."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:358
+#: kmymoney/dialogs/settings/ksettingsregister.ui:395
 #, kde-format
 msgid "Same transaction if amount differs less than percentage set below"
 msgstr ""
@@ -4280,7 +4312,7 @@ msgstr ""
 "spodaj"
 
 #. i18n: ectx: property (whatsThis), widget (QRadioButton, radioButton3)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:371
+#: kmymoney/dialogs/settings/ksettingsregister.ui:408
 #, kde-format
 msgid ""
 "The data of the last transaction assigned to the category used most often "
@@ -4290,20 +4322,20 @@ msgstr ""
 "tega prejemnika plačila se samodejno izpolnijo v urejevalniku transakcij."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton3)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:374
+#: kmymoney/dialogs/settings/ksettingsregister.ui:411
 #, kde-format
 msgid "With previously most often used transaction for the payee"
 msgstr ""
 "S predhodno najpogosteje uporabljenimi transakcijami za prejemnika plačila"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:393
+#: kmymoney/dialogs/settings/ksettingsregister.ui:430
 #, kde-format
 msgid "Same transaction if amount differs less than "
 msgstr "Ista transakcija, če se znesek razlikuje za manj kot "
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_AutoFillDifference)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:400
+#: kmymoney/dialogs/settings/ksettingsregister.ui:437
 #, kde-format
 msgid ""
 "Two transactions are usually treated identical for autofill, if they refer "
@@ -4316,13 +4348,13 @@ msgstr ""
 "odstotek."
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, kcfg_AutoFillDifference)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:403
+#: kmymoney/dialogs/settings/ksettingsregister.ui:440
 #, no-c-format, kde-format
 msgid "%"
 msgstr "%"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_AutoFillUseMemos)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:432
+#: kmymoney/dialogs/settings/ksettingsregister.ui:469
 #, kde-format
 msgid ""
 "If this option is checked the memos from the previous transaction will be "
@@ -4334,25 +4366,25 @@ msgstr ""
 "transakcije."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoFillUseMemos)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:435
+#: kmymoney/dialogs/settings/ksettingsregister.ui:472
 #, kde-format
 msgid "Use memos from previous transaction"
 msgstr "Uporabi opombe iz prejšnje transakcije"
 
 #. i18n: ectx: attribute (title), widget (QWidget, TabPage2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:462
+#: kmymoney/dialogs/settings/ksettingsregister.ui:499
 #, kde-format
 msgid "Import"
 msgstr "Uvozi"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:470
+#: kmymoney/dialogs/settings/ksettingsregister.ui:507
 #, kde-format
 msgid "Match transactions within days"
 msgstr "Ujemanje transakcij v nekaj dneh"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_matchInterval)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:480
+#: kmymoney/dialogs/settings/ksettingsregister.ui:517
 #, kde-format
 msgid ""
 "Search for matching transactions within the range of the posting date of the "
@@ -4362,7 +4394,7 @@ msgstr ""
 "+/- število danih dni."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_askForPayeeCategory)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:517
+#: kmymoney/dialogs/settings/ksettingsregister.ui:554
 #, kde-format
 msgid ""
 "Whenever a new payee is detected during import of a statement, the user will "
@@ -4374,7 +4406,7 @@ msgstr ""
 "uporabnika, če je izbrana ta možnost."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_askForPayeeCategory)
-#: kmymoney/dialogs/settings/ksettingsregister.ui:520
+#: kmymoney/dialogs/settings/ksettingsregister.ui:557
 #, kde-format
 msgid "Ask for a new payee's default category"
 msgstr "Vprašaj za privzeto kategorijo novega prejemnika plačila"
@@ -4707,13 +4739,13 @@ msgstr "Izbranih transakcij ni mogoče najti"
 msgid "Unable to unmatch the selected transactions"
 msgstr "Ni mogoče ločiti izbranih transakcij"
 
-#: kmymoney/kmymoney.cpp:1452
+#: kmymoney/kmymoney.cpp:1464
 #, kde-format
 msgctxt "@action New file/database"
 msgid "New book..."
 msgstr "Nova knjiga..."
 
-#: kmymoney/kmymoney.cpp:1596
+#: kmymoney/kmymoney.cpp:1608
 #, kde-format
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
@@ -4721,586 +4753,586 @@ msgstr ""
 "To je dnevnik preverjanja skladnosti, uporabite kontekstni meni za kopiranje "
 "ali shranjevanje."
 
-#: kmymoney/kmymoney.cpp:1609
+#: kmymoney/kmymoney.cpp:1621
 #, kde-format
 msgid "Copy to clipboard"
 msgstr "Kopiraj na odložišče"
 
-#: kmymoney/kmymoney.cpp:1610
+#: kmymoney/kmymoney.cpp:1622
 #, kde-format
 msgid "Save to file"
 msgstr "Shrani na datoteko"
 
-#: kmymoney/kmymoney.cpp:1733
+#: kmymoney/kmymoney.cpp:1745
 #, kde-format
 msgid "Backup..."
 msgstr "Varnostna kopija..."
 
-#: kmymoney/kmymoney.cpp:1734
+#: kmymoney/kmymoney.cpp:1746
 #, kde-format
 msgid "Statement file..."
 msgstr "Datoteka izkazov..."
 
-#: kmymoney/kmymoney.cpp:1735 kmymoney/kmymoney.cpp:1736
+#: kmymoney/kmymoney.cpp:1747 kmymoney/kmymoney.cpp:1748
 #, kde-format
 msgid "Account Template..."
 msgstr "Šablona računa..."
 
-#: kmymoney/kmymoney.cpp:1737
+#: kmymoney/kmymoney.cpp:1749
 #, kde-format
 msgid "Personal Data..."
 msgstr "Osebni podatki..."
 
-#: kmymoney/kmymoney.cpp:1739
+#: kmymoney/kmymoney.cpp:1751
 #, kde-format
 msgid "Dump Memory"
 msgstr "Izbruhaj pomnilnik"
 
-#: kmymoney/kmymoney.cpp:1741
+#: kmymoney/kmymoney.cpp:1753
 #, kde-format
 msgid "File-Information..."
 msgstr "Informacija o datoteki..."
 
-#: kmymoney/kmymoney.cpp:1745
+#: kmymoney/kmymoney.cpp:1757
 #, kde-format
 msgid "Find transaction..."
 msgstr "Najdi transakcijo..."
 
-#: kmymoney/kmymoney.cpp:1749
+#: kmymoney/kmymoney.cpp:1761
 #, kde-format
 msgid "Show Transaction Detail"
 msgstr "Prikaži podrobnosti transakcije"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
-#: kmymoney/kmymoney.cpp:1750 kmymoney/settings/kmymoney.kcfg:236
+#: kmymoney/kmymoney.cpp:1762 kmymoney/settings/kmymoney.kcfg:236
 #, kde-format
 msgid "Hide reconciled transactions"
 msgstr "Skrij usklajene transakcije"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
-#: kmymoney/kmymoney.cpp:1751 kmymoney/settings/kmymoney.kcfg:216
+#: kmymoney/kmymoney.cpp:1763 kmymoney/settings/kmymoney.kcfg:216
 #, kde-format
 msgid "Hide unused categories"
 msgstr "Skrij neuporabljene kategorije"
 
 #. i18n: ectx: label, entry (ShowAllAccounts), group (List Options)
-#: kmymoney/kmymoney.cpp:1752 kmymoney/settings/kmymoney.kcfg:220
+#: kmymoney/kmymoney.cpp:1764 kmymoney/settings/kmymoney.kcfg:220
 #, kde-format
 msgid "Show all accounts"
 msgstr "Prikaži vse račune"
 
-#: kmymoney/kmymoney.cpp:1756
+#: kmymoney/kmymoney.cpp:1768
 #, kde-format
 msgid "New institution..."
 msgstr "Nova institucija..."
 
-#: kmymoney/kmymoney.cpp:1757
+#: kmymoney/kmymoney.cpp:1769
 #, kde-format
 msgid "Edit institution..."
 msgstr "Uredi institucijo..."
 
-#: kmymoney/kmymoney.cpp:1758
+#: kmymoney/kmymoney.cpp:1770
 #, kde-format
 msgid "Delete institution..."
 msgstr "Zbriši institucijo..."
 
-#: kmymoney/kmymoney.cpp:1762
+#: kmymoney/kmymoney.cpp:1774
 #, kde-format
 msgid "New account..."
 msgstr "Nov račun..."
 
-#: kmymoney/kmymoney.cpp:1763
+#: kmymoney/kmymoney.cpp:1775
 #, kde-format
 msgid "Open ledger"
 msgstr "Odpri glavno knjigo"
 
-#: kmymoney/kmymoney.cpp:1764
+#: kmymoney/kmymoney.cpp:1776
 #, kde-format
 msgid "Reconcile..."
 msgstr "Uskladi..."
 
-#: kmymoney/kmymoney.cpp:1765
+#: kmymoney/kmymoney.cpp:1777
 #, kde-format
 msgctxt "Finish reconciliation"
 msgid "Finish"
 msgstr "Končaj"
 
-#: kmymoney/kmymoney.cpp:1766
+#: kmymoney/kmymoney.cpp:1778
 #, kde-format
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
 msgstr "Odloži"
 
-#: kmymoney/kmymoney.cpp:1767
+#: kmymoney/kmymoney.cpp:1779
 #, kde-format
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
 msgstr "Prekliči"
 
-#: kmymoney/kmymoney.cpp:1768
+#: kmymoney/kmymoney.cpp:1780
 #, kde-format
 msgid "Report reconciliation"
 msgstr "Poročaj o usklajevanju"
 
-#: kmymoney/kmymoney.cpp:1769
+#: kmymoney/kmymoney.cpp:1781
 #, kde-format
 msgid "Edit account..."
 msgstr "Uredi račun..."
 
-#: kmymoney/kmymoney.cpp:1770
+#: kmymoney/kmymoney.cpp:1782
 #, kde-format
 msgid "Delete account..."
 msgstr "Zbriši račun..."
 
-#: kmymoney/kmymoney.cpp:1771
+#: kmymoney/kmymoney.cpp:1783
 #, kde-format
 msgid "Close account"
 msgstr "Zapri račun"
 
-#: kmymoney/kmymoney.cpp:1772
+#: kmymoney/kmymoney.cpp:1784
 #, kde-format
 msgid "Reopen account"
 msgstr "Ponovno odpri račun"
 
-#: kmymoney/kmymoney.cpp:1773
+#: kmymoney/kmymoney.cpp:1785
 #, kde-format
 msgid "Transaction report"
 msgstr "Poročilo o transakcijah"
 
-#: kmymoney/kmymoney.cpp:1774
+#: kmymoney/kmymoney.cpp:1786
 #, kde-format
 msgid "Show balance chart..."
 msgstr "Prikaži diagram salda.."
 
-#: kmymoney/kmymoney.cpp:1775
+#: kmymoney/kmymoney.cpp:1787
 #, kde-format
 msgid "Map account..."
 msgstr "Preslika račun..."
 
-#: kmymoney/kmymoney.cpp:1776
+#: kmymoney/kmymoney.cpp:1788
 #, kde-format
 msgid "Unmap account..."
 msgstr "Odstrani preslikavo računa..."
 
-#: kmymoney/kmymoney.cpp:1777
+#: kmymoney/kmymoney.cpp:1789
 #, kde-format
 msgid "Update account..."
 msgstr "Posodobi račun..."
 
-#: kmymoney/kmymoney.cpp:1778
+#: kmymoney/kmymoney.cpp:1790
 #, kde-format
 msgid "Update all accounts..."
 msgstr "Posodobi vse račune..."
 
-#: kmymoney/kmymoney.cpp:1782
+#: kmymoney/kmymoney.cpp:1794
 #, kde-format
 msgid "New category..."
 msgstr "Nova kategorija..."
 
-#: kmymoney/kmymoney.cpp:1783
+#: kmymoney/kmymoney.cpp:1795
 #, kde-format
 msgid "Edit category..."
 msgstr "Uredi kategorijo..."
 
-#: kmymoney/kmymoney.cpp:1784
+#: kmymoney/kmymoney.cpp:1796
 #, kde-format
 msgid "Delete category..."
 msgstr "Zbriši kategorijo..."
 
-#: kmymoney/kmymoney.cpp:1788
+#: kmymoney/kmymoney.cpp:1800
 #, kde-format
 msgid "Currencies..."
 msgstr "Valute..."
 
-#: kmymoney/kmymoney.cpp:1789
+#: kmymoney/kmymoney.cpp:1801
 #, kde-format
 msgid "Prices..."
 msgstr "Cene..."
 
-#: kmymoney/kmymoney.cpp:1790
+#: kmymoney/kmymoney.cpp:1802
 #, kde-format
 msgid "Update Stock and Currency Prices..."
 msgstr "Posodobi tečajnice delnic in tečajnice valut..."
 
-#: kmymoney/kmymoney.cpp:1791
+#: kmymoney/kmymoney.cpp:1803
 #, kde-format
 msgid "Consistency Check"
 msgstr "Preverjanje konsistentnosti"
 
-#: kmymoney/kmymoney.cpp:1792
+#: kmymoney/kmymoney.cpp:1804
 #, kde-format
 msgid "Performance-Test"
 msgstr "Preizkus zmogljivosti"
 
-#: kmymoney/kmymoney.cpp:1793
+#: kmymoney/kmymoney.cpp:1805
 #, kde-format
 msgid "Calculator..."
 msgstr "Računalo..."
 
-#: kmymoney/kmymoney.cpp:1797
+#: kmymoney/kmymoney.cpp:1809
 #, kde-format
 msgid "Enable all messages"
 msgstr "Omogoči vsa sporočila"
 
-#: kmymoney/kmymoney.cpp:1801 kmymoney/views/kwelcomepage.cpp:82
+#: kmymoney/kmymoney.cpp:1813 kmymoney/views/kwelcomepage.cpp:82
 #, kde-format
 msgid "Get help from our community"
 msgstr "Dobite pomoč pri skupnosti"
 
-#: kmymoney/kmymoney.cpp:1802 kmymoney/views/kwelcomepage.cpp:84
+#: kmymoney/kmymoney.cpp:1814 kmymoney/views/kwelcomepage.cpp:84
 #, kde-format
 msgid "See what's new in this version"
 msgstr "Poglejte, kaj je novega v tej verziji"
 
-#: kmymoney/kmymoney.cpp:1803 kmymoney/views/kwelcomepage.cpp:80
+#: kmymoney/kmymoney.cpp:1815 kmymoney/views/kwelcomepage.cpp:80
 #, kde-format
 msgid "Visit our website"
 msgstr "Obiščite našo spletno stran"
 
-#: kmymoney/kmymoney.cpp:1807
+#: kmymoney/kmymoney.cpp:1819
 #, kde-format
 msgctxt "New transaction button"
 msgid "New transaction"
 msgstr "Nova transakcija"
 
-#: kmymoney/kmymoney.cpp:1808
+#: kmymoney/kmymoney.cpp:1820
 #, kde-format
 msgctxt "Edit transaction button"
 msgid "Edit"
 msgstr "Uredi"
 
-#: kmymoney/kmymoney.cpp:1809
+#: kmymoney/kmymoney.cpp:1821
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
 msgstr "Vnesi"
 
-#: kmymoney/kmymoney.cpp:1810
+#: kmymoney/kmymoney.cpp:1822
 #, kde-format
 msgctxt "Edit split button"
 msgid "Edit splits"
 msgstr "Uredi dele"
 
-#: kmymoney/kmymoney.cpp:1811
+#: kmymoney/kmymoney.cpp:1823
 #, kde-format
 msgctxt "Cancel transaction edit"
 msgid "Cancel"
 msgstr "Prekliči"
 
-#: kmymoney/kmymoney.cpp:1812
+#: kmymoney/kmymoney.cpp:1824
 #, kde-format
 msgctxt "Delete transaction"
 msgid "Delete"
 msgstr "Zbriši"
 
-#: kmymoney/kmymoney.cpp:1813
+#: kmymoney/kmymoney.cpp:1825
 #, kde-format
 msgctxt "Duplicate transaction"
 msgid "Duplicate"
 msgstr "Dupliciraj"
 
-#: kmymoney/kmymoney.cpp:1814
+#: kmymoney/kmymoney.cpp:1826
 #, kde-format
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
 msgstr "Dodaj obratno"
 
-#: kmymoney/kmymoney.cpp:1815
+#: kmymoney/kmymoney.cpp:1827
 #, kde-format
 msgctxt "Accept 'imported' and 'matched' transaction"
 msgid "Accept"
 msgstr "Sprejmi"
 
-#: kmymoney/kmymoney.cpp:1816
+#: kmymoney/kmymoney.cpp:1828
 #, kde-format
 msgctxt "Toggle reconciliation flag"
 msgid "Toggle"
 msgstr "Preklopi"
 
-#: kmymoney/kmymoney.cpp:1817
+#: kmymoney/kmymoney.cpp:1829
 #, kde-format
 msgctxt "Mark transaction cleared"
 msgid "Cleared"
 msgstr "Očiščeno"
 
-#: kmymoney/kmymoney.cpp:1818
+#: kmymoney/kmymoney.cpp:1830
 #, kde-format
 msgctxt "Mark transaction reconciled"
 msgid "Reconciled"
 msgstr "Usklajen"
 
-#: kmymoney/kmymoney.cpp:1819
+#: kmymoney/kmymoney.cpp:1831
 #, kde-format
 msgctxt "Mark transaction not reconciled"
 msgid "Not reconciled"
 msgstr "Neusklajen"
 
-#: kmymoney/kmymoney.cpp:1820
+#: kmymoney/kmymoney.cpp:1832
 #, kde-format
 msgctxt "Move transaction"
 msgid "Move transaction"
 msgstr "Prenesi transakcijo"
 
-#: kmymoney/kmymoney.cpp:1821
+#: kmymoney/kmymoney.cpp:1833
 #, kde-format
 msgctxt "Show transaction"
 msgid "Show transaction"
 msgstr "Prikaži transakcijo"
 
-#: kmymoney/kmymoney.cpp:1823
+#: kmymoney/kmymoney.cpp:1835
 #, kde-format
 msgctxt "Select all transactions"
 msgid "Select all"
 msgstr "Izberi vse"
 
-#: kmymoney/kmymoney.cpp:1824
+#: kmymoney/kmymoney.cpp:1836
 #, kde-format
 msgid "Go to account"
 msgstr "Pojdi na račun"
 
-#: kmymoney/kmymoney.cpp:1825
+#: kmymoney/kmymoney.cpp:1837
 #, kde-format
 msgid "Go to payee"
 msgstr "Pojdi na prejemnika plačil"
 
-#: kmymoney/kmymoney.cpp:1826
+#: kmymoney/kmymoney.cpp:1838
 #, kde-format
 msgid "Create scheduled transaction..."
 msgstr "Ustvari načrtovano transakcijo..."
 
-#: kmymoney/kmymoney.cpp:1827
+#: kmymoney/kmymoney.cpp:1839
 #, kde-format
 msgid "Assign next number"
 msgstr "Dodeli naslednjo številko"
 
-#: kmymoney/kmymoney.cpp:1828
+#: kmymoney/kmymoney.cpp:1840
 #, kde-format
 msgctxt "Combine transactions"
 msgid "Combine"
 msgstr "Sestavi"
 
-#: kmymoney/kmymoney.cpp:1829
+#: kmymoney/kmymoney.cpp:1841
 #, kde-format
 msgid "Move to today"
 msgstr "Prenesi na danes"
 
-#: kmymoney/kmymoney.cpp:1830
+#: kmymoney/kmymoney.cpp:1842
 #, kde-format
 msgid "Copy splits"
 msgstr "Kopiraj razdelitve"
 
-#: kmymoney/kmymoney.cpp:1831
+#: kmymoney/kmymoney.cpp:1843
 #, kde-format
 msgid "Show filter widget"
 msgstr "Prikaži orodje filtriranja"
 
-#: kmymoney/kmymoney.cpp:1833
+#: kmymoney/kmymoney.cpp:1845
 #, kde-format
 msgid "New investment..."
 msgstr "Nova naložba..."
 
-#: kmymoney/kmymoney.cpp:1834
+#: kmymoney/kmymoney.cpp:1846
 #, kde-format
 msgid "Edit investment..."
 msgstr "Uredi naložbo..."
 
-#: kmymoney/kmymoney.cpp:1835
+#: kmymoney/kmymoney.cpp:1847
 #, kde-format
 msgid "Delete investment..."
 msgstr "Zbriši naložbo.."
 
-#: kmymoney/kmymoney.cpp:1836
+#: kmymoney/kmymoney.cpp:1848
 #, kde-format
 msgid "Online price update..."
 msgstr "Spletno posodabljanje cene..."
 
-#: kmymoney/kmymoney.cpp:1837
+#: kmymoney/kmymoney.cpp:1849
 #, kde-format
 msgid "Manual price update..."
 msgstr "Ročno posodabljanje cene..."
 
-#: kmymoney/kmymoney.cpp:1838
+#: kmymoney/kmymoney.cpp:1850
 #, kde-format
 msgid "Edit security..."
 msgstr "Uredi vrednostni papir..."
 
-#: kmymoney/kmymoney.cpp:1839
+#: kmymoney/kmymoney.cpp:1851
 #, kde-format
 msgid "Delete security..."
 msgstr "Zbriši vrednostni papir..."
 
-#: kmymoney/kmymoney.cpp:1842
+#: kmymoney/kmymoney.cpp:1854
 #, kde-format
 msgid "New schedule..."
 msgstr "Nov načrt..."
 
-#: kmymoney/kmymoney.cpp:1843
+#: kmymoney/kmymoney.cpp:1855
 #, kde-format
 msgid "Edit scheduled transaction"
 msgstr "Uredi načrtovano transakcijo"
 
-#: kmymoney/kmymoney.cpp:1844
+#: kmymoney/kmymoney.cpp:1856
 #, kde-format
 msgid "Delete scheduled transaction"
 msgstr "Zbriši načrtovano transakcijo"
 
-#: kmymoney/kmymoney.cpp:1845
+#: kmymoney/kmymoney.cpp:1857
 #, kde-format
 msgid "Duplicate scheduled transaction"
 msgstr "Podvoji načrtovano transakcijo"
 
-#: kmymoney/kmymoney.cpp:1846
+#: kmymoney/kmymoney.cpp:1858
 #, kde-format
 msgid "Enter next transaction..."
 msgstr "Vnesite naslednjo transakcijo..."
 
-#: kmymoney/kmymoney.cpp:1847
+#: kmymoney/kmymoney.cpp:1859
 #, kde-format
 msgid "Skip next transaction..."
 msgstr "Preskoči naslednjo transakcijo..."
 
-#: kmymoney/kmymoney.cpp:1849
+#: kmymoney/kmymoney.cpp:1861
 #, kde-format
 msgid "New payee..."
 msgstr "Nov prejemnik plačil..."
 
-#: kmymoney/kmymoney.cpp:1850
+#: kmymoney/kmymoney.cpp:1862
 #, kde-format
 msgid "Rename payee"
 msgstr "Spremeni ime prejemnika plačil"
 
-#: kmymoney/kmymoney.cpp:1851
+#: kmymoney/kmymoney.cpp:1863
 #, kde-format
 msgid "Delete payee"
 msgstr "Zbriši prejemnika plačil"
 
-#: kmymoney/kmymoney.cpp:1852
+#: kmymoney/kmymoney.cpp:1864
 #, kde-format
 msgid "Merge payees"
 msgstr "Zlij prejemnike plačil"
 
-#: kmymoney/kmymoney.cpp:1854
+#: kmymoney/kmymoney.cpp:1866
 #, kde-format
 msgid "New tag..."
 msgstr "Nova značka..."
 
-#: kmymoney/kmymoney.cpp:1855
+#: kmymoney/kmymoney.cpp:1867
 #, kde-format
 msgid "Rename tag"
 msgstr "Preimenuj značko"
 
-#: kmymoney/kmymoney.cpp:1856
+#: kmymoney/kmymoney.cpp:1868
 #, kde-format
 msgid "Delete tag"
 msgstr "Zbriši značko"
 
-#: kmymoney/kmymoney.cpp:1858
+#: kmymoney/kmymoney.cpp:1870
 #, kde-format
 msgid "Open report"
 msgstr "Odpri poročilo"
 
-#: kmymoney/kmymoney.cpp:1859
+#: kmymoney/kmymoney.cpp:1871
 #, kde-format
 msgid "New report"
 msgstr "Novo poročilo"
 
-#: kmymoney/kmymoney.cpp:1860
+#: kmymoney/kmymoney.cpp:1872
 #, kde-format
 msgid "Copy report"
 msgstr "Kopiraj poročilo"
 
-#: kmymoney/kmymoney.cpp:1861
+#: kmymoney/kmymoney.cpp:1873
 #, kde-format
 msgid "Configure report"
 msgstr "Nastavi poročilo"
 
-#: kmymoney/kmymoney.cpp:1862
+#: kmymoney/kmymoney.cpp:1874
 #, kde-format
 msgid "Export report"
 msgstr "Izvozi poročilo"
 
-#: kmymoney/kmymoney.cpp:1863
+#: kmymoney/kmymoney.cpp:1875
 #, kde-format
 msgid "Delete report"
 msgstr "Zbriši poročilo"
 
-#: kmymoney/kmymoney.cpp:1864
+#: kmymoney/kmymoney.cpp:1876
 #, kde-format
 msgid "Close report"
 msgstr "Zapri poročilo"
 
-#: kmymoney/kmymoney.cpp:1865
+#: kmymoney/kmymoney.cpp:1877
 #, kde-format
 msgid "Toggle chart"
 msgstr "Preklopi graf"
 
-#: kmymoney/kmymoney.cpp:1866
+#: kmymoney/kmymoney.cpp:1878
 #, kde-format
 msgid "Edit tab order"
 msgstr "Uredi vrstni red zavihkov"
 
-#: kmymoney/kmymoney.cpp:1869
+#: kmymoney/kmymoney.cpp:1881
 #, kde-format
 msgid "Test new feature"
 msgstr "Preizkusi novo zmožnost"
 
-#: kmymoney/kmymoney.cpp:1870
+#: kmymoney/kmymoney.cpp:1882
 #, kde-format
 msgid "Debug Traces"
 msgstr "Razhrošči sledi"
 
-#: kmymoney/kmymoney.cpp:1872
+#: kmymoney/kmymoney.cpp:1884
 #, kde-format
 msgid "Debug Timers"
 msgstr "Razhrošči časomerilnike"
 
-#: kmymoney/kmymoney.cpp:1891
+#: kmymoney/kmymoney.cpp:1903
 #, kde-format
 msgctxt "Match transactions"
 msgid "Match"
 msgstr "Ujemanje"
 
-#: kmymoney/kmymoney.cpp:1892
+#: kmymoney/kmymoney.cpp:1904
 #, kde-format
 msgctxt "Unmatch transactions"
 msgid "Unmatch"
 msgstr "Neujemanje"
 
-#: kmymoney/kmymoney.cpp:2016
+#: kmymoney/kmymoney.cpp:2028
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Start reconciling the currently selected account"
 msgstr "Začni usklajevati trenutni izbrani račun"
 
-#: kmymoney/kmymoney.cpp:2017
+#: kmymoney/kmymoney.cpp:2029
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
 msgstr "Odloži trenutno usklajevanje"
 
-#: kmymoney/kmymoney.cpp:2018
+#: kmymoney/kmymoney.cpp:2030
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
 msgstr "Končaj trenutno usklajevanje"
 
-#: kmymoney/kmymoney.cpp:2019
+#: kmymoney/kmymoney.cpp:2031
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
 msgstr "Prekliči trenutno usklajevanje"
 
-#: kmymoney/kmymoney.cpp:2126
+#: kmymoney/kmymoney.cpp:2138
 #, kde-format
 msgid "View back"
 msgstr "Poglej nazaj"
 
-#: kmymoney/kmymoney.cpp:2127
+#: kmymoney/kmymoney.cpp:2139
 #, kde-format
 msgid "View forward"
 msgstr "Poglej naprej"
 
-#: kmymoney/kmymoney.cpp:2518
+#: kmymoney/kmymoney.cpp:2530
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5309,12 +5341,12 @@ msgstr ""
 "Usklajen je vsaj en razcep izbranih transakcij. Ali si želite vseeno "
 "izbrisati transakcije?"
 
-#: kmymoney/kmymoney.cpp:2520
+#: kmymoney/kmymoney.cpp:2532
 #, kde-format
 msgid "Transaction already reconciled"
 msgstr "Transakcija je že usklajena"
 
-#: kmymoney/kmymoney.cpp:2525
+#: kmymoney/kmymoney.cpp:2537
 #, kde-format
 msgid "Do you really want to delete the selected transaction?"
 msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5323,22 +5355,22 @@ msgstr[1] "Ali res želite izbrisati obe %1 izbrani transakciji?"
 msgstr[2] "Ali res želite izbrisati vse %1 izbrane transakcije?"
 msgstr[3] "Ali res želite izbrisati vseh %1 izbranih transakcij?"
 
-#: kmymoney/kmymoney.cpp:2529
+#: kmymoney/kmymoney.cpp:2541
 #, kde-format
 msgid "Delete transaction"
 msgstr "Zbriši transakcijo"
 
-#: kmymoney/kmymoney.cpp:2606
+#: kmymoney/kmymoney.cpp:2618
 #, kde-format
 msgid "Unable to duplicate transaction(s)"
 msgstr "Transakcij ni mogoče podvojiti"
 
-#: kmymoney/kmymoney.cpp:2776
+#: kmymoney/kmymoney.cpp:2788
 #, kde-format
 msgid "Unable to modify transaction"
 msgstr "Transakcije ni mogoče spremeniti"
 
-#: kmymoney/kmymoney.cpp:2868
+#: kmymoney/kmymoney.cpp:2880
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
@@ -5347,13 +5379,13 @@ msgstr ""
 "Usklajen je vsaj en razcep izbranih transakcij. Ali si vseeno želite "
 "spremeniti transakcije?"
 
-#: kmymoney/kmymoney.cpp:2870
+#: kmymoney/kmymoney.cpp:2882
 #, kde-format
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "Transakcija je že usklajena"
 
-#: kmymoney/kmymoney.cpp:2875
+#: kmymoney/kmymoney.cpp:2887
 #, kde-format
 msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
@@ -5362,18 +5394,18 @@ msgstr[1] "Ali res želite spremeniti obe %1 izbrani transakciji?"
 msgstr[2] "Ali res želite spremeniti vse %1 izbrane transakcije?"
 msgstr[3] "Ali res želite spremeniti vseh %1 izbranih transakcij?"
 
-#: kmymoney/kmymoney.cpp:2879
+#: kmymoney/kmymoney.cpp:2891
 #, kde-format
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "Spremeni transakcijo"
 
-#: kmymoney/kmymoney.cpp:2964
+#: kmymoney/kmymoney.cpp:2976
 #, kde-format
 msgid "Unable to accept transaction"
 msgstr "Transakcije ni mogoče sprejeti"
 
-#: kmymoney/kmymoney.cpp:3004
+#: kmymoney/kmymoney.cpp:3016
 #, kde-format
 msgid ""
 "KMyMoney has detected some overdue scheduled transactions for the account <b>"
@@ -5382,12 +5414,12 @@ msgstr ""
 "KMyMoney je zaznal nekaj zapadlih časovno načrtovanih transakcij za račun <b>"
 "%1</b>. Ali želite zdaj vnesti te časovno načrtovane transakcije?"
 
-#: kmymoney/kmymoney.cpp:3007 kmymoney/views/kscheduledview.cpp:134
+#: kmymoney/kmymoney.cpp:3019 kmymoney/views/kscheduledview.cpp:134
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "Najdene časovno načrtovane transakcije"
 
-#: kmymoney/kmymoney.cpp:3078
+#: kmymoney/kmymoney.cpp:3090
 #, kde-format
 msgid ""
 "<qt>You have closed this account. It remains in the system because you have "
@@ -5400,17 +5432,17 @@ msgstr ""
 "postane viden, tako da odprete meni Pogled in izberete <b>Pokaži vse račune</"
 "b>.</qt>"
 
-#: kmymoney/kmymoney.cpp:3080
+#: kmymoney/kmymoney.cpp:3092
 #, kde-format
 msgid "Information"
 msgstr "Informacije"
 
-#: kmymoney/kmymoney.cpp:3184 kmymoney/kmymoney.cpp:3280
+#: kmymoney/kmymoney.cpp:3196 kmymoney/kmymoney.cpp:3292
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "Ni odprte datoteke KMyMoney"
 
-#: kmymoney/kmymoney.cpp:3217 kmymoney/kmymoney.cpp:3219
+#: kmymoney/kmymoney.cpp:3229 kmymoney/kmymoney.cpp:3231
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1360
 #: kmymoney/plugins/xml/xmlstorage.cpp:407
 #, kde-format
@@ -5418,63 +5450,63 @@ msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "Pripravljen."
 
-#: kmymoney/kmymoney.cpp:3284
+#: kmymoney/kmymoney.cpp:3296
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "Ogled osebnih podatkov..."
 
-#: kmymoney/kmymoney.cpp:3291
+#: kmymoney/kmymoney.cpp:3303
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "Uredi osebne podatke"
 
-#: kmymoney/kmymoney.cpp:3306
+#: kmymoney/kmymoney.cpp:3318
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "Podatkov o uporabniku ni mogoče shraniti: %1"
 
-#: kmymoney/kmymoney.cpp:3314
+#: kmymoney/kmymoney.cpp:3326
 #, kde-format
 msgid "Importing account templates."
 msgstr "Uvažam predloge računa."
 
-#: kmymoney/kmymoney.cpp:3328
+#: kmymoney/kmymoney.cpp:3340
 #, kde-format
 msgid "Unable to import template(s)"
 msgstr "Predlog(e) ni mogoče uvoziti"
 
-#: kmymoney/kmymoney.cpp:3336
+#: kmymoney/kmymoney.cpp:3348
 #, kde-format
 msgid "Exporting account templates."
 msgstr "Izvažam predloge računa."
 
-#: kmymoney/kmymoney.cpp:3342
+#: kmymoney/kmymoney.cpp:3354
 #, kde-format
 msgid "Save as..."
 msgstr "Shrani kot..."
 
-#: kmymoney/kmymoney.cpp:3343
+#: kmymoney/kmymoney.cpp:3355
 #, kde-format
 msgid "KMyMoney template files (*.kmt);;All files (*)"
 msgstr "Predloge datotek KMyMoney (*.kmt);;Vse datoteke (*)"
 
-#: kmymoney/kmymoney.cpp:3374
+#: kmymoney/kmymoney.cpp:3386
 #, kde-format
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "Izvoz predloge"
 
-#: kmymoney/kmymoney.cpp:3392
+#: kmymoney/kmymoney.cpp:3404
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "Datoteka <b>%1</b> že obstaja. Ali jo želite prepisati?"
 
-#: kmymoney/kmymoney.cpp:3394 kmymoney/plugins/csv/export/csvexporter.cpp:103
+#: kmymoney/kmymoney.cpp:3406 kmymoney/plugins/csv/export/csvexporter.cpp:103
 #, kde-format
 msgid "File already exists"
 msgstr "Datoteka že obstaja"
 
-#: kmymoney/kmymoney.cpp:3514
+#: kmymoney/kmymoney.cpp:3527
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
@@ -5483,13 +5515,13 @@ msgstr ""
 "Datoteka mora biti najprej shranjena preden izdelavo varnostno kopijo. Ali "
 "želite nadaljevati?"
 
-#: kmymoney/kmymoney.cpp:3516
+#: kmymoney/kmymoney.cpp:3529
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr "Potrditev varnostne kopije"
 
-#: kmymoney/kmymoney.cpp:3533
+#: kmymoney/kmymoney.cpp:3546
 #, kde-format
 msgid ""
 "The current implementation of the backup functionality only supports local "
@@ -5498,63 +5530,63 @@ msgstr ""
 "Trenutna izvedba varnostnega kopiranja podpira samo lokalne datoteke kot "
 "izvorne datoteke. Vaša trenutna izvorna datoteka je '%1'."
 
-#: kmymoney/kmymoney.cpp:3535
+#: kmymoney/kmymoney.cpp:3548
 #, kde-format
 msgid "Local files only"
 msgstr "Samo lokalne datoteke"
 
-#: kmymoney/kmymoney.cpp:3574
+#: kmymoney/kmymoney.cpp:3587
 #, kde-format
 msgid "Mounting %1"
 msgstr "Priklapljam %1"
 
-#: kmymoney/kmymoney.cpp:3608
+#: kmymoney/kmymoney.cpp:3621
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr "Varnostna kopija za danes že obstaja na tej napravi. Naj jo zamenjam?"
 
-#: kmymoney/kmymoney.cpp:3608
+#: kmymoney/kmymoney.cpp:3621
 #, kde-format
 msgid "&Replace"
 msgstr "Zamenjaj"
 
-#: kmymoney/kmymoney.cpp:3614
+#: kmymoney/kmymoney.cpp:3627
 #, kde-format
 msgid "Writing %1"
 msgstr "Pišem %1"
 
-#: kmymoney/kmymoney.cpp:3635
+#: kmymoney/kmymoney.cpp:3648
 #, kde-format
 msgid "Unmounting %1"
 msgstr "Odklapljam %1"
 
-#: kmymoney/kmymoney.cpp:3672
+#: kmymoney/kmymoney.cpp:3685
 #, kde-format
 msgid "Error mounting device"
 msgstr "Napaka pri priklopu naprave"
 
-#: kmymoney/kmymoney.cpp:3687 kmymoney/kmymoney.cpp:3706
+#: kmymoney/kmymoney.cpp:3700 kmymoney/kmymoney.cpp:3719
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Opravljeno"
 
-#: kmymoney/kmymoney.cpp:3688 kmymoney/kmymoney.cpp:3708
+#: kmymoney/kmymoney.cpp:3701 kmymoney/kmymoney.cpp:3721
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Datoteka je bila uspešno varnostno skopirana"
 
-#: kmymoney/kmymoney.cpp:3694
+#: kmymoney/kmymoney.cpp:3707
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Napaka pri kopiranju datoteke na napravo"
 
-#: kmymoney/kmymoney.cpp:3710
+#: kmymoney/kmymoney.cpp:3723
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Napaka pri odklapljanju naprave"
 
-#: kmymoney/kmymoney.cpp:3757
+#: kmymoney/kmymoney.cpp:3770
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5572,29 +5604,29 @@ msgstr ""
 "Kliknite Ne, da znesek pustite kot %2,\n"
 "Za preklic ustvarjanja računa kliknite Prekliči."
 
-#: kmymoney/kmymoney.cpp:3767
+#: kmymoney/kmymoney.cpp:3780
 #, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Odpiranje bilance obveznosti"
 
-#: kmymoney/kmymoney.cpp:3778
+#: kmymoney/kmymoney.cpp:3791
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Ni mogoče dodati računa: %1"
 
-#: kmymoney/kmymoney.cpp:3901
+#: kmymoney/kmymoney.cpp:3914
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Izvajam preizkus konsistentnosti.."
 
-#: kmymoney/kmymoney.cpp:3908
+#: kmymoney/kmymoney.cpp:3921
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Preizkus konsistentnosti ni uspel: %1"
 
-#: kmymoney/kmymoney.cpp:3918
+#: kmymoney/kmymoney.cpp:3931
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5603,7 +5635,7 @@ msgstr ""
 "Preverjanje konsistentnosti ni odkrilo težav z vašimi podatki. Podrobnosti "
 "so predstavljene spodaj."
 
-#: kmymoney/kmymoney.cpp:3920
+#: kmymoney/kmymoney.cpp:3933
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5614,28 +5646,28 @@ msgstr ""
 "Podrobnosti so predstavljene spodaj. Te težave, ki jih ni bilo mogoče "
 "samodejno odpraviti, mora rešiti uporabnik."
 
-#: kmymoney/kmymoney.cpp:3923
+#: kmymoney/kmymoney.cpp:3936
 #, kde-format
 msgid "Consistency check result"
 msgstr "Rezultat preverjanja konsistentnosti"
 
-#: kmymoney/kmymoney.cpp:3989
+#: kmymoney/kmymoney.cpp:4002
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Preverjanje zapadlih načrtovanih transakcij..."
 
-#: kmymoney/kmymoney.cpp:4179
+#: kmymoney/kmymoney.cpp:4192
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr "Najprej morate izbrati datoteko KMyMoney, preden lahko uvozite izkaz."
 
-#: kmymoney/kmymoney.cpp:4184
+#: kmymoney/kmymoney.cpp:4197
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Uvažanje izkaza prek Web Connecta"
 
-#: kmymoney/kmymoney.cpp:4196
+#: kmymoney/kmymoney.cpp:4209
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5644,67 +5676,67 @@ msgid ""
 msgstr ""
 "Ni mogoče uvoziti %1 z uporabo vtičnika %2. Vtičnik je vrnil napako: %3"
 
-#: kmymoney/kmymoney.cpp:4196 kmymoney/plugins/ofx/import/ofximporter.cpp:1012
+#: kmymoney/kmymoney.cpp:4209 kmymoney/plugins/ofx/import/ofximporter.cpp:1012
 #, kde-format
 msgid "Importing error"
 msgstr "Napaka pri uvažanju"
 
-#: kmymoney/kmymoney.cpp:4223
+#: kmymoney/kmymoney.cpp:4236
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Omogočena so vsa sporočila."
 
-#: kmymoney/kmymoney.cpp:4223
+#: kmymoney/kmymoney.cpp:4236
 #, kde-format
 msgid "All messages"
 msgstr "Vsa sporočila"
 
-#: kmymoney/kmymoney.cpp:4259
+#: kmymoney/kmymoney.cpp:4272
 #, kde-format
 msgid "Auto saving..."
 msgstr "Samodejno shranjujem..."
 
-#: kmymoney/kmymoney.cpp:4379
+#: kmymoney/kmymoney.cpp:4392
 #, kde-format
 msgid "Creating new document..."
 msgstr "Ustvarjam nov dokument..."
 
-#: kmymoney/kmymoney.cpp:4439
+#: kmymoney/kmymoney.cpp:4452
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Ni bilo mogoče ustvariti nove datoteke."
 
-#: kmymoney/kmymoney.cpp:4450
+#: kmymoney/kmymoney.cpp:4463
 #, kde-format
 msgid "Open a file."
 msgstr "Odpri datoteko."
 
-#: kmymoney/kmymoney.cpp:4464
+#: kmymoney/kmymoney.cpp:4477
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "Ni bilo mogoče najti nobenega vtičnika za odpiranje pomnilnika."
 
-#: kmymoney/kmymoney.cpp:4468
+#: kmymoney/kmymoney.cpp:4481
 #, kde-format
 msgid "All files (*)"
 msgstr "Vse datoteke (*)"
 
-#: kmymoney/kmymoney.cpp:4481
+#: kmymoney/kmymoney.cpp:4494
 #, kde-format
 msgid "Loading file..."
 msgstr "Nalagam datoteko..."
 
-#: kmymoney/kmymoney.cpp:4487
+#: kmymoney/kmymoney.cpp:4500
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr "<p>Datoteka <b>%1</b> je že odprta v drugem pojavku KMyMoneya</p>"
 
-#: kmymoney/kmymoney.cpp:4487
+#: kmymoney/kmymoney.cpp:4500
 #, kde-format
 msgid "Duplicate open"
 msgstr "Podvojeno odpiranje"
 
-#: kmymoney/kmymoney.cpp:4494
+#: kmymoney/kmymoney.cpp:4507
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5713,17 +5745,17 @@ msgstr ""
 "<p><b>%1</b> je ali neveljavno ime datoteke ali datoteka ne obstaja. Lahko "
 "odprete drugo datoteko ali ustvarite novo.</p>"
 
-#: kmymoney/kmymoney.cpp:4494
+#: kmymoney/kmymoney.cpp:4507
 #, kde-format
 msgid "File not found"
 msgstr "Datoteke ni mogoče najti"
 
-#: kmymoney/kmymoney.cpp:4521
+#: kmymoney/kmymoney.cpp:4534
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Ni je mogoče odpreti kot je zahtevano."
 
-#: kmymoney/kmymoney.cpp:4527
+#: kmymoney/kmymoney.cpp:4540
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -5732,27 +5764,27 @@ msgstr ""
 "Ni bilo mogoče prebrati podatkovnega vira. Preverite nastavitve KMyMoney, da "
 "je omogočen potrebni vtičnik."
 
-#: kmymoney/kmymoney.cpp:4537
+#: kmymoney/kmymoney.cpp:4550
 #, kde-format
 msgid "Saving file..."
 msgstr "Shranjujem datoteko..."
 
-#: kmymoney/kmymoney.cpp:4549 kmymoney/kmymoney.cpp:4606
+#: kmymoney/kmymoney.cpp:4562 kmymoney/kmymoney.cpp:4619
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Vaše shrambe ni bilo mogoče shraniti."
 
-#: kmymoney/kmymoney.cpp:4555
+#: kmymoney/kmymoney.cpp:4568
 #, kde-format
 msgid "Couldn't find suitable plugin to save your storage."
 msgstr "Ni bilo mogoče najti ustreznega vtičnika za shranjevanje vaše shrambe."
 
-#: kmymoney/kmymoney.cpp:4561
+#: kmymoney/kmymoney.cpp:4574
 #, kde-format
 msgid "Saving file as...."
 msgstr "Shranjevanje datoteke kot..."
 
-#: kmymoney/kmymoney.cpp:4577
+#: kmymoney/kmymoney.cpp:4590
 #, kde-format
 msgid "Couldn't find any plugin for saving storage."
 msgstr "Ni bilo mogoče najti nobenega vtičnika za shranjevanje shrambe."
@@ -14824,63 +14856,63 @@ msgstr "Napoved"
 
 #. i18n: ectx: label, entry (forecastMethod), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:11
-#: kmymoney/settings/kmymoney.kcfg:404
+#: kmymoney/settings/kmymoney.kcfg:413
 #, kde-format
 msgid "Method to calculate forecast"
 msgstr "Metoda izračuna napovedi"
 
 #. i18n: ectx: label, entry (forecastDays), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:15
-#: kmymoney/settings/kmymoney.kcfg:408
+#: kmymoney/settings/kmymoney.kcfg:417
 #, kde-format
 msgid "Days to forecast"
 msgstr "Dni napovedi"
 
 #. i18n: ectx: label, entry (forecastAccountCycle), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:21
-#: kmymoney/settings/kmymoney.kcfg:414
+#: kmymoney/settings/kmymoney.kcfg:423
 #, kde-format
 msgid "Days of normal account cycle"
 msgstr "Dnevi običajnega cikla računa"
 
 #. i18n: ectx: label, entry (forecastCycles), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:27
-#: kmymoney/settings/kmymoney.kcfg:420
+#: kmymoney/settings/kmymoney.kcfg:429
 #, kde-format
 msgid "Number of historic cycles to use in forecast"
 msgstr "Število preteklih ciklov za napoved"
 
 #. i18n: ectx: label, entry (beginForecastDay), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:33
-#: kmymoney/settings/kmymoney.kcfg:426
+#: kmymoney/settings/kmymoney.kcfg:435
 #, kde-format
 msgid "Day of month to start forecast"
 msgstr "Dan v mesecu za začetek napovedi"
 
 #. i18n: ectx: label, entry (historyMethod), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:39
-#: kmymoney/settings/kmymoney.kcfg:432
+#: kmymoney/settings/kmymoney.kcfg:441
 #, kde-format
 msgid "Method to calculate history-based forecast"
 msgstr "Metoda za izračun napovedi na podlagi zgodovine"
 
 #. i18n: ectx: label, entry (skipOpeningDate), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:43
-#: kmymoney/settings/kmymoney.kcfg:436
+#: kmymoney/settings/kmymoney.kcfg:445
 #, kde-format
 msgid "Skip opening date when fetching transactions"
 msgstr "Preskoči datum odprtja pri pridobivanju transakcij"
 
 #. i18n: ectx: label, entry (includeFutureTransactions), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:47
-#: kmymoney/settings/kmymoney.kcfg:440
+#: kmymoney/settings/kmymoney.kcfg:449
 #, kde-format
 msgid "Include future transaction when using Schedule Forecast"
 msgstr "Vključi prihodnje transakcije pri uporabi napovedi časovnega načrta"
 
 #. i18n: ectx: label, entry (includeScheduledTransactions), group (Forecast Options)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.kcfg:51
-#: kmymoney/settings/kmymoney.kcfg:444
+#: kmymoney/settings/kmymoney.kcfg:453
 #, kde-format
 msgid "Include scheduled transactions when using Schedule Forecast"
 msgstr "Vključi načrtovane transakcije pri uporabi napovedi časovnega načrta"
@@ -16769,7 +16801,7 @@ msgstr "Širina črt grafikonov"
 #. i18n: ectx: label, entry (LineWidth), group (Chart Settings)
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_LineWidth)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:66
-#: kmymoney/settings/kmymoney.kcfg:385
+#: kmymoney/settings/kmymoney.kcfg:394
 #, kde-format
 msgid "Line width for diagrams, in pixels"
 msgstr "Širina črt za diagrame v pikslih"
@@ -18310,11 +18342,29 @@ msgstr "Skrij lastniške vrednostne papirje z ničelnim stanjem"
 msgid "Hide finished schedules"
 msgstr "Skrij končane časovne načrte"
 
+#. i18n: ectx: label, entry (ShowRegisterDetailed), group (List Options)
+#: kmymoney/settings/kmymoney.kcfg:240
+#, kde-format
+msgid "Show all register entries in full detail"
+msgstr "Prikaži vse vnose registra z vsemi podrobnostmi"
+
+#. i18n: ectx: label, entry (ShowAllSplits), group (List Options)
+#: kmymoney/settings/kmymoney.kcfg:244
+#, kde-format
+msgid "Show all split details in register"
+msgstr "Prikaži vse podrobnosti delitev v registru"
+
 #. i18n: ectx: label, entry (ShowPlannedScheduleDates), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:248
 #, kde-format
 msgid "Show schedules with planned date"
 msgstr "Pokažite časovne načrte s planiranim datumom"
+
+#. i18n: ectx: label, entry (ShowGrid), group (List Options)
+#: kmymoney/settings/kmymoney.kcfg:252
+#, kde-format
+msgid "Show a grid in the register"
+msgstr "Prikaži mrežo v registru"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:256
@@ -18328,130 +18378,136 @@ msgstr "Pokaži dekorativne označevalce skupin"
 msgid "Show fancy markers for previous and current fiscal year"
 msgstr "Prikaži dekorativne označevalce za prejšnje in trenutno fiskalno leto"
 
-#. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
+#. i18n: ectx: label, entry (ShowReconciliationMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:264
+#, kde-format
+msgid "Show reconciliation entries with date and balance"
+msgstr ""
+
+#. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
+#: kmymoney/settings/kmymoney.kcfg:273
 #, kde-format
 msgid "Starting month of the fiscal year"
 msgstr "Začetni mesec fiskalnega leta"
 
 #. i18n: ectx: label, entry (FiscalYearBeginDay), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:270
+#: kmymoney/settings/kmymoney.kcfg:279
 #, kde-format
 msgid "Starting day of the fiscal year"
 msgstr "Začetni dan fiskalnega leta"
 
 #. i18n: ectx: label, entry (StartDate), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:276
+#: kmymoney/settings/kmymoney.kcfg:285
 #, kde-format
 msgid "Start date"
 msgstr "Začetni datum"
 
 #. i18n: ectx: label, entry (logPath), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:280
+#: kmymoney/settings/kmymoney.kcfg:289
 #, kde-format
 msgid "Log file path"
 msgstr "Pot datoteke dnevnika"
 
 #. i18n: ectx: label, entry (useSystemFont), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:289
+#: kmymoney/settings/kmymoney.kcfg:298
 #, kde-format
 msgid "Use system font"
 msgstr "Uporabi sistemsko pisavo"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
 #. i18n: ectx: label, entry (sortReconcileView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:303 kmymoney/settings/kmymoney.kcfg:307
+#: kmymoney/settings/kmymoney.kcfg:312 kmymoney/settings/kmymoney.kcfg:316
 #, kde-format
 msgid "Sort order of register in normal view"
 msgstr "Vrstni red registra v običajnem pogledu"
 
 #. i18n: ectx: label, entry (sortSearchView), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:311
+#: kmymoney/settings/kmymoney.kcfg:320
 #, kde-format
 msgid "Sort order of register in search dialog"
 msgstr "Vrstni red registra v iskalnem pogovornem oknu"
 
 #. i18n: ectx: label, entry (defaultReconciliationState), group (List Options)
-#: kmymoney/settings/kmymoney.kcfg:324
+#: kmymoney/settings/kmymoney.kcfg:333
 #, kde-format
 msgid ""
 "Default reconciliation state for transactions entered during reconciliation"
 msgstr "Privzeto stanje uskladitve za transakcije, vnesene med usklajevanjem"
 
 #. i18n: ectx: label, entry (matchInterval), group (Import options)
-#: kmymoney/settings/kmymoney.kcfg:330
+#: kmymoney/settings/kmymoney.kcfg:339
 #, kde-format
 msgid "Number of days (plus/minus) to search for matching transactions"
 msgstr "Število dni (plus/minus) za iskanje ustreznih transakcij"
 
 #. i18n: ectx: label, entry (askForPayeeCategory), group (Import options)
-#: kmymoney/settings/kmymoney.kcfg:334
+#: kmymoney/settings/kmymoney.kcfg:343
 #, kde-format
 msgid "During import, ask for a new payee's default category"
 msgstr "Med uvozom zahtevaj privzeto kategorijo novega prejemnika plačila"
 
 #. i18n: ectx: label, entry (lastUsedPostDate), group (Internal Options)
-#: kmymoney/settings/kmymoney.kcfg:341
+#: kmymoney/settings/kmymoney.kcfg:350
 #, kde-format
 msgid "Post date last entered by the user"
 msgstr "Datum objave, ki je zadnjič vnesel uporabnik"
 
 #. i18n: ectx: label, entry (qifCash), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:347
+#: kmymoney/settings/kmymoney.kcfg:356
 #, kde-format
 msgid "additional names for cash account"
 msgstr "dodatna imena za gotovinski račun"
 
 #. i18n: ectx: label, entry (qifBank), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:351
+#: kmymoney/settings/kmymoney.kcfg:360
 #, kde-format
 msgid "additional names for checking account"
 msgstr "dodatna imena za tekoči račun"
 
 #. i18n: ectx: label, entry (qifCreditCard), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:355
+#: kmymoney/settings/kmymoney.kcfg:364
 #, kde-format
 msgid "additional names for credit card account"
 msgstr "dodatna imena za račun kreditne kartice"
 
 #. i18n: ectx: label, entry (qifAsset), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:359
+#: kmymoney/settings/kmymoney.kcfg:368
 #, kde-format
 msgid "additional names for asset account"
 msgstr "dodatna imena za račun imetij"
 
 #. i18n: ectx: label, entry (qifOpeningBalance), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:363
+#: kmymoney/settings/kmymoney.kcfg:372
 #, kde-format
 msgid "additional names for opening balance payee"
 msgstr "dodatna imena za otvoritev prejemnika plačila"
 
 #. i18n: ectx: label, entry (qifInvoice), group (QIF Options)
-#: kmymoney/settings/kmymoney.kcfg:367
+#: kmymoney/settings/kmymoney.kcfg:376
 #, kde-format
 msgid "additional names for invoice accounts"
 msgstr "dodatna imena za račune faktur"
 
 #. i18n: ectx: label, entry (showAccountsExpanded), group (Account View Settings)
-#: kmymoney/settings/kmymoney.kcfg:373
+#: kmymoney/settings/kmymoney.kcfg:382
 #, kde-format
 msgid "Show accounts view expanded when loaded"
 msgstr "Pokaži pogled računov, razširjen ob nalaganju"
 
 #. i18n: ectx: label, entry (MaximumLegendItems), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:379
+#: kmymoney/settings/kmymoney.kcfg:388
 #, kde-format
 msgid "Maximum quantity of legend items to display on charts"
 msgstr "Največja količina elementov legende za prikaz na grafikonih"
 
 #. i18n: ectx: label, entry (ChartsPalette), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:391
+#: kmymoney/settings/kmymoney.kcfg:400
 #, kde-format
 msgid "The palette used to render charts"
 msgstr "Paleta barv, ki se uporablja za upodabljanje grafikonov"
 
 #. i18n: ectx: label, entry (CssFileDefault), group (Chart Settings)
-#: kmymoney/settings/kmymoney.kcfg:397
+#: kmymoney/settings/kmymoney.kcfg:406
 #, kde-format
 msgid "Name of default CSS file"
 msgstr "Ime privzete datoteke CSS"
