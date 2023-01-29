@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-14 18:08+0000\n"
-"PO-Revision-Date: 2023-01-17 00:53+0100\n"
+"PO-Revision-Date: 2023-01-28 11:30+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2898,7 +2898,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:70
 #, kde-format
 msgid "Liability"
-msgstr ""
+msgstr "პასუხიმგებლობა"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:497 kmymoney/kmymoney.cpp:376
 #: kmymoney/models/ledgerproxymodel.cpp:65 kmymoney/views/khomeview_p.h:1698
@@ -3129,7 +3129,7 @@ msgstr ""
 #: kmymoney/dialogs/knewaccountdlg.ui:374
 #, kde-format
 msgid "Number:"
-msgstr ""
+msgstr "ნომერი:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel7)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
@@ -3852,7 +3852,7 @@ msgstr "გაშვების მორგება"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:36
 #, kde-format
 msgid "Show splash screen"
-msgstr ""
+msgstr "მისასალმებელი ეკრანის ჩვენება"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:46
@@ -4192,7 +4192,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingshome.ui:40
 #, kde-format
 msgid "Move selected item up"
-msgstr ""
+msgstr "მონიშნული ელემენტის მაღლა ატანა"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_upButton)
 #: kmymoney/dialogs/settings/ksettingshome.ui:43
@@ -4211,7 +4211,7 @@ msgstr "მაღლა"
 #: kmymoney/dialogs/settings/ksettingshome.ui:53
 #, kde-format
 msgid "Move selected item down"
-msgstr ""
+msgstr "მონიშნული ელემენტის დაბლა ჩამოტანა"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_downButton)
 #: kmymoney/dialogs/settings/ksettingshome.ui:56
@@ -5848,7 +5848,7 @@ msgstr ""
 #, kde-format
 msgctxt "Select all transactions"
 msgid "Select all"
-msgstr ""
+msgstr "ყველაფრის მონიშვნა"
 
 #: kmymoney/kmymoney.cpp:1468 kmymoney/views/kgloballedgerview_p.h:982
 #, kde-format
@@ -7157,7 +7157,7 @@ msgstr ""
 #, kde-format
 msgctxt "Account type"
 msgid "Liability"
-msgstr ""
+msgstr "პასუხიმგებლობა"
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:498
 #, kde-format
@@ -11869,7 +11869,7 @@ msgstr ""
 #, kde-format
 msgctxt "replacement for institution or account w/o name"
 msgid "(unnamed)"
-msgstr ""
+msgstr "(უსახელო)"
 
 #: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:115
 #, kde-format
@@ -15768,7 +15768,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/kreportsview.cpp:624
 #, kde-format
 msgid "&Delete"
-msgstr ""
+msgstr "&წაშლა"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:739
 #, kde-format
@@ -15812,7 +15812,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/kreportsview_p.h:627
 #, kde-format
 msgid "Charts"
-msgstr ""
+msgstr "გრაფიკები"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:674
 #: kmymoney/views/khomeview_p.h:999
@@ -20426,7 +20426,7 @@ msgstr ""
 #: kmymoney/widgets/ktransactionfilter.ui:521
 #, kde-format
 msgid "Select all"
-msgstr ""
+msgstr "ყველაფრის მონიშვნა"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_clearTagsButton)
 #. i18n: ectx: property (text), widget (QPushButton, m_clearPayeesButton)
@@ -21853,8 +21853,8 @@ msgstr[1] ""
 #, kde-format
 msgid "one year"
 msgid_plural "%1 years"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 წელი"
+msgstr[1] "%1 წელი"
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:349
 #: kmymoney/wizards/newloanwizard/durationwizardpage.cpp:115
@@ -23555,7 +23555,7 @@ msgstr "ელფოტა:"
 #: kmymoney/wizards/newuserwizard/kgeneralpage.ui:165
 #, kde-format
 msgid "Zip code"
-msgstr ""
+msgstr "ზიპ კოდი"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/wizards/newuserwizard/kintropage.ui:26
@@ -23589,17 +23589,17 @@ msgstr "შესავალი"
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:58
 #, kde-format
 msgid "Personal Data"
-msgstr ""
+msgstr "პირადი მონაცემებები"
 
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:59
 #, kde-format
 msgid "Select Currency"
-msgstr ""
+msgstr "აირჩიეთ ვალუტა"
 
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:60
 #, kde-format
 msgid "Select Accounts"
-msgstr ""
+msgstr "აირჩიეთ ანგარიშები"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newuserwizard/kpasswordpage.ui:23
