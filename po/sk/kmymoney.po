@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-29 00:58+0000\n"
+"POT-Creation-Date: 2023-01-30 00:58+0000\n"
 "PO-Revision-Date: 2020-01-02 16:30+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -1757,7 +1757,7 @@ msgstr "[Žiadny identifikátor]"
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
-#: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.cpp:37
+#: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.cpp:38
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.cpp:53
 #, fuzzy, kde-format
 #| msgid "This IBAN is invalid."
@@ -4232,7 +4232,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:335
-#: kmymoney/models/ledgerfilter.cpp:77
+#: kmymoney/models/ledgerfilter.cpp:78
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
 #, kde-format
 msgid "Not reconciled"
@@ -6441,39 +6441,39 @@ msgstr "Hodnota"
 msgid "Displayed columns"
 msgstr "Stĺpec pre dátum"
 
-#: kmymoney/models/ledgerfilter.cpp:71
+#: kmymoney/models/ledgerfilter.cpp:72
 #, kde-format
 msgid "Any status"
 msgstr "Akýkoľvek stav"
 
-#: kmymoney/models/ledgerfilter.cpp:72
+#: kmymoney/models/ledgerfilter.cpp:73
 #, kde-format
 msgid "Imported"
 msgstr "Importované"
 
-#: kmymoney/models/ledgerfilter.cpp:73
+#: kmymoney/models/ledgerfilter.cpp:74
 #, kde-format
 msgid "Matched"
 msgstr "Zhodné"
 
-#: kmymoney/models/ledgerfilter.cpp:74
+#: kmymoney/models/ledgerfilter.cpp:75
 #, kde-format
 msgid "Erroneous"
 msgstr "Chybný"
 
-#: kmymoney/models/ledgerfilter.cpp:75
+#: kmymoney/models/ledgerfilter.cpp:76
 #, fuzzy, kde-format
 #| msgctxt "Scheduled method"
 #| msgid "Scheduled"
 msgid "Scheduled"
 msgstr "Naplánované"
 
-#: kmymoney/models/ledgerfilter.cpp:76
+#: kmymoney/models/ledgerfilter.cpp:77
 #, kde-format
 msgid "Not marked"
 msgstr "Neoznačené"
 
-#: kmymoney/models/ledgerfilter.cpp:78 kmymoney/mymoney/statusmodel.cpp:29
+#: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:29
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:33
 #, kde-format
 msgctxt "Reconciliation state 'Cleared'"
@@ -22222,7 +22222,7 @@ msgstr ""
 msgid "Charges"
 msgstr "Výdavky"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:89
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:92
 #, kde-format
 msgid ""
 "Please enter the following fields with the information as you find them on "
@@ -22231,12 +22231,12 @@ msgstr ""
 "Prosím, zadajte nasledujúce polia s informáciami, ako ste ich nášli na "
 "výpise. Uistite sa, aby ste zadali všetky hodnoty v <b>%1</b>."
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:138
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:142
 #, kde-format
 msgid "Last reconciled statement: %1"
 msgstr "Posledný zosúladený výpis: %1"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:205
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:210
 #, kde-format
 msgid "Oldest unmarked transaction: %1"
 msgstr "Najstaršia neoznačená transakcia: %1"

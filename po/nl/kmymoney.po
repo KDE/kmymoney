@@ -7,12 +7,13 @@
 # Freek de Kruijf <freekdekruijf@kde.nl>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Ruurd Pels <ruurd@tiscali.nl>, 2011.
 # Ronald Stroethoff <stroet43@zonnet.nl>, 2016.
+# Nisse Lommerde <nisselommerde@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-29 00:58+0000\n"
-"PO-Revision-Date: 2023-01-25 11:30+0100\n"
+"POT-Creation-Date: 2023-01-30 00:58+0000\n"
+"PO-Revision-Date: 2023-01-29 22:57+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -28,12 +29,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Ronald Stroethoff - 2018,Freek de Kruijf - t/m 2023"
+msgstr "Ronald Stroethoff - 2018,Freek de Kruijf - t/m 2023,Nisse Lommerde"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "stroet43@zonnet.nl,freekdekruijf@kde.nl"
+msgstr "stroet43@zonnet.nl,freekdekruijf@kde.nl,nisselommerde@gmail.com"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:131
 #, kde-format
@@ -48,12 +49,12 @@ msgstr "_Dividend"
 #: kmymoney/converter/mymoneystatementreader.cpp:372
 #, kde-format
 msgid "Error importing %1: This file is not a valid KMM statement file."
-msgstr "Fout bij importeren van %1. Dit bestand is geen geldig KMM bestand."
+msgstr "Fout bij importeren van %1. Dit bestand is geen geldig KMM-bestand."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:372
 #, kde-format
 msgid "Invalid Statement"
-msgstr "Ongeldige afschrift"
+msgstr "Ongeldig afschrift"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:489
 #, kde-format
@@ -106,7 +107,7 @@ msgstr[1] "    %1 vergeleken"
 #, kde-format
 msgid "    %1 duplicate"
 msgid_plural "    %1 duplicates"
-msgstr[0] "Dupliceren"
+msgstr[0] "    %1 duplicaat"
 msgstr[1] "    %1 duplicaten"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:585
@@ -224,12 +225,12 @@ msgstr "Nieuwe begunstigde/ontvanger"
 #: kmymoney/converter/mymoneystatementreader.cpp:1069
 #, kde-format
 msgid "Default Category for Payee"
-msgstr "Standaard categorie voor begunstigde"
+msgstr "Standaardcategorie voor begunstigde"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1076
 #, kde-format
 msgid "Please select a default category for payee '%1'"
-msgstr "Selecteer een standaard categorie voor begunstigde '%1'"
+msgstr "Selecteer een standaardcategorie voor begunstigde '%1'"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1098
 #, kde-format
@@ -295,7 +296,7 @@ msgid ""
 "manually from the selection box below."
 msgstr ""
 "KMyMoney kan niet vaststellen welke rekening gebruikt moet worden. U kunt "
-"een nieuwe rekening aanmaken door op de <b>Creëer</b> knop te drukken of "
+"een nieuwe rekening aanmaken door op de <b>Creëer</b>-knop te drukken of "
 "handmatig een keuze te maken uit onderstaande lijst."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1442
@@ -307,7 +308,7 @@ msgid ""
 msgstr ""
 "Er is geen rekeninginformatie gevonden in het geselecteerde bankafschrift. "
 "Selecteer een rekening via de lijst of creëer een nieuwe rekening door te "
-"drukken op de <b>Creëer</b> knop."
+"drukken op de <b>Creëer</b>-knop."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1469
 #, kde-format
@@ -538,14 +539,15 @@ msgid ""
 "Use this to abort the import. Your financial data will be in the state "
 "before you started the QIF import."
 msgstr ""
-"Gebruik dit om de import af te breken. Uw financiële gegevens zullen worden "
-"hersteld naar de staat waarin ze waren voordat u de QIF import startte."
+"\tGebruik dit om de import af te breken. Uw financiële gegevens zullen "
+"worden hersteld naar de staat waarin ze waren voordat u de QIF import "
+"startte."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KAccountSelectDlg)
 #: kmymoney/dialogs/kaccountselectdlg.ui:17
 #, kde-format
 msgid "Account selection"
-msgstr "Rekening selectie"
+msgstr "Rekeningselectie"
 
 #. i18n: ectx: property (text), widget (QLabel, m_headerLabel)
 #: kmymoney/dialogs/kaccountselectdlg.ui:79
@@ -728,8 +730,8 @@ msgid ""
 "category need to be re-assigned to a different category before the selected "
 "category can be deleted. Please select a category from the list below."
 msgstr ""
-"De (periodieke) transacties en budgetten  behorende bij deze categorie "
-"moeten worden toegewezen aan een andere categorie alvorens de geselecteerde "
+"De (periodieke) transacties en budgetten behorende bij deze categorie moeten "
+"worden toegewezen aan een andere categorie alvorens de geselecteerde "
 "categorie kan worden verwijderd. Selecteer a.u.b. een categorie uit "
 "onderstaande lijst."
 
@@ -761,7 +763,7 @@ msgstr ""
 #: kmymoney/dialogs/kchooseimportexportdlg.ui:108
 #, kde-format
 msgid "Choose import type:"
-msgstr "Kies import type:"
+msgstr "Kies importtype:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KChooseImportExportDlg)
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:77
@@ -785,12 +787,12 @@ msgstr ""
 "bijgewerkt zodra\n"
 "u een item selecteert uit het selectiemenu.\n"
 "\n"
-"Als u eenmaal een import type hebt gekozen, druk dan op de OK knop."
+"Als u eenmaal een importtype hebt gekozen, druk dan op de OK knop."
 
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:83
 #, kde-format
 msgid "Choose export type:"
-msgstr "Kies Export type:"
+msgstr "Kies Exporttype:"
 
 #: kmymoney/dialogs/kchooseimportexportdlg.cpp:84
 #, kde-format
@@ -963,13 +965,13 @@ msgstr "Fatale fout tijdens het bepalen van gegevens: %1"
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:14
 #, kde-format
 msgid "Confirm Manual Enter"
-msgstr "Bevestig Handmatige invoer"
+msgstr "Bevestig Handmatige Invoer"
 
 #. i18n: ectx: property (text), widget (QLabel, m_message)
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:38
 #, kde-format
 msgid "The following changes have been made to the transaction data:"
-msgstr "De volgende wijzigingen zijn aangebracht in de transactie gegevens:"
+msgstr "De volgende wijzigingen zijn aangebracht in de transactiegegevens:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox1)
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:61
@@ -1166,7 +1168,7 @@ msgstr "Koershistorie bijwerken"
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:663
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
-msgstr "Kan %1 niet als basis valuta instellen: %2"
+msgstr "Kan %1 niet als basisvaluta instellen: %2"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:151
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:663
@@ -1227,7 +1229,7 @@ msgstr "Kies een basisvaluta"
 #, kde-format
 msgctxt "@title:menu"
 msgid "Currency options"
-msgstr "Valuta Opties"
+msgstr "Valuta-opties"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:648
 #, kde-format
@@ -1594,7 +1596,7 @@ msgstr "1 /"
 #: kmymoney/dialogs/knewequityentrydlg.ui:35
 #, kde-format
 msgid "Investment Type:"
-msgstr "Investering Type:"
+msgstr "Investeringstype:"
 
 #. i18n: ectx: property (text), widget (QLabel, lblEquityName)
 #: kmymoney/dialogs/keditequityentry.ui:98
@@ -1736,7 +1738,7 @@ msgstr "Koers"
 #, kde-format
 msgctxt "Internal identifier"
 msgid "Internal ID"
-msgstr "Interne-ID"
+msgstr "Interne ID"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:92
 #, kde-format
@@ -1765,7 +1767,7 @@ msgstr "[Geen identifier]"
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
-#: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.cpp:37
+#: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.cpp:38
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.cpp:53
 #, kde-format
 msgctxt "@info:tooltip"
@@ -1778,7 +1780,7 @@ msgid ""
 "Failed to retrieve an exchange rate for %1 from %2. It will be skipped this "
 "time."
 msgstr ""
-"Kan de conversie koers van %1 van %2 niet achterhalen. Deze stap wordt "
+"Kan de conversiekoers van %1 van %2 niet achterhalen. Deze stap wordt "
 "overgeslagen."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:562
@@ -1979,7 +1981,7 @@ msgstr "Voor het laatst gewijzigd op"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:68
 #, kde-format
 msgid "Base currency"
-msgstr "Basis valuta"
+msgstr "Basisvaluta"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel10)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
@@ -2081,7 +2083,7 @@ msgstr "Gesloten"
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
 msgstr[0] "Weet u zeker dat u de geselecteerde koers wilt verwijderen?"
-msgstr[1] "Weet u zeker dat u de geselecteerde koers wilt verwijderen?"
+msgstr[1] "Weet u zeker dat u de geselecteerde koersen wilt verwijderen?"
 
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:343
 #, kde-format
@@ -2112,13 +2114,13 @@ msgstr "Koers verwijderen..."
 #, kde-format
 msgctxt "@title:menu"
 msgid "Price options"
-msgstr "Koers-opties"
+msgstr "Koersopties"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KMyMoneyPriceDlg)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:14
 #, kde-format
 msgid "Price Editor"
-msgstr "Koers Editor"
+msgstr "Koersbewerker"
 
 #. i18n: ectx: property (whatsThis), widget (QTreeWidget, m_priceList)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:32
@@ -2177,7 +2179,7 @@ msgstr "Een nieuw item toevoegen"
 #: kmymoney/dialogs/kmymoneypricedlg.ui:92
 #, kde-format
 msgid "Create a new price entry."
-msgstr "Een nieuw koers creëren."
+msgstr "Een nieuwe koers creëren."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_newButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:95
@@ -2196,7 +2198,7 @@ msgstr "Het geselecteerde item wijzigen"
 #: kmymoney/dialogs/kmymoneypricedlg.ui:105
 #, kde-format
 msgid "Change the details of selected price information."
-msgstr "De details van geselecteerde koers wijzigen."
+msgstr "De details van de geselecteerde koers wijzigen."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_editButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:108
@@ -2253,7 +2255,7 @@ msgstr "Totaal van alle aandelen"
 #: kmymoney/dialogs/knewaccountdlg.cpp:230
 #, kde-format
 msgid "VAT account"
-msgstr "BTW Rekening"
+msgstr "Btw-rekening"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:516 kmymoney/kmymoney.cpp:427
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
@@ -2367,13 +2369,13 @@ msgstr "Verborgen categorieën"
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
-msgstr "Kan Bank niet toevoegen"
+msgstr "Kan bank niet toevoegen"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:935
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
-msgstr "Geef een naam op voor de nieuwe categorie of de rekening."
+msgstr "Geef een naam op voor de nieuwe categorie of rekening."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:940
 #, kde-format
@@ -2385,13 +2387,13 @@ msgstr "U kunt geen rekening of categorie aanmaken die %1 in de naam bevat."
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
-msgstr "Geef een percentage op groter dan nul en kleiner dan 100."
+msgstr "Geef een percentage op van groter dan nul en kleiner dan 100."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:951
 #, kde-format
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
-msgstr "Selecteer een categorie voor de BTW."
+msgstr "Selecteer een categorie voor de btw."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1016
 #, kde-format
@@ -2425,7 +2427,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Category"
-msgstr "Creëer een nieuwe Categorie"
+msgstr "Creëer een nieuwe categorie"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1068
 #, kde-format
@@ -2437,7 +2439,7 @@ msgstr "Een nieuwe rekening aanmaken"
 #: kmymoney/dialogs/knewaccountdlg.ui:14
 #, kde-format
 msgid "New Account Dialog"
-msgstr "Nieuwe Rekening Dialoog"
+msgstr "Nieuwe Rekeningdialoog"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_generalTab)
 #: kmymoney/dialogs/knewaccountdlg.ui:27
@@ -2457,7 +2459,7 @@ msgstr "Naam:"
 #: kmymoney/dialogs/knewaccountdlg.ui:62
 #, kde-format
 msgid "Opening information"
-msgstr "Start informatie"
+msgstr "Startinformatie"
 
 #. i18n: ectx: property (text), widget (QLabel, m_currencyText)
 #: kmymoney/dialogs/knewaccountdlg.ui:86
@@ -2500,7 +2502,7 @@ msgstr "Opties"
 #: kmymoney/dialogs/knewaccountdlg.ui:185
 #, kde-format
 msgid "Last check number:"
-msgstr "Laatste controle nummer:"
+msgstr "Laatste controlenummer:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: kmymoney/dialogs/knewaccountdlg.ui:207
@@ -2512,7 +2514,7 @@ msgstr "Opmerkingen:"
 #: kmymoney/dialogs/knewaccountdlg.ui:227
 #, kde-format
 msgid "No auto-VAT-assignment"
-msgstr "Geen automatische BTW-toewijzing"
+msgstr "Geen automatische btw-toewijzing"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_5)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_5)
@@ -2520,7 +2522,7 @@ msgstr "Geen automatische BTW-toewijzing"
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:195
 #, kde-format
 msgid "Price entry"
-msgstr "Invoer van koers"
+msgstr "Koersinvoer"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxPreferred)
 #: kmymoney/dialogs/knewaccountdlg.ui:261
@@ -2640,13 +2642,13 @@ msgstr "Absolute limiet"
 #: kmymoney/dialogs/knewaccountdlg.ui:492
 #, kde-format
 msgid "Maximum credit limit"
-msgstr "Maximale krediet limiet"
+msgstr "Maximale kredietlimiet"
 
 #. i18n: ectx: property (text), widget (QLabel, m_minBalanceLabel)
 #: kmymoney/dialogs/knewaccountdlg.ui:523
 #, kde-format
 msgid "Minimum balance"
-msgstr "Minimum saldo"
+msgstr "Minimumsaldo"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: kmymoney/dialogs/knewaccountdlg.ui:543
@@ -2665,25 +2667,25 @@ msgstr "Belasting"
 #: kmymoney/dialogs/knewaccountdlg.ui:578
 #, kde-format
 msgid "VAT details"
-msgstr "BTW details"
+msgstr "Btw-details"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_vatCategory)
 #: kmymoney/dialogs/knewaccountdlg.ui:595
 #, kde-format
 msgid "VAT category"
-msgstr "BTW categorie"
+msgstr "Btw-categorie"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/dialogs/knewaccountdlg.ui:615
 #, kde-format
 msgid "VAT percentage"
-msgstr "BTW percentage"
+msgstr "Btw-percentage"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_vatAssignment)
 #: kmymoney/dialogs/knewaccountdlg.ui:681
 #, kde-format
 msgid "Enable auto VAT assignment"
-msgstr "Automatische BTW-toewijzing inschakelen"
+msgstr "Automatische btw-toewijzing inschakelen"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_amountGroupBox)
 #: kmymoney/dialogs/knewaccountdlg.ui:711
@@ -2695,19 +2697,19 @@ msgstr "Ingevuld bedrag"
 #: kmymoney/dialogs/knewaccountdlg.ui:726
 #, kde-format
 msgid "Gross amount"
-msgstr "Bruto bedrag"
+msgstr "Brutobedrag"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_netAmount)
 #: kmymoney/dialogs/knewaccountdlg.ui:739
 #, kde-format
 msgid "Net a&mount"
-msgstr "Netto &bedrag"
+msgstr "Netto&bedrag"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxTax)
 #: kmymoney/dialogs/knewaccountdlg.ui:779
 #, kde-format
 msgid "Include on Tax Reports"
-msgstr "Meenemen in Belasting overzichten"
+msgstr "Meenemen in belastingoverzichten"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KNewEquityEntryDlg)
 #: kmymoney/dialogs/knewequityentrydlg.ui:14
@@ -2721,7 +2723,7 @@ msgstr "Nieuw Aandeel"
 #: kmymoney/dialogs/knewequityentrydlg.ui:48
 #, kde-format
 msgid "Trading Symbol of the stock or mutual fund, not required."
-msgstr "Handelssymbool van het aandeel of beleggingsfonds, niet verplicht."
+msgstr "Handelssymbool van het aandeel of beleggingsfonds (niet verplicht)."
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, edtEquityName)
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, edtEquityName)
@@ -2740,7 +2742,7 @@ msgstr ""
 #: kmymoney/dialogs/knewinstitutiondlg.cpp:129
 #, kde-format
 msgid "Adding New Institution"
-msgstr "Toevoegen van nieuwe Bank"
+msgstr "Toevoegen van Nieuwe Bank"
 
 #: kmymoney/dialogs/knewinstitutiondlg.cpp:177
 #, kde-format
@@ -2756,13 +2758,13 @@ msgstr ""
 #: kmymoney/dialogs/knewinstitutiondlg.ui:14
 #, kde-format
 msgid "New Institution Dialog"
-msgstr "Nieuwe Bank dialoog"
+msgstr "Nieuwe Bankdialoog"
 
 #. i18n: ectx: property (title), widget (QGroupBox, GroupBox1)
 #: kmymoney/dialogs/knewinstitutiondlg.ui:26
 #, kde-format
 msgid "Institution Details"
-msgstr "Details voor Bank"
+msgstr "Bankdetails"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/knewinstitutiondlg.ui:32
@@ -2954,20 +2956,20 @@ msgstr "Corrigeer splitsing"
 #: kmymoney/dialogs/splitadjustdialog.ui:42
 #, kde-format
 msgid "How do you want to proceed?"
-msgstr "Hoe wil u verder gaan?"
+msgstr "Hoe wilt u verder gaan?"
 
 #. i18n: ectx: property (text), widget (QRadioButton, continueBtn)
 #: kmymoney/dialogs/ksplitcorrectiondlg.ui:55
 #: kmymoney/dialogs/splitadjustdialog.ui:64
 #, kde-format
 msgid "Continue to edit splits"
-msgstr "Doorgaan met Bewerk Splitsing"
+msgstr "Doorgaan met splitsing bewerken"
 
 #. i18n: ectx: property (text), widget (QRadioButton, changeBtn)
 #: kmymoney/dialogs/ksplitcorrectiondlg.ui:68
 #, no-c-format, kde-format
 msgid "Chan&ge total amount of transaction to %1."
-msgstr "Totaal bedrag van transactie &wijzigen naar %1."
+msgstr "Totaalbedrag van transactie &wijzigen naar %1."
 
 #. i18n: ectx: property (text), widget (QRadioButton, distributeBtn)
 #: kmymoney/dialogs/ksplitcorrectiondlg.ui:81
@@ -2997,10 +2999,10 @@ msgid ""
 "once you have selected a tag or marked the checkbox."
 msgstr ""
 "Om het verwijderen te voltooien, selecteer ofwel een tag uit de beschikbare "
-"tags die de geselecteerde tags zullen vervangen voordat ze verwijderd worden "
-"of markeer het onderstaande keuzevakje afhankelijk van uw keuze. De knop OK "
-"wordt toegankelijk nadat u een tag hebt geselecteerd of het keuzevakje hebt "
-"gemarkeerd."
+"tags die de geselecteerde tags zullen vervangen voordat ze verwijderd "
+"worden, of markeer het onderstaande keuzevakje afhankelijk van uw keuze. De "
+"knop OK wordt toegankelijk nadat u een tag hebt geselecteerd of het "
+"keuzevakje hebt gemarkeerd."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/dialogs/ktagreassigndlg.ui:79
@@ -3024,7 +3026,7 @@ msgstr ""
 #: kmymoney/widgets/transactionsortoption.ui:23
 #, kde-format
 msgid "Sort options"
-msgstr "Sorteer opties"
+msgstr "Sorteeropties"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useDefault)
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
@@ -3056,7 +3058,7 @@ msgstr "Fonds/Aandeel"
 #: kmymoney/dialogs/settings/ksettingscolors.ui:14
 #, kde-format
 msgid "Color settings"
-msgstr "Kleur opties"
+msgstr "Kleuropties "
 
 #. i18n: ectx: property (title), widget (QGroupBox, kcfg_useCustomColors)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:20
@@ -3068,7 +3070,7 @@ msgstr "Aange&paste kleuren"
 #: kmymoney/dialogs/settings/ksettingscolors.ui:32
 #, kde-format
 msgid "Ledger group separator"
-msgstr "Kasboek scheiding"
+msgstr "Kasboekscheiding"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:56
@@ -3355,8 +3357,7 @@ msgstr "Tabblad"
 #, kde-format
 msgid "Synchronize account selection of ledger and investment view"
 msgstr ""
-"Synchroniseer rekening selectie van het kasboek met het Investeringen "
-"overzicht"
+"Synchroniseer rekeningselectie van het kasboek met het Investeringenoverzicht"
 
 #. i18n: ectx: attribute (title), widget (QWidget, TabPage)
 #. i18n: ectx: attribute (title), widget (QWidget, tabFilter)
@@ -3381,7 +3382,7 @@ msgid ""
 "selection lists."
 msgstr ""
 "Deze optie verbergt in het overzicht alle categorieën die niet gebruikt "
-"worden. U kunt ze wel zien in de categorie selectie lijst."
+"worden. U kunt ze wel zien in de categorieselectielijst."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideUnusedCategory)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:393
@@ -3405,7 +3406,7 @@ msgstr "Deze optie toont de categorieën in de weergave van rekeningen ook."
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:410
 #, kde-format
 msgid "Show categories in the accounts list view"
-msgstr "Toon categorieën in de weergave van de lijst rekeningen"
+msgstr "Toon categorieën in de weergave van de rekeningenlijst"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:417
@@ -3480,7 +3481,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:292
 #, kde-format
 msgid "Log imported statements"
-msgstr "Afschriften importeren loggen."
+msgstr "Geïmporteerde afschriftenloggen."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logOfxTransactions)
 #. i18n: ectx: label, entry (logOfxTransactions), group (List Options)
@@ -3494,7 +3495,7 @@ msgstr "OFX-transacties loggen"
 #: kmymoney/dialogs/settings/ksettingshome.ui:14
 #, kde-format
 msgid "Homepage Settings"
-msgstr "Startpagina Opties"
+msgstr "Startpagina-opties"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_upButton)
 #: kmymoney/dialogs/settings/ksettingshome.ui:40
@@ -3581,7 +3582,7 @@ msgstr "Weergave van rekeninginformatie"
 #: kmymoney/dialogs/settings/ksettingshome.ui:196
 #, kde-format
 msgid "Show Account Limit Information"
-msgstr "Toon informatie over de rekening limiet"
+msgstr "Toon informatie over het rekeninglimiet"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowBalanceStatusOfOnlineAccounts)
 #: kmymoney/dialogs/settings/ksettingshome.ui:203
@@ -3593,7 +3594,7 @@ msgstr "Toon de status van het saldo van zichtbare online rekeningen"
 #: kmymoney/dialogs/settings/ksettingshome.ui:210
 #, kde-format
 msgid "Show number of not marked transactions per account [!M]"
-msgstr "Aantal niet gemarkeerde transacties per rekening tonen [!M]"
+msgstr "Aantal niet-gemarkeerde transacties per rekening tonen [!M]"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowCountOfClearedTransactions)
 #: kmymoney/dialogs/settings/ksettingshome.ui:217
@@ -3608,14 +3609,14 @@ msgid ""
 "Show number of not reconciled (not marked + cleared) transactions per "
 "account [!R]"
 msgstr ""
-"Aantal niet gecontroleerde (niet gemarkeerd + vrijgegeven) transacties per "
+"Aantal niet-gecontroleerde (niet gemarkeerd + vrijgegeven) transacties per "
 "rekening tonen [!R]"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowDateOfLastReconciliation)
 #: kmymoney/dialogs/settings/ksettingshome.ui:231
 #, kde-format
 msgid "Show date of last reconciliation"
-msgstr "Laatste datum van transactie-controle tonen"
+msgstr "Laatste datum van transactiecontrole tonen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceLiabilities)
 #: kmymoney/dialogs/settings/ksettingshome.ui:238
@@ -3663,7 +3664,7 @@ msgstr "Start"
 #, kde-format
 msgctxt "Ledger view settings"
 msgid "Ledger"
-msgstr "Ledger"
+msgstr "Grootboek"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:44
 #: kmymoney/views/kmymoneyview.cpp:174
@@ -3693,7 +3694,7 @@ msgstr "Pictogrammen"
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:51
 #, kde-format
 msgid "Plugins"
-msgstr "invoegtoepassingen"
+msgstr "Invoegtoepassingen"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:74
 #, kde-format
@@ -3719,7 +3720,7 @@ msgstr "Naam"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:377
 #, kde-format
 msgid "New Quote Source"
-msgstr "Nieuwe online koersen bron"
+msgstr "Nieuwe online koersenbron"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:256
 #, kde-format
@@ -3756,10 +3757,10 @@ msgid ""
 "mailinglist at <a href=\"mailto:kmymoney@kde.org\">kmymoney@kde.org</a> to "
 "find what settings work for other users in your country.</i>"
 msgstr ""
-"<i>Voer standaard expressies in die gebruikt kunnen worden om de gegevens te "
-"verwerken die terugkomen vanaf de aangegeven URL.  Het symbool,de koers en "
-"datum welke worden gevonden in de koers gegevens moeten bruikbaar zijn. U "
-"kunt ook via de KMyMoney gebruikers mailinglijst op <a href=\"mailto:"
+"<i>Voer standaardexpressies in die gebruikt kunnen worden om de gegevens te "
+"verwerken die terugkomen vanaf de aangegeven URL.  Het symbool, de koers en "
+"de datum welke worden gevonden in de koersgegevens moeten bruikbaar zijn. U "
+"kunt ook via de KMyMoney-gebruikersmailinglijst op <a href=\"mailto:"
 "kmymoney@kde.org\">kmymoney@kde.org</a> proberen te achterhalen welke opties "
 "voor andere gebruikers in uw land werken.</i>"
 
@@ -3793,7 +3794,7 @@ msgstr "Identifier"
 #, kde-format
 msgid "Regular Expression to extract the identifier from the downloaded data"
 msgstr ""
-"Normale expressie voor het extraheren van de identifier uit de gedownloade "
+"Reguliere expressie voor het extraheren van de identifier uit de gedownloade "
 "gegevens"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editDate)
@@ -3803,7 +3804,7 @@ msgstr ""
 #, kde-format
 msgid "Regular Expression to extract the date from the downloaded data"
 msgstr ""
-"Normale expressie voor het extraheren van de datum uit de gedownloade "
+"Reguliere expressie voor het extraheren van de datum uit de gedownloade "
 "gegevens"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
@@ -3818,7 +3819,7 @@ msgstr "URL"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:112
 #, kde-format
 msgid "CSV URL"
-msgstr "CSV URL"
+msgstr "CSV-URL"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editURL)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:119
@@ -3835,10 +3836,10 @@ msgid ""
 "conversions, <b>%2</b> will be replaced with the currency to be quoted and "
 "<b>%1</b> with the currency the quote is based on."
 msgstr ""
-"Voer de URL in van waaruit de aandelen koersen moeten worden opgehaald. <b>"
+"Voer de URL in van waaruit de aandelenkoersen moeten worden opgehaald. <b>"
 "%1</b> wordt vervangen door het symbool van het fonds waarvoor de koers "
-"wordt opgevraagd. Voor valuta conversies wordt <b>%2</b> vervangen door de "
-"conversie koers die is opgevraagd en wordt  <b>%1</b> vervangen door de "
+"wordt opgevraagd. Voor valutaconversies wordt <b>%2</b> vervangen door de "
+"conversiekoers die is opgevraagd en wordt  <b>%1</b> vervangen door de "
 "valuta waarop de koers is gebaseerd."
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editPrice)
@@ -3846,7 +3847,7 @@ msgstr ""
 #, kde-format
 msgid "Regular Expression to extract the price from the downloaded data"
 msgstr ""
-"Normale expressie voor het extraheren van de koers uit de gedownloade "
+"Reguliere expressie voor het extraheren van de koers uit de gedownloade "
 "gegevens"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_skipStripping)
@@ -3885,7 +3886,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:158
 #, kde-format
 msgid "Skip HTML stripping"
-msgstr "HTML strippen overslaan"
+msgstr "HTML-strippen overslaan"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:165
@@ -3980,7 +3981,7 @@ msgstr "Bewerkingen bij online bankieren"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:14
 #, kde-format
 msgid "Register settings"
-msgstr "Kasboek opties"
+msgstr "Kasboekopties"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab1)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:24
@@ -3991,8 +3992,7 @@ msgstr "Weergave"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowGrid)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:30
-#, fuzzy, kde-format
-#| msgid "Show a grid in the register"
+#, kde-format
 msgid "Show a grid in the ledger"
 msgstr "Toon een raster in het kasboek"
 
@@ -4019,21 +4019,19 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsregister.ui:50
 #, kde-format
 msgid "Display overdue schedules with planned date"
-msgstr "Periodieke transacties die over tijd zijn tonen met geplande datum"
+msgstr "Periodieke transacties die verlopen zijn tonen met geplande datum"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:57
-#, fuzzy, kde-format
-#| msgid "Investment details"
+#, kde-format
 msgid "Ledger entry details"
-msgstr "Investeringsdetails"
+msgstr "Details van kasboekitems"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowRegisterDetailed)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:63
-#, fuzzy, kde-format
-#| msgid "Show all register entries in full detail"
+#, kde-format
 msgid "Show all ledger entries in full detail"
-msgstr "Laat alle kasboek transacties volledig zien"
+msgstr "Laat alle kasboektransacties volledig zien"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_LedgerLens)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:73
@@ -4045,9 +4043,9 @@ msgid ""
 "form."
 msgstr ""
 "Maakt gebruik van de Kasboek Lens om details weer te geven over de "
-"transactie die is geselecteerd in het kasboek. Als u het transactie "
-"formulier gebruikt wordt normaal gesproken slechts één regel per transactie "
-"getoond. Details worden getoond in het transactie formulier."
+"transactie die is geselecteerd in het kasboek. Als u het transactieformulier "
+"gebruikt wordt normaal gesproken slechts één regel per transactie getoond. "
+"Details worden getoond in het transactieformulier."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_LedgerLens)
 #. i18n: ectx: label, entry (LedgerLens), group (General Options)
@@ -4059,17 +4057,15 @@ msgstr "De Kasboek Lens gebruiken"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllSplits)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:86
-#, fuzzy, kde-format
-#| msgid "Show all split details in register"
+#, kde-format
 msgid "Show all split details in ledger"
 msgstr "Alle gesplitste details in het kasboek tonen"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:96
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgid "Information headers"
-msgstr "Informatie"
+msgstr "Informatiekoppen"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:102
@@ -4083,10 +4079,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:105
-#, fuzzy, kde-format
-#| msgid "Show group header between transactions"
+#, kde-format
 msgid "Show group headers between transactions"
-msgstr "Toon groepering regel tussen de transacties"
+msgstr "Toon groeperingsregels tussen de transacties"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFiscalMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:115
@@ -4096,23 +4091,21 @@ msgstr "Toon kop voor het vorige en het huidige fiscale jaar"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:123
-#, fuzzy, kde-format
-#| msgid "Do not show reconciled transactions"
+#, kde-format
 msgid "Don't show reconciliation entries"
 msgstr "Gecontroleerde transacties niet tonen"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:128
-#, fuzzy, kde-format
-#| msgid "Show date of last reconciliation on the Homepage"
+#, kde-format
 msgid "Show last reconciliation entry with date and balance in ledger"
-msgstr "Datum van laatste transactie-controle tonen op de homepagina"
+msgstr "Laatste transactie-item tonen met datum en saldo in het kasboek"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:133
 #, kde-format
 msgid "Show all reconciliation entries with date and balance in ledger"
-msgstr ""
+msgstr "Alle transactie-items tonen met datum en saldo in het kasboek"
 
 #. i18n: ectx: attribute (title), widget (QWidget, sorting)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:161
@@ -4136,7 +4129,7 @@ msgstr "Overzicht transactiecontrole"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:194
 #, kde-format
 msgid "Search view"
-msgstr "Zoeken overzicht"
+msgstr "Zoekoverzicht"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:210
@@ -4147,17 +4140,17 @@ msgid ""
 "Click a selected entry to toggle the sort order between <i>ascending</i> and "
 "<i>descending</i>."
 msgstr ""
-"Gebruik de <i>links</i> en <i>rechts</i> knoppen om sorteer opties toe te "
-"voegen of te verwijderen. Gebruik de <i>omhoog</i> en <i>omlaag</i> knoppen "
-"om de sorteer volgorde te wijzigen. Dubbelklik op de geselecteerde kolom/"
-"regel om de sorteer volgorde te wijzigen in <i>Oplopend</i> of "
-"<i>Neerwaarts</i>."
+"Gebruik de <i>links-</i> en <i>rechts</i>knoppen om sorteer opties toe te "
+"voegen of te verwijderen. Gebruik de <i>omhoog- </i> en <i>omlaag</i>knoppen "
+"om de sorteervolgorde te wijzigen. Dubbelklik op de geselecteerde kolom/"
+"regel om de sorteervolgorde te wijzigen in <i>Oplopend</i> of <i>Neerwaarts</"
+"i>."
 
 #. i18n: ectx: attribute (title), widget (QWidget, TabPage1)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:221
 #, kde-format
 msgid "Data entry"
-msgstr "Gegevens invoer"
+msgstr "Gegevensinvoer"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoIncCheckNumber)
 #. i18n: ectx: label, entry (AutoIncCheckNumber), group (General Options)
@@ -4165,7 +4158,7 @@ msgstr "Gegevens invoer"
 #: kmymoney/settings/kmymoney.kcfg:21
 #, kde-format
 msgid "Auto increment check number"
-msgstr "Automatisch ophogen controle nummer"
+msgstr "Automatisch ophogen controlenummer"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FocusChangeIsEnter)
 #. i18n: ectx: label, entry (FocusChangeIsEnter), group (General Options)
@@ -4188,9 +4181,9 @@ msgid ""
 "Mark this option, if you always want to match names e.g. for payees from the "
 "start. If unset, any substring is matched."
 msgstr ""
-"Activeer deze optie, als u altijd namen, bijv. voor begunstigden, vanaf het "
-"begin overeen wilt laten komen. Indien niet actief, komt elke gedeelte van "
-"een tekenreeks overeen."
+"Activeer deze optie indien u altijd namen (bijv. voor begunstigden) vanaf "
+"het begin overeen wilt laten komen. Indien niet actief, komt elke gedeelte "
+"van een tekenreeks overeen."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_stringMatchFromStart)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:257
@@ -4206,8 +4199,8 @@ msgid ""
 "that match that data (in some cases it might be not possible to do that)."
 msgstr ""
 "Na het invoeren van informatie ter controle worden automatisch de "
-"transacties gedetecteerd die overeenkomen met die gegevens (in sommige "
-"gevallen kan dat niet mogelijk zijn)."
+"transacties gedetecteerd die overeenkomen met die gegevens (in de gevallen "
+"waar mogelijk)."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoReconciliation)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:267
@@ -4252,7 +4245,7 @@ msgstr "Jaar"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:321
 #, kde-format
 msgid "Default reconciliation state"
-msgstr "Standaard transactie controle status"
+msgstr "Standaard transactiecontrole-status"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, kcfg_defaultReconciliationState)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:331
@@ -4261,12 +4254,12 @@ msgid ""
 "Default reconciliation state for transactions entered during reconciliation "
 "of an account"
 msgstr ""
-"Standaard controle status voor transacties die worden ingevoerd tijdens "
-"saldo controle van een rekening."
+"Standaard controlestatus voor transacties die worden ingevoerd tijdens "
+"saldocontrole van een rekening."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:335
-#: kmymoney/models/ledgerfilter.cpp:77
+#: kmymoney/models/ledgerfilter.cpp:78
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
 #, kde-format
 msgid "Not reconciled"
@@ -4303,7 +4296,7 @@ msgstr "Automatisch aanvullen"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:380
 #, kde-format
 msgid "Do not auto-fill transaction data at all."
-msgstr "Nooit automatisch aanvullen van transactie gegevens doen."
+msgstr "Transactiegegevens nooit automatisch aanvullen."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton1)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:383
@@ -4324,8 +4317,8 @@ msgid ""
 msgstr ""
 "Verzamel alle transacties voor de geselecteerde begunstigde. Behandel alle "
 "transacties die verwijzen naar dezelfde categorie en een bedrag binnen een "
-"marge van  +/- X % als identiek. Als er meerdere transactie worden gevonden, "
-"dan wordt een lijst getoond.\n"
+"marge van  +/- X % als identiek. Als er meerdere transacties worden gevonden "
+"wordt een lijst getoond.\n"
 "\n"
 "Als u 0% selecteert worden alle transactie getoond."
 
@@ -4345,8 +4338,8 @@ msgid ""
 "for this payee is autofilled into the transaction editor."
 msgstr ""
 "De gegevens van de laatste transacties gekoppeld aan de meeste gebruikte "
-"categorie voor deze gebruiker wordt automatisch ingevuld in de transactie "
-"editor."
+"categorie voor deze gebruiker wordt automatisch ingevuld in de "
+"transactiebewerker."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton3)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:411
@@ -6361,37 +6354,37 @@ msgstr "Waarde"
 msgid "Displayed columns"
 msgstr "Getoonde kolommen"
 
-#: kmymoney/models/ledgerfilter.cpp:71
+#: kmymoney/models/ledgerfilter.cpp:72
 #, kde-format
 msgid "Any status"
 msgstr "Willekeurige status"
 
-#: kmymoney/models/ledgerfilter.cpp:72
+#: kmymoney/models/ledgerfilter.cpp:73
 #, kde-format
 msgid "Imported"
 msgstr "Geïmporteerd"
 
-#: kmymoney/models/ledgerfilter.cpp:73
+#: kmymoney/models/ledgerfilter.cpp:74
 #, kde-format
 msgid "Matched"
 msgstr "Identiek"
 
-#: kmymoney/models/ledgerfilter.cpp:74
+#: kmymoney/models/ledgerfilter.cpp:75
 #, kde-format
 msgid "Erroneous"
 msgstr "Foutief"
 
-#: kmymoney/models/ledgerfilter.cpp:75
+#: kmymoney/models/ledgerfilter.cpp:76
 #, kde-format
 msgid "Scheduled"
 msgstr "Gepland"
 
-#: kmymoney/models/ledgerfilter.cpp:76
+#: kmymoney/models/ledgerfilter.cpp:77
 #, kde-format
 msgid "Not marked"
 msgstr "Niet gemarkeerd"
 
-#: kmymoney/models/ledgerfilter.cpp:78 kmymoney/mymoney/statusmodel.cpp:29
+#: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:29
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:33
 #, kde-format
 msgctxt "Reconciliation state 'Cleared'"
@@ -18385,7 +18378,7 @@ msgstr "Verberg afgehandelde periodieke transacties"
 #: kmymoney/settings/kmymoney.kcfg:240
 #, kde-format
 msgid "Show all register entries in full detail"
-msgstr "Laat alle kasboek transacties volledig zien"
+msgstr "Laat alle kasboektransacties volledig zien"
 
 #. i18n: ectx: label, entry (ShowAllSplits), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:244
@@ -18422,7 +18415,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:264
 #, kde-format
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "Transactie-items tonen met datum en saldo"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:273
@@ -21705,7 +21698,7 @@ msgstr ""
 msgid "Charges"
 msgstr "Kosten"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:89
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:92
 #, kde-format
 msgid ""
 "Please enter the following fields with the information as you find them on "
@@ -21714,12 +21707,12 @@ msgstr ""
 "Voer a.u.b. de volgende velden in met de informatie zoals u die vindt op uw "
 "bankafschrift. Zorg ervoor dat u alle waarden invoert in <b>%1</b>."
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:138
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:142
 #, kde-format
 msgid "Last reconciled statement: %1"
 msgstr "Laatst gecontroleerde bankafschrift: %1"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:205
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:210
 #, kde-format
 msgid "Oldest unmarked transaction: %1"
 msgstr "Oudste niet gemarkeerde transactie: %1"

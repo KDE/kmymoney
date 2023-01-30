@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-29 00:58+0000\n"
-"PO-Revision-Date: 2023-01-25 09:27+0100\n"
+"POT-Creation-Date: 2023-01-30 00:58+0000\n"
+"PO-Revision-Date: 2023-01-29 10:06+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -1762,7 +1762,7 @@ msgstr "[Sense identificador]"
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
-#: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.cpp:37
+#: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.cpp:38
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.cpp:53
 #, kde-format
 msgctxt "@info:tooltip"
@@ -3994,10 +3994,9 @@ msgstr "Visualització"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowGrid)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:30
-#, fuzzy, kde-format
-#| msgid "Show a grid in the register"
+#, kde-format
 msgid "Show a grid in the ledger"
-msgstr "Mostra una quadrícula als llibres"
+msgstr "Mostra una quadrícula en el llibre major"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TransactionForm)
 #. i18n: ectx: label, entry (TransactionForm), group (General Options)
@@ -4026,17 +4025,15 @@ msgstr "Mostra les planificacions endarrerides amb data planificada"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:57
-#, fuzzy, kde-format
-#| msgid "Investment details"
+#, kde-format
 msgid "Ledger entry details"
-msgstr "Detalls de la inversió"
+msgstr "Detalls de les entrades del llibre major"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowRegisterDetailed)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:63
-#, fuzzy, kde-format
-#| msgid "Show all register entries in full detail"
+#, kde-format
 msgid "Show all ledger entries in full detail"
-msgstr "Mostra tots els detalls a les entrades del llibre"
+msgstr "Mostra els detalls complets de totes les entrades del llibre major"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_LedgerLens)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:73
@@ -4062,17 +4059,15 @@ msgstr "Usa la lupa del llibre major"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllSplits)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:86
-#, fuzzy, kde-format
-#| msgid "Show all split details in register"
+#, kde-format
 msgid "Show all split details in ledger"
-msgstr "Mostra tots els detalls desglossats en els llibres"
+msgstr "Mostra tots els detalls dels desglossaments en el llibre major"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:96
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgid "Information headers"
-msgstr "Informació"
+msgstr "Capçaleres d'informació"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:102
@@ -4086,10 +4081,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:105
-#, fuzzy, kde-format
-#| msgid "Show group header between transactions"
+#, kde-format
 msgid "Show group headers between transactions"
-msgstr "Mostra la capçalera de grup entre les operacions"
+msgstr "Mostra les capçaleres de grup entre les operacions"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFiscalMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:115
@@ -4099,23 +4093,25 @@ msgstr "Mostra una capçalera per a l'any fiscal anterior i l'actual"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:123
-#, fuzzy, kde-format
-#| msgid "Do not show reconciled transactions"
+#, kde-format
 msgid "Don't show reconciliation entries"
-msgstr "No mostris les operacions conciliades"
+msgstr "No mostris les entrades de conciliació"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:128
-#, fuzzy, kde-format
-#| msgid "Show date of last reconciliation on the Homepage"
+#, kde-format
 msgid "Show last reconciliation entry with date and balance in ledger"
-msgstr "Mostra la data de l'última conciliació a la pàgina principal"
+msgstr ""
+"Mostra l'entrada de l'última conciliació amb la data i el saldo al llibre "
+"major"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:133
 #, kde-format
 msgid "Show all reconciliation entries with date and balance in ledger"
 msgstr ""
+"Mostra totes les entrades de conciliació amb la data i el saldo al llibre "
+"major"
 
 #. i18n: ectx: attribute (title), widget (QWidget, sorting)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:161
@@ -4268,7 +4264,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:335
-#: kmymoney/models/ledgerfilter.cpp:77
+#: kmymoney/models/ledgerfilter.cpp:78
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
 #, kde-format
 msgid "Not reconciled"
@@ -6372,37 +6368,37 @@ msgstr "Valor"
 msgid "Displayed columns"
 msgstr "Columnes mostrades"
 
-#: kmymoney/models/ledgerfilter.cpp:71
+#: kmymoney/models/ledgerfilter.cpp:72
 #, kde-format
 msgid "Any status"
 msgstr "Qualsevol estat"
 
-#: kmymoney/models/ledgerfilter.cpp:72
+#: kmymoney/models/ledgerfilter.cpp:73
 #, kde-format
 msgid "Imported"
 msgstr "Importat"
 
-#: kmymoney/models/ledgerfilter.cpp:73
+#: kmymoney/models/ledgerfilter.cpp:74
 #, kde-format
 msgid "Matched"
 msgstr "Coincident"
 
-#: kmymoney/models/ledgerfilter.cpp:74
+#: kmymoney/models/ledgerfilter.cpp:75
 #, kde-format
 msgid "Erroneous"
 msgstr "Erroni"
 
-#: kmymoney/models/ledgerfilter.cpp:75
+#: kmymoney/models/ledgerfilter.cpp:76
 #, kde-format
 msgid "Scheduled"
 msgstr "Planificat"
 
-#: kmymoney/models/ledgerfilter.cpp:76
+#: kmymoney/models/ledgerfilter.cpp:77
 #, kde-format
 msgid "Not marked"
 msgstr "No verificat"
 
-#: kmymoney/models/ledgerfilter.cpp:78 kmymoney/mymoney/statusmodel.cpp:29
+#: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:29
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:33
 #, kde-format
 msgctxt "Reconciliation state 'Cleared'"
@@ -18468,7 +18464,7 @@ msgstr "Mostra marcadors de fantasia per a l'any fiscal anterior i l'actual"
 #: kmymoney/settings/kmymoney.kcfg:264
 #, kde-format
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "Mostra les entrades de conciliació amb la data i el saldo"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:273
@@ -21759,7 +21755,7 @@ msgstr ""
 msgid "Charges"
 msgstr "Càrrecs"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:89
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:92
 #, kde-format
 msgid ""
 "Please enter the following fields with the information as you find them on "
@@ -21768,12 +21764,12 @@ msgstr ""
 "Si us plau, ompliu els camps següents amb la informació que figura en el "
 "vostre extracte. Assegureu-vos d'introduir tots els valors en <b>%1</b>."
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:138
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:142
 #, kde-format
 msgid "Last reconciled statement: %1"
 msgstr "Darrer extracte conciliat: %1"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:205
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:210
 #, kde-format
 msgid "Oldest unmarked transaction: %1"
 msgstr "Operació sense marcar més antiga: %1"

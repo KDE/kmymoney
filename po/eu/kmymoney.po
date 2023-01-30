@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-29 00:58+0000\n"
-"PO-Revision-Date: 2023-01-27 21:05+0100\n"
+"POT-Creation-Date: 2023-01-30 00:58+0000\n"
+"PO-Revision-Date: 2023-01-29 20:33+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -1758,7 +1758,7 @@ msgstr "[identifikatzailerik ez]"
 #: kmymoney/dialogs/settings/ksettingsgeneral.cpp:62
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.cpp:38
 #: kmymoney/widgets/daterangedlg.cpp:64 kmymoney/widgets/daterangedlg.cpp:67
-#: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.cpp:37
+#: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.cpp:38
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.cpp:53
 #, kde-format
 msgctxt "@info:tooltip"
@@ -3061,7 +3061,7 @@ msgstr "&Kolore pertsonalizatuak"
 #: kmymoney/dialogs/settings/ksettingscolors.ui:32
 #, kde-format
 msgid "Ledger group separator"
-msgstr "Kontabilitate-liburuko talde-bereizlea"
+msgstr "Liburu nagusiko talde-bereizlea"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:56
@@ -3111,7 +3111,7 @@ msgstr "Erabili sistemaren letra-tipoak"
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:27
 #, kde-format
 msgid "Individual font settings for ledgers"
-msgstr "Kontabilitate-liburuetarako banakako letra-tipoak"
+msgstr "Liburu nagusietarako banakako letra-tipoak"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (listCellFont), group (List Options)
@@ -3346,8 +3346,7 @@ msgstr "Fitxak"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:354
 #, kde-format
 msgid "Synchronize account selection of ledger and investment view"
-msgstr ""
-"Sinkronizatu kontabilitate-liburuko eta inbertsio-ikuspegiko kontu-hautapena"
+msgstr "Sinkronizatu liburu nagusiko eta inbertsio-ikuspegiko kontu-hautapena"
 
 #. i18n: ectx: attribute (title), widget (QWidget, TabPage)
 #. i18n: ectx: attribute (title), widget (QWidget, tabFilter)
@@ -3430,8 +3429,8 @@ msgstr "Ez erakutsi data hau baino lehenagoko transakzioak"
 #, kde-format
 msgid "This option hides all reconciled transactions in the ledger view."
 msgstr ""
-"Kontabilitate-liburuaren ikuspegian transakzio berdinkatu guztiak ezkutatzen "
-"ditu aukera honek."
+"Liburu nagusiaren ikuspegian transakzio berdinkatu guztiak ezkutatzen ditu "
+"aukera honek."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideReconciledTransactions)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:488
@@ -3652,7 +3651,7 @@ msgstr "Orri nagusia"
 #, kde-format
 msgctxt "Ledger view settings"
 msgid "Ledger"
-msgstr "Kontabilitate-liburua"
+msgstr "Liburu nagusia"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:44
 #: kmymoney/views/kmymoneyview.cpp:174
@@ -3975,10 +3974,9 @@ msgstr "Bistaratzea"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowGrid)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:30
-#, fuzzy, kde-format
-#| msgid "Show a grid in the register"
+#, kde-format
 msgid "Show a grid in the ledger"
-msgstr "Erakutsi sareta erregistroan"
+msgstr "Erakutsi sareta bat liburu nagusian"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TransactionForm)
 #. i18n: ectx: label, entry (TransactionForm), group (General Options)
@@ -4007,17 +4005,15 @@ msgstr "Erakutsi atzeratutako antolatuak aurreikusitako dataz"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:57
-#, fuzzy, kde-format
-#| msgid "Investment details"
+#, kde-format
 msgid "Ledger entry details"
-msgstr "Inbertsioaren xehetasunak"
+msgstr "Liburu nagusiko sarreraren xehetasunak"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowRegisterDetailed)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:63
-#, fuzzy, kde-format
-#| msgid "Show all register entries in full detail"
+#, kde-format
 msgid "Show all ledger entries in full detail"
-msgstr "Erakutsi erregistro-sarrera guztiak xehetasun guztiekin"
+msgstr "Erakutsi liburu nagusiko sarrera guztiak xehetasun guztiekin"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_LedgerLens)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:73
@@ -4028,10 +4024,10 @@ msgid ""
 "summary is displayed for each transaction as the details are shown in the "
 "form."
 msgstr ""
-"Kontabilitate-liburuaren lenteak erabilita, kontabilitate-liburuan "
-"fokuratuta dagoen transakzioaren xehetasunak bistaratzen dira. Transakzio-"
-"inprimakia erabiltzean, lerro bakarreko laburpena baino ez da bistaratzen "
-"transakzio bakoitzeko, xehetasunak inprimakian erakusten baitira."
+"Liburu nagusiaren lenteak erabilita, liburu nagusian fokuratuta dagoen "
+"transakzioaren xehetasunak bistaratzen dira. Transakzio-inprimakia "
+"erabiltzean, lerro bakarreko laburpena baino ez da bistaratzen transakzio "
+"bakoitzeko, xehetasunak inprimakian erakusten baitira."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_LedgerLens)
 #. i18n: ectx: label, entry (LedgerLens), group (General Options)
@@ -4039,21 +4035,19 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:80
 #, kde-format
 msgid "Use the ledger lens"
-msgstr "Erabili kontabilitate-liburuaren lenteak"
+msgstr "Erabili liburu nagusiaren lenteak"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllSplits)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:86
-#, fuzzy, kde-format
-#| msgid "Show all split details in register"
+#, kde-format
 msgid "Show all split details in ledger"
-msgstr "Erakutsi erregistroko partida guztien xehetasunak"
+msgstr "Erakutsi liburu nagusiko partida guztien xehetasunak"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:96
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgid "Information headers"
-msgstr "Informazioa"
+msgstr "Informazio goiburuak"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:102
@@ -4067,10 +4061,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:105
-#, fuzzy, kde-format
-#| msgid "Show group header between transactions"
+#, kde-format
 msgid "Show group headers between transactions"
-msgstr "Erakutsi talde-goiburua transakzioen artean"
+msgstr "Erakutsi transakzioen arteko talde-goiburuak"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFiscalMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:115
@@ -4080,23 +4073,23 @@ msgstr "Erakutsi goiburua aurreko eta aurtengo ekitaldietan"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:123
-#, fuzzy, kde-format
-#| msgid "Do not show reconciled transactions"
+#, kde-format
 msgid "Don't show reconciliation entries"
-msgstr "Ez erakutsi transakzio berdinkatuak"
+msgstr "Ez erakutsi berdinkatze sarrerak"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:128
-#, fuzzy, kde-format
-#| msgid "Show date of last reconciliation on the Homepage"
+#, kde-format
 msgid "Show last reconciliation entry with date and balance in ledger"
-msgstr "Erakutsi berdinkatutako azken data orri nagusian"
+msgstr ""
+"Erakutsi liburu nagusiko azken berdinkatze sarrera data eta saldoarekin"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:133
 #, kde-format
 msgid "Show all reconciliation entries with date and balance in ledger"
 msgstr ""
+"Erakutsi liburu nagusiko berdinkatze sarrera guztiak data eta saldoarekin"
 
 #. i18n: ectx: attribute (title), widget (QWidget, sorting)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:161
@@ -4247,7 +4240,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_defaultReconciliationState)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:335
-#: kmymoney/models/ledgerfilter.cpp:77
+#: kmymoney/models/ledgerfilter.cpp:78
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:34
 #, kde-format
 msgid "Not reconciled"
@@ -4477,7 +4470,7 @@ msgstr "(Bat ere ez)"
 #: kmymoney/settings/kmymoney.kcfg:66
 #, kde-format
 msgid "Number of days to preview schedules in ledger"
-msgstr "Antolaketak kontabilitate-liburuan aurreikusteko egun kopurua"
+msgstr "Antolaketak liburu nagusian aurreikusteko egun kopurua"
 
 #: kmymoney/dialogs/splitadjustdialog.cpp:53
 #, kde-format
@@ -4849,7 +4842,7 @@ msgstr "Kontu berria..."
 #: kmymoney/kmymoney.cpp:1775
 #, kde-format
 msgid "Open ledger"
-msgstr "Ireki kontabilitate-liburua"
+msgstr "Ireki liburu nagusia"
 
 #: kmymoney/kmymoney.cpp:1776
 #, kde-format
@@ -6342,37 +6335,37 @@ msgstr "Balioa"
 msgid "Displayed columns"
 msgstr "Erakutsitako zutabeak"
 
-#: kmymoney/models/ledgerfilter.cpp:71
+#: kmymoney/models/ledgerfilter.cpp:72
 #, kde-format
 msgid "Any status"
 msgstr "Edozein egoera"
 
-#: kmymoney/models/ledgerfilter.cpp:72
+#: kmymoney/models/ledgerfilter.cpp:73
 #, kde-format
 msgid "Imported"
 msgstr "Inportatuta"
 
-#: kmymoney/models/ledgerfilter.cpp:73
+#: kmymoney/models/ledgerfilter.cpp:74
 #, kde-format
 msgid "Matched"
 msgstr "Parekatua"
 
-#: kmymoney/models/ledgerfilter.cpp:74
+#: kmymoney/models/ledgerfilter.cpp:75
 #, kde-format
 msgid "Erroneous"
 msgstr "Okerra"
 
-#: kmymoney/models/ledgerfilter.cpp:75
+#: kmymoney/models/ledgerfilter.cpp:76
 #, kde-format
 msgid "Scheduled"
 msgstr "Antolatua"
 
-#: kmymoney/models/ledgerfilter.cpp:76
+#: kmymoney/models/ledgerfilter.cpp:77
 #, kde-format
 msgid "Not marked"
 msgstr "Markatu gabe"
 
-#: kmymoney/models/ledgerfilter.cpp:78 kmymoney/mymoney/statusmodel.cpp:29
+#: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:29
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:33
 #, kde-format
 msgctxt "Reconciliation state 'Cleared'"
@@ -18149,7 +18142,7 @@ msgstr "Exekutatu aditu (kontulari) moduan"
 #: kmymoney/settings/kmymoney.kcfg:118
 #, kde-format
 msgid "Synchronize account in ledger and investment view"
-msgstr "Sinkronizatu kontua kontabilitate-liburuan eta inbertsio-ikuspegian"
+msgstr "Sinkronizatu kontua liburu nagusian eta inbertsio-ikuspegian"
 
 #. i18n: ectx: label, entry (viewType), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:122
@@ -18357,7 +18350,7 @@ msgstr "Erakutsi markatzaile dotoreak aurreko eta aurtengo ekitaldietan"
 #: kmymoney/settings/kmymoney.kcfg:264
 #, kde-format
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "Erakutsi berdinkatze sarrerak data eta saldoarekin"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:273
@@ -19622,7 +19615,7 @@ msgstr "Bilatu..."
 #: kmymoney/views/kmymoneyview.cpp:178
 #, kde-format
 msgid "Ledgers"
-msgstr "Kontabilitate-liburuak"
+msgstr "Liburu nagusiak"
 
 #: kmymoney/views/kmymoneyview.cpp:510
 #, kde-format
@@ -19662,7 +19655,7 @@ msgstr "Erakutsi onuradunen orria"
 #: kmymoney/views/kmymoneyview.cpp:517
 #, kde-format
 msgid "Show ledgers page"
-msgstr "Erakutsi kontabilitate-liburuen orria"
+msgstr "Erakutsi liburu nagusietako orria"
 
 #: kmymoney/views/kmymoneyview.cpp:518
 #, kde-format
@@ -20632,8 +20625,8 @@ msgid ""
 "This page shows the accounts ledger. Currently, no accounts exist so this "
 "text is shown instead."
 msgstr ""
-"Orrialde honek kontuen liburua erakusten du. Momentuz, ez dago konturik, "
-"beraz, testu hau erakusten da."
+"Orrialde honek kontuen liburu nagusia erakusten du. Momentuz, ez dago "
+"konturik, beraz, testu hau erakusten da."
 
 #: kmymoney/views/simpleledgerview.cpp:432
 #, kde-format
@@ -20642,7 +20635,7 @@ msgid ""
 "This page shows the accounts ledger. Currently, no accounts are selected so "
 "this text is shown instead."
 msgstr ""
-"Orrialde honek kontuen liburua erakusten du. Momentuz, ez da konturik "
+"Orrialde honek kontuen liburu nagusia erakusten du. Momentuz, ez da konturik "
 "hautatu, beraz, testu hau erakusten da."
 
 #: kmymoney/views/simpleledgerview.cpp:646
@@ -21614,7 +21607,7 @@ msgstr ""
 msgid "Charges"
 msgstr "Karguak"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:89
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:92
 #, kde-format
 msgid ""
 "Please enter the following fields with the information as you find them on "
@@ -21623,12 +21616,12 @@ msgstr ""
 "Bete eremu hauek kontu-laburpenean azaltzen zaizun informazioarekin. "
 "Ziurtatu balio guztiak <b>%1</b>(e)(a)n sartu dituzula."
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:138
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:142
 #, kde-format
 msgid "Last reconciled statement: %1"
 msgstr "Azkenekoz berdinkatutako kontu-laburpena: %1"
 
-#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:205
+#: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:210
 #, kde-format
 msgid "Oldest unmarked transaction: %1"
 msgstr "Markatu gabeko transakzio zaharrena: %1"
@@ -21661,7 +21654,7 @@ msgid ""
 msgstr ""
 "Beste aldi batean atzeratu zenuen kontu honen berdinkatzea. Kontu hau "
 "berdinkatzen hasi zinen azken aldian karguak edo interesak sartu bazenituen, "
-"geroago aldatu ahalko dituzu kontabilitate-liburuan.\n"
+"geroago aldatu ahalko dituzu liburu nagusian.\n"
 "\n"
 "Garrantzitsua da berdinkatzea atzeratu zenueneko kontu-laburpen berarekin "
 "jarraitzea.\n"
