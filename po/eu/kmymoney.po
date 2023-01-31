@@ -4,7 +4,7 @@
 # KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2010, 2011, 2013, 2014, 2018, 2020, 2022.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2010, 2011, 2013, 2014, 2018, 2020, 2022, 2023.
 # Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2013.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2013.
 # Ander Elortondo <ander.elor@gmail.com>, 2018, 2020, 2022.
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-14 18:08+0000\n"
-"PO-Revision-Date: 2022-12-19 02:02+0100\n"
+"PO-Revision-Date: 2023-01-29 20:27+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3999,7 +3999,7 @@ msgstr "&Kolore pertsonalizatuak"
 #: kmymoney/dialogs/settings/ksettingscolors.ui:32
 #, kde-format
 msgid "Ledger group separator"
-msgstr "Kontabilitate-liburuko talde-bereizlea"
+msgstr "Liburu nagusiko talde-bereizlea"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:56
@@ -4304,8 +4304,7 @@ msgstr "Erakutsi titulu-barra orri guztietan"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:377
 #, kde-format
 msgid "Synchronize account selection of ledger and investment view"
-msgstr ""
-"Sinkronizatu kontabilitate-liburuko eta inbertsio-ikuspegiko kontu-hautapena"
+msgstr "Sinkronizatu liburu nagusiko eta inbertsio-ikuspegiko kontu-hautapena"
 
 #. i18n: ectx: attribute (title), widget (QWidget, TabPage)
 #. i18n: ectx: attribute (title), widget (QWidget, tabFilter)
@@ -4388,8 +4387,8 @@ msgstr "Ez erakutsi data hau baino lehenagoko transakzioak"
 #, kde-format
 msgid "This option hides all reconciled transactions in the ledger view."
 msgstr ""
-"Kontabilitate-liburuaren ikuspegian transakzio berdinkatu guztiak ezkutatzen "
-"ditu aukera honek."
+"Liburu nagusiaren ikuspegian transakzio berdinkatu guztiak ezkutatzen ditu "
+"aukera honek."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideReconciledTransactions)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:514
@@ -4610,7 +4609,7 @@ msgstr "Orri nagusia"
 #, kde-format
 msgctxt "Ledger view settings"
 msgid "Ledger"
-msgstr "Kontabilitate-liburua"
+msgstr "Liburu nagusia"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:46
 #: kmymoney/views/kmymoneyview.cpp:142
@@ -4955,10 +4954,10 @@ msgid ""
 "summary is displayed for each transaction as the details are shown in the "
 "form."
 msgstr ""
-"Kontabilitate-liburuaren lenteak erabilita, kontabilitate-liburuan "
-"fokuratuta dagoen transakzioaren xehetasunak bistaratzen dira. Transakzio-"
-"inprimakia erabiltzean, lerro bakarreko laburpena baino ez da bistaratzen "
-"transakzio bakoitzeko, xehetasunak inprimakian erakusten baitira."
+"Liburu nagusiaren lenteak erabilita, liburu nagusian fokuratuta dagoen "
+"transakzioaren xehetasunak bistaratzen dira. Transakzio-inprimakia "
+"erabiltzean, lerro bakarreko laburpena baino ez da bistaratzen transakzio "
+"bakoitzeko, xehetasunak inprimakian erakusten baitira."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_LedgerLens)
 #. i18n: ectx: label, entry (LedgerLens), group (General Options)
@@ -4966,7 +4965,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:84
 #, kde-format
 msgid "Use the ledger lens"
-msgstr "Erabili kontabilitate-liburuaren lenteak"
+msgstr "Erabili liburu nagusiaren lenteak"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TransactionForm)
 #. i18n: ectx: label, entry (TransactionForm), group (General Options)
@@ -5388,7 +5387,7 @@ msgstr "(Bat ere ez)"
 #: kmymoney/settings/kmymoney.kcfg:70
 #, kde-format
 msgid "Number of days to preview schedules in ledger"
-msgstr "Antolaketak kontabilitate-liburuan aurreikusteko egun kopurua"
+msgstr "Antolaketak liburu nagusian aurreikusteko egun kopurua"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, TestDialog)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SplitDialog)
@@ -5981,7 +5980,7 @@ msgstr "Kontu berria..."
 #: kmymoney/kmymoney.cpp:1412
 #, kde-format
 msgid "Open ledger"
-msgstr "Ireki kontabilitate-liburua"
+msgstr "Ireki liburu nagusia"
 
 #: kmymoney/kmymoney.cpp:1413
 #, kde-format
@@ -18427,7 +18426,7 @@ msgstr "Erakutsi harrerako pantaila abioan"
 #: kmymoney/settings/kmymoney.kcfg:126
 #, kde-format
 msgid "Synchronize account in ledger and investment view"
-msgstr "Sinkronizatu kontua kontabilitate-liburuan eta inbertsio-ikuspegian"
+msgstr "Sinkronizatu kontua liburu nagusian eta inbertsio-ikuspegian"
 
 #. i18n: ectx: label, entry (viewType), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:130
@@ -19751,7 +19750,7 @@ msgstr "Kendu burtsa-balio hau fitxategitik"
 #: kmymoney/views/kmymoneyview.cpp:146
 #, kde-format
 msgid "Ledgers"
-msgstr "Kontabilitate-liburuak"
+msgstr "Liburu nagusiak"
 
 #: kmymoney/views/kmymoneyview.cpp:149
 #, kde-format
@@ -19806,7 +19805,7 @@ msgstr "Erakutsi onuradunen orria"
 #: kmymoney/views/kmymoneyview.cpp:438
 #, kde-format
 msgid "Show ledgers page"
-msgstr "Erakutsi kontabilitate-liburuen orria"
+msgstr "Erakutsi liburu nagusietako orria"
 
 #: kmymoney/views/kmymoneyview.cpp:439
 #, kde-format
@@ -21875,7 +21874,7 @@ msgid ""
 msgstr ""
 "Beste aldi batean atzeratu zenuen kontu honen berdinkatzea. Kontu hau "
 "berdinkatzen hasi zinen azken aldian karguak edo interesak sartu bazenituen, "
-"geroago aldatu ahalko dituzu kontabilitate-liburuan.\n"
+"geroago aldatu ahalko dituzu liburu nagusian.\n"
 "\n"
 "Garrantzitsua da berdinkatzea atzeratu zenueneko kontu-laburpen berarekin "
 "jarraitzea.\n"
