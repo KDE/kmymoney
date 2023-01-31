@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-30 00:58+0000\n"
-"PO-Revision-Date: 2023-01-10 07:03+0100\n"
+"PO-Revision-Date: 2023-01-29 20:53+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -4033,8 +4033,7 @@ msgstr "Afficher"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowGrid)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:30
-#, fuzzy, kde-format
-#| msgid "Show a grid in the register"
+#, kde-format
 msgid "Show a grid in the ledger"
 msgstr "Afficher une grille dans le grand livre"
 
@@ -4065,17 +4064,15 @@ msgstr "Afficher les échéances arriérées à la date initialement prévue"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:57
-#, fuzzy, kde-format
-#| msgid "Investment details"
+#, kde-format
 msgid "Ledger entry details"
-msgstr "Détails du placement"
+msgstr "Détails sur les entrées du grand livre"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowRegisterDetailed)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:63
-#, fuzzy, kde-format
-#| msgid "Show all register entries in full detail"
+#, kde-format
 msgid "Show all ledger entries in full detail"
-msgstr "Afficher toutes les lignes du grand livre dans tous ses détails"
+msgstr "Afficher toutes les entrées du grand livre avec tous ses détails"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_LedgerLens)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:73
@@ -4102,17 +4099,15 @@ msgstr "Utiliser la loupe du grand livre"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllSplits)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:86
-#, fuzzy, kde-format
-#| msgid "Show all split details in register"
+#, kde-format
 msgid "Show all split details in ledger"
-msgstr "Afficher tous les détails du fractionnement dans le registre"
+msgstr "Afficher tous les détails du fractionnement dans le grand livre"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:96
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgid "Information headers"
-msgstr "Informations"
+msgstr "En-têtes d'informations"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:102
@@ -4126,10 +4121,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:105
-#, fuzzy, kde-format
-#| msgid "Show group header between transactions"
+#, kde-format
 msgid "Show group headers between transactions"
-msgstr "Afficher une en-tête de groupe entre les opérations"
+msgstr "Afficher les en-têtes de groupe entre les opérations"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFiscalMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:115
@@ -4139,23 +4133,23 @@ msgstr "Afficher l'en-tête pour l'exercice fiscal précédent et actuel"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:123
-#, fuzzy, kde-format
-#| msgid "Do not show reconciled transactions"
+#, kde-format
 msgid "Don't show reconciliation entries"
-msgstr "Ne pas afficher les opérations rapprochées"
+msgstr "Ne pas afficher les entrées de réconciliation"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:128
-#, fuzzy, kde-format
-#| msgid "Show date of last reconciliation on the Homepage"
+#, kde-format
 msgid "Show last reconciliation entry with date and balance in ledger"
-msgstr "Afficher la date du dernier rapprochement sur la page d'accueil"
+msgstr "Afficher la dernière entrée de réconciliation avec la date et le bilan"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:133
 #, kde-format
 msgid "Show all reconciliation entries with date and balance in ledger"
 msgstr ""
+"Afficher toutes les entrées de réconciliation avec la date et le bilan dans "
+"le grand livre"
 
 #. i18n: ectx: attribute (title), widget (QWidget, sorting)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:161
@@ -18569,7 +18563,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:264
 #, kde-format
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "Afficher toutes les entrées de réconciliation avec la date et le bilan"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:273

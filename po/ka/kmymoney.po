@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-30 00:58+0000\n"
-"PO-Revision-Date: 2023-01-25 07:01+0100\n"
+"PO-Revision-Date: 2023-01-30 10:14+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -3788,10 +3788,9 @@ msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:96
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgid "Information headers"
-msgstr "ინფორმაცია"
+msgstr "საინფორმაციო თავსართები"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:102
@@ -4412,7 +4411,7 @@ msgstr ""
 #: kmymoney/kmymoney.cpp:887
 #, kde-format
 msgid "Account problem"
-msgstr ""
+msgstr "ანგარიშის პრობლემა"
 
 #: kmymoney/kmymoney.cpp:906
 #, kde-format
@@ -5238,7 +5237,7 @@ msgstr "%1-ის მოხსნა"
 #: kmymoney/kmymoney.cpp:3685
 #, kde-format
 msgid "Error mounting device"
-msgstr ""
+msgstr "მოწყობილობის მიმაგრების შეცდომა"
 
 #: kmymoney/kmymoney.cpp:3700 kmymoney/kmymoney.cpp:3719
 #, kde-format
@@ -10983,7 +10982,7 @@ msgstr "დასრულებულია"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2344
 #, kde-format
 msgid "Save Report"
-msgstr ""
+msgstr "ანგარიშის შენახვა"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2361
 #, kde-format
@@ -12013,7 +12012,7 @@ msgstr "ხელით"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:97
 #, kde-format
 msgid "FID"
-msgstr ""
+msgstr "FID"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:107
@@ -12047,7 +12046,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label account username"
 msgid "Username"
-msgstr ""
+msgstr "მომხმარებლის სახელი"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_3)
@@ -12475,7 +12474,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:148
 #, kde-format
 msgid "OFX..."
-msgstr ""
+msgstr "OFX..."
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:162
 #, kde-format
@@ -12624,7 +12623,7 @@ msgstr ""
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:68
 #, kde-format
 msgid "Create a new profile"
-msgstr ""
+msgstr "ახალი პროფილის შექმნა"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:88
 #, kde-format
@@ -13075,7 +13074,7 @@ msgstr ""
 #: kmymoney/plugins/qif/import/qifimporter.cpp:56
 #, kde-format
 msgid "QIF..."
-msgstr ""
+msgstr "QIF..."
 
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:57
 #, kde-format
@@ -13618,25 +13617,25 @@ msgstr ""
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:178
 #, kde-format
 msgid "Database Type"
-msgstr ""
+msgstr "მონაცემთა ბაზის ტიპი"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:59
 #, kde-format
 msgid "Database Details"
-msgstr ""
+msgstr "მონაცემთა ბაზის დეტალები"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:67
 #, kde-format
 msgid "Database File (SQLite only)"
-msgstr ""
+msgstr "მონაცემთა ბაზის ფაილი (მხოლოდ SQLite)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:77
 #, kde-format
 msgid "Database Name (Others)"
-msgstr ""
+msgstr "მონაცემთა ბაზის სახელი (სხვები)"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:87
@@ -13648,7 +13647,7 @@ msgstr "ჰოსტი"
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:97
 #, kde-format
 msgid "Username"
-msgstr ""
+msgstr "მომხმარებლის სახელი"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:128
@@ -13686,19 +13685,19 @@ msgstr ""
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:188
 #, kde-format
 msgid "Fi&le"
-msgstr ""
+msgstr "&ფაილი"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:217
 #, kde-format
 msgid "Database &Name"
-msgstr ""
+msgstr "&ბაზის სახელი"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:234
 #, kde-format
 msgid "Host &Name"
-msgstr ""
+msgstr "&ჰოსტის სახელი"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:251
@@ -16406,7 +16405,7 @@ msgstr "ზარი"
 #, kde-format
 msgctxt "type of graphic palette"
 msgid "Use application setting"
-msgstr ""
+msgstr "აპლიკაციის პარამეტრის გამოყენება"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:98
 #, kde-format
@@ -17096,7 +17095,7 @@ msgstr ""
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:40
 #, kde-format
 msgid "Your key"
-msgstr ""
+msgstr "თქვენი გასაღები"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, m_masterKeyCombo)
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:56
@@ -17112,7 +17111,7 @@ msgstr ""
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:80
 #, kde-format
 msgid "Additional keys"
-msgstr ""
+msgstr "დამატებითი გასაღებები"
 
 #. i18n: ectx: property (whatsThis), widget (KEditListWidget, kcfg_GpgRecipientList)
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:74
@@ -18164,7 +18163,7 @@ msgstr ""
 #: kmymoney/views/kcategoriesview.cpp:356
 #, kde-format
 msgid "Delete all"
-msgstr ""
+msgstr "ყველას წაშლა"
 
 #: kmymoney/views/kcategoriesview.cpp:357
 #, kde-format
@@ -21666,8 +21665,8 @@ msgstr[1] ""
 #, kde-format
 msgid "one year"
 msgid_plural "%1 years"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 წელი"
+msgstr[1] "%1 წელი"
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:348
 #: kmymoney/wizards/newloanwizard/durationwizardpage.cpp:115
