@@ -57,6 +57,8 @@ public Q_SLOTS:
     void slotPrintView();
     void slotPrintPreviewView();
     void slotSettingsChanged() override;
+    void slotDisableRefresh();
+    void slotEnableRefresh();
 
 private:
     Q_DECLARE_PRIVATE(KHomeView)

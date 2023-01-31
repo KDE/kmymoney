@@ -70,6 +70,10 @@ private Q_SLOTS:
     void slotAccountUnmapOnline();
     void slotAccountUpdateOnline();
     void slotAccountUpdateOnlineAll();
+
+Q_SIGNALS:
+    void beginImportingStatements();
+    void endImportingStatements();
 };
 
 #endif

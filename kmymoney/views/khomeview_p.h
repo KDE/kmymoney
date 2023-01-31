@@ -106,11 +106,12 @@ class KHomeViewPrivate : public KMyMoneyViewBasePrivate
     Q_DECLARE_PUBLIC(KHomeView)
 
 public:
-    explicit KHomeViewPrivate(KHomeView *qq)
+    explicit KHomeViewPrivate(KHomeView* qq)
         : KMyMoneyViewBasePrivate(qq)
         , m_view(nullptr)
         , m_showAllSchedules(false)
         , m_needLoad(true)
+        , m_skipRefresh(false)
         , m_netWorthGraphLastValidSize(400, 300)
         , m_scrollBarPos(0)
         , m_fileOpen(false)
@@ -1905,11 +1906,12 @@ public:
 
     KMMTextBrowser* m_view;
 
-    QString           m_html;
-    bool              m_showAllSchedules;
-    bool              m_needLoad;
-    MyMoneyForecast   m_forecast;
-    MyMoneyMoney      m_total;
+    QString m_html;
+    bool m_showAllSchedules;
+    bool m_needLoad;
+    bool m_skipRefresh;
+    MyMoneyForecast m_forecast;
+    MyMoneyMoney m_total;
     /**
       * Hold the last valid size of the net worth graph
       * for the times when the needed size can't be computed.

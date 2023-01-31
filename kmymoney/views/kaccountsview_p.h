@@ -348,6 +348,7 @@ public:
 
     void accountsUpdateOnline(const QList<MyMoneyAccount>& accList)
     {
+        Q_Q(KAccountsView);
         // block the update account actions for now so that we don't get here twice
         const QVector<eMenu::Action> disabledActions {eMenu::Action::UpdateAccount, eMenu::Action::UpdateAllAccounts};
         for (const auto& a : disabledActions)
@@ -361,6 +362,7 @@ public:
         // 'moreAccounts' parameter in the call to updateAccount() to false
         auto processedAccounts = 0;
 
+        Q_EMIT q->beginImportingStatements();
         for (auto it_provider = m_onlinePlugins->constBegin(); it_provider != m_onlinePlugins->constEnd(); ++it_provider) {
             auto nextAccount = accList.cend();
             for (auto it_a = accList.cbegin(); it_a != accList.cend(); ++it_a) {
@@ -378,6 +380,7 @@ public:
                 (*it_provider)->updateAccount(*nextAccount, false);
             }
         }
+        Q_EMIT q->endImportingStatements();
 
         // re-enable the disabled actions
         updateActions(m_currentAccount);

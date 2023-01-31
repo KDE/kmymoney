@@ -98,7 +98,7 @@ void KHomeView::executeCustomAction(eView::Action action)
 void KHomeView::refresh()
 {
     Q_D(KHomeView);
-    if (isVisible()) {
+    if (isVisible() && !d->m_skipRefresh) {
         d->loadView();
         d->m_needsRefresh = false;
     } else {
@@ -235,6 +235,19 @@ void KHomeView::slotOpenUrl(const QUrl &url)
 
 void KHomeView::slotSettingsChanged()
 {
+    refresh();
+}
+
+void KHomeView::slotDisableRefresh()
+{
+    Q_D(KHomeView);
+    d->m_skipRefresh = true;
+}
+
+void KHomeView::slotEnableRefresh()
+{
+    Q_D(KHomeView);
+    d->m_skipRefresh = false;
     refresh();
 }
 

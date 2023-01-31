@@ -206,9 +206,11 @@ KMyMoneyView::KMyMoneyView()
 
     d->m_model = new KPageWidgetModel(this); // cannot be parentless, otherwise segfaults at exit
 
-    d->viewBases[View::Home] = new KHomeView;
+    const auto homeView = new KHomeView;
+    const auto accountsView = new KAccountsView;
+    d->viewBases[View::Home] = homeView;
     d->viewBases[View::Institutions] = new KInstitutionsView;
-    d->viewBases[View::Accounts] = new KAccountsView;
+    d->viewBases[View::Accounts] = accountsView;
     d->viewBases[View::Schedules] = new KScheduledView;
     d->viewBases[View::Categories] = new KCategoriesView;
     d->viewBases[View::Tags] = new KTagsView;
@@ -224,6 +226,10 @@ KMyMoneyView::KMyMoneyView()
     setModel(d->m_model);
     setCurrentPage(d->viewFrames[View::Home]);
     connect(this, &KMyMoneyView::currentPageChanged, this, &KMyMoneyView::slotSwitchView);
+
+    // suppress update of homepage during statement import
+    connect(accountsView, &KAccountsView::beginImportingStatements, homeView, &KHomeView::slotDisableRefresh);
+    connect(accountsView, &KAccountsView::endImportingStatements, homeView, &KHomeView::slotEnableRefresh);
 
     updateViewType();
 }
