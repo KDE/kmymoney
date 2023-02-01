@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-14 18:08+0000\n"
-"PO-Revision-Date: 2023-01-31 01:17+0300\n"
+"PO-Revision-Date: 2023-02-01 00:42+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -4071,7 +4071,7 @@ msgstr "Yazıtipi ayarları"
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:23
 #, kde-format
 msgid "Use system fonts"
-msgstr "Sistem yazı tiplerini kullan"
+msgstr "Sistem yazıtiplerini kullan"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_individualFontsFrame)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:30
@@ -4653,7 +4653,7 @@ msgstr "Renkler"
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:49
 #, kde-format
 msgid "Fonts"
-msgstr "Yazı Tipleri"
+msgstr "Yazıtipleri"
 
 #: kmymoney/dialogs/settings/ksettingskmymoney.cpp:51
 #, kde-format
@@ -14716,7 +14716,7 @@ msgstr "Oluşturma işlemi için SQL"
 #: kmymoney/plugins/sql/kselectdatabasedlg.cpp:87
 #, kde-format
 msgid "Qt SQL driver %1 is no longer installed on your system"
-msgstr "Qt SQL sürücüsü %1 artık sisteminizde yüklü değil"
+msgstr "Qt SQL sürücüsü %1 artık sisteminizde kurulu değil"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSelectDatabaseDlg)
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:26
