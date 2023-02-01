@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-30 00:58+0000\n"
+"POT-Creation-Date: 2023-02-01 00:57+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -1038,8 +1038,8 @@ msgstr "Tecaj/Urednik Cjena"
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:246
 #: kmymoney/plugins/views/reports/core/listtable.cpp:615
-#: kmymoney/views/khomeview_p.h:633 kmymoney/views/khomeview_p.h:695
-#: kmymoney/views/khomeview_p.h:735 kmymoney/views/newspliteditor.ui:32
+#: kmymoney/views/khomeview_p.h:634 kmymoney/views/khomeview_p.h:696
+#: kmymoney/views/khomeview_p.h:736 kmymoney/views/newspliteditor.ui:32
 #: kmymoney/views/newtransactioneditor.ui:56
 #: kmymoney/views/newtransactionform.ui:145
 #: kmymoney/widgets/ktransactionfilter.cpp:131
@@ -1123,8 +1123,8 @@ msgstr "xxx"
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:120
 #: kmymoney/plugins/views/reports/core/listtable.cpp:613
 #: kmymoney/views/investtransactioneditor.ui:245
-#: kmymoney/views/khomeview_p.h:618 kmymoney/views/khomeview_p.h:680
-#: kmymoney/views/khomeview_p.h:720 kmymoney/views/newtransactioneditor.ui:78
+#: kmymoney/views/khomeview_p.h:619 kmymoney/views/khomeview_p.h:681
+#: kmymoney/views/khomeview_p.h:721 kmymoney/views/newtransactioneditor.ui:78
 #: kmymoney/views/newtransactionform.ui:110
 #: kmymoney/widgets/ktransactionfilter.cpp:122
 #: kmymoney/widgets/ktransactionfilter.ui:138
@@ -2086,7 +2086,7 @@ msgstr "Tip"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:237
 #: kmymoney/views/investtransactioneditor.ui:51
 #: kmymoney/views/investtransactioneditor.ui:221
-#: kmymoney/views/khomeview_p.h:1016
+#: kmymoney/views/khomeview_p.h:1017
 #, kde-format
 msgid "Total"
 msgstr "Ukupno"
@@ -2296,7 +2296,7 @@ msgid "Liability"
 msgstr "Obaveza"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:520 kmymoney/kmymoney.cpp:429
-#: kmymoney/models/ledgerfilterbase.cpp:72 kmymoney/views/khomeview_p.h:1774
+#: kmymoney/models/ledgerfilterbase.cpp:72 kmymoney/views/khomeview_p.h:1775
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:379
@@ -4307,8 +4307,8 @@ msgstr "Očišćeno"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:345
 #: kmymoney/plugins/views/reports/core/listtable.cpp:637
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:992 kmymoney/views/khomeview_p.h:1347
-#: kmymoney/views/khomeview_p.h:1376
+#: kmymoney/views/khomeview_p.h:993 kmymoney/views/khomeview_p.h:1348
+#: kmymoney/views/khomeview_p.h:1377
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -6127,7 +6127,7 @@ msgstr "Aktiva i pasiva"
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:64
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1510
+#: kmymoney/views/khomeview_p.h:1511
 #, kde-format
 msgid "Budget"
 msgstr "Budžet"
@@ -9925,9 +9925,9 @@ msgstr "Vrsta računa:"
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:92
-#: kmymoney/views/khomeview_p.h:630 kmymoney/views/khomeview_p.h:692
-#: kmymoney/views/khomeview_p.h:732 kmymoney/views/khomeview_p.h:979
-#: kmymoney/views/khomeview_p.h:1107 kmymoney/views/newtransactioneditor.ui:17
+#: kmymoney/views/khomeview_p.h:631 kmymoney/views/khomeview_p.h:693
+#: kmymoney/views/khomeview_p.h:733 kmymoney/views/khomeview_p.h:980
+#: kmymoney/views/khomeview_p.h:1108 kmymoney/views/newtransactioneditor.ui:17
 #: kmymoney/widgets/ktransactionfilter.cpp:116
 #: kmymoney/widgets/ktransactionfilter.ui:113
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:73
@@ -10281,8 +10281,8 @@ msgstr "Očisti odabire"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:683
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:995 kmymoney/views/khomeview_p.h:1350
-#: kmymoney/views/khomeview_p.h:1379
+#: kmymoney/views/khomeview_p.h:996 kmymoney/views/khomeview_p.h:1351
+#: kmymoney/views/khomeview_p.h:1380
 #, kde-format
 msgid "Balance"
 msgstr "Bilans"
@@ -15651,13 +15651,13 @@ msgstr[1] "%1 dana"
 msgstr[2] "%1 dana"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:379
-#: kmymoney/views/khomeview_p.h:1176
+#: kmymoney/views/khomeview_p.h:1177
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr "Bilans %1 je ispod minimalnog bilansa %2 danas."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:384
-#: kmymoney/views/khomeview_p.h:1180
+#: kmymoney/views/khomeview_p.h:1181
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
 msgid_plural ""
@@ -15667,19 +15667,19 @@ msgstr[1] "Bilans od %2 će pasti ispod minimalnog bilansa %3 u %1 dana."
 msgstr[2] "Bilans od %2 će pasti ispod minimalnog bilansa %3 u %1 dana."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:403
-#: kmymoney/views/khomeview_p.h:1198
+#: kmymoney/views/khomeview_p.h:1199
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr "Bilans od %1 je ispod %2 danas."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:408
-#: kmymoney/views/khomeview_p.h:1203
+#: kmymoney/views/khomeview_p.h:1204
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr "Bilans od %1 je iznad %2 danas."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:415
-#: kmymoney/views/khomeview_p.h:1209
+#: kmymoney/views/khomeview_p.h:1210
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
@@ -15688,7 +15688,7 @@ msgstr[1] "Bilans od %2 će pasti ispod %3 za %1 dana."
 msgstr[2] "Bilans od %2 će pasti ispod %3 za %1 dana."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:422
-#: kmymoney/views/khomeview_p.h:1216
+#: kmymoney/views/khomeview_p.h:1217
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
@@ -15753,7 +15753,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "Pokazi ovaj grafikon u obliku izvještaja"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:660
-#: kmymoney/views/khomeview_p.h:527 kmymoney/views/khomeview_p.h:1514
+#: kmymoney/views/khomeview_p.h:528 kmymoney/views/khomeview_p.h:1515
 #, fuzzy, kde-format
 #| msgid "Show the report version of this chart"
 msgid "Enable reports plugin to see this chart."
@@ -16549,7 +16549,7 @@ msgstr "Opseg"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:171
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
 #: kmymoney/plugins/views/reports/kreportsview_p.h:430
-#: kmymoney/views/khomeview_p.h:1050
+#: kmymoney/views/khomeview_p.h:1051
 #, kde-format
 msgid "Report"
 msgstr "Izvještaj"
@@ -16870,7 +16870,7 @@ msgstr "Izvještaji"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:51
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:49
-#: kmymoney/views/khomeview_p.h:1052
+#: kmymoney/views/khomeview_p.h:1053
 #, kde-format
 msgid "Comment"
 msgstr "Komentar"
@@ -16904,7 +16904,7 @@ msgid "Charts"
 msgstr "Grafikoni"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:660
-#: kmymoney/views/khomeview_p.h:1045
+#: kmymoney/views/khomeview_p.h:1046
 #, kde-format
 msgid "Favorite Reports"
 msgstr "Omiljeni izvještaji"
@@ -16950,7 +16950,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Torta dijagram prihoda i troškova"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:867
-#: kmymoney/views/khomeview_p.h:1486
+#: kmymoney/views/khomeview_p.h:1487
 #, kde-format
 msgid "Net Worth"
 msgstr "Neto vrijednost"
@@ -17281,7 +17281,7 @@ msgstr "Zatvori"
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:82
 #: kmymoney/plugins/views/reports/reportsview.cpp:118
-#: kmymoney/views/khomeview_p.h:513
+#: kmymoney/views/khomeview_p.h:514
 #, kde-format
 msgid "Net Worth Forecast"
 msgstr "Prognoza neto vrijednosti"
@@ -20021,94 +20021,94 @@ msgstr ""
 "financijskom statusu, morate kreirati barem jedan nalog. Do tada KMyMoney "
 "prikazuje stranicu dobrodošlice."
 
-#: kmymoney/views/khomeview_p.h:453
+#: kmymoney/views/khomeview_p.h:454
 #, kde-format
 msgid "Preferred Accounts"
 msgstr "Preferirani računi"
 
-#: kmymoney/views/khomeview_p.h:459 kmymoney/views/khomeview_p.h:461
+#: kmymoney/views/khomeview_p.h:460 kmymoney/views/khomeview_p.h:462
 #, kde-format
 msgid "Payment Accounts"
 msgstr "Računi plaćanja"
 
-#: kmymoney/views/khomeview_p.h:605
+#: kmymoney/views/khomeview_p.h:606
 #, fuzzy, kde-format
 #| msgid "Schedule name:"
 msgid "Scheduled Payments"
 msgstr "Ime rasporeda:"
 
-#: kmymoney/views/khomeview_p.h:615
+#: kmymoney/views/khomeview_p.h:616
 #, kde-format
 msgid "Overdue payments"
 msgstr "Zakašnjela plaćanja"
 
-#: kmymoney/views/khomeview_p.h:621 kmymoney/views/khomeview_p.h:683
-#: kmymoney/views/khomeview_p.h:723
+#: kmymoney/views/khomeview_p.h:622 kmymoney/views/khomeview_p.h:684
+#: kmymoney/views/khomeview_p.h:724
 #, fuzzy, kde-format
 #| msgctxt "Go to next page of the wizard"
 #| msgid "&Next"
 msgid "Next"
 msgstr "&Sljedeći"
 
-#: kmymoney/views/khomeview_p.h:624 kmymoney/views/khomeview_p.h:686
-#: kmymoney/views/khomeview_p.h:726
+#: kmymoney/views/khomeview_p.h:625 kmymoney/views/khomeview_p.h:687
+#: kmymoney/views/khomeview_p.h:727
 #, kde-format
 msgid "Skip"
 msgstr "Preskoči"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, ScheduleWizardPage)
-#: kmymoney/views/khomeview_p.h:627 kmymoney/views/khomeview_p.h:689
-#: kmymoney/views/khomeview_p.h:729
+#: kmymoney/views/khomeview_p.h:628 kmymoney/views/khomeview_p.h:690
+#: kmymoney/views/khomeview_p.h:730
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:78
 #: kmymoney/wizards/newloanwizard/schedulewizardpage.ui:6
 #, kde-format
 msgid "Schedule"
 msgstr "Raspored"
 
-#: kmymoney/views/khomeview_p.h:636 kmymoney/views/khomeview_p.h:698
-#: kmymoney/views/khomeview_p.h:738
+#: kmymoney/views/khomeview_p.h:637 kmymoney/views/khomeview_p.h:699
+#: kmymoney/views/khomeview_p.h:739
 #, kde-format
 msgid "Balance after"
 msgstr "Bilans nakon"
 
-#: kmymoney/views/khomeview_p.h:677
+#: kmymoney/views/khomeview_p.h:678
 #, kde-format
 msgid "Today's due payments"
 msgstr "Plaćanja s današnjim dospijećem"
 
-#: kmymoney/views/khomeview_p.h:717
+#: kmymoney/views/khomeview_p.h:718
 #, kde-format
 msgid "Future payments"
 msgstr "Buduća plaćanja"
 
-#: kmymoney/views/khomeview_p.h:805
+#: kmymoney/views/khomeview_p.h:806
 #, kde-format
 msgctxt "Less..."
 msgid "Show fewer schedules on the list"
 msgstr "Prikaži manje planova na popisu"
 
-#: kmymoney/views/khomeview_p.h:807
+#: kmymoney/views/khomeview_p.h:808
 #, kde-format
 msgctxt "More..."
 msgid "Show more schedules on the list"
 msgstr "Prikaži više planova na popisu"
 
-#: kmymoney/views/khomeview_p.h:837
+#: kmymoney/views/khomeview_p.h:838
 #, kde-format
 msgid "Enter schedule"
 msgstr "Unesi raspored"
 
-#: kmymoney/views/khomeview_p.h:841
+#: kmymoney/views/khomeview_p.h:842
 #, kde-format
 msgid "Skip schedule"
 msgstr "Preskoči raspored"
 
-#: kmymoney/views/khomeview_p.h:845
+#: kmymoney/views/khomeview_p.h:846
 #, kde-format
 msgid "Edit schedule"
 msgstr "Uredi raspored"
 
-#: kmymoney/views/khomeview_p.h:849
+#: kmymoney/views/khomeview_p.h:850
 #, kde-format
 msgid " (%1 payment)"
 msgid_plural " (%1 payments)"
@@ -20116,20 +20116,20 @@ msgstr[0] " (%1 uplata)"
 msgstr[1] " (%1 uplate)"
 msgstr[2] " (%1 uplata)"
 
-#: kmymoney/views/khomeview_p.h:983
+#: kmymoney/views/khomeview_p.h:984
 #, kde-format
 msgctxt "Header not marked"
 msgid "!M"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:986
+#: kmymoney/views/khomeview_p.h:987
 #, fuzzy, kde-format
 #| msgid "C"
 msgctxt "Header cleared"
 msgid "C"
 msgstr "C"
 
-#: kmymoney/views/khomeview_p.h:989
+#: kmymoney/views/khomeview_p.h:990
 #, fuzzy, kde-format
 #| msgctxt "Reconciliation flag R"
 #| msgid "R"
@@ -20137,13 +20137,13 @@ msgctxt "Header not reconciled"
 msgid "!R"
 msgstr "R"
 
-#: kmymoney/views/khomeview_p.h:1001
+#: kmymoney/views/khomeview_p.h:1002
 #, fuzzy, kde-format
 #| msgid "To Minimum Balance / Maximum Credit"
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr "Na najmanji bilans/najveći kredit"
 
-#: kmymoney/views/khomeview_p.h:1101
+#: kmymoney/views/khomeview_p.h:1102
 #, fuzzy, kde-format
 #| msgid "%1 Day Forecast"
 msgctxt "Forecast days"
@@ -20153,7 +20153,7 @@ msgstr[0] "%1 dan prognoza"
 msgstr[1] "%1 dan prognoza"
 msgstr[2] "%1 dan prognoza"
 
-#: kmymoney/views/khomeview_p.h:1112
+#: kmymoney/views/khomeview_p.h:1113
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 day"
@@ -20162,97 +20162,97 @@ msgstr[0] "%1 dan"
 msgstr[1] "%1 dana"
 msgstr[2] "%1 dana"
 
-#: kmymoney/views/khomeview_p.h:1320
+#: kmymoney/views/khomeview_p.h:1321
 #, kde-format
 msgid "Assets and Liabilities Summary"
 msgstr "Sažetak imovine i obveza"
 
-#: kmymoney/views/khomeview_p.h:1334
+#: kmymoney/views/khomeview_p.h:1335
 #, kde-format
 msgid "Asset Accounts"
 msgstr "Računi imovine"
 
-#: kmymoney/views/khomeview_p.h:1363
+#: kmymoney/views/khomeview_p.h:1364
 #, kde-format
 msgid "Liability Accounts"
 msgstr "Računi obaveza"
 
-#: kmymoney/views/khomeview_p.h:1465
+#: kmymoney/views/khomeview_p.h:1466
 #, kde-format
 msgid "Total Assets"
 msgstr "Ukupna imovina"
 
-#: kmymoney/views/khomeview_p.h:1475
+#: kmymoney/views/khomeview_p.h:1476
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Ukupne obveze"
 
-#: kmymoney/views/khomeview_p.h:1764
+#: kmymoney/views/khomeview_p.h:1765
 #, kde-format
 msgid "Cash Flow Summary"
 msgstr "Pregled novčanog toka"
 
-#: kmymoney/views/khomeview_p.h:1769
+#: kmymoney/views/khomeview_p.h:1770
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Prihodi i rashodi u tekućem mjesecu"
 
-#: kmymoney/views/khomeview_p.h:1777
+#: kmymoney/views/khomeview_p.h:1778
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Predviđeni prihodi"
 
-#: kmymoney/views/khomeview_p.h:1780
+#: kmymoney/views/khomeview_p.h:1781
 #, kde-format
 msgid "Expenses"
 msgstr "Troškovi"
 
-#: kmymoney/views/khomeview_p.h:1783
+#: kmymoney/views/khomeview_p.h:1784
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Predviđeni troškovi"
 
-#: kmymoney/views/khomeview_p.h:1811
+#: kmymoney/views/khomeview_p.h:1812
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Tekuća aktiva i pasiva"
 
-#: kmymoney/views/khomeview_p.h:1816
+#: kmymoney/views/khomeview_p.h:1817
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Tekuća imovina"
 
-#: kmymoney/views/khomeview_p.h:1819
+#: kmymoney/views/khomeview_p.h:1820
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Transferi kratkoročnih obveza"
 
-#: kmymoney/views/khomeview_p.h:1822
+#: kmymoney/views/khomeview_p.h:1823
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Tekuća pasiva"
 
-#: kmymoney/views/khomeview_p.h:1825
+#: kmymoney/views/khomeview_p.h:1826
 #, kde-format
 msgid "Other Transfers"
 msgstr "Ostali transferi"
 
-#: kmymoney/views/khomeview_p.h:1868
+#: kmymoney/views/khomeview_p.h:1869
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Stanje novčanog toka"
 
-#: kmymoney/views/khomeview_p.h:1873
+#: kmymoney/views/khomeview_p.h:1874
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Očekivana tekuća imovina"
 
-#: kmymoney/views/khomeview_p.h:1876
+#: kmymoney/views/khomeview_p.h:1877
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Očekivana tekuća pasiva"
 
-#: kmymoney/views/khomeview_p.h:1879
+#: kmymoney/views/khomeview_p.h:1880
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Očekivani profit/gubitak"
@@ -20341,76 +20341,76 @@ msgstr "&Traži:"
 msgid "Ledgers"
 msgstr "Knjige"
 
-#: kmymoney/views/kmymoneyview.cpp:510
+#: kmymoney/views/kmymoneyview.cpp:516
 #, fuzzy, kde-format
 #| msgid "Show KMyMoney welcome page"
 msgid "Show home page"
 msgstr "Pokaži KMyMoney naslovnu stranicu"
 
-#: kmymoney/views/kmymoneyview.cpp:511
+#: kmymoney/views/kmymoneyview.cpp:517
 #, fuzzy, kde-format
 msgid "Show institutions page"
 msgstr "Oznaka institucije"
 
-#: kmymoney/views/kmymoneyview.cpp:512
+#: kmymoney/views/kmymoneyview.cpp:518
 #, fuzzy, kde-format
 #| msgid "Show all accounts"
 msgid "Show accounts page"
 msgstr "Prikaži sve račune"
 
-#: kmymoney/views/kmymoneyview.cpp:513
+#: kmymoney/views/kmymoneyview.cpp:519
 #, fuzzy, kde-format
 #| msgid "Scheduled transactions"
 msgid "Show scheduled transactions page"
 msgstr "Isplanirane transakcije"
 
-#: kmymoney/views/kmymoneyview.cpp:514
+#: kmymoney/views/kmymoneyview.cpp:520
 #, fuzzy, kde-format
 #| msgid "Income categories"
 msgid "Show categories page"
 msgstr "Prihodne kategorije"
 
-#: kmymoney/views/kmymoneyview.cpp:515
+#: kmymoney/views/kmymoneyview.cpp:521
 #, fuzzy, kde-format
 #| msgid "Show totals column"
 msgid "Show tags page"
 msgstr "Prikaži sumarne kolone"
 
-#: kmymoney/views/kmymoneyview.cpp:516
+#: kmymoney/views/kmymoneyview.cpp:522
 #, fuzzy, kde-format
 #| msgid "Show KMyMoney welcome page"
 msgid "Show payees page"
 msgstr "Pokaži KMyMoney naslovnu stranicu"
 
-#: kmymoney/views/kmymoneyview.cpp:517
+#: kmymoney/views/kmymoneyview.cpp:523
 #, kde-format
 msgid "Show ledgers page"
 msgstr ""
 
-#: kmymoney/views/kmymoneyview.cpp:518
+#: kmymoney/views/kmymoneyview.cpp:524
 #, fuzzy, kde-format
 #| msgid "Investments"
 msgid "Show investments page"
 msgstr "Investicije"
 
-#: kmymoney/views/kmymoneyview.cpp:519
+#: kmymoney/views/kmymoneyview.cpp:525
 #, fuzzy, kde-format
 #| msgid "Save report as"
 msgid "Show reports page"
 msgstr "Spremi izvještaj kao"
 
-#: kmymoney/views/kmymoneyview.cpp:520
+#: kmymoney/views/kmymoneyview.cpp:526
 #, fuzzy, kde-format
 #| msgid "New budget"
 msgid "Show budget page"
 msgstr "Novi budžet"
 
-#: kmymoney/views/kmymoneyview.cpp:521
+#: kmymoney/views/kmymoneyview.cpp:527
 #, kde-format
 msgid "Show forecast page"
 msgstr ""
 
-#: kmymoney/views/kmymoneyview.cpp:522
+#: kmymoney/views/kmymoneyview.cpp:528
 #, fuzzy, kde-format
 #| msgid "Show title bar on each page"
 msgid "Show outbox page"
