@@ -75,7 +75,7 @@ void LedgerViewPage::initModel()
 {
     // setup the model stack
     const auto file = MyMoneyFile::instance();
-    const auto viewSettings = LedgerViewSettings::instance();
+    auto viewSettings = LedgerViewSettings::instance();
     d->accountFilter =
         new LedgerAccountFilter(d->ui->m_ledgerView,
                                 QVector<QAbstractItemModel*>{file->specialDatesModel(), file->schedulesJournalModel(), file->reconciliationModel()});
@@ -118,6 +118,7 @@ void LedgerViewPage::initModel()
     d->ui->m_ledgerView->setModel(d->specialItemFilter);
 
     connect(viewSettings, &LedgerViewSettings::settingsChanged, this, [&]() {
+        viewSettings = LedgerViewSettings::instance();
         d->accountFilter->setHideReconciledTransactions(viewSettings->hideReconciledTransactions());
         d->accountFilter->setHideTransactionsBefore(viewSettings->hideTransactionsBefore());
         d->specialItemFilter->setShowReconciliationEntries(viewSettings->showReconciliationEntries());
