@@ -3,22 +3,22 @@
 # Vít Pelčák <vit@pelcak.org>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017.
 # Petr Bravenec <spravce@solartec.cz>, 2010.
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012, 2013.
-# Vit Pelcak <vit@pelcak.org>, 2015, 2018, 2019, 2020, 2021.
+# Vit Pelcak <vit@pelcak.org>, 2015, 2018, 2019, 2020, 2021, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-14 18:08+0000\n"
-"PO-Revision-Date: 2021-08-16 12:37+0200\n"
-"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"PO-Revision-Date: 2023-02-02 15:13+0100\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.04.3\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2742,7 +2742,7 @@ msgstr "Smazat cenu..."
 #, kde-format
 msgctxt "Menu header"
 msgid "Price options"
-msgstr ""
+msgstr "Volby cen"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KMyMoneyPriceDlg)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:14
@@ -3835,7 +3835,7 @@ msgstr "Krátký popis"
 #: kmymoney/dialogs/ktemplateexportdlg.ui:33
 #, kde-format
 msgid "Long Description"
-msgstr ""
+msgstr "Dlouhý popis"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/ktemplateexportdlg.ui:43
@@ -5441,7 +5441,7 @@ msgstr ""
 #: kmymoney/kcreditswindow.cpp:41
 #, kde-format
 msgid "(c) 2000-2022 The KMyMoney development team"
-msgstr ""
+msgstr "(c) 2000-2022 Vývojový tým KMyMoney"
 
 #: kmymoney/kcreditswindow.cpp:44
 #, kde-format
@@ -5458,7 +5458,7 @@ msgstr "Thomas Baumgart"
 #: kmymoney/kcreditswindow.cpp:46
 #, kde-format
 msgid "Core engine, Release Manager, Project admin"
-msgstr ""
+msgstr "Jádro aplikace, manažer vydání, správce projektu"
 
 #: kmymoney/kcreditswindow.cpp:47
 #, kde-format
@@ -5503,7 +5503,7 @@ msgstr "Neaktivní člen."
 #: kmymoney/kcreditswindow.cpp:52
 #, kde-format
 msgid "Initial idea, much initial source code, Project admin"
-msgstr ""
+msgstr "Původní nápad, spousta kódu ze začátku, administrátor projektu"
 
 #: kmymoney/kcreditswindow.cpp:53
 #, kde-format
@@ -5533,7 +5533,7 @@ msgstr "Tony Bloomfield"
 #: kmymoney/kcreditswindow.cpp:55
 #, kde-format
 msgid "Database backend, maintainer stable branch"
-msgstr ""
+msgstr "Podpůrná vrstva databáze, správce stabilní větve"
 
 #: kmymoney/kcreditswindow.cpp:56
 #, kde-format
@@ -5568,7 +5568,7 @@ msgstr ""
 #: kmymoney/kcreditswindow.cpp:60
 #, kde-format
 msgid "Documentation and user support"
-msgstr ""
+msgstr "Dokumentace a uživatelská podpora"
 
 #: kmymoney/kcreditswindow.cpp:61
 #, kde-format
@@ -5578,7 +5578,7 @@ msgstr "Kevin Tambascio"
 #: kmymoney/kcreditswindow.cpp:61
 #, kde-format
 msgid "Initial investment support"
-msgstr ""
+msgstr "Počáteční podpora investic"
 
 #: kmymoney/kcreditswindow.cpp:62
 #, kde-format
@@ -5588,7 +5588,7 @@ msgstr "Javier Campos Morales"
 #: kmymoney/kcreditswindow.cpp:62
 #, kde-format
 msgid "Developer & Artist"
-msgstr ""
+msgstr "Vývojář a umělec"
 
 #: kmymoney/kcreditswindow.cpp:63
 #, kde-format
@@ -5608,7 +5608,7 @@ msgstr "Laurent Montel"
 #: kmymoney/kcreditswindow.cpp:64
 #, kde-format
 msgid "Patches and port to kde4"
-msgstr ""
+msgstr "Opravy a port na KDE4"
 
 #: kmymoney/kcreditswindow.cpp:65
 #, kde-format
@@ -7002,7 +7002,7 @@ msgstr "DPH"
 #, kde-format
 msgctxt "Column heading for Cost Center"
 msgid "CC"
-msgstr ""
+msgstr "Kopie"
 
 #: kmymoney/models/accountsmodel.cpp:772
 #, kde-format
@@ -7033,7 +7033,7 @@ msgstr "Účty bez přiřazené instituce"
 #: kmymoney/models/costcentermodel.cpp:79
 #, kde-format
 msgid "Cost center"
-msgstr ""
+msgstr "Nákladové středisko"
 
 #. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
 #: kmymoney/models/equitiesmodel.cpp:350
@@ -7043,7 +7043,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title stock symbol column"
 msgid "Symbol"
-msgstr ""
+msgstr "Symbol"
 
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
 #: kmymoney/models/equitiesmodel.cpp:352 kmymoney/models/ledgermodel.cpp:120
@@ -7240,7 +7240,7 @@ msgstr "Zlomek"
 #: kmymoney/models/splitmodel.cpp:110
 #, kde-format
 msgid "Cost Center"
-msgstr ""
+msgstr "Nákladové středisko"
 
 #: kmymoney/models/splitmodel.cpp:114
 #, kde-format
@@ -8941,37 +8941,37 @@ msgstr ""
 #, kde-format
 msgctxt "Split header"
 msgid "Category"
-msgstr ""
+msgstr "Kategorie"
 
 #: kmymoney/mymoney/splitmodel.cpp:35
 #, kde-format
 msgctxt "Split header"
 msgid "Memo"
-msgstr ""
+msgstr "Poznámka"
 
 #: kmymoney/mymoney/splitmodel.cpp:36
 #, kde-format
 msgctxt "Split header"
 msgid "Payment"
-msgstr ""
+msgstr "Platba"
 
 #: kmymoney/mymoney/splitmodel.cpp:37
 #, kde-format
 msgctxt "Split header"
 msgid "Deposit"
-msgstr ""
+msgstr "Vklad"
 
 #: kmymoney/mymoney/statusmodel.cpp:52
 #, kde-format
 msgctxt "Reconciliation state"
 msgid "Status"
-msgstr ""
+msgstr "Stav"
 
 #: kmymoney/mymoney/storage/budgetsmodel.cpp:67
 #, kde-format
 msgctxt "Budget year"
 msgid "Year"
-msgstr ""
+msgstr "Rok"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:100
 #: kmymoney/widgets/investtransaction.cpp:132
@@ -9113,67 +9113,67 @@ msgstr "Plátce"
 #, kde-format
 msgctxt "Schedule group"
 msgid "Bills"
-msgstr ""
+msgstr "Výběry"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:152
 #, kde-format
 msgctxt "Schedule group"
 msgid "Deposits"
-msgstr ""
+msgstr "Vklady"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:153
 #, kde-format
 msgctxt "Schedule group"
 msgid "Transfers"
-msgstr ""
+msgstr "Převody"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:154
 #, kde-format
 msgctxt "Schedule group"
 msgid "Loans"
-msgstr ""
+msgstr "Půjčky"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:179
 #, kde-format
 msgctxt "Schedule header"
 msgid "Type/Name"
-msgstr ""
+msgstr "Typ/Název"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:180
 #, kde-format
 msgctxt "Schedule header"
 msgid "Account"
-msgstr ""
+msgstr "Účet"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:181
 #, kde-format
 msgctxt "Schedule header"
 msgid "Payee"
-msgstr ""
+msgstr "Plátce"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:182
 #, kde-format
 msgctxt "Schedule header"
 msgid "Amount"
-msgstr ""
+msgstr "Částka"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:183
 #, kde-format
 msgctxt "Schedule header"
 msgid "Next Due Date"
-msgstr ""
+msgstr "Následující datum splatnosti"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:184
 #, kde-format
 msgctxt "Schedule header"
 msgid "Frequency"
-msgstr ""
+msgstr "Interval plateb"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:185
 #, kde-format
 msgctxt "Schedule header"
 msgid "Payment Method"
-msgstr ""
+msgstr "Druh platby"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:241
 #: kmymoney/views/kscheduledview_p.h:441
@@ -9417,7 +9417,7 @@ msgstr "%1 a %2/%3"
 #, kde-format
 msgctxt "@label The word to be printed for no fractional part as in No/00"
 msgid "No"
-msgstr ""
+msgstr "Ne"
 
 #. i18n: ectx: label, entry (checkTemplateFile), group (General)
 #: kmymoney/plugins/checkprinting/pluginsettings.kcfg:10
@@ -9958,7 +9958,7 @@ msgstr ""
 #, kde-format
 msgctxt "location of debit column"
 msgid "Debit"
-msgstr ""
+msgstr "Debet"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_debitCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:599
@@ -9977,7 +9977,7 @@ msgstr ""
 #, kde-format
 msgctxt "location of credit column"
 msgid "Credit"
-msgstr ""
+msgstr "Zásluhy"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_creditCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:644
@@ -11528,7 +11528,7 @@ msgstr "%1 není investiční účet. Přejete si jej nastavit jako investiční
 #: kmymoney/plugins/ibanbicdata/ibanbicdata.cpp:24
 #, kde-format
 msgid "IBAN/BIC Data"
-msgstr ""
+msgstr "Data IBAN/BIC"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:49
 #, kde-format
@@ -11855,7 +11855,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:45
 #, kde-format
 msgid "Bank Code"
-msgstr ""
+msgstr "Kód banky"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:62
@@ -13054,7 +13054,7 @@ msgstr ""
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:115
 #, kde-format
 msgid "Purpose"
-msgstr ""
+msgstr "Účel"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:82
 #, kde-format
@@ -16932,7 +16932,7 @@ msgstr "Koláč"
 #, kde-format
 msgctxt "type of graphic chart"
 msgid "Ring"
-msgstr ""
+msgstr "Prozvonit"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:97
 #, kde-format
@@ -18627,7 +18627,7 @@ msgstr "Zůstatek: %1"
 #: kmymoney/views/kgloballedgerview.cpp:460
 #, kde-format
 msgid "Investment value: %1%2"
-msgstr ""
+msgstr "Hodnota investice: %1%2"
 
 #: kmymoney/views/kgloballedgerview.cpp:566
 #, kde-format
@@ -18827,7 +18827,7 @@ msgid "%1 charge (%2)"
 msgid_plural "%1 charges (%2)"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
+msgstr[2] "Poplatky"
 
 #: kmymoney/views/kgloballedgerview_p.h:826
 #: kmymoney/views/kgloballedgerview_p.h:834
@@ -21114,7 +21114,7 @@ msgstr "Transakci nebyla přiřazena kategorie."
 #: kmymoney/widgets/transaction.cpp:674
 #, kde-format
 msgid "The transaction has a missing assignment of <b>%1</b>."
-msgstr ""
+msgstr "Transakci chybí přiřazení <b>%1</b>."
 
 #: kmymoney/widgets/transactionform.cpp:236
 #, kde-format
