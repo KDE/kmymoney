@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-01 00:57+0000\n"
-"PO-Revision-Date: 2023-01-30 10:14+0100\n"
+"PO-Revision-Date: 2023-02-03 16:05+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1506,7 +1506,7 @@ msgstr "წაშლა"
 #: kmymoney/views/newtransactioneditor.ui:140
 #, kde-format
 msgid "Cancel"
-msgstr "_გაუქმება"
+msgstr "გაუქმება"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, EquityPriceUpdateConfDlg)
 #: kmymoney/dialogs/kequitypriceupdateconfdlg.ui:14
@@ -4559,7 +4559,7 @@ msgstr "გადადება"
 #, kde-format
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
-msgstr "_გაუქმება"
+msgstr "გაუქმება"
 
 #: kmymoney/kmymoney.cpp:1780
 #, kde-format
@@ -4709,7 +4709,7 @@ msgstr "გაყოფების ჩასწორება"
 #, kde-format
 msgctxt "Cancel transaction edit"
 msgid "Cancel"
-msgstr "_გაუქმება"
+msgstr "გაუქმება"
 
 #: kmymoney/kmymoney.cpp:1824
 #, kde-format
@@ -12157,7 +12157,7 @@ msgstr "ანგარშის დეტალები"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:29
 #, kde-format
 msgid "STATUS:"
-msgstr ""
+msgstr "სტატუსი:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_textOnlineStatus)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:54
@@ -15590,7 +15590,7 @@ msgstr "ანგარიში"
 #: kmymoney/views/khomeview_p.h:1053
 #, kde-format
 msgid "Comment"
-msgstr "კომე_ნტარი"
+msgstr "კომენტარი"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, buttonChart)
 #: kmymoney/plugins/views/reports/kreportsview_p.h:421
