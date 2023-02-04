@@ -790,6 +790,8 @@ public:
         item->setFont(column, item->font(0));
         if (amount.isNegative()) {
             item->setForeground(column, KMyMoneySettings::schemeColor(SchemeColor::Negative));
+        } else {
+            item->setForeground(column, QBrush());
         }
     }
 
