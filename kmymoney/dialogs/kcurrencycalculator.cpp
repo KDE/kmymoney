@@ -291,14 +291,14 @@ void KCurrencyCalculator::slotUpdateResult(const QString& /*txt*/)
 {
     Q_D(KCurrencyCalculator);
     MyMoneyMoney result = d->ui->m_toAmount->value();
-    MyMoneyMoney price(0, 1);
+    MyMoneyMoney price(MyMoneyMoney::ONE);
 
     if (result.isNegative()) {
         d->ui->m_toAmount->setValue(-result);
         return;
     }
 
-    if (!result.isZero()) {
+    if (!result.isZero() && !d->m_value.isZero()) {
         price = result / d->m_value;
 
         QSignalBlocker signalBlocker(d->ui->m_conversionRate);
