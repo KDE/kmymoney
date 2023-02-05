@@ -883,7 +883,7 @@ void MyMoneyReport::validDateRange(QDate& db, QDate& de)
         auto tmpBegin = dateRange.firstTransaction;
         auto tmpEnd = dateRange.lastTransaction;
 
-        // make sure that we leave this function with valid dates no mather what
+        // make sure that we leave this function with valid dates no matter what
         if (!tmpBegin.isValid() || !tmpEnd.isValid() || tmpBegin > tmpEnd) {
             tmpBegin = QDate(QDate::currentDate().year(), 1, 1);   // the first date in the file
             tmpEnd = QDate(QDate::currentDate().year(), 12, 31);   // the last date in the file
