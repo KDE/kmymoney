@@ -463,8 +463,10 @@ void KReportConfigurationFilterDlg::slotReset()
         slotRowTypeChanged(combo->currentIndex());
 
         //load budgets combo
+        d->m_tabRowColPivot->ui->m_comboBudget->setDisabled(true);
         if (d->m_initialState.rowType() == eMyMoney::Report::RowType::Budget
                 || d->m_initialState.rowType() == eMyMoney::Report::RowType::BudgetActual) {
+            d->m_tabRowColPivot->ui->m_comboBudget->setEnabled(true);
             d->m_tabRowColPivot->ui->m_comboRows->setEnabled(false);
             d->m_tabRowColPivot->ui->m_rowsLabel->setEnabled(false);
             d->m_tabRowColPivot->ui->m_budgetFrame->setEnabled(!d->m_budgets.empty());

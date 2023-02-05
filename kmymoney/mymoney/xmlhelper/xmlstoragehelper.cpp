@@ -814,8 +814,11 @@ MyMoneyReport readReport(QXmlStreamReader* reader)
         report.setInvestmentsOnly(readBoolAttribute(reader, attributeName(Attribute::Report::Investments), false));
 
         // read rows/columns tab
-        if (hasAttribute(reader, attributeName(Attribute::Report::Budget))) {
-            report.setBudget(readStringAttribute(reader, attributeName(Attribute::Report::Budget)), report.isIncludingBudgetActuals());
+        if (report.group() == QLatin1String("Budgeting")) {
+            // only budgeting reports have a reference to a budget
+            if (hasAttribute(reader, attributeName(Attribute::Report::Budget))) {
+                report.setBudget(readStringAttribute(reader, attributeName(Attribute::Report::Budget)), report.isIncludingBudgetActuals());
+            }
         }
 
         if (rowTypeFromXML != eMyMoney::Report::RowType::Invalid) {
