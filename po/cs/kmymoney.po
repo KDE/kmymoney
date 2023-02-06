@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-01 00:57+0000\n"
+"POT-Creation-Date: 2023-02-06 01:00+0000\n"
 "PO-Revision-Date: 2023-02-02 15:13+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -1889,7 +1889,7 @@ msgstr "Základní měna"
 #. i18n: ectx: property (text), widget (QLabel, textLabel10)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:88
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:508
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:510
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:81
 #: kmymoney/views/kmymoneyview.cpp:177
 #: kmymoney/widgets/ktransactionfilter.cpp:155
@@ -4043,7 +4043,7 @@ msgstr "Den"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:292
 #: kmymoney/plugins/views/reports/core/listtable.cpp:633
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:517
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:519
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:96
 #, kde-format
 msgid "Month"
@@ -13276,7 +13276,7 @@ msgstr "Profil QIF"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxCategories)
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:254
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:499
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:501
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:66
 #: kmymoney/views/kmymoneyview.cpp:175
 #, kde-format
@@ -15028,7 +15028,7 @@ msgstr "Num"
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:621
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:505
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:507
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:76
 #: kmymoney/views/kmymoneyview.cpp:176 kmymoney/views/newspliteditor.ui:110
 #: kmymoney/views/newtransactioneditor.ui:205
@@ -15050,7 +15050,7 @@ msgstr "Druh kategorie"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
 #: kmymoney/plugins/views/reports/core/listtable.cpp:635
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:520
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:522
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:101
 #, kde-format
 msgid "Week"
@@ -15549,7 +15549,7 @@ msgstr "Výkaz"
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:356
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:367
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:613
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:615
 #: kmymoney/plugins/views/reports/reporttabrange.ui:79
 #, kde-format
 msgctxt "@item the columns will display monthly data"
@@ -15577,7 +15577,7 @@ msgid "Assets & Liabilities"
 msgstr "Aktiva & Pasiva"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:502
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:504
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:71
 #, kde-format
 msgid "Top Categories"
@@ -15585,7 +15585,7 @@ msgstr "Nejvyšší kategorie"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:511
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:513
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:86
 #: kmymoney/views/kmymoneyview.cpp:173
 #: kmymoney/widgets/kaccounttemplateselector.ui:87
@@ -15594,14 +15594,14 @@ msgid "Accounts"
 msgstr "Účty"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboOrganizeBy)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:514
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:516
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:91
 #, kde-format
 msgid "Top Accounts"
 msgstr "Nejvyšší účty"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:601
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:603
 #: kmymoney/plugins/views/reports/reporttabrange.ui:69
 #, kde-format
 msgctxt "@item the columns will display daily data"
@@ -15609,7 +15609,7 @@ msgid "Daily"
 msgstr "Denně"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:604
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:606
 #: kmymoney/plugins/views/reports/reporttabrange.ui:74
 #, kde-format
 msgctxt "@item the columns will display weekly data"
@@ -15617,7 +15617,7 @@ msgid "Weekly"
 msgstr "Týdně"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:616
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:618
 #: kmymoney/plugins/views/reports/reporttabrange.ui:84
 #, kde-format
 msgctxt "@item the columns will display bi-monthly data"
@@ -15625,7 +15625,7 @@ msgid "Bi-Monthly"
 msgstr "Dvouměsíčně"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:619
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:621
 #: kmymoney/plugins/views/reports/reporttabrange.ui:89
 #, kde-format
 msgctxt "@item the columns will display quarterly data"
@@ -15633,31 +15633,31 @@ msgid "Quarterly"
 msgstr "Čtvrtletně"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboColumns)
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:622
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:624
 #: kmymoney/plugins/views/reports/reporttabrange.ui:94
 #, kde-format
 msgctxt "@item the columns will display yearly data"
 msgid "Yearly"
 msgstr "Ročně"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:637
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:649
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:639
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:651
 #, kde-format
 msgid "Only owned"
 msgstr "Pouze vlastněno"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:638
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:650
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:640
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:652
 #, kde-format
 msgid "Only sold"
 msgstr "Pouze prodáno"
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:647
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:649
 #, kde-format
 msgid "From period"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:648
+#: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:650
 #, kde-format
 msgid "Owned and sold"
 msgstr "Vlastněno a prodáno"
