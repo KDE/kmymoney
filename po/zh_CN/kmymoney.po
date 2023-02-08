@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-06 01:00+0000\n"
-"PO-Revision-Date: 2023-01-12 10:30\n"
+"PO-Revision-Date: 2023-02-07 11:02\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -2880,11 +2880,9 @@ msgstr "排序选项"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useDefault)
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
-#, fuzzy, kde-format
-#| msgctxt "default price mode"
-#| msgid "(default)"
+#, kde-format
 msgid "Use default"
-msgstr "(默认)"
+msgstr "使用默认设定"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KUpdateStockPriceDlg)
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:14
@@ -3812,10 +3810,9 @@ msgstr "显示"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowGrid)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:30
-#, fuzzy, kde-format
-#| msgid "Show a grid in the register"
+#, kde-format
 msgid "Show a grid in the ledger"
-msgstr "在账簿中显示栅格"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TransactionForm)
 #. i18n: ectx: label, entry (TransactionForm), group (General Options)
@@ -3849,10 +3846,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowRegisterDetailed)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:63
-#, fuzzy, kde-format
-#| msgid "Show all register entries in full detail"
+#, kde-format
 msgid "Show all ledger entries in full detail"
-msgstr "详细显示全部账簿条目"
+msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_LedgerLens)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:73
@@ -3877,17 +3873,15 @@ msgstr "在账簿中显示选中交易详细信息"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllSplits)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:86
-#, fuzzy, kde-format
-#| msgid "Show all register entries in full detail"
+#, kde-format
 msgid "Show all split details in ledger"
-msgstr "详细显示全部账簿条目"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:96
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgid "Information headers"
-msgstr "信息"
+msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:102
@@ -3899,10 +3893,9 @@ msgstr "在每组交易上方显示一个较大的标题。具体的分组取决
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:105
-#, fuzzy, kde-format
-#| msgid "Show group header between transactions"
+#, kde-format
 msgid "Show group headers between transactions"
-msgstr "在交易间显示组标题"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFiscalMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:115
@@ -3912,10 +3905,9 @@ msgstr "显示上一财年及当前财年的标题"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:123
-#, fuzzy, kde-format
-#| msgid "Do not show reconciled transactions"
+#, kde-format
 msgid "Don't show reconciliation entries"
-msgstr "不显示已对账的交易"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:128
@@ -24027,11 +24019,3 @@ msgstr ""
 "<p>使用下面的各项来输入关于您本人的信息。</p>\n"
 "\n"
 "<p>所有的信息都可以不填，它们仅用来个性化您自己的KMyMoney文件。</p>"
-
-#~ msgctxt "Activity for income categories"
-#~ msgid "Received"
-#~ msgstr "接收"
-
-#~ msgctxt "Activity for expense categories"
-#~ msgid "Paid"
-#~ msgstr "已付款"
