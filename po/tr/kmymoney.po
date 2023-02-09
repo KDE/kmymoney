@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-06 01:00+0000\n"
-"PO-Revision-Date: 2023-02-01 00:42+0300\n"
+"PO-Revision-Date: 2023-02-08 19:52+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -12996,7 +12996,7 @@ msgstr "Kullanıcı"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:171
 #, kde-format
 msgid "Enter Login Details"
-msgstr "Giriş Ayrıntılarını Girin"
+msgstr "Oturum Açma Ayrıntılarını Gir"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:192
@@ -13006,9 +13006,10 @@ msgid ""
 "online banking.  Please note that many banks require a separate signup, and "
 "assign a separate PIN or password just for online banking from home."
 msgstr ""
-"Lütfen çevrimiçi bankacılığa giriş yapmak için kullanıcı adı ve parola "
-"girin.  Lütfen aklınızda bulundurun, birçok banka çevrimiçi bankacılık için "
-"ayrı bir kayıt, ayrı PIN ataması ya da parola ister. "
+"Lütfen internet bankacılığı için bu bankaya oturum açmak için kullandığınız "
+"kullanıcı adı ve parolayı girin. Lütfen birçok bankanın ayrı bir kayıt "
+"gerektirdiğini ve yalnızca evden çevrimiçi bankacılık için ayrı bir PIN veya "
+"parola atadığını unutmayın."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:202
