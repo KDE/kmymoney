@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-14 18:08+0000\n"
-"PO-Revision-Date: 2023-01-29 09:15+0100\n"
+"PO-Revision-Date: 2023-02-08 11:43+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -19005,7 +19005,7 @@ msgstr ""
 #: kmymoney/views/kpayeesview.ui:92
 #, kde-format
 msgid "Merge"
-msgstr "_შერწყმა"
+msgstr "შერწყმა"
 
 #. i18n: ectx: property (text), widget (QLabel, m_balanceLabel)
 #: kmymoney/views/kpayeesview.ui:144 kmymoney/views/ktagsview.ui:190
