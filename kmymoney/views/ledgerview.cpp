@@ -113,7 +113,7 @@ public:
         const auto verticalPosition = q->verticalHeader()->sectionPosition(idx.row());
         const auto cellHeight = q->verticalHeader()->sectionSize(idx.row());
 
-        // in case the idx is displayed passed the viewport
+        // in case the idx is displayed past the viewport
         // adjust the position of the scroll area
         if (verticalPosition - verticalOffset + cellHeight > viewportHeight) {
             q->verticalScrollBar()->setValue(q->verticalScrollBar()->maximum());
