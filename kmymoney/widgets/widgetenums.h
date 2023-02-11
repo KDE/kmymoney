@@ -22,6 +22,7 @@ enum class SortField {
     Category, ///< sort by Category
     ReconcileState, ///< sort by reconciliation state
     Security, ///< sort by security (only useful for investment accounts)
+    ReconciliationDate, ///< sort by reconciliation date
     // insert new values in front of this line
     MaxFields,
 };

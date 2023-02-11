@@ -74,7 +74,8 @@ bool LedgerSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& 
 
         switch (sortOrderItem.sortRole) {
         case eMyMoney::Model::TransactionPostDateRole:
-        case eMyMoney::Model::TransactionEntryDateRole: {
+        case eMyMoney::Model::TransactionEntryDateRole:
+        case eMyMoney::Model::SplitReconcileDateRole: {
             const auto leftDate = left.data(sortOrderItem.sortRole).toDate();
             const auto rightDate = right.data(sortOrderItem.sortRole).toDate();
 
@@ -111,6 +112,19 @@ bool LedgerSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& 
                 // in the sortOrderList needs to be evaluated
                 break;
             }
+
+            // special handling for reconciliation date because it
+            // might be invalid and has to be sorted to the end in
+            // case
+            if (sortOrderItem.sortRole == eMyMoney::Model::SplitReconcileDateRole) {
+                if (leftDate.isValid() && !rightDate.isValid()) {
+                    return trueValue;
+                }
+                if (!leftDate.isValid() && rightDate.isValid()) {
+                    return falseValue;
+                }
+            }
+
             return sortOrderItem.lessThanIs(leftDate < rightDate);
         }
         case eMyMoney::Model::SplitSharesRole: {

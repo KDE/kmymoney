@@ -38,6 +38,7 @@ static constexpr KLazyLocalizedString sortOrderText[] = {
     kli18n("Category"),
     kli18n("Reconcile state"),
     kli18n("Security"),
+    kli18n("Reconciliation date"),
     // add new values above this comment line
 };
 

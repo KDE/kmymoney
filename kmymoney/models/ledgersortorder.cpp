@@ -48,6 +48,7 @@ void LedgerSortOrder::setSortOrder(const QString& sortOrder)
         {eWidgets::SortField::ReconcileState, eMyMoney::Model::SplitReconcileFlagRole},
         {eWidgets::SortField::Security, eMyMoney::Model::JournalSplitSecurityNameRole},
         {eWidgets::SortField::Type, eMyMoney::Model::SplitSharesSuffixRole},
+        {eWidgets::SortField::ReconciliationDate, eMyMoney::Model::SplitReconcileDateRole},
     };
 
     clear();
