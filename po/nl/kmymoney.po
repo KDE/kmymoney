@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-06 01:00+0000\n"
+"POT-Creation-Date: 2023-02-12 00:58+0000\n"
 "PO-Revision-Date: 2023-01-29 22:57+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -21617,6 +21617,13 @@ msgstr "Volgorde van invoer"
 #: kmymoney/widgets/transactionsortoption.cpp:39
 msgid "Reconcile state"
 msgstr "Controle status"
+
+#: kmymoney/widgets/transactionsortoption.cpp:41
+#, fuzzy
+#| msgctxt "@title:column Reconciliation state (ext)"
+#| msgid "Reconciliation"
+msgid "Reconciliation date"
+msgstr "Transactiecontrole"
 
 #. i18n: ectx: property (text), widget (QListWidget, m_selectedList)
 #: kmymoney/widgets/transactionsortoption.ui:92

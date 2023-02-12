@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-06 01:00+0000\n"
+"POT-Creation-Date: 2023-02-12 00:58+0000\n"
 "PO-Revision-Date: 2023-01-29 20:53+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -21786,6 +21786,13 @@ msgstr "Saisir l'ordre"
 #: kmymoney/widgets/transactionsortoption.cpp:39
 msgid "Reconcile state"
 msgstr "État du rapprochement"
+
+#: kmymoney/widgets/transactionsortoption.cpp:41
+#, fuzzy
+#| msgctxt "@title:column Reconciliation state (ext)"
+#| msgid "Reconciliation"
+msgid "Reconciliation date"
+msgstr "Réconciliation"
 
 #. i18n: ectx: property (text), widget (QListWidget, m_selectedList)
 #: kmymoney/widgets/transactionsortoption.ui:92

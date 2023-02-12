@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-06 01:00+0000\n"
+"POT-Creation-Date: 2023-02-12 00:58+0000\n"
 "PO-Revision-Date: 2023-02-08 19:52+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -22079,6 +22079,12 @@ msgstr "Girdi sıralaması"
 #: kmymoney/widgets/transactionsortoption.cpp:39
 msgid "Reconcile state"
 msgstr "Uzlaştırılmış durum"
+
+#: kmymoney/widgets/transactionsortoption.cpp:41
+#, fuzzy
+#| msgid "Reconciliation view"
+msgid "Reconciliation date"
+msgstr "Uzlaştırma görünümü"
 
 #. i18n: ectx: property (text), widget (QListWidget, m_selectedList)
 #: kmymoney/widgets/transactionsortoption.ui:92

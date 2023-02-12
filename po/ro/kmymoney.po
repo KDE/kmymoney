@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-06 01:00+0000\n"
+"POT-Creation-Date: 2023-02-12 00:58+0000\n"
 "PO-Revision-Date: 2022-08-14 16:08+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -22592,6 +22592,12 @@ msgstr "Ordinea intrării"
 #: kmymoney/widgets/transactionsortoption.cpp:39
 msgid "Reconcile state"
 msgstr "Starea reconcilierii"
+
+#: kmymoney/widgets/transactionsortoption.cpp:41
+#, fuzzy
+#| msgid "Reconciliation view"
+msgid "Reconciliation date"
+msgstr "Vizualizarea reconcilierii"
 
 #. i18n: ectx: property (text), widget (QListWidget, m_selectedList)
 #: kmymoney/widgets/transactionsortoption.ui:92
