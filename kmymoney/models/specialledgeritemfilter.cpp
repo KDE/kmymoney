@@ -61,7 +61,7 @@ public:
             const auto sourceLedgerSortOrder = sourceModel->ledgerSortOrder();
             if (!sourceLedgerSortOrder.isEmpty()) {
                 const auto role = sourceLedgerSortOrder.at(0).sortRole;
-                return ((role == eMyMoney::Model::TransactionPostDateRole) || (role == eMyMoney::Model::TransactionEntryDateRole));
+                return dateRoles.contains(role);
             }
         }
         return false;
@@ -77,7 +77,7 @@ public:
             const int maxIndex = qMin(sourceLedgerSortOrder.count(), 2);
             for (int i = 0; i < maxIndex; ++i) {
                 const auto role = sourceLedgerSortOrder.at(i).sortRole;
-                if ((role == eMyMoney::Model::TransactionPostDateRole) || (role == eMyMoney::Model::TransactionEntryDateRole)) {
+                if (dateRoles.contains(role)) {
                     return true;
                 }
                 // if the first one is security then
@@ -214,6 +214,12 @@ public:
         }
     }
 
+    QSet<int> dateRoles = {
+        eMyMoney::Model::TransactionPostDateRole,
+        eMyMoney::Model::TransactionEntryDateRole,
+        eMyMoney::Model::SplitReconcileDateRole,
+    };
+
     LedgerSortProxyModel* sourceModel;
     QTimer updateDelayTimer;
     LedgerViewSettings::ReconciliationHeader showReconciliationEntries;
@@ -320,6 +326,7 @@ void SpecialLedgerItemFilter::setSortingEnabled(bool enable)
         // need to recalc the balance afterwards.
         d->sourceModel->setSortingEnabled(enable);
         if (enable) {
+            invalidateFilter();
             d->recalculateBalances();
         }
     }
@@ -421,7 +428,13 @@ bool SpecialLedgerItemFilter::filterAcceptsRow(int source_row, const QModelIndex
         // a regular transaction
         int row = source_row + 1;
         const auto testIdx = sourceModel()->index(row, 0, source_parent);
-        return !(d->isReconciliationModel(testIdx) || d->isSpecialDatesModel(testIdx));
+        if (!d->isReconciliationModel(testIdx)) {
+            if (d->isSpecialDatesModel(testIdx)) {
+                return !filterAcceptsRow(row, source_parent);
+            }
+            return true;
+        }
+        return false;
 
     } else if (idx.data(eMyMoney::Model::OnlineBalanceEntryRole).toBool()) {
         // Don't show online balance items if display is not sorted by date

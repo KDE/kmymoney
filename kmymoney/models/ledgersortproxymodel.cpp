@@ -79,7 +79,9 @@ bool LedgerSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& 
             const auto leftDate = left.data(sortOrderItem.sortRole).toDate();
             const auto rightDate = right.data(sortOrderItem.sortRole).toDate();
 
-            if (leftDate == rightDate) {
+            // in case of sorting by reconciliation date, the date
+            // may be invalid and we have to react a bit different.
+            if ((leftDate == rightDate) && leftDate.isValid()) {
                 const auto leftModel = model->baseModel(left);
                 const auto rightModel = model->baseModel(right);
                 if (leftModel != rightModel) {
@@ -111,18 +113,26 @@ bool LedgerSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& 
                 // same date and same model means that the next item
                 // in the sortOrderList needs to be evaluated
                 break;
-            }
 
-            // special handling for reconciliation date because it
-            // might be invalid and has to be sorted to the end in
-            // case
-            if (sortOrderItem.sortRole == eMyMoney::Model::SplitReconcileDateRole) {
+            } else if (sortOrderItem.sortRole == eMyMoney::Model::SplitReconcileDateRole) {
+                // special handling for reconciliation date because it
+                // might be invalid and has to be sorted to the end in
+                // this case
                 if (leftDate.isValid() && !rightDate.isValid()) {
                     return trueValue;
                 }
                 if (!leftDate.isValid() && rightDate.isValid()) {
                     return falseValue;
                 }
+                if (leftDate.isValid()) {
+                    // actually, both dates are valid here but testing
+                    // one for validity is enough
+                    return sortOrderItem.lessThanIs(leftDate < rightDate);
+                }
+
+                // in case both are invalid, we continue with the
+                // next item in the sortOrderList
+                break;
             }
 
             return sortOrderItem.lessThanIs(leftDate < rightDate);

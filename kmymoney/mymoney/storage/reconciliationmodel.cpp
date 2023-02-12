@@ -201,6 +201,7 @@ QVariant ReconciliationModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::TransactionEntryDateRole:
     case eMyMoney::Model::TransactionPostDateRole:
+    case eMyMoney::Model::SplitReconcileDateRole:
         return reconciliationEntry.date();
 
     case eMyMoney::Model::SplitAccountIdRole:

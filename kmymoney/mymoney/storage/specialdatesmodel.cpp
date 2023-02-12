@@ -135,6 +135,7 @@ QVariant SpecialDatesModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::TransactionEntryDateRole:
     case eMyMoney::Model::TransactionPostDateRole:
+    case eMyMoney::Model::SplitReconcileDateRole:
         return dateEntry.date();
 
     case eMyMoney::Model::DelegateRole:

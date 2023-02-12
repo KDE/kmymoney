@@ -683,7 +683,22 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         return QVariant::fromValue<eMyMoney::Split::State>(split.reconcileFlag());
 
     case eMyMoney::Model::SplitReconcileDateRole:
-        return split.reconcileDate();
+        switch (split.reconcileFlag()) {
+        case eMyMoney::Split::State::Reconciled:
+        case eMyMoney::Split::State::Frozen:
+            if (split.reconcileDate().isValid()) {
+                return split.reconcileDate();
+            }
+            // in case a split is marked reconciled but
+            // the reconciliation date is invalid
+            // we return the postdate instead as the
+            // closest approximation.
+            return transaction.postDate();
+
+        default:
+            break;
+        }
+        return {};
 
     case eMyMoney::Model::SplitActionRole:
         return split.action();

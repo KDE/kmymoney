@@ -25,6 +25,7 @@
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "onlinebalanceproxymodel.h"
+#include "reconciliationmodel.h"
 #include "schedulesjournalmodel.h"
 #include "securityaccountsproxymodel.h"
 #include "specialdatesmodel.h"
@@ -155,5 +156,32 @@ QVariant LedgerAccountFilter::data(const QModelIndex& index, int role) const
             break;
         }
     }
+
+    // we're asking for the reconciliation date of a special date
+    // which maps to the next younger reconciliation date of that
+    // account
+    if (role == eMyMoney::Model::SplitReconcileDateRole) {
+        if (d->isSpecialDatesModel(index)) {
+            QDate result;
+            const auto entryDate = index.data(eMyMoney::Model::TransactionPostDateRole).toDate();
+            const auto reconciliationModel = MyMoneyFile::instance()->reconciliationModel();
+            const auto reconciliations =
+                reconciliationModel->match(reconciliationModel->index(0, 0),
+                                           eMyMoney::Model::SplitAccountIdRole,
+                                           d->account.id(),
+                                           -1,
+                                           Qt::MatchFlags(Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive)));
+            for (const auto& idx : reconciliations) {
+                const auto date = idx.data(role).toDate();
+                if (date >= entryDate) {
+                    if (!result.isValid() || (date < result)) {
+                        result = date;
+                    }
+                }
+            }
+            return result;
+        }
+    }
+
     return LedgerFilterBase::data(index, role);
 }
