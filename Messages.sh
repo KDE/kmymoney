@@ -6,5 +6,5 @@ $EXTRACTRC `find . -name \*.rc -o -name \*.ui -o -name \*.kcfg` >> rc.cpp
 # extensions besides .cpp, and .h, just add them in the find call.
 $XGETTEXT `find . -name \*.cpp -o -name \*.h | grep -v '/tests/'` -o $podir/kmymoney.pot
 
-# Remove these two generated files again
-rm kmymoney/tips.cpp rc.cpp
+# Remove this generated file again
+rm rc.cpp
