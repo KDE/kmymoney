@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-12 00:58+0000\n"
-"PO-Revision-Date: 2023-01-09 18:34+0000\n"
+"PO-Revision-Date: 2023-02-15 15:32+0000\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
 "Language: pt\n"
@@ -4072,8 +4072,7 @@ msgstr "Visualização"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowGrid)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:30
-#, fuzzy, kde-format
-#| msgid "Show a grid in the register"
+#, kde-format
 msgid "Show a grid in the ledger"
 msgstr "Mostrar uma grelha no registo"
 
@@ -4104,17 +4103,15 @@ msgstr "Mostrar os agendamentos atrasados com a data planeada"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:57
-#, fuzzy, kde-format
-#| msgid "Investment details"
+#, kde-format
 msgid "Ledger entry details"
-msgstr "Detalhes do investimento"
+msgstr "Detalhes do item no registo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowRegisterDetailed)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:63
-#, fuzzy, kde-format
-#| msgid "Show all register entries in full detail"
+#, kde-format
 msgid "Show all ledger entries in full detail"
-msgstr "Mostrar todos os valores do registo por completo"
+msgstr "Mostrar todos os itens do registo por completo"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_LedgerLens)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:73
@@ -4141,17 +4138,15 @@ msgstr "Usar a lupa do livro de registos"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllSplits)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:86
-#, fuzzy, kde-format
-#| msgid "Show all split details in register"
+#, kde-format
 msgid "Show all split details in ledger"
 msgstr "Mostrar todos os detalhes da parcela no registo"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:96
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgid "Information headers"
-msgstr "Informação"
+msgstr "Cabeçalhos da informação"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:102
@@ -4165,10 +4160,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:105
-#, fuzzy, kde-format
-#| msgid "Show group header between transactions"
+#, kde-format
 msgid "Show group headers between transactions"
-msgstr "Mostrar o cabeçalho do grupo entre as transacções"
+msgstr "Mostrar os cabeçalhos do grupo entre as transacções"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFiscalMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:115
@@ -4178,23 +4172,21 @@ msgstr "Mostrar o cabeçalho para os anos fiscais anteriores e actual"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:123
-#, fuzzy, kde-format
-#| msgid "Do not show reconciled transactions"
+#, kde-format
 msgid "Don't show reconciliation entries"
-msgstr "Não mostrar as transacções reconciliadas"
+msgstr "Não mostrar os itens consolidados"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:128
-#, fuzzy, kde-format
-#| msgid "Show date of last reconciliation on the Homepage"
+#, kde-format
 msgid "Show last reconciliation entry with date and balance in ledger"
-msgstr "Mostrar a data da última reconciliação na página inicial"
+msgstr "Mostrar o último item consolidado com a data e saldo no registo"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:133
 #, kde-format
 msgid "Show all reconciliation entries with date and balance in ledger"
-msgstr ""
+msgstr "Mostrar todos os itens de consolidação com a data e saldo no registo"
 
 #. i18n: ectx: attribute (title), widget (QWidget, sorting)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:161
@@ -18542,7 +18534,7 @@ msgstr "Mostrar marcadores bonitos para os anos fiscais anteriores e actual"
 #: kmymoney/settings/kmymoney.kcfg:264
 #, kde-format
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "Mostrar os itens de consolidação com a data e saldo"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:273
@@ -21746,11 +21738,8 @@ msgid "Reconcile state"
 msgstr "Estado de reconciliação"
 
 #: kmymoney/widgets/transactionsortoption.cpp:41
-#, fuzzy
-#| msgctxt "@title:column Reconciliation state (ext)"
-#| msgid "Reconciliation"
 msgid "Reconciliation date"
-msgstr "Reconciliação"
+msgstr "Data da reconciliação"
 
 #. i18n: ectx: property (text), widget (QListWidget, m_selectedList)
 #: kmymoney/widgets/transactionsortoption.ui:92
@@ -25163,20 +25152,3 @@ msgstr ""
 "\n"
 "<p>Todas as informações são opcionais e são oferecidas apenas para "
 "personalizar o seu ficheiro KMyMoney.</p>"
-
-#~ msgctxt "Activity for income categories"
-#~ msgid "Received"
-#~ msgstr "Recebida"
-
-# TODO: Verify
-#~ msgctxt "Activity for expense categories"
-#~ msgid "Paid"
-#~ msgstr "Paga"
-
-#~ msgctxt "Payee"
-#~ msgid "Pay to"
-#~ msgstr "Pagar a"
-
-#~ msgctxt "Payer"
-#~ msgid "From"
-#~ msgstr "De"

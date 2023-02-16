@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-12 00:58+0000\n"
-"PO-Revision-Date: 2023-02-07 11:02\n"
+"PO-Revision-Date: 2023-02-15 11:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -9258,7 +9258,7 @@ msgstr "导出完成。\n"
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
 #, kde-format
 msgid "Unable to open file '%1' for writing"
-msgstr "无法为写入操作打开文件“%1”。"
+msgstr "无法打开文件“%1”进行写入。"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:96
 #, kde-format
@@ -14048,7 +14048,8 @@ msgid ""
 "Cannot open or create database %1.\n"
 "Retry Save As Database and click Help for further info."
 msgstr ""
-"无法打开和创建数据库%1]n 重试“另存为数据库”，并点击“帮助”以获取更多信息。"
+"无法打开或者创建数据库 %1\n"
+"请重试“另存为数据库”，并点击“帮助”以获取更多信息。"
 
 #. i18n: ectx: Menu (budget_context_menu)
 #: kmymoney/plugins/views/budget/budgetview.rc:4
@@ -20810,10 +20811,8 @@ msgid "Reconcile state"
 msgstr "对账状态"
 
 #: kmymoney/widgets/transactionsortoption.cpp:41
-#, fuzzy
-#| msgid "Reconciliation view"
 msgid "Reconciliation date"
-msgstr "对账视图"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QListWidget, m_selectedList)
 #: kmymoney/widgets/transactionsortoption.ui:92
