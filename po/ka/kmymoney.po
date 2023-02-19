@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-14 18:08+0000\n"
-"PO-Revision-Date: 2023-02-08 11:43+0100\n"
+"PO-Revision-Date: 2023-02-18 07:54+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2806,7 +2806,7 @@ msgstr "კატეგორია"
 #: kmymoney/dialogs/kmymoneysplittable.cpp:193
 #, kde-format
 msgid "Split Options"
-msgstr ""
+msgstr "დაყოფის პარამერები"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_editSecurityButton)
 #: kmymoney/dialogs/kmymoneysplittable.cpp:195
@@ -3023,7 +3023,7 @@ msgstr "ზოგადი"
 #, kde-format
 msgctxt "account name"
 msgid "Name:"
-msgstr ""
+msgstr "სახელი:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox4)
 #: kmymoney/dialogs/knewaccountdlg.ui:62
@@ -3580,7 +3580,7 @@ msgstr ""
 #: kmymoney/views/splitdialog.ui:620
 #, kde-format
 msgid "&Merge"
-msgstr ""
+msgstr "&შერწყმა"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, mergeButton)
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:114
@@ -3718,7 +3718,7 @@ msgstr ""
 #: kmymoney/dialogs/ktemplateexportdlg.ui:26
 #, kde-format
 msgid "Short description"
-msgstr ""
+msgstr "მოკლე აღწერა"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/dialogs/ktemplateexportdlg.ui:33
@@ -5107,7 +5107,7 @@ msgstr ""
 #: kmymoney/widgets/transactionsortoption.cpp:34
 #, kde-format
 msgid "Number"
-msgstr ""
+msgstr "ნომერი"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #. i18n: ectx: property (text), widget (QLabel, tagsLabel)
@@ -6512,7 +6512,7 @@ msgstr "გამოიყენეთ ანგარიშების გა�
 #: kmymoney/wizards/newloanwizard/newpaymentswizardpage.ui:6
 #, kde-format
 msgid "Payments"
-msgstr ""
+msgstr "გადახდები"
 
 #: kmymoney/kmymoneyutils.cpp:120
 #, kde-format
@@ -11851,13 +11851,13 @@ msgstr ""
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:73
 #, kde-format
 msgid "Decelerate"
-msgstr ""
+msgstr "შენელება"
 
 #. i18n: ectx: property (text), widget (QToolButton, accelerateButton)
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:85
 #, kde-format
 msgid "Accelerate"
-msgstr ""
+msgstr "აჩქარება"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:154
@@ -12035,7 +12035,7 @@ msgstr "დავალების ID"
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:156
 #, kde-format
 msgid "Job Type"
-msgstr ""
+msgstr "დავალების ტიპი"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:157
 #, kde-format
@@ -13296,7 +13296,7 @@ msgstr ""
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:94
 #, kde-format
 msgid "Import File..."
-msgstr ""
+msgstr "ფაილის შემოტანა.."
 
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:96
 #, kde-format
@@ -19880,7 +19880,7 @@ msgstr ""
 #: kmymoney/views/splitdialog.ui:630
 #, kde-format
 msgid "Delete &Zero"
-msgstr ""
+msgstr "&ნულების წაშლა"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, deleteAllButton)
 #: kmymoney/views/splitdialog.ui:647
@@ -19930,13 +19930,13 @@ msgstr "დეპოზიტები"
 #, kde-format
 msgctxt "Payments towards credit card"
 msgid "Payments"
-msgstr ""
+msgstr "გადახდები"
 
 #: kmymoney/widgets/groupmarkers.cpp:60
 #, kde-format
 msgctxt "Payments made from account"
 msgid "Payments"
-msgstr ""
+msgstr "გადახდები"
 
 #: kmymoney/widgets/groupmarkers.cpp:62
 #, kde-format
@@ -20109,7 +20109,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label name of the schedule"
 msgid "Name:"
-msgstr ""
+msgstr "სახელი:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: kmymoney/widgets/kmymoneybriefschedule.ui:228
@@ -20475,7 +20475,7 @@ msgstr ""
 #: kmymoney/widgets/ktransactionfilter.ui:609
 #, kde-format
 msgid "All types"
-msgstr ""
+msgstr "ყველა ტიპი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
 #: kmymoney/widgets/ktransactionfilter.ui:633
@@ -20533,7 +20533,7 @@ msgstr "ტექსტი"
 #, kde-format
 msgctxt "Filter widget label"
 msgid "Fi&lter:"
-msgstr ""
+msgstr "&ფილტრი:"
 
 #: kmymoney/widgets/passwordtoggle.cpp:33
 #, kde-format
@@ -20568,19 +20568,19 @@ msgstr ""
 #: kmymoney/widgets/payeeidentifier/nationalaccount/nationalaccountdelegate.cpp:76
 #, kde-format
 msgid "National Account"
-msgstr ""
+msgstr "ეროვნული ანგარიში"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, accountNumberEdit)
 #: kmymoney/widgets/payeeidentifier/nationalaccount/nationalaccountedit.ui:17
 #, kde-format
 msgid "account number"
-msgstr ""
+msgstr "ანგარიშის ნომერი"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, institutionCodeEdit)
 #: kmymoney/widgets/payeeidentifier/nationalaccount/nationalaccountedit.ui:24
 #, kde-format
 msgid "institution code"
-msgstr ""
+msgstr "დაწესებულების კოდი"
 
 #: kmymoney/widgets/register.cpp:1704
 #, kde-format
@@ -20745,7 +20745,7 @@ msgstr ""
 #: kmymoney/widgets/transactionsortoption.cpp:30
 #, kde-format
 msgid "Post date"
-msgstr ""
+msgstr "პოსტის თარიღი"
 
 #: kmymoney/widgets/transactionsortoption.cpp:31
 #, kde-format
@@ -21346,7 +21346,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kinstitutionpage.ui:68
 #, kde-format
 msgid "Account number"
-msgstr ""
+msgstr "ანგარიშის ნომერი"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:95
 #, kde-format
@@ -21825,7 +21825,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/knewloanwizard_p.h:409
 #, kde-format
 msgid "Calculation error"
-msgstr ""
+msgstr "გამოთვლის შეცდომა"
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:284
 #: kmymoney/wizards/newloanwizard/knewloanwizard_p.h:413
@@ -21847,8 +21847,8 @@ msgstr ""
 #, kde-format
 msgid "one month"
 msgid_plural "%1 months"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ერთი თვე"
+msgstr[1] "%1 თვე"
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:345
 #: kmymoney/wizards/newloanwizard/durationwizardpage.cpp:111
@@ -21863,8 +21863,8 @@ msgstr[1] "%1 წელი"
 #, kde-format
 msgid "one payment"
 msgid_plural "%1 payments"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ერთი გადახდა"
+msgstr[1] "%1 გადახდა"
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:389
 #, kde-format
