@@ -231,6 +231,7 @@ bool KMyMoneyAccountCombo::eventFilter(QObject* o, QEvent* e)
                         QSignalBlocker blocker(lineEdit());
                         lineEdit()->setText(idx.data(eMyMoney::Model::Roles::AccountFullNameRole).toString());
                         d->setCurrentIndex(d->findMatchingItem(accountId));
+                        Q_EMIT accountSelected(accountId);
                     }
                     hidePopup();
                     break;
