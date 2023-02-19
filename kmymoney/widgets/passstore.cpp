@@ -87,6 +87,10 @@ void PassStore::setPasswordId(const QString& id)
     Q_D(PassStore);
     d->m_passwordId = id;
 
+    // replace directory separators
+    d->m_passwordId.replace(QLatin1Char('/'), QLatin1Char('_'));
+    d->m_passwordId.replace(QLatin1Char('\\'), QLatin1Char('_'));
+
     // control visibility of icon
     bool visible = false;
 #ifdef ENABLE_GPG
@@ -96,6 +100,12 @@ void PassStore::setPasswordId(const QString& id)
     }
 #endif
     d->m_loadPasswordAction->setVisible(visible);
+}
+
+QString PassStore::passwordId() const
+{
+    Q_D(const PassStore);
+    return d->m_passwordId;
 }
 
 bool PassStore::isActionVisible() const

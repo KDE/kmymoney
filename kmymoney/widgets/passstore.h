@@ -65,8 +65,17 @@ public:
     /**
      * Update the password id to @a id. This will check for
      * the password in the store and update the icon accordingly.
+     *
+     * @note The characters '/' and '\\' will be converted to '_'
      */
     void setPasswordId(const QString& id);
+
+    /**
+     * Return the 'converted' passwordId.
+     *
+     * @sa setPasswordId() for possible conversions.
+     */
+    QString passwordId() const;
 
     /**
      * Return if the action is visible or not. This can be used

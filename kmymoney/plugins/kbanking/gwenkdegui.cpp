@@ -63,7 +63,7 @@ int gwenKdeGui::execDialog(GWEN_DIALOG *dlg, GWEN_UNUSED uint32_t guiid)
             // check for available pass entry
             passStore = new PassStore(edit, QLatin1String("KMyMoney/KBanking"), passwordId);
             if (!passStore->isActionVisible()) {
-                qDebug() << "No password found for KMyMoney/KBanking/" << passwordId;
+                qDebug() << "No password found for KMyMoney/KBanking/" << passStore->passwordId();
             }
             new PasswordToggle(edit);
             break;
