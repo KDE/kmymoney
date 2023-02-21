@@ -1719,6 +1719,12 @@ void CSVFile::getStartEndRow(CSVProfile *profile)
 
     if (profile->m_startLine > profile->m_endLine)   // Don't allow m_startLine > m_endLine
         profile->m_startLine = profile->m_endLine;
+
+    if (profile->m_startLine < 0) // Don't allow m_startLine negative
+        profile->m_startLine = 0;
+
+    if (profile->m_endLine < 0) // Don't allow m_endLine negative
+        profile->m_endLine = 0;
 }
 
 void CSVFile::getColumnCount(CSVProfile *profile, const QStringList &rows)
@@ -1822,19 +1828,23 @@ void CSVFile::readFile(CSVProfile *profile)
 
     QString buf = inStream.readAll();
     inFile.close();
+    m_model->clear();
     m_parse->setTextDelimiter(profile->m_textDelimiter);
     QStringList rows = m_parse->parseFile(buf);        // parse the buffer
     m_rowCount = m_parse->lastLine();                  // won't work without above line
     getColumnCount(profile, rows);
     getStartEndRow(profile);
 
-    // prepare model from rows having rowCount and columnCount
-    m_model->clear();
-    for (int i = 0; i < m_rowCount; ++i) {
-        QList<QStandardItem*> itemList;
-        QStringList columns = m_parse->parseLine(rows.takeFirst());  // take instead of read from rows to preserve memory
-        for (int j = 0; j < m_columnCount; ++j)
-            itemList.append(new QStandardItem(columns.value(j, QString())));
-        m_model->appendRow(itemList);
+    // prepare model from rows having rowCount and columnCount,
+    // but only if there is at least one row
+    if (m_rowCount > 0) {
+        for (int i = 0; i < m_rowCount; ++i) {
+            QList<QStandardItem*> itemList;
+            // use take instead of read from rows to preserve memory
+            QStringList columns = m_parse->parseLine(rows.takeFirst());
+            for (int j = 0; j < m_columnCount; ++j)
+                itemList.append(new QStandardItem(columns.value(j, QString())));
+            m_model->appendRow(itemList);
+        }
     }
 }
