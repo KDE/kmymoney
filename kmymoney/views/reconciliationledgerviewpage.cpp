@@ -253,7 +253,11 @@ public:
             // that we don't show the online balance anymore, as it might be different
             reconciliationAccount.deletePair("lastImportedTransactionDate");
         }
-        reconciliationAccount.setLastReconciliationDate(endingBalanceDlg->statementDate());
+
+        // if this is a newer reconciliation then bump the date
+        if (reconciliationAccount.lastReconciliationDate() < endingBalanceDlg->statementDate()) {
+            reconciliationAccount.setLastReconciliationDate(endingBalanceDlg->statementDate());
+        }
 
         // keep a record of this reconciliation
         reconciliationAccount.addReconciliation(endingBalanceDlg->statementDate(), endingBalanceDlg->endingBalance());
