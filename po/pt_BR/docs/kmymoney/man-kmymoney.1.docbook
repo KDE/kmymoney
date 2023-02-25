@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-<!ENTITY kmymoney "<application
->KMyMoney</application
->">
-<!ENTITY kappname "&kmymoney;">
 <!ENTITY % Brazilian-Portuguese "INCLUDE">
 ]>
 
@@ -167,6 +163,10 @@
 
     There are eight additional people in credits.docbook for "Special Thanks."
     Should any of them be included here?  -->
+<date
+>17/06/2016</date>
+<releaseinfo
+>KMyMoney 5.0</releaseinfo>
 </refentryinfo>
 
 <refmeta>
@@ -188,34 +188,43 @@
 >kmymoney</command
 ></refname>
 <refpurpose
->o gerenciador de finanças pessoais para o &kde;</refpurpose>
+>o gerenciador de finanças pessoais do &kde;</refpurpose>
 </refnamediv>
 
 <refsynopsisdiv>
 <cmdsynopsis
 ><command
 >kmymoney</command
-> <group
+> <group choice="opt"
 ><option
->Opções Genéricas</option
+>--lang</option
 ></group
-> <group
+> <group choice="opt"
 ><option
->Opções do Qt</option
+>-n</option
 ></group
-> <group
+> <group choice="opt"
 ><option
->Opções do KDE</option
+>--timers</option
+> <replaceable
+> coluna</replaceable
 ></group
-> <group
+> <group choice="opt"
 ><option
->Opções</option
+>--nocatch</option
 ></group
-> <group
+> <group choice="opt"
 ><option
->Arquivo</option
+>--trace</option
+></group
+> <group choice="opt"
+><option
+><replaceable
+>arquivo</replaceable
+></option
 ></group
 > </cmdsynopsis>
+
 </refsynopsisdiv>
 
 <refsect1>
@@ -223,7 +232,7 @@
 >Descrição</title>
 
 <para
->O &kmymoney; é o Gerenciador de Finanças Pessoais do ambiente de trabalho &kde;. Ele fornece as funções necessárias para consolidar os seus cheques, gerenciar os seus empréstimos pessoais e classificar as suas receitas e despesas, usando uma interface gráfica semelhante a um livro de registros.</para>
+>O &kmymoney; é o Gerenciador de Finanças Pessoais do &kde;. Ele fornece as funções necessárias para consolidar os seus cheques, gerenciar os seus empréstimos pessoais e classificar as suas receitas e despesas, usando uma interface gráfica semelhante a um livro de registros.</para>
 
 </refsect1>
 
@@ -235,12 +244,12 @@
 
 <varlistentry>
 <term
-><replaceable
->Arquivo</replaceable
+><option
+>--lang</option
 ></term>
 <listitem>
 <para
->arquivo a abrir </para>
+>Idioma a ser usado </para>
 </listitem>
 </varlistentry>
 
@@ -251,7 +260,7 @@
 ></term>
 <listitem>
 <para
->Iniciar sem abrir qualquer arquivo </para>
+>Não abrir o último arquivo usado </para>
 </listitem>
 </varlistentry>
 
@@ -295,84 +304,7 @@
 ></term>
 <listitem>
 <para
->Apresenta os nomes de todos os objetos KAction definidos para o 'stdout' e sai. Esta opção só está disponível quando o &kmymoney; está compilado no modo de depuração. </para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term
-><option
->--help</option
-></term>
-<listitem>
-<para
->Mostra a ajuda sobre as opções </para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term
-><option
->--help-qt</option
-></term>
-<listitem>
-<para
->Mostra as opções específicas do Qt </para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term
-><option
->--help-kde</option
-></term>
-<listitem>
-<para
->Mostra as opções específicas do KDE </para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term
-><option
->--help-all</option
-></term>
-<listitem>
-<para
->Mostra todas as opções </para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term
-><option
->--author</option
-></term>
-<listitem>
-<para
->Mostra informações sobre o autor </para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term
-><option
->-v, --version</option
-></term>
-<listitem>
-<para
->Mostra informações sobre a versão </para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term
-><option
->--license</option
-></term>
-<listitem>
-<para
->Mostra informações sobre a licença </para>
+>Apresenta os nomes de todos os objetos QAction definidos para o 'stdout' e sai. Esta opção só está disponível quando o &kmymoney; está compilado no modo de depuração. </para>
 </listitem>
 </varlistentry>
 
@@ -380,106 +312,13 @@
 
 </refsect1>
 
-<refsect1>
-<title
->Ambiente</title>
-<variablelist>
-
-<varlistentry>
-<term
->$<envar
->KDE_LANG</envar
-></term>
-<listitem>
-<para
->A configuração regional do idioma a usar. Esta opção possibilita a definição de outro ambiente de idioma para um programa que não seja o padrão. O pacote correto para o idioma deverá estar instalado, para que esta opção funcione. O idioma usado por padrão, quando mais nenhuma estiver configurada, é o 'en_US'. Ao decidir qual o idioma, são pesquisados os seguintes recursos, nesta ordem: <envar
->KDE_LANG</envar
->, arquivo de configuração, <envar
->LC_CTYPE</envar
->, <envar
->LC_MESSAGES</envar
->, <envar
->LC_ALL</envar
->, <envar
->LANG</envar
->.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term
->$<envar
->KDE_UTF8_FILENAMES</envar
-></term>
-<listitem>
-<para
->Assume que todos os nomes dos arquivos estão no formato UTF-8, independentemente da configuração do idioma atual. Caso contrário, o formato dos nomes de arquivos é definido pelo idioma.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term
->$<envar
->KDE_MULTIHEAD</envar
-></term>
-<listitem>
-<para
->Se esta variável tiver um valor lógico verdadeiro, é ativado o modo de telas múltiplas. A tela do KDE será compartilhada por mais de uma tela física.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term
->$<envar
->DISPLAY</envar
-></term>
-<listitem>
-<para
->Indica a tela do X onde irá executar o KDE.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term
->$<envar
->SESSION_MANAGER</envar
-></term>
-<listitem>
-<para
->O gerenciador de sessões a usar. Esta opção é definida automaticamente pelo KDE, sendo uma localização de rede para o 'socket' do gerenciador de sessões.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term
->$<envar
->HOME</envar
-></term>
-<listitem>
-<para
->A localização da pasta pessoal do usuário atual.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term
->$<envar
->KDEHOME</envar
-></term>
-<listitem>
-<para
->A pasta de configurações, por cada usuário, do KDE.</para>
-</listitem>
-</varlistentry>
-
-</variablelist>
-</refsect1>
 
 <refsect1>
 <title
 >Veja também</title>
 
-<para
+<simplelist>
+<member
 >A documentação completa do &kmymoney; é mantida como um manual em DocBook. Se o programa &khelpcenter; estiver instalado de forma adequada na sua máquina, o comando <userinput
 ><command
 >khelpcenter</command
@@ -490,7 +329,12 @@
 >URL</acronym
 > <ulink url="help:/kmymoney"
 >help:/kmymoney</ulink
-></para>
+></member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+</simplelist>
 
 </refsect1>
 
