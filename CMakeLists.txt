@@ -422,7 +422,7 @@ add_subdirectory( tools )
 add_subdirectory( kmymoney )
 if(KF5DocTools_FOUND)
   add_subdirectory( doc )
-  kdoctools_install( doc )
+  kdoctools_install( po )
 endif()
 
 ######################### Output Results #############################
