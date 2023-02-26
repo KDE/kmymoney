@@ -350,7 +350,7 @@
      <item row="1" column="0">
       <widget class="QCheckBox" name="m_checkInvestments">
        <property name="toolTip">
-        <string>&lt;p&gt;Check this box to include only those categories which have been marked to &quot;Include on Tax Reports&quot;&lt;/p&gt;</string>
+        <string>&lt;p&gt;Include only data from Investment accounts in this report&lt;/p&gt;</string>
        </property>
        <property name="text">
         <string>Include only Investment accounts</string>
