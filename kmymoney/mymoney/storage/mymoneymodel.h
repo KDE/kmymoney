@@ -608,8 +608,24 @@ public:
         return rc;
     }
 
-    QSet<QString> referencedObjects() const
+    QSet<QString> referencedObjects()
     {
+        if (m_referencedObjects.isEmpty()) {
+            const int rows = rowCount();
+            if (m_idToItemMapper) {
+                for (const auto& item : qAsConst(*m_idToItemMapper)) {
+                    m_referencedObjects.unite(item->constDataRef().referencedObjects());
+                }
+            } else {
+                QModelIndex idx;
+                for (int row = 0; row < rows; ++row) {
+                    idx = index(row, 0);
+                    if (idx.isValid()) {
+                        m_referencedObjects.unite(static_cast<TreeItem<T>*>(idx.internalPointer())->constDataRef().referencedObjects());
+                    }
+                }
+            }
+        }
         return m_referencedObjects;
     }
 
@@ -786,21 +802,7 @@ protected:
 
     virtual void doUpdateReferencedObjects() override
     {
-        const int rows = rowCount();
         m_referencedObjects.clear();
-        if (m_idToItemMapper) {
-            for(const auto item : qAsConst(*m_idToItemMapper)) {
-                m_referencedObjects.unite(item->constDataRef().referencedObjects());
-            }
-        } else {
-            QModelIndex idx;
-            for (int row = 0; row < rows; ++row) {
-                idx = index(row, 0);
-                if (idx.isValid()) {
-                    m_referencedObjects.unite(static_cast<TreeItem<T>*>(idx.internalPointer())->constDataRef().referencedObjects());
-                }
-            }
-        }
     }
 
 protected:
