@@ -327,6 +327,47 @@ struct JournalModel::Private
         }
     }
 
+    /**
+     * Check if the balance of any account will change when exchanging
+     * @a prev with @a next. Return @c true if this is the case,
+     * @c false otherwise.
+     *
+     * @param curr const ref to current transaction in model
+     * @param next const ref to replacing transaction in model
+     *
+     * @retval false no balance affected
+     * @retval true balance of at least one account is affected
+     */
+    bool checkBalanceChange(const MyMoneyTransaction& curr, const MyMoneyTransaction& next) const
+    {
+        auto nextSplits = next.splits();
+        const auto currSplits = curr.splits();
+        for (const auto& currSplit : currSplits) {
+            const int splitCount = nextSplits.count();
+            if (splitCount == 0) {
+                // the next version of the transaction has
+                // more splits than the current one so there
+                // must be a change of a balance
+                return true;
+            }
+            for (int i = 0; i < splitCount; ++i) {
+                const MyMoneySplit& nextSplit = nextSplits.at(i);
+                if ((nextSplit.accountId() == currSplit.accountId()) && (nextSplit.value() == currSplit.value()) && nextSplit.shares() == currSplit.shares()) {
+                    // we found exactly the same split
+                    // in curr and next so we remove it
+                    // from the list and continue with
+                    // the next one to check
+                    nextSplits.removeAt(i);
+                    break;
+                }
+            }
+        }
+
+        // in case the next version has more splits
+        // there must be a change of a balance
+        return !nextSplits.isEmpty();
+    }
+
     void finishBalanceCacheOperation()
     {
         if (!fullBalanceRecalc.isEmpty()) {
@@ -354,7 +395,9 @@ struct JournalModel::Private
             balances.insert(accountId, balanceCache.value(accountId));
             Q_EMIT q->balanceChanged(accountId);
         }
-        Q_EMIT q->balancesChanged(balances);
+        if (!balances.isEmpty()) {
+            Q_EMIT q->balancesChanged(balances);
+        }
     }
 
     QString formatValue(const MyMoneyTransaction& t, const MyMoneySplit& s, const MyMoneyMoney& factor = MyMoneyMoney::ONE)
@@ -1246,8 +1289,12 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
     const auto oldSplitCount = static_cast<int>(oldTransaction.splitCount());
     const auto oldKey = oldTransaction.uniqueSortKey();
 
+    const auto balanceChanges = d->checkBalanceChange(oldTransaction, newTransaction);
+
     d->startBalanceCacheOperation();
-    d->removeTransactionFromBalance(srcIdx.row(), oldSplitCount);
+    if (balanceChanges) {
+        d->removeTransactionFromBalance(srcIdx.row(), oldSplitCount);
+    }
 
     // we have to deal with several cases here. The first differentiation
     // is the unique key. It remains the same as long as the postDate()
@@ -1395,7 +1442,9 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
         }
     }
 
-    d->addTransactionToBalance(srcIdx.row(), newTransaction.splitCount());
+    if (balanceChanges) {
+        d->addTransactionToBalance(srcIdx.row(), newTransaction.splitCount());
+    }
 
     d->finishBalanceCacheOperation();
     doUpdateReferencedObjects();
