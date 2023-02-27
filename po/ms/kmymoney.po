@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-12 00:58+0000\n"
+"POT-Creation-Date: 2023-02-27 01:01+0000\n"
 "PO-Revision-Date: 2009-09-18 17:20+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -16752,13 +16752,9 @@ msgid "Include only Loan accounts"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkInvestments)
-#. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkTax)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:353
-#: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:373
 #, kde-format
-msgid ""
-"<p>Check this box to include only those categories which have been marked to "
-"\"Include on Tax Reports\"</p>"
+msgid "<p>Include only data from Investment accounts in this report</p>"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkInvestments)
@@ -16779,6 +16775,14 @@ msgstr ""
 #, fuzzy, kde-format
 msgid "Hide Split Transaction Details"
 msgstr "Pilih tahun"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkTax)
+#: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:373
+#, kde-format
+msgid ""
+"<p>Check this box to include only those categories which have been marked to "
+"\"Include on Tax Reports\"</p>"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTax)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:376

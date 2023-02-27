@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-12 00:58+0000\n"
+"POT-Creation-Date: 2023-02-27 01:01+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -17402,14 +17402,10 @@ msgid "Include only Loan accounts"
 msgstr "Įterpti į mokesčių pranešimą"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkInvestments)
-#. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkTax)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:353
-#: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:373
-#, kde-format
-msgid ""
-"<p>Check this box to include only those categories which have been marked to "
-"\"Include on Tax Reports\"</p>"
-msgstr ""
+#, fuzzy, kde-format
+msgid "<p>Include only data from Investment accounts in this report</p>"
+msgstr "Įterpti į mokesčių pranešimą"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:356
@@ -17429,6 +17425,14 @@ msgstr ""
 #, fuzzy, kde-format
 msgid "Hide Split Transaction Details"
 msgstr "Operacijos detalės"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkTax)
+#: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:373
+#, kde-format
+msgid ""
+"<p>Check this box to include only those categories which have been marked to "
+"\"Include on Tax Reports\"</p>"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTax)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:376

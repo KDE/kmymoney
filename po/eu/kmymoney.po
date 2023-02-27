@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-12 00:58+0000\n"
+"POT-Creation-Date: 2023-02-27 01:01+0000\n"
 "PO-Revision-Date: 2023-02-13 07:13+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -17487,16 +17487,11 @@ msgid "Include only Loan accounts"
 msgstr "Sartu mailegu-kontuak soilik"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkInvestments)
-#. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkTax)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:353
-#: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:373
-#, kde-format
-msgid ""
-"<p>Check this box to include only those categories which have been marked to "
-"\"Include on Tax Reports\"</p>"
-msgstr ""
-"<p>Markatu lauki hau \"Sartu zerga-txostenetan\" markatuta duten kategoriak "
-"soilik sartzeko</p>"
+#, fuzzy, kde-format
+#| msgid "Include only Investment accounts"
+msgid "<p>Include only data from Investment accounts in this report</p>"
+msgstr "Sartu inbertsio-kontuak soilik"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:356
@@ -17517,6 +17512,16 @@ msgstr ""
 #, kde-format
 msgid "Hide Split Transaction Details"
 msgstr "Ezkutatu partidadun transakzioaren xehetasunak"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkTax)
+#: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:373
+#, kde-format
+msgid ""
+"<p>Check this box to include only those categories which have been marked to "
+"\"Include on Tax Reports\"</p>"
+msgstr ""
+"<p>Markatu lauki hau \"Sartu zerga-txostenetan\" markatuta duten kategoriak "
+"soilik sartzeko</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTax)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:376
