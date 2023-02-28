@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 01:01+0000\n"
-"PO-Revision-Date: 2023-02-12 16:42+0100\n"
+"PO-Revision-Date: 2023-02-27 10:51+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -17549,10 +17549,10 @@ msgstr "Uitsluitend leningen"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:353
-#, fuzzy, kde-format
-#| msgid "Include only Investment accounts"
+#, kde-format
 msgid "<p>Include only data from Investment accounts in this report</p>"
-msgstr "Alleen investeringsrekeningen meenemen"
+msgstr ""
+"<p>Alleen gegevens uit investeringsrekeningen meenemen in dit rapport</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:356

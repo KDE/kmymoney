@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 01:01+0000\n"
-"PO-Revision-Date: 2023-02-26 18:48+0100\n"
+"PO-Revision-Date: 2023-02-27 10:33+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -17595,10 +17595,10 @@ msgstr "Inclou en els comptes de préstecs"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:353
-#, fuzzy, kde-format
-#| msgid "Include only Investment accounts"
+#, kde-format
 msgid "<p>Include only data from Investment accounts in this report</p>"
-msgstr "Inclou només en els comptes d'inversions"
+msgstr ""
+"<p>En aquest informe inclou només les dades dels comptes d'inversions</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:356

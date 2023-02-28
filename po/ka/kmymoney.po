@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 01:01+0000\n"
-"PO-Revision-Date: 2023-02-13 05:58+0100\n"
+"PO-Revision-Date: 2023-02-27 06:39+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -10995,6 +10995,8 @@ msgid ""
 "Found:\n"
 "\n"
 msgstr ""
+"ნაპოვნია:\n"
+"\n"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2387
 #, kde-format
@@ -11160,7 +11162,7 @@ msgstr ""
 #, kde-format
 msgctxt "ICS (Filefilter)"
 msgid "iCalendar files"
-msgstr ""
+msgstr "iCalendar-ის ფაილები"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:93
 #: kmymoney/plugins/views/reports/kreportsview.cpp:353
@@ -11840,7 +11842,7 @@ msgstr "დავალების ID"
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:156
 #, kde-format
 msgid "Job Type"
-msgstr ""
+msgstr "დავალების ტიპი"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:157
 #, kde-format
@@ -13593,7 +13595,7 @@ msgstr ""
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:239
 #, kde-format
 msgid "Select output file"
-msgstr ""
+msgstr "აირჩიეთ გამოტანის ფაილი"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:267
 #: kmymoney/plugins/sql/kselectdatabasedlg.cpp:176
@@ -17632,7 +17634,7 @@ msgstr ""
 #: kmymoney/templates/ktemplateexportdlg.ui:26
 #, kde-format
 msgid "Short description"
-msgstr ""
+msgstr "მოკლე აღწერა"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/templates/ktemplateexportdlg.ui:33
@@ -18697,7 +18699,7 @@ msgstr ""
 #: kmymoney/views/kinvestmentview.ui:122
 #, kde-format
 msgid "Search..."
-msgstr ""
+msgstr "საძიებო სიტყვა..."
 
 #: kmymoney/views/kmymoneyview.cpp:178
 #, kde-format
@@ -20396,7 +20398,7 @@ msgstr "ყველა ტიპი"
 #: kmymoney/wizards/newloanwizard/newpaymentswizardpage.ui:6
 #, kde-format
 msgid "Payments"
-msgstr ""
+msgstr "გადახდები"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
 #: kmymoney/widgets/ktransactionfilter.ui:619

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 01:01+0000\n"
-"PO-Revision-Date: 2023-02-12 14:45+0100\n"
+"PO-Revision-Date: 2023-02-27 10:33+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -12244,6 +12244,7 @@ msgstr ""
 msgid "Clock length of optical tan flickering in ms."
 msgstr "Duració de rellotge del parpelleig òptic del codi TAN en ms."
 
+# skip-rule: rst-1asterisk,rst-asterisk1
 #. i18n: ectx: tooltip, entry (clocksetting), group (opticalTan)
 #: kmymoney/plugins/kbanking/kbanking.kcfg:14
 #, kde-format
@@ -14964,7 +14965,7 @@ msgstr "Ometre la data d'obertura en recuperar operacions"
 #, kde-format
 msgid "Include future transaction when using Schedule Forecast"
 msgstr ""
-"Incloure operacions futures quan s'utilitze la previsió basada en la "
+"Inclou operacions futures quan s'utilitze la previsió basada en la "
 "planificació"
 
 #. i18n: ectx: label, entry (includeScheduledTransactions), group (Forecast Options)
@@ -14973,7 +14974,7 @@ msgstr ""
 #, kde-format
 msgid "Include scheduled transactions when using Schedule Forecast"
 msgstr ""
-"Incloure operacions planificades quan s'utilitze la previsió basada en la "
+"Inclou operacions planificades quan s'utilitze la previsió basada en la "
 "planificació"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
@@ -17593,10 +17594,10 @@ msgstr "Inclou en els comptes de préstecs"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:353
-#, fuzzy, kde-format
-#| msgid "Include only Investment accounts"
+#, kde-format
 msgid "<p>Include only data from Investment accounts in this report</p>"
-msgstr "Inclou només en els comptes d'inversions"
+msgstr ""
+"<p>En este informe inclou només les dades dels comptes d'inversions</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:356

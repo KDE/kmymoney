@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 01:01+0000\n"
-"PO-Revision-Date: 2023-02-22 16:45+0100\n"
+"PO-Revision-Date: 2023-02-27 14:45+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -17007,10 +17007,9 @@ msgstr "Zahrnout jen účty půjček"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:353
-#, fuzzy, kde-format
-#| msgid "Include only Investment accounts"
+#, kde-format
 msgid "<p>Include only data from Investment accounts in this report</p>"
-msgstr "Zahrnout jen účty investic"
+msgstr "<p>V tomto hlášení zahrnout jen data z investičních účtů</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:356

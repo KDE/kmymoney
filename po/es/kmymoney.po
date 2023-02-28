@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 01:01+0000\n"
-"PO-Revision-Date: 2023-02-13 00:07+0100\n"
+"PO-Revision-Date: 2023-02-27 05:07+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17577,10 +17577,9 @@ msgstr "Incluir solo cuentas de préstamos"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:353
-#, fuzzy, kde-format
-#| msgid "Include only Investment accounts"
+#, kde-format
 msgid "<p>Include only data from Investment accounts in this report</p>"
-msgstr "Incluir solo cuentas de inversiones"
+msgstr "<p>Incluir solo datos de cuentas de inversiones en este informe</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:356

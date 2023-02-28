@@ -5,15 +5,15 @@
 #
 # Benjamin <benjamincarlyle@optusnet.com.au>, 2004.
 # Andrew Coles <andrew_coles@yahoo.co.uk>, 2009, 2010.
-# Steve Allewell <steve.allewell@gmail.com>, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Steve Allewell <steve.allewell@gmail.com>, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 01:01+0000\n"
-"PO-Revision-Date: 2022-12-31 16:23+0000\n"
+"PO-Revision-Date: 2023-02-27 20:17+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
-"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language-Team: English <kde-l10n-en_gb@kde.org>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2879,24 +2879,7 @@ msgstr "Choose XML if unsure."
 
 #. i18n: ectx: property (html), widget (QTextBrowser, textBrowser)
 #: kmymoney/dialogs/ksaveasquestion.ui:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#| "REC-html40/strict.dtd\">\n"
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
-#| "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#| "\">KMyMoney supports multiple storage types. The availability of storage "
-#| "types depends on the presence of plugins and their activation in the "
-#| "application settings.</p>\n"
-#| "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
-#| "left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /"
-#| ">If you are uncertain what to choose here, then <span style=\" font-"
-#| "weight:600;\">XML</span> is probably your best choice.</p></body></html>"
+#, kde-format
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
 "REC-html40/strict.dtd\">\n"
@@ -2920,15 +2903,13 @@ msgstr ""
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-"
 "weight:400; font-style:normal;\">\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
-"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">KMyMoney "
-"supports multiple storage types. The availability of storage types depends "
-"on the presence of plugins and their activation in the application settings."
-"</p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-"
-"left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br />If "
-"you are uncertain what to choose here, then <span style=\" font-weight:600;"
-"\">XML</span> is probably your best choice.</p></body></html>"
+"<p align=\"justify\" style=\" margin: 0; -qt-block-indent:0; text-indent:0px;"
+"\">KMyMoney supports multiple storage types. The availability of storage "
+"types depends on the presence of plugins and their activation in the "
+"application settings.</p>\n"
+"<p align=\"justify\" style=\" margin: 0; -qt-block-indent:0; text-indent:0px;"
+"\"><br />If you are uncertain what to choose here, then <span style=\" font-"
+"weight:600;\">XML</span> is probably your best choice.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/ksaveasquestion.ui:68
@@ -3020,11 +3001,9 @@ msgstr "Sort options"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useDefault)
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Reset to application defaults"
-#| msgid "Reset to default"
+#, kde-format
 msgid "Use default"
-msgstr "Reset to default"
+msgstr "Use default"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KUpdateStockPriceDlg)
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:14
@@ -3967,10 +3946,9 @@ msgstr "Display"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowGrid)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:30
-#, fuzzy, kde-format
-#| msgid "Show a grid in the register"
+#, kde-format
 msgid "Show a grid in the ledger"
-msgstr "Show a grid in the register"
+msgstr "Show a grid in the ledger"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TransactionForm)
 #. i18n: ectx: label, entry (TransactionForm), group (General Options)
@@ -3998,17 +3976,15 @@ msgstr "Display overdue schedules with planned date"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:57
-#, fuzzy, kde-format
-#| msgid "Investment details"
+#, kde-format
 msgid "Ledger entry details"
-msgstr "Investment details"
+msgstr "Ledger entry details"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowRegisterDetailed)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:63
-#, fuzzy, kde-format
-#| msgid "Show all register entries in full detail"
+#, kde-format
 msgid "Show all ledger entries in full detail"
-msgstr "Show all register entries in full detail"
+msgstr "Show all ledger entries in full detail"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_LedgerLens)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:73
@@ -4034,17 +4010,15 @@ msgstr "Use the ledger lens"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllSplits)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:86
-#, fuzzy, kde-format
-#| msgid "Show all split details in register"
+#, kde-format
 msgid "Show all split details in ledger"
-msgstr "Show all split details in register"
+msgstr "Show all split details in ledger"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:96
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgid "Information headers"
-msgstr "Information"
+msgstr "Information headers"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:102
@@ -4058,10 +4032,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:105
-#, fuzzy, kde-format
-#| msgid "Show group header between transactions"
+#, kde-format
 msgid "Show group headers between transactions"
-msgstr "Show group header between transactions"
+msgstr "Show group headers between transactions"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFiscalMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:115
@@ -4071,23 +4044,21 @@ msgstr "Show header for the previous and current fiscal year"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:123
-#, fuzzy, kde-format
-#| msgid "Do not show reconciled transactions"
+#, kde-format
 msgid "Don't show reconciliation entries"
-msgstr "Do not show reconciled transactions"
+msgstr "Do not show reconciliation entries"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:128
-#, fuzzy, kde-format
-#| msgid "Show date of last reconciliation on the Homepage"
+#, kde-format
 msgid "Show last reconciliation entry with date and balance in ledger"
-msgstr "Show date of last reconciliation on the Homepage"
+msgstr "Show last reconciliation entry with date and balance in ledger"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ShowReconciliationMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:133
 #, kde-format
 msgid "Show all reconciliation entries with date and balance in ledger"
-msgstr ""
+msgstr "Show all reconciliation entries with date and balance in ledger"
 
 #. i18n: ectx: attribute (title), widget (QWidget, sorting)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:161
@@ -17450,10 +17421,9 @@ msgstr "Include only Loan accounts"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:353
-#, fuzzy, kde-format
-#| msgid "Include only Investment accounts"
+#, kde-format
 msgid "<p>Include only data from Investment accounts in this report</p>"
-msgstr "Include only Investment accounts"
+msgstr "<p>Include only data from Investment accounts in this report</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:356
@@ -18307,7 +18277,7 @@ msgstr "Show fancy markers for previous and current fiscal year"
 #: kmymoney/settings/kmymoney.kcfg:264
 #, kde-format
 msgid "Show reconciliation entries with date and balance"
-msgstr ""
+msgstr "Show reconciliation entries with date and balance"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:273
@@ -20395,11 +20365,10 @@ msgid "Cleared: %1"
 msgstr "Cleared: %1"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
-#, fuzzy, kde-format
-#| msgid "%1 of %2"
+#, kde-format
 msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
 msgid "%1 of %2: %3"
-msgstr "%1 of %2"
+msgstr "%1 of %2: %3"
 
 #: kmymoney/views/ledgerviewpage_p.h:151
 #, kde-format
@@ -21484,11 +21453,8 @@ msgid "Reconcile state"
 msgstr "Reconcile state"
 
 #: kmymoney/widgets/transactionsortoption.cpp:41
-#, fuzzy
-#| msgctxt "@title:column Reconciliation state (ext)"
-#| msgid "Reconciliation"
 msgid "Reconciliation date"
-msgstr "Reconciliation"
+msgstr "Reconciliation date"
 
 #. i18n: ectx: property (text), widget (QListWidget, m_selectedList)
 #: kmymoney/widgets/transactionsortoption.ui:92
