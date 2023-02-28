@@ -1,16 +1,16 @@
 # Translation of kmymoney.po to Catalan (Valencian)
-# Copyright (C) 2006-2022 This_file_is_part_of_KDE
+# Copyright (C) 2006-2023 This_file_is_part_of_KDE
 # This file is put in the public domain.
 #
 # Orestes Mas Casals <orestes@tsc.upc.edu>, 2006, 2010, 2011.
-# Josep M. Ferrer <txemaq@gmail.com>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Josep M. Ferrer <txemaq@gmail.com>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-14 18:08+0000\n"
-"PO-Revision-Date: 2022-10-28 14:11+0200\n"
+"PO-Revision-Date: 2023-02-26 12:13+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -12404,6 +12404,7 @@ msgstr ""
 msgid "Clock length of optical tan flickering in ms."
 msgstr "Duració de rellotge del parpelleig òptic del codi TAN en ms."
 
+# skip-rule: rst-1asterisk,rst-asterisk1
 #. i18n: ectx: tooltip, entry (clocksetting), group (opticalTan)
 #: kmymoney/plugins/kbanking/kbanking.kcfg:14
 #, kde-format
@@ -15233,7 +15234,7 @@ msgstr "Ometre la data d'obertura en recuperar operacions"
 #, kde-format
 msgid "Include future transaction when using Schedule Forecast"
 msgstr ""
-"Incloure operacions futures quan s'utilitze la previsió basada en la "
+"Inclou operacions futures quan s'utilitze la previsió basada en la "
 "planificació"
 
 #. i18n: ectx: label, entry (includeScheduledTransactions), group (Forecast Options)
@@ -15242,7 +15243,7 @@ msgstr ""
 #, kde-format
 msgid "Include scheduled transactions when using Schedule Forecast"
 msgstr ""
-"Incloure operacions planificades quan s'utilitze la previsió basada en la "
+"Inclou operacions planificades quan s'utilitze la previsió basada en la "
 "planificació"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
