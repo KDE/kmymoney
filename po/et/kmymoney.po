@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 01:01+0000\n"
+"POT-Creation-Date: 2023-03-02 00:55+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -20672,7 +20672,7 @@ msgid "Investment value: %1%2"
 msgstr "Investeering väärtus: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:143
-#: kmymoney/views/reconciliationledgerviewpage.cpp:370
+#: kmymoney/views/reconciliationledgerviewpage.cpp:374
 #, fuzzy, kde-format
 #| msgctxt "Cleared balance"
 #| msgid "Cleared: %1"
@@ -20851,14 +20851,14 @@ msgstr ""
 msgid "Confirm end of reconciliation"
 msgstr "Kooskõlastamise lõpetamise kinnitus"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:369
+#: kmymoney/views/reconciliationledgerviewpage.cpp:373
 #, fuzzy, kde-format
 #| msgid "Statement: %1"
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Pangaväljavõte: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:371
+#: kmymoney/views/reconciliationledgerviewpage.cpp:375
 #, fuzzy, kde-format
 #| msgid "Difference: %1"
 msgctxt "@label:textbox Difference to statement"

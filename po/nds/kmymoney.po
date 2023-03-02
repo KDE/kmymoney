@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 01:01+0000\n"
+"POT-Creation-Date: 2023-03-02 00:55+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -20965,7 +20965,7 @@ msgid "Investment value: %1%2"
 msgstr "Geldanlaagweert: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:143
-#: kmymoney/views/reconciliationledgerviewpage.cpp:370
+#: kmymoney/views/reconciliationledgerviewpage.cpp:374
 #, fuzzy, kde-format
 #| msgctxt "Cleared balance"
 #| msgid "Cleared: %1"
@@ -21137,14 +21137,14 @@ msgstr ""
 msgid "Confirm end of reconciliation"
 msgstr "Afglieken-Enn beglöven"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:369
+#: kmymoney/views/reconciliationledgerviewpage.cpp:373
 #, fuzzy, kde-format
 #| msgid "Statement: %1"
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Kontouttog: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:371
+#: kmymoney/views/reconciliationledgerviewpage.cpp:375
 #, fuzzy, kde-format
 #| msgid "Difference: %1"
 msgctxt "@label:textbox Difference to statement"

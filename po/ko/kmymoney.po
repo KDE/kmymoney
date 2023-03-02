@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 01:01+0000\n"
+"POT-Creation-Date: 2023-03-02 00:55+0000\n"
 "PO-Revision-Date: 2022-07-13 15:41+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -419,7 +419,7 @@ msgstr "사용자 이름:"
 #: kmymoney/wizards/wizardpages/userinfo.ui:120
 #, kde-format
 msgid "Telephone:"
-msgstr "전화 번호:"
+msgstr "전화번호:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel3)
 #: kmymoney/dialogs/editpersonaldatadlg.ui:177
@@ -2980,11 +2980,9 @@ msgstr "정렬 옵션"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useDefault)
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Reset to application defaults"
-#| msgid "Reset to default"
+#, kde-format
 msgid "Use default"
-msgstr "기본값으로 초기화"
+msgstr "기본값 사용"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KUpdateStockPriceDlg)
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:14
@@ -20206,7 +20204,7 @@ msgid "Investment value: %1%2"
 msgstr "투자 가치: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:143
-#: kmymoney/views/reconciliationledgerviewpage.cpp:370
+#: kmymoney/views/reconciliationledgerviewpage.cpp:374
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -20371,13 +20369,13 @@ msgstr ""
 msgid "Confirm end of reconciliation"
 msgstr "조정 종료 확인"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:369
+#: kmymoney/views/reconciliationledgerviewpage.cpp:373
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "명세서: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:371
+#: kmymoney/views/reconciliationledgerviewpage.cpp:375
 #, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"

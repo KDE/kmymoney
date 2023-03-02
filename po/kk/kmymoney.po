@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 01:01+0000\n"
+"POT-Creation-Date: 2023-03-02 00:55+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -21116,7 +21116,7 @@ msgid "Investment value: %1%2"
 msgstr "Инвестиция мөлшері: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:143
-#: kmymoney/views/reconciliationledgerviewpage.cpp:370
+#: kmymoney/views/reconciliationledgerviewpage.cpp:374
 #, fuzzy, kde-format
 #| msgctxt "Cleared balance"
 #| msgid "Cleared: %1"
@@ -21295,14 +21295,14 @@ msgstr ""
 msgid "Confirm end of reconciliation"
 msgstr "Салыстырып тексеруді бітіруін құптау"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:369
+#: kmymoney/views/reconciliationledgerviewpage.cpp:373
 #, fuzzy, kde-format
 #| msgid "Statement: %1"
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Үзінді көшірме: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:371
+#: kmymoney/views/reconciliationledgerviewpage.cpp:375
 #, fuzzy, kde-format
 #| msgid "Difference: %1"
 msgctxt "@label:textbox Difference to statement"

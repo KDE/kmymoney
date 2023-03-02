@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 01:01+0000\n"
+"POT-Creation-Date: 2023-03-02 00:55+0000\n"
 "PO-Revision-Date: 2022-08-10 09:37+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -20579,7 +20579,7 @@ msgid "Investment value: %1%2"
 msgstr "Инвестиционная стоимость: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:143
-#: kmymoney/views/reconciliationledgerviewpage.cpp:370
+#: kmymoney/views/reconciliationledgerviewpage.cpp:374
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -20745,13 +20745,13 @@ msgstr ""
 msgid "Confirm end of reconciliation"
 msgstr "Завершение сверки счёта"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:369
+#: kmymoney/views/reconciliationledgerviewpage.cpp:373
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Выписка: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:371
+#: kmymoney/views/reconciliationledgerviewpage.cpp:375
 #, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"

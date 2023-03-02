@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 01:01+0000\n"
+"POT-Creation-Date: 2023-03-02 00:55+0000\n"
 "PO-Revision-Date: 2009-12-24 06:59-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -20324,7 +20324,7 @@ msgid "Investment value: %1%2"
 msgstr "Infheistíocht"
 
 #: kmymoney/views/ledgerviewpage_p.h:143
-#: kmymoney/views/reconciliationledgerviewpage.cpp:370
+#: kmymoney/views/reconciliationledgerviewpage.cpp:374
 #, fuzzy, kde-format
 #| msgctxt "@item reconciliation status"
 #| msgid "Cleared"
@@ -20492,14 +20492,14 @@ msgstr ""
 msgid "Confirm end of reconciliation"
 msgstr ""
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:369
+#: kmymoney/views/reconciliationledgerviewpage.cpp:373
 #, fuzzy, kde-format
 #| msgid "Start date"
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Dáta tosaigh"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:371
+#: kmymoney/views/reconciliationledgerviewpage.cpp:375
 #, fuzzy, kde-format
 #| msgid "Difference"
 msgctxt "@label:textbox Difference to statement"

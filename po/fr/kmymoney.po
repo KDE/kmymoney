@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 01:01+0000\n"
-"PO-Revision-Date: 2023-02-13 19:07+0100\n"
+"POT-Creation-Date: 2023-03-02 00:55+0000\n"
+"PO-Revision-Date: 2023-02-27 19:01+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -17684,10 +17684,11 @@ msgstr "Inclure seulement les comptes de prêts"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:353
-#, fuzzy, kde-format
-#| msgid "Include only Investment accounts"
+#, kde-format
 msgid "<p>Include only data from Investment accounts in this report</p>"
-msgstr "Inclure seulement les comptes de placement"
+msgstr ""
+"<p>Inclure uniquement les données des comptes de placement dans ce rapport</"
+"p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:356
@@ -20684,7 +20685,7 @@ msgid "Investment value: %1%2"
 msgstr "Valeur du placement : %1 %2"
 
 #: kmymoney/views/ledgerviewpage_p.h:143
-#: kmymoney/views/reconciliationledgerviewpage.cpp:370
+#: kmymoney/views/reconciliationledgerviewpage.cpp:374
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -20854,13 +20855,13 @@ msgstr ""
 msgid "Confirm end of reconciliation"
 msgstr "Confirmer la fin du rapprochement"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:369
+#: kmymoney/views/reconciliationledgerviewpage.cpp:373
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Déclaration : %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:371
+#: kmymoney/views/reconciliationledgerviewpage.cpp:375
 #, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
