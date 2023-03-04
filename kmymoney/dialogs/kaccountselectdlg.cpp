@@ -162,6 +162,7 @@ void KAccountSelectDlg::slotCreateAccount()
     if (!((int)d->m_accountType & ((int)eDialogs::Category::expense | (int)eDialogs::Category::income))) {
         Q_EMIT createAccount(d->m_account);
         if (!d->m_account.id().isEmpty()) {
+            d->ui->m_accountSelector->setSelected(d->m_account.id());
             accept();
         }
     } else {
@@ -170,6 +171,7 @@ void KAccountSelectDlg::slotCreateAccount()
         else
             KNewAccountDlg::newCategory(d->m_account, MyMoneyFile::instance()->income());
         if (!d->m_account.id().isEmpty()) {
+            d->ui->m_accountSelector->setSelected(d->m_account.id());
             accept();
         }
     }
@@ -226,15 +228,5 @@ QString KAccountSelectDlg::selectedAccount() const
 {
     Q_D(const KAccountSelectDlg);
 
-    // in case an account was created before, it might not be in the
-    // account model (yet) due to the delayed update (an enclosing
-    // MyMoneyFileTransaction has not been committed). Therefor, we
-    // use the id of m_account which carries the id of the newly
-    // created account. If only an account was selected, the object
-    // m_account is empty.
-    if (d->m_account.id().isEmpty())
-        return d->ui->m_accountSelector->getSelected();
-    return d->m_account.id();
+    return d->ui->m_accountSelector->getSelected();
 }
-
-// kate: space-indent on; indent-width 2; remove-trailing-space on; remove-trailing-space-save on;
