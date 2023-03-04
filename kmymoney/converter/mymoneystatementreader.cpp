@@ -1356,6 +1356,9 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
         }
     }
 
+    // keep a copy for later use
+    const QString originalAccountId(accountId);
+
     QString msg = i18n("<b>You have downloaded a statement for the following account:</b><br/><br/>");
     msg += i18n(" - Account Name: %1", account.name()) + "<br/>";
     msg += i18n(" - Account Type: %1", MyMoneyAccount::accountTypeToString(account.accountType())) + "<br/>";
@@ -1365,6 +1368,7 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
     if (!account.name().isEmpty()) {
         if (!accountId.isEmpty())
             msg += i18n("Do you want to import transactions to this account?");
+
         else
             msg += i18n("KMyMoney cannot determine which of your accounts to use.  You can "
                         "create a new account by pressing the <b>Create</b> button "
@@ -1409,13 +1413,27 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
         if (accountSelect->exec() == QDialog::Accepted && !accountSelect->selectedAccount().isEmpty()) {
             result = true;
             done = true;
+            // update account data (current and previous)
             accountId = accountSelect->selectedAccount();
             account = file->account(accountId);
+            MyMoneyAccount originalAccount;
+            if (!originalAccountId.isEmpty()) {
+                originalAccount = file->account(originalAccountId);
+            }
+
+            // if we have an account number and it differs
+            // from the one we have as reference on file
             if (! accountNumber.isEmpty() && account.value("StatementKey") != accountNumber) {
+                // update it on the account and remove it from the previous one
                 account.setValue("StatementKey", accountNumber);
+                originalAccount.deletePair(QLatin1String("StatementKey"));
+
                 MyMoneyFileTransaction ft;
                 try {
                     MyMoneyFile::instance()->modifyAccount(account);
+                    if (!originalAccountId.isEmpty()) {
+                        MyMoneyFile::instance()->modifyAccount(originalAccount);
+                    }
                     ft.commit();
                     accname = account.name();
                 } catch (const MyMoneyException &) {
