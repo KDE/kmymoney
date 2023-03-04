@@ -641,6 +641,7 @@ void JournalDelegate::endEdit()
         }
         Q_EMIT closeEditor(d->m_editor, NoHint);
         d->m_editorRow = -1;
+        delete d->m_editor;
         d->m_editor = nullptr;
     }
 }
