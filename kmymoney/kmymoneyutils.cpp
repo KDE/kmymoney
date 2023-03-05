@@ -561,7 +561,7 @@ bool KMyMoneyUtils::newPayee(const QString& newnameBase, QString& id)
 
     if (newnameBase != i18n("New Payee")) {
         // Ask the user if that is what he intended to do?
-        const auto msg = i18n("<qt>Do you want to add <b>%1</b> as payer/receiver?</qt>", newnameBase);
+        const auto msg = i18n("<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>", newnameBase);
 
         if (KMessageBox::questionTwoActions(nullptr, msg, i18n("New payee/receiver"), KMMYesNo::yes(), KMMYesNo::no(), "NewPayee")
             == KMessageBox::SecondaryAction) {
