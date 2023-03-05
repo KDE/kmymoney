@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 18:08+0000\n"
+"POT-Creation-Date: 2023-03-05 04:03+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -246,33 +246,33 @@ msgstr ""
 "Problem ved at tilføje eller matche importeret transaktion med id'et \"%1\": "
 "%2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1359
+#: kmymoney/converter/mymoneystatementreader.cpp:1362
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>Du har downloadet en opgørelse for følgende konto:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1360
+#: kmymoney/converter/mymoneystatementreader.cpp:1363
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Kontonavn: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1361
+#: kmymoney/converter/mymoneystatementreader.cpp:1364
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Konto type: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1362
+#: kmymoney/converter/mymoneystatementreader.cpp:1365
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Kontonummer: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1367
+#: kmymoney/converter/mymoneystatementreader.cpp:1370
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Vil du importere transaktioner til denne konto?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1369
+#: kmymoney/converter/mymoneystatementreader.cpp:1373
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -283,7 +283,7 @@ msgstr ""
 "oprette en ny konto ved at trykke på knappen <b>Opret</b> eller vælge en "
 "anden manuelt fra udvælgelsesfeltet nedenfor."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1373
+#: kmymoney/converter/mymoneystatementreader.cpp:1377
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -294,12 +294,12 @@ msgstr ""
 "venligst en konto med udvælgelsesfeltet i dialogen eller opret en ny konto "
 "ved at trykke på knappen <b>Opret</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1400
+#: kmymoney/converter/mymoneystatementreader.cpp:1404
 #, kde-format
 msgid "Import transactions"
 msgstr "Importér transaktioner"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1430
+#: kmymoney/converter/mymoneystatementreader.cpp:1448
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -307,7 +307,7 @@ msgid ""
 msgstr ""
 "Du skal vælge en konto, oprette en ny, eller trykke på knappen <b>Afbryd</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1561
+#: kmymoney/converter/mymoneystatementreader.cpp:1579
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has found a scheduled transaction which matches an imported "
@@ -324,7 +324,7 @@ msgstr ""
 "transaktion.<br/> Skemanavn: <b>%1</b><br/>Transaktion: <i>%2 %3</i><br/>Vil "
 "du at KMyMoney skal gå ind i dette skema nu så transaktionen kan matches? "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1570
+#: kmymoney/converter/mymoneystatementreader.cpp:1588
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has found a scheduled transaction which matches an imported "
@@ -350,7 +350,7 @@ msgstr[1] ""
 "transaktion.<br/> Skemanavn: <b>%1</b><br/>Transaktion: <i>%2 %3</i><br/>Vil "
 "du at KMyMoney skal gå ind i dette skema nu så transaktionen kan matches? "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1582
+#: kmymoney/converter/mymoneystatementreader.cpp:1600
 #, kde-format
 msgid "Schedule found"
 msgstr "Skema fundet"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 18:08+0000\n"
+"POT-Creation-Date: 2023-03-05 04:03+0000\n"
 "PO-Revision-Date: 2022-10-11 11:38+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -250,33 +250,33 @@ msgstr ""
 "Ongelma lisäyksessä tai tuodun tapahtuman sovittamisessa, tapahtumatunniste "
 "'%1': %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1359
+#: kmymoney/converter/mymoneystatementreader.cpp:1362
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>Tiliote ladattu seuraavalle tilille:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1360
+#: kmymoney/converter/mymoneystatementreader.cpp:1363
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " – Tilin nimi: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1361
+#: kmymoney/converter/mymoneystatementreader.cpp:1364
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " – Tilin tyyppi: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1362
+#: kmymoney/converter/mymoneystatementreader.cpp:1365
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " – Tilinumero: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1367
+#: kmymoney/converter/mymoneystatementreader.cpp:1370
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Haluatko tuoda tälle tilille tapahtumia?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1369
+#: kmymoney/converter/mymoneystatementreader.cpp:1373
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -286,7 +286,7 @@ msgstr ""
 "Ohjelma ei osaa päättää käytettävää tiliä. Uuden tilin voi luoda "
 "napsauttamalla <b>Luo uusi</b> tai valitsemalla sen valintakentästä."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1373
+#: kmymoney/converter/mymoneystatementreader.cpp:1377
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -296,12 +296,12 @@ msgstr ""
 "Valitusta tiliotteesta ei löytynyt tilitietoa. Valitse tili ikkunan "
 "valintakentästä tai luo uusi painikkeella <b>Luo uusi</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1400
+#: kmymoney/converter/mymoneystatementreader.cpp:1404
 #, kde-format
 msgid "Import transactions"
 msgstr "Tuo tapahtumia"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1430
+#: kmymoney/converter/mymoneystatementreader.cpp:1448
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -309,7 +309,7 @@ msgid ""
 msgstr ""
 "On valittava tili, luotava uusi tai painettava <b>Keskeytä</b>-painiketta."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1561
+#: kmymoney/converter/mymoneystatementreader.cpp:1579
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -322,7 +322,7 @@ msgstr ""
 ">Haluatko KMyMoneyn käyttävän nyt tätä aikataulua, jotta tapahtumat voi "
 "sovittaa yhteen?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1570
+#: kmymoney/converter/mymoneystatementreader.cpp:1588
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -345,7 +345,7 @@ msgstr[1] ""
 ">Tapahtuman päiväyksissä on %1 päivän ero.<br/>Haluatko että ajoitettu "
 "tapahtuma kirjataan, jotta tapahtuma on yhteensovitettavissa? "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1582
+#: kmymoney/converter/mymoneystatementreader.cpp:1600
 #, kde-format
 msgid "Schedule found"
 msgstr "Ajoitettu tapahtuma löytyi"
