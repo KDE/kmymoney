@@ -58,6 +58,10 @@ Qt::ItemFlags SchedulesJournalModel::flags(const QModelIndex& index) const
 
 QVariant SchedulesJournalModel::data(const QModelIndex& index, int role) const
 {
+    if (role == eMyMoney::Model::BaseModelRole) {
+        return eMyMoney::Model::SchedulesJournalEntryRole;
+    }
+
     if (!index.isValid())
         return QVariant();
     if (index.row() < 0 || index.row() >= rowCount(index.parent()))

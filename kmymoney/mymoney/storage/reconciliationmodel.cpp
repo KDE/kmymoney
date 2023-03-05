@@ -148,6 +148,10 @@ void ReconciliationModel::doLoad()
 
 QVariant ReconciliationModel::data(const QModelIndex& idx, int role) const
 {
+    if (role == eMyMoney::Model::BaseModelRole) {
+        return eMyMoney::Model::ReconciliationEntryRole;
+    }
+
     if (!idx.isValid())
         return {};
 

@@ -115,6 +115,10 @@ void SpecialDatesModel::load()
 
 QVariant SpecialDatesModel::data(const QModelIndex& idx, int role) const
 {
+    if (role == eMyMoney::Model::BaseModelRole) {
+        return eMyMoney::Model::SpecialDatesEntryRole;
+    }
+
     if (!idx.isValid())
         return {};
 

@@ -570,6 +570,10 @@ Qt::ItemFlags JournalModel::flags(const QModelIndex& index) const
 
 QVariant JournalModel::data(const QModelIndex& idx, int role) const
 {
+    if (role == eMyMoney::Model::BaseModelRole) {
+        return eMyMoney::Model::JournalEntryRole;
+    }
+
     if (!idx.isValid())
         return QVariant();
     if (idx.row() < 0 || idx.row() >= rowCount(idx.parent()))

@@ -661,9 +661,17 @@ enum Roles {
     ActiveFilterTextRole,
     ActiveFilterStateRole,
     ShowValueInvertedRole,
+
+    DelegateRole,
+
+    // Modeltypes
+    BaseModelRole,
+    JournalEntryRole, // true if entry is a journal record
     OnlineBalanceEntryRole, // true if entry is an online balance record
     SecurityAccountNameEntryRole, // true if entry is a security account name record
-    DelegateRole,
+    SpecialDatesEntryRole, // true if entry is a special dates record
+    ReconciliationEntryRole, // true if entry is a reconciliation record
+    SchedulesJournalEntryRole, // true if entry is a scheduled journal record
 };
 
 typedef enum {
@@ -680,5 +688,6 @@ Q_DECLARE_METATYPE(eMyMoney::Split::InvestmentTransactionType)
 Q_DECLARE_METATYPE(eMyMoney::Schedule::Occurrence)
 Q_DECLARE_METATYPE(eMyMoney::Schedule::PaymentType)
 Q_DECLARE_METATYPE(eMyMoney::Model::ReconciliationFilterHint)
+Q_DECLARE_METATYPE(eMyMoney::Model::Roles)
 
 #endif

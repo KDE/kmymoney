@@ -46,7 +46,7 @@ public:
 
     inline bool isSpecialDatesModel(const QModelIndex& idx) const
     {
-        return isSpecialDatesModel(MyMoneyModelBase::baseModel(idx));
+        return idx.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>() == eMyMoney::Model::SpecialDatesEntryRole;
     }
 
     inline bool isReconciliationModel(const QAbstractItemModel* model) const
@@ -56,7 +56,12 @@ public:
 
     inline bool isReconciliationModel(const QModelIndex& idx) const
     {
-        return isReconciliationModel(MyMoneyModelBase::baseModel(idx));
+        return idx.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>() == eMyMoney::Model::ReconciliationEntryRole;
+    }
+
+    inline bool isOnlineBalanceModel(const QModelIndex& idx) const
+    {
+        return idx.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>() == eMyMoney::Model::OnlineBalanceEntryRole;
     }
 
     inline bool isJournalModel(const QAbstractItemModel* model) const
@@ -66,7 +71,7 @@ public:
 
     inline bool isJournalModel(const QModelIndex& idx) const
     {
-        return isJournalModel(MyMoneyModelBase::baseModel(idx));
+        return idx.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>() == eMyMoney::Model::JournalEntryRole;
     }
 
     inline bool isSchedulesJournalModel(const QAbstractItemModel* model) const
@@ -76,7 +81,7 @@ public:
 
     inline bool isSchedulesJournalModel(const QModelIndex& idx) const
     {
-        return isSchedulesJournalModel(MyMoneyModelBase::baseModel(idx));
+        return idx.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>() == eMyMoney::Model::SchedulesJournalEntryRole;
     }
 
     QString modelType(const QAbstractItemModel* model) const

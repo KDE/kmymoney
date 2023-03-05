@@ -82,29 +82,29 @@ bool LedgerSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& 
             // in case of sorting by reconciliation date, the date
             // may be invalid and we have to react a bit different.
             if ((leftDate == rightDate) && leftDate.isValid()) {
-                const auto leftModel = model->baseModel(left);
-                const auto rightModel = model->baseModel(right);
+                const auto leftModel = left.data(eMyMoney::Model::BaseModelRole);
+                const auto rightModel = right.data(eMyMoney::Model::BaseModelRole);
                 if (leftModel != rightModel) {
                     // schedules will always be presented last on the same day
                     // before that the online balance is shown
                     // before that the reconciliation records are displayed
                     // special date records are shown on top
                     // account names are shown on top
-                    if (d->isSchedulesJournalModel(leftModel)) {
+                    if (d->isSchedulesJournalModel(left)) {
                         return falseValue;
-                    } else if (d->isSchedulesJournalModel(rightModel)) {
+                    } else if (d->isSchedulesJournalModel(right)) {
                         return trueValue;
-                    } else if (left.data(eMyMoney::Model::OnlineBalanceEntryRole).toBool()) {
+                    } else if (d->isOnlineBalanceModel(left)) {
                         return falseValue;
-                    } else if (right.data(eMyMoney::Model::OnlineBalanceEntryRole).toBool()) {
+                    } else if (d->isOnlineBalanceModel(right)) {
                         return trueValue;
-                    } else if (d->isSpecialDatesModel(leftModel)) {
+                    } else if (d->isSpecialDatesModel(left)) {
                         return trueValue;
-                    } else if (d->isSpecialDatesModel(rightModel)) {
+                    } else if (d->isSpecialDatesModel(right)) {
                         return falseValue;
-                    } else if (d->isReconciliationModel(leftModel)) {
+                    } else if (d->isReconciliationModel(left)) {
                         return falseValue;
-                    } else if (d->isReconciliationModel(rightModel)) {
+                    } else if (d->isReconciliationModel(right)) {
                         return trueValue;
                     }
                     // if we get here, both are transaction entries
@@ -242,8 +242,7 @@ bool LedgerSortProxyModel::filterAcceptsRow(int source_row, const QModelIndex& s
     }
 
     // in case it's a special date entry or reconciliation entry, we accept it
-    const auto baseModel = MyMoneyFile::baseModel()->baseModel(idx);
-    if (d->isSpecialDatesModel(baseModel) || d->isReconciliationModel(baseModel)) {
+    if (d->isSpecialDatesModel(idx) || d->isReconciliationModel(idx)) {
         return true;
     }
 

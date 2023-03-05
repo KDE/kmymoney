@@ -64,11 +64,12 @@ QVariant SecurityAccountsProxyModel::data(const QModelIndex& idx, int role) cons
         return {};
     }
 
+    if (role == eMyMoney::Model::BaseModelRole) {
+        return eMyMoney::Model::SecurityAccountNameEntryRole;
+    }
+
     if (idx.isValid()) {
         switch (role) {
-        case eMyMoney::Model::SecurityAccountNameEntryRole:
-            return true;
-
         case eMyMoney::Model::JournalSplitSecurityNameRole:
             return QSortFilterProxyModel::data(idx, eMyMoney::Model::AccountNameRole);
 

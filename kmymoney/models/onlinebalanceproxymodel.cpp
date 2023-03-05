@@ -83,11 +83,12 @@ QModelIndex OnlineBalanceProxyModel::index(int row, int column, const QModelInde
 
 QVariant OnlineBalanceProxyModel::data(const QModelIndex& idx, int role) const
 {
+    if (role == eMyMoney::Model::BaseModelRole) {
+        return eMyMoney::Model::OnlineBalanceEntryRole;
+    }
+
     if (idx.isValid()) {
         switch(role) {
-        case eMyMoney::Model::OnlineBalanceEntryRole:
-            return true;
-
         case eMyMoney::Model::DelegateRole:
             return static_cast<int>(eMyMoney::Delegates::Types::OnlineBalanceDelegate);
 
