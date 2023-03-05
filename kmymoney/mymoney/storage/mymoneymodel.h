@@ -533,7 +533,11 @@ public:
         int row = 0;
         for (const auto& item : list) {
             updateNextObjectId(item.id());
-            static_cast<TreeItem<T>*>(index(row, 0).internalPointer())->dataRef() = item;
+            const auto idx = index(row, 0);
+            static_cast<TreeItem<T>*>(idx.internalPointer())->dataRef() = item;
+            if (m_idToItemMapper) {
+                m_idToItemMapper->insert(item.id(), static_cast<TreeItem<T>*>(idx.internalPointer()));
+            }
             ++row;
         }
         endResetModel();
