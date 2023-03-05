@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-02 00:55+0000\n"
+"POT-Creation-Date: 2023-03-05 00:52+0000\n"
 "PO-Revision-Date: 2023-02-28 08:42+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -268,33 +268,33 @@ msgstr "Ni mogoče dodati plačnika/prejemnika plačil"
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr "Težava pri dodajanju ali ujemanju uvožene transakcije z ID-jem '%1':%2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1428
+#: kmymoney/converter/mymoneystatementreader.cpp:1431
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>Prenesli ste izkaz za naslednji račun: </b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1429
+#: kmymoney/converter/mymoneystatementreader.cpp:1432
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Ime računa; %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1430
+#: kmymoney/converter/mymoneystatementreader.cpp:1433
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Vrsta računa: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1431
+#: kmymoney/converter/mymoneystatementreader.cpp:1434
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Številka računa: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1436
+#: kmymoney/converter/mymoneystatementreader.cpp:1439
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Ali želite uvoziti transakcije na ta račun?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1438
+#: kmymoney/converter/mymoneystatementreader.cpp:1442
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -305,7 +305,7 @@ msgstr ""
 "ustvarite nov račun s pritiskom na gumb <b>Ustvari</b> ali izberete drugega "
 "ročno iz spodnjega izbirnega polja."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1442
+#: kmymoney/converter/mymoneystatementreader.cpp:1446
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -316,12 +316,12 @@ msgstr ""
 "Prosim izberite račun z izbirnim poljem v pogovornem oknu ali ustvarite "
 "novega s pritiskom na gumb <b>Ustvari</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1469
+#: kmymoney/converter/mymoneystatementreader.cpp:1473
 #, kde-format
 msgid "Import transactions"
 msgstr "Uvozi transakcije"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1499
+#: kmymoney/converter/mymoneystatementreader.cpp:1517
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -329,14 +329,14 @@ msgid ""
 msgstr ""
 "Izbrati morate račun, ustvariti novega ali pritisniti gumb <b>Prekini</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1611
+#: kmymoney/converter/mymoneystatementreader.cpp:1629
 #: kmymoney/views/kscheduledview_p.h:192 kmymoney/views/kscheduledview_p.h:307
 #: kmymoney/views/kscheduledview_p.h:311
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Ni mogoče vnesti časovno načrtovane transakcije '%1'"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1631
+#: kmymoney/converter/mymoneystatementreader.cpp:1649
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -348,7 +348,7 @@ msgstr ""
 ">Ime razporeda:<b>%1</b><br/>Transakcija:<i>%2 %3</i><br />Ali želite, da "
 "KMyMoney zdaj vnese ta urnik, da se lahko transakciji ujemata?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1640
+#: kmymoney/converter/mymoneystatementreader.cpp:1658
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -381,7 +381,7 @@ msgstr[3] ""
 "se razlikujeta samo za %1 dni.<br />Ali želite, da KMyMoney zdaj vnese ta "
 "urnik, da se lahko transakciji ujemata?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1654
+#: kmymoney/converter/mymoneystatementreader.cpp:1672
 #, kde-format
 msgid "Schedule found"
 msgstr "Najden razpored"

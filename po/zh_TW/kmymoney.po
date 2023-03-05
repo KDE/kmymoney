@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-02 00:55+0000\n"
+"POT-Creation-Date: 2023-03-05 00:52+0000\n"
 "PO-Revision-Date: 2019-01-19 19:46+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -258,33 +258,33 @@ msgstr "無法新增收款人"
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr "新增或比對匯入交易（代碼 %1）時發生問題：%2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1428
+#: kmymoney/converter/mymoneystatementreader.cpp:1431
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>您已下載以下帳戶的報表：</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1429
+#: kmymoney/converter/mymoneystatementreader.cpp:1432
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - 帳戶名稱：%1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1430
+#: kmymoney/converter/mymoneystatementreader.cpp:1433
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - 帳戶類型：%1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1431
+#: kmymoney/converter/mymoneystatementreader.cpp:1434
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - 帳戶編號：%1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1436
+#: kmymoney/converter/mymoneystatementreader.cpp:1439
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "您要匯入此帳戶的交易嗎？"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1438
+#: kmymoney/converter/mymoneystatementreader.cpp:1442
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -294,7 +294,7 @@ msgstr ""
 "KMyMoney 無法決定要使用哪一個帳戶。您可以按下「建立」來建立新帳戶，或是在下方"
 "選擇現有的帳戶。"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1442
+#: kmymoney/converter/mymoneystatementreader.cpp:1446
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -304,26 +304,26 @@ msgstr ""
 "在選取的報表檔中找不到帳戶資訊。請選取一個帳戶，或是按下「建立」來建立新帳"
 "戶。"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1469
+#: kmymoney/converter/mymoneystatementreader.cpp:1473
 #, kde-format
 msgid "Import transactions"
 msgstr "匯入交易"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1499
+#: kmymoney/converter/mymoneystatementreader.cpp:1517
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
 "button."
 msgstr "您必須選擇帳戶，或是建立帳戶，或是按下「中止」鍵。"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1611
+#: kmymoney/converter/mymoneystatementreader.cpp:1629
 #: kmymoney/views/kscheduledview_p.h:192 kmymoney/views/kscheduledview_p.h:307
 #: kmymoney/views/kscheduledview_p.h:311
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "無法輸入排程交易 %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1631
+#: kmymoney/converter/mymoneystatementreader.cpp:1649
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has found a scheduled transaction named <b>%1</b> which matches "
@@ -338,7 +338,7 @@ msgstr ""
 "KMyMoney 找到了名為 <b>%1</b> 的排程交易，與匯入交易比對相符。您要 KMyMoney "
 "現在輸入此排程，以便符合該筆交易嗎？"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1640
+#: kmymoney/converter/mymoneystatementreader.cpp:1658
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has found a scheduled transaction named <b>%1</b> which matches "
@@ -358,7 +358,7 @@ msgstr[0] ""
 "KMyMoney 找到了名為 <b>%1</b> 的排程交易，與匯入交易比對相符。您要 KMyMoney "
 "現在輸入此排程，以便符合該筆交易嗎？"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1654
+#: kmymoney/converter/mymoneystatementreader.cpp:1672
 #, kde-format
 msgid "Schedule found"
 msgstr "找到排程"

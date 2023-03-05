@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-02 00:55+0000\n"
+"POT-Creation-Date: 2023-03-05 00:52+0000\n"
 "PO-Revision-Date: 2022-01-04 22:18+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -267,33 +267,33 @@ msgstr "تعذّرت إضافة المُتسلِّم/المستلم"
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr "مشكلة في إضافة (أو مطابقة) المعاملة المستوردة ذات المعرّف ’%1‘:‏ %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1428
+#: kmymoney/converter/mymoneystatementreader.cpp:1431
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>لقد نزّلت إفادة للحساب الآتي:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1429
+#: kmymoney/converter/mymoneystatementreader.cpp:1432
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - اسم الحساب: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1430
+#: kmymoney/converter/mymoneystatementreader.cpp:1433
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - نوع الحساب: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1431
+#: kmymoney/converter/mymoneystatementreader.cpp:1434
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - رقم الحساب: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1436
+#: kmymoney/converter/mymoneystatementreader.cpp:1439
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "أتريد استيراد المعاملات إلى هذا الحساب؟"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1438
+#: kmymoney/converter/mymoneystatementreader.cpp:1442
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -303,7 +303,7 @@ msgstr ""
 "يتعذّر على «أموالك» تحديد أيّ الحسابات يجب استخدامها. يمكنك إنشاء حساب جديد "
 "بنقر الزّرّ <b>أنشئ</b> أو اختيار آخر يدويًّا من مربّع الاختيار أدناه."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1442
+#: kmymoney/converter/mymoneystatementreader.cpp:1446
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -313,26 +313,26 @@ msgstr ""
 "لم يُعثر على معلومات عن الحساب في ملفّ البيان المستورد. رجاءً اختر حسابًا "
 "باستخدام مربّع الاختيار في الحواريّ أو أنشئ جديدًا بنقر زرّ <b>أنشئ</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1469
+#: kmymoney/converter/mymoneystatementreader.cpp:1473
 #, kde-format
 msgid "Import transactions"
 msgstr "استورد المعاملات"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1499
+#: kmymoney/converter/mymoneystatementreader.cpp:1517
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
 "button."
 msgstr "عليك اختيار حساب، أو إنشاء واحد جديد، أو نقر زرّ <b>أجهض</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1611
+#: kmymoney/converter/mymoneystatementreader.cpp:1629
 #: kmymoney/views/kscheduledview_p.h:192 kmymoney/views/kscheduledview_p.h:307
 #: kmymoney/views/kscheduledview_p.h:311
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "تعذّر الدّخول إلى المعاملة المجدولة ’%1‘"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1631
+#: kmymoney/converter/mymoneystatementreader.cpp:1649
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -344,7 +344,7 @@ msgstr ""
 "الجدول: <b>%1</b><br/>المعاملة: <i>%2 ‏%3</i><br/>أتريد أن يدخل «أموالك» إلى "
 "هذا الجدول الآن ليمكنه مطابقة المعاملة؟"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1640
+#: kmymoney/converter/mymoneystatementreader.cpp:1658
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -363,7 +363,7 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1654
+#: kmymoney/converter/mymoneystatementreader.cpp:1672
 #, kde-format
 msgid "Schedule found"
 msgstr "عُثر على جدول"
@@ -4454,7 +4454,7 @@ msgid ""
 "Please consider contributing to this project with code and/or suggestions."
 msgstr ""
 "\n"
-"أموالك، مدير الماليّة الشّخصيّ من كدي.\n"
+"أموالك، مدير الماليّة الشّخصيّ من كِيدِي.\n"
 "\n"
 "نرجو منك التّفكير والمساهمة في المشروع بتطويره أو الاقتراح عليه."
 
@@ -4581,7 +4581,7 @@ msgstr "الأيقونات وشاشة البداية"
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches and port to kde4"
-msgstr "ترقيعات متفرّقة والانتقال إلى كدي٤"
+msgstr "ترقيعات متفرّقة والانتقال إلى كِيدِي٤"
 
 #: kmymoney/kcreditswindow.cpp:82
 #, kde-format
@@ -20142,7 +20142,7 @@ msgstr "مرحبًا في «أموالك»"
 #: kmymoney/views/kwelcomepage.cpp:66
 #, kde-format
 msgid "The free, easy to use, personal finance manager by KDE"
-msgstr "مدير الماليّة الشّخصيّ الحرّ وسهل الاستخدام من «كدي»"
+msgstr "مدير الماليّة الشّخصيّ الحرّ وسهل الاستخدام من «كِيدِي»"
 
 #: kmymoney/views/kwelcomepage.cpp:74
 #, fuzzy, kde-format
@@ -25771,14 +25771,14 @@ msgstr ""
 #~ msgstr "ألوان خلفية خاصة"
 
 #~ msgid "KDE language settings..."
-#~ msgstr "إعدادات لغة كدي..."
+#~ msgstr "إعدادات لغة كِيدِي..."
 
 #~ msgid ""
 #~ "Please be aware that changes made in the following dialog affect all KDE "
 #~ "applications not only KMyMoney."
 #~ msgstr ""
 #~ "يرجى العلم أن التغييرات التي تُفعل في مربع الحوار التالي ستؤثّر في كل "
-#~ "تطبيقات كدي وليس فقط أموالي.ك."
+#~ "تطبيقات كِيدِي وليس فقط أموالي.ك."
 
 #~ msgid "List background color"
 #~ msgstr "لون خلفية القائمة"

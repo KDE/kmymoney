@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-02 00:55+0000\n"
+"POT-Creation-Date: 2023-03-05 00:52+0000\n"
 "PO-Revision-Date: 2022-09-26 20:31+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -257,33 +257,33 @@ msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr ""
 "Problem att lägga till eller matcha importerad transaktion med id '%1': %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1428
+#: kmymoney/converter/mymoneystatementreader.cpp:1431
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "<b>Du har laddat ner ett utdrag för följande konto:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1429
+#: kmymoney/converter/mymoneystatementreader.cpp:1432
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Kontonamn: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1430
+#: kmymoney/converter/mymoneystatementreader.cpp:1433
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Kontotyp: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1431
+#: kmymoney/converter/mymoneystatementreader.cpp:1434
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Kontonummer: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1436
+#: kmymoney/converter/mymoneystatementreader.cpp:1439
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Vill du importera transaktioner i det här kontot?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1438
+#: kmymoney/converter/mymoneystatementreader.cpp:1442
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -294,7 +294,7 @@ msgstr ""
 "skapa ett nytt konto genom att klicka på knappen <b>Skapa</b>, eller välja "
 "ett annat manuellt i urvalsrutan nedan."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1442
+#: kmymoney/converter/mymoneystatementreader.cpp:1446
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -305,12 +305,12 @@ msgstr ""
 "urvalsrutan i dialogrutan eller skapa ett nytt konto genom att klicka på "
 "knappen <b>Skapa</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1469
+#: kmymoney/converter/mymoneystatementreader.cpp:1473
 #, kde-format
 msgid "Import transactions"
 msgstr "Importera transaktioner"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1499
+#: kmymoney/converter/mymoneystatementreader.cpp:1517
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -319,14 +319,14 @@ msgstr ""
 "Du måste markera ett konto, skapa ett nytt, eller klicka på knappen "
 "<b>Avbryt</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1611
+#: kmymoney/converter/mymoneystatementreader.cpp:1629
 #: kmymoney/views/kscheduledview_p.h:192 kmymoney/views/kscheduledview_p.h:307
 #: kmymoney/views/kscheduledview_p.h:311
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Kan inte registrera schemalagd transaktion '%1'"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1631
+#: kmymoney/converter/mymoneystatementreader.cpp:1649
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -339,7 +339,7 @@ msgstr ""
 ">Vill du att KMyMoney ska skriva in schemat nu så att transaktionen kan "
 "matchas? "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1640
+#: kmymoney/converter/mymoneystatementreader.cpp:1658
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -362,7 +362,7 @@ msgstr[1] ""
 ">Transaktionsdatumen är åtskilda med %1 dagar.<br/>Vill du att KMyMoney ska "
 "skriva in schemat nu så att transaktionen kan matchas? "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1654
+#: kmymoney/converter/mymoneystatementreader.cpp:1672
 #, kde-format
 msgid "Schedule found"
 msgstr "Schema hittades"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-02 00:55+0000\n"
+"POT-Creation-Date: 2023-03-05 00:52+0000\n"
 "PO-Revision-Date: 2023-02-27 10:51+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -262,34 +262,34 @@ msgstr "Kan begunstigde/ontvanger niet toevoegen"
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr "Probleem bij het toevoegen van de geïmporteerde transactie '%1': %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1428
+#: kmymoney/converter/mymoneystatementreader.cpp:1431
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr ""
 "<b>U hebt een afschrift voor de volgende rekening gedownload:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1429
+#: kmymoney/converter/mymoneystatementreader.cpp:1432
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Rekeningnaam: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1430
+#: kmymoney/converter/mymoneystatementreader.cpp:1433
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Rekeningtype: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1431
+#: kmymoney/converter/mymoneystatementreader.cpp:1434
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Rekeningnummer: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1436
+#: kmymoney/converter/mymoneystatementreader.cpp:1439
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Wilt u transacties importeren naar deze rekening?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1438
+#: kmymoney/converter/mymoneystatementreader.cpp:1442
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -300,7 +300,7 @@ msgstr ""
 "een nieuwe rekening aanmaken door op de <b>Creëer</b>-knop te drukken of "
 "handmatig een keuze te maken uit onderstaande lijst."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1442
+#: kmymoney/converter/mymoneystatementreader.cpp:1446
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -311,12 +311,12 @@ msgstr ""
 "Selecteer een rekening via de lijst of creëer een nieuwe rekening door te "
 "drukken op de <b>Creëer</b>-knop."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1469
+#: kmymoney/converter/mymoneystatementreader.cpp:1473
 #, kde-format
 msgid "Import transactions"
 msgstr "Transacties importeren"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1499
+#: kmymoney/converter/mymoneystatementreader.cpp:1517
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -325,14 +325,14 @@ msgstr ""
 "U moet een rekening selecteren, een nieuwe aanmaken of op de knop "
 "<b>Afbreken</b> klikken."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1611
+#: kmymoney/converter/mymoneystatementreader.cpp:1629
 #: kmymoney/views/kscheduledview_p.h:192 kmymoney/views/kscheduledview_p.h:307
 #: kmymoney/views/kscheduledview_p.h:311
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Kan de periodieke transactie '%1' niet invoeren"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1631
+#: kmymoney/converter/mymoneystatementreader.cpp:1649
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -345,7 +345,7 @@ msgstr ""
 "%2 %3</i><br/>Wilt u deze periodieke transactie nu invoeren zodat deze 2 "
 "transacties kunnen worden vergeleken?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1640
+#: kmymoney/converter/mymoneystatementreader.cpp:1658
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -370,7 +370,7 @@ msgstr[1] ""
 "periodieke transactie nu invoeren zodat deze 2 transacties kunnen worden "
 "vergeleken?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1654
+#: kmymoney/converter/mymoneystatementreader.cpp:1672
 #, kde-format
 msgid "Schedule found"
 msgstr "Periodieke transactie gevonden"

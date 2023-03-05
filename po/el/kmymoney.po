@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-02 00:55+0000\n"
+"POT-Creation-Date: 2023-03-05 00:52+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -258,7 +258,7 @@ msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr ""
 "Πρόβλημα στην προσθήκη ή συσχέτιση συναλλαγών με το αναγνωριστικό '%1': %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1428
+#: kmymoney/converter/mymoneystatementreader.cpp:1431
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
@@ -266,27 +266,27 @@ msgstr ""
 "<b>Έχει γίνει λήψη ενός αποσπάσματος κίνησης για τον ακόλουθο λογαριασμό:</"
 "b><br/><br/> "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1429
+#: kmymoney/converter/mymoneystatementreader.cpp:1432
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Όνομα λογαριασμού: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1430
+#: kmymoney/converter/mymoneystatementreader.cpp:1433
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Τύπος λογαριασμού: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1431
+#: kmymoney/converter/mymoneystatementreader.cpp:1434
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Αριθμός λογαριασμού: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1436
+#: kmymoney/converter/mymoneystatementreader.cpp:1439
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Επιθυμείτε την εισαγωγή συναλλαγών σε αυτόν το λογαριασμό;"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1438
+#: kmymoney/converter/mymoneystatementreader.cpp:1442
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -298,7 +298,7 @@ msgstr ""
 "πατώντας στο κουμπί <b>Δημιουργία</b> ή να επιλέξετε έναν άλλο χειροκίνητα "
 "από το παρακάτω κουτί επιλογής."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1442
+#: kmymoney/converter/mymoneystatementreader.cpp:1446
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -310,12 +310,12 @@ msgstr ""
 "κουμπί επιλογής σε αυτόν τον διάλογο, ή δημιουργείστε ένα νέο λογαριασμό "
 "πατώντας στο κουμπί <b>Δημιουργία</b>."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1469
+#: kmymoney/converter/mymoneystatementreader.cpp:1473
 #, kde-format
 msgid "Import transactions"
 msgstr "Εισαγωγή συναλλαγών"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1499
+#: kmymoney/converter/mymoneystatementreader.cpp:1517
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -324,14 +324,14 @@ msgstr ""
 "Πρέπει να επιλέξετε ένα λογαριασμό, να δημιουργήσετε ένα νέο ή να πατήσετε "
 "στο κουμπί «Εγκατάλειψη»."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1611
+#: kmymoney/converter/mymoneystatementreader.cpp:1629
 #: kmymoney/views/kscheduledview_p.h:192 kmymoney/views/kscheduledview_p.h:307
 #: kmymoney/views/kscheduledview_p.h:311
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Αδυναμία εισαγωγής προγραμματισμένης συναλλαγής '%1'"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1631
+#: kmymoney/converter/mymoneystatementreader.cpp:1649
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has found a scheduled transaction which matches an imported "
@@ -349,7 +349,7 @@ msgstr ""
 "%2 %3</i><br/>Θέλετε το KMyMoney να συσχετίσει την εισαγωγή με την "
 "προγραμματισμένη συναλλαγή; "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1640
+#: kmymoney/converter/mymoneystatementreader.cpp:1658
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has found a scheduled transaction which matches an imported "
@@ -377,7 +377,7 @@ msgstr[1] ""
 "%2 %3</i><br/>Θέλετε το KMyMoney να συσχετίσει την εισαγωγή με την "
 "προγραμματισμένη συναλλαγή; "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1654
+#: kmymoney/converter/mymoneystatementreader.cpp:1672
 #, kde-format
 msgid "Schedule found"
 msgstr "Βρέθηκε προγραμματισμένη συναλλαγή"

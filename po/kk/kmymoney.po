@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-02 00:55+0000\n"
+"POT-Creation-Date: 2023-03-05 00:52+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -247,7 +247,7 @@ msgstr "Алушыны қосуға болмайды"
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr "'%1' деген импорталған транзакцияның қосу не сәйкестік мәселесі: %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1428
+#: kmymoney/converter/mymoneystatementreader.cpp:1431
 #, fuzzy, kde-format
 #| msgid ""
 #| "<b>You have downloaded a statement for the following account:</b><br/><br/"
@@ -256,27 +256,27 @@ msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr "Келесі есепшоттың үзінді көшірмесі жүктеп алынды: <b>%1</b>t<br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1429
+#: kmymoney/converter/mymoneystatementreader.cpp:1432
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Есепшоттың атауы: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1430
+#: kmymoney/converter/mymoneystatementreader.cpp:1433
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Есепшоттың түрі: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1431
+#: kmymoney/converter/mymoneystatementreader.cpp:1434
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Есепшоттың нөмірі: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1436
+#: kmymoney/converter/mymoneystatementreader.cpp:1439
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Осы есепшотың транзакциялары импортталсын ба?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1438
+#: kmymoney/converter/mymoneystatementreader.cpp:1442
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -287,7 +287,7 @@ msgstr ""
 "жаңа есепшотты құрып, немесе панелінің көмегімен барынан қолмен таңдап "
 "алыңыз."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1442
+#: kmymoney/converter/mymoneystatementreader.cpp:1446
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -298,12 +298,12 @@ msgstr ""
 "көмегімен есепшоты таңдаңыз, немесе <b>Құру</b> батырманы басып жаңасын "
 "құрып алыңыз."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1469
+#: kmymoney/converter/mymoneystatementreader.cpp:1473
 #, kde-format
 msgid "Import transactions"
 msgstr "Транзакцияларды импорттау"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1499
+#: kmymoney/converter/mymoneystatementreader.cpp:1517
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -312,14 +312,14 @@ msgstr ""
 "Есепшотты таңдау керек не жаңасын құру керек, немесе <b>Доғару</b> "
 "батырмасын басу керек."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1611
+#: kmymoney/converter/mymoneystatementreader.cpp:1629
 #: kmymoney/views/kscheduledview_p.h:192 kmymoney/views/kscheduledview_p.h:307
 #: kmymoney/views/kscheduledview_p.h:311
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Жоспарлаған <b>'%1</b> транзакциясын енгізуге болмайды"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1631
+#: kmymoney/converter/mymoneystatementreader.cpp:1649
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has found a scheduled transaction which matches an imported "
@@ -336,7 +336,7 @@ msgstr ""
 ">Жоспардың атауы: <b>%1</b><br/>Транзакция: <i>%2 %3</i><br/>Бірдей бола "
 "берісн деп KMyMoney оны енгізе берсін бе? "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1640
+#: kmymoney/converter/mymoneystatementreader.cpp:1658
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has found a scheduled transaction which matches an imported "
@@ -358,7 +358,7 @@ msgstr[0] ""
 ">Жоспардың атауы: <b>%1</b><br/>Транзакция: <i>%2 %3</i><br/>Бірдей бола "
 "берісн деп KMyMoney оны енгізе берсін бе? "
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1654
+#: kmymoney/converter/mymoneystatementreader.cpp:1672
 #, kde-format
 msgid "Schedule found"
 msgstr "Жоспар табылды"

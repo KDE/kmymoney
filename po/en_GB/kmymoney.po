@@ -10,16 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-02 00:55+0000\n"
-"PO-Revision-Date: 2023-02-27 20:17+0000\n"
+"POT-Creation-Date: 2023-03-05 00:52+0000\n"
+"PO-Revision-Date: 2023-03-04 17:31+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
-"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language-Team: British English\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -255,34 +255,34 @@ msgstr "Unable to add payee/receiver"
 msgid "Problem adding or matching imported transaction with id '%1': %2"
 msgstr "Problem adding or matching imported transaction with ID '%1': %2"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1428
+#: kmymoney/converter/mymoneystatementreader.cpp:1431
 #, kde-format
 msgid ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 msgstr ""
 "<b>You have downloaded a statement for the following account:</b><br/><br/>"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1429
+#: kmymoney/converter/mymoneystatementreader.cpp:1432
 #, kde-format
 msgid " - Account Name: %1"
 msgstr " - Account Name: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1430
+#: kmymoney/converter/mymoneystatementreader.cpp:1433
 #, kde-format
 msgid " - Account Type: %1"
 msgstr " - Account Type: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1431
+#: kmymoney/converter/mymoneystatementreader.cpp:1434
 #, kde-format
 msgid " - Account Number: %1"
 msgstr " - Account Number: %1"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1436
+#: kmymoney/converter/mymoneystatementreader.cpp:1439
 #, kde-format
 msgid "Do you want to import transactions to this account?"
 msgstr "Do you want to import transactions to this account?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1438
+#: kmymoney/converter/mymoneystatementreader.cpp:1442
 #, kde-format
 msgid ""
 "KMyMoney cannot determine which of your accounts to use.  You can create a "
@@ -293,7 +293,7 @@ msgstr ""
 "new account by pressing the <b>Create</b> button or select another one "
 "manually from the selection box below."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1442
+#: kmymoney/converter/mymoneystatementreader.cpp:1446
 #, kde-format
 msgid ""
 "No account information has been found in the selected statement file. Please "
@@ -304,12 +304,12 @@ msgstr ""
 "select an account using the selection box in the dialogue or create a new "
 "account by pressing the <b>Create</b> button."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1469
+#: kmymoney/converter/mymoneystatementreader.cpp:1473
 #, kde-format
 msgid "Import transactions"
 msgstr "Import transactions"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1499
+#: kmymoney/converter/mymoneystatementreader.cpp:1517
 #, kde-format
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
@@ -318,14 +318,14 @@ msgstr ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
 "button."
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1611
+#: kmymoney/converter/mymoneystatementreader.cpp:1629
 #: kmymoney/views/kscheduledview_p.h:192 kmymoney/views/kscheduledview_p.h:307
 #: kmymoney/views/kscheduledview_p.h:311
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Unable to enter scheduled transaction '%1'"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1631
+#: kmymoney/converter/mymoneystatementreader.cpp:1649
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -338,7 +338,7 @@ msgstr ""
 ">Do you want KMyMoney to enter this schedule now so that the transaction can "
 "be matched?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1640
+#: kmymoney/converter/mymoneystatementreader.cpp:1658
 #, kde-format
 msgid ""
 "KMyMoney has found a scheduled transaction which matches an imported "
@@ -361,7 +361,7 @@ msgstr[1] ""
 ">The transaction dates are %1 days apart.<br/>Do you want KMyMoney to enter "
 "this schedule now so that the transaction can be matched?"
 
-#: kmymoney/converter/mymoneystatementreader.cpp:1654
+#: kmymoney/converter/mymoneystatementreader.cpp:1672
 #, kde-format
 msgid "Schedule found"
 msgstr "Schedule found"
@@ -2972,7 +2972,7 @@ msgid ""
 msgstr ""
 "To complete the deletion operation, either select a tag from the available "
 "tags that will replace the selected tags before they are deleted or mark the "
-"tickbox below depending on your choice. The OK button becomes accessible "
+"tick-box below depending on your choice. The OK button becomes accessible "
 "once you have selected a tag or marked the checkbox."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
@@ -9015,7 +9015,7 @@ msgstr "Print cheque"
 #: kmymoney/plugins/checkprinting/checkprintingsettingsdecl.ui:36
 #, kde-format
 msgid "Use custom check template"
-msgstr "Use custom check template"
+msgstr "Use custom cheque template"
 
 #. i18n: ectx: label, entry (checkTemplateFile), group (General)
 #: kmymoney/plugins/checkprinting/checkprintingsettings.kcfg:14
@@ -11791,7 +11791,7 @@ msgstr "After"
 #: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:44
 #, kde-format
 msgid "KMyMoney print check"
-msgstr "KMyMoney print check"
+msgstr "KMyMoney print cheque"
 
 #: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:47
 #, kde-format
@@ -19155,11 +19155,11 @@ msgid ""
 "(You will be asked what you intend after pressing OK in the following "
 "dialog)</p>"
 msgstr ""
-"<p>Please check that all the details in the following dialogue are correct "
-"and press OK.</p><p>Editable data can be changed and can either be applied "
-"to just this occurrence or for all subsequent occurrences for this "
-"schedule.  (You will be asked what you intend after pressing OK in the "
-"following dialogue)</p>"
+"<p>Please check that all the details in the following dialog are correct and "
+"press OK.</p><p>Editable data can be changed and can either be applied to "
+"just this occurrence or for all subsequent occurrences for this schedule.  "
+"(You will be asked what you intend after pressing OK in the following "
+"dialog)</p>"
 
 #: kmymoney/views/kenterscheduledlg.cpp:200
 #, kde-format
@@ -20408,13 +20408,13 @@ msgstr "A category assignment is required for a split."
 #: kmymoney/views/newtransactioneditor.cpp:362
 #, kde-format
 msgid "The check number used for this transaction."
-msgstr "The check number used for this transaction."
+msgstr "The cheque number used for this transaction."
 
 #: kmymoney/views/newspliteditor.cpp:221
 #: kmymoney/views/newtransactioneditor.cpp:372
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
-msgstr "The check number <b>%1</b> has already been used in this account."
+msgstr "The cheque number <b>%1</b> has already been used in this account."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
@@ -21870,7 +21870,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:193
 #, kde-format
 msgid "Check date"
-msgstr "Check date"
+msgstr "Cheque date"
 
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:201
 #, kde-format
