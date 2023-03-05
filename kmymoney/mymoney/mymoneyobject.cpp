@@ -51,3 +51,17 @@ void MyMoneyObject::clearId()
     Q_D(MyMoneyObject);
     d->m_id.clear();
 }
+
+bool MyMoneyObject::hasReferenceTo(const QString& id) const
+{
+    return referencedObjects().contains(id);
+}
+
+QSet<QString> MyMoneyObject::referencedObjects() const
+{
+    Q_D(const MyMoneyObject);
+    if (d->m_referencedObjects.isEmpty()) {
+        const_cast<MyMoneyObjectPrivate*>(d)->collectReferencedObjects();
+    }
+    return d->m_referencedObjects;
+}

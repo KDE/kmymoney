@@ -83,6 +83,9 @@ class KMM_MYMONEY_EXPORT MyMoneyAccount : public MyMoneyObject, public MyMoneyKe
 
     KMM_MYMONEY_UNIT_TESTABLE
 
+protected:
+    explicit MyMoneyAccount(MyMoneyAccountPrivate* dd, const MyMoneyAccount& other);
+
 public:
     /**
       * This is the constructor for a new empty account
@@ -370,22 +373,6 @@ public:
       * @param id ID of currency to be associated with this account.
       */
     void setCurrencyId(const QString& id);
-
-    /**
-      * This method checks if a reference to the given object exists. It returns,
-      * a @p true if the object is referencing the one requested by the
-      * parameter @p id. If it does not, this method returns @p false.
-      *
-      * @param id id of the object to be checked for references
-      * @retval true This object references object with id @p id.
-      * @retval false This object does not reference the object with id @p id.
-      */
-    bool hasReferenceTo(const QString& id) const override;
-
-    /**
-     * @copydoc MyMoneyObject::referencedObjects
-     */
-    QSet<QString> referencedObjects() const override;
 
     /**
       * This member returns the balance of this account based on

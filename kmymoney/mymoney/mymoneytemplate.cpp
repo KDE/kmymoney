@@ -61,6 +61,10 @@ public:
     QUrl                  m_source;
     QMap<QString,QString> m_vatAccountMap;
 
+    void collectReferencedObjects() override
+    {
+    }
+
     MyMoneyTemplateLoadResult loadDescription()
     {
         MyMoneyTemplateLoadResult result;
@@ -210,15 +214,4 @@ void MyMoneyTemplate::setSource(const QUrl& s)
 {
     Q_D(MyMoneyTemplate);
     d->m_source = s;
-}
-
-bool MyMoneyTemplate::hasReferenceTo(const QString& id) const
-{
-    Q_UNUSED(id)
-    return false;
-}
-
-QSet<QString> MyMoneyTemplate::referencedObjects() const
-{
-    return {};
 }

@@ -10,6 +10,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QSet>
 #include <QString>
 
 // ----------------------------------------------------------------------------
@@ -22,6 +23,12 @@ public:
     {
     }
 
+    MyMoneyObjectPrivate(const MyMoneyObjectPrivate& right)
+    {
+        m_id = right.m_id;
+        m_referencedObjects = right.m_referencedObjects;
+    }
+
     virtual ~MyMoneyObjectPrivate()
     {
     }
@@ -31,7 +38,20 @@ public:
         m_id = id;
     }
 
+    /**
+     * This method must be provided by all derived object. It fills
+     * the @c m_referencedObjects set with the ids that are
+     * referenced by this object.
+     */
+    virtual void collectReferencedObjects() = 0;
+
+    void clearReferences()
+    {
+        m_referencedObjects.clear();
+    }
+
     QString m_id;
+    QSet<QString> m_referencedObjects;
 };
 
 #endif

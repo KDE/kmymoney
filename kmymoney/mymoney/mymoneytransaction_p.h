@@ -47,6 +47,14 @@ public:
         return QStringLiteral("S%1").arg(lastIdUsed + 1, SPLIT_ID_SIZE, 10, QLatin1Char('0'));
     }
 
+    void collectReferencedObjects() override
+    {
+        m_referencedObjects.insert(m_commodity);
+        for (const auto& split : m_splits) {
+            m_referencedObjects.unite(split.referencedObjects());
+        }
+    }
+
     static const int SPLIT_ID_SIZE = 4;
     /** constants for unique sort key */
     static const int YEAR_SIZE = 4;

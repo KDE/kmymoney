@@ -30,6 +30,10 @@
 class MyMoneyInstitutionPrivate : public MyMoneyObjectPrivate
 {
 public:
+    void collectReferencedObjects() override
+    {
+    }
+
     /**
       * This member variable keeps the name of the institution
       */

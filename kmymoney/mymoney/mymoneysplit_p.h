@@ -41,6 +41,19 @@ public:
     {
     }
 
+    void collectReferencedObjects() override
+    {
+        if (m_isMatched) {
+            m_referencedObjects.unite(m_matchedTransaction.referencedObjects());
+        }
+        for (int i = 0; i < m_tagList.size(); i++) {
+            m_referencedObjects.insert(m_tagList[i]);
+        }
+        m_referencedObjects.insert(m_account);
+        m_referencedObjects.insert(m_payee);
+        m_referencedObjects.insert(m_costCenter);
+    }
+
     /**
       * This member contains the ID of the payee
       */

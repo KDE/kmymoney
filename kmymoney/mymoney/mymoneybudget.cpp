@@ -384,31 +384,13 @@ bool MyMoneyBudget::operator == (const MyMoneyBudget& right) const
     // clang-format on
 }
 
-bool MyMoneyBudget::hasReferenceTo(const QString& id) const
-{
-    Q_D(const MyMoneyBudget);
-    // return true if we have an assignment for this id
-    return (d->m_accounts.contains(id));
-}
-
-QSet<QString> MyMoneyBudget::referencedObjects() const
-{
-    Q_D(const MyMoneyBudget);
-#if 0
-    if (d->m_accounts.isEmpty()) {
-        return {};
-    }
-#endif
-    const auto keys = d->m_accounts.keys();
-    return QSet<QString>(keys.constBegin(), keys.constEnd());
-}
-
 void MyMoneyBudget::removeReference(const QString& id)
 {
     Q_D(MyMoneyBudget);
     if (d->m_accounts.contains(id)) {
         d->m_accounts.remove(id);
     }
+    d->clearReferences();
 }
 
 const MyMoneyBudget::AccountGroup& MyMoneyBudget::account(const QString& id) const
@@ -435,6 +417,7 @@ void MyMoneyBudget::setAccount(const AccountGroup& account, const QString& id)
             acc.setId(id);
         d->m_accounts[id] = acc;
     }
+    d->clearReferences();
 }
 
 bool MyMoneyBudget::contains(const QString &id) const

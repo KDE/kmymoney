@@ -122,13 +122,3 @@ bool MyMoneyTag::operator < (const MyMoneyTag& right) const
     auto d2 = static_cast<const MyMoneyTagPrivate *>(right.d_func());
     return d->m_name < d2->m_name;
 }
-
-bool MyMoneyTag::hasReferenceTo(const QString& /*id*/) const
-{
-    return false;
-}
-
-QSet<QString> MyMoneyTag::referencedObjects() const
-{
-    return {};
-}

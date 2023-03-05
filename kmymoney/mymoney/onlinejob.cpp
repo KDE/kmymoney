@@ -15,65 +15,48 @@
 #include "tasks/onlinetask.h"
 #include "onlinejobadministration.h"
 
-onlineJob::onlineJob() :
-    MyMoneyObject(*new onlineJobPrivate),
-    m_task(nullptr)
-{
-    Q_D(onlineJob);
-    d->m_jobSend = QDateTime();
-    d->m_jobBankAnswerDate = QDateTime();
-    d->m_jobBankAnswerState = eMyMoney::OnlineJob::sendingState::noBankAnswer;
-    d->m_messageList = QList<onlineJobMessage>();
-    d->m_locked = false;
-}
-
-onlineJob::onlineJob(const QString &id) :
-    MyMoneyObject(*new onlineJobPrivate, id),
-    m_task(nullptr)
+onlineJob::onlineJob()
+    : MyMoneyObject(*new onlineJobPrivate(this))
+    , m_task(nullptr)
 {
 }
 
-onlineJob::onlineJob(onlineTask* onlinetask, const QString &id) :
-    MyMoneyObject(*new onlineJobPrivate, id),
-    m_task(onlinetask)
+onlineJob::onlineJob(const QString& id)
+    : MyMoneyObject(*new onlineJobPrivate(this), id)
+    , m_task(nullptr)
 {
-    Q_D(onlineJob);
-    d->m_jobSend = QDateTime();
-    d->m_jobBankAnswerDate = QDateTime();
-    d->m_jobBankAnswerState = eMyMoney::OnlineJob::sendingState::noBankAnswer;
-    d->m_messageList = QList<onlineJobMessage>();
-    d->m_locked = false;
 }
 
-onlineJob::onlineJob(onlineTask* onlinetask) :
-    MyMoneyObject(*new onlineJobPrivate, QString()),
-    m_task(onlinetask)
+onlineJob::onlineJob(onlineTask* onlinetask, const QString& id)
+    : MyMoneyObject(*new onlineJobPrivate(this), id)
+    , m_task(onlinetask)
 {
-    Q_D(onlineJob);
-    d->m_jobSend = QDateTime();
-    d->m_jobBankAnswerDate = QDateTime();
-    d->m_jobBankAnswerState = eMyMoney::OnlineJob::sendingState::noBankAnswer;
-    d->m_messageList = QList<onlineJobMessage>();
-    d->m_locked = false;
 }
 
-onlineJob::onlineJob(onlineJob const& other) :
-    MyMoneyObject(*new onlineJobPrivate(*other.d_func()), other.id()),
-    m_task(nullptr)
+onlineJob::onlineJob(onlineTask* onlinetask)
+    : MyMoneyObject(*new onlineJobPrivate(this), QString())
+    , m_task(onlinetask)
+{
+}
+
+onlineJob::onlineJob(onlineJob const& other)
+    : MyMoneyObject(*new onlineJobPrivate(this, *other.d_func()), other.id())
+    , m_task(nullptr)
 {
     copyPointerFromOtherJob(other);
 }
 
-onlineJob::onlineJob(const QString &id, const onlineJob& other) :
-    MyMoneyObject(*new onlineJobPrivate(*other.d_func()), id),
-    m_task()
+onlineJob::onlineJob(const QString& id, const onlineJob& other)
+    : MyMoneyObject(*new onlineJobPrivate(this, *other.d_func()), id)
+    , m_task(nullptr)
 {
     Q_D(onlineJob);
+    d->m_jobBankAnswerState = eMyMoney::OnlineJob::sendingState::noBankAnswer;
+    d->m_locked = false;
     d->m_jobSend = QDateTime();
     d->m_jobBankAnswerDate = QDateTime();
-    d->m_jobBankAnswerState = eMyMoney::OnlineJob::sendingState::noBankAnswer;
-    d->m_messageList = QList<onlineJobMessage>();
-    d->m_locked = false;
+    d->m_messageList.clear();
+
     copyPointerFromOtherJob(other);
 }
 
@@ -100,7 +83,12 @@ onlineJob::~onlineJob()
 
 void onlineJob::setTask(onlineTask *_task)
 {
+    Q_D(onlineJob);
     m_task = _task;
+    d->clearReferences();
+    if (m_task) {
+        d->m_referencedObjects = m_task->referencedObjects();
+    }
 }
 
 onlineTask* onlineJob::task()
@@ -252,7 +240,7 @@ QList<onlineJobMessage> onlineJob::jobMessageList() const
 void onlineJob::clearJobMessageList()
 {
     Q_D(onlineJob);
-    d->m_messageList = QList<onlineJobMessage>();
+    d->m_messageList.clear();
 }
 
 bool onlineJob::isValid() const
@@ -266,18 +254,4 @@ QDateTime onlineJob::sendDate() const
 {
     Q_D(const onlineJob);
     return d->m_jobSend;
-}
-
-bool onlineJob::hasReferenceTo(const QString& id) const
-{
-    if (m_task != nullptr)
-        return m_task->hasReferenceTo(id);
-    return false;
-}
-
-QSet<QString> onlineJob::referencedObjects() const
-{
-    if (m_task != nullptr)
-        return m_task->referencedObjects();
-    return {};
 }

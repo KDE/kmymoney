@@ -225,18 +225,6 @@ void MyMoneySecurity::setPricePrecision(const int pp)
     d->m_pricePrecision = pp;
 }
 
-bool MyMoneySecurity::hasReferenceTo(const QString& id) const
-{
-    Q_D(const MyMoneySecurity);
-    return (id == d->m_tradingCurrency);
-}
-
-QSet<QString> MyMoneySecurity::referencedObjects() const
-{
-    Q_D(const MyMoneySecurity);
-    return { d->m_tradingCurrency };
-}
-
 QString MyMoneySecurity::securityTypeToString(const eMyMoney::Security::Type securityType)
 {
     switch (securityType) {

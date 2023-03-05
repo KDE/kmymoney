@@ -235,16 +235,6 @@ bool MyMoneyInstitution::operator == (const MyMoneyInstitution& right) const
         return false;
 }
 
-bool MyMoneyInstitution::hasReferenceTo(const QString& /* id */) const
-{
-    return false;
-}
-
-QSet<QString> MyMoneyInstitution::referencedObjects() const
-{
-    return {};
-}
-
 QPixmap MyMoneyInstitution::pixmap(const int size)
 {
     QPixmap pxIcon;

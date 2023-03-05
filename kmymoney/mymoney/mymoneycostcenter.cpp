@@ -24,6 +24,10 @@ MyMoneyCostCenter MyMoneyCostCenter::null;
 class MyMoneyCostCenterPrivate : public MyMoneyObjectPrivate
 {
 public:
+    void collectReferencedObjects() override
+    {
+    }
+
     QString m_name;
 };
 
@@ -65,16 +69,6 @@ bool MyMoneyCostCenter::operator < (const MyMoneyCostCenter& right) const
     auto d2 = static_cast<const MyMoneyCostCenterPrivate *>(right.d_func());
     QCollator col;
     return col.compare(d->m_name, d2->m_name);
-}
-
-bool MyMoneyCostCenter::hasReferenceTo(const QString& /*id*/) const
-{
-    return false;
-}
-
-QSet<QString> MyMoneyCostCenter::referencedObjects() const
-{
-    return {};
 }
 
 QString MyMoneyCostCenter::name() const

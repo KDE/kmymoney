@@ -40,6 +40,11 @@ public:
         , m_weekendOption(Schedule::WeekendOption::MoveNothing)
     {}
 
+    void collectReferencedObjects() override
+    {
+        m_referencedObjects = m_transaction.referencedObjects();
+    }
+
     /// Its occurrence
     eMyMoney::Schedule::Occurrence m_occurrence;
 

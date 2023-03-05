@@ -32,8 +32,9 @@
 class MyMoneyReportPrivate : public MyMoneyObjectPrivate
 {
 public:
-    MyMoneyReportPrivate()
-        : m_name(QStringLiteral("Unconfigured Pivot Table Report"))
+    MyMoneyReportPrivate(MyMoneyReport* qq)
+        : q(qq)
+        , m_name(QStringLiteral("Unconfigured Pivot Table Report"))
         , m_detailLevel(eMyMoney::Report::DetailLevel::None)
         , m_investmentSum(eMyMoney::Report::InvestmentSum::Sold)
         , m_hideTransactions(false)
@@ -114,6 +115,20 @@ public:
         return reportTypes.value(rowType, eMyMoney::Report::ReportType::Invalid);
     }
 
+    void collectReferencedObjects() override
+    {
+        QStringList list;
+        q->accounts(list);
+        q->categories(list);
+        q->payees(list);
+        q->tags(list);
+        if (!m_budgetId.isEmpty()) {
+            list.append(m_budgetId);
+        }
+        m_referencedObjects = QSet<QString>(list.constBegin(), list.constEnd());
+    }
+
+    MyMoneyReport* q;
     /**
       * The user-assigned name of the report
       */

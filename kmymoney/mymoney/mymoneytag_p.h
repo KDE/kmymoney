@@ -37,6 +37,10 @@ public:
     {
     }
 
+    void collectReferencedObjects() override
+    {
+    }
+
     // Simple fields
     QString m_name;
     // Closed tags will not be shown in the selector inside a transaction, only in the Tag tab

@@ -53,23 +53,26 @@ public:
     void clearId();
 
     /**
-      * This method must be provided by all derived objects. It returns,
-      * a @p true if the object is referencing the one requested by the
-      * parameter @p id. If it does not, this method returns @p false.
-      *
-      * @param id id of the object to be checked for references
-      * @retval true This object references object with id @p id.
-      * @retval false This object does not reference the object with id @p id.
-      */
-    virtual bool hasReferenceTo(const QString& id) const = 0;
+     * This method returns @p true if the object is referencing the
+     * one requested by the parameter @p id. If it does not,
+     * this method returns @p false.
+     *
+     * @param id id of the object to be checked for references
+     * @retval true This object references object with id @p id.
+     * @retval false This object does not reference the object with id @p id.
+     *
+     * @sa referencedObjects()
+     */
+    bool hasReferenceTo(const QString& id) const;
 
     /**
-     * This method must be provided by all derived object. It returns
-     * a QSet of object ids that this object references.
+     * This method returns a QSet of object ids that this object references.
      *
      * @returns QSet<QString> of referenced objects
+     *
+     * @sa hasReferenceTo()
      */
-    virtual QSet<QString> referencedObjects() const = 0;
+    QSet<QString> referencedObjects() const;
 
     bool operator == (const MyMoneyObject& right) const;
 

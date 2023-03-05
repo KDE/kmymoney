@@ -76,16 +76,6 @@ public:
     MyMoneyTemplateLoadResult setAccountTree(QFile *file);
     const QDomNode& accountTree() const;
 
-    /**
-     * reimplemented for internal reasons
-     */
-    virtual bool hasReferenceTo(const QString& id) const override;
-
-    /**
-     * reimplemented for internal reasons
-     */
-    virtual QSet<QString> referencedObjects() const override;
-
 protected:
 #if 0
     bool loadDescription();

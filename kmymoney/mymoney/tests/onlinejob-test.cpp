@@ -59,11 +59,14 @@ void onlineJobTest::testCopyConstructorWithNewId()
 {
     onlineJob originalJob = onlineJob(new dummyTask, "O000001");
     originalJob.setBankAnswer(eMyMoney::OnlineJob::sendingState::acceptedByBank);
+    originalJob.setLock(true);
     QVERIFY(!originalJob.isNull());
 
     onlineJob jobCopy = onlineJob("O000002", originalJob);
     QVERIFY(!jobCopy.isNull());
     QCOMPARE(jobCopy.id(), QString("O000002"));
     QVERIFY(originalJob.task() != jobCopy.task());
+    QCOMPARE(jobCopy.isLocked(), false);
+    QCOMPARE(jobCopy.bankAnswerState(), eMyMoney::OnlineJob::sendingState::noBankAnswer);
     QVERIFY(jobCopy.bankAnswerDate().isNull());
 }

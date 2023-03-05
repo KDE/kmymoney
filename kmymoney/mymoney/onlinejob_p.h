@@ -12,9 +12,10 @@
 #include <QHash>
 #include <QMap>
 
+#include "mymoneyenums.h"
 #include "mymoneyobject_p.h"
 #include "onlinejobmessage.h"
-#include "mymoneyenums.h"
+#include "tasks/onlinetask.h"
 
 namespace eMyMoney {
 namespace OnlineJob {
@@ -25,6 +26,34 @@ enum class sendingState;
 class onlineJobPrivate : public MyMoneyObjectPrivate
 {
 public:
+    onlineJobPrivate(onlineJob* qq)
+        : MyMoneyObjectPrivate()
+        , q(qq)
+        , m_jobBankAnswerState(eMyMoney::OnlineJob::sendingState::noBankAnswer)
+        , m_locked(false)
+    {
+    }
+
+    onlineJobPrivate(onlineJob* qq, const onlineJobPrivate& dd)
+        : MyMoneyObjectPrivate(dd)
+        , q(qq)
+        , m_jobSend(dd.m_jobSend)
+        , m_jobBankAnswerDate(dd.m_jobBankAnswerDate)
+        , m_jobBankAnswerState(dd.m_jobBankAnswerState)
+        , m_messageList(dd.m_messageList)
+        , m_locked(dd.m_locked)
+    {
+    }
+
+    void collectReferencedObjects() override
+    {
+        // this looks strange but triggers to
+        // collect the referenced objects
+        q->setTask(q->task());
+    }
+
+    onlineJob* q;
+
     /**
      * @brief Date-time the job was sent to the bank
      *

@@ -55,6 +55,12 @@ MyMoneyAccount::MyMoneyAccount(const QString &id):
 {
 }
 
+MyMoneyAccount::MyMoneyAccount(MyMoneyAccountPrivate* dd, const MyMoneyAccount& other)
+    : MyMoneyObject(*dd, other.id())
+    , MyMoneyKeyValueContainer(other)
+{
+}
+
 MyMoneyAccount::MyMoneyAccount(const MyMoneyAccount& other) :
     MyMoneyObject(*new MyMoneyAccountPrivate(*other.d_func()), other.id()),
     MyMoneyKeyValueContainer(other)
@@ -98,6 +104,7 @@ void MyMoneyAccount::setInstitutionId(const QString& id)
 {
     Q_D(MyMoneyAccount);
     d->m_institution = id;
+    d->clearReferences();
 }
 
 QString MyMoneyAccount::name() const
@@ -182,6 +189,7 @@ void MyMoneyAccount::setParentAccountId(const QString& parent)
 {
     Q_D(MyMoneyAccount);
     d->m_parentAccount = parent;
+    d->clearReferences();
 }
 
 QStringList MyMoneyAccount::accountList() const
@@ -295,6 +303,7 @@ void MyMoneyAccount::setCurrencyId(const QString& id)
 {
     Q_D(MyMoneyAccount);
     d->m_currencyId = id;
+    d->clearReferences();
 }
 
 bool MyMoneyAccount::isAssetLiability() const
@@ -355,18 +364,6 @@ void MyMoneyAccount::setIsInTaxReports(bool include)
     } else {
         deletePair(QLatin1String("Tax"));
     }
-}
-
-bool MyMoneyAccount::hasReferenceTo(const QString& id) const
-{
-    Q_D(const MyMoneyAccount);
-    return (id == d->m_institution) || (id == d->m_parentAccount) || (id == d->m_currencyId);
-}
-
-QSet<QString> MyMoneyAccount::referencedObjects() const
-{
-    Q_D(const MyMoneyAccount);
-    return { d->m_institution, d->m_parentAccount, d->m_currencyId };
 }
 
 void MyMoneyAccount::setOnlineBankingSettings(const MyMoneyKeyValueContainer& values)

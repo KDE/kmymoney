@@ -131,14 +131,6 @@ public:
 
     QString taskIid() const;
 
-    /** @todo implement */
-    bool hasReferenceTo(const QString &id) const override;
-
-    /**
-     * @copydoc MyMoneyObject::referencedObjects
-     */
-    QSet<QString> referencedObjects() const override;
-
     /**
      * @brief Return the purpose of the job
      */

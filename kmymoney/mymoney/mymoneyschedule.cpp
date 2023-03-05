@@ -189,6 +189,7 @@ void MyMoneySchedule::setTransaction(const MyMoneyTransaction& transaction, bool
     // make sure that the transaction does not have an id so that we can enter
     // it into the engine
     d->m_transaction.clearId();
+    d->clearReferences();
 }
 
 void MyMoneySchedule::setEndDate(const QDate& date)
@@ -861,18 +862,6 @@ void MyMoneySchedule::fixDate(QDate& date) const
             && QDate::isValid(date.year(), date.month(), fixDate.day())) {
         date = QDate(date.year(), date.month(), fixDate.day());
     }
-}
-
-bool MyMoneySchedule::hasReferenceTo(const QString& id) const
-{
-    Q_D(const MyMoneySchedule);
-    return d->m_transaction.hasReferenceTo(id);
-}
-
-QSet<QString> MyMoneySchedule::referencedObjects() const
-{
-    Q_D(const MyMoneySchedule);
-    return d->m_transaction.referencedObjects();
 }
 
 QString MyMoneySchedule::occurrenceToString() const

@@ -93,6 +93,7 @@ void MyMoneySplit::setAccountId(const QString& account)
 {
     Q_D(MyMoneySplit);
     d->m_account = account;
+    d->clearReferences();
 }
 
 QString MyMoneySplit::costCenterId() const
@@ -105,6 +106,7 @@ void MyMoneySplit::setCostCenterId(const QString& costCenter)
 {
     Q_D(MyMoneySplit);
     d->m_costCenter = costCenter;
+    d->clearReferences();
 }
 
 QString MyMoneySplit::memo() const
@@ -201,6 +203,7 @@ void MyMoneySplit::setPayeeId(const QString& payee)
 {
     Q_D(MyMoneySplit);
     d->m_payee = payee;
+    d->clearReferences();
 }
 
 QList<QString> MyMoneySplit::tagIdList() const
@@ -213,6 +216,7 @@ void MyMoneySplit::setTagIdList(const QList<QString>& tagList)
 {
     Q_D(MyMoneySplit);
     d->m_tagList = tagList;
+    d->clearReferences();
 }
 
 void MyMoneySplit::setAction(eMyMoney::Split::InvestmentTransactionType type)
@@ -375,36 +379,6 @@ MyMoneyMoney MyMoneySplit::price() const
     if (!d->m_value.isZero() && !d->m_shares.isZero())
         return d->m_value / d->m_shares;
     return MyMoneyMoney::ONE;
-}
-
-bool MyMoneySplit::hasReferenceTo(const QString& id) const
-{
-    Q_D(const MyMoneySplit);
-    auto rc = false;
-    if (isMatched()) {
-        rc = matchedTransaction().hasReferenceTo(id);
-    }
-    for (int i = 0; i < d->m_tagList.size(); i++)
-        if (id == d->m_tagList[i])
-            return true;
-    return rc || (id == d->m_account) || (id == d->m_payee) || (id == d->m_costCenter);
-}
-
-QSet<QString> MyMoneySplit::referencedObjects() const
-{
-    Q_D(const MyMoneySplit);
-
-    QSet<QString> ids;
-    if (isMatched()) {
-        ids.unite(matchedTransaction().referencedObjects());
-    }
-    for (int i = 0; i < d->m_tagList.size(); i++) {
-        ids.insert(d->m_tagList[i]);
-    }
-    ids.insert(d->m_account);
-    ids.insert(d->m_payee);
-    ids.insert(d->m_costCenter);
-    return ids;
 }
 
 bool MyMoneySplit::isMatched() const

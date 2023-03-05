@@ -34,6 +34,11 @@ public:
     {
     }
 
+    void collectReferencedObjects() override
+    {
+        m_referencedObjects = {m_defaultAccountId};
+    }
+
     // Simple fields
     QString m_name;
     QString m_address;

@@ -9,6 +9,7 @@
 */
 
 #include "mymoneyaccountloan.h"
+#include "mymoneyaccount_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -26,8 +27,26 @@
 
 #include "mymoneymoney.h"
 
+class MyMoneyAccountLoanPrivate : public MyMoneyAccountPrivate
+{
+public:
+    MyMoneyAccountLoanPrivate(MyMoneyAccountLoan* qq)
+        : MyMoneyAccountPrivate()
+        , q(qq)
+    {
+    }
+
+    void collectReferencedObjects() override
+    {
+        MyMoneyAccountPrivate::collectReferencedObjects();
+        m_referencedObjects.insert(q->payee());
+        m_referencedObjects.insert(q->schedule());
+    }
+    MyMoneyAccountLoan* q;
+};
+
 MyMoneyAccountLoan::MyMoneyAccountLoan(const MyMoneyAccount& acc)
-    : MyMoneyAccount(acc)
+    : MyMoneyAccount(new MyMoneyAccountLoanPrivate(this), acc)
 {
 }
 
@@ -210,21 +229,6 @@ const QString MyMoneyAccountLoan::interestAccountId() const
 void MyMoneyAccountLoan::setInterestAccountId(const QString& /* id */)
 {
 
-}
-
-bool MyMoneyAccountLoan::hasReferenceTo(const QString& id) const
-{
-    return MyMoneyAccount::hasReferenceTo(id)
-           || (id == payee())
-           || (id == schedule());
-}
-
-QSet<QString> MyMoneyAccountLoan::referencedObjects() const
-{
-    QSet<QString> ids(MyMoneyAccount::referencedObjects());
-    ids.insert(payee());
-    ids.insert(schedule());
-    return ids;
 }
 
 void MyMoneyAccountLoan::setInterestCompounding(int frequency)

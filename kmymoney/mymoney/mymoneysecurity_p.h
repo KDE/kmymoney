@@ -37,6 +37,11 @@ public:
     {
     }
 
+    void collectReferencedObjects() override
+    {
+        m_referencedObjects = {m_tradingCurrency};
+    }
+
     QString                   m_name;
     QString                   m_tradingSymbol;
     QString                   m_tradingMarket;

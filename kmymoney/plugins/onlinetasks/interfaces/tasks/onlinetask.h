@@ -169,6 +169,7 @@ protected:
     virtual QString purpose() const = 0;
 
     friend class onlineJob;
+    friend class onlineJobPrivate;
 };
 
 Q_DECLARE_INTERFACE(onlineTask, "org.kmymoney.onlinetask");

@@ -29,13 +29,13 @@
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 
-MyMoneyReport::MyMoneyReport() :
-    MyMoneyObject(*new MyMoneyReportPrivate)
+MyMoneyReport::MyMoneyReport()
+    : MyMoneyObject(*new MyMoneyReportPrivate(this))
 {
 }
 
-MyMoneyReport::MyMoneyReport(const QString &id) :
-    MyMoneyObject(*new MyMoneyReportPrivate, id)
+MyMoneyReport::MyMoneyReport(const QString& id)
+    : MyMoneyObject(*new MyMoneyReportPrivate(this), id)
 {
 }
 
@@ -44,8 +44,8 @@ MyMoneyReport::MyMoneyReport(eMyMoney::Report::RowType rt,
                              eMyMoney::TransactionFilter::Date dl,
                              eMyMoney::Report::DetailLevel ss,
                              const QString& name,
-                             const QString& comment) :
-    MyMoneyObject(*new MyMoneyReportPrivate)
+                             const QString& comment)
+    : MyMoneyObject(*new MyMoneyReportPrivate(this))
 {
     Q_D(MyMoneyReport);
     d->m_name = name;
@@ -970,29 +970,6 @@ bool MyMoneyReport::includes(const MyMoneyAccount& acc) const
         }
     }
     return result;
-}
-
-bool MyMoneyReport::hasReferenceTo(const QString& id) const
-{
-    QStringList list;
-
-    // collect all ids
-    accounts(list);
-    categories(list);
-    payees(list);
-    tags(list);
-
-    return list.contains(id);
-}
-
-QSet<QString> MyMoneyReport::referencedObjects() const
-{
-    QStringList list;
-    accounts(list);
-    categories(list);
-    payees(list);
-    tags(list);
-    return QSet<QString>(list.constBegin(), list.constEnd());
 }
 
 int MyMoneyReport::m_lineWidth = 2;

@@ -138,6 +138,7 @@ void MyMoneyTransaction::setCommodity(const QString& commodityId)
 {
     Q_D(MyMoneyTransaction);
     d->m_commodity = commodityId;
+    d->clearReferences();
 }
 
 QString MyMoneyTransaction::bankID() const
@@ -209,6 +210,7 @@ void MyMoneyTransaction::addSplit(MyMoneySplit &split)
     split = newSplit;
     split.setTransactionId(id());
     d->m_splits.append(split);
+    d->clearReferences();
 }
 
 void MyMoneyTransaction::modifySplit(const MyMoneySplit& split)
@@ -222,6 +224,7 @@ void MyMoneyTransaction::modifySplit(const MyMoneySplit& split)
     for (auto& it_split : d->m_splits) {
         if (split.id() == it_split.id()) {
             it_split = split;
+            d->clearReferences();
             return;
         }
     }
@@ -234,6 +237,7 @@ void MyMoneyTransaction::removeSplit(const MyMoneySplit& split)
     for (int end = d->m_splits.size(), i = 0; i < end; ++i) {
         if (split.id() == d->m_splits.at(i).id()) {
             d->m_splits.removeAt(i);
+            d->clearReferences();
             return;
         }
     }
@@ -245,6 +249,7 @@ void MyMoneyTransaction::removeSplits()
 {
     Q_D(MyMoneyTransaction);
     d->m_splits.clear();
+    d->clearReferences();
 }
 
 MyMoneySplit MyMoneyTransaction::splitByPayee(const QString& payeeId) const
@@ -392,30 +397,6 @@ void MyMoneyTransaction::setImported(bool state)
         setValue("Imported", "true");
     else
         deletePair("Imported");
-}
-
-bool MyMoneyTransaction::hasReferenceTo(const QString& id) const
-{
-    Q_D(const MyMoneyTransaction);
-    if (id == d->m_commodity)
-        return true;
-
-    Q_FOREACH (const auto split, d->m_splits) {
-        if (split.hasReferenceTo(id))
-            return true;
-    }
-    return false;
-}
-
-QSet<QString> MyMoneyTransaction::referencedObjects() const
-{
-    Q_D(const MyMoneyTransaction);
-    QSet<QString> ids;
-    ids.insert(d->m_commodity);
-    for (const auto& split : d->m_splits) {
-        ids.unite(split.referencedObjects());
-    }
-    return ids;
 }
 
 bool MyMoneyTransaction::hasAutoCalcSplit() const

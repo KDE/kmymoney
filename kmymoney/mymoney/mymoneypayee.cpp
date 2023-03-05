@@ -80,18 +80,6 @@ bool MyMoneyPayee::operator < (const MyMoneyPayee& right) const
     return d->m_name < d2->m_name;
 }
 
-bool MyMoneyPayee::hasReferenceTo(const QString& id) const
-{
-    Q_D(const MyMoneyPayee);
-    return id == d->m_defaultAccountId;
-}
-
-QSet<QString> MyMoneyPayee::referencedObjects() const
-{
-    Q_D(const MyMoneyPayee);
-    return { d->m_defaultAccountId };
-}
-
 QString MyMoneyPayee::name() const
 {
     Q_D(const MyMoneyPayee);
@@ -295,6 +283,7 @@ void MyMoneyPayee::setDefaultAccountId(const QString& id)
 {
     Q_D(MyMoneyPayee);
     d->m_defaultAccountId = id;
+    d->clearReferences();
 }
 
 // vim:cin:si:ai:et:ts=2:sw=2:

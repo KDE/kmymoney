@@ -42,6 +42,11 @@ public:
     {
     }
 
+    void collectReferencedObjects() override
+    {
+        m_referencedObjects = {m_institution, m_parentAccount, m_currencyId};
+    }
+
     /**
       * This member variable identifies the type of account
       */
