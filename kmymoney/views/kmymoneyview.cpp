@@ -646,6 +646,8 @@ void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& se
 
     case eMenu::Action::FileClose:
         disconnect(this, &KMyMoneyView::viewActivated, this, &KMyMoneyView::slotRememberLastView);
+        // block home view from unnecessary updates
+        d->viewBases[View::Home]->executeAction(action, selections);
         break;
 
     default:
