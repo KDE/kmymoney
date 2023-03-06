@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 00:52+0000\n"
+"POT-Creation-Date: 2023-03-06 00:48+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -1525,35 +1525,35 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:135
-#: kmymoney/mymoney/mymoneysecurity.cpp:262
+#: kmymoney/mymoney/mymoneysecurity.cpp:250
 #, kde-format
 msgid "Never"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:140
-#: kmymoney/mymoney/mymoneysecurity.cpp:264
+#: kmymoney/mymoney/mymoneysecurity.cpp:252
 #, kde-format
 msgid "Floor"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:145
-#: kmymoney/mymoney/mymoneysecurity.cpp:266
+#: kmymoney/mymoney/mymoneysecurity.cpp:254
 #, kde-format
 msgid "Ceil"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:150
-#: kmymoney/mymoney/mymoneysecurity.cpp:268
+#: kmymoney/mymoney/mymoneysecurity.cpp:256
 #, kde-format
 msgid "Truncate"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:155
-#: kmymoney/mymoney/mymoneysecurity.cpp:270
+#: kmymoney/mymoney/mymoneysecurity.cpp:258
 #, kde-format
 msgid "Promote"
 msgstr ""
@@ -1574,7 +1574,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:170
-#: kmymoney/mymoney/mymoneysecurity.cpp:276
+#: kmymoney/mymoney/mymoneysecurity.cpp:264
 #, fuzzy, kde-format
 #| msgid ""
 #| "Found:\n"
@@ -6324,7 +6324,7 @@ msgstr "Νέος δικαιούχος"
 #: kmymoney/kmymoneyutils.cpp:564
 #, fuzzy, kde-format
 #| msgid "Do you want to add <b>%1</b> as payer/receiver?"
-msgid "<qt>Do you want to add <b>%1</b> as payer/receiver?</qt>"
+msgid "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
 msgstr "Θέλετε να προσθέσετε τον <b>%1</b> ως δικαιούχο;"
 
 #: kmymoney/kmymoneyutils.cpp:603
@@ -6701,27 +6701,27 @@ msgstr ""
 msgid "The plugin to show this information could not be found."
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:434
+#: kmymoney/mymoney/mymoneyaccount.cpp:431
 #, kde-format
 msgctxt "Brokerage (suffix for account names)"
 msgid "Brokerage"
 msgstr "Μεσιτεία"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:531
+#: kmymoney/mymoney/mymoneyaccount.cpp:528
 #, fuzzy, kde-format
 #| msgid "Checking"
 msgctxt "Account type"
 msgid "Checking"
 msgstr "Όψεως"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:533
+#: kmymoney/mymoney/mymoneyaccount.cpp:530
 #, fuzzy, kde-format
 #| msgid "Savings"
 msgctxt "Account type"
 msgid "Savings"
 msgstr "Ταμιευτηρίου"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:535
+#: kmymoney/mymoney/mymoneyaccount.cpp:532
 #, fuzzy, kde-format
 #| msgid "Credit Card"
 msgctxt "Account type"
@@ -6729,98 +6729,98 @@ msgid "Credit Card"
 msgstr "Πιστωτική κάρτα"
 
 # Type of account
-#: kmymoney/mymoney/mymoneyaccount.cpp:537
+#: kmymoney/mymoney/mymoneyaccount.cpp:534
 #, fuzzy, kde-format
 #| msgid "Cash"
 msgctxt "Account type"
 msgid "Cash"
 msgstr "Μετρητών"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:539
+#: kmymoney/mymoney/mymoneyaccount.cpp:536
 #, fuzzy, kde-format
 #| msgid "Loan"
 msgctxt "Account type"
 msgid "Loan"
 msgstr "Δανείου"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:541
+#: kmymoney/mymoney/mymoneyaccount.cpp:538
 #, fuzzy, kde-format
 #| msgid "Certificate of Deposit"
 msgctxt "Account type"
 msgid "Certificate of Deposit"
 msgstr "Πιστοποιητικό κατάθεσης"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:543
+#: kmymoney/mymoney/mymoneyaccount.cpp:540
 #, fuzzy, kde-format
 #| msgid "Investment"
 msgctxt "Account type"
 msgid "Investment"
 msgstr "Επενδύσεων"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:545
+#: kmymoney/mymoney/mymoneyaccount.cpp:542
 #, fuzzy, kde-format
 #| msgid "Money Market"
 msgctxt "Account type"
 msgid "Money Market"
 msgstr "Χρηματαγορά"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:547
+#: kmymoney/mymoney/mymoneyaccount.cpp:544
 #, fuzzy, kde-format
 #| msgid "Asset"
 msgctxt "Account type"
 msgid "Asset"
 msgstr "Ενεργητικού"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:549
+#: kmymoney/mymoney/mymoneyaccount.cpp:546
 #, fuzzy, kde-format
 #| msgid "Liability"
 msgctxt "Account type"
 msgid "Liability"
 msgstr "Παθητικού"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:551
+#: kmymoney/mymoney/mymoneyaccount.cpp:548
 #, fuzzy, kde-format
 #| msgid "Currency"
 msgctxt "Account type"
 msgid "Currency"
 msgstr "Νόμισμα"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:553
+#: kmymoney/mymoney/mymoneyaccount.cpp:550
 #, fuzzy, kde-format
 #| msgid "Income"
 msgctxt "Account type"
 msgid "Income"
 msgstr "Έσοδα"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:555
+#: kmymoney/mymoney/mymoneyaccount.cpp:552
 #, fuzzy, kde-format
 #| msgid "Expense"
 msgctxt "Account type"
 msgid "Expense"
 msgstr "Έξοδα"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:557
+#: kmymoney/mymoney/mymoneyaccount.cpp:554
 #, fuzzy, kde-format
 #| msgid "Investment Loan"
 msgctxt "Account type"
 msgid "Investment Loan"
 msgstr "Επενδυτικό δάνειο"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:559
+#: kmymoney/mymoney/mymoneyaccount.cpp:556
 #, fuzzy, kde-format
 #| msgid "Stock"
 msgctxt "Account type"
 msgid "Stock"
 msgstr "Χαρτοφυλάκιο"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:561
+#: kmymoney/mymoney/mymoneyaccount.cpp:558
 #, fuzzy, kde-format
 #| msgid "Equity"
 msgctxt "Account type"
 msgid "Equity"
 msgstr "Μετοχών"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:563
+#: kmymoney/mymoney/mymoneyaccount.cpp:560
 #, fuzzy, kde-format
 #| msgid "Unknown"
 msgctxt "Account type"
@@ -8167,137 +8167,137 @@ msgstr "Ασήμι"
 msgid "Opening Balances"
 msgstr "Ισολογισμοί ανοίγματος"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:886
+#: kmymoney/mymoney/mymoneyschedule.cpp:875
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Once"
 msgstr "Μια φορά"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:888
+#: kmymoney/mymoney/mymoneyschedule.cpp:877
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Daily"
 msgstr "Καθημερινά"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:890
+#: kmymoney/mymoney/mymoneyschedule.cpp:879
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Weekly"
 msgstr "Εβδομαδιαία"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:892
+#: kmymoney/mymoney/mymoneyschedule.cpp:881
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Fortnightly"
 msgstr "Κάθε δεκαπενθήμερο"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:894
-#: kmymoney/mymoney/mymoneyschedule.cpp:944
+#: kmymoney/mymoney/mymoneyschedule.cpp:883
+#: kmymoney/mymoney/mymoneyschedule.cpp:933
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every other week"
 msgstr "Κάθε δυο εβδομάδες"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:896
+#: kmymoney/mymoney/mymoneyschedule.cpp:885
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every half month"
 msgstr "Κάθε μισό μήνα"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:898
-#: kmymoney/mymoney/mymoneyschedule.cpp:947
+#: kmymoney/mymoney/mymoneyschedule.cpp:887
+#: kmymoney/mymoney/mymoneyschedule.cpp:936
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every three weeks"
 msgstr "Κάθε τρεις εβδομάδες"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:900
-#: kmymoney/mymoney/mymoneyschedule.cpp:950
+#: kmymoney/mymoney/mymoneyschedule.cpp:889
+#: kmymoney/mymoney/mymoneyschedule.cpp:939
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every four weeks"
 msgstr "Κάθε τέσσερις εβδομάδες"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:902
-#: kmymoney/mymoney/mymoneyschedule.cpp:935
+#: kmymoney/mymoney/mymoneyschedule.cpp:891
+#: kmymoney/mymoney/mymoneyschedule.cpp:924
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every thirty days"
 msgstr "Κάθε 30 ημέρες"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:904
+#: kmymoney/mymoney/mymoneyschedule.cpp:893
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Monthly"
 msgstr "Μηνιαία"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:906
-#: kmymoney/mymoney/mymoneyschedule.cpp:953
+#: kmymoney/mymoney/mymoneyschedule.cpp:895
+#: kmymoney/mymoney/mymoneyschedule.cpp:942
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every eight weeks"
 msgstr "Κάθε οχτώ εβδομάδες"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:908
-#: kmymoney/mymoney/mymoneyschedule.cpp:965
+#: kmymoney/mymoney/mymoneyschedule.cpp:897
+#: kmymoney/mymoney/mymoneyschedule.cpp:954
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every two months"
 msgstr "Κάθε δύο μήνες"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:910
-#: kmymoney/mymoney/mymoneyschedule.cpp:968
+#: kmymoney/mymoney/mymoneyschedule.cpp:899
+#: kmymoney/mymoney/mymoneyschedule.cpp:957
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every three months"
 msgstr "Κάθε τρεις μήνες"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:912
+#: kmymoney/mymoney/mymoneyschedule.cpp:901
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Quarterly"
 msgstr "Τριμηνιαία"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:914
-#: kmymoney/mymoney/mymoneyschedule.cpp:971
+#: kmymoney/mymoney/mymoneyschedule.cpp:903
+#: kmymoney/mymoney/mymoneyschedule.cpp:960
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every four months"
 msgstr "Κάθε τέσσερις μήνες"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:916
-#: kmymoney/mymoney/mymoneyschedule.cpp:974
+#: kmymoney/mymoney/mymoneyschedule.cpp:905
+#: kmymoney/mymoney/mymoneyschedule.cpp:963
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Twice yearly"
 msgstr "Εξαμηνιαία"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:918
+#: kmymoney/mymoney/mymoneyschedule.cpp:907
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Yearly"
 msgstr "Ετήσια"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:920
-#: kmymoney/mymoney/mymoneyschedule.cpp:983
+#: kmymoney/mymoney/mymoneyschedule.cpp:909
+#: kmymoney/mymoney/mymoneyschedule.cpp:972
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every other year"
 msgstr "Κάθε δυο χρόνια"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:921
+#: kmymoney/mymoney/mymoneyschedule.cpp:910
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Any"
 msgstr "Οποιοδήποτε"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:930
+#: kmymoney/mymoney/mymoneyschedule.cpp:919
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "%1 times"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:938
+#: kmymoney/mymoney/mymoneyschedule.cpp:927
 #, fuzzy, kde-format
 #| msgctxt "Frequency of schedule"
 #| msgid "Every thirty days"
@@ -8305,7 +8305,7 @@ msgctxt "Frequency of schedule"
 msgid "Every %1 days"
 msgstr "Κάθε 30 ημέρες"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:956
+#: kmymoney/mymoney/mymoneyschedule.cpp:945
 #, fuzzy, kde-format
 #| msgctxt "Frequency of schedule"
 #| msgid "Every four weeks"
@@ -8313,7 +8313,7 @@ msgctxt "Frequency of schedule"
 msgid "Every %1 weeks"
 msgstr "Κάθε τέσσερις εβδομάδες"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:960
+#: kmymoney/mymoney/mymoneyschedule.cpp:949
 #, fuzzy, kde-format
 #| msgctxt "Frequency of schedule"
 #| msgid "Every half month"
@@ -8321,7 +8321,7 @@ msgctxt "Frequency of schedule"
 msgid "Every %1 half months"
 msgstr "Κάθε μισό μήνα"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:977
+#: kmymoney/mymoney/mymoneyschedule.cpp:966
 #, fuzzy, kde-format
 #| msgctxt "Frequency of schedule"
 #| msgid "Every two months"
@@ -8329,7 +8329,7 @@ msgctxt "Frequency of schedule"
 msgid "Every %1 months"
 msgstr "Κάθε δύο μήνες"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:986
+#: kmymoney/mymoney/mymoneyschedule.cpp:975
 #, fuzzy, kde-format
 #| msgctxt "Frequency of schedule"
 #| msgid "Every other year"
@@ -8337,129 +8337,129 @@ msgctxt "Frequency of schedule"
 msgid "Every %1 years"
 msgstr "Κάθε δυο χρόνια"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:996
+#: kmymoney/mymoney/mymoneyschedule.cpp:985
 msgctxt "Schedule occurrence period"
 msgid "Any"
 msgstr "Οποιοδήποτε"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:999
+#: kmymoney/mymoney/mymoneyschedule.cpp:988
 msgctxt "Schedule occurrence period"
 msgid "Once"
 msgstr "Μια φορά"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1001
+#: kmymoney/mymoney/mymoneyschedule.cpp:990
 msgctxt "Schedule occurrence period"
 msgid "Day"
 msgstr "Ημέρα"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1003
+#: kmymoney/mymoney/mymoneyschedule.cpp:992
 msgctxt "Schedule occurrence period"
 msgid "Week"
 msgstr "Εβδομάδα"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1005
+#: kmymoney/mymoney/mymoneyschedule.cpp:994
 msgctxt "Schedule occurrence period"
 msgid "Half-month"
 msgstr "Μισός μήνας"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1007
+#: kmymoney/mymoney/mymoneyschedule.cpp:996
 msgctxt "Schedule occurrence period"
 msgid "Month"
 msgstr "Μήνας"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1009
+#: kmymoney/mymoney/mymoneyschedule.cpp:998
 msgctxt "Schedule occurrence period"
 msgid "Year"
 msgstr "Έτος"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1019
+#: kmymoney/mymoney/mymoneyschedule.cpp:1008
 msgctxt "Scheduled transaction type"
 msgid "Bill"
 msgstr "Λογαριασμός"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1022
+#: kmymoney/mymoney/mymoneyschedule.cpp:1011
 msgctxt "Scheduled transaction type"
 msgid "Deposit"
 msgstr "Κατάθεση"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1025
+#: kmymoney/mymoney/mymoneyschedule.cpp:1014
 msgctxt "Scheduled transaction type"
 msgid "Transfer"
 msgstr "Μεταφορά"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1028
+#: kmymoney/mymoney/mymoneyschedule.cpp:1017
 msgctxt "Scheduled transaction type"
 msgid "Loan payment"
 msgstr "Δόση δανείου"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1032
+#: kmymoney/mymoney/mymoneyschedule.cpp:1021
 msgctxt "Scheduled transaction type"
 msgid "Unknown"
 msgstr "Άγνωστο"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1041
+#: kmymoney/mymoney/mymoneyschedule.cpp:1030
 msgctxt "Scheduled Transaction payment type"
 msgid "Direct debit"
 msgstr "Άμεση χρέωση"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1044
+#: kmymoney/mymoney/mymoneyschedule.cpp:1033
 msgctxt "Scheduled Transaction payment type"
 msgid "Direct deposit"
 msgstr "Άμεση κατάθεση"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1047
+#: kmymoney/mymoney/mymoneyschedule.cpp:1036
 msgctxt "Scheduled Transaction payment type"
 msgid "Manual deposit"
 msgstr "Χειροκίνητη κατάθεση"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1050
+#: kmymoney/mymoney/mymoneyschedule.cpp:1039
 msgctxt "Scheduled Transaction payment type"
 msgid "Other"
 msgstr "Άλλο"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1053
+#: kmymoney/mymoney/mymoneyschedule.cpp:1042
 msgctxt "Scheduled Transaction payment type"
 msgid "Write check"
 msgstr "Συμπλήρωση επιταγής"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1056
+#: kmymoney/mymoney/mymoneyschedule.cpp:1045
 msgctxt "Scheduled Transaction payment type"
 msgid "Standing order"
 msgstr "Μόνιμη διαταγή"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1059
+#: kmymoney/mymoney/mymoneyschedule.cpp:1048
 msgctxt "Scheduled Transaction payment type"
 msgid "Bank transfer"
 msgstr "Τραπεζική μεταφορά"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1062
+#: kmymoney/mymoney/mymoneyschedule.cpp:1051
 msgctxt "Scheduled Transaction payment type"
 msgid "Any (Error)"
 msgstr "Όλα (Σφάλμα)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1074
+#: kmymoney/mymoney/mymoneyschedule.cpp:1063
 #: kmymoney/views/keditscheduledlg.ui:164
 #, kde-format
 msgid "Change the date to the previous processing day"
 msgstr "Αλλαγή της ημερομηνίας με αυτήν της προηγούμενης εργάσιμης ημέρας"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1077
+#: kmymoney/mymoney/mymoneyschedule.cpp:1066
 #: kmymoney/views/keditscheduledlg.ui:169
 #, kde-format
 msgid "Change the date to the next processing day"
 msgstr "Αλλαγή της ημερομηνίας με αυτήν της επόμενης εργάσιμης ημέρας"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1080
+#: kmymoney/mymoney/mymoneyschedule.cpp:1069
 #: kmymoney/views/keditscheduledlg.ui:159
 #, fuzzy, kde-format
 #| msgid "Do not show unused categories"
 msgid "Do not change the date"
 msgstr "Να μην εμφανίζονται οι κατηγορίες που δεν χρησιμοποιούνται"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:244
+#: kmymoney/mymoney/mymoneysecurity.cpp:232
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:30
 #, fuzzy, kde-format
 #| msgid "Stock"
@@ -8467,7 +8467,7 @@ msgctxt "Security type"
 msgid "Stock"
 msgstr "Χαρτοφυλάκιο"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:246
+#: kmymoney/mymoney/mymoneysecurity.cpp:234
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:31
 #, fuzzy, kde-format
 #| msgid "Mutual Fund"
@@ -8475,7 +8475,7 @@ msgctxt "Security type"
 msgid "Mutual Fund"
 msgstr "Αμοιβαία κεφάλαια"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:248
+#: kmymoney/mymoney/mymoneysecurity.cpp:236
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:32
 #, fuzzy, kde-format
 #| msgid "Bond"
@@ -8483,57 +8483,57 @@ msgctxt "Security type"
 msgid "Bond"
 msgstr "Ομόλογα"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:250
+#: kmymoney/mymoney/mymoneysecurity.cpp:238
 #, fuzzy, kde-format
 #| msgid "Currency"
 msgctxt "Security type"
 msgid "Currency"
 msgstr "Νόμισμα"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:252
+#: kmymoney/mymoney/mymoneysecurity.cpp:240
 #, fuzzy, kde-format
 #| msgid "None"
 msgctxt "Security type"
 msgid "None"
 msgstr "Κανένα"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:254
+#: kmymoney/mymoney/mymoneysecurity.cpp:242
 #, fuzzy, kde-format
 #| msgid "Unknown"
 msgctxt "Security type"
 msgid "Unknown"
 msgstr "Άγνωστο"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:272
+#: kmymoney/mymoney/mymoneysecurity.cpp:260
 #, fuzzy
 #| msgctxt "@action move item down"
 #| msgid "Down"
 msgid "HalfDown"
 msgstr "Κάτω"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:274
+#: kmymoney/mymoney/mymoneysecurity.cpp:262
 msgid "HalfUp"
 msgstr ""
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:278
+#: kmymoney/mymoney/mymoneysecurity.cpp:266
 msgid "Unknown"
 msgstr "Άγνωστο"
 
-#: kmymoney/mymoney/mymoneytemplate.cpp:95
+#: kmymoney/mymoney/mymoneytemplate.cpp:99
 #, kde-format
 msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
 msgstr "<p>Άκυρη ετικέτα <b>%1</b> στο αρχείο προτύπου<b>%2</b></p>"
 
-#: kmymoney/mymoney/mymoneytemplate.cpp:102
-#: kmymoney/mymoney/mymoneytemplate.cpp:104
 #: kmymoney/mymoney/mymoneytemplate.cpp:106
 #: kmymoney/mymoney/mymoneytemplate.cpp:108
+#: kmymoney/mymoney/mymoneytemplate.cpp:110
+#: kmymoney/mymoney/mymoneytemplate.cpp:112
 #, fuzzy, kde-format
 #| msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
 msgid "<p>Missing tag <b>%1</b> in template file <b>%2</b></p>"
 msgstr "<p>Άκυρη ετικέτα <b>%1</b> στο αρχείο προτύπου<b>%2</b></p>"
 
-#: kmymoney/mymoney/mymoneytemplate.cpp:112
+#: kmymoney/mymoney/mymoneytemplate.cpp:116
 #, fuzzy, kde-format
 #| msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
 msgid "<p>Invalid root element in template file <b>%1</b></p>"
@@ -9260,7 +9260,7 @@ msgstr "Αξία"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_payeesView)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkPayee)
 #. i18n: ectx: attribute (title), widget (QWidget, payeeTab)
-#: kmymoney/mymoney/storage/payeesmodel.cpp:95
+#: kmymoney/mymoney/storage/payeesmodel.cpp:96
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:21
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:68

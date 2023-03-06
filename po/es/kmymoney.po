@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 00:52+0000\n"
+"POT-Creation-Date: 2023-03-06 00:48+0000\n"
 "PO-Revision-Date: 2023-02-27 05:07+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -1493,35 +1493,35 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:135
-#: kmymoney/mymoney/mymoneysecurity.cpp:262
+#: kmymoney/mymoney/mymoneysecurity.cpp:250
 #, kde-format
 msgid "Never"
 msgstr "Nunca"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:140
-#: kmymoney/mymoney/mymoneysecurity.cpp:264
+#: kmymoney/mymoney/mymoneysecurity.cpp:252
 #, kde-format
 msgid "Floor"
 msgstr "Por defecto"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:145
-#: kmymoney/mymoney/mymoneysecurity.cpp:266
+#: kmymoney/mymoney/mymoneysecurity.cpp:254
 #, kde-format
 msgid "Ceil"
 msgstr "Por exceso"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:150
-#: kmymoney/mymoney/mymoneysecurity.cpp:268
+#: kmymoney/mymoney/mymoneysecurity.cpp:256
 #, kde-format
 msgid "Truncate"
 msgstr "Truncar"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:155
-#: kmymoney/mymoney/mymoneysecurity.cpp:270
+#: kmymoney/mymoney/mymoneysecurity.cpp:258
 #, kde-format
 msgid "Promote"
 msgstr "Promocionar"
@@ -1540,7 +1540,7 @@ msgstr "Mitad hacia arriba"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:170
-#: kmymoney/mymoney/mymoneysecurity.cpp:276
+#: kmymoney/mymoney/mymoneysecurity.cpp:264
 #, kde-format
 msgid "Round"
 msgstr "Redondear"
@@ -6102,8 +6102,9 @@ msgid "New Payee"
 msgstr "Nuevo beneficiario"
 
 #: kmymoney/kmymoneyutils.cpp:564
-#, kde-format
-msgid "<qt>Do you want to add <b>%1</b> as payer/receiver?</qt>"
+#, fuzzy, kde-format
+#| msgid "<qt>Do you want to add <b>%1</b> as payer/receiver?</qt>"
+msgid "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
 msgstr "<qt>¿Desea añadir <b>%1</b> como pagador/receptor?</qt>"
 
 #: kmymoney/kmymoneyutils.cpp:603
@@ -6456,109 +6457,109 @@ msgid "The plugin to show this information could not be found."
 msgstr ""
 "No se puede encontrar el complemento necesario para mostrar esta información."
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:434
+#: kmymoney/mymoney/mymoneyaccount.cpp:431
 #, kde-format
 msgctxt "Brokerage (suffix for account names)"
 msgid "Brokerage"
 msgstr "Corretaje"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:531
+#: kmymoney/mymoney/mymoneyaccount.cpp:528
 #, kde-format
 msgctxt "Account type"
 msgid "Checking"
 msgstr "Corriente"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:533
+#: kmymoney/mymoney/mymoneyaccount.cpp:530
 #, kde-format
 msgctxt "Account type"
 msgid "Savings"
 msgstr "Ahorro"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:535
+#: kmymoney/mymoney/mymoneyaccount.cpp:532
 #, kde-format
 msgctxt "Account type"
 msgid "Credit Card"
 msgstr "Tarjeta de crédito"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:537
+#: kmymoney/mymoney/mymoneyaccount.cpp:534
 #, kde-format
 msgctxt "Account type"
 msgid "Cash"
 msgstr "Efectivo"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:539
+#: kmymoney/mymoney/mymoneyaccount.cpp:536
 #, kde-format
 msgctxt "Account type"
 msgid "Loan"
 msgstr "Préstamo"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:541
+#: kmymoney/mymoney/mymoneyaccount.cpp:538
 #, kde-format
 msgctxt "Account type"
 msgid "Certificate of Deposit"
 msgstr "Certificado de depósito"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:543
+#: kmymoney/mymoney/mymoneyaccount.cpp:540
 #, kde-format
 msgctxt "Account type"
 msgid "Investment"
 msgstr "Inversión"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:545
+#: kmymoney/mymoney/mymoneyaccount.cpp:542
 #, kde-format
 msgctxt "Account type"
 msgid "Money Market"
 msgstr "Mercado monetario"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:547
+#: kmymoney/mymoney/mymoneyaccount.cpp:544
 #, kde-format
 msgctxt "Account type"
 msgid "Asset"
 msgstr "Activos"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:549
+#: kmymoney/mymoney/mymoneyaccount.cpp:546
 #, kde-format
 msgctxt "Account type"
 msgid "Liability"
 msgstr "Pasivos"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:551
+#: kmymoney/mymoney/mymoneyaccount.cpp:548
 #, kde-format
 msgctxt "Account type"
 msgid "Currency"
 msgstr "Moneda"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:553
+#: kmymoney/mymoney/mymoneyaccount.cpp:550
 #, kde-format
 msgctxt "Account type"
 msgid "Income"
 msgstr "Ingreso"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:555
+#: kmymoney/mymoney/mymoneyaccount.cpp:552
 #, kde-format
 msgctxt "Account type"
 msgid "Expense"
 msgstr "Gasto"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:557
+#: kmymoney/mymoney/mymoneyaccount.cpp:554
 #, kde-format
 msgctxt "Account type"
 msgid "Investment Loan"
 msgstr "Financiación de inversión"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:559
+#: kmymoney/mymoney/mymoneyaccount.cpp:556
 #, kde-format
 msgctxt "Account type"
 msgid "Stock"
 msgstr "Acción"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:561
+#: kmymoney/mymoney/mymoneyaccount.cpp:558
 #, kde-format
 msgctxt "Account type"
 msgid "Equity"
 msgstr "Patrimonio"
 
-#: kmymoney/mymoney/mymoneyaccount.cpp:563
+#: kmymoney/mymoney/mymoneyaccount.cpp:560
 #, kde-format
 msgctxt "Account type"
 msgid "Unknown"
@@ -7876,353 +7877,353 @@ msgstr "Plata"
 msgid "Opening Balances"
 msgstr "Saldos de apertura"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:886
+#: kmymoney/mymoney/mymoneyschedule.cpp:875
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Once"
 msgstr "Una vez"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:888
+#: kmymoney/mymoney/mymoneyschedule.cpp:877
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Daily"
 msgstr "Diariamente"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:890
+#: kmymoney/mymoney/mymoneyschedule.cpp:879
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Weekly"
 msgstr "Semanalmente"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:892
+#: kmymoney/mymoney/mymoneyschedule.cpp:881
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Fortnightly"
 msgstr "Quincenal"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:894
-#: kmymoney/mymoney/mymoneyschedule.cpp:944
+#: kmymoney/mymoney/mymoneyschedule.cpp:883
+#: kmymoney/mymoney/mymoneyschedule.cpp:933
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every other week"
 msgstr "A semanas alternas"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:896
+#: kmymoney/mymoney/mymoneyschedule.cpp:885
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every half month"
 msgstr "Cada medio mes"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:898
-#: kmymoney/mymoney/mymoneyschedule.cpp:947
+#: kmymoney/mymoney/mymoneyschedule.cpp:887
+#: kmymoney/mymoney/mymoneyschedule.cpp:936
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every three weeks"
 msgstr "Cada tres semanas"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:900
-#: kmymoney/mymoney/mymoneyschedule.cpp:950
+#: kmymoney/mymoney/mymoneyschedule.cpp:889
+#: kmymoney/mymoney/mymoneyschedule.cpp:939
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every four weeks"
 msgstr "Cada cuatro semanas"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:902
-#: kmymoney/mymoney/mymoneyschedule.cpp:935
+#: kmymoney/mymoney/mymoneyschedule.cpp:891
+#: kmymoney/mymoney/mymoneyschedule.cpp:924
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every thirty days"
 msgstr "Cada treinta días"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:904
+#: kmymoney/mymoney/mymoneyschedule.cpp:893
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Monthly"
 msgstr "Mensualmente"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:906
-#: kmymoney/mymoney/mymoneyschedule.cpp:953
+#: kmymoney/mymoney/mymoneyschedule.cpp:895
+#: kmymoney/mymoney/mymoneyschedule.cpp:942
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every eight weeks"
 msgstr "Cada ocho semanas"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:908
-#: kmymoney/mymoney/mymoneyschedule.cpp:965
+#: kmymoney/mymoney/mymoneyschedule.cpp:897
+#: kmymoney/mymoney/mymoneyschedule.cpp:954
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every two months"
 msgstr "Bimestral"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:910
-#: kmymoney/mymoney/mymoneyschedule.cpp:968
+#: kmymoney/mymoney/mymoneyschedule.cpp:899
+#: kmymoney/mymoney/mymoneyschedule.cpp:957
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every three months"
 msgstr "Trimestral"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:912
+#: kmymoney/mymoney/mymoneyschedule.cpp:901
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Quarterly"
 msgstr "Trimestralmente"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:914
-#: kmymoney/mymoney/mymoneyschedule.cpp:971
+#: kmymoney/mymoney/mymoneyschedule.cpp:903
+#: kmymoney/mymoney/mymoneyschedule.cpp:960
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every four months"
 msgstr "Cuatrimestral"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:916
-#: kmymoney/mymoney/mymoneyschedule.cpp:974
+#: kmymoney/mymoney/mymoneyschedule.cpp:905
+#: kmymoney/mymoney/mymoneyschedule.cpp:963
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Twice yearly"
 msgstr "Dos veces al año"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:918
+#: kmymoney/mymoney/mymoneyschedule.cpp:907
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Yearly"
 msgstr "Anualmente"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:920
-#: kmymoney/mymoney/mymoneyschedule.cpp:983
+#: kmymoney/mymoney/mymoneyschedule.cpp:909
+#: kmymoney/mymoney/mymoneyschedule.cpp:972
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every other year"
 msgstr "Bienal"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:921
+#: kmymoney/mymoney/mymoneyschedule.cpp:910
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Any"
 msgstr "Cualquiera"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:930
+#: kmymoney/mymoney/mymoneyschedule.cpp:919
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "%1 times"
 msgstr "%1 veces"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:938
+#: kmymoney/mymoney/mymoneyschedule.cpp:927
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 days"
 msgstr "Cada %1 días"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:956
+#: kmymoney/mymoney/mymoneyschedule.cpp:945
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 weeks"
 msgstr "Cada %1 semanas"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:960
+#: kmymoney/mymoney/mymoneyschedule.cpp:949
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 half months"
 msgstr "Cada %1 medios meses"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:977
+#: kmymoney/mymoney/mymoneyschedule.cpp:966
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 months"
 msgstr "Cada %1 meses"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:986
+#: kmymoney/mymoney/mymoneyschedule.cpp:975
 #, kde-format
 msgctxt "Frequency of schedule"
 msgid "Every %1 years"
 msgstr "Cada %1 años"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:996
+#: kmymoney/mymoney/mymoneyschedule.cpp:985
 msgctxt "Schedule occurrence period"
 msgid "Any"
 msgstr "Cualquiera"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:999
+#: kmymoney/mymoney/mymoneyschedule.cpp:988
 msgctxt "Schedule occurrence period"
 msgid "Once"
 msgstr "Una vez"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1001
+#: kmymoney/mymoney/mymoneyschedule.cpp:990
 msgctxt "Schedule occurrence period"
 msgid "Day"
 msgstr "Día"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1003
+#: kmymoney/mymoney/mymoneyschedule.cpp:992
 msgctxt "Schedule occurrence period"
 msgid "Week"
 msgstr "Semana"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1005
+#: kmymoney/mymoney/mymoneyschedule.cpp:994
 msgctxt "Schedule occurrence period"
 msgid "Half-month"
 msgstr "Medio mes"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1007
+#: kmymoney/mymoney/mymoneyschedule.cpp:996
 msgctxt "Schedule occurrence period"
 msgid "Month"
 msgstr "Mes"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1009
+#: kmymoney/mymoney/mymoneyschedule.cpp:998
 msgctxt "Schedule occurrence period"
 msgid "Year"
 msgstr "Año"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1019
+#: kmymoney/mymoney/mymoneyschedule.cpp:1008
 msgctxt "Scheduled transaction type"
 msgid "Bill"
 msgstr "Factura"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1022
+#: kmymoney/mymoney/mymoneyschedule.cpp:1011
 msgctxt "Scheduled transaction type"
 msgid "Deposit"
 msgstr "Depósito"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1025
+#: kmymoney/mymoney/mymoneyschedule.cpp:1014
 msgctxt "Scheduled transaction type"
 msgid "Transfer"
 msgstr "Transferencia"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1028
+#: kmymoney/mymoney/mymoneyschedule.cpp:1017
 msgctxt "Scheduled transaction type"
 msgid "Loan payment"
 msgstr "Pago de préstamo"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1032
+#: kmymoney/mymoney/mymoneyschedule.cpp:1021
 msgctxt "Scheduled transaction type"
 msgid "Unknown"
 msgstr "Desconocida"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1041
+#: kmymoney/mymoney/mymoneyschedule.cpp:1030
 msgctxt "Scheduled Transaction payment type"
 msgid "Direct debit"
 msgstr "Adeudo por domiciliación"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1044
+#: kmymoney/mymoney/mymoneyschedule.cpp:1033
 msgctxt "Scheduled Transaction payment type"
 msgid "Direct deposit"
 msgstr "Depósito en cuenta"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1047
+#: kmymoney/mymoney/mymoneyschedule.cpp:1036
 msgctxt "Scheduled Transaction payment type"
 msgid "Manual deposit"
 msgstr "Depósito en mano"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1050
+#: kmymoney/mymoney/mymoneyschedule.cpp:1039
 msgctxt "Scheduled Transaction payment type"
 msgid "Other"
 msgstr "Otro"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1053
+#: kmymoney/mymoney/mymoneyschedule.cpp:1042
 msgctxt "Scheduled Transaction payment type"
 msgid "Write check"
 msgstr "Extender cheque"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1056
+#: kmymoney/mymoney/mymoneyschedule.cpp:1045
 msgctxt "Scheduled Transaction payment type"
 msgid "Standing order"
 msgstr "Pago domiciliado"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1059
+#: kmymoney/mymoney/mymoneyschedule.cpp:1048
 msgctxt "Scheduled Transaction payment type"
 msgid "Bank transfer"
 msgstr "Transferencia bancaria"
 
-#: kmymoney/mymoney/mymoneyschedule.cpp:1062
+#: kmymoney/mymoney/mymoneyschedule.cpp:1051
 msgctxt "Scheduled Transaction payment type"
 msgid "Any (Error)"
 msgstr "Cualquier (Error)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1074
+#: kmymoney/mymoney/mymoneyschedule.cpp:1063
 #: kmymoney/views/keditscheduledlg.ui:164
 #, kde-format
 msgid "Change the date to the previous processing day"
 msgstr "Cambiar la fecha al día hábil anterior"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1077
+#: kmymoney/mymoney/mymoneyschedule.cpp:1066
 #: kmymoney/views/keditscheduledlg.ui:169
 #, kde-format
 msgid "Change the date to the next processing day"
 msgstr "Cambiar la fecha al día hábil siguiente"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, weekendOptionCombo)
-#: kmymoney/mymoney/mymoneyschedule.cpp:1080
+#: kmymoney/mymoney/mymoneyschedule.cpp:1069
 #: kmymoney/views/keditscheduledlg.ui:159
 #, kde-format
 msgid "Do not change the date"
 msgstr "No cambiar la fecha"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:244
+#: kmymoney/mymoney/mymoneysecurity.cpp:232
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:30
 #, kde-format
 msgctxt "Security type"
 msgid "Stock"
 msgstr "Acción"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:246
+#: kmymoney/mymoney/mymoneysecurity.cpp:234
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:31
 #, kde-format
 msgctxt "Security type"
 msgid "Mutual Fund"
 msgstr "Fondo de inversión"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:248
+#: kmymoney/mymoney/mymoneysecurity.cpp:236
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.cpp:32
 #, kde-format
 msgctxt "Security type"
 msgid "Bond"
 msgstr "Bono"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:250
+#: kmymoney/mymoney/mymoneysecurity.cpp:238
 #, kde-format
 msgctxt "Security type"
 msgid "Currency"
 msgstr "Moneda"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:252
+#: kmymoney/mymoney/mymoneysecurity.cpp:240
 #, kde-format
 msgctxt "Security type"
 msgid "None"
 msgstr "Ninguno"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:254
+#: kmymoney/mymoney/mymoneysecurity.cpp:242
 #, kde-format
 msgctxt "Security type"
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:272
+#: kmymoney/mymoney/mymoneysecurity.cpp:260
 msgid "HalfDown"
 msgstr "Mitad inferior"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:274
+#: kmymoney/mymoney/mymoneysecurity.cpp:262
 msgid "HalfUp"
 msgstr "Mitad superior"
 
-#: kmymoney/mymoney/mymoneysecurity.cpp:278
+#: kmymoney/mymoney/mymoneysecurity.cpp:266
 msgid "Unknown"
 msgstr "Desconocida"
 
-#: kmymoney/mymoney/mymoneytemplate.cpp:95
+#: kmymoney/mymoney/mymoneytemplate.cpp:99
 #, kde-format
 msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
 msgstr ""
 "<p>Etiqueta no válida <b>%1</b> en el archivo de plantillas <b>%2</b></p>"
 
-#: kmymoney/mymoney/mymoneytemplate.cpp:102
-#: kmymoney/mymoney/mymoneytemplate.cpp:104
 #: kmymoney/mymoney/mymoneytemplate.cpp:106
 #: kmymoney/mymoney/mymoneytemplate.cpp:108
+#: kmymoney/mymoney/mymoneytemplate.cpp:110
+#: kmymoney/mymoney/mymoneytemplate.cpp:112
 #, kde-format
 msgid "<p>Missing tag <b>%1</b> in template file <b>%2</b></p>"
 msgstr "<p>Etiqueta ausente<b>%1</b> en el archivo de plantillas <b>%2</b></p>"
 
-#: kmymoney/mymoney/mymoneytemplate.cpp:112
+#: kmymoney/mymoney/mymoneytemplate.cpp:116
 #, kde-format
 msgid "<p>Invalid root element in template file <b>%1</b></p>"
 msgstr "<p>Elemento raíz no válido en el archivo de plantilla <b>%1</b></p>"
@@ -8887,7 +8888,7 @@ msgstr "Valor"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_payeesView)
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkPayee)
 #. i18n: ectx: attribute (title), widget (QWidget, payeeTab)
-#: kmymoney/mymoney/storage/payeesmodel.cpp:95
+#: kmymoney/mymoney/storage/payeesmodel.cpp:96
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:21
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:68
