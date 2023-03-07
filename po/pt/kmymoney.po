@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-06 00:48+0000\n"
-"PO-Revision-Date: 2023-02-15 15:32+0000\n"
+"PO-Revision-Date: 2023-03-06 16:11+0000\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
 "Language: pt\n"
@@ -6187,11 +6187,9 @@ msgid "New Payee"
 msgstr "Novo Beneficiário"
 
 #: kmymoney/kmymoneyutils.cpp:564
-#, fuzzy, kde-format
-#| msgid "<qt>Do you want to add <b>%1</b> as payer/receiver?</qt>"
+#, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
-msgstr ""
-"<qt>Você deseja adicionar o <b>%1</b> como beneficiário/destinatário?</qt>"
+msgstr "<qt>Deseja adicionar o <b>%1</b> como beneficiário/destinatário?</qt>"
 
 #: kmymoney/kmymoneyutils.cpp:603
 #, kde-format
@@ -17668,10 +17666,10 @@ msgstr "Incluir apenas as contas de Empréstimo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:353
-#, fuzzy, kde-format
-#| msgid "Include only Investment accounts"
+#, kde-format
 msgid "<p>Include only data from Investment accounts in this report</p>"
-msgstr "Incluir apenas as contas de Investimento"
+msgstr ""
+"<p>Incluir apenas os dados das contas de Investimento neste relatório</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkInvestments)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:356
