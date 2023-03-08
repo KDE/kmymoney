@@ -122,7 +122,7 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
     QString reportName = i18n("Reconciliation report of account %1", account.name());
     QString report = QString("<h2 class=\"report\">%1</h2>\n").arg(reportName);
     report += QString("<div class=\"subtitle\">");
-    report += QString("%1").arg(QLocale().toString(date, QLocale::ShortFormat));
+    report += MyMoneyUtils::formatDate(date);
     report += QString("</div>\n");
     report += QString("<div class=\"gap\">&nbsp;</div>\n");
     report += QString("<div class=\"subtitle\">");
@@ -182,7 +182,7 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
     report += "</td></tr>";
     // row 8
     report += "<tr class=\"row-even\"><td class=\"left\">";
-    report += i18n("Register balance as of %1", QLocale().toString(date, QLocale::ShortFormat));
+    report += i18n("Register balance as of %1", MyMoneyUtils::formatDate(date));
     report += "</td><td>";
     report += MyMoneyUtils::formatMoney(MyMoneyFile::instance()->balance(account.id(), date), currency);
     report += "</td></tr>";
@@ -216,13 +216,13 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
 
     // row 9
     report += "<tr class=\"row-odd\"><td class=\"left\">";
-    report += i18np("%1 payment after %2", "%1 payments after %2", afterPayments, QLocale().toString(date, QLocale::ShortFormat));
+    report += i18np("%1 payment after %2", "%1 payments after %2", afterPayments, MyMoneyUtils::formatDate(date));
     report += "</td><td>";
     report += MyMoneyUtils::formatMoney(afterPaymentAmount, currency);
     report += "</td></tr>";
     // row 10
     report += "<tr class=\"row-even\"><td class=\"left\">";
-    report += i18np("%1 deposit after %2", "%1 deposits after %2", afterDeposits, QLocale().toString(date, QLocale::ShortFormat));
+    report += i18np("%1 deposit after %2", "%1 deposits after %2", afterDeposits, MyMoneyUtils::formatDate(date));
     report += "</td><td>";
     report += MyMoneyUtils::formatMoney(afterDepositAmount, currency);
     report += "</td></tr>";
@@ -270,7 +270,7 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
                 }
 
                 detailsReport += QString("<tr class=\"%1\"><td>").arg((index++ % 2 == 1) ? "row-odd" : "row-even");
-                detailsReport += QString("%1").arg(QLocale().toString(transaction.postDate(), QLocale::ShortFormat));
+                detailsReport += MyMoneyUtils::formatDate(transaction.postDate());
                 detailsReport += "</td><td>";
                 detailsReport += QString("%1").arg(split.number());
                 detailsReport += "</td><td>";
@@ -280,7 +280,7 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
                 detailsReport += "</td><td>";
                 detailsReport += QString("%1").arg(category);
                 detailsReport += "</td><td>";
-                detailsReport += QString("%1").arg(MyMoneyUtils::formatMoney(split.shares(), file->currency(account.currencyId())));
+                detailsReport += MyMoneyUtils::formatMoney(split.shares(), file->currency(account.currencyId()));
                 detailsReport += "</td></tr>";
             }
         }
@@ -313,10 +313,10 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
                 }
 
                 detailsReport += QString("<tr class=\"%1\"><td>").arg((index++ % 2 == 1) ? "row-odd" : "row-even")
-                    + QString("%1").arg(QLocale().toString(transaction.postDate(), QLocale::ShortFormat)) + "</td><td>" + QString("%1").arg(split.number())
-                    + "</td><td>" + QString("%1").arg(file->payee(split.payeeId()).name()) + "</td><td>" + QString("%1").arg(transaction.memo()) + "</td><td>"
-                    + QString("%1").arg(category) + "</td><td>"
-                    + QString("%1").arg(MyMoneyUtils::formatMoney(split.shares(), file->currency(account.currencyId()))) + "</td></tr>";
+                    + MyMoneyUtils::formatDate(transaction.postDate()) + "</td><td>" + QString("%1").arg(split.number()) + "</td><td>"
+                    + QString("%1").arg(file->payee(split.payeeId()).name()) + "</td><td>" + QString("%1").arg(transaction.memo()) + "</td><td>"
+                    + QString("%1").arg(category) + "</td><td>" + MyMoneyUtils::formatMoney(split.shares(), file->currency(account.currencyId()))
+                    + "</td></tr>";
             }
         }
     }
