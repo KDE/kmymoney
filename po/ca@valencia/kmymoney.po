@@ -14965,7 +14965,7 @@ msgstr "Ometre la data d'obertura en recuperar operacions"
 #, kde-format
 msgid "Include future transaction when using Schedule Forecast"
 msgstr ""
-"Inclou operacions futures quan s'utilitze la previsió basada en la "
+"Inclou les operacions futures quan s'utilitze la previsió basada en la "
 "planificació"
 
 #. i18n: ectx: label, entry (includeScheduledTransactions), group (Forecast Options)
@@ -14974,7 +14974,7 @@ msgstr ""
 #, kde-format
 msgid "Include scheduled transactions when using Schedule Forecast"
 msgstr ""
-"Inclou operacions planificades quan s'utilitze la previsió basada en la "
+"Inclou les operacions planificades quan s'utilitze la previsió basada en la "
 "planificació"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox3)
