@@ -8,6 +8,10 @@
 
 #include "mymoneyutils.h"
 
+#include <QDate>
+#include <QLocale>
+#include <QRegExp>
+
 #include <iostream>
 
 #include "mymoneyaccount.h"
@@ -17,8 +21,6 @@
 #include <cstdio>
 #include <cstdarg>
 
-#include <QRegExp>
-#include <QDate>
 
 QString MyMoneyUtils::getFileExtension(QString strFileName)
 {
@@ -89,6 +91,18 @@ unsigned long MyMoneyUtils::extractId(const QString& txt)
         rc = txt.mid(pos).toInt();
     }
     return rc;
+}
+
+QString MyMoneyUtils::formatDate(const QDate& date)
+{
+    static QString format;
+    if (format.isEmpty()) {
+        format = QLocale().dateFormat(QLocale::ShortFormat);
+        if (!format.contains(QLatin1String("yyyy")) && format.contains(QLatin1String("yy"))) {
+            format.replace(QLatin1String("yy"), QLatin1String("yyyy"));
+        }
+    }
+    return date.toString(format);
 }
 
 bool MyMoneyUtils::isRunningAsAppImage()
