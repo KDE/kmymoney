@@ -22,17 +22,18 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "mymoneymoney.h"
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "mymoneytransaction.h"
-#include "mymoneytransactionfilter.h"
-#include "mymoneysplit.h"
-#include "mymoneypayee.h"
-#include "mymoneyexception.h"
 #include "csvexportdlg.h"
 #include "csvexporter.h"
+#include "mymoneyaccount.h"
 #include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "mymoneypayee.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+#include "mymoneytransactionfilter.h"
 
 CsvWriter::CsvWriter() :
     m_plugin(0),
@@ -93,16 +94,24 @@ void CsvWriter::writeAccountEntry(QTextStream& stream, const QString& accountId,
     MyMoneyTransactionFilter filter(accountId);
 
     QString type = account.accountTypeToString(account.accountType());
-    data = QString(i18n("Account Type:"));
+    data = i18n("Account Type:");
 
     if (account.accountType() == eMyMoney::Account::Type::Investment) {
         data += QString("%1\n\n").arg(type);
-        m_headerLine << QString(i18n("Date")) << QString(i18n("Security")) << QString(i18n("Action/Type")) << QString(i18n("Amount")) << QString(i18n("Quantity")) << QString(i18n("Price")) << QString(i18n("Interest")) << QString(i18n("Fees")) << QString(i18n("Account")) << QString(i18n("Memo")) << QString(i18n("Status"));
+        m_headerLine << i18nc("@title:column header in CSV export", "Date") << i18nc("@title:column header in CSV export", "Security")
+                     << i18nc("@title:column header in CSV export", "Symbol") << i18nc("@title:column header in CSV export", "Action/Type")
+                     << i18nc("@title:column header in CSV export", "Amount") << i18nc("@title:column header in CSV export", "Quantity")
+                     << i18nc("@title:column header in CSV export", "Price") << i18nc("@title:column header in CSV export", "Interest")
+                     << i18nc("@title:column header in CSV export", "Fees") << i18nc("@title:column header in CSV export", "Account")
+                     << i18nc("@title:column header in CSV export", "Memo") << i18nc("@title:column header in CSV export", "Status");
         data += m_headerLine.join(m_separator);
         extractInvestmentEntries(accountId, startDate, endDate);
     } else {
         data += QString("%1\n\n").arg(type);
-        m_headerLine << QString(i18n("Date")) << QString(i18n("Payee")) << QString(i18n("Amount")) << QString(i18n("Account/Cat")) << QString(i18n("Memo")) << QString(i18n("Status")) << QString(i18n("Number"));
+        m_headerLine << i18nc("@title:column header in CSV export", "Date") << i18nc("@title:column header in CSV export", "Payee")
+                     << i18nc("@title:column header in CSV export", "Amount") << i18nc("@title:column header in CSV export", "Account/Cat")
+                     << i18nc("@title:column header in CSV export", "Memo") << i18nc("@title:column header in CSV export", "Status")
+                     << i18nc("@title:column header in CSV export", "Number");
         filter.setDateFilter(startDate, endDate);
 
         QList<MyMoneyTransaction> trList;
@@ -233,7 +242,8 @@ void CsvWriter::writeSplitEntry(QString &str, const MyMoneySplit& split, const i
 
     if (splitCount > m_highestSplitCount) {
         m_highestSplitCount++;
-        m_headerLine << QString(i18n("splitCategory")) << QString(i18n("splitMemo")) << QString(i18n("splitAmount"));
+        m_headerLine << i18nc("@title:column header in CSV export", "splitCategory") << i18nc("@title:column header in CSV export", "splitMemo")
+                     << i18nc("@title:column header in CSV export", "splitAmount");
         m_headerLine.join(m_separator);
     }
     str += format(split.memo());
@@ -266,6 +276,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
     QString strAmount;
     QString strPrice;
     QString strAccName;
+    QString strAccSymbol;
     QString strCheckingAccountName;
     QString strMemo;
     QString strAction;
@@ -281,6 +292,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
     MyMoneyMoney qty;
     MyMoneyMoney value;
     QMap<eMyMoney::Account::Type, QString> map;
+    MyMoneySecurity security;
 
     for (int i = 0; i < lst.count(); i++) {
         MyMoneyAccount acc = file->account(lst[i].accountId());
@@ -406,6 +418,8 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
                 strQuantity = format(qty);
             }
             strAccName = format(acc.name());
+            security = file->security(acc.currencyId());
+            strAccSymbol = format(security.tradingSymbol());
             strAction += m_separator;
         }
 
@@ -428,7 +442,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
             strFees = m_separator;
         }
     }  //  end of itSplit loop
-    str += strAccName + strAction + strAmount + strQuantity + strPrice + strInterest + strFees + strCheckingAccountName + strMemo + strStatus;
+    str += strAccName + strAccSymbol + strAction + strAmount + strQuantity + strPrice + strInterest + strFees + strCheckingAccountName + strMemo + strStatus;
     QString date = t.postDate().toString(Qt::ISODate);
     m_map.insert(date, str);
 }
