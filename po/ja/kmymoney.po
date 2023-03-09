@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 04:03+0000\n"
+"POT-Creation-Date: 2023-03-09 02:49+0000\n"
 "PO-Revision-Date: 2009-05-18 00:20+0900\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -13695,14 +13695,14 @@ msgstr ""
 msgid "Outstanding deposits"
 msgstr ""
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:312
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:304
 #, kde-format
 msgid "One outstanding charges of"
 msgid_plural "Total of %1 outstanding charges amounting to"
 msgstr[0] ""
 msgstr[1] ""
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:313
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:305
 #, kde-format
 msgid "One outstanding deposit of"
 msgid_plural "Total of %1 outstanding deposits amounting to"

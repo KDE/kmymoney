@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 04:03+0000\n"
+"POT-Creation-Date: 2023-03-09 02:49+0000\n"
 "PO-Revision-Date: 2020-09-15 12:07+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -14607,14 +14607,14 @@ msgstr "Encargos pendentes"
 msgid "Outstanding deposits"
 msgstr "Depósitos pendentes"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:312
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:304
 #, kde-format
 msgid "One outstanding charges of"
 msgid_plural "Total of %1 outstanding charges amounting to"
 msgstr[0] "Um encargo pendente de"
 msgstr[1] "Um total de %1 encargos pendentes de"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:313
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:305
 #, kde-format
 msgid "One outstanding deposit of"
 msgid_plural "Total of %1 outstanding deposits amounting to"

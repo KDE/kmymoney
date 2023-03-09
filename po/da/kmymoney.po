@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 04:03+0000\n"
+"POT-Creation-Date: 2023-03-09 02:49+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -14740,7 +14740,7 @@ msgstr "Udestående betalinger"
 msgid "Outstanding deposits"
 msgstr "Udestående indsættelser"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:312
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:304
 #, fuzzy, kde-format
 #| msgid "One outstanding payment of"
 #| msgid_plural "Total of %1 outstanding payments amounting to"
@@ -14749,7 +14749,7 @@ msgid_plural "Total of %1 outstanding charges amounting to"
 msgstr[0] "En udestående betaling på"
 msgstr[1] "I alt %1 udestående betalinger som beløber sig til"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:313
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:305
 #, kde-format
 msgid "One outstanding deposit of"
 msgid_plural "Total of %1 outstanding deposits amounting to"

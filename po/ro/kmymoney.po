@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 04:03+0000\n"
+"POT-Creation-Date: 2023-03-09 02:49+0000\n"
 "PO-Revision-Date: 2022-08-14 16:08+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -14937,7 +14937,7 @@ msgstr "Plăți neverificate"
 msgid "Outstanding deposits"
 msgstr "Depuneri neverificate"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:312
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:304
 #, fuzzy, kde-format
 #| msgid "One outstanding payment of"
 #| msgid_plural "Total of %1 outstanding payments amounting to"
@@ -14947,7 +14947,7 @@ msgstr[0] "O plată neverificată în valoare de"
 msgstr[1] "%1 plăți neverificate în valoare de"
 msgstr[2] "%1 de plăți neverificate în valoare de"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:313
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:305
 #, kde-format
 msgid "One outstanding deposit of"
 msgid_plural "Total of %1 outstanding deposits amounting to"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 04:03+0000\n"
+"POT-Creation-Date: 2023-03-09 02:49+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -14746,7 +14746,7 @@ msgstr "Nepodmirena dugovanja"
 msgid "Outstanding deposits"
 msgstr "Nepodmireni depoziti"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:312
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:304
 #, fuzzy, kde-format
 #| msgid "One outstanding payment of"
 #| msgid_plural "Total of %1 outstanding payments amounting to"
@@ -14756,7 +14756,7 @@ msgstr[0] "%1 nepodmiren dug od"
 msgstr[1] "%1 nepodmirena duga od"
 msgstr[2] "%1 nepodmirenih dugaova od"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:313
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:305
 #, kde-format
 msgid "One outstanding deposit of"
 msgid_plural "Total of %1 outstanding deposits amounting to"

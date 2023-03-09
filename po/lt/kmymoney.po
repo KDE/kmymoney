@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 04:03+0000\n"
+"POT-Creation-Date: 2023-03-09 02:49+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -14196,7 +14196,7 @@ msgstr "Mokėjimai ateityje"
 msgid "Outstanding deposits"
 msgstr "Rankinis indėlis"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:312
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:304
 #, fuzzy, kde-format
 #| msgid "Future payments"
 msgid "One outstanding charges of"
@@ -14206,7 +14206,7 @@ msgstr[1] "Mokėjimai ateityje"
 msgstr[2] "Mokėjimai ateityje"
 msgstr[3] "Mokėjimai ateityje"
 
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:313
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:305
 #, fuzzy, kde-format
 #| msgid "Manual deposit"
 msgid "One outstanding deposit of"
