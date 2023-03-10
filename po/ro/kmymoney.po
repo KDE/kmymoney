@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-06 00:48+0000\n"
+"POT-Creation-Date: 2023-03-10 00:48+0000\n"
 "PO-Revision-Date: 2022-08-14 16:08+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -1046,8 +1046,6 @@ msgstr "Editor de preț/rată de schimb"
 #. i18n: ectx: attribute (title), widget (QWidget, m_amountTab)
 #. i18n: ectx: attribute (title), widget (QWidget, amountTab)
 #: kmymoney/dialogs/kcurrencycalculator.ui:51
-#: kmymoney/plugins/csv/export/csvwriter.cpp:100
-#: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:398
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:59
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
@@ -1127,8 +1125,6 @@ msgstr "xxx"
 #: kmymoney/dialogs/kmymoneypricedlg.ui:60
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:92
 #: kmymoney/mymoney/storage/pricemodel.cpp:39
-#: kmymoney/plugins/csv/export/csvwriter.cpp:100
-#: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:132
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:58
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:152
@@ -1758,7 +1754,6 @@ msgstr "Nume"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:75
 #: kmymoney/models/equitiesmodel.cpp:193 kmymoney/models/equitiesmodel.cpp:415
 #: kmymoney/mymoney/storage/pricemodel.cpp:40
-#: kmymoney/plugins/csv/export/csvwriter.cpp:100
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:55
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:174
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:45
@@ -3078,7 +3073,6 @@ msgstr "Înregistrare de preț nouă"
 #. i18n: ectx: property (windowTitle), widget (QDialog, SecurityDlg)
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:95
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:79
-#: kmymoney/plugins/csv/export/csvwriter.cpp:100
 #: kmymoney/plugins/csv/import/securitydlg.ui:14
 #: kmymoney/views/investtransactioneditor.ui:99
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:193
@@ -6540,7 +6534,6 @@ msgstr "Simbol"
 #. i18n: ectx: property (text), widget (QLabel, labelInv_quantity)
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
 #: kmymoney/models/equitiesmodel.cpp:192 kmymoney/models/equitiesmodel.cpp:413
-#: kmymoney/plugins/csv/export/csvwriter.cpp:100
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:56
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:102
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:482
@@ -9285,7 +9278,6 @@ msgstr "Valoare"
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkPayee)
 #. i18n: ectx: attribute (title), widget (QWidget, payeeTab)
 #: kmymoney/mymoney/storage/payeesmodel.cpp:96
-#: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:21
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:68
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:243
@@ -10006,158 +9998,140 @@ msgid ""
 "qt>"
 msgstr "Fișierul <b>%1</b> deja există. Doriți într-adevăr să-l suprascrieți?"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:75
+#: kmymoney/plugins/csv/export/csvwriter.cpp:76
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:73
 #, kde-format
 msgid "Unexpected exception '%1'"
 msgstr ""
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:79
+#: kmymoney/plugins/csv/export/csvwriter.cpp:80
 #, fuzzy, kde-format
 #| msgid "Import complete"
 msgid "Export completed.\n"
 msgstr "Importul s-a încheiat"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:82
+#: kmymoney/plugins/csv/export/csvwriter.cpp:83
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "Nu s-a putut deschide fișierul „%1” pentru scriere"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:96
+#: kmymoney/plugins/csv/export/csvwriter.cpp:97
 #, fuzzy, kde-format
 #| msgid "Account Types"
 msgid "Account Type:"
 msgstr "Tipuri de cont"
 
-#. i18n: ectx: property (text), widget (QLabel, accountLabel)
-#. i18n: ectx: property (text), widget (QLabel, assetAccountLabel)
-#. i18n: ectx: attribute (title), widget (QWidget, m_accountTab)
-#. i18n: ectx: property (text), widget (QCheckBox, m_checkAccount)
-#. i18n: ectx: property (text), widget (QLabel, textLabel3)
-#. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxAccount)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:100
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:158
-#: kmymoney/plugins/qif/export/kexportdlgdecl.ui:247
-#: kmymoney/plugins/views/budget/kbudgetview.ui:185
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:187
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:292
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:481
-#: kmymoney/plugins/views/forecast/kforecastview_p.h:613
-#: kmymoney/plugins/views/reports/core/listtable.cpp:625
-#: kmymoney/plugins/views/reports/reportsview.cpp:227
-#: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
-#: kmymoney/views/investtransactioneditor.ui:92
-#: kmymoney/views/khomeview_p.h:631 kmymoney/views/khomeview_p.h:693
-#: kmymoney/views/khomeview_p.h:733 kmymoney/views/khomeview_p.h:980
-#: kmymoney/views/khomeview_p.h:1108 kmymoney/views/newtransactioneditor.ui:17
-#: kmymoney/widgets/ktransactionfilter.cpp:116
-#: kmymoney/widgets/ktransactionfilter.ui:113
-#: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:73
-#, kde-format
-msgid "Account"
-msgstr "Cont"
+#: kmymoney/plugins/csv/export/csvwriter.cpp:101
+#: kmymoney/plugins/csv/export/csvwriter.cpp:111
+#, fuzzy, kde-format
+#| msgid "Date"
+msgctxt "@title:column header in CSV export"
+msgid "Date"
+msgstr "Data"
 
-#. i18n: ectx: property (text), widget (QLabel, statusLabel)
-#. i18n: ectx: property (text), widget (QLabel, label_9)
-#. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:100
-#: kmymoney/plugins/csv/export/csvwriter.cpp:105
-#: kmymoney/plugins/csv/import/securitiesdlg.ui:72
-#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:159
-#: kmymoney/views/investtransactioneditor.ui:113
-#: kmymoney/views/newtransactioneditor.ui:31
-#: kmymoney/views/newtransactionform.ui:152
-#, kde-format
-msgid "Status"
-msgstr "Stare"
+#: kmymoney/plugins/csv/export/csvwriter.cpp:101
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:column header in CSV export"
+msgid "Security"
+msgstr "Titlu de valoare"
 
-#. i18n: ectx: property (text), widget (QLabel, memoLabel)
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#. i18n: ectx: property (text), widget (QCheckBox, m_checkMemo)
-#. i18n: ectx: property (text), widget (QLabel, textLabel2)
-#. i18n: ectx: attribute (title), widget (QWidget, memoTab)
-#. i18n: ectx: property (text), widget (QLabel, labelInv_memo)
-#. i18n: ectx: property (text), widget (QLabel, labelBnk_memo)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:100
-#: kmymoney/plugins/csv/export/csvwriter.cpp:105
-#: kmymoney/plugins/csv/import/bankingwizardpage.ui:270
-#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:62
-#: kmymoney/plugins/csv/import/investmentwizardpage.ui:86
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:78
-#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:192
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:244
-#: kmymoney/plugins/views/reports/core/listtable.cpp:627
-#: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:159
-#: kmymoney/views/investtransactioneditor.ui:155
-#: kmymoney/views/newspliteditor.ui:191
-#: kmymoney/views/newtransactioneditor.ui:165
-#: kmymoney/views/newtransactionform.ui:124
-#, kde-format
-msgid "Memo"
-msgstr "Detalii"
+#: kmymoney/plugins/csv/export/csvwriter.cpp:102
+#, fuzzy, kde-format
+#| msgid "Symbol"
+msgctxt "@title:column header in CSV export"
+msgid "Symbol"
+msgstr "Simbol"
 
-#. i18n: ectx: property (text), widget (QLabel, interestAmountLabel)
-#. i18n: ectx: property (placeholderText), widget (AmountEdit, interestAmountEdit)
-#. i18n: ectx: property (text), widget (QLabel, interestLabel)
-#. i18n: ectx: attribute (title), widget (QWizardPage, InterestWizardPage)
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
-#. i18n: ectx: property (text), item, widget (QComboBox, cbActionTypes)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:100
-#: kmymoney/plugins/csv/import/transactiondlg.ui:127
-#: kmymoney/plugins/views/reports/core/listtable.cpp:679
-#: kmymoney/views/investtransactioneditor.ui:61
-#: kmymoney/views/investtransactioneditor.ui:174
-#: kmymoney/views/investtransactioneditor.ui:238
-#: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:98
-#: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:307
-#: kmymoney/wizards/newloanwizard/interestwizardpage.ui:6
-#, kde-format
-msgid "Interest"
-msgstr "Dobîndă"
-
-#. i18n: ectx: property (text), widget (QLabel, feesAmountLabel)
-#. i18n: ectx: property (text), widget (QLabel, feesLabel)
-#. i18n: ectx: property (placeholderText), widget (AmountEdit, feesAmountEdit)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:100
-#: kmymoney/plugins/views/reports/core/listtable.cpp:677
-#: kmymoney/views/investtransactioneditor.ui:106
-#: kmymoney/views/investtransactioneditor.ui:214
-#: kmymoney/views/investtransactioneditor.ui:343
-#: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:77
-#, kde-format
-msgid "Fees"
-msgstr "Taxe"
-
-#: kmymoney/plugins/csv/export/csvwriter.cpp:100
+#: kmymoney/plugins/csv/export/csvwriter.cpp:102
 #, fuzzy, kde-format
 #| msgid "Action"
+msgctxt "@title:column header in CSV export"
 msgid "Action/Type"
 msgstr "Acțiune"
 
-#. i18n: ectx: property (text), widget (QLabel, numberLabel)
-#. i18n: ectx: property (text), widget (QLabel, label_4)
-#. i18n: ectx: property (text), widget (QCheckBox, m_checkNumber)
-#. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
+#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#, fuzzy, kde-format
+#| msgid "Amount"
+msgctxt "@title:column header in CSV export"
+msgid "Amount"
+msgstr "Sumă"
+
+#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#, fuzzy, kde-format
+#| msgid "Quantity"
+msgctxt "@title:column header in CSV export"
+msgid "Quantity"
+msgstr "Cantitate"
+
+#: kmymoney/plugins/csv/export/csvwriter.cpp:104
+#, fuzzy, kde-format
+#| msgid "Price"
+msgctxt "@title:column header in CSV export"
+msgid "Price"
+msgstr "Preț"
+
+#: kmymoney/plugins/csv/export/csvwriter.cpp:104
+#, fuzzy, kde-format
+#| msgid "Interest"
+msgctxt "@title:column header in CSV export"
+msgid "Interest"
+msgstr "Dobîndă"
+
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
-#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:376
-#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
-#: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:230
-#: kmymoney/views/newspliteditor.ui:130
-#: kmymoney/views/newtransactioneditor.ui:238
-#: kmymoney/views/newtransactionform.ui:54
-#: kmymoney/widgets/transactionsortoption.cpp:35
-#, kde-format
-msgid "Number"
-msgstr "Număr"
+#, fuzzy, kde-format
+#| msgid "Fees"
+msgctxt "@title:column header in CSV export"
+msgid "Fees"
+msgstr "Taxe"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #, fuzzy, kde-format
 #| msgid "Account"
+msgctxt "@title:column header in CSV export"
+msgid "Account"
+msgstr "Cont"
+
+#: kmymoney/plugins/csv/export/csvwriter.cpp:106
+#: kmymoney/plugins/csv/export/csvwriter.cpp:113
+#, fuzzy, kde-format
+#| msgid "Memo"
+msgctxt "@title:column header in CSV export"
+msgid "Memo"
+msgstr "Detalii"
+
+#: kmymoney/plugins/csv/export/csvwriter.cpp:106
+#: kmymoney/plugins/csv/export/csvwriter.cpp:113
+#, fuzzy, kde-format
+#| msgid "Status"
+msgctxt "@title:column header in CSV export"
+msgid "Status"
+msgstr "Stare"
+
+#: kmymoney/plugins/csv/export/csvwriter.cpp:111
+#, fuzzy, kde-format
+#| msgid "Payee"
+msgctxt "@title:column header in CSV export"
+msgid "Payee"
+msgstr "Beneficiar"
+
+#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#, fuzzy, kde-format
+#| msgid "Account"
+msgctxt "@title:column header in CSV export"
 msgid "Account/Cat"
 msgstr "Cont"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:173
+#: kmymoney/plugins/csv/export/csvwriter.cpp:114
+#, fuzzy, kde-format
+#| msgid "Number"
+msgctxt "@title:column header in CSV export"
+msgid "Number"
+msgstr "Număr"
+
+#: kmymoney/plugins/csv/export/csvwriter.cpp:182
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgid ""
@@ -10167,33 +10141,36 @@ msgid ""
 msgstr "Tranzacției îi lipsește o asignare de categorie."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:175
-#: kmymoney/plugins/csv/export/csvwriter.cpp:352
+#: kmymoney/plugins/csv/export/csvwriter.cpp:184
+#: kmymoney/plugins/csv/export/csvwriter.cpp:364
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:349
 #: kmymoney/widgets/ktransactionfilter.ui:643
 #, kde-format
 msgid "Invalid transaction"
 msgstr "Tranzacție nevalidă"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:236
+#: kmymoney/plugins/csv/export/csvwriter.cpp:245
 #, fuzzy, kde-format
 #| msgid "Category"
+msgctxt "@title:column header in CSV export"
 msgid "splitCategory"
 msgstr "Categoria"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:236
+#: kmymoney/plugins/csv/export/csvwriter.cpp:245
 #, fuzzy, kde-format
 #| msgid "Memo"
+msgctxt "@title:column header in CSV export"
 msgid "splitMemo"
 msgstr "Detalii"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:236
+#: kmymoney/plugins/csv/export/csvwriter.cpp:246
 #, fuzzy, kde-format
 #| msgid "Amount"
+msgctxt "@title:column header in CSV export"
 msgid "splitAmount"
 msgstr "Sumă"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:350
+#: kmymoney/plugins/csv/export/csvwriter.cpp:362
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgid ""
@@ -10388,6 +10365,29 @@ msgstr "Alegeți coloana care conține câmpul dată."
 #| msgid "Category selection"
 msgid "Clear category field selection."
 msgstr "Alegere categorie"
+
+#. i18n: ectx: property (text), widget (QLabel, memoLabel)
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#. i18n: ectx: property (text), widget (QCheckBox, m_checkMemo)
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#. i18n: ectx: attribute (title), widget (QWidget, memoTab)
+#. i18n: ectx: property (text), widget (QLabel, labelInv_memo)
+#. i18n: ectx: property (text), widget (QLabel, labelBnk_memo)
+#: kmymoney/plugins/csv/import/bankingwizardpage.ui:270
+#: kmymoney/plugins/csv/import/investmentwizardpage.cpp:62
+#: kmymoney/plugins/csv/import/investmentwizardpage.ui:86
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:78
+#: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:192
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:244
+#: kmymoney/plugins/views/reports/core/listtable.cpp:627
+#: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:159
+#: kmymoney/views/investtransactioneditor.ui:155
+#: kmymoney/views/newspliteditor.ui:191
+#: kmymoney/views/newtransactioneditor.ui:165
+#: kmymoney/views/newtransactionform.ui:124
+#, kde-format
+msgid "Memo"
+msgstr "Detalii"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_memoCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:289
@@ -11502,6 +11502,18 @@ msgid ""
 "Please complete every missing name or symbol."
 msgstr ""
 
+#. i18n: ectx: property (text), widget (QLabel, statusLabel)
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
+#: kmymoney/plugins/csv/import/securitiesdlg.ui:72
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:159
+#: kmymoney/views/investtransactioneditor.ui:113
+#: kmymoney/views/newtransactioneditor.ui:31
+#: kmymoney/views/newtransactionform.ui:152
+#, kde-format
+msgid "Status"
+msgstr "Stare"
+
 #. i18n: ectx: property (text), widget (QLabel, label_title)
 #: kmymoney/plugins/csv/import/securitydlg.ui:26
 #, kde-format
@@ -11712,6 +11724,24 @@ msgstr "Adaugă acțiuni"
 msgctxt "description of investment activity"
 msgid "Remove Shares"
 msgstr "Retrage acțiuni"
+
+#. i18n: ectx: property (text), widget (QLabel, interestAmountLabel)
+#. i18n: ectx: property (placeholderText), widget (AmountEdit, interestAmountEdit)
+#. i18n: ectx: property (text), widget (QLabel, interestLabel)
+#. i18n: ectx: attribute (title), widget (QWizardPage, InterestWizardPage)
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
+#. i18n: ectx: property (text), item, widget (QComboBox, cbActionTypes)
+#: kmymoney/plugins/csv/import/transactiondlg.ui:127
+#: kmymoney/plugins/views/reports/core/listtable.cpp:679
+#: kmymoney/views/investtransactioneditor.ui:61
+#: kmymoney/views/investtransactioneditor.ui:174
+#: kmymoney/views/investtransactioneditor.ui:238
+#: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:98
+#: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:307
+#: kmymoney/wizards/newloanwizard/interestwizardpage.ui:6
+#, kde-format
+msgid "Interest"
+msgstr "Dobîndă"
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:60
 #, kde-format
@@ -13059,6 +13089,33 @@ msgstr "Tipul sarcinii"
 msgid "Institute"
 msgstr "Instituție"
 
+#. i18n: ectx: property (text), widget (QLabel, accountLabel)
+#. i18n: ectx: property (text), widget (QLabel, assetAccountLabel)
+#. i18n: ectx: attribute (title), widget (QWidget, m_accountTab)
+#. i18n: ectx: property (text), widget (QCheckBox, m_checkAccount)
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#. i18n: ectx: property (text), widget (QCheckBox, m_qcheckboxAccount)
+#: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:158
+#: kmymoney/plugins/qif/export/kexportdlgdecl.ui:247
+#: kmymoney/plugins/views/budget/kbudgetview.ui:185
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:187
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:292
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:481
+#: kmymoney/plugins/views/forecast/kforecastview_p.h:613
+#: kmymoney/plugins/views/reports/core/listtable.cpp:625
+#: kmymoney/plugins/views/reports/reportsview.cpp:227
+#: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
+#: kmymoney/views/investtransactioneditor.ui:92
+#: kmymoney/views/khomeview_p.h:631 kmymoney/views/khomeview_p.h:693
+#: kmymoney/views/khomeview_p.h:733 kmymoney/views/khomeview_p.h:980
+#: kmymoney/views/khomeview_p.h:1108 kmymoney/views/newtransactioneditor.ui:17
+#: kmymoney/widgets/ktransactionfilter.cpp:116
+#: kmymoney/widgets/ktransactionfilter.ui:113
+#: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:73
+#, kde-format
+msgid "Account"
+msgstr "Cont"
+
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/kbanking/widgets/phototandialog.ui:48
 #, kde-format
@@ -13345,6 +13402,21 @@ msgid ""
 msgstr ""
 "Vă rog să alegeți din lista de mai jos contul din instituția dumneavoastră "
 "financiară care se asociază cu acest cont."
+
+#. i18n: ectx: property (text), widget (QLabel, numberLabel)
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#. i18n: ectx: property (text), widget (QCheckBox, m_checkNumber)
+#. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
+#: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:376
+#: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:242
+#: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:230
+#: kmymoney/views/newspliteditor.ui:130
+#: kmymoney/views/newtransactioneditor.ui:238
+#: kmymoney/views/newtransactionform.ui:54
+#: kmymoney/widgets/transactionsortoption.cpp:35
+#, kde-format
+msgid "Number"
+msgstr "Număr"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:386
@@ -16326,6 +16398,18 @@ msgstr "Întoarcere anuală"
 #, kde-format
 msgid "Return On Investment"
 msgstr "Întoarcere pe investiții"
+
+#. i18n: ectx: property (text), widget (QLabel, feesAmountLabel)
+#. i18n: ectx: property (text), widget (QLabel, feesLabel)
+#. i18n: ectx: property (placeholderText), widget (AmountEdit, feesAmountEdit)
+#: kmymoney/plugins/views/reports/core/listtable.cpp:677
+#: kmymoney/views/investtransactioneditor.ui:106
+#: kmymoney/views/investtransactioneditor.ui:214
+#: kmymoney/views/investtransactioneditor.ui:343
+#: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:77
+#, kde-format
+msgid "Fees"
+msgstr "Taxe"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, PaymentWizardPage)
 #. i18n: ectx: attribute (title), widget (QWizardPage, PaymentEditWizardPage)
