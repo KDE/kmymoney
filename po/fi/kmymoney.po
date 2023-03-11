@@ -2160,7 +2160,7 @@ msgstr ""
 "<qt>On syötetty ajoitettu tapahtuma päivälle <b>%1</b>. Koska tämä ajoitettu "
 "tapahtuma on viimeksi maksettu <b>%2</b>, siirretään tapahtuma "
 "automaattisesti seuraavalle päivälle, paitsi jos viimeinen maksupäivä "
-"palautetaan. Palautetaanko viimeisin maksupäivä?"
+"palautetaan. Palautetaanko viimeisin maksupäivä?</qt>"
 
 #: kmymoney/dialogs/keditscheduledlg.cpp:533
 #, kde-format

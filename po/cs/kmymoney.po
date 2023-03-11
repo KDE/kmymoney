@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-09 02:49+0000\n"
-"PO-Revision-Date: 2023-02-22 16:45+0100\n"
+"PO-Revision-Date: 2023-03-10 10:50+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16695,7 +16695,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:393
 #, kde-format
 msgid "Hide Totals"
-msgstr ""
+msgstr "Skrýt celkové"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabChart)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabRange)
@@ -18827,7 +18827,7 @@ msgid "%1 charge (%2)"
 msgid_plural "%1 charges (%2)"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] "Poplatky"
+msgstr[2] ""
 
 #: kmymoney/views/kgloballedgerview_p.h:826
 #: kmymoney/views/kgloballedgerview_p.h:834
@@ -19553,7 +19553,7 @@ msgstr "Aktualizovat"
 #, kde-format
 msgctxt "@item No matching"
 msgid "No matching"
-msgstr ""
+msgstr "Nepárovat"
 
 #: kmymoney/views/kpayeesview_p.h:155
 #, kde-format
@@ -20583,14 +20583,14 @@ msgstr "Placeno"
 #, kde-format
 msgctxt "Payee"
 msgid "Pay to"
-msgstr ""
+msgstr "Placeno na"
 
 #: kmymoney/widgets/kmymoneycashflowcombo.cpp:52
 #: kmymoney/widgets/transaction_p.h:70 kmymoney/widgets/transaction_p.h:72
 #, kde-format
 msgctxt "Payer"
 msgid "From"
-msgstr ""
+msgstr "Od"
 
 #: kmymoney/widgets/kmymoneydateinput.cpp:252
 #, kde-format
