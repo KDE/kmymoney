@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-10 00:48+0000\n"
-"PO-Revision-Date: 2023-03-06 11:07+0100\n"
+"PO-Revision-Date: 2023-03-10 09:23+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -9583,110 +9583,94 @@ msgstr "Tipus de compte:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:101
 #: kmymoney/plugins/csv/export/csvwriter.cpp:111
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Date"
 msgstr "Data"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:101
-#, fuzzy, kde-format
-#| msgid "Security"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Security"
 msgstr "Títol"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:102
-#, fuzzy, kde-format
-#| msgctxt "@title currency symbol column"
-#| msgid "Symbol"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Symbol"
 msgstr "Símbol"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:102
-#, fuzzy, kde-format
-#| msgid "Action/Type"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Action/Type"
 msgstr "Acció/Tipus"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:103
 #: kmymoney/plugins/csv/export/csvwriter.cpp:112
-#, fuzzy, kde-format
-#| msgid "Amount"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Amount"
 msgstr "Import"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:103
-#, fuzzy, kde-format
-#| msgid "Quantity"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Quantity"
 msgstr "Quantitat"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:104
-#, fuzzy, kde-format
-#| msgid "Price"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Price"
 msgstr "Preu"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:104
-#, fuzzy, kde-format
-#| msgid "Interest"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Interest"
 msgstr "Interès"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
-#, fuzzy, kde-format
-#| msgid "Fees"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Fees"
 msgstr "Despeses"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
-#, fuzzy, kde-format
-#| msgid "Account"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Account"
 msgstr "Compte"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:106
 #: kmymoney/plugins/csv/export/csvwriter.cpp:113
-#, fuzzy, kde-format
-#| msgid "Memo"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Memo"
 msgstr "Recordatori"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:106
 #: kmymoney/plugins/csv/export/csvwriter.cpp:113
-#, fuzzy, kde-format
-#| msgid "Status"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Status"
 msgstr "Estat"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:111
-#, fuzzy, kde-format
-#| msgid "Payee"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Payee"
 msgstr "Beneficiari"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:112
-#, fuzzy, kde-format
-#| msgid "Account/Cat"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Account/Cat"
 msgstr "Compte/Cat"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:114
-#, fuzzy, kde-format
-#| msgid "Number"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Number"
 msgstr "Número"
@@ -9712,25 +9696,22 @@ msgid "Invalid transaction"
 msgstr "Operació no vàlida"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:245
-#, fuzzy, kde-format
-#| msgid "splitCategory"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitCategory"
-msgstr "Categoria de desglossament"
+msgstr "Categoria desglo."
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:245
-#, fuzzy, kde-format
-#| msgid "splitMemo"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitMemo"
-msgstr "Recordatori de desglossament"
+msgstr "Recordatori desglo."
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:246
-#, fuzzy, kde-format
-#| msgid "splitAmount"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitAmount"
-msgstr "Total de desglossament"
+msgstr "Import desglo."
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:362
 #, kde-format
