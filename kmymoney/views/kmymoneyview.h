@@ -96,6 +96,7 @@ class KMyMoneyView : public KPageWidget
 
 private:
     const QScopedPointer<KMyMoneyViewPrivate> d_ptr;
+    Q_PRIVATE_SLOT(d_func(), void _q_selectionChangeRequested(const SelectedObjects& selection));
 
 public:
     /**

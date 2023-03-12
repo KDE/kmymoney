@@ -153,8 +153,21 @@ public:
         }
     }
 
+    void _q_selectionChangeRequested(const SelectedObjects& selection)
+    {
+        Q_Q(KMyMoneyView);
+        // Only emit for current view and if selection has really changed
+        if (q->sender() == viewBases[currentViewId()]) {
+            if (selection != m_lastSelection) {
+                m_lastSelection = selection;
+                Q_EMIT q->requestSelectionChange(selection);
+            }
+        }
+    }
+
     KMyMoneyView* q_ptr;
     KPageWidgetModel* m_model;
+    SelectedObjects m_lastSelection;
 
     QHash<View, KPageWidgetItem*> viewFrames;
     QHash<View, KMyMoneyViewBase*> viewBases;
@@ -311,7 +324,7 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
     connect(this, &KMyMoneyView::onlinePluginsChanged, view, &KMyMoneyViewBase::setOnlinePlugins);
 
     connect(view, &KMyMoneyViewBase::viewStateChanged, d->viewFrames[idView], &KPageWidgetItem::setEnabled);
-    connect(view, &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
+    connect(view, SIGNAL(requestSelectionChange(SelectedObjects)), this, SLOT(_q_selectionChangeRequested(SelectedObjects)));
     connect(view, &KMyMoneyViewBase::requestView, this, &KMyMoneyView::switchView);
 
     d->addSharedActions(view);
@@ -333,7 +346,7 @@ void KMyMoneyView::removeView(View idView)
         return;
 
     disconnect(view, &KMyMoneyViewBase::viewStateChanged, d->viewFrames[idView], &KPageWidgetItem::setEnabled);
-    disconnect(view, &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
+    disconnect(view, SIGNAL(requestSelectionChange(SelectedObjects)), this, SLOT(_q_selectionChangeRequested(SelectedObjects)));
 
     disconnect(view, &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
     disconnect(view, &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
@@ -697,3 +710,5 @@ void KMyMoneyView::closeCurrentView()
         currentView->closeCurrentView();
     }
 }
+
+#include "moc_kmymoneyview.cpp"
