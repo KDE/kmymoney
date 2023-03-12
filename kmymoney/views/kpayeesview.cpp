@@ -193,7 +193,9 @@ void KPayeesView::updateActions(const SelectedObjects& selections)
     switch (selectedItemCount) {
     case 0: // no selection
         d->ui->m_balanceLabel->hide();
-        d->clearItemData();
+        if (isVisible()) {
+            d->clearItemData();
+        }
         d->ui->m_syncAddressbook->setEnabled(false);
         break;
 
@@ -207,7 +209,9 @@ void KPayeesView::updateActions(const SelectedObjects& selections)
         pActions[eMenu::Action::DeletePayee]->setEnabled(true);
         pActions[eMenu::Action::MergePayee]->setEnabled(true);
         d->ui->m_balanceLabel->hide();
-        d->clearItemData();
+        if (isVisible()) {
+            d->clearItemData();
+        }
         break;
     }
 }
@@ -216,6 +220,7 @@ void KPayeesView::aboutToShow()
 {
     Q_D(KPayeesView);
     d->loadDetails();
+    d->showTransactions();
 
     // don't forget base class logic
     KMyMoneyViewBase::aboutToShow();

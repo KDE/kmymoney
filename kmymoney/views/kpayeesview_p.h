@@ -169,7 +169,6 @@ public:
         m_renameProxyModel->setSortRole(eMyMoney::Model::PayeeNameRole);
         m_renameProxyModel->setSortLocaleAware(true);
         m_renameProxyModel->sort(0);
-        m_renameProxyModel->setDynamicSortFilter(true);
 
         m_renameProxyModel->setSourceModel(MyMoneyFile::instance()->payeesModel());
 
@@ -291,6 +290,8 @@ public:
         ui->comboDefaultCategory->setSelected(m_payee.defaultAccountId());
 
         ui->payeeIdentifiers->setSource(m_payee);
+
+        ui->m_tabWidget->setEnabled(!m_payee.id().isEmpty());
     }
 
     void clearItemData()
@@ -802,10 +803,8 @@ public:
         Q_Q(KPayeesView);
         const auto selectedPayeesList = selectedPayees();
         m_payee = MyMoneyPayee();
-        ui->m_tabWidget->setEnabled(false);
         if (!selectedPayeesList.isEmpty()) {
             m_payee = selectedPayeesList.at(0);
-            ui->m_tabWidget->setEnabled(true);
         }
 
         // as of now we are updating only the last selected payee, and until
