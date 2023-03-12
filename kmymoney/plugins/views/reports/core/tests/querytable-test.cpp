@@ -822,7 +822,8 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
         MyMoneyMoney moTransaction(100, 1);
         MyMoneyMoney moJpyTransaction(100, 1);
 
-        QString acJpyChecking = makeAccount(QString("Japanese Checking"), eMyMoney::Account::Type::Checkings, moJpyOpening, QDate(2003, 11, 15), acAsset, "JPY");
+        const QString jpyChecking =
+            makeAccount(QLatin1String("Japanese Checking"), eMyMoney::Account::Type::Checkings, moJpyOpening, QDate(2003, 11, 15), acAsset, "JPY");
 
         makePrice("JPY", QDate(2004, 1, 1), MyMoneyMoney(moJpyPrice));
         makePrice("JPY", QDate(2004, 5, 1), MyMoneyMoney(moJpyPrice2));
@@ -832,14 +833,34 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
         QDate intermediateDate(2004, 5, 20);
         QDate closingDate(2004, 7, 20);
 
-        TransactionHelper t1(openingDate,      MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer),   MyMoneyMoney(moJpyTransaction), acJpyChecking, acChecking, "JPY");
-        TransactionHelper t4(openingDate,      MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit),    MyMoneyMoney(moTransaction),    acCredit,      acChecking);
-        TransactionHelper t2(intermediateDate, MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer),   MyMoneyMoney(moJpyTransaction), acJpyChecking, acChecking, "JPY");
-        TransactionHelper t5(intermediateDate, MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit),    MyMoneyMoney(moTransaction),    acCredit,      acChecking);
-        TransactionHelper t3(closingDate,      MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer),   MyMoneyMoney(moJpyTransaction), acJpyChecking, acChecking, "JPY");
-        TransactionHelper t6(closingDate,      MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit),    MyMoneyMoney(moTransaction),    acCredit,      acChecking);
+        TransactionHelper t1(openingDate,
+                             MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer),
+                             MyMoneyMoney(moJpyTransaction),
+                             jpyChecking,
+                             acChecking,
+                             "JPY");
+        TransactionHelper t4(openingDate, MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(moTransaction), acCredit, acChecking);
+        TransactionHelper t2(intermediateDate,
+                             MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer),
+                             MyMoneyMoney(moJpyTransaction),
+                             jpyChecking,
+                             acChecking,
+                             "JPY");
+        TransactionHelper t5(intermediateDate, MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(moTransaction), acCredit, acChecking);
+        TransactionHelper t3(closingDate,
+                             MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer),
+                             MyMoneyMoney(moJpyTransaction),
+                             jpyChecking,
+                             acChecking,
+                             "JPY");
+        TransactionHelper t6(closingDate, MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit), MyMoneyMoney(moTransaction), acCredit, acChecking);
         // test that an income/expense transaction that involves a currency exchange is properly reported
-        TransactionHelper t7(intermediateDate, MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(moJpyTransaction), acJpyChecking, acSolo, "JPY");
+        TransactionHelper t7(intermediateDate,
+                             MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal),
+                             MyMoneyMoney(moJpyTransaction),
+                             jpyChecking,
+                             acSolo,
+                             "JPY");
 
         unsigned cols;
 
