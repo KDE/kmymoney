@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-09 02:49+0000\n"
-"PO-Revision-Date: 2023-02-24 12:58\n"
+"PO-Revision-Date: 2023-03-11 04:55\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -9607,7 +9607,7 @@ msgstr "账户类型："
 #: kmymoney/plugins/csv/export/csvwriter.cpp:98
 #, kde-format
 msgid "Action/Type"
-msgstr "操作或类型"
+msgstr ""
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:103
 #, kde-format
@@ -9637,17 +9637,17 @@ msgstr "无效交易"
 #: kmymoney/plugins/csv/export/csvwriter.cpp:233
 #, kde-format
 msgid "splitCategory"
-msgstr "splitCategory"
+msgstr ""
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:233
 #, kde-format
 msgid "splitMemo"
-msgstr "splitMemo"
+msgstr ""
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:233
 #, kde-format
 msgid "splitAmount"
-msgstr "splitAmount"
+msgstr ""
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:346
 #, kde-format
