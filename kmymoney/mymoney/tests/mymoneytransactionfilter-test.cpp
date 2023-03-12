@@ -49,12 +49,12 @@ void MyMoneyTransactionFilterTest::init()
     file->addTag(tag);
     tagIdList << tag.id();
 
-    QString acAsset = MyMoneyFile::instance()->asset().id();
-    QString acExpense = (MyMoneyFile::instance()->expense().id());
-    QString acIncome = (MyMoneyFile::instance()->income().id());
-    acCheckingId = makeAccount("Account 10.2", eMyMoney::Account::Type::Checkings, MyMoneyMoney(0.0), QDate(2004, 1, 1), acAsset);
-    acExpenseId = makeAccount("Expense", eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acExpense);
-    acIncomeId = makeAccount("Expense", eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2004, 1, 11), acIncome);
+    const QString asset = MyMoneyFile::instance()->asset().id();
+    const QString expense = (MyMoneyFile::instance()->expense().id());
+    const QString income = (MyMoneyFile::instance()->income().id());
+    acCheckingId = makeAccount(QLatin1String("Account 10.2"), eMyMoney::Account::Type::Checkings, MyMoneyMoney(0.0), QDate(2004, 1, 1), asset);
+    acExpenseId = makeAccount(QLatin1String("Expense"), eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2004, 1, 11), expense);
+    acIncomeId = makeAccount(QLatin1String("Expense"), eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2004, 1, 11), income);
 
     ft.commit();
 }
