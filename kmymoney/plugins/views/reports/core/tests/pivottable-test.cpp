@@ -464,10 +464,12 @@ void PivotTableTest::testMultipleCurrencies()
     MyMoneyMoney moCanTransaction(100.0, 10);
     MyMoneyMoney moJpyTransaction(100.0, 10);
 
-    QString acCanChecking = makeAccount(QString("Canadian Checking"), eMyMoney::Account::Type::Checkings, moCanOpening, QDate(2003, 11, 15), acAsset, "CAD");
-    QString acJpyChecking = makeAccount(QString("Japanese Checking"), eMyMoney::Account::Type::Checkings, moJpyOpening, QDate(2003, 11, 15), acAsset, "JPY");
-    QString acCanCash = makeAccount(QString("Canadian"), eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acForeign, "CAD");
-    QString acJpyCash = makeAccount(QString("Japanese"), eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acForeign, "JPY");
+    const QString canChecking =
+        makeAccount(QString("Canadian Checking"), eMyMoney::Account::Type::Checkings, moCanOpening, QDate(2003, 11, 15), acAsset, "CAD");
+    const QString jpyChecking =
+        makeAccount(QString("Japanese Checking"), eMyMoney::Account::Type::Checkings, moJpyOpening, QDate(2003, 11, 15), acAsset, "JPY");
+    const QString canCash = makeAccount(QString("Canadian"), eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acForeign, "CAD");
+    const QString jpyCash = makeAccount(QString("Japanese"), eMyMoney::Account::Type::Expense, MyMoneyMoney(), QDate(2004, 2, 11), acForeign, "JPY");
 
     makePrice("CAD", QDate(2004, 1, 1), MyMoneyMoney(moCanPrice));
     makePrice("JPY", QDate(2004, 1, 1), MyMoneyMoney(moJpyPrice));
@@ -475,12 +477,42 @@ void PivotTableTest::testMultipleCurrencies()
     makePrice("JPY", QDate(2004, 6, 30), MyMoneyMoney(moJpyPrice3));
     makePrice("JPY", QDate(2004, 7, 15), MyMoneyMoney(moJpyPrice4));
 
-    TransactionHelper t1(QDate(2004, 2, 20), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(moJpyTransaction), acJpyChecking, acJpyCash, "JPY");
-    TransactionHelper t2(QDate(2004, 3, 20), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(moJpyTransaction), acJpyChecking, acJpyCash, "JPY");
-    TransactionHelper t3(QDate(2004, 4, 20), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(moJpyTransaction), acJpyChecking, acJpyCash, "JPY");
-    TransactionHelper t4(QDate(2004, 2, 20), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(moCanTransaction), acCanChecking, acCanCash, "CAD");
-    TransactionHelper t5(QDate(2004, 3, 20), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(moCanTransaction), acCanChecking, acCanCash, "CAD");
-    TransactionHelper t6(QDate(2004, 4, 20), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), MyMoneyMoney(moCanTransaction), acCanChecking, acCanCash, "CAD");
+    TransactionHelper t1(QDate(2004, 2, 20),
+                         MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal),
+                         MyMoneyMoney(moJpyTransaction),
+                         jpyChecking,
+                         jpyCash,
+                         "JPY");
+    TransactionHelper t2(QDate(2004, 3, 20),
+                         MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal),
+                         MyMoneyMoney(moJpyTransaction),
+                         jpyChecking,
+                         jpyCash,
+                         "JPY");
+    TransactionHelper t3(QDate(2004, 4, 20),
+                         MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal),
+                         MyMoneyMoney(moJpyTransaction),
+                         jpyChecking,
+                         jpyCash,
+                         "JPY");
+    TransactionHelper t4(QDate(2004, 2, 20),
+                         MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal),
+                         MyMoneyMoney(moCanTransaction),
+                         canChecking,
+                         canCash,
+                         "CAD");
+    TransactionHelper t5(QDate(2004, 3, 20),
+                         MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal),
+                         MyMoneyMoney(moCanTransaction),
+                         canChecking,
+                         canCash,
+                         "CAD");
+    TransactionHelper t6(QDate(2004, 4, 20),
+                         MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal),
+                         MyMoneyMoney(moCanTransaction),
+                         canChecking,
+                         canCash,
+                         "CAD");
 
 #if 0
     QFile g("multicurrencykmy.xml");
@@ -504,14 +536,14 @@ void PivotTableTest::testMultipleCurrencies()
     writeTabletoCSV(spending_f);
 
     // test single foreign currency
-    QVERIFY(spending_f.m_grid["Expense"]["Foreign"][ReportAccount(acCanCash)][eActual][1] == (moCanTransaction*moCanPrice));
-    QVERIFY(spending_f.m_grid["Expense"]["Foreign"][ReportAccount(acCanCash)][eActual][2] == (moCanTransaction*moCanPrice));
-    QVERIFY(spending_f.m_grid["Expense"]["Foreign"][ReportAccount(acCanCash)][eActual][3] == (moCanTransaction*moCanPrice));
+    QVERIFY(spending_f.m_grid["Expense"]["Foreign"][ReportAccount(canCash)][eActual][1] == (moCanTransaction * moCanPrice));
+    QVERIFY(spending_f.m_grid["Expense"]["Foreign"][ReportAccount(canCash)][eActual][2] == (moCanTransaction * moCanPrice));
+    QVERIFY(spending_f.m_grid["Expense"]["Foreign"][ReportAccount(canCash)][eActual][3] == (moCanTransaction * moCanPrice));
 
     // test multiple foreign currencies under a common parent
-    QVERIFY(spending_f.m_grid["Expense"]["Foreign"][ReportAccount(acJpyCash)][eActual][1] == (moJpyTransaction*moJpyPrice));
-    QVERIFY(spending_f.m_grid["Expense"]["Foreign"][ReportAccount(acJpyCash)][eActual][2] == (moJpyTransaction*moJpyPrice));
-    QVERIFY(spending_f.m_grid["Expense"]["Foreign"][ReportAccount(acJpyCash)][eActual][3] == (moJpyTransaction*moJpyPrice));
+    QVERIFY(spending_f.m_grid["Expense"]["Foreign"][ReportAccount(jpyCash)][eActual][1] == (moJpyTransaction * moJpyPrice));
+    QVERIFY(spending_f.m_grid["Expense"]["Foreign"][ReportAccount(jpyCash)][eActual][2] == (moJpyTransaction * moJpyPrice));
+    QVERIFY(spending_f.m_grid["Expense"]["Foreign"][ReportAccount(jpyCash)][eActual][3] == (moJpyTransaction * moJpyPrice));
     QVERIFY(spending_f.m_grid["Expense"]["Foreign"].m_total[eActual][1] == (moJpyTransaction*moJpyPrice + moCanTransaction*moCanPrice));
     QVERIFY(spending_f.m_grid["Expense"]["Foreign"].m_total[eActual].m_total == (moJpyTransaction*moJpyPrice + moCanTransaction*moCanPrice + moJpyTransaction*moJpyPrice + moCanTransaction*moCanPrice + moJpyTransaction*moJpyPrice + moCanTransaction*moCanPrice));
 
@@ -523,12 +555,12 @@ void PivotTableTest::testMultipleCurrencies()
     PivotTable spending_fnc(filter);
     writeTabletoCSV(spending_fnc);
 
-    QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][ReportAccount(acCanCash)][eActual][1] == (moCanTransaction));
-    QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][ReportAccount(acCanCash)][eActual][2] == (moCanTransaction));
-    QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][ReportAccount(acCanCash)][eActual][3] == (moCanTransaction));
-    QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][ReportAccount(acJpyCash)][eActual][1] == (moJpyTransaction));
-    QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][ReportAccount(acJpyCash)][eActual][2] == (moJpyTransaction));
-    QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][ReportAccount(acJpyCash)][eActual][3] == (moJpyTransaction));
+    QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][ReportAccount(canCash)][eActual][1] == (moCanTransaction));
+    QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][ReportAccount(canCash)][eActual][2] == (moCanTransaction));
+    QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][ReportAccount(canCash)][eActual][3] == (moCanTransaction));
+    QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][ReportAccount(jpyCash)][eActual][1] == (moJpyTransaction));
+    QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][ReportAccount(jpyCash)][eActual][2] == (moJpyTransaction));
+    QVERIFY(spending_fnc.m_grid["Expense"]["Foreign"][ReportAccount(jpyCash)][eActual][3] == (moJpyTransaction));
 
     filter.setConvertCurrency(true);
     filter.clearTransactionFilter();
@@ -540,22 +572,30 @@ void PivotTableTest::testMultipleCurrencies()
     writeTabletoCSV(networth_f);
 
     // test single foreign currency
-    QVERIFY(networth_f.m_grid["Asset"]["Canadian Checking"][ReportAccount(acCanChecking)][eActual][1] == (moCanOpening*moCanPrice));
-    QVERIFY(networth_f.m_grid["Asset"]["Canadian Checking"][ReportAccount(acCanChecking)][eActual][2] == ((moCanOpening - moCanTransaction)*moCanPrice));
-    QVERIFY(networth_f.m_grid["Asset"]["Canadian Checking"][ReportAccount(acCanChecking)][eActual][3] == ((moCanOpening - moCanTransaction - moCanTransaction)*moCanPrice));
-    QVERIFY(networth_f.m_grid["Asset"]["Canadian Checking"][ReportAccount(acCanChecking)][eActual][4] == ((moCanOpening - moCanTransaction - moCanTransaction - moCanTransaction)*moCanPrice));
-    QVERIFY(networth_f.m_grid["Asset"]["Canadian Checking"][ReportAccount(acCanChecking)][eActual][12] == ((moCanOpening - moCanTransaction - moCanTransaction - moCanTransaction)*moCanPrice));
+    QVERIFY(networth_f.m_grid["Asset"]["Canadian Checking"][ReportAccount(canChecking)][eActual][1] == (moCanOpening * moCanPrice));
+    QVERIFY(networth_f.m_grid["Asset"]["Canadian Checking"][ReportAccount(canChecking)][eActual][2] == ((moCanOpening - moCanTransaction) * moCanPrice));
+    QVERIFY(networth_f.m_grid["Asset"]["Canadian Checking"][ReportAccount(canChecking)][eActual][3]
+            == ((moCanOpening - moCanTransaction - moCanTransaction) * moCanPrice));
+    QVERIFY(networth_f.m_grid["Asset"]["Canadian Checking"][ReportAccount(canChecking)][eActual][4]
+            == ((moCanOpening - moCanTransaction - moCanTransaction - moCanTransaction) * moCanPrice));
+    QVERIFY(networth_f.m_grid["Asset"]["Canadian Checking"][ReportAccount(canChecking)][eActual][12]
+            == ((moCanOpening - moCanTransaction - moCanTransaction - moCanTransaction) * moCanPrice));
 
     // test Stable currency price, fluctuating account balance
-    QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][ReportAccount(acJpyChecking)][eActual][1] == (moJpyOpening*moJpyPrice));
-    QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][ReportAccount(acJpyChecking)][eActual][2] == ((moJpyOpening - moJpyTransaction)*moJpyPrice));
-    QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][ReportAccount(acJpyChecking)][eActual][3] == ((moJpyOpening - moJpyTransaction - moJpyTransaction)*moJpyPrice));
-    QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][ReportAccount(acJpyChecking)][eActual][4] == ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction)*moJpyPrice));
+    QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][ReportAccount(jpyChecking)][eActual][1] == (moJpyOpening * moJpyPrice));
+    QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][ReportAccount(jpyChecking)][eActual][2] == ((moJpyOpening - moJpyTransaction) * moJpyPrice));
+    QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][ReportAccount(jpyChecking)][eActual][3]
+            == ((moJpyOpening - moJpyTransaction - moJpyTransaction) * moJpyPrice));
+    QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][ReportAccount(jpyChecking)][eActual][4]
+            == ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction) * moJpyPrice));
 
     // test Fluctuating currency price, stable account balance
-    QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][ReportAccount(acJpyChecking)][eActual][5] == ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction)*moJpyPrice2));
-    QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][ReportAccount(acJpyChecking)][eActual][6] == ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction)*moJpyPrice3));
-    QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][ReportAccount(acJpyChecking)][eActual][7] == ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction)*moJpyPrice4));
+    QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][ReportAccount(jpyChecking)][eActual][5]
+            == ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction) * moJpyPrice2));
+    QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][ReportAccount(jpyChecking)][eActual][6]
+            == ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction) * moJpyPrice3));
+    QVERIFY(networth_f.m_grid["Asset"]["Japanese Checking"][ReportAccount(jpyChecking)][eActual][7]
+            == ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction) * moJpyPrice4));
 
     // test multiple currencies totalled up
     QVERIFY(networth_f.m_grid["Asset"].m_total[eActual][4] == ((moCanOpening - moCanTransaction - moCanTransaction - moCanTransaction)*moCanPrice) + ((moJpyOpening - moJpyTransaction - moJpyTransaction - moJpyTransaction)*moJpyPrice));
