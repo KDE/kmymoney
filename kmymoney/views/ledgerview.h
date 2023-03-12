@@ -48,7 +48,7 @@ public:
 
     void setModel(QAbstractItemModel * model) override;
 
-    QStringList selectedJournalEntries() const;
+    QStringList selectedJournalEntryIds() const;
 
     void setSelectedJournalEntries(const QStringList& journalEntryIds);
     void reselectJournalEntry(const QString& journalEntryId);

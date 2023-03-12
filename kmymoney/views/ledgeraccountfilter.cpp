@@ -79,9 +79,6 @@ LedgerAccountFilter::LedgerAccountFilter(QObject* parent, QVector<QAbstractItemM
     setFilterRole(eMyMoney::Model::SplitAccountIdRole);
 
     setSourceModel(d->concatModel);
-
-    // force to refilter if data in the concatenated source models changes
-    connect(d->concatModel, &QAbstractItemModel::dataChanged, this, &LedgerAccountFilter::invalidateFilter);
 }
 
 LedgerAccountFilter::~LedgerAccountFilter()

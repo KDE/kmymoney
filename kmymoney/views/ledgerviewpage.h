@@ -68,6 +68,15 @@ public:
     QList<int> splitterSizes() const;
     void setSplitterSizes(QList<int> sizes);
 
+    /**
+     * Initialize the model for the view if called
+     * for the first time. Successive calls don't
+     * have an effect.
+     *
+     * @sa showEvent()
+     */
+    void prepareToShow();
+
 protected:
     explicit LedgerViewPage(Private& dd, QWidget* parent = nullptr, const QString& configGroupName = QString());
     bool eventFilter(QObject *watched, QEvent *event) override;

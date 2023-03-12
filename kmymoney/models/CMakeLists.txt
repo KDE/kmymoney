@@ -6,6 +6,7 @@ set(libmodels_a_SOURCES
     idfilter.cpp
     institutionsproxymodel.cpp
     itemrenameproxymodel.cpp
+    ledgerconcatenatemodel.cpp
     ledgerfilter.cpp
     ledgerfilterbase.cpp
     ledgersortorder.cpp

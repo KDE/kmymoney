@@ -592,7 +592,7 @@ void NewTransactionEditor::Private::updateVAT(TaxValueChange amountChanged)
             return QString();
         }
         const auto category = MyMoneyFile::instance()->account(categoryId);
-        return category.value("VatAccount");
+        return category.value(QLatin1String("VatAccount"));
     };
 
     // if auto vat assignment for this account is turned off

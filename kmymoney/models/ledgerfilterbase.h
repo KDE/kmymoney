@@ -51,9 +51,15 @@ public:
      * roles are forwarded to the source model. The balance can
      * be retrieved using the derived model.
      *
+     * It also maintains the split height cache. Setting any @a index
+     * with role JournalSplitMaxLinesCountRole to a @a value of -1
+     * will clear the cache of all items.
+     *
      * @sa LedgerAccountFilter::data()
      */
     bool setData(const QModelIndex& index, const QVariant& value, int role) override;
+
+    QVariant data(const QModelIndex& index, int role) const override;
 
     void setShowEntryForNewTransaction(bool show);
 

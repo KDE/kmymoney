@@ -214,6 +214,94 @@ public:
         }
     }
 
+    bool filterAcceptsRow(const QModelIndex& idx, const QModelIndex& source_parent, int rowCount) const
+    {
+        switch (idx.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>()) {
+        case eMyMoney::Model::SpecialDatesEntryRole: {
+            // Don't show them if display is not sorted by date
+            if (!isSortingByDateFirst())
+                return false;
+            // make sure we don't show trailing special date entries
+            int row = idx.row() + 1;
+            bool visible = false;
+            QModelIndex testIdx;
+            for (; !visible && row < rowCount; ++row) {
+                testIdx = q->sourceModel()->index(row, 0, source_parent);
+                if (testIdx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
+                    // the empty id is the entry for the new transaction entry
+                    // we're done scanning
+                    break;
+                }
+                if (!isSpecialDatesModel(testIdx)) {
+                    // we did not hit a special date entry
+                    // now we need to check for a real transaction or the online balance one
+                    if (!testIdx.data(eMyMoney::Model::JournalTransactionIdRole).toString().isEmpty()) {
+                        visible = true;
+                    }
+                    break;
+                }
+            }
+
+            // in case this is not a trailing date entry, we need to check
+            // if it is the last of a row of date entries.
+            if (visible && ((idx.row() + 1) < rowCount)) {
+                // check if the next is also a date entry
+                testIdx = q->sourceModel()->index(idx.row() + 1, 0, source_parent);
+                if (isSpecialDatesModel(testIdx)) {
+                    visible = false;
+                }
+            }
+            return visible;
+        }
+
+        case eMyMoney::Model::ReconciliationEntryRole: {
+            // Don't show them if view is not sorted by date
+            if (!isSortingByDate()) {
+                return false;
+            }
+            // Depending on the setting we only show a subset
+            if (showReconciliationEntries != LedgerViewSettings::ShowAllReconciliationHeader) {
+                const auto filterHint = idx.data(eMyMoney::Model::ReconciliationFilterHintRole).value<eMyMoney::Model::ReconciliationFilterHint>();
+                switch (showReconciliationEntries) {
+                case LedgerViewSettings::DontShowReconciliationHeader:
+                    if (filterHint != eMyMoney::Model::DontFilter) {
+                        return false;
+                    }
+                    break;
+
+                case LedgerViewSettings::ShowLastReconciliationHeader:
+                    if (filterHint == eMyMoney::Model::StdFilter) {
+                        return false;
+                    }
+                    // intentional fall through
+
+                case LedgerViewSettings::ShowAllReconciliationHeader:
+                    break;
+                }
+            }
+
+            // make sure we only show reconciliation entries that are not followed by
+            // another reconciliation entry. Only inspect visible items
+            int row = idx.row() + 1;
+            while (row < rowCount) {
+                const auto testIdx = q->sourceModel()->index(row, 0, source_parent);
+                if (filterAcceptsRow(testIdx, source_parent, rowCount)) {
+                    if (isReconciliationModel(testIdx)) {
+                        return false;
+                    }
+                    return true;
+                }
+                ++row;
+            }
+            return true;
+        }
+
+        default:
+            break;
+        }
+        return true;
+    }
+
     QSet<int> dateRoles = {
         eMyMoney::Model::TransactionPostDateRole,
         eMyMoney::Model::TransactionEntryDateRole,
@@ -233,7 +321,7 @@ SpecialLedgerItemFilter::SpecialLedgerItemFilter(QObject* parent)
     setObjectName("SpecialLedgerItemFilter");
     connect(&d->updateDelayTimer, &QTimer::timeout, this, [&]() {
         Q_D(SpecialLedgerItemFilter);
-        invalidateFilter();
+        d->sourceModel->invalidate();
         d->recalculateBalances();
     });
 
@@ -359,94 +447,28 @@ bool SpecialLedgerItemFilter::filterAcceptsRow(int source_row, const QModelIndex
     Q_D(const SpecialLedgerItemFilter);
 
     const QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
-    const auto baseModel = MyMoneyModelBase::baseModel(idx);
 
-    if (d->isSpecialDatesModel(baseModel)) {
-        // Don't show them if display is not sorted by date
-        if (!d->isSortingByDateFirst())
-            return false;
-        // make sure we don't show trailing special date entries
-        const auto rows = sourceModel()->rowCount(source_parent);
-        int row = source_row + 1;
-        bool visible = false;
-        QModelIndex testIdx;
-        for (; !visible && row < rows; ++row) {
-            testIdx = sourceModel()->index(row, 0, source_parent);
-            if (testIdx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
-                // the empty id is the entry for the new transaction entry
-                // we're done scanning
-                break;
-            }
-            if (!d->isSpecialDatesModel(testIdx)) {
-                // we did not hit a special date entry
-                // now we need to check for a real transaction or the online balance one
-                if (!testIdx.data(eMyMoney::Model::JournalTransactionIdRole).toString().isEmpty()) {
-                    visible = true;
-                }
-                break;
-            }
-        }
+    switch (idx.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>()) {
+    case eMyMoney::Model::SpecialDatesEntryRole:
+    case eMyMoney::Model::ReconciliationEntryRole:
+        return d->filterAcceptsRow(idx, source_parent, sourceModel()->rowCount(source_parent));
 
-        // in case this is not a trailing date entry, we need to check
-        // if it is the last of a row of date entries.
-        if (visible && ((source_row + 1) < rows)) {
-            // check if the next is also a date entry
-            testIdx = sourceModel()->index(source_row + 1, 0, source_parent);
-            if (d->isSpecialDatesModel(testIdx)) {
-                visible = false;
-            }
-        }
-        return visible;
-
-    } else if (d->isReconciliationModel(baseModel)) {
-        // Don't show them if view is not sorted by date
-        if (!d->isSortingByDate()) {
-            return false;
-        }
-        // Depending on the setting we only show a subset
-        if (d->showReconciliationEntries != LedgerViewSettings::ShowAllReconciliationHeader) {
-            const auto filterHint = idx.data(eMyMoney::Model::ReconciliationFilterHintRole).value<eMyMoney::Model::ReconciliationFilterHint>();
-            switch (d->showReconciliationEntries) {
-            case LedgerViewSettings::DontShowReconciliationHeader:
-                if (filterHint != eMyMoney::Model::DontFilter) {
-                    return false;
-                }
-                break;
-
-            case LedgerViewSettings::ShowLastReconciliationHeader:
-                if (filterHint == eMyMoney::Model::StdFilter) {
-                    return false;
-                }
-                // intentional fall through
-
-            case LedgerViewSettings::ShowAllReconciliationHeader:
-                break;
-            }
-        }
-
-        // make sure we only show reconciliation entries that are followed by
-        // a regular transaction
-        int row = source_row + 1;
-        const auto testIdx = sourceModel()->index(row, 0, source_parent);
-        if (!d->isReconciliationModel(testIdx)) {
-            if (d->isSpecialDatesModel(testIdx)) {
-                return !filterAcceptsRow(row, source_parent);
-            }
-            return true;
-        }
-        return false;
-
-    } else if (idx.data(eMyMoney::Model::OnlineBalanceEntryRole).toBool()) {
+    case eMyMoney::Model::OnlineBalanceEntryRole:
         // Don't show online balance items if display is not sorted by date
         if (!d->isSortingByDate()) {
             return false;
         }
+        break;
 
-    } else if (idx.data(eMyMoney::Model::SecurityAccountNameEntryRole).toBool()) {
+    case eMyMoney::Model::SecurityAccountNameEntryRole:
         // Don't show online balance items if display is not sorted by date
         if (!d->isSortingBySecurity()) {
             return false;
         }
+        break;
+
+    default:
+        break;
     }
     return true;
 }

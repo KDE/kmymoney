@@ -579,6 +579,15 @@ void LedgerView::setModel(QAbstractItemModel* model)
         }
     });
 
+    connect(model, &QAbstractItemModel::modelReset, this, [&]() {
+        auto model = LedgerView::model();
+        const auto rows = model->rowCount();
+        for (int row = 0; row < rows; ++row) {
+            const auto idx = model->index(row, 0);
+            model->setData(idx, 0, eMyMoney::Model::JournalSplitMaxLinesCountRole);
+        }
+    });
+
     horizontalHeader()->setSortIndicatorShown(false);
     horizontalHeader()->setSortIndicator(-1, Qt::AscendingOrder);
 
@@ -593,6 +602,8 @@ void LedgerView::reset()
 
 void LedgerView::reselectAfterModelReset()
 {
+    auto objectIds = d->selection.selection(SelectedObjects::JournalEntry);
+
     // make sure we stay in bounds
     if (d->lastSelectedRow > model()->rowCount()) {
         d->lastSelectedRow = model()->rowCount() - 1;
@@ -608,12 +619,17 @@ void LedgerView::reselectAfterModelReset()
                     break;
                 }
             }
+            objectIds.clear();
             --d->lastSelectedRow;
         } while (d->lastSelectedRow > -1);
 
         if (d->lastSelectedRow > -1) {
-            setCurrentIndex(idx);
-            selectRow(idx.row());
+            if (!objectIds.isEmpty()) {
+                setSelectedJournalEntries(objectIds);
+            } else {
+                selectRow(idx.row());
+                setCurrentIndex(idx);
+            }
             scrollTo(idx, EnsureVisible);
         }
     }
@@ -1373,7 +1389,7 @@ void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSel
     Q_EMIT transactionSelectionChanged(d->selection);
 }
 
-QStringList LedgerView::selectedJournalEntries() const
+QStringList LedgerView::selectedJournalEntryIds() const
 {
     QStringList selection;
 
@@ -1501,8 +1517,8 @@ void LedgerView::setSelectedJournalEntries(const QStringList& journalEntryIds)
     // add a possibly dangling range
     createSelectionRange();
 
+    selectionModel()->setCurrentIndex(currentIdx, QItemSelectionModel::NoUpdate);
     selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
-    setCurrentIndex(currentIdx);
 }
 
 void LedgerView::selectAllTransactions()

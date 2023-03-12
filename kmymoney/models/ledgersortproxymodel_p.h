@@ -34,24 +34,9 @@ public:
     {
     }
 
-    inline bool isAccountsModel(const QAbstractItemModel* model) const
-    {
-        return (model == static_cast<void*>(MyMoneyFile::instance()->accountsModel()));
-    }
-
-    inline bool isSpecialDatesModel(const QAbstractItemModel* model) const
-    {
-        return (model == static_cast<void*>(MyMoneyFile::instance()->specialDatesModel()));
-    }
-
     inline bool isSpecialDatesModel(const QModelIndex& idx) const
     {
         return idx.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>() == eMyMoney::Model::SpecialDatesEntryRole;
-    }
-
-    inline bool isReconciliationModel(const QAbstractItemModel* model) const
-    {
-        return (model == static_cast<void*>(MyMoneyFile::instance()->reconciliationModel()));
     }
 
     inline bool isReconciliationModel(const QModelIndex& idx) const
@@ -64,19 +49,9 @@ public:
         return idx.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>() == eMyMoney::Model::OnlineBalanceEntryRole;
     }
 
-    inline bool isJournalModel(const QAbstractItemModel* model) const
-    {
-        return (model == static_cast<void*>(MyMoneyFile::instance()->journalModel()));
-    }
-
     inline bool isJournalModel(const QModelIndex& idx) const
     {
         return idx.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>() == eMyMoney::Model::JournalEntryRole;
-    }
-
-    inline bool isSchedulesJournalModel(const QAbstractItemModel* model) const
-    {
-        return (model == static_cast<void*>(MyMoneyFile::instance()->schedulesJournalModel()));
     }
 
     inline bool isSchedulesJournalModel(const QModelIndex& idx) const
@@ -84,19 +59,9 @@ public:
         return idx.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>() == eMyMoney::Model::SchedulesJournalEntryRole;
     }
 
-    QString modelType(const QAbstractItemModel* model) const
+    inline bool isSecurityAccountNameModel(const QModelIndex& idx) const
     {
-        if (isAccountsModel(model))
-            return QLatin1String("AccountsModel");
-        if (isSpecialDatesModel(model))
-            return QLatin1String("SpecialDatesModel");
-        if (isReconciliationModel(model))
-            return QLatin1String("ReconciliationModel");
-        if (isJournalModel(model))
-            return QLatin1String("JournalModel");
-        if (isSchedulesJournalModel(model))
-            return QLatin1String("SchedulesJournalModel");
-        return QLatin1String("unknown model");
+        return idx.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>() == eMyMoney::Model::SecurityAccountNameEntryRole;
     }
 
     int columnToSortRole(int column) const

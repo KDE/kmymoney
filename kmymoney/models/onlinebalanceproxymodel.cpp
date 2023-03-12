@@ -128,12 +128,6 @@ QVariant OnlineBalanceProxyModel::data(const QModelIndex& idx, int role) const
         }
     }
 
-#if 0
-    if (idx.column() == JournalModel::Column::Balance) {
-        const QModelIndex baseIdx = idx.model()->index(idx.row(), 0, idx.parent());
-        return QSortFilterProxyModel::data(baseIdx, role);
-    }
-#endif
     return QSortFilterProxyModel::data(idx, role);
 }
 

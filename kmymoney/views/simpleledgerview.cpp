@@ -233,6 +233,7 @@ public:
             // insert new ledger view page in tab view
             int newIdx = ui->ledgerTab->insertTab(ui->ledgerTab->count()-1, view, acc.name());
             if (makeCurrentLedger) {
+                view->prepareToShow();
                 // selecting the last tab (the one with the +) and then the new one
                 // makes sure that all signals about the new selection are emitted
                 ui->ledgerTab->setCurrentIndex(ui->ledgerTab->count()-1);
@@ -333,6 +334,7 @@ public:
 
             // selecting the last tab (the one with the +) and then the new one
             // makes sure that all signal about the new selection are emitted
+            reconciliationView->prepareToShow();
             ui->ledgerTab->setCurrentIndex(ui->ledgerTab->count() - 1);
             ui->ledgerTab->setCurrentIndex(newIdx);
         }
@@ -508,6 +510,12 @@ void SimpleLedgerView::tabClicked(int idx)
             d->accountCombo->move(rect.left()+rect.width()- popupView->header()->sectionSize(0), rect.bottom());
         }
     } else {
+        // make sure the view's model is initialized before
+        // the view is shown
+        const auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->widget(idx));
+        if (view) {
+            view->prepareToShow();
+        }
         d->accountCombo->hide();
     }
 }
@@ -550,6 +558,7 @@ void SimpleLedgerView::closeLedger(int idx)
         if (view) {
             view = view->popView();
             if (view) {
+                view->prepareToShow();
                 d->ui->ledgerTab->insertTab(idx, view, view->accountName());
                 d->ui->ledgerTab->setCurrentIndex(d->ui->ledgerTab->count() - 1);
                 d->ui->ledgerTab->setCurrentIndex(idx);

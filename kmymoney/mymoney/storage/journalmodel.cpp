@@ -1032,8 +1032,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::DelegateRole:
         return static_cast<int>(eMyMoney::Delegates::Types::JournalDelegate);
 
-    case eMyMoney::Model::OnlineBalanceEntryRole:
-    case eMyMoney::Model::SecurityAccountNameEntryRole:
+    case eMyMoney::Model::ShowValueInvertedRole:
         return false;
 
     default:

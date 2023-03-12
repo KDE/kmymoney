@@ -62,13 +62,16 @@ LedgerViewPage::LedgerViewPage(LedgerViewPage::Private& dd, QWidget* parent, con
 
 void LedgerViewPage::showEvent(QShowEvent* event)
 {
-    // the first time we are shown, we need to
-    // setup the model to get access to data
+    prepareToShow();
+    QWidget::showEvent(event);
+}
+
+void LedgerViewPage::prepareToShow()
+{
+    // make sure to run only once
     if (d->needModelInit) {
         initModel();
-        Q_EMIT requestSelectionChanged(d->selections);
     }
-    QWidget::showEvent(event);
 }
 
 void LedgerViewPage::initModel()
@@ -140,7 +143,7 @@ void LedgerViewPage::initModel()
     });
 
     connect(&d->delayTimer, &QTimer::timeout, this, [&]() {
-        auto list = d->ui->m_ledgerView->selectedJournalEntries();
+        auto list = d->ui->m_ledgerView->selectedJournalEntryIds();
         if (list.isEmpty()) {
             d->ui->m_ledgerView->selectMostRecentTransaction();
         } else {
@@ -197,7 +200,7 @@ bool LedgerViewPage::eventFilter(QObject* watched, QEvent* event)
  */
 void LedgerViewPage::keepSelection()
 {
-    d->selections.setSelection(SelectedObjects::JournalEntry, d->ui->m_ledgerView->selectedJournalEntries());
+    d->selections.setSelection(SelectedObjects::JournalEntry, d->ui->m_ledgerView->selectedJournalEntryIds());
 }
 
 void LedgerViewPage::reloadFilter()
@@ -343,7 +346,8 @@ void LedgerViewPage::splitterChanged(int pos, int index)
     Q_UNUSED(pos);
     Q_UNUSED(index);
 
-    d->ui->m_ledgerView->ensureCurrentItemIsVisible();
+    QMetaObject::invokeMethod(d->ui->m_ledgerView, &LedgerView::ensureCurrentItemIsVisible, Qt::QueuedConnection);
+    // d->ui->m_ledgerView->ensureCurrentItemIsVisible();
 }
 
 void LedgerViewPage::setShowEntryForNewTransaction(bool show)
@@ -390,7 +394,7 @@ void LedgerViewPage::slotRequestSelectionChanged(const SelectedObjects& selectio
 
 const SelectedObjects& LedgerViewPage::selections() const
 {
-    d->selections.setSelection(SelectedObjects::JournalEntry, d->ui->m_ledgerView->selectedJournalEntries());
+    d->selections.setSelection(SelectedObjects::JournalEntry, d->ui->m_ledgerView->selectedJournalEntryIds());
     return d->selections;
 }
 
@@ -469,7 +473,7 @@ void LedgerViewPage::pushView(LedgerViewPage* view)
         qDebug() << "view stack already taken, old one destroyed";
         d->stackedView->deleteLater();
     }
-    d->ui->m_ledgerView->setSelectedJournalEntries(view->d->ui->m_ledgerView->selectedJournalEntries());
+    d->ui->m_ledgerView->setSelectedJournalEntries(view->d->ui->m_ledgerView->selectedJournalEntryIds());
     d->stackedView = view;
 }
 

@@ -9,7 +9,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QConcatenateTablesProxyModel>
 #include <QDate>
 #include <QSet>
 
@@ -19,6 +18,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ledgerconcatenatemodel.h"
 #include "ledgersortproxymodel_p.h"
 #include "mymoneyfile.h"
 
@@ -34,28 +34,14 @@ public:
     {
     }
 
-    QString modelType(const QAbstractItemModel* model) const
-    {
-        if (isAccountsModel(model))
-            return QLatin1String("AccountsModel");
-        if (isSpecialDatesModel(model))
-            return QLatin1String("SpecialDatesModel");
-        if (isReconciliationModel(model))
-            return QLatin1String("ReconciliationModel");
-        if (isJournalModel(model))
-            return QLatin1String("JournalModel");
-        if (isSchedulesJournalModel(model))
-            return QLatin1String("SchedulesJournalModel");
-        return QLatin1String("unknown model");
-    }
-
-    QConcatenateTablesProxyModel* concatModel;
+    LedgerConcatenateModel* concatModel;
     eMyMoney::Account::Type accountType;
     QStringList filterIds;
     bool showValuesInverted;
     bool maintainBalances;
     QSet<QAbstractItemModel*> sourceModels;
     QVector<MyMoneyMoney> balances;
+    QVector<int> splitMaxLineCount;
 };
 
 #endif

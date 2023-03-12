@@ -121,12 +121,12 @@ void LedgerPayeeFilter::setPayeeIdList(const QStringList& payeeIds)
     setSortRole(eMyMoney::Model::TransactionPostDateRole);
     sort(JournalModel::Column::Date, sortOrder());
 
+    invalidate();
+
     // if balance calculation has not been triggered, then run it immediately
     if(!d->balanceCalculationPending) {
         recalculateBalances();
     }
-
-    invalidateFilter();
 }
 
 bool LedgerPayeeFilter::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
@@ -139,8 +139,7 @@ bool LedgerPayeeFilter::filterAcceptsRow(int source_row, const QModelIndex& sour
         QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
 
         // special dates are shown when sorted by date
-        const auto baseModel = MyMoneyFile::baseModel()->baseModel(idx);
-        if (d->isSpecialDatesModel(baseModel)) {
+        if (d->isSpecialDatesModel(idx)) {
             return (sortRole() == eMyMoney::Model::TransactionPostDateRole);
         }
 

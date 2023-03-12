@@ -30,8 +30,7 @@ LedgerSortProxyModel::LedgerSortProxyModel(LedgerSortProxyModelPrivate* dd, QObj
     : QSortFilterProxyModel(parent)
     , d_ptr(dd)
 {
-    setSortRole(-1); // no sorting
-    setDynamicSortFilter(false);
+    setDynamicSortFilter(false); // no automatic sorting
 }
 
 LedgerSortProxyModel::~LedgerSortProxyModel()
@@ -61,7 +60,6 @@ bool LedgerSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& 
         return true;
     }
 
-    const auto model = MyMoneyFile::baseModel();
     // make sure that the online balance is the last entry of a day
     // and the date headers are the first
     for (const auto sortOrderItem : d->ledgerSortOrder) {
@@ -161,12 +159,12 @@ bool LedgerSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& 
             const auto leftSecurity = left.data(sortOrderItem.sortRole).toString();
             const auto rightSecurity = right.data(sortOrderItem.sortRole).toString();
             if (leftSecurity == rightSecurity) {
-                const auto leftModel = model->baseModel(left);
-                const auto rightModel = model->baseModel(right);
+                const auto leftModel = left.data(eMyMoney::Model::BaseModelRole);
+                const auto rightModel = right.data(eMyMoney::Model::BaseModelRole);
                 if (leftModel != rightModel) {
-                    if (left.data(eMyMoney::Model::SecurityAccountNameEntryRole).toBool()) {
+                    if (d->isSecurityAccountNameModel(left)) {
                         return trueValue;
-                    } else if (right.data(eMyMoney::Model::SecurityAccountNameEntryRole).toBool()) {
+                    } else if (d->isSecurityAccountNameModel(right)) {
                         return falseValue;
                     }
                     // if we get here, both are transaction entries
@@ -336,8 +334,8 @@ void LedgerSortProxyModel::setLedgerSortOrder(LedgerSortOrder sortOrder)
     if (sortOrder != d->ledgerSortOrder) {
         // the next line will turn on sorting for this model
         // but is otherwise not used (see lessThan())
-        setSortRole(eMyMoney::Model::TransactionPostDateRole);
         d->ledgerSortOrder = sortOrder;
+        setSortRole(eMyMoney::Model::TransactionPostDateRole);
         doSort();
     }
 }

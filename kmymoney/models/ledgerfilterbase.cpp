@@ -32,9 +32,12 @@ LedgerFilterBase::LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent)
     : LedgerSortProxyModel(dd, parent)
 {
     Q_D(LedgerFilterBase);
-    d->concatModel = new QConcatenateTablesProxyModel(parent);
+    d->concatModel = new LedgerConcatenateModel(parent);
+    connect(d->concatModel, &QAbstractItemModel::modelReset, this, [&]() {
+        Q_D(LedgerFilterBase);
+        d->splitMaxLineCount.clear();
+    });
 
-    setSortRole(-1);
     setFilterRole(-1);
     setFilterKeyColumn(-1);
 }
@@ -111,17 +114,43 @@ void LedgerFilterBase::setMaintainBalances(bool maintainBalances)
 bool LedgerFilterBase::setData(const QModelIndex& index, const QVariant& value, int role)
 {
     Q_D(LedgerFilterBase);
-    if ((d->maintainBalances) && (role == eMyMoney::Model::JournalBalanceRole)) {
-        if (index.isValid()) {
-            if (rowCount() > d->balances.capacity()) {
-                d->balances.resize(rowCount());
+    if (index.isValid()) {
+        if ((d->maintainBalances) && (role == eMyMoney::Model::JournalBalanceRole)) {
+            if (rowCount() >= d->balances.size()) {
+                d->balances.resize(rowCount() + 1);
             }
             d->balances[index.row()] = qvariant_cast<MyMoneyMoney>(value);
+            return true;
+
+        } else if (role == eMyMoney::Model::JournalSplitMaxLinesCountRole) {
+            const int cacheValue = value.toInt();
+            if (cacheValue == -1) {
+                d->splitMaxLineCount.clear();
+            } else {
+                if (rowCount() >= d->splitMaxLineCount.size()) {
+                    d->splitMaxLineCount.resize(rowCount() + 1);
+                }
+                d->splitMaxLineCount[index.row()] = cacheValue;
+            }
             return true;
         }
         return false;
     }
     return LedgerSortProxyModel::setData(index, value, role);
+}
+
+QVariant LedgerFilterBase::data(const QModelIndex& index, int role) const
+{
+    Q_D(const LedgerFilterBase);
+    if (index.isValid()) {
+        if (role == eMyMoney::Model::JournalSplitMaxLinesCountRole) {
+            if (rowCount() > d->splitMaxLineCount.size()) {
+                return 0;
+            }
+            return d->splitMaxLineCount.at(index.row());
+        }
+    }
+    return LedgerSortProxyModel::data(index, role);
 }
 
 bool LedgerFilterBase::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
