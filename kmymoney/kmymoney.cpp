@@ -3503,13 +3503,13 @@ bool KMyMoneyApp::slotFileSave()
                 }
                 return false;
             } catch (const MyMoneyException &e) {
-                KMessageBox::detailedError(this, i18n("Failed to save your storage."), e.what());
+                KMessageBox::detailedError(this, i18n("Failed to save your data."), e.what());
                 return false;
             }
         }
     }
 
-    KMessageBox::error(this, i18n("Couldn't find suitable plugin to save your storage."));
+    KMessageBox::error(this, i18n("Couldn't find suitable plugin to save your data."));
     return false;
 }
 
@@ -3531,7 +3531,7 @@ bool KMyMoneyApp::slotFileSaveAs()
     auto chosenFileType = eKMyMoney::StorageType::None;
     switch (availableFileTypes.count()) {
     case 0:
-        KMessageBox::error(this, i18n("Couldn't find any plugin for saving storage."));
+        KMessageBox::error(this, i18n("Couldn't find any plugin for saving data."));
         return false;
     case 1:
         chosenFileType = availableFileTypes.first();
