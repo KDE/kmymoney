@@ -261,7 +261,7 @@ bool QSQLiteResultPrivate::fetchNext(QSqlCachedResult::ValueCache &values, int i
         // already fetched
         Q_ASSERT(!initialFetch);
         skipRow = false;
-        for(int i=0; i<firstRow.count(); i++)
+        for (i = 0; i < firstRow.count(); i++)
             values[i]=firstRow[i];
         return skippedStatus;
     }
