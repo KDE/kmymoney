@@ -580,11 +580,11 @@ void LedgerView::setModel(QAbstractItemModel* model)
     });
 
     connect(model, &QAbstractItemModel::modelReset, this, [&]() {
-        auto model = LedgerView::model();
-        const auto rows = model->rowCount();
+        auto m = LedgerView::model();
+        const auto rows = m->rowCount();
         for (int row = 0; row < rows; ++row) {
-            const auto idx = model->index(row, 0);
-            model->setData(idx, 0, eMyMoney::Model::JournalSplitMaxLinesCountRole);
+            const auto idx = m->index(row, 0);
+            m->setData(idx, 0, eMyMoney::Model::JournalSplitMaxLinesCountRole);
         }
     });
 
