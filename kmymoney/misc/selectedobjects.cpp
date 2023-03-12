@@ -84,3 +84,8 @@ bool SelectedObjects::isEmpty() const
 {
     return m_selections.isEmpty();
 }
+
+bool SelectedObjects::operator!=(const SelectedObjects& right) const
+{
+    return m_selections != right.m_selections;
+}

@@ -69,6 +69,8 @@ public:
      */
     bool isEmpty() const;
 
+    bool operator!=(const SelectedObjects& right) const;
+
 private:
     QHash<Object_t, QStringList>    m_selections;
 };
