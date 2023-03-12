@@ -68,7 +68,7 @@ public:
      * This method returns a QModelIndex for a stacked @a proxyModel based
      * on the model index @a idx pointing to the base model.
      */
-    QModelIndex mapFromBaseSource(QAbstractItemModel* proxyModel, const QModelIndex& idx);
+    static QModelIndex mapFromBaseSource(QAbstractItemModel* proxyModel, const QModelIndex& idx);
 
     void setDirty(bool dirty = true);
     bool isDirty() const;
