@@ -537,6 +537,7 @@ void MyMoneyFile::startTransaction(const QString& undoActionText)
     d->undoStack.beginMacro(undoActionText);
     d->m_inTransaction = true;
     d->m_changeSet.clear();
+    Q_EMIT storageTransactionStarted();
 }
 
 bool MyMoneyFile::hasTransaction() const
@@ -652,6 +653,8 @@ void MyMoneyFile::commitTransaction()
 
     // inform the outside world about the end of notifications
     Q_EMIT endChangeNotification();
+
+    Q_EMIT storageTransactionEnded();
 }
 
 void MyMoneyFile::rollbackTransaction()
@@ -670,6 +673,8 @@ void MyMoneyFile::rollbackTransaction()
     d->m_balanceChangedSet.clear();
     d->m_valueChangedSet.clear();
     d->m_changeSet.clear();
+
+    Q_EMIT storageTransactionEnded();
 }
 
 void MyMoneyFile::addInstitution(MyMoneyInstitution& institution)

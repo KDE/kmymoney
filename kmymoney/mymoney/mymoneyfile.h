@@ -1778,6 +1778,9 @@ protected Q_SLOTS:
     void reloadSpecialDates();
 
 Q_SIGNALS:
+    void storageTransactionStarted();
+    void storageTransactionEnded();
+
     /**
      * This signal is emitted when a transaction has been committed and
      * the notifications are about to be sent out.
