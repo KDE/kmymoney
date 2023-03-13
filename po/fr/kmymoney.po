@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:49+0000\n"
+"POT-Creation-Date: 2023-03-13 03:06+0000\n"
 "PO-Revision-Date: 2022-09-13 13:20+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
@@ -6780,14 +6780,16 @@ msgid "Saving file..."
 msgstr "Enregistrement du fichier…"
 
 # unreviewed-context
-#: kmymoney/kmymoney.cpp:3506 kmymoney/kmymoney.cpp:3563
-#, kde-format
-msgid "Failed to save your storage."
+#: kmymoney/kmymoney.cpp:3506
+#, fuzzy, kde-format
+#| msgid "Failed to save your storage."
+msgid "Failed to save your data."
 msgstr "Impossible d'enregistrer votre stockage."
 
 #: kmymoney/kmymoney.cpp:3512
-#, kde-format
-msgid "Couldn't find suitable plugin to save your storage."
+#, fuzzy, kde-format
+#| msgid "Couldn't find suitable plugin to save your storage."
+msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 "Impossible de trouver un module externe adapté pour enregistrer votre "
 "stockage."
@@ -6798,11 +6800,18 @@ msgid "Saving file as...."
 msgstr "Enregistrement du fichier sous…"
 
 #: kmymoney/kmymoney.cpp:3534
-#, kde-format
-msgid "Couldn't find any plugin for saving storage."
+#, fuzzy, kde-format
+#| msgid "Couldn't find any plugin for saving storage."
+msgid "Couldn't find any plugin for saving data."
 msgstr ""
 "Impossible de trouver un module externe adapté pour enregistrer votre "
 "stockage."
+
+# unreviewed-context
+#: kmymoney/kmymoney.cpp:3563
+#, kde-format
+msgid "Failed to save your storage."
+msgstr "Impossible d'enregistrer votre stockage."
 
 #. i18n: ectx: Menu (import)
 #: kmymoney/kmymoneyui.rc:8 kmymoney/plugins/qif/import/kimportdlg.cpp:54

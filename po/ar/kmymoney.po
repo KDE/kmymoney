@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:49+0000\n"
+"POT-Creation-Date: 2023-03-13 03:06+0000\n"
 "PO-Revision-Date: 2017-02-15 09:32+0300\n"
 "Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -6522,15 +6522,15 @@ msgstr ""
 msgid "Saving file..."
 msgstr "يحفظ الملف..."
 
-#: kmymoney/kmymoney.cpp:3506 kmymoney/kmymoney.cpp:3563
+#: kmymoney/kmymoney.cpp:3506
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
-msgid "Failed to save your storage."
+msgid "Failed to save your data."
 msgstr "فشل حفظ: %1"
 
 #: kmymoney/kmymoney.cpp:3512
 #, kde-format
-msgid "Couldn't find suitable plugin to save your storage."
+msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 
 #: kmymoney/kmymoney.cpp:3518
@@ -6541,8 +6541,14 @@ msgstr "يحفظ الملف..."
 
 #: kmymoney/kmymoney.cpp:3534
 #, kde-format
-msgid "Couldn't find any plugin for saving storage."
+msgid "Couldn't find any plugin for saving data."
 msgstr ""
+
+#: kmymoney/kmymoney.cpp:3563
+#, fuzzy, kde-format
+#| msgid "Failed to save: %1"
+msgid "Failed to save your storage."
+msgstr "فشل حفظ: %1"
 
 #. i18n: ectx: Menu (import)
 #: kmymoney/kmymoneyui.rc:8 kmymoney/plugins/qif/import/kimportdlg.cpp:54

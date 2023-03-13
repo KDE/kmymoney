@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:49+0000\n"
+"POT-Creation-Date: 2023-03-13 03:06+0000\n"
 "PO-Revision-Date: 2020-09-15 12:07+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -6805,14 +6805,16 @@ msgstr ""
 msgid "Saving file..."
 msgstr "A gravar o ficheiro..."
 
-#: kmymoney/kmymoney.cpp:3506 kmymoney/kmymoney.cpp:3563
-#, kde-format
-msgid "Failed to save your storage."
+#: kmymoney/kmymoney.cpp:3506
+#, fuzzy, kde-format
+#| msgid "Failed to save your storage."
+msgid "Failed to save your data."
 msgstr "Não foi possível gravar o seu armazenamento."
 
 #: kmymoney/kmymoney.cpp:3512
-#, kde-format
-msgid "Couldn't find suitable plugin to save your storage."
+#, fuzzy, kde-format
+#| msgid "Couldn't find suitable plugin to save your storage."
+msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 "Não foi possível encontrar um 'plugin' adequado para gravar o seu "
 "armazenamento."
@@ -6823,10 +6825,16 @@ msgid "Saving file as...."
 msgstr "A gravar o ficheiro como..."
 
 #: kmymoney/kmymoney.cpp:3534
-#, kde-format
-msgid "Couldn't find any plugin for saving storage."
+#, fuzzy, kde-format
+#| msgid "Couldn't find any plugin for saving storage."
+msgid "Couldn't find any plugin for saving data."
 msgstr ""
 "Não foi possível encontrar nenhum 'plugin' para gravar o armazenamento."
+
+#: kmymoney/kmymoney.cpp:3563
+#, kde-format
+msgid "Failed to save your storage."
+msgstr "Não foi possível gravar o seu armazenamento."
 
 #. i18n: ectx: Menu (import)
 #: kmymoney/kmymoneyui.rc:8 kmymoney/plugins/qif/import/kimportdlg.cpp:54

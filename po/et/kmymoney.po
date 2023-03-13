@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:49+0000\n"
+"POT-Creation-Date: 2023-03-13 03:06+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -6616,14 +6616,16 @@ msgstr ""
 msgid "Saving file..."
 msgstr "Faili salvestamine..."
 
-#: kmymoney/kmymoney.cpp:3506 kmymoney/kmymoney.cpp:3563
-#, kde-format
-msgid "Failed to save your storage."
+#: kmymoney/kmymoney.cpp:3506
+#, fuzzy, kde-format
+#| msgid "Failed to save your storage."
+msgid "Failed to save your data."
 msgstr "Salvesti salvestamine nurjus."
 
 #: kmymoney/kmymoney.cpp:3512
-#, kde-format
-msgid "Couldn't find suitable plugin to save your storage."
+#, fuzzy, kde-format
+#| msgid "Couldn't find suitable plugin to save your storage."
+msgid "Couldn't find suitable plugin to save your data."
 msgstr "Salvesti salvestamiseks ei leitud ühtegi sobivat pluginat."
 
 #: kmymoney/kmymoney.cpp:3518
@@ -6632,9 +6634,15 @@ msgid "Saving file as...."
 msgstr "Faili salvestamine ..."
 
 #: kmymoney/kmymoney.cpp:3534
-#, kde-format
-msgid "Couldn't find any plugin for saving storage."
+#, fuzzy, kde-format
+#| msgid "Couldn't find any plugin for saving storage."
+msgid "Couldn't find any plugin for saving data."
 msgstr "Salvesti salvestamiseks ei leitud ühtegi pluginat."
+
+#: kmymoney/kmymoney.cpp:3563
+#, kde-format
+msgid "Failed to save your storage."
+msgstr "Salvesti salvestamine nurjus."
 
 #. i18n: ectx: Menu (import)
 #: kmymoney/kmymoneyui.rc:8 kmymoney/plugins/qif/import/kimportdlg.cpp:54

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:49+0000\n"
+"POT-Creation-Date: 2023-03-13 03:06+0000\n"
 "PO-Revision-Date: 2022-07-13 15:41+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -6577,14 +6577,16 @@ msgstr ""
 msgid "Saving file..."
 msgstr "파일 저장 중..."
 
-#: kmymoney/kmymoney.cpp:3506 kmymoney/kmymoney.cpp:3563
-#, kde-format
-msgid "Failed to save your storage."
+#: kmymoney/kmymoney.cpp:3506
+#, fuzzy, kde-format
+#| msgid "Failed to save your storage."
+msgid "Failed to save your data."
 msgstr "저장소를 저장하지 못했습니다."
 
 #: kmymoney/kmymoney.cpp:3512
-#, kde-format
-msgid "Couldn't find suitable plugin to save your storage."
+#, fuzzy, kde-format
+#| msgid "Couldn't find suitable plugin to save your storage."
+msgid "Couldn't find suitable plugin to save your data."
 msgstr "저장소를 저장할 플러그인을 찾을 수 없습니다."
 
 #: kmymoney/kmymoney.cpp:3518
@@ -6593,9 +6595,15 @@ msgid "Saving file as...."
 msgstr "다른 이름으로 파일 저장 중..."
 
 #: kmymoney/kmymoney.cpp:3534
-#, kde-format
-msgid "Couldn't find any plugin for saving storage."
+#, fuzzy, kde-format
+#| msgid "Couldn't find any plugin for saving storage."
+msgid "Couldn't find any plugin for saving data."
 msgstr "저장소를 저장하는 플러그인을 찾을 수 없습니다."
+
+#: kmymoney/kmymoney.cpp:3563
+#, kde-format
+msgid "Failed to save your storage."
+msgstr "저장소를 저장하지 못했습니다."
 
 #. i18n: ectx: Menu (import)
 #: kmymoney/kmymoneyui.rc:8 kmymoney/plugins/qif/import/kimportdlg.cpp:54

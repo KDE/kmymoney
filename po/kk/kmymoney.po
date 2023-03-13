@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:49+0000\n"
+"POT-Creation-Date: 2023-03-13 03:06+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -6740,15 +6740,15 @@ msgstr ""
 msgid "Saving file..."
 msgstr "Файлды сақтау..."
 
-#: kmymoney/kmymoney.cpp:3506 kmymoney/kmymoney.cpp:3563
+#: kmymoney/kmymoney.cpp:3506
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
-msgid "Failed to save your storage."
+msgid "Failed to save your data."
 msgstr "Сақтау жаңылысы: %1"
 
 #: kmymoney/kmymoney.cpp:3512
 #, kde-format
-msgid "Couldn't find suitable plugin to save your storage."
+msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 
 #: kmymoney/kmymoney.cpp:3518
@@ -6759,8 +6759,14 @@ msgstr "Файлды сақтау..."
 
 #: kmymoney/kmymoney.cpp:3534
 #, kde-format
-msgid "Couldn't find any plugin for saving storage."
+msgid "Couldn't find any plugin for saving data."
 msgstr ""
+
+#: kmymoney/kmymoney.cpp:3563
+#, fuzzy, kde-format
+#| msgid "Failed to save: %1"
+msgid "Failed to save your storage."
+msgstr "Сақтау жаңылысы: %1"
 
 #. i18n: ectx: Menu (import)
 #: kmymoney/kmymoneyui.rc:8 kmymoney/plugins/qif/import/kimportdlg.cpp:54
