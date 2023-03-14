@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-13 00:49+0000\n"
-"PO-Revision-Date: 2023-03-10 11:30+0100\n"
+"PO-Revision-Date: 2023-03-13 12:01+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -5784,16 +5784,14 @@ msgid "Saving file..."
 msgstr "Bezig met opslaan van bestand..."
 
 #: kmymoney/kmymoney.cpp:4562
-#, fuzzy, kde-format
-#| msgid "Failed to save your storage."
+#, kde-format
 msgid "Failed to save your data."
-msgstr "Uw opslag opslaan is mislukt."
+msgstr "Uw gegevens opslaan is mislukt."
 
 #: kmymoney/kmymoney.cpp:4568
-#, fuzzy, kde-format
-#| msgid "Couldn't find suitable plugin to save your storage."
+#, kde-format
 msgid "Couldn't find suitable plugin to save your data."
-msgstr "Kon geen geschikte plug-in vinden om uw opslag op te slaan."
+msgstr "Kon geen geschikte plug-in vinden om uw gegevens op te slaan."
 
 #: kmymoney/kmymoney.cpp:4574
 #, kde-format
@@ -5801,10 +5799,9 @@ msgid "Saving file as...."
 msgstr "Bezig met opslaan van bestand als..."
 
 #: kmymoney/kmymoney.cpp:4590
-#, fuzzy, kde-format
-#| msgid "Couldn't find any plugin for saving storage."
+#, kde-format
 msgid "Couldn't find any plugin for saving data."
-msgstr "Kon geen enkele plug-in vinden om uw opslag op te slaan."
+msgstr "Kon geen enkele plug-in vinden om uw gegevens op te slaan."
 
 #: kmymoney/kmymoney.cpp:4619
 #, kde-format

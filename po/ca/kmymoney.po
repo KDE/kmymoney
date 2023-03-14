@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-13 00:49+0000\n"
-"PO-Revision-Date: 2023-03-10 09:23+0100\n"
+"PO-Revision-Date: 2023-03-13 09:47+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -5793,17 +5793,14 @@ msgid "Saving file..."
 msgstr "S'està desant el fitxer..."
 
 #: kmymoney/kmymoney.cpp:4562
-#, fuzzy, kde-format
-#| msgid "Failed to save your storage."
+#, kde-format
 msgid "Failed to save your data."
-msgstr "Ha fallat en desar l'emmagatzematge."
+msgstr "Ha fallat en desar les dades."
 
 #: kmymoney/kmymoney.cpp:4568
-#, fuzzy, kde-format
-#| msgid "Couldn't find suitable plugin to save your storage."
+#, kde-format
 msgid "Couldn't find suitable plugin to save your data."
-msgstr ""
-"No s'ha pogut carregar cap connector adequat per a desar a l'emmagatzematge."
+msgstr "No s'ha pogut trobar cap connector adequat per a desar les dades."
 
 #: kmymoney/kmymoney.cpp:4574
 #, kde-format
@@ -5811,10 +5808,9 @@ msgid "Saving file as...."
 msgstr "S'està desant el fitxer com a..."
 
 #: kmymoney/kmymoney.cpp:4590
-#, fuzzy, kde-format
-#| msgid "Couldn't find any plugin for saving storage."
+#, kde-format
 msgid "Couldn't find any plugin for saving data."
-msgstr "No s'ha pogut trobar cap connector per a desar a l'emmagatzematge."
+msgstr "No s'ha pogut trobar cap connector per a desar les dades."
 
 #: kmymoney/kmymoney.cpp:4619
 #, kde-format

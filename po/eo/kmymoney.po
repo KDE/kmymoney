@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-13 00:49+0000\n"
-"PO-Revision-Date: 2023-03-11 03:34+0100\n"
+"PO-Revision-Date: 2023-03-13 20:21+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -5716,16 +5716,14 @@ msgid "Saving file..."
 msgstr "Konservante dosieron..."
 
 #: kmymoney/kmymoney.cpp:4562
-#, fuzzy, kde-format
-#| msgid "Failed to save your storage."
+#, kde-format
 msgid "Failed to save your data."
-msgstr "Malsukcesis konservi viajn konservaĵojn."
+msgstr "Malsukcesis konservi viajn datumojn."
 
 #: kmymoney/kmymoney.cpp:4568
-#, fuzzy, kde-format
-#| msgid "Couldn't find suitable plugin to save your storage."
+#, kde-format
 msgid "Couldn't find suitable plugin to save your data."
-msgstr "Ne eblis trovi taŭgan kromprogramon por konservi viajn konservaĵojn."
+msgstr "Ne eblis trovi taŭgan kromprogramon por konservi viajn datumojn."
 
 #: kmymoney/kmymoney.cpp:4574
 #, kde-format
@@ -5733,8 +5731,7 @@ msgid "Saving file as...."
 msgstr "Konservante dosieron kiel...."
 
 #: kmymoney/kmymoney.cpp:4590
-#, fuzzy, kde-format
-#| msgid "Couldn't find any plugin for saving storage."
+#, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "Ne eblis trovi ajnan kromprogramon por konservi datumojn."
 
@@ -14072,15 +14069,15 @@ msgstr "Komenca saldo sur banka deklaro"
 #, kde-format
 msgid "%1 cleared payment"
 msgid_plural "%1 cleared payments in total"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 plenumita pago"
+msgstr[1] "%1 plenumitaj pagoj sume"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:151
 #, kde-format
 msgid "%1 cleared deposit"
 msgid_plural "%1 cleared deposits in total"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 plenumita deponaĵo"
+msgstr[1] "%1 plenumitaj deponaĵoj sume"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:157
 #, kde-format
@@ -14173,15 +14170,15 @@ msgstr "Elstaraj deponejoj"
 #, kde-format
 msgid "One outstanding charges of"
 msgid_plural "Total of %1 outstanding charges amounting to"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Unu plenumenda pagoŝarĝo de"
+msgstr[1] "Totalo de %1 plenumendaj pagoŝarĝoj sumiĝaj al"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:328
 #, kde-format
 msgid "One outstanding deposit of"
 msgid_plural "Total of %1 outstanding deposits amounting to"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Unu plenumenda deponaĵo de"
+msgstr[1] "Totalo de %1 plenumendaj deponaĵoj sumiĝaj al"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:71
 #, kde-format
@@ -15088,8 +15085,8 @@ msgstr "Tuta variado"
 #, kde-format
 msgid "1 day"
 msgid_plural "%1 days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "unu tago"
+msgstr[1] "%1 tagoj"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:379
 #: kmymoney/views/khomeview_p.h:1177
@@ -15103,8 +15100,8 @@ msgstr "La saldo de %1 estas sub la minimuma saldo %2 hodiaŭ."
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
 msgid_plural ""
 "The balance of %2 will drop below the minimum balance %3 in %1 days."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "La saldo de %2 falos sub la minimuma saldo %3 post %1 tago."
+msgstr[1] "La saldo de %2 falos sub la minimuma saldo %3 post %1 tagoj."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:403
 #: kmymoney/views/khomeview_p.h:1199
@@ -15123,16 +15120,16 @@ msgstr "La saldo de %1 estas super %2 hodiaŭ."
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "La saldo de %2 falos sub %3 en %1 tago."
+msgstr[1] "La saldo de %2 falos sub %3 en %1 tagoj."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:422
 #: kmymoney/views/khomeview_p.h:1217
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "La saldo de %2 leviĝos super %3 en %1 tago."
+msgstr[1] "La saldo de %2 leviĝos super %3 en %1 tagoj."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:437
 #, kde-format
@@ -19384,8 +19381,8 @@ msgstr "Redakti horaron"
 #, kde-format
 msgid " (%1 payment)"
 msgid_plural " (%1 payments)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " (%1 pago)"
+msgstr[1] " (%1 pagoj)"
 
 #: kmymoney/views/khomeview_p.h:984
 #, kde-format
@@ -19415,16 +19412,16 @@ msgstr "Al Minimuma Saldo<br>/ Maksimuma Kredito"
 msgctxt "Forecast days"
 msgid "%1 Day Forecast"
 msgid_plural "%1 Day Forecast"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1-taga prognozo"
+msgstr[1] "%1-taga prognozo"
 
 #: kmymoney/views/khomeview_p.h:1113
 #, kde-format
 msgctxt "Forecast days"
 msgid "%1 day"
 msgid_plural "%1 days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 tago"
+msgstr[1] "%1 tagoj"
 
 #: kmymoney/views/khomeview_p.h:1321
 #, kde-format
@@ -21015,15 +21012,15 @@ msgstr "Pago je %1 por %2 okazanta %3."
 #, kde-format
 msgid "%1 day overdue"
 msgid_plural "%1 days overdue"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 tagon prokrastita"
+msgstr[1] "%1 tagojn prokrastita"
 
 #: kmymoney/widgets/kmymoneybriefschedule.cpp:102
 #, kde-format
 msgid "(%1 occurrence.)"
 msgid_plural "(%1 occurrences.)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "(%1 okazo.)"
+msgstr[1] "(%1 okazoj.)"
 
 #. i18n: ectx: property (text), widget (QLabel, m_indexLabel)
 #: kmymoney/widgets/kmymoneybriefschedule.ui:105
