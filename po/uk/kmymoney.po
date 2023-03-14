@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-13 03:06+0000\n"
-"PO-Revision-Date: 2022-09-18 14:18+0300\n"
+"PO-Revision-Date: 2023-03-13 19:37+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -6733,18 +6733,14 @@ msgid "Saving file..."
 msgstr "Збереження файла…."
 
 #: kmymoney/kmymoney.cpp:3506
-#, fuzzy, kde-format
-#| msgid "Failed to save your storage."
+#, kde-format
 msgid "Failed to save your data."
 msgstr "Не вдалося зберегти ваші дані."
 
 #: kmymoney/kmymoney.cpp:3512
-#, fuzzy, kde-format
-#| msgid "Couldn't find suitable plugin to save your storage."
+#, kde-format
 msgid "Couldn't find suitable plugin to save your data."
-msgstr ""
-"Не вдалося завантажити відповідний додаток для збереження даних до вашого "
-"сховища даних."
+msgstr "Не вдалося завантажити відповідний додаток для збереження даних."
 
 #: kmymoney/kmymoney.cpp:3518
 #, kde-format
@@ -6752,10 +6748,9 @@ msgid "Saving file as...."
 msgstr "Збереження файла як…"
 
 #: kmymoney/kmymoney.cpp:3534
-#, fuzzy, kde-format
-#| msgid "Couldn't find any plugin for saving storage."
+#, kde-format
 msgid "Couldn't find any plugin for saving data."
-msgstr "Не вдалося знайти жодного додатка для збереження сховища даних."
+msgstr "Не вдалося знайти жодного додатка для збереження даних."
 
 #: kmymoney/kmymoney.cpp:3563
 #, kde-format
