@@ -5,21 +5,21 @@
 #
 # Benjamin <benjamincarlyle@optusnet.com.au>, 2004.
 # Andrew Coles <andrew_coles@yahoo.co.uk>, 2009, 2010.
-# Steve Allewell <steve.allewell@gmail.com>, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Steve Allewell <steve.allewell@gmail.com>, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-13 03:06+0000\n"
-"PO-Revision-Date: 2022-09-18 12:33+0100\n"
+"PO-Revision-Date: 2023-03-14 21:06+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
-"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language-Team: British English\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 23.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -6661,16 +6661,14 @@ msgid "Saving file..."
 msgstr "Saving file..."
 
 #: kmymoney/kmymoney.cpp:3506
-#, fuzzy, kde-format
-#| msgid "Failed to save your storage."
+#, kde-format
 msgid "Failed to save your data."
-msgstr "Failed to save your storage."
+msgstr "Failed to save your data."
 
 #: kmymoney/kmymoney.cpp:3512
-#, fuzzy, kde-format
-#| msgid "Couldn't find suitable plugin to save your storage."
+#, kde-format
 msgid "Couldn't find suitable plugin to save your data."
-msgstr "Could not find suitable plugin to save your storage."
+msgstr "Could not find a suitable plugin to save your data."
 
 #: kmymoney/kmymoney.cpp:3518
 #, kde-format
@@ -6678,10 +6676,9 @@ msgid "Saving file as...."
 msgstr "Saving file as...."
 
 #: kmymoney/kmymoney.cpp:3534
-#, fuzzy, kde-format
-#| msgid "Couldn't find any plugin for saving storage."
+#, kde-format
 msgid "Couldn't find any plugin for saving data."
-msgstr "Could not find any plugin for saving storage."
+msgstr "Could not find any plugin for saving data."
 
 #: kmymoney/kmymoney.cpp:3563
 #, kde-format
