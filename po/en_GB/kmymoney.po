@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-13 00:49+0000\n"
-"PO-Revision-Date: 2023-03-10 17:35+0000\n"
+"PO-Revision-Date: 2023-03-14 20:51+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -5726,16 +5726,14 @@ msgid "Saving file..."
 msgstr "Saving file..."
 
 #: kmymoney/kmymoney.cpp:4562
-#, fuzzy, kde-format
-#| msgid "Failed to save your storage."
+#, kde-format
 msgid "Failed to save your data."
-msgstr "Failed to save your storage."
+msgstr "Failed to save your data."
 
 #: kmymoney/kmymoney.cpp:4568
-#, fuzzy, kde-format
-#| msgid "Couldn't find suitable plugin to save your storage."
+#, kde-format
 msgid "Couldn't find suitable plugin to save your data."
-msgstr "Could not find suitable plugin to save your storage."
+msgstr "Could not find a suitable plugin to save your data."
 
 #: kmymoney/kmymoney.cpp:4574
 #, kde-format
@@ -5743,10 +5741,9 @@ msgid "Saving file as...."
 msgstr "Saving file as...."
 
 #: kmymoney/kmymoney.cpp:4590
-#, fuzzy, kde-format
-#| msgid "Couldn't find any plugin for saving storage."
+#, kde-format
 msgid "Couldn't find any plugin for saving data."
-msgstr "Could not find any plugin for saving storage."
+msgstr "Could not find any plugin for saving data."
 
 #: kmymoney/kmymoney.cpp:4619
 #, kde-format

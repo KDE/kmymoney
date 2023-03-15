@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-13 00:49+0000\n"
-"PO-Revision-Date: 2023-03-10 07:42+0100\n"
+"PO-Revision-Date: 2023-03-14 08:57+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -5757,16 +5757,15 @@ msgid "Saving file..."
 msgstr "Shranjujem datoteko..."
 
 #: kmymoney/kmymoney.cpp:4562
-#, fuzzy, kde-format
-#| msgid "Failed to save your storage."
+#, kde-format
 msgid "Failed to save your data."
-msgstr "Vaše shrambe ni bilo mogoče shraniti."
+msgstr "Ni bilo mogoče shraniti vaših podatkov."
 
 #: kmymoney/kmymoney.cpp:4568
-#, fuzzy, kde-format
-#| msgid "Couldn't find suitable plugin to save your storage."
+#, kde-format
 msgid "Couldn't find suitable plugin to save your data."
-msgstr "Ni bilo mogoče najti ustreznega vtičnika za shranjevanje vaše shrambe."
+msgstr ""
+"Ni bilo mogoče najti ustreznega vtičnika za shranjevanje vaših podatkov."
 
 #: kmymoney/kmymoney.cpp:4574
 #, kde-format
@@ -5774,10 +5773,9 @@ msgid "Saving file as...."
 msgstr "Shranjevanje datoteke kot..."
 
 #: kmymoney/kmymoney.cpp:4590
-#, fuzzy, kde-format
-#| msgid "Couldn't find any plugin for saving storage."
+#, kde-format
 msgid "Couldn't find any plugin for saving data."
-msgstr "Ni bilo mogoče najti nobenega vtičnika za shranjevanje shrambe."
+msgstr "Ni bilo mogoče najti nobenega vtičnika za shranjevanje podatkov."
 
 #: kmymoney/kmymoney.cpp:4619
 #, kde-format
