@@ -13044,7 +13044,7 @@ msgstr "مايكروسوفت مَنِي ٢٠٠٧"
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:103
 #, kde-format
 msgid "MS-Money Plus"
-msgstr "مايكروسوفت مَنِي پلس"
+msgstr "مايكروسوفت مَنِي بلس"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:104
 #, kde-format
