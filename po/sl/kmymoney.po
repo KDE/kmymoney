@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-13 03:06+0000\n"
-"PO-Revision-Date: 2023-03-14 08:57+0100\n"
+"PO-Revision-Date: 2023-03-16 19:39+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
-"%100<=4 ? 2 : 3);\n"
-"X-Generator: Poedit 3.2.2\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -403,11 +403,9 @@ msgstr ""
 "p>"
 
 #: kmymoney/converter/mymoneytemplate.cpp:100
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Template Loading Error"
+#, kde-format
 msgid "Template Error"
-msgstr "Napaka pri nalaganje predloge"
+msgstr "Napaka v predlogi"
 
 #: kmymoney/converter/mymoneytemplate.cpp:107
 #, kde-format
@@ -420,10 +418,9 @@ msgid "<p>Invalid tag <b>%1</b> in template file <b>%2</b></p>"
 msgstr "<p>Neveljavna značka <b>%1</b> v datoteki predloge <b>%2</b></p>"
 
 #: kmymoney/converter/mymoneytemplate.cpp:214
-#, fuzzy, kde-format
-#| msgid "Loading templates..."
+#, kde-format
 msgid "Loading template %1"
-msgstr "Nalaganje predlog..."
+msgstr "Nalaganje predloge %1"
 
 #: kmymoney/converter/mymoneytemplate.cpp:240
 #, kde-format
@@ -805,22 +802,18 @@ msgstr "Delnice"
 #: kmymoney/dialogs/investactivities.cpp:649
 #: kmymoney/dialogs/investactivities.cpp:932
 #: kmymoney/dialogs/investtransactioneditor.cpp:490
-#, fuzzy, kde-format
-#| msgid "Total"
+#, kde-format
 msgctxt "Total value"
 msgid "Total"
 msgstr "Skupno"
 
 #: kmymoney/dialogs/investactivities.cpp:873
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox"
-#| msgid "Ratio 1/"
+#, kde-format
 msgid "Ratio 1/"
 msgstr "Razmerje 1/"
 
 #: kmymoney/dialogs/investtransactioneditor.cpp:285
-#, fuzzy, kde-format
-#| msgid "Price/share"
+#, kde-format
 msgid "Price/Share"
 msgstr "Cena/delnica"
 
@@ -845,8 +838,7 @@ msgid "Security"
 msgstr "Varnost"
 
 #: kmymoney/dialogs/investtransactioneditor.cpp:365
-#, fuzzy, kde-format
-#| msgid "Asset accounts"
+#, kde-format
 msgid "Asset account"
 msgstr "Račun imetja"
 
@@ -960,27 +952,19 @@ msgstr "Stanje"
 
 #: kmymoney/dialogs/investtransactioneditor.cpp:776
 #: kmymoney/dialogs/stdtransactioneditor.cpp:1188
-#, fuzzy, kde-format
-#| msgid ""
-#| "At least one split of the selected transactions has been reconciled. Do "
-#| "you wish to change the transactions anyway?"
+#, kde-format
 msgid ""
 "At least one split of the selected transaction references an account that "
 "has been closed. Editing the transactions is therefore prohibited."
 msgstr ""
-"Usklajen je vsaj en razcep izbranih transakcij. Ali si vseeno želite "
-"spremeniti transakcije?"
+"Usklajen je vsaj en razcep izbrane transakcije na računu, ki je bil zaprt. "
+"Urejevanje transakcije je zato prepovedano."
 
 #: kmymoney/dialogs/investtransactioneditor.cpp:802
 #: kmymoney/dialogs/stdtransactioneditor.cpp:1215
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Transaction '%1' has a post date '%2' before one of the referenced "
-#| "account's opening date."
+#, kde-format
 msgid "Cannot enter transaction with postdate prior to account's opening date."
-msgstr ""
-"  * Transakcija '%1' ima datum objave '%2' pred eno od referenčnih datumov "
-"odprtja računa."
+msgstr "Ni mogoče vnesti transakcije z datumom pred datumom odprtja računa."
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonSkip)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonCancel)
@@ -1693,12 +1677,10 @@ msgid "Select as base currency"
 msgstr "Nastavi kot osnovno valuto"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:519
-#, fuzzy, kde-format
-#| msgctxt "@title:menu"
-#| msgid "Currency options"
+#, kde-format
 msgctxt "Menu header"
 msgid "Currency options"
-msgstr "Možnosti valute"
+msgstr "Valutne opcije"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:650
 #, kde-format
@@ -2180,10 +2162,9 @@ msgid "Other"
 msgstr "Ostalo"
 
 #: kmymoney/dialogs/keditscheduledlg.cpp:373
-#, fuzzy, kde-format
-#| msgid "Next due date:"
+#, kde-format
 msgid "Next due date"
-msgstr "Naslednji rok zapadlosti:"
+msgstr "Naslednji rok zapadlosti"
 
 #: kmymoney/dialogs/keditscheduledlg.cpp:489 kmymoney/kmymoney.cpp:2663
 #: kmymoney/kmymoney.cpp:2666
@@ -2661,8 +2642,7 @@ msgid "Criteria"
 msgstr "Kriterij"
 
 #: kmymoney/dialogs/kfindtransactiondlg_p.h:110
-#, fuzzy, kde-format
-#| msgid "Search transactions"
+#, kde-format
 msgctxt "@info:tooltip for find transaction Open button"
 msgid "Search transactions"
 msgstr "Poišči transakcije"
@@ -2671,21 +2651,19 @@ msgstr "Poišči transakcije"
 #, kde-format
 msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
 msgid_plural "Found %1 matching transactions (D %2 / P %3 = %4)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Najdena %1 ustrezna transakcija (D %2 / P %3 = %4)"
+msgstr[1] "Najdeni %1 ustrezni transakciji (D %2 / P %3 = %4)"
+msgstr[2] "Najdene %1 ustrezne transakcije (D %2 / P %3 = %4)"
+msgstr[3] "Najdenih %1 ustreznih transakcij (D %2 / P %3 = %4)"
 
 #: kmymoney/dialogs/kfindtransactiondlg_p.h:179
-#, fuzzy, kde-format
-#| msgid "Found %1 matching splits"
-#| msgid_plural "Found %1 matching splits"
+#, kde-format
 msgid "Found %1 matching transaction"
 msgid_plural "Found %1 matching transactions"
-msgstr[0] "Najdena %1 ustrezna delitev"
-msgstr[1] "Najdeni %1 ustrezni delitvi"
-msgstr[2] "Najdene %1 ustrezne delitve"
-msgstr[3] "Najdenih %1 ustreznih delitev"
+msgstr[0] "Najdena %1 ustrezna transakcija"
+msgstr[1] "Najdena %1 ustrezni transakciji"
+msgstr[2] "Najdene %1 ustrezne transakcije"
+msgstr[3] "Najdeno %1 ustreznih transakcij"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KImportVerifyDlg)
 #: kmymoney/dialogs/kimportverifydlg.ui:17
@@ -2695,10 +2673,9 @@ msgstr "Preveri uvoz"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KLoadTemplateDlg)
 #: kmymoney/dialogs/kloadtemplatedlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Dialog"
+#, kde-format
 msgid "MyDialog"
-msgstr "Dialog"
+msgstr "MyDialog"
 
 #: kmymoney/dialogs/kmergetransactionsdlg.cpp:32
 #, kde-format
@@ -2706,21 +2683,17 @@ msgid "Merge Transactions"
 msgstr "Zlij transakcije"
 
 #: kmymoney/dialogs/kmergetransactionsdlg.cpp:34
-#, fuzzy, kde-format
-#| msgctxt "@info:label Description of merge transaction dialog"
-#| msgid ""
-#| "The two selected transactions to merge are shown. The one at the top and "
-#| "its values will be used in the resulting merged transaction.  If you want "
-#| "to use the other one press the exchange button on the right."
+#, kde-format
 msgid ""
 "Are you sure you wish to merge these transactions?  The one you selected "
 "first is the top one, and its values will be used in the merged "
 "transaction.  Cancel and select the other transaction first, if you want its "
 "values to be used."
 msgstr ""
-"Prikazani sta dve izbrani transakciji. Vrhnja transakcija in njene vrednosti "
-"bodo uporabljene v združeni transakciji. Če želite uporabiti drugo "
-"transakcijo, pritisnite gumb zamenjave na desni."
+"Ali ste prepričani, da želite združiti ti transakciji? Prva izbrana je "
+"zgornja in njene vrednosti bodo uporabljene v združeni transakciji. "
+"Prekličite in najprej izberite drugo transakcijo, če želite uporabiti to "
+"vrednost."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KMyMoneyFileInfoDlg)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:14
@@ -2871,12 +2844,10 @@ msgid "Delete price..."
 msgstr "Zbriši ceno..."
 
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:394
-#, fuzzy, kde-format
-#| msgctxt "@title:menu"
-#| msgid "Price options"
+#, kde-format
 msgctxt "Menu header"
 msgid "Price options"
-msgstr "Možnosti cene"
+msgstr "Opcije cene"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KMyMoneyPriceDlg)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:14
@@ -3026,25 +2997,19 @@ msgid "Category"
 msgstr "Kategorija"
 
 #: kmymoney/dialogs/kmymoneysplittable.cpp:193
-#, fuzzy, kde-format
-#| msgctxt "@title:menu split context menu"
-#| msgid "Split Options"
+#, kde-format
 msgid "Split Options"
 msgstr "Možnosti delitve"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_editSecurityButton)
 #: kmymoney/dialogs/kmymoneysplittable.cpp:195
 #: kmymoney/views/kinvestmentview.ui:166
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu Edit a split"
-#| msgid "Edit..."
+#, kde-format
 msgid "Edit..."
 msgstr "Uredi..."
 
 #: kmymoney/dialogs/kmymoneysplittable.cpp:196
-#, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
-#| msgid "Duplicate"
+#, kde-format
 msgctxt "To duplicate a split"
 msgid "Duplicate"
 msgstr "Dupliciraj"
@@ -3052,24 +3017,20 @@ msgstr "Dupliciraj"
 #. i18n: ectx: property (text), widget (QPushButton, m_deleteSecurityButton)
 #: kmymoney/dialogs/kmymoneysplittable.cpp:198
 #: kmymoney/views/kinvestmentview.ui:179
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgid "Delete..."
-msgstr "Zbriši"
+msgstr "Zbriši..."
 
 #: kmymoney/dialogs/kmymoneysplittable.cpp:628
-#, fuzzy, kde-format
-#| msgid "calculate"
+#, kde-format
 msgid "will be calculated"
-msgstr "izračunaj"
+msgstr "bo izračunana"
 
 #: kmymoney/dialogs/kmymoneysplittable.cpp:738
-#, fuzzy, kde-format
-#| msgid "Do you really want to delete the selected transaction?"
-#| msgid_plural "Do you really want to delete all %1 selected transactions?"
+#, kde-format
 msgid ""
 "You are about to delete the selected split. Do you really want to continue?"
-msgstr "Ali res želite izbrisati %1 izbrano transakcijo?"
+msgstr "Nameravate izbrisati izbrano delitev? Ali res želite nadaljevati?"
 
 #: kmymoney/dialogs/kmymoneysplittable.cpp:740
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:397 kmymoney/main.cpp:120
@@ -3080,20 +3041,17 @@ msgstr "KMyMoney"
 #: kmymoney/dialogs/kmymoneysplittable.cpp:785
 #, kde-format
 msgid "You need to assign a category to this split before it can be entered."
-msgstr ""
+msgstr "Najprej morate dodeliti kategorijo tega razcepa pred njegovim vnosom."
 
 #: kmymoney/dialogs/kmymoneysplittable.cpp:785
-#, fuzzy, kde-format
-#| msgctxt "Edit split button"
-#| msgid "Edit splits"
+#, kde-format
 msgid "Enter split"
-msgstr "Uredi dele"
+msgstr "Uredi razcep"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:135
-#, fuzzy, kde-format
-#| msgid "Subaccount"
+#, kde-format
 msgid "Is a sub account"
-msgstr "Podračun"
+msgstr "Je podračun"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:143
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:39
@@ -3222,10 +3180,9 @@ msgid "Hidden categories"
 msgstr "Skrite kategorije"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:776
-#, fuzzy, kde-format
-#| msgid "Subaccount of %1"
+#, kde-format
 msgid "Is a sub account of %1"
-msgstr "Podračun od %1"
+msgstr "Je podračun od %1"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:825
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
@@ -3250,9 +3207,7 @@ msgid "Create category"
 msgstr "Ustvari kategorijo"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:961
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Create a new Category"
+#, kde-format
 msgid "Create a new Category"
 msgstr "Ustvari novo kategorijo"
 
@@ -3583,10 +3538,9 @@ msgstr "Kraj:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6)
 #: kmymoney/dialogs/knewbankdlg.ui:169
-#, fuzzy, kde-format
-#| msgid "Account Number"
+#, kde-format
 msgid "Routing Number:"
-msgstr "Številka računa"
+msgstr "Usmerjevalna številka računa:"
 
 #. i18n: ectx: property (text), widget (QToolButton, splitEditorButton)
 #. i18n: ectx: property (text), widget (QPushButton, choosePath)
@@ -3722,23 +3676,7 @@ msgstr "Izberi XML, če nisi prepričan."
 
 #. i18n: ectx: property (html), widget (QTextBrowser, textBrowser)
 #: kmymoney/dialogs/ksaveasquestion.ui:34
-#, fuzzy, kde-format
-#| msgid ""
-#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#| "REC-html40/strict.dtd\">\n"
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p align=\"justify\" style=\" margin: 0; -qt-block-indent:0; text-"
-#| "indent:0px;\">KMyMoney supports multiple storage types. The availability "
-#| "of storage types depends on the presence of plugins and their activation "
-#| "in the application settings.</p>\n"
-#| "<p align=\"justify\" style=\" margin: 0; -qt-block-indent:0; text-"
-#| "indent:0px;\"><br />If you are uncertain what to choose here, then <span "
-#| "style=\" font-weight:600;\">XML</span> is probably your best choice.</p></"
-#| "body></html>"
+#, kde-format
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
 "REC-html40/strict.dtd\">\n"
@@ -3788,6 +3726,8 @@ msgstr "Izberi transakcijo"
 msgid ""
 "Select a transaction and press the OK button or use Cancel to select none."
 msgstr ""
+"Izberite transakcijo in pritisnite gumb V redu ali uporabite gumb Prekliči, "
+"če niste izbrali nobene."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KSortOptionDlg)
 #. i18n: ectx: property (text), widget (QListWidget, m_availableList)
@@ -3842,9 +3782,7 @@ msgid "Leave %1 unassigned."
 msgstr "Zapusti %1 nedodeljeno."
 
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:102
-#, fuzzy, kde-format
-#| msgctxt "Clear all column assignments"
-#| msgid "Clear all"
+#, kde-format
 msgid "Clear &All"
 msgstr "Očisti vse"
 
@@ -3856,16 +3794,14 @@ msgid "Clear all splits"
 msgstr "Očisti vse delitve"
 
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:104
-#, fuzzy, kde-format
-#| msgid "Use this to delete all splits of this transaction."
+#, kde-format
 msgid "Use this to clear all splits of this transaction"
 msgstr "Uporabite to, da izbrišete vse delitve te transakcije."
 
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:108
-#, fuzzy, kde-format
-#| msgid "Clear Fee"
+#, kde-format
 msgid "Clear &Zero"
-msgstr "Počisti pristojbino"
+msgstr "Počisti ničlo"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:109
@@ -3889,19 +3825,13 @@ msgid "Merges splits with the same category to one split"
 msgstr "Združi delitve z isto kategorijo v eno samo delitev"
 
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:115
-#, fuzzy, kde-format
-#| msgid ""
-#| "In case you have multiple split entries to the same category and you like "
-#| "to keep them as a single split, press this button. The amount for "
-#| "identical categories will be added and stored in a single split for that "
-#| "category."
+#, kde-format
 msgid ""
 "In case you have multiple split entries to the same category and you like to "
 "keep them as a single split"
 msgstr ""
 "Če imate več razcepljenih vnosov v isto kategorijo in želite da jih shranite "
-"kot en del, pritisnite ta gumb. Znesek za enake kategorije bodo dodane in "
-"shranjene v enem razcepu za to kategorijo."
+"kot en del"
 
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:306
 #: kmymoney/dialogs/splitadjustdialog.cpp:53
@@ -3938,12 +3868,12 @@ msgid "&Leave %1 unassigned."
 msgstr "Pusti %1 nedodeljen."
 
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:395
-#, fuzzy, kde-format
-#| msgid "Use this to delete all splits of this transaction."
+#, kde-format
 msgid ""
 "You are about to delete all splits of this transaction. Do you really want "
 "to continue?"
-msgstr "Uporabite to, da izbrišete vse delitve te transakcije."
+msgstr ""
+"Kmalu boste izbrisali vse razcepe te transakcije. Ali res želite nadaljevati?"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KSplitTransactionDlg)
 #: kmymoney/dialogs/ksplittransactiondlg.ui:14
@@ -3957,19 +3887,17 @@ msgstr "Razdeli transakcijo"
 #: kmymoney/dialogs/ksplittransactiondlg.ui:139
 #, kde-format
 msgid "<b>11,00<b>"
-msgstr ""
+msgstr "<b>11,00<b>"
 
 #. i18n: ectx: property (text), widget (QLabel, transactionAmount)
 #: kmymoney/dialogs/ksplittransactiondlg.ui:164
 #, kde-format
 msgid "<b>111,00<b>"
-msgstr ""
+msgstr "<b>111,00<b>"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_2)
 #: kmymoney/dialogs/ksplittransactiondlg.ui:183
-#, fuzzy, kde-format
-#| msgctxt "Split editor summary"
-#| msgid "Unassigned"
+#, kde-format
 msgid "Unassigned"
 msgstr "Nedodeljeno"
 
@@ -3985,48 +3913,39 @@ msgstr "Vsota delitev"
 #: kmymoney/dialogs/ksplittransactiondlg.ui:227
 #, kde-format
 msgid "100,00"
-msgstr ""
+msgstr "100,00"
 
 #: kmymoney/dialogs/ktagreassigndlg.cpp:64
-#, fuzzy, kde-format
-#| msgid ""
-#| "This dialog does not allow new payees to be created. Please pick a payee "
-#| "from the list."
+#, kde-format
 msgid ""
 "This dialog does not allow new tags to be created. Please pick a tag from "
 "the list."
 msgstr ""
-"Ta dialog okno ne dovoljuje ustvarjanja novih prejemnikov plačil. Izberite "
-"prejemnika plačila iz seznama."
+"Ta pogovorno okno ne dovoljuje ustvarjanja novih oznak. Izberite oznako iz "
+"seznama."
 
 #: kmymoney/dialogs/ktagreassigndlg.cpp:64
-#, fuzzy, kde-format
-#| msgid "Payee creation"
+#, kde-format
 msgid "Tag creation"
-msgstr "Ustvarjanje prejemnika plačil"
+msgstr "Ustvarjanje oznake"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTagReassignDlg)
 #: kmymoney/dialogs/ktagreassigndlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Reassign payees"
+#, kde-format
 msgid "Reassign tags"
-msgstr "Ponovno dodeli prejemnike plačil"
+msgstr "Ponovno dodeli oznake"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/dialogs/ktagreassigndlg.ui:32
-#, fuzzy, kde-format
-#| msgid ""
-#| "The transactions associated with the selected payees need to be re-"
-#| "assigned to a different payee before the selected payees can be deleted. "
-#| "Please select a payee from the list below."
+#, kde-format
 msgid ""
 "The transactions associated with the selected tags need to be re-assigned to "
 "a different tag before the selected tags can be deleted. Please select a tag "
 "from the list below."
 msgstr ""
-"Transakcije, povezane z izbranimi prejemniki plačil, je treba ponovno "
-"dodeliti drugemu prejemniku plačila, preden lahko izbrane prejemnike plačila "
-"izbrišemo. Prosim izberite prejemnika plačil iz spodnjega seznama."
+"Transakcije, povezane z izbranimi prejemniki oznakami, je treba ponovno "
+"dodeliti drugi oznaki, preden lahko izbrane oznako izbrišemo. Prosim "
+"izberite oznako iz spodnjega seznama."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/dialogs/ktagreassigndlg.ui:61
@@ -4128,8 +4047,7 @@ msgstr "Uporabi sistemsko pisavo"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_individualFontsFrame)
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:30
-#, fuzzy, kde-format
-#| msgid "Individual icon settings"
+#, kde-format
 msgid "Individual font settings"
 msgstr "Individualne nastavitve ikon"
 
@@ -4177,11 +4095,9 @@ msgstr "Možnosti ob zagonu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowSplash)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:36
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "Icons & splash screen"
+#, kde-format
 msgid "Show splash screen"
-msgstr "Ikone in uvodni zaslon"
+msgstr "Prikaži uvodni zaslon"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:46
@@ -4380,10 +4296,9 @@ msgstr "Zavihki"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_showTitleBar)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:370
-#, fuzzy, kde-format
-#| msgid "Show institutions page"
+#, kde-format
 msgid "Show title bar on each page"
-msgstr "Prikaži stran institucij"
+msgstr "Prikaži naslovno letvico na vsaki strani"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_syncLedgerInvestment)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:377
@@ -4768,9 +4683,7 @@ msgstr ""
 "odstraniti?"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:314
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Delete quote source"
+#, kde-format
 msgid "Delete quote source"
 msgstr "Briši vir kotacije"
 
@@ -5074,8 +4987,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:83
-#, fuzzy, kde-format
-#| msgid "Show group headers between transactions"
+#, kde-format
 msgid "Show group header between transactions"
 msgstr "Prikazuj naslov skupine med transakcijami"
 
@@ -5485,16 +5397,14 @@ msgid "Dialog"
 msgstr "Dialog"
 
 #: kmymoney/dialogs/stdtransactioneditor.cpp:116
-#, fuzzy, kde-format
-#| msgid "New payee/receiver"
+#, kde-format
 msgid "Payer/Receiver"
-msgstr "Novi plačnik/prejemnik"
+msgstr "Plačnik/Prejemnik"
 
 #: kmymoney/dialogs/stdtransactioneditor.cpp:126
-#, fuzzy, kde-format
-#| msgid "Category creation"
+#, kde-format
 msgid "Category/Account"
-msgstr "Ustvarjanje kategorije"
+msgstr "Kategorija/Račun"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #. i18n: ectx: property (text), widget (QLabel, numberLabel)
@@ -5540,10 +5450,9 @@ msgstr "Značke"
 #: kmymoney/dialogs/stdtransactioneditor.cpp:948
 #: kmymoney/dialogs/stdtransactioneditor.cpp:953
 #: kmymoney/widgets/stdtransaction.cpp:124
-#, fuzzy, kde-format
-#| msgid "Transfer from %1"
+#, kde-format
 msgid "Transfer from"
-msgstr "Prenos od %1"
+msgstr "Prenos od"
 
 #: kmymoney/dialogs/stdtransactioneditor.cpp:426
 #: kmymoney/dialogs/stdtransactioneditor.cpp:466
@@ -5552,16 +5461,14 @@ msgstr "Prenos od %1"
 #: kmymoney/dialogs/stdtransactioneditor.cpp:950
 #: kmymoney/dialogs/stdtransactioneditor.cpp:957
 #: kmymoney/widgets/stdtransaction.cpp:124
-#, fuzzy, kde-format
-#| msgid "Transfer to %1"
+#, kde-format
 msgid "Transfer to"
-msgstr "Prenos na %1"
+msgstr "Prenos na"
 
 #: kmymoney/dialogs/stdtransactioneditor.cpp:742
-#, fuzzy, kde-format
-#| msgid "Select Transaction"
+#, kde-format
 msgid "Select autofill transaction"
-msgstr "Izberi transakcijo"
+msgstr "Izberi samodejno vneseno transakcijo"
 
 #: kmymoney/dialogs/stdtransactioneditor.cpp:1600
 #, kde-format
@@ -5569,12 +5476,13 @@ msgid ""
 "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in the "
 "other split?"
 msgstr ""
+"Želite zamenjati opombo <p><i>%1</i></p>z opombo<p><i>%2</i></p>v preostalem "
+"razcepu?"
 
 #: kmymoney/dialogs/stdtransactioneditor.cpp:1600
-#, fuzzy, kde-format
-#| msgid "Copy report"
+#, kde-format
 msgid "Copy memo"
-msgstr "Kopiraj poročilo"
+msgstr "Kopiraj opombo"
 
 #: kmymoney/dialogs/transactioneditor.cpp:442
 #, kde-format
@@ -5583,6 +5491,9 @@ msgid ""
 "different currency (%1). Using this account to modify the transaction may "
 "result in rounding errors. Do you want to continue?"
 msgstr ""
+"Ta transakcija ima več kot dva razcepa in prvotno temelji na drugi valuti "
+"(%1). Uporaba tega računa za spremembo transakcije lahko povzroči "
+"zaokrožitvene napake. Ali želite nadaljevati?"
 
 #: kmymoney/dialogs/transactioneditor.cpp:444
 #, kde-format
@@ -5591,12 +5502,14 @@ msgid ""
 "originally based on a different currency (%1). Using this account to modify "
 "the transactions may result in rounding errors. Do you want to continue?"
 msgstr ""
+"Vsaj ena od izbranih transakcij ima več kot dva razcepa in prvotno temelji "
+"na drugi valuti (%1). Uporaba tega računa za spremembo transakcij lahko "
+"povzroči zaokrožitvene napake. Ali želite nadaljevati?"
 
 #: kmymoney/dialogs/transactioneditor.cpp:496
-#, fuzzy, kde-format
-#| msgid "Cancel processing of schedule entry."
+#, kde-format
 msgid "<center>Processing schedule for %1.</center>"
-msgstr "Prekliči obdelavo vnosa v načrt."
+msgstr "<center>Obdelava časovnega načrta za %1.</center>"
 
 #: kmymoney/dialogs/transactioneditor.cpp:499
 #, kde-format
@@ -5604,54 +5517,44 @@ msgid ""
 "Check number <b>%1</b> has already been used in account <b>%2</b>.<center>Do "
 "you want to replace it with the next available number?</center>"
 msgstr ""
+"Številka čeka <b>%1</b> je že bila uporabljena v računu <b>%2</b>."
+"<center>Ali jo želite zamenjati za naslednjo razpoložljivo številko?</center>"
 
 #: kmymoney/dialogs/transactioneditor.cpp:500
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Duplicate tag name"
+#, kde-format
 msgid "Duplicate number"
-msgstr "Podvojeno ime oznake"
+msgstr "Podvojena številka"
 
 #: kmymoney/dialogs/transactioneditor.cpp:633
-#, fuzzy, kde-format
-#| msgid "Loading transactions..."
+#, kde-format
 msgid "Storing transactions"
-msgstr "Nalaganje transakcij..."
+msgstr "Shranjevanje transakcij"
 
 #: kmymoney/dialogs/transactioneditor.cpp:687
-#, fuzzy, kde-format
-#| msgid "Enter"
+#, kde-format
 msgid "&Enter"
-msgstr "Vnesite"
+msgstr "Vnos"
 
 #: kmymoney/dialogs/transactioneditor.cpp:690
-#, fuzzy, kde-format
-#| msgid "Record this transaction into the register"
+#, kde-format
 msgid "Use this to enter the transaction into the ledger."
-msgstr "Zabeleži to transakcijo v register"
+msgstr "Uporabi to za vnos transakcije v glavno knjigo."
 
 #: kmymoney/dialogs/transactioneditor.cpp:691
-#, fuzzy, kde-format
-#| msgid "Schedule"
+#, kde-format
 msgid "&Schedule"
 msgstr "Časovni načrt"
 
 #: kmymoney/dialogs/transactioneditor.cpp:693
-#, fuzzy, kde-format
-#| msgid "Accepts the entered data and stores it"
+#, kde-format
 msgid "Accepts the entered data and stores it as schedule"
-msgstr "Sprejme vneseni datum in ga shrani"
+msgstr "Sprejme vnesene podatke in ga shrani v časovni načrt"
 
 #: kmymoney/dialogs/transactioneditor.cpp:694
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip Unmatch button"
-#| msgid ""
-#| "Detach the hidden (matched) transaction from the one shown and enter it "
-#| "into the ledger again."
+#, kde-format
 msgid "Use this to schedule the transaction for later entry into the ledger."
 msgstr ""
-"Odklopite skrito (ujemajočo) transakcijo od prikazane in jo ponovno vnesite "
-"v glavno knjigo."
+"Uporabite to za časovni načrt transakcije za kasnejši vnos v glavno knjigo."
 
 #: kmymoney/dialogs/transactioneditor.cpp:696
 #, kde-format
@@ -5659,47 +5562,42 @@ msgid ""
 "The transaction you are about to enter has a post date in the future.<br/"
 "><br/>Do you want to enter it in the ledger or add it to the schedules?"
 msgstr ""
+"Transakcija, ki jo nameravate vnesti, ima datum objave v bodočnosti.<br/><br/"
+">Ali jo želite vnesti v glavno knjigo ali dodati v časovni načrt?"
 
 #: kmymoney/dialogs/transactioneditor.cpp:696
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "Dialog caption for 'Enter or schedule' dialog"
 msgid "Enter or schedule?"
-msgstr "Vnesi časovni načrt"
+msgstr "Vnesi v knjigo ali v časovni načrt?"
 
 #: kmymoney/dialogs/transactioneditor.cpp:780
-#, fuzzy, kde-format
-#| msgid "The balance of %1 is below the minimum balance %2 today."
+#, kde-format
 msgid ""
 "The balance of account <b>%1</b> dropped below the warning balance of %2."
-msgstr "Saldo %1 je danes pod najnižjim saldom %2."
+msgstr "Saldo računa <b>%1</b> je padel pod opozorilno vrednost salda %2."
 
 #: kmymoney/dialogs/transactioneditor.cpp:786
-#, fuzzy, kde-format
-#| msgid "The balance of %1 is below the minimum balance %2 today."
+#, kde-format
 msgid ""
 "The balance of account <b>%1</b> dropped below the minimum balance of %2."
-msgstr "Saldo %1 je danes pod najnižjim saldom %2."
+msgstr "Saldo računa <b>%1</b>%1 je padel pod najnižji saldo %2."
 
 #: kmymoney/dialogs/transactioneditor.cpp:792
-#, fuzzy, kde-format
-#| msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
-#| msgid_plural ""
-#| "The balance of %2 will drop below the minimum balance %3 in %1 days."
+#, kde-format
 msgid ""
 "The balance of account <b>%1</b> dropped below the maximum credit warning "
 "limit of %2."
-msgstr "Stanje %2 bo padlo pod najnižje stanje %3 v %1 dnevu."
+msgstr ""
+"Stanje računa <b>%1</b> je padlo pod maksimalno opozorilno vrednost kredita "
+"%2."
 
 #: kmymoney/dialogs/transactioneditor.cpp:798
-#, fuzzy, kde-format
-#| msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
-#| msgid_plural ""
-#| "The balance of %2 will drop below the minimum balance %3 in %1 days."
+#, kde-format
 msgid ""
 "The balance of account <b>%1</b> dropped below the maximum credit limit of "
 "%2."
-msgstr "Stanje %2 bo padlo pod najnižje stanje %3 v %1 dnevu."
+msgstr "Stanje računa <b>%1</b> je padlo pod maksimalno omejitev kredita %2."
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_idGroup)
 #: kmymoney/kcreditswindow.cpp:30 kmymoney/plugins/xml/xmlstoragesettings.ui:32
@@ -5747,48 +5645,44 @@ msgstr ""
 #: kmymoney/kcreditswindow.cpp:46
 #, kde-format
 msgid "Thomas Baumgart"
-msgstr ""
+msgstr "Thomas Baumgart"
 
 #: kmymoney/kcreditswindow.cpp:46
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "Core engine, Release Manager, Project admin"
+#, kde-format
 msgid "Core engine, Release Manager, Project admin"
 msgstr "Glavni del programa, Direktor izdaj, Skrbnik projekta"
 
 #: kmymoney/kcreditswindow.cpp:47
 #, kde-format
 msgid "Łukasz Wojniłowicz"
-msgstr ""
+msgstr "Łukasz Wojniłowicz"
 
 #: kmymoney/kcreditswindow.cpp:47 kmymoney/kcreditswindow.cpp:48
 #: kmymoney/kcreditswindow.cpp:49 kmymoney/kcreditswindow.cpp:50
 #: kmymoney/kcreditswindow.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "Developer"
+#, kde-format
 msgid "Developer"
 msgstr "Razvijalec"
 
 #: kmymoney/kcreditswindow.cpp:48
 #, kde-format
 msgid "Ralf Habacker"
-msgstr ""
+msgstr "Ralf Habacker"
 
 #: kmymoney/kcreditswindow.cpp:49
 #, kde-format
 msgid "Cristian Oneț"
-msgstr ""
+msgstr "Cristian Oneț"
 
 #: kmymoney/kcreditswindow.cpp:50
 #, kde-format
 msgid "Christian Dávid"
-msgstr ""
+msgstr "Christian Dávid"
 
 #: kmymoney/kcreditswindow.cpp:52
 #, kde-format
 msgid "Michael Edwardes"
-msgstr ""
+msgstr "Michael Edwardes"
 
 #: kmymoney/kcreditswindow.cpp:52 kmymoney/kcreditswindow.cpp:53
 #: kmymoney/kcreditswindow.cpp:54 kmymoney/kcreditswindow.cpp:55
@@ -5799,171 +5693,142 @@ msgid "Inactive member. "
 msgstr "Neaktivni član. "
 
 #: kmymoney/kcreditswindow.cpp:52
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "Initial idea, much initial source code, Project admin"
+#, kde-format
 msgid "Initial idea, much initial source code, Project admin"
 msgstr "Začetna ideja, veliko začetne izvorne kode, Skrbnik projekta"
 
 #: kmymoney/kcreditswindow.cpp:53
 #, kde-format
 msgid "Alvaro Soliverez"
-msgstr ""
+msgstr "Alvaro Soliverez"
 
 #: kmymoney/kcreditswindow.cpp:53
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "Forecast, Reports"
+#, kde-format
 msgid "Forecast, Reports"
 msgstr "Napovedovanje, Poročila"
 
 #: kmymoney/kcreditswindow.cpp:54
 #, kde-format
 msgid "Ace Jones"
-msgstr ""
+msgstr "Ace Jones"
 
 #: kmymoney/kcreditswindow.cpp:54
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "Reporting logic, OFX Import"
+#, kde-format
 msgid "Reporting logic, OFX Import"
 msgstr "Logika poročil, Uvoz OFX"
 
 #: kmymoney/kcreditswindow.cpp:55
 #, kde-format
 msgid "Tony Bloomfield"
-msgstr ""
+msgstr "Tony Bloomfield"
 
 #: kmymoney/kcreditswindow.cpp:55
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "Database backend, maintainer stable branch"
+#, kde-format
 msgid "Database backend, maintainer stable branch"
-msgstr "Ozadje podatkovne baze, vzdrževalec stabilne verzije"
+msgstr "Zaledje podatkovne baze, vzdrževalec stabilne verzije"
 
 #: kmymoney/kcreditswindow.cpp:56
 #, kde-format
 msgid "Felix Rodriguez"
-msgstr ""
+msgstr "Felix Rodriguez"
 
 #: kmymoney/kcreditswindow.cpp:56
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "Project Admin"
+#, kde-format
 msgid "Project Admin"
 msgstr "Skrbnik projekta"
 
 #: kmymoney/kcreditswindow.cpp:57
 #, kde-format
 msgid "John C"
-msgstr ""
+msgstr "John C"
 
 #: kmymoney/kcreditswindow.cpp:58
 #, kde-format
 msgid "Fernando Vilas"
-msgstr ""
+msgstr "Fernando Vilas"
 
 #: kmymoney/kcreditswindow.cpp:58
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "Database backend"
+#, kde-format
 msgid "Database backend"
-msgstr "Ozadje podatkovne baze"
+msgstr "Zaledje podatkovne baze"
 
 #: kmymoney/kcreditswindow.cpp:60
 #, kde-format
 msgid "Jack Ostroff"
-msgstr ""
+msgstr "Jack Ostroff"
 
 #: kmymoney/kcreditswindow.cpp:60
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "Documentation and user support"
+#, kde-format
 msgid "Documentation and user support"
 msgstr "Dokumentacija in podpora uporabnikom"
 
 #: kmymoney/kcreditswindow.cpp:61
 #, kde-format
 msgid "Kevin Tambascio"
-msgstr ""
+msgstr "Kevin Tambascio"
 
 #: kmymoney/kcreditswindow.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "Initial investment support"
+#, kde-format
 msgid "Initial investment support"
 msgstr "Začetna podpora naložbe"
 
 #: kmymoney/kcreditswindow.cpp:62
 #, kde-format
 msgid "Javier Campos Morales"
-msgstr ""
+msgstr "Javier Campos Morales"
 
 #: kmymoney/kcreditswindow.cpp:62
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "Developer & Artist"
+#, kde-format
 msgid "Developer & Artist"
 msgstr "Razvijalec in umetnik"
 
 #: kmymoney/kcreditswindow.cpp:63
 #, kde-format
 msgid "Robert Wadley"
-msgstr ""
+msgstr "Robert Wadley"
 
 #: kmymoney/kcreditswindow.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "Icons & splash screen"
+#, kde-format
 msgid "Icons & splash screen"
 msgstr "Ikone in uvodni zaslon"
 
 #: kmymoney/kcreditswindow.cpp:64
-#, fuzzy, kde-format
-#| msgid "Current month"
+#, kde-format
 msgid "Laurent Montel"
-msgstr "Trenutni mesec"
+msgstr "Laurent Montel"
 
 #: kmymoney/kcreditswindow.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "Patches and port to kde4"
+#, kde-format
 msgid "Patches and port to kde4"
 msgstr "Popravki in prenos na kde4"
 
 #: kmymoney/kcreditswindow.cpp:65
 #, kde-format
 msgid "Wolfgang Rohdewald"
-msgstr ""
+msgstr "Wolfgang Rohdewald"
 
 #: kmymoney/kcreditswindow.cpp:65
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "Patches"
+#, kde-format
 msgid "Patches"
 msgstr "Popravki"
 
 #: kmymoney/kcreditswindow.cpp:66
 #, kde-format
 msgid "Marko Käning"
-msgstr ""
+msgstr "Marko Käning"
 
 #: kmymoney/kcreditswindow.cpp:66
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "Patches, packaging and KF5-CI for OS X"
+#, kde-format
 msgid "Patches, packaging and KF5-CI for OS X"
-msgstr "Popravki, pakiranje in KF5-Cl za OS x"
+msgstr "Popravki, pakiranje in KF5-Cl za OS X"
 
 #: kmymoney/kcreditswindow.cpp:67
 #, kde-format
 msgid "Allan Anderson ✝"
-msgstr ""
+msgstr "Allan Anderson ✝"
 
 #: kmymoney/kcreditswindow.cpp:67
-#, fuzzy, kde-format
-#| msgctxt "Roles in project"
-#| msgid "CSV import/export"
+#, kde-format
 msgid "CSV import/export"
 msgstr "Uvoz/izvoz CSV"
 
@@ -6069,10 +5934,9 @@ msgstr "Skrij usklajene transakcije"
 
 #. i18n: ectx: label, entry (ShowReconciledBalances), group (List Options)
 #: kmymoney/kmymoney.cpp:1399 kmymoney/settings/kmymoney.kcfg:252
-#, fuzzy, kde-format
-#| msgid "Do not show reconciled transactions"
+#, kde-format
 msgid "Show reconciled balances"
-msgstr "Ne prikazuj usklajenih transakcij"
+msgstr "Prikazuj usklajene salde"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
 #: kmymoney/kmymoney.cpp:1400 kmymoney/settings/kmymoney.kcfg:228
@@ -6123,9 +5987,7 @@ msgid "Finish"
 msgstr "Končaj"
 
 #: kmymoney/kmymoney.cpp:1415
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Postpone the current reconciliation"
+#, kde-format
 msgid "Postpone reconciliation"
 msgstr "Odloži trenutno usklajevanje"
 
@@ -6239,11 +6101,10 @@ msgstr "Omogoči vsa sporočila"
 #: kmymoney/kmymoney.cpp:1449
 #, kde-format
 msgid "&Show tip of the day"
-msgstr ""
+msgstr "Prikaži namig dneva"
 
 #: kmymoney/kmymoney.cpp:1453
-#, fuzzy, kde-format
-#| msgid "New"
+#, kde-format
 msgctxt "New transaction button"
 msgid "New"
 msgstr "Nov"
@@ -6292,9 +6153,7 @@ msgstr "Dodaj obratno"
 
 #: kmymoney/kmymoney.cpp:1461 kmymoney/views/kgloballedgerview.cpp:291
 #: kmymoney/views/kgloballedgerview.cpp:1825
-#, fuzzy, kde-format
-#| msgctxt "Match transactions"
-#| msgid "Match"
+#, kde-format
 msgctxt "Button text for match transaction"
 msgid "Match"
 msgstr "Ujemanje"
@@ -6392,10 +6251,9 @@ msgid "Manual price update..."
 msgstr "Ročno posodabljanje cene..."
 
 #: kmymoney/kmymoney.cpp:1481
-#, fuzzy, kde-format
-#| msgid "New Scheduled transaction..."
+#, kde-format
 msgid "New scheduled transaction"
-msgstr "Nova časovno načrtovana transakcija..."
+msgstr "Nova časovno načrtovana transakcija"
 
 #: kmymoney/kmymoney.cpp:1482
 #, kde-format
@@ -6423,8 +6281,7 @@ msgid "Skip next transaction..."
 msgstr "Preskoči naslednjo transakcijo..."
 
 #: kmymoney/kmymoney.cpp:1488
-#, fuzzy, kde-format
-#| msgid "New Payee"
+#, kde-format
 msgid "New payee"
 msgstr "Nov prejemnik plačil"
 
@@ -6474,16 +6331,14 @@ msgid "Debug Timers"
 msgstr "Razhrošči časomerilnike"
 
 #: kmymoney/kmymoney.cpp:1503
-#, fuzzy, kde-format
-#| msgid "New credit transfer"
+#, kde-format
 msgid "Remove credit transfer"
-msgstr "Nov prenos kredita"
+msgstr "Odstrani prenos kredita"
 
 #: kmymoney/kmymoney.cpp:1504
-#, fuzzy, kde-format
-#| msgid "New credit transfer"
+#, kde-format
 msgid "Edit credit transfer"
-msgstr "Nov prenos kredita"
+msgstr "Uredi prenos kredita"
 
 #: kmymoney/kmymoney.cpp:1505
 #, kde-format
@@ -6665,11 +6520,12 @@ msgstr "Ni mogoče dodati računa: %1"
 #, kde-format
 msgid "<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>"
 msgstr ""
+"<p><b>%1</b> ni mogoče prenesti na institucijo <b>%2</b>. Razlog: %3</p>"
 
 #: kmymoney/kmymoney.cpp:2693
 #, kde-format
 msgid "<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>"
-msgstr ""
+msgstr "<p><b>%1</b> ni mogoče prenesti na <b>%2</b>. Razlog: %3</p>"
 
 #: kmymoney/kmymoney.cpp:2782
 #, kde-format
@@ -6728,11 +6584,7 @@ msgid "Importing a statement via Web Connect"
 msgstr "Uvažanje izkaza prek Web Connecta"
 
 #: kmymoney/kmymoney.cpp:3183
-#, fuzzy, kde-format
-#| msgctxt "%1 file location, %2 plugin name"
-#| msgid ""
-#| "Unable to import %1 using %2 plugin. The plugin returned the following "
-#| "error: %3"
+#, kde-format
 msgid ""
 "Unable to import %1 using %2 plugin.  The plugin returned the following "
 "error: %3"
@@ -7110,8 +6962,7 @@ msgid "Frozen"
 msgstr "Zamrznjeno"
 
 #: kmymoney/kmymoneyutils.cpp:408 kmymoney/widgets/transaction.cpp:711
-#, fuzzy, kde-format
-#| msgid "Unknown"
+#, kde-format
 msgctxt "Unknown reconciliation state"
 msgid "Unknown"
 msgstr "Neznano"
@@ -7144,7 +6995,7 @@ msgstr "F"
 #, kde-format
 msgctxt "Flag for unknown reconciliation state"
 msgid "?"
-msgstr ""
+msgstr "?"
 
 #: kmymoney/kmymoneyutils.cpp:462
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:115
@@ -7204,8 +7055,7 @@ msgid "New Payee"
 msgstr "Nov prejemnik plačil"
 
 #: kmymoney/kmymoneyutils.cpp:666
-#, fuzzy, kde-format
-#| msgid "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
+#, kde-format
 msgid "<qt>Do you want to add <b>%1</b> as payer/receiver?</qt>"
 msgstr "<qt>Ali želite dodati <b>%1</b> kot plačnika/prejemnika?</qt>"
 
@@ -7261,10 +7111,9 @@ msgid "Statement import statistics"
 msgstr "Statistika uvoza izkazov"
 
 #: kmymoney/kstartuplogo.cpp:38
-#, fuzzy, kde-format
-#| msgid "Loading file..."
+#, kde-format
 msgid "Loading %1..."
-msgstr "Nalagam datoteko..."
+msgstr "Nalagam %1..."
 
 #: kmymoney/main.cpp:140
 #, kde-format
@@ -7346,33 +7195,25 @@ msgid "Equity accounts"
 msgstr "Računi lastniškega kapitala"
 
 #: kmymoney/models/accountsmodel.cpp:766
-#, fuzzy, kde-format
-#| msgid "Tax"
+#, kde-format
 msgctxt "Column heading for category in tax report"
 msgid "Tax"
 msgstr "Davek"
 
 #: kmymoney/models/accountsmodel.cpp:768
-#, fuzzy, kde-format
-#| msgctxt "@title:column Shows VAT percentage rate, if configured"
-#| msgid "VAT"
+#, kde-format
 msgctxt "Column heading for VAT category"
 msgid "VAT"
 msgstr "DDV"
 
 #: kmymoney/models/accountsmodel.cpp:770
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@title:column Indicates whether a Cost Center assignment is necessary "
-#| "when entering a transaction"
-#| msgid "CC"
+#, kde-format
 msgctxt "Column heading for Cost Center"
 msgid "CC"
 msgstr "SM"
 
 #: kmymoney/models/accountsmodel.cpp:772
-#, fuzzy, kde-format
-#| msgid "Get Balance"
+#, kde-format
 msgid "Total Balance"
 msgstr "Pridobi saldo"
 
@@ -7382,17 +7223,12 @@ msgid "Posted Value"
 msgstr "Objavljena vrednost"
 
 #: kmymoney/models/accountsmodel.cpp:776
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@title:column Shows Total Value, which includes a sum of all subaccounts "
-#| "(in base currency)"
-#| msgid "Total Value"
+#, kde-format
 msgid "Total Value"
 msgstr "Skupna vrednost"
 
 #: kmymoney/models/accountsmodel.cpp:780
-#, fuzzy, kde-format
-#| msgid "Sort order"
+#, kde-format
 msgctxt "IBAN, SWIFT, etc."
 msgid "Sort Code"
 msgstr "Razvrstitev po vrsti"
@@ -7452,22 +7288,16 @@ msgstr "Prikazani stolpci"
 #: kmymoney/models/ledgermodel.cpp:98
 #: kmymoney/mymoney/storage/journalmodel.cpp:46
 #: kmymoney/widgets/register.cpp:148
-#, fuzzy, kde-format
-#| msgctxt "@title:column Cheque Number"
-#| msgid "No."
+#, kde-format
 msgctxt "Cheque Number"
 msgid "No."
 msgstr "Št."
 
 #: kmymoney/models/ledgermodel.cpp:104
 #: kmymoney/mymoney/storage/journalmodel.cpp:50
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@title:column Indicates whether a Cost Center assignment is necessary "
-#| "when entering a transaction"
-#| msgid "CC"
+#, kde-format
 msgid "CC"
-msgstr "SM"
+msgstr "SK"
 
 #. i18n: ectx: attribute (title), widget (QWidget, detail)
 #. i18n: ectx: property (text), widget (QLabel, textLabel6)
@@ -7482,11 +7312,9 @@ msgstr "Podrobnost"
 #: kmymoney/models/ledgermodel.cpp:108 kmymoney/models/splitmodel.cpp:120
 #: kmymoney/mymoney/storage/journalmodel.cpp:52
 #: kmymoney/widgets/register.cpp:153
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation flag C"
-#| msgid "C"
+#, kde-format
 msgid "C"
-msgstr "C"
+msgstr "K"
 
 #: kmymoney/models/ledgermodel.cpp:110
 #: kmymoney/mymoney/storage/journalmodel.cpp:53
@@ -7618,15 +7446,12 @@ msgid "Fraction"
 msgstr "Del"
 
 #: kmymoney/models/splitmodel.cpp:110
-#, fuzzy, kde-format
-#| msgid "Cost center"
+#, kde-format
 msgid "Cost Center"
 msgstr "Stroškovno mesto"
 
 #: kmymoney/models/splitmodel.cpp:114
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "No"
+#, kde-format
 msgid "No"
 msgstr "Ne"
 
@@ -9579,11 +9404,10 @@ msgid "Finished"
 msgstr "Končano"
 
 #: kmymoney/plugins/checkprinting/checkprinting.cpp:60
-#, fuzzy, kde-format
-#| msgid "Checking"
+#, kde-format
 msgctxt "It's about printing bank checks"
 msgid "Check printing"
-msgstr "Transakcijski"
+msgstr "Preverjanje tiskanja"
 
 #: kmymoney/plugins/checkprinting/checkprinting.cpp:79
 #, kde-format
@@ -9777,17 +9601,13 @@ msgid "Billion"
 msgstr "Bilijon"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:35
-#, fuzzy, kde-format
-#| msgctxt "@item %1 = hundred value digit"
-#| msgid "%1 Hundred"
+#, kde-format
 msgctxt "@item This comes after the hundred value digit"
 msgid " Hundred"
-msgstr "%1 Sto"
+msgstr "Sto"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:38
-#, fuzzy, kde-format
-#| msgctxt "@item Appears last as separator"
-#| msgid " and "
+#, kde-format
 msgctxt ""
 "@item This comes after the hunder text if the tens unit is different from 0"
 msgid " and "
@@ -9815,9 +9635,7 @@ msgid "%1 and %2/%3"
 msgstr "%1 in %2/%3"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:109
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "No"
+#, kde-format
 msgctxt "@label The word to be printed for no fractional part as in No/00"
 msgid "No"
 msgstr "Ne"
@@ -9844,10 +9662,9 @@ msgstr "Nastavitve izvoza icalendarja"
 
 #. i18n: ectx: property (text), widget (QLabel, check_template_file)
 #: kmymoney/plugins/checkprinting/pluginsettingsdecl.ui:36
-#, fuzzy, kde-format
-#| msgid "Check date"
+#, kde-format
 msgid "Check template file"
-msgstr "Preberi datum"
+msgstr "Preveri datoteko predloge"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:56
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:64
@@ -10005,9 +9822,7 @@ msgid "Tab (\\t)"
 msgstr "Tabulator (\\t)"
 
 #: kmymoney/plugins/csv/export/csvexporter.cpp:42
-#, fuzzy, kde-format
-#| msgctxt "CSV Exporter dialog title"
-#| msgid "CSV Exporter"
+#, kde-format
 msgid "CSV exporter"
 msgstr "Izvoznik CSV"
 
@@ -10052,16 +9867,12 @@ msgid "Account Type:"
 msgstr "Vrsta računa:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:98
-#, fuzzy, kde-format
-#| msgctxt "@title:column header in CSV export"
-#| msgid "Action/Type"
+#, kde-format
 msgid "Action/Type"
 msgstr "Dejavnost/Tip"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "@title:column header in CSV export"
-#| msgid "Account/Cat"
+#, kde-format
 msgid "Account/Cat"
 msgstr "Račun/Kategorija"
 
@@ -10086,25 +9897,19 @@ msgid "Invalid transaction"
 msgstr "Neveljavna transakcija"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:233
-#, fuzzy, kde-format
-#| msgctxt "@title:column header in CSV export"
-#| msgid "splitCategory"
+#, kde-format
 msgid "splitCategory"
-msgstr "deljena-kategorija"
+msgstr "deljenaKategorija"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:233
-#, fuzzy, kde-format
-#| msgctxt "@title:column header in CSV export"
-#| msgid "splitMemo"
+#, kde-format
 msgid "splitMemo"
-msgstr "deljena-opomba"
+msgstr "deljenaOpomba"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:233
-#, fuzzy, kde-format
-#| msgctxt "@title:column header in CSV export"
-#| msgid "splitAmount"
+#, kde-format
 msgid "splitAmount"
-msgstr "deljeni-znesek"
+msgstr "deljeniZnesek"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:346
 #, kde-format
@@ -10471,7 +10276,7 @@ msgstr "prodaj,ponovno kupi"
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "reinvest,reinv,re-inv"
-msgstr "reinvesticija,ponovna naložba"
+msgstr "reinvesticija,ponovna naložba,re-inv"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1581
 #, kde-format
@@ -10501,8 +10306,7 @@ msgid "remove"
 msgstr "odstrani"
 
 #: kmymoney/plugins/csv/import/csvimporter.cpp:41
-#, fuzzy, kde-format
-#| msgid "CSV import"
+#, kde-format
 msgid "CSV importer"
 msgstr "Uvoz CSV"
 
@@ -11481,10 +11285,9 @@ msgid "Remove Shares"
 msgstr "Odstrani delnice"
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:42
-#, fuzzy, kde-format
-#| msgid "GnuCash Import Options"
+#, kde-format
 msgid "GnuCash importer"
-msgstr "Možnosti uvoza GnuCash"
+msgstr "Uvoznik GnuCash"
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:137
 #, kde-format
@@ -12047,16 +11850,14 @@ msgid "%1 is not an Investment Account. Do you wish to make it one?"
 msgstr "%1 ni naložbeni račun. Ali želite ustvariti naložbeni račun?"
 
 #: kmymoney/plugins/ibanbicdata/ibanbicdata.cpp:24
-#, fuzzy, kde-format
-#| msgid "IBAN & BIC"
+#, kde-format
 msgid "IBAN/BIC Data"
-msgstr "IBAN in BIC"
+msgstr "Podatki IBAN/BIC"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:49
-#, fuzzy, kde-format
-#| msgid "Icalendar export settings"
+#, kde-format
 msgid "iCalendar exporter"
-msgstr "Nastavitve izvoza icalendarja"
+msgstr "Izvoznik icalendarja"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:66
 #, kde-format
@@ -12553,48 +12354,44 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QPushButton, dequeueButton)
 #: kmymoney/plugins/kbanking/views/kbjobview.cpp:66
 #: kmymoney/plugins/kbanking/views/kbjobview.ui:32
-#, fuzzy, kde-format
-#| msgctxt "Status of the job"
-#| msgid "enqueued"
+#, kde-format
 msgid "Dequeue"
-msgstr "v čakalni vrsti"
+msgstr "Izstopi iz čakalne vrste"
 
 #: kmymoney/plugins/kbanking/views/kbjobview.cpp:68
 #, kde-format
 msgid "Dequeue selected job"
-msgstr ""
+msgstr "Izbrani posel izstopi iz čakalne vrste"
 
 #: kmymoney/plugins/kbanking/views/kbjobview.cpp:69
-#, fuzzy, kde-format
-#| msgid "Remove this price item from the file"
+#, kde-format
 msgid "Remove the selected job from the list"
-msgstr "Odstrani to cenovno postavko iz datoteke"
+msgstr "Odstrani izbrani posel iz seznama"
 
 #. i18n: ectx: property (text), widget (QPushButton, executeButton)
 #: kmymoney/plugins/kbanking/views/kbjobview.cpp:70
 #: kmymoney/plugins/kbanking/views/kbjobview.ui:42
 #, kde-format
 msgid "Execute"
-msgstr ""
+msgstr "Izvedi"
 
 #: kmymoney/plugins/kbanking/views/kbjobview.cpp:72
 #: kmymoney/plugins/kbanking/views/kbjobview.cpp:73
 #, kde-format
 msgid "Execute all jobs in the queue"
-msgstr ""
+msgstr "Izvedi vse posle v čakalni vrsti"
 
 #: kmymoney/plugins/kbanking/views/kbjobview.cpp:129
-#, fuzzy, kde-format
-#| msgid "There are no entries in this account.\n"
+#, kde-format
 msgctxt "Warning message"
 msgid "There are no jobs in the queue."
-msgstr "Ni nobenega vnosa na tem računu.\n"
+msgstr "Ni nobenega posla v čakalni vrsti."
 
 #: kmymoney/plugins/kbanking/views/kbjobview.cpp:130
 #, kde-format
 msgctxt "Message title"
 msgid "No Jobs"
-msgstr ""
+msgstr "Ni poslov"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KBJobView)
 #. i18n: ectx: property (title), widget (QGroupBox, jobBox)
@@ -12602,7 +12399,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/views/kbjobview.ui:20
 #, kde-format
 msgid "Jobs"
-msgstr ""
+msgstr "Posli"
 
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.cpp:154
 #: kmymoney/plugins/kbanking/widgets/phototandialog.cpp:90
@@ -13485,10 +13282,9 @@ msgid "Enter your password for account <b>%1</b>"
 msgstr "Vnesite vaše geslo za račun <b>%1</b>"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:126
-#, fuzzy, kde-format
-#| msgid "QIF Import"
+#, kde-format
 msgid "OFX Importer"
-msgstr "Uvoz QIF"
+msgstr "Uvoznik OFX"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:154
 #, kde-format
@@ -14118,10 +13914,9 @@ msgstr ""
 "Transakcija je umaknjena."
 
 #: kmymoney/plugins/qif/export/qifexporter.cpp:36
-#, fuzzy, kde-format
-#| msgid "QIF Export"
+#, kde-format
 msgid "QIF exporter"
-msgstr "Izvoz QIF"
+msgstr "Izvoznik QIF"
 
 #: kmymoney/plugins/qif/export/qifexporter.cpp:64
 #: kmymoney/plugins/qif/import/qifimporter.cpp:68
@@ -14461,10 +14256,9 @@ msgid "Autogenerated by QIF importer from type Mutual account entry"
 msgstr "Avtogenerirano od uvoznika QIF iz vnosa računa vzajemcev"
 
 #: kmymoney/plugins/qif/import/qifimporter.cpp:41
-#, fuzzy, kde-format
-#| msgid "QIF Import"
+#, kde-format
 msgid "QIF importer"
-msgstr "Uvoz QIF"
+msgstr "Uvoznik QIF"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KReconciliationReportDlgDecl)
 #: kmymoney/plugins/reconciliationreport/kreconciliationreportdlgdecl.ui:14
@@ -14869,10 +14663,9 @@ msgstr ""
 "Napaka pri kreiranju baze podatkov %1; ali imate dovoljenja za kreiranje?"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:80
-#, fuzzy, kde-format
-#| msgid "Save storage as..."
+#, kde-format
 msgid "SQL storage"
-msgstr "Shrani zbrano kot..."
+msgstr "Shramba SQL"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:148
 #, kde-format
@@ -14951,10 +14744,9 @@ msgstr ""
 "Pomoč."
 
 #: kmymoney/plugins/views/budget/budgetview.cpp:29
-#, fuzzy, kde-format
-#| msgid "Budgets"
+#, kde-format
 msgid "Budgets view"
-msgstr "Proračuni"
+msgstr "Pogled proračunov"
 
 #: kmymoney/plugins/views/budget/kbudgetvalues.cpp:234
 #, kde-format
@@ -15025,18 +14817,14 @@ msgid "Individual"
 msgstr "Individualno"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:96
-#, fuzzy, kde-format
-#| msgctxt "@item:intable Your budgets, %1 budget year"
-#| msgid "Budget %1"
+#, kde-format
 msgid "Budget %1"
 msgstr "Proračun %1"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:106
-#, fuzzy, kde-format
-#| msgctxt "@item:intable Your bugets, %1 budget year, %2 unique index"
-#| msgid "Budget %1 (%2)"
+#, kde-format
 msgid "Budget %1 %2"
-msgstr "Proračun %1 (%2)"
+msgstr "Proračun %1 %2"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:120
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:166
@@ -15055,9 +14843,7 @@ msgid "Do you really want to remove all selected budgets?"
 msgstr "Ali res želite odstraniti vse izbrane proračune?"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:139
-#, fuzzy, kde-format
-#| msgctxt "@title:window "
-#| msgid "Remove Budget"
+#, kde-format
 msgid "Remove Budget"
 msgstr "Odstrani proračun"
 
@@ -15073,16 +14859,14 @@ msgid "Copy of %1"
 msgstr "Kopija od %1"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:191
-#, fuzzy, kde-format
-#| msgid "Select all"
+#, kde-format
 msgid "Select year"
-msgstr "Izberi vse"
+msgstr "Izberi leto"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:191
-#, fuzzy, kde-format
-#| msgid "Budgeted"
+#, kde-format
 msgid "Budget year"
-msgstr "V proračunu"
+msgstr "Proračun leta"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:203
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:241
@@ -15137,10 +14921,9 @@ msgid "Copy budget"
 msgstr "Kopiraj proračun"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:306
-#, fuzzy, kde-format
-#| msgid "Current year"
+#, kde-format
 msgid "Change budget year"
-msgstr "Trenutno leto"
+msgstr "Spremeni leto proračuna"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:307
 #, kde-format
@@ -15148,24 +14931,19 @@ msgid "Budget based on forecast"
 msgstr "Proračun na podlagi napovedi"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:309
-#, fuzzy, kde-format
-#| msgid "Budget options"
+#, kde-format
 msgctxt "Menu header"
 msgid "Budget options"
 msgstr "Možnosti proračuna"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:344
-#, fuzzy, kde-format
-#| msgid ""
-#| "A tag with the name '%1' already exists. It is not advisable to have "
-#| "multiple tags with the same identification name. Are you sure you would "
-#| "like to rename the tag?"
+#, kde-format
 msgid ""
 "A budget with the name '%1' already exists. It is not advisable to have "
 "multiple budgets with the same identification name. Are you sure you would "
 "like to rename the budget?"
 msgstr ""
-"Oznaka z imenom '%1' že obstaja. Ni priporočljivo imeti več oznak z isto "
+"Proračun z imenom '%1' že obstaja. Ni priporočljivo imeti več oznak z isto "
 "identifikacijo. Ste prepričani, da bi radi preimenovati oznako?"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
@@ -15176,40 +14954,34 @@ msgstr "Vaši proračuni"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_newButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:47
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Create a new Account"
+#, kde-format
 msgid "Creates a new budget"
-msgstr "Ustvari nov račun"
+msgstr "Ustvari nov proračun"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_newButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:50
-#, fuzzy, kde-format
-#| msgid "Use this to create a new schedule."
+#, kde-format
 msgid "Use this to create a new empty budget."
-msgstr "Uporabi to za ustvarjanje novega načrta."
+msgstr "Uporabi to za ustvarjanje novega praznega proračuna."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_newButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:53
-#, fuzzy, kde-format
-#| msgid "New"
+#, kde-format
 msgctxt "New budget"
 msgid "New"
-msgstr "Nov"
+msgstr "Novi"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_renameButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:60
-#, fuzzy, kde-format
-#| msgid "Unable to reset budget"
+#, kde-format
 msgid "Rename the current selected budget."
-msgstr "Proračuna ni mogoče ponastaviti"
+msgstr "Preimenuj trenutni izbrani proračun."
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_renameButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:63
-#, fuzzy, kde-format
-#| msgid "Use this to store the modified data."
+#, kde-format
 msgid "Use this to start renaming the selected budget."
-msgstr "Uporabi to, da shraniš spremenjene podatke."
+msgstr "Uporabi to, da začneš preimenovati izbrani proračun."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_renameButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:66
@@ -15220,17 +14992,15 @@ msgstr "Pre"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_deleteButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:73
-#, fuzzy, kde-format
-#| msgid "Delete the selected source entry"
+#, kde-format
 msgid "Delete the current selected budget"
-msgstr "Zbriši izbrani vnos vira"
+msgstr "Zbriši trenutni izbrani proračun"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_deleteButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:76
-#, fuzzy, kde-format
-#| msgid "Use this to delete the selected online source entry"
+#, kde-format
 msgid "Use this to delete the selected budget."
-msgstr "Uporabi to, da izbrišeš izbrani spletni vir"
+msgstr "Uporabi to, da izbrišeš izbrani proračun."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_deleteButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:79
@@ -15241,8 +15011,7 @@ msgstr "Bri"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_budgetList)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:101
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "@title header of the budget name column"
 msgid "Name"
 msgstr "Ime"
@@ -15339,10 +15108,9 @@ msgid "Name"
 msgstr "Ime"
 
 #: kmymoney/plugins/views/forecast/forecastview.cpp:29
-#, fuzzy, kde-format
-#| msgid "Forecast"
+#, kde-format
 msgid "Forecast view"
-msgstr "Napoved"
+msgstr "Pogled napovedi"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_forecastButton)
 #: kmymoney/plugins/views/forecast/forecastview.cpp:42
@@ -15770,19 +15538,13 @@ msgid "You need to select a single job for editing."
 msgstr "Za urejanje morate izbrati en posel."
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:318
-#, fuzzy, kde-format
-#| msgid "Clear amount field selection."
+#, kde-format
 msgctxt "The user selected credit transfers to send. But they cannot be sent."
 msgid "Cannot send selection"
-msgstr "Očisti izbrano polje zneska."
+msgstr "Ni mogoče poslati izbire"
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:319
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "The user selected credit transfers to send. But they cannot be sent"
-#| msgid ""
-#| "Not all selected credit transfers can be sent because some of them are "
-#| "invalid or were already sent."
+#, kde-format
 msgid ""
 "Not all selected credit transfers can be sent because some of them are "
 "invalid or were already sent."
@@ -15893,87 +15655,70 @@ msgid "Action"
 msgstr "Dejavnost"
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmodel.cpp:88
-#, fuzzy, kde-format
-#| msgctxt "@title:column"
-#| msgid "Destination"
+#, kde-format
 msgid "Destination"
 msgstr "Cilj"
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmodel.cpp:125
 #, kde-format
 msgid "Not able to display this job."
-msgstr ""
+msgstr "Ni mogoče prikazati tega posla."
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmodel.cpp:127
 #, kde-format
 msgid ""
 "Could not find a plugin to display this job or it does not contain any data."
 msgstr ""
+"Ni bilo mogoče najti vtičnika za prikaz tega posla ali pa ta posel ne "
+"vsebuje nobenih podatkov."
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmodel.cpp:163
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
-#| msgid "This job was accepted by the bank on %1."
+#, kde-format
 msgctxt "Arg 1 is a date/time"
 msgid "This job was accepted by the bank on %1."
-msgstr "Ta posel je sprejela banka dne %1."
+msgstr "Ta posel je sprejela banka ob %1."
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmodel.cpp:165
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
-#| msgid "Sending this job failed (tried on %1)."
+#, kde-format
 msgctxt "Arg 1 is a date/time"
 msgid "Sending this job failed (tried on %1)."
 msgstr "Pošiljanje tega posla ni uspelo (poskus ob %1)."
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmodel.cpp:167
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip online job list status"
-#| msgid "Sending this job was manually aborted."
+#, kde-format
 msgid "Sending this job was manually aborted."
 msgstr "Pošiljanje tega posla je bilo ročno prekinjeno."
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmodel.cpp:169
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
-#| msgid "The bank rejected this job on %1."
+#, kde-format
 msgctxt "Arg 1 is a date/time"
 msgid "The bank rejected this job on %1."
 msgstr "Banka je ta posel zavrnila dne %1."
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmodel.cpp:172
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
-#| msgid "The bank accepted this job on %1."
+#, kde-format
 msgctxt "Arg 1 is a date/time"
 msgid "The bank accepted this job on %1."
 msgstr "Banka je ta posel sprejela dne %1."
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmodel.cpp:174
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip online job list status"
-#| msgid "This job needs further editing and cannot be sent therefore."
+#, kde-format
 msgid "This job needs further editing and cannot be sent therefore."
 msgstr "Ta posel je treba dodatno urediti in ga zato ni mogoče poslati."
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmodel.cpp:176
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip online job list status"
-#| msgid "This job is ready for sending."
+#, kde-format
 msgid "This job is ready for sending."
 msgstr "Ta posel je pripravljen za pošiljanje."
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejoboutboxview.cpp:29
 #: kmymoney/plugins/views/reports/reportsview.cpp:39
-#, fuzzy, kde-format
-#| msgid "KReportsView"
+#, kde-format
 msgid "Reports view"
 msgstr "KReportsView"
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejoboutboxview.cpp:42
-#, fuzzy, kde-format
-#| msgctxt "@item name of view"
-#| msgid "Outbox"
+#, kde-format
 msgid "Outbox"
 msgstr "Izhodna pošta"
 
@@ -18132,7 +17877,7 @@ msgstr ""
 #: kmymoney/plugins/woob/woob.cpp:86
 #, kde-format
 msgid "Woob"
-msgstr ""
+msgstr "Woob"
 
 #: kmymoney/plugins/woob/woob.cpp:130
 #, kde-format
@@ -18260,10 +18005,9 @@ msgid "Unknown XML tag %1 found in line %2"
 msgstr "Najdena neznana značka XML %1 v vrstici %2"
 
 #: kmymoney/plugins/xml/mymoneystoragexml.cpp:392
-#, fuzzy, kde-format
-#| msgid "Exception while reading %1 element: %2"
+#, kde-format
 msgid "Exception while creating a %1 element: %2"
-msgstr "Izjema med branjem %1 elementa: %2"
+msgstr "Izjema med ustvarjanjem %1 elementa: %2"
 
 #: kmymoney/plugins/xml/mymoneystoragexml.cpp:1530
 #, kde-format
@@ -18276,45 +18020,39 @@ msgid "Loading user information..."
 msgstr "Nalaganje informacij o uporabniku..."
 
 #: kmymoney/plugins/xml/mymoneystoragexml.cpp:1691
-#, fuzzy, kde-format
-#| msgid "Loading accounts..."
+#, kde-format
 msgid "Saving accounts..."
-msgstr "Nalaganje računov..."
+msgstr "Shranjevanje računov..."
 
 #: kmymoney/plugins/xml/mymoneystoragexml.cpp:1711
-#, fuzzy, kde-format
-#| msgid "Loading transactions..."
+#, kde-format
 msgid "Saving transactions..."
-msgstr "Nalaganje transakcij..."
+msgstr "Shranjevanje transakcij..."
 
 #: kmymoney/plugins/xml/mymoneystoragexml.cpp:1775
-#, fuzzy, kde-format
-#| msgid "Loading reports..."
+#, kde-format
 msgid "Saving reports..."
-msgstr "Nalaganje poročil..."
+msgstr "Shranjevanje poročil..."
 
 #: kmymoney/plugins/xml/mymoneystoragexml.cpp:1794
-#, fuzzy, kde-format
-#| msgid "Saving file..."
+#, kde-format
 msgid "Saving budgets..."
-msgstr "Shranjujem datoteko..."
+msgstr "Shranjevanje proračunov..."
 
 #: kmymoney/plugins/xml/mymoneystoragexml.cpp:1811
-#, fuzzy, kde-format
-#| msgid "Saving file as...."
+#, kde-format
 msgid "Saving online banking orders..."
-msgstr "Shranjevanje datoteke kot..."
+msgstr "Shranjevanje spletnih bančnih zahtevkov..."
 
 #: kmymoney/plugins/xml/mymoneystoragexml.cpp:1829
-#, fuzzy, kde-format
-#| msgid "Loading cost center..."
+#, kde-format
 msgid "Saving costcenters..."
-msgstr "Nalaganje stroškovnega centra..."
+msgstr "Shranjevanje stroškovnih centrov..."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:66
 #, kde-format
 msgid "XML storage"
-msgstr ""
+msgstr "Hramba XML"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:346
 #, kde-format
@@ -18711,7 +18449,7 @@ msgstr "Zaženi v ekspertnem (računovodskem) načinu"
 #: kmymoney/settings/kmymoney.kcfg:122
 #, kde-format
 msgid "Show splash screen during startup"
-msgstr ""
+msgstr "Prikaži zaslon dobrodošlice ob zagonu"
 
 #. i18n: ectx: label, entry (syncLedgerInvestment), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:126
@@ -18733,10 +18471,9 @@ msgstr "Ob prvem zagonu preklopite na zagon čarovnika za novega uporabnika"
 
 #. i18n: ectx: label, entry (showTitleBar), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:138
-#, fuzzy, kde-format
-#| msgid "Show categories in the accounts view"
+#, kde-format
 msgid "Show title bar on each view"
-msgstr "Prikaži kategorije v pogledu računov"
+msgstr "Prikaži letvico kategorije v vsakem pogledu"
 
 #. i18n: ectx: label, entry (stringMatchFromStart), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:142
@@ -19208,12 +18945,7 @@ msgid "Unable to delete account '%1'. Cause: %2"
 msgstr "Računa '%1' ni mogoče izbrisati. Vzrok: %2"
 
 #: kmymoney/views/kaccountsview.cpp:359
-#, fuzzy, kde-format
-#| msgid ""
-#| "<qt>You have closed this account. It remains in the system because you "
-#| "have transactions which still refer to it, but it is not shown in the "
-#| "views. You can make it visible again by going to the View menu and "
-#| "selecting <b>Show all accounts</b>.</qt>"
+#, kde-format
 msgid ""
 "<qt>You have closed this account. It remains in the system because you have "
 "transactions which still refer to it, but it is not shown in the views. You "
@@ -19224,7 +18956,7 @@ msgstr ""
 "<qt>Ta račun ste zaprli. V sistemu ostaja, ker imate transakcije, ki se še "
 "vedno nanašajo nanj, vendar v pogledih niso prikazane. Račun lahko znova "
 "postane viden, tako da odprete meni Pogled in izberete <b>Pokaži vse račune</"
-"b>.</qt>"
+"b> ali umaknete izbiro nastavitve <b>Ne prikazuj zaprtih računov</b>.</qt>"
 
 #: kmymoney/views/kaccountsview.cpp:362
 #, kde-format
@@ -19271,10 +19003,9 @@ msgid "Mapping brokerage account"
 msgstr "Preslikava posredniškega računa"
 
 #: kmymoney/views/kaccountsview.cpp:469
-#, fuzzy, kde-format
-#| msgid "Online Banking Operations"
+#, kde-format
 msgid "Select online banking plugin"
-msgstr "Operacije spletnega bančništva"
+msgstr "Izberi vtičnik spletnega bančništva"
 
 #: kmymoney/views/kaccountsview.cpp:510
 #, kde-format
@@ -19412,40 +19143,33 @@ msgid "Unable to delete category '%1'. Cause: %2"
 msgstr "Kategorije '%1' ni mogoče izbrisati. Vzrok: %2"
 
 #: kmymoney/views/kgloballedgerview.cpp:243
-#, fuzzy, kde-format
-#| msgid "Reconciled"
+#, kde-format
 msgid "Reconcile"
-msgstr "Usklajeno"
+msgstr "Uskladi"
 
 #: kmymoney/views/kgloballedgerview.cpp:245
 #, kde-format
 msgid "Reconcile - disabled because you are currently reconciling <b>%1</b>"
-msgstr ""
+msgstr "Uskladi - onemogočeno, ker trenutno usklajujete <b>%1</b>"
 
 #: kmymoney/views/kgloballedgerview.cpp:309
-#, fuzzy, kde-format
-#| msgid "Duplicate scheduled transaction"
+#, kde-format
 msgid "Duplicate the current selected transactions"
-msgstr "Podvoji načrtovano transakcijo"
+msgstr "Podvoji trenutno izbrano transakcijo"
 
 #: kmymoney/views/kgloballedgerview.cpp:313
-#, fuzzy, kde-format
-#| msgid "Record this transaction into the register"
+#, kde-format
 msgid "Add reversing transactions to the currently selected"
-msgstr "Zabeleži to transakcijo v register"
+msgstr "Dodaj povratno transakcijo trenutno izbrani"
 
 #: kmymoney/views/kgloballedgerview.cpp:365
-#, fuzzy, kde-format
-#| msgctxt "Unmatch transactions"
-#| msgid "Unmatch"
+#, kde-format
 msgctxt "Button text for unmatch transaction"
 msgid "Unmatch"
 msgstr "Neujemanje"
 
 #: kmymoney/views/kgloballedgerview.cpp:446
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Difference to statement"
-#| msgid "Difference: %1"
+#, kde-format
 msgid "Difference: %1"
 msgstr "Razlika: %1"
 
@@ -19456,9 +19180,7 @@ msgid "Balance: %1"
 msgstr "Stanje: %1"
 
 #: kmymoney/views/kgloballedgerview.cpp:460
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Total value of investment"
-#| msgid "Investment value: %1%2"
+#, kde-format
 msgid "Investment value: %1%2"
 msgstr "Vrednost naložbe: %1%2"
 
@@ -19472,16 +19194,13 @@ msgstr ""
 "Bi radi, da KMyMoney te transakcije razčisti za vas?"
 
 #: kmymoney/views/kgloballedgerview.cpp:805
-#, fuzzy, kde-format
-#| msgid ""
-#| "At least one split of the selected transactions has been reconciled. Do "
-#| "you wish to change the transactions anyway?"
+#, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
 "wish to continue to edit the transactions anyway?"
 msgstr ""
-"Usklajen je vsaj en razcep izbranih transakcij. Ali si vseeno želite "
-"spremeniti transakcije?"
+"Usklajen je vsaj en razcep izbranih transakcij. Ali vseeno želite urejati "
+"transakcije?"
 
 #: kmymoney/views/kgloballedgerview.cpp:808
 #: kmymoney/views/kgloballedgerview.cpp:1468
@@ -19492,49 +19211,43 @@ msgstr "Transakcija je že usklajena"
 #: kmymoney/views/kgloballedgerview.cpp:1102
 #, kde-format
 msgid "Cannot create transactions when no account is selected."
-msgstr ""
+msgstr "Ni mogoče ustvariti transakcije, kadar ni izbranega nobenega računa."
 
 #: kmymoney/views/kgloballedgerview.cpp:1107
-#, fuzzy, kde-format
-#| msgid ""
-#| "A cost center assignment is required for a transaction in the selected "
-#| "category."
+#, kde-format
 msgid "Cannot create transactions in the context of a category."
-msgstr ""
-"Potrebna je dodelitev stroškovnega mesta za transakcijo v izbrani kategoriji."
+msgstr "Ni mogoče ustvariti transakcije v kontekstu kategorij."
 
 #: kmymoney/views/kgloballedgerview.cpp:1112
-#, fuzzy, kde-format
-#| msgid "Do you want to import transactions to this account?"
+#, kde-format
 msgid "Cannot create transactions in a closed account."
-msgstr "Ali želite uvoziti transakcije na ta račun?"
+msgstr "Ni mogoče ustvariti transakcije v zaprtem računu."
 
 #: kmymoney/views/kgloballedgerview.cpp:1150
 #, kde-format
 msgid "Cannot edit transactions in the context of a category."
-msgstr ""
+msgstr "Ni mogoče urejati transakcij v kontekstu kategorije."
 
 #: kmymoney/views/kgloballedgerview.cpp:1173
 #, kde-format
 msgid "Cannot edit mixed investment action/type transactions together."
-msgstr ""
+msgstr "Ni mogoče urejati mešane dejavnosti naložb in transakcij skupaj."
 
 #: kmymoney/views/kgloballedgerview.cpp:1187
 #, kde-format
 msgid ""
 "Cannot edit investment transactions and non-investment transactions together."
-msgstr ""
+msgstr "Ni mogoče urejati transakcij naložb in transakcij ne-naložb skupaj."
 
 #: kmymoney/views/kgloballedgerview.cpp:1196
 #, kde-format
 msgid "Cannot edit multiple split transactions at once."
-msgstr ""
+msgstr "Ni mogoče urejati večkratnega razcepa transakcij naenkrat."
 
 #: kmymoney/views/kgloballedgerview.cpp:1217
-#, fuzzy, kde-format
-#| msgid "Do you want to import transactions to this account?"
+#, kde-format
 msgid "Cannot edit investment transactions in the context of this account."
-msgstr "Ali želite uvoziti transakcije na ta račun?"
+msgstr "Ni mogoče urejati naložbenih transakcij v kontekstu tega računa."
 
 #: kmymoney/views/kgloballedgerview.cpp:1351
 #, kde-format
@@ -19544,13 +19257,15 @@ msgid ""
 "save the transaction automatically when e.g. selecting another transaction.</"
 "p>"
 msgstr ""
+"<p>Izberite, kaj želite storiti: zavreči spremembe, shraniti spremembe ali "
+"nadaljevati z urejanjem transakcije.</p><p>Lahko nastavite tudi možnost, da "
+"transakcijo shranite samodejno, kadar npr. izbirate druge transakcije.</p>"
 
 #: kmymoney/views/kgloballedgerview.cpp:1351
 #: kmymoney/views/kgloballedgerview.cpp:1354
-#, fuzzy, kde-format
-#| msgid "Any transaction"
+#, kde-format
 msgid "End transaction edit"
-msgstr "Katerakoli transakcija"
+msgstr "Končaj urejanje transakcije"
 
 #: kmymoney/views/kgloballedgerview.cpp:1354
 #, kde-format
@@ -19559,6 +19274,9 @@ msgid ""
 "can also set an option to save the transaction automatically when e.g. "
 "selecting another transaction.</p>"
 msgstr ""
+"<p>Izberite, kaj želite storiti: zavreči spremembe ali shraniti spremembe.</"
+"p><p>Lahko nastavite tudi možnost ,da transakcijo shranite samodejno, kadar "
+"npr. izbirate druge transakcije.</p>"
 
 #: kmymoney/views/kgloballedgerview.cpp:1466
 #, kde-format
@@ -19600,23 +19318,20 @@ msgid "Unable to modify transaction"
 msgstr "Transakcije ni mogoče spremeniti"
 
 #: kmymoney/views/kgloballedgerview.cpp:1676
-#, fuzzy, kde-format
-#| msgid "Date:"
+#, kde-format
 msgid "Date: %1"
-msgstr "Datum:"
+msgstr "Datum: %1"
 
 #: kmymoney/views/kgloballedgerview.cpp:1679
-#, fuzzy, kde-format
-#| msgid "Unknown"
+#, kde-format
 msgctxt "Name for unknown payee"
 msgid "Unknown"
 msgstr "Neznano"
 
 #: kmymoney/views/kgloballedgerview.cpp:1683
-#, fuzzy, kde-format
-#| msgid "Payee%1"
+#, kde-format
 msgid "Payee: %1"
-msgstr "Prejemnik plačil%1"
+msgstr "Prejemnik plačil: %1"
 
 #: kmymoney/views/kgloballedgerview.cpp:1686
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:192
@@ -19626,10 +19341,9 @@ msgid "Amount: %1"
 msgstr "Znesek: %1"
 
 #: kmymoney/views/kgloballedgerview.cpp:1689
-#, fuzzy, kde-format
-#| msgid "Memo"
+#, kde-format
 msgid "Memo: %1"
-msgstr "Opomba"
+msgstr "Opomba: %1"
 
 #: kmymoney/views/kgloballedgerview.cpp:1960
 #, kde-format
@@ -19648,96 +19362,80 @@ msgid "Confirm end of reconciliation"
 msgstr "Potrdite konec usklajevanja"
 
 #: kmymoney/views/kgloballedgerview_p.h:696
-#, fuzzy, kde-format
-#| msgid "Statement file..."
+#, kde-format
 msgid "Statement Details"
-msgstr "Datoteka izkazov..."
+msgstr "Podrobnosti izkaza"
 
 #: kmymoney/views/kgloballedgerview_p.h:700
-#, fuzzy, kde-format
-#| msgid "Statement import statistics"
+#, kde-format
 msgid "Statement Deposit Details"
-msgstr "Statistika uvoza izkazov"
+msgstr "Podrobnosti izkaza depozita"
 
 #: kmymoney/views/kgloballedgerview_p.h:701
-#, fuzzy, kde-format
-#| msgid "Statement import statistics"
+#, kde-format
 msgid "Statement Payment Details"
-msgstr "Statistika uvoza izkazov"
+msgstr "Podrobnosti izkaza plačila"
 
 #: kmymoney/views/kgloballedgerview_p.h:822
 #: kmymoney/views/kgloballedgerview_p.h:838
-#, fuzzy, kde-format
-#| msgid "%1 deposit after %2"
-#| msgid_plural "%1 deposits after %2"
+#, kde-format
 msgid "%1 deposit (%2)"
 msgid_plural "%1 deposits (%2)"
-msgstr[0] "%1 depozit po %2"
-msgstr[1] "%1 depozita po %2"
-msgstr[2] "%1 depoziti po %2"
-msgstr[3] "%1 depozitov po %2"
+msgstr[0] "%1 depozit (%2)"
+msgstr[1] "%1 depozita (%2)"
+msgstr[2] "%1 depoziti (%2)"
+msgstr[3] "%1 depozitov (%2)"
 
 #: kmymoney/views/kgloballedgerview_p.h:824
 #, kde-format
 msgid "%1 charge (%2)"
 msgid_plural "%1 charges (%2)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1 obremenitev (%2)"
+msgstr[1] "%1 obremenitvi (%2)"
+msgstr[2] "%1 obremenitve (%2)"
+msgstr[3] "%1 obremenitev (%2)"
 
 #: kmymoney/views/kgloballedgerview_p.h:826
 #: kmymoney/views/kgloballedgerview_p.h:834
-#, fuzzy, kde-format
-#| msgid " (%1 payment)"
-#| msgid_plural " (%1 payments)"
+#, kde-format
 msgid "%1 payment (%2)"
 msgid_plural "%1 payments (%2)"
-msgstr[0] " (%1 plačilo)"
-msgstr[1] " (%1 plačili)"
-msgstr[2] " (%1 plačila)"
-msgstr[3] " (%1 plačil)"
+msgstr[0] "%1 plačilo (%2)"
+msgstr[1] "%1 plačili (%2)"
+msgstr[2] "%1 plačila (%2)"
+msgstr[3] "%1 plačil (%2)"
 
 #: kmymoney/views/kgloballedgerview_p.h:829
 #, kde-format
 msgctxt "%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments"
 msgid "%1, %2"
-msgstr ""
+msgstr "%1, %2"
 
 #: kmymoney/views/kgloballedgerview_p.h:936
 #: kmymoney/views/kgloballedgerview_p.h:962
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu open account"
-#| msgid "Go to '%1'"
+#, kde-format
 msgid "Go to '%1'"
 msgstr "Pojdi na '%1'"
 
 #: kmymoney/views/kgloballedgerview_p.h:1016
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Statement balance"
-#| msgid "Statement: %1"
+#, kde-format
 msgid "Statement: %1"
 msgstr "Izkaz: %1"
 
 #: kmymoney/views/kgloballedgerview_p.h:1017
 #: kmymoney/views/kgloballedgerview_p.h:1033
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Cleared balance"
-#| msgid "Cleared: %1"
+#, kde-format
 msgctxt "Cleared balance"
 msgid "Cleared: %1"
 msgstr "Razčiščeno: %1"
 
 #: kmymoney/views/kgloballedgerview_p.h:1025
-#, fuzzy, kde-format
-#| msgid "Last Reconciled"
+#, kde-format
 msgid "Last reconciled: %1"
-msgstr "Zadnjič usklajeno"
+msgstr "Zadnjič usklajeno: %1"
 
 #: kmymoney/views/kgloballedgerview_p.h:1027
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Reconciliation date"
-#| msgid "Never reconciled"
+#, kde-format
 msgid "Never reconciled"
 msgstr "Nikoli usklajeno"
 
@@ -19747,10 +19445,9 @@ msgid "Cannot process transaction with focus if it is not selected."
 msgstr ""
 
 #: kmymoney/views/kgloballedgerview_p.h:1214
-#, fuzzy, kde-format
-#| msgid "Unable to duplicate transaction(s)"
+#, kde-format
 msgid "Unable to delete transaction(s)"
-msgstr "Transakcij ni mogoče podvojiti"
+msgstr "Transakcij ni mogoče izbrisati"
 
 #: kmymoney/views/kgloballedgerview_p.h:1243
 #, kde-format
@@ -19763,10 +19460,9 @@ msgid "Unable to match the selected transactions"
 msgstr "Izbranih transakcij ni mogoče najti"
 
 #: kmymoney/views/kgloballedgerview_p.h:1508
-#, fuzzy, kde-format
-#| msgid "Automatic reconciliation"
+#, kde-format
 msgid "Running automatic reconciliation"
-msgstr "Samodejno usklajevanje"
+msgstr "Poteka samodejno usklajevanje"
 
 #: kmymoney/views/khomeview.cpp:214
 #, kde-format
@@ -19890,10 +19586,9 @@ msgid "Last Reconciled"
 msgstr "Zadnjič usklajeno"
 
 #: kmymoney/views/khomeview_p.h:960
-#, fuzzy, kde-format
-#| msgid "To Minimum Balance<br>/ Maximum Credit"
+#, kde-format
 msgid "To Minimum Balance / Maximum Credit"
-msgstr "Do minimalnega stanja<br>/ Največji dobropis"
+msgstr "Do minimalnega stanja / Največji dobropis"
 
 #: kmymoney/views/khomeview_p.h:1048
 #, kde-format
@@ -20076,17 +19771,15 @@ msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_editSecurityButton)
 #: kmymoney/views/kinvestmentview.ui:163
-#, fuzzy, kde-format
-#| msgid "Change the details of selected price information."
+#, kde-format
 msgid "Change the security information of the selected entry."
-msgstr "Spremeni podrobnosti izbranih podatkov o ceni."
+msgstr "Spremeni informacije o izbranem vrednostnem papirju."
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_deleteSecurityButton)
 #: kmymoney/views/kinvestmentview.ui:176
-#, fuzzy, kde-format
-#| msgid "Remove this price item from the file"
+#, kde-format
 msgid "Remove this security item from the file"
-msgstr "Odstrani to cenovno postavko iz datoteke"
+msgstr "Odstrani to postavko vrednostnega papirja iz datoteke"
 
 #: kmymoney/views/kmymoneyview.cpp:146
 #, kde-format
@@ -20094,21 +19787,19 @@ msgid "Ledgers"
 msgstr "Glavne knjige"
 
 #: kmymoney/views/kmymoneyview.cpp:149
-#, fuzzy, kde-format
-#| msgid "Open ledger"
+#, kde-format
 msgid "New ledger"
-msgstr "Odpri glavno knjigo"
+msgstr "Nova glavna knjiga"
 
 #: kmymoney/views/kmymoneyview.cpp:334
 #, kde-format
 msgid "Do you want to show <b>%1</b> column on every loaded view?"
-msgstr ""
+msgstr "Ali želite prikazati stolpec <b>%1</b> na vsakem naloženem pogledu?"
 
 #: kmymoney/views/kmymoneyview.cpp:336
-#, fuzzy, kde-format
-#| msgid "<qt>Do you want to add <b>%1</b> as payee/receiver?</qt>"
+#, kde-format
 msgid "Do you want to hide <b>%1</b> column on every loaded view?"
-msgstr "<qt>Ali želite dodati <b>%1</b> kot plačnika/prejemnika?</qt>"
+msgstr "Ali želite skriti stolpec <b>%1</b> na vsakem naloženem pogledu?"
 
 #: kmymoney/views/kmymoneyview.cpp:431
 #, kde-format
@@ -20176,10 +19867,9 @@ msgid "Show outbox page"
 msgstr "Prikaži stran izhodne pošte"
 
 #: kmymoney/views/kmymoneyview.cpp:621
-#, fuzzy, kde-format
-#| msgid "Unable to add scheduled transaction: %1"
+#, kde-format
 msgid "Unable to add schedule: %1"
-msgstr "Ni mogoče dodatni načrtovano transakcijo: %1"
+msgstr "Ni mogoče dodati časovni načrt: %1"
 
 #: kmymoney/views/kpayeesview.cpp:174
 #, kde-format
@@ -20231,69 +19921,62 @@ msgstr "Vaši prejemniki plačil"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_newButton)
 #: kmymoney/views/kpayeesview.ui:44
-#, fuzzy, kde-format
-#| msgid "Create a new profile"
+#, kde-format
 msgid "Creates a new payee"
-msgstr "Ustvari nov profil"
+msgstr "Ustvari novega prejemnika plačil."
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_newButton)
 #: kmymoney/views/kpayeesview.ui:47
-#, fuzzy, kde-format
-#| msgid "Use this to create a new schedule."
+#, kde-format
 msgid "Use this to create a new payee."
-msgstr "Uporabi to za ustvarjanje novega načrta."
+msgstr "Uporabi to za ustvarjanje novega prejemnika plačil."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_newButton)
 #: kmymoney/views/kpayeesview.ui:50 kmymoney/views/ktagsview.ui:58
-#, fuzzy, kde-format
-#| msgid "New"
+#, kde-format
 msgctxt "New payee"
 msgid "New"
-msgstr "Nov"
+msgstr "Novi"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_renameButton)
 #: kmymoney/views/kpayeesview.ui:57
-#, fuzzy, kde-format
-#| msgid "Rename currency"
+#, kde-format
 msgid "Rename the current selected payee"
-msgstr "Preimenuj valuto"
+msgstr "Preimenuj trenutno izbranega prejemnika plačil"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_renameButton)
 #: kmymoney/views/kpayeesview.ui:60
-#, fuzzy, kde-format
-#| msgid "Use this to start the export operation"
+#, kde-format
 msgid "Use this to start renaming the selected payee."
-msgstr "Uporabi to za začetek postopka izvoza"
+msgstr "Uporabi to za začetek preimenovanja izbranega prejemnika plačil."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_deleteButton)
 #: kmymoney/views/kpayeesview.ui:70
-#, fuzzy, kde-format
-#| msgid "Delete payee"
+#, kde-format
 msgid "Delete selected payee(s)"
-msgstr "Zbriši prejemnika plačil"
+msgstr "Zbriši prejemnike plačil"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_deleteButton)
 #: kmymoney/views/kpayeesview.ui:73
-#, fuzzy, kde-format
-#| msgid "Use this to delete the selected online source entry"
+#, kde-format
 msgid ""
 "Use this to delete the selected payee. You can also select multiple payees "
 "to be deleted."
-msgstr "Uporabi to, da izbrišeš izbrani spletni vir"
+msgstr ""
+"Uporabi to za brisanje izbranega prejemnika plačil. Izberete lahko tudi več "
+"prejemnikov za brisanje."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_mergeButton)
 #: kmymoney/views/kpayeesview.ui:86
-#, fuzzy, kde-format
-#| msgid "Multiple fee categories"
+#, kde-format
 msgid "Merge multiple selected payees"
-msgstr "Kategorije več pristojbin"
+msgstr "Zlijte več izbranih prejemnikov plačil"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_mergeButton)
 #: kmymoney/views/kpayeesview.ui:89
-#, fuzzy, kde-format
-#| msgid "<p>Do you really want to merge the selected payees?"
+#, kde-format
 msgid "Use this to merge multiple selected payees."
-msgstr "<p> Ali res želite zliti izbrane prejemnike plačil?"
+msgstr "Uporabite to, da zlijete več izbranih prejemnikov plačil."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_mergeButton)
 #: kmymoney/views/kpayeesview.ui:92
@@ -20536,22 +20219,18 @@ msgid "Scheduled transactions found"
 msgstr "Najdene časovno načrtovane transakcije"
 
 #: kmymoney/views/kscheduledview.cpp:270
-#, fuzzy, kde-format
-#| msgid "Error mounting device"
+#, kde-format
 msgid "Error executing item"
-msgstr "Napaka pri priklopu naprave"
+msgstr "Napaka pri izvajanju postavke"
 
 #: kmymoney/views/kscheduledview.cpp:304
-#, fuzzy, kde-format
-#| msgid "Unable to find account: %1"
+#, kde-format
 msgid "Unable to filter account"
-msgstr "Ni mogoče najti računa: %1"
+msgstr "Ni mogoče filtrirati računa"
 
 #: kmymoney/views/kscheduledview.cpp:312 kmymoney/views/kscheduledview.cpp:327
 #: kmymoney/views/kscheduledview_p.h:190
-#, fuzzy, kde-format
-#| msgctxt "Schedule group"
-#| msgid "Bills"
+#, kde-format
 msgid "Bills"
 msgstr "Računi"
 
@@ -20565,9 +20244,7 @@ msgstr "Depoziti"
 
 #: kmymoney/views/kscheduledview.cpp:318 kmymoney/views/kscheduledview.cpp:333
 #: kmymoney/views/kscheduledview_p.h:206
-#, fuzzy, kde-format
-#| msgctxt "Schedule group"
-#| msgid "Loans"
+#, kde-format
 msgid "Loans"
 msgstr "Posojila"
 
@@ -20617,32 +20294,26 @@ msgstr "Nova časovno načrtovana transakcija..."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_accountsCombo)
 #: kmymoney/views/kscheduledview.ui:45
-#, fuzzy, kde-format
-#| msgid "Filter out accounts"
+#, kde-format
 msgid "Filter Accounts"
 msgstr "Filtriraj račune"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_scheduleTree)
 #: kmymoney/views/kscheduledview.ui:74
-#, fuzzy, kde-format
-#| msgctxt "Schedule header"
-#| msgid "Type/Name"
+#, kde-format
 msgid "Type/Name"
 msgstr "Tip/Ime"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_scheduleTree)
 #: kmymoney/views/kscheduledview.ui:99
-#, fuzzy, kde-format
-#| msgctxt "Schedule header"
-#| msgid "Frequency"
+#, kde-format
 msgid "Frequency"
 msgstr "Pogostost"
 
 #: kmymoney/views/kscheduledview_p.h:175
-#, fuzzy, kde-format
-#| msgid "Unable to add account: %1"
+#, kde-format
 msgid "Unable to load accounts: "
-msgstr "Ni mogoče dodati računa: %1"
+msgstr "Ni mogoče naložiti računov: "
 
 #: kmymoney/views/kscheduledview_p.h:477 kmymoney/views/kscheduledview_p.h:596
 #: kmymoney/views/kscheduledview_p.h:602
@@ -20701,40 +20372,31 @@ msgid "Do you want to save the changes for <b>%1</b>?"
 msgstr "Ali želite shraniti spremembe za <b>%1</b>?"
 
 #: kmymoney/views/ktagsview.cpp:622
-#, fuzzy, kde-format
-#| msgid "<p>Do you really want to remove the payee <b>%1</b>?</p>"
+#, kde-format
 msgid "<p>Do you really want to remove the tag <b>%1</b>?</p>"
-msgstr "<p>Ali zares želite odstraniti prejemnika plačil <b>%1</b>?</p>"
+msgstr "<p>Ali zares želite odstraniti oznako <b>%1</b>?</p>"
 
 #: kmymoney/views/ktagsview.cpp:624
-#, fuzzy, kde-format
-#| msgid "Do you really want to remove all selected payees?"
+#, kde-format
 msgid "Do you really want to remove all selected tags?"
-msgstr "Ali res želite odstraniti vse izbrane prejemnike plačil?"
+msgstr "Ali res želite odstraniti vse izbrane oznake?"
 
 #: kmymoney/views/ktagsview.cpp:626
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Remove Tag"
-msgstr "Odstrani"
+msgstr "Odstrani oznako"
 
 #: kmymoney/views/ktagsview.cpp:663
-#, fuzzy, kde-format
-#| msgid ""
-#| "At least one transaction/scheduled transaction or loan account is still "
-#| "referenced by a payee. Currently you have all payees selected. However, "
-#| "at least one payee must remain so that the transaction/scheduled "
-#| "transaction or loan account can be reassigned."
+#, kde-format
 msgid ""
 "At least one transaction/scheduled transaction is still referenced by a tag. "
 "Currently you have all tags selected. However, at least one tag must remain "
 "so that the transaction/scheduled transaction can be reassigned."
 msgstr ""
-"Obstaja vsaj ena transakcija / časovno načrtovana transakcija ali posojilni "
-"račun na katero se sklicuje prejemnik plačila. Trenutno ste izbrali vse "
-"prejemnike plačil. Vendar pa mora ostati vsaj še en prejemnik plačila, da bo "
-"transakcija / časovno načrtovana transakcija oz. posojilo lahko "
-"prerazporejeno."
+"Obstaja vsaj ena transakcija / časovno načrtovana transakcija na katero se "
+"sklicuje oznaka. Trenutno ste izbrali vse oznake. Vendar pa mora ostati vsaj "
+"še ena oznaka, da bo transakcija / časovno načrtovana transakcija oz. "
+"posojilo lahko prerazporejeno."
 
 #: kmymoney/views/ktagsview.cpp:728
 #, kde-format
@@ -20754,46 +20416,39 @@ msgstr "Vaše oznake"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_newButton)
 #: kmymoney/views/ktagsview.ui:52
-#, fuzzy, kde-format
-#| msgid "Create a new split"
+#, kde-format
 msgid "Creates a new tag"
-msgstr "Ustvari nov razcep"
+msgstr "Ustvari novo oznako"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_newButton)
 #: kmymoney/views/ktagsview.ui:55
-#, fuzzy, kde-format
-#| msgid "Use this to create a new schedule."
+#, kde-format
 msgid "Use this to create a new tag."
-msgstr "Uporabi to za ustvarjanje novega načrta."
+msgstr "Uporabi to za ustvarjanje nove oznake."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_renameButton)
 #: kmymoney/views/ktagsview.ui:65
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Start reconciling the currently selected account"
+#, kde-format
 msgid "Rename the current selected tag"
-msgstr "Začni usklajevati trenutni izbrani račun"
+msgstr "Preimenuj trenutno izbrano oznako"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_renameButton)
 #: kmymoney/views/ktagsview.ui:68
-#, fuzzy, kde-format
-#| msgid "Use this to store the modified data."
+#, kde-format
 msgid "Use this to start renaming the selected tag."
-msgstr "Uporabi to, da shraniš spremenjene podatke."
+msgstr "Uporabite to, da začnete preimenovanje izbrane oznake."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_deleteButton)
 #: kmymoney/views/ktagsview.ui:78
-#, fuzzy, kde-format
-#| msgid "Delete the selected source entry"
+#, kde-format
 msgid "Delete the current selected tag"
-msgstr "Zbriši izbrani vnos vira"
+msgstr "Zbriši trenutno izbrano oznako"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_deleteButton)
 #: kmymoney/views/ktagsview.ui:81
-#, fuzzy, kde-format
-#| msgid "Use this to delete the selected online source entry"
+#, kde-format
 msgid "Use this to delete the selected tag."
-msgstr "Uporabi to, da izbrišeš izbrani spletni vir"
+msgstr "Uporabi to, da izbrišeš izbrano oznako."
 
 #. i18n: ectx: property (title), widget (QGroupBox, detailsGroup)
 #: kmymoney/views/ktagsview.ui:215
@@ -20873,10 +20528,9 @@ msgid "Open an existing data file"
 msgstr "Odpri obstoječo podatkovno datoteko"
 
 #: kmymoney/views/kwelcomepage.cpp:98
-#, fuzzy, kde-format
-#| msgid "Open the Handbook and learn how to use KMyMoney"
+#, kde-format
 msgid "Learn how to use KMyMoney"
-msgstr "Odprite priročnik in se naučite uporabljati KMyMoney"
+msgstr "Naučite se uporabljati KMyMoney"
 
 #: kmymoney/views/kwelcomepage.cpp:101
 #, kde-format
@@ -21113,10 +20767,9 @@ msgid "Next fiscal year"
 msgstr "Naslednje fiskalno leto"
 
 #: kmymoney/views/ledgerdelegate.cpp:276
-#, fuzzy, kde-format
-#| msgid "Opening balance: %1"
+#, kde-format
 msgid "Online statement balance: %1"
-msgstr "Otvoritveno stanje: %1"
+msgstr "Spletno otvoritveno stanje: %1"
 
 #: kmymoney/views/newspliteditor.cpp:121
 #: kmymoney/views/newtransactioneditor.cpp:234
@@ -21148,18 +20801,14 @@ msgstr "Številka čeka <b>%1</b> je bila v tem računu že uporabljena."
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, amountEditCredit)
 #: kmymoney/views/newspliteditor.ui:54
 #: kmymoney/views/newtransactioneditor.ui:85
-#, fuzzy, kde-format
-#| msgctxt "location of credit column"
-#| msgid "Credit"
+#, kde-format
 msgid "Credit"
 msgstr "V dobro"
 
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, amountEditDebit)
 #: kmymoney/views/newspliteditor.ui:67
 #: kmymoney/views/newtransactioneditor.ui:98
-#, fuzzy, kde-format
-#| msgctxt "location of debit column"
-#| msgid "Debit"
+#, kde-format
 msgid "Debit"
 msgstr "V breme"
 
@@ -21168,9 +20817,7 @@ msgstr "V breme"
 #: kmymoney/views/newspliteditor.ui:144
 #: kmymoney/views/newtransactioneditor.ui:107
 #: kmymoney/views/newtransactionform.ui:40
-#, fuzzy, kde-format
-#| msgctxt "Payee"
-#| msgid "Pay to"
+#, kde-format
 msgid "Pay to"
 msgstr "Plačaj"
 
@@ -21290,88 +20937,74 @@ msgid "To"
 msgstr "Za"
 
 #: kmymoney/widgets/groupmarkers.cpp:54
-#, fuzzy, kde-format
-#| msgid "Deposits"
+#, kde-format
 msgctxt "Deposits onto account"
 msgid "Deposits"
 msgstr "Depoziti"
 
 #: kmymoney/widgets/groupmarkers.cpp:56
-#, fuzzy, kde-format
-#| msgid "Payments"
+#, kde-format
 msgctxt "Payments towards credit card"
 msgid "Payments"
 msgstr "Plačila"
 
 #: kmymoney/widgets/groupmarkers.cpp:60
-#, fuzzy, kde-format
-#| msgid "Payments"
+#, kde-format
 msgctxt "Payments made from account"
 msgid "Payments"
 msgstr "Plačila"
 
 #: kmymoney/widgets/groupmarkers.cpp:62
-#, fuzzy, kde-format
-#| msgid "Charges"
+#, kde-format
 msgctxt "Payments made with credit card"
 msgid "Charges"
 msgstr "Obremenitve"
 
 #: kmymoney/widgets/groupmarkers.cpp:137
-#, fuzzy, kde-format
-#| msgid "Not reconciled"
+#, kde-format
 msgctxt "Reconcile state 'Not reconciled'"
 msgid "Not reconciled"
 msgstr "Neusklajeno"
 
 #: kmymoney/widgets/groupmarkers.cpp:140
-#, fuzzy, kde-format
-#| msgid "Cleared"
+#, kde-format
 msgctxt "Reconcile state 'Cleared'"
 msgid "Cleared"
 msgstr "Razčiščeno"
 
 #: kmymoney/widgets/groupmarkers.cpp:143
-#, fuzzy, kde-format
-#| msgid "Reconciled"
+#, kde-format
 msgctxt "Reconcile state 'Reconciled'"
 msgid "Reconciled"
 msgstr "Usklajeno"
 
 #: kmymoney/widgets/groupmarkers.cpp:146
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation state 'Frozen'"
-#| msgid "Frozen"
+#, kde-format
 msgctxt "Reconcile state 'Frozen'"
 msgid "Frozen"
 msgstr "Zamrznjeno"
 
 #: kmymoney/widgets/groupmarkers.cpp:149
-#, fuzzy, kde-format
-#| msgid "Unknown"
+#, kde-format
 msgctxt "Unknown reconcile state"
 msgid "Unknown"
 msgstr "Neznano"
 
 #: kmymoney/widgets/investtransaction.cpp:216
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox"
-#| msgid "Ratio 1/"
+#, kde-format
 msgid "Ratio"
-msgstr "Razmerje 1/"
+msgstr "Razmerje"
 
 #: kmymoney/widgets/investtransaction.cpp:279
-#, fuzzy, kde-format
-#| msgid "Amount"
+#, kde-format
 msgid "Fee Amount"
-msgstr "Znesek"
+msgstr "Znesek pristojbine"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_groupList)
 #: kmymoney/widgets/kaccounttemplateselector.ui:30
-#, fuzzy, kde-format
-#| msgid "Account Type:"
+#, kde-format
 msgid "Account Types"
-msgstr "Vrsta računa:"
+msgstr "Vrste računa"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/widgets/kaccounttemplateselector.ui:45
@@ -21399,26 +21032,22 @@ msgid "None"
 msgstr "Noben"
 
 #: kmymoney/widgets/kmymoneyaccountsviewbase_p.h:52
-#, fuzzy, kde-format
-#| msgid "Net Worth: %1"
+#, kde-format
 msgid "Net Worth: "
-msgstr "Neto vrednost: %1"
+msgstr "Neto vrednost: "
 
 #: kmymoney/widgets/kmymoneyaccountsviewbase_p.h:56
-#, fuzzy, kde-format
-#| msgid "Loss: %1"
+#, kde-format
 msgid "Loss: "
-msgstr "Izguba: %1"
+msgstr "Izguba: "
 
 #: kmymoney/widgets/kmymoneyaccountsviewbase_p.h:58
-#, fuzzy, kde-format
-#| msgid "Profit: %1"
+#, kde-format
 msgid "Profit: "
-msgstr "Dobiček: %1"
+msgstr "Dobiček: "
 
 #: kmymoney/widgets/kmymoneyaccountsviewbase_p.h:61
-#, fuzzy, kde-format
-#| msgid "Balance: "
+#, kde-format
 msgctxt "The balance of the selected budget"
 msgid "Balance: "
 msgstr "Stanje: "
@@ -21698,31 +21327,24 @@ msgid "Last 3 months to next 3 months"
 msgstr "Zadnjih 3 mesecev do naslednjih 3 mesecev"
 
 #: kmymoney/widgets/kmymoneytagcombo.cpp:95
-#, fuzzy, kde-format
-#| msgctxt "@title:info In reconciliation"
-#| msgid "View cannot be closed"
+#, kde-format
 msgid "Closed tags cannot be used."
-msgstr "Pogleda ni mogoče zapreti"
+msgstr "Zaprtih oznak ni mogoče uporabiti."
 
 #: kmymoney/widgets/kmymoneytagcombo.cpp:96
-#, fuzzy, kde-format
-#| msgid "Closed"
+#, kde-format
 msgid "Closed tag"
-msgstr "Zaprto"
+msgstr "Zaprta oznaka"
 
 #: kmymoney/widgets/kmymoneytagcombo.cpp:101
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip online job list status"
-#| msgid "This job is ready for sending."
+#, kde-format
 msgid "The tag is already present."
-msgstr "Ta posel je pripravljen za pošiljanje."
+msgstr "Ta oznaka je že prisotna."
 
 #: kmymoney/widgets/kmymoneytagcombo.cpp:102
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Duplicate tag name"
+#, kde-format
 msgid "Duplicate tag"
-msgstr "Podvojeno ime oznake"
+msgstr "Podvoji oznako"
 
 #. i18n: ectx: property (text), widget (QLabel, icon)
 #: kmymoney/widgets/kmymoneyvalidationfeedback.ui:17
@@ -21985,55 +21607,45 @@ msgid "institution code"
 msgstr "koda institucije"
 
 #: kmymoney/widgets/register.cpp:1704
-#, fuzzy, kde-format
-#| msgid "Transactions by Week"
+#, kde-format
 msgid "Prior transactions possibly filtered"
-msgstr "Transakcije po tednih"
+msgstr "Prejšnje transakcije morda filtrirane"
 
 #: kmymoney/widgets/register.cpp:1707
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox Reconciliation date"
-#| msgid "Last reconciliation: %1"
+#, kde-format
 msgid "Last reconciliation"
-msgstr "Zadnja uskladitev: %1"
+msgstr "Zadnja uskladitev"
 
 #: kmymoney/widgets/register.cpp:1711
-#, fuzzy, kde-format
-#| msgid "Opening balance: %1"
+#, kde-format
 msgid "Reconciled Balance: %1"
-msgstr "Otvoritveno stanje: %1"
+msgstr "Usklajeno stanje: %1"
 
 #: kmymoney/widgets/register.cpp:1722
-#, fuzzy, kde-format
-#| msgctxt "Label in ledger for online balance row"
-#| msgid "Online Balance"
+#, kde-format
 msgid "Online Statement Balance: %1"
-msgstr "Spletni saldo"
+msgstr "Spletni izkaz salda: %1"
 
 #: kmymoney/widgets/register.cpp:1777
-#, fuzzy, kde-format
-#| msgid "Unknown"
+#, kde-format
 msgctxt "Unknown payee"
 msgid "Unknown"
 msgstr "Neznano"
 
 #: kmymoney/widgets/register.cpp:1794
-#, fuzzy, kde-format
-#| msgid "Unknown"
+#, kde-format
 msgctxt "Unknown category"
 msgid "Unknown"
 msgstr "Neznano"
 
 #: kmymoney/widgets/register.cpp:1811
-#, fuzzy, kde-format
-#| msgid "Unknown"
+#, kde-format
 msgctxt "Unknown security"
 msgid "Unknown"
 msgstr "Neznano"
 
 #: kmymoney/widgets/registersearchline.cpp:67
-#, fuzzy, kde-format
-#| msgid "Status"
+#, kde-format
 msgctxt "label for status combo"
 msgid "Stat&us"
 msgstr "Stanje"
@@ -22071,56 +21683,45 @@ msgstr "Ni označeno"
 #: kmymoney/widgets/stdtransaction.cpp:84
 #, kde-format
 msgid "Sell"
-msgstr ""
+msgstr "Prodaj"
 
 #: kmymoney/widgets/stdtransaction.cpp:86
-#, fuzzy, kde-format
-#| msgctxt "Type of operation as in financial statement"
-#| msgid "buy"
+#, kde-format
 msgid "Buy"
-msgstr "kupi"
+msgstr "Kupi"
 
 #: kmymoney/widgets/stdtransaction.cpp:99
-#, fuzzy, kde-format
-#| msgid "Investment Transactions"
+#, kde-format
 msgid "Investment transaction"
-msgstr "Naložbene transakcije"
+msgstr "Naložbena transakcija"
 
 #: kmymoney/widgets/stdtransactionmatched.cpp:109
-#, fuzzy, kde-format
-#| msgid "Unable to match the selected transactions"
+#, kde-format
 msgid "KMyMoney has matched the two selected transactions (result above)"
-msgstr "Izbranih transakcij ni mogoče najti"
+msgstr "KMyMoney je uparil dve izbrani transakciji (rezultat zgoraj)"
 
 #: kmymoney/widgets/stdtransactionmatched.cpp:117
-#, fuzzy, kde-format
-#| msgid "Data entry"
+#, kde-format
 msgid "Bank entry:"
-msgstr "Vnos podatkov"
+msgstr "Bančni vnos:"
 
 #: kmymoney/widgets/stdtransactionmatched.cpp:148
-#, fuzzy, kde-format
-#| msgid "Your key"
+#, kde-format
 msgid "Your entry:"
-msgstr "Vaš ključ"
+msgstr "Vaš vnos:"
 
 #: kmymoney/widgets/transaction.cpp:671
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip icon description"
-#| msgid "Transaction is missing a category assignment."
+#, kde-format
 msgid "Transaction is missing a category assignment."
 msgstr "Transakciji manjka dodeljena kategorija."
 
 #: kmymoney/widgets/transaction.cpp:674
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip icon description"
-#| msgid "The transaction has a missing assignment of <b>%1</b>."
+#, kde-format
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Transakciji manjka dodelitev <b>%1</b>."
 
 #: kmymoney/widgets/transactionform.cpp:236
-#, fuzzy, kde-format
-#| msgid "Deposit"
+#, kde-format
 msgid "&Deposit"
 msgstr "Depozit"
 
@@ -22128,42 +21729,34 @@ msgstr "Depozit"
 #: kmymoney/widgets/transactionform.cpp:243
 #: kmymoney/widgets/transactionform.cpp:250
 #: kmymoney/widgets/transactionform.cpp:257
-#, fuzzy, kde-format
-#| msgid "Transfer"
+#, kde-format
 msgid "&Transfer"
 msgstr "Prenos"
 
 #: kmymoney/widgets/transactionform.cpp:238
 #, kde-format
 msgid "&Withdrawal"
-msgstr ""
+msgstr "Dvig"
 
 #: kmymoney/widgets/transactionform.cpp:242
-#, fuzzy, kde-format
-#| msgid "Payment"
+#, kde-format
 msgid "&Payment"
 msgstr "Plačilo"
 
 #: kmymoney/widgets/transactionform.cpp:244
-#, fuzzy, kde-format
-#| msgctxt "Payment made with credit card"
-#| msgid "Charge"
+#, kde-format
 msgid "&Charge"
 msgstr "Obremenitev"
 
 #: kmymoney/widgets/transactionform.cpp:249
 #: kmymoney/widgets/transactionform.cpp:258
-#, fuzzy, kde-format
-#| msgctxt "Decrease of asset/liability value"
-#| msgid "Decrease"
+#, kde-format
 msgid "&Decrease"
 msgstr "Zmanjšanje"
 
 #: kmymoney/widgets/transactionform.cpp:251
 #: kmymoney/widgets/transactionform.cpp:256
-#, fuzzy, kde-format
-#| msgctxt "Increase of asset/liability value"
-#| msgid "Increase"
+#, kde-format
 msgid "&Increase"
 msgstr "Povečanje"
 
@@ -22349,7 +21942,7 @@ msgstr "Pomoč"
 #: kmymoney/wizards/kmymoneywizard_p.h:161
 #, kde-format
 msgid "No Title specified"
-msgstr ""
+msgstr "Ni določenega naslova"
 
 #: kmymoney/wizards/kmymoneywizard_p.h:274
 #, kde-format
@@ -25246,19 +24839,14 @@ msgstr "Ime institucije, ki je izdala račun."
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_institutionNumberEdit)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:59
-#, fuzzy, kde-format
-#| msgid ""
-#| "Each institution has a bank code, known as routing number in the US or a "
-#| "sort code in the UK. Enter it here. If uncertain, leave the field blank. "
-#| "You can modify it later."
+#, kde-format
 msgid ""
 "Each institution has a routing number. Enter it here. If uncertain, leave "
 "the field blank. You can modify it later."
 msgstr ""
-"Vsaka institucija ima kodo banke, ki je v ZDA znana kot 'routing "
-"number' (usmerjevalna številka) ali 'sort code' (kodo razvrščanja) v Veliki "
-"Britaniji. Vnesite ga sem. Če niste gotovi o tem, pustite polje prazno. "
-"Lahko ga spremenite kasneje."
+"Vsaka institucija ima kodo banke (angl. 'routing number' (usmerjevalna "
+"številka). Vnesite jo sem. Če niste gotovi o tem, pustite polje prazno. "
+"Lahko jo spremenite kasneje."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:66
@@ -25268,10 +24856,9 @@ msgstr "Ime institucije"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:76
-#, fuzzy, kde-format
-#| msgid "account number"
+#, kde-format
 msgid "Routing number"
-msgstr "številka računa"
+msgstr "Koda banke"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_accountNumberEdit)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:86
@@ -25532,6 +25119,8 @@ msgid ""
 "<p>...that you can change the sort order of ledger entries by\n"
 "right-clicking the header of the ledger view?\n"
 msgstr ""
+"<p>...da lahko spremenite vrstni red vnosov v knjigo, tako\n"
+"da z desno miškino tipko kliknete na glavo pogleda?\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tips:9
