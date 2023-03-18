@@ -109,7 +109,6 @@ KTagContainer::KTagContainer(QWidget* parent)
     setFocusProxy(d->m_tagCombo);
     d->m_tagCombo->lineEdit()->setPlaceholderText(i18nc("@info:placeholder tag combo box", "Tag"));
 
-    d->m_tagCombo->setModel(d->m_idFilter.data());
     d->m_idFilter.data()->setSortLocaleAware(true);
     d->m_idFilter.data()->sort(0);
 
@@ -172,7 +171,11 @@ bool KTagContainer::eventFilter(QObject* o, QEvent* e)
 void KTagContainer::setModel(QAbstractItemModel* model)
 {
     Q_D(KTagContainer);
+    const bool needSetSourceModel = d->m_idFilter->sourceModel() == nullptr;
     d->m_idFilter->setSourceModel(model);
+    if (needSetSourceModel) {
+        d->m_tagCombo->setModel(d->m_idFilter.data());
+    }
 }
 
 QComboBox* KTagContainer::tagCombo()
