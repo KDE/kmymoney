@@ -9,7 +9,6 @@
 // QT Includes
 
 #include <QApplication>
-#include <QDebug>
 #include <QPainter>
 #include <QScrollBar>
 #include <QSortFilterProxyModel>
@@ -52,9 +51,6 @@ SecurityAccountNameDelegate::~SecurityAccountNameDelegate()
 
 void SecurityAccountNameDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-    if (index.column() == JournalModel::Column::Detail) {
-        qDebug() << "Hit";
-    }
     QStyleOptionViewItem opt = option;
     initStyleOption(&opt, index);
 
