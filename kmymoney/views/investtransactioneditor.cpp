@@ -121,6 +121,7 @@ public:
     void setSecurity(const MyMoneySecurity& sec);
 
     bool amountChanged(SplitModel* model, AmountEdit* widget, const MyMoneyMoney& transactionFactor);
+    bool isDividendOrYield(eMyMoney::Split::InvestmentTransactionType type) const;
 
     void scheduleUpdateTotalAmount();
     void updateWidgetState();
@@ -425,6 +426,11 @@ bool InvestTransactionEditor::Private::amountChanged(SplitModel* model, AmountEd
         /// of all splits, otherwise we could ask if the user wants to start the split editor or anything else.
     }
     return rc;
+}
+
+bool InvestTransactionEditor::Private::isDividendOrYield(eMyMoney::Split::InvestmentTransactionType type) const
+{
+    return (type == eMyMoney::Split::InvestmentTransactionType::Dividend) || (type == eMyMoney::Split::InvestmentTransactionType::Yield);
 }
 
 void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, AmountEdit* amountEdit, const MyMoneyMoney& transactionFactor)
@@ -1151,8 +1157,10 @@ void InvestTransactionEditor::activityChanged(int index)
             d->currentActivity = new Invest::Sell(this);
             break;
         case eMyMoney::Split::InvestmentTransactionType::Dividend:
-        case eMyMoney::Split::InvestmentTransactionType::Yield:
             d->currentActivity = new Invest::Div(this);
+            break;
+        case eMyMoney::Split::InvestmentTransactionType::Yield:
+            d->currentActivity = new Invest::Yield(this);
             break;
         case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
             d->currentActivity = new Invest::Reinvest(this);
@@ -1191,13 +1199,13 @@ void InvestTransactionEditor::activityChanged(int index)
             d->ui->sharesAmountEdit->setPrecision(MyMoneyMoney::denomToPrec(d->security.smallestAccountFraction()));
         }
 
-        if (type == eMyMoney::Split::InvestmentTransactionType::Dividend && oldType != eMyMoney::Split::InvestmentTransactionType::Dividend) {
-            // switch to dividend
+        if (d->isDividendOrYield(type) && !d->isDividendOrYield(oldType)) {
+            // switch to dividend/yield
             d->stockSplit.setShares(MyMoneyMoney()); // dividend payments don't affect the number of shares
             d->stockSplit.setValue(MyMoneyMoney());
             d->stockSplit.setPrice(MyMoneyMoney());
-        } else if (type != eMyMoney::Split::InvestmentTransactionType::Dividend && oldType == eMyMoney::Split::InvestmentTransactionType::Dividend) {
-            // switch away from dividend
+        } else if (!d->isDividendOrYield(type) && d->isDividendOrYield(oldType)) {
+            // switch away from dividend/yield
             d->stockSplit.setShares(d->ui->sharesAmountEdit->shares());
             d->stockSplit.setPrice(d->ui->priceAmountEdit->value());
             d->stockSplit.setValue(d->stockSplit.shares() * d->stockSplit.price());

@@ -421,6 +421,34 @@ void Div::showWidgets() const
     setupWidgets(activityWidgets);
 }
 
+Invest::Yield::Yield(InvestTransactionEditor* editor)
+    : Activity(editor, QLatin1String("Yield"))
+{
+}
+
+Invest::Yield::~Yield()
+{
+}
+
+eMyMoney::Split::InvestmentTransactionType Invest::Yield::type() const
+{
+    return eMyMoney::Split::InvestmentTransactionType::Yield;
+}
+
+void Yield::showWidgets() const
+{
+    static const QStringList activityWidgets = {
+        // clang-format off
+        "assetAccountLabel", "assetAccountCombo",
+        "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
+        "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
+        "totalLabel", "totalAmountEdit",
+        // clang-format on
+    };
+
+    setupWidgets(activityWidgets);
+}
+
 Reinvest::Reinvest(InvestTransactionEditor* editor)
     : Activity(editor, QLatin1String("Reinvest"))
 {

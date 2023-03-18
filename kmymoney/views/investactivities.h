@@ -165,14 +165,43 @@ public:
     ~Div() override;
     eMyMoney::Split::InvestmentTransactionType type() const override;
     void showWidgets() const override;
-    virtual void adjustStockSplit(MyMoneySplit&) override {}
-    fieldRequired_t feesRequired() const override {
+    virtual void adjustStockSplit(MyMoneySplit&) override
+    {
+    }
+    fieldRequired_t feesRequired() const override
+    {
         return Optional;
     }
-    fieldRequired_t interestRequired() const override {
+    fieldRequired_t interestRequired() const override
+    {
         return Mandatory;
     }
-    fieldRequired_t assetAccountRequired() const override {
+    fieldRequired_t assetAccountRequired() const override
+    {
+        return Mandatory;
+    }
+};
+
+class Yield : public Activity
+{
+public:
+    explicit Yield(InvestTransactionEditor* editor);
+    ~Yield() override;
+    eMyMoney::Split::InvestmentTransactionType type() const override;
+    void showWidgets() const override;
+    virtual void adjustStockSplit(MyMoneySplit&) override
+    {
+    }
+    fieldRequired_t feesRequired() const override
+    {
+        return Optional;
+    }
+    fieldRequired_t interestRequired() const override
+    {
+        return Mandatory;
+    }
+    fieldRequired_t assetAccountRequired() const override
+    {
         return Mandatory;
     }
 };
