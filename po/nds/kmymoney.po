@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 00:49+0000\n"
+"POT-Creation-Date: 2023-03-19 00:48+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -19120,7 +19120,7 @@ msgctxt "@label:textbox"
 msgid "Price"
 msgstr "Pries"
 
-#: kmymoney/views/investactivities.cpp:580
+#: kmymoney/views/investactivities.cpp:608
 #, fuzzy, kde-format
 #| msgid "Ratio 1/"
 msgctxt "@label:textbox"
@@ -19190,14 +19190,14 @@ msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "Tinsinkamen"
 
-#: kmymoney/views/investtransactioneditor.cpp:264
+#: kmymoney/views/investtransactioneditor.cpp:265
 #: kmymoney/views/newtransactioneditor.cpp:216
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
 msgid "The posting date of the transaction."
 msgstr "Kontouttog ahn Boken warrt importeert."
 
-#: kmymoney/views/investtransactioneditor.cpp:288
+#: kmymoney/views/investtransactioneditor.cpp:289
 #: kmymoney/views/newtransactioneditor.cpp:236
 #, fuzzy, kde-format
 #| msgid ""
@@ -19208,7 +19208,7 @@ msgstr ""
 "  * För Konto \"%1\" in Geldsort \"%2\" is keen Pries för Startdatum \"%3\" "
 "instellt."
 
-#: kmymoney/views/investtransactioneditor.cpp:384
+#: kmymoney/views/investtransactioneditor.cpp:385
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -19216,63 +19216,63 @@ msgid ""
 "price information invalid. Please check them."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:521
+#: kmymoney/views/investtransactioneditor.cpp:527
 #, fuzzy, kde-format
 #| msgid "Default Category for Payee"
 msgctxt "@info:tooltip"
 msgid "Category for fees"
 msgstr "Standardkategorie för Adressaat"
 
-#: kmymoney/views/investtransactioneditor.cpp:522
+#: kmymoney/views/investtransactioneditor.cpp:528
 #, fuzzy, kde-format
 #| msgid "Amount is:"
 msgctxt "@info:tooltip"
 msgid "Amount of fees"
 msgstr "Bedrag is:"
 
-#: kmymoney/views/investtransactioneditor.cpp:523
+#: kmymoney/views/investtransactioneditor.cpp:529
 #, fuzzy, kde-format
 #| msgid "Category options"
 msgctxt "@info:tooltip"
 msgid "Category for interest"
 msgstr "Kategorie-Optschonen"
 
-#: kmymoney/views/investtransactioneditor.cpp:524
+#: kmymoney/views/investtransactioneditor.cpp:530
 #, fuzzy, kde-format
 #| msgid "Amount entered"
 msgctxt "@info:tooltip"
 msgid "Amount of interest"
 msgstr "Ingeven Bedrag"
 
-#: kmymoney/views/investtransactioneditor.cpp:525
+#: kmymoney/views/investtransactioneditor.cpp:531
 #, fuzzy, kde-format
 #| msgid "Create brokerage account"
 msgctxt "@info:tooltip"
 msgid "Asset or brokerage account"
 msgstr "Verrekenkonto opstellen"
 
-#: kmymoney/views/investtransactioneditor.cpp:526
+#: kmymoney/views/investtransactioneditor.cpp:532
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Price information for this transaction"
 msgstr "Mit dissen Knoop lett sik disse Boken sekern"
 
-#: kmymoney/views/investtransactioneditor.cpp:529
+#: kmymoney/views/investtransactioneditor.cpp:535
 #, fuzzy, kde-format
 #| msgid "Skip this transaction"
 msgctxt "@info:tooltip"
 msgid "Security for this transaction"
 msgstr "Disse Boken övergahn"
 
-#: kmymoney/views/investtransactioneditor.cpp:530
+#: kmymoney/views/investtransactioneditor.cpp:536
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Select the activity for this transaction."
 msgstr "Mit dissen Knoop lett sik disse Boken sekern"
 
-#: kmymoney/views/investtransactioneditor.cpp:533
+#: kmymoney/views/investtransactioneditor.cpp:539
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19280,21 +19280,21 @@ msgid ""
 "account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:534
+#: kmymoney/views/investtransactioneditor.cpp:540
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "This activity cannot be modified because the security account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:546
+#: kmymoney/views/investtransactioneditor.cpp:552
 #, fuzzy, kde-format
 #| msgid "Number of historic cycles to use in forecast"
 msgctxt "@info:tooltip"
 msgid "Number of shares"
 msgstr "Tall vun verleden Dörlööp för den Utblick"
 
-#: kmymoney/views/investtransactioneditor.cpp:548
+#: kmymoney/views/investtransactioneditor.cpp:554
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -19302,77 +19302,77 @@ msgid ""
 "closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:552
+#: kmymoney/views/investtransactioneditor.cpp:558
 #, fuzzy, kde-format
 #| msgid "Enter next transaction..."
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
 msgstr "Nakamen Boken ingeven..."
 
-#: kmymoney/views/investtransactioneditor.cpp:558
+#: kmymoney/views/investtransactioneditor.cpp:564
 #, fuzzy, kde-format
 #| msgid "Split transaction"
 msgctxt "@info:tooltip"
 msgid "Split ratio"
 msgstr "Boken opdelen"
 
-#: kmymoney/views/investtransactioneditor.cpp:560
+#: kmymoney/views/investtransactioneditor.cpp:566
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The split ratio cannot be modified because the security account is closed."
 msgstr ""
 
-#: kmymoney/views/investtransactioneditor.cpp:564
+#: kmymoney/views/investtransactioneditor.cpp:570
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
 msgstr "Mit dissen Knoop lett sik disse Boken sekern"
 
-#: kmymoney/views/investtransactioneditor.cpp:576
+#: kmymoney/views/investtransactioneditor.cpp:582
 #, fuzzy, kde-format
 #| msgid "Enter next transaction..."
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
 msgstr "Nakamen Boken ingeven..."
 
-#: kmymoney/views/investtransactioneditor.cpp:592
+#: kmymoney/views/investtransactioneditor.cpp:598
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
 msgstr "Boken laat sik nich tofögen."
 
-#: kmymoney/views/investtransactioneditor.cpp:599
+#: kmymoney/views/investtransactioneditor.cpp:605
 #, fuzzy, kde-format
 #| msgid "Default Category for Payee"
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
 msgstr "Standardkategorie för Adressaat"
 
-#: kmymoney/views/investtransactioneditor.cpp:602
+#: kmymoney/views/investtransactioneditor.cpp:608
 #, fuzzy, kde-format
 #| msgid "Enter additional fees"
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
 msgstr "Bito-Kösten ingeven"
 
-#: kmymoney/views/investtransactioneditor.cpp:608
+#: kmymoney/views/investtransactioneditor.cpp:614
 #, fuzzy, kde-format
 #| msgid "Expense categories"
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
 msgstr "Utgaven-Kategorien"
 
-#: kmymoney/views/investtransactioneditor.cpp:611
+#: kmymoney/views/investtransactioneditor.cpp:617
 #, fuzzy, kde-format
 #| msgid "Type of interest"
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
 msgstr "Typ vun Tinssatz"
 
-#: kmymoney/views/investtransactioneditor.cpp:616
+#: kmymoney/views/investtransactioneditor.cpp:622
 #, fuzzy, kde-format
 #| msgid "Use this button to record this transaction"
 msgctxt "@info:tooltip"
