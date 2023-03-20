@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-13 03:06+0000\n"
-"PO-Revision-Date: 2023-01-29 20:27+0100\n"
+"PO-Revision-Date: 2023-03-12 19:07+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -922,7 +922,7 @@ msgstr "Data"
 #: kmymoney/widgets/stdtransaction.cpp:305
 #, kde-format
 msgid "Memo"
-msgstr "Memoranduma"
+msgstr "Oharra"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
@@ -1391,7 +1391,7 @@ msgstr ""
 #, kde-format
 msgctxt "Empty memo"
 msgid "empty"
-msgstr "hutsa"
+msgstr "hutsik"
 
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:135
 #, kde-format
@@ -5454,7 +5454,7 @@ msgstr "Etiketak"
 #: kmymoney/widgets/stdtransaction.cpp:124
 #, kde-format
 msgid "Transfer from"
-msgstr "Transferitu hemendik:"
+msgstr "Transferentzia hemendik:"
 
 #: kmymoney/dialogs/stdtransactioneditor.cpp:426
 #: kmymoney/dialogs/stdtransactioneditor.cpp:466
@@ -5465,7 +5465,7 @@ msgstr "Transferitu hemendik:"
 #: kmymoney/widgets/stdtransaction.cpp:124
 #, kde-format
 msgid "Transfer to"
-msgstr "Transferitu hona:"
+msgstr "Transferentzia hona:"
 
 #: kmymoney/dialogs/stdtransactioneditor.cpp:742
 #, kde-format
@@ -6850,7 +6850,7 @@ msgstr "Hautatu kontua"
 #: kmymoney/kmymoneyui.rc:228
 #, kde-format
 msgid "Credit transfer options"
-msgstr "Transferentzia aukerak"
+msgstr "Kreditu transferentzia aukerak"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: kmymoney/kmymoneyui.rc:239
@@ -9176,7 +9176,7 @@ msgstr "Kategoria"
 #, kde-format
 msgctxt "Split header"
 msgid "Memo"
-msgstr "Memoranduma"
+msgstr "Oharra"
 
 #: kmymoney/mymoney/splitmodel.cpp:36
 #, kde-format
@@ -9871,7 +9871,7 @@ msgstr "Esportatzea osatu da.\n"
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:77
 #, kde-format
 msgid "Unable to open file '%1' for writing"
-msgstr "ezin da  '%1' fitxategia ireki idazteko"
+msgstr "Ezin du '%1' fitxategia idazteko ireki"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:94
 #, kde-format
@@ -9942,8 +9942,8 @@ msgid ""
 "'Yes'.</center>"
 msgstr ""
 "<center>'<b>%1</b>' eremuan dagoeneko hautatuta dago zutabe hori.</"
-"center><center>Onuradunaren datuak oharren eremuan kopiatu nahi badituzu, "
-"egin klik 'Bai' botoian.</center>"
+"center><center>Onuradunaren datuak ohar-eremuan kopiatu nahi badituzu, egin "
+"klik 'Bai' botoian.</center>"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:294
 #, kde-format
@@ -9955,7 +9955,7 @@ msgstr "Bat ere ez"
 #, kde-format
 msgctxt "@label:listbox list of currently selected fields"
 msgid "<i>Memo columns:</i> %1"
-msgstr "<i>Memo zutabeak:</i> %1"
+msgstr "<i>Ohar zutabeak:</i> %1"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:345
 #, kde-format
@@ -10314,7 +10314,7 @@ msgstr "gehitu,akzio,dibidendua,dibin,berinb,transfer,eguneko sarrera"
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "remove"
-msgstr "Kendu"
+msgstr "kendu"
 
 #: kmymoney/plugins/csv/import/csvimporter.cpp:41
 #, kde-format
@@ -10669,7 +10669,7 @@ msgid ""
 "</center>"
 msgstr ""
 "<center>'<b>%1</b>' eremuan dagoeneko hautatuta dago zutabe hori.</"
-"center><center>Datua horiek oharren eremuan kopiatu nahi badituzu, egin klik "
+"center><center>Datua horiek ohar-eremuan kopiatu nahi badituzu, egin klik "
 "'Bai' botoian.</center>"
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:375
@@ -12023,7 +12023,7 @@ msgstr "iCalendar fitxategia"
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:207
 #, kde-format
 msgid "Transfer from %1 to %2, Payee %3, amount %4"
-msgstr "Transferitu %1(e)tik %2(e)ra; %3 onuraduna, %4 zenbatekoa"
+msgstr "Transferentzia %1(e)tik %2(e)ra, onuraduna %3, zenbatekoa %4"
 
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:209
 #, kde-format
@@ -12061,7 +12061,7 @@ msgstr "Erabili onuradun-eremua erakundeak adierazi bezala"
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:43
 #, kde-format
 msgid "Extract payee from memo field using regular expressions"
-msgstr "Atera onuraduna oharren eremutik adierazpen erregularrak erabiliz"
+msgstr "Atera onuraduna ohar-eremutik adierazpen erregularrak erabiliz"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:104
@@ -12132,7 +12132,7 @@ msgid ""
 "been inserted between multiple purpose fields of the transaction.</p></"
 "body></html>"
 msgstr ""
-"<html><head/><body><p>Kendu lerro saltoak ohar eremutik transakzioan hainbat "
+"<html><head/><body><p>Kendu lerro jauziak ohar-eremutik transakzioan hainbat "
 "helburutako eremuen artean sartu direnak.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_removeLineBreaksFromMemo)
@@ -12153,7 +12153,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:204
 #, kde-format
 msgid "Remove line breaks from memo field"
-msgstr "Kendu lerro saltoak ohar eremutik"
+msgstr "Kendu lerro jauziak ohar-eremutik"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:211
@@ -12169,7 +12169,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:214
 #, kde-format
 msgid "Include the payee details in memo"
-msgstr "Sartu onuradunaren xehetasunak memoan"
+msgstr "Sartu onuradunaren xehetasunak oharrean"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, MapAccountWizard)
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBMapAccount)
@@ -12523,7 +12523,7 @@ msgstr "Hartu transakzioak"
 #: kmymoney/plugins/views/reports/core/querytable.cpp:911
 #, kde-format
 msgid "Transfer"
-msgstr "Transferitu"
+msgstr "Transferentzia"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:79
 #, kde-format
@@ -13368,8 +13368,8 @@ msgid ""
 "After this credit transfer the account's balance will be below your credit "
 "limit."
 msgstr ""
-"Transferentzia honen ondoren zuren kontuaren saldoa zure kreditu limitetik "
-"behera geldituko da."
+"Kreditu transferentzia horren ondoren, kontuko saldoa zure kreditu-mugaren "
+"azpitik egongo da."
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:472
 #, kde-format
@@ -13377,8 +13377,8 @@ msgid ""
 "After this credit transfer the account's balance will be below the minimal "
 "balance."
 msgstr ""
-"Transferentzia honen ondoren zuren kontuaren saldoa zure saldo minimotik "
-"behera geldituko da."
+"Kreditu-transferentzia horren ondoren, kontuko saldoa gutxieneko saldoa "
+"baino txikiagoa izango da."
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:482
 #, kde-format
@@ -14383,7 +14383,7 @@ msgstr[1] "Ordaindu gabeko %1 ordainketa guztira; zenbatekoa:"
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:278
 #, kde-format
 msgid "Outstanding charges"
-msgstr "Kobratu gabeko kobrantza "
+msgstr "Kobratu gabeko karguak"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:278
 #, kde-format
@@ -15961,7 +15961,7 @@ msgstr "Epe luzeko irabazia"
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1926
 #, kde-format
 msgid "Transfer from %1"
-msgstr "Transferitu hemendik: %1"
+msgstr "Transferentzia hemendik: %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:228
 #: kmymoney/plugins/views/reports/core/querytable.cpp:909
@@ -15970,7 +15970,7 @@ msgstr "Transferitu hemendik: %1"
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1925
 #, kde-format
 msgid "Transfer to %1"
-msgstr "Transferitu hona: %1"
+msgstr "Transferentzia hona: %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:287
 #, kde-format
@@ -17406,7 +17406,7 @@ msgstr "Eraztuna"
 #, kde-format
 msgctxt "type of graphic palette"
 msgid "Use application setting"
-msgstr "Erabili aplikazio ezarpenak"
+msgstr "Erabili aplikazioaren ezarpenak"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:98
 #, kde-format
@@ -17630,7 +17630,7 @@ msgstr "Erakutsi zutabeak"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:156
 #, kde-format
 msgid "<p>Select this option to show the Memo column</p>"
-msgstr "<p>Hautatu aukera hau Oharrak zutabea erakusteko</p>"
+msgstr "<p>Hautatu aukera hau ohar-zutabea erakusteko</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkShares)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:169
@@ -18698,7 +18698,7 @@ msgstr "izen gehiago eskudiruaren konturako"
 #: kmymoney/settings/kmymoney.kcfg:356
 #, kde-format
 msgid "additional names for checking account"
-msgstr "izen gehiago txekeen konturako"
+msgstr "kontu korronterako izen gehigarriak"
 
 #. i18n: ectx: label, entry (qifCreditCard), group (QIF Options)
 #: kmymoney/settings/kmymoney.kcfg:360
@@ -21338,8 +21338,8 @@ msgstr "Testua"
 msgid ""
 "Warning: Filtering by Category will exclude all transfers from the results."
 msgstr ""
-"Abisua: kategoriaren arabera iragazteak emaitzetatik kanpo utziko ditu "
-"transferentzia guztiak."
+"Abisua: Kategoriaren arabera iragazteak transferentzia guztiak emaitzetatik "
+"at utziko ditu."
 
 #: kmymoney/widgets/ktransactionfilter.cpp:179
 #, kde-format
@@ -22061,12 +22061,12 @@ msgstr "Berfinantziatu: %1"
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:173
 #, kde-format
 msgid "Transfer amount to %1"
-msgstr "Transferitu zenbatekoa hona: %1"
+msgstr "Transferentzia zenbatekoa %1(e)ra"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:175
 #, kde-format
 msgid "Transfer amount from %1"
-msgstr "Transferitu zenbatekoa hemendik: %1"
+msgstr "Transferentzia zenbatekoa %1(e)tik"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:177
 #, kde-format
@@ -22252,14 +22252,14 @@ msgid ""
 "friends. For amortization loans like mortgages you should create a loan "
 "account.</p>"
 msgstr ""
-"<p><b>Txekeak</b>\n"
-"Erabili txekeen kontu mota txekeen kontuan eragiketak egiteko, adibidez, "
-"ordainketak, txekeak eta kreditu-txartel bidezko erosketak egiteko.</p>\n"
+"<p><b>Korrontea</b>\n"
+"Erabili kontu korronte mota zure kontu korronteko jarduerak kudeatzeko, "
+"ordainketak, txekeak eta zordunketa-txartel bidezko erosketak adibidez.</p>\n"
 "\n"
 "<p><b>Aurrezkiak</b>\n"
-"Erabili aurrezkien kontu mota aurrezkien kontuan eragiketak egiteko.</p>\n"
+"Erabili aurrezki kontu mota aurrezkien kontuan eragiketak egiteko.</p>\n"
 "\n"
-"<p><b>Kreditu-txartela</b>\n"
+"<p><b>Kreditu txartela</b>\n"
 "Erabili kreditu-txartelaren kontu mota kreditu-txartelaren kontuan "
 "eragiketak egiteko.</p>\n"
 "\n"
@@ -23246,12 +23246,12 @@ msgid ""
 "If this loan is a 'consumer loan' (money to use however you want), you can "
 "use a checking account instead."
 msgstr ""
-"Mailegua aktibo baterako bada, hala nola auto baterako edo etxe baterako, "
-"aktiboko kontua sor dezakezu orain. Aktiboko kontu batek aktiboaren balio "
-"osoa irudikatzen du. Mailegu horretako dirua zuk sortu edo aukeratu duzun "
-"aktiboko kontura transferituko da.\n"
-"Mailegu hori 'kontsumo-mailegua' bada (nahierara erabiltzeko dirua), txeke-"
-"kontu bat erabil dezakezu haren ordez."
+"Mailegu hau aktibo baterako bada, hala nola auto baterako edo etxe baterako, "
+"aktibo-kontua orain sor dezakezu. Aktibo-kontu batek aktiboa baten balio "
+"osoa adierazten du. Mailegu horretako dirua zuk sortu edo aukeratu duzun "
+"aktibo-kontura transferituko da.\n"
+"Mailegu hori 'kontsumo-mailegu' bat bada (nahi duzun bezala erabiltzeko "
+"dirua), horren ordez kontu korronte bat erabil dezakezu."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_dontCreatePayoutCheckBox)
 #. i18n: ectx: property (text), widget (QCheckBox, m_noPayoutTransaction)
@@ -23353,9 +23353,9 @@ msgid ""
 "receive regular payments in case you lend the money. In most cases, this is "
 "a checking account."
 msgstr ""
-"Aukeratu zer kontutatik egiten dituzun aldizkako ordainketak, edo zer "
-"kontutan jasotzen dituzun, dirua maileguan utzi baduzu. Kasurik gehienetan, "
-"txekeen kontu bat izaten da hori."
+"Hautatu zure aldizkako ordainketak egiteko, edo, dirua utziz gero ordainketa "
+"erregularrak jasotzeko erabiltzen duzun kontua. Kasu gehienetan, kontu "
+"korronte bat izan ohi da."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_3)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
@@ -23646,7 +23646,7 @@ msgstr ""
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:284
 #, kde-format
 msgid "Create security"
-msgstr "Burtsa-balioa sortu"
+msgstr "Sortu burtsa-balioa"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KNewInvestmentWizard)
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.ui:17
@@ -24789,15 +24789,16 @@ msgid ""
 "and uses it to receive money or pay bills. If this is not the case, please "
 "deselect the checkbox below and continue on the next page."
 msgstr ""
-"KMyMoney-ren ohiko erabiltzaileek erakunde baten txekeen kontu bat "
-"erabiltzen dute dirua jasotzeko eta fakturak ordaintzeko. Zuk horrelakorik "
-"ez baduzu, kendu beheko hautamarka eta joan hurrengo orrira."
+"«KMyMoney»ren ohiko erabiltzaile batek kontu korronte bat mantentzen du "
+"erakunderen batekin eta dirua jasotzeko edo fakturak ordaintzeko erabiltzen "
+"du. Hala ez bada, mesedez, desautatu beheko egiaztapen-laukia eta jarraitu "
+"hurrengo orrira."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_haveCheckingAccountButton)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:33
 #, kde-format
 msgid "I have a checking account that I want to manage with KMyMoney"
-msgstr "Txekeen kontu bat dut eta KMyMoney-rekin kudeatu nahi dut"
+msgstr "«KMyMoney»rekin kudeatu nahi dudan kontu korronte bat daukat"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_institutionNameEdit)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:52
@@ -24844,8 +24845,8 @@ msgid ""
 "Enter a descriptive name that will be used by KMyMoney to identify your "
 "checking account."
 msgstr ""
-"Idatzi kontua deskribatzen duen izen bat. Txekeen kontua identifikatzeko "
-"erabiliko du KMyMoney-k izen hori."
+"Sartu «KMyMoney»k zure kontu korrontea identifikatzeko erabiliko duen izen "
+"deskribatzaile bat."
 
 #. i18n: ectx: property (whatsThis), widget (KMyMoneyDateInput, m_openingDateEdit)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:112
@@ -24889,8 +24890,9 @@ msgid ""
 "account. Once this wizard finishes, the account will be created for you "
 "within KMyMoney."
 msgstr ""
-"Beheko eremuetan, txekeen kontuari buruzko informazioa sar dezakezu. Morroi "
-"hau amaitutakoan, kontua sortuta egongo da KMyMoney-n."
+"Beheko eremuek zure kontu korronteari buruzko informazio batzuk sartzeko "
+"aukera ematen dizute. Morroi honekin amaitutakoan, «KMyMoney»k zuretzako "
+"kontua sortuta izango du."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel3)
 #: kmymoney/wizards/newuserwizard/kcurrencypage.ui:23
