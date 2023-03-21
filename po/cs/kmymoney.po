@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-19 00:48+0000\n"
-"PO-Revision-Date: 2023-03-10 10:50+0100\n"
+"PO-Revision-Date: 2023-03-15 14:31+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -5554,15 +5554,14 @@ msgid "Saving file..."
 msgstr "Ukládám soubor..."
 
 #: kmymoney/kmymoney.cpp:4562
-#, fuzzy, kde-format
-#| msgid "Failed to save: %1"
+#, kde-format
 msgid "Failed to save your data."
-msgstr "Uložení selhalo: %1"
+msgstr "Uložení dat selhalo."
 
 #: kmymoney/kmymoney.cpp:4568
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
-msgstr ""
+msgstr "Nelze najít vhodný modul pro uložení vašich dat."
 
 #: kmymoney/kmymoney.cpp:4574
 #, kde-format
@@ -5572,7 +5571,7 @@ msgstr "Ukládám soubor jako...."
 #: kmymoney/kmymoney.cpp:4590
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
-msgstr ""
+msgstr "Nelze najít jakýkoliv modul pro uložení dat."
 
 #: kmymoney/kmymoney.cpp:4619
 #, kde-format
