@@ -21,7 +21,6 @@
 #include <QBitArray>
 #include <QDebug>
 #include <QList>
-#include <QLocale>
 #include <QRegularExpression>
 #include <QString>
 #include <QTimer>
@@ -2702,7 +2701,7 @@ QStringList MyMoneyFile::consistencyCheck()
             tChanged = true;
             t.setPostDate(t.entryDate().isValid() ? t.entryDate() : QDate::currentDate());
             rc << i18n("  * Transaction '%1' has an invalid post date.", t.id());
-            rc << i18n("    The post date was updated to '%1'.", QLocale().toString(t.postDate(), QLocale::ShortFormat));
+            rc << i18n("    The post date was updated to '%1'.", MyMoneyUtils::formatDate(t.postDate()));
             ++problemCount;
         }
         // check if the transaction's post date is after the opening date
@@ -2736,9 +2735,11 @@ QStringList MyMoneyFile::consistencyCheck()
                 break;
             }
 #endif
-            rc << i18n("  * Transaction '%1' has a post date '%2' before one of the referenced account's opening date.", t.id(), QLocale().toString(originalPostDate, QLocale::ShortFormat));
+            rc << i18n("  * Transaction '%1' has a post date '%2' before one of the referenced account's opening date.",
+                       t.id(),
+                       MyMoneyUtils::formatDate(originalPostDate));
             rc << i18n("    Referenced accounts: %1", accountList.join(","));
-            rc << i18n("    The post date was not updated to '%1'.", QLocale().toString(accountOpeningDate, QLocale::ShortFormat));
+            rc << i18n("    The post date was not updated to '%1'.", MyMoneyUtils::formatDate(accountOpeningDate));
             ++unfixedCount;
         }
 

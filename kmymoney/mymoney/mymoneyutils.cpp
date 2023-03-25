@@ -12,7 +12,6 @@
 // QT Includes
 
 #include <QDate>
-#include <QLocale>
 #include <QProcess>
 #include <QRegularExpression>
 
@@ -146,16 +145,45 @@ void MyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, con
     }
 }
 
-QString MyMoneyUtils::formatDate(const QDate& date)
+static QString dateTimeFormat;
+static QString timeFormat;
+static QString dateFormat;
+
+QString MyMoneyUtils::formatDateTime(const QDateTime& dt)
 {
-    static QString format;
-    if (format.isEmpty()) {
-        format = QLocale().dateFormat(QLocale::ShortFormat);
-        if (!format.contains(QLatin1String("yyyy")) && format.contains(QLatin1String("yy"))) {
-            format.replace(QLatin1String("yy"), QLatin1String("yyyy"));
+    if (dateTimeFormat.isEmpty()) {
+        dateTimeFormat = QLocale().dateTimeFormat(QLocale::ShortFormat);
+        if (!dateTimeFormat.contains(QLatin1String("yyyy")) && dateTimeFormat.contains(QLatin1String("yy"))) {
+            dateTimeFormat.replace(QLatin1String("yy"), QLatin1String("yyyy"));
         }
     }
-    return date.toString(format);
+    return dt.toString(dateTimeFormat);
+}
+
+QString MyMoneyUtils::formatTime(const QTime& time)
+{
+    if (timeFormat.isEmpty()) {
+        timeFormat = QLocale().timeFormat(QLocale::LongFormat);
+    }
+    return time.toString(timeFormat);
+}
+
+QString MyMoneyUtils::formatDate(const QDate& date, QLocale::FormatType formatType)
+{
+    if (dateFormat.isEmpty()) {
+        dateFormat = QLocale().dateFormat(formatType);
+        if (!dateFormat.contains(QLatin1String("yyyy")) && dateFormat.contains(QLatin1String("yy"))) {
+            dateFormat.replace(QLatin1String("yy"), QLatin1String("yyyy"));
+        }
+    }
+    return date.toString(dateFormat);
+}
+
+void MyMoneyUtils::clearFormatCaches()
+{
+    dateTimeFormat.clear();
+    timeFormat.clear();
+    dateFormat.clear();
 }
 
 QString MyMoneyUtils::paymentMethodToString(eMyMoney::Schedule::PaymentType paymentType)

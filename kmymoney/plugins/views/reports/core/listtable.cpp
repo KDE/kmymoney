@@ -24,15 +24,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
-#include "mymoneyfile.h"
+#include "kmymoneysettings.h"
 #include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "mymoneyreport.h"
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "mymoneyreport.h"
-#include "kmymoneysettings.h"
-#include "mymoneyenums.h"
+#include "mymoneyutils.h"
 
 namespace reports
 {
@@ -416,7 +417,7 @@ void ListTable::render(QString& result, QString& csv) const
                 // if we have a locale() then use its date formatter
                 if (!data.isEmpty()) {
                     QDate qd = QDate::fromString(data, Qt::ISODate);
-                    data = QLocale().toString(qd, QLocale::ShortFormat);
+                    data = MyMoneyUtils::formatDate(qd);
                 }
                 result.append(QString::fromLatin1("<td class=\"left%4\">%2%1%3</td>").arg(data, tlinkBegin, tlinkEnd, QString::number(prevGrpNames.count() - 1)));
                 break;

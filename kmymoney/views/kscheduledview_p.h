@@ -346,7 +346,7 @@ public:
                             && (KMessageBox::questionTwoActions(parentWidget,
                                                                 i18n("<qt>Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?</qt>",
                                                                      schedule.name(),
-                                                                     QLocale().toString(next, QLocale::ShortFormat)),
+                                                                     MyMoneyUtils::formatDate(next)),
                                                                 i18nc("@title:window", "Skip scheduled transaction"),
                                                                 KMMYesNo::yes(),
                                                                 KMMYesNo::no()))

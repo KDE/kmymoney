@@ -27,15 +27,16 @@
 
 #include "ui_kmymoneybriefschedule.h"
 
+#include "icons.h"
+#include "kmymoneyutils.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
 #include "mymoneyexception.h"
 #include "mymoneymoney.h"
-#include "mymoneyaccount.h"
 #include "mymoneyschedule.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "kmymoneyutils.h"
-#include "icons/icons.h"
-#include "mymoneyenums.h"
+#include "mymoneyutils.h"
 
 using namespace Icons;
 
@@ -74,12 +75,12 @@ public:
                     text = i18np("Payment on %2 for %3 with %1 transaction remaining occurring %4.",
                                  "Payment on %2 for %3 with %1 transactions remaining occurring %4.",
                                  transactions,
-                                 QLocale().toString(m_date, QLocale::ShortFormat),
+                                 MyMoneyUtils::formatDate(m_date),
                                  amount.formatMoney(sched.account().fraction()),
                                  sched.occurrenceToString());
                 } else {
                     text = i18n("Payment on %1 for %2 occurring %3.",
-                                QLocale().toString(m_date, QLocale::ShortFormat),
+                                MyMoneyUtils::formatDate(m_date),
                                 amount.formatMoney(sched.account().fraction()),
                                 sched.occurrenceToString());
                 }

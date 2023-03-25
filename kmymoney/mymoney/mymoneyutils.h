@@ -14,6 +14,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QLocale>
 #include <QString>
 class QDate;
 class QProcess;
@@ -91,7 +92,10 @@ KMM_MYMONEY_EXPORT unsigned long extractId(const QString& txt);
 
 KMM_MYMONEY_EXPORT void dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, eMyMoney::Split::InvestmentTransactionType& transactionType);
 
-KMM_MYMONEY_EXPORT QString formatDate(const QDate& date);
+KMM_MYMONEY_EXPORT void clearFormatCaches();
+KMM_MYMONEY_EXPORT QString formatDate(const QDate& date, QLocale::FormatType formatType = QLocale::ShortFormat);
+KMM_MYMONEY_EXPORT QString formatTime(const QTime& date);
+KMM_MYMONEY_EXPORT QString formatDateTime(const QDateTime& date);
 
 /**
  * This method is used to convert the payment type from its

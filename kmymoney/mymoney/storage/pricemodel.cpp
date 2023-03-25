@@ -21,6 +21,7 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneyutils.h"
 
 PriceEntry::PriceEntry(const MyMoneyPrice& price)
     : MyMoneyPrice(price)
@@ -107,7 +108,7 @@ QVariant PriceModel::data(const QModelIndex& idx, int role) const
             return QString("To");
 
         case Date:
-            return QLocale().toString(priceEntry.date(), QLocale::ShortFormat);
+            return MyMoneyUtils::formatDate(priceEntry.date());
 
         case Price:
             /// @todo fix precision handling

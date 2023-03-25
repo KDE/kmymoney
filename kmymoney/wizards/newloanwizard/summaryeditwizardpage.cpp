@@ -18,6 +18,8 @@
 
 #include "ui_summaryeditwizardpage.h"
 
+#include "mymoneyutils.h"
+
 SummaryEditWizardPage::SummaryEditWizardPage(QWidget *parent)
     : QWizardPage(parent),
       ui(new Ui::SummaryEditWizardPage)
@@ -40,5 +42,5 @@ void SummaryEditWizardPage::initializePage()
     ui->m_additionalFees7->setText(field("additionalCost").toString());
     ui->m_totalPayment7->setText(field("periodicPayment").toString());
     ui->m_interestRate7->setText(field("interestRate6").toString());
-    ui->m_startDateChanges->setText(QLocale().toString(field("effectiveChangeDateEdit").toDate()));
+    ui->m_startDateChanges->setText(MyMoneyUtils::formatDate(field("effectiveChangeDateEdit").toDate(), QLocale::LongFormat));
 }

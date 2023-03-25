@@ -3451,6 +3451,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
         return;
     }
 
+    MyMoneyUtils::clearFormatCaches();
     switch (KMyMoneySettings::initialDateFieldCursorPosition()) {
     case KMyMoneySettings::Day:
         KMyMoneyDateEdit().setInitialSection(QDateTimeEdit::DaySection);

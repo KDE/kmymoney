@@ -51,6 +51,7 @@
 #include "mymoneyschedule.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "mymoneyutils.h"
 #include "newtransactioneditor.h"
 #include "widgetenums.h"
 #include "widgethintframe.h"
@@ -593,8 +594,8 @@ void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule)
                             "<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the scheduled transaction was last paid on <b>%2</b>, "
                             "KMyMoney will automatically adjust the scheduled transaction date to the next date unless the last payment date is reset.  Do you "
                             "want to reset the last payment date?</qt>",
-                            QLocale().toString(next, QLocale::ShortFormat),
-                            QLocale().toString(last, QLocale::ShortFormat));
+                            MyMoneyUtils::formatDate(next),
+                            MyMoneyUtils::formatDate(last));
                         if (KMessageBox::questionTwoActions(nullptr, questionText, i18n("Reset Last Payment Date"), KMMYesNo::yes(), KMMYesNo::no())
                             == KMessageBox::PrimaryAction) {
                             sched.setLastPayment(QDate());

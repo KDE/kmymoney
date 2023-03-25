@@ -27,15 +27,16 @@
 
 #include "ui_kcurrencycalculator.h"
 
-#include "mymoneyfile.h"
+#include "kmymoneysettings.h"
 #include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
-#include "mymoneyprice.h"
-#include "mymoneymoney.h"
 #include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "mymoneyprice.h"
+#include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "kmymoneysettings.h"
+#include "mymoneyutils.h"
 
 class KCurrencyCalculatorPrivate
 {
@@ -164,7 +165,7 @@ public:
         else
             ui->m_dateEdit->setDate(QDate::currentDate());
 
-        ui->m_dateText->setText(QLocale().toString(m_date));
+        ui->m_dateText->setText(MyMoneyUtils::formatDate(m_date));
 
         ui->m_fromCurrencyText->setText(QStringLiteral("%1 %2").arg(MyMoneySecurity::securityTypeToString(m_fromCurrency.securityType()),
                                                                     (m_fromCurrency.isCurrency() ? m_fromCurrency.id() : m_fromCurrency.tradingSymbol())));
@@ -227,7 +228,7 @@ void KCurrencyCalculator::setDate(const QDate& date)
     else
         d->ui->m_dateEdit->setDate(QDate::currentDate());
 
-    d->ui->m_dateText->setText(QLocale().toString(date));
+    d->ui->m_dateText->setText(MyMoneyUtils::formatDate(date));
 }
 
 void KCurrencyCalculator::setFromCurrency(const MyMoneySecurity& sec)

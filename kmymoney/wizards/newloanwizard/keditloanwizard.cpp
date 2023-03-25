@@ -38,19 +38,19 @@
 #include "ui_editselectionwizardpage.h"
 #include "ui_finalpaymentwizardpage.h"
 
+#include "kmmyesno.h"
+#include "kmymoneyaccountselector.h"
+#include "kmymoneylineedit.h"
 #include "knewloanwizard.h"
 #include "knewloanwizard_p.h"
-#include "kmymoneylineedit.h"
-#include "kmymoneyaccountselector.h"
-#include "mymoneyfile.h"
-#include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
 #include "mymoneyaccountloan.h"
+#include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
 #include "mymoneypayee.h"
 #include "mymoneyschedule.h"
 #include "mymoneytransactionfilter.h"
-
-#include "kmmyesno.h"
+#include "mymoneyutils.h"
 
 class KEditLoanWizardPrivate : public KNewLoanWizardPrivate
 {
@@ -89,9 +89,11 @@ KEditLoanWizard::KEditLoanWizard(const MyMoneyAccount& account, QWidget *parent)
 
     if (d->m_account.openingDate() > QDate::currentDate()) {
         //FIXME: port
-        d->ui->m_effectiveDatePage->ui->m_effectiveDateNoteLabel->setText(QString("\n") + i18n(
-                    "Note: you will not be able to modify this account today, because the opening date \"%1\" is in the future. "
-                    "Please revisit this dialog when the time has come.", QLocale().toString(d->m_account.openingDate())));
+        d->ui->m_effectiveDatePage->ui->m_effectiveDateNoteLabel->setText(
+            QString("\n")
+            + i18n("Note: you will not be able to modify this account today, because the opening date \"%1\" is in the future. "
+                   "Please revisit this dialog when the time has come.",
+                   MyMoneyUtils::formatDate(d->m_account.openingDate(), QLocale::LongFormat)));
     } else {
         d->ui->m_effectiveDatePage->ui->m_effectiveDateNoteLabel->hide();
     }

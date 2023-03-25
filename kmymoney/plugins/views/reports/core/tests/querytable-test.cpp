@@ -11,20 +11,21 @@
 
 #include <KLocalizedString>
 
-#include "tests/testutilities.h"
 #include "cashflowlist.h"
-#include "querytable.h"
-#include "mymoneyinstitution.h"
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
-#include "mymoneyprice.h"
-#include "mymoneystoragedump.h"
-#include "mymoneyreport.h"
-#include "mymoneysplit.h"
-#include "mymoneypayee.h"
-#include "mymoneystatement.h"
-#include "mymoneyexception.h"
 #include "kmymoneysettings.h"
+#include "mymoneyaccount.h"
+#include "mymoneyexception.h"
+#include "mymoneyinstitution.h"
+#include "mymoneypayee.h"
+#include "mymoneyprice.h"
+#include "mymoneyreport.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneystatement.h"
+#include "mymoneystoragedump.h"
+#include "mymoneyutils.h"
+#include "querytable.h"
+#include "tests/testutilities.h"
 
 using namespace reports;
 using namespace test;
@@ -799,8 +800,8 @@ void QueryTableTest::testBalanceColumn()
         QVERIFY(rows.count() == 19);
 
         //this is to make sure that the dates of closing and opening balances and the balance numbers are ok
-        QString openingDate = QLocale().toString(QDate(2004, 1, 1), QLocale::ShortFormat);
-        QString closingDate = QLocale().toString(QDate(2005, 9, 1), QLocale::ShortFormat);
+        QString openingDate = MyMoneyUtils::formatDate(QDate(2004, 1, 1));
+        QString closingDate = MyMoneyUtils::formatDate(QDate(2005, 9, 1));
         QVERIFY(html.indexOf(openingDate + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Opening Balance")) > 0);
         QVERIFY(html.indexOf(closingDate + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>&nbsp;-702.36</td></tr>") > 0);
         QVERIFY(html.indexOf(closingDate + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>&nbsp;-705.69</td></tr>") > 0);
@@ -884,9 +885,9 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
         QVERIFY(rows.count() == 24);
 
         //this is to make sure that the dates of closing and opening balances and the balance numbers are ok
-        QString openingDateString = QLocale().toString(openingDate, QLocale::ShortFormat);
-        QString intermediateDateString = QLocale().toString(intermediateDate, QLocale::ShortFormat);
-        QString closingDateString = QLocale().toString(closingDate, QLocale::ShortFormat);
+        QString openingDateString = MyMoneyUtils::formatDate(openingDate);
+        QString intermediateDateString = MyMoneyUtils::formatDate(intermediateDate);
+        QString closingDateString = MyMoneyUtils::formatDate(closingDate);
         // check the opening and closing balances
 
         QVERIFY(html.indexOf(openingDateString + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Opening Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>USD&nbsp;0.00</td></tr>") > 0);

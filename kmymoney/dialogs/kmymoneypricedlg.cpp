@@ -43,6 +43,7 @@
 #include "mymoneymoney.h"
 #include "mymoneyprice.h"
 #include "mymoneysecurity.h"
+#include "mymoneyutils.h"
 
 #include "kmmyesno.h"
 
@@ -252,7 +253,7 @@ QTreeWidgetItem* KMyMoneyPriceDlg::loadPriceItem(const MyMoneyPrice& basePrice)
         priceTreeItem->setText(KPriceTreeItem::ePriceStockName, (from.isCurrency()) ? QString() : d->m_stockNameMap.value(from.id()));
         priceTreeItem->setToolTip(KPriceTreeItem::ePriceStockName, (from.isCurrency()) ? QString() : d->m_stockNameMap.value(from.id()));
         priceTreeItem->setText(KPriceTreeItem::ePriceCurrency, to.id());
-        priceTreeItem->setText(KPriceTreeItem::ePriceDate, QLocale().toString(price.date(), QLocale::ShortFormat));
+        priceTreeItem->setText(KPriceTreeItem::ePriceDate, MyMoneyUtils::formatDate(price.date()));
         priceTreeItem->setData(KPriceTreeItem::ePriceDate, KPriceTreeItem::OrderRole, QVariant(price.date()));
         priceTreeItem->setText(KPriceTreeItem::ePricePrice, price.rate(priceBase).formatMoney("", from.pricePrecision()));
         priceTreeItem->setTextAlignment(KPriceTreeItem::ePricePrice, Qt::AlignRight | Qt::AlignVCenter);

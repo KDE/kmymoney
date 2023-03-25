@@ -20,12 +20,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmmurl.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
-#include "mymoneyexception.h"
-#include "kmmurl.h"
+#include "mymoneyutils.h"
 
 reports::ReportTable::ReportTable(const MyMoneyReport& _report):
     m_reportStyleSheet("reportstylesheet"),
@@ -97,10 +98,7 @@ QString reports::ReportTable::renderReport(const QString& type, const QByteArray
             // report's date range
             result.append(QString::fromLatin1("<div class=\"subtitle\">%1</div>\n"
                                               "<div class=\"gap\">&nbsp;</div>\n")
-                              .arg(i18nc("Report date range",
-                                         "%1 through %2",
-                                         QLocale().toString(fromDate, QLocale::ShortFormat),
-                                         QLocale().toString(toDate, QLocale::ShortFormat))));
+                              .arg(i18nc("Report date range", "%1 through %2", MyMoneyUtils::formatDate(fromDate), MyMoneyUtils::formatDate(toDate))));
             // report's currency information
             if (m_containsNonBaseCurrency) {
                 result.append(QString::fromLatin1("<div class=\"subtitle\">%1</div>\n"
@@ -124,8 +122,8 @@ QString reports::ReportTable::renderReport(const QString& type, const QByteArray
         result.append(QLatin1String("</body>\n</html>\n"));
     } else if (type == QLatin1String("csv")) {
         result.append(QString::fromLatin1("\"Report: %1\"\n").arg(m_config.name()));
-        result.append(QString::fromLatin1("%1\n").arg(
-            i18nc("Report date range", "%1 through %2", QLocale().toString(fromDate, QLocale::ShortFormat), QLocale().toString(toDate, QLocale::ShortFormat))));
+        result.append(
+            QString::fromLatin1("%1\n").arg(i18nc("Report date range", "%1 through %2", MyMoneyUtils::formatDate(fromDate), MyMoneyUtils::formatDate(toDate))));
         if (m_containsNonBaseCurrency)
             result.append(QString::fromLatin1("%1\n").arg(m_config.isConvertCurrency() ?
                           i18n("All currencies converted to %1", file->baseCurrency().name()) :

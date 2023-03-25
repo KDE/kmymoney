@@ -191,7 +191,7 @@ public:
 
         for (int i = 1; i <= forecast.forecastDays(); ++i) {
             QDate forecastDate = QDate::currentDate().addDays(i);
-            headerLabels << QLocale().toString(forecastDate, QLocale::LongFormat);
+            headerLabels << MyMoneyUtils::formatDate(forecastDate, QLocale::LongFormat);
         }
 
         //add variation columns
@@ -539,7 +539,7 @@ public:
                 }
                 it_c++;
 
-                QString dateString = QLocale().toString(minDate, QLocale::ShortFormat);
+                QString dateString = MyMoneyUtils::formatDate(minDate);
                 advancedItem->setText(it_c, dateString);
                 advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
                 if (amountMM.isNegative()) {
@@ -563,7 +563,7 @@ public:
                 }
                 it_c++;
 
-                QString dateString = QLocale().toString(maxDate, QLocale::ShortFormat);
+                QString dateString = MyMoneyUtils::formatDate(maxDate);
                 advancedItem->setText(it_c, dateString);
                 advancedItem->setTextAlignment(it_c, Qt::AlignRight | Qt::AlignVCenter);
                 if (amountMM.isNegative()) {

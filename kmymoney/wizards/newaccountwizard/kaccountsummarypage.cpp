@@ -111,7 +111,7 @@ void AccountSummaryPage::enterPage()
     d->ui->m_dataList->append(i18n("Type: %1", accTypeText));
 
     d->ui->m_dataList->append(i18n("Currency: %1", d->m_wizard->d_func()->currency().name()));
-    d->ui->m_dataList->append(i18n("Opening date: %1", QLocale().toString(acc.openingDate())));
+    d->ui->m_dataList->append(i18n("Opening date: %1", MyMoneyUtils::formatDate(acc.openingDate())));
     if (d->m_wizard->d_func()->currency().id() != MyMoneyFile::instance()->baseCurrency().id()) {
         d->ui->m_dataList->append(i18n("Conversion rate: %1", d->m_wizard->conversionRate().rate(QString()).formatMoney(QString(), d->m_wizard->d_func()->currency().pricePrecision())));
     }
@@ -172,7 +172,9 @@ void AccountSummaryPage::enterPage()
                 else
                     d->ui->m_dataList->append(i18n("Transfer amount from %1", d->m_wizard->d_func()->m_loanPayoutPage->d_func()->ui->m_assetAccount->currentText()));
             }
-            d->ui->m_dataList->append(i18n("Payment date: %1 ", QLocale().toString(d->m_wizard->d_func()->m_loanPayoutPage->d_func()->ui->m_payoutDate->date())));
+            d->ui->m_dataList->append(
+                i18n("Payment date: %1 ",
+                     MyMoneyUtils::formatDate(d->m_wizard->d_func()->m_loanPayoutPage->d_func()->ui->m_payoutDate->date(), QLocale::LongFormat)));
         }
     }
 
@@ -188,13 +190,14 @@ void AccountSummaryPage::enterPage()
             d->ui->m_dataList->append(i18n("Paid from %1", paymentAccount.name()));
             d->ui->m_dataList->append(i18n("Pay to %1", d->m_wizard->d_func()->m_schedulePage->d_func()->ui->m_payee->currentText()));
             d->ui->m_dataList->append(i18n("Amount: %1", MyMoneyUtils::formatMoney(d->m_wizard->d_func()->m_schedulePage->d_func()->ui->m_amount->value(), acc, sec)));
-            d->ui->m_dataList->append(i18n("First payment due on %1", QLocale().toString(sch.nextDueDate())));
+            d->ui->m_dataList->append(i18n("First payment due on %1", MyMoneyUtils::formatDate(sch.nextDueDate(), QLocale::LongFormat)));
             d->ui->m_dataList->append(i18n("Payment method: %1", d->m_wizard->d_func()->m_schedulePage->d_func()->ui->m_method->currentText()));
         }
         if (acc.isLoan()) {
             d->ui->m_dataList->append(i18n("Occurrence: %1", d->m_wizard->d_func()->m_generalLoanInfoPage->d_func()->ui->m_paymentFrequency->currentText()));
             d->ui->m_dataList->append(i18n("Amount: %1", MyMoneyUtils::formatMoney(d->m_wizard->d_func()->m_loanPaymentPage->basePayment() + d->m_wizard->d_func()->m_loanPaymentPage->additionalFees(), acc, sec)));
-            d->ui->m_dataList->append(i18n("First payment due on %1", QLocale().toString(d->m_wizard->d_func()->m_loanSchedulePage->firstPaymentDueDate())));
+            d->ui->m_dataList->append(
+                i18n("First payment due on %1", MyMoneyUtils::formatDate(d->m_wizard->d_func()->m_loanSchedulePage->firstPaymentDueDate())));
         }
     }
 }

@@ -54,7 +54,7 @@
 #include "ui_kreportsview.h"
 #include "ui_reportcontrol.h"
 
-#include "icons/icons.h"
+#include "icons.h"
 #include "kmm_printer.h"
 #include "kmmtextbrowser.h"
 #include "kmymoneysettings.h"
@@ -301,7 +301,7 @@ void KReportTab::print()
                 font.setPointSizeF(font.pointSizeF() * 0.8);
                 painter.setFont(font);
                 QLocale locale;
-                painter.drawText(0, 0, QDate::currentDate().toString(locale.dateFormat(QLocale::ShortFormat)));
+                painter.drawText(0, 0, MyMoneyUtils::formatDate(QDate::currentDate()));
 
                 /// @todo extract url from KMyMoneyApp
                 QUrl file;

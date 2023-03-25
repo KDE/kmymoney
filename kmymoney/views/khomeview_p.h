@@ -248,7 +248,7 @@ public:
         }
 
         if (KMyMoneySettings::showDateOfLastReconciliation()) {
-            const auto lastReconciliationDate = QLocale().toString(acc.lastReconciliationDate(), QLocale::ShortFormat).replace(QChar(' '), "&nbsp;");
+            const auto lastReconciliationDate = MyMoneyUtils::formatDate(acc.lastReconciliationDate()).replace(QChar(' '), "&nbsp;");
             tmp += QString("<td>%1</d>").arg(lastReconciliationDate);
         }
 
@@ -839,8 +839,7 @@ public:
                     MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
                     //show payment date
-                    tmp =
-                        QString("<td class=\"nowrap\">") + QLocale().toString(sched.adjustedNextDueDate(), QLocale::ShortFormat) + "</td><td class=\"center\">";
+                    tmp = QString("<td class=\"nowrap\">") + MyMoneyUtils::formatDate(sched.adjustedNextDueDate()) + "</td><td class=\"center\">";
 
                     // show Enter Next and Skip Next buttons
                     if (!pathEnterIcon.isEmpty())

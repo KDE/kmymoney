@@ -123,7 +123,7 @@ struct CheckPrinting::Private {
         checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
         checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
         // data about the transaction
-        checkHTML.replace("$DATE", QLocale().toString(transaction.postDate(), QLocale::ShortFormat));
+        checkHTML.replace("$DATE", MyMoneyUtils::formatDate(transaction.postDate()));
         checkHTML.replace("$CHECK_NUMBER", split.number());
         checkHTML.replace("$PAYEE_NAME", payee.name());
         checkHTML.replace("$PAYEE_ADDRESS", payee.address());

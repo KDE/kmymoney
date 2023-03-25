@@ -21,6 +21,7 @@
 
 #include "knewloanwizard.h"
 #include "mymoneyaccountloan.h"
+#include "mymoneyutils.h"
 
 EffectiveDateWizardPage::EffectiveDateWizardPage(QWidget *parent)
     : QWizardPage(parent),
@@ -40,10 +41,11 @@ EffectiveDateWizardPage::~EffectiveDateWizardPage()
 
 void EffectiveDateWizardPage::initializePage()
 {
-    ui->m_effectiveDateLabel->setText(QString("\n") + i18n(
-                                          "Please enter the date from which on the following changes will be effective. "
-                                          "The date entered must be later than the opening date of this account (%1), but must "
-                                          "not be in the future. The default will be today.", QLocale().toString(qobject_cast<KNewLoanWizard*>(wizard())->account().openingDate())));
+    ui->m_effectiveDateLabel->setText(QString("\n")
+                                      + i18n("Please enter the date from which on the following changes will be effective. "
+                                             "The date entered must be later than the opening date of this account (%1), but must "
+                                             "not be in the future. The default will be today.",
+                                             MyMoneyUtils::formatDate(qobject_cast<KNewLoanWizard*>(wizard())->account().openingDate(), QLocale::LongFormat)));
 }
 
 /**

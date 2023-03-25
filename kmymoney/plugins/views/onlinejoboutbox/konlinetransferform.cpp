@@ -19,17 +19,17 @@
 #include <KLocalizedString>
 #include <KPluginFactory>
 
-#include "kguiutils.h"
-#include "onlinetasks/interfaces/ui/ionlinejobedit.h"
-
-#include "mymoneyfile.h"
-#include "mymoney/onlinejobadministration.h"
-#include "onlinejob.h"
-#include "tasks/onlinetask.h"
 #include "accountsmodel.h"
+#include "icons.h"
+#include "kguiutils.h"
+#include "mymoney/onlinejobadministration.h"
 #include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneyutils.h"
+#include "onlinejob.h"
+#include "onlinetasks/interfaces/ui/ionlinejobedit.h"
+#include "tasks/onlinetask.h"
 
-#include "icons/icons.h"
 using namespace Icons;
 
 kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
@@ -281,7 +281,7 @@ void kOnlineTransferForm::setJobReadOnly(const bool& readOnly)
         if (activeOnlineJob().sendDate().isValid())
             ui->headMessage->setText(
                 i18n("This credit-transfer was sent to your bank at %1 therefore cannot be edited anymore. You may create a copy for editing.",
-                     QLocale().toString(activeOnlineJob().sendDate(), QLocale::ShortFormat)));
+                     MyMoneyUtils::formatDateTime(activeOnlineJob().sendDate())));
         else
             ui->headMessage->setText(i18n("This credit-transfer is not editable. You may create a copy for editing."));
 

@@ -25,6 +25,7 @@
 #include "mymoneyfile.h"
 #include "mymoneypayee.h"
 #include "mymoneyschedule.h"
+#include "mymoneyutils.h"
 
 SummaryWizardPage::SummaryWizardPage(QWidget *parent)
     : QWizardPage(parent),
@@ -49,7 +50,7 @@ void SummaryWizardPage::initializePage()
     else
         ui->m_summaryLoanType->setText(i18n("lend"));
 
-    ui->m_summaryFirstPayment->setText(QLocale().toString(field("firstDueDateEdit").toDate()));
+    ui->m_summaryFirstPayment->setText(MyMoneyUtils::formatDate(field("firstDueDateEdit").toDate(), QLocale::LongFormat));
 
     const QString &payeeId = field("payeeEdit").toString();
     if (!payeeId.isEmpty()) {
@@ -87,7 +88,7 @@ void SummaryWizardPage::initializePage()
     }
     ui->m_summaryAdditionalFees->setText(field("additionalCost").toString());
     ui->m_summaryTotalPeriodicPayment->setText(field("periodicPayment").toString());
-    ui->m_summaryNextPayment->setText(QLocale().toString(field("nextDueDateEdit").toDate()));
+    ui->m_summaryNextPayment->setText(MyMoneyUtils::formatDate(field("nextDueDateEdit").toDate(), QLocale::LongFormat));
 
     try {
         QStringList sel = field("paymentAccountEdit").toStringList();
