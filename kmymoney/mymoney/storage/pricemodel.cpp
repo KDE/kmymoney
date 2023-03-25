@@ -247,17 +247,17 @@ MyMoneyPrice PriceModel::price(const QString& from, const QString& to, const QDa
         if (exactDate) {
             return {};
         }
-        // the last row is the one we look for. We
+        // the last row is the one we look for.
         row = rowCount()-1;
         auto priceEntry = static_cast<TreeItem<PriceEntry>*>(index(row, 0).internalPointer())->data();
-        return std::move(priceEntry);
+        return priceEntry;
     }
 
     auto priceEntry = static_cast<TreeItem<PriceEntry>*>(index(row, 0).internalPointer())->data();
 
     // in case we have an exact match, we report it
     if (priceEntry.id() == fullId) {
-        return std::move(priceEntry);
+        return priceEntry;
     }
 
     // in case the caller wanted the exact date we are done
@@ -271,7 +271,7 @@ MyMoneyPrice PriceModel::price(const QString& from, const QString& to, const QDa
     if (row > 0) {
         priceEntry = static_cast<TreeItem<PriceEntry>*>(index(row-1, 0).internalPointer())->data();
         if ((priceEntry.from() == from) && (priceEntry.to() == to)) {
-            return std::move(priceEntry);
+            return priceEntry;
         }
     }
     return {};
