@@ -98,7 +98,7 @@ void KHomeView::executeCustomAction(eView::Action action)
 void KHomeView::refresh()
 {
     Q_D(KHomeView);
-    if (isVisible() && !d->m_skipRefresh) {
+    if (isVisible() && !d->m_skipRefresh && !d->m_resizeRefreshTimeout.isActive()) {
         d->loadView();
         d->m_needsRefresh = false;
     } else {
@@ -108,13 +108,8 @@ void KHomeView::refresh()
 
 void KHomeView::resizeEvent(QResizeEvent* event)
 {
-    static QTimer timeout;
-
-    // refresh only if no other resize event occurs within the specified time
-    timeout.stop();
-    connect(&timeout, &QTimer::timeout, this, &KHomeView::refresh, Qt::UniqueConnection);
-    timeout.setSingleShot(true);
-    timeout.start(100);
+    Q_D(KHomeView);
+    d->repaintAfterResize();
     KMyMoneyViewBase::resizeEvent(event);
 }
 

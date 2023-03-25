@@ -29,6 +29,7 @@
 #include <QPrinter>
 #include <QScrollBar>
 #include <QStandardPaths>
+#include <QTimer>
 #include <QUrlQuery>
 #include <QVBoxLayout>
 #include <QWheelEvent>
@@ -155,6 +156,9 @@ public:
         q->connect(m_view, &KMMTextBrowser::anchorClicked, q, &KHomeView::slotOpenUrl);
 
         q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KHomeView::refresh);
+
+        m_resizeRefreshTimeout.setSingleShot(true);
+        q->connect(&m_resizeRefreshTimeout, &QTimer::timeout, q, &KHomeView::refresh);
     }
 
     /**
@@ -395,6 +399,12 @@ public:
         return m_accountList[acc.id()][paymentDate];
     }
 
+    void repaintAfterResize()
+    {
+        // refresh only if no other resize event occurs within the specified time
+        m_resizeRefreshTimeout.start(100);
+    }
+
     void loadView()
     {
         Q_Q(KHomeView);
@@ -487,7 +497,6 @@ public:
                 qDebug() << "Processed home view section" << option << "in" << t.restart() << "ms";
             }
         }
-
         m_html += footer;
 
         m_view->setHtml(m_html);
@@ -1933,6 +1942,7 @@ public:
     QString pathStatusHeader; // online download status
     int adjustedIconSize;
     double devRatio;
+    QTimer m_resizeRefreshTimeout;
 };
 
 #endif
