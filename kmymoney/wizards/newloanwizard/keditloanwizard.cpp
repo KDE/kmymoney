@@ -543,7 +543,7 @@ const MyMoneyAccount KEditLoanWizard::account() const
                                        field("interestFrequencyUnitEdit").toInt());
     }
 
-    return std::move(acc);
+    return acc;
 }
 
 const MyMoneyTransaction KEditLoanWizard::transaction() const
