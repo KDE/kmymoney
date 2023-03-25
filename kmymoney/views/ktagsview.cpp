@@ -687,7 +687,8 @@ void KTagsView::slotDeleteTag()
         QList<MyMoneySchedule> used_schedules;
         for (const auto& schedule : file->scheduleList()) {
             // loop over all splits in the transaction of the schedule
-            for (const auto& split : qAsConst(schedule.transaction().splits())) {
+            const auto splits = schedule.transaction().splits();
+            for (const auto& split : splits) {
                 for (auto i = 0; i < split.tagIdList().size(); ++i) {
                     // is the tag in the split to be deleted?
                     if (d->tagInList(selectedTags, split.tagIdList()[i])) {
