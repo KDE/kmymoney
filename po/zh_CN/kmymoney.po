@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-13 03:06+0000\n"
-"PO-Revision-Date: 2023-03-11 04:55\n"
+"PO-Revision-Date: 2023-03-26 02:20\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -6470,16 +6470,14 @@ msgid "Saving file..."
 msgstr "保存文件..."
 
 #: kmymoney/kmymoney.cpp:3506
-#, fuzzy, kde-format
-#| msgid "Failed to save: %1"
+#, kde-format
 msgid "Failed to save your data."
-msgstr "无法保存：%1"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:3512
-#, fuzzy, kde-format
-#| msgid "Couldn't find any plugin for opening storage."
+#, kde-format
 msgid "Couldn't find suitable plugin to save your data."
-msgstr "无法找到用于打开存储的插件。"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:3518
 #, kde-format
@@ -6487,10 +6485,9 @@ msgid "Saving file as...."
 msgstr "正在将文件另存为...."
 
 #: kmymoney/kmymoney.cpp:3534
-#, fuzzy, kde-format
-#| msgid "Couldn't find any plugin for opening storage."
+#, kde-format
 msgid "Couldn't find any plugin for saving data."
-msgstr "无法找到用于打开存储的插件。"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:3563
 #, kde-format
