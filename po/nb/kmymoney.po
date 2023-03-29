@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-13 03:06+0000\n"
-"PO-Revision-Date: 2023-03-19 13:26+0100\n"
+"PO-Revision-Date: 2023-03-28 12:33+0200\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
@@ -334,12 +334,12 @@ msgid_plural ""
 msgstr[0] ""
 "KMyMoney har funnet en planlagt transaksjon som samsvarer med en importert "
 "transaksjon.<br/>Tidsplan: <b>%2</b><br/>Transaksjon: <i>%3 %4</i><br/"
-">Tranaksjonsdatoene fraviker en dag<br/>Vil du at KMyMoney skal legge inn "
+">Transaksjonsdatoene fraviker en dag<br/>Vil du at KMyMoney skal legge inn "
 "denne planen nå slik at transaksjonen kan bli koblet?"
 msgstr[1] ""
 "KMyMoney har funnet en planlagt transaksjon som samsvarer med en importert "
 "transaksjon.<br/>Tidsplan: <b>%2</b><br/>Transaksjon: <i>%3 %4</i><br/"
-">Tranaksjonsdatoene fraviker %1 dager<br/>Vil du at KMyMoney skal legge inn "
+">Transaksjonsdatoene fraviker %1 dager<br/>Vil du at KMyMoney skal legge inn "
 "denne planen nå slik at transaksjonen kan bli koblet? "
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1600
@@ -456,7 +456,7 @@ msgid ""
 "number."
 msgstr ""
 "Hoppet over <placeholder>%1</placeholder> fordi den har ikke "
-"idetifikasjonsnummer."
+"identifikasjonsnummer."
 
 #: kmymoney/converter/webpricequote.cpp:269
 #, kde-format
@@ -899,7 +899,7 @@ msgstr "Dato"
 #: kmymoney/widgets/stdtransaction.cpp:305
 #, kde-format
 msgid "Memo"
-msgstr ""
+msgstr "Notat"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
@@ -3561,8 +3561,8 @@ msgid ""
 "to a different payee before the selected payees can be deleted. Please "
 "select a payee from the list below."
 msgstr ""
-"Transaksjonene tilknyttet de merkede mottakerene må tilordnes på ny til en "
-"annen mottaker før de merkede mottakerene kan slettes. Velg en mottaker fra "
+"Transaksjonene tilknyttet de merkede mottakerne må tilordnes på ny til en "
+"annen mottaker før de merkede mottakerne kan slettes. Velg en mottaker fra "
 "listen under."
 
 #: kmymoney/dialogs/kpayeereassigndlg.cpp:110
@@ -3990,7 +3990,7 @@ msgstr "Bruk systemskrifttype"
 #: kmymoney/dialogs/settings/ksettingsfonts.ui:30
 #, kde-format
 msgid "Individual font settings"
-msgstr "Individuell instilling for skrifttype"
+msgstr "Individuell innstilling for skrifttype"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: label, entry (listCellFont), group (List Options)
@@ -4672,7 +4672,7 @@ msgstr "Kjennemerke"
 #, kde-format
 msgid "Regular Expression to extract the identifier from the downloaded data"
 msgstr ""
-"Regulært uttrykk for å trekke ut kjennemerkeet fra de nedlastede dataene"
+"Regulært uttrykk for å trekke ut kjennemerket fra de nedlastede dataene"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editDate)
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editDateFormat)
@@ -4855,7 +4855,7 @@ msgstr "Handlinger for nettbank"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:14
 #, kde-format
 msgid "Register settings"
-msgstr "Instillinger for hovedbok"
+msgstr "Innstillinger for hovedbok"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab1)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:24
@@ -5243,7 +5243,7 @@ msgstr "Importer"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:473
 #, kde-format
 msgid "Match transactions within days"
-msgstr "Antall dager å matche transasjoner innenfor"
+msgstr "Antall dager å matche transaksjoner innenfor"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_matchInterval)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:483
@@ -5309,7 +5309,7 @@ msgstr "Behandlingsdager"
 #: kmymoney/dialogs/settings/ksettingsschedules.ui:77
 #, kde-format
 msgid "Use holiday calendar for region"
-msgstr "Bruk helliggdagskalender for regionen"
+msgstr "Bruk helligdagskalender for regionen"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_holidayRegion)
 #: kmymoney/dialogs/settings/ksettingsschedules.ui:91
@@ -5572,7 +5572,7 @@ msgstr "Thomas Baumgart"
 #: kmymoney/kcreditswindow.cpp:46
 #, kde-format
 msgid "Core engine, Release Manager, Project admin"
-msgstr "Kjerneprogram, utgivelsehåndering, prosjektadministrasjon"
+msgstr "Kjerneprogram, håndtering av utgivelse, prosjektadministrasjon"
 
 #: kmymoney/kcreditswindow.cpp:47
 #, kde-format
@@ -6133,7 +6133,7 @@ msgstr "Lag planlagt transaksjon..."
 #: kmymoney/kmymoney.cpp:1471
 #, kde-format
 msgid "Assign next number"
-msgstr "Tilornde neste nummer"
+msgstr "Tilordne neste nummer"
 
 #: kmymoney/kmymoney.cpp:1472
 #, kde-format
@@ -6429,7 +6429,7 @@ msgstr ""
 "\n"
 "Trykk Ja for å endre åpningssaldo til %1,\n"
 "Trykk Nei for å la saldo være %2,\n"
-"Trykk Avbryt for å avbryte oprettelsen av kontoen."
+"Trykk Avbryt for å avbryte opprettelsen av kontoen."
 
 #: kmymoney/kmymoney.cpp:2612 kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
@@ -6731,7 +6731,7 @@ msgstr "Valg for investering"
 #: kmymoney/kmymoneyui.rc:184
 #, kde-format
 msgid "Scheduled transactions options"
-msgstr "Valg for planlagte yransaksjoner"
+msgstr "Valg for planlagte transaksjoner"
 
 #. i18n: ectx: Menu (transaction_context_menu)
 #: kmymoney/kmymoneyui.rc:199
@@ -7238,7 +7238,7 @@ msgstr ""
 #: kmymoney/widgets/register.cpp:159
 #, kde-format
 msgid "Balance"
-msgstr ""
+msgstr "Saldo"
 
 #: kmymoney/models/ledgerproxymodel.cpp:53
 #: kmymoney/widgets/register.cpp:302
@@ -7275,28 +7275,28 @@ msgstr "Betaling"
 #, kde-format
 msgctxt "Reconciliation flag empty"
 msgid "Not reconciled"
-msgstr ""
+msgstr "Ikke avstemt"
 
 #: kmymoney/models/ledgertransaction.cpp:197
 #: kmymoney/mymoney/storage/journalmodel.cpp:87
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "Cleared"
-msgstr ""
+msgstr "Klarert"
 
 #: kmymoney/models/ledgertransaction.cpp:200
 #: kmymoney/mymoney/storage/journalmodel.cpp:89
 #, kde-format
 msgctxt "Reconciliation flag R"
 msgid "Reconciled"
-msgstr ""
+msgstr "Avstemt"
 
 #: kmymoney/models/ledgertransaction.cpp:203
 #: kmymoney/mymoney/storage/journalmodel.cpp:91
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "Frozen"
-msgstr ""
+msgstr "Fryst"
 
 #: kmymoney/models/ledgertransaction_p.h:84
 #: kmymoney/mymoney/splitmodel.cpp:100 kmymoney/mymoney/storage/journalmodel.cpp:175
@@ -7332,14 +7332,14 @@ msgstr ""
 #: kmymoney/models/securitiesmodel.cpp:267
 #, kde-format
 msgid "Market"
-msgstr ""
+msgstr "Marked"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2_2)
 #: kmymoney/models/securitiesmodel.cpp:271
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:81
 #, kde-format
 msgid "Fraction"
-msgstr ""
+msgstr "Brøk"
 
 #: kmymoney/models/splitmodel.cpp:110
 #, kde-format
@@ -7532,8 +7532,7 @@ msgstr "    Listen til den underordnede kontoen vil bli rekonstruert"
 #, kde-format
 msgid "  * The payee with id %1 referenced by the loan does not exist anymore."
 msgstr ""
-"  * Betalingsmodtageren med id %1 som er henvist til i lånet, finnes ikke "
-"lenger."
+"  * Mottakeren med id %1 som er henvist til i lånet, finnes ikke lenger."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2034
 #, kde-format
@@ -7588,7 +7587,7 @@ msgstr "  * Betalingsmottaker %1 er gjenskapt med fast id"
 #: kmymoney/mymoney/mymoneyfile.cpp:2159
 #, kde-format
 msgid "  * Payee id updated in split of transaction '%1'."
-msgstr "  * Mottakerid er oppdatert i oppdelingen av transaksjonen «%1»."
+msgstr "  * Mottaker-id er oppdatert i oppdelingen av transaksjonen «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2181
 #, kde-format
@@ -7753,7 +7752,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:2474
 #, kde-format
 msgid "* Problem with budget '%1'"
-msgstr "* Problem med budjsett «%1»"
+msgstr "* Problem med budsjett «%1»"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2476
 #, kde-format
@@ -8682,7 +8681,7 @@ msgstr "Uruguayanske peso"
 #: kmymoney/mymoney/mymoneyfile.cpp:2917
 #, kde-format
 msgid "Uzbekistani Sum"
-msgstr "Usbekiske soms"
+msgstr "Usbekiske sum"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2918
 #, kde-format
@@ -9085,28 +9084,28 @@ msgstr "År"
 #, kde-format
 msgctxt "Add securities/shares/bonds"
 msgid "Add shares"
-msgstr ""
+msgstr "Legg til aksjer"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:102
 #: kmymoney/widgets/investtransaction.cpp:135
 #, kde-format
 msgctxt "Remove securities/shares/bonds"
 msgid "Remove shares"
-msgstr ""
+msgstr "Slett aksjer"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:104
 #: kmymoney/widgets/investtransaction.cpp:138
 #, kde-format
 msgctxt "Buy securities/shares/bonds"
 msgid "Buy shares"
-msgstr ""
+msgstr "Kjøp aksjer"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:106
 #: kmymoney/widgets/investtransaction.cpp:141
 #, kde-format
 msgctxt "Sell securities/shares/bonds"
 msgid "Sell shares"
-msgstr ""
+msgstr "Selg aksjer"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:108
 #: kmymoney/widgets/investtransaction.cpp:144
@@ -9114,13 +9113,13 @@ msgstr ""
 #: kmymoney/widgets/stdtransaction.cpp:89
 #, kde-format
 msgid "Dividend"
-msgstr ""
+msgstr "Utbytte"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:110
 #: kmymoney/widgets/investtransaction.cpp:147
 #, kde-format
 msgid "Reinvest Dividend"
-msgstr ""
+msgstr "Reinvester utbytte"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:112
 #: kmymoney/widgets/investtransaction.cpp:150
@@ -9128,14 +9127,14 @@ msgstr ""
 #: kmymoney/widgets/stdtransaction.cpp:91
 #, kde-format
 msgid "Yield"
-msgstr ""
+msgstr "Avkastning"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:114
 #: kmymoney/widgets/investtransaction.cpp:153
 #, kde-format
 msgctxt "Split securities/shares/bonds"
 msgid "Split shares"
-msgstr ""
+msgstr "Splitt aksjer"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:116
 #: kmymoney/widgets/investtransaction.cpp:156
@@ -9143,54 +9142,54 @@ msgstr ""
 #: kmymoney/widgets/stdtransaction.cpp:93
 #, kde-format
 msgid "Interest Income"
-msgstr ""
+msgstr "Renteinntekt"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:118
 #: kmymoney/widgets/investtransaction.cpp:159
 #, kde-format
 msgctxt "Unknown investment activity"
 msgid "Unknown"
-msgstr ""
+msgstr "Ukjent"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:207
 #, kde-format
 msgid "Multiple fee categories"
-msgstr ""
+msgstr "Flere gebyrkategorier"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:207
 #, kde-format
 msgid "Multiple interest categories"
-msgstr ""
+msgstr "Flere rentekategorier"
 
 #: kmymoney/mymoney/storage/mymoneystoragedump.cpp:452
 #, kde-format
 msgctxt "Reconciliation status 'Not Reconciled'"
 msgid "not reconciled"
-msgstr ""
+msgstr "ikke avstemt"
 
 #: kmymoney/mymoney/storage/mymoneystoragedump.cpp:455
 #, kde-format
 msgctxt "Reconciliation status 'Cleared'"
 msgid "cleared"
-msgstr ""
+msgstr "klarert"
 
 #: kmymoney/mymoney/storage/mymoneystoragedump.cpp:458
 #, kde-format
 msgctxt "Reconciliation status 'Reconciled'"
 msgid "reconciled"
-msgstr ""
+msgstr "avstemt"
 
 #: kmymoney/mymoney/storage/mymoneystoragedump.cpp:461
 #, kde-format
 msgctxt "Reconciliation status 'Frozen'"
 msgid "frozen"
-msgstr ""
+msgstr "fryst"
 
 #: kmymoney/mymoney/storage/mymoneystoragedump.cpp:464
 #, kde-format
 msgctxt "Reconciliation status unknown"
 msgid "unknown"
-msgstr ""
+msgstr "ukjent"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_scheduleTree)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
@@ -9219,37 +9218,37 @@ msgstr "Mottaker"
 #, kde-format
 msgctxt "Schedule group"
 msgid "Bills"
-msgstr ""
+msgstr "Regning"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:152
 #, kde-format
 msgctxt "Schedule group"
 msgid "Deposits"
-msgstr ""
+msgstr "Innskudd"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:153
 #, kde-format
 msgctxt "Schedule group"
 msgid "Transfers"
-msgstr ""
+msgstr "Overføringer"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:154
 #, kde-format
 msgctxt "Schedule group"
 msgid "Loans"
-msgstr ""
+msgstr "Lån"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:179
 #, kde-format
 msgctxt "Schedule header"
 msgid "Type/Name"
-msgstr ""
+msgstr "Type/navn"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:180
 #, kde-format
 msgctxt "Schedule header"
 msgid "Account"
-msgstr ""
+msgstr "Konto"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:181
 #, kde-format
@@ -9261,254 +9260,254 @@ msgstr "Mottaker"
 #, kde-format
 msgctxt "Schedule header"
 msgid "Amount"
-msgstr ""
+msgstr "Beløp"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:183
 #, kde-format
 msgctxt "Schedule header"
 msgid "Next Due Date"
-msgstr ""
+msgstr "Neste forfallsdato"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:184
 #, kde-format
 msgctxt "Schedule header"
 msgid "Frequency"
-msgstr ""
+msgstr "Frekvens"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:185
 #, kde-format
 msgctxt "Schedule header"
 msgid "Payment Method"
-msgstr ""
+msgstr "Betalingsmetode"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:241
 #: kmymoney/views/kscheduledview_p.h:441
 #, kde-format
 msgctxt "Finished schedule"
 msgid "Finished"
-msgstr ""
+msgstr "Ferdig"
 
 #: kmymoney/plugins/checkprinting/checkprinting.cpp:60
 #, kde-format
 msgctxt "It's about printing bank checks"
 msgid "Check printing"
-msgstr ""
+msgstr "Sjekkutskrift"
 
 #: kmymoney/plugins/checkprinting/checkprinting.cpp:79
 #, kde-format
 msgid "Print check"
-msgstr ""
+msgstr "Skriv ut sjekk"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 0"
 msgid "Zero"
-msgstr ""
+msgstr "Null"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 1"
 msgid "One"
-msgstr ""
+msgstr "En"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 2"
 msgid "Two"
-msgstr ""
+msgstr "To"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 3"
 msgid "Three"
-msgstr ""
+msgstr "Tre"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 4"
 msgid "Four"
-msgstr ""
+msgstr "Fire"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 5"
 msgid "Five"
-msgstr ""
+msgstr "Fem"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 6"
 msgid "Six"
-msgstr ""
+msgstr "Seks"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 7"
 msgid "Seven"
-msgstr ""
+msgstr "Sju"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 8"
 msgid "Eight"
-msgstr ""
+msgstr "Åtte"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 9"
 msgid "Nine"
-msgstr ""
+msgstr "Ni"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 10"
 msgid "Ten"
-msgstr ""
+msgstr "Ti"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 11"
 msgid "Eleven"
-msgstr ""
+msgstr "Elleve"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 12"
 msgid "Twelve"
-msgstr ""
+msgstr "Tolv"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 13"
 msgid "Thirteen"
-msgstr ""
+msgstr "Tretten"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 14"
 msgid "Fourteen"
-msgstr ""
+msgstr "Fjorten"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 15"
 msgid "Fifteen"
-msgstr ""
+msgstr "Femten"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 16"
 msgid "Sixteen"
-msgstr ""
+msgstr "Seksten"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 17"
 msgid "Seventeen"
-msgstr ""
+msgstr "Sytten"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 18"
 msgid "Eighteen"
-msgstr ""
+msgstr "Atten"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
 msgctxt "@item the number 19"
 msgid "Nineteen"
-msgstr ""
+msgstr "Nitten"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:17
 #, kde-format
 msgctxt "@item the number 20"
 msgid "Twenty"
-msgstr ""
+msgstr "Tjue"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:17
 #, kde-format
 msgctxt "@item the number 30"
 msgid "Thirty"
-msgstr ""
+msgstr "Tretti"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:17
 #, kde-format
 msgctxt "@item the number 40"
 msgid "Forty"
-msgstr ""
+msgstr "Førti"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:17
 #, kde-format
 msgctxt "@item the number 50"
 msgid "Fifty"
-msgstr ""
+msgstr "Femti"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:17
 #, kde-format
 msgctxt "@item the number 60"
 msgid "Sixty"
-msgstr ""
+msgstr "Seksti"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:17
 #, kde-format
 msgctxt "@item the number 70"
 msgid "Seventy"
-msgstr ""
+msgstr "Sytti"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:17
 #, kde-format
 msgctxt "@item the number 80"
 msgid "Eighty"
-msgstr ""
+msgstr "Åtti"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:17
 #, kde-format
 msgctxt "@item the number 90"
 msgid "Ninety"
-msgstr ""
+msgstr "Nitti"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:20
 #, kde-format
 msgctxt "@item the number 1000"
 msgid "Thousand"
-msgstr ""
+msgstr "Tusen"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:20
 #, kde-format
 msgctxt "@item the number 1,000,000"
 msgid "Million"
-msgstr ""
+msgstr "Million"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:20
 #, kde-format
 msgctxt "@item the number 1,000,000,000"
 msgid "Billion"
-msgstr ""
+msgstr "Milliard"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:35
 #, kde-format
 msgctxt "@item This comes after the hundred value digit"
 msgid " Hundred"
-msgstr ""
+msgstr " hundre"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:38
 #, kde-format
 msgctxt ""
 "@item This comes after the hunder text if the tens unit is different from 0"
 msgid " and "
-msgstr ""
+msgstr " og "
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:94
 #, kde-format
 msgctxt "@item Appears last as separator"
 msgid " and "
-msgstr ""
+msgstr " og "
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:94
 #, kde-format
 msgctxt "@item Separator"
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:106
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:109
@@ -9517,13 +9516,13 @@ msgctxt ""
 "@label The first argument is the amount in words, the second is the "
 "fractional part and the third is the denominator of the fractional part"
 msgid "%1 and %2/%3"
-msgstr ""
+msgstr "%1 og %2/%3"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:109
 #, kde-format
 msgctxt "@label The word to be printed for no fractional part as in No/00"
 msgid "No"
-msgstr ""
+msgstr "Nei"
 
 #. i18n: ectx: label, entry (checkTemplateFile), group (General)
 #: kmymoney/plugins/checkprinting/pluginsettings.kcfg:10
@@ -9531,12 +9530,13 @@ msgstr ""
 msgid ""
 "The check template file which defines the way the printed check will look."
 msgstr ""
+"Filen med sjekkmal som definerer hvordan den utskrevne sjekken skal se ut."
 
 #. i18n: ectx: label, entry (printedChecks), group (General)
 #: kmymoney/plugins/checkprinting/pluginsettings.kcfg:13
 #, kde-format
 msgid "A list containing the id's of already printed checks."
-msgstr ""
+msgstr "En liste som inneholder id-ene til allerede utskrevne sjekker."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, PluginSettingsDecl)
 #: kmymoney/plugins/checkprinting/pluginsettingsdecl.ui:20
@@ -9556,13 +9556,13 @@ msgstr ""
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:56
 #, kde-format
 msgid "Start operation"
-msgstr ""
+msgstr "Start handling"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:57
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:65
 #, kde-format
 msgid "Use this to start the export operation"
-msgstr ""
+msgstr "Bruk denne for å starte eksporthandlingen"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonBrowse)
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:60
@@ -9573,37 +9573,37 @@ msgstr ""
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:67
 #, kde-format
 msgid "&Browse..."
-msgstr ""
+msgstr "&Bla gjennom…"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:62
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:70
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:62
 #, kde-format
 msgid "Select filename"
-msgstr ""
+msgstr "Velg filnavn"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:63
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:71
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:63
 #, kde-format
 msgid "Use this to select a filename to export to"
-msgstr ""
+msgstr "Bruk denne for å velge filnavnet du skal eksportere til"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:169
 #, kde-format
 msgid "There are no entries in this account.\n"
-msgstr ""
+msgstr "Det er ingen oppføringer i denne kontoen.\n"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:170
 #, kde-format
 msgid "Invalid account"
-msgstr ""
+msgstr "Ugyldig konto"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CsvExportDlg)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:14
 #, kde-format
 msgid "Csv Export"
-msgstr ""
+msgstr "CSV-eksport"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:37
@@ -9618,13 +9618,21 @@ msgid ""
 "all the transactions between the specified dates,  or just choose to export "
 "Categories."
 msgstr ""
+"Fra dette vinduet kan du eksportere transaksjoner til en kommaseparert fil "
+"(kjent som en CSV-fil pga filendelsen).  Du kan likevel velge en skilletegn "
+"under.  Legg inn en sti til CSV-filen eller velg den ved å trykke på «Bla "
+"gjennom»-knappen.\n"
+"\n"
+"Du kan velge filens sti og kontoen. Velg konto for å eksportere alle "
+"transaksjonene mellom de angitte datoene, eller velg å bare eksportere "
+"kategorier."
 
 #. i18n: ectx: property (text), widget (QLabel, lblFileExport)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:74
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:114
 #, kde-format
 msgid "File to export to:"
-msgstr ""
+msgstr "Fil å eksportere til:"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
@@ -9632,87 +9640,87 @@ msgstr ""
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:140
 #, kde-format
 msgid "Account to export"
-msgstr ""
+msgstr "Konto å eksportere"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_qgroupboxContents)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:150
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:226
 #, kde-format
 msgid "Contents to Export"
-msgstr ""
+msgstr "Innhold å eksportere"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_radioButtonAccount)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:171
 #, kde-format
 msgid "Acco&unt"
-msgstr ""
+msgstr "Ko&nto"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_radioButtonCategories)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:178
 #, kde-format
 msgid "Ca&tegories"
-msgstr ""
+msgstr "Ka&tegorier"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_qgroupboxDates)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:194
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:264
 #, kde-format
 msgid "Date Range"
-msgstr ""
+msgstr "Datointervall"
 
 #. i18n: ectx: property (text), widget (QLabel, lblStartDate)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:214
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:324
 #, kde-format
 msgid "Start on:"
-msgstr ""
+msgstr "Begynner den:"
 
 #. i18n: ectx: property (text), widget (QLabel, lblEndDate)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:239
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:302
 #, kde-format
 msgid "End on:"
-msgstr ""
+msgstr "Slutter den:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_qgroupboxSeparator)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:263
 #, kde-format
 msgid "Field Separator"
-msgstr ""
+msgstr "Skilletegn"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_separatorComboBox)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:270
 #, kde-format
 msgid "Comma (,)"
-msgstr ""
+msgstr "Komma (,)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_separatorComboBox)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:275
 #, kde-format
 msgid "Semicolon (;)"
-msgstr ""
+msgstr "Semikolon (;)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_separatorComboBox)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:280
 #, kde-format
 msgid "Tab (\\t)"
-msgstr ""
+msgstr "Tabulator (\\t)"
 
 #: kmymoney/plugins/csv/export/csvexporter.cpp:42
 #, kde-format
 msgid "CSV exporter"
-msgstr ""
+msgstr "CSV-eksport"
 
 #: kmymoney/plugins/csv/export/csvexporter.cpp:70
 #, kde-format
 msgid "&CSV..."
-msgstr ""
+msgstr "&CSV…"
 
 #: kmymoney/plugins/csv/export/csvexporter.cpp:80
 #, kde-format
 msgctxt "CSV Exporter dialog title"
 msgid "CSV Exporter"
-msgstr ""
+msgstr "CSV-eksport"
 
 #: kmymoney/plugins/csv/export/csvexporter.cpp:115
 #, kde-format
@@ -9720,38 +9728,40 @@ msgid ""
 "<qt>The file <b>%1</b> already exists. Do you really want to overwrite it?</"
 "qt>"
 msgstr ""
+"<qt>Filen <b>%1</b> finnes fra før. Er du sikker på at du vil skrive over "
+"den?</qt>"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:73
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:71
 #, kde-format
 msgid "Unexpected exception '%1'"
-msgstr ""
+msgstr "Uventet unntak «%1»"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:77
 #, kde-format
 msgid "Export completed.\n"
-msgstr ""
+msgstr "Eksport fullført.\n"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:80
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:77
 #, kde-format
 msgid "Unable to open file '%1' for writing"
-msgstr ""
+msgstr "Kan ikke å åpne «%1» for skriving"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:94
 #, kde-format
 msgid "Account Type:"
-msgstr ""
+msgstr "Kontotype:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:98
 #, kde-format
 msgid "Action/Type"
-msgstr ""
+msgstr "Aksjon/type"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:103
 #, kde-format
 msgid "Account/Cat"
-msgstr ""
+msgstr "Konto/kat"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:170
 #, kde-format
@@ -9760,6 +9770,9 @@ msgid ""
 "Date '%2', Payee '%3'.\n"
 "Transaction dropped.\n"
 msgstr ""
+"Transaksjon nummer «%1» mangler tilordning til konto.\n"
+"Dato «%2», mottaker «%3».\n"
+"Transaksjon droppet.\n"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
 #: kmymoney/plugins/csv/export/csvwriter.cpp:172
@@ -9768,22 +9781,22 @@ msgstr ""
 #: kmymoney/widgets/ktransactionfilter.ui:643
 #, kde-format
 msgid "Invalid transaction"
-msgstr ""
+msgstr "Ugyldig transaksjon"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:233
 #, kde-format
 msgid "splitCategory"
-msgstr ""
+msgstr "delKategori"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:233
 #, kde-format
 msgid "splitMemo"
-msgstr ""
+msgstr "delNotat"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:233
 #, kde-format
 msgid "splitAmount"
-msgstr ""
+msgstr "delBeløp"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:346
 #, kde-format
@@ -9792,6 +9805,9 @@ msgid ""
 "Date '%2', Amount '%3'.\n"
 "Transaction dropped.\n"
 msgstr ""
+"Transaksjon nummer «%1» mangler tilordning til konto\n"
+"Dato «%2», beløp «%3».\n"
+"Transaksjon droppet.\n"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:254
 #, kde-format
@@ -9800,18 +9816,21 @@ msgid ""
 "center><center>If you wish to copy the Payee data to the memo field, click "
 "'Yes'.</center>"
 msgstr ""
+"<center>Feltet «<b>%1</b>» er allerede valgt til denne kolonnen.</"
+"center><center>Trykk «Ja» dersom du ønsker å kopiere mottakerdata til "
+"notatfeltet.</center>"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:294
 #, kde-format
 msgctxt "@item:intext No field selection"
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:302
 #, kde-format
 msgctxt "@label:listbox list of currently selected fields"
 msgid "<i>Memo columns:</i> %1"
-msgstr ""
+msgstr "<i>Notatkolonner:</i> %1"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:345
 #, kde-format
@@ -9819,6 +9838,8 @@ msgid ""
 "<center>Field name not recognised.</center> <center>'<b>%1</b>'</center> "
 "Please re-enter your column selections."
 msgstr ""
+"<center>Feltnavner gjenkjennes ikke.</center> <center>«<b>%1</b>»</center> "
+"Velg kolonnene på ny."
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:346
 #: kmymoney/plugins/csv/import/csvwizard.cpp:988
@@ -9837,6 +9858,7 @@ msgid ""
 "Column <b>%1</b> cannot be selected because it is already used in '<b>%2</"
 "b>'."
 msgstr ""
+"Kolonne <b>%1</b> kan ikke velges fordi den er allerede i bruk i «<b>%2</b>»."
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:388
 #, kde-format
@@ -9844,17 +9866,19 @@ msgid ""
 "<center>The %1 field contains '%2'</center><center>and the %3 field contains "
 "'%4'.</center><center>Please choose which you wish to accept.</center>"
 msgstr ""
+"<center>Feltet %1 inneholder «%2»</center><center>og feltet %3 inneholder «"
+"%4».</center><center>Velg den du vil akseptere.</center>"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:395
 #, kde-format
 msgid "CSV invalid field values"
-msgstr ""
+msgstr "CSV ugyldige feltverdier"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:396
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:397
 #, kde-format
 msgid "Accept %1"
-msgstr ""
+msgstr "Aksepter %1"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, BankingPage)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:20
@@ -9869,25 +9893,27 @@ msgid ""
 "Please select the appropriate columns to use,\n"
 " corresponding to your data."
 msgstr ""
+"Velg de kolonnene som skal brukes\n"
+" som samsvarer med dine data."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_number)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:81
 #, kde-format
 msgctxt "column containing number field"
 msgid "Number"
-msgstr ""
+msgstr "Nummer"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_numberCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:106
 #, kde-format
 msgid "Select column containing number field."
-msgstr ""
+msgstr "Velg kolonnen som inneholder nummerfeltet."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_numberColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:119
 #, kde-format
 msgid "Clear number field selection."
-msgstr ""
+msgstr "Rens valg av nummerfelt."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_dateCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:157
@@ -9901,206 +9927,206 @@ msgstr "Velg kolonnen som inneholder datofeltet."
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:167
 #, kde-format
 msgid "Clear date field selection."
-msgstr ""
+msgstr "Rens valg av datofelt."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_payee)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:180
 #, kde-format
 msgctxt "column containing payee or description field"
 msgid "Payee/Description"
-msgstr ""
+msgstr "Mottaker/beskrivelse"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_payeeCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:199
 #, kde-format
 msgid "Select column containing payee or description field."
-msgstr ""
+msgstr "Velg kolonnen som inneholder felt for mottarker eller beskrivelse."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_payeeColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:209
 #, kde-format
 msgid "Clear payee field selection."
-msgstr ""
+msgstr "Rens valg av mottakerfelt."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_category)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:228
 #, kde-format
 msgctxt "column containing number field"
 msgid "Category"
-msgstr ""
+msgstr "Kategori"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_categoryCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:247
 #, kde-format
 msgid "Select column containing category field."
-msgstr ""
+msgstr "Velg kolonnen som inneholder kategorifeltet."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_categoryColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:257
 #, kde-format
 msgid "Clear category field selection."
-msgstr ""
+msgstr "Rens valg av kategorifelt."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_memoCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:289
 #, kde-format
 msgid "Select column containing memo field."
-msgstr ""
+msgstr "Velg kolonnen som inneholder notatfeltet."
 
 #. i18n: ectx: property (text), widget (QLabel, m_currentMemoColumns)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:305
 #, kde-format
 msgid "Selection"
-msgstr ""
+msgstr "Valg"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_memoColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:315
 #, kde-format
 msgid "Clear memo field selection."
-msgstr ""
+msgstr "Rens valg av notatfelt."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_balanceCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:344
 #, kde-format
 msgid "Select column containing balance field."
-msgstr ""
+msgstr "Velg kolonnen som inneholder saldofeltet."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_balanceColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:351
 #, kde-format
 msgid "Clear balance field selection."
-msgstr ""
+msgstr "Rens valg av saldofelt."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_amount)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:409
 #, kde-format
 msgctxt "location of amount column"
 msgid "Amount"
-msgstr ""
+msgstr "Beløp"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_amountCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:428
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:118
 #, kde-format
 msgid "Select column containing amount field."
-msgstr ""
+msgstr "Velg kolonnen som inneholder beløpfeltet."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_amountColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:438
 #, kde-format
 msgid "Clear amount field selection."
-msgstr ""
+msgstr "Rens valg av notatfelt."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_indicator)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:448
 #, kde-format
 msgid "Debit/Credit Indicator"
-msgstr ""
+msgstr "Debet-/kreditindikator"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_creditDebitIndicatorCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:461
 #, kde-format
 msgid "Select column containing indicator field."
-msgstr ""
+msgstr "Velg kolonnen som inneholder indikatorfeltet."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditDebitIndicatorColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:468
 #, kde-format
 msgid "Clear indicator field selection."
-msgstr ""
+msgstr "Rens valgt infdikatorfelt."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_debit)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:478
 #, kde-format
 msgid "Indicator for Credit"
-msgstr ""
+msgstr "Indikator for kredit"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, m_creditIndicator)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:488
 #, kde-format
 msgid "Enter text that is used to indicate that amount is a credit."
-msgstr ""
+msgstr "Skriv teksten som brukes for å indikere at beløpet er en kredit."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_credit)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:498
 #, kde-format
 msgid "Indicator for Debit"
-msgstr ""
+msgstr "Indikator for debit"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, m_debitIndicator)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:508
 #, kde-format
 msgid "Enter text that is used to indicate that amount is a debit."
-msgstr ""
+msgstr "Skriv teksten som brukes for å indikere at beløpet er en debit."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_opposite)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:518
 #, kde-format
 msgid "Opposite signs"
-msgstr ""
+msgstr "Motsattsymbol"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_oppositeSigns)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:534
 #, kde-format
 msgid "Select if your amount column has signs improperly set."
-msgstr ""
+msgstr "Velg denne dersom beløpskolonnen har uriktig satte symboler."
 
 #. i18n: ectx: attribute (title), widget (QWidget, debitCreditTab)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:563
 #, kde-format
 msgid "Debit/credit"
-msgstr ""
+msgstr "Debet/kredit"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_debits)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:577
 #, kde-format
 msgctxt "location of debit column"
 msgid "Debit"
-msgstr ""
+msgstr "Debit"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_debitCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:599
 #, kde-format
 msgid "Select column containing debit field."
-msgstr ""
+msgstr "Velg kolonnen som inneholder debitfeltet."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_debitColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:609
 #, kde-format
 msgid "Clear debit field selection."
-msgstr ""
+msgstr "Rens valgt debetfelt."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_credits)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:625
 #, kde-format
 msgctxt "location of credit column"
 msgid "Credit"
-msgstr ""
+msgstr "Kredit"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_creditCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:644
 #, kde-format
 msgid "Select column containing credit field."
-msgstr ""
+msgstr "Velg kolonnen som inneholder kreditfeltet."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:654
 #, kde-format
 msgid "Clear credit field selection."
-msgstr ""
+msgstr "Rens valgt kreditfelt."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_clear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:719
 #, kde-format
 msgid "Clear all selected column and indicator entries"
-msgstr ""
+msgstr "Rens alle valgte kolonne- og indikatoroppføringer"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_clear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:722
 #, kde-format
 msgctxt "Clear all column assignments"
 msgid "Clear all"
-msgstr ""
+msgstr "Rens alt"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:215
 #, kde-format
@@ -10108,6 +10134,8 @@ msgid ""
 "Version of your CSV config file is %1.%2.%3 and is newer than supported "
 "version %4.%5.%6. Expect troubles."
 msgstr ""
+"Versjonen i CSV-oppsettsfilen din er %1.%2.%3. Den er nyere enn støttet "
+"versjon %4.%5.%6. Forvent trøbbel."
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:293
 #, kde-format
@@ -10116,36 +10144,39 @@ msgid ""
 "not be recognized.<br>The profile cannot be used because of that.<br>Do you "
 "want to delete it?</center>"
 msgstr ""
+"<center>Ved oppdatering av <b>%1</b><br>kunne ikke profiltypen for <b>%2</b> "
+"gjenkjennes.<br>Profilen kan ikke brukes på grunn av dette.<br>Vil du slette "
+"den?</center>"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1575
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "buy"
-msgstr ""
+msgstr "kjøp"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1577
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "sell,repurchase"
-msgstr ""
+msgstr "selg,kjøp på ny"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1579
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "reinvest,reinv,re-inv"
-msgstr ""
+msgstr "reinvester,reinv, re-inv"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1581
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "dividend"
-msgstr ""
+msgstr "utbytte"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1583
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "interest,income"
-msgstr ""
+msgstr "rente,inntekt"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1585
 #, kde-format
@@ -10153,42 +10184,43 @@ msgctxt "Type of operation as in financial statement"
 msgid ""
 "add,stock dividend,divd reinv,transfer in,re-registration in,journal entry"
 msgstr ""
+"legg til,aksjeutbytte,utb reinv,overfør om,gjenregistering,journaloppføring"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1587
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "remove"
-msgstr ""
+msgstr "fjern"
 
 #: kmymoney/plugins/csv/import/csvimporter.cpp:41
 #, kde-format
 msgid "CSV importer"
-msgstr ""
+msgstr "CSV importørverktøy"
 
 #: kmymoney/plugins/csv/import/csvimporter.cpp:69
 #, kde-format
 msgid "CSV..."
-msgstr ""
+msgstr "CSV…"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:408
 #, kde-format
 msgid "Save QIF"
-msgstr ""
+msgstr "Lagre QIF"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:408
 #, kde-format
 msgid "QIF Files (*.qif)"
-msgstr ""
+msgstr "QIF-filer (*.qif)"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:464
 #, kde-format
 msgid "Select File"
-msgstr ""
+msgstr "Velg fil"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:465
 #, kde-format
 msgid "A profile must be selected before selecting a file."
-msgstr ""
+msgstr "En profil må velges før du velger fil."
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:537
 #, kde-format
@@ -10196,32 +10228,33 @@ msgid ""
 "<center>Profile <b>%1</b> already exists.<br>Please enter another name</"
 "center>"
 msgstr ""
+"<center>Profilen <b>%1</b> finnes allerede.<br>Angi et annet navn</center>"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:558
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been added.</center>"
-msgstr ""
+msgstr "<center>Profilen <b>%1</b> er lagt til.</center>"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:564
 #, kde-format
 msgid "<center>Profile <b>%1</b> has been removed.</center>"
-msgstr ""
+msgstr "<center>Profilen <b>%1</b> er fjernet.</center>"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:570
 #, kde-format
 msgid ""
 "<center>Profile name has been renamed from <b>%1</b> to <b>%2</b>.</center>"
-msgstr ""
+msgstr "<center>Profilnavnet er endret fra <b>%1</b> til <b>%2</b>.</center>"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:948
 #, kde-format
 msgid "Import CSV"
-msgstr ""
+msgstr "Importer CSV"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:950
 #, kde-format
 msgid "Make QIF File"
-msgstr ""
+msgstr "Lag QIF-fil"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:987
 #, kde-format
@@ -10240,6 +10273,8 @@ msgid ""
 "<center>There are invalid date formats in column '%1'.</"
 "center><center>Please check your selections.</center>"
 msgstr ""
+"<center>Det er ugyldige datoformat i kolonnen «%1».</center><center>Sjekk "
+"valgene dine.</center>"
 
 #. i18n: Noun, the introduction.
 #. i18n: ectx: property (text), widget (QLabel, label_intro)
@@ -10247,68 +10282,68 @@ msgstr ""
 #, kde-format
 msgctxt "Noun, the introduction."
 msgid "1. File"
-msgstr "1. fil"
+msgstr "1. Fil"
 
 #. i18n: ectx: property (text), widget (QLabel, label_separators)
 #: kmymoney/plugins/csv/import/csvwizard.ui:82
 #, kde-format
 msgid "2. Separators"
-msgstr ""
+msgstr "2. Skilletegn"
 
 #. i18n: ectx: property (text), widget (QLabel, label_rows)
 #: kmymoney/plugins/csv/import/csvwizard.ui:95
 #, kde-format
 msgid "3. Rows"
-msgstr ""
+msgstr "3. Rader"
 
 #. i18n: ectx: property (text), widget (QLabel, label_columns)
 #: kmymoney/plugins/csv/import/csvwizard.ui:102
 #, kde-format
 msgid "4. Columns"
-msgstr ""
+msgstr "4. Kolonner"
 
 #. i18n: ectx: property (text), widget (QLabel, label_formats)
 #: kmymoney/plugins/csv/import/csvwizard.ui:109
 #, kde-format
 msgid "5. Formats"
-msgstr ""
+msgstr "5. Format"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CurrenciesDlg)
 #: kmymoney/plugins/csv/import/currenciesdlg.ui:14
 #, kde-format
 msgid "Currencies"
-msgstr ""
+msgstr "Valutaer"
 
 #. i18n: ectx: property (text), widget (QLabel, label_title)
 #: kmymoney/plugins/csv/import/currenciesdlg.ui:26
 #, kde-format
 msgid "Missing currencies"
-msgstr ""
+msgstr "Manglende valutaer"
 
 #. i18n: ectx: property (text), widget (QLabel, label_info)
 #: kmymoney/plugins/csv/import/currenciesdlg.ui:36
 #, kde-format
 msgid "You need to select from currency and to currency."
-msgstr ""
+msgstr "Du må velge fra-valute og til-valuta."
 
 #. i18n: ectx: property (text), widget (QLabel, lblFrom)
 #: kmymoney/plugins/csv/import/currenciesdlg.ui:61
 #, kde-format
 msgid "From currency"
-msgstr ""
+msgstr "Fra-valuta"
 
 #. i18n: ectx: property (text), widget (QLabel, lblTo)
 #: kmymoney/plugins/csv/import/currenciesdlg.ui:68
 #, kde-format
 msgid "To currency"
-msgstr ""
+msgstr "Til-valuta"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbDontAsk)
 #: kmymoney/plugins/csv/import/currenciesdlg.ui:84
 #: kmymoney/plugins/csv/import/securitydlg.ui:112
 #, kde-format
 msgid "Do not ask next time"
-msgstr ""
+msgstr "Ikke spør neste gang"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:41
@@ -10319,6 +10354,10 @@ msgid ""
 "If all is OK, you will be able to click 'Import'.\n"
 "If required, a QIF file may then be produced."
 msgstr ""
+"Velg desimalsymbolet i filen din.\n"
+"Tusenskilletegnet endrer seg automatisk.\n"
+"Hvis alt er ok får du klikke på «Importer».\n"
+"Hvis det er påkrevd kan en QIF-fil bli laget."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_fieldDelimiter)
 #. i18n: ectx: property (text), item, widget (QComboBox, m_thousandsDelimiter)
@@ -10328,7 +10367,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:124
 #, kde-format
 msgid "comma (,)"
-msgstr ""
+msgstr "komme (,)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_thousandsDelimiter)
 #. i18n: ectx: property (text), item, widget (QComboBox, m_decimalSymbol)
@@ -10336,7 +10375,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:159
 #, kde-format
 msgid "dot (.)"
-msgstr ""
+msgstr "punktum (.)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_thousandsDelimiter)
 #. i18n: ectx: property (text), item, widget (QComboBox, m_decimalSymbol)
@@ -10344,7 +10383,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:169
 #, kde-format
 msgid "auto"
-msgstr ""
+msgstr "automatisk"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSet_decimal)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_editAmounts)
@@ -10354,7 +10393,7 @@ msgstr ""
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:515
 #, kde-format
 msgid "Decimal Symbol"
-msgstr ""
+msgstr "Desimalsymbol"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_decimalSymbol)
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:152
@@ -10363,46 +10402,48 @@ msgid ""
 "Click to select the required decimal symbol, and to\n"
 "check that the selected symbol matches the data."
 msgstr ""
+"Klikke for å velge påkrevd desimalsymbol og for å\n"
+"sjekke at det valgte symbolet samsvarer med dataene."
 
 #. i18n: ectx: property (text), widget (QLabel, labelSet_thousands)
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:177
 #, kde-format
 msgid "Thousands Symbol"
-msgstr ""
+msgstr "Tusenskilletegn"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSet_dateFormat)
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:187
 #, kde-format
 msgctxt "date format to use"
 msgid "Date format"
-msgstr ""
+msgstr "Datoformat"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_dateFormat)
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:207
 #, kde-format
 msgctxt "abbreviation of 'year', 'month', 'day'."
 msgid "y m d"
-msgstr ""
+msgstr "å m d"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_dateFormat)
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:212
 #, kde-format
 msgctxt "abbreviation of 'month', 'day', 'year',"
 msgid "m d y"
-msgstr ""
+msgstr "m d å"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_dateFormat)
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:217
 #, kde-format
 msgctxt "abbreviation of  'day', 'month', 'year',"
 msgid "d m y"
-msgstr ""
+msgstr "d m å"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, IntroPage)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:20
 #, kde-format
 msgid "Intro Wizard Page"
-msgstr ""
+msgstr "Første side i veiviseren"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:44
@@ -10412,37 +10453,43 @@ msgid ""
 "Then select existing profile or create new\n"
 "by entering its name and selecting 'Add'.\n"
 "Then open the file you wish to import."
-msgstr "Velg enten Bank"
+msgstr ""
+"Velg enten banktjeneste, investering eller priser.\n"
+"Deretter velg en eksisterende profil eller lag en ny\n"
+"ved å skrive inn navnet og velge «Legg til».\n"
+"Når det er gjort velger du filen du vil importere."
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_profilesBank)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:96
 #, kde-format
 msgid "Ban&king"
-msgstr ""
+msgstr "Ban&ktjeneste"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_profilesInvest)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:112
 #, kde-format
 msgid "In&vestment"
-msgstr ""
+msgstr "In&vestering"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_profilesStockPrices)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:125
 #, kde-format
 msgid "Stock p&rices"
-msgstr ""
+msgstr "Akjseku&rser"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_profilesCurrencyPrices)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:132
 #, kde-format
 msgid "C&urrency prices"
-msgstr ""
+msgstr "Val&utakurser"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_add)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:167
 #, kde-format
 msgid "After entering new profile name, press this button to add it."
 msgstr ""
+"Etter at du har skrevet inn et nytt profilnavn trykker du denne knappen for "
+"å legge den til."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_skipSetup)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:184
@@ -10451,24 +10498,26 @@ msgid ""
 "Select to bypass profile setup.\n"
 "Only useful if a profile has already been setup."
 msgstr ""
+"Velg for å hoppe over oppsett.\n"
+"Kun nyttig dersom profilen allerede er satt opp."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_skipSetup)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:187
 #, kde-format
 msgid "Skip setup"
-msgstr ""
+msgstr "Hopp over oppsett"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_remove)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:203
 #, kde-format
 msgid "Press this button to remove selected profile."
-msgstr ""
+msgstr "Trykk denne knappen for å fjerne det valgte filteret."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_rename)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:222
 #, kde-format
 msgid "Press this button after renaming your profile."
-msgstr ""
+msgstr "Trykk denne knappen etter at du har endret navn på profilen."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_rename)
 #. i18n: ectx: property (text), widget (QPushButton, m_renameButton)
@@ -10476,18 +10525,18 @@ msgstr ""
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:624
 #, kde-format
 msgid "Rename"
-msgstr ""
+msgstr "Endre navn"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_profiles)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:241
 #, kde-format
 msgid "Select your importing profile here."
-msgstr ""
+msgstr "Velg din importprofil her."
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:54
 #, kde-format
 msgid "Fee"
-msgstr ""
+msgstr "Avgift"
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:175
 #, kde-format
@@ -10496,6 +10545,9 @@ msgid ""
 "center><center>If you wish to copy that data to the memo field, click 'Yes'."
 "</center>"
 msgstr ""
+"<center>Feltet «<b>%1</b>» har allerede denne kolonnen valgt.</"
+"center><center>Trykk «Ja» hvis du vil kopiere data derfra til notatfeltet.</"
+"center>"
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:375
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:135
@@ -10504,6 +10556,8 @@ msgid ""
 "<center>Field name not recognised.</center><center>'<b>%1</b>'</"
 "center>Please re-enter your column selections."
 msgstr ""
+"<center>Feltnavnet gjenkjennes ikke.</center><center>«<b>%1</b>»</"
+"center>Legg inn kolonnevalg på ny."
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:402
 #, kde-format
@@ -10513,12 +10567,15 @@ msgid ""
 "Please check the fields in the current transaction,\n"
 "and also your selections."
 msgstr ""
+"Verdiene i kolonnene du har valgt bsamsvarer\n"
+"ikke med noen av de forventede investeringstypene.\n"
+"Sjekk feltene i denne transaksjonen samt valgene dine."
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:416
 #, kde-format
 msgctxt "Unused column"
 msgid "Unused"
-msgstr ""
+msgstr "Ubrukt"
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:423
 #, kde-format
@@ -19519,6 +19576,8 @@ msgid ""
 "KMyMoney has detected some overdue scheduled transactions for this account. "
 "Do you want to enter those scheduled transactions now?"
 msgstr ""
+"KMyMoney har oppdaget noen overløpte planlagte transaksjoner for denne "
+"kontoen. Vil du legge inn de planlagte transaksjonene nå?"
 
 #: kmymoney/views/kscheduledview.cpp:205
 #, kde-format
@@ -19828,7 +19887,7 @@ msgstr "Besøk nettsiden vår"
 #: kmymoney/views/kwelcomepage.cpp:104
 #, kde-format
 msgid "Get help from our community"
-msgstr "Få hjelp fra sammfunnet vårt"
+msgstr "Få hjelp fra samfunnet vårt"
 
 #: kmymoney/views/kwelcomepage.cpp:107
 #, kde-format
@@ -19979,76 +20038,76 @@ msgstr ""
 #: kmymoney/views/ledgerdelegate.cpp:189 kmymoney/widgets/register.cpp:1729
 #, kde-format
 msgid "This year"
-msgstr ""
+msgstr "I år"
 
 #: kmymoney/views/ledgerdelegate.cpp:190 kmymoney/widgets/kmymoneyperiodcombo.cpp:42
 #: kmymoney/widgets/register.cpp:1730
 #, kde-format
 msgid "Last month"
-msgstr ""
+msgstr "Forrige måned"
 
 #: kmymoney/views/ledgerdelegate.cpp:191 kmymoney/widgets/register.cpp:1731
 #, kde-format
 msgid "This month"
-msgstr ""
+msgstr "Denne måneden"
 
 #: kmymoney/views/ledgerdelegate.cpp:192 kmymoney/widgets/register.cpp:1732
 #, kde-format
 msgid "Last week"
-msgstr ""
+msgstr "Forrige uke"
 
 #: kmymoney/views/ledgerdelegate.cpp:193 kmymoney/widgets/register.cpp:1733
 #, kde-format
 msgid "This week"
-msgstr ""
+msgstr "Denne uken"
 
 #: kmymoney/views/ledgerdelegate.cpp:194 kmymoney/widgets/register.cpp:1734
 #, kde-format
 msgid "Yesterday"
-msgstr ""
+msgstr "I går"
 
 #: kmymoney/views/ledgerdelegate.cpp:195 kmymoney/widgets/kmymoneyperiodcombo.cpp:34
 #: kmymoney/widgets/register.cpp:1735
 #, kde-format
 msgid "Today"
-msgstr ""
+msgstr "I dag"
 
 #: kmymoney/views/ledgerdelegate.cpp:196 kmymoney/widgets/register.cpp:1736
 #: kmymoney/widgets/register.cpp:1741
 #, kde-format
 msgid "Future transactions"
-msgstr ""
+msgstr "Fremtidige transaksjoner"
 
 #: kmymoney/views/ledgerdelegate.cpp:197 kmymoney/widgets/register.cpp:1737
 #, kde-format
 msgid "Next week"
-msgstr ""
+msgstr "Neste uke"
 
 #: kmymoney/views/ledgerdelegate.cpp:198 kmymoney/widgets/register.cpp:1738
 #, kde-format
 msgid "Next month"
-msgstr ""
+msgstr "Neste måned"
 
 #: kmymoney/views/ledgerdelegate.cpp:200 kmymoney/widgets/kmymoneyperiodcombo.cpp:38
 #: kmymoney/widgets/register.cpp:1745
 #, kde-format
 msgid "Current fiscal year"
-msgstr ""
+msgstr "Inneværende regnskapsår"
 
 #: kmymoney/views/ledgerdelegate.cpp:201 kmymoney/widgets/register.cpp:1746
 #, kde-format
 msgid "Previous fiscal year"
-msgstr ""
+msgstr "Forrige regnskapsår"
 
 #: kmymoney/views/ledgerdelegate.cpp:202 kmymoney/widgets/register.cpp:1747
 #, kde-format
 msgid "Next fiscal year"
-msgstr ""
+msgstr "Neste regnskapsår"
 
 #: kmymoney/views/ledgerdelegate.cpp:276
 #, kde-format
 msgid "Online statement balance: %1"
-msgstr ""
+msgstr "Saldo på nettbankutdrag: %1"
 
 #: kmymoney/views/newspliteditor.cpp:121 kmymoney/views/newtransactioneditor.cpp:234
 #, kde-format
@@ -20868,40 +20927,40 @@ msgstr ""
 #: kmymoney/widgets/register.cpp:1704
 #, kde-format
 msgid "Prior transactions possibly filtered"
-msgstr ""
+msgstr "Tidligere transaksjoner er muligens filtrert ut"
 
 #: kmymoney/widgets/register.cpp:1707
 #, kde-format
 msgid "Last reconciliation"
-msgstr ""
+msgstr "Siste avstemming"
 
 #: kmymoney/widgets/register.cpp:1711
 #, kde-format
 msgid "Reconciled Balance: %1"
-msgstr ""
+msgstr "Avstemt saldo: %1"
 
 #: kmymoney/widgets/register.cpp:1722
 #, kde-format
 msgid "Online Statement Balance: %1"
-msgstr ""
+msgstr "Saldo på nettbankutdrag: %1"
 
 #: kmymoney/widgets/register.cpp:1777
 #, kde-format
 msgctxt "Unknown payee"
 msgid "Unknown"
-msgstr ""
+msgstr "Ukjent"
 
 #: kmymoney/widgets/register.cpp:1794
 #, kde-format
 msgctxt "Unknown category"
 msgid "Unknown"
-msgstr ""
+msgstr "Ukjent"
 
 #: kmymoney/widgets/register.cpp:1811
 #, kde-format
 msgctxt "Unknown security"
 msgid "Unknown"
-msgstr ""
+msgstr "Ukjent"
 
 #: kmymoney/widgets/registersearchline.cpp:67
 #, kde-format
