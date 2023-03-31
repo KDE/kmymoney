@@ -69,7 +69,7 @@
 >Crear la base de dades</title>
 
 <para
->S'ha inclòs el codi per a crear una base de dades inicial -si no existeix- per a emmagatzemar les dades. No obstant això, es recomana encaridament que creeu prèviament una base de dades, ja que la majoria dels productes ofereixen una sèrie d'opcions que poden ser rellevants. Quelcom que podria ser de particular importància per a alguns seria la designació del joc de caràcters (&pex;, UTF-8) que s'utilitzarà per als camps de text. </para>
+>S'ha inclòs el codi per a crear una base de dades inicial -si no existeix- per a emmagatzemar les dades. No obstant això, es recomana fermament que creeu prèviament una base de dades, ja que la majoria dels productes ofereixen una sèrie d'opcions que poden ser rellevants. Quelcom que podria ser de particular importància per a alguns seria la designació del joc de caràcters (&pex;, UTF-8) que s'utilitzarà per als camps de text. </para>
 
 <para
 >En aquest moment, també haureu d'especificar els permisos perquè diversos usuaris realitzin diferents operacions a la base de dades. En la majoria dels sistemes, a l'usuari que crea la base de dades se li assignaran automàticament tots els permisos, però aquesta és una àrea en la qual s'haurà de consultar la documentació. </para>
