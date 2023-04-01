@@ -377,8 +377,7 @@ void PivotTable::init()
     // Calculate the running sums
     // (for running sum reports only)
     //
-
-    if (m_config.isRunningSum())
+    if (m_config.isRunningSum() && (m_config.chartType() != eMyMoney::Report::ChartType::Pie))
         calculateRunningSums();
 
     //
