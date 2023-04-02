@@ -103,6 +103,19 @@ public:
         q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestActionTrigger, q, &KAccountsView::requestActionTrigger);
 
         m_focusWidget = ui->m_accountTree;
+
+        // make sure to update our local copy if the account data changes
+        q->connect(ui->m_accountTree->model(), &QAbstractItemModel::dataChanged, q, [&](const QModelIndex& topLeft, const QModelIndex& bottomRight) {
+            // it should be only one row, but we never know and so we loop over all of them
+            for (int row = topLeft.row(); row <= bottomRight.row(); ++row) {
+                const auto idx = ui->m_accountTree->model()->index(row, 0, topLeft.parent());
+                const auto id = idx.data(eMyMoney::Model::IdRole).toString();
+                if (id == m_currentAccount.id()) {
+                    m_currentAccount = MyMoneyFile::instance()->accountsModel()->itemById(id);
+                    break;
+                }
+            }
+        });
     }
 
     void editLoan()
