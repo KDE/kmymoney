@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-26 00:48+0000\n"
+"POT-Creation-Date: 2023-04-02 00:48+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -15818,12 +15818,12 @@ msgstr "Prosjek"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:298
 #: kmymoney/plugins/views/reports/core/listtable.cpp:299
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1403
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1544
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1596
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1672
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1859
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1930
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1402
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1543
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1595
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1671
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1858
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1929
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -16073,8 +16073,8 @@ msgstr "Završni bilans"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:302
 #: kmymoney/plugins/views/reports/core/listtable.cpp:303
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1620
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1968
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1619
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1967
 #, kde-format
 msgid "Grand Total"
 msgstr "Sve ukupno"
@@ -16401,64 +16401,64 @@ msgstr "Da"
 msgid "Transfers"
 msgstr "Transferi"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:532
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:531
 #, fuzzy, kde-format
 #| msgid "Opening Date"
 msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Datum otvaranja"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1389
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1660
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1388
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1659
 #, fuzzy, kde-format
 #| msgid "Account"
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Račun"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2169
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2168
 #, fuzzy, kde-format
 #| msgid "Actual"
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Aktuelno"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2174
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2173
 #, fuzzy, kde-format
 #| msgid "Budget"
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Budžet"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2179
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2178
 #, fuzzy, kde-format
 #| msgid "Difference"
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Razlika"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2184
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2183
 #, fuzzy, kde-format
 #| msgid "Forecast"
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Prognoza"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2189
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2188
 #, fuzzy, kde-format
 #| msgid "Moving Average"
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Usrednjavanje"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2194
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2193
 #, fuzzy, kde-format
 #| msgid "Moving Average Price"
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Pokretna prosječna cijena"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2199
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2198
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@title:column report header"
