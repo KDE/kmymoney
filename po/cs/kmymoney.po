@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 03:06+0000\n"
+"POT-Creation-Date: 2023-04-02 02:38+0000\n"
 "PO-Revision-Date: 2023-03-15 14:31+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -15044,12 +15044,12 @@ msgstr "Průměr"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:452
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:454
 #: kmymoney/plugins/views/reports/core/listtable.cpp:295
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1389
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1530
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1582
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1658
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1844
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1914
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1388
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1529
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1581
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1657
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1843
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1913
 #: kmymoney/widgets/investtransaction.cpp:344
 #, kde-format
 msgctxt "Total balance"
@@ -15313,8 +15313,8 @@ msgid "Closing Balance"
 msgstr "Konečný zůstatek"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:297
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1606
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1952
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1605
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1951
 #, kde-format
 msgid "Grand Total"
 msgstr "Celkový součet"
@@ -15583,56 +15583,56 @@ msgstr "Ano"
 msgid "Transfers"
 msgstr "Převody"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:531
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:530
 #, kde-format
 msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Otevírám"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1375
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1646
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1374
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1645
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Účet"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2146
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2145
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Skutečnost"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2151
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2150
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Rozpočet"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2156
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2155
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Rozdíl"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2161
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2160
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Předpověď"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2166
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2165
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Klouzavý průměr"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2171
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2170
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Klouzavý průměr ceny"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2176
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2175
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"

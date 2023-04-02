@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 03:06+0000\n"
+"POT-Creation-Date: 2023-04-02 02:38+0000\n"
 "PO-Revision-Date: 2009-12-24 06:59-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -15243,12 +15243,12 @@ msgstr ""
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:452
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:454
 #: kmymoney/plugins/views/reports/core/listtable.cpp:295
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1389
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1530
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1582
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1658
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1844
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1914
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1388
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1529
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1581
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1657
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1843
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1913
 #: kmymoney/widgets/investtransaction.cpp:344
 #, kde-format
 msgctxt "Total balance"
@@ -15521,8 +15521,8 @@ msgid "Closing Balance"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:297
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1606
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1952
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1605
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1951
 #, kde-format
 msgid "Grand Total"
 msgstr "Iomlán"
@@ -15798,61 +15798,61 @@ msgstr "Is é"
 msgid "Transfers"
 msgstr "Aistrithe"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:531
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:530
 #, fuzzy, kde-format
 #| msgid "Opening date: %1"
 msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Lá tionscnaimh: %1"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1375
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1646
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1374
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1645
 #, fuzzy, kde-format
 #| msgid "Account"
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Cuntas"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2146
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2145
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2151
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2150
 #, fuzzy, kde-format
 #| msgid "Sort options"
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Roghanna sórtála"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2156
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2155
 #, fuzzy, kde-format
 #| msgid "Difference"
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Difríocht"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2161
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2160
 #, fuzzy, kde-format
 #| msgid "Forecast"
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Réamhaisnéis"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2166
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2165
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2171
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2170
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2176
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2175
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@title:column report header"
