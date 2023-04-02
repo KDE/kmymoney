@@ -421,12 +421,12 @@
            <widget class="QComboBox" name="m_uniqueTransactionId">
             <item>
              <property name="text">
-              <string>OFX FITID</string>
+              <string comment="@item:inlistbox Method to identify duplicate transactions">OFX FITID</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>KMyMoney Hash</string>
+              <string comment="@item:inlistbox Method to identify duplicate transactions">KMyMoney ID</string>
              </property>
             </item>
            </widget>
