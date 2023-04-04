@@ -12242,7 +12242,7 @@ msgstr "Extrair a Data Inicial"
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.ui:39
 #, kde-format
 msgid "Start Date"
-msgstr "Data Inicial"
+msgstr "Data de Início"
 
 #. i18n: ectx: property (text), widget (QRadioButton, noDateButton)
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.ui:45
