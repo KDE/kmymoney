@@ -42,6 +42,9 @@ public:
     {
     }
 
+    MyMoneyAccountPrivate(const MyMoneyAccountPrivate& right) = default;
+    MyMoneyAccountPrivate& operator=(const MyMoneyAccountPrivate& right) = default;
+
     void collectReferencedObjects() override
     {
         m_referencedObjects = {m_institution, m_parentAccount, m_currencyId};
