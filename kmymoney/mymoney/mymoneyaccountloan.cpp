@@ -48,6 +48,8 @@ public:
 MyMoneyAccountLoan::MyMoneyAccountLoan(const MyMoneyAccount& acc)
     : MyMoneyAccount(new MyMoneyAccountLoanPrivate(this), acc)
 {
+    Q_D(MyMoneyAccountLoan);
+    *(static_cast<MyMoneyAccountPrivate*>(d)) = *acc.d_func();
 }
 
 const MyMoneyMoney MyMoneyAccountLoan::loanAmount() const

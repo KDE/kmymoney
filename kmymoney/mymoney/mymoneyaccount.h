@@ -77,9 +77,11 @@ template <class T> class payeeIdentifierTyped;
 **/
 
 class MyMoneyAccountPrivate;
+class MyMoneyAccountLoan;
 class KMM_MYMONEY_EXPORT MyMoneyAccount : public MyMoneyObject, public MyMoneyKeyValueContainer /*, public MyMoneyPayeeIdentifierContainer */
 {
     Q_DECLARE_PRIVATE_D(MyMoneyObject::d_ptr, MyMoneyAccount)
+    friend MyMoneyAccountLoan;
 
     KMM_MYMONEY_UNIT_TESTABLE
 

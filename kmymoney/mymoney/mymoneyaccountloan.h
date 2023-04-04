@@ -27,8 +27,11 @@
   * object.
   */
 class MyMoneyMoney;
+class MyMoneyAccountLoanPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyAccountLoan : public MyMoneyAccount
 {
+    Q_DECLARE_PRIVATE_D(MyMoneyObject::d_ptr, MyMoneyAccountLoan)
+
 public:
     enum interestDueE {
         paymentDue = 0,

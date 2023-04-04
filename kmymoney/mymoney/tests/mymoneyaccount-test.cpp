@@ -10,12 +10,13 @@
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyAccountTest;
 
-#include "mymoneymoney.h"
 #include "mymoneyaccount.h"
 #include "mymoneyaccount_p.h"
-#include "mymoneysplit.h"
-#include "mymoneyexception.h"
+#include "mymoneyaccountloan.h"
 #include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneymoney.h"
+#include "mymoneysplit.h"
 
 QTEST_GUILESS_MAIN(MyMoneyAccountTest)
 
@@ -152,16 +153,33 @@ void MyMoneyAccountTest::testAssignmentConstructor()
 
     b = a;
 
-    QVERIFY(b.name() == "Account");
-    QVERIFY(b.institutionId() == "Inst1");
-    QVERIFY(b.accountType() == eMyMoney::Account::Type::Checkings);
-    QVERIFY(b.lastModified() == QDate());
-    QVERIFY(b.openingDate() == a.openingDate());
-    QVERIFY(b.description() == "Bla");
-    QVERIFY(b.number() == "assigned Number");
-    QVERIFY(b.value("Key") == "Value");
-    QVERIFY(b.accountList().count() == 1);
-    QVERIFY(b.accountList()[0] == "ChildAccount");
+    QCOMPARE(b.name(), "Account");
+    QCOMPARE(b.institutionId(), "Inst1");
+    QCOMPARE(b.accountType(), eMyMoney::Account::Type::Checkings);
+    QCOMPARE(b.lastModified(), QDate());
+    QCOMPARE(b.openingDate(), a.openingDate());
+    QCOMPARE(b.description(), "Bla");
+    QCOMPARE(b.number(), "assigned Number");
+    QCOMPARE(b.value("Key"), "Value");
+    QCOMPARE(b.accountList().count(), 1);
+    QCOMPARE(b.accountList()[0], "ChildAccount");
+
+    MyMoneyAccountLoan c;
+
+    b.setLastModified(QDate::currentDate());
+
+    c = a;
+
+    QCOMPARE(c.name(), "Account");
+    QCOMPARE(c.institutionId(), "Inst1");
+    QCOMPARE(c.accountType(), eMyMoney::Account::Type::Checkings);
+    QCOMPARE(c.lastModified(), QDate());
+    QCOMPARE(c.openingDate(), a.openingDate());
+    QCOMPARE(c.description(), "Bla");
+    QCOMPARE(c.number(), "assigned Number");
+    QCOMPARE(c.value("Key"), "Value");
+    QCOMPARE(c.accountList().count(), 1);
+    QCOMPARE(c.accountList()[0], "ChildAccount");
 }
 
 void MyMoneyAccountTest::testAdjustBalance()
