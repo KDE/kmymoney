@@ -25,8 +25,14 @@ public:
 
     MyMoneyObjectPrivate(const MyMoneyObjectPrivate& right)
     {
+        *this = right;
+    }
+
+    MyMoneyObjectPrivate& operator=(const MyMoneyObjectPrivate& right)
+    {
         m_id = right.m_id;
         m_referencedObjects = right.m_referencedObjects;
+        return *this;
     }
 
     virtual ~MyMoneyObjectPrivate()
