@@ -35,15 +35,41 @@ using namespace eMyMoney;
 class MyMoneyAccountPrivate : public MyMoneyObjectPrivate
 {
 public:
-
-    MyMoneyAccountPrivate() :
-        m_accountType(Account::Type::Unknown),
-        m_fraction(-1)
+    MyMoneyAccountPrivate()
+        : MyMoneyObjectPrivate()
+        , m_accountType(Account::Type::Unknown)
+        , m_fraction(-1)
     {
     }
 
-    MyMoneyAccountPrivate(const MyMoneyAccountPrivate& right) = default;
-    MyMoneyAccountPrivate& operator=(const MyMoneyAccountPrivate& right) = default;
+    MyMoneyAccountPrivate(const MyMoneyAccountPrivate& right)
+        : MyMoneyObjectPrivate(right)
+    {
+        *this = right;
+    }
+
+    MyMoneyAccountPrivate& operator=(const MyMoneyAccountPrivate& right)
+    {
+        MyMoneyObjectPrivate::operator=(right);
+        m_accountType = right.m_accountType;
+        m_institution = right.m_institution;
+        m_name = right.m_name;
+        m_number = right.m_number;
+        m_description = right.m_description;
+        m_lastModified = right.m_lastModified;
+        m_openingDate = right.m_openingDate;
+        m_lastReconciliationDate = right.m_lastReconciliationDate;
+        m_accountList = right.m_accountList;
+        m_parentAccount = right.m_parentAccount;
+        m_currencyId = right.m_currencyId;
+        m_balance = right.m_balance;
+        m_totalPostedValue = right.m_totalPostedValue;
+        m_postedValue = right.m_postedValue;
+        m_onlineBankingSettings = right.m_onlineBankingSettings;
+        m_fraction = right.m_fraction;
+        m_reconciliationHistory = right.m_reconciliationHistory;
+        return *this;
+    }
 
     void collectReferencedObjects() override
     {
