@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-02 00:48+0000\n"
+"POT-Creation-Date: 2023-04-05 00:48+0000\n"
 "PO-Revision-Date: 2023-04-03 09:13+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
-"%100<=4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
 "X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
@@ -12910,20 +12910,20 @@ msgid "Method to detect duplicate transactions during import"
 msgstr "Metoda za odkrivanje podvojenih transakcij med uvozom"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
-#. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:424
-#: kmymoney/plugins/ofx/import/importoption.ui:78
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "OFX FITID"
+msgctxt "@item:inlistbox Method to identify duplicate transactions"
 msgid "OFX FITID"
 msgstr "OFX FITID"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
-#. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:429
-#: kmymoney/plugins/ofx/import/importoption.ui:83
-#, kde-format
-msgid "KMyMoney Hash"
-msgstr "KMyMoney razpršitev"
+#, fuzzy, kde-format
+#| msgid "KMyMoney"
+msgctxt "@item:inlistbox Method to identify duplicate transactions"
+msgid "KMyMoney ID"
+msgstr "KMyMoney"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:443
@@ -13130,6 +13130,18 @@ msgstr "MS-Money (Ekspertni)"
 #, kde-format
 msgid "Enter your password for account <b>%1</b>"
 msgstr "Vnesite vaše geslo za račun <b>%1</b>"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
+#: kmymoney/plugins/ofx/import/importoption.ui:78
+#, kde-format
+msgid "OFX FITID"
+msgstr "OFX FITID"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
+#: kmymoney/plugins/ofx/import/importoption.ui:83
+#, kde-format
+msgid "KMyMoney Hash"
+msgstr "KMyMoney razpršitev"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:148
 #, kde-format
@@ -19063,33 +19075,33 @@ msgstr ""
 msgid "Total Profits:"
 msgstr "Skupaj dobički:"
 
-#: kmymoney/views/kaccountsview_p.h:176
+#: kmymoney/views/kaccountsview_p.h:189
 #, kde-format
 msgid "Edit account '%1'"
 msgstr "Uredi račun '%1'"
 
-#: kmymoney/views/kaccountsview_p.h:257
+#: kmymoney/views/kaccountsview_p.h:270
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
 msgstr "Računa '%1' ni mogoče spremeniti. Vzrok: %2"
 
-#: kmymoney/views/kaccountsview_p.h:335
+#: kmymoney/views/kaccountsview_p.h:348
 #, kde-format
 msgid ""
 "The balance of the account must be zero before the account can be closed"
 msgstr "Stanje na računu mora biti nič, preden ga lahko zaprete"
 
-#: kmymoney/views/kaccountsview_p.h:338
+#: kmymoney/views/kaccountsview_p.h:351
 #, kde-format
 msgid "All subaccounts must be closed before the account can be closed"
 msgstr "Vsi podračuni morajo biti zaprti, preden lahko zaprete račun"
 
-#: kmymoney/views/kaccountsview_p.h:341
+#: kmymoney/views/kaccountsview_p.h:354
 #, kde-format
 msgid "This account is still included in an active schedule"
 msgstr "Ta račun je še vedno vključen v aktivni časovni načrt"
 
-#: kmymoney/views/kaccountsview_p.h:344
+#: kmymoney/views/kaccountsview_p.h:357
 #, kde-format
 msgid "This account is still mapped to an online account"
 msgstr "Ta račun je še vedno preslikan na spletni račun"

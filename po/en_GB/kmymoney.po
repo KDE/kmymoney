@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-02 00:48+0000\n"
+"POT-Creation-Date: 2023-04-05 00:48+0000\n"
 "PO-Revision-Date: 2023-03-14 20:51+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -12854,20 +12854,20 @@ msgid "Method to detect duplicate transactions during import"
 msgstr "Method to detect duplicate transactions during import"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
-#. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:424
-#: kmymoney/plugins/ofx/import/importoption.ui:78
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "OFX FITID"
+msgctxt "@item:inlistbox Method to identify duplicate transactions"
 msgid "OFX FITID"
 msgstr "OFX FITID"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
-#. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:429
-#: kmymoney/plugins/ofx/import/importoption.ui:83
-#, kde-format
-msgid "KMyMoney Hash"
-msgstr "KMyMoney Hash"
+#, fuzzy, kde-format
+#| msgid "KMyMoney"
+msgctxt "@item:inlistbox Method to identify duplicate transactions"
+msgid "KMyMoney ID"
+msgstr "KMyMoney"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:443
@@ -13074,6 +13074,18 @@ msgstr "MS-Money (Expert)"
 #, kde-format
 msgid "Enter your password for account <b>%1</b>"
 msgstr "Enter your password for account <b>%1</b>"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
+#: kmymoney/plugins/ofx/import/importoption.ui:78
+#, kde-format
+msgid "OFX FITID"
+msgstr "OFX FITID"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
+#: kmymoney/plugins/ofx/import/importoption.ui:83
+#, kde-format
+msgid "KMyMoney Hash"
+msgstr "KMyMoney Hash"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:148
 #, kde-format
@@ -18957,34 +18969,34 @@ msgstr "Note: Unused categories are not shown as selected by settings."
 msgid "Total Profits:"
 msgstr "Total Profits:"
 
-#: kmymoney/views/kaccountsview_p.h:176
+#: kmymoney/views/kaccountsview_p.h:189
 #, kde-format
 msgid "Edit account '%1'"
 msgstr "Edit account '%1'"
 
-#: kmymoney/views/kaccountsview_p.h:257
+#: kmymoney/views/kaccountsview_p.h:270
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
 msgstr "Unable to modify account '%1'. Cause: %2"
 
-#: kmymoney/views/kaccountsview_p.h:335
+#: kmymoney/views/kaccountsview_p.h:348
 #, kde-format
 msgid ""
 "The balance of the account must be zero before the account can be closed"
 msgstr ""
 "The balance of the account must be zero before the account can be closed"
 
-#: kmymoney/views/kaccountsview_p.h:338
+#: kmymoney/views/kaccountsview_p.h:351
 #, kde-format
 msgid "All subaccounts must be closed before the account can be closed"
 msgstr "All subaccounts must be closed before the account can be closed"
 
-#: kmymoney/views/kaccountsview_p.h:341
+#: kmymoney/views/kaccountsview_p.h:354
 #, kde-format
 msgid "This account is still included in an active schedule"
 msgstr "This account is still included in an active schedule"
 
-#: kmymoney/views/kaccountsview_p.h:344
+#: kmymoney/views/kaccountsview_p.h:357
 #, kde-format
 msgid "This account is still mapped to an online account"
 msgstr "This account is still mapped to an online account"

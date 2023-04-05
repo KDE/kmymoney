@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-02 00:48+0000\n"
+"POT-Creation-Date: 2023-04-05 00:48+0000\n"
 "PO-Revision-Date: 2022-08-14 16:08+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -13569,20 +13569,18 @@ msgid "Method to detect duplicate transactions during import"
 msgstr "Nu s-au putut adăuga tranzacții"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
-#. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:424
-#: kmymoney/plugins/ofx/import/importoption.ui:78
 #, kde-format
+msgctxt "@item:inlistbox Method to identify duplicate transactions"
 msgid "OFX FITID"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
-#. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:429
-#: kmymoney/plugins/ofx/import/importoption.ui:83
 #, fuzzy, kde-format
 #| msgid "KMyMoney"
-msgid "KMyMoney Hash"
+msgctxt "@item:inlistbox Method to identify duplicate transactions"
+msgid "KMyMoney ID"
 msgstr "KMyMoney"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
@@ -13793,6 +13791,19 @@ msgstr "MS-Money (avansat)"
 #| msgid "Enter your password"
 msgid "Enter your password for account <b>%1</b>"
 msgstr "Introduceți parola"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
+#: kmymoney/plugins/ofx/import/importoption.ui:78
+#, kde-format
+msgid "OFX FITID"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
+#: kmymoney/plugins/ofx/import/importoption.ui:83
+#, fuzzy, kde-format
+#| msgid "KMyMoney"
+msgid "KMyMoney Hash"
+msgstr "KMyMoney"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:148
 #, kde-format
@@ -19973,17 +19984,17 @@ msgstr ""
 msgid "Total Profits:"
 msgstr "Total profituri:"
 
-#: kmymoney/views/kaccountsview_p.h:176
+#: kmymoney/views/kaccountsview_p.h:189
 #, kde-format
 msgid "Edit account '%1'"
 msgstr "Modifică contul '%1'"
 
-#: kmymoney/views/kaccountsview_p.h:257
+#: kmymoney/views/kaccountsview_p.h:270
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
 msgstr "Nu s-a putut modifica contul '%1'. Motivul: %2"
 
-#: kmymoney/views/kaccountsview_p.h:335
+#: kmymoney/views/kaccountsview_p.h:348
 #, fuzzy, kde-format
 #| msgid ""
 #| "The balance of account <b>%1</b> dropped below the warning balance of %2."
@@ -19991,17 +20002,17 @@ msgid ""
 "The balance of the account must be zero before the account can be closed"
 msgstr "Soldul contului <b>%1</b> a căzut sub soldul de avertisment al %2."
 
-#: kmymoney/views/kaccountsview_p.h:338
+#: kmymoney/views/kaccountsview_p.h:351
 #, kde-format
 msgid "All subaccounts must be closed before the account can be closed"
 msgstr ""
 
-#: kmymoney/views/kaccountsview_p.h:341
+#: kmymoney/views/kaccountsview_p.h:354
 #, kde-format
 msgid "This account is still included in an active schedule"
 msgstr ""
 
-#: kmymoney/views/kaccountsview_p.h:344
+#: kmymoney/views/kaccountsview_p.h:357
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>The given application account <b>%1</b> has not been mapped to an "
