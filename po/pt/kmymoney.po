@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-05 00:48+0000\n"
-"PO-Revision-Date: 2023-03-20 14:27+0000\n"
+"PO-Revision-Date: 2023-04-06 10:42+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
 "Language: pt\n"
@@ -13057,19 +13057,17 @@ msgstr "Método para detectar as transacções duplicadas na importação"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:424
-#, fuzzy, kde-format
-#| msgid "OFX FITID"
+#, kde-format
 msgctxt "@item:inlistbox Method to identify duplicate transactions"
 msgid "OFX FITID"
 msgstr "OFX FITID"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:429
-#, fuzzy, kde-format
-#| msgid "KMyMoney"
+#, kde-format
 msgctxt "@item:inlistbox Method to identify duplicate transactions"
 msgid "KMyMoney ID"
-msgstr "KMyMoney"
+msgstr "ID do KMyMoney"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:443

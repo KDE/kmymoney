@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-05 00:48+0000\n"
-"PO-Revision-Date: 2023-03-11 06:53+0100\n"
+"PO-Revision-Date: 2023-04-06 05:59+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -12331,11 +12331,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:429
-#, fuzzy, kde-format
-#| msgid "KMyMoney"
+#, kde-format
 msgctxt "@item:inlistbox Method to identify duplicate transactions"
 msgid "KMyMoney ID"
-msgstr "KMyMoney"
+msgstr "KMyMoney-ის ID"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:443
@@ -15055,9 +15054,9 @@ msgid "Next Interest Change"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:722
-#, kde-format
+#, fuzzy, kde-format
 msgid "Periodic Payment"
-msgstr ""
+msgstr "პერიოდული გადახდა"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:724
 #, kde-format
@@ -16595,7 +16594,7 @@ msgstr ""
 #, kde-format
 msgctxt "To (Data)"
 msgid "To"
-msgstr ""
+msgstr "სადამდე"
 
 #. i18n: ectx: property (text), widget (QLabel, lblLabelsPrecision)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:222
@@ -17055,7 +17054,7 @@ msgstr ""
 #: kmymoney/plugins/xml/xmlstorage.cpp:341
 #, kde-format
 msgid "Save As"
-msgstr ""
+msgstr "შენახვა, როგორც"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:342
 #, kde-format
@@ -17599,7 +17598,7 @@ msgstr "საწყისი თარიღი"
 #: kmymoney/settings/kmymoney.kcfg:289
 #, kde-format
 msgid "Log file path"
-msgstr ""
+msgstr "ბილიკი ჟურნალის ფაილამდე"
 
 #. i18n: ectx: label, entry (useSystemFont), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:298
@@ -17755,7 +17754,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Template Loading Error"
-msgstr ""
+msgstr "შაბლონის ჩატვირთვის შეცდომა"
 
 #: kmymoney/templates/templateloader.cpp:110
 #, kde-format
@@ -18194,28 +18193,28 @@ msgstr ""
 #, kde-format
 msgctxt "Approximate loss"
 msgid "Loss: ~%1"
-msgstr ""
+msgstr "წაგება: ~%1"
 
 #: kmymoney/views/kcategoriesview.cpp:147
 #, kde-format
 msgid "Loss: %1"
-msgstr ""
+msgstr "წაგება: %1"
 
 #: kmymoney/views/kcategoriesview.cpp:150
 #, kde-format
 msgctxt "Approximate profit"
 msgid "Profit: ~%1"
-msgstr ""
+msgstr "მოგება: ~%1"
 
 #: kmymoney/views/kcategoriesview.cpp:151
 #, kde-format
 msgid "Profit: %1"
-msgstr ""
+msgstr "მოგება: %1"
 
 #: kmymoney/views/kcategoriesview.cpp:191
 #, kde-format
 msgid "Edit category '%1'"
-msgstr ""
+msgstr "'%1' კატეგორიის ჩასწორება"
 
 #: kmymoney/views/kcategoriesview.cpp:212
 #, kde-format
