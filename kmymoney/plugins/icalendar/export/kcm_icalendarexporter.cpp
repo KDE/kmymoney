@@ -40,15 +40,6 @@ public:
 KCMiCalendarExporter::KCMiCalendarExporter(QWidget *parent, const QVariantList& args)
     : KCModule(parent, args)
 {
-    KAboutData *about = new KAboutData(QStringLiteral("kmm_printcheck"),
-                                       i18n("KMyMoney print check"),
-                                       QStringLiteral(VERSION), QString(),
-                                       KAboutLicense::GPL,
-                                       i18n("Copyright 2009" ) );
-    about->addAuthor( QString::fromUtf8("Cristian Oneț") );
-
-    setAboutData( about );
-
     PluginSettingsWidget *w = new PluginSettingsWidget(this);
     addConfig(ICalendarSettings::self(), w);
     QVBoxLayout *layout = new QVBoxLayout;
