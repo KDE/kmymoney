@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-05 00:48+0000\n"
-"PO-Revision-Date: 2023-04-06 05:59+0200\n"
+"PO-Revision-Date: 2023-04-07 04:59+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -14048,13 +14048,13 @@ msgstr ""
 #, kde-format
 msgctxt "Profit/Loss"
 msgid "Loss: %1"
-msgstr ""
+msgstr "წაგება: %1"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:345
 #, kde-format
 msgctxt "Profit/Loss"
 msgid "Profit: %1"
-msgstr ""
+msgstr "მოგება: %1"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:409
 #, kde-format
@@ -15054,7 +15054,7 @@ msgid "Next Interest Change"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:722
-#, fuzzy, kde-format
+#, kde-format
 msgid "Periodic Payment"
 msgstr "პერიოდული გადახდა"
 

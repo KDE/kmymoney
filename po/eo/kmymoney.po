@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-05 00:48+0000\n"
-"PO-Revision-Date: 2023-03-13 20:21+0100\n"
+"PO-Revision-Date: 2023-04-07 10:09+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -3815,9 +3815,9 @@ msgstr ""
 "<p>La jenaj eroj estas kutime forigitaj per senigo:\n"
 "\n"
 "<ul>\n"
-"<li >HTML-etikedoj kiel <b>&lt;tag&gt;</b></li>\n"
+"<li>HTML-etikedoj kiel <b>&lt;tag&gt;</b></li>\n"
 "<li>& kodigitaj signoj kiel <b>&amp;&nbsp;</b></li>\n"
-"<li>duobligita blankspaco< /li>\n"
+"<li>duobligita blankspaco</li>\n"
 "</ul>\n"
 "</p>"
 
@@ -9621,7 +9621,7 @@ msgid ""
 msgstr ""
 "<center>La kampo '<b>%1</b>' jam havas ĉi tiun kolumnon elektita.</"
 "center><center>Se vi volas kopii la datumojn de la Pagato al la memorkampo, "
-"alklaku 'Jes'.</center> >"
+"alklaku 'Jes'.</center>"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:253
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:182
@@ -9993,7 +9993,7 @@ msgid ""
 "want to delete it?</center>"
 msgstr ""
 "<center>Dum ĝisdatigo de <b>%1</b><br>la profiltipo por <b>%2</b> ne povis "
-"esti rekonita.<br>La profilo ne povas esti uzata pro tio.<br >Ĉu vi volas "
+"esti rekonita.<br>La profilo ne povas esti uzata pro tio.<br>Ĉu vi volas "
 "forigi ĝin?</center>"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1550
@@ -12756,7 +12756,7 @@ msgstr "BANKO/Makleristo:"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:136
 #, kde-format
 msgid "&lt;Not configured&gt;"
-msgstr "<Ne agordita>"
+msgstr "&lt;Ne agordita&gt;"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:114
@@ -12774,7 +12774,7 @@ msgstr "Detaloj de OFX"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:242
 #, kde-format
 msgid "User Agent"
-msgstr "Uzanto Agento"
+msgstr "Uzant-Agento"
 
 #. i18n: ectx: property (whatsThis), widget (QLineEdit, m_clientUidEdit)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:252
@@ -12837,19 +12837,17 @@ msgstr "Metodo por detekti duplikatajn transakciojn dum importado"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:424
-#, fuzzy, kde-format
-#| msgid "OFX FITID"
+#, kde-format
 msgctxt "@item:inlistbox Method to identify duplicate transactions"
 msgid "OFX FITID"
 msgstr "OFX FITID"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:429
-#, fuzzy, kde-format
-#| msgid "KMyMoney"
+#, kde-format
 msgctxt "@item:inlistbox Method to identify duplicate transactions"
 msgid "KMyMoney ID"
-msgstr "KMyMoney"
+msgstr "KMyMoney-ID"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:443
@@ -17830,7 +17828,7 @@ msgid ""
 "KMyMoney recover key.</p>"
 msgstr ""
 "<p>Vi elektis ĉifri viajn datumojn ankaŭ per la reakira ŝlosilo KMyMoney, "
-"sed la ŝlosilo kun id</p><p><center><b>%1</b></center></p>< p> ne estas "
+"sed la ŝlosilo kun id</p><p><center><b>%1</b></center></p><p> ne estas "
 "trovita en via ŝlosilringo nuntempe. Bonvolu certigi importi ĉi tiun "
 "ŝlosilon en vian ŝlosilringon. Vi povas trovi ĝin en la <a href=\"https://"
 "kmymoney.org/\">retejo de KMyMoney</a>. Ĉi-foje viaj datumoj ne estos "
