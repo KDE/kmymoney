@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 00:48+0000\n"
+"POT-Creation-Date: 2023-04-09 00:47+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -12542,18 +12542,6 @@ msgstr "Πριν"
 #, kde-format
 msgid "After"
 msgstr "Μετά"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:44
-#, fuzzy, kde-format
-#| msgctxt "KMyMoney (Filefilter)"
-#| msgid "KMyMoney files"
-msgid "KMyMoney print check"
-msgstr "Αρχεία KMyMoney"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:47
-#, kde-format
-msgid "Copyright 2009"
-msgstr ""
 
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:207
 #, kde-format
@@ -26191,6 +26179,12 @@ msgstr ""
 "\n"
 "<p>Όλες οι πληροφορίες είναι προαιρετικές και χρησιμοποιούνται μόνο για να "
 "δώσουν προσωπικό τόνο στο αρχείο KMyMoney.</p>"
+
+#, fuzzy
+#~| msgctxt "KMyMoney (Filefilter)"
+#~| msgid "KMyMoney files"
+#~ msgid "KMyMoney print check"
+#~ msgstr "Αρχεία KMyMoney"
 
 #~ msgctxt "Activity for income categories"
 #~ msgid "Received"

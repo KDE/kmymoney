@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 00:48+0000\n"
+"POT-Creation-Date: 2023-04-09 00:47+0000\n"
 "PO-Revision-Date: 2019-01-19 19:46+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -12111,18 +12111,6 @@ msgstr "多久之前："
 #, kde-format
 msgid "After"
 msgstr "多久之後："
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:44
-#, fuzzy, kde-format
-#| msgctxt "KMyMoney (Filefilter)"
-#| msgid "KMyMoney files"
-msgid "KMyMoney print check"
-msgstr "KMyMoney 檔案"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:47
-#, kde-format
-msgid "Copyright 2009"
-msgstr ""
 
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:207
 #, kde-format
@@ -25095,6 +25083,12 @@ msgstr ""
 "<p>在下面輸入您自己的一些資訊。</p>\n"
 "\n"
 "<p>所有的資訊都不是必填的，只是用於個人化您的 KMyMoney 檔案。</p>"
+
+#, fuzzy
+#~| msgctxt "KMyMoney (Filefilter)"
+#~| msgid "KMyMoney files"
+#~ msgid "KMyMoney print check"
+#~ msgstr "KMyMoney 檔案"
 
 #~ msgctxt "Activity for income categories"
 #~ msgid "Received"

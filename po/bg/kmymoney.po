@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 00:48+0000\n"
+"POT-Creation-Date: 2023-04-09 00:47+0000\n"
 "PO-Revision-Date: 2009-10-17 16:25+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -11340,16 +11340,6 @@ msgstr "Преди"
 #, kde-format
 msgid "After"
 msgstr "След"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:44
-#, fuzzy, kde-format
-msgid "KMyMoney print check"
-msgstr "Писане на чек"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:47
-#, kde-format
-msgid "Copyright 2009"
-msgstr ""
 
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:207
 #, kde-format
@@ -23624,3 +23614,7 @@ msgid ""
 "<p>All information is optional and only used to personalize your KMyMoney "
 "file.</p>"
 msgstr ""
+
+#, fuzzy
+#~ msgid "KMyMoney print check"
+#~ msgstr "Писане на чек"

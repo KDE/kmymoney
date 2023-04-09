@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 00:48+0000\n"
+"POT-Creation-Date: 2023-04-09 00:47+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -12379,18 +12379,6 @@ msgstr "Prije"
 #, kde-format
 msgid "After"
 msgstr "Nakon"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:44
-#, fuzzy, kde-format
-#| msgctxt "KMyMoney (Filefilter)"
-#| msgid "KMyMoney files"
-msgid "KMyMoney print check"
-msgstr "KMyMoney datoteke"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:47
-#, kde-format
-msgid "Copyright 2009"
-msgstr ""
 
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:207
 #, kde-format
@@ -25834,6 +25822,12 @@ msgstr ""
 "\n"
 "<p>Sve informacije su opcionalne i služe samo za personalizaciju vase "
 "KMyMoney datoteke.</p>"
+
+#, fuzzy
+#~| msgctxt "KMyMoney (Filefilter)"
+#~| msgid "KMyMoney files"
+#~ msgid "KMyMoney print check"
+#~ msgstr "KMyMoney datoteke"
 
 #~ msgctxt "Activity for income categories"
 #~ msgid "Received"

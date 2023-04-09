@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 00:48+0000\n"
+"POT-Creation-Date: 2023-04-09 00:47+0000\n"
 "PO-Revision-Date: 2022-08-10 09:37+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -11973,16 +11973,6 @@ msgstr "до"
 #, kde-format
 msgid "After"
 msgstr "после"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:44
-#, kde-format
-msgid "KMyMoney print check"
-msgstr "Распечатка чеков в KMyMoney"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:47
-#, kde-format
-msgid "Copyright 2009"
-msgstr "Авторское право, 2009"
 
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:207
 #, kde-format
@@ -25174,6 +25164,12 @@ msgstr ""
 "\n"
 "<p>Все поля являются необязательными и предназначены только для "
 "персонализации файла KMyMoney.</p>"
+
+#~ msgid "KMyMoney print check"
+#~ msgstr "Распечатка чеков в KMyMoney"
+
+#~ msgid "Copyright 2009"
+#~ msgstr "Авторское право, 2009"
 
 #~ msgctxt "Activity for income categories"
 #~ msgid "Received"

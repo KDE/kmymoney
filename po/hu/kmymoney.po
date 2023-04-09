@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 00:48+0000\n"
+"POT-Creation-Date: 2023-04-09 00:47+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -12108,18 +12108,6 @@ msgstr "Előtte"
 #, kde-format
 msgid "After"
 msgstr "Utána"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:44
-#, fuzzy, kde-format
-#| msgctxt "KMyMoney (Filefilter)"
-#| msgid "KMyMoney files"
-msgid "KMyMoney print check"
-msgstr "KMyMoney-fájlok"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:47
-#, kde-format
-msgid "Copyright 2009"
-msgstr ""
 
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:207
 #, kde-format
@@ -25167,6 +25155,12 @@ msgstr ""
 "\n"
 "<p>Semelyik mező megadása nem kötelező, és csak a KMyMoney fájl személyre "
 "szabásához lesz felhasználva.</p>"
+
+#, fuzzy
+#~| msgctxt "KMyMoney (Filefilter)"
+#~| msgid "KMyMoney files"
+#~ msgid "KMyMoney print check"
+#~ msgstr "KMyMoney-fájlok"
 
 #~ msgctxt "Activity for income categories"
 #~ msgid "Received"

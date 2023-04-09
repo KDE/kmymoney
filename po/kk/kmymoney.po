@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 00:48+0000\n"
+"POT-Creation-Date: 2023-04-09 00:47+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -12344,18 +12344,6 @@ msgstr "Алдында"
 #, kde-format
 msgid "After"
 msgstr "Кейін"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:44
-#, fuzzy, kde-format
-#| msgctxt "KMyMoney (Filefilter)"
-#| msgid "KMyMoney files"
-msgid "KMyMoney print check"
-msgstr "KMyMoney файлдары"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:47
-#, kde-format
-msgid "Copyright 2009"
-msgstr ""
 
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:207
 #, kde-format
@@ -25696,6 +25684,12 @@ msgstr ""
 "<p>Төмендегі өрістерде өзіңіз туралы мәліметті келтіре аласыз.</p>\n"
 "\n"
 "<p>Мәліметті келтіру міндеті емес.</p>"
+
+#, fuzzy
+#~| msgctxt "KMyMoney (Filefilter)"
+#~| msgid "KMyMoney files"
+#~ msgid "KMyMoney print check"
+#~ msgstr "KMyMoney файлдары"
 
 #~ msgctxt "Activity for income categories"
 #~ msgid "Received"

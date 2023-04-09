@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: en_GB\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 00:48+0000\n"
-"PO-Revision-Date: 2023-03-14 20:51+0000\n"
+"POT-Creation-Date: 2023-04-09 00:47+0000\n"
+"PO-Revision-Date: 2023-04-08 11:07+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -11810,16 +11810,6 @@ msgstr "Before"
 msgid "After"
 msgstr "After"
 
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:44
-#, kde-format
-msgid "KMyMoney print check"
-msgstr "KMyMoney print cheque"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:47
-#, kde-format
-msgid "Copyright 2009"
-msgstr "Copyright 2009"
-
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:207
 #, kde-format
 msgid "Transfer from %1 to %2, Payee %3, amount %4"
@@ -12855,19 +12845,17 @@ msgstr "Method to detect duplicate transactions during import"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:424
-#, fuzzy, kde-format
-#| msgid "OFX FITID"
+#, kde-format
 msgctxt "@item:inlistbox Method to identify duplicate transactions"
 msgid "OFX FITID"
 msgstr "OFX FITID"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:429
-#, fuzzy, kde-format
-#| msgid "KMyMoney"
+#, kde-format
 msgctxt "@item:inlistbox Method to identify duplicate transactions"
 msgid "KMyMoney ID"
-msgstr "KMyMoney"
+msgstr "KMyMoney ID"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:443
@@ -24914,6 +24902,12 @@ msgstr ""
 "\n"
 "<p>All information is optional and only used to personalise your KMyMoney "
 "file.</p>"
+
+#~ msgid "KMyMoney print check"
+#~ msgstr "KMyMoney print cheque"
+
+#~ msgid "Copyright 2009"
+#~ msgstr "Copyright 2009"
 
 #~ msgctxt "Activity for income categories"
 #~ msgid "Received"

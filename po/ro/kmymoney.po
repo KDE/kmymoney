@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 00:48+0000\n"
+"POT-Creation-Date: 2023-04-09 00:47+0000\n"
 "PO-Revision-Date: 2022-08-14 16:08+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -12501,17 +12501,6 @@ msgstr "înainte"
 #, kde-format
 msgid "After"
 msgstr "după"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:44
-#, fuzzy, kde-format
-#| msgid "KMyMoney Unittest"
-msgid "KMyMoney print check"
-msgstr "Testare unitate KMyMoney"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:47
-#, kde-format
-msgid "Copyright 2009"
-msgstr ""
 
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:207
 #, kde-format
@@ -26166,6 +26155,11 @@ msgstr ""
 "\n"
 "<p>Toate informațiile sînt opționale și sînt folosite doar pentru a vă "
 "personaliza fișierul KMyMoney.</p>"
+
+#, fuzzy
+#~| msgid "KMyMoney Unittest"
+#~ msgid "KMyMoney print check"
+#~ msgstr "Testare unitate KMyMoney"
 
 #~ msgctxt "Activity for income categories"
 #~ msgid "Received"

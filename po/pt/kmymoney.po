@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-05 00:48+0000\n"
+"POT-Creation-Date: 2023-04-09 00:47+0000\n"
 "PO-Revision-Date: 2023-04-06 10:42+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -12001,16 +12001,6 @@ msgstr "Antes"
 #, kde-format
 msgid "After"
 msgstr "Depois"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:44
-#, kde-format
-msgid "KMyMoney print check"
-msgstr "Impressão de cheque do KMyMoney"
-
-#: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:47
-#, kde-format
-msgid "Copyright 2009"
-msgstr "Copyright 2009"
 
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:207
 #, kde-format
@@ -25241,3 +25231,9 @@ msgstr ""
 "\n"
 "<p>Todas as informações são opcionais e são oferecidas apenas para "
 "personalizar o seu ficheiro KMyMoney.</p>"
+
+#~ msgid "KMyMoney print check"
+#~ msgstr "Impressão de cheque do KMyMoney"
+
+#~ msgid "Copyright 2009"
+#~ msgstr "Copyright 2009"
