@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-09 00:47+0000\n"
-"PO-Revision-Date: 2023-04-07 10:09+0100\n"
+"PO-Revision-Date: 2023-04-10 04:45+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -12010,7 +12010,7 @@ msgid ""
 "choose one.</p></qt>"
 msgstr ""
 "<qt><p>Bonvolu elekti la unuan daton, por kiu transakcioj estas prenitaj de "
-"<b>%1</b>.</p><p>Se vi specifas neniun daton, tiam la banko elektos unu.</ "
+"<b>%1</b>.</p><p>Se vi specifas neniun daton, tiam la banko elektos unu.</"
 "p></qt>"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBPickStartDate)
@@ -15928,8 +15928,8 @@ msgstr "ĝi estas malplena"
 #, kde-format
 msgid "There is a problem with file %1"
 msgid_plural "There are problems with file %1"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Estas problemo pri dosiero %1"
+msgstr[1] "Estas problemoj pri dosiero %1"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:102
 #, kde-format
@@ -24872,9 +24872,3 @@ msgstr ""
 "\n"
 "<p>Ĉiuj informoj estas laŭvolaj kaj nur uzataj por personecigi vian KMyMoney-"
 "dosieron.</p>"
-
-#~ msgid "KMyMoney print check"
-#~ msgstr "Presa ĉeko de KMyMoney"
-
-#~ msgid "Copyright 2009"
-#~ msgstr "Kopirajto 2009"
