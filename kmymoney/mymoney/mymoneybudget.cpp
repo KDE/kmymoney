@@ -78,15 +78,16 @@ bool MyMoneyBudget::PeriodGroup::operator == (const PeriodGroup& right) const
 class MyMoneyBudget::AccountGroupPrivate {
 
 public:
-
-    AccountGroupPrivate() :
-        m_budgetlevel(eMyMoney::Budget::Level::None),
-        m_budgetsubaccounts(false)
+    AccountGroupPrivate()
+        : m_budgetlevel(eMyMoney::Budget::Level::None)
+        , m_budgetType(eMyMoney::Account::Type::Unknown)
+        , m_budgetsubaccounts(false)
     {
     }
 
     QString                                   m_id;
     eMyMoney::Budget::Level                   m_budgetlevel;
+    eMyMoney::Account::Type m_budgetType;
     bool                                      m_budgetsubaccounts;
     QMap<QDate, MyMoneyBudget::PeriodGroup>   m_periods;
 
@@ -211,6 +212,18 @@ void MyMoneyBudget::AccountGroup::setBudgetLevel(eMyMoney::Budget::Level level)
 {
     Q_D(AccountGroup);
     d->m_budgetlevel = level;
+}
+
+eMyMoney::Account::Type MyMoneyBudget::AccountGroup::budgetType() const
+{
+    Q_D(const AccountGroup);
+    return d->m_budgetType;
+}
+
+void MyMoneyBudget::AccountGroup::setBudgetType(eMyMoney::Account::Type type)
+{
+    Q_D(AccountGroup);
+    d->m_budgetType = type;
 }
 
 MyMoneyBudget::PeriodGroup MyMoneyBudget::AccountGroup::period(const QDate& date) const

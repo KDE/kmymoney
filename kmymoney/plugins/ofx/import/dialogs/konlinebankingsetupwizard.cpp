@@ -447,19 +447,19 @@ int KOnlineBankingSetupWizard::ofxAccountCallback(struct OfxAccountData data, vo
     }
 
     if (data.bank_id_valid)
-        kvps.setValue("bankid", data.bank_id);
+        kvps.setValue("bankid", QLatin1String(data.bank_id));
 
     if (data.broker_id_valid)
-        kvps.setValue("bankid", data.broker_id);
+        kvps.setValue("bankid", QLatin1String(data.broker_id));
 
     if (data.branch_id_valid)
-        kvps.setValue("branchid", data.branch_id);
+        kvps.setValue("branchid", QLatin1String(data.branch_id));
 
     if (data.account_number_valid)
-        kvps.setValue("accountid", data.account_number);
+        kvps.setValue("accountid", QLatin1String(data.account_number));
 
     if (data.account_id_valid)
-        kvps.setValue("uniqueId", data.account_id);
+        kvps.setValue("uniqueId", QLatin1String(data.account_id));
 
     kvps.setValue("username", pthis->m_editUsername->text());
     kvps.setValue("password", pthis->m_editPassword->text());
@@ -467,9 +467,9 @@ int KOnlineBankingSetupWizard::ofxAccountCallback(struct OfxAccountData data, vo
     if (!pthis->m_userAgent->text().isEmpty()) {
         kvps.setValue("kmmofx-useragent", pthis->m_userAgent->text());
     }
-    kvps.setValue("url", (*(pthis->m_it_info)).url);
-    kvps.setValue("fid", (*(pthis->m_it_info)).fid);
-    kvps.setValue("org", (*(pthis->m_it_info)).org);
+    kvps.setValue("url", QLatin1String((*(pthis->m_it_info)).url));
+    kvps.setValue("fid", QLatin1String((*(pthis->m_it_info)).fid));
+    kvps.setValue("org", QLatin1String((*(pthis->m_it_info)).org));
     kvps.setValue("fipid", "");
     QListWidgetItem* item = pthis->m_listFi->currentItem();
     if (item)

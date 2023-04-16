@@ -678,6 +678,9 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::AccountIsIncomeExpenseRole:
         return account.isIncomeExpense();
 
+    case eMyMoney::Model::AccountTypeInBudgetRole:
+        return QVariant::fromValue(account.budgetAccountType());
+
     case eMyMoney::Model::AccountFullHierarchyNameRole:
         return indexToHierarchicalName(idx, true);
 
@@ -1129,7 +1132,7 @@ void AccountsModel::doAddItem(const MyMoneyAccount& item, const QModelIndex& par
     const auto realParentIdx = indexById(item.parentAccountId());
     static_cast<TreeItem<MyMoneyAccount>*>(realParentIdx.internalPointer())->dataRef().addAccountId(item.id());
     MyMoneyModel::doAddItem(item, realParentIdx);
-    if (item.value("PreferredAccount") == QLatin1String("Yes")) {
+    if (item.value("PreferredAccount", false)) {
         addFavorite(item.id());
     }
 }
@@ -1140,7 +1143,7 @@ void AccountsModel::doModifyItem(const MyMoneyAccount& before, const MyMoneyAcco
     const auto idx = indexById(after.id());
     if (idx.isValid()) {
         MyMoneyModel::doModifyItem(before, after);
-        if (after.value("PreferredAccount") == QLatin1String("Yes")) {
+        if (after.value("PreferredAccount", false)) {
             addFavorite(after.id());
         } else {
             removeFavorite(after.id());

@@ -16,6 +16,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QString>
 #include <qglobal.h>
 
 // ----------------------------------------------------------------------------
@@ -80,13 +81,46 @@ public:
     QString value(const QString& key) const;
 
     /**
-      * This method is used to add a key/value pair to the container or
-      * modify an existing pair.
-      *
-      * @param key const reference to QString with the key to search for
-      * @param value const reference to QString with the value for this key
-      */
-    void setValue(const QString& key, const QString& value);
+     * convenience method for type @c bool
+     */
+    bool value(const QString& key, bool defaultValue) const;
+
+    /**
+     * convenience method for type @c int
+     */
+    int value(const QString& key, int defaultValue) const;
+
+    /**
+     * This method is used to add a key/value pair to the container or
+     * modify an existing pair.
+     *
+     * @param key const reference to QString with the key to search for
+     * @param value const reference to QString with the value for this key
+     * @param defaultValue when value has this defaultValue, the entry is removed
+     */
+    void setValue(const QString& key, const QString& value, const QString& defaultValue = QString());
+
+    /**
+     * Convenience method for setValue(const QString& key, const QString& value, const QString& defaultValue)
+     */
+    void setValue(const QString& key, int value, int defaultValue = 0);
+
+    /**
+     * Convenience method for setValue(const QString& key, const QString& value, const QString& defaultValue)
+     */
+    void setValue(const QString& key, const char* value);
+
+    /**
+     * This method is used to add a key/value pair representing a boolean
+     * value. If the @a value is equal to @a defaultValue the entry is
+     * removed, otherwise it will be set to "yes" for @c true or "no"
+     * for @c false.
+     *
+     * @param key const reference to QString with the key to search for
+     * @param value the value for this key
+     * @param defaultValue when value has this defaultValue, the entry is removed
+     */
+    void setValue(const QString& key, bool value, bool defaultValue);
 
     /**
       * This method is used to remove an existing key/value pair from the

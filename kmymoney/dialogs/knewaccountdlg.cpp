@@ -54,6 +54,13 @@ class KNewAccountDlgPrivate
     Q_DISABLE_COPY(KNewAccountDlgPrivate)
     Q_DECLARE_PUBLIC(KNewAccountDlg)
 
+    // keep in sync with assigned values of m_budgetInclusion in knewaccountdlg.ui
+    enum AccountBudgetOptionIndex {
+        NoInclusionIndex,
+        IncludeAsExpenseIndex,
+        IncludeAsIncomeIndex,
+    };
+
 public:
     explicit KNewAccountDlgPrivate(KNewAccountDlg *qq) :
         q_ptr(qq),
@@ -197,6 +204,8 @@ public:
 
             ui->m_institutionBox->hide();
             ui->m_qcheckboxNoVat->hide();
+            ui->m_budgetOptionsGroupBox->hide();
+            ui->m_budgetInclusion->setCurrentIndex(accountTypeToBudgetOptionIndex(eMyMoney::Account::Type::Unknown));
 
             ui->typeCombo->addItem(MyMoneyAccount::accountTypeToString(Account::Type::Income), (int)Account::Type::Income);
             ui->typeCombo->addItem(MyMoneyAccount::accountTypeToString(Account::Type::Expense), (int)Account::Type::Expense);
@@ -320,8 +329,9 @@ public:
                 ui->m_institutionBox->hide();
 
             ui->accountNoEdit->setText(m_account.number());
-            ui->m_qcheckboxPreferred->setChecked(m_account.value("PreferredAccount") == "Yes");
-            ui->m_qcheckboxNoVat->setChecked(m_account.value("NoVat") == "Yes");
+            ui->m_budgetInclusion->setCurrentIndex(accountTypeToBudgetOptionIndex(m_account.budgetAccountType()));
+            loadKVP("PreferredAccount", ui->m_qcheckboxPreferred);
+            loadKVP("NoVat", ui->m_qcheckboxNoVat);
             loadKVP("iban", ui->ibanEdit);
             loadKVP("minBalanceAbsolute", ui->m_minBalanceAbsoluteEdit);
             loadKVP("minBalanceEarly", ui->m_minBalanceEarlyEdit);
@@ -443,22 +453,27 @@ public:
 
     void loadKVP(const QString& key, AmountEdit* widget)
     {
-        if (!widget)
-            return;
-
-        if (m_account.value(key).isEmpty()) {
-            widget->setText(QString());
-        } else {
-            widget->setValue(MyMoneyMoney(m_account.value(key)));
+        if (widget) {
+            if (m_account.value(key).isEmpty()) {
+                widget->setText(QString());
+            } else {
+                widget->setValue(MyMoneyMoney(m_account.value(key)));
+            }
         }
     }
 
     void loadKVP(const QString& key, KLineEdit* widget)
     {
-        if (!widget)
-            return;
+        if (widget) {
+            widget->setText(m_account.value(key));
+        }
+    }
 
-        widget->setText(m_account.value(key));
+    void loadKVP(const QString& key, QCheckBox* widget, bool defaultValue = false)
+    {
+        if (widget) {
+            widget->setChecked(m_account.value(key, defaultValue));
+        }
     }
 
     void storeKVP(const QString& key, const QString& text, const QString& value)
@@ -472,11 +487,7 @@ public:
     void storeKVP(const QString& key, QCheckBox* widget)
     {
         if (widget) {
-            if(widget->isChecked()) {
-                m_account.setValue(key, "Yes");
-            } else {
-                m_account.deletePair(key);
-            }
+            m_account.setValue(key, widget->isChecked());
         }
     }
 
@@ -553,13 +564,13 @@ public:
                 if (it->id() == m_account.id() || currencyId != it->currencyId()
                         || it->accountType() != Account::Type::Equity)
                     continue;
-                if (it->value("OpeningBalanceAccount") == "Yes") {
+                if (it->value("OpeningBalanceAccount", false)) {
                     isOtherOpenBalancingAccount = true;
                     break;
                 }
             }
             if (!isOtherOpenBalancingAccount) {
-                bool isOpenBalancingAccount = m_account.value("OpeningBalanceAccount") == "Yes";
+                bool isOpenBalancingAccount = m_account.value("OpeningBalanceAccount", false);
                 ui->m_qcheckboxOpeningBalance->setChecked(isOpenBalancingAccount);
                 if (isOpenBalancingAccount) {
                     // let only allow state change if no transactions are assigned to this account
@@ -619,6 +630,32 @@ public:
             MyMoneyFile::instance()->createAccount(account, parentAccount, brokerageAccount, MyMoneyMoney());
         }
         delete dialog;
+    }
+
+    AccountBudgetOptionIndex accountTypeToBudgetOptionIndex(eMyMoney::Account::Type type) const
+    {
+        switch (type) {
+        case eMyMoney::Account::Type::Income:
+            return IncludeAsIncomeIndex;
+        case eMyMoney::Account::Type::Expense:
+            return IncludeAsExpenseIndex;
+        default:
+            break;
+        }
+        return NoInclusionIndex;
+    }
+
+    eMyMoney::Account::Type budgetOptionIndexToAccountType(int option) const
+    {
+        switch (option) {
+        case IncludeAsExpenseIndex:
+            return eMyMoney::Account::Type::Expense;
+        case IncludeAsIncomeIndex:
+            return eMyMoney::Account::Type::Income;
+        default:
+            break;
+        }
+        return eMyMoney::Account::Type::Unknown;
     }
 
     KNewAccountDlg* q_ptr;
@@ -771,6 +808,7 @@ void KNewAccountDlg::okClicked()
     if (!d->m_categoryEditor) {
         d->storeKVP("PreferredAccount", d->ui->m_qcheckboxPreferred);
         d->storeKVP("NoVat", d->ui->m_qcheckboxNoVat);
+        d->m_account.setBudgetAccountType(d->budgetOptionIndexToAccountType(d->ui->m_budgetInclusion->currentIndex()));
 
         if (d->ui->m_minBalanceAbsoluteEdit->isVisible()) {
             d->m_account.setValue("minimumBalance", d->ui->m_minBalanceAbsoluteEdit->value().toString());
@@ -784,11 +822,7 @@ void KNewAccountDlg::okClicked()
 
     d->m_account.setIsInTaxReports(d->ui->m_qcheckboxTax->isChecked());
 
-    if (d->ui->m_qcheckboxOpeningBalance->isChecked())
-        d->m_account.setValue("OpeningBalanceAccount", "Yes");
-    else
-        d->m_account.deletePair("OpeningBalanceAccount");
-
+    d->m_account.setValue("OpeningBalanceAccount", d->ui->m_qcheckboxOpeningBalance->isChecked());
     d->m_account.deletePair("VatAccount");
     d->m_account.deletePair("VatAmount");
     d->m_account.deletePair("VatRate");

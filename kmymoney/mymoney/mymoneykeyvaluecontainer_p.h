@@ -22,6 +22,23 @@ class MyMoneyKeyValueContainerPrivate
 {
 public:
     /**
+     * Returns a string representing of a boolean value
+     *
+     * @param value the boolean value
+     * @retval "yes" for @c true
+     * @retval "no" for @c false
+     */
+    QString toString(bool value) const;
+
+    /**
+     * Returns a string representing an int value
+     *
+     * @param value the integer value
+     * @returns value as QString
+     */
+    QString toString(int value) const;
+
+    /**
       * This member variable represents the container of key/value pairs.
       */
     QMap<QString, QString>  m_kvp;

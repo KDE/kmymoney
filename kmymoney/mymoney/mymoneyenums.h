@@ -500,6 +500,7 @@ enum Roles {
     // MyMoneyAccount
     AccountTypeRole,
     AccountGroupRole,
+    AccountTypeInBudgetRole,
     AccountCanBeClosedRole,
     AccountIsClosedRole,
     AccountIsInvestRole,

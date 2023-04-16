@@ -313,7 +313,12 @@ bool MyMoneyAccount::isAssetLiability() const
 
 bool MyMoneyAccount::isIncomeExpense() const
 {
-    return accountGroup() == Account::Type::Income || accountGroup() == Account::Type::Expense;
+    return isIncomeExpense(accountType());
+}
+
+bool MyMoneyAccount::isIncomeExpense(eMyMoney::Account::Type type)
+{
+    return (accountGroup(type) == Account::Type::Income) || (accountGroup(type) == Account::Type::Expense);
 }
 
 bool MyMoneyAccount::isLoan() const
@@ -340,30 +345,22 @@ bool MyMoneyAccount::isLiquidLiability() const
 
 bool MyMoneyAccount::isCostCenterRequired() const
 {
-    return value(QLatin1String("CostCenter")).toLower() == QLatin1String("yes");
+    return value(QLatin1String("CostCenter"), false);
 }
 
 void MyMoneyAccount::setCostCenterRequired(bool required)
 {
-    if(required) {
-        setValue(QLatin1String("CostCenter"), QLatin1String("yes"));
-    } else {
-        deletePair(QLatin1String("CostCenter"));
-    }
+    setValue(QLatin1String("CostCenter"), required, false);
 }
 
 bool MyMoneyAccount::isInTaxReports() const
 {
-    return value(QLatin1String("Tax")).toLower() == QLatin1String("yes");
+    return value(QLatin1String("Tax"), false);
 }
 
 void MyMoneyAccount::setIsInTaxReports(bool include)
 {
-    if (include) {
-        setValue(QLatin1String("Tax"), QLatin1String("yes"));
-    } else {
-        deletePair(QLatin1String("Tax"));
-    }
+    setValue(QLatin1String("Tax"), include, false);
 }
 
 void MyMoneyAccount::setOnlineBankingSettings(const MyMoneyKeyValueContainer& values)
@@ -380,10 +377,7 @@ MyMoneyKeyValueContainer MyMoneyAccount::onlineBankingSettings() const
 
 void MyMoneyAccount::setClosed(bool closed)
 {
-    if (closed)
-        setValue(QLatin1String("mm-closed"), QLatin1String("yes"));
-    else
-        deletePair(QLatin1String("mm-closed"));
+    setValue(QLatin1String("mm-closed"), closed, false);
 }
 
 bool MyMoneyAccount::isClosed() const
@@ -677,4 +671,17 @@ QString MyMoneyAccount::stdAccName(eMyMoney::Account::Standard stdAccID)
 QString MyMoneyAccount::accountSeparator()
 {
     return QStringLiteral(":");
+}
+
+void MyMoneyAccount::setBudgetAccountType(eMyMoney::Account::Type type)
+{
+    if ((type != eMyMoney::Account::Type::Income) && (type != eMyMoney::Account::Type::Expense)) {
+        type = eMyMoney::Account::Type::Unknown;
+    }
+    setValue(QLatin1String("budgetAccountType"), static_cast<int>(type), static_cast<int>(eMyMoney::Account::Type::Unknown));
+}
+
+eMyMoney::Account::Type MyMoneyAccount::budgetAccountType() const
+{
+    return static_cast<eMyMoney::Account::Type>(value(QLatin1String("budgetAccountType"), static_cast<int>(accountType())));
 }

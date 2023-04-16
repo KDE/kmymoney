@@ -401,3 +401,23 @@ void MyMoneyAccountTest::testHasOnlineMapping()
     a.setOnlineBankingSettings(kvp);
     QCOMPARE(a.hasOnlineMapping(), true);
 }
+
+void MyMoneyAccountTest::testBudgetOptions()
+{
+    MyMoneyAccount a;
+    a.setAccountType(eMyMoney::Account::Type::Asset);
+    QCOMPARE(a.accountType(), eMyMoney::Account::Type::Asset);
+    QCOMPARE(a.budgetAccountType(), eMyMoney::Account::Type::Asset);
+
+    a.setBudgetAccountType(eMyMoney::Account::Type::Income);
+    QCOMPARE(a.accountType(), eMyMoney::Account::Type::Asset);
+    QCOMPARE(a.budgetAccountType(), eMyMoney::Account::Type::Income);
+
+    a.setBudgetAccountType(eMyMoney::Account::Type::Expense);
+    QCOMPARE(a.accountType(), eMyMoney::Account::Type::Asset);
+    QCOMPARE(a.budgetAccountType(), eMyMoney::Account::Type::Expense);
+
+    a.setBudgetAccountType(eMyMoney::Account::Type::Investment);
+    QCOMPARE(a.accountType(), eMyMoney::Account::Type::Asset);
+    QCOMPARE(a.budgetAccountType(), eMyMoney::Account::Type::Asset);
+}

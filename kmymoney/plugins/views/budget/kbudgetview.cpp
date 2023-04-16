@@ -52,8 +52,8 @@ void KBudgetView::showEvent(QShowEvent * event)
 
         connect(d->ui->m_budgetList, &QTableView::customContextMenuRequested, this, [&](const QPoint&) {
             Q_D(KBudgetView);
-            if (d->m_contextMenu) {
-                d->m_contextMenu->exec(QCursor::pos());
+            if (d->m_budgetContextMenu) {
+                d->m_budgetContextMenu->exec(QCursor::pos());
             } else {
                 qDebug() << "No context menu assigned in KBudgetView";
             }
@@ -276,11 +276,15 @@ void KBudgetView::slotBudgetedAmountChanged()
     const auto indexes = d->ui->m_accountTree->selectionModel()->selectedIndexes();
     if (indexes.isEmpty())
         return;
-    QString accountID = indexes.front().data(eMyMoney::Model::Roles::IdRole).toString();
+    const auto idx = indexes.front();
+    const auto accountID = idx.data(eMyMoney::Model::Roles::IdRole).toString();
 
     MyMoneyBudget::AccountGroup accountGroup = d->m_budget.account(accountID);
     accountGroup.setId(accountID);
     d->ui->m_budgetValue->budgetValues(d->m_budget, accountGroup);
+    if (!idx.data(eMyMoney::Model::AccountIsIncomeExpenseRole).toBool()) {
+        accountGroup.setBudgetType(idx.data(eMyMoney::Model::AccountTypeInBudgetRole).value<eMyMoney::Account::Type>());
+    }
     d->m_budget.setAccount(accountGroup, accountID);
 
     d->m_budgetProxyModel->setBudget(d->m_budget);
@@ -394,6 +398,18 @@ void KBudgetView::slotHideUnused(bool toggled)
         d->m_budgetProxyModel->setHideUnusedIncomeExpenseAccounts(d->ui->m_hideUnusedButton->isChecked());
 }
 
+void KBudgetView::slotTreatAsExpense()
+{
+    Q_D(KBudgetView);
+    d->treatAs(eMyMoney::Account::Type::Expense);
+}
+
+void KBudgetView::slotTreatAsIncome()
+{
+    Q_D(KBudgetView);
+    d->treatAs(eMyMoney::Account::Type::Income);
+}
+
 void KBudgetView::createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiClient)
 {
     typedef void(KBudgetView::*KBudgetViewFunc)();
@@ -405,17 +421,41 @@ void KBudgetView::createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiCl
         eMenu::BudgetAction id;
     };
 
-    const QVector<actionInfo> actionInfos {
-        {QStringLiteral("budget_new"),              &KBudgetView::slotNewBudget,      i18n("New budget"),               Icon::DocumentNew,             eMenu::BudgetAction::NewBudget},
-        {QStringLiteral("budget_rename"),           &KBudgetView::slotStartRename,    i18n("Rename budget"),            Icon::DocumentEdit,            eMenu::BudgetAction::RenameBudget},
-        {QStringLiteral("budget_delete"),           &KBudgetView::slotDeleteBudget,   i18n("Delete budget"),            Icon::EditRemove,              eMenu::BudgetAction::DeleteBudget},
-        {QStringLiteral("budget_copy"),             &KBudgetView::slotCopyBudget,     i18n("Copy budget"),              Icon::EditCopy,                eMenu::BudgetAction::CopyBudget},
-        {QStringLiteral("budget_base_on_forecast"), &KBudgetView::slotBudgetForecast, i18n("Budget based on forecast"), Icon::OfficeChartLineForecast, eMenu::BudgetAction::BudgetForecast},
+    const QVector<actionInfo> budgetActionInfos{
+        {QStringLiteral("budget_new"), &KBudgetView::slotNewBudget, i18n("New budget"), Icon::DocumentNew, eMenu::BudgetAction::NewBudget},
+        {QStringLiteral("budget_rename"), &KBudgetView::slotStartRename, i18n("Rename budget"), Icon::DocumentEdit, eMenu::BudgetAction::RenameBudget},
+        {QStringLiteral("budget_delete"), &KBudgetView::slotDeleteBudget, i18n("Delete budget"), Icon::EditRemove, eMenu::BudgetAction::DeleteBudget},
+        {QStringLiteral("budget_copy"), &KBudgetView::slotCopyBudget, i18n("Copy budget"), Icon::EditCopy, eMenu::BudgetAction::CopyBudget},
+        {QStringLiteral("budget_base_on_forecast"),
+         &KBudgetView::slotBudgetForecast,
+         i18n("Budget based on forecast"),
+         Icon::OfficeChartLineForecast,
+         eMenu::BudgetAction::BudgetForecast},
+    };
+
+    const QVector<actionInfo> accountActionInfos{
+        {QStringLiteral("budget_treat_as_income"),
+         &KBudgetView::slotTreatAsIncome,
+         i18nc("@item:inmenu To make it income", "Change to income"),
+         Icon::Income,
+         eMenu::BudgetAction::TreatAsIncome},
+        {QStringLiteral("budget_treat_as_expense"),
+         &KBudgetView::slotTreatAsExpense,
+         i18nc("@item:inmenu To make it expense", "Change to expense"),
+         Icon::Expense,
+         eMenu::BudgetAction::TreatAsExpense},
     };
 
     Q_D(KBudgetView);
     d->m_actionCollection = guiClient->actionCollection();
-    for (const auto& actionInfo : actionInfos) {
+    for (const auto& actionInfo : budgetActionInfos) {
+        QAction* action = d->m_actionCollection->addAction(actionInfo.name, this, actionInfo.callback);
+        action->setText(actionInfo.text);
+        action->setIcon(Icons::get(actionInfo.icon));
+        d->m_actions.insert(actionInfo.id, action);
+    }
+
+    for (const auto& actionInfo : accountActionInfos) {
         QAction *action = d->m_actionCollection->addAction(actionInfo.name, this, actionInfo.callback);
         action->setText(actionInfo.text);
         action->setIcon(Icons::get(actionInfo.icon));
@@ -423,16 +463,27 @@ void KBudgetView::createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiCl
     }
 
     // create context menu
-    d->m_contextMenu = qobject_cast<QMenu*>(guiFactory->container(QStringLiteral("budget_context_menu"), guiClient));
+    d->m_budgetContextMenu = qobject_cast<QMenu*>(guiFactory->container(QStringLiteral("budget_context_menu"), guiClient));
 
     // For some unknown reason, the context menu does not get created this way from the .rc file.
     // I must be doing something wrong / don't understand something. This kxmlgui thingy
     // remains a mystery to me. Apparently, I am also too stupid to get the window tile showing up
-    if (!d->m_contextMenu) {
-        d->m_contextMenu = new QMenu(this);
-        d->m_contextMenu->addSection(i18nc("@title:menu budget context menu", "Budget options"));
-        for (const auto& actionInfo : actionInfos) {
-            d->m_contextMenu->insertAction(nullptr, d->m_actions[actionInfo.id]);
+    if (!d->m_budgetContextMenu) {
+        d->m_budgetContextMenu = new QMenu(this);
+        d->m_budgetContextMenu->addSection(i18nc("@title:menu Budget context menu", "Budget options"));
+        for (const auto& actionInfo : budgetActionInfos) {
+            d->m_budgetContextMenu->insertAction(nullptr, d->m_actions[actionInfo.id]);
+        }
+    }
+
+    // create context menu
+    d->m_accountContextMenu = qobject_cast<QMenu*>(guiFactory->container(QStringLiteral("budget_account_context_menu"), guiClient));
+
+    if (!d->m_accountContextMenu) {
+        d->m_accountContextMenu = new QMenu(this);
+        d->m_accountContextMenu->addSection(i18nc("@title:menu Budget account context menu", "Account options"));
+        for (const auto& actionInfo : accountActionInfos) {
+            d->m_accountContextMenu->insertAction(nullptr, d->m_actions[actionInfo.id]);
         }
     }
 }
@@ -445,7 +496,8 @@ void KBudgetView::removeActions()
         d->m_actionCollection->removeAction(action);
     }
     // the context menu should be our child, but you never know
-    d->m_contextMenu->deleteLater();
+    d->m_budgetContextMenu->deleteLater();
+    d->m_accountContextMenu->deleteLater();
 }
 
 void KBudgetView::updateActions(const SelectedObjects& selections)
@@ -460,4 +512,28 @@ void KBudgetView::updateActions(const SelectedObjects& selections)
     d->m_actions[eMenu::BudgetAction::CopyBudget]->setEnabled(b);
     d->m_actions[eMenu::BudgetAction::RenameBudget]->setEnabled(b);
     d->m_actions[eMenu::BudgetAction::BudgetForecast]->setEnabled(b);
+}
+
+void KBudgetView::slotOpenAccountContextMenu(eMenu::Menu type, const QPoint& p)
+{
+    Q_D(KBudgetView);
+    const auto currentIdx = d->ui->m_accountTree->selectionModel()->currentIndex();
+    if (currentIdx.isValid() && !d->ui->m_accountTree->selectionModel()->selectedIndexes().isEmpty() && (type == eMenu::Menu::Account)) {
+        const auto accountId = currentIdx.data(eMyMoney::Model::IdRole).toString();
+        auto accountGroup = d->m_budget.account(accountId);
+        QString tip;
+        if (accountGroup.id() == accountId) {
+            const bool isIncome = accountGroup.budgetType() == eMyMoney::Account::Type::Income;
+            tip = i18nc("@info:tooltip Budget assignment", "Select how the budget of this account shall be treated.");
+            d->m_actions[eMenu::BudgetAction::TreatAsIncome]->setEnabled(!isIncome);
+            d->m_actions[eMenu::BudgetAction::TreatAsExpense]->setEnabled(isIncome);
+        } else {
+            tip = i18nc("@info:tooltip Budget assignment", "This option is only available when a budget value is assigned.");
+            d->m_actions[eMenu::BudgetAction::TreatAsIncome]->setEnabled(false);
+            d->m_actions[eMenu::BudgetAction::TreatAsExpense]->setEnabled(false);
+        }
+        d->m_actions[eMenu::BudgetAction::TreatAsIncome]->setToolTip(tip);
+        d->m_actions[eMenu::BudgetAction::TreatAsExpense]->setToolTip(tip);
+        d->m_accountContextMenu->popup(p);
+    }
 }

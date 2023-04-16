@@ -178,6 +178,7 @@ QString attributeName(Attribute::Budget attributeID)
         {Attribute::Budget::BudgetLevel,        QStringLiteral("budgetlevel")},
         {Attribute::Budget::BudgetSubAccounts,  QStringLiteral("budgetsubaccounts")},
         {Attribute::Budget::Amount,             QStringLiteral("amount")},
+        {Attribute::Budget::BudgetType,         QStringLiteral("type")},
     };
     // clang-format on
     return attributeNames.value(attributeID);
@@ -1045,6 +1046,9 @@ void writeBudget(const MyMoneyBudget& budget, QXmlStreamWriter* writer)
             writer->writeAttribute(attributeName(Attribute::Budget::ID), it.key());
             writer->writeAttribute(attributeName(Attribute::Budget::BudgetLevel), budgetLevels(it.value().budgetLevel()));
             writer->writeAttribute(attributeName(Attribute::Budget::BudgetSubAccounts), attrValue(it.value().budgetSubaccounts()));
+            if (it.value().budgetType() != eMyMoney::Account::Type::Unknown) {
+                writer->writeAttribute(attributeName(Attribute::Budget::BudgetType), accountTypeAttributeToString(it.value().budgetType()));
+            }
 
             const QMap<QDate, MyMoneyBudget::PeriodGroup> periods = it.value().getPeriods();
             QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_per;
@@ -1397,6 +1401,7 @@ MyMoneyBudget readBudget(QXmlStreamReader* reader)
             account.setId(readStringAttribute(reader, attributeName(Attribute::Budget::ID)));
             account.setBudgetLevel(stringToBudgetLevel(readStringAttribute(reader, attributeName(Attribute::Budget::BudgetLevel))));
             account.setBudgetSubaccounts(readBoolAttribute(reader, attributeName(Attribute::Budget::BudgetSubAccounts), false));
+            account.setBudgetType(stringToAccountTypeAttribute(readStringAttribute(reader, attributeName(Attribute::Budget::BudgetType))));
 
             while (reader->readNextStartElement()) {
                 if (reader->name() == elementName(Element::Budget::Period)) {

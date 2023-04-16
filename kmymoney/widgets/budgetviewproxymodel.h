@@ -59,6 +59,7 @@ Q_SIGNALS:
 protected:
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
     MyMoneyMoney accountBalance(const QString &accountId) const;
+    MyMoneyMoney accountBalance(const QModelIndex& idx) const;
     MyMoneyMoney accountValue(const MyMoneyAccount &account, const MyMoneyMoney &balance) const;
     MyMoneyMoney computeTotalValue(const QModelIndex &source_index) const;
 

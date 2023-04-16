@@ -516,6 +516,12 @@ public:
     bool isIncomeExpense() const;
 
     /**
+     * Returns @c true if the @a type is either Income or Expense.
+     * In all other cases it returns @c false.
+     */
+    static bool isIncomeExpense(eMyMoney::Account::Type type);
+
+    /**
       * This method returns @a true if the account type is
       * either Asset or Liability
       *
@@ -640,6 +646,9 @@ public:
       * @return @c true if account has an online mapping, @c false otherwise
       */
     bool hasOnlineMapping() const;
+
+    eMyMoney::Account::Type budgetAccountType() const;
+    void setBudgetAccountType(eMyMoney::Account::Type type);
 
     static QString stdAccName(eMyMoney::Account::Standard stdAccID);
     static QString accountSeparator();

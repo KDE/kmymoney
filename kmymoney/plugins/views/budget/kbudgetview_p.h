@@ -14,10 +14,11 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QObject>
-#include <QMenu>
 #include <QDate>
 #include <QInputDialog>
+#include <QMenu>
+#include <QObject>
+#include <QPoint>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -55,11 +56,12 @@ class KBudgetViewPrivate : public KMyMoneyViewBasePrivate
     Q_DECLARE_PUBLIC(KBudgetView)
 
 public:
-    explicit KBudgetViewPrivate(KBudgetView *qq)
+    explicit KBudgetViewPrivate(KBudgetView* qq)
         : KMyMoneyViewBasePrivate(qq)
         , ui(new Ui::KBudgetView)
         , m_budgetProxyModel(nullptr)
-        , m_contextMenu(nullptr)
+        , m_budgetContextMenu(nullptr)
+        , m_accountContextMenu(nullptr)
         , m_actionCollection(nullptr)
     {
     }
@@ -97,7 +99,7 @@ public:
 
         // replace the standard proxy model
         m_budgetProxyModel = new BudgetViewProxyModel(q);
-        m_budgetProxyModel->addAccountGroup(AccountsProxyModel::incomeExpense());
+        m_budgetProxyModel->addAccountGroup(AccountsProxyModel::incomeExpense() + AccountsProxyModel::assetLiability());
         ui->m_accountTree->setProxyModel(m_budgetProxyModel);
 
         auto columnSelector = new ColumnSelector(ui->m_accountTree, q->metaObject()->className());
@@ -109,8 +111,10 @@ public:
         columnSelector->setModel(m_budgetProxyModel);
 
         q->connect(m_budgetProxyModel, &BudgetViewProxyModel::balanceChanged, q, &KBudgetView::slotBudgetBalanceChanged);
+        q->connect(MyMoneyFile::instance()->accountsModel(), &QAbstractItemModel::dataChanged, m_budgetProxyModel, &QSortFilterProxyModel::invalidate);
 
         q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestSelectionChange, q, &KBudgetView::slotAccountSelectionChanged );
+        q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestCustomContextMenu, q, &KBudgetView::slotOpenAccountContextMenu);
         q->connect(ui->m_budgetList->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KBudgetView::slotSelectBudget);
         q->connect(ui->m_cbBudgetSubaccounts, &QAbstractButton::clicked, q, &KBudgetView::cb_includesSubaccounts_clicked);
 
@@ -169,9 +173,9 @@ public:
     MyMoneyBudget selectedBudget() const
     {
         MyMoneyBudget budget;
-        auto currentIdx = ui->m_budgetList->selectionModel()->currentIndex();
+        const auto currentIdx = ui->m_budgetList->selectionModel()->currentIndex();
         if (currentIdx.isValid() && !ui->m_budgetList->selectionModel()->selectedIndexes().isEmpty()) {
-            const auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource( currentIdx );
+            const auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(currentIdx);
             budget = MyMoneyFile::instance()->budgetsModel()->itemByIndex(baseIdx);
         }
         return budget;
@@ -213,12 +217,27 @@ public:
         return rc;
     }
 
-    Ui::KBudgetView*                      ui;
-    BudgetViewProxyModel*                 m_budgetProxyModel;
-    MyMoneyBudget                         m_budget;
-    QHash<eMenu::BudgetAction, QAction*>  m_actions;
-    QMenu*                                m_contextMenu;
-    KActionCollection*                    m_actionCollection;
+    void treatAs(eMyMoney::Account::Type type)
+    {
+        const auto currentIdx = ui->m_accountTree->selectionModel()->currentIndex();
+        const auto accountId = currentIdx.data(eMyMoney::Model::IdRole).toString();
+        auto accountGroup = m_budget.account(accountId);
+
+        // we touch the budget only if the entry exists
+        if (accountGroup.id() == accountId) {
+            accountGroup.setBudgetType(type);
+            m_budget.setAccount(accountGroup, accountId);
+            m_budgetProxyModel->setBudget(m_budget);
+        }
+    }
+
+    Ui::KBudgetView* ui;
+    BudgetViewProxyModel* m_budgetProxyModel;
+    MyMoneyBudget m_budget;
+    QHash<eMenu::BudgetAction, QAction*> m_actions;
+    QMenu* m_budgetContextMenu;
+    QMenu* m_accountContextMenu;
+    KActionCollection* m_actionCollection;
 };
 
 #endif

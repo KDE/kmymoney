@@ -20,6 +20,16 @@
 
 Q_GLOBAL_STATIC(QString, nullString)
 
+QString MyMoneyKeyValueContainerPrivate::toString(bool value) const
+{
+    return value ? QLatin1String("yes") : QLatin1String("no");
+}
+
+QString MyMoneyKeyValueContainerPrivate::toString(int value) const
+{
+    return QStringLiteral("%1").arg(value);
+}
+
 MyMoneyKeyValueContainer::MyMoneyKeyValueContainer() :
     d_ptr(new MyMoneyKeyValueContainerPrivate)
 {
@@ -47,15 +57,57 @@ QString MyMoneyKeyValueContainer::value(const QString& key, const QString& defau
     return defaultValue;
 }
 
+bool MyMoneyKeyValueContainer::value(const QString& key, bool defaultValue) const
+{
+    Q_D(const MyMoneyKeyValueContainer);
+    const auto rc = value(key, d->toString(defaultValue)).toLower();
+    return rc == QLatin1String("yes") ? true : false;
+}
+
+int MyMoneyKeyValueContainer::value(const QString& key, int defaultValue) const
+{
+    Q_D(const MyMoneyKeyValueContainer);
+    bool ok;
+    const auto rc = value(key, d->toString(defaultValue)).toInt(&ok, 0);
+    return ok ? rc : defaultValue;
+}
+
 QString MyMoneyKeyValueContainer::value(const QString& key) const
 {
     return value(key, *nullString);
 }
 
-void MyMoneyKeyValueContainer::setValue(const QString& key, const QString& value)
+void MyMoneyKeyValueContainer::setValue(const QString& key, const QString& value, const QString& defaultValue)
 {
     Q_D(MyMoneyKeyValueContainer);
-    d->m_kvp[key] = value;
+
+    QMap<QString, QString>::Iterator it;
+
+    if (value != defaultValue) {
+        d->m_kvp[key] = value;
+    } else {
+        it = d->m_kvp.find(key);
+        if (it != d->m_kvp.end()) {
+            d->m_kvp.erase(it);
+        }
+    }
+}
+
+void MyMoneyKeyValueContainer::setValue(const QString& key, const char* value)
+{
+    setValue(key, QLatin1String(value));
+}
+
+void MyMoneyKeyValueContainer::setValue(const QString& key, bool value, bool defaultValue)
+{
+    Q_D(MyMoneyKeyValueContainer);
+    setValue(key, d->toString(value), d->toString(defaultValue));
+}
+
+void MyMoneyKeyValueContainer::setValue(const QString& key, int value, int defaultValue)
+{
+    Q_D(MyMoneyKeyValueContainer);
+    setValue(key, d->toString(value), d->toString(defaultValue));
 }
 
 QMap<QString, QString> MyMoneyKeyValueContainer::pairs() const

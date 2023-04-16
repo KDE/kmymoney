@@ -17,8 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyobject.h"
 #include "kmm_mymoney_export.h"
+#include "mymoneyenums.h"
+#include "mymoneyobject.h"
 #include "mymoneyunittestable.h"
 
 class QString;
@@ -131,6 +132,9 @@ public:
 
         eMyMoney::Budget::Level budgetLevel() const;
         void setBudgetLevel(eMyMoney::Budget::Level level);
+
+        eMyMoney::Account::Type budgetType() const;
+        void setBudgetType(eMyMoney::Account::Type type);
 
         PeriodGroup period(const QDate& date) const;
         void addPeriod(const QDate& date, PeriodGroup& period);

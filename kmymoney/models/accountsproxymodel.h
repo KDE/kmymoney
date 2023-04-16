@@ -110,10 +110,17 @@ public:
 
     /**
      * This is a convenience method which returns a prefilled vector
-     * to be used with accAccountGroup() for asset, liability and equity
+     * to be used with addAccountGroup() for asset, liability and equity
      * accounts.
      */
     static QVector<eMyMoney::Account::Type> assetLiabilityEquity();
+
+    /**
+     * This is a convenience method which returns a prefilled vector
+     * to be used with addAccountGroup() for asset and liability
+     * accounts.
+     */
+    static QVector<eMyMoney::Account::Type> assetLiability();
 
     /**
      * This is a convenience method which returns a prefilled vector

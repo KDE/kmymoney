@@ -35,9 +35,15 @@ class SelectedObjects;
 
 namespace eMenu {
 enum class BudgetAction {
-    NewBudget, RenameBudget, DeleteBudget,
-    CopyBudget, BudgetForecast,
+    NewBudget,
+    RenameBudget,
+    DeleteBudget,
+    CopyBudget,
+    BudgetForecast,
+    TreatAsIncome,
+    TreatAsExpense,
 };
+
 inline uint qHash(const BudgetAction key, uint seed) {
     return ::qHash(static_cast<uint>(key), seed);
 }
@@ -89,6 +95,11 @@ private Q_SLOTS:
     void slotHideUnused(bool toggled);
 
     void slotAccountSelectionChanged (const SelectedObjects& selections);
+
+    void slotOpenAccountContextMenu(eMenu::Menu type, const QPoint& p);
+
+    void slotTreatAsIncome();
+    void slotTreatAsExpense();
 };
 
 #endif

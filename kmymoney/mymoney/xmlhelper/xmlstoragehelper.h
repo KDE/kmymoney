@@ -132,10 +132,10 @@ enum class Budget {
     BudgetLevel,
     BudgetSubAccounts,
     Amount,
+    BudgetType,
     // insert new entries above this line
     LastAttribute,
 };
-
 }
 
 namespace MyMoneyXmlHelper {

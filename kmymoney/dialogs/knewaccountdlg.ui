@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>670</width>
-    <height>530</height>
+    <height>612</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -130,7 +130,7 @@
            </widget>
           </item>
           <item row="0" column="3">
-           <widget class="KMyMoneyDateEdit" name="m_openingDateEdit" native="true"/>
+           <widget class="KMyMoneyDateEdit" name="m_openingDateEdit"/>
           </item>
           <item row="1" column="2">
            <widget class="QLabel" name="m_openingBalanceLabel">
@@ -228,6 +228,20 @@
               </property>
              </widget>
             </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="m_costCenterRequiredCheckBox">
+              <property name="text">
+               <string>Cost Center assignment required</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="m_qcheckboxPreferred">
+              <property name="text">
+               <string>Preferred Account</string>
+              </property>
+             </widget>
+            </item>
             <item row="0" column="1">
              <layout class="QHBoxLayout">
               <item>
@@ -255,20 +269,6 @@
               </item>
              </layout>
             </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="m_qcheckboxPreferred">
-              <property name="text">
-               <string>Preferred Account</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="m_costCenterRequiredCheckBox">
-              <property name="text">
-               <string>Cost Center assignment required</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="1">
              <widget class="QCheckBox" name="m_qcheckboxOpeningBalance">
               <property name="enabled">
@@ -283,6 +283,34 @@
              </widget>
             </item>
            </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="m_budgetOptionsGroupBox">
+         <property name="title">
+          <string>Budget options</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QComboBox" name="m_budgetInclusion">
+            <item>
+             <property name="text">
+              <string comment="@item:inlistbox Don't include this account in budgets">Don't include in budgets</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string comment="@item:inlistbox Include this account in budgets as expense">Include in budgets as expense</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string comment="@item:inlistbox Include this account in budgets as income">Include in budgets as income</string>
+             </property>
+            </item>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -819,6 +847,11 @@
    <class>KTextEdit</class>
    <extends>QTextEdit</extends>
    <header>ktextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KDateComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kdatecombobox.h</header>
   </customwidget>
   <customwidget>
    <class>AmountEdit</class>

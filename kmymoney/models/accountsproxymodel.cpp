@@ -486,6 +486,11 @@ int AccountsProxyModel::visibleItems(const QModelIndex& index) const
     return rows;
 }
 
+QVector<eMyMoney::Account::Type> AccountsProxyModel::assetLiability()
+{
+    return QVector<eMyMoney::Account::Type>({eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability});
+}
+
 QVector<eMyMoney::Account::Type> AccountsProxyModel::assetLiabilityEquity()
 {
     return QVector<eMyMoney::Account::Type>({ eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity });
