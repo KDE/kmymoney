@@ -25,8 +25,12 @@
 struct BudgetsModel::Private
 {
     Private()
+        : fiscalYearStartMonth(1)
+        , fiscalYearStartDay(1)
     {}
 
+    int fiscalYearStartMonth;
+    int fiscalYearStartDay;
 };
 
 BudgetsModel::BudgetsModel(QObject* parent, QUndoStack* undoStack)
@@ -129,10 +133,9 @@ bool BudgetsModel::setData(const QModelIndex& index, const QVariant& value, int 
 
         case Columns::Year:
         {
-            /// @todo fix when supporting budget for any fiscal year boundary
-            QDate date(value.toInt(), 1, 1);
+            QDate date(value.toInt(), d->fiscalYearStartMonth, d->fiscalYearStartDay);
             if (date.isValid()) {
-                budget.setBudgetStart(QDate(value.toInt(), 1, 1));
+                budget.setBudgetStart(QDate(value.toInt(), d->fiscalYearStartMonth, d->fiscalYearStartDay));
             } else {
                 return false;
             }
@@ -160,3 +163,8 @@ bool BudgetsModel::setData(const QModelIndex& index, const QVariant& value, int 
     return true;
 }
 
+void BudgetsModel::setFiscalYearStart(int month, int day)
+{
+    d->fiscalYearStartDay = day;
+    d->fiscalYearStartMonth = month;
+}

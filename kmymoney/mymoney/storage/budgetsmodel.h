@@ -39,6 +39,8 @@ public:
 
     static const int ID_SIZE = 6;
 
+    void setFiscalYearStart(int month, int day);
+
     int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;

@@ -29,6 +29,19 @@ using namespace Icons;
 KBudgetView::KBudgetView(QWidget* parent)
     : KMyMoneyViewBase(*new KBudgetViewPrivate(this), parent)
 {
+    connect(MyMoneyFile::instance()->budgetsModel(), &QAbstractItemModel::dataChanged, this, [&](const QModelIndex& topLeft, const QModelIndex& bottomRight) {
+        Q_UNUSED(bottomRight)
+        Q_D(KBudgetView);
+        // only process if full initialized
+        if (d->m_budgetProxyModel) {
+            if (d->ui->m_budgetList->currentIndex().row() == topLeft.row()) {
+                const auto yearIdx = topLeft.model()->index(topLeft.row(), BudgetsModel::Columns::Year, topLeft.parent());
+                if (d->ui->m_budgetValue->budgetStartDate().year() != yearIdx.data().toInt()) {
+                    slotResetBudget();
+                }
+            }
+        }
+    });
 }
 
 KBudgetView::~KBudgetView()
@@ -41,6 +54,7 @@ void KBudgetView::slotSettingsChanged()
     if (d->m_budgetProxyModel) {
         d->m_budgetProxyModel->setColorScheme(AccountsModel::Positive, KMyMoneySettings::schemeColor(SchemeColor::Positive));
         d->m_budgetProxyModel->setColorScheme(AccountsModel::Negative, KMyMoneySettings::schemeColor(SchemeColor::Negative));
+        d->ui->m_budgetValue->setBudgetStartDate(QDate(QDate::currentDate().year(), KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay()));
     }
 }
 
@@ -49,6 +63,7 @@ void KBudgetView::showEvent(QShowEvent * event)
     Q_D(KBudgetView);
     if (!d->m_budgetProxyModel) {
         d->init();
+        slotSettingsChanged();
 
         connect(d->ui->m_budgetList, &QTableView::customContextMenuRequested, this, [&](const QPoint&) {
             Q_D(KBudgetView);
@@ -94,6 +109,7 @@ void KBudgetView::slotNewBudget()
         ft.commit();
         // select the newly created budget
         d->ui->m_budgetList->setCurrentIndex(MyMoneyFile::instance()->budgetsModel()->indexById(budget.id()));
+        d->ui->m_budgetValue->setBudgetStartDate(date);
     } catch (const MyMoneyException &e) {
         KMessageBox::detailedError(this, i18n("Unable to add budget"), QString::fromLatin1(e.what()));
     }
@@ -235,7 +251,8 @@ void KBudgetView::slotUpdateBudget()
 void KBudgetView::slotStartRename()
 {
     Q_D(KBudgetView);
-    if (d->ui->m_budgetList->selectionModel()->selectedIndexes().count() == 2) {
+    // check that a single row is selected (all columns)
+    if (d->ui->m_budgetList->selectionModel()->selectedIndexes().count() == d->ui->m_budgetList->model()->columnCount()) {
         auto row = d->ui->m_budgetList->selectionModel()->selectedIndexes().first().row();
         auto idx = d->ui->m_budgetList->model()->index(row, 0);
         d->ui->m_budgetList->setCurrentIndex(idx);

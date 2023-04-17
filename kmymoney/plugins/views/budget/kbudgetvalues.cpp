@@ -64,12 +64,16 @@ public:
         }
     }
 
-    void fillMonthLabels()
+    void fillMonthLabels(QWidget* tab)
     {
         QDate date(m_budgetDate);
         for (auto i = 0; i < 12; ++i) {
             m_label[i]->setText(QLocale().standaloneMonthName(date.month(), QLocale::ShortFormat));
             date = date.addMonths(1);
+        }
+        // for monthly and yearly entries we remove the label of the first field
+        if (tab != ui->m_individualButton) {
+            m_label[0]->setText(" ");
         }
     }
 
@@ -87,7 +91,7 @@ KBudgetValues::KBudgetValues(QWidget* parent) :
     Q_D(KBudgetValues);
     d->ui->setupUi(this);
     d->m_currentTab = d->ui->m_monthlyButton;
-    d->m_budgetDate = QDate(2007, KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
+    d->m_budgetDate = QDate(QDate::currentDate().year(), KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
 
     d->m_field[0] = d->ui->m_amount1;
     d->m_field[1] = d->ui->m_amount2;
@@ -215,13 +219,12 @@ void KBudgetValues::slotChangePeriod(int id)
     inside = true;
 
     QWidget *tab = d->ui->m_periodGroup->button(id);
-    d->fillMonthLabels();
+    d->fillMonthLabels(tab);
 
     MyMoneyMoney newValue;
     if (tab == d->ui->m_monthlyButton) {
         d->ui->m_firstItemStack->setCurrentIndex(d->ui->m_firstItemStack->indexOf(d->ui->m_monthlyPage));
         d->enableMonths(false);
-        d->m_label[0]->setText(" ");
         if (d->ui->m_amountMonthly->value().isZero()) {
             if (d->m_currentTab == d->ui->m_yearlyButton) {
                 newValue = (d->ui->m_amountYearly->value() / MyMoneyMoney(12, 1)).convert();
@@ -251,7 +254,6 @@ void KBudgetValues::slotChangePeriod(int id)
     } else if (tab == d->ui->m_yearlyButton) {
         d->ui->m_firstItemStack->setCurrentIndex(d->ui->m_firstItemStack->indexOf(d->ui->m_yearlyPage));
         d->enableMonths(false);
-        d->m_label[0]->setText(" ");
         if (d->ui->m_amountYearly->value().isZero()) {
             if (d->m_currentTab == d->ui->m_monthlyButton) {
                 newValue = (d->ui->m_amountMonthly->value() * MyMoneyMoney(12, 1)).convert();
@@ -402,4 +404,17 @@ void KBudgetValues::slotUpdateClearButton()
         }
     }
     d->ui->m_clearButton->setEnabled(rc);
+}
+
+void KBudgetValues::setBudgetStartDate(const QDate& date)
+{
+    Q_D(KBudgetValues);
+    d->m_budgetDate = date;
+    d->fillMonthLabels(d->m_currentTab);
+}
+
+QDate KBudgetValues::budgetStartDate() const
+{
+    Q_D(const KBudgetValues);
+    return d->m_budgetDate;
 }

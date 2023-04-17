@@ -84,6 +84,7 @@
 // Project Includes
 
 #include "accountsmodel.h"
+#include "budgetsmodel.h"
 #include "dialogs/editpersonaldatadlg.h"
 #include "dialogs/kbackupdlg.h"
 #include "dialogs/kbalancewarning.h"
@@ -3469,6 +3470,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
     ledgerViewSettings->setHideTransactionsBefore(KMyMoneySettings::startDate().date());
 
     MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
+    MyMoneyFile::instance()->budgetsModel()->setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
     MyMoneyReport::setLineWidth(KMyMoneySettings::lineWidth());
 
     const auto showHeaders = KMyMoneySettings::showFancyMarker();

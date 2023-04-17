@@ -1277,14 +1277,12 @@ public:
                            ));
             list.back().setBudget("Any", true);
 
-            list.push_back(MyMoneyReport(
-                               eMyMoney::Report::RowType::BudgetActual,
-                               static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
-                               TransactionFilter::Date::CurrentYear,
-                               eMyMoney::Report::DetailLevel::All,
-                               i18n("Yearly Budgeted vs. Actual"),
-                               i18n("Default Report")
-                           ));
+            list.push_back(MyMoneyReport(eMyMoney::Report::RowType::BudgetActual,
+                                         static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
+                                         TransactionFilter::Date::CurrentFiscalYear,
+                                         eMyMoney::Report::DetailLevel::All,
+                                         i18n("Yearly Budgeted vs. Actual"),
+                                         i18n("Default Report")));
             list.back().setBudget("Any", true);
             list.back().setShowingRowTotals(true);
 
@@ -1298,24 +1296,20 @@ public:
                            ));
             list.back().setBudget("Any", false);
 
-            list.push_back(MyMoneyReport(
-                               eMyMoney::Report::RowType::Budget,
-                               static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
-                               TransactionFilter::Date::CurrentYear,
-                               eMyMoney::Report::DetailLevel::All,
-                               i18n("Yearly Budget"),
-                               i18n("Default Report")
-                           ));
+            list.push_back(MyMoneyReport(eMyMoney::Report::RowType::Budget,
+                                         static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
+                                         TransactionFilter::Date::CurrentFiscalYear,
+                                         eMyMoney::Report::DetailLevel::All,
+                                         i18n("Yearly Budget"),
+                                         i18n("Default Report")));
             list.back().setBudget("Any", false);
             list.back().setShowingRowTotals(true);
-            list.push_back(MyMoneyReport(
-                               eMyMoney::Report::RowType::BudgetActual,
-                               static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
-                               TransactionFilter::Date::CurrentYear,
-                               eMyMoney::Report::DetailLevel::Group,
-                               i18n("Yearly Budgeted vs Actual Graph"),
-                               i18n("Default Report")
-                           ));
+            list.push_back(MyMoneyReport(eMyMoney::Report::RowType::BudgetActual,
+                                         static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
+                                         TransactionFilter::Date::CurrentFiscalYear,
+                                         eMyMoney::Report::DetailLevel::Group,
+                                         i18n("Yearly Budgeted vs Actual Graph"),
+                                         i18n("Default Report")));
             list.back().setChartByDefault(true);
             list.back().setChartCHGridLines(false);
             list.back().setChartSVGridLines(false);

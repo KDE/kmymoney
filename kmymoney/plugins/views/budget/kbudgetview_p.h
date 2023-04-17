@@ -168,6 +168,7 @@ public:
         ui->m_updateButton->setEnabled(!(selectedBudget() == m_budget));
         ui->m_resetButton->setEnabled(!(selectedBudget() == m_budget));
         m_budgetProxyModel->setBudget(m_budget);
+        ui->m_budgetValue->setBudgetStartDate(m_budget.budgetStart());
     }
 
     MyMoneyBudget selectedBudget() const

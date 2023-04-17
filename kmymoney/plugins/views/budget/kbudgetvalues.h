@@ -34,6 +34,9 @@ public:
     explicit KBudgetValues(QWidget* parent = nullptr);
     ~KBudgetValues();
 
+    void setBudgetStartDate(const QDate& date);
+    QDate budgetStartDate() const;
+
     void setBudgetValues(const MyMoneyBudget& budget, const MyMoneyBudget::AccountGroup& budgetAccount);
     void budgetValues(const MyMoneyBudget& budget, MyMoneyBudget::AccountGroup& budgetAccount);
     void clear();
