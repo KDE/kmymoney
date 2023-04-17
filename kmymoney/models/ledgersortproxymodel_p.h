@@ -31,6 +31,7 @@ public:
         , sortEnabled(false)
         , sortPending(false)
         , sortPostponed(false)
+        , sorting(false)
     {
     }
 
@@ -114,6 +115,11 @@ public:
      * a sort is still pending.
      */
     bool sortPostponed;
+
+    /**
+     * The sorting currently happens when this is set to @c true.
+     */
+    bool sorting;
 };
 
 #endif // LEDGERSORTPROXYMODEL_P_H

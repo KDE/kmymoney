@@ -282,6 +282,13 @@ void LedgerSortProxyModel::setSortingEnabled(bool enable)
         }
     }
 }
+
+bool LedgerSortProxyModel::inSorting() const
+{
+    Q_D(const LedgerSortProxyModel);
+    return d->sorting;
+}
+
 void LedgerSortProxyModel::sort(int column, Qt::SortOrder order)
 {
     Q_UNUSED(column)
@@ -293,7 +300,9 @@ void LedgerSortProxyModel::sort(int column, Qt::SortOrder order)
         if (d->sortEnabled) {
             // LedgerSortProxyModel::lessThan takes care of the sort
             // order and is based on a general ascending order
+            d->sorting = true;
             QSortFilterProxyModel::sort(0, Qt::AscendingOrder);
+            d->sorting = false;
             d->sortPending = false;
         } else {
             d->sortPending = true;

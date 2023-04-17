@@ -280,6 +280,17 @@ public:
                 }
             }
 
+            // in case the source model is not sorting, we
+            // can assume that the item is visible. Once it
+            // is sorted, it is early enough to perform the
+            // other checks for reconciliation entries.
+            // Not suppressing this this on an unsorted model
+            // may cause a hug performance penalty (looks like
+            // the application hung up in certain scenarios)
+            if (!sourceModel->inSorting()) {
+                return true;
+            }
+
             // make sure we only show reconciliation entries that are not followed by
             // another reconciliation entry. Only inspect visible items
             int row = idx.row() + 1;
@@ -426,7 +437,10 @@ void SpecialLedgerItemFilter::setShowReconciliationEntries(LedgerViewSettings::R
 
     if (d->showReconciliationEntries != show) {
         d->showReconciliationEntries = show;
-        invalidateFilter();
+        // sort afresh in case some reconciliation entries
+        // were added as part of the change of 'show'.
+        // doSort() inherits a call to invalidateFilter().
+        doSort();
     }
 }
 

@@ -43,6 +43,8 @@ public:
      */
     void sortOnIdle();
 
+    bool inSorting() const;
+
     /**
      * This method changes the global filter for
      * all instances of LedgerSortProxyModel and derived objects to
