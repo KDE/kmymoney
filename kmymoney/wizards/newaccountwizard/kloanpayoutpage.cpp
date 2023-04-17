@@ -143,7 +143,7 @@ QWidget* LoanPayoutPage::initialFocusWidget() const
 bool LoanPayoutPage::isComplete() const
 {
     Q_D(const LoanPayoutPage);
-    return KMyMoneyWizardPage::isComplete() | d->ui->m_noPayoutTransaction->isChecked();
+    return KMyMoneyWizardPage::isComplete() || d->ui->m_noPayoutTransaction->isChecked();
 }
 
 QString LoanPayoutPage::payoutAccountId() const
