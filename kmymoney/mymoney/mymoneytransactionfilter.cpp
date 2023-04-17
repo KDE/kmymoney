@@ -177,7 +177,7 @@ void MyMoneyTransactionFilter::addCategory(const QString& id)
 void MyMoneyTransactionFilter::setDateFilter(const QDate& from, const QDate& to)
 {
     Q_D(MyMoneyTransactionFilter);
-    d->m_filterSet.setFlag(dateFilterActive, from.isValid() | to.isValid());
+    d->m_filterSet.setFlag(dateFilterActive, from.isValid() || to.isValid());
     d->m_fromDate = from;
     d->m_toDate = to;
 }
