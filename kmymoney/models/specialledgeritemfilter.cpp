@@ -331,9 +331,9 @@ SpecialLedgerItemFilter::SpecialLedgerItemFilter(QObject* parent)
     Q_D(SpecialLedgerItemFilter);
     setObjectName("SpecialLedgerItemFilter");
     connect(&d->updateDelayTimer, &QTimer::timeout, this, [&]() {
-        Q_D(SpecialLedgerItemFilter);
-        d->sourceModel->invalidate();
-        d->recalculateBalances();
+        // sort afresh in case some rows need to be resorted
+        // doSort() inherits a call to invalidateFilter().
+        doSort();
     });
 
     connect(MyMoneyFile::instance()->journalModel(), &JournalModel::balanceChanged, this, [&](const QString& accountId) {
@@ -431,16 +431,22 @@ void SpecialLedgerItemFilter::setSortingEnabled(bool enable)
     }
 }
 
+void SpecialLedgerItemFilter::setHideReconciledTransactions(bool hide)
+{
+    Q_D(SpecialLedgerItemFilter);
+    if (d->hideReconciledTransactions != hide) {
+        d->hideReconciledTransactions = hide;
+        forceReload();
+    }
+}
+
 void SpecialLedgerItemFilter::setShowReconciliationEntries(LedgerViewSettings::ReconciliationHeader show)
 {
     Q_D(SpecialLedgerItemFilter);
 
     if (d->showReconciliationEntries != show) {
         d->showReconciliationEntries = show;
-        // sort afresh in case some reconciliation entries
-        // were added as part of the change of 'show'.
-        // doSort() inherits a call to invalidateFilter().
-        doSort();
+        forceReload();
     }
 }
 

@@ -69,6 +69,11 @@ public:
     void setShowReconciliationEntries(LedgerViewSettings::ReconciliationHeader show);
 
     /**
+     * Make sure to suppress multiple reconciliation headers following each other
+     */
+    void setHideReconciledTransactions(bool hide);
+
+    /**
      * Setup how the balance display shall be filtered. In @a FilterBalanceNormal mode
      * balances will be filtered if any filter is active or the transactions are
      * not sorted by date. In @a FilterBalanceReconciliation mode balances

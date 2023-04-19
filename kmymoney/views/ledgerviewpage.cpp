@@ -121,10 +121,11 @@ void LedgerViewPage::initModel()
     d->ui->m_ledgerView->setModel(d->specialItemFilter);
 
     connect(viewSettings, &LedgerViewSettings::settingsChanged, this, [&]() {
-        viewSettings = LedgerViewSettings::instance();
-        d->accountFilter->setHideReconciledTransactions(viewSettings->hideReconciledTransactions());
-        d->accountFilter->setHideTransactionsBefore(viewSettings->hideTransactionsBefore());
-        d->specialItemFilter->setShowReconciliationEntries(viewSettings->showReconciliationEntries());
+        const auto settings = LedgerViewSettings::instance();
+        d->accountFilter->setHideReconciledTransactions(settings->hideReconciledTransactions());
+        d->accountFilter->setHideTransactionsBefore(settings->hideTransactionsBefore());
+        d->specialItemFilter->setHideReconciledTransactions(settings->hideReconciledTransactions());
+        d->specialItemFilter->setShowReconciliationEntries(settings->showReconciliationEntries());
 
         // make sure sorting is updated
         const auto acc = MyMoneyFile::instance()->accountsModel()->itemById(d->accountId);
