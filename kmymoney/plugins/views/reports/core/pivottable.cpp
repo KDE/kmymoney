@@ -1032,6 +1032,8 @@ void PivotTable::convertToBaseCurrency()
     MyMoneyFile* file = MyMoneyFile::instance();
     int fraction = file->baseCurrency().smallestAccountFraction();
     QList<ERowType> rowTypeList = m_rowTypeList;
+    QMap<QString, MyMoneySecurity> securityCache;
+
     rowTypeList.removeOne(eAverage);
 
     PivotGrid::iterator it_outergroup = m_grid.begin();
@@ -1050,9 +1052,13 @@ void PivotTable::convertToBaseCurrency()
                     //get base price for that date
                     MyMoneyMoney conversionfactor = it_row.key().baseCurrencyPrice(valuedate, m_config.isSkippingZero());
                     int pricePrecision;
-                    if (it_row.key().isInvest())
-                        pricePrecision = file->security(it_row.key().currencyId()).pricePrecision();
-                    else
+                    if (it_row.key().isInvest()) {
+                        const auto currencyId = it_row.key().currencyId();
+                        if (!securityCache.contains(currencyId)) {
+                            securityCache[currencyId] = file->security(it_row.key().currencyId());
+                        }
+                        pricePrecision = securityCache[currencyId].pricePrecision();
+                    } else
                         pricePrecision = MyMoneyMoney::denomToPrec(fraction);
 
                     Q_FOREACH (const auto rowType, rowTypeList) {

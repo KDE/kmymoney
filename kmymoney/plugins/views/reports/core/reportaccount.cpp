@@ -34,31 +34,43 @@ namespace reports
 {
 
 ReportAccount::ReportAccount()
+    : m_securityCache(new QMap<QString, MyMoneySecurity>)
 {
 }
 
-ReportAccount::ReportAccount(const ReportAccount& copy):
-    MyMoneyAccount(copy), m_nameHierarchy(copy.m_nameHierarchy)
+ReportAccount::ReportAccount(const ReportAccount& copy)
+    : MyMoneyAccount(copy)
+    , m_nameHierarchy(copy.m_nameHierarchy)
+    , m_tradingCurrencyId(copy.m_tradingCurrencyId)
+    , m_deepcurrency(copy.m_deepcurrency)
+    , m_securityCache(new QMap<QString, MyMoneySecurity>(*copy.m_securityCache))
 {
     // NOTE: I implemented the copy constructor solely for debugging reasons
 
     DEBUG_ENTER(Q_FUNC_INFO);
 }
 
-ReportAccount::ReportAccount(const QString& accountid):
-    MyMoneyAccount(MyMoneyFile::instance()->account(accountid))
+ReportAccount::ReportAccount(const QString& accountid)
+    : MyMoneyAccount(MyMoneyFile::instance()->account(accountid))
+    , m_securityCache(new QMap<QString, MyMoneySecurity>)
 {
     DEBUG_ENTER(Q_FUNC_INFO);
     DEBUG_OUTPUT(QString("Account %1").arg(accountid));
     calculateAccountHierarchy();
 }
 
-ReportAccount::ReportAccount(const MyMoneyAccount& account):
-    MyMoneyAccount(account)
+ReportAccount::ReportAccount(const MyMoneyAccount& account)
+    : MyMoneyAccount(account)
+    , m_securityCache(new QMap<QString, MyMoneySecurity>)
 {
     DEBUG_ENTER(Q_FUNC_INFO);
     DEBUG_OUTPUT(QString("Account %1").arg(account.id()));
     calculateAccountHierarchy();
+}
+
+ReportAccount::~ReportAccount() noexcept
+{
+    delete m_securityCache;
 }
 
 void ReportAccount::calculateAccountHierarchy()
@@ -86,6 +98,13 @@ void ReportAccount::calculateAccountHierarchy()
         m_nameHierarchy.prepend(file->account(resultid).name());
 #endif
     }
+    m_tradingCurrencyId = tradingCurrencyId();
+
+    // First, get the deep currency
+    m_deepcurrency = file->security(currencyId());
+    if (!m_deepcurrency.isCurrency()) {
+        m_deepcurrency = file->security(m_deepcurrency.tradingCurrency());
+    }
 }
 
 MyMoneyMoney ReportAccount::deepCurrencyPrice(const QDate& date, bool exactDate) const
@@ -95,7 +114,11 @@ MyMoneyMoney ReportAccount::deepCurrencyPrice(const QDate& date, bool exactDate)
     MyMoneyMoney result(1, 1);
     MyMoneyFile* file = MyMoneyFile::instance();
 
-    MyMoneySecurity undersecurity = file->security(currencyId());
+    if (!m_securityCache->contains(currencyId())) {
+        m_securityCache->insert(currencyId(), file->security(currencyId()));
+    }
+
+    MyMoneySecurity undersecurity(m_securityCache->find(currencyId()).value());
     if (! undersecurity.isCurrency()) {
         const MyMoneyPrice &price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), date, exactDate);
         if (price.isValid()) {
@@ -116,6 +139,11 @@ MyMoneyMoney ReportAccount::deepCurrencyPrice(const QDate& date, bool exactDate)
     }
 
     return result;
+}
+
+bool ReportAccount::isForeignCurrency() const
+{
+    return (m_tradingCurrencyId != MyMoneyFile::instance()->baseCurrency().id());
 }
 
 MyMoneyMoney ReportAccount::baseCurrencyPrice(const QDate& date, bool exactDate) const
@@ -188,15 +216,16 @@ MyMoneyMoney ReportAccount::foreignCurrencyPrice(const QString foreignCurrency, 
   */
 MyMoneySecurity ReportAccount::currency() const
 {
-    MyMoneyFile* file = MyMoneyFile::instance();
+    return m_deepcurrency;
+}
 
-    // First, get the deep currency
-    MyMoneySecurity deepcurrency = file->security(currencyId());
-    if (! deepcurrency.isCurrency())
-        deepcurrency = file->security(deepcurrency.tradingCurrency());
-
-    // Return the deep currency's ID
-    return deepcurrency;
+ReportAccount& ReportAccount::operator=(const ReportAccount& right)
+{
+    m_nameHierarchy = right.m_nameHierarchy;
+    m_tradingCurrencyId = right.m_tradingCurrencyId;
+    m_deepcurrency = right.m_deepcurrency;
+    *m_securityCache = *right.m_securityCache;
+    return *this;
 }
 
 bool ReportAccount::operator<(const ReportAccount& second) const

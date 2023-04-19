@@ -10,6 +10,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QMap>
 #include <QStringList>
 
 // ----------------------------------------------------------------------------
@@ -18,6 +19,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "mymoneyaccount.h"
+#include "mymoneysecurity.h"
 
 namespace reports
 {
@@ -44,6 +46,9 @@ class ReportAccount: public MyMoneyAccount
 {
 private:
     QStringList m_nameHierarchy;
+    QString m_tradingCurrencyId;
+    MyMoneySecurity m_deepcurrency;
+    QMap<QString, MyMoneySecurity>* m_securityCache;
 
 public:
     /**
@@ -74,7 +79,7 @@ public:
       */
     explicit ReportAccount(const MyMoneyAccount& accountid);
 
-    ~ReportAccount() = default;
+    virtual ~ReportAccount() noexcept;
 
     /**
       * @param right The object to compare against
@@ -83,7 +88,7 @@ public:
       */
     bool operator<(const ReportAccount& right) const;
 
-    ReportAccount& operator=(const ReportAccount& right) = default;
+    ReportAccount& operator=(const ReportAccount& right);
 
     /**
       * Returns the price of this account's underlying currency on the indicated date,
@@ -139,6 +144,11 @@ public:
       * @return  The account's currency trading currency object
       */
     MyMoneySecurity currency() const;
+
+    /**
+     * Overrides base class to support caching
+     */
+    bool isForeignCurrency() const;
 
     /**
       * The name of only this account.  No matter how deep the hierarchy, this

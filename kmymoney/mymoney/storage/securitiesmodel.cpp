@@ -102,7 +102,6 @@ QVariant SecuritiesModel::data(const QModelIndex& index, int role) const
         return QVariant();
 
     const MyMoneySecurity& security = static_cast<TreeItem<MyMoneySecurity>*>(index.internalPointer())->constDataRef();
-    MyMoneySecurity tradingCurrency;
     switch(role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
