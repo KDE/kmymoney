@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-18 00:48+0000\n"
-"PO-Revision-Date: 2023-04-06 10:42+0100\n"
+"PO-Revision-Date: 2023-04-18 09:32+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
 "Language: pt\n"
@@ -2637,22 +2637,21 @@ msgstr "Opções do orçamento"
 #, kde-format
 msgctxt "@item:inlistbox Don't include this account in budgets"
 msgid "Don't include in budgets"
-msgstr ""
+msgstr "Não incluir nos orçamentos"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
 #: kmymoney/dialogs/knewaccountdlg.ui:305
 #, kde-format
 msgctxt "@item:inlistbox Include this account in budgets as expense"
 msgid "Include in budgets as expense"
-msgstr ""
+msgstr "Incluir nos orçamentos como despesa"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
 #: kmymoney/dialogs/knewaccountdlg.ui:310
-#, fuzzy, kde-format
-#| msgid "Include the payee details in memo"
+#, kde-format
 msgctxt "@item:inlistbox Include this account in budgets as income"
 msgid "Include in budgets as income"
-msgstr "Incluir os detalhes do beneficiário no memo"
+msgstr "Incluir nos orçamentos como receita"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_3)
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
@@ -14948,47 +14947,41 @@ msgid "Budget based on forecast"
 msgstr "Orçamento com base na previsão"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:456
-#, fuzzy, kde-format
-#| msgctxt "@title:window Confirmation dialog"
-#| msgid "Change transaction"
+#, kde-format
 msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
-msgstr "Modificar a transacção"
+msgstr "Mudar para receita"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:461
-#, fuzzy, kde-format
-#| msgctxt "Category name"
-#| msgid "Miscellaneous expense"
+#, kde-format
 msgctxt "@item:inmenu To make it expense"
 msgid "Change to expense"
-msgstr "Despesa diversa"
+msgstr "Mudar para despesa"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:490
-#, fuzzy, kde-format
-#| msgid "Budget options"
+#, kde-format
 msgctxt "@title:menu Budget context menu"
 msgid "Budget options"
 msgstr "Opções do orçamento"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:501
-#, fuzzy, kde-format
-#| msgid "Account options"
+#, kde-format
 msgctxt "@title:menu Budget account context menu"
 msgid "Account options"
 msgstr "Opções da conta"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:544
-#, fuzzy, kde-format
-#| msgid "Select the currency in which this account is denominated."
+#, kde-format
 msgctxt "@info:tooltip Budget assignment"
 msgid "Select how the budget of this account shall be treated."
-msgstr "Seleccione a moeda na qual esta conta será denominada."
+msgstr "Seleccione como será tratado o orçamento desta conta."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:548
 #, kde-format
 msgctxt "@info:tooltip Budget assignment"
 msgid "This option is only available when a budget value is assigned."
 msgstr ""
+"Esta opção só está disponível quando está atribuído um valor ao orçamento."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:39
@@ -25293,13 +25286,3 @@ msgstr ""
 "\n"
 "<p>Todas as informações são opcionais e são oferecidas apenas para "
 "personalizar o seu ficheiro KMyMoney.</p>"
-
-#~ msgctxt "@title:menu budget context menu"
-#~ msgid "Budget options"
-#~ msgstr "Opções do orçamento"
-
-#~ msgid "KMyMoney print check"
-#~ msgstr "Impressão de cheque do KMyMoney"
-
-#~ msgid "Copyright 2009"
-#~ msgstr "Copyright 2009"

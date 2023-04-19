@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-18 00:48+0000\n"
-"PO-Revision-Date: 2023-04-08 08:02+0200\n"
+"PO-Revision-Date: 2023-04-18 20:42+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.2.2\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2554,22 +2554,21 @@ msgstr "Možnosti proračuna"
 #, kde-format
 msgctxt "@item:inlistbox Don't include this account in budgets"
 msgid "Don't include in budgets"
-msgstr ""
+msgstr "Ne vključuj v proračune"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
 #: kmymoney/dialogs/knewaccountdlg.ui:305
 #, kde-format
 msgctxt "@item:inlistbox Include this account in budgets as expense"
 msgid "Include in budgets as expense"
-msgstr ""
+msgstr "Vključuj v proračune kot strošek"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
 #: kmymoney/dialogs/knewaccountdlg.ui:310
-#, fuzzy, kde-format
-#| msgid "Include the payee details in memo"
+#, kde-format
 msgctxt "@item:inlistbox Include this account in budgets as income"
 msgid "Include in budgets as income"
-msgstr "Vključi podrobnosti o plačniku med opombe"
+msgstr "Vključuj v proračune kot dohodek"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_3)
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
@@ -14806,47 +14805,40 @@ msgid "Budget based on forecast"
 msgstr "Proračun na podlagi napovedi"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:456
-#, fuzzy, kde-format
-#| msgctxt "@title:window Confirmation dialog"
-#| msgid "Change transaction"
+#, kde-format
 msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
-msgstr "Spremeni transakcijo"
+msgstr "Spremeni v dohodek"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:461
-#, fuzzy, kde-format
-#| msgctxt "Category name"
-#| msgid "Miscellaneous expense"
+#, kde-format
 msgctxt "@item:inmenu To make it expense"
 msgid "Change to expense"
-msgstr "Drugi izdatki"
+msgstr "Spremeni v izdatek"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:490
-#, fuzzy, kde-format
-#| msgid "Budget options"
+#, kde-format
 msgctxt "@title:menu Budget context menu"
 msgid "Budget options"
 msgstr "Možnosti proračuna"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:501
-#, fuzzy, kde-format
-#| msgid "Account options"
+#, kde-format
 msgctxt "@title:menu Budget account context menu"
 msgid "Account options"
 msgstr "Možnosti računa"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:544
-#, fuzzy, kde-format
-#| msgid "Select the currency in which this account is denominated."
+#, kde-format
 msgctxt "@info:tooltip Budget assignment"
 msgid "Select how the budget of this account shall be treated."
-msgstr "Izberite valuto, v kateri je denominiran ta račun."
+msgstr "Izberite kako naj bo obravnavan proračun tega računa."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:548
 #, kde-format
 msgctxt "@info:tooltip Budget assignment"
 msgid "This option is only available when a budget value is assigned."
-msgstr ""
+msgstr "Ta možnost je na voljo samo, kadar je dodeljena vrednost proračuna."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:39
