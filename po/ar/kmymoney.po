@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-18 00:48+0000\n"
+"POT-Creation-Date: 2023-04-20 00:49+0000\n"
 "PO-Revision-Date: 2022-01-04 22:18+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -15258,12 +15258,12 @@ msgstr "المتوسّط"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:298
 #: kmymoney/plugins/views/reports/core/listtable.cpp:299
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1402
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1543
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1595
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1671
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1858
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1929
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1408
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1549
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1601
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1677
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1864
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1935
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -15520,8 +15520,8 @@ msgstr "الرّصيد الختاميّ"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:302
 #: kmymoney/plugins/views/reports/core/listtable.cpp:303
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1619
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1967
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1625
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1973
 #, kde-format
 msgid "Grand Total"
 msgstr "المجموع الكلي"
@@ -15845,38 +15845,38 @@ msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "يفتح %1"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1388
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1659
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1394
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1665
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "الحساب"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2168
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2174
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "الفعلي"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2173
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2179
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "الموازنة"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2178
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2184
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "الفرق"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2183
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2189
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "التّنبّؤ"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2188
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2194
 #, fuzzy, kde-format
 #| msgctxt "Average balance"
 #| msgid "Average"
@@ -15884,7 +15884,7 @@ msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "المتوسّط"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2193
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2199
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
@@ -15892,7 +15892,7 @@ msgstr ""
 
 # غالبا سنواجه خطأ ما بسبب كثرة استخدامه في كل مكان
 # قد نحتاج سياقا
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2198
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2204
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@title:column report header"

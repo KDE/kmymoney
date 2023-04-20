@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-18 00:48+0000\n"
-"PO-Revision-Date: 2023-04-07 04:59+0200\n"
+"POT-Creation-Date: 2023-04-20 00:49+0000\n"
+"PO-Revision-Date: 2023-04-19 06:08+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2368,7 +2368,7 @@ msgstr "საწყისი ბალანსის ანგარიში"
 #: kmymoney/plugins/views/budget/budgetview.rc:4
 #, kde-format
 msgid "Budget options"
-msgstr ""
+msgstr "ბიუჯეტის მორგება"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
 #: kmymoney/dialogs/knewaccountdlg.ui:300
@@ -5541,7 +5541,7 @@ msgstr "ხელსაწყოები"
 #: kmymoney/kmymoneyui.rc:125 kmymoney/plugins/views/budget/budgetview.rc:12
 #, kde-format
 msgid "Account options"
-msgstr ""
+msgstr "ანგარიშის პარამეტრები"
 
 #. i18n: ectx: Menu (category_context_menu)
 #: kmymoney/kmymoneyui.rc:149
@@ -14102,25 +14102,22 @@ msgid "Change to income"
 msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:461
-#, fuzzy, kde-format
-#| msgid "language to be used"
+#, kde-format
 msgctxt "@item:inmenu To make it expense"
 msgid "Change to expense"
-msgstr "ენის გამოყენება"
+msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:490
-#, fuzzy, kde-format
-#| msgid "Tag options"
+#, kde-format
 msgctxt "@title:menu Budget context menu"
 msgid "Budget options"
-msgstr "ჭდის მორგება"
+msgstr "ბიუჯეტის მორგება"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:501
-#, fuzzy, kde-format
-#| msgid "Account Information"
+#, kde-format
 msgctxt "@title:menu Budget account context menu"
 msgid "Account options"
-msgstr "ანგარიშის ინფორმაცია"
+msgstr "ანგარიშის პარამეტრები"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:544
 #, kde-format
@@ -14616,12 +14613,12 @@ msgstr "საშუალო"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:298
 #: kmymoney/plugins/views/reports/core/listtable.cpp:299
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1402
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1543
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1595
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1671
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1858
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1929
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1408
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1549
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1601
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1677
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1864
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1935
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -14862,8 +14859,8 @@ msgstr ""
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:302
 #: kmymoney/plugins/views/reports/core/listtable.cpp:303
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1619
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1967
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1625
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1973
 #, kde-format
 msgid "Grand Total"
 msgstr "გრანდ-ჯამი"
@@ -15185,50 +15182,50 @@ msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "იხსნება"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1388
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1659
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1394
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1665
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "ანგარიში"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2168
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2174
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "მიმდინარე"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2173
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2179
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "ბიუჯეტი"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2178
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2184
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "სხვაობა"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2183
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2189
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "პროგნოზი"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2188
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2194
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "მცოცავი საშუალო"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2193
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2199
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2198
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2204
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"

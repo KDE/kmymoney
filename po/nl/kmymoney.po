@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-18 00:48+0000\n"
-"PO-Revision-Date: 2023-04-05 10:10+0200\n"
+"POT-Creation-Date: 2023-04-20 00:49+0000\n"
+"PO-Revision-Date: 2023-04-18 10:59+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -2561,22 +2561,21 @@ msgstr "Budget opties"
 #, kde-format
 msgctxt "@item:inlistbox Don't include this account in budgets"
 msgid "Don't include in budgets"
-msgstr ""
+msgstr "Niet invoegen in budgetten"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
 #: kmymoney/dialogs/knewaccountdlg.ui:305
 #, kde-format
 msgctxt "@item:inlistbox Include this account in budgets as expense"
 msgid "Include in budgets as expense"
-msgstr ""
+msgstr "In budgetten invoegen als uitgave"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
 #: kmymoney/dialogs/knewaccountdlg.ui:310
-#, fuzzy, kde-format
-#| msgid "Include the payee details in memo"
+#, kde-format
 msgctxt "@item:inlistbox Include this account in budgets as income"
 msgid "Include in budgets as income"
-msgstr "Details van debiteur invoegen in memo"
+msgstr "In budgetten invoegen als inkomsten"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_3)
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
@@ -14837,47 +14836,41 @@ msgid "Budget based on forecast"
 msgstr "Budget gebaseerd op prognose"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:456
-#, fuzzy, kde-format
-#| msgctxt "@title:window Confirmation dialog"
-#| msgid "Change transaction"
+#, kde-format
 msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
-msgstr "Transactie wijzigen"
+msgstr "Wijzigen naar inkomsten"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:461
-#, fuzzy, kde-format
-#| msgctxt "Category name"
-#| msgid "Miscellaneous expense"
+#, kde-format
 msgctxt "@item:inmenu To make it expense"
 msgid "Change to expense"
-msgstr "Diverse uitgaven"
+msgstr "Wijzigen naar uitgaven"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:490
-#, fuzzy, kde-format
-#| msgid "Budget options"
+#, kde-format
 msgctxt "@title:menu Budget context menu"
 msgid "Budget options"
-msgstr "Budget opties"
+msgstr "Budgetopties"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:501
-#, fuzzy, kde-format
-#| msgid "Account options"
+#, kde-format
 msgctxt "@title:menu Budget account context menu"
 msgid "Account options"
-msgstr "Rekening opties"
+msgstr "Rekeningopties"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:544
-#, fuzzy, kde-format
-#| msgid "Select the currency in which this account is denominated."
+#, kde-format
 msgctxt "@info:tooltip Budget assignment"
 msgid "Select how the budget of this account shall be treated."
-msgstr "Selecteer de valuta welke wordt gebruikt voor deze rekening."
+msgstr "Selecteer hoe het budget van deze rekening zal worden gebruikt."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:548
 #, kde-format
 msgctxt "@info:tooltip Budget assignment"
 msgid "This option is only available when a budget value is assigned."
 msgstr ""
+"Deze optie is alleen beschikbaar wanneer een budgetwaarde is toegekend."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:39
@@ -15362,12 +15355,12 @@ msgstr "Gemiddeld"
 #: kmymoney/plugins/views/reports/core/kreportchartview.cpp:456
 #: kmymoney/plugins/views/reports/core/listtable.cpp:298
 #: kmymoney/plugins/views/reports/core/listtable.cpp:299
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1402
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1543
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1595
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1671
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1858
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1929
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1408
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1549
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1601
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1677
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1864
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1935
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -15621,8 +15614,8 @@ msgstr "Eindsaldo"
 
 #: kmymoney/plugins/views/reports/core/listtable.cpp:302
 #: kmymoney/plugins/views/reports/core/listtable.cpp:303
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1619
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1967
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1625
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1973
 #, kde-format
 msgid "Grand Total"
 msgstr "Totaal"
@@ -15944,50 +15937,50 @@ msgctxt "@title:column Report heading"
 msgid "Opening"
 msgstr "Openen"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1388
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1659
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1394
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1665
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Rekening"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2168
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2174
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Actueel"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2173
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2179
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Budget"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2178
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2184
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Verschil"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2183
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2189
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Prognose"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2188
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2194
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Lopend gemiddelde"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2193
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2199
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Lopend gemiddelde prijs"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2198
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2204
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
