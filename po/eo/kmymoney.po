@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-20 00:49+0000\n"
-"PO-Revision-Date: 2023-04-10 04:45+0100\n"
+"PO-Revision-Date: 2023-04-20 23:30+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -520,7 +520,7 @@ msgid ""
 "before you started the QIF import."
 msgstr ""
 "Uzu ĉi tion por ĉesigi la importadon. Viaj financaj datumoj estos en la "
-"ŝtato antaŭ ol vi komencis la QIF-importadon."
+"stato kiel antaŭ ol vi komencis la QIF-importadon."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KAccountSelectDlg)
 #: kmymoney/dialogs/kaccountselectdlg.ui:17
@@ -2534,11 +2534,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
 #: kmymoney/dialogs/knewaccountdlg.ui:310
-#, fuzzy, kde-format
-#| msgid "Include the payee details in memo"
+#, kde-format
 msgctxt "@item:inlistbox Include this account in budgets as income"
 msgid "Include in budgets as income"
-msgstr "Enmeti la detalojn pri pagito en noto"
+msgstr "Inkluzivi en buĝetoj kiel enspezo"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_3)
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
@@ -4211,7 +4210,7 @@ msgstr "Jaro"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:321
 #, kde-format
 msgid "Default reconciliation state"
-msgstr "Defaŭlta repaciĝoŝtato"
+msgstr "Defaŭlta repaciĝostato"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, kcfg_defaultReconciliationState)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:331
@@ -6139,7 +6138,7 @@ msgstr "ebligi agado-tempigilojn"
 #: kmymoney/main.cpp:144
 #, kde-format
 msgid "do not globally catch uncaught exceptions"
-msgstr "ne tutmonde kapti nekaptitajn esceptojn"
+msgstr "ne tutamplekse kapti nekaptitajn esceptojn"
 
 #: kmymoney/main.cpp:150
 #, kde-format
@@ -14708,47 +14707,40 @@ msgid "Budget based on forecast"
 msgstr "Buĝeto bazita sur prognozo"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:456
-#, fuzzy, kde-format
-#| msgctxt "@title:window Confirmation dialog"
-#| msgid "Change transaction"
+#, kde-format
 msgctxt "@item:inmenu To make it income"
 msgid "Change to income"
-msgstr "Ŝanĝi transakcion"
+msgstr "Ŝanĝi al enspezo"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:461
-#, fuzzy, kde-format
-#| msgctxt "Category name"
-#| msgid "Miscellaneous expense"
+#, kde-format
 msgctxt "@item:inmenu To make it expense"
 msgid "Change to expense"
-msgstr "Diversaj elspezoj"
+msgstr "Ŝanĝi al elspezo"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:490
-#, fuzzy, kde-format
-#| msgid "Budget options"
+#, kde-format
 msgctxt "@title:menu Budget context menu"
 msgid "Budget options"
-msgstr "Buĝetaj elektoj"
+msgstr "Buĝetaj opcioj"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:501
-#, fuzzy, kde-format
-#| msgid "Account options"
+#, kde-format
 msgctxt "@title:menu Budget account context menu"
 msgid "Account options"
 msgstr "Opcioj de konto"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:544
-#, fuzzy, kde-format
-#| msgid "Select the currency in which this account is denominated."
+#, kde-format
 msgctxt "@info:tooltip Budget assignment"
 msgid "Select how the budget of this account shall be treated."
-msgstr "Elektu la valuton en kiu ĉi tiu konto estas nomita."
+msgstr "Elektu la buĝeto de ĉi tiu konto estu traktata."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:548
 #, kde-format
 msgctxt "@info:tooltip Budget assignment"
 msgid "This option is only available when a budget value is assigned."
-msgstr ""
+msgstr "Tiu opcio nur haveblas kiam buĝeta valoro estas asignita."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:39
@@ -17205,13 +17197,13 @@ msgstr "Linio"
 #, kde-format
 msgctxt "type of graphic chart"
 msgid "Bar"
-msgstr "Trinkejo"
+msgstr "Breto"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:91
 #, kde-format
 msgctxt "type of graphic chart"
 msgid "Stacked Bar"
-msgstr "Stakita Trinkejo"
+msgstr "Stakita Breto"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:92
 #, kde-format
@@ -21403,7 +21395,7 @@ msgstr "Valideco"
 #, kde-format
 msgctxt "@item reconciliation status"
 msgid "All states"
-msgstr "Ĉiuj ŝtatoj"
+msgstr "Ĉiuj statoj"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
 #: kmymoney/widgets/ktransactionfilter.ui:590
@@ -21570,7 +21562,7 @@ msgstr "Ordo de eniro"
 
 #: kmymoney/widgets/transactionsortoption.cpp:39
 msgid "Reconcile state"
-msgstr "Akordigi ŝtaton"
+msgstr "Akordigi staton"
 
 #: kmymoney/widgets/transactionsortoption.cpp:41
 msgid "Reconciliation date"
@@ -24934,7 +24926,3 @@ msgstr ""
 "\n"
 "<p>Ĉiuj informoj estas laŭvolaj kaj nur uzataj por personecigi vian KMyMoney-"
 "dosieron.</p>"
-
-#~ msgctxt "@title:menu budget context menu"
-#~ msgid "Budget options"
-#~ msgstr "Buĝetaj elektoj"
