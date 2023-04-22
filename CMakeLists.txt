@@ -25,6 +25,13 @@ set(RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_
 # Setting the name of the main project
 project(KMyMoney VERSION "${RELEASE_SERVICE_VERSION}" LANGUAGES CXX)
 
+# Minimum versions required for extern packages
+set(KMM_ALKIMIA_MIN_VERSION 8.1.1)
+set(KMM_KCHART_MIN_VERSION 2.6.0)
+set(KMM_LIBOFX_MIN_VERSION 0.10.0)
+set(KMM_AQBANKING_MIN_VERSION 6.5.0)
+set(KMM_GWENHYWFAR_MIN_VERSION 5.10.1)
+
 # Determine the GIT reference (if we're based on GIT)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
   execute_process(COMMAND git rev-parse --short HEAD
@@ -143,7 +150,7 @@ find_package(Qt${QT_MAJOR_VERSION}Keychain CONFIG REQUIRED)
 if(LibAlkimia5_DIR)
   set(_LibAlkimia5_DIR ${LibAlkimia5_DIR})
 endif()
-find_package(LibAlkimia${QT_MAJOR_VERSION} 8.1.1)
+find_package(LibAlkimia${QT_MAJOR_VERSION} ${KMM_ALKIMIA_MIN_VERSION})
 if (NOT LibAlkimia${QT_MAJOR_VERSION}_FOUND)
   # restore LibAlkimia5_DIR set to NOTFOUND by first find_package call
   if(_LibAlkimia5_DIR)
@@ -152,11 +159,11 @@ if (NOT LibAlkimia${QT_MAJOR_VERSION}_FOUND)
   find_package(LibAlkimia5 8.1 REQUIRED)
 endif()
 
-find_package(KChart 2.6.0 QUIET)
+find_package(KChart ${KMM_KCHART_MIN_VERSION} QUIET)
 
 # we want the lowercase 'libofx' package name, for 'libofx_FOUND' compatibility with what pkg-config returns,
 # in case it is to be used as fallback
-find_package(libofx NAMES LibOFX libofx)
+find_package(libofx ${KMM_LIBOFX_MIN_VERSION} NAMES LibOFX libofx)
 if(NOT libofx_FOUND)
     find_package(PkgConfig)
 
@@ -164,11 +171,17 @@ if(NOT libofx_FOUND)
         pkg_check_modules(libofx IMPORTED_TARGET libofx)
 
         if(libofx_FOUND)
-            add_library(libofx::libofx INTERFACE IMPORTED)
-            target_link_libraries(libofx::libofx INTERFACE PkgConfig::libofx)
+            if (${libofx_VERSION} VERSION_GREATER_EQUAL ${KMM_LIBOFX_MIN_VERSION})
+                add_library(libofx::libofx INTERFACE IMPORTED)
+                target_link_libraries(libofx::libofx INTERFACE PkgConfig::libofx)
+            else()
+                message(STATUS "Version ${libofx_VERSION} of libofx does not meet min. required version ${KMM_LIBOFX_MIN_VERSION}")
+                set(libofx_FOUND FALSE)
+            endif()
         endif()
     endif()
 endif()
+
 
 if(KF5Gpgmepp_FOUND)
   set(GPG_FOUND TRUE)
@@ -279,8 +292,8 @@ cmake_dependent_option(ENABLE_IBANBICDATA "Enable IBAN/BIC data support." OFF
 add_feature_info("IBAN/BIC data" ENABLE_IBANBICDATA "Adds predefined IBAN/BIC numbers to KMyMoney (note: doesn't work yet).")
 
 # check for optional KBanking support
-find_package(aqbanking 6.2.5 QUIET)
-find_package(gwenhywfar 5.4.1 QUIET)
+find_package(aqbanking ${KMM_AQBANKING_MIN_VERSION} QUIET)
+find_package(gwenhywfar ${KMM_GWENHYWFAR_MIN_VERSION} QUIET)
 find_package(gwengui-cpp QUIET)
 find_package(gwengui-qt5 QUIET)
 
