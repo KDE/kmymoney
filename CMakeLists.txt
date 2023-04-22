@@ -17,6 +17,12 @@ set(RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_
 # Setting the name of the main project
 project(KMyMoney VERSION "${RELEASE_SERVICE_VERSION}" LANGUAGES CXX)
 
+# Minimum versions required for extern packages
+set(KMM_ALKIMIA_MIN_VERSION 8.0)
+set(KMM_KCHART_MIN_VERSION 2.6.0)
+set(KMM_AQBANKING_MIN_VERSION 6.0.1)
+set(KMM_GWENHYWFAR_MIN_VERSION 5.1.2)
+
 # Determine the GIT reference (if we're based on GIT)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
   execute_process(COMMAND git rev-parse --short HEAD
@@ -107,7 +113,7 @@ find_package(KF5IdentityManagement ${AKONADI_MIN_VERSION} QUIET)
 if(LibAlkimia5_DIR)
   set(_LibAlkimia5_DIR ${LibAlkimia5_DIR})
 endif()
-find_package(LibAlkimia5 8.0)
+find_package(LibAlkimia5 ${KMM_ALKIMIA_MIN_VERSION})
 if (NOT LibAlkimia5_FOUND)
   # restore LibAlkimia5_DIR set to NOTFOUND by first find_package call
   if(_LibAlkimia5_DIR)
@@ -116,7 +122,7 @@ if (NOT LibAlkimia5_FOUND)
   find_package(LibAlkimia5 7.0 REQUIRED)
 endif()
 
-find_package(KChart 2.6.0 QUIET)
+find_package(KChart ${KMM_KCHART_MIN_VERSION} QUIET)
 
 if(KF5Gpgmepp_FOUND)
   set(GPG_FOUND TRUE)
@@ -260,8 +266,8 @@ endif(ENABLE_OFXIMPORTER)
 add_feature_info("OFX Importer" ENABLE_OFXIMPORTER "Allows importing OFX files (have client uid version: ${nice_LIBOFX_HAVE_CLIENTUID})" )
 
 # check for optional KBanking support
-find_package(aqbanking 6.0.1 QUIET)
-find_package(gwenhywfar 5.1.2 QUIET)
+find_package(aqbanking ${KMM_AQBANKING_MIN_VERSION} QUIET)
+find_package(gwenhywfar ${KMM_GWENHYWFAR_MIN_VERSION} QUIET)
 find_package(gwengui-cpp QUIET)
 find_package(gwengui-qt5 QUIET)
 
