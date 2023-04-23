@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-02 02:38+0000\n"
-"PO-Revision-Date: 2023-03-12 19:07+0100\n"
+"PO-Revision-Date: 2023-04-22 19:15+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4097,7 +4097,7 @@ msgstr "Abioko aukerak"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:36
 #, kde-format
 msgid "Show splash screen"
-msgstr "Harrerako pantaila erakutsi"
+msgstr "Erakutsi plasta pantaila"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:46
@@ -5797,7 +5797,7 @@ msgstr "Robert Wadley"
 #: kmymoney/kcreditswindow.cpp:63
 #, kde-format
 msgid "Icons & splash screen"
-msgstr "Ikonoak eta harrerako pantaila"
+msgstr "Ikonoak eta plasta pantaila"
 
 #: kmymoney/kcreditswindow.cpp:64
 #, kde-format
@@ -18428,7 +18428,7 @@ msgstr "Exekutatu aditu (kontulari) moduan"
 #: kmymoney/settings/kmymoney.kcfg:122
 #, kde-format
 msgid "Show splash screen during startup"
-msgstr "Erakutsi harrerako pantaila abioan"
+msgstr "Erakutsi plasta pantaila abioan"
 
 #. i18n: ectx: label, entry (syncLedgerInvestment), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:126
