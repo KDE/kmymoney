@@ -244,7 +244,7 @@ cmake_dependent_option(ENABLE_IBANBICDATA "Enable IBAN/BIC data support." OFF
 add_feature_info("IBAN/BIC data" ENABLE_IBANBICDATA "Adds predefined IBAN/BIC numbers to KMyMoney (note: doesn't work yet).")
 
 # check for optional QWebEngine
-option(ENABLE_WEBENGINE "Enable QWebEngine" OFF)
+option(ENABLE_WEBENGINE "Enable QWebEngine" ON)
 if(ENABLE_WEBENGINE)
   find_package(Qt5WebEngineWidgets 5.8 REQUIRED)
   if(Qt5WebEngineWidgets_VERSION VERSION_GREATER 5.8.99 AND Qt5WebEngineWidgets_VERSION VERSION_LESS 5.9.3)
