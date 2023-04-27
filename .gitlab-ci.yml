@@ -6,6 +6,8 @@ include:
 
 # custom builds
 build_local_ubuntu_2004:
+  # make it manual for now, since it constantly fails due to the lack of QWebengine support
+  when: manual
   stage: build
   image: ubuntu:20.04
   variables:
