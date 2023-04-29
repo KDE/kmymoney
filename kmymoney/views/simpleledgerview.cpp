@@ -455,6 +455,19 @@ SimpleLedgerView::SimpleLedgerView(QWidget *parent) :
 {
     Q_D(SimpleLedgerView);
     d->m_sharedToolbarActions.insert(eMenu::Action::FileNew, pActions[eMenu::Action::NewTransaction]);
+
+    connect(MyMoneyFile::instance()->accountsModel(), &QAbstractItemModel::dataChanged, this, [&](const QModelIndex& topLeft, const QModelIndex& bottomRight) {
+        Q_D(SimpleLedgerView);
+        Q_ASSERT(topLeft.parent() == bottomRight.parent());
+        for (int row = topLeft.row(); row <= bottomRight.row(); ++row) {
+            const auto idx = MyMoneyFile::instance()->accountsModel()->index(row, 0, topLeft.parent());
+            auto accountId = idx.data(eMyMoney::Model::IdRole).toString();
+            const auto tab = d->tabIdByAccountId(accountId);
+            if (tab != -1) {
+                d->ui->ledgerTab->setTabText(tab, idx.data(eMyMoney::Model::AccountNameRole).toString());
+            }
+        }
+    });
 }
 
 SimpleLedgerView::~SimpleLedgerView()
