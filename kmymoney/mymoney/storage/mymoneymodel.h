@@ -767,7 +767,8 @@ protected:
             static_cast<TreeItem<T>*>(idx.internalPointer())->dataRef() = after;
             setDirty();
             doUpdateReferencedObjects();
-            Q_EMIT dataChanged(idx, index(idx.row(), columnCount(idx.parent())-1));
+            const auto parentIdx = idx.parent();
+            Q_EMIT dataChanged(idx, index(idx.row(), columnCount(parentIdx) - 1, parentIdx));
         }
     }
 
