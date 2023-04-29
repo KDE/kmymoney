@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Giovanni Sora <g.sora@tiscali.it>, 2013, 2014, 2020, 2021, 2022.
+# Giovanni Sora <g.sora@tiscali.it>, 2013, 2014, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-20 00:49+0000\n"
-"PO-Revision-Date: 2022-10-12 15:43+0200\n"
+"PO-Revision-Date: 2023-04-28 23:16+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2850,11 +2850,9 @@ msgstr "Optiones de ordinar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useDefault)
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu Reset to application defaults"
-#| msgid "Reset to default"
+#, kde-format
 msgid "Use default"
-msgstr "Retorna a valores predefinite"
+msgstr "Usa valores predefinite"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KUpdateStockPriceDlg)
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:14
@@ -3533,8 +3531,7 @@ msgid ""
 msgstr ""
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:316
-#, fuzzy, kde-format
-#| msgid "Delete quote source"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete quote source"
 msgstr "Dele fonte de citar"
@@ -4442,11 +4439,10 @@ msgid "The file has been changed, save it?"
 msgstr ""
 
 #: kmymoney/kmymoney.cpp:514
-#, fuzzy, kde-format
-#| msgid "Save to file"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save file"
-msgstr "Salveguarda a File"
+msgstr "Salveguarda file"
 
 #: kmymoney/kmymoney.cpp:886
 #, kde-format
@@ -5889,16 +5885,13 @@ msgid "Uncaught error. Please report the details to the developers"
 msgstr ""
 
 #: kmymoney/misc/kmmyesno.cpp:21
-#, fuzzy, kde-format
-#| msgctxt "Is this a tax account?"
-#| msgid "Yes"
+#, kde-format
 msgctxt "@action:button"
 msgid "Yes"
 msgstr "Si"
 
 #: kmymoney/misc/kmmyesno.cpp:26
-#, fuzzy, kde-format
-#| msgid "No"
+#, kde-format
 msgctxt "@action:button"
 msgid "No"
 msgstr "No"
@@ -7641,7 +7634,7 @@ msgstr "Ulle"
 #, fuzzy, kde-format
 msgctxt "Frequency of schedule"
 msgid "%1 times"
-msgstr "; %1 vices"
+msgstr "(%1 vices)"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:927
 #, kde-format
@@ -8191,11 +8184,7 @@ msgid "Security"
 msgstr "Securitate"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:55
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@title:column Indicates whether a Cost Center assignment is necessary "
-#| "when entering a transaction"
-#| msgid "CC"
+#, kde-format
 msgctxt "@title:column Costcenter"
 msgid "CC"
 msgstr "pc (CC)"
@@ -8262,23 +8251,19 @@ msgid "Entry"
 msgstr "Elemento"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:68
-#, fuzzy, kde-format
-#| msgid "Number"
+#, kde-format
 msgctxt "@title:column Cheque Number (ext)"
 msgid "Number"
 msgstr "Numero"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "Ledger marker showing a reconciliation entry"
-#| msgid "Reconciliation"
+#, kde-format
 msgctxt "@title:column Reconciliation state (ext)"
 msgid "Reconciliation"
 msgstr "Reconciliation"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:70
-#, fuzzy, kde-format
-#| msgid "Cost center"
+#, kde-format
 msgctxt "@title:column CostCenter (ext)"
 msgid "Cost center"
 msgstr "Centro de costo"
@@ -9209,81 +9194,69 @@ msgstr "Typo de conto:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:101
 #: kmymoney/plugins/csv/export/csvwriter.cpp:111
-#, fuzzy, kde-format
-#| msgid "Date"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Date"
 msgstr "Data"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:101
-#, fuzzy, kde-format
-#| msgid "Security"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Security"
 msgstr "Securitate"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:102
-#, fuzzy, kde-format
-#| msgctxt "@title currency symbol column"
-#| msgid "Symbol"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Symbol"
 msgstr "Symbolo"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:102
-#, fuzzy, kde-format
-#| msgid "Action/Type"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Action/Type"
 msgstr "Action/Typo"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:103
 #: kmymoney/plugins/csv/export/csvwriter.cpp:112
-#, fuzzy, kde-format
-#| msgid "Amount"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Amount"
 msgstr "Amonta"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:103
-#, fuzzy, kde-format
-#| msgid "Quantity"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Quantity"
 msgstr "Quantitate"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:104
-#, fuzzy, kde-format
-#| msgid "Price"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Price"
 msgstr "Precio"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:104
-#, fuzzy, kde-format
-#| msgid "Interest"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Interest"
 msgstr "Interesse"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
-#, fuzzy, kde-format
-#| msgid "Fees"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Fees"
 msgstr "Honorarios"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
-#, fuzzy, kde-format
-#| msgid "Account"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Account"
 msgstr "Conto"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:106
 #: kmymoney/plugins/csv/export/csvwriter.cpp:113
-#, fuzzy, kde-format
-#| msgid "Memo"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Memo"
 msgstr "Memo"
@@ -9297,22 +9270,19 @@ msgid "Status"
 msgstr "Stato"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:111
-#, fuzzy, kde-format
-#| msgid "Payee"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Payee"
 msgstr "Beneficiario"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:112
-#, fuzzy, kde-format
-#| msgid "Account/Cat"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Account/Cat"
 msgstr "Conto/Cat"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:114
-#, fuzzy, kde-format
-#| msgid "Number"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Number"
 msgstr "Numero"
@@ -11947,7 +11917,7 @@ msgstr "Id de carga (job)"
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:156
 #, kde-format
 msgid "Job Type"
-msgstr ""
+msgstr "Typo de travalio (Job)"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:157
 #, kde-format
@@ -14176,15 +14146,13 @@ msgid "Change to expense"
 msgstr ""
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:490
-#, fuzzy, kde-format
-#| msgid "Budget options"
+#, kde-format
 msgctxt "@title:menu Budget context menu"
 msgid "Budget options"
 msgstr "Optiones de budget"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:501
-#, fuzzy, kde-format
-#| msgid "Account options"
+#, kde-format
 msgctxt "@title:menu Budget account context menu"
 msgid "Account options"
 msgstr "Optiones de conto"
@@ -19310,7 +19278,7 @@ msgstr ""
 #| msgid "Enter schedule"
 msgctxt "@title:window"
 msgid "Delete schedule"
-msgstr "Inserta horario"
+msgstr "Dele planification %1"
 
 #: kmymoney/views/kscheduledview.cpp:238
 #, kde-format
@@ -20474,8 +20442,7 @@ msgid "Feedback content"
 msgstr ""
 
 #: kmymoney/widgets/ktagcontainer.cpp:110
-#, fuzzy, kde-format
-#| msgid "Tag"
+#, kde-format
 msgctxt "@info:placeholder tag combo box"
 msgid "Tag"
 msgstr "Etiquetta"
@@ -22946,11 +22913,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:288
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirmation"
-msgstr "Information"
+msgstr "Confirmation"
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:73
 #, kde-format
