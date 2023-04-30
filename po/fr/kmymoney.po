@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-20 00:49+0000\n"
+"POT-Creation-Date: 2023-04-30 00:49+0000\n"
 "PO-Revision-Date: 2023-03-08 14:28+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -21061,12 +21061,12 @@ msgstr ""
 "Cette page affiche le grand livre des comptes. Actuellement, aucun compte "
 "n'est sélectionné. Ainsi, ce texte est affiché à la place."
 
-#: kmymoney/views/simpleledgerview.cpp:655
+#: kmymoney/views/simpleledgerview.cpp:668
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Ouvrir le site Web de <b>%1</b> dans votre navigateur."
 
-#: kmymoney/views/simpleledgerview.cpp:823
+#: kmymoney/views/simpleledgerview.cpp:836
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21076,7 +21076,7 @@ msgstr ""
 "réconciliation pour ce compte. Veuillez terminer, annuler ou reporter la "
 "réconciliation tout d'abord."
 
-#: kmymoney/views/simpleledgerview.cpp:824
+#: kmymoney/views/simpleledgerview.cpp:837
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

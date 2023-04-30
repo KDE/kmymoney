@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-20 00:49+0000\n"
+"POT-Creation-Date: 2023-04-30 00:49+0000\n"
 "PO-Revision-Date: 2023-04-22 19:15+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -20786,12 +20786,12 @@ msgstr ""
 "Orrialde honek kontuen liburu nagusia erakusten du. Momentuz, ez da konturik "
 "hautatu, beraz, testu hau erakusten da."
 
-#: kmymoney/views/simpleledgerview.cpp:655
+#: kmymoney/views/simpleledgerview.cpp:668
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "<b>%1</b>-(e)n webgunea ireki zure nabigatzailean."
 
-#: kmymoney/views/simpleledgerview.cpp:823
+#: kmymoney/views/simpleledgerview.cpp:836
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -20800,7 +20800,7 @@ msgstr ""
 "Ezin duzu ikuspegi hau itxi kontua adosten ari zarelako. Bukatu, bertan "
 "behera utzi edo atzeratu adostea lehenago."
 
-#: kmymoney/views/simpleledgerview.cpp:824
+#: kmymoney/views/simpleledgerview.cpp:837
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
