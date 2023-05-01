@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-30 00:49+0000\n"
-"PO-Revision-Date: 2023-04-28 23:16+0200\n"
+"PO-Revision-Date: 2023-04-30 21:35+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -1585,8 +1585,7 @@ msgid "Source"
 msgstr "Fonte"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:172
-#, fuzzy, kde-format
-#| msgid "Configure"
+#, kde-format
 msgctxt "@action:button Configuration of price update"
 msgid "Configure"
 msgstr "Configura"
@@ -3831,10 +3830,9 @@ msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:96
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgid "Information headers"
-msgstr "Information"
+msgstr "Capites de Information"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:102
@@ -7631,10 +7629,10 @@ msgid "Any"
 msgstr "Ulle"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:919
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Frequency of schedule"
 msgid "%1 times"
-msgstr "(%1 vices)"
+msgstr "%1 vices"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:927
 #, kde-format
@@ -8440,8 +8438,7 @@ msgstr "Destination"
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:149
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:170
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:182
-#, fuzzy, kde-format
-#| msgid "Unknown"
+#, kde-format
 msgctxt "Unknown payee in online task"
 msgid "Unknown"
 msgstr "Incognite"
@@ -9263,8 +9260,7 @@ msgstr "Memo"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:106
 #: kmymoney/plugins/csv/export/csvwriter.cpp:113
-#, fuzzy, kde-format
-#| msgid "Status"
+#, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Status"
 msgstr "Stato"
@@ -18321,11 +18317,10 @@ msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:330
 #: kmymoney/views/kcategoriesview.cpp:390
-#, fuzzy, kde-format
-#| msgid "Default category:"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete category"
-msgstr "Categoria predefinite"
+msgstr "Dele Categoria"
 
 #: kmymoney/views/kcategoriesview.cpp:339
 #, kde-format
@@ -18817,11 +18812,10 @@ msgid "<p>Do you really want to delete the institution <b>%1</b>?</p>"
 msgstr ""
 
 #: kmymoney/views/kinstitutionsview.cpp:275
-#, fuzzy, kde-format
-#| msgid "Name of the institution"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete institution"
-msgstr "Nomine del institution"
+msgstr "Dele institution"
 
 #: kmymoney/views/kinstitutionsview.cpp:286
 #: kmymoney/views/kinstitutionsview.cpp:289
@@ -18955,11 +18949,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/kpayeesview.cpp:152
-#, fuzzy, kde-format
-#| msgid "Delete payee"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate payee name"
-msgstr "Dele beneficiario"
+msgstr "Dele nomine de beneficiario"
 
 #: kmymoney/views/kpayeesview.cpp:176 kmymoney/views/kpayeesview.cpp:378
 #: kmymoney/views/kpayeesview.cpp:401
@@ -19274,11 +19267,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/kscheduledview.cpp:230
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
-msgstr "Dele planification %1"
+msgstr "Dele planification"
 
 #: kmymoney/views/kscheduledview.cpp:238
 #, kde-format
@@ -19426,12 +19418,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ktagsview.cpp:379
-#, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
-#| msgid "Duplicate"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
-msgstr "Duplica"
+msgstr "Duplica nomine de etiquetta"
 
 #: kmymoney/views/ktagsview.cpp:402 kmymoney/views/ktagsview.cpp:526
 #, kde-format
@@ -19676,11 +19666,10 @@ msgid "Cleared: %1"
 msgstr "Nettate: %1"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
-#, fuzzy, kde-format
-#| msgid "%1 of %2"
+#, kde-format
 msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
 msgid "%1 of %2: %3"
-msgstr "%1 de %2"
+msgstr "%1 de %2: %3"
 
 #: kmymoney/views/ledgerviewpage_p.h:151
 #, kde-format
