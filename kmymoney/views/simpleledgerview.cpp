@@ -403,20 +403,22 @@ public:
      */
     int tabIdByAccountId(QString& accountId)
     {
-        // in case a stock account is selected, we switch to the parent which
-        // is the investment account
-        MyMoneyAccount acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
-        if (acc.isInvest()) {
-            acc = MyMoneyFile::instance()->accountsModel()->itemById(acc.parentAccountId());
-            accountId = acc.id();
-        }
+        if (ui && ui->ledgerTab) {
+            // in case a stock account is selected, we switch to the parent which
+            // is the investment account
+            MyMoneyAccount acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
+            if (acc.isInvest()) {
+                acc = MyMoneyFile::instance()->accountsModel()->itemById(acc.parentAccountId());
+                accountId = acc.id();
+            }
 
-        // check if ledger is already opened
-        for (int idx = 0; idx < ui->ledgerTab->count() - 1; ++idx) {
-            const auto view = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx));
-            if (view) {
-                if (accountId == view->accountId()) {
-                    return idx;
+            // check if ledger is already opened
+            for (int idx = 0; idx < ui->ledgerTab->count() - 1; ++idx) {
+                const auto view = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx));
+                if (view) {
+                    if (accountId == view->accountId()) {
+                        return idx;
+                    }
                 }
             }
         }
