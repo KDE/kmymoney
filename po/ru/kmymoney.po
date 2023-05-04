@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-30 00:49+0000\n"
+"POT-Creation-Date: 2023-05-04 00:48+0000\n"
 "PO-Revision-Date: 2022-08-10 09:37+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -20930,7 +20930,7 @@ msgstr ""
 "Кнопка закрытия для этого счёта была убрана, так как вы выполняете его "
 "сверку. Чтобы вернуть эту кнопку, завершите, отмените или отложите сверку."
 
-#: kmymoney/views/simpleledgerview.cpp:431
+#: kmymoney/views/simpleledgerview.cpp:433
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -20940,7 +20940,7 @@ msgstr ""
 "На этой странице показана книга учёта счетов. В настоящий момент счетов нет, "
 "поэтому вместо них показан этот текст."
 
-#: kmymoney/views/simpleledgerview.cpp:434
+#: kmymoney/views/simpleledgerview.cpp:436
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -20950,12 +20950,12 @@ msgstr ""
 "На этой странице показана книга учёта счетов. В настоящий момент счета не "
 "выбраны, поэтому вместо них показан этот текст."
 
-#: kmymoney/views/simpleledgerview.cpp:668
+#: kmymoney/views/simpleledgerview.cpp:670
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Открыть страницу <b>%1</b> в браузере."
 
-#: kmymoney/views/simpleledgerview.cpp:836
+#: kmymoney/views/simpleledgerview.cpp:838
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -20964,7 +20964,7 @@ msgstr ""
 "Это представление нельзя закрыть, так как выполняется сверка счёта. Сначала "
 "завершите, отмените или отложите сверку."
 
-#: kmymoney/views/simpleledgerview.cpp:837
+#: kmymoney/views/simpleledgerview.cpp:839
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

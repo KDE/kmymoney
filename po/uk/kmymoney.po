@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-30 00:49+0000\n"
+"POT-Creation-Date: 2023-05-04 00:48+0000\n"
 "PO-Revision-Date: 2023-04-18 16:26+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -20936,7 +20936,7 @@ msgstr ""
 "Кнопку закриття для цього рахунку вилучено, оскільки ви його узгоджуєте. "
 "Завершіть, скасуйте або відкладіть узгодження, щоб повернути кнопку на місце."
 
-#: kmymoney/views/simpleledgerview.cpp:431
+#: kmymoney/views/simpleledgerview.cpp:433
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -20946,7 +20946,7 @@ msgstr ""
 "На цій сторінці показано бухгалтерську книгу рахунків. Поки що не створено "
 "жодних записів рахунків, тому показано цей напис."
 
-#: kmymoney/views/simpleledgerview.cpp:434
+#: kmymoney/views/simpleledgerview.cpp:436
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -20956,12 +20956,12 @@ msgstr ""
 "На цій сторінці показано бухгалтерську книгу рахунків. Поки що не вибрано "
 "жодних записів рахунків, тому показано цей напис."
 
-#: kmymoney/views/simpleledgerview.cpp:668
+#: kmymoney/views/simpleledgerview.cpp:670
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Відкрити сайт <b>%1</b> у вашій програмі для перегляду інтернету."
 
-#: kmymoney/views/simpleledgerview.cpp:836
+#: kmymoney/views/simpleledgerview.cpp:838
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -20970,7 +20970,7 @@ msgstr ""
 "Ви не можете закрити панель перегляду цього рахунку, оскільки ви узгоджуєте "
 "рахунок. Спочатку, завершіть дію, скасуйте або відкладіть узгодження."
 
-#: kmymoney/views/simpleledgerview.cpp:837
+#: kmymoney/views/simpleledgerview.cpp:839
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-30 00:49+0000\n"
+"POT-Creation-Date: 2023-05-04 00:48+0000\n"
 "PO-Revision-Date: 2022-09-26 20:31+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -20796,7 +20796,7 @@ msgstr ""
 "stämma av det. Avsluta, avbryt eller senarelägg avstämningen för att få "
 "tillbaka den."
 
-#: kmymoney/views/simpleledgerview.cpp:431
+#: kmymoney/views/simpleledgerview.cpp:433
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -20806,7 +20806,7 @@ msgstr ""
 "Sidan visar kontohuvudboken. För närvarande finns inga konton, så den här "
 "texten visas istället."
 
-#: kmymoney/views/simpleledgerview.cpp:434
+#: kmymoney/views/simpleledgerview.cpp:436
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -20816,12 +20816,12 @@ msgstr ""
 "Sidan visar kontohuvudboken. För närvarande är inga konton valda, så den här "
 "texten visas istället."
 
-#: kmymoney/views/simpleledgerview.cpp:668
+#: kmymoney/views/simpleledgerview.cpp:670
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Visa webbplats för <b>%1</b> i webbläsaren."
 
-#: kmymoney/views/simpleledgerview.cpp:836
+#: kmymoney/views/simpleledgerview.cpp:838
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -20830,7 +20830,7 @@ msgstr ""
 "Vyn kan inte stängas, eftersom kontot håller på att avstämmas. Slutför, "
 "avbryt eller senarelägg först avstämningen."
 
-#: kmymoney/views/simpleledgerview.cpp:837
+#: kmymoney/views/simpleledgerview.cpp:839
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-30 00:49+0000\n"
+"POT-Creation-Date: 2023-05-04 00:48+0000\n"
 "PO-Revision-Date: 2023-04-18 09:32+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -20959,7 +20959,7 @@ msgstr ""
 "O botão de fecho desta conta foi removido porque você está a consolidá-la. "
 "Termine, cancele ou adie a consolidação para o ter de volta."
 
-#: kmymoney/views/simpleledgerview.cpp:431
+#: kmymoney/views/simpleledgerview.cpp:433
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -20969,7 +20969,7 @@ msgstr ""
 "Esta página mostra o livro de registos das contas. De momento não existem "
 "contas, pelo que é apresentado este texto em alternativa."
 
-#: kmymoney/views/simpleledgerview.cpp:434
+#: kmymoney/views/simpleledgerview.cpp:436
 #, kde-format
 msgctxt "@label displayed when no ledger is open"
 msgid ""
@@ -20979,12 +20979,12 @@ msgstr ""
 "Esta página mostra o livro de registos das contas. De momento não estão "
 "seleccionadas contas, pelo que é apresentado este texto em alternativa."
 
-#: kmymoney/views/simpleledgerview.cpp:668
+#: kmymoney/views/simpleledgerview.cpp:670
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Abrir a página Web do <b>%1</b> no seu navegador."
 
-#: kmymoney/views/simpleledgerview.cpp:836
+#: kmymoney/views/simpleledgerview.cpp:838
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -20993,7 +20993,7 @@ msgstr ""
 "Não pode fechar esta janela porque a está a consolidar. Termine, cancele ou "
 "adie a consolidação para poder voltar a fechar."
 
-#: kmymoney/views/simpleledgerview.cpp:837
+#: kmymoney/views/simpleledgerview.cpp:839
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
