@@ -667,8 +667,16 @@ void QueryTable::constructTransactionTable()
                 }
             } else if (splitAcc.isInvest())
                 xr = (*it_split).price();
-            else
+            else {
+                // for the very first split we adjust the currency to the
+                // currency used for the split to make sure the right one
+                // is used in case it should differ from the transaction
+                // commodity. see bug #469195
+                if (myBegin == it_split) {
+                    qA[ctCurrency] = qS[ctCurrency] = splitCurrency;
+                }
                 xr = MyMoneyMoney::ONE;
+            }
 
             qA[ctTag].clear();
 
