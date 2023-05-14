@@ -3178,13 +3178,13 @@ msgstr ""
 "يُبقي «أموالك» العدد المحدّد من الحالات السابقة للملفّ في كلّ مرّة تحفظ فيها "
 "البيانات الحاليّة في ملفّ محليّ.\n"
 "\n"
-"اضبطه على ٠ لتعطيل الميزة."
+"اضبطه على 0 لتعطيل الميزة."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:122
 #, kde-format
 msgid "Number of backups to keep (0=off)"
-msgstr "عدد النّسخ الاحتياطيّة لإبقائها (٠ للتّعطيل)"
+msgstr "عدد النّسخ الاحتياطيّة لإبقائها (0 للتّعطيل)"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:147
@@ -4487,7 +4487,7 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgid "(c) 2000-2017 The KMyMoney development team"
 msgid "(c) 2000-2022 The KMyMoney development team"
-msgstr "© ٢٠٠٧-٢٠١٧ لفريق تطوير «أموالك»"
+msgstr "© 2007-2017 لفريق تطوير «أموالك»"
 
 #: kmymoney/kcreditswindow.cpp:44
 #, fuzzy, kde-format
@@ -4606,7 +4606,7 @@ msgstr "الأيقونات وشاشة البداية"
 #, kde-format
 msgctxt "Roles in project"
 msgid "Patches and port to kde4"
-msgstr "ترقيعات متفرّقة والانتقال إلى كِيدِي٤"
+msgstr "ترقيعات متفرّقة والانتقال إلى كِيدِي4"
 
 #: kmymoney/kcreditswindow.cpp:82
 #, kde-format
@@ -10231,31 +10231,31 @@ msgstr ""
 #, kde-format
 msgctxt "Noun, the introduction."
 msgid "1. File"
-msgstr "١. الملفّ"
+msgstr "1. الملفّ"
 
 #. i18n: ectx: property (text), widget (QLabel, label_separators)
 #: kmymoney/plugins/csv/import/csvwizard.ui:82
 #, kde-format
 msgid "2. Separators"
-msgstr "٢. الفواصل"
+msgstr "2. الفواصل"
 
 #. i18n: ectx: property (text), widget (QLabel, label_rows)
 #: kmymoney/plugins/csv/import/csvwizard.ui:95
 #, kde-format
 msgid "3. Rows"
-msgstr "٣. الصّفوف"
+msgstr "3. الصّفوف"
 
 #. i18n: ectx: property (text), widget (QLabel, label_columns)
 #: kmymoney/plugins/csv/import/csvwizard.ui:102
 #, kde-format
 msgid "4. Columns"
-msgstr "٤. الأعمدة"
+msgstr "4. الأعمدة"
 
 #. i18n: ectx: property (text), widget (QLabel, label_formats)
 #: kmymoney/plugins/csv/import/csvwizard.ui:109
 #, kde-format
 msgid "5. Formats"
-msgstr "٥. التّنسيقات"
+msgstr "5. التّنسيقات"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CurrenciesDlg)
 #: kmymoney/plugins/csv/import/currenciesdlg.ui:14
@@ -13039,27 +13039,27 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:98
 #, kde-format
 msgid "MS-Money 2003"
-msgstr "مايكروسوفت مَنِي ٢٠٠٣"
+msgstr "مايكروسوفت مَنِي 2003"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:99
 #, kde-format
 msgid "MS-Money 2004"
-msgstr "مايكروسوفت مَنِي ٢٠٠٤"
+msgstr "مايكروسوفت مَنِي 2004"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:100
 #, kde-format
 msgid "MS-Money 2005"
-msgstr "مايكروسوفت مَنِي ٢٠٠٥"
+msgstr "مايكروسوفت مَنِي 2005"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:101
 #, kde-format
 msgid "MS-Money 2006"
-msgstr "مايكروسوفت مَنِي ٢٠٠٦"
+msgstr "مايكروسوفت مَنِي 2006"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:102
 #, kde-format
 msgid "MS-Money 2007"
-msgstr "مايكروسوفت مَنِي ٢٠٠٧"
+msgstr "مايكروسوفت مَنِي 2007"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:103
 #, kde-format
@@ -21193,17 +21193,17 @@ msgstr ""
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:45
 #, kde-format
 msgid "Last 7 days"
-msgstr "آخر ٧ أيّام"
+msgstr "آخر 7 أيّام"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:46
 #, kde-format
 msgid "Last 30 days"
-msgstr "آخر ٣٠ يومًا"
+msgstr "آخر 30 يومًا"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:47
 #, kde-format
 msgid "Last 3 months"
-msgstr "آخر ٣ أشهر"
+msgstr "آخر 3 أشهر"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:48
 #, kde-format
@@ -21213,27 +21213,27 @@ msgstr "آخر ربع"
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:49
 #, kde-format
 msgid "Last 6 months"
-msgstr "آخر ٦ أشهر"
+msgstr "آخر 6 أشهر"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:50
 #, kde-format
 msgid "Last 11 months"
-msgstr "آخر ١١ شهرًا"
+msgstr "آخر 11 شهرًا"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:51
 #, kde-format
 msgid "Last 12 months"
-msgstr "آخر ١٢ شهرًا"
+msgstr "آخر 12 شهرًا"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:52
 #, kde-format
 msgid "Next 7 days"
-msgstr "٧ أيام القادمة"
+msgstr "7 أيام القادمة"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:53
 #, kde-format
 msgid "Next 30 days"
-msgstr "٣٠ يوما القادمة"
+msgstr "30 يوما القادمة"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:54
 #, fuzzy, kde-format
@@ -23964,7 +23964,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/newpaymentswizardpage.ui:83
 #, kde-format
 msgid "1. General Information"
-msgstr "١. معلومات عامّة"
+msgstr "1. معلومات عامّة"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel19_4)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4_3_2)
@@ -23976,7 +23976,7 @@ msgid ""
 "2. Calculate Loan"
 msgstr ""
 "\n"
-"٢. احسب القرض"
+"2. احسب القرض"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel19_5)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4_3)
@@ -23988,7 +23988,7 @@ msgid ""
 "3. Payments"
 msgstr ""
 "\n"
-"٣. حالات السّداد"
+"3. حالات السّداد"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
 #: kmymoney/wizards/newloanwizard/newgeneralinfowizardpage.ui:19
@@ -24012,9 +24012,9 @@ msgid ""
 "3. Payments"
 msgstr ""
 "\n"
-"٢. احسب القرض\n"
+"2. احسب القرض\n"
 "\n"
-"٣. حالات السّداد"
+"3. حالات السّداد"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_1)
 #: kmymoney/wizards/newloanwizard/newintrowizardpage.ui:43
@@ -24618,7 +24618,7 @@ msgstr ""
 #~ msgstr "خيارات الميزانية"
 
 #~ msgid "Copyright 2009"
-#~ msgstr "الحقوق محفوظة ٢٠٠٩"
+#~ msgstr "الحقوق محفوظة 2009"
 
 #~ msgctxt "Activity for income categories"
 #~ msgid "Received"
@@ -24957,13 +24957,13 @@ msgstr ""
 #~ msgstr "أنت على وشك حذف كلّ تجزئات المعاملة. أمتأكّد من المتابعة؟"
 
 #~ msgid "<b>11,00<b>"
-#~ msgstr "<b>١١٫٠٠<b>"
+#~ msgstr "<b>11٫00<b>"
 
 #~ msgid "<b>111,00<b>"
-#~ msgstr "<b>١١١٫٠٠<b>"
+#~ msgstr "<b>111٫00<b>"
 
 #~ msgid "100,00"
-#~ msgstr "١٠٠٫٠٠"
+#~ msgstr "100٫00"
 
 #~ msgctxt "Unknown payee"
 #~ msgid "Unknown"
@@ -25422,7 +25422,7 @@ msgstr ""
 #~ msgstr "أدرج نوع المعاملة في حقل الرّقم للمعاملات الجديدة"
 
 #~ msgid "Enter ISO 4217 code for the new currency"
-#~ msgstr "أدخِل رمز ”آيزو ٤٢١٧“ للعملة الجديدة"
+#~ msgstr "أدخِل رمز ”آيزو 4217“ للعملة الجديدة"
 
 #~ msgid "Name:"
 #~ msgstr "الاسم:"
@@ -25639,8 +25639,8 @@ msgstr ""
 #~ "Account %1 contains an opening balance. Please use KMyMoney version 0.8 "
 #~ "or later and earlier than version 0.9 to correct the problem."
 #~ msgstr ""
-#~ "يحتوي الحساب %1 رصيدًا افتتاحيًّا. رجاءً استخدم الإصدارة ٠٫٨ من «أموالك» أو "
-#~ "أخرى أعلى من ٠٫٩ لتصحيح المشكلة."
+#~ "يحتوي الحساب %1 رصيدًا افتتاحيًّا. رجاءً استخدم الإصدارة 0٫8 من «أموالك» أو "
+#~ "أخرى أعلى من 0٫9 لتصحيح المشكلة."
 
 #~ msgid "Cannot remove transaction that references a closed account."
 #~ msgstr "لا يمكن إزالة معاملة تشير إلى حساب مغلق."
