@@ -352,7 +352,8 @@ struct JournalModel::Private
             }
             for (int i = 0; i < splitCount; ++i) {
                 const MyMoneySplit& nextSplit = nextSplits.at(i);
-                if ((nextSplit.accountId() == currSplit.accountId()) && (nextSplit.value() == currSplit.value()) && nextSplit.shares() == currSplit.shares()) {
+                if ((nextSplit.accountId() == currSplit.accountId()) && (nextSplit.value() == currSplit.value()) && (nextSplit.shares() == currSplit.shares())
+                    && (nextSplit.reconcileFlag() == currSplit.reconcileFlag())) {
                     // we found exactly the same split
                     // in curr and next so we remove it
                     // from the list and continue with
