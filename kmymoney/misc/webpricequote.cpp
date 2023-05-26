@@ -654,21 +654,17 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                                    "%d.%m.%y" // dateformat
                                                       );
 
-    // This quote source provided by e-mail and should replace the previous one:
-    // From: David Houlden <djhoulden@gmail.com>
-    // To: kmymoney@kde.org
-    // Date: Sat, 6 Apr 2013 13:22:45 +0100
-    // Updated on 2017-06 by Łukasz Wojniłowicz
+    // This quote source provided by forum post and should replace the previous one:
+    // Updated on 2023-05-26 by Thomas Baumgart
     result["Financial Times - UK Funds"] = WebPriceQuoteSource("Financial Times",
-                                           "http://funds.ft.com/uk/Tearsheet/Summary?s=%1",
-                                           QString(),
-                                           QString(), // webIDRegExp
-                                           WebPriceQuoteSource::identifyBy::IdentificationNumber,
-                                           "Price\\D+([\\d,]*\\d+\\.\\d+)", // price regexp
-                                           "Data delayed at least 15 minutes, as of\\ (.*)\\.", // date regexp
-                                           "%m %d %y", // date format
-                                           true // skip HTML stripping
-                                                              );
+                                                               "https://markets.ft.com/data/equities/tearsheet/summary?s=%1" QString(),
+                                                               QString(), // webIDRegExp
+                                                               WebPriceQuoteSource::identifyBy::IdentificationNumber,
+                                                               "Price\\D+([\\d,]*\\d+\\.\\d+)", // price regexp
+                                                               "Data delayed at least 15 minutes, as of\\ (.*)\\.", // date regexp
+                                                               "%m %d %y", // date format
+                                                               true // skip HTML stripping
+    );
 
     // The following two price sources were contributed by
     // Marc Zahnlecker <tf2k@users.sourceforge.net>
