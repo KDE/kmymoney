@@ -657,7 +657,8 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
     // This quote source provided by forum post and should replace the previous one:
     // Updated on 2023-05-26 by Thomas Baumgart
     result["Financial Times - UK Funds"] = WebPriceQuoteSource("Financial Times",
-                                                               "https://markets.ft.com/data/equities/tearsheet/summary?s=%1" QString(),
+                                                               "https://markets.ft.com/data/equities/tearsheet/summary?s=%1",
+                                                               QString(),
                                                                QString(), // webIDRegExp
                                                                WebPriceQuoteSource::identifyBy::IdentificationNumber,
                                                                "Price\\D+([\\d,]*\\d+\\.\\d+)", // price regexp
