@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-02 02:38+0000\n"
-"PO-Revision-Date: 2023-05-16 20:03+0200\n"
+"PO-Revision-Date: 2023-05-24 00:11+0200\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
@@ -1114,7 +1114,7 @@ msgid ""
 "If your system does not use an automounter, make sure you mark the checkbox "
 "below to \"mount this directory before backing up.\""
 msgstr ""
-"Hvis systemet ditt ikke bruker en «automounter», sørg for at du merker av i "
+"Hvis systemet ditt ikke bruker en «automonterer», sørg for at du merker av i "
 "avmerkingsboksen nedenfor for å «montere denne katalogen før "
 "sikkerhetskopiering»."
 
@@ -1905,10 +1905,10 @@ msgstr ""
 "<html><head/><body><p><span style=\" font-weight:600;\">Aldri</span></"
 "p><p>Ikke foreta noen avrunding, bare avkort og skriv ut en advarsel i "
 "tilfelle en rest. Ellers det samme som avkort.</p><p><span style=\" font-"
-"weight:600;\">Nedover</span></p><p>Rund av til den største heltallverdien "
+"weight:600;\">Nedover</span></p><p>Rund av til den største heltallsverdien "
 "som ikke er større enn verdien. F.eks. 0,5  -&gt; 0,0 og -0,5 -&gt; -1,0</"
 "p><p><span style=\" font-weight:600;\">Oppover</span></p><p>Rund av til den "
-"minste heltallverdien som ikke er mindre enn verdien. F.eks. 0,5  -&gt; 1,0 "
+"minste heltallsverdien som ikke er mindre enn verdien. F.eks. 0,5  -&gt; 1,0 "
 "og -0,5 -&gt; -0,0</p><p><span style=\" font-weight:600;\">Avkortet</span></"
 "p><p>Ingen avrunding, bare avkort en hvilken som helst brøk</p><p><span "
 "style=\" font-weight:600;\">Promoter</span></p><p>Bruk oppover for positive "
@@ -11604,7 +11604,7 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2205
 #, kde-format
 msgid "Schedule %1 dropped at user request"
-msgstr "Tidslanen %1 ble droppet som følge av brukerbeslutning"
+msgstr "Tidsplanen %1 ble droppet som følge av brukerbeslutning"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2248
 #, kde-format
@@ -14429,7 +14429,7 @@ msgid ""
 msgstr ""
 "Databasetypen %1 er ikke fullt ut testet i et KMyMoney-miljø.\n"
 "Vær sikker på at du har tilstrekkelige sikkerhetskopier av dine data.\n"
-"Rapporter alle problemer til utviklerenes epostliste på kmymoney-devel@kde."
+"Rapporter alle problemer til utviklerenes e-postliste på kmymoney-devel@kde."
 "org"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KGenerateSqlDlg)
@@ -17301,7 +17301,7 @@ msgstr ""
 "for perioden. Hvis\n"
 "              den er på vil verdien vise «0» i tabellen. I et diagram vil "
 "manglende verdier\n"
-"              plottes inn linjært basert på allerede kjente kurser.\n"
+"              plottes inn lineært basert på allerede kjente kurser.\n"
 "              <br>Eksempel:\n"
 "              <br>Det er kurser for januar og mars men ingen kurs for\n"
 "              februar.\n"
@@ -17310,7 +17310,7 @@ msgstr ""
 "              januar\n"
 "              <li><b>PÅ</b>: i en tabell blir verdien «0» mens i et diagram "
 "vil kursen\n"
-"              for februar plottes inn linjært\n"
+"              for februar plottes inn lineært\n"
 "              (det blir på en måte en gjennomsnittsverdi beregnet av januar- "
 "og\n"
 "              marskursen i tabellen)\n"
@@ -17904,7 +17904,7 @@ msgstr ""
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:105
 #, kde-format
 msgid "Keys for all of the above user ids found"
-msgstr "Fant nøkler for alle ovenstående brukerider"
+msgstr "Fant nøkler for alle ovenstående bruker-ID-er"
 
 #: kmymoney/plugins/xml/mymoneystorageanon.cpp:148
 #: kmymoney/views/kaccountsview.cpp:450
@@ -18067,10 +18067,10 @@ msgid ""
 "user-id was not found in your keyring. Please make sure to import a valid "
 "key for this user-id. This time, encryption is disabled.</p>"
 msgstr ""
-"<p>Du har valgt å kryptere dine data for brukeriden</p><p><center><b>%1</b></"
-"center></p><p>Beklageligvis ble det ikke funnet en gyldig nøkkel for denne "
-"brukeriden i nøkkelringen din. Sørg for å importere en gyldig nøkkel for "
-"brukeriden. Kryptering er slått av denne gangen.</p>"
+"<p>Du har valgt å kryptere dine data for bruker-ID-en</p><p><center><b>%1</"
+"b></center></p><p>Beklageligvis ble det ikke funnet en gyldig nøkkel for "
+"denne bruker-ID-en i nøkkelringen din. Sørg for å importere en gyldig nøkkel "
+"for bruker-ID-en. Kryptering er slått av denne gangen.</p>"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:461
 #, kde-format
@@ -18194,8 +18194,8 @@ msgid ""
 "This symbol denotes, if the key for the given user id has been found in your "
 "keyring. It is green when found, dark otherwise."
 msgstr ""
-"Dette symbolet betegner om nøkkelen for den oppgitte brukeriden er funnet i "
-"nøkkelringen din. Den grønn dersom den er funnet. Hvis ikke er den mørk."
+"Dette symbolet betegner om nøkkelen for den oppgitte bruker-ID-en er funnet "
+"i nøkkelringen din. Den grønn dersom den er funnet. Hvis ikke er den mørk."
 
 #. i18n: ectx: property (whatsThis), widget (KLed, m_recoverKeyFound)
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:135
@@ -18350,13 +18350,13 @@ msgstr "Krypter også mot gjenopprettingsnøkkel"
 #: kmymoney/settings/kmymoney.kcfg:112
 #, kde-format
 msgid "GPG User ID (deprecated)"
-msgstr "GPG brukerid (avviklet)"
+msgstr "GPG bruker-ID (avviklet)"
 
 #. i18n: ectx: label, entry (GpgRecipientList), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:115
 #, kde-format
 msgid "GPG User ID"
-msgstr "GPG brukerid"
+msgstr "GPG bruker-ID"
 
 #. i18n: ectx: label, entry (ExpertMode), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:118
@@ -20499,7 +20499,7 @@ msgid ""
 msgstr ""
 "Si fra til oss om programmet oppfører seg unormalt ved å velge <a href=\"/"
 "action?id=help_report_bug\">\"Rapporter feil…\"</a> fra hjelpemenyen eller "
-"ved å sende en epost til utviklerens epostliste."
+"ved å sende en epost til utviklerens e-postliste."
 
 #: kmymoney/views/kwelcomepage.cpp:203
 #, kde-format
@@ -20594,7 +20594,7 @@ msgstr "– Fjernet Yahoo som kurskilde"
 #: kmymoney/views/kwelcomepage.cpp:245
 #, kde-format
 msgid "- Supporting OFX client uid required by some banks"
-msgstr "– Støtte for OFX klientbrukerid som er påkrevd av noen banker"
+msgstr "– Støtte for OFX klientbruker-ID som er påkrevd av noen banker"
 
 #: kmymoney/views/kwelcomepage.cpp:246
 #, kde-format
@@ -25048,7 +25048,7 @@ msgid ""
 "register by selecting the 'ledger lens' feature in the settings dialog?\n"
 msgstr ""
 "<p>… at du kan vise flere detaljer om den valgte transaksjonen i\n"
-"registeret ved å velge «hovedboklinse» i oppsettsvinduet?\n"
+"registeret ved å velge «hovedboklinse» i oppsettvinduet?\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tips:31
