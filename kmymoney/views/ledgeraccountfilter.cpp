@@ -134,9 +134,9 @@ QVariant LedgerAccountFilter::data(const QModelIndex& index, int role) const
         return d->showValuesInverted;
     }
 
-    if (index.column() == JournalModel::Balance) {
-        switch (role) {
-        case Qt::DisplayRole:
+    switch (role) {
+    case Qt::DisplayRole:
+        if (index.column() == JournalModel::Balance) {
             if (index.row() < d->balances.size()) {
                 // only report a balance for transactions and schedules but
                 // not for the empty (new) transaction
@@ -145,19 +145,13 @@ QVariant LedgerAccountFilter::data(const QModelIndex& index, int role) const
                 }
             }
             return {};
-
-        case Qt::TextAlignmentRole:
-            return QVariant(Qt::AlignRight | Qt::AlignTop);
-
-        default:
-            break;
         }
-    }
+        break;
 
-    // we're asking for the reconciliation date of a special date
-    // which maps to the next younger reconciliation date of that
-    // account
-    if (role == eMyMoney::Model::SplitReconcileDateRole) {
+    case eMyMoney::Model::SplitReconcileDateRole:
+        // we're asking for the reconciliation date of a special date
+        // which maps to the next younger reconciliation date of that
+        // account
         if (d->isSpecialDatesModel(index)) {
             QDate result;
             const auto entryDate = index.data(eMyMoney::Model::TransactionPostDateRole).toDate();
@@ -178,6 +172,10 @@ QVariant LedgerAccountFilter::data(const QModelIndex& index, int role) const
             }
             return result;
         }
+        break;
+
+    default:
+        break;
     }
 
     return LedgerFilterBase::data(index, role);
