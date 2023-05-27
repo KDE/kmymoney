@@ -113,10 +113,12 @@ bool LedgerFilter::filterAcceptsRow(int source_row, const QModelIndex& source_pa
     Q_D(const LedgerFilter);
 
     const auto idx = sourceModel()->index(source_row, 0, source_parent);
-    const bool isJournalItem = MyMoneyModelBase::baseModel(idx) == MyMoneyFile::instance()->journalModel();
-    const bool isScheduleItem = MyMoneyModelBase::baseModel(idx) == qobject_cast<QAbstractItemModel*>(MyMoneyFile::instance()->schedulesJournalModel());
+    const bool isJournalItem = d->isJournalModel(idx);
+    const bool isScheduleItem = d->isSchedulesJournalModel(idx);
+
     // a transaction is in date range if no date range is set or the post date is older than the end of the range
-    const auto inDateRange = !d->endDate.isValid() || (idx.data(eMyMoney::Model::TransactionPostDateRole).toDate() < d->endDate);
+    const auto inDateRange = !d->endDate.isValid() || (idx.data(eMyMoney::Model::TransactionPostDateRole).toDate() <= d->endDate);
+
     if (d->state != State::Any) {
         if (isJournalItem) {
             const auto splitState = idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>();
@@ -270,5 +272,8 @@ void LedgerFilter::clearFilter()
 void LedgerFilter::setEndDate(const QDate& endDate)
 {
     Q_D(LedgerFilter);
-    d->endDate = endDate;
+    if (d->endDate != endDate) {
+        d->endDate = endDate;
+        invalidateFilter();
+    }
 }
