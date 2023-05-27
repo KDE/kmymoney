@@ -2224,7 +2224,11 @@ void MyMoneyFile::removeSchedule(const MyMoneySchedule& sched)
 
 MyMoneySchedule MyMoneyFile::schedule(const QString& id) const
 {
-    return d->schedulesModel.itemById(id);
+    const auto schedule = d->schedulesModel.itemById(id);
+    if (schedule.id().isEmpty()) {
+        throw MYMONEYEXCEPTION_SSTRING(std::string("Schedule not found for id") + id.toStdString());
+    }
+    return schedule;
 }
 
 QList<MyMoneySchedule> MyMoneyFile::scheduleList(
