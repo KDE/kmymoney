@@ -50,6 +50,8 @@ public:
      */
     virtual WidgetHintFrameCollection* widgetHintFrameCollection() const;
 
+    void setVisible(bool visible) override;
+
 public Q_SLOTS:
     virtual void slotSettingsChanged()
     {

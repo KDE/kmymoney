@@ -158,3 +158,11 @@ WidgetHintFrameCollection* TransactionEditorBase::widgetHintFrameCollection() co
 {
     return nullptr;
 }
+
+void TransactionEditorBase::setVisible(bool visible)
+{
+    QWidget::setVisible(visible);
+    if (d->focusFrame) {
+        d->focusFrame->setVisible(visible);
+    }
+}

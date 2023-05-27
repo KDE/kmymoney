@@ -83,6 +83,7 @@ public:
         , moveToAccountSelector(nullptr)
         , columnSelector(nullptr)
         , infoMessage(new KMessageWidget(q))
+        , editor(nullptr)
         , adjustableColumn(JournalModel::Column::Detail)
         , lastSelectedRow(-1)
         , adjustingColumn(false)
@@ -445,6 +446,7 @@ public:
     KMyMoneyAccountSelector* moveToAccountSelector;
     ColumnSelector* columnSelector;
     KMessageWidget* infoMessage;
+    TransactionEditorBase* editor;
     QHash<const QAbstractItemModel*, QStyledItemDelegate*>   delegates;
     int adjustableColumn;
     int lastSelectedRow;
@@ -597,6 +599,11 @@ void LedgerView::setModel(QAbstractItemModel* model)
 void LedgerView::reset()
 {
     QTableView::reset();
+    if (d->editor) {
+        closeEditor(d->editor, QAbstractItemDelegate::NoHint);
+        d->editor->deleteLater();
+    }
+
     QMetaObject::invokeMethod(this, &LedgerView::reselectAfterModelReset, Qt::QueuedConnection);
 }
 
@@ -706,13 +713,14 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
 
             // make sure that the row gets resized according to the requirements of the editor
             // and is completely visible
-            const auto editor = qobject_cast<TransactionEditorBase*>(indexWidget(d->editIndex));
-            connect(editor, &TransactionEditorBase::editorLayoutChanged, this, &LedgerView::resizeEditorRow);
-            connect(this, &LedgerView::settingsChanged, editor, &TransactionEditorBase::slotSettingsChanged);
+            d->editor = qobject_cast<TransactionEditorBase*>(indexWidget(d->editIndex));
+            connect(d->editor, &TransactionEditorBase::editorLayoutChanged, this, &LedgerView::resizeEditorRow);
+            connect(this, &LedgerView::settingsChanged, d->editor, &TransactionEditorBase::slotSettingsChanged);
 
             // make sure to unregister the editor in case it is destroyed
-            connect(editor, &TransactionEditorBase::destroyed, this, [&]() {
+            connect(d->editor, &TransactionEditorBase::destroyed, this, [&]() {
                 d->unregisterGlobalEditor();
+                d->editor = nullptr;
             });
 
             resizeEditorRow();
