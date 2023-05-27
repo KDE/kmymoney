@@ -50,6 +50,7 @@ public:
         : LedgerSortProxyModelPrivate(qq)
         , showReconciliationEntries(LedgerViewSettings::DontShowReconciliationHeader)
         , filterBalanceMode(SpecialLedgerItemFilter::FilterBalanceNormal)
+        , lastWasReconciliationEntry(false)
     {
         updateDelayTimer.setSingleShot(true);
         updateDelayTimer.setInterval(20);
@@ -214,7 +215,7 @@ public:
         }
     }
 
-    bool filterAcceptsRow(const QModelIndex& idx, const QModelIndex& source_parent, int rowCount) const
+    bool filterAcceptsRow(const QModelIndex& idx, const QModelIndex& source_parent, int rowCount)
     {
         switch (idx.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>()) {
         case eMyMoney::Model::SpecialDatesEntryRole: {
@@ -291,12 +292,21 @@ public:
                 return true;
             }
 
+            // in case we get here recursively, we simply assume
+            // that this entry will be shown, so the actual one
+            // that is checked will be hidden
+            if (lastWasReconciliationEntry) {
+                return true;
+            }
+
             // make sure we only show reconciliation entries that are not followed by
             // another reconciliation entry. Only inspect visible items
+            lastWasReconciliationEntry = true;
             int row = idx.row() + 1;
             while (row < rowCount) {
                 const auto testIdx = q->sourceModel()->index(row, 0, source_parent);
                 if (filterAcceptsRow(testIdx, source_parent, rowCount)) {
+                    lastWasReconciliationEntry = false;
                     if (isReconciliationModel(testIdx)) {
                         return false;
                     }
@@ -323,6 +333,7 @@ public:
     QTimer updateDelayTimer;
     LedgerViewSettings::ReconciliationHeader showReconciliationEntries;
     SpecialLedgerItemFilter::FilterBalanceMode filterBalanceMode;
+    bool lastWasReconciliationEntry;
 };
 
 SpecialLedgerItemFilter::SpecialLedgerItemFilter(QObject* parent)
@@ -471,7 +482,7 @@ bool SpecialLedgerItemFilter::filterAcceptsRow(int source_row, const QModelIndex
     switch (idx.data(eMyMoney::Model::BaseModelRole).value<eMyMoney::Model::Roles>()) {
     case eMyMoney::Model::SpecialDatesEntryRole:
     case eMyMoney::Model::ReconciliationEntryRole:
-        return d->filterAcceptsRow(idx, source_parent, sourceModel()->rowCount(source_parent));
+        return const_cast<SpecialLedgerItemFilterPrivate*>(d)->filterAcceptsRow(idx, source_parent, sourceModel()->rowCount(source_parent));
 
     case eMyMoney::Model::OnlineBalanceEntryRole:
         // Don't show online balance items if display is not sorted by date
