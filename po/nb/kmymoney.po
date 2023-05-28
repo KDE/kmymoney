@@ -9954,8 +9954,8 @@ msgid ""
 "<center>The %1 field contains '%2'</center><center>and the %3 field contains "
 "'%4'.</center><center>Please choose which you wish to accept.</center>"
 msgstr ""
-"<center>Feltet %1 inneholder «%2»</center><center>og feltet %3 inneholder «"
-"%4».</center><center>Velg den du vil godta.</center>"
+"<center>Feltet %1 inneholder «%2»</center><center>og feltet %3 inneholder "
+"«%4».</center><center>Velg den du vil godta.</center>"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:395
 #, kde-format
@@ -20161,8 +20161,8 @@ msgstr "Lån"
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
 msgstr ""
-"<p>Er du sikker på at du vil slette denne planlagte transaksjonen <b>%1</"
-"b>?</p>"
+"<p>Er du sikker på at du vil slette denne planlagte transaksjonen <b>%1</b>?"
+"</p>"
 
 #: kmymoney/views/kscheduledview.cpp:387
 #, kde-format
