@@ -2291,6 +2291,7 @@ QStringList MyMoneyFile::consistencyCheck()
     QStringList accountRebuild;
 
     QMap<QString, bool> interestAccounts;
+    QMap<QString, QDate> firstUseMap;
 
     MyMoneyAccount parent;
     MyMoneyAccount child;
@@ -2680,6 +2681,16 @@ QStringList MyMoneyFile::consistencyCheck()
                     }
                 }
 
+                // keep a trace of the first usage of accounts
+                auto accountUse = firstUseMap.find(s.accountId());
+                if (accountUse == firstUseMap.end()) {
+                    firstUseMap.insert(s.accountId(), t.postDate());
+                } else {
+                    if (acc.openingDate() > *accountUse) {
+                        *accountUse = acc.openingDate();
+                    }
+                }
+
             } catch (const MyMoneyException &) {
                 rc << i18n("  * Split %2 in transaction '%1' contains a reference to invalid account %3. Please fix manually.", t.id(), split.id(), split.accountId());
                 ++unfixedCount;
@@ -2920,22 +2931,31 @@ QStringList MyMoneyFile::consistencyCheck()
         }
 
         //compare the first price with the opening date of the account
-        if ((!securityPriceDate.contains(pricePair) || securityPriceDate.value(pricePair) > (*accForeignList_it).openingDate())
-                && (!securityPriceDate.contains(reversePricePair) || securityPriceDate.value(reversePricePair) > (*accForeignList_it).openingDate())) {
-            if (firstInvProblem) {
-                firstInvProblem = false;
-                rc << i18n("* Potential problem with securities/currencies");
+        if (firstUseMap.contains((*accForeignList_it).id())) {
+            const auto firstUseDate = firstUseMap.value((*accForeignList_it).id());
+            if ((!securityPriceDate.contains(pricePair) || securityPriceDate.value(pricePair) > firstUseDate)
+                && (!securityPriceDate.contains(reversePricePair) || securityPriceDate.value(reversePricePair) > firstUseDate)) {
+                if (firstInvProblem) {
+                    firstInvProblem = false;
+                    rc << i18nc("@info consistency check", "* Potential problem with securities/currencies");
+                }
+                MyMoneySecurity secError = security((*accForeignList_it).currencyId());
+                if (!(*accForeignList_it).isInvest()) {
+                    rc << i18nc("@info consistency check",
+                                "  * The account '%1' in currency '%2' has no price set for the date of its first usage on '%3'.",
+                                (*accForeignList_it).name(),
+                                secError.name(),
+                                firstUseDate.toString(Qt::ISODate));
+                    rc << i18nc("@info consistency check", "    Please enter a price for the currency on or before the date of first usage.");
+                } else {
+                    rc << i18nc("@info consistency check",
+                                "  * The security '%1' has no price set for the first use on '%2'.",
+                                (*accForeignList_it).name(),
+                                firstUseDate.toString(Qt::ISODate));
+                    rc << i18nc("@info consistency check", "    Please enter a price for the security on or before this date.");
+                }
+                ++unfixedCount;
             }
-            QDate openingDate = (*accForeignList_it).openingDate();
-            MyMoneySecurity secError = security((*accForeignList_it).currencyId());
-            if (!(*accForeignList_it).isInvest()) {
-                rc << i18n("  * The account '%1' in currency '%2' has no price set for the opening date '%3'.", (*accForeignList_it).name(), secError.name(), openingDate.toString(Qt::ISODate));
-                rc << i18n("    Please enter a price for the currency on or before the opening date.");
-            } else {
-                rc << i18n("  * The security '%1' has no price set for the opening date '%2'.", (*accForeignList_it).name(), openingDate.toString(Qt::ISODate));
-                rc << i18n("    Please enter a price for the security on or before the opening date.");
-            }
-            ++unfixedCount;
         }
     }
 
