@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
@@ -74,7 +74,6 @@ msgstr ""
 msgid "    %1 processed"
 msgid_plural "    %1 processed"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/converter/mymoneystatementreader.cpp:569
 #, kde-format
@@ -82,21 +81,18 @@ msgctxt "x transactions have been added"
 msgid "    %1 added"
 msgid_plural "    %1 added"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/converter/mymoneystatementreader.cpp:570
 #, kde-format
 msgid "    %1 matched"
 msgid_plural "    %1 matched"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/converter/mymoneystatementreader.cpp:571
 #, kde-format
 msgid "    %1 duplicate"
 msgid_plural "    %1 duplicates"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/converter/mymoneystatementreader.cpp:572
 #, kde-format
@@ -109,7 +105,6 @@ msgctxt "x transactions have been created"
 msgid "    %1 created"
 msgid_plural "    %1 created"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/converter/mymoneystatementreader.cpp:636
 #, kde-format
@@ -301,7 +296,6 @@ msgid_plural ""
 ">The transaction dates are %1 days apart.<br/>Do you want KMyMoney to enter "
 "this schedule now so that the transaction can be matched?"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1600
 #, kde-format
@@ -2462,14 +2456,12 @@ msgstr ""
 msgid "Found %1 matching transaction (D %2 / P %3 = %4)"
 msgid_plural "Found %1 matching transactions (D %2 / P %3 = %4)"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/dialogs/kfindtransactiondlg_p.h:179
 #, kde-format
 msgid "Found %1 matching transaction"
 msgid_plural "Found %1 matching transactions"
 msgstr[0] ""
-msgstr[1] ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KImportVerifyDlg)
 #: kmymoney/dialogs/kimportverifydlg.ui:17
@@ -2616,7 +2608,6 @@ msgstr ""
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/dialogs/kmymoneypricedlg.cpp:338
 #, kde-format
@@ -6695,7 +6686,6 @@ msgstr ""
 msgid "One statement has been processed with the following results:"
 msgid_plural "%1 statements have been processed with the following results:"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/kmymoneyutils.cpp:828
 #: kmymoney/plugins/interfaces/kmmstatementinterface.cpp:54
@@ -6703,7 +6693,6 @@ msgstr[1] ""
 msgid "No new transaction has been imported."
 msgid_plural "No new transactions have been imported."
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/kmymoneyutils.cpp:829
 #: kmymoney/plugins/interfaces/kmmstatementinterface.cpp:55
@@ -7462,14 +7451,12 @@ msgstr ""
 msgid "%1 problem corrected."
 msgid_plural "%1 problems corrected."
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2494
 #, kde-format
 msgid "%1 problem still present."
 msgid_plural "%1 problems still present."
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2497
 #, kde-format
@@ -11123,35 +11110,30 @@ msgstr ""
 msgid "%1 commodity (equity)\n"
 msgid_plural "%1 commodities (equities)\n"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2371
 #, kde-format
 msgid "%1 price\n"
 msgid_plural "%1 prices\n"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2372
 #, kde-format
 msgid "%1 account\n"
 msgid_plural "%1 accounts\n"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2373
 #, kde-format
 msgid "%1 transaction\n"
 msgid_plural "%1 transactions\n"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2374
 #, kde-format
 msgid "%1 schedule\n"
 msgid_plural "%1 schedules\n"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2377
 #, kde-format
@@ -11163,21 +11145,18 @@ msgstr ""
 msgid "%1 inconsistency was detected and corrected\n"
 msgid_plural "%1 inconsistencies were detected and corrected\n"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2384
 #, kde-format
 msgid "%1 orphan account was created\n"
 msgid_plural "%1 orphan accounts were created\n"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2389
 #, kde-format
 msgid "%1 possible schedule problem was noted\n"
 msgid_plural "%1 possible schedule problems were noted\n"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2394
 #, kde-format
@@ -12714,7 +12693,6 @@ msgstr ""
 msgid "A beneficiary name is needed."
 msgid_plural "The beneficiary name must be at least %1 characters long"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:459
 #, kde-format
@@ -12740,14 +12718,12 @@ msgstr ""
 msgid "The end-to-end reference cannot contain more than one character."
 msgid_plural "The end-to-end reference cannot contain more than %1 characters."
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:498
 #, kde-format
 msgid "The maximal line length of %1 character per line is exceeded."
 msgid_plural "The maximal line length of %1 characters per line is exceeded."
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:502
 #, kde-format
@@ -12760,14 +12736,12 @@ msgstr ""
 msgid "In the purpose only a single line is allowed."
 msgid_plural "The purpose cannot contain more than %1 lines."
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:508
 #, kde-format
 msgid "A purpose is needed."
 msgid_plural "The purpose must be at least %1 characters long."
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.h:44
 #, kde-format
@@ -13621,14 +13595,12 @@ msgstr ""
 msgid "%1 cleared payment"
 msgid_plural "%1 cleared payments in total"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:144
 #, kde-format
 msgid "%1 cleared deposit"
 msgid_plural "%1 cleared deposits in total"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:150
 #, kde-format
@@ -13645,14 +13617,12 @@ msgstr ""
 msgid "%1 outstanding payment"
 msgid_plural "%1 outstanding payments in total"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:172
 #, kde-format
 msgid "%1 outstanding deposit"
 msgid_plural "%1 outstanding deposits in total"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:178
 #, kde-format
@@ -13664,14 +13634,12 @@ msgstr ""
 msgid "%1 payment after %2"
 msgid_plural "%1 payments after %2"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:217
 #, kde-format
 msgid "%1 deposit after %2"
 msgid_plural "%1 deposits after %2"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:223
 #, kde-format
@@ -13688,7 +13656,6 @@ msgstr ""
 msgid "One outstanding payment of"
 msgid_plural "Total of %1 outstanding payments amounting to"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:278
 #, kde-format
@@ -13705,14 +13672,12 @@ msgstr ""
 msgid "One outstanding charges of"
 msgid_plural "Total of %1 outstanding charges amounting to"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:305
 #, kde-format
 msgid "One outstanding deposit of"
 msgid_plural "Total of %1 outstanding deposits amounting to"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:74
 #, kde-format
@@ -14631,7 +14596,6 @@ msgstr ""
 msgid "1 day"
 msgid_plural "%1 days"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:377
 #: kmymoney/views/khomeview_p.h:1121
@@ -14646,7 +14610,6 @@ msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
 msgid_plural ""
 "The balance of %2 will drop below the minimum balance %3 in %1 days."
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:401
 #: kmymoney/views/khomeview_p.h:1143
@@ -14666,7 +14629,6 @@ msgstr ""
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:420
 #: kmymoney/views/khomeview_p.h:1161
@@ -14674,7 +14636,6 @@ msgstr[1] ""
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:435
 #, kde-format
@@ -15436,7 +15397,6 @@ msgstr ""
 msgid "There is a problem with file %1"
 msgid_plural "There are problems with file %1"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:102
 #, kde-format
@@ -17289,7 +17249,6 @@ msgid_plural ""
 "%1 days. Please update the key from a keyserver using your GPG frontend (e."
 "g. KGPG)."
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:576
 #, kde-format
@@ -18321,7 +18280,6 @@ msgstr ""
 msgid "Do you really want to delete the selected transaction?"
 msgid_plural "Do you really want to delete all %1 selected transactions?"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/views/kgloballedgerview.cpp:1476
 #, kde-format
@@ -18406,14 +18364,12 @@ msgstr ""
 msgid "%1 deposit (%2)"
 msgid_plural "%1 deposits (%2)"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/views/kgloballedgerview_p.h:824
 #, kde-format
 msgid "%1 charge (%2)"
 msgid_plural "%1 charges (%2)"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/views/kgloballedgerview_p.h:826
 #: kmymoney/views/kgloballedgerview_p.h:834
@@ -18421,7 +18377,6 @@ msgstr[1] ""
 msgid "%1 payment (%2)"
 msgid_plural "%1 payments (%2)"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/views/kgloballedgerview_p.h:829
 #, kde-format
@@ -18572,7 +18527,6 @@ msgstr ""
 msgid " (%1 payment)"
 msgid_plural " (%1 payments)"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/views/khomeview_p.h:942
 #, kde-format
@@ -18609,7 +18563,6 @@ msgctxt "Forecast days"
 msgid "%1 Day Forecast"
 msgid_plural "%1 Day Forecast"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/views/khomeview_p.h:1057
 #, kde-format
@@ -18617,7 +18570,6 @@ msgctxt "Forecast days"
 msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/views/khomeview_p.h:1263
 #, kde-format
@@ -20056,7 +20008,6 @@ msgid "Payment on %2 for %3 with %1 transaction remaining occurring %4."
 msgid_plural ""
 "Payment on %2 for %3 with %1 transactions remaining occurring %4."
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/widgets/kmymoneybriefschedule.cpp:81
 #, kde-format
@@ -20068,14 +20019,12 @@ msgstr ""
 msgid "%1 day overdue"
 msgid_plural "%1 days overdue"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/widgets/kmymoneybriefschedule.cpp:102
 #, kde-format
 msgid "(%1 occurrence.)"
 msgid_plural "(%1 occurrences.)"
 msgstr[0] ""
-msgstr[1] ""
 
 #. i18n: ectx: property (text), widget (QLabel, m_indexLabel)
 #: kmymoney/widgets/kmymoneybriefschedule.ui:105
@@ -21827,7 +21776,6 @@ msgstr ""
 msgid "one month"
 msgid_plural "%1 months"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:345
 #: kmymoney/wizards/newloanwizard/durationwizardpage.cpp:111
@@ -21835,7 +21783,6 @@ msgstr[1] ""
 msgid "one year"
 msgid_plural "%1 years"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:349
 #: kmymoney/wizards/newloanwizard/durationwizardpage.cpp:115
@@ -21843,7 +21790,6 @@ msgstr[1] ""
 msgid "one payment"
 msgid_plural "%1 payments"
 msgstr[0] ""
-msgstr[1] ""
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:389
 #, kde-format
