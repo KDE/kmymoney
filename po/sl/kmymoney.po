@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-30 00:47+0000\n"
-"PO-Revision-Date: 2023-04-24 09:48+0200\n"
+"PO-Revision-Date: 2023-05-30 08:24+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.2.2\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -6845,47 +6845,40 @@ msgid "  * Payee '%1' removed."
 msgstr "  * Prejemnik plačila '%1' odstranjen."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2940
-#, fuzzy, kde-format
-#| msgid "* Potential problem with securities/currencies"
+#, kde-format
 msgctxt "@info consistency check"
 msgid "* Potential problem with securities/currencies"
 msgstr "* Potencialni problem z vrednostnimi papirji/valutami"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2945
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * The account '%1' in currency '%2' has no price set for the opening "
-#| "date '%3'."
+#, kde-format
 msgctxt "@info consistency check"
 msgid ""
 "  * The account '%1' in currency '%2' has no price set for the date of its "
 "first usage on '%3'."
-msgstr "  * Račun '%1' v valuti '%2' nima določene cene za datum odprtja '%3'."
+msgstr ""
+"  * Račun '%1' v valuti '%2' nima določene cene za datum prve uporabe na "
+"'%3'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2949
-#, fuzzy, kde-format
-#| msgid ""
-#| "    Please enter a price for the currency on or before the opening date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid ""
 "    Please enter a price for the currency on or before the date of first "
 "usage."
-msgstr "    Vnesite ceno za valuto na ali pred datumom odprtja."
+msgstr "    Vnesite ceno za valuto na ali pred datumom prve uporabe."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2952
-#, fuzzy, kde-format
-#| msgid "  * The security '%1' has no price set for the opening date '%2'."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "  * The security '%1' has no price set for the first use on '%2'."
-msgstr "  * Vrednostni papir '%1' nima določene cene za datum odprtja '%2'."
+msgstr "  * Vrednostni papir '%1' nima določene cene za prvo uporabo na '%2'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2955
-#, fuzzy, kde-format
-#| msgid ""
-#| "    Please enter a price for the security on or before the opening date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the security on or before this date."
-msgstr "    Vnesite ceno vrednostnega papirja na ali pred datumom odprtja."
+msgstr "    Vnesite ceno vrednostnega papirja na ali pred tem datumom."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2976
 #, kde-format

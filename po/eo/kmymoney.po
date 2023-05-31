@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-30 00:47+0000\n"
-"PO-Revision-Date: 2023-05-17 16:20+0100\n"
+"PO-Revision-Date: 2023-05-30 22:35+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -2523,14 +2523,14 @@ msgstr "Buĝetaj elektoj"
 #, kde-format
 msgctxt "@item:inlistbox Don't include this account in budgets"
 msgid "Don't include in budgets"
-msgstr ""
+msgstr "Ne inkluzivi en buĝetoj"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
 #: kmymoney/dialogs/knewaccountdlg.ui:305
 #, kde-format
 msgctxt "@item:inlistbox Include this account in budgets as expense"
 msgid "Include in budgets as expense"
-msgstr ""
+msgstr "Inkluzivi en buĝetoj kiel elspezoj"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_budgetInclusion)
 #: kmymoney/dialogs/knewaccountdlg.ui:310
@@ -6793,50 +6793,43 @@ msgid "  * Payee '%1' removed."
 msgstr "  * Pagato '%1' forigita."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2940
-#, fuzzy, kde-format
-#| msgid "* Potential problem with securities/currencies"
+#, kde-format
 msgctxt "@info consistency check"
 msgid "* Potential problem with securities/currencies"
 msgstr "* Ebla problemo kun valorpaperoj/valutoj"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2945
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * The account '%1' in currency '%2' has no price set for the opening "
-#| "date '%3'."
+#, kde-format
 msgctxt "@info consistency check"
 msgid ""
 "  * The account '%1' in currency '%2' has no price set for the date of its "
 "first usage on '%3'."
 msgstr ""
-"  * La konto '%1' en valuto '%2' havas neniun prezon fiksitan por la "
-"malferma dato '%3'."
+"  * La konto '%1' en valuto '%2' havas neniun prezon fiksitan por la dato de "
+"ĝia unua uzo je '%3'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2949
-#, fuzzy, kde-format
-#| msgid ""
-#| "    Please enter a price for the currency on or before the opening date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid ""
 "    Please enter a price for the currency on or before the date of first "
 "usage."
-msgstr "    Bonvolu enigi prezon por la valuto en aŭ antaŭ la malferma dato."
+msgstr ""
+"    Bonvolu enigi prezon por la valuto en aŭ antaŭ la dato de unua uzado."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2952
-#, fuzzy, kde-format
-#| msgid "  * The security '%1' has no price set for the opening date '%2'."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "  * The security '%1' has no price set for the first use on '%2'."
 msgstr ""
-"  * La sekureco '%1' havas neniun prezon fiksitan por la malferma dato '%2'."
+"  * La sekureco '%1' havas neniun prezon fiksitan por la dato de unua uzo je "
+"'%2'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2955
-#, fuzzy, kde-format
-#| msgid ""
-#| "    Please enter a price for the security on or before the opening date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the security on or before this date."
-msgstr "    Bonvolu enigi prezon por la sekureco en aŭ antaŭ la malferma dato."
+msgstr "    Bonvolu enigi prezon por la sekureco en aŭ antaŭ ĉi tiu dato."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2976
 #, kde-format
@@ -21068,8 +21061,8 @@ msgstr "%1 de %2"
 msgid "Payment on %2 for %3 with %1 transaction remaining occurring %4."
 msgid_plural ""
 "Payment on %2 for %3 with %1 transactions remaining occurring %4."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Pago je %2 por %3 kun %1 transakcio restanta okazante %4."
+msgstr[1] "Pago je %2 por %3 kun %1 transakcioj restantaj okazante %4."
 
 #: kmymoney/widgets/kmymoneybriefschedule.cpp:82
 #, kde-format

@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-30 00:47+0000\n"
-"PO-Revision-Date: 2023-04-18 10:59+0200\n"
+"PO-Revision-Date: 2023-05-30 12:40+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.1\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -6871,49 +6871,42 @@ msgid "  * Payee '%1' removed."
 msgstr "  * Begunstigde '%1' is verwijderd."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2940
-#, fuzzy, kde-format
-#| msgid "* Potential problem with securities/currencies"
+#, kde-format
 msgctxt "@info consistency check"
 msgid "* Potential problem with securities/currencies"
 msgstr "* Mogelijk probleem met waardepapieren/valutas"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2945
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * The account '%1' in currency '%2' has no price set for the opening "
-#| "date '%3'."
+#, kde-format
 msgctxt "@info consistency check"
 msgid ""
 "  * The account '%1' in currency '%2' has no price set for the date of its "
 "first usage on '%3'."
 msgstr ""
-"* De rekening '%1' in valuta '%2' kent geen koers op openingsdatum '%3'"
+"* De rekening '%1' in valuta '%2' kent geen koers op de datum van eerste "
+"gebruik op '%3'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2949
-#, fuzzy, kde-format
-#| msgid ""
-#| "    Please enter a price for the currency on or before the opening date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid ""
 "    Please enter a price for the currency on or before the date of first "
 "usage."
-msgstr "Geeft een koers op voor de valuta op of voor de openingsdatum."
+msgstr ""
+"Geeft een koers op voor de valuta op of voor de datum van eerste gebruik."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2952
-#, fuzzy, kde-format
-#| msgid "  * The security '%1' has no price set for the opening date '%2'."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "  * The security '%1' has no price set for the first use on '%2'."
-msgstr " * Het waardepapier '%1' kent geen koers voor openingsdatum '%2'."
+msgstr ""
+" * Het waardepapier '%1' kent geen koers voor het eerste gebruik op '%2'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2955
-#, fuzzy, kde-format
-#| msgid ""
-#| "    Please enter a price for the security on or before the opening date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the security on or before this date."
-msgstr ""
-"    Geeft een koers op voor het waardepapier op of voor de openingsdatum."
+msgstr "    Geeft een koers op voor het waardepapier op of voor deze datum."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2976
 #, kde-format
