@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-30 00:47+0000\n"
-"PO-Revision-Date: 2023-04-18 10:39+0200\n"
+"PO-Revision-Date: 2023-05-30 08:56+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -6884,50 +6884,42 @@ msgid "  * Payee '%1' removed."
 msgstr "  * S'ha eliminat el beneficiari «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2940
-#, fuzzy, kde-format
-#| msgid "* Potential problem with securities/currencies"
+#, kde-format
 msgctxt "@info consistency check"
 msgid "* Potential problem with securities/currencies"
 msgstr "* Problema potencial amb els títols/divises"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2945
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * The account '%1' in currency '%2' has no price set for the opening "
-#| "date '%3'."
+#, kde-format
 msgctxt "@info consistency check"
 msgid ""
 "  * The account '%1' in currency '%2' has no price set for the date of its "
 "first usage on '%3'."
 msgstr ""
-"  * El compte «%1» en la divisa «%2» no té preu establit per a la data "
-"d'obertura «%3»."
+"  * El compte «%1» en la divisa «%2» no té preu establit per a la data del "
+"seu primer ús «%3»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2949
-#, fuzzy, kde-format
-#| msgid ""
-#| "    Please enter a price for the currency on or before the opening date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid ""
 "    Please enter a price for the currency on or before the date of first "
 "usage."
 msgstr ""
-"    Introduïu un preu per a la divisa en o abans de la data d'obertura."
+"    Introduïu un preu per a la divisa en o abans de la data del primer ús."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2952
-#, fuzzy, kde-format
-#| msgid "  * The security '%1' has no price set for the opening date '%2'."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "  * The security '%1' has no price set for the first use on '%2'."
-msgstr "  * El títol «%1» no té preu establit per a la data d'obertura «%2»."
+msgstr ""
+"  * El títol «%1» no té preu establit per a la data del primer ús «%2»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2955
-#, fuzzy, kde-format
-#| msgid ""
-#| "    Please enter a price for the security on or before the opening date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the security on or before this date."
-msgstr "    Introduïu un preu per al títol en o abans de la data d'obertura."
+msgstr "    Introduïu un preu per al títol en o abans d'esta data."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2976
 #, kde-format
@@ -19345,8 +19337,7 @@ msgid ""
 "are still used. They will be made sub-categories of <b>%2</b>. Proceed?</p>"
 msgstr ""
 "<p>Algunes subcategories de la categoria <b>%1</b> no s'ha pogut suprimir "
-"perquè encara estan en ús. Esdevindran categories de <b>%2</b>. Voleu "
-"continuar?</p>"
+"perquè encara estan en ús. Esdevindran categories de <b>%2</b>. Continue?</p>"
 
 #: kmymoney/views/kcategoriesview.cpp:412
 #, kde-format
