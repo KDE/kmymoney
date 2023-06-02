@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-30 00:47+0000\n"
-"PO-Revision-Date: 2023-05-05 21:22+0200\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
+"PO-Revision-Date: 2023-05-31 13:50+0200\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -6948,17 +6948,13 @@ msgid "  * Payee '%1' removed."
 msgstr " * Le bénéficiaire « %1 » est supprimé."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2940
-#, fuzzy, kde-format
-#| msgid "* Potential problem with securities/currencies"
+#, kde-format
 msgctxt "@info consistency check"
 msgid "* Potential problem with securities/currencies"
-msgstr "* Problème potentiel avec les titres/devises"
+msgstr "* Problème potentiel avec les les titres / devises"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2945
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * The account '%1' in currency '%2' has no price set for the opening "
-#| "date '%3'."
+#, kde-format
 msgctxt "@info consistency check"
 msgid ""
 "  * The account '%1' in currency '%2' has no price set for the date of its "
@@ -6968,9 +6964,7 @@ msgstr ""
 "d'ouverture « %3 »."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2949
-#, fuzzy, kde-format
-#| msgid ""
-#| "    Please enter a price for the currency on or before the opening date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid ""
 "    Please enter a price for the currency on or before the date of first "
@@ -6979,21 +6973,17 @@ msgstr ""
 " Veuillez saisir un cours pour la devise avant ou à la date d'ouverture."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2952
-#, fuzzy, kde-format
-#| msgid "  * The security '%1' has no price set for the opening date '%2'."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "  * The security '%1' has no price set for the first use on '%2'."
 msgstr ""
 " * Le titre « %1 » n'a pas de cours défini à la date d'ouverture « %2 »."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2955
-#, fuzzy, kde-format
-#| msgid ""
-#| "    Please enter a price for the security on or before the opening date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the security on or before this date."
-msgstr ""
-" Veuillez saisir un cours pour le titre avant ou à la date d'ouverture."
+msgstr " Veuillez saisir un cours pour le titre à ou avant cette date."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2976
 #, kde-format
