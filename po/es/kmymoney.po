@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-02 02:38+0000\n"
-"PO-Revision-Date: 2023-03-13 21:09+0100\n"
+"PO-Revision-Date: 2023-06-03 01:39+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -218,8 +218,7 @@ msgstr "Categoría predeterminada para el beneficiario"
 #: kmymoney/converter/mymoneystatementreader.cpp:1043
 #, kde-format
 msgid "Please select a default category for payee '%1'"
-msgstr ""
-"Por favor, seleccione una categoría predeterminada para el beneficiario «%1»"
+msgstr "Seleccione una categoría predeterminada para el beneficiario «%1»"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1066
 #, kde-format
@@ -1184,8 +1183,8 @@ msgid ""
 "This dialog does not allow new categories to be created. Please pick a "
 "category from the list."
 msgstr ""
-"Este diálogo no permite crear nuevas categorías. Por favor, escoja una "
-"categoría de la lista."
+"Este diálogo no permite crear nuevas categorías. Escoja una categoría de la "
+"lista."
 
 #: kmymoney/dialogs/kcategoryreassigndlg.cpp:94
 #, kde-format
@@ -1208,8 +1207,8 @@ msgid ""
 msgstr ""
 "Los asientos, planificaciones y presupuestos asociados con la categoría "
 "seleccionada se deben reasignar a una categoría diferente antes de que la "
-"categoría seleccionada se pueda borrar. Por favor, seleccione una categoría "
-"de la lista siguiente."
+"categoría seleccionada se pueda borrar. Seleccione una categoría de la lista "
+"siguiente."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/dialogs/kcategoryreassigndlg.ui:61
@@ -1227,7 +1226,7 @@ msgid ""
 "\n"
 "Once you have chosen an import type please press the OK button."
 msgstr ""
-"Por favor, escoja el tipo de importación que desea realizar. Dispone de\n"
+"Escoja el tipo de importación que desea realizar. Dispone de\n"
 "una breve descripción de cada tipo en el fondo de la pantalla, que se\n"
 "actualiza cuando escoge una opción.\n"
 "\n"
@@ -1257,7 +1256,7 @@ msgid ""
 "\n"
 "Once you have chosen an export type please press the OK button."
 msgstr ""
-"Por favor, escoja el tipo de exportación a realizar. Dispone de una breve\n"
+"Escoja el tipo de exportación a realizar. Dispone de una breve\n"
 "descripción del tipo de exportación en el fondo de la pantalla, que es\n"
 "actualizado cuando escoge una opción.\n"
 "\n"
@@ -1323,8 +1322,7 @@ msgid ""
 "\n"
 "Once you have chosen an import type please press the OK button."
 msgstr ""
-"Por favor, escoja el tipo de importación que desea realizar. Dispone de una "
-"breve\n"
+"Escoja el tipo de importación que desea realizar. Dispone de una breve\n"
 "explicación de cada tipo en el fondo de la pantalla, que se actualiza "
 "cuando\n"
 "escoge una opción.\n"
@@ -1455,7 +1453,7 @@ msgstr "Se realizaron los siguientes cambios a los datos del asiento:"
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:61
 #, kde-format
 msgid "Please choose what you wish to do with the above changes"
-msgstr "Por favor, escoja qué desea hacer con los cambios"
+msgstr "Escoja lo que desea hacer con los cambios"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_discardRadio)
 #: kmymoney/dialogs/kconfirmmanualenterdlg.ui:67
@@ -2334,11 +2332,10 @@ msgid ""
 "(You will be asked what you intend after pressing OK in the following "
 "dialog)</p>"
 msgstr ""
-"<p>Por favor, compruebe que todos los detalles son correctos y pulse "
-"«Aceptar»</p><p>Los datos editables pueden ser cambiados y también pueden "
-"ser aplicados a solo esta o a todas las siguientes apariciones de este "
-"evento planificado (se le preguntará qué pretende después de pulsar Aceptar)."
-"</p>"
+"<p>Compruebe que todos los detalles son correctos y pulse «Aceptar»</"
+"p><p>Los datos editables pueden ser cambiados y también pueden ser aplicados "
+"a solo esta o a todas las siguientes apariciones de este evento planificado "
+"(se le preguntará qué pretende después de pulsar Aceptar).</p>"
 
 #: kmymoney/dialogs/kenterscheduledlg.cpp:237
 #, kde-format
@@ -3142,13 +3139,13 @@ msgid ""
 "You have not specified a name.\n"
 "Please fill in this field."
 msgstr ""
-"No especificó un nombre.\n"
-"Por favor, rellene el campo."
+"No ha especificado ningún nombre.\n"
+"Rellene este campo."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:629
 #, kde-format
 msgid "Please select a parent account."
-msgstr "Por favor, seleccione una cuenta madre."
+msgstr "Seleccione una cuenta madre."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:635
 #: kmymoney/dialogs/knewaccountdlg.cpp:786
@@ -3481,9 +3478,7 @@ msgstr "Incluir en informes de impuestos"
 #: kmymoney/dialogs/knewbankdlg.cpp:130
 #, kde-format
 msgid "The institution name field is empty.  Please enter the name."
-msgstr ""
-"El campo nombre de la institución está vacío. Por favor, introduzca el "
-"nombre."
+msgstr "El campo nombre de la institución está vacío. Introduzca el nombre."
 
 #: kmymoney/dialogs/knewbankdlg.cpp:130
 #, kde-format
@@ -3635,8 +3630,8 @@ msgid ""
 "This dialog does not allow new payees to be created. Please pick a payee "
 "from the list."
 msgstr ""
-"Este cuadro de diálogo no permite crear nuevos beneficiarios. Por favor, "
-"escoja un beneficiario de la lista."
+"Este cuadro de diálogo no permite crear nuevos beneficiarios. Escoja un "
+"beneficiario de la lista."
 
 #: kmymoney/dialogs/kpayeereassigndlg.cpp:110
 #, kde-format
@@ -5889,9 +5884,9 @@ msgid ""
 msgstr ""
 "<p>La cuenta «%1» fue creada con anterioridad como de tipo préstamo pero "
 "falta alguna información.</p><p>El asistente para nuevos préstamos se "
-"iniciará  para recoger toda la información pertinente.</p><p>Por favor, use "
-"una versión de KMyMoney igual o superior a 0.8.7 e inferior a la versión 0.9 "
-"para corregir el problema.</p>"
+"iniciará  para recoger toda la información pertinente.</p><p>Use una versión "
+"de KMyMoney igual o superior a 0.8.7 e inferior a la versión 0.9 para "
+"corregir el problema.</p>"
 
 #: kmymoney/kmymoney.cpp:906
 #, kde-format
@@ -7190,8 +7185,7 @@ msgstr "archivo a abrir"
 #: kmymoney/main.cpp:307
 #, kde-format
 msgid "Uncaught error. Please report the details to the developers"
-msgstr ""
-"Error no detectado. Por favor, informe de los detalles a los desarrolladores."
+msgstr "Error no detectado. Informe de los detalles a los desarrolladores."
 
 #: kmymoney/models/accountsmodel.cpp:570
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:344
@@ -7700,8 +7694,8 @@ msgid ""
 "    Please open it in the account editor (Account/Edit account) once and "
 "press OK."
 msgstr ""
-"    Por favor, ábrala en el editor de cuentas (Cuenta/Editar cuenta) una vez "
-"y pulse Aceptar."
+"    Ábrala en el editor de cuentas (Cuenta/Editar cuenta) una vez y pulse "
+"Aceptar."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2055
 #, kde-format
@@ -7778,7 +7772,7 @@ msgid ""
 "Please fix manually."
 msgstr ""
 "  * La partida %2 en el asiento «%1» contiene una referencia a la cuenta no "
-"válida %3. Por favor, corríjala manualmente."
+"válida %3. Corríjala manualmente."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2224
 #, kde-format
@@ -7860,7 +7854,7 @@ msgid ""
 "Please fix manually."
 msgstr ""
 "  * La partida %2 en el asiento planificado «%1» contiene una referencia a "
-"una cuenta no válida %3. Por favor, corríjala manualmente."
+"una cuenta no válida %3. Corríjala manualmente."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2356
 #, kde-format
@@ -9784,8 +9778,8 @@ msgstr ""
 "Desde este diálogo puede exportar transacciones a un archivo de valores "
 "separados por comas (conocido genéricamente como archivo CSV, debido a su "
 "extensión). No obstante, puedes especificar un separador alternativo a "
-"continuación. Por favor, introduzca la ruta al archivo CSV o selecciónelo "
-"pulsando en el botón «Explorar».\n"
+"continuación. Introduzca la ruta al archivo CSV o selecciónelo pulsando en "
+"el botón «Explorar».\n"
 "\n"
 "Puede escoger la ruta del archivo y la cuenta. Seleccione la cuenta para "
 "exportar todas las transacciones entre las fechas especificadas, o "
@@ -10002,7 +9996,7 @@ msgid ""
 "Please re-enter your column selections."
 msgstr ""
 "<center>Nombre del campo no reconocido.</center><center>«<b>%1</b>»</center> "
-"Por favor, introduzca de nuevo sus selecciones de columna."
+"Introduzca de nuevo sus selecciones de columna."
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:346
 #: kmymoney/plugins/csv/import/csvwizard.cpp:988
@@ -10031,7 +10025,7 @@ msgid ""
 "'%4'.</center><center>Please choose which you wish to accept.</center>"
 msgstr ""
 "<center>El campo %1 contiene «%2»</center><center>y el campo %3 contiene "
-"«%4».</center><center>Por favor, seleccione cuál desea aceptar.</center>"
+"«%4».</center><center>Seleccione cuál desea aceptar.</center>"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:395
 #, kde-format
@@ -10057,7 +10051,7 @@ msgid ""
 "Please select the appropriate columns to use,\n"
 " corresponding to your data."
 msgstr ""
-"Por favor, seleccione las columnas apropiadas a usar,\n"
+"Seleccione las columnas apropiadas que se deben usar,\n"
 " correspondientes a sus datos."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_number)
@@ -10397,8 +10391,7 @@ msgid ""
 "<center>Profile <b>%1</b> already exists.<br>Please enter another name</"
 "center>"
 msgstr ""
-"<center>El perfil <b>%1</b> ya existe.<br>Por favor, introduzca otro nombre</"
-"center>"
+"<center>El perfil <b>%1</b> ya existe.<br>Introduzca otro nombre</center>"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:558
 #, kde-format
@@ -10445,7 +10438,7 @@ msgid ""
 "center><center>Please check your selections.</center>"
 msgstr ""
 "<center>Existen formatos de fecha no válidos en la columna «%1».</"
-"center><center>Por favor, compruebe su selección.</center>"
+"center><center>Compruebe su selección.</center>"
 
 #. i18n: Noun, the introduction.
 #. i18n: ectx: property (text), widget (QLabel, label_intro)
@@ -10525,7 +10518,7 @@ msgid ""
 "If all is OK, you will be able to click 'Import'.\n"
 "If required, a QIF file may then be produced."
 msgstr ""
-"Por favor, seleccione el símbolo decimal usado en el archivo.\n"
+"Seleccione el símbolo decimal usado en el archivo.\n"
 "El delimitador de miles cambia automáticamente.\n"
 "Si todo es correcto, podrá pulsar «Importar».\n"
 "Si se ha solicitado, se generará un archivo QIF."
@@ -10728,7 +10721,7 @@ msgid ""
 "center>Please re-enter your column selections."
 msgstr ""
 "<center>Nombre del campo no reconocido.</center><center>«<b>%1</b>»</center> "
-"Por favor, introduzca de nuevo sus selecciones de columna."
+"Introduzca de nuevo sus selecciones de columna."
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:402
 #, kde-format
@@ -10740,7 +10733,7 @@ msgid ""
 msgstr ""
 "Los valores de las columnas que ha seleccionado\n"
 "no coinciden con ningún tipo esperado de inversión.\n"
-"Por favor, compruebe los campos de la transacción actual,\n"
+"Compruebe los campos de la transacción actual,\n"
 "y también sus selecciones."
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:416
@@ -10756,8 +10749,8 @@ msgid ""
 "center><center>Please check the parameters supplied.</center>"
 msgstr ""
 "<center>No se ha encontrado ningún tipo de acción válido para esta "
-"transacción.</center><center>Por favor, compruebe los parámetros "
-"proporcionados.</center>"
+"transacción.</center><center>Compruebe los parámetros proporcionados.</"
+"center>"
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:453
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:151
@@ -10766,8 +10759,8 @@ msgid ""
 "The '<b>%1</b>' field already has this column selected. <center>Please "
 "reselect both entries as necessary.</center>"
 msgstr ""
-"El campo «<b>%1</b>» ya tiene esta columna seleccionada. <center>Por favor, "
-"vuelva a seleccionar ambas entradas como sea necesario.</center>"
+"El campo «<b>%1</b>» ya tiene esta columna seleccionada. <center>Vuelva a "
+"seleccionar ambas entradas como sea necesario.</center>"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, InvestmentPage)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:20
@@ -10783,8 +10776,7 @@ msgid ""
 "If there is just a single security in the file, enter its name below.\n"
 "Otherwise, select the column for the symbol, and for the description or name."
 msgstr ""
-"Por favor, seleccione las columnas adecuadas a usar que correspondan con sus "
-"datos.\n"
+"Seleccione las columnas adecuadas a usar que correspondan con sus datos.\n"
 "Si solo existe un único valor bursátil en el archivo, introduzca su nombre a "
 "continuación.\n"
 "En caso contrario, seleccione la columna para el símbolo y para la "
@@ -11058,8 +11050,7 @@ msgstr "Página del asistente de precios"
 msgid ""
 "Please select the appropriate columns to use, corresponding to your data.\n"
 msgstr ""
-"Por favor, seleccione las columnas apropiadas a usar que correspondan con "
-"sus datos.\n"
+"Seleccione las columnas apropiadas a usar que correspondan con sus datos.\n"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, RowsPage)
 #: kmymoney/plugins/csv/import/rowswizardpage.ui:20
@@ -11074,7 +11065,7 @@ msgid ""
 "Please set your data range.\n"
 "Ensure that statement header and footer is excluded."
 msgstr ""
-"Por favor, defina el intervalo de datos.\n"
+"Defina el intervalo de datos.\n"
 "Asegúrese de que se excluyan la cabecera y el pie del extracto."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_headerHasName)
@@ -11151,7 +11142,7 @@ msgid ""
 "Please complete every missing name or symbol."
 msgstr ""
 "KMyMoney no conoce los siguientes nombres y símbolos de valores bursátiles.\n"
-"Por favor, complete todos los nombres y símbolos que faltan."
+"Complete todos los nombres y símbolos que faltan."
 
 #. i18n: ectx: property (text), widget (QLabel, label_title)
 #: kmymoney/plugins/csv/import/securitydlg.ui:26
@@ -11290,8 +11281,7 @@ msgid ""
 msgstr ""
 "<center>La siguiente transacción posee un tipo no válido o no reconocido.</"
 "center>\n"
-"<center>Por favor, seleccione una entrada apropiada, si está disponible.</"
-"center>\n"
+"<center>Seleccione una entrada apropiada, si está disponible.</center>\n"
 "<center>En caso contrario, pulse «Cancelar» para interrumpir.</center>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -11625,7 +11615,7 @@ msgid ""
 "please check"
 msgstr ""
 "Cuenta o categoría %1, fecha de la transacción %2; la partida contiene un "
-"valor no válido; por favor, compruébela"
+"valor no válido; compruébela"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1788
 #, kde-format
@@ -11686,7 +11676,7 @@ msgid ""
 "correct operation"
 msgstr ""
 "La planificación %1 contiene una especificación de intervalo desconocida; "
-"por favor, compruebe que el funcionamiento sea el correcto"
+"compruebe que el funcionamiento sea el correcto"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2180
 #, kde-format
@@ -11694,8 +11684,8 @@ msgid ""
 "Schedule %1 contains a deferred interval specification; please check for "
 "correct operation"
 msgstr ""
-"La planificación %1 contiene una especificación de intervalo diferida; por "
-"favor, compruebe que el funcionamiento sea el correcto"
+"La planificación %1 contiene una especificación de intervalo diferida. "
+"Compruebe que el funcionamiento sea el correcto."
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2205
 #, kde-format
@@ -12254,7 +12244,7 @@ msgid ""
 "</qt>"
 msgstr ""
 "<qt>\n"
-"Por favor, elija la cuenta <b>en línea</b> a la que quiere mapear\n"
+"Elija la cuenta <b>en línea</b> a la que quiere mapear\n"
 "la <b>aplicación</b> de la cuenta de la lista de abajo.\n"
 "</qt>"
 
@@ -12295,9 +12285,9 @@ msgid ""
 "retrieved from <b>%1</b>.</p><p>If you specify no date then the bank will "
 "choose one.</p></qt>"
 msgstr ""
-"<qt><p>Por favor, seleccione la primera fecha para la que deben descargarse "
-"operaciones de <b>%1</b>.</p><p>Si no especifica una fecha, el banco elegirá "
-"una.</p></qt>"
+"<qt><p>Seleccione la primera fecha para la que deben descargarse operaciones "
+"de <b>%1</b>.</p><p>Si no especifica una fecha, el banco elegirá una.</p></"
+"qt>"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBPickStartDate)
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.ui:14
@@ -12789,12 +12779,12 @@ msgstr "No permite banca electrónica"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:288
 #, kde-format
 msgid "Please choose a bank."
-msgstr "Por favor, escoja un banco."
+msgstr "Escoja un banco."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:294
 #, kde-format
 msgid "Please fill all fields with values."
-msgstr "Por favor, complete todos los campos con valores."
+msgstr "Complete todos los campos con valores."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:298
 #, kde-format
@@ -12809,7 +12799,7 @@ msgstr "No se han encontrado cuentas compatibles en este banco."
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:426
 #, kde-format
 msgid "Please choose an account"
-msgstr "Por favor, escoja una cuenta"
+msgstr "Escoja una cuenta"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:531
 #, kde-format
@@ -12853,8 +12843,7 @@ msgstr "Seleccionar una institución financiera"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:38
 #, kde-format
 msgid "Please select your financial institution from the list below..."
-msgstr ""
-"Por favor, seleccione su institución financiera de la siguiente lista..."
+msgstr "Seleccione su institución financiera de la siguiente lista..."
 
 #. i18n: ectx: attribute (title), widget (QWidget, autoTab)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:55
@@ -12902,10 +12891,10 @@ msgid ""
 "online banking.  Please note that many banks require a separate signup, and "
 "assign a separate PIN or password just for online banking from home."
 msgstr ""
-"Por favor, introduzca el usuario y la contraseña que usa para iniciar sesión "
-"en este banco para banca electrónica. Por favor, tenga en cuenta que muchos "
-"bancos necesitan que se dé de alta por separado, y asignan una contraseña o "
-"PIN diferente para usar banca electrónica desde el hogar."
+"introduzca el usuario y la contraseña que usa para iniciar sesión en este "
+"banco para banca electrónica. tenga en cuenta que muchos bancos necesitan "
+"que se dé de alta por separado, y asignan una contraseña o PIN diferente "
+"para usar banca electrónica desde el hogar."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_4)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:202
@@ -12983,8 +12972,8 @@ msgid ""
 "Please select the account from your financial institution from the list "
 "below which matches this account."
 msgstr ""
-"Por favor, seleccione la cuenta de su institución financiera de la siguiente "
-"lista que coincida con esta cuenta."
+"Seleccione la cuenta de su institución financiera de la siguiente lista que "
+"coincida con esta cuenta."
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:386
@@ -13949,8 +13938,8 @@ msgid ""
 "detailing how many transactions, categories and payees were exported."
 msgstr ""
 "Mediante este diálogo es posible exportar asientos a un archivo compatible "
-"con quicken, (conocidos como archivos QIF, debido a la extensión). Por "
-"favor, introduzca la ruta al archivo QIF o escójalo pulsando en el botón "
+"con quicken, (conocidos como archivos QIF, debido a la extensión). "
+"Introduzca la ruta al archivo QIF o escójalo pulsando en el botón "
 "«Escoger».\n"
 "\n"
 "Puede escoger la ruta al archivo, la cuenta y el formato del archivo QIF "
@@ -14046,10 +14035,10 @@ msgstr ""
 "<p>Desde este diálogo puede importar asientos desde un archivo compatible "
 "con Quicken<b>&trade;</b> (conocido como archivo QIF, por la extensión "
 "usada).</p>\n"
-"<p>Por favor, introduzca la ruta al archivo QIF o selecciónelo pulsando en "
-"el botón «Explorar». Cuando tenga la ruta al archivo, pulse el botón "
-"«Importar» y KMyMoney importará todos los asientos, categorías y "
-"beneficiarios que encuentre.</p>"
+"<p>Introduzca la ruta al archivo QIF o selecciónelo pulsando en el botón "
+"«Explorar». Cuando tenga la ruta al archivo, pulse el botón «Importar» y "
+"KMyMoney importará todos los asientos, categorías y beneficiarios que "
+"encuentre.</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, lblImportFile)
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:54
@@ -14278,8 +14267,8 @@ msgid ""
 "manually once the import is done."
 msgstr ""
 "KMyMoney ha importado un segundo asiento de apertura a la cuenta <b>%1</b>, "
-"que difiere del que ya se encontraba en archivo. Por favor, corrija esto "
-"manualmente una vez terminada la importación."
+"que difiere del que ya se encontraba en archivo. Corrija esto manualmente "
+"una vez terminada la importación."
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:977
 #, kde-format
@@ -14550,9 +14539,9 @@ msgid ""
 msgstr ""
 "El tipo de base de datos %1 no ha sido completamente probado en un entorno "
 "de KMyMoney.\n"
-"Por favor, asegúrese de tener copias de respaldo suficientes de sus datos.\n"
-"Por favor, informe de cualquier problema a la lista de correo de desarrollo "
-"en kmymoney-devel@kde.org"
+"Asegúrese de tener copias de respaldo suficientes de sus datos.\n"
+"Informe de cualquier problema a la lista de correo de desarrollo en kmymoney-"
+"devel@kde.org"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KGenerateSqlDlg)
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:32
@@ -14630,8 +14619,8 @@ msgid ""
 "As always, please make sure you have adequate backups of your data."
 msgstr ""
 "Esta aplicación está todavía en una etapa experimental y tiene todavía "
-"problemas en el tiempo de respuesta. Por favor, sea paciente, estamos "
-"trabajando en resolverlos.\n"
+"problemas en el tiempo de respuesta. Sea paciente, estamos trabajando en "
+"resolverlos.\n"
 "Como siempre, asegúrese de tener copias de seguridad suficientes de sus "
 "datos."
 
@@ -14720,7 +14709,7 @@ msgid ""
 msgstr ""
 "La creación automática de base de datos para el tipo %1 no está implementada "
 "actualmente.\n"
-"Por favor, cree la base de datos %2 manualmente"
+"Cree la base de datos %2 manualmente."
 
 #: kmymoney/plugins/sql/mymoneystoragesql_p.h:2065
 #, kde-format
@@ -15158,7 +15147,7 @@ msgstr "Guardar cambios"
 #: kmymoney/plugins/views/budget/knewbudgetdlg.cpp:89
 #, kde-format
 msgid "Please specify a budget name"
-msgstr "Por favor, especifique un nombre de presupuesto"
+msgstr "Especifique un nombre para el presupuesto"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KNewBudgetDlg)
 #: kmymoney/plugins/views/budget/knewbudgetdlg.ui:14
@@ -16226,8 +16215,8 @@ msgid ""
 "Please report this error to the developer's list: kmymoney-devel@kde.org"
 msgstr ""
 "Ha ocurrido un error al crear su informe: «%1».\n"
-"Por favor, informe de este error a la lista de correo de desarrolladores: "
-"kmymoney-devel@kde.org"
+"Informe de este error a la lista de correo de desarrolladores: kmymoney-"
+"devel@kde.org"
 
 #: kmymoney/plugins/views/reports/kbalancechartdlg.cpp:37
 #, kde-format
@@ -16540,8 +16529,7 @@ msgid ""
 "Please report this error to the developer's list: kmymoney-devel@kde.org"
 msgstr ""
 "No se ha podido encontrar el grupo de informes «%1» para el informe «%2».\n"
-"Por favor, informe de este error a la lista de desarrolladores: kmymoney-"
-"devel@kde.org"
+"Informe de este error a la lista de desarrolladores: kmymoney-devel@kde.org"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:337
 #, kde-format
@@ -17376,7 +17364,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:81
 #, kde-format
 msgid "Mark as a favorite report"
-msgstr "Marcar como informe preferido"
+msgstr "Marcar como informe favorito"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_skipZero)
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:113
@@ -17897,7 +17885,7 @@ msgstr "Seleccione motor"
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:21
 #, kde-format
 msgid "Please select a backend from the list below..."
-msgstr "Por favor, seleccione un motor de la siguiente lista..."
+msgstr "Seleccione un motor de la siguiente lista..."
 
 #. i18n: ectx: property (text), widget (QTreeWidget, backendsList)
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:33
@@ -18013,8 +18001,8 @@ msgid ""
 "You have configured KMyMoney to save your data secured with GPG. Please "
 "choose the key you want to use for encryption of your data."
 msgstr ""
-"Ha configurado KMyMoney para que guarde los datos asegurados con GPG. Por "
-"favor, escoja la clave que desea usar para cifrar los datos."
+"Ha configurado KMyMoney para que guarde los datos asegurados con GPG. Escoja "
+"la clave que desea usar para cifrar los datos."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/xml/kgpgkeyselectiondlg.ui:39
@@ -18164,9 +18152,9 @@ msgid ""
 "can be found using the standard search path. This time, encryption is "
 "disabled."
 msgstr ""
-"Parece que GPG no está instalado en su sistema. Por favor, asegúrese de que "
-"se puede encontrar GPG en la ruta estándar de búsqueda. Por ahora, no es "
-"posible cifrar."
+"Parece que GPG no está instalado en su sistema. Asegúrese de que se puede "
+"encontrar GPG en la ruta estándar de búsqueda. Por ahora, no es posible "
+"cifrar."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:441
 #, kde-format
@@ -18240,13 +18228,13 @@ msgid_plural ""
 msgstr[0] ""
 "Ha configurado KMyMoney para que use el cifrado GPG para proteger sus datos "
 "y para que cifre sus datos también con la clave de recuperación de KMyMoney. "
-"Esta clave expirará en %1 día. Por favor, actualice la clave desde un "
-"servidor de claves usando su interfaz preferida de GPG (por ejemplo, KGPG)."
+"Esta clave expirará en %1 día. Actualice la clave desde un servidor de "
+"claves usando su interfaz preferida de GPG (por ejemplo, KGPG)."
 msgstr[1] ""
 "Ha configurado KMyMoney para que use el cifrado GPG para proteger sus datos "
 "y para que cifre sus datos también con la clave de recuperación de KMyMoney. "
-"Esta clave expirará en %1 días. Por favor, actualice la clave desde un "
-"servidor de claves usando su interfaz preferida de GPG (por ejemplo, KGPG)."
+"Esta clave expirará en %1 días. Actualice la clave desde un servidor de "
+"claves usando su interfaz preferida de GPG (por ejemplo, KGPG)."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:576
 #, kde-format
@@ -19066,8 +19054,8 @@ msgid ""
 msgstr ""
 "Usted intenta vincular una cuenta de corretaje a una cuenta en línea. Esto, "
 "por lo general, no es recomendable. Habitualmente es la cuenta de inversión "
-"la que debería vincularse a la cuenta en línea. Por favor, cancele si "
-"intenta vincular la cuenta de inversión. Continúe si no es así."
+"la que debería vincularse a la cuenta en línea. Cancele si intenta vincular "
+"la cuenta de inversión. Continúe si no es así."
 
 #: kmymoney/views/kaccountsview.cpp:451
 #, kde-format
@@ -20907,7 +20895,7 @@ msgstr "Librado"
 #: kmymoney/views/payeeidentifierselectiondelegate.cpp:43
 #, kde-format
 msgid "Please select the account number type"
-msgstr "Por favor, seleccione el tipo de número de cuenta"
+msgstr "Seleccione el tipo de número de cuenta"
 
 #: kmymoney/views/payeeidentifierselectiondelegate.cpp:46
 #, kde-format
@@ -21883,7 +21871,7 @@ msgstr ""
 "impresa en su extracto.\n"
 "\n"
 "En la siguiente página verificará que el saldo final coincide con el "
-"indicado en su extracto. Si no es el caso, por favor, modifíquelo.\n"
+"indicado en su extracto. Si no es el caso, modifíquelo.\n"
 "\n"
 "El balance inicial es la suma de sus transacciones liquidadas y conciliadas."
 
@@ -22257,9 +22245,9 @@ msgid ""
 "date. If you requested an online quote it might be provided for a different "
 "date."
 msgstr ""
-"Por favor, asegúrese de introducir la conversión correcta para la fecha de "
-"apertura seleccionada. Si solicitó una cotización en línea, esta puede ser "
-"para una fecha diferente."
+"Asegúrese de introducir la conversión correcta para la fecha de apertura "
+"seleccionada. Si solicitó una cotización en línea, esta puede ser para una "
+"fecha diferente."
 
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:185
 #, kde-format
@@ -22443,9 +22431,9 @@ msgid ""
 msgstr ""
 "<p>El saldo de apertura es el saldo de la cuenta cuando usted empiece a "
 "usarla con KMyMoney. Para cuentas nuevas este es usualmente 0, pero para "
-"cuentas existentes puede ser diferente. Por favor, consulte los estadillos "
-"de las cuentas para averiguar este valor. El saldo de apertura debe estar en "
-"la divisa que ha sido seleccionada para esa cuenta.</p>\n"
+"cuentas existentes puede ser diferente. Consulte los estadillos de las "
+"cuentas para averiguar este valor. El saldo de apertura debe estar en la "
+"divisa que ha sido seleccionada para esa cuenta.</p>\n"
 "<p><i>Nota</i>:Si no conoce la cantidad exacta del importe de apertura, "
 "introduzca una estimación. Puede cambiar este valor más tarde, antes de que "
 "concilie la cuenta por primera vez.</p>"
@@ -22583,8 +22571,8 @@ msgid ""
 "this payment here."
 msgstr ""
 "Para las cuentas de tarjeta de crédito puede crear una planificación mensual "
-"que le recordará automáticamente del pago. Por favor, complete los detalles "
-"sobre el pago aquí."
+"que le recordará automáticamente del pago. Complete los detalles sobre el "
+"pago aquí."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_reminderCheckBox)
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.ui:33
@@ -22642,8 +22630,8 @@ msgid ""
 "Please select the required options. Please use the <b>What's this?</b> "
 "feature to see more information about the items."
 msgstr ""
-"Por favor, seleccione las opciones requeridas. Por favor, use <b>¿Qué es "
-"esto?</b> para ver más información sobre cada elemento."
+"Seleccione las opciones requeridas. Use <b>¿Qué es esto?</b> para ver más "
+"información sobre cada elemento."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:37
@@ -23066,8 +23054,8 @@ msgid ""
 "You have entered mis-matching information. Please modify your figures or "
 "leave one value empty to let KMyMoney calculate it for you"
 msgstr ""
-"Ha introducido una información que no encaja. Por favor, actualice sus datos "
-"o deje un valor vacío para permitir a KMyMoney calcularlo por usted"
+"Ha introducido una información que no encaja. Actualice sus datos o deje un "
+"valor vacío para permitir a KMyMoney calcularlo por usted"
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:280
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:109
@@ -23186,10 +23174,10 @@ msgid ""
 "please enter the ending balance of your last statement."
 msgstr ""
 "Introduzca el importe del préstamo en este campo. Si desea calcular este "
-"campo a partir de los otros parámetros, por favor, déjelo vacío. Si el campo "
-"está marcado como requerido (fondo en color), usted ha informado que ya se "
-"han realizados algunos pagos del préstamo. En ese caso, por favor, "
-"introduzca el saldo final de su último extracto."
+"campo a partir de los otros parámetros, déjelo vacío. Si el campo está "
+"marcado como requerido (fondo en color), usted ha informado que ya se han "
+"realizados algunos pagos del préstamo. En ese caso, introduzca el saldo "
+"final de su último extracto."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6_5)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_4)
@@ -23227,10 +23215,10 @@ msgid ""
 "the time that is required to fully repay the loan. This time might be "
 "different from the time your loan contract is signed for."
 msgstr ""
-"Por favor, introduzca el plazo de este préstamo o deje el campo vacío para "
-"calcularlo. El plazo es el tiempo requerido para devolver por completo el "
-"préstamo. Este tiempo puede ser diferente del tiempo por el que firme el "
-"contrato de préstamo."
+"Introduzca el plazo de este préstamo o deje el campo vacío para calcularlo. "
+"El plazo es el tiempo requerido para devolver por completo el préstamo. Este "
+"tiempo puede ser diferente del tiempo por el que firme el contrato de "
+"préstamo."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel11)
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.ui:141
@@ -23245,8 +23233,8 @@ msgid ""
 "Please enter the amount you pay for principal and interest or leave the "
 "field empty to calculate it."
 msgstr ""
-"Por favor, introduzca el importe que paga de amortización e intereses o "
-"déjelo en blanco para calcularlo."
+"Introduzca el importe que paga de amortización e intereses o déjelo en "
+"blanco para calcularlo."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel12)
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.ui:158
@@ -23406,9 +23394,9 @@ msgid ""
 "If you selected to record only this years payments, then the <b>First "
 "payment due date</b> is the date of the first payment made in this year."
 msgstr ""
-"KMyMoney creará un plan de pagos, y le avisará cuando deba hacer uno. Por "
-"favor, seleccione la cuenta desde/hacia la cual realizará los pagos y la "
-"categoría a la cual asignar los intereses.<p>\n"
+"KMyMoney creará un plan de pagos, y le avisará cuando deba hacer uno. "
+"Seleccione la cuenta desde/hacia la cual realizará los pagos y la categoría "
+"a la cual asignar los intereses.<p>\n"
 "Si escogió registrar todos los pagos, ya ha proporcionado esta fecha. Si "
 "escogió registrar solamente los pagos de este año, entonces la <b>Fecha de "
 "vencimiento del primer pago</b> es la fecha del primer pago realizado este "
@@ -23981,10 +23969,10 @@ msgid ""
 "might be different from the time your loan contract is signed for."
 msgstr ""
 "\n"
-"Por favor, introduzca el plazo de este préstamo o deje el campo vacío para "
-"calcularlo. El plazo es el tiempo requerido para devolver por completo el "
-"préstamo. Este tiempo puede ser diferente del tiempo por el que firme el "
-"contrato de préstamo."
+"Introduzca el plazo de este préstamo o deje el campo vacío para calcularlo. "
+"El plazo es el tiempo requerido para devolver por completo el préstamo. Este "
+"tiempo puede ser diferente del tiempo por el que firme el contrato de "
+"préstamo."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_1_2)
 #: kmymoney/wizards/newloanwizard/editintrowizardpage.ui:43
@@ -24024,7 +24012,7 @@ msgid ""
 "Please select, which data of the loan you want to modify."
 msgstr ""
 "\n"
-"Por favor, elija los datos del préstamo a modificar."
+"Elija los datos del préstamo a modificar."
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_editInterestRateButton)
 #: kmymoney/wizards/newloanwizard/editselectionwizardpage.ui:95
@@ -24089,8 +24077,7 @@ msgstr ""
 #, kde-format
 msgid "Please enter the date, the first payment for this loan was/is due."
 msgstr ""
-"Por favor, introduzca la fecha en la que vence/venció el primer pago de este "
-"préstamo."
+"Introduzca la fecha en la que vence/venció el primer pago de este préstamo."
 
 #: kmymoney/wizards/newloanwizard/firstpaymentwizardpage.cpp:54
 #, kde-format
@@ -24107,9 +24094,7 @@ msgstr ""
 #, kde-format
 msgid ""
 "Please enter the date, the first payment for this loan was/is due this year."
-msgstr ""
-"Por favor, introduzca la fecha en que vence/venció el primer pago de este "
-"año."
+msgstr "Introduzca la fecha en que vence/venció el primer pago de este año."
 
 #: kmymoney/wizards/newloanwizard/firstpaymentwizardpage.cpp:62
 #, kde-format
@@ -24254,8 +24239,7 @@ msgid ""
 "come."
 msgstr ""
 "Nota: no podrá modificar esta cuenta hoy, debido a que la fecha de apertura "
-"«%1» está en el futuro. Por favor, vuelva a este diálogo cuando llegue el "
-"momento."
+"«%1» está en el futuro. Vuelva a este diálogo cuando llegue el momento."
 
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:272
 #, kde-format
@@ -24274,9 +24258,9 @@ msgid ""
 "page where the current value to be calculated is defined and fill in a value."
 msgstr ""
 "El asistente de préstamos no es capaz de calcular dos valores diferentes "
-"para su préstamo al mismo tiempo. Por favor, introduzca un valor para el %1 "
-"en esta página o vuelva a la página donde se define el valor actual a ser "
-"calculado e introduzca un valor."
+"para su préstamo al mismo tiempo. Introduzca un valor para el %1 en esta "
+"página o vuelva a la página donde se define el valor actual a ser calculado "
+"e introduzca un valor."
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:107
 #, kde-format
@@ -24343,9 +24327,9 @@ msgid ""
 "page and update your figures or leave one value empty to let KMyMoney "
 "calculate it for you"
 msgstr ""
-"Introdujo información que no encaja. Por favor, vuelva a la página adecuada "
-"y actualice sus datos o deje un valor vacío para permitir a KMyMoney "
-"calcularlo por usted"
+"Ha introducido información que no concuerda. Vuelva a la página adecuada y "
+"actualice sus datos o deje un valor vacío para permitir a KMyMoney "
+"calcularlo por usted."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, LendBorrowWizardPage)
 #: kmymoney/wizards/newloanwizard/lendborrowwizardpage.ui:6
@@ -24369,8 +24353,8 @@ msgid ""
 "Please enter the original loan amount in the field below or leave it empty "
 "to be calculated."
 msgstr ""
-"Por favor, introduzca el importe original del préstamo en el campo de abajo "
-"o déjelo vacío para ser calculado."
+"Introduzca el importe original del préstamo en el campo de abajo o déjelo "
+"vacío para ser calculado."
 
 #: kmymoney/wizards/newloanwizard/loanamountwizardpage.cpp:65
 #, kde-format
@@ -24378,8 +24362,8 @@ msgid ""
 "Please enter the remaining loan amount of last years final statement in the "
 "field below. You should not leave this field empty."
 msgstr ""
-"Por favor, introduzca el importe que tras el último pago del año pasado "
-"faltaba por devolver. No debería dejar ese campo en blanco."
+"Introduzca el importe que tras el último pago del año pasado faltaba por "
+"devolver. No debería dejar ese campo en blanco."
 
 #: kmymoney/wizards/newloanwizard/namewizardpage.cpp:50
 #, kde-format
@@ -24554,8 +24538,8 @@ msgid ""
 "field empty to calculate it."
 msgstr ""
 "\n"
-"Por favor, introduzca el importe que paga de principal e intereses o deje la "
-"casilla en blanco para calcularla."
+"Introduzca el importe que paga de principal e intereses o deje la casilla en "
+"blanco para calcularla."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_4)
 #: kmymoney/wizards/newloanwizard/paymenteditwizardpage.ui:83
@@ -24896,8 +24880,7 @@ msgid ""
 msgstr ""
 "Un usuario típico de KMyMoney mantiene una cuenta corriente con alguna "
 "institución y la usa para recibir dinero o pagar facturas. Si este no es el "
-"caso, por favor, desmarque la casilla inferior y continúe a la siguiente "
-"página."
+"caso, desmarque la casilla inferior y continúe a la siguiente página."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_haveCheckingAccountButton)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:33
@@ -25159,7 +25142,7 @@ msgid ""
 msgstr ""
 "KMyMoney permite usar múltiples divisas, aunque una de ellas se usará como "
 "divisa base. La divisa base es la predeterminada para nuevas cuentas e "
-"informes. Por favor, seleccione la divisa base de la siguiente lista."
+"informes. Seleccione la divisa base de la siguiente lista."
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_currencyList)
 #: kmymoney/wizards/wizardpages/currency.ui:36
