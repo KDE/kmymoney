@@ -57,7 +57,7 @@
         "Description[sk]": "Pridáva podporu XML úložiska do KMyMoney",
         "Description[sl]": "Dodaj programu KMyMoney podporo za shranjevanje XML",
         "Description[sv]": "Lägger till stöd för XML-lagring i KMyMoney",
-        "Description[tr]": "KMyMoney'e XML depolama desteği ekler",
+        "Description[tr]": "K Param'a XML depolama desteği ekler",
         "Description[uk]": "Підтримка сховищ XML у KMyMoney",
         "Description[x-test]": "xxAdds XML storage support to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 XML 存储支持",

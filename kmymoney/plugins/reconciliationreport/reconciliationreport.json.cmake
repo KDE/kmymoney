@@ -59,7 +59,7 @@
         "Description[sk]": "Vytvorí report po každom zrovnaní obsahujúcom dáta o procese zrovnania",
         "Description[sl]": "Po vsaki uskladitvi ustvari poročilo, ki vsebuje podatke o postopku usklajevanja",
         "Description[sv]": "Skapar en rapport efter varje avstämning som innehåller information om avstämningsprocessen",
-        "Description[tr]": "Mutabakat süreciyle ilgili verileri içeren her mutabakattan sonra bir rapor oluşturur",
+        "Description[tr]": "Her mutabakat sonrası mutabakat süreci ile ilgili veriyi içeren bir rapor oluşturur",
         "Description[uk]": "Створення звітів після кожного узгодження із даними щодо процедури узгодження",
         "Description[x-test]": "xxCreates a report after each reconciliation containing data about the reconciliation processxx",
         "Description[zh_CN]": "每次对账后生成包含对账过程数据的报表",

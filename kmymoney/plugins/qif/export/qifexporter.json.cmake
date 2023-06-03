@@ -59,7 +59,7 @@
         "Description[sk]": "Pridať QIF export do KMyMoney",
         "Description[sl]": "Dodaj v KMyMoney možnost izvoza QIF",
         "Description[sv]": "Lägg till QIF-export till KMyMoney",
-        "Description[tr]": "KMyMoney'e QIF dışa aktarma ekle",
+        "Description[tr]": "K Param'a QIF dışa aktarma ekle",
         "Description[uk]": "Експортування даних QIF у KMyMoney",
         "Description[x-test]": "xxAdd QIF exporting to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 QIF 导出服务",

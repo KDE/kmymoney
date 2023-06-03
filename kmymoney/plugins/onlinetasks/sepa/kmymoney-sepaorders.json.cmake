@@ -76,7 +76,7 @@
         "Description[ru]": "Типы платёжных поручений для единого европейского пространства платежей (SEPA)",
         "Description[sl]": "Plačilni nalogi za enotno evropsko plačilno območje (SEPA)",
         "Description[sv]": "Ordertyp för gemensamma eurobetalningsområdet (SEPA) order",
-        "Description[tr]": "Tek avrupa ödeme bölgesi (SEPA) siparişleri için talimat türleri",
+        "Description[tr]": "Avrupa tek ödeme bölgesi (SEPA) talimatları için talimat türleri",
         "Description[uk]": "Типи векселів для Єдиної європейської системи сплат (SEPA)",
         "Description[x-test]": "xxOrder types for single european payment area (SEPA) ordersxx",
         "Description[zh_CN]": "单一欧元支付区订单类型",

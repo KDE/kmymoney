@@ -59,7 +59,7 @@
         "Description[sk]": "Exportovať rozvrhy do súborov iCalendar",
         "Description[sl]": "Izvozi časovne plane v datoteke iCalendar",
         "Description[sv]": "Exporterar scheman till iCalendar-filer",
-        "Description[tr]": "Zamanlamaları iCalendar dosyalarına aktarır",
+        "Description[tr]": "Zamanlamaları iCalendar dosyalarına dışa aktarır",
         "Description[uk]": "Експортування розкладів до файлів iCalendar",
         "Description[x-test]": "xxExports schedules to iCalendar filesxx",
         "Description[zh_CN]": "将日程表导出为 iCalebdar 文件",

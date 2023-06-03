@@ -57,7 +57,7 @@
         "Description[ru]": "Добавляет в KMyMoney представление исходящих сетевых заданий",
         "Description[sl]": "V KMyMoney doda pogled na oddano e-pošto",
         "Description[sv]": "Lägger till utkorgsvy för nätjobb i KMyMoney",
-        "Description[tr]": "KMyMoney'e çevrimiçi iş giden kutusu görünümü ekler",
+        "Description[tr]": "K Param'a çevrimiçi iş giden kutusu görünümü ekler",
         "Description[uk]": "Панель вихідних інтернет-завдань у KMyMoney",
         "Description[x-test]": "xxAdds online job outbox view to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加在线任务发件箱视图",
