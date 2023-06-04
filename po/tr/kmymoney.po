@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-02 02:38+0000\n"
-"PO-Revision-Date: 2023-05-15 22:48+0300\n"
+"PO-Revision-Date: 2023-06-04 01:06+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -32,7 +32,7 @@ msgstr "tulliana@gmail.com, volkangezer@gmail.com"
 #: kmymoney/converter/mymoneystatementreader.cpp:129
 #, kde-format
 msgid "_Fees"
-msgstr "_Aidatlar"
+msgstr "Ücretler"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:135
 #, kde-format
@@ -7876,24 +7876,23 @@ msgid ""
 "  * Split %2 in schedule '%1' contains a reference to invalid account %3. "
 "Please fix manually."
 msgstr ""
-"  * '%1' programındaki %2 bölümü geçersiz %3 hesabı içerir. Lütfen elle "
-"düzeltin."
+"  * '%1' planındaki %2 bölmesi geçersiz %3 hesabına bir başvuru içeriyor. "
+"Lütfen elle düzeltin."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2356
 #, kde-format
 msgid "  * Payee id updated in report '%1'."
-msgstr "  * Alacaklı kimliği '%1' raporunda güncellendi."
+msgstr "  * '%1' raporundaki alacaklı kimliği güncellendi."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2373
 #, kde-format
 msgid "  * Payee '%1' removed."
-msgstr "  * Alacaklı '%1' silindi."
+msgstr "  * '%1' alacaklısı silindi."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2445
-#, fuzzy, kde-format
-#| msgid "* Potential problem with investments/currencies"
+#, kde-format
 msgid "* Potential problem with securities/currencies"
-msgstr "* Yatırımlar/Para Birimleri ile ilgili olası sorun"
+msgstr "* Menkul kıymetler/para birimleri ile ilgili potansiyel sorun"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2450
 #, kde-format
@@ -7936,12 +7935,12 @@ msgstr "* '%1' bütçesi ile ilgili sorun"
 #, kde-format
 msgid ""
 "  * The account with id %1 referenced by the budget does not exist anymore."
-msgstr "  * Bütçe kaynaklı %1 numaralı hesap artık yok."
+msgstr "  * Bütçenin başvurduğu %1 kimlikli hesap artık yok."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2477
 #, kde-format
 msgid "    The account reference will be removed."
-msgstr "    Hesap kaynağı silinecektir."
+msgstr "    Hesap başvurusu kaldırılacak."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2491
 #, kde-format
@@ -7952,15 +7951,15 @@ msgstr "Bitti: Veri tutarlı."
 #, kde-format
 msgid "%1 problem corrected."
 msgid_plural "%1 problems corrected."
-msgstr[0] "%1 sorunu düzeltildi."
-msgstr[1] "%1 sorunları düzeltildi."
+msgstr[0] "%1 sorun düzeltildi."
+msgstr[1] "%1 sorun düzeltildi."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2494
 #, kde-format
 msgid "%1 problem still present."
 msgid_plural "%1 problems still present."
-msgstr[0] "%1 sorunu hala mevcut."
-msgstr[1] "%1 sorunları hala mevcut."
+msgstr[0] "Hâlâ %1 sorun var."
+msgstr[1] "Hâlâ %1 sorun var."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2497
 #, kde-format
@@ -8063,7 +8062,7 @@ msgstr "Malta Lirası"
 #: kmymoney/mymoney/mymoneyfile.cpp:2734
 #, kde-format
 msgid "Cyprus Pound"
-msgstr "Kıbrıs Paundu"
+msgstr "Kıbrıs Libresi"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2737
 #, kde-format
@@ -8091,10 +8090,9 @@ msgid "Belarusian Ruble (old)"
 msgstr "Beyaz Rus Rublesi (eski)"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2752
-#, fuzzy, kde-format
-#| msgid "Zambian Kwacha"
+#, kde-format
 msgid "Zambian Kwacha (old)"
-msgstr "Zambiya Kvaçası"
+msgstr "Zambiya Kuaçası (eski)"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2755
 #, kde-format
@@ -8132,15 +8130,14 @@ msgid "Andorran Peseta"
 msgstr "Andorra Pesetası"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2770
-#, fuzzy, kde-format
-#| msgid "Angolan New Kwanza"
+#, kde-format
 msgid "Angolan Kwanza"
-msgstr "Angolan New Kwanza"
+msgstr "Yeni Angola Kuanzası"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2771
 #, kde-format
 msgid "Argentine Peso"
-msgstr "Arjantin Pesosu"
+msgstr "Arjantin Pezosu"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2772
 #, kde-format
@@ -8175,7 +8172,7 @@ msgstr "Barbados Doları"
 #: kmymoney/mymoney/mymoneyfile.cpp:2779
 #, kde-format
 msgid "Bitcoin"
-msgstr "Sanalpara"
+msgstr "Bitcoin"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2780
 #, kde-format
@@ -8220,7 +8217,7 @@ msgstr "Brezilya Reali"
 #: kmymoney/mymoney/mymoneyfile.cpp:2788
 #, kde-format
 msgid "British Pound"
-msgstr "İngiliz Sterlini"
+msgstr "Britanya Sterlini"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2789
 #, kde-format
@@ -8245,12 +8242,12 @@ msgstr "CFA Franc BEAC"
 #: kmymoney/mymoney/mymoneyfile.cpp:2793
 #, kde-format
 msgid "CFA Franc BCEAO"
-msgstr "Afrika Finans Topluluğu Frangı"
+msgstr "Afrika Finans Topluluğu Frankı"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2794
 #, kde-format
 msgid "CFP Franc Pacifique"
-msgstr "Büyük Okyanus Finansal Topluluğu Frangı"
+msgstr "Büyük Okyanus Finansal Topluluğu Frankı"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2795
 #, kde-format
@@ -8270,12 +8267,12 @@ msgstr "Cape Verde Eskudosu"
 #: kmymoney/mymoney/mymoneyfile.cpp:2798
 #, kde-format
 msgid "Cayman Islands Dollar"
-msgstr "Cayman Adaları Doları"
+msgstr "Kayman Adaları Doları"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2799
 #, kde-format
 msgid "Chilean Peso"
-msgstr "Şili Pezo"
+msgstr "Şili Pezosu"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2800
 #, kde-format
@@ -8303,10 +8300,9 @@ msgid "Cuban Peso"
 msgstr "Küba Pezosu"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2805
-#, fuzzy, kde-format
-#| msgid "Bosnian Convertible Mark"
+#, kde-format
 msgid "Cuban Convertible Peso"
-msgstr "Bosna Değiştirilebilir Markı"
+msgstr "Küba Değiştirilebilir Pezosu"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2806
 #, kde-format
@@ -8321,7 +8317,7 @@ msgstr "Danimarka Kronu"
 #: kmymoney/mymoney/mymoneyfile.cpp:2808
 #, kde-format
 msgid "Djibouti Franc"
-msgstr "Cİbuti Frankı"
+msgstr "Cibuti Frankı"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2809
 #, kde-format
@@ -8336,7 +8332,7 @@ msgstr "Doğu Karayip Doları"
 #: kmymoney/mymoney/mymoneyfile.cpp:2811
 #, kde-format
 msgid "Egyptian Pound"
-msgstr "Mısır Paundu"
+msgstr "Mısır Libresi"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2812
 #, kde-format
@@ -8366,7 +8362,7 @@ msgstr "Avro"
 #: kmymoney/mymoney/mymoneyfile.cpp:2817
 #, kde-format
 msgid "Falkland Islands Pound"
-msgstr "Falkland Adaları Paundu"
+msgstr "Falkland Adaları Libresi"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2818
 #, kde-format
@@ -8541,7 +8537,7 @@ msgstr "Madagaskar Frankı"
 #: kmymoney/mymoney/mymoneyfile.cpp:2852
 #, kde-format
 msgid "Malawi Kwacha"
-msgstr "Malavi Kvaçası"
+msgstr "Malavi Kuaçası"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2853
 #, kde-format
@@ -8551,7 +8547,7 @@ msgstr "Malezya Ringiti"
 #: kmymoney/mymoney/mymoneyfile.cpp:2854
 #, kde-format
 msgid "Maldive Rufiyaa"
-msgstr "Maldiv Rufiyaası"
+msgstr "Maldiv Rufiyası"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2855
 #, kde-format
@@ -8586,7 +8582,7 @@ msgstr "Moğolistan Tugriki"
 #: kmymoney/mymoney/mymoneyfile.cpp:2861
 #, kde-format
 msgid "Moroccan Dirham"
-msgstr "Fas Dirhamı"
+msgstr "Fas Dirhemi"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2863
 #, kde-format
@@ -8741,7 +8737,7 @@ msgstr "Güney Afrika Randı"
 #: kmymoney/mymoney/mymoneyfile.cpp:2893
 #, kde-format
 msgid "South Korean Won"
-msgstr "Güney Kore Vonu"
+msgstr "Güney Kore Uonu"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2894
 #, kde-format
@@ -8766,7 +8762,7 @@ msgstr "Surinam Florini"
 #: kmymoney/mymoney/mymoneyfile.cpp:2898
 #, kde-format
 msgid "Swaziland Lilangeni"
-msgstr "Swaziland Lilangeni"
+msgstr "Suaziland Lilangeni"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2899
 #, kde-format
@@ -8776,12 +8772,12 @@ msgstr "İsveç Kronu"
 #: kmymoney/mymoney/mymoneyfile.cpp:2900
 #, kde-format
 msgid "Swiss Franc"
-msgstr "İsviçre Frangı"
+msgstr "İsviçre Frankı"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2901
 #, kde-format
 msgid "Syrian Pound"
-msgstr "Suriye Paundu"
+msgstr "Suriye Libresi"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2902
 #, kde-format
@@ -8856,7 +8852,7 @@ msgstr "Birleşik Arap Emirlikleri Dirhemi"
 #: kmymoney/mymoney/mymoneyfile.cpp:2916
 #, kde-format
 msgid "Uruguayan Peso"
-msgstr "Uruguay Pesosu"
+msgstr "Uruguay Pezosu"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2917
 #, kde-format
@@ -8881,7 +8877,7 @@ msgstr "Vietnam Dongu"
 #: kmymoney/mymoney/mymoneyfile.cpp:2921
 #, kde-format
 msgid "Zambian Kwacha"
-msgstr "Zambiya Kvaçası"
+msgstr "Zambiya Kuaçası"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2922
 #, kde-format
@@ -9343,10 +9339,9 @@ msgid "Unknown"
 msgstr "Bilinmeyen"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:207
-#, fuzzy, kde-format
-#| msgid "Expense categories"
+#, kde-format
 msgid "Multiple fee categories"
-msgstr "Gider kategorileri"
+msgstr "Birden çok ücret kategorisi"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:207
 #, fuzzy, kde-format
@@ -10820,7 +10815,7 @@ msgstr "İçe aktarma profilinizi burdan seçin."
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:54
 #, kde-format
 msgid "Fee"
-msgstr "Harç"
+msgstr "Ücret"
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:175
 #, kde-format
@@ -11003,21 +10998,20 @@ msgstr ""
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:342
 #, kde-format
 msgid "Fee is Percentage"
-msgstr "Ücret Yüzde"
+msgstr "Ücret Yüzdedir"
 
 #. i18n: ectx: property (text), widget (QLabel, labelInv_feeCol)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:358
 #, kde-format
 msgctxt "column containing fee field"
 msgid "Fee Column"
-msgstr "Ödeme Sütunu"
+msgstr "Ücret Sütunu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_feeIsPercentage)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:374
 #, kde-format
 msgid "Check box if any fee is a percentage figure rather than a value."
-msgstr ""
-"Eğer herhangi bir ödeme bir değer yerine yüzde değer ise kutuyu işaretle."
+msgstr "Herhangi bir ücret bir değer değil de yüzdeyse kutuyu işaretleyin."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_typeCol)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:390
@@ -11033,15 +11027,15 @@ msgid ""
 "Caution. This might already have been\n"
 "incorporated into the price."
 msgstr ""
-"Gerekliyse ödemeleri içeren sütunu seçin.\n"
-"Dikkat. Bu zaten\n"
-"fiyata dahil olabilir."
+"Gerekliyse ücretleri içeren\n"
+"sütunu seçin. Dikkat. Bu,\n"
+"halihazırda fiyata dahil olabilir."
 
 #. i18n: ectx: property (text), widget (QLabel, labelInv_feeRate)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:428
 #, kde-format
 msgid "Fee rate"
-msgstr "Serbest kur"
+msgstr "Ücret oranı"
 
 #. i18n: ectx: property (text), widget (QLabel, labelInv_type)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:451
@@ -11067,7 +11061,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:479
 #, kde-format
 msgid "Minimal Fee"
-msgstr "Asgari Ücret"
+msgstr "En düşük ücret"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_clearFee)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:508
@@ -11079,7 +11073,7 @@ msgstr "Ücreti Temizle"
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:521
 #, kde-format
 msgid "Calculate Fee"
-msgstr "Harç Hesapla"
+msgstr "Ücreti Hesapla"
 
 #. i18n: ectx: label, entry (AutoFieldDelimiter), group (Misc)
 #: kmymoney/plugins/csv/import/pluginsettings.kcfg:10
@@ -14278,7 +14272,7 @@ msgstr "Diğer harcamalar"
 #, kde-format
 msgctxt "Category name"
 msgid "Investment fees"
-msgstr "Yatırım aidatları"
+msgstr "Yatırım ücretleri"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:203
 #, kde-format
@@ -19043,18 +19037,16 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:511
-#, fuzzy, kde-format
-#| msgid "Default Category for Payee"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for fees"
-msgstr "Alacaklı için öntanımlı kategori"
+msgstr "Ücretler kategorisi"
 
 #: kmymoney/views/investtransactioneditor.cpp:512
-#, fuzzy, kde-format
-#| msgid "Amount is:"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of fees"
-msgstr "Tutar:"
+msgstr "Ücretler tutarı"
 
 #: kmymoney/views/investtransactioneditor.cpp:513
 #, fuzzy, kde-format
@@ -19127,18 +19119,16 @@ msgid "Select account to balance the transaction"
 msgstr "Otomatik doldurulan aktarımı seç"
 
 #: kmymoney/views/investtransactioneditor.cpp:572
-#, fuzzy, kde-format
-#| msgid "Default Category for Payee"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
-msgstr "Alacaklı için öntanımlı kategori"
+msgstr "Ücretler için kategori gir"
 
 #: kmymoney/views/investtransactioneditor.cpp:575
-#, fuzzy, kde-format
-#| msgid "Enter additional fees"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
-msgstr "Ek ödeme gir"
+msgstr "Ücret tutarını gir"
 
 #: kmymoney/views/investtransactioneditor.cpp:581
 #, fuzzy, kde-format
@@ -22326,7 +22316,7 @@ msgstr "Anapara ve faiz: %1"
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:161
 #, kde-format
 msgid "Additional Fees: %1"
-msgstr "Ek Ödemeler: %1"
+msgstr "Ek ücretler: %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:162
 #, kde-format
@@ -23491,8 +23481,8 @@ msgid ""
 "fees</b> button to enter them."
 msgstr ""
 "Şimdi dönemsel kredi ödemesi için gerekli bilgileri girin. Eğer düzenli "
-"ödemeleriniz ek ücretler içeriyorsa <b>Ek ücretler</b> düğmesine tıklayarak "
-"bunu girin."
+"ödemelerinizde ek ücretler varsa onları <b>Ek Ücretler</b> düğmesine "
+"tıklayarak girebilirsiniz."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/wizards/newaccountwizard/kloanpaymentpage.ui:53
@@ -23506,7 +23496,7 @@ msgstr "Anapara + Faiz"
 #: kmymoney/wizards/newloanwizard/additionalfeeswizardpage.ui:6
 #, kde-format
 msgid "Additional Fees"
-msgstr "Ek Ödemeler"
+msgstr "Ek Ücretler"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
 #: kmymoney/wizards/newaccountwizard/kloanpaymentpage.ui:116
@@ -23991,7 +23981,7 @@ msgstr "&Ek ödemeler"
 #: kmymoney/wizards/newloanwizard/additionalfeeswizardpage.cpp:44
 #, kde-format
 msgid "Enter additional fees"
-msgstr "Ek ödeme gir"
+msgstr "Ek ücretleri gir"
 
 #: kmymoney/wizards/newloanwizard/additionalfeeswizardpage.cpp:45
 #, kde-format
@@ -23999,8 +23989,8 @@ msgid ""
 "Use this to add any additional fees other than principal and interest "
 "contained in your periodical payments."
 msgstr ""
-"Dönemsel ödemelerinize ana para ve faiz dışında herhangi bir ek ödeme "
-"eklemek için bunu kullanın."
+"Dönemsel ödemelerinize anapara ve faiz dışında herhangi bir ek ödeme eklemek "
+"için bunu kullanın."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel21_2)
 #: kmymoney/wizards/newloanwizard/additionalfeeswizardpage.ui:19
@@ -24011,14 +24001,14 @@ msgid ""
 "\"Additional fees\" to enter them."
 msgstr ""
 "\n"
-"Eğer dönemsel ödemeniz ek ödeme içeriyorsa \"Ek ödemeler\" düğmesine "
-"tıklayarak bunları girin."
+"Eğer dönemsel ödemelerinizde ek ücretler varsa onları girmek için \"Ek "
+"Ücretler\" düğmesine tıklayın."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel21_1_3)
 #: kmymoney/wizards/newloanwizard/additionalfeeswizardpage.ui:63
 #, kde-format
 msgid "= periodical payment:"
-msgstr "= periyodik ödeme:"
+msgstr "= dönemsel ödeme:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel10_2_2_2_2)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel10)
@@ -24049,8 +24039,8 @@ msgid ""
 "If no additional fees are included in your periodical payment or you have "
 "entered all such fees, then click on \"Next\"."
 msgstr ""
-"Eğer dönemsel ödemeniz için ek ödeme eklemeyecekseniz veya bu tip ödemelerin "
-"hepsini girdiyseniz \"Sonraki\" tuşuna tıklayın."
+"Eğer dönemsel ödemenizde ek ücretler yoksa veya bu tür ücretlerin hepsini "
+"girdiyseniz \"Sonraki\" düğmesine tıklayın."
 
 #: kmymoney/wizards/newloanwizard/assetaccountwizardpage.cpp:50
 #, kde-format
@@ -24231,7 +24221,7 @@ msgstr "Faiz oranını düzenle"
 #: kmymoney/wizards/newloanwizard/editselectionwizardpage.ui:105
 #, kde-format
 msgid "Modify additional fees"
-msgstr "Ek ödemeleri düzenle"
+msgstr "Ek ücretleri değiştir"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_editOtherInfoButton)
 #: kmymoney/wizards/newloanwizard/editselectionwizardpage.ui:115
@@ -24900,7 +24890,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:269
 #, kde-format
 msgid "Additional Fees:"
-msgstr "Ek Ödemeler:"
+msgstr "Ek ücretler:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel9_2_2_2_2_2_2)
 #: kmymoney/wizards/newloanwizard/summaryeditwizardpage.ui:89
