@@ -3054,9 +3054,9 @@ msgid ""
 "checkbox below depending on your choice. The OK button becomes accessible "
 "once you have selected a tag or marked the checkbox."
 msgstr ""
-"Pour terminer l’opération de suppression, soit sélectionnez une étiquette "
+"Pour terminer l'opération de suppression, soit sélectionnez une étiquette "
 "parmi les étiquettes disponibles qui remplaceront celles sélectionnées avant "
-"qu’elles ne soient supprimées, soit cochez la case ci-dessous en fonction de "
+"qu'elles ne soient supprimées, soit cochez la case ci-dessous en fonction de "
 "votre choix. Le bouton « Ok » devient accessible une fois que vous avez "
 "sélectionné une étiquette ou coché la case."
 
@@ -15003,7 +15003,7 @@ msgstr "Sélectionner comment le budget de ce compte doit être traité."
 msgctxt "@info:tooltip Budget assignment"
 msgid "This option is only available when a budget value is assigned."
 msgstr ""
-"Cette option n’est disponible que lorsqu’une valeur de budget est attribuée."
+"Cette option n'est disponible que lorsqu'une valeur de budget est attribuée."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:39
@@ -17673,7 +17673,7 @@ msgid ""
 "Check this to propagate the difference of one period to the budget of the "
 "next period."
 msgstr ""
-"Veuillez vérifier ceci pour propager la différence d’une période vers le "
+"Veuillez vérifier ceci pour propager la différence d'une période vers le "
 "budget de la période suivante."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_propagateRemainder)
@@ -20617,7 +20617,7 @@ msgid ""
 msgstr ""
 "Les deux transactions sélectionnées pour la fusion sont affichées. Celle en "
 "haut et ses valeurs seront utilisées dans la transaction fusionnée "
-"résultante. Si vous voulez utiliser l’autre, appuyez sur le bouton d’échange "
+"résultante. Si vous voulez utiliser l'autre, appuyez sur le bouton d'échange "
 "à droite."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:114
