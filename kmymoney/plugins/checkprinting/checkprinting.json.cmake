@@ -88,6 +88,7 @@
         "Name[sk]": "Skontrolovať tlač",
         "Name[sl]": "Tiskanje čekov",
         "Name[sv]": "Checkutskrift",
+        "Name[tr]": "Çek yazdırma",
         "Name[uk]": "Друк чеків",
         "Name[x-test]": "xxCheck printingxx",
         "Name[zh_CN]": "支票打印",
