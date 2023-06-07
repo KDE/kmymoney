@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-30 00:47+0000\n"
-"PO-Revision-Date: 2023-05-24 00:11+0200\n"
+"PO-Revision-Date: 2023-06-06 14:56+0200\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
@@ -6819,7 +6819,7 @@ msgstr "  * Mottakeren «%1» er fjernet."
 #, kde-format
 msgctxt "@info consistency check"
 msgid "* Potential problem with securities/currencies"
-msgstr ""
+msgstr "* Potensielt problem med verdipapir/valutaer"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2945
 #, kde-format
@@ -6828,6 +6828,8 @@ msgid ""
 "  * The account '%1' in currency '%2' has no price set for the date of its "
 "first usage on '%3'."
 msgstr ""
+"  * Kontoen «%1» i valutaen «%2» har ikke definert kurs for datoen for "
+"førstegangs bruk den «%3»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2949
 #, kde-format
@@ -6836,18 +6838,21 @@ msgid ""
 "    Please enter a price for the currency on or before the date of first "
 "usage."
 msgstr ""
+"    Skriv inn en valutakurs datert på eller før datoen for førstegangs bruk."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2952
 #, kde-format
 msgctxt "@info consistency check"
 msgid "  * The security '%1' has no price set for the first use on '%2'."
 msgstr ""
+"  * Verdipapiret «%1» har ingen kurs satt for førstegangs bruk den «%2»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2955
 #, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the security on or before this date."
 msgstr ""
+"    Skriv inn en kurs for verdipapiret datert på eller før denne datoen."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2976
 #, kde-format
