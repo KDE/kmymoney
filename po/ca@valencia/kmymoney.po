@@ -4463,7 +4463,7 @@ msgstr "Configureu la pàgina principal"
 #: kmymoney/dialogs/settings/ksettingshome.ui:40
 #, kde-format
 msgid "Move selected item up"
-msgstr "Mou amunt l'element seleccionat"
+msgstr "Mou cap amunt l'element seleccionat"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_upButton)
 #: kmymoney/dialogs/settings/ksettingshome.ui:43
