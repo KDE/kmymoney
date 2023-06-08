@@ -470,18 +470,24 @@ bool LedgerViewPage::executeAction(eMenu::Action action, const SelectedObjects& 
 
 void LedgerViewPage::pushView(LedgerViewPage* view)
 {
+    Q_ASSERT(view != nullptr);
+
     if (d->stackedView) {
         qDebug() << "view stack already taken, old one destroyed";
         d->stackedView->deleteLater();
     }
     d->ui->m_ledgerView->setSelectedJournalEntries(view->d->ui->m_ledgerView->selectedJournalEntryIds());
     d->stackedView = view;
+    d->stackedView->blockSignals(true);
 }
 
 LedgerViewPage* LedgerViewPage::popView()
 {
     const auto view = d->stackedView;
     d->stackedView = nullptr;
+    if (view) {
+        view->blockSignals(false);
+    }
     return view;
 }
 

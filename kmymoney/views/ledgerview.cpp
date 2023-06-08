@@ -85,10 +85,10 @@ public:
         , infoMessage(new KMessageWidget(q))
         , editor(nullptr)
         , adjustableColumn(JournalModel::Column::Detail)
-        , lastSelectedRow(-1)
         , adjustingColumn(false)
         , showValuesInverted(false)
         , newTransactionPresent(false)
+        , reselectAfterResetPending(false)
     {
         infoMessage->hide();
 
@@ -449,16 +449,18 @@ public:
     TransactionEditorBase* editor;
     QHash<const QAbstractItemModel*, QStyledItemDelegate*>   delegates;
     int adjustableColumn;
-    int lastSelectedRow;
     bool adjustingColumn;
     bool showValuesInverted;
     bool newTransactionPresent;
+    bool reselectAfterResetPending;
     QString accountId;
     QString groupName;
     QPersistentModelIndex editIndex;
     SelectedObjects selection;
     QString firstSelectedId;
     LedgerSortOrder sortOrder;
+    QStringList selectionBeforeReset;
+    QString currentBeforeReset;
 };
 
 
@@ -572,13 +574,9 @@ void LedgerView::setModel(QAbstractItemModel* model)
     horizontalHeader()->setSectionsMovable(true);
 
     connect(model, &QAbstractItemModel::modelAboutToBeReset, this, [&]() {
-        if (selectionModel()) {
-            // using this->model() here, because model is already used any maybe out of scope
-            const auto selectedRows = selectionModel()->selectedIndexes().count() / this->model()->columnCount();
-            if (selectedRows >= 1) {
-                d->lastSelectedRow = selectionModel()->selectedIndexes().at(0).row();
-            }
-        }
+        // keep the current selected ids as the indeces might change
+        d->selectionBeforeReset = selectedJournalEntryIds();
+        d->currentBeforeReset = currentIndex().data(eMyMoney::Model::IdRole).toString();
     });
 
     connect(model, &QAbstractItemModel::modelReset, this, [&]() {
@@ -604,44 +602,24 @@ void LedgerView::reset()
         d->editor->deleteLater();
     }
 
-    QMetaObject::invokeMethod(this, &LedgerView::reselectAfterModelReset, Qt::QueuedConnection);
+    // make sure to kick-off re-selection only once
+    if (!d->reselectAfterResetPending) {
+        d->reselectAfterResetPending = true;
+        QMetaObject::invokeMethod(this, &LedgerView::reselectAfterModelReset, Qt::QueuedConnection);
+    }
 }
 
 void LedgerView::reselectAfterModelReset()
 {
-    auto objectIds = d->selection.selection(SelectedObjects::JournalEntry);
-
-    // make sure we stay in bounds
-    if (d->lastSelectedRow > model()->rowCount()) {
-        d->lastSelectedRow = model()->rowCount() - 1;
+    // make sure the current index is the first in the list
+    auto objectIds = d->selectionBeforeReset;
+    if (!d->currentBeforeReset.isEmpty()) {
+        objectIds.prepend(d->currentBeforeReset);
     }
+    objectIds.removeDuplicates();
+    setSelectedJournalEntries(objectIds);
 
-    if (d->lastSelectedRow != -1) {
-        QModelIndex idx;
-        do {
-            idx = model()->index(d->lastSelectedRow, 0);
-            if (!idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
-                if ((idx.flags() & (Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsEnabled))
-                    == (Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsEnabled)) {
-                    break;
-                }
-            }
-            objectIds.clear();
-            --d->lastSelectedRow;
-        } while (d->lastSelectedRow > -1);
-
-        if (d->lastSelectedRow > -1) {
-            if (!objectIds.isEmpty()) {
-                setSelectedJournalEntries(objectIds);
-            } else {
-                selectRow(idx.row());
-                setCurrentIndex(idx);
-            }
-            scrollTo(idx, EnsureVisible);
-        }
-    }
-    // reset last remembered value
-    d->lastSelectedRow = -1;
+    d->reselectAfterResetPending = false;
 }
 
 void LedgerView::setAccountId(const QString& id)
@@ -1394,6 +1372,12 @@ void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSel
 
     d->selection.setSelection(SelectedObjects::JournalEntry, selectedJournalEntries);
     d->selection.setSelection(SelectedObjects::Schedule, selectedSchedules);
+    // in case the selection changes when a reselection is pending
+    // we override the pending information with the updated values
+    if (d->reselectAfterResetPending) {
+        d->selectionBeforeReset = selectedJournalEntries + selectedSchedules;
+        d->currentBeforeReset = d->firstSelectedId;
+    }
     Q_EMIT transactionSelectionChanged(d->selection);
 }
 
@@ -1401,15 +1385,17 @@ QStringList LedgerView::selectedJournalEntryIds() const
 {
     QStringList selection;
 
-    int lastRow = -1;
-    QString id;
-    for (const auto& idx : selectionModel()->selectedIndexes()) {
-        // we don't need to process all columns but only the first one
-        if (idx.row() != lastRow) {
-            lastRow = idx.row();
-            id = idx.data(eMyMoney::Model::IdRole).toString();
-            if (!selection.contains(id)) {
-                selection.append(id);
+    if (selectionModel()) {
+        int lastRow = -1;
+        QString id;
+        for (const auto& idx : selectionModel()->selectedIndexes()) {
+            // we don't need to process all columns but only the first one
+            if (idx.row() != lastRow) {
+                lastRow = idx.row();
+                id = idx.data(eMyMoney::Model::IdRole).toString();
+                if (!selection.contains(id)) {
+                    selection.append(id);
+                }
             }
         }
     }
