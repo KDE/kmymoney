@@ -3523,7 +3523,7 @@ msgstr "Configureu la pàgina principal"
 #: kmymoney/dialogs/settings/ksettingshome.ui:40
 #, kde-format
 msgid "Move selected item up"
-msgstr "Mou amunt l'element seleccionat"
+msgstr "Mou cap amunt l'element seleccionat"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_upButton)
 #: kmymoney/dialogs/settings/ksettingshome.ui:43
@@ -19337,7 +19337,8 @@ msgid ""
 "are still used. They will be made sub-categories of <b>%2</b>. Proceed?</p>"
 msgstr ""
 "<p>Algunes subcategories de la categoria <b>%1</b> no s'ha pogut suprimir "
-"perquè encara estan en ús. Esdevindran categories de <b>%2</b>. Continue?</p>"
+"perquè encara estan en ús. Esdevindran categories de <b>%2</b>. Voleu "
+"continuar?</p>"
 
 #: kmymoney/views/kcategoriesview.cpp:412
 #, kde-format

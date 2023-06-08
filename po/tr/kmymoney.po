@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-30 00:47+0000\n"
-"PO-Revision-Date: 2023-06-07 00:47+0300\n"
+"PO-Revision-Date: 2023-06-08 00:47+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -657,7 +657,7 @@ msgstr "Bağlama Noktası:"
 #: kmymoney/dialogs/kbackupdlg.ui:112
 #, kde-format
 msgid "Select mount point"
-msgstr "Bağlama noktasını seç"
+msgstr "Bağlama noktası seç"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, chooseButton)
 #: kmymoney/dialogs/kbackupdlg.ui:115
@@ -1143,7 +1143,7 @@ msgstr "%1, temel para birimi olarak ayarlanamadı: %2"
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:663
 #, kde-format
 msgid "Set base currency"
-msgstr "Temel para birimi ayarla"
+msgstr "Temel para birimini ayarla"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:172
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:176
@@ -10004,22 +10004,19 @@ msgstr "Kredi alanını içeren sütunu seçin."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:654
-#, fuzzy, kde-format
-#| msgid "Category selection"
+#, kde-format
 msgid "Clear credit field selection."
-msgstr "Kategori seçimi"
+msgstr "Kredi alanı seçimini temizleyin."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_clear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:719
-#, fuzzy, kde-format
-#| msgid "Clear selected column entries"
+#, kde-format
 msgid "Clear all selected column and indicator entries"
-msgstr "Seçilen sütun girişlerini temizle"
+msgstr "Tüm seçili sütun ve gösterge girdilerini temizle"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_clear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:722
-#, fuzzy, kde-format
-#| msgid "Clear all"
+#, kde-format
 msgctxt "Clear all column assignments"
 msgid "Clear all"
 msgstr "Tümünü temizle"
@@ -10041,32 +10038,32 @@ msgid ""
 "want to delete it?</center>"
 msgstr ""
 "<center><b>%1</b> güncellemesi sırasında<br><b>%2</b> için profil türü "
-"tanınamadı.<br>Profil bu yüzden kullanılamaz.<br>Silmek ister misiniz?</"
+"tanınamadı.<br>Profil bu yüzden kullanılamaz.<br>Silmek istiyor musunuz?</"
 "center>"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1550
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "buy"
-msgstr "satın alma"
+msgstr "satın al"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1552
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "sell,repurchase"
-msgstr "satış, yeniden alış"
+msgstr "sat, yeniden al"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1554
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "reinvest,reinv,re-inv"
-msgstr "yenidenyatırım,yenidenyat,yen-yat"
+msgstr "yeniden yatır,yenidenyat,yen-yat"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1556
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "dividend"
-msgstr "kar payı"
+msgstr "temettü"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1558
 #, kde-format
@@ -10080,7 +10077,8 @@ msgctxt "Type of operation as in financial statement"
 msgid ""
 "add,stock dividend,divd reinv,transfer in,re-registration in,journal entry"
 msgstr ""
-"ekleme,stok hissesi,hiss yen-yat,içe aktarım,yeniden-kayıt,günlük girdisi"
+"ekle,hisse senedi temettüsü,hisse yeniden yatır,içe aktar,yeniden kayıt,"
+"defter girdisi"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1562
 #, kde-format
@@ -10111,7 +10109,7 @@ msgstr "Dosya Seç"
 #: kmymoney/plugins/csv/import/csvwizard.cpp:471
 #, kde-format
 msgid "A profile must be selected before selecting a file."
-msgstr "Dosya seçiminden önce bir profil seçilmiş olmalıdır."
+msgstr "Bir dosya seçmeden önce bir profil seçili olmalıdır."
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:537
 #, kde-format
@@ -10119,7 +10117,8 @@ msgid ""
 "<center>Profile <b>%1</b> already exists.<br>Please enter another name</"
 "center>"
 msgstr ""
-"<center><b>%1</b> profili zaten mevcut.<br>Lütfen başka bir ad girin</center>"
+"<center><b>%1</b> profili halihazırda var.<br>Lütfen başka bir ad girin</"
+"center>"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:558
 #, kde-format
@@ -10135,17 +10134,18 @@ msgstr "<center><b>%1</b> profili kaldırıldı.</center>"
 #, kde-format
 msgid ""
 "<center>Profile name has been renamed from <b>%1</b> to <b>%2</b>.</center>"
-msgstr "<center>Profil adı <b>%1</b> den <b>%2</b> ye değiştirildi.</center>"
+msgstr ""
+"<center>Profil adı <b>%1</b> -> <b>%2</b> olarak değiştirildi.</center>"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:949
 #, kde-format
 msgid "Import CSV"
-msgstr "CSV İçeri Aktar"
+msgstr "CSV İçe Aktar"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:951
 #, kde-format
 msgid "Make QIF File"
-msgstr "QIF Dosyası Hazırla"
+msgstr "QIF Dosyası Yap"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:988
 #, kde-format
@@ -10154,9 +10154,9 @@ msgid ""
 "center><center>Try manual selection to see problematic cells and correct "
 "your data.</center>"
 msgstr ""
-"<center>Otomatik algılama %1 sütunundaki ondalık sembolünü algılayamadı.</"
-"center><center>Elle seçim ile problemli hücreleri görmeye çalışın ve "
-"verinizi düzeltin.</center>"
+"<center>Otomatik algılama, %1 sütunundaki ondalık sembolünü algılayamadı.</"
+"center><center>Elle seçim ile sorunlu hücreleri görmeye çalışın ve verinizi "
+"düzeltin.</center>"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:1059
 #, kde-format
@@ -10164,15 +10164,14 @@ msgid ""
 "<center>There are invalid date formats in column '%1'.</"
 "center><center>Please check your selections.</center>"
 msgstr ""
-"<center>'%1' sütununda geçersiz tarih biçimleri var.</center><center>Lütfen "
-"seçimlerinizi denetleyin.</center>"
+"<center>'%1' sütununda geçersiz tarih biçimi var.</center><center>Lütfen "
+"seçiminizi denetleyin.</center>"
 
 #: kmymoney/plugins/csv/import/csvwizard.cpp:1107
-#, fuzzy, kde-format
-#| msgid "Please select a profile type and enter a profile name."
+#, kde-format
 msgctxt "@info:tooltip QIF profile not selected"
 msgid "Please select a QIF profile in the CSV importer settings"
-msgstr "Lütfen bir profil tipi seçiniz ve profil adı giriniz."
+msgstr "CSV içe aktarıcı ayarlarında lütfen bir QIF profili seçin."
 
 #. i18n: Noun, the introduction.
 #. i18n: ectx: property (text), widget (QLabel, label_intro)
@@ -10210,7 +10209,7 @@ msgstr "5. Biçimler"
 #: kmymoney/plugins/csv/import/currenciesdlg.ui:14
 #, kde-format
 msgid "Currencies"
-msgstr "Para birimleri"
+msgstr "Para Birimleri"
 
 #. i18n: ectx: property (text), widget (QLabel, label_title)
 #: kmymoney/plugins/csv/import/currenciesdlg.ui:26
@@ -10222,7 +10221,7 @@ msgstr "Eksik para birimleri"
 #: kmymoney/plugins/csv/import/currenciesdlg.ui:36
 #, kde-format
 msgid "You need to select from currency and to currency."
-msgstr "Para biriminden para birimine seçim yapmalısınız."
+msgstr "Seçim, para biriminden para birimine yapılır."
 
 #. i18n: ectx: property (text), widget (QLabel, lblFrom)
 #: kmymoney/plugins/csv/import/currenciesdlg.ui:61
@@ -10252,10 +10251,10 @@ msgid ""
 "If all is OK, you will be able to click 'Import'.\n"
 "If required, a QIF file may then be produced."
 msgstr ""
-"Lütfen dosyanızda kullandığınız ondalık sembolünü seçin.\n"
-"Binler basamağı ayıracı otomatik olarak değişecektir.\n"
-"Herşey tamamsa, 'İçe Aktar'a tıklayabileceksiniz.\n"
-"Gerekli olursa bir QIF dosyası üretilebilir."
+"Lütfen dosyanızda kullanılan ondalık sembolünü seçin.\n"
+"Binler basamağı ayrıcısı otomatik olarak değişecektir.\n"
+"Herşey tamamsa 'İçe Aktar'a tıklayabileceksiniz.\n"
+"Gerekliyse bir QIF dosyası üretilir."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_fieldDelimiter)
 #. i18n: ectx: property (text), item, widget (QComboBox, m_thousandsDelimiter)
@@ -10281,7 +10280,7 @@ msgstr "nokta (.)"
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:169
 #, kde-format
 msgid "auto"
-msgstr "oto"
+msgstr "otomatik"
 
 #. i18n: ectx: property (text), widget (QLabel, labelSet_decimal)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_editAmounts)
@@ -10291,7 +10290,7 @@ msgstr "oto"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:515
 #, kde-format
 msgid "Decimal Symbol"
-msgstr "Ondalık Simgesi"
+msgstr "Ondalık Sembolü"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_decimalSymbol)
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:152
@@ -10300,8 +10299,8 @@ msgid ""
 "Click to select the required decimal symbol, and to\n"
 "check that the selected symbol matches the data."
 msgstr ""
-"İstenen ondalık sembolü seçmek için ve\n"
-"seçilen sembol ile eşleşen veriyi denetlemek için tıklayın."
+"Gerekli ondalık sembolünü seçmek ve seçili sembolün\n"
+"veriyle eşleşip eşleşmediğini denetlemek için tıklayın."
 
 #. i18n: ectx: property (text), widget (QLabel, labelSet_thousands)
 #: kmymoney/plugins/csv/import/formatswizardpage.ui:177
@@ -10341,7 +10340,7 @@ msgstr "g a y"
 #: kmymoney/plugins/csv/import/introwizardpage.ui:20
 #, kde-format
 msgid "Intro Wizard Page"
-msgstr "Sihirbaz Sayfasına giriş"
+msgstr "Başlangıç Sihirbazı Sayfası"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:44
@@ -10352,8 +10351,8 @@ msgid ""
 "by entering its name and selecting 'Add'.\n"
 "Then open the file you wish to import."
 msgstr ""
-"Bankacılık, Yatırım ya da Fiyatlara tıklayın.\n"
-"Mevcut profili seçin ya da adını girerek ve\n"
+"Bankacılık, Yatırım veya Fiyatlar'a tıklayın.\n"
+"Var olan profili seçin veya adını girerek ve\n"
 "'Ekle'yi seçerek yeni oluşturun. Ardından\n"
 "içe aktarmak istediğiniz dosyayı seçin."
 
@@ -10385,7 +10384,7 @@ msgstr "P&ara birimi fiyatları"
 #: kmymoney/plugins/csv/import/introwizardpage.ui:167
 #, kde-format
 msgid "After entering new profile name, press this button to add it."
-msgstr "Yeni profil adı girdikten sonra eklemek için bu düğmeye basın."
+msgstr "Yeni profil adını girdikten sonra eklemek için bu düğmeye basın."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_skipSetup)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:184
@@ -10394,8 +10393,8 @@ msgid ""
 "Select to bypass profile setup.\n"
 "Only useful if a profile has already been setup."
 msgstr ""
-"Profil kurulumunu atlamak için seç.\n"
-"Yalnızca önceden profil kurulumu yapılmışsa bu özellikle yararlıdır."
+"Profil kurulumunu atlamak için seçin.\n"
+"Yalnızca bir profil önceden ayarlanmışsa kullanışlıdır."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_skipSetup)
 #: kmymoney/plugins/csv/import/introwizardpage.ui:187
@@ -10427,7 +10426,7 @@ msgstr "Yeniden Adlandır"
 #: kmymoney/plugins/csv/import/introwizardpage.ui:241
 #, kde-format
 msgid "Select your importing profile here."
-msgstr "İçe aktarma profilinizi burdan seçin."
+msgstr "Buradan içe aktarma profilinizi seçin."
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:57
 #, kde-format
@@ -10441,9 +10440,8 @@ msgid ""
 "center><center>If you wish to copy that data to the memo field, click 'Yes'."
 "</center>"
 msgstr ""
-"<center>'<b>%1</b>' alanında seçilen bu sütun zaten var.</"
-"center><center>Eğer verileri hatırlatma alanına kopyalamak istiyorsanız, "
-"'Evet' tuşunu tıklayın.</center>"
+"<center>'<b>%1</b>' alanında bu sütun zaten seçili.</center><center>Bu "
+"verileri not alanına kopyalamak istiyorsanız, 'Evet'e tıklayın.</center >"
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:382
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:135
@@ -10463,16 +10461,16 @@ msgid ""
 "Please check the fields in the current transaction,\n"
 "and also your selections."
 msgstr ""
-"Seçtiğiniz sütunlardaki değerler\n"
-"beklenen herhangi bir yatırım tipi ile uyuşmuyor.\n"
-"Lütfen mevcut işlemdeki alanları\n"
-"ve seçimlerinizi denetleyin."
+"Seçtiğiniz sütunlardaki değerler, beklenen\n"
+"herhangi bir yatırım türüyle eşleşmiyor. Lütfen\n"
+"geçerli işlemdeki alanları ve ayrıca seçimlerinizi\n"
+"denetleyin."
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:423
 #, kde-format
 msgctxt "Unused column"
 msgid "Unused"
-msgstr "Kullanılmamış"
+msgstr "Kullanılmıyor"
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:430
 #, kde-format
@@ -10480,8 +10478,8 @@ msgid ""
 "<center>No valid action type found for this transaction.</"
 "center><center>Please check the parameters supplied.</center>"
 msgstr ""
-"<center>Bu aktarım için geçerli bir eylem türü yok.</center><center>Lütfen "
-"girdiğiniz değişkenleri denetleyin.</center>"
+"<center>Bu işlem için geçerli bir eylem türü yok.</center><center>Lütfen "
+"verilen parametreleri denetleyin.</center>"
 
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:460
 #: kmymoney/plugins/csv/import/priceswizardpage.cpp:151
@@ -10490,8 +10488,8 @@ msgid ""
 "The '<b>%1</b>' field already has this column selected. <center>Please "
 "reselect both entries as necessary.</center>"
 msgstr ""
-"<b>%1</b> alanında seçilen sütun zaten var.<center>Lütfen gerektiğinde her "
-"iki girişi yeniden seçin.</center>"
+"'<b>%1</b>' alanında bu sütun halihazırda seçili. <center>Lütfen her iki "
+"girdiyi de gerektiği gibi yeniden seçin.</center>"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, InvestmentPage)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:20
@@ -10507,9 +10505,9 @@ msgid ""
 "If there is just a single security in the file, enter its name below.\n"
 "Otherwise, select the column for the symbol, and for the description or name."
 msgstr ""
-"Lütfen kullanmak için verilerinize karşılık gelen uygun sütunu seçin.\n"
-"Eğer dosyada tek bir teminat varsa, aşağıya bu adı girin.\n"
-"Aksi halde sembol için ve tanım ve ad için sütun seçin."
+"Lütfen verinize karşılık gelen, kullanılacak uygun sütunları seçin.\n"
+"Dosyada tek bir menkul kıymet varsa adını aşağıya girin.\n"
+"Aksi takdirde, sembol ve açıklama veya ad için sütunu seçin."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_priceFraction)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:136
@@ -10520,9 +10518,9 @@ msgid ""
 "between imported and stored prices. For instance, if the\n"
 "import price is in cents but the file is priced in dollars, select 0.01."
 msgstr ""
-"Gerekirse alım ve saklama fiyatları arasındaki uyumluluğu\n"
-"sağlamak için bir oran/çarpan seçin. Örneğin, eğer alımlar kuruşla\n"
-"yapılıyor ama dosya saklama fiyatı lira ile yapılıyorsa 0.01'i seçin."
+"Gerekirse içe aktarılan ve depolanan fiyatlar arasındaki uyumluluk için bir "
+"kesir/çarpan seçin. Örneğin, içe aktarma fiyatı sent, ancak dosyanın fiyatı "
+"dolar türündense 0,01'i seçin."
 
 #. i18n: ectx: property (toolTip), widget (QLabel, labelInv_date)
 #. i18n: ectx: property (toolTip), widget (QLabel, lbldateCol)
@@ -10571,7 +10569,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/priceswizardpage.ui:211
 #, kde-format
 msgid "Clear selected column entries."
-msgstr "Seçili sütun girdileri temizleyin."
+msgstr "Seçili sütun girdilerini temizleyin."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_clear)
 #. i18n: ectx: property (text), widget (QPushButton, button_clear)
@@ -10716,13 +10714,13 @@ msgstr "Alan ayırıcısının kendiliğinden algılanıp algılanmayacağını 
 #: kmymoney/plugins/csv/import/pluginsettings.kcfg:13
 #, kde-format
 msgid "Determines whether decimal symbol will be autodetected."
-msgstr "Ondalık sembolünün otomatik algılanıp algılanmayacağını belirler."
+msgstr "Ondalık sembolünün kendiliğinden algılanıp algılanmayacağını belirler."
 
 #. i18n: ectx: label, entry (AutoDateFormat), group (Misc)
 #: kmymoney/plugins/csv/import/pluginsettings.kcfg:16
 #, kde-format
 msgid "Determines whether date format will be autodetected."
-msgstr "Tarih biçiminin otomatik algılanıp algılanmayacağını belirler."
+msgstr "Tarih biçiminin kendiliğinden algılanıp algılanmayacağını belirler."
 
 #. i18n: ectx: label, entry (QifExportProfile), group (Misc)
 #: kmymoney/plugins/csv/import/pluginsettings.kcfg:19
@@ -10734,7 +10732,7 @@ msgstr "QIF dışa aktarması için kullanılacak profil."
 #: kmymoney/plugins/csv/import/pluginsettingsdecl.ui:14
 #, kde-format
 msgid "CSV Importer settings"
-msgstr "CSV İçeri Aktarıcısı ayarları"
+msgstr "CSV İçe Aktarıcısı ayarları"
 
 #. i18n: ectx: property (title), widget (QGroupBox, autodetect)
 #: kmymoney/plugins/csv/import/pluginsettingsdecl.ui:20
@@ -10752,7 +10750,7 @@ msgstr "Alan ayırıcısı"
 #: kmymoney/plugins/csv/import/pluginsettingsdecl.ui:45
 #, kde-format
 msgid "Decimal symbol"
-msgstr "Ondalık simgesi"
+msgstr "Ondalık sembolü"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AutoDateFormat)
 #: kmymoney/plugins/csv/import/pluginsettingsdecl.ui:58
@@ -10923,14 +10921,14 @@ msgid ""
 "You need security to import into,\n"
 "so please select existing security or enter new security name and symbol."
 msgstr ""
-"İçe aktarım yapacak kefile gereksiniminiz var,\n"
-"lütfen mevcut kefili ya da yeni kefil adı ve sembolünü girin."
+"İçine aktarılacak menkul kıymete gereksiniminiz var, bu yüzden lütfen var\n"
+"olan menkul kıymeti seçin veya yeni menkul kıymet adı ve sembolü girin."
 
 #. i18n: ectx: property (text), widget (QLabel, lblSecurity)
 #: kmymoney/plugins/csv/import/securitydlg.ui:82
 #, kde-format
 msgid "Existing security"
-msgstr "Mevcut kefil"
+msgstr "Var olan menkul kıymet"
 
 #. i18n: ectx: property (text), widget (QLabel, lblNewSymbol)
 #: kmymoney/plugins/csv/import/securitydlg.ui:89
@@ -10948,7 +10946,7 @@ msgstr "Yeni ad"
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:20
 #, kde-format
 msgid "Separator Wizard Page"
-msgstr "Ayırıcı sihirbaz sayfası"
+msgstr "Ayırıcı Sihirbazı Sayfası"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:44
@@ -10959,22 +10957,22 @@ msgid ""
 "The text delimiter does not normally need to be\n"
 "changed, except possibly when within a field."
 msgstr ""
-"Alan sınırlayıcısı otomatik olarak seçilmelidir.\n"
-"Onu değiştirme girişimi alanların seçimini sıfırlayacaktır.\n"
-"Normalde metin sınırlayıcısının değiştirilmesi,\n"
-"bir alan içinde olmaları haricinde gerekmez."
+"Alan sınırlayıcısı kendiliğinden algılanmalıdır.\n"
+"Bunu değiştirmeye çalışmak tüm alan seçimlerini sıfırlar.\n"
+"Metin sınırlayıcısının normalde değiştirilmesi gerekmez;\n"
+"yalnızca bir alan içinde olduğu durumlar dışında."
 
 #. i18n: ectx: property (text), widget (QLabel, labelSet_fieldDelim)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:107
 #, kde-format
 msgid "Field Delimiter"
-msgstr "Alan Sınırlandırıcı"
+msgstr "Alan Sınırlandırıcısı"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_fieldDelimiter)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:129
 #, kde-format
 msgid "semiColon (;)"
-msgstr "Noktalı virgül (;)"
+msgstr "noktalı virgül (;)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_fieldDelimiter)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:134
@@ -11002,8 +11000,8 @@ msgid ""
 "Select field delimiter/separator character.\n"
 "This will reset any existing field choices."
 msgstr ""
-"Alan sınırlayıcı/ayırıcı karakter seçin.\n"
-"Bu var olan alan seçimlerini sıfırlayacak."
+"Alan sınırlayıcı/ayırıcı karakteri seçin.\n"
+"Bu, var olan alan seçimlerini sıfırlayacak."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_textDelimiter)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:171
@@ -11027,7 +11025,7 @@ msgstr "Kodlama"
 #: kmymoney/plugins/csv/import/transactiondlg.ui:14
 #, kde-format
 msgid "Transaction Type"
-msgstr "Aktarım Türü"
+msgstr "İşlem Türü"
 
 #. i18n: ectx: property (text), widget (QLabel, label_title)
 #: kmymoney/plugins/csv/import/transactiondlg.ui:26
@@ -11044,9 +11042,9 @@ msgid ""
 "<center>Please select an appropriate entry, if available.</center>\n"
 "<center>Otherwise, click Cancel to abort.</center>"
 msgstr ""
-"<center>Aşağıdaki işlem tanımlanamayan veya geçersiz tipte.</center>\n"
-"<center>Lütfen mümkünse uygun bir girdi seçin.</center>\n"
-"<center>Aksi halde vazgeçmek için İptal'e tıklayın.</center>"
+"<center>Aşağıdaki işlemin türü tanınmıyor veya geçersiz.</center>\n"
+"<center>Lütfen varsa uygun bir girdi seçin.</center>\n"
+"<center>Aksi takdirde, iptal etmek için İptal'e tıklayın.</center>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/csv/import/transactiondlg.ui:80
@@ -11130,13 +11128,13 @@ msgstr "Faiz"
 #, kde-format
 msgid "The size of the file is too small to be a valid GnuCash format: %1"
 msgstr ""
+"Bu dosyanın boyutu, geçerli bir GnuCash biçimi olmak için pek küçük: %1"
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:64
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:75
-#, fuzzy, kde-format
-#| msgid "Cannot add institution: %1"
+#, kde-format
 msgid "Cannot read the file: %1"
-msgstr "Şirket eklenemedi: %1"
+msgstr "Dosya okunamadı: %1"
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:80
 #, kde-format
@@ -11144,57 +11142,55 @@ msgid ""
 "GnuCash SQLite file format is not supported. Please save it using XML format "
 "in GnuCash and try again."
 msgstr ""
+"GnuCash SQLite dosya biçimi desteklenmiyor. Lütfen XML biçimini kullanarak "
+"GnuCash'e kaydedin ve yeniden deneyin."
 
 #: kmymoney/plugins/gnc/import/gncimporter.cpp:129
-#, fuzzy, kde-format
-#| msgid "GnuCash files (*.gnucash *.xac *.gnc);;All files (*)"
+#, kde-format
 msgid "GnuCash files (*.gnucash *.xac *.gnc)"
-msgstr "GnuCash dosyaları (*.gnucash *.xac *.gnc);;Tüm dosyalar (*)"
+msgstr "GnuCash dosyaları (*.gnucash *.xac *.gnc)"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KGncImportOptionsDlg)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:20
 #, kde-format
 msgid "GnuCash Import Options"
-msgstr "GnuCash İçeri Aktarma Seçenekleri"
+msgstr "GnuCash İçe Aktarma Seçenekleri"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:26
 #, kde-format
 msgid "Use 'Help' for more information on these options"
-msgstr "Bu seçenekler hakkında daha fazla bilgi için 'Yardım' kullanın"
+msgstr "Bu seçenekler hakkında daha fazla bilgi için 'Yardım'ı kullanın"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonInvestGroupBox)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:39
 #, kde-format
 msgid "Investment Handling"
-msgstr "Yatırım yönetimi"
+msgstr "Yatırım Yönetimi"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioInvest1)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:45
-#, fuzzy, kde-format
-#| msgid "One investment account for each stock"
+#, kde-format
 msgid "O&ne investment account for each stock"
-msgstr "Her hisse senedi için bir yatırım hesabı"
+msgstr "Her bir hisse senedi için &ayrı yatırım hesabı"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioInvest2)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:58
-#, fuzzy, kde-format
-#| msgid "One investment account for all stocks"
+#, kde-format
 msgid "One in&vestment account for all stocks"
-msgstr "Bütün hisse senetleri için bir yatırım hesabı"
+msgstr "Tüm hisse senetleri için &bir yatırım hesabı"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioInvest3)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:68
-#, fuzzy, kde-format
-#| msgid "Prompt for an investment account for each stock"
+#, kde-format
 msgid "P&rompt for an investment account for each stock"
-msgstr "Her hisse senedine bir yatırım hesabı için uyar"
+msgstr "Her hisse senedine bir yatırım hesabı için &uyar"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox5)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:81
 #, kde-format
 msgid "Online price quotes"
-msgstr "Çevrimiçi fiyatlar"
+msgstr "Çevrimiçi kurlar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkFinanceQuote)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:87
@@ -11206,37 +11202,37 @@ msgstr "Hisse senedi fiyat bilgisi için Finance::Quote kullan"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:100
 #, kde-format
 msgid "Scheduled Transactions"
-msgstr "Zamanlanmış Aktarımlar"
+msgstr "Planlı İşlemler"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkSchedules)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:106
 #, kde-format
 msgid "Drop suspect scheduled transactions"
-msgstr "Programlanmış şüpheli işlemleri bırak"
+msgstr "Kuşku uyandırıcı planlı işlemleri bırak"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox4)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:119
 #, kde-format
 msgid "Decoding option"
-msgstr "Şifre çözme seçeneği"
+msgstr "Kod çözme seçeneği"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkDecode)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:142
 #, kde-format
 msgid "Decode using"
-msgstr "Bunu kullanarak şifrelemeyi aç"
+msgstr "Şunu kullanarak kodu çöz"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox18)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:176
 #, kde-format
 msgid "Transaction Notes option"
-msgstr "Aktarım notları seçenekleri"
+msgstr "İşlem Notları seçeneği"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkTxNotes)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:182
 #, kde-format
 msgid "Use transaction notes on non-split transactions"
-msgstr "Bölümlenmemiş işlemlerde işlem notları bölümünü kullan"
+msgstr "Bölünmemiş işlemlerde işlem notlarını kullan"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox3)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:205
@@ -11254,7 +11250,7 @@ msgstr "Genel hata ayıklama verisi"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:221
 #, kde-format
 msgid "Display XML data"
-msgstr "XML verilerini göster"
+msgstr "XML verisini göster"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkAnonymize)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:231
@@ -11270,13 +11266,13 @@ msgstr "Yatırım: %1"
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.cpp:61
 #, kde-format
 msgid "Quote source: %1"
-msgstr "Aktarım kaynağı: %1"
+msgstr "Kur kaynağı: %1"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KGncPriceSourceDlg)
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:20
 #, kde-format
 msgid "Online Quotes - Select price source"
-msgstr "Çevirim içi bilgi - fiyat kaynağını seçiniz"
+msgstr "Çevrimiçi Kurlar - Fiyat kaynağı seç"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:46
@@ -11284,22 +11280,20 @@ msgstr "Çevirim içi bilgi - fiyat kaynağını seçiniz"
 msgid ""
 "This price source is not known to KMyMoney. Please select an option below."
 msgstr ""
-"Bu ücret kaynağı K Param uygulamasında bilinmiyor. Lütfen aşağıdaki "
-"seçeneklerden seçiniz."
+"Bu fiyat kaynağı K Param tarafından bilinmiyor. Lütfen aşağıdan bir seçenek "
+"belirleyin."
 
 #. i18n: ectx: property (text), widget (QRadioButton, buttonNoSource)
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:62
-#, fuzzy, kde-format
-#| msgid "Do not perform online quotes for this investment"
+#, kde-format
 msgid "Do &not perform online quotes for this investment"
-msgstr "Bu yatırım için çevrim içi fiyat bilgisini uygulama"
+msgstr "Bu yatırım için çevrimiçi kurları &alma"
 
 #. i18n: ectx: property (text), widget (QRadioButton, buttonSelectSource)
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:72
-#, fuzzy, kde-format
-#| msgid "Select a known KMyMoney source from the list below"
+#, kde-format
 msgid "Select a &known KMyMoney source from the list below"
-msgstr "Aşağıdaki listeden bilinen bir K Param kaynağı seçiniz."
+msgstr "Aşağıdaki listeden &bilinen bir K Param kaynağı seç"
 
 #. i18n: ectx: property (text), widget (QRadioButton, buttonUserSource)
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:86
@@ -11315,7 +11309,7 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:102
 #, kde-format
 msgid "Always use this selection for this price source."
-msgstr "Bu fiyat kaynaği için her zman bu seçimi kullan."
+msgstr "Bu fiyat kaynaği için her zaman bu seçimi kullanın."
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:241
 #, kde-format
@@ -11325,7 +11319,7 @@ msgstr "Hesap%1"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:246
 #, kde-format
 msgid "Stock%1"
-msgstr "Stok%1"
+msgstr "Hisse%1"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:255
 #, kde-format
@@ -11335,7 +11329,7 @@ msgstr "Alacaklı%1"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:262
 #, kde-format
 msgid "Schedule%1"
-msgstr "Zamanlama%1"
+msgstr "Plan%1"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1210
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1249
@@ -11346,19 +11340,19 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
-"İçeriye aktarma işlemi başarısız oldu:\n"
+"İçe aktarma işlemi başarısız:\n"
 "\n"
 "%1"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1358
 #, kde-format
 msgid "Import complete"
-msgstr "İçeri aktarma işlemi tamamlandı"
+msgstr "İçe aktarma tamamlandı"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1415
 #, kde-format
 msgid "Disguise your wealth"
-msgstr "Servetinizi Gizleyin"
+msgstr "Varsıllığını gizle"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1416
 #, kde-format
@@ -11371,18 +11365,16 @@ msgid ""
 "all values.\n"
 "These numbers will not be stored in the file."
 msgstr ""
-"Dosyanızdaki para ile ilgili her değer, her işlem için kullanılan farklı bir "
-"değerle ve0.01 ve 1.99\n"
-"arasındaki rastgele bir sayı ile çarpılacaktır. Ek olarak, gerçek değerini "
-"gizlemek için,\n"
-" bütün değerlere uygulanabilecek %1 ve %2 arasındaki bir sayıyı "
-"girebilirsiniz.\n"
-"Bu sayılar dosyada saklanmayacaktır."
+"Dosyanızdaki her parasal değer, her işlem için kullanılan farklı bir "
+"değerle\n"
+"0,01 ile 1,99 arasında rastgele bir sayı ile çarpılır. Ayrıca, gerçek\n"
+"değerleri daha da gizlemek için %1 ile %2 arasında bir sayı girebilirsiniz.\n"
+"Bu numaralar dosyada depolanmaz."
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1431
 #, kde-format
 msgid "Loading commodities..."
-msgstr "Emtia'lar yükleniyor..."
+msgstr "Emtialar yükleniyor..."
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1484
 #, kde-format
@@ -11393,7 +11385,7 @@ msgstr "Fiyatlar yükleniyor..."
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1496
 #, kde-format
 msgid "Imported History"
-msgstr "İçeri Aktarılan Geçmiş"
+msgstr "İçe Aktarılan Geçmiş"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1517
 #, kde-format
@@ -11403,7 +11395,7 @@ msgstr "Hesaplar yükleniyor..."
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1663
 #, kde-format
 msgid "Loading transactions..."
-msgstr "Aktarımlar yükleniyor..."
+msgstr "İşlemler yükleniyor..."
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1766
 #, kde-format
@@ -11411,18 +11403,18 @@ msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
 "please check"
 msgstr ""
-"Hesap ya da Kategori %1, aktarım tarihi %2; hisse geçersiz değer içeriyor; "
+"Hesap ya da Kategori %1, işlem tarihi %2; bölme geçersiz değer içeriyor; "
 "lütfen denetleyin"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1808
 #, kde-format
 msgid "Imported Transaction"
-msgstr "İçeriye Aktarılmış Aktarım"
+msgstr "İçe Aktarılan İşlem"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1857
 #, kde-format
 msgid "Loading templates..."
-msgstr "Şabolanlar yükleniyor..."
+msgstr "Şablonlar yükleniyor..."
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1871
 #, kde-format
@@ -11432,17 +11424,17 @@ msgstr "Bilinmeyen alacaklı"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1999
 #, kde-format
 msgid "Schedule %1 contains unknown action (key = %2, type = %3)"
-msgstr "Program %1 bilinmeyen eylem içeriyor (anahtar = %2, tür = %3)"
+msgstr "Plan %1 bilinmeyen eylem içeriyor (anahtar = %2, tür = %3)"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2007
 #, kde-format
 msgid "Schedule %1 contains multiple actions; only one has been imported"
-msgstr "Program %1 çoklu eylem içeriyor; yalnızca bir tanesi içe aktarıldı"
+msgstr "Plan %1 birden çok eylem içeriyor; yalnızca bir tanesi içe aktarıldı"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2013
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
-msgstr "Program %1, hiç geçerli hisse içermiyor"
+msgstr "Plan %1 hiç geçerli bölme içermiyor"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2018
 #, kde-format
@@ -11450,17 +11442,18 @@ msgid ""
 "Schedule %1 appears to contain a formula. GnuCash formulae are not "
 "convertible"
 msgstr ""
-"Program %1 bir formül içeriyor görünüyor. GnuCash formülleri dönüştürülemez"
+"Plan %1 bir formül içeriyor görünüyor. GnuCash formülleri dönüştürülebilir "
+"değildir"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2068
 #, kde-format
 msgid "Loading schedules..."
-msgstr "Zamanlamalar yükleniyor..."
+msgstr "Planlar yükleniyor..."
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2156
 #, kde-format
 msgid "Schedule %1 has interval of %2 which is not currently available"
-msgstr "%1 programı şimdilik kullanılabilir olmayan %2 aralığında"
+msgstr "Plan %1, şu anda kullanılamayan %2 aralığına sahip"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2163
 #, kde-format
@@ -11468,8 +11461,8 @@ msgid ""
 "Schedule %1 contains unknown interval specification; please check for "
 "correct operation"
 msgstr ""
-"Program %1 bilinmeyen aralık tanımlaması içeriyor; lütfen doğru işlem için "
-"denetleyin"
+"Plan %1 bilinmeyen aralık belirtimi içeriyor; lütfen doğru çalışıp "
+"çalışmadığını denetleyin"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2199
 #, kde-format
@@ -11477,18 +11470,18 @@ msgid ""
 "Schedule %1 contains a deferred interval specification; please check for "
 "correct operation"
 msgstr ""
-"Program %1 ertelenmiş aralık tanımlaması içeriyor; lütfen doğru işlem için "
-"denetleyin"
+"Plan %1 ertelenmiş bir aralık belirtimi içeriyor; lütfen doğru çalışıp "
+"çalışmadığını denetleyin"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2224
 #, kde-format
 msgid "Schedule %1 dropped at user request"
-msgstr "Program %1 kullanıcı isteği ile silindi"
+msgstr "Plan %1 kullanıcı isteği ile silindi"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2267
 #, kde-format
 msgid "Reorganizing accounts..."
-msgstr "Hesaplar yeniden düzenleniyor..."
+msgstr "Hesaplar yeniden organize ediliyor..."
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2325
 #, kde-format
@@ -11503,7 +11496,7 @@ msgstr ""
 #, kde-format
 msgctxt "Button to show more detailed data"
 msgid "More"
-msgstr "Daha fazla"
+msgstr "Daha Fazla"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2342
 #, kde-format
@@ -11517,14 +11510,9 @@ msgid "Save Report"
 msgstr "Raporu Kaydet"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2361
-#, fuzzy, kde-format
-#| msgid ""
-#| "Problems were encountered in converting schedule '%1'.\n"
-#| "Do you want to review or edit it now?"
+#, kde-format
 msgid "Problems were encountered in converting schedule '%1'."
-msgstr ""
-"Program '%1' dönüşümünde problemlerle karşılaşıldı.\n"
-"Yeniden incelemek ya da şu anda düzenlemek ister misiniz?"
+msgstr "'%1' planı dönüştürülürken sorunlarla karşılaşıldı."
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2386
 #, kde-format
@@ -11560,20 +11548,20 @@ msgstr[1] "%1 hesap\n"
 #, kde-format
 msgid "%1 transaction\n"
 msgid_plural "%1 transactions\n"
-msgstr[0] "%1 aktarım\n"
-msgstr[1] "%1 aktarım\n"
+msgstr[0] "%1 işlem\n"
+msgstr[1] "%1 işlem\n"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2391
 #, kde-format
 msgid "%1 schedule\n"
 msgid_plural "%1 schedules\n"
-msgstr[0] "%1 program\n"
-msgstr[1] "%1 program\n"
+msgstr[0] "%1 plan\n"
+msgstr[1] "%1 plan\n"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2394
 #, kde-format
 msgid "No inconsistencies were detected\n"
-msgstr "Hiçbir tutarsızlık tespit edilmedi\n"
+msgstr "Hiçbir tutarsızlık algılanmadı\n"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2396
 #, kde-format
@@ -11593,8 +11581,8 @@ msgstr[1] "%1 sahipsiz hesap oluşturuldu\n"
 #, kde-format
 msgid "%1 possible schedule problem was noted\n"
 msgid_plural "%1 possible schedule problems were noted\n"
-msgstr[0] "%1 olası program sorunu kaydedildi\n"
-msgstr[1] "%1 olası program sorunları kaydedildi\n"
+msgstr[0] "%1 olası plan sorunu not edildi\n"
+msgstr[1] "%1 olası plan sorunu not edildi\n"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2411
 #, kde-format
@@ -11610,7 +11598,7 @@ msgstr "Bütçeler"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2413
 #, kde-format
 msgid "Lots"
-msgstr "Birçok"
+msgstr "Birçok Şey"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2415
 #, kde-format
@@ -11626,7 +11614,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Daha fazla bilgi için daha çok düğmesine basın"
+"Ek bilgi için Daha Fazla düğmesine basın"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2433
 #, kde-format
@@ -11636,7 +11624,7 @@ msgstr "Raporu farklı kaydet"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2469
 #, kde-format
 msgid "Orphan created from unknown GnuCash account"
-msgstr "Sahipsiz, bilinmeyen bir GnuCash hesabı tarafından oluşturuldu"
+msgstr "Sahipsiz hesap, bilinmeyen bir GnuCash hesabından oluşturuldu"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2484
 #, kde-format
@@ -11645,8 +11633,8 @@ msgid ""
 "account\n"
 "An asset account with the name %1 has been created to hold the data"
 msgstr ""
-"Bir ya da daha fazla işlem, başka bir bilinmeyen hesabın kaynağını içerir\n"
-"%1 adlı varlık hesabı bütün verileri tutmak için yaratılmıştır"
+"Bir veya daha fazla işlem, bilinmeyen bir hesaba başvuru içeriyor\n"
+"Verileri tutmak için %1 adlı bir varlık hesabı oluşturuldu"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2518
 #, kde-format
@@ -11654,8 +11642,8 @@ msgid ""
 "An Investment account must be a child of an Asset account\n"
 "Account %1 will be stored under the main Asset account"
 msgstr ""
-"Yatırım hesabı bir varlık hesabına bağlı olmalıdır\n"
-"Hesap %1 ana varlık hesap altında saklanacaktır"
+"Yatırım hesabı, bir Varlık hesabının alt ögesi olmalıdır\n"
+"Hesap %1, ana Varlık hesabı altında depolanacak"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2525
 #, kde-format
@@ -11663,8 +11651,8 @@ msgid ""
 "An Income account must be a child of an Income account\n"
 "Account %1 will be stored under the main Income account"
 msgstr ""
-"Gelir hesabı bir gelir hesabına bağlı olmalıdır\n"
-"Hesap %1 ana gelir hesap altında saklanacaktır"
+"Gelir hesabı, başka bir Gelir hesabının alt ögesi olmalıdır\n"
+"Hesap %1, ana Varlık hesabı altında depolanacak"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2532
 #, kde-format
@@ -11672,13 +11660,13 @@ msgid ""
 "An Expense account must be a child of an Expense account\n"
 "Account %1 will be stored under the main Expense account"
 msgstr ""
-"Gider hesabı bir gider hesabına bağlı olmalıdır\n"
-"Hesap %1 ana gider hesap altında saklanacaktır"
+"Gider hesabı, başka bir Gider hesabının alt ögesi olmalıdır\n"
+"Hesap %1, ana Varlık hesabı altında depolanacak"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2580
 #, kde-format
 msgid "Enter the investment account name "
-msgstr "Yatırım hesabı adı girin "
+msgstr "Yatırım hesabı adını girin "
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2581
 #, kde-format
@@ -11688,23 +11676,24 @@ msgstr "Yatırımlarım"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2619
 #, kde-format
 msgid "Select parent investment account or enter new name. Stock %1"
-msgstr "Ana yatırım hesabı seçin ya da yeni bir ad girin. Stok %1"
+msgstr "Ana yatırım hesabı seçin veya yeni bir ad girin. Hisse %1"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2644
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2661
 #, kde-format
 msgid "%1 is not an Investment Account. Do you wish to make it one?"
-msgstr "%1 yatırım hesabı değildir. Bir tane yaratmak ister misiniz?"
+msgstr ""
+"%1 bir yatırım hesabı değil. Onu bir yatırım hesabı yapmak ister misiniz?"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:53
 #, kde-format
 msgid "Schedules to iCalendar"
-msgstr "iCalendar için Programlar"
+msgstr "iCalendar için Planlar"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:73
 #, kde-format
 msgid "Schedules to iCalendar [%1]"
-msgstr "İCalendar için programlar [%1]"
+msgstr "iCalendar için Planlar [%1]"
 
 #: kmymoney/plugins/icalendar/export/icalendarexporter.cpp:90
 #, kde-format
@@ -11716,13 +11705,13 @@ msgstr "iCalendar dosyaları"
 #: kmymoney/plugins/views/reports/kreportsview.cpp:353
 #, kde-format
 msgid "Export as"
-msgstr "Dışarıya farklı aktar"
+msgstr "Farklı dışa aktar"
 
 #. i18n: ectx: label, entry (createAlarm), group (General)
 #: kmymoney/plugins/icalendar/export/icalendarsettings.kcfg:9
 #, kde-format
 msgid "To create an alarm for the exported schedules"
-msgstr "Dışarı aktarılmış programlar için bir alarm oluşturmak için"
+msgstr "Dışa aktarılmış planlar için bir alarm oluşturmak için"
 
 #. i18n: ectx: label, entry (beforeAfter), group (General)
 #: kmymoney/plugins/icalendar/export/icalendarsettings.kcfg:13
@@ -11731,27 +11720,27 @@ msgid ""
 "Tells whether the reminder should be triggered before or after the schedule "
 "start"
 msgstr ""
-"Anımsatıcının program başladıktan sonra mı yoksa öncesinde mi tetiklenmesi "
+"Anımsatıcının plan başlangıcından önce mi yoksa sonra mı tetiklenmesi "
 "gerektiğini söyler"
 
 #. i18n: ectx: label, entry (timeUnits), group (General)
 #: kmymoney/plugins/icalendar/export/icalendarsettings.kcfg:17
 #, kde-format
 msgid "The number of units of the interval before or after the schedule starts"
-msgstr "Programın başlamasından önce ya da sonraki zaman aralıklarının sayısı"
+msgstr "Plan başlamadan önceki veya sonraki aralığın birim sayısı"
 
 #. i18n: ectx: label, entry (timeUnitInSeconds), group (General)
 #: kmymoney/plugins/icalendar/export/icalendarsettings.kcfg:21
 #, kde-format
 msgid ""
 "The units of the interval before or after the schedule starts in seconds "
-msgstr "Program başlamadan önceki ve sonraki zamanın saniye cinsinden değeri "
+msgstr "Plan başlangıcından önceki ve sonraki zamanın saniye türünden değeri "
 
 #. i18n: ectx: label, entry (repeatingReminders), group (General)
 #: kmymoney/plugins/icalendar/export/icalendarsettings.kcfg:25
 #, kde-format
 msgid "If the reminders should repeat or not"
-msgstr "Anımsatıcılar tekrar etsin mi etmesin mi"
+msgstr "Anımsatıcıların yinelenip yinelenmeyeceği"
 
 #. i18n: ectx: label, entry (intervalBetweenRemindersTimeUnits), group (General)
 #: kmymoney/plugins/icalendar/export/icalendarsettings.kcfg:29
@@ -11763,19 +11752,19 @@ msgstr "Anımsatıcılar arasındaki aralığın biriminin sayısı"
 #: kmymoney/plugins/icalendar/export/icalendarsettings.kcfg:33
 #, kde-format
 msgid "The units of the interval between reminders in seconds "
-msgstr "Anımsatıcılar arasındaki aralığın saniye cinsinden değeri "
+msgstr "Anımsatıcılar arasındaki aralığın saniye türünden değeri "
 
 #. i18n: ectx: label, entry (numberOfReminders), group (General)
 #: kmymoney/plugins/icalendar/export/icalendarsettings.kcfg:37
 #, kde-format
 msgid "The number of reminders to be generated for the schedule "
-msgstr "Program için oluşturulmuş anımsatıcı sayısı "
+msgstr "Plan için oluşturulan anımsatıcı sayısı "
 
 #. i18n: ectx: label, entry (icalendarFile), group (General)
 #: kmymoney/plugins/icalendar/export/icalendarsettings.kcfg:41
 #, kde-format
 msgid "The icalendar file in which to export the schedules."
-msgstr "Dışarı aktarılacak programın icalendar dosyası."
+msgstr "Dışa aktarılacak planın icalendar dosyası."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ICalendarSettingsDecl)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:26
@@ -11787,14 +11776,14 @@ msgstr "Icalendar dışa aktarma ayarları"
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:34
 #, kde-format
 msgid "Create reminders"
-msgstr "Anımsatıcı oluştur"
+msgstr "Anımsatıcılar oluştur"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_repeatingReminders)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:70
 #, kde-format
 msgctxt "@action whether the schedule will have more occurrences over time"
 msgid "Repeating:"
-msgstr "Tekrarlanan:"
+msgstr "Yinelenen:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:79
@@ -11837,7 +11826,7 @@ msgstr "Saat"
 #, kde-format
 msgctxt "Time unit"
 msgid "Days"
-msgstr "Günler"
+msgstr "Gün"
 
 #: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:35
 #, kde-format
@@ -11852,17 +11841,17 @@ msgstr "Sonra"
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:207
 #, kde-format
 msgid "Transfer from %1 to %2, Payee %3, amount %4"
-msgstr "%1' den %2' ye aktar, Alacaklı %3, tutar %4"
+msgstr "%1 hesabından %2 hesabına aktar, alacaklı %3, tutar %4"
 
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:209
 #, kde-format
 msgid "From %1 into %2, Category %3, sum of %4"
-msgstr "%1' den %2 içine, Kategori %3, toplamı %4"
+msgstr "%1 hesabından %2 hesabına, kategori %3, %4 toplamı"
 
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:210
 #, kde-format
 msgid "From account %1, Pay to %2, Category %3, sum of %4"
-msgstr "%1 hesabından %2 hesabına öde, Kategori %3, toplam %4"
+msgstr "%1 hesabından %2 hesabına öde, kategori %3, %4 toplamı"
 
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.cpp:78
 #, kde-format
@@ -11871,9 +11860,8 @@ msgid ""
 "regular expression for payee and memo extraction. The option will not be "
 "activated."
 msgstr ""
-"Hatırlatma notlarından alacaklıyı çıkarmak için seçtiniz fakat alacaklı ve "
-"hatırlatma alanı çıkarımı için bir düzenli ifade sağlamadınız. Seçenek "
-"etkinleştirilmeyecektir."
+"Alacaklıyı not alanından çıkarmayı seçtiniz; ancak alacaklı ve not çıkarma "
+"için normal bir ifade sağlamadınız. Seçenek etkinleştirilmeyecek."
 
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.cpp:78
 #, kde-format
@@ -11914,9 +11902,9 @@ msgid ""
 "accounts. The following option allows to turn off the request for "
 "transaction data."
 msgstr ""
-"Bu eklenti genellikle hesap bakiyesi ve işlemleri indirir. Bazı durumlarda, "
-"işlem verilerinin indirilmesi mevcut hesaplar için desteklenmez. Aşağıdaki "
-"seçenek işlem verileri için talepleri kapatmaya izin verir."
+"Eklenti genellikle hesap bakiyesini ve işlemleri indirir. Bazı durumlarda, "
+"işlem verisinin indirilmesi belirli hesaplar için desteklenmez. Aşağıdaki "
+"seçenek, işlem verisi talebini kapatmaya izin verir."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_transactionDownload)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:127
@@ -11952,7 +11940,7 @@ msgstr "İlk uygun"
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:163
 #, kde-format
 msgid "Default start date for statement download"
-msgstr "Bilanço indirmek için öntanımlı başlangıç tarihi"
+msgstr "Hesap özeti indirmek için öntanımlı başlangıç tarihi"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_removeLineBreaksFromMemo)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:198
@@ -11962,8 +11950,8 @@ msgid ""
 "been inserted between multiple purpose fields of the transaction.</p></"
 "body></html>"
 msgstr ""
-"<html><head/><body><p>İşlemin çok amaçlı alanları arasına eklenen not "
-"alanındaki satır sonlarını kaldırın.</p></body></html>"
+"<html><head/><body><p>Not alanındaki, işlemin çok amaçlı alanları arasına "
+"eklenen satır sonlarını kaldırın.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_removeLineBreaksFromMemo)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:201
@@ -11974,36 +11962,32 @@ msgid ""
 "characters inserted after each purpose field are distracting and are removed "
 "when this option is enabled.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Bazı kurumlar, bir işlemin çok amaçlı alanlarını alır "
-"ve tek bir işlem olarak ele alır. Bu durumda, her amaç alanından sonra "
-"eklenen satır sonu karakterleri dikkat dağıtıcıdır ve bu seçenek "
-"etkinleştirildiğinde kaldırılır.</p></body></html>"
+"<html><head/><body><p>Bazı kurumlar, bir işlemin birden fazla amaç alanını "
+"alıp tek bir işlem olarak ele alır. Bu seçenek etkinleştirildiğinde, her "
+"amaç alanından sonra eklenen satır sonu karakterleri dikkat dağıtıcıdır ve "
+"bu işlem yapıldığında kaldırılır.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_removeLineBreaksFromMemo)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:204
-#, fuzzy, kde-format
-#| msgid "Remove this price item from the file"
+#, kde-format
 msgid "Remove line breaks from memo field"
-msgstr "Bu fiyat ögesini dosyadan kaldır"
+msgstr "Not alanından satır sonu karakterlerini kaldır"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:211
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>Flag this account to be an opening balance account</"
-#| "p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>Add additional payee details found in the transaction "
 "to the memo.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Bu hesabı bir açılış bakiyesi hesabı olarak "
-"işaretleyin.</p></body></html>"
+"<html><head/><body><p>İşlemde bulunan ek alacaklı ayrıntılarını nota ekle.</"
+"p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:214
 #, kde-format
 msgid "Include the payee details in memo"
-msgstr ""
+msgstr "Notta alacaklı ayrıntılarını içer"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, MapAccountWizard)
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBMapAccount)
@@ -12011,7 +11995,7 @@ msgstr ""
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:14
 #, kde-format
 msgid "Account Mapping"
-msgstr "Hesap Planlaması"
+msgstr "Hesap Eşlemesi"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:23
@@ -12023,8 +12007,8 @@ msgid ""
 "</qt>"
 msgstr ""
 "<qt>\n"
-"Lütfen <b>çevirim içi</b> hesapla eşlenmesini \n"
-"istediğiniz <b>uygulama</b> hesabını listeden seçiniz.\n"
+"Lütfen aşağıdaki listeden <b>uygulama</b> hesabının \n"
+"eşlenmesini istediğiniz <b>çevrimiçi</b> hesabı seçin.\n"
 "</qt>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
@@ -12051,7 +12035,7 @@ msgstr "Hesap Numarası"
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:88
 #, kde-format
 msgid "Online Accounts"
-msgstr "Çevirimiçi Hesaplar"
+msgstr "Çevrimiçi Hesaplar"
 
 #. i18n: ectx: property (text), widget (QPushButton, assignButton)
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:125
@@ -12066,14 +12050,14 @@ msgid ""
 "retrieved from <b>%1</b>.</p><p>If you specify no date then the bank will "
 "choose one.</p></qt>"
 msgstr ""
-"<qt><p><b>%1</b>den alınan işlemler için ilk tarihi seçin.</p><p>Eğer tarih "
-"belirtmezseniz banka bir tane seçecek.</p></qt>"
+"<qt><p>Lütfen <b>%1</b> hesabından hangi işlemlerin alınacağı ilk tarihi "
+"seçin.</p><p>Hiçbir tarih belirtmezseniz banka bir tarih seçer.</p></qt>"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBPickStartDate)
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.ui:14
 #, kde-format
 msgid "Pick Start Date"
-msgstr "Başlangıç Tarihini Seç"
+msgstr "Başlangıç Tarihi Seç"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroup)
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.ui:39
@@ -12124,7 +12108,7 @@ msgstr "Aq&Banking'i yapılandır..."
 #: kmymoney/plugins/kbanking/kbanking.cpp:338
 #, kde-format
 msgid "AqBanking importer..."
-msgstr "AqBanking içeri aktarıcısı..."
+msgstr "AqBanking içe aktarıcısı..."
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:524
 #: kmymoney/plugins/kbanking/kbanking.cpp:773
@@ -12133,12 +12117,12 @@ msgid ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
 "account.</qt>"
 msgstr ""
-"<qt>Verilen uygulama hesabı<b>%1</b>, aktif bir hesapla eşlenmedi.</qt>"
+"<qt>Verilen uygulama hesabı<b>%1</b>, etkin bir hesapla eşlenmedi.</qt>"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:530
 #, kde-format
 msgid "Account Not Mapped"
-msgstr "Eşlenmemiş Hesap"
+msgstr "Hesap Eşlenmedi"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:602
 #: kmymoney/plugins/kbanking/kbanking.cpp:624
@@ -12153,7 +12137,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/kbanking.cpp:1570
 #, kde-format
 msgid "Error importing statement. Do you want to continue?"
-msgstr "Bilanço içeri aktarılırken hata. Devam etmek istiyor musunuz?"
+msgstr "Hesap özeti içe aktarılırken hata. Sürdürmek istiyor musunuz?"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:1571
 #: kmymoney/plugins/views/reports/kreportsview.cpp:434
@@ -12168,13 +12152,14 @@ msgstr "Kritik Hata"
 #, kde-format
 msgid ""
 "Width of the flicker field for optical tan generation (chipTan/sm@rtTan)."
-msgstr "Optik tan oluşturma için titreşimli alan genişliği (chipTan/sm@rtTan)."
+msgstr ""
+"Optik bronzluk üretimi için titreme alanının genişliği (chipTan/sm@rtTan)."
 
 #. i18n: ectx: label, entry (clocksetting), group (opticalTan)
 #: kmymoney/plugins/kbanking/kbanking.kcfg:13
 #, kde-format
 msgid "Clock length of optical tan flickering in ms."
-msgstr "Optik tan titreşiminin ms olarak saat uzunluğu."
+msgstr "Milisaniye türünden optik bronzluk titremesinin saat uzunluğu."
 
 #. i18n: ectx: tooltip, entry (clocksetting), group (opticalTan)
 #: kmymoney/plugins/kbanking/kbanking.kcfg:14
@@ -12183,14 +12168,14 @@ msgid ""
 "After a clock the first flicker bar changes (each half-byte is transmitted "
 "in 2*clocksetting)."
 msgstr ""
-"Bir çevrimden sonra ilk titreşim çubuğu değişir (her yarım-bayt 2*saat ayarı "
-"ile aktarılır)."
+"Bir saatten sonra ilk titreme çubuğu değişir (her yarım bayt, 2 * saat "
+"ayarında iletilir)."
 
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.cpp:155
 #: kmymoney/plugins/kbanking/widgets/phototandialog.cpp:90
 #, kde-format
 msgid "A valid tan is required to proceed."
-msgstr "Devam etmek için geçerli bir tan gerekli."
+msgstr "Sürdürmek için geçerli bir bronzluk gerekli."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, chipTanDialog)
 #. i18n: ectx: property (windowTitle), widget (QWidget, photoTanDialog)
@@ -12198,13 +12183,13 @@ msgstr "Devam etmek için geçerli bir tan gerekli."
 #: kmymoney/plugins/kbanking/widgets/phototandialog.ui:14
 #, kde-format
 msgid "Order confirmation"
-msgstr "Sipariş onayı"
+msgstr "Emir onayı"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, reduceButton)
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:24
 #, kde-format
 msgid "Reduce optical tan area in size"
-msgstr "Optik tan alanı boyutunu düşür"
+msgstr "Optik bronzluk alanı boyutunu düşür"
 
 #. i18n: ectx: property (text), widget (QToolButton, reduceButton)
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:27
@@ -12216,7 +12201,7 @@ msgstr "Düşür"
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:39
 #, kde-format
 msgid "Enlarge optical tan field"
-msgstr "Optik tan alanını genişlet"
+msgstr "Optik bronzluk alanını genişlet"
 
 #. i18n: ectx: property (text), widget (QToolButton, enlargeButton)
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:42
@@ -12240,7 +12225,7 @@ msgstr "Hızlandır"
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:154
 #, kde-format
 msgid "To confirm this order enter the tan displayed by your generator"
-msgstr "Bu siparişi doğrulamak için üretecinizde görüntülenen tan'ı girin"
+msgstr "Bu emri doğrulamak için üretecinizde görüntülenen bronzluğu girin"
 
 #: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:74
 #: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:83
@@ -12254,7 +12239,7 @@ msgstr "(adsız)"
 #, kde-format
 msgctxt "Header for AqBanking account list"
 msgid "Id"
-msgstr "Numara"
+msgstr "Kimlik"
 
 #: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:115
 #, kde-format
@@ -12339,12 +12324,10 @@ msgid "new"
 msgstr "yeni"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:106
-#, fuzzy, kde-format
-#| msgctxt "Accept 'imported' and 'matched' transaction"
-#| msgid "Accept"
+#, kde-format
 msgctxt "Status of the job"
 msgid "accepted"
-msgstr "Kabul Et"
+msgstr "kabul edildi"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:109
 #, kde-format
@@ -12359,41 +12342,34 @@ msgid "pending"
 msgstr "beklemede"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "Status of the job"
-#| msgid "pending"
+#, kde-format
 msgctxt "Status of the job"
 msgid "sending"
-msgstr "beklemede"
+msgstr "gönderiliyor"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:118
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation status 'Reconciled'"
-#| msgid "reconciled"
+#, kde-format
 msgctxt "Status of the job"
 msgid "reconciled (auto)"
-msgstr "uzlaştırılmış"
+msgstr "mutabık kalındı (otomatik)"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:121
-#, fuzzy, kde-format
-#| msgctxt "Reconciliation status 'Reconciled'"
-#| msgid "reconciled"
+#, kde-format
 msgctxt "Status of the job"
 msgid "reconciled (manual)"
-msgstr "uzlaştırılmış"
+msgstr "mutabık kalındı (elle)"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:124
 #, kde-format
 msgctxt "Status of the job"
 msgid "revoked"
-msgstr "iptal edildi"
+msgstr "yürürlükten kaldırıldı"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:127
-#, fuzzy, kde-format
-#| msgid "Imported"
+#, kde-format
 msgctxt "Status of the job"
 msgid "aborted"
-msgstr "İçeriye aktarılmış"
+msgstr "iptal edildi"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:130
 #, kde-format
@@ -12416,12 +12392,12 @@ msgstr "(bilinmeyen)"
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:155
 #, kde-format
 msgid "Job Id"
-msgstr "Görev Numarası"
+msgstr "İş Kimliği"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:156
 #, kde-format
 msgid "Job Type"
-msgstr "Görev Türü"
+msgstr "İş Türü"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:157
 #, kde-format
@@ -12457,10 +12433,9 @@ msgstr "Hesap"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/kbanking/widgets/phototandialog.ui:48
-#, fuzzy, kde-format
-#| msgid "To confirm this order enter the tan displayed by your generator"
+#, kde-format
 msgid "To confirm this order enter the tan displayed by your &generator"
-msgstr "Bu siparişi doğrulamak için üretecinizde görüntülenen tan'ı girin"
+msgstr "Bu siparişi doğrulamak için üretecinizde görüntülenen bronzluğu girin"
 
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:203
 #: kmymoney/plugins/ofx/import/ofxpartner.cpp:413
@@ -12473,7 +12448,7 @@ msgstr "HTTP isteği başarısız oldu."
 #, kde-format
 msgctxt "The HTTP request failed"
 msgid "Failed"
-msgstr "Başarısız oldu"
+msgstr "Başarısız"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KOfxDirectConnectDlgDecl)
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlgdecl.ui:14
@@ -12485,7 +12460,7 @@ msgstr "OFX Doğrudan Bağlantı"
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlgdecl.ui:23
 #, kde-format
 msgid "Contacting bank..."
-msgstr "Bankaya bağlanılıyor..."
+msgstr "Bankayla iletişim kuruluyor..."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:70
 #, kde-format
@@ -12493,41 +12468,36 @@ msgid "Loading banklist"
 msgstr "Banka listesi yükleniyor"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:71
-#, fuzzy, kde-format
-#| msgid ""
-#| "Getting list of banks from http://www.ofxhome.com/\n"
-#| "This may take some time depending on the available bandwidth."
+#, kde-format
 msgid ""
 "Getting list of banks from https://www.ofxhome.com/\n"
 "This may take some time depending on the available bandwidth."
 msgstr ""
-"Bankalar listesi http://www.ofxhome.com/ adresinden alınıyor\n"
+"https://www.ofxhome.com/ adresinden bankalar listesi alınıyor\n"
 "İnternet hızınıza bağlı olarak bu işlem biraz zaman alabilir."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:240
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:294
 #, kde-format
 msgid "Supports online statements<br/>"
-msgstr "Çevirim içi hesaplar destekleniyor<br/>"
+msgstr "Çevrimiçi hesaplar desteklenir<br/>"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:242
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:296
 #, kde-format
 msgid "Supports investments<br/>"
-msgstr "Yatırımları destekliyor<br/>"
+msgstr "Yatırımlar desteklenir<br/>"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:244
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:298
 #, kde-format
 msgid "Supports bill payment (but not supported by KMyMoney yet)<br/>"
-msgstr ""
-"Fatura ödemeyi destekliyor (ancak henüz K Param tarafından "
-"desteklenmiyor)<br/>"
+msgstr "Fatura ödemeyi destekliyor (K Param henüz desteklenmiyor)<br/>"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:248
 #, kde-format
 msgid "OFX host failed. Last successful access was on '%1'. "
-msgstr "OFX ana bilgisayar başarısız. Son başarılı erişim '%1' tarihindeydi. "
+msgstr "OFX makinesi başarısız oldu. Son başarılı erişim '%1' tarihindeydi. "
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:250
 #, kde-format
@@ -12556,7 +12526,7 @@ msgstr "Lütfen bütün alanları doldurun."
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:278
 #, kde-format
 msgid "<p>Details for %1:</p>"
-msgstr "<p>%1 için ayrıntılar:</p>"
+msgstr "<p>%1 ayrıntıları:</p>"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:389
 #, kde-format
@@ -12582,17 +12552,17 @@ msgstr "Giriş yapılırken bankanızdan uyarılar alındı"
 #, kde-format
 msgctxt "Warning 'message'"
 msgid "WARNING %1"
-msgstr "UYARI %1"
+msgstr "UYARI: %1"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:519
 #, kde-format
 msgid "Error signing onto your bank"
-msgstr "Banka ile iletişim hatası"
+msgstr "Bankaya oturum açılırken hata"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:519
 #, kde-format
 msgid "ERROR %1"
-msgstr "HATA %1"
+msgstr "HATA: %1"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KOnlineBankingSetupWizard)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:14
@@ -12604,7 +12574,7 @@ msgstr "Çevrimiçi Bankacılık Hesap Ayarları"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:18
 #, kde-format
 msgid "Select Financial Institution"
-msgstr "Finansal Kurumu Seç"
+msgstr "Finansal Kurum Seç"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:38
@@ -12624,7 +12594,7 @@ msgstr "Otomatik"
 #, kde-format
 msgctxt "@title type of online banking connection"
 msgid "Manual"
-msgstr "El ile"
+msgstr "Elle"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_5)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:97
@@ -12640,10 +12610,9 @@ msgstr "Org"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:123
-#, fuzzy, kde-format
-#| msgid "User"
+#, kde-format
 msgid "UserAgent"
-msgstr "Kullanıcı"
+msgstr "KullanıcıAracısı"
 
 #. i18n: ectx: property (title), widget (QWizardPage, LoginPage)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:171
@@ -12708,14 +12677,14 @@ msgstr "Uygulamanın dört basamaklı sürüm bilgisini girmek için uzman seçe
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:219
 #, kde-format
 msgid "Header Version"
-msgstr "Başlık Sürümü"
+msgstr "Üstbilgi Sürümü"
 
 #. i18n: ectx: property (text), widget (QLabel, m_clientUidLabel)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:318
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:235
 #, kde-format
 msgid "Client UID"
-msgstr "İstemci UID"
+msgstr "İstemci UID'si"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:328
@@ -12766,7 +12735,7 @@ msgstr "Banka"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:391
 #, kde-format
 msgid "Branch"
-msgstr "Branş"
+msgstr "Şube"
 
 #. i18n: ectx: property (title), widget (QWizardPage, WizardPage)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:402
@@ -12781,19 +12750,19 @@ msgid ""
 "Congratulations: you have successfully set up your bank for online banking "
 "via OFX."
 msgstr ""
-"Tebrikler: OFX üzerinden bankanızı, çevirim içi bankacılık için "
+"Tebrikler: OFX üzerinden bankanızı, çevrimiçi bankacılık için "
 "yapılandırdınız."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatus.cpp:52
 #, kde-format
 msgid "Enabled & configured"
-msgstr "Etkinleştirilmiş & Yapılandırılmış"
+msgstr "Etkinleştirildi ve yapılandırıldı"
 
 #. i18n: ectx: attribute (title), widget (QWidget, accountTab)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:21
 #, kde-format
 msgid "Account Details"
-msgstr "Hesap Detayları"
+msgstr "Hesap Ayrıntıları"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:29
@@ -12805,13 +12774,13 @@ msgstr "DURUM:"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:54
 #, kde-format
 msgid "Unavailable"
-msgstr "Mevcut değil"
+msgstr "Kullanılamıyor"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:82
 #, kde-format
 msgid "BANK/BROKER:"
-msgstr "BANKA/KOMİSYONCU:"
+msgstr "BANKA/ARACI:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_textBank)
 #. i18n: ectx: property (text), widget (QLabel, m_textOnlineAccount)
@@ -12819,7 +12788,7 @@ msgstr "BANKA/KOMİSYONCU:"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:136
 #, kde-format
 msgid "&lt;Not configured&gt;"
-msgstr "&lt;Yapılandırılmamış&gt;"
+msgstr "&lt;Yapılandırılmadı&gt;"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:114
@@ -12835,28 +12804,27 @@ msgstr "OFX Ayrıntıları"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:242
-#, fuzzy, kde-format
-#| msgid "User defined"
+#, kde-format
 msgid "User Agent"
-msgstr "Kullanıcı tanımlı"
+msgstr "Kullanıcı Aracısı"
 
 #. i18n: ectx: property (whatsThis), widget (QLineEdit, m_clientUidEdit)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:252
 #, kde-format
 msgid "OFX <CLIENTUID> for institutions that require it"
-msgstr "Gereksinimi olan kuruluşlar için OFX <CLIENTUID>"
+msgstr "Gereksinim duyan kurumlar için OFX <MÜŞTERİ_UID'Sİ>"
 
 #. i18n: ectx: attribute (title), widget (QWidget, importTab)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:278
 #, kde-format
 msgid "Import Details"
-msgstr "Ayrıntıları İçeri Aktar"
+msgstr "Ayrıntıları İçe Aktar"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:284
 #, kde-format
 msgid "Start date of import"
-msgstr "İçeri aktarım için başlangıç tarihi"
+msgstr "İçe aktarım başlangıç tarihi"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_lastUpdateRB)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:305
@@ -12875,7 +12843,7 @@ msgstr "Bu&günden önceki günler"
 #, kde-format
 msgctxt "@action number of days"
 msgid "days"
-msgstr "günler"
+msgstr "gün"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_pickDateRB)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:355
@@ -12890,45 +12858,42 @@ msgstr "&Tarih seç"
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:76
 #, kde-format
 msgid "Import options"
-msgstr "İçeri aktarma ayarları"
+msgstr "İçe aktarma seçenekleri"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:416
 #: kmymoney/plugins/ofx/import/importoption.ui:70
-#, fuzzy, kde-format
-#| msgid "Unable to add transactions"
+#, kde-format
 msgid "Method to detect duplicate transactions during import"
-msgstr "Aktarımlar eklenemedi"
+msgstr "İçe aktarma sırasında yinelenmiş işlemleri algılama yöntemi"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:424
-#, fuzzy, kde-format
-#| msgid "OFX FITID"
+#, kde-format
 msgctxt "@item:inlistbox Method to identify duplicate transactions"
 msgid "OFX FITID"
 msgstr "OFX FITID"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueTransactionId)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:429
-#, fuzzy, kde-format
-#| msgid "KMyMoney"
+#, kde-format
 msgctxt "@item:inlistbox Method to identify duplicate transactions"
 msgid "KMyMoney ID"
-msgstr "K Param"
+msgstr "K Param Kimliği"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:443
 #: kmymoney/plugins/ofx/import/importoption.ui:41
 #, kde-format
 msgid "Payee's name is based on contents of the OFX tag"
-msgstr "Alacaklı adı OFX etiketi içeriğine göredir"
+msgstr "Alacaklının adı, OFX etiketinin içeriğine bağlıdır"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:453
 #: kmymoney/plugins/ofx/import/importoption.ui:91
 #, kde-format
 msgid "Timezone offset"
-msgstr "Saat dilimi farkı"
+msgstr "Zaman dilimi farkı"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel21_1_2)
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
@@ -12951,10 +12916,9 @@ msgstr "-"
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:481
 #: kmymoney/plugins/ofx/import/importoption.ui:119
-#, fuzzy, kde-format
-#| msgid "Transaction amount"
+#, kde-format
 msgid "Invert sign of transaction amount"
-msgstr "Aktarım tutarı"
+msgstr "İşlem tutarının işaretini ters çevir"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_invertAmount)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:488
@@ -12966,8 +12930,8 @@ msgid ""
 "because your institution provides them inverted.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>İçe aktarılan işlem tutarlarının işaretini tersine "
-"çevirmeniz gerekiyorsa bunu işaretleyin, ör. Kurumunuz bunları tersine "
-"çevirdiği için ücretleri ve ödemeleri geri almanız gerekiyorsa.</p></body></"
+"çevirmeniz gerekiyorsa; örneğin kurumunuz tersini sağladığı için masrafları "
+"ve ödemeleri tersine çevirmeniz gerekiyorsa bunu işaretleyin.</p></body></"
 "html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
@@ -12975,7 +12939,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/importoption.ui:136
 #, kde-format
 msgid "Fix sign of the investment transaction amount and quantity"
-msgstr ""
+msgstr "Yatırım işlem tutarı ve niceliğinin işaretini düzelt"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_fixBuySellSignage)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:505
@@ -12987,6 +12951,10 @@ msgid ""
 "institution not applying the correct negative/positive sign to the share "
 "amount or quantity value.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>İçe aktarma sonrası yatırım işlemlerine yanlış Alış/"
+"Satış türü atanmışsa bunu denetleyin; bu durum kurumunuzun pay tutarına veya "
+"nicelik değerine doğru eksi/artı işareti uygulamamasından dolayı olabilir.</"
+"p></body></html>"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:71
 #, kde-format
@@ -13056,22 +13024,19 @@ msgid "Quicken Windows 2016"
 msgstr "Quicken Windows 2016"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:88
-#, fuzzy, kde-format
-#| msgid "Quicken Windows 2010"
+#, kde-format
 msgid "Quicken Windows 2017"
-msgstr "Quicken Windows 2010"
+msgstr "Quicken Windows 2017"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:89
-#, fuzzy, kde-format
-#| msgid "Quicken Windows 2010"
+#, kde-format
 msgid "Quicken Windows 2018"
-msgstr "Quicken Windows 2010"
+msgstr "Quicken Windows 2018"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:90
-#, fuzzy, kde-format
-#| msgid "Quicken Windows 2010"
+#, kde-format
 msgid "Quicken Windows 2019"
-msgstr "Quicken Windows 2010"
+msgstr "Quicken Windows 2019"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:92
 #, kde-format
@@ -13079,10 +13044,9 @@ msgid "Quicken Windows (Expert)"
 msgstr "Quicken Windows (Uzman)"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:95
-#, fuzzy, kde-format
-#| msgid "Quicken Windows (Expert)"
+#, kde-format
 msgid "Quicken Mac (Expert)"
-msgstr "Quicken Windows (Uzman)"
+msgstr "Quicken Mac (Uzman)"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:98
 #, kde-format
@@ -13132,10 +13096,9 @@ msgstr "OFX FITID"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_uniqueIdSource)
 #: kmymoney/plugins/ofx/import/importoption.ui:83
-#, fuzzy, kde-format
-#| msgid "KMyMoney"
+#, kde-format
 msgid "KMyMoney Hash"
-msgstr "K Param"
+msgstr "K Param Sağlaması"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:148
 #, kde-format
@@ -13145,7 +13108,7 @@ msgstr "OFX..."
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:162
 #, kde-format
 msgid "OFX import file selection"
-msgstr "OFX içeriye aktarılacak dosya seçimi"
+msgstr "OFX içe aktarılacak dosya seçimi"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:182
 #, kde-format
@@ -13153,13 +13116,13 @@ msgid ""
 "Unable to import %1 using the OFX importer plugin.  This file is not the "
 "correct format."
 msgstr ""
-"OFX içeriye aktarıcı eklentisi %1 i kullanarak içeriye aktarımı "
-"gerçekleştiremedi.  Bu dosya düzgün biçimde değildir."
+"OFX içe aktarma eklentisi kullanılarak %1 içe aktarılamadı. Bu dosya doğru "
+"biçimde değil."
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:182
 #, kde-format
 msgid "Incorrect format"
-msgstr "Geçersiz biçem"
+msgstr "Yanlış biçim"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:227
 #, kde-format
@@ -13169,7 +13132,7 @@ msgstr "Dosya ayrıştırılamadı"
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:817
 #, kde-format
 msgid "No accounts found."
-msgstr "Hiç bir hesap bulunmadı."
+msgstr "Hiçbir hesap bulunmadı."
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:1002
 #, kde-format
@@ -13182,39 +13145,39 @@ msgid ""
 "<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin "
 "returned the following error:</p><p>%2</p>"
 msgstr ""
-"<p>OFX içeriye aktarım aracı eklentisi <b>'%1'</b>i kullanarak içeriye "
-"aktaramadı:  Bu eklenti bu hatayı geri döndürdü:</p><p>%2</p>"
+"<p>OFX içe aktarma eklentisi kullanılarak <b>'%1'</b> içe aktarılamıyor. "
+"Eklenti şu hatayı verdi:</p><p>%2</p>"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:1046
 #, kde-format
 msgid "Importing process terminated unexpectedly."
-msgstr "İçeri aktarma süreci beklenmedik bir şekilde sonlandı."
+msgstr "İçe aktarma süreci beklenmedik bir biçimde sonlandı."
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:1046
 #, kde-format
 msgid "Failed to import all statements."
-msgstr "Tüm ifadelerin içeri aktarılması başarısız oldu."
+msgstr "Tüm hesap özetleri içe aktarılamadı."
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:432
 #, kde-format
 msgid "For this beneficiary's country the BIC is mandatory."
-msgstr "Bu hak sahibinin ülkesi için BIC zorunlu."
+msgstr "Bu hak sahibinin ülkesinde BIC zorunludur."
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:448
 #, kde-format
 msgid "A beneficiary name is needed."
 msgid_plural "The beneficiary name must be at least %1 characters long"
 msgstr[0] ""
-"Bir hak sahibi adı gerekli.Hak sahibi adı en az %1 karakter uzunluğunda "
+"Bir hak sahibi adı gerekli. Hak sahibi adı en az %1 karakter uzunluğunda "
 "olmalı"
 msgstr[1] ""
-"Bir hak sahibi adı gerekli.Hak sahibi adı en az %1 karakter uzunluğunda "
+"Bir hak sahibi adı gerekli. Hak sahibi adı en az %1 karakter uzunluğunda "
 "olmalı"
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:459
 #, kde-format
 msgid "A positive amount to transfer is needed."
-msgstr "Aktarılacak pozitif miktar gerekli."
+msgstr "Aktarılacak tutar pozitif bir tutar olmalı."
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:470
 #, kde-format
@@ -13222,7 +13185,8 @@ msgid ""
 "After this credit transfer the account's balance will be below your credit "
 "limit."
 msgstr ""
-"Bu kredi aktarımından sonra hesap bakiyesi kredi limitinizin altında olacak."
+"Bu kredi aktarımından sonra hesabın bakiyesi kredi limitinizin altında "
+"olacaktır."
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:472
 #, kde-format
@@ -13230,41 +13194,42 @@ msgid ""
 "After this credit transfer the account's balance will be below the minimal "
 "balance."
 msgstr ""
-"Bu kredi transferinden sonra hesap bakiyesi asgari bakiyenin altında olacak."
+"Bu kredi aktarımından sonra hesabın bakiyesi en düşük bakiyenin altında "
+"olacaktır."
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:482
 #, kde-format
 msgid "The end-to-end reference cannot contain more than one character."
 msgid_plural "The end-to-end reference cannot contain more than %1 characters."
-msgstr[0] "Sondan-sona referans bir karakterden fazlasını içeremez."
-msgstr[1] "Sondan-sona referans %1 karakterden fazlasını içeremez."
+msgstr[0] "Uçtan uca başvuru birden çok karakter içeremez."
+msgstr[1] "Uçtan uca başvuru %1 karakterden fazlasını içeremez."
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:498
 #, kde-format
 msgid "The maximal line length of %1 character per line is exceeded."
 msgid_plural "The maximal line length of %1 characters per line is exceeded."
-msgstr[0] "Satır başına azami %1 karakter uzunluğu geçildi."
-msgstr[1] "Satır başına azami %1 karakter uzunluğu geçildi."
+msgstr[0] "Satır başına en çok %1 karakterlik satır uzunluğu aşıldı."
+msgstr[1] "Satır başına en çok %1 karakterlik satır uzunluğu aşıldı."
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:502
 #, kde-format
 msgid ""
 "The purpose can only contain the letters A-Z, spaces and ':?.,-()+ and /"
-msgstr "Amaç yalnızca A-Z harflerini, boşlukları ve ':?.,-()+ ve / içerebilir"
+msgstr "Amaç yalnızca A-Z harflerini, boşlukları ve ':?.,-()+/' içerebilir"
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:504
 #, kde-format
 msgid "In the purpose only a single line is allowed."
 msgid_plural "The purpose cannot contain more than %1 lines."
-msgstr[0] "Amaç içinde yalnızca tek satıra izin verilir."
-msgstr[1] "Amaç %1 satırdan fazlasını içeremez."
+msgstr[0] "Amaçta yalnızca tek bir satıra izin verilir."
+msgstr[1] "Amaçta yalnızca %1 satıra izin verilir."
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:508
 #, kde-format
 msgid "A purpose is needed."
 msgid_plural "The purpose must be at least %1 characters long."
-msgstr[0] "Bir amaç gerekli.Amaç en az %1 karakter uzunluğunda olmalı."
-msgstr[1] "Bir amaç gerekli.Amaç en az %1 karakter uzunluğunda olmalı."
+msgstr[0] "Bir amaç gerekli."
+msgstr[1] "Amaç en az %1 karakter uzunluğunda olmalı."
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.h:44
 #, kde-format
@@ -13281,7 +13246,7 @@ msgstr "Hak Sahibi &Adı"
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:99
 #, kde-format
 msgid "End-to-end reference"
-msgstr "Sondan-sona referans"
+msgstr "Uçtan uca başvuru"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:115
@@ -13304,8 +13269,7 @@ msgstr "Yeni bir profil oluştur"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:88
 #, kde-format
 msgid "Use this to create a new QIF import/export profile"
-msgstr ""
-"Yeni bir QIF içeri aktar/dışarı aktar profili oluşturmak için bunu kullan"
+msgstr "Yeni bir QIF içe/dışarı aktar profili oluşturmak için bunu kullan"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, MyMoneyQifProfileEditor)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:137
@@ -13313,7 +13277,7 @@ msgstr ""
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:14
 #, kde-format
 msgid "QIF Profile Editor"
-msgstr "QIF Profil Düzenleyici"
+msgstr "QIF Profil Düzenleyicisi"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:139
 #, kde-format
@@ -13330,7 +13294,7 @@ msgstr "Öntanımlı QIF profili"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:385
 #, kde-format
 msgid "Enter new profile name"
-msgstr "Yeni profil adı girin"
+msgstr "Yeni profil adı gir"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:395
 #, kde-format
@@ -13341,7 +13305,8 @@ msgstr "Profil adı boş olamaz. Bir ad belirtin veya iptal edin."
 #, kde-format
 msgid "The name <b>%1</b> is already taken. Please change the name or cancel."
 msgstr ""
-"Ad <b>%1</b> zaten kullanılıyor. Lütfen başka bir ad seçin veya iptal edin."
+"<b>%1</b> adı halihazırda kullanılıyor. Lütfen başka bir ad seçin veya iptal "
+"edin."
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:399
 #, kde-format
@@ -13351,14 +13316,13 @@ msgstr "QIF profil adı sorunu"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:415
 #, kde-format
 msgid "Do you really want to delete profile '%1'?"
-msgstr "'%1' profilini gerçekten silmek istiyor musunuz?"
+msgstr "'%1' profilini silmeyi gerçekten istiyor musunuz?"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:416
-#, fuzzy, kde-format
-#| msgid "The default QIF profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete QIF profile"
-msgstr "Öntanımlı QIF profili"
+msgstr "QIF Profilini Sil"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tabGeneral)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:53
@@ -13377,7 +13341,7 @@ msgstr "İşaretlenmemiş"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:83
 #, kde-format
 msgid "Opening Balance text"
-msgstr "Açılış Bakiyesi Metni"
+msgstr "Açılış bakiyesi metni"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:102
@@ -13389,7 +13353,7 @@ msgstr "Metin alanı türü"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:124
 #, kde-format
 msgid "Account delimiter"
-msgstr "Hesap Sınırlandırıcı"
+msgstr "Hesap sınırlandırıcısı"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:146
@@ -13397,7 +13361,7 @@ msgstr "Hesap Sınırlandırıcı"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:698
 #, kde-format
 msgid "Description"
-msgstr "Tanım"
+msgstr "Açıklama"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_attemptMatch)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:158
@@ -13409,7 +13373,7 @@ msgstr "Benzer işlemleri eşlemeye çalış"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:196
 #, kde-format
 msgid "Output filter location"
-msgstr "Çıktı filtresi konumu"
+msgstr "Çıktı süzgeci konumu"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1_4_3)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:222
@@ -13427,7 +13391,7 @@ msgstr "*.qif"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:245
 #, kde-format
 msgid "Input filter location"
-msgstr "Girdi filtresi konumu"
+msgstr "Girdi süzgeci konumu"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, m_editDateFormat)
 #. i18n: ectx: property (whatsThis), widget (QLabel, TextLabel3)
@@ -13435,7 +13399,7 @@ msgstr "Girdi filtresi konumu"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:297
 #, kde-format
 msgid "The format of the dates in the QIF file."
-msgstr "QIF dosyası içindeki tarih biçimleri."
+msgstr "QIF dosyasındaki tarihlerin biçimleri."
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, m_editApostrophe)
 #. i18n: ectx: property (whatsThis), widget (QLabel, TextLabel4)
@@ -13449,10 +13413,11 @@ msgid ""
 "2005.  Specify here which range of years will have year delimited by an "
 "apostrophe (eg. for Quicken this is usually 1900-1949)."
 msgstr ""
-"QIF dosyası yılı iki basamaklı gösteren tarih girdisi içeriyorsa, hangi "
-"yüzyıl olduğunu ayırt etmek için kesme işareti ya da eğik çizgi "
-"kullanacaktır. Bu sayede 1905 ve 2005 ayırt edilebilir. Kesme işareti ile "
-"ayrılacak yıl aralığı belirt (Quicken biçimi için genellikle 1900-1949)."
+"Bir QIF dosyası, yılların iki rakamla temsil edildiği tarih girişleri "
+"içeriyorsa belirli yüzyılların tarihlerinde yılı sınırlamak için kesme "
+"işareti veya eğik çizgi kullanılabilir. Bu, 1905'in 2005'ten ayırt "
+"edilmesini sağlar. Burada hangi yıl aralığını belirtin kesme işaretiyle "
+"ayrılmış yıl olacaktır (örn. Quicken için bu genellikle 1900-1949'dur)."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:326
@@ -13477,13 +13442,13 @@ msgstr "Alan"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:394
 #, kde-format
 msgid "QIF-Record"
-msgstr "QIF-Kaydı"
+msgstr "QIF Kaydı"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:404
 #, kde-format
 msgid "Thousand Delimiter"
-msgstr "Bin sınırlayıcısı"
+msgstr "Binler Sınırlayıcısı"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:409
@@ -13507,7 +13472,7 @@ msgstr "0"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:431
 #, kde-format
 msgid "Split-Value"
-msgstr "Bölüm-Değer"
+msgstr "Bölünmüş-Değer"
 
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:434
@@ -13691,7 +13656,7 @@ msgstr "4"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:531
 #, kde-format
 msgid "Thousands Separator"
-msgstr "Binler Basamağı Ayırıcısı"
+msgstr "Binler Ayırıcısı"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_newButton)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:610
@@ -13710,7 +13675,7 @@ msgstr "Sıfırla"
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:14
 #, kde-format
 msgid "QIF Export"
-msgstr "QIF Dışarı Aktarımı"
+msgstr "QIF Dışa Aktar"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2)
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:66
@@ -13727,16 +13692,17 @@ msgid ""
 "Export button a message box will appear when the export has completed "
 "detailing how many transactions, categories and payees were exported."
 msgstr ""
-"Bu pencereden işlemlerini quicken uyumlu bir dosya olarak dışarı "
-"aktarabilirsiniz, (uzantısından dolayı QIF dosyası olarak bilinir).  Lütfen "
-"QIF dosyası için bir yol girin veya yolu Göz At düğmesine tıklayarak seçin.\n"
+"Bu iletişim kutusundan, işlemleri Quicken uyumlu bir dosyaya dışa "
+"aktarabilirsiniz (uzantısı nedeniyle QIF dosyası olarak bilinir). Lütfen QIF "
+"dosyasının yolunu girin veya Göz At düğmesine tıklayarak seçin.\n"
 "\n"
-"Dosyanın yolunu, hesap ve QIF dosyasının biçimini (profil) seçebilirsiniz."
-"Belirtilen tarihlerde veya kategoriler arasındaki bütün işlemleri dışa "
-"aktarmak için hesap seçin. Ayrıca dışarı aktarılacak işlemleri başlama ve "
-"bitiş tarihleri ile sınırlandırabilirsiniz. Dışa Aktar düğmesine bastığında "
-"kaç tane işlem, kategori ve alacaklı dışarı aktarıldı ayrıntılarını içeren "
-"bir ileti kutusu ortaya çıkacaktır."
+"Dosyanın yolunu, hesabı ve QIF dosyasının (profilin) biçimini "
+"seçebilirsiniz. Belirtilen tarihler arasındaki tüm işlemleri veya yalnızca "
+"kategorileri dışa aktarmak için Hesap'ı seçin. Ayrıca, dışa aktarılan "
+"işlemleri başlangıç ve bitiş tarihine göre sınırlayabilirsiniz. Dışa Aktar "
+"düğmesine basıp dışa aktarma tamamlandığında; kaç tane işlemin, kategorinin "
+"ve alacaklının dışa aktarıldığını gösteren bir iletişim kutusu "
+"görüntülenecektir."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel3)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel3_2)
@@ -13762,7 +13728,7 @@ msgid ""
 "Transaction number <b>%1</b> is missing an account assignment.\n"
 "Transaction dropped."
 msgstr ""
-"<b>%1</b> işlem numarası bir hesaba atanmamış.\n"
+"<b>%1</b> işlem numarasında bir hesap ataması eksik.\n"
 "İşlem bırakıldı."
 
 #: kmymoney/plugins/qif/export/qifexporter.cpp:52
@@ -13774,7 +13740,7 @@ msgstr "QIF..."
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:57
 #, kde-format
 msgid "Use this to start the import operation"
-msgstr "İçeri aktarma işlemine başlamak için bunu kullan"
+msgstr "İçe aktarma işlemine başlamak için bunu kullan"
 
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:66
 #, kde-format
@@ -13785,23 +13751,23 @@ msgstr "&Yeni..."
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:69
 #, kde-format
 msgid "Use this to open the profile editor"
-msgstr "Profil düzenleyiciyi açmak için bunu kullanın"
+msgstr "Profil düzenleyiciyi açmak için bunu kullan"
 
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:94
 #, kde-format
 msgid "Import File..."
-msgstr "İçeriye Dosya Aktar..."
+msgstr "Dosya İçe Aktar..."
 
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:96
 #, kde-format
 msgid "Import files (%1);;All files (%2)"
-msgstr "İçe aktarım dosyaları (%1);;Tüm dosyalar (%2)"
+msgstr "İçe aktarılacak dosyalar (%1);;Tüm dosyalar (%2)"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KImportDlgDecl)
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:14
 #, kde-format
 msgid "QIF Import"
-msgstr "QIF İçeriye Aktarımı"
+msgstr "QIF İçe Aktar"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:36
@@ -25180,7 +25146,3 @@ msgstr ""
 "\n"
 "<p>Tüm bilgiler isteğe bağlıdır ve K Param dosyanızı kişiselleştimeye yarar."
 "</p>"
-
-#~ msgctxt "Reconciliation flag C"
-#~ msgid "T"
-#~ msgstr "C"
