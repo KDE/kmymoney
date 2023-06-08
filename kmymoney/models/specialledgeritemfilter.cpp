@@ -171,7 +171,7 @@ public:
                 // transaction in the set. This may not be the date of the first transaction displayed
                 for (int row = parameter.firstRow; (row >= parameter.startRow) && (row <= parameter.lastRow); ++row) {
                     idx = q->index(qAbs(row), 0);
-                    if (!idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
+                    if (!idx.data(eMyMoney::Model::IdRole).toString().isEmpty() && isJournalModel(idx)) {
                         if (idx.data(eMyMoney::Model::TransactionPostDateRole).toDate() < startDate) {
                             startDate = idx.data(eMyMoney::Model::TransactionPostDateRole).toDate();
                         }
