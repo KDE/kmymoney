@@ -177,6 +177,29 @@ public:
                         qWarning("interest transaction not stored: '%s'", e.what());
                     }
                     updateSummaryInformation();
+
+                    // select a transaction close to the reconciliation date
+                    const auto view = ui->m_ledgerView;
+                    const auto model = view->model();
+                    const auto rows = model->rowCount();
+                    const auto targetDate = endingBalanceDlg->statementDate();
+                    const auto journalModel = MyMoneyFile::instance()->journalModel();
+                    int rowToSelect = -1;
+                    for (int row = 0; row < rows; ++row) {
+                        const auto idx = model->index(row, 0);
+                        const auto postDate = idx.data(eMyMoney::Model::TransactionPostDateRole).toDate();
+                        if (postDate.isValid() && MyMoneyModelBase::baseModel(idx) == journalModel) {
+                            if (postDate <= targetDate) {
+                                rowToSelect = row;
+                            }
+                        }
+                    }
+                    if (rowToSelect != -1) {
+                        const auto idx = model->index(rowToSelect, 0);
+                        QStringList selection;
+                        selection.append(idx.data(eMyMoney::Model::IdRole).toString());
+                        view->setSelectedJournalEntries(selection);
+                    }
                 } else {
                     pActions[eMenu::Action::CancelReconciliation]->trigger();
                 }
