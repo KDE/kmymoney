@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-30 00:47+0000\n"
+"POT-Creation-Date: 2023-06-09 00:48+0000\n"
 "PO-Revision-Date: 2022-07-13 15:41+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -20252,7 +20252,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "'%1'(으)로 이동"
 
-#: kmymoney/views/ledgerview.cpp:690
+#: kmymoney/views/ledgerview.cpp:668
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -20262,19 +20262,19 @@ msgstr ""
 "다른 보기에서 거래를 편집하고 있습니다. KMyMoney에서는 거래 두 개를 동시에 편"
 "집할 수 없습니다. <a href=\"jumpToEditor\">현재 편집기로 이동</a>"
 
-#: kmymoney/views/ledgerview.cpp:788
+#: kmymoney/views/ledgerview.cpp:766
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "거래에 할당된 분류가 없습니다."
 
-#: kmymoney/views/ledgerview.cpp:795
+#: kmymoney/views/ledgerview.cpp:773
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "거래에 <b>%1</b> 할당이 누락되었습니다."
 
-#: kmymoney/views/ledgerview.cpp:804
+#: kmymoney/views/ledgerview.cpp:782
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip icon description"
 #| msgid "This schedule is overdue. Click on the icon to enter it."
@@ -20282,14 +20282,14 @@ msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "이 일정의 만료 기한이 지났습니다. 아이콘을 클릭하면 편집합니다."
 
-#: kmymoney/views/ledgerview.cpp:810
+#: kmymoney/views/ledgerview.cpp:788
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 "이 거래는 가져온 거래입니다. 아이콘을 클릭하면 수락한 것으로 표시합니다."
 
-#: kmymoney/views/ledgerview.cpp:815
+#: kmymoney/views/ledgerview.cpp:793
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -20297,31 +20297,31 @@ msgid ""
 msgstr ""
 "이 거래가 일치합니다. 아이콘을 클릭하면 수락하거나 일치를 해제할 수 있습니다."
 
-#: kmymoney/views/ledgerview.cpp:891
+#: kmymoney/views/ledgerview.cpp:869
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "기한이 지난 거래를 입력하지 않습니다."
 
-#: kmymoney/views/ledgerview.cpp:892
+#: kmymoney/views/ledgerview.cpp:870
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "기한이 지난 거래를 입력합니다."
 
-#: kmymoney/views/ledgerview.cpp:895
+#: kmymoney/views/ledgerview.cpp:873
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "기한이 지난 일정을 입력하시겠습니까?"
 
-#: kmymoney/views/ledgerview.cpp:896
+#: kmymoney/views/ledgerview.cpp:874
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "기한이 지난 일정 입력"
 
-#: kmymoney/views/ledgerview.cpp:916
+#: kmymoney/views/ledgerview.cpp:894
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -20331,7 +20331,7 @@ msgstr ""
 "숨겨진(일치하는) 거래를 표시된 거래에서 분리하고 원장에 나중에 다시 입력합니"
 "다."
 
-#: kmymoney/views/ledgerview.cpp:918
+#: kmymoney/views/ledgerview.cpp:896
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20340,13 +20340,13 @@ msgid ""
 msgstr ""
 "표시된 대로 거래 일치를 수락하고 숨겨진(일치하는) 거래의 데이터를 삭제합니다."
 
-#: kmymoney/views/ledgerview.cpp:922
+#: kmymoney/views/ledgerview.cpp:900
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "일치하는 거래를 수락하거나 일치를 해제하시겠습니까?"
 
-#: kmymoney/views/ledgerview.cpp:923
+#: kmymoney/views/ledgerview.cpp:901
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
@@ -20381,7 +20381,7 @@ msgid "Investment value: %1%2"
 msgstr "투자 가치: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:143
-#: kmymoney/views/reconciliationledgerviewpage.cpp:374
+#: kmymoney/views/reconciliationledgerviewpage.cpp:397
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -20530,7 +20530,7 @@ msgstr ""
 "KMyMoney가 조정 데이터와 일치하는 거래를 감지했습니다.\n"
 "해당 거래를 취소하시겠습니까?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:232
+#: kmymoney/views/reconciliationledgerviewpage.cpp:255
 #, kde-format
 msgid ""
 "You are about to finish the reconciliation of this account with a difference "
@@ -20541,18 +20541,18 @@ msgstr ""
 "하려고 합니다.\n"
 "조정을 마치시겠습니까?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:235
+#: kmymoney/views/reconciliationledgerviewpage.cpp:258
 #, kde-format
 msgid "Confirm end of reconciliation"
 msgstr "조정 종료 확인"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:373
+#: kmymoney/views/reconciliationledgerviewpage.cpp:396
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "명세서: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:375
+#: kmymoney/views/reconciliationledgerviewpage.cpp:398
 #, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-30 00:47+0000\n"
-"PO-Revision-Date: 2023-06-08 00:47+0300\n"
+"POT-Creation-Date: 2023-06-09 00:48+0000\n"
+"PO-Revision-Date: 2023-06-08 19:54+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -12153,13 +12153,14 @@ msgstr "Kritik Hata"
 msgid ""
 "Width of the flicker field for optical tan generation (chipTan/sm@rtTan)."
 msgstr ""
-"Optik bronzluk üretimi için titreme alanının genişliği (chipTan/sm@rtTan)."
+"Optik işlem numarası üretimi için titreme alanının genişliği (chipTan/"
+"sm@rtTan)."
 
 #. i18n: ectx: label, entry (clocksetting), group (opticalTan)
 #: kmymoney/plugins/kbanking/kbanking.kcfg:13
 #, kde-format
 msgid "Clock length of optical tan flickering in ms."
-msgstr "Milisaniye türünden optik bronzluk titremesinin saat uzunluğu."
+msgstr "Milisaniye türünden optik işlem numarası titremesinin saat uzunluğu."
 
 #. i18n: ectx: tooltip, entry (clocksetting), group (opticalTan)
 #: kmymoney/plugins/kbanking/kbanking.kcfg:14
@@ -12175,7 +12176,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/widgets/phototandialog.cpp:90
 #, kde-format
 msgid "A valid tan is required to proceed."
-msgstr "Sürdürmek için geçerli bir bronzluk gerekli."
+msgstr "Sürdürmek için geçerli bir işlem numarası gerekli."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, chipTanDialog)
 #. i18n: ectx: property (windowTitle), widget (QWidget, photoTanDialog)
@@ -12189,7 +12190,7 @@ msgstr "Emir onayı"
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:24
 #, kde-format
 msgid "Reduce optical tan area in size"
-msgstr "Optik bronzluk alanı boyutunu düşür"
+msgstr "Optik işlem numarası alanı boyutunu düşür"
 
 #. i18n: ectx: property (text), widget (QToolButton, reduceButton)
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:27
@@ -12201,7 +12202,7 @@ msgstr "Düşür"
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:39
 #, kde-format
 msgid "Enlarge optical tan field"
-msgstr "Optik bronzluk alanını genişlet"
+msgstr "Optik işlem numarası alanını genişlet"
 
 #. i18n: ectx: property (text), widget (QToolButton, enlargeButton)
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:42
@@ -12225,7 +12226,8 @@ msgstr "Hızlandır"
 #: kmymoney/plugins/kbanking/widgets/chiptandialog.ui:154
 #, kde-format
 msgid "To confirm this order enter the tan displayed by your generator"
-msgstr "Bu emri doğrulamak için üretecinizde görüntülenen bronzluğu girin"
+msgstr ""
+"Bu emri doğrulamak için üretecinizde görüntülenen işlem numarasını girin"
 
 #: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:74
 #: kmymoney/plugins/kbanking/widgets/kbaccountlist.cpp:83
@@ -12435,7 +12437,8 @@ msgstr "Hesap"
 #: kmymoney/plugins/kbanking/widgets/phototandialog.ui:48
 #, kde-format
 msgid "To confirm this order enter the tan displayed by your &generator"
-msgstr "Bu siparişi doğrulamak için üretecinizde görüntülenen bronzluğu girin"
+msgstr ""
+"Bu siparişi doğrulamak için üretecinizde görüntülenen işlem numarasını girin"
 
 #: kmymoney/plugins/ofx/import/dialogs/kofxdirectconnectdlg.cpp:203
 #: kmymoney/plugins/ofx/import/ofxpartner.cpp:413
@@ -20519,7 +20522,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Buraya git '%1'"
 
-#: kmymoney/views/ledgerview.cpp:690
+#: kmymoney/views/ledgerview.cpp:668
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -20527,35 +20530,35 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:788
+#: kmymoney/views/ledgerview.cpp:766
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "İşlemde bir kategori ataması eksik."
 
-#: kmymoney/views/ledgerview.cpp:795
+#: kmymoney/views/ledgerview.cpp:773
 #, fuzzy, kde-format
 #| msgid "The transaction has a missing assignment of <b>%1</b>."
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "İşlemde <b>%1</b> ataması eksik."
 
-#: kmymoney/views/ledgerview.cpp:804
+#: kmymoney/views/ledgerview.cpp:782
 #, fuzzy, kde-format
 #| msgid "This schedule will end at some time"
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "Bu program yakın zamanda sonlanacak"
 
-#: kmymoney/views/ledgerview.cpp:810
+#: kmymoney/views/ledgerview.cpp:788
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Birinci işlem eşleştirme için gereksinimleri sağlamıyor"
 
-#: kmymoney/views/ledgerview.cpp:815
+#: kmymoney/views/ledgerview.cpp:793
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
@@ -20563,7 +20566,7 @@ msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr "Birinci işlem eşleştirme için gereksinimleri sağlamıyor"
 
-#: kmymoney/views/ledgerview.cpp:891
+#: kmymoney/views/ledgerview.cpp:869
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -20573,14 +20576,14 @@ msgstr ""
 "Seçilen fiyat girdisini gerçekten silmek istiyor musunuz?Seçilen fiyat "
 "girdilerini gerçekten silmek istiyor musunuz?"
 
-#: kmymoney/views/ledgerview.cpp:892
+#: kmymoney/views/ledgerview.cpp:870
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Programlanmış işlem gir"
 
-#: kmymoney/views/ledgerview.cpp:895
+#: kmymoney/views/ledgerview.cpp:873
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -20590,7 +20593,7 @@ msgstr ""
 "Seçilen fiyat girdisini gerçekten silmek istiyor musunuz?Seçilen fiyat "
 "girdilerini gerçekten silmek istiyor musunuz?"
 
-#: kmymoney/views/ledgerview.cpp:896
+#: kmymoney/views/ledgerview.cpp:874
 #, fuzzy, kde-format
 #| msgctxt "Dialog caption for 'Enter or schedule' dialog"
 #| msgid "Enter or schedule?"
@@ -20598,7 +20601,7 @@ msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Gir ya da programla?"
 
-#: kmymoney/views/ledgerview.cpp:916
+#: kmymoney/views/ledgerview.cpp:894
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use this to schedule the transaction for later entry into the ledger."
@@ -20608,7 +20611,7 @@ msgid ""
 "the ledger again."
 msgstr "Deftere sonradan girişi yapılacak işlemi planlamak için bunu kullan."
 
-#: kmymoney/views/ledgerview.cpp:918
+#: kmymoney/views/ledgerview.cpp:896
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20616,7 +20619,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:922
+#: kmymoney/views/ledgerview.cpp:900
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -20624,7 +20627,7 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Seçilen işlemi gerçekten silmek istiyor musunuz?"
 
-#: kmymoney/views/ledgerview.cpp:923
+#: kmymoney/views/ledgerview.cpp:901
 #, fuzzy, kde-format
 #| msgid "Accept"
 msgctxt "@title:window"
@@ -20662,7 +20665,7 @@ msgid "Investment value: %1%2"
 msgstr "Yatırım: %1"
 
 #: kmymoney/views/ledgerviewpage_p.h:143
-#: kmymoney/views/reconciliationledgerviewpage.cpp:374
+#: kmymoney/views/reconciliationledgerviewpage.cpp:397
 #, fuzzy, kde-format
 #| msgctxt "Cleared balance"
 #| msgid "Cleared: %1"
@@ -20825,7 +20828,7 @@ msgstr ""
 "K Param sizin uzlaştırılmış verilerinizle eşleşen işlemler tespit etti.\n"
 "K Param uygulamasının sizin adınıza bu işlemleri temizlemesini ister misiniz?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:232
+#: kmymoney/views/reconciliationledgerviewpage.cpp:255
 #, kde-format
 msgid ""
 "You are about to finish the reconciliation of this account with a difference "
@@ -20836,19 +20839,19 @@ msgstr ""
 "farklılıklarla bu hesabın uzlaştırma işlemini bitirmek üzeresiniz.\n"
 "Uzlaştırma işlemini bitirmek istediğinizden emin misiniz?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:235
+#: kmymoney/views/reconciliationledgerviewpage.cpp:258
 #, kde-format
 msgid "Confirm end of reconciliation"
 msgstr "Uzlaştırma sonucunu onayla"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:373
+#: kmymoney/views/reconciliationledgerviewpage.cpp:396
 #, fuzzy, kde-format
 #| msgid "Statement: %1"
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Bilanço: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:375
+#: kmymoney/views/reconciliationledgerviewpage.cpp:398
 #, fuzzy, kde-format
 #| msgid "Difference: %1"
 msgctxt "@label:textbox Difference to statement"

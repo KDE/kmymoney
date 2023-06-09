@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-30 00:47+0000\n"
+"POT-Creation-Date: 2023-06-09 00:48+0000\n"
 "PO-Revision-Date: 2022-11-07 20:00+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -20726,7 +20726,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Gehe zu „%1“"
 
-#: kmymoney/views/ledgerview.cpp:690
+#: kmymoney/views/ledgerview.cpp:668
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -20734,33 +20734,33 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:788
+#: kmymoney/views/ledgerview.cpp:766
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Dieser Buchung wurde keine Kategorie zugewiesenen."
 
-#: kmymoney/views/ledgerview.cpp:795
+#: kmymoney/views/ledgerview.cpp:773
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Die Buchung hat eine fehlende Zuordnung von <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:804
+#: kmymoney/views/ledgerview.cpp:782
 #, fuzzy, kde-format
 #| msgid "This schedule will end at some time"
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "Zahlungen enden zu einem bestimmten Termin"
 
-#: kmymoney/views/ledgerview.cpp:810
+#: kmymoney/views/ledgerview.cpp:788
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Erste Buchung erfüllt die Anforderungen für eine Zuordnung nicht"
 
-#: kmymoney/views/ledgerview.cpp:815
+#: kmymoney/views/ledgerview.cpp:793
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
@@ -20768,7 +20768,7 @@ msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr "Erste Buchung erfüllt die Anforderungen für eine Zuordnung nicht"
 
-#: kmymoney/views/ledgerview.cpp:891
+#: kmymoney/views/ledgerview.cpp:869
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -20776,14 +20776,14 @@ msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Möchten Sie den gewählten Kurseintrag wirklich löschen?"
 
-#: kmymoney/views/ledgerview.cpp:892
+#: kmymoney/views/ledgerview.cpp:870
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Geplante Buchung eintragen"
 
-#: kmymoney/views/ledgerview.cpp:895
+#: kmymoney/views/ledgerview.cpp:873
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -20791,7 +20791,7 @@ msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Möchten Sie den gewählten Kurseintrag wirklich löschen?"
 
-#: kmymoney/views/ledgerview.cpp:896
+#: kmymoney/views/ledgerview.cpp:874
 #, fuzzy, kde-format
 #| msgctxt "Dialog caption for 'Enter or schedule' dialog"
 #| msgid "Enter or schedule?"
@@ -20799,7 +20799,7 @@ msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Eintragen oder planen?"
 
-#: kmymoney/views/ledgerview.cpp:916
+#: kmymoney/views/ledgerview.cpp:894
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use this to schedule the transaction for later entry into the ledger."
@@ -20811,7 +20811,7 @@ msgstr ""
 "Verwenden Sie dies, um die Buchung für einen späteren Eintrag in das "
 "Kontenbuch vorzusehen."
 
-#: kmymoney/views/ledgerview.cpp:918
+#: kmymoney/views/ledgerview.cpp:896
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20819,7 +20819,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:922
+#: kmymoney/views/ledgerview.cpp:900
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -20827,7 +20827,7 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Sind Sie sicher, dass Sie die ausgewählte Buchung löschen möchten?"
 
-#: kmymoney/views/ledgerview.cpp:923
+#: kmymoney/views/ledgerview.cpp:901
 #, fuzzy, kde-format
 #| msgid "Attempt to match similar transactions"
 msgctxt "@title:window"
@@ -20865,7 +20865,7 @@ msgid "Investment value: %1%2"
 msgstr "Investition: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:143
-#: kmymoney/views/reconciliationledgerviewpage.cpp:374
+#: kmymoney/views/reconciliationledgerviewpage.cpp:397
 #, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
@@ -21023,7 +21023,7 @@ msgstr ""
 "KMyMoney hat Buchungen erkannt, die Ihren Abgleichdaten entsprechen.\n"
 "Soll KMyMoney diese jetzt als verrechnet markieren?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:232
+#: kmymoney/views/reconciliationledgerviewpage.cpp:255
 #, kde-format
 msgid ""
 "You are about to finish the reconciliation of this account with a difference "
@@ -21035,18 +21035,18 @@ msgstr ""
 "Buchungen besteht.\n"
 "Sind Sie sicher, dass Sie den Abgleich beenden möchten?"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:235
+#: kmymoney/views/reconciliationledgerviewpage.cpp:258
 #, kde-format
 msgid "Confirm end of reconciliation"
 msgstr "Ende des Abgleichs bestätigen"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:373
+#: kmymoney/views/reconciliationledgerviewpage.cpp:396
 #, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
 msgstr "Kontoauszug: %1"
 
-#: kmymoney/views/reconciliationledgerviewpage.cpp:375
+#: kmymoney/views/reconciliationledgerviewpage.cpp:398
 #, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
