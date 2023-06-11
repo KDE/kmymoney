@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-09 00:48+0000\n"
-"PO-Revision-Date: 2023-04-19 09:35+0200\n"
+"PO-Revision-Date: 2023-05-30 18:00+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -6869,55 +6869,46 @@ msgid "  * Payee '%1' removed."
 msgstr "  * Beneficiario «%1» rimosso."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2940
-#, fuzzy, kde-format
-#| msgid "* Potential problem with securities/currencies"
+#, kde-format
 msgctxt "@info consistency check"
 msgid "* Potential problem with securities/currencies"
 msgstr "* Possibile problema con strumenti finanziari/valute"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2945
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * The account '%1' in currency '%2' has no price set for the opening "
-#| "date '%3'."
+#, kde-format
 msgctxt "@info consistency check"
 msgid ""
 "  * The account '%1' in currency '%2' has no price set for the date of its "
 "first usage on '%3'."
 msgstr ""
 "  * Il conto «%1» nella valuta «%2» non ha un prezzo impostato per la data "
-"iniziale «%3»."
+"del primo utilizzo del «%3»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2949
-#, fuzzy, kde-format
-#| msgid ""
-#| "    Please enter a price for the currency on or before the opening date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid ""
 "    Please enter a price for the currency on or before the date of first "
 "usage."
 msgstr ""
-"    Digita un prezzo per la valuta alla data di apertura o precedente la "
-"data stessa."
+"    Digita un prezzo per la valuta alla data di primo utilizzo o prima di "
+"tale data."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2952
-#, fuzzy, kde-format
-#| msgid "  * The security '%1' has no price set for the opening date '%2'."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "  * The security '%1' has no price set for the first use on '%2'."
 msgstr ""
-"  * Lo strumento finanziario «%1» non ha un prezzo impostato per la data "
-"iniziale «%2»."
+"  * Lo strumento finanziario «%1» non ha un prezzo impostato per il primo "
+"utilizzo del «%2»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2955
-#, fuzzy, kde-format
-#| msgid ""
-#| "    Please enter a price for the security on or before the opening date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the security on or before this date."
 msgstr ""
-"    Digita un prezzo per lo strumento finanziario alla data di apertura o "
-"prima della data stessa."
+"    Digita un prezzo per lo strumento finanziario a questa data o prima di "
+"tale data."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2976
 #, kde-format
