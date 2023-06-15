@@ -1606,6 +1606,9 @@ void KMyMoneyApp::slotInstallConsistencyCheckContextMenu()
     // this code relies on the implementation of KMessageBox::informationList to add a context menu to that list,
     // please adjust it if it's necessary or rewrite the way the consistency check results are displayed
     if (QWidget* dialog = QApplication::activeModalWidget()) {
+        // allow the user to resize the dialog, since the contents might be large
+        dialog->setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
+        dialog->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         if (QListWidget* widget = dialog->findChild<QListWidget *>()) {
             // give the user a hint that the data can be saved
             widget->setToolTip(i18n("This is the consistency check log, use the context menu to copy or save it."));
