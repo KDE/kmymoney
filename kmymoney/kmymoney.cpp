@@ -1130,8 +1130,10 @@ public:
             pActions[action]->setEnabled(m_storageInfo.isOpened);
 
         // make sure all shared actions of the New button have the right state
-        for (const auto action : m_sharedActionButtons[Action::FileNew].button->actions()) {
-            action->setEnabled(m_storageInfo.isOpened);
+        if (m_sharedActionButtons[Action::FileNew].button) {
+            for (const auto action : m_sharedActionButtons[Action::FileNew].button->actions()) {
+                action->setEnabled(m_storageInfo.isOpened);
+            }
         }
         // except the New File/Book which is always enabled
         pActions[Action::FileNew]->setEnabled(true);
