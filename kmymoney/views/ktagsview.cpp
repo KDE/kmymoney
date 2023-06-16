@@ -549,6 +549,7 @@ void KTagsView::showEvent(QShowEvent* event)
         });
 
         connect(LedgerViewSettings::instance(), &LedgerViewSettings::settingsChanged, this, [&]() {
+            Q_D(KTagsView);
             d->m_transactionFilter->setHideReconciledTransactions(LedgerViewSettings::instance()->hideReconciledTransactions());
             d->m_transactionFilter->setHideTransactionsBefore(LedgerViewSettings::instance()->hideTransactionsBefore());
         });
