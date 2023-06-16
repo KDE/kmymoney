@@ -674,7 +674,7 @@ void JournalDelegate::setModelData(QWidget* editWidget, QAbstractItemModel* mode
         // it moves the selected transaction(s) around due to a date change.
         // therefore, we reselect when we return from saving.
         const auto selection = editor->saveTransaction(d->m_view->selectedJournalEntryIds());
-        d->m_view->setSelectedJournalEntries(selection);
+        QMetaObject::invokeMethod(d->m_view, "setSelectedJournalEntries", Qt::QueuedConnection, Q_ARG(QStringList, selection));
     }
 }
 

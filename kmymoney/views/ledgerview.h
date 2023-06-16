@@ -50,7 +50,6 @@ public:
 
     QStringList selectedJournalEntryIds() const;
 
-    void setSelectedJournalEntries(const QStringList& journalEntryIds);
     void reselectJournalEntry(const QString& journalEntryId);
 
     void selectMostRecentTransaction();
@@ -134,6 +133,8 @@ public Q_SLOTS:
     void moveSection(QWidget* view, int section, int oldIndex, int newIndex);
 
     void reset() override;
+
+    void setSelectedJournalEntries(const QStringList& journalEntryIds);
 
 protected:
     bool edit(const QModelIndex& index, EditTrigger trigger, QEvent* event) final override;

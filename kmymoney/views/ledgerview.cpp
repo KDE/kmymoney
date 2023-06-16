@@ -577,6 +577,9 @@ void LedgerView::setModel(QAbstractItemModel* model)
         // keep the current selected ids as the indeces might change
         d->selectionBeforeReset = selectedJournalEntryIds();
         d->currentBeforeReset = currentIndex().data(eMyMoney::Model::IdRole).toString();
+
+        // turn off updates of the view to reduce flicker
+        viewport()->setUpdatesEnabled(false);
     });
 
     connect(model, &QAbstractItemModel::modelReset, this, [&]() {
@@ -620,6 +623,8 @@ void LedgerView::reselectAfterModelReset()
     setSelectedJournalEntries(objectIds);
 
     d->reselectAfterResetPending = false;
+    // turn updates back on
+    viewport()->setUpdatesEnabled(true);
 }
 
 void LedgerView::setAccountId(const QString& id)
