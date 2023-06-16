@@ -291,6 +291,14 @@ QVariant EquitiesModel::extraColumnData(const QModelIndex& parent, int row, int 
     return QVariant();
 }
 
+QVariant EquitiesModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    // KExtraColumnsProxyModel only supports Qt::DisplayRole
+    if (role == eMyMoney::Model::LongDisplayRole) {
+        role = Qt::DisplayRole;
+    }
+    return KExtraColumnsProxyModel::headerData(section, orientation, role);
+}
 
 #if 0
 /**
