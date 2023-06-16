@@ -25,12 +25,7 @@ class KMM_MODELS_EXPORT EquitiesModel : public KExtraColumnsProxyModel
 {
     Q_OBJECT
 public:
-    enum Column {
-        Symbol = 0,
-        Quantity,
-        Price,
-        Value,
-    };
+    enum Column { Symbol = 0, Quantity, Price, Value, LastPriceUpdate };
 
     EquitiesModel(QObject *parent = nullptr);
     ~EquitiesModel();

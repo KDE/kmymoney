@@ -11,6 +11,7 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -23,6 +24,7 @@
 #include "mymoneyprice.h"
 #include "mymoneymoney.h"
 #include "mymoneyenums.h"
+#include "mymoneyutils.h"
 
 class EquitiesModelPrivate
 {
@@ -192,6 +194,7 @@ EquitiesModel::EquitiesModel(QObject *parent)
     appendColumn(i18n("Quantity"));
     appendColumn(i18n("Price"));
     appendColumn(i18n("Value"));
+    appendColumn(i18n("Last Price Update"));
 }
 
 EquitiesModel::~EquitiesModel()
@@ -256,6 +259,12 @@ QVariant EquitiesModel::extraColumnData(const QModelIndex& parent, int row, int 
             } else {
                 return value.formatMoney(tradingCurrencySymbol, prec);
             }
+        }
+
+        case LastPriceUpdate: {
+            const auto tradingCurrencyId = tradingCurrencyIdx.data(eMyMoney::Model::IdRole).toString();
+            const auto priceDate = MyMoneyUtils::formatDate(file->price(acc.currencyId(), tradingCurrencyId).date());
+            return priceDate;
         }
 
         default:
@@ -413,6 +422,8 @@ QString EquitiesModel::getHeaderName(const Column column)
         return i18n("Quantity");
     case Price:
         return i18n("Price");
+    case LastPriceUpdate:
+        return i18n("Last Price Update");
     default:
         return QString();
     }
