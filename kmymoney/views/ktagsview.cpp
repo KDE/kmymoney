@@ -624,7 +624,7 @@ void KTagsView::slotSettingsChanged()
 
 void KTagsView::slotHelp()
 {
-    KHelpClient::invokeHelp("details.tags.attributes");
+    KHelpClient::invokeHelp("details.tags");
     //FIXME-ALEX update help file
 }
 
