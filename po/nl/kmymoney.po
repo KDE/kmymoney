@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 00:48+0000\n"
+"POT-Creation-Date: 2023-06-17 00:49+0000\n"
 "PO-Revision-Date: 2023-05-30 12:40+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -1716,7 +1716,7 @@ msgstr "Naam"
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:85
 #: kmymoney/dialogs/kmymoneypricedlg.ui:65
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:75
-#: kmymoney/models/equitiesmodel.cpp:193 kmymoney/models/equitiesmodel.cpp:415
+#: kmymoney/models/equitiesmodel.cpp:195 kmymoney/models/equitiesmodel.cpp:432
 #: kmymoney/mymoney/storage/pricemodel.cpp:41
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:55
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:174
@@ -4726,7 +4726,7 @@ msgctxt "Roles in project"
 msgid "CSV import/export"
 msgstr "CSV importeren/exporteren"
 
-#: kmymoney/kmymoney.cpp:432 kmymoney/models/equitiesmodel.cpp:407
+#: kmymoney/kmymoney.cpp:432 kmymoney/models/equitiesmodel.cpp:424
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:192
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:401
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:78
@@ -6136,7 +6136,7 @@ msgstr "<qt>Wilt u <b>%1</b> toevoegen als debiteur/ontvanger?</qt>"
 msgid "Unable to add payee"
 msgstr "Kan begunstigde niet toevoegen"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:634
 #, kde-format
 msgid "New Tag"
 msgstr "Nieuwe tag"
@@ -6351,7 +6351,7 @@ msgid "Closed"
 msgstr "Gesloten"
 
 #. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
-#: kmymoney/models/equitiesmodel.cpp:191 kmymoney/models/equitiesmodel.cpp:409
+#: kmymoney/models/equitiesmodel.cpp:193 kmymoney/models/equitiesmodel.cpp:426
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:81
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:60
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:77
@@ -6362,7 +6362,7 @@ msgstr "Symbool"
 
 #. i18n: ectx: property (text), widget (QLabel, labelInv_quantity)
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
-#: kmymoney/models/equitiesmodel.cpp:192 kmymoney/models/equitiesmodel.cpp:413
+#: kmymoney/models/equitiesmodel.cpp:194 kmymoney/models/equitiesmodel.cpp:430
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:56
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:102
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:482
@@ -6371,13 +6371,19 @@ msgid "Quantity"
 msgstr "Hoeveelheid"
 
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
-#: kmymoney/models/equitiesmodel.cpp:194 kmymoney/models/equitiesmodel.cpp:411
+#: kmymoney/models/equitiesmodel.cpp:196 kmymoney/models/equitiesmodel.cpp:428
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:414
 #, kde-format
 msgid "Value"
 msgstr "Waarde"
 
-#: kmymoney/models/equitiesmodel.cpp:521
+#: kmymoney/models/equitiesmodel.cpp:197 kmymoney/models/equitiesmodel.cpp:434
+#, fuzzy, kde-format
+#| msgid "&Last Update"
+msgid "Last Price Update"
+msgstr "&Laatste keer bijwerken"
+
+#: kmymoney/models/equitiesmodel.cpp:540
 #: kmymoney/widgets/columnselector.cpp:215
 #, kde-format
 msgid "Displayed columns"
@@ -20411,12 +20417,12 @@ msgstr "Naam van tag dupliceren"
 msgid "Unable to modify tag"
 msgstr "Kan tag niet wijzigen"
 
-#: kmymoney/views/ktagsview.cpp:802
+#: kmymoney/views/ktagsview.cpp:803
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Kan tag niet aan andere transactie/splitsing koppelen"
 
-#: kmymoney/views/ktagsview.cpp:814
+#: kmymoney/views/ktagsview.cpp:815
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Kan tag(s) niet verwijderen"
@@ -20524,7 +20530,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Ga naar '%1'"
 
-#: kmymoney/views/ledgerview.cpp:668
+#: kmymoney/views/ledgerview.cpp:673
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -20535,19 +20541,19 @@ msgstr ""
 "heeft geen ondersteuning voor het parallel bewerken van twee transacties. <a "
 "href=\"jumpToEditor\">Spring naar huidige bewerker</a>"
 
-#: kmymoney/views/ledgerview.cpp:766
+#: kmymoney/views/ledgerview.cpp:771
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Transactie is niet aan een categorie toegewezen."
 
-#: kmymoney/views/ledgerview.cpp:773
+#: kmymoney/views/ledgerview.cpp:778
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "De transactie mist een toewijzing van <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:782
+#: kmymoney/views/ledgerview.cpp:787
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
@@ -20555,14 +20561,14 @@ msgstr ""
 "Deze periodieke transactie is over tijd sinds %1. Klik op het pictogram om "
 "het toegankelijk te maken."
 
-#: kmymoney/views/ledgerview.cpp:788
+#: kmymoney/views/ledgerview.cpp:793
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 "Deze transactie is geïmporteerd. Klik op het pictogram om het te accepteren."
 
-#: kmymoney/views/ledgerview.cpp:793
+#: kmymoney/views/ledgerview.cpp:798
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -20571,31 +20577,31 @@ msgstr ""
 "Deze transactie komt overeen. Klik op het pictogram om het te accepteren of "
 "het niet overeen te laten komen."
 
-#: kmymoney/views/ledgerview.cpp:869
+#: kmymoney/views/ledgerview.cpp:874
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "De over tijd zijnde periodieke transactie niet invoeren?"
 
-#: kmymoney/views/ledgerview.cpp:870
+#: kmymoney/views/ledgerview.cpp:875
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "De over tijd zijnde periodieke transactie invoeren."
 
-#: kmymoney/views/ledgerview.cpp:873
+#: kmymoney/views/ledgerview.cpp:878
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Wilt u de over tijd zijnde periodieke transactie nu invoeren?"
 
-#: kmymoney/views/ledgerview.cpp:874
+#: kmymoney/views/ledgerview.cpp:879
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Over tijd zijnde periodieke transactie invoeren"
 
-#: kmymoney/views/ledgerview.cpp:894
+#: kmymoney/views/ledgerview.cpp:899
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -20605,7 +20611,7 @@ msgstr ""
 "Maak de verborgen (overeenkomende) transactie los van de getoonde en voer "
 "het opnieuw in in het kasboek."
 
-#: kmymoney/views/ledgerview.cpp:896
+#: kmymoney/views/ledgerview.cpp:901
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20615,7 +20621,7 @@ msgstr ""
 "De overeenkomende zoals getoond accepteren en de gegevens van de verborgen "
 "(overeenkomende) transactie verwijderen."
 
-#: kmymoney/views/ledgerview.cpp:900
+#: kmymoney/views/ledgerview.cpp:905
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
@@ -20623,7 +20629,7 @@ msgstr ""
 "Wilt u de overeenkomende transactie nu accepteren of niet overeen laten "
 "komen?"
 
-#: kmymoney/views/ledgerview.cpp:901
+#: kmymoney/views/ledgerview.cpp:906
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"

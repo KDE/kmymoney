@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 00:48+0000\n"
+"POT-Creation-Date: 2023-06-17 00:49+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -1757,7 +1757,7 @@ msgstr "Όνομα"
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:85
 #: kmymoney/dialogs/kmymoneypricedlg.ui:65
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:75
-#: kmymoney/models/equitiesmodel.cpp:193 kmymoney/models/equitiesmodel.cpp:415
+#: kmymoney/models/equitiesmodel.cpp:195 kmymoney/models/equitiesmodel.cpp:432
 #: kmymoney/mymoney/storage/pricemodel.cpp:41
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:55
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:174
@@ -4869,7 +4869,7 @@ msgctxt "Roles in project"
 msgid "CSV import/export"
 msgstr "Οδηγός εισαγωγής CSV"
 
-#: kmymoney/kmymoney.cpp:432 kmymoney/models/equitiesmodel.cpp:407
+#: kmymoney/kmymoney.cpp:432 kmymoney/models/equitiesmodel.cpp:424
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:192
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:401
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:78
@@ -6363,7 +6363,7 @@ msgstr "Θέλετε να προσθέσετε τον <b>%1</b> ως δικαι�
 msgid "Unable to add payee"
 msgstr "Αδυναμία προσθήκης του δικαιούχου"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:634
 #, kde-format
 msgid "New Tag"
 msgstr "Νέα ετικέτα"
@@ -6602,7 +6602,7 @@ msgid "Closed"
 msgstr "Κλειστός"
 
 #. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
-#: kmymoney/models/equitiesmodel.cpp:191 kmymoney/models/equitiesmodel.cpp:409
+#: kmymoney/models/equitiesmodel.cpp:193 kmymoney/models/equitiesmodel.cpp:426
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:81
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:60
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:77
@@ -6614,7 +6614,7 @@ msgstr "Σύμβολο"
 
 #. i18n: ectx: property (text), widget (QLabel, labelInv_quantity)
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
-#: kmymoney/models/equitiesmodel.cpp:192 kmymoney/models/equitiesmodel.cpp:413
+#: kmymoney/models/equitiesmodel.cpp:194 kmymoney/models/equitiesmodel.cpp:430
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:56
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:102
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:482
@@ -6623,13 +6623,19 @@ msgid "Quantity"
 msgstr "Ποσότητα"
 
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
-#: kmymoney/models/equitiesmodel.cpp:194 kmymoney/models/equitiesmodel.cpp:411
+#: kmymoney/models/equitiesmodel.cpp:196 kmymoney/models/equitiesmodel.cpp:428
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:414
 #, kde-format
 msgid "Value"
 msgstr "Αξία"
 
-#: kmymoney/models/equitiesmodel.cpp:521
+#: kmymoney/models/equitiesmodel.cpp:197 kmymoney/models/equitiesmodel.cpp:434
+#, fuzzy, kde-format
+#| msgid "Last Update"
+msgid "Last Price Update"
+msgstr "Τελευταία ενημέρωση"
+
+#: kmymoney/models/equitiesmodel.cpp:540
 #: kmymoney/widgets/columnselector.cpp:215
 #, fuzzy, kde-format
 #| msgid "Date Column"
@@ -21381,12 +21387,12 @@ msgstr "Διπλή ετικέτα"
 msgid "Unable to modify tag"
 msgstr "Αδυναμία τροποποίησης της ετικέτας"
 
-#: kmymoney/views/ktagsview.cpp:802
+#: kmymoney/views/ktagsview.cpp:803
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Αδυναμία επανάληψης της καταχώρησης ετικέτας για συναλλαγή/διάσπαση"
 
-#: kmymoney/views/ktagsview.cpp:814
+#: kmymoney/views/ktagsview.cpp:815
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Αδυναμία διαγραφής ετικετών"
@@ -21500,7 +21506,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Μετάβαση στο «%1»"
 
-#: kmymoney/views/ledgerview.cpp:668
+#: kmymoney/views/ledgerview.cpp:673
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -21508,35 +21514,35 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:766
+#: kmymoney/views/ledgerview.cpp:771
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Στη συναλλαγή λείπει η ανάθεση μιας κατηγορίας."
 
-#: kmymoney/views/ledgerview.cpp:773
+#: kmymoney/views/ledgerview.cpp:778
 #, fuzzy, kde-format
 #| msgid "The transaction has a missing assignment of <b>%1</b>."
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Από τη συναλλαγή λείπει η ανάθεση του <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:782
+#: kmymoney/views/ledgerview.cpp:787
 #, fuzzy, kde-format
 #| msgid "This schedule will end at some time"
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "Αυτή η προγραμματισμένη συναλλαγή θα τερματιστεί κάποια στιγμή"
 
-#: kmymoney/views/ledgerview.cpp:788
+#: kmymoney/views/ledgerview.cpp:793
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Η πρώτη συναλλαγή δεν ταιριάζει στις απαιτήσεις ταιριάσματος"
 
-#: kmymoney/views/ledgerview.cpp:793
+#: kmymoney/views/ledgerview.cpp:798
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
@@ -21544,7 +21550,7 @@ msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr "Η πρώτη συναλλαγή δεν ταιριάζει στις απαιτήσεις ταιριάσματος"
 
-#: kmymoney/views/ledgerview.cpp:869
+#: kmymoney/views/ledgerview.cpp:874
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -21552,14 +21558,14 @@ msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Επιθυμείτε πραγματικά την διαγραφή της επιλεγμένης τιμής;"
 
-#: kmymoney/views/ledgerview.cpp:870
+#: kmymoney/views/ledgerview.cpp:875
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Εισαγωγή προγραμματισμένης συναλλαγής"
 
-#: kmymoney/views/ledgerview.cpp:873
+#: kmymoney/views/ledgerview.cpp:878
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -21567,7 +21573,7 @@ msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Επιθυμείτε πραγματικά την διαγραφή της επιλεγμένης τιμής;"
 
-#: kmymoney/views/ledgerview.cpp:874
+#: kmymoney/views/ledgerview.cpp:879
 #, fuzzy, kde-format
 #| msgctxt "Dialog caption for 'Enter or schedule' dialog"
 #| msgid "Enter or schedule?"
@@ -21575,7 +21581,7 @@ msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Εισαγωγή ή προγραμματισμό συναλλαγής"
 
-#: kmymoney/views/ledgerview.cpp:894
+#: kmymoney/views/ledgerview.cpp:899
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use this to schedule the transaction for later entry into the ledger."
@@ -21587,7 +21593,7 @@ msgstr ""
 "Χρησιμοποιήστε το για τον προγραμματισμό της συναλλαγής για μετέπειτα "
 "εισαγωγή στο καθολικό."
 
-#: kmymoney/views/ledgerview.cpp:896
+#: kmymoney/views/ledgerview.cpp:901
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21595,7 +21601,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:900
+#: kmymoney/views/ledgerview.cpp:905
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -21603,7 +21609,7 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Θέλετε πραγματικά να διαγράψετε την επιλεγμένη συναλλαγή;"
 
-#: kmymoney/views/ledgerview.cpp:901
+#: kmymoney/views/ledgerview.cpp:906
 #, fuzzy, kde-format
 #| msgid "Attempt to match similar transactions"
 msgctxt "@title:window"

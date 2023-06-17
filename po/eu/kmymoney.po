@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 00:48+0000\n"
+"POT-Creation-Date: 2023-06-17 00:49+0000\n"
 "PO-Revision-Date: 2023-04-22 19:15+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -1706,7 +1706,7 @@ msgstr "Izena"
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:85
 #: kmymoney/dialogs/kmymoneypricedlg.ui:65
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:75
-#: kmymoney/models/equitiesmodel.cpp:193 kmymoney/models/equitiesmodel.cpp:415
+#: kmymoney/models/equitiesmodel.cpp:195 kmymoney/models/equitiesmodel.cpp:432
 #: kmymoney/mymoney/storage/pricemodel.cpp:41
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:55
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:174
@@ -4704,7 +4704,7 @@ msgctxt "Roles in project"
 msgid "CSV import/export"
 msgstr "CSV-inportatzaile/esportatzailea"
 
-#: kmymoney/kmymoney.cpp:432 kmymoney/models/equitiesmodel.cpp:407
+#: kmymoney/kmymoney.cpp:432 kmymoney/models/equitiesmodel.cpp:424
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:192
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:401
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:78
@@ -6120,7 +6120,7 @@ msgstr "<qt><b>%1</b> onuradun/hartzaile gisa gehitu nahi duzu?</qt>"
 msgid "Unable to add payee"
 msgstr "Ezin da onuraduna gehitu"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:634
 #, kde-format
 msgid "New Tag"
 msgstr "Etiketa berria"
@@ -6335,7 +6335,7 @@ msgid "Closed"
 msgstr "Itxita"
 
 #. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
-#: kmymoney/models/equitiesmodel.cpp:191 kmymoney/models/equitiesmodel.cpp:409
+#: kmymoney/models/equitiesmodel.cpp:193 kmymoney/models/equitiesmodel.cpp:426
 #: kmymoney/mymoney/storage/securitiesmodel.cpp:81
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:60
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:77
@@ -6346,7 +6346,7 @@ msgstr "Ikurra"
 
 #. i18n: ectx: property (text), widget (QLabel, labelInv_quantity)
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
-#: kmymoney/models/equitiesmodel.cpp:192 kmymoney/models/equitiesmodel.cpp:413
+#: kmymoney/models/equitiesmodel.cpp:194 kmymoney/models/equitiesmodel.cpp:430
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:56
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:102
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:482
@@ -6355,13 +6355,19 @@ msgid "Quantity"
 msgstr "Kopurua"
 
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
-#: kmymoney/models/equitiesmodel.cpp:194 kmymoney/models/equitiesmodel.cpp:411
+#: kmymoney/models/equitiesmodel.cpp:196 kmymoney/models/equitiesmodel.cpp:428
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:414
 #, kde-format
 msgid "Value"
 msgstr "Balioa"
 
-#: kmymoney/models/equitiesmodel.cpp:521
+#: kmymoney/models/equitiesmodel.cpp:197 kmymoney/models/equitiesmodel.cpp:434
+#, fuzzy, kde-format
+#| msgid "&Last Update"
+msgid "Last Price Update"
+msgstr "Azken eguneratzea"
+
+#: kmymoney/models/equitiesmodel.cpp:540
 #: kmymoney/widgets/columnselector.cpp:215
 #, kde-format
 msgid "Displayed columns"
@@ -20353,12 +20359,12 @@ msgstr "Bikoiztutako etiketa-izena"
 msgid "Unable to modify tag"
 msgstr "Ezin da etiketa aldatu"
 
-#: kmymoney/views/ktagsview.cpp:802
+#: kmymoney/views/ktagsview.cpp:803
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Ez da transakzioaren/partidaren etiketa berresleitzeko gai"
 
-#: kmymoney/views/ktagsview.cpp:814
+#: kmymoney/views/ktagsview.cpp:815
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Ezin d(ir)a etiketa(k) kendu"
@@ -20464,7 +20470,7 @@ msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
 msgstr "Joan hona: '%1'"
 
-#: kmymoney/views/ledgerview.cpp:668
+#: kmymoney/views/ledgerview.cpp:673
 #, kde-format
 msgid ""
 "You are already editing a transaction in another view. KMyMoney does not "
@@ -20475,32 +20481,32 @@ msgstr ""
 "onartzen bi transakzio paraleloan editatzea. <a href=\"jumpToEditor"
 "\">Oraingo editorera joan</a>"
 
-#: kmymoney/views/ledgerview.cpp:766
+#: kmymoney/views/ledgerview.cpp:771
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Kategoria bat esleitzea falta zaio transakzioari."
 
-#: kmymoney/views/ledgerview.cpp:773
+#: kmymoney/views/ledgerview.cpp:778
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "<b>%1</b> esleitzea falta zaio transakzioari."
 
-#: kmymoney/views/ledgerview.cpp:782
+#: kmymoney/views/ledgerview.cpp:787
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr ""
 "Programazio hau %1(e)tik atzeratuta dago. Egin klik ikonoan hura sartzeko."
 
-#: kmymoney/views/ledgerview.cpp:788
+#: kmymoney/views/ledgerview.cpp:793
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Transakzio hau inportatu da. Egin klik ikonoan onartzeko."
 
-#: kmymoney/views/ledgerview.cpp:793
+#: kmymoney/views/ledgerview.cpp:798
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -20508,31 +20514,31 @@ msgid ""
 msgstr ""
 "Transakzio hau parekatu da. Egin klik ikonoan onartzeko edo hura desparekatu."
 
-#: kmymoney/views/ledgerview.cpp:869
+#: kmymoney/views/ledgerview.cpp:874
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Ez sartu programatutako transakzio atzeratuan."
 
-#: kmymoney/views/ledgerview.cpp:870
+#: kmymoney/views/ledgerview.cpp:875
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Sartu programatutako transakzio atzeratuan."
 
-#: kmymoney/views/ledgerview.cpp:873
+#: kmymoney/views/ledgerview.cpp:878
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Sartu nahi duzu programatutako transakzio atzeratuan orain?"
 
-#: kmymoney/views/ledgerview.cpp:874
+#: kmymoney/views/ledgerview.cpp:879
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Sartu programazio atzeratuan"
 
-#: kmymoney/views/ledgerview.cpp:894
+#: kmymoney/views/ledgerview.cpp:899
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -20542,7 +20548,7 @@ msgstr ""
 "Kendu ezkutuko (parekatuta) transakzioa erakutsitakotik eta sartu berriro "
 "liburu nagusian."
 
-#: kmymoney/views/ledgerview.cpp:896
+#: kmymoney/views/ledgerview.cpp:901
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20552,13 +20558,13 @@ msgstr ""
 "Onartu parekatzea erakusten den moduan eta kendu ezkutuko (bat datozen) "
 "transakzioaren datuak."
 
-#: kmymoney/views/ledgerview.cpp:900
+#: kmymoney/views/ledgerview.cpp:905
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Onartu edo desparekatu nahi duzu parekatuta transakzioa orain?"
 
-#: kmymoney/views/ledgerview.cpp:901
+#: kmymoney/views/ledgerview.cpp:906
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
