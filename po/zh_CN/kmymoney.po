@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-02 02:38+0000\n"
-"PO-Revision-Date: 2023-05-22 14:04\n"
+"PO-Revision-Date: 2023-06-17 04:13\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -7586,7 +7586,7 @@ msgstr "  * 收/付款人“%1”已删除。"
 #: kmymoney/mymoney/mymoneyfile.cpp:2445
 #, kde-format
 msgid "* Potential problem with securities/currencies"
-msgstr "* 证券或货币存在部分问题"
+msgstr ""
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2450
 #, kde-format
@@ -17336,13 +17336,13 @@ msgstr ""
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:34
 #, kde-format
 msgid "GPG installation not found or not working properly."
-msgstr "未找到 GPG 安装程序，或安装程序运行异常。"
+msgstr "没有找到已安装的 GPG 程序，或者 GPG 程序运行异常。"
 
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:153
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
-msgstr "未找到 GPG 私钥，请运行 gpg[2] --gen-key 或向 gpg 导入密钥。"
+msgstr "没有找到 GPG 私钥，请运行 gpg[2] --gen-key，或者向 gpg 导入密钥。"
 
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:168
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:206
