@@ -34,6 +34,7 @@
 
 #include "columnselector.h"
 #include "icons.h"
+#include "kmmsearchwidget.h"
 #include "kmymoneyplugin.h"
 #include "kmymoneyviewbase_p.h"
 #include "konlinetransferform.h"
@@ -83,6 +84,8 @@ public:
         Q_Q(KOnlineJobOutboxView);
         m_needLoad = false;
         ui->setupUi(q);
+        // for now we don't need the combo box here
+        ui->m_searchWidget->comboBox()->hide();
 
         // Restore column state
         KConfigGroup configGroup = KSharedConfig::openConfig()->group("KOnlineJobOutboxView");
@@ -440,6 +443,25 @@ void KOnlineJobOutboxView::showEvent(QShowEvent* event)
             Q_UNUSED(order)
             d->setSortRole(logicalIndex);
         });
+
+        connect(d->ui->m_searchWidget, &KMMSearchWidget::closed, this, [&]() {
+            Q_D(KOnlineJobOutboxView);
+            d->ui->m_onlineJobView->setFocus();
+        });
+
+        connect(d->ui->m_searchWidget->lineEdit(), &QLineEdit::textChanged, this, [&](const QString& text) {
+            Q_D(KOnlineJobOutboxView);
+            d->m_filterModel->setFilterFixedString(text);
+            d->m_filterModel->setFilterKeyColumn(-1);
+        });
+
+        connect(pActions[eMenu::Action::ShowFilterWidget], &QAction::triggered, this, [&]() {
+            Q_D(KOnlineJobOutboxView);
+            if (isVisible()) {
+                d->ui->m_searchWidget->show();
+            }
+        });
+
         const auto header = d->ui->m_onlineJobView->header();
         d->setSortRole(header->sortIndicatorSection());
         d->ui->m_onlineJobView->sortByColumn(header->sortIndicatorSection(), header->sortIndicatorOrder());
