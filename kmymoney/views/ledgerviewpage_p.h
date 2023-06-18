@@ -156,7 +156,6 @@ public:
     virtual void clearFilter()
     {
         stateFilter->clearFilter();
-        ui->m_filterContainer->hide();
         ui->m_ledgerView->setFocus();
         QMetaObject::invokeMethod(ui->m_ledgerView, &LedgerView::ensureCurrentItemIsVisible, Qt::QueuedConnection);
     }

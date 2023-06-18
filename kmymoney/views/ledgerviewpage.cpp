@@ -23,6 +23,7 @@
 
 #include "icons.h"
 #include "journalmodel.h"
+#include "kmmsearchwidget.h"
 #include "kmymoneysettings.h"
 #include "menuenums.h"
 #include "mymoneyaccount.h"
@@ -87,27 +88,21 @@ void LedgerViewPage::initModel()
 
     d->stateFilter = new LedgerFilter(d->ui->m_ledgerView);
     d->stateFilter->setSourceModel(d->accountFilter);
-    d->stateFilter->setComboBox(d->ui->m_filterBox);
-    d->stateFilter->setLineEdit(d->ui->m_searchWidget);
-    d->ui->m_searchWidget->installEventFilter(this);
+    d->stateFilter->setComboBox(d->ui->m_searchWidget->comboBox());
+    d->stateFilter->setLineEdit(d->ui->m_searchWidget->lineEdit());
 
     d->specialItemFilter = new SpecialLedgerItemFilter(this);
     d->specialItemFilter->setSourceModel(d->stateFilter);
     d->specialItemFilter->setSortRole(eMyMoney::Model::TransactionPostDateRole);
     d->specialItemFilter->setShowReconciliationEntries(viewSettings->showReconciliationEntries());
 
-    // prepare the filter container
-    d->ui->m_closeButton->setIcon(Icons::get(Icon::DialogClose));
-    d->ui->m_closeButton->setAutoRaise(true);
-    d->ui->m_filterContainer->hide();
-
-    connect(d->ui->m_closeButton, &QToolButton::clicked, this, [&]() {
+    connect(d->ui->m_searchWidget, &KMMSearchWidget::closed, this, [&]() {
         d->clearFilter();
+        d->ui->m_ledgerView->setFocus();
     });
     connect(pActions[eMenu::Action::ShowFilterWidget], &QAction::triggered, this, [&]() {
         if (isVisible()) {
-            d->ui->m_filterContainer->show();
-            d->ui->m_searchWidget->setFocus();
+            d->ui->m_searchWidget->show();
         }
     });
 
@@ -179,20 +174,6 @@ void LedgerViewPage::initModel()
 LedgerViewPage::~LedgerViewPage()
 {
     delete d;
-}
-
-bool LedgerViewPage::eventFilter(QObject* watched, QEvent* event)
-{
-    if (watched == d->ui->m_searchWidget) {
-        if (event->type() == QEvent::KeyPress) {
-            const auto kev = static_cast<QKeyEvent*>(event);
-            if (kev->modifiers() == Qt::NoModifier && kev->key() == Qt::Key_Escape) {
-                d->ui->m_closeButton->animateClick();
-                return true;
-            }
-        }
-    }
-    return QWidget::eventFilter(watched, event);
 }
 
 /**

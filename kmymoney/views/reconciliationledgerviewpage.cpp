@@ -414,8 +414,8 @@ ReconciliationLedgerViewPage::ReconciliationLedgerViewPage(QWidget* parent, cons
     : LedgerViewPage(*new Private(this), parent, configGroupName)
 {
     // in reconciliation mode we use a fixed state filter
-    d->ui->m_filterBox->setCurrentIndex(static_cast<int>(LedgerFilter::State::NotReconciled));
-    d->ui->m_filterBox->setDisabled(true);
+    d->ui->m_searchWidget->comboBox()->setCurrentIndex(static_cast<int>(LedgerFilter::State::NotReconciled));
+    d->ui->m_searchWidget->comboBox()->setDisabled(true);
 }
 
 ReconciliationLedgerViewPage::~ReconciliationLedgerViewPage()

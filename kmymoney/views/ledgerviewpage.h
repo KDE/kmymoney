@@ -79,7 +79,6 @@ public:
 
 protected:
     explicit LedgerViewPage(Private& dd, QWidget* parent = nullptr, const QString& configGroupName = QString());
-    bool eventFilter(QObject *watched, QEvent *event) override;
     void showEvent(QShowEvent* event) override;
     void initModel();
 

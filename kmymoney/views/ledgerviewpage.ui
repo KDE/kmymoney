@@ -100,8 +100,8 @@
         </widget>
        </item>
        <item>
-        <widget class="QWidget" name="m_filterContainer" native="true">
-         <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,2,0">
+        <widget class="KMMSearchWidget" name="m_searchWidget" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout" stretch="">
           <property name="spacing">
            <number>2</number>
           </property>
@@ -117,26 +117,6 @@
           <property name="bottomMargin">
            <number>1</number>
           </property>
-          <item>
-           <widget class="QToolButton" name="m_closeButton">
-            <property name="text">
-             <string>...</string>
-            </property>
-            <property name="autoRaise">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="m_searchWidget"/>
-          </item>
-          <item>
-           <widget class="QComboBox" name="m_filterBox">
-            <property name="sizeAdjustPolicy">
-             <enum>QComboBox::AdjustToContents</enum>
-            </property>
-           </widget>
-          </item>
          </layout>
         </widget>
        </item>
@@ -152,6 +132,12 @@
    <class>LedgerView</class>
    <extends>QListView</extends>
    <header>ledgerview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMMSearchWidget</class>
+   <extends>QWidget</extends>
+   <header>kmmsearchwidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

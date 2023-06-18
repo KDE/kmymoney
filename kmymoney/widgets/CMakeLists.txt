@@ -30,6 +30,7 @@ set(kmm_base_widgets_SOURCES
   creditdebitedit.cpp
   kaccounttemplateselector.cpp
   kguiutils.cpp
+  kmmsearchwidget.cpp
   kmymoneyaccountcombo.cpp
   kmymoneyaccountcompletion.cpp
   kmymoneyaccountselector.cpp
@@ -113,6 +114,7 @@ list(APPEND kmm_widgets_HEADERS ${IBANBICWidget_HEADERS})
 ki18n_wrap_ui(kmm_base_widgets_SOURCES
   creditdebitedit.ui
   kaccounttemplateselector.ui
+  kmmsearchwidget.ui
   kmymoneyvalidationfeedback.ui
   ./payeeidentifier/nationalaccount/nationalaccountedit.ui
   ./payeeidentifier/ibanbic/ibanbicitemedit.ui
