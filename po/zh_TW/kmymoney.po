@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-17 00:49+0000\n"
+"POT-Creation-Date: 2023-06-18 00:54+0000\n"
 "PO-Revision-Date: 2019-01-19 19:46+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -597,10 +597,10 @@ msgid "Backup location:"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
-#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3624
-#: kmymoney/kmymoney.cpp:3688 kmymoney/kmymoney.cpp:3704
-#: kmymoney/kmymoney.cpp:3710 kmymoney/kmymoney.cpp:3724
-#: kmymoney/kmymoney.cpp:3726
+#: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3629
+#: kmymoney/kmymoney.cpp:3693 kmymoney/kmymoney.cpp:3709
+#: kmymoney/kmymoney.cpp:3715 kmymoney/kmymoney.cpp:3729
+#: kmymoney/kmymoney.cpp:3731
 #, kde-format
 msgid "Backup"
 msgstr "備份"
@@ -4693,600 +4693,600 @@ msgstr "帳戶問題"
 msgid "Fix transactions"
 msgstr "修正交易"
 
-#: kmymoney/kmymoney.cpp:1172
+#: kmymoney/kmymoney.cpp:1174
 #, kde-format
 msgid "Untitled"
 msgstr "未命名"
 
-#: kmymoney/kmymoney.cpp:1346
+#: kmymoney/kmymoney.cpp:1348
 #, kde-format
 msgid "Unable to match the selected transactions"
 msgstr "無法比對選取的交易"
 
-#: kmymoney/kmymoney.cpp:1373
+#: kmymoney/kmymoney.cpp:1375
 #, kde-format
 msgid "Unable to unmatch the selected transactions"
 msgstr "無法取消比對選取的交易"
 
-#: kmymoney/kmymoney.cpp:1465
+#: kmymoney/kmymoney.cpp:1467
 #, fuzzy, kde-format
 #| msgid "New account..."
 msgctxt "@action New file/database"
 msgid "New book..."
 msgstr "新增帳戶..."
 
-#: kmymoney/kmymoney.cpp:1609
+#: kmymoney/kmymoney.cpp:1614
 #, kde-format
 msgid ""
 "This is the consistency check log, use the context menu to copy or save it."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1622
+#: kmymoney/kmymoney.cpp:1627
 #, fuzzy, kde-format
 #| msgid "Copy this report to the clipboard"
 msgid "Copy to clipboard"
 msgstr "複製此報告到剪貼簿"
 
-#: kmymoney/kmymoney.cpp:1623
+#: kmymoney/kmymoney.cpp:1628
 #, fuzzy, kde-format
 #| msgid "Unable to parse file"
 msgid "Save to file"
 msgstr "無法剖析檔案"
 
-#: kmymoney/kmymoney.cpp:1746
+#: kmymoney/kmymoney.cpp:1751
 #, kde-format
 msgid "Backup..."
 msgstr "備份..."
 
-#: kmymoney/kmymoney.cpp:1747
+#: kmymoney/kmymoney.cpp:1752
 #, kde-format
 msgid "Statement file..."
 msgstr "報表檔..."
 
-#: kmymoney/kmymoney.cpp:1748 kmymoney/kmymoney.cpp:1749
+#: kmymoney/kmymoney.cpp:1753 kmymoney/kmymoney.cpp:1754
 #, kde-format
 msgid "Account Template..."
 msgstr "帳戶樣本..."
 
-#: kmymoney/kmymoney.cpp:1750
+#: kmymoney/kmymoney.cpp:1755
 #, kde-format
 msgid "Personal Data..."
 msgstr "個人資料..."
 
-#: kmymoney/kmymoney.cpp:1752
+#: kmymoney/kmymoney.cpp:1757
 #, kde-format
 msgid "Dump Memory"
 msgstr "傾印記憶體"
 
-#: kmymoney/kmymoney.cpp:1754
+#: kmymoney/kmymoney.cpp:1759
 #, kde-format
 msgid "File-Information..."
 msgstr "檔案資訊..."
 
-#: kmymoney/kmymoney.cpp:1758
+#: kmymoney/kmymoney.cpp:1763
 #, kde-format
 msgid "Find transaction..."
 msgstr "尋找交易..."
 
-#: kmymoney/kmymoney.cpp:1762
+#: kmymoney/kmymoney.cpp:1767
 #, kde-format
 msgid "Show Transaction Detail"
 msgstr "顯示交易詳情"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
-#: kmymoney/kmymoney.cpp:1763 kmymoney/settings/kmymoney.kcfg:236
+#: kmymoney/kmymoney.cpp:1768 kmymoney/settings/kmymoney.kcfg:236
 #, kde-format
 msgid "Hide reconciled transactions"
 msgstr "隱藏已對帳的交易"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
-#: kmymoney/kmymoney.cpp:1764 kmymoney/settings/kmymoney.kcfg:216
+#: kmymoney/kmymoney.cpp:1769 kmymoney/settings/kmymoney.kcfg:216
 #, kde-format
 msgid "Hide unused categories"
 msgstr "隱藏未使用的類別"
 
 #. i18n: ectx: label, entry (ShowAllAccounts), group (List Options)
-#: kmymoney/kmymoney.cpp:1765 kmymoney/settings/kmymoney.kcfg:220
+#: kmymoney/kmymoney.cpp:1770 kmymoney/settings/kmymoney.kcfg:220
 #, kde-format
 msgid "Show all accounts"
 msgstr "顯示所有帳戶"
 
-#: kmymoney/kmymoney.cpp:1769
+#: kmymoney/kmymoney.cpp:1774
 #, kde-format
 msgid "New institution..."
 msgstr "新增機構..."
 
-#: kmymoney/kmymoney.cpp:1770
+#: kmymoney/kmymoney.cpp:1775
 #, kde-format
 msgid "Edit institution..."
 msgstr "編輯機構..."
 
-#: kmymoney/kmymoney.cpp:1771
+#: kmymoney/kmymoney.cpp:1776
 #, kde-format
 msgid "Delete institution..."
 msgstr "刪除機構..."
 
-#: kmymoney/kmymoney.cpp:1775
+#: kmymoney/kmymoney.cpp:1780
 #, kde-format
 msgid "New account..."
 msgstr "新增帳戶..."
 
-#: kmymoney/kmymoney.cpp:1776
+#: kmymoney/kmymoney.cpp:1781
 #, kde-format
 msgid "Open ledger"
 msgstr "開啟分類簿"
 
-#: kmymoney/kmymoney.cpp:1777
+#: kmymoney/kmymoney.cpp:1782
 #, kde-format
 msgid "Reconcile..."
 msgstr "對帳..."
 
-#: kmymoney/kmymoney.cpp:1778
+#: kmymoney/kmymoney.cpp:1783
 #, kde-format
 msgctxt "Finish reconciliation"
 msgid "Finish"
 msgstr "完成"
 
-#: kmymoney/kmymoney.cpp:1779
+#: kmymoney/kmymoney.cpp:1784
 #, fuzzy, kde-format
 #| msgid "Postal Code:"
 msgctxt "Postpone reconciliation"
 msgid "Postpone"
 msgstr "郵遞區號："
 
-#: kmymoney/kmymoney.cpp:1780
+#: kmymoney/kmymoney.cpp:1785
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "Cancel reconciliation"
 msgid "Cancel"
 msgstr "取消"
 
-#: kmymoney/kmymoney.cpp:1781
+#: kmymoney/kmymoney.cpp:1786
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgid "Report reconciliation"
 msgstr "最後對帳"
 
-#: kmymoney/kmymoney.cpp:1782
+#: kmymoney/kmymoney.cpp:1787
 #, kde-format
 msgid "Edit account..."
 msgstr "編輯帳戶..."
 
-#: kmymoney/kmymoney.cpp:1783
+#: kmymoney/kmymoney.cpp:1788
 #, kde-format
 msgid "Delete account..."
 msgstr "刪除帳戶..."
 
-#: kmymoney/kmymoney.cpp:1784
+#: kmymoney/kmymoney.cpp:1789
 #, kde-format
 msgid "Close account"
 msgstr "關閉帳戶"
 
-#: kmymoney/kmymoney.cpp:1785
+#: kmymoney/kmymoney.cpp:1790
 #, kde-format
 msgid "Reopen account"
 msgstr "重新開啟帳戶"
 
-#: kmymoney/kmymoney.cpp:1786
+#: kmymoney/kmymoney.cpp:1791
 #, kde-format
 msgid "Transaction report"
 msgstr "交易報告"
 
-#: kmymoney/kmymoney.cpp:1787
+#: kmymoney/kmymoney.cpp:1792
 #, kde-format
 msgid "Show balance chart..."
 msgstr "顯示餘額圖表..."
 
-#: kmymoney/kmymoney.cpp:1788
+#: kmymoney/kmymoney.cpp:1793
 #, fuzzy, kde-format
 #| msgid "Unmap account..."
 msgid "Map account..."
 msgstr "取消映射帳戶..."
 
-#: kmymoney/kmymoney.cpp:1789
+#: kmymoney/kmymoney.cpp:1794
 #, kde-format
 msgid "Unmap account..."
 msgstr "取消映射帳戶..."
 
-#: kmymoney/kmymoney.cpp:1790
+#: kmymoney/kmymoney.cpp:1795
 #, kde-format
 msgid "Update account..."
 msgstr "更新帳戶..."
 
-#: kmymoney/kmymoney.cpp:1791
+#: kmymoney/kmymoney.cpp:1796
 #, kde-format
 msgid "Update all accounts..."
 msgstr "更新所有帳戶..."
 
-#: kmymoney/kmymoney.cpp:1795
+#: kmymoney/kmymoney.cpp:1800
 #, kde-format
 msgid "New category..."
 msgstr "新增類別..."
 
-#: kmymoney/kmymoney.cpp:1796
+#: kmymoney/kmymoney.cpp:1801
 #, kde-format
 msgid "Edit category..."
 msgstr "編輯類別..."
 
-#: kmymoney/kmymoney.cpp:1797
+#: kmymoney/kmymoney.cpp:1802
 #, kde-format
 msgid "Delete category..."
 msgstr "刪除類別..."
 
-#: kmymoney/kmymoney.cpp:1801
+#: kmymoney/kmymoney.cpp:1806
 #, kde-format
 msgid "Currencies..."
 msgstr "貨幣..."
 
-#: kmymoney/kmymoney.cpp:1802
+#: kmymoney/kmymoney.cpp:1807
 #, kde-format
 msgid "Prices..."
 msgstr "價格..."
 
-#: kmymoney/kmymoney.cpp:1803
+#: kmymoney/kmymoney.cpp:1808
 #, kde-format
 msgid "Update Stock and Currency Prices..."
 msgstr "更新股票與貨幣價格..."
 
-#: kmymoney/kmymoney.cpp:1804
+#: kmymoney/kmymoney.cpp:1809
 #, kde-format
 msgid "Consistency Check"
 msgstr "一致性檢查"
 
-#: kmymoney/kmymoney.cpp:1805
+#: kmymoney/kmymoney.cpp:1810
 #, kde-format
 msgid "Performance-Test"
 msgstr "效能測試"
 
-#: kmymoney/kmymoney.cpp:1806
+#: kmymoney/kmymoney.cpp:1811
 #, kde-format
 msgid "Calculator..."
 msgstr "計算機..."
 
-#: kmymoney/kmymoney.cpp:1810
+#: kmymoney/kmymoney.cpp:1815
 #, kde-format
 msgid "Enable all messages"
 msgstr "開啟所有訊息"
 
-#: kmymoney/kmymoney.cpp:1814 kmymoney/views/kwelcomepage.cpp:82
+#: kmymoney/kmymoney.cpp:1819 kmymoney/views/kwelcomepage.cpp:82
 #, fuzzy, kde-format
 #| msgid "Get help from the KMyMoney community"
 msgid "Get help from our community"
 msgstr "從 KMyMoney 社群取得協助"
 
-#: kmymoney/kmymoney.cpp:1815 kmymoney/views/kwelcomepage.cpp:84
+#: kmymoney/kmymoney.cpp:1820 kmymoney/views/kwelcomepage.cpp:84
 #, kde-format
 msgid "See what's new in this version"
 msgstr "查看這一版本有什麼新功能"
 
-#: kmymoney/kmymoney.cpp:1816 kmymoney/views/kwelcomepage.cpp:80
+#: kmymoney/kmymoney.cpp:1821 kmymoney/views/kwelcomepage.cpp:80
 #, fuzzy, kde-format
 #| msgid "Visit the KMyMoney website"
 msgid "Visit our website"
 msgstr "造訪 KMyMoney 網站"
 
-#: kmymoney/kmymoney.cpp:1820
+#: kmymoney/kmymoney.cpp:1825
 #, fuzzy, kde-format
 #| msgid " transactions\n"
 msgctxt "New transaction button"
 msgid "New transaction"
 msgstr " 個交易\n"
 
-#: kmymoney/kmymoney.cpp:1821
+#: kmymoney/kmymoney.cpp:1826
 #, kde-format
 msgctxt "Edit transaction button"
 msgid "Edit"
 msgstr "編輯"
 
-#: kmymoney/kmymoney.cpp:1822
+#: kmymoney/kmymoney.cpp:1827
 #, kde-format
 msgctxt "Enter transaction"
 msgid "Enter"
 msgstr "輸入"
 
-#: kmymoney/kmymoney.cpp:1823
+#: kmymoney/kmymoney.cpp:1828
 #, kde-format
 msgctxt "Edit split button"
 msgid "Edit splits"
 msgstr "編輯分割"
 
-#: kmymoney/kmymoney.cpp:1824
+#: kmymoney/kmymoney.cpp:1829
 #, kde-format
 msgctxt "Cancel transaction edit"
 msgid "Cancel"
 msgstr "取消"
 
-#: kmymoney/kmymoney.cpp:1825
+#: kmymoney/kmymoney.cpp:1830
 #, kde-format
 msgctxt "Delete transaction"
 msgid "Delete"
 msgstr "刪除"
 
-#: kmymoney/kmymoney.cpp:1826
+#: kmymoney/kmymoney.cpp:1831
 #, kde-format
 msgctxt "Duplicate transaction"
 msgid "Duplicate"
 msgstr "複製"
 
-#: kmymoney/kmymoney.cpp:1827
+#: kmymoney/kmymoney.cpp:1832
 #, fuzzy, kde-format
 #| msgid "Add shares"
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
 msgstr "新增股票"
 
-#: kmymoney/kmymoney.cpp:1828
+#: kmymoney/kmymoney.cpp:1833
 #, kde-format
 msgctxt "Accept 'imported' and 'matched' transaction"
 msgid "Accept"
 msgstr "接受"
 
-#: kmymoney/kmymoney.cpp:1829
+#: kmymoney/kmymoney.cpp:1834
 #, kde-format
 msgctxt "Toggle reconciliation flag"
 msgid "Toggle"
 msgstr "切換"
 
-#: kmymoney/kmymoney.cpp:1830
+#: kmymoney/kmymoney.cpp:1835
 #, kde-format
 msgctxt "Mark transaction cleared"
 msgid "Cleared"
 msgstr "清除"
 
-#: kmymoney/kmymoney.cpp:1831
+#: kmymoney/kmymoney.cpp:1836
 #, kde-format
 msgctxt "Mark transaction reconciled"
 msgid "Reconciled"
 msgstr "已對帳"
 
-#: kmymoney/kmymoney.cpp:1832
+#: kmymoney/kmymoney.cpp:1837
 #, kde-format
 msgctxt "Mark transaction not reconciled"
 msgid "Not reconciled"
 msgstr "未對帳"
 
-#: kmymoney/kmymoney.cpp:1833
+#: kmymoney/kmymoney.cpp:1838
 #, fuzzy, kde-format
 #| msgid "Move transaction to..."
 msgctxt "Move transaction"
 msgid "Move transaction"
 msgstr "移動交易到..."
 
-#: kmymoney/kmymoney.cpp:1834
+#: kmymoney/kmymoney.cpp:1839
 #, fuzzy, kde-format
 #| msgid "Show transaction form"
 msgctxt "Show transaction"
 msgid "Show transaction"
 msgstr "顯示交易表單"
 
-#: kmymoney/kmymoney.cpp:1836
+#: kmymoney/kmymoney.cpp:1841
 #, kde-format
 msgctxt "Select all transactions"
 msgid "Select all"
 msgstr "全部選取"
 
-#: kmymoney/kmymoney.cpp:1837
+#: kmymoney/kmymoney.cpp:1842
 #, kde-format
 msgid "Go to account"
 msgstr "前往帳戶"
 
-#: kmymoney/kmymoney.cpp:1838
+#: kmymoney/kmymoney.cpp:1843
 #, kde-format
 msgid "Go to payee"
 msgstr "前往收款人"
 
-#: kmymoney/kmymoney.cpp:1839
+#: kmymoney/kmymoney.cpp:1844
 #, kde-format
 msgid "Create scheduled transaction..."
 msgstr "建立排程交易..."
 
-#: kmymoney/kmymoney.cpp:1840
+#: kmymoney/kmymoney.cpp:1845
 #, kde-format
 msgid "Assign next number"
 msgstr "指定下個編號"
 
-#: kmymoney/kmymoney.cpp:1841
+#: kmymoney/kmymoney.cpp:1846
 #, kde-format
 msgctxt "Combine transactions"
 msgid "Combine"
 msgstr "組合"
 
-#: kmymoney/kmymoney.cpp:1842
+#: kmymoney/kmymoney.cpp:1847
 #, fuzzy, kde-format
 #| msgid "As of today"
 msgid "Move to today"
 msgstr "截至今日"
 
-#: kmymoney/kmymoney.cpp:1843
+#: kmymoney/kmymoney.cpp:1848
 #, fuzzy, kde-format
 #| msgid "Correct splits"
 msgid "Copy splits"
 msgstr "修正分割"
 
-#: kmymoney/kmymoney.cpp:1844
+#: kmymoney/kmymoney.cpp:1849
 #, kde-format
 msgid "Show filter widget"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:1846
+#: kmymoney/kmymoney.cpp:1851
 #, kde-format
 msgid "New investment..."
 msgstr "新增投資..."
 
-#: kmymoney/kmymoney.cpp:1847
+#: kmymoney/kmymoney.cpp:1852
 #, kde-format
 msgid "Edit investment..."
 msgstr "編輯投資..."
 
-#: kmymoney/kmymoney.cpp:1848
+#: kmymoney/kmymoney.cpp:1853
 #, kde-format
 msgid "Delete investment..."
 msgstr "刪除投資..."
 
-#: kmymoney/kmymoney.cpp:1849
+#: kmymoney/kmymoney.cpp:1854
 #, kde-format
 msgid "Online price update..."
 msgstr "線上價格更新..."
 
-#: kmymoney/kmymoney.cpp:1850
+#: kmymoney/kmymoney.cpp:1855
 #, kde-format
 msgid "Manual price update..."
 msgstr "手動價格更新..."
 
-#: kmymoney/kmymoney.cpp:1851
+#: kmymoney/kmymoney.cpp:1856
 #, fuzzy, kde-format
 #| msgid "Hide security"
 msgid "Edit security..."
 msgstr "隱藏抵押品"
 
-#: kmymoney/kmymoney.cpp:1852
+#: kmymoney/kmymoney.cpp:1857
 #, fuzzy, kde-format
 #| msgid "Delete security"
 msgid "Delete security..."
 msgstr "刪除抵押品"
 
-#: kmymoney/kmymoney.cpp:1855
+#: kmymoney/kmymoney.cpp:1860
 #, fuzzy, kde-format
 #| msgid "&New Schedule..."
 msgid "New schedule..."
 msgstr "新增排程(&N)"
 
-#: kmymoney/kmymoney.cpp:1856
+#: kmymoney/kmymoney.cpp:1861
 #, kde-format
 msgid "Edit scheduled transaction"
 msgstr "編輯排程交易"
 
-#: kmymoney/kmymoney.cpp:1857
+#: kmymoney/kmymoney.cpp:1862
 #, kde-format
 msgid "Delete scheduled transaction"
 msgstr "刪除排程交易"
 
-#: kmymoney/kmymoney.cpp:1858
+#: kmymoney/kmymoney.cpp:1863
 #, kde-format
 msgid "Duplicate scheduled transaction"
 msgstr "複製排程交易"
 
-#: kmymoney/kmymoney.cpp:1859
+#: kmymoney/kmymoney.cpp:1864
 #, kde-format
 msgid "Enter next transaction..."
 msgstr "輸入下一筆交易..."
 
-#: kmymoney/kmymoney.cpp:1860
+#: kmymoney/kmymoney.cpp:1865
 #, kde-format
 msgid "Skip next transaction..."
 msgstr "跳過下一筆交易..."
 
-#: kmymoney/kmymoney.cpp:1862
+#: kmymoney/kmymoney.cpp:1867
 #, fuzzy, kde-format
 #| msgid "New payee"
 msgid "New payee..."
 msgstr "新增收款人"
 
-#: kmymoney/kmymoney.cpp:1863
+#: kmymoney/kmymoney.cpp:1868
 #, kde-format
 msgid "Rename payee"
 msgstr "重新命名收款人"
 
-#: kmymoney/kmymoney.cpp:1864
+#: kmymoney/kmymoney.cpp:1869
 #, kde-format
 msgid "Delete payee"
 msgstr "刪除收款人"
 
-#: kmymoney/kmymoney.cpp:1865
+#: kmymoney/kmymoney.cpp:1870
 #, fuzzy, kde-format
 #| msgid "Your payees"
 msgid "Merge payees"
 msgstr "您的收款人"
 
-#: kmymoney/kmymoney.cpp:1867
+#: kmymoney/kmymoney.cpp:1872
 #, fuzzy, kde-format
 #| msgid "New Item"
 msgid "New tag..."
 msgstr "新增項目"
 
-#: kmymoney/kmymoney.cpp:1868
+#: kmymoney/kmymoney.cpp:1873
 #, fuzzy, kde-format
 #| msgid "Rename"
 msgid "Rename tag"
 msgstr "重新命名"
 
-#: kmymoney/kmymoney.cpp:1869
+#: kmymoney/kmymoney.cpp:1874
 #, fuzzy, kde-format
 #| msgid "Delete all"
 msgid "Delete tag"
 msgstr "全部刪除"
 
-#: kmymoney/kmymoney.cpp:1871
+#: kmymoney/kmymoney.cpp:1876
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Open report"
 msgstr "新增報告(&N)"
 
-#: kmymoney/kmymoney.cpp:1872
+#: kmymoney/kmymoney.cpp:1877
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "New report"
 msgstr "新增報告(&N)"
 
-#: kmymoney/kmymoney.cpp:1873
+#: kmymoney/kmymoney.cpp:1878
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Copy report"
 msgstr "新增報告(&N)"
 
-#: kmymoney/kmymoney.cpp:1874
+#: kmymoney/kmymoney.cpp:1879
 #, fuzzy, kde-format
 #| msgid "Configure this report"
 msgid "Configure report"
 msgstr "設定此報告"
 
-#: kmymoney/kmymoney.cpp:1875
+#: kmymoney/kmymoney.cpp:1880
 #, fuzzy, kde-format
 #| msgid "Favorite reports"
 msgid "Export report"
 msgstr "最常看的報告"
 
-#: kmymoney/kmymoney.cpp:1876
+#: kmymoney/kmymoney.cpp:1881
 #, fuzzy, kde-format
 #| msgid "Delete Report?"
 msgid "Delete report"
 msgstr "要刪除報告？"
 
-#: kmymoney/kmymoney.cpp:1877
+#: kmymoney/kmymoney.cpp:1882
 #, fuzzy, kde-format
 #| msgid "&New report"
 msgid "Close report"
 msgstr "新增報告(&N)"
 
-#: kmymoney/kmymoney.cpp:1878
+#: kmymoney/kmymoney.cpp:1883
 #, fuzzy, kde-format
 #| msgctxt "Toggle reconciliation flag"
 #| msgid "Toggle"
 msgid "Toggle chart"
 msgstr "切換"
 
-#: kmymoney/kmymoney.cpp:1879
+#: kmymoney/kmymoney.cpp:1884
 #, fuzzy, kde-format
 #| msgid "Include transfers"
 msgid "Edit tab order"
 msgstr "包含轉帳"
 
-#: kmymoney/kmymoney.cpp:1882
+#: kmymoney/kmymoney.cpp:1887
 #, kde-format
 msgid "Test new feature"
 msgstr "測試新功能"
 
-#: kmymoney/kmymoney.cpp:1883
+#: kmymoney/kmymoney.cpp:1888
 #, kde-format
 msgid "Debug Traces"
 msgstr "除錯追蹤"
 
-#: kmymoney/kmymoney.cpp:1885
+#: kmymoney/kmymoney.cpp:1890
 #, kde-format
 msgid "Debug Timers"
 msgstr "除錯計時器"
 
-#: kmymoney/kmymoney.cpp:1904
+#: kmymoney/kmymoney.cpp:1909
 #, fuzzy, kde-format
 #| msgctxt "Button text for match transaction"
 #| msgid "Match"
@@ -5294,7 +5294,7 @@ msgctxt "Match transactions"
 msgid "Match"
 msgstr "比對"
 
-#: kmymoney/kmymoney.cpp:1905
+#: kmymoney/kmymoney.cpp:1910
 #, fuzzy, kde-format
 #| msgctxt "Button text for unmatch transaction"
 #| msgid "Unmatch"
@@ -5302,80 +5302,80 @@ msgctxt "Unmatch transactions"
 msgid "Unmatch"
 msgstr "取消比對"
 
-#: kmymoney/kmymoney.cpp:2029
+#: kmymoney/kmymoney.cpp:2034
 #, fuzzy, kde-format
 #| msgid "Duplicate the current selected transactions"
 msgctxt "@info:tooltip"
 msgid "Start reconciling the currently selected account"
 msgstr "複製目前選取的交易"
 
-#: kmymoney/kmymoney.cpp:2030
+#: kmymoney/kmymoney.cpp:2035
 #, fuzzy, kde-format
 #| msgid "Postpone reconciliation"
 msgctxt "@info:tooltip"
 msgid "Postpone the current reconciliation"
 msgstr "延遲對帳"
 
-#: kmymoney/kmymoney.cpp:2031
+#: kmymoney/kmymoney.cpp:2036
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgctxt "@info:tooltip"
 msgid "Finish the current reconciliation"
 msgstr "最後對帳"
 
-#: kmymoney/kmymoney.cpp:2032
+#: kmymoney/kmymoney.cpp:2037
 #, fuzzy, kde-format
 #| msgid "Last reconciliation"
 msgctxt "@info:tooltip"
 msgid "Cancel the current reconciliation"
 msgstr "最後對帳"
 
-#: kmymoney/kmymoney.cpp:2139
+#: kmymoney/kmymoney.cpp:2144
 #, kde-format
 msgid "View back"
 msgstr "檢視返回"
 
-#: kmymoney/kmymoney.cpp:2140
+#: kmymoney/kmymoney.cpp:2145
 #, kde-format
 msgid "View forward"
 msgstr "檢視往前"
 
-#: kmymoney/kmymoney.cpp:2531
+#: kmymoney/kmymoney.cpp:2536
 #, kde-format
 msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
 "wish to delete the transactions anyway?"
 msgstr "選取的交易中至少有一個分割已經對帳完成。您還是要刪除這些交易嗎？"
 
-#: kmymoney/kmymoney.cpp:2533
+#: kmymoney/kmymoney.cpp:2538
 #, kde-format
 msgid "Transaction already reconciled"
 msgstr "交易已對帳"
 
-#: kmymoney/kmymoney.cpp:2538
+#: kmymoney/kmymoney.cpp:2543
 #, kde-format
 msgid "Do you really want to delete the selected transaction?"
 msgid_plural "Do you really want to delete all %1 selected transactions?"
 msgstr[0] "您確定要刪除這 %1 筆選取的交易嗎？"
 
-#: kmymoney/kmymoney.cpp:2542
+#: kmymoney/kmymoney.cpp:2547
 #, kde-format
 msgid "Delete transaction"
 msgstr "刪除交易"
 
-#: kmymoney/kmymoney.cpp:2619
+#: kmymoney/kmymoney.cpp:2624
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to duplicate transaction(s)"
 msgstr "無法新增交易"
 
-#: kmymoney/kmymoney.cpp:2789
+#: kmymoney/kmymoney.cpp:2794
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to modify transaction"
 msgstr "無法新增交易"
 
-#: kmymoney/kmymoney.cpp:2881
+#: kmymoney/kmymoney.cpp:2886
 #, fuzzy, kde-format
 #| msgid ""
 #| "At least one split of the selected transactions has been reconciled. Do "
@@ -5385,14 +5385,14 @@ msgid ""
 "wish to change the transactions anyway?"
 msgstr "選取的交易中至少有一個分割已經對帳完成。您還是要刪除這些交易嗎？"
 
-#: kmymoney/kmymoney.cpp:2883
+#: kmymoney/kmymoney.cpp:2888
 #, fuzzy, kde-format
 #| msgid "Transaction already reconciled"
 msgctxt "@title:window Warning dialog"
 msgid "Transaction already reconciled"
 msgstr "交易已對帳"
 
-#: kmymoney/kmymoney.cpp:2888
+#: kmymoney/kmymoney.cpp:2893
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -5400,20 +5400,20 @@ msgid "Do you really want to change the selected transaction?"
 msgid_plural "Do you really want to change all %1 selected transactions?"
 msgstr[0] "您確定要刪除這 %1 筆選取的交易嗎？"
 
-#: kmymoney/kmymoney.cpp:2892
+#: kmymoney/kmymoney.cpp:2897
 #, fuzzy, kde-format
 #| msgid "Any transaction"
 msgctxt "@title:window Confirmation dialog"
 msgid "Change transaction"
 msgstr "任何交易"
 
-#: kmymoney/kmymoney.cpp:2977
+#: kmymoney/kmymoney.cpp:2982
 #, fuzzy, kde-format
 #| msgid "Unable to add transactions"
 msgid "Unable to accept transaction"
 msgstr "無法新增交易"
 
-#: kmymoney/kmymoney.cpp:3017
+#: kmymoney/kmymoney.cpp:3022
 #, fuzzy, kde-format
 #| msgid ""
 #| "KMyMoney has detected some overdue scheduled transactions for this "
@@ -5423,12 +5423,12 @@ msgid ""
 "%1</b>. Do you want to enter those scheduled transactions now?"
 msgstr "KMyMoney 偵測到這個帳戶裡有些排程交易已過時。您要現在輸入這些交易嗎？"
 
-#: kmymoney/kmymoney.cpp:3020 kmymoney/views/kscheduledview.cpp:134
+#: kmymoney/kmymoney.cpp:3025 kmymoney/views/kscheduledview.cpp:134
 #, kde-format
 msgid "Scheduled transactions found"
 msgstr "找到已排程交易"
 
-#: kmymoney/kmymoney.cpp:3091
+#: kmymoney/kmymoney.cpp:3096
 #, fuzzy, kde-format
 #| msgid ""
 #| "You have closed this account. It remains in the system because you have "
@@ -5446,17 +5446,17 @@ msgstr ""
 "帳戶未顯示在檢視中。您可以到「檢視」選單中選擇「顯示所有帳戶」，或是取消「不"
 "要顯示已關閉的帳戶」選項將帳戶顯示出來。"
 
-#: kmymoney/kmymoney.cpp:3093
+#: kmymoney/kmymoney.cpp:3098
 #, kde-format
 msgid "Information"
 msgstr "資訊"
 
-#: kmymoney/kmymoney.cpp:3197 kmymoney/kmymoney.cpp:3293
+#: kmymoney/kmymoney.cpp:3202 kmymoney/kmymoney.cpp:3298
 #, kde-format
 msgid "No KMyMoneyFile open"
 msgstr "沒有開啟任何 KMyMoney 檔案"
 
-#: kmymoney/kmymoney.cpp:3230 kmymoney/kmymoney.cpp:3232
+#: kmymoney/kmymoney.cpp:3235 kmymoney/kmymoney.cpp:3237
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1360
 #: kmymoney/plugins/xml/xmlstorage.cpp:407
 #, kde-format
@@ -5464,43 +5464,43 @@ msgctxt "Application is ready to use"
 msgid "Ready."
 msgstr "已就緒。"
 
-#: kmymoney/kmymoney.cpp:3297
+#: kmymoney/kmymoney.cpp:3302
 #, kde-format
 msgid "Viewing personal data..."
 msgstr "檢視個人資料..."
 
-#: kmymoney/kmymoney.cpp:3304
+#: kmymoney/kmymoney.cpp:3309
 #, kde-format
 msgid "Edit Personal Data"
 msgstr "編輯個人資料"
 
-#: kmymoney/kmymoney.cpp:3319
+#: kmymoney/kmymoney.cpp:3324
 #, kde-format
 msgid "Unable to store user information: %1"
 msgstr "無法儲存使用者資訊：%1"
 
-#: kmymoney/kmymoney.cpp:3327
+#: kmymoney/kmymoney.cpp:3332
 #, kde-format
 msgid "Importing account templates."
 msgstr "匯入帳戶樣本中。"
 
-#: kmymoney/kmymoney.cpp:3341
+#: kmymoney/kmymoney.cpp:3346
 #, fuzzy, kde-format
 #| msgid "Unable to import template(s): %1, thrown in %2:%3"
 msgid "Unable to import template(s)"
 msgstr "無法匯入樣本：%1，例外來自 %2：%3"
 
-#: kmymoney/kmymoney.cpp:3349
+#: kmymoney/kmymoney.cpp:3354
 #, kde-format
 msgid "Exporting account templates."
 msgstr "匯出帳戶樣本中。"
 
-#: kmymoney/kmymoney.cpp:3355
+#: kmymoney/kmymoney.cpp:3360
 #, kde-format
 msgid "Save as..."
 msgstr "另存為..."
 
-#: kmymoney/kmymoney.cpp:3356
+#: kmymoney/kmymoney.cpp:3361
 #, fuzzy, kde-format
 #| msgid ""
 #| "*.kmt|KMyMoney template files\n"
@@ -5510,37 +5510,37 @@ msgstr ""
 "*.kmt|KMyMoney 樣本檔\n"
 "*|所有檔案"
 
-#: kmymoney/kmymoney.cpp:3387
+#: kmymoney/kmymoney.cpp:3392
 #, fuzzy, kde-format
 #| msgid "Template Error"
 msgctxt "@title:window Error display"
 msgid "Template export"
 msgstr "樣本錯誤"
 
-#: kmymoney/kmymoney.cpp:3405
+#: kmymoney/kmymoney.cpp:3410
 #, kde-format
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr "檔案 <b>%1</b> 已存在。您確定要覆寫它嗎？"
 
-#: kmymoney/kmymoney.cpp:3407 kmymoney/plugins/csv/export/csvexporter.cpp:103
+#: kmymoney/kmymoney.cpp:3412 kmymoney/plugins/csv/export/csvexporter.cpp:103
 #, kde-format
 msgid "File already exists"
 msgstr "檔案已經存在"
 
-#: kmymoney/kmymoney.cpp:3530
+#: kmymoney/kmymoney.cpp:3535
 #, kde-format
 msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
 "continue?"
 msgstr "在備份前您必須先儲存檔案。您要繼續嗎？"
 
-#: kmymoney/kmymoney.cpp:3532
+#: kmymoney/kmymoney.cpp:3537
 #, kde-format
 msgctxt "@title:window"
 msgid "Confirmation of backup"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3549
+#: kmymoney/kmymoney.cpp:3554
 #, fuzzy, kde-format
 #| msgid ""
 #| "The current implementation of the backup functionality only supports "
@@ -5550,63 +5550,63 @@ msgid ""
 "files as source files. Your current source file is '%1'."
 msgstr "目前備份功能只支援備份本地檔案。您目前的來源檔為 %1。"
 
-#: kmymoney/kmymoney.cpp:3551
+#: kmymoney/kmymoney.cpp:3556
 #, kde-format
 msgid "Local files only"
 msgstr "只有本地檔案"
 
-#: kmymoney/kmymoney.cpp:3590
+#: kmymoney/kmymoney.cpp:3595
 #, kde-format
 msgid "Mounting %1"
 msgstr "掛載 %1 中"
 
-#: kmymoney/kmymoney.cpp:3624
+#: kmymoney/kmymoney.cpp:3629
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr "今天的備份已經存在。要取代它嗎？"
 
-#: kmymoney/kmymoney.cpp:3624
+#: kmymoney/kmymoney.cpp:3629
 #, kde-format
 msgid "&Replace"
 msgstr "取代(&R)"
 
-#: kmymoney/kmymoney.cpp:3630
+#: kmymoney/kmymoney.cpp:3635
 #, kde-format
 msgid "Writing %1"
 msgstr "正在寫入 %1"
 
-#: kmymoney/kmymoney.cpp:3651
+#: kmymoney/kmymoney.cpp:3656
 #, kde-format
 msgid "Unmounting %1"
 msgstr "卸載 %1中"
 
-#: kmymoney/kmymoney.cpp:3688
+#: kmymoney/kmymoney.cpp:3693
 #, kde-format
 msgid "Error mounting device"
 msgstr "掛載裝置時發生錯誤"
 
-#: kmymoney/kmymoney.cpp:3703 kmymoney/kmymoney.cpp:3722
+#: kmymoney/kmymoney.cpp:3708 kmymoney/kmymoney.cpp:3727
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "完成"
 
-#: kmymoney/kmymoney.cpp:3704 kmymoney/kmymoney.cpp:3724
+#: kmymoney/kmymoney.cpp:3709 kmymoney/kmymoney.cpp:3729
 #, kde-format
 msgid "File successfully backed up"
 msgstr "檔案已成功備份"
 
-#: kmymoney/kmymoney.cpp:3710
+#: kmymoney/kmymoney.cpp:3715
 #, kde-format
 msgid "Error copying file to device"
 msgstr "複製檔案到裝置時發生錯誤"
 
-#: kmymoney/kmymoney.cpp:3726
+#: kmymoney/kmymoney.cpp:3731
 #, kde-format
 msgid "Error unmounting device"
 msgstr "卸載裝置時發生錯誤"
 
-#: kmymoney/kmymoney.cpp:3773
+#: kmymoney/kmymoney.cpp:3778
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5623,37 +5623,37 @@ msgstr ""
 "若點擊「否」，則保持開戶金額為 %2，\n"
 "若點擊「取消」則會中止建立帳戶。"
 
-#: kmymoney/kmymoney.cpp:3783
+#: kmymoney/kmymoney.cpp:3788
 #, fuzzy, kde-format
 #| msgid "Opening balance problem"
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "開戶金額發生問題"
 
-#: kmymoney/kmymoney.cpp:3794
+#: kmymoney/kmymoney.cpp:3799
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "無法新增帳戶：%1"
 
-#: kmymoney/kmymoney.cpp:3917
+#: kmymoney/kmymoney.cpp:3922
 #, kde-format
 msgid "Running consistency check..."
 msgstr "正在執行一致性檢查..."
 
-#: kmymoney/kmymoney.cpp:3924
+#: kmymoney/kmymoney.cpp:3929
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "一致性檢查失敗：%1"
 
-#: kmymoney/kmymoney.cpp:3934
+#: kmymoney/kmymoney.cpp:3939
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
 "presented below."
 msgstr "一致性檢查在您的資料中發現了一些問題。詳情列在下方。"
 
-#: kmymoney/kmymoney.cpp:3936
+#: kmymoney/kmymoney.cpp:3941
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5663,28 +5663,28 @@ msgstr ""
 "一致性檢查在您的資料中發現了一些問題。詳情列在下方。這些問題無法自動修正，因"
 "此需要您手動解決。"
 
-#: kmymoney/kmymoney.cpp:3939
+#: kmymoney/kmymoney.cpp:3944
 #, kde-format
 msgid "Consistency check result"
 msgstr "一致性檢查結果"
 
-#: kmymoney/kmymoney.cpp:4005
+#: kmymoney/kmymoney.cpp:4010
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "正在檢查逾期的排程交易..."
 
-#: kmymoney/kmymoney.cpp:4195
+#: kmymoney/kmymoney.cpp:4200
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr "您必須先選擇 KMyMoney 檔，才能匯入報表。"
 
-#: kmymoney/kmymoney.cpp:4200
+#: kmymoney/kmymoney.cpp:4205
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "透過網頁連線來匯入報表"
 
-#: kmymoney/kmymoney.cpp:4212
+#: kmymoney/kmymoney.cpp:4217
 #, fuzzy, kde-format
 #| msgid ""
 #| "Unable to import %1 using %2 plugin.  The plugin returned the following "
@@ -5695,70 +5695,70 @@ msgid ""
 "error: %3"
 msgstr "無法用 %2 外掛程式匯入 %1。外掛程式傳回以下的錯誤：%3"
 
-#: kmymoney/kmymoney.cpp:4212 kmymoney/plugins/ofx/import/ofximporter.cpp:1012
+#: kmymoney/kmymoney.cpp:4217 kmymoney/plugins/ofx/import/ofximporter.cpp:1012
 #, kde-format
 msgid "Importing error"
 msgstr "匯入錯誤"
 
-#: kmymoney/kmymoney.cpp:4239
+#: kmymoney/kmymoney.cpp:4244
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "所有訊息均已被開啟。"
 
-#: kmymoney/kmymoney.cpp:4239
+#: kmymoney/kmymoney.cpp:4244
 #, kde-format
 msgid "All messages"
 msgstr "所有訊息"
 
-#: kmymoney/kmymoney.cpp:4275
+#: kmymoney/kmymoney.cpp:4280
 #, kde-format
 msgid "Auto saving..."
 msgstr "自動儲存..."
 
-#: kmymoney/kmymoney.cpp:4395
+#: kmymoney/kmymoney.cpp:4400
 #, kde-format
 msgid "Creating new document..."
 msgstr "正在建立新文件..."
 
-#: kmymoney/kmymoney.cpp:4455
+#: kmymoney/kmymoney.cpp:4460
 #, fuzzy, kde-format
 #| msgid "Create a new profile"
 msgid "Couldn't create a new file."
 msgstr "建立新設定檔"
 
-#: kmymoney/kmymoney.cpp:4466
+#: kmymoney/kmymoney.cpp:4471
 #, kde-format
 msgid "Open a file."
 msgstr "開啟一個檔案。"
 
-#: kmymoney/kmymoney.cpp:4480
+#: kmymoney/kmymoney.cpp:4485
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4484
+#: kmymoney/kmymoney.cpp:4489
 #, fuzzy, kde-format
 #| msgctxt "All files (Filefilter)"
 #| msgid "All files"
 msgid "All files (*)"
 msgstr "所有檔案"
 
-#: kmymoney/kmymoney.cpp:4497
+#: kmymoney/kmymoney.cpp:4502
 #, kde-format
 msgid "Loading file..."
 msgstr "載入檔案中..."
 
-#: kmymoney/kmymoney.cpp:4503
+#: kmymoney/kmymoney.cpp:4508
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr "<p>檔案 <b>%1</b> 已經被另一個 KMyMoney 實體開啟了。</p>"
 
-#: kmymoney/kmymoney.cpp:4503
+#: kmymoney/kmymoney.cpp:4508
 #, kde-format
 msgid "Duplicate open"
 msgstr "重複開啟"
 
-#: kmymoney/kmymoney.cpp:4510
+#: kmymoney/kmymoney.cpp:4515
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5767,52 +5767,52 @@ msgstr ""
 "<p><b>%1</b> 檔名不合法，或是檔案不存在。您可以開啟另一個檔案，或是建立新檔"
 "案。</p>"
 
-#: kmymoney/kmymoney.cpp:4510
+#: kmymoney/kmymoney.cpp:4515
 #, kde-format
 msgid "File not found"
 msgstr "找不到檔案"
 
-#: kmymoney/kmymoney.cpp:4537
+#: kmymoney/kmymoney.cpp:4542
 #, fuzzy, kde-format
 #| msgid "Cannot open file %1 for writing"
 msgid "Cannot open file as requested."
 msgstr "不能開啟要寫入的檔案 %1 "
 
-#: kmymoney/kmymoney.cpp:4543
+#: kmymoney/kmymoney.cpp:4548
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4553
+#: kmymoney/kmymoney.cpp:4558
 #, kde-format
 msgid "Saving file..."
 msgstr "正在儲存檔案..."
 
-#: kmymoney/kmymoney.cpp:4565
+#: kmymoney/kmymoney.cpp:4570
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your data."
 msgstr "儲存失敗：%1"
 
-#: kmymoney/kmymoney.cpp:4571
+#: kmymoney/kmymoney.cpp:4576
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4577
+#: kmymoney/kmymoney.cpp:4582
 #, fuzzy, kde-format
 #| msgid "Saving file..."
 msgid "Saving file as...."
 msgstr "正在儲存檔案..."
 
-#: kmymoney/kmymoney.cpp:4593
+#: kmymoney/kmymoney.cpp:4598
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4622
+#: kmymoney/kmymoney.cpp:4627
 #, fuzzy, kde-format
 #| msgid "Failed to save: %1"
 msgid "Failed to save your storage."
