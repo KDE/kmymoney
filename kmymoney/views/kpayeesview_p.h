@@ -285,7 +285,7 @@ public:
         ui->matchKeyEditList->insertStringList(keys);
         ui->checkMatchIgnoreCase->setChecked(ignorecase);
 
-        ui->comboDefaultCategory->setCurrentIndex(-1);
+        ui->comboDefaultCategory->clearSelection();
         ui->checkEnableDefaultCategory->setChecked(!m_payee.defaultAccountId().isEmpty());
         ui->comboDefaultCategory->setSelected(m_payee.defaultAccountId());
 
