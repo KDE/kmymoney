@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-18 00:54+0000\n"
+"POT-Creation-Date: 2023-06-19 00:50+0000\n"
 "PO-Revision-Date: 2022-08-10 09:37+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -1632,7 +1632,7 @@ msgstr "Добавить"
 #. i18n: ectx: property (text), widget (QPushButton, btnEditEntry)
 #. i18n: ectx: property (text), widget (QToolButton, m_buttonEdit)
 #: kmymoney/dialogs/keditequityentry.ui:157
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:42
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:96
 #, kde-format
 msgid "Edit"
 msgstr "Редактировать"
@@ -1643,7 +1643,7 @@ msgstr "Редактировать"
 #. i18n: ectx: property (text), widget (QPushButton, m_remove)
 #: kmymoney/dialogs/keditequityentry.ui:164
 #: kmymoney/plugins/csv/import/introwizardpage.ui:206
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:58
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:112
 #: kmymoney/views/kpayeeidentifierview.ui:35
 #, kde-format
 msgid "Remove"
@@ -1933,7 +1933,7 @@ msgstr "Состояние:"
 #: kmymoney/views/kinstitutionsview.ui:71
 #: kmymoney/views/kinstitutionsview.ui:81
 #: kmymoney/views/ktransactionselectdlg.ui:50
-#: kmymoney/views/ledgerviewpage.ui:123
+#: kmymoney/widgets/kmmsearchwidget.ui:35
 #: kmymoney/widgets/kmymoneybriefschedule.ui:82
 #: kmymoney/widgets/kmymoneybriefschedule.ui:131
 #, kde-format
@@ -15523,66 +15523,66 @@ msgctxt "Unknown forecast method"
 msgid "Unknown"
 msgstr "неизвестно"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:196
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:284
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:199
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:287
 #, kde-format
 msgid "Send transfer"
 msgstr "Отправить перевод"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_buttonNewCreditTransfer)
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:197
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:106
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:200
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:80
 #, kde-format
 msgid "New credit transfer"
 msgstr "Новый перевод"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:198
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:201
 #, kde-format
 msgid "Remove transfer"
 msgstr "Удалить перевод"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:199
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:202
 #, kde-format
 msgid "Edit transfer"
 msgstr "Редактировать перевод"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:200
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:203
 #, kde-format
 msgid "Show log"
 msgstr "Показать журнал"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:220
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:223
 #, kde-format
 msgctxt "@title:menu Online job context menu"
 msgid "Credit transfer options"
 msgstr "Действия с переводами"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:274
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:277
 #, kde-format
 msgid "This job cannot be edited anymore because it was sent already."
 msgstr "Это задание нельзя редактировать, так как оно уже было отправлено."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:277
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:280
 #, kde-format
 msgid "Job is being processed at the moment."
 msgstr "Задание в данный момент обрабатывается."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:282
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:285
 #, kde-format
 msgid "The plugin to edit this job is not available."
 msgstr "Модуль редактирования этого задания недоступен."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:287
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:290
 #, kde-format
 msgid "You need to select a single job for editing."
 msgstr "Выберите одно задание для редактирования."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:288
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:291
 #, kde-format
 msgid "Send transfers"
 msgstr "Отправить переводы"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:387
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:390
 #, kde-format
 msgctxt "The user selected credit transfers to send. But they cannot be sent"
 msgid ""
@@ -15592,7 +15592,7 @@ msgstr ""
 "Не все выделенные переводы можно отправить, так как некоторые из них "
 "недействительны или уже отправлены."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:388
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:391
 #, kde-format
 msgctxt "@title:window Online transfers"
 msgid "Cannot send transfers"
@@ -15601,7 +15601,7 @@ msgstr "Невозможно отправить переводы"
 #. i18n: ectx: property (text), widget (QPushButton, m_sendMail)
 #. i18n: ectx: property (text), widget (QPushButton, buttonSend)
 #. i18n: ectx: property (text), widget (QToolButton, m_buttonSend)
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:87
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:61
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:245
 #: kmymoney/views/kpayeesview.ui:330
 #, kde-format
@@ -21282,6 +21282,12 @@ msgstr ""
 msgctxt "@title header of the account name column"
 msgid "Name"
 msgstr "Название"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, KMMSearchWidget)
+#: kmymoney/widgets/kmmsearchwidget.ui:14
+#, kde-format
+msgid "Form"
+msgstr ""
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
 #, fuzzy, kde-format

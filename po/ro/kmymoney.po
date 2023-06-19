@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-18 00:54+0000\n"
+"POT-Creation-Date: 2023-06-19 00:50+0000\n"
 "PO-Revision-Date: 2022-08-14 16:08+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -1658,7 +1658,7 @@ msgstr "Adaugă"
 #. i18n: ectx: property (text), widget (QPushButton, btnEditEntry)
 #. i18n: ectx: property (text), widget (QToolButton, m_buttonEdit)
 #: kmymoney/dialogs/keditequityentry.ui:157
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:42
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:96
 #, kde-format
 msgid "Edit"
 msgstr "Modifică"
@@ -1669,7 +1669,7 @@ msgstr "Modifică"
 #. i18n: ectx: property (text), widget (QPushButton, m_remove)
 #: kmymoney/dialogs/keditequityentry.ui:164
 #: kmymoney/plugins/csv/import/introwizardpage.ui:206
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:58
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:112
 #: kmymoney/views/kpayeeidentifierview.ui:35
 #, kde-format
 msgid "Remove"
@@ -1973,7 +1973,7 @@ msgstr "Stare:"
 #: kmymoney/views/kinstitutionsview.ui:71
 #: kmymoney/views/kinstitutionsview.ui:81
 #: kmymoney/views/ktransactionselectdlg.ui:50
-#: kmymoney/views/ledgerviewpage.ui:123
+#: kmymoney/widgets/kmmsearchwidget.ui:35
 #: kmymoney/widgets/kmymoneybriefschedule.ui:82
 #: kmymoney/widgets/kmymoneybriefschedule.ui:131
 #, kde-format
@@ -3086,8 +3086,7 @@ msgstr "Opțiuni de sortare"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useDefault)
 #: kmymoney/dialogs/ktransactionsortoptionsdlg.ui:23
-#, fuzzy, kde-format
-#| msgid "Use default"
+#, kde-format
 msgid "Use default"
 msgstr "Folosește valoare implicită"
 
@@ -16104,74 +16103,74 @@ msgctxt "Unknown forecast method"
 msgid "Unknown"
 msgstr "Necunoscut(ă)"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:196
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:284
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:199
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:287
 #, fuzzy, kde-format
 #| msgid "Bank transfer"
 msgid "Send transfer"
 msgstr "Transfer bancar"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_buttonNewCreditTransfer)
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:197
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:106
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:200
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:80
 #, fuzzy, kde-format
 #| msgid "Include transfers"
 msgid "New credit transfer"
 msgstr "Include transferuri"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:198
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:201
 #, fuzzy, kde-format
 #| msgid "Include transfers"
 msgid "Remove transfer"
 msgstr "Include transferuri"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:199
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:202
 #, fuzzy, kde-format
 #| msgid "Include transfers"
 msgid "Edit transfer"
 msgstr "Include transferuri"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:200
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:203
 #, fuzzy, kde-format
 #| msgid "Show Columns"
 msgid "Show log"
 msgstr "Afișează coloane"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:220
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:223
 #, fuzzy, kde-format
 #| msgid "Transfer"
 msgctxt "@title:menu Online job context menu"
 msgid "Credit transfer options"
 msgstr "Transfer"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:274
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:277
 #, kde-format
 msgid "This job cannot be edited anymore because it was sent already."
 msgstr ""
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:277
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:280
 #, kde-format
 msgid "Job is being processed at the moment."
 msgstr ""
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:282
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:285
 #, kde-format
 msgid "The plugin to edit this job is not available."
 msgstr ""
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:287
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:290
 #, fuzzy, kde-format
 #| msgid "You must select or create an account."
 msgid "You need to select a single job for editing."
 msgstr "Trebuie să alegeți sau să creați un cont."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:288
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:291
 #, fuzzy, kde-format
 #| msgid "Include transfers"
 msgid "Send transfers"
 msgstr "Include transferuri"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:387
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:390
 #, kde-format
 msgctxt "The user selected credit transfers to send. But they cannot be sent"
 msgid ""
@@ -16179,7 +16178,7 @@ msgid ""
 "invalid or were already sent."
 msgstr ""
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:388
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:391
 #, fuzzy, kde-format
 #| msgid "Category selection"
 msgctxt "@title:window Online transfers"
@@ -16189,7 +16188,7 @@ msgstr "Alegere categorie"
 #. i18n: ectx: property (text), widget (QPushButton, m_sendMail)
 #. i18n: ectx: property (text), widget (QPushButton, buttonSend)
 #. i18n: ectx: property (text), widget (QToolButton, m_buttonSend)
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:87
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:61
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:245
 #: kmymoney/views/kpayeesview.ui:330
 #, kde-format
@@ -22176,6 +22175,12 @@ msgstr ""
 msgctxt "@title header of the account name column"
 msgid "Name"
 msgstr "Nume"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, KMMSearchWidget)
+#: kmymoney/widgets/kmmsearchwidget.ui:14
+#, kde-format
+msgid "Form"
+msgstr ""
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
 #, fuzzy, kde-format
