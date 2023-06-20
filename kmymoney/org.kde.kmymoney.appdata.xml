@@ -52,6 +52,7 @@
   <summary xml:lang="eu">Finantza kudeatzaile pertsonala Sarrera bikoitzeko kontabilitatean oinarritua</summary>
   <summary xml:lang="fi">Henkilökohtainen kaksinkertaiseen kirjanpitoon perustuva taloushallinto-ohjelma</summary>
   <summary xml:lang="fr">Gestionnaire de compte personnel reposant sur à une comptabilité à double entrée</summary>
+  <summary xml:lang="gl">Xestor das finanzas persoais de dobre entrada.</summary>
   <summary xml:lang="id">Pengelola keuangan pribadi berdasarkan pembukuan entri ganda</summary>
   <summary xml:lang="it">Gestore delle finanze personali basato sulla contabilità in partita doppia</summary>
   <summary xml:lang="ka">ჩანაწერების ორ-ადგილას-შენახვაზე ბაზირებული პერსონალური ფინანსების მმართველი</summary>
@@ -81,7 +82,7 @@
     <p xml:lang="eu">KMyMoney KDEren finantza pertsonalen kudeatzailea da. Eginbide sorta luze batekin dator erabiltzaile ez teknikorako erabilterrazak direnak.</p>
     <p xml:lang="fi">KMyMoney on KDE:n henkilökohtainen taloudenhallintaohjelma. Siinä on monia ominaisuuksia, mutta se on silti helppo myös ei-tekniselle käyttäjälle.</p>
     <p xml:lang="fr">KMyMoney est un gestionnaire de finances personnelles par KDE. Il dispose d'un ensemble de fonctionnalités complètes tout en restant simple d'utilisation pour les utilisateurs peu techniques.</p>
-    <p xml:lang="gl">KMyMoney é un xestor de finanzas persoais de KDE. Inclúe un gran número de funcionalidades sen renunciar a ser fácil de usar para personas non técnicas.</p>
+    <p xml:lang="gl">KMyMoney é un xestor de finanzas persoais de KDE. Inclúe un gran número de funcionalidades sen renunciar a ser fácil de usar para persoas non técnicas.</p>
     <p xml:lang="id">KMyMoney adalah pengelola keuangan personal oleh KDE. Ia menghadirkan sebuah set yang besar dari fitur yang mudah saat digunakan oleh pengguna nonteknis.</p>
     <p xml:lang="it">KMyMoney è un gestore delle finanza personali di KDE. È dotato di un ampio insieme funzionalità pur essendo facile da usare per l'utente non tecnico.</p>
     <p xml:lang="ka">KMyMoney პირადი ფინანსების მმართველია KDE-სთვის. მას ფუნქციების დიდი რაოდენობა მოჰყვება და ამავე დროს ადვილი გამოსაყენებელია არატექნიკური მომხმარებლისთვის.</p>
