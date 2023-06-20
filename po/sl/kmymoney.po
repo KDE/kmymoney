@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-19 00:50+0000\n"
+"POT-Creation-Date: 2023-06-20 00:52+0000\n"
 "PO-Revision-Date: 2023-06-17 08:11+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -6110,7 +6110,7 @@ msgstr "<qt>Ali želite dodati <b>%1</b> kot plačnika/prejemnika?</qt>"
 msgid "Unable to add payee"
 msgstr "Ni mogoče dodati prejemnika plačil"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "Nova značka"
@@ -20379,12 +20379,12 @@ msgstr "Podvojeno ime oznake"
 msgid "Unable to modify tag"
 msgstr "Ni mogoče spremeniti oznake"
 
-#: kmymoney/views/ktagsview.cpp:803
+#: kmymoney/views/ktagsview.cpp:802
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Oznake transakcije/razcepa ni mogoče dodeliti drugam"
 
-#: kmymoney/views/ktagsview.cpp:815
+#: kmymoney/views/ktagsview.cpp:814
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Ni mogoče odstraniti oznak(e)"

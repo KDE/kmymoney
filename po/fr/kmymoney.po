@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-19 00:50+0000\n"
+"POT-Creation-Date: 2023-06-20 00:52+0000\n"
 "PO-Revision-Date: 2023-05-31 13:50+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
@@ -6199,7 +6199,7 @@ msgstr "<qt>Voulez-vous ajouter <b>%1</b> comme payeur ou bénéficiaire ?</qt>
 msgid "Unable to add payee"
 msgstr "Impossible d'ajouter le bénéficiaire"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "Nouvelle étiquette"
@@ -20579,13 +20579,13 @@ msgstr "Nom d'étiquette en doublon"
 msgid "Unable to modify tag"
 msgstr "Impossible de modifier l'étiquette"
 
-#: kmymoney/views/ktagsview.cpp:803
+#: kmymoney/views/ktagsview.cpp:802
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr ""
 "Impossible de réassigner l'étiquette pour l'opération ou la répartition"
 
-#: kmymoney/views/ktagsview.cpp:815
+#: kmymoney/views/ktagsview.cpp:814
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Impossible de supprimer les étiquettes"

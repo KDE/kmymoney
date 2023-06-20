@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-19 00:50+0000\n"
+"POT-Creation-Date: 2023-06-20 00:52+0000\n"
 "PO-Revision-Date: 2023-06-17 09:31+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -6076,7 +6076,7 @@ msgstr "<qt>Ĉu vi volas aldoni <b>%1</b> kiel paganton/ricevanton?</qt>"
 msgid "Unable to add payee"
 msgstr "Ne eblas aldoni pagaton"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "Nova Etikedo"
@@ -20256,12 +20256,12 @@ msgstr "Duobliga nomo de etikedo"
 msgid "Unable to modify tag"
 msgstr "Ne eblas modifi etikedon"
 
-#: kmymoney/views/ktagsview.cpp:803
+#: kmymoney/views/ktagsview.cpp:802
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Ne eblas reatribui etikedon de transakcio/divido"
 
-#: kmymoney/views/ktagsview.cpp:815
+#: kmymoney/views/ktagsview.cpp:814
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Ne eblas forigi etikedojn"

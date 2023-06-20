@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-19 00:50+0000\n"
+"POT-Creation-Date: 2023-06-20 00:52+0000\n"
 "PO-Revision-Date: 2022-10-08 11:24+0200\n"
 "Last-Translator: Grzegorz Koryga <rehork@tutamail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -6141,7 +6141,7 @@ msgstr "<qt>Czy chcesz dodać <b>%1</b> jako płatnika/odbiorcę?</qt>"
 msgid "Unable to add payee"
 msgstr "Nie można dodać odbiorcy"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "Nowy znacznik"
@@ -20438,12 +20438,12 @@ msgstr "Powiel znacznik"
 msgid "Unable to modify tag"
 msgstr "Nie można zmienić znacznika"
 
-#: kmymoney/views/ktagsview.cpp:803
+#: kmymoney/views/ktagsview.cpp:802
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Nie można przepisać znacznika transakcji/części"
 
-#: kmymoney/views/ktagsview.cpp:815
+#: kmymoney/views/ktagsview.cpp:814
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Nie można usunąć znacznika(ów)"

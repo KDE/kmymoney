@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-19 00:50+0000\n"
+"POT-Creation-Date: 2023-06-20 00:52+0000\n"
 "PO-Revision-Date: 2022-10-11 11:38+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -6137,7 +6137,7 @@ msgstr "<qt>Lisätäänkö <b>%1</b> maksajaksi tai maksunsaajaksi?</qt>"
 msgid "Unable to add payee"
 msgstr "Maksunsaajaa ei voitu lisätä"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "Uusi luokitus"
@@ -20388,12 +20388,12 @@ msgstr "Olemassa oleva tunniste"
 msgid "Unable to modify tag"
 msgstr "Luokitusta ei voitu muuttaa"
 
-#: kmymoney/views/ktagsview.cpp:803
+#: kmymoney/views/ktagsview.cpp:802
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Tapahtuman tai jaottelun luokitusta ei voitu kytkeä uudelleen"
 
-#: kmymoney/views/ktagsview.cpp:815
+#: kmymoney/views/ktagsview.cpp:814
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Luokituksia ei voitu poistaa"

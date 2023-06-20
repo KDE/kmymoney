@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-19 00:50+0000\n"
+"POT-Creation-Date: 2023-06-20 00:52+0000\n"
 "PO-Revision-Date: 2022-11-07 20:00+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -6176,7 +6176,7 @@ msgstr "<qt>Möchten Sie <b>%1</b> als Zahlungsempfänger hinzufügen?</qt>"
 msgid "Unable to add payee"
 msgstr "Zahlungsempfänger kann nicht hinzugefügt werden"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "Neues Stichwort"
@@ -20622,12 +20622,12 @@ msgstr "Doppeltes Stichwort"
 msgid "Unable to modify tag"
 msgstr "Stichwort kann nicht geändert werden"
 
-#: kmymoney/views/ktagsview.cpp:803
+#: kmymoney/views/ktagsview.cpp:802
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Stichwort der (Teil-)Buchung kann nicht neu zugewiesen werden"
 
-#: kmymoney/views/ktagsview.cpp:815
+#: kmymoney/views/ktagsview.cpp:814
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Stichwörter können nicht entfernt werden"

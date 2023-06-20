@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-19 00:50+0000\n"
+"POT-Creation-Date: 2023-06-20 00:52+0000\n"
 "PO-Revision-Date: 2023-03-15 16:16-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -6175,7 +6175,7 @@ msgstr "<qt>Deseja adicionar <b>%1</b> como beneficiário/recebedor?</qt>"
 msgid "Unable to add payee"
 msgstr "Não foi possível adicionar o beneficiário"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "Nova etiqueta"
@@ -20563,12 +20563,12 @@ msgstr "Etiqueta duplicada"
 msgid "Unable to modify tag"
 msgstr "Não foi possível modificar a etiqueta"
 
-#: kmymoney/views/ktagsview.cpp:803
+#: kmymoney/views/ktagsview.cpp:802
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Não foi possível reatribuir etiqueta de transação/parcela"
 
-#: kmymoney/views/ktagsview.cpp:815
+#: kmymoney/views/ktagsview.cpp:814
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Não foi possível remover a(s) etiqueta(s)"

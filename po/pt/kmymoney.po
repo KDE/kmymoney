@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-19 00:50+0000\n"
+"POT-Creation-Date: 2023-06-20 00:52+0000\n"
 "PO-Revision-Date: 2023-06-18 01:03+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -6223,7 +6223,7 @@ msgstr "<qt>Deseja adicionar o <b>%1</b> como beneficiário/destinatário?</qt>"
 msgid "Unable to add payee"
 msgstr "Não é possível adicionar o beneficiário"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "Nova Marca"
@@ -20539,12 +20539,12 @@ msgstr "Nome de marca duplicado"
 msgid "Unable to modify tag"
 msgstr "Não é possível modificar a marca"
 
-#: kmymoney/views/ktagsview.cpp:803
+#: kmymoney/views/ktagsview.cpp:802
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Não foi possível atribuir de novo a marca da transacção/parcela"
 
-#: kmymoney/views/ktagsview.cpp:815
+#: kmymoney/views/ktagsview.cpp:814
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Não foi possível remover as marcas"
@@ -21308,7 +21308,7 @@ msgstr "Nome"
 #: kmymoney/widgets/kmmsearchwidget.ui:14
 #, kde-format
 msgid "Form"
-msgstr ""
+msgstr "Formulário"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
 #, kde-format

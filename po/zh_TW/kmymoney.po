@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-19 00:50+0000\n"
+"POT-Creation-Date: 2023-06-20 00:52+0000\n"
 "PO-Revision-Date: 2019-01-19 19:46+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -6122,7 +6122,7 @@ msgstr "您要新增 <b>%1</b> 為付款者/收款人嗎？"
 msgid "Unable to add payee"
 msgstr "無法新增收款人"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, fuzzy, kde-format
 #| msgid "New payee"
 msgid "New Tag"
@@ -20643,13 +20643,13 @@ msgstr "複製"
 msgid "Unable to modify tag"
 msgstr "無法變更收款人"
 
-#: kmymoney/views/ktagsview.cpp:803
+#: kmymoney/views/ktagsview.cpp:802
 #, fuzzy, kde-format
 #| msgid "Unable to reassign payee of transaction/split"
 msgid "Unable to reassign tag of transaction/split"
 msgstr "無法重新指定收款人給交易或分割"
 
-#: kmymoney/views/ktagsview.cpp:815
+#: kmymoney/views/ktagsview.cpp:814
 #, fuzzy, kde-format
 #| msgid "Unable to remove payee(s)"
 msgid "Unable to remove tag(s)"

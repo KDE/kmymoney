@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-19 00:50+0000\n"
-"PO-Revision-Date: 2023-04-19 06:08+0200\n"
+"POT-Creation-Date: 2023-06-20 00:52+0000\n"
+"PO-Revision-Date: 2023-06-19 06:01+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -105,7 +105,7 @@ msgstr[1] "    %1 დუბლიკატი"
 #: kmymoney/converter/mymoneystatementreader.cpp:585
 #, kde-format
 msgid "  Payees"
-msgstr " გადამხდელები"
+msgstr " თანხის მიმღებები"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:586
 #, kde-format
@@ -172,7 +172,7 @@ msgid ""
 "Original payee: %1\n"
 "%2"
 msgstr ""
-"დამატებითი ანაკრები: %1\n"
+"საწყისი თანხის მიმღები: %1\n"
 "%2"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1030
@@ -198,12 +198,12 @@ msgstr ""
 #: kmymoney/kmymoneyutils.cpp:566
 #, kde-format
 msgid "New payee/receiver"
-msgstr ""
+msgstr "ახალი თანხის მიმღები/მიმღები"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1069
 #, kde-format
 msgid "Default Category for Payee"
-msgstr ""
+msgstr "ნაგულისხმები კატეგორია თანხის მიმღებისთვის"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1076
 #, kde-format
@@ -232,7 +232,7 @@ msgstr "შეწყვეტა"
 #: kmymoney/converter/mymoneystatementreader.cpp:1126
 #, kde-format
 msgid "Unable to add payee/receiver"
-msgstr ""
+msgstr "თანხის მიმღების/მიმღების დამატების შეცდომა"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1373
 #, kde-format
@@ -1821,14 +1821,14 @@ msgstr "საბაზისო ვალუტა"
 #: kmymoney/widgets/ktransactionfilter.cpp:155
 #, kde-format
 msgid "Payees"
-msgstr ""
+msgstr "გადამხდელები"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel6)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:108
 #: kmymoney/views/kmymoneyview.cpp:185
 #, kde-format
 msgid "Institutions"
-msgstr ""
+msgstr "ინსტიტუტები"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel7)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:128
@@ -1962,7 +1962,7 @@ msgstr ""
 #: kmymoney/mymoney/storage/pricemodel.cpp:37
 #, kde-format
 msgid "Commodity"
-msgstr ""
+msgstr "სასაქონლო"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_priceList)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:50
@@ -3725,7 +3725,7 @@ msgstr "KMyMoney -ის დამატებები"
 #: kmymoney/dialogs/settings/ksettingsplugins.cpp:66
 #, kde-format
 msgid "Payee Identifier"
-msgstr "გადამხდელის იდენტიფიკატორი"
+msgstr "თანხის მიმღებს იდენტიფიკატორი"
 
 #: kmymoney/dialogs/settings/ksettingsplugins.cpp:67
 #, kde-format
@@ -4808,7 +4808,7 @@ msgstr "ანგარიშზე გადასვლა"
 #: kmymoney/kmymoney.cpp:1843
 #, kde-format
 msgid "Go to payee"
-msgstr "გადამხდელზე გადასვლა"
+msgstr "თანხის მიმღებზე გადასვლა"
 
 #: kmymoney/kmymoney.cpp:1844
 #, kde-format
@@ -5769,7 +5769,7 @@ msgstr ""
 msgid "Unable to add payee"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "ახალი ჭდე"
@@ -6009,10 +6009,9 @@ msgid "Value"
 msgstr "მნიშვნელობა"
 
 #: kmymoney/models/equitiesmodel.cpp:197 kmymoney/models/equitiesmodel.cpp:434
-#, fuzzy, kde-format
-#| msgid "&Last Update"
+#, kde-format
 msgid "Last Price Update"
-msgstr "&ბოლო განახლება"
+msgstr "&ბოლო ფასის განახლება"
 
 #: kmymoney/models/equitiesmodel.cpp:540
 #: kmymoney/widgets/columnselector.cpp:215
@@ -7860,7 +7859,7 @@ msgstr "კატეგორია"
 #, kde-format
 msgctxt "Split header"
 msgid "Memo"
-msgstr ""
+msgstr "მემორანდუმი"
 
 #: kmymoney/mymoney/splitmodel.cpp:38
 #, kde-format
@@ -8164,7 +8163,7 @@ msgstr "ანგარიში"
 #, kde-format
 msgctxt "@title:column"
 msgid "Payee"
-msgstr "გადამხდელი"
+msgstr "თანხის მიმღები"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:54
 #, kde-format
@@ -8509,7 +8508,7 @@ msgstr "მნიშვნელობა"
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.ui:79
 #, kde-format
 msgid "Payee"
-msgstr "გადამხდელი"
+msgstr "თანხის მიმღები"
 
 #: kmymoney/mymoney/storage/pricemodel.cpp:38
 #, kde-format
@@ -8564,7 +8563,7 @@ msgstr "ანგარიში"
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:182
 msgctxt "Schedule header"
 msgid "Payee"
-msgstr "გადამხდელი"
+msgstr "თანხის მიმღები"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:183
 msgctxt "Schedule header"
@@ -9242,7 +9241,7 @@ msgstr "ანგარიში"
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Memo"
-msgstr ""
+msgstr "მემორანდუმი"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:106
 #: kmymoney/plugins/csv/export/csvwriter.cpp:113
@@ -9255,7 +9254,7 @@ msgstr "სტატუსი"
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Payee"
-msgstr "გადამხდელი"
+msgstr "თანხის მიმღები"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:112
 #, kde-format
@@ -9488,7 +9487,7 @@ msgstr ""
 #: kmymoney/views/newtransactionform.ui:124
 #, kde-format
 msgid "Memo"
-msgstr ""
+msgstr "მემორანდუმი"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_memoCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:289
@@ -18924,7 +18923,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Duplicate payee name"
-msgstr "გადამხდელის სახელის დუბლირება"
+msgstr "დუბლირებული თანხის მიმღების სახელი"
 
 #: kmymoney/views/kpayeesview.cpp:176 kmymoney/views/kpayeesview.cpp:378
 #: kmymoney/views/kpayeesview.cpp:401
@@ -19398,12 +19397,12 @@ msgstr "ჭდის სახელის დუბლირება"
 msgid "Unable to modify tag"
 msgstr ""
 
-#: kmymoney/views/ktagsview.cpp:803
+#: kmymoney/views/ktagsview.cpp:802
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr ""
 
-#: kmymoney/views/ktagsview.cpp:815
+#: kmymoney/views/ktagsview.cpp:814
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr ""
@@ -19492,7 +19491,7 @@ msgstr "ანგარიშზე გადასვლა"
 #, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
-msgstr "გადამხდელზე გადასვლა"
+msgstr "თანხის მიმღებზე გადასვლა"
 
 #: kmymoney/views/ledgerview.cpp:251
 #, kde-format
@@ -20108,7 +20107,7 @@ msgstr "სახელი"
 #: kmymoney/widgets/kmmsearchwidget.ui:14
 #, kde-format
 msgid "Form"
-msgstr ""
+msgstr "ფორმა"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
 #, kde-format
@@ -22764,7 +22763,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:49
 #, kde-format
 msgid "Create a new category"
-msgstr ""
+msgstr "ახალი კატეგორიის შექმნა"
 
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:50
 #, kde-format

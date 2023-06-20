@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-19 00:50+0000\n"
-"PO-Revision-Date: 2023-06-17 08:54+0300\n"
+"POT-Creation-Date: 2023-06-20 00:52+0000\n"
+"PO-Revision-Date: 2023-06-19 07:06+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -6147,7 +6147,7 @@ msgstr "<qt>Бажаєте додати <b>%1</b> як платника/отри
 msgid "Unable to add payee"
 msgstr "Не вдалося додати отримувача"
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "Нова мітка"
@@ -20517,12 +20517,12 @@ msgstr "Дублювання назви мітки"
 msgid "Unable to modify tag"
 msgstr "Не вдалося змінити мітку"
 
-#: kmymoney/views/ktagsview.cpp:803
+#: kmymoney/views/ktagsview.cpp:802
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Не вдалося повторно призначити мітку операції/дроблення"
 
-#: kmymoney/views/ktagsview.cpp:815
+#: kmymoney/views/ktagsview.cpp:814
 #, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Не вдалося вилучити мітки"
@@ -21282,7 +21282,7 @@ msgstr "Назва"
 #: kmymoney/widgets/kmmsearchwidget.ui:14
 #, kde-format
 msgid "Form"
-msgstr ""
+msgstr "Форма"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
 #, kde-format

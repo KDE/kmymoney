@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-19 00:50+0000\n"
+"POT-Creation-Date: 2023-06-20 00:52+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -6133,7 +6133,7 @@ msgstr "Wullt Du <b>%1</b> as Adressaat tofögen?"
 msgid "Unable to add payee"
 msgstr "Adressaat lett sik nich tofögen."
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, fuzzy, kde-format
 #| msgid "New payee"
 msgid "New Tag"
@@ -20868,13 +20868,13 @@ msgstr "Verdubbeln"
 msgid "Unable to modify tag"
 msgstr "Adressaat lett sik nich ännern"
 
-#: kmymoney/views/ktagsview.cpp:803
+#: kmymoney/views/ktagsview.cpp:802
 #, fuzzy, kde-format
 #| msgid "Unable to reassign payee of transaction/split"
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Adressaat lett sik de Boken/Deelboken nich nieg towiesen"
 
-#: kmymoney/views/ktagsview.cpp:815
+#: kmymoney/views/ktagsview.cpp:814
 #, fuzzy, kde-format
 #| msgid "Unable to remove payee(s)"
 msgid "Unable to remove tag(s)"

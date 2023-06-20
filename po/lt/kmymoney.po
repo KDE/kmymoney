@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-19 00:50+0000\n"
+"POT-Creation-Date: 2023-06-20 00:52+0000\n"
 "PO-Revision-Date: 2015-12-29 21:19+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
@@ -5916,7 +5916,7 @@ msgstr "Naudokite tai norėdami ištrinti pažymėtą profilį"
 msgid "Unable to add payee"
 msgstr ""
 
-#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:634
+#: kmymoney/kmymoneyutils.cpp:614 kmymoney/views/ktagsview.cpp:633
 #, kde-format
 msgid "New Tag"
 msgstr "Nauja žyma"
@@ -20193,12 +20193,12 @@ msgstr "Dublikuoti"
 msgid "Unable to modify tag"
 msgstr "Nepavyksta pakeisti tvarkaraščio: "
 
-#: kmymoney/views/ktagsview.cpp:803
+#: kmymoney/views/ktagsview.cpp:802
 #, fuzzy, kde-format
 msgid "Unable to reassign tag of transaction/split"
 msgstr "Nepavyksta pašalinti operacijos"
 
-#: kmymoney/views/ktagsview.cpp:815
+#: kmymoney/views/ktagsview.cpp:814
 #, fuzzy, kde-format
 msgid "Unable to remove tag(s)"
 msgstr "Nepavyksta pašalinti operacijos"
