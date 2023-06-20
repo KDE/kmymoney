@@ -302,8 +302,8 @@ msgid ""
 "account by pressing the <b>Create</b> button."
 msgstr ""
 "Non se atopou información da conta no ficheiro de extracto indicado. Escolla "
-"unha conta empregando a caixa de selección deste diálogo ou cree unha conta "
-"nova co botón <b>Crear</b>."
+"unha conta usando a caixa de selección deste diálogo ou cree unha conta nova "
+"co botón <b>Crear</b>."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1404
 #, kde-format
@@ -984,7 +984,7 @@ msgstr "Omitir este asento"
 msgid ""
 "Use this to skip importing this transaction and proceed with the next one."
 msgstr ""
-"Empregue isto para omitir a importación deste asento e continuar co seguinte."
+"Use isto para omitir a importación deste asento e continuar co seguinte."
 
 #: kmymoney/dialogs/kaccountselectdlg.cpp:88
 #: kmymoney/wizards/newaccountwizard/kloanpayoutpage.cpp:64
@@ -1002,7 +1002,7 @@ msgstr "Crear unha nova conta/categoría"
 #: kmymoney/dialogs/kaccountselectdlg.cpp:91
 #, kde-format
 msgid "Use this to add a new account/category to the file"
-msgstr "Empregue isto para engadir unha nova conta/categoría no ficheiro"
+msgstr "Use isto para engadir unha nova conta/categoría no ficheiro"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_kButtonAbort)
 #: kmymoney/dialogs/kaccountselectdlg.cpp:95
@@ -1022,8 +1022,8 @@ msgid ""
 "Use this to abort the import. Your financial data will be in the state "
 "before you started the QIF import."
 msgstr ""
-"Empregue isto para interromper a importación. Os seus datos financeiros "
-"estarán no estado anterior á importación do QIF."
+"Use isto para interromper a importación. Os seus datos financeiros estarán "
+"no estado anterior á importación do QIF."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KAccountSelectDlg)
 #: kmymoney/dialogs/kaccountselectdlg.ui:17
@@ -1103,7 +1103,7 @@ msgstr ""
 #: kmymoney/kmymoney.cpp:2521
 #, kde-format
 msgid "Backup"
-msgstr "Copia de seguranza"
+msgstr "Copia de seguridade"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/dialogs/kbackupdlg.ui:26
@@ -2893,7 +2893,7 @@ msgstr "Fonte"
 #: kmymoney/dialogs/kmymoneypricedlg.ui:78
 #, kde-format
 msgid "Show all stored prices"
-msgstr "Mostrar todos os prezos gardados"
+msgstr "Amosar todos os prezos gardados"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_newButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:89
@@ -3166,10 +3166,9 @@ msgid ""
 "only be shown if it is used. Otherwise, it will be hidden in the accounts/"
 "categories view."
 msgstr ""
-"Escolleu non mostrar as categorías non utilizadas no diálogo de "
-"configuración de KMyMoney. Por tanto, a categoría que acaba de crear só se "
-"mostrará se for utilizada. En caso contrario, estará agochada na vista de "
-"contas/categorías."
+"Escolleu non amosar as categorías non utilizadas no diálogo de configuración "
+"de KMyMoney. Por tanto, a categoría que acaba de crear só se amosará se for "
+"utilizada. En caso contrario, estará agochada na vista de contas/categorías."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:716
 #, kde-format
@@ -3794,7 +3793,7 @@ msgstr "Eliminar todas as partidas"
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:104
 #, kde-format
 msgid "Use this to clear all splits of this transaction"
-msgstr "Empregar isto para eliminar todas as partidas deste asento"
+msgstr "Usar isto para eliminar todas as partidas deste asento"
 
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:108
 #, kde-format
@@ -4094,7 +4093,7 @@ msgstr "Opcións do inicio"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:36
 #, kde-format
 msgid "Show splash screen"
-msgstr "Mostrar a pantalla de benvida"
+msgstr "Amosar a pantalla de benvida"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:46
@@ -4125,7 +4124,7 @@ msgstr "Gardar automaticamente cando se teña modificado o ficheiro ao pechar"
 #, kde-format
 msgid "Setup number of backups to keep (local file only)"
 msgstr ""
-"Número configurado de copias de seguranza que manter (só ficheiro local)"
+"Número configurado de copias de seguridade que manter (só ficheiro local)"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_AutoBackupCopies)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:119
@@ -4145,7 +4144,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:138
 #, kde-format
 msgid "Number of backups to keep (0=off)"
-msgstr "Número de copias de seguranza que manter (0=desactivado)"
+msgstr "Número de copias de seguridade que manter (0=desactivado)"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:163
@@ -4296,7 +4295,7 @@ msgstr "Con lapelas"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:370
 #, kde-format
 msgid "Show title bar on each page"
-msgstr "Mostrar a barra de título en cada páxina"
+msgstr "Amosar a barra de título en cada páxina"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_syncLedgerInvestment)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:377
@@ -4335,13 +4334,13 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:416
 #, kde-format
 msgid "Do not show unused categories"
-msgstr "Non mostrar as categorías non empregadas"
+msgstr "Non amosar as categorías non empregadas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ExpertMode)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:423
 #, kde-format
 msgid "Show equity accounts"
-msgstr "Mostrar as contas de patrimonio"
+msgstr "Amosar as contas de patrimonio"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowCategoriesInAccountsView)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:430
@@ -4353,13 +4352,13 @@ msgstr "Esta opción tamén mostra as categorías na vista de contas."
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:433
 #, kde-format
 msgid "Show categories in the accounts list view"
-msgstr "Mostrar as categorías na vista de lista de contas"
+msgstr "Amosar as categorías na vista de lista de contas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:440
 #, kde-format
 msgid "Do not show zero balance equities"
-msgstr "Non mostrar o patrimonio de saldo nulo"
+msgstr "Non amosar o patrimonio de saldo nulo"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_HideFinishedSchedules)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:456
@@ -4372,13 +4371,13 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:459
 #, kde-format
 msgid "Do not show finished schedules"
-msgstr "Non mostrar as planificacións rematadas"
+msgstr "Non amosar as planificacións rematadas"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_3)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:477
 #, kde-format
 msgid "Do not show transactions prior to"
-msgstr "Non mostrar os asentos anteriores a"
+msgstr "Non amosar os asentos anteriores a"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_HideReconciledTransactions)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:511
@@ -4391,7 +4390,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:514
 #, kde-format
 msgid "Do not show reconciled transactions"
-msgstr "Non mostrar os asentos conciliados"
+msgstr "Non amosar os asentos conciliados"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:541
@@ -4455,8 +4454,7 @@ msgstr "Mover obxecto escollido cara riba"
 #, kde-format
 msgid "Use this to move the selected item up by one position in the list."
 msgstr ""
-"Empregue isto para subir o obxecto escollido unha posición cara riba na "
-"lista."
+"Use isto para subir o obxecto escollido unha posición cara riba na lista."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_upButton)
 #: kmymoney/dialogs/settings/ksettingshome.ui:46
@@ -4476,8 +4474,7 @@ msgstr "Mover o obxecto seleccionado cara baixo"
 #, kde-format
 msgid "Use this to move the selected item down by one position in the list."
 msgstr ""
-"Empregue isto para baixar o obxecto escollido unha posición cara baixo na "
-"lista."
+"Use isto para baixar o obxecto escollido unha posición cara baixo na lista."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_downButton)
 #: kmymoney/dialogs/settings/ksettingshome.ui:59
@@ -4493,8 +4490,8 @@ msgid ""
 "Selected entries are shown on the home page of the application.<p>\n"
 "Use the buttons and checkboxes to customize the layout of the home page."
 msgstr ""
-"As entradas escollidas móstranse na páxina de inicio da aplicación.<p>\n"
-"Empregue os botóns e opcións para personalizar o aspecto da páxina de inicio."
+"As entradas escollidas amósanse na páxina de inicio da aplicación.<p>\n"
+"Use os botóns e opcións para personalizar o aspecto da páxina de inicio."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupbox)
 #: kmymoney/dialogs/settings/ksettingshome.ui:132
@@ -4528,25 +4525,25 @@ msgstr "Visualización da información da conta"
 #: kmymoney/dialogs/settings/ksettingshome.ui:196
 #, kde-format
 msgid "Show Account Limit Information"
-msgstr "Mostrar o límite da conta"
+msgstr "Amosar o límite da conta"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowBalanceStatusOfOnlineAccounts)
 #: kmymoney/dialogs/settings/ksettingshome.ui:203
 #, kde-format
 msgid "Show balance-status of mapped online accounts"
-msgstr "Mostrar o estado do balance das contas de Internet asociadas"
+msgstr "Amosar o estado do balance das contas de Internet asociadas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowCountOfUnmarkedTransactions)
 #: kmymoney/dialogs/settings/ksettingshome.ui:210
 #, kde-format
 msgid "Show number of not marked transactions per account [!M]"
-msgstr "Mostrar a cantidade de asentos non marcados por conta [!M]"
+msgstr "Amosar a cantidade de asentos non marcados por conta [!M]"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowCountOfClearedTransactions)
 #: kmymoney/dialogs/settings/ksettingshome.ui:217
 #, kde-format
 msgid "Show number of cleared transactions per account [C]"
-msgstr "Mostrar a cantidade de asentos compensados por conta [C]"
+msgstr "Amosar a cantidade de asentos compensados por conta [C]"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowCountOfNotReconciledTransactions)
 #: kmymoney/dialogs/settings/ksettingshome.ui:224
@@ -4555,14 +4552,14 @@ msgid ""
 "Show number of not reconciled (not marked + cleared) transactions per "
 "account [!R]"
 msgstr ""
-"Mostrar a cantidade de asentos non compensados (non marcados + compensados) "
+"Amosar a cantidade de asentos non compensados (non marcados + compensados) "
 "por conta [!R]"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowDateOfLastReconciliation)
 #: kmymoney/dialogs/settings/ksettingshome.ui:231
 #, kde-format
 msgid "Show date of last reconciliation"
-msgstr "Mostrar a data da última reconciliación."
+msgstr "Amosar a data da última reconciliación."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceLiabilities)
 #: kmymoney/dialogs/settings/ksettingshome.ui:238
@@ -4810,7 +4807,7 @@ msgstr ""
 "<p>Para procesar dun xeito máis sinxelo os datos descargados da fonte de "
 "Internet, KMyMoney xeralmente suprime as partes non utilizadas antes de que "
 "procesalos con expresións regulares. Se depende destes campos para atopar os "
-"campos, empregue esta opción para non retirar as etiquetas.</p>\n"
+"campos, use esta opción para non retirar as etiquetas.</p>\n"
 "\n"
 "<p>Xeralmente elimínanse estes elementos:\n"
 "\n"
@@ -4843,7 +4840,7 @@ msgstr "Crear unha fonte de cotizacións de Internet nova"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:180
 #, kde-format
 msgid "Use this to create a new entry for online quotes"
-msgstr "Empregue isto para crear unha entrada nova de cotizacións de Internet"
+msgstr "Use isto para crear unha entrada nova de cotizacións de Internet"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_newButton)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:183
@@ -4862,7 +4859,7 @@ msgstr "Eliminar a fonte escollida"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:193
 #, kde-format
 msgid "Use this to delete the selected online source entry"
-msgstr "Empregue isto para eliminar a fonte de Internet seleccionada"
+msgstr "Use isto para eliminar a fonte de Internet seleccionada"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_dumpCSVProfile)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:219
@@ -4893,7 +4890,7 @@ msgstr "Acepta os datos introducidos e almacénaos"
 #: kmymoney/views/kpayeesview.ui:569 kmymoney/views/ktagsview.ui:361
 #, kde-format
 msgid "Use this to accept the modified data."
-msgstr "Empregue isto para aceptar os datos modificados."
+msgstr "Use isto para aceptar os datos modificados."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_updateButton)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:235
@@ -4936,7 +4933,7 @@ msgstr "Visualización"
 #: kmymoney/settings/kmymoney.kcfg:264
 #, kde-format
 msgid "Show a grid in the register"
-msgstr "Mostrar unha grade no rexistro"
+msgstr "Amosar unha grade no rexistro"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowRegisterDetailed)
 #. i18n: ectx: label, entry (ShowRegisterDetailed), group (List Options)
@@ -4944,7 +4941,7 @@ msgstr "Mostrar unha grade no rexistro"
 #: kmymoney/settings/kmymoney.kcfg:256
 #, kde-format
 msgid "Show all register entries in full detail"
-msgstr "Mostrar todas as entradas do rexistro detalladamente"
+msgstr "Amosar todas as entradas do rexistro detalladamente"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_LedgerLens)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:50
@@ -4957,7 +4954,7 @@ msgid ""
 msgstr ""
 "A lupa do libro maior mostra os detalles do asento que teña o foco no libro "
 "maior. Polo xeral, cando se usa o formulario de escrituración, só se mostra "
-"unha liña de resumo por cada asento xa que os detalles móstraos o formulario."
+"unha liña de resumo por cada asento xa que os detalles amósaos o formulario."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_LedgerLens)
 #. i18n: ectx: label, entry (LedgerLens), group (General Options)
@@ -4973,13 +4970,13 @@ msgstr "Usar a lupa do libro maior"
 #: kmymoney/settings/kmymoney.kcfg:92
 #, kde-format
 msgid "Show transaction form"
-msgstr "Mostrar o formulario de escrituración"
+msgstr "Amosar o formulario de escrituración"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AlwaysShowNrField)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:70
 #, kde-format
 msgid "Always show a No. field"
-msgstr "Mostrar sempre un campo de número"
+msgstr "Amosar sempre un campo de número"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowFancyMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:80
@@ -4995,13 +4992,13 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsregister.ui:83
 #, kde-format
 msgid "Show group header between transactions"
-msgstr "Mostrar a cabeceira de grupo entre os asentos"
+msgstr "Amosar a cabeceira de grupo entre os asentos"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowFiscalMarker)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:93
 #, kde-format
 msgid "Show header for the previous and current fiscal year"
-msgstr "Mostrar unha cabeceira para os anos fiscais actual e anterior"
+msgstr "Amosar unha cabeceira para os anos fiscais actual e anterior"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_ShowPlannedScheduleDates)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:100
@@ -5018,7 +5015,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsregister.ui:103
 #, kde-format
 msgid "Display overdue schedules with planned date"
-msgstr "Mostrar as planificacións vencidas coa data planificada"
+msgstr "Amosar as planificacións vencidas coa data planificada"
 
 #. i18n: ectx: attribute (title), widget (QWidget, sorting)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:127
@@ -5084,7 +5081,7 @@ msgstr "Manter os cambios cando se escolla unha partida ou asento diferente."
 #: kmymoney/dialogs/settings/ksettingsregister.ui:210
 #, kde-format
 msgid "Use Enter to move between fields"
-msgstr "Empregar o Intro para moverse polos campos"
+msgstr "Usar o Intro para moverse polos campos"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_stringMatchFromStart)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:220
@@ -5228,7 +5225,7 @@ msgid ""
 msgstr ""
 "Recolle todos os asentos do beneficiario indicado. Considera idénticas todas "
 "as transaccións que estean na mesma categoría e teñan un importe con ±X %. "
-"De atoparse máis dun asento, mostraralle ao usuario unha lista con elas.\n"
+"De atoparse máis dun asento, amosaralle ao usuario unha lista con elas.\n"
 "\n"
 "Se escolle o 0% mostraranse todas as transaccións."
 
@@ -5375,7 +5372,7 @@ msgstr "Días hábiles"
 #: kmymoney/dialogs/settings/ksettingsschedules.ui:77
 #, kde-format
 msgid "Use holiday calendar for region"
-msgstr "Empregar o calendario de festivos da rexión"
+msgstr "Usar o calendario de festivos da rexión"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_holidayRegion)
 #: kmymoney/dialogs/settings/ksettingsschedules.ui:91
@@ -5543,7 +5540,7 @@ msgstr "Ins&erir"
 #: kmymoney/dialogs/transactioneditor.cpp:690
 #, kde-format
 msgid "Use this to enter the transaction into the ledger."
-msgstr "Empregue isto para inserir esta operación no libro maior."
+msgstr "Use isto para inserir esta operación no libro maior."
 
 #: kmymoney/dialogs/transactioneditor.cpp:691
 #, kde-format
@@ -5558,7 +5555,7 @@ msgstr "Acepta os datos introducidos e gárdaos como un asento planificado"
 #: kmymoney/dialogs/transactioneditor.cpp:694
 #, kde-format
 msgid "Use this to schedule the transaction for later entry into the ledger."
-msgstr "Empregue isto para planificar un asento posteriormente no libro maior."
+msgstr "Use isto para planificar un asento posteriormente no libro maior."
 
 #: kmymoney/dialogs/transactioneditor.cpp:696
 #, kde-format
@@ -5860,9 +5857,9 @@ msgid ""
 msgstr ""
 "<p>A conta «%1» foi creada con anterioridade como de tipo empréstito pero "
 "falta algunha información.</p><p>O asistente para novos empréstitos comezará "
-"a recoller toda a información de interese.</p><p>Por favor, empregue unha "
-"versión de KMyMoney  0.8.7 ou posterior pero máir recente que a 0.9 para "
-"corrixir o problema.</p>"
+"a recoller toda a información de interese.</p><p>Por favor, use unha versión "
+"de KMyMoney  0.8.7 ou posterior pero máir recente que a 0.9 para corrixir o "
+"problema.</p>"
 
 #: kmymoney/kmymoney.cpp:906
 #, kde-format
@@ -5895,7 +5892,7 @@ msgstr "Gardar no ficheiro"
 #: kmymoney/kmymoney.cpp:1381
 #, kde-format
 msgid "Backup..."
-msgstr "Copia de seguranza…"
+msgstr "Copia de seguridade…"
 
 #: kmymoney/kmymoney.cpp:1382
 #, kde-format
@@ -5930,7 +5927,7 @@ msgstr "Atopar un asento…"
 #: kmymoney/kmymoney.cpp:1397
 #, kde-format
 msgid "Show Transaction Detail"
-msgstr "Mostrar os detalles do asento"
+msgstr "Amosar os detalles do asento"
 
 #. i18n: ectx: label, entry (HideReconciledTransactions), group (List Options)
 #: kmymoney/kmymoney.cpp:1398 kmymoney/settings/kmymoney.kcfg:248
@@ -5955,7 +5952,7 @@ msgstr "Agochar as categorías non usadas"
 #: kmymoney/kmymoney.cpp:1401 kmymoney/settings/kmymoney.kcfg:232
 #, kde-format
 msgid "Show all accounts"
-msgstr "Mostrar todas as contas"
+msgstr "Amosar todas as contas"
 
 #: kmymoney/kmymoney.cpp:1405
 #, kde-format
@@ -6026,7 +6023,7 @@ msgstr "Informe de asentos"
 #: kmymoney/kmymoney.cpp:1421
 #, kde-format
 msgid "Show balance chart..."
-msgstr "Mostrar a gráfica do saldo…"
+msgstr "Amosar a gráfica do saldo…"
 
 #: kmymoney/kmymoney.cpp:1422
 #, kde-format
@@ -6351,7 +6348,7 @@ msgstr "Editar a transferencia"
 #: kmymoney/kmymoney.cpp:1505
 #, kde-format
 msgid "Show log"
-msgstr "Mostrar o historial"
+msgstr "Amosar o historial"
 
 #: kmymoney/kmymoney.cpp:1664
 #, kde-format
@@ -6432,8 +6429,8 @@ msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
 "continue?"
 msgstr ""
-"O ficheiro debe ser gardado antes de poder facerlle unha copia de seguranza. "
-"Quere continuar?"
+"O ficheiro debe ser gardado antes de poder facerlle unha copia de "
+"seguridade. Quere continuar?"
 
 #: kmymoney/kmymoney.cpp:2362
 #, kde-format
@@ -6441,7 +6438,7 @@ msgid ""
 "The current implementation of the backup functionality only supports local "
 "files as source files. Your current source file is '%1'."
 msgstr ""
-"A implementación actual da función de copia de seguranza só permite usar "
+"A implementación actual da función de copia de seguridade só permite usar "
 "ficheiros locais como orixes. O ficheiro orixe actual é «%1»."
 
 #: kmymoney/kmymoney.cpp:2364
@@ -6458,7 +6455,7 @@ msgstr "Estase a montar %1"
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr ""
-"Xa existe unha copia de seguranza de hoxe nese dispositivo. Desexa "
+"Xa existe unha copia de seguridade de hoxe nese dispositivo. Desexa "
 "substituíla?"
 
 #: kmymoney/kmymoney.cpp:2428
@@ -6490,7 +6487,7 @@ msgstr "Feito"
 #: kmymoney/kmymoney.cpp:2499 kmymoney/kmymoney.cpp:2519
 #, kde-format
 msgid "File successfully backed up"
-msgstr "Creouse unha copia de seguranza do ficheiro"
+msgstr "Creouse unha copia de seguridade do ficheiro"
 
 #: kmymoney/kmymoney.cpp:2505
 #, kde-format
@@ -6870,7 +6867,7 @@ msgstr "Crear un novo asento planificado."
 #: kmymoney/kmymoneyutils.cpp:103
 #, kde-format
 msgid "Use this to create a new schedule."
-msgstr "Empregue isto para crear un asento planificado novo."
+msgstr "Use isto para crear un asento planificado novo."
 
 #: kmymoney/kmymoneyutils.cpp:110
 #, kde-format
@@ -6885,7 +6882,7 @@ msgstr "Filtrar as contas"
 #: kmymoney/kmymoneyutils.cpp:113
 #, kde-format
 msgid "Use this to filter out accounts"
-msgstr "Empregue isto para filtrar as contas"
+msgstr "Use isto para filtrar as contas"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, NewPaymentsWizardPage)
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
@@ -7296,7 +7293,7 @@ msgstr "Número"
 #: kmymoney/widgets/accountsviewproxymodel.cpp:93
 #, kde-format
 msgid "Displayed columns"
-msgstr "Columnas mostradas"
+msgstr "Columnas amosadas"
 
 #: kmymoney/models/ledgermodel.cpp:98
 #: kmymoney/mymoney/storage/journalmodel.cpp:46
@@ -7445,7 +7442,7 @@ msgstr "Dr."
 #, kde-format
 msgid "The plugin to show this information could not be found."
 msgstr ""
-"Non se puido atopar o complemento necesario para mostrar esta información."
+"Non se puido atopar o complemento necesario para amosar esta información."
 
 #: kmymoney/models/securitiesmodel.cpp:267
 #, kde-format
@@ -9178,7 +9175,7 @@ msgstr "Descoñecida"
 #: kmymoney/mymoney/onlinetasks/unavailabletask/tasks/unavailabletask.cpp:17
 #, kde-format
 msgid "Could not load responsible plugin to view this task."
-msgstr "Non se puido cargar o complemento necesario para mostrar esta tarefa."
+msgstr "Non se puido cargar o complemento necesario para amosar esta tarefa."
 
 #: kmymoney/mymoney/splitmodel.cpp:34
 #, fuzzy, kde-format
@@ -9720,7 +9717,7 @@ msgstr "Iniciar a operación"
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:65
 #, kde-format
 msgid "Use this to start the export operation"
-msgstr "Empregue isto para iniciar a operación de exportación"
+msgstr "Use isto para iniciar a operación de exportación"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonBrowse)
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:60
@@ -9745,7 +9742,7 @@ msgstr "Escolla o nome de ficheiro"
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:63
 #, kde-format
 msgid "Use this to select a filename to export to"
-msgstr "Empregue isto para escoller un nome de ficheiro ao que exportar"
+msgstr "Use isto para escoller un nome de ficheiro ao que exportar"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:169
 #, kde-format
@@ -11380,7 +11377,7 @@ msgstr "Opcións da importación de GnuCash"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:26
 #, kde-format
 msgid "Use 'Help' for more information on these options"
-msgstr "Empregue «Axuda» para obter máis información sobre estas opcións"
+msgstr "Use «Axuda» para obter máis información sobre estas opcións"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonInvestGroupBox)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:39
@@ -11440,7 +11437,7 @@ msgstr "Opción de descodificación"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:142
 #, kde-format
 msgid "Decode using"
-msgstr "Descodificar empregando"
+msgstr "Descodificar usando"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox18)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:176
@@ -11452,7 +11449,7 @@ msgstr "Opcións das notas do asento"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:182
 #, kde-format
 msgid "Use transaction notes on non-split transactions"
-msgstr "Empregar as notas da transacción naquelas que non teñan partidas"
+msgstr "Usar as notas da transacción naquelas que non teñan partidas"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox3)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:205
@@ -11470,7 +11467,7 @@ msgstr "Datos xerais de depuración"
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:221
 #, kde-format
 msgid "Display XML data"
-msgstr "Mostrar os datos XML"
+msgstr "Amosar os datos XML"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkAnonymize)
 #: kmymoney/plugins/gnc/import/kgncimportoptionsdlg.ui:231
@@ -11529,7 +11526,7 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/kgncpricesourcedlg.ui:102
 #, kde-format
 msgid "Always use this selection for this price source."
-msgstr "Empregar sempre esta escolla para esta fonte de prezos."
+msgstr "Usar sempre esta escolla para esta fonte de prezos."
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:250
 #, kde-format
@@ -12122,14 +12119,14 @@ msgstr "Falta información"
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:33
 #, kde-format
 msgid "Use payee field as provided by institution"
-msgstr "Empregar o campo de beneficiario tal e como o fornece a entidade"
+msgstr "Usar o campo de beneficiario tal e como o fornece a entidade"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_extractPayeeButton)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:43
 #, kde-format
 msgid "Extract payee from memo field using regular expressions"
 msgstr ""
-"Extraer o beneficiario do campo do concepto empregando expresións regulares"
+"Extraer o beneficiario do campo do concepto usando expresións regulares"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:104
@@ -13409,8 +13406,8 @@ msgid ""
 "<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin "
 "returned the following error:</p><p>%2</p>"
 msgstr ""
-"<p>Non se pode importar <b>«%1»</b> empregando o complemento de importación "
-"de OFX. A extensión devolveu o erro seguinte:</p><p>%2</p>"
+"<p>Non se pode importar <b>«%1»</b> usando o complemento de importación de "
+"OFX. A extensión devolveu o erro seguinte:</p><p>%2</p>"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:1038
 #, kde-format
@@ -13433,7 +13430,7 @@ msgid "A beneficiary name is needed."
 msgid_plural "The beneficiary name must be at least %1 characters long"
 msgstr[0] "Debe indicar o nome dun beneficiario."
 msgstr[1] ""
-"Debe indicar o nome dun beneficiario empregando un mínimo de %1 caracteres."
+"Debe indicar o nome dun beneficiario usando un mínimo de %1 caracteres."
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:459
 #, kde-format
@@ -13493,7 +13490,7 @@ msgstr[1] "O motivo non pode conter máis de %1 liñas."
 msgid "A purpose is needed."
 msgid_plural "The purpose must be at least %1 characters long."
 msgstr[0] "Debe indicar un motivo."
-msgstr[1] "Debe indicar un motivo empregando un mínimo de %1 caracteres."
+msgstr[1] "Debe indicar un motivo usando un mínimo de %1 caracteres."
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.h:44
 #, kde-format
@@ -13533,7 +13530,7 @@ msgstr "Crear un perfil novo"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:85
 #, kde-format
 msgid "Use this to create a new QIF import/export profile"
-msgstr "Empregue isto para crear un novo perfil QIF de importación/exportación"
+msgstr "Use isto para crear un novo perfil QIF de importación/exportación"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, MyMoneyQifProfileEditor)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:134
@@ -14002,7 +13999,7 @@ msgstr "QIF…"
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:57
 #, kde-format
 msgid "Use this to start the import operation"
-msgstr "Empregar isto para comezar a operación de importación"
+msgstr "Usar isto para comezar a operación de importación"
 
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:66
 #, kde-format
@@ -14013,7 +14010,7 @@ msgstr "&Novo…"
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:69
 #, kde-format
 msgid "Use this to open the profile editor"
-msgstr "Empregue isto para abrir o editor de perfís"
+msgstr "Use isto para abrir o editor de perfís"
 
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:94
 #, kde-format
@@ -14073,8 +14070,8 @@ msgid ""
 msgstr ""
 "Se escolle <b>Extracto bancario</b> activará a busca automática de "
 "coincidencias da categoría, que no caso de <b>Outra aplicación</b> estará "
-"desactivada. Empregue esta última alternativa se importa ficheiros desde "
-"outros aplicativos de xestión das finanzas persoais,"
+"desactivada. Use esta última alternativa se importa ficheiros desde outros "
+"aplicativos de xestión das finanzas persoais,"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeComboBox)
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:106
@@ -14367,7 +14364,7 @@ msgstr "Informe de conciliación da conta %1"
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:139
 #, kde-format
 msgid "All values shown in %1"
-msgstr "Todos os valores móstranse en %1"
+msgstr "Todos os valores amósanse en %1"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, SummaryEditWizardPage)
 #. i18n: ectx: attribute (title), widget (QWizardPage, SummaryWizardPage)
@@ -14500,7 +14497,7 @@ msgid ""
 "In order to use a database, you need to install some additional software. "
 "Click Help for more information"
 msgstr ""
-"Para empregar unha base de datos hai que instalar software adicional. Prema "
+"Para usar unha base de datos hai que instalar software adicional. Prema "
 "Axuda para máis información."
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:170
@@ -14516,7 +14513,7 @@ msgid ""
 "You must use an SQL CREATE DATABASE statement before creating the tables.\n"
 msgstr ""
 "Non se pode abrir a base de datos.\n"
-"Hai que empregar unha instrución CREATE DATABASE de SQL antes de crear as "
+"Hai que usar unha instrución CREATE DATABASE de SQL antes de crear as "
 "táboas.\n"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:209
@@ -14551,7 +14548,7 @@ msgid ""
 msgstr ""
 "O base de datos tipo %1 non ten sido probada abondo nun contexto con "
 "KMyMoney.\n"
-"Asegúrese de dispor de copias de seguranza bos dos seus datos.\n"
+"Asegúrese de dispor de copias de seguridade bos dos seus datos.\n"
 "Informe de calquera problema na lista de correo dos desenvolvedores en "
 "kmymoney-devel@kde.org"
 
@@ -14632,7 +14629,7 @@ msgid ""
 msgstr ""
 "Este software aínda está en fase experimental e aínda ten algúns problemas "
 "coñecidos cos tempos de resposta. Estamos a traballar neles.\n"
-"Como sempre, asegúrese de que ten unha copia de seguranza dos seus datos."
+"Como sempre, asegúrese de que ten unha copia de seguridade dos seus datos."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:188
@@ -15024,7 +15021,7 @@ msgstr "Crea un orzamento novo"
 #: kmymoney/plugins/views/budget/kbudgetview.ui:50
 #, kde-format
 msgid "Use this to create a new empty budget."
-msgstr "Empregue isto para crear un orzamento novo en branco."
+msgstr "Use isto para crear un orzamento novo en branco."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_newButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:53
@@ -15043,7 +15040,7 @@ msgstr "Cambiar o nome do orzamento escollido."
 #: kmymoney/plugins/views/budget/kbudgetview.ui:63
 #, kde-format
 msgid "Use this to start renaming the selected budget."
-msgstr "Empregue isto para cambiar o nome do orzamento escollido."
+msgstr "Use isto para cambiar o nome do orzamento escollido."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_renameButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:66
@@ -15062,7 +15059,7 @@ msgstr "Borrar o orzamento escollido"
 #: kmymoney/plugins/views/budget/kbudgetview.ui:76
 #, kde-format
 msgid "Use this to delete the selected budget."
-msgstr "Empregue isto para borrar o orzamento escollido."
+msgstr "Use isto para borrar o orzamento escollido."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_deleteButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:79
@@ -15088,7 +15085,7 @@ msgstr "Acepta os datos introducidos e garda o orzamento."
 #: kmymoney/plugins/views/budget/kbudgetview.ui:139
 #, kde-format
 msgid "Use this to store the modified data."
-msgstr "Empregue isto para almacenar os datos modificados."
+msgstr "Use isto para almacenar os datos modificados."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_updateButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:142
@@ -15106,7 +15103,7 @@ msgstr "Repón o orzamento ao último estado gardado."
 #: kmymoney/plugins/views/budget/kbudgetview.ui:158
 #, kde-format
 msgid "Use this to discard the modified data."
-msgstr "Empregue isto para descartar os datos modificados."
+msgstr "Use isto para descartar os datos modificados."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_resetButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:161
@@ -15362,7 +15359,7 @@ msgstr "Detalle da gráfica:"
 #: kmymoney/plugins/views/forecast/kforecastview.ui:160
 #, kde-format
 msgid "<p>Choose what level of detail to show on the chart.</p>"
-msgstr "<p>Escolla o grao de detalle que desexa mostrar nesta gráfica.</p>"
+msgstr "<p>Escolla o grao de detalle que desexa amosar nesta gráfica.</p>"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_comboDetail)
 #: kmymoney/plugins/views/forecast/kforecastview.ui:167
@@ -15721,14 +15718,14 @@ msgstr "Destino"
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmodel.cpp:125
 #, kde-format
 msgid "Not able to display this job."
-msgstr "Non é posíbel mostrar esta tarefa."
+msgstr "Non é posíbel amosar esta tarefa."
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmodel.cpp:127
 #, kde-format
 msgid ""
 "Could not find a plugin to display this job or it does not contain any data."
 msgstr ""
-"Non se puido atopar un complemento para mostrar esta tarefa, ou a tarefa non "
+"Non se puido atopar un complemento para amosar esta tarefa, ou a tarefa non "
 "contén datos."
 
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmodel.cpp:163
@@ -16606,7 +16603,7 @@ msgstr "Asentos deste ano na conta %1"
 #: kmymoney/plugins/views/reports/reportcontrol.ui:38
 #, kde-format
 msgid "Show the chart version of this report"
-msgstr "Mostrar a versión deste informe con gráfica"
+msgstr "Amosar a versión deste informe con gráfica"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:409
 #, kde-format
@@ -17032,7 +17029,7 @@ msgstr "Prognóstico do valor neto"
 #: kmymoney/plugins/views/reports/reportsview.cpp:155
 #, kde-format
 msgid "You have no budgets to display."
-msgstr "Non ten presupostos para mostrar."
+msgstr "Non ten presupostos para amosar."
 
 #: kmymoney/plugins/views/reports/reportsview.cpp:184
 #, kde-format
@@ -17077,7 +17074,7 @@ msgstr "Configuración dos informes"
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:26
 #, kde-format
 msgid "Maximum number of legend items to display"
-msgstr "Número máximo de lendas que mostrar"
+msgstr "Número máximo de lendas que amosar"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_MaximumLegendItems)
 #: kmymoney/plugins/views/reports/reportsviewsettings.ui:35
@@ -17191,7 +17188,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:52
 #, kde-format
 msgid "Show short-term and long-term capital gains"
-msgstr "Mostrar as plusvalías a curto e longo prazo."
+msgstr "Amosar as plusvalías a curto e longo prazo."
 
 #. i18n: ectx: property (text), widget (QLabel, lblinvestmentSum)
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:59
@@ -17259,14 +17256,14 @@ msgid ""
 "<p>Select this option to draw the numeric values for data points next to "
 "their plot location.</p>"
 msgstr ""
-"<p>Escolla esta opción para mostrar os valores numéricos xunto aos puntos "
-"dos datos na gráfica.</p> "
+"<p>Escolla esta opción para amosar os valores numéricos xunto aos puntos dos "
+"datos na gráfica.</p> "
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkValues)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:115
 #, kde-format
 msgid "Draw values on chart"
-msgstr "Mostrar os valores na gráfica"
+msgstr "Amosar os valores na gráfica"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkShowChart)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:122
@@ -17275,14 +17272,14 @@ msgid ""
 "<p>Select this option to cause the report to be shown as a chart when you "
 "first open the report.  Otherwise, it will come up as a text report.</p>"
 msgstr ""
-"<p>Escolla esta opción para facer que o informe sexa mostrado como unha "
-"gráfica cando o abra. En caso contrario, mostrarase o texto do informe.</p>"
+"<p>Escolla esta opción para facer que o informe sexa amosado como unha "
+"gráfica cando o abra. En caso contrario, amosarase o texto do informe.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkShowChart)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:125
 #, kde-format
 msgid "Show as chart by default"
-msgstr "Mostrar como gráfica predeterminada"
+msgstr "Amosar como gráfica predeterminada"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkCHGridLines)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:139
@@ -17291,8 +17288,8 @@ msgid ""
 "<p>Select this option to show horizontal and vertical grid lines on the "
 "chart.</p>"
 msgstr ""
-"<p>Escolla esta opción para mostrar liñas de grade horizontais e verticais "
-"na gráfica.</p> "
+"<p>Escolla esta opción para amosar liñas de grade horizontais e verticais na "
+"gráfica.</p> "
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_logYaxis)
 #: kmymoney/plugins/views/reports/reporttabchart.ui:149
@@ -17350,7 +17347,7 @@ msgid ""
 msgstr ""
 "<p>Escolla esta opción para converter todos os valores do informe á súa "
 "divisa base.</p><p>Déixea desmarcada se desexa ver os valores na súa divisa "
-"orixinal.</p> <p>Se non converte as divisas, os subtotais non se han mostrar."
+"orixinal.</p> <p>Se non converte as divisas, os subtotais non se han amosar."
 "</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkCurrency)
@@ -17419,7 +17416,7 @@ msgstr ""
 "\n"
 "              <p>\n"
 "              Esta opción é só para os informes de investimentos, que\n"
-"              mostran prezos no canto de saldos, como fan o resto dos "
+"              amosan prezos no canto de saldos, como fan o resto dos "
 "informes.\n"
 "              </p>\n"
 "              <p>\n"
@@ -17442,8 +17439,7 @@ msgstr ""
 "              <li><b>ACTIVADO</b>: nunha táboa o valor é «0»;\n"
 "             nunha gráfica realízase unha interpolación lineal para o prezo "
 "de febreiro\n"
-"              (para que faga unha especie de valor medio empregando os "
-"valores\n"
+"              (para que faga unha especie de valor medio usando os valores\n"
 "              de xaneiro e de febreiro na gráfica)\n"
 "              </ul>\n"
 "              </p>\n"
@@ -17512,22 +17508,22 @@ msgstr "Suave"
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:112
 #, kde-format
 msgid "Show circular grid lines"
-msgstr "Mostrar as liñas circulares da grade"
+msgstr "Amosar as liñas circulares da grade"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:113
 #, kde-format
 msgid "Show sagittal grid lines"
-msgstr "Mostrar as liñas saxitais da grade"
+msgstr "Amosar as liñas saxitais da grade"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:119
 #, kde-format
 msgid "Show horizontal grid lines"
-msgstr "Mostrar as liñas horizontais da grade"
+msgstr "Amosar as liñas horizontais da grade"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:120
 #, kde-format
 msgid "Show vertical grid lines"
-msgstr "Mostrar as liñas verticais da grade"
+msgstr "Amosar as liñas verticais da grade"
 
 #. i18n: ectx: property (title), widget (QGroupBox, dateRangeBox)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:26
@@ -17625,7 +17621,7 @@ msgstr ""
 #, kde-format
 msgid ""
 "<p>Choose what kind of accounts to display as the rows of this report.</p>"
-msgstr "<p>Escolla que clase de contas mostrar como filas deste informe.</p>"
+msgstr "<p>Escolla que clase de contas amosar como filas deste informe.</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, m_rowsLabel)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:57
@@ -17637,7 +17633,7 @@ msgstr "Filas"
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:70
 #, kde-format
 msgid "Show totals column"
-msgstr "Mostrar a columna dos totais"
+msgstr "Amosar a columna dos totais"
 
 #. i18n: ectx: property (text), widget (QLabel, m_movingAverageLabel)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:77
@@ -17656,7 +17652,7 @@ msgstr "Todas"
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:155
 #, kde-format
 msgid "Show totals row"
-msgstr "Mostrar a fila dos totais"
+msgstr "Amosar a fila dos totais"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkScheduled)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:182
@@ -17696,27 +17692,27 @@ msgid ""
 "<p>Choose which columns should be shown in the report.</p><p>The date and "
 "transaction amount are always shown.</p>"
 msgstr ""
-"<p>Escoller que columnas desexa que se mostren no informe.</p><p>A data e "
-"importe do asento sempre son mostradas.</p>"
+"<p>Escoller que columnas desexa que se amosen no informe.</p><p>A data e "
+"importe do asento sempre son amosadas.</p>"
 
 #. i18n: ectx: property (title), widget (QGroupBox, buttonGroupBox1)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:141
 #, kde-format
 msgid "Show Columns"
-msgstr "Mostrar as columnas"
+msgstr "Amosar as columnas"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkMemo)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:156
 #, kde-format
 msgid "<p>Select this option to show the Memo column</p>"
-msgstr "<p>Escolla esta opción para mostrar a columna Concepto</p>"
+msgstr "<p>Escolla esta opción para amosar a columna Concepto</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkShares)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:169
 #, kde-format
 msgid "<p>Select this option to show the Shares column for investments</p>"
 msgstr ""
-"<p>Escolla esta opción para mostrar a columna Participacións nos "
+"<p>Escolla esta opción para amosar a columna Participacións nos "
 "investimentos</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkPrice)
@@ -17724,55 +17720,55 @@ msgstr ""
 #, kde-format
 msgid "<p>Select this option to show the Price column for investments</p>"
 msgstr ""
-"<p>Escolla esta opción para mostrar a columna Prezo nos investimentos</p> "
+"<p>Escolla esta opción para amosar a columna Prezo nos investimentos</p> "
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkReconciled)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:195
 #, kde-format
 msgid "<p>Select this option to show the Reconciled column</p>"
-msgstr "<p>Escolla esta opción para mostrar a columna Conciliado</p>"
+msgstr "<p>Escolla esta opción para amosar a columna Conciliado</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkAccount)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:208
 #, kde-format
 msgid "<p>Select this option to show the Account column</p>"
-msgstr "<p>Escolla esta opción para mostrar a columna Conta</p>"
+msgstr "<p>Escolla esta opción para amosar a columna Conta</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkNumber)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:227
 #, kde-format
 msgid "<p>Select this option to show the Number column</p>"
-msgstr "<p>Escolla esta opción para mostrar a columna Número</p>"
+msgstr "<p>Escolla esta opción para amosar a columna Número</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkTag)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:246
 #, kde-format
 msgid "<p>Select this option to show the Tag column</p>"
-msgstr "<p>Escolla esta opción para mostrar a columna Etiqueta</p>"
+msgstr "<p>Escolla esta opción para amosar a columna Etiqueta</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkPayee)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:265
 #, kde-format
 msgid "<p>Select this option to show the Payee column</p>"
-msgstr "<p>Escolla esta opción para mostrar a columna Beneficiario</p>"
+msgstr "<p>Escolla esta opción para amosar a columna Beneficiario</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkCategory)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:284
 #, kde-format
 msgid "<p>Select this option to show the Category column</p>"
-msgstr "<p>Escolla esta opción para mostrar a columna Categoría</p>"
+msgstr "<p>Escolla esta opción para amosar a columna Categoría</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkAction)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:297
 #, kde-format
 msgid "<p>Select this option to show the Action column</p>"
-msgstr "<p>Escolla esta opción para mostrar a columna Acción</p>"
+msgstr "<p>Escolla esta opción para amosar a columna Acción</p>"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkBalance)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:310
 #, kde-format
 msgid "<p>Select this option to show the Running balance column</p>"
-msgstr "<p>Escolla esta opción para mostrar a columna de Saldo actual</p>"
+msgstr "<p>Escolla esta opción para amosar a columna de Saldo actual</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkLoans)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:346
@@ -17804,7 +17800,7 @@ msgstr "Incluír só as contas de Investimento"
 msgid ""
 "Do not display the individual transactions that make up a split transaction"
 msgstr ""
-"Non mostrar as transaccións individuais que conforman un asento con varias "
+"Non amosar as transaccións individuais que conforman un asento con varias "
 "partidas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkHideSplitDetails)
@@ -17823,7 +17819,7 @@ msgstr "Incluír só as categorías de impostos"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:383
 #, kde-format
 msgid "Do not display the transactions, leaving only totals displayed."
-msgstr "Non mostrar os asentos, deixando mostrados só os totais."
+msgstr "Non amosar os asentos, deixando amosados só os totais."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkHideTransactions)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:386
@@ -17984,10 +17980,10 @@ msgid ""
 msgstr ""
 "<p>Activou o soporte de cifrado con GPG. Isto significa que os ficheiros "
 "novos gardaranse cifrados.</p><p>Os ficheiros existentes non se cifrarán "
-"automaticamente. Para cifrar os ficheiros xa existentes, empregue "
-"<b>Ficheiro → Gardar como…</b> e garde o ficheiro cun nome diferente.<br/"
-">Cando confíe no resultado, elimine o ficheiro vello e cambie o nome do "
-"ficheiro cifrado ao que tiña antes.</p>"
+"automaticamente. Para cifrar os ficheiros xa existentes, use <b>Ficheiro → "
+"Gardar como…</b> e garde o ficheiro cun nome diferente.<br/>Cando confíe no "
+"resultado, elimine o ficheiro vello e cambie o nome do ficheiro cifrado ao "
+"que tiña antes.</p>"
 
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:168
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:206
@@ -18030,7 +18026,7 @@ msgid ""
 "be an e-mail address or the hexadecimal key id. In case of the key id, do "
 "not forget the leading 0x."
 msgstr ""
-"Introduza o identificador da chave que queira empregar para cifrar os datos. "
+"Introduza o identificador da chave que queira usar para cifrar os datos. "
 "Isto pode ser ou un enderezo de correo electrónico ou o identificador "
 "hexadecimal da chave. Neste caso non esqueza o 0x inicial."
 
@@ -18286,7 +18282,7 @@ msgstr ""
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:25
 #, kde-format
 msgid "Use GPG encryption"
-msgstr "Empregar o cifrado con GPG"
+msgstr "Usar o cifrado con GPG"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:40
@@ -18302,7 +18298,7 @@ msgid ""
 "the one you want to use for encryption when saving to a file."
 msgstr ""
 "Esta lista despregábel enumera todas as chaves secretas que ten no seu "
-"chaveiro. Escolla a que queira empregar para gardar nun ficheiro."
+"chaveiro. Escolla a que queira usar para gardar nun ficheiro."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #. i18n: ectx: property (title), widget (KEditListWidget, kcfg_GpgRecipientList)
@@ -18394,7 +18390,7 @@ msgstr "Cifrar tamén coa chave de recuperación de KMyMoney"
 #: kmymoney/settings/kmymoney.kcfg:9
 #, kde-format
 msgid "Always show a No. field in transaction form"
-msgstr "Mostrar sempre un campo Nº no formulario de escrituración"
+msgstr "Amosar sempre un campo Nº no formulario de escrituración"
 
 #. i18n: ectx: label, entry (AutoFillTransaction), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:13
@@ -18436,7 +18432,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:37
 #, kde-format
 msgid "Number of backup files to keep"
-msgstr "Número de copias de seguranza que manter"
+msgstr "Número de copias de seguridade que manter"
 
 #. i18n: ectx: label, entry (AutoSavePeriod), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:43
@@ -18520,7 +18516,7 @@ msgstr "Executar no modo experto (contábel)"
 #: kmymoney/settings/kmymoney.kcfg:122
 #, kde-format
 msgid "Show splash screen during startup"
-msgstr "Mostrar a páxina de benvida ao iniciar"
+msgstr "Amosar a páxina de benvida ao iniciar"
 
 #. i18n: ectx: label, entry (syncLedgerInvestment), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:126
@@ -18544,7 +18540,7 @@ msgstr "Indicador de primeira vez para iniciar o asistente para usuarios novos"
 #: kmymoney/settings/kmymoney.kcfg:138
 #, kde-format
 msgid "Show title bar on each view"
-msgstr "Mostrar a barra de título en cada vista"
+msgstr "Amosar a barra de título en cada vista"
 
 #. i18n: ectx: label, entry (stringMatchFromStart), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:142
@@ -18593,7 +18589,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:168
 #, kde-format
 msgid "Show account limit information on the Homepage"
-msgstr "Mostrar o límite da conta na páxina de inicio"
+msgstr "Amosar o límite da conta na páxina de inicio"
 
 #. i18n: ectx: label, entry (ShowBalanceStatusOfOnlineAccounts), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:172
@@ -18602,7 +18598,7 @@ msgid ""
 "Show balance status on the Homepage for accounts where data imports include "
 "balance information."
 msgstr ""
-"Mostrar o estado do saldo na páxina de inicio para as contas cuxas "
+"Amosar o estado do saldo na páxina de inicio para as contas cuxas "
 "importacións de datos inclúan información de saldo."
 
 #. i18n: ectx: label, entry (ShowCountOfUnmarkedTransactions), group (Homepage Options)
@@ -18610,14 +18606,14 @@ msgstr ""
 #, kde-format
 msgid "Show number of not marked transactions per account on the Homepage [!M]"
 msgstr ""
-"Mostrar na páxina inicial a cantidade de asentos non marcados por conta [!M]"
+"Amosar na páxina inicial a cantidade de asentos non marcados por conta [!M]"
 
 #. i18n: ectx: label, entry (ShowCountOfClearedTransactions), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:180
 #, kde-format
 msgid "Show number of cleared transactions per account on the Homepage [C]"
 msgstr ""
-"Mostrar na páxina inicial a cantidade de asentos compensados por conta [C]"
+"Amosar na páxina inicial a cantidade de asentos compensados por conta [C]"
 
 #. i18n: ectx: label, entry (ShowCountOfNotReconciledTransactions), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:184
@@ -18626,14 +18622,14 @@ msgid ""
 "Show number of not reconciled (not marked + cleared) transactions per "
 "account on the Homepage [!R]"
 msgstr ""
-"Mostrar na páxina inicial a cantidade de asentos non compensados (non "
+"Amosar na páxina inicial a cantidade de asentos non compensados (non "
 "marcados + compensados) por conta [!R]"
 
 #. i18n: ectx: label, entry (ShowDateOfLastReconciliation), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:188
 #, kde-format
 msgid "Show date of last reconciliation on the Homepage"
-msgstr "Mostrar a data da última reconciliación na páxina inicial."
+msgstr "Amosar a data da última reconciliación na páxina inicial."
 
 #. i18n: ectx: label, entry (HideZeroBalanceLiabilities), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:192
@@ -18645,7 +18641,7 @@ msgstr "Agochar os pasivos de saldo nulo na páxina principal"
 #: kmymoney/settings/kmymoney.kcfg:198
 #, kde-format
 msgid "Use custom colors"
-msgstr "Empregar cores personalizadas."
+msgstr "Usar cores personalizadas."
 
 #. i18n: ectx: label, entry (transactionImportedColor), group (Color Options)
 #: kmymoney/settings/kmymoney.kcfg:202
@@ -18687,7 +18683,7 @@ msgstr "Cor de fondo para os campos obrigatorios"
 #: kmymoney/settings/kmymoney.kcfg:236
 #, kde-format
 msgid "Show categories in the accounts view"
-msgstr "Mostrar as categorías na vista de contas"
+msgstr "Amosar as categorías na vista de contas"
 
 #. i18n: ectx: label, entry (HideZeroBalanceEquities), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:240
@@ -18705,19 +18701,19 @@ msgstr "Agochar as planificacións rematadas"
 #: kmymoney/settings/kmymoney.kcfg:260
 #, kde-format
 msgid "Show schedules with planned date"
-msgstr "Mostrar as planificacións coa data planificada"
+msgstr "Amosar as planificacións coa data planificada"
 
 #. i18n: ectx: label, entry (ShowFancyMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:268
 #, kde-format
 msgid "Show fancy group markers"
-msgstr "Mostrar marcadores de grupo decorativos"
+msgstr "Amosar marcadores de grupo decorativos"
 
 #. i18n: ectx: label, entry (ShowFiscalMarker), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:272
 #, kde-format
 msgid "Show fancy markers for previous and current fiscal year"
-msgstr "Mostrar marcadores decorativos para o ano fiscal actual e anterior"
+msgstr "Amosar marcadores decorativos para o ano fiscal actual e anterior"
 
 #. i18n: ectx: label, entry (FiscalYearBegin), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:276
@@ -18747,7 +18743,7 @@ msgstr "Ruta do ficheiro de rexistro"
 #: kmymoney/settings/kmymoney.kcfg:301
 #, kde-format
 msgid "Use system font"
-msgstr "Empregar o tipo de letra do sistema"
+msgstr "Usar o tipo de letra do sistema"
 
 #. i18n: ectx: label, entry (sortNormalView), group (List Options)
 #. i18n: ectx: label, entry (sortReconcileView), group (List Options)
@@ -18825,13 +18821,13 @@ msgstr "nomes adicionais das contas de facturación"
 #: kmymoney/settings/kmymoney.kcfg:378
 #, kde-format
 msgid "Show accounts view expanded when loaded"
-msgstr "Mostrar a vista de contas despregada ao cargar"
+msgstr "Amosar a vista de contas despregada ao cargar"
 
 #. i18n: ectx: label, entry (MaximumLegendItems), group (Chart Settings)
 #: kmymoney/settings/kmymoney.kcfg:384
 #, kde-format
 msgid "Maximum quantity of legend items to display on charts"
-msgstr "Número máximo de elementos de lenda que mostrar nas gráficas"
+msgstr "Número máximo de elementos de lenda que amosar nas gráficas"
 
 #. i18n: ectx: label, entry (ChartsPalette), group (Chart Settings)
 #: kmymoney/settings/kmymoney.kcfg:396
@@ -19056,9 +19052,9 @@ msgid ""
 "setting.</qt>"
 msgstr ""
 "<qt>Pechou esta conta. Aínda segue no sistema porque hai asentos que se "
-"refiren a ela, pero non é mostrada nas vistas. Pode facela visíbel de novo "
-"indo ao menú Vista e escollendo <b>Mostrar todas as contas</b> ou "
-"desmarcando a opción <b>Non mostrar as contas pechadas</b>.</qt>"
+"refiren a ela, pero non é amosada nas vistas. Pode facela visíbel de novo "
+"indo ao menú Vista e escollendo <b>Amosar todas as contas</b> ou desmarcando "
+"a opción <b>Non amosar as contas pechadas</b>.</qt>"
 
 #: kmymoney/views/kaccountsview.cpp:362
 #, kde-format
@@ -19073,8 +19069,8 @@ msgid ""
 "action cannot be reverted."
 msgstr ""
 "Seguro que quere retirar a asociación da conta <b>%1</b> cunha conta en "
-"Internet? En función dos detalles do método de banca por Internet que "
-"empregue, esta acción non pode reverterse."
+"Internet? En función dos detalles do método de banca por Internet que use, "
+"esta acción non pode reverterse."
 
 #: kmymoney/views/kaccountsview.cpp:417
 #, kde-format
@@ -19133,7 +19129,7 @@ msgstr "Despregar todas as contas da lista"
 #, kde-format
 msgid "Note: Unused categories are not shown as selected by settings."
 msgstr ""
-"Nota: Non se mostran as categorías non usadas, seguindo a configuración."
+"Nota: Non se amosan as categorías non usadas, seguindo a configuración."
 
 #. i18n: ectx: property (text), widget (QLabel, m_totalProfitsLabel)
 #: kmymoney/views/kaccountsview.ui:95 kmymoney/views/kcategoriesview.ui:97
@@ -19569,7 +19565,7 @@ msgid ""
 msgstr ""
 "Para que KMyMoney poida darlle información pormenorizada sobre o seu estado "
 "financeiro debe crear polo menos unha conta. Ata que non o faga, KMyMoney "
-"mostrará a páxina de benvida."
+"amosará a páxina de benvida."
 
 #: kmymoney/views/khomeview_p.h:444
 #, kde-format
@@ -19589,7 +19585,7 @@ msgstr "Contas de pagamento"
 #: kmymoney/views/khomeview_p.h:497
 #, kde-format
 msgid "Show KMyMoney welcome page"
-msgstr "Mostrar a páxina de benvida de KMyMoney"
+msgstr "Amosar a páxina de benvida de KMyMoney"
 
 #: kmymoney/views/khomeview_p.h:598
 #, kde-format
@@ -19625,13 +19621,13 @@ msgstr "Pagamentos futuros"
 #, kde-format
 msgctxt "Less..."
 msgid "Show fewer schedules on the list"
-msgstr "Mostrar menos planificacións na lista"
+msgstr "Amosar menos planificacións na lista"
 
 #: kmymoney/views/khomeview_p.h:770
 #, kde-format
 msgctxt "More..."
 msgid "Show more schedules on the list"
-msgstr "Mostrar máis planificacións na lista"
+msgstr "Amosar máis planificacións na lista"
 
 #: kmymoney/views/khomeview_p.h:802
 #, kde-format
@@ -19857,7 +19853,7 @@ msgid ""
 "Summary of the equities contained in this account, showing your holdings and "
 "their most recent price."
 msgstr ""
-"Resumo dos patrimonios contidos nesta conta, mostrando as participacións e o "
+"Resumo dos patrimonios contidos nesta conta, amosando as participacións e o "
 "prezo máis recente."
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_editSecurityButton)
@@ -19885,7 +19881,7 @@ msgstr "Novo libro maior"
 #: kmymoney/views/kmymoneyview.cpp:334
 #, kde-format
 msgid "Do you want to show <b>%1</b> column on every loaded view?"
-msgstr "Quere mostrar a columna <b>%1</b> en todas as vistas cargadas?"
+msgstr "Quere amosar a columna <b>%1</b> en todas as vistas cargadas?"
 
 #: kmymoney/views/kmymoneyview.cpp:336
 #, kde-format
@@ -19895,67 +19891,67 @@ msgstr "Quere agochar a columna <b>%1</b> en todas as vistas cargadas?"
 #: kmymoney/views/kmymoneyview.cpp:431
 #, kde-format
 msgid "Show home page"
-msgstr "Mostrar a páxina de inicio."
+msgstr "Amosar a páxina de inicio."
 
 #: kmymoney/views/kmymoneyview.cpp:432
 #, kde-format
 msgid "Show institutions page"
-msgstr "Mostrar a páxina das institucións."
+msgstr "Amosar a páxina das institucións."
 
 #: kmymoney/views/kmymoneyview.cpp:433
 #, kde-format
 msgid "Show accounts page"
-msgstr "Mostrar a páxina das contas."
+msgstr "Amosar a páxina das contas."
 
 #: kmymoney/views/kmymoneyview.cpp:434
 #, kde-format
 msgid "Show scheduled transactions page"
-msgstr "Mostrar a páxina dos asentos planificados."
+msgstr "Amosar a páxina dos asentos planificados."
 
 #: kmymoney/views/kmymoneyview.cpp:435
 #, kde-format
 msgid "Show categories page"
-msgstr "Mostrar a páxina das categorías."
+msgstr "Amosar a páxina das categorías."
 
 #: kmymoney/views/kmymoneyview.cpp:436
 #, kde-format
 msgid "Show tags page"
-msgstr "Mostrar a páxina das etiquetas."
+msgstr "Amosar a páxina das etiquetas."
 
 #: kmymoney/views/kmymoneyview.cpp:437
 #, kde-format
 msgid "Show payees page"
-msgstr "Mostrar a páxina dos beneficiarios."
+msgstr "Amosar a páxina dos beneficiarios."
 
 #: kmymoney/views/kmymoneyview.cpp:438
 #, kde-format
 msgid "Show ledgers page"
-msgstr "Mostrar a páxina dos libros maiores."
+msgstr "Amosar a páxina dos libros maiores."
 
 #: kmymoney/views/kmymoneyview.cpp:439
 #, kde-format
 msgid "Show investments page"
-msgstr "Mostrar a páxina dos investimentos."
+msgstr "Amosar a páxina dos investimentos."
 
 #: kmymoney/views/kmymoneyview.cpp:440
 #, kde-format
 msgid "Show reports page"
-msgstr "Mostrar a páxina dos informes."
+msgstr "Amosar a páxina dos informes."
 
 #: kmymoney/views/kmymoneyview.cpp:441
 #, kde-format
 msgid "Show budget page"
-msgstr "Mostrar a páxina dos orzamentos."
+msgstr "Amosar a páxina dos orzamentos."
 
 #: kmymoney/views/kmymoneyview.cpp:442
 #, kde-format
 msgid "Show forecast page"
-msgstr "Mostrar a páxina das previsións."
+msgstr "Amosar a páxina das previsións."
 
 #: kmymoney/views/kmymoneyview.cpp:443
 #, kde-format
 msgid "Show outbox page"
-msgstr "Mostrar a páxina da caixa de saída."
+msgstr "Amosar a páxina da caixa de saída."
 
 #: kmymoney/views/kmymoneyview.cpp:621
 #, kde-format
@@ -20020,7 +20016,7 @@ msgstr "Crea un beneficiario novo"
 #: kmymoney/views/kpayeesview.ui:47
 #, kde-format
 msgid "Use this to create a new payee."
-msgstr "Empregue isto para crear un beneficiario novo."
+msgstr "Use isto para crear un beneficiario novo."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_newButton)
 #: kmymoney/views/kpayeesview.ui:50 kmymoney/views/ktagsview.ui:58
@@ -20039,7 +20035,7 @@ msgstr "Cambiar o nome do beneficiario escollido"
 #: kmymoney/views/kpayeesview.ui:60
 #, kde-format
 msgid "Use this to start renaming the selected payee."
-msgstr "Empregue isto para cambiar o nome do beneficiario escollido."
+msgstr "Use isto para cambiar o nome do beneficiario escollido."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_deleteButton)
 #: kmymoney/views/kpayeesview.ui:70
@@ -20054,8 +20050,8 @@ msgid ""
 "Use this to delete the selected payee. You can also select multiple payees "
 "to be deleted."
 msgstr ""
-"Empregue isto para eliminar o beneficiario seleccionado. Pode seleccionar "
-"máis dun beneficiario para eliminar."
+"Use isto para eliminar o beneficiario seleccionado. Pode seleccionar máis "
+"dun beneficiario para eliminar."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_mergeButton)
 #: kmymoney/views/kpayeesview.ui:86
@@ -20067,7 +20063,7 @@ msgstr "Fusionar os beneficiarios seleccionados"
 #: kmymoney/views/kpayeesview.ui:89
 #, kde-format
 msgid "Use this to merge multiple selected payees."
-msgstr "Empregue isto para fusionar os beneficiarios seleccionados."
+msgstr "Use isto para fusionar os beneficiarios seleccionados."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_mergeButton)
 #: kmymoney/views/kpayeesview.ui:92
@@ -20178,8 +20174,7 @@ msgstr "Categoría predeterminada"
 #, kde-format
 msgid "Use the default category for new transactions with this payee"
 msgstr ""
-"Empregar a categoría predeterminada para os novos asentos con este "
-"beneficiario"
+"Usar a categoría predeterminada para os novos asentos con este beneficiario"
 
 #. i18n: ectx: property (text), widget (QLabel, labelDefaultCategory)
 #: kmymoney/views/kpayeesview.ui:463
@@ -20514,7 +20509,7 @@ msgstr "Crea unha etiqueta nova"
 #: kmymoney/views/ktagsview.ui:55
 #, kde-format
 msgid "Use this to create a new tag."
-msgstr "Empregue isto para crear unha etiqueta nova."
+msgstr "Use isto para crear unha etiqueta nova."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_renameButton)
 #: kmymoney/views/ktagsview.ui:65
@@ -20526,7 +20521,7 @@ msgstr "Cambiar o nome da etiqueta escollida"
 #: kmymoney/views/ktagsview.ui:68
 #, kde-format
 msgid "Use this to start renaming the selected tag."
-msgstr "Empregue isto para cambiar o nome da etiqueta escollida."
+msgstr "Use isto para cambiar o nome da etiqueta escollida."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_deleteButton)
 #: kmymoney/views/ktagsview.ui:78
@@ -20538,7 +20533,7 @@ msgstr "Eliminar a etiqueta escollida"
 #: kmymoney/views/ktagsview.ui:81
 #, kde-format
 msgid "Use this to delete the selected tag."
-msgstr "Empregue isto para eliminar a etiqueta escollida."
+msgstr "Use isto para eliminar a etiqueta escollida."
 
 #. i18n: ectx: property (title), widget (QGroupBox, detailsGroup)
 #: kmymoney/views/ktagsview.ui:215
@@ -20620,7 +20615,7 @@ msgstr "Abrir un ficheiro de datos existente"
 #: kmymoney/views/kwelcomepage.cpp:98
 #, kde-format
 msgid "Learn how to use KMyMoney"
-msgstr "Aprender a empregar KMyMoney"
+msgstr "Aprender a usar KMyMoney"
 
 #: kmymoney/views/kwelcomepage.cpp:101
 #, kde-format
@@ -20732,7 +20727,7 @@ msgstr "- Mellora da navegación co teclado."
 #: kmymoney/views/kwelcomepage.cpp:233
 #, kde-format
 msgid "- View columns are user selectable"
-msgstr "- Pódese seleccionar que columnas se mostran."
+msgstr "- Pódese seleccionar que columnas se amosan."
 
 #: kmymoney/views/kwelcomepage.cpp:234
 #, kde-format
@@ -21426,7 +21421,7 @@ msgstr "Dos últimos aos vindeiros 3 meses"
 #: kmymoney/widgets/kmymoneytagcombo.cpp:95
 #, kde-format
 msgid "Closed tags cannot be used."
-msgstr "Non poden empregarse as etiquetas pechadas."
+msgstr "Non poden usarse as etiquetas pechadas."
 
 #: kmymoney/widgets/kmymoneytagcombo.cpp:96
 #, kde-format
@@ -22024,7 +22019,7 @@ msgstr ""
 "É importante que continúe co mesmo extracto de conta que usou cando pospuxo "
 "a conciliación.\n"
 "\n"
-"Toda a información que ten introducido neste asistente mostrarase e os "
+"Toda a información que ten introducido neste asistente amosarase e os "
 "asentos xa compensados marcaranse cun «L»."
 
 #: kmymoney/wizards/kmymoneywizard_p.h:79
@@ -23838,7 +23833,7 @@ msgid ""
 "Use this to add any additional fees other than principal and interest "
 "contained in your periodical payments."
 msgstr ""
-"Empregue isto para engadir cargos que non sexan principal ou xuros nos seus "
+"Use isto para engadir cargos que non sexan principal ou xuros nos seus "
 "pagamentos periódicos."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel21_2)
@@ -23896,8 +23891,7 @@ msgstr ""
 msgid ""
 "Use this to create a new account to which the initial payment should be made"
 msgstr ""
-"Empregue isto para crear unha conta nova á cal se deba facer o pagamento "
-"inicial"
+"Use isto para crear unha conta nova á cal se deba facer o pagamento inicial"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_createNewAssetButton)
 #: kmymoney/wizards/newloanwizard/assetaccountwizardpage.ui:78
@@ -24194,7 +24188,7 @@ msgstr "Crear unha categoría nova"
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:50
 #, kde-format
 msgid "Use this to open the new account editor"
-msgstr "Empregue isto para abrir o editor de contas novas"
+msgstr "Use isto para abrir o editor de contas novas"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel20_2)
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.ui:19
@@ -24733,8 +24727,8 @@ msgid ""
 msgstr ""
 "\n"
 "KMyMoney calculou o empréstito como se mostra abaixo. Se quere aceptar estes "
-"valores empregue o botón «Rematar» para actualizar a súa conta; se non é o "
-"caso use o botón «Atrás» para modificar os datos."
+"valores use o botón «Rematar» para actualizar a súa conta; se non é o caso "
+"use o botón «Atrás» para modificar os datos."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel8_3_2_2_2_2_2)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel14)
@@ -25276,9 +25270,9 @@ msgid ""
 "by typing &lt;Ctrl-T&gt; or selecting the 'View -> Show Transaction Detail'\n"
 "menu entry? You can turn this feature off the same way.\n"
 msgstr ""
-"<p>…que pode mostrar todos os detalles dos asentos do rexistro\n"
+"<p>…que pode amosar todos os detalles dos asentos do rexistro\n"
 "tecleando &lt;Ctrl-T&gt; ou mediante o menú\n"
-"«Vista -> Mostrar os detalles dos asentos»?\n"
+"«Vista -> Amosar os detalles dos asentos»?\n"
 "Pode desactivala do mesmo xeito.\n"
 
 #. i18n: ectx: @info:tipoftheday
@@ -25309,7 +25303,7 @@ msgid ""
 "import format to QIF on the fly? See the QIF profile editor for\n"
 "more details.\n"
 msgstr ""
-"<p>…que pode empregar o seu propio programa externo para converter\n"
+"<p>…que pode usar o seu propio programa externo para converter\n"
 "calquera formato de importación a QIF? Consulte o editor de perfís QIF para\n"
 "obter máis detalles.\n"
 
