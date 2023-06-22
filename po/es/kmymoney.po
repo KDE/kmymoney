@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-20 00:52+0000\n"
-"PO-Revision-Date: 2023-06-17 05:56+0200\n"
+"PO-Revision-Date: 2023-06-20 01:05+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -21191,7 +21191,7 @@ msgstr "Nombre"
 #: kmymoney/widgets/kmmsearchwidget.ui:14
 #, kde-format
 msgid "Form"
-msgstr ""
+msgstr "Formulario"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
 #, kde-format
