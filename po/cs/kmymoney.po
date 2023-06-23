@@ -6145,10 +6145,9 @@ msgid "Value"
 msgstr "Hodnota"
 
 #: kmymoney/models/equitiesmodel.cpp:197 kmymoney/models/equitiesmodel.cpp:434
-#, fuzzy, kde-format
-#| msgid "&Last Update"
+#, kde-format
 msgid "Last Price Update"
-msgstr "Pos&lední aktualizace"
+msgstr ""
 
 #: kmymoney/models/equitiesmodel.cpp:540
 #: kmymoney/widgets/columnselector.cpp:215
@@ -20495,7 +20494,7 @@ msgstr "Název"
 #: kmymoney/widgets/kmmsearchwidget.ui:14
 #, kde-format
 msgid "Form"
-msgstr ""
+msgstr "Formulář"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
 #, kde-format
