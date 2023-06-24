@@ -119,17 +119,12 @@ KTransactionMergeDlg::KTransactionMergeDlg(QWidget* parent)
         // swap order
         d->sortOrder = (d->sortOrder == Qt::DescendingOrder) ? Qt::AscendingOrder : Qt::DescendingOrder;
         d->filterModel->setSortRole(eMyMoney::Model::IdRole);
-        d->filterModel->sort(0, d->sortOrder);
+        d->filterModel->QSortFilterProxyModel::sort(0, d->sortOrder);
 
         // and reselect the first entry
         const auto idx = d->filterModel->index(0, 0);
         d->ui->m_ledgerView->setSelectedJournalEntries(QStringList(idx.data(eMyMoney::Model::IdRole).toString()));
     });
-    // no selection possible
-    // d_ptr->ui->m_register->setSelectionMode(QTableWidget::NoSelection);
-
-    // override default and enable ok button right away
-    // d_ptr->ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
 }
 
 void KTransactionMergeDlg::addTransaction(const QString& journalEntryId)
@@ -137,6 +132,7 @@ void KTransactionMergeDlg::addTransaction(const QString& journalEntryId)
     Q_D(KTransactionSelectDlg);
 
     KTransactionSelectDlg::addTransaction(journalEntryId);
+    d->filterModel->QSortFilterProxyModel::sort(0, d->sortOrder);
     const auto idx = d->filterModel->index(0, 0);
     d->ui->m_ledgerView->setSelectedJournalEntries(QStringList(idx.data(eMyMoney::Model::IdRole).toString()));
 }
