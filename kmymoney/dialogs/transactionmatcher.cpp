@@ -48,8 +48,9 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
         throw MYMONEYEXCEPTION_CSTRING("Both splits must reference the same account for matching");
     }
 
-    auto account = MyMoneyFile::instance()->account(sm.accountId());
-    auto sec = MyMoneyFile::instance()->security(account.currencyId());
+    const auto file = MyMoneyFile::instance();
+    auto account = file->account(sm.accountId());
+    auto sec = file->security(account.currencyId());
 
     // Now match the transactions.
     //
@@ -148,10 +149,25 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
     tm.modifySplit(sm);
 
     ti.modifySplit(si);///
-    MyMoneyFile::instance()->modifyTransaction(tm);
+
+    if (file->isInvestmentTransaction(tm)) {
+        // find the security split and set the memo to the same as sm.memo
+        const auto splits = tm.splits();
+        for (auto split : splits) {
+            const auto acc = file->account(split.accountId());
+            const auto security = file->security(acc.currencyId());
+            if (!security.isCurrency()) {
+                split.setMemo(memo);
+                tm.modifySplit(split);
+                break;
+            }
+        }
+    }
+
+    file->modifyTransaction(tm);
     // Delete the end transaction if it was stored in the engine
     if (!ti.id().isEmpty())
-        MyMoneyFile::instance()->removeTransaction(ti);
+        file->removeTransaction(ti);
 }
 
 void TransactionMatcher::unmatch(const MyMoneyTransaction& _t, const MyMoneySplit& _s)
@@ -187,6 +203,7 @@ void TransactionMatcher::unmatch(const MyMoneyTransaction& _t, const MyMoneySpli
         sm.deletePair("kmm-orig-payee");
         sm.deletePair("kmm-orig-memo");
         sm.deletePair("kmm-match-split");
+        sm.setBankID(QString());
         tm.modifySplit(sm);
 
         MyMoneyFile::instance()->modifyTransaction(tm);
