@@ -4327,7 +4327,7 @@ msgid ""
 "selection lists."
 msgstr ""
 "Esta opción agocha na vista de categorías todas as categorías que non estean "
-"a ser usadas en polo menos un asento. Aínda así mostraranse nas listas de "
+"a ser usadas en polo menos un asento. Aínda así amosaranse nas listas de "
 "selección de categoría."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideUnusedCategory)
@@ -5227,7 +5227,7 @@ msgstr ""
 "as transaccións que estean na mesma categoría e teñan un importe con ±X %. "
 "De atoparse máis dun asento, amosaralle ao usuario unha lista con elas.\n"
 "\n"
-"Se escolle o 0% mostraranse todas as transaccións."
+"Se escolle o 0% amosaranse todas as transaccións."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:361
@@ -6313,7 +6313,7 @@ msgstr "Nova etiqueta"
 #: kmymoney/kmymoney.cpp:1494
 #, kde-format
 msgid "Rename tag"
-msgstr "Cambiar o nome da etiqueta"
+msgstr "Renomear a etiqueta"
 
 #: kmymoney/kmymoney.cpp:1495
 #, kde-format
@@ -14967,7 +14967,7 @@ msgstr "Novo orzamento"
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:303
 #, kde-format
 msgid "Rename budget"
-msgstr "Cambiar o nome do orzamento"
+msgstr "Renomear o orzamento"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:304
 #, kde-format
@@ -15034,7 +15034,7 @@ msgstr "Novo"
 #: kmymoney/plugins/views/budget/kbudgetview.ui:60
 #, kde-format
 msgid "Rename the current selected budget."
-msgstr "Cambiar o nome do orzamento escollido."
+msgstr "Renomear o orzamento escollido."
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_renameButton)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:63
@@ -20029,7 +20029,7 @@ msgstr "Novo"
 #: kmymoney/views/kpayeesview.ui:57
 #, kde-format
 msgid "Rename the current selected payee"
-msgstr "Cambiar o nome do beneficiario escollido"
+msgstr "Renomear o beneficiario escollido"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_renameButton)
 #: kmymoney/views/kpayeesview.ui:60
@@ -20515,7 +20515,7 @@ msgstr "Use isto para crear unha etiqueta nova."
 #: kmymoney/views/ktagsview.ui:65
 #, kde-format
 msgid "Rename the current selected tag"
-msgstr "Cambiar o nome da etiqueta escollida"
+msgstr "Renomear a etiqueta escollida"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_renameButton)
 #: kmymoney/views/ktagsview.ui:68
