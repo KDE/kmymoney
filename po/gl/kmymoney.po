@@ -3419,7 +3419,7 @@ msgid ""
 "selection lists."
 msgstr ""
 "Esta opción agocha na vista de categorías todas as categorías que non estean "
-"a ser usadas en polo menos un asento. Aínda así mostraranse nas listas de "
+"a ser usadas en polo menos un asento. Aínda así amosaranse nas listas de "
 "selección de categoría."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideUnusedCategory)
@@ -4355,7 +4355,7 @@ msgstr ""
 "as transaccións que estean na mesma categoría e teñan un importe con ±X %. "
 "De atoparse máis dun asento, amosaralle ao usuario unha lista con elas.\n"
 "\n"
-"Se escolle o 0% mostraranse todas as transaccións."
+"Se escolle o 0% amosaranse todas as transaccións."
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton2)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:395
@@ -5312,7 +5312,7 @@ msgstr "Nova etiqueta"
 #: kmymoney/kmymoney.cpp:1873
 #, kde-format
 msgid "Rename tag"
-msgstr "Cambiar o nome da etiqueta"
+msgstr "Renomear a etiqueta"
 
 #: kmymoney/kmymoney.cpp:1874
 #, kde-format
@@ -15126,7 +15126,7 @@ msgstr "Novo orzamento"
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:443
 #, kde-format
 msgid "Rename budget"
-msgstr "Cambiar o nome do orzamento"
+msgstr "Renomear o orzamento"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:444
 #, kde-format
