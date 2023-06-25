@@ -127,7 +127,7 @@ ReportsViewSettingsWidget::ReportsViewSettingsWidget(QWidget* parent) :
     Q_D(ReportsViewSettingsWidget);
     d->ui->setupUi(this);
 
-#if KIO_VERSION > QT_VERSION_CHECK(5, 108, 0)
+#if KIO_VERSION >= QT_VERSION_CHECK(5, 108, 0)
     d->ui->kcfg_CssFileDefault->setNameFilters({i18n("CSS files") + QLatin1String(" (*.css)"), i18n("All files") + QLatin1String(" (*)")});
 #else
     d->ui->kcfg_CssFileDefault->setFilter(QLatin1String("*.css|") + i18n("CSS files") + QLatin1String("\n*|") + i18n("All files"));
