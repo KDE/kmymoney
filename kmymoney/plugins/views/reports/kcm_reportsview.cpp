@@ -16,11 +16,12 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
 #include <KAboutData>
+#include <KLineEdit>
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KLineEdit>
+#include <KPluginFactory>
+#include <kio_version.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -126,10 +127,11 @@ ReportsViewSettingsWidget::ReportsViewSettingsWidget(QWidget* parent) :
     Q_D(ReportsViewSettingsWidget);
     d->ui->setupUi(this);
 
-    // once KF5 version greater than 5.108 is mandatory,
-    // replace the setUrlNameFilter() with setNameFilter()
-    // in the next statement and remove this comment.
-    d->ui->kcfg_CssFileDefault->setUrlNameFilter(QStringLiteral("*.css|CSS files *|All files (*)"));
+#if KIO_VERSION > QT_VERSION_CHECK(5, 108, 0)
+    d->ui->kcfg_CssFileDefault->setNameFilters({i18n("CSS files") + QLatin1String(" (*.css)"), i18n("All files") + QLatin1String(" (*)")});
+#else
+    d->ui->kcfg_CssFileDefault->setFilter(QLatin1String("*.css|") + i18n("CSS files") + QLatin1String("\n*|") + i18n("All files"));
+#endif
 
     // keep initial (default) css file in mind
     d->m_cssFileOld = KMyMoneySettings::cssFileDefault();

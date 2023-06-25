@@ -140,27 +140,6 @@ else()
     message(FATAL_ERROR "Remove the above logic from CMakeLists.txt since it is not needed anymore")
 endif()
 
-# For KF5 < 5.108 we need to fix method names that
-# have been deprecated but are not available before that version.
-# Once the KF5_MIN_VERSION of this project is >= 5.108 this
-# whole block can be removed. Make sure to make necessary
-# adjustments of the code in
-#
-# - kcm_reportsview.cpp
-if (${KF5_MIN_VERSION} VERSION_LESS "5.108")
-    if (${KF5_VERSION} VERSION_LESS "5.108")
-        add_definitions(
-            -DsetUrlNameFilter=setFilter
-        )
-    else()
-        add_definitions(
-            -DsetUrlNameFilter=setNameFilter
-        )
-    endif()
-else()
-    message(FATAL_ERROR "Remove the above logic from CMakeLists.txt since it is not needed anymore")
-endif()
-
 find_package(KF5 ${KF5_MIN_VERSION} OPTIONAL_COMPONENTS DocTools Holidays Contacts Activities)
 if (DEFINED AKONADI_MIN_VERSION)
   find_package(KF5 ${AKONADI_MIN_VERSION} OPTIONAL_COMPONENTS Akonadi IdentityManagement)
