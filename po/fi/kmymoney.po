@@ -7,13 +7,13 @@
 # Raimo Ikonen <raimo.ikonen@innotronics.fi>, 2008, 2009, 2010.
 # Marko Suvila <marko.suvila@gmail.com>, 2008, 2009.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016.
-# Tommi Nieminen <translator@legisign.org>, 2019, 2020, 2021, 2022.
+# Tommi Nieminen <translator@legisign.org>, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-20 00:52+0000\n"
-"PO-Revision-Date: 2022-10-11 11:38+0300\n"
+"PO-Revision-Date: 2023-06-07 16:30+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -20630,11 +20630,10 @@ msgid "Last reconciliation: %1"
 msgstr "Viimeksi yhteensovitettu"
 
 #: kmymoney/views/ledgerviewpage_p.h:98
-#, fuzzy, kde-format
-#| msgid "Never reconciled"
+#, kde-format
 msgctxt "@label:textbox Reconciliation date"
 msgid "Never reconciled"
-msgstr "Ei aiemmin yhteensovitettu"
+msgstr "Ei koskaan yhteensovitettu"
 
 #: kmymoney/views/ledgerviewpage_p.h:139
 #, fuzzy, kde-format
@@ -20651,15 +20650,13 @@ msgid "Cleared: %1"
 msgstr "Varmistettu: %1"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
-#, fuzzy, kde-format
-#| msgid "%1 of %2"
+#, kde-format
 msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
 msgid "%1 of %2: %3"
-msgstr "%1 / %2"
+msgstr "%1 / %2: %3"
 
 #: kmymoney/views/ledgerviewpage_p.h:151
-#, fuzzy, kde-format
-#| msgid "Balance: %1"
+#, kde-format
 msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Saldo: %1"
@@ -20833,18 +20830,14 @@ msgid "Difference: %1"
 msgstr "Erotus: %1"
 
 #: kmymoney/views/simpleledgerview.cpp:323
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid ""
-#| "The close button for this account has been removed because you are "
-#| "reconciling it. Finish or postpone the reconciliation to get it back."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "The close button for this account has been removed because you are "
 "reconciling it. Finish, cancel or postpone the reconciliation to get it back."
 msgstr ""
-"Sulje-nappi tälle tilille on poistettu koska yhteensovitus on kesken. Lykkää "
-"yhteensovitusta tai saata se valmiiksi palauttaaksesi napin."
+"Tilin sulkemispainike on poistettu, koska tiliä yhteensovitetaan. "
+"Viimeistele, peru tai lykkää yhteensovitusta palauttaaksesi sen näkyviin."
 
 #: kmymoney/views/simpleledgerview.cpp:433
 #, kde-format
@@ -20868,17 +20861,13 @@ msgid "Open website of <b>%1</b> in your browser."
 msgstr "Avaa verkkosivu <b>%1</b> verkkoselaimessasi."
 
 #: kmymoney/views/simpleledgerview.cpp:838
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid ""
-#| "The close button for this account has been removed because you are "
-#| "reconciling it. Finish or postpone the reconciliation to get it back."
+#, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
 "cancel or postpone the reconciliation first."
 msgstr ""
-"Sulje-nappi tälle tilille on poistettu koska yhteensovitus on kesken. Lykkää "
-"yhteensovitusta tai saata se valmiiksi palauttaaksesi napin."
+"Tätä näkymää ei voi sulkea, koska tilin yhteensovitus on kesken. "
+"Viimeistele, peru tai lykkää yhteensovitusta ensin."
 
 #: kmymoney/views/simpleledgerview.cpp:839
 #, kde-format
@@ -21043,31 +21032,25 @@ msgid "Split Options"
 msgstr "Jaotteluvalinnat"
 
 #: kmymoney/views/splitview.cpp:112
-#, fuzzy, kde-format
-#| msgctxt "create new institution"
-#| msgid "New..."
+#, kde-format
 msgctxt "@item:inmenu Create a split"
 msgid "New..."
 msgstr "Uusi…"
 
 #: kmymoney/views/splitview.cpp:127
-#, fuzzy, kde-format
-#| msgid "Edit..."
+#, kde-format
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
-msgstr "Muuta…"
+msgstr "Muokkaa…"
 
 #: kmymoney/views/splitview.cpp:132
-#, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
-#| msgid "Duplicate"
+#, kde-format
 msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
 msgstr "Monista"
 
 #: kmymoney/views/splitview.cpp:174
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"
 msgstr "Poista"
@@ -21080,33 +21063,28 @@ msgid "Tab Editor Options"
 msgstr "Tunnisteen asetukset"
 
 #: kmymoney/views/tabordereditor.cpp:426
-#, fuzzy, kde-format
-#| msgid "Start operation"
+#, kde-format
 msgctxt "@action:inmenu Move tab editor selector to this widget"
 msgid "Start from here"
-msgstr "Aloita"
+msgstr "Aloita tästä"
 
 #: kmymoney/views/tabordereditor.cpp:428
-#, fuzzy, kde-format
-#| msgctxt "Click 'Restart' to begin again."
-#| msgid "Restart"
+#, kde-format
 msgctxt "@action:inmenu Set tab editor selector to first widget"
 msgid "Restart"
-msgstr "Uudelleenkäynnistä"
+msgstr "Käynnistä uudelleen"
 
 #: kmymoney/views/tabordereditor.cpp:431
-#, fuzzy, kde-format
-#| msgid "Save changes"
+#, kde-format
 msgctxt "@action:inmenu Reset all changes"
 msgid "Undo changes"
-msgstr "Tallenna muutokset"
+msgstr "Kumoa muutokset"
 
 #: kmymoney/views/tabordereditor.cpp:433
-#, fuzzy, kde-format
-#| msgid "Use default"
+#, kde-format
 msgctxt "@action:inmenu Reset to application defaults"
 msgid "Reset to default"
-msgstr "Käytä oletusta"
+msgstr "Palaa oletuksiin"
 
 #: kmymoney/views/tabordereditor.cpp:438
 #, kde-format
@@ -21488,8 +21466,7 @@ msgid "Feedback content"
 msgstr "Palautteen sisältö"
 
 #: kmymoney/widgets/ktagcontainer.cpp:110
-#, fuzzy, kde-format
-#| msgid "Tag"
+#, kde-format
 msgctxt "@info:placeholder tag combo box"
 msgid "Tag"
 msgstr "Luokitus"
@@ -22520,10 +22497,9 @@ msgid "Next due date is prior to opening date"
 msgstr "Seuraava eräpäivä on ennen avauspäivää"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:117
-#, fuzzy, kde-format
-#| msgid "Next due date"
+#, kde-format
 msgid "Next due date is invalid"
-msgstr "Seuraava eräpäivä"
+msgstr "Seuraava määräpäivä on kelvoton"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:121
 #, kde-format
@@ -24215,11 +24191,10 @@ msgstr ""
 "hylätään. Jatketaanko?"
 
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:288
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirmation"
-msgstr "Tiedot"
+msgstr "Vahvistus"
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:73
 #, kde-format
