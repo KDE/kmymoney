@@ -126,6 +126,11 @@ ReportsViewSettingsWidget::ReportsViewSettingsWidget(QWidget* parent) :
     Q_D(ReportsViewSettingsWidget);
     d->ui->setupUi(this);
 
+    // once KF5 version greater than 5.108 is mandatory,
+    // replace the setUrlNameFilter() with setNameFilter()
+    // in the next statement and remove this comment.
+    d->ui->kcfg_CssFileDefault->setUrlNameFilter(QStringLiteral("*.css|CSS files *|All files (*)"));
+
     // keep initial (default) css file in mind
     d->m_cssFileOld = KMyMoneySettings::cssFileDefault();
 

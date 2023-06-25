@@ -140,10 +140,6 @@
         <property name="toolTip">
          <string>default style sheet</string>
         </property>
-        <property name="filter">
-         <string>*.css|CSS files
-*|All files (*)</string>
-        </property>
         <property name="kcfg_property" stdset="0">
          <cstring>text</cstring>
         </property>
@@ -170,19 +166,14 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>QSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>knuminput.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KUrlRequester</class>
-   <extends>QFrame</extends>
-   <header>kurlrequester.h</header>
-  </customwidget>
-  <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KUrlRequester</class>
+   <extends>QWidget</extends>
+   <header>kurlrequester.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
