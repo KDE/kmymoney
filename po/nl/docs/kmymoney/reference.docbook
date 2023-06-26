@@ -1172,7 +1172,7 @@
     <listitem>
       <para
 ><action
->Drukt de inhoud va de geselecteerde transactie in het geselecteerde register af, opgemaakt overeenkomstig het geselecteerde sjabloon.</action
+>Drukt de inhoud van de geselecteerde transactie in het geselecteerde register af, opgemaakt overeenkomstig het geselecteerde sjabloon.</action
 > Merk op dit menu-item alleen aanwezig is als in het register een transactie is geselecteerd. Lees de sectie over de configuratie van de <link linkend="details.settings.plugins"
 >Controle afdrukken</link
 > plugin voor meer informatie. </para>
