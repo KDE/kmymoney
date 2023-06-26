@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-20 00:52+0000\n"
+"POT-Creation-Date: 2023-06-26 00:51+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -16320,32 +16320,48 @@ msgstr "%1 egyenleg előzmény"
 msgid "Generated Report"
 msgstr "Előállított jelentés"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:74
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:75
 #, kde-format
 msgid "File %1 does not exist"
 msgstr "%1 fájl nem létezik"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:81
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:82
 #, kde-format
 msgid "it is not a plain file"
 msgstr "ez nem egyszerű szöveges fájl"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:85
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:86
 #, kde-format
 msgid "it is not readable"
 msgstr "nem olvasható"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:89
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:90
 #, kde-format
 msgid "it is empty"
 msgstr "üres"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:97
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:98
 #, kde-format
 msgid "There is a problem with file %1"
 msgid_plural "There are problems with file %1"
 msgstr[0] "a/az %1 fájllal probléma van"
 msgstr[1] "a/az %1 fájlokkal probléma van"
+
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
+#, fuzzy, kde-format
+#| msgctxt "CSV (Filefilter)"
+#| msgid "CSV files"
+msgid "CSS files"
+msgstr "CSV fájlok"
+
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
+#, fuzzy, kde-format
+#| msgctxt "All files (Filefilter)"
+#| msgid "All files"
+msgid "All files"
+msgstr "Összes fájl"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:102
 #, kde-format
@@ -17237,19 +17253,6 @@ msgstr "Alapértelmezett css fájl"
 #, kde-format
 msgid "default style sheet"
 msgstr "alapértelemezett stíluslap"
-
-#. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_CssFileDefault)
-#: kmymoney/plugins/views/reports/reportsviewsettings.ui:145
-#, fuzzy, kde-format
-#| msgid ""
-#| "*.css|CSS files\n"
-#| "*|All files"
-msgid ""
-"*.css|CSS files\n"
-"*|All files (*)"
-msgstr ""
-"*.css|CSS fájlok\n"
-"*|Minden fájl"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformance)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabCapitalGain)
@@ -25232,6 +25235,17 @@ msgstr ""
 "szabásához lesz felhasználva.</p>"
 
 #, fuzzy
+#~| msgid ""
+#~| "*.css|CSS files\n"
+#~| "*|All files"
+#~ msgid ""
+#~ "*.css|CSS files\n"
+#~ "*|All files (*)"
+#~ msgstr ""
+#~ "*.css|CSS fájlok\n"
+#~ "*|Minden fájl"
+
+#, fuzzy
 #~| msgid "Budget options"
 #~ msgctxt "@title:menu budget context menu"
 #~ msgid "Budget options"
@@ -26134,10 +26148,6 @@ msgstr ""
 
 #~ msgid "Marko Käning"
 #~ msgstr "Marko Käning"
-
-#~ msgctxt "CSV (Filefilter)"
-#~ msgid "CSV files"
-#~ msgstr "CSV fájlok"
 
 #~ msgctxt "HTML (Filefilter)"
 #~ msgid "HTML files"

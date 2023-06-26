@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-20 00:52+0000\n"
+"POT-Creation-Date: 2023-06-26 00:51+0000\n"
 "PO-Revision-Date: 2009-12-24 06:59-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -16003,27 +16003,27 @@ msgstr ""
 msgid "Generated Report"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:74
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:75
 #, kde-format
 msgid "File %1 does not exist"
 msgstr "Níl comhad %1 ann"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:81
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:82
 #, kde-format
 msgid "it is not a plain file"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:85
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:86
 #, kde-format
 msgid "it is not readable"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:89
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:90
 #, kde-format
 msgid "it is empty"
 msgstr ""
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:97
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:98
 #, kde-format
 msgid "There is a problem with file %1"
 msgid_plural "There are problems with file %1"
@@ -16032,6 +16032,20 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 msgstr[4] ""
+
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
+#, fuzzy, kde-format
+#| msgid "Saving file..."
+msgid "CSS files"
+msgstr "Comhad á shábháil..."
+
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
+#, fuzzy, kde-format
+#| msgid "QIF Files"
+msgid "All files"
+msgstr "Comhaid QIF"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:102
 #, kde-format
@@ -16922,19 +16936,6 @@ msgstr "Réamhshocrú"
 #, kde-format
 msgid "default style sheet"
 msgstr ""
-
-#. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_CssFileDefault)
-#: kmymoney/plugins/views/reports/reportsviewsettings.ui:145
-#, fuzzy, kde-format
-#| msgid ""
-#| "*.csv *.PRN *.txt|CSV Files\n"
-#| "*|All files"
-msgid ""
-"*.css|CSS files\n"
-"*|All files (*)"
-msgstr ""
-"*.csv *.PRN *.txt|Comhaid CSV\n"
-"*|Gach comhad"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformance)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabCapitalGain)
@@ -24647,6 +24648,17 @@ msgid ""
 "<p>All information is optional and only used to personalize your KMyMoney "
 "file.</p>"
 msgstr ""
+
+#, fuzzy
+#~| msgid ""
+#~| "*.csv *.PRN *.txt|CSV Files\n"
+#~| "*|All files"
+#~ msgid ""
+#~ "*.css|CSS files\n"
+#~ "*|All files (*)"
+#~ msgstr ""
+#~ "*.csv *.PRN *.txt|Comhaid CSV\n"
+#~ "*|Gach comhad"
 
 #, fuzzy
 #~| msgid "Sort options"

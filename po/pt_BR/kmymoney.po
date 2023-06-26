@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-20 00:52+0000\n"
+"POT-Creation-Date: 2023-06-26 00:51+0000\n"
 "PO-Revision-Date: 2023-03-15 16:16-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -16241,32 +16241,48 @@ msgstr "Histórico do saldo de %1"
 msgid "Generated Report"
 msgstr "Relatório Criado"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:74
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:75
 #, kde-format
 msgid "File %1 does not exist"
 msgstr "O arquivo %1 não existe"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:81
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:82
 #, kde-format
 msgid "it is not a plain file"
 msgstr "não é um arquivo de texto simples"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:85
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:86
 #, kde-format
 msgid "it is not readable"
 msgstr "não é legível"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:89
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:90
 #, kde-format
 msgid "it is empty"
 msgstr "está vazio"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:97
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:98
 #, kde-format
 msgid "There is a problem with file %1"
 msgid_plural "There are problems with file %1"
 msgstr[0] "Ocorreu um problema com o arquivo %1"
 msgstr[1] "Ocorreram problemas com o arquivo %1"
+
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
+#, fuzzy, kde-format
+#| msgctxt "CSV (Filefilter)"
+#| msgid "CSV files"
+msgid "CSS files"
+msgstr "Arquivos CSV"
+
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
+#, fuzzy, kde-format
+#| msgctxt "All files (Filefilter)"
+#| msgid "All files"
+msgid "All files"
+msgstr "Todos os arquivos"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:102
 #, kde-format
@@ -17148,16 +17164,6 @@ msgstr "Arquivo CSS padrão"
 #, kde-format
 msgid "default style sheet"
 msgstr "Folha de estilo padrão"
-
-#. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_CssFileDefault)
-#: kmymoney/plugins/views/reports/reportsviewsettings.ui:145
-#, kde-format
-msgid ""
-"*.css|CSS files\n"
-"*|All files (*)"
-msgstr ""
-"*.css|Arquivos CSS\n"
-"*|Todos os arquivos (*)"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformance)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabCapitalGain)
@@ -25339,6 +25345,13 @@ msgstr ""
 "<p>Todas informações são opcionais e são oferecidas somente para "
 "personalizar o seu arquivo KMyMoney.</p>"
 
+#~ msgid ""
+#~ "*.css|CSS files\n"
+#~ "*|All files (*)"
+#~ msgstr ""
+#~ "*.css|Arquivos CSS\n"
+#~ "*|Todos os arquivos (*)"
+
 #~ msgctxt "@title:menu budget context menu"
 #~ msgid "Budget options"
 #~ msgstr "Opções de orçamento"
@@ -26362,10 +26375,6 @@ msgstr ""
 
 #~ msgid "Allan Anderson ✝"
 #~ msgstr "Allan Anderson ✝"
-
-#~ msgctxt "CSV (Filefilter)"
-#~ msgid "CSV files"
-#~ msgstr "Arquivos CSV"
 
 #~ msgctxt "HTML (Filefilter)"
 #~ msgid "HTML files"

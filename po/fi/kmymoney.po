@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-20 00:52+0000\n"
+"POT-Creation-Date: 2023-06-26 00:51+0000\n"
 "PO-Revision-Date: 2023-06-07 16:30+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -16113,32 +16113,48 @@ msgstr "%1 saldohistoria"
 msgid "Generated Report"
 msgstr "Automaattisesti luotu raportti"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:74
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:75
 #, kde-format
 msgid "File %1 does not exist"
 msgstr "Tiedostoa %1 ei ole olemassa"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:81
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:82
 #, kde-format
 msgid "it is not a plain file"
 msgstr "ei ole tekstitiedosto"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:85
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:86
 #, kde-format
 msgid "it is not readable"
 msgstr "ei ole luettavissa"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:89
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:90
 #, kde-format
 msgid "it is empty"
 msgstr "on tyhjä"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:97
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:98
 #, kde-format
 msgid "There is a problem with file %1"
 msgid_plural "There are problems with file %1"
 msgstr[0] "Tiedostossa %1 on ongelma"
 msgstr[1] "Tiedostossa %1 on ongelmia"
+
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
+#, fuzzy, kde-format
+#| msgctxt "CSV (Filefilter)"
+#| msgid "CSV files"
+msgid "CSS files"
+msgstr "CSV-tiedostot"
+
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
+#, fuzzy, kde-format
+#| msgctxt "All files (Filefilter)"
+#| msgid "All files"
+msgid "All files"
+msgstr "Kaikki tiedostot"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:102
 #, kde-format
@@ -17018,16 +17034,6 @@ msgstr "CSS-oletustiedosto"
 #, kde-format
 msgid "default style sheet"
 msgstr "oletustyylitiedosto"
-
-#. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_CssFileDefault)
-#: kmymoney/plugins/views/reports/reportsviewsettings.ui:145
-#, kde-format
-msgid ""
-"*.css|CSS files\n"
-"*|All files (*)"
-msgstr ""
-"*.css|CSS-tiedostot\n"
-"*|Kaikki tiedostot (*)"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformance)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabCapitalGain)
@@ -25097,6 +25103,13 @@ msgstr ""
 "<p>Mitkään tiedot eivät ole pakollisia. Niitä käytetään vain KMyMoney-"
 "kirjanpitosi mukauttamiseen.</p>"
 
+#~ msgid ""
+#~ "*.css|CSS files\n"
+#~ "*|All files (*)"
+#~ msgstr ""
+#~ "*.css|CSS-tiedostot\n"
+#~ "*|Kaikki tiedostot (*)"
+
 #~ msgctxt "@title:menu budget context menu"
 #~ msgid "Budget options"
 #~ msgstr "Budjetin asetukset"
@@ -26089,10 +26102,6 @@ msgstr ""
 
 #~ msgid "Allan Anderson ✝"
 #~ msgstr "Allan Anderson ✝"
-
-#~ msgctxt "CSV (Filefilter)"
-#~ msgid "CSV files"
-#~ msgstr "CSV-tiedostot"
 
 #~ msgctxt "HTML (Filefilter)"
 #~ msgid "HTML files"

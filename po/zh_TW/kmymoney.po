@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-20 00:52+0000\n"
+"POT-Creation-Date: 2023-06-26 00:51+0000\n"
 "PO-Revision-Date: 2019-01-19 19:46+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -16315,31 +16315,47 @@ msgstr "%1 餘額歷史"
 msgid "Generated Report"
 msgstr "產生的報告"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:74
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:75
 #, kde-format
 msgid "File %1 does not exist"
 msgstr "檔案 %1 不存在"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:81
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:82
 #, kde-format
 msgid "it is not a plain file"
 msgstr "它不是純文字檔"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:85
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:86
 #, kde-format
 msgid "it is not readable"
 msgstr "它無法讀取"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:89
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:90
 #, kde-format
 msgid "it is empty"
 msgstr "它是空的"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:97
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:98
 #, kde-format
 msgid "There is a problem with file %1"
 msgid_plural "There are problems with file %1"
 msgstr[0] "檔案 %1 發生問題"
+
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
+#, fuzzy, kde-format
+#| msgctxt "CSV (Filefilter)"
+#| msgid "CSV files"
+msgid "CSS files"
+msgstr "CSV 檔"
+
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
+#, fuzzy, kde-format
+#| msgctxt "All files (Filefilter)"
+#| msgid "All files"
+msgid "All files"
+msgstr "所有檔案"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:102
 #, kde-format
@@ -17230,19 +17246,6 @@ msgstr "預設 CSS 檔"
 #, kde-format
 msgid "default style sheet"
 msgstr "預設樣式表"
-
-#. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_CssFileDefault)
-#: kmymoney/plugins/views/reports/reportsviewsettings.ui:145
-#, fuzzy, kde-format
-#| msgid ""
-#| "*|Gnucash files\n"
-#| "*|All files"
-msgid ""
-"*.css|CSS files\n"
-"*|All files (*)"
-msgstr ""
-" * |Gnucash 檔案\n"
-" *|所有檔案"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformance)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabCapitalGain)
@@ -25166,6 +25169,17 @@ msgstr ""
 "<p>所有的資訊都不是必填的，只是用於個人化您的 KMyMoney 檔案。</p>"
 
 #, fuzzy
+#~| msgid ""
+#~| "*|Gnucash files\n"
+#~| "*|All files"
+#~ msgid ""
+#~ "*.css|CSS files\n"
+#~ "*|All files (*)"
+#~ msgstr ""
+#~ " * |Gnucash 檔案\n"
+#~ " *|所有檔案"
+
+#, fuzzy
 #~| msgctxt "Menu header"
 #~| msgid "Budget options"
 #~ msgctxt "@title:menu budget context menu"
@@ -26092,10 +26106,6 @@ msgstr ""
 #~| msgid "Allan Anderson"
 #~ msgid "Allan Anderson ✝"
 #~ msgstr "Allan Anderson"
-
-#~ msgctxt "CSV (Filefilter)"
-#~ msgid "CSV files"
-#~ msgstr "CSV 檔"
 
 #~ msgctxt "HTML (Filefilter)"
 #~ msgid "HTML files"

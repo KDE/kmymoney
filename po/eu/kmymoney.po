@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-20 00:52+0000\n"
+"POT-Creation-Date: 2023-06-26 00:51+0000\n"
 "PO-Revision-Date: 2023-04-22 19:15+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -16066,32 +16066,48 @@ msgstr "%1-(r)en saldoaren historia"
 msgid "Generated Report"
 msgstr "Sortutako txostena"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:74
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:75
 #, kde-format
 msgid "File %1 does not exist"
 msgstr "%1 fitxategia ez da existitzen"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:81
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:82
 #, kde-format
 msgid "it is not a plain file"
 msgstr "ez da fitxategi arrunta"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:85
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:86
 #, kde-format
 msgid "it is not readable"
 msgstr "ezin da irakurri"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:89
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:90
 #, kde-format
 msgid "it is empty"
 msgstr "hutsik dago"
 
-#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:97
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:98
 #, kde-format
 msgid "There is a problem with file %1"
 msgid_plural "There are problems with file %1"
 msgstr[0] "Arazo bat dago %1 fitxategiarekin"
 msgstr[1] "Arazo batzuk daude %1 fitxategiarekin"
+
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
+#, fuzzy, kde-format
+#| msgctxt "CSV (Filefilter)"
+#| msgid "CSV files"
+msgid "CSS files"
+msgstr "CSV fitxategiak"
+
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
+#: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
+#, fuzzy, kde-format
+#| msgctxt "All files (Filefilter)"
+#| msgid "All files"
+msgid "All files"
+msgstr "Fitxategi guztiak"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:102
 #, kde-format
@@ -16973,16 +16989,6 @@ msgstr "CSS fitxategi lehenetsia"
 #, kde-format
 msgid "default style sheet"
 msgstr "estilo-orri lehenetsia"
-
-#. i18n: ectx: property (filter), widget (KUrlRequester, kcfg_CssFileDefault)
-#: kmymoney/plugins/views/reports/reportsviewsettings.ui:145
-#, kde-format
-msgid ""
-"*.css|CSS files\n"
-"*|All files (*)"
-msgstr ""
-"*.css|CSS fitxategiak\n"
-"*|Fitxategi guztiak (*)"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabPerformance)
 #. i18n: ectx: property (windowTitle), widget (QWidget, ReportTabCapitalGain)
@@ -25077,6 +25083,13 @@ msgstr ""
 "<p>Informazio hori aukerakoa da, eta zure KMyMoney fitxategia "
 "pertsonalizatzeko baino ez da erabiliko.</p>"
 
+#~ msgid ""
+#~ "*.css|CSS files\n"
+#~ "*|All files (*)"
+#~ msgstr ""
+#~ "*.css|CSS fitxategiak\n"
+#~ "*|Fitxategi guztiak (*)"
+
 #~ msgctxt "@title:menu budget context menu"
 #~ msgid "Budget options"
 #~ msgstr "Aurrekontu-aukerak"
@@ -26102,10 +26115,6 @@ msgstr ""
 
 #~ msgid "Allan Anderson ✝"
 #~ msgstr "Allan Anderson ✝"
-
-#~ msgctxt "CSV (Filefilter)"
-#~ msgid "CSV files"
-#~ msgstr "CSV fitxategiak"
 
 #~ msgctxt "HTML (Filefilter)"
 #~ msgid "HTML files"
