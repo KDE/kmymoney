@@ -1026,14 +1026,14 @@
 >Connector d'impressió de xecs</title>
 
 <para
->Com a exemple, hi ha un connector per a imprimir xecs, el qual s'inclou amb el codi font del &kmymoney;, i sempre haurà d'estar habilitat. Permet imprimir un xec basat en les dades d'una operació seleccionada, amb la disposició controlada per una plantilla &HTML;. Haureu d'emprar una plantilla que coincideixi amb els xecs prèviament impresos. De manera predeterminada es proporciona una plantilla incrustada. També podreu triar una plantilla personalitzada. Per a fer-ho, feu clic al botó <guibutton
+>Com a exemple, hi ha un connector per a imprimir xecs, el qual s'inclou amb el codi font del &kmymoney;, i sempre haurà d'estar habilitat. Permet imprimir un xec basat en les dades d'una operació seleccionada, amb la disposició controlada per una plantilla &HTML;. Haureu d'emprar una plantilla que coincideixi amb els xecs prèviament impresos. De manera predeterminada es proporciona una plantilla integrada. També podreu triar una plantilla personalitzada. Per a fer-ho, feu clic al botó <guibutton
 >configura</guibutton
 > (&configicon;) perquè es mostri el diàleg de configuració <guilabel
 >Impressió de xecs</guilabel
 >. A la part superior podreu marcar la casella per a utilitzar una plantilla personalitzada. A la dreta hi ha un botó que obrirà un selector de fitxers per a seleccionar un fitxer de plantilla alternatiu. </para>
 
 <para
->Un fitxer de plantilla és un fitxer &HTML;, en el qual s'utilitzen cadenes específiques per a fer referència als camps de l'operació, del compte i la institució actuals per a mostrar on s'imprimiran al xec. El &kmymoney; es distribueix de manera predeterminada amb una plantilla incrustada. En <ulink url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/"
+>Un fitxer de plantilla és un fitxer &HTML;, en el qual s'utilitzen cadenes específiques per a fer referència als camps de l'operació, del compte i la institució actuals per a mostrar on s'imprimiran al xec. El &kmymoney; es distribueix de manera predeterminada amb una plantilla integrada. En <ulink url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/"
 >aquesta</ulink
 > adreça trobareu el fitxer font &HTML; de la plantilla predeterminada, així com algunes plantilles addicionals. Hauríeu de poder utilitzar-ne una o modificar-la per a satisfer les vostres necessitats. Recordeu que només s'admet un <emphasis
 >subconjunt</emphasis

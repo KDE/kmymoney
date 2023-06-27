@@ -14689,7 +14689,7 @@ msgid ""
 "Executed: %1\n"
 "Error No %2: %3"
 msgstr ""
-"Fallou a creación cando se empregou a instrución\n"
+"Fallou a creación cando se usou a instrución\n"
 "Executouse: %1\n"
 "Nº de erro %2: %3"
 
