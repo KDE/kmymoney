@@ -194,7 +194,13 @@
 ></note>
 
 <para
->Només es requereix el nom al diàleg Institució nova, tots els altres camps són opcionals. Com amb el diàleg per a la informació personal, actualment el &kmymoney; no empra aquestes dades, però seran requerides per les versions futures per a certes característiques. En particular, es requerirà el Codi de banc i el BIC (codi d'identificació del banc) per a la banca en línia. </para>
+>Only the name is required in the New Institution Dialog, all other fields are optional. As with the personal information dialog, this data is not currently used by &kmymoney;, but will be required by future releases for certain features. In particular, the <ulink url="https://en.wikipedia.org/wiki/Bank_code"
+>Bank Code</ulink
+> and the <acronym
+> <ulink url="https://en.wikipedia.org/wiki/ISO_9362"
+>BIC (Bank Identifier Code)</ulink
+></acronym
+> will be required for online banking. </para>
 </sect2>
 </sect1>
 
