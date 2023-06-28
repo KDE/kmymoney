@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-26 00:51+0000\n"
-"PO-Revision-Date: 2023-06-17 12:08+0200\n"
+"PO-Revision-Date: 2023-06-26 10:06+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -16169,17 +16169,13 @@ msgstr[1] "Hi ha hagut alguns problemes amb el fitxer %1"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
-#, fuzzy, kde-format
-#| msgctxt "XML (Filefilter)"
-#| msgid "XML files"
+#, kde-format
 msgid "CSS files"
-msgstr "Fitxers XML"
+msgstr "Fitxers CSS"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
-#, fuzzy, kde-format
-#| msgctxt "All files (Filefilter)"
-#| msgid "All files"
+#, kde-format
 msgid "All files"
 msgstr "Tots els fitxers"
 
@@ -21249,7 +21245,7 @@ msgstr "Nom"
 #: kmymoney/widgets/kmmsearchwidget.ui:14
 #, kde-format
 msgid "Form"
-msgstr ""
+msgstr "Formulari"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
 #, kde-format
@@ -25226,10 +25222,3 @@ msgstr ""
 "\n"
 "<p>Tota la informació és optativa i s'utilitza per a personalitzar el fitxer "
 "de KMyMoney.</p>"
-
-#~ msgid ""
-#~ "*.css|CSS files\n"
-#~ "*|All files (*)"
-#~ msgstr ""
-#~ "*.css|Fitxers CSS\n"
-#~ "*|Tots els fitxers (*)"

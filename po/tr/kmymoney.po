@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-26 00:51+0000\n"
-"PO-Revision-Date: 2023-06-23 22:33+0300\n"
+"PO-Revision-Date: 2023-06-27 23:12+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -3723,7 +3723,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Delete quote source"
-msgstr "Kur kaynağını sil"
+msgstr "Kur Kaynağını Sil"
 
 #. i18n: ectx: property (whatsThis), widget (QGroupBox, groupParsing)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:36
@@ -6312,10 +6312,9 @@ msgid "Value"
 msgstr "Değer"
 
 #: kmymoney/models/equitiesmodel.cpp:197 kmymoney/models/equitiesmodel.cpp:434
-#, fuzzy, kde-format
-#| msgid "&Last Update"
+#, kde-format
 msgid "Last Price Update"
-msgstr "&Son Güncelleme"
+msgstr "Son Fiyat Güncellemesi"
 
 #: kmymoney/models/equitiesmodel.cpp:540
 #: kmymoney/widgets/columnselector.cpp:215
@@ -8028,7 +8027,7 @@ msgstr "Fatura"
 #: kmymoney/mymoney/mymoneyschedule.cpp:1011
 msgctxt "Scheduled transaction type"
 msgid "Deposit"
-msgstr "Para yatırma"
+msgstr "Yatırma"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1014
 msgctxt "Scheduled transaction type"
@@ -8048,7 +8047,7 @@ msgstr "Bilinmiyor"
 #: kmymoney/mymoney/mymoneyschedule.cpp:1030
 msgctxt "Scheduled Transaction payment type"
 msgid "Direct debit"
-msgstr "Otomatik ödeme"
+msgstr "Doğrudan tahsilat"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1033
 msgctxt "Scheduled Transaction payment type"
@@ -8058,7 +8057,7 @@ msgstr "Doğrudan yatırma"
 #: kmymoney/mymoney/mymoneyschedule.cpp:1036
 msgctxt "Scheduled Transaction payment type"
 msgid "Manual deposit"
-msgstr "Elle para yatırma"
+msgstr "Elle yatırma"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1039
 msgctxt "Scheduled Transaction payment type"
@@ -8202,7 +8201,7 @@ msgstr "Ödeme"
 #, kde-format
 msgctxt "Split header"
 msgid "Deposit"
-msgstr "Para Yatırma"
+msgstr "Yatırma"
 
 #: kmymoney/mymoney/statusmodel.cpp:28
 #, kde-format
@@ -8534,7 +8533,7 @@ msgstr "Ödeme"
 #, kde-format
 msgctxt "@title:column Deposit into account"
 msgid "Deposit"
-msgstr "Para Yatırma"
+msgstr "Yatır"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:60
 #, kde-format
@@ -8871,7 +8870,7 @@ msgstr "Faturalar"
 #, kde-format
 msgctxt "Schedule group"
 msgid "Deposits"
-msgstr "Para Yatırmalar"
+msgstr "Yatırmalar"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:154
 #, kde-format
@@ -14177,8 +14176,8 @@ msgstr[1] "%2 sonrası %1 taksit"
 #, kde-format
 msgid "%1 deposit after %2"
 msgid_plural "%1 deposits after %2"
-msgstr[0] "%2 sonrası %1 para yatırma"
-msgstr[1] "%2 sonrası %1 para yatırma"
+msgstr[0] "%2 sonrası %1 mevduat"
+msgstr[1] "%2 sonrası %1 mevduat"
 
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:231
 #, kde-format
@@ -14751,13 +14750,13 @@ msgstr "Gider olarak değiştir"
 #, kde-format
 msgctxt "@title:menu Budget context menu"
 msgid "Budget options"
-msgstr "Bütçe seçenekleri"
+msgstr "Bütçe Seçenekleri"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:501
 #, kde-format
 msgctxt "@title:menu Budget account context menu"
 msgid "Account options"
-msgstr "Hesap seçenekleri"
+msgstr "Hesap Seçenekleri"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:544
 #, kde-format
@@ -16015,17 +16014,13 @@ msgstr[1] "%1 dosyasında sorunlar var"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
-#, fuzzy, kde-format
-#| msgctxt "XML (Filefilter)"
-#| msgid "XML files"
+#, kde-format
 msgid "CSS files"
-msgstr "XML dosyaları"
+msgstr "CSS dosyaları"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
-#, fuzzy, kde-format
-#| msgctxt "All files (Filefilter)"
-#| msgid "All files"
+#, kde-format
 msgid "All files"
 msgstr "Tüm dosyalar"
 
@@ -19769,7 +19764,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Duplicate payee name"
-msgstr "Yinelenmiş alacaklı adı"
+msgstr "Yinelenmiş Alacaklı Adı"
 
 #: kmymoney/views/kpayeesview.cpp:176 kmymoney/views/kpayeesview.cpp:378
 #: kmymoney/views/kpayeesview.cpp:401
@@ -19925,21 +19920,15 @@ msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, defaultAccountTab)
 #: kmymoney/views/kpayeesview.ui:439
-#, fuzzy, kde-format
-#| msgid "Default category:"
+#, kde-format
 msgid "Default Category"
-msgstr "Öntanımlı kategori:"
+msgstr "Öntanımlı Kategori"
 
 #. i18n: ectx: property (text), widget (QCheckBox, checkEnableDefaultCategory)
 #: kmymoney/views/kpayeesview.ui:445
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use the default category for\n"
-#| "new transactions with this payee"
+#, kde-format
 msgid "Use the default category for new transactions with this payee"
-msgstr ""
-"Aktarımları ana hesap defterine\n"
-"eklemek için bunu kullanın"
+msgstr "Bu alacaklıyla yeni işlemler için öntanımlı kategoriyi kullan"
 
 #. i18n: ectx: property (text), widget (QLabel, labelDefaultCategory)
 #: kmymoney/views/kpayeesview.ui:454
@@ -19963,28 +19952,24 @@ msgstr "Hesap Numaraları"
 #: kmymoney/views/kpayeesview.ui:538
 #, kde-format
 msgid "Fetches the payee's data from your addressbook."
-msgstr "Alacaklının verisi adres defterinizden alınır."
+msgstr "Alacaklının verisini adres defterinizden getirir."
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_syncAddressbook)
 #: kmymoney/views/kpayeesview.ui:541
 #, kde-format
 msgid "Use this to fetch payee's data."
-msgstr "Alıcının verisini getirmek için bunu kullan."
+msgstr "Alacaklının verisini getirmek için bunu kullanın."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_syncAddressbook)
 #: kmymoney/views/kpayeesview.ui:544
-#, fuzzy, kde-format
-#| msgctxt "Sync payee"
-#| msgid "Sync"
+#, kde-format
 msgid "Sync"
-msgstr "Eşle"
+msgstr "Eşzamanla"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_updateButton)
 #. i18n: ectx: property (text), widget (QPushButton, m_updateButton)
 #: kmymoney/views/kpayeesview.ui:563 kmymoney/views/ktagsview.ui:336
-#, fuzzy, kde-format
-#| msgctxt "@action update quotes from online quote source"
-#| msgid "Update"
+#, kde-format
 msgid "Update"
 msgstr "Güncelle"
 
@@ -19998,19 +19983,19 @@ msgstr "Eşleşme yok"
 #, kde-format
 msgctxt "@item Match Payees name partially"
 msgid "Match Payees name (partial)"
-msgstr "Alacaklı adı eşleştir (kısmen)"
+msgstr "Alacaklılar adlarını eşleştir (kısımsal)"
 
 #: kmymoney/views/kpayeesview_p.h:135
 #, kde-format
 msgctxt "@item Match Payees name exactly"
 msgid "Match Payees name (exact)"
-msgstr "Alacaklı adı eşleştir (tam)"
+msgstr "Alacaklılar adlarını eşleştir (tam)"
 
 #: kmymoney/views/kpayeesview_p.h:136
 #, kde-format
 msgctxt "@item Search match in list"
 msgid "Match on a name listed below"
-msgstr "Aşağıda listelenmiş bir ad ile eşleştir"
+msgstr "Aşağıda listelenmiş bir adla eşleştir"
 
 #: kmymoney/views/kpayeesview_p.h:139
 #, kde-format
@@ -20022,7 +20007,7 @@ msgstr "Tümü"
 #, kde-format
 msgctxt "@item Show only used payees"
 msgid "Used"
-msgstr "Kullanılmış"
+msgstr "Kullanılan"
 
 #: kmymoney/views/kpayeesview_p.h:141
 #, kde-format
@@ -20031,8 +20016,7 @@ msgid "Unused"
 msgstr "Kullanılmayan"
 
 #: kmymoney/views/kpayeesview_p.h:178 kmymoney/views/ktagsview.cpp:184
-#, fuzzy, kde-format
-#| msgid "Search"
+#, kde-format
 msgctxt "Placeholder text"
 msgid "Search"
 msgstr "Ara"
@@ -20040,7 +20024,7 @@ msgstr "Ara"
 #: kmymoney/views/kpayeesview_p.h:350 kmymoney/views/ktagsview.cpp:212
 #, kde-format
 msgid "Balance: %1"
-msgstr "Bilanço: %1"
+msgstr "Bakiye: %1"
 
 #: kmymoney/views/kpayeesview_p.h:394 kmymoney/views/ktagsview.cpp:256
 #, kde-format
@@ -20055,15 +20039,15 @@ msgid ""
 "least one payee must remain so that the transaction/scheduled transaction or "
 "loan account can be reassigned."
 msgstr ""
-"En az bir işlem/programlanmış işlem ya da kredi hesabı hala bir alacaklı ile "
-"eşleştirilmiş durumda. Şu anda bütün alacaklılar seçilmiş. Ancak en az bir "
-"alacaklı işlem/programlanmış işlem ya da kredi hesabına yeniden atanmak "
-"üzere kalmalıdır."
+"Alacaklı tarafından en az bir işlem/planlanmış işlem veya kredi hesabına "
+"başvuruluyor. Şu anda tüm alacaklıları seçtiniz. Ancak, işlemin/planlanan "
+"işlemin veya kredi hesabının yeniden atanabilmesi için en az bir alacaklının "
+"kalması gerekir."
 
 #: kmymoney/views/kpayeesview_p.h:563
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
-msgstr "İşlem/bölüm alacaklısı yeniden atanamadı"
+msgstr "İşlemin/bölümün alacaklısı yeniden atanamıyor"
 
 #: kmymoney/views/kpayeesview_p.h:567
 #, kde-format
@@ -20073,7 +20057,7 @@ msgstr "Birleştirilecek bir şey yok."
 #: kmymoney/views/kpayeesview_p.h:650
 #, kde-format
 msgid "Unable to remove payee(s)"
-msgstr "Alacaklı(lar) silinemedi"
+msgstr "Alacaklılar kaldırılamıyor"
 
 #: kmymoney/views/kscheduledview.cpp:133
 #, kde-format
@@ -20081,65 +20065,64 @@ msgid ""
 "KMyMoney has detected some overdue scheduled transactions for this account. "
 "Do you want to enter those scheduled transactions now?"
 msgstr ""
-"K Param bu hesap için bazı vadesi geçmiş programlanmış işlemler belirledi. "
-"Bu programlanmış işlemleri şimdi girmek istiyor musunuz?"
+"K Param bu hesap için bazı vadesi geçmiş planlanmış işlemler belirledi. Bu "
+"planlı işlemleri şimdi girmek istiyor musunuz?"
 
 #: kmymoney/views/kscheduledview.cpp:214 kmymoney/views/kscheduledview.cpp:290
 #: kmymoney/views/kscheduledview.cpp:307
 #, kde-format
 msgid "Unknown scheduled transaction '%1'"
-msgstr "Bilinmeyen programlanmış işlem '%1'"
+msgstr "Bilinmeyen planlı işlem '%1'"
 
 #: kmymoney/views/kscheduledview.cpp:225
 #, kde-format
 msgid ""
 "<p>Are you sure you want to delete the scheduled transaction <b>%1</b>?</p>"
-msgstr ""
-"<p><b>%1</b> programlanmış işlemini gerçekten silmek istiyor musunuz?</p>"
+msgstr "<p><b>%1</b> planlı işlemini silmeyi gerçekten istiyor musunuz?</p>"
 
 #: kmymoney/views/kscheduledview.cpp:228
 #, kde-format
 msgid ""
 "In case of loan payments it is currently not possible to recreate the "
 "scheduled transaction."
-msgstr "Borç ödemeleri durumunda programlanmış işler yeniden oluşturamaz."
+msgstr ""
+"Kredi ödemeleri durumunda, planlanmış işlemi yeniden oluşturmak şu anda "
+"olanaklı değildir."
 
 #: kmymoney/views/kscheduledview.cpp:230
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Delete schedule"
-msgstr "Zamanlama gir"
+msgstr "Planı Sil"
 
 #: kmymoney/views/kscheduledview.cpp:238
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
-msgstr "'%1' programlanmış işlemi silinemedi"
+msgstr "'%1' planlı işlemi silinemiyor"
 
 #: kmymoney/views/kscheduledview.cpp:252
 #, kde-format
 msgctxt "Copy of scheduled transaction name"
 msgid "Copy of %1"
-msgstr "%1 ögesinin kopyası"
+msgstr "%1 kopyası"
 
 #: kmymoney/views/kscheduledview.cpp:273
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
-msgstr "Programlanmış işlemi çoğaltılamadı: '%1'"
+msgstr "Planlı işlem çoğaltılamıyor: '%1'"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonNew)
 #: kmymoney/views/kscheduledview.ui:31
 #, kde-format
 msgid "New Scheduled transaction..."
-msgstr "Yeni Zamanlanmış Aktarım..."
+msgstr "Yeni planlı işlem..."
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, m_searchWidget)
 #: kmymoney/views/kscheduledview.ui:38
-#, fuzzy, kde-format
-#| msgid "Filter"
+#, kde-format
 msgctxt "Placeholdertext in schedulesview"
 msgid "Filter"
-msgstr "Filtre"
+msgstr "Süzgeç"
 
 #: kmymoney/views/kscheduledview_p.h:246
 #, kde-format
@@ -20150,50 +20133,43 @@ msgid ""
 "KMyMoney will prompt you again next time it starts unless you manually enter "
 "it later."
 msgstr ""
-"Kayıt yerine girişi yapılan bu programlanmış işlemi durdurmak istediğinizden "
-"emin misiniz?\n"
+"Bu planlanmış işlemin kayıt edilmesini durdurmak istediğinizden emin "
+"misiniz?\n"
 "\n"
-"Daha sonra bu girişi elle yapmazsanız bir sonraki sefer bu işlem "
-"başladığında K Param sizi tekrar uyaracak."
+"Daha sonra elle girmediğiniz sürece, K Param bir sonraki başlatılışında size "
+"yeniden soracaktır."
 
 #: kmymoney/views/kscheduledview_p.h:248
-#, fuzzy, kde-format
-#| msgid "Enter schedule"
+#, kde-format
 msgctxt "@title:window"
 msgid "Stop entering schedule"
-msgstr "Zamanlama gir"
+msgstr "Plan Girmeyi Durdur"
 
 #: kmymoney/views/kscheduledview_p.h:347
-#, fuzzy, kde-format
-#| msgid ""
-#| "Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</"
-#| "b>?"
+#, kde-format
 msgid ""
 "<qt>Do you really want to skip the <b>%1</b> transaction scheduled for <b>"
 "%2</b>?</qt>"
 msgstr ""
-"<b>%1</b> işlemini <b>%2</b> için programlamayı gerçekten atlamak istiyor "
-"musunuz?"
+"<qt><b>%2</b> için olan <b>%1</b> işlem planını atlamayı gerçekten istiyor "
+"musunuz?</qt>"
 
 #: kmymoney/views/kscheduledview_p.h:350
-#, fuzzy, kde-format
-#| msgid "Edit scheduled transaction"
+#, kde-format
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
-msgstr "Zamanlanmış aktarımı düzenle"
+msgstr "Planlı İşlemi Atla"
 
 #: kmymoney/views/kscheduledview_p.h:363
-#, fuzzy, kde-format
-#| msgid "Unable to skip scheduled transaction <b>%1</b>."
+#, kde-format
 msgid "<qt>Unable to skip scheduled transaction <b>%1</b>.</qt>"
-msgstr "Planlanan <b>%1</b> işlemi atlanamadı."
+msgstr "<qt><b>%1</b> planlı işlemi atlanamıyor.</qt>"
 
 #: kmymoney/views/ksearchtransactiondlg.cpp:54
-#, fuzzy, kde-format
-#| msgid "Criteria"
+#, kde-format
 msgctxt "Criteria tab"
 msgid "Criteria"
-msgstr "Ölçüt"
+msgstr "Kriter"
 
 #: kmymoney/views/ksearchtransactiondlg.cpp:64
 #, kde-format
@@ -20205,8 +20181,8 @@ msgstr "İşlemleri ara"
 #, kde-format
 msgid "Found %1 matching splits"
 msgid_plural "Found %1 matching splits"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Eşleşen %1 bölme bulundu"
+msgstr[1] "Eşleşen %1 bölme bulundu"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_resultPage)
 #: kmymoney/views/ksearchtransactiondlg.ui:24
@@ -20218,12 +20194,10 @@ msgstr "Sonuç"
 #: kmymoney/views/ksearchtransactiondlg.ui:33
 #, kde-format
 msgid "F"
-msgstr "F"
+msgstr "B"
 
 #: kmymoney/views/ktagsview.cpp:93
-#, fuzzy, kde-format
-#| msgctxt "@action update quotes from online quote source"
-#| msgid "Update"
+#, kde-format
 msgctxt "@action:button Update button in tags view"
 msgid "Update"
 msgstr "Güncelle"
@@ -20238,13 +20212,13 @@ msgstr "Tümü"
 #, kde-format
 msgctxt "@item Show only used tags"
 msgid "Used"
-msgstr "Atanmış"
+msgstr "Atanan"
 
 #: kmymoney/views/ktagsview.cpp:102
 #, kde-format
 msgctxt "@item Show only unused tags"
 msgid "Unused"
-msgstr "Atanmamış"
+msgstr "Atanmayan"
 
 #: kmymoney/views/ktagsview.cpp:103
 #, kde-format
@@ -20261,7 +20235,7 @@ msgstr "Kapalı"
 #: kmymoney/views/ktagsview.cpp:288
 #, kde-format
 msgid "Do you want to save the changes for <b>%1</b>?"
-msgstr "<b>%1</b> için değişiklikleri kaydetmek istiyor musunuz?"
+msgstr "<b>%1</b> değişikliklerini kaydetmek istiyor musunuz?"
 
 #: kmymoney/views/ktagsview.cpp:375
 #, kde-format
@@ -20270,31 +20244,30 @@ msgid ""
 "multiple tags with the same identification name. Are you sure you would like "
 "to rename the tag?"
 msgstr ""
-"'%1' adlı bir etiket zaten var. Aynı adda birden fazla etiketin olması "
-"tavsiye edilir bir durum değildir. Etiketi yeniden adlandırmak istediğinize "
-"emin misiniz?"
+"'%1' adlı bir etiket halihazırda var. Aynı tanımlama adına sahip birden "
+"fazla etiketin olması tavsiye edilmez. Etiketi yeniden adlandırmak "
+"istediğinizden emin misiniz?"
 
 #: kmymoney/views/ktagsview.cpp:379
-#, fuzzy, kde-format
-#| msgid "Duplicate open"
+#, kde-format
 msgctxt "@title:window"
 msgid "Duplicate tag name"
-msgstr "Üstüste açma"
+msgstr "Yinelenmiş Etiket Adı"
 
 #: kmymoney/views/ktagsview.cpp:402 kmymoney/views/ktagsview.cpp:526
 #, kde-format
 msgid "Unable to modify tag"
-msgstr "Etiket değiştirilemedi"
+msgstr "Etiket değiştirilemiyor"
 
 #: kmymoney/views/ktagsview.cpp:802
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
-msgstr "İşlem/bölüm etiketi yeniden atanamadı"
+msgstr "İşlemin/bölmenin etiketi yeniden atanamıyor"
 
 #: kmymoney/views/ktagsview.cpp:814
 #, kde-format
 msgid "Unable to remove tag(s)"
-msgstr "Etiket(ler) silinemedi"
+msgstr "Etiketler kaldırılamıyor"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
 #: kmymoney/views/ktagsview.ui:44
@@ -20306,18 +20279,18 @@ msgstr "Etiketleriniz"
 #: kmymoney/views/ktagsview.ui:193
 #, kde-format
 msgid "Tag configuration"
-msgstr "Etiket yapılandırma"
+msgstr "Etiket yapılandırması"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #: kmymoney/views/ktagsview.ui:246
 #, kde-format
 msgid "Tag color:"
-msgstr "Etiket renk:"
+msgstr "Etiket rengi:"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:106
 #, kde-format
 msgid "Merge Transactions"
-msgstr "Aktarımları Birleştir"
+msgstr "İşlemleri Birleştir"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:108
 #, kde-format
@@ -20327,13 +20300,15 @@ msgid ""
 "values will be used in the resulting merged transaction.  If you want to use "
 "the other one press the exchange button on the right."
 msgstr ""
+"Birleştirilecek iki seçili işlem gösterilir. Ortaya çıkan birleştirilmiş "
+"işlemde en üstteki ve değerleri kullanılacaktır. Diğerini kullanmak "
+"istiyorsanız sağdaki değiş tokuş düğmesine basın."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:114
-#, fuzzy, kde-format
-#| msgid "Unable to match the selected transactions"
+#, kde-format
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
-msgstr "Seçili aktarımlar eşlenemedi"
+msgstr "İki işlemi değiş tokuş etmek için basın."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14
@@ -20359,46 +20334,41 @@ msgstr "KDE için özgür, kullanımı kolay kişisel finans yöneticisi"
 #: kmymoney/views/kwelcomepage.cpp:74
 #, kde-format
 msgid "Get started and setup accounts"
-msgstr "Başla ve hesapları ayarla"
+msgstr "Başlayın ve hesapları ayarlayın"
 
 #: kmymoney/views/kwelcomepage.cpp:76
 #, kde-format
 msgid "Open an existing data file"
-msgstr "Varolan bir K Param veri dosyası aç"
+msgstr "Var olan bir veri dosyası aç"
 
 #: kmymoney/views/kwelcomepage.cpp:78
-#, fuzzy, kde-format
-#| msgid "Learn how to use KMyMoney"
+#, kde-format
 msgid "Open the Handbook and learn how to use KMyMoney"
-msgstr "K Param uygulamasının nasıl kullanılacağını öğren"
+msgstr "El Kitabı'nı aç ve K Param'ın nasıl kullanılacağını öğren"
 
 #: kmymoney/views/ledgerview.cpp:204
-#, fuzzy, kde-format
-#| msgid "Go to account"
+#, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to account"
 msgstr "Hesaba git"
 
 #: kmymoney/views/ledgerview.cpp:206
-#, fuzzy, kde-format
-#| msgid "Go to payee"
+#, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to payee"
 msgstr "Alacaklıya git"
 
 #: kmymoney/views/ledgerview.cpp:251
-#, fuzzy, kde-format
-#| msgid "Go to '%1'"
+#, kde-format
 msgctxt "@action:inmenu open account"
 msgid "Go to '%1'"
-msgstr "Buraya git '%1'"
+msgstr "Git: '%1'"
 
 #: kmymoney/views/ledgerview.cpp:261
-#, fuzzy, kde-format
-#| msgid "Go to '%1'"
+#, kde-format
 msgctxt "@action:inmenu open payee"
 msgid "Go to '%1'"
-msgstr "Buraya git '%1'"
+msgstr "Git: '%1'"
 
 #: kmymoney/views/ledgerview.cpp:673
 #, kde-format
@@ -20407,87 +20377,75 @@ msgid ""
 "support editing two transactions in parallel. <a href=\"jumpToEditor\">Jump "
 "to current editor</a>"
 msgstr ""
+"Halihazırda başka bir görünümde bir işlemi düzenliyorsunuz. K Param, iki "
+"işlemin aynı anda düzenlenmesini desteklemez. <a href=\"jumpToEditor"
+"\">Geçerli düzenleyiciye atla</a>"
 
 #: kmymoney/views/ledgerview.cpp:771
-#, fuzzy, kde-format
-#| msgid "Transaction is missing a category assignment."
+#, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "İşlemde bir kategori ataması eksik."
 
 #: kmymoney/views/ledgerview.cpp:778
-#, fuzzy, kde-format
-#| msgid "The transaction has a missing assignment of <b>%1</b>."
+#, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "İşlemde <b>%1</b> ataması eksik."
 
 #: kmymoney/views/ledgerview.cpp:787
-#, fuzzy, kde-format
-#| msgid "This schedule will end at some time"
+#, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
-msgstr "Bu program yakın zamanda sonlanacak"
+msgstr "Bu plan, %1 tarihinden itibaren gecikti. Girmek için simgeye tıklayın."
 
 #: kmymoney/views/ledgerview.cpp:793
-#, fuzzy, kde-format
-#| msgid "First transaction does not match requirement for matching"
+#, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
-msgstr "Birinci işlem eşleştirme için gereksinimleri sağlamıyor"
+msgstr "Bu işlem içe aktarılmış. Kabul etmek için simgeye tıklayın."
 
 #: kmymoney/views/ledgerview.cpp:798
-#, fuzzy, kde-format
-#| msgid "First transaction does not match requirement for matching"
+#, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
-msgstr "Birinci işlem eşleştirme için gereksinimleri sağlamıyor"
+msgstr ""
+"Bu işlem eşleştirildi. Kabul etmek veya eşleştirmeyi kaldırmak için simgeye "
+"tıklayın."
 
 #: kmymoney/views/ledgerview.cpp:874
-#, fuzzy, kde-format
-#| msgid "Do you really want to delete the selected price entry?"
-#| msgid_plural "Do you really want to delete the selected price entries?"
+#, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
-msgstr ""
-"Seçilen fiyat girdisini gerçekten silmek istiyor musunuz?Seçilen fiyat "
-"girdilerini gerçekten silmek istiyor musunuz?"
+msgstr "Vadesi geçmiş planlı işlem girmeyin."
 
 #: kmymoney/views/ledgerview.cpp:875
-#, fuzzy, kde-format
-#| msgid "Enter scheduled transaction"
+#, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
-msgstr "Programlanmış işlem gir"
+msgstr "Vadesi geçmiş planlı işlemi girin."
 
 #: kmymoney/views/ledgerview.cpp:878
-#, fuzzy, kde-format
-#| msgid "Do you really want to delete the selected price entry?"
-#| msgid_plural "Do you really want to delete the selected price entries?"
+#, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
-msgstr ""
-"Seçilen fiyat girdisini gerçekten silmek istiyor musunuz?Seçilen fiyat "
-"girdilerini gerçekten silmek istiyor musunuz?"
+msgstr "Gecikme takvimine şimdi girmek istiyor musunuz?"
 
 #: kmymoney/views/ledgerview.cpp:879
-#, fuzzy, kde-format
-#| msgctxt "Dialog caption for 'Enter or schedule' dialog"
-#| msgid "Enter or schedule?"
+#, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
-msgstr "Gir ya da programla?"
+msgstr "Gecikme Takvimine Gir"
 
 #: kmymoney/views/ledgerview.cpp:899
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use this to schedule the transaction for later entry into the ledger."
+#, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
 "Detach the hidden (matched) transaction from the one shown and enter it into "
 "the ledger again."
-msgstr "Deftere sonradan girişi yapılacak işlemi planlamak için bunu kullan."
+msgstr ""
+"Gizli (eşleşen) işlemi gösterilen işlemden ayırın ve yeniden deftere girin."
 
 #: kmymoney/views/ledgerview.cpp:901
 #, kde-format
@@ -20496,21 +20454,22 @@ msgid ""
 "Accept the match as shown and remove the data of the hidden (matched) "
 "transaction."
 msgstr ""
+"Eşleşmeyi gösterildiği gibi kabul edin ve gizli (eşleşen) işlemin verisini "
+"kaldırın."
 
 #: kmymoney/views/ledgerview.cpp:905
-#, fuzzy, kde-format
-#| msgid "Do you really want to delete the selected transaction?"
-#| msgid_plural "Do you really want to delete all %1 selected transactions?"
+#, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
-msgstr "Seçilen işlemi gerçekten silmek istiyor musunuz?"
+msgstr ""
+"Eşleşen işlemi şimdi kabul etmek mi yoksa eşleştirmeyi kaldırmak mı "
+"istiyorsunuz?"
 
 #: kmymoney/views/ledgerview.cpp:906
-#, fuzzy, kde-format
-#| msgid "Accept"
+#, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
-msgstr "Kabul Et"
+msgstr "İşlemi Kabul Et veya Eşleşmesini Kaldır"
 
 #. i18n: ectx: property (text), widget (QLabel, m_leftLabel)
 #. i18n: ectx: property (text), widget (QLabel, m_centerLabel)
@@ -20522,104 +20481,89 @@ msgid "TextLabel"
 msgstr "MetinEtiketi"
 
 #: kmymoney/views/ledgerviewpage_p.h:96
-#, fuzzy, kde-format
-#| msgid "Last reconciled statement: %1"
+#, kde-format
 msgctxt "@label:textbox Reconciliation date"
 msgid "Last reconciliation: %1"
-msgstr "Son uzlaştırılmış finansal tablo: %1"
+msgstr "Son mutabakat: %1"
 
 #: kmymoney/views/ledgerviewpage_p.h:98
-#, fuzzy, kde-format
-#| msgid "Not reconciled"
+#, kde-format
 msgctxt "@label:textbox Reconciliation date"
 msgid "Never reconciled"
-msgstr "Uzlaştırılmamış"
+msgstr "Hiçbir zaman mutabakat yapılmamış"
 
 #: kmymoney/views/ledgerviewpage_p.h:139
-#, fuzzy, kde-format
-#| msgid "Investment: %1"
+#, kde-format
 msgctxt "@label:textbox Total value of investment"
 msgid "Investment value: %1%2"
-msgstr "Yatırım: %1"
+msgstr "Yatırım değeri: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:143
 #: kmymoney/views/reconciliationledgerviewpage.cpp:397
-#, fuzzy, kde-format
-#| msgctxt "Cleared balance"
-#| msgid "Cleared: %1"
+#, kde-format
 msgctxt "@label:textbox Cleared balance"
 msgid "Cleared: %1"
-msgstr "Temizlenmiş: %1"
+msgstr "Temizlendi: %1"
 
 #: kmymoney/views/ledgerviewpage_p.h:146
-#, fuzzy, kde-format
-#| msgid "%1 of %2"
+#, kde-format
 msgctxt "@label:textbox %1 sum symbol, %2 number of selected tx, %3 sum of tx"
 msgid "%1 of %2: %3"
-msgstr "%1 / %2"
+msgstr "%1/%2: %3"
 
 #: kmymoney/views/ledgerviewpage_p.h:151
-#, fuzzy, kde-format
-#| msgid "Balance: %1"
+#, kde-format
 msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
-msgstr "Bilanço: %1"
+msgstr "Bakiye: %1"
 
 #: kmymoney/views/newspliteditor.cpp:146
-#, fuzzy, kde-format
-#| msgid "The cost center this transaction should be assigned to."
+#, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid "The cost center this transaction should be assigned to."
-msgstr "Bu aktarımın atanacağı maliyet merkezi."
+msgstr "Bu işlemin atanması gereken masraf merkezi."
 
 #: kmymoney/views/newspliteditor.cpp:151
-#, fuzzy, kde-format
-#| msgid ""
-#| "A cost center assignment is required for a transaction in the selected "
-#| "category."
+#, kde-format
 msgctxt "@info:tooltip costcenter combo in split editor"
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
 "category."
-msgstr "Seçili kategoride aktarım için bir maliyet merkezi ataması gerekiyor."
+msgstr ""
+"Seçili kategorideki bir işlem için bir masraf merkezi ataması gereklidir."
 
 #: kmymoney/views/newspliteditor.cpp:162
-#, fuzzy, kde-format
-#| msgid "The cost center this transaction should be assigned to."
+#, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "The category this split should be assigned to."
-msgstr "Bu aktarımın atanacağı maliyet merkezi."
+msgstr "Bu bölmenin atanması gereken kategori."
 
 #: kmymoney/views/newspliteditor.cpp:203
-#, fuzzy, kde-format
-#| msgid ""
-#| "A cost center assignment is required for a transaction in the selected "
-#| "category."
+#, kde-format
 msgctxt "@info:tooltip category combo in split editor"
 msgid "A category assignment is required for a split."
-msgstr "Seçili kategoride aktarım için bir maliyet merkezi ataması gerekiyor."
+msgstr "Bölme için bir kategori ataması gereklidir."
 
 #: kmymoney/views/newspliteditor.cpp:212
 #: kmymoney/views/newtransactioneditor.cpp:362
 #, kde-format
 msgid "The check number used for this transaction."
-msgstr "Bu aktarım için kullanılan check numarası."
+msgstr "Bu işlem için kullanılan çek numarası."
 
 #: kmymoney/views/newspliteditor.cpp:221
 #: kmymoney/views/newtransactioneditor.cpp:372
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
-msgstr "Check numarası <b>%1</b> bu hesapta zaten kullanıldı."
+msgstr "<b>%1</b> çek numarası bu hesapta halihazırda kullanılmış."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, payToLabel)
 #: kmymoney/views/newspliteditor.ui:137
 #: kmymoney/views/newtransactioneditor.ui:95
 #: kmymoney/views/newtransactionform.ui:40
-#, fuzzy, kde-format
-#| msgid "Payer/Receiver"
+#, kde-format
 msgid "Payer/Payee"
-msgstr "Ödeyen/Alıcı"
+msgstr "Ödeyen/Alacaklı"
 
 #. i18n: ectx: property (text), widget (QLabel, costCenterLabel)
 #. i18n: ectx: property (text), widget (QLabel, label_8)
@@ -20628,25 +20572,25 @@ msgstr "Ödeyen/Alıcı"
 #: kmymoney/views/newtransactionform.ui:82
 #, kde-format
 msgid "Costcenter"
-msgstr "Maliyetmerkezi"
+msgstr "Maliyet Merkezi"
 
 #: kmymoney/views/newtransactioneditor.cpp:219
-#, fuzzy, kde-format
-#| msgid "The posting date of the transaction."
+#, kde-format
 msgid "The posting date is invalid."
-msgstr "Aktarımın gönderim tarihi."
+msgstr "Gönderim tarihi geçersiz."
 
 #: kmymoney/views/newtransactioneditor.cpp:248
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
-msgstr "Bu aktarımın atanacağı maliyet merkezi."
+msgstr "Bu işlemin atanması gereken masraf merkezi."
 
 #: kmymoney/views/newtransactioneditor.cpp:251
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
 "category."
-msgstr "Seçili kategoride aktarım için bir maliyet merkezi ataması gerekiyor."
+msgstr ""
+"Seçili kategorideki bir işlem için bir masraf merkezi ataması gereklidir."
 
 #: kmymoney/views/newtransactionform.cpp:113
 #, kde-format
@@ -20654,26 +20598,25 @@ msgctxt ""
 "@item:intext Amount, %1 transaction amount, %2 payment direction enclosed in "
 "parenthesis"
 msgid "%1 %2"
-msgstr ""
+msgstr "%1 %2"
 
 #: kmymoney/views/onlinebalancedelegate.cpp:143
 #, kde-format
 msgctxt "text for online balance value if not available"
 msgid "n/a"
-msgstr ""
+msgstr "yok"
 
 #: kmymoney/views/onlinebalancedelegate.cpp:144
 #, kde-format
 msgctxt "text for online balance date if not available"
 msgid "n/a"
-msgstr ""
+msgstr "yok"
 
 #: kmymoney/views/onlinebalancedelegate.cpp:176
-#, fuzzy, kde-format
-#| msgid "Opening Balance"
+#, kde-format
 msgctxt "Label in ledger for online balance row"
 msgid "Online Balance"
-msgstr "Açılış Bakiyesi"
+msgstr "Çevrimiçi Bakiye"
 
 #: kmymoney/views/payeeidentifierselectiondelegate.cpp:42
 #, kde-format
@@ -20691,11 +20634,10 @@ msgid "National Account Number"
 msgstr "Ulusal Hesap Numarası"
 
 #: kmymoney/views/reconciliationdelegate.cpp:107
-#, fuzzy, kde-format
-#| msgid "Reconciliation view"
+#, kde-format
 msgctxt "Ledger marker showing a reconciliation entry"
 msgid "Reconciliation"
-msgstr "Uzlaştırma görünümü"
+msgstr "Mutabakat"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:123
 #, kde-format
@@ -20703,7 +20645,7 @@ msgid ""
 "KMyMoney has detected transactions matching your reconciliation data.\n"
 "Would you like KMyMoney to clear these transactions for you?"
 msgstr ""
-"K Param sizin uzlaştırılmış verilerinizle eşleşen işlemler tespit etti.\n"
+"K Param sizin uzlaştırılmış verinizle eşleşen işlemler tespit etti.\n"
 "K Param uygulamasının sizin adınıza bu işlemleri temizlemesini ister misiniz?"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:255
@@ -20713,25 +20655,23 @@ msgid ""
 "between your bank statement and the transactions marked as cleared.\n"
 "Are you sure you want to finish the reconciliation?"
 msgstr ""
-"Banka dekontunuz ve silinmiş olarak işaretlenmiş işlemler arasındaki "
-"farklılıklarla bu hesabın uzlaştırma işlemini bitirmek üzeresiniz.\n"
-"Uzlaştırma işlemini bitirmek istediğinizden emin misiniz?"
+"Banka hesap özetiniz ile temizlendi olarak imlenmiş işlemler arasındaki "
+"farkla bu hesabın mutabakatını bitirmek üzeresiniz.\n"
+"Mutabakatı bitirmek istediğinizden emin misiniz?"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:258
 #, kde-format
 msgid "Confirm end of reconciliation"
-msgstr "Uzlaştırma sonucunu onayla"
+msgstr "Mutabakat bitişini onayla"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:396
-#, fuzzy, kde-format
-#| msgid "Statement: %1"
+#, kde-format
 msgctxt "@label:textbox Statement balance"
 msgid "Statement: %1"
-msgstr "Bilanço: %1"
+msgstr "Özet: %1"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:398
-#, fuzzy, kde-format
-#| msgid "Difference: %1"
+#, kde-format
 msgctxt "@label:textbox Difference to statement"
 msgid "Difference: %1"
 msgstr "Fark: %1"
@@ -20743,6 +20683,8 @@ msgid ""
 "The close button for this account has been removed because you are "
 "reconciling it. Finish, cancel or postpone the reconciliation to get it back."
 msgstr ""
+"Mutabakat yaptığınız için bu hesabın kapat düğmesi kaldırıldı. Geri almak "
+"için mutabakatı bitirin, iptal edin veya erteleyin."
 
 #: kmymoney/views/simpleledgerview.cpp:433
 #, kde-format
@@ -20751,6 +20693,8 @@ msgid ""
 "This page shows the accounts ledger. Currently, no accounts exist so this "
 "text is shown instead."
 msgstr ""
+"Bu sayfa hesap defterini gösterir. Şu anda hiçbir hesap bulunmadığından "
+"bunun yerine bu metin gösteriliyor."
 
 #: kmymoney/views/simpleledgerview.cpp:436
 #, kde-format
@@ -20759,11 +20703,13 @@ msgid ""
 "This page shows the accounts ledger. Currently, no accounts are selected so "
 "this text is shown instead."
 msgstr ""
+"Bu sayfa hesap defterini gösterir. Şu anda seçili hesap olmadığından bu "
+"metin gösteriliyor."
 
 #: kmymoney/views/simpleledgerview.cpp:670
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
-msgstr ""
+msgstr "Tarayıcınızda <b>%1</b> web sitesini açın."
 
 #: kmymoney/views/simpleledgerview.cpp:838
 #, kde-format
@@ -20771,25 +20717,24 @@ msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
 "cancel or postpone the reconciliation first."
 msgstr ""
+"Hesabın mutabakatını yaptığınız için bu görünümü kapatamazsınız. Önce "
+"mutabakatı bitirin, iptal edin veya erteleyin."
 
 #: kmymoney/views/simpleledgerview.cpp:839
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"
-msgstr ""
+msgstr "Görünüm Kapatılamaz"
 
 #. i18n: ectx: property (text), widget (QLabel, l2)
 #: kmymoney/views/simpleledgerview.ui:72
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>Flag this account to be an opening balance account</"
-#| "p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>Once an account or category is selected its "
 "transactions will be presented here.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Bu hesabı bir açılış bakiyesi hesabı olarak "
-"işaretleyin.</p></body></html>"
+"<html><head/><body><p>Bir hesap veya kategori seçildiğinde işlemleri burada "
+"gösterilir.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, l3)
 #: kmymoney/views/simpleledgerview.ui:85
@@ -20799,14 +20744,15 @@ msgid ""
 "automatically after KMyMoney opened the file or database. Use the + button "
 "on the tabbar above to select an account.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Sık kullanılan olarak imlenmiş hesaplar, K Param "
+"dosyayı veya veritabanını açtığında kendiliğinden açılırlar. Bir hesap "
+"seçmek için sekme çubuğundaki + düğmesini kullanın.</p></body></html>"
 
 #: kmymoney/views/splitdialog.cpp:317
-#, fuzzy, kde-format
-#| msgctxt "Split editor summary"
-#| msgid "Unassigned"
+#, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
-msgstr "Atanmamış"
+msgstr "Fazla Atanmış"
 
 #: kmymoney/views/splitdialog.cpp:320
 #, kde-format
@@ -20818,25 +20764,25 @@ msgstr "Atanmamış"
 #: kmymoney/views/splitdialog.ui:547
 #, kde-format
 msgid "Sum of splits"
-msgstr "Bölümlerin toplamı"
+msgstr "Bölmelerin toplamı"
 
 #. i18n: ectx: property (text), item, widget (QTableWidget, summaryView)
 #: kmymoney/views/splitdialog.ui:585
 #, kde-format
 msgid "Transaction amount"
-msgstr "Aktarım tutarı"
+msgstr "İşlem tutarı"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, newSplitButton)
 #: kmymoney/views/splitdialog.ui:630
 #, kde-format
 msgid "Create a new split"
-msgstr "Yeni bir bölüntü oluştur"
+msgstr "Yeni bir bölme oluştur"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, mergeButton)
 #: kmymoney/views/splitdialog.ui:653
 #, kde-format
 msgid "Merges splits with the same category to one split"
-msgstr "Aynı kategorili bölümleri bir bölüme birleştirir"
+msgstr "Aynı kategoriye sahip bölmeleri bir bölmede birleştirir"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, mergeButton)
 #: kmymoney/views/splitdialog.ui:656
@@ -20846,9 +20792,9 @@ msgid ""
 "keep them as a single split, press this button. The amount for identical "
 "categories will be added and stored in a single split for that category."
 msgstr ""
-"Aynı kategori için birden fazla bölünmüş hisseniz varsa ve hepsini tekbir "
-"hissede tutmak isterseniz, bu düğmeye basın. Benzer kategoriler için toplam "
-"bu kategoride tek bir hisseye eklenir ve kaydedilir."
+"Aynı kategoride birden fazla bölünmüş girişiniz varsa ve bunları tek bir "
+"bölme olarak tutmak istiyorsanız bu düğmeye basın. Aynı kategoriler için "
+"tutar eklenir ve o kategori için tek bir bölmede saklanır."
 
 #. i18n: ectx: property (text), widget (QPushButton, mergeButton)
 #: kmymoney/views/splitdialog.ui:659
@@ -20864,43 +20810,45 @@ msgid ""
 "'Unassigned' amount will be added or 'Overassigned' amount\n"
 "will be subtracted from the amount of the selected split."
 msgstr ""
+"Geçerli bölmeye 'Atanmamış' veya 'Fazla Atanmış' tutarı uygulayın.\n"
+"'Atanmayan' tutar eklenecek veya 'Fazla Atanan' tutar, seçilen bölmenin\n"
+"tutarından çıkarılacaktır."
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
 #: kmymoney/views/splitdialog.ui:671
-#, fuzzy, kde-format
-#| msgid "Difference"
+#, kde-format
 msgid "Apply Difference"
-msgstr "Fark"
+msgstr "Farkı Uygula"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
 #: kmymoney/views/splitdialog.ui:678
 #, kde-format
 msgid "Removes all splits that have a value of zero"
-msgstr "Değeri sıfır olan bütün bölümleri çıkar"
+msgstr "Değeri sıfır olan bütün bölmeleri kaldırır"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteZeroButton)
 #: kmymoney/views/splitdialog.ui:681
 #, kde-format
 msgid "Delete &Zero"
-msgstr "&Sıfır Olanları temizle"
+msgstr "&Sıfırları Sil"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteAllButton)
 #: kmymoney/views/splitdialog.ui:695
 #, kde-format
 msgid "Clear all splits"
-msgstr "Bütün bölümleri sil"
+msgstr "Tüm bölmeleri temizle"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, deleteAllButton)
 #: kmymoney/views/splitdialog.ui:698
 #, kde-format
 msgid "Use this to delete all splits of this transaction."
-msgstr "Bu aktarımın bölümlerini silmek için bunu kullan."
+msgstr "Bu işlemin tüm bölümlerini silmek için bunu kullanın."
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteAllButton)
 #: kmymoney/views/splitdialog.ui:701
 #, kde-format
 msgid "Delete &All"
-msgstr "&Tümünü sil"
+msgstr "&Tümünü Sil"
 
 #. i18n: ectx: property (text), widget (QPushButton, okButton)
 #: kmymoney/views/splitdialog.ui:721
@@ -20915,89 +20863,76 @@ msgid "&Cancel"
 msgstr "İ&ptal"
 
 #: kmymoney/views/splitview.cpp:110
-#, fuzzy, kde-format
-#| msgid "Split Options"
+#, kde-format
 msgctxt "@title:menu split context menu"
 msgid "Split Options"
-msgstr "Ayırma Seçenekleri"
+msgstr "Bölme Seçenekleri"
 
 #: kmymoney/views/splitview.cpp:112
-#, fuzzy, kde-format
-#| msgctxt "create new institution"
-#| msgid "New..."
+#, kde-format
 msgctxt "@item:inmenu Create a split"
 msgid "New..."
 msgstr "Yeni..."
 
 #: kmymoney/views/splitview.cpp:127
-#, fuzzy, kde-format
-#| msgid "Edit..."
+#, kde-format
 msgctxt "@item:inmenu Edit a split"
 msgid "Edit..."
 msgstr "Düzenle..."
 
 #: kmymoney/views/splitview.cpp:132
-#, fuzzy, kde-format
-#| msgctxt "Duplicate transaction"
-#| msgid "Duplicate"
+#, kde-format
 msgctxt "@item:inmenu Duplicate selected split(s)"
 msgid "Duplicate"
 msgstr "Çoğalt"
 
 #: kmymoney/views/splitview.cpp:174
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@item:inmenu Delete selected split(s)"
 msgid "Delete"
 msgstr "Sil"
 
 #: kmymoney/views/tabordereditor.cpp:423
-#, fuzzy, kde-format
-#| msgid "Tag options"
+#, kde-format
 msgctxt "@title:menu"
 msgid "Tab Editor Options"
-msgstr "Etiket seçenekleri"
+msgstr "Etiket Düzenleyicisi Seçenekleri"
 
 #: kmymoney/views/tabordereditor.cpp:426
-#, fuzzy, kde-format
-#| msgid "Start operation"
+#, kde-format
 msgctxt "@action:inmenu Move tab editor selector to this widget"
 msgid "Start from here"
-msgstr "İşleme başla"
+msgstr "Buradan Başlat"
 
 #: kmymoney/views/tabordereditor.cpp:428
-#, fuzzy, kde-format
-#| msgid "Restart"
+#, kde-format
 msgctxt "@action:inmenu Set tab editor selector to first widget"
 msgid "Restart"
 msgstr "Yeniden Başlat"
 
 #: kmymoney/views/tabordereditor.cpp:431
-#, fuzzy, kde-format
-#| msgid "Save changes"
+#, kde-format
 msgctxt "@action:inmenu Reset all changes"
 msgid "Undo changes"
-msgstr "Değişiklikleri kaydet"
+msgstr "Değişiklikleri Geri Al"
 
 #: kmymoney/views/tabordereditor.cpp:433
-#, fuzzy, kde-format
-#| msgid "Use default"
+#, kde-format
 msgctxt "@action:inmenu Reset to application defaults"
 msgid "Reset to default"
-msgstr "Öntanımlıı kullan"
+msgstr "Öntanımlılara Sıfırla"
 
 #: kmymoney/views/tabordereditor.cpp:438
 #, kde-format
 msgctxt "@action:inmenu Open tab order dialog"
 msgid "Tab Order List..."
-msgstr ""
+msgstr "Sekme Sırası Listesi..."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, TabOrderEditor)
 #: kmymoney/views/tabordereditor.ui:14
-#, fuzzy, kde-format
-#| msgid "Price Editor"
+#, kde-format
 msgid "Tab Order Editor"
-msgstr "Fiyat Düzenleyici"
+msgstr "Fiyat Sırası Düzenleyicisi"
 
 #: kmymoney/widgets/amountedit.cpp:245
 #, kde-format
@@ -21005,18 +20940,20 @@ msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid ""
 "Value are presented in %1. Press this button to switch the currency to %2."
 msgstr ""
+"Değerler %1 olarak sunulur. Para birimini %2 olarak değiştirmek için bu "
+"düğmeye basın."
 
 #: kmymoney/widgets/amountedit.cpp:252
 #, kde-format
 msgctxt "@info:tooltip Swap currencies for entry/display"
 msgid "Values are presented in %1."
-msgstr ""
+msgstr "Değerler %1 olarak sunulur."
 
 #. i18n: ectx: property (placeholderText), widget (AmountEdit, debitAmount)
 #: kmymoney/widgets/creditdebitedit.ui:42
 #, kde-format
 msgid "Deposit"
-msgstr "Depozit"
+msgstr "Mevduat"
 
 #: kmymoney/widgets/daterangedlg.cpp:72
 #, kde-format
@@ -21025,13 +20962,15 @@ msgid ""
 "The date provided as start lies past the one provided for the end of the "
 "search. This will result in an empty set."
 msgstr ""
+"Başlangıç olarak sağlanan tarih, aramanın sonu için verilen tarihin "
+"ilerisindedir. Bu boş bir küme ile sonuçlanacaktır."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5)
 #: kmymoney/widgets/daterangedlg.ui:22
 #, kde-format
 msgctxt "From (Date)"
 msgid "From"
-msgstr "Başlangıç Tarihi"
+msgstr "Başlangıç tarihi"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6)
 #: kmymoney/widgets/daterangedlg.ui:35
@@ -21061,6 +21000,16 @@ msgid ""
 "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
 "\"><br /></p></body></html>"
 msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+"\"><br /></p></body></html>"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_accountList)
 #: kmymoney/widgets/kaccounttemplateselector.ui:109
@@ -21073,14 +21022,13 @@ msgstr "Ad"
 #: kmymoney/widgets/kmmsearchwidget.ui:14
 #, kde-format
 msgid "Form"
-msgstr ""
+msgstr "Form"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
-#, fuzzy, kde-format
-#| msgid "Use this to open the profile editor"
+#, kde-format
 msgctxt "@info:tooltip icon in category to open the split editor"
 msgid "Click this icon to open the split editor"
-msgstr "Profil düzenleyiciyi açmak için bunu kullanın"
+msgstr "Bölme düzenleyicisini açmak için bu simgeye tıkla"
 
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:69
 #, kde-format
@@ -21092,81 +21040,81 @@ msgstr "Tümü"
 #, kde-format
 msgctxt "No account"
 msgid "None"
-msgstr "Hiçbiri"
+msgstr "Yok"
 
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:346
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:347
 #, kde-format
 msgid "Favorites"
-msgstr "Yer İmleri"
+msgstr "Sık Kullanılanlar"
 
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:43
 #, kde-format
 msgid "Buy shares"
-msgstr "Hisse al"
+msgstr "Hisseler al"
 
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:44
 #, kde-format
 msgid "Sell shares"
-msgstr "Hisse sat"
+msgstr "Hisseler sat"
 
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:46
 #, kde-format
 msgid "Reinvest dividend"
-msgstr "Temettüyle yeniden yatırım yap"
+msgstr "Temettüyü yeniden yatır"
 
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:48
 #, kde-format
 msgid "Add shares"
-msgstr "Hisse Ekle"
+msgstr "Hisseler ekle"
 
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:49
 #, kde-format
 msgid "Remove shares"
-msgstr "Hisse kaldır"
+msgstr "Hisseler kaldır"
 
 #: kmymoney/widgets/kmymoneyactivitycombo.cpp:50
 #, kde-format
 msgid "Split shares"
-msgstr "Hisse böl"
+msgstr "Hisseler böl"
 
 #: kmymoney/widgets/kmymoneybriefschedule.cpp:65
 #, kde-format
 msgid "%1 of %2"
-msgstr "%1 / %2"
+msgstr "%1/%2"
 
 #: kmymoney/widgets/kmymoneybriefschedule.cpp:75
 #, kde-format
 msgid "Payment on %2 for %3 with %1 transaction remaining occurring %4."
 msgid_plural ""
 "Payment on %2 for %3 with %1 transactions remaining occurring %4."
-msgstr[0] "%3 için %1 işlem ile %2 ödemesi sonrası kalan %4."
-msgstr[1] "%3 için %1 işlem ile %2 ödemesi sonrası kalan %4."
+msgstr[0] "%4 oluşlu %1 kalan işlemle %3 için %2 tarihinde ödeme."
+msgstr[1] "%4 oluşlu %1 kalan işlemle %3 için %2 tarihinde ödeme."
 
 #: kmymoney/widgets/kmymoneybriefschedule.cpp:82
 #, kde-format
 msgid "Payment on %1 for %2 occurring %3."
-msgstr "%2 için %1 ödemesi sonrası meydana gelen %3."
+msgstr "%3 oluşlu %2 için %1 tarihinde ödeme."
 
 #: kmymoney/widgets/kmymoneybriefschedule.cpp:101
 #, kde-format
 msgid "%1 day overdue"
 msgid_plural "%1 days overdue"
-msgstr[0] "%1 gün vadesi geçmiş"
-msgstr[1] "%1 gün vadesi geçmiş"
+msgstr[0] "%1 gün gecikmiş"
+msgstr[1] "%1 gün gecikmiş"
 
 #: kmymoney/widgets/kmymoneybriefschedule.cpp:103
 #, kde-format
 msgid "(%1 occurrence.)"
 msgid_plural "(%1 occurrences.)"
-msgstr[0] "(%1 olay.)"
-msgstr[1] "(%1 olay.)"
+msgstr[0] "(%1 oluş.)"
+msgstr[1] "(%1 oluş.)"
 
 #. i18n: ectx: property (text), widget (QLabel, m_indexLabel)
 #: kmymoney/widgets/kmymoneybriefschedule.ui:105
 #, kde-format
 msgid "n of n"
-msgstr "n de n"
+msgstr "n/n"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/widgets/kmymoneybriefschedule.ui:154
@@ -21185,13 +21133,13 @@ msgstr "Hesap:"
 #: kmymoney/widgets/kmymoneybriefschedule.ui:303
 #, kde-format
 msgid "Record this transaction into the register"
-msgstr "Kayıt yerine bu işlemi kaydet"
+msgstr "Bu işlemi kayıt et"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_buttonEnter)
 #: kmymoney/widgets/kmymoneybriefschedule.ui:306
 #, kde-format
 msgid "Use this button to record this transaction"
-msgstr "İşlemi kaydetmek için bu butonu kullanın"
+msgstr "İşlemi kaydetmek için bu düğmeyi kullan"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_buttonEnter)
 #: kmymoney/widgets/kmymoneybriefschedule.ui:309
@@ -21203,7 +21151,7 @@ msgstr "Gir..."
 #: kmymoney/widgets/kmymoneybriefschedule.ui:319
 #, kde-format
 msgid "Use this button to skip this transaction"
-msgstr "Bu aktarımı atlamak için bu düğmeyi kullanın"
+msgstr "Bu işlemi atlamak için bu düğmeyi kullan"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_closeButton)
 #: kmymoney/widgets/kmymoneybriefschedule.ui:329
@@ -21216,7 +21164,7 @@ msgstr "&Kapat"
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"
-msgstr ""
+msgstr "Girdiğiniz tarih geçersiz"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:32
 #, kde-format
@@ -21271,7 +21219,7 @@ msgstr "Geçen mali yıl"
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:45
 #, kde-format
 msgid "Last 7 days"
-msgstr "Son 7 gün"
+msgstr "Geçen 7 gün"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:46
 #, kde-format
@@ -21296,7 +21244,7 @@ msgstr "Geçen 6 ay"
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:50
 #, kde-format
 msgid "Last 11 months"
-msgstr "Son 11 ay"
+msgstr "Geçen 11 ay"
 
 #: kmymoney/widgets/kmymoneyperiodcombo.cpp:51
 #, kde-format
@@ -21356,8 +21304,7 @@ msgid "Feedback content"
 msgstr "Geri bildirim içeriği"
 
 #: kmymoney/widgets/ktagcontainer.cpp:110
-#, fuzzy, kde-format
-#| msgid "Tag"
+#, kde-format
 msgctxt "@info:placeholder tag combo box"
 msgid "Tag"
 msgstr "Etiket"
@@ -21374,30 +21321,30 @@ msgstr "Metin"
 msgid ""
 "Warning: Filtering by Category will exclude all transfers from the results."
 msgstr ""
-"Uyarı: Kategoriye göre süzme işlemi sonuçlardan bütün aktarımları çıkaracak."
+"Uyarı: Kategoriye göre süzmek sonuçlardan bütün işlemleri dışarıda tutar."
 
 #: kmymoney/widgets/ktransactionfilter.cpp:182
 #, kde-format
 msgctxt "No selection"
 msgid "(None)"
-msgstr "(Hiçbiri)"
+msgstr "(Yok)"
 
 #: kmymoney/widgets/ktransactionfilter.cpp:184
 #, kde-format
 msgid "Current selections: %1"
-msgstr "Mevcut seçimler:  %1"
+msgstr "Geçerli seçimler: %1"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/widgets/ktransactionfilter.ui:23
 #, kde-format
 msgid "Define your search criteria"
-msgstr "Arama kriterinizi belirleyin"
+msgstr "Arama kriterini belirle"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_textNegate)
 #: kmymoney/widgets/ktransactionfilter.ui:85
 #, kde-format
 msgid "Contains"
-msgstr "İçeren"
+msgstr "İçerir"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_textNegate)
 #: kmymoney/widgets/ktransactionfilter.ui:90
@@ -21434,14 +21381,14 @@ msgstr "Belli aralıktaki tutarı ara"
 #, kde-format
 msgctxt "to (amount)"
 msgid "to"
-msgstr "göre"
+msgstr "şu tutara"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel7)
 #: kmymoney/widgets/ktransactionfilter.ui:269
 #, kde-format
 msgctxt "from (amount)"
 msgid "from"
-msgstr "alt limit"
+msgstr "şu tutardan"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_emptyTagsButton)
 #: kmymoney/widgets/ktransactionfilter.ui:386
@@ -21469,7 +21416,7 @@ msgstr "Hiçbirini seçme"
 #: kmymoney/widgets/ktransactionfilter.ui:495
 #, kde-format
 msgid "Select transactions without payees"
-msgstr "Alacaklısı olmayan işlemleri seç"
+msgstr "Alacaklısız işlemleri seç"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel11_2)
 #: kmymoney/widgets/ktransactionfilter.ui:564
@@ -21489,14 +21436,14 @@ msgstr "Tüm durumlar"
 #, kde-format
 msgctxt "@item reconciliation status"
 msgid "Not reconciled"
-msgstr "Uzlaştırılmamış"
+msgstr "Mutabık kalınmamış"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
 #: kmymoney/widgets/ktransactionfilter.ui:600
 #, kde-format
 msgctxt "@item reconciliation status"
 msgid "Reconciled"
-msgstr "Uzlaştırılmış"
+msgstr "Mutabık kalınmış"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeBox)
 #: kmymoney/widgets/ktransactionfilter.ui:609
@@ -21519,13 +21466,13 @@ msgstr "Ödemeler"
 #: kmymoney/widgets/ktransactionfilter.ui:619
 #, kde-format
 msgid "Deposits"
-msgstr "Depozitler"
+msgstr "Yatırmalar"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
 #: kmymoney/widgets/ktransactionfilter.ui:633
 #, kde-format
 msgid "Any transaction"
-msgstr "Tüm işlemler"
+msgstr "Herhangi bir işlem"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
 #: kmymoney/widgets/ktransactionfilter.ui:638
@@ -21550,21 +21497,21 @@ msgstr "Bu numarayı ara"
 #: kmymoney/widgets/ktransactionfilter.ui:702
 #, kde-format
 msgid "Search number in range"
-msgstr "Numarayı aralıkta ara"
+msgstr "Aralıkta numarayı ara"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel14)
 #: kmymoney/widgets/ktransactionfilter.ui:724
 #, kde-format
 msgctxt "to (number)"
 msgid "to"
-msgstr "ile"
+msgstr "şu sayıya"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel13)
 #: kmymoney/widgets/ktransactionfilter.ui:740
 #, kde-format
 msgctxt "from (number)"
 msgid "from"
-msgstr "itibaren"
+msgstr "şu sayıdan"
 
 #. i18n: ectx: property (text), widget (QLabel, m_selectedCriteria)
 #: kmymoney/widgets/ktransactionfilter.ui:793
@@ -21576,22 +21523,22 @@ msgstr "metin"
 #, kde-format
 msgctxt "Filter widget label"
 msgid "Fi&lter:"
-msgstr "Fi&ltre:"
+msgstr "&Süz:"
 
 #: kmymoney/widgets/passstore.cpp:61
 #, kde-format
 msgid "Read the password from pass store"
-msgstr ""
+msgstr "Parolayı pass store'dan oku"
 
 #: kmymoney/widgets/passwordtoggle.cpp:33
 #, kde-format
 msgid "Change the visibility of the password"
-msgstr ""
+msgstr "Parolanın görünürlüğünü değiştir"
 
 #: kmymoney/widgets/payeeidentifier/ibanbic/bicvalidator.cpp:46
 #, kde-format
 msgid "A valid BIC is 8 or 11 characters long."
-msgstr "Geçerli BIC 8 veya 11 karakter uzunluğundadır."
+msgstr "Geçerli bir BIC, 8 veya 11 karakter uzunluğundadır."
 
 #: kmymoney/widgets/payeeidentifier/ibanbic/bicvalidator.cpp:49
 #, kde-format
@@ -21601,12 +21548,12 @@ msgstr "Verilen BIC herhangi bir kredi kurumuna atanmamış."
 #: kmymoney/widgets/payeeidentifier/ibanbic/ibanbicitemdelegate.cpp:76
 #, kde-format
 msgid "IBAN & BIC"
-msgstr "IBAN & BIC"
+msgstr "IBAN ve BIC"
 
 #: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:61
 #, kde-format
 msgid "This IBAN is too short."
-msgstr "Bu IBAN çok kısa."
+msgstr "Bu IBAN pek kısa."
 
 #: kmymoney/widgets/payeeidentifier/ibanbic/ibanvalidator.cpp:64
 #, kde-format
@@ -21637,31 +21584,29 @@ msgstr "Bilinmiyor"
 
 #: kmymoney/widgets/transactionsortoption.cpp:31
 msgid "Post date"
-msgstr "Gönderme tarihi"
+msgstr "Gönderim tarihi"
 
 #: kmymoney/widgets/transactionsortoption.cpp:32
 msgid "Date entered"
-msgstr "Veri girildi"
+msgstr "Girilen tarih"
 
 #: kmymoney/widgets/transactionsortoption.cpp:36
 msgid "Entry order"
-msgstr "Girdi sıralaması"
+msgstr "Girdi sırası"
 
 #: kmymoney/widgets/transactionsortoption.cpp:39
 msgid "Reconcile state"
-msgstr "Uzlaştırılmış durum"
+msgstr "Mutabakat durumu"
 
 #: kmymoney/widgets/transactionsortoption.cpp:41
-#, fuzzy
-#| msgid "Reconciliation view"
 msgid "Reconciliation date"
-msgstr "Uzlaştırma görünümü"
+msgstr "Mutabakat tarihi"
 
 #. i18n: ectx: property (text), widget (QListWidget, m_selectedList)
 #: kmymoney/widgets/transactionsortoption.ui:92
 #, kde-format
 msgid "Sort order"
-msgstr "Sıralama düzeni"
+msgstr "Sıralama ölçütü"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6)
 #: kmymoney/wizards/endingbalancedlg/checkingstartwizardpage.ui:32
@@ -21680,61 +21625,57 @@ msgid ""
 "\n"
 "The starting balance is the sum of your cleared and reconciled transactions."
 msgstr ""
-"Hesabınızın uzlaştırılması kayıtlarınızın kurumun kayıtlarıyla eşleştiğini "
-"ve iki tarafta da hata olmadığını denetler. Uzlaştırma işlemini kurumunuzdan "
-"her bildirim aldığınızda yapmalısınız.\n"
+"Hesabınızın mutabakatını yapmak, kayıtlarınızın kurumunuzunkilerle "
+"eşleşmesini ve her iki tarafta da hata olmamasını sağlar. Kurumunuzdan her "
+"hesap özeti aldığınızda hesabınızı mutabık kılmalısınız.\n"
 "\n"
-"Bu süreç için gerekli tüm bilgiler genellikle bildiriminizde yazılı "
-"olacaktır.\n"
+"Bu işlem için gerekli olan tüm ilgili bilgiler genellikle hesap özetinizin "
+"üzerine yazdırılır.\n"
 "\n"
-"Sonraki sayfada kapanış bakiyenizin bildirimdekiyle uyuştuğunu "
-"denetleyeceksiniz. Değilse lütfen onu düzenleyin.\n"
+"Bir sonraki sayfada, kapanış bakiyesinin hesap özetinizdeki ile eşleştiğini "
+"doğrulayacaksınız. Değilse lütfen değiştirin.\n"
 "\n"
-"Başlangıç bakiyesi sizin temizlediğiniz ve uzlaştırdığınız işlemlerin "
-"toplamıdır."
+"Başlangıç bakiyesi, temizlenen ve mutabık kılınan işlemlerinizin toplamıdır."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, CheckingStatementInfoWizardPage)
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.ui:14
 #, kde-format
 msgid "Statement Information"
-msgstr "Bilanço Bilgileri"
+msgstr "Özet Bilgisi"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel3)
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.ui:78
 #, kde-format
 msgid "Statement date:"
-msgstr "Bilanço tarihi:"
+msgstr "Özet tarihi:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2)
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.ui:91
 #, kde-format
 msgid "Starting balance of this statement:"
-msgstr "Bilançonun başlangıç bakiyesi:"
+msgstr "Bu özetin başlangıç bakiyesi:"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #: kmymoney/wizards/endingbalancedlg/checkingstatementinfowizardpage.ui:108
 #, kde-format
 msgid "Ending balance of this statement:"
-msgstr "Bilançonun son bakiyesi:"
+msgstr "Bu özetin bitiş bakiyesi:"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, InterestChargeCheckingsWizardPage)
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:6
 #, kde-format
 msgid "Interest / Charges"
-msgstr "Faiz /  Vergiler"
+msgstr "Faiz / Masraflar"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:12
-#, fuzzy, kde-format
-#| msgid ""
-#| "If necessary, enter information about interest or charges here. KMyMoney "
-#| "will create transactions and cleares them directly for you."
+#, kde-format
 msgid ""
 "If necessary, enter information about interest or charges here. KMyMoney "
 "will create transactions and mark them as cleared."
 msgstr ""
-"Gerekliyse faiz ya da vergi bilgilerini burada girin. K Param işlemler "
-"oluşturacak ve sizin adınıza doğrudan onları silecek."
+"Gerekirse faiz veya masraflarla ilgili bilgileri buraya girin. K Param "
+"işlemler oluşturacak ve bunları temizlenmiş olarak işaretleyecektir."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox2)
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:134
@@ -21748,30 +21689,30 @@ msgid ""
 "Please enter the following fields with the information as you find them on "
 "your statement. Make sure to enter all values in <b>%1</b>."
 msgstr ""
-"Lütfen hesap tablonuzda bulunan bilgilerle aşağıdaki alanları doldurun. <b>"
-"%1</b> içinde bütün değerleri girdiğinizden emin olun."
+"Lütfen aşağıdaki alanları hesap özetinizde bulduğunuz bilgilerle birlikte "
+"giriniz. <b>%1</b> içindeki tüm değerleri girdiğinizden emin olun."
 
 #: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:142
 #, kde-format
 msgid "Last reconciled statement: %1"
-msgstr "Son uzlaştırılmış finansal tablo: %1"
+msgstr "Son mutabık özet: %1"
 
 #: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.cpp:210
 #, kde-format
 msgid "Oldest unmarked transaction: %1"
-msgstr "En eski işaretlenmemiş işlem: %1"
+msgstr "En eski imlenmemiş işlem: %1"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KEndingBalanceDlg)
 #: kmymoney/wizards/endingbalancedlg/kendingbalancedlg.ui:14
 #, kde-format
 msgid "Reconciliation Wizard"
-msgstr "Uzlaştırma Sihirbazı"
+msgstr "Mutabakat Sihirbazı"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, PreviousPostponeWizardPage)
 #: kmymoney/wizards/endingbalancedlg/previouspostponewizardpage.ui:14
 #, kde-format
 msgid "Restarting postponed reconciliation"
-msgstr "Ertelenmiş uzlaştırma yeniden başlatılıyor"
+msgstr "Ertelenmiş mutabakat yeniden başlatılıyor"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel8)
 #: kmymoney/wizards/endingbalancedlg/previouspostponewizardpage.ui:30
@@ -21787,14 +21728,14 @@ msgid ""
 "All information you have entered into this wizard will be shown and all "
 "transactions that you already cleared are marked with a 'C'."
 msgstr ""
-"Bu hesabın mutabakatını daha önce ertelediniz. Eğer son defa gelir ve gider "
-"girişi yaparsanız bu hesabın uzlaştırma işlemi başlayacak daha sonra defter "
-"alanında bu değerleri değiştirebilirsiniz.\n"
+"Daha önce bu hesabın mutabakatını ertelediniz. Bu hesabı mutabık kılmaya son "
+"başladığınızda masraf veya faiz girdiyseniz bunları daha sonra genel "
+"muhasebede değiştirebilirsiniz.\n"
 "\n"
-"Uzlaştırmayı ertelediğiniz değerlerle devam etmeniz önemli.\n"
+"Mutabakatı ertelediğinizde kullandığınız ifadeyle sürdürmeniz önemlidir.\n"
 "\n"
-"Girdiğiniz bütün bilgiler ve 'C' ile işaretlenen silinmiş bütün işlemler bu "
-"sihirbazda gösterilecek."
+"Bu sihirbaza girdiğiniz tüm bilgiler gösterilecek ve zaten temizlediğiniz "
+"tüm işlemler 'T' ile imlenecektir."
 
 #: kmymoney/wizards/kmymoneywizard_p.h:77
 #, kde-format
@@ -21816,12 +21757,12 @@ msgstr "&Yardım"
 #: kmymoney/wizards/kmymoneywizard_p.h:266
 #, kde-format
 msgid "Step %1 of %2"
-msgstr "%2 adımın %1. adımı"
+msgstr "Adım %1/%2"
 
 #: kmymoney/wizards/kmymoneywizardpage.cpp:98
 #, kde-format
 msgid "Continue with next page"
-msgstr "Sonraki sayfa ile devam et"
+msgstr "Sonraki sayfayla sürdür"
 
 #: kmymoney/wizards/kmymoneywizardpage.cpp:100
 #, kde-format
@@ -21831,7 +21772,7 @@ msgstr "Sihirbazı bitir"
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:101
 #, kde-format
 msgid "Account information"
-msgstr "Hesap bilgileri"
+msgstr "Hesap bilgisi"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:103
 #, kde-format
@@ -21879,7 +21820,7 @@ msgstr "Açılış bakiyesi: %1"
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:122
 #, kde-format
 msgid "Institution: %1"
-msgstr "Şirket: %1"
+msgstr "Kurum: %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:124
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:140
@@ -21912,17 +21853,17 @@ msgstr "Kredi bilgisi"
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:152
 #, kde-format
 msgid "Amount borrowed: %1"
-msgstr "Ödünç alma miktarı: %1"
+msgstr "Ödünç alınan tutar: %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:154
 #, kde-format
 msgid "Amount lent: %1"
-msgstr "Verilen borç miktarı: %1"
+msgstr "Borç verilen tutar: %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:156
 #, kde-format
 msgid "Interest rate: %1 %"
-msgstr "Faiz oranı: %1 %"
+msgstr "Faiz oranı: %​%1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:157
 #, kde-format
@@ -21952,22 +21893,22 @@ msgstr "Ödeme hesabı: %1"
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:165
 #, kde-format
 msgid "Payout information"
-msgstr "Ödeme bilgileri"
+msgstr "Ödeme bilgisi"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:168
 #, kde-format
 msgid "Refinance: %1"
-msgstr "Yeniden finanse et: %1"
+msgstr "Taksitlendir: %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:171
 #, kde-format
 msgid "Transfer amount to %1"
-msgstr "Şuna tutar aktar %1"
+msgstr "Şuraya tutar aktar: %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:173
 #, kde-format
 msgid "Transfer amount from %1"
-msgstr "Şundan tutar aktar %1"
+msgstr "Şuradan tutar aktar: %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:176
 #, kde-format
@@ -21977,7 +21918,7 @@ msgstr "Ödeme tarihi: %1 "
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:184
 #, kde-format
 msgid "Schedule information"
-msgstr "Zamanlama Bilgileri"
+msgstr "Plan bilgisi"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:186
 #, kde-format
@@ -21993,12 +21934,12 @@ msgstr "Sıklık: Aylık"
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:190
 #, kde-format
 msgid "Paid from %1"
-msgstr "%1' den ödenen"
+msgstr "Şuradan ödenen: %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:191
 #, kde-format
 msgid "Pay to %1"
-msgstr "%1 kişisine öde"
+msgstr "Şuna öde: %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:192
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:198
@@ -22010,17 +21951,17 @@ msgstr "Tutar: %1"
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:200
 #, kde-format
 msgid "First payment due on %1"
-msgstr "İlk ödeme zamanı %1"
+msgstr "İlk ödeme tarihi: %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:194
 #, kde-format
 msgid "Payment method: %1"
-msgstr "Ödeme şekli: %1"
+msgstr "Ödeme yöntemi: %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:197
 #, kde-format
 msgid "Occurrence: %1"
-msgstr "Sıklık: %1"
+msgstr "Oluş: %1"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.ui:23
@@ -22030,18 +21971,19 @@ msgid ""
 "create the account, schedules, etc. or use <b>Back</b> to modify your "
 "entries."
 msgstr ""
-"Bu sayfa girilmiş verileri özetler. Hesap, Programlar vb. yaratmak için "
-"<b>Bitir</b> basın ya da girdileri değiştirmek için <b>Geri Al</b> kullanın."
+"Bu sayfa girdiğiniz veriyi özetler. Hesabı, programları vb. oluşturmak için "
+"<b>Bitir</b>'e basın veya girdilerinizi değiştirmek için <b>Geri</b>'yi "
+"kullanın."
 
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:61
 #, kde-format
 msgid "Checking"
-msgstr "Denetleniyor"
+msgstr "Cari"
 
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:63
 #, kde-format
 msgid "Savings"
-msgstr "Tasarruflar"
+msgstr "Tasarruf"
 
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:65
 #, kde-format
@@ -22065,14 +22007,13 @@ msgid ""
 "date. If you requested an online quote it might be provided for a different "
 "date."
 msgstr ""
-"Lütfen seçilen açılış tarihi için doğru dönüşümü girdiğinizden emin olun. "
-"Eğer çevrimiçi bir teklif istemişseniz farklı bir tarih için sağlanmış "
-"olabilir."
+"Lütfen seçili açılış tarihi için doğru dönüştürmeyi girdiğinizden emin olun. "
+"Çevrimiçi bir kur talep ettiyseniz farklı bir tarih için sağlanmış olabilir."
 
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:193
 #, kde-format
 msgid "Check date"
-msgstr "Tarihi denetle"
+msgstr "Çek tarihi"
 
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:201
 #, kde-format
@@ -22098,9 +22039,10 @@ msgid ""
 "see more details about the various account types. Enter the date the account "
 "was opened and its currency."
 msgstr ""
-"K Param ile kullanılacak hesabın adını girin. Yeni hesabın türünü seçin. "
-"Farklı hesap türleri hakkında bilgi almak için <b>Bu nedir?</b> özelliğini "
-"kullanın. Hesabın açılış tarihini ve para birimini girin."
+"K Param içinde bilindiği şekilde hesabın adını girin. Yeni hesap için türü "
+"seçin. Çeşitli hesap türleri hakkında daha fazla ayrıntı görmek için <b>Bu "
+"Nedir?</b> özelliğini kullanın. Hesabın açıldığı tarihi ve para birimini "
+"girin."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:35
@@ -22112,7 +22054,7 @@ msgstr "Hesap adı"
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:51
 #, kde-format
 msgid "Enter a name under which this account is known within KMyMoney."
-msgstr "K Param uygulamasında bilinen hesaba bir ad girin."
+msgstr "K Param içinde bilindiği şekilde hesabın adını girin."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:58
@@ -22158,45 +22100,45 @@ msgid ""
 "friends. For amortization loans like mortgages you should create a loan "
 "account.</p>"
 msgstr ""
-"<p><b>Çek</b>\n"
-"Çek hesabınızdaki işlemleri yönetmek için çek hesap türünü kullanın, örnek; "
-"ödemeler, çekler ve peşin alımlar.</p>\n"
+"<p><b>Cari</b>\n"
+"Cari hesabınızdaki etkinlikleri yönetmek için cari hesap türünü kullanın; "
+"örn. ödemeler, çekler ve nakit kart satın alımları.</p>\n"
 "\n"
 "<p><b>Tasarruf</b>\n"
-"Tasarruf hesabınızdaki işlemleri yönetmek için tasarruf hesap türünü "
+"Tasarruf hesabınızdaki etkinlikleri yönetmek için tasarruf hesabı türünü "
 "kullanın.</p>\n"
 "\n"
 "<p><b>Kredi Kartı</b>\n"
-"Kredi kartınızdaki işlemleri yönetmek için Kredi Kartı hesap türünü kullanın."
-"</p>\n"
+"Kredi kartınızdaki etkinlikleri yönetmek için kredi kartı hesap türünü "
+"kullanın.</p>\n"
 "\n"
 "<p><b>Nakit</b>\n"
 "\n"
-"Cüzdanınızdaki işlemleri yönetmek için Nakit hesap türünü kullanın.</p>\n"
+"Cüzdanınızdaki etkinlikleri yönetmek için nakit hesap türünü kullanın.</p>\n"
 "\n"
 "<p><b>Kredi</b>\n"
-"Amortisman kredilerini yönetmek için kredi hesap türünü kullanın (Örnek "
-"ipotekler, araba kredisi, ödünç para, özel krediler gibi).</p>\n"
+"Amortisman kredilerini (ör. ipotek, araba kredisi, ödünç verdiğiniz para, "
+"özel krediler vb.) yönetmek için kredi hesabı türünü kullanın.</p>\n"
 "\n"
 "<p><b>Yatırım</b>\n"
-"Hisseleri, yatırım fonu ve diğer yatırımları yönetmek için yatırım hesap "
-"türünü kullanın.</p>\n"
+"Hisse senedi, yatırım fonu ve diğer yatırımlarınızı yönetmek için yatırım "
+"hesabını kullanın.</p>\n"
 "\n"
 "<p><b>Varlık</b>\n"
-"Varlıklarınızı yönetmek için varlık hesap türünü kullanın (Örnek; ev, araba "
-"ya da sanat koleksiyonu).</p>\n"
+"Varlıkları (ör. eviniz, arabanız veya sanat koleksiyonunuz) yönetmek için "
+"varlık hesabı türünü kullanın.</p>\n"
 "\n"
-"<p><b>Borç</b>\n"
-"Amortisman kredileri haricindeki bütün borç tiplerini yönetmek için borç "
-"hesap türünü kullanın. Vergi borcunuz ya da arkadaşınıza borcunuz için "
-"kullanın. İpotekler gibi amortisman kredileri için, bir kredi hesabı "
-"oluşturmalısınız.</p>"
+"<p><b>Yükümlülük</b>\n"
+"Amortisman kredileri dışında her türlü borcu yönetmek için yükümlülük hesabı "
+"türünü kullanın. Borçlu olduğunuz vergiler veya arkadaşlarınızdan ödünç "
+"aldığınız paralar için kullanabilirsiniz. İpotek gibi amortisman kredileri "
+"için bir kredi hesabı oluşturmalısınız.</p>"
 
 #. i18n: ectx: property (whatsThis), widget (KMyMoneyCurrencySelector, m_currencyComboBox)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:120
 #, kde-format
 msgid "Select the currency in which this account is denominated."
-msgstr "Daha önceden var olan bu hesapta para birimi seçin."
+msgstr "Bu hesabın ifade edildiği para birimini seçin."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
@@ -22219,14 +22161,14 @@ msgid ""
 "enter an estimate. You can change this value later before you reconcile this "
 "account for the first time.</p>"
 msgstr ""
-"<p>Açılış tarihi son ekstrenin tarihi olmalıdır. Eğer bu tarihten önceki "
-"işlemleri takip etmek istemeniz durumunda önceki ekstrenin kapanış "
-"bakiyesini ile ekstre tarihini ve aşağıdaki işlem bilgilerini K Param için "
-"ekleyin. K Param bu tarih öncesindeki işlemleri girmenize veya düzenleminize "
-"izin vermeyecektir.</p>\n"
-"<p><i>Not:</i> Eğer açılış bakiyesini kesin olarak bilmiyorsanız bir tahmin "
-"girin. Bu değeri hesabınızı ilk defa uzlaştırana kadar değiştirebilirsiniz.</"
-"p>"
+"<p>Açılış tarihi, son hesap özetinin tarihi olacaktır. Bu tarihten önceki "
+"işlemleri takip etmek istiyorsanız önceki bir hesap özetinin bitiş "
+"bakiyesini ve hesap kesim tarihini girin ve takip eden tüm işlemleri K "
+"Param'a ekleyin. K Param, bu tarihten önce işlem girmenize veya "
+"değiştirmenize izin vermeyecektir.</p>\n"
+"<p><i>Not</i>: Açılış bakiyesinin tam miktarını bilmiyorsanız bir tahmin "
+"girin. Bu hesabı ilk kez mutabık kılmadan önce bu değeri daha sonra "
+"değiştirebilirsiniz.</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
 #. i18n: ectx: property (text), widget (QLabel, m_openingBalanceLabel)
@@ -22249,13 +22191,13 @@ msgid ""
 "enter an estimate. You can change this value later before you reconcile this "
 "account for the first time.</p>"
 msgstr ""
-"<p>Açılış bakiyesi, K Param uygulamasıyla kullanmaya başladığınızda hesabın "
-"bakiyesidir. Yeni hesaplar için bu genellikle 0 olur fakat var olan "
-"hesaplarda bu da farklı olabilir. Bu değeri anlamak için lütfen hesap "
-"ekstrelerine bakınız. Açılış bakiyesi, para birimi butonu ile seçilen "
-"hesabın para biriminde olacaktır.</p>\n"
-"<p><i>Not</i>: Eğer açılış bakiyesinin tam tutarını bilmiyorsanız, tahmini "
-"bir değer girin. Bu değeri sonradan hesabı uzlaştırmadan önce "
+"<p>Açılış bakiyesi, K Param ile kullanmaya başladığınızda hesabın "
+"bakiyesidir. Yeni hesaplar için bu genellikle 0'dır; ancak var olan hesaplar "
+"için bu farklılık gösterebilir. Bu değeri bulmak için lütfen hesap "
+"özetlerine bakın. Açılış bakiyesi, para birimi düğmesiyle seçilen hesabın "
+"para biriminde sağlanacaktır.</p>\n"
+"<p><i>Not</i>: Açılış bakiyesinin tam miktarını bilmiyorsanız bir tahmin "
+"girin. Bu hesabı ilk kez mutabık kılmadan önce bu değeri daha sonra "
 "değiştirebilirsiniz.</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, m_conversionLabel)
@@ -22272,22 +22214,23 @@ msgid ""
 "should be the price of the foreign currency in the base currency on the "
 "opening date of the account."
 msgstr ""
-"Yabancı para birimleri için bir başlangıç dönüşüm oranı girilmelidir. Bu "
-"hesabın açılışın tarihindeki yabancı para biriminin yerel para birimine "
-"oranı olmalıdır."
+"Yabancı para birimleri için bir başlangıç dönüştürme oranı sağlanmalıdır. "
+"Bu, hesabın açılış tarihindeki dövizin baz döviz türünden fiyatı olmalıdır."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_onlineQuote)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:217
 #, kde-format
 msgid "Online quote"
-msgstr "Çevrimiçi aktarımlar"
+msgstr "Çevrimiçi kurlar"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:250
 #, kde-format
 msgid ""
 "Mark this checkbox if the account should be maintained as preferred account"
-msgstr "Hesap, öncelikli hesap olarak korunmalıysa bu onay kutusunu işaretle"
+msgstr ""
+"Hesabın tercih edilen hesap olarak tutulması gerekiyorsa bu onay kutusunu "
+"imleyin"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:253
@@ -22296,8 +22239,8 @@ msgid ""
 "Selecting the <b>Preferred Account</b> checkbox will allow preferred access "
 "in some dialogs and views of KMyMoney."
 msgstr ""
-"<b>Ayrıcalıklı Hesap</b> onay kutusunun seçilmesi bazı iletişim "
-"pencerelerine ve K Param görünümlerine ayrıcalıklı erişim izni verecek."
+"<b>Tercih Edilen Hesap</b> onay kutusunun seçilmesi, K Param'ın bazı "
+"iletişim kutularında ve görünümlerinde tercihli erişime izin verecektir."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:256
@@ -22318,14 +22261,14 @@ msgid ""
 "You should also uncheck it if the account is not maintained by a bank or "
 "broker."
 msgstr ""
-"Bu yatırım hesabı bir komisyon hesabı içeriyor mu?<p>\n"
+"Bu yatırım hesabının komisyon hesabı var mı?<p>\n"
 "\n"
-"Eğer bu yatırım hesabı yatırılmamış para ile ilişkili bir hesap içeriyorsa "
-"işareti <b>Onayla</b>.<br>\n"
+"Bu yatırım hesabının, yatırılmayan para için ilişkili bir hesabı olup "
+"olmadığını <b>denetleyin</b>.<br>\n"
 "\n"
-"Eğer aktif borsa komisyonu için bu hesabı kullanmıyorsanız işareti "
-"<b>Onaylama</b>. Ayrıca hesap, bir banka ya da komisyoncu tarafından "
-"korunmuyorsa bu seçeneği seçmemelisiniz."
+"Bu hesabı etkin borsa komisyonculuğu için kullanmıyorsanız <b>işaretini "
+"kaldırın</b>. Hesap bir banka veya komisyoncu tarafından yönetilmiyorsa da "
+"işaretini kaldırmalısınız."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_createBrokerageButton)
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:37
@@ -22354,22 +22297,22 @@ msgstr "Doğrudan tahsilat"
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:77
 #, kde-format
 msgid "Bank transfer"
-msgstr "Banka aktarımı"
+msgstr "Banka havalesi"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:78
 #, kde-format
 msgid "Standing order"
-msgstr "Ödeme emri"
+msgstr "Bekleyen emir"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:79
 #, kde-format
 msgid "Manual deposit"
-msgstr "kılavuz mevduat"
+msgstr "Elle yatırma"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:80
 #, kde-format
 msgid "Direct deposit"
-msgstr "Doğrudan depozit"
+msgstr "Doğrudan yatırma"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:81
 #, kde-format
@@ -22390,12 +22333,12 @@ msgstr "Girdiyi bitir ve hesap oluştur"
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:110
 #, kde-format
 msgid "Finish entry and create account and schedule"
-msgstr "Girdiyi bitir, hesap oluştur ve programla"
+msgstr "Girdiyi bitir, hesap oluştur ve planla"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:113
 #, kde-format
 msgid "Next due date is prior to opening date"
-msgstr "Sonraki vade açılış tarihinden önce"
+msgstr "Bir sonraki ödeme tarihi, açılış tarihinden öncedir"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:117
 #, fuzzy, kde-format
@@ -24115,11 +24058,10 @@ msgstr ""
 "girdiğiniz değişiklikleri reddedecektir. Sürdürmek istiyor musunuz?"
 
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:288
-#, fuzzy, kde-format
-#| msgid "Information"
+#, kde-format
 msgctxt "@title:window"
 msgid "Confirmation"
-msgstr "Bilgiler"
+msgstr "Onay"
 
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:73
 #, kde-format
