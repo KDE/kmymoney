@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-26 00:51+0000\n"
-"PO-Revision-Date: 2023-06-27 09:37+0200\n"
+"PO-Revision-Date: 2023-06-28 05:41+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1674,7 +1674,7 @@ msgstr ""
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:824
 #, kde-format
 msgid "Price for %1 updated (id %2)"
-msgstr ""
+msgstr "%1-ის ფასი განახლდა (id %2)"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:828
 #, kde-format
@@ -14399,9 +14399,9 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton11)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:168
 #: kmymoney/plugins/views/forecast/kforecastview.ui:278
-#, fuzzy, kde-format
+#, kde-format
 msgid "Simple Moving Average"
-msgstr "მარტივი მცოცავი საშუალო"
+msgstr "მარტივი მოძრავი საშუალო"
 
 #. i18n: ectx: property (text), widget (QRadioButton, radioButton12)
 #: kmymoney/plugins/views/forecast/forecastviewsettings.ui:175
