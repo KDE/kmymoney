@@ -1445,7 +1445,6 @@ QString PivotTable::renderCSV() const
         //
 
         PivotOuterGroup::const_iterator it_innergroup = (*it_outergroup).begin();
-        int rownum = 0;
         while (it_innergroup != (*it_outergroup).end()) {
             //
             // Rows
@@ -1549,7 +1548,6 @@ QString PivotTable::renderCSV() const
                     finalRow = i18nc("Total balance", "Total");
                     isUsed = true;
                 } else {
-                    ++rownum;
                     finishrow = false;
                 }
             } else {
@@ -1588,7 +1586,6 @@ QString PivotTable::renderCSV() const
 
             if (isUsed) {
                 result += finalRow;
-                ++rownum;
             }
             ++it_innergroup;
         }

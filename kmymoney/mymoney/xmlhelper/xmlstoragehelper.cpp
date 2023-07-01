@@ -1146,12 +1146,10 @@ void writeReport(const MyMoneyReport& report, QXmlStreamWriter* writer)
         QStringList columns;
         unsigned qc = report.queryColumns();
         unsigned it_qc = eMyMoney::Report::QueryColumn::Begin;
-        unsigned index = 1;
         while (it_qc != eMyMoney::Report::QueryColumn::End) {
             if (qc & it_qc)
                 columns += reportNamesForQC(static_cast<eMyMoney::Report::QueryColumn>(it_qc));
             it_qc *= 2;
-            index++;
         }
         writer->writeAttribute(attributeName(Attribute::Report::QueryColumns), columns.join(","));
 
