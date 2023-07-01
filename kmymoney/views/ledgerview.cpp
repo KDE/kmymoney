@@ -1008,7 +1008,7 @@ QModelIndex LedgerView::moveCursor(QAbstractItemView::CursorAction cursorAction,
     // now make sure that moving the cursor does not hit the empty
     // transaction at the bottom or a schedule.
     for (auto row = newIndex.row(); row >= 0; --row) {
-        newIndex = model()->index(row, 0);
+        newIndex = model()->index(row, newIndex.column(), newIndex.parent());
         QString id = newIndex.data(eMyMoney::Model::IdRole).toString();
         // skip the empty transaction at the end of a ledger if
         // the movement is not the down arrow
