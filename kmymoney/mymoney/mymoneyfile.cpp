@@ -122,9 +122,23 @@ private:
     QString        m_id;
 };
 
-
-
-
+class KMM_MYMONEY_EXPORT MyMoneyFileUndoStack : public QUndoStack
+{
+    Q_OBJECT
+public Q_SLOTS:
+    void undo()
+    {
+        Q_EMIT MyMoneyFile::instance()->storageTransactionStarted();
+        QUndoStack::undo();
+        Q_EMIT MyMoneyFile::instance()->storageTransactionEnded();
+    }
+    void redo()
+    {
+        Q_EMIT MyMoneyFile::instance()->storageTransactionStarted();
+        QUndoStack::redo();
+        Q_EMIT MyMoneyFile::instance()->storageTransactionEnded();
+    }
+};
 
 class MyMoneyFile::Private
 {
@@ -343,7 +357,7 @@ public:
     QList<MyMoneyNotification> m_changeSet;
 
     // the engine's undo stack
-    QUndoStack          undoStack;
+    MyMoneyFileUndoStack undoStack;
 
     /**
      * The various models
@@ -4291,3 +4305,5 @@ void MyMoneyFileTransaction::rollback()
         MyMoneyFile::instance()->rollbackTransaction();
     d->m_needRollback = false;
 }
+
+#include "mymoneyfile.moc"
