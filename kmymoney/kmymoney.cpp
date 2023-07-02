@@ -2423,10 +2423,17 @@ bool KMyMoneyApp::slotBackupWriteFile()
 #endif
 
     // check if file already exists and ask what to do
-    QFile f(backupfile);
-    if (f.exists()) {
+    QFileInfo fileInfo(backupfile);
+    if (fileInfo.exists()) {
         int answer = KMessageBox::warningContinueCancel(this, i18n("Backup file for today exists on that device. Replace?"), i18n("Backup"), KGuiItem(i18n("&Replace")));
         if (answer == KMessageBox::Cancel) {
+            return false;
+        }
+    } else {
+        // if it does not exist, make sure the path exists
+        const auto path = fileInfo.absolutePath();
+        if (!QDir().mkpath(path)) {
+            KMessageBox::error(this, i18nc("@info Error during backup", "Unable to create backup directory '%1'.", path));
             return false;
         }
     }
