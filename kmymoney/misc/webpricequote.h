@@ -1,5 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2004 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2004 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2004 Tony B <tonybloom@users.sourceforge.net>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -29,7 +31,7 @@ class QTextCodec;
 Helper class to attend the process which is running the script, in the case
 of a local script being used to fetch the quote.
 
-@author Thomas Baumgart <thb@net-bembel.de> & Ace Jones <acejones@users.sourceforge.net>
+@author Thomas Baumgart <tbaumgart@kde.org> & Ace Jones <acejones@users.sourceforge.net>
 */
 class KMM_WEBCONNECT_EXPORT WebPriceQuoteProcess: public QProcess
 {
@@ -38,19 +40,22 @@ public:
     WebPriceQuoteProcess();
     inline void setWebID(const QString& _webID) {
         m_webID = _webID;
-        m_string.truncate(0);
+        m_receivedData.truncate(0);
+        m_receivedError.truncate(0);
     }
 
 public Q_SLOTS:
     void slotReceivedDataFromFilter();
+    void slotReceivedErrorFromFilter();
     void slotProcessExited(int exitCode, QProcess::ExitStatus exitStatus);
 
 Q_SIGNALS:
-    void processExited(const QString&);
+    void processExited(const QString& data, const QString& error);
 
 private:
     QString m_webID;
-    QString m_string;
+    QString m_receivedData;
+    QString m_receivedError;
 };
 
 /**
@@ -59,7 +64,7 @@ a list of valid sources. The actual price quotes are obtained thru WebPriceQuote
 The class also contains functions to convert between the rather cryptic source names used
 by the Finance::Quote package, and more user-friendly names.
 
-@author Thomas Baumgart <thb@net-bembel.de> & Ace Jones <acejones@users.sourceforge.net>, Tony B<tonybloom@users.sourceforge.net>
+@author Thomas Baumgart <tbaumgart@kde.org> & Ace Jones <acejones@users.sourceforge.net>, Tony B<tonybloom@users.sourceforge.net>
  */
 class KMM_WEBCONNECT_EXPORT FinanceQuoteProcess: public QProcess
 {
@@ -166,7 +171,7 @@ Q_SIGNALS:
 
 protected Q_SLOTS:
     void slotParseCSVQuote(const QString& filename);
-    void slotParseQuote(const QString&);
+    void slotParseQuote(const QString& data, const QString& error);
     void downloadCSV(KJob* job);
     void downloadResult(KJob* job);
 

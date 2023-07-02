@@ -50,7 +50,6 @@ class WebPriceQuote::Private
 {
 public:
     WebPriceQuoteProcess m_filter;
-    QString m_quoteData;
     QString m_webID;
     QString m_kmmID;
     QDate m_date;
@@ -70,7 +69,7 @@ WebPriceQuote::WebPriceQuote(QObject* _parent):
     if (m_financeQuoteScriptPath.isEmpty()) {
         m_financeQuoteScriptPath = QStandardPaths::locate(QStandardPaths::AppDataLocation, QString("misc/financequote.pl"));
     }
-    connect(&d->m_filter, SIGNAL(processExited(QString)), this, SLOT(slotParseQuote(QString)));
+    connect(&d->m_filter, &WebPriceQuoteProcess::processExited, this, &WebPriceQuote::slotParseQuote);
 }
 
 WebPriceQuote::~WebPriceQuote()
@@ -287,12 +286,12 @@ bool WebPriceQuote::launchNative(const QString& _webID, const QString& _kmmID, c
         }
         d->m_filter.setWebID(d->m_webID);
 
-        d->m_filter.setProcessChannelMode(QProcess::MergedChannels);
+        d->m_filter.setProcessChannelMode(QProcess::SeparateChannels);
         d->m_filter.start(program, arguments);
 
         if (!d->m_filter.waitForStarted()) {
             Q_EMIT error(i18n("Unable to launch: %1", url.toLocalFile()));
-            slotParseQuote(QString());
+            slotParseQuote(QString(), QString());
         }
     } else {
         //silent download
@@ -354,15 +353,15 @@ void WebPriceQuote::downloadResult(KJob* job)
                 codec = QTextCodec::codecForLocale();
             QString quote = codec->toUnicode(page);
             f.close();
-            slotParseQuote(quote);
+            slotParseQuote(quote, QString());
         } else {
             Q_EMIT error(i18n("Failed to open downloaded file"));
-            slotParseQuote(QString());
+            slotParseQuote(QString(), QString());
         }
         QFile::remove(tmpFile);
     } else {
         Q_EMIT error(job->errorString());
-        slotParseQuote(QString());
+        slotParseQuote(QString(), QString());
     }
 }
 
@@ -391,7 +390,7 @@ bool WebPriceQuote::launchFinanceQuote(const QString& _webID, const QString& _km
     // to not include APPDIR subdirectories
     MyMoneyUtils::removeAppImagePathFromLinkLoaderLibPath(&d->m_filter);
 
-    d->m_filter.setProcessChannelMode(QProcess::MergedChannels);
+    d->m_filter.setProcessChannelMode(QProcess::SeparateChannels);
     d->m_filter.start(QStringLiteral("perl"), arguments);
 
     // This seems to work best if we just block until done.
@@ -399,7 +398,7 @@ bool WebPriceQuote::launchFinanceQuote(const QString& _webID, const QString& _km
         result = true;
     } else {
         Q_EMIT error(i18n("Unable to launch: %1", m_financeQuoteScriptPath));
-        slotParseQuote(QString());
+        slotParseQuote(QString(), QString());
     }
 
     return result;
@@ -428,14 +427,14 @@ void WebPriceQuote::slotParseCSVQuote(const QString& filename)
     }
 }
 
-void WebPriceQuote::slotParseQuote(const QString& _quotedata)
+void WebPriceQuote::slotParseQuote(const QString& _quotedata, const QString& _errordata)
 {
     QString quotedata = _quotedata;
-    d->m_quoteData = quotedata;
 
     qCDebug(WEBPRICEQUOTE) << "quotedata" << _quotedata;
+    qCDebug(WEBPRICEQUOTE) << "errordata" << _errordata;
 
-    if (! quotedata.isEmpty()) {
+    if (_errordata.isEmpty() && !quotedata.isEmpty()) {
         if (!d->m_source.m_skipStripping) {
             // First, remove extraneous non-data elements
 
@@ -523,8 +522,11 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
             Q_EMIT error(i18n("Unable to update price for %1 (no price or no date)", d->m_webID));
             Q_EMIT failed(d->m_kmmID, d->m_webID);
         }
-    } else {
+    } else if (_errordata.isEmpty()) {
         Q_EMIT error(i18n("Unable to update price for %1 (empty quote data)", d->m_webID));
+        Q_EMIT failed(d->m_kmmID, d->m_webID);
+    } else {
+        Q_EMIT error(i18n("Unable to update price for %1 (error encountered: '%2')", d->m_webID, _errordata));
         Q_EMIT failed(d->m_kmmID, d->m_webID);
     }
 }
@@ -940,21 +942,27 @@ void WebPriceQuoteSource::remove() const
 
 WebPriceQuoteProcess::WebPriceQuoteProcess()
 {
-    connect(this, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReceivedDataFromFilter()));
-    connect(this, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotProcessExited(int,QProcess::ExitStatus)));
+    connect(this, &QProcess::readyReadStandardOutput, this, &WebPriceQuoteProcess::slotReceivedDataFromFilter);
+    connect(this, &QProcess::readyReadStandardError, this, &WebPriceQuoteProcess::slotReceivedErrorFromFilter);
+    connect(this, &QProcess::finished, this, &WebPriceQuoteProcess::slotProcessExited);
 }
 
 void WebPriceQuoteProcess::slotReceivedDataFromFilter()
 {
 //   qDebug() << "WebPriceQuoteProcess::slotReceivedDataFromFilter(): " << QString(data);
-    m_string += QString(readAllStandardOutput());
+    m_receivedData += QString::fromUtf8(readAllStandardOutput());
+}
+
+void WebPriceQuoteProcess::slotReceivedErrorFromFilter()
+{
+    m_receivedError += QString::fromUtf8(readAllStandardError());
 }
 
 void WebPriceQuoteProcess::slotProcessExited(int /*exitCode*/, QProcess::ExitStatus /*exitStatus*/)
 {
 //   qDebug() << "WebPriceQuoteProcess::slotProcessExited()";
-    Q_EMIT processExited(m_string);
-    m_string.truncate(0);
+    Q_EMIT processExited(m_receivedData, m_receivedError);
+    m_receivedData.truncate(0);
 }
 
 //
