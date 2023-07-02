@@ -37,6 +37,7 @@ public:
         , m_emptyDateAllowed(false)
         , m_dateValidity(false)
         , m_lastKeyPressWasEscape(false)
+        , m_firstFocusIn(true)
     {
         int sectionIndex(0);
         bool lastWasDelimiter(false);
@@ -357,6 +358,7 @@ public:
     bool m_emptyDateAllowed;
     bool m_dateValidity;
     bool m_lastKeyPressWasEscape;
+    bool m_firstFocusIn;
 };
 
 KMyMoneyDateEdit::KMyMoneyDateEdit(QWidget* parent)
@@ -374,8 +376,6 @@ KMyMoneyDateEdit::KMyMoneyDateEdit(QWidget* parent)
     });
 
     setDate(QDate::currentDate());
-
-    d->selectSection(s_globalKMyMoneyDateEditSettings()->initialSection);
 }
 
 KMyMoneyDateEdit::~KMyMoneyDateEdit()
@@ -396,13 +396,9 @@ void KMyMoneyDateEdit::connectNotify(const QMetaMethod& signal)
 void KMyMoneyDateEdit::setDate(const QDate& date)
 {
     // force sending out a single dateValidityChanged signal
-    const auto isNewDate(date != this->date());
     QSignalBlocker blocker(lineEdit());
     d->setDate(date);
     d->m_originalDay = date.day();
-    if (isNewDate) {
-        d->selectSection(s_globalKMyMoneyDateEditSettings()->initialSection);
-    }
     const auto newDate = d->fixupDate();
     Q_EMIT dateValidityChanged(newDate);
     d->m_dateValidity = newDate.isValid();
@@ -477,7 +473,8 @@ void KMyMoneyDateEdit::focusInEvent(QFocusEvent* event)
     switch (event->reason()) {
     case Qt::TabFocusReason:
     case Qt::BacktabFocusReason:
-        d->selectSection(d->m_sections.at(0));
+    case Qt::OtherFocusReason:
+        d->selectSection(s_globalKMyMoneyDateEditSettings()->initialSection);
         break;
     default:
         break;
