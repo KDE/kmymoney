@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-02 02:38+0000\n"
+"POT-Creation-Date: 2023-07-03 03:06+0000\n"
 "PO-Revision-Date: 2023-05-05 21:22+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -1107,9 +1107,9 @@ msgstr "Emplacement de sauvegarde :"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
 #: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:2428
-#: kmymoney/kmymoney.cpp:2483 kmymoney/kmymoney.cpp:2499
-#: kmymoney/kmymoney.cpp:2505 kmymoney/kmymoney.cpp:2519
-#: kmymoney/kmymoney.cpp:2521
+#: kmymoney/kmymoney.cpp:2490 kmymoney/kmymoney.cpp:2506
+#: kmymoney/kmymoney.cpp:2512 kmymoney/kmymoney.cpp:2526
+#: kmymoney/kmymoney.cpp:2528
 #, kde-format
 msgid "Backup"
 msgstr "Sauvegarde"
@@ -2196,8 +2196,8 @@ msgstr "Autre"
 msgid "Next due date"
 msgstr "Prochaine échéance"
 
-#: kmymoney/dialogs/keditscheduledlg.cpp:489 kmymoney/kmymoney.cpp:2663
-#: kmymoney/kmymoney.cpp:2666
+#: kmymoney/dialogs/keditscheduledlg.cpp:489 kmymoney/kmymoney.cpp:2670
+#: kmymoney/kmymoney.cpp:2673
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
 msgstr "Impossible d'ajouter l'opération récurrente : %1"
@@ -6546,43 +6546,50 @@ msgstr ""
 msgid "&Replace"
 msgstr "&Remplacer"
 
-#: kmymoney/kmymoney.cpp:2434
+#: kmymoney/kmymoney.cpp:2436
+#, fuzzy, kde-format
+#| msgid "Unable to create account: %1"
+msgctxt "@info Error during backup"
+msgid "Unable to create backup directory '%1'."
+msgstr "Impossible de charger le compte : %1"
+
+#: kmymoney/kmymoney.cpp:2441
 #, kde-format
 msgid "Writing %1"
 msgstr "Écriture de %1"
 
-#: kmymoney/kmymoney.cpp:2451
+#: kmymoney/kmymoney.cpp:2458
 #, kde-format
 msgid "Unmounting %1"
 msgstr "Démontage de %1 en cours"
 
-#: kmymoney/kmymoney.cpp:2483
+#: kmymoney/kmymoney.cpp:2490
 #, kde-format
 msgid "Error mounting device"
 msgstr "Erreur lors du montage du périphérique"
 
-#: kmymoney/kmymoney.cpp:2498 kmymoney/kmymoney.cpp:2517
+#: kmymoney/kmymoney.cpp:2505 kmymoney/kmymoney.cpp:2524
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Terminé"
 
-#: kmymoney/kmymoney.cpp:2499 kmymoney/kmymoney.cpp:2519
+#: kmymoney/kmymoney.cpp:2506 kmymoney/kmymoney.cpp:2526
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Fichier enregistré avec succès"
 
-#: kmymoney/kmymoney.cpp:2505
+#: kmymoney/kmymoney.cpp:2512
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Erreur lors de la copie du fichier vers le périphérique"
 
-#: kmymoney/kmymoney.cpp:2521
+#: kmymoney/kmymoney.cpp:2528
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Erreur lors du démontage du périphérique"
 
-#: kmymoney/kmymoney.cpp:2592
+#: kmymoney/kmymoney.cpp:2599
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -6599,40 +6606,40 @@ msgstr ""
 "Veuillez appuyer sur Non pour laisser %2 comme montant,\n"
 "Veuillez appuyer sur Annuler pour interrompre la création du compte."
 
-#: kmymoney/kmymoney.cpp:2612
+#: kmymoney/kmymoney.cpp:2619
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Impossible d'ajouter le compte : %1"
 
-#: kmymoney/kmymoney.cpp:2680
+#: kmymoney/kmymoney.cpp:2687
 #, kde-format
 msgid "<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>"
 msgstr ""
 "<p>Impossible de déplacer <b>%1</b> vers l'établissement <b>%2</b>. Raison : "
 "%3</p>"
 
-#: kmymoney/kmymoney.cpp:2693
+#: kmymoney/kmymoney.cpp:2700
 #, kde-format
 msgid "<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>"
 msgstr "<p>Impossible de déplacer <b>%1</b> vers <b>%2</b>. Raison : %3</p>"
 
-#: kmymoney/kmymoney.cpp:2782
+#: kmymoney/kmymoney.cpp:2789
 #, kde-format
 msgid "Untitled"
 msgstr "Sans titre"
 
-#: kmymoney/kmymoney.cpp:2847
+#: kmymoney/kmymoney.cpp:2854
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Vérification de cohérence…"
 
-#: kmymoney/kmymoney.cpp:2854
+#: kmymoney/kmymoney.cpp:2861
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Échec de la vérification de cohérence : %1"
 
-#: kmymoney/kmymoney.cpp:2864
+#: kmymoney/kmymoney.cpp:2871
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -6641,7 +6648,7 @@ msgstr ""
 "La vérification de cohérence n'a pas trouvé de problème avec vos données. "
 "Les détails sont présentés ci-dessous."
 
-#: kmymoney/kmymoney.cpp:2866
+#: kmymoney/kmymoney.cpp:2873
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -6652,29 +6659,29 @@ msgstr ""
 "données. Les détails sont présentés ci-dessous. Ces problèmes n'ont pu être "
 "corrigés automatiquement et doivent être résolus par l'utilisateur."
 
-#: kmymoney/kmymoney.cpp:2869
+#: kmymoney/kmymoney.cpp:2876
 #, kde-format
 msgid "Consistency check result"
 msgstr "Résultat de la vérification de cohérence"
 
-#: kmymoney/kmymoney.cpp:2979
+#: kmymoney/kmymoney.cpp:2986
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Vérification des échéances arriérées…"
 
-#: kmymoney/kmymoney.cpp:3169
+#: kmymoney/kmymoney.cpp:3176
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr ""
 "Vous devez d'abord choisir un fichier KMyMoney avant d'importer un relevé."
 
-#: kmymoney/kmymoney.cpp:3174
+#: kmymoney/kmymoney.cpp:3181
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Importation d'un relevé grâce à une connexion internet"
 
-#: kmymoney/kmymoney.cpp:3183
+#: kmymoney/kmymoney.cpp:3190
 #, kde-format
 msgid ""
 "Unable to import %1 using %2 plugin.  The plugin returned the following "
@@ -6683,70 +6690,70 @@ msgstr ""
 "Impossible d'importer %1 en utilisant le module externe %2. Le module "
 "externe a renvoyé l'erreur suivante : %3"
 
-#: kmymoney/kmymoney.cpp:3183 kmymoney/plugins/ofx/import/ofximporter.cpp:1004
+#: kmymoney/kmymoney.cpp:3190 kmymoney/plugins/ofx/import/ofximporter.cpp:1004
 #, kde-format
 msgid "Importing error"
 msgstr "Erreur durant l'importation"
 
-#: kmymoney/kmymoney.cpp:3210
+#: kmymoney/kmymoney.cpp:3217
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Tous les messages ont été activés."
 
-#: kmymoney/kmymoney.cpp:3210
+#: kmymoney/kmymoney.cpp:3217
 #, kde-format
 msgid "All messages"
 msgstr "Tous les messages"
 
-#: kmymoney/kmymoney.cpp:3231
+#: kmymoney/kmymoney.cpp:3238
 #, kde-format
 msgid "Auto saving..."
 msgstr "Enregistrement automatique…"
 
-#: kmymoney/kmymoney.cpp:3339
+#: kmymoney/kmymoney.cpp:3346
 #, kde-format
 msgid "Creating new document..."
 msgstr "Création d'un nouveau document…"
 
-#: kmymoney/kmymoney.cpp:3397
+#: kmymoney/kmymoney.cpp:3404
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Impossible de créer un nouveau fichier."
 
-#: kmymoney/kmymoney.cpp:3408
+#: kmymoney/kmymoney.cpp:3415
 #, kde-format
 msgid "Open a file."
 msgstr "Ouvrir un fichier."
 
-#: kmymoney/kmymoney.cpp:3422
+#: kmymoney/kmymoney.cpp:3429
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr ""
 "Impossible de trouver un module externe adapté pour ouvrir votre stockage."
 
-#: kmymoney/kmymoney.cpp:3426
+#: kmymoney/kmymoney.cpp:3433
 #, kde-format
 msgid "All files (*)"
 msgstr "Tous les fichiers (*)"
 
-#: kmymoney/kmymoney.cpp:3439
+#: kmymoney/kmymoney.cpp:3446
 #, kde-format
 msgid "Loading file..."
 msgstr "Chargement du fichier…"
 
-#: kmymoney/kmymoney.cpp:3445
+#: kmymoney/kmymoney.cpp:3452
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr ""
 "<p>Le fichier <b>%1</b> est déjà ouvert par une autre instance de KMyMoney</"
 "p>"
 
-#: kmymoney/kmymoney.cpp:3445
+#: kmymoney/kmymoney.cpp:3452
 #, kde-format
 msgid "Duplicate open"
 msgstr "Ouverture dupliquée"
 
-#: kmymoney/kmymoney.cpp:3450
+#: kmymoney/kmymoney.cpp:3457
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -6755,17 +6762,17 @@ msgstr ""
 "<p>Le fichier <b>%1</b> a un nom non valable ou n'existe pas. Vous pouvez "
 "ouvrir un autre fichier ou en créer un nouveau.</p>"
 
-#: kmymoney/kmymoney.cpp:3450
+#: kmymoney/kmymoney.cpp:3457
 #, kde-format
 msgid "File not found"
 msgstr "Impossible de trouver le fichier"
 
-#: kmymoney/kmymoney.cpp:3478
+#: kmymoney/kmymoney.cpp:3485
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Impossible d'ouvrir le fichier demandé."
 
-#: kmymoney/kmymoney.cpp:3484
+#: kmymoney/kmymoney.cpp:3491
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -6774,36 +6781,36 @@ msgstr ""
 "Impossible de lire votre source de données. Veuillez vérifier dans la "
 "configuration de KMyMoney que le module externe nécessaire est activé."
 
-#: kmymoney/kmymoney.cpp:3494
+#: kmymoney/kmymoney.cpp:3501
 #, kde-format
 msgid "Saving file..."
 msgstr "Enregistrement du fichier…"
 
 # unreviewed-context
-#: kmymoney/kmymoney.cpp:3506
+#: kmymoney/kmymoney.cpp:3513
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Impossible d'enregistrer votre données."
 
-#: kmymoney/kmymoney.cpp:3512
+#: kmymoney/kmymoney.cpp:3519
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
 "Impossible de trouver un module externe adapté pour enregistrer vos données."
 
-#: kmymoney/kmymoney.cpp:3518
+#: kmymoney/kmymoney.cpp:3525
 #, kde-format
 msgid "Saving file as...."
 msgstr "Enregistrement du fichier sous…"
 
-#: kmymoney/kmymoney.cpp:3534
+#: kmymoney/kmymoney.cpp:3541
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr ""
 "Impossible de trouver un module externe adapté pour enregistrer vos données."
 
 # unreviewed-context
-#: kmymoney/kmymoney.cpp:3563
+#: kmymoney/kmymoney.cpp:3570
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Impossible d'enregistrer votre stockage."
