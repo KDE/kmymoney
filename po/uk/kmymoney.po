@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-02 00:47+0000\n"
+"POT-Creation-Date: 2023-07-03 00:55+0000\n"
 "PO-Revision-Date: 2023-06-26 07:24+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -630,9 +630,9 @@ msgstr "Розташування файла резервної копії:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
 #: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:3629
-#: kmymoney/kmymoney.cpp:3693 kmymoney/kmymoney.cpp:3709
-#: kmymoney/kmymoney.cpp:3715 kmymoney/kmymoney.cpp:3729
-#: kmymoney/kmymoney.cpp:3731
+#: kmymoney/kmymoney.cpp:3700 kmymoney/kmymoney.cpp:3716
+#: kmymoney/kmymoney.cpp:3722 kmymoney/kmymoney.cpp:3736
+#: kmymoney/kmymoney.cpp:3738
 #, kde-format
 msgid "Backup"
 msgstr "Резервування"
@@ -1769,7 +1769,7 @@ msgid "%1 units in %2"
 msgstr "%1 одиниць у %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:303
-#: kmymoney/misc/webpricequote.cpp:227
+#: kmymoney/misc/webpricequote.cpp:226
 #, kde-format
 msgid "[No identifier]"
 msgstr "[Немає ідентифікатора]"
@@ -5604,43 +5604,50 @@ msgstr "На цьому пристрої вже існує файл. Замін�
 msgid "&Replace"
 msgstr "З&амінити"
 
-#: kmymoney/kmymoney.cpp:3635
+#: kmymoney/kmymoney.cpp:3637
+#, fuzzy, kde-format
+#| msgid "Unable to create account: %1"
+msgctxt "@info Error during backup"
+msgid "Unable to create backup directory '%1'."
+msgstr "Неможливо створити рахунок: %1"
+
+#: kmymoney/kmymoney.cpp:3642
 #, kde-format
 msgid "Writing %1"
 msgstr "Запис %1"
 
-#: kmymoney/kmymoney.cpp:3656
+#: kmymoney/kmymoney.cpp:3663
 #, kde-format
 msgid "Unmounting %1"
 msgstr "Демонтування %1"
 
-#: kmymoney/kmymoney.cpp:3693
+#: kmymoney/kmymoney.cpp:3700
 #, kde-format
 msgid "Error mounting device"
 msgstr "Помилка під час спроби монтування пристрою"
 
-#: kmymoney/kmymoney.cpp:3708 kmymoney/kmymoney.cpp:3727
+#: kmymoney/kmymoney.cpp:3715 kmymoney/kmymoney.cpp:3734
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
 msgstr "Виконано"
 
-#: kmymoney/kmymoney.cpp:3709 kmymoney/kmymoney.cpp:3729
+#: kmymoney/kmymoney.cpp:3716 kmymoney/kmymoney.cpp:3736
 #, kde-format
 msgid "File successfully backed up"
 msgstr "Резервну копію файла успішно створено"
 
-#: kmymoney/kmymoney.cpp:3715
+#: kmymoney/kmymoney.cpp:3722
 #, kde-format
 msgid "Error copying file to device"
 msgstr "Помилка під час спроби копіювання файла на пристрій"
 
-#: kmymoney/kmymoney.cpp:3731
+#: kmymoney/kmymoney.cpp:3738
 #, kde-format
 msgid "Error unmounting device"
 msgstr "Помилка під час спроби демонтування пристрою"
 
-#: kmymoney/kmymoney.cpp:3778
+#: kmymoney/kmymoney.cpp:3785
 #, kde-format
 msgid ""
 "This account is a liability and if the opening balance represents money "
@@ -5657,29 +5664,29 @@ msgstr ""
 "Натисніть кнопку «Ні», щоб зберегти значення суми %2,\n"
 "Натисніть кнопку «Скасувати», щоб перервати створення рахунку."
 
-#: kmymoney/kmymoney.cpp:3788
+#: kmymoney/kmymoney.cpp:3795
 #, kde-format
 msgctxt "@title:window"
 msgid "Opening balance for liability"
 msgstr "Відкриття балансу для пасиву"
 
-#: kmymoney/kmymoney.cpp:3799
+#: kmymoney/kmymoney.cpp:3806
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
 msgstr "Не вдалося додати рахунок: %1"
 
-#: kmymoney/kmymoney.cpp:3922
+#: kmymoney/kmymoney.cpp:3929
 #, kde-format
 msgid "Running consistency check..."
 msgstr "Виконання перевірки коректності…"
 
-#: kmymoney/kmymoney.cpp:3929
+#: kmymoney/kmymoney.cpp:3936
 #, kde-format
 msgid "Consistency check failed: %1"
 msgstr "Знайдено помилку: %1"
 
-#: kmymoney/kmymoney.cpp:3939
+#: kmymoney/kmymoney.cpp:3946
 #, kde-format
 msgid ""
 "The consistency check has found no issues in your data. Details are "
@@ -5688,7 +5695,7 @@ msgstr ""
 "Під час перевірки цілісності даних у ваших даних не було виявлено жодних "
 "помилок. Подробиці наведено нижче."
 
-#: kmymoney/kmymoney.cpp:3941
+#: kmymoney/kmymoney.cpp:3948
 #, kde-format
 msgid ""
 "The consistency check has found some issues in your data. Details are "
@@ -5699,28 +5706,28 @@ msgstr ""
 "наведено нижче. Знайдені помилки не можна виправити у автоматичному режимі, "
 "потрібне ваше втручання."
 
-#: kmymoney/kmymoney.cpp:3944
+#: kmymoney/kmymoney.cpp:3951
 #, kde-format
 msgid "Consistency check result"
 msgstr "Результат перевірки коректності"
 
-#: kmymoney/kmymoney.cpp:4010
+#: kmymoney/kmymoney.cpp:4017
 #, kde-format
 msgid "Checking for overdue scheduled transactions..."
 msgstr "Перевірка наявності прострочених запланованих операцій…"
 
-#: kmymoney/kmymoney.cpp:4200
+#: kmymoney/kmymoney.cpp:4207
 #, kde-format
 msgid ""
 "You must first select a KMyMoney file before you can import a statement."
 msgstr "Перш ніж імпортувати виписку, вам слід обрати файл KMyMoney."
 
-#: kmymoney/kmymoney.cpp:4205
+#: kmymoney/kmymoney.cpp:4212
 #, kde-format
 msgid "Importing a statement via Web Connect"
 msgstr "Імпортування виписки за допомогою Web Connect"
 
-#: kmymoney/kmymoney.cpp:4217
+#: kmymoney/kmymoney.cpp:4224
 #, kde-format
 msgctxt "%1 file location, %2 plugin name"
 msgid ""
@@ -5730,67 +5737,67 @@ msgstr ""
 "Не вдалося імпортувати %1 за допомогою додатка %2. Додаток повернув "
 "повідомлення про помилку: %3"
 
-#: kmymoney/kmymoney.cpp:4217 kmymoney/plugins/ofx/import/ofximporter.cpp:1012
+#: kmymoney/kmymoney.cpp:4224 kmymoney/plugins/ofx/import/ofximporter.cpp:1012
 #, kde-format
 msgid "Importing error"
 msgstr "Помилка під час спроби імпортування"
 
-#: kmymoney/kmymoney.cpp:4244
+#: kmymoney/kmymoney.cpp:4251
 #, kde-format
 msgid "All messages have been enabled."
 msgstr "Було увімкнуто всі повідомлення."
 
-#: kmymoney/kmymoney.cpp:4244
+#: kmymoney/kmymoney.cpp:4251
 #, kde-format
 msgid "All messages"
 msgstr "Всі повідомлення"
 
-#: kmymoney/kmymoney.cpp:4280
+#: kmymoney/kmymoney.cpp:4287
 #, kde-format
 msgid "Auto saving..."
 msgstr "Автозбереження…."
 
-#: kmymoney/kmymoney.cpp:4400
+#: kmymoney/kmymoney.cpp:4407
 #, kde-format
 msgid "Creating new document..."
 msgstr "Створення нового документа…"
 
-#: kmymoney/kmymoney.cpp:4460
+#: kmymoney/kmymoney.cpp:4467
 #, kde-format
 msgid "Couldn't create a new file."
 msgstr "Не вдалося створити файл."
 
-#: kmymoney/kmymoney.cpp:4471
+#: kmymoney/kmymoney.cpp:4478
 #, kde-format
 msgid "Open a file."
 msgstr "Відкрити файл."
 
-#: kmymoney/kmymoney.cpp:4485
+#: kmymoney/kmymoney.cpp:4492
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
 msgstr "Не вдалося знайти жодного додатка для відкриття сховища даних."
 
-#: kmymoney/kmymoney.cpp:4489
+#: kmymoney/kmymoney.cpp:4496
 #, kde-format
 msgid "All files (*)"
 msgstr "усі файли (*)"
 
-#: kmymoney/kmymoney.cpp:4502
+#: kmymoney/kmymoney.cpp:4509
 #, kde-format
 msgid "Loading file..."
 msgstr "Завантаження файла…"
 
-#: kmymoney/kmymoney.cpp:4508
+#: kmymoney/kmymoney.cpp:4515
 #, kde-format
 msgid "<p>File <b>%1</b> is already opened in another instance of KMyMoney</p>"
 msgstr "<p>Файл <b>%1</b> вже відкрито у іншому екземплярі KMyMoney</p>"
 
-#: kmymoney/kmymoney.cpp:4508
+#: kmymoney/kmymoney.cpp:4515
 #, kde-format
 msgid "Duplicate open"
 msgstr "Дублювати відкритий"
 
-#: kmymoney/kmymoney.cpp:4515
+#: kmymoney/kmymoney.cpp:4522
 #, kde-format
 msgid ""
 "<p><b>%1</b> is either an invalid filename or the file does not exist. You "
@@ -5799,17 +5806,17 @@ msgstr ""
 "<p>Назва <b>%1</b> є некоректною назвою файла (можливо, файла просто не "
 "існує). Ви можете відкрити інший файл або створити новий.</p>"
 
-#: kmymoney/kmymoney.cpp:4515
+#: kmymoney/kmymoney.cpp:4522
 #, kde-format
 msgid "File not found"
 msgstr "Файл не знайдено"
 
-#: kmymoney/kmymoney.cpp:4542
+#: kmymoney/kmymoney.cpp:4549
 #, kde-format
 msgid "Cannot open file as requested."
 msgstr "Не вдалося відкрити файл."
 
-#: kmymoney/kmymoney.cpp:4548
+#: kmymoney/kmymoney.cpp:4555
 #, kde-format
 msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
@@ -5818,32 +5825,32 @@ msgstr ""
 "Не вдалося прочитати дані з вашого джерела. Будь ласка, перевірте, чи "
 "правильно вказано параметри роботи KMyMoney і чи увімкнено потрібний додаток."
 
-#: kmymoney/kmymoney.cpp:4558
+#: kmymoney/kmymoney.cpp:4565
 #, kde-format
 msgid "Saving file..."
 msgstr "Збереження файла…."
 
-#: kmymoney/kmymoney.cpp:4570
+#: kmymoney/kmymoney.cpp:4577
 #, kde-format
 msgid "Failed to save your data."
 msgstr "Не вдалося зберегти ваші дані."
 
-#: kmymoney/kmymoney.cpp:4576
+#: kmymoney/kmymoney.cpp:4583
 #, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr "Не вдалося завантажити відповідний додаток для збереження даних."
 
-#: kmymoney/kmymoney.cpp:4582
+#: kmymoney/kmymoney.cpp:4589
 #, kde-format
 msgid "Saving file as...."
 msgstr "Збереження файла як…"
 
-#: kmymoney/kmymoney.cpp:4598
+#: kmymoney/kmymoney.cpp:4605
 #, kde-format
 msgid "Couldn't find any plugin for saving data."
 msgstr "Не вдалося знайти жодного додатка для збереження даних."
 
-#: kmymoney/kmymoney.cpp:4627
+#: kmymoney/kmymoney.cpp:4634
 #, kde-format
 msgid "Failed to save your storage."
 msgstr "Не вдалося зберегти ваші дані."
@@ -6259,37 +6266,37 @@ msgctxt "@action:button"
 msgid "No"
 msgstr "Ні"
 
-#: kmymoney/misc/webpricequote.cpp:117 kmymoney/misc/webpricequote.cpp:242
+#: kmymoney/misc/webpricequote.cpp:116 kmymoney/misc/webpricequote.cpp:241
 #, kde-format
 msgid "Source <placeholder>%1</placeholder> does not exist."
 msgstr "Джерела <placeholder>%1</placeholder> не існує."
 
-#: kmymoney/misc/webpricequote.cpp:150
+#: kmymoney/misc/webpricequote.cpp:149
 #, kde-format
 msgid "Cannot resolve input date."
 msgstr "Не вдалося обробити вхідні дані."
 
-#: kmymoney/misc/webpricequote.cpp:167
+#: kmymoney/misc/webpricequote.cpp:166
 #, kde-format
 msgid "CSV source <placeholder>%1</placeholder> does not exist."
 msgstr "Джерела CSV <placeholder>%1</placeholder> не існує."
 
-#: kmymoney/misc/webpricequote.cpp:185
+#: kmymoney/misc/webpricequote.cpp:184
 #, kde-format
 msgid "Cannot find from and to currency."
 msgstr "Не вдалося визначити початкову і кінцеву валюти."
 
-#: kmymoney/misc/webpricequote.cpp:198
+#: kmymoney/misc/webpricequote.cpp:197
 #, kde-format
 msgid "Local quote sources aren't supported."
 msgstr "Підтримки локальних джерел курсів не передбачено."
 
-#: kmymoney/misc/webpricequote.cpp:203 kmymoney/misc/webpricequote.cpp:299
+#: kmymoney/misc/webpricequote.cpp:202 kmymoney/misc/webpricequote.cpp:298
 #, kde-format
 msgid "Fetching URL %1..."
 msgstr "Отримання даних URL %1…"
 
-#: kmymoney/misc/webpricequote.cpp:228
+#: kmymoney/misc/webpricequote.cpp:227
 #, kde-format
 msgid ""
 "<placeholder>%1</placeholder> skipped because it doesn't have identification "
@@ -6298,57 +6305,63 @@ msgstr ""
 "<placeholder>%1</placeholder> пропущено, оскільки цей запис не має "
 "ідентифікаційного номера."
 
-#: kmymoney/misc/webpricequote.cpp:267
+#: kmymoney/misc/webpricequote.cpp:266
 #, kde-format
 msgctxt "The process x is executing"
 msgid "Executing %1..."
 msgstr "Виконання %1…"
 
-#: kmymoney/misc/webpricequote.cpp:294 kmymoney/misc/webpricequote.cpp:401
+#: kmymoney/misc/webpricequote.cpp:293 kmymoney/misc/webpricequote.cpp:400
 #, kde-format
 msgid "Unable to launch: %1"
 msgstr "Не вдалося запустити: %1"
 
-#: kmymoney/misc/webpricequote.cpp:330 kmymoney/misc/webpricequote.cpp:359
+#: kmymoney/misc/webpricequote.cpp:329 kmymoney/misc/webpricequote.cpp:358
 #, kde-format
 msgid "Failed to open downloaded file"
 msgstr "Спроба відкрити отриманий файл завершилася невдало"
 
-#: kmymoney/misc/webpricequote.cpp:388
+#: kmymoney/misc/webpricequote.cpp:387
 #, kde-format
 msgctxt "Executing 'script' 'online source' 'investment symbol' "
 msgid "Executing %1 %2 %3..."
 msgstr "Виконання %1 %2 %3…"
 
-#: kmymoney/misc/webpricequote.cpp:426
+#: kmymoney/misc/webpricequote.cpp:425
 #, kde-format
 msgid "Unable to update price for %1"
 msgstr "Не вдалося оновити ціну для %1"
 
-#: kmymoney/misc/webpricequote.cpp:460
+#: kmymoney/misc/webpricequote.cpp:459
 #, kde-format
 msgid "Identifier found: '%1'"
 msgstr "Знайдено ідентифікатор: «%1»"
 
-#: kmymoney/misc/webpricequote.cpp:501
+#: kmymoney/misc/webpricequote.cpp:500
 #, kde-format
 msgid "Price found: '%1' (%2)"
 msgstr "Знайдено ціну: «%1» (%2)"
 
-#: kmymoney/misc/webpricequote.cpp:512
+#: kmymoney/misc/webpricequote.cpp:511
 #, kde-format
 msgid "Date found: '%1'"
 msgstr "Знайдено дату: «%1»"
 
-#: kmymoney/misc/webpricequote.cpp:523
+#: kmymoney/misc/webpricequote.cpp:522
 #, kde-format
 msgid "Unable to update price for %1 (no price or no date)"
 msgstr "Не вдалося оновити ціну для %1 (не вказано ціни або дати)"
 
-#: kmymoney/misc/webpricequote.cpp:527
+#: kmymoney/misc/webpricequote.cpp:526
 #, kde-format
 msgid "Unable to update price for %1 (empty quote data)"
 msgstr "Не вдалося оновити ціну для %1 (порожні дані щодо курсу)"
+
+#: kmymoney/misc/webpricequote.cpp:529
+#, fuzzy, kde-format
+#| msgid "Unable to update price for %1 (no price or no date)"
+msgid "Unable to update price for %1 (error encountered: '%2')"
+msgstr "Не вдалося оновити ціну для %1 (не вказано ціни або дати)"
 
 #: kmymoney/models/accountsproxymodel.cpp:529
 #, kde-format
@@ -21427,8 +21440,8 @@ msgstr "Натисніть цю кнопку, щоб пропустити опе
 msgid "&Close"
 msgstr "&Закрити"
 
-#: kmymoney/widgets/kmymoneydateedit.cpp:452
-#: kmymoney/widgets/kmymoneydateedit.cpp:521
+#: kmymoney/widgets/kmymoneydateedit.cpp:448
+#: kmymoney/widgets/kmymoneydateedit.cpp:518
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"
