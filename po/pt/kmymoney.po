@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-03 00:55+0000\n"
-"PO-Revision-Date: 2023-07-03 00:53+0100\n"
+"PO-Revision-Date: 2023-07-05 00:22+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
 "Language: pt\n"
@@ -5674,11 +5674,10 @@ msgid "&Replace"
 msgstr "Substitui&r"
 
 #: kmymoney/kmymoney.cpp:3637
-#, fuzzy, kde-format
-#| msgid "Unable to create account: %1"
+#, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
-msgstr "Não foi possível criar a conta: %1"
+msgstr "Não foi possível criar a pasta de cópias de segurança '%1'."
 
 #: kmymoney/kmymoney.cpp:3642
 #, kde-format
@@ -6429,10 +6428,9 @@ msgid "Unable to update price for %1 (empty quote data)"
 msgstr "Não foi possível actualizar o preço de %1 (dados da cotação em branco)"
 
 #: kmymoney/misc/webpricequote.cpp:529
-#, fuzzy, kde-format
-#| msgid "Unable to update price for %1 (no price or no date)"
+#, kde-format
 msgid "Unable to update price for %1 (error encountered: '%2')"
-msgstr "Não foi possível actualizar o preço de %1 (sem preço ou sem data)"
+msgstr "Não foi possível actualizar o preço de %1 (foi detectado o erro: '%2')"
 
 #: kmymoney/models/accountsproxymodel.cpp:529
 #, kde-format

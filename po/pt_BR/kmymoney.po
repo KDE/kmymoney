@@ -17,15 +17,15 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-03 00:55+0000\n"
-"PO-Revision-Date: 2023-03-15 16:16-0300\n"
+"PO-Revision-Date: 2023-07-04 10:27-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
-"Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -5626,11 +5626,10 @@ msgid "&Replace"
 msgstr "Substitui&r"
 
 #: kmymoney/kmymoney.cpp:3637
-#, fuzzy, kde-format
-#| msgid "Unable to create account: %1"
+#, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
-msgstr "Não foi possível criar a conta: %1"
+msgstr "Não foi possível criar a pasta da cópia de segurança: '%1'."
 
 #: kmymoney/kmymoney.cpp:3642
 #, kde-format
