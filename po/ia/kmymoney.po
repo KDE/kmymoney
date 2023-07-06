@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-03 00:55+0000\n"
-"PO-Revision-Date: 2023-05-19 23:11+0200\n"
+"PO-Revision-Date: 2023-07-05 22:43+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2726,18 +2726,7 @@ msgstr ""
 
 #. i18n: ectx: property (html), widget (QTextBrowser, textBrowser)
 #: kmymoney/dialogs/ksaveasquestion.ui:52
-#, fuzzy, kde-format
-#| msgid ""
-#| "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#| "REC-html40/strict.dtd\">\n"
-#| "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#| "css\">\n"
-#| "p, li { white-space: pre-wrap; }\n"
-#| "</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; "
-#| "font-weight:400; font-style:normal;\">\n"
-#| "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#| "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#| "\"><br /></p></body></html>"
+#, kde-format
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
 "REC-html40/strict.dtd\">\n"
@@ -2759,11 +2748,16 @@ msgstr ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-"
 "weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
-"p></body></html>"
+"<p align=\"justify\" style=\" margin: 0; -qt-block-indent:0; text-indent:0px;"
+"\">KMyMoney supporta  multiple typos de immagazinage. Le typos de "
+"immagazinage disponibile depende del presentia de plugins e lor activation "
+"in le preferentias de application.</p>\n"
+"<p align=\"justify\" style=\" margin: 0; -qt-block-indent:0; text-indent:0px;"
+"\"><br />Si tu es incerte de qual seliger hic, alora <span style=\" font-"
+"weight:600;\">XML</span> ie probabilemente tu election melior.</p></body></"
+"html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/ksaveasquestion.ui:68
@@ -4568,7 +4562,7 @@ msgstr ""
 #: kmymoney/kmymoney.cpp:1776
 #, kde-format
 msgid "Delete institution..."
-msgstr ""
+msgstr "Dele institution..."
 
 #: kmymoney/kmymoney.cpp:1780
 #, kde-format
@@ -4671,7 +4665,7 @@ msgstr ""
 #: kmymoney/kmymoney.cpp:1802
 #, kde-format
 msgid "Delete category..."
-msgstr ""
+msgstr "Dele Categoria..."
 
 #: kmymoney/kmymoney.cpp:1806
 #, kde-format
@@ -5267,11 +5261,10 @@ msgid "&Replace"
 msgstr "&Reimplacia"
 
 #: kmymoney/kmymoney.cpp:3637
-#, fuzzy, kde-format
-#| msgid "Unable to write changes to '%1'"
+#, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
-msgstr "Incapace a scriber modificationes in '%1'"
+msgstr "Incapace a crear directorio de copia de secutitate '%1'"
 
 #: kmymoney/kmymoney.cpp:3642
 #, kde-format
@@ -5989,10 +5982,9 @@ msgid "Unable to update price for %1 (empty quote data)"
 msgstr "Incapace de actualisar precio per '%1' (datos de citar vacue)"
 
 #: kmymoney/misc/webpricequote.cpp:529
-#, fuzzy, kde-format
-#| msgid "Unable to update price for %1 (empty quote data)"
+#, kde-format
 msgid "Unable to update price for %1 (error encountered: '%2')"
-msgstr "Incapace de actualisar precio per '%1' (datos de citar vacue)"
+msgstr "Incapace a actualisar precio per '%1' (error incontrate: '%2')"
 
 #: kmymoney/models/accountsproxymodel.cpp:529
 #, kde-format
@@ -6040,10 +6032,9 @@ msgid "Value"
 msgstr "Valor"
 
 #: kmymoney/models/equitiesmodel.cpp:197 kmymoney/models/equitiesmodel.cpp:434
-#, fuzzy, kde-format
-#| msgid "&Last Update"
+#, kde-format
 msgid "Last Price Update"
-msgstr "&Ultime actualisation"
+msgstr "Ultime actualisation  de precio"
 
 #: kmymoney/models/equitiesmodel.cpp:540
 #: kmymoney/widgets/columnselector.cpp:215
@@ -15407,17 +15398,13 @@ msgstr[1] ""
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
-#, fuzzy, kde-format
-#| msgctxt "CSV (Filefilter)"
-#| msgid "CSV files"
+#, kde-format
 msgid "CSS files"
-msgstr "Files CSV"
+msgstr "Files CSS"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
-#, fuzzy, kde-format
-#| msgctxt "All files (Filefilter)"
-#| msgid "All files"
+#, kde-format
 msgid "All files"
 msgstr "Omne files"
 
@@ -19482,12 +19469,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/ktransactionselectdlg.cpp:114
-#, fuzzy, kde-format
-#| msgid "Do you really want to change the selected transaction?"
-#| msgid_plural "Do you really want to change all %1 selected transactions?"
+#, kde-format
 msgctxt "@info:tooltip Exchange transactions about to merge"
 msgid "Press to exchange the two transactions."
-msgstr "Tu vermente vole cambiar le transatction seligite?"
+msgstr "Pressa per cambiar le duo transactiones?"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KTransactionSelectDlg)
 #: kmymoney/views/ktransactionselectdlg.ui:14
@@ -19650,11 +19635,10 @@ msgid "TextLabel"
 msgstr "Etiquetta de Texto (TextLabel)"
 
 #: kmymoney/views/ledgerviewpage_p.h:96
-#, fuzzy, kde-format
-#| msgid "Last reconciled: %1"
+#, kde-format
 msgctxt "@label:textbox Reconciliation date"
 msgid "Last reconciliation: %1"
-msgstr "Ultime reconciliate: %1"
+msgstr "Ultime reconciliation: %1"
 
 #: kmymoney/views/ledgerviewpage_p.h:98
 #, kde-format
@@ -19663,11 +19647,10 @@ msgid "Never reconciled"
 msgstr "Jammais reconciliate"
 
 #: kmymoney/views/ledgerviewpage_p.h:139
-#, fuzzy, kde-format
-#| msgid "Investment: %1"
+#, kde-format
 msgctxt "@label:textbox Total value of investment"
 msgid "Investment value: %1%2"
-msgstr "Investimento: %1"
+msgstr "Valor de Investimento: %1%2"
 
 #: kmymoney/views/ledgerviewpage_p.h:143
 #: kmymoney/views/reconciliationledgerviewpage.cpp:397
@@ -19900,12 +19883,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/splitdialog.cpp:317
-#, fuzzy, kde-format
-#| msgctxt "Split editor summary"
-#| msgid "Unassigned"
+#, kde-format
 msgctxt "Split editor summary"
 msgid "Overassigned"
-msgstr "Non assignate"
+msgstr "Super assignate"
 
 #: kmymoney/views/splitdialog.cpp:320
 #, kde-format
@@ -19963,10 +19944,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, adjustUnassigned)
 #: kmymoney/views/splitdialog.ui:671
-#, fuzzy, kde-format
-#| msgid "Difference"
+#, kde-format
 msgid "Apply Difference"
-msgstr "Differentia"
+msgstr "Applica Differentia"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, deleteZeroButton)
 #: kmymoney/views/splitdialog.ui:678
@@ -20166,7 +20146,7 @@ msgstr "Nomine"
 #: kmymoney/widgets/kmmsearchwidget.ui:14
 #, kde-format
 msgid "Form"
-msgstr ""
+msgstr "Forma"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
 #, kde-format
@@ -20742,11 +20722,8 @@ msgid "Reconcile state"
 msgstr ""
 
 #: kmymoney/widgets/transactionsortoption.cpp:41
-#, fuzzy
-#| msgctxt "Ledger marker showing a reconciliation entry"
-#| msgid "Reconciliation"
 msgid "Reconciliation date"
-msgstr "Reconciliation"
+msgstr "Data de Reconciliation"
 
 #. i18n: ectx: property (text), widget (QListWidget, m_selectedList)
 #: kmymoney/widgets/transactionsortoption.ui:92
@@ -21392,10 +21369,9 @@ msgid "Next due date is prior to opening date"
 msgstr ""
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:117
-#, fuzzy, kde-format
-#| msgid "Next due date"
+#, kde-format
 msgid "Next due date is invalid"
-msgstr "Proxime data de termino de pagamento"
+msgstr "Proxime data de termino de pagamento es invalide"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:121
 #, kde-format
