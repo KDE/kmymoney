@@ -122,7 +122,9 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
     // if we don't have a payee assigned to the manually entered transaction
     // we use the one we found in the imported transaction
     if (sm.payeeId().isEmpty() && !si.payeeId().isEmpty()) {
-        sm.setValue("kmm-orig-payee", sm.payeeId());
+        // we use "\xff\xff\xff\xff" as the default so that
+        // the entry will be written, since payeeId is empty
+        sm.setValue("kmm-orig-payee", sm.payeeId(), QLatin1String("\xff\xff\xff\xff"));
         sm.setPayeeId(si.payeeId());
     }
 
@@ -135,7 +137,9 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
     // combine the two memos into one
     QString memo = sm.memo();
     if (!si.memo().isEmpty() && si.memo() != memo) {
-        sm.setValue("kmm-orig-memo", memo);
+        // we use "\xff\xff\xff\xff" as the default so that
+        // the entry will be written, even if memo is empty
+        sm.setValue("kmm-orig-memo", memo, QLatin1String("\xff\xff\xff\xff"));
         if (!memo.isEmpty())
             memo += '\n';
         memo += si.memo();
@@ -190,12 +194,12 @@ void TransactionMatcher::unmatch(const MyMoneyTransaction& _t, const MyMoneySpli
         }
 
         // restore payee if modified
-        if (!sm.value("kmm-orig-payee").isEmpty()) {
+        if (sm.pairs().contains("kmm-orig-payee")) {
             sm.setPayeeId(sm.value("kmm-orig-payee"));
         }
 
         // restore memo if modified
-        if (!sm.value("kmm-orig-memo").isEmpty()) {
+        if (sm.pairs().contains("kmm-orig-memo")) {
             sm.setMemo(sm.value("kmm-orig-memo"));
         }
 
