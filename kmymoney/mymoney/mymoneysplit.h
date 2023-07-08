@@ -106,7 +106,7 @@ public:
     /**
      * Required to have (direct) access to the MyMoneyKeyValueContainer::setValue() method.
      */
-    void setValue(const QString& key, const QString& value);
+    void setValue(const QString& key, const QString& value, const QString& defaultValue = QString());
     void setValue(const MyMoneyMoney& value);
     /**
       * This method is used to set either the shares or the value depending on

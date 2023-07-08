@@ -168,9 +168,9 @@ QString MyMoneySplit::value(const QString& key) const
     return MyMoneyKeyValueContainer::value(key);
 }
 
-void MyMoneySplit::setValue(const QString& key, const QString& value)
+void MyMoneySplit::setValue(const QString& key, const QString& value, const QString& defaultValue)
 {
-    MyMoneyKeyValueContainer::setValue(key, value);
+    MyMoneyKeyValueContainer::setValue(key, value, defaultValue);
 }
 
 void MyMoneySplit::setValue(const MyMoneyMoney& value)
