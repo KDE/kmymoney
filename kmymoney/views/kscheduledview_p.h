@@ -151,6 +151,10 @@ public:
         int sortCol = grp.readEntry<int>("KScheduleView_sortColumn", SchedulesModel::Column::Name);
         auto sortOrder = static_cast<Qt::SortOrder>(grp.readEntry<int>("KScheduleView_sortOrder", Qt::AscendingOrder));
         m_filterModel->sort(sortCol, sortOrder);
+        ui->m_scheduleTree->setSortingEnabled(true);
+        ui->m_scheduleTree->setAllColumnsShowFocus(true);
+        ui->m_scheduleTree->setAlternatingRowColors(true);
+        ui->m_scheduleTree->header()->setSortIndicatorShown(true);
     }
 
     void writeConfig()
