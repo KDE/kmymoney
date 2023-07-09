@@ -81,7 +81,7 @@ public:
         if (index.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool()) {
             if (index.column() == JournalModel::Column::Detail) {
                 const auto memo = index.data(eMyMoney::Model::MatchedSplitMemoRole).toString();
-                rc.lines << memo;
+                rc.lines << (memo.isEmpty() ? i18nc("@info placeholder for memo of matched transaction if empty", "Empty memo") : memo);
                 return rc;
             }
         }
