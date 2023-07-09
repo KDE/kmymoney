@@ -31,6 +31,7 @@ public:
         , accountType(eMyMoney::Account::Type::Asset)
         , showValuesInverted(false)
         , maintainBalances(false)
+        , enableEdit(true)
     {
     }
 
@@ -39,6 +40,7 @@ public:
     QStringList filterIds;
     bool showValuesInverted;
     bool maintainBalances;
+    bool enableEdit;
     QSet<QAbstractItemModel*> sourceModels;
     QVector<MyMoneyMoney> balances;
     QVector<int> splitMaxLineCount;

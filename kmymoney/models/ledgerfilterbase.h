@@ -61,6 +61,14 @@ public:
 
     QVariant data(const QModelIndex& index, int role) const override;
 
+    /**
+     * Overridden for internal reasons to implement the functionality
+     * provided by setLedgerIsEditable()
+     *
+     * @sa setLedgerIsEditable()
+     */
+    Qt::ItemFlags flags(const QModelIndex& idx) const override;
+
     void setShowEntryForNewTransaction(bool show);
 
     void setShowScheduledTransactions(bool show);
@@ -79,6 +87,15 @@ public:
      * Use to control maintenance of balance information
      */
     void setMaintainBalances(bool maintainBalances);
+
+    /**
+     * This can be used to prevent editing items in
+     * the views using this model. The default value
+     * when this object is constructed for this setting
+     * is @c true. If set to false, editing the transactions
+     * shown is not possible anymore.
+     */
+    void setLedgerIsEditable(bool enableEdit);
 
 protected:
     explicit LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent);

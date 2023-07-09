@@ -153,6 +153,16 @@ QVariant LedgerFilterBase::data(const QModelIndex& index, int role) const
     return LedgerSortProxyModel::data(index, role);
 }
 
+Qt::ItemFlags LedgerFilterBase::flags(const QModelIndex& idx) const
+{
+    Q_D(const LedgerFilterBase);
+    auto flags = LedgerSortProxyModel::flags(idx);
+    if (!d->enableEdit) {
+        flags &= ~Qt::ItemIsEditable;
+    }
+    return flags;
+}
+
 bool LedgerFilterBase::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
 {
     Q_D(const LedgerFilterBase);
@@ -236,4 +246,10 @@ void LedgerFilterBase::removeSourceModel(QAbstractItemModel* model)
         d->sourceModels.remove(model);
         invalidateFilter();
     }
+}
+
+void LedgerFilterBase::setLedgerIsEditable(bool enableEdit)
+{
+    Q_D(LedgerFilterBase);
+    d->enableEdit = enableEdit;
 }

@@ -58,6 +58,8 @@ KTransactionSelectDlg::KTransactionSelectDlg(QWidget* parent)
     // don't show sort indicator and don't allow sorting via header
     d->ui->m_ledgerView->horizontalHeader()->setSortIndicatorShown(false);
     d->ui->m_ledgerView->setSortingEnabled(false);
+    // we don't allow editing in this dialog
+    d->filterModel->setLedgerIsEditable(false);
 
     QVector<int> columns;
     columns = {
