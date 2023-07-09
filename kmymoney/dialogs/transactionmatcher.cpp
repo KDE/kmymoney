@@ -7,19 +7,28 @@
 
 #include "transactionmatcher.h"
 
+// ----------------------------------------------------------------------------
+// QT Includes
+
 #include <QDate>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
 
 #include <KLocalizedString>
 
+// ----------------------------------------------------------------------------
+// Project Includes
+
 #include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyutils.h"
-#include "mymoneyfile.h"
-#include "mymoneyexception.h"
-#include "mymoneyenums.h"
 
 class TransactionMatcherPrivate
 {
@@ -28,6 +37,16 @@ class TransactionMatcherPrivate
 public:
     TransactionMatcherPrivate()
     {
+    }
+
+    void clearMatchFlags(MyMoneySplit& s)
+    {
+        s.deletePair("kmm-orig-postdate");
+        s.deletePair("kmm-orig-payee");
+        s.deletePair("kmm-orig-memo");
+        s.deletePair("kmm-orig-onesplit");
+        s.deletePair("kmm-orig-not-reconciled");
+        s.deletePair("kmm-match-split");
     }
 };
 
@@ -54,40 +73,27 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
 
     // Now match the transactions.
     //
-    // 'Matching' the transactions entails DELETING the end transaction,
-    // and MODIFYING the start transaction as needed.
+    // 'Matching' the transactions entails DELETING the imported transaction (ti),
+    // and MODIFYING the manual entered transaction (tm) as needed.
     //
     // There are a variety of ways that a transaction can conflict.
     // Post date, splits, amount are the ones that seem to matter.
     // TODO: Handle these conflicts intelligently, at least warning
     // the user, or better yet letting the user choose which to use.
     //
-    // For now, we will just use the transaction details from the start
-    // transaction.  The only thing we'll take from the end transaction
-    // are the bank ID's.
+    // If the imported split (si) contains a bankID but none is in sm
+    // use the one found in si and add it to sm.
+    // If there is a bankID in BOTH, then this transaction
+    // cannot be merged (both transactions were imported!!)
     //
-    // What we have to do here is iterate over the splits in the end
-    // transaction, and find the corresponding split in the start
-    // transaction.  If there is a bankID in the end split but not the
-    // start split, add it to the start split.  If there is a bankID
-    // in BOTH, then this transaction cannot be merged (both transactions
-    // were imported!!)  If the corresponding start split cannot  be
-    // found and the end split has a bankID, we should probably just fail.
-    // Although we could ADD it to the transaction.
-
-    // ipwizard: Don't know if iterating over the transactions is a good idea.
-    // In case of a split transaction recorded with KMyMoney and the transaction
-    // data being imported consisting only of a single category assignment, this
-    // does not make much sense. The same applies for investment transactions
-    // stored in KMyMoney against imported transactions. I think a better solution
-    // is to just base the match on the splits referencing the same (currently
-    // selected) account.
+    // If the postdate of si differs from the one in sm, we use the one in si
+    // if ti has the imported flag set.
 
     // verify, that tm is a manual (non-matched) transaction
     // allow matching two manual transactions
 
-    if ((!allowImportedTransactions && tm.isImported()) || sm.isMatched())
-        throw MYMONEYEXCEPTION_CSTRING("First transaction does not match requirement for matching");
+    if ((!allowImportedTransactions && tm.isImported()) || sm.isMatched() || si.isMatched())
+        throw MYMONEYEXCEPTION_CSTRING("Transactions does not fullfil requirements for matching");
 
     // verify that the amounts are the same, otherwise we should not be matching!
     if (sm.shares() != si.shares()) {
@@ -116,6 +122,7 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
 
     // mark the split as cleared if it does not have a reconciliation information yet
     if (sm.reconcileFlag() == eMyMoney::Split::State::NotReconciled) {
+        sm.MyMoneyKeyValueContainer::setValue("kmm-orig-not-reconciled", true, false);
         sm.setReconcileFlag(eMyMoney::Split::State::Cleared);
     }
 
@@ -129,30 +136,42 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
     }
 
     // We use the imported postdate and keep the previous one for unmatch
-    if (tm.postDate() != ti.postDate()) {
+    if ((tm.postDate() != ti.postDate()) && ti.isImported()) {
         sm.setValue("kmm-orig-postdate", tm.postDate().toString(Qt::ISODate));
         tm.setPostDate(ti.postDate());
     }
 
-    // combine the two memos into one
+    // combine the two memos into one if they differ
     QString memo = sm.memo();
-    if (!si.memo().isEmpty() && si.memo() != memo) {
+    if (si.memo() != memo) {
         // we use "\xff\xff\xff\xff" as the default so that
         // the entry will be written, even if memo is empty
         sm.setValue("kmm-orig-memo", memo, QLatin1String("\xff\xff\xff\xff"));
-        if (!memo.isEmpty())
+        if (!memo.isEmpty() && !si.memo().isEmpty())
             memo += '\n';
         memo += si.memo();
     }
     sm.setMemo(memo);
+
+    // if tm has only one split and ti has more than one, then simply
+    // copy all splits from ti to tm (skipping si) and remember that
+    // tm had no splits.
+    if (tm.splitCount() == 1 && ti.splitCount() > 1) {
+        sm.MyMoneyKeyValueContainer::setValue("kmm-orig-onesplit", true, false);
+        const auto splits = ti.splits();
+        for (auto split : splits) {
+            if (split.id() == si.id())
+                continue;
+            split.clearId();
+            tm.addSplit(split);
+        }
+    }
 
     // remember the split we matched
     sm.setValue("kmm-match-split", si.id());
 
     sm.addMatch(ti);
     tm.modifySplit(sm);
-
-    ti.modifySplit(si);///
 
     if (file->isInvestmentTransaction(tm)) {
         // find the security split and set the memo to the same as sm.memo
@@ -169,13 +188,15 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
     }
 
     file->modifyTransaction(tm);
-    // Delete the end transaction if it was stored in the engine
+
+    // Delete the imported transaction if it was previously stored in the engine
     if (!ti.id().isEmpty())
         file->removeTransaction(ti);
 }
 
 void TransactionMatcher::unmatch(const MyMoneyTransaction& _t, const MyMoneySplit& _s)
 {
+    Q_D(TransactionMatcher);
     if (_s.isMatched()) {
         MyMoneyTransaction tm(_t);
         MyMoneySplit sm(_s);
@@ -203,10 +224,23 @@ void TransactionMatcher::unmatch(const MyMoneyTransaction& _t, const MyMoneySpli
             sm.setMemo(sm.value("kmm-orig-memo"));
         }
 
-        sm.deletePair("kmm-orig-postdate");
-        sm.deletePair("kmm-orig-payee");
-        sm.deletePair("kmm-orig-memo");
-        sm.deletePair("kmm-match-split");
+        // restore reconcileFlag if modified
+        if (sm.MyMoneyKeyValueContainer::value("kmm-orig-not-reconciled", false)) {
+            sm.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
+            sm.setReconcileDate(QDate());
+        }
+
+        // remove splits if they were added during matching
+        if (sm.MyMoneyKeyValueContainer::value("kmm-orig-onesplit", false)) {
+            const auto splits = tm.splits();
+            for (auto split : splits) {
+                if (split.id() == sm.id())
+                    continue;
+                tm.removeSplit(split);
+            }
+        }
+
+        d->clearMatchFlags(sm);
         sm.setBankID(QString());
         tm.modifySplit(sm);
 
@@ -217,14 +251,12 @@ void TransactionMatcher::unmatch(const MyMoneyTransaction& _t, const MyMoneySpli
 
 void TransactionMatcher::accept(const MyMoneyTransaction& _t, const MyMoneySplit& _s)
 {
+    Q_D(TransactionMatcher);
     if (_s.isMatched()) {
         MyMoneyTransaction tm(_t);
         MyMoneySplit sm(_s);
         sm.removeMatch();
-        sm.deletePair("kmm-orig-postdate");
-        sm.deletePair("kmm-orig-payee");
-        sm.deletePair("kmm-orig-memo");
-        sm.deletePair("kmm-match-split");
+        d->clearMatchFlags(sm);
         tm.modifySplit(sm);
 
         MyMoneyFile::instance()->modifyTransaction(tm);
