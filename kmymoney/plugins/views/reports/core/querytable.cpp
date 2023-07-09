@@ -719,6 +719,7 @@ void QueryTable::constructTransactionTable()
                         for (it_split = splits.begin(); it_split != splits.end(); ++it_split) {
                             if ((*it_split) == assetAccountSplit) {
                                 splitAcc = ReportAccount(assetAccountSplit.accountId()); // switch over from stock split to asset split because amount in stock split doesn't take fees/interests into account
+                                include_me |= m_config.includes(splitAcc);
                                 myBegin = it_split;                       // set myBegin to asset split, so stock split can be listed in details under splits
                                 myBeginCurrency = (file->account((*myBegin).accountId())).currencyId();
                                 if (m_config.isConvertCurrency()) {
