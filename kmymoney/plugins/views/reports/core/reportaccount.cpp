@@ -23,12 +23,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
+#include "accountsmodel.h"
+#include "mymoneyenums.h"
 #include "mymoneyfile.h"
+#include "mymoneymoney.h"
 #include "mymoneyprice.h"
 #include "mymoneysecurity.h"
 #include "reportdebug.h"
-#include "mymoneyenums.h"
 
 namespace reports
 {
@@ -80,31 +81,34 @@ void ReportAccount::calculateAccountHierarchy()
     MyMoneyFile* file = MyMoneyFile::instance();
     QString resultid = id();
     QString parentid = parentAccountId();
+    QModelIndex resultIdx = file->accountsModel()->indexById(resultid);
 
 #ifdef DEBUG_HIDE_SENSITIVE
-    m_nameHierarchy.prepend(file->account(resultid).id());
+    m_nameHierarchy.prepend(resultid);
 #else
-    m_nameHierarchy.prepend(file->account(resultid).name());
+    m_nameHierarchy.prepend(resultIdx.data(eMyMoney::Model::AccountNameRole).toString());
 #endif
+
     while (!parentid.isEmpty() && !file->isStandardAccount(parentid)) {
         // take on the identity of our parent
         resultid = parentid;
+        resultIdx = file->accountsModel()->indexById(resultid);
 
         // and try again
-        parentid = file->account(resultid).parentAccountId();
+        parentid = resultIdx.data(eMyMoney::Model::AccountParentIdRole).toString();
 #ifdef DEBUG_HIDE_SENSITIVE
-        m_nameHierarchy.prepend(file->account(resultid).id());
+        m_nameHierarchy.prepend(resultid);
 #else
-        m_nameHierarchy.prepend(file->account(resultid).name());
+        m_nameHierarchy.prepend(resultIdx.data(eMyMoney::Model::AccountNameRole).toString());
 #endif
     }
-    m_tradingCurrencyId = tradingCurrencyId();
 
     // First, get the deep currency
     m_deepcurrency = file->security(currencyId());
     if (!m_deepcurrency.isCurrency()) {
         m_deepcurrency = file->security(m_deepcurrency.tradingCurrency());
     }
+    m_tradingCurrencyId = m_deepcurrency.id();
 }
 
 MyMoneyMoney ReportAccount::deepCurrencyPrice(const QDate& date, bool exactDate) const
