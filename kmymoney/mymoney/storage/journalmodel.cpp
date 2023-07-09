@@ -510,7 +510,7 @@ JournalModel::JournalModel(QObject* parent, QUndoStack* undoStack)
     , d(new Private(this))
 {
     setObjectName(QLatin1String("JournalModel"));
-    useIdToItemMapper(true);
+    setUseIdToItemMapper(true);
 }
 
 JournalModel::JournalModel(const QString& idLeadin, QObject* parent, QUndoStack* undoStack)
@@ -518,7 +518,7 @@ JournalModel::JournalModel(const QString& idLeadin, QObject* parent, QUndoStack*
     , d(new Private(this))
 {
     setObjectName(QLatin1String("JournalModel"));
-    useIdToItemMapper(true);
+    setUseIdToItemMapper(true);
 }
 
 JournalModel::~JournalModel()

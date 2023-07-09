@@ -59,6 +59,7 @@ SecuritiesModel::SecuritiesModel(QObject* parent, QUndoStack* undoStack)
     , d(new Private(this, parent))
 {
     setObjectName(QLatin1String("SecuritiesModel"));
+    setUseIdToItemMapper(true);
 }
 
 SecuritiesModel::~SecuritiesModel()
@@ -194,9 +195,13 @@ void SecuritiesModel::loadCurrencies(const QMap<QString, MyMoneySecurity>& list)
     setDirty(false);
 
     int row = 0;
-    Q_FOREACH (const auto& item, list) {
-        static_cast<TreeItem<MyMoneySecurity>*>(index(row, 0).internalPointer())->dataRef() = item;
-        static_cast<TreeItem<MyMoneySecurity>*>(index(row, 0).internalPointer())->dataRef().setSecurityType(eMyMoney::Security::Type::Currency);
+    for (const auto& item : list) {
+        const auto idx = index(row, 0);
+        static_cast<TreeItem<MyMoneySecurity>*>(idx.internalPointer())->dataRef() = item;
+        static_cast<TreeItem<MyMoneySecurity>*>(idx.internalPointer())->dataRef().setSecurityType(eMyMoney::Security::Type::Currency);
+        if (m_idToItemMapper) {
+            m_idToItemMapper->insert(item.id(), static_cast<TreeItem<MyMoneySecurity>*>(idx.internalPointer()));
+        }
         ++row;
     }
     endResetModel();
@@ -213,14 +218,17 @@ void SecuritiesModel::addCurrency(const MyMoneySecurity& currency)
     m_idMatchExp.setPattern(QStringLiteral("^(\\d+)$"));
 
     if (!currency.id().isEmpty()) {
-        const auto idx = indexById(currency.id());
+        auto idx = indexById(currency.id());
         if (!idx.isValid()) {
             const int row = rowCount();
             insertRows(row, 1);
-            const QModelIndex index = SecuritiesModel::index(row, 0);
-            static_cast<TreeItem<MyMoneySecurity>*>(index.internalPointer())->dataRef() = currency;
+            idx = SecuritiesModel::index(row, 0);
+            static_cast<TreeItem<MyMoneySecurity>*>(idx.internalPointer())->dataRef() = currency;
+            if (m_idToItemMapper) {
+                m_idToItemMapper->insert(currency.id(), static_cast<TreeItem<MyMoneySecurity>*>(idx.internalPointer()));
+            }
             setDirty();
-            Q_EMIT dataChanged(index, SecuritiesModel::index(row, columnCount()-1));
+            Q_EMIT dataChanged(idx, SecuritiesModel::index(row, columnCount() - 1));
         } else {
             qDebug() << "Currency with ID" << currency.id() << "already exists";
         }

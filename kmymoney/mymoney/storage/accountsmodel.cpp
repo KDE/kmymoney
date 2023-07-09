@@ -379,7 +379,8 @@ AccountsModel::AccountsModel(QObject* parent, QUndoStack* undoStack)
 
     setObjectName(QLatin1String("AccountsModel"));
 
-    useIdToItemMapper(true);
+    setUseIdToItemMapper(true);
+    setFullTableScan(true);
 
     // force creation of empty account structure
     unload();

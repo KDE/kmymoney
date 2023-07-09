@@ -52,7 +52,7 @@ TemplatesModel::TemplatesModel(QObject* parent, QUndoStack* undoStack)
 {
     setObjectName(QLatin1String("TemplatesModel"));
 
-    useIdToItemMapper(true);
+    setUseIdToItemMapper(true);
 
     // force creation of empty template structure
     unload();

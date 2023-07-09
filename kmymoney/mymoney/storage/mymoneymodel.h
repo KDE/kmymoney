@@ -206,13 +206,12 @@ public:
         T                 m_after;
     };
 
-
-
     explicit MyMoneyModel(QObject* parent, const QString& idLeadin, quint8 idSize, QUndoStack* undoStack)
         : MyMoneyModelBase(parent, idLeadin, idSize)
         , m_emptyItemModel(nullptr)
         , m_undoStack(undoStack)
         , m_idToItemMapper(nullptr)
+        , m_fullTableScan(false)
     {
         m_rootItem = new TreeItem<T>(T());
     }
@@ -232,7 +231,30 @@ public:
         return m_emptyItemModel;
     }
 
-    void useIdToItemMapper(bool use)
+    /**
+     * In case the idToItemMapper is used it might still
+     * be necessary to search all items even it is not
+     * found using the idToItemMapper. This can be accomplished
+     * by calling this method with @a use equals to @c true.
+     *
+     * @sa setUseIdToItemMapper()
+     */
+    void setFullTableScan(bool fullTableScan)
+    {
+        m_fullTableScan = fullTableScan;
+    }
+
+    /**
+     * For large models it might be faster to have an
+     * index setup on the id of the object. This will
+     * add a memory overhead but improves speed significantly.
+     *
+     * @param use Setup an index if set to @c true
+     *
+     * @note When turning on existing items in the model will
+     *       not be indexed
+     */
+    void setUseIdToItemMapper(bool use)
     {
         if (use && (m_idToItemMapper == nullptr)) {
             m_idToItemMapper = new QHash<QString, TreeItem<T>*>();
@@ -479,6 +501,9 @@ public:
             const auto item = m_idToItemMapper->value(id, nullptr);
             if (item) {
                 return createIndex(item->row(), 0, item);
+            }
+            if (!m_fullTableScan) {
+                return {};
             }
         }
         const QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, id, 1, Qt::MatchFixedString | Qt::MatchRecursive);
@@ -816,6 +841,7 @@ protected:
     QUndoStack* m_undoStack;
     QHash<QString, TreeItem<T>*>* m_idToItemMapper;
     QSet<QString> m_referencedObjects;
+    bool m_fullTableScan;
 };
 
 template <typename T>

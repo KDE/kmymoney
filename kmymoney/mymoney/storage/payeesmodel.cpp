@@ -66,7 +66,7 @@ PayeesModel::PayeesModel(QObject* parent, QUndoStack* undoStack)
     , d(new Private(this))
 {
     setObjectName(QLatin1String("PayeesModel"));
-    useIdToItemMapper(true);
+    setUseIdToItemMapper(true);
 }
 
 PayeesModel::~PayeesModel()
