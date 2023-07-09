@@ -1788,7 +1788,8 @@ QString PivotTable::renderHTML() const
                                             if (it_row.key().isInvest()) // stock account isn't evaluated in currency, so take investment account instead
                                                 currencyPrecision = MyMoneyMoney::denomToPrec(it_row.key().parent().fraction());
                                             else
-                                                currencyPrecision = MyMoneyMoney::denomToPrec(it_row.key().fraction());
+                                                currencyPrecision = MyMoneyMoney::denomToPrec(
+                                                    !m_config.isConvertCurrency() ? it_row.key().fraction() : file->baseCurrency().smallestAccountFraction());
                                             precision = currencyPrecision;
                                         } else
                                             precision = currencyPrecision;
