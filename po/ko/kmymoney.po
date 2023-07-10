@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-03 00:55+0000\n"
+"POT-Creation-Date: 2023-07-10 00:47+0000\n"
 "PO-Revision-Date: 2022-07-13 15:41+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -305,8 +305,8 @@ msgstr ""
 "계좌를 선택하거나, 새 계좌를 만들거나, <b>중단</b> 단추를 눌러야 합니다."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1629
-#: kmymoney/views/kscheduledview_p.h:192 kmymoney/views/kscheduledview_p.h:307
-#: kmymoney/views/kscheduledview_p.h:311
+#: kmymoney/views/kscheduledview_p.h:196 kmymoney/views/kscheduledview_p.h:311
+#: kmymoney/views/kscheduledview_p.h:315
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "예정된 '%1' 거래를 입력할 수 없음"
@@ -1988,7 +1988,7 @@ msgstr "가격"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:232
 #: kmymoney/dialogs/knewaccountdlg.ui:493
-#: kmymoney/mymoney/storage/securitiesmodel.cpp:83
+#: kmymoney/mymoney/storage/securitiesmodel.cpp:84
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:54
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:381
 #: kmymoney/plugins/views/reports/core/listtable.cpp:686
@@ -2086,7 +2086,7 @@ msgstr "주식 이름"
 #: kmymoney/dialogs/kmymoneypricedlg.ui:55
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:75
 #: kmymoney/mymoney/storage/pricemodel.cpp:39
-#: kmymoney/mymoney/storage/securitiesmodel.cpp:87
+#: kmymoney/mymoney/storage/securitiesmodel.cpp:88
 #: kmymoney/plugins/views/reports/core/listtable.cpp:702
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:104
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:61
@@ -3019,7 +3019,7 @@ msgstr "새 가격 항목"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SecurityDlg)
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:95
-#: kmymoney/mymoney/storage/securitiesmodel.cpp:79
+#: kmymoney/mymoney/storage/securitiesmodel.cpp:80
 #: kmymoney/plugins/csv/import/securitydlg.ui:14
 #: kmymoney/views/investtransactioneditor.ui:99
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:193
@@ -6282,7 +6282,7 @@ msgstr "폐쇄됨"
 
 #. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
 #: kmymoney/models/equitiesmodel.cpp:193 kmymoney/models/equitiesmodel.cpp:426
-#: kmymoney/mymoney/storage/securitiesmodel.cpp:81
+#: kmymoney/mymoney/storage/securitiesmodel.cpp:82
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:60
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:77
 #, kde-format
@@ -6389,7 +6389,7 @@ msgstr "거래 분할"
 
 #: kmymoney/models/ledgertransaction_p.h:84 kmymoney/mymoney/splitmodel.cpp:112
 #: kmymoney/mymoney/storage/journalmodel.cpp:187
-#: kmymoney/plugins/views/reports/core/querytable.cpp:981
+#: kmymoney/plugins/views/reports/core/querytable.cpp:982
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "*** 할당되지 않음 ***"
@@ -8284,39 +8284,39 @@ msgstr "지출 분류"
 msgid "Equity accounts"
 msgstr "자본 계좌"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:412
+#: kmymoney/mymoney/storage/accountsmodel.cpp:413
 #, kde-format
 msgctxt "@title:column Shows the Name of account"
 msgid "Name"
 msgstr "이름"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:414
+#: kmymoney/mymoney/storage/accountsmodel.cpp:415
 #, kde-format
 msgctxt ""
 "@title:column Shows the Type of account (e.g. Asset, Checking, Credit Card)"
 msgid "Type"
 msgstr "형식"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:416
+#: kmymoney/mymoney/storage/accountsmodel.cpp:417
 #, kde-format
 msgctxt ""
 "@title:column Indicates whether account has an online mapping configured"
 msgid "Online"
 msgstr "온라인"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:418
+#: kmymoney/mymoney/storage/accountsmodel.cpp:419
 #, kde-format
 msgctxt "@title:column Indicates whether account is included in tax reports"
 msgid "Tax"
 msgstr "세금"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:420
+#: kmymoney/mymoney/storage/accountsmodel.cpp:421
 #, kde-format
 msgctxt "@title:column Shows VAT percentage rate, if configured"
 msgid "VAT"
 msgstr "부가가치세"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:422
+#: kmymoney/mymoney/storage/accountsmodel.cpp:423
 #, kde-format
 msgctxt ""
 "@title:column Indicates whether a Cost Center assignment is necessary when "
@@ -8324,19 +8324,19 @@ msgctxt ""
 msgid "CC"
 msgstr "CC"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:424
+#: kmymoney/mymoney/storage/accountsmodel.cpp:425
 #, kde-format
 msgctxt "@title:column Shows account's balance (in account's currency)"
 msgid "Balance"
 msgstr "잔액"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:426
-#: kmymoney/mymoney/storage/accountsmodel.cpp:462
+#: kmymoney/mymoney/storage/accountsmodel.cpp:427
+#: kmymoney/mymoney/storage/accountsmodel.cpp:463
 #, kde-format
 msgid "Posted Value"
 msgstr "고시된 가치"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:428
+#: kmymoney/mymoney/storage/accountsmodel.cpp:429
 #, kde-format
 msgctxt ""
 "@title:column Shows Total Value, which includes a sum of all subaccounts (in "
@@ -8344,19 +8344,19 @@ msgctxt ""
 msgid "Total Value"
 msgstr "가치 총액"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:430
+#: kmymoney/mymoney/storage/accountsmodel.cpp:431
 #, kde-format
 msgctxt "@title:column Shows Account Number"
 msgid "Number"
 msgstr "번호"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:432
+#: kmymoney/mymoney/storage/accountsmodel.cpp:433
 #, kde-format
 msgctxt "@title:column Shows IBAN"
 msgid "IBAN"
 msgstr "IBAN"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:437
+#: kmymoney/mymoney/storage/accountsmodel.cpp:438
 #, kde-format
 msgctxt ""
 "@title:column Shows Bank Code. Use a generic form, do not translate using a "
@@ -8365,13 +8365,13 @@ msgctxt ""
 msgid "Bank Code"
 msgstr "은행 코드"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:439
+#: kmymoney/mymoney/storage/accountsmodel.cpp:440
 #, kde-format
 msgctxt "@title:column Shows SWIFT/BIC"
 msgid "SWIFT/BIC"
 msgstr "SWIFT/BIC"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:448
+#: kmymoney/mymoney/storage/accountsmodel.cpp:449
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Name' column. Used in Account, Category and Institution "
@@ -8379,7 +8379,7 @@ msgctxt ""
 msgid "Full name"
 msgstr "전체 이름"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:450
+#: kmymoney/mymoney/storage/accountsmodel.cpp:451
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Type' column, used in both Account and Category context, "
@@ -8387,56 +8387,56 @@ msgctxt ""
 msgid "Type"
 msgstr "형식"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:452
+#: kmymoney/mymoney/storage/accountsmodel.cpp:453
 #, kde-format
 msgctxt "@info:tooltip for 'Online' column (YES/NO value)"
 msgid "Whether account has online mapping set up"
 msgstr "계좌에 온라인 매핑 설정 여부"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:454
+#: kmymoney/mymoney/storage/accountsmodel.cpp:455
 #, kde-format
 msgctxt "@info:tooltip for 'Tax' column (YES/NO value)"
 msgid "Whether account is included in tax reports"
 msgstr "세금 보고에 계좌 포함 여부"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:456
+#: kmymoney/mymoney/storage/accountsmodel.cpp:457
 #, kde-format
 msgctxt "@info:tooltip for 'VAT' column (% rate)"
 msgid "VAT percentage rate, if configured."
 msgstr "설정된 경우 부가가치세 비율입니다."
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:458
+#: kmymoney/mymoney/storage/accountsmodel.cpp:459
 #, kde-format
 msgctxt "@info:tooltip for 'CC' column (YES/NO value)"
 msgid ""
 "Whether a cost center assignment is necessary when entering a transaction."
 msgstr "거래를 입력할 때 원가 중심점 할당을 강제할지 여부입니다."
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:460
+#: kmymoney/mymoney/storage/accountsmodel.cpp:461
 #, kde-format
 msgctxt "@info:tooltip for 'Balance' column"
 msgid "Account balance (in account's currency)"
 msgstr "계좌 잔액(계좌에 설정된 통화)"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:464
+#: kmymoney/mymoney/storage/accountsmodel.cpp:465
 #, kde-format
 msgctxt "@info:tooltip for 'Total Value' column"
 msgid "Total Value (including subaccounts)"
 msgstr "하위 계좌 포함"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:466
+#: kmymoney/mymoney/storage/accountsmodel.cpp:467
 #, kde-format
 msgctxt "@info:tooltip for 'Account Number' column"
 msgid "Account or credit card number, as assigned by the institution."
 msgstr "금융기관에서 배당한 계좌나 신용카드 번호입니다."
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:468
+#: kmymoney/mymoney/storage/accountsmodel.cpp:469
 #, kde-format
 msgctxt "@info:tooltip for 'IBAN' column"
 msgid "Account number in IBAN (International Bank Account Number) format"
 msgstr "IBAN(국제 은행 계좌 번호) 형식 계좌 번호"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:473
+#: kmymoney/mymoney/storage/accountsmodel.cpp:474
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Bank Code' column. Include an example of the culture-"
@@ -8450,7 +8450,7 @@ msgstr ""
 "중앙 은행, 금융 감독 기관, 은행 조합 등에서 할당한 은행 코드입니다. 미국에서"
 "는 Routing Number, 영국에서는 Sort Code로 불립니다."
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:476
+#: kmymoney/mymoney/storage/accountsmodel.cpp:477
 #, kde-format
 msgctxt "@info:tooltip for 'SWIFT/BIC' column"
 msgid "A Business Identifier Code, also known as SWIFT."
@@ -8936,13 +8936,13 @@ msgctxt "Finished schedule"
 msgid "Finished"
 msgstr "완료"
 
-#: kmymoney/mymoney/storage/securitiesmodel.cpp:85
+#: kmymoney/mymoney/storage/securitiesmodel.cpp:86
 #, kde-format
 msgid "Market"
 msgstr "시장"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2_2)
-#: kmymoney/mymoney/storage/securitiesmodel.cpp:89
+#: kmymoney/mymoney/storage/securitiesmodel.cpp:90
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:81
 #, kde-format
 msgid "Fraction"
@@ -12294,8 +12294,8 @@ msgid "Get Transactions"
 msgstr "거래 가져오기"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:76
-#: kmymoney/plugins/views/reports/core/querytable.cpp:783
-#: kmymoney/plugins/views/reports/core/querytable.cpp:921
+#: kmymoney/plugins/views/reports/core/querytable.cpp:784
+#: kmymoney/plugins/views/reports/core/querytable.cpp:922
 #, kde-format
 msgid "Transfer"
 msgstr "이체"
@@ -15220,8 +15220,8 @@ msgstr "평균"
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1548
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1598
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1674
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1861
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1932
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1862
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1933
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -15470,7 +15470,7 @@ msgstr "결산 금액"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:302
 #: kmymoney/plugins/views/reports/core/listtable.cpp:303
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1622
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1970
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1971
 #, kde-format
 msgid "Grand Total"
 msgstr "총액"
@@ -15743,19 +15743,19 @@ msgid "Long-term Gain"
 msgstr "장기 이익"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:220
-#: kmymoney/plugins/views/reports/core/querytable.cpp:918
-#: kmymoney/plugins/views/reports/core/querytable.cpp:979
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1919
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1938
+#: kmymoney/plugins/views/reports/core/querytable.cpp:919
+#: kmymoney/plugins/views/reports/core/querytable.cpp:980
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1920
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1939
 #, kde-format
 msgid "Transfer from %1"
 msgstr "%1에서 이체"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:919
-#: kmymoney/plugins/views/reports/core/querytable.cpp:978
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1918
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1937
+#: kmymoney/plugins/views/reports/core/querytable.cpp:920
+#: kmymoney/plugins/views/reports/core/querytable.cpp:979
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1919
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1938
 #, kde-format
 msgid "Transfer to %1"
 msgstr "%1(으)로 이체"
@@ -15799,95 +15799,95 @@ msgctxt "@title:column report header"
 msgid "Account"
 msgstr "계좌"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2171
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2172
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "실제"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2176
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2177
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "예산"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2181
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2182
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "차액"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2186
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2187
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "예측"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2191
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2192
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "이동 평균"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2196
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2197
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "이동 평균 가격"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2201
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2202
 #, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
 msgstr "가격"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:549
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1754
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1755
 #, kde-format
 msgid "Month of %1"
 msgstr "%1의 달"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:550
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1755
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1756
 #, kde-format
 msgid "Week of %1"
 msgstr "%1의 주"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:754
-#: kmymoney/plugins/views/reports/core/querytable.cpp:984
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1132
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1881
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2052
+#: kmymoney/plugins/views/reports/core/querytable.cpp:755
+#: kmymoney/plugins/views/reports/core/querytable.cpp:985
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1133
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1882
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2053
 #, kde-format
 msgid "No Institution"
 msgstr "금융기관 없음"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:758
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1892
+#: kmymoney/plugins/views/reports/core/querytable.cpp:759
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1893
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[빈 수취인]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:802
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1924
+#: kmymoney/plugins/views/reports/core/querytable.cpp:803
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1925
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "[분할 거래]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:803
 #: kmymoney/plugins/views/reports/core/querytable.cpp:804
+#: kmymoney/plugins/views/reports/core/querytable.cpp:805
 #, kde-format
 msgctxt "Split transaction"
 msgid "Split"
 msgstr "분할"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:942
-#: kmymoney/plugins/views/reports/core/querytable.cpp:993
+#: kmymoney/plugins/views/reports/core/querytable.cpp:943
+#: kmymoney/plugins/views/reports/core/querytable.cpp:994
 #, kde-format
 msgid "[No Tag]"
 msgstr "[태그 없음]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1666
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1667
 #, kde-format
 msgctxt "No institution"
 msgid "None"
@@ -18846,6 +18846,13 @@ msgstr "입력"
 msgid "Activity"
 msgstr "활동"
 
+#: kmymoney/views/journaldelegate.cpp:84
+#, fuzzy, kde-format
+#| msgid "Copy memo"
+msgctxt "@info placeholder for memo of matched transaction if empty"
+msgid "Empty memo"
+msgstr "메모 복사"
+
 #: kmymoney/views/kaccountsview.cpp:174
 #: kmymoney/views/kinstitutionsview.cpp:208
 #, kde-format
@@ -20028,7 +20035,7 @@ msgctxt "Placeholdertext in schedulesview"
 msgid "Filter"
 msgstr "필터"
 
-#: kmymoney/views/kscheduledview_p.h:246
+#: kmymoney/views/kscheduledview_p.h:250
 #, kde-format
 msgid ""
 "Are you sure you wish to stop this scheduled transaction from being entered "
@@ -20041,28 +20048,28 @@ msgstr ""
 "\n"
 "나중에 수동으로 거래를 입력하지 않는 한 다음에 다시 물어 볼 것입니다."
 
-#: kmymoney/views/kscheduledview_p.h:248
+#: kmymoney/views/kscheduledview_p.h:252
 #, fuzzy, kde-format
 #| msgid "Enter schedule"
 msgctxt "@title:window"
 msgid "Stop entering schedule"
 msgstr "일정 입력"
 
-#: kmymoney/views/kscheduledview_p.h:347
+#: kmymoney/views/kscheduledview_p.h:351
 #, kde-format
 msgid ""
 "<qt>Do you really want to skip the <b>%1</b> transaction scheduled for <b>"
 "%2</b>?</qt>"
 msgstr "<qt><b>%2</b>에 예정된 <b>%1</b> 거래를 건너뛰시겠습니까?</qt>"
 
-#: kmymoney/views/kscheduledview_p.h:350
+#: kmymoney/views/kscheduledview_p.h:354
 #, fuzzy, kde-format
 #| msgid "Edit scheduled transaction"
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
 msgstr "예정된 거래 수정"
 
-#: kmymoney/views/kscheduledview_p.h:363
+#: kmymoney/views/kscheduledview_p.h:367
 #, kde-format
 msgid "<qt>Unable to skip scheduled transaction <b>%1</b>.</qt>"
 msgstr "<qt>예정된 거래 <b>%1</b>을(를) 건너 뛸 수 없습니다.</qt>"
@@ -20188,12 +20195,12 @@ msgstr "태그 설정"
 msgid "Tag color:"
 msgstr "태그 색상:"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:106
+#: kmymoney/views/ktransactionselectdlg.cpp:108
 #, kde-format
 msgid "Merge Transactions"
 msgstr "거래 병합"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:108
+#: kmymoney/views/ktransactionselectdlg.cpp:110
 #, fuzzy, kde-format
 #| msgid ""
 #| "Are you sure you wish to merge these transactions?  The one you selected "
@@ -20210,7 +20217,7 @@ msgstr ""
 "을 합쳐진 거래 내역에 사용합니다. 다른 값을 사용하려면 취소하고 다른 거래 내"
 "역을 선택하십시오."
 
-#: kmymoney/views/ktransactionselectdlg.cpp:114
+#: kmymoney/views/ktransactionselectdlg.cpp:116
 #, fuzzy, kde-format
 #| msgid "Unable to match the selected transactions"
 msgctxt "@info:tooltip Exchange transactions about to merge"
@@ -25404,9 +25411,6 @@ msgstr ""
 #~ msgstr ""
 #~ "다른 분할의 메모<p><i>%1</i></p>을(를)<p><i>%2</i></p>(으)로 바꾸시겠습니"
 #~ "까?"
-
-#~ msgid "Copy memo"
-#~ msgstr "메모 복사"
 
 #~ msgid "KMyMoney has matched the two selected transactions (result above)"
 #~ msgstr "KMyMoney가 선택한 두 거래를 일치시켰습니다(결과는 위 참조)."

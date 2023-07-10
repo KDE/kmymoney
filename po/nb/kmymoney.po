@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-03 00:55+0000\n"
+"POT-Creation-Date: 2023-07-09 01:02+0000\n"
 "PO-Revision-Date: 2023-06-06 14:56+0200\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -317,8 +317,8 @@ msgid ""
 msgstr "Du må velge en konto, opprette en ny eller trykke <b>Avbryt</b>."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1629
-#: kmymoney/views/kscheduledview_p.h:192 kmymoney/views/kscheduledview_p.h:307
-#: kmymoney/views/kscheduledview_p.h:311
+#: kmymoney/views/kscheduledview_p.h:196 kmymoney/views/kscheduledview_p.h:311
+#: kmymoney/views/kscheduledview_p.h:315
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Kan ikke legge inn planlagt transaksjon '%1'"
@@ -20151,7 +20151,7 @@ msgctxt "Placeholdertext in schedulesview"
 msgid "Filter"
 msgstr "Filter"
 
-#: kmymoney/views/kscheduledview_p.h:246
+#: kmymoney/views/kscheduledview_p.h:250
 #, kde-format
 msgid ""
 "Are you sure you wish to stop this scheduled transaction from being entered "
@@ -20166,13 +20166,13 @@ msgstr ""
 "KMyMoney vil spørre deg igjen neste gang den starter med mindre du legger "
 "den inn manuelt senere."
 
-#: kmymoney/views/kscheduledview_p.h:248
+#: kmymoney/views/kscheduledview_p.h:252
 #, kde-format
 msgctxt "@title:window"
 msgid "Stop entering schedule"
 msgstr "Stop føring av tidsplan"
 
-#: kmymoney/views/kscheduledview_p.h:347
+#: kmymoney/views/kscheduledview_p.h:351
 #, kde-format
 msgid ""
 "<qt>Do you really want to skip the <b>%1</b> transaction scheduled for "
@@ -20181,13 +20181,13 @@ msgstr ""
 "<qt>Vil du virkelig hoppe over transaksjonen <b>%1</b> som er planlagt til "
 "<b>%2</b>?</qt>"
 
-#: kmymoney/views/kscheduledview_p.h:350
+#: kmymoney/views/kscheduledview_p.h:354
 #, kde-format
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
 msgstr "Hopp over planlagt transaksjon"
 
-#: kmymoney/views/kscheduledview_p.h:363
+#: kmymoney/views/kscheduledview_p.h:367
 #, kde-format
 msgid "<qt>Unable to skip scheduled transaction <b>%1</b>.</qt>"
 msgstr "<qt>Kan ikke hoppe over planlagt transaksjon <b>%1</b>.</qt>"

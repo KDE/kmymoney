@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-03 00:55+0000\n"
+"POT-Creation-Date: 2023-07-10 00:47+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -321,8 +321,8 @@ msgstr ""
 "Morate odabrati račun, kreirati novi, ili pritisnuti na <b>Prekini</b> dugme."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1629
-#: kmymoney/views/kscheduledview_p.h:192 kmymoney/views/kscheduledview_p.h:307
-#: kmymoney/views/kscheduledview_p.h:311
+#: kmymoney/views/kscheduledview_p.h:196 kmymoney/views/kscheduledview_p.h:311
+#: kmymoney/views/kscheduledview_p.h:315
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
 msgstr "Nemoguće pristupiti planiranoj transakciji '%1'"
@@ -2065,7 +2065,7 @@ msgstr "Cjene"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_listAccount)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:232
 #: kmymoney/dialogs/knewaccountdlg.ui:493
-#: kmymoney/mymoney/storage/securitiesmodel.cpp:83
+#: kmymoney/mymoney/storage/securitiesmodel.cpp:84
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:54
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:381
 #: kmymoney/plugins/views/reports/core/listtable.cpp:686
@@ -2165,7 +2165,7 @@ msgstr "Naziv dionice"
 #: kmymoney/dialogs/kmymoneypricedlg.ui:55
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:75
 #: kmymoney/mymoney/storage/pricemodel.cpp:39
-#: kmymoney/mymoney/storage/securitiesmodel.cpp:87
+#: kmymoney/mymoney/storage/securitiesmodel.cpp:88
 #: kmymoney/plugins/views/reports/core/listtable.cpp:702
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:104
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:61
@@ -3074,7 +3074,7 @@ msgstr "Novi zapis cijene"
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #. i18n: ectx: property (windowTitle), widget (QDialog, SecurityDlg)
 #: kmymoney/dialogs/kupdatestockpricedlg.ui:95
-#: kmymoney/mymoney/storage/securitiesmodel.cpp:79
+#: kmymoney/mymoney/storage/securitiesmodel.cpp:80
 #: kmymoney/plugins/csv/import/securitydlg.ui:14
 #: kmymoney/views/investtransactioneditor.ui:99
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:193
@@ -6504,7 +6504,7 @@ msgstr "Zatvoreno"
 
 #. i18n: ectx: property (text), widget (QTableWidget, tableWidget)
 #: kmymoney/models/equitiesmodel.cpp:193 kmymoney/models/equitiesmodel.cpp:426
-#: kmymoney/mymoney/storage/securitiesmodel.cpp:81
+#: kmymoney/mymoney/storage/securitiesmodel.cpp:82
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:60
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:77
 #, fuzzy, kde-format
@@ -6615,7 +6615,7 @@ msgstr "Razdvajajuća transakcija"
 
 #: kmymoney/models/ledgertransaction_p.h:84 kmymoney/mymoney/splitmodel.cpp:112
 #: kmymoney/mymoney/storage/journalmodel.cpp:187
-#: kmymoney/plugins/views/reports/core/querytable.cpp:981
+#: kmymoney/plugins/views/reports/core/querytable.cpp:982
 #, kde-format
 msgid "*** UNASSIGNED ***"
 msgstr "***NEDODJLJENO***"
@@ -8578,7 +8578,7 @@ msgstr "Rashodne kategorije"
 msgid "Equity accounts"
 msgstr "Vlasnički računi"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:412
+#: kmymoney/mymoney/storage/accountsmodel.cpp:413
 #, fuzzy, kde-format
 #| msgctxt "@title header of the currency name column"
 #| msgid "Name"
@@ -8586,7 +8586,7 @@ msgctxt "@title:column Shows the Name of account"
 msgid "Name"
 msgstr "Ime"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:414
+#: kmymoney/mymoney/storage/accountsmodel.cpp:415
 #, fuzzy, kde-format
 #| msgid "Type"
 msgctxt ""
@@ -8594,7 +8594,7 @@ msgctxt ""
 msgid "Type"
 msgstr "Tip"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:416
+#: kmymoney/mymoney/storage/accountsmodel.cpp:417
 #, fuzzy, kde-format
 #| msgid "End line"
 msgctxt ""
@@ -8602,14 +8602,14 @@ msgctxt ""
 msgid "Online"
 msgstr "Zadnja linija"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:418
+#: kmymoney/mymoney/storage/accountsmodel.cpp:419
 #, fuzzy, kde-format
 #| msgid "Tax"
 msgctxt "@title:column Indicates whether account is included in tax reports"
 msgid "Tax"
 msgstr "Porez"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:420
+#: kmymoney/mymoney/storage/accountsmodel.cpp:421
 #, fuzzy, kde-format
 #| msgctxt "Column heading for VAT category"
 #| msgid "VAT"
@@ -8617,7 +8617,7 @@ msgctxt "@title:column Shows VAT percentage rate, if configured"
 msgid "VAT"
 msgstr "VAT"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:422
+#: kmymoney/mymoney/storage/accountsmodel.cpp:423
 #, fuzzy, kde-format
 #| msgid "C"
 msgctxt ""
@@ -8626,21 +8626,21 @@ msgctxt ""
 msgid "CC"
 msgstr "C"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:424
+#: kmymoney/mymoney/storage/accountsmodel.cpp:425
 #, fuzzy, kde-format
 #| msgid "Balance"
 msgctxt "@title:column Shows account's balance (in account's currency)"
 msgid "Balance"
 msgstr "Bilans"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:426
-#: kmymoney/mymoney/storage/accountsmodel.cpp:462
+#: kmymoney/mymoney/storage/accountsmodel.cpp:427
+#: kmymoney/mymoney/storage/accountsmodel.cpp:463
 #, fuzzy, kde-format
 #| msgid "Total Value"
 msgid "Posted Value"
 msgstr "Ukupna vrijednost"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:428
+#: kmymoney/mymoney/storage/accountsmodel.cpp:429
 #, fuzzy, kde-format
 #| msgid "Total Value"
 msgctxt ""
@@ -8649,21 +8649,21 @@ msgctxt ""
 msgid "Total Value"
 msgstr "Ukupna vrijednost"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:430
+#: kmymoney/mymoney/storage/accountsmodel.cpp:431
 #, fuzzy, kde-format
 #| msgid "Number"
 msgctxt "@title:column Shows Account Number"
 msgid "Number"
 msgstr "Broj"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:432
+#: kmymoney/mymoney/storage/accountsmodel.cpp:433
 #, fuzzy, kde-format
 #| msgid "IBAN"
 msgctxt "@title:column Shows IBAN"
 msgid "IBAN"
 msgstr "IBAN"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:437
+#: kmymoney/mymoney/storage/accountsmodel.cpp:438
 #, fuzzy, kde-format
 #| msgid "Bank Code"
 msgctxt ""
@@ -8673,13 +8673,13 @@ msgctxt ""
 msgid "Bank Code"
 msgstr "Bankovni kod"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:439
+#: kmymoney/mymoney/storage/accountsmodel.cpp:440
 #, kde-format
 msgctxt "@title:column Shows SWIFT/BIC"
 msgid "SWIFT/BIC"
 msgstr ""
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:448
+#: kmymoney/mymoney/storage/accountsmodel.cpp:449
 #, fuzzy, kde-format
 #| msgid "Full name"
 msgctxt ""
@@ -8688,7 +8688,7 @@ msgctxt ""
 msgid "Full name"
 msgstr "Puno ime"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:450
+#: kmymoney/mymoney/storage/accountsmodel.cpp:451
 #, fuzzy, kde-format
 #| msgid "Type"
 msgctxt ""
@@ -8697,27 +8697,27 @@ msgctxt ""
 msgid "Type"
 msgstr "Tip"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:452
+#: kmymoney/mymoney/storage/accountsmodel.cpp:453
 #, fuzzy, kde-format
 #| msgid "Homepage can show accounts online banking status"
 msgctxt "@info:tooltip for 'Online' column (YES/NO value)"
 msgid "Whether account has online mapping set up"
 msgstr "Početna stranica može pokazati status računa online bankarstva"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:454
+#: kmymoney/mymoney/storage/accountsmodel.cpp:455
 #, fuzzy, kde-format
 #| msgid "Homepage can show accounts online banking status"
 msgctxt "@info:tooltip for 'Tax' column (YES/NO value)"
 msgid "Whether account is included in tax reports"
 msgstr "Početna stranica može pokazati status računa online bankarstva"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:456
+#: kmymoney/mymoney/storage/accountsmodel.cpp:457
 #, kde-format
 msgctxt "@info:tooltip for 'VAT' column (% rate)"
 msgid "VAT percentage rate, if configured."
 msgstr ""
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:458
+#: kmymoney/mymoney/storage/accountsmodel.cpp:459
 #, fuzzy, kde-format
 #| msgid "Cannot create transactions in the context of a category."
 msgctxt "@info:tooltip for 'CC' column (YES/NO value)"
@@ -8725,33 +8725,33 @@ msgid ""
 "Whether a cost center assignment is necessary when entering a transaction."
 msgstr "Nije moguće kreirati transakciju u okviru kategorije."
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:460
+#: kmymoney/mymoney/storage/accountsmodel.cpp:461
 #, kde-format
 msgctxt "@info:tooltip for 'Balance' column"
 msgid "Account balance (in account's currency)"
 msgstr ""
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:464
+#: kmymoney/mymoney/storage/accountsmodel.cpp:465
 #, fuzzy, kde-format
 #| msgid "Include subaccounts"
 msgctxt "@info:tooltip for 'Total Value' column"
 msgid "Total Value (including subaccounts)"
 msgstr "Uključi podračune"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:466
+#: kmymoney/mymoney/storage/accountsmodel.cpp:467
 #, kde-format
 msgctxt "@info:tooltip for 'Account Number' column"
 msgid "Account or credit card number, as assigned by the institution."
 msgstr ""
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:468
+#: kmymoney/mymoney/storage/accountsmodel.cpp:469
 #, fuzzy, kde-format
 #| msgid "Enter the International Bank Account Number into this field"
 msgctxt "@info:tooltip for 'IBAN' column"
 msgid "Account number in IBAN (International Bank Account Number) format"
 msgstr "Unesite Broj Računa Internacionalne Banke u ovo polje"
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:473
+#: kmymoney/mymoney/storage/accountsmodel.cpp:474
 #, kde-format
 msgctxt ""
 "@info:tooltip for 'Bank Code' column. Include an example of the culture-"
@@ -8763,7 +8763,7 @@ msgid ""
 "'Sort Code' (UK accounts)."
 msgstr ""
 
-#: kmymoney/mymoney/storage/accountsmodel.cpp:476
+#: kmymoney/mymoney/storage/accountsmodel.cpp:477
 #, kde-format
 msgctxt "@info:tooltip for 'SWIFT/BIC' column"
 msgid "A Business Identifier Code, also known as SWIFT."
@@ -9299,13 +9299,13 @@ msgctxt "Finished schedule"
 msgid "Finished"
 msgstr "Završeno"
 
-#: kmymoney/mymoney/storage/securitiesmodel.cpp:85
+#: kmymoney/mymoney/storage/securitiesmodel.cpp:86
 #, kde-format
 msgid "Market"
 msgstr "Tržište"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2_2)
-#: kmymoney/mymoney/storage/securitiesmodel.cpp:89
+#: kmymoney/mymoney/storage/securitiesmodel.cpp:90
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:81
 #, kde-format
 msgid "Fraction"
@@ -12884,8 +12884,8 @@ msgid "Get Transactions"
 msgstr "Dobavi transakcije"
 
 #: kmymoney/plugins/kbanking/widgets/kbjoblist.cpp:76
-#: kmymoney/plugins/views/reports/core/querytable.cpp:783
-#: kmymoney/plugins/views/reports/core/querytable.cpp:921
+#: kmymoney/plugins/views/reports/core/querytable.cpp:784
+#: kmymoney/plugins/views/reports/core/querytable.cpp:922
 #, kde-format
 msgid "Transfer"
 msgstr "Prijenos"
@@ -15909,8 +15909,8 @@ msgstr "Prosjek"
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1548
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1598
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1674
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1861
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1932
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1862
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1933
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
@@ -16161,7 +16161,7 @@ msgstr "Završni bilans"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:302
 #: kmymoney/plugins/views/reports/core/listtable.cpp:303
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1622
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:1970
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:1971
 #, kde-format
 msgid "Grand Total"
 msgstr "Sve ukupno"
@@ -16443,19 +16443,19 @@ msgid "Long-term Gain"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:220
-#: kmymoney/plugins/views/reports/core/querytable.cpp:918
-#: kmymoney/plugins/views/reports/core/querytable.cpp:979
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1919
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1938
+#: kmymoney/plugins/views/reports/core/querytable.cpp:919
+#: kmymoney/plugins/views/reports/core/querytable.cpp:980
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1920
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1939
 #, kde-format
 msgid "Transfer from %1"
 msgstr "Transfer od %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:221
-#: kmymoney/plugins/views/reports/core/querytable.cpp:919
-#: kmymoney/plugins/views/reports/core/querytable.cpp:978
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1918
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1937
+#: kmymoney/plugins/views/reports/core/querytable.cpp:920
+#: kmymoney/plugins/views/reports/core/querytable.cpp:979
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1919
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1938
 #, kde-format
 msgid "Transfer to %1"
 msgstr "Transfer za %1"
@@ -16503,49 +16503,49 @@ msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Račun"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2171
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2172
 #, fuzzy, kde-format
 #| msgid "Actual"
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Aktuelno"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2176
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2177
 #, fuzzy, kde-format
 #| msgid "Budget"
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Budžet"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2181
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2182
 #, fuzzy, kde-format
 #| msgid "Difference"
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Razlika"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2186
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2187
 #, fuzzy, kde-format
 #| msgid "Forecast"
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Prognoza"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2191
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2192
 #, fuzzy, kde-format
 #| msgid "Moving Average"
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Usrednjavanje"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2196
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2197
 #, fuzzy, kde-format
 #| msgid "Moving Average Price"
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Pokretna prosječna cijena"
 
-#: kmymoney/plugins/views/reports/core/pivottable.cpp:2201
+#: kmymoney/plugins/views/reports/core/pivottable.cpp:2202
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@title:column report header"
@@ -16553,52 +16553,52 @@ msgid "Price"
 msgstr "Cijena"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:549
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1754
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1755
 #, kde-format
 msgid "Month of %1"
 msgstr "Mjesec %1"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:550
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1755
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1756
 #, kde-format
 msgid "Week of %1"
 msgstr "Nedjelja %1"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:754
-#: kmymoney/plugins/views/reports/core/querytable.cpp:984
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1132
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1881
-#: kmymoney/plugins/views/reports/core/querytable.cpp:2052
+#: kmymoney/plugins/views/reports/core/querytable.cpp:755
+#: kmymoney/plugins/views/reports/core/querytable.cpp:985
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1133
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1882
+#: kmymoney/plugins/views/reports/core/querytable.cpp:2053
 #, kde-format
 msgid "No Institution"
 msgstr "Nema institucije"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:758
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1892
+#: kmymoney/plugins/views/reports/core/querytable.cpp:759
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1893
 #, kde-format
 msgid "[Empty Payee]"
 msgstr "[Prazan primalac]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:802
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1924
+#: kmymoney/plugins/views/reports/core/querytable.cpp:803
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1925
 #, kde-format
 msgid "[Split Transaction]"
 msgstr "Podijeli transakciju"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:803
 #: kmymoney/plugins/views/reports/core/querytable.cpp:804
+#: kmymoney/plugins/views/reports/core/querytable.cpp:805
 #, kde-format
 msgctxt "Split transaction"
 msgid "Split"
 msgstr "Razdvoji"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:942
-#: kmymoney/plugins/views/reports/core/querytable.cpp:993
+#: kmymoney/plugins/views/reports/core/querytable.cpp:943
+#: kmymoney/plugins/views/reports/core/querytable.cpp:994
 #, kde-format
 msgid "[No Tag]"
 msgstr "[Bez taga]"
 
-#: kmymoney/plugins/views/reports/core/querytable.cpp:1666
+#: kmymoney/plugins/views/reports/core/querytable.cpp:1667
 #, kde-format
 msgctxt "No institution"
 msgid "None"
@@ -19733,6 +19733,13 @@ msgstr "Ulaz"
 msgid "Activity"
 msgstr "Aktivnost"
 
+#: kmymoney/views/journaldelegate.cpp:84
+#, fuzzy, kde-format
+#| msgid "Copy of %1"
+msgctxt "@info placeholder for memo of matched transaction if empty"
+msgid "Empty memo"
+msgstr "Kopija %1"
+
 #: kmymoney/views/kaccountsview.cpp:174
 #: kmymoney/views/kinstitutionsview.cpp:208
 #, fuzzy, kde-format
@@ -21008,7 +21015,7 @@ msgctxt "Placeholdertext in schedulesview"
 msgid "Filter"
 msgstr "Filter"
 
-#: kmymoney/views/kscheduledview_p.h:246
+#: kmymoney/views/kscheduledview_p.h:250
 #, kde-format
 msgid ""
 "Are you sure you wish to stop this scheduled transaction from being entered "
@@ -21023,14 +21030,14 @@ msgstr ""
 "KMyMoney će od Vas zatražiti unos kada se pokrene sljedeći put ako ne "
 "izvršite unos ručno."
 
-#: kmymoney/views/kscheduledview_p.h:248
+#: kmymoney/views/kscheduledview_p.h:252
 #, fuzzy, kde-format
 #| msgid "Enter schedule"
 msgctxt "@title:window"
 msgid "Stop entering schedule"
 msgstr "Unesi raspored"
 
-#: kmymoney/views/kscheduledview_p.h:347
+#: kmymoney/views/kscheduledview_p.h:351
 #, fuzzy, kde-format
 #| msgid ""
 #| "Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</"
@@ -21041,14 +21048,14 @@ msgid ""
 msgstr ""
 "Da li zaista želite preskočiti <b>%1</b> transakciju planiranu za <b>%2</b>?"
 
-#: kmymoney/views/kscheduledview_p.h:350
+#: kmymoney/views/kscheduledview_p.h:354
 #, fuzzy, kde-format
 #| msgid "Edit scheduled transaction"
 msgctxt "@title:window"
 msgid "Skip scheduled transaction"
 msgstr "Uredi raspoređena transakciju"
 
-#: kmymoney/views/kscheduledview_p.h:363
+#: kmymoney/views/kscheduledview_p.h:367
 #, fuzzy, kde-format
 #| msgid "Unable to skip scheduled transaction <b>%1</b>."
 msgid "<qt>Unable to skip scheduled transaction <b>%1</b>.</qt>"
@@ -21183,12 +21190,12 @@ msgstr "Konfikuracija oznake"
 msgid "Tag color:"
 msgstr "Boja oznake:"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:106
+#: kmymoney/views/ktransactionselectdlg.cpp:108
 #, kde-format
 msgid "Merge Transactions"
 msgstr "Spoji transakcije"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:108
+#: kmymoney/views/ktransactionselectdlg.cpp:110
 #, kde-format
 msgctxt "@info:label Description of merge transaction dialog"
 msgid ""
@@ -21197,7 +21204,7 @@ msgid ""
 "the other one press the exchange button on the right."
 msgstr ""
 
-#: kmymoney/views/ktransactionselectdlg.cpp:114
+#: kmymoney/views/ktransactionselectdlg.cpp:116
 #, fuzzy, kde-format
 #| msgid "Unable to match the selected transactions"
 msgctxt "@info:tooltip Exchange transactions about to merge"
@@ -26537,11 +26544,6 @@ msgstr ""
 
 #~ msgid "Select autofill transaction"
 #~ msgstr "Odaberi automatsko popunjavanje transakcije"
-
-#, fuzzy
-#~| msgid "Copy of %1"
-#~ msgid "Copy memo"
-#~ msgstr "Kopija %1"
 
 #, fuzzy
 #~| msgid ""
