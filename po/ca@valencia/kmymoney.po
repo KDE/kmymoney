@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-10 00:47+0000\n"
-"PO-Revision-Date: 2023-07-03 09:41+0200\n"
+"PO-Revision-Date: 2023-07-10 09:27+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -19142,11 +19142,10 @@ msgid "Activity"
 msgstr "Activitat"
 
 #: kmymoney/views/journaldelegate.cpp:84
-#, fuzzy, kde-format
-#| msgid "[Empty Payee]"
+#, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
-msgstr "[Beneficiari buit]"
+msgstr "Recordatori buit"
 
 # skip-rule: ff-net
 #: kmymoney/views/kaccountsview.cpp:174

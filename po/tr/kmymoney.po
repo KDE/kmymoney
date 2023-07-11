@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-10 00:47+0000\n"
-"PO-Revision-Date: 2023-07-03 11:48+0300\n"
+"PO-Revision-Date: 2023-07-10 12:48+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -18937,11 +18937,10 @@ msgid "Activity"
 msgstr "Etkinlik"
 
 #: kmymoney/views/journaldelegate.cpp:84
-#, fuzzy, kde-format
-#| msgid "[Empty Payee]"
+#, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
-msgstr "[Boş Alacaklı]"
+msgstr "Boş not"
 
 #: kmymoney/views/kaccountsview.cpp:174
 #: kmymoney/views/kinstitutionsview.cpp:208

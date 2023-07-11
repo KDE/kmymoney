@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-10 00:47+0000\n"
-"PO-Revision-Date: 2023-07-03 09:23+0200\n"
+"PO-Revision-Date: 2023-07-10 07:35+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.3.1\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -19048,11 +19048,10 @@ msgid "Activity"
 msgstr "Dejavnost"
 
 #: kmymoney/views/journaldelegate.cpp:84
-#, fuzzy, kde-format
-#| msgid "[Empty Payee]"
+#, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
-msgstr "[Prazni prejemnik plačila]"
+msgstr "Prazna zabeležka"
 
 #: kmymoney/views/kaccountsview.cpp:174
 #: kmymoney/views/kinstitutionsview.cpp:208

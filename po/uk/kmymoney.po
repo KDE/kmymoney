@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-10 00:47+0000\n"
-"PO-Revision-Date: 2023-07-03 09:09+0300\n"
+"PO-Revision-Date: 2023-07-10 09:44+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -19189,11 +19189,10 @@ msgid "Activity"
 msgstr "Дія"
 
 #: kmymoney/views/journaldelegate.cpp:84
-#, fuzzy, kde-format
-#| msgid "Copy memo"
+#, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
-msgstr "Копіювати нотатку"
+msgstr "Порожня нотатка"
 
 #: kmymoney/views/kaccountsview.cpp:174
 #: kmymoney/views/kinstitutionsview.cpp:208
