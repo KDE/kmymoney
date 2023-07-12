@@ -1495,6 +1495,8 @@ void LedgerView::setSelectedJournalEntries(const QStringList& journalEntryIds)
             } else {
                 // a new range start, so we take care of it
                 createSelectionRange();
+                startRow = row;
+                lastRow = row;
             }
         }
     }
