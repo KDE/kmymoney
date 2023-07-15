@@ -9,20 +9,20 @@
 # Alexander Lakhin <exclusion@gmail.com>, 2013.
 # Yuri Efremov <yur.arh@gmail.com>, 2014.
 # Alexander Yavorsky <kekcuha@gmail.com>, 2020.
-# Olesya Gerasimenko <translation-team@basealt.ru>, 2021, 2022.
+# Olesya Gerasimenko <translation-team@basealt.ru>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-03 03:06+0000\n"
-"PO-Revision-Date: 2022-08-01 15:23+0300\n"
+"PO-Revision-Date: 2023-07-14 18:45+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Environment: kde\n"
@@ -5643,10 +5643,9 @@ msgstr ""
 "Предложения и вклад в виде разработанного кода приветствуются."
 
 #: kmymoney/kcreditswindow.cpp:41
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2019 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2022 The KMyMoney development team"
-msgstr "© Команда разработчиков KMyMoney, 2000—2019"
+msgstr "© Команда разработчиков KMyMoney, 2000—2022"
 
 #: kmymoney/kcreditswindow.cpp:44
 #, kde-format
@@ -6475,11 +6474,10 @@ msgid "&Replace"
 msgstr "&Заменить"
 
 #: kmymoney/kmymoney.cpp:2436
-#, fuzzy, kde-format
-#| msgid "Unable to create account: %1"
+#, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
-msgstr "Невозможно создать счёт: %1"
+msgstr "Не удалось создать каталог для резервных копий «%1»."
 
 #: kmymoney/kmymoney.cpp:2441
 #, kde-format
@@ -6709,17 +6707,14 @@ msgid "Saving file..."
 msgstr "Сохранение файла..."
 
 #: kmymoney/kmymoney.cpp:3513
-#, fuzzy, kde-format
-#| msgid "Failed to save your storage."
+#, kde-format
 msgid "Failed to save your data."
-msgstr "Не удалось сохранить запоминающее устройство."
+msgstr "Не удалось сохранить данные."
 
 #: kmymoney/kmymoney.cpp:3519
-#, fuzzy, kde-format
-#| msgid "Couldn't find suitable plugin to save your storage."
+#, kde-format
 msgid "Couldn't find suitable plugin to save your data."
-msgstr ""
-"Невозможно найти модуль, подходящий для сохранения запоминающего устройства."
+msgstr "Невозможно найти модуль, подходящий для сохранения данных."
 
 #: kmymoney/kmymoney.cpp:3525
 #, kde-format
@@ -6727,12 +6722,9 @@ msgid "Saving file as...."
 msgstr "Сохранение файла...."
 
 #: kmymoney/kmymoney.cpp:3541
-#, fuzzy, kde-format
-#| msgid "Couldn't find any plugin for saving storage."
+#, kde-format
 msgid "Couldn't find any plugin for saving data."
-msgstr ""
-"Невозможно найти модуль, используемый для сохранения запоминающего "
-"устройства."
+msgstr "Невозможно найти модуль, используемый для сохранения данных."
 
 #: kmymoney/kmymoney.cpp:3570
 #, kde-format
@@ -12199,22 +12191,19 @@ msgstr "Удалить разрывы строк из поля примечан�
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:211
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>Flag this account to be an opening balance account</"
-#| "p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>Add additional payee details found in the transaction "
 "to the memo.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Отметить этот счёт как счёт начального баланса</p></"
-"body></html>"
+"<html><head/><body><p>Добавить дополнительные сведения о контрагенте, "
+"обнаруженные в операции, в примечание.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:214
 #, kde-format
 msgid "Include the payee details in memo"
-msgstr ""
+msgstr "Включить сведения о контрагенте в примечание"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, MapAccountWizard)
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBMapAccount)
@@ -17643,7 +17632,7 @@ msgstr "Все"
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:155
 #, kde-format
 msgid "Show totals row"
-msgstr "Показывать ряд с итоговыми суммами"
+msgstr "Показывать строку с итоговыми суммами"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkScheduled)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:182
@@ -17780,7 +17769,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:356
 #, kde-format
 msgid "Include only Investment accounts"
-msgstr "Включать только инвестиционные счета"
+msgstr "Показывать только инвестиционные счета"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_checkHideSplitDetails)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:363
