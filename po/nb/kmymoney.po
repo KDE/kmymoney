@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-10 00:47+0000\n"
-"PO-Revision-Date: 2023-06-06 14:56+0200\n"
+"PO-Revision-Date: 2023-07-16 12:53+0200\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
@@ -5551,7 +5551,7 @@ msgstr "&Erstatt"
 #, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
-msgstr ""
+msgstr "Klarte ikke å opprette sikkerhetskopimappen «%1»."
 
 #: kmymoney/kmymoney.cpp:3642
 #, kde-format
@@ -6294,7 +6294,7 @@ msgstr "Kan ikke oppdatere kurs for %1 (tom aksjekurs)"
 #: kmymoney/misc/webpricequote.cpp:529
 #, kde-format
 msgid "Unable to update price for %1 (error encountered: '%2')"
-msgstr ""
+msgstr "Kan ikke oppdatere kurs for %1 (oppstått feil: «%2»)"
 
 #: kmymoney/models/accountsproxymodel.cpp:529
 #, kde-format
@@ -6344,7 +6344,7 @@ msgstr "Verdi"
 #: kmymoney/models/equitiesmodel.cpp:197 kmymoney/models/equitiesmodel.cpp:434
 #, kde-format
 msgid "Last Price Update"
-msgstr ""
+msgstr "Forrige kursoppdatering"
 
 #: kmymoney/models/equitiesmodel.cpp:540
 #: kmymoney/widgets/columnselector.cpp:215
@@ -16047,13 +16047,13 @@ msgstr[1] "Det er problemer med filen %1"
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
 #, kde-format
 msgid "CSS files"
-msgstr ""
+msgstr "CSS-filer"
 
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:131
 #: kmymoney/plugins/views/reports/kcm_reportsview.cpp:133
 #, kde-format
 msgid "All files"
-msgstr ""
+msgstr "Alle filer"
 
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:102
 #, kde-format
@@ -18961,7 +18961,7 @@ msgstr "Aktivitet"
 #, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
-msgstr ""
+msgstr "Tøm notat"
 
 #: kmymoney/views/kaccountsview.cpp:174
 #: kmymoney/views/kinstitutionsview.cpp:208
@@ -21056,7 +21056,7 @@ msgstr "Navn"
 #: kmymoney/widgets/kmmsearchwidget.ui:14
 #, kde-format
 msgid "Form"
-msgstr ""
+msgstr "Skjema"
 
 #: kmymoney/widgets/kmymoneyaccountcombo.cpp:131
 #, kde-format
