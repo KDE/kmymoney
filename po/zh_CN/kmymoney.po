@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-10 00:47+0000\n"
-"PO-Revision-Date: 2023-07-03 11:38\n"
+"PO-Revision-Date: 2023-07-18 11:11\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -5362,11 +5362,10 @@ msgid "&Replace"
 msgstr "替换(&R)"
 
 #: kmymoney/kmymoney.cpp:3637
-#, fuzzy, kde-format
-#| msgid "Unable to create account: %1"
+#, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
-msgstr "无法创建账户：%1"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:3642
 #, kde-format
@@ -6090,10 +6089,9 @@ msgid "Unable to update price for %1 (empty quote data)"
 msgstr "无法更新 %1 的价格信息 (报表数据为空)"
 
 #: kmymoney/misc/webpricequote.cpp:529
-#, fuzzy, kde-format
-#| msgid "Unable to update price for %1 (no price or no date)"
+#, kde-format
 msgid "Unable to update price for %1 (error encountered: '%2')"
-msgstr "无法更新 %1 的价格(无价格或无日期)"
+msgstr ""
 
 #: kmymoney/models/accountsproxymodel.cpp:529
 #, kde-format
@@ -18411,11 +18409,10 @@ msgid "Activity"
 msgstr "活动"
 
 #: kmymoney/views/journaldelegate.cpp:84
-#, fuzzy, kde-format
-#| msgid "[Empty Payee]"
+#, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
-msgstr "[空收款人]"
+msgstr ""
 
 #: kmymoney/views/kaccountsview.cpp:174
 #: kmymoney/views/kinstitutionsview.cpp:208
