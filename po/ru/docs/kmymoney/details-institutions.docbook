@@ -194,13 +194,11 @@
 ></note>
 
 <para
->Only the name is required in the New Institution Dialog, all other fields are optional. As with the personal information dialog, this data is not currently used by &kmymoney;, but will be required by future releases for certain features. In particular, the <ulink url="https://en.wikipedia.org/wiki/Bank_code"
->Bank Code</ulink
-> and the <acronym
-> <ulink url="https://en.wikipedia.org/wiki/ISO_9362"
+>В диалоге «Новое учреждение» обязательно требуется указать только название учреждения (все остальные поля являются необязательными). Как и в случае диалога ввода персональных данных, указанные сведения не используются в текущей версии &kmymoney;, но будут задействованы для работы некоторых функций в будущих версиях программы. В частности, номер отделения банка и <acronym
+><ulink url="https://en.wikipedia.org/wiki/ISO_9362"
 >BIC (Bank Identifier Code)</ulink
 ></acronym
-> will be required for online banking. </para>
+> (идентификационный код банка) потребуются для работы онлайн-банка. </para>
 </sect2>
 </sect1>
 

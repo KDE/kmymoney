@@ -125,10 +125,10 @@
 >. </para>
 
 <para
->If you check the <guilabel
->Treat Text as regular expression</guilabel
-> box, the text will be treated as a regular expression. For details on how to craft a regular expression, visit the &Qt; documentation about the <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
->QRegularExpression class</ulink
+>Если флажок <guilabel
+>Регулярное выражение</guilabel
+> установлен, текст будет обрабатываться как регулярное выражение. Подробные сведения о создании регулярных выражений доступны в документации &Qt;, посвящённой <ulink url="https://doc.qt.io/qt-5/qregexp.html"
+>классу QRegExp</ulink
 >. </para>
 </sect2>
 

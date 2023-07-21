@@ -102,7 +102,7 @@
 >Контрагенты</link
 ></member>
 	    <member
-><link linkend="details.reconcile"
+><link linkend="details.schedules"
 >Графики</link
 ></member>
 	    <member
@@ -112,6 +112,22 @@
 	    <member
 ><link linkend="details.investments"
 >Инвестиции</link
+></member>
+	    <member
+><link linkend="details.currencies"
+>Валюты</link
+></member>
+	    <member
+><link linkend="details.reconcile"
+>Сверка</link
+></member>
+	    <member
+><link linkend="details.reports"
+>Отчёты</link
+></member>
+	    <member
+><link linkend="details.impexp"
+>Импорт и экспорт</link
 ></member>
 	    <member
 ><link linkend="details.settings"
@@ -129,22 +145,6 @@
 	</entry>
 	<entry valign="top">
 	  <simplelist>
-	    <member
-><link linkend="details.currencies"
->Валюты</link
-></member>
-	    <member
-><link linkend="details.reconcile"
->Сверка</link
-></member>
-	    <member
-><link linkend="details.reports"
->Отчёты</link
-></member>
-	    <member
-><link linkend="details.impexp"
->Импорт и экспорт</link
-></member>
 	    <member
 ><link linkend="details.loans"
 >Кредиты</link

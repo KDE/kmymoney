@@ -20,6 +20,55 @@
 <title
 >Первый запуск &kmymoney;</title>
 
+<para
+>По завершении загрузки &kmymoney; будут показаны два окна. Верхнее окно, «Совет дня», содержит ряд важных и полезных советов о работе с приложением. <screenshot>
+	<screeninfo
+>Совет дня</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="tipofday.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Совет дня</phrase>
+	</textobject>
+	</mediaobject>
+  </screenshot>
+</para>
+
+<para
+>Рекомендуется ознакомиться с содержанием этих советов. Воспользуйтесь кнопками <guibutton
+>Предыдущий</guibutton
+> и <guibutton
+>Следующий</guibutton
+>, которые расположены в нижней части окна. </para>
+
+<para
+>После ознакомления с советами закройте окно. По умолчанию оно будет показано вновь при следующем запуске &kmymoney;. Чтобы изменить это поведение, снимите соответствующий флажок в окне «Совет дня». </para>
+
+<note>
+  <para
+>Окно с советами возможно открыть в любой момент. Чтобы это сделать, выберите в &kmymoney; пункт меню <menuchoice
+><guimenu
+>Справка</guimenu
+> <guimenuitem
+>Показывать совет дня</guimenuitem
+></menuchoice
+>. </para>
+</note>
+
+<para
+>Все советы взяты из списка часто задаваемых вопросов (&FAQ;), в котором содержатся более подробные сведения. Он доступен на <ulink url="https://www.kmymoney.org/faq.php"
+>веб-сайте</ulink
+> проекта и в <link linkend="faq"
+>этом руководстве</link
+>. </para>
+
+<para
+>Чтобы закрыть диалог «Совет дня», нажмите кнопку <guibutton
+>Закрыть</guibutton
+>. </para>
+
 <note>
   <para
 >Вероятно, внешний вид программы &kmymoney; не будет в точности соответствовать снимкам в этом руководстве. Многие параметры (например, шрифты, цвета и значки) возможно настроить с помощью пункта меню <menuchoice
@@ -388,7 +437,7 @@
 </para>
 
 <para
->Enter the name of the account and a possible account or reference number assigned by the institution managing the account. Enter the opening date of the account and the opening balance of the account. For example, you want to use &kmymoney; to manage all your finances as of 2008-01-01, then enter the balance of the account at the beginning of this date. The number can possibly be obtained from a paper statement. You may also enter the name and the bank code of the institution. The latter, known as the routing number in the US or the sort code in the UK, is optional and only required for online banking purposes, but it may also be helpful when importing bank statements in some of the formats supported (OFX, QFX). </para>
+>Укажите название счёта и, возможно, номер счёта или учётный номер, присвоенный учреждением, под управлением которого находится счёт. Введите дату открытия счёта и его начальный баланс. Например, если требуется использовать &kmymoney; для управления финансовыми данными, начиная с 1 января 2008 года, укажите баланс счёта на эту дату. Нужное значение возможно узнать из бумажной выписки. Также укажите название и код учреждения (эти сведения являются необязательными, они требуются только для работы с онлайн-банком). </para>
 
 <para
 >Если создавать начальный счёт не требуется, снимите соответствующий флажок. </para>

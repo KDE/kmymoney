@@ -164,9 +164,9 @@
     There are eight additional people in credits.docbook for "Special Thanks."
     Should any of them be included here?  -->
 <date
->17 июня 2016 г.</date>
+>5 июня 2022 г.</date>
 <releaseinfo
->KMyMoney 5.0</releaseinfo>
+>KMyMoney 5.1</releaseinfo>
 </refentryinfo>
 
 <refmeta>
@@ -206,7 +206,7 @@
 > <group choice="opt"
 ><option
 >--timers</option
-> <replaceable
+><replaceable
 > column</replaceable
 ></group
 > <group choice="opt"
@@ -219,12 +219,15 @@
 ></group
 > <group choice="opt"
 ><option
+>--dump-actions</option
+></group
+> <group choice="opt"
+><option
 ><replaceable
 >file</replaceable
 ></option
 ></group
 > </cmdsynopsis>
-
 </refsynopsisdiv>
 
 <refsect1>
@@ -232,8 +235,7 @@
 >Описание</title>
 
 <para
->&kmymoney; — программа учёта личных финансов, разработанная &kde;. Она предоставляет графический интерфейс, который позволяет просматривать баланс счетов, управлять кредитами и разбивать доходы и расходы на статьи.</para>
-
+>&kmymoney; — программа учёта личных финансов, разработанная &kde;. Она предоставляет графический интерфейс, который позволяет просматривать баланс счетов, управлять кредитами, разбивать доходы и расходы на статьи и выполнять многие другие действия. </para>
 </refsect1>
 
 <refsect1>
@@ -309,9 +311,7 @@
 </varlistentry>
 
 </variablelist>
-
 </refsect1>
-
 
 <refsect1>
 <title
@@ -329,10 +329,13 @@
 >URL-адрес</acronym
 > <ulink url="help:/kmymoney"
 >help:/kmymoney</ulink
-></member>
-<member
+>. Кроме того, по адресу <ulink url="https://docs.kde.org/index.php?application=kmymoney"
+>https://docs.kde.org/index.php?application=kmymoney"</ulink
+> доступны онлайн-версии руководства как для стабильной, так и для разрабатываемой версий &kmymoney;. </member>
+
+  <member
 >kf5options(7)</member>
-<member
+  <member
 >qt5options(7)</member>
 </simplelist>
 

@@ -56,6 +56,19 @@
   <varlistentry>
     <term
 ><guilabel
+>Действия при запуске программы</guilabel
+></term>
+    <listitem>
+      <para
+>Если флажок <guilabel
+>Показывать экран-заставку</guilabel
+> установлен, &kmymoney; отобразит заставку &kmymoney;. На экране-заставке (в левом нижнем углу) будет показан номер версии программы. Если этот флажок не установлен, экран-заставка не будет показан при запуске.</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><guilabel
 >Автоматическое сохранение</guilabel
 ></term>
 <!-- I would prefer to use a more consistent hierarchy and use of levels on this
@@ -834,7 +847,7 @@
 
 <sect2>
 <title
->Startup options</title>
+>Действия при запуске программы</title>
 <variablelist>
   <varlistentry>
     <term
@@ -1020,21 +1033,14 @@
 >Модуль печати чеков</title>
 
 <para
->As one example, there is a plugin for printing checks, which is included with the source of &kmymoney;, and should always be enabled. It allows printing of a check based on the data from a selected transaction, with the layout controlled by an &HTML; template. You need to use a template which is matched to your pre-printed checks. A default, built-in template is provided. You may also choose a custom template. To do so, click on the <guibutton
->configure</guibutton
-> (&configicon;) button to get the <guilabel
->Check printing</guilabel
-> configuration dialog displayed. At the top you can check the box to use a custom template. To the right of that is a button which brings up a file chooser, to select an alternate template file. </para>
+>Например, имеется модуль печати чеков, который является частью пакета &kmymoney;; следовательно, он должен быть всегда включён. С его помощью возможно печатать чеки на основе данных выбранной записи операции. Компоновка чека определяется &HTML;-шаблоном. Следует воспользоваться шаблоном, который соответствует бланкам чеков. После нажатия кнопки <guibutton
+>Настройка</guibutton
+> (&configicon;) программа откроет диалоговое окно настройки <guilabel
+>Печать чека</guilabel
+>. В верхней части окна расположено текстовое поле для ввода пути к выбранному шаблону. Справа от него показана кнопка, с помощью которой возможно открыть окно выбора файла. В этом окне возможно выбрать другой файл шаблона. </para>
 
 <para
->A template file is an &HTML; file, in which specific strings are used to reference the fields from the transaction and from the current account and institution to show where they will be printed on the check. &kmymoney; ships with a default, built-in template. At <ulink url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/"
->this</ulink
-> address you can find the HTML source file of default template, as well as some additional templates. You should either be able to use one of them, or modify one to suit your needs. Note that only a <emphasis
->subset</emphasis
-> of the HTML standard is supported — the detailed documentation on that can be found <ulink url="https://doc.qt.io/qt-5/richtext-html-subset.html"
->here</ulink
->. </para>
-
+>Файл шаблона — это &HTML;-файл, в котором определённые строки используются для ссылки на поля операции, текущего счёта и учреждения с целью указания их расположения в чеке. &kmymoney; поставляется с несколькими файлами шаблонов. Возможно либо просто использовать один из них, либо внести в файл необходимые изменения. После выбора стандартного шаблона в диалоге настройки будет показана папка, содержащая файлы-образцы. </para>
 
 <!-- info from source code on substitution variables
     // data about the user
@@ -1063,6 +1069,16 @@
     checkHTML.replace("$MEMO", (*it).split().memo());
 -->
 
+
+</sect2>
+<sect2 id="details.settings.plugins.kbanking">
+<title
+>KBanking</title>
+
+<para
+>Этот модуль добавляет в KMyMoney поддержку сетевой работы с банком для HBCI/FinTs, OFX и PayPal. После включения этого модуля возможно настроить сетевую работу с банком в меню <link linkend="reference.menus.settings.help"
+>Настройка</link
+>. </para>
 
 </sect2>
 </sect1>

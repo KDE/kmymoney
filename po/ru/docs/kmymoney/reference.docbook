@@ -426,6 +426,29 @@
 ><shortcut
 > <keycombo
 >&Ctrl;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Вид</guimenu
+> <guimenuitem
+>Показывать сверенные балансы</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Отображает сверенный баланс и дату последней сверки в реестре.</action
+></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
 >U</keycap
 ></keycombo
 > </shortcut
@@ -1306,22 +1329,22 @@
     <term
 ><menuchoice
 ><guimenu
->Settings</guimenu
+>Настройка</guimenu
 ><guimenuitem
->Configure Aqbanking</guimenuitem
+>Настроить AqBanking...</guimenuitem
 > </menuchoice
 ></term>
     <listitem>
       <para
 ><action
->Configure online banking settings</action
->, see <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
->How do I configure online banking</ulink
-> for further details. </para>
+>Настройка параметров онлайн-банка</action
+>, подробные сведения доступны в <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
+>соответствующем разделе пользовательской базы знаний KDE</ulink
+>. </para>
       <para
->Note that this menu selection is only available if the KBanking module is enabled. See the section on configuring the <link linkend="details.settings.plugins.kbanking"
->KBanking plugin</link
-> for more information. </para>
+>Обратите внимание, что этот пункт меню доступен только в том случае, если модуль KBanking включён. Дополнительные сведения доступны в разделе о настройке <link linkend="details.settings.plugins.kbanking"
+>модуля KBanking</link
+>. </para>
     </listitem>
   </varlistentry>
 
