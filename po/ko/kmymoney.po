@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Jung Hee Lee <daemul72@gmail.com>, 2019, 2020.
-# Shinjo Park <kde@peremen.name>, 2019, 2020, 2021, 2022.
+# Shinjo Park <kde@peremen.name>, 2019, 2020, 2021, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-03 03:06+0000\n"
-"PO-Revision-Date: 2022-07-13 15:41+0200\n"
+"PO-Revision-Date: 2023-07-23 20:53+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1250,7 +1250,7 @@ msgid ""
 "Another dialog will appear, if you choose this type, asking for further\n"
 "information relevant to the Quicken format."
 msgstr ""
-"QIF 파일은 회계 프로그램 Quicken의 파일 형식입니다.\n"
+"QIF 파일은 회계 앱 Quicken의 파일 형식입니다.\n"
 "이 형식을 선택하면 Quicken 형식에 필요한 정보를 묻는\n"
 "추가 대화 상자가 나타납니다."
 
@@ -4406,7 +4406,7 @@ msgid ""
 "Selected entries are shown on the home page of the application.<p>\n"
 "Use the buttons and checkboxes to customize the layout of the home page."
 msgstr ""
-"선택한 항목을 프로그램의 홈페이지에 표시합니다.<p>\n"
+"선택한 항목을 앱의 홈페이지에 표시합니다.<p>\n"
 "단추와 확인란을 사용하여 홈페이지 레이아웃을 사용자 정의하십시오."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupbox)
@@ -5524,10 +5524,9 @@ msgstr ""
 "코드나 제안으로 이 프로젝트에 참여하는 것을 고려해 보십시오."
 
 #: kmymoney/kcreditswindow.cpp:41
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2019 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2022 The KMyMoney development team"
-msgstr "(c) 2000-2019 The KMyMoney development team"
+msgstr "(c) 2000-2022 The KMyMoney development team"
 
 #: kmymoney/kcreditswindow.cpp:44
 #, kde-format
@@ -6351,11 +6350,10 @@ msgid "&Replace"
 msgstr "바꾸기(&R)"
 
 #: kmymoney/kmymoney.cpp:2436
-#, fuzzy, kde-format
-#| msgid "Unable to create account: %1"
+#, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
-msgstr "계좌를 만들 수 없음: %1"
+msgstr "백업 디렉터리 '%1'을(를) 만들 수 없습니다."
 
 #: kmymoney/kmymoney.cpp:2441
 #, kde-format
@@ -6585,16 +6583,14 @@ msgid "Saving file..."
 msgstr "파일 저장 중..."
 
 #: kmymoney/kmymoney.cpp:3513
-#, fuzzy, kde-format
-#| msgid "Failed to save your storage."
+#, kde-format
 msgid "Failed to save your data."
-msgstr "저장소를 저장하지 못했습니다."
+msgstr "데이터를 저장하지 못했습니다."
 
 #: kmymoney/kmymoney.cpp:3519
-#, fuzzy, kde-format
-#| msgid "Couldn't find suitable plugin to save your storage."
+#, kde-format
 msgid "Couldn't find suitable plugin to save your data."
-msgstr "저장소를 저장할 플러그인을 찾을 수 없습니다."
+msgstr "데이터를 저장할 올바른 플러그인을 찾을 수 없습니다."
 
 #: kmymoney/kmymoney.cpp:3525
 #, kde-format
@@ -6602,10 +6598,9 @@ msgid "Saving file as...."
 msgstr "다른 이름으로 파일 저장 중..."
 
 #: kmymoney/kmymoney.cpp:3541
-#, fuzzy, kde-format
-#| msgid "Couldn't find any plugin for saving storage."
+#, kde-format
 msgid "Couldn't find any plugin for saving data."
-msgstr "저장소를 저장하는 플러그인을 찾을 수 없습니다."
+msgstr "데이터를 저장하는 플러그인을 찾을 수 없습니다."
 
 #: kmymoney/kmymoney.cpp:3570
 #, kde-format
@@ -12021,7 +12016,7 @@ msgid ""
 "</qt>"
 msgstr ""
 "<qt>\n"
-"아래 목록에서 <b>프로그램</b>에 등록된 계좌로 매핑할\n"
+"아래 목록에서 <b>앱</b>에 등록된 계좌로 매핑할\n"
 "<b>온라인</b> 계좌를 선택하십시오.\n"
 "</qt>"
 
@@ -12029,7 +12024,7 @@ msgstr ""
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:39
 #, kde-format
 msgid "Application Account"
-msgstr "프로그램 계좌"
+msgstr "앱 계좌"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/plugins/kbanking/dialogs/kbmapaccount.ui:45
@@ -12129,8 +12124,7 @@ msgid ""
 "<qt>The given application account <b>%1</b> has not been mapped to an online "
 "account.</qt>"
 msgstr ""
-"<qt>지정한 프로그램 계좌 <b>%1</b>이(가) 온라인 계좌에 매핑되지 않았습니다.</"
-"qt>"
+"<qt>지정한 앱 계좌 <b>%1</b>이(가) 온라인 계좌에 매핑되지 않았습니다.</qt>"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:511
 #, kde-format
@@ -12701,7 +12695,7 @@ msgstr "식별:"
 #, kde-format
 msgid ""
 "Expert option to enter the four digit version information of the application"
-msgstr "프로그램의 네 자리 버전 정보를 입력하는 전문가 옵션"
+msgstr "앱의 네 자리 버전 정보를 입력하는 전문가 옵션"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_6)
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_3)
@@ -13796,9 +13790,9 @@ msgid ""
 "turned off in case of <b>Other application</b>. Use the latter if you import "
 "files from other Personal Finance Management software."
 msgstr ""
-"<b>은행 명세서</b>를 선택하면 자동 분류 일치를 활성화하며, <b>기타 `프로그램"
-"</b>을 선택하면 자동 분류 일치를 비활성화합니다. 다른 개인 재무 관리 소프트웨"
-"어에서 파일을 가져오는 경우 후자를 사용하십시오."
+"<b>은행 명세서</b>를 선택하면 자동 분류 일치를 활성화하며, <b>기타 `앱</b>을 "
+"선택하면 자동 분류 일치를 비활성화합니다. 다른 개인 재무 관리 소프트웨어에서 "
+"파일을 가져오는 경우 후자를 사용하십시오."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_typeComboBox)
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:106
@@ -13810,7 +13804,7 @@ msgstr "은행 명세서"
 #: kmymoney/plugins/qif/import/kimportdlgdecl.ui:111
 #, kde-format
 msgid "Other application"
-msgstr "다른 프로그램"
+msgstr "다른 앱"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:165
 #, kde-format
@@ -17159,7 +17153,7 @@ msgstr "반지"
 #, kde-format
 msgctxt "type of graphic palette"
 msgid "Use application setting"
-msgstr "프로그램 설정 사용"
+msgstr "앱 설정 사용"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:98
 #, kde-format
@@ -17579,7 +17573,7 @@ msgstr "백엔드 선택"
 msgid ""
 "Select what <b>online</b> account you want to map to the <b>application</b> "
 "account..."
-msgstr "<b>프로그램</b> 계좌에 매핑할 <b>온라인</b> 계좌를 선택하십시오..."
+msgstr "<b>앱</b> 계좌에 매핑할 <b>온라인</b> 계좌를 선택하십시오..."
 
 #: kmymoney/plugins/woob/woob.cpp:59
 #, kde-format
@@ -19121,7 +19115,7 @@ msgstr "조정되지 않음"
 #: kmymoney/views/kgloballedgerview_p.h:1126
 #, kde-format
 msgid "Cannot process transaction with focus if it is not selected."
-msgstr "선택하지 않으면 초점이 맞춰진 거래를 처리할 수 ​​없습니다."
+msgstr "선택하지 않으면 포커스가 맞춰진 거래를 처리할 수 ​​없습니다."
 
 #: kmymoney/views/kgloballedgerview_p.h:1214
 #, kde-format
@@ -20230,7 +20224,7 @@ msgstr "이 버전의 새로운 기능:"
 #, kde-format
 msgid ""
 "Let us know what you think. We hope that you enjoy using the application."
-msgstr "귀하의 생각을 알려 주십시오. 프로그램을 잘 사용하기를 기대합니다."
+msgstr "귀하의 생각을 알려 주십시오. 앱을 잘 사용하기를 기대합니다."
 
 #: kmymoney/views/kwelcomepage.cpp:200
 #, kde-format
@@ -20326,7 +20320,7 @@ msgstr "* 온라인 서비스"
 #: kmymoney/views/kwelcomepage.cpp:243
 #, kde-format
 msgid "- Updated list of application versions for OFX direct import"
-msgstr "- OFX 직접 가져오기에 대한 프로그램 버전 목록 업데이트"
+msgstr "- OFX 직접 가져오기에 대한 앱 버전 목록 업데이트"
 
 #: kmymoney/views/kwelcomepage.cpp:244
 #, kde-format
@@ -24542,11 +24536,11 @@ msgid ""
 "On the next few pages you will be guided through the steps necessary to "
 "setup the program. This will happen only once."
 msgstr ""
-"이 컴퓨터에서 KMyMoney를 처음 시작했습니다. 이 프로그램이 재무 관리에 도움이"
-"되기 전에 일부 데이터를 수집해야 합니다.<p>\n"
+"이 컴퓨터에서 KMyMoney를 처음 시작했습니다. 이 앱이 재무 관리에 도움이되기 전"
+"에 일부 데이터를 수집해야 합니다.<p>\n"
 "\n"
-"다음 몇 페이지에서 프로그램 설정에 필요한 단계를 안내합니다. 마법사는 한 번"
-"만 실행됩니다."
+"다음 몇 페이지에서 앱 설정에 필요한 단계를 안내합니다. 마법사는 한 번만 실행"
+"됩니다."
 
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:55
 #, kde-format
