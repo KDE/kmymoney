@@ -1,0 +1,28 @@
+<sect1 id="details.impexp.csvexp">
+<title
+>Модуль экспорта файлов CSV</title>
+<para
+>Чтобы экспортировать счёт в формате CSV, выберите пункт меню <menuchoice
+><guimenu
+>Файл</guimenu
+><guisubmenu
+>Экспорт</guisubmenu
+> <guimenuitem
+>CSV...</guimenuitem
+></menuchoice
+>. Появится диалоговое окно, в котором следует задать параметры экспорта. </para>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="csvexport.png" format="PNG"/>
+      </imageobject>
+      <textobject>
+        <phrase
+>Экспорт в формате CSV</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+</sect1>
