@@ -6,13 +6,13 @@
 # Stefan Nilsen <stefan.nilsen@millnet.se>, 2007.
 # Konrad Skeri <konrad@skeri.com>, 2008.
 # Stefan Asserhäll <stefan.asserhall@bredband.net>, 2009, 2010.
-# Stefan Asserhall <stefan.asserhall@bredband.net>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Stefan Asserhall <stefan.asserhall@bredband.net>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-03 03:06+0000\n"
-"PO-Revision-Date: 2022-09-18 11:12+0200\n"
+"PO-Revision-Date: 2023-07-24 15:47+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -6445,11 +6445,10 @@ msgid "&Replace"
 msgstr "E&rsätt"
 
 #: kmymoney/kmymoney.cpp:2436
-#, fuzzy, kde-format
-#| msgid "Unable to create account: %1"
+#, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
-msgstr "Kan inte skapa konto: %1"
+msgstr "Kunde inte skapa säkerhetskopieringskatalog '%1'."
 
 #: kmymoney/kmymoney.cpp:2441
 #, kde-format
@@ -6681,16 +6680,14 @@ msgid "Saving file..."
 msgstr "Sparar fil..."
 
 #: kmymoney/kmymoney.cpp:3513
-#, fuzzy, kde-format
-#| msgid "Failed to save your storage."
+#, kde-format
 msgid "Failed to save your data."
-msgstr "Misslyckades spara lagring."
+msgstr "Misslyckades spara data."
 
 #: kmymoney/kmymoney.cpp:3519
-#, fuzzy, kde-format
-#| msgid "Couldn't find suitable plugin to save your storage."
+#, kde-format
 msgid "Couldn't find suitable plugin to save your data."
-msgstr "Kunde inte hitta lämpligt insticksprogram för att spara lagringen."
+msgstr "Kunde inte hitta lämpligt insticksprogram för att spara data."
 
 #: kmymoney/kmymoney.cpp:3525
 #, kde-format
@@ -6698,10 +6695,9 @@ msgid "Saving file as...."
 msgstr "Sparar fil som..."
 
 #: kmymoney/kmymoney.cpp:3541
-#, fuzzy, kde-format
-#| msgid "Couldn't find any plugin for saving storage."
+#, kde-format
 msgid "Couldn't find any plugin for saving data."
-msgstr "Kunde inte hitta något insticksprogram för att spara lagring."
+msgstr "Kunde inte hitta något insticksprogram för att spara data."
 
 #: kmymoney/kmymoney.cpp:3570
 #, kde-format
