@@ -289,16 +289,22 @@ public:
     void unload();
 
     /**
-      * This method must be called before any single change or a series of changes
-      * in the underlying storage area is performed.
-      * Once all changes are complete (i.e. the transaction is completed),
-      * commitTransaction() must be called to finalize all changes. If an error occurs
-      * during the processing of the changes call rollbackTransaction() to undo the
-      * changes done so far.
-      *
-      * The @a undoActionText will be attached to the transaction
-      */
-    void startTransaction(const QString& undoActionText = QString());
+     * This method must be called before any single change or a series of changes
+     * in the underlying storage area is performed.
+     * Once all changes are complete (i.e. the transaction is completed),
+     * commitTransaction() must be called to finalize all changes. If an error occurs
+     * during the processing of the changes call rollbackTransaction() to undo the
+     * changes done so far.
+     *
+     * The @a undoActionText will be attached to the transaction
+     *
+     * If @a journalBlocking is true (the default), signals sent from the concatenated
+     * journal are surpressed and once the transaction is finished, a complete reset
+     * of the model will be performed. Where this is not required, you may set
+     * @a journalBlocking to false to maintain signal emission and preventing the
+     * complete model reset.
+     */
+    void startTransaction(const QString& undoActionText = QString(), bool journalBlocking = true);
 
     /**
       * This method returns whether a transaction has been started (@a true)
@@ -1778,8 +1784,8 @@ protected Q_SLOTS:
     void reloadSpecialDates();
 
 Q_SIGNALS:
-    void storageTransactionStarted();
-    void storageTransactionEnded();
+    void storageTransactionStarted(bool journalBlocking);
+    void storageTransactionEnded(bool journalBlocking);
 
     /**
      * This signal is emitted when a transaction has been committed and
@@ -1892,6 +1898,7 @@ class KMM_MYMONEY_EXPORT MyMoneyFileTransaction
 
 public:
     MyMoneyFileTransaction();
+    MyMoneyFileTransaction(const QString& undoActionText, bool journalBlocking);
     ~MyMoneyFileTransaction();
 
     /**

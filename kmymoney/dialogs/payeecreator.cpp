@@ -13,11 +13,14 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
+#include <KLocalizedString>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kmymoneyutils.h"
 #include "mymoneyenums.h"
+#include "mymoneyfile.h"
 #include "payeecreator.h"
 
 PayeeCreator::PayeeCreator(QObject* parent)
@@ -50,12 +53,15 @@ void PayeeCreator::createPayee()
         qDebug() << "createPayee" << m_comboBox->currentText();
         QString payeeId;
         bool ok;
+
+        MyMoneyFileTransaction ft(i18nc("Undo action description", "Create payee"), false);
         std::tie(ok, payeeId) = KMyMoneyUtils::newPayee(m_comboBox->currentText());
         if (!ok) {
             m_comboBox->clearEditText();
             m_comboBox->setCurrentIndex(-1);
             m_comboBox->setFocus();
         } else {
+            ft.commit();
             const auto index = m_comboBox->findData(payeeId, eMyMoney::Model::IdRole);
             if (index != -1) {
                 m_comboBox->setCurrentIndex(index);

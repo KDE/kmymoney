@@ -12,6 +12,8 @@
 // ----------------------------------------------------------------------------
 // KDE Headers
 
+#include <KLocalizedString>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -69,17 +71,19 @@ void AccountCreator::createAccount()
             parent = MyMoneyFile::instance()->income();
         }
 
-        if ((m_accountType == eMyMoney::Account::Type::Asset) || (m_accountType == eMyMoney::Account::Type::Liability)) {
-            KNewAccountDlg::newAccount(account, parent);
-        } else {
-            KNewAccountDlg::newCategory(account, parent);
-        }
+        const bool isAccount = (m_accountType == eMyMoney::Account::Type::Asset) || (m_accountType == eMyMoney::Account::Type::Liability);
+        const auto creator = isAccount ? &KNewAccountDlg::newAccount : &KNewAccountDlg::newCategory;
+        const QString undoAction = isAccount ? i18nc("Create undo action", "Create account") : i18nc("Create undo action", "Create category");
+
+        MyMoneyFileTransaction ft(undoAction, false);
+        creator(account, parent);
 
         if (account.id().isEmpty()) {
             m_comboBox->setSelected(QString());
             m_comboBox->clearSelection();
             m_comboBox->setFocus();
         } else {
+            ft.commit();
             m_comboBox->setSelected(account.id());
             auto widget = m_comboBox->nextInFocusChain();
             widget->setFocus();

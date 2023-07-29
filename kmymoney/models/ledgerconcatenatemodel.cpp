@@ -30,14 +30,18 @@ LedgerConcatenateModel::LedgerConcatenateModel(QObject* parent)
     : QConcatenateTablesProxyModel(parent)
     , d_ptr(new LedgerConcatenateModelPrivate)
 {
-    connect(MyMoneyFile::instance(), &MyMoneyFile::storageTransactionStarted, this, [&]() {
-        blockSignals(true);
+    connect(MyMoneyFile::instance(), &MyMoneyFile::storageTransactionStarted, this, [&](bool journalBlocking) {
+        if (journalBlocking) {
+            blockSignals(true);
+        }
     });
 
-    connect(MyMoneyFile::instance(), &MyMoneyFile::storageTransactionEnded, this, [&]() {
-        blockSignals(false);
-        beginResetModel();
-        endResetModel();
+    connect(MyMoneyFile::instance(), &MyMoneyFile::storageTransactionEnded, this, [&](bool journalBlocking) {
+        if (journalBlocking) {
+            blockSignals(false);
+            beginResetModel();
+            endResetModel();
+        }
     });
 }
 

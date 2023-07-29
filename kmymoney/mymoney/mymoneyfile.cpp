@@ -128,15 +128,27 @@ class KMM_MYMONEY_EXPORT MyMoneyFileUndoStack : public QUndoStack
 public Q_SLOTS:
     void undo()
     {
-        Q_EMIT MyMoneyFile::instance()->storageTransactionStarted();
+        const auto file = MyMoneyFile::instance();
+        const auto hasTransaction = file->hasTransaction();
+        if (!hasTransaction) {
+            Q_EMIT file->storageTransactionStarted(true);
+        }
         QUndoStack::undo();
-        Q_EMIT MyMoneyFile::instance()->storageTransactionEnded();
+        if (!hasTransaction) {
+            Q_EMIT file->storageTransactionEnded(true);
+        }
     }
     void redo()
     {
-        Q_EMIT MyMoneyFile::instance()->storageTransactionStarted();
+        const auto file = MyMoneyFile::instance();
+        const auto hasTransaction = file->hasTransaction();
+        if (!hasTransaction) {
+            Q_EMIT file->storageTransactionStarted(true);
+        }
         QUndoStack::redo();
-        Q_EMIT MyMoneyFile::instance()->storageTransactionEnded();
+        if (!hasTransaction) {
+            Q_EMIT file->storageTransactionEnded(true);
+        }
     }
 };
 
@@ -308,10 +320,11 @@ public:
         }
     }
 
-    MyMoneyFile*           m_file;
-    bool                   m_dirty;
-    bool                   m_inTransaction;
-    MyMoneySecurity        m_baseCurrency;
+    MyMoneyFile* m_file;
+    bool m_dirty;
+    bool m_inTransaction;
+    bool m_journalBlocking;
+    MyMoneySecurity m_baseCurrency;
 
     /**
      * @brief Cache for MyMoneyObjects
@@ -541,7 +554,7 @@ bool MyMoneyFile::storageAttached() const
 }
 #endif
 
-void MyMoneyFile::startTransaction(const QString& undoActionText)
+void MyMoneyFile::startTransaction(const QString& undoActionText, bool journalBlocking)
 {
     if (d->m_inTransaction) {
         throw MYMONEYEXCEPTION_CSTRING("Already started a transaction!");
@@ -549,8 +562,9 @@ void MyMoneyFile::startTransaction(const QString& undoActionText)
 
     d->undoStack.beginMacro(undoActionText);
     d->m_inTransaction = true;
+    d->m_journalBlocking = journalBlocking;
     d->m_changeSet.clear();
-    Q_EMIT storageTransactionStarted();
+    Q_EMIT storageTransactionStarted(journalBlocking);
 }
 
 bool MyMoneyFile::hasTransaction() const
@@ -667,7 +681,7 @@ void MyMoneyFile::commitTransaction()
     // inform the outside world about the end of notifications
     Q_EMIT endChangeNotification();
 
-    Q_EMIT storageTransactionEnded();
+    Q_EMIT storageTransactionEnded(d->m_journalBlocking);
 }
 
 void MyMoneyFile::rollbackTransaction()
@@ -687,7 +701,7 @@ void MyMoneyFile::rollbackTransaction()
     d->m_valueChangedSet.clear();
     d->m_changeSet.clear();
 
-    Q_EMIT storageTransactionEnded();
+    Q_EMIT storageTransactionEnded(d->m_journalBlocking);
 }
 
 void MyMoneyFile::addInstitution(MyMoneyInstitution& institution)
@@ -4254,19 +4268,30 @@ public:
     {
     }
 
+    void startTransaction(const QString& undoActionText, bool journalBlocking)
+    {
+        if (!m_isNested)
+            MyMoneyFile::instance()->startTransaction(undoActionText, journalBlocking);
+    }
+
 public:
     bool m_isNested;
     bool m_needRollback;
 
 };
 
-
-MyMoneyFileTransaction::MyMoneyFileTransaction() :
-    d_ptr(new MyMoneyFileTransactionPrivate)
+MyMoneyFileTransaction::MyMoneyFileTransaction()
+    : d_ptr(new MyMoneyFileTransactionPrivate)
 {
     Q_D(MyMoneyFileTransaction);
-    if (!d->m_isNested)
-        MyMoneyFile::instance()->startTransaction();
+    d->startTransaction(QString(), true);
+}
+
+MyMoneyFileTransaction::MyMoneyFileTransaction(const QString& undoActionText, bool journalBlocking)
+    : d_ptr(new MyMoneyFileTransactionPrivate)
+{
+    Q_D(MyMoneyFileTransaction);
+    d->startTransaction(undoActionText, journalBlocking);
 }
 
 MyMoneyFileTransaction::~MyMoneyFileTransaction()
