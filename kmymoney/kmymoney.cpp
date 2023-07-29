@@ -3834,7 +3834,8 @@ void KMyMoneyApp::slotScheduleNew(const MyMoneyTransaction& _t, eMyMoney::Schedu
 
 void KMyMoneyApp::slotPayeeNew(const QString& newnameBase, QString& id)
 {
-    KMyMoneyUtils::newPayee(newnameBase, id);
+    bool ok;
+    std::tie(ok, id) = KMyMoneyUtils::newPayee(newnameBase);
 }
 
 void KMyMoneyApp::slotEditTabOrder()

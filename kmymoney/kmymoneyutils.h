@@ -319,7 +319,7 @@ public:
 
     static QString downloadFile(const QUrl &url);
 
-    static bool newPayee(const QString& newnameBase, QString& id);
+    static std::tuple<bool, QString> newPayee(const QString& newnameBase);
 
     static void newTag(const QString& newnameBase, QString& id);
 

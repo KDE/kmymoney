@@ -333,7 +333,8 @@ void KEndingBalanceDlg::createCategory(const QString& txt, QString& id, const My
 
 void KEndingBalanceDlg::slotNewPayee(const QString& newnameBase, QString& id)
 {
-    KMyMoneyUtils::newPayee(newnameBase, id);
+    bool ok;
+    std::tie(ok, id) = KMyMoneyUtils::newPayee(newnameBase);
 }
 
 MyMoneyMoney KEndingBalanceDlg::endingBalance() const

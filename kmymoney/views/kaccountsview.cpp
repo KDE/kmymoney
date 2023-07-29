@@ -257,7 +257,8 @@ void KAccountsView::slotNewCategory()
 
 void KAccountsView::slotNewPayee(const QString& nameBase, QString& id)
 {
-    KMyMoneyUtils::newPayee(nameBase, id);
+    bool ok;
+    std::tie(ok, id) = KMyMoneyUtils::newPayee(nameBase);
 }
 
 void KAccountsView::slotAccountUnmapOnline()

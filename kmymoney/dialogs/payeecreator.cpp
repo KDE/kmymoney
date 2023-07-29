@@ -47,9 +47,11 @@ void PayeeCreator::createPayee()
             }
         }
 
-        QString payeeId;
         qDebug() << "createPayee" << m_comboBox->currentText();
-        if (!KMyMoneyUtils::newPayee(m_comboBox->currentText(), payeeId)) {
+        QString payeeId;
+        bool ok;
+        std::tie(ok, payeeId) = KMyMoneyUtils::newPayee(m_comboBox->currentText());
+        if (!ok) {
             m_comboBox->clearEditText();
             m_comboBox->setCurrentIndex(-1);
             m_comboBox->setFocus();

@@ -428,7 +428,8 @@ void Wizard::newAccount(MyMoneyAccount& account)
 
 void Wizard::slotPayeeNew(const QString& txt, QString& id)
 {
-    KMyMoneyUtils::newPayee(txt, id);
+    bool ok;
+    std::tie(ok, id) = KMyMoneyUtils::newPayee(txt);
 }
 
 void Wizard::slotAccountNew(MyMoneyAccount& account)

@@ -229,5 +229,6 @@ void KNewLoanWizard::slotNewCategory(MyMoneyAccount& acc)
 
 void KNewLoanWizard::slotNewPayee(const QString& newnameBase, QString& id)
 {
-    KMyMoneyUtils::newPayee(newnameBase, id);
+    bool ok;
+    std::tie(ok, id) = KMyMoneyUtils::newPayee(newnameBase);
 }

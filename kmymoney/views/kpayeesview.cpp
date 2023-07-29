@@ -525,8 +525,9 @@ void KPayeesView::slotHelp()
 void KPayeesView::slotNewPayee()
 {
     Q_D(KPayeesView);
+    bool ok;
     QString id;
-    KMyMoneyUtils::newPayee(i18n("New Payee"), id);
+    std::tie(ok, id) = KMyMoneyUtils::newPayee(i18n("New Payee"));
     d->selectPayeeAndTransaction(id);
 }
 

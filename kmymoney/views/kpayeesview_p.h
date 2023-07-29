@@ -498,7 +498,9 @@ public:
                     if (type == KPayeeReassignDlg::TypeMerge) {
                         // it's ok to use payee_id for both arguments since the first is const,
                         // so it's guaranteed not to change its content
-                        if (!KMyMoneyUtils::newPayee(payee_id, payee_id))
+                        bool ok;
+                        std::tie(ok, payee_id) = KMyMoneyUtils::newPayee(payee_id);
+                        if (!ok)
                             return false; // the user aborted the dialog, so let's abort as well
                         newPayee = file->payee(payee_id);
                     } else {

@@ -555,9 +555,10 @@ QString KMyMoneyUtils::downloadFile(const QUrl &url)
     return filename;
 }
 
-bool KMyMoneyUtils::newPayee(const QString& newnameBase, QString& id)
+std::tuple<bool, QString> KMyMoneyUtils::newPayee(const QString& newnameBase)
 {
     bool doit = true;
+    QString id;
 
     if (newnameBase != i18n("New Payee")) {
         // Ask the user if that is what he intended to do?
@@ -604,7 +605,7 @@ bool KMyMoneyUtils::newPayee(const QString& newnameBase, QString& id)
             doit = false;
         }
     }
-    return doit;
+    return std::make_tuple(doit, id);
 }
 
 void KMyMoneyUtils::newTag(const QString& newnameBase, QString& id)
