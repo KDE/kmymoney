@@ -376,6 +376,30 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
     } else {
         connect(this, static_cast<void (KComboBox::*)(int)>(&KMyMoneyAccountCombo::KComboBox::activated), this, &KMyMoneyAccountCombo::activated);
     }
+
+    // since the standard QComboBox implementation does not deal with data changes in tree models
+    // we make sure that a possible account name change gets propagated to our widget
+    connect(model, &QAbstractItemModel::dataChanged, this, [&](const QModelIndex& topLeft, const QModelIndex& bottomRight) {
+        const auto currentIdx = currentIndex();
+        if (currentIdx >= topLeft.row() && currentIdx <= bottomRight.row()) {
+            setRootModelIndex(topLeft.parent());
+            const auto accountId = itemData(currentIdx, eMyMoney::Model::IdRole).toString();
+            const QString text = itemText(currentIdx);
+            setRootModelIndex(QModelIndex());
+            // we need to check for the account id because the row is
+            // ambiguous as it may come from a different sub-tree in the model
+            if (accountId == d->m_lastSelectedAccount) {
+                if (lineEdit()) {
+                    lineEdit()->setText(text);
+                    auto dummyResizeEvent = QResizeEvent(QSize(), QSize());
+                    resizeEvent(&dummyResizeEvent);
+                } else {
+                    Q_EMIT currentTextChanged(text);
+                }
+                update();
+            }
+        }
+    });
 }
 
 void KMyMoneyAccountCombo::selectItem(const QModelIndex& index)
