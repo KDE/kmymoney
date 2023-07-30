@@ -744,3 +744,11 @@ void MyMoneyMoneyTest::testMaxPrecision()
     QCOMPARE(m1.toString(), QStringLiteral("112345678921234567893123/100000000000000000000000"));
     QCOMPARE(m1.formatMoney("", -1), QStringLiteral("1.12345678921234567893"));
 }
+
+void MyMoneyMoneyTest::testZeroIsMinusZero()
+{
+    MyMoneyMoney m1;
+    QCOMPARE(m1.isZero(), true);
+    m1 = -m1;
+    QCOMPARE(m1.isZero(), true);
+}

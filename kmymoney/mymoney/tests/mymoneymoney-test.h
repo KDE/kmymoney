@@ -44,6 +44,7 @@ private Q_SLOTS:
     void testReduce();
     void testZeroDenominator();
     void testMaxPrecision();
+    void testZeroIsMinusZero();
 };
 
 #endif
