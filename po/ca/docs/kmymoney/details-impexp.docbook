@@ -363,7 +363,7 @@
 >Divises</title>
 
 <para
->El &kmymoney; té una implementació incorporada per a tots els tipus de divisa estrangera. El &kmymoney; també requereix que l'usuari especifiqui una divisa base, la qual serà la divisa predeterminada per als comptes nous. L'importador intentarà determinar la divisa base més probable, tot i que aquesta opció pot ser rebutjada a favor d'una alternativa. </para>
+>El &kmymoney; té una implementació integrada per a tots els tipus de divisa estrangera. El &kmymoney; també requereix que l'usuari especifiqui una divisa base, la qual serà la divisa predeterminada per als comptes nous. L'importador intentarà determinar la divisa base més probable, tot i que aquesta opció pot ser rebutjada a favor d'una alternativa. </para>
 
 <note
 ><para
