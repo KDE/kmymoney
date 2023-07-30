@@ -193,23 +193,25 @@ void KCategoriesView::slotEditCategory()
     dlg->setOpeningBalanceShown(false);
     dlg->setOpeningDateShown(false);
 
-    if (dlg && dlg->exec() == QDialog::Accepted) {
-        try {
-            MyMoneyFileTransaction ft;
+    if (dlg->exec() == QDialog::Accepted) {
+        if (dlg != nullptr) {
+            try {
+                MyMoneyFileTransaction ft(i18nc("Undo action description", "Edit category"), false);
 
-            auto account = dlg->account();
-            auto parent = dlg->parentAccount();
+                auto account = dlg->account();
+                auto parent = dlg->parentAccount();
 
-            // we need to modify first, as reparent would override all other changes
-            file->modifyAccount(account);
-            if (account.parentAccountId() != parent.id())
-                file->reparentAccount(account, parent);
+                // we need to modify first, as reparent would override all other changes
+                file->modifyAccount(account);
+                if (account.parentAccountId() != parent.id())
+                    file->reparentAccount(account, parent);
 
-            ft.commit();
-            // update our local copy of the category data
-            d->m_currentCategory = account;
-        } catch (const MyMoneyException &e) {
-            KMessageBox::error(this, i18n("Unable to modify category '%1'. Cause: %2", d->m_currentCategory.name(), QString::fromLatin1(e.what())));
+                ft.commit();
+                // update our local copy of the category data
+                d->m_currentCategory = account;
+            } catch (const MyMoneyException& e) {
+                KMessageBox::error(this, i18n("Unable to modify category '%1'. Cause: %2", d->m_currentCategory.name(), QString::fromLatin1(e.what())));
+            }
         }
     }
 

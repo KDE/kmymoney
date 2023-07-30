@@ -221,59 +221,64 @@ public:
             }
         }
 
-        if (dlg != 0 && dlg->exec() == QDialog::Accepted) {
-            try {
-                MyMoneyFileTransaction ft;
-
-                auto account = dlg->account();
-                auto parent = dlg->parentAccount();
-                if (m_onlinePlugins && it_plugin != m_onlinePlugins->constEnd()) {
-                    account.setOnlineBankingSettings((*it_plugin)->onlineBankingSettings(account.onlineBankingSettings()));
-                }
-                auto bal = dlg->openingBalance();
-                if (account.accountGroup() == eMyMoney::Account::Type::Liability) {
-                    bal = -bal;
-                }
-
-                // we need to modify first, as reparent would override all other changes
-                file->modifyAccount(account);
-                if (account.parentAccountId() != parent.id()) {
-                    file->reparentAccount(account, parent);
-                }
-                if (!tid.isEmpty() && dlg->openingBalance().isZero()) {
-                    file->removeTransaction(t);
-
-                } else if (!tid.isEmpty() && !dlg->openingBalance().isZero()) {
-                    // update transaction only if changed
-                    if ((s0.shares() != bal) || (t.postDate() != account.openingDate())) {
-                        s0.setShares(bal);
-                        s0.setValue(bal);
-                        t.modifySplit(s0);
-                        s1.setShares(-bal);
-                        s1.setValue(-bal);
-                        t.modifySplit(s1);
-                        t.setPostDate(account.openingDate());
-                        file->modifyTransaction(t);
+        if (dlg->exec() == QDialog::Accepted) {
+            if (dlg != nullptr) {
+                try {
+                    auto account = dlg->account();
+                    auto parent = dlg->parentAccount();
+                    auto bal = dlg->openingBalance();
+                    if (account.accountGroup() == eMyMoney::Account::Type::Liability) {
+                        bal = -bal;
                     }
-                } else if (tid.isEmpty() && !dlg->openingBalance().isZero()) {
-                    file->createOpeningBalanceTransaction(account, bal);
+
+                    // determine if the opening balance transaction will change
+
+                    // do we remove the transaction?
+                    auto balanceTransactionChanges = (!tid.isEmpty() && bal.isZero());
+                    // do we modify the transaction?
+                    balanceTransactionChanges |= (!tid.isEmpty() && !bal.isZero() && ((s0.shares() != bal) || (t.postDate() != account.openingDate())));
+                    // do we create the transaction?
+                    balanceTransactionChanges |= (tid.isEmpty() && !bal.isZero());
+
+                    MyMoneyFileTransaction ft(i18nc("Undo action description", "Edit account"), balanceTransactionChanges);
+
+                    if (m_onlinePlugins && it_plugin != m_onlinePlugins->constEnd()) {
+                        account.setOnlineBankingSettings((*it_plugin)->onlineBankingSettings(account.onlineBankingSettings()));
+                    }
+                    // we need to modify first, as reparent would override all other changes
+                    file->modifyAccount(account);
+                    if (account.parentAccountId() != parent.id()) {
+                        file->reparentAccount(account, parent);
+                    }
+                    if (!tid.isEmpty()) {
+                        if (bal.isZero()) {
+                            file->removeTransaction(t);
+
+                        } else if ((s0.shares() != bal) || (t.postDate() != account.openingDate())) {
+                            s0.setShares(bal);
+                            s0.setValue(bal);
+                            t.modifySplit(s0);
+                            s1.setShares(-bal);
+                            s1.setValue(-bal);
+                            t.modifySplit(s1);
+                            t.setPostDate(account.openingDate());
+                            file->modifyTransaction(t);
+                        }
+
+                    } else if (!bal.isZero()) {
+                        file->createOpeningBalanceTransaction(account, bal);
+                    }
+
+                    ft.commit();
+                    m_currentAccount = account;
+
+                } catch (const MyMoneyException& e) {
+                    Q_Q(KAccountsView);
+                    KMessageBox::error(q, i18n("Unable to modify account '%1'. Cause: %2", m_currentAccount.name(), e.what()));
                 }
-
-                ft.commit();
-                m_currentAccount = account;
-
-                // reload the account object as it might have changed in the meantime
-                //            slotSelectAccount(file->account(account.id()));
-
-            } catch (const MyMoneyException &e) {
-                Q_Q(KAccountsView);
-                KMessageBox::error(q, i18n("Unable to modify account '%1'. Cause: %2", m_currentAccount.name(), e.what()));
             }
         }
-
         delete dlg;
-        //        ready();
-
     }
 
     enum CanCloseAccountCodeE {
