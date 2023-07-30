@@ -371,6 +371,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     pActions[eMenu::Action::DeleteTransaction]->setDisabled(true);
     pActions[eMenu::Action::DuplicateTransaction]->setDisabled(true);
     pActions[eMenu::Action::AddReversingTransaction]->setDisabled(true);
+    pActions[eMenu::Action::DisplayTransactionDetails]->setDisabled(true);
     pActions[eMenu::Action::CopySplits]->setDisabled(true);
     pActions[eMenu::Action::MarkNotReconciled]->setDisabled(true);
     pActions[eMenu::Action::MarkCleared]->setDisabled(true);
@@ -430,6 +431,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
             pActions[eMenu::Action::DeleteTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
             pActions[eMenu::Action::DuplicateTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
             pActions[eMenu::Action::AddReversingTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
+            pActions[eMenu::Action::DisplayTransactionDetails]->setDisabled(false);
             pActions[eMenu::Action::CopySplits]->setDisabled(true);
             pActions[eMenu::Action::MoveToToday]->setEnabled(true);
 

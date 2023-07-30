@@ -14,7 +14,6 @@
 // ----------------------------------------------------------------------------
 // Std C++ / STL Includes
 
-#include <typeinfo>
 #include <iostream>
 #include <memory>
 
@@ -31,6 +30,7 @@
 #include <QElapsedTimer>
 #include <QFileDialog>
 #include <QFlags>
+#include <QGridLayout>
 #include <QHBoxLayout>
 #include <QIcon>
 #include <QInputDialog>
@@ -43,6 +43,7 @@
 #include <QProgressBar>
 #include <QPushButton>
 #include <QStatusBar>
+#include <QTextBrowser>
 #include <QTimer>
 #include <QUrl>
 
@@ -106,6 +107,7 @@
 #include "keditscheduledlg.h"
 #include "kmymoneyadaptor.h"
 #include "kmymoneysettings.h"
+#include "kmymoneyutils.h"
 #include "kmymoneyview.h"
 #include "ksearchtransactiondlg.h"
 #include "ktransactionselectdlg.h"
@@ -1837,6 +1839,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::MarkNotReconciled,             QStringLiteral("transaction_mark_notreconciled"), i18nc("Mark transaction not reconciled", "Not reconciled"),     Icon::Empty},
             {Action::MoveTransactionTo,             QStringLiteral("transaction_move"),               i18nc("Move transaction", "Move transaction"),      Icon::Empty},     // not directly available in UI
             {Action::ShowTransaction,               QStringLiteral("transaction_show"),               i18nc("Show transaction", "Show transaction"),      Icon::Empty},     // not directly available in UI
+	    {Action::DisplayTransactionDetails,     QStringLiteral("transaction_display_details"),    i18nc("Display transaction details", "Show transaction details"),   Icon::DocumentProperties},
 
             {Action::SelectAllTransactions,         QStringLiteral("transaction_select_all"),         i18nc("Select all transactions", "Select all"),     Icon::SelectAll},
             {Action::GoToAccount,                   QStringLiteral("transaction_goto_account"),       i18n("Go to account"),                              Icon::BankAccount},
@@ -1989,6 +1992,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::DeleteTransaction,             &KMyMoneyApp::slotDeleteTransactions},
             {Action::DuplicateTransaction,          &KMyMoneyApp::slotDuplicateTransactions},
             {Action::AddReversingTransaction,       &KMyMoneyApp::slotDuplicateTransactions},
+	    {Action::DisplayTransactionDetails,     &KMyMoneyApp::slotDisplayTransactionDetails},
             {Action::CopySplits,                    &KMyMoneyApp::slotCopySplits},
             {Action::MarkCleared,                   &KMyMoneyApp::slotMarkTransactions},
             {Action::MarkReconciled,                &KMyMoneyApp::slotMarkTransactions},
@@ -2622,6 +2626,108 @@ void KMyMoneyApp::slotDuplicateTransactions()
 
     } catch (const MyMoneyException &e) {
         KMessageBox::detailedError(this, i18n("Unable to duplicate transaction(s)"), QString::fromLatin1(e.what()));
+    }
+}
+
+void KMyMoneyApp::slotDisplayTransactionDetails()
+{
+    // Display popup with full transaction details, since some are never displayed in the UI
+    const auto file = MyMoneyFile::instance();
+    QString head =
+        "<html><head><style>table, tr, th, td {border: 1px solid black; border-collapse: collapse; padding: 4px} "
+        ".spec {border-bottom-width: 3px}"
+        "</style></head><body>";
+    QString trans;
+    QString kvpt;
+    QString splits;
+    QString kvps;
+    for (const auto& journalEntryId : d->m_selections.selection(SelectedObjects::JournalEntry)) {
+        const auto journalEntry = file->journalModel()->itemById(journalEntryId);
+        if (!journalEntry.id().isEmpty()) {
+            const auto t = journalEntry.transaction();
+            const auto commodity = t.commodity();
+            const auto safraction = MyMoneyFile::instance()->security(commodity).smallestAccountFraction();
+            if (!t.id().isEmpty()) {
+                head += "<H1>Transaction: " + t.id() + "</H1>";
+                // transaction
+                trans = "<table>";
+                trans += "<tr><th>Entry date</th><td>" + t.entryDate().toString(Qt::ISODate) + "</td></tr>";
+                trans += "<tr><th>Post date</th><td>" + t.postDate().toString(Qt::ISODate) + "</td></tr>";
+                trans += "<tr><th>Currency</th><td>" + t.commodity() + "</td></tr>";
+                trans += "<tr><th>Memo</th><td>" + t.memo() + "</td></tr>";
+                trans += "</table>";
+                // Transaction KVPs
+                if (t.pairs().count() > 0) {
+                    kvpt = "<p><b>Key Value Pairs</b></p><table><tr><th>Key</th><th>Value</th></tr>";
+                    for (auto it = t.pairs().cbegin(); it != t.pairs().cend(); ++it) {
+                        kvpt += "<tr><th>" + it.key() + "</th><th>" + it.value() + "</th></tr>";
+                    }
+                    kvpt += "</table><br/><br/>";
+                } else {
+                    kvpt = "<br/>";
+                }
+                // splits: [id] payee account reconcileFlag reconcileDate action shares price value memo costCenter tagList number
+                splits =
+                    "<table>"
+                    "<tr><th>Split</th><th>Number</th><th>Payee</th><th>Account</th><th>_CR</th><th>ReconcileDate</th>"
+                    "<th>Action</th><th>Shares</th><th>Price</th><th>Value</th>"
+                    "<th>BankID</th></th></tr>"
+                    "<tr><th>&nbsp;</th><th colspan=\"10\" align=\"left\">Memo</th></tr>";
+                for (const auto& split : t.splits()) {
+                    // split: id payee account reconcileflag reconciledate activity shares price value memo
+                    const auto splitAccount = MyMoneyFile::instance()->account(split.accountId());
+                    const auto pairs = splitAccount.pairs();
+                    const auto accopen = !splitAccount.isClosed();
+                    const auto splitSymbol = splitAccount.accountType() == eMyMoney::Account::Type::Stock
+                        ? MyMoneyFile::instance()->security(splitAccount.currencyId()).tradingSymbol()
+                        : splitAccount.currencyId();
+                    splits += "<tr></tr><tr><td>" + split.id() + "</td><td>";
+                    splits += split.number() + "</td><td>";
+                    splits += split.payeeId() + "<br/>" + MyMoneyFile::instance()->payee(split.payeeId()).name() + "</td><td>";
+                    if (accopen == true) {
+                        splits += split.accountId();
+                    } else {
+                        splits += "<s>" + split.accountId() + "</s> (Closed)";
+                    }
+                    splits += "<br/>" + splitAccount.name() + "</td><td>" + KMyMoneyUtils::reconcileStateToString(split.reconcileFlag());
+                    splits += "</td><td>" + split.reconcileDate().toString(Qt::ISODate) + "</td><td>" + split.action() + "</td><td>";
+                    splits += split.shares().formatMoney(splitAccount.fraction(), true) + "<br/>(" + splitSymbol + " ";
+                    splits += QString::number(splitAccount.fraction()) + ")</td><td>";
+                    splits +=
+                        split.price().formatMoney(safraction > splitAccount.fraction() ? safraction / splitAccount.fraction() : splitAccount.fraction(), true);
+                    splits += "</td><td>" + split.value().formatMoney(safraction, true) + "<br/>(" + t.commodity() + " " + QString::number(safraction);
+                    splits += ")</td><td>" + split.bankID() + "</td></tr><tr><td>&nbsp;</td><td colspan=\"10\">" + split.memo() + "</td></tr>";
+                    if (split.pairs().count() > 0) {
+                        splits += "<tr><th>KVP</th><th colspan=\"2\">Key</th><th colspan=\"8\">Value</th></tr>";
+                        for (auto it = split.pairs().cbegin(); it != split.pairs().cend(); ++it) {
+                            splits += "<tr><td></td><td colspan=\"2\">" + it.key() + "</td><td colspan=\"8\">" + it.value() + "</td></tr>";
+                        }
+                    }
+                }
+                splits +=
+                    "</table><p align=\"center\">The Value column uses the currency of the transaction, which may not be the currency of the account "
+                    "of the split.<br/>Shown in parentheses are the currency or trading symbol of the split and the fraction used to display value.</p>";
+            } else {
+                head += "<p>There is no selected Transaction.</p>";
+            }
+        } else {
+            head += "<p>There appears to be nothing selected.</p>";
+        }
+        QString foot = "</body></html>";
+        QString all = head + trans + kvpt + splits + foot;
+
+        QDialog* txInfo = new QDialog;
+        txInfo->setMinimumSize(700, 450);
+        QTextBrowser* text = new QTextBrowser();
+        text->setHtml(all);
+        QPushButton* doneButton = new QPushButton("Done");
+        doneButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        connect(doneButton, SIGNAL(clicked()), txInfo, SLOT(accept()));
+        QVBoxLayout* layout = new QVBoxLayout(txInfo);
+        layout->addWidget(text);
+        layout->addWidget(doneButton);
+        layout->setAlignment(doneButton, Qt::AlignHCenter);
+        txInfo->exec();
     }
 }
 

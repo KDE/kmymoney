@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="52" name="kmymoney" >
+<kpartgui version="53" name="kmymoney" >
  <MenuBar>
   <Menu name="file" >
    <DefineGroup name="open_db_group" append="open_merge"/>
@@ -88,6 +88,7 @@
     <Action name="transaction_mark_cleared"/>
     <Action name="transaction_mark_reconciled"/>
    </Menu>
+   <Action name="transaction_display_details" />
    <Separator />
    <Action name="transaction_goto_account"/>
    <Action name="transaction_goto_payee"/>
@@ -228,6 +229,7 @@
    <Action name="transaction_mark_cleared"/>
    <Action name="transaction_mark_reconciled"/>
   </Menu>
+  <Action name="transaction_display_details" />
   <Separator />
   <Action name="transaction_goto_account"/>
   <Action name="transaction_goto_payee"/>
