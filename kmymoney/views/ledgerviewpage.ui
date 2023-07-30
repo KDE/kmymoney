@@ -100,25 +100,7 @@
         </widget>
        </item>
        <item>
-        <widget class="KMMSearchWidget" name="m_searchWidget" native="true">
-         <layout class="QHBoxLayout" name="horizontalLayout" stretch="">
-          <property name="spacing">
-           <number>2</number>
-          </property>
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>1</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>1</number>
-          </property>
-         </layout>
-        </widget>
+        <widget class="KMMSearchWidget" name="m_searchWidget" native="true"/>
        </item>
       </layout>
      </widget>
