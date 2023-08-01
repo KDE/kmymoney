@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-31 00:47+0000\n"
-"PO-Revision-Date: 2023-07-04 08:55+0200\n"
+"PO-Revision-Date: 2023-07-31 06:33+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -330,16 +330,13 @@ msgid "Schedule found"
 msgstr "განრიგი ნაპოვნია"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Create a new Account"
+#, kde-format
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "ახალი ანგარიშის შექმნა"
+msgstr "ანგარიშის შექმნა"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, fuzzy, kde-format
-#| msgid "Create category"
+#, kde-format
 msgctxt "Create undo action"
 msgid "Create category"
 msgstr "კატეგორიის შექმნა"
@@ -2870,11 +2867,10 @@ msgid "Security"
 msgstr "უსაფრთხოება"
 
 #: kmymoney/dialogs/payeecreator.cpp:57
-#, fuzzy, kde-format
-#| msgid "Create category"
+#, kde-format
 msgctxt "Undo action description"
 msgid "Create payee"
-msgstr "კატეგორიის შექმნა"
+msgstr "გადამხდელის შექმნა"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsColors)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:14
@@ -4817,8 +4813,7 @@ msgid "Show transaction"
 msgstr "ტრანზაქციის ჩვენება"
 
 #: kmymoney/kmymoney.cpp:1842
-#, fuzzy, kde-format
-#| msgid "Show Transaction Detail"
+#, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "ტრანზაქციის დეტალების ჩვენება"
@@ -18268,11 +18263,10 @@ msgid "Edit account '%1'"
 msgstr ""
 
 #: kmymoney/views/kaccountsview_p.h:243
-#, fuzzy, kde-format
-#| msgid "Edit account..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
-msgstr "ანგარიშის ჩასწორება..."
+msgstr "ანგარიშის ჩასწორება"
 
 #: kmymoney/views/kaccountsview_p.h:277
 #, kde-format
@@ -18328,11 +18322,10 @@ msgid "Edit category '%1'"
 msgstr "'%1' კატეგორიის ჩასწორება"
 
 #: kmymoney/views/kcategoriesview.cpp:199
-#, fuzzy, kde-format
-#| msgid "Edit category..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
-msgstr "კატეგორიის ჩასწორება..."
+msgstr "კატეგორიის ჩასწორება"
 
 #: kmymoney/views/kcategoriesview.cpp:213
 #, kde-format

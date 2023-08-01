@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-31 00:47+0000\n"
-"PO-Revision-Date: 2023-07-30 11:27+0200\n"
+"PO-Revision-Date: 2023-07-31 15:31+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -5142,11 +5142,10 @@ msgid "Show transaction"
 msgstr "Transactie tonen"
 
 #: kmymoney/kmymoney.cpp:1842
-#, fuzzy, kde-format
-#| msgid "Show Transaction Detail"
+#, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
-msgstr "Toon Transactie Details"
+msgstr "Transactiedetails tonen"
 
 #: kmymoney/kmymoney.cpp:1844
 #, kde-format
@@ -19227,11 +19226,10 @@ msgid "Edit account '%1'"
 msgstr "Bewerk rekening '%1'"
 
 #: kmymoney/views/kaccountsview_p.h:243
-#, fuzzy, kde-format
-#| msgid "Edit account..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
-msgstr "Bewerk Rekening..."
+msgstr "Rekening bewerken"
 
 #: kmymoney/views/kaccountsview_p.h:277
 #, kde-format
@@ -19291,11 +19289,10 @@ msgid "Edit category '%1'"
 msgstr "Bewerk categorie '%1'"
 
 #: kmymoney/views/kcategoriesview.cpp:199
-#, fuzzy, kde-format
-#| msgid "Edit category..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
-msgstr "Bewerk categorie..."
+msgstr "Categorie bewerken"
 
 #: kmymoney/views/kcategoriesview.cpp:213
 #, kde-format

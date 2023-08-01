@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-31 00:47+0000\n"
-"PO-Revision-Date: 2023-07-30 07:49+0200\n"
+"PO-Revision-Date: 2023-07-31 06:16+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -5114,8 +5114,7 @@ msgid "Show transaction"
 msgstr "Prikaži transakcijo"
 
 #: kmymoney/kmymoney.cpp:1842
-#, fuzzy, kde-format
-#| msgid "Show Transaction Detail"
+#, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "Prikaži podrobnosti transakcije"
@@ -19179,11 +19178,10 @@ msgid "Edit account '%1'"
 msgstr "Uredi račun '%1'"
 
 #: kmymoney/views/kaccountsview_p.h:243
-#, fuzzy, kde-format
-#| msgid "Edit account..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
-msgstr "Uredi račun..."
+msgstr "Uredi račun"
 
 #: kmymoney/views/kaccountsview_p.h:277
 #, kde-format
@@ -19239,11 +19237,10 @@ msgid "Edit category '%1'"
 msgstr "Uredi kategorijo '%1'"
 
 #: kmymoney/views/kcategoriesview.cpp:199
-#, fuzzy, kde-format
-#| msgid "Edit category..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
-msgstr "Uredi kategorijo..."
+msgstr "Uredi kategorijo"
 
 #: kmymoney/views/kcategoriesview.cpp:213
 #, kde-format

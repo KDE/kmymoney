@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-31 00:47+0000\n"
-"PO-Revision-Date: 2023-07-30 07:59+0100\n"
+"PO-Revision-Date: 2023-07-31 06:26+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -5084,11 +5084,10 @@ msgid "Show transaction"
 msgstr "Montri transakcion"
 
 #: kmymoney/kmymoney.cpp:1842
-#, fuzzy, kde-format
-#| msgid "Show Transaction Detail"
+#, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
-msgstr "Montri Transakcian Detalon"
+msgstr "Montri transakciajn detalojn"
 
 #: kmymoney/kmymoney.cpp:1844
 #, kde-format
@@ -19068,8 +19067,7 @@ msgid "Edit account '%1'"
 msgstr "Redakti konton '%1'"
 
 #: kmymoney/views/kaccountsview_p.h:243
-#, fuzzy, kde-format
-#| msgid "Edit account..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
 msgstr "Redakti konton..."
@@ -19130,11 +19128,10 @@ msgid "Edit category '%1'"
 msgstr "Redakti kategorion '%1'"
 
 #: kmymoney/views/kcategoriesview.cpp:199
-#, fuzzy, kde-format
-#| msgid "Edit category..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
-msgstr "Redakti Kategorion..."
+msgstr "Redakti kategorion"
 
 #: kmymoney/views/kcategoriesview.cpp:213
 #, kde-format

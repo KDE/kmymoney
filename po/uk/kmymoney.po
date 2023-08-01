@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-31 00:47+0000\n"
-"PO-Revision-Date: 2023-07-30 08:42+0300\n"
+"PO-Revision-Date: 2023-07-31 09:07+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -5152,8 +5152,7 @@ msgid "Show transaction"
 msgstr "Показати операцію"
 
 #: kmymoney/kmymoney.cpp:1842
-#, fuzzy, kde-format
-#| msgid "Show Transaction Detail"
+#, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
 msgstr "Показати параметри операції"
@@ -19320,11 +19319,10 @@ msgid "Edit account '%1'"
 msgstr "Змінити рахунок «%1»"
 
 #: kmymoney/views/kaccountsview_p.h:243
-#, fuzzy, kde-format
-#| msgid "Edit account..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
-msgstr "Редагувати рахунок…"
+msgstr "редагування рахунка"
 
 #: kmymoney/views/kaccountsview_p.h:277
 #, kde-format
@@ -19381,11 +19379,10 @@ msgid "Edit category '%1'"
 msgstr "Змінити категорію «%1»"
 
 #: kmymoney/views/kcategoriesview.cpp:199
-#, fuzzy, kde-format
-#| msgid "Edit category..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
-msgstr "Змінити категорію…"
+msgstr "редагування категорії"
 
 #: kmymoney/views/kcategoriesview.cpp:213
 #, kde-format

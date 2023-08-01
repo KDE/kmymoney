@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-31 00:47+0000\n"
-"PO-Revision-Date: 2023-07-30 21:42+0300\n"
+"PO-Revision-Date: 2023-07-31 13:49+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -5078,11 +5078,10 @@ msgid "Show transaction"
 msgstr "İşlemi göster"
 
 #: kmymoney/kmymoney.cpp:1842
-#, fuzzy, kde-format
-#| msgid "Show Transaction Detail"
+#, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
-msgstr "İşlem Ayrıntısını Göster"
+msgstr "İşlem ayrıntılarını göster"
 
 #: kmymoney/kmymoney.cpp:1844
 #, kde-format
@@ -19066,11 +19065,10 @@ msgid "Edit account '%1'"
 msgstr "'%1' hesabını düzenle"
 
 #: kmymoney/views/kaccountsview_p.h:243
-#, fuzzy, kde-format
-#| msgid "Edit account..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
-msgstr "Hesabı düzenle..."
+msgstr "Hesabı düzenle"
 
 #: kmymoney/views/kaccountsview_p.h:277
 #, kde-format
@@ -19128,11 +19126,10 @@ msgid "Edit category '%1'"
 msgstr "'%1' kategorisini düzenle"
 
 #: kmymoney/views/kcategoriesview.cpp:199
-#, fuzzy, kde-format
-#| msgid "Edit category..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
-msgstr "Kategoriyi düzenle..."
+msgstr "Kategoriyi düzenle"
 
 #: kmymoney/views/kcategoriesview.cpp:213
 #, kde-format
