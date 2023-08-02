@@ -35,13 +35,15 @@ using namespace eMyMoney;
 
 static IMyMoneyProcessingCalendar* processingCalendarPtr = 0;
 
-MyMoneySchedule::MyMoneySchedule() :
-    MyMoneyObject(*new MyMoneySchedulePrivate)
+MyMoneySchedule::MyMoneySchedule()
+    : MyMoneyObject(*new MyMoneySchedulePrivate)
+    , MyMoneyKeyValueContainer()
 {
 }
 
-MyMoneySchedule::MyMoneySchedule(const QString &id) :
-    MyMoneyObject(*new MyMoneySchedulePrivate, id)
+MyMoneySchedule::MyMoneySchedule(const QString& id)
+    : MyMoneyObject(*new MyMoneySchedulePrivate, id)
+    , MyMoneyKeyValueContainer()
 {
 }
 
@@ -53,8 +55,9 @@ MyMoneySchedule::MyMoneySchedule(const QString& name,
                                  const QDate& /* startDate */,
                                  const QDate& endDate,
                                  bool fixed,
-                                 bool autoEnter) :
-    MyMoneyObject(*new MyMoneySchedulePrivate)
+                                 bool autoEnter)
+    : MyMoneyObject(*new MyMoneySchedulePrivate)
+    , MyMoneyKeyValueContainer()
 {
     Q_D(MyMoneySchedule);
     // Set up the values possibly differing from defaults
@@ -69,13 +72,15 @@ MyMoneySchedule::MyMoneySchedule(const QString& name,
     d->m_endDate = endDate;
 }
 
-MyMoneySchedule::MyMoneySchedule(const MyMoneySchedule& other) :
-    MyMoneyObject(*new MyMoneySchedulePrivate(*other.d_func()), other.id())
+MyMoneySchedule::MyMoneySchedule(const MyMoneySchedule& other)
+    : MyMoneyObject(*new MyMoneySchedulePrivate(*other.d_func()), other.id())
+    , MyMoneyKeyValueContainer(other)
 {
 }
 
-MyMoneySchedule::MyMoneySchedule(const QString& id, const MyMoneySchedule& other) :
-    MyMoneyObject(*new MyMoneySchedulePrivate(*other.d_func()), id)
+MyMoneySchedule::MyMoneySchedule(const QString& id, const MyMoneySchedule& other)
+    : MyMoneyObject(*new MyMoneySchedulePrivate(*other.d_func()), id)
+    , MyMoneyKeyValueContainer(other)
 {
 }
 
@@ -1417,4 +1422,14 @@ bool MyMoneySchedule::replaceId(const QString& newId, const QString& oldId)
 {
     Q_D(MyMoneySchedule);
     return d->m_transaction.replaceId(newId, oldId);
+}
+
+void MyMoneySchedule::setKeepMultiCurrencyAmount(bool keepAmount)
+{
+    setValue("kmm-keepamount", keepAmount, false);
+}
+
+bool MyMoneySchedule::keepMultiCurrencyAmount() const
+{
+    return value("kmm-keepamount", false);
 }

@@ -1411,11 +1411,13 @@ public:
         }
         writeTransaction(sch.id(), sch.transaction(), query, "S");
 
-        //FIXME: enable when schedules have KVPs.
-
-        //Add in Key-Value Pairs for transactions.
-        //deleteKeyValuePairs("SCHEDULE", sch.id());
-        //writeKeyValuePairs("SCHEDULE", sch.id(), sch.pairs());
+        // Add in Key-Value Pairs for schedules.
+        QVariantList idList;
+        idList << sch.id();
+        QList<QMap<QString, QString>> pairs;
+        pairs << sch.pairs();
+        deleteKeyValuePairs("SCHEDULE", idList);
+        writeKeyValuePairs("SCHEDULE", idList, pairs);
     }
 
     void writeSecurity(const MyMoneySecurity& security, QSqlQuery& query)

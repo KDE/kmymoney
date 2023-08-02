@@ -488,6 +488,8 @@ void MyMoneyXmlWriterPrivate::writeSchedule(QXmlStreamWriter* writer, const MyMo
     writer->writeAttribute(attributeName(Attribute::Schedule::LastPayment), MyMoneyUtils::dateToString(schedule.lastPayment()));
     writer->writeAttribute(attributeName(Attribute::Schedule::WeekendOption), attrValue(static_cast<int>(schedule.weekendOption())));
 
+    writeKeyValueContainer(writer, schedule);
+
     // store the payment history for this schedule.
     // ipwizard: i am not sure if this is used at all
     QList<QDate> payments = schedule.recordedPayments();
