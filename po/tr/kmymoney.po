@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-31 00:47+0000\n"
-"PO-Revision-Date: 2023-07-31 13:49+0300\n"
+"PO-Revision-Date: 2023-08-02 01:01+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -997,7 +997,7 @@ msgstr "Kullanıcı"
 #: kmymoney/dialogs/kcurrencycalculator.ui:17
 #, kde-format
 msgid "Exchange Rate/Price Editor"
-msgstr "Döviz Kuru/Fiyat Düzenleyici"
+msgstr "Döviz Kuru/Fiyat Düzenleyicisi"
 
 #. i18n: ectx: property (text), widget (QLabel, amountLabel)
 #. i18n: ectx: property (text), widget (QLabel, label_7)
@@ -2095,7 +2095,7 @@ msgstr "Fiyat Seçenekleri"
 #: kmymoney/dialogs/kmymoneypricedlg.ui:14
 #, kde-format
 msgid "Price Editor"
-msgstr "Fiyat Düzenleyici"
+msgstr "Fiyat Düzenleyicisi"
 
 #. i18n: ectx: property (whatsThis), widget (QTreeWidget, m_priceList)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:32
@@ -13322,7 +13322,7 @@ msgstr "QIF Profil Düzenleyicisi"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:139
 #, kde-format
 msgid "QIF Profile Selector"
-msgstr "QIF Profil Seçici"
+msgstr "QIF Profili Seçicisi"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:219
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:129

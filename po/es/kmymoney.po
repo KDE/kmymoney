@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-31 00:47+0000\n"
-"PO-Revision-Date: 2023-07-30 19:34+0200\n"
+"PO-Revision-Date: 2023-08-01 14:01+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -5138,11 +5138,10 @@ msgid "Show transaction"
 msgstr "Mostrar transacción"
 
 #: kmymoney/kmymoney.cpp:1842
-#, fuzzy, kde-format
-#| msgid "Show Transaction Detail"
+#, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
-msgstr "Mostrar Detalles del Asiento"
+msgstr "Mostrar detalles de la transacción"
 
 #: kmymoney/kmymoney.cpp:1844
 #, kde-format
@@ -19235,11 +19234,10 @@ msgid "Edit account '%1'"
 msgstr "Editar cuenta «%1»"
 
 #: kmymoney/views/kaccountsview_p.h:243
-#, fuzzy, kde-format
-#| msgid "Edit account..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
-msgstr "Editar cuenta..."
+msgstr "Editar cuenta"
 
 #: kmymoney/views/kaccountsview_p.h:277
 #, kde-format
@@ -19295,11 +19293,10 @@ msgid "Edit category '%1'"
 msgstr "Editar categoría «%1»"
 
 #: kmymoney/views/kcategoriesview.cpp:199
-#, fuzzy, kde-format
-#| msgid "Edit category..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
-msgstr "Editar categoría..."
+msgstr "Editar categoría"
 
 #: kmymoney/views/kcategoriesview.cpp:213
 #, kde-format
