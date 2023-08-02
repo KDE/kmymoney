@@ -93,7 +93,7 @@
         "Name[sk]": "CSV exportér",
         "Name[sl]": "Izvoznik CSV",
         "Name[sv]": "CSV-export",
-        "Name[tr]": "CSV Dışa Aktarıcı",
+        "Name[tr]": "CSV Dışa Aktarıcısı",
         "Name[uk]": "Експортування CSV",
         "Name[x-test]": "xxCSV Exporterxx",
         "Name[zh_CN]": "CSV 导出工具",
