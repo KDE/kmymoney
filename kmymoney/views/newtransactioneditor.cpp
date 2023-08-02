@@ -1161,6 +1161,9 @@ MyMoneyTransaction NewTransactionEditor::transaction() const
     if (!d->m_transaction.id().isEmpty()) {
         t = d->m_transaction;
     } else {
+        // use the commodity of the account
+        t.setCommodity(d->m_transaction.commodity());
+
         // we keep the date when adding a new transaction
         // for the next new one
         KMyMoneySettings::setLastUsedPostDate(d->ui->dateEdit->date().startOfDay());
