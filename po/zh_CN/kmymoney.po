@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-31 00:47+0000\n"
-"PO-Revision-Date: 2023-07-30 07:09\n"
+"PO-Revision-Date: 2023-08-02 12:40\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -336,18 +336,16 @@ msgid "Schedule found"
 msgstr "已找到交易计划"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, fuzzy, kde-format
-#| msgid "Created on"
+#, kde-format
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "创建于"
+msgstr ""
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, fuzzy, kde-format
-#| msgid "Create category"
+#, kde-format
 msgctxt "Create undo action"
 msgid "Create category"
-msgstr "创建交易类别"
+msgstr ""
 
 #: kmymoney/dialogs/editpersonaldatadlg.cpp:174
 #: kmymoney/wizards/newuserwizard/kgeneralpage.cpp:78
@@ -2942,11 +2940,10 @@ msgid "Security"
 msgstr "证券"
 
 #: kmymoney/dialogs/payeecreator.cpp:57
-#, fuzzy, kde-format
-#| msgid "Delete payee"
+#, kde-format
 msgctxt "Undo action description"
 msgid "Create payee"
-msgstr "删除收款人"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsColors)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:14
@@ -4928,11 +4925,10 @@ msgid "Show transaction"
 msgstr ""
 
 #: kmymoney/kmymoney.cpp:1842
-#, fuzzy, kde-format
-#| msgid "Show Transaction Detail"
+#, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
-msgstr "显示交易详细信息"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1844
 #, kde-format
@@ -18536,11 +18532,10 @@ msgid "Edit account '%1'"
 msgstr "编辑账户“%1”"
 
 #: kmymoney/views/kaccountsview_p.h:243
-#, fuzzy, kde-format
-#| msgid "Edit account..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
-msgstr "编辑账户..."
+msgstr ""
 
 #: kmymoney/views/kaccountsview_p.h:277
 #, kde-format
@@ -18596,11 +18591,10 @@ msgid "Edit category '%1'"
 msgstr "编辑交易类别“%1”"
 
 #: kmymoney/views/kcategoriesview.cpp:199
-#, fuzzy, kde-format
-#| msgid "Edit category..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
-msgstr "编辑交易类别..."
+msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:213
 #, kde-format

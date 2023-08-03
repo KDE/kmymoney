@@ -23745,20 +23745,3 @@ msgid ""
 "<p>All information is optional and only used to personalize your KMyMoney "
 "file.</p>"
 msgstr ""
-
-#, fuzzy
-#~ msgid ""
-#~ "*.css|CSS files\n"
-#~ "*|All files (*)"
-#~ msgstr ""
-#~ "*.kmy|Файлове на KMyMoney (*.kmy)\n"
-#~ "*.*|Всички файлове (*.*)"
-
-#, fuzzy
-#~ msgctxt "@title:menu budget context menu"
-#~ msgid "Budget options"
-#~ msgstr "Настройки на бюджет"
-
-#, fuzzy
-#~ msgid "KMyMoney print check"
-#~ msgstr "Писане на чек"
