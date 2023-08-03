@@ -87,6 +87,7 @@
         "Name[sk]": "QIF Exporter",
         "Name[sl]": "Izvoznik QIF",
         "Name[sv]": "QIF-export",
+        "Name[tr]": "QIF Dışa Aktarıcısı",
         "Name[uk]": "Інструмент експортування QIF",
         "Name[x-test]": "xxQIF Exporterxx",
         "Name[zh_CN]": "QIF 导出工具",
