@@ -118,6 +118,7 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget* parent, const MyMoneySchedule& sch
             d->m_editor->loadSchedule(loanSchedule);
         } else {
             d->m_editor->loadSchedule(d->m_schedule);
+            d->m_editor->setKeepCategoryAmount(d->m_schedule.keepMultiCurrencyAmount());
         }
     } catch (const MyMoneyException& e) {
         KMessageBox::detailedError(this, i18n("Unable to load schedule details"), QString::fromLatin1(e.what()));

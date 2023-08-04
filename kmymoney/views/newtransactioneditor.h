@@ -77,6 +77,8 @@ public:
      */
     virtual WidgetHintFrameCollection* widgetHintFrameCollection() const override;
 
+    void setKeepCategoryAmount(bool keepCategoryAmount);
+
 public Q_SLOTS:
     void slotSettingsChanged() override;
 
@@ -88,6 +90,7 @@ protected Q_SLOTS:
 
 Q_SIGNALS:
     void postDateChanged(const QDate& date) const;
+    void categorySelectionChanged();
 
 private:
     class Private;

@@ -79,6 +79,7 @@ public:
         , accepted(false)
         , costCenterRequired(false)
         , inUpdateVat(false)
+        , keepCategoryAmount(false)
         , splitModel(parent, &undoStack)
         , frameCollection(nullptr)
         , m_splitHelper(nullptr)
@@ -134,6 +135,7 @@ public:
     bool accepted;
     bool costCenterRequired;
     bool inUpdateVat;
+    bool keepCategoryAmount;
     QUndoStack undoStack;
     SplitModel splitModel;
     MyMoneyAccount m_account;
@@ -346,6 +348,8 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
 
                 updateVAT(ValueUnchanged);
 
+                keepCategoryAmount = false;
+
             } catch (MyMoneyException&) {
                 qDebug() << "Ooops: invalid account id" << accountId << "in" << Q_FUNC_INFO;
             }
@@ -387,14 +391,16 @@ bool NewTransactionEditor::Private::amountChanged()
             if (splitModel.rowCount() == 1) {
                 const QModelIndex index = splitModel.index(0, 0);
 
-                // check if there is a change in the values other than simply reverting the sign
-                // and get an updated price in that case
-                if ((index.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>() != ui->creditDebitEdit->shares())
-                    || (index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>() != ui->creditDebitEdit->value())) {
-                    KCurrencyCalculator::updateConversion(ui->creditDebitEdit, ui->dateEdit->date());
-                }
+                if (!keepCategoryAmount) {
+                    // check if there is a change in the values other than simply reverting the sign
+                    // and get an updated price in that case
+                    if ((index.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>() != ui->creditDebitEdit->shares())
+                        || (index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>() != ui->creditDebitEdit->value())) {
+                        KCurrencyCalculator::updateConversion(ui->creditDebitEdit, ui->dateEdit->date());
+                    }
 
-                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-ui->creditDebitEdit->shares()), eMyMoney::Model::SplitSharesRole);
+                    splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-ui->creditDebitEdit->shares()), eMyMoney::Model::SplitSharesRole);
+                }
                 splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-ui->creditDebitEdit->value()), eMyMoney::Model::SplitValueRole);
             }
             rc = true;
@@ -747,6 +753,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->m_splitHelper = new KMyMoneyAccountComboSplitHelper(d->ui->categoryCombo, &d->splitModel);
     connect(d->m_splitHelper, &KMyMoneyAccountComboSplitHelper::accountComboEnabled, d->ui->costCenterCombo, &QComboBox::setEnabled);
     connect(d->m_splitHelper, &KMyMoneyAccountComboSplitHelper::accountComboEnabled, d->ui->costCenterLabel, &QComboBox::setEnabled);
+    connect(d->m_splitHelper, &KMyMoneyAccountComboSplitHelper::accountComboEnabled, this, &NewTransactionEditor::categorySelectionChanged);
 
     d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type>{
         eMyMoney::Account::Type::Asset,
@@ -1214,6 +1221,7 @@ MyMoneyTransaction NewTransactionEditor::transaction() const
         const auto val = idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
         sp.setShares(-val);
         sp.setValue(-val);
+        sp.setPrice(MyMoneyMoney::ONE);
     } else {
         sp.setShares(d->ui->creditDebitEdit->value());
         sp.setValue(d->ui->creditDebitEdit->value());
@@ -1378,4 +1386,9 @@ void NewTransactionEditor::slotSettingsChanged()
 WidgetHintFrameCollection* NewTransactionEditor::widgetHintFrameCollection() const
 {
     return d->frameCollection;
+}
+
+void NewTransactionEditor::setKeepCategoryAmount(bool keepCategoryAmount)
+{
+    d->keepCategoryAmount = keepCategoryAmount;
 }

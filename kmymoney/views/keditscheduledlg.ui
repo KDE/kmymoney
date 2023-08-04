@@ -230,6 +230,16 @@
        </layout>
       </item>
       <item>
+       <widget class="QCheckBox" name="keepMultiCurrencyAmount">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select this if you don't want to modify the amount of the category side of a multi-currency transaction. The exchange rate of the transaction will be adjusted instead when the schedule is entered with a modifed amount.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>Do not change amount of category but modify exchange rate of transaction</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QCheckBox" name="lastDayInMonthOption">
         <property name="text">
          <string>Process this schedule always at the last day of a month</string>
@@ -330,7 +340,7 @@
           </widget>
          </item>
          <item>
-          <widget class="KMyMoneyDateEdit" name="finalPaymentDateEdit" native="true">
+          <widget class="KMyMoneyDateEdit" name="finalPaymentDateEdit">
            <property name="focusPolicy">
             <enum>Qt::StrongFocus</enum>
            </property>
@@ -384,6 +394,11 @@
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KDateComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kdatecombobox.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyDateEdit</class>

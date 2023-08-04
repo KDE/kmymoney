@@ -53,6 +53,7 @@
 #include "mymoneytransaction.h"
 #include "mymoneyutils.h"
 #include "newtransactioneditor.h"
+#include "securitiesmodel.h"
 #include "widgetenums.h"
 #include "widgethintframe.h"
 
@@ -91,6 +92,7 @@ public:
     {
         Q_Q(KEditScheduleDlg);
         ui->setupUi(q);
+        ui->keepMultiCurrencyAmount->setEnabled(false);
 
         transactionEditor = ui->transactionEditor;
         transactionEditor->setShowAccountCombo(true);
@@ -119,6 +121,7 @@ public:
         WidgetHintFrame::hide(ui->nameEdit);
         WidgetHintFrame::hide(m_accountCombo);
         WidgetHintFrame::hide(m_categoryCombo);
+        ui->keepMultiCurrencyAmount->setDisabled(true);
 
         if (ui->nameEdit->text().isEmpty()) {
             WidgetHintFrame::show(ui->nameEdit, i18nc("@info:tooltip", "The name is a required field for a schedule"));
@@ -129,6 +132,19 @@ public:
         // if we have a combo, it is empty and can be modified (no multi split transaction)
         if (m_categoryCombo && m_categoryCombo->getSelected().isEmpty() && !m_categoryCombo->lineEdit()->isReadOnly()) {
             WidgetHintFrame::show(m_categoryCombo, i18nc("@info:tooltip", "The category is a required field for a schedule"));
+        }
+
+        if (m_accountCombo && m_categoryCombo) {
+            if (!(m_accountCombo->getSelected().isEmpty() || m_categoryCombo->getSelected().isEmpty() || m_categoryCombo->lineEdit()->isReadOnly())) {
+                const auto file = MyMoneyFile::instance();
+                try {
+                    const auto account = file->account(m_accountCombo->getSelected());
+                    const auto category = file->account(m_categoryCombo->getSelected());
+                    ui->keepMultiCurrencyAmount->setEnabled(account.currencyId() != category.currencyId());
+                } catch (MyMoneyException& e) {
+                    ;
+                }
+            }
         }
     }
 
@@ -150,7 +166,7 @@ public:
         m_categoryCombo = transactionEditor->findChild<KMyMoneyAccountCombo*>(QLatin1String("categoryCombo"));
         if (m_categoryCombo) {
             m_frameCollection->addFrame(new WidgetHintFrame(m_categoryCombo));
-            connect(m_categoryCombo, &KMyMoneyAccountCombo::accountSelected, this, [&]() {
+            connect(transactionEditor, &NewTransactionEditor::categorySelectionChanged, this, [&]() {
                 updateState();
             });
         }
@@ -197,6 +213,8 @@ public:
             ui->remainingEdit->setValue(m_schedule.transactionsRemaining());
             ui->finalPaymentDateEdit->setDate(m_schedule.endDate());
         }
+
+        ui->keepMultiCurrencyAmount->setChecked(m_schedule.keepMultiCurrencyAmount());
 
         q->setModal(true);
 
@@ -524,6 +542,8 @@ const MyMoneySchedule& KEditScheduleDlg::schedule()
     } else {
         d->m_schedule.setEndDate(QDate());
     }
+
+    d->m_schedule.setKeepMultiCurrencyAmount(d->ui->keepMultiCurrencyAmount->isEnabled() && d->ui->keepMultiCurrencyAmount->isChecked());
     return d->m_schedule;
 }
 

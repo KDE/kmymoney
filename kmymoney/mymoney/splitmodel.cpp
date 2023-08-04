@@ -489,6 +489,12 @@ void SplitModel::addSplitsToTransaction(MyMoneyTransaction& t) const
         s.setPayeeId(idx.data(eMyMoney::Model::SplitPayeeIdRole).toString());
         s.setTagIdList(idx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
 
+        // update the price information. setting the price to zero
+        // will cause MyMoneySplit::price to recalculate the price
+        // based on value and shares of the split
+        s.setPrice(MyMoneyMoney());
+        s.setPrice(s.price());
+
         if (s.id().isEmpty()) {
             t.addSplit(s);
         } else {
@@ -512,6 +518,13 @@ QList<MyMoneySplit> SplitModel::splitList() const
         s.setCostCenterId(idx.data(eMyMoney::Model::SplitCostCenterIdRole).toString());
         s.setPayeeId(idx.data(eMyMoney::Model::SplitPayeeIdRole).toString());
         s.setTagIdList(idx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
+
+        // update the price information. setting the price to zero
+        // will cause MyMoneySplit::price to recalculate the price
+        // based on value and shares of the split
+        s.setPrice(MyMoneyMoney());
+        s.setPrice(s.price());
+
         splits.append(s);
     }
     return splits;
