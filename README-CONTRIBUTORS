@@ -1,0 +1,19 @@
+This Handbook-5.2 branch is specifically for preparing the Handbook for the
+upcoming (but not yet scheduled) release of KMyMoney 5.2 from master branch.
+Use of a separate branch rather than working in master branch is intended to
+save the translators from extra work, as there are likely to be multiple
+edits to some sections, as well as reorganizations of the material.
+
+If you are interested in contributing, please contact
+ostroffjh@users.sourceforge.net so multiple people are not working on the
+same chapters at the same time.
+
+I expect that there will be changes ONLY in the doc subdirectory.
+
+Update of screenshots will be left for later in the process, but
+descriptions of what changes or new screenshots are needed can/should be
+placed below the existing or target location.
+
+At some point, I will add to this doc a list of which chapters have and have
+not been edited yet, and not use the list used for the 4 -> 5 changes in the
+What's New section.

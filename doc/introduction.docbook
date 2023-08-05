@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="introduction">
 <chapterinfo>
-  <date>2018-01-13</date>
-  <releaseinfo>5.0.0</releaseinfo>
+  <date>2023-08-15</date>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title>Introduction</title>
@@ -61,7 +61,10 @@
   As a personal finance manager, &kmymoney; is not intended to scale to the
   needs of an average business.  A small business might find sufficient
   functionality to use &kmymoney;, but features such as accounts-receivable and
-  accounts-payable are not directly supported.  However, it would be possible to
+  accounts-payable are not directly supported.  Most if not all the data needed
+  for a small business, such as for reports for audit and taxation purposes is
+  present, but may need to be extracted using various reports and then processed
+  and assembled into the required formats.  In addition, it would be possible to
   create client, supplier, document, or other features through plugins.
 </para>
 

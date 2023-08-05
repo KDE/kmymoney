@@ -115,7 +115,7 @@
 
 <bookinfo>
 <title>The &kmymoney; Handbook</title>
-<subtitle>for &kmymoney; version 5.0</subtitle>
+<subtitle>for &kmymoney; version 5.2</subtitle>
 
 <authorgroup>
 <!-- This is just put in as an example.  For real documentation, please
@@ -137,7 +137,7 @@ and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
 </authorgroup>
 
 <copyright>
-<year>2000-2018</year>
+<year>2000-2023</year>
 <holder>The &kmymoney; Development Team</holder>
 </copyright>
 <!-- Translators: put here the copyright notice of the translation -->
@@ -152,8 +152,8 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>2018-01-13</date>
-<releaseinfo>5.0.0</releaseinfo>
+<date>2023-08-15</date>
+<releaseinfo>5.2.0</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -163,7 +163,7 @@ Do NOT change these in the translation. -->
 </para>
 
 <para>
-  This handbook describes &kmymoney; version 5.0.
+  This handbook describes &kmymoney; version 5.2.
 </para>
 </abstract>
 
