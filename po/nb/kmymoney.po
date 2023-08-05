@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-31 00:47+0000\n"
-"PO-Revision-Date: 2023-07-16 12:53+0200\n"
-"Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
+"PO-Revision-Date: 2023-08-04 11:52+0200\n"
+"Last-Translator: Kjetil Sørlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
@@ -114,8 +114,8 @@ msgstr "  Mottakere"
 msgctxt "x transactions have been created"
 msgid "    %1 created"
 msgid_plural "    %1 created"
-msgstr[0] "    %1 opprettet"
-msgstr[1] "    %1 opprettet"
+msgstr[0] "    %1 er lagt til"
+msgstr[1] "    %1 er lagt til"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:650
 #, kde-format
@@ -201,13 +201,13 @@ msgid ""
 "payee information for all following transactions referencing \"%1\" will be "
 "removed."
 msgstr ""
-"Ved å velge «Ja» oppretter du denne mottakeren. «Nei» betyr å hoppe over "
+"Ved å velge «Ja» legger du til denne mottakeren. «Nei» betyr å hoppe over "
 "opprettelsen av mottakeren og å fjerne informasjon om mottaker fra "
 "transaksjonen. Ved å velge «Avbryt» avbryter du importeringen.\n"
 "\n"
 "Hvis du velger «Nei» her og krysser av i boksen «Ikke vis dette igjen», vil "
-"informasjon om mottakere bli fjernet fra alle transaksjoner med referanse "
-"«%1»."
+"informasjon om mottakere bli fjernet fra alle transaksjoner med referanse «"
+"%1»."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1046
 #: kmymoney/kmymoneyutils.cpp:567
@@ -247,7 +247,7 @@ msgstr "Avbryt"
 #: kmymoney/converter/mymoneystatementreader.cpp:1126
 #, kde-format
 msgid "Unable to add payee/receiver"
-msgstr "Kan ikke opprette mottaker"
+msgstr "Kan ikke legge til mottaker"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1373
 #, kde-format
@@ -290,7 +290,7 @@ msgid ""
 "manually from the selection box below."
 msgstr ""
 "KMyMoney kan ikke avgjøre hvilken av dine konti som skal brukes.  Du kan "
-"opprette en ny konto ved å trykke på <b>Opprett</b> eller velg en annen "
+"legge til en ny konto ved å trykke på <b>Legg til</b> eller velg en annen "
 "manuelt fra valgboksen nedenfor."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1446
@@ -301,8 +301,8 @@ msgid ""
 "account by pressing the <b>Create</b> button."
 msgstr ""
 "Ingen kontoinformasjon er funnet i den valgte kontoutdragsfilen. Velg en "
-"konto ved å bruke valgboksen i dialogvindu eller opprett en ny konto ved å "
-"trykke på <b>Opprett</b>."
+"konto ved å bruke valgboksen i dialogvindu eller legg til en ny konto ved å "
+"trykke på <b>Legg til</b>."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1473
 #, kde-format
@@ -314,7 +314,7 @@ msgstr "Importer transaksjoner"
 msgid ""
 "You must select an account, create a new one, or press the <b>Abort</b> "
 "button."
-msgstr "Du må velge en konto, opprette en ny eller trykke <b>Avbryt</b>."
+msgstr "Du må velge en konto, legge til en ny eller trykke <b>Avbryt</b>."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1629
 #: kmymoney/views/kscheduledview_p.h:196 kmymoney/views/kscheduledview_p.h:311
@@ -368,13 +368,13 @@ msgstr "Tidsplan funnet"
 #, kde-format
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr ""
+msgstr "Legg til konto"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, kde-format
 msgctxt "Create undo action"
 msgid "Create category"
-msgstr ""
+msgstr "Legg til kategori"
 
 #: kmymoney/dialogs/editpersonaldatadlg.cpp:174
 #: kmymoney/wizards/newuserwizard/kgeneralpage.cpp:78
@@ -511,12 +511,12 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:47
 #, kde-format
 msgid "&Create..."
-msgstr "&Opprett..."
+msgstr "&Legg til..."
 
 #: kmymoney/dialogs/kaccountselectdlg.cpp:88
 #, kde-format
 msgid "Create a new account/category"
-msgstr "Oppretter en ny konto/kategori"
+msgstr "Legg til en ny konto/kategori"
 
 #: kmymoney/dialogs/kaccountselectdlg.cpp:89
 #, kde-format
@@ -562,7 +562,7 @@ msgstr "Kontoen du skal importere til"
 #: kmymoney/wizards/newaccountwizard/kloanpayoutpage.ui:89
 #, kde-format
 msgid "Create"
-msgstr "Opprett"
+msgstr "Legg til"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnOK)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonOk)
@@ -714,7 +714,7 @@ msgstr ""
 #: kmymoney/dialogs/kcategoryreassigndlg.cpp:94
 #, kde-format
 msgid "Category creation"
-msgstr "Opprette kategori"
+msgstr "Ny kategori"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KCategoryReassignDlg)
 #: kmymoney/dialogs/kcategoryreassigndlg.ui:14
@@ -1389,7 +1389,7 @@ msgid ""
 "body></html>"
 msgstr ""
 "<html><head/><body><p>Skriv inn ISO4217-koden for valutaen her (f.eks. EUR "
-"for euro). Dette kan ikke endres når valutaen er opprettet.</p></body></html>"
+"for euro). Dette kan ikke endres når valutaen er lagt til.</p></body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leSymbol)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:104
@@ -1407,7 +1407,7 @@ msgid ""
 "This cannot be changed once the currency is created."
 msgstr ""
 "Angi den minste brøkdelen av valutaen som brukes for bankkonti her. Dette "
-"kan ikke endres når valutaen er opprettet."
+"kan ikke endres når valutaen er lagt til."
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leCashFraction)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:118
@@ -1418,7 +1418,7 @@ msgid ""
 "This cannot be changed once the currency is created."
 msgstr ""
 "Angi den minste brøkdelen av valutaen som brukes for kontantkonti her. Dette "
-"kan ikke endres når valutaen er opprettet."
+"kan ikke endres når valutaen er lagt til."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:125
@@ -1955,7 +1955,7 @@ msgstr "Filinformasjon"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:28
 #, kde-format
 msgid "Created on"
-msgstr "Opprettet"
+msgstr "Lagt til den"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:48
@@ -2165,7 +2165,7 @@ msgstr "Legg til ny oppføring"
 #: kmymoney/dialogs/kmymoneypricedlg.ui:92
 #, kde-format
 msgid "Create a new price entry."
-msgstr "Opprett en ny kursoppføring."
+msgstr "Legg til en ny kursoppføring."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_newButton)
 #: kmymoney/dialogs/kmymoneypricedlg.ui:95
@@ -2330,8 +2330,8 @@ msgid ""
 "A category named <b>%1</b> already exists. You cannot create a second "
 "category with the same name."
 msgstr ""
-"Kategorien <b>%1</b> finnes allerede. Du kan ikke opprette flere kategorier "
-"med samme navn."
+"Kategorien <b>%1</b> finnes allerede. Du kan ikke lage flere kategorier med "
+"samme navn."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:818
 #, kde-format
@@ -2341,9 +2341,9 @@ msgid ""
 "only be shown if it is used. Otherwise, it will be hidden in the accounts/"
 "categories view."
 msgstr ""
-"Du har i innstillingene valgt å skjule alle ubrukte kategorier. Kategorien "
-"du nettopp opprettet, vil derfor bare vises hvis den er i bruk. Ellers vil "
-"den ikke være synlig i konto- og kategorivisninger."
+"Du har valgt å skjule alle ubrukte kategorier i innstillingene. Kategorien "
+"du nettopp la til, vil derfor bare vises hvis den er i bruk. Ellers vil den "
+"ikke være synlig i konto- og kategorivisninger."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:818
 #, kde-format
@@ -2354,7 +2354,7 @@ msgstr "Skjulte kategorier"
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
-msgstr "Kan ikke opprette institusjon"
+msgstr "Kan ikke lege til institusjon"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:969
 #, kde-format
@@ -2367,7 +2367,7 @@ msgstr "Skriv inn et navn for den nye kategorien eller kontoen."
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
 msgstr ""
-"Du kan ikke opprette en konto eller kategori som inneholder %1 i navnet."
+"Du kan ikke legge til en konto eller kategori som inneholder %1 i navnet."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:981
 #, kde-format
@@ -2389,7 +2389,7 @@ msgid ""
 "</p><p><i>The parent account will default to <b>%2</b> but can be changed in "
 "the following dialog</i>.</p>"
 msgstr ""
-"<p>Kategorien <b>%1</b> finnes ikke. Vil du opprette den?</p><p><i>Standard "
+"<p>Kategorien <b>%1</b> finnes ikke. Vil du lage den?</p><p><i>Standard "
 "overordnet kategori er <b>%2</b> men den kan endres i det påfølgende "
 "vinduet</i>.</p>"
 
@@ -2406,7 +2406,7 @@ msgid ""
 "</p><p><i>The parent account will default to <b>%2</b> but can be changed in "
 "the following dialog</i>.</p>"
 msgstr ""
-"<p>Kontoen <b>%1</b> finnes ikke. Vil du opprette den?</p><p><i>Standard "
+"<p>Kontoen <b>%1</b> finnes ikke. Vil du legge den til?</p><p><i>Standard "
 "overordnet konto er <b>%2</b> men den kan endres i det påfølgende vinduet</"
 "i>.</p>"
 
@@ -2414,19 +2414,19 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Category"
-msgstr "Opprett ny kategori"
+msgstr "Legg til en ny kategori"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1102
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Account"
-msgstr "Opprett ny konto"
+msgstr "Legg til en ny konto"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KNewAccountDlg)
 #: kmymoney/dialogs/knewaccountdlg.ui:14
 #, kde-format
 msgid "New Account Dialog"
-msgstr "Opprett ny konto"
+msgstr "Veiviser for å legge til ny konto"
 
 #. i18n: ectx: attribute (title), widget (QWidget, m_generalTab)
 #: kmymoney/dialogs/knewaccountdlg.ui:27
@@ -2852,7 +2852,7 @@ msgid ""
 "list below or create a new one."
 msgstr ""
 "For å kunne slå sammen de allerede merkede mottakere må du velge en mottaker "
-"fra listen under eller opprette en ny."
+"fra listen under eller legge til en ny."
 
 #: kmymoney/dialogs/kpayeereassigndlg.cpp:36
 msgid ""
@@ -2876,7 +2876,7 @@ msgstr ""
 #: kmymoney/dialogs/kpayeereassigndlg.cpp:114
 #, kde-format
 msgid "Payee creation"
-msgstr "Opprette mottaker"
+msgstr "Legge til mottaker"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KPayeeReassignDlg)
 #: kmymoney/dialogs/kpayeereassigndlg.ui:14
@@ -3071,7 +3071,7 @@ msgstr "Verdipapir"
 #, kde-format
 msgctxt "Undo action description"
 msgid "Create payee"
-msgstr ""
+msgstr "Legg til mottaker"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsColors)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:14
@@ -3901,14 +3901,14 @@ msgstr "Identifiser som"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:177
 #, kde-format
 msgid "Create a new source entry for online quotes"
-msgstr "Opprett ny kildeoppføring for nettbaserte aksjekurser"
+msgstr "Legg til en ny kildeoppføring for nettbaserte aksjekurser"
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_newButton)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:180
 #, kde-format
 msgid "Use this to create a new entry for online quotes"
 msgstr ""
-"Bruk denne for å opprette nye oppføringer for å hente aksjekurser fra nettet"
+"Bruk denne for å legge til en ny oppføring for å hente aksjekurser fra nettet"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_newButton)
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:183
@@ -4555,7 +4555,7 @@ msgid ""
 "Please consider contributing to this project with code and/or suggestions."
 msgstr ""
 "\n"
-"KMyMoney, personlig økonomibehandler av KDE.\n"
+"KMyMoney, personlig økonomibehandler fra KDE.\n"
 "\n"
 "Vurder gjerne å bidra til dette prosjektet med kode og/eller forslag."
 
@@ -4577,7 +4577,7 @@ msgstr ""
 #, kde-format
 msgctxt "Roles in project"
 msgid "Core engine, Release Manager, Project admin"
-msgstr "Kjerneprogram, håndtering av utgivelse, prosjektadministrasjon"
+msgstr "Kjerneprogram, sjef for utgivelser, prosjektadministrasjon"
 
 #: kmymoney/kcreditswindow.cpp:47
 #, kde-format
@@ -4662,7 +4662,7 @@ msgstr "Dokumentasjon og brukerstøtte"
 #, kde-format
 msgctxt "Roles in project"
 msgid "Initial investment support"
-msgstr "Første investeringsstøtte"
+msgstr "Opprinnelig investeringsstøtte"
 
 #: kmymoney/kcreditswindow.cpp:76
 #, kde-format
@@ -4727,7 +4727,7 @@ msgid ""
 "all relevant information.</p><p>Please use KMyMoney version 0.8.7 or later "
 "and earlier than version 0.9 to correct the problem.</p>"
 msgstr ""
-"<p>Kontoen «%1» er tidligere opprettet som en lånekonto men det mangler noe "
+"<p>Kontoen «%1» er tidligere lagt til som en lånekonto men det mangler noe "
 "informasjon.</p><p>Den nye låneveiviseren vil bli startet for å innhente all "
 "relevant informasjon.</p><p>Bruk KMyMoney versjon 0.8.7 og senere men "
 "tidligere enn versjon 0.9 for rette på problemet.</p>"
@@ -4750,12 +4750,12 @@ msgstr "Uten tittel"
 #: kmymoney/kmymoney.cpp:1350
 #, kde-format
 msgid "Unable to match the selected transactions"
-msgstr "Kan ikke samsvare de valgte transaksjonene"
+msgstr "Kan ikke slå sammen de valgte transaksjonene"
 
 #: kmymoney/kmymoney.cpp:1377
 #, kde-format
 msgid "Unable to unmatch the selected transactions"
-msgstr "Kan ikke oppheve samsvar mellom de valgte transaksjonene"
+msgstr "Kan ikke dele opp de valgte transaksjonene"
 
 #: kmymoney/kmymoney.cpp:1469
 #, kde-format
@@ -5101,7 +5101,7 @@ msgstr "Vis transaksjons"
 #, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
-msgstr ""
+msgstr "Vis transaksjonsdetaljer"
 
 #: kmymoney/kmymoney.cpp:1844
 #, kde-format
@@ -5314,13 +5314,13 @@ msgstr "Feilsøkingstidtakere"
 #, kde-format
 msgctxt "Match transactions"
 msgid "Match"
-msgstr "Samsvar"
+msgstr "Slå sammen"
 
 #: kmymoney/kmymoney.cpp:1913
 #, kde-format
 msgctxt "Unmatch transactions"
 msgid "Unmatch"
-msgstr "Opphev samsvar"
+msgstr "Del opp"
 
 #: kmymoney/kmymoney.cpp:2038
 #, kde-format
@@ -5964,12 +5964,12 @@ msgstr "&Ny Tidsplan..."
 #: kmymoney/kmymoneyutils.cpp:99
 #, kde-format
 msgid "Create a new schedule."
-msgstr "Opprett en ny tidsplan."
+msgstr "Lag en ny tidsplan."
 
 #: kmymoney/kmymoneyutils.cpp:100
 #, kde-format
 msgid "Use this to create a new schedule."
-msgstr "Bruk denne for å opprette en ny tidsplan."
+msgstr "Bruk denne for å lage en ny tidsplan."
 
 #: kmymoney/kmymoneyutils.cpp:107
 #, kde-format
@@ -6118,7 +6118,7 @@ msgstr "<qt>Vil du legge til <b>%1</b> som mottaker?</qt>"
 #: kmymoney/kmymoneyutils.cpp:604
 #, kde-format
 msgid "Unable to add payee"
-msgstr "Kan ikke opprette mottaker"
+msgstr "Kan ikke legge til mottaker"
 
 #: kmymoney/kmymoneyutils.cpp:615 kmymoney/views/ktagsview.cpp:633
 #, kde-format
@@ -6843,7 +6843,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneyfile.cpp:2857
 #, kde-format
 msgid "  * Imported flag removed from schedule '%1'"
-msgstr "  * Importert markør er fjerner fra tidsplanen «%1»"
+msgstr "  * Importert markør er fjernet fra tidsplanen «%1»"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2877
 #, kde-format
@@ -10409,7 +10409,7 @@ msgid ""
 "Then open the file you wish to import."
 msgstr ""
 "Velg enten banktjeneste, investering eller kurser.\n"
-"Velg deretter en eksisterende profil eller opprett en ny\n"
+"Velg deretter en eksisterende profil eller legg til en ny\n"
 "ved å skrive inn navnet og velge «Legg til».\n"
 "Når det er gjort velger du filen du vil importere."
 
@@ -10761,8 +10761,8 @@ msgctxt "@info:tooltip No QIF profile defined"
 msgid ""
 "Please use the QIF profile editor in the QIF plugin settings to create one."
 msgstr ""
-"Bruk QIF profilredigering i oppsettet til QIF programtillegget for å "
-"opprette en."
+"Bruk QIF profilredigering i oppsettet til QIF programtillegget for å legge "
+"til en."
 
 #. i18n: ectx: label, entry (AutoFieldDelimiter), group (Misc)
 #: kmymoney/plugins/csv/import/pluginsettings.kcfg:10
@@ -11634,8 +11634,8 @@ msgstr[1] "%1 uoverensstemmelser ble funnet og korrigert\n"
 #, kde-format
 msgid "%1 orphan account was created\n"
 msgid_plural "%1 orphan accounts were created\n"
-msgstr[0] "%1 foreldreløs konto ble opprettet\n"
-msgstr[1] "%1 foreldreløse konti ble opprettet\n"
+msgstr[0] "%1 foreldreløs konto ble lagt til\n"
+msgstr[1] "%1 foreldreløse konti ble lagt til\n"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2406
 #, kde-format
@@ -11686,7 +11686,7 @@ msgstr "Lagre rapport som"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2469
 #, kde-format
 msgid "Orphan created from unknown GnuCash account"
-msgstr "Foreldreløs konto ble opprettet fra en ukjent GnuCash-konto"
+msgstr "Foreldreløs konto ble lagt til fra en ukjent GnuCash-konto"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2484
 #, kde-format
@@ -11697,7 +11697,7 @@ msgid ""
 msgstr ""
 "En eller flere transaksjoner inneholder en referanse til en ellers ukjent "
 "konto\n"
-"En formueskonto med navnet %1 ble opprettet for å ta vare på dataene"
+"En eiendelskonto med navnet %1 ble lagt til for å ta vare på dataene"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2518
 #, kde-format
@@ -11773,7 +11773,7 @@ msgstr "Eksporter som"
 #: kmymoney/plugins/icalendar/export/icalendarsettings.kcfg:9
 #, kde-format
 msgid "To create an alarm for the exported schedules"
-msgstr "For å opprette en alarm for de eksporterte tidsplanene"
+msgstr "For å lage en alarm for de eksporterte tidsplanene"
 
 #. i18n: ectx: label, entry (beforeAfter), group (General)
 #: kmymoney/plugins/icalendar/export/icalendarsettings.kcfg:13
@@ -11819,7 +11819,7 @@ msgstr "Enheter for intervall mellom hver påminnelse i sekunder "
 #: kmymoney/plugins/icalendar/export/icalendarsettings.kcfg:37
 #, kde-format
 msgid "The number of reminders to be generated for the schedule "
-msgstr "Antall påminnelser som skal opprettes for tidsplanen "
+msgstr "Antall påminnelser som skal lages for tidsplanen "
 
 #. i18n: ectx: label, entry (icalendarFile), group (General)
 #: kmymoney/plugins/icalendar/export/icalendarsettings.kcfg:41
@@ -12135,7 +12135,7 @@ msgstr "I&ngen dato (la banken bestemme startdato)"
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.ui:52
 #, kde-format
 msgid "&Last Update"
-msgstr "&Forrige oppdatering"
+msgstr "&Sist oppdatering"
 
 #. i18n: ectx: property (text), widget (QRadioButton, firstDateButton)
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.ui:75
@@ -13326,12 +13326,12 @@ msgstr "&Ny"
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:68
 #, kde-format
 msgid "Create a new profile"
-msgstr "Opprett en ny profil"
+msgstr "Lag en ny profil"
 
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:88
 #, kde-format
 msgid "Use this to create a new QIF import/export profile"
-msgstr "Bruk denne for å opprette en ny QIF import-/eksportprofil"
+msgstr "Bruk denne for å lage en ny QIF import-/eksportprofil"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, MyMoneyQifProfileEditor)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.cpp:137
@@ -14292,7 +14292,7 @@ msgstr[1] "Totalt %1 utestående innskudd som beløper seg på"
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:71
 #, kde-format
 msgid "Create Tables"
-msgstr "Opprett tabeller"
+msgstr "Lag tabeller"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:72
 #, kde-format
@@ -14322,8 +14322,8 @@ msgid ""
 "You must use an SQL CREATE DATABASE statement before creating the tables.\n"
 msgstr ""
 "Kan ikke åpne database.\n"
-"Du må bruke et uttrykk basert på «SQL CREATE DATABASE» før du opprette "
-"tabeller.\n"
+"Du må bruke et uttrykk basert på «SQL CREATE DATABASE» før du lager tabeller."
+"\n"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:205
 #, kde-format
@@ -14525,12 +14525,12 @@ msgid ""
 "Please create database %2 manually"
 msgstr ""
 "Automatisk opprettelse av database for typen %1 er ikke implementert ennå.\n"
-"Opprett database %2 manuelt"
+"Lag database %2 manuelt"
 
 #: kmymoney/plugins/sql/mymoneystoragesql_p.h:2100
 #, kde-format
 msgid "Error in create database %1; do you have create permissions?"
-msgstr "Feil ved opprettelse av database %1. Har du tillatelse til å opprette?"
+msgstr "Feil ved opprettelse av database %1. Har du tillatelse til å lage den?"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:136
 #, kde-format
@@ -14586,7 +14586,7 @@ msgstr "Åpne database…"
 #: kmymoney/plugins/sql/sqlstorage.cpp:270
 #, kde-format
 msgid "Generate Database SQL"
-msgstr "Opprett SQL for database"
+msgstr "Generer SQL for database"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:331
 #, kde-format
@@ -15445,15 +15445,14 @@ msgid ""
 "anymore. You may create a copy for editing."
 msgstr ""
 "Denne kredittoverføringen ble sendt til banken den %1 og kan derfor ikke "
-"endres lenger. Du kan opprette en kopi for endring."
+"endres lenger. Du kan lage en kopi for endring."
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:286
 #, kde-format
 msgid ""
 "This credit-transfer is not editable. You may create a copy for editing."
 msgstr ""
-"Denne kredittoverføringen kan ikke endres. Du kan opprette en kopi for "
-"endring."
+"Denne kredittoverføringen kan ikke endres. Du kan lage en kopi for endring."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.ui:20
@@ -16009,7 +16008,7 @@ msgstr "Alle valutaer vist i %1 med mindre annet er oppgitt"
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:117
 #, kde-format
 msgid "Unable to generate report"
-msgstr "Kan ikke opprette rapport"
+msgstr "Kan ikke lage rapport"
 
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:118
 #, kde-format
@@ -16807,7 +16806,7 @@ msgstr "Oppsett"
 #: kmymoney/plugins/views/reports/reportcontrol.ui:70
 #, kde-format
 msgid "Create a new report based on this one"
-msgstr "Opprett en ny rapport basert på denne"
+msgstr "Lag en ny rapport basert på denne"
 
 #. i18n: ectx: property (text), widget (QToolButton, buttonNew)
 #: kmymoney/plugins/views/reports/reportcontrol.ui:73
@@ -19087,7 +19086,7 @@ msgstr "Endre konto «%1»"
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
-msgstr ""
+msgstr "Endre konto"
 
 #: kmymoney/views/kaccountsview_p.h:277
 #, kde-format
@@ -19146,7 +19145,7 @@ msgstr "Endre kategori «%1»"
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
-msgstr ""
+msgstr "Endre kategori"
 
 #: kmymoney/views/kcategoriesview.cpp:213
 #, kde-format
@@ -19442,7 +19441,7 @@ msgid ""
 "the welcome page instead."
 msgstr ""
 "Før KMyMoney kan gi deg detaljert informasjon om din finansielle status må "
-"du opprette minst en konto. Før det viser KMyMoney bare en velkomstside i "
+"du legge til minst en konto. Før det viser KMyMoney bare en velkomstside i "
 "stedet."
 
 #: kmymoney/views/khomeview_p.h:464
@@ -19940,19 +19939,19 @@ msgstr "Adresse:"
 #: kmymoney/views/kpayeesview.ui:324
 #, kde-format
 msgid "Creates new e-mail to your payee."
-msgstr "Oppretter ny epostadresse for mottakeren din."
+msgstr "Legger tl ny epostadresse for mottakeren din."
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_sendMail)
 #: kmymoney/views/kpayeesview.ui:327
 #, kde-format
 msgid "Use this to create new e-mail to your payee."
-msgstr "Bruk denne for opprette ny epostadresse til mottakeren din."
+msgstr "Bruk denne for legge til en ny epostadresse til mottakeren din."
 
 #. i18n: ectx: attribute (title), widget (QWidget, matchingTab)
 #: kmymoney/views/kpayeesview.ui:386
 #, kde-format
 msgid "Matching"
-msgstr "Samsvar"
+msgstr "Samsvarer"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/views/kpayeesview.ui:394
@@ -20847,7 +20846,7 @@ msgstr "Transaksjonsbeløp"
 #: kmymoney/views/splitdialog.ui:630
 #, kde-format
 msgid "Create a new split"
-msgstr "Opprett en ny oppdeling"
+msgstr "Lag en ny oppdeling"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, mergeButton)
 #: kmymoney/views/splitdialog.ui:653
@@ -21747,7 +21746,7 @@ msgid ""
 "will create transactions and mark them as cleared."
 msgstr ""
 "Om nødvendig skriv inn informasjon om renter eller avgifter her. KMyMoney "
-"vil opprette transaksjoner og markere den som klarert."
+"vil sette opp transaksjoner og markere dem som klarert."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox2)
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:134
@@ -22045,7 +22044,7 @@ msgid ""
 "entries."
 msgstr ""
 "Denne siden oppsummerer dataene du har lagt inn. Trykk <b>fullfør</b> for å "
-"opprette kontoen, tidsplanen etc. eller bruk <b>tilbake</b> for å endre "
+"legge til kontoen, tidsplanen etc. eller bruk <b>tilbake</b> for å endre "
 "oppføringene."
 
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:61
@@ -22205,7 +22204,7 @@ msgstr ""
 "<p><b>Gjeld</b>\n"
 "Bruk kontotypen gjeld for å behandle en hvilken som helst gjeld unntatt "
 "nedbetalingslån. Bruk den for skyldig MVA/skatt eller penger du har lånt fra "
-"en venn. For nedbetalingslån som huslån, bør du opprette en lånekonto</p>"
+"en venn. For nedbetalingslån som huslån, bør du benytte en lånekonto</p>"
 
 #. i18n: ectx: property (whatsThis), widget (KMyMoneyCurrencySelector, m_currencyComboBox)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:120
@@ -22347,7 +22346,7 @@ msgstr ""
 #: kmymoney/wizards/newaccountwizard/kbrokeragepage.ui:37
 #, kde-format
 msgid "Create brokerage account"
-msgstr "Opprett kurtasjekonto"
+msgstr "Legg til kurtasjekonto"
 
 #. i18n: ectx: property (text), widget (QLabel, m_accountNumberLabel)
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
@@ -22401,12 +22400,12 @@ msgstr "Månedsbetaling for kredittkortet: %1"
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:108
 #, kde-format
 msgid "Finish entry and create account"
-msgstr "Fullfør oppføringen og opprett konto"
+msgstr "Fullfør oppføringen og legg til konto"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:110
 #, kde-format
 msgid "Finish entry and create account and schedule"
-msgstr "Fullfør oppføringen og opprett konto og tidsplan"
+msgstr "Fullfør oppføringen og legg til konto og tidsplan"
 
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:113
 #, kde-format
@@ -22446,7 +22445,7 @@ msgid ""
 "automatically remind you about the payment. Please fill in the details about "
 "this payment here."
 msgstr ""
-"For kredittkortkonti kan du opprette en månedlig tidsplan som automatisk vil "
+"For kredittkortkonti kan du lage en månedlig tidsplan som automatisk vil "
 "minne deg på betalingene. Fyll inn detaljene om denne betalingen her."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_reminderCheckBox)
@@ -22549,7 +22548,7 @@ msgstr ""
 "skylder deg penger.\n"
 "\n"
 "Hvis navnet ikke finnes i KMyMoney sin database blir du spurt om du vil "
-"opprette det."
+"legge det til."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1_2)
 #: kmymoney/wizards/newaccountwizard/kgeneralloaninfopage.ui:77
@@ -22570,7 +22569,7 @@ msgstr ""
 "Er det gjort noen betalinger på dette lånet uavhengig om det er ført inn i "
 "KMyMoney eller ikke?\n"
 "\n"
-"Merk: Betalinger gjort for å opprette lånet (f.eks. kurstap) blir ikke "
+"Merk: Betalinger gjort for å tegne lånet (f.eks. kurstap) blir ikke "
 "betraktet som betaling i denne sammenhengen."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_anyPayments)
@@ -22792,8 +22791,8 @@ msgid ""
 msgstr ""
 "Velg en institusjon fra listen hvis denne kontoen blir behandlet av en "
 "institusjon. Hvis institusjonen ikke finnes ennå trykk på <b>Ny institusjon</"
-"b> for å opprette den. Skal du ikke knytte kontoen til en institusjon lar du "
-"feltet stå tomt.\n"
+"b> for å legge den til. Skal du ikke knytte kontoen til en institusjon lar "
+"du feltet stå tomt.\n"
 "Skriv inn kontonummerer som institusjonen bruker for å identifisere kontoen."
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_institutionComboBox)
@@ -23182,14 +23181,14 @@ msgstr "=periodiske betalinger"
 #: kmymoney/wizards/newloanwizard/assetaccountwizardpage.cpp:49
 #, kde-format
 msgid "Create a new asset account"
-msgstr "Opprett en ny eiendelskonto"
+msgstr "Legg til en ny eiendelskonto"
 
 #: kmymoney/wizards/newaccountwizard/kloanpayoutpage.cpp:66
 #, kde-format
 msgid ""
 "If the asset account does not yet exist, press this button to create it."
 msgstr ""
-"Trykk på denne knappen for å opprette eiendelskontoen hvis den ikke finnes."
+"Trykk på denne knappen for å legge til eiendelskontoen hvis den ikke finnes."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel10_4_2)
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
@@ -23207,7 +23206,7 @@ msgstr ""
 "Hvis dette lånet er for en eiendel som en bil eller et hus, kan du opprette "
 "en eiendelskonto nå. En eiendelskonto representerer totalverdien av en "
 "eiendel. Pengene fra dette lånet vil bil overført til eiendelskontoen du "
-"oppretter eller velger.\n"
+"legger til eller velger.\n"
 "Hvis dette lånet er et «forbrukslån» (penger du kan bruke til hva du vil) "
 "kan bruke en brukskonto i stedet."
 
@@ -23217,7 +23216,7 @@ msgstr ""
 #: kmymoney/wizards/newloanwizard/assetaccountwizardpage.ui:42
 #, kde-format
 msgid "Do not create payout transaction"
-msgstr "Ikke opprett utbetalingstransaksjon"
+msgstr "Ikke lag utbetalingstransaksjon"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_refinanceLoan)
 #: kmymoney/wizards/newaccountwizard/kloanpayoutpage.ui:59
@@ -23370,7 +23369,7 @@ msgstr "Nedbetaling"
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:421
 #, kde-format
 msgid "Unable to create account: %1"
-msgstr "Kan ikke opprette konto: %1"
+msgstr "Kan ikke legge til konto: %1"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:64
 #, kde-format
@@ -23532,7 +23531,7 @@ msgstr "Investeringstype"
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:12
 #, kde-format
 msgid "This wizard allows you to create a new investment."
-msgstr "Denne veiviseren hjelper deg å opprette en ny investering."
+msgstr "Denne veiviseren hjelper deg å legge til en ny investering."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmenttypewizardpage.ui:41
@@ -23595,12 +23594,12 @@ msgid ""
 "b>. Do you want to create it?</qt>"
 msgstr ""
 "<qt>Verdipapiret <b>%1</b> finnes ikke for øyeblikket ikke som en underkonto "
-"til <b>%2</b>. Vil du opprette den?</qt>"
+"til <b>%2</b>. Vil du legge den til?</qt>"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:294
 #, kde-format
 msgid "Create security"
-msgstr "Opprett verdipapir"
+msgstr "Legg til verdipapir"
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, KNewInvestmentWizard)
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.ui:17
@@ -23716,13 +23715,13 @@ msgstr ""
 msgid ""
 "Use this to create a new account to which the initial payment should be made"
 msgstr ""
-"Bruk denne for opprette e ny konto som den første betalingen skal gjøres til"
+"Bruk denne for legge til e ny konto som den første betalingen skal gjøres til"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_createNewAssetButton)
 #: kmymoney/wizards/newloanwizard/assetaccountwizardpage.ui:78
 #, kde-format
 msgid "Press this to create a new asset account"
-msgstr "Trykk på denne for å opprette en ny eiendelskonto"
+msgstr "Trykk på denne for å legge til en ny eiendelskonto"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, CalculationOverviewWizardPage)
 #: kmymoney/wizards/newloanwizard/calculationoverviewwizardpage.ui:6
@@ -24007,7 +24006,7 @@ msgstr "når betalingen har forfall."
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:49
 #, kde-format
 msgid "Create a new category"
-msgstr "Opprett ny kategori"
+msgstr "Legg til en ny kategori"
 
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:50
 #, kde-format
@@ -24023,7 +24022,7 @@ msgid ""
 "create a new category."
 msgstr ""
 "\n"
-"Velg kategorien du fil tilordne rentene til eller opprett en ny kategori."
+"Velg kategorien du fil tilordne rentene til eller lag en ny kategori."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel5_4)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel14_2)
@@ -24340,7 +24339,7 @@ msgid ""
 msgstr ""
 "\n"
 "I det første skrittet kommer KMyMoney til å be deg om å skrive inn litt "
-"generell informasjon om lånet som opprettes."
+"generell informasjon om lånet som legges til."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #: kmymoney/wizards/newloanwizard/newgeneralinfowizardpage.ui:99
@@ -24484,7 +24483,7 @@ msgid ""
 "Note: Payments made to obtain the loan (e.g. Dissagio) are not considered as "
 "payments in this context."
 msgstr ""
-"Merk: Betalinger gjort for å opprette lånet (f.eks. kurstap) blir ikke "
+"Merk: Betalinger gjort for å tegne lånet (f.eks. kurstap) blir ikke "
 "betraktet som betaling i denne sammenhengen."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, RecordPaymentWizardPage)
@@ -24525,8 +24524,8 @@ msgid ""
 "If you selected to record only this years payments, then the <b>First "
 "payment due date</b> is the date of the first payment made in this year."
 msgstr ""
-"KMyMoney vil opprette en tidsplan for denne betalingen og minner deg på når "
-"en betaling må gjennomføres.<p>\n"
+"KMyMoney vil lage en tidsplan for denne betalingen og minner deg på når en "
+"betaling må gjennomføres.<p>\n"
 "Hvis du valgte å føre alle betalingene er denne datoen allerede lagt inn. "
 "Hvis du valgte å føre kun årets betalinger er <b>Første forfallsdato</b> "
 "datoen den første betalingen som ble gjort i år."
@@ -24620,7 +24619,7 @@ msgstr ""
 "\n"
 "Denne siden oppsummerer dataene du har skrevet inn. Hvis du trenger på endre "
 "noe trykk på «Tilbake»-knappen for å gå til den rette siden. Ellers bruker "
-"du «Fullfør»-knappen for å opprette kontoen."
+"du «Fullfør»-knappen for å legge kontoen til."
 
 #. i18n: ectx: property (title), widget (QGroupBox, GroupBox3)
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:64
@@ -24842,7 +24841,7 @@ msgid ""
 "within KMyMoney."
 msgstr ""
 "Feltene under lar det skrive inn informasjon om brukskontoen din. Så snart "
-"veiviseren er ferdig vil kontoen opprettes for deg i KMyMoney."
+"veiviseren er ferdig vil kontoen legges til for deg i KMyMoney."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel3)
 #: kmymoney/wizards/newuserwizard/kcurrencypage.ui:23
@@ -24988,7 +24987,7 @@ msgid ""
 msgstr ""
 "Velger grupper av konti som samsvarer med hvordan du vil bruke KMyMoney. "
 "Hver gruppe du velger kan forårsake at flere konti og kategorier blir "
-"opprettet. Velg de gruppene som er relevant for deg. Du kan alltid opprette "
+"opprettet. Velg de gruppene som er relevant for deg. Du kan alltid legge til "
 "flere konti manuelt senere."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
