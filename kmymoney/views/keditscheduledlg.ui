@@ -232,7 +232,7 @@
       <item>
        <widget class="QCheckBox" name="keepMultiCurrencyAmount">
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select this if you don't want to modify the amount of the category side of a multi-currency transaction. The exchange rate of the transaction will be adjusted instead when the schedule is entered with a modifed amount.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select this if you don't want to modify the amount of the category side of a multi-currency transaction. The exchange rate of the transaction will be adjusted instead when the schedule is entered with a modified amount.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>Do not change amount of category but modify exchange rate of transaction</string>
