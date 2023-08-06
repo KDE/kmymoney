@@ -9,6 +9,7 @@ Name[es]=Una base de datos de nombres de organismos y de reglas IBAN y BIC
 Name[eu]=Instituzio baten izenak edo iban edo bic erregelentzako datu-basea
 Name[fi]=Instituutionimien ja IBAC- ja BIC-sääntöjen tietokanta
 Name[fr]=Une base de données pour les noms d'institutions et les règles de correspondance « IBAN » vers « BIC ».
+Name[gl]=Unha base de datos con nomes de institucións e regras de conversión de IBAN a BIC
 Name[it]=Un database per i nomi degli istituti e le regole da iban a bic
 Name[ka]=ინსტიტუტების სახელების და IBAN->BIC წესების მონაცემთა ბაზა
 Name[ko]=금융기관 이름과 IBAN BIC 변환 규칙
