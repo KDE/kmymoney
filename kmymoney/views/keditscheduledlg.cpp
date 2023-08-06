@@ -141,7 +141,7 @@ public:
                     const auto account = file->account(m_accountCombo->getSelected());
                     const auto category = file->account(m_categoryCombo->getSelected());
                     ui->keepMultiCurrencyAmount->setEnabled(account.currencyId() != category.currencyId());
-                } catch (MyMoneyException& e) {
+                } catch (MyMoneyException&) {
                     ;
                 }
             }
