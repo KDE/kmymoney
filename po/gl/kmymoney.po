@@ -7,13 +7,13 @@
 # Xosé <xosecalvo@gmail.com>, 2013.
 # Marce Villarino <mvillarino@kde-espana.es>, 2013, 2014.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015, 2016, 2017.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2020.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2020, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-03 03:06+0000\n"
-"PO-Revision-Date: 2020-03-07 08:15+0100\n"
+"PO-Revision-Date: 2023-08-05 11:51+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.08.3\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -541,13 +541,13 @@ msgid ""
 "of the standard address book."
 msgstr ""
 "Non se poden cargar os datos, porque non hai ningún contacto asociado ao "
-"dono do caderno de enderezos estándar."
+"dono da axenda de enderezos estándar."
 
 #: kmymoney/dialogs/editpersonaldatadlg.cpp:174
 #: kmymoney/wizards/newuserwizard/kgeneralpage.cpp:78
 #, kde-format
 msgid "Address book import"
-msgstr "Importar do caderno de enderezos"
+msgstr "Importar da axenda de enderezos"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, EditPersonalDataDlg)
 #: kmymoney/dialogs/editpersonaldatadlg.ui:14
@@ -634,7 +634,7 @@ msgstr "Código postal:"
 #: kmymoney/wizards/wizardpages/userinfo.ui:142
 #, kde-format
 msgid "Load from Addressbook"
-msgstr "Cargar desde o caderno de enderezos"
+msgstr "Cargar desde a axenda de enderezos"
 
 #: kmymoney/dialogs/investactivities.cpp:267
 #: kmymoney/plugins/xml/mymoneystorageanon.cpp:156
@@ -5607,7 +5607,7 @@ msgstr "Cifrado con GPG"
 #: kmymoney/kcreditswindow.cpp:33
 #, kde-format
 msgid "Addressbook integration"
-msgstr "Integración co caderno de enderezos"
+msgstr "Integración coa axenda de enderezos"
 
 #: kmymoney/kcreditswindow.cpp:36
 #, kde-format
@@ -20205,7 +20205,7 @@ msgstr "Números de conta"
 #: kmymoney/views/kpayeesview.ui:547
 #, kde-format
 msgid "Fetches the payee's data from your addressbook."
-msgstr "Obtén os datos do beneficiario do seu caderno de enderezos."
+msgstr "Obtén os datos do beneficiario da axenda de enderezos."
 
 #. i18n: ectx: property (whatsThis), widget (QPushButton, m_syncAddressbook)
 #: kmymoney/views/kpayeesview.ui:550
