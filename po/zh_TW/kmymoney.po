@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-06 00:47+0000\n"
+"POT-Creation-Date: 2023-08-07 00:49+0000\n"
 "PO-Revision-Date: 2019-01-19 19:46+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -2232,7 +2232,7 @@ msgstr "總共價格"
 msgid "VAT account"
 msgstr "增值稅帳戶"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:527 kmymoney/kmymoney.cpp:430
+#: kmymoney/dialogs/knewaccountdlg.cpp:529 kmymoney/kmymoney.cpp:430
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:363
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
@@ -2240,7 +2240,7 @@ msgstr "增值稅帳戶"
 msgid "Asset"
 msgstr "資產"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:529 kmymoney/kmymoney.cpp:431
+#: kmymoney/dialogs/knewaccountdlg.cpp:531 kmymoney/kmymoney.cpp:431
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:371
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
@@ -2248,7 +2248,7 @@ msgstr "資產"
 msgid "Liability"
 msgstr "負債"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:531 kmymoney/kmymoney.cpp:432
+#: kmymoney/dialogs/knewaccountdlg.cpp:533 kmymoney/kmymoney.cpp:432
 #: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1783
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
@@ -2257,7 +2257,7 @@ msgstr "負債"
 msgid "Income"
 msgstr "收入"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:533 kmymoney/kmymoney.cpp:433
+#: kmymoney/dialogs/knewaccountdlg.cpp:535 kmymoney/kmymoney.cpp:433
 #: kmymoney/models/ledgerfilterbase.cpp:97
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
@@ -2266,28 +2266,28 @@ msgstr "收入"
 msgid "Expense"
 msgstr "支出"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:580
+#: kmymoney/dialogs/knewaccountdlg.cpp:582
 #, kde-format
 msgid ""
 "Option has been disabled because there are transactions assigned to this "
 "account"
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:585
+#: kmymoney/dialogs/knewaccountdlg.cpp:587
 #, kde-format
 msgid ""
 "Option has been disabled because there is another account flagged to be an "
 "opening balance account for this currency"
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:605
+#: kmymoney/dialogs/knewaccountdlg.cpp:607
 #, fuzzy, kde-format
 #| msgid "Is a sub account of %1"
 msgctxt "@label:chooser %1 account name, %2 parent account name"
 msgid "<b>%1</b> is a sub account of <b>%2</b>"
 msgstr "是 %1 的子帳戶"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:723
+#: kmymoney/dialogs/knewaccountdlg.cpp:725
 #, kde-format
 msgid ""
 "You have not specified a name.\n"
@@ -2296,14 +2296,14 @@ msgstr ""
 "您並未指定名稱。\n"
 "請填入此欄位。"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:730
+#: kmymoney/dialogs/knewaccountdlg.cpp:732
 #, kde-format
 msgid "Please select a parent account."
 msgstr "請選擇父帳戶。"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:736
-#: kmymoney/dialogs/knewaccountdlg.cpp:892
-#: kmymoney/dialogs/knewaccountdlg.cpp:907
+#: kmymoney/dialogs/knewaccountdlg.cpp:738
+#: kmymoney/dialogs/knewaccountdlg.cpp:894
+#: kmymoney/dialogs/knewaccountdlg.cpp:909
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:519
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
@@ -2311,14 +2311,14 @@ msgstr "請選擇父帳戶。"
 msgid "(No Institution)"
 msgstr "（沒有機構）"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:791
+#: kmymoney/dialogs/knewaccountdlg.cpp:793
 #, kde-format
 msgid ""
 "A category named <b>%1</b> already exists. You cannot create a second "
 "category with the same name."
 msgstr "名為 <b>%1</b> 的類別已存在。您無法建立相同名稱的類別。"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:818
+#: kmymoney/dialogs/knewaccountdlg.cpp:820
 #, kde-format
 msgid ""
 "You have selected to suppress the display of unused categories in the "
@@ -2329,43 +2329,43 @@ msgstr ""
 "您已選擇不要在 KMyMoney 設定對話框裡顯示未使用的類別。因此您剛才建立的類別不"
 "會馬上顯示出來。它會被藏在帳戶/類別檢視裡。"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:818
+#: kmymoney/dialogs/knewaccountdlg.cpp:820
 #, kde-format
 msgid "Hidden categories"
 msgstr "隱藏類別"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:932
+#: kmymoney/dialogs/knewaccountdlg.cpp:934
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
 msgstr "無法新增機構"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:969
+#: kmymoney/dialogs/knewaccountdlg.cpp:971
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:974
+#: kmymoney/dialogs/knewaccountdlg.cpp:976
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:981
+#: kmymoney/dialogs/knewaccountdlg.cpp:983
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
 msgstr ""
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:985
+#: kmymoney/dialogs/knewaccountdlg.cpp:987
 #, fuzzy, kde-format
 #| msgid "Please select a default category for payee"
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
 msgstr "請選擇收款人的預設類別"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1050
+#: kmymoney/dialogs/knewaccountdlg.cpp:1052
 #, kde-format
 msgid ""
 "<p>The category <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2375,13 +2375,13 @@ msgstr ""
 "<p>類別 <b>%1</b> 目前不存在。您要建立它嗎？</p> <p><i>父帳戶會將預設改為 <b>"
 "%2</b>，但您可以在下方的對話框中變更。</i></p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1054
-#: kmymoney/dialogs/knewaccountdlg.cpp:1079
+#: kmymoney/dialogs/knewaccountdlg.cpp:1056
+#: kmymoney/dialogs/knewaccountdlg.cpp:1081
 #, kde-format
 msgid "Create category"
 msgstr "建立類別"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1075
+#: kmymoney/dialogs/knewaccountdlg.cpp:1077
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>The category <b>%1</b> currently does not exist. Do you want to create "
@@ -2395,14 +2395,14 @@ msgstr ""
 "<p>類別 <b>%1</b> 目前不存在。您要建立它嗎？</p> <p><i>父帳戶會將預設改為 <b>"
 "%2</b>，但您可以在下方的對話框中變更。</i></p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1097
+#: kmymoney/dialogs/knewaccountdlg.cpp:1099
 #, fuzzy, kde-format
 #| msgid "Create a new Category"
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "建立新類別"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1102
+#: kmymoney/dialogs/knewaccountdlg.cpp:1104
 #, fuzzy, kde-format
 #| msgid "Create a new asset account"
 msgctxt "@title:window"
@@ -6373,14 +6373,14 @@ msgstr "無法更新 %1 的價格（空白的報價資料）"
 msgid "Unable to update price for %1 (error encountered: '%2')"
 msgstr "無法更新 %1 的價格（沒有價格或沒有日期）"
 
-#: kmymoney/models/accountsproxymodel.cpp:529
+#: kmymoney/models/accountsproxymodel.cpp:534
 #, fuzzy, kde-format
 #| msgid "Any status"
 msgctxt "Account filter"
 msgid "Any status"
 msgstr "任何狀態"
 
-#: kmymoney/models/accountsproxymodel.cpp:530
+#: kmymoney/models/accountsproxymodel.cpp:535
 #, fuzzy, kde-format
 #| msgctxt "Unused column"
 #| msgid "Unused"
@@ -6388,7 +6388,7 @@ msgctxt "Account filter"
 msgid "Unused"
 msgstr "未使用"
 
-#: kmymoney/models/accountsproxymodel.cpp:531
+#: kmymoney/models/accountsproxymodel.cpp:536
 #, fuzzy, kde-format
 #| msgid "Closed"
 msgctxt "Account filter"
@@ -19409,19 +19409,19 @@ msgstr "總收益："
 msgid "Edit account '%1'"
 msgstr "編輯帳戶 %1"
 
-#: kmymoney/views/kaccountsview_p.h:243
+#: kmymoney/views/kaccountsview_p.h:245
 #, fuzzy, kde-format
 #| msgid "Edit account..."
 msgctxt "Undo action description"
 msgid "Edit account"
 msgstr "編輯帳戶..."
 
-#: kmymoney/views/kaccountsview_p.h:277
+#: kmymoney/views/kaccountsview_p.h:279
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
 msgstr "無法變更帳戶 %1。原因：%2"
 
-#: kmymoney/views/kaccountsview_p.h:353
+#: kmymoney/views/kaccountsview_p.h:355
 #, fuzzy, kde-format
 #| msgid ""
 #| "The balance of account <b>%1</b> dropped below the warning balance of %2."
@@ -19429,17 +19429,17 @@ msgid ""
 "The balance of the account must be zero before the account can be closed"
 msgstr "帳戶 <b>%1</b> 的餘額已經低於警示金額 %2。"
 
-#: kmymoney/views/kaccountsview_p.h:356
+#: kmymoney/views/kaccountsview_p.h:358
 #, kde-format
 msgid "All subaccounts must be closed before the account can be closed"
 msgstr ""
 
-#: kmymoney/views/kaccountsview_p.h:359
+#: kmymoney/views/kaccountsview_p.h:361
 #, kde-format
 msgid "This account is still included in an active schedule"
 msgstr ""
 
-#: kmymoney/views/kaccountsview_p.h:362
+#: kmymoney/views/kaccountsview_p.h:364
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>The given application account <b>%1</b> has not been mapped to an "
@@ -21202,19 +21202,19 @@ msgid ""
 "this text is shown instead."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:670
+#: kmymoney/views/simpleledgerview.cpp:675
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:838
+#: kmymoney/views/simpleledgerview.cpp:843
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
 "cancel or postpone the reconciliation first."
 msgstr ""
 
-#: kmymoney/views/simpleledgerview.cpp:839
+#: kmymoney/views/simpleledgerview.cpp:844
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

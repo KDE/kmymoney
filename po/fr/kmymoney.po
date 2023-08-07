@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-06 00:47+0000\n"
+"POT-Creation-Date: 2023-08-07 00:49+0000\n"
 "PO-Revision-Date: 2023-05-31 13:50+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
@@ -2290,7 +2290,7 @@ msgstr "Total pour toutes les parts"
 msgid "VAT account"
 msgstr "Compte de TVA"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:527 kmymoney/kmymoney.cpp:430
+#: kmymoney/dialogs/knewaccountdlg.cpp:529 kmymoney/kmymoney.cpp:430
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:363
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
@@ -2298,7 +2298,7 @@ msgstr "Compte de TVA"
 msgid "Asset"
 msgstr "Actif"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:529 kmymoney/kmymoney.cpp:431
+#: kmymoney/dialogs/knewaccountdlg.cpp:531 kmymoney/kmymoney.cpp:431
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:371
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
@@ -2306,7 +2306,7 @@ msgstr "Actif"
 msgid "Liability"
 msgstr "Passif"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:531 kmymoney/kmymoney.cpp:432
+#: kmymoney/dialogs/knewaccountdlg.cpp:533 kmymoney/kmymoney.cpp:432
 #: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1783
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
@@ -2315,7 +2315,7 @@ msgstr "Passif"
 msgid "Income"
 msgstr "Revenu"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:533 kmymoney/kmymoney.cpp:433
+#: kmymoney/dialogs/knewaccountdlg.cpp:535 kmymoney/kmymoney.cpp:433
 #: kmymoney/models/ledgerfilterbase.cpp:97
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
@@ -2324,7 +2324,7 @@ msgstr "Revenu"
 msgid "Expense"
 msgstr "Dépense"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:580
+#: kmymoney/dialogs/knewaccountdlg.cpp:582
 #, kde-format
 msgid ""
 "Option has been disabled because there are transactions assigned to this "
@@ -2333,7 +2333,7 @@ msgstr ""
 "Cette option a été désactivée parce que des opérations sont assignées à ce "
 "compte"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:585
+#: kmymoney/dialogs/knewaccountdlg.cpp:587
 #, kde-format
 msgid ""
 "Option has been disabled because there is another account flagged to be an "
@@ -2342,13 +2342,13 @@ msgstr ""
 "Cette option a été désactivée parce qu'un autre compte est désigné comme "
 "compte de solde d'ouverture pour cette devise"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:605
+#: kmymoney/dialogs/knewaccountdlg.cpp:607
 #, kde-format
 msgctxt "@label:chooser %1 account name, %2 parent account name"
 msgid "<b>%1</b> is a sub account of <b>%2</b>"
 msgstr "<b>%1</b> est un sous-compte de <b>%2</b>."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:723
+#: kmymoney/dialogs/knewaccountdlg.cpp:725
 #, kde-format
 msgid ""
 "You have not specified a name.\n"
@@ -2357,14 +2357,14 @@ msgstr ""
 "Vous n'avez pas spécifié de nom.\n"
 "Veuillez remplir ce champ."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:730
+#: kmymoney/dialogs/knewaccountdlg.cpp:732
 #, kde-format
 msgid "Please select a parent account."
 msgstr "Veuillez sélectionner un compte père."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:736
-#: kmymoney/dialogs/knewaccountdlg.cpp:892
-#: kmymoney/dialogs/knewaccountdlg.cpp:907
+#: kmymoney/dialogs/knewaccountdlg.cpp:738
+#: kmymoney/dialogs/knewaccountdlg.cpp:894
+#: kmymoney/dialogs/knewaccountdlg.cpp:909
 #: kmymoney/wizards/newloanwizard/keditloanwizard.cpp:519
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:45
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:80
@@ -2372,7 +2372,7 @@ msgstr "Veuillez sélectionner un compte père."
 msgid "(No Institution)"
 msgstr "(Pas d'établissement)"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:791
+#: kmymoney/dialogs/knewaccountdlg.cpp:793
 #, kde-format
 msgid ""
 "A category named <b>%1</b> already exists. You cannot create a second "
@@ -2381,7 +2381,7 @@ msgstr ""
 "Une catégorie appelée <b>%1</b> existe déjà. Vous ne pouvez pas créer une "
 "deuxième catégorie avec le même nom."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:818
+#: kmymoney/dialogs/knewaccountdlg.cpp:820
 #, kde-format
 msgid ""
 "You have selected to suppress the display of unused categories in the "
@@ -2394,25 +2394,25 @@ msgstr ""
 "ne sera donc affichée que si elle est utilisée. Sinon, elle sera cachée dans "
 "la vue comptes/catégories."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:818
+#: kmymoney/dialogs/knewaccountdlg.cpp:820
 #, kde-format
 msgid "Hidden categories"
 msgstr "Catégories masquées"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:932
+#: kmymoney/dialogs/knewaccountdlg.cpp:934
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
 msgstr "Impossible d'ajouter l'établissement"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:969
+#: kmymoney/dialogs/knewaccountdlg.cpp:971
 #, kde-format
 msgctxt "@info:tooltip Hint to provide name"
 msgid "Please provide a name for the new category or account."
 msgstr ""
 "Veuillez fournir un nom pour une nouvelle catégorie ou un nouveau compte."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:974
+#: kmymoney/dialogs/knewaccountdlg.cpp:976
 #, kde-format
 msgctxt "@info:tooltip %1 contains invalid character combination"
 msgid "You cannot create an account or category that contains %1 in the name."
@@ -2420,19 +2420,19 @@ msgstr ""
 "Il vous est impossible de créer un compte ou une catégorie contenant %1 dans "
 "le nom."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:981
+#: kmymoney/dialogs/knewaccountdlg.cpp:983
 #, kde-format
 msgctxt "@info:tooltip Hint to provide VAT percentage in range"
 msgid "Please provide a percentage greater than zero and less than 100."
 msgstr "Veuillez fournir un pourcentage supérieur à zéro et inférieur à 100."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:985
+#: kmymoney/dialogs/knewaccountdlg.cpp:987
 #, kde-format
 msgctxt "@info:tooltip Hint to provide category to assign VAT"
 msgid "Please select a category for the VAT."
 msgstr "Veuillez sélectionner une catégorie pour la TVA."
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1050
+#: kmymoney/dialogs/knewaccountdlg.cpp:1052
 #, kde-format
 msgid ""
 "<p>The category <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2443,13 +2443,13 @@ msgstr ""
 "p><p><i>Le compte père par défaut sera <b>%2</b> mais peut être changé dans "
 "la fenêtre suivante</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1054
-#: kmymoney/dialogs/knewaccountdlg.cpp:1079
+#: kmymoney/dialogs/knewaccountdlg.cpp:1056
+#: kmymoney/dialogs/knewaccountdlg.cpp:1081
 #, kde-format
 msgid "Create category"
 msgstr "Créer une catégorie"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1075
+#: kmymoney/dialogs/knewaccountdlg.cpp:1077
 #, kde-format
 msgid ""
 "<p>The account <b>%1</b> currently does not exist. Do you want to create it?"
@@ -2460,13 +2460,13 @@ msgstr ""
 "p><p><i>Le compte père par défaut sera <b>%2</b> mais peut être modifié dans "
 "la fenêtre suivante</i>.</p>"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1097
+#: kmymoney/dialogs/knewaccountdlg.cpp:1099
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Category"
 msgstr "Créer une nouvelle catégorie"
 
-#: kmymoney/dialogs/knewaccountdlg.cpp:1102
+#: kmymoney/dialogs/knewaccountdlg.cpp:1104
 #, kde-format
 msgctxt "@title:window"
 msgid "Create a new Account"
@@ -6441,19 +6441,19 @@ msgid "Unable to update price for %1 (error encountered: '%2')"
 msgstr ""
 "Impossible de mettre à jour le cours de %1 (pas de cours ou pas de date)"
 
-#: kmymoney/models/accountsproxymodel.cpp:529
+#: kmymoney/models/accountsproxymodel.cpp:534
 #, kde-format
 msgctxt "Account filter"
 msgid "Any status"
 msgstr "N'importe quel état"
 
-#: kmymoney/models/accountsproxymodel.cpp:530
+#: kmymoney/models/accountsproxymodel.cpp:535
 #, kde-format
 msgctxt "Account filter"
 msgid "Unused"
 msgstr "Non utilisé"
 
-#: kmymoney/models/accountsproxymodel.cpp:531
+#: kmymoney/models/accountsproxymodel.cpp:536
 #, kde-format
 msgctxt "Account filter"
 msgid "Closed"
@@ -19389,38 +19389,38 @@ msgstr "Total des bénéfices :"
 msgid "Edit account '%1'"
 msgstr "Éditer le compte « %1 »"
 
-#: kmymoney/views/kaccountsview_p.h:243
+#: kmymoney/views/kaccountsview_p.h:245
 #, fuzzy, kde-format
 #| msgid "Edit account..."
 msgctxt "Undo action description"
 msgid "Edit account"
 msgstr "Modifier un compte…"
 
-#: kmymoney/views/kaccountsview_p.h:277
+#: kmymoney/views/kaccountsview_p.h:279
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
 msgstr "Impossible de modifier le compte « %1 ». Raison : %2"
 
-#: kmymoney/views/kaccountsview_p.h:353
+#: kmymoney/views/kaccountsview_p.h:355
 #, kde-format
 msgid ""
 "The balance of the account must be zero before the account can be closed"
 msgstr ""
 "Le solde du compte doit être à zéro pour que le compte puisse être clôturé"
 
-#: kmymoney/views/kaccountsview_p.h:356
+#: kmymoney/views/kaccountsview_p.h:358
 #, kde-format
 msgid "All subaccounts must be closed before the account can be closed"
 msgstr ""
 "Tous les sous-comptes doivent être clôturés pour que le compte puisse être "
 "clôturé"
 
-#: kmymoney/views/kaccountsview_p.h:359
+#: kmymoney/views/kaccountsview_p.h:361
 #, kde-format
 msgid "This account is still included in an active schedule"
 msgstr "Ce compte est toujours inclus dans une opération récurrente active"
 
-#: kmymoney/views/kaccountsview_p.h:362
+#: kmymoney/views/kaccountsview_p.h:364
 #, kde-format
 msgid "This account is still mapped to an online account"
 msgstr "Ce compte est toujours associé à un compte en ligne"
@@ -21125,12 +21125,12 @@ msgstr ""
 "Cette page affiche le grand livre des comptes. Actuellement, aucun compte "
 "n'est sélectionné. Ainsi, ce texte est affiché à la place."
 
-#: kmymoney/views/simpleledgerview.cpp:670
+#: kmymoney/views/simpleledgerview.cpp:675
 #, kde-format
 msgid "Open website of <b>%1</b> in your browser."
 msgstr "Ouvrir le site Web de <b>%1</b> dans votre navigateur."
 
-#: kmymoney/views/simpleledgerview.cpp:838
+#: kmymoney/views/simpleledgerview.cpp:843
 #, kde-format
 msgid ""
 "You cannot close this view because you are reconciling the account. Finish, "
@@ -21140,7 +21140,7 @@ msgstr ""
 "réconciliation pour ce compte. Veuillez terminer, annuler ou reporter la "
 "réconciliation tout d'abord."
 
-#: kmymoney/views/simpleledgerview.cpp:839
+#: kmymoney/views/simpleledgerview.cpp:844
 #, kde-format
 msgctxt "@title:info In reconciliation"
 msgid "View cannot be closed"

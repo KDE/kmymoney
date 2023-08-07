@@ -129,11 +129,11 @@
 
 <para
 >Låt oss exempelvis säga att din månatliga bostadsamortering kommer från banken som <quote
->SUNTRUST BANK MAPLE VALLEY, GA 111506</quote
+>SUN TRUST BANK MAPLE VALLEY, GA 111506</quote
 > en månad, och därefter <quote
->SUNTRUST BANK MAPLE VALLEY, GA 121606</quote
+>SUN TRUST BANK MAPLE VALLEY, GA 121606</quote
 > nästa månad. Du skulle helst vilja att båda transaktionerna helt enkelt tilldelas till din betalare <quote
->SunTrust</quote
+>Sun Trust</quote
 >. Då är funktionen för transaktionsmatchning någonting för dig. </para>
 
 <para>
@@ -196,16 +196,18 @@
 
 <para
 >När du importerar transaktioner med användning av QIF-import, eller använder ett insticksprogram som OFX eller AqBanking, beaktas de matchningsnycklar du har angivit. Om matchningsnyckeln för en av dina betalningsmottagare hittas någonstans i den importerade transaktionens betalningsmottagare, tilldelas motsvarande betalningsmottagare från din lista till transaktionen. På så sätt kommer nyckeln <quote
->SunTrust</quote
+>Sun Trust</quote
 > att matcha <quote
->SUNTRUST BANK MAPLE VALLEY,GA</quote
+>SUN TRUST BANK MAPLE VALLEY,GA</quote
 > eller till och med <quote
->MORGENSUNTRUST&amp;LOAN</quote
->. Du måste alltså välja matchningsnycklar omsorgsfull. <note
-> <para
+>MORGEN SUN TRUST&amp;LOAN</quote
+>. Du måste alltså välja matchningsnycklar omsorgsfull. </para>
+<para
+><note>
+    <para
 >Om en betalare i en transaktion matchar mer än en matchningsnyckel, är beteendet odefinierat. &kmymoney; väljer godtyckligt en av betalarna som matchar.</para>
-  </note>
-</para>
+</note
+></para>
 </sect3>
 </sect2>
 </sect1>
