@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-07 00:49+0000\n"
-"PO-Revision-Date: 2023-08-05 13:27+0300\n"
+"PO-Revision-Date: 2023-08-07 17:46+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -19310,12 +19310,7 @@ msgstr "Her ödeme için değiştiğinden, tutar tahminidir"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, keepMultiCurrencyAmount)
 #: kmymoney/views/keditscheduledlg.ui:235
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>Select this if you don't want to modify the amount "
-#| "of the category side of a multi-currency transaction. The exchange rate "
-#| "of the transaction will be adjusted instead when the schedule is entered "
-#| "with a modifed amount.</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>Select this if you don't want to modify the amount of "
 "the category side of a multi-currency transaction. The exchange rate of the "
