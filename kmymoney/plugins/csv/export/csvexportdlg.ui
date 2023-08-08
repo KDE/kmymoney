@@ -16,7 +16,7 @@
   <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="2,0,0,0,0,0,0">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="TextLabel2">
      <property name="sizePolicy">
@@ -61,8 +61,8 @@ You can choose the file's path, and the account. Choose Account to export all th
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_1">
-     <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
       <widget class="QLabel" name="lblFileExport">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
@@ -78,21 +78,17 @@ You can choose the file's path, and the account. Choose Account to export all th
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="KLineEdit" name="m_qlineeditFile"/>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="m_qlineeditFile"/>
      </item>
-     <item>
+     <item row="0" column="2">
       <widget class="QPushButton" name="m_qbuttonBrowse">
        <property name="text">
         <string>&amp;Browse...</string>
        </property>
       </widget>
      </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,100,5">
-     <item>
+     <item row="1" column="0">
       <widget class="QLabel" name="label">
        <property name="maximumSize">
         <size>
@@ -105,23 +101,26 @@ You can choose the file's path, and the account. Choose Account to export all th
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="KComboBox" name="m_accountComboBox"/>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_5">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+     <item row="1" column="1">
+      <widget class="KMyMoneyAccountCombo" name="m_accountComboBox">
+       <property name="editable">
+        <bool>true</bool>
        </property>
-       <property name="sizeHint" stdset="0">
+       <property name="iconSize">
         <size>
-         <width>40</width>
-         <height>20</height>
+         <width>0</width>
+         <height>0</height>
         </size>
        </property>
-      </spacer>
+       <property name="kmm_taborder" stdset="0">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="KMessageWidget" name="infoMessage"/>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="3,12,12,8,3">
@@ -264,23 +263,7 @@ You can choose the file's path, and the account. Choose Account to export all th
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QComboBox" name="m_separatorComboBox">
-          <item>
-           <property name="text">
-            <string>Comma (,)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Semicolon (;)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Tab (\t)</string>
-           </property>
-          </item>
-         </widget>
+         <widget class="QComboBox" name="m_separatorComboBox"/>
         </item>
        </layout>
       </widget>
@@ -316,16 +299,6 @@ You can choose the file's path, and the account. Choose Account to export all th
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
-      <widget class="QProgressBar" name="progressBar">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="value">
-        <number>0</number>
-       </property>
-      </widget>
-     </item>
-     <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -344,7 +317,7 @@ You can choose the file's path, and the account. Choose Account to export all th
         <string>&amp;Export</string>
        </property>
        <property name="autoDefault">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="default">
         <bool>true</bool>
@@ -357,7 +330,7 @@ You can choose the file's path, and the account. Choose Account to export all th
         <string>Cancel</string>
        </property>
        <property name="autoDefault">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -368,19 +341,20 @@ You can choose the file's path, and the account. Choose Account to export all th
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
+   <class>KMessageWidget</class>
+   <extends>QFrame</extends>
+   <header>kmessagewidget.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyDateEdit</class>
    <extends>QDateEdit</extends>
    <header>kmymoneydateedit.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyAccountCombo</class>
+   <extends>QComboBox</extends>
+   <header>kmymoneyaccountcombo.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
