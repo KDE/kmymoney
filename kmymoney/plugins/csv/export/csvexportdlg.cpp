@@ -30,6 +30,7 @@
 
 #include "accountsmodel.h"
 #include "icons.h"
+#include "kmymoneysettings.h"
 #include "mymoneyaccount.h"
 #include "mymoneyfile.h"
 #include "mymoneytransaction.h"
@@ -78,6 +79,7 @@ public:
         accountsModel->setHideEquityAccounts(true);
         accountsModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
         accountsModel->sort(AccountsModel::Column::AccountName);
+        accountsModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
         ui->m_accountComboBox->setModel(accountsModel);
         ui->m_accountComboBox->clearSelection();
     }
