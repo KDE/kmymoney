@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-07 00:49+0000\n"
+"POT-Creation-Date: 2023-08-09 00:46+0000\n"
 "PO-Revision-Date: 2009-09-18 17:20+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -915,8 +915,8 @@ msgstr ""
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:61
 #: kmymoney/plugins/reconciliationreport/reconciliationreport.cpp:246
 #: kmymoney/plugins/views/reports/core/listtable.cpp:616
-#: kmymoney/views/khomeview_p.h:643 kmymoney/views/khomeview_p.h:705
-#: kmymoney/views/khomeview_p.h:745 kmymoney/views/newspliteditor.ui:32
+#: kmymoney/views/khomeview_p.h:643 kmymoney/views/khomeview_p.h:703
+#: kmymoney/views/khomeview_p.h:741 kmymoney/views/newspliteditor.ui:32
 #: kmymoney/views/newtransactioneditor.ui:56
 #: kmymoney/views/newtransactionform.ui:145
 #: kmymoney/widgets/ktransactionfilter.cpp:131
@@ -998,8 +998,8 @@ msgstr ""
 #: kmymoney/plugins/views/onlinejoboutbox/onlinejobmessagesmodel.cpp:120
 #: kmymoney/plugins/views/reports/core/listtable.cpp:614
 #: kmymoney/views/investtransactioneditor.ui:245
-#: kmymoney/views/khomeview_p.h:628 kmymoney/views/khomeview_p.h:690
-#: kmymoney/views/khomeview_p.h:730 kmymoney/views/newtransactioneditor.ui:78
+#: kmymoney/views/khomeview_p.h:628 kmymoney/views/khomeview_p.h:688
+#: kmymoney/views/khomeview_p.h:726 kmymoney/views/newtransactioneditor.ui:78
 #: kmymoney/views/newtransactionform.ui:110
 #: kmymoney/widgets/ktransactionfilter.cpp:122
 #: kmymoney/widgets/ktransactionfilter.ui:138
@@ -1504,7 +1504,7 @@ msgstr "Buang"
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonCancel)
 #: kmymoney/dialogs/keditequityentry.ui:217
 #: kmymoney/dialogs/kimportverifydlg.ui:92
-#: kmymoney/plugins/csv/export/csvexportdlg.ui:357
+#: kmymoney/plugins/csv/export/csvexportdlg.ui:330
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:397
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:423
 #: kmymoney/views/investtransactioneditor.ui:312
@@ -1905,7 +1905,7 @@ msgstr "Jenis"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:237
 #: kmymoney/views/investtransactioneditor.ui:51
 #: kmymoney/views/investtransactioneditor.ui:221
-#: kmymoney/views/khomeview_p.h:1025
+#: kmymoney/views/khomeview_p.h:1041
 #, fuzzy, kde-format
 #| msgid "Total"
 msgid "Total"
@@ -2115,7 +2115,7 @@ msgid "Liability"
 msgstr ""
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:533 kmymoney/kmymoney.cpp:432
-#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1783
+#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1799
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:379
@@ -4014,8 +4014,8 @@ msgstr "Dikosongkan"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:345
 #: kmymoney/plugins/views/reports/core/listtable.cpp:638
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:1001 kmymoney/views/khomeview_p.h:1356
-#: kmymoney/views/khomeview_p.h:1385
+#: kmymoney/views/khomeview_p.h:1017 kmymoney/views/khomeview_p.h:1372
+#: kmymoney/views/khomeview_p.h:1401
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -5210,7 +5210,7 @@ msgstr "Templat"
 msgid "The file <b>%1</b> already exists. Do you really want to overwrite it?"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:3518 kmymoney/plugins/csv/export/csvexporter.cpp:103
+#: kmymoney/kmymoney.cpp:3518 kmymoney/plugins/csv/export/csvexporter.cpp:102
 #, fuzzy, kde-format
 msgid "File already exists"
 msgstr "Fail telah wujud"
@@ -5497,8 +5497,8 @@ msgstr "&Import"
 #. i18n: ectx: Menu (export)
 #. i18n: ectx: property (text), widget (QToolButton, buttonExport)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonOk)
-#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:54
-#: kmymoney/plugins/csv/export/csvexportdlg.ui:344
+#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:90
+#: kmymoney/plugins/csv/export/csvexportdlg.ui:317
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:410
 #: kmymoney/plugins/views/reports/reportcontrol.ui:89
@@ -5691,7 +5691,7 @@ msgstr ""
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1519
+#: kmymoney/views/khomeview_p.h:1535
 #, kde-format
 msgid "Budget"
 msgstr ""
@@ -9035,21 +9035,39 @@ msgctxt ""
 msgid "%1 and No/%2"
 msgstr ""
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:56
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:63
+#, kde-format
+msgctxt "@item:inlistbox CSV separator"
+msgid "Comma (,)"
+msgstr ""
+
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
+#, kde-format
+msgctxt "@item:inlistbox CSV separator"
+msgid "Semicolon (;)"
+msgstr ""
+
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
+#, kde-format
+msgctxt "@item:inlistbox CSV separator"
+msgid "Tab (\\t)"
+msgstr ""
+
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:90
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:62
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:56
 #, kde-format
 msgid "Start operation"
 msgstr ""
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:57
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:90
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #, kde-format
 msgid "Use this to start the export operation"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonBrowse)
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:60
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:93
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:87
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:66
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:127
@@ -9059,29 +9077,25 @@ msgstr ""
 msgid "&Browse..."
 msgstr "&Layar..."
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:62
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:68
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:62
 #, kde-format
 msgid "Select filename"
 msgstr ""
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:63
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:96
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:69
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:63
 #, kde-format
 msgid "Use this to select a filename to export to"
 msgstr ""
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:165
-#, kde-format
-msgid "There are no entries in this account.\n"
-msgstr ""
-
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:166
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:197
 #, fuzzy, kde-format
-msgid "Invalid account"
-msgstr "Akaun"
+msgctxt "@info Hint in CSV export dialog"
+msgid "Current selected account does not contain any transactions."
+msgstr "Pilih tahun"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CsvExportDlg)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:14
@@ -9112,7 +9126,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2_2)
-#: kmymoney/plugins/csv/export/csvexportdlg.ui:104
+#: kmymoney/plugins/csv/export/csvexportdlg.ui:100
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:140
 #, fuzzy, kde-format
 #| msgid "Account"
@@ -9120,41 +9134,41 @@ msgid "Account to export"
 msgstr "Akaun"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_qgroupboxContents)
-#: kmymoney/plugins/csv/export/csvexportdlg.ui:150
+#: kmymoney/plugins/csv/export/csvexportdlg.ui:149
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:226
 #, kde-format
 msgid "Contents to Export"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_radioButtonAccount)
-#: kmymoney/plugins/csv/export/csvexportdlg.ui:171
+#: kmymoney/plugins/csv/export/csvexportdlg.ui:170
 #, fuzzy, kde-format
 #| msgid "Account"
 msgid "Acco&unt"
 msgstr "Akaun"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_radioButtonCategories)
-#: kmymoney/plugins/csv/export/csvexportdlg.ui:178
+#: kmymoney/plugins/csv/export/csvexportdlg.ui:177
 #, fuzzy, kde-format
 msgid "Ca&tegories"
 msgstr "Kategori"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_qgroupboxDates)
-#: kmymoney/plugins/csv/export/csvexportdlg.ui:194
+#: kmymoney/plugins/csv/export/csvexportdlg.ui:193
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:264
 #, fuzzy, kde-format
 msgid "Date Range"
 msgstr "Julat Tarikh"
 
 #. i18n: ectx: property (text), widget (QLabel, lblStartDate)
-#: kmymoney/plugins/csv/export/csvexportdlg.ui:214
+#: kmymoney/plugins/csv/export/csvexportdlg.ui:213
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:324
 #, fuzzy, kde-format
 msgid "Start on:"
 msgstr "Keadaan"
 
 #. i18n: ectx: property (text), widget (QLabel, lblEndDate)
-#: kmymoney/plugins/csv/export/csvexportdlg.ui:239
+#: kmymoney/plugins/csv/export/csvexportdlg.ui:238
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:302
 #, fuzzy, kde-format
 #| msgid "Edit..."
@@ -9162,28 +9176,10 @@ msgid "End on:"
 msgstr "Sunting..."
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_qgroupboxSeparator)
-#: kmymoney/plugins/csv/export/csvexportdlg.ui:263
+#: kmymoney/plugins/csv/export/csvexportdlg.ui:262
 #, fuzzy, kde-format
 msgid "Field Separator"
 msgstr "Tahun Seterusnya"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, m_separatorComboBox)
-#: kmymoney/plugins/csv/export/csvexportdlg.ui:270
-#, kde-format
-msgid "Comma (,)"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, m_separatorComboBox)
-#: kmymoney/plugins/csv/export/csvexportdlg.ui:275
-#, kde-format
-msgid "Semicolon (;)"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, m_separatorComboBox)
-#: kmymoney/plugins/csv/export/csvexportdlg.ui:280
-#, kde-format
-msgid "Tab (\\t)"
-msgstr ""
 
 #: kmymoney/plugins/csv/export/csvexporter.cpp:60
 #, fuzzy, kde-format
@@ -9196,7 +9192,7 @@ msgctxt "CSV Exporter dialog title"
 msgid "CSV Exporter"
 msgstr "Import"
 
-#: kmymoney/plugins/csv/export/csvexporter.cpp:102
+#: kmymoney/plugins/csv/export/csvexporter.cpp:101
 #, kde-format
 msgid ""
 "<qt>The file <b>%1</b> already exists. Do you really want to overwrite it?</"
@@ -9574,8 +9570,8 @@ msgstr "Seting warna"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:684
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1004 kmymoney/views/khomeview_p.h:1359
-#: kmymoney/views/khomeview_p.h:1388
+#: kmymoney/views/khomeview_p.h:1020 kmymoney/views/khomeview_p.h:1375
+#: kmymoney/views/khomeview_p.h:1404
 #, fuzzy, kde-format
 msgid "Balance"
 msgstr "Baki"
@@ -11984,9 +11980,9 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reportsview.cpp:227
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:211
 #: kmymoney/views/investtransactioneditor.ui:92
-#: kmymoney/views/khomeview_p.h:640 kmymoney/views/khomeview_p.h:702
-#: kmymoney/views/khomeview_p.h:742 kmymoney/views/khomeview_p.h:988
-#: kmymoney/views/khomeview_p.h:1116 kmymoney/views/newtransactioneditor.ui:17
+#: kmymoney/views/khomeview_p.h:640 kmymoney/views/khomeview_p.h:700
+#: kmymoney/views/khomeview_p.h:738 kmymoney/views/khomeview_p.h:1004
+#: kmymoney/views/khomeview_p.h:1132 kmymoney/views/newtransactioneditor.ui:17
 #: kmymoney/widgets/ktransactionfilter.cpp:116
 #: kmymoney/widgets/ktransactionfilter.ui:113
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:73
@@ -14614,13 +14610,13 @@ msgstr[0] "1 hari"
 msgstr[1] "1 hari"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:379
-#: kmymoney/views/khomeview_p.h:1185
+#: kmymoney/views/khomeview_p.h:1201
 #, kde-format
 msgid "The balance of %1 is below the minimum balance %2 today."
 msgstr ""
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:384
-#: kmymoney/views/khomeview_p.h:1189
+#: kmymoney/views/khomeview_p.h:1205
 #, kde-format
 msgid "The balance of %2 will drop below the minimum balance %3 in %1 day."
 msgid_plural ""
@@ -14629,19 +14625,19 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:403
-#: kmymoney/views/khomeview_p.h:1207
+#: kmymoney/views/khomeview_p.h:1223
 #, kde-format
 msgid "The balance of %1 is below %2 today."
 msgstr ""
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:408
-#: kmymoney/views/khomeview_p.h:1212
+#: kmymoney/views/khomeview_p.h:1228
 #, kde-format
 msgid "The balance of %1 is above %2 today."
 msgstr ""
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:415
-#: kmymoney/views/khomeview_p.h:1218
+#: kmymoney/views/khomeview_p.h:1234
 #, kde-format
 msgid "The balance of %2 will drop below %3 in %1 day."
 msgid_plural "The balance of %2 will drop below %3 in %1 days."
@@ -14649,7 +14645,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:422
-#: kmymoney/views/khomeview_p.h:1225
+#: kmymoney/views/khomeview_p.h:1241
 #, kde-format
 msgid "The balance of %2 will raise above %3 in %1 day."
 msgid_plural "The balance of %2 will raise above %3 in %1 days."
@@ -14713,7 +14709,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr ""
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:660
-#: kmymoney/views/khomeview_p.h:537 kmymoney/views/khomeview_p.h:1523
+#: kmymoney/views/khomeview_p.h:537 kmymoney/views/khomeview_p.h:1539
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr ""
@@ -15501,7 +15497,7 @@ msgstr "Julat"
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.cpp:171
 #: kmymoney/plugins/views/reports/kreportconfigurationfilterdlg.ui:27
 #: kmymoney/plugins/views/reports/kreportsview_p.h:430
-#: kmymoney/views/khomeview_p.h:1059
+#: kmymoney/views/khomeview_p.h:1075
 #, fuzzy, kde-format
 msgid "Report"
 msgstr "Laporan"
@@ -15816,7 +15812,7 @@ msgstr "Laporan"
 #. i18n: ectx: property (text), widget (QTreeWidget, m_tocTreeWidget)
 #: kmymoney/plugins/views/reports/kreportsview.ui:51
 #: kmymoney/plugins/views/reports/reporttabgeneral.ui:49
-#: kmymoney/views/khomeview_p.h:1061
+#: kmymoney/views/khomeview_p.h:1077
 #, fuzzy, kde-format
 msgid "Comment"
 msgstr "Komen"
@@ -15846,7 +15842,7 @@ msgid "Charts"
 msgstr "Carta"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:660
-#: kmymoney/views/khomeview_p.h:1054
+#: kmymoney/views/khomeview_p.h:1070
 #, kde-format
 msgid "Favorite Reports"
 msgstr ""
@@ -15891,7 +15887,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr ""
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:867
-#: kmymoney/views/khomeview_p.h:1495
+#: kmymoney/views/khomeview_p.h:1511
 #, kde-format
 msgid "Net Worth"
 msgstr ""
@@ -18685,101 +18681,101 @@ msgstr "Jadual"
 msgid "Overdue payments"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:631 kmymoney/views/khomeview_p.h:693
-#: kmymoney/views/khomeview_p.h:733
+#: kmymoney/views/khomeview_p.h:631 kmymoney/views/khomeview_p.h:691
+#: kmymoney/views/khomeview_p.h:729
 #, fuzzy, kde-format
 msgid "Next"
 msgstr "&Berikutnya"
 
-#: kmymoney/views/khomeview_p.h:634 kmymoney/views/khomeview_p.h:696
-#: kmymoney/views/khomeview_p.h:736
+#: kmymoney/views/khomeview_p.h:634 kmymoney/views/khomeview_p.h:694
+#: kmymoney/views/khomeview_p.h:732
 #, fuzzy, kde-format
 msgid "Skip"
 msgstr "Langkau"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, ScheduleWizardPage)
-#: kmymoney/views/khomeview_p.h:637 kmymoney/views/khomeview_p.h:699
-#: kmymoney/views/khomeview_p.h:739
+#: kmymoney/views/khomeview_p.h:637 kmymoney/views/khomeview_p.h:697
+#: kmymoney/views/khomeview_p.h:735
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:78
 #: kmymoney/wizards/newloanwizard/schedulewizardpage.ui:6
 #, fuzzy, kde-format
 msgid "Schedule"
 msgstr "Jadual"
 
-#: kmymoney/views/khomeview_p.h:646 kmymoney/views/khomeview_p.h:708
-#: kmymoney/views/khomeview_p.h:748
+#: kmymoney/views/khomeview_p.h:646 kmymoney/views/khomeview_p.h:706
+#: kmymoney/views/khomeview_p.h:744
 #, kde-format
 msgid "Balance after"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:687
+#: kmymoney/views/khomeview_p.h:685
 #, kde-format
 msgid "Today's due payments"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:727
+#: kmymoney/views/khomeview_p.h:723
 #, kde-format
 msgid "Future payments"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:815
+#: kmymoney/views/khomeview_p.h:809
 #, kde-format
 msgctxt "Less..."
 msgid "Show fewer schedules on the list"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:817
+#: kmymoney/views/khomeview_p.h:811
 #, kde-format
 msgctxt "More..."
 msgid "Show more schedules on the list"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:846
+#: kmymoney/views/khomeview_p.h:849
 #, kde-format
 msgid "Enter schedule"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:850
+#: kmymoney/views/khomeview_p.h:854
 #, kde-format
 msgid "Skip schedule"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:854
+#: kmymoney/views/khomeview_p.h:860
 #, kde-format
 msgid "Edit schedule"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:858
+#: kmymoney/views/khomeview_p.h:864
 #, fuzzy, kde-format
 msgid " (%1 payment)"
 msgid_plural " (%1 payments)"
 msgstr[0] "Bayaran"
 msgstr[1] "Bayaran"
 
-#: kmymoney/views/khomeview_p.h:992
+#: kmymoney/views/khomeview_p.h:1008
 #, kde-format
 msgctxt "Header not marked"
 msgid "!M"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:995
+#: kmymoney/views/khomeview_p.h:1011
 #, fuzzy, kde-format
 msgctxt "Header cleared"
 msgid "C"
 msgstr "C"
 
-#: kmymoney/views/khomeview_p.h:998
+#: kmymoney/views/khomeview_p.h:1014
 #, fuzzy, kde-format
 msgctxt "Header not reconciled"
 msgid "!R"
 msgstr "R"
 
-#: kmymoney/views/khomeview_p.h:1010
+#: kmymoney/views/khomeview_p.h:1026
 #, kde-format
 msgid "To Minimum Balance<br>/ Maximum Credit"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1110
+#: kmymoney/views/khomeview_p.h:1126
 #, fuzzy, kde-format
 msgctxt "Forecast days"
 msgid "%1 Day Forecast"
@@ -18787,7 +18783,7 @@ msgid_plural "%1 Day Forecast"
 msgstr[0] "Format Tarikh"
 msgstr[1] "Format Tarikh"
 
-#: kmymoney/views/khomeview_p.h:1121
+#: kmymoney/views/khomeview_p.h:1137
 #, fuzzy, kde-format
 msgctxt "Forecast days"
 msgid "%1 day"
@@ -18795,97 +18791,97 @@ msgid_plural "%1 days"
 msgstr[0] "%1 hari"
 msgstr[1] "%1 hari"
 
-#: kmymoney/views/khomeview_p.h:1329
+#: kmymoney/views/khomeview_p.h:1345
 #, kde-format
 msgid "Assets and Liabilities Summary"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1343
+#: kmymoney/views/khomeview_p.h:1359
 #, kde-format
 msgid "Asset Accounts"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1372
+#: kmymoney/views/khomeview_p.h:1388
 #, kde-format
 msgid "Liability Accounts"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1474
+#: kmymoney/views/khomeview_p.h:1490
 #, kde-format
 msgid "Total Assets"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1484
+#: kmymoney/views/khomeview_p.h:1500
 #, kde-format
 msgid "Total Liabilities"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1773
+#: kmymoney/views/khomeview_p.h:1789
 #, kde-format
 msgid "Cash Flow Summary"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1778
+#: kmymoney/views/khomeview_p.h:1794
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1786
+#: kmymoney/views/khomeview_p.h:1802
 #, kde-format
 msgid "Scheduled Income"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1789
+#: kmymoney/views/khomeview_p.h:1805
 #, kde-format
 msgid "Expenses"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1792
+#: kmymoney/views/khomeview_p.h:1808
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1820
+#: kmymoney/views/khomeview_p.h:1836
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1825
+#: kmymoney/views/khomeview_p.h:1841
 #, kde-format
 msgid "Liquid Assets"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1828
+#: kmymoney/views/khomeview_p.h:1844
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1831
+#: kmymoney/views/khomeview_p.h:1847
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1834
+#: kmymoney/views/khomeview_p.h:1850
 #, kde-format
 msgid "Other Transfers"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1877
+#: kmymoney/views/khomeview_p.h:1893
 #, kde-format
 msgid "Cash Flow Status"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1882
+#: kmymoney/views/khomeview_p.h:1898
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1885
+#: kmymoney/views/khomeview_p.h:1901
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr ""
 
-#: kmymoney/views/khomeview_p.h:1888
+#: kmymoney/views/khomeview_p.h:1904
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr ""
@@ -23787,6 +23783,10 @@ msgid ""
 "<p>All information is optional and only used to personalize your KMyMoney "
 "file.</p>"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Invalid account"
+#~ msgstr "Akaun"
 
 #, fuzzy
 #~ msgctxt "@title:menu budget context menu"
