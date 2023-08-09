@@ -231,12 +231,15 @@ CsvExportDlg::CsvExportDlg(QWidget* parent)
 
     // connect the change signals to the check slot and perform initial check
     connect(d->ui->m_qlineeditFile, &QLineEdit::editingFinished, this, [&] {
+        Q_D(CsvExportDlg);
         d->checkData();
     });
     connect(d->ui->m_radioButtonAccount, &QRadioButton::toggled, this, [&] {
+        Q_D(CsvExportDlg);
         d->checkData();
     });
     connect(d->ui->m_radioButtonCategories, &QRadioButton::toggled, this, [&] {
+        Q_D(CsvExportDlg);
         d->checkData();
     });
     connect(d->ui->m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, this, [&](const QString& accountId) {
