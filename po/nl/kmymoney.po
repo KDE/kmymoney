@@ -12,15 +12,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-09 00:46+0000\n"
-"PO-Revision-Date: 2023-08-06 08:11+0200\n"
+"POT-Creation-Date: 2023-08-10 00:47+0000\n"
+"PO-Revision-Date: 2023-08-09 10:43+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 23.11.70\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -5876,7 +5876,7 @@ msgstr "&Importeren"
 #. i18n: ectx: Menu (export)
 #. i18n: ectx: property (text), widget (QToolButton, buttonExport)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonOk)
-#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:90
+#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:92
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:317
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:410
@@ -9434,42 +9434,39 @@ msgctxt ""
 msgid "%1 and No/%2"
 msgstr "%1 en geen/%2"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:63
-#, fuzzy, kde-format
-#| msgid "Comma (,)"
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Comma (,)"
 msgstr "Komma (,)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
-#, fuzzy, kde-format
-#| msgid "Semicolon (;)"
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Semicolon (;)"
 msgstr "Puntkomma (;)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
-#, fuzzy, kde-format
-#| msgid "Tab (\\t)"
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:66
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
 msgstr "Tab (\\t)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:90
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:92
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:62
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:56
 #, kde-format
 msgid "Start operation"
 msgstr "Start bewerking"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:90
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:92
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #, kde-format
 msgid "Use this to start the export operation"
 msgstr "Gebruik dit om het exporteren te starten"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonBrowse)
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:93
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:87
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:66
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:127
@@ -9479,26 +9476,25 @@ msgstr "Gebruik dit om het exporteren te starten"
 msgid "&Browse..."
 msgstr "&Bladeren..."
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:97
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:68
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:62
 #, kde-format
 msgid "Select filename"
 msgstr "Kies bestandsnaam"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:96
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:98
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:69
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:63
 #, kde-format
 msgid "Use this to select a filename to export to"
 msgstr "Gebruik dit om een bestandsnaam te kiezen om naar te exporteren"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:197
-#, fuzzy, kde-format
-#| msgid "  * Parent account '%1' does not contain '%2' as sub-account."
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:199
+#, kde-format
 msgctxt "@info Hint in CSV export dialog"
 msgid "Current selected account does not contain any transactions."
-msgstr "  * Moeder-rekening '%1' heeft '%2' niet als dochter-rekening."
+msgstr "De nu geselecteerde rekening bevat geen transacties."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CsvExportDlg)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:14

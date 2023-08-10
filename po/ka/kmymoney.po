@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-09 00:46+0000\n"
+"POT-Creation-Date: 2023-08-10 00:47+0000\n"
 "PO-Revision-Date: 2023-07-31 06:33+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -5513,7 +5513,7 @@ msgstr "&იმპორტი"
 #. i18n: ectx: Menu (export)
 #. i18n: ectx: property (text), widget (QToolButton, buttonExport)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonOk)
-#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:90
+#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:92
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:317
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:410
@@ -9022,42 +9022,42 @@ msgctxt ""
 msgid "%1 and No/%2"
 msgstr "%1 და No/%2"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:63
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
 #, fuzzy, kde-format
 #| msgid "Comma (,)"
 msgctxt "@item:inlistbox CSV separator"
 msgid "Comma (,)"
 msgstr "მძიმე (,)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
 #, fuzzy, kde-format
 #| msgid "Semicolon (;)"
 msgctxt "@item:inlistbox CSV separator"
 msgid "Semicolon (;)"
 msgstr "წერტილმძიმე (;)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:66
 #, fuzzy, kde-format
 #| msgid "Tab (\\t)"
 msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
 msgstr "ტაბულაცია (\\t)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:90
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:92
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:62
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:56
 #, kde-format
 msgid "Start operation"
 msgstr "ოპერაციის დაწყება"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:90
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:92
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #, kde-format
 msgid "Use this to start the export operation"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonBrowse)
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:93
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:87
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:66
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:127
@@ -9067,21 +9067,21 @@ msgstr ""
 msgid "&Browse..."
 msgstr "არჩევა..."
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:97
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:68
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:62
 #, kde-format
 msgid "Select filename"
 msgstr "აირჩიეთ ფაილის სახელი"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:96
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:98
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:69
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:63
 #, kde-format
 msgid "Use this to select a filename to export to"
 msgstr ""
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:197
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:199
 #, kde-format
 msgctxt "@info Hint in CSV export dialog"
 msgid "Current selected account does not contain any transactions."

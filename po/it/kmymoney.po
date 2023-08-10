@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-09 00:46+0000\n"
-"PO-Revision-Date: 2023-07-10 14:10+0200\n"
+"POT-Creation-Date: 2023-08-10 00:47+0000\n"
+"PO-Revision-Date: 2023-08-08 18:02+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -369,16 +369,13 @@ msgid "Schedule found"
 msgstr "Pianificazione trovata"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Create a new Account"
+#, kde-format
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "Crea un nuovo conto"
+msgstr "Crea conto"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, fuzzy, kde-format
-#| msgid "Create category"
+#, kde-format
 msgctxt "Create undo action"
 msgid "Create category"
 msgstr "Crea categoria"
@@ -3086,11 +3083,10 @@ msgid "Security"
 msgstr "Strumenti finanziari"
 
 #: kmymoney/dialogs/payeecreator.cpp:57
-#, fuzzy, kde-format
-#| msgid "Creates a new payee"
+#, kde-format
 msgctxt "Undo action description"
 msgid "Create payee"
-msgstr "Crea un nuovo beneficiario"
+msgstr "Crea beneficiario"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsColors)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:14
@@ -5137,11 +5133,10 @@ msgid "Show transaction"
 msgstr "Mostra transazione"
 
 #: kmymoney/kmymoney.cpp:1842
-#, fuzzy, kde-format
-#| msgid "Show Transaction Detail"
+#, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
-msgstr "Mostra dettagli della transazione"
+msgstr "Mostra i dettagli della transazione"
 
 #: kmymoney/kmymoney.cpp:1844
 #, kde-format
@@ -5873,7 +5868,7 @@ msgstr "&Importa"
 #. i18n: ectx: Menu (export)
 #. i18n: ectx: property (text), widget (QToolButton, buttonExport)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonOk)
-#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:90
+#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:92
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:317
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:410
@@ -9444,42 +9439,42 @@ msgctxt ""
 msgid "%1 and No/%2"
 msgstr "%1 e No/%2"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:63
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
 #, fuzzy, kde-format
 #| msgid "Comma (,)"
 msgctxt "@item:inlistbox CSV separator"
 msgid "Comma (,)"
 msgstr "Virgola (,)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
 #, fuzzy, kde-format
 #| msgid "Semicolon (;)"
 msgctxt "@item:inlistbox CSV separator"
 msgid "Semicolon (;)"
 msgstr "Punto e virgola (;)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:66
 #, fuzzy, kde-format
 #| msgid "Tab (\\t)"
 msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
 msgstr "Tabulazione (\\t)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:90
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:92
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:62
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:56
 #, kde-format
 msgid "Start operation"
 msgstr "Inizia operazione"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:90
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:92
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #, kde-format
 msgid "Use this to start the export operation"
 msgstr "Premi qui per iniziare l'esportazione"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonBrowse)
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:93
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:87
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:66
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:127
@@ -9489,21 +9484,21 @@ msgstr "Premi qui per iniziare l'esportazione"
 msgid "&Browse..."
 msgstr "&Sfoglia..."
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:97
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:68
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:62
 #, kde-format
 msgid "Select filename"
 msgstr "Seleziona il nome del file"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:96
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:98
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:69
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:63
 #, kde-format
 msgid "Use this to select a filename to export to"
 msgstr "Premi qui per selezionare il nome del file in cui esportare"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:197
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:199
 #, fuzzy, kde-format
 #| msgid "  * Parent account '%1' does not contain '%2' as sub-account."
 msgctxt "@info Hint in CSV export dialog"
@@ -19251,11 +19246,10 @@ msgid "Edit account '%1'"
 msgstr "Modifica conto «%1»"
 
 #: kmymoney/views/kaccountsview_p.h:245
-#, fuzzy, kde-format
-#| msgid "Edit account..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
-msgstr "Modifica conto..."
+msgstr "Modifica conto"
 
 #: kmymoney/views/kaccountsview_p.h:279
 #, kde-format
@@ -19312,11 +19306,10 @@ msgid "Edit category '%1'"
 msgstr "Modifica categoria «%1»"
 
 #: kmymoney/views/kcategoriesview.cpp:199
-#, fuzzy, kde-format
-#| msgid "Edit category..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
-msgstr "Modifica categoria..."
+msgstr "Modifica categoria"
 
 #: kmymoney/views/kcategoriesview.cpp:213
 #, kde-format
@@ -19506,6 +19499,10 @@ msgid ""
 "transaction will be adjusted instead when the schedule is entered with a "
 "modified amount.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Seleziona questa opzione se non desideri modificare "
+"l'importo della categoria di una transazione multi-valuta. Il tasso di "
+"cambio della transazione sarà invece adeguato quando la pianificazione viene "
+"inserita con un importo modificato.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, keepMultiCurrencyAmount)
 #: kmymoney/views/keditscheduledlg.ui:238
@@ -19513,6 +19510,8 @@ msgstr ""
 msgid ""
 "Do not change amount of category but modify exchange rate of transaction"
 msgstr ""
+"Non modificare l'importo della categoria, ma modifica il tasso di cambio "
+"della transazione"
 
 #. i18n: ectx: property (text), widget (QCheckBox, lastDayInMonthOption)
 #: kmymoney/views/keditscheduledlg.ui:245

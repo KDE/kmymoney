@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-09 00:46+0000\n"
-"PO-Revision-Date: 2023-08-06 16:33+0200\n"
+"POT-Creation-Date: 2023-08-10 00:47+0000\n"
+"PO-Revision-Date: 2023-08-09 16:28+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -5834,7 +5834,7 @@ msgstr "&Importera"
 #. i18n: ectx: Menu (export)
 #. i18n: ectx: property (text), widget (QToolButton, buttonExport)
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonOk)
-#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:90
+#: kmymoney/kmymoneyui.rc:15 kmymoney/plugins/csv/export/csvexportdlg.cpp:92
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:317
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:60
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:410
@@ -9381,42 +9381,39 @@ msgctxt ""
 msgid "%1 and No/%2"
 msgstr "%1 and nr./%2"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:63
-#, fuzzy, kde-format
-#| msgid "Comma (,)"
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Comma (,)"
 msgstr "Kommatecken (,)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
-#, fuzzy, kde-format
-#| msgid "Semicolon (;)"
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Semicolon (;)"
 msgstr "Semikolon (;)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
-#, fuzzy, kde-format
-#| msgid "Tab (\\t)"
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:66
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
 msgstr "Tabulator (\\t)"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:90
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:92
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:62
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:56
 #, kde-format
 msgid "Start operation"
 msgstr "Starta åtgärden"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:90
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:92
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:63
 #, kde-format
 msgid "Use this to start the export operation"
 msgstr "Använd det här för att starta exportåtgärden"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonBrowse)
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:93
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:87
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:66
 #: kmymoney/plugins/qif/export/kexportdlgdecl.ui:127
@@ -9426,26 +9423,25 @@ msgstr "Använd det här för att starta exportåtgärden"
 msgid "&Browse..."
 msgstr "&Bläddra..."
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:95
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:97
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:68
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:62
 #, kde-format
 msgid "Select filename"
 msgstr "Välj filnamn"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:96
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:98
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:69
 #: kmymoney/plugins/qif/import/kimportdlg.cpp:63
 #, kde-format
 msgid "Use this to select a filename to export to"
 msgstr "Använd det här för att välja ett filnamn att exportera till"
 
-#: kmymoney/plugins/csv/export/csvexportdlg.cpp:197
-#, fuzzy, kde-format
-#| msgid "  * Parent account '%1' does not contain '%2' as sub-account."
+#: kmymoney/plugins/csv/export/csvexportdlg.cpp:199
+#, kde-format
 msgctxt "@info Hint in CSV export dialog"
 msgid "Current selected account does not contain any transactions."
-msgstr "  * Överliggande kontot '%1' innehåller inte '%2' som delkonto."
+msgstr "Kontot som för närvarande är valt innehåller inte några transaktioner."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CsvExportDlg)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:14
@@ -17328,7 +17324,7 @@ msgstr "Dämpad"
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:112
 #, kde-format
 msgid "Show circular grid lines"
-msgstr "Visa cirkulärt rutnät"
+msgstr "Visa cirkulära rutnätslinjer"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:113
 #, kde-format
@@ -17367,7 +17363,7 @@ msgstr "<p>Välj hur lång tidsperiod varje kolumn ska omfatta</p>"
 #: kmymoney/plugins/views/reports/reporttabrange.ui:120
 #, kde-format
 msgid "Data range"
-msgstr "Datumintervall"
+msgstr "Dataintervall"
 
 #. i18n: ectx: property (text), widget (QLabel, lblDataRangeStart)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:138
