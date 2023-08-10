@@ -110,7 +110,7 @@
 >Kontotyper</title>
 
 <para
->För båda produkter, är kontot den högsta strukturnivån i filen. &kmymoney; stöder fem huvudtyper av konton: tillgångskonto, skuldkonto, inkomst, utgift och aktiekonto, som var och en kan ha flera deltyper, t.ex. lönekonto, kreditkortskonto, etc. &kmymoney; inkluderar ett 'standardkonto' för var och en av de fem typerna, och alla andra konton är underordnade till något av dessa. &kmymoney; genomdriver större följdriktighet (eller mindre flexibilitet, beroende på ståndpunkt) mellan kontotyper än &gnucash; gör, och eventuella motsägelser som detekteras korrigeras vid import. Det kan orsaka en något annorlunda kontostruktur, även om det kan rättas till efter det att importen är klar, inom rimliga gränser. </para>
+>For both products, the highest level of structure in the file is the account. &kmymoney; supports 5 main types of account: Asset, Liability, Income, Expense and Equity, each of which may have various subtypes, e,g., Checking, Credit Card, etc. &kmymoney; includes a 'standard' account for each of these five types, and all other accounts are held subordinate to one of these. &kmymoney; enforces more consistency (or less flexibility, depending on your point of view) between account types than does &gnucash;, and the importer will correct any inconsistencies it detects. This may result in a slightly different account structure, though this can, within reason, be amended after the import is complete. </para>
 </sect4>
 
 <sect4>
@@ -118,7 +118,7 @@
 >Kategorier</title>
 
 <para
->&kmymoney; använder termen Kategori för att ange ett konto av inkomst- eller utgiftstyp. Till skillnad från &gnucash;, anses de inte som 'huvudbokskonton' och inmatning av transaktioner direkt till kategorier stöds inte. Tilldelningar görs vid inmatning av transaktioner till andra kontotyper. </para>
+>&kmymoney; uses the term Category to denote an account of an Income or Expense type. Unlike &gnucash;, these are not considered as 'ledger' accounts, and entry of transactions folder into categories is not supported; allocations are made during transaction entry into other account types. </para>
 </sect4>
 
 <sect4>
@@ -126,7 +126,7 @@
 >Struktur och platsmarkörer</title>
 
 <para
->&gnucash; stöder användning av platsmarkörskonton. Praktiskt taget är de skrivskyddade konton där inga transaktioner kan läggas till, men som fungerar på liknande sätt som kataloger i en katalogstruktur, för att innehålla andra konton. Även om &kmymoney; inte stöder funktionen som sådan, tillhandahåller det förhållanden mellan konton, så platsmarkörer simuleras vid import genom att skapa tomma konton. </para>
+>&gnucash; supports the use of Placeholder accounts. In effect, these are just read-only accounts into which no transactions can be entered, but which function in an analogous fashion to folders in a folder structure, as a holder for other accounts. Though &kmymoney; does not support this feature as such, it does provide a parent/child account relationship, so the importer simulates placeholders by creating empty accounts. </para>
 </sect4>
 
 <sect4>

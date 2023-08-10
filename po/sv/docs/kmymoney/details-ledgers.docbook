@@ -404,6 +404,27 @@
 >Ok</guibutton
 > för att spara hela transaktionen. Om det fortfarande finns belopp som inte har tilldelats, blir du tillfrågad om du antingen vill återgå till att redigera delningen, ändra transaktionens totala belopp, eller lämna en del av transaktionen utan tilldelning. </para>
 
+<para>
+	<screenshot>
+	<screeninfo
+>Split with unassigned amount</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="split_unasigned.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Split with unassigned amount</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>To redistribute an 'Unassigned' or 'Overassigned' amount, select a split item that has to be adjusted. After that click on a button <guibutton
+>Apply Difference</guibutton
+>. If 'Unassigned' was previously shown and non-zero, that amount will be added to the selected line item value. If 'Overassigned' was previously shown and non-zero, that amount will be subtracted from the selected line item value. As the result, the 'Unassigned' amount will be set to zero and a transaction could be saved successfully. </para>
+
 <para
 >Observera att kategorifältet i transaktionsformuläret eller transaktionslistan nu visar <emphasis
 >Delad transaktion</emphasis
@@ -630,4 +651,3 @@
 > kan kontots detaljinformation ändras. Det finns också ett menyalternativ för att visa menyn Avstämning, som låter dig matcha transaktioner med ett officiellt bankutdrag eller kreditkortsutdrag. </para>
 </sect1>
 </chapter>
-

@@ -1308,6 +1308,28 @@
 ></para>
     </listitem>
   </varlistentry>
+  <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Anpassa Aqbanking...</guimenuitem
+> </menuchoice
+></term>
+    <listitem>
+      <para
+><action
+>Anpassa inställningar av internetbank</action
+>, se <ulink url="https://userbase.kde.org/KMyMoney/FAQ#How_do_I_configure_online_banking_.3F"
+>Hur ställer man in internetbank</ulink
+> för ytterligare information. </para>
+      <para
+>Observera att menyalternativet bara är tillgängligt om modulen KBanking är aktiverad. Se avsnittet om att ställa in <link linkend="details.settings.plugins.kbanking"
+>insticksprogrammet KBanking</link
+> för mer information. </para>
+    </listitem>
+  </varlistentry>
 
 </variablelist>
 </sect2>

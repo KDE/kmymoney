@@ -115,7 +115,7 @@
 <para
 >För att ta bort en kategori, välj den i trädet och högerklicka för att visa den sammanhangsberoende menyn. Välj därefter <guimenuitem
 >Ta bort</guimenuitem
->. Om kategorin inte har några associerade transaktioner, scheman eller budgetar, kommer den att tas bort. </para>
+>. Om kategorin inte har några associerade transaktioner, scheman eller budgetar, och den inte är förvald kategori för nya transaktioner med någon betalningsmottagare, kommer den att tas bort. </para>
 
 <para
 >Om en kategori har någon av de tre objekten, visas en meddelanderuta som låter dig välja en annan kategori som alla objekten kan tilldelas till istället innan kategorin tas bort. </para>

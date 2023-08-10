@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-03 03:06+0000\n"
-"PO-Revision-Date: 2023-07-24 15:47+0200\n"
+"PO-Revision-Date: 2023-08-09 16:15+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -17397,7 +17397,7 @@ msgstr "Dämpad"
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:112
 #, kde-format
 msgid "Show circular grid lines"
-msgstr "Visa cirkulärt rutnät"
+msgstr "Visa cirkulära rutnätslinjer"
 
 #: kmymoney/plugins/views/reports/reporttabimpl.cpp:113
 #, kde-format
@@ -17436,7 +17436,7 @@ msgstr "<p>Välj hur lång tidsperiod varje kolumn ska omfatta</p>"
 #: kmymoney/plugins/views/reports/reporttabrange.ui:120
 #, kde-format
 msgid "Data range"
-msgstr "Datumintervall"
+msgstr "Dataintervall"
 
 #. i18n: ectx: property (text), widget (QLabel, lblDataRangeStart)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:138

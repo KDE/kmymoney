@@ -828,7 +828,7 @@
 
 <note>
 <para
->Dessa instruktioner gäller bara för att flytta data och inställningar för &kmymoney;. Det kan dock finnas viktiga saker som lagras av &kde; och inte av &kmymoney;, såsom lösenord lagrade i plånboken. Att flytta andra delar av &kde;:s inställningar är utanför ramen för den här handboken, även om många av de relevanta filerna också lagras i <envar
+>These instructions are solely for moving your &kmymoney; data and settings. However, there may be important items which are stored by &kde; and not by &kmymoney;, such as passwords stored in Keychain. Moving other parts of your &kde; setup is beyond the scope of this manual, although many of the relevant files are also stored under <envar
 >$KDEHOME</envar
 >. </para>
 </note>
