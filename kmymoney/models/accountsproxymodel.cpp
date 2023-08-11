@@ -300,6 +300,11 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
                 break;
             }
 
+            // in case we should hide the favorite accounts section, we filter it out here
+            if (d->m_hideFavoriteAccounts && source.data(eMyMoney::Model::AccountIsFavoriteIndexRole).toBool()) {
+                return false;
+            }
+
             if (d->m_typeList.contains(accountType)) {
                 return true;
             }

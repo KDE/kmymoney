@@ -97,6 +97,10 @@ HierarchyPage::HierarchyPage(Wizard* wizard) :
 
     connect(d->ui->m_parentAccounts->selectionModel(), &QItemSelectionModel::currentChanged, this, &HierarchyPage::parentAccountChanged);
     connect(d->ui->m_parentAccounts, &KMyMoneyAccountTreeView::startEdit, wizard, &KMyMoneyWizard::selectNextPage);
+
+    connect(d->ui->m_parentAccounts, &KMyMoneyAccountTreeView::requestSelectionChange, this, [&]() {
+        completeStateChanged();
+    });
 }
 
 HierarchyPage::~HierarchyPage()
@@ -142,7 +146,15 @@ MyMoneyAccount HierarchyPage::parentAccount() const
 bool HierarchyPage::isComplete() const
 {
     Q_D(const HierarchyPage);
-    return d->ui->m_parentAccounts->currentIndex().isValid();
+
+    KMyMoneyWizardPage::isComplete();
+
+    const auto selectionModel = d->ui->m_parentAccounts->selectionModel();
+    if (selectionModel && selectionModel->selectedIndexes().isEmpty()) {
+        d->m_wizard->d_func()->m_nextButton->setToolTip(i18nc("@info Missing parent account selection in new account wizard", "No parent account selected"));
+        return false;
+    }
+    return true;
 }
 
 void HierarchyPage::parentAccountChanged()

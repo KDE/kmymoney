@@ -64,7 +64,7 @@ void KAccountsView::slotSettingsChanged()
     d->m_proxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
     d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
     d->m_proxyModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
-    d->m_proxyModel->setHideFavoriteAccounts(true);
+    d->m_proxyModel->setHideFavoriteAccounts(false);
 
     if (KMyMoneySettings::showCategoriesInAccountsView()) {
         d->m_proxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense});
@@ -98,10 +98,9 @@ void KAccountsView::refresh()
     }
     d->m_needsRefresh = false;
 
-    // TODO: check why the invalidate is needed here
-    d->m_proxyModel->invalidate();
     d->m_proxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
     d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+    d->m_proxyModel->setHideFavoriteAccounts(false);
     if (KMyMoneySettings::showCategoriesInAccountsView()) {
         d->m_proxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense});
     } else {
@@ -113,6 +112,7 @@ void KAccountsView::refresh()
     d->m_haveUnusedCategories = false;
     d->ui->m_hiddenCategories->hide();  // hides label
     d->m_proxyModel->setHideUnusedIncomeExpenseAccounts(KMyMoneySettings::hideUnusedCategory());
+    d->m_proxyModel->invalidate();
 }
 
 void KAccountsView::updateActions(const SelectedObjects& selections)
