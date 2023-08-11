@@ -620,6 +620,7 @@ enum Roles {
     JournalSplitPriceSortRole,
     JournalSplitValueSortRole,
     JournalSplitSecurityNameRole,
+    JournalEntryIsFrozenRole,
 
     // Ledger
     LedgerDisplayOrderRole,
