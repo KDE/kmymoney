@@ -427,11 +427,11 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
         } else {
             const auto warnLevel = MyMoneyUtils::transactionWarnLevel(selections.selection(SelectedObjects::JournalEntry));
             pActions[eMenu::Action::EditTransaction]->setEnabled(true);
-            pActions[eMenu::Action::EditSplits]->setEnabled(true);
+            pActions[eMenu::Action::EditSplits]->setEnabled(selections.selection(SelectedObjects::JournalEntry).count() == 1);
             pActions[eMenu::Action::DeleteTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
             pActions[eMenu::Action::DuplicateTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
             pActions[eMenu::Action::AddReversingTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
-            pActions[eMenu::Action::DisplayTransactionDetails]->setDisabled(false);
+            pActions[eMenu::Action::DisplayTransactionDetails]->setEnabled(true);
             pActions[eMenu::Action::CopySplits]->setDisabled(true);
             pActions[eMenu::Action::MoveToToday]->setEnabled(true);
 
