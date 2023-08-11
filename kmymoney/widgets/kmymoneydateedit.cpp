@@ -367,11 +367,12 @@ KMyMoneyDateEdit::KMyMoneyDateEdit(QWidget* parent)
 {
     setOptions(KDateComboBox::EditDate | KDateComboBox::SelectDate | KDateComboBox::DatePicker | KDateComboBox::WarnOnInvalid);
 
-    connect(lineEdit(), &QLineEdit::textChanged, this, [&]() {
+    connect(lineEdit(), &QLineEdit::textChanged, this, [&](const QString& text) {
         const auto newDate(d->fixupDate());
-        if (newDate.isValid() != d->m_dateValidity) {
+        auto newDateIsValid = newDate.isValid() || (d->m_emptyDateAllowed && text.isEmpty());
+        if (newDateIsValid != d->m_dateValidity) {
             Q_EMIT dateValidityChanged(newDate);
-            d->m_dateValidity = newDate.isValid();
+            d->m_dateValidity = newDateIsValid;
         }
     });
 
