@@ -25,10 +25,26 @@ StatusModel::StatusModel(QObject* parent)
     : MyMoneyModel<StatusEntry>(parent, QStringLiteral("ST"), 2, nullptr)
 {
     QMap<QString, StatusEntry> states = {
-        { QStringLiteral("ST01"), StatusEntry(QString(), eMyMoney::Split::State::NotReconciled, QString(), i18nc("Reconciliation state 'Not reconciled'", "Not reconciled")) },
-        { QStringLiteral("ST02"), StatusEntry(QString(), eMyMoney::Split::State::Cleared, i18nc("Reconciliation flag C", "C"), i18nc("Reconciliation state 'Cleared'", "Cleared")) },
-        { QStringLiteral("ST03"), StatusEntry(QString(), eMyMoney::Split::State::Reconciled, i18nc("Reconciliation flag R", "R"), i18nc("Reconciliation state 'Reconciled'", "Reconciled")) },
-        { QStringLiteral("ST04"), StatusEntry(QString(), eMyMoney::Split::State::Frozen, i18nc("Reconciliation flag F", "F"), i18nc("Reconciliation state 'Frozen'", "Frozen")) },
+        {QStringLiteral("ST01"),
+         StatusEntry(QStringLiteral("ST01"),
+                     eMyMoney::Split::State::NotReconciled,
+                     QString(),
+                     i18nc("Reconciliation state 'Not reconciled'", "Not reconciled"))},
+        {QStringLiteral("ST02"),
+         StatusEntry(QStringLiteral("ST02"),
+                     eMyMoney::Split::State::Cleared,
+                     i18nc("Reconciliation flag C", "C"),
+                     i18nc("Reconciliation state 'Cleared'", "Cleared"))},
+        {QStringLiteral("ST03"),
+         StatusEntry(QStringLiteral("ST03"),
+                     eMyMoney::Split::State::Reconciled,
+                     i18nc("Reconciliation flag R", "R"),
+                     i18nc("Reconciliation state 'Reconciled'", "Reconciled"))},
+        {QStringLiteral("ST04"),
+         StatusEntry(QStringLiteral("ST04"),
+                     eMyMoney::Split::State::Frozen,
+                     i18nc("Reconciliation flag F", "F"),
+                     i18nc("Reconciliation state 'Frozen'", "Frozen"))},
     };
     load(states);
 }
@@ -87,6 +103,8 @@ QVariant StatusModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::SplitReconcileStatusRole:
         return statusEntry.longName();
 
+    case eMyMoney::Model::SplitReconcileStateRole:
+        return QVariant::fromValue(statusEntry.state());
     }
     return {};
 }
