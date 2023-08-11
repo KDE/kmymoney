@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-10 00:47+0000\n"
-"PO-Revision-Date: 2023-07-31 06:33+0200\n"
+"PO-Revision-Date: 2023-08-10 06:57+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -9023,22 +9023,19 @@ msgid "%1 and No/%2"
 msgstr "%1 და No/%2"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
-#, fuzzy, kde-format
-#| msgid "Comma (,)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Comma (,)"
 msgstr "მძიმე (,)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
-#, fuzzy, kde-format
-#| msgid "Semicolon (;)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Semicolon (;)"
 msgstr "წერტილმძიმე (;)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:66
-#, fuzzy, kde-format
-#| msgid "Tab (\\t)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
 msgstr "ტაბულაცია (\\t)"
