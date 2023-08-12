@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-10 00:47+0000\n"
+"POT-Creation-Date: 2023-08-12 00:46+0000\n"
 "PO-Revision-Date: 2023-08-06 08:41+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -6343,19 +6343,19 @@ msgstr "Ni mogoče posodobiti cene za %1 (prazen podatek)"
 msgid "Unable to update price for %1 (error encountered: '%2')"
 msgstr "Ni mogoče posodobiti cene za %1 (javljena napaka: '%2')"
 
-#: kmymoney/models/accountsproxymodel.cpp:534
+#: kmymoney/models/accountsproxymodel.cpp:539
 #, kde-format
 msgctxt "Account filter"
 msgid "Any status"
 msgstr "Kakršnokoli stanje"
 
-#: kmymoney/models/accountsproxymodel.cpp:535
+#: kmymoney/models/accountsproxymodel.cpp:540
 #, kde-format
 msgctxt "Account filter"
 msgid "Unused"
 msgstr "Neuporabljeno"
 
-#: kmymoney/models/accountsproxymodel.cpp:536
+#: kmymoney/models/accountsproxymodel.cpp:541
 #, kde-format
 msgctxt "Account filter"
 msgid "Closed"
@@ -6429,7 +6429,7 @@ msgstr "Načrtovano"
 msgid "Not marked"
 msgstr "Ni označeno"
 
-#: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:29
+#: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:37
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:33
 #, kde-format
 msgctxt "Reconciliation state 'Cleared'"
@@ -8288,46 +8288,46 @@ msgctxt "Split header"
 msgid "Deposit"
 msgstr "Depozit"
 
-#: kmymoney/mymoney/statusmodel.cpp:28
+#: kmymoney/mymoney/statusmodel.cpp:32
 #, kde-format
 msgctxt "Reconciliation state 'Not reconciled'"
 msgid "Not reconciled"
 msgstr "Ni usklajeno"
 
-#: kmymoney/mymoney/statusmodel.cpp:29
+#: kmymoney/mymoney/statusmodel.cpp:36
 #: kmymoney/mymoney/storage/journalmodel.cpp:83
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "C"
 msgstr "C"
 
-#: kmymoney/mymoney/statusmodel.cpp:30
+#: kmymoney/mymoney/statusmodel.cpp:41
 #: kmymoney/mymoney/storage/journalmodel.cpp:85
 #, kde-format
 msgctxt "Reconciliation flag R"
 msgid "R"
 msgstr "R"
 
-#: kmymoney/mymoney/statusmodel.cpp:30
+#: kmymoney/mymoney/statusmodel.cpp:42
 #, kde-format
 msgctxt "Reconciliation state 'Reconciled'"
 msgid "Reconciled"
 msgstr "Usklajeno"
 
-#: kmymoney/mymoney/statusmodel.cpp:31
+#: kmymoney/mymoney/statusmodel.cpp:46
 #: kmymoney/mymoney/storage/journalmodel.cpp:87
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "F"
 msgstr "F"
 
-#: kmymoney/mymoney/statusmodel.cpp:31
+#: kmymoney/mymoney/statusmodel.cpp:47
 #, kde-format
 msgctxt "Reconciliation state 'Frozen'"
 msgid "Frozen"
 msgstr "Zamrznjeno"
 
-#: kmymoney/mymoney/statusmodel.cpp:52
+#: kmymoney/mymoney/statusmodel.cpp:68
 #, kde-format
 msgctxt "Reconciliation state"
 msgid "Status"
@@ -21359,8 +21359,8 @@ msgstr "S tem gumbom preskoči to transakcijo"
 msgid "&Close"
 msgstr "Zapri"
 
-#: kmymoney/widgets/kmymoneydateedit.cpp:448
-#: kmymoney/widgets/kmymoneydateedit.cpp:518
+#: kmymoney/widgets/kmymoneydateedit.cpp:449
+#: kmymoney/widgets/kmymoneydateedit.cpp:519
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"
@@ -22898,6 +22898,13 @@ msgstr "Leta"
 #, kde-format
 msgid "Next interest change is due"
 msgstr "Naslednja sprememba obresti je"
+
+#: kmymoney/wizards/newaccountwizard/khierarchypage.cpp:154
+#, fuzzy, kde-format
+#| msgid "No account selected"
+msgctxt "@info Missing parent account selection in new account wizard"
+msgid "No parent account selected"
+msgstr "Ni izbranega računa"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newaccountwizard/khierarchypage.ui:26

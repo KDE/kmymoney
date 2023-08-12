@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-10 00:47+0000\n"
+"POT-Creation-Date: 2023-08-12 00:46+0000\n"
 "PO-Revision-Date: 2014-07-03 09:44+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -6389,14 +6389,14 @@ msgstr "Pries för %1 lett sik nich opfrischen (keen Kursdaten)"
 msgid "Unable to update price for %1 (error encountered: '%2')"
 msgstr "Pries för %1 lett sik nich opfrischen (Pries oder Datum fehlt)."
 
-#: kmymoney/models/accountsproxymodel.cpp:534
+#: kmymoney/models/accountsproxymodel.cpp:539
 #, fuzzy, kde-format
 #| msgid "Any status"
 msgctxt "Account filter"
 msgid "Any status"
 msgstr "All Statussen"
 
-#: kmymoney/models/accountsproxymodel.cpp:535
+#: kmymoney/models/accountsproxymodel.cpp:540
 #, fuzzy, kde-format
 #| msgctxt "@item Show only unused payees"
 #| msgid "Unused"
@@ -6404,7 +6404,7 @@ msgctxt "Account filter"
 msgid "Unused"
 msgstr "Nich bruukt"
 
-#: kmymoney/models/accountsproxymodel.cpp:536
+#: kmymoney/models/accountsproxymodel.cpp:541
 #, fuzzy, kde-format
 #| msgid "Closed"
 msgctxt "Account filter"
@@ -6484,7 +6484,7 @@ msgstr "Plaant"
 msgid "Not marked"
 msgstr "Nich markeert"
 
-#: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:29
+#: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:37
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:33
 #, kde-format
 msgctxt "Reconciliation state 'Cleared'"
@@ -8399,14 +8399,14 @@ msgctxt "Split header"
 msgid "Deposit"
 msgstr "Inbetahlen"
 
-#: kmymoney/mymoney/statusmodel.cpp:28
+#: kmymoney/mymoney/statusmodel.cpp:32
 #, fuzzy, kde-format
 #| msgid "Not reconciled"
 msgctxt "Reconciliation state 'Not reconciled'"
 msgid "Not reconciled"
 msgstr "Nich utgleken"
 
-#: kmymoney/mymoney/statusmodel.cpp:29
+#: kmymoney/mymoney/statusmodel.cpp:36
 #: kmymoney/mymoney/storage/journalmodel.cpp:83
 #, fuzzy, kde-format
 #| msgid "C"
@@ -8414,7 +8414,7 @@ msgctxt "Reconciliation flag C"
 msgid "C"
 msgstr "C"
 
-#: kmymoney/mymoney/statusmodel.cpp:30
+#: kmymoney/mymoney/statusmodel.cpp:41
 #: kmymoney/mymoney/storage/journalmodel.cpp:85
 #, fuzzy, kde-format
 #| msgctxt "Reconcile flag R"
@@ -8423,14 +8423,14 @@ msgctxt "Reconciliation flag R"
 msgid "R"
 msgstr "U"
 
-#: kmymoney/mymoney/statusmodel.cpp:30
+#: kmymoney/mymoney/statusmodel.cpp:42
 #, fuzzy, kde-format
 #| msgid "Reconciled"
 msgctxt "Reconciliation state 'Reconciled'"
 msgid "Reconciled"
 msgstr "Utgleken"
 
-#: kmymoney/mymoney/statusmodel.cpp:31
+#: kmymoney/mymoney/statusmodel.cpp:46
 #: kmymoney/mymoney/storage/journalmodel.cpp:87
 #, fuzzy, kde-format
 #| msgctxt "Reconcile flag F"
@@ -8439,7 +8439,7 @@ msgctxt "Reconciliation flag F"
 msgid "F"
 msgstr "I"
 
-#: kmymoney/mymoney/statusmodel.cpp:31
+#: kmymoney/mymoney/statusmodel.cpp:47
 #, fuzzy, kde-format
 #| msgctxt "Reconcile state 'Frozen'"
 #| msgid "Frozen"
@@ -8447,7 +8447,7 @@ msgctxt "Reconciliation state 'Frozen'"
 msgid "Frozen"
 msgstr "Infroren"
 
-#: kmymoney/mymoney/statusmodel.cpp:52
+#: kmymoney/mymoney/statusmodel.cpp:68
 #, fuzzy, kde-format
 #| msgid "Status"
 msgctxt "Reconciliation state"
@@ -21891,8 +21891,8 @@ msgstr "Mit dissen Knoop lett sik disse Boken övergahn"
 msgid "&Close"
 msgstr "&Tomaken"
 
-#: kmymoney/widgets/kmymoneydateedit.cpp:448
-#: kmymoney/widgets/kmymoneydateedit.cpp:518
+#: kmymoney/widgets/kmymoneydateedit.cpp:449
+#: kmymoney/widgets/kmymoneydateedit.cpp:519
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"
@@ -23346,6 +23346,13 @@ msgstr "Johren"
 #, kde-format
 msgid "Next interest change is due"
 msgstr "Tokamen Tinsännern steiht an"
+
+#: kmymoney/wizards/newaccountwizard/khierarchypage.cpp:154
+#, fuzzy, kde-format
+#| msgid "No account selected"
+msgctxt "@info Missing parent account selection in new account wizard"
+msgid "No parent account selected"
+msgstr "Keen Konto utsöcht"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newaccountwizard/khierarchypage.ui:26

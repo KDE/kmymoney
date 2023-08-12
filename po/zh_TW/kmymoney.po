@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-10 00:47+0000\n"
+"POT-Creation-Date: 2023-08-12 00:46+0000\n"
 "PO-Revision-Date: 2019-01-19 19:46+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -6373,14 +6373,14 @@ msgstr "無法更新 %1 的價格（空白的報價資料）"
 msgid "Unable to update price for %1 (error encountered: '%2')"
 msgstr "無法更新 %1 的價格（沒有價格或沒有日期）"
 
-#: kmymoney/models/accountsproxymodel.cpp:534
+#: kmymoney/models/accountsproxymodel.cpp:539
 #, fuzzy, kde-format
 #| msgid "Any status"
 msgctxt "Account filter"
 msgid "Any status"
 msgstr "任何狀態"
 
-#: kmymoney/models/accountsproxymodel.cpp:535
+#: kmymoney/models/accountsproxymodel.cpp:540
 #, fuzzy, kde-format
 #| msgctxt "Unused column"
 #| msgid "Unused"
@@ -6388,7 +6388,7 @@ msgctxt "Account filter"
 msgid "Unused"
 msgstr "未使用"
 
-#: kmymoney/models/accountsproxymodel.cpp:536
+#: kmymoney/models/accountsproxymodel.cpp:541
 #, fuzzy, kde-format
 #| msgid "Closed"
 msgctxt "Account filter"
@@ -6466,7 +6466,7 @@ msgstr "已排程"
 msgid "Not marked"
 msgstr "未標記"
 
-#: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:29
+#: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:37
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:33
 #, kde-format
 msgctxt "Reconciliation state 'Cleared'"
@@ -8339,46 +8339,46 @@ msgctxt "Split header"
 msgid "Deposit"
 msgstr "存款"
 
-#: kmymoney/mymoney/statusmodel.cpp:28
+#: kmymoney/mymoney/statusmodel.cpp:32
 #, kde-format
 msgctxt "Reconciliation state 'Not reconciled'"
 msgid "Not reconciled"
 msgstr "未對帳"
 
-#: kmymoney/mymoney/statusmodel.cpp:29
+#: kmymoney/mymoney/statusmodel.cpp:36
 #: kmymoney/mymoney/storage/journalmodel.cpp:83
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "C"
 msgstr "C"
 
-#: kmymoney/mymoney/statusmodel.cpp:30
+#: kmymoney/mymoney/statusmodel.cpp:41
 #: kmymoney/mymoney/storage/journalmodel.cpp:85
 #, kde-format
 msgctxt "Reconciliation flag R"
 msgid "R"
 msgstr "R"
 
-#: kmymoney/mymoney/statusmodel.cpp:30
+#: kmymoney/mymoney/statusmodel.cpp:42
 #, kde-format
 msgctxt "Reconciliation state 'Reconciled'"
 msgid "Reconciled"
 msgstr "已對帳"
 
-#: kmymoney/mymoney/statusmodel.cpp:31
+#: kmymoney/mymoney/statusmodel.cpp:46
 #: kmymoney/mymoney/storage/journalmodel.cpp:87
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "F"
 msgstr "F"
 
-#: kmymoney/mymoney/statusmodel.cpp:31
+#: kmymoney/mymoney/statusmodel.cpp:47
 #, kde-format
 msgctxt "Reconciliation state 'Frozen'"
 msgid "Frozen"
 msgstr "已凍結"
 
-#: kmymoney/mymoney/statusmodel.cpp:52
+#: kmymoney/mymoney/statusmodel.cpp:68
 #, fuzzy, kde-format
 #| msgid "Status"
 msgctxt "Reconciliation state"
@@ -21642,8 +21642,8 @@ msgstr "用這個按鍵來跳過交易"
 msgid "&Close"
 msgstr "關閉(&C)"
 
-#: kmymoney/widgets/kmymoneydateedit.cpp:448
-#: kmymoney/widgets/kmymoneydateedit.cpp:518
+#: kmymoney/widgets/kmymoneydateedit.cpp:449
+#: kmymoney/widgets/kmymoneydateedit.cpp:519
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"
@@ -23094,6 +23094,13 @@ msgstr "年"
 #, kde-format
 msgid "Next interest change is due"
 msgstr "下次利息變動日已到"
+
+#: kmymoney/wizards/newaccountwizard/khierarchypage.cpp:154
+#, fuzzy, kde-format
+#| msgid "No account selected"
+msgctxt "@info Missing parent account selection in new account wizard"
+msgid "No parent account selected"
+msgstr "未選取任何帳戶"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newaccountwizard/khierarchypage.ui:26

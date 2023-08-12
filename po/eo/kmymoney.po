@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-10 00:47+0000\n"
-"PO-Revision-Date: 2023-08-06 09:43+0100\n"
+"POT-Creation-Date: 2023-08-12 00:46+0000\n"
+"PO-Revision-Date: 2023-08-11 10:45+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -6306,19 +6306,19 @@ msgstr "Ne eblas ĝisdatigi prezon por %1 (malplenaj citaĵoj)"
 msgid "Unable to update price for %1 (error encountered: '%2')"
 msgstr "Ne eblis ĝisdatigi prezon por %1 (renkontis eraron: '%2')"
 
-#: kmymoney/models/accountsproxymodel.cpp:534
+#: kmymoney/models/accountsproxymodel.cpp:539
 #, kde-format
 msgctxt "Account filter"
 msgid "Any status"
 msgstr "Ajna statuso"
 
-#: kmymoney/models/accountsproxymodel.cpp:535
+#: kmymoney/models/accountsproxymodel.cpp:540
 #, kde-format
 msgctxt "Account filter"
 msgid "Unused"
 msgstr "Neuzata"
 
-#: kmymoney/models/accountsproxymodel.cpp:536
+#: kmymoney/models/accountsproxymodel.cpp:541
 #, kde-format
 msgctxt "Account filter"
 msgid "Closed"
@@ -6392,7 +6392,7 @@ msgstr "Planita"
 msgid "Not marked"
 msgstr "Ne markita"
 
-#: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:29
+#: kmymoney/models/ledgerfilter.cpp:79 kmymoney/mymoney/statusmodel.cpp:37
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:33
 #, kde-format
 msgctxt "Reconciliation state 'Cleared'"
@@ -8241,46 +8241,46 @@ msgctxt "Split header"
 msgid "Deposit"
 msgstr "Deponejo"
 
-#: kmymoney/mymoney/statusmodel.cpp:28
+#: kmymoney/mymoney/statusmodel.cpp:32
 #, kde-format
 msgctxt "Reconciliation state 'Not reconciled'"
 msgid "Not reconciled"
 msgstr "Ne repacigita"
 
-#: kmymoney/mymoney/statusmodel.cpp:29
+#: kmymoney/mymoney/statusmodel.cpp:36
 #: kmymoney/mymoney/storage/journalmodel.cpp:83
 #, kde-format
 msgctxt "Reconciliation flag C"
 msgid "C"
 msgstr "C"
 
-#: kmymoney/mymoney/statusmodel.cpp:30
+#: kmymoney/mymoney/statusmodel.cpp:41
 #: kmymoney/mymoney/storage/journalmodel.cpp:85
 #, kde-format
 msgctxt "Reconciliation flag R"
 msgid "R"
 msgstr "R"
 
-#: kmymoney/mymoney/statusmodel.cpp:30
+#: kmymoney/mymoney/statusmodel.cpp:42
 #, kde-format
 msgctxt "Reconciliation state 'Reconciled'"
 msgid "Reconciled"
 msgstr "Repacigita"
 
-#: kmymoney/mymoney/statusmodel.cpp:31
+#: kmymoney/mymoney/statusmodel.cpp:46
 #: kmymoney/mymoney/storage/journalmodel.cpp:87
 #, kde-format
 msgctxt "Reconciliation flag F"
 msgid "F"
 msgstr "F"
 
-#: kmymoney/mymoney/statusmodel.cpp:31
+#: kmymoney/mymoney/statusmodel.cpp:47
 #, kde-format
 msgctxt "Reconciliation state 'Frozen'"
 msgid "Frozen"
 msgstr "Frostita"
 
-#: kmymoney/mymoney/statusmodel.cpp:52
+#: kmymoney/mymoney/statusmodel.cpp:68
 #, kde-format
 msgctxt "Reconciliation state"
 msgid "Status"
@@ -9359,22 +9359,19 @@ msgid "%1 and No/%2"
 msgstr "%1 kaj Ne/%2"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
-#, fuzzy, kde-format
-#| msgid "Comma (,)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Comma (,)"
 msgstr "Komo (,)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
-#, fuzzy, kde-format
-#| msgid "Semicolon (;)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Semicolon (;)"
 msgstr "Punktokomo (;)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:66
-#, fuzzy, kde-format
-#| msgid "Tab (\\t)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
 msgstr "Tabo (\\t)"
@@ -9418,11 +9415,10 @@ msgid "Use this to select a filename to export to"
 msgstr "Uzu ĉi tion por elekti dosiernomon al kiu eksporti"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:199
-#, fuzzy, kde-format
-#| msgid "  * Parent account '%1' does not contain '%2' as sub-account."
+#, kde-format
 msgctxt "@info Hint in CSV export dialog"
 msgid "Current selected account does not contain any transactions."
-msgstr "  * Gepatra konto '%1' ne enhavas '%2' kiel subkonton."
+msgstr "Aktuale elektita konto ne enhavas iujn transakciojn."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CsvExportDlg)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:14
@@ -21235,8 +21231,8 @@ msgstr "Uzu ĉi tiun butonon por preterlasi ĉi tiun transakcion"
 msgid "&Close"
 msgstr "F&ermi"
 
-#: kmymoney/widgets/kmymoneydateedit.cpp:448
-#: kmymoney/widgets/kmymoneydateedit.cpp:518
+#: kmymoney/widgets/kmymoneydateedit.cpp:449
+#: kmymoney/widgets/kmymoneydateedit.cpp:519
 #, kde-format
 msgctxt "@info"
 msgid "The date you entered is invalid"
@@ -22770,6 +22766,13 @@ msgstr "Jaroj"
 #, kde-format
 msgid "Next interest change is due"
 msgstr "La sekva interezoŝanĝo estas pagenda"
+
+#: kmymoney/wizards/newaccountwizard/khierarchypage.cpp:154
+#, fuzzy, kde-format
+#| msgid "No account selected"
+msgctxt "@info Missing parent account selection in new account wizard"
+msgid "No parent account selected"
+msgstr "Neniu konto elektita"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newaccountwizard/khierarchypage.ui:26
@@ -25036,9 +25039,3 @@ msgstr ""
 "\n"
 "<p>Ĉiuj informoj estas laŭvolaj kaj nur uzataj por personecigi vian KMyMoney-"
 "dosieron.</p>"
-
-#~ msgid "There are no entries in this account.\n"
-#~ msgstr "Ne estas enskriboj en ĉi tiu konto.\n"
-
-#~ msgid "Invalid account"
-#~ msgstr "Nevalida konto"
