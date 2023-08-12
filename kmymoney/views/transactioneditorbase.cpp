@@ -166,3 +166,19 @@ void TransactionEditorBase::setVisible(bool visible)
         d->focusFrame->setVisible(visible);
     }
 }
+
+void TransactionEditorBase::setAmountPlaceHolderText(const QAbstractItemModel* model)
+{
+    Q_UNUSED(model)
+}
+
+bool TransactionEditorBase::setSelectedJournalEntryIds(const QStringList& selectedJournalEntryIds)
+{
+    Q_UNUSED(selectedJournalEntryIds)
+    return true;
+}
+
+QString TransactionEditorBase::errorMessage() const
+{
+    return {};
+}

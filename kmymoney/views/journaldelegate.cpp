@@ -18,8 +18,9 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
 #include <KColorScheme>
+#include <KLocalizedString>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -30,6 +31,7 @@
 #include "journalmodel.h"
 #include "ledgerview.h"
 #include "ledgerviewsettings.h"
+#include "multitransactioneditor.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneyutils.h"
@@ -319,18 +321,24 @@ void JournalDelegate::setShowPayeeInDetailColumn(bool show)
 QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
     Q_UNUSED(option);
+    QString errorMessage;
 
     if(index.isValid()) {
+        d->m_editor = nullptr;
         if(d->m_view->selectionModel()->selectedRows().count() > 1) {
-            qDebug() << "Editing multiple transactions at once is not yet supported";
-
-            /**
-             * @todo replace the following three lines with the creation of a special
-             * editor that can handle multiple transactions at once
-             */
-            d->m_editor = nullptr;
-            JournalDelegate* that = const_cast<JournalDelegate*>(this);
-            Q_EMIT that->closeEditor(d->m_editor, NoHint);
+            auto accountId = d->m_view->accountId();
+            if (!accountId.isEmpty()) {
+                const auto acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
+                if (acc.accountType() == eMyMoney::Account::Type::Investment) {
+                    d->m_editor = nullptr;
+                } else {
+                    d->m_editor = new MultiTransactionEditor(parent, accountId);
+                }
+            } else {
+                errorMessage =
+                    i18nc("@info Editing multiple transactions", "The current implementation cannot modify multiple transactions in different accounts.");
+                // Message that multiple edit is only available in ledger (within a single account)
+            }
 
         } else {
             auto accountId = index.data(eMyMoney::Model::SplitAccountIdRole).toString();
@@ -358,6 +366,12 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
                         d->m_editor = new NewTransactionEditor(parent, accountId);
                     }
                 }
+            }
+        }
+
+        // in case we have an editor, we check that it can perform the action
+        if (d->m_editor) {
+            if (d->m_editor->setSelectedJournalEntryIds(d->m_view->selectedJournalEntryIds())) {
                 d->m_editor->setAmountPlaceHolderText(index.model());
                 d->m_editorWidthOfs = 8;
                 if(d->m_view) {
@@ -365,16 +379,16 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
                         d->m_editorWidthOfs += d->m_view->verticalScrollBar()->width();
                     }
                 }
-
             } else {
-                qDebug() << "Unable to determine account for editing";
-
+                // if not get error message and display it and delete the editor again
+                /// @todo add error message handling here
+                errorMessage = d->m_editor->errorMessage();
+                delete d->m_editor;
                 d->m_editor = nullptr;
-                JournalDelegate* that = const_cast<JournalDelegate*>(this);
-                Q_EMIT that->closeEditor(d->m_editor, NoHint);
             }
         }
 
+        // if we still have an editor here,
         if(d->m_editor) {
             d->m_editorRow = index.row();
             connect(d->m_editor, &TransactionEditorBase::done, this, &JournalDelegate::endEdit);
@@ -385,6 +399,13 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
             const auto journalEntryId = index.data(eMyMoney::Model::IdRole).toString();
             const auto warnLevel = MyMoneyUtils::transactionWarnLevel(journalEntryId);
             d->m_editor->setReadOnly(warnLevel >= OneSplitFrozen);
+
+        } else {
+            if (!errorMessage.isEmpty()) {
+                KMessageBox::information(0, errorMessage);
+            }
+            JournalDelegate* that = const_cast<JournalDelegate*>(this);
+            Q_EMIT that->closeEditor(d->m_editor, NoHint);
         }
 
     } else {
