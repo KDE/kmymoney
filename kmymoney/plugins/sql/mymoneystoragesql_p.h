@@ -1280,9 +1280,7 @@ public:
             sharesList << s.shares().toString();
             MyMoneyAccount acc = m_storage->account(s.accountId());
             MyMoneySecurity sec = m_storage->security(acc.currencyId());
-            sharesFormattedList << s.price().
-                                formatMoney("", MyMoneyMoney::denomToPrec(sec.smallestAccountFraction()), false).
-                                replace(QChar(','), QChar('.'));
+            sharesFormattedList << s.shares().formatMoney("", MyMoneyMoney::denomToPrec(sec.smallestAccountFraction()), false).replace(QChar(','), QChar('.'));
             MyMoneyMoney price = s.actualPrice();
             if (!price.isZero()) {
                 priceList << price.toString();
