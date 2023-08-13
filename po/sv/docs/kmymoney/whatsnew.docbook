@@ -14,10 +14,10 @@
 >Felrättningar och förbättringar av funktionalitet</title>
 
 <para
->Liksom vid varje utgåva, har &kmymoney;s utvecklingsgrupp arbetat hårt för att göra den hör utgåvan bättre och enklare att använda på alla sätt. Det här är fjärde utgåvan i 5.0-serien, och de flesta aktiviteterna har varit inriktade på att rätta fel. </para>
+>Liksom vid varje utgåva, har &kmymoney;s utvecklingsgrupp fortsatt arbeta hårt för att göra varje utgåva bättre och enklare att använda på alla sätt. Det här är tredje utgåvan i 5.1-serien, och de flesta aktiviteterna har varit inriktade på att rätta fel. </para>
 
 <para
->Vid denna tidpunkt är konverteringen till att använda KDE Ramverk i stort sett färdig, även om det och arbetet för att uppdatera många av de underliggande biblioteken som används av programmet är bakom kulisserna, och inte direkt synligt för slutanvändaren. Det allmänna utseendet och känslan bör vara stabila, även om några mindre ändringar fortfarande kan ske. Programmets grundläggande funktionalitet förblir också densamma, förutom avsiktliga förbättringar och tillägg. </para>
+>Från och med 5.1 är konverteringen till att använda &kde; Ramverk i stort sett färdig, även om det och arbetet för att uppdatera många av de underliggande biblioteken som används av programmet är bakom kulisserna, och inte direkt synligt för slutanvändaren. Det allmänna utseendet och känslan bör vara stabila, även om några mindre ändringar fortfarande kan ske. Programmets grundläggande funktionalitet förblir också densamma, förutom avsiktliga förbättringar och tillägg. </para>
 
 <para
 >I tidigare utgåvor har den här sidan i handboken inkluderat en lista med många av de specifika felrättningarna och funktionsförbättringarna. Istället för att duplicera informationen, hittar du den direkt i <ulink url="https://kmymoney.org/changelog.html"
@@ -25,12 +25,12 @@
 >. </para>
 
 <para
->Sedan 5.0 gavs ut har några ändringar skett som kräver justeringar från användarens sida vid uppgradering från 4.8.x eller äldre version </para>
+>Sedan 5.0 gavs ut har några ändringar skett som kräver justeringar från användarens sida vid uppgradering från 4.8.x eller äldre version. Dock förväntar vi oss att de flesta användare har konverterat till 5.x vid det här laget. </para>
 
 <itemizedlist>
   <listitem
 ><para
->Programmet söker efter mallarna för checkutskriftsinsticksprogrammet på olika ställen. Användaren måste ta hänsyn till det i insticksprogrammets inställningsdialogruta. Se <link linkend="details.settings.plugins"
+>Sedan en tid tillbaka, söker programmet efter mallarna för checkutskriftsinsticksprogrammet på olika ställen än tidigare. Om det fortfarande är ett problem för dig, måste du ta hänsyn till det i inställningsdialogrutan för insticksprogram. Se <link linkend="details.settings.plugins"
 >följande avsnitt för mer detaljerad information</link
 >. </para
 ></listitem>
@@ -45,7 +45,7 @@
 >Medan vi håller på, finns fortfarande kapitel i handboken som inte har uppdaterats för att motsvara ändringarna i programmet som är synliga för användaren från 5.0. Varje kapitel identifierar den utgåva av &kmymoney; då det senast uppdaterades, men vi presenterar en fullständig lista här som snabbreferens. </para>
 
 <para
->Observera dock att i vilken utsträckning de kapitel som inte har uppdaterats motsvarar eller inte motsvarar programmets nuvarande funktion beror på hur mycket det området av programmet har ändrats mellan utgåva 4.8 och 5.0. </para>
+>Observera dock att i vilken utsträckning de kapitel som inte har uppdaterats motsvarar eller inte motsvarar programmets nuvarande funktion beror på hur mycket det området av programmet har ändrats mellan utgåva 4.8, 5.0 och 5.1. </para>
   
 <informaltable frame="none">
   <tgroup cols="2">
@@ -118,6 +118,10 @@
 >Inställningar</link
 ></member>
 	    <member
+><link linkend="faq"
+>Frågor och svar</link
+></member>
+	    <member
 ><link linkend="reference.menus"
 >Referens: Menyer</link
 ></member>
@@ -168,10 +172,6 @@
 	    <member
 ><link linkend="details.database"
 >Databas</link
-></member>
-	    <member
-><link linkend="faq"
->Frågor och svar</link
 ></member>
 	    <member
 ><link linkend="reference.widgets"

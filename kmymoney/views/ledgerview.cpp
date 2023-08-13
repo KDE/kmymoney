@@ -682,31 +682,42 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
         if(rc) {
             // editing started, but we need the editor to cover all columns
             // so we close it, set the span to have a single row and recreate
-            // the editor in that single cell
+            // the editor in that single cell in case an editor was created at all.
+            //
+            // we double check the presence of the editor, because the delegate
+            // may not have created one but QTableView::edit() nevertheless
+            // returns true in case it was called with trigger set to
+            // QAbstractItemView::AllEditTriggers.
+            d->editor = qobject_cast<TransactionEditorBase*>(indexWidget(index));
             closeEditor(indexWidget(index), QAbstractItemDelegate::NoHint);
 
-            d->registerGlobalEditor(index);
-            d->infoMessage->animatedHide();
+            // in case the editor was created, we continue to start it. if not
+            // the journal delegate took care of stopping editing again by
+            // sending signals
+            if (d->editor) {
+                d->registerGlobalEditor(index);
+                d->infoMessage->animatedHide();
 
-            Q_EMIT aboutToStartEdit();
-            setSpan(index.row(), 0, 1, horizontalHeader()->count());
-            d->editIndex = model()->index(index.row(), 0);
+                Q_EMIT aboutToStartEdit();
+                setSpan(index.row(), 0, 1, horizontalHeader()->count());
+                d->editIndex = model()->index(index.row(), 0);
 
-            rc = QTableView::edit(d->editIndex, trigger, event);
+                rc = QTableView::edit(d->editIndex, trigger, event);
 
-            // make sure that the row gets resized according to the requirements of the editor
-            // and is completely visible
-            d->editor = qobject_cast<TransactionEditorBase*>(indexWidget(d->editIndex));
-            connect(d->editor, &TransactionEditorBase::editorLayoutChanged, this, &LedgerView::resizeEditorRow);
-            connect(this, &LedgerView::settingsChanged, d->editor, &TransactionEditorBase::slotSettingsChanged);
+                // make sure that the row gets resized according to the requirements of the editor
+                // and is completely visible
+                d->editor = qobject_cast<TransactionEditorBase*>(indexWidget(d->editIndex));
+                connect(d->editor, &TransactionEditorBase::editorLayoutChanged, this, &LedgerView::resizeEditorRow);
+                connect(this, &LedgerView::settingsChanged, d->editor, &TransactionEditorBase::slotSettingsChanged);
 
-            // make sure to unregister the editor in case it is destroyed
-            connect(d->editor, &TransactionEditorBase::destroyed, this, [&]() {
-                d->unregisterGlobalEditor();
-                d->editor = nullptr;
-            });
+                // make sure to unregister the editor in case it is destroyed
+                connect(d->editor, &TransactionEditorBase::destroyed, this, [&]() {
+                    d->unregisterGlobalEditor();
+                    d->editor = nullptr;
+                });
 
-            resizeEditorRow();
+                resizeEditorRow();
+            }
         }
         return rc;
     }

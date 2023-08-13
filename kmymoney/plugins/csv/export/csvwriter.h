@@ -132,8 +132,9 @@ private:
 
     bool m_noError;
 
-    QString format(const QString &s, bool withSeparator = true);
-    QString format(const MyMoneyMoney &value, int prec = 2, bool withSeparator = true);
+    QString format(const QString& s, bool withSeparator = true) const;
+    QString format(const MyMoneyMoney& value, int prec = 2, bool withSeparator = true) const;
+    QString format(const MyMoneyMoney& value, const QString& accountId, bool withSeparator = true) const;
 };
 
 #endif

@@ -748,6 +748,15 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         }
         return {};
 
+    case eMyMoney::Model::JournalEntryIsFrozenRole: {
+        for (const auto& sp : transaction.splits()) {
+            if (sp.reconcileFlag() == eMyMoney::Split::State::Frozen) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     case eMyMoney::Model::SplitActionRole:
         return split.action();
 

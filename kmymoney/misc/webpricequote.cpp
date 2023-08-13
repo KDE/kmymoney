@@ -576,16 +576,17 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
     // Use fx-rate.net as the standard currency exchange rate source until
     // we have the capability to use more than one source. Use a neutral
     // name for the source.
+    // Update on 2023-08-07: https://discuss.kde.org/t/kmoney-currency-udpates-not-working/3037/3?u=ipwizard
     result["KMyMoney Currency"] = WebPriceQuoteSource("KMyMoney Currency",
-                                  "https://fx-rate.net/%1/%2",
-                                  QString(),
-                                  "https://fx-rate.net/([^/]+/[^/]+)",
-                                  WebPriceQuoteSource::identifyBy::Symbol,
-                                  "1\\s[^=]+\\s=</span><br\\s/>\\s([^\\s]+)",
-                                  "updated\\s\\d+:\\d+:\\d+\\(\\w+\\)\\s+(\\d{1,2}/\\d{2}/\\d{4})",
-                                  "%d/%m/%y",
-                                  true // skip HTML stripping
-                                                     );
+                                                      "https://fx-rate.net/%1/%2",
+                                                      QString(),
+                                                      "https://fx-rate.net/([^/]+/[^/]+)",
+                                                      WebPriceQuoteSource::identifyBy::Symbol,
+                                                      "Today\\s+=\\s+([^<]+)",
+                                                      "updated\\s\\d+:\\d+:\\d+\\(\\w+\\)\\s+(\\d{1,2}/\\d{2}/\\d{4})",
+                                                      "%d/%m/%y",
+                                                      true // skip HTML stripping
+    );
 
     // Update on 2017-06 by Łukasz Wojniłowicz
     result["Globe & Mail"] = WebPriceQuoteSource("Globe & Mail",

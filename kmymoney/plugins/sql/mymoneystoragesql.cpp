@@ -2381,10 +2381,9 @@ QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QStringLi
         if (!sq.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading schedule payment history")); // krazy:exclude=crashy
         while (sq.next()) s.recordPayment(sq.value(0).toDate());
 
-        sList[s.id()] = s;
+        s.setPairs(d->readKeyValuePairs("SCHEDULE", s.id()).pairs());
 
-        //FIXME: enable when schedules have KVPs.
-        //  s.setPairs(readKeyValuePairs("SCHEDULE", s.id()).pairs());
+        sList[s.id()] = s;
 
         //ulong id = MyMoneyUtils::extractId(s.id().data());
         //if(id > lastId)

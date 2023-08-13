@@ -22,6 +22,7 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
+#include "accountsmodel.h"
 #include "csvexportdlg.h"
 #include "csvexporter.h"
 #include "mymoneyaccount.h"
@@ -34,6 +35,7 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
+#include "securitiesmodel.h"
 
 CsvWriter::CsvWriter() :
     m_plugin(0),
@@ -95,9 +97,13 @@ void CsvWriter::writeAccountEntry(QTextStream& stream, const QString& accountId,
 
     QString type = account.accountTypeToString(account.accountType());
     data = i18n("Account Type:");
+    data += QString("%1").arg(type);
+    data += m_separator;
+
+    data += i18n("Account Name:");
+    data += QString("%1\n\n").arg(account.name());
 
     if (account.accountType() == eMyMoney::Account::Type::Investment) {
-        data += QString("%1\n\n").arg(type);
         m_headerLine << i18nc("@title:column header in CSV export", "Date") << i18nc("@title:column header in CSV export", "Security")
                      << i18nc("@title:column header in CSV export", "Symbol") << i18nc("@title:column header in CSV export", "Action/Type")
                      << i18nc("@title:column header in CSV export", "Amount") << i18nc("@title:column header in CSV export", "Quantity")
@@ -107,7 +113,6 @@ void CsvWriter::writeAccountEntry(QTextStream& stream, const QString& accountId,
         data += m_headerLine.join(m_separator);
         extractInvestmentEntries(accountId, startDate, endDate);
     } else {
-        data += QString("%1\n\n").arg(type);
         m_headerLine << i18nc("@title:column header in CSV export", "Date") << i18nc("@title:column header in CSV export", "Payee")
                      << i18nc("@title:column header in CSV export", "Amount") << i18nc("@title:column header in CSV export", "Account/Cat")
                      << i18nc("@title:column header in CSV export", "Memo") << i18nc("@title:column header in CSV export", "Status")
@@ -193,7 +198,7 @@ void CsvWriter::writeTransactionEntry(const MyMoneyTransaction& t, const QString
     MyMoneyPayee payee = file->payee(split.payeeId());
     str += format(payee.name());
 
-    str += format(split.value());
+    str += format(split.value(), split.accountId());
 
     if (splits.count() > 1) {
         MyMoneySplit sp = t.splitByAccount(accountId, false);
@@ -248,7 +253,7 @@ void CsvWriter::writeSplitEntry(QString &str, const MyMoneySplit& split, const i
     }
     str += format(split.memo());
 
-    str += format(split.value(), 2, !lastEntry);
+    str += format(split.value(), split.accountId(), !lastEntry);
 }
 
 void CsvWriter::extractInvestmentEntries(const QString& accountId, const QDate& startDate, const QDate& endDate)
@@ -329,21 +334,21 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
             chkAccntId = (*itSplit).accountId();
             chkAccnt = file->account(chkAccntId).name();
             strCheckingAccountName = format(file->accountToCategory(chkAccntId));
-            strAmount = format((*itSplit).value());
+            strAmount = format((*itSplit).value(), (*itSplit).accountId());
         } else if (acc.accountType() == eMyMoney::Account::Type::Income) {
             //
             //  eMyMoney::Account::Type::Income.
             //
             qty = (*itSplit).shares();
             value = (*itSplit).value();
-            strInterest = format(value);
+            strInterest = format(value, (*itSplit).accountId());
         } else if (acc.accountType() == eMyMoney::Account::Type::Expense) {
             //
             //  eMyMoney::Account::Type::Expense.
             //
             qty = (*itSplit).shares();
             value = (*itSplit).value();
-            strFees = format(value);
+            strFees = format(value, (*itSplit).accountId());
         }  else if (acc.accountType() == eMyMoney::Account::Type::Stock) {
             //
             //  eMyMoney::Account::Type::Stock.
@@ -380,11 +385,15 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
                 }
             } else if ((*itSplit).action() == QLatin1String("Reinvest")) {
                 qty = (*itSplit).shares();
-                strAmount = format((*itSplit).value());
+                strAmount = format((*itSplit).value(), (*itSplit).accountId());
                 strAction = QLatin1String("ReinvDiv");
             } else {
                 strAction = (*itSplit).action();
             }
+
+            strAccName = format(acc.name());
+            security = file->security(acc.currencyId());
+            strAccSymbol = format(security.tradingSymbol());
             //
             //  Add action.
             //
@@ -394,19 +403,17 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
                 // TODO: value is not used below
                 if (strAction == QLatin1String("Sell")) {
                     value = -value;
+                    qty = -qty;
                 }
                 //
                 //  Add price.
                 //
-                strPrice = format((*itSplit).price(), 6);
+                strPrice = format((*itSplit).price(), security.pricePrecision());
                 if (!qty.isZero()) {
                     //
                     //  Add quantity.
                     //
-                    if (strAction == QLatin1String("Sell")) {
-                        qty = -qty;
-                    }
-                    strQuantity = format(qty);
+                    strQuantity = format(qty, security.smallestAccountFraction());
                 }
             } else if ((strAction == QLatin1String("Shrsin")) || (strAction == QLatin1String("Shrsout"))) {
                 //
@@ -415,11 +422,8 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
                 if (strAction == QLatin1String("Shrsout")) {
                     qty = -qty;
                 }
-                strQuantity = format(qty);
+                strQuantity = format(qty, security.smallestAccountFraction());
             }
-            strAccName = format(acc.name());
-            security = file->security(acc.currencyId());
-            strAccSymbol = format(security.tradingSymbol());
             strAction += m_separator;
         }
 
@@ -453,7 +457,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
  * @param withSeparator append field separator to string (default = true)
  * @return csv formatted string
  */
-QString CsvWriter::format(const QString &s, bool withSeparator)
+QString CsvWriter::format(const QString& s, bool withSeparator) const
 {
     if (s.isEmpty())
         return withSeparator ? m_separator : QString();
@@ -470,7 +474,13 @@ QString CsvWriter::format(const QString &s, bool withSeparator)
  * @param withSeparator append field separator to string (default = true)
  * @return formatted value as string
  */
-QString CsvWriter::format(const MyMoneyMoney &value, int prec, bool withSeparator)
+QString CsvWriter::format(const MyMoneyMoney& value, int prec, bool withSeparator) const
 {
     return QString("\"%1\"%2").arg(value.formatMoney("", prec, false), withSeparator ? m_separator : QString());
+}
+
+QString CsvWriter::format(const MyMoneyMoney& value, const QString& accountId, bool withSeparator) const
+{
+    const auto account = MyMoneyFile::instance()->account(accountId);
+    return format(value, MyMoneyMoney::denomToPrec(account.fraction()), withSeparator);
 }

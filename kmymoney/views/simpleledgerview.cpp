@@ -463,9 +463,14 @@ SimpleLedgerView::SimpleLedgerView(QWidget *parent) :
         Q_ASSERT(topLeft.parent() == bottomRight.parent());
         for (int row = topLeft.row(); row <= bottomRight.row(); ++row) {
             const auto idx = MyMoneyFile::instance()->accountsModel()->index(row, 0, topLeft.parent());
-            auto accountId = idx.data(eMyMoney::Model::IdRole).toString();
-            const auto tab = d->tabIdByAccountId(accountId);
-            if (tab != -1) {
+            const auto modifiedAccountId = idx.data(eMyMoney::Model::IdRole).toString();
+            auto tabAccountId = modifiedAccountId;
+            const auto tab = d->tabIdByAccountId(tabAccountId);
+            // d->tabIdByAccountId() may return the tab for the parent in case
+            // a stock account was changed. In this case it also updates
+            // tabAccountId to contain the id of the parent account. We only
+            // update the name if the parent was changed directly.
+            if (tab != -1 && (tabAccountId == modifiedAccountId)) {
                 d->ui->ledgerTab->setTabText(tab, idx.data(eMyMoney::Model::AccountNameRole).toString());
             }
         }

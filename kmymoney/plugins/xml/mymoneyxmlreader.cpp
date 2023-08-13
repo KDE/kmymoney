@@ -808,6 +808,10 @@ public:
                 }
                 m_reader->skipCurrentElement();
 
+            } else if (tag == nodeName(Node::KeyValuePairs)) {
+                readKeyValueContainer();
+                m_schedule.setPairs(m_kvp.pairs());
+
             } else {
                 m_reader->skipCurrentElement();
             }

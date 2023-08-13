@@ -653,9 +653,7 @@ public:
                 int cnt =
                     (*it).transactionsRemainingUntil(QDate::currentDate().addDays(-1));
 
-                m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
-                showPaymentEntry(*it, cnt);
-                m_html += "</tr>";
+                i = showPaymentEntry(*it, i, cnt);
             }
             m_html += "</table></td></tr>";
         }
@@ -711,9 +709,7 @@ public:
 
                 int i = 0;
                 for (t_it = todays.begin(); t_it != todays.end(); ++t_it) {
-                    m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
-                    showPaymentEntry(*t_it);
-                    m_html += "</tr>";
+                    i = showPaymentEntry(*t_it, i);
                 }
                 m_html += "</table></td></tr>";
             }
@@ -784,9 +780,7 @@ public:
                     if (!(*it).isOverdue()) {
                         if (cnt > 0)
                             --cnt;
-                        m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
-                        showPaymentEntry(*it);
-                        m_html += "</tr>";
+                        i = showPaymentEntry(*it, i);
 
                         // for single occurrence we have reported everything so we
                         // better get out of here.
@@ -825,67 +819,89 @@ public:
         m_html += "</table>";
     }
 
-    void showPaymentEntry(const MyMoneySchedule& sched, int cnt = 1)
+    int showPaymentEntry(const MyMoneySchedule& sched, int index, int cnt = 1)
     {
-        QString tmp;
         MyMoneyFile* file = MyMoneyFile::instance();
 
         try {
-            MyMoneyAccount acc = sched.account();
-            if (!acc.id().isEmpty()) {
+            MyMoneyAccount mainAccount = sched.account();
+            if (!mainAccount.id().isEmpty()) {
                 MyMoneyTransaction t = sched.transaction();
                 // only show the entry, if it is still active
                 if (!sched.isFinished()) {
-                    MyMoneySplit sp = t.splitByAccount(acc.id(), true);
+                    // walk over splits in two rounds: the first takes
+                    // care of the main split and the second of all
+                    // others
+                    bool processMainSplit(true);
+                    do {
+                        for (const auto& sp : t.splits()) {
+                            if (processMainSplit == (sp.accountId() == mainAccount.id())) {
+                                const auto account = file->account(sp.accountId());
+                                if (account.isAssetLiability()) {
+                                    QString tmp = QString("<tr class=\"row-%1\">").arg(index++ & 0x01 ? "even" : "odd");
 
-                    //show payment date
-                    tmp = QString("<td class=\"nowrap\">") + MyMoneyUtils::formatDate(sched.adjustedNextDueDate()) + "</td><td class=\"center\">";
+                                    // show payment date
+                                    tmp +=
+                                        QString("<td class=\"nowrap\">") + MyMoneyUtils::formatDate(sched.adjustedNextDueDate()) + "</td><td class=\"center\">";
 
-                    // show Enter Next and Skip Next buttons
-                    if (!pathEnterIcon.isEmpty())
-                        tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=enter").arg(sched.id()), i18n("Enter schedule"))
-                            + QString("<img src=\"%1\" border=\"0\" style=\"height:%2px;\" ></a>").arg(pathEnterIcon).arg(adjustedIconSize) + linkend();
-                    tmp += "</td><td class=\"center\">";
-                    if (!pathSkipIcon.isEmpty())
-                        tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=skip").arg(sched.id()), i18n("Skip schedule"))
-                            + QString("<img src=\"%1\" border=\"0\" style=\"height:%2px;\"></a>").arg(pathSkipIcon).arg(adjustedIconSize) + linkend();
-                    tmp += "</td><td>";
+                                    // show Enter Next and Skip Next buttons
+                                    if (!pathEnterIcon.isEmpty())
+                                        tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=enter").arg(sched.id()), i18n("Enter schedule"))
+                                            + QString("<img src=\"%1\" border=\"0\" style=\"height:%2px;\" ></a>").arg(pathEnterIcon).arg(adjustedIconSize)
+                                            + linkend();
+                                    tmp += "</td><td class=\"center\">";
+                                    if (!pathSkipIcon.isEmpty())
+                                        tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=skip").arg(sched.id()), i18n("Skip schedule"))
+                                            + QString("<img src=\"%1\" border=\"0\" style=\"height:%2px;\"></a>").arg(pathSkipIcon).arg(adjustedIconSize)
+                                            + linkend();
+                                    tmp += "</td><td>";
 
-                    tmp += link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=edit").arg(sched.id()), i18n("Edit schedule")) + sched.name() + linkend();
+                                    tmp +=
+                                        link(VIEW_SCHEDULE, QString("?id=%1&amp;mode=edit").arg(sched.id()), i18n("Edit schedule")) + sched.name() + linkend();
 
-                    //show quantity of payments overdue if any
-                    if (cnt > 1)
-                        tmp += i18np(" (%1 payment)", " (%1 payments)", cnt);
+                                    // show quantity of payments overdue if any
+                                    if (cnt > 1)
+                                        tmp += i18np(" (%1 payment)", " (%1 payments)", cnt);
 
-                    //show account of the main split
-                    tmp += "</td><td>";
-                    tmp += QString(file->account(acc.id()).name());
+                                    // show account of the main split
+                                    tmp += "</td><td>";
+                                    tmp += link(VIEW_LEDGER, QString("?id=%1").arg(account.id())) + account.name() + linkend();
 
-                    //show amount of the schedule
-                    tmp += "</td><td class=\"right nowrap\">";
+                                    // show amount of the schedule
+                                    tmp += "</td><td class=\"right nowrap\">";
 
-                    const MyMoneySecurity& currency = MyMoneyFile::instance()->currency(acc.currencyId());
-                    MyMoneyMoney payment = MyMoneyMoney(sp.value(t.commodity(), acc.currencyId()) * cnt);
-                    QString amount = MyMoneyUtils::formatMoney(payment, acc, currency);
-                    amount.replace(QChar(' '), "&nbsp;");
-                    tmp += showColoredAmount(amount, payment.isNegative());
-                    tmp += "</td>";
-                    //show balance after payments
-                    tmp += "<td class=\"right nowrap\">";
-                    QDate paymentDate = QDate(sched.adjustedNextDueDate());
-                    MyMoneyMoney balanceAfter = forecastPaymentBalance(acc, payment, paymentDate);
-                    QString balance = MyMoneyUtils::formatMoney(balanceAfter, acc, currency);
-                    balance.replace(QChar(' '), "&nbsp;");
-                    tmp += showColoredAmount(balance, balanceAfter.isNegative());
-                    tmp += "</td>";
+                                    const MyMoneySecurity& currency = MyMoneyFile::instance()->currency(account.currencyId());
+                                    MyMoneyMoney payment = MyMoneyMoney(sp.value(t.commodity(), account.currencyId()) * cnt);
+                                    QString amount = MyMoneyUtils::formatMoney(payment, account, currency);
+                                    amount.replace(QChar(' '), "&nbsp;");
+                                    tmp += showColoredAmount(amount, payment.isNegative());
+                                    tmp += "</td>";
+                                    // show balance after payments
+                                    tmp += "<td class=\"right nowrap\">";
+                                    QDate paymentDate = QDate(sched.adjustedNextDueDate());
+                                    MyMoneyMoney balanceAfter = forecastPaymentBalance(account, payment, paymentDate);
+                                    QString balance = MyMoneyUtils::formatMoney(balanceAfter, account, currency);
+                                    balance.replace(QChar(' '), "&nbsp;");
+                                    tmp += showColoredAmount(balance, balanceAfter.isNegative());
+                                    tmp += "</td></tr>";
 
-                    // qDebug("paymentEntry = '%s'", tmp.toLatin1());
-                    m_html += tmp;
+                                    // qDebug("paymentEntry = '%s'", tmp.toLatin1());
+                                    m_html += tmp;
+                                }
+                            }
+                        }
+                        if (processMainSplit) {
+                            processMainSplit = false;
+                            continue;
+                        }
+                        break;
+                    } while (true);
                 }
             }
         } catch (const MyMoneyException &e) {
             qDebug("Unable to display schedule entry: %s", e.what());
         }
+        return index;
     }
 
     void showAccounts(paymentTypeE type, const QString& header)

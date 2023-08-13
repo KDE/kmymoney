@@ -374,8 +374,10 @@ public:
             qDebug("exception in init for account dialog: %s", e.what());
         }
 
-        if (m_account.isInvest())
-            ui->m_parentAccounts->setEnabled(false);
+        // if it is an investment type account only allow to re-parent to other investment
+        if (m_account.isInvest()) {
+            m_filterProxyModel->setSelectableAccountTypes(QSet<eMyMoney::Account::Type>{eMyMoney::Account::Type::Investment});
+        }
 
         if (!m_categoryEditor)
             q->slotLoadInstitutions(institutionName);

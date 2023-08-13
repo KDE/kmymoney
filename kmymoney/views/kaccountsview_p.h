@@ -239,6 +239,8 @@ public:
                     balanceTransactionChanges |= (!tid.isEmpty() && !bal.isZero() && ((s0.shares() != bal) || (t.postDate() != account.openingDate())));
                     // do we create the transaction?
                     balanceTransactionChanges |= (tid.isEmpty() && !bal.isZero());
+                    // or do we reparent the account
+                    balanceTransactionChanges |= (account.parentAccountId() != parent.id());
 
                     MyMoneyFileTransaction ft(i18nc("Undo action description", "Edit account"), balanceTransactionChanges);
 

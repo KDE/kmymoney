@@ -11,6 +11,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QSet>
 class QComboBox;
 
 // ----------------------------------------------------------------------------
@@ -55,6 +56,7 @@ public:
     bool m_hideFavoriteAccounts;
     bool m_hideAllEntries;
     bool m_canSelectClosedAccounts;
+    QSet<eMyMoney::Account::Type> m_selectableAccountTypes;
     AccountsProxyModel::State m_state;
 };
 

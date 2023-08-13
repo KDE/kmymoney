@@ -33,10 +33,24 @@ public:
     virtual bool accepted() const = 0;
     virtual void loadTransaction(const QModelIndex& index) = 0;
     virtual QStringList saveTransaction(const QStringList& selectedJournalEntries) = 0;
-    virtual void setAmountPlaceHolderText(const QAbstractItemModel* model)
-    {
-        Q_UNUSED(model)
-    }
+    virtual void setAmountPlaceHolderText(const QAbstractItemModel* model);
+
+    /**
+     * Inform the editor about the selected journal entries so that
+     * it can check if the editor can handle the selection.
+     * The default implementation does nothing and returns @c true.
+     *
+     * In case it cannot handle the selection, the method returns
+     * @c false, the errorMessage() should return the reason why it
+     * cannot do so.
+     */
+    virtual bool setSelectedJournalEntryIds(const QStringList& selectedJournalEntryIds);
+
+    /**
+     * Returns the reason in case setSelectedJournalEntryIds() returned
+     * with @c false. The default implementation returns an empty string.
+     */
+    virtual QString errorMessage() const;
 
     virtual void setReadOnly(bool readOnly);
     bool isReadOnly() const;

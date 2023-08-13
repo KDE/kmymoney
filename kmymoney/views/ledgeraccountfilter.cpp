@@ -106,6 +106,15 @@ void LedgerAccountFilter::setAccount(const MyMoneyAccount& acc)
 
     setAccountType(d->account.accountType());
     setFilterFixedString(d->account.id());
+
+    connect(d->concatModel, &QAbstractItemModel::modelReset, this, [&]() {
+        Q_D(LedgerAccountFilter);
+        const auto newAccount = MyMoneyFile::instance()->accountsModel()->itemById(d->account.id());
+        if (d->account.accountList() != newAccount.accountList()) {
+            d->account = newAccount;
+            invalidate();
+        }
+    });
 }
 
 bool LedgerAccountFilter::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const

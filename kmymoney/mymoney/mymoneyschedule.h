@@ -17,8 +17,9 @@
 // Project Includes
 
 #include "kmm_mymoney_export.h"
-#include "mymoneyunittestable.h"
+#include "mymoneykeyvaluecontainer.h"
 #include "mymoneyobject.h"
+#include "mymoneyunittestable.h"
 
 class QString;
 class QDate;
@@ -50,9 +51,9 @@ template <typename T> class QList;
   * @see MyMoneyScheduled
   */
 class MyMoneySchedulePrivate;
-class KMM_MYMONEY_EXPORT MyMoneySchedule : public MyMoneyObject
+class KMM_MYMONEY_EXPORT MyMoneySchedule : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
-    Q_DECLARE_PRIVATE(MyMoneySchedule)
+    Q_DECLARE_PRIVATE_D(MyMoneyObject::d_ptr, MyMoneySchedule)
 
     friend class MyMoneyStorageANON;
     KMM_MYMONEY_UNIT_TESTABLE
@@ -486,6 +487,9 @@ public:
       */
     void setName(const QString& nm);
 
+    bool keepMultiCurrencyAmount() const;
+    void setKeepMultiCurrencyAmount(bool keepAmount);
+
     bool operator ==(const MyMoneySchedule& right) const;
     bool operator !=(const MyMoneySchedule& right) const;
 
@@ -690,7 +694,8 @@ private:
 inline void swap(MyMoneySchedule& first, MyMoneySchedule& second) // krazy:exclude=inline
 {
     using std::swap;
-    swap(first.d_ptr, second.d_ptr);
+    swap(first.MyMoneyObject::d_ptr, second.MyMoneyObject::d_ptr);
+    swap(first.MyMoneyKeyValueContainer::d_ptr, second.MyMoneyKeyValueContainer::d_ptr);
 }
 
 inline MyMoneySchedule::MyMoneySchedule(MyMoneySchedule && other) : MyMoneySchedule() // krazy:exclude=inline

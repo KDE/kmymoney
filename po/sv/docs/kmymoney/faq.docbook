@@ -6,9 +6,9 @@
 >&Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
   <date
->2014-08-30</date>
+>2022-12-10</date>
   <releaseinfo
->4.7.01</releaseinfo>
+>5.1.3</releaseinfo>
 </chapterinfo>
 
 <title
@@ -32,7 +32,9 @@
  </question>
  <answer>
    <para
->Det finns många orsaker &kmymoney; kan krascha eller ge ett fel istället för att starta normalt. Du måste först bestämma om problemet gäller programvaran eller data. Det första att prova är alltså att <link linkend="firsttime.launch"
+>Det finns många anledningar till att &kmymoney; kan krascha eller ge ett fel istället för att starta normalt. Ibland visas ett felmeddelande, men om inte kan du köra &kmymoney; från en kommandorad för att se om någon användbar information matas ut på terminalen. På &Linux; betyder detta bara att du skriver "kmymoney" i ett skal. &macOS; ska vara liknande. På &Windows; måste du skriva in hela sökvägen till den körbara &kmymoney; filen.</para>
+   <para
+>Om det inte visar problemets orsak, måste du avgöra om det är ett problem med programvaran eller data. För att göra det, måste du <link linkend="firsttime.launch"
 >starta &kmymoney;</link
 > utan att öppna datafilen. Om programmet startar, men kraschar när du försöker läsa in datafilen, försök att läsa in en äldre kopia av filen. (Du har väl gjort en säkerhetskopia, eller hur?)</para>
    <para
@@ -124,16 +126,20 @@
  </question>
  <answer>
    <para
->Det går lätt att ändra kontotyp mellan lönekonto, sparkonto och kontanter. På grund av sättet som &kmymoney; lagrar kontoinformation, tillåts dock inte andra ändringar av kontotyp. Sättet att komma runt det är att skapa ett nytt konto med rätt typ, flytta alla transaktioner från det gamla till det nya kontot, och därefter ta bort det gamla kontot.</para>
-   <!-- this should have links to the sections on new acct, move transactions,
-        delete account. -->
+>Det går lätt att ändra kontotyp mellan lönekonto, sparkonto och kontanter. På grund av sättet som &kmymoney; lagrar kontoinformation, tillåts dock inte andra ändringar av kontotyp. Sättet att komma runt det är att <link linkend="details.accounts.create"
+>skapa ett nytt konto med rätt typ</link
+>, flytta alla transaktioner från det gamla till det nya kontot, och därefter <link linkend="details.accounts.delete"
+>ta bort det gamla kontot</link
+>.</para>
+   <!-- this still needs a link to the section on moving transactions, which
+        does not yet exist. -->
  </answer>
 </qandaentry>
 
 <qandaentry>
  <question>
    <para
->Jag har ett lån med 0 % ränta, men jag får ett fel i guiden för nya lån som inte låter mig använda värdet.</para>
+>Jag har ett lån med 0 % ränta, men jag får ett fel i Guide för nytt lån som inte låter mig använda värdet.</para>
  </question>
  <answer>
    <para
@@ -173,9 +179,9 @@
  </question>
  <answer>
    <para
->Det finns ingen allmän sök- och ersättningsfunktion i &kmymoney;. Hur som helst är det enkelt att ändra en betalares namn: välj betalarvyn och hitta posten med namnet du vill ändra. Klicka med höger musknapp på betalaren, och välj <guimenuitem
+>Det finns ingen allmän sök- och ersättningsfunktion i &kmymoney;. Hur som helst är det enkelt att ändra en betalares namn: välj betalarvyn och leta rätt på posten med namnet du vill ändra. Klicka med höger musknapp på betalaren, och välj <guimenuitem
 >Byt namn på betalare</guimenuitem
-> i den sammanhangsberoende menyn. Skriv in det nya namnet. Eftersom transaktionerna bara använder en referens till betalarens post, visar alla transaktioner nu det nya namnet.</para>
+> i den sammanhangsberoende menyn, och skriv in det nya namnet. Eftersom transaktionerna bara använder en referens till betalarens post, visar alla transaktioner nu det nya namnet.</para>
  </answer>
 </qandaentry>
 
@@ -186,7 +192,7 @@
  </question>
  <answer>
    <para
->För att kunna ta bort ett konto får inte &kmymoney; ha några andra referenser till det. Det betyder att alla transaktioner måste tas bort eller flyttas till ett annat konto. Om det ändå inte går att ta bort ett konto kan det finnas schemalagda transaktioner som refererar till kontot, vilka inte är synliga i huvudboken. Alla framtida transaktioner och själva schemat måste tas bort, eller flyttas till ett annat konto.</para>
+>För att kunna ta bort ett konto får inte &kmymoney; ha några andra referenser till det. Det betyder att alla transaktioner i det kontot måste tas bort eller flyttas till ett annat konto. Om det ändå inte går att ta bort ett konto kan det finnas schemalagda transaktioner som refererar till kontot, vilka inte är synliga i huvudboken. Alla framtida transaktioner och själva schemat måste tas bort, eller flyttas till ett annat konto.</para>
  </answer>
 </qandaentry>
 
@@ -203,11 +209,12 @@
  </question>
  <answer>
    <para
->Här är några externa källor som kan ge mer information: <ulink url="https://ofxblog.wordpress.com/"
->OFX Blog</ulink
-> och <ulink url="https://www.ofxhome.com/"
+>Att söka på webben med specifika frågor kan ibland ge användbara resultat, men det finns ändå en sida som kan ge dig mer information: <ulink url="https://www.ofxhome.com/"
 >OFX Home</ulink
 >.</para>
+   <!-- <ulink url="https://ofxblog.wordpress.com/"
+>OFX Blog</ulink
+> -->
  </answer>
 </qandaentry>
 
@@ -241,9 +248,9 @@
  </question>
  <answer>
    <para
->Användningen av KMyMoney2 var en historisk kvarleva från när projektet gick från &kde; 1 till &kde; 2. För att undvika att ändra namn varje gång det kom en ny &kde;-version, bestämde vi oss för att hålla oss till &kmymoney;.</para>
-   <para
->Den första versionen av &kmymoney; som ansågs vara tillräckligt stabil fick beteckningen 1.0, även om den körde på &kde; 3. Eftersom projektet nu håller på att bli tätare kopplat till &kde;, bestämde vi oss för att använda samma huvudnummer för utgåvan.</para>
+>Användningen av KMyMoney2 var en historisk kvarleva från när projektet gick från &kde; 1 till &kde; 2. För att undvika att ändra namn varje gång det kom en ny &kde;-version, bestämde vi oss för att hålla oss till &kmymoney;.</para
+> <para
+>Den första versionen av &kmymoney; som ansågs vara tillräckligt stabil fick beteckningen 1.0, även om den körde på &kde; 3. Eftersom projektet nu är tätare kopplat till &kde;, bestämde vi oss för att använda samma huvudnummer för utgåvan.</para>
  </answer>
 </qandaentry>
 

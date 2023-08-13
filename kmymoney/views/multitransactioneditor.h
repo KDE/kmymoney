@@ -1,10 +1,10 @@
 /*
-    SPDX-FileCopyrightText: 2015-2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2023 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef NEWTRANSACTIONEDITOR_H
-#define NEWTRANSACTIONEDITOR_H
+#ifndef MULTITRANSACTIONEDITOR_H
+#define MULTITRANSACTIONEDITOR_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -22,13 +22,13 @@ class QWidget;
 
 class MyMoneySchedule;
 
-class NewTransactionEditor : public TransactionEditorBase, TabOrderEditorInterface
+class MultiTransactionEditor : public TransactionEditorBase, TabOrderEditorInterface
 {
     Q_OBJECT
 
 public:
-    explicit NewTransactionEditor(QWidget* parent = nullptr, const QString& accountId = QString());
-    virtual ~NewTransactionEditor();
+    explicit MultiTransactionEditor(QWidget* parent = nullptr, const QString& accountId = QString());
+    virtual ~MultiTransactionEditor();
 
     /**
      * This method returns true if the user pressed the enter button.
@@ -37,20 +37,11 @@ public:
     virtual bool accepted() const override;
 
     /**
-     * Returns the currently entered amount
-     */
-    MyMoneyMoney transactionAmount() const;
-
-    /**
      */
     void loadTransaction(const QModelIndex& index) override;
     QStringList saveTransaction(const QStringList& selectedJournalEntries) override;
 
     void setAmountPlaceHolderText(const QAbstractItemModel* model) override;
-
-    MyMoneyTransaction transaction() const;
-
-    void loadSchedule(const MyMoneySchedule& schedule);
 
     /**
      * Reimplemented to suppress some events in certain conditions
@@ -72,12 +63,14 @@ public:
     void storeTabOrder(const QStringList& tabOrder) override;
 
     /**
-     * This method is used to embed the transaction editor in other dialogs
-     * e.g. KEditScheduleDlg
+     * @copydoc TransactionEditorBase::setSelectedJournalEntryIds
      */
-    virtual WidgetHintFrameCollection* widgetHintFrameCollection() const override;
+    virtual bool setSelectedJournalEntryIds(const QStringList& selectedJournalEntryIds) override;
 
-    void setKeepCategoryAmount(bool keepCategoryAmount);
+    /**
+     * @copydoc TransactionEditorBase::errorMessage
+     */
+    virtual QString errorMessage() const override;
 
 public Q_SLOTS:
     void slotSettingsChanged() override;
@@ -85,18 +78,12 @@ public Q_SLOTS:
 protected Q_SLOTS:
     virtual void acceptEdit();
 
-    // edit splits directly
-    virtual void editSplits();
-
 Q_SIGNALS:
     void postDateChanged(const QDate& date) const;
-    void categorySelectionChanged();
 
 private:
     class Private;
     QScopedPointer<Private> const d;
-    static QDate  m_lastPostDateUsed;
 };
 
-#endif // NEWTRANSACTIONEDITOR_H
-
+#endif // MULTITRANSACTIONEDITOR_H

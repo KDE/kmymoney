@@ -1298,9 +1298,7 @@ public:
             sharesList << s.shares().toString();
             MyMoneyAccount acc = m_file->account(s.accountId());
             MyMoneySecurity sec = m_file->security(acc.currencyId());
-            sharesFormattedList << s.price().
-                                formatMoney("", MyMoneyMoney::denomToPrec(sec.smallestAccountFraction()), false).
-                                replace(QChar(','), QChar('.'));
+            sharesFormattedList << s.shares().formatMoney("", MyMoneyMoney::denomToPrec(sec.smallestAccountFraction()), false).replace(QChar(','), QChar('.'));
             MyMoneyMoney price = s.actualPrice();
             if (!price.isZero()) {
                 priceList << price.toString();
@@ -1411,11 +1409,13 @@ public:
         }
         writeTransaction(sch.id(), sch.transaction(), query, "S");
 
-        //FIXME: enable when schedules have KVPs.
-
-        //Add in Key-Value Pairs for transactions.
-        //deleteKeyValuePairs("SCHEDULE", sch.id());
-        //writeKeyValuePairs("SCHEDULE", sch.id(), sch.pairs());
+        // Add in Key-Value Pairs for schedules.
+        QVariantList idList;
+        idList << sch.id();
+        QList<QMap<QString, QString>> pairs;
+        pairs << sch.pairs();
+        deleteKeyValuePairs("SCHEDULE", idList);
+        writeKeyValuePairs("SCHEDULE", idList, pairs);
     }
 
     void writeSecurity(const MyMoneySecurity& security, QSqlQuery& query)

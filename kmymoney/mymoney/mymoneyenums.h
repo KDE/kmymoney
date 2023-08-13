@@ -591,6 +591,7 @@ enum Roles {
     SplitPriceRole,
     SplitReconcileFlagRole, // the short status flag
     SplitReconcileStatusRole, // the full status name
+    SplitReconcileStateRole, // the numeric status value
     SplitReconcileDateRole,
     SplitActionRole,
     SplitNumberRole,
@@ -619,6 +620,7 @@ enum Roles {
     JournalSplitPriceSortRole,
     JournalSplitValueSortRole,
     JournalSplitSecurityNameRole,
+    JournalEntryIsFrozenRole,
 
     // Ledger
     LedgerDisplayOrderRole,

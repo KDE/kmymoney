@@ -404,6 +404,27 @@
 >Ok</guibutton
 > för att spara hela transaktionen. Om det fortfarande finns belopp som inte har tilldelats, blir du tillfrågad om du antingen vill återgå till att redigera delningen, ändra transaktionens totala belopp, eller lämna en del av transaktionen utan tilldelning. </para>
 
+<para>
+	<screenshot>
+	<screeninfo
+>Dela med otilldelat belopp</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="split_unasigned.png" format="PNG"/>
+	</imageobject>
+	<textobject>
+	<phrase
+>Dela med ej tilldelat belopp</phrase>
+	</textobject>
+	</mediaobject>
+	</screenshot>
+</para>
+
+<para
+>För att omfördela ett 'Ej tilldelat' eller 'Övertilldelat' belopp, markera ett delning som måste justera. Klicka därefter på knappen <guibutton
+>Applicera skillnad</guibutton
+>, om 'Ej tilldelat' tidigare visades och inte var noll, läggs det beloppet till i den markerade radens värde. Om 'Övertilldelat' tidigare visades och inte var noll, subtraheras beloppet från den markerade radens värde. Som resultat, blir beloppet 'Ej tilldelat' ändat till noll och transaktionen kan sparas med lyckat resultat. </para>
+
 <para
 >Observera att kategorifältet i transaktionsformuläret eller transaktionslistan nu visar <emphasis
 >Delad transaktion</emphasis
@@ -630,4 +651,3 @@
 > kan kontots detaljinformation ändras. Det finns också ett menyalternativ för att visa menyn Avstämning, som låter dig matcha transaktioner med ett officiellt bankutdrag eller kreditkortsutdrag. </para>
 </sect1>
 </chapter>
-
