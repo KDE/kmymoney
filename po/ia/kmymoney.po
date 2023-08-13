@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-12 00:46+0000\n"
+"POT-Creation-Date: 2023-08-13 00:46+0000\n"
 "PO-Revision-Date: 2023-07-13 22:22+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -17992,12 +17992,14 @@ msgid "Interest Income"
 msgstr "Ganio de interesse"
 
 #: kmymoney/views/investtransactioneditor.cpp:265
+#: kmymoney/views/multitransactioneditor.cpp:164
 #: kmymoney/views/newtransactioneditor.cpp:218
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr ""
 
 #: kmymoney/views/investtransactioneditor.cpp:289
+#: kmymoney/views/multitransactioneditor.cpp:194
 #: kmymoney/views/newtransactioneditor.cpp:238
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
@@ -18183,11 +18185,19 @@ msgstr "Inserta"
 msgid "Activity"
 msgstr "Activitate"
 
-#: kmymoney/views/journaldelegate.cpp:84
+#: kmymoney/views/journaldelegate.cpp:86
 #, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Vacua memo"
+
+#: kmymoney/views/journaldelegate.cpp:339
+#, kde-format
+msgctxt "@info Editing multiple transactions"
+msgid ""
+"The current implementation cannot modify multiple transactions in different "
+"accounts."
+msgstr ""
 
 #: kmymoney/views/kaccountsview.cpp:174
 #: kmymoney/views/kinstitutionsview.cpp:208
@@ -19607,62 +19617,62 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:771
+#: kmymoney/views/ledgerview.cpp:782
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:778
+#: kmymoney/views/ledgerview.cpp:789
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:787
+#: kmymoney/views/ledgerview.cpp:798
 #, kde-format
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:793
+#: kmymoney/views/ledgerview.cpp:804
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:798
+#: kmymoney/views/ledgerview.cpp:809
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:874
+#: kmymoney/views/ledgerview.cpp:885
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Non insertar le transaction programmate expirate."
 
-#: kmymoney/views/ledgerview.cpp:875
+#: kmymoney/views/ledgerview.cpp:886
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Inserta le transaction programmate expirate."
 
-#: kmymoney/views/ledgerview.cpp:878
+#: kmymoney/views/ledgerview.cpp:889
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Tu vole insertar le horario expirate nunc?"
 
-#: kmymoney/views/ledgerview.cpp:879
+#: kmymoney/views/ledgerview.cpp:890
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Inserta horario expirate"
 
-#: kmymoney/views/ledgerview.cpp:899
+#: kmymoney/views/ledgerview.cpp:910
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -19670,7 +19680,7 @@ msgid ""
 "the ledger again."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:901
+#: kmymoney/views/ledgerview.cpp:912
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -19678,13 +19688,13 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:905
+#: kmymoney/views/ledgerview.cpp:916
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Tu vole acceptar o non corresponder le transaction correspondite nunc?"
 
-#: kmymoney/views/ledgerview.cpp:906
+#: kmymoney/views/ledgerview.cpp:917
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
@@ -19735,6 +19745,40 @@ msgstr "%1 de %2: %3"
 msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Balanciamento: %1"
+
+#: kmymoney/views/multitransactioneditor.cpp:172
+#: kmymoney/views/newtransactioneditor.cpp:221
+#, kde-format
+msgid "The posting date is invalid."
+msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:218
+#, fuzzy, kde-format
+#| msgid "Select account"
+msgid "Select category or account."
+msgstr "Selige conto"
+
+#: kmymoney/views/multitransactioneditor.cpp:230
+#, kde-format
+msgctxt "@info Error when selecting account"
+msgid ""
+"A selected transaction has a post date (%1) before the opening date of the "
+"selected account (%2)."
+msgstr ""
+
+#: kmymoney/views/multitransactioneditor.cpp:696
+#, fuzzy, kde-format
+#| msgid "Cannot open file as requested."
+msgctxt "@info Error selecting multiple transactions for edit"
+msgid "Cannot edit multiple schedules at once."
+msgstr "Il non pote aperir file como requirite."
+
+#: kmymoney/views/multitransactioneditor.cpp:704
+#, kde-format
+msgid ""
+"Selection of category or account is not possible when split transactions are "
+"part of the selection."
+msgstr ""
 
 #: kmymoney/views/newspliteditor.cpp:146
 #, kde-format
@@ -19790,11 +19834,6 @@ msgstr "Debitor/Beneficiario"
 #: kmymoney/views/newtransactionform.ui:82
 #, kde-format
 msgid "Costcenter"
-msgstr ""
-
-#: kmymoney/views/newtransactioneditor.cpp:221
-#, kde-format
-msgid "The posting date is invalid."
 msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:250

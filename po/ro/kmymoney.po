@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-12 00:46+0000\n"
+"POT-Creation-Date: 2023-08-13 00:46+0000\n"
 "PO-Revision-Date: 2022-08-14 16:08+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -19770,6 +19770,7 @@ msgid "Interest Income"
 msgstr "Venit din dobândă"
 
 #: kmymoney/views/investtransactioneditor.cpp:265
+#: kmymoney/views/multitransactioneditor.cpp:164
 #: kmymoney/views/newtransactioneditor.cpp:218
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
@@ -19777,6 +19778,7 @@ msgid "The posting date of the transaction."
 msgstr "Se importă extrasul fără tranzacții"
 
 #: kmymoney/views/investtransactioneditor.cpp:289
+#: kmymoney/views/multitransactioneditor.cpp:194
 #: kmymoney/views/newtransactioneditor.cpp:238
 #, fuzzy, kde-format
 #| msgid ""
@@ -19991,12 +19993,20 @@ msgstr "Introdu"
 msgid "Activity"
 msgstr "Activitate"
 
-#: kmymoney/views/journaldelegate.cpp:84
+#: kmymoney/views/journaldelegate.cpp:86
 #, fuzzy, kde-format
 #| msgid "Copy of %1"
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Copie a %1"
+
+#: kmymoney/views/journaldelegate.cpp:339
+#, kde-format
+msgctxt "@info Editing multiple transactions"
+msgid ""
+"The current implementation cannot modify multiple transactions in different "
+"accounts."
+msgstr ""
 
 #: kmymoney/views/kaccountsview.cpp:174
 #: kmymoney/views/kinstitutionsview.cpp:208
@@ -21586,35 +21596,35 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:771
+#: kmymoney/views/ledgerview.cpp:782
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Tranzacției îi lipsește o asignare de categorie."
 
-#: kmymoney/views/ledgerview.cpp:778
+#: kmymoney/views/ledgerview.cpp:789
 #, fuzzy, kde-format
 #| msgid "The transaction has a missing assignment of <b>%1</b>."
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Tranzacția are lipsă o asignare de <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:787
+#: kmymoney/views/ledgerview.cpp:798
 #, fuzzy, kde-format
 #| msgid "This schedule will end at some time"
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "Această plată programată se va termina cîndva în viitor"
 
-#: kmymoney/views/ledgerview.cpp:793
+#: kmymoney/views/ledgerview.cpp:804
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Prima tranzacție nu îndeplinește cerințele pentru asociere"
 
-#: kmymoney/views/ledgerview.cpp:798
+#: kmymoney/views/ledgerview.cpp:809
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
@@ -21622,7 +21632,7 @@ msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr "Prima tranzacție nu îndeplinește cerințele pentru asociere"
 
-#: kmymoney/views/ledgerview.cpp:874
+#: kmymoney/views/ledgerview.cpp:885
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -21630,14 +21640,14 @@ msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Doriți într-adevăr să ștergeți întrarea de preț marcată?"
 
-#: kmymoney/views/ledgerview.cpp:875
+#: kmymoney/views/ledgerview.cpp:886
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Introduceți tranzacția programată"
 
-#: kmymoney/views/ledgerview.cpp:878
+#: kmymoney/views/ledgerview.cpp:889
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -21645,7 +21655,7 @@ msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Doriți într-adevăr să ștergeți întrarea de preț marcată?"
 
-#: kmymoney/views/ledgerview.cpp:879
+#: kmymoney/views/ledgerview.cpp:890
 #, fuzzy, kde-format
 #| msgctxt "Dialog caption for 'Enter or schedule' dialog"
 #| msgid "Enter or schedule?"
@@ -21653,7 +21663,7 @@ msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Introduceți sau programați?"
 
-#: kmymoney/views/ledgerview.cpp:899
+#: kmymoney/views/ledgerview.cpp:910
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use this to schedule the transaction for later entry into the ledger."
@@ -21665,7 +21675,7 @@ msgstr ""
 "Folosiți aceasta pentru a programa tranzacția pentru o înregistrare "
 "ulterioară în registru."
 
-#: kmymoney/views/ledgerview.cpp:901
+#: kmymoney/views/ledgerview.cpp:912
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21673,7 +21683,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:905
+#: kmymoney/views/ledgerview.cpp:916
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -21681,7 +21691,7 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Doriți într-adevăr să ștergeți tranzacția marcată?"
 
-#: kmymoney/views/ledgerview.cpp:906
+#: kmymoney/views/ledgerview.cpp:917
 #, fuzzy, kde-format
 #| msgid ""
 #| "_: Accept 'imported' and 'matched' transaction\n"
@@ -21744,6 +21754,45 @@ msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Soldul: %1"
 
+#: kmymoney/views/multitransactioneditor.cpp:172
+#: kmymoney/views/newtransactioneditor.cpp:221
+#, fuzzy, kde-format
+#| msgid "Importing statement without transactions"
+msgid "The posting date is invalid."
+msgstr "Se importă extrasul fără tranzacții"
+
+#: kmymoney/views/multitransactioneditor.cpp:218
+#, fuzzy, kde-format
+#| msgid "Select account"
+msgid "Select category or account."
+msgstr "Alegeți un cont"
+
+#: kmymoney/views/multitransactioneditor.cpp:230
+#, fuzzy, kde-format
+#| msgid ""
+#| "Cannot enter transaction with postdate prior to account's opening date."
+msgctxt "@info Error when selecting account"
+msgid ""
+"A selected transaction has a post date (%1) before the opening date of the "
+"selected account (%2)."
+msgstr ""
+"Nu poate fi creată o tranzacție având data înaintea datei de deschidere a "
+"contului."
+
+#: kmymoney/views/multitransactioneditor.cpp:696
+#, fuzzy, kde-format
+#| msgid "Cannot edit multiple split transactions at once."
+msgctxt "@info Error selecting multiple transactions for edit"
+msgid "Cannot edit multiple schedules at once."
+msgstr "Nu pot fi modificate deodată tranzacții compuse din mai multe părți."
+
+#: kmymoney/views/multitransactioneditor.cpp:704
+#, kde-format
+msgid ""
+"Selection of category or account is not possible when split transactions are "
+"part of the selection."
+msgstr ""
+
 #: kmymoney/views/newspliteditor.cpp:146
 #, fuzzy, kde-format
 #| msgid "Use this to enter the transaction into the ledger."
@@ -21805,12 +21854,6 @@ msgstr "Plătitor/Beneficiar"
 #, kde-format
 msgid "Costcenter"
 msgstr ""
-
-#: kmymoney/views/newtransactioneditor.cpp:221
-#, fuzzy, kde-format
-#| msgid "Importing statement without transactions"
-msgid "The posting date is invalid."
-msgstr "Se importă extrasul fără tranzacții"
 
 #: kmymoney/views/newtransactioneditor.cpp:250
 #, fuzzy, kde-format
@@ -27179,10 +27222,6 @@ msgstr ""
 #~ "together."
 #~ msgstr ""
 #~ "Nu pot fi modificate împreună tranzacții de investiții și fără investiții."
-
-#~ msgid "Cannot edit multiple split transactions at once."
-#~ msgstr ""
-#~ "Nu pot fi modificate deodată tranzacții compuse din mai multe părți."
 
 #~ msgid "Cannot edit investment transactions in the context of this account."
 #~ msgstr "Nu pot fi modificate tranzacții în contextul acestui cont."

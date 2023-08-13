@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-12 00:46+0000\n"
+"POT-Creation-Date: 2023-08-13 00:46+0000\n"
 "PO-Revision-Date: 2015-02-09 11:02+0100\n"
 "Last-Translator: Samir Ribic <samir.ribic@etf.unsa.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -19541,6 +19541,7 @@ msgid "Interest Income"
 msgstr "Kamatni prihodi"
 
 #: kmymoney/views/investtransactioneditor.cpp:265
+#: kmymoney/views/multitransactioneditor.cpp:164
 #: kmymoney/views/newtransactioneditor.cpp:218
 #, fuzzy, kde-format
 #| msgid "Importing statement without transactions"
@@ -19548,6 +19549,7 @@ msgid "The posting date of the transaction."
 msgstr "Uvoz obračuna bez transakcija"
 
 #: kmymoney/views/investtransactioneditor.cpp:289
+#: kmymoney/views/multitransactioneditor.cpp:194
 #: kmymoney/views/newtransactioneditor.cpp:238
 #, fuzzy, kde-format
 #| msgid ""
@@ -19758,12 +19760,20 @@ msgstr "Ulaz"
 msgid "Activity"
 msgstr "Aktivnost"
 
-#: kmymoney/views/journaldelegate.cpp:84
+#: kmymoney/views/journaldelegate.cpp:86
 #, fuzzy, kde-format
 #| msgid "Copy of %1"
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "Kopija %1"
+
+#: kmymoney/views/journaldelegate.cpp:339
+#, kde-format
+msgctxt "@info Editing multiple transactions"
+msgid ""
+"The current implementation cannot modify multiple transactions in different "
+"accounts."
+msgstr ""
 
 #: kmymoney/views/kaccountsview.cpp:174
 #: kmymoney/views/kinstitutionsview.cpp:208
@@ -21343,35 +21353,35 @@ msgid ""
 "to current editor</a>"
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:771
+#: kmymoney/views/ledgerview.cpp:782
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "Transakcija nema dodjeljenu kategoriju."
 
-#: kmymoney/views/ledgerview.cpp:778
+#: kmymoney/views/ledgerview.cpp:789
 #, fuzzy, kde-format
 #| msgid "The transaction has a missing assignment of <b>%1</b>."
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "Transakciji nedostaje dodjela <b>%1</b>."
 
-#: kmymoney/views/ledgerview.cpp:787
+#: kmymoney/views/ledgerview.cpp:798
 #, fuzzy, kde-format
 #| msgid "This schedule will end at some time"
 msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "Ovaj rapored će završiti u nekom vremenu"
 
-#: kmymoney/views/ledgerview.cpp:793
+#: kmymoney/views/ledgerview.cpp:804
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr "Prva transakcija ne odgovara zahtjevu za podudaranje"
 
-#: kmymoney/views/ledgerview.cpp:798
+#: kmymoney/views/ledgerview.cpp:809
 #, fuzzy, kde-format
 #| msgid "First transaction does not match requirement for matching"
 msgctxt "@info:tooltip icon description"
@@ -21379,7 +21389,7 @@ msgid ""
 "This transaction is matched. Click on the icon to accept or un-match it."
 msgstr "Prva transakcija ne odgovara zahtjevu za podudaranje"
 
-#: kmymoney/views/ledgerview.cpp:874
+#: kmymoney/views/ledgerview.cpp:885
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -21387,14 +21397,14 @@ msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "Da li stvarno želite izbrisati odabrani unos cijene?"
 
-#: kmymoney/views/ledgerview.cpp:875
+#: kmymoney/views/ledgerview.cpp:886
 #, fuzzy, kde-format
 #| msgid "Enter scheduled transaction"
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "Unesi planiranu transakciju"
 
-#: kmymoney/views/ledgerview.cpp:878
+#: kmymoney/views/ledgerview.cpp:889
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected price entry?"
 #| msgid_plural "Do you really want to delete the selected price entries?"
@@ -21402,7 +21412,7 @@ msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "Da li stvarno želite izbrisati odabrani unos cijene?"
 
-#: kmymoney/views/ledgerview.cpp:879
+#: kmymoney/views/ledgerview.cpp:890
 #, fuzzy, kde-format
 #| msgctxt "Dialog caption for 'Enter or schedule' dialog"
 #| msgid "Enter or schedule?"
@@ -21410,7 +21420,7 @@ msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "Unos ili Raspoređivanje?"
 
-#: kmymoney/views/ledgerview.cpp:899
+#: kmymoney/views/ledgerview.cpp:910
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use this to schedule the transaction for later entry into the ledger."
@@ -21420,7 +21430,7 @@ msgid ""
 "the ledger again."
 msgstr "Koristi ovo za raspoređivanje transakcija za kasniji pristup knjizi."
 
-#: kmymoney/views/ledgerview.cpp:901
+#: kmymoney/views/ledgerview.cpp:912
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -21428,7 +21438,7 @@ msgid ""
 "transaction."
 msgstr ""
 
-#: kmymoney/views/ledgerview.cpp:905
+#: kmymoney/views/ledgerview.cpp:916
 #, fuzzy, kde-format
 #| msgid "Do you really want to delete the selected transaction?"
 #| msgid_plural "Do you really want to delete all %1 selected transactions?"
@@ -21436,7 +21446,7 @@ msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "Da li zasita želite izbrisati odabranu %1 transakciju?"
 
-#: kmymoney/views/ledgerview.cpp:906
+#: kmymoney/views/ledgerview.cpp:917
 #, fuzzy, kde-format
 #| msgid "Attempt to match similar transactions"
 msgctxt "@title:window"
@@ -21496,6 +21506,44 @@ msgstr "%1 od %2"
 msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "Stanje: %1"
+
+#: kmymoney/views/multitransactioneditor.cpp:172
+#: kmymoney/views/newtransactioneditor.cpp:221
+#, fuzzy, kde-format
+#| msgid "Importing statement without transactions"
+msgid "The posting date is invalid."
+msgstr "Uvoz obračuna bez transakcija"
+
+#: kmymoney/views/multitransactioneditor.cpp:218
+#, fuzzy, kde-format
+#| msgid "Select account"
+msgid "Select category or account."
+msgstr "Označi račun"
+
+#: kmymoney/views/multitransactioneditor.cpp:230
+#, fuzzy, kde-format
+#| msgid ""
+#| "Cannot enter transaction with postdate prior to account's opening date."
+msgctxt "@info Error when selecting account"
+msgid ""
+"A selected transaction has a post date (%1) before the opening date of the "
+"selected account (%2)."
+msgstr ""
+"Nije moguće unijeti transakciju sa datumom prije datuma otvaranja računa."
+
+#: kmymoney/views/multitransactioneditor.cpp:696
+#, fuzzy, kde-format
+#| msgid "Cannot edit multiple split transactions at once."
+msgctxt "@info Error selecting multiple transactions for edit"
+msgid "Cannot edit multiple schedules at once."
+msgstr "Nije moguće uređivanje više podijeljenih transakcija odjednom."
+
+#: kmymoney/views/multitransactioneditor.cpp:704
+#, kde-format
+msgid ""
+"Selection of category or account is not possible when split transactions are "
+"part of the selection."
+msgstr ""
 
 #: kmymoney/views/newspliteditor.cpp:146
 #, fuzzy, kde-format
@@ -21558,12 +21606,6 @@ msgstr "Isplatitelj / Primatelj"
 #, kde-format
 msgid "Costcenter"
 msgstr ""
-
-#: kmymoney/views/newtransactioneditor.cpp:221
-#, fuzzy, kde-format
-#| msgid "Importing statement without transactions"
-msgid "The posting date is invalid."
-msgstr "Uvoz obračuna bez transakcija"
 
 #: kmymoney/views/newtransactioneditor.cpp:250
 #, fuzzy, kde-format
@@ -26830,9 +26872,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Nije moguće uređivanje investicijskih i neinvesticijskih transakcija "
 #~ "zajedno."
-
-#~ msgid "Cannot edit multiple split transactions at once."
-#~ msgstr "Nije moguće uređivanje više podijeljenih transakcija odjednom."
 
 #~ msgid "Cannot edit investment transactions in the context of this account."
 #~ msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-12 00:46+0000\n"
+"POT-Creation-Date: 2023-08-13 00:46+0000\n"
 "PO-Revision-Date: 2023-07-24 21:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -18574,12 +18574,14 @@ msgid "Interest Income"
 msgstr "이자 수입"
 
 #: kmymoney/views/investtransactioneditor.cpp:265
+#: kmymoney/views/multitransactioneditor.cpp:164
 #: kmymoney/views/newtransactioneditor.cpp:218
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "거래 전기 일입니다."
 
 #: kmymoney/views/investtransactioneditor.cpp:289
+#: kmymoney/views/multitransactioneditor.cpp:194
 #: kmymoney/views/newtransactioneditor.cpp:238
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
@@ -18767,11 +18769,19 @@ msgstr "입력"
 msgid "Activity"
 msgstr "활동"
 
-#: kmymoney/views/journaldelegate.cpp:84
+#: kmymoney/views/journaldelegate.cpp:86
 #, kde-format
 msgctxt "@info placeholder for memo of matched transaction if empty"
 msgid "Empty memo"
 msgstr "빈 메모"
+
+#: kmymoney/views/journaldelegate.cpp:339
+#, kde-format
+msgctxt "@info Editing multiple transactions"
+msgid ""
+"The current implementation cannot modify multiple transactions in different "
+"accounts."
+msgstr ""
 
 #: kmymoney/views/kaccountsview.cpp:174
 #: kmymoney/views/kinstitutionsview.cpp:208
@@ -20234,19 +20244,19 @@ msgstr ""
 "다른 보기에서 거래를 편집하고 있습니다. KMyMoney에서는 거래 두 개를 동시에 편"
 "집할 수 없습니다. <a href=\"jumpToEditor\">현재 편집기로 이동</a>"
 
-#: kmymoney/views/ledgerview.cpp:771
+#: kmymoney/views/ledgerview.cpp:782
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "Transaction is missing a category assignment."
 msgstr "거래에 할당된 분류가 없습니다."
 
-#: kmymoney/views/ledgerview.cpp:778
+#: kmymoney/views/ledgerview.cpp:789
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "The transaction has a missing assignment of <b>%1</b>."
 msgstr "거래에 <b>%1</b> 할당이 누락되었습니다."
 
-#: kmymoney/views/ledgerview.cpp:787
+#: kmymoney/views/ledgerview.cpp:798
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip icon description"
 #| msgid "This schedule is overdue. Click on the icon to enter it."
@@ -20254,14 +20264,14 @@ msgctxt "@info:tooltip icon description, param is date"
 msgid "This schedule is overdue since %1. Click on the icon to enter it."
 msgstr "이 일정의 만료 기한이 지났습니다. 아이콘을 클릭하면 편집합니다."
 
-#: kmymoney/views/ledgerview.cpp:793
+#: kmymoney/views/ledgerview.cpp:804
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid "This transaction is imported. Click on the icon to accept it."
 msgstr ""
 "이 거래는 가져온 거래입니다. 아이콘을 클릭하면 수락한 것으로 표시합니다."
 
-#: kmymoney/views/ledgerview.cpp:798
+#: kmymoney/views/ledgerview.cpp:809
 #, kde-format
 msgctxt "@info:tooltip icon description"
 msgid ""
@@ -20269,31 +20279,31 @@ msgid ""
 msgstr ""
 "이 거래가 일치합니다. 아이콘을 클릭하면 수락하거나 일치를 해제할 수 있습니다."
 
-#: kmymoney/views/ledgerview.cpp:874
+#: kmymoney/views/ledgerview.cpp:885
 #, kde-format
 msgctxt "@info:tooltip No button"
 msgid "Do not enter the overdue scheduled transaction."
 msgstr "기한이 지난 거래를 입력하지 않습니다."
 
-#: kmymoney/views/ledgerview.cpp:875
+#: kmymoney/views/ledgerview.cpp:886
 #, kde-format
 msgctxt "@info:tooltip Yes button"
 msgid "Enter the overdue scheduled transaction."
 msgstr "기한이 지난 거래를 입력합니다."
 
-#: kmymoney/views/ledgerview.cpp:878
+#: kmymoney/views/ledgerview.cpp:889
 #, kde-format
 msgctxt "Question about the overdue action"
 msgid "Do you want to enter the overdue schedule now?"
 msgstr "기한이 지난 일정을 입력하시겠습니까?"
 
-#: kmymoney/views/ledgerview.cpp:879
+#: kmymoney/views/ledgerview.cpp:890
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter overdue schedule"
 msgstr "기한이 지난 일정 입력"
 
-#: kmymoney/views/ledgerview.cpp:899
+#: kmymoney/views/ledgerview.cpp:910
 #, kde-format
 msgctxt "@info:tooltip Unmatch button"
 msgid ""
@@ -20303,7 +20313,7 @@ msgstr ""
 "숨겨진(일치하는) 거래를 표시된 거래에서 분리하고 원장에 나중에 다시 입력합니"
 "다."
 
-#: kmymoney/views/ledgerview.cpp:901
+#: kmymoney/views/ledgerview.cpp:912
 #, kde-format
 msgctxt "@info:tooltip Accept button"
 msgid ""
@@ -20312,13 +20322,13 @@ msgid ""
 msgstr ""
 "표시된 대로 거래 일치를 수락하고 숨겨진(일치하는) 거래의 데이터를 삭제합니다."
 
-#: kmymoney/views/ledgerview.cpp:905
+#: kmymoney/views/ledgerview.cpp:916
 #, kde-format
 msgctxt "Question about the accept or unmatch action"
 msgid "Do you want to accept or unmatch the matched transaction now?"
 msgstr "일치하는 거래를 수락하거나 일치를 해제하시겠습니까?"
 
-#: kmymoney/views/ledgerview.cpp:906
+#: kmymoney/views/ledgerview.cpp:917
 #, kde-format
 msgctxt "@title:window"
 msgid "Accept or unmatch transaction"
@@ -20369,6 +20379,46 @@ msgstr "%2 중 %1: %3"
 msgctxt "@label:textbox Total balance"
 msgid "Balance: %1"
 msgstr "잔액: %1"
+
+#: kmymoney/views/multitransactioneditor.cpp:172
+#: kmymoney/views/newtransactioneditor.cpp:221
+#, fuzzy, kde-format
+#| msgid "The posting date of the transaction."
+msgid "The posting date is invalid."
+msgstr "거래 전기 일입니다."
+
+#: kmymoney/views/multitransactioneditor.cpp:218
+#, fuzzy, kde-format
+#| msgid "Select account"
+msgid "Select category or account."
+msgstr "계좌 선택"
+
+#: kmymoney/views/multitransactioneditor.cpp:230
+#, fuzzy, kde-format
+#| msgid ""
+#| "  * Transaction '%1' has a post date '%2' before one of the referenced "
+#| "account's opening date."
+msgctxt "@info Error when selecting account"
+msgid ""
+"A selected transaction has a post date (%1) before the opening date of the "
+"selected account (%2)."
+msgstr ""
+"  * '%1' 거래에서 참조하는 계좌의 개설일보다 이전인 '%2' 후일부가 설정되었습"
+"니다."
+
+#: kmymoney/views/multitransactioneditor.cpp:696
+#, fuzzy, kde-format
+#| msgid "Cannot edit multiple split transactions at once."
+msgctxt "@info Error selecting multiple transactions for edit"
+msgid "Cannot edit multiple schedules at once."
+msgstr "한 번에 여러 분할 거래를 편집할 수 없습니다."
+
+#: kmymoney/views/multitransactioneditor.cpp:704
+#, kde-format
+msgid ""
+"Selection of category or account is not possible when split transactions are "
+"part of the selection."
+msgstr ""
 
 #: kmymoney/views/newspliteditor.cpp:146
 #, kde-format
@@ -20425,12 +20475,6 @@ msgstr "지불인/수취인"
 #, kde-format
 msgid "Costcenter"
 msgstr "원가 중심점"
-
-#: kmymoney/views/newtransactioneditor.cpp:221
-#, fuzzy, kde-format
-#| msgid "The posting date of the transaction."
-msgid "The posting date is invalid."
-msgstr "거래 전기 일입니다."
 
 #: kmymoney/views/newtransactioneditor.cpp:250
 #, kde-format
@@ -25546,9 +25590,6 @@ msgstr ""
 #~ "Cannot edit investment transactions and non-investment transactions "
 #~ "together."
 #~ msgstr "투자 거래와 비 투자 거래를 함께 편집할 수 없습니다."
-
-#~ msgid "Cannot edit multiple split transactions at once."
-#~ msgstr "한 번에 여러 분할 거래를 편집할 수 없습니다."
 
 #~ msgid "Cannot edit investment transactions in the context of this account."
 #~ msgstr "이 계좌의 콘텍스트에서 투자 거래를 편집할 수 없습니다."
