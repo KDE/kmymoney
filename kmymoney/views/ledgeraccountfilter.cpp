@@ -125,9 +125,15 @@ bool LedgerAccountFilter::filterAcceptsRow(int source_row, const QModelIndex& so
     // in case we don't have a match and the current account is an investment account
     // we check if the journal entry references a child account of the investment account
     // if so, we need to display the transaction
-    if (!rc && d->account.accountType() == eMyMoney::Account::Type::Investment) {
+    if (d->account.accountType() == eMyMoney::Account::Type::Investment) {
         const auto idx = sourceModel()->index(source_row, 0, source_parent);
-        rc = d->account.accountList().contains(idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
+        if (!rc) {
+            rc = d->account.accountList().contains(idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
+        }
+        // we never show reconciliation records in investment accounts
+        if (rc) {
+            rc = !d->isReconciliationModel(idx);
+        }
     }
     return rc;
 }
