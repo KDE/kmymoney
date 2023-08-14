@@ -100,6 +100,7 @@ public:
 
         m_filterModel = new QSortFilterProxyModel(q);
         m_filterModel->setSourceModel(MyMoneyFile::instance()->onlineJobsModel());
+        m_filterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
         ui->m_onlineJobView->setModel(m_filterModel);
         columnSelector->setModel(m_filterModel);
 
