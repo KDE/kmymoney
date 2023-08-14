@@ -10,19 +10,22 @@
 <title>Bug fixes and enhancements to functionality</title>
 
 <para>
-  As with every release, the &kmymoney; development team continues to work hard
-  to make each version better and easier to use in every way.  Many bugs have
-  been fixed since the previous stable release of 5.1.4; several areas of the
-  program have seen functional enhancements; but the major noticeable change from
-  the 5.1 series of releases is in the ledger - more details below.
+  As with every release, the &kmymoney; development team continues to work hard to
+  make each version better and easier to use in every way.  Many bugs have been fixed
+  since the previous stable release of 5.1.4; several areas of the program have seen
+  functional enhancements; but the major noticeable changes from the 5.1 series of
+  releases are in the ledger - more details below.
 </para>
 
 <para>
   The conversion to using &kde-frameworks; was essentially complete in the 5.1.x
   releases, with much of that work behind the scenes and not directly visible to the
   end user.  The general look and feel should remain stable, although some minor
-  changes still occur.  The basic functionality of the program also remains the same,
-  aside from intentional improvements and additions.
+  changes may be noticable.  In addition, the team has begun to make changes to
+  support the eventual conversion to using Qt6 and KDE6 libraries, which will
+  eventually replace Qt5 and KDE5. With all these changes, the basic functionality of
+  the program remains the same, aside from intentional bug fixes, improvements, and
+  additions.
 </para>
 
 <para>
@@ -33,10 +36,13 @@
 </para>
 
 <para>
-  The 5.0.x and 5.1.x series included some changes needing adjustments on the
-  user's side, if they were upgrading from 4.8.x or an older version.  However,
-  we expect that most users have converted to 5.x by now.  Specifically, there
-  should be no adjustments needed by users converting from 5.1.x to 5.2.
+  The 5.0.x and 5.1.x series included some changes needing adjustments on the user's
+  side, if they were upgrading from 4.8.x or an older version.  However, we expect
+  that most users have converted to 5.x by now.  Specifically, there should be no
+  adjustments needed by users converting from 5.1.x to 5.2.  If for some reason, you
+  are still using &kmymoney; version 4, you are very strongly encouraged to upgrade,
+  as it is getting increasingly difficult for the team to provide any assistance for
+  very old version.
 </para>
 
 </sect1>
@@ -44,9 +50,9 @@
 <sect1>
 <title>Updates to this Handbook</title>
 <para>
-  This section used to talk about the lack of complete handbook update from 4.x
-  to 5.x.  The intent is that the handbook be fully updated for 5.2, so this
-  section should hopefully be able to be removed before release.
+  This section used to present some details related to the lack of a complete
+  handbook update from 4.x to 5.x.  The intent is that the handbook be fully updated
+  for 5.2, so this section should hopefully be able to be removed before release.
 </para>
 
 </sect1>

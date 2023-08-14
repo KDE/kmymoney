@@ -17,3 +17,47 @@ placed below the existing or target location.
 At some point, I will add to this doc a list of which chapters have and have
 not been edited yet, and not use the list used for the 4 -> 5 changes in the
 What's New section.
+
+This is in the order pulled in from index.docbook, with brief note on state of update
+
+<!ENTITY introduction SYSTEM "introduction.docbook">
+  prelim update
+  
+<!ENTITY whatsnew SYSTEM "whatsnew.docbook">
+  prelim update
+  
+<!ENTITY makemostof SYSTEM "makemostof.docbook">
+  prelim update
+  
+<!ENTITY firsttime SYSTEM "firsttime.docbook">
+  prelim update
+
+<!ENTITY details-institutions SYSTEM "details-institutions.docbook">
+<!ENTITY details-accounts SYSTEM "details-accounts.docbook">
+<!ENTITY details-categories SYSTEM "details-categories.docbook">
+<!ENTITY details-tags SYSTEM "details-tags.docbook">
+<!ENTITY details-payees SYSTEM "details-payees.docbook">
+<!ENTITY details-schedules SYSTEM "details-schedules.docbook">
+<!ENTITY details-ledgers SYSTEM "details-ledgers.docbook">
+<!ENTITY details-investments SYSTEM "details-investments.docbook">
+<!ENTITY details-currencies SYSTEM "details-currencies.docbook">
+<!ENTITY details-reconciliation SYSTEM "details-reconciliation.docbook">
+<!ENTITY details-reports SYSTEM "details-reports.docbook">
+<!ENTITY details-impexp SYSTEM "details-impexp.docbook">
+<!ENTITY details-impexp-csv SYSTEM "details-impexp-csv.docbook">
+<!ENTITY details-impexp-csvexp SYSTEM "details-impexp-csvexp.docbook">
+<!ENTITY details-impexp-woob SYSTEM "details-impexp-woob.docbook">
+<!ENTITY details-loans SYSTEM "details-loans.docbook">
+<!ENTITY details-budgets SYSTEM "details-budgets.docbook">
+<!ENTITY details-forecast SYSTEM "details-forecast.docbook">
+<!ENTITY details-settings SYSTEM "details-settings.docbook">
+<!ENTITY details-search SYSTEM "details-search.docbook">
+<!ENTITY details-formats SYSTEM "details-formats.docbook">
+<!ENTITY details-database SYSTEM "details-database.docbook">
+<!ENTITY faq SYSTEM "faq.docbook">
+<!ENTITY reference SYSTEM "reference.docbook">
+<!ENTITY details-widgets SYSTEM "details-widgets.docbook">
+<!ENTITY credits SYSTEM "credits.docbook">
+<!-- no longer used? <!ENTITY details-hbciofx SYSTEM "details-hbciofx.docbook"> -->
+
+<!-- not directly included in docbook   "man-kmymoney.1.docbook" -->

@@ -16,10 +16,9 @@
 
 <note>
   <para>
-    When you run &kmymoney;, it might not look exactly like the screenshots in
-    this manual.  Many details, such as fonts, colors, and icons, can be
-    customized, either using the
-    <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+    When you run &kmymoney;, it might not look exactly like the screenshots in this
+    manual.  Many details, such as fonts, colors, and icons, can be customized, using
+    the <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
     &kmymoney;...</guimenuitem></menuchoice> menu item or the &kde; &systemsettings;
     application, depending on your operating system.
   </para>
@@ -56,18 +55,19 @@
 </itemizedlist>
 
 <para>
-  The menu and toolbars provide access to the features of &kmymoney; and allow
-  you to <link linkend="firsttime.3">Create</link> files or configure how
+  The menu and toolbars provide access to the features of &kmymoney; and allow you to
+  <link linkend="firsttime.3">Create a new data file</link> or configure how
   &kmymoney; operates.
 </para>
 
 <para>
-  On the left side of the main window, the view selector consists of at least
-  eleven icons with optional labels, depending upon the software provided by
-  your system.  More icons could be added by various plugins.  By clicking on an
-  icon, the view window on the right hand side is loaded with the appropriate
-  view of your financial data.  Each view provides a unique representation of
-  your financial situation and allows you to view or edit the information shown.
+  On the left side of the main window, the view selector consists of at least eleven
+  icons with optional labels, depending upon the software provided by your system, as
+  some features can be included or excluded when the program is compiled.  More icons
+  could be added by various plugins.  By clicking on an icon, the view window on the
+  right hand side is loaded with the appropriate view of your financial data.  Each
+  view provides a unique representation of your financial situation and allows you to
+  view or edit the information shown.
 </para>
 
 <para>
@@ -87,8 +87,8 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Home: A configurable overview of your current financial situation (or an
-      introduction page when no data file is open).
+      Home: a configurable overview of your current financial situation (or an
+      introduction page when no data file is open.)
     </para>
   </listitem>
 
@@ -104,8 +104,7 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Institutions: All of your institutions and accounts displayed in a
-      hierarchy.
+      Institutions: all of your institutions and accounts displayed in a hierarchy.
     </para>
   </listitem>
 
@@ -137,7 +136,7 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Scheduled Transactions: Your recurring bills and deposits.
+      Scheduled Transactions: your recurring bills and deposits.
     </para>
   </listitem>
 
@@ -153,8 +152,8 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Categories: Special accounts that provide a means for you to group
-      associated transactions.
+      Categories: special accounts that provide a means for you to group associated
+      transactions.
     </para>
   </listitem>
 
@@ -170,8 +169,8 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Tags: Special accounts that provide an additional means to Categories for
-      you to group associated transactions.
+      Tags: special accounts that provide an additional means similar to Categories
+      for you to group associated transactions.
     </para>
   </listitem>
 
@@ -187,8 +186,8 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Payees: All Payees used by &kmymoney;.  These are all the people or
-      organizations you pay money to or receive money from.
+      Payees: these are all the people or organizations you pay money to or receive
+      money from.
     </para>
   </listitem>
 
@@ -198,13 +197,13 @@
 	<inlinemediaobject>
 	  <imageobject>
 	    <imagedata fileref="ledgers_view.png" format="PNG"/>
-      </imageobject>
+          </imageobject>
 	  <textobject>
 	    <phrase>Ledgers View</phrase>
-      </textobject>
+          </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Ledgers: Your account transactions.
+      Ledgers: your account transactions.
     </para>
   </listitem>
 
@@ -220,7 +219,7 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Investments: Your portfolio summary.
+      Investments: your portfolio summary.
     </para>
   </listitem>
 
@@ -236,8 +235,8 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Reports: A collection of useful reports, providing alternate, customizable
-      views of your financial data.
+      Reports: a collection of reports, providing alternate, customizable views of
+      your financial data.
     </para>
   </listitem>
 
@@ -253,7 +252,7 @@
       </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Budgets: Your budgets.
+      Budgets: your budgets.
     </para>
   </listitem>
 
@@ -269,7 +268,7 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Forecast: This view provides a forecast of your accounts and categories.
+      Forecast: forecast of the balances of your accounts and categories.
     </para>
   </listitem>
 
@@ -285,9 +284,9 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Outbox: Used by the online banking module to provide feedback on running
-      processes.  This view is provided by the KBanking plugin and may not be
-      present on your system.
+      Outbox: used by the online banking module to provide feedback on running
+      processes.  This view is provided by the KBanking plugin and may not be present
+      on your system.
     </para>
   </listitem>
 </itemizedlist>

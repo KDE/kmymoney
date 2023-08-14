@@ -5,39 +5,45 @@
     <author><personname><firstname>Joe</firstname><surname>(joe1011010)</surname></personname>
             <email>joe1011010_km@users.sourceforge.net</email>
     </author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2010-04-05</date>
-  <releaseinfo>5.0.4</releaseinfo>
+  <date>2023-08-15</date>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title>Making the most of &kmymoney;</title>
 
 <para>
-  While you could go ahead, clicking some buttons and filling in some data,
-  after a time, you could decide you have done it wrong and start again, even if
-  you did read the documentation on each part of &kmymoney;.
+  While much of &kmymoney; might be obvious to a naive user, and you could go ahead,
+  clicking some buttons and filling in some data, after a time, you might decide you
+  have done it wrong and want to start again, even if you did read the documentation
+  on each part of &kmymoney;.
 </para>
 
 <para>
-  You will get a more effective system if you spend a little time planning how
-  you are going to use &kmymoney;, so follow the steps given here.
+  You will get a more effective system and much better use of your time if you first
+  spend a little time planning how you are going to use &kmymoney;, so follow the
+  steps given here.  This may seem very simple, and indeed, it is simple, but taking
+  the time to assure that your understanding of how things work is the same as
+  &kmymoney;'s will almost certianly save you time later.
 </para>
 
 <sect1 id="makingmostof.basicaccounting">
 <title>Basic Accounting</title>
 
 <para>
-  Imagine your money as balls, or beans, and to stop them rolling around you
-  keep them in a box, or pot. Accounting, or Bookkeeping, is the process of
-  counting and keeping track of the beans in the pot, or several pots.
+  Imagine your money as balls, or beans, and to stop them rolling around you keep
+  them in a box, or pot.  Accounting, or Bookkeeping, is the process of counting and
+  keeping track of the beans in the pot, or more important, the beans in several
+  pots.
 </para>
 
 <para>
-  You have some money in the pot marked <quote>Cash</quote>. You buy some goods,
-  so you take some beans out of the cash pot and place them into another pot
-  marked <quote>Supplier</quote>. The supplier gives you some goods in exchange
-  for the cash, so you take the beans out of the pot marked
-  <quote>Supplier</quote> and put them in the pot marked <quote>Goods</quote>.
+  You have some money in the pot marked <quote>Cash</quote>. You buy some goods, so
+  you take some beans out of the cash pot and place them into another pot marked
+  <quote>Supplier</quote>. The supplier gives you some goods in exchange for the
+  cash, so you take the beans out of the pot marked <quote>Supplier</quote> and put
+  them in the pot marked <quote>Goods</quote>.
 </para>
 
 <para>
@@ -131,23 +137,45 @@
 <title>Mapping your finances to &kmymoney;</title>
 
 <para>
-  So, collect up your papers and see the following sections for each item in
-  &kmymoney;.
+  So, collect your recent financial papers and see the following sections for more
+  information on how you can map your own finances to each of the different areas of
+  &kmymoney;.  Note that each of these sections below is presented in more detail in
+  later chapters of this handbook.
 </para>
 
 <sect2 id="makingmostof.mapping.accounts">
 <title>Accounts</title>
 
 <para>
-  These hold a value. Transactions are created against one or more accounts.
+  An <quote>Account</quote> in &kmymoney; represents one ot the <quote>pots</quote>
+  of the previous section: is can be anywhere which holds your money and possessions
+  that you wish to monitor.  You generally create an account in &kmymoney; to
+  represent each different account you have in <quote>real life,</quote> whether it
+  is with a bank or other financial institution, or a store, or even just the cash in
+  your wallet.  There are sevral types of accounts available, to represent the
+  different types of places your money may be.
 </para>
+
+<para>
+  Transactions (to be described in more detail later) are created to indicate money
+  moving in or out of one or more accounts.
+</para>
+
+<para>
+  As described below, accounts can either hold money which is actually yours (assets)
+  or money which you owe (liabilities.)  Liabilities can be though of as magic post,
+  which you can take beans from even if there are not acatually any beans there, but
+  which you eventually need to replace.  
+</para>
+
 
 <sect3 id="makingmostof.mapping.accounts.asset">
 <title>Accounts - Asset</title>
 
 <para>
-  These are the accounts which hold your money and possessions that you wish to
-  monitor. The following types are available:
+  There are multiple types of Asset Accounts.  They are all essentially the same, in
+  holding your money, but there are some differences in the details of how money
+  enters and leaves the different types of accounts.
 </para>
 
 <variablelist>
@@ -173,7 +201,7 @@
     <term>Cash</term>
     <listitem>
       <para>
-        Money in your hand or wallet.
+        Money in your pocket or yoor wallet.
       </para>
     </listitem>
   </varlistentry>
@@ -211,8 +239,7 @@
 <title>Accounts - Liability</title>
 
 <para>
-  These are the accounts which represent your debts and money owed that you wish
-  to monitor. The following types are available:
+  These accounts represent your debts and money you owe to others.
 </para>
 
 <variablelist>
@@ -238,7 +265,7 @@
     <term>Liability</term>
     <listitem>
       <para>
-        Anything else you owe that is not a loan.
+        Anything else you owe that does fit the other liability account types.
       </para>
     </listitem>
   </varlistentry>
@@ -250,8 +277,11 @@
 <title>Institutions</title>
 
 <para>
-  These are completely optional and can be used to group accounts, and show a
-  total value for all accounts in each group.
+  These represent financial institutions, such as banks or investment brokers.  They
+  can be used to group accounts, and can show the total value of all your accounts
+  within that institution.  These do not need to reflect actual organizations, but
+  are for your convenience in grouping your accounts, and their use is completely
+  optional.
 </para>
 </sect2>
 
@@ -259,29 +289,42 @@
 <title>Categories</title>
 
 <para>
-  These represent non-managed income and expense accounts that do not have a
-  value. The total value of transactions is shown against each category. A
-  category or transfer account is required for each transaction.
+  A Category is a special type of account used internally by &kmymoney; to track
+  income and expenses.  These account are non-managed, because as mentioned earlier,
+  they do not have real values, and show only what you have gotten from them or
+  contributed to them.  Each category shows the total value of transactions which
+  mention it.  The principle of double entry accounting requires that every
+  transaction include a category or transfer account.  This will also be explained in
+  more detail later in the handbook.
 </para>
-</sect2>
 
-<sect2 id="makingmostof.mapping.subcategories">
+<para>
+  Income Categories are used as places from which you receive money, and Expense
+  Categories represent purposes for which you spend money.  On rare occasion, money
+  can flow the "wrong" way, such as getting a refund for an over-payment of a utility
+  bill.
+</para>
+
+<sect3 id="makingmostof.mapping.subcategories">
 <title>Sub-Categories</title>
 
 <para>
-  Categories can be split into sub-categories, but this relationship is only for
-  display purposes, as the sub-category totals are not included in the higher
-  level category total.
+  Categories can be split into sub-categories, but this relationship is primarily for
+  your conveniend, and is used for display purposes.  Most of the time, the
+  sub-category totals are not included in the higher level category total, although
+  there are specific reports and displays where this can be done.
 </para>
+</sect3>
+
 </sect2>
 
 <sect2 id="makingmostof.mapping.tags">
 <title>Tags</title>
 
 <para>
-  Tags are very similar to Categories, as they are also non-managed accounts
-  that do not have a value.  However, unlike Categories, the use of Tags is
-  completely optional.
+  Tags are very similar to Categories, as they are also non-managed accounts that do
+  not have a value.  However, unlike Categories, the use of Tags is completely
+  optional.  They can be used to group transactions for reporting purpses.
 </para>
 </sect2>
 
@@ -289,9 +332,12 @@
 <title>Payees</title>
 
 <para>
-  These are optional for transactions. They are required for Scheduled
-  transactions. A transaction history, with category, is shown against each
-  payee.
+  A Payee (or Payor) represents someone or some group to which you pay money or which
+  pays you money.  As with Tags, they are non-managed, and do not have a value.  They
+  are primarily a convenience for being able to report how much money you have sent
+  to someone or spent at a particular store.  These are optional for most
+  transactions, but are required for Scheduled transactions, which are describe
+  below.  A transaction history, with category, can be shown for each payee.
 </para>
 </sect2>
 
@@ -299,9 +345,9 @@
 <title>Scheduled transactions</title>
 
 <para>
-  Where transactions occur on a regular basis, these can be set up against a
-  Schedule. Transactions are created from a schedule; any that are overdue can
-  be seen on the home page.
+  Where transactions occur on a regular basis, such as salary or utility bills, these
+  can be set up against a Schedule.  Transactions are created from Schedules.
+  Scheduled transaction which are overdue can be shown on the home page.
 </para>
 </sect2>
 </sect1>
@@ -310,73 +356,81 @@
 <title>Useful Tips</title>
 
 <para>
+  When you start &kmymoney;, the Home View, or Home Page, shows a high level overview
+  of your finances.  It is divided into several sections, and you can customize which
+  are displayed.  Along the left, there are icons for each of the major Views.  Each one is used
+  by &kmymoney; to present a different type of data for entry or reveiw.
+</para>
+
+<para>
   Unless you keep your money under your mattress or under the floorboards, you
   probably make use of one or more institutions where you have accounts, which
   may be in credit or debit. In order to familiarize yourself with the way
   &kmymoney; works, choose an account you want to track with &kmymoney; and
   select the <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem>
-  </menuchoice> menu item in order to set up an account file.
+  </menuchoice> menu item in order to set up a data file.
 </para>
 
 <para>
-  If you have used another personal finance manager, you may be able to import
-  the data from it into &kmymoney;.
+  If you have used another personal finance manager, you may be able to import the
+  data from it into &kmymoney;.
 </para>
 
 <para>
-  If you have some regular receipts into or outgoings from this account, go to
-  Payee and enter the names of both the payers and the payees involved; then go
-  to Schedule and fill in a New Schedule for each recurring transaction. If you
-  haven't entered the payee or payer, &kmymoney; will offer you the opportunity
-  to do this in the middle of entering the schedule.
+  If you have some regular receipts into or outgoings from this account, you can go
+  to the Payees View and enter the names of both the payers and the payees involved;
+  then go to Scheduled Transactions View and fill in a New Schedule for each
+  recurring transaction. If you haven't entered the payee or payer, &kmymoney; will
+  offer you the opportunity to do this in the middle of entering the Schedule.
 </para>
 
 <para>
-  To add other new transactions go to Ledgers; you can add new payees and
-  categories in the middle of a transaction or by going to Payees or Categories
-  before entering the transaction.
+  To add other new transactions go to th Ledger view; you can add new payees and
+  categories while entering a transaction or by going to the Payees or Categories
+  View before entering the transaction.
 </para>
 
-<para>
-  You will probably find that the default Categories do not exactly match your
-  needs; you can easily delete ones you know you are never going to need and add
-  others that you need. But when you are entering a transaction, you only have
-  to type a few letters of a category and &kmymoney; will offer you a drop down
-  list of the matching categories from which to choose.
+<para> 
+  Depending on which option you chose when setting up the data file, you will
+  probably find that the default Categories do not exactly match your needs; you can
+  easily delete ones you know you are never going to need and add others that you
+  need. But when you are entering a transaction, you only have to type a few letters
+  of a category and &kmymoney; will offer you a drop down list of the matching
+  categories from which to choose.
 </para>
 
 <para>
   You can add different accounts managed by different institutions; the
-  preferred one will show when you open &kmymoney; but you can quickly switch to
+  preferred ones will show when you open &kmymoney; but you can quickly switch to
   any of the others.
 </para>
 
 <para>
-  When you make a payment, &kmymoney; will work out what the next check number
-  should be; delete this if you are not making a check payment or edit it if
-  the first check you enter is not check number 1. Alternatively, it is
-  possible to switch off auto-increment of check numbers.
+  When you make a payment, &kmymoney; will work out what the next check number should
+  be; delete this if you are not making a check payment or edit it if the first check
+  you enter is not check number 1. Alternatively, it is possible to switch off
+  auto-increment of check numbers.
 </para>
 
 <para>
-  Every so often you may get statements of your account from the institutions
-  you use; you can reconcile your &kmymoney; accounts against these statements
-  so that you have an accurate statement of the current state of your finances.
+  Every so often you may get statements of your account from the institutions you
+  use.  You can reconcile your &kmymoney; accounts against these statements so that
+  you know you have an accurate representation of the current state of your finances.
 </para>
 
 <para>
-  If you go to Reports, you will find several default reports; to customize
-  these, open one similar to the sort you prefer and then select 'New' (not
-  'Copy'); you can then customize this to your needs and mark it as a preferred
+  If you go to the Reports View, you will find several default reports.  To customize
+  these, open the one most similar to the sort you prefer and then select 'New' (not
+  'Copy'.)  You can then customize this to your needs and mark it as a preferred
   report if you wish.
 </para>
 
 <para>
-  Though &kmymoney; is not intended for use in a business context, if you are
-  running a business on your own and so do not need payroll functions, you will
-  probably find that &kmymoney; is sufficiently customizable to meet your needs
-  particularly as it comes with budgeting and forecasting features and you can
-  export your customized reports via CSV into other applications.
+  Though &kmymoney; is not intended for use in a business context, if you are running
+  a business on your own and so do not need payroll functions, you may find that
+  &kmymoney; is sufficiently customizable to meet your needs, particularly as it
+  comes with budgeting and forecasting features, and you can export your customized
+  reports via CSV into other applications.
 </para>
 </sect1>
 </chapter>
