@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-13 00:46+0000\n"
+"POT-Creation-Date: 2023-08-14 00:47+0000\n"
 "PO-Revision-Date: 2014-09-26 18:07+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -9808,138 +9808,145 @@ msgid ""
 "qt>"
 msgstr "A(z) <b>%1</b> fájl már létezik. Biztosan felül kívánja írni?"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:76
+#: kmymoney/plugins/csv/export/csvwriter.cpp:78
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:73
 #, kde-format
 msgid "Unexpected exception '%1'"
 msgstr ""
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:80
+#: kmymoney/plugins/csv/export/csvwriter.cpp:82
 #, kde-format
 msgid "Export completed.\n"
 msgstr "Az exportálás befejeződött.\n"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:83
+#: kmymoney/plugins/csv/export/csvwriter.cpp:85
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "Nem sikerült megnyitni írásra a(z) „%1” fájlt"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:97
+#: kmymoney/plugins/csv/export/csvwriter.cpp:99
 #, kde-format
 msgid "Account Type:"
 msgstr "Számlatípus:"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:101
-#: kmymoney/plugins/csv/export/csvwriter.cpp:111
+#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#, fuzzy, kde-format
+#| msgctxt "Header for AqBanking account list"
+#| msgid "Account Name"
+msgid "Account Name:"
+msgstr "Számlanév"
+
+#: kmymoney/plugins/csv/export/csvwriter.cpp:107
+#: kmymoney/plugins/csv/export/csvwriter.cpp:116
 #, fuzzy, kde-format
 #| msgid "Date"
 msgctxt "@title:column header in CSV export"
 msgid "Date"
 msgstr "Dátum"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:101
+#: kmymoney/plugins/csv/export/csvwriter.cpp:107
 #, fuzzy, kde-format
 #| msgid "Security"
 msgctxt "@title:column header in CSV export"
 msgid "Security"
 msgstr "Kötvény"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:102
+#: kmymoney/plugins/csv/export/csvwriter.cpp:108
 #, fuzzy, kde-format
 #| msgid "Symbol"
 msgctxt "@title:column header in CSV export"
 msgid "Symbol"
 msgstr "Szimbólum"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:102
+#: kmymoney/plugins/csv/export/csvwriter.cpp:108
 #, fuzzy, kde-format
 #| msgid "Action/Type"
 msgctxt "@title:column header in CSV export"
 msgid "Action/Type"
 msgstr "Művelet/típus"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
-#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:109
+#: kmymoney/plugins/csv/export/csvwriter.cpp:117
 #, fuzzy, kde-format
 #| msgid "Amount"
 msgctxt "@title:column header in CSV export"
 msgid "Amount"
 msgstr "Összeg"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#: kmymoney/plugins/csv/export/csvwriter.cpp:109
 #, fuzzy, kde-format
 #| msgid "Quantity"
 msgctxt "@title:column header in CSV export"
 msgid "Quantity"
 msgstr "Mennyiség"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:104
+#: kmymoney/plugins/csv/export/csvwriter.cpp:110
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@title:column header in CSV export"
 msgid "Price"
 msgstr "Ár"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:104
+#: kmymoney/plugins/csv/export/csvwriter.cpp:110
 #, fuzzy, kde-format
 #| msgid "Interest"
 msgctxt "@title:column header in CSV export"
 msgid "Interest"
 msgstr "Kamat"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:105
+#: kmymoney/plugins/csv/export/csvwriter.cpp:111
 #, fuzzy, kde-format
 #| msgid "Fees"
 msgctxt "@title:column header in CSV export"
 msgid "Fees"
 msgstr "Díjak"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:105
+#: kmymoney/plugins/csv/export/csvwriter.cpp:111
 #, fuzzy, kde-format
 #| msgid "Account"
 msgctxt "@title:column header in CSV export"
 msgid "Account"
 msgstr "Számla"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:106
-#: kmymoney/plugins/csv/export/csvwriter.cpp:113
+#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:118
 #, fuzzy, kde-format
 #| msgid "Memo"
 msgctxt "@title:column header in CSV export"
 msgid "Memo"
 msgstr "Megjegyzés"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:106
-#: kmymoney/plugins/csv/export/csvwriter.cpp:113
+#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:118
 #, fuzzy, kde-format
 #| msgid "Status"
 msgctxt "@title:column header in CSV export"
 msgid "Status"
 msgstr "Állapot"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:111
+#: kmymoney/plugins/csv/export/csvwriter.cpp:116
 #, fuzzy, kde-format
 #| msgid "Payee"
 msgctxt "@title:column header in CSV export"
 msgid "Payee"
 msgstr "Kedvezményezett"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:117
 #, fuzzy, kde-format
 #| msgid "Account"
 msgctxt "@title:column header in CSV export"
 msgid "Account/Cat"
 msgstr "Számla"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:114
+#: kmymoney/plugins/csv/export/csvwriter.cpp:119
 #, fuzzy, kde-format
 #| msgid "Number"
 msgctxt "@title:column header in CSV export"
 msgid "Number"
 msgstr "Szám"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:182
+#: kmymoney/plugins/csv/export/csvwriter.cpp:187
 #, kde-format
 msgid ""
 "Transaction number '%1' is missing an account assignment.\n"
@@ -9948,36 +9955,36 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:184
-#: kmymoney/plugins/csv/export/csvwriter.cpp:364
+#: kmymoney/plugins/csv/export/csvwriter.cpp:189
+#: kmymoney/plugins/csv/export/csvwriter.cpp:369
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:349
 #: kmymoney/widgets/ktransactionfilter.ui:643
 #, kde-format
 msgid "Invalid transaction"
 msgstr "Érvénytelen tranzakció"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:245
+#: kmymoney/plugins/csv/export/csvwriter.cpp:250
 #, fuzzy, kde-format
 #| msgid "Category"
 msgctxt "@title:column header in CSV export"
 msgid "splitCategory"
 msgstr "Kategória"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:245
+#: kmymoney/plugins/csv/export/csvwriter.cpp:250
 #, fuzzy, kde-format
 #| msgid "Memo"
 msgctxt "@title:column header in CSV export"
 msgid "splitMemo"
 msgstr "Megjegyzés"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:246
+#: kmymoney/plugins/csv/export/csvwriter.cpp:251
 #, fuzzy, kde-format
 #| msgid "Amount"
 msgctxt "@title:column header in CSV export"
 msgid "splitAmount"
 msgstr "Összeg"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:362
+#: kmymoney/plugins/csv/export/csvwriter.cpp:367
 #, kde-format
 msgid ""
 "Transaction number '%1' is missing an account assignment.\n"
@@ -14777,19 +14784,19 @@ msgstr ""
 msgid "Inserting online jobs."
 msgstr ""
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2028
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2026
 #, kde-format
 msgid "SQLite file %1 does not exist"
 msgstr "A(z) %1 SQLite fájl nem létezik"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2082
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2080
 #, kde-format
 msgid ""
 "Automatic database creation for type %1 is not currently implemented.\n"
 "Please create database %2 manually"
 msgstr ""
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2102
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2100
 #, kde-format
 msgid "Error in create database %1; do you have create permissions?"
 msgstr ""

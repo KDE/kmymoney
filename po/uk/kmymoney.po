@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-13 00:46+0000\n"
-"PO-Revision-Date: 2023-08-12 08:54+0300\n"
+"POT-Creation-Date: 2023-08-14 00:47+0000\n"
+"PO-Revision-Date: 2023-08-13 08:28+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -9627,123 +9627,130 @@ msgid ""
 "qt>"
 msgstr "<qt>Файл з назвою <b>%1</b> вже існує. Бажаєте його перезаписати?</qt>"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:76
+#: kmymoney/plugins/csv/export/csvwriter.cpp:78
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:73
 #, kde-format
 msgid "Unexpected exception '%1'"
 msgstr "Неочікуване виключення «%1»"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:80
+#: kmymoney/plugins/csv/export/csvwriter.cpp:82
 #, kde-format
 msgid "Export completed.\n"
 msgstr "Експортування завершено.\n"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:83
+#: kmymoney/plugins/csv/export/csvwriter.cpp:85
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "Не вдалося відкрити файл «%1» для запису."
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:97
+#: kmymoney/plugins/csv/export/csvwriter.cpp:99
 #, kde-format
 msgid "Account Type:"
 msgstr "Тип рахунку:"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:101
-#: kmymoney/plugins/csv/export/csvwriter.cpp:111
+#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#, fuzzy, kde-format
+#| msgctxt "Header for AqBanking account list"
+#| msgid "Account Name"
+msgid "Account Name:"
+msgstr "Назва рахунку"
+
+#: kmymoney/plugins/csv/export/csvwriter.cpp:107
+#: kmymoney/plugins/csv/export/csvwriter.cpp:116
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Date"
 msgstr "Дата"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:101
+#: kmymoney/plugins/csv/export/csvwriter.cpp:107
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Security"
 msgstr "Цінний папір"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:102
+#: kmymoney/plugins/csv/export/csvwriter.cpp:108
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Symbol"
 msgstr "Символ"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:102
+#: kmymoney/plugins/csv/export/csvwriter.cpp:108
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Action/Type"
 msgstr "Дія/Тип"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
-#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:109
+#: kmymoney/plugins/csv/export/csvwriter.cpp:117
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Amount"
 msgstr "Сума"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#: kmymoney/plugins/csv/export/csvwriter.cpp:109
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Quantity"
 msgstr "Кількість"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:104
+#: kmymoney/plugins/csv/export/csvwriter.cpp:110
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Price"
 msgstr "Ціна"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:104
+#: kmymoney/plugins/csv/export/csvwriter.cpp:110
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Interest"
 msgstr "Відсоток"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:105
+#: kmymoney/plugins/csv/export/csvwriter.cpp:111
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Fees"
 msgstr "Мита"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:105
+#: kmymoney/plugins/csv/export/csvwriter.cpp:111
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Account"
 msgstr "Рахунок"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:106
-#: kmymoney/plugins/csv/export/csvwriter.cpp:113
+#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:118
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Memo"
 msgstr "Нотатка"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:106
-#: kmymoney/plugins/csv/export/csvwriter.cpp:113
+#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:118
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Status"
 msgstr "Стан"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:111
+#: kmymoney/plugins/csv/export/csvwriter.cpp:116
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Payee"
 msgstr "Отримувач"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:117
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Account/Cat"
 msgstr "Рахунок/Категорія"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:114
+#: kmymoney/plugins/csv/export/csvwriter.cpp:119
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Number"
 msgstr "Номер"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:182
+#: kmymoney/plugins/csv/export/csvwriter.cpp:187
 #, kde-format
 msgid ""
 "Transaction number '%1' is missing an account assignment.\n"
@@ -9755,33 +9762,33 @@ msgstr ""
 "Запис операції відкинуто.\n"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:184
-#: kmymoney/plugins/csv/export/csvwriter.cpp:364
+#: kmymoney/plugins/csv/export/csvwriter.cpp:189
+#: kmymoney/plugins/csv/export/csvwriter.cpp:369
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:349
 #: kmymoney/widgets/ktransactionfilter.ui:643
 #, kde-format
 msgid "Invalid transaction"
 msgstr "Некоректна операція"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:245
+#: kmymoney/plugins/csv/export/csvwriter.cpp:250
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitCategory"
 msgstr "роздКатегорія"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:245
+#: kmymoney/plugins/csv/export/csvwriter.cpp:250
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitMemo"
 msgstr "роздНотатка"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:246
+#: kmymoney/plugins/csv/export/csvwriter.cpp:251
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitAmount"
 msgstr "роздСума"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:362
+#: kmymoney/plugins/csv/export/csvwriter.cpp:367
 #, kde-format
 msgid ""
 "Transaction number '%1' is missing an account assignment.\n"
@@ -14674,12 +14681,12 @@ msgstr ""
 msgid "Inserting online jobs."
 msgstr "Вставляємо інтернет-завдання."
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2028
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2026
 #, kde-format
 msgid "SQLite file %1 does not exist"
 msgstr "Файла SQLite %1 не існує"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2082
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2080
 #, kde-format
 msgid ""
 "Automatic database creation for type %1 is not currently implemented.\n"
@@ -14689,7 +14696,7 @@ msgstr ""
 "типу %1.\n"
 "Будь ласка, створіть базу даних %2 вручну."
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2102
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2100
 #, kde-format
 msgid "Error in create database %1; do you have create permissions?"
 msgstr ""
@@ -19224,6 +19231,8 @@ msgid ""
 "The current implementation cannot modify multiple transactions in different "
 "accounts."
 msgstr ""
+"У поточній реалізації програми не можна одночасно вносити зміни до декількох "
+"операцій на різних рахунках."
 
 #: kmymoney/views/kaccountsview.cpp:174
 #: kmymoney/views/kinstitutionsview.cpp:208
@@ -20869,30 +20878,25 @@ msgid "The posting date is invalid."
 msgstr "Дата проведення операції є некоректною."
 
 #: kmymoney/views/multitransactioneditor.cpp:218
-#, fuzzy, kde-format
-#| msgid "Select account"
+#, kde-format
 msgid "Select category or account."
-msgstr "Виберіть рахунок"
+msgstr "Виберіть категорію або рахунок."
 
 #: kmymoney/views/multitransactioneditor.cpp:230
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Transaction '%1' has a post date '%2' before one of the referenced "
-#| "account's opening date."
+#, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
 "A selected transaction has a post date (%1) before the opening date of the "
 "selected account (%2)."
 msgstr ""
-"  * Переказ «%1» має дату «%2» до дати, яка вважається датою відкриття "
-"рахунку."
+"Дата переказу вибраної операції (%1) передує даті відкриття вибраного "
+"рахунка (%2)."
 
 #: kmymoney/views/multitransactioneditor.cpp:696
-#, fuzzy, kde-format
-#| msgid "Cannot edit multiple split transactions at once."
+#, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
-msgstr "Редагування декількох дроблених операцій одночасно неможливе."
+msgstr "Не можна одночасно редагувати декілька розкладів."
 
 #: kmymoney/views/multitransactioneditor.cpp:704
 #, kde-format
@@ -20900,6 +20904,8 @@ msgid ""
 "Selection of category or account is not possible when split transactions are "
 "part of the selection."
 msgstr ""
+"Вибір категорії або рахунка неможливий, якщо частиною позначення є розділені "
+"операції."
 
 #: kmymoney/views/newspliteditor.cpp:146
 #, kde-format

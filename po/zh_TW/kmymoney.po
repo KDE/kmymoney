@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-13 00:46+0000\n"
+"POT-Creation-Date: 2023-08-14 00:47+0000\n"
 "PO-Revision-Date: 2019-01-19 19:46+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -9775,140 +9775,147 @@ msgid ""
 "qt>"
 msgstr "檔案 <b>%1</b> 已存在。您確定要覆寫它嗎？"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:76
+#: kmymoney/plugins/csv/export/csvwriter.cpp:78
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:73
 #, kde-format
 msgid "Unexpected exception '%1'"
 msgstr ""
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:80
+#: kmymoney/plugins/csv/export/csvwriter.cpp:82
 #, fuzzy, kde-format
 #| msgid "Import complete"
 msgid "Export completed.\n"
 msgstr "匯入完成"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:83
+#: kmymoney/plugins/csv/export/csvwriter.cpp:85
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "無法開啟寫入檔案 '%1'"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:97
+#: kmymoney/plugins/csv/export/csvwriter.cpp:99
 #, fuzzy, kde-format
 #| msgid "Account Types"
 msgid "Account Type:"
 msgstr "帳戶型態"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:101
-#: kmymoney/plugins/csv/export/csvwriter.cpp:111
+#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#, fuzzy, kde-format
+#| msgctxt "Header for AqBanking account list"
+#| msgid "Account Name"
+msgid "Account Name:"
+msgstr "帳戶名稱"
+
+#: kmymoney/plugins/csv/export/csvwriter.cpp:107
+#: kmymoney/plugins/csv/export/csvwriter.cpp:116
 #, fuzzy, kde-format
 #| msgid "Date"
 msgctxt "@title:column header in CSV export"
 msgid "Date"
 msgstr "日期"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:101
+#: kmymoney/plugins/csv/export/csvwriter.cpp:107
 #, fuzzy, kde-format
 #| msgid "Security"
 msgctxt "@title:column header in CSV export"
 msgid "Security"
 msgstr "抵押品"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:102
+#: kmymoney/plugins/csv/export/csvwriter.cpp:108
 #, fuzzy, kde-format
 #| msgid "Symbol"
 msgctxt "@title:column header in CSV export"
 msgid "Symbol"
 msgstr "符號"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:102
+#: kmymoney/plugins/csv/export/csvwriter.cpp:108
 #, fuzzy, kde-format
 #| msgid "Action"
 msgctxt "@title:column header in CSV export"
 msgid "Action/Type"
 msgstr "動作"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
-#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:109
+#: kmymoney/plugins/csv/export/csvwriter.cpp:117
 #, fuzzy, kde-format
 #| msgid "Amount"
 msgctxt "@title:column header in CSV export"
 msgid "Amount"
 msgstr "數量"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#: kmymoney/plugins/csv/export/csvwriter.cpp:109
 #, fuzzy, kde-format
 #| msgid "Quantity"
 msgctxt "@title:column header in CSV export"
 msgid "Quantity"
 msgstr "數量"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:104
+#: kmymoney/plugins/csv/export/csvwriter.cpp:110
 #, fuzzy, kde-format
 #| msgid "Price"
 msgctxt "@title:column header in CSV export"
 msgid "Price"
 msgstr "價格"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:104
+#: kmymoney/plugins/csv/export/csvwriter.cpp:110
 #, fuzzy, kde-format
 #| msgid "Interest"
 msgctxt "@title:column header in CSV export"
 msgid "Interest"
 msgstr "利率"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:105
+#: kmymoney/plugins/csv/export/csvwriter.cpp:111
 #, fuzzy, kde-format
 #| msgid "Fees"
 msgctxt "@title:column header in CSV export"
 msgid "Fees"
 msgstr "費用"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:105
+#: kmymoney/plugins/csv/export/csvwriter.cpp:111
 #, fuzzy, kde-format
 #| msgid "Account"
 msgctxt "@title:column header in CSV export"
 msgid "Account"
 msgstr "帳戶"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:106
-#: kmymoney/plugins/csv/export/csvwriter.cpp:113
+#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:118
 #, fuzzy, kde-format
 #| msgid "Memo"
 msgctxt "@title:column header in CSV export"
 msgid "Memo"
 msgstr "備忘"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:106
-#: kmymoney/plugins/csv/export/csvwriter.cpp:113
+#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:118
 #, fuzzy, kde-format
 #| msgid "Status"
 msgctxt "@title:column header in CSV export"
 msgid "Status"
 msgstr "狀態"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:111
+#: kmymoney/plugins/csv/export/csvwriter.cpp:116
 #, fuzzy, kde-format
 #| msgid "Payee"
 msgctxt "@title:column header in CSV export"
 msgid "Payee"
 msgstr "收款人"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:117
 #, fuzzy, kde-format
 #| msgid "Account"
 msgctxt "@title:column header in CSV export"
 msgid "Account/Cat"
 msgstr "帳戶"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:114
+#: kmymoney/plugins/csv/export/csvwriter.cpp:119
 #, fuzzy, kde-format
 #| msgid "Number"
 msgctxt "@title:column header in CSV export"
 msgid "Number"
 msgstr "編號"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:182
+#: kmymoney/plugins/csv/export/csvwriter.cpp:187
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgid ""
@@ -9918,36 +9925,36 @@ msgid ""
 msgstr "交易內沒有指定類別。"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:184
-#: kmymoney/plugins/csv/export/csvwriter.cpp:364
+#: kmymoney/plugins/csv/export/csvwriter.cpp:189
+#: kmymoney/plugins/csv/export/csvwriter.cpp:369
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:349
 #: kmymoney/widgets/ktransactionfilter.ui:643
 #, kde-format
 msgid "Invalid transaction"
 msgstr "不合法的交易"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:245
+#: kmymoney/plugins/csv/export/csvwriter.cpp:250
 #, fuzzy, kde-format
 #| msgid "Category"
 msgctxt "@title:column header in CSV export"
 msgid "splitCategory"
 msgstr "類別"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:245
+#: kmymoney/plugins/csv/export/csvwriter.cpp:250
 #, fuzzy, kde-format
 #| msgid "Memo"
 msgctxt "@title:column header in CSV export"
 msgid "splitMemo"
 msgstr "備忘"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:246
+#: kmymoney/plugins/csv/export/csvwriter.cpp:251
 #, fuzzy, kde-format
 #| msgid "Amount"
 msgctxt "@title:column header in CSV export"
 msgid "splitAmount"
 msgstr "數量"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:362
+#: kmymoney/plugins/csv/export/csvwriter.cpp:367
 #, fuzzy, kde-format
 #| msgid "Transaction is missing a category assignment."
 msgid ""
@@ -14776,13 +14783,13 @@ msgstr ""
 msgid "Inserting online jobs."
 msgstr ""
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2028
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2026
 #, fuzzy, kde-format
 #| msgid "Sqlite file %1 does not exist"
 msgid "SQLite file %1 does not exist"
 msgstr "Sqlite 檔 %1 不存在"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2082
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2080
 #, kde-format
 msgid ""
 "Automatic database creation for type %1 is not currently implemented.\n"
@@ -14791,7 +14798,7 @@ msgstr ""
 "目前尚未實作自動建立型態為 %1 的資料庫。\n"
 "請手動建立資料庫 %2"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2102
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2100
 #, kde-format
 msgid "Error in create database %1; do you have create permissions?"
 msgstr "建立資料庫 %1 時發生錯誤；您有建立權限嗎？"

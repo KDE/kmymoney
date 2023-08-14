@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-13 00:46+0000\n"
-"PO-Revision-Date: 2023-08-12 10:54+0200\n"
+"POT-Creation-Date: 2023-08-14 00:47+0000\n"
+"PO-Revision-Date: 2023-08-13 11:29+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -9633,123 +9633,130 @@ msgid ""
 msgstr ""
 "<qt>El fitxer <b>%1</b> ja existeix. Realment voleu sobreescriure'l?</qt>"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:76
+#: kmymoney/plugins/csv/export/csvwriter.cpp:78
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:73
 #, kde-format
 msgid "Unexpected exception '%1'"
 msgstr "Excepció inesperada: «%1»"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:80
+#: kmymoney/plugins/csv/export/csvwriter.cpp:82
 #, kde-format
 msgid "Export completed.\n"
 msgstr "S'ha completat l'exportació.\n"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:83
+#: kmymoney/plugins/csv/export/csvwriter.cpp:85
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "No es pot obrir el fitxer «%1» per a escriptura"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:97
+#: kmymoney/plugins/csv/export/csvwriter.cpp:99
 #, kde-format
 msgid "Account Type:"
 msgstr "Tipus de compte:"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:101
-#: kmymoney/plugins/csv/export/csvwriter.cpp:111
+#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#, fuzzy, kde-format
+#| msgctxt "Header for AqBanking account list"
+#| msgid "Account Name"
+msgid "Account Name:"
+msgstr "Nom del compte"
+
+#: kmymoney/plugins/csv/export/csvwriter.cpp:107
+#: kmymoney/plugins/csv/export/csvwriter.cpp:116
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Date"
 msgstr "Data"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:101
+#: kmymoney/plugins/csv/export/csvwriter.cpp:107
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Security"
 msgstr "Títol"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:102
+#: kmymoney/plugins/csv/export/csvwriter.cpp:108
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Symbol"
 msgstr "Símbol"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:102
+#: kmymoney/plugins/csv/export/csvwriter.cpp:108
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Action/Type"
 msgstr "Acció/Tipus"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
-#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:109
+#: kmymoney/plugins/csv/export/csvwriter.cpp:117
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Amount"
 msgstr "Import"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#: kmymoney/plugins/csv/export/csvwriter.cpp:109
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Quantity"
 msgstr "Quantitat"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:104
+#: kmymoney/plugins/csv/export/csvwriter.cpp:110
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Price"
 msgstr "Preu"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:104
+#: kmymoney/plugins/csv/export/csvwriter.cpp:110
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Interest"
 msgstr "Interès"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:105
+#: kmymoney/plugins/csv/export/csvwriter.cpp:111
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Fees"
 msgstr "Despeses"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:105
+#: kmymoney/plugins/csv/export/csvwriter.cpp:111
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Account"
 msgstr "Compte"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:106
-#: kmymoney/plugins/csv/export/csvwriter.cpp:113
+#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:118
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Memo"
 msgstr "Recordatori"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:106
-#: kmymoney/plugins/csv/export/csvwriter.cpp:113
+#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:118
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Status"
 msgstr "Estat"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:111
+#: kmymoney/plugins/csv/export/csvwriter.cpp:116
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Payee"
 msgstr "Beneficiari"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:117
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Account/Cat"
 msgstr "Compte/Cat"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:114
+#: kmymoney/plugins/csv/export/csvwriter.cpp:119
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Number"
 msgstr "Número"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:182
+#: kmymoney/plugins/csv/export/csvwriter.cpp:187
 #, kde-format
 msgid ""
 "Transaction number '%1' is missing an account assignment.\n"
@@ -9761,8 +9768,8 @@ msgstr ""
 "Operació s'ha ignorat.\n"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:184
-#: kmymoney/plugins/csv/export/csvwriter.cpp:364
+#: kmymoney/plugins/csv/export/csvwriter.cpp:189
+#: kmymoney/plugins/csv/export/csvwriter.cpp:369
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:349
 #: kmymoney/widgets/ktransactionfilter.ui:643
 #, kde-format
@@ -9770,27 +9777,27 @@ msgid "Invalid transaction"
 msgstr "Operació no vàlida"
 
 # skip-rule: punctuation-period-no
-#: kmymoney/plugins/csv/export/csvwriter.cpp:245
+#: kmymoney/plugins/csv/export/csvwriter.cpp:250
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitCategory"
 msgstr "Categoria desglo."
 
 # skip-rule: punctuation-period-no
-#: kmymoney/plugins/csv/export/csvwriter.cpp:245
+#: kmymoney/plugins/csv/export/csvwriter.cpp:250
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitMemo"
 msgstr "Recordatori desglo."
 
 # skip-rule: punctuation-period-no
-#: kmymoney/plugins/csv/export/csvwriter.cpp:246
+#: kmymoney/plugins/csv/export/csvwriter.cpp:251
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitAmount"
 msgstr "Import desglo."
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:362
+#: kmymoney/plugins/csv/export/csvwriter.cpp:367
 #, kde-format
 msgid ""
 "Transaction number '%1' is missing an account assignment.\n"
@@ -14634,12 +14641,12 @@ msgstr ""
 msgid "Inserting online jobs."
 msgstr "S'estan inserint treballs en línia."
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2028
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2026
 #, kde-format
 msgid "SQLite file %1 does not exist"
 msgstr "El fitxer SQLite %1 no existeix"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2082
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2080
 #, kde-format
 msgid ""
 "Automatic database creation for type %1 is not currently implemented.\n"
@@ -14649,7 +14656,7 @@ msgstr ""
 "de tipus %1.\n"
 "Si us plau, creeu manualment la base de dades %2"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2102
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2100
 #, kde-format
 msgid "Error in create database %1; do you have create permissions?"
 msgstr "Error en crear la base de dades %1; teniu permís de creació?"
@@ -19180,6 +19187,8 @@ msgid ""
 "The current implementation cannot modify multiple transactions in different "
 "accounts."
 msgstr ""
+"La implementació actual no pot modificar diverses operacions en comptes "
+"diferents."
 
 # skip-rule: ff-net
 #: kmymoney/views/kaccountsview.cpp:174
@@ -20826,30 +20835,25 @@ msgid "The posting date is invalid."
 msgstr "La data de situació no és vàlida."
 
 #: kmymoney/views/multitransactioneditor.cpp:218
-#, fuzzy, kde-format
-#| msgid "Select account"
+#, kde-format
 msgid "Select category or account."
-msgstr "Escolliu un compte"
+msgstr "Seleccioneu una categoria o un compte."
 
 #: kmymoney/views/multitransactioneditor.cpp:230
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Transaction '%1' has a post date '%2' before one of the referenced "
-#| "account's opening date."
+#, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
 "A selected transaction has a post date (%1) before the opening date of the "
 "selected account (%2)."
 msgstr ""
-"  * L'operació «%1» té una data de situació «%2» anterior a la data "
-"d'obertura del compte de referència."
+"Una operació seleccionada té una data de situació (%1) anterior a la data "
+"d'obertura del compte seleccionat (%2)."
 
 #: kmymoney/views/multitransactioneditor.cpp:696
-#, fuzzy, kde-format
-#| msgid "Cannot open file as requested."
+#, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
-msgstr "No s'ha pogut obrir el fitxer tal com s'ha sol·licitat."
+msgstr "No es poden editar múltiples planificacions a la vegada."
 
 #: kmymoney/views/multitransactioneditor.cpp:704
 #, kde-format
@@ -20857,6 +20861,8 @@ msgid ""
 "Selection of category or account is not possible when split transactions are "
 "part of the selection."
 msgstr ""
+"No és possible la selecció de la categoria o del compte quan les operacions "
+"desglossades són part de la selecció."
 
 #: kmymoney/views/newspliteditor.cpp:146
 #, kde-format
@@ -25356,9 +25362,3 @@ msgstr ""
 "\n"
 "<p>Tota la informació és optativa i s'usa per a personalitzar el fitxer del "
 "KMyMoney.</p>"
-
-#~ msgid "There are no entries in this account.\n"
-#~ msgstr "No hi ha cap entrada en aquest compte.\n"
-
-#~ msgid "Invalid account"
-#~ msgstr "Compte no vàlid"
