@@ -126,7 +126,13 @@ QVariant OnlineJobsModel::data(const QModelIndex& index, int role) const
             return MyMoneyFile::instance()->accountsModel()->itemById(job.responsibleAccount()).name();
 
         case Action:
-            return job.task()->jobTypeName();
+            try {
+                return job.task()->jobTypeName();
+            } catch (const onlineJob::badTaskCast&) {
+            } catch (const onlineJob::emptyTask&) {
+            } catch (const MyMoneyException&) {
+            }
+            break;
 
         case Value:
             // Show credit transfer data
