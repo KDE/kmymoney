@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-14 02:26+0000\n"
-"PO-Revision-Date: 2023-08-08 14:43+0200\n"
+"PO-Revision-Date: 2023-08-14 11:39+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -9922,11 +9922,9 @@ msgid "Account Type:"
 msgstr "Tipus de compte:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:100
-#, fuzzy, kde-format
-#| msgctxt "Header for AqBanking account list"
-#| msgid "Account Name"
+#, kde-format
 msgid "Account Name:"
-msgstr "Nom del compte"
+msgstr "Nom del compte:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:104
 #, kde-format
