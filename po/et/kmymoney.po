@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-14 00:47+0000\n"
+"POT-Creation-Date: 2023-08-15 00:46+0000\n"
 "PO-Revision-Date: 2020-05-02 10:27+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -8981,23 +8981,23 @@ msgctxt "@title:column"
 msgid "Destination BIC"
 msgstr "Sihtkoht"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:149
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:170
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:182
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:155
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:176
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:188
 #, fuzzy, kde-format
 #| msgid "Unknown"
 msgctxt "Unknown payee in online task"
 msgid "Unknown"
 msgstr "Tundmatu"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:224
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:230
 #, fuzzy, kde-format
 #| msgid "Job is being processed at the moment."
 msgctxt "@info:tooltip online job list status"
 msgid "Job is being processed at the moment."
 msgstr "Tööd parajasti töödeldakse."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:229
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:235
 #, fuzzy, kde-format
 #| msgctxt "Arg 1 is a date/time"
 #| msgid "This job was accepted by the bank on %1."
@@ -9005,7 +9005,7 @@ msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
 msgid "This job was accepted by the bank on %1."
 msgstr "Pank võttis selle töö vastu %1."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:233
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:239
 #, fuzzy, kde-format
 #| msgctxt "Arg 1 is a date/time"
 #| msgid "Sending this job failed (tried on %1)."
@@ -9013,14 +9013,14 @@ msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
 msgid "Sending this job failed (tried on %1)."
 msgstr "Selle töö saatmine nurjus (prooviti %1)."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:236
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:242
 #, fuzzy, kde-format
 #| msgid "Sending this job was manually aborted."
 msgctxt "@info:tooltip online job list status"
 msgid "Sending this job was manually aborted."
 msgstr "Selle töö saatmisest loobuti käsitsi."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:239
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:245
 #, fuzzy, kde-format
 #| msgctxt "Arg 1 is a date/time"
 #| msgid "The bank rejected this job on %1."
@@ -9028,7 +9028,7 @@ msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
 msgid "The bank rejected this job on %1."
 msgstr "Pank lükkas selle töö tagasi %1."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:244
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:250
 #, fuzzy, kde-format
 #| msgctxt "Arg 1 is a date/time"
 #| msgid "The bank accepted this job on %1."
@@ -9036,14 +9036,14 @@ msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
 msgid "The bank accepted this job on %1."
 msgstr "Pank võttis selle töö vastu %1."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:247
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:253
 #, fuzzy, kde-format
 #| msgid "This job needs further editing and cannot be sent therefore."
 msgctxt "@info:tooltip online job list status"
 msgid "This job needs further editing and cannot be sent therefore."
 msgstr "Töö vajab edasist muutmist ja seda ei saa seepärast saata."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:249
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:255
 #, fuzzy, kde-format
 #| msgid "This job is ready for sending."
 msgctxt "@info:tooltip online job list status"
@@ -15602,71 +15602,71 @@ msgctxt "Unknown forecast method"
 msgid "Unknown"
 msgstr "Tundmatu"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:199
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:287
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:200
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:288
 #, fuzzy, kde-format
 #| msgid "Bank transfer"
 msgid "Send transfer"
 msgstr "Pangaülekanne"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_buttonNewCreditTransfer)
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:200
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:201
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:80
 #, kde-format
 msgid "New credit transfer"
 msgstr "Uus krediidiülekanne"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:201
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:202
 #, fuzzy, kde-format
 #| msgid "Remove credit transfer"
 msgid "Remove transfer"
 msgstr "Eemalda krediidiülekanne"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:202
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:203
 #, fuzzy, kde-format
 #| msgid "Edit credit transfer"
 msgid "Edit transfer"
 msgstr "Muuda krediidiülekannet"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:203
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:204
 #, kde-format
 msgid "Show log"
 msgstr "Näita logi"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:223
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:224
 #, fuzzy, kde-format
 #| msgid "Credit transfer options"
 msgctxt "@title:menu Online job context menu"
 msgid "Credit transfer options"
 msgstr "Krediidiülekande valikud"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:277
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:278
 #, kde-format
 msgid "This job cannot be edited anymore because it was sent already."
 msgstr "Tööd ei saa enam muuta, sest see on juba ära saadetud."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:280
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:281
 #, kde-format
 msgid "Job is being processed at the moment."
 msgstr "Tööd parajasti töödeldakse."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:285
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:286
 #, kde-format
 msgid "The plugin to edit this job is not available."
 msgstr "Pluginat selle töö muutmiseks pole saada."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:290
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:291
 #, kde-format
 msgid "You need to select a single job for editing."
 msgstr "Muutmiseks tuleb valida üks töö."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:291
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:292
 #, fuzzy, kde-format
 #| msgid "Include transfers"
 msgid "Send transfers"
 msgstr "Kaasa arvatud ülekanded"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:390
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:391
 #, fuzzy, kde-format
 #| msgid ""
 #| "Not all selected credit transfers can be sent because some of them are "
@@ -15679,7 +15679,7 @@ msgstr ""
 "Kõiki valitud krediidiülekandeid ei saa saata, sest mõned neist on vigased "
 "või juba saadetud."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:391
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:392
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "The user selected credit transfers to send. But they cannot be sent."

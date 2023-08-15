@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-14 00:47+0000\n"
+"POT-Creation-Date: 2023-08-15 00:46+0000\n"
 "PO-Revision-Date: 2023-07-14 18:46+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -8934,57 +8934,57 @@ msgctxt "@title:column"
 msgid "Destination BIC"
 msgstr "Назначение"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:149
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:170
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:182
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:155
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:176
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:188
 #, kde-format
 msgctxt "Unknown payee in online task"
 msgid "Unknown"
 msgstr "Нет данных"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:224
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:230
 #, kde-format
 msgctxt "@info:tooltip online job list status"
 msgid "Job is being processed at the moment."
 msgstr "Задание в данный момент обрабатывается."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:229
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:235
 #, kde-format
 msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
 msgid "This job was accepted by the bank on %1."
 msgstr "Задание было принято банком %1."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:233
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:239
 #, kde-format
 msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
 msgid "Sending this job failed (tried on %1)."
 msgstr "Не удалось отправить задание (попытка выполнена %1)."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:236
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:242
 #, kde-format
 msgctxt "@info:tooltip online job list status"
 msgid "Sending this job was manually aborted."
 msgstr "Отправка задания была прервана вручную."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:239
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:245
 #, kde-format
 msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
 msgid "The bank rejected this job on %1."
 msgstr "Банк отклонил задание %1."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:244
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:250
 #, kde-format
 msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
 msgid "The bank accepted this job on %1."
 msgstr "Банк принял задание %1."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:247
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:253
 #, kde-format
 msgctxt "@info:tooltip online job list status"
 msgid "This job needs further editing and cannot be sent therefore."
 msgstr "Задание требует корректировки и поэтому не может быть отправлено."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:249
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:255
 #, kde-format
 msgctxt "@info:tooltip online job list status"
 msgid "This job is ready for sending."
@@ -15564,66 +15564,66 @@ msgctxt "Unknown forecast method"
 msgid "Unknown"
 msgstr "неизвестно"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:199
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:287
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:200
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:288
 #, kde-format
 msgid "Send transfer"
 msgstr "Отправить перевод"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_buttonNewCreditTransfer)
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:200
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:201
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:80
 #, kde-format
 msgid "New credit transfer"
 msgstr "Новый перевод"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:201
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:202
 #, kde-format
 msgid "Remove transfer"
 msgstr "Удалить перевод"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:202
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:203
 #, kde-format
 msgid "Edit transfer"
 msgstr "Редактировать перевод"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:203
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:204
 #, kde-format
 msgid "Show log"
 msgstr "Показать журнал"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:223
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:224
 #, kde-format
 msgctxt "@title:menu Online job context menu"
 msgid "Credit transfer options"
 msgstr "Действия с переводами"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:277
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:278
 #, kde-format
 msgid "This job cannot be edited anymore because it was sent already."
 msgstr "Это задание нельзя редактировать, так как оно уже было отправлено."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:280
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:281
 #, kde-format
 msgid "Job is being processed at the moment."
 msgstr "Задание в данный момент обрабатывается."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:285
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:286
 #, kde-format
 msgid "The plugin to edit this job is not available."
 msgstr "Модуль редактирования этого задания недоступен."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:290
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:291
 #, kde-format
 msgid "You need to select a single job for editing."
 msgstr "Выберите одно задание для редактирования."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:291
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:292
 #, kde-format
 msgid "Send transfers"
 msgstr "Отправить переводы"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:390
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:391
 #, kde-format
 msgctxt "The user selected credit transfers to send. But they cannot be sent"
 msgid ""
@@ -15633,7 +15633,7 @@ msgstr ""
 "Не все выделенные переводы можно отправить, так как некоторые из них "
 "недействительны или уже отправлены."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:391
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:392
 #, kde-format
 msgctxt "@title:window Online transfers"
 msgid "Cannot send transfers"
