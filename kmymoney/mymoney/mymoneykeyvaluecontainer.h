@@ -103,7 +103,7 @@ public:
     /**
      * Convenience method for setValue(const QString& key, const QString& value, const QString& defaultValue)
      */
-    void setValue(const QString& key, int value, int defaultValue = 0);
+    void setValue(const QString& key, int value, int defaultValue);
 
     /**
      * Convenience method for setValue(const QString& key, const QString& value, const QString& defaultValue)
