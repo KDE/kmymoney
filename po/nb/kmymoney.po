@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-13 00:46+0000\n"
+"POT-Creation-Date: 2023-08-15 00:46+0000\n"
 "PO-Revision-Date: 2023-08-04 11:52+0200\n"
 "Last-Translator: Kjetil Sørlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -8810,57 +8810,57 @@ msgctxt "@title:column"
 msgid "Destination BIC"
 msgstr "Målets BIC"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:149
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:170
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:182
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:155
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:176
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:188
 #, kde-format
 msgctxt "Unknown payee in online task"
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:224
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:230
 #, kde-format
 msgctxt "@info:tooltip online job list status"
 msgid "Job is being processed at the moment."
 msgstr "Jobbe behandles for øyeblikket."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:229
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:235
 #, kde-format
 msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
 msgid "This job was accepted by the bank on %1."
 msgstr "Jobbe ble godtatt av banken den %1."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:233
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:239
 #, kde-format
 msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
 msgid "Sending this job failed (tried on %1)."
 msgstr "Sending av denne jobben feilet (prøvde den %1)."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:236
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:242
 #, kde-format
 msgctxt "@info:tooltip online job list status"
 msgid "Sending this job was manually aborted."
 msgstr "Sending av denne jobben ble avbrutt manuelt."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:239
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:245
 #, kde-format
 msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
 msgid "The bank rejected this job on %1."
 msgstr "Banken avviste denne jobben den %1."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:244
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:250
 #, kde-format
 msgctxt "@info:tooltip online job list status Arg 1 is a date/time"
 msgid "The bank accepted this job on %1."
 msgstr "Banken godtok denne jobben den %1."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:247
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:253
 #, kde-format
 msgctxt "@info:tooltip online job list status"
 msgid "This job needs further editing and cannot be sent therefore."
 msgstr "Denne jobben trenger ytterligere redigering og kan derfor ikke sendes."
 
-#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:249
+#: kmymoney/mymoney/storage/onlinejobsmodel.cpp:255
 #, kde-format
 msgctxt "@info:tooltip online job list status"
 msgid "This job is ready for sending."
@@ -9548,123 +9548,128 @@ msgstr ""
 "<qt>Filen <b>%1</b> finnes fra før. Er du sikker på at du vil skrive over "
 "den?</qt>"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:76
+#: kmymoney/plugins/csv/export/csvwriter.cpp:78
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:73
 #, kde-format
 msgid "Unexpected exception '%1'"
 msgstr "Uventet unntak «%1»"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:80
+#: kmymoney/plugins/csv/export/csvwriter.cpp:82
 #, kde-format
 msgid "Export completed.\n"
 msgstr "Eksport fullført.\n"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:83
+#: kmymoney/plugins/csv/export/csvwriter.cpp:85
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
 #, kde-format
 msgid "Unable to open file '%1' for writing"
 msgstr "Kan ikke å åpne «%1» for skriving"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:97
+#: kmymoney/plugins/csv/export/csvwriter.cpp:99
 #, kde-format
 msgid "Account Type:"
 msgstr "Kontotype:"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:101
-#: kmymoney/plugins/csv/export/csvwriter.cpp:111
+#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#, kde-format
+msgid "Account Name:"
+msgstr ""
+
+#: kmymoney/plugins/csv/export/csvwriter.cpp:107
+#: kmymoney/plugins/csv/export/csvwriter.cpp:116
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Date"
 msgstr "Dato"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:101
+#: kmymoney/plugins/csv/export/csvwriter.cpp:107
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Security"
 msgstr "Verdipapir"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:102
+#: kmymoney/plugins/csv/export/csvwriter.cpp:108
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Symbol"
 msgstr "Symbol"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:102
+#: kmymoney/plugins/csv/export/csvwriter.cpp:108
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Action/Type"
 msgstr "Aksjon/type"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
-#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:109
+#: kmymoney/plugins/csv/export/csvwriter.cpp:117
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Amount"
 msgstr "Beløp"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:103
+#: kmymoney/plugins/csv/export/csvwriter.cpp:109
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Quantity"
 msgstr "Mengde"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:104
+#: kmymoney/plugins/csv/export/csvwriter.cpp:110
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Price"
 msgstr "Kurs"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:104
+#: kmymoney/plugins/csv/export/csvwriter.cpp:110
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Interest"
 msgstr "Rente"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:105
+#: kmymoney/plugins/csv/export/csvwriter.cpp:111
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Fees"
 msgstr "Avgifter"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:105
+#: kmymoney/plugins/csv/export/csvwriter.cpp:111
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Account"
 msgstr "Konto"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:106
-#: kmymoney/plugins/csv/export/csvwriter.cpp:113
+#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:118
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Memo"
 msgstr "Notat"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:106
-#: kmymoney/plugins/csv/export/csvwriter.cpp:113
+#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:118
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Status"
 msgstr "Status"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:111
+#: kmymoney/plugins/csv/export/csvwriter.cpp:116
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Payee"
 msgstr "Mottaker"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:112
+#: kmymoney/plugins/csv/export/csvwriter.cpp:117
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Account/Cat"
 msgstr "Konto/kat"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:114
+#: kmymoney/plugins/csv/export/csvwriter.cpp:119
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "Number"
 msgstr "Nummer"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:182
+#: kmymoney/plugins/csv/export/csvwriter.cpp:187
 #, kde-format
 msgid ""
 "Transaction number '%1' is missing an account assignment.\n"
@@ -9676,33 +9681,33 @@ msgstr ""
 "Transaksjon droppet.\n"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_validityBox)
-#: kmymoney/plugins/csv/export/csvwriter.cpp:184
-#: kmymoney/plugins/csv/export/csvwriter.cpp:364
+#: kmymoney/plugins/csv/export/csvwriter.cpp:189
+#: kmymoney/plugins/csv/export/csvwriter.cpp:369
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:349
 #: kmymoney/widgets/ktransactionfilter.ui:643
 #, kde-format
 msgid "Invalid transaction"
 msgstr "Ugyldig transaksjon"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:245
+#: kmymoney/plugins/csv/export/csvwriter.cpp:250
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitCategory"
 msgstr "delKategori"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:245
+#: kmymoney/plugins/csv/export/csvwriter.cpp:250
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitMemo"
 msgstr "delNotat"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:246
+#: kmymoney/plugins/csv/export/csvwriter.cpp:251
 #, kde-format
 msgctxt "@title:column header in CSV export"
 msgid "splitAmount"
 msgstr "delBeløp"
 
-#: kmymoney/plugins/csv/export/csvwriter.cpp:362
+#: kmymoney/plugins/csv/export/csvwriter.cpp:367
 #, kde-format
 msgid ""
 "Transaction number '%1' is missing an account assignment.\n"
@@ -14509,12 +14514,12 @@ msgstr ""
 msgid "Inserting online jobs."
 msgstr "Legger til nettjobber."
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2028
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2026
 #, kde-format
 msgid "SQLite file %1 does not exist"
 msgstr "SQLite-filen «%1» finnes ikke."
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2082
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2080
 #, kde-format
 msgid ""
 "Automatic database creation for type %1 is not currently implemented.\n"
@@ -14523,7 +14528,7 @@ msgstr ""
 "Automatisk opprettelse av database for typen %1 er ikke implementert ennå.\n"
 "Lag database %2 manuelt"
 
-#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2102
+#: kmymoney/plugins/sql/mymoneystoragesql_p.h:2100
 #, kde-format
 msgid "Error in create database %1; do you have create permissions?"
 msgstr "Feil ved opprettelse av database %1. Har du tillatelse til å lage den?"
@@ -15341,66 +15346,66 @@ msgctxt "Unknown forecast method"
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:199
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:287
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:200
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:288
 #, kde-format
 msgid "Send transfer"
 msgstr "Send overføring"
 
 #. i18n: ectx: property (text), widget (QToolButton, m_buttonNewCreditTransfer)
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:200
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:201
 #: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.ui:80
 #, kde-format
 msgid "New credit transfer"
 msgstr "Ny kredittoverføring"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:201
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:202
 #, kde-format
 msgid "Remove transfer"
 msgstr "Fjern kredittoverføring"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:202
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:203
 #, kde-format
 msgid "Edit transfer"
 msgstr "Endre kredittransaksjon"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:203
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:204
 #, kde-format
 msgid "Show log"
 msgstr "Vis logg"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:223
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:224
 #, kde-format
 msgctxt "@title:menu Online job context menu"
 msgid "Credit transfer options"
 msgstr "Valg for kredittoverføring"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:277
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:278
 #, kde-format
 msgid "This job cannot be edited anymore because it was sent already."
 msgstr "Denne jobben kan ikke endres lenger fordi den er allerede sendt."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:280
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:281
 #, kde-format
 msgid "Job is being processed at the moment."
 msgstr "Jobben behandles for øyeblikket."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:285
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:286
 #, kde-format
 msgid "The plugin to edit this job is not available."
 msgstr "Programtillegget for å endre denne jobben er ikke tilgjengelig."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:290
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:291
 #, kde-format
 msgid "You need to select a single job for editing."
 msgstr "Du må velge en enkelt jobb for å endre."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:291
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:292
 #, kde-format
 msgid "Send transfers"
 msgstr "Send overføringer"
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:390
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:391
 #, kde-format
 msgctxt "The user selected credit transfers to send. But they cannot be sent"
 msgid ""
@@ -15410,7 +15415,7 @@ msgstr ""
 "Ikke alle de valgte kredittoverføringene kan sendes fordi noen av dem er "
 "ugyldig eller allerede sendt."
 
-#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:391
+#: kmymoney/plugins/views/onlinejoboutbox/konlinejoboutboxview.cpp:392
 #, kde-format
 msgctxt "@title:window Online transfers"
 msgid "Cannot send transfers"
