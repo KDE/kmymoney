@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-15 00:46+0000\n"
+"POT-Creation-Date: 2023-08-17 00:46+0000\n"
 "PO-Revision-Date: 2016-10-23 22:14+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -5968,7 +5968,7 @@ msgstr ""
 "Αδυναμία εισαγωγής %1 με χρήση του πρόσθετου %2.  Το πρόσθετο επέστρεψε το "
 "ακόλουθο σφάλμα: %3"
 
-#: kmymoney/kmymoney.cpp:4331 kmymoney/plugins/ofx/import/ofximporter.cpp:1012
+#: kmymoney/kmymoney.cpp:4331 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
 #, kde-format
 msgid "Importing error"
 msgstr "Σφάλμα κατά την εισαγωγή"
@@ -12891,7 +12891,7 @@ msgid "Pick &date"
 msgstr "Επιλογή ημερομηνίας"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:307
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:870
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:881
 #, kde-format
 msgid "Online settings"
 msgstr "Διαδικτυακές ρυθμίσεις"
@@ -13929,17 +13929,17 @@ msgstr ""
 msgid "KMyMoney Hash"
 msgstr "KMyMoney"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:148
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:153
 #, kde-format
 msgid "OFX..."
 msgstr "OFX..."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:162
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:167
 #, kde-format
 msgid "OFX import file selection"
 msgstr "Επιλογή του αρχείου OFX προς εισαγωγή"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:182
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
 msgid ""
 "Unable to import %1 using the OFX importer plugin.  This file is not the "
@@ -13948,27 +13948,27 @@ msgstr ""
 "Αδυναμία εισαγωγής του %1 κάνοντας χρήση του πρόσθετου εισαγωγής OFX. Αυτό "
 "το αρχείο δεν έχει σωστό τύπο."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:182
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
 msgid "Incorrect format"
 msgstr "Λανθασμένος τύπος αρχειοθέτησης"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:227
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:232
 #, kde-format
 msgid "Unable to parse file"
 msgstr "Αδυναμία ανάλυσης του αρχείου"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:817
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:828
 #, kde-format
 msgid "No accounts found."
 msgstr "Δεν βρέθηκαν λογαριασμοί."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1002
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1013
 #, kde-format
 msgid "Error connecting to bank: %1"
 msgstr "Σφάλμα κατά την σύνδεση με την τράπεζα: %1"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1012
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1023
 #, kde-format
 msgid ""
 "<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin "
@@ -13977,12 +13977,12 @@ msgstr ""
 "<p>Αδυναμία εισαγωγής του <b>«%1»</b> κάνοντας χρήση του πρόσθετου εισαγωγής "
 "OFX. Το πρόσθετο επέστρεψε το ακόλουθο σφάλμα:</p><p>%2</p>"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1046
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1057
 #, kde-format
 msgid "Importing process terminated unexpectedly."
 msgstr "Η διεργασία εισαγωγής τερματίστηκε ξαφνικά."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1046
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1057
 #, kde-format
 msgid "Failed to import all statements."
 msgstr "Η εισαγωγή όλων των αποσπασμάτων απέτυχε."

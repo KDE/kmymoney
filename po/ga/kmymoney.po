@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-15 00:46+0000\n"
+"POT-Creation-Date: 2023-08-17 00:46+0000\n"
 "PO-Revision-Date: 2009-12-24 06:59-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -5594,7 +5594,7 @@ msgid ""
 "error: %3"
 msgstr ""
 
-#: kmymoney/kmymoney.cpp:4331 kmymoney/plugins/ofx/import/ofximporter.cpp:1012
+#: kmymoney/kmymoney.cpp:4331 kmymoney/plugins/ofx/import/ofximporter.cpp:1023
 #, kde-format
 msgid "Importing error"
 msgstr ""
@@ -12156,7 +12156,7 @@ msgid "Pick &date"
 msgstr "Roghnaigh Dáta Tosaigh"
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:307
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:870
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:881
 #, kde-format
 msgid "Online settings"
 msgstr ""
@@ -13174,56 +13174,56 @@ msgstr ""
 msgid "KMyMoney Hash"
 msgstr "MS-Money Plus"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:148
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:153
 #, kde-format
 msgid "OFX..."
 msgstr "OFX..."
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:162
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:167
 #, kde-format
 msgid "OFX import file selection"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:182
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
 msgid ""
 "Unable to import %1 using the OFX importer plugin.  This file is not the "
 "correct format."
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:182
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:187
 #, kde-format
 msgid "Incorrect format"
 msgstr "Formáid mhícheart"
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:227
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:232
 #, kde-format
 msgid "Unable to parse file"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:817
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:828
 #, kde-format
 msgid "No accounts found."
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1002
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1013
 #, kde-format
 msgid "Error connecting to bank: %1"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1012
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1023
 #, kde-format
 msgid ""
 "<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin "
 "returned the following error:</p><p>%2</p>"
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1046
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1057
 #, kde-format
 msgid "Importing process terminated unexpectedly."
 msgstr ""
 
-#: kmymoney/plugins/ofx/import/ofximporter.cpp:1046
+#: kmymoney/plugins/ofx/import/ofximporter.cpp:1057
 #, kde-format
 msgid "Failed to import all statements."
 msgstr ""
