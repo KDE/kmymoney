@@ -12,7 +12,7 @@
 <title>Categories</title>
 
 <para>
-  The Categories view provides a summary of all the existing categories in your
+  The Categories View provides a summary of all the existing categories in your
   current database.  The categories are split into income and expense, sorted
   alphabetically, and shown along with the respective balance for each.
 </para>
@@ -34,7 +34,7 @@
   There are 3 ways to create a new category: either select the
   <menuchoice><guimenu>Category</guimenu><guimenuitem>New
   category</guimenuitem></menuchoice> menu item; select a parent in the tree
-  in the Categories view, right-click and select the <guimenuitem>New
+  in the Categories View, right-click and select the <guimenuitem>New
   Category</guimenuitem> option, or directly type the name of the new category
   when adding or editing a transaction in the Ledger.  Doing any of these steps
   will direct you to the <guilabel>Create new Category</guilabel> dialog.  The

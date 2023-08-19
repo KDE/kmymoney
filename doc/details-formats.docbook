@@ -10,13 +10,17 @@
 
 <title>File Formats</title>
 
+<!-- FIXME: be sure to have a better explanation of the Backup command, including
+     mounting the directory.  Can also use OS specifics, especially about folder
+     mounting on Windows.  -->
+
 <para>
   Unless you choose to use a <link linkend="details.database">relational
-  database</link>, &kmymoney; will store all your financial information in a
-  file ending in <filename class="extension">.kmy</filename>. Also, unless you use a <link
-  linkend="firsttime.launch">command line option</link> that tells it not to do
-  so, when you launch &kmymoney;, it will open the last file it had open.
-  However, it is important to know that there is more than one type of file
+  database</link>, &kmymoney; will store all your financial information in a file
+  ending in <filename class="extension">.kmy</filename>.  Also, when you launch
+  &kmymoney;, unless you use a <link linkend="firsttime.launch">command line
+  option</link> that tells it not to do so, it will open the last file it had open.
+  However, it is important to know that there is actually more than one type of file
   &kmymoney; can use to hold your financial data.
 </para>
 

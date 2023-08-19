@@ -140,7 +140,7 @@
 
 <para>
   Accounts are displayed in a tree format. Accounts that are marked for search
-  are indicated with a check box. If you click the <guibutton>All</guibutton>
+  are indicated with a checkbox. If you click the <guibutton>All</guibutton>
   button, all accounts are marked for searching. If you click the
   <guibutton>None</guibutton> button, no accounts will be marked for
   searching. Individual accounts can be marked or unmarked by clicking on the

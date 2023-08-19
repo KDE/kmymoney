@@ -5,24 +5,36 @@
     <author> &Roger.Lum; &Roger.Lum.mail; </author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2018-02-01</date>
-  <releaseinfo>5.0.0</releaseinfo>
+  <date>2018-08-20</date>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title>Institutions</title>
 
 <para>
-  The Institutions view provides a summary of all the accounts grouped under
-  their respective institutions.  The list of accounts under any institution can be
-  expanded or collapsed by clicking on the arrow to the left of the institution
-  name.  The last listed institution is "Accounts with no institution assigned."
+  Institutions in &kmymoney; serve as a way to group accounts.  They are most
+  commonly financial institutions like banks and brokerage firms, but they can be
+  anything you want, such as <quote>Self</quote>, to hold accounts for the cash in
+  your pocket and any other assets not actually help by a financial institution, or
+  <quote>Stores</quote>, to group all your credit card and other accounts with retail
+  stores.
+</para>
+
+<sect1 id="details.institutions.view">
+<title>Institutions View</title>
+
+<para>
+  The Institutions View provides a summary of all the accounts grouped under their
+  respective institutions.  The list of accounts under any institution can be
+  expanded or collapsed by clicking on the arrow to the left of the institution name.
+  The last listed institution is "Accounts with no institution assigned."
 </para>
 
 <para>
-  The Institutions view displays several columns, showing information about the
-  account.  It also shows the total value of all accounts in each institution.
-  You can select which columns are shown by right clicking on any column heading
-  and selecting or unselecting the checkbox next to the name of the column.
+  The Institutions View displays several columns, showing information about the
+  account.  It also shows the total value of all accounts in each institution.  You
+  can select which columns are shown by right clicking on any column heading and
+  selecting or unselecting the checkbox next to the name of the column.
 </para>
 
 <para>
@@ -39,20 +51,17 @@
 </screenshot>
 </para>
 
-<para>
-  The following columns are available in the Institutions view.
-</para>
-
 <variablelist>
   <varlistentry>
-    <term>Account</term>
+    <term>Name</term>
     <listitem>
       <para>
-        The name of the institution or account.
+        The name of the institution or account.  This column is always displayed.
       </para>
     </listitem>
   </varlistentry>
 
+<!--  not in Institutions View
   <varlistentry>
     <term>Type</term>
     <listitem>
@@ -61,7 +70,9 @@
       </para>
     </listitem>
   </varlistentry>
+-->
 
+<!--  not in Institutions View
   <varlistentry>
     <term>Tax</term>
     <listitem>
@@ -71,7 +82,9 @@
       </para>
     </listitem>
   </varlistentry>
+-->
 
+<!--  not in Institutions View
   <varlistentry>
     <term>VAT</term>
     <listitem>
@@ -81,7 +94,9 @@
       </para>
     </listitem>
   </varlistentry>
+-->  
 
+<!--  not in Institutions View
   <varlistentry>
     <term>CC (Cost Center)</term>
     <listitem>
@@ -92,17 +107,19 @@
         used.
       </para>
     </listitem>
-  </varlistentry>
+    </varlistentry>
+-->
 
   <varlistentry>
-    <term>Total Balance</term>
+    <term>Balance</term>
     <listitem>
       <para>
-        Another new feature, not yet implemented.
+        The current balance of the account.  No value is displayed for institutions.
       </para>
     </listitem>
   </varlistentry>
 
+<!--  not in Institutions View
   <varlistentry>
     <term>Posted Value</term>
     <listitem>
@@ -111,17 +128,19 @@
       </para>
     </listitem>
   </varlistentry>
+-->  
 
   <varlistentry>
     <term>Total Value</term>
     <listitem>
       <para>
-        The balance of the account in &kmymoney;.  Note that for Institutions,
-        this is the total of the balances for all accounts in that institution.
+        For accounts, this is the same value as the balance.  For Institutions, this
+        is the total of the balances for all accounts in that institution.
       </para>
     </listitem>
   </varlistentry>
 
+<!--  not in Institutions View
   <varlistentry>
     <term>Number</term>
     <listitem>
@@ -129,45 +148,72 @@
         The account number, if one was entered.
       </para>
     </listitem>
+    </varlistentry>
+-->
+
+  <varlistentry>
+    <term>IBAN</term>
+    <listitem>
+      <para>
+        The <acronym><ulink
+        url="https://en.wikipedia.org/wiki/International_Bank_Account_Number">IBAN</ulink></acronym>
+        (International Bank Account Number) is shown if there is a value entered in
+        the appropriate field on the account information dialog.
+      </para>
+    </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term>Sort Code</term>
+    <term>Bank Code</term>
     <listitem>
       <para>
-        This shows the IBAN number, if there is a value entered in the
-        appropriate field on the Account information dialog.
+        The <ulink url="https://en.wikipedia.org/wiki/Bank_code">Bank Code</ulink>.
+        This is known as the routing number in the US and the sort code in the UK.
+        <!-- FIXME: this and next - link to further explanation of where used and
+             where needed.  -->
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>SWIFT/BIC</term>
+    <listitem>
+      <para>
+        The <acronym><ulink
+        url="https://en.wikipedia.org/wiki/ISO_9362">SWIFT/BIC</ulink></acronym>
+        (Society for Worldwide Interbank Financial Telecommunication/Bank Identifier
+        Code)
       </para>
     </listitem>
   </varlistentry>
 
 </variablelist>
 
+<!-- FIXME:  confirm no longer true.
 <para>
   Note that many of these same columns are also available in other views, such
-  as the Accounts view.  When you select or unselect a checkbox to display or
+  as the Accounts View.  When you select or unselect a checkbox to display or
   remove a column, you will see a popup asking if you want to show or remove
   that column from all other views where it is present. If you check "No," you
   will only change the display of that column in the current view.
 </para>
+-->
+</sect1>
 
 <sect1 id="details.institutions.institution">
 <title>Institution Options</title>
 
 <para>
-  Right-clicking an institution name brings up an Institution Options sub-menu,
-  providing you with several choices. Selecting <guimenuitem>New
-  Institution...</guimenuitem> opens the New Institution Dialog, where you can
-  enter all the necessary information to create a new institution.  Selecting
-  <guimenuitem>Edit Institution...</guimenuitem> brings up an editable window
-  with institution details such as name and address. Selecting
-  <guimenuitem>Delete Institution</guimenuitem> removes the entire institution
-  and all its associated accounts. Keep in mind that you will only be able to
-  delete an institution if you can delete all of its accounts, and you will only
-  be able to delete each associated account if it has no transactions and no
-  schedules refers to it.  Selecting <guimenuitem>New account...</guimenuitem>
-  steps you through the new account process, which is described in more detail
-  in the next section.
+  Right-clicking an institution name brings up an Institution Options menu, providing
+  you with several choices. Selecting <guimenuitem>New Institution...</guimenuitem>
+  opens the New Institution Dialog, where you can enter all the necessary information
+  to create a new institution. Selecting <guimenuitem>Edit
+  Institution...</guimenuitem> brings up an editable window where you can change the
+  institution details. Selecting <guimenuitem>Delete Institution</guimenuitem>
+  completely removes the institution from the data file.  Any accounts associated
+  with that institution will remain, but without being associated with any
+  institution. Selecting <guimenuitem>New account...</guimenuitem> steps you through
+  the new account process, which is described in more detail in the next section.
 </para>
 
 <para>
@@ -208,12 +254,13 @@
 
 <para>
   Only the name is required in the New Institution Dialog, all other fields are
-  optional.  As with the personal information dialog, this data is not currently
-  used by &kmymoney;, but will be required by future releases for certain
+  optional.  As with the personal information dialog, this data is not currently used
+  by &kmymoney;, but some items may be required by future releases for certain
   features.  In particular, the <ulink
   url="https://en.wikipedia.org/wiki/Bank_code">Bank Code</ulink> and the <acronym>
   <ulink url="https://en.wikipedia.org/wiki/ISO_9362">BIC (Bank Identifier
-  Code)</ulink></acronym> will be required for online banking.
+  Code)</ulink></acronym> will be required for online banking, although this may
+  depend on the country your bank is in.
 </para>
 </sect2>
 </sect1>
@@ -222,10 +269,18 @@
 <title>Account Options</title>
 
 <para>
-  Right-clicking an account name brings up an Account Options sub-menu.
+  The options just discussed refer to the institutions listed in the Institutions
+  View.  Most of the rows in this viw are accounts.  Right-clicking an account name
+  brings up an Account Options menu.  The entries and details for this menu will be
+  discussed in the following <link linkend="details.accounts">Accounts</link>
+  section.
+</para>
+
+<!-- FIXME:  remove the rest when confirmed covered OK in next nextion -->
+<para>
   Selecting <guimenuitem>New account...</guimenuitem> steps you through the new
   account process. Selecting <guimenuitem>Open Ledger</guimenuitem> brings you
-  directly to the Ledgers view or Investments view, depending on the account
+  directly to the Ledgers View or Investments View, depending on the account
   type. Simply double-clicking an account name also opens the account. Selecting
   <guimenuitem>Edit account</guimenuitem> brings up a window allowing you to
   change an account's name, start date, associated banking institution, and
@@ -251,5 +306,6 @@
 	</mediaobject>
 </screenshot>
 </para>
+
 </sect1>
 </chapter>

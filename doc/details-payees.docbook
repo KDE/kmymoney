@@ -79,7 +79,7 @@
   To remove a payee or payer, right-click the name and select
   <guimenuitem>Delete payee</guimenuitem>.  If the payee has any transactions,
   you will be presented with a dialog that allows you to reassign them to a
-  different payee, and also a check box to enable the deleted name to be added
+  different payee, and also a checkbox to enable the deleted name to be added
   to the new payee's matching list.  Another option for deleting an existing
   payee is to select the payee or payer by left clicking it and then left
   clicking <guibutton>Del</guibutton>.

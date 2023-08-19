@@ -186,7 +186,7 @@
   Schedules View, and other displays.  Specify how often the schedule should
   occur, using the Frequency field and drop down list.  For example "every 6
   weeks" or "every 3 months."  If the amount varies transaction to transaction
-  make sure to check the <guilabel>Estimate</guilabel> check box and you will be
+  make sure to check the <guilabel>Estimate</guilabel> checkbox and you will be
   prompted for the correct amount when it is entered into the ledger.  The other
   required fields in the Payment information section include the Account and
   Category.  The remaining fields in this section are optional.

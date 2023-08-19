@@ -6,32 +6,45 @@
     <author> &Roger.Lum; &Roger.Lum.mail; </author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2018-02-01</date>
-  <releaseinfo>5.0.0</releaseinfo>
+  <date>2023-08-20</date>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title>Accounts</title>
 
+<para>
+  Your &kmymoney; file contains one or more accounts.  All your money is in one of
+  these accounts.  There are several different types of accounts.  Typical
+  <quote>Asset</quote> accounts include bank accounts, cash, and investments.
+  Typical <quote>Liability</quote> accounts include credit cards and loans.
+</para>
+
+<para>
+  There are two other account types: <quote>Income</quote> and
+  <quote>Expense</quote>. These accounts are <quote>Categories,</quote> and are a way
+  to organize your transactions.  They are treated internally by &kmymoney; as
+  accounts, and are described in more detail in the section on <link
+  linkend="details.categories">Categories</link>.  Income and Expense accounts are
+  always displayed in the Categories View, but it is possible to <link
+  linkend="details.settings">configure &kmymoney;</link> to also display them on the
+  Accounts View.
+</para>
+
+<para>
+  You may also see <quote>Equity</quote> as an account type.  Any account of this
+  type is a special account in &kmymoney;, used to hold the opening balance
+  transactions of all other accounts.
+</para>
+
+<para>
+  The final type, although it is displayed first on the list, is
+  <quote>Favorite</quote>.  These are accounts of any other type which you have
+  indicated are <quote>favorite</quote> accounts in the details when creating or
+  editing that account.
+</para>
+
 <sect1 id="details.accounts.view">
 <title>The Accounts View</title>
-
-<para>
-  The Accounts view provides a summary of all the accounts. It is similar to the
-  Institutions view, except accounts are grouped under the Asset and Liability
-  asset categories.  Typical asset accounts include bank accounts, cash, and
-  investments, while typical liability accounts include credit cards and loans.
-</para>
-
-<para>
-  There are actually two other account categories: Income and
-  Expense. Categories are a way to organize your transaction; they are grouped
-  under either the Income or Expense account category and are treated
-  internally by &kmymoney; as accounts. They are described in more detail in
-  the chapter on <link linkend="details.categories">Categories</link>. The
-  Income and Expense account categories are always displayed in the Categories
-  view, but it is possible to <link linkend="details.settings">configure
-  &kmymoney;</link> to also display them on the Accounts view.
-</para>
 
 <para>
 <screenshot>
@@ -48,14 +61,117 @@
 </para>
 
 <para>
-  Similar to the Institutions view, the Accounts view displays several columns
-  with descriptive and summary information about each account.  The rest of this
-  chapter will focus on Asset and Liability account functionality.  Income and
-  Expense accounts, &ie;, Categories, are described in the chapter on <link
-  linkend="details.categories">Categories</link>.
+  The Accounts View provides a summary of all the accounts. It is similar to the
+  Institutions View, except accounts are grouped by the type of account.  The list of
+  accounts under any account type can be expanded or collapsed by clicking on the
+  arrow to the left of the type.
 </para>
 
+<para>
+  Similar to the Institutions View, the Accounts View displays several columns with
+  descriptive and summary information about each account.  As with the Institutions
+  View, you can select which columns are shown by right clicking on any column
+  heading and selecting or unselecting the checkbox next to the name of the column.
+</para>
+
+<para>
+  The rest of this chapter will focus on Asset and Liability account functionality.
+  Income and Expense accounts, &ie;, Categories, are described in the chapter on
+  <link linkend="details.categories">Categories</link>.
+</para>
+
+<variablelist>
+  <varlistentry>
+    <term>Name</term>
+    <listitem>
+      <para>
+        The name of the account.  This columns is always displayed.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Type</term>
+    <listitem>
+      <para>
+        The type of account, &eg;, Savings, Checking, Credit Card, Stock, &etc;
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Online</term>
+    <listitem>
+      <para>
+        An indication whether this account has been configured for online access.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Tax</term>
+    <listitem>
+      <para>
+        An indication whether this account has been configured as important for tax
+        purposes.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>VAT</term>
+    <listitem>
+      <para>
+        An indication whether this account has been configured to apply a VAT on
+        transactions.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Balance</term>
+    <listitem>
+      <para>
+        The current balance of the account, shown in the currency chosen when the
+        account was created.
+      </para>
+    </listitem>
+  </varlistentry>
+  
+  <varlistentry>
+    <term>Total Value</term>
+    <listitem>
+      <para>
+        This is the same value as the balance, but always in the base currenct as
+        chosen for the data file.  These values are summed for the row for the
+        overall account type.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Number</term>
+    <listitem>
+      <para>
+        The account number, if one was entered.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>IBAN</term>
+    <listitem>
+      <para>
+        The <acronym><ulink
+        url="https://en.wikipedia.org/wiki/International_Bank_Account_Number">IBAN</ulink></acronym>
+        (International Bank Account Number) is shown if there is a value entered in
+        the appropriate field on the account information dialog.
+      </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
 </sect1>
+<!--- done to here! -->
 
 <sect1 id="details.accounts.create">
 <title>Creating an Account</title>
@@ -72,7 +188,7 @@
   menu item or choose the <guiicon><inlinemediaobject><imageobject><imagedata
   fileref="newacct.png" format="PNG"/></imageobject></inlinemediaobject>
   </guiicon> new account icon from the toolbar. You can also create an account
-  from the Accounts view; click on the Accounts icon in the view selector and
+  from the Accounts View; click on the Accounts icon in the view selector and
   then right click on the Asset or Liability tree icon and select <guimenuitem>New
   account...</guimenuitem> from the popup menu.
 </para>
@@ -247,7 +363,7 @@
 </para>
 
 <para>
-  Selecting the <emphasis>Preferred Account</emphasis> check box will allow
+  Selecting the <emphasis>Preferred Account</emphasis> checkbox will allow
   preferred access in some dialogs and views of &kmymoney;.
 </para>
 
@@ -280,7 +396,7 @@
 </para>
 
 <para>
-  If you want such a transaction generated, make sure the check box is selected
+  If you want such a transaction generated, make sure the checkbox is selected
   and enter the required information.
 </para>
 
@@ -579,13 +695,13 @@
 
 <para>
   If you re-financed an existing Loan, check the <guilabel>Refinance existing
-  loan</guilabel> check box, select the Loan account and &kmymoney; will create
+  loan</guilabel> checkbox, select the Loan account and &kmymoney; will create
   a transfer transaction paying off the existing loan.
 </para>
 
 <para>
   If you don't want to create the payout transaction, check the <guilabel>Do
-  not create payout transaction</guilabel> check box.
+  not create payout transaction</guilabel> checkbox.
 </para>
 </sect2>
 
@@ -660,12 +776,12 @@
 <title>Opening / viewing accounts</title>
 
 <para>
-  To open an account in the Ledger view you can either click on the link to the
-  account from the Home view, or click on the <guiicon><inlinemediaobject>
+  To open an account in the Ledger View you can either click on the link to the
+  account from the Home View, or click on the <guiicon><inlinemediaobject>
   <imageobject><imagedata fileref="ledgers_view.png" format="PNG"/></imageobject>
   </inlinemediaobject></guiicon> ledgers icon in the view selector and select the
   account in the drop down box at the top of the view. Alternatively, in the
-  <guiicon>Account</guiicon> view, either double-click the account entry or
+  <guiicon>Account</guiicon> View, either double-click the account entry or
   right click and select <guimenuitem>Open ledger</guimenuitem>.
 </para>
 </sect1>
