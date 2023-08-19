@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-17 00:46+0000\n"
-"PO-Revision-Date: 2023-08-11 10:45+0100\n"
+"PO-Revision-Date: 2023-08-18 23:49+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -9551,11 +9551,9 @@ msgid "Account Type:"
 msgstr "Konto Tipo:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "Header for AqBanking account list"
-#| msgid "Account Name"
+#, kde-format
 msgid "Account Name:"
-msgstr "Kontonomo"
+msgstr "Kontonomo:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:107
 #: kmymoney/plugins/csv/export/csvwriter.cpp:116
@@ -18980,6 +18978,7 @@ msgid ""
 "The current implementation cannot modify multiple transactions in different "
 "accounts."
 msgstr ""
+"La aktuala realigo ne povas modifi plurajn transakciojn en malsamaj kontoj."
 
 #: kmymoney/views/kaccountsview.cpp:174
 #: kmymoney/views/kinstitutionsview.cpp:208
@@ -20612,30 +20611,25 @@ msgid "The posting date is invalid."
 msgstr "La afiŝa dato estas nevalida."
 
 #: kmymoney/views/multitransactioneditor.cpp:218
-#, fuzzy, kde-format
-#| msgid "Select account"
+#, kde-format
 msgid "Select category or account."
-msgstr "Elekti konton"
+msgstr "Elektu kategorion aŭ konton."
 
 #: kmymoney/views/multitransactioneditor.cpp:230
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Transaction '%1' has a post date '%2' before one of the referenced "
-#| "account's opening date."
+#, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
 "A selected transaction has a post date (%1) before the opening date of the "
 "selected account (%2)."
 msgstr ""
-"  * Transakcio '%1' havas poŝtan daton '%2' antaŭ unu el la referencaj datoj "
-"de malfermo de la konto."
+"Elektita transakcio havas poŝtan daton (%1) antaŭ la malfermiĝa dato de la "
+"elektita konto (%2)."
 
 #: kmymoney/views/multitransactioneditor.cpp:696
-#, fuzzy, kde-format
-#| msgid "Cannot open file as requested."
+#, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
-msgstr "Ne povas malfermi dosieron kiel petis."
+msgstr "Ne povas redakti plurajn planojn samtempe."
 
 #: kmymoney/views/multitransactioneditor.cpp:704
 #, kde-format
@@ -20643,6 +20637,8 @@ msgid ""
 "Selection of category or account is not possible when split transactions are "
 "part of the selection."
 msgstr ""
+"Elekto de kategorio aŭ konto ne eblas kiam dividitaj transakcioj estas parto "
+"de la elekto."
 
 #: kmymoney/views/newspliteditor.cpp:146
 #, kde-format
@@ -22819,8 +22815,7 @@ msgid "Next interest change is due"
 msgstr "La sekva interezoŝanĝo estas pagenda"
 
 #: kmymoney/wizards/newaccountwizard/khierarchypage.cpp:154
-#, fuzzy, kde-format
-#| msgid "No account selected"
+#, kde-format
 msgctxt "@info Missing parent account selection in new account wizard"
 msgid "No parent account selected"
 msgstr "Neniu konto elektita"

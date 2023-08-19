@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-17 00:46+0000\n"
-"PO-Revision-Date: 2023-08-17 20:52+0200\n"
+"PO-Revision-Date: 2023-08-18 17:26+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -19499,6 +19499,10 @@ msgid ""
 "transaction will be adjusted instead when the schedule is entered with a "
 "modified amount.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Seleccione esto si no desea modificar el importe del "
+"lado de la categoría de una transacción en varias divisas. En su lugar, se "
+"ajustará el tipo de cambio de la transacción cuando se introduzca la "
+"planificación con un importe modificado.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, keepMultiCurrencyAmount)
 #: kmymoney/views/keditscheduledlg.ui:238
@@ -19506,6 +19510,8 @@ msgstr ""
 msgid ""
 "Do not change amount of category but modify exchange rate of transaction"
 msgstr ""
+"No cambiar el importe de la categoría, sino el tipo de cambio de la "
+"transacción"
 
 #. i18n: ectx: property (text), widget (QCheckBox, lastDayInMonthOption)
 #: kmymoney/views/keditscheduledlg.ui:245
@@ -20781,24 +20787,20 @@ msgid "Select category or account."
 msgstr "Seleccione categoría o cuenta."
 
 #: kmymoney/views/multitransactioneditor.cpp:230
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Transaction '%1' has a post date '%2' before one of the referenced "
-#| "account's opening date."
+#, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
 "A selected transaction has a post date (%1) before the opening date of the "
 "selected account (%2)."
 msgstr ""
-"  * La transacción «%1» tiene una fecha de valor «%2» anterior a la fecha de "
-"apertura de una de las cuentas referenciadas."
+"Una transacción seleccionada tiene una fecha de valor (%1) anterior a la "
+"fecha de apertura de la cuenta seleccionada (%2)."
 
 #: kmymoney/views/multitransactioneditor.cpp:696
-#, fuzzy, kde-format
-#| msgid "Cannot edit multiple split transactions at once."
+#, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
-msgstr "No se pueden editar asientos de múltiples partidas al mismo tiempo."
+msgstr "No se pueden editar múltiples planificaciones al mismo tiempo."
 
 #: kmymoney/views/multitransactioneditor.cpp:704
 #, kde-format
@@ -20806,6 +20808,8 @@ msgid ""
 "Selection of category or account is not possible when split transactions are "
 "part of the selection."
 msgstr ""
+"La selección de una categoría o cuenta no es posible cuando las "
+"transacciones con partidas son parte de la selección."
 
 #: kmymoney/views/newspliteditor.cpp:146
 #, kde-format
