@@ -180,6 +180,12 @@ void MyMoneyTransactionFilter::setDateFilter(const QDate& from, const QDate& to)
     d->m_filterSet.setFlag(dateFilterActive, from.isValid() || to.isValid());
     d->m_fromDate = from;
     d->m_toDate = to;
+    if (from.isValid() && to.isValid()) {
+        if (from > to) {
+            d->m_fromDate = to;
+            d->m_toDate = from;
+        }
+    }
 }
 
 void MyMoneyTransactionFilter::setAmountFilter(const MyMoneyMoney& from, const MyMoneyMoney& to)
