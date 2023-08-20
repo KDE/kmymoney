@@ -573,6 +573,7 @@ enum Roles {
     TransactionInvestmentAccountIdRole,
     TransactionCommodityRole,
     TransactionIsImportedRole,
+    TransactionAccountSignatureRole,
 
     // MyMoneySchedule
     TransactionScheduleRole,
@@ -598,6 +599,7 @@ enum Roles {
     SplitCostCenterIdRole,
     SplitActivityRole,
     SplitTagIdRole,
+    SplitBankIdRole,
     SplitFormattedValueRole,
     SplitFormattedSharesRole,
     SplitIsNewRole,
