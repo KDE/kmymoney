@@ -35,4 +35,9 @@ enum class SchemeColor {
     MissingConversionRate,
 };
 
+enum class AutoFillMethod {
+    NoAutoFill = 0,
+    AutoFillWithClosestInValue,
+    AutoFillWithMostOftenUsed,
+};
 #endif

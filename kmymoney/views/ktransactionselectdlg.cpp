@@ -100,6 +100,22 @@ void KTransactionSelectDlg::addTransaction(const QString& journalEntryId)
     d->filterModel->appendFilterFixedString(journalEntryId);
 }
 
+QString KTransactionSelectDlg::journalEntryId() const
+{
+    Q_D(const KTransactionSelectDlg);
+    const auto selection = d->ui->m_ledgerView->selectedJournalEntryIds();
+    if (!selection.isEmpty()) {
+        return selection.first();
+    }
+    return {};
+}
+
+LedgerView* KTransactionSelectDlg::ledgerView() const
+{
+    Q_D(const KTransactionSelectDlg);
+    return d->ui->m_ledgerView;
+}
+
 KTransactionMergeDlg::KTransactionMergeDlg(QWidget* parent)
     : KTransactionSelectDlg(parent)
 {

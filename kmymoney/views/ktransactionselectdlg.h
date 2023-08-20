@@ -17,6 +17,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ledgerview.h"
+
 /**
  * @author Thomas Baumgart
  */
@@ -31,6 +33,10 @@ public:
     ~KTransactionSelectDlg();
 
     void addTransaction(const QString& journalEntryId);
+
+    QString journalEntryId() const;
+
+    LedgerView* ledgerView() const;
 
 protected:
     KTransactionSelectDlgPrivate* const d_ptr;
