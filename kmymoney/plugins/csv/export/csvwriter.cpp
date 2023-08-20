@@ -31,6 +31,7 @@
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "mymoneypayee.h"
+#include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
@@ -376,8 +377,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
             }
 
             strAccName = format(acc.name());
-            security = file->security(acc.currencyId());
-            strAccSymbol = format(security.tradingSymbol());
+            const auto security = file->security(acc.currencyId());
             //
             //  Add action.
             //
