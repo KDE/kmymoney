@@ -716,6 +716,21 @@ bool MyMoneyTransactionFilter::payees(QStringList& list) const
     return result;
 }
 
+QStringList MyMoneyTransactionFilter::payees() const
+{
+    Q_D(const MyMoneyTransactionFilter);
+    QStringList list;
+
+    if (d->m_filterSet.testFlag(payeeFilterActive)) {
+        QHashIterator<QString, QString> it_payee(d->m_payees);
+        while (it_payee.hasNext()) {
+            it_payee.next();
+            list += it_payee.key();
+        }
+    }
+    return list;
+}
+
 bool MyMoneyTransactionFilter::tags(QStringList& list) const
 {
     Q_D(const MyMoneyTransactionFilter);
@@ -752,6 +767,22 @@ bool MyMoneyTransactionFilter::accounts(QStringList& list) const
         }
     }
     return result;
+}
+
+QStringList MyMoneyTransactionFilter::accounts() const
+{
+    Q_D(const MyMoneyTransactionFilter);
+    QStringList list;
+
+    if (d->m_filterSet.testFlag(accountFilterActive)) {
+        QHashIterator<QString, QString> it_account(d->m_accounts);
+        while (it_account.hasNext()) {
+            it_account.next();
+            QString account = it_account.key();
+            list += account;
+        }
+    }
+    return list;
 }
 
 bool MyMoneyTransactionFilter::categories(QStringList& list) const
