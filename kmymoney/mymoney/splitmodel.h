@@ -69,6 +69,16 @@ public:
     void setTransactionCommodity(const QString& commodity);
     bool hasMultiCurrencySplits() const;
 
+    /**
+     * When copying an existing transaction, the IDs assigned
+     * to the splits need to be replaced when the transaction is
+     * actually created. This method forces new split IDs to
+     * be assigned in addSplitsToTransaction().
+     *
+     * @sa addSplitsToTransaction()
+     */
+    void resetAllSplitIds();
+
 private Q_SLOTS:
     void checkForForeignCurrency() const;
 
