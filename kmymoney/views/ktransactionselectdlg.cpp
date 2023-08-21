@@ -53,6 +53,8 @@ KTransactionSelectDlg::KTransactionSelectDlg(QWidget* parent)
     d->ui->setupUi(this);
     d->ui->switchButton->hide();
 
+    d->ui->label->setText(i18nc("@info:label Description of select transaction dialog", "Select the transaction to use as template."));
+
     d->filterModel->setSourceModel(MyMoneyFile::instance()->journalModel());
     d->ui->m_ledgerView->setModel(d->filterModel);
     // don't show sort indicator and don't allow sorting via header
@@ -122,11 +124,11 @@ KTransactionMergeDlg::KTransactionMergeDlg(QWidget* parent)
     Q_D(KTransactionSelectDlg);
     // setup descriptive texts
     setWindowTitle(i18n("Merge Transactions"));
-    d_ptr->ui->label->setText(i18nc("@info:label Description of merge transaction dialog",
-                                    "The two selected transactions to merge are shown. The one at "
-                                    "the top and its values will be used in the resulting "
-                                    "merged transaction.  If you want to use the other one "
-                                    "press the exchange button on the right."));
+    d->ui->label->setText(i18nc("@info:label Description of merge transaction dialog",
+                                "The two selected transactions to merge are shown. The one at "
+                                "the top and its values will be used in the resulting "
+                                "merged transaction.  If you want to use the other one "
+                                "press the exchange button on the right."));
 
     d->ui->switchButton->setIcon(Icons::get(Icons::Icon::ItemExchange));
     d->ui->switchButton->setToolTip(i18nc("@info:tooltip Exchange transactions about to merge", "Press to exchange the two transactions."));
