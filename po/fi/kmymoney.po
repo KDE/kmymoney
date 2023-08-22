@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-17 00:46+0000\n"
+"POT-Creation-Date: 2023-08-22 00:46+0000\n"
 "PO-Revision-Date: 2023-06-07 16:30+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -18912,14 +18912,14 @@ msgstr "Korkotulot"
 
 #: kmymoney/views/investtransactioneditor.cpp:265
 #: kmymoney/views/multitransactioneditor.cpp:164
-#: kmymoney/views/newtransactioneditor.cpp:218
+#: kmymoney/views/newtransactioneditor.cpp:224
 #, kde-format
 msgid "The posting date of the transaction."
 msgstr "Tapahtuman kirjauspäivä."
 
 #: kmymoney/views/investtransactioneditor.cpp:289
 #: kmymoney/views/multitransactioneditor.cpp:194
-#: kmymoney/views/newtransactioneditor.cpp:238
+#: kmymoney/views/newtransactioneditor.cpp:244
 #, kde-format
 msgid "The posting date is prior to the opening date of account <b>%1</b>."
 msgstr "Kirjauspäivä on ennen tilin <b>%1</b> avauspäivää."
@@ -20519,12 +20519,19 @@ msgstr "Luokitusasetukset"
 msgid "Tag color:"
 msgstr "Luokitusväri:"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:108
+#: kmymoney/views/ktransactionselectdlg.cpp:56
+#, fuzzy, kde-format
+#| msgid "Select transactions without payees"
+msgctxt "@info:label Description of select transaction dialog"
+msgid "Select the transaction to use as template."
+msgstr "Valitse tapahtumat ilman maksunsaajia"
+
+#: kmymoney/views/ktransactionselectdlg.cpp:126
 #, kde-format
 msgid "Merge Transactions"
 msgstr "Yhdistä tapahtumat"
 
-#: kmymoney/views/ktransactionselectdlg.cpp:110
+#: kmymoney/views/ktransactionselectdlg.cpp:128
 #, fuzzy, kde-format
 #| msgid ""
 #| "Are you sure you wish to merge these transactions?  The one you selected "
@@ -20541,7 +20548,7 @@ msgstr ""
 "käytetään yhdistetyssä tapahtumassa. Peruuta ja valitse toinen tapahtuma "
 "ensin, jos sen arvoja halutaan käyttää."
 
-#: kmymoney/views/ktransactionselectdlg.cpp:116
+#: kmymoney/views/ktransactionselectdlg.cpp:134
 #, fuzzy, kde-format
 #| msgid "Unable to match the selected transactions"
 msgctxt "@info:tooltip Exchange transactions about to merge"
@@ -20765,7 +20772,7 @@ msgid "Balance: %1"
 msgstr "Saldo: %1"
 
 #: kmymoney/views/multitransactioneditor.cpp:172
-#: kmymoney/views/newtransactioneditor.cpp:221
+#: kmymoney/views/newtransactioneditor.cpp:227
 #, fuzzy, kde-format
 #| msgid "The posting date of the transaction."
 msgid "The posting date is invalid."
@@ -20839,13 +20846,13 @@ msgid "A category assignment is required for a split."
 msgstr "Valitussa luokassa tapahtumalle vaaditaan kustannuspaikkatoimeksianto."
 
 #: kmymoney/views/newspliteditor.cpp:212
-#: kmymoney/views/newtransactioneditor.cpp:366
+#: kmymoney/views/newtransactioneditor.cpp:372
 #, kde-format
 msgid "The check number used for this transaction."
 msgstr "Sekkinumero jota käytetään tälle tapahtumalle."
 
 #: kmymoney/views/newspliteditor.cpp:221
-#: kmymoney/views/newtransactioneditor.cpp:376
+#: kmymoney/views/newtransactioneditor.cpp:382
 #, kde-format
 msgid "The check number <b>%1</b> has already been used in this account."
 msgstr "Sekkinumero <b>%1</b> on jo käytössä tälle tilille."
@@ -20869,17 +20876,24 @@ msgstr "Maksunsaaja / vastaanottaja"
 msgid "Costcenter"
 msgstr "Kustannuspaikka"
 
-#: kmymoney/views/newtransactioneditor.cpp:250
+#: kmymoney/views/newtransactioneditor.cpp:256
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
 msgstr "Kustannuspaikka tälle tapahtumalle pitäisi antaa toimeksi."
 
-#: kmymoney/views/newtransactioneditor.cpp:253
+#: kmymoney/views/newtransactioneditor.cpp:259
 #, kde-format
 msgid ""
 "A cost center assignment is required for a transaction in the selected "
 "category."
 msgstr "Valitussa luokassa tapahtumalle vaaditaan kustannuspaikkatoimeksianto."
+
+#: kmymoney/views/newtransactioneditor.cpp:527
+#, fuzzy, kde-format
+#| msgid "Select autofill transaction"
+msgctxt "@title:window Autofill selection dialog"
+msgid "Select autofill transaction"
+msgstr "Valitse täytä automaattisesti -tapahtuma"
 
 #: kmymoney/views/newtransactionform.cpp:113
 #, kde-format
@@ -25876,9 +25890,6 @@ msgstr ""
 
 #~ msgid "Category/Account"
 #~ msgstr "Luokka / tili"
-
-#~ msgid "Select autofill transaction"
-#~ msgstr "Valitse täytä automaattisesti -tapahtuma"
 
 #~ msgid ""
 #~ "Do you want to replace memo<p><i>%1</i></p>with memo<p><i>%2</i></p>in "
