@@ -396,14 +396,14 @@ public:
 
     /**
      * This method returns the tab index for the given @a accountId
-     * or -1 if there is no tab for it open
+     * or -1 if there is no tab for it open or @a accountId is empty
      *
      * @note updates accountId to point to the investment account in case
      * @a accountId references a stock account
      */
     int tabIdByAccountId(QString& accountId)
     {
-        if (ui && ui->ledgerTab) {
+        if (ui && ui->ledgerTab && !accountId.isEmpty()) {
             // in case a stock account is selected, we switch to the parent which
             // is the investment account
             MyMoneyAccount acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
@@ -565,7 +565,8 @@ void SimpleLedgerView::closeLedger(int idx)
 {
     Q_D(SimpleLedgerView);
     // don't react on the close request for the new ledger function
-    if(idx != (d->ui->ledgerTab->count()-1)) {
+    // and non-existing tabs
+    if ((idx >= 0) && (idx != (d->ui->ledgerTab->count() - 1))) {
         // if the currently selected ledger is closed, we
         // remove any selection
         d->m_selections.clearSelections();
@@ -748,7 +749,7 @@ void SimpleLedgerView::updateActions(const SelectedObjects& selections)
 void SimpleLedgerView::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
     Q_D(SimpleLedgerView);
-    const auto accountId = selections.firstSelection(SelectedObjects::Account);
+    auto accountId = selections.firstSelection(SelectedObjects::Account);
     switch (action) {
     case eMenu::Action::GoToAccount:
     case eMenu::Action::NewTransaction:
@@ -804,6 +805,11 @@ void SimpleLedgerView::executeAction(eMenu::Action action, const SelectedObjects
 
     case eMenu::Action::FileClose:
         d->closeLedgers();
+        break;
+
+    case eMenu::Action::CloseAccount:
+        // close the ledger in case it is shown
+        closeLedger(d->tabIdByAccountId(accountId));
         break;
 
     default:

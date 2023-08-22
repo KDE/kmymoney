@@ -3196,6 +3196,10 @@ void KMyMoneyApp::slotCloseAccount()
         account.setClosed(true);
         file->modifyAccount(account);
         ft.commit();
+
+        // inform views about the closing of the account
+        d->executeAction(eMenu::Action::CloseAccount);
+
         if (!KMyMoneySettings::showAllAccounts()) {
             KMessageBox::information(
                 this,
