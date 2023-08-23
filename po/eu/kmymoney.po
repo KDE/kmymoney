@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-22 00:46+0000\n"
-"PO-Revision-Date: 2023-07-31 13:15+0200\n"
+"PO-Revision-Date: 2023-08-22 11:58+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -2323,7 +2323,7 @@ msgstr ""
 #: kmymoney/dialogs/knewaccountdlg.cpp:732
 #, kde-format
 msgid "Please select a parent account."
-msgstr "Hautatu kontu gurasoa."
+msgstr "Mesedez, hautatu guraso kontua."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:738
 #: kmymoney/dialogs/knewaccountdlg.cpp:894
@@ -2401,7 +2401,7 @@ msgid ""
 "the following dialog</i>.</p>"
 msgstr ""
 "<p>Une honetan, <b>%1</b> kontua ez da existitzen. Sortu nahi duzu?</"
-"p><p><i>Kontu gurasoa <b>%2</b> izango da lehenespenez, baina hurrengo "
+"p><p><i>Guraso Kontua <b>%2</b> izango da lehenespenez, baina hurrengo "
 "elkarrizketa-leihoan alda daiteke</i>.</p>"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1056
@@ -2418,7 +2418,7 @@ msgid ""
 "the following dialog</i>.</p>"
 msgstr ""
 "<p>Une honetan, <b>%1</b> kontua ez da existitzen. Sortu nahi duzu? </"
-"p><p><i>Kontu gurasoa <b>%2</b> izango da lehenespenez, baina hurrengo "
+"p><p><i>Guraso kontua <b>%2</b> izango da lehenespenez, baina hurrengo "
 "elkarrizketa-leihoan alda daiteke</i>.</p>"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:1099
@@ -6630,17 +6630,17 @@ msgstr "    Goi-mailako '%1' kontua '%2' kontuaren guraso bihurtzen."
 #: kmymoney/mymoney/mymoneyfile.cpp:2421
 #, kde-format
 msgid "  * Parent account '%1' belongs to a different group."
-msgstr "  * '%1' kontu gurasoa beste talde batekoa da."
+msgstr "  * '%1' guraso kontua beste talde batekoa da."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2422 kmymoney/mymoney/mymoneyfile.cpp:2452
 #, kde-format
 msgid "    New parent account is the top level account '%1'."
-msgstr "    Goi-mailako '%1' kontua da kontu guraso berria."
+msgstr "    Goi-mailako '%1' kontua da guraso kontu berria."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2438
 #, kde-format
 msgid "  * Parent account '%1' does not contain '%2' as sub-account."
-msgstr "  * '%1' kontu gurasoak ez du '%2' azpikontu gisa."
+msgstr "  * '%1' guraso kontuak ez du '%2' azpikontu gisa."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2451
 #, kde-format
@@ -9411,25 +9411,22 @@ msgid "%1 and No/%2"
 msgstr "%1 eta Ez/%2"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
-#, fuzzy, kde-format
-#| msgid "Comma (,)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Comma (,)"
 msgstr "Koma (,)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
-#, fuzzy, kde-format
-#| msgid "Semicolon (;)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Semicolon (;)"
 msgstr "Puntu eta koma (;)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:66
-#, fuzzy, kde-format
-#| msgid "Tab (\\t)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
-msgstr "Tabulazioa (\\t)"
+msgstr "Tabuladorea (\\t)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:92
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:62
@@ -9470,11 +9467,10 @@ msgid "Use this to select a filename to export to"
 msgstr "Erabili hau zer fitxategi-izenetara esportatuko den hautatzeko"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:199
-#, fuzzy, kde-format
-#| msgid "  * Parent account '%1' does not contain '%2' as sub-account."
+#, kde-format
 msgctxt "@info Hint in CSV export dialog"
 msgid "Current selected account does not contain any transactions."
-msgstr "  * '%1' kontu gurasoak ez du '%2' azpikontu gisa."
+msgstr "Hautatutako uneko kontuak ez du transakziorik."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CsvExportDlg)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:14
@@ -9608,11 +9604,9 @@ msgid "Account Type:"
 msgstr "Kontu mota:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "Header for AqBanking account list"
-#| msgid "Account Name"
+#, kde-format
 msgid "Account Name:"
-msgstr "Kontu-izena"
+msgstr "Kontu-izena:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:107
 #: kmymoney/plugins/csv/export/csvwriter.cpp:116
@@ -19062,6 +19056,7 @@ msgid ""
 "The current implementation cannot modify multiple transactions in different "
 "accounts."
 msgstr ""
+"Uneko inplementazioak ezin ditu hainbat transakzio aldatu kontu ezberdinetan."
 
 #: kmymoney/views/kaccountsview.cpp:174
 #: kmymoney/views/kinstitutionsview.cpp:208
@@ -19415,6 +19410,10 @@ msgid ""
 "transaction will be adjusted instead when the schedule is entered with a "
 "modified amount.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Hautatu hori, dibisa anizkoitzeko transakzio baten, "
+"kategoria aldeko, zenbatekoa aldatu nahi ez baduzu. Transakzioaren kanbio-"
+"tasa doituko da horren ordez, zenbatekoa aldatuta duen antolaketa bat "
+"sartzen denean.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, keepMultiCurrencyAmount)
 #: kmymoney/views/keditscheduledlg.ui:238
@@ -19422,6 +19421,7 @@ msgstr ""
 msgid ""
 "Do not change amount of category but modify exchange rate of transaction"
 msgstr ""
+"Ez aldatu kategoriaren zenbatekoa, baina aldatu transakzioaren kanbio-tasa"
 
 #. i18n: ectx: property (text), widget (QCheckBox, lastDayInMonthOption)
 #: kmymoney/views/keditscheduledlg.ui:245
@@ -20454,11 +20454,10 @@ msgid "Tag color:"
 msgstr "Etiketaren kolorea:"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:56
-#, fuzzy, kde-format
-#| msgid "Select transactions without payees"
+#, kde-format
 msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
-msgstr "Hautatu onuradunik gabeko transakzioak"
+msgstr "Hautatu txantiloi bezala erabili beharreko txantiloia."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:126
 #, kde-format
@@ -20696,30 +20695,25 @@ msgid "The posting date is invalid."
 msgstr "Argitalpen-data baliogabea da."
 
 #: kmymoney/views/multitransactioneditor.cpp:218
-#, fuzzy, kde-format
-#| msgid "Select account"
+#, kde-format
 msgid "Select category or account."
-msgstr "Hautatu kontua"
+msgstr "Hautatu kategoria edo kontua."
 
 #: kmymoney/views/multitransactioneditor.cpp:230
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Transaction '%1' has a post date '%2' before one of the referenced "
-#| "account's opening date."
+#, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
 "A selected transaction has a post date (%1) before the opening date of the "
 "selected account (%2)."
 msgstr ""
-"* '%1' transakzioak ezin du '%2' data izan bere kontuaren irekiera data "
-"aurrekoa delako."
+"Hautatutako transakzio batek bidaltze-data (%1) hautatutako kontuaren (%2) "
+"irekiera dataren aurrekoa du."
 
 #: kmymoney/views/multitransactioneditor.cpp:696
-#, fuzzy, kde-format
-#| msgid "Cannot edit multiple split transactions at once."
+#, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
-msgstr "Ezin dira aldi berean editatu partidadun transakzio bat baino gehiago."
+msgstr "Ezin ditu aldi berean hainbat antolaketa editatu."
 
 #: kmymoney/views/multitransactioneditor.cpp:704
 #, kde-format
@@ -20727,6 +20721,8 @@ msgid ""
 "Selection of category or account is not possible when split transactions are "
 "part of the selection."
 msgstr ""
+"Ezin da kategoria edo kontua hautatu partidako transakzioak hautapenaren "
+"parte direnean."
 
 #: kmymoney/views/newspliteditor.cpp:146
 #, kde-format
@@ -20799,11 +20795,10 @@ msgid ""
 msgstr "Hautatutako kategorian kostu-zentroa esleitu behar zaie transakzioei."
 
 #: kmymoney/views/newtransactioneditor.cpp:527
-#, fuzzy, kde-format
-#| msgid "Select autofill transaction"
+#, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
-msgstr "Hautatu transakzioa automatikoki betetzea"
+msgstr "Hautatu automatikoki betetzeko transakzioa"
 
 #: kmymoney/views/newtransactionform.cpp:113
 #, kde-format
@@ -22914,17 +22909,16 @@ msgid "Next interest change is due"
 msgstr "Hurrengo interes-aldaketaren mugaeguna"
 
 #: kmymoney/wizards/newaccountwizard/khierarchypage.cpp:154
-#, fuzzy, kde-format
-#| msgid "No account selected"
+#, kde-format
 msgctxt "@info Missing parent account selection in new account wizard"
 msgid "No parent account selected"
-msgstr "Ez da aukeratu konturik"
+msgstr "Ez da guraso konturik hautatu"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newaccountwizard/khierarchypage.ui:26
 #, kde-format
 msgid "This page allows you to select the parent account."
-msgstr "Orri honetan, kontu gurasoa aukeratu dezakezu."
+msgstr "Orri honetan, guraso kontua aukeratu dezakezu."
 
 #. i18n: ectx: property (text), widget (QLabel, m_subAccountLabel)
 #: kmymoney/wizards/newaccountwizard/khierarchypage.ui:36
@@ -23496,7 +23490,7 @@ msgstr "Ordainketa"
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:80
 #, kde-format
 msgid "Parent Account"
-msgstr "Kontu gurasoa"
+msgstr "Guraso kontua"
 
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:81
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:60

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-22 00:46+0000\n"
-"PO-Revision-Date: 2023-08-22 01:04+0300\n"
+"PO-Revision-Date: 2023-08-22 23:08+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -17585,7 +17585,7 @@ msgstr "<p>Eylem sütununu göstermek için bu seçeneği seçin.</p>"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:310
 #, kde-format
 msgid "<p>Select this option to show the Running balance column</p>"
-msgstr "<p>Aktif bakiye sütununu göstermek için bu seçeneği seçin.</p>"
+msgstr "<p>Etkin bakiye sütununu göstermek için bu seçeneği seçin.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkLoans)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:346
@@ -20373,11 +20373,10 @@ msgid "Tag color:"
 msgstr "Etiket rengi:"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:56
-#, fuzzy, kde-format
-#| msgid "Select transactions without payees"
+#, kde-format
 msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
-msgstr "Alacaklısız işlemleri seç"
+msgstr "Bir şablon olarak kullanmak üzere işlemi seçin."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:126
 #, kde-format
@@ -20716,11 +20715,10 @@ msgstr ""
 "Seçili kategorideki bir işlem için bir masraf merkezi ataması gereklidir."
 
 #: kmymoney/views/newtransactioneditor.cpp:527
-#, fuzzy, kde-format
-#| msgid "Select Transaction"
+#, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
-msgstr "İşlem Seç"
+msgstr "Otomatik Doldurma İşlemi Seç"
 
 #: kmymoney/views/newtransactionform.cpp:113
 #, kde-format

@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-22 00:46+0000\n"
-"PO-Revision-Date: 2023-08-18 17:26+0200\n"
+"PO-Revision-Date: 2023-08-22 12:47+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -20546,11 +20546,10 @@ msgid "Tag color:"
 msgstr "Color de la etiqueta:"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:56
-#, fuzzy, kde-format
-#| msgid "Select transactions without payees"
+#, kde-format
 msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
-msgstr "Seleccionar asientos sin beneficiario"
+msgstr "Seleccione la transacción que se usará como plantilla."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:126
 #, kde-format
@@ -20891,11 +20890,10 @@ msgstr ""
 "categoría seleccionada."
 
 #: kmymoney/views/newtransactioneditor.cpp:527
-#, fuzzy, kde-format
-#| msgid "Select autofill transaction"
+#, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
-msgstr "Seleccionar asiento para rellenar automáticamente"
+msgstr "Seleccionar transacción para rellenar automáticamente"
 
 #: kmymoney/views/newtransactionform.cpp:113
 #, kde-format

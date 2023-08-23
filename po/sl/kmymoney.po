@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-22 00:46+0000\n"
-"PO-Revision-Date: 2023-08-14 11:49+0200\n"
+"PO-Revision-Date: 2023-08-22 09:29+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
 "X-Generator: Poedit 3.3.2\n"
 
 #, kde-format
@@ -20496,11 +20496,10 @@ msgid "Tag color:"
 msgstr "Barva oznake:"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:56
-#, fuzzy, kde-format
-#| msgid "Select transactions without payees"
+#, kde-format
 msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
-msgstr "Izberi transakcije brez prejemnika plačila"
+msgstr "Izberite transakcijo za uporabo kot predlogo."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:126
 #, kde-format
@@ -20838,11 +20837,10 @@ msgstr ""
 "Potrebna je dodelitev stroškovnega mesta za transakcijo v izbrani kategoriji."
 
 #: kmymoney/views/newtransactioneditor.cpp:527
-#, fuzzy, kde-format
-#| msgid "Select Transaction"
+#, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
-msgstr "Izberi transakcijo"
+msgstr "Izberite samodejno izpolnjeno transakcijo"
 
 #: kmymoney/views/newtransactionform.cpp:113
 #, kde-format

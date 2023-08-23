@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-22 00:46+0000\n"
-"PO-Revision-Date: 2023-08-14 11:39+0200\n"
+"PO-Revision-Date: 2023-08-22 11:32+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -20592,11 +20592,10 @@ msgid "Tag color:"
 msgstr "Color de l'etiqueta:"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:56
-#, fuzzy, kde-format
-#| msgid "Select transactions without payees"
+#, kde-format
 msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
-msgstr "Selecciona les operacions sense beneficiaris"
+msgstr "Selecciona l'operació que es farà servir com a plantilla."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:126
 #, kde-format
@@ -20942,11 +20941,10 @@ msgstr ""
 "centre de despesa."
 
 #: kmymoney/views/newtransactioneditor.cpp:527
-#, fuzzy, kde-format
-#| msgid "Select Transaction"
+#, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
-msgstr "Selecció d'operació"
+msgstr "Seleccioneu autocompleció d'operació"
 
 #: kmymoney/views/newtransactionform.cpp:113
 #, kde-format
