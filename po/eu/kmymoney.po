@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2023-07-30 21:18+0200\n"
+"PO-Revision-Date: 2023-08-22 11:49+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -3137,7 +3137,7 @@ msgstr ""
 #: kmymoney/dialogs/knewaccountdlg.cpp:629
 #, kde-format
 msgid "Please select a parent account."
-msgstr "Hautatu kontu gurasoa."
+msgstr "Mesedez, hautatu guraso kontua."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:635
 #: kmymoney/dialogs/knewaccountdlg.cpp:786
@@ -3194,7 +3194,7 @@ msgid ""
 "the following dialog</i>.</p>"
 msgstr ""
 "<p>Une honetan, <b>%1</b> kontua ez da existitzen. Sortu nahi duzu?</"
-"p><p><i>Kontu gurasoa <b>%2</b> izango da lehenespenez, baina hurrengo "
+"p><p><i>Guraso Kontua <b>%2</b> izango da lehenespenez, baina hurrengo "
 "elkarrizketa-leihoan alda daiteke</i>.</p>"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:935
@@ -7622,17 +7622,17 @@ msgstr "    Goi-mailako '%1' kontua '%2' kontuaren guraso bihurtzen."
 #: kmymoney/mymoney/mymoneyfile.cpp:1959
 #, kde-format
 msgid "  * Parent account '%1' belongs to a different group."
-msgstr "  * '%1' kontu gurasoa beste talde batekoa da."
+msgstr "  * '%1' guraso kontua beste talde batekoa da."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:1960 kmymoney/mymoney/mymoneyfile.cpp:1990
 #, kde-format
 msgid "    New parent account is the top level account '%1'."
-msgstr "    Goi-mailako '%1' kontua da kontu guraso berria."
+msgstr "    Goi-mailako '%1' kontua da guraso kontu berria."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:1976
 #, kde-format
 msgid "  * Parent account '%1' does not contain '%2' as sub-account."
-msgstr "  * '%1' kontu gurasoak ez du '%2' azpikontu gisa."
+msgstr "  * '%1' guraso kontuak ez du '%2' azpikontu gisa."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:1989
 #, kde-format
@@ -9882,11 +9882,9 @@ msgid "Account Type:"
 msgstr "Kontu mota:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:101
-#, fuzzy, kde-format
-#| msgctxt "Header for AqBanking account list"
-#| msgid "Account Name"
+#, kde-format
 msgid "Account Name:"
-msgstr "Kontu-izena"
+msgstr "Kontu-izena:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #, kde-format
@@ -22821,7 +22819,7 @@ msgstr "Hurrengo interes-aldaketaren mugaeguna"
 #: kmymoney/wizards/newaccountwizard/khierarchypage.ui:26
 #, kde-format
 msgid "This page allows you to select the parent account."
-msgstr "Orri honetan, kontu gurasoa aukeratu dezakezu."
+msgstr "Orri honetan, guraso kontua aukeratu dezakezu."
 
 #. i18n: ectx: property (text), widget (QLabel, m_subAccountLabel)
 #: kmymoney/wizards/newaccountwizard/khierarchypage.ui:36
@@ -23393,7 +23391,7 @@ msgstr "Ordainketa"
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:80
 #, kde-format
 msgid "Parent Account"
-msgstr "Kontu gurasoa"
+msgstr "Guraso kontua"
 
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:81
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:61
