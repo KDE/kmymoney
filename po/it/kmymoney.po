@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-24 00:46+0000\n"
-"PO-Revision-Date: 2023-08-08 18:02+0200\n"
+"PO-Revision-Date: 2023-08-16 09:30+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -9440,22 +9440,19 @@ msgid "%1 and No/%2"
 msgstr "%1 e No/%2"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
-#, fuzzy, kde-format
-#| msgid "Comma (,)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Comma (,)"
 msgstr "Virgola (,)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
-#, fuzzy, kde-format
-#| msgid "Semicolon (;)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Semicolon (;)"
 msgstr "Punto e virgola (;)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:66
-#, fuzzy, kde-format
-#| msgid "Tab (\\t)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
 msgstr "Tabulazione (\\t)"
@@ -9499,11 +9496,10 @@ msgid "Use this to select a filename to export to"
 msgstr "Premi qui per selezionare il nome del file in cui esportare"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:199
-#, fuzzy, kde-format
-#| msgid "  * Parent account '%1' does not contain '%2' as sub-account."
+#, kde-format
 msgctxt "@info Hint in CSV export dialog"
 msgid "Current selected account does not contain any transactions."
-msgstr "  * Il conto padre «%1» non contiene «%2» come sottoconto."
+msgstr "Il conto attualmente selezionato non contiene transazioni."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CsvExportDlg)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:14
@@ -9635,11 +9631,9 @@ msgid "Account Type:"
 msgstr "Tipi di conto:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "Header for AqBanking account list"
-#| msgid "Account Name"
+#, kde-format
 msgid "Account Name:"
-msgstr "Nome conto"
+msgstr "Nome del conto:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:107
 #: kmymoney/plugins/csv/export/csvwriter.cpp:116
@@ -19160,6 +19154,8 @@ msgid ""
 "The current implementation cannot modify multiple transactions in different "
 "accounts."
 msgstr ""
+"L'attuale implementazione non può modificare più transazioni in conti "
+"diversi."
 
 #: kmymoney/views/kaccountsview.cpp:174
 #: kmymoney/views/kinstitutionsview.cpp:208
@@ -20811,31 +20807,25 @@ msgid "The posting date is invalid."
 msgstr "La data di pubblicazione non è valida."
 
 #: kmymoney/views/multitransactioneditor.cpp:218
-#, fuzzy, kde-format
-#| msgid "Select account"
+#, kde-format
 msgid "Select category or account."
-msgstr "Seleziona conto"
+msgstr "Seleziona la categoria o il conto."
 
 #: kmymoney/views/multitransactioneditor.cpp:230
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Transaction '%1' has a post date '%2' before one of the referenced "
-#| "account's opening date."
+#, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
 "A selected transaction has a post date (%1) before the opening date of the "
 "selected account (%2)."
 msgstr ""
-"  * La transazione «%1» ha un data di emissione «%2» che precede una delle "
-"date di apertura del conto di riferimento."
+"Una transazione selezionata ha una data di registrazione (%1) precedente "
+"alla data di apertura del conto selezionato (%2)."
 
 #: kmymoney/views/multitransactioneditor.cpp:696
-#, fuzzy, kde-format
-#| msgid "Cannot edit multiple split transactions at once."
+#, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
-msgstr ""
-"Impossibile modificare transazioni con più suddivisioni in una sola volta."
+msgstr "Non è possibile modificare più pianificazioni contemporaneamente."
 
 #: kmymoney/views/multitransactioneditor.cpp:704
 #, kde-format
@@ -20843,6 +20833,8 @@ msgid ""
 "Selection of category or account is not possible when split transactions are "
 "part of the selection."
 msgstr ""
+"La selezione della categoria o del conto non è possibile quando le "
+"transazioni suddivise fanno parte della selezione."
 
 #: kmymoney/views/newspliteditor.cpp:146
 #, kde-format
@@ -23044,11 +23036,10 @@ msgid "Next interest change is due"
 msgstr "I prossimi interessi cambiano il"
 
 #: kmymoney/wizards/newaccountwizard/khierarchypage.cpp:154
-#, fuzzy, kde-format
-#| msgid "No account selected"
+#, kde-format
 msgctxt "@info Missing parent account selection in new account wizard"
 msgid "No parent account selected"
-msgstr "Nessun conto selezionato"
+msgstr "Nessun conto genitore selezionato"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newaccountwizard/khierarchypage.ui:26
