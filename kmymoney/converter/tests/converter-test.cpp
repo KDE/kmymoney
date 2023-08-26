@@ -21,6 +21,7 @@ using namespace test;
 #include "mymoneystatement.h"
 #include "mymoneyexception.h"
 #include "storage/mymoneystoragedump.h"
+/// @todo AlkOnlineQuote remove following include when ported to Alkimia
 #include "webpricequote.h"
 
 QTEST_GUILESS_MAIN(ConverterTest)

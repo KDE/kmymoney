@@ -24,12 +24,15 @@
 
 #include "ui_knewinvestmentwizard.h"
 
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
-#include "mymoneyfile.h"
-#include "webpricequote.h"
 #include "kmymoneyutils.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
 #include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "mymoneysecurity.h"
+/// @todo AlkOnlineQuote remove following include when ported to Alkimia
+#include "webpricequote.h"
 
 #include "kmmyesno.h"
 
