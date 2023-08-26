@@ -917,7 +917,6 @@ void NewTransactionEditor::Private::loadTransaction(QModelIndex idx)
 
     // keep a copy of the transaction and split
     m_transaction = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).transaction();
-    qDebug() << m_transaction.splits().count();
     m_split = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).split();
     const auto list = idx.model()->match(idx.model()->index(0, 0),
                                          eMyMoney::Model::JournalTransactionIdRole,
