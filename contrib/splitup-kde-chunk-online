@@ -7,7 +7,7 @@
 #      $(srcdir)/index.docbook -o index.xml;
 #
 # into several HTML files. While processing the input file - which
-# must be named index.xml - replace the following occurences:
+# must be named index.xml - replace the following occurrences:
 #
 # source                                      destination
 # ---------------------------------------------------------------------------

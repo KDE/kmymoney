@@ -49,7 +49,7 @@ public:
     void detachFromWidget();
 
     /**
-     * Set the @a style of the frame. For the stlye @c Focus
+     * Set the @a style of the frame. For the style @c Focus
      * the @c offset will be set to 0 for all other styles
      * it will be set to 2.
      *

@@ -299,7 +299,7 @@ public:
      * The @a undoActionText will be attached to the transaction
      *
      * If @a journalBlocking is true (the default), signals sent from the concatenated
-     * journal are surpressed and once the transaction is finished, a complete reset
+     * journal are suppressed and once the transaction is finished, a complete reset
      * of the model will be performed. Where this is not required, you may set
      * @a journalBlocking to false to maintain signal emission and preventing the
      * complete model reset.
@@ -1127,7 +1127,7 @@ public:
 
     /**
       * This method is used to modify an existing MyMoneySchedule
-      * object. Therefor, the id attribute of the object must be set.
+      * object. Therefore, the id attribute of the object must be set.
       *
       * An exception will be thrown upon erroneous situations.
       *

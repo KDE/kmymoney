@@ -263,7 +263,7 @@ public Q_SLOTS:
      * the height of the row. While painting the next time, this
      * information will be updated through the JournalDelegate.
      * Once done, it emits a dataChanged signal for all rows
-     * and colums.
+     * and columns.
      */
     void resetRowHeightInformation();
 

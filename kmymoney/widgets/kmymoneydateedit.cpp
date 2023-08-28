@@ -149,7 +149,7 @@ public:
      * returned. The same applies, when the current input represents
      * an invalid date (e.g. February 31st).
      *
-     * In case the input is empty and empty input is allowd, a phony
+     * In case the input is empty and empty input is allowed, a phony
      * date (which is valid but does not represent a real date) is
      * returned.
      */

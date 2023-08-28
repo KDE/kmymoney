@@ -29,7 +29,7 @@ public:
     virtual ~MyMoneyModelBase();
 
     /**
-     * This method returns a list with the first QModelIndex that mathches the @a name
+     * This method returns a list with the first QModelIndex that matches the @a name
      * in the Qt::DisplayRole role in the model.
      *
      * @sa

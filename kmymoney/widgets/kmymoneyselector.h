@@ -57,7 +57,7 @@ public:
       * @note When the widget is created, it defaults to QListView::Single.
       *       Any items loaded into the widget will be cleared if the mode changes.
       *       Changing the selection mode also changes the type of the items
-      *       created through newItem(). You should therefor set the selection mode
+      *       created through newItem(). You should therefore set the selection mode
       *       before you create items.
       */
     void setSelectionMode(const QTreeWidget::SelectionMode mode);
