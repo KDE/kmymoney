@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-27 00:47+0000\n"
-"PO-Revision-Date: 2023-08-02 12:40\n"
+"PO-Revision-Date: 2023-08-27 03:40\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -9145,25 +9145,22 @@ msgid "%1 and No/%2"
 msgstr "%1又%2分之没有"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
-#, fuzzy, kde-format
-#| msgid "Comma (,)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Comma (,)"
-msgstr "逗号 (,)"
+msgstr ""
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
-#, fuzzy, kde-format
-#| msgid "Semicolon (;)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Semicolon (;)"
-msgstr "分号 (;)"
+msgstr ""
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:66
-#, fuzzy, kde-format
-#| msgid "Tab (\\t)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
-msgstr "制表符 (Tab, \\t)"
+msgstr ""
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:92
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:62
@@ -9204,11 +9201,10 @@ msgid "Use this to select a filename to export to"
 msgstr "选择要导出的文件"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:199
-#, fuzzy, kde-format
-#| msgid "  * Parent account '%1' does not contain '%2' as sub-account."
+#, kde-format
 msgctxt "@info Hint in CSV export dialog"
 msgid "Current selected account does not contain any transactions."
-msgstr "  * 父账户“%1”里并未包含子账户“%2”。"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CsvExportDlg)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:14
@@ -9338,11 +9334,9 @@ msgid "Account Type:"
 msgstr "账户类型："
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "Header for AqBanking account list"
-#| msgid "Account Name"
+#, kde-format
 msgid "Account Name:"
-msgstr "账户名称"
+msgstr ""
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:107
 #: kmymoney/plugins/csv/export/csvwriter.cpp:116
@@ -19794,11 +19788,10 @@ msgid "Tag color:"
 msgstr ""
 
 #: kmymoney/views/ktransactionselectdlg.cpp:56
-#, fuzzy, kde-format
-#| msgid "Select transactions without payees"
+#, kde-format
 msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
-msgstr "选择无收款人的交易"
+msgstr ""
 
 #: kmymoney/views/ktransactionselectdlg.cpp:126
 #, kde-format
@@ -20024,28 +20017,23 @@ msgid "The posting date is invalid."
 msgstr ""
 
 #: kmymoney/views/multitransactioneditor.cpp:218
-#, fuzzy, kde-format
-#| msgid "Select account"
+#, kde-format
 msgid "Select category or account."
-msgstr "选择账户"
+msgstr ""
 
 #: kmymoney/views/multitransactioneditor.cpp:230
-#, fuzzy, kde-format
-#| msgid ""
-#| "  * Transaction '%1' has a post date '%2' before one of the referenced "
-#| "account's opening date."
+#, kde-format
 msgctxt "@info Error when selecting account"
 msgid ""
 "A selected transaction has a post date (%1) before the opening date of the "
 "selected account (%2)."
-msgstr "  * 交易“%1”的创建日期“%2”早于某个相关账户的开户日期。"
+msgstr ""
 
 #: kmymoney/views/multitransactioneditor.cpp:696
-#, fuzzy, kde-format
-#| msgid "Cannot open file as requested."
+#, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
-msgstr "无法打开所需文件。"
+msgstr ""
 
 #: kmymoney/views/multitransactioneditor.cpp:704
 #, kde-format
@@ -20123,11 +20111,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:527
-#, fuzzy, kde-format
-#| msgid "Select Transaction"
+#, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
-msgstr "选择交易"
+msgstr "选择自动填充交易"
 
 #: kmymoney/views/newtransactionform.cpp:113
 #, kde-format
@@ -22145,11 +22132,10 @@ msgid "Next interest change is due"
 msgstr "下次利率变化到期"
 
 #: kmymoney/wizards/newaccountwizard/khierarchypage.cpp:154
-#, fuzzy, kde-format
-#| msgid "No account selected"
+#, kde-format
 msgctxt "@info Missing parent account selection in new account wizard"
 msgid "No parent account selected"
-msgstr "未选择账户"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newaccountwizard/khierarchypage.ui:26
@@ -24316,9 +24302,3 @@ msgstr ""
 "<p>使用下面的各项来输入关于您本人的信息。</p>\n"
 "\n"
 "<p>所有的信息都可以不填，它们仅用来个性化您自己的KMyMoney文件。</p>"
-
-#~ msgid "There are no entries in this account.\n"
-#~ msgstr "此账户不含任何条目。\n"
-
-#~ msgid "Invalid account"
-#~ msgstr "非法账号"
