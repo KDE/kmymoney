@@ -30,14 +30,10 @@
 >. </para>
 
 <para
->Hi ha dues pestanyes principals en aquest diàleg. La pestanya <guilabel
->Criteris</guilabel
-> mostra una sèrie de subpestanyes per a especificar els criteris de la cerca. </para>
+>Hi ha dues pestanyes principals en aquest diàleg. La pestanya «Criteris» mostra una sèrie de subpestanyes per a especificar els criteris de la cerca. </para>
 
 <para
->Una vegada s'hagi completat la cerca, els resultats es mostraran sota la pestanya <guilabel
->Resultat</guilabel
->. A sota de la llista de resultats, el &kmymoney; mostrarà el nombre d'operacions que han complit amb els criteris de la cerca. En fer doble clic sobre una operació individual a la llista de resultats, apareixerà el llibre major apropiat i es mostrarà l'operació. </para>
+>Una vegada s'hagi completat la cerca, els resultats es mostraran sota la pestanya «Resultat». A sota de la llista de resultats, el &kmymoney; mostrarà el nombre d'operacions que han complit amb els criteris de la cerca. En fer doble clic sobre una operació individual a la llista de resultats, apareixerà el llibre major apropiat i es mostrarà l'operació. </para>
 
 <para
 >Quan es prem el botó <guibutton
@@ -63,9 +59,7 @@
 >Criteri de cerca</title>
 
 <para
->Hi ha diverses subpestanyes sota de la pestanya principal <guilabel
->Criteris</guilabel
->, cadascuna de les quals permet especificar diferents tipus de criteris de cerca. A sota de l'àrea per a especificar els criteris, el &kmymoney; llista cadascun dels diferents tipus de criteris que s'especifiquen actualment per a la cerca. </para>
+>Hi ha diverses subpestanyes sota de la pestanya principal «Criteris», cadascuna de les quals permet especificar diferents tipus de criteris de cerca. A sota de l'àrea per a especificar els criteris, el &kmymoney; llista cadascun dels diferents tipus de criteris que s'especifiquen actualment per a la cerca. </para>
 
 <sect2 id="details.search.text">
 <title
@@ -368,9 +362,7 @@
 >Resultat de la cerca</title>
 
 <para
->La pestanya <guilabel
->Resultat</guilabel
-> mostra la Data, Compte, Detalls, Estat de la conciliació, Pagament i Ingrés per a cada operació que coincideixi amb els criteris de la cerca que heu introduït. Fer clic dret sobre la capçalera de la fila a la llista de resultats us permetrà modificar l'ordenació dels resultats. </para>
+>La pestanya «Resultat» mostra la Data, Compte, Detalls, Estat de la conciliació, Pagament i Ingrés per a cada operació que coincideixi amb els criteris de la cerca que heu introduït. Fer clic dret sobre la capçalera de la fila a la llista de resultats us permetrà modificar l'ordenació dels resultats. </para>
 
 <para
 >En fer doble clic sobre una operació, es mostrarà el llibre major del compte corresponent i se centrarà en l'operació seleccionada. </para>

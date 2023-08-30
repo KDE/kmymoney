@@ -500,9 +500,7 @@
 <para
 >El nivell de detall de cada línia es controla a la pestanya <link linkend="details.reports.config.rowscolumns"
 >Files/Columnes</link
-> de la configuració del gràfic. Si escolliu el nivell de detall <guilabel
->Nivell superior</guilabel
->, hi haurà una línia per a cadascun dels comptes o categories superiors, les quals mostraran la suma total de tots els comptes o categories subjacents. Si escolliu <guilabel
+> de la configuració del gràfic. Si escolliu el nivell de detall «Nivell superior», hi haurà una línia per a cadascun dels comptes o categories superiors, les quals mostraran la suma total de tots els comptes o categories subjacents. Si escolliu <guilabel
 >Grups</guilabel
 >, en el seu lloc es mostrarà una línia per a Ingressos, Despeses, Actius o Passius, depenent de les altres opcions de configuració. </para>
 </sect3>
