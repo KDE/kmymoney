@@ -4,58 +4,98 @@
   <authorgroup>
     <author>&Roger.Lum; &Roger.Lum.mail;</author>
     <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2020-02-06</date>
-  <releaseinfo>5.0.8</releaseinfo>
+  <date>2023-08-30</date>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title>Categories</title>
 
 <para>
-  The Categories View provides a summary of all the existing categories in your
-  current database.  The categories are split into income and expense, sorted
-  alphabetically, and shown along with the respective balance for each.
+  Internally, Categories are treated by &kmymoney; as a special type of account, so
+  many of the features of Categories are very similar to those of other Accounts.
+</para>
+
+<sect1 id="details.categories.view">
+<title>Categories View</title>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="categories.png" format="PNG" />
+      </imageobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="categories.png" format="PNG" />
-	</imageobject>
-	</mediaobject>
-	</screenshot>
+  The Categories View provides a summary of all the existing categories in your
+  current data file.  Similar to the Accounts View, categories are grouped into
+  Income and Expense.  As with the Institutions View and Accounts View, the list of
+  categories can be expanded or collapse by clicking on the arrow to the left of the
+  type or name.  As with Asset and Liability Accounts, Categories can be considered
+  subcategories, with a parent of another category instead of the top-level Income or
+  Expense.
 </para>
+
+<para>
+  Similar to the Accounts View, the Categories View displays several columns with
+  descriptive and summary information about each category.  As with the Accounts
+  View, you can select which columns are shown by right-clicking on any column
+  heading and selecting or unselecting the checkbox next to the name of the column.
+</para>
+
+<para>
+  The columns available for Categories are identical to those for Accounts for Name,
+  Type, Tax, VAT, Balance, and Total Value.  Online, Account Number, and IBAN are not
+  applicable to Categories.  There is one additional column available.
+</para>
+
+<variablelist>
+  <varlistentry>
+    <term>CC</term>
+    <listitem>
+      <para>
+        An indication that a cost center assignment is necessary under certain
+        conditions when entering a transaction for this category.  This is a recently
+        added feature, which is not yet implemented, so this column is not currently
+        used.
+      </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</sect1>
 
 <sect1 id="details.categories.create">
 <title>Creating a category</title>
 
 <para>
-  There are 3 ways to create a new category: either select the
+  There are 3 ways to create a new category: select the
   <menuchoice><guimenu>Category</guimenu><guimenuitem>New
-  category</guimenuitem></menuchoice> menu item; select a parent in the tree
-  in the Categories View, right-click and select the <guimenuitem>New
-  Category</guimenuitem> option, or directly type the name of the new category
-  when adding or editing a transaction in the Ledger.  Doing any of these steps
-  will direct you to the <guilabel>Create new Category</guilabel> dialog.  The
-  dialog contains three tabs: <guilabel>General</guilabel>,
-  <guilabel>Hierarchy</guilabel>, and <guilabel>Tax</guilabel>.  The General tab
-  includes editable fields for the new category name, type, and currency (with
-  the default currency preselected,) as well as options for Last check number,
-  Notes, and a checkbox for Cost center assignment required.  In the Hierarchy
-  tab, you are able to select the appropriate parent account for the category.
-  Finally, in the Tax tab, there are fields to enable and configure VAT support,
-  and a checkbox to include this category in tax related reports.
+  category</guimenuitem></menuchoice> menu item, right-click a parent in the tree in
+  the Categories View and select the <guimenuitem>New Category</guimenuitem> option,
+  or directly type the name of the new category when adding or editing a transaction
+  in the Ledger.  Doing any of these steps will direct you to the <guilabel>Create a
+  new Category</guilabel> dialog.  This dialog contains three tabs:
+  <guilabel>General</guilabel>, <guilabel>Hierarchy</guilabel>, and
+  <guilabel>Tax</guilabel>.  The General tab includes editable fields for the new
+  category name, type, and currency (with the default currency preselected,) as well
+  as options for Last check number, Notes, and a checkbox for Cost Center assignment
+  required.  In the Hierarchy tab, you are able to select the appropriate parent for
+  the category.  Finally, in the Tax tab, there are fields to enable and configure
+  VAT support, and a checkbox to include this category in tax related reports.
 </para>
 
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="categoryedit.png" format="PNG" />
-	</imageobject>
-	</mediaobject>
-	</screenshot>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
 </para>
 </sect1>
 
@@ -63,10 +103,10 @@
 <title>Editing a Category</title>
 
 <para>
-  To edit a category, right-click on a category name, and choose
-  <guimenuitem>Edit category</guimenuitem>.  A window appears with the same
-  three tabs as the new category dialog: General, Hierarchy and Tax.  Each tab
-  allows you to edit certain details of the category.
+  To edit a category, right-click on a category name in the Category View, and choose
+  <guimenuitem>Edit category...</guimenuitem>.  A window appears with the same three
+  tabs as the <guilabel>Create a new Category</guilabel> dialog: General, Hierarchy,
+  and Tax.  Each tab allows you to edit certain details of the category.
 </para>
 
 <para>
@@ -81,17 +121,14 @@
      See https://bugs.kde.org/show_bug.cgi?id=272737 
      You can also change the parent category from the main category page by
      dragging the category to a different parent. -->
-  The Hierarchy tab allows you to change the parent category by clicking on
-  another category in this view of the category hierarchy.  In an earlier
-  version of &kmymoney; it was possible to change the parent of a category by
-  dragging and dropping.  This functionality is expected to return in a future
-  version of the application.
+  The Hierarchy tab allows you to change the parent of a category by clicking on
+  another category which then becomes the parent.
 </para>
 
 <para>
-  The Tax tab allows you to assign or change VAT details, or to alter the
-  automatic VAT assignment.  It also allows the ability to toggle whether or not
-  the category is included in tax related reports.
+  The Tax tab allows you to assign or change VAT details, or to alter the automatic
+  VAT assignment.  It also allows you to toggle whether or not the category is
+  included in tax related reports.
 </para>
 </sect1>
 
@@ -142,16 +179,17 @@
 <title>Deleting a category</title>
 
 <para>
-  To delete a category, select it in the tree, right click to bring up the popup
-  menu, and select <guimenuitem>Delete</guimenuitem>.  If the category has no
-  transactions, schedules, or budgets associated with it, and it is not set as the
-  default category for new transactions with any payee, it will be deleted.
+  Deleting a Category is similar to deleting an Account.  To delete a category,
+  right-click its name in the Categories View, and select <guimenuitem>Delete
+  Category...</guimenuitem>.  If the category has no transactions, schedules, or
+  budgets associated with it, and it is not set as the default category for new
+  transactions with any payee, it will be deleted.
 </para>
 
 <para>
-  If the category has any of those items, a popup will be displayed allowing you
-  to choose another category to which all those items can be reassigned before
-  the category is deleted.
+  If the category has any of those items, a popup will be displayed allowing you to
+  choose another category to which all those items can be reassigned before the
+  category is deleted.
 </para>
 
 <para>
@@ -163,8 +201,8 @@
 </para>
 
 <para>
-  Note that deleting some categories may prompt both for where to reassign its
-  data and also whether or not to delete any sub-categories.
+  Note that deleting some categories may prompt both for where to reassign its data
+  and also whether or not to delete any sub-categories.
 </para>
 </sect1>
 
@@ -172,17 +210,12 @@
 <title>Open ledger for a category</title>
 
 <para>
-  By right-clicking on any category there is an option to open a ledger for that
-  category.  You can also double-click on the category.  When this option is
-  selected &kmymoney; will display a ledger with all the transactions for the
-  selected category.  This allows you to quickly review all the transactions in
-  detail for the selected category.  You can then right-click on any transaction
-  to obtain additional details about the specific transaction ultimately allowing
-  any editing that may be required.  Note that you cannot edit a transaction in
-  the Category ledger; you need to switch to the ledger display for the other
-  account, using one of the selections in the popup menu when you right click on
-  the transaction.
-  
+  The menu options for categories includes a choice to open a ledger for that
+  category.  When this option is selected &kmymoney; will display that category in a
+  tab in the Ledgers View, showing all the transactions for the selected category.
+  This allows you to quickly review all the transactions in detail for the selected
+  category.  You can then right-click on any transaction to obtain additional details
+  about the specific transaction, and can even edit the transaction.
 </para>
 </sect1>
 </chapter>

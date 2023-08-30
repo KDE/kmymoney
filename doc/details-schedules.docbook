@@ -4,13 +4,11 @@
   <authorgroup>
     <author> &Roger.Lum; &Roger.Lum.mail; </author>
     <author> &Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
-    <author>
-      <personname><firstname>Michael</firstname><surname>Carpino</surname></personname>
-      <email>mfcarpino@gmail.com</email>
-    </author>
+    <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2019-04-01</date>
-  <releaseinfo>5.0.3</releaseinfo>
+  <date>2023-08-30</date>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title>Schedules</title>
@@ -19,44 +17,42 @@
 <title>Introduction</title>
 
 <para>
-  <quote>
-    Schedules maintain information about transactions that occur one or more
-    times over a specified period of time.
-  </quote>
+  Schedules maintain information about transactions that occur one or more times over
+  a specified period of time.
 </para>
 
 <para>
-  Sometimes called a recurring transaction, a schedule provides a means to
-  record information about a transaction that happen on a regular basis.  You 
-  can schedule deposit, transfer, withdrawal, and loan transactions.  There is
-  a lot of flexibility built in with scheduling transactions that include doing
-  it Once, or on a basis of number of Day(s), Week(s), Half-month(s), Month(s), 
-  or Year(s).
+  Sometimes called a scheduled transaction or a recurring transaction, a schedule
+  provides a means to record information about a transaction that happens on a
+  regular basis.  You can schedule deposit, transfer, withdrawal, and loan
+  transactions.  There is a lot of flexibility in schedules, including transactions
+  that occur Once, or on a basis of number of Days, Weeks, Half-months, Months, or
+  Years.
 </para>
 
 <para>
-  Because you know these transactions are regularly made, whether they are
-  payments made to you or payments you make to someone else, you can create a
-  Schedule to record information about the recurring details to simplify and
-  easily remember when the event will occur.
+  Because you know these transactions happen regularly, whether they are payments made
+  to you or payments you make to someone else, you can create a Schedule to record
+  information about the recurring details to simplify and easily remember when the
+  event will next occur.
 </para>
 
 <para>
-  Schedules can be considered to reflect money coming in or out of your accounts
-  on a consistent basis.  Common uses include paychecks, taxes, insurance,
-  credit cards, dues, interest, loans, mortgage, and rents.  Scheduling a
-  payment like these provides for a useful reminder so you can manage expected
-  future financial matters effectively.
+  Schedules can be created to reflect money coming in or out of your accounts on a
+  consistent basis.  Common uses include paychecks, taxes, insurance, credit card
+  payments, dues, interest, loans, mortgage, and rents.  Scheduling a payment like
+  these provides for a useful reminder so you can manage expected future financial
+  matters effectively.
 </para>
 
 <para>
   A schedule consists of two main parts: the transaction data and the scheduling
-  data.  The scheduling data records the occurrence of the schedule, &ie;, when
-  the transaction is to be entered into the ledger and how.  The transaction
-  data records the normal details about the transaction.  These include options
-  for Payment method, Account, Pay to/from, Category, Tags, Memo, Due date,
-  Amount and status.  Along with this, you can also select additional options
-  based on when to process the transaction.
+  data.  The scheduling data records the occurrence of the schedule, &ie;, when the
+  transaction is to be entered into the ledger and how.  The transaction data records
+  the normal details about the transaction, including options for Payment method,
+  Account, Pay to/from, Category, Tags, Memo, Due date, Amount, and Status.  Along
+  with these, you can also select additional options based on when to process the
+  transaction.
 </para>
 </sect1>
 
@@ -64,102 +60,88 @@
 <title>Types of schedules</title>
 
 <para>
-  There are four different types of schedules in the current version of
-  &kmymoney;:
+  There are four different types of schedules in &kmymoney;:
 </para>
 
-<itemizedlist>
-  <listitem><para>Deposits</para></listitem>
-  <listitem><para>Bills</para></listitem>
-  <listitem><para>Transfers</para></listitem>
-  <listitem><para>Loans</para></listitem>
-</itemizedlist>
-
-<sect2>
-<title>Deposit</title>
-
+<formalpara><title>Deposits</title>
 <para>
-  A Deposit is for money coming into your account, such as paychecks,
-  bonuses, or interest income. 
+  These schedules are for money coming into your account, such as a paycheck, bonus,
+  or interest income.
 </para>
-</sect2>
+</formalpara>
 
-<sect2>
-<title>Bills/Withdrawals</title>
-
-<para>	
-  A Bill or Withdrawal is for money going out of your account, such as a
-  membership, utility bill, taxes, or car registration.
-</para>
-</sect2>
-
-<sect2>
-<title>Transfer</title>
-
+<formalpara><title>Bills/Withdrawals</title>
 <para>
-  A Transfer is for money going out of one account and into another,
-  such as making a credit card payment from your checking account.
+  These are for money going out of your account, such as a membership, utility bill,
+  taxe payment, or car registration.
 </para>
-</sect2>
+</formalpara>
 
-<sect2>
-<title>Loans</title>
-
+<formalpara><title>Transfer</title>
 <para>
-  A Loan Schedule is a special type of schedule and is created when dealing with a
-  <link linkend="details.loans">Loan account</link>.
+  These are for money going out of one account and into another account, such as making a
+  credit card payment from your checking account.
 </para>
-</sect2>
+</formalpara>
+
+<formalpara><title>Loans</title>
+<para>
+  These are a special type of schedule, which is created when you create a <link
+  linkend="details.loans">Loan account</link>.
+</para>
+</formalpara>
 </sect1>
 
 <sect1 id="details.schedules.view">
 <title>The Schedules View</title>
 
 <para>
-  Open the Schedules View by clicking on the <guiicon><inlinemediaobject><imageobject>
-  <imagedata fileref="schedule_view.png" format="PNG"/></imageobject></inlinemediaobject>
-  </guiicon> schedule icon in the view selector.
+  Open the Schedules View by clicking on the
+  <guiicon><inlinemediaobject><imageobject><imagedata fileref="schedule_view.png"
+  format="PNG"/></imageobject></inlinemediaobject></guiicon> Scheduled transactions
+  icon in the view selector.
 </para>
 
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="scheduleview.png" format="PNG" />
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase>Schedule View</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 	
 <para>
-  The Schedules View consists of a view area with <guibutton>New
-  Schedule</guibutton> button and <guibutton>Filter</guibutton> and
-  <guilabel>Filter:</guilabel> text box above it.
+  The Schedules View consists of a sinngle display area with a <guibutton>New
+  Schedule...</guibutton> button and a <guilabel>Filter</guilabel> text box above it.
 </para>
 	
 <para>
-  To create a new schedule click on the button.  For Deposit, Transfer, and Withdrawal/Bills
-  schedules, &kmymoney; will display the new schedule dialog.  Loan schedules are
-  handled differently, as described in the Loans section of this manual.
+  To create a new schedule click on the <guibutton>New Schedule...</guibutton>
+  button.  &kmymoney; will display the new schedule dialog, which can be used to
+  create a Deposit, Transfer, or Bill/Withdrawal schedule.  Loan schedules are
+  handled differently, as described in the <link linkend="details.loans">Loans</link>
+  section of this manual.
 </para>
 </sect1>
 
 <sect1 id="details.schedules.new">
 <title>The New Schedule dialog</title>
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="newsched_numbered.png" format="PNG" />
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase>New Schedule</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 	
 <para>
@@ -182,49 +164,72 @@
 
 <para>
   Enter the name of the schedule and the date of the next occurrence into their
-  respective fields.  The name is how the schedule will be labelled in the
-  Schedules View, and other displays.  Specify how often the schedule should
-  occur, using the Frequency field and drop down list.  For example "every 6
-  weeks" or "every 3 months."  If the amount varies transaction to transaction
-  make sure to check the <guilabel>Estimate</guilabel> checkbox and you will be
-  prompted for the correct amount when it is entered into the ledger.  The other
-  required fields in the Payment information section include the Account and
-  Category.  The remaining fields in this section are optional.
+  respective fields.  The name is how the schedule will be labelled in the Schedules
+  View and other displays.  Specify how often the schedule should occur, using the
+  Frequency field and drop down list.  For example "every 6 weeks" or "every 3
+  months."  If the amount varies transaction to transaction make sure to check the
+  <guilabel>The amount is an estimate because it varies for each payment</guilabel>
+  checkbox in the <guilabel>Options</guilabel> area below, and you will be prompted
+  for the correct amount when it is entered into the ledger.  The amount is entered
+  as a positive number in either the <guilabel>Payment</guilabel> or
+  <guilabel>Deposit</guilabel> field.  The other required fields in this area are the
+  Account and the Category.  The <guilabel>Status</guilabel> dropdown indicates the
+  state of the transaction when &kmymoney; enters it into the ledger.  The remaining
+  fields in this section are optional.
 </para> 
 </sect2>
 
 <sect2>
 <title>Modifying the Schedule Options section</title>
 <para>
-  You can choose how to handle non-processing days.  If the schedule occurs on a
-  non-processing day you can choose whether to <guilabel>Do not change the
-  date</guilabel>, <guilabel>Change the date to the previous processing
-  day</guilabel>, or <guilabel>Change the date to the next processing
-  day</guilabel>. This option is available to replicate some of the real world
-  banking operational processing.  Non-processing days include weekends and
-  holidays known to &kmymoney; for the region specified in the <link
-  linkend="details.settings.schedules.calendar">appropriate configuration
-  option</link>.
+  The <guilabel>If this schedule occurs on a non-processing date:</guilabel> dropdown
+  allows you to choose how to handle non-processing days.  Non-processing days
+  include weekends and holidays known to &kmymoney; for the region specified in the
+  <link linkend="details.settings.schedules.calendar">appropriate configuration
+  option</link>.  If the schedule occurs on a non-processing day you can choose
+  whether to <guilabel>Do not change the date</guilabel>, <guilabel>Change the date
+  to the previous processing day</guilabel>, or <guilabel>Change the date to the next
+  processing day</guilabel>. This option is available to replicate some of the real
+  world business operational processing.
 </para>
 
 <para>
-  You can also select whether or not the amount is an estimate so you'll be
-  prompted to update the amount when the schedule is due. Selecting the process
-  at the last day of the month allows for scheduling for irregular month-end
-  date processing. By checking the box for automatically enter when the it's due
-  provides for &kmymoney; to enter the transaction into the ledger without human
-  intervention.  Otherwise, when the transaction is due to be entered,
-  &kmymoney; will open a dialog box asking you to confirm that you want it to be
-  entered.  This behavior is configurable, and more information can be found in
-  the <link linkend="details.settings.schedules">Settings</link> section.
+  The <guilabel>The amount is an estimate because is varies for each
+  payment</guilabel> checkbox allows you to select whether &kmymoney; automatically
+  enters that amount into the ledger or prompts you for the actual amount when the
+  schedule is due.
 </para>
 
 <para>
-  If you know how many transactions are left or when they are due to finish,
-  this information can be entered so the transactions are not entered
-  indefinitely.  Checking the schedule will end box and enter either the number
-  of transactions remaining or date of final transaction will end the scheduled
-  transaction based on this criteria. 
+  The <guilabel>Do not change amount of category but modify exchange rate of
+  transaction</guilabel> checkbox can be used when the schedule involves an account
+  and a category with different currencies.  If it is not selected, the amount
+  specified is used when the transaction is entered into the ledger.  Checked the box
+  tells &kmymoney; that the amount is specified in the currency of the category.  You
+  will still need to confirm the other value or the conversion rate when the
+  transaction is entered into the ledger.
+  <!-- FIXME: confirm what this really does. -->
+</para>
+
+<para>
+  The <guilabel>Process this schedule always at the last day of the month</guilabel>
+  checkbox allows for scheduling for irregular month-end date processing.
+</para>
+
+<para>
+  The <guilabel>Enter this schedule into the register automatically when it is
+  due</guilabel> checkbox tells &kmymoney; to enter the transaction into the ledger
+  on the correct date without human intervention.  Otherwise, when the transaction is
+  due to be entered, &kmymoney; will open a dialog box asking you to confirm that you
+  want it to be entered.  This behavior is configurable, and more information can be
+  found in the <link linkend="details.settings.schedules">Settings</link> section.
+</para>
+
+<para>
+  If you know the schedule will not continue indefinitely, check the <guilabel>This
+  schedule will end at some time</guilabel> and you can enter either the
+  <guilabel>Number of transactions remaining:</guilabel> or the <guilabel>Date of
+  final transaction</guilabel>.
 </para>
 
 <para>
@@ -232,17 +237,16 @@
   <guibutton>OK</guibutton> to continue.
 </para>
 </sect2>
-
 </sect1>
 
 <sect1 id="details.schedules.edit">
 <title>Editing schedules</title>
 
 <para>
-  To edit a schedule simply select the entry in the list and right click to
-  bring up the context menu and select <guimenuitem>Edit scheduled transaction</guimenuitem>.  This
-  will bring up a dialog similar to the Edit Schedule transaction dialog, where you can update
-  the necessary data.
+  To edit a schedule simply select the entry in the list, then right-click and select
+  <guimenuitem>Edit scheduled transaction</guimenuitem> in the context menu.  This
+  will bring up a dialog similar to the <guilabel>New Scheduled
+  transaction</guilabel> dialog, where you can update the necessary data.
 </para>
 </sect1>
 
@@ -250,8 +254,9 @@
 <title>Deleting schedules</title>
 
 <para>
-  To delete a schedule simply select the entry in the list and right click to
-  bring up the context menu and select <guimenuitem>Delete scheduled transaction</guimenuitem>.
+  To delete a schedule simply select the entry in the list, then right-click and
+  select <guimenuitem>Delete scheduled transaction</guimenuitem>. in the context
+  menu.
 </para>
 </sect1>
 
@@ -259,8 +264,9 @@
 <title>Duplicating schedules</title>
 
 <para>
-  To duplicate a schedule simply select the entry in the list and right click to
-  bring up the context menu and select <guimenuitem>Duplicate scheduled transaction</guimenuitem>.
+  To duplicate a schedule simply select the entry in the list, then right-click and
+  select <guimenuitem>Duplicate scheduled transaction</guimenuitem> in the context
+  menu.
 </para>
 </sect1>
 
@@ -268,76 +274,70 @@
 <title>Entering scheduled transactions</title>
 
 <para>
-  Entering a scheduled transaction means actually entering a transaction into
-  the appropriate ledger, using the details specified in the schedule.
-  Scheduled transactions can be entered in one of 3 different ways:
+  Entering a scheduled transaction means actually enteringcreating a transaction in
+  the appropriate ledger, using the details specified in the schedule.  Scheduled
+  transactions can be entered in one of 3 different ways:
 </para>
 
 <itemizedlist>
   <listitem>
     <para>
-    Manually by right clicking on the entry in the Schedules View</para>
+      Manually, by right-clicking on the entry in the Schedules View and selecting
+      <guilabel>Enter next transaction</guilabel> in the context menu.
+    </para>
   </listitem>
 
   <listitem>
     <para>
-      &kmymoney; can enter them with or without your interaction upon startup
+      &kmymoney; can enter them with or without your interaction upon startup.
     </para>
   </listitem>
   <listitem>
     <para>
-      &kmymoney; can enter them with your interaction during online banking or
-      import of an electronic bank statement
+      &kmymoney; can enter them with your interaction during online banking or when
+      you import a bank statement.
     </para>
   </listitem>
 </itemizedlist>
 
 <sect2>
-<title>Manually entering scheduled transactions</title>
-
-<para>	
-  You can enter a scheduled transaction manually by right clicking on the list
-  entry and selecting <guimenuitem>Enter</guimenuitem> from the popup menu.
-</para>
-</sect2>
-
-<sect2>
 <title>Confirming the transaction to enter</title>
 
 <para>
-  After selecting either method the Enter Scheduled Transaction dialog window is
-  shown prompting you with the required information that was entered when you
-  created the schedule.
+  The first and third methods will display an <guilabel>Enter scheduled
+  transaction</gui> dialog (possibley after displaying an informational window about
+  the process.)  This dialog prompts you to confirm or update the required
+  information that was entered when you created the schedule.
 </para>
 
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="enterschedule.png" format="PNG" />
-	</imageobject>
-	</mediaobject>
-	</screenshot>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>		
-  This information can be changed, and the changes can be applied to just this
-  one instance of the schedule or to all subsequent transactions.  After
-  checking that all the data is correct clicking <guibutton>OK</guibutton>
-  will add the transaction to the ledger and update the next due date of the
-  schedule to the next occurrence.  If you have changed any of the transaction
-  data a further confirmation of what you changed will be displayed, giving you
-  a final chance to accept or reject the changes.
+  This information can be changed, and the changes can be applied to just this one
+  instance of the schedule or to all subsequent transactions.  After checking that
+  all the data is correct clicking <guibutton>OK</guibutton> will add the transaction
+  to the ledger and update the next due date of the schedule to the next occurrence.
+  If you have changed any of the transaction data a further confirmation of what you
+  changed will be displayed, giving you a final chance to accept or reject the
+  changes.
 </para>
 
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="confirmenter.png" format="PNG" />
-	</imageobject>
-	</mediaobject>
-	</screenshot>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>	
@@ -350,23 +350,21 @@
 <title>Letting &kmymoney; enter the scheduled transaction(s) for you</title>
 
 <para>	
-  Alternatively, &kmymoney; can check which schedules are due upon startup and
-  enter them for you if the appropriate option was checked when setting up the
-  schedule.
+  Alternatively, &kmymoney; can check which schedules are due upon startup and enter
+  them for you if the appropriate option was checked when setting up the schedule.
 </para>
 
 <para>
-  If the option was not checked then &kmymoney; will open the previously
-  mentioned dialog and you can follow the steps mentioned there.  &kmymoney;
-  will also open the dialog if the amount is an estimate so you can enter the
-  real amount.
+  If the option was not checked then &kmymoney; will open the previously mentioned
+  dialog and you can follow the steps mentioned there.  &kmymoney; will also open the
+  dialog if the amount is an estimate so you can enter the actual amount.
 </para>
 
 <para>
-  You can also opt to have &kmymoney; not check which transactions are scheduled
-  on startup by deselecting the option in the Settings dialog and any overdue
-  transaction or transactions due 'today' will be shown in the Home view for you
-  to enter manually.
+  You can also opt to have &kmymoney; not check which transactions are scheduled on
+  startup by deselecting the option in the Settings dialog and any overdue
+  transaction or transactions due 'today' will be shown in the Home view for you to
+  enter manually.
 </para>
 </sect2>
 </sect1>

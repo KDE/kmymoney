@@ -4,13 +4,11 @@
   <authorgroup>
     <author> &Michael.T.Edwardes; &Michael.T.Edwardes.mail; </author>
     <author> &Roger.Lum; &Roger.Lum.mail; </author>
-    <author>
-      <personname><firstname>Michael</firstname><surname>Carpino</surname></personname>
-      <email>mfcarpino@gmail.com</email>
-    </author>
+    <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2019-04-02</date>
-  <releaseinfo>5.0.3</releaseinfo>
+  <date>2023-08-30</date>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title>Ledgers</title>
@@ -413,7 +411,7 @@
   action="simul">&Ctrl;&Ins;</keycombo>, or click
   <guibutton>New</guibutton> at the foot of the window. The &Up;
   and &Down; arrow keys let you navigate through the list.  After
-  pressing &Enter; or double clicking on an entry, the transaction list displays
+  pressing &Enter; or double-clicking on an entry, the transaction list displays
   the fields required to enter the transaction and waits for input.
 </para>
 
@@ -521,10 +519,10 @@
 
 <para>
   To edit a transaction, select it in the list view and either click on
-  <guibutton>Edit</guibutton> in the transaction form or right click on the
+  <guibutton>Edit</guibutton> in the transaction form or right-click on the
   entry and select <guimenuitem>Edit</guimenuitem> from the popup menu.  If you
   are editing transactions directly in the list you can edit the transaction
-  simply by double clicking on an entry or by pressing &Enter; when a
+  simply by double-clicking on an entry or by pressing &Enter; when a
   transaction is highlighted.
 </para>
 </sect1>
@@ -533,7 +531,7 @@
 <title>Deleting transactions</title>
 
 <para>
-  To delete a transaction, select it in the list view, right click on the entry,
+  To delete a transaction, select it in the list view, right-click on the entry,
   and select <guimenuitem>Delete</guimenuitem> from the popup menu when it
   appears, or click <guibutton>Delete</guibutton> on the transaction form.
 </para>
@@ -575,7 +573,7 @@
   combine the two transactions together. The values of both transactions must be
   the same for the match to work, except that the dates may differ by the window
   specified in the settings, as described above. If you are happy with the
-  result, right click the matched transaction, then select
+  result, right-click the matched transaction, then select
   <guibutton>Accept</guibutton>.
 </para>
 

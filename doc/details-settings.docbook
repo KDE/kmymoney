@@ -3,14 +3,11 @@
 <chapterinfo>
   <authorgroup>
     <author> &Roger.Lum; &Roger.Lum.mail; </author>
-    <author>
-      <personname><firstname>Michael</firstname><surname>Carpino</surname></personname>
-      <email>mfcarpino@gmail.com</email>
-    </author>
+    <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2019-03-31</date>
-  <releaseinfo>5.0.3</releaseinfo>
+  <date>2023-08-30</date>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title>&kmymoney; Settings</title>
@@ -536,7 +533,7 @@ of accounts.</para>
   You can adjust the relative order of the fields by selecting one and adjusting
   its position in the list using the up and down arrows to the right of the
   list.  You can switch between ascending and descending sort for any item
-  by double clicking on it.
+  by double-clicking on it.
 </para>
 <para>
   The fields available for sorting are the same for all three sections: Amount,
@@ -609,11 +606,10 @@ of accounts.</para>
     <term><guilabel>Match names from start</guilabel></term>
     <listitem>
       <para>This option controls <link
-      linkend="details.payees.personalinformation.matching">payee
-      matching.</link> When enabled, payee names will always be matched from the
-      start.  When disabled, any substring will be matched.  Also, when enabled
-      additional options for matching can be established in the Matching Tab of
-      the Payees View.</para>
+      linkend="details.payees.details.matching">payee matching</link>. When enabled,
+      payee names will always be matched from the start.  When disabled, any
+      substring will be matched.  Also, when enabled additional options for matching
+      can be established in the Matching Tab of the Payees View.</para>
     </listitem>
   </varlistentry>
 

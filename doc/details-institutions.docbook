@@ -33,7 +33,7 @@
 <para>
   The Institutions View displays several columns, showing information about the
   account.  It also shows the total value of all accounts in each institution.  You
-  can select which columns are shown by right clicking on any column heading and
+  can select which columns are shown by right-clicking on any column heading and
   selecting or unselecting the checkbox next to the name of the column.
 </para>
 
@@ -61,55 +61,6 @@
     </listitem>
   </varlistentry>
 
-<!--  not in Institutions View
-  <varlistentry>
-    <term>Type</term>
-    <listitem>
-      <para>
-        The type of account, &eg;, Savings, Checking, Credit Card, ...
-      </para>
-    </listitem>
-  </varlistentry>
--->
-
-<!--  not in Institutions View
-  <varlistentry>
-    <term>Tax</term>
-    <listitem>
-      <para>
-        An indication whether this account has been configured as important for
-        tax purposes.
-      </para>
-    </listitem>
-  </varlistentry>
--->
-
-<!--  not in Institutions View
-  <varlistentry>
-    <term>VAT</term>
-    <listitem>
-      <para>
-        An indication whether this account has been configured to apply a VAT on
-        transaction.
-      </para>
-    </listitem>
-  </varlistentry>
--->  
-
-<!--  not in Institutions View
-  <varlistentry>
-    <term>CC (Cost Center)</term>
-    <listitem>
-      <para>
-        An indication that a cost center assignment is necessary under certain
-        conditions when entering a transaction for this account.  This is a new
-        feature, which is not yet implemented, so this column is not currently
-        used.
-      </para>
-    </listitem>
-    </varlistentry>
--->
-
   <varlistentry>
     <term>Balance</term>
     <listitem>
@@ -118,17 +69,6 @@
       </para>
     </listitem>
   </varlistentry>
-
-<!--  not in Institutions View
-  <varlistentry>
-    <term>Posted Value</term>
-    <listitem>
-      <para>
-        This is the balance of the account as provided by the institution.
-      </para>
-    </listitem>
-  </varlistentry>
--->  
 
   <varlistentry>
     <term>Total Value</term>
@@ -139,17 +79,6 @@
       </para>
     </listitem>
   </varlistentry>
-
-<!--  not in Institutions View
-  <varlistentry>
-    <term>Number</term>
-    <listitem>
-      <para>
-        The account number, if one was entered.
-      </para>
-    </listitem>
-    </varlistentry>
--->
 
   <varlistentry>
     <term>IBAN</term>
@@ -186,18 +115,8 @@
       </para>
     </listitem>
   </varlistentry>
-
 </variablelist>
 
-<!-- FIXME:  confirm no longer true.
-<para>
-  Note that many of these same columns are also available in other views, such
-  as the Accounts View.  When you select or unselect a checkbox to display or
-  remove a column, you will see a popup asking if you want to show or remove
-  that column from all other views where it is present. If you check "No," you
-  will only change the display of that column in the current view.
-</para>
--->
 </sect1>
 
 <sect1 id="details.institutions.institution">

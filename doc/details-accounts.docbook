@@ -6,7 +6,7 @@
     <author> &Roger.Lum; &Roger.Lum.mail; </author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2023-08-20</date>
+  <date>2023-08-30</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
@@ -21,7 +21,7 @@
 
 <para>
   There are two other account types: <quote>Income</quote> and
-  <quote>Expense</quote>. These accounts are <quote>Categories,</quote> and are a way
+  <quote>Expense.</quote> These accounts are <quote>Categories,</quote> and are a way
   to organize your transactions.  They are treated internally by &kmymoney; as
   accounts, and are described in more detail in the section on <link
   linkend="details.categories">Categories</link>.  Income and Expense accounts are
@@ -33,12 +33,12 @@
 <para>
   You may also see <quote>Equity</quote> as an account type.  Any account of this
   type is a special account in &kmymoney;, used to hold the opening balance
-  transactions of all other accounts.
+  transactions of other accounts.
 </para>
 
 <para>
   The final type, although it is displayed first on the list, is
-  <quote>Favorite</quote>.  These are accounts of any other type which you have
+  <quote>Favorite.</quote>  These are accounts of any other type which you have
   indicated are <quote>favorite</quote> accounts in the details when creating or
   editing that account.
 </para>
@@ -47,30 +47,31 @@
 <title>The Accounts View</title>
 
 <para>
-<screenshot>
-    	<screeninfo>account view</screeninfo>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <screeninfo>account view</screeninfo>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="account_view.png" format="PNG" />
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase>account view</phrase>
-	</textobject>
-	</mediaobject>
-</screenshot>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>
   The Accounts View provides a summary of all the accounts. It is similar to the
   Institutions View, except accounts are grouped by the type of account.  The list of
-  accounts under any account type can be expanded or collapsed by clicking on the
-  arrow to the left of the type.
+  accounts under any account type (or under the parent acccount for any subaccounts)
+  can be expanded or collapsed by clicking on the arrow to the left of the type or
+  name.
 </para>
 
 <para>
   Similar to the Institutions View, the Accounts View displays several columns with
   descriptive and summary information about each account.  As with the Institutions
-  View, you can select which columns are shown by right clicking on any column
+  View, you can select which columns are shown by right-clicking on any column
   heading and selecting or unselecting the checkbox next to the name of the column.
 </para>
 
@@ -85,7 +86,7 @@
     <term>Name</term>
     <listitem>
       <para>
-        The name of the account.  This columns is always displayed.
+        The name of the account.  This column is always displayed.
       </para>
     </listitem>
   </varlistentry>
@@ -104,6 +105,9 @@
     <listitem>
       <para>
         An indication whether this account has been configured for online access.
+        The process of configuring accounts for online access is described in the
+        <link linkend="details.impexp">Importing and Exporting Chapter.</link>
+        <!-- FIXME: make this link more specific -->
       </para>
     </listitem>
   </varlistentry>
@@ -142,8 +146,8 @@
     <term>Total Value</term>
     <listitem>
       <para>
-        This is the same value as the balance, but always in the base currenct as
-        chosen for the data file.  These values are summed for the row for the
+        This is the same value as the balance, but always in the base currency chosen
+        when data file was created.  These values are summed for the row for the
         overall account type.
       </para>
     </listitem>
@@ -171,7 +175,6 @@
   </varlistentry>
 </variablelist>
 </sect1>
-<!--- done to here! -->
 
 <sect1 id="details.accounts.create">
 <title>Creating an Account</title>
@@ -189,7 +192,7 @@
   fileref="newacct.png" format="PNG"/></imageobject></inlinemediaobject>
   </guiicon> new account icon from the toolbar. You can also create an account
   from the Accounts View; click on the Accounts icon in the view selector and
-  then right click on the Asset or Liability tree icon and select <guimenuitem>New
+  then right-click on the Asset or Liability tree icon and select <guimenuitem>New
   account...</guimenuitem> from the popup menu.
 </para>
 
@@ -224,7 +227,7 @@
   url="https://en.wikipedia.org/wiki/International_Bank_Account_Number"><acronym>IBAN</acronym>
   (International Bank Account Number)</ulink> are not currently used
   by &kmymoney;.  These fields may be left blank and filled in at a later time;
-  they are only required for online banking.
+  they are only required for online banking. <!-- FIXME: check accuracy -->
 </para>
 
 <para>
@@ -237,14 +240,14 @@
 
 <para>
   <screenshot>
-          <mediaobject>
-            <imageobject>
-              <imagedata fileref="accwiz2.png" format="PNG" />
-            </imageobject>
-            <textobject>
-              <phrase>Account Wizard</phrase>
-            </textobject>
-          </mediaobject>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="accwiz2.png" format="PNG" />
+      </imageobject>
+      <textobject>
+        <phrase>Account Wizard</phrase>
+      </textobject>
+    </mediaobject>
   </screenshot>
 </para>
 
@@ -253,12 +256,11 @@
 </para>
 
 <para>
-  Next, select the type of account from one of the types available from the
-  dropdown list.  Different account types are handled differently within
-  &kmymoney;, so it is important to choose the correct type when creating the
-  account.  Also, different types of accounts require different setup
-  information, and may display different pages in the new account setup wizard
-  to collect that information.
+  Next, select the type of account from one of the types available from the dropdown
+  list.  Different account types are handled differently within &kmymoney;, so it is
+  important to choose the correct type when creating the account.  Also, different
+  types of accounts require different setup information, and may display different
+  pages in the new account setup wizard to collect that information.
 </para>
 
 <variablelist>
@@ -266,7 +268,7 @@
     <term>Checking</term>
     <listitem>
       <para>
-        A normal checking account, the type you get with any bank or credit union.
+        A normal checking account, such as you get with any bank or credit union.
       </para>
     </listitem>
   </varlistentry>
@@ -275,7 +277,7 @@
     <term>Savings</term>
     <listitem>
       <para>
-        A normal savings account, the type you get with any bank or credit union.
+        A normal savings account, such as you get with any bank or credit union.
       </para>
     </listitem>
   </varlistentry>
@@ -293,8 +295,8 @@
     <term>Cash</term>
     <listitem>
       <para>
-        A general purpose account, typically used for accounts not held at a
-        bank, such as the cash in your wallet.
+        A general purpose account, typically used for accounts not held at a bank,
+        such as the cash in your wallet.
       </para>
     </listitem>
   </varlistentry>
@@ -303,11 +305,11 @@
     <term>Loan</term>
     <listitem>
       <para>
-        An account to manage a loan for money either borrowed or lent.  With a
-        Loan account &kmymoney; automatically calculates interest payments to
-        help you track the remaining principal on the loan.  Loans with no
-        interest might use the plain Asset or Liability type below, depending on
-        whether the money is lent or borrowed.
+        An account to manage a loan for money either borrowed or lent.  With a Loan
+        account, &kmymoney; automatically calculates interest payments to help you
+        track the remaining principal on the loan.  Loans with no interest should use
+        the plain Asset or Liability type below, depending on whether the money is
+        lent or borrowed.
       </para>
     </listitem>
   </varlistentry>
@@ -316,8 +318,7 @@
     <term>Investment</term>
     <listitem>
       <para>
-        An account to manage an investment such as stocks, bonds, or mutual
-        funds.
+        An account to manage an investment such as stocks, bonds, or mutual funds.
       </para>
     </listitem>
   </varlistentry>
@@ -326,8 +327,8 @@
     <term>Asset</term>
     <listitem>
       <para>
-        An account to manage an asset that does not fit in one of the above
-        types.
+        An account to manage an asset that does not fit in one of the above types.
+        For example, this can be used to track the value of a vehicle.
       </para>
     </listitem>
   </varlistentry>
@@ -336,17 +337,29 @@
     <term>Liability</term>
     <listitem>
       <para>
-        An account to manage a money you owe or a future expense that does not
-        fit in one of the above types.  This is most commonly used for loans
-        with no interest.  If interest needs to be calculated, you might be
-        better using the Loan type above.
+        An account to manage a money you owe or a future expense that does not fit in
+        one of the above types.  This is most commonly used for loans with no
+        interest.  If interest needs to be calculated, you should use the Loan type
+        above.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Equity</term>
+    <listitem>
+      <para>
+        Accounts of this type are used for Opening Balance Transactions in other
+        accounts.  &kmymoney; automatically creates one account of this type and it
+        is rarely necessary to create another.
       </para>
     </listitem>
   </varlistentry>
 </variablelist>
 
 <para>
-  Select the currency to be used for the account from the dropdown list.
+  Select the currency to be used for the account from the dropdown list.  The default
+  is the currency chosen when the data file was created.
 </para>
 
 <para>
@@ -357,14 +370,15 @@
 </para>
 
 <para>
-  Enter the opening balance for the account. If this is an existing bank
-  account, this information can be found on your statement. If it is a new
-  account, the opening balance can be left at zero.
+  Enter the opening balance for the account.  If this is an existing bank account,
+  this information can be found on your statement. If it is a new account, the
+  opening balance can be left at zero.
 </para>
 
 <para>
-  Selecting the <emphasis>Preferred Account</emphasis> checkbox will allow
-  preferred access in some dialogs and views of &kmymoney;.
+  Selecting the <emphasis>Preferred Account</emphasis> checkbox will allow preferred
+  access in some dialogs and views of &kmymoney;.  This is also referred to as a
+  <quote>Favorite</quote> account.
 </para>
 
 <para>
@@ -377,21 +391,20 @@
 
 <para>
   When creating a Credit Card account, after entering the basic information and
-  clicking <guibutton>Next</guibutton>, you can optionally have &kmymoney;
-  create a <link linkend="details.schedules">scheduled transaction</link> for
-  you.
+  clicking <guibutton>Next</guibutton>, you can optionally have &kmymoney; create a
+  <link linkend="details.schedules">Scheduled Transaction</link> for you.
 </para>
 
 <para>
   <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz6.png" format="PNG" />
-              </imageobject>
-              <textobject>
-                <phrase>Account Wizard</phrase>
-              </textobject>
-            </mediaobject>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="accwiz6.png" format="PNG" />
+      </imageobject>
+      <textobject>
+        <phrase>Account Wizard</phrase>
+      </textobject>
+    </mediaobject>
   </screenshot>
 </para>
 
@@ -421,24 +434,31 @@
 </para>
 
 <para>
+  There have been many requests to let Investment accounts also hold cash, and this
+  will likely be possible in a future version of &kmymoney;, along with other things
+  not currently possible.  However, this will involve a significant effort, and is
+  not expected in the near future.
+</para>
+
+<para>
   <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz7.png" format="PNG" />
-              </imageobject>
-              <textobject>
-                <phrase>Account Wizard</phrase>
-              </textobject>
-            </mediaobject>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="accwiz7.png" format="PNG" />
+      </imageobject>
+      <textobject>
+        <phrase>Account Wizard</phrase>
+      </textobject>
+    </mediaobject>
   </screenshot>
 </para>
 
 <para>
-  It is generally best to create the Brokerage account here, which will be given
-  the same name as the Investment account, with "(Brokerage)" appended.
-  Currently it is not possible to specify the opening date or balance for the
-  Brokerage account at this point; you may do by editing the account details
-  after the account has been created.
+  It is generally best to create the Brokerage account here, which will be given the
+  same name as the Investment account, with "(Brokerage)" appended.  Currently it is
+  not possible to specify the opening date or balance for the Brokerage account at
+  this point; you may do by editing the account details after the account has been
+  created.
 </para>
 </sect2>
 
@@ -446,22 +466,22 @@
 <title>Loan Accounts</title>
 
 <para>
-  Loan accounts are special accounts used to help you manage Loans with interest
-  and scheduled repayments.  By providing &kmymoney; with information about the
-  loan, &kmymoney; can help you track interest payments and the remaining
-  principal of the loan.
+  Loan accounts have special features to help you manage Loans with interest and
+  scheduled repayments.  By providing &kmymoney; with information about the loan,
+  &kmymoney; can help you track interest payments and the remaining principal of the
+  loan.
 </para>
 
 <para>
   <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_1.png" format="PNG" />
-              </imageobject>
-              <textobject>
-                <phrase>Account Wizard</phrase>
-              </textobject>
-            </mediaobject>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="accwiz8_1.png" format="PNG" />
+      </imageobject>
+      <textobject>
+        <phrase>Account Wizard</phrase>
+      </textobject>
+    </mediaobject>
   </screenshot>
 </para>
 
@@ -470,32 +490,31 @@
 </para>
 
 <para>
-  First, select whether you are borrowing or lending money.  If you are
-  borrowing money the loan will be listed in Accounts under Liabilities.  If you
-  are lending money the loan will be listed under Assets.
+  First, select whether you are borrowing or lending money.  If you are borrowing
+  money the loan will be a Liability account.  If you are lending money the loan will
+  be an Asset account.
 </para>
 
 <para>
-  Next, select the payee or payer of the loan.  As always, if the name doesn't
-  yet exist in the Payees list, enter it here and &kmymoney; will create it for
-  you.
+  Next, select the payee or payer of the loan.  As always, if the name doesn't yet
+  exist in the Payees list, enter it here and &kmymoney; will create it for you.
 </para>
 
 <para>
-  The next three items are for handling Loans on which you've already made
-  payments.  If you select <guibutton>Yes</guibutton> in the <guilabel>Did you make/receive any
-  payments yet?</guilabel> dropdown, you can then select whether you want to
-  record all payments or just those from the beginning of the current year.  If
-  you want to record from the beginning of the current year, you are than asked
-  to input the balance at the beginning of this year.
+  The next three items are for handling Loans on which payments have already been
+  made, If you select <guibutton>Yes</guibutton> in the <guilabel>Did you
+  make/receive any payments yet?</guilabel> dropdown, you can then select whether you
+  want to record all payments or just those from the beginning of the current year.
+  If you want to record from the beginning of the current year, you are than asked to
+  input the balance at the beginning of this year.
 </para>
 
 <para>
-  Next, select how often payments will be made and how often interest is
-  compounded.  Compounding is where the interest is added to the amount owed on
-  the loan so that when the interest is next calculated there will be more
-  interest paid on the interest.  It's common for interest to be compounded at
-  the same frequency that payments are made.
+  Next, select how often payments will be made and how often interest is compounded.
+  Compounding is where the interest is added to the amount owed on the loan so that
+  when the interest is next calculated there will be more interest paid on the
+  interest.  It's common for interest to be compounded at the same frequency that
+  payments are made.
 </para>
 
 <para>
@@ -505,34 +524,32 @@
 <para>
   Finally, enter information about how the interest rate varies.  If the loan is
   fixed-rate there is nothing to do.  If the rate varies, select Variable in
-  <guilabel>Type of interest rate</guilabel> and then enter the interval
-  between interest rate changes and the date the first change of interest rate
-  is due: &kmymoney; will ask you to update the interest rate when that date
-  arrives.  Click <guibutton>Next</guibutton> to continue.
+  <guilabel>Type of interest rate</guilabel> and then enter the interval between
+  interest rate changes and the date the first change of interest rate is due:
+  &kmymoney; will ask you to update the interest rate when that date arrives.  Click
+  <guibutton>Next</guibutton> to continue.
 </para>
 
 <para>
   <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_2.png" format="PNG" />
-              </imageobject>
-              <textobject>
-                <phrase>Account Wizard</phrase>
-              </textobject>
-            </mediaobject>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="accwiz8_2.png" format="PNG" />
+      </imageobject>
+      <textobject>
+        <phrase>Account Wizard</phrase>
+      </textobject>
+    </mediaobject>
   </screenshot>
 </para>
 
 <para>
-  The Payments page is where you enter the payment and interest values for the
-  loan.
+  The Payments page is where you enter the payment and interest values for the loan.
 </para>
 
 <para>
-  First, select whether the interest rate is calculated when the payment is
-  received or when it becomes due.  If you don't know, leave it on the default
-  value.
+  First, select whether the interest rate is calculated when the payment is received
+  or when it becomes due.  If you don't know, leave it on the default value.
 </para>
 
 <para>
@@ -550,7 +567,11 @@
   <varlistentry>
     <term>Interest rate</term>
     <listitem>
-      <para>The annual percentage interest rate of the loan.</para>
+      <para>
+        The annual percentage interest rate of the loan.  This must be a positive
+        number.  If there is no interest, then the loan should be created as an Asset
+        or Liability account.
+      </para>
     </listitem>
   </varlistentry>
 
@@ -558,8 +579,7 @@
     <term>Term</term>
     <listitem>
       <para>
-        The length of the loan.  Enter a number and select either Months or
-        Years.
+        The length of the loan.  Enter a number and select either Months or Years.
       </para>
     </listitem>
   </varlistentry>
@@ -578,10 +598,9 @@
     <term>Balloon payment</term>
     <listitem>
       <para>
-        Additional final payment made at the end of the term to pay off the
-        remaining principal of the loan.  For a repayment loan this is often
-        zero.  For an interest-only loan this will be the same as the loan
-        amount.
+        Additional final payment made at the end of the term to pay off the remaining
+        principal of the loan.  For a repayment loan this is often zero.  For an
+        interest-only loan this will be the same as the loan amount.
       </para>
     </listitem>
   </varlistentry>
@@ -598,29 +617,29 @@
 </para>
 
 <para>
-  If you omit one value, &kmymoney; will try to calculate it for you.  If you
-  have entered all values &kmymoney; will check the values are consistent.
-  &kmymoney; will not adjust entered values other than the "Balloon payment",
-  which it may adjust slightly to deal with rounding.  If the values are
-  inconsistent or &kmymoney; cannot calculate the omitted value, &kmymoney; will
-  let you know so that you can correct any errors and repeat the calculation.
+  If you omit one value, &kmymoney; will try to calculate it for you.  If you have
+  entered all values &kmymoney; will check the values are consistent.  &kmymoney;
+  will not adjust entered values other than the "Balloon payment", which it may
+  adjust slightly to deal with rounding.  If the values are inconsistent or
+  &kmymoney; cannot calculate the omitted value, &kmymoney; will let you know so that
+  you can correct any errors and repeat the calculation.
 </para>
 
 <para>
-  Once the values are consistent, the <guibutton>Next</guibutton> button is
-  enabled and you can advance to the next page.
+  Once the values are consistent, the <guibutton>Next</guibutton> button is enabled
+  and you can advance to the next page.
 </para>
 
 <para>
   <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_3.png" format="PNG" />
-              </imageobject>
-              <textobject>
-                <phrase>Account Wizard</phrase>
-              </textobject>
-            </mediaobject>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="accwiz8_3.png" format="PNG" />
+      </imageobject>
+      <textobject>
+        <phrase>Account Wizard</phrase>
+      </textobject>
+    </mediaobject>
   </screenshot>
 </para>
 
@@ -638,26 +657,26 @@
 
 <para>
   <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_4.png" format="PNG" />
-              </imageobject>
-              <textobject>
-                <phrase>Account Wizard</phrase>
-              </textobject>
-            </mediaobject>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="accwiz8_4.png" format="PNG" />
+      </imageobject>
+      <textobject>
+        <phrase>Account Wizard</phrase>
+      </textobject>
+    </mediaobject>
   </screenshot>
 </para>
 
 <para>
-  &kmymoney; will create a <link linkend="details.schedules">scheduled
-  transaction</link> for your loan.  The Schedule page is where you enter the
-  remaining details needed to create the schedule.
+  &kmymoney; will create a <link linkend="details.schedules">Scheduled
+  Transaction</link> for your loan.  The Schedule page is where you enter the
+  remaining details needed to create the Schedule.
 </para>
 
 <para>
-  First enter the Category to which loan interest will be assigned.  Then enter
-  the account from which the loan payment will be made.
+  First enter the Category to which loan interest will be assigned.  Then enter the
+  account from which or into which the loan payment will be made.
 </para>
 
 <para>
@@ -667,14 +686,14 @@
 
 <para>
   <screenshot>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="accwiz8_5.png" format="PNG" />
-              </imageobject>
-              <textobject>
-                <phrase>Account Wizard</phrase>
-              </textobject>
-            </mediaobject>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="accwiz8_5.png" format="PNG" />
+      </imageobject>
+      <textobject>
+        <phrase>Account Wizard</phrase>
+      </textobject>
+    </mediaobject>
   </screenshot>
 </para>
 
@@ -710,33 +729,37 @@
 
 <para>
   <screenshot>
-	<screeninfo>Parent Account</screeninfo>
-	<mediaobject>
-	  <imageobject>
-            <imagedata fileref="accwiz10.png" format="PNG" />
-	  </imageobject>
-	  <textobject>
-	    <phrase>Account Wizard</phrase>
-	  </textobject>
-	</mediaobject>
+    <screeninfo>Parent Account</screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="accwiz10.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>Account Wizard</phrase>
+      </textobject>
+    </mediaobject>
   </screenshot>
 </para>
 
 <para>
-  This is the penultimate step in creating any new account except a loan.
-  Depending on the type of account that is being created, a tree of your Asset
-  or Liability accounts will be displayed.
+  This is the penultimate step in creating any new account except a loan.  Depending
+  on the type of account that is being created, a tree of your Asset or Liability
+  accounts will be displayed.  Most accounts are direct childred of the Asset or
+  Liability account type.  However, most accounts may be created as subaccounts,
+  using another account as the parent.  There is no financial impact of making an
+  account a subaccount; it is only used for organizing the hierarchical display of
+  accounts in the Institutions View of the Accounts View.
 </para>
 
 <para>
-  The Parent Account page is not currently shown for Loans because they cannot
-  be created as subaccounts.  Also, Investment accounts cannot contain other
-  accounts so they are not shown in the tree.
+  The Parent Account page is not currently shown for Loans because they cannot be
+  created as subaccounts.  Also, Investment accounts cannot contain other accounts so
+  they are not shown in the tree.
 </para>
 
 <para>
-  Select the account you wish contain the new account.  If you do not select a
-  parent account, the new account will be created at the top level.
+  Select the account you wish contain the new account.  If you do not select a parent
+  account, the new account will be created at the top level.
 </para>
 
 </sect2>
@@ -746,29 +769,32 @@
 
 <para>
   <screenshot>
-          <screeninfo>Review</screeninfo>
-          <mediaobject>
-            <imageobject>
-              <imagedata fileref="accwiz9.png" format="PNG" />
-            </imageobject>
-            <textobject>
-              <phrase>Account Wizard</phrase>
-            </textobject>
-          </mediaobject>
+    <screeninfo>Review</screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="accwiz9.png" format="PNG" />
+      </imageobject>
+      <textobject>
+        <phrase>Account Wizard</phrase>
+      </textobject>
+    </mediaobject>
   </screenshot>
 </para>
 
 <para>
-  This is the final step in creating a new account. A summary of the information
-  entered is displayed. Review it, and if everything is OK press
-  <guibutton>Finish</guibutton>. Otherwise, either press
-  <guibutton>Back</guibutton> to make corrections or
-  <guibutton>Cancel</guibutton> to abandon creating the new account.
+  This is the final step in creating a new account.  A summary of the information
+  entered is displayed.  Review it, and if everything is OK press
+  <guibutton>Finish</guibutton>.  Otherwise, either press <guibutton>Back</guibutton>
+  to make corrections or <guibutton>Cancel</guibutton> to abandon creating the new
+  account.
 </para>
 
-<note><para>
-  The Type and Currency cannot at present be changed after the account is created.
-</para></note>
+<note>
+  <para>
+    The Currency cannot be changed after the account is created.  The account type
+    can be changed, but only within a limited set of sufficiently similar type.
+  </para>
+</note>
 </sect2>
 </sect1>
 
@@ -776,13 +802,16 @@
 <title>Opening / viewing accounts</title>
 
 <para>
-  To open an account in the Ledger View you can either click on the link to the
-  account from the Home View, or click on the <guiicon><inlinemediaobject>
-  <imageobject><imagedata fileref="ledgers_view.png" format="PNG"/></imageobject>
-  </inlinemediaobject></guiicon> ledgers icon in the view selector and select the
-  account in the drop down box at the top of the view. Alternatively, in the
-  <guiicon>Account</guiicon> View, either double-click the account entry or
-  right click and select <guimenuitem>Open ledger</guimenuitem>.
+  To open an account in the <link linkend="details.ledgers.view">Ledgers View</link>,
+  you can either click on the link to the account in the Home View, or you can click
+  on the <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="ledgers_view.png"
+  format="PNG"/></imageobject></inlinemediaobject></guiicon> ledgers icon in the view
+  selector.  If the account is not already displayed there, then click on the
+  <quote>+</quote> in the right-most tab and select the account in the drop down box
+  which appears.  Alternatively, in the Accounts View or the Institutionss View,
+  either double-click the account name or right-click and select <guimenuitem>Open
+  ledger</guimenuitem>.
 </para>
 </sect1>
 
@@ -790,108 +819,149 @@
 <title>Editing Account Information</title>
 
 <para>
-  To edit a particular account, right-click that account and choose
-  <guimenuitem>Edit account...</guimenuitem> or with that account open in the
-  ledger, select <menuchoice><guimenu>Account</guimenu><guimenuitem>Edit
-  Account...</guimenuitem></menuchoice>. A window will pop-up with several
-  tabs, each allowing you to view and change certain information about the
-  account.  For more information on any of these details, see the section on
-  <link linkend="details.accounts.create">creating a new account</link>.
+  To edit a particular account, right-click the account name in the Accounts View or
+  the Institutions View and choose <guimenuitem>Edit account...</guimenuitem> or with
+  that account open in the ledger, select
+  <menuchoice><guimenu>Account</guimenu><guimenuitem>Edit
+  Account...</guimenuitem></menuchoice>. A window will pop-up with several tabs, each
+  allowing you to view and change certain information about the account.  For more
+  information on any of these details, see the section on <link
+  linkend="details.accounts.create">creating a new account</link>.
 </para>
 
 <para>
   <screenshot>
-        <screeninfo>Edit an account</screeninfo>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="account_edit.png" format="PNG" />
-          </imageobject>
-
-          <textobject>
-            <phrase>Edit account information</phrase>
-          </textobject>
-        </mediaobject>
+    <screeninfo>Edit an account</screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="account_edit.png" format="PNG" />
+      </imageobject>
+      <textobject>
+        <phrase>Edit account information</phrase>
+      </textobject>
+    </mediaobject>
   </screenshot>
 </para>
 
 <formalpara><title>General</title>
 <para>
-  View the general information about the account, and change the name,
-  start or opening date, as well as some of the other basic settings
-  of the account.
+  View the general information about the account, and change the name, start or
+  opening date, as well as some of the other basic settings of the account.
 </para>
 </formalpara>
 
 <formalpara><title>Institution</title>
 <para>
-  View and change the associated banking institution and account
-  numbers.  You can also create a new institution here.
+  View and change the associated banking institution and account numbers.  You can
+  also create a new institution here.
 </para>
 </formalpara>
 
 <formalpara><title>Hierarchy</title>
 <para>
-<!-- not ported to kde4 yet, uncomment if that is done,
-     see https://bugs.kde.org/show_bug.cgi?id=272737
-  You can change the parent account by dragging the account in this
-  view of the account hierarchy.  Changing the parent account is also
-  possible in the main Accounts screen, by dragging the account and
-  dropping it on a different parent account.
+<!-- not ported to kde4 or even 5 yet.  uncomment if that is done, see
+     https://bugs.kde.org/show_bug.cgi?id=272737 You can change the parent account by
+     dragging the account in this view of the account hierarchy.  Changing the parent
+     account is also possible in the main Accounts screen, by dragging the account
+     and dropping it on a different parent account.
 -->
-  You can change the parent account by clicking on another parent account in
-  this view of the account hierarchy.
+  You can change the parent account by clicking the new parent account and then
+  clicking <guibutton>OK</guibutton>.
 </para>
 </formalpara>
 
 <formalpara><title>Limits</title>
 <para>
-  This tab is only present for asset and liability accounts.  If you
-  enter amounts in the available fields, &kmymoney; will warn you when
-  the account balance reaches those values.
+  This tab is only present for asset and liability accounts.  If you enter amounts in
+  the available fields, &kmymoney; will warn you when the account balance reaches or
+  exceeds those values.
 </para>
 </formalpara>
 
 <formalpara><title>Tax</title>
 <para>
-  Here you can check whether this is a VAT account, and whether to
-  include this account on tax reports.
+  Here you can check whether this is a VAT account, and can specify the percentage of
+  the VAT.  In additon, you can check whether to include this account on tax reports.
 </para>
 </formalpara>
 
 <formalpara><title>Online Settings</title>
 <para>
   This tab is only be present if the account has been mapped to an <link
-  linkend="details.impexp.ofxdirectconnect">online account</link>.  It has
-  three subtabs.
+  linkend="details.impexp.ofxdirectconnect">online account</link>.  It has three
+  subtabs.
 </para>
 </formalpara>
 
 <itemizedlist>
 <listitem>
 <para>
-  <emphasis>Account Details</emphasis>: This shows the status of the
-  online connection, the bank/broker and account number, and allows
-  you to store or change the password for the online account.
+  <emphasis>Account Details</emphasis>: This shows the status of the online
+  connection, the bank/broker, and the account number.  It also allows you to store
+  or change the password for the online account.
 </para>
 </listitem>
 
 <listitem>
 <para>
-  <emphasis>OFX Details</emphasis>: Here you can adjust certain details
-  &kmymoney; uses when it establishes an OFX connection with the
-  institution.  This should only be necessary if you get certain
-  errors when you first set up the online account, or perhaps if your
-  institution changes its OFX server software.
+  <emphasis>OFX Details</emphasis>: Here you can adjust certain details &kmymoney;
+  uses when it establishes an OFX connection with the institution.  This should only
+  be necessary if you get certain errors when you first set up the online account, or
+  perhaps if your institution changes its OFX server software.
 </para>
 </listitem>
 
 <listitem>
 <para>
-  <emphasis>Import Details</emphasis>: Here you can tell &kmymoney;
- what to use as the start date for the import.  In addition, starting
- with version 4.6, you can choose whether the payee's name is based
- on the PAYEEID, NAME, or MEMO field of the imported transaction.
+  <emphasis>Import Details</emphasis>: In the upper box, you can tell &kmymoney; what
+  to use as the start date for the import.  The lower box has several items
+  &kmymoney; uses when creating transactions from the downloaded data.
+  <itemizedlist>
+    <listitem>
+      <para>
+        You can choose whether the payee's name is based on the PAYEEID, NAME, or
+        MEMO field of the imported transaction.  Different institutions use different
+        standards, so you may need to try a different value here if your imported
+        transactions seem to consistently have the wrong Payee.
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        Some banks do not follow the OFX standard of providing a repeatable, uniqe
+        FITID (Financial Institution Transaction Identification) which can cause
+        duplicate transactions on repeated downloads.  If this happens, you can
+        change the method &kmymoney; uses to detect duplicates from the <guilabel>OFX
+        FITID</guilabel> to the internallly calculated <guilabel>KMyMoney
+        ID</guilabel>.  This is not frequently necessary.
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        Importing transactions from an institution in a different timezone can
+        sometimes lead to the wrong date on an imported transaction.  If this
+        happens, you can set a <guilabel>Timezone offset</guilabel> to adjust for the
+        difference.
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        Very infrequently, an institution will create OFX downloads with the sign of
+        the transaction amount reversed.  You can click this checkbox to correct this
+        problem.
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        A similar problem sometimes occurs, but only for the values in investment
+        transacionts, such as the purchase and sale of stocks.  Clicking this
+        checkbox corrects this.
+      </para>
+    </listitem>
+  </itemizedlist>
 </para>
 </listitem>
 </itemizedlist>
@@ -901,25 +971,34 @@
 <title>Deleting accounts</title>
 
 <para>
-  To delete an account, first remove all the transactions from that account in
-  the ledger. Next, find the account in the accounts view and after right
-  clicking on the entry to show the popup menu select <guimenuitem>Delete
-  account...</guimenuitem> from the popup menu.
+  An account can only be deleted if it has no transactions in it, and is not referred
+  to by any other item in the data file.  In general, this means you first need to
+  remove all the transactions from that account in the ledger.  Then you can select
+  <menuchoice><guimenu>Account</guimenu><guimenuitem>Delete
+  account...</guimenuitem></menuchoice> or right-click the name in the Accounts View
+  and select <guimenuitem>Delete account...</guimenuitem> from the popup menu.
 </para>
 
 <para>
-  If you are unable to delete an account which looks like it has no transactions
-  in it, check your filter. See <menuchoice> <guimenu>Settings</guimenu>
-  <guimenuitem>Configure &kmymoney;</guimenuitem>
-  <guimenuitem>General</guimenuitem> <guimenuitem>Filter</guimenuitem>
-  </menuchoice>. Clear all filters. Set the start date to 1.1.1900 or so.
+  If you are unable to delete an account which looks like it has no transactions in
+  it, there may be transactions which are not displayed in the ledger due to a filter
+  setting.  See <menuchoice> <guimenu>Settings</guimenu>
+  <guimenuitem>Configure &kmymoney;...</guimenuitem>
+  <guimenuitem>General</guimenuitem> <guimenuitem>Filter</guimenuitem> </menuchoice>.
+  Clear all filters and set the start date to 1.1.1900 or so.
 </para>
 
 <para>
-  There may be transactions in your ledger that are not shown, for example, if
+  There may also be transactions in your ledger that are not shown, for example, if
   you have inadvertently typed in the wrong year when making an entry so that an
   entry remains outside the opening date of &kmymoney;. This appears beneath the
   ledger page as remaining funds.
+</para>
+
+<para>
+  In some cases, you will be able to select <guimenuitem>Delete
+  account...</guimenuitem>, but will get a popup stating why &kmymoney; cannot delete
+  the account.
 </para>
 </sect1>
 </chapter>

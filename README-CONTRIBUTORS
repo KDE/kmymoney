@@ -8,26 +8,27 @@ If you are interested in contributing, please contact
 ostroffjh@users.sourceforge.net so multiple people are not working on the
 same chapters at the same time.
 
-I expect that there will be changes ONLY in the doc subdirectory.
+This branch should have changes ONLY in the doc subdirectory.
 
 Update of screenshots will be left for later in the process, but
 descriptions of what changes or new screenshots are needed can/should be
 placed below the existing or target location.
 
-At some point, I will add to this doc a list of which chapters have and have
-not been edited yet, and not use the list used for the 4 -> 5 changes in the
-What's New section.
+At some point, I will add to this doc a list of which chapters have and have not been
+edited yet, and not use the list used for the 4 -> 5 changes in the What's New
+section.  However, on further thought, that should not be necessary, as this should
+not be released with 5.2 until it is fully updated for that version.
 
 This is in the order pulled in from index.docbook, with brief note on state of update
 
 <!ENTITY introduction SYSTEM "introduction.docbook">
-  prelim update
+  prelim update done
   
 <!ENTITY whatsnew SYSTEM "whatsnew.docbook">
-  prelim update
+  prelim update done
   
 <!ENTITY makemostof SYSTEM "makemostof.docbook">
-  prelim update - possibly need a complete replacement of this
+  prelim update - probably need a complete replacement of this
   
 <!ENTITY firsttime SYSTEM "firsttime.docbook">
   prelim update complete
@@ -36,32 +37,61 @@ This is in the order pulled in from index.docbook, with brief note on state of u
   prelim update complete
 
 <!ENTITY details-accounts SYSTEM "details-accounts.docbook">
-  prelim update started
+  prelim update complete
 
 <!ENTITY details-categories SYSTEM "details-categories.docbook">
+  prelim update complete
+
 <!ENTITY details-tags SYSTEM "details-tags.docbook">
+  prelim update complete
+
 <!ENTITY details-payees SYSTEM "details-payees.docbook">
+  prelim update complete
+
 <!ENTITY details-schedules SYSTEM "details-schedules.docbook">
+  prelim update complete
+
 <!ENTITY details-ledgers SYSTEM "details-ledgers.docbook">
+  prelim update begun
+
 <!ENTITY details-investments SYSTEM "details-investments.docbook">
+
 <!ENTITY details-currencies SYSTEM "details-currencies.docbook">
+
 <!ENTITY details-reconciliation SYSTEM "details-reconciliation.docbook">
+
 <!ENTITY details-reports SYSTEM "details-reports.docbook">
+
 <!ENTITY details-impexp SYSTEM "details-impexp.docbook">
+
 <!ENTITY details-impexp-csv SYSTEM "details-impexp-csv.docbook">
+
 <!ENTITY details-impexp-csvexp SYSTEM "details-impexp-csvexp.docbook">
+
 <!ENTITY details-impexp-woob SYSTEM "details-impexp-woob.docbook">
+
 <!ENTITY details-loans SYSTEM "details-loans.docbook">
+
 <!ENTITY details-budgets SYSTEM "details-budgets.docbook">
+
 <!ENTITY details-forecast SYSTEM "details-forecast.docbook">
+
 <!ENTITY details-settings SYSTEM "details-settings.docbook">
+
 <!ENTITY details-search SYSTEM "details-search.docbook">
+
 <!ENTITY details-formats SYSTEM "details-formats.docbook">
+
 <!ENTITY details-database SYSTEM "details-database.docbook">
+
 <!ENTITY faq SYSTEM "faq.docbook">
+
 <!ENTITY reference SYSTEM "reference.docbook">
+
 <!ENTITY details-widgets SYSTEM "details-widgets.docbook">
+
 <!ENTITY credits SYSTEM "credits.docbook">
+
 <!-- no longer used? <!ENTITY details-hbciofx SYSTEM "details-hbciofx.docbook"> -->
 
 <!-- not directly included in docbook   "man-kmymoney.1.docbook" -->
@@ -72,9 +102,6 @@ Items which need to be addressed, but so far not sure where (or more likely in
 multiple places.
 
 - Need consistency in capitalization of Xxx View.  What about View Selector?
-
-- columns which may be displayed in various Views by right clicking in header and
-  selecting.  Mention for each view, but is there a general place?  FAQ?
 
 - In Institutuions and Accounts Views, balance is in currency of the account, total
   value is in base currency.  Need to confirm, and see how/if this affects roll-up.
@@ -97,31 +124,80 @@ multiple places.
   others?)  Also not sure where to mention that sql storage is treated as another
   type of file.
 
+- Where are config files located?  Handbook currently says $KDEHOME/share/config, but
+  I find it $KDEHOME/kmymoney where $KDEHOME is ~/.config) and other stuff in
+  ~/.local/share/kmymoney.
+
 - is there a "man file" equivalent on Mac and Windows? (referenced in Launching
   section of Firsttime.
 
 - running 'kmymoney path-to-file' says can import a gnucash file.  Import or open
   into kmm format?
 
-- Where are config files located?  Handbook currently says $KDEHOME/share/config, but
-  I find it $KDEHOME/kmymoney where $KDEHOME is ~/.config) and other stuff in
-  ~/.local/share/kmymoney.
-
 - why is account type column not shown in Institutions View?
 
 - Confirm IBAN, Bank Code, SWIFT/BIC only apply to accounts, not institutions, and
   explain only to the bank where the account is.
 
-- Deleting an Institution orphans any accounts without warning, and they do not appear 
-  under the "Institution for accounts with no institution" until after a reboot.
+- Deleting an Institution orphans any accounts without warning, and they do not
+  appear under the "Institution for accounts with no institution" until after a
+  restart of KMM.
 
 - "...all the..." or "...all your..."
 
 - In Accounts View, the type of "Favorite" is "Asset" instead of "Favorite" or blank.
 
+- Be consistent: click something or click on something?
 
+- Why do we mix "preferred" and "favorite" account designation?  Are they any different?
 
-----------------
+- do we still have the issue that you cannot edit a loan account, only the schedule
+  which was created for paying the loan?
+
+- Are loans with 0% now allowed?  Need to know for wording about loan accounts.
+
+- do we want to talk about stock as an account type?
+
+- Bug 272737 is that categories and account hierarchies cannot be dragged to new
+  location.  It seems this is still not implemented.  Will it ever be?  I'm not sure
+  it's really needed, since you just click on the new parent and click OK (or Apply?)
+
+- There are several tabs in the Edit Account dialog which are not included in the New
+  Account dialog.  Should these also be there?
+
+- Confirm wording of VAT percentage in Edit Account section.
+
+- Is CC (cost center) used for anything?  Does it occur anywhere except Categories
+  (which is only that cc is required)
+
+- In New Category dialog, Price entry dropdown is disabled.  Is there any condition
+  under which it is enabled?  If so, need to add to handbook.
+
+- TMTOWTDI: right-click here, click there.  Do we put multiple ways in lots of
+  places, or just a first description and then single way in most descriptions?
+
+- do we need a Tags main menu item?
+
+- confirm which import methods are or are not able to import tags.
+
+- do we want to be consistent about whether descriptions are above/below/or mixed in
+  relation to the screenshot they describe?
+
+- in Tabbed sections, the sect titles are sometimes just the tab title, but sometimes
+  more descriptive (see Payees Details)  Do we want this to be consistent?
+
+- The handbook uses "Schedules" as the formal name, but the View Selector says
+  "Scheduled transactions" We should be consistent.
+
+- On schecule frequency, should we comment on possibly odd combinations of frequency
+  and the interval?  What happens if you say 2 Once?  Is 2 Month the same as 1 Every
+  half month or 1 Every two months?
+
+- Price downloads allow you to specify data (date range?) yet this is never used in
+  actually fetching prices (stocks or currency.)  Should we just drop the field, or
+  at least note it is ignored?  IS there any way to retreive historic prices?
+
+  ----------------
 
 This is a list of potential enhancements I came up with while reviewing the handbook,
 but have not yet posted either as wishlist bugs, entries to any Issue on invent, or
@@ -135,11 +211,20 @@ elsewhere.
   header row.
 
 - Do we want to allow selecting right v left justification of any columns?  (mainly
-  thinking of date in Schedule T View.
+  thinking of date in Schedules View.
 
 - In multi column views, allow not forcing use of full width, i.e., don't force
   rightmost column to right edge of window.
 
 - Consider reordering the View Selector.  Categories right after Accounts, move
   Schedules down directly above Ledgers?  Payees above Tags
+
+- Should the Account View (Institutions also?) include Currency column?
+
+- New Schedule dialog is still titled "Edit Scheduled transaction"
+
+- should register be replaced with ledger wherever it is used?
+
+
+
 

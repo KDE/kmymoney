@@ -5,53 +5,68 @@
     <author>&Cristian.Onet; &Cristian.Onet.mail;</author>
     <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
   </authorgroup>
-  <date>2020-02-06</date>
-  <releaseinfo>5.0.8</releaseinfo>
+  <date>2023-08-30</date>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title>Tags</title>
 
 <para>
-  The Tags View provides information about all the tags that have been added by
-  the user.  The Tags screen is split into two main areas: a list of tags and a
-  detail area, which has two tabs: Transactions and Details.  The
-  <guilabel>Transactions</guilabel> tab displays all the transactions associated
-  with the tag.  The <guilabel>Details</guilabel> tab includes a user-defined
-  color, as well as Notes, which are not used elsewhere.  Note that if you
-  change the color, which is used in the symbol displayed before the tag name in
-  any associated transactions, you need to click the check button at the lower
-  right of the Details area for it to be saved.
-  </para>
+  Tags provide an additional way for you to group and categorize transactions.  They
+  are often useful in <link linkend="details.search.general">searching for
+  transactions</link> and for <link linkend="details.reports.avail">creating
+  reports</link>.
+</para>
 
-<sect1 id="details.tags.list">
-<title>Tags List</title>
+<sect1 id="details.tags.view">
+<title>Tags View</title>
 
 <para>
-  A list of all tags, sorted alphabetically, is displayed on the left side of
-  this screen.
-
   <screenshot>
-  <mediaobject>
-  <imageobject>
-  <imagedata fileref="tags.png" format="PNG" />
-  </imageobject>
-  </mediaobject>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="tags.png" format="PNG" />
+      </imageobject>
+    </mediaobject>
   </screenshot>
 </para>
 
+<para>
+  The Tags View provides information about all the tags that have been added to the
+  data file.  The display is split into two areas.
+</para>
+
+<sect2 id="details.tags.list">
+<title>Tags List</title>
+
+<para>
+  On the left is a list of tags, with buttons for adding, renaming, or deleting a tag.
+</para>
+
+<para>
+  On the right you can see more detailed information about the tag selected in the
+  list on the left, in one of the two tabs: Transactions and Details.  The
+  <guilabel>Transactions</guilabel> tab displays all the transactions associated with
+  the tag.  The <guilabel>Details</guilabel> tab includes a user-selectable color, as
+  well as Notes, which are not used elsewhere.  Note that if you change the color,
+  which is used in the symbol displayed before the tag name in any associated
+  transactions, you need to click the <guibutton>Update</guibutton> button at the
+  lower right of the Details area for it to be saved.
+</para>
+</sect2>
+  
 <sect2>
 <title>Adding a Tag</title>
 <para>
-  There are three different ways to create a new tag.  First, you can click on
-  the <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="list-add.png"/></imageobject></inlinemediaobject></guiicon> new tag
-  icon.  Second, you can right-click on any tag and choose <guimenuitem>New
-  tag</guimenuitem>. This creates a new tag called <quote>New tag.</quote>
-  Right-click on this tag and select <guimenuitem>Rename tag</guimenuitem> to
-  enter the name of the new tag.  Finally, you can add a new tag directly into
-  the ledger page or within a split transaction by typing the name of the tag in
-  the tag field.  &kmymoney; will ask if you want to add this tag and after
-  selecting <quote>yes</quote> it will be added.
+  As with most actions in &kmymoney;, there are multiple ways to create a new tag.
+  First, you can click on the <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="list-add.png"/></imageobject></inlinemediaobject></guiicon> new tag icon.
+  Second, you can right-click on any tag and choose <guimenuitem>New
+  tag...</guimenuitem>. This creates a new tag called <quote>New tag.</quote> See the
+  next section for how to rename the tag.  Finally, you can add a new tag directly in
+  the ledger or within a split transaction by typing the name of the tag in the tag
+  field.  &kmymoney; will ask if you want to add this tag and after selecting
+  <quote>yes</quote> it will be added.
 </para>
 </sect2>
 
@@ -59,29 +74,29 @@
 <title>Renaming a Tag</title>
 <para>
   To rename a tag, either click on the tag name to select it and click on the
-  <guiicon>Rename tag</guiicon> (between the add and remove icons) or
-  right-click on the name and then select <guimenuitem>Rename tag</guimenuitem>.
-  The name then becomes editable. Changing the name will affect the name in all
-  the transactions in which it appears.
+  <guiicon>Rename tag</guiicon> icon <!-- FIXME: add icon for rename -->(between the
+  add and remove icons) or right-click on the name and then select
+  <guimenuitem>Rename tag</guimenuitem>.  The name then becomes editable. Changing
+  the name will affect the name in all the transactions in which it appears.
 </para>
 </sect2>
 
 <sect2>
 <title>Deleting a Tag</title>
 <para>
-  To remove a tag, either click on the <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="list-remove.png" format="PNG"/></imageobject></inlinemediaobject></guiicon>
-  delete tag icon or right-click the name and select <guimenuitem>Delete tag</guimenuitem>.
-  If the tag has any transactions, you will be presented with a dialog that allows you
-  to reassign them to a different tag.
+  To delete a tag, either click on the
+  <guiicon><inlinemediaobject><imageobject><imagedata fileref="list-remove.png"
+  format="PNG"/></imageobject></inlinemediaobject></guiicon> delete tag icon or
+  right-click the name and select <guimenuitem>Delete tag</guimenuitem>.  If the tag
+  has any transactions, you will be presented with a dialog that allows you to
+  reassign them to a different tag.
 </para>
 
 <note>
 <para>
-  As Tags were only introduced to &kmymoney; in version 4.7, none of the methods
-  for importing data are able to import tags.  It is understood that this is an
-  important feature, and each import method is likely to introduce it in an
-  upcoming release.
+  Tags were introduced to &kmymoney; in version 4.7, but not all of the methods for
+  importing data are able to import tags.  It is understood that this is an important
+  feature, and it will eventually be added to all import methods
 </para>
 </note>
 </sect2>
@@ -91,20 +106,22 @@
 <title>Tagged transactions and Tag details</title>
 <para>
   To view the transactions or view and edit the information associated with a
-  particular tag, select the tag from the list and select the appropriate tab on
-  the right side of the dialog.
+  particular tag, select the tag from the list and select the appropriate tab on the
+  right side of the dialog.
+</para>
 
-<screenshot>
-  <screeninfo>The tag details tab</screeninfo>
-  <mediaobject>
-  <imageobject>
-  <imagedata fileref="tag_details.png" format="PNG" />
-  </imageobject>
-  <textobject>
-  <phrase>Tag details</phrase>
-  </textobject>
-  </mediaobject>
-</screenshot>
+<para>
+  <screenshot>
+    <screeninfo>The tag details tab</screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="tag_details.png" format="PNG" />
+      </imageobject>
+      <textobject>
+        <phrase>Tag details</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <sect2 id="details.tags.info.transactions">

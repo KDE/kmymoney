@@ -445,9 +445,9 @@
 </para>
 
 <para>
-  You can edit a symbol or security name by double clicking the cell.  For
+  You can edit a symbol or security name by double-clicking the cell.  For
   each security, if necessary, edit the name in one of its rows, If the correct
-  security name appears in the imported file, double click on it to select it,
+  security name appears in the imported file, double-click on it to select it,
   then copy and paste/edit, taking care if you have used a variation or
   abbreviation within &kmymoney;.  If you edit a security name, that edit will
   be applied to all rows with the same symbol.
@@ -478,7 +478,7 @@
   all those symbol cells should still be selected, so click on one and enter the
   symbol.  Click inside the window but outside that column, or hit
   &Enter; (not <guibutton>OK</guibutton>).  Now that those
-  transactions all have the same symbol, double click one detail entry and edit
+  transactions all have the same symbol, double-click one detail entry and edit
   the security name as you wish.  Click elsewhere on the window (or
   &Enter;) to accept the edit, which will then change all
   those entries.  The remaining entries will show the symbols picked up from the

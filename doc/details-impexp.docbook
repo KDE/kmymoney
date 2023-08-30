@@ -712,7 +712,7 @@
 </para>
 
 <para>	
-	Transaction data can be edited or even deleted if needed.  To edit a transaction simply double click on the entry or hit enter when the entry is highlighted.  Once finished click on <guibutton>OK</guibutton> to accept the imported transactions or <guibutton>Cancel</guibutton> to remove the imported transactions.
+	Transaction data can be edited or even deleted if needed.  To edit a transaction simply double-click on the entry or hit enter when the entry is highlighted.  Once finished click on <guibutton>OK</guibutton> to accept the imported transactions or <guibutton>Cancel</guibutton> to remove the imported transactions.
 </para>
 
 </sect2>
@@ -1072,7 +1072,7 @@
 
 <para>
   The first step is to configure each account for which you wish to download
-  statements. Go to the Accounts view, right click on the account you wish to
+  statements. Go to the Accounts view, right-click on the account you wish to
   configure, and choose <guimenuitem>Map to online account...</guimenuitem>. 
   In case more than one online banking plugin is installed on your system
   you will be asked which one to use. For the internal OFX method select

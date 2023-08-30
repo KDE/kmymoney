@@ -57,12 +57,13 @@
 <para>
   To manually add a currency, select the
   <menuchoice><guimenu>Tools</guimenu><guimenuitem>Currencies...</guimenuitem></menuchoice>
-  menu item to display the <guilabel>Currencies</guilabel> dialog, as shown above. Right
-  click on any existing currency and select <guimenuitem>New currency</guimenuitem>
-  from the <guimenu>Currency Options</guimenu> context menu.  Enter the official code for the
-  currency and click <guilabel>OK</guilabel>.  The currency will be created with
-  the name <quote>New Currency</quote>.  To change the name, either press
-  <keycap>F2</keycap> or right click and select <guimenuitem>Rename currency</guimenuitem>.
+  menu item to display the <guilabel>Currencies</guilabel> dialog, as shown
+  above. Right-click on any existing currency and select <guimenuitem>New
+  currency</guimenuitem> from the <guimenu>Currency Options</guimenu> context menu.
+  Enter the official code for the currency and click <guilabel>OK</guilabel>.  The
+  currency will be created with the name <quote>New Currency</quote>.  To change the
+  name, either press <keycap>F2</keycap> or right-click and select
+  <guimenuitem>Rename currency</guimenuitem>.
 </para>
 </sect2>
 </sect1>
