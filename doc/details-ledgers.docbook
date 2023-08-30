@@ -17,31 +17,42 @@
 <title>The Ledger View</title>
 
 <para>
-  The Ledger view is functionally the data integration center of &kmymoney;.  This
-  view is for entering, examining, deleting, and editing transactions in your defined
-  accounts.  The view is split into three main areas: the filter area, the
-  transaction list, and the input area.
+  The Ledger View is functionally the data integration center of &kmymoney;.  This
+  view is for entering, examining, editin, and deleting transactions in your defined
+  accounts.  This veiw has had a major overaul since the 5.1 series of &kmymoney;
+  releases.  The main difference is that it is now a tabbed display, so you can have
+  more than one account displayed at once.  You can actually only see one at a time,
+  but switching by simply clicking on a different tab is significantly more
+  convenient than having to select the other account in a dropdown.
+</para>
+  
+<para>
+  The main display area shows zero or more tabs, each one for the ledger display on
+  one account.  The rightmost tab will always have a <guilabel>+</guilabel>.
+  Clicking on this will display a dropdown where you can select the account to view,
+  and a new tab will be created for that account.  The rest of this chapter will
+  descirbe using the ledger for any single account.
 </para>
 
 <para>
-  This view allows for several key actions: searching and viewing transactions;
-  entering new transaction; and editing, duplicating, deleting, and scheduling
-  existing transactions.  Along with this it also provides the ability to move,
-  mark, and go to additional account transaction details.  Other functionality
+  The Ledgers View allows for several key actions: searching and viewing
+  transactions; entering new transaction; and editing, duplicating, deleting, and
+  scheduling existing transactions.  Along with this it also provides the ability to
+  move, mark, and go to additional account transaction details.  Other functionality
   within the Ledgers View includes modifying and reconciling the account.
 </para>
   
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="ledgerview-numbered.png" format="PNG" />
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase>Ledger View</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>
@@ -49,12 +60,12 @@
 </para>
 
 <itemizedlist>
-  <listitem><para>The filter area</para></listitem>
+  <listitem><para>The filter area, which may or may not be visible</para></listitem>
   <listitem><para>The transaction list</para></listitem>
   <listitem>
     <para>
-      The transaction form, which may or may not appear, depending upon
-      your configuration as selected in the Configure &kmymoney; Ledger section.
+      The transaction form, which may or may not appear, depending upon your
+      configuration as selected in the Configure &kmymoney; Ledger section.
     </para>
   </listitem>
 </itemizedlist>
@@ -63,33 +74,47 @@
 <title>The filter area</title>
 
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="accountdropdown.png" format="PNG" />
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase>Filter area</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
-	
-<para>
-  You can easily select any account via the account dropdown list at the top of
-  the view area.  Note that depending upon the type of the account the <link
-  linkend="details.ledger.transactionform">transaction form</link> at the
-  bottom of the view may change.
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>
-  To the right of the account dropdown list, are two additional fields. The
-  filter box provides the ability to search for matching transactions
-  that will be displayed in the list view. The text specified can be in any
-  of the fields of the transaction for the specific account. The status field
-  is a dropdown list. The status field list allows for the selection of:
-  Any status, Imported, Matched, Erroneous, Not marked, Not reconciled, 
-  Cleared, and scheduled transactions.
+  In previous versions of &kmymoney;, the filter area was always displayed at the top
+  of the ledger.  Now, it is normally hidden, but can be displayed by typing
+  <keycombo>&Ctrl;<keycap>F</keycap></keycombo>.  It now appears below the
+  transaction list.
+</para>
+
+<para>
+  Previous versions of &kmymoney; had a dropdown where you could select the account
+  to be displayed in the ledger.  This is no longer necessary, as to view another
+  account, you can just open a new tab.  Note that depending upon the type of the
+  account the <link linkend="details.ledger.transactionform">transaction form</link>,
+  if it is displayed, may change.
+</para>
+
+<para>
+  If displayed, most of the filter area is a text box. This filter box provides the
+  ability to search for transactions containing the text typed in the box.  These
+  filtered transactions will then displayed in the list above.  The text specified
+  can be in any of the fields of the transaction for the specific account.  At the
+  right of the filter text is a status filter.  The default value of this dropdown is
+  <guilabel>Any status</guilabel> which does not apply any filter to the list.  The other values allow
+  you to restrict the list of displayed transactions to <guilabel></guilabel>
+  <guilabel></guilabel>
+  <guilabel></guilabel>
+  <guilabel></guilabel> <guilabel></guilabel>
+  <guilabel></guilabel> <guilabel></guilabel>
+  status, Imported, Matched, Erroneous, Not marked, Not reconciled, Cleared, and
+  scheduled.
 </para>
 
 </sect2>

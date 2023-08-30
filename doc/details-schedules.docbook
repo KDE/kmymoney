@@ -305,8 +305,8 @@
 
 <para>
   The first and third methods will display an <guilabel>Enter scheduled
-  transaction</gui> dialog (possibley after displaying an informational window about
-  the process.)  This dialog prompts you to confirm or update the required
+  transaction</guilabel> dialog (possibley after displaying an informational window
+  about the process.)  This dialog prompts you to confirm or update the required
   information that was entered when you created the schedule.
 </para>
 
