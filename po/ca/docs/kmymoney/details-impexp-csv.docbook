@@ -527,9 +527,7 @@
 >$KDEHOME/share/config</filename
 > on <envar
 >$KDEHOME</envar
-> generalment és <filename class="directory"
->.config</filename
-> dins de la carpeta d'inici. Si esteu migrant des d'una versió anterior del &kmymoney; 5.0 o posterior, la ubicació anterior de <envar
+> generalment és «.config» dins de la carpeta d'inici. Si esteu migrant des d'una versió anterior del &kmymoney; 5.0 o posterior, la ubicació anterior de <envar
 >$KDEHOME</envar
 > era <filename class="directory"
 >.kde4</filename
