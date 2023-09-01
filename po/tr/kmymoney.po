@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2023-08-22 01:04+0300\n"
+"PO-Revision-Date: 2023-08-31 19:52+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -5972,13 +5972,13 @@ msgstr "Uzlaştırılmış işlemleri gösterme"
 #: kmymoney/kmymoney.cpp:1400 kmymoney/settings/kmymoney.kcfg:228
 #, kde-format
 msgid "Hide unused categories"
-msgstr "Kullanılmayan kategorileri gizle"
+msgstr "Kullanılmayan Kategorileri Gizle"
 
 #. i18n: ectx: label, entry (ShowAllAccounts), group (List Options)
 #: kmymoney/kmymoney.cpp:1401 kmymoney/settings/kmymoney.kcfg:232
 #, kde-format
 msgid "Show all accounts"
-msgstr "Tüm hesapları göster"
+msgstr "Tüm Hesapları Göster"
 
 #: kmymoney/kmymoney.cpp:1405
 #, kde-format
@@ -5998,7 +5998,7 @@ msgstr "Şirketi sil..."
 #: kmymoney/kmymoney.cpp:1411
 #, kde-format
 msgid "New account..."
-msgstr "Yeni hesap..."
+msgstr "Yeni Hesap..."
 
 #: kmymoney/kmymoney.cpp:1412
 #, kde-format
@@ -6024,22 +6024,22 @@ msgstr "Mutabakat erteleme"
 #: kmymoney/kmymoney.cpp:1416
 #, kde-format
 msgid "Edit account..."
-msgstr "Hesabı düzenle..."
+msgstr "Hesabı Düzenle..."
 
 #: kmymoney/kmymoney.cpp:1417
 #, kde-format
 msgid "Delete account..."
-msgstr "Hesabı sil..."
+msgstr "Hesabı Sil..."
 
 #: kmymoney/kmymoney.cpp:1418
 #, kde-format
 msgid "Close account"
-msgstr "Hesabı kapat"
+msgstr "Hesabı Kapat"
 
 #: kmymoney/kmymoney.cpp:1419
 #, kde-format
 msgid "Reopen account"
-msgstr "Hesabı yeniden aç"
+msgstr "Hesabı Yeniden Aç"
 
 #: kmymoney/kmymoney.cpp:1420
 #, kde-format
@@ -6054,7 +6054,7 @@ msgstr "Bakiye grafiği göster..."
 #: kmymoney/kmymoney.cpp:1422
 #, kde-format
 msgid "Map account..."
-msgstr "Hesabı eşleştir..."
+msgstr "Hesabı Eşleştir..."
 
 #: kmymoney/kmymoney.cpp:1423
 #, kde-format
@@ -6064,12 +6064,12 @@ msgstr "Hesabı eşlemeyi kaldır..."
 #: kmymoney/kmymoney.cpp:1424
 #, kde-format
 msgid "Update account..."
-msgstr "Hesabı güncelle..."
+msgstr "Hesabı Güncelle..."
 
 #: kmymoney/kmymoney.cpp:1425
 #, kde-format
 msgid "Update all accounts..."
-msgstr "Tüm hesapları güncelle..."
+msgstr "Tüm Hesapları Güncelle..."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_buttonNewCreditTransfer)
 #: kmymoney/kmymoney.cpp:1426
@@ -6081,17 +6081,17 @@ msgstr "Yeni kredi aktarımı"
 #: kmymoney/kmymoney.cpp:1430
 #, kde-format
 msgid "New category..."
-msgstr "Yeni kategori..."
+msgstr "Yeni Kategori..."
 
 #: kmymoney/kmymoney.cpp:1431
 #, kde-format
 msgid "Edit category..."
-msgstr "Kategoriyi düzenle..."
+msgstr "Kategoriyi Düzenle..."
 
 #: kmymoney/kmymoney.cpp:1432
 #, kde-format
 msgid "Delete category..."
-msgstr "Kategoriyi sil..."
+msgstr "Kategoriyi Sil..."
 
 #: kmymoney/kmymoney.cpp:1436
 #, kde-format
@@ -6223,12 +6223,12 @@ msgstr "Uzlaştırılmamış"
 #, kde-format
 msgctxt "Select all transactions"
 msgid "Select all"
-msgstr "Tümünü seç"
+msgstr "Tümünü Seç"
 
 #: kmymoney/kmymoney.cpp:1468 kmymoney/views/kgloballedgerview_p.h:982
 #, kde-format
 msgid "Go to account"
-msgstr "Hesaba git"
+msgstr "Hesaba Git"
 
 #: kmymoney/kmymoney.cpp:1469 kmymoney/views/kgloballedgerview_p.h:980
 #, kde-format
@@ -12465,7 +12465,7 @@ msgstr "KBanking birimi düzgün başlatılamadı"
 #: kmymoney/plugins/kbanking/kbanking.cpp:315
 #, kde-format
 msgid "Configure Aq&Banking..."
-msgstr "Aq&Banking'i yapılandır..."
+msgstr "Aq&Banking'i Yapılandır..."
 
 #: kmymoney/plugins/kbanking/kbanking.cpp:320
 #, kde-format
@@ -14899,7 +14899,7 @@ msgstr "Veritabanı Dosyası (Sadece SQLite)"
 #: kmymoney/plugins/sql/sqlstorage.cpp:280
 #, kde-format
 msgid "Open database..."
-msgstr "Veritabanı aç..."
+msgstr "Veritabanı Aç..."
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:285
 #, kde-format
