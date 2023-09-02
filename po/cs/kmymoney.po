@@ -9657,11 +9657,9 @@ msgid "Account Type:"
 msgstr "Typ účtu:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:101
-#, fuzzy, kde-format
-#| msgctxt "Header for AqBanking account list"
-#| msgid "Account Name"
+#, kde-format
 msgid "Account Name:"
-msgstr "Název účtu"
+msgstr "Název účtu:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #, kde-format
