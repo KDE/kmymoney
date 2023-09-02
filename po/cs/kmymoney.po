@@ -358,19 +358,16 @@ msgid "Schedule found"
 msgstr "Finanční plán nalezen"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Create a new Account"
+#, kde-format
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "Vytvořit nový účet"
+msgstr ""
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, fuzzy, kde-format
-#| msgid "Create category"
+#, kde-format
 msgctxt "Create undo action"
 msgid "Create category"
-msgstr "Vytvořit kategorii"
+msgstr ""
 
 #: kmymoney/dialogs/editpersonaldatadlg.cpp:174
 #: kmymoney/wizards/newuserwizard/kgeneralpage.cpp:78
@@ -2953,11 +2950,10 @@ msgid "Security"
 msgstr "Cenný papír"
 
 #: kmymoney/dialogs/payeecreator.cpp:57
-#, fuzzy, kde-format
-#| msgid "Delete payee"
+#, kde-format
 msgctxt "Undo action description"
 msgid "Create payee"
-msgstr "Odstranit plátce/příjemce"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsColors)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:14
@@ -4927,11 +4923,10 @@ msgid "Show transaction"
 msgstr "Ukázat transakci"
 
 #: kmymoney/kmymoney.cpp:1842
-#, fuzzy, kde-format
-#| msgid "Show Transaction Detail"
+#, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
-msgstr "Zobrazit podrobnosti o transakci"
+msgstr ""
 
 #: kmymoney/kmymoney.cpp:1844
 #, kde-format
@@ -9177,25 +9172,22 @@ msgid "%1 and No/%2"
 msgstr ""
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
-#, fuzzy, kde-format
-#| msgid "Comma (,)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Comma (,)"
-msgstr "Čárka (,)"
+msgstr ""
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
-#, fuzzy, kde-format
-#| msgid "Semicolon (;)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Semicolon (;)"
-msgstr "Středník (;)"
+msgstr ""
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:66
-#, fuzzy, kde-format
-#| msgid "Tab (\\t)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
-msgstr "Tab (\\t)"
+msgstr ""
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:92
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:62
@@ -9236,11 +9228,10 @@ msgid "Use this to select a filename to export to"
 msgstr "Vybrat název souboru pro uložení exportu"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:199
-#, fuzzy, kde-format
-#| msgid "  * Parent account '%1' does not contain '%2' as sub-account."
+#, kde-format
 msgctxt "@info Hint in CSV export dialog"
 msgid "Current selected account does not contain any transactions."
-msgstr "* Nadřazeným účet \"%1\" neobsahuje podúčet \"%2\"."
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CsvExportDlg)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:14
@@ -9372,11 +9363,9 @@ msgid "Account Type:"
 msgstr "Typ účtu:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "Header for AqBanking account list"
-#| msgid "Account Name"
+#, kde-format
 msgid "Account Name:"
-msgstr "Název účtu"
+msgstr "Název účtu:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:107
 #: kmymoney/plugins/csv/export/csvwriter.cpp:116
@@ -18628,11 +18617,10 @@ msgid "Edit account '%1'"
 msgstr "Upravit účet \"%1\""
 
 #: kmymoney/views/kaccountsview_p.h:245
-#, fuzzy, kde-format
-#| msgid "Edit account..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
-msgstr "Upravit účet..."
+msgstr ""
 
 #: kmymoney/views/kaccountsview_p.h:279
 #, kde-format
@@ -18688,11 +18676,10 @@ msgid "Edit category '%1'"
 msgstr "Upravit kategorii \"%1\""
 
 #: kmymoney/views/kcategoriesview.cpp:199
-#, fuzzy, kde-format
-#| msgid "Edit category..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
-msgstr "Upravit kategorii..."
+msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:213
 #, kde-format
@@ -19896,11 +19883,10 @@ msgid "Tag color:"
 msgstr "Barva značky:"
 
 #: kmymoney/views/ktransactionselectdlg.cpp:56
-#, fuzzy, kde-format
-#| msgid "Select transactions without payees"
+#, kde-format
 msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
-msgstr "Vybrat transakce bez plátců/příjemců"
+msgstr ""
 
 #: kmymoney/views/ktransactionselectdlg.cpp:126
 #, kde-format
@@ -20126,10 +20112,9 @@ msgid "The posting date is invalid."
 msgstr ""
 
 #: kmymoney/views/multitransactioneditor.cpp:218
-#, fuzzy, kde-format
-#| msgid "Select account"
+#, kde-format
 msgid "Select category or account."
-msgstr "Vyberte účet"
+msgstr ""
 
 #: kmymoney/views/multitransactioneditor.cpp:230
 #, kde-format
@@ -20140,11 +20125,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/multitransactioneditor.cpp:696
-#, fuzzy, kde-format
-#| msgid "Cannot open file as requested."
+#, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
-msgstr "Požadovaný soubor nelze otevřít."
+msgstr ""
 
 #: kmymoney/views/multitransactioneditor.cpp:704
 #, kde-format
@@ -20222,11 +20206,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:527
-#, fuzzy, kde-format
-#| msgid "Select Transaction"
+#, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
-msgstr "Vybrat transakce"
+msgstr ""
 
 #: kmymoney/views/newtransactionform.cpp:113
 #, kde-format
@@ -22307,11 +22290,10 @@ msgid "Next interest change is due"
 msgstr "Příští změna úrokové sazby bude provedena"
 
 #: kmymoney/wizards/newaccountwizard/khierarchypage.cpp:154
-#, fuzzy, kde-format
-#| msgid "No account selected"
+#, kde-format
 msgctxt "@info Missing parent account selection in new account wizard"
 msgid "No parent account selected"
-msgstr "Nebyl vybrán účet"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newaccountwizard/khierarchypage.ui:26
@@ -24559,9 +24541,3 @@ msgstr ""
 "\n"
 "<p>Veškeré informace jsou volitelně a používají se pouze pro zosobnění "
 "vašeho KMyMoney.</p>"
-
-#~ msgid "There are no entries in this account.\n"
-#~ msgstr "Pro tento účet nejsou žádné záznamy.\n"
-
-#~ msgid "Invalid account"
-#~ msgstr "Neplatný účet"
