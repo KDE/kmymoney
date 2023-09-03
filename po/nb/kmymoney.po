@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2023-08-04 11:52+0200\n"
+"PO-Revision-Date: 2023-08-29 20:32+0200\n"
 "Last-Translator: Kjetil Sørlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
@@ -1324,7 +1324,7 @@ msgstr "Litt beskrivelse"
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:72
 #, kde-format
 msgid "Transaction %1 has no splits"
-msgstr "Transaksjonen %1 har ingen oppdelinger"
+msgstr "Transaksjonen %1 er ikke fordelt"
 
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:82
 #, kde-format
@@ -1360,7 +1360,7 @@ msgstr ""
 #, kde-format
 msgctxt "Split transaction (category replacement)"
 msgid "Split transaction"
-msgstr "Del opp transaksjon"
+msgstr "Fordelt transaksjon"
 
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:122
 #, kde-format
@@ -2742,7 +2742,7 @@ msgstr "Transaksjoner"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:168
 #, kde-format
 msgid "Splits"
-msgstr "Oppdelinger"
+msgstr "Fordelinger"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel9)
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_5)
@@ -2977,7 +2977,7 @@ msgstr "Kategori"
 #: kmymoney/dialogs/kmymoneysplittable.cpp:193
 #, kde-format
 msgid "Split Options"
-msgstr "Valg for oppdeling"
+msgstr "Valg for fordeling"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_editSecurityButton)
 #: kmymoney/dialogs/kmymoneysplittable.cpp:195
@@ -3008,7 +3008,7 @@ msgstr "vil bli beregnet"
 #, kde-format
 msgid ""
 "You are about to delete the selected split. Do you really want to continue?"
-msgstr "Du er i ferd med å fjerne den valgte oppdelingen. Vil du fortsette?"
+msgstr "Du er i ferd med å fjerne den valgte fordelingen. Vil du fortsette?"
 
 #: kmymoney/dialogs/kmymoneysplittable.cpp:740
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:397 kmymoney/main.cpp:120
@@ -3020,12 +3020,12 @@ msgstr "KMyMoney"
 #, kde-format
 msgid "You need to assign a category to this split before it can be entered."
 msgstr ""
-"Du må tilordne en kategori til denne oppdelingen før den kan bli lagt inn."
+"Du må tilordne en kategori til denne fordelingen før den kan bli lagt inn."
 
 #: kmymoney/dialogs/kmymoneysplittable.cpp:785
 #, kde-format
 msgid "Enter split"
-msgstr "Legg inn oppdeling"
+msgstr "Legg inn fordeling"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:135
 #, kde-format
@@ -3189,7 +3189,7 @@ msgstr "Lag kategori"
 #: kmymoney/dialogs/knewaccountdlg.cpp:961
 #, kde-format
 msgid "Create a new Category"
-msgstr "Legg til en ny kategori"
+msgstr "Lag en ny kategori"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KNewAccountDlg)
 #: kmymoney/dialogs/knewaccountdlg.ui:14
@@ -3273,7 +3273,7 @@ msgstr "Foretrukket konto"
 #: kmymoney/dialogs/knewaccountdlg.ui:268
 #, kde-format
 msgid "Cost Center assignment required"
-msgstr "Det kreves tilordning fra et kostnadssenter"
+msgstr "Det kreves tilordning til et kostnadssenter"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_qcheckboxOpeningBalance)
 #: kmymoney/dialogs/knewaccountdlg.ui:278
@@ -3730,7 +3730,7 @@ msgstr "Bruk som standard"
 #: kmymoney/dialogs/ksplitcorrectiondlg.ui:17
 #, kde-format
 msgid "Correct splits"
-msgstr "Korriger delte transaksjoner"
+msgstr "Korriger fordeling"
 
 #. i18n: ectx: property (text), widget (QLabel, question)
 #: kmymoney/dialogs/ksplitcorrectiondlg.ui:36
@@ -3744,7 +3744,7 @@ msgstr "Hvordan vil du fortsette?"
 #: kmymoney/dialogs/splitadjustdialog.ui:58
 #, kde-format
 msgid "Continue to edit splits"
-msgstr "Fortsett å endre delinger"
+msgstr "Fortsett å fordele"
 
 #. i18n: ectx: property (text), widget (QRadioButton, changeBtn)
 #: kmymoney/dialogs/ksplitcorrectiondlg.ui:68
@@ -3774,12 +3774,12 @@ msgstr "Tøm &alle"
 #: kmymoney/views/splitdialog.ui:644
 #, kde-format
 msgid "Clear all splits"
-msgstr "Tøm alle oppdelinger"
+msgstr "Tøm alle fordelingene"
 
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:104
 #, kde-format
 msgid "Use this to clear all splits of this transaction"
-msgstr "Bruk denne for å slette alle oppdelingen for denne transaksjonen"
+msgstr "Bruk denne for å slette alle fordelingene for denne transaksjonen"
 
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:108
 #, kde-format
@@ -3791,7 +3791,7 @@ msgstr "Fjern &null"
 #: kmymoney/views/splitdialog.ui:627
 #, kde-format
 msgid "Removes all splits that have a value of zero"
-msgstr "Fjerner alle oppdelinger som har nullverdi"
+msgstr "Fjerner alle fordelinger som har nullverdi"
 
 #. i18n: ectx: property (text), widget (QPushButton, mergeButton)
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:113
@@ -3805,7 +3805,7 @@ msgstr "&Slå sammen"
 #: kmymoney/views/splitdialog.ui:614
 #, kde-format
 msgid "Merges splits with the same category to one split"
-msgstr "Slår sammen oppdelinger det samme kategori til en del"
+msgstr "Slår sammen fordelinger med samme kategori til en oppføring"
 
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:115
 #, kde-format
@@ -3813,8 +3813,8 @@ msgid ""
 "In case you have multiple split entries to the same category and you like to "
 "keep them as a single split"
 msgstr ""
-"I tilfelle du har flere oppdelte oppføringer i samme kategori og vil holde "
-"dem som en enkelt oppdeling"
+"I tilfelle du har flere fordelte oppføringer i samme kategori og vil holde "
+"dem som en enkelt fordeling"
 
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:306
 #: kmymoney/dialogs/splitadjustdialog.cpp:53
@@ -3823,8 +3823,8 @@ msgid ""
 "The total amount of this transaction is %1 while the sum of the splits is "
 "%2. The remaining %3 are unassigned."
 msgstr ""
-"Totalsummen for denne transaksjonen er %1 mens summen av oppdelingene er %2. "
-"Resterende %3 er ikke delt opp."
+"Totalsummen for denne transaksjonen er %1 mens summen av fordelingene er %2. "
+"Resterende %3 er ikke fordelt."
 
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:311
 #: kmymoney/dialogs/splitadjustdialog.cpp:58
@@ -3856,7 +3856,7 @@ msgid ""
 "You are about to delete all splits of this transaction. Do you really want "
 "to continue?"
 msgstr ""
-"Du er i ferd med å fjerne alle oppdelingene for denne transaksjonen. Vil du "
+"Du er i ferd med å fjerne alle fordelingene for denne transaksjonen. Vil du "
 "fortsette?"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KSplitTransactionDlg)
@@ -3865,7 +3865,7 @@ msgstr ""
 #: kmymoney/views/newtransactioneditor.cpp:143
 #, kde-format
 msgid "Split transaction"
-msgstr "Del opp transaksjon"
+msgstr "Fordel transaksjon"
 
 #. i18n: ectx: property (text), widget (QLabel, splitUnassigned)
 #: kmymoney/dialogs/ksplittransactiondlg.ui:139
@@ -3891,7 +3891,7 @@ msgstr "Ikke tilordnet"
 #: kmymoney/views/splitdialog.ui:517
 #, kde-format
 msgid "Sum of splits"
-msgstr "Sum av oppdelingene"
+msgstr "Sum av fordelingene"
 
 #. i18n: ectx: property (text), widget (QLabel, splitSum)
 #: kmymoney/dialogs/ksplittransactiondlg.ui:227
@@ -5472,7 +5472,7 @@ msgid ""
 "different currency (%1). Using this account to modify the transaction may "
 "result in rounding errors. Do you want to continue?"
 msgstr ""
-"Denne transaksjonen har mer enn to oppdelinger og er opprinnelig basert på "
+"Denne transaksjonen har mer enn to fordelinger og er opprinnelig basert på "
 "en annen valuta (%1). Ved å bruke denne kontoen for å endre transaksjonen "
 "kan du få avrundingsfeil. Vil du fortsette?"
 
@@ -5483,7 +5483,7 @@ msgid ""
 "originally based on a different currency (%1). Using this account to modify "
 "the transactions may result in rounding errors. Do you want to continue?"
 msgstr ""
-"Minst en av de valgte transaksjonene har mer enn to oppdelinger og er "
+"Minst en av de valgte transaksjonene har mer enn to fordelinger og er "
 "opprinnelig basert på en annen valuta (%1). Ved å bruke denne kontoen for å "
 "endre transaksjonene kan du få avrundingsfeil. Vil du fortsette?"
 
@@ -6110,7 +6110,7 @@ msgstr "Godta"
 #, kde-format
 msgctxt "Edit split button"
 msgid "Edit splits"
-msgstr "Endre oppdelinger"
+msgstr "Endre fordelinger"
 
 #: kmymoney/kmymoney.cpp:1457
 #, kde-format
@@ -6208,7 +6208,7 @@ msgstr "Kombiner"
 #: kmymoney/kmymoney.cpp:1473
 #, kde-format
 msgid "Copy splits"
-msgstr "Kopier oppdelinger"
+msgstr "Kopier fordelinger"
 
 #: kmymoney/kmymoney.cpp:1475
 #, kde-format
@@ -7680,7 +7680,7 @@ msgstr "  * Betalingsmottaker %1 er gjenskapt med fast id"
 #: kmymoney/mymoney/mymoneyfile.cpp:2159
 #, kde-format
 msgid "  * Payee id updated in split of transaction '%1'."
-msgstr "  * Mottaker-id er oppdatert i oppdelingen av transaksjonen «%1»."
+msgstr "  * Mottaker-id er oppdatert i fordelingen av transaksjonen «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2181
 #, kde-format
@@ -7708,12 +7708,12 @@ msgstr "    Kontoens åpningsdato er oppdatert."
 #: kmymoney/mymoney/mymoneyfile.cpp:2206
 #, kde-format
 msgid "  * shares set to value in split of transaction '%1'."
-msgstr "   * aksjer satt til verdi i oppdeling av transaksjonen «%1»."
+msgstr "   * aksjer satt til verdi i fordeling av transaksjonen «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2209
 #, kde-format
 msgid "  * value set to shares in split of transaction '%1'."
-msgstr "  * verdi satt til aksjer i oppdeling av transaksjonen «%1»."
+msgstr "  * verdi satt til aksjer i fordeling av transaksjonen «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2215
 #, kde-format
@@ -7721,13 +7721,13 @@ msgid ""
 "  * Split %2 in transaction '%1' contains a reference to invalid account %3. "
 "Please fix manually."
 msgstr ""
-"  * Oppdelingen %2 i transaksjonen «%1» inneholder ugyldig referanse til "
+"  * Fordelingen %2 i transaksjonen «%1» inneholder ugyldig referanse til "
 "kontoen %3. Fiks dette manuelt."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2224
 #, kde-format
 msgid "  * action marked as interest in split of transaction '%1'."
-msgstr "  * handling merket som rente i oppdelingen av transaksjonen «%1»."
+msgstr "  * handling merket som rente i fordelingen av transaksjonen «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2238
 #, kde-format
@@ -7761,14 +7761,14 @@ msgstr "    Posteringsdatoen ble ikke oppdatert til «%1»."
 #: kmymoney/mymoney/mymoneyfile.cpp:2296
 #, kde-format
 msgid "  * Payee id updated in split of schedule '%1'."
-msgstr "  * Mottaker-id ble oppdatert i oppdelingen av tidsplanen «%1»."
+msgstr "  * Mottaker-id ble fordatert i oppdelingen av tidsplanen «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2302
 #, kde-format
 msgid ""
 "  * Split in scheduled transaction '%1' contained value != 0 and shares == 0."
 msgstr ""
-"  * Oppdeling i den planlagte transaksjonen «%1» inneholder verdi !=0 og "
+"  * Fordeling i den planlagte transaksjonen «%1» inneholder verdi !=0 og "
 "aksjer == 0."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2303
@@ -7779,17 +7779,17 @@ msgstr "    Aksjer satt til verdi."
 #: kmymoney/mymoney/mymoneyfile.cpp:2311
 #, kde-format
 msgid "  * Removed bankid from split in scheduled transaction '%1'."
-msgstr "  * Fjernet bank-id fra oppdeling i den planlagte transaksjonen «%1»."
+msgstr "  * Fjernet bank-id fra fordeling i den planlagte transaksjonen «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2324
 #, kde-format
 msgid "  * shares set to value in split in schedule '%1'."
-msgstr "  * aksjer satt til verdi i oppdeling i tidsplanen «%1»."
+msgstr "  * aksjer satt til verdi i fordeling i tidsplanen «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2327
 #, kde-format
 msgid "  * value set to shares in split in schedule '%1'."
-msgstr "  * verdi satt til aksjer i oppdeling i tidsplanen «%1»."
+msgstr "  * verdi satt til aksjer i fordeling i tidsplanen «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2333
 #, kde-format
@@ -7797,7 +7797,7 @@ msgid ""
 "  * Split %2 in schedule '%1' contains a reference to invalid account %3. "
 "Please fix manually."
 msgstr ""
-"  * Oppdelingen %2 i tidsplanen «%1» inneholder en referanse til den "
+"  * Fordelingen %2 i tidsplanen «%1» inneholder en referanse til den "
 "ugyldige kontoen %3. Fiks dette manuelt."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2356
@@ -9850,7 +9850,7 @@ msgstr "Kontotype:"
 #: kmymoney/plugins/csv/export/csvwriter.cpp:101
 #, kde-format
 msgid "Account Name:"
-msgstr ""
+msgstr "Kontonavn:1"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #, kde-format
@@ -11542,8 +11542,8 @@ msgid ""
 "Account or Category %1, transaction date %2; split contains invalid value; "
 "please check"
 msgstr ""
-"Sjekk kontoen eller kategorien %1, transaksjonsdato %2. Oppdeling inneholder "
-"en ugyldig verdi"
+"Sjekk kontoen eller kategorien %1, transaksjonsdato %2. Fordelingen "
+"inneholder en ugyldig verdi"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1788
 #, kde-format
@@ -11573,7 +11573,7 @@ msgstr "Tidsplanen %1 inneholder flere handlinger; bare en er blitt importert"
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1993
 #, kde-format
 msgid "Schedule %1 contains no valid splits"
-msgstr "Tidsplanen %1 inneholder ingen gyldige oppdelinger"
+msgstr "Tidsplanen %1 inneholder ingen gyldige fordelinger"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1998
 #, kde-format
@@ -13396,7 +13396,7 @@ msgstr "SEPA kredittoverføring"
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:17
 #, kde-format
 msgid "Beneficiary &Name"
-msgstr "Mottakerrnavn"
+msgstr "Mottakernavn"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.ui:99
@@ -13622,7 +13622,7 @@ msgstr "0"
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:431
 #, kde-format
 msgid "Split-Value"
-msgstr "Oppdelingsverdi"
+msgstr "Fordelingsverdi"
 
 #. i18n: ectx: property (text), item, widget (QTreeWidget, m_editAmounts)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:434
@@ -16058,7 +16058,7 @@ msgstr "[Tom mottaker]"
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1912
 #, kde-format
 msgid "[Split Transaction]"
-msgstr "[Del opp transaksjon]"
+msgstr "[Fordelt transaksjon]"
 
 #: kmymoney/plugins/views/reports/core/querytable.cpp:793
 #: kmymoney/plugins/views/reports/core/querytable.cpp:794
@@ -19128,7 +19128,7 @@ msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
 "wish to continue to edit the transactions anyway?"
 msgstr ""
-"Minst en av oppdelingene i den valgte transaksjonen er avstemt. Vil du endre "
+"Minst en av fordelingene i den valgte transaksjonen er avstemt. Vil du endre "
 "transaksjonene likevel?"
 
 #: kmymoney/views/kgloballedgerview.cpp:808
@@ -19175,7 +19175,7 @@ msgstr ""
 #: kmymoney/views/kgloballedgerview.cpp:1196
 #, kde-format
 msgid "Cannot edit multiple split transactions at once."
-msgstr "Kan ikke endre flere oppdelte transaksjoner på en gang."
+msgstr "Kan ikke endre flere fordelte transaksjoner på en gang."
 
 #: kmymoney/views/kgloballedgerview.cpp:1217
 #, kde-format
@@ -19218,7 +19218,7 @@ msgid ""
 "At least one split of the selected transactions has been reconciled. Do you "
 "wish to delete the transactions anyway?"
 msgstr ""
-"Minst en av oppdelingene i den valgte transaksjonen er avstemt. Vil du "
+"Minst en av fordelingene i den valgte transaksjonen er avstemt. Vil du "
 "slette transaksjonen likevel?"
 
 #: kmymoney/views/kgloballedgerview.cpp:1472
@@ -20820,7 +20820,7 @@ msgstr "Slett &null"
 #: kmymoney/views/splitdialog.ui:647
 #, kde-format
 msgid "Use this to delete all splits of this transaction."
-msgstr "Bruk denne for å slette alle oppdelingen for denne transaksjonen."
+msgstr "Bruk denne for å slette alle fordelingene for denne transaksjonen."
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteAllButton)
 #: kmymoney/views/splitdialog.ui:650
@@ -23001,7 +23001,7 @@ msgstr "Rentefoten blir beregnet"
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.ui:64
 #, kde-format
 msgid "when the payment is received"
-msgstr "når betlingen er mottatt"
+msgstr "når betalingen er mottatt"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_paymentDue)
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.ui:69
@@ -23017,7 +23017,7 @@ msgstr "når betalingen har forfall"
 #: kmymoney/wizards/newloanwizard/loanamountwizardpage.ui:55
 #, kde-format
 msgid "Loan amount"
-msgstr "Lånesaldo"
+msgstr "Lånebeløp"
 
 #. i18n: ectx: property (whatsThis), widget (AmountEdit, m_loanAmount)
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.ui:90
@@ -24722,10 +24722,9 @@ msgid ""
 "and uses it to receive money or pay bills. If this is not the case, please "
 "deselect the checkbox below and continue on the next page."
 msgstr ""
-"En typisk bruker av KMyMoney holder en brukskonto hos en institusjon of "
-"bruker denne til å få inn penger og betale regninger. Hvis det ikke er "
-"tilfelle for deg må du ta bort krysset i avkrysningsboksen og fortsette til "
-"neste side."
+"En typisk bruker av KMyMoney har en brukskonto i en institusjon og bruker "
+"denne til å få inn penger og betale regninger. Hvis det ikke er tilfelle for "
+"deg må du ta bort krysset i avkrysningsboksen og fortsette til neste side."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_haveCheckingAccountButton)
 #: kmymoney/wizards/newuserwizard/kaccountpage.ui:33
@@ -24894,7 +24893,7 @@ msgstr ""
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:55
 #, kde-format
 msgid "KMyMoney New File Setup"
-msgstr "Oppsett for ny KMyMoney-fil"
+msgstr "Sett opp ny KMyMoney-fil"
 
 #: kmymoney/wizards/newuserwizard/knewuserwizard.cpp:57
 #, kde-format
@@ -25068,7 +25067,7 @@ msgid ""
 "transactions with unassigned values are marked with an exclamation mark \n"
 "on a yellow triangle in the register?\n"
 msgstr ""
-"<p>… at transaksjoner uten kategori eller oppdelte\n"
+"<p>… at transaksjoner uten kategori eller fordelte\n"
 "transaksjoner med verdier som ikke er tildelt er merket med et utropstegn \n"
 "i en gul trekant i registret?\n"
 
@@ -25111,7 +25110,7 @@ msgid ""
 "import format to QIF on the fly? See the QIF profile editor for\n"
 "more details.\n"
 msgstr ""
-"<p>…at du kan bruke ditt eget eksterne filterprogram for å konvertere\n"
+"<p>… at du kan bruke ditt eget eksterne filterprogram for å konvertere\n"
 "et hvilket som helst format til QIF på direkten? Se QIF profilendrer for\n"
 "flere detaljer.\n"
 

@@ -12,15 +12,16 @@
 # Pascal Billery-Schneider <pascal.billery-schneider@laposte.net>, 2014.
 # Johnny Jazeix <jazeix@gmail.com>, 2020.
 # Xavier BESNARD <xavier.besnard@neuf.fr>, 2022, 2023.
+# A. Villemain <nepasrepondre@monadresse.fr>, 2023.
 # jaaf, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2023-05-05 21:22+0200\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
-"Language-Team: fr\n"
+"PO-Revision-Date: 2023-08-31 15:53+0200\n"
+"Last-Translator: A. Villemain <nepasrepondre@monadresse.fr>\n"
+"Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +30,7 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 19.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -6547,11 +6548,10 @@ msgid "&Replace"
 msgstr "&Remplacer"
 
 #: kmymoney/kmymoney.cpp:2436
-#, fuzzy, kde-format
-#| msgid "Unable to create account: %1"
+#, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
-msgstr "Impossible de charger le compte : %1"
+msgstr "Impossible de créer le répertoire de sauvegarde '%1'."
 
 #: kmymoney/kmymoney.cpp:2441
 #, kde-format
@@ -9988,11 +9988,9 @@ msgid "Account Type:"
 msgstr "Type de compte :"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:101
-#, fuzzy, kde-format
-#| msgctxt "Header for AqBanking account list"
-#| msgid "Account Name"
+#, kde-format
 msgid "Account Name:"
-msgstr "Nom du compte"
+msgstr "Nom du compte :"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #, kde-format
@@ -14467,7 +14465,7 @@ msgstr "Rapport de rapprochement du compte %1"
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:139
 #, kde-format
 msgid "All values shown in %1"
-msgstr "Toutes les valeurs montrées dans %1"
+msgstr "Valeurs en %1"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, SummaryEditWizardPage)
 #. i18n: ectx: attribute (title), widget (QWizardPage, SummaryWizardPage)
@@ -16323,7 +16321,7 @@ msgstr "Toutes les devises converties en %1"
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:159
 #, kde-format
 msgid "All values shown in %1 unless otherwise noted"
-msgstr "Toutes les valeurs affichées en %1 sauf cas contraire"
+msgstr "Toutes les valeurs sont affichées en %1 sauf cas contraire"
 
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:145
 #, kde-format
