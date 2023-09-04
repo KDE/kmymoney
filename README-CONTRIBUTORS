@@ -197,6 +197,23 @@ multiple places.
   actually fetching prices (stocks or currency.)  Should we just drop the field, or
   at least note it is ignored?  IS there any way to retreive historic prices?
 
+- Can the transaction form show up other than at the bottom of the transaction list?
+  With or without the form enabled, editing a transaction shows the form at the
+  location of the transaction in the ledger.  Shouldn't editing take place in the
+  form at the bottom?
+
+- for clarifications, can a transaction only be split on one side?  It does make
+  sense to restrict a transaction to only one account on one side, but would allowing
+  both sides be split cause any real problem, or just too much confusion?
+
+- In Investment account ledger, Activity has a blue border when selected, but
+  Security and Account have the name highlighted when the field is selected.  Why the
+  difference.
+
+- Can you really not match two non-imported transactions?  If so, then the date
+  always comes from the imported transaction.
+
+
   ----------------
 
 This is a list of potential enhancements I came up with while reviewing the handbook,
@@ -225,6 +242,10 @@ elsewhere.
 
 - should register be replaced with ledger wherever it is used?
 
+- If the transaction form is displayed, a single selected transaction is shown in the
+  form.  However, if you unselect the transaction, it remains displaye in the form.
+  If you select additional transaction, the last one selected is shown in the form.
+  There seems no danger, since the form is not editable, but it does seem odd.
 
 
 
