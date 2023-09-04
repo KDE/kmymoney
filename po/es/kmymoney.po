@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Automatically generated, 2014.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, %Y.
+# SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Eloy Cuadra <ecuadra@eloihr.net>
 # Raul Gonzalez <raulgf83@gmail.com>, 2014, 2015.
 # Sofia Priego <spriego@darksylvania.net>, 2016.
 msgid ""
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2023-08-14 17:25+0200\n"
+"PO-Revision-Date: 2023-09-03 21:57+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 23.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4793,9 +4793,9 @@ msgid ""
 "<b>%1</b> with the currency the quote is based on."
 msgstr ""
 "Introduzca la URL de la que tomar las cotizaciones de las acciones. <b>%1</"
-"b> será reemplazado con el símbolo del valor bursátil para el que se buscan "
-"cotizaciones. Para conversiones de divisas, <b>%2</b> será reemplazado con "
-"la divisa a la que convertir y <b>%1</b> con la divisa en la que se basa la "
+"b> se sustituirá por el símbolo del valor bursátil para el que se buscan "
+"cotizaciones. En conversiones de divisas, <b>%2</b> se sustituirá por la "
+"divisa a la que convertir y <b>%1</b> por la divisa en la que se basa la "
 "cotización."
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editPrice)
@@ -6481,12 +6481,13 @@ msgstr "Montando %1"
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr ""
-"Ya existe una copia de seguridad de hoy en ese dispositivo. ¿Reemplazar?"
+"Ya existe una copia de seguridad de hoy en ese dispositivo. ¿Desea "
+"sustituirla?"
 
 #: kmymoney/kmymoney.cpp:2428
 #, kde-format
 msgid "&Replace"
-msgstr "&Reemplazar"
+msgstr "&Sustituir"
 
 #: kmymoney/kmymoney.cpp:2436
 #, kde-format
@@ -14945,8 +14946,8 @@ msgid ""
 "The current budget already contains data. Continuing will replace all "
 "current values of this budget."
 msgstr ""
-"El presupuesto actual contiene datos. Continuar reemplazar todos los valores "
-"actuales de este presupuesto."
+"El presupuesto actual contiene datos. Si continúa se sustituirán todos los "
+"valores actuales de este presupuesto."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:219
 #, kde-format
