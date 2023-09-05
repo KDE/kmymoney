@@ -6,17 +6,14 @@
     <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2019-12-30</date>
-  <releaseinfo>5.0.7</releaseinfo>
+  <date>2023-09-05</date>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title>Investments</title>
 
 <sect1 id="details.investments.overview">
 <title>Investments in &kmymoney;</title>
-
-<sect2>
-<title>Investments</title>
 
 <para>
   In very general terms, an investment is any allocation of money with the
@@ -32,26 +29,13 @@
   functionality for them.  As long an investment has similar characteristics to a
   stock or mutual fund, it can be tracked.
 </para>
-</sect2>
-
-<sect2>
-<title>Base Currency</title>
-<para>
-  Each security has a Base Currency.  This is the currency in which it is traded.
-  When a price quote is entered for an investment, the currency of the value given is
-  always its base currency.  A stock on the NYSE (New York Stock Exchange) would be
-  in US dollars (USD), and one on an Australian market would be in Australian dollars
-  (AUD).  The Base currency for a security does not need to be the same as the
-  default currency for the Investment account holding that security.
-</para>
-</sect2>
 
 <sect2>
 <title>Investment Accounts</title>
 <para>
-  An Investment Account holds a collection of Securities, also referred to as
-  Equities.  An Investment account contains transactions, recording activities such
-  as buys, sells, dividends, reinvestments, yields, splits and income of those
+  A &kmymoney; Investment Account holds a collection of Securities, also referred to
+  as Equities.  An Investment account contains transactions, recording activities
+  such as buys, sells, dividends, reinvestments, yields, splits and income of those
   investments.  Each transaction in an Investment account must relate to a specific
   security.
 </para>
@@ -60,9 +44,11 @@
   It is common for an account at a Brokerage Institution to contain both securities
   and cash.  In &kmymoney;, an Investment account holds <emphasis>only</emphasis>
   securities.  It cannot contain any cash balance.  This was a design decision made
-  when Investment accounts were first included in &kmymoney;, and it might be changed
-  in a future version.  For now, any cash needed to purchase a security or gained
-  from a sell or dividend transaction requires the use of a Brokerage Account.
+  when Investment accounts were first included in &kmymoney;.  It might be changed in
+  a future version, but this is likely to be part of a significant revision in all of
+  &kmymoney;'s handling of investments.  For now, any cash needed to purchase a
+  security or gained from a sell or dividend transaction requires the use of a
+  Brokerage Account.
 </para>
 </sect2>
 
@@ -73,33 +59,77 @@
   dividend) cash, that transaction must refer to another account which can hold the
   money, most commonly a checking account.  You can specify any suitable account for
   any investment transaction which requires one.  However, &kmymoney; has the concept
-  of a <emphasis>Brokerage Account</emphasis>, also sometimes referred to as
-  a <quote>Cash Account</quote>, which is the default account for such transactions.
+  of a <emphasis>Brokerage Account</emphasis>, also sometimes referred to as a
+  <quote>Cash Account</quote>, which is the default account for such transactions.
 </para>
 
 <para>
   When you create an Investment Account, you have the option of creating an
   associated Brokerage Account with it.  The default name of the Brokerage account
   will be the name of the investment account with " (Brokerage)" appended.
+  &kmymoney; assumes this naming convention in several actions related to
+  investments.  Following the convention is not absolutely required, but without it,
+  you will often have to take extra steps to complete the entry of transactions.
 </para>
 </sect2>
+
+<sect2>
+<title>Base Currency</title>
+<para>
+  You &kmymoney; data file has a base currency, specified when the file was created.
+  In addition, an Investment account has a base currency, specified when it was
+  created.  Separately, each security has its own Base Currency.  This is the
+  currency in which it is traded.  When a price quote is entered for an investment,
+  the currency of the value given is always its base currency.  A stock on the NYSE
+  (New York Stock Exchange) would be in US dollars (USD), and one on an Australian
+  market would be in Australian dollars (AUD).  The Base currency for a security does
+  not need to be the same as the default currency for the Investment account holding
+  that security.
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="details.investments.view">
+<title>The Investments View</title>
+
+<para>
+  The Investments View has a single display area, with two tabs.  The second tab,
+  <guilabel>Securities</guilabel>, provides a high level view of all the stocks,
+  mutual funds, bonds, &etc;, you track in &kmymoney;. The first tab,
+  <guilabel>Equities</guilabel>, is similar, but is restricted to those securities
+  within a single Investment Account, as specified in the <guilabel>Select
+  Account:</guilabel> dropdown.
+</para>
+
+<sect2 id="details.investments.view.equities">
+  <title>The Equities tab</title>
+    <para>
+    </para>
+  </sect2>
+
+<sect2 id="details.investments.view.securities">
+  <title>The Securities tab</title>
+    <para>
+    </para>
+  </sect2>
 </sect1>
 
 <sect1 id="details.investments.investment">
 <title>Creating an Investment Account</title>
 
 <para>
-  The first step on the path to working with investments is to create an account
-  to hold your defined securities. Choose the <menuchoice><guimenu>Account</guimenu>
-  <guimenuitem>New account...</guimenuitem></menuchoice> menu item to begin the process.
-  Create an account as previously defined in the adding <guilabel>Account</guilabel>
+  The first step on the path to working with investments is to create an Investment
+  account to hold your defined securities.  Choose the
+  <menuchoice><guimenu>Account</guimenu>
+  <guimenuitem>New account...</guimenuitem></menuchoice> menu item to begin the
+  process.  Create an account as previously defineddescribed in the <link
+  linkend="details.accounts.create.account"><guilabel>Account</guilabel></link>
   section, making sure to choose <quote>Investment</quote> as the type of account.
 </para>
 
 <para>
-  To work with the new investment account, navigate to the
-  <guibutton>Investments</guibutton> view, and choose the account you have just
-  created from the <guilabel>Select Account</guilabel> dropdown box.
+  To work with the new investment account, open that account in the Ledgers View, as
+  previously described.
 </para>
 </sect1>
 
@@ -113,15 +143,15 @@
   investment is held from the <guilabel>Select Account</guilabel> drop-down box.
 
   <screenshot>
-  <screeninfo>Investment View, Equities Tab</screeninfo>
-  <mediaobject>
-  <imageobject>
-  <imagedata fileref="investments_summarytab.png" format="PNG" />
-  </imageobject>
-  <textobject>
-  <phrase>Investment View, Equities Tab</phrase>
-  </textobject>
-  </mediaobject>
+    <screeninfo>Investment View, Equities Tab</screeninfo>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="investments_summarytab.png" format="PNG" />
+      </imageobject>
+      <textobject>
+        <phrase>Investment View, Equities Tab</phrase>
+      </textobject>
+    </mediaobject>
   </screenshot>
 </para>
 
