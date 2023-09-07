@@ -4,7 +4,6 @@
 cmake_minimum_required(VERSION 3.12)
 set(ECM_MINIMUM_VERSION 5.42)
 
-set(KMYMONEY_STABLE_BRANCH TRUE)
 set(RELEASE_SERVICE_VERSION_MAJOR "5")
 set(RELEASE_SERVICE_VERSION_MINOR "1")
 set(RELEASE_SERVICE_VERSION_MICRO "3")
@@ -23,18 +22,6 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
   # Add variables which are similar to the build in names of cmake
   set(PROJECT_VERSION_SUFFIX "${VERSION_SUFFIX}")
   set(${PROJECT_NAME}_VERSION_SUFFIX "${VERSION_SUFFIX}")
-
-  execute_process(
-          COMMAND git rev-parse --abbrev-ref HEAD
-          WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-          OUTPUT_VARIABLE GIT_BRANCH
-          OUTPUT_STRIP_TRAILING_WHITESPACE)
-  string(TOLOWER "${GIT_BRANCH}" GIT_BRANCH)
-  message(STATUS "Working on branch ${GIT_BRANCH}")
-  if ("${GIT_BRANCH}" MATCHES "master|main")
-      set(KMYMONEY_STABLE_BRANCH FALSE)
-      message(STATUS "Detected an unstable ${GIT_BRANCH} branch")
-  endif()
 elseif(DEFINED VERSION_SUFFIX)
   string(REGEX REPLACE "-*(.+)" "\\1" DASHFREE_SUFFIX "${VERSION_SUFFIX}")
   set(PROJECT_VERSION_SUFFIX "-${DASHFREE_SUFFIX}")
@@ -345,11 +332,7 @@ add_feature_info("Fetch translations" FETCH_TRANSLATIONS "Downloads KMyMoney tra
 
 if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/po AND FETCH_TRANSLATIONS)
     set(TRANSLATIONS ${CMAKE_CURRENT_BINARY_DIR}/po)
-        if (KMYMONEY_STABLE_BRANCH)
             set(tr_EXTRA_FLAGS "")
-        else()
-            set(tr_EXTRA_FLAGS "--unstable")
-        endif()
 
     get_filename_component(absolute_podir ${TRANSLATIONS} ABSOLUTE)
     string(MD5 pathmd5 ${absolute_podir})
