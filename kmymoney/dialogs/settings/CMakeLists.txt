@@ -33,15 +33,12 @@ target_link_libraries(settings PUBLIC
   KF5::KIOWidgets
   KF5::TextWidgets
   KF5::I18n
+  KF5::IconThemes
   KF5::Completion
   KF5::KCMUtils
   KF5::ItemViews
   Alkimia::alkimia
 )
-
-if (KMYMONEY_STABLE_BRANCH)
-  target_link_libraries(settings PUBLIC KF5::IconThemes)
-endif()
 
 if (ENABLE_HOLIDAYS)
   target_link_libraries(settings PUBLIC KF5::Holidays)

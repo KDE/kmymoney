@@ -94,12 +94,6 @@ include(KMyMoneyMacros)
 find_package(PkgConfig)
 
 set (OPT_KF5_COMPONENTS DocTools Holidays Contacts Akonadi IdentityManagement Activities)
-set (REQ_KF5_COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet XmlGui TextWidgets Notifications KIO)
-
-if (KMYMONEY_STABLE_BRANCH)
-  list(APPEND REQ_KF5_COMPONENTS IconThemes)
-endif()
-
 find_package(Gpgmepp)
 if (Gpgmepp_FOUND)
   set(GPG_FOUND TRUE)
@@ -119,7 +113,7 @@ find_package(Qt5 5.6 OPTIONAL_COMPONENTS
   Sql Concurrent QuickWidgets WebEngineWidgets WebKitWidgets)
 
 find_package(KF5 5.2 REQUIRED COMPONENTS
-  ${REQ_KF5_COMPONENTS})
+  Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO)
 find_package(KF5 5.2 OPTIONAL_COMPONENTS
   ${OPT_KF5_COMPONENTS})
 

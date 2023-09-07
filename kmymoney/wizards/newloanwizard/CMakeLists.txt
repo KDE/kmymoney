@@ -45,11 +45,7 @@ ki18n_wrap_ui(libnewloanwizard_a_SOURCES ${libnewloanwizard_a_UI} )
 
 add_library(newloanwizard STATIC ${libnewloanwizard_a_SOURCES})
 # TODO: clean dependencies
-target_link_libraries(newloanwizard newaccountwizard KF5::XmlGui KF5::Service KF5::I18n KF5::Completion KF5::WidgetsAddons KF5::TextWidgets Qt5::Widgets Qt5::Xml Alkimia::alkimia)
-
-if (KMYMONEY_STABLE_BRANCH)
-  target_link_libraries(newloanwizard KF5::IconThemes)
-endif()
+target_link_libraries(newloanwizard newaccountwizard KF5::XmlGui KF5::IconThemes KF5::Service KF5::I18n KF5::Completion KF5::WidgetsAddons KF5::TextWidgets Qt5::Widgets Qt5::Xml Alkimia::alkimia)
 
 # we rely on some dialogs to be generated
 add_dependencies(newloanwizard dialogs)
