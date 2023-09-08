@@ -14,10 +14,10 @@ Update of screenshots will be left for later in the process, but
 descriptions of what changes or new screenshots are needed can/should be
 placed below the existing or target location.
 
-At some point, I will add to this doc a list of which chapters have and have not been
-edited yet, and not use the list used for the 4 -> 5 changes in the What's New
-section.  However, on further thought, that should not be necessary, as this should
-not be released with 5.2 until it is fully updated for that version.
+I have removed from the handbook the list used for tracking which chapters were
+updated for the 4 -> 5 changes in the What's New section.  It is no longer useful or
+needed as this version will be released with the release of 5.2, ane really should be
+complete by then.
 
 This is in the order pulled in from index.docbook, with brief note on state of update
 
@@ -52,9 +52,10 @@ This is in the order pulled in from index.docbook, with brief note on state of u
   prelim update complete
 
 <!ENTITY details-ledgers SYSTEM "details-ledgers.docbook">
-  prelim update begun
+  prelim update complete
 
 <!ENTITY details-investments SYSTEM "details-investments.docbook">
+  prelim update begun
 
 <!ENTITY details-currencies SYSTEM "details-currencies.docbook">
 
@@ -247,5 +248,9 @@ elsewhere.
   If you select additional transaction, the last one selected is shown in the form.
   There seems no danger, since the form is not editable, but it does seem odd.
 
+- all data items specified when creating or editing an object should be displayed on
+  the main view for that object.  For example identification number for stocks is not
+  shown anywhere else.
 
+- 
 
