@@ -129,7 +129,14 @@ endif()
 
 find_package(KF5 ${KF5_MIN_VERSION} OPTIONAL_COMPONENTS DocTools Holidays Contacts Activities)
 if (DEFINED AKONADI_MIN_VERSION)
-  find_package(KF5 ${AKONADI_MIN_VERSION} OPTIONAL_COMPONENTS Akonadi IdentityManagement)
+  # Akonadi 23.04 moved to KPim5 prefix, deprecating KF5
+  set(PIMPREFIX KPim5)
+  find_package(${PIMPREFIX}Akonadi ${AKONADI_MIN_VERSION} QUIET)
+  if(NOT ${PIMPREFIX}Akonadi_FOUND)
+    set(PIMPREFIX KF5)
+    find_package(${PIMPREFIX}Akonadi ${AKONADI_MIN_VERSION} QUIET)
+  endif()
+  find_package(${PIMPREFIX}IdentityManagement ${AKONADI_MIN_VERSION} QUIET)
 endif()
 
 find_package(Qt${QT_MAJOR_VERSION}Keychain CONFIG REQUIRED)
@@ -226,7 +233,7 @@ set(QT_INSTALL_DIR ${QT_DIR} CACHE PATH
   "Qt install prefix defaults to the Qt prefix: ${QT_DIR}")
 
 cmake_dependent_option(ENABLE_ADDRESSBOOK "Enable addressbook support." ON
-                       "KF5IdentityManagement_FOUND;KF5Akonadi_FOUND;KF5Contacts_FOUND" OFF)
+                       "${PIMPREFIX}IdentityManagement_FOUND;${PIMPREFIX}Akonadi_FOUND;KF5Contacts_FOUND" OFF)
 
 add_feature_info("Address book" ENABLE_ADDRESSBOOK "Allows fetching payee information from KDE PIM system.")
 
