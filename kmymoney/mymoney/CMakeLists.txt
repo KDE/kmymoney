@@ -99,7 +99,7 @@ target_link_libraries(kmm_mymoney
 )
 
 if(ENABLE_ADDRESSBOOK)
-target_link_libraries(kmm_mymoney PUBLIC KF5::IdentityManagement KF5::AkonadiCore KF5::Contacts)
+target_link_libraries(kmm_mymoney PUBLIC ${PIMPREFIX}::IdentityManagement ${PIMPREFIX}::AkonadiCore KF5::Contacts)
 endif()
 
 set_target_properties(kmm_mymoney PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})
