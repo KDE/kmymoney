@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-27 00:47+0000\n"
+"POT-Creation-Date: 2023-09-11 00:47+0000\n"
 "PO-Revision-Date: 2023-09-02 02:57\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -160,12 +160,13 @@ msgid "(Fees) %1"
 msgstr "(费用) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1022
-#, kde-format
-msgctxt "Prepend name of payee (%1) to orignal memo (%2)"
+#, fuzzy, kde-format
+#| msgid "Additional Fees: %1"
+msgctxt "Prepend name of payee (%1) to original memo (%2)"
 msgid ""
 "Original payee: %1\n"
 "%2"
-msgstr ""
+msgstr "附加费用: %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1030
 #, kde-format
