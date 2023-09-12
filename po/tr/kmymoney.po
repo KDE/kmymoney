@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-11 00:47+0000\n"
-"PO-Revision-Date: 2023-08-31 19:54+0300\n"
+"PO-Revision-Date: 2023-09-11 14:12+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -173,11 +173,7 @@ msgid "(Fees) %1"
 msgstr "(Ücretler) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1022
-#, fuzzy, kde-format
-#| msgctxt "Prepend name of payee (%1) to orignal memo (%2)"
-#| msgid ""
-#| "Original payee: %1\n"
-#| "%2"
+#, kde-format
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
 msgid ""
 "Original payee: %1\n"
@@ -19162,7 +19158,7 @@ msgstr ""
 #: kmymoney/views/kcategoriesview.cpp:331
 #, kde-format
 msgid "<qt>Do you really want to delete category <b>%1</b>?</qt>"
-msgstr "<qt><b>%1</b> kategorisini silmeyi gerçekten istiyor musunuz?<q/t>"
+msgstr "<qt><b>%1</b> kategorisini silmeyi gerçekten istiyor musunuz?</qt>"
 
 #: kmymoney/views/kcategoriesview.cpp:332
 #: kmymoney/views/kcategoriesview.cpp:392
@@ -19206,7 +19202,7 @@ msgid ""
 msgstr ""
 "<p><b>%1</b> kategorisinin bazı alt kategorileri silinemiyor; çünkü hâlâ "
 "kullanılıyorlar. <b>%2</b> kategorisinin alt kategorileri yapılacaklar. "
-"Sürdürülsün mü?< /p>"
+"Sürdürülsün mü?</p>"
 
 #: kmymoney/views/kcategoriesview.cpp:414
 #, kde-format

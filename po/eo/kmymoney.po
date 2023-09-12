@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-11 00:47+0000\n"
-"PO-Revision-Date: 2023-09-04 20:29+0100\n"
+"PO-Revision-Date: 2023-09-11 06:47+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -172,11 +172,7 @@ msgid "(Fees) %1"
 msgstr "(Kotizoj) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1022
-#, fuzzy, kde-format
-#| msgctxt "Prepend name of payee (%1) to orignal memo (%2)"
-#| msgid ""
-#| "Original payee: %1\n"
-#| "%2"
+#, kde-format
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
 msgid ""
 "Original payee: %1\n"
