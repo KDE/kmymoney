@@ -1836,7 +1836,7 @@ msgstr "Nom"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the name of the currency here (e.g. Euro)"
-msgstr "Introduïu ací el nom de la divisa (p. ex. Euro)"
+msgstr "Introduïu ací el nom de la divisa (p. ex., Euro)"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leIsoCode)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:97
@@ -1847,16 +1847,16 @@ msgid ""
 "for the Euro). This cannot be changed once the currency is created.</p></"
 "body></html>"
 msgstr ""
-"<html><head/><body><p>Introduïu ací el codi ISO4217 de la divisa (p. ex. EUR "
-"per a l'Euro). Açò no es podrà canviar una vegada s'haja creat la divisa.</"
-"p></body></html>"
+"<html><head/><body><p>Introduïu ací el codi ISO4217 de la divisa (p. ex., "
+"EUR per a l'Euro). Açò no es podrà canviar una vegada s'haja creat la divisa."
+"</p></body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leSymbol)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the monetary symbol of the currency here (e.g. € for the Euro)"
-msgstr "Introduïu ací el símbol monetari de la divisa (p. ex. € per a l'Euro)"
+msgstr "Introduïu ací el símbol monetari de la divisa (p. ex., € per a l'Euro)"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leAccountFraction)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:111
@@ -1924,13 +1924,13 @@ msgstr ""
 "fat cap arredoniment, senzillament trunca i imprimix un avís en cas d'un "
 "romanent. Altrament, és el mateix que Truncament.</p><p><span style=\" font-"
 "weight:600;\">Terra</span></p><p>Arredonix al valor enter més gran que no "
-"siga més gran que el valor. P. ex. 0,5 -&gt; 0,0 i -0,5 -&gt; -1,0</"
+"siga més gran que el valor. P. ex., 0,5 -&gt; 0,0 i -0,5 -&gt; -1,0</"
 "p><p><span style=\" font-weight:600;\">Sostre</span></p><p>Arredonix al "
-"valor enter més xicotet que no siga menor que el valor. P. ex. 0,5 -&gt; 1,0 "
-"i -0,5 -&gt; -0,0</p><p><span style=\" font-weight:600;\">Trunca</span></"
+"valor enter més xicotet que no siga menor que el valor. P. ex., 0,5 -&gt; "
+"1,0 i -0,5 -&gt; -0,0</p><p><span style=\" font-weight:600;\">Trunca</span></"
 "p><p>No arredonix, senzillament trunca qualsevol fracció</p><p><span style="
 "\" font-weight:600;\">Promociona</span></p><p>Utilitza Sostre per a valors "
-"positius i terra pels negatius. P. ex. 0,5 -&gt; 1,0 i -0,5 -&gt; -1,0</"
+"positius i terra pels negatius. P. ex., 0,5 -&gt; 1,0 i -0,5 -&gt; -1,0</"
 "p><p><span style=\" font-weight:600;\">Meitat avall</span></p><p>Arredonix "
 "cap amunt amb les restriccions següents: 0,1 .. 0,5 -&gt; 0,0 i 0,6 .. 0,9 -"
 "&gt; 1,0</p><p><span style=\" font-weight:600;\">Meitat amunt</span></"
@@ -1938,7 +1938,7 @@ msgstr ""
 "i 0,5 .. 0,9 -&gt; 1,0</p><p><span style=\" font-weight:600;\">Arredonit</"
 "span></p><p>Utilitza Meitat avall per 0,1 .. 0,4 i Meitat amunt per 0,6 .. "
 "0,9. Utilitza Meitat amunt per 0,5 en cas que el numerador resultant siga "
-"senar, Meitat avall en cas que el numerador resultant siga parell. P. ex. "
+"senar, Meitat avall en cas que el numerador resultant siga parell. P. ex., "
 "0,5 -&gt; 0,0 i 1,5 -&gt; 2,0</p></body></html>"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
@@ -4434,7 +4434,7 @@ msgid ""
 "sensitive data (e.g. passwords in clear-text etc)."
 msgstr ""
 "En seleccionar el camí cap al fitxer de registre cal tindre en compte que "
-"els fitxers de registre poden contindre dades confidencials (p. ex. "
+"els fitxers de registre poden contindre dades confidencials (p. ex., "
 "contrasenyes en text clar, etc.)."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_logImportedStatements)
@@ -5115,7 +5115,7 @@ msgid ""
 "Mark this option, if you always want to match names e.g. for payees from the "
 "start. If unset, any substring is matched."
 msgstr ""
-"Marqueu esta opció si voleu que sempre coincidisquen els noms (p. ex. "
+"Marqueu esta opció si voleu que sempre coincidisquen els noms (p. ex., "
 "beneficiaris) des de l'inici. Si no s'activa, coincidirà qualsevol subcadena."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_stringMatchFromStart)
@@ -13204,7 +13204,7 @@ msgid ""
 "because your institution provides them inverted.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Activeu-la si cal invertir el signe dels imports de "
-"les operacions importades, p. ex. si cal invertir els càrrecs i els "
+"les operacions importades, p. ex., si cal invertir els càrrecs i els "
 "pagaments perquè la institució els proporciona invertits.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
@@ -13680,7 +13680,7 @@ msgstr ""
 "aleshores es pot emprar un apòstrof o una barra inclinada per a delimitar "
 "l'any de la data a certs segles. Açò permet distingir el 1905 del 2005. "
 "Especifiqueu ací quin interval d'anys tindrà l'any delimitat per un apòstrof "
-"(p. ex. en Quicken sol ser el període 1900-1949)."
+"(p. ex., en Quicken sol ser el període 1900-1949)."
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel4)
 #: kmymoney/plugins/qif/config/mymoneyqifprofileeditor.ui:326
@@ -18269,12 +18269,12 @@ msgstr[0] ""
 "Heu configurat KMyMoney per a utilitzar GPG per a protegir les vostres dades "
 "i també encriptar-les amb la clau de recuperació de KMyMoney. Esta clau està "
 "a punt de caducar en %1 dia. Actualitzeu la clau des de l'anell de claus "
-"emprant el frontal de GPG (p. ex. el KGPG)."
+"emprant el frontal de GPG (p. ex., KGpg)."
 msgstr[1] ""
 "Heu configurat KMyMoney per a utilitzar GPG per a protegir les vostres dades "
 "i també encriptar-les amb la clau de recuperació de KMyMoney. Esta clau està "
 "a punt de caducar en %1 dies. Actualitzeu la clau des de l'anell de claus "
-"emprant el frontal de GPG (p. ex. el KGPG)."
+"emprant el frontal de GPG (p. ex., KGpg)."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:576
 #, kde-format
@@ -19368,7 +19368,7 @@ msgid ""
 msgstr ""
 "<p>Seleccioneu què voleu fer: descartar els canvis, guardar els canvis o "
 "continuar editant l'operació.</p><p>També podeu establir una opció per a "
-"guardar automàticament l'operació en seleccionar, p. ex. una altra operació."
+"guardar automàticament l'operació en seleccionar, p. ex., una altra operació."
 "</p>"
 
 #: kmymoney/views/kgloballedgerview.cpp:1351
@@ -22390,7 +22390,7 @@ msgid ""
 msgstr ""
 "<p><b>Compte corrent</b>\n"
 "Utilitzeu el tipus de compte corrent per a gestionar les activitats del "
-"vostre compte corrent, p. ex. pagaments, xecs i compres de targeta de dèbit."
+"vostre compte corrent, p. ex., pagaments, xecs i compres de targeta de dèbit."
 "</p>\n"
 "\n"
 "<p><b>Estalvis</b>\n"
@@ -22408,7 +22408,7 @@ msgstr ""
 "\n"
 "<p><b>Préstec</b>\n"
 "Utilitzeu el tipus de compte de préstec per a gestionar els préstecs a "
-"amortitzar (p. ex. hipoteques, préstec del cotxe, diners que heu deixat, "
+"amortitzar (p. ex., hipoteques, préstec del cotxe, diners que heu deixat, "
 "préstecs entre particulars, etc.)</p>\n"
 "\n"
 "<p><b>Inversió</b>\n"
@@ -22416,7 +22416,7 @@ msgstr ""
 "d'inversió i altres inversions.</p>\n"
 "\n"
 "<p><b>Actiu</b>\n"
-"Utilitzeu el tipus de compte d'actiu per a gestionar els actius (p. ex. la "
+"Utilitzeu el tipus de compte d'actiu per a gestionar els actius (p. ex., la "
 "vostra casa, cotxe o col·lecció d'art).</p>\n"
 "\n"
 "<p><b>Passiu</b>\n"
@@ -22750,7 +22750,7 @@ msgstr ""
 "S'han efectuat els pagaments per a este préstec i si s'han introduït en "
 "KMyMoney o no?\n"
 "\n"
-"Nota: Els pagaments efectuats per a obtindre el préstec (p. ex. despeses "
+"Nota: Els pagaments efectuats per a obtindre el préstec (p. ex., despeses "
 "d'obertura) no es consideren com a pagaments en este context."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_anyPayments)
@@ -23609,7 +23609,7 @@ msgstr "Símbol de cotització"
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:61
 #, kde-format
 msgid "Enter the ticker symbol (e.g. RHAT)."
-msgstr "Introduïu el símbol borsari (p. ex. RHAT)."
+msgstr "Introduïu el símbol borsari (p. ex., RHAT)."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.ui:68
@@ -24570,7 +24570,7 @@ msgid ""
 msgstr ""
 "\n"
 "Us donem la benvinguda a l'assistent per a un compte de préstec nou, el qual "
-"vos guiarà a través de la creació d'un préstec nou, p. ex. per a la vostra "
+"vos guiarà a través de la creació d'un préstec nou, p. ex., per a la vostra "
 "casa, el cotxe o qualsevol altre préstec del qual pagueu o rebeu "
 "interessos.\n"
 "\n"
@@ -24680,7 +24680,7 @@ msgid ""
 "Note: Payments made to obtain the loan (e.g. Dissagio) are not considered as "
 "payments in this context."
 msgstr ""
-"Nota: Els pagaments efectuats per a obtindre el préstec (p. ex. despeses "
+"Nota: Els pagaments efectuats per a obtindre el préstec (p. ex., despeses "
 "d'obertura) no es consideren com a pagaments en este context."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, RecordPaymentWizardPage)
