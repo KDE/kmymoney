@@ -18174,12 +18174,12 @@ msgstr[0] ""
 "Heu configurat KMyMoney per a utilitzar GPG per a protegir les vostres dades "
 "i també encriptar-les amb la clau de recuperació de KMyMoney. Esta clau està "
 "a punt de caducar en %1 dia. Actualitzeu la clau des de l'anell de claus "
-"emprant el frontal de GPG (p. ex., el KGPG)."
+"emprant el frontal de GPG (p. ex., KGpg)."
 msgstr[1] ""
 "Heu configurat KMyMoney per a utilitzar GPG per a protegir les vostres dades "
 "i també encriptar-les amb la clau de recuperació de KMyMoney. Esta clau està "
 "a punt de caducar en %1 dies. Actualitzeu la clau des de l'anell de claus "
-"emprant el frontal de GPG (p. ex., el KGPG)."
+"emprant el frontal de GPG (p. ex., KGpg)."
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:569
 #, kde-format
