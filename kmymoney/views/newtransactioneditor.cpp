@@ -1240,7 +1240,11 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
         // block the signals sent out from the model here so that
         // connected widgets don't overwrite the values we just loaded
         // because they are not yet set (d->ui->creditDebitEdit)
-        QSignalBlocker blocker(d->splitModel);
+        QSignalBlocker splitModelSignalBlocker(d->splitModel);
+
+        // block the signals sent out from the payee edit widget so that
+        // the autofill logic is not trigger when loading the schdule
+        QSignalBlocker autoFillSignalBlocker(d->ui->payeeEdit);
 
         for (const auto& split : d->m_transaction.splits()) {
             if (split.id() == d->m_split.id()) {
