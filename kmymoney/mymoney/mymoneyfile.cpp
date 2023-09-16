@@ -2628,7 +2628,7 @@ QStringList MyMoneyFile::consistencyCheck()
 
         const auto splits = t.splits();
         if (!t.splitSum().isZero()) {
-            rc << i18n("  * Sum of splits in transaction '%1' posted on %2 is not zero.", t.id(), t.postDate().toString(Qt::ISODate));
+            rc << i18n("  * Sum of splits in transaction '%1' posted on %2 is not zero.", t.id(), MyMoneyUtils::formatDate(t.postDate()));
             for (const auto& split : splits) {
                 const auto accIdx = d->accountsModel.indexById(split.accountId());
                 const auto name = accIdx.data(eMyMoney::Model::AccountFullHierarchyNameRole).toString();
@@ -2676,7 +2676,9 @@ QStringList MyMoneyFile::consistencyCheck()
                 } else {
                     if (acc.openingDate() > t.postDate()) {
                         rc << i18n("  * Transaction '%1' post date '%2' is older than opening date '%4' of account '%3'.",
-                                   t.id(), t.postDate().toString(Qt::ISODate), this->accountToCategory(acc.id()), acc.openingDate().toString(Qt::ISODate));
+                                   t.id(),
+                                   MyMoneyUtils::formatDate(t.postDate()),
+                                   MyMoneyUtils::formatDate(acc.openingDate()));
 
                         rc << i18n("    Account opening date updated.");
                         MyMoneyAccount newAcc = acc;
@@ -2969,16 +2971,16 @@ QStringList MyMoneyFile::consistencyCheck()
                                 "  * The account '%1' in currency '%2' has no price set for the date of its first usage on '%3'.",
                                 (*accForeignList_it).name(),
                                 secError.name(),
-                                firstTransaction.postDate().toString(Qt::ISODate));
+                                MyMoneyUtils::formatDate(firstTransaction.postDate()));
                     rc << i18nc("@info consistency check",
                                 "    Please enter a price for the currency on or before '%1'.",
-                                firstTransaction.postDate().toString(Qt::ISODate));
+                                MyMoneyUtils::formatDate(firstTransaction.postDate()));
                     ++unfixedCount;
                 } else {
                     rc << i18nc("@info consistency check",
                                 "  * The security '%1' has no price set for the first use on '%2'.",
                                 (*accForeignList_it).name(),
-                                firstTransaction.postDate().toString(Qt::ISODate));
+                                MyMoneyUtils::formatDate(firstTransaction.postDate()));
                     const auto split = firstTransaction.splitByAccount((*accForeignList_it).id());
                     if (((split.action() == QLatin1String("Buy")) || (split.action() == QLatin1String("Sell"))) && (!split.shares().isZero())) {
                         MyMoneyPrice pr(pricePair.first,
