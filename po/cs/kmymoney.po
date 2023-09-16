@@ -177,18 +177,12 @@ msgid "(Fees) %1"
 msgstr "(Poplatky) %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1022
-#, fuzzy, kde-format
-#| msgctxt "Prepend name of payee (%1) to orignal memo (%2)"
-#| msgid ""
-#| "Original payee: %1\n"
-#| "%2"
+#, kde-format
 msgctxt "Prepend name of payee (%1) to original memo (%2)"
 msgid ""
 "Original payee: %1\n"
 "%2"
 msgstr ""
-"Původní plátce: %1\n"
-"%2"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1030
 #, kde-format
