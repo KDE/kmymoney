@@ -2319,7 +2319,7 @@ QStringList MyMoneyFile::consistencyCheck()
     QStringList accountRebuild;
 
     QMap<QString, bool> interestAccounts;
-    QMap<QString, QDate> firstUseMap;
+    QMap<QString, MyMoneyTransaction> firstTransactionInAccount;
 
     MyMoneyAccount parent;
     MyMoneyAccount child;
@@ -2710,13 +2710,9 @@ QStringList MyMoneyFile::consistencyCheck()
                 }
 
                 // keep a trace of the first usage of accounts
-                auto accountUse = firstUseMap.find(s.accountId());
-                if (accountUse == firstUseMap.end()) {
-                    firstUseMap.insert(s.accountId(), t.postDate());
-                } else {
-                    if (acc.openingDate() > *accountUse) {
-                        *accountUse = acc.openingDate();
-                    }
+                // by remembering the first transaction
+                if (!firstTransactionInAccount.contains(s.accountId())) {
+                    firstTransactionInAccount.insert(s.accountId(), t);
                 }
 
             } catch (const MyMoneyException &) {
@@ -2895,11 +2891,11 @@ QStringList MyMoneyFile::consistencyCheck()
         ++problemCount;
     }
 
-    //look for accounts which have currencies other than the base currency but no price on the opening date
-    //all accounts using base currency are excluded, since that's the base used for foreign currency calculation
-    //thus it is considered as always present
-    //accounts that represent Income/Expense categories are also excluded as price is irrelevant for their
-    //fake opening date since a forex rate is required for all multi-currency transactions
+    // look for accounts which have currencies other than the base currency but no price on the date of first use
+    // all accounts using base currency are excluded, since that's the base used for foreign currency calculation
+    // thus it is considered as always present
+    // accounts that represent Income/Expense categories are also excluded as price is irrelevant for their
+    // fake opening date since a forex rate is required for all multi-currency transactions
 
     //get all currencies in use
     QStringList currencyList;
@@ -2929,18 +2925,18 @@ QStringList MyMoneyFile::consistencyCheck()
 
         //only check the price if the currency is in use
         if (currencyList.contains(firstPrice.from()) || currencyList.contains(firstPrice.to())) {
-            //check the security in the from field
-            //if it is there, check if it is older
+            // check the security in the from field
+            // if it is there, use it since it is the first one
             QPair<QString, QString> pricePair = qMakePair(firstPrice.from(), firstPrice.to());
             securityPriceDate[pricePair] = firstPrice.date();
         }
     }
 
-    //compare the dates with the opening dates of the accounts using each currency
+    // compare the dates with the dates of the first use of each currency
     QList<MyMoneyAccount>::const_iterator accForeignList_it;
     bool firstInvProblem = true;
     for (accForeignList_it = accountForeignCurrency.constBegin(); accForeignList_it != accountForeignCurrency.constEnd(); ++accForeignList_it) {
-        //setup the price pair correctly
+        // setup the price pair correctly
         QPair<QString, QString> pricePair;
         //setup the reverse, which can also be used for rate conversion
         QPair<QString, QString> reversePricePair;
@@ -2958,11 +2954,11 @@ QStringList MyMoneyFile::consistencyCheck()
             reversePricePair = qMakePair(baseCurrencyId, currency);
         }
 
-        //compare the first price with the opening date of the account
-        if (firstUseMap.contains((*accForeignList_it).id())) {
-            const auto firstUseDate = firstUseMap.value((*accForeignList_it).id());
-            if ((!securityPriceDate.contains(pricePair) || securityPriceDate.value(pricePair) > firstUseDate)
-                && (!securityPriceDate.contains(reversePricePair) || securityPriceDate.value(reversePricePair) > firstUseDate)) {
+        // check if the account is in use and if a price is available for the date of use
+        if (firstTransactionInAccount.contains((*accForeignList_it).id())) {
+            const auto firstTransaction = firstTransactionInAccount.value((*accForeignList_it).id());
+            if ((!securityPriceDate.contains(pricePair) || securityPriceDate.value(pricePair) > firstTransaction.postDate())
+                && (!securityPriceDate.contains(reversePricePair) || securityPriceDate.value(reversePricePair) > firstTransaction.postDate())) {
                 if (firstInvProblem) {
                     firstInvProblem = false;
                     rc << i18nc("@info consistency check", "* Potential problem with securities/currencies");
@@ -2973,16 +2969,31 @@ QStringList MyMoneyFile::consistencyCheck()
                                 "  * The account '%1' in currency '%2' has no price set for the date of its first usage on '%3'.",
                                 (*accForeignList_it).name(),
                                 secError.name(),
-                                firstUseDate.toString(Qt::ISODate));
-                    rc << i18nc("@info consistency check", "    Please enter a price for the currency on or before the date of first usage.");
+                                firstTransaction.postDate().toString(Qt::ISODate));
+                    rc << i18nc("@info consistency check",
+                                "    Please enter a price for the currency on or before '%1'.",
+                                firstTransaction.postDate().toString(Qt::ISODate));
+                    ++unfixedCount;
                 } else {
                     rc << i18nc("@info consistency check",
                                 "  * The security '%1' has no price set for the first use on '%2'.",
                                 (*accForeignList_it).name(),
-                                firstUseDate.toString(Qt::ISODate));
-                    rc << i18nc("@info consistency check", "    Please enter a price for the security on or before this date.");
+                                firstTransaction.postDate().toString(Qt::ISODate));
+                    const auto split = firstTransaction.splitByAccount((*accForeignList_it).id());
+                    if (((split.action() == QLatin1String("Buy")) || (split.action() == QLatin1String("Sell"))) && (!split.shares().isZero())) {
+                        MyMoneyPrice pr(pricePair.first,
+                                        pricePair.second,
+                                        firstTransaction.postDate(),
+                                        split.value() / split.shares(),
+                                        i18nc("@info price source", "User"));
+                        addPrice(pr);
+                        rc << i18nc("@info consistency check", "    Price for the security has been extracted from transaction and added to price history.");
+                        ++problemCount;
+                    } else {
+                        rc << i18nc("@info consistency check", "    Please enter a price for the security on or before this date.");
+                        ++unfixedCount;
+                    }
                 }
-                ++unfixedCount;
             }
         }
     }
