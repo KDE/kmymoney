@@ -22,7 +22,7 @@ Dependencies:
     'frameworks/kcmutils': '@stable'
     'graphics/kdiagram': '@stable'
     'frameworks/kdewebkit': '@stable'
-    'office/alkimia': '@stable'
+    'office/alkimia': '@latest'
 
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD', 'Windows' ]
