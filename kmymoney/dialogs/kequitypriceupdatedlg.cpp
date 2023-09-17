@@ -41,8 +41,11 @@
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
+#include "mymoneymoney.h"
 #include "mymoneyprice.h"
 #include "mymoneysecurity.h"
+#include "mymoneystatement.h"
+/// @todo AlkOnlineQuote remove following include when ported to Alkimia
 #include "webpricequote.h"
 #include "widgethintframe.h"
 

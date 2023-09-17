@@ -194,6 +194,8 @@ public:
 
     void transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const;
     void transactionList(QList< QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const;
+    QStringList journalEntryIds(MyMoneyTransactionFilter& filter) const;
+
     unsigned int transactionCount(const QString& accountid) const;
 
     bool setData(const QModelIndex& idx, const QVariant& value, int role = Qt::EditRole) override;
@@ -261,7 +263,7 @@ public Q_SLOTS:
      * the height of the row. While painting the next time, this
      * information will be updated through the JournalDelegate.
      * Once done, it emits a dataChanged signal for all rows
-     * and colums.
+     * and columns.
      */
     void resetRowHeightInformation();
 

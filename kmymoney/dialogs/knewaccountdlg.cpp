@@ -489,7 +489,7 @@ public:
     void storeKVP(const QString& key, QCheckBox* widget)
     {
         if (widget) {
-            m_account.setValue(key, widget->isChecked());
+            m_account.setValue(key, widget->isChecked(), false);
         }
     }
 
@@ -824,7 +824,7 @@ void KNewAccountDlg::okClicked()
 
     d->m_account.setIsInTaxReports(d->ui->m_qcheckboxTax->isChecked());
 
-    d->m_account.setValue("OpeningBalanceAccount", d->ui->m_qcheckboxOpeningBalance->isChecked());
+    d->storeKVP("OpeningBalanceAccount", d->ui->m_qcheckboxOpeningBalance);
     d->m_account.deletePair("VatAccount");
     d->m_account.deletePair("VatAmount");
     d->m_account.deletePair("VatRate");

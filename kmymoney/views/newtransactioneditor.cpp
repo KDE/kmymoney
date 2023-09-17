@@ -38,7 +38,9 @@
 #include "kcurrencycalculator.h"
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneysettings.h"
+#include "kmymoneyutils.h"
 #include "knewaccountdlg.h"
+#include "ktransactionselectdlg.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
 #include "mymoneyexception.h"
@@ -108,7 +110,8 @@ public:
     bool isDatePostOpeningDate(const QDate& date, const QString& accountId);
     bool postdateChanged(const QDate& date);
     bool costCenterChanged(int costCenterIndex);
-    bool payeeChanged(int payeeIndex);
+    void payeeChanged(int payeeIndex);
+    void autoFillTransaction(const QString& payeeId);
     void accountChanged(const QString& id);
     bool categoryChanged(const QString& id);
     bool numberChanged(const QString& newNumber);
@@ -124,6 +127,9 @@ public:
     void createCategory();
     void createPayee();
     void defaultCategoryAssignment();
+    void loadTransaction(QModelIndex idx);
+    MyMoneySplit prepareSplit(const MyMoneySplit& sp);
+    bool needClearSplitAction(const QString& action) const;
 
     NewTransactionEditor* q;
     Ui_NewTransactionEditor* ui;
@@ -416,15 +422,196 @@ bool NewTransactionEditor::Private::amountChanged()
     return rc;
 }
 
-bool NewTransactionEditor::Private::payeeChanged(int payeeIndex)
+void NewTransactionEditor::Private::payeeChanged(int payeeIndex)
 {
+    const auto payeeId = payeesModel->index(payeeIndex, 0).data(eMyMoney::Model::IdRole).toString();
+    const AutoFillMethod autoFillMethod = static_cast<AutoFillMethod>(KMyMoneySettings::autoFillTransaction());
+
+    // we have a new payee assigned to this transaction.
+    // in case there is no category assigned, no value entered and no
+    // memo available, we search for the last transaction of this payee
+    // in the selected account.
+    if (m_transaction.id().isEmpty() && (splitModel.rowCount() == 0) && !ui->creditDebitEdit->haveValue() && ui->memoEdit->toPlainText().isEmpty()
+        && !m_account.id().isEmpty() && (autoFillMethod != AutoFillMethod::NoAutoFill)) {
+        // if we got here, we have to autofill
+        autoFillTransaction(payeeId);
+    }
     // copy payee information to second split if there are only two splits
     if (splitModel.rowCount() == 1) {
         const auto idx = splitModel.index(0, 0);
-        const auto payeeId = payeesModel->index(payeeIndex, 0).data(eMyMoney::Model::IdRole).toString();
         splitModel.setData(idx, payeeId, eMyMoney::Model::SplitPayeeIdRole);
     }
-    return true;
+}
+
+void NewTransactionEditor::Private::autoFillTransaction(const QString& payeeId)
+{
+    struct uniqTransaction {
+        QString journalEntryId;
+        MyMoneyTransaction transaction;
+        int matches;
+    };
+
+    /**
+     * Sum up all splits for the given account in the transaction
+     */
+    auto shares = [&](const MyMoneyTransaction& t, const QString& accountId) {
+        MyMoneyMoney result;
+        for (const auto& split : t.splits()) {
+            if (split.accountId() == accountId) {
+                result += split.shares();
+            }
+        }
+        return result;
+    };
+
+    const auto journalModel = MyMoneyFile::instance()->journalModel();
+    MyMoneyTransactionFilter filter(m_account.id());
+    filter.addPayee(payeeId);
+    QStringList journalEntryIds(journalModel->journalEntryIds(filter));
+
+    if (!journalEntryIds.empty()) {
+        const AutoFillMethod autoFillMethod = static_cast<AutoFillMethod>(KMyMoneySettings::autoFillTransaction());
+        // ok, we found at least one previous transaction. now we clear out
+        // what we have collected so far and add those splits from
+        // the previous transaction.
+        QMap<QString, struct uniqTransaction> uniqList;
+
+        // collect the journal entries and see if we have any duplicates
+        for (const auto& journalEntryId : journalEntryIds) {
+            const auto journalEntry = journalModel->itemById(journalEntryId);
+            int cnt = 0;
+            QMap<QString, struct uniqTransaction>::iterator it_u;
+            do {
+                QString ukey = QString("%1-%2").arg(journalEntry.transaction().accountSignature()).arg(cnt);
+                it_u = uniqList.find(ukey);
+                if (it_u == uniqList.end()) {
+                    uniqList[ukey].journalEntryId = journalEntryId;
+                    uniqList[ukey].transaction = journalEntry.transaction();
+                    uniqList[ukey].matches = 1;
+
+                } else if (autoFillMethod == AutoFillMethod::AutoFillWithClosestInValue) {
+                    // we already have a transaction with this signature. we must
+                    // now check, if we should really treat it as a duplicate according
+                    // to the value comparison delta.
+                    MyMoneyMoney s1 = shares(((*it_u).transaction), m_account.id());
+                    MyMoneyMoney s2 = shares(journalEntry.transaction(), m_account.id());
+                    if (s2.abs() > s1.abs()) {
+                        MyMoneyMoney t(s1);
+                        s1 = s2;
+                        s2 = t;
+                    }
+                    MyMoneyMoney diff;
+                    if (s2.isZero()) {
+                        diff = s1.abs();
+                    } else {
+                        diff = ((s1 - s2) / s2).convert(10000);
+                    }
+                    if (diff.isPositive() && diff <= MyMoneyMoney(KMyMoneySettings::autoFillDifference(), 100)) {
+                        uniqList[ukey].journalEntryId = journalEntryId;
+                        uniqList[ukey].transaction = journalEntry.transaction();
+                        break; // end while loop
+                    }
+                } else if (autoFillMethod == AutoFillMethod::AutoFillWithMostOftenUsed) {
+                    uniqList[ukey].journalEntryId = journalEntryId;
+                    uniqList[ukey].transaction = journalEntry.transaction();
+                    (*it_u).matches++;
+                    break; // end while loop
+                }
+                ++cnt;
+            } while (it_u != uniqList.end());
+        }
+
+        QString journalEntryId;
+        if (autoFillMethod != AutoFillMethod::AutoFillWithMostOftenUsed) {
+            QPointer<KTransactionSelectDlg> dlg = new KTransactionSelectDlg();
+            dlg->setWindowTitle(i18nc("@title:window Autofill selection dialog", "Select autofill transaction"));
+
+            QMap<QString, struct uniqTransaction>::const_iterator it_u;
+            for (it_u = uniqList.constBegin(); it_u != uniqList.constEnd(); ++it_u) {
+                dlg->addTransaction((*it_u).journalEntryId);
+            }
+
+            // Sort by
+            // - ascending post date
+            // - descending reconciliation state
+            // - descending value
+            dlg->ledgerView()->setSortOrder(LedgerSortOrder("1,-9,-4"));
+            dlg->ledgerView()->selectMostRecentTransaction();
+            if (dlg->exec() == QDialog::Accepted) {
+                journalEntryId = dlg->journalEntryId();
+            }
+        } else {
+            int maxCnt = 0;
+            QMap<QString, struct uniqTransaction>::const_iterator it_u;
+            for (it_u = uniqList.constBegin(); it_u != uniqList.constEnd(); ++it_u) {
+                if ((*it_u).matches > maxCnt) {
+                    journalEntryId = (*it_u).journalEntryId;
+                    maxCnt = (*it_u).matches;
+                }
+            }
+        }
+
+        if (!journalEntryId.isEmpty()) {
+            // keep data we don't want to change by loading
+            const auto postDate = ui->dateEdit->date();
+            const auto number = ui->numberEdit->text();
+            // now load the existing transaction into the editor
+            auto index = MyMoneyFile::instance()->journalModel()->indexById(journalEntryId);
+            loadTransaction(index);
+
+            // restore data we don't want to change by loading
+            ui->dateEdit->setDate(postDate);
+
+            if (ui->numberEdit->isVisible() && !number.isEmpty()) {
+                ui->numberEdit->setText(number);
+            } else if (!m_split.number().isEmpty()) {
+                ui->numberEdit->setText(KMyMoneyUtils::nextFreeCheckNumber(m_account));
+            }
+
+            // make sure to really create a new transaction
+            m_transaction.clearId();
+            ui->statusCombo->setCurrentIndex(static_cast<int>(eMyMoney::Split::State::NotReconciled));
+            m_split = prepareSplit(m_split);
+
+            splitModel.resetAllSplitIds();
+            for (int row = 0; row < splitModel.rowCount(); ++row) {
+                const auto idx = splitModel.index(row, 0);
+                splitModel.setData(idx, QVariant::fromValue(eMyMoney::Split::State::NotReconciled), eMyMoney::Model::SplitReconcileFlagRole);
+                splitModel.setData(idx, QDate(), eMyMoney::Model::SplitReconcileDateRole);
+                splitModel.setData(idx, QString(), eMyMoney::Model::SplitBankIdRole);
+                splitModel.setData(idx, QString(), eMyMoney::Model::SplitMemoRole);
+
+                if (needClearSplitAction(idx.data(eMyMoney::Model::SplitActionRole).toString())) {
+                    splitModel.setData(idx, QString(), eMyMoney::Model::SplitActionRole);
+                }
+            }
+        }
+    }
+
+    /// @todo maybe set focus to next tab widget
+}
+
+MyMoneySplit NewTransactionEditor::Private::prepareSplit(const MyMoneySplit& sp)
+{
+    auto split(sp);
+    split.setReconcileDate(QDate());
+    split.setBankID(QString());
+    // older versions of KMyMoney used to set the action
+    // we don't need this anymore
+    if (needClearSplitAction(split.action())) {
+        split.setAction(QString());
+    }
+    split.setNumber(QString());
+    if (!KMyMoneySettings::autoFillUseMemos()) {
+        split.setMemo(QString());
+    }
+
+    return split;
+}
+
+bool NewTransactionEditor::Private::needClearSplitAction(const QString& action) const
+{
+    return (action != MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization) && action != MyMoneySplit::actionName(eMyMoney::Split::Action::Interest));
 }
 
 bool NewTransactionEditor::Private::tagsChanged(const QStringList& ids)
@@ -712,6 +899,99 @@ void NewTransactionEditor::Private::defaultCategoryAssignment()
     }
 }
 
+/**
+ * @note @a idx must be the base model index
+ */
+void NewTransactionEditor::Private::loadTransaction(QModelIndex idx)
+{
+    // we block sending out signals for the account and category combo here
+    // to avoid calling NewTransactionEditorPrivate::categoryChanged which
+    // does not work properly when loading the editor
+    QSignalBlocker accountBlocker(ui->accountCombo->lineEdit());
+    ui->accountCombo->clearEditText();
+    QSignalBlocker categoryBlocker(ui->categoryCombo->lineEdit());
+    ui->categoryCombo->clearEditText();
+
+    // find which item has this id and set is as the current item
+    const auto selectedSplitRow = idx.row();
+
+    // keep a copy of the transaction and split
+    m_transaction = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).transaction();
+    m_split = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).split();
+    const auto list = idx.model()->match(idx.model()->index(0, 0),
+                                         eMyMoney::Model::JournalTransactionIdRole,
+                                         idx.data(eMyMoney::Model::JournalTransactionIdRole),
+                                         -1, // all splits
+                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+
+    // make sure the commodity is the one of the current account
+    // in case we have exactly two splits. This is a precondition
+    // used by the transaction editor to work properly.
+    auto amountValue = m_split.value();
+    if (m_transaction.splitCount() == 2) {
+        amountValue = m_split.shares();
+        m_split.setValue(amountValue);
+    }
+
+    // preset the value to be used for the amount widget
+    auto amountShares = m_split.shares();
+
+    // block the signals sent out from the model here so that
+    // connected widgets don't overwrite the values we just loaded
+    // because they are not yet set (d->ui->creditDebitEdit)
+    QSignalBlocker blocker(splitModel);
+
+    for (const auto& splitIdx : list) {
+        if (selectedSplitRow == splitIdx.row()) {
+            ui->dateEdit->setDate(splitIdx.data(eMyMoney::Model::TransactionPostDateRole).toDate());
+
+            const auto payeeId = splitIdx.data(eMyMoney::Model::SplitPayeeIdRole).toString();
+            const QModelIndex payeeIdx = MyMoneyFile::instance()->payeesModel()->indexById(payeeId);
+            if (payeeIdx.isValid()) {
+                ui->payeeEdit->setCurrentIndex(MyMoneyFile::baseModel()->mapFromBaseSource(payeesModel, payeeIdx).row());
+            } else {
+                ui->payeeEdit->setCurrentIndex(0);
+            }
+
+            ui->memoEdit->clear();
+            ui->memoEdit->insertPlainText(splitIdx.data(eMyMoney::Model::SplitMemoRole).toString());
+            ui->memoEdit->moveCursor(QTextCursor::Start);
+            ui->memoEdit->ensureCursorVisible();
+
+            ui->numberEdit->setText(splitIdx.data(eMyMoney::Model::SplitNumberRole).toString());
+            ui->statusCombo->setCurrentIndex(splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
+            ui->tagContainer->loadTags(splitIdx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
+        } else {
+            splitModel.appendSplit(MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
+
+            if (splitIdx.data(eMyMoney::Model::TransactionSplitCountRole) == 2) {
+                // force the value of the second split to be the same as for the first
+                idx = splitModel.index(0, 0);
+                splitModel.setData(idx, QVariant::fromValue<MyMoneyMoney>(-amountValue), eMyMoney::Model::SplitValueRole);
+
+                // use the shares based on the second split
+                amountShares = -(splitIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>());
+
+                // adjust the commodity for the shares
+                const auto accountId = splitIdx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+                const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
+                const auto currencyId = accountIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString();
+                const auto currency = MyMoneyFile::instance()->currenciesModel()->itemById(currencyId);
+                ui->creditDebitEdit->setSharesCommodity(currency);
+            }
+        }
+    }
+    m_transaction.setCommodity(m_account.currencyId());
+
+    // then setup the amount widget and update the state
+    // of all other widgets
+    ui->creditDebitEdit->setValue(amountValue);
+    ui->creditDebitEdit->setShares(amountShares);
+
+    updateWidgetState();
+    m_splitHelper->updateWidget();
+}
+
 NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accountId)
     : TransactionEditorBase(parent, accountId)
     , d(new Private(this))
@@ -960,7 +1240,11 @@ void NewTransactionEditor::loadSchedule(const MyMoneySchedule& schedule)
         // block the signals sent out from the model here so that
         // connected widgets don't overwrite the values we just loaded
         // because they are not yet set (d->ui->creditDebitEdit)
-        QSignalBlocker blocker(d->splitModel);
+        QSignalBlocker splitModelSignalBlocker(d->splitModel);
+
+        // block the signals sent out from the payee edit widget so that
+        // the autofill logic is not trigger when loading the schdule
+        QSignalBlocker autoFillSignalBlocker(d->ui->payeeEdit);
 
         for (const auto& split : d->m_transaction.splits()) {
             if (split.id() == d->m_split.id()) {
@@ -1054,83 +1338,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
         // the default exchange rate is 1 so we don't need to set it here
 
     } else {
-        // find which item has this id and set is as the current item
-        const auto selectedSplitRow = idx.row();
-
-        // keep a copy of the transaction and split
-        d->m_transaction = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).transaction();
-        d->m_split = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).split();
-        const auto list = idx.model()->match(idx.model()->index(0, 0), eMyMoney::Model::JournalTransactionIdRole,
-                                             idx.data(eMyMoney::Model::JournalTransactionIdRole),
-                                             -1,                         // all splits
-                                             Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-
-        // make sure the commodity is the one of the current account
-        // in case we have exactly two splits. This is a precondition
-        // used by the transaction editor to work properly.
-        auto amountValue = d->m_split.value();
-        if (d->m_transaction.splitCount() == 2) {
-            amountValue = d->m_split.shares();
-            d->m_split.setValue(amountValue);
-        }
-
-        // preset the value to be used for the amount widget
-        auto amountShares = d->m_split.shares();
-
-        // block the signals sent out from the model here so that
-        // connected widgets don't overwrite the values we just loaded
-        // because they are not yet set (d->ui->creditDebitEdit)
-        QSignalBlocker blocker(d->splitModel);
-
-        for (const auto& splitIdx : list) {
-            if (selectedSplitRow == splitIdx.row()) {
-                d->ui->dateEdit->setDate(splitIdx.data(eMyMoney::Model::TransactionPostDateRole).toDate());
-
-                const auto payeeId = splitIdx.data(eMyMoney::Model::SplitPayeeIdRole).toString();
-                const QModelIndex payeeIdx = MyMoneyFile::instance()->payeesModel()->indexById(payeeId);
-                if (payeeIdx.isValid()) {
-                    d->ui->payeeEdit->setCurrentIndex(MyMoneyFile::baseModel()->mapFromBaseSource(d->payeesModel, payeeIdx).row());
-                } else {
-                    d->ui->payeeEdit->setCurrentIndex(0);
-                }
-
-                d->ui->memoEdit->clear();
-                d->ui->memoEdit->insertPlainText(splitIdx.data(eMyMoney::Model::SplitMemoRole).toString());
-                d->ui->memoEdit->moveCursor(QTextCursor::Start);
-                d->ui->memoEdit->ensureCursorVisible();
-
-                d->ui->numberEdit->setText(splitIdx.data(eMyMoney::Model::SplitNumberRole).toString());
-                d->ui->statusCombo->setCurrentIndex(splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
-                d->ui->tagContainer->loadTags(splitIdx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
-            } else {
-                d->splitModel.appendSplit(MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
-
-                if (splitIdx.data(eMyMoney::Model::TransactionSplitCountRole) == 2) {
-                    // force the value of the second split to be the same as for the first
-                    idx = d->splitModel.index(0, 0);
-                    d->splitModel.setData(idx, QVariant::fromValue<MyMoneyMoney>(-amountValue), eMyMoney::Model::SplitValueRole);
-
-                    // use the shares based on the second split
-                    amountShares = -(splitIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>());
-
-                    // adjust the commodity for the shares
-                    const auto accountId = splitIdx.data(eMyMoney::Model::SplitAccountIdRole).toString();
-                    const auto accountIdx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
-                    const auto currencyId = accountIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString();
-                    const auto currency = MyMoneyFile::instance()->currenciesModel()->itemById(currencyId);
-                    d->ui->creditDebitEdit->setSharesCommodity(currency);
-                }
-            }
-        }
-        d->m_transaction.setCommodity(d->m_account.currencyId());
-
-        // then setup the amount widget and update the state
-        // of all other widgets
-        d->ui->creditDebitEdit->setValue(amountValue);
-        d->ui->creditDebitEdit->setShares(amountShares);
-
-        d->updateWidgetState();
-        d->m_splitHelper->updateWidget();
+        d->loadTransaction(idx);
     }
 
     // set focus to first tab field once we return to event loop

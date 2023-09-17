@@ -18,16 +18,20 @@
 #include <KConfig>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_ksettingsonlinequotes.h"
 
+#include "csv/import/core/csvimportercore.h"
+
 #include "icons.h"
-#include "kmymoney/misc/webpricequote.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
+/// @todo AlkOnlineQuote remove following include when ported to Alkimia
+#include "webpricequote.h"
 
 #include "kmmyesno.h"
 

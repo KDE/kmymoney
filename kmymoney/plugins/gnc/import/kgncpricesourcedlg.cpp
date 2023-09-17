@@ -23,7 +23,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "webpricequote.h"
 #include "ui_kgncpricesourcedlg.h"
 
 class KGncPriceSourceDlgPrivate

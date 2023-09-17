@@ -436,6 +436,13 @@ public:
     bool payees(QStringList& list) const;
 
     /**
+     * This method returns all payees set in the filter.
+     *
+     * @return QStringList of payeeIds to match;
+     */
+    QStringList payees() const;
+
+    /**
       * This method returns whether a tag filter has been set,
       * and if so, it returns all the tags set in the filter.
       *
@@ -461,6 +468,13 @@ public:
       * @return return true if an account filter has been set
       */
     bool accounts(QStringList& list) const;
+
+    /**
+     * This method returns all accounts set in the filter.
+     *
+     * @return QStringList of payeeIds to match;
+     */
+    QStringList accounts() const;
 
     /**
       * This method returns whether a category filter has been set,

@@ -334,6 +334,9 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::SplitIsNewRole:
         return split.id().isEmpty() || split.id().endsWith(QLatin1Char('-'));
 
+    case eMyMoney::Model::SplitActionRole:
+        return split.action();
+
     default:
         break;
     }
@@ -403,6 +406,16 @@ bool SplitModel::setData(const QModelIndex& idx, const QVariant& value, int role
 
     case eMyMoney::Model::SplitTagIdRole:
         split.setTagIdList(value.toStringList());
+        Q_EMIT dataChanged(startIdx, endIdx);
+        return true;
+
+    case eMyMoney::Model::SplitBankIdRole:
+        split.setBankID(value.toString());
+        Q_EMIT dataChanged(startIdx, endIdx);
+        return true;
+
+    case eMyMoney::Model::SplitActionRole:
+        split.setAction(value.toString());
         Q_EMIT dataChanged(startIdx, endIdx);
         return true;
 
@@ -556,4 +569,16 @@ void SplitModel::checkForForeignCurrency() const
 bool SplitModel::hasMultiCurrencySplits() const
 {
     return d->showCurrencies;
+}
+
+void SplitModel::resetAllSplitIds()
+{
+    const auto startIdx = index(0, 0);
+    const auto endIdx = index(rowCount() - 1, columnCount() - 1);
+    for (int row = 0; row <= endIdx.row(); ++row) {
+        const auto idx = index(row, 0);
+        MyMoneySplit& split = static_cast<TreeItem<MyMoneySplit>*>(idx.internalPointer())->dataRef();
+        split = MyMoneySplit(newSplitId(), split);
+    }
+    Q_EMIT dataChanged(startIdx, endIdx);
 }

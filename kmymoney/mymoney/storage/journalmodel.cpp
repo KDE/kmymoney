@@ -980,6 +980,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         // we don't store schedules in this model
         return {};
 
+    case eMyMoney::Model::TransactionAccountSignatureRole:
+        return transaction.accountSignature();
+
     case eMyMoney::Model::JournalSplitMaxLinesCountRole:
         return journalEntry.linesInLedger();
 
@@ -1509,6 +1512,46 @@ void JournalModel::transactionList(QList< QPair<MyMoneyTransaction, MyMoneySplit
         }
         row += journalEntry.transaction().splitCount();
     }
+}
+
+QStringList JournalModel::journalEntryIds(MyMoneyTransactionFilter& filter) const
+{
+    int startRow = 0;
+    int endRow = rowCount() - 1;
+    const auto filterSet = filter.filterSet();
+    if (filterSet.testFlag(MyMoneyTransactionFilter::dateFilterActive)) {
+        if (filter.fromDate().isValid()) {
+            startRow = MyMoneyModelBase::lowerBound(keyForDate(filter.fromDate())).row();
+        }
+        if (filter.toDate().isValid()) {
+            endRow = MyMoneyModelBase::upperBound(keyForDate(filter.toDate())).row();
+        }
+    }
+
+    if (filterSet & ~(MyMoneyTransactionFilter::accountFilterActive | MyMoneyTransactionFilter::payeeFilterActive)) {
+        qDebug() << "Filter not implemented"
+                 << static_cast<int>(filterSet & ~(MyMoneyTransactionFilter::accountFilterActive | MyMoneyTransactionFilter::payeeFilterActive));
+    }
+    const auto needAccountMatch = filterSet.testFlag(MyMoneyTransactionFilter::accountFilterActive);
+    const auto needPayeeMatch = filterSet.testFlag(MyMoneyTransactionFilter::payeeFilterActive);
+    const auto payeeIds = filter.payees();
+    const auto accountIds = filter.accounts();
+
+    QStringList journalEntryIds;
+    for (int row = startRow; row <= endRow; ++row) {
+        bool collect = true;
+        const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
+        if (needAccountMatch) {
+            collect = accountIds.contains(journalEntry.split().accountId());
+        }
+        if (collect && needPayeeMatch) {
+            collect = payeeIds.contains(journalEntry.split().payeeId());
+        }
+        if (collect) {
+            journalEntryIds.append(journalEntry.id());
+        }
+    }
+    return journalEntryIds;
 }
 
 unsigned int JournalModel::transactionCount(const QString& accountid) const

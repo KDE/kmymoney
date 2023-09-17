@@ -850,7 +850,7 @@ bool KMyMoneyUtils::tabFocusHelper(QWidget* topLevelWidget, bool next)
 
     auto selectWidget = [&](QWidget* w) {
         if (w) {
-            // if we point to a contructed widget (e.g. ButtonBox) we
+            // if we point to a constructed widget (e.g. ButtonBox) we
             // need to select the last widget if going backward
             if (reason == Qt::BacktabFocusReason && !w->findChildren<QWidget*>().isEmpty()) {
                 auto parent = w;

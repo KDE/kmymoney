@@ -2090,8 +2090,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     // *************
     //
         {
+        // clang-format off
             const QVector<QPair<Action, QKeySequence>> actionShortcuts{
-                // clang-format off
             {qMakePair(Action::EditFindTransaction,         Qt::CTRL | Qt::SHIFT | Qt::Key_F)},
             {qMakePair(Action::ViewTransactionDetail,       Qt::CTRL | Qt::Key_T)},
             {qMakePair(Action::ViewHideReconciled,          Qt::CTRL | Qt::Key_R)},
@@ -2119,11 +2119,12 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
 #endif
             {qMakePair(Action::AssignTransactionsNumber,    Qt::CTRL | Qt::SHIFT | Qt::Key_N)},
             {qMakePair(Action::ShowFilterWidget,            Qt::CTRL | Qt::Key_F)},
-                // clang-format on
             };
+        // clang-format on
 
-        for(const auto& it : actionShortcuts)
-            lutActions[it.first]->setShortcut(it.second);
+        for (const auto& it : actionShortcuts) {
+            actionCollection()->setDefaultShortcut(lutActions[it.first], it.second);
+        }
     }
 
     // *************
@@ -3196,6 +3197,10 @@ void KMyMoneyApp::slotCloseAccount()
         account.setClosed(true);
         file->modifyAccount(account);
         ft.commit();
+
+        // inform views about the closing of the account
+        d->executeAction(eMenu::Action::CloseAccount);
+
         if (!KMyMoneySettings::showAllAccounts()) {
             KMessageBox::information(
                 this,

@@ -21,6 +21,7 @@
 
 #include "mymoneymoney.h"
 #include "mymoneysecurity.h"
+/// @todo AlkOnlineQuote remove following include when ported to Alkimia
 #include "webpricequote.h"
 
 KOnlineUpdateWizardPage::KOnlineUpdateWizardPage(QWidget *parent) :

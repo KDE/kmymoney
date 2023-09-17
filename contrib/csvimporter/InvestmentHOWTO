@@ -3,7 +3,7 @@ SampleIncFund.csv
 NOTE
 	Please bear in mind that this import file was made to be complicated in order to 
 		demonstrate the different possibilities the plugin can handle.  In particular, 
-		it icludes unclear investment activity types, and also two brokerage transactions.
+		it includes unclear investment activity types, and also two brokerage transactions.
 		Generally, most files can be imported with far	less interaction,
 
 a)	Click Investment tab.

@@ -583,8 +583,8 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                                                       "https://fx-rate.net/([^/]+/[^/]+)",
                                                       WebPriceQuoteSource::identifyBy::Symbol,
                                                       "Today\\s+=\\s+([^<]+)",
-                                                      "updated\\s\\d+:\\d+:\\d+\\(\\w+\\)\\s+(\\d{1,2}/\\d{2}/\\d{4})",
-                                                      "%d/%m/%y",
+                                                      "name=\"date_input\" class=\"ip_ondate\" value=\"(\\d{4}-\\d{2}-\\d{2})",
+                                                      "%y/%m/%d",
                                                       true // skip HTML stripping
     );
 

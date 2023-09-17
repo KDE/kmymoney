@@ -102,6 +102,11 @@ public:
         return offset;
     }
 
+    QString sanitizedString(const char* str)
+    {
+        auto text = QString::fromUtf8(str);
+        return text.replace(QChar(0), QString());
+    }
 };
 
 
@@ -333,22 +338,23 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
 //   kDebug(2) << Q_FUNC_INFO;
 
     OFXImporter* pofx = reinterpret_cast<OFXImporter*>(pv);
+    OFXImporter::Private* d = pofx->d;
     MyMoneyStatement& s = pofx->back();
 
     MyMoneyStatement::Transaction t;
 
     if (data.date_posted_valid) {
         QDateTime dt;
-        dt.setSecsSinceEpoch(data.date_posted - pofx->d->m_timestampOffset * 60);
+        dt.setSecsSinceEpoch(data.date_posted - d->m_timestampOffset * 60);
         t.m_datePosted = dt.date();
     } else if (data.date_initiated_valid) {
         QDateTime dt;
-        dt.setSecsSinceEpoch(data.date_initiated - pofx->d->m_timestampOffset * 60);
+        dt.setSecsSinceEpoch(data.date_initiated - d->m_timestampOffset * 60);
         t.m_datePosted = dt.date();
     }
     if (t.m_datePosted.isValid()) {
         // verify the transaction date is one we want
-        if (t.m_datePosted < pofx->d->m_updateStartDate) {
+        if (t.m_datePosted < d->m_updateStartDate) {
             //kDebug(0) << "discarding transaction dated" << qPrintable(t.m_datePosted.toString(Qt::ISODate));
             return 0;
         }
@@ -444,7 +450,7 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
     if (data.amount_valid) {
         t.m_amount = MyMoneyMoney(data.amount, 1000);
 
-        if (pofx->d->m_fixBuySellSignage) {
+        if (d->m_fixBuySellSignage) {
             if (t.m_eAction == eMyMoney::Transaction::Action::Buy
                     || t.m_eAction == eMyMoney::Transaction::Action::ReinvestDividend) {
                 t.m_amount = -t.m_amount.abs();
@@ -456,20 +462,20 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
             }
         }
 
-        if (pofx->d->m_invertAmount) {
+        if (d->m_invertAmount) {
             t.m_amount = -t.m_amount;
         }
     }
 
     if (data.check_number_valid) {
-        t.m_strNumber = QString::fromUtf8(data.check_number);
+        t.m_strNumber = d->sanitizedString(data.check_number);
     }
 
     unsigned long h;
     QString tmpString;
     // in case the unique transaction id source is yet unknown we
     // use the global preset
-    UniqueTransactionIdSource idSource = pofx->d->m_uniqueIdSource;
+    UniqueTransactionIdSource idSource = d->m_uniqueIdSource;
     if (idSource == UniqueIdUnknown) {
         idSource = defaultIdSource();
     }
@@ -477,19 +483,19 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
     default:
     case UniqueIdOfx:
         if (data.fi_id_valid) {
-            t.m_strBankID = QStringLiteral("ID ") + QString::fromUtf8(data.fi_id);
+            t.m_strBankID = QStringLiteral("ID ") + d->sanitizedString(data.fi_id);
         } else if (data.reference_number_valid) {
-            t.m_strBankID = QStringLiteral("REF ") + QString::fromUtf8(data.reference_number);
+            t.m_strBankID = QStringLiteral("REF ") + d->sanitizedString(data.reference_number);
         }
         break;
 
     case UniqueIdKMyMoney:
         if (data.payee_id_valid) {
-            tmpString = QString::fromUtf8(data.payee_id);
+            tmpString = d->sanitizedString(data.payee_id);
         } else if (data.name_valid) {
-            tmpString = QString::fromUtf8(data.name);
+            tmpString = d->sanitizedString(data.name);
         } else if (data.memo_valid) {
-            tmpString = QString::fromUtf8(data.memo);
+            tmpString = d->sanitizedString(data.memo);
         }
         h = MyMoneyTransaction::hash(tmpString.trimmed());
         if (data.memo_valid)
@@ -503,8 +509,8 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
         QString hash;
         for (;;) {
             hash = QString("%1-%2").arg(hashBase).arg(idx);
-            if (!pofx->d->m_hashes.contains(hash)) {
-                pofx->d->m_hashes += hash;
+            if (!d->m_hashes.contains(hash)) {
+                d->m_hashes += hash;
                 break;
             }
             ++idx;
@@ -516,33 +522,33 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
     // Decide whether to use NAME, PAYEEID or MEMO to construct the payee
     bool validity[3] = {false, false, false};
     QStringList values;
-    switch (pofx->d->m_preferName) {
+    switch (d->m_preferName) {
     case OFXImporter::Private::PreferId:  // PAYEEID
     default:
         validity[0] = data.payee_id_valid;
         validity[1] = data.name_valid;
         validity[2] = data.memo_valid;
-        values += QString::fromUtf8(data.payee_id);
-        values += QString::fromUtf8(data.name);
-        values += QString::fromUtf8(data.memo);
+        values += d->sanitizedString(data.payee_id);
+        values += d->sanitizedString(data.name);
+        values += d->sanitizedString(data.memo);
         break;
 
     case OFXImporter::Private::PreferName:  // NAME
         validity[0] = data.name_valid;
         validity[1] = data.payee_id_valid;
         validity[2] = data.memo_valid;
-        values += QString::fromUtf8(data.name);
-        values += QString::fromUtf8(data.payee_id);
-        values += QString::fromUtf8(data.memo);
+        values += d->sanitizedString(data.name);
+        values += d->sanitizedString(data.payee_id);
+        values += d->sanitizedString(data.memo);
         break;
 
     case OFXImporter::Private::PreferMemo:  // MEMO
         validity[0] = data.memo_valid;
         validity[1] = data.payee_id_valid;
         validity[2] = data.name_valid;
-        values += QString::fromUtf8(data.memo);
-        values += QString::fromUtf8(data.payee_id);
-        values += QString::fromUtf8(data.name);
+        values += d->sanitizedString(data.memo);
+        values += d->sanitizedString(data.payee_id);
+        values += d->sanitizedString(data.name);
         break;
     }
 
@@ -552,8 +558,8 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
         validity[0] = data.payee_id_valid;
         validity[1] = data.name_valid;
         validity[2] = false;
-        values += QString::fromUtf8(data.payee_id);
-        values += QString::fromUtf8(data.name);
+        values += d->sanitizedString(data.payee_id);
+        values += d->sanitizedString(data.name);
     }
 
     for (int idx = 0; idx < 3; ++idx) {
@@ -564,9 +570,8 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
     }
 
     // extract memo field if we haven't used it as payee
-    if ((data.memo_valid)
-            && (pofx->d->m_preferName != OFXImporter::Private::PreferMemo)) {
-        t.m_strMemo = QString::fromUtf8(data.memo);
+    if ((data.memo_valid) && (d->m_preferName != OFXImporter::Private::PreferMemo)) {
+        t.m_strMemo = d->sanitizedString(data.memo);
     }
 
     // If the payee or memo fields are blank, set them to
@@ -584,14 +589,14 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
         struct OfxSecurityData* secdata = data.security_data_ptr;
 
         if (secdata->unique_id_valid) {
-            t.m_strSecurityId = QString::fromUtf8(secdata->unique_id);
+            t.m_strSecurityId = d->sanitizedString(secdata->unique_id);
         }
         if (secdata->ticker_valid) {
-            t.m_strSymbol = QString::fromUtf8(secdata->ticker);
+            t.m_strSymbol = d->sanitizedString(secdata->ticker);
         }
 
         if (secdata->secname_valid) {
-            t.m_strSecurity = QString::fromUtf8(secdata->secname);
+            t.m_strSecurity = d->sanitizedString(secdata->secname);
         }
 
         // scan over securities and check if security is there
@@ -654,17 +659,19 @@ int OFXImporter::ofxStatementCallback(struct OfxStatementData data, void* pv)
 //   kDebug(2) << Q_FUNC_INFO;
 
     OFXImporter* pofx = reinterpret_cast<OFXImporter*>(pv);
+    OFXImporter::Private* d = pofx->d;
+
     MyMoneyStatement& s = pofx->back();
 
     pofx->setValid();
 
     if (data.currency_valid) {
-        s.m_strCurrency = QString::fromUtf8(data.currency);
+        s.m_strCurrency = d->sanitizedString(data.currency);
     }
     if (data.account_id_valid) {
         // only use the account_id if it is filled with non-blank data
         // see https://bugs.kde.org/show_bug.cgi?id=428156
-        const auto account_id = QString::fromUtf8(data.account_id).trimmed();
+        const auto account_id = d->sanitizedString(data.account_id).trimmed();
         if (!account_id.isEmpty()) {
             s.m_strAccountNumber = account_id;
         }
@@ -672,13 +679,13 @@ int OFXImporter::ofxStatementCallback(struct OfxStatementData data, void* pv)
 
     if (data.date_start_valid) {
         QDateTime dt;
-        dt.setSecsSinceEpoch(data.date_start - pofx->d->m_timestampOffset * 60);
+        dt.setSecsSinceEpoch(data.date_start - d->m_timestampOffset * 60);
         s.m_dateBegin = dt.date();
     }
 
     if (data.date_end_valid) {
         QDateTime dt;
-        dt.setSecsSinceEpoch(data.date_end - pofx->d->m_timestampOffset * 60);
+        dt.setSecsSinceEpoch(data.date_end - d->m_timestampOffset * 60);
         s.m_dateEnd = dt.date();
     }
 
@@ -699,16 +706,18 @@ int OFXImporter::ofxAccountCallback(struct OfxAccountData data, void * pv)
 //   kDebug(2) << Q_FUNC_INFO;
 
     OFXImporter* pofx = reinterpret_cast<OFXImporter*>(pv);
+    OFXImporter::Private* d = pofx->d;
+
     pofx->addnew();
     MyMoneyStatement& s = pofx->back();
 
     // Having any account at all makes an ofx statement valid
-    pofx->d->m_valid = true;
+    d->m_valid = true;
     // new account means new hashes
-    pofx->d->m_hashes.clear();
+    d->m_hashes.clear();
 
     if (data.account_id_valid) {
-        const auto account_name = QString::fromUtf8(data.account_name);
+        const auto account_name = d->sanitizedString(data.account_name);
         // in case libofx does not extract any value, it returns
         // one of the following fixed strings in this member.
         // See OfxAccountContainer::gen_account_id in
@@ -724,19 +733,19 @@ int OFXImporter::ofxAccountCallback(struct OfxAccountData data, void * pv)
 
         // only use the account_id if it is filled with non-blank data
         // see https://bugs.kde.org/show_bug.cgi?id=428156
-        const auto account_id = QString::fromUtf8(data.account_id).trimmed();
+        const auto account_id = d->sanitizedString(data.account_id).trimmed();
         if (!account_id.isEmpty()) {
             s.m_strAccountNumber = account_id;
         }
     }
     if (data.bank_id_valid) {
-        s.m_strBankCode = QString::fromUtf8(data.bank_id);
+        s.m_strBankCode = d->sanitizedString(data.bank_id);
     }
     if (data.broker_id_valid) {
-        s.m_strBankCode = QString::fromUtf8(data.broker_id);
+        s.m_strBankCode = d->sanitizedString(data.broker_id);
     }
     if (data.currency_valid) {
-        s.m_strCurrency = QString::fromUtf8(data.currency);
+        s.m_strCurrency = d->sanitizedString(data.currency);
     }
 
     if (data.account_type_valid) {
@@ -775,9 +784,9 @@ int OFXImporter::ofxAccountCallback(struct OfxAccountData data, void * pv)
     }
 
     // copy over the securities
-    s.m_listSecurities = pofx->d->m_securitylist;
+    s.m_listSecurities = d->m_securitylist;
 
-//   kDebug(2) << Q_FUNC_INFO << " return 0";
+    //   kDebug(2) << Q_FUNC_INFO << " return 0";
 
     return 0;
 }
@@ -787,19 +796,20 @@ int OFXImporter::ofxSecurityCallback(struct OfxSecurityData data, void* pv)
     //   kDebug(2) << Q_FUNC_INFO;
 
     OFXImporter* pofx = reinterpret_cast<OFXImporter*>(pv);
+    OFXImporter::Private* d = pofx->d;
     MyMoneyStatement::Security sec;
 
     if (data.unique_id_valid) {
-        sec.m_strId = QString::fromUtf8(data.unique_id);
+        sec.m_strId = d->sanitizedString(data.unique_id);
     }
     if (data.secname_valid) {
-        sec.m_strName = QString::fromUtf8(data.secname);
+        sec.m_strName = d->sanitizedString(data.secname);
     }
     if (data.ticker_valid) {
-        sec.m_strSymbol = QString::fromUtf8(data.ticker);
+        sec.m_strSymbol = d->sanitizedString(data.ticker);
     }
 
-    pofx->d->m_securitylist += sec;
+    d->m_securitylist += sec;
 
     return 0;
 }
@@ -809,6 +819,7 @@ int OFXImporter::ofxStatusCallback(struct OfxStatusData data, void * pv)
 //   kDebug(2) << Q_FUNC_INFO;
 
     OFXImporter* pofx = reinterpret_cast<OFXImporter*>(pv);
+    OFXImporter::Private* d = pofx->d;
     QString message;
 
     // if we got this far, we know we were able to parse the file.
@@ -817,13 +828,13 @@ int OFXImporter::ofxStatusCallback(struct OfxStatusData data, void * pv)
     pofx->d->m_fatalerror = i18n("No accounts found.");
 
     if (data.ofx_element_name_valid)
-        message.prepend(QString("%1: ").arg(QString::fromUtf8(data.ofx_element_name)));
+        message.prepend(QString("%1: ").arg(d->sanitizedString(data.ofx_element_name)));
 
     if (data.code_valid)
-        message += QString("%1 (Code %2): %3").arg(QString::fromUtf8(data.name)).arg(data.code).arg(QString::fromUtf8(data.description));
+        message += QString("%1 (Code %2): %3").arg(d->sanitizedString(data.name)).arg(data.code).arg(d->sanitizedString(data.description));
 
     if (data.server_message_valid)
-        message += QString(" (%1)").arg(QString::fromUtf8(data.server_message));
+        message += QString(" (%1)").arg(d->sanitizedString(data.server_message));
 
     if (data.severity_valid) {
         switch (data.severity) {

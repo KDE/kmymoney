@@ -1019,7 +1019,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             // some details which are otherwise lost
             const auto payee = file->payeesModel()->itemById(payeeid);
             if ((s1.memo() == transactionUnderImport.memo()) && (payee.name().toLower() != importedPayeeName.toLower())) {
-                s1.setMemo(i18nc("Prepend name of payee (%1) to orignal memo (%2)", "Original payee: %1\n%2", importedPayeeName, s1.memo()));
+                s1.setMemo(i18nc("Prepend name of payee (%1) to original memo (%2)", "Original payee: %1\n%2", importedPayeeName, s1.memo()));
             }
         } catch (const MyMoneyException &) {
             MyMoneyPayee payee;
