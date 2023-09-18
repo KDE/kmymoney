@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-17 00:45+0000\n"
-"PO-Revision-Date: 2023-09-11 06:47+0100\n"
+"PO-Revision-Date: 2023-09-17 08:58+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
@@ -994,8 +994,7 @@ msgstr "Meti ĉiujn pliajn okazojn en ĉ&i tiu horaro al ĉi valoroj."
 
 #: kmymoney/dialogs/kcurrencycalculator.cpp:429
 #: kmymoney/mymoney/mymoneyfile.cpp:2990
-#, fuzzy, kde-format
-#| msgid "User"
+#, kde-format
 msgctxt "@info price source"
 msgid "User"
 msgstr "Uzanto"
@@ -6858,12 +6857,10 @@ msgstr ""
 "ĝia unua uzo je '%3'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2976
-#, fuzzy, kde-format
-#| msgctxt "@info consistency check"
-#| msgid "    Please enter a price for the security on or before this date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the currency on or before '%1'."
-msgstr "    Bonvolu enigi prezon por la sekureco en aŭ antaŭ ĉi tiu dato."
+msgstr "    Bonvolu enigi prezon por la sekureco en aŭ antaŭ '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2981
 #, kde-format
@@ -6880,6 +6877,8 @@ msgid ""
 "    Price for the security has been extracted from transaction and added to "
 "price history."
 msgstr ""
+"    Prezo por la sekureco estis ĉerpita el transakcio kaj aldonita al "
+"prezhistorio."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2995
 #, kde-format
@@ -25111,10 +25110,3 @@ msgstr ""
 "\n"
 "<p>Ĉiuj informoj estas laŭvolaj kaj nur uzataj por personecigi vian KMyMoney-"
 "dosieron.</p>"
-
-#~ msgctxt "@info consistency check"
-#~ msgid ""
-#~ "    Please enter a price for the currency on or before the date of first "
-#~ "usage."
-#~ msgstr ""
-#~ "    Bonvolu enigi prezon por la valuto en aŭ antaŭ la dato de unua uzado."

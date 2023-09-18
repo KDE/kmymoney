@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-17 00:45+0000\n"
-"PO-Revision-Date: 2023-09-11 20:25+0200\n"
+"PO-Revision-Date: 2023-09-17 20:40+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -1001,8 +1001,7 @@ msgstr "Ställ &in alla framtida förekomster i schemat att ha de här värdena.
 
 #: kmymoney/dialogs/kcurrencycalculator.cpp:429
 #: kmymoney/mymoney/mymoneyfile.cpp:2990
-#, fuzzy, kde-format
-#| msgid "User"
+#, kde-format
 msgctxt "@info price source"
 msgid "User"
 msgstr "Användare"
@@ -6879,12 +6878,10 @@ msgstr ""
 "användningsdatumet '%3'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2976
-#, fuzzy, kde-format
-#| msgctxt "@info consistency check"
-#| msgid "    Please enter a price for the security on or before this date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the currency on or before '%1'."
-msgstr "    Ange en kurs för investeringen på eller innan datumet."
+msgstr "    Ange en kurs för valutan på eller innan '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2981
 #, kde-format
@@ -6901,6 +6898,8 @@ msgid ""
 "    Price for the security has been extracted from transaction and added to "
 "price history."
 msgstr ""
+"    Värdepapprets kurs har extraherats från transaktionen och lagts till i "
+"kurshistoriken."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2995
 #, kde-format

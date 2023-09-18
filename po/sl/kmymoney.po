@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-17 00:45+0000\n"
-"PO-Revision-Date: 2023-09-11 06:23+0200\n"
+"PO-Revision-Date: 2023-09-17 05:10+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
 "X-Generator: Poedit 3.3.2\n"
 
 #, kde-format
@@ -1014,8 +1014,7 @@ msgstr "Nastavite vse nadaljnje pojave in v tem urniku na te vrednosti."
 
 #: kmymoney/dialogs/kcurrencycalculator.cpp:429
 #: kmymoney/mymoney/mymoneyfile.cpp:2990
-#, fuzzy, kde-format
-#| msgid "User"
+#, kde-format
 msgctxt "@info price source"
 msgid "User"
 msgstr "Uporabnik"
@@ -6902,12 +6901,10 @@ msgstr ""
 "'%3'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2976
-#, fuzzy, kde-format
-#| msgctxt "@info consistency check"
-#| msgid "    Please enter a price for the security on or before this date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the currency on or before '%1'."
-msgstr "    Vnesite ceno vrednostnega papirja na ali pred tem datumom."
+msgstr "    Vnesite ceno vrednostnega papirja na ali pred '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2981
 #, kde-format
@@ -6922,6 +6919,8 @@ msgid ""
 "    Price for the security has been extracted from transaction and added to "
 "price history."
 msgstr ""
+"    Cena vrednostnega papirja je bila ugotovljena iz transakcije in dodana v "
+"zgodovino cen."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2995
 #, kde-format

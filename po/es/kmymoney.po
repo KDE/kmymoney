@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-17 00:45+0000\n"
-"PO-Revision-Date: 2023-09-11 17:37+0200\n"
+"PO-Revision-Date: 2023-09-17 12:28+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -1006,8 +1006,7 @@ msgstr ""
 
 #: kmymoney/dialogs/kcurrencycalculator.cpp:429
 #: kmymoney/mymoney/mymoneyfile.cpp:2990
-#, fuzzy, kde-format
-#| msgid "User"
+#, kde-format
 msgctxt "@info price source"
 msgid "User"
 msgstr "Usuario"
@@ -6934,14 +6933,11 @@ msgstr ""
 "fecha de su primer uso en «%3»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2976
-#, fuzzy, kde-format
-#| msgctxt "@info consistency check"
-#| msgid "    Please enter a price for the security on or before this date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the currency on or before '%1'."
 msgstr ""
-"    Introduzca un precio para el valor bursátil en esta fecha o antes de "
-"ella."
+"    Introduzca un precio para la divisa en la fecha «%1» o antes de ella."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2981
 #, kde-format
@@ -6958,6 +6954,8 @@ msgid ""
 "    Price for the security has been extracted from transaction and added to "
 "price history."
 msgstr ""
+"    El precio para el valor bursátil se ha extraído de la transacción y se "
+"ha añadido al historial del precio."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2995
 #, kde-format
