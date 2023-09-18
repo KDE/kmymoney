@@ -5106,7 +5106,7 @@ msgstr "Conserva els canvis en seleccionar una operació/desglossat diferent"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:210
 #, kde-format
 msgid "Use Enter to move between fields"
-msgstr "Utilitzeu Retorn per a desplaçar-vos entre els camps"
+msgstr "Utilitzeu «Retorn» per a desplaçar-vos entre els camps"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_stringMatchFromStart)
 #: kmymoney/dialogs/settings/ksettingsregister.ui:220
@@ -18491,7 +18491,7 @@ msgstr "Nom de la regió que s'ha d'utilitzar per als dies no hàbils"
 #: kmymoney/settings/kmymoney.kcfg:80
 #, kde-format
 msgid "Using the Enter key moves between the fields"
-msgstr "En utilitzar la tecla Retorn es mou entre els camps"
+msgstr "En utilitzar la tecla «Retorn» es mou entre els camps"
 
 #. i18n: ectx: label, entry (StartLastViewSelected), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:96
@@ -20726,7 +20726,7 @@ msgstr "- Compatibilitat millorada amb els esquemes de colors foscos"
 #: kmymoney/views/kwelcomepage.cpp:231
 #, kde-format
 msgid "- Fast switching of main views via Ctrl + number key"
-msgstr "- Commutació ràpida de vistes principals via Ctrl + tecla numèrica"
+msgstr "- Commutació ràpida de vistes principals via «Ctrl» + tecla numèrica"
 
 #: kmymoney/views/kwelcomepage.cpp:232
 #, kde-format
