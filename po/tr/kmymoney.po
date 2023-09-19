@@ -988,8 +988,7 @@ msgstr "Bu plandaki diğer tüm oluşları bu değerler olarak ayarlayın."
 
 #: kmymoney/dialogs/kcurrencycalculator.cpp:429
 #: kmymoney/mymoney/mymoneyfile.cpp:2990
-#, fuzzy, kde-format
-#| msgid "User"
+#, kde-format
 msgctxt "@info price source"
 msgid "User"
 msgstr "Kullanıcı"
@@ -6853,13 +6852,11 @@ msgstr ""
 "kullanımı için bir fiyat ayarlanmamış."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2976
-#, fuzzy, kde-format
-#| msgctxt "@info consistency check"
-#| msgid "    Please enter a price for the security on or before this date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the currency on or before '%1'."
 msgstr ""
-"    Lütfen bu tarihte veya öncesinde menkul kıymet için bir fiyat girin."
+"    Lütfen '%1' tarihinde veya öncesinde para birimi için bir fiyat girin."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2981
 #, kde-format
@@ -6875,7 +6872,7 @@ msgctxt "@info consistency check"
 msgid ""
 "    Price for the security has been extracted from transaction and added to "
 "price history."
-msgstr ""
+msgstr "    Menkul kıymatin fiyatı işlemden alındı ve fiyat geçmişine eklendi."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2995
 #, kde-format
@@ -25108,17 +25105,3 @@ msgstr ""
 "\n"
 "<p>Tüm bilgiler isteğe bağlıdır ve yalnızca K Param dosyanızı "
 "kişiselleştirmek için kullanılır.</p>"
-
-#~ msgctxt "@info consistency check"
-#~ msgid ""
-#~ "    Please enter a price for the currency on or before the date of first "
-#~ "usage."
-#~ msgstr ""
-#~ "    Lütfen ilk kullanım tarihinde veya öncesinde para birimi için bir "
-#~ "fiyat girin."
-
-#~ msgid "There are no entries in this account.\n"
-#~ msgstr "Bu hesapta hiç girdi yok.\n"
-
-#~ msgid "Invalid account"
-#~ msgstr "Geçersiz hesap"
