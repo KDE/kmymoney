@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-17 00:45+0000\n"
-"PO-Revision-Date: 2023-09-12 07:20+0200\n"
+"PO-Revision-Date: 2023-09-19 20:42+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.0\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1006,8 +1006,7 @@ msgstr "&Ezarri balio hauek antolaketa honetako hurrengo agerraldiei."
 
 #: kmymoney/dialogs/kcurrencycalculator.cpp:429
 #: kmymoney/mymoney/mymoneyfile.cpp:2990
-#, fuzzy, kde-format
-#| msgid "User"
+#, kde-format
 msgctxt "@info price source"
 msgid "User"
 msgstr "Erabiltzailea"
@@ -6902,12 +6901,10 @@ msgstr ""
 "erabileraren datan, '%3'(e)an."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2976
-#, fuzzy, kde-format
-#| msgctxt "@info consistency check"
-#| msgid "    Please enter a price for the security on or before this date."
+#, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the currency on or before '%1'."
-msgstr "    Ezarri prezio bat burtsa-balioari data honetan edo aurretik."
+msgstr "    Mesedez, sartu dibisaren '%1'(e)ko edo lehenagoko prezioa."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2981
 #, kde-format
@@ -6924,6 +6921,8 @@ msgid ""
 "    Price for the security has been extracted from transaction and added to "
 "price history."
 msgstr ""
+"    Burtsa-balioaren prezioa transakziotik atera da eta prezioen historiara "
+"gehitu da."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2995
 #, kde-format
