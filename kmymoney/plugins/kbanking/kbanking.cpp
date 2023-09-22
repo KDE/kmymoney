@@ -58,6 +58,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include <alkimia/alkenvironment.h>
+
 #include "aqbankingkmmoperators.h"
 #include "gwenhywfarqtoperators.h"
 #include "gwenkdegui.h"
@@ -188,7 +190,7 @@ void KBanking::plug(KXMLGUIFactory* guiFactory)
     Q_UNUSED(guiFactory)
 
     if (qEnvironmentVariableIsEmpty("GWEN_LOGLEVEL")) {
-        if (MyMoneyUtils::isRunningAsAppImage()) {
+        if (AlkEnvironment::isRunningAsAppImage()) {
             qDebug() << "Set loglevel for" << GWEN_LOGDOMAIN << "to verbose";
             GWEN_Logger_SetLevel(GWEN_LOGDOMAIN, GWEN_LoggerLevel_Verbous);
         } else {
@@ -196,7 +198,7 @@ void KBanking::plug(KXMLGUIFactory* guiFactory)
         }
     }
     if (qEnvironmentVariableIsEmpty("AQBANKING_LOGLEVEL")) {
-        if (MyMoneyUtils::isRunningAsAppImage()) {
+        if (AlkEnvironment::isRunningAsAppImage()) {
             qDebug() << "Set loglevel for" << AQBANKING_LOGDOMAIN << "to verbose";
             GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Verbous);
             qDebug() << "Set loglevel for"
@@ -242,7 +244,7 @@ void KBanking::plug(KXMLGUIFactory* guiFactory)
             m_kbanking = 0;
         }
 
-        if (MyMoneyUtils::isRunningAsAppImage()) {
+        if (AlkEnvironment::isRunningAsAppImage()) {
             GWEN_Logger_SetLevel(GWEN_LOGDOMAIN, GWEN_LoggerLevel_Warning);
             GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Warning);
         }

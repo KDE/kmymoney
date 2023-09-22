@@ -115,10 +115,6 @@ KMM_MYMONEY_EXPORT QString convertRegularExpressionToWildcard(const QString& pat
 
 KMM_MYMONEY_EXPORT modifyTransactionWarnLevel_t transactionWarnLevel(const QString& transactionId);
 KMM_MYMONEY_EXPORT modifyTransactionWarnLevel_t transactionWarnLevel(const QStringList& transactionIds);
-
-KMM_MYMONEY_EXPORT bool isRunningAsAppImage();
-
-KMM_MYMONEY_EXPORT void removeAppImagePathFromLinkLoaderLibPath(QProcess* process);
 }
 
 #endif

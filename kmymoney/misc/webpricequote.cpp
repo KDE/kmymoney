@@ -37,7 +37,8 @@
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
-#include "mymoneyutils.h"
+
+#include <alkimia/alkenvironment.h>
 
 Q_DECLARE_LOGGING_CATEGORY(WEBPRICEQUOTE)
 Q_LOGGING_CATEGORY(WEBPRICEQUOTE, "kmymoney_webpricequote")
@@ -281,7 +282,7 @@ bool WebPriceQuote::launchNative(const QString& _webID, const QString& _kmmID, c
 
                 // make sure to fix the LD_LIBRARY_PATH
                 // to not include APPDIR subdirectories
-                MyMoneyUtils::removeAppImagePathFromLinkLoaderLibPath(&d->m_filter);
+                AlkEnvironment::removeAppImagePathFromLinkLoaderLibPath(&d->m_filter);
             }
         }
         d->m_filter.setWebID(d->m_webID);
@@ -388,7 +389,7 @@ bool WebPriceQuote::launchFinanceQuote(const QString& _webID, const QString& _km
 
     // make sure to fix the LD_LIBRARY_PATH
     // to not include APPDIR subdirectories
-    MyMoneyUtils::removeAppImagePathFromLinkLoaderLibPath(&d->m_filter);
+    AlkEnvironment::removeAppImagePathFromLinkLoaderLibPath(&d->m_filter);
 
     d->m_filter.setProcessChannelMode(QProcess::SeparateChannels);
     d->m_filter.start(QStringLiteral("perl"), arguments);
@@ -1062,7 +1063,7 @@ void FinanceQuoteProcess::launch(const QString& scriptPath)
 
     // make sure to fix the LD_LIBRARY_PATH
     // to not include APPDIR subdirectories
-    MyMoneyUtils::removeAppImagePathFromLinkLoaderLibPath(this);
+    AlkEnvironment::removeAppImagePathFromLinkLoaderLibPath(this);
 
     start(QStringLiteral("perl"), arguments);
     if (! waitForStarted()) qWarning("Unable to start FQ script");

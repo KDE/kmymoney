@@ -25,7 +25,7 @@ set(RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_
 project(KMyMoney VERSION "${RELEASE_SERVICE_VERSION}" LANGUAGES CXX)
 
 # Minimum versions required for extern packages
-set(KMM_ALKIMIA_MIN_VERSION 8.1.1)
+set(KMM_ALKIMIA_MIN_VERSION 8.1.72)
 set(KMM_KCHART_MIN_VERSION 2.6.0)
 set(KMM_LIBOFX_MIN_VERSION 0.10.0)
 set(KMM_AQBANKING_MIN_VERSION 6.5.0)
@@ -144,13 +144,14 @@ find_package(Qt${QT_MAJOR_VERSION}Keychain CONFIG REQUIRED)
 if(LibAlkimia5_DIR)
   set(_LibAlkimia5_DIR ${LibAlkimia5_DIR})
 endif()
-find_package(LibAlkimia${QT_MAJOR_VERSION} ${KMM_ALKIMIA_MIN_VERSION})
+find_package(LibAlkimia${QT_MAJOR_VERSION} ${KMM_ALKIMIA_MIN_VERSION} REQUIRED)
 if (NOT LibAlkimia${QT_MAJOR_VERSION}_FOUND)
   # restore LibAlkimia5_DIR set to NOTFOUND by first find_package call
   if(_LibAlkimia5_DIR)
     set(LibAlkimia5_DIR ${_LibAlkimia5_DIR})
   endif()
   find_package(LibAlkimia5 8.1 REQUIRED)
+  find_package(Qt5WebEngineWidgets 5.9.3 REQUIRED)
 endif()
 
 find_package(KChart ${KMM_KCHART_MIN_VERSION} QUIET)
