@@ -203,6 +203,13 @@ bool KMyMoneyAccountSelector::contains(const QString& txt) const
     return false;
 }
 
+QSize KMyMoneyAccountSelector::sizeHint() const
+{
+    auto size = KMyMoneySelector::sizeHint();
+    size.setWidth(400);
+    return size;
+}
+
 class AccountSetPrivate
 {
     Q_DISABLE_COPY(AccountSetPrivate)
