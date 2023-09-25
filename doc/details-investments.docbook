@@ -83,8 +83,8 @@
   currency in which it is traded.  When a price quote is entered for an investment,
   the currency of the value given is always its base currency.  A stock on the NYSE
   (New York Stock Exchange) would be in US dollars (USD), and one on an Australian
-  market would be in Australian dollars (AUD).  The Base currency for a security does
-  not need to be the same as the default currency for the Investment account holding
+  market would be in Australian dollars (AUD).  The base currency for a security does
+  not need to be the same as the base currency for the Investment account holding
   that security.
 </para>
 </sect2>
@@ -587,30 +587,19 @@
   </screenshot>
 </para>
 
-<!-- XXX -->
-
 <para>
-  Investment transactions are entered and edited in the
-  <link linkend="details.ledgers">Ledger</link> view, as with other kinds of
-  accounts.  However, the fields will appear different, and vary depending on the
-  transaction type or activity.  Investment transactions have some additional
-  elements:
+  Investment transactions are entered and edited in the <link
+  linkend="details.ledgers">Ledgers</link> view, as with transactions in other types
+  of accounts.  However, the fields shown will be different, and vary depending on
+  the activity or transaction type.  Investment transactions have some additional
+  elements, described below.
 </para>
-
-<itemizedlist>
-	<listitem><para>Activity</para></listitem>
-	<listitem><para>Security</para></listitem>
-	<listitem><para>Account</para></listitem>
-	<listitem><para>Shares, Price, &amp; Total Amount</para></listitem>
-	<listitem><para>Fees</para></listitem>
-	<listitem><para>Interest category</para></listitem>
-</itemizedlist>
 
 <sect2>
 <title>Activity</title>
 <para>
-  The Activity for an investment transaction describes what action is happening
-  to the security.  The following activities are supported:
+  The Activity for an investment transaction describes what type of action is
+  happening to the security.  The following activities are supported:
 </para>
 
 <variablelist>
@@ -618,55 +607,57 @@
   <term>Buy/Sell</term>
   <listitem>
     <para>
-      Use to record purchases or sales of individual securities.  This action
+      Use to record the purchase or sale of an individual security.  This action
       requires an account to transfer the funds from/to, which defaults to the
-      Brokerage account, if one has been created.
+      Brokerage account, if one has been defined for this Investment account.
     </para>
   </listitem>
   </varlistentry>
 
   <varlistentry>
-  <term>Dividend/Yield</term>
+  <term>Dividend/Yield/Interest Income</term>
   <listitem>
     <para>
-      Also known as a <quote>Cash Dividend</quote>, this action is used when you
-      receive an interest or dividend disbursement from your security.  This action
-      also requires an account to transfer the funds to.
+      Also known as a <quote>Cash Dividend,</quote> this action is used when you
+      receive an interest or dividend disbursement of cash from your security.  This
+      action also requires an account to transfer the funds to.  The three terms are
+      used interchangeably.
     </para>
   </listitem>
   </varlistentry>
 
   <varlistentry>
-  <term>Reinvest Dividend</term>
+  <term>Reinvest dividend</term>
   <listitem>
     <para>
-      Reinvest Dividend.  This is a dividend where the proceeds are used to purchase
-      additional shares of the security.
+      This is a dividend where the proceeds are used to purchase additional shares of
+      the security.
     </para>
   </listitem>
   </varlistentry>
 
   <varlistentry>
-  <term>Add/Remove Shares</term>
+  <term>Add/Remove shares</term>
   <listitem>
     <para>
       A simple increase or decrease in the number of shares you own.  This should be
       used very rarely, because it's uncommon for shares to just show up in your
-      account (or disappear) unless it's a purchase or a sale.  One use of these
-      activities is for some situations &kmymoney; does not natively handle, such as
-      the exchange of some number of shares of a security for a different number of
-      shares of a different class of the same security.
+      account (or to disappear) unless it's a purchase, sale, or dividend
+      reinvestment.  One use of these activities is for some situations &kmymoney;
+      does not natively handle, such as the exchange of some number of shares of a
+      security for a different number of shares of a different security or different
+      class of the same security.
     </para>
   </listitem>
   </varlistentry>
 
   <varlistentry>
-  <term>Split Shares</term>
+  <term>Split shares</term>
   <listitem>
     <para>
-      This is used when the stock is split.  Enter the ratio of the split in
-      the <quote>Split Ratio</quote> field.  For example, in a 3:2 split, enter 1.5.
-      Reverse splits, where the ration is less than one, such as 2:3, although
+      This is used when the stock is split.  Enter the ratio of the split in the
+      <quote>Split Ratio</quote> field.  For example, in a 3:2 split, enter 1.5.
+      Reverse splits, where the ratio is less than one, such as 2:3, although
       uncommon, are also allowed.
     </para>
   </listitem>
@@ -677,9 +668,9 @@
 <sect2>
 <title>Security</title>
 <para>
-  Each investment transaction must be associated with an individual security.  Choose
-  the security name when adding or editing a transaction.  The symbol will be
-  displayed when viewing it.
+  Each investment transaction must be associated with an individual security.  The
+  dropdown shows all securities you own in the current Investment account - select
+  the one for this transaction.
 </para>
 </sect2>
 
@@ -703,33 +694,31 @@
   enter just the total amount and the number of shares, because these are the known
   facts of the transaction.  &kmymoney; will automatically calculate the price per
   share.  Note that there is only one entry field for the price, and it will be
-  labeled
-  <quote>Transaction amount</quote> or <quote>Price/share</quote> depending on the
-  setting of the <guilabel>Price entry</guilabel> option when the account
-  was <link linkend="details.investments.newinvestmentwizard">set up</link>.
+  labeled <quote>Transaction amount</quote> or <quote>Price/share</quote> depending
+  on the setting of the <guilabel>Price entry</guilabel> option when the account was
+  <link linkend="details.investments.newinvestmentwizard">set up</link>.
 </para>
 </sect2>
 
 <sect2>
 <title>Fees</title>
 <para>
-  With many investment transactions you can include the fees (or commission) you
-  paid the broker.  If you enter a category for the fee, then a field will be
-  shown to the right where you can enter the amount of the fee.  If you need to
-  enter more than one fee for the transaction, you can use
-  the <link linkend="details.ledgers.split">Split Transactions</link> feature.
-  In this case, when you complete entering all the splits, the total amount of
-  the fees will be shown to the right.
+  With many investment transactions you can include the fees (or commission) you paid
+  the broker.  If you enter a category for the fee, then a field will be shown to the
+  right where you can enter the amount of the fee.  If you need to enter more than
+  one fee for the transaction, you can use the <link
+  linkend="details.ledgers.split">Split Transactions</link> feature.  In this case,
+  when you complete entering all the splits, the total amount of the fees will be
+  shown to the right.
 </para>
 </sect2>
 
 <sect2>
 <title>Interest</title>
 <para>
-  This is how you enter an interest or dividend payment from a security.  As
-  with fees, if you enter a category, then  a field will be shown to the right
-  where you can enter the amount.  You can also use the split transaction
-  feature, if required.
+  This is how you enter an interest or dividend payment from a security.  As with
+  fees, if you enter a category, then a field will be shown to the right where you
+  can enter the amount.  You can also use the split transaction feature, if required.
 </para>
 </sect2>
 </sect1>
@@ -738,13 +727,13 @@
 <title>Working With Foreign Investments</title>
 
 <para>
-  &kmymoney; supports multiple currencies and securities, and you may want to combine
-  the two.  However, doing so requires extra care to assure accurate records.  As
-  noted above, when you add a security, you must specify its trading currency.  This
-  might not be the same as the base currency for your &kmymoney; file, and it also
-  might not be the same as the default currency for the investment account in which
-  you hold the stock or the account where you transfer your funds to/from for
-  buys/sells.
+  &kmymoney; supports multiple currencies, and there are situations where this can be
+  very useful, if not essential.  However, doing so requires extra care to assure
+  accurate records.  As noted above, when you add a security, you must specify its
+  trading currency.  This might not be the same as the base currency for your
+  &kmymoney; file, and it also might not be the same as the base currency for the
+  investment account in which you hold the security or for the account where you
+  transfer your funds to/from for buys/sells/dividends.
 </para>
 
 <para>
@@ -760,36 +749,22 @@
 </para>
 
 <para>
-	<screenshot>
-	<screeninfo>Currency Warning</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="investment-currencywarning.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Currency Warning</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
-<para>
   When you choose the brokerage account to fund the transfer, you'll be warned
   that it's in a different currency.
 </para>
 
 <para>
-	<screenshot>
-	<screeninfo>Exchange Rate Editor</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="investment-exchangerateeditor.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Exchange Rate Editor</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+  <screenshot>
+    <screeninfo>Currency Warning</screeninfo>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="investment-currencywarning.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>Currency Warning</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>
@@ -800,26 +775,39 @@
 </para>
 
 <para>
+  <screenshot>
+    <screeninfo>Exchange Rate Editor</screeninfo>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="investment-exchangerateeditor.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>Exchange Rate Editor</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<para>
   If you then switch over to the brokerage account, you will see the transaction as
   EUR 2,254.54, assuming an exchange rate is 11.0000 SEK/EUR.
 </para>
 </sect1>
 
 <sect1 id="details.investments.prices">
-<title>Updating Prices</title>
+<title>Updating Security Prices</title>
 
 <para>
-  There are two ways of updating the prices for your investments.  You can
-  either enter the price manually or have &kmymoney; fetch it from the web.
+  There are two ways of updating the prices for your investments.  You can either
+  enter the price manually or have &kmymoney; fetch it from the web.
 </para>
 
 <sect2>
 <title>Manual Price Updates</title>
 
 <para>
-  You can enter prices for your investments using the same
-  <link linkend="details.currencies.prices">Price Editor</link> as used for
-  currencies.
+  You can enter prices for your investments using the same <link
+  linkend="details.currencies.prices">Price Editor</link> as used for currencies.
 </para>
 </sect2>
 
@@ -833,24 +821,25 @@
 <sect3>
 <title>How Online Quotes Work</title>
 <para>
-  At your request, &kmymoney; will fetch a page from the web that contains the
-  latest price for each security.  By default, prices are fetched from
-  <ulink url="https://finance.yahoo.com">finance.yahoo.com</ulink>, and are
-  subject to the terms and conditions of that site.
+  At your request, &kmymoney; will fetch a page from the web that contains the latest
+  price for each security.  By default, prices are fetched from <ulink
+  url="https://finance.yahoo.com">finance.yahoo.com</ulink>, and are subject to the
+  terms and conditions of that site.  
 </para>
 
 <para>
   The online quote lookup uses the security's trading symbol to find the price.
   Therefore, it is important to set the symbol correctly.  Yahoo supports stocks from
-  most major world markets, so it's usually just a matter of finding the correct
+  most major world markets, so it is usually just a matter of finding the correct
   symbol.  For example, TietoEnator trades on the Stockholm Stock Exchange market,
   and its Yahoo symbol is TIEN.ST.
 </para>
 
 <para>
-  To find the trading symbol for a security supported by Yahoo, use the
-  <quote>Symbol Lookup</quote> feature
-  at <ulink url="https://finance.yahoo.com">finance.yahoo.com</ulink>.
+  To find the trading symbol for a security supported by Yahoo, use the <quote>Symbol
+  Lookup</quote> feature at <ulink
+  url="https://finance.yahoo.com">finance.yahoo.com</ulink>.  You should have set the
+  trading symbol when initially entering the security into &kmymoney;.
 </para>
 </sect3>
 
@@ -858,10 +847,10 @@
 <title>Assigning a Quote Source</title>
 
 <para>
-  In order to get online price quotes, you first have to enable it for each
-  security or currency you want updated, by setting a <quote>Online Quote
-  Source</quote>.  This is the name of the service from which the quote should
-  be fetched.  &kmymoney; ships with several sources to choose from.  Yahoo is the
+  In order to get online price quotes, you first have to enable the feature for each
+  security or currency you want updated, by setting an <quote>Online Quote
+  Source</quote>.  This is the name of the service from which the quote should be
+  fetched.  &kmymoney; ships with several sources to choose from.  Yahoo is the
   recommended default source, and should work for most investments and all
   currencies.
 </para>
@@ -876,12 +865,12 @@
 </para>
 
 <para>
-  Versions of &kmymoney; starting with 0.9 contain support for the Finance::Quote
-  package for obtaining online quotes.  This is intended primarily as a convenience
-  for those users converting from the &gnucash; finance package, which uses it as its
-  native method.  If you do select this option, you should see a different list of
-  sources, those supported by Finance::Quote. If the list is empty, it suggests that
-  the package is not properly installed.  See their web site at
+  Versions of &kmymoney; starting with 0.9 contain support for the Perl
+  Finance::Quote package for obtaining online quotes.  This is intended primarily as
+  a convenience for those users converting from the &gnucash; finance package, which
+  uses it as its native method.  If you do select this option, you should see a
+  different list of sources, those supported by Finance::Quote. If the list is empty,
+  it suggests that the package is not properly installed.  See their web site at
   <ulink url="http://finance-quote.sourceforge.net">
   http://finance-quote.sourceforge.net</ulink> for more information.
 </para>
@@ -891,20 +880,20 @@
 <title>Adjusting a quote</title>
 
 <para>
-  Some online sources do not report the price in a base quantity (&eg;, EUR) but
-  in a fraction (&eg;, Cent). Using this information as price will produce wrong
+  Some online sources do not report the price in a base quantity (&eg;, EUR) but in a
+  fraction (&eg;, Cent).  Using this information for a price will produce wrong
   values for your investments.
 </para>
 
 <para>
   If this is the case for your online source, you can use the
-  <guilabel>Factor</guilabel> field to enter an adjusting factor. For the above
+  <guilabel>Factor</guilabel> field to enter an adjusting factor.  For the above
   mentioned example the factor would be 0.01.
 </para>
 
 <para>
-  The <guilabel>Factor</guilabel> field is only available if a
-  <guibutton>Quote Source</guibutton> has been selected.
+  The <guilabel>Factor</guilabel> field is only available if a <guibutton>Quote
+  Source</guibutton> has been selected.
 </para>
 </sect3>
 
@@ -915,23 +904,23 @@
   Typically, you will update the prices for all your securities and currencies as a
   single operation.  Choose the
   <menuchoice><guimenu>Tools</guimenu><guimenuitem>Update Stock and Currency
-  Prices...</guimenuitem></menuchoice> menu item to bring up the online price
-  quotes dialog.  Press <guibutton>Update All</guibutton> to fetch quotes for all
-  securities and currencies in your &kmymoney; file.
+  Prices...</guimenuitem></menuchoice> menu item to bring up the online price quotes
+  dialog.  Press <guibutton>Update All</guibutton> to fetch quotes for all securities
+  and currencies in your &kmymoney; file.
 </para>
 
 <para>
-	<screenshot>
-	<screeninfo>Update Stock and Currency Prices</screeninfo>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <screeninfo>Update Stock and Currency Prices</screeninfo>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="investment-onlineupdate.png" format="PNG" />
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase>Online Stock and Currency Price Update</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 </sect3>
 
@@ -941,20 +930,22 @@
 <para>
   Adding or editing quote sources is not recommended for anyone but the most
   technical user.  You should feel comfortable reading HTML and writing complex
-  regular expressions.  If this doesn't sound like you, we recommend writing to the
-  developer's list if none of the quote sources work for you.  Ideally, please point
-  us to a web page where these quotes can be obtained.  Additionally you can consult
-  with members of the KDE Community Forum for &kmymoney; as they may already have a
-  solution available for your needs.
+  regular expressions.  If this doesn't sound like you, please use one of the <link
+  linkend="firsttime.contact">suggested support channels</link> if you are having
+  problems with a particular source or if none of the quote sources work for you.  If
+  looking for a source for prices for a security not found by one of the existing
+  sources, ideally, please point us to a web page where these prices can be obtained.
+  Additionally you can consult with members of the KDE Community Forum for &kmymoney;
+  as they may already have a solution available for your needs.
 </para>
 
 <para>
   If you do feel up to the challenge, here's how it works.  The quote sources are
-  contained in the settings dialog. Choose the
+  contained in the settings dialog.  Choose the
   <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-  &kmymoney;</guimenuitem></menuchoice> menu item. From there, choose the <guilabel>Online
-  Quotes</guilabel> section.  You can choose an existing source to edit, or create a
-  new one.  When you are done with your changes, be sure to press
+  &kmymoney;</guimenuitem></menuchoice> menu item.  From there, choose the
+  <guilabel>Online Quotes</guilabel> section.  You can choose an existing source to
+  edit, or create a new one.  When you are done with your changes, be sure to press
   the <guibutton>Update</guibutton> button before exiting the dialog.  Your changes
   are not saved by default.
 </para>
@@ -971,9 +962,9 @@
 <para>
   Note that the URL can also be a file: URL, which the quote fetcher takes to be the
   path to an executable script.  It will pass any command-line arguments to it that
-  you have specified, and feed the stdout to the page parser.  For example, you might
-  have a script called getquote.sh that contains custom quote logic, taking the
-  symbol as a single parameter.  Your URL would be
+  you have specified, and feed the stdout of that script to the page parser.  For
+  example, you might have a script called getquote.sh that contains custom quote
+  logic, taking the symbol as a single parameter.  Your URL would be
   <quote>file:/path/to/getquote.sh %1</quote>.
 </para>
 
@@ -985,9 +976,9 @@
   should be exactly one capture expression, surrounded by parentheses, in each regexp
   field.  The date format further tells the date parser the order of year, month, and
   day.  This date format should always be in the form "%x %x %x". where x is y, m, or
-  d.  The date parser is very smart.  <quote>%m %d %y</quote> will
-  parse <quote>December 31st, 2005</quote> as easily as <quote>12/31/05</quote>.  Two
-  digit years are interpreted as being in the range of 1950-2049.
+  d.  The date parser is very smart.  <quote>%m %d %y</quote> will parse
+  <quote>December 31st, 2005</quote> as easily as <quote>12/31/05</quote>.  Two digit
+  years are interpreted as being in the range of 1950-2049.
 </para>
 </sect3>
 </sect2>
@@ -1005,6 +996,14 @@
   knowledge about any country's specific tax reporting requirements, but these can
   usually be handled by marking as Tax related all the categories you use for
   transactions which might have tax consequences.
+</para>
+
+<para>
+  The &kmymoney; development team is aware of these and additional issues, and has
+  been collecting requirements and notes for an eventual major re-write of how the
+  program handles investments.  When that process begins (there is not current
+  schedule) there will be an opportunity for users to provide input on any additional
+  needs and desires in this area.
 </para>
 </sect1>
 </chapter>

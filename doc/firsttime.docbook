@@ -30,17 +30,17 @@
 <title>The main window</title>
 
 <para>
-	<screenshot>
-	<screeninfo>The Main Window</screeninfo>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <screeninfo>The Main Window</screeninfo>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="mainwindow_numbered.png" format="PNG" />
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase>The Main Window</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>
@@ -56,7 +56,7 @@
 
 <para>
   The menu and toolbars provide access to the features of &kmymoney; and allow you to
-  <link linkend="firsttime.3">Create a new data file,</link> open an existing data
+  <link linkend="firsttime.newfile">Create a new data file,</link> open an existing data
   file, or configure how &kmymoney; operates.  The toolbar can be configured to show
   icons for the operations you use most frequently.  <!-- FIXME: pointer to wherever
   this is described. -->
@@ -296,7 +296,7 @@
 </para>
 </sect1>
 
-<sect1 id="firsttime.3">
+<sect1 id="firsttime.newfile">
 <title>Creating a new file</title>
 
 <para>
@@ -311,18 +311,20 @@
 
 <para>
   In addition to that data file with all the financial data for that set of accounts,
-  &kmymoney; uses additional files to store data regarding configuration and display
-  preferences.  The exact location of these files depends on your specific Operating
-  System or Distribution. <!-- FIXME: we need a section on OS specific issues. -->
+  &kmymoney; uses additional files to store data regarding configuration settings and
+  display preferences.  The exact location of these files depends on your specific
+  Operating System or Distribution.
+  <!-- FIXME: we need a section on OS specific issues. -->
 </para>
 
 <para>
-  To create a new file you can either select
-  <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice>
-  menu item or choose the <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="new.png" format="PNG"/></imageobject></inlinemediaobject></guiicon> new
-  icon from the toolbar. In addition, if the main welcome page is displayed,
-  you can also select the first link: "Get started and setup accounts."
+  To create a new file you can either select the
+  <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice> menu
+  item or choose the <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="new.png" format="PNG"/></imageobject></inlinemediaobject></guiicon>
+  <guilabel>new</guilabel> icon from the toolbar.  In addition, if the main welcome
+  page is displayed, you can also select the first link: <quote>Get started and setup
+  accounts.</quote>
 </para>
 
 <para>
@@ -331,35 +333,36 @@
 </para>
 
 <para>
-	<screenshot>
-	<screeninfo>Personal Data Page</screeninfo>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <screeninfo>Personal Data Page</screeninfo>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="newfile.png" format="PNG" />
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase>Personal Data Page</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>
-  Any information entered here is used only to personalize your file. All these
-  fields are optional, so you can use &kmymoney; without entering any information
-  now. In the future, this information may be used in some reports and for online
-  banking. If &kmymoney; requires any personal information in future releases and
-  finds none, you will be prompted to enter the relevant data then.
-</para>
-
-<para>
-  Once you have completed entering data, press <guibutton>Next</guibutton>.
+  Any information entered hereon the <guilabel>Personal Data</guilabel> page is used
+  only to personalize your file.  All these fields are optional, so you can use
+  &kmymoney; without entering any information now.  In the future, this information
+  may be used in some reports and for online banking.  If &kmymoney; requires any
+  personal information in future releases and finds none, you will be prompted to
+  enter the relevant data then.
 </para>
 
 <para>
   In case you have an address for yourself stored in the &kaddressbook;, the
   button <guibutton>Load from Addressbook</guibutton> is enabled and pressing it
   imports all information into &kmymoney;.
+</para>
+
+<para>
+  Once you have completed entering data, press <guibutton>Next</guibutton>.
 </para>
 
 <para>
@@ -371,23 +374,23 @@
 <para>
   &kmymoney; supports multiple currencies.  To set your base currency (the currency
   you use day to day and which will be used for your reports,) select the appropriate
-  entry from the list provided and press <guibutton>Next</guibutton>. A default will
-  be selected from &kmymoney; based upon your locale settings.  You can choose a
-  different currency, if appropriate for you situation.
+  entry from the list provided and press <guibutton>Next</guibutton>.  A default will
+  be selected based upon your locale settings, but you can easily choose a different
+  currency, if appropriate for you situation.
 </para>
 
 <para>
-	<screenshot>
-	<screeninfo>Base currency selection Page</screeninfo>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <screeninfo>Base currency selection Page</screeninfo>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="newfile-2.png" format="PNG" />
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase>Base currency selection page</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>
@@ -401,17 +404,17 @@
 </para>
 
 <para>
-	<screenshot>
-	<screeninfo>Checking account creation Page</screeninfo>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <screeninfo>Checking account creation Page</screeninfo>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="newfile-3.png" format="PNG" />
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase>Checking account creation page</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>
@@ -437,17 +440,17 @@
 </para>
 
 <para>
-	<screenshot>
-	<screeninfo>Account template selection Page</screeninfo>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <screeninfo>Account template selection Page</screeninfo>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="newfile-4.png" format="PNG" />
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase>Account template selection page</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 
@@ -467,17 +470,17 @@
 </para>
 
 <para>
-	<screenshot>
-	<screeninfo>Preference Page</screeninfo>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <screeninfo>Preference Page</screeninfo>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="newfile-6.png" format="PNG" />
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase>Preference page</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>
@@ -491,17 +494,17 @@
      is the wrong shot. -->
 
 <para>
-	<screenshot>
-	<screeninfo>Filename selection Page</screeninfo>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <screeninfo>Filename selection Page</screeninfo>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="newfile-6.png" format="PNG" />
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase>Filename selection page</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>
@@ -1025,7 +1028,13 @@
   </para>
 </formalpara>
 
-<para> Running this way is a bit more difficult, so we don't expect all users to do
-this.  However, if you're interested in helping &kmymoney; become as stable as
-possible, this is the best way to do it short of finding the bug in the code and
-sending in a patch.  </para> </sect3> </sect2> </sect1> </chapter>
+<para>
+  Running this way is a bit more difficult, so we don't expect all users to do this.
+  However, if you're interested in helping &kmymoney; become as stable as possible,
+  this is the best way to do it short of finding the bug in the code and sending in a
+  patch.
+</para>
+</sect3>
+</sect2>
+</sect1>
+</chapter>

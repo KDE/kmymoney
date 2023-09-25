@@ -55,10 +55,11 @@ This is in the order pulled in from index.docbook, with brief note on state of u
   prelim update complete
 
 <!ENTITY details-investments SYSTEM "details-investments.docbook">
-  prelim update begun
+  prelim update complete
 
 <!ENTITY details-currencies SYSTEM "details-currencies.docbook">
-
+  prelim update begun
+  
 <!ENTITY details-reconciliation SYSTEM "details-reconciliation.docbook">
 
 <!ENTITY details-reports SYSTEM "details-reports.docbook">
@@ -214,6 +215,18 @@ multiple places.
 - Can you really not match two non-imported transactions?  If so, then the date
   always comes from the imported transaction.
 
+- The Security dropdown and column in an Investment ledger shows only the name of the
+  security.  Should it also show the symbol?  (The manual used to say it did.)
+
+- Manual says KMM can download the latest prices from the web.  Should we just
+  specify "current" prices?  Although there is a date field for price fetch, it is
+  ignored.  How do we want to deal with this?
+
+- online quote page parser, date field order.  Did we recently have a case where it
+  needed to be altered due to field separators in the date?  It shouldn't, so am I
+  mis-remembering, or was there a problem?
+
+- 
 
   ----------------
 

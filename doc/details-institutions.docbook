@@ -168,7 +168,7 @@
 <note><para>
   You must have a file open before you can create a new institution. If
   you do not have an existing file, you will need to <link
-  linkend="firsttime.3">create one</link>.
+  linkend="firsttime.newfile">create one</link>.
 </para></note>
 
 <para>

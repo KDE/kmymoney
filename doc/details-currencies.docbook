@@ -4,63 +4,127 @@
   <authorgroup>
     <author> &Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
     <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2020-02-20</date>
-  <releaseinfo>5.0.8</releaseinfo>
+  <date>2023-09-20</date>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title>Currencies</title>
 
 <para>
-  &kmymoney; supports the use of multiple currencies in different accounts. For
-  example, you can set up a bank account in Euros, another in British Pounds, and
-  still have your credit card account in US Dollars.
+  &kmymoney; supports the use of multiple currencies in different accounts.  For
+  example, you can set up a savings account in Euros, a checking account in British
+  Pounds, and still have your credit card account in US Dollars.
 </para>
 
 <sect1 id="details.currencies.basecurrency">
 <title>Base currency</title>
 
 <para>
-  During the initial &kmymoney; New File Setup, you will be asked to select the
-  base currency.  Usually, the base currency is the currency you use in your
-  country.  The base currency is the one that all income and expense categories
-  use and that reports will be based on. When you set up a new account &kmymoney;
-  will automatically default to the base currency.  If your account requires you
-  to use a different currency, you can change it during the New Account Setup.
+  During the initial &kmymoney; <link linkend="firsttime.newfile"> New File
+  Setup</link>, you are asked to select the base currency.  Usually, the base
+  currency is the currency you use in your home country.  The base currency is the
+  one that all income and expense categories use and that reports will be based on.
+  When you set up a new account, &kmymoney; will automatically default to the base
+  currency.  If your account requires you to use a different currency, you can change
+  it during the <link linkend="details.accounts.create.account">New Account
+  Setup</link>.
 </para>
 
 <para>
-	<screenshot>
-	<screeninfo>The select currency dialog</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="select_currency.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>select currency</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+  &kmymoney; is released with a list of all currencies known at the time, and that is
+  the list from which you chose the default currency when you created your data file.
+  The <guilabel>Currencies</guilabel> dialog is where you manage the list of
+  currencies used in your data file.  To display this dialog, select the
+  <menuchoice><guimenu>Tools</guimenu><guimenuitem>Currencies...</guimenuitem></menuchoice>
+  menu item.
 </para>
+
+<sect2 id="details.currencies.addcurrency">
+<title>Adding a currency to your data file</title>
+
+<para>
+  <screenshot>
+    <screeninfo>The currency dialog</screeninfo>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="currency_dialog1.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>show used currencies</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<para>
+  For a newly created data file, the Currencies dialog will show only the currency
+  you chose as the default currency.  If you want to use a different currency for a
+  new account, you must first add that currenc.  By clicking the
+  <guibutton>Add</guibutton> button, you will be presented with the same list of
+  currencies from which you chose the default currency.  You can either scroll
+  through the list, or use the search box at the top to find the currency you wish to
+  use.  Click on that currency, and click <guibutton>OK</guibutton>.  The Currencies
+  dialog will then include that currency in the list displayed, and you can now use
+  that currency when creating a new account.
+</para>
+</sect2>
 
 <sect2 id="details.currencies.newcurrency">
 <title>Adding a new currency</title>
 
 <para>
-  Although it does not happen often, sometimes a new currency is introduced.
-  This can be a new virtual currency, such as Bitcoin, or a change introduced by
-  a country for financial policy reasons.  While any such currency will be added
-  to the next version of &kmymoney; it is possible to add it manually, in case
+  <screenshot>
+    <screeninfo>The select currency dialog</screeninfo>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="select_currency.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>select currency</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<para>
+  Although it does not happen often, sometimes a new currency is introduced.  This
+  can be a new virtual currency, such as Bitcoin, or a change introduced by a country
+  for financial policy reasons.  While any such currency will be added to the next
+  version of &kmymoney;, it is possible to add it to your data file manually, in case
   you have a need to begin using it immediately.
 </para>
 
 <para>
-  To manually add a currency, select the
-  <menuchoice><guimenu>Tools</guimenu><guimenuitem>Currencies...</guimenuitem></menuchoice>
-  menu item to display the <guilabel>Currencies</guilabel> dialog, as shown
-  above. Right-click on any existing currency and select <guimenuitem>New
-  currency</guimenuitem> from the <guimenu>Currency Options</guimenu> context menu.
-  Enter the official code for the currency and click <guilabel>OK</guilabel>.  The
+  To manually add a currency, bring up the Currencies dialog, as shown above.
+  Right-click on any existing currency and select <guimenuitem>New
+  currency</guimenuitem> from the <guimenu>Currency Options</guimenu> context menu,
+  or click the <guibutton>New</guibutton> button.  This will bring up the
+  <guilabel>Currency editor</guilabel>.
+</para>
+
+<para>
+  Replace with the currency editor
+  <screenshot>
+    <screeninfo>The Currency editor</screeninfo>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="select_currency.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>add new currency or edit currency dedtails</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<para>
+  The Currency editor has some similarities to the dialog for editing details of securities
+</para>
+
+<para>
+  Enter the official ISO code for the currency and click <guilabel>OK</guilabel>.  The
   currency will be created with the name <quote>New Currency</quote>.  To change the
   name, either press <keycap>F2</keycap> or right-click and select
   <guimenuitem>Rename currency</guimenuitem>.
