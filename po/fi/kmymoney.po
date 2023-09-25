@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-23 00:45+0000\n"
+"POT-Creation-Date: 2023-09-25 00:43+0000\n"
 "PO-Revision-Date: 2023-06-07 16:30+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -2241,7 +2241,7 @@ msgstr "ALV-tili"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:529 kmymoney/kmymoney.cpp:432
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:188
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:363
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:370
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:73
 #, kde-format
 msgid "Asset"
@@ -2249,7 +2249,7 @@ msgstr "Varallisuus"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:531 kmymoney/kmymoney.cpp:433
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:189
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:371
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:378
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:75
 #, kde-format
 msgid "Liability"
@@ -2259,7 +2259,7 @@ msgstr "Velat ja lainat"
 #: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1799
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:379
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:386
 #, kde-format
 msgid "Income"
 msgstr "Tulot"
@@ -2268,7 +2268,7 @@ msgstr "Tulot"
 #: kmymoney/models/ledgerfilterbase.cpp:97
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:79
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:191
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:390
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:397
 #, kde-format
 msgid "Expense"
 msgstr "Menot"
@@ -4725,7 +4725,7 @@ msgstr "CSV-tuonti ja -vienti"
 
 #: kmymoney/kmymoney.cpp:436 kmymoney/models/equitiesmodel.cpp:424
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:192
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:401
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:408
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:78
 #, kde-format
 msgid "Equity"
@@ -8398,33 +8398,33 @@ msgid "Favorite"
 msgstr "Suosikki"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:350
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:364
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:371
 #, kde-format
 msgid "Asset accounts"
 msgstr "Omaisuustilit"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:351
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:372
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:379
 #, kde-format
 msgid "Liability accounts"
 msgstr "Velkatilit"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:352
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:127
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:380
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:387
 #, kde-format
 msgid "Income categories"
 msgstr "Tulokatekoriat"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:353
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:129
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:391
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:398
 #, kde-format
 msgid "Expense categories"
 msgstr "Menoluokat"
 
 #: kmymoney/mymoney/storage/accountsmodel.cpp:354
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:402
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:409
 #, kde-format
 msgid "Equity accounts"
 msgstr "Pääomatilit"
@@ -21362,8 +21362,8 @@ msgctxt "No account"
 msgid "None"
 msgstr "Ei mitään"
 
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:346
-#: kmymoney/widgets/kmymoneyaccountselector.cpp:347
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:353
+#: kmymoney/widgets/kmymoneyaccountselector.cpp:354
 #, kde-format
 msgid "Favorites"
 msgstr "Suosikit"
