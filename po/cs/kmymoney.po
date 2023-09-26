@@ -953,11 +953,10 @@ msgstr ""
 
 #: kmymoney/dialogs/kcurrencycalculator.cpp:429
 #: kmymoney/mymoney/mymoneyfile.cpp:2990
-#, fuzzy, kde-format
-#| msgid "User"
+#, kde-format
 msgctxt "@info price source"
 msgid "User"
-msgstr "Uživatel"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KCurrencyCalculator)
 #: kmymoney/dialogs/kcurrencycalculator.ui:17
