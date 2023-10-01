@@ -64,12 +64,12 @@ msgstr "Extracto incorrecto"
 #: kmymoney/converter/mymoneystatementreader.cpp:489
 #, kde-format
 msgid "Importing statement for account %1"
-msgstr "Estase a importar un extracto da conta %1"
+msgstr "Importando un extracto da conta %1"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:491
 #, kde-format
 msgid "Importing statement without transactions"
-msgstr "Estase a importar un extracto da conta sen transaccións"
+msgstr "Importando un extracto da conta sen transaccións"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:576
 #, kde-format
@@ -257,7 +257,7 @@ msgstr "Interromper"
 #: kmymoney/converter/mymoneystatementreader.cpp:1126
 #, kde-format
 msgid "Unable to add payee/receiver"
-msgstr "Non se pode engadir o beneficiario/receptor"
+msgstr "Non é posíbel engadir o beneficiario/receptor"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1373
 #, kde-format
@@ -299,8 +299,8 @@ msgid ""
 "new account by pressing the <b>Create</b> button or select another one "
 "manually from the selection box below."
 msgstr ""
-"KMyMoney non pode determinar cal das súas contas utilizar. Pode crear unha "
-"conta nova premendo o botón <b>Crear</b> ou escoller outra manualmente no "
+"KMyMoney non pode determinar cal das súas contas usar. Pode crear unha conta "
+"nova premendo o botón <b>Crear</b> ou escoller outra manualmente no "
 "despregábel de abaixo."
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1446
@@ -333,7 +333,7 @@ msgstr ""
 #: kmymoney/views/kscheduledview_p.h:315
 #, kde-format
 msgid "Unable to enter scheduled transaction '%1'"
-msgstr "Non se pode inserir a transacción planificada «%1»"
+msgstr "Non é posíbel inserir a transacción planificada «%1»"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1649
 #, kde-format
@@ -397,7 +397,7 @@ msgid ""
 "Unable to load data, because no contact has been associated with the owner "
 "of the standard address book."
 msgstr ""
-"Non se poden cargar os datos, porque non hai ningún contacto asociado ao "
+"Non é posíbel cargar os datos, porque non hai ningún contacto asociado ao "
 "dono da axenda de enderezos estándar."
 
 #: kmymoney/dialogs/editpersonaldatadlg.cpp:174
@@ -635,7 +635,7 @@ msgstr ""
 #: kmymoney/kmymoney.cpp:3851
 #, kde-format
 msgid "Backup"
-msgstr "Copia de seguridade"
+msgstr "Salvagarda"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/dialogs/kbackupdlg.ui:26
@@ -1184,7 +1184,7 @@ msgstr "Actualizar o historial de prezos"
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:663
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
-msgstr "Non se pode usar %1 como divisa base: %2"
+msgstr "Non é posíbel usar %1 como divisa base: %2"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:151
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:663
@@ -1196,7 +1196,7 @@ msgstr "Escoller como divisa base"
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:176
 #, kde-format
 msgid "Cannot update currency. %1"
-msgstr "Non se pode actualizar a divisa. %1"
+msgstr "Non é posíbel actualizar a divisa. %1"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:172
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:176
@@ -1207,7 +1207,7 @@ msgstr "Actualizar a divisa"
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:209
 #, kde-format
 msgid "Cannot create new currency. %1"
-msgstr "Non se pode crear a nova divisa. %1"
+msgstr "Non é posíbel crear a nova divisa. %1"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:209
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:504
@@ -1254,7 +1254,7 @@ msgstr "Opcións das divisas"
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:648
 #, kde-format
 msgid "Cannot delete currency %1. %2"
-msgstr "Non se pode eliminar a divisa %1. %2"
+msgstr "Non é posíbel eliminar a divisa %1. %2"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KCurrencyEditDlg)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:14
@@ -1786,7 +1786,7 @@ msgid ""
 "Failed to retrieve an exchange rate for %1 from %2. It will be skipped this "
 "time."
 msgstr ""
-"Non se puido obter o tipo de cambio de %1 desde %2. Ha ignorarse esta vez."
+"Non foi posíbel obter o tipo de cambio de %1 desde %2. Ha ignorarse esta vez."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:565
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:578
@@ -1803,15 +1803,15 @@ msgid ""
 "updating this security during future price updates or <b>Cancel</b> to stop "
 "the current update operation."
 msgstr ""
-"Non se puido obter a cotización de %1 en %2. Prema <b>Non</b> para retirar "
-"permanentemente a fonte de prezos en Internet para este valor bolsista, "
-"<b>Si</b> para continuar a actualizar este valor en vindeiras actualizacións "
-"ou <b>Cancelar</b> para cancelar esta actualización."
+"Non foi posíbel obter a cotización de %1 en %2. Prema <b>Non</b> para "
+"retirar permanentemente a fonte de prezos en Internet para este valor "
+"bolsista, <b>Si</b> para continuar a actualizar este valor en vindeiras "
+"actualizacións ou <b>Cancelar</b> para cancelar esta actualización."
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:599
 #, kde-format
 msgid "Cannot update security <b>%1</b>: %2"
-msgstr "Non se pode actualizar o valor bolsista <b>%1</b>: %2"
+msgstr "Non é posíbel actualizar o valor bolsista <b>%1</b>: %2"
 
 #: kmymoney/dialogs/kequitypriceupdatedlg.cpp:690
 #, kde-format
@@ -2365,9 +2365,9 @@ msgid ""
 "only be shown if it is used. Otherwise, it will be hidden in the accounts/"
 "categories view."
 msgstr ""
-"Escolleu non amosar as categorías non utilizadas no diálogo de configuración "
-"de KMyMoney. Por tanto, a categoría que acaba de crear só se amosará se for "
-"utilizada. En caso contrario, estará agochada na vista de contas/categorías."
+"Escolleu non amosar as categorías non usadas no diálogo de configuración de "
+"KMyMoney. Por tanto, a categoría que acaba de crear só se amosará se for "
+"usada. En caso contrario, estará agochada na vista de contas/categorías."
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:820
 #, kde-format
@@ -2378,7 +2378,7 @@ msgstr "Categorías agochadas"
 #: kmymoney/wizards/newloanwizard/loanattributeswizardpage.cpp:102
 #, kde-format
 msgid "Cannot add institution"
-msgstr "Non se pode engadir a entidade"
+msgstr "Non é posíbel engadir a entidade"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:971
 #, kde-format
@@ -3243,8 +3243,7 @@ msgstr "Gardar automaticamente cando se teña modificado o ficheiro ao pechar"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:98
 #, kde-format
 msgid "Setup number of backups to keep (local file only)"
-msgstr ""
-"Número configurado de copias de seguridade que manter (só ficheiro local)"
+msgstr "Número configurado de salvagardas que manter (só ficheiro local)"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_AutoBackupCopies)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:103
@@ -3264,7 +3263,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:122
 #, kde-format
 msgid "Number of backups to keep (0=off)"
-msgstr "Número de copias de seguridade que manter (0=desactivado)"
+msgstr "Número de salvagardas que manter (0=desactivado)"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:147
@@ -3922,7 +3921,7 @@ msgid ""
 "</p>"
 msgstr ""
 "<p>Para procesar dun xeito máis sinxelo os datos descargados da fonte de "
-"Internet, KMyMoney xeralmente suprime as partes non utilizadas antes de que "
+"Internet, KMyMoney xeralmente suprime as partes non usadas antes de que "
 "procesalos con expresións regulares. Se depende destes campos para atopar os "
 "campos, use esta opción para non retirar as etiquetas.</p>\n"
 "\n"
@@ -4831,12 +4830,12 @@ msgstr "Sen título"
 #: kmymoney/kmymoney.cpp:1352
 #, kde-format
 msgid "Unable to match the selected transactions"
-msgstr "Non se poden emparellar os asentos escollidos"
+msgstr "Non é posíbel emparellar os asentos escollidos"
 
 #: kmymoney/kmymoney.cpp:1379
 #, kde-format
 msgid "Unable to unmatch the selected transactions"
-msgstr "Non se pode desemparellar o asento escollido"
+msgstr "Non é posíbel desemparellar o asento escollido"
 
 #: kmymoney/kmymoney.cpp:1471
 #, fuzzy, kde-format
@@ -4866,7 +4865,7 @@ msgstr "Gardar no ficheiro"
 #: kmymoney/kmymoney.cpp:1755
 #, kde-format
 msgid "Backup..."
-msgstr "Copia de seguridade…"
+msgstr "Salvagarda…"
 
 #: kmymoney/kmymoney.cpp:1756
 #, kde-format
@@ -5501,12 +5500,12 @@ msgstr "Borrar o asento"
 #: kmymoney/kmymoney.cpp:2631
 #, kde-format
 msgid "Unable to duplicate transaction(s)"
-msgstr "Non se poden duplicar os asentos"
+msgstr "Non é posíbel duplicar os asentos"
 
 #: kmymoney/kmymoney.cpp:2903
 #, kde-format
 msgid "Unable to modify transaction"
-msgstr "Non se pode modificar o asento"
+msgstr "Non é posíbel modificar o asento"
 
 #: kmymoney/kmymoney.cpp:2995
 #, fuzzy, kde-format
@@ -5546,7 +5545,7 @@ msgstr "Calquera asento"
 #: kmymoney/kmymoney.cpp:3091
 #, kde-format
 msgid "Unable to accept transaction"
-msgstr "Non se pode aceptar o asento"
+msgstr "Non é posíbel aceptar o asento"
 
 #: kmymoney/kmymoney.cpp:3131
 #, fuzzy, kde-format
@@ -5615,7 +5614,7 @@ msgstr "Editar os datos persoais"
 #: kmymoney/kmymoney.cpp:3437
 #, kde-format
 msgid "Unable to store user information: %1"
-msgstr "Non se pode gardar a información do usuario: %1"
+msgstr "Non é posíbel gardar a información do usuario: %1"
 
 #: kmymoney/kmymoney.cpp:3445
 #, kde-format
@@ -5625,7 +5624,7 @@ msgstr "Estanse a importar os modelos de contas."
 #: kmymoney/kmymoney.cpp:3459
 #, kde-format
 msgid "Unable to import template(s)"
-msgstr "Non se poden importar os modelos"
+msgstr "Non é posíbel importar os modelos"
 
 #: kmymoney/kmymoney.cpp:3467
 #, kde-format
@@ -5665,8 +5664,8 @@ msgid ""
 "The file must be saved first before it can be backed up.  Do you want to "
 "continue?"
 msgstr ""
-"O ficheiro debe ser gardado antes de poder facerlle unha copia de "
-"seguridade. Quere continuar?"
+"O ficheiro debe ser gardado antes de poder facerlle unha salvagarda. Quere "
+"continuar?"
 
 #: kmymoney/kmymoney.cpp:3650
 #, kde-format
@@ -5680,8 +5679,8 @@ msgid ""
 "The current implementation of the backup functionality only supports local "
 "files as source files. Your current source file is '%1'."
 msgstr ""
-"A implementación actual da función de copia de seguridade só permite usar "
-"ficheiros locais como orixes. O ficheiro orixe actual é «%1»."
+"A implementación actual da función de salvagarda só permite usar ficheiros "
+"locais como orixes. O ficheiro orixe actual é «%1»."
 
 #: kmymoney/kmymoney.cpp:3669
 #, kde-format
@@ -5691,14 +5690,13 @@ msgstr "Só ficheiros locais"
 #: kmymoney/kmymoney.cpp:3708
 #, kde-format
 msgid "Mounting %1"
-msgstr "Estase a montar %1"
+msgstr "Montando %1"
 
 #: kmymoney/kmymoney.cpp:3742
 #, kde-format
 msgid "Backup file for today exists on that device. Replace?"
 msgstr ""
-"Xa existe unha copia de seguridade de hoxe nese dispositivo. Desexa "
-"substituíla?"
+"Xa existe unha salvagarda de hoxe nese dispositivo. Desexa substituíla?"
 
 #: kmymoney/kmymoney.cpp:3742
 #, kde-format
@@ -5720,7 +5718,7 @@ msgstr "Escribindo %1"
 #: kmymoney/kmymoney.cpp:3776
 #, kde-format
 msgid "Unmounting %1"
-msgstr "Estase a desmontar %1"
+msgstr "Desmontando %1"
 
 #: kmymoney/kmymoney.cpp:3813
 #, kde-format
@@ -5736,7 +5734,7 @@ msgstr "Feito"
 #: kmymoney/kmymoney.cpp:3829 kmymoney/kmymoney.cpp:3849
 #, kde-format
 msgid "File successfully backed up"
-msgstr "Creouse unha copia de seguridade do ficheiro"
+msgstr "Creouse unha salvagarda do ficheiro"
 
 #: kmymoney/kmymoney.cpp:3835
 #, kde-format
@@ -5776,12 +5774,12 @@ msgstr "Problema co saldo de apertura"
 #: kmymoney/wizards/newloanwizard/interestcategorywizardpage.cpp:98
 #, kde-format
 msgid "Unable to add account: %1"
-msgstr "Non se pode engadir a conta: %1"
+msgstr "Non é posíbel engadir a conta: %1"
 
 #: kmymoney/kmymoney.cpp:4043
 #, kde-format
 msgid "Running consistency check..."
-msgstr "Estase a facer unha comprobación da consistencia…"
+msgstr "Facendo unha comprobación da consistencia…"
 
 #: kmymoney/kmymoney.cpp:4050
 #, kde-format
@@ -5827,7 +5825,7 @@ msgstr "Antes de importar un extracto, debe escoller un ficheiro de KMyMoney."
 #: kmymoney/kmymoney.cpp:4326
 #, kde-format
 msgid "Importing a statement via Web Connect"
-msgstr "Estase a importar un extracto mediante Conexión á Web"
+msgstr "Importando un extracto mediante Conexión á Web"
 
 #: kmymoney/kmymoney.cpp:4338
 #, fuzzy, kde-format
@@ -5860,17 +5858,17 @@ msgstr "Todas as mensaxes"
 #: kmymoney/kmymoney.cpp:4401
 #, kde-format
 msgid "Auto saving..."
-msgstr "Estase a gardar automaticamente…"
+msgstr "Gardando automaticamente…"
 
 #: kmymoney/kmymoney.cpp:4521
 #, kde-format
 msgid "Creating new document..."
-msgstr "Estase a crear un documento novo…"
+msgstr "Creando un documento novo…"
 
 #: kmymoney/kmymoney.cpp:4581
 #, kde-format
 msgid "Couldn't create a new file."
-msgstr "Non se puido crear un ficheiro novo."
+msgstr "Non foi posíbel crear un ficheiro novo."
 
 #: kmymoney/kmymoney.cpp:4592
 #, kde-format
@@ -5880,7 +5878,7 @@ msgstr "Abrir un ficheiro."
 #: kmymoney/kmymoney.cpp:4606
 #, kde-format
 msgid "Couldn't find any plugin for opening storage."
-msgstr "Non se puido atopar ningún complemento para abrir o almacenamento."
+msgstr "Non foi posíbel atopar ningún complemento para abrir o almacenamento."
 
 #: kmymoney/kmymoney.cpp:4610
 #, kde-format
@@ -5890,7 +5888,7 @@ msgstr "Todos os ficheiros (*)"
 #: kmymoney/kmymoney.cpp:4623
 #, kde-format
 msgid "Loading file..."
-msgstr "Estase a cargar o ficheiro…"
+msgstr "Cargando o ficheiro…"
 
 #: kmymoney/kmymoney.cpp:4629
 #, kde-format
@@ -5920,7 +5918,7 @@ msgstr "Ficheiro non atopado"
 #: kmymoney/kmymoney.cpp:4663
 #, kde-format
 msgid "Cannot open file as requested."
-msgstr "Non se pode abrir o ficheiro como solicitou."
+msgstr "Non é posíbel abrir o ficheiro como solicitou."
 
 #: kmymoney/kmymoney.cpp:4669
 #, kde-format
@@ -5928,13 +5926,13 @@ msgid ""
 "Could not read your data source. Please check the KMyMoney settings that the "
 "necessary plugin is enabled."
 msgstr ""
-"Non se puido ler a súa fonte de datos. Comprobe que na configuración de "
+"Non foi posíbel ler a súa fonte de datos. Comprobe que na configuración de "
 "KMyMoney están activados os complementos necesarios."
 
 #: kmymoney/kmymoney.cpp:4679
 #, kde-format
 msgid "Saving file..."
-msgstr "Estase a gardar o ficheiro…"
+msgstr "Gardando o ficheiro…"
 
 #: kmymoney/kmymoney.cpp:4691
 #, fuzzy, kde-format
@@ -5963,7 +5961,7 @@ msgstr "Non se puido atopar ningún complemento para gardar o almacenamento."
 #: kmymoney/kmymoney.cpp:4748
 #, kde-format
 msgid "Failed to save your storage."
-msgstr "Non se puido gardar o seu almacenamento."
+msgstr "Non foi posíbel gardar o seu almacenamento."
 
 #. i18n: ectx: Menu (import)
 #: kmymoney/kmymoneyui.rc:8 kmymoney/plugins/qif/import/kimportdlg.cpp:54
@@ -6181,7 +6179,7 @@ msgstr "Fluxo de caixa"
 #: kmymoney/kmymoneyutils.cpp:275 kmymoney/views/kenterscheduledlg.cpp:124
 #, kde-format
 msgid "Unable to load schedule details"
-msgstr "Non se poden cargar os detalles da planificación"
+msgstr "Non é posíbel cargar os detalles da planificación"
 
 #: kmymoney/kmymoneyutils.cpp:370
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:112
@@ -6266,7 +6264,7 @@ msgstr "<qt>Quere engadir a <b>%1</b> como pagador/receptor?</qt>"
 #: kmymoney/kmymoneyutils.cpp:604
 #, kde-format
 msgid "Unable to add payee"
-msgstr "Non se pode engadir o beneficiario"
+msgstr "Non é posíbel engadir o beneficiario"
 
 #: kmymoney/kmymoneyutils.cpp:615 kmymoney/views/ktagsview.cpp:633
 #, kde-format
@@ -6286,12 +6284,12 @@ msgstr "Nova etiqueta"
 #: kmymoney/kmymoneyutils.cpp:653
 #, kde-format
 msgid "Unable to add tag"
-msgstr "Non se pode engadir a etiqueta"
+msgstr "Non é posíbel engadir a etiqueta"
 
 #: kmymoney/kmymoneyutils.cpp:669 kmymoney/views/kinstitutionsview.cpp:229
 #, kde-format
 msgid "Cannot add institution: %1"
-msgstr "Non se pode engadir a entidade: %1"
+msgstr "Non é posíbel engadir a entidade: %1"
 
 #: kmymoney/kmymoneyutils.cpp:726
 #: kmymoney/plugins/plugin-interfaces/kmmstatementinterface.cpp:50
@@ -6385,7 +6383,7 @@ msgstr "A fonte <placeholder>%1</placeholder> non existe."
 #: kmymoney/misc/webpricequote.cpp:150
 #, kde-format
 msgid "Cannot resolve input date."
-msgstr "Non se pode resolver a data de entrada."
+msgstr "Non é posíbel resolver a data de entrada."
 
 #: kmymoney/misc/webpricequote.cpp:167
 #, kde-format
@@ -6395,7 +6393,7 @@ msgstr "A fonte CSV <placeholder>%1</placeholder> non existe."
 #: kmymoney/misc/webpricequote.cpp:185
 #, kde-format
 msgid "Cannot find from and to currency."
-msgstr "Non se poden atopar as divisas de orixe e de destino."
+msgstr "Non é posíbel atopar as divisas de orixe e de destino."
 
 #: kmymoney/misc/webpricequote.cpp:198
 #, kde-format
@@ -6405,7 +6403,7 @@ msgstr "Non se permiten fontes de cotización locais."
 #: kmymoney/misc/webpricequote.cpp:203 kmymoney/misc/webpricequote.cpp:299
 #, kde-format
 msgid "Fetching URL %1..."
-msgstr "Estase a obter o URL %1…"
+msgstr "Obtendo o URL %1…"
 
 #: kmymoney/misc/webpricequote.cpp:228
 #, kde-format
@@ -6420,28 +6418,28 @@ msgstr ""
 #, kde-format
 msgctxt "The process x is executing"
 msgid "Executing %1..."
-msgstr "Estase a executar %1…"
+msgstr "Executando %1…"
 
 #: kmymoney/misc/webpricequote.cpp:294 kmymoney/misc/webpricequote.cpp:401
 #, kde-format
 msgid "Unable to launch: %1"
-msgstr "Non se pode iniciar: %1"
+msgstr "Non é posíbel iniciar: %1"
 
 #: kmymoney/misc/webpricequote.cpp:330 kmymoney/misc/webpricequote.cpp:359
 #, kde-format
 msgid "Failed to open downloaded file"
-msgstr "Non se puido abrir o ficheiro descargado"
+msgstr "Non foi posíbel abrir o ficheiro descargado"
 
 #: kmymoney/misc/webpricequote.cpp:388
 #, kde-format
 msgctxt "Executing 'script' 'online source' 'investment symbol' "
 msgid "Executing %1 %2 %3..."
-msgstr "Estase a executar %1 %2 %3…"
+msgstr "Executando %1 %2 %3…"
 
 #: kmymoney/misc/webpricequote.cpp:426
 #, kde-format
 msgid "Unable to update price for %1"
-msgstr "Non se pode actualizar o prezo de %1"
+msgstr "Non é posíbel actualizar o prezo de %1"
 
 #: kmymoney/misc/webpricequote.cpp:460
 #, kde-format
@@ -6461,12 +6459,12 @@ msgstr "Data atopada: «%1»"
 #: kmymoney/misc/webpricequote.cpp:523
 #, kde-format
 msgid "Unable to update price for %1 (no price or no date)"
-msgstr "Non se pode actualizar o prezo de %1 (non hai prezo ou data)"
+msgstr "Non é posíbel actualizar o prezo de %1 (non hai prezo ou data)"
 
 #: kmymoney/misc/webpricequote.cpp:527
 #, kde-format
 msgid "Unable to update price for %1 (empty quote data)"
-msgstr "Non se pode actualizar o prezo de %1 (datos de cotización baleiros)"
+msgstr "Non é posíbel actualizar o prezo de %1 (datos de cotización baleiros)"
 
 #: kmymoney/misc/webpricequote.cpp:530
 #, fuzzy, kde-format
@@ -6629,7 +6627,7 @@ msgstr "Dr."
 #, kde-format
 msgid "The plugin to show this information could not be found."
 msgstr ""
-"Non se puido atopar o complemento necesario para amosar esta información."
+"Non foi posíbel atopar o complemento necesario para amosar esta información."
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:425
 #, kde-format
@@ -8452,7 +8450,8 @@ msgstr ""
 #: kmymoney/mymoney/onlinetasks/unavailabletask/tasks/unavailabletask.cpp:23
 #, kde-format
 msgid "Could not load responsible plugin to view this task."
-msgstr "Non se puido cargar o complemento necesario para amosar esta tarefa."
+msgstr ""
+"Non foi posíbel cargar o complemento necesario para amosar esta tarefa."
 
 #: kmymoney/mymoney/splitmodel.cpp:36
 #, fuzzy, kde-format
@@ -9896,7 +9895,7 @@ msgstr "Completouse a exportación.\n"
 #: kmymoney/plugins/qif/export/mymoneyqifwriter.cpp:79
 #, kde-format
 msgid "Unable to open file '%1' for writing"
-msgstr "Non se pode abrir o ficheiro «%1» para escritura"
+msgstr "Non é posíbel abrir o ficheiro «%1» para escritura"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:99
 #, kde-format
@@ -12927,7 +12926,7 @@ msgstr "Contactando co banco…"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:70
 #, kde-format
 msgid "Loading banklist"
-msgstr "Estase a cargar a lista de bancos"
+msgstr "Cargando a lista de bancos"
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:71
 #, kde-format
@@ -12935,7 +12934,7 @@ msgid ""
 "Getting list of banks from https://www.ofxhome.com/\n"
 "This may take some time depending on the available bandwidth."
 msgstr ""
-"Estase a obter a lista de bancos de https://www.ofxhome.com/\n"
+"Obtendo a lista de bancos de https://www.ofxhome.com/\n"
 "Isto pode demorar algún tempo, segundo a largura de banda dispoñíbel."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:240
@@ -13581,7 +13580,7 @@ msgid ""
 "Unable to import %1 using the OFX importer plugin.  This file is not the "
 "correct format."
 msgstr ""
-"Non se pode importar %1 usando o complemento de importación de OFX. Este "
+"Non é posíbel importar %1 usando o complemento de importación de OFX. Este "
 "ficheiro non ten o formato correcto."
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:187
@@ -13592,7 +13591,7 @@ msgstr "O formato é incorrecto"
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:232
 #, kde-format
 msgid "Unable to parse file"
-msgstr "Non se pode procesar o ficheiro"
+msgstr "Non é posíbel procesar o ficheiro"
 
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:828
 #, kde-format
@@ -13621,7 +13620,7 @@ msgstr "O proceso de importación rematou inesperadamente."
 #: kmymoney/plugins/ofx/import/ofximporter.cpp:1057
 #, kde-format
 msgid "Failed to import all statements."
-msgstr "Non se puideron importar todos os extractos."
+msgstr "Non foi posíbel importar todos os extractos."
 
 #: kmymoney/plugins/onlinetasks/sepa/ui/sepacredittransferedit.cpp:432
 #, kde-format
@@ -14385,12 +14384,12 @@ msgstr "Escolla o formato de data que corresponde co ficheiro de entrada"
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:379
 #, kde-format
 msgid "Importing QIF..."
-msgstr "Estase a importar o QIF…"
+msgstr "Importando o QIF…"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:481
 #, kde-format
 msgid "Reading QIF..."
-msgstr "Estase a ler o QIF…"
+msgstr "Lendo o QIF…"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:486
 #, kde-format
@@ -14456,7 +14455,7 @@ msgstr "Sobrescribir o saldo de apertura"
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:904
 #, kde-format
 msgid "Unable to find account: %1"
-msgstr "Non se pode atopar a conta: %1"
+msgstr "Non é posíbel atopar a conta: %1"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:918
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:928
@@ -14728,7 +14727,7 @@ msgid ""
 "Unable to open database.\n"
 "You must use an SQL CREATE DATABASE statement before creating the tables.\n"
 msgstr ""
-"Non se pode abrir a base de datos.\n"
+"Non é posíbel abrir a base de datos.\n"
 "Hai que usar unha instrución CREATE DATABASE de SQL antes de crear as "
 "táboas.\n"
 
@@ -14764,7 +14763,7 @@ msgid ""
 msgstr ""
 "O base de datos tipo %1 non ten sido probada abondo nun contexto con "
 "KMyMoney.\n"
-"Asegúrese de dispor de copias de seguridade bos dos seus datos.\n"
+"Asegúrese de dispor de salvagardas bos dos seus datos.\n"
 "Informe de calquera problema na lista de correo dos desenvolvedores en "
 "kmymoney-devel@kde.org"
 
@@ -14845,7 +14844,7 @@ msgid ""
 msgstr ""
 "Este software aínda está en fase experimental e aínda ten algúns problemas "
 "coñecidos cos tempos de resposta. Estamos a traballar neles.\n"
-"Como sempre, asegúrese de que ten unha copia de seguridade dos seus datos."
+"Como sempre, asegúrese de que ten unha salvagarda dos seus datos."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:188
@@ -14943,7 +14942,7 @@ msgstr ""
 #: kmymoney/plugins/sql/sqlstorage.cpp:136
 #, kde-format
 msgid "Cannot open database %1\n"
-msgstr "Non se pode abrir a base de datos %1\n"
+msgstr "Non é posíbel abrir a base de datos %1\n"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:169
 #, kde-format
@@ -14974,12 +14973,12 @@ msgstr ""
 #: kmymoney/plugins/sql/sqlstorage.cpp:231
 #, kde-format
 msgid "Cannot save to current database."
-msgstr "Non se pode gardar na base de datos actual."
+msgstr "Non é posíbel gardar na base de datos actual."
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:236
 #, kde-format
 msgid "Cannot save to current database: %1"
-msgstr "Non se pode gardar na base de datos actual: %1"
+msgstr "Non é posíbel gardar na base de datos actual: %1"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:259
 #, kde-format
@@ -15012,7 +15011,7 @@ msgid ""
 "Cannot open or create database %1.\n"
 "Retry Save As Database and click Help for further info."
 msgstr ""
-"Non se pode abrir ou crear a base de datos %1\n"
+"Non é posíbel abrir ou crear a base de datos %1\n"
 "Use de novo «Gardar como base de datos» e prema «Axuda» para máis "
 "información."
 
@@ -15099,7 +15098,7 @@ msgstr "Orzamento %1 %2"
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:174
 #, kde-format
 msgid "Unable to add budget"
-msgstr "Non se pode engadir o orzamento"
+msgstr "Non é posíbel engadir o orzamento"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:131
 #, kde-format
@@ -15121,7 +15120,7 @@ msgstr "Eliminar o orzamento"
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:154
 #, kde-format
 msgid "Unable to remove budget."
-msgstr "Non se pode retirar o orzamento."
+msgstr "Non é posíbel retirar o orzamento."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:169
 #: kmymoney/plugins/views/reports/kreportsview.cpp:469
@@ -15147,17 +15146,17 @@ msgstr "Aviso"
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:217
 #, kde-format
 msgid "Unable to modify budget."
-msgstr "Non se pode modificar o orzamento."
+msgstr "Non é posíbel modificar o orzamento."
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:232
 #, kde-format
 msgid "Unable to reset budget"
-msgstr "Non se pode recuperar o orzamento"
+msgstr "Non é posíbel recuperar o orzamento"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:247
 #, kde-format
 msgid "Unable to modify budget"
-msgstr "Non se pode modificar o orzamento"
+msgstr "Non é posíbel modificar o orzamento"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:365
 #, fuzzy, kde-format
@@ -15869,7 +15868,7 @@ msgstr "Enviar"
 msgid ""
 "During the change of the order your previous entries could not be converted."
 msgstr ""
-"Non se puideron converter as entradas anteriores durante o cambio do xiro."
+"Non foi posíbel converter as entradas anteriores durante o cambio do xiro."
 
 #: kmymoney/plugins/views/onlinejoboutbox/konlinetransferform.cpp:283
 #, kde-format
@@ -16451,7 +16450,7 @@ msgstr "Todos os valores en %1 a non ser que se indique outra cousa"
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:117
 #, kde-format
 msgid "Unable to generate report"
-msgstr "Non se pode xerar o informe"
+msgstr "Non é posíbel xerar o informe"
 
 #: kmymoney/plugins/views/reports/core/reporttable.cpp:118
 #, kde-format
@@ -16719,7 +16718,7 @@ msgstr "Descoñécese a vista «%1» en KReportsView::slotOpenUrl()"
 #: kmymoney/plugins/views/reports/kreportsview.cpp:374
 #, kde-format
 msgid "Failed to save: %1"
-msgstr "Non se puido gardar: %1"
+msgstr "Non foi posíbel gardar: %1"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:399
 #: kmymoney/plugins/views/reports/kreportsview.cpp:470
@@ -16799,19 +16798,19 @@ msgid ""
 "Could not find reportgroup \"%1\" for report \"%2\".\n"
 "Please report this error to the developer's list: kmymoney-devel@kde.org"
 msgstr ""
-"Non se puido atopar reportgroup «%1» para o informe «%2».\n"
+"Non foi posíbel atopar reportgroup «%1» para o informe «%2».\n"
 "Por favor, informe deste erro na lista de desenvolvedores: kmymoney-"
 "devel@kde.org"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:448
 #, kde-format
 msgid "Failed to configure report: %1"
-msgstr "Non se puido configurar o informe: %1"
+msgstr "Non foi posíbel configurar o informe: %1"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:506
 #, kde-format
 msgid "Cannot add report, reason: \"%1\""
-msgstr "Non se pode engadir o informe; motivo: «%1»"
+msgstr "Non é posíbel engadir o informe; motivo: «%1»"
 
 #: kmymoney/plugins/views/reports/kreportsview.cpp:541
 #, kde-format
@@ -18652,7 +18651,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:33
 #, kde-format
 msgid "Number of backup files to keep"
-msgstr "Número de copias de seguridade que manter"
+msgstr "Número de salvagardas que manter"
 
 #. i18n: ectx: label, entry (AutoSavePeriod), group (General Options)
 #: kmymoney/settings/kmymoney.kcfg:39
@@ -19168,7 +19167,7 @@ msgstr "Estase a cargar o modelo %1"
 #: kmymoney/templates/templatewriter.cpp:202
 #, kde-format
 msgid "Unable to write changes to '%1'"
-msgstr "Non se poden escribir os cambios en «%1»"
+msgstr "Non é posíbel escribir os cambios en «%1»"
 
 #: kmymoney/templates/templatewriter.cpp:192
 #: kmymoney/templates/templatewriter.cpp:206
@@ -19527,7 +19526,7 @@ msgstr "Valor neto: "
 #: kmymoney/views/kaccountsview.cpp:248
 #, kde-format
 msgid "Unable to delete account '%1'. Cause: %2"
-msgstr "Non se pode eliminar a conta «%1». Motivo: %2"
+msgstr "Non é posíbel eliminar a conta «%1». Motivo: %2"
 
 #: kmymoney/views/kaccountsview.cpp:277
 #, kde-format
@@ -19548,7 +19547,7 @@ msgstr "Eliminar a asociación cunha conta de Internet"
 #: kmymoney/views/kaccountsview.cpp:298
 #, kde-format
 msgid "Unable to unmap account from online account: %1"
-msgstr "Non se pode anular a asociación da conta cunha conta en Internet: %1"
+msgstr "Non é posíbel anular a asociación da conta cunha conta en Internet: %1"
 
 #: kmymoney/views/kaccountsview.cpp:317
 #, kde-format
@@ -19566,7 +19565,7 @@ msgstr ""
 #: kmymoney/views/kaccountsview.cpp:317
 #, kde-format
 msgid "Mapping brokerage account"
-msgstr "Estase a asociar a nova conta de corretaxe"
+msgstr "Asociando a nova conta de corretaxe"
 
 #: kmymoney/views/kaccountsview.cpp:335
 #, fuzzy, kde-format
@@ -19578,7 +19577,7 @@ msgstr "Actualización por Internet"
 #: kmymoney/views/kaccountsview.cpp:377
 #, kde-format
 msgid "Unable to map account to online account: %1"
-msgstr "Non se pode asociar a conta a unha conta en Internet: %1"
+msgstr "Non é posíbel asociar a conta a unha conta en Internet: %1"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_collapseButton)
 #: kmymoney/views/kaccountsview.ui:58 kmymoney/views/kcategoriesview.ui:44
@@ -19621,7 +19620,7 @@ msgstr "Editar a conta…"
 #: kmymoney/views/kaccountsview_p.h:279
 #, kde-format
 msgid "Unable to modify account '%1'. Cause: %2"
-msgstr "Non se pode modificar a conta «%1». Motivo: %2"
+msgstr "Non é posíbel modificar a conta «%1». Motivo: %2"
 
 #: kmymoney/views/kaccountsview_p.h:355
 #, kde-format
@@ -19685,14 +19684,14 @@ msgstr "Editar a categoría…"
 #: kmymoney/views/kcategoriesview.cpp:213
 #, kde-format
 msgid "Unable to modify category '%1'. Cause: %2"
-msgstr "Non se pode modificar a categoría «%1». Causa: %2"
+msgstr "Non é posíbel modificar a categoría «%1». Causa: %2"
 
 #: kmymoney/views/kcategoriesview.cpp:310
 #, kde-format
 msgid ""
 "Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3"
 msgstr ""
-"Non se poden intercambiar as categorías <b>%1</b> e <b>%2</b>. Motivo: %3"
+"Non é posíbel intercambiar as categorías <b>%1</b> e <b>%2</b>. Motivo: %3"
 
 #: kmymoney/views/kcategoriesview.cpp:331
 #, kde-format
@@ -19751,7 +19750,7 @@ msgstr "<qt>Non se pode borrar unha subcategoría de <b>%1</b>. Motivo: %2</qt>"
 #: kmymoney/views/kcategoriesview.cpp:424
 #, kde-format
 msgid "Unable to delete category '%1'. Cause: %2"
-msgstr "Non se pode eliminar a categoría <b>%1</b>. Causa: %2"
+msgstr "Non é posíbel eliminar a categoría <b>%1</b>. Causa: %2"
 
 #: kmymoney/views/keditscheduledlg.cpp:127
 #, fuzzy, kde-format
@@ -19781,7 +19780,7 @@ msgstr ""
 #: kmymoney/views/keditscheduledlg.cpp:578
 #, kde-format
 msgid "Unable to add scheduled transaction: %1"
-msgstr "Non se pode engadir a transacción planificada: %1"
+msgstr "Non é posíbel engadir a transacción planificada: %1"
 
 #: kmymoney/views/keditscheduledlg.cpp:578
 #, kde-format
@@ -19813,7 +19812,7 @@ msgstr "Reiniciar a data do último pagamento"
 #: kmymoney/views/keditscheduledlg.cpp:654
 #, kde-format
 msgid "Unable to modify scheduled transaction '%1'"
-msgstr "Non se pode modificar a planificación «%1»"
+msgstr "Non é posíbel modificar a planificación «%1»"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KEditScheduleDlg)
 #: kmymoney/views/keditscheduledlg.ui:14
@@ -20236,12 +20235,12 @@ msgstr "Ganancias/Perdas agardadas"
 #: kmymoney/views/kinstitutionsview.cpp:257
 #, kde-format
 msgid "Unable to store institution: %1"
-msgstr "Non se pode gardar a entidade: %1"
+msgstr "Non é posíbel gardar a entidade: %1"
 
 #: kmymoney/views/kinstitutionsview.cpp:263
 #, kde-format
 msgid "Unable to edit institution: %1"
-msgstr "Non se pode editar a entidade: %1"
+msgstr "Non é posíbel editar a entidade: %1"
 
 #: kmymoney/views/kinstitutionsview.cpp:274
 #, kde-format
@@ -20259,7 +20258,7 @@ msgstr "Eliminar a entidade…"
 #: kmymoney/views/kinstitutionsview.cpp:289
 #, kde-format
 msgid "Unable to delete institution: %1"
-msgstr "Non se pode eliminar a entidade: %1"
+msgstr "Non é posíbel eliminar a entidade: %1"
 
 #: kmymoney/views/kinvestmentview.cpp:271
 #, kde-format
@@ -20274,7 +20273,7 @@ msgstr "Borrar o investimento"
 #: kmymoney/views/kinvestmentview.cpp:283
 #, kde-format
 msgid "Unable to delete investment: %1"
-msgstr "Non se pode eliminar o investimento: %1"
+msgstr "Non é posíbel eliminar o investimento: %1"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KInvestmentView)
 #: kmymoney/views/kinvestmentview.ui:14
@@ -20404,7 +20403,7 @@ msgstr "Duplicado aberto"
 #: kmymoney/views/kpayeesview.cpp:401
 #, kde-format
 msgid "Unable to modify payee"
-msgstr "Non se pode modificar o beneficiario"
+msgstr "Non é posíbel modificar o beneficiario"
 
 #: kmymoney/views/kpayeesview.cpp:553
 #, kde-format
@@ -20687,7 +20686,7 @@ msgstr ""
 #: kmymoney/views/kpayeesview_p.h:565
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
-msgstr "Non se pode reasignar o beneficiario do asento/partida"
+msgstr "Non é posíbel reasignar o beneficiario do asento/partida"
 
 #: kmymoney/views/kpayeesview_p.h:569
 #, kde-format
@@ -20697,7 +20696,7 @@ msgstr "Non hai nada para fusionar."
 #: kmymoney/views/kpayeesview_p.h:652
 #, kde-format
 msgid "Unable to remove payee(s)"
-msgstr "Non se poden retirar os beneficiarios"
+msgstr "Non é posíbel retirar os beneficiarios"
 
 #: kmymoney/views/kscheduledview.cpp:133
 #, kde-format
@@ -20739,7 +20738,7 @@ msgstr "Escoller as planificacións"
 #: kmymoney/views/kscheduledview.cpp:238
 #, kde-format
 msgid "Unable to remove scheduled transaction '%1'"
-msgstr "Non se pode retirar a planificación «%1»"
+msgstr "Non é posíbel retirar a planificación «%1»"
 
 #: kmymoney/views/kscheduledview.cpp:252
 #, kde-format
@@ -20750,7 +20749,7 @@ msgstr "Copia de %1"
 #: kmymoney/views/kscheduledview.cpp:273
 #, kde-format
 msgid "Unable to duplicate scheduled transaction: '%1'"
-msgstr "Non se pode asentar a transacción planificada: «%1»"
+msgstr "Non é posíbel asentar a transacción planificada: «%1»"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_qbuttonNew)
 #: kmymoney/views/kscheduledview.ui:31
@@ -20904,17 +20903,17 @@ msgstr "Etiqueta duplicada"
 #: kmymoney/views/ktagsview.cpp:402 kmymoney/views/ktagsview.cpp:526
 #, kde-format
 msgid "Unable to modify tag"
-msgstr "Non se pode modificar a etiqueta"
+msgstr "Non é posíbel modificar a etiqueta"
 
 #: kmymoney/views/ktagsview.cpp:802
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
-msgstr "Non se pode reasignar o beneficiario do asento/partida"
+msgstr "Non é posíbel reasignar o beneficiario do asento/partida"
 
 #: kmymoney/views/ktagsview.cpp:814
 #, kde-format
 msgid "Unable to remove tag(s)"
-msgstr "Non se poden retirar as etiquetas"
+msgstr "Non é posíbel retirar as etiquetas"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
 #: kmymoney/views/ktagsview.ui:44
@@ -22474,7 +22473,7 @@ msgstr "Asistente de conciliación"
 #: kmymoney/wizards/endingbalancedlg/previouspostponewizardpage.ui:14
 #, kde-format
 msgid "Restarting postponed reconciliation"
-msgstr "Estase a reiniciar a conciliación aprazada"
+msgstr "Reiniciando a conciliación aprazada"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel8)
 #: kmymoney/wizards/endingbalancedlg/previouspostponewizardpage.ui:30
@@ -22956,10 +22955,10 @@ msgid ""
 "enter an estimate. You can change this value later before you reconcile this "
 "account for the first time.</p>"
 msgstr ""
-"<p>O saldo inicial é o saldo da conta cando comeza a utilizala con KMyMoney. "
-"No caso das contas novas polo xeral vale 0 pero no das preexistentes pode "
-"ser outro valor. Consulte os extractos de conta para coñecer esta cantidade. "
-"O saldo inicial debe indicarse na divisa da conta, tal como esta fose "
+"<p>O saldo inicial é o saldo da conta cando comeza a usala con KMyMoney. No "
+"caso das contas novas polo xeral vale 0 pero no das preexistentes pode ser "
+"outro valor. Consulte os extractos de conta para coñecer esta cantidade. O "
+"saldo inicial debe indicarse na divisa da conta, tal como esta fose "
 "escollida co botón de divisa.</p>\n"
 "<p><i>Nota</i>: Se descoñece o saldo de apertura exacto, insira unha "
 "estimación. Poderá cambiar este valor noutro momento antes de conciliar a "
@@ -24076,7 +24075,7 @@ msgstr "Usuario"
 #: kmymoney/wizards/newaccountwizard/knewaccountwizard.cpp:421
 #, kde-format
 msgid "Unable to create account: %1"
-msgstr "Non se pode crear conta: %1"
+msgstr "Non é posíbel crear conta: %1"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:64
 #, kde-format
