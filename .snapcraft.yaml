@@ -24,7 +24,6 @@ apps:
         - network
         - network-bind
         - cups
-        - network-manager
         - udisks2
         command-chain:
         - snap/command-chain/desktop-launch
