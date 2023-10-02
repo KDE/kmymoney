@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-25 00:43+0000\n"
+"POT-Creation-Date: 2023-10-02 00:43+0000\n"
 "PO-Revision-Date: 2023-09-11 14:12+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -20634,13 +20634,13 @@ msgstr ""
 "Seçili bir işlemin kayıt tarihi (%1), seçili hesabın açılış tarihinden (%2) "
 "önce."
 
-#: kmymoney/views/multitransactioneditor.cpp:696
+#: kmymoney/views/multitransactioneditor.cpp:724
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Bir anda birden çok plan düzenlenemiyor."
 
-#: kmymoney/views/multitransactioneditor.cpp:704
+#: kmymoney/views/multitransactioneditor.cpp:732
 #, kde-format
 msgid ""
 "Selection of category or account is not possible when split transactions are "

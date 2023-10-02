@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-25 00:43+0000\n"
+"POT-Creation-Date: 2023-10-02 00:43+0000\n"
 "PO-Revision-Date: 2023-08-20 10:48+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -20848,14 +20848,14 @@ msgstr ""
 "  * Data wykonania '%2' transakcji '%1' jest późniejsza niż data otwarcia "
 "konta, do którego się odnosi."
 
-#: kmymoney/views/multitransactioneditor.cpp:696
+#: kmymoney/views/multitransactioneditor.cpp:724
 #, fuzzy, kde-format
 #| msgid "Cannot edit multiple split transactions at once."
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Nie może edytować wielu części transakcji na raz."
 
-#: kmymoney/views/multitransactioneditor.cpp:704
+#: kmymoney/views/multitransactioneditor.cpp:732
 #, kde-format
 msgid ""
 "Selection of category or account is not possible when split transactions are "

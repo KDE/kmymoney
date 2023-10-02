@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-25 00:43+0000\n"
+"POT-Creation-Date: 2023-10-02 00:43+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -21434,14 +21434,14 @@ msgid ""
 "selected account (%2)."
 msgstr "Күні есепшот ашылған күннен алдындағы транзакцияны енгізуге болмайды."
 
-#: kmymoney/views/multitransactioneditor.cpp:696
+#: kmymoney/views/multitransactioneditor.cpp:724
 #, fuzzy, kde-format
 #| msgid "Cannot edit multiple split transactions at once."
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Бірнешеге бөлінген транзакциялар бірге өзгертілмейді."
 
-#: kmymoney/views/multitransactioneditor.cpp:704
+#: kmymoney/views/multitransactioneditor.cpp:732
 #, kde-format
 msgid ""
 "Selection of category or account is not possible when split transactions are "

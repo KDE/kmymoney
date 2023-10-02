@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-25 00:43+0000\n"
+"POT-Creation-Date: 2023-10-02 00:43+0000\n"
 "PO-Revision-Date: 2023-07-13 00:39+0100\n"
 "Last-Translator: Jose Jorge <jjorge@free.fr>\n"
 "Language-Team: português <pt@li.org>\n"
@@ -20938,14 +20938,14 @@ msgstr ""
 "  * A transacção '%1' tem uma data de publicação '%2' anterior à data de "
 "abertura da conta respectiva."
 
-#: kmymoney/views/multitransactioneditor.cpp:696
+#: kmymoney/views/multitransactioneditor.cpp:724
 #, fuzzy, kde-format
 #| msgid "Cannot open file as requested."
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
 msgstr "Não é possível aceder ao ficheiro pedido."
 
-#: kmymoney/views/multitransactioneditor.cpp:704
+#: kmymoney/views/multitransactioneditor.cpp:732
 #, kde-format
 msgid ""
 "Selection of category or account is not possible when split transactions are "
