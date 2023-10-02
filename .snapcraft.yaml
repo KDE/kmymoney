@@ -25,6 +25,7 @@ apps:
         - network-bind
         - cups
         - udisks2
+        - browser-support
         command-chain:
         - snap/command-chain/desktop-launch
 assumes:
@@ -164,6 +165,8 @@ parts:
         - libqt5keychain1
         - libqt5webengine5
         - qml-module-qtquick2
+        stage-snaps:
+        - kcalc
         source: https://invent.kde.org/office/kmymoney.git
         source-branch: 5.1
         cmake-parameters:
