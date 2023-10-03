@@ -62,6 +62,8 @@
 
 #include "mymoneyxmlwriter_p.h"
 
+#include "config-kmymoney-version.h"
+
 using namespace MyMoneyXmlHelper;
 
 MyMoneyXmlWriterPrivate::MyMoneyXmlWriterPrivate()
@@ -157,6 +159,9 @@ void MyMoneyXmlWriterPrivate::writeFileInformation()
     m_writer->writeStartElement(elementName(Element::General::FixVersion));
     m_writer->writeAttribute(attributeName(Attribute::General::Date),
                              m_file->parametersModel()->itemById(m_file->fixedKey(MyMoneyFile::FileFixVersion)).value());
+    m_writer->writeEndElement();
+    m_writer->writeStartElement(elementName(Element::General::ApplicationVersion));
+    m_writer->writeAttribute(attributeName(Attribute::General::ID), QLatin1String(VERSION));
     m_writer->writeEndElement();
 
     m_writer->writeEndElement();

@@ -62,6 +62,7 @@ enum class General {
     Version,
     FixVersion,
     Pair,
+    ApplicationVersion,
     // insert new entries above this line
     LastElement,
 };

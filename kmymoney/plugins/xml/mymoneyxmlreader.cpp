@@ -223,6 +223,8 @@ public:
                     strFixVersion = 3;
                 m_fileInformation.insert(m_file->fixedKey(MyMoneyFile::FileFixVersion), QString("%1").arg(strFixVersion));
 
+            } else if (tag == elementName(Element::General::ApplicationVersion)) {
+                // nothing to do
             }
             m_reader->skipCurrentElement();
         }
