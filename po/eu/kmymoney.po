@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-02 00:43+0000\n"
+"POT-Creation-Date: 2023-10-04 00:43+0000\n"
 "PO-Revision-Date: 2023-09-19 20:42+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -17945,7 +17945,7 @@ msgstr " (Artekaritza)"
 msgid "%1 (Brokerage)"
 msgstr "%1 (Artekaritza)"
 
-#: kmymoney/plugins/xml/mymoneyxmlreader.cpp:321
+#: kmymoney/plugins/xml/mymoneyxmlreader.cpp:323
 #, kde-format
 msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"

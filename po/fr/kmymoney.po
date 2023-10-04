@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-02 00:43+0000\n"
+"POT-Creation-Date: 2023-10-04 00:43+0000\n"
 "PO-Revision-Date: 2023-09-19 19:12+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
@@ -18146,7 +18146,7 @@ msgstr " (Courtage)"
 msgid "%1 (Brokerage)"
 msgstr "%1 (Courtage)"
 
-#: kmymoney/plugins/xml/mymoneyxmlreader.cpp:321
+#: kmymoney/plugins/xml/mymoneyxmlreader.cpp:323
 #, kde-format
 msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
