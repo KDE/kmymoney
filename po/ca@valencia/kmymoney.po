@@ -20721,7 +20721,7 @@ msgstr ""
 #: kmymoney/views/kwelcomepage.cpp:230
 #, kde-format
 msgid "- Improved compatibility with dark color schemes"
-msgstr "- Compatibilitat millorada amb els esquemes de colors foscos"
+msgstr "- Compatibilitat millorada amb els esquemes de color foscos"
 
 #: kmymoney/views/kwelcomepage.cpp:231
 #, kde-format
@@ -25193,7 +25193,7 @@ msgid ""
 msgstr ""
 "Seleccioneu els grups de comptes que corresponen a les maneres en què voleu "
 "utilitzar KMyMoney. Cada grup que seleccioneu farà que es creen diversos "
-"comptes i categories. Seleccioneu els grups que són apropiats per a vós. "
+"comptes i categories. Seleccioneu els grups que són apropiats per a tu. "
 "Sempre podreu crear comptes addicionals manualment més tard."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
