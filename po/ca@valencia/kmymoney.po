@@ -25333,7 +25333,7 @@ msgid ""
 msgstr ""
 "Seleccioneu els grups de comptes que corresponen a les maneres en què voleu "
 "utilitzar KMyMoney. Cada grup que seleccioneu farà que es creen diversos "
-"comptes i categories. Seleccioneu els grups que són apropiats per a vós. "
+"comptes i categories. Seleccioneu els grups que són apropiats per a tu. "
 "Sempre podreu crear comptes addicionals manualment més tard."
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
