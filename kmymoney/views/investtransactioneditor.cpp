@@ -1265,6 +1265,7 @@ QStringList InvestTransactionEditor::saveTransaction(const QStringList& selected
 
     t.setPostDate(d->ui->dateEdit->date());
     d->stockSplit.setMemo(d->ui->memoEdit->toPlainText());
+    d->assetSplit.setMemo(d->ui->memoEdit->toPlainText());
     d->stockSplit.setAction(d->currentActivity->actionString());
 
     d->currentActivity->adjustStockSplit(d->stockSplit);
