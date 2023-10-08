@@ -595,6 +595,7 @@ void MyMoneyXmlWriterPrivate::writePrices()
         if ((entry.from() != from) || (entry.to() != to)) {
             if (needEndElement) {
                 m_writer->writeEndElement();
+                needEndElement = false;
             }
 
             try {
