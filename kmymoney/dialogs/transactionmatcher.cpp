@@ -47,6 +47,7 @@ public:
         s.deletePair("kmm-orig-onesplit");
         s.deletePair("kmm-orig-not-reconciled");
         s.deletePair("kmm-match-split");
+        s.deletePair("kmm-matched-tx");
     }
 };
 
