@@ -674,9 +674,12 @@ void MyMoneyFile::commitTransaction()
 
     d->m_valueChangedSet.clear();
 
-    // as a last action, send out the global dataChanged signal
-    if (changed)
+    // as a last action, update the last modification date and send out the global dataChanged signal
+    if (changed) {
+        d->parametersModel.addItem(fixedKey(MyMoneyFile::LastModificationDate), MyMoneyUtils::dateTimeToString(QDateTime::currentDateTime()));
+
         Q_EMIT dataChanged();
+    }
 
     // inform the outside world about the end of notifications
     Q_EMIT endChangeNotification();
