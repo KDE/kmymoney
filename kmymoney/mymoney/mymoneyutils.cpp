@@ -14,6 +14,7 @@
 #include <QDate>
 #include <QProcess>
 #include <QRegularExpression>
+#include <QTimeZone>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -86,7 +87,7 @@ QDate MyMoneyUtils::stringToDate(const QString& str)
 
 QString MyMoneyUtils::dateTimeToString(const QDateTime& dateTime)
 {
-    return dateTime.toString(Qt::ISODate);
+    return QDateTime(dateTime.date(), dateTime.time(), QTimeZone(dateTime.offsetFromUtc())).toString(Qt::ISODate);
 }
 
 QDateTime MyMoneyUtils::stringToDateTime(const QString& str)
