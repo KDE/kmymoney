@@ -86,6 +86,29 @@ KMM_MYMONEY_EXPORT QString dateToString(const QDate& date);
  */
 KMM_MYMONEY_EXPORT QDate stringToDate(const QString& str);
 
+/**
+ * This function returns a timestamp in the form specified by IS08601.
+ * If the @p date is invalid an empty string will be returned.
+ *
+ * @param date const reference to date to be converted
+ * @return QString containing the converted date
+ */
+KMM_MYMONEY_EXPORT QString dateTimeToString(const QDateTime& dateTime);
+
+/**
+ * This function returns date and time as QDateTime object as specified by
+ * the parameter @a str. @a str must be in Qt::ISODate format. If @a str
+ * only contains a date, the time will be set to 00:00:00 and the timezone
+ * is localtime.
+ *
+ * If @a str is empty or contains an invalid date, QDateTime() is
+ * returned.
+ *
+ * @param str date in Qt::ISODate format
+ * @return QDateTime object
+ */
+KMM_MYMONEY_EXPORT QDateTime stringToDateTime(const QString& str);
+
 KMM_MYMONEY_EXPORT QString QStringEmpty(const QString&);
 
 KMM_MYMONEY_EXPORT unsigned long extractId(const QString& txt);
