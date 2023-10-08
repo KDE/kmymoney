@@ -11270,7 +11270,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:171
 #, kde-format
 msgid "quote (\")"
-msgstr "aspas (\")"
+msgstr "comiñas (\")"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_textDelimiter)
 #: kmymoney/plugins/csv/import/separatorwizardpage.ui:176
