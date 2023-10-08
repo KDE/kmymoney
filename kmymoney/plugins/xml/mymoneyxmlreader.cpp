@@ -209,7 +209,7 @@ public:
 
             } else if (tag == elementName(Element::General::LastModifiedDate)) {
                 const auto strDate = readStringAttribute(attributeName(Attribute::General::Date));
-                if (MyMoneyUtils::stringToDate(strDate).isValid()) {
+                if (MyMoneyUtils::stringToDateTime(strDate).isValid()) {
                     m_fileInformation.insert(m_file->fixedKey(MyMoneyFile::LastModificationDate), strDate);
                 }
 
