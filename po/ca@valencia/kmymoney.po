@@ -554,7 +554,7 @@ msgstr ""
 #: kmymoney/dialogs/kaccountselectdlg.ui:17
 #, kde-format
 msgid "Account selection"
-msgstr "Seleccioneu el compte"
+msgstr "Seleccioneu un compte"
 
 #. i18n: ectx: property (text), widget (QLabel, m_headerLabel)
 #: kmymoney/dialogs/kaccountselectdlg.ui:79
@@ -12886,7 +12886,7 @@ msgstr "Detalls de connexió"
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:53
 #, kde-format
 msgid "Select Account"
-msgstr "Seleccioneu el compte"
+msgstr "Seleccioneu un compte"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:362
@@ -18084,7 +18084,7 @@ msgstr "Fitxers anònims"
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
-msgstr "Fitxers XML"
+msgstr "Fitxers en XML"
 
 #: kmymoney/plugins/xml/xmlstorage.cpp:345
 #, kde-format
