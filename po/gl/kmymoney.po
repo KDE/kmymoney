@@ -12923,7 +12923,7 @@ msgid ""
 "online banking.  Please note that many banks require a separate signup, and "
 "assign a separate PIN or password just for online banking from home."
 msgstr ""
-"Insira o nome de usuario e o contrasinal que usa para acceder á banca por "
+"Insira o nome de usuaria e o contrasinal que usa para acceder á banca por "
 "Internet do seu banco. Lembre que moitos bancos requiren un contrato "
 "específico e asignan un PIN ou contrasinal só para a banca por Internet "
 "desde a casa."
@@ -12933,7 +12933,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label account username"
 msgid "Username"
-msgstr "Nome de usuario"
+msgstr "Nome de usuaria"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_3)
@@ -14608,7 +14608,7 @@ msgstr "Nome do servidor"
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:97
 #, kde-format
 msgid "Username"
-msgstr "Nome de usuario"
+msgstr "Nome de usuaria"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:128
