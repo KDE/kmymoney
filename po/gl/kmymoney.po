@@ -4098,7 +4098,7 @@ msgid ""
 "form."
 msgstr ""
 "A lupa do libro maior mostra os detalles do asento que teña o foco no libro "
-"maior. Polo xeral, cando se usa o formulario de escrituración, só se mostra "
+"maior. Polo xeral, cando se usa o formulario de escrituración, só se amosa "
 "unha liña de resumo por cada asento xa que os detalles amósaos o formulario."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_LedgerLens)
