@@ -14,6 +14,7 @@ Dependencies:
     'frameworks/kcompletion': '@stable'
     'frameworks/kitemmodels': '@stable'
     'frameworks/kitemviews': '@stable'
+    'frameworks/kwallet': '@stable'
     'frameworks/kwindowsystem': '@stable'
     'frameworks/kiconthemes': '@stable'
     'frameworks/kio': '@stable'
