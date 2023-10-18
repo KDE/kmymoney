@@ -5,7 +5,7 @@
     <author> &Ace.Jones; &Ace.Jones.mail; </author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2023-10-05</date>
+  <date>2023-20-05</date>
   <releaseinfo>5.2</releaseinfo>
 </chapterinfo>
 
@@ -19,14 +19,15 @@
 
 <title>&gnucash; Importer</title>
 
-<sect2>
-<title>&gnucash; Files</title>
+<sect2><title>&gnucash; Files</title>
 
 <para>
-  The &kmymoney; &gnucash; importer handles direct reading of standard (&XML;) files
-  as produced by &gnucash; versions 1.8 and 2.0.  File from more recent versions
-  should also be imported without problem, but there is no recent testing to confirm
-  this.  Specifically, however, the following are not supported:
+  The &kmymoney; &gnucash; importer is known to handle direct reading of standard
+  (&XML;) files as produced by &gnucash; versions 1.8 and 2.0.  File from more recent
+  versions should also be imported without problem.  There is no recent, formal
+  testing to confirm this, but the developers' mailing list &devlist; has a report of
+  success importing a file from &gnucash; 5.3.  Specifically, however, the following
+  are not supported:
 </para>
 
 <itemizedlist>
@@ -63,11 +64,9 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Similarities, Differences, and Terminology</title>
+<sect2><title>Similarities, Differences, and Terminology</title>
 
-<sect3>
-<title>Small Business Usage</title>
+<sect3><title>Small Business Usage</title>
 
 <para>
   It should be noted that &kmymoney; is a <emphasis>personal</emphasis> finance
@@ -78,11 +77,9 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Accounts</title>
+<sect3><title>Accounts</title>
 
-<sect4>
-<title>Account types</title>
+<sect4><title>Account types</title>
 
 <para>
   For both products, the highest level of structure in the file is the
@@ -97,8 +94,7 @@
 </para>
 </sect4>
 
-<sect4>
-<title>Categories</title>
+<sect4><title>Categories</title>
 
 <para>
   &kmymoney; uses the term Category to denote an account of an Income or Expense
@@ -109,8 +105,7 @@
 </para>
 </sect4>
 
-<sect4>
-<title>Structure and Placeholders</title>
+<sect4><title>Structure and Placeholders</title>
 
 <para>
   &gnucash; supports the use of Placeholder accounts. In effect, these are just
@@ -122,8 +117,7 @@
 </para>
 </sect4>
 
-<sect4>
-<title>Account Type map</title>
+<sect4><title>Account Type map</title>
 
 <informaltable frame='all'>
 <tgroup cols='2' align='left' colsep='1' rowsep='1'>
@@ -187,11 +181,9 @@
 </sect4>
 </sect3>
 
-<sect3>
-<title>Transactions and Splits</title>
+<sect3><title>Transactions and Splits</title>
 
-<sect4>
-<title>Balanced transactions</title>
+<sect4><title>Balanced transactions</title>
 
 <para>
   In both programs, data is entered in the form of transactions, each generally
@@ -204,8 +196,7 @@
 </para>
 </sect4>
 
-<sect4>
-<title>Payees</title>
+<sect4><title>Payees</title>
 
 <para>
   &kmymoney; prefers that all transactions have a Payee (a generic term that
@@ -215,8 +206,7 @@
 </para>
 </sect4>
 
-<sect4>
-<title>Transfers</title>
+<sect4><title>Transfers</title>
 
 <para>
   &kmymoney; uses the term Transfer to describe a transaction which does not
@@ -225,8 +215,7 @@
 </para>
 </sect4>
 
-<sect4>
-<title>Reconcile</title>
+<sect4><title>Reconcile</title>
 
 <para>
   &kmymoney; provides an account reconciliation function similar to that of
@@ -235,16 +224,14 @@
 </sect4>
 </sect3>
 
-<sect3>
-<title>Commodities</title>
+<sect3><title>Commodities</title>
 
 <para>
   &gnucash; uses the term Commodity to cover both currencies and non-currency assets.
   These are treated separately in &kmymoney;.
 </para>
 
-<sect4>
-<title>Currencies</title>
+<sect4><title>Currencies</title>
 
 <para>
   &kmymoney; has built-in support for all foreign <link
@@ -265,8 +252,7 @@
 </note>
 </sect4>
 
-<sect4 id="gncsecurities">
-<title>Securities and Investments</title>
+<sect4 id="gncsecurities"><title>Securities and Investments</title>
 
 <para>
   Non-currency assets (typically stocks and bonds) are called Securities by
@@ -303,8 +289,7 @@
 </para>
 </sect4>
 
-<sect4>
-<title>Prices and currency rates</title>
+<sect4><title>Prices and currency rates</title>
 
 <para>
   Security prices and currency exchange rates, as displayed in the &gnucash; Price
@@ -313,8 +298,7 @@
 </para>
 </sect4>
 
-<sect4 id="details.impexp.gncquotes">
-<title>Online Quotes</title>
+<sect4 id="details.impexp.gncquotes"><title>Online Quotes</title>
 
 <para>
   For obtaining online price and currency rate quotations, &gnucash; uses a Perl
@@ -348,8 +332,7 @@
 </sect4>
 </sect3>
 
-<sect3 id="gncschedules">
-<title>Scheduled Transactions</title>
+<sect3 id="gncschedules"><title>Scheduled Transactions</title>
 
 <para>
   &kmymoney; does not retain the separation made in &gnucash; between template
@@ -358,8 +341,7 @@
   likely to be of great significance.
 </para>
 
-<sect4>
-<title>Schedule types</title>
+<sect4><title>Schedule types</title>
 
 <para>
   &kmymoney; classifies all schedules as one of three types: Bills, Deposits, or
@@ -370,8 +352,7 @@
 </para>
 </sect4>
 
-<sect4>
-<title>Suspect Schedules</title>
+<sect4><title>Suspect Schedules</title>
 
 <para>
   Some features of &gnucash; scheduled transactions are not available in &kmymoney;,
@@ -406,8 +387,7 @@
 </sect4>
 </sect3>
 
-<sect3>
-<title>Reports</title>
+<sect3><title>Reports</title>
 
 <para>
   &kmymoney; provides a comprehensive selection of configurable reports, described in
@@ -417,8 +397,7 @@
 </sect3>
 </sect2>
 
-<sect2>
-<title>Selecting Importer Options</title>
+<sect2><title>Selecting Importer Options</title>
 
 <para id="details.impexp.gncoptions">
   <screenshot>
@@ -430,16 +409,14 @@
   </screenshot>
 </para>
 
-<sect3>
-<title>Investment Handling</title>
+<sect3><title>Investment Handling</title>
 
 <para>
   See <link linkend="gncsecurities">"Securities and Investments"</link> above.
 </para>
 </sect3>
 
-<sect3>
-<title>Online Quotes</title>
+<sect3><title>Online Quotes</title>
 
 <para>
   Turn this off if you wish to use the native method for future online price quotes.
@@ -448,16 +425,14 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Scheduled Transactions</title>
+<sect3><title>Scheduled Transactions</title>
 
 <para>
   See <link linkend="gncschedules">"Scheduled Transactions"</link> above.
 </para>
 </sect3>
 
-<sect3>
-<title>Decoding Options</title>
+<sect3><title>Decoding Options</title>
 
 <para>
   If your native language is written in letters or symbols which are different from
@@ -474,8 +449,7 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Transaction Notes option</title>
+<sect3><title>Transaction Notes option</title>
 
 <para>
   Under some usage conditions, non-split &gnucash; transactions may contain residual,
@@ -487,8 +461,7 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Debug Options</title>
+<sect3><title>Debug Options</title>
 
 <para>
   These need only be used in the event of import problems.  If you have such
@@ -500,8 +473,7 @@
 </sect3>
 </sect2>
 
-<sect2>
-<title>Import Report</title>
+<sect2><title>Import Report</title>
 
 <para>
   At the end of processing, the importer produces a report showing the number of
@@ -536,21 +508,18 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.impexp.qifimp">
-<sect1info>
+<sect1 id="details.impexp.qifimp"><sect1info>
   <author>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
   <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
 </sect1info>
 
 <title>QIF Importer</title>
 
-<sect2>
-<title>QIF format considered harmful</title>
-
+<sect2><title>QIF format considered harmful</title>
 <para>
-  Generally speaking, the QIF format should be avoided wherever possible.  It is a
-  poor choice for transporting financial data.  Among other things, QIF suffers from
-  these problems:
+  Generally speaking, the QIF format should be avoided wherever possible.  For many
+  reasons, it is a poor choice for transporting financial data.  Among other things,
+  QIF suffers from these problems:
 </para>
 
 <itemizedlist>
@@ -578,12 +547,10 @@
 </para>
 </sect2>
 
-<sect2>
-<title>How to import a QIF file</title>
-
+<sect2><title>How to import a QIF file</title>
 <para>
-  To import a QIF file, first ensure you have a valid &kmymoney; file open.  Then
-  select <menuchoice> <guimenu>File</guimenu> <guisubmenu>Import</guisubmenu>
+  To import a QIF file, first ensure you have a valid &kmymoney; file open, then
+  select the <menuchoice> <guimenu>File</guimenu> <guisubmenu>Import</guisubmenu>
   <guimenuitem>QIF...</guimenuitem> </menuchoice> menu item.
 </para>
 	
@@ -598,23 +565,28 @@
 </para>
 
 <para>
-  The resulting dialog prompts for the QIF filename allowing you to type in the full
+  The resulting dialog prompts for the QIF filename, allowing you to type in the full
   path to the file or to locate the file by clicking on the
   <guibutton>Browse</guibutton> button.
 </para>
 
 <para>
   Note that &kmymoney; differentiates between the import of a bank statement file and
-  a file with historic data exported from another application.  The default is to
-  import a bank statement file.  In case you are importing data from your previous
-  personal finance manager application, select the appropriate option.
+  a file with historic data exported from another application.  A bank statement file
+  does not necessarily include all the data related to a single bank statement; it
+  may contain only one or a few transactions.  The default is to import a bank
+  statement file.  In case you are importing data from your previous personal finance
+  manager application, select the appropriate option.
 </para>
 
 <para>
-  In general, the default QIF profile should work with your QIF data.  In some cases
-  it might become necessary to use a modified QIF profile.  See the <link
-  linkend="details.impexp.qifimp.profile">next section</link> for more details on
-  that subject.
+  Next, you need to select a QIF Profile for the import.  Because there is no
+  universally standard format for a QIF file, different vendors have taken liberties
+  with the format, and introduced their own nuances.  The QIF Profile allows
+  &kmymoney; to know about the peculiarities of your file.  In general, the default
+  QIF profile should work with most QIF files.  In some cases it might be necessary to
+  use a modified QIF profile.  See the <link linkend="details.impexp.qif.profile">
+  next section</link> for more details on that subject.
 </para>
 
 <para>
@@ -680,172 +652,9 @@
   separate section of this document.
   <!-- FIXME:  use correct link.  -->
 </para>
-
-</sect2>
-
-<!-- FIXME:  confirm whether to keep or just delete this section -->
-<!--
-<sect2>
-<title>Accepting the imported transactions</title>
-
-<para>
-  When &kmymoney; has finished importing the QIF transactions the account will
-  be shown with the imported transactions listed in Yellow.
-</para>
-
-<para>
-<screenshot>
-	<screeninfo>Imported transactions</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="qifimportverify.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Imported transactions</phrase>
-	</textobject>
-	</mediaobject>
-</screenshot>
-</para>
-
-<para>
-	Some of your transactions may be flashing red in the ledger.  
-	This is because they need to be assigned a category.  
-	The importer was not able to automatically assign a category based on your past transaction history.
-</para>
-
-<para>
-    Transaction data can be edited or even deleted if needed.  To edit a
-    transaction simply double-click on the entry or hit enter when the entry is
-    highlighted.  Once finished click on <guibutton>OK</guibutton> to accept the imported
-    transactions or <guibutton>Cancel</guibutton> to remove the imported transactions.
-</para>
-
-</sect2>
-
-<sect2><title>Importing Investments</title>
-
-<para>
-    Please note that if you are importing a file with investment transactions, those investments must first exist in your &kmymoney; file.
-    The trading symbol is used to match, so please ensure that the symbol in &kmymoney; is exactly the same as the one in the file you're importing.
-</para>
-</sect2>
--->
-
-<sect2 id="details.impexp.qifimp.profile">
-<title>Setting up a QIF profile</title>
-
-<para>
-  Because there is no universally standard format for a QIF file, different vendors
-  have taken liberties with the format, and introduced their own nuances.  The QIF
-  Profile allows &kmymoney; to know about the peculiarities of your file.  To edit an
-  existing QIF Profile, or to create a new one, bring up the QIF Importer dialog by
-  selecting <menuchoice> <shortcut> <keycombo>&Ctrl;&Shift;<keycap>,</keycap>
-  </keycombo> </shortcut> <guimenu>Settings</guimenu> <guimenuitem>Configure
-  &kmymoney;...</guimenuitem> </menuchoice> from the main menu, clicking on
-  <guilabel>Plugins</guilabel> at the bottom of the left panel, and clicking the
-  &configicon; button on the entry for <quote>QIF Importer</quote>.
-  <!-- FIXME: do we want to use the plugins icon from that left panel here? -->
-</para>
-
-<para>
-  <screenshot>
-    <mediaobject>
-      <imageobject>
-	<imagedata fileref="qifimport-qifprofileeditor.png" format="PNG" />
-      </imageobject>
-      <textobject>
-	<phrase>QIF Profile Editor</phrase>
-      </textobject>
-    </mediaobject>
-  </screenshot>
-</para>
-
-<para>
-  On the left, the Profile selector displays a list of all existing QIF Importer
-  Profiles, select one to edit its configuration.  To create an new profile, press
-  the <guibutton>New</guibutton> button.  You can rename an existing profile by
-  selecting it in the Profile selector and clicking the <guibutton>Rename</guibutton>
-  button, and delete on with the <guibutton>Delete</guibutton> button.  Clicking the
-  <guibutton>Reset</guibutton> button resets all the fields to their default values.
-</para>
-
-<!-- FIXME: what do these all actually do?  do we want/need separate images for each?
-     -->
-<para>
-  The right area of the dialog has four tabs.
-</para>
-
-<para>
-  The <quote>General</quote> tab contains a description and fields 
-</para>
-
-<para>
-  The <quote>Filter</quote> tab allows you to specify a filter program or script to
-  be applied when this profile is chosen for import.  See the following section for
-  more details.
-</para>
-
-<para>
-  The <quote>Date</quote> tab
-</para>
-
-<para>
-  The <quote>Amounts</quote> tab
-</para>
-
-<note>
-<para>
-  Previous versions of &kmymoney; used to have a tab for date and amount
-  specifications.  &kmymoney; now determines those settings by scanning the file.  If
-  it cannot figure out the proper settings, it will interrogate the user during
-  import.
-</para>
-</note>
-
-<!--
-<para>
-	The most commonly changed thing between QIF implementations is the date format.  
-	So if this is the first time you're importing a QIF file, spend a few moments to figure out what format the dates are in, and set the QIF Profile accordingly.  
-	See the discussion below on apostrophe format for more details.
-</para>
-
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="qifimport-qifprofiledate.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>QIF Profile Date</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
-</para>
-
-</sect2>
-
-<sect2><title>Apostrophe format</title>
-
-<para>
-	Many common QIF writers use a 2-digit representation for the year. 
-	This is ambiguous, because the importer cannot know which century the date belongs in.
-	To make things even more complicated, QIF files will often used an apostrophe as a year separator to indicate that the date belongs in the OTHER century from the default.
-</para>
-<para>
-	For example, if the default century is 1900-1999, the date 12/31/95 would mean 1995.  The date 12/31'05 would mean 2005.
-</para>
-<para>
-	Because the QIF format is not standardized, it's impossible to know which century is desired.
-	This is why you have to explicitly state it in the QIF profile.
-	You do this by specifying which century is intended when an apostrophe is found.
-	In the example above, you would set the Apostrophe Format to &quot;2000-2099&quot;, so dates with an apostrophe will be interpreted as being &gt; year 2000.
-	In this case, dates without an apostrophe will be treated as being in the 1900's.
-</para>
--->
 </sect2>
 
 <sect2><title>Transaction matching</title>
-
 <para>
   As noted previously, one of the major drawbacks of the QIF format is the lack of a
   unique identifier for each transaction.  Thus, if you import a QIF file and some of
@@ -858,12 +667,11 @@
 <para>
   This can be a problem if you have transactions that look very similar but are
   actually different.  In this case, you can unmatch those transactions later in the
-  ledger view.
+  Ledger View.
 </para>
 </sect2>
 
-<sect2>
-<title>Writing an import filter</title>
+<sect2 id="details.impexp.qif.filter"><title>Writing an import filter</title>
 
 <para>
   Sometimes you may have data in a custom format, like comma-separated-values (CSV)
@@ -878,12 +686,13 @@
 </para>
 
 <para>
-  To use a filter, edit your favorite QIF Profile or create a new one, and select the
-  Filter tab.  Enter the full path to your filter program in the <guilabel>Input
-  filter location</guilabel> field, or click the browse icon next to the field and
-  navigate to the filter in the <guilabel>File Open...</guilabel> dialog.  Then,
-  whenever you do a QIF import using this profile, the file you select for importing
-  will be run through your filter first
+  To use a filter, edit your favorite QIF Profile or create a new one (see the next
+  section for details on QIF Profiles,) and select the Filter tab.  Enter the full
+  path to your filter program in the <guilabel>Input filter location</guilabel>
+  field, or click the browse icon next to the field and navigate to the filter in the
+  <guilabel>File Open...</guilabel> dialog.  Then, whenever you do a QIF import using
+  this profile, the file you select for importing will be run through your filter
+  first
 </para>
 
 <para>
@@ -923,8 +732,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Special &kmymoney; QIF extensions</title>
+<sect2><title>Special &kmymoney; QIF extensions</title>
 
 <para>
   As already mentioned, one of the major drawbacks of the QIF format is the lack of a
@@ -934,6 +742,132 @@
   ID, and disregard the record if the transaction is already in the system.
 </para>
 </sect2>
+</sect1>
+
+<sect1 id="details.impexp.qif.profile"><title>QIF Profiles</title>
+
+<para>
+  To edit an existing QIF Profile, or to create a new one, bring up the QIF Importer
+  dialog by selecting <menuchoice> <shortcut>
+  <keycombo>&Ctrl;&Shift;<keycap>,</keycap> </keycombo> </shortcut>
+  <guimenu>Settings</guimenu> <guimenuitem>Configure &kmymoney;...</guimenuitem>
+  </menuchoice> from the main menu, clicking on <inlinemediaobject> <imageobject>
+  <imagedata fileref='preferences-plugin.svg' format='SVG'/> </imageobject>
+  </inlinemediaobject> <guilabel>Plugins</guilabel> at the bottom of the left panel,
+  and clicking the &configicon; configure button on the entry for <quote>QIF
+  Importer</quote>.
+</para>
+
+<para>
+  Note that because the QIF Importer and the QIF Exporter are implemented as separate
+  plugins, there are separate entries for each on the Plugins configuration dialog.
+  Configuring either one brings up the same Profile Editor dialog.
+</para>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="qifimport-qifprofileeditor.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>QIF Profile Editor</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+
+  On the left, the Profile selector displays a list of all existing QIF Profiles;
+  select one to edit its configuration.  To create an new profile, press the
+  <guibutton>New</guibutton> button.  You can rename an existing profile by selecting
+  it in the Profile selector and clicking the <guibutton>Rename</guibutton> button,
+  and delete one with the <guibutton>Delete</guibutton> button.  Clicking the
+  <guibutton>Reset</guibutton> button resets all the fields of the currenlty
+  displayed profile to their default values.
+</para>
+
+<!-- FIXME: confirm what each of these actually does, and consider separate
+     screenshots for each tab. -->
+
+<para>
+  The right area of the dialog has four tabs.
+</para>
+
+<para>
+  The <quote>General</quote> tab contains a field for a description of the filter,
+  several fields to specify what &kmymoney; should expect certain fields to look like
+  in the qif file output by the filter, and a checkbox which tells &kmymoney; whether
+  or not to attempt to match similar transactions to avoid duplicates.
+</para>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="qifimport-qifprofilefilter.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>QIF Profile Editor</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+
+  The <quote>Filter</quote> tab allows you to specify the location of both an import
+  filter, as described in the <link linkend="details.impexp.qif.filter">previous
+  section</link> as well as an output filter, which works similarly, but is applied
+  when writing out a data file.  The <guilabel>Input filter file type</guilabel> is
+  not applicable to an output filter, as the file dialog for the file to be written
+  does not require filtering.
+</para>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="qifimport-qifprofiledate.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>QIF Export</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+
+  The <quote>Date</quote> tab is primarily applicable to QIF Export, as &kmymoney; is
+  usually able to determine the date format by examining the actual data.  The primary
+  purpose is to specify the order of the date parts, and the delimiter which separates
+  them.
+</para>
+
+<para>
+  Because the QIF format is not standardized, it's impossible to know which century
+  is meant when using two digit years.  In QIF files with two digit years, there is
+  an assumed default century, and an apostrophe is used as the year separator to
+  specify that entry is in the OTHER century.  However, since which century is
+  assumed to be the default is not standardized, the <guilabel>Apostrophe
+  Handling</guilabel> field is use for this purpose, indicating the intended century
+  when an apostrophe is used as the year separator.  As an example, you would set the
+  Apostrophe Format to &quot;2000-2099&quot;, so dates with an apostrophe will be
+  interpreted as being &gt; year 2000.  In this case, dates without an apostrophe
+  will be treated as being in the 1900's.
+</para>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="qifimport-qifprofileamount.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>QIF Export</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+  
+  The <quote>Amounts</quote> tab is used on QIF Export to specify the Decimal Symbol
+  and Thousands Separator to be used.  However, you need to speicfy those for each
+  line in the QIF file which can contain an amount.  To alter those settings, click
+  one of the lines in the upper part of the display, then use the dropdowns below to
+  set the characters to be used.
+</para>
 </sect1>
 
 <sect1 id="details.impexp.qifexp"><title>QIF Exporter</title>
@@ -962,11 +896,9 @@
       </textobject>
     </mediaobject>
   </screenshot>
-</para>
 
-<para>
   The QIF Exporter uses QIF Profiles in a similar way as the QIF Importer, but it
-  uses the information in the Profile for format the QIF file being written, rather
+  uses the information in the Profile to format the QIF file being written, rather
   than to interpret the file being read.  Parallel to the importer, you can use a
   custom written filter program.  There is a separate field on the Filter Tab of the
   QIF Profile editor for an output filter, so you can use the same QIF Profile for
@@ -982,8 +914,7 @@
 </sect1info>
 <title>OFX Importer Plugin</title>
 
-<sect2>
-<title>Getting the plugin</title>
+<sect2><title>Getting the plugin</title>
 
 <para>
   &kmymoney; will import OFX files painlessly.  However, this functionality is
@@ -1018,8 +949,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>What is OFX</title>
+<sect2><title>What is OFX</title>
 
 <para>
   OFX stands for <quote>Open Financial Exchange</quote>.  According to the
@@ -1051,8 +981,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Importing an OFX file</title>
+<sect2><title>Importing an OFX file</title>
 
 <para>
   The most basic way to import an OFX file is to choose the importer from the
@@ -1084,8 +1013,7 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Importing Investments</title>
+<sect2><title>Importing Investments</title>
 
 <para>
   Please note that if you are importing a file with investment transactions,
@@ -1095,8 +1023,7 @@
 </para>
 </sect2>
 
-<sect2 id="details.impexp.webconnect">
-<title>Web Connect</title>
+<sect2 id="details.impexp.webconnect"><title>Web Connect</title>
 
 <para>
   The easiest way to import an OFX file is to set up Web Connect.  Visit your
@@ -1114,8 +1041,7 @@
 </para>
 </sect2>
 
-<sect2 id="details.impexp.ofxdirectconnect">
-<title>Direct Connect</title>
+<sect2 id="details.impexp.ofxdirectconnect"><title>Direct Connect</title>
 
 <para>
   OFX Direct Connect is now supported in &kmymoney;.  This gives you the ability
@@ -1185,8 +1111,7 @@
 </note>
 </sect2>
 
-<sect2>
-<title>Exporting an OFX file</title>
+<sect2><title>Exporting an OFX file</title>
 
 <para>
   It is not possible to export your data as an OFX file currently.  If you are
@@ -1207,8 +1132,7 @@
 <!-- entity defined in index.docbook -->
 &details-impexp-woob;
 
-<sect1 id="details.impexp.plugins">
-<title>Writing Importer Plugins</title>
+<sect1 id="details.impexp.plugins"><title>Writing Importer Plugins</title>
 
 <para>
   &kmymoney; contains explicit support for importer plugins.  If you have a

@@ -1,0 +1,45 @@
+<!-- This is stuff that was commented out in details.impexp.docbook, from the QIF
+     import section.  I am moving it here to clean up that file, but it is still not
+     sure if this material is still needed anywhere.  I've modified the nesting to
+     make it look more legal.  -->
+
+<sect2><title>Accepting the imported transactions</title>
+
+<para>
+<screenshot>
+  <screeninfo>Imported transactions</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qifimportverify.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Imported transactions</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+</para>
+
+<para>
+  Some of your transactions may be flashing red in the ledger.  This is because they
+  need to be assigned a category.  The importer was not able to automatically assign
+  a category based on your past transaction history.
+</para>
+
+<para>
+  Transaction data can be edited or even deleted if needed.  To edit a transaction
+  simply double-click on the entry or hit enter when the entry is highlighted.  Once
+  finished click on <guibutton>OK</guibutton> to accept the imported transactions or
+  <guibutton>Cancel</guibutton> to remove the imported transactions.
+</para>
+</sect2>
+
+
+<sect2><title>Importing Investments</title>
+<para>
+  Please note that if you are importing a file with investment transactions, those
+  investments must first exist in your &kmymoney; file.  The trading symbol is used
+  to match, so please ensure that the symbol in &kmymoney; is exactly the same as the
+  one in the file you're importing.
+</para>
+</sect2>
+
