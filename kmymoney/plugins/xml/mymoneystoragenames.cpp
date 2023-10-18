@@ -145,6 +145,7 @@ uint qHash(const Reconciliation key, uint seed)
 
 QString elementName(Element::General elementID)
 {
+    // clang-format off
     static const QMap<Element::General, QString> elementNames {
         {Element::General::Address,           QStringLiteral("ADDRESS")},
         {Element::General::CreationDate,      QStringLiteral("CREATION_DATE")},
@@ -152,7 +153,9 @@ QString elementName(Element::General elementID)
         {Element::General::Version,           QStringLiteral("VERSION")},
         {Element::General::FixVersion,        QStringLiteral("FIXVERSION")},
         {Element::General::Pair,              QStringLiteral("PAIR")},
+        {Element::General::ApplicationVersion,QStringLiteral("APPVERSION")},
     };
+    // clang-format on
     return elementNames.value(elementID);
 }
 

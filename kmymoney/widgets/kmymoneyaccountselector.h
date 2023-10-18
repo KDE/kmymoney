@@ -100,6 +100,8 @@ public:
       */
     void removeButtons();
 
+    QSize sizeHint() const override;
+
 public Q_SLOTS:
     /**
       * This slot selects all items that are currently in

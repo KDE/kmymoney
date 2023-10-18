@@ -520,11 +520,21 @@ QStringList MultiTransactionEditor::saveTransaction(const QStringList& selectedJ
         selection.replaceInStrings(previousId, currentId);
     });
 
+    const auto file = MyMoneyFile::instance();
+
+    auto splitsUseSameCurrency = [&](const MyMoneySplit& split1, const MyMoneySplit& split2) {
+        const auto accountsModel = file->accountsModel();
+        const auto accIdx1 = accountsModel->indexById(split1.accountId());
+        const auto accIdx2 = accountsModel->indexById(split2.accountId());
+        const auto secId1 = accIdx1.data(eMyMoney::Model::AccountCurrencyIdRole).toString();
+        const auto secId2 = accIdx2.data(eMyMoney::Model::AccountCurrencyIdRole).toString();
+        return secId1 == secId2;
+    };
+
     if (d->anyChanges()) {
         const auto journalModel = MyMoneyFile::instance()->journalModel();
         MyMoneyFileTransaction ft;
         try {
-            const auto file = MyMoneyFile::instance();
             for (const auto& journalEntryId : selectedJournalEntryIds) {
                 const auto journalIdx = journalModel->indexById(journalEntryId);
                 const auto journalEntry = journalModel->itemByIndex(journalIdx);
@@ -564,6 +574,24 @@ QStringList MultiTransactionEditor::saveTransaction(const QStringList& selectedJ
                     if (!csp.id().isEmpty()) {
                         csp.setAccountId(d->ui->categoryCombo->getSelected());
                         t.modifySplit(csp);
+                    } else {
+                        csp = sp;
+                        csp.clearId();
+                        csp.setValue(-csp.value());
+                        /// @todo make assignment multi currency safe. For now, we
+                        /// just dump out a debug message in case both securities are
+                        /// not the same
+                        csp.setShares(-csp.shares());
+                        csp.setAccountId(d->ui->categoryCombo->getSelected());
+                        if (!splitsUseSameCurrency(sp, csp)) {
+                            qDebug() << "MultiTransactionEditor does not support multiple currencies yet";
+                        }
+                        csp.setReconcileDate(QDate());
+                        csp.setReconcileFlag(eMyMoney::Split::State::Unknown);
+                        csp.setBankID(QString());
+                        csp.setAction(QString());
+                        csp.setNumber(QString());
+                        t.addSplit(csp);
                     }
                 }
 

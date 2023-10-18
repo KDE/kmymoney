@@ -84,6 +84,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include <alkimia/alkenvironment.h>
+
 #include "accountsmodel.h"
 #include "budgetsmodel.h"
 #include "dialogs/editpersonaldatadlg.h"
@@ -3690,7 +3692,7 @@ void KMyMoneyApp::slotBackupFile()
 
             // make sure to fix the LD_LIBRARY_PATH
             // to not include APPDIR subdirectories
-            MyMoneyUtils::removeAppImagePathFromLinkLoaderLibPath(&d->m_proc);
+            AlkEnvironment::removeAppImagePathFromLinkLoaderLibPath(&d->m_proc);
 
             d->m_proc.setProgram("true");
             d->m_proc.start();
@@ -3709,7 +3711,7 @@ void KMyMoneyApp::slotBackupMount()
 
     // make sure to fix the LD_LIBRARY_PATH
     // to not include APPDIR subdirectories
-    MyMoneyUtils::removeAppImagePathFromLinkLoaderLibPath(&d->m_proc);
+    AlkEnvironment::removeAppImagePathFromLinkLoaderLibPath(&d->m_proc);
 
     d->m_proc.start();
 }
@@ -3761,7 +3763,7 @@ bool KMyMoneyApp::slotBackupWriteFile()
 
     // make sure to fix the LD_LIBRARY_PATH
     // to not include APPDIR subdirectories
-    MyMoneyUtils::removeAppImagePathFromLinkLoaderLibPath(&d->m_proc);
+    AlkEnvironment::removeAppImagePathFromLinkLoaderLibPath(&d->m_proc);
 #endif
     d->m_backupState = BACKUP_COPYING;
     qDebug() << "Backup cmd:" << d->m_proc.program();
@@ -3779,7 +3781,7 @@ void KMyMoneyApp::slotBackupUnmount()
 
     // make sure to fix the LD_LIBRARY_PATH
     // to not include APPDIR subdirectories
-    MyMoneyUtils::removeAppImagePathFromLinkLoaderLibPath(&d->m_proc);
+    AlkEnvironment::removeAppImagePathFromLinkLoaderLibPath(&d->m_proc);
 
     d->m_proc.start();
 }

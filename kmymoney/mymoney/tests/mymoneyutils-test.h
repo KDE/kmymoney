@@ -22,6 +22,10 @@ private Q_SLOTS:
     void testConvertRegularExpressionToWildcard();
     void testExtractId_data();
     void testExtractId();
+    void testStringToDateTime_data();
+    void testStringToDateTime();
+    void testDateTimeToString_data();
+    void testDateTimeToString();
 };
 
 #endif // MYMONEYUTILSTEST_H
