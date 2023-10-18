@@ -3,103 +3,111 @@
 <chapterinfo>
   <authorgroup>
     <author> &Ace.Jones; &Ace.Jones.mail; </author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date>2023-10-02</date>
+  <releaseinfo>5.2</releaseinfo>
 </chapterinfo>
 
 <title>Reports</title>
 
-<sect1 id="details.reports.avail">
-<title>Available Reports</title>
+<sect1 id="details.reports.avail"><title>Available Reports</title>
 
 <para>
 <screenshot>
-	<screeninfo>Reports View</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="reports_view-all.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Reports View</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo>Reports View</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="reports_view_list.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Reports View</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
 <para>
-  The Reports View lists all available reports, grouped under the following
-  headings.
+  The <guilabel>Reports></guilabel> tab of the Reports View lists all available
+  reports, grouped under the following headings.  You can click on the
+  <quote>></quote> to expand or collapse the specific reports under each heading.
+  When you open any report, it is displayed in an additional tab, labelled with the
+  name of that report.
 </para>
 
-<sect2>
-<title>Income and Expenses</title>
+<sect2><title>Income and Expenses</title>
 <para>
-  The reports in this section show your income and expenses either for the
-  current month or for each month in the current year.  Of course, the duration
-  of the overall report and the duration captured by each column can be
-  configured to your liking. Graphs and Pie Charts also may be produced.
+  The reports in this section show your income and expenses either for the current
+  month, for each month in the current year, or for each year.  Of course, the
+  duration of the overall report and the duration captured by each column can be
+  configured to your liking.  Various Graphs and Pie Charts also may be produced.
 </para>
 </sect2>
 
-<sect2>
-<title>Net Worth</title>
+<sect2><title>Net Worth</title>
 <para>
-  Here there are reports that describe your net worth, either at the current
-  moment, every month for the current year, or every year of your history. In
-  addition, there is a 7-day Cash Flow Forecast and a Net Worth Graph.  There
-  are also reports to get the balances for all of your accounts at any given
-  point in time.
+  Here there are reports that describe your net worth, either at the current moment,
+  every month for the current year, or every year of your history.  In addition,
+  there is a 7-day Cash Flow Forecast and a Net Worth Graph.  There are also reports
+  to get the balances for all of your accounts at any given point in time.
 </para>
 </sect2>
 
-<sect2>
-<title>Transactions</title>
+<sect2><title>Transactions</title>
 <para>
   This section includes reports that list individual transactions.  This is the
   best way to print your account register for a specific period of time.  The
   transactions printed can be grouped together according to your liking by
   choosing the appropriate report, such as:
-<itemizedlist>
-  <listitem><para>By Account</para></listitem>
-  <listitem><para>By Category</para></listitem>
-  <listitem><para>By Month or Week</para></listitem>
-  <listitem><para>By Payee</para></listitem>
-</itemizedlist>
+  <itemizedlist>
+    <listitem><para>By Account</para></listitem>
+    <listitem><para>By Category</para></listitem>
+    <listitem><para>By Month or Week</para></listitem>
+    <listitem><para>By Payee</para></listitem>
+    <listitem><para>By Reconciliation Status</para></listitem>
+    <listitem><para>By Tag</para></listitem>
+  </itemizedlist>
 </para>
-
 </sect2>
 
-<sect2>
-<title>Cash Flow</title>
+<sect2><title>Cash Flow</title>
 <para>
   The Cash Flow report is similar to a Transaction report, but it displays all
-  cash-flow related transactions.
+  cash-flow related transactions for the specified period, which defaults to the
+  current month.
 </para>
 </sect2>
 
-<sect2>
-<title>Investments</title>
+<sect2><title>Investments</title>
 <para>
   These reports help you keep track of your investments.  They only include
   investment accounts.  There are a variety of presentation filters and styles,
   as shown in this partial list.
 </para>
+
 <itemizedlist>
-  <listitem><para>Investment Transactions:  Similar to a Transactions report,
-    and includes the share price and quantities.</para></listitem>
-  <listitem><para>Investment Holdings by Account:  Shows the current shares,
-    price, and value for each account.</para></listitem>
-  <listitem><para>Investment Holdings by Type:  Same as the previous report, but
-    organizes the accounts by type (Stock, Mutual Fund, &etc;)</para></listitem>
-  <listitem><para>Investment Performance by Account: Shows the annualized
-    performance over any period of time.  This performs a cash flow analysis of
-    all money coming into and going out of the account.  As a result, this is a
-    very accurate picture of how well your investments are
-    doing.</para></listitem>
-  <listitem><para>Investment Performance by Type:  Same as the previous report,
-    but organizes the accounts by type (Stock, Mutual Fund,
-    &etc;)</para></listitem>
+  <listitem>
+    <para> Investment Transactions: Similar to a Transactions report, but it includes
+    share prices and quantities.  </para>
+  </listitem>
+  <listitem>
+    <para>Investment Holdings by Account: Shows the current shares, prices, and
+    values for each account.</para>
+  </listitem>
+  <listitem>
+    <para>Investment Holdings by Type: Same as the previous report, but organizes the
+    accounts by type (Stock, Mutual Fund, &etc;)</para>
+  </listitem>
+  <listitem>
+    <para>Investment Performance by Account: Shows the annualized performance over
+    any period of time.  This performs a cash flow analysis of all money coming into
+    and going out of the account.  As a result, this is a very accurate picture of
+    how well your investments are doing.</para>
+  </listitem>
+  <listitem>
+    <para>Investment Performance by Type: Same as the previous report, but organizes
+    the accounts by type (Stock, Mutual Fund, &etc;)</para>
+  </listitem>
 </itemizedlist>
 
 <para>
@@ -107,300 +115,421 @@
 </para>
 </sect2>
 
-<sect2>
-<title>Taxes</title>
+<sect2><title>Taxes</title>
 <para>
-  The tax reports are just like the transactions reports, with the addition that
-  only Tax related categories are included.  This allows you to flag certain
-  categories as being tax-related, and then get one big report at the end of the
-  year to see them all in one place. They may be listed either by Category or by
-  Payee, and for the last fiscal year.
+  The tax reports are just like the transactions reports, with the addition that only
+  Tax related categories are included.  This allows you to flag certain categories as
+  being tax-related, and then get one big report at the end of the year to see the
+  transactions for those categories all in one place.  They may be listed either by
+  Category or by Payee, and for the last fiscal year.
 </para>
 </sect2>
 
-<sect2>
-<title>Budgeting</title>
+<sect2><title>Budgeting</title>
 <para>
-  The budgeting reports are similar to net worth reports, but the reports can
-  display the budget for a given year, or even compare it to the actual income
-  and expenses for the same period.
+  The budgeting reports are similar to net worth reports, but the reports can display
+  the budget for a given year, or even compare it to the actual income and expenses
+  for the same period.
 </para>
 </sect2>
 
-<sect2>
-<title>Forecast</title>
+<sect2><title>Forecast</title>
 <para>
   The forecast reports are just like the net worth reports, but they use the
-  information to display forecast information.  You can display the information
-  at various levels and for the time frame of your choosing.
+  information to display forecast information.  You can display the information at
+  various levels and for the time frame of your choosing.
 </para>
 </sect2>
 
-<sect2>
-<title>Information</title>
+<sect2><title>Information</title>
 <para>
-  These reports display non-transaction information about schedules, accounts,
-  and loans.
+  These reports display non-transaction information about accounts, loans, and
+  schedules.
 </para>
 </sect2>
 
-<sect2>
-<title>Charts</title>
+<sect2><title>Charts</title>
 <para>
-  If <link linkend="details.reports.charts">Charts</link> are enabled, this
-  section lists all the reports which are marked to display a graphical chart as
-  the default.  They are also listed in one of the other sections, but they are
-  also aggregated here for your easy reference.
+  If <link linkend="details.reports.charts">Charts</link> are enabled, this section
+  lists all the reports which are marked to display a graphical chart as the default.
+  They are also listed in one of the other sections, but they are aggregated here for
+  your easy reference.
 </para>
 </sect2>
 
-<sect2>
-<title>Favorite Reports</title>
+<sect2><title>Favorite Reports</title>
 <para>
   This section lists all the reports you have marked as a favorite in the report
-  configuration dialog.  They are still listed in one of the other sections, but
-  they are also aggregated here for your easy reference.  Favorite reports are
-  also included on the financial summary page for even easier reference.
+  configuration dialog.  They are still listed in one of the other sections, but they
+  are aggregated here for your easy reference.  Favorite reports can also be included
+  on the Home View for even easier reference.
 </para>
 </sect2>
-
-<sect2>
-<title>Configuring Reports</title>
-<para>
-  To access the report configuration dialog, bring up the report you wish to
-  configure, and press the <guibutton>Configure</guibutton> button at the top of
-  the report.
-</para>
-</sect2>
-
 </sect1>
 
-<sect1 id="details.reports.working">
-<title>Working With Reports</title>
+<sect1 id="details.reports.working"><title>Working With Reports</title>
 
 <para>
-  There are a number of actions you can take on each report.  You can access
-  these by right-clicking the report name in the list of reports.  Alternately,
-  once you have run a report, there are buttons across the top of the view to
-  invoke each of these:
+  There are a number of actions you can take on each report.  You can access some
+  these by right-clicking the report name in the list of reports, which brings up the
+  <guilabel>Report options</guilabel> context menu.  Alternately, once you have run a
+  report, there are buttons across the top of the view to invoke each of these:
 </para>
 
 <itemizedlist>
-  <listitem><para>Chart: Only present if the report is capable of displaying a
-    chart. Clicking this option toggles between the report and the
-    chart.</para></listitem>
-  <listitem><para>Configure: Change the properties of this report. You can
-    customize the report to your liking and save it for future
-    use.</para></listitem>
-  <listitem><para>New: Create a new customized report based on the selected
-    report.</para></listitem>
-  <listitem><para>Copy: The report output can be copied to the clipboard to
-    paste them in another application, like a spreadsheet, for further
-    analysis.</para></listitem>
-  <listitem><para>Export: Reports can be saved in &HTML; or CSV
-    format.</para></listitem>
-  <listitem><para>Delete: Customized reports can be deleted.  The default
-    reports that ship with &kmymoney; cannot be deleted.</para></listitem>
-  <listitem><para>Close: Close the current report.</para></listitem>
+  <listitem>
+    <para> Chart: Only present if the report is capable of displaying a chart.
+    Clicking this option toggles between the report and the chart.
+    </para>
+  </listitem>
+  <listitem>
+    <para>Configure report: Change the properties of this report.  You can customize
+    the report to your liking and save it for future use.  See the next section for
+    more details</para>
+  </listitem>
+  <listitem>
+    <para>New report: Create a new, customized report based on the selected
+    report.</para>
+  </listitem>
+  <listitem>
+    <para>Export report: Reports can be exported, or saved, in &HTML; or CSV format.
+    &HTML; is intended to preserve the displayed formatting of the report.  CSV
+    exports the data underlying the report.</para>
+  </listitem>
+  <listitem>
+    <para>Delete report: Customized reports can be deleted.  The default reports that
+    ship with &kmymoney; cannot be deleted.</para>
+  </listitem>
+  <listitem>
+    <para>Close report: Close the current report.</para>
+  </listitem>
 </itemizedlist>
 </sect1>
 
 <sect1 id="details.reports.config">
 <title>Configuring Reports</title>
 
-<sect2>
-<title>Working with custom reports</title>
+<sect2><title>Working with custom reports</title>
 <para>
-  You can configure the default reports or create your own from them by
-  selecting 'New' and then configuring the new report. When you select
-  'Configure' you will be presented with the Report Tab. Initially, it is named
-  the same as the old report with <quote>(Customized)</quote> added to the end. You
-  can change the name to whatever you want.  You can even name your custom
-  reports the same as a default report, or the same as another custom
-  report. Also, you can always use the Comment field to further distinguish
-  reports.
+  You can configure the default reports or create your own from them by selecting
+  <guilabel>New report</guilabel>, and then configuring the new report.  When you
+  click <guilabel>Configure report</guilabel> you will be presented with the Report
+  Tab of the <guilabel>Report Configuration</guilabel> dialog.  Initially, the new
+  report it is named the same as the old report with <quote>(Customized)</quote>
+  added to the end.  You can change the name to whatever you want.  You can even name
+  your custom reports the same as a default report, or the same as another custom
+  report.  You can use the Comment field to further distinguish reports.
 </para>
 
 <para>
-  The Report Configuration dialog has a number of tabs across the top.  Each tab
-  displays options for configuring different aspects of the report.
+  The Report Configuration dialog has a <guilabel>Report</guilabel> tab and a
+  <guilabel>Filters</guilabel> tab, which each have a number of subtabs.  Each subtab
+  displays options for configuring different aspects of the report.  Note that
+  specific subtabs and options within them may not appear if they are not relevant to
+  the report being configured.
 </para>
-
 </sect2>
 
-<sect2><title>Report Tab</title>
+<sect2 id="details.reports.config.report"><title>Report Tab</title>
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="report_configuration-reporttab.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Report Configuration -Report</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+  This is where you configure general information about the report as well as controlling
+  details about what data is presented and how it is presented.
+</para>
+
+<sect3 id="details.reports.config.general"><title>General subtab</title>
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="reports_configuration_general.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>Report Configuration - General</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>
-  On this tab, you set the basic properties of this report.
-<itemizedlist>
-  <listitem><para>Report Name: Choose a name for this report.</para></listitem>
-  <listitem><para>Comment: Enter a comment to help you remember the details of
-    this report.</para></listitem>
-  <listitem><para>Convert values to base currency: Select this option to convert
-    all values in the report to your base currency. Leave it unchecked if you'd
-    like to see values in their original currency. If currencies are not
-    converted, then subtotals will not be shown.</para></listitem>
-  <listitem><para>Mark as favorite report: Check this to cause this report to
-    show up on the home page and in the group of <guilabel>Favorite
-    Reports</guilabel>.</para></listitem>
-</itemizedlist>
+  Here you set the basic properties of the report.
+  <itemizedlist>
+    <listitem>
+      <para>Report Name: Choose or edit the name for this report.</para>
+    </listitem>
+    <listitem>
+      <para>Comment: Enter a comment to help you remember the details of this report
+      and identify it if the name is the same as any other report.</para>
+    </listitem>
+    <listitem>
+      <para>Convert values to base currency: Select this option to convert all values
+      in the report to your base currency.  Leave it unchecked if you'd like to see
+      values in their original currency.  If currencies are not converted, then
+      subtotals will not be shown.</para>
+    </listitem>
+    <listitem>
+      <para>Mark as favorite report: Check this to cause this report to show up on
+      the Home View and in the group of <guilabel>Favorite Reports</guilabel>.</para>
+    </listitem>
+    <listitem>
+      <!-- FIXME: when IS this used? -->
+      <para>Skip value if price is zero: This option is only available where it makes
+      sense.</para>
+    </listitem>
+  </itemizedlist>
+</para>
+</sect3>
+
+<sect3 id="details.reports.config.rowscolumns"><title>Rows/Columns subtab</title>
+<para>
+  This is where you configure how you would like the rows and columns of the report
+  to be selected and organized.  This tab presents different configuration options
+  depending on the style of report you are configuring.
 </para>
 
-</sect2>
-
-<sect2 id="details.reports.config.rowscolumns">
-<title>Rows/Columns Tab</title>
 <para>
-  On this tab, you configure how you would like the rows and columns to be selected
-  and organized.  This tab presents different configuration options depending on
-  the style of report you have selected.
-</para>
-
-<para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="report_configuration-rowscolumns.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Report Configuration -Rows and Columns</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="reports_configuration_rowscolumns.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>Report Configuration - Rows and Columns</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>
   For income/expense and net worth reports:
-<itemizedlist>
-  <listitem><para>Columns: Choose how large of a time period each column should
-    encompass</para></listitem>
-  <listitem><para>Rows: Choose what kind of accounts to display as the rows of
-    this report</para></listitem>
-  <listitem><para>Detail: Choose the level of detail required for this
-    report.</para></listitem>
-</itemizedlist>
-</para>
+  <itemizedlist>
+    <listitem>
+      <para>Budgets: If you have have any <link
+      linkend="details.budgets">budgets</link> defined, you can select one as well as
+      whether differences between budget and actual amounts should be propagated from
+      one time period to the next</para>
+    </listitem>
+    <listitem>
+      <para>Totals: Choose whether to display a row and/or column for total
+      amounts.</para>
+    </listitem>
+    <listitem>
+      <para>Rows: Choose whether to base the report on Income and Expense
+      (Categories) or on Asset and Liability accounts.</para>
+    </listitem>
+    <listitem>
+      <para>Detail: Choose the level of detail required for this report.</para>
+      
+      <para>The following levels of detail are available:
+      <itemizedlist>
+        <listitem><para>All: Show every category or account.</para></listitem>
+        <listitem><para>Top-Level: Show only the highest-level categories or
+        accounts, and roll up the sums of the subordinate categories or accounts into
+        those values.</para></listitem>
+        <listitem><para>Groups: Show only the totals of the income and expense or
+        asset and liabilities.</para></listitem>
+        <listitem><para>Totals: Show only the grand totals.</para></listitem>
+      </itemizedlist>
+      </para>
+    </listitem>
 
-<para>The following levels of detail are available:
-<itemizedlist>
-  <listitem><para>All: Show every category or account.</para></listitem>
-  <listitem><para>Top-Level: Show only the highest-level categories or accounts,
-    and roll up the sums of the subordinates categories or accounts into those
-    values.</para></listitem>
-  <listitem><para>Groups: Show only the totals of the income, expenses, assets,
-    or liabilities.</para></listitem>
-  <listitem><para>Total: Show only the grand totals line.</para></listitem>
-</itemizedlist>
+    <listitem>
+      <para>In addition you can specify whether or not to include scheduled and/or
+      transfer transactions and unused accounts or categories.</para>
+    </listitem>
+  </itemizedlist>
 </para>
 
 <para>
   For transaction reports:
-<itemizedlist>
-  <listitem><para>Organize by: Choose how to group the transactions in this
-    report.</para></listitem>
-  <listitem><para>Show Columns: Choose which columns should be shown in the
-    report. The date and transaction amount are always shown.</para></listitem>
-  <listitem><para>Include only Tax Categories: Only show categories which have
-    been marked as tax-related.</para></listitem>
-  <listitem><para>Include only Investment Accounts: Only show transactions from
-    investment accounts.</para></listitem>
-  <listitem><para>Include only Loan Accounts: Only show transactions from loan
-    accounts.</para></listitem>
-</itemizedlist>
+  <itemizedlist>
+    <listitem>
+      <para>Organize by: Choose how to group the transactions in this report.</para>
+    </listitem>
+    <listitem>
+      <para>Show Columns: Choose which columns should be shown in the report. The
+      date and transaction amount are always shown.</para>
+    </listitem>
+    <listitem>
+      <para>Include only Tax Categories: Only show categories which have been marked
+      as tax-related.</para>
+    </listitem>
+    <listitem>
+      <para>Include only Investment Accounts: Only show transactions from investment
+      accounts.</para>
+    </listitem>
+    <listitem>
+      <para>Include only Loan Accounts: Only show transactions from loan
+      accounts.</para>
+    </listitem>
+    <listitem>
+      <para>Include transfers: Unless this is checked, transfer transactions are not
+      included in transaction reports</para>
+    </listitem>
+    <listitem>
+      <para>Hide Split Transaction Details: When this option is available, it lets
+      you speicfy that only the total amount of a split transaction is to be
+      displayed.</para>
+    </listitem>
+    <listitem>
+      <para>Hide totals: Selecting this prevents Total lines from being calculated
+      and displayed</para>
+    </listitem>
+  </itemizedlist>
+</para>
+</sect3>
+</sect2>
+
+<sect2 id="details.reports.config.chart"><title>Chart Subtab</title><para>
+  This subtab allows you to configure what the report should look like when it is
+  displayed as a chart.  See the <link linkend="details.reports.charts">Graphs &amp;
+  Charts</link> section for more explanation of the charting functions.
 </para>
 
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="reports_configuration_chart.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>Report Configuration - Chart</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<itemizedlist>
+  <listitem>
+    <para>Chart Type: The visual format of chart desired.</para>
+  </listitem>
+  <listitem>
+    <para>Show grid lines: Whether to print horizontal and vertical grid lines on the
+    chart.</para>
+  </listitem>
+  <listitem>
+    <para>Draw values on chart: Whether to print the data values on the chart itself
+    for chosen data points.</para>
+  </listitem>
+  <listitem>
+    <para>Show chart by default: Whether this report should first be displayed as a
+    chart when it's opened.</para>
+  </listitem>
+  <listitem>
+    <para>Logarithmic vertical axis: normally the vertical axis is linear.</para>
+  </listitem>
+  <listitem>
+    <para>Plot expenses downwards: normally both income and expenses are plotted
+    upwards.</para>
+  </listitem>
+  <listitem>
+    <para>Line width: The width of data lines on the chart, specified in
+    pixels.</para>
+  </listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="details.reports.config.range"><title>Range Subtab</title>
+<para>
+  The Range subtab has two sections, <guilabel>Date range</guilabel> and
+  <guilabel>Data range</guilabel> for controlling the limits and subdivisions of the
+  displayed data.  Note that this only controls the display, to control the data used
+  by &kmymoney; to created the report, see the section on the <link
+  linkend="details.reports.config.report">Filters tab</link>.
+</para>
+
+<para>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="reports_configuration_range.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>Report Configuration - Range</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<sect3><title>Date range</title>
+<para>
+  Selecting one of the descriptive values from the <guilabel>Range</guilabel>
+  dropdown automatically sets the values of the <guilabel>From</guilabel> and
+  <guilabel>To</guilabel> date fields.  You can override either or both of those
+  dates, in which case the first dropdown will show <quote>User defined</quote>.
+</para>
+
+<para>
+  The <guilabel>Ticks</guilabel> dropdown controls the placement of ticks on the date
+  axis of the chart.
+</para>
+</sect3>
+
+<sect3><title>Data range</title>
+<para>
+  This lets you control the limits, ticks, and labels on the vertical data axis.  The
+  default value for the <guilabel>Range</guilabel> dropdown is
+  <quote>Automatic</quote>, lets &kmymoney; choose reasonable values for the other
+  fields.  If you select <quote>User defined</quote> you need to specify all the
+  other fields.  <guilabel>From</guilabel> and <guilabel>To</guilabel> set the lower
+  and upper limits of the axis.  <guilabel>Major tick length</guilabel> and
+  <guilabel>Minor tick length</guilabel> control the positioning of larger and
+  smaller tick marks along the axis.  <guilabel>Labels Precision</guilabel> controls
+  the number of decimal places used in the numbers displayed along the axis.
+</para>
+</sect3>
 </sect2>
 
 <sect2>
-<title>Chart Tab</title>
-
+<title>Filters tab</title>
 <para>
-  This tab allows you to configure what the report should look like when it is
-  displayed as a chart.  See the <link linkend="details.reports.charts">Graphs
-  &amp; Charts</link> section for more explanation of the charting functions.
-<itemizedlist>
-  <listitem><para>Chart Type: The visual format of chart
-    desired.</para></listitem>
-  <listitem><para>Show grid lines: Whether to print horizontal and vertical grid
-    lines on the chart.</para></listitem>
-  <listitem><para>Draw values on chart: Whether to print the data values on the
-    chart itself for chosen data points.</para></listitem>
-  <listitem><para>Show chart by default: Whether this report should first be
-    displayed as a chart when it's opened.</para></listitem>
-  <listitem><para>Line width: The width of data lines on the
-    chart.</para></listitem>
-</itemizedlist>
-</para>
-
+  The filters tab has several subtabs, which can be used to filter or limit the data
+  &kmymoney; uses to prepare the report.  These are the same subtabs used to control
+  searching for transactions.  Please refer to the <link
+  linkend="details.search">Search Transactions</link> section for details on those
+  tabs.</para>
 </sect2>
-
-<sect2>
-<title>Other Tabs</title>
-<para>
-  The other tabs in this dialog are the same as in the Search Transactions
-  interface.  Please refer to
-  the <link linkend="details.search">documentation</link> on that interface for
-  details on the other tabs.</para>
-</sect2>
-
 </sect1>
 
-<sect1 id="details.reports.charts">
-<title>Graphs &amp; Charts</title>
+<sect1 id="details.reports.charts"><title>Graphs &amp; Charts</title>
 
-<sect2>
-<title>Viewing as a Chart</title>
+<sect2><title>Viewing as a Chart</title>
 
 <para>
-  Each report can be viewed in either textual form or graphical (chart) form.
-  The same report configuration parameters are used in either case.  You can
-  easily jump back and forth between the textual and graphical forms by pressing
-  the <guibutton>Chart</guibutton> or <guibutton>Report</guibutton> buttons
-  along the top of the report view.
+  Many reports can be viewed in either textual form or graphical (chart) form.  The
+  same report configuration parameters are used in either case.  You can easily jump
+  back and forth between the textual and graphical forms by pressing the
+  <guibutton>Chart</guibutton> or <guibutton>Report</guibutton> buttons along the top
+  of the report view.
 </para>
 
 <para>
-  Care should be taken to limit the amount of data you choose to display on a
-  chart. If you are not careful, using the same configuration for both textual
-  and graphical forms means it's possible to configure a chart to be visually
-  cluttered, unappealing, and uninformative. &kmymoney; will not force you to
-  keep your charts readable and useful!
+  Please pay attention to the amount of data you choose to display on a chart.  If
+  you are not careful, using the same configuration for both textual and graphical
+  forms means it's possible to configure a chart to be visually cluttered,
+  unappealing, and uninformative. &kmymoney; will not force you to keep your charts
+  readable and useful!  Also be aware that some reports will take a long time to
+  calculate and display if too much is included.
 </para>
-
 </sect2>
 
-<sect2>
-<title>Available Chart Types</title>
+<sect2><title>Available Chart Types</title>
 
-<sect3>
-<title>Line Graph</title>
+<sect3><title>Line Graph</title>
 
 <para>
-  A line graph is one of the most simple forms of a chart.  There is one line
-  for each series. (Usually a series is a single account or category; see below
-  for more details on that.) The time periods stretch out along the bottom axis,
-  and the currency values are along the left.
+  A line graph is one of the simplest forms of a chart.  There is one line for each
+  series.  Usually, a series is data from a single account or category over time; see
+  below for more details.  The time periods stretch out along the bottom axis, and
+  the currency values are along the left axis.
 </para>
 
 <para>
   The detail level for each line is controlled in the <link
-  linkend="details.reports.config.rowscolumns">Rows/Columns</link> Tab of chart
-  configuration.  If you choose the <quote>Top-Level</quote> detail level, there
-  will be one line for each of the top-most accounts or categories which show
-  the sum total of all underlying accounts or categories.  If you choose
-  <quote>Groups</quote> it will instead show one line each for Income, Expenses,
+  linkend="details.reports.config.rowscolumns">Rows/Columns</link> Subtab of chart
+  configuration.  If you choose the <quote>Top-Level</quote> detail level, there will
+  be one line for each of the top-most accounts or categories, which shows the sum
+  total of all underlying accounts or categories.  If you choose
+  <quote>Groups,</quote> it will instead show one line each for Income, Expenses,
   Assets, or Liabilities, depending on the other settings.
 </para>
 </sect3>
@@ -409,8 +538,8 @@
 <title>Bar Graph</title>
 
 <para>
-  The bar graph works exactly the same as the line graph, except there is one
-  bar for each series in each time slice.
+  The bar graph works exactly the same as the line graph, except there is one bar for
+  each series in each time slice.
 </para>
 </sect3>
 
@@ -418,11 +547,11 @@
 <title>Pie Chart</title>
 
 <para>
-  The pie chart is the most simple chart available.  It shows only one time
-  slice, as opposed to showing the values across time.  This chart shows only
-  the totals column of whatever report is selected.  If your report is
+  The pie chart is the simplest chart type available.  It shows data from only one
+  time slice, as opposed to showing the values across time.  This chart shows only
+  the data from the totals column of whatever report is selected.  If your report is
   configured to NOT convert values to the base currency, there will be no totals
-  column, and therefore this report is not useful.
+  column, in which case this report is not useful.
 </para>
 </sect3>
 
@@ -434,8 +563,6 @@
   <quote>ring</quote> for each time slice in the report.
 </para>
 </sect3>
-
 </sect2>
-
 </sect1>
 </chapter>

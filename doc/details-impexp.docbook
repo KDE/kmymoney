@@ -3,9 +3,10 @@
 <chapterinfo>
   <authorgroup>
     <author> &Ace.Jones; &Ace.Jones.mail; </author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2011-07-03</date>
-  <releaseinfo>4.6</releaseinfo>
+  <date>2023-10-05</date>
+  <releaseinfo>5.2</releaseinfo>
 </chapterinfo>
 
 <title>Importing and Exporting</title>
@@ -13,6 +14,7 @@
 <sect1 id="details.impexp.gnucash">
 <sect1info>
   <author>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
+  <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
 </sect1info>
 
 <title>&gnucash; Importer</title>
@@ -21,45 +23,43 @@
 <title>&gnucash; Files</title>
 
 <para>
-  The &kmymoney; &gnucash; importer handles direct
-  reading of standard (&XML;) files as produced by &gnucash;
-  versions 1.8 and 2.0. The following are not supported:
+  The &kmymoney; &gnucash; importer handles direct reading of standard (&XML;) files
+  as produced by &gnucash; versions 1.8 and 2.0.  File from more recent versions
+  should also be imported without problem, but there is no recent testing to confirm
+  this.  Specifically, however, the following are not supported:
 </para>
 
 <itemizedlist>
   <listitem><para>import of database (Postgres) data</para></listitem>
   <listitem><para>import of 'multi-book' files</para></listitem>
   <listitem><para>import into an existing &kmymoney; file</para></listitem>
-  <listitem><para>import of small-business specific features (Employees,
-    Invoices, &etc;)</para></listitem>
+  <listitem><para>import of small-business specific features (Employees, Invoices,
+    &etc;)</para></listitem>
   <listitem><para>export to &gnucash; files.</para></listitem>
 </itemizedlist>
 
 <para>
-  The import will probably only work correctly if presented with a valid file.
-  It is recommended that the <menuchoice><guimenu>Actions</guimenu><guimenuitem>Check
-  &amp; Repair All</guimenuitem></menuchoice> menu item of &gnucash; be run
-  before attempting to import.
+  The import will probably only work correctly if presented with a valid file.  It is
+  recommended that the <menuchoice><guimenu>Actions</guimenu><guimenuitem>Check &amp;
+  Repair All</guimenuitem></menuchoice> menu item of &gnucash; be run before saving
+  the file and attempting to import into &kmymoney;.
 </para>
 
 <para>
   Files can be opened by specifying the filename on the command line
   (<command>kmymoney &lt;path to file&gt;</command>), or by means of the &kmymoney;
-  <menuchoice>
-    <shortcut><keycombo>&Ctrl;<keycap>O</keycap></keycombo></shortcut>
-    <guimenu>File</guimenu><guimenuitem>Open</guimenuitem>
-  </menuchoice> or
-  <menuchoice>
-    <guimenu>File</guimenu><guisubmenu>Import</guisubmenu>
+  <menuchoice> <shortcut> <keycombo>&Ctrl;<keycap>O</keycap> </keycombo> </shortcut>
+    <guimenu>File</guimenu><guimenuitem>Open</guimenuitem> </menuchoice> or
+    <menuchoice> <guimenu>File</guimenu> <guisubmenu>Import</guisubmenu>
   </menuchoice> menu items.
 </para>
 
 <para>
   The similarity between the two products means that much day-to-day data can be
-  imported in a straightforward fashion. However, there are some areas where
-  differences arise, and various options are provided to deal with these. The
+  imported in a straightforward fashion. However, there are some areas where there
+  are differences, and various options are provided to deal with these.  The
   following sections will describe some of these differences; understanding them
-  should lead to a smoother importation.
+  should lead to a smoother import, where any of them are relevant to your data.
 </para>
 </sect2>
 
@@ -86,15 +86,14 @@
 
 <para>
   For both products, the highest level of structure in the file is the
-  account. &kmymoney; supports 5 main types of account: Asset, Liability,
-  Income, Expense and Equity, each of which may have various subtypes, &eg;,
-  Checking, Credit Card, &etc;  &kmymoney; includes a 'standard' account for
-  each of these five types, and all other accounts are held subordinate to one
-  of these. &kmymoney; enforces more consistency (or less flexibility, depending
-  on your point of view) between account types than does &gnucash;, and the
-  importer will correct any inconsistencies it detects. This may result in a
-  slightly different account structure, though this can, within reason, be
-  amended after the import is complete.
+  account. &kmymoney; supports 5 main types of account: Asset, Liability, Income,
+  Expense, and Equity, each of which may have various subtypes, &eg;, Checking,
+  Credit Card, &etc; &kmymoney; includes a 'standard' account for each of these five
+  types, and all other accounts are held subordinate to one of these. &kmymoney;
+  enforces more consistency (or less flexibility, depending on your point of view)
+  between account types than does &gnucash;, and the importer will correct any
+  inconsistencies it detects. This may result in a slightly different account
+  structure, though this can, within reason, be amended after the import is complete.
 </para>
 </sect4>
 
@@ -103,9 +102,10 @@
 
 <para>
   &kmymoney; uses the term Category to denote an account of an Income or Expense
-  type. Unlike &gnucash;, these are not considered as 'ledger' accounts, and entry
-  of transactions folder into categories is not supported; allocations are made
-  during transaction entry into other account types.
+  type.  Unlike &gnucash;, these are not considered as <quote>ledger</quote>
+  accounts, and entry of transactions directly into categories is not supported.
+  Allocations are made during transaction entry into other account types.
+<!-- FIXME: can anyone explain what this last sentence means? -->
 </para>
 </sect4>
 
@@ -114,11 +114,11 @@
 
 <para>
   &gnucash; supports the use of Placeholder accounts. In effect, these are just
-  read-only accounts into which no transactions can be entered, but which function
-  in an analogous fashion to folders in a folder structure, as a holder for other
-  accounts. Though &kmymoney; does not support this feature as such, it does
-  provide a parent/child account relationship, so the importer simulates
-  placeholders by creating empty accounts.
+  read-only accounts into which no transactions can be entered, but which function in
+  an analogous fashion to folders in a folder structure, as a holder for other
+  accounts. Though &kmymoney; does not support this feature as such, it does provide
+  a parent/child account relationship, so the importer simulates placeholders by
+  creating empty accounts.
 </para>
 </sect4>
 
@@ -194,13 +194,13 @@
 <title>Balanced transactions</title>
 
 <para>
-  As with &gnucash;, data is entered in the form of transactions, each generally
-  consisting of 2 or more split entries. In fact, valid &gnucash; transactions
-  will always contain at least 2 splits, and to conform to &gnucash;'s
-  double-entry bookkeeping standard, these must be in monetary balance (&ie;,
-  they must balance out to zero). &kmymoney; encourages, but does not enforce,
-  this standard, but any imported transaction which is not balanced will be
-  marked in the ledger view as having a problem.
+  In both programs, data is entered in the form of transactions, each generally
+  consisting of 2 or more split entries.  In fact, valid &gnucash; transactions will
+  always contain at least 2 splits, and to conform to &gnucash;'s double-entry
+  bookkeeping standard, these must be in monetary balance (&ie;, they must balance
+  out to zero). &kmymoney; encourages, but does not enforce, this standard, but any
+  imported transaction which is not balanced will be marked in the ledger view as
+  having a problem.
 </para>
 </sect4>
 
@@ -209,9 +209,9 @@
 
 <para>
   &kmymoney; prefers that all transactions have a Payee (a generic term that
-  encompasses both payees and payers), and unlike &gnucash;, a list of these
-  payees is maintained. Payee names are generated by the importer from the
-  &gnucash; transaction's Description field.
+  encompasses both payees and payers,) and unlike &gnucash;, it maintains a list of
+  these payees.  Payee names are generated by the importer from the &gnucash;
+  transaction's Description field.
 </para>
 </sect4>
 
@@ -221,7 +221,7 @@
 <para>
   &kmymoney; uses the term Transfer to describe a transaction which does not
   involve a Category, but only transfers money between Asset and/or Liability
-  accounts.
+  accounts. <!-- FIXME: what does this have to do with gnucash? -->
 </para>
 </sect4>
 
@@ -239,53 +239,55 @@
 <title>Commodities</title>
 
 <para>
-  &gnucash; uses the term Commodity to cover both currencies and non-currency
-  assets. These are treated separately in &kmymoney;.
+  &gnucash; uses the term Commodity to cover both currencies and non-currency assets.
+  These are treated separately in &kmymoney;.
 </para>
 
 <sect4>
 <title>Currencies</title>
 
 <para>
-  &kmymoney; has built-in support for all foreign 
-  <link linkend="details.currencies">currency</link> types.  &kmymoney; also
-  requires that the user specify a base currency, this being the default
-  currency for new accounts. The importer will attempt to determine the most
-  likely base currency, though this choice may be rejected in favor of an
-  alternative.
+  &kmymoney; has built-in support for all foreign <link
+  linkend="details.currencies">currency</link> types.  &kmymoney; also requires that
+  the user specify a base currency, this being the default currency for new accounts.
+  The importer will attempt to determine the most likely base currency, though this
+  choice may be rejected in favor of an alternative.
 </para>
 
-<note><para>
-  &kmymoney; does not currently support accounts denominated in 'defunct'
-  currencies (except those replaced by the Euro). At present, it will be
-  necessary to remove any such accounts from your &gnucash; file before
-  importing. We hope to improve on this situation in a future release.
-</para></note>
+<note>
+  <para>
+    &kmymoney; does not currently support accounts denominated in 'defunct'
+    currencies (except those replaced by the Euro.)  At present, it will be necessary
+    to remove any such accounts from your &gnucash; file before importing.  We hope
+    to improve on this situation in a future release.
+    <!-- FIXME: is this still true? -->
+  </para>
+</note>
 </sect4>
 
 <sect4 id="gncsecurities">
 <title>Securities and Investments</title>
 
 <para>
-  Non-currency assets (normally stocks and bonds) are called Securities by
-  &kmymoney;, and represent the main difference between the two products, in
-  that &kmymoney; requires any account denominated in a security to be
-  subordinate to an Investment Account. This is described in more detail in the
-  chapter on <link linkend="details.investments">Investments</link>. Though
-  users may have implemented such a relationship, &gnucash; imposes no defined
-  structure on it, so the importer is unable to detect it and perform an
-  automatic conversion. Three options are therefore made available:
+  Non-currency assets (typically stocks and bonds) are called Securities by
+  &kmymoney;, and represent the main difference between the two products, in that
+  &kmymoney; requires any account denominated in a security to be subordinate to an
+  Investment Account.  This is described in more detail in the chapter on <link
+  linkend="details.investments">Investments</link>.  Though users may have
+  implemented such a relationship, &gnucash; imposes no defined structure on it, so
+  the importer is unable to detect it and perform an automatic conversion.  Three
+  options are therefore made available:
 </para>
 
 <itemizedlist>
   <listitem>
-    <para>Create a separate Investment account for each security, with the same
-    name as the security</para>
+    <para>Create a separate Investment account for each security, with the same name
+    as the security</para>
   </listitem>
 
   <listitem>
-    <para>Create a single Investment account which will act as 'parent' for all
-    security accounts</para>
+    <para>Create a single Investment account which will act as <quote>parent</quote>
+    for all security accounts</para>
   </listitem>
 
   <listitem>
@@ -295,9 +297,9 @@
 </itemizedlist>
 
 <para>
-  It depends entirely on user requirements which of these options is relevant in
-  each situation, and in some cases, manual restructuring of accounts after
-  importation may be necessary.
+  It depends entirely on user requirements and preference which of these options is
+  relevant in each situation.  In some cases, manual restructuring of accounts after
+  import may be necessary.
 </para>
 </sect4>
 
@@ -305,8 +307,8 @@
 <title>Prices and currency rates</title>
 
 <para>
-  Security prices and currency exchange rates as displayed in the &gnucash; Price
-  Editor will be imported. In addition, price and rate entries will be generated
+  Security prices and currency exchange rates, as displayed in the &gnucash; Price
+  Editor, will be imported.  In addition, price and rate entries will be generated
   from all transactions involving securities and multiple currencies.
 </para>
 </sect4>
@@ -315,32 +317,33 @@
 <title>Online Quotes</title>
 
 <para>
-  For obtaining online price and currency rate quotations, &gnucash; uses a
-  package called <literal>Finance::Quote</literal>. Recent versions of &kmymoney;
-  contain support for this package for obtaining stock quotes, and this will be
-  used by default when importing data. You may however select to convert to the
-  native method used by &kmymoney; which is covered in more detail in
-  <link linkend="details.investments.onlinequotes">online quotes</link>.
+  For obtaining online price and currency rate quotations, &gnucash; uses a Perl
+  based package called <literal>Finance::Quote</literal>.  Recent versions of
+  &kmymoney; contain support for this package for obtaining stock quotes, and this
+  will be used by default when importing data from &gnucash;.  You may however select
+  to convert to the native method used by &kmymoney; which is covered in more detail
+  in the section on <link linkend="details.investments.onlinequotes">online
+  quotes</link>.
 </para>
 
 <para>
   If you choose to do so, the following dialog will allow selection of a
-  'native' &kmymoney; price source, or a user-defined source, for each account
-  for which online quotes are required. However, the stock (ticker) symbol will
-  be imported unchanged. Since this symbol will almost certainly be different in
-  the two packages, it will need to be manually edited after completion of the
-  import process. Future currency rate updates will not use <literal>Finance::Quote</literal>,
-  and will always use the native retrieval method.
+  <quote>native</quote> &kmymoney; price source, or a user-defined source, for each
+  account for which online quotes are required.  However, the stock (ticker) symbol
+  will be imported unchanged.  Since this symbol will almost certainly be different
+  in the two packages, it will need to be manually edited after completion of the
+  import process.  Future currency rate updates will not use
+  <literal>Finance::Quote</literal>, and will always use the native retrieval method.
 </para>
 
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="gnucash-select_price_source.png" format="PNG" />
-	</imageobject>
-	</mediaobject>
-	</screenshot>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
 </para>
 </sect4>
 </sect3>
@@ -350,20 +353,20 @@
 
 <para>
   &kmymoney; does not retain the separation made in &gnucash; between template
-  transactions and their frequency of occurrence. Transaction data will be
-  duplicated if the same template is used in different schedules, but this is
-  not likely to be of great significance.
+  transactions and their frequency of occurrence.  Transaction data will be
+  duplicated if the same template is used in different schedules, but this is not
+  likely to be of great significance.
 </para>
 
 <sect4>
 <title>Schedule types</title>
 
 <para>
-  &kmymoney; classifies all schedules as one of three types, Bills, Deposits, or
-  Transfers. Since &gnucash; does not make such a distinction, the importer
-  attempts to determine the classification from the accounts and direction of
-  money movements. It may be that in some cases incorrect assumptions are made,
-  and these will need manual correction.
+  &kmymoney; classifies all schedules as one of three types: Bills, Deposits, or
+  Transfers.  Since &gnucash; does not make such a distinction, the importer attempts
+  to determine the classification from the accounts and direction of money movements.
+  It may be that in some cases incorrect assumptions are made, and these will need
+  manual correction.
 </para>
 </sect4>
 
@@ -371,34 +374,34 @@
 <title>Suspect Schedules</title>
 
 <para>
-  Some features of &gnucash; scheduled transactions are not available in
-  &kmymoney;, so the importer tries in each case to reach a reasonable
-  compromise in converting the data. These transactions will be flagged as
-  suspect, and the user will be given the option of editing them directly during
-  the import process. Examples of situations which may cause this are:
+  Some features of &gnucash; scheduled transactions are not available in &kmymoney;,
+  so the importer tries in each case to reach a reasonable compromise in converting
+  the data.  These transactions will be flagged as suspect, and the user will be
+  given the option of editing them directly during the import process.  Examples of
+  situations which may cause this are:
 </para>
 
 <itemizedlist>
   <listitem>
-    <para>some frequency intervals supported in &gnucash; are not currently
-    available in &kmymoney;</para>
+    <para>some frequency intervals supported in &gnucash; are not currently available
+    in &kmymoney;</para>
   </listitem>
 
   <listitem>
-    <para>&kmymoney; does not support the use of formulae and variables in
-    amount fields</para>
+    <para>&kmymoney; does not support the use of formulae and variables in amount
+    fields</para>
   </listitem>
 
   <listitem>
-    <para>complex cases which have not yet been identified for import.</para>
+    <para>complex cases which have not yet been identified for import</para>
   </listitem>
 </itemizedlist>
 
 <para>
   Despite best efforts, it is possible that, due to the many options involved, a
-  scheduled transaction may cause a fatal error within &kmymoney;.  If this sort
-  of problem seems to be occurring, the importer offers the option to drop all
-  suspect schedules.
+  scheduled transaction may cause a fatal error within &kmymoney;.  If this sort of
+  problem seems to be occurring, the importer offers the option to drop all suspect
+  schedules.
 </para>
 </sect4>
 </sect3>
@@ -407,10 +410,9 @@
 <title>Reports</title>
 
 <para>
-  &kmymoney; provides a comprehensive selection of configurable reports,
-  described in more detail in <link linkend="details.reports">Reports.</link>
-  These will not necessarily, however, match precisely those reports available
-  in &gnucash;.
+  &kmymoney; provides a comprehensive selection of configurable reports, described in
+  more detail in <link linkend="details.reports">Reports.</link> These will not
+  necessarily, however, match precisely those reports available in &gnucash;.
 </para>
 </sect3>
 </sect2>
@@ -419,13 +421,13 @@
 <title>Selecting Importer Options</title>
 
 <para id="details.impexp.gncoptions">
-	<screenshot>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="gnucash-import_options.png" format="PNG" />
-	</imageobject>
-	</mediaobject>
-	</screenshot>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <sect3>
@@ -440,12 +442,9 @@
 <title>Online Quotes</title>
 
 <para>
-  Turn this off if you wish to use the native method for future online price
-  quotes.
-</para>
-
-<para>
-  See <link linkend="details.impexp.gncquotes">"Online Quotes"</link> above.
+  Turn this off if you wish to use the native method for future online price quotes.
+  See <link linkend="details.impexp.gncquotes">"Online Quotes"</link> above for more
+  details.
 </para>
 </sect3>
 
@@ -461,18 +460,17 @@
 <title>Decoding Options</title>
 
 <para>
-  If your native language is written in letters or symbols which are different
-  from those used in the 'Latin' languages (&ie;, generally Western European),
-  these are represented in a special fashion ('encoded') in your &gnucash; file.
-  If these letters are not displayed correctly on your screen, then they must be
-  decoded.  Currently, it is often not possible to detect accurately which form
-  of decoding must be used, so you may need to set this option and select an
-  entry from the list.  In general, the first item in the list will be that
-  which is considered appropriate for your locale (&ie;, the country and
-  language which was selected as native when your operating system was
-  installed), so this should be tried first.  Since the import process does not
-  overwrite your &gnucash; file, you are free to experiment with any of these
-  selections.
+  If your native language is written in letters or symbols which are different from
+  those used in the 'Latin' languages (&ie;, generally Western European,) these are
+  represented in a special fashion (<quote>encoded</quote>) in your &gnucash; file.
+  If these characters are not displayed correctly on your screen, then they must be
+  decoded.  Currently, it is often not possible to detect accurately which form of
+  decoding must be used, so you may need to set this option manually by selecting an
+  entry from the list.  In general, the first item in the list will be that which is
+  considered appropriate for your locale (&ie;, the country and language which was
+  selected as native when your operating system was installed,) so this should be
+  tried first.  Since the import process does not overwrite your &gnucash; file, you
+  are free to experiment with any of these selections.
 </para>
 </sect3>
 
@@ -480,12 +478,12 @@
 <title>Transaction Notes option</title>
 
 <para>
-  Under some usage conditions, non-split &gnucash; transactions may contain
-  residual, often incorrect, memo data which is not normally visible to the
-  user. When imported into &kmymoney; however, due to display differences, this
-  data can become visible. Often, these transactions will have a Notes field
-  describing the real purpose of the transaction. If this option is selected,
-  these notes, if present, will be used to override the extraneous memo data.
+  Under some usage conditions, non-split &gnucash; transactions may contain residual,
+  often incorrect, memo data which is not normally visible to the user.  When
+  imported into &kmymoney; however, due to display differences, this data can become
+  visible.  Often, these transactions will have a Notes field describing the real
+  purpose of the transaction.  If this option is selected, these notes, if present,
+  will be used to override the extraneous memo data.
 </para>
 </sect3>
 
@@ -494,10 +492,10 @@
 
 <para>
   These need only be used in the event of import problems.  If you have such
-  problems, you should also report them to the &kmymoney; developer list
-  &devlist;.  Note that the traces produced by these options may contain data of
-  a confidential nature, and the <guilabel>Anonymize data</guilabel> option
-  should be used if they are to be made publicly available.
+  problems, you should also report them to the &kmymoney; developer list &devlist;.
+  Note that the traces produced by these options may contain data of a confidential
+  nature, and the <guilabel>Anonymize data</guilabel> option should be used if they
+  are to be made publicly available.
 </para>
 </sect3>
 </sect2>
@@ -507,9 +505,9 @@
 
 <para>
   At the end of processing, the importer produces a report showing the number of
-  different entities processed, and any errors or anomalies encountered. This
-  report will be displayed on screen, and may be saved to a file for later
-  review. A full report may contain the following sections:
+  different entities processed, and any errors or anomalies encountered.  This report
+  will be displayed on screen, and may be saved to a file for later review.  A full
+  report may contain the following sections:
 </para>
 
 <itemizedlist>
@@ -527,13 +525,13 @@
 </itemizedlist>
 
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="gnucash-report.png" format="PNG" />
-	</imageobject>
-	</mediaobject>
-	</screenshot>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
 </para>
 </sect2>
 </sect1>
@@ -541,6 +539,7 @@
 <sect1 id="details.impexp.qifimp">
 <sect1info>
   <author>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+  <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
 </sect1info>
 
 <title>QIF Importer</title>
@@ -549,34 +548,33 @@
 <title>QIF format considered harmful</title>
 
 <para>
-  Generally speaking, the QIF format should be avoided wherever possible.  It is
-  a poor choice for transporting financial data.  Among other things, QIF suffers
-  from these problems:
+  Generally speaking, the QIF format should be avoided wherever possible.  It is a
+  poor choice for transporting financial data.  Among other things, QIF suffers from
+  these problems:
 </para>
 
 <itemizedlist>
   <listitem>
-    <para>Lack of standardized format: Different versions of the same program
-    will impart different meanings to the same element.</para>
+    <para>Lack of standardized format: Different versions of the same program will
+    impart different meanings to the same element.</para>
   </listitem>
 
   <listitem>
-    <para>Lack of transaction identifier: Because there is no ID number
-    associated with each transaction, matching duplicate transactions is
-    haphazard at best.</para>
+    <para>Lack of transaction identifier: Because there is no ID number associated
+    with each transaction, matching duplicate transactions is haphazard at
+    best.</para>
   </listitem>
 
   <listitem>
-    <para>Lack of expressiveness: The grammar is really simple, and cannot
-    portray the depth of financial information found in today's financial
-    environment.</para>
+    <para>Lack of expressiveness: The grammar is really simple, and cannot portray
+    the depth of financial information found in today's financial environment.</para>
   </listitem>
 </itemizedlist>
 
 <para>
   This is generally why Intuit stopped supporting QIF input at all with
-  <application>Quicken</application> 2005. If you have the option of getting
-  data some other way, like OFX, always choose that option.
+  <application>Quicken</application> 2005.  If you have the option of getting data
+  some other way, like OFX, always choose that option.
 </para>
 </sect2>
 
@@ -584,38 +582,39 @@
 <title>How to import a QIF file</title>
 
 <para>
-  To import a QIF file, first ensure you have a valid &kmymoney; file open.
-  Then select <menuchoice><guimenu>File</guimenu><guisubmenu>Import</guisubmenu>
+  To import a QIF file, first ensure you have a valid &kmymoney; file open.  Then
+  select <menuchoice> <guimenu>File</guimenu> <guisubmenu>Import</guisubmenu>
   <guimenuitem>QIF...</guimenuitem> </menuchoice> menu item.
 </para>
 	
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="qifopen.png" format="PNG" />
-	</imageobject>
-	</mediaobject>
-	</screenshot>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>
-  The resulting dialog prompts for the QIF filename allowing you to locate the
-  file by clicking on the <guibutton>Browse</guibutton> button.
+  The resulting dialog prompts for the QIF filename allowing you to type in the full
+  path to the file or to locate the file by clicking on the
+  <guibutton>Browse</guibutton> button.
 </para>
 
 <para>
-  Also, &kmymoney; differentiates between the import of a bank statement file
-  and historic data exported from another application. The default is to import
-  a bank statement file. In case you are importing data from your previous personal
-  finance manager application select the appropriate option.
+  Note that &kmymoney; differentiates between the import of a bank statement file and
+  a file with historic data exported from another application.  The default is to
+  import a bank statement file.  In case you are importing data from your previous
+  personal finance manager application, select the appropriate option.
 </para>
 
 <para>
-  In general the default QIF profile should work with your QIF data. In some
-  cases it might become necessary to use a modified QIF profile. See
-  the <link linkend="details.impexp.qifimp.profile">next section</link> for more
-  details on that subject.
+  In general, the default QIF profile should work with your QIF data.  In some cases
+  it might become necessary to use a modified QIF profile.  See the <link
+  linkend="details.impexp.qifimp.profile">next section</link> for more details on
+  that subject.
 </para>
 
 <para>
@@ -623,56 +622,49 @@
 </para>
 
 <para>
-  &kmymoney; will start scanning the file to determine the formats used to
-  represent dates and numbers. In case it cannot determine a date format
-  unambiguously, &kmymoney; will ask the user to select one from the list of
-  possible date formats.
+  &kmymoney; will start scanning the file to determine the formats used to represent
+  dates and numbers.  In case it cannot determine a date format unambiguously,
+  &kmymoney; will ask the user to select one from the list of possible date formats.
 </para>
 
 <para>
-  Next, &kmymoney; imports the data and creates all necessary objects, such as
-  payee information, accounts and category records, and stock price information.
-  Wherever possible, existing transactions will be matched against the imported
-  information. A progress bar is shown and updated during the import process.
+  Next, &kmymoney; imports the data and creates all necessary objects, such as payee
+  information, account and category records, and stock price information.  Wherever
+  possible, existing transactions will be matched against the imported information,
+  to avoid duplicate transactions.  A progress bar is shown and updated during the
+  import process.
 </para>
 
 <para>
-  In case &kmymoney; could not detect the name of the account to be imported,
-  the user will be asked to select the account into which the data should be
-  imported. If the account does not already exist in your file, a new account
-  can be created by clicking on <guibutton>Create</guibutton>.
+  In case &kmymoney; could not detect the name of the account to be imported, the
+  user will be asked to select the account into which the data should be imported.
+  If the account does not already exist in your file, a new account can be created by
+  clicking on <guibutton>Create</guibutton>.
 </para>
 
 <para>
-  At the end of the import, &kmymoney; shows a statement import statistics
-  window.
+  At the end of the import, &kmymoney; shows a statement import statistics window.
 </para>
 
 <para>
 <screenshot>
-	<screeninfo>Statement statistics</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="qif_report.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>Statement statistics</phrase>
-	</textobject>
-	</mediaobject>
+  <screeninfo>Statement statistics</screeninfo>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="qif_report.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>Statement statistics</phrase>
+    </textobject>
+  </mediaobject>
 </screenshot>
 </para>
 
 <para>
   After importing, all of the imported transactions will be shown with a yellow
-  background in the ledger view.  In case &kmymoney; was able to match an
-  imported transaction with an already existing transaction, the background is
-  shown in light green.
-</para>
-
-<para>
-  The next step is to verify the imported data and accept it. This is a general
-  process and also applies to imports from other sources. It is outlined in a
-  separate section of this document.
+  background in the Ledgers View.  In case &kmymoney; was able to match an imported
+  transaction with an already existing transaction, the background is shown in light
+  green.
 </para>
 
 <note>
@@ -681,14 +673,24 @@
   may be different in your environment.
 </para>
 </note>
+
+<para>
+  The next step is to verify the imported data and accept it.  This is a general
+  process and also applies to imports from other sources.  It is outlined in a
+  separate section of this document.
+  <!-- FIXME:  use correct link.  -->
+</para>
+
 </sect2>
 
+<!-- FIXME:  confirm whether to keep or just delete this section -->
 <!--
 <sect2>
 <title>Accepting the imported transactions</title>
+
 <para>
-  
-	When &kmymoney; has finished importing the QIF transactions the account will be shown with the imported transactions listed in Yellow.
+  When &kmymoney; has finished importing the QIF transactions the account will
+  be shown with the imported transactions listed in Yellow.
 </para>
 
 <para>
@@ -711,8 +713,11 @@
 	The importer was not able to automatically assign a category based on your past transaction history.
 </para>
 
-<para>	
-	Transaction data can be edited or even deleted if needed.  To edit a transaction simply double-click on the entry or hit enter when the entry is highlighted.  Once finished click on <guibutton>OK</guibutton> to accept the imported transactions or <guibutton>Cancel</guibutton> to remove the imported transactions.
+<para>
+    Transaction data can be edited or even deleted if needed.  To edit a
+    transaction simply double-click on the entry or hit enter when the entry is
+    highlighted.  Once finished click on <guibutton>OK</guibutton> to accept the imported
+    transactions or <guibutton>Cancel</guibutton> to remove the imported transactions.
 </para>
 
 </sect2>
@@ -720,8 +725,8 @@
 <sect2><title>Importing Investments</title>
 
 <para>
-	Please note that if you are importing a file with investment transactions, those investments must first exist in your &kmymoney; file.
-	The trading symbol is used to match, so please ensure that the symbol in &kmymoney; is exactly the same as the one in the file you're importing.
+    Please note that if you are importing a file with investment transactions, those investments must first exist in your &kmymoney; file.
+    The trading symbol is used to match, so please ensure that the symbol in &kmymoney; is exactly the same as the one in the file you're importing.
 </para>
 </sect2>
 -->
@@ -730,34 +735,73 @@
 <title>Setting up a QIF profile</title>
 
 <para>
-  Because there is no universally standard format for a QIF file, different
-  vendors have taken liberties with the format, and introduced their own
-  nuances.  The QIF Profile allows &kmymoney; to know about the peculiarities of
-  your file.  To edit an existing QIF Profile, or to create a new one, press the
-  <guibutton>New</guibutton> button on the QIF Import dialog, near the profile selector.
+  Because there is no universally standard format for a QIF file, different vendors
+  have taken liberties with the format, and introduced their own nuances.  The QIF
+  Profile allows &kmymoney; to know about the peculiarities of your file.  To edit an
+  existing QIF Profile, or to create a new one, bring up the QIF Importer dialog by
+  selecting <menuchoice> <shortcut> <keycombo>&Ctrl;&Shift;<keycap>,</keycap>
+  </keycombo> </shortcut> <guimenu>Settings</guimenu> <guimenuitem>Configure
+  &kmymoney;...</guimenuitem> </menuchoice> from the main menu, clicking on
+  <guilabel>Plugins</guilabel> at the bottom of the left panel, and clicking the
+  &configicon; button on the entry for <quote>QIF Importer</quote>.
+  <!-- FIXME: do we want to use the plugins icon from that left panel here? -->
 </para>
 
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="qifimport-qifprofileeditor.png" format="PNG" />
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase>QIF Profile Editor</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<para>
+  On the left, the Profile selector displays a list of all existing QIF Importer
+  Profiles, select one to edit its configuration.  To create an new profile, press
+  the <guibutton>New</guibutton> button.  You can rename an existing profile by
+  selecting it in the Profile selector and clicking the <guibutton>Rename</guibutton>
+  button, and delete on with the <guibutton>Delete</guibutton> button.  Clicking the
+  <guibutton>Reset</guibutton> button resets all the fields to their default values.
+</para>
+
+<!-- FIXME: what do these all actually do?  do we want/need separate images for each?
+     -->
+<para>
+  The right area of the dialog has four tabs.
+</para>
+
+<para>
+  The <quote>General</quote> tab contains a description and fields 
+</para>
+
+<para>
+  The <quote>Filter</quote> tab allows you to specify a filter program or script to
+  be applied when this profile is chosen for import.  See the following section for
+  more details.
+</para>
+
+<para>
+  The <quote>Date</quote> tab
+</para>
+
+<para>
+  The <quote>Amounts</quote> tab
 </para>
 
 <note>
 <para>
   Previous versions of &kmymoney; used to have a tab for date and amount
-  specifications. &kmymoney; now determines those settings by scanning the
-  file. If it cannot figure out all settings, it will interrogate the user
-  during import.
+  specifications.  &kmymoney; now determines those settings by scanning the file.  If
+  it cannot figure out the proper settings, it will interrogate the user during
+  import.
 </para>
 </note>
+
 <!--
 <para>
 	The most commonly changed thing between QIF implementations is the date format.  
@@ -803,19 +847,18 @@
 <sect2><title>Transaction matching</title>
 
 <para>
-  As noted previously, one of the major drawbacks of the QIF format is the lack
-  of a unique identifier for each transaction.  Thus, if you import a QIF file
-  and some of the transactions are already in your ledger, you may get
-  duplicates.  &kmymoney; attempts to get around this by looking for
-  transactions that look similar to those you already have.  If it finds
-  something that looks like the same transaction, it will match the apparent
-  duplicate.
+  As noted previously, one of the major drawbacks of the QIF format is the lack of a
+  unique identifier for each transaction.  Thus, if you import a QIF file and some of
+  the transactions are already in your ledger, you may get duplicates.  &kmymoney;
+  attempts to get around this by looking for transactions that look similar to those
+  you already have.  If it finds something that looks like the same transaction, it
+  will match the apparent duplicate.
 </para>
 
 <para>
-  This can be a problem if you have transactions that look too similar but are
-  actually different.  In this case, you can unmatch those transactions later in
-  the ledger view.
+  This can be a problem if you have transactions that look very similar but are
+  actually different.  In this case, you can unmatch those transactions later in the
+  ledger view.
 </para>
 </sect2>
 
@@ -823,89 +866,111 @@
 <title>Writing an import filter</title>
 
 <para>
-  Sometimes you may have data in a custom format, like comma-separated-values
-  (CSV) or something else unique to your situation.  As of version 4.6,
-  &kmymoney; includes a CSV Importer Plugin, but you can still import other
-  types of files into &kmymoney; using a QIF Import Filter.  A filter is a
-  custom program you write which takes your special file as input, and produces
-  a QIF file as output.  This can be a shell script, a perl script, a compiled
-  program written in C/C++, or anything else you can dream of, as long as the
-  system can run it.
+  Sometimes you may have data in a custom format, like comma-separated-values (CSV)
+  or something else unique to your situation.  As of version 4.6, &kmymoney; includes
+  a CSV Importer Plugin, but you can still import other types of files into
+  &kmymoney; using a QIF Import Filter.  A filter is a custom program you write which
+  takes your special file as input, and produces a QIF file as output.  This can be a
+  shell script, a perl script, a compiled program written in C/C++, or anything else
+  you can dream of, as long as the system can run it.  The filter will be run with
+  the input file as stdin and stdout is assumed to be a valid qif file to pass on the
+  the actual QIF importer.
 </para>
 
 <para>
-  To use it, edit your favorite QIF Profile, and select the Filter tab.  Enter
-  the location of your filter program where prompted.  Then, whenever you do a
-  QIF import using this profile, the file you select for importing will be run
-  through your filter first.
+  To use a filter, edit your favorite QIF Profile or create a new one, and select the
+  Filter tab.  Enter the full path to your filter program in the <guilabel>Input
+  filter location</guilabel> field, or click the browse icon next to the field and
+  navigate to the filter in the <guilabel>File Open...</guilabel> dialog.  Then,
+  whenever you do a QIF import using this profile, the file you select for importing
+  will be run through your filter first
 </para>
 
 <para>
-  A common problem is to convert a list of comma-separated-values into a QIF
-  file. This is a textbook case for the <command>awk</command> tool. Create
-  a script called <filename>csv2qif.awk</filename>, with the following two
-  lines as contents:
+  Next, if you want the <guilabel>File Open...</guilabel> dialog where you choose the
+  file to input to have a filter for your specific file type, enter a comma separated
+  list of file filters (such as <quote>*.abc,*.xyz</quote>) in the <guilabel>Input
+  filter file type</guilabel> field.  With the above example, when you open a file
+  for import using this profile, you will only see files ending in abc or xyz.  If
+  you leave the field empty, no name filtering will be done, and you will see all
+  files.
+</para>
+
+<para>
+  A common problem is to convert a list of comma-separated-values into a QIF file.
+  Prior to the addition of &kmymoney;'s CSV Importer plugin, this would have been a
+  textbook case for the <command>awk</command> tool.  We still use this example here,
+  just to show a sample of how the import filter process works.  Create a script
+  called <filename>csv2qif.awk</filename>, with the following two lines as contents:
 </para>
 
 <programlisting>
-	BEGIN { FS=&quot;,&quot;; print &quot;!Type:Bank&quot; }
+    BEGIN { FS=&quot;,&quot;; print &quot;!Type:Bank&quot; }
 
-	{ print &quot;D&quot;$1; print &quot;T&quot;$2; print &quot;N&quot;$3; print &quot;P&quot;$4; print &quot;M&quot;$5; print &quot;^&quot; }
+    { print &quot;D&quot;$1; print &quot;T&quot;$2; print &quot;N&quot;$3; print &quot;P&quot;$4; print &quot;M&quot;$5; print &quot;^&quot; }
 </programlisting>
 
 <para>
-  Then, change the QIF keys (D,T,N,P,M) to match the order of your CSV data.
-  Set the input filter to <userinput>awk -f csv2qif.awk</userinput>.
+  Then, change the QIF keys (D,T,N,P,M) to match the order of the columns in your CSV
+  data.  Set the input filter to <userinput>awk -f csv2qif.awk</userinput>.
 </para>
 
 <para>
-  Another problem sometimes arises in the encoding of QIF files.  &kmymoney;
-  expects files to be UTF8 encoded.  If your file is encoded in something else,
-  it can be useful to convert it to UTF8.  For example to convert it from
-  iso-8859-1, you would set the input filter to <userinput>recode
-  iso-8859-1..utf-8</userinput>.
+  Another problem sometimes arises in the encoding of QIF files.  &kmymoney; expects
+  files to be UTF8 encoded.  If your file is encoded in something else, it can be
+  useful to convert it to UTF8.  For example to convert it from iso-8859-1, you would
+  set the input filter to <userinput>recode iso-8859-1..utf-8</userinput>.
 </para>
-
 </sect2>
+
 <sect2>
 <title>Special &kmymoney; QIF extensions</title>
 
 <para>
-  As already mentioned, one of the major drawbacks of the QIF format is the lack
-  of a unique identifier for each transaction.  If you are writing your own QIF
-  file creator (or filter, as described above), you can overcome this problem.
-  &kmymoney; supports the '#' field.  The importer will interpret this as a
-  unique transaction ID, and disregard the record if the transaction is already
-  in the system.
+  As already mentioned, one of the major drawbacks of the QIF format is the lack of a
+  unique identifier for each transaction.  If you are writing your own QIF file
+  creator (or filter, as described above,) you can overcome this problem.  &kmymoney;
+  supports the '#' field.  The importer will interpret this as a unique transaction
+  ID, and disregard the record if the transaction is already in the system.
 </para>
 </sect2>
 </sect1>
 
-<sect1 id="details.impexp.qifexp">
-<title>QIF Exporter</title>
+<sect1 id="details.impexp.qifexp"><title>QIF Exporter</title>
 <para>
   To export one of your accounts to a QIF file, choose
-  the <menuchoice><guimenu>File</guimenu><guisubmenu>Export</guisubmenu>
-  <guimenuitem>QIF...</guimenuitem></menuchoice> menu item. You will be prompted for
-  which single account to export, what file to export it to, and what QIF Profile
+  the <menuchoice> <guimenu>File</guimenu> <guisubmenu>Export</guisubmenu>
+  <guimenuitem>QIF...</guimenuitem> </menuchoice> menu item.  You will be prompted
+  for which single account to export, what file to export it to, and what QIF Profile
   to use.
 </para>
 
-<note><para>
-  At the moment, QIF Exporter does not handle export of investments.
-</para></note>
+<note>
+  <para>The QIF Exporter does not handle export of investment accounts.  It may
+  appear to work, and will produce an output file, but that file will not include any
+  actual data.</para>
+</note>
 
 <para>
-	<screenshot>
-	<mediaobject>
-	<imageobject>
+  <screenshot>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="qifimport-export.png" format="PNG" />
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase>QIF Export</phrase>
-	</textobject>
-	</mediaobject>
-	</screenshot>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<para>
+  The QIF Exporter uses QIF Profiles in a similar way as the QIF Importer, but it
+  uses the information in the Profile for format the QIF file being written, rather
+  than to interpret the file being read.  Parallel to the importer, you can use a
+  custom written filter program.  There is a separate field on the Filter Tab of the
+  QIF Profile editor for an output filter, so you can use the same QIF Profile for
+  both importing and exporting, but use a separate filter for the two processes.
 </para>
 </sect1>
 
@@ -913,6 +978,7 @@
 <sect1info>
   <author>&Ace.Jones; &Ace.Jones.mail;</author>
   <author>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
+  <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
 </sect1info>
 <title>OFX Importer Plugin</title>
 

@@ -58,13 +58,16 @@ This is in the order pulled in from index.docbook, with brief note on state of u
   prelim update complete
 
 <!ENTITY details-currencies SYSTEM "details-currencies.docbook">
-  prelim update begun
+  prelim update complete
   
 <!ENTITY details-reconciliation SYSTEM "details-reconciliation.docbook">
+  prelim update complete
 
 <!ENTITY details-reports SYSTEM "details-reports.docbook">
+  prelim update complete
 
 <!ENTITY details-impexp SYSTEM "details-impexp.docbook">
+  prelim update begun
 
 <!ENTITY details-impexp-csv SYSTEM "details-impexp-csv.docbook">
 
@@ -226,7 +229,36 @@ multiple places.
   needed to be altered due to field separators in the date?  It shouldn't, so am I
   mis-remembering, or was there a problem?
 
+- Price Editor dialog first column is labelled Commodity, but in New price entry, it
+  is called Security.  Shouldn't this be consistent?
+
+- Reconciliatiohn wizard interest/charge dialog - should it allow split entries?  Might
+  be unlikely for interest, but you might have credit card interest plus fees.
+
+- Can we change the order of reports in the Reports View to make more sense?  (Look at
+  Tranacions reports for an example)
+
+- Report section CashFlow - should this be Cash Flow (with a space between?)
+
+- what are cash-flow related transactions?  How is the term defined?
+
+- Can the tabs in the Reports View get an "X" to close them, instead of needing to use
+  the "Close report" button?
+
+- In Gnucash import, matching of account types, some map to things that are only
+  applicable to security subaccounts of investmant accounts.  Should these be shown
+  separately, with an explanation?
+
+- Importing gnucash schedules talks about if it causes fatal errors.  Is this while
+  importing, or while running later?
+
+- doc says not all report types are matched - what happens if they don't?
+
+- is the QIF Profile input filter location a single file or a command?  Does it just use
+  a single file as the program, and anything more than that as a command to be invoked?
+
 - 
+
 
   ----------------
 
@@ -265,5 +297,8 @@ elsewhere.
   the main view for that object.  For example identification number for stocks is not
   shown anywhere else.
 
-- 
+- In report configuration dialog, if the report has not been run (select configure from
+  the reports list) and you close, do not actually run the report.
+
+
 
