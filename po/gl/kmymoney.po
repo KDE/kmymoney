@@ -20389,8 +20389,7 @@ msgid ""
 "like to rename the payee?"
 msgstr ""
 "Xa hai un beneficiario chamado «%1». Non se recomenda ter varios "
-"beneficiarios co mesmo nome. Está seguro de que quere renomear o "
-"beneficiario?"
+"beneficiarios co mesmo nome. Seguro que quere renomear o beneficiario?"
 
 #: kmymoney/views/kpayeesview.cpp:152
 #, fuzzy, kde-format
@@ -20774,8 +20773,7 @@ msgid ""
 "KMyMoney will prompt you again next time it starts unless you manually enter "
 "it later."
 msgstr ""
-"Está seguro de que quere parar o apuntamento deste asento planificado no "
-"rexistro?\n"
+"Seguro que quere parar o apuntamento deste asento planificado no rexistro?\n"
 "\n"
 "KMyMoney preguntaralle de novo a próxima vez que arranque a menos que o "
 "introduza manualmente máis tarde."
@@ -20891,7 +20889,7 @@ msgid ""
 "to rename the tag?"
 msgstr ""
 "Xa hai unha etiqueta chamado «%1». Non se recomenda ter varias etiquetas co "
-"mesmo nome. Está seguro de que quere renomear a etiqueta?"
+"mesmo nome. Seguro que quere renomear a etiqueta?"
 
 #: kmymoney/views/ktagsview.cpp:379
 #, fuzzy, kde-format
