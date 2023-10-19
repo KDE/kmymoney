@@ -15017,7 +15017,7 @@ msgid ""
 "like to rename the budget?"
 msgstr ""
 "Xa hai un orzamento chamado «%1». Non é recomendábel ter varios orzamentos "
-"co mesmo nome. Está seguro de que quere renomear o orzamento?"
+"co mesmo nome. Seguro que quere renomear o orzamento?"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox1)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:39
@@ -19980,8 +19980,7 @@ msgid ""
 "like to rename the payee?"
 msgstr ""
 "Xa hai un beneficiario chamado «%1». Non se recomenda ter varios "
-"beneficiarios co mesmo nome. Está seguro de que quere renomear o "
-"beneficiario?"
+"beneficiarios co mesmo nome. Seguro que quere renomear o beneficiario?"
 
 #: kmymoney/views/kpayeesview.cpp:199 kmymoney/views/kpayeesview.cpp:435
 #: kmymoney/views/kpayeesview.cpp:509
@@ -20431,8 +20430,7 @@ msgid ""
 "KMyMoney will prompt you again next time it starts unless you manually enter "
 "it later."
 msgstr ""
-"Está seguro de que quere parar o apuntamento deste asento planificado no "
-"rexistro?\n"
+"Seguro que quere parar o apuntamento deste asento planificado no rexistro?\n"
 "\n"
 "KMyMoney preguntaralle de novo a próxima vez que arranque a menos que o "
 "introduza manualmente máis tarde."
@@ -20459,7 +20457,7 @@ msgid ""
 "to rename the tag?"
 msgstr ""
 "Xa hai unha etiqueta chamado «%1». Non se recomenda ter varias etiquetas co "
-"mesmo nome. Está seguro de que quere renomear a etiqueta?"
+"mesmo nome. Seguro que quere renomear a etiqueta?"
 
 #: kmymoney/views/ktagsview.cpp:148 kmymoney/views/ktagsview.cpp:385
 #, kde-format
