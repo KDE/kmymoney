@@ -64,6 +64,7 @@ public Q_SLOTS:
 private:
     QList<QAbstractButton*> m_buttons;
     QComboBox* m_comboBox;
+    QString m_name;
 };
 
 #endif // PAYEECREATOR_H
