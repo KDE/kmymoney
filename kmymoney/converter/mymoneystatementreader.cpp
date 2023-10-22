@@ -93,8 +93,7 @@ public:
 
     MyMoneyAccount                 lastAccount;
     MyMoneyAccount                 m_account;
-    MyMoneyAccount                 m_brokerageAccount;
-    QList<MyMoneyTransaction> transactions;
+    MyMoneyAccount m_brokerageAccount;
     QList<MyMoneyPayee>       payees;
     int                            transactionsCount;
     int                            transactionsAdded;
@@ -117,7 +116,7 @@ private:
      */
     void previouslyUsedCategories(const QString& investmentAccount, QString& feesId, QString& interestId);
 
-    QString nameToId(const QString&name, MyMoneyAccount& parent);
+    QString nameToId(const QString& name, const MyMoneyAccount& parent);
 
 private:
     QString                        m_feeId;
@@ -138,7 +137,7 @@ const QString& MyMoneyStatementReader::Private::interestId(const MyMoneyAccount&
     return m_interestId;
 }
 
-QString MyMoneyStatementReader::Private::nameToId(const QString& name, MyMoneyAccount& parent)
+QString MyMoneyStatementReader::Private::nameToId(const QString& name, const MyMoneyAccount& parent)
 {
     //  Adapted from KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
     //  Needed to find/create category:sub-categories
@@ -1073,7 +1072,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                     QVBoxLayout *topcontents = new QVBoxLayout(mainWidget);
 
                     //add in caption? and account combo here
-                    QLabel* label1 = new QLabel(i18n("Please select a default category for payee '%1'", importedPayeeName));
+                    QLabel* const label1 = new QLabel(i18n("Please select a default category for payee '%1'", importedPayeeName));
                     topcontents->addWidget(label1);
 
                     auto filterProxyModel = new AccountNamesFilterProxyModel(this);
@@ -1449,6 +1448,7 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
     }
 
     eDialogs::Category type;
+#if 0
     if (account.accountType() == Account::Type::Checkings) {
         type = eDialogs::Category::checking;
     } else if (account.accountType() == Account::Type::Savings) {
@@ -1460,6 +1460,7 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
     } else {
         type = static_cast<eDialogs::Category>(eDialogs::Category::asset | eDialogs::Category::liability);
     }
+#endif
     // FIXME: This is a quick fix to show all accounts in the account selection combo box
     // of the KAccountSelectDlg. This allows to select any asset or liability account during
     // statement import.
@@ -1476,7 +1477,6 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
     accountSelect->setMode(false);
     accountSelect->showAbortButton(true);
     accountSelect->hideQifEntry();
-    QString accname;
     bool done = false;
     while (!done) {
         if (accountSelect->exec() == QDialog::Accepted && !accountSelect->selectedAccount().isEmpty()) {
@@ -1504,7 +1504,6 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
                         MyMoneyFile::instance()->modifyAccount(originalAccount);
                     }
                     ft.commit();
-                    accname = account.name();
                 } catch (const MyMoneyException &) {
                     qDebug("Updating account in MyMoneyStatementReader::selectOrCreateAccount failed");
                 }

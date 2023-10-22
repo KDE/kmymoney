@@ -524,7 +524,7 @@ void KCurrencyEditDlg::slotSelectBaseCurrency()
 {
     Q_D(KCurrencyEditDlg);
     if (!d->m_currentCurrency.id().isEmpty()) {
-        QTreeWidgetItem* p = d->ui->m_currencyList->currentItem();
+        QTreeWidgetItem* const p = d->ui->m_currencyList->currentItem();
         d->setBaseCurrency(d->m_currentCurrency);
         // in case the dataChanged() signal was not sent out (nested FileTransaction)
         // we update the list manually
