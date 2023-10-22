@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-09 00:43+0000\n"
+"POT-Creation-Date: 2023-10-22 00:43+0000\n"
 "PO-Revision-Date: 2023-09-17 20:40+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -3069,7 +3069,7 @@ msgstr "Ny kurspost"
 msgid "Security"
 msgstr "Värdepapper"
 
-#: kmymoney/dialogs/payeecreator.cpp:57
+#: kmymoney/dialogs/payeecreator.cpp:62
 #, kde-format
 msgctxt "Undo action description"
 msgid "Create payee"

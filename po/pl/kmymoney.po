@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-09 00:43+0000\n"
+"POT-Creation-Date: 2023-10-22 00:43+0000\n"
 "PO-Revision-Date: 2023-10-08 11:16+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -3075,7 +3075,7 @@ msgstr "Nowa cena"
 msgid "Security"
 msgstr "Papier"
 
-#: kmymoney/dialogs/payeecreator.cpp:57
+#: kmymoney/dialogs/payeecreator.cpp:62
 #, kde-format
 msgctxt "Undo action description"
 msgid "Create payee"

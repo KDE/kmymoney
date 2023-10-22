@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-09 00:43+0000\n"
+"POT-Creation-Date: 2023-10-22 00:43+0000\n"
 "PO-Revision-Date: 2023-09-18 10:19-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -3108,7 +3108,7 @@ msgstr "Nova entrada de preço"
 msgid "Security"
 msgstr "Título"
 
-#: kmymoney/dialogs/payeecreator.cpp:57
+#: kmymoney/dialogs/payeecreator.cpp:62
 #, fuzzy, kde-format
 #| msgid "Creates a new payee"
 msgctxt "Undo action description"
