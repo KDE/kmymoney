@@ -67,7 +67,7 @@ This is in the order pulled in from index.docbook, with brief note on state of u
   prelim update complete
 
 <!ENTITY details-impexp SYSTEM "details-impexp.docbook">
-  prelim update begun
+  prelim update complete through QIF.  OFX just begun.
 
 <!ENTITY details-impexp-csv SYSTEM "details-impexp-csv.docbook">
 
@@ -109,7 +109,8 @@ multiple places.
 - Need consistency in capitalization of Xxx View.  What about View Selector?
 
 - In Institutuions and Accounts Views, balance is in currency of the account, total
-  value is in base currency.  Need to confirm, and see how/if this affects roll-up.
+  value is in base currency.  Need to confirm, and see how/if this affects roll-up of
+  values in various displays/views and reports.
 
 - In Categories View, Balance and Total Value - which get rolled up under what
   circumstances?

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="introduction">
 <chapterinfo>
-  <date>2023-08-15</date>
+  <date>2023-10-23</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
@@ -11,11 +11,9 @@
 <title>What is &kmymoney;?</title>
 
 <para>
-  &kmymoney; is a personal finance manager by &kde;.  Some users prefer 
-  It enables
-  users of open source operating systems and applications to keep careful track
-  of their personal finances by providing a broad array of financial features
-  and tools.
+  &kmymoney; is a personal finance manager by &kde;.  It enables users to keep
+  careful track of their personal finances by providing a broad array of financial
+  features and tools.
 </para>
 
 <para>
@@ -59,7 +57,7 @@
 <title>What &kmymoney; is not</title>
 
 <para>
-  As a personal finance manager, &kmymoney; is not intended to scalesupport the needs
+  As a personal finance manager, &kmymoney; is not intended to support the needs
   of an average business.  A small business might find sufficient functionality to
   use &kmymoney;, but features such as accounts-receivable and accounts-payable are
   not directly supported.  Most if not all the data needed for a small business, such

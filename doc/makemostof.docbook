@@ -7,7 +7,7 @@
     </author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2023-08-15</date>
+  <date>2023-10-23</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
@@ -25,7 +25,7 @@
   spend a little time planning how you are going to use &kmymoney;, so follow the
   steps given here.  This may seem very simple, and indeed, it is simple, but taking
   the time to assure that your understanding of how things work is the same as
-  &kmymoney;'s will almost certianly save you time later.
+  &kmymoney;'s will almost certainly save you time later.
 </para>
 
 <sect1 id="makingmostof.basicaccounting">
@@ -72,7 +72,7 @@
 <para>
   This will be covered in more detail later on in this handbook.
 </para>
-<!-- **** don't forget to make sure this is actually covered, and linked to from
+<!-- FIXME **** don't forget to make sure this is actually covered, and linked to from
      here.  Also, I have removed "in setting up accounts for Businesses." and
      modified the section below, since we explicitly say that KMM is not for
      business use. -->
@@ -81,11 +81,12 @@
 <title>Defining the accounts (personal records)</title>
 
 <para>
-  Most accounts, or pots, above represent a measure of our <quote>Worth</quote>.
-  The cash and goods represent our <quote>Assets</quote>; so does what we are
-  owed if our customers have not yet given us the money. The money we owe, say
-  if we had not paid our suppliers, are our <quote>Liabilities</quote>. These
-  accounts are transferable to Cash and have a value.
+  Most accounts, or pots, as described above, represent a measure of our
+  <quote>Worth</quote>.  The cash and goods represent our <quote>Assets</quote>,
+  which also include any amount someone owes us for goods we provided or money we
+  loaned to them.  The money we owe to others, say if we had not paid our suppliers,
+  are our <quote>Liabilities</quote>. These accounts are transferable to Cash and
+  have a value.
 </para>
 
 <para>
@@ -148,11 +149,11 @@
 
 <para>
   An <quote>Account</quote> in &kmymoney; represents one ot the <quote>pots</quote>
-  of the previous section: is can be anywhere which holds your money and possessions
+  of the previous section: it can be anywhere which holds your money and possessions
   that you wish to monitor.  You generally create an account in &kmymoney; to
   represent each different account you have in <quote>real life,</quote> whether it
   is with a bank or other financial institution, or a store, or even just the cash in
-  your wallet.  There are sevral types of accounts available, to represent the
+  your wallet.  There are several types of accounts available, to represent the
   different types of places your money may be.
 </para>
 
@@ -163,7 +164,7 @@
 
 <para>
   As described below, accounts can either hold money which is actually yours (assets)
-  or money which you owe (liabilities.)  Liabilities can be though of as magic post,
+  or money which you owe (liabilities.)  Liabilities can be thought of as magic pots,
   which you can take beans from even if there are not acatually any beans there, but
   which you eventually need to replace.  
 </para>
@@ -201,7 +202,7 @@
     <term>Cash</term>
     <listitem>
       <para>
-        Money in your pocket or yoor wallet.
+        Money in your pocket or your wallet.
       </para>
     </listitem>
   </varlistentry>
@@ -265,7 +266,7 @@
     <term>Liability</term>
     <listitem>
       <para>
-        Anything else you owe that does fit the other liability account types.
+        Anything else you owe that does not fit the other liability account types.
       </para>
     </listitem>
   </varlistentry>
@@ -290,12 +291,12 @@
 
 <para>
   A Category is a special type of account used internally by &kmymoney; to track
-  income and expenses.  These account are non-managed, because as mentioned earlier,
+  income and expenses.  These accounts are non-managed, because as mentioned earlier,
   they do not have real values, and show only what you have gotten from them or
   contributed to them.  Each category shows the total value of transactions which
   mention it.  The principle of double entry accounting requires that every
-  transaction include a category or transfer account.  This will also be explained in
-  more detail later in the handbook.
+  transaction includes a category or transfer account.  This will also be explained
+  in more detail later in the handbook.
 </para>
 
 <para>
@@ -310,7 +311,7 @@
 
 <para>
   Categories can be split into sub-categories, but this relationship is primarily for
-  your conveniend, and is used for display purposes.  Most of the time, the
+  your convenience, and is used for display purposes.  Most of the time, the
   sub-category totals are not included in the higher level category total, although
   there are specific reports and displays where this can be done.
 </para>
