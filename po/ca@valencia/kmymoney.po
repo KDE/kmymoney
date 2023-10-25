@@ -5493,7 +5493,7 @@ msgstr "Transferix de"
 #: kmymoney/widgets/stdtransaction.cpp:124
 #, kde-format
 msgid "Transfer to"
-msgstr "Transferix a"
+msgstr "Transferix cap a"
 
 #: kmymoney/dialogs/stdtransactioneditor.cpp:742
 #, kde-format
@@ -10322,7 +10322,7 @@ msgid ""
 "want to delete it?</center>"
 msgstr ""
 "<center>Durant l'actualització de <b>%1</b><br>el tipus de perfil per a <b>"
-"%2</b> no s'ha pogut reconéixer.<br>Per açò, el perfil no es pot utilitzar."
+"%2</b> no s'ha pogut reconéixer.<br>Per a açò, el perfil no es pot utilitzar."
 "<br>El voleu suprimir?</center>"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1575
@@ -12092,7 +12092,7 @@ msgstr "Fitxer iCalendar"
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:207
 #, kde-format
 msgid "Transfer from %1 to %2, Payee %3, amount %4"
-msgstr "Transferència de %1 a %2, beneficiari %3, import %4"
+msgstr "Transferència des de %1 cap a %2, beneficiari %3, import %4"
 
 #: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:209
 #, kde-format
@@ -16070,7 +16070,7 @@ msgstr "Transferix de %1"
 #: kmymoney/plugins/views/reports/core/querytable.cpp:1925
 #, kde-format
 msgid "Transfer to %1"
-msgstr "Transferix a %1"
+msgstr "Transferix cap a %1"
 
 #: kmymoney/plugins/views/reports/core/objectinfotable.cpp:287
 #, kde-format
@@ -18302,7 +18302,7 @@ msgid ""
 msgstr ""
 "Esta pàgina permet establir els paràmetres per a l'emmagatzematge del fitxer "
 "encriptat de les dades de <b>KMyMoney</b> basat en <b>GPG</b>.<p>\n"
-"L'accés a les opcions de configuració està desactivat si no s'ha pogut "
+"L'accés en les opcions de configuració està desactivat si no s'ha pogut "
 "detectar <b>GPG</b> en el sistema. En este cas, comproveu que <b>GPG</b> "
 "estiga funcionant adequadament per a l'usuari actual.<p>\n"
 "L'<i>encriptació de recuperació addicional</i> només serà accessible si es "
@@ -20726,7 +20726,7 @@ msgstr "- Compatibilitat millorada amb els esquemes de color foscos"
 #: kmymoney/views/kwelcomepage.cpp:231
 #, kde-format
 msgid "- Fast switching of main views via Ctrl + number key"
-msgstr "- Commutació ràpida de vistes principals via «Ctrl» + tecla numèrica"
+msgstr "- Commutació ràpida de vistes principals via «Ctrl +» tecla numèrica"
 
 #: kmymoney/views/kwelcomepage.cpp:232
 #, kde-format
@@ -22197,7 +22197,7 @@ msgstr "Refinançament: %1"
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:173
 #, kde-format
 msgid "Transfer amount to %1"
-msgstr "Transferix l'import a %1"
+msgstr "Transferix l'import cap a %1"
 
 #: kmymoney/wizards/newaccountwizard/kaccountsummarypage.cpp:175
 #, kde-format
@@ -23393,8 +23393,8 @@ msgid ""
 msgstr ""
 "Si este préstec és per a un actiu, com un cotxe o una casa, ara podeu crear "
 "el compte de l'actiu. Un compte d'actiu representa el valor total d'un "
-"actiu. L'import d'este préstec es transferirà al compte de l'actiu que creeu "
-"o seleccioneu.\n"
+"actiu. L'import d'este préstec es transferirà cap al compte de l'actiu que "
+"creeu o seleccioneu.\n"
 "Si este préstec és un «préstec al consum» (diners que podeu utilitzar en el "
 "que vulgueu), en el seu lloc podeu utilitzar un compte corrent."
 
@@ -24817,7 +24817,7 @@ msgid ""
 msgstr ""
 "\n"
 "Esta pàgina resumix les dades que heu introduït. Si us cal modificar res, "
-"utilitzeu el botó «Arrere» per a anar a la pàgina apropiada. Altrament "
+"utilitzeu el botó «Arrere» per a anar fins a la pàgina apropiada. Altrament "
 "utilitzeu el botó «Acaba» per a crear el compte."
 
 #. i18n: ectx: property (title), widget (QGroupBox, GroupBox3)
@@ -25338,7 +25338,7 @@ msgid ""
 "more details.\n"
 msgstr ""
 "<p>...podeu emprar un programa de filtratge extern per a convertir\n"
-"qualsevol format d'importació a QIF en temps real? Per a més detalls\n"
+"qualsevol format d'importació cap a QIF en temps real? Per a més detalls\n"
 "vegeu l'editor de perfils del QIF.\n"
 
 #. i18n: ectx: @info:tipoftheday
