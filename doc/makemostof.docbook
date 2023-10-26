@@ -434,4 +434,47 @@
   reports via CSV into other applications.
 </para>
 </sect1>
+
+<sect1 id="makingmostof.plugins">
+<title>Plugins</title>
+
+<para>
+  While a detailed knowledge of plugins is not necessary to use &kmymoney;, a basic
+  understanding is helpful, as the concept is mentioned in many places throughout
+  this handbook.  When &kmymoney; was originally designed, all features and
+  functionality were implemented within the source code of the program.  As more
+  features and functionality were added to the program, a plugin system was designed,
+  so additional functionality could be added in a way that did not require
+  modification of any of the core source code files.  When &kmymoney; starts, it
+  looks in a specific directory for any plugins, and it creates the appropriate menu
+  menu and configuration entries for those it finds.
+</para>
+
+<para>
+  When the first plugins were written, even though the source code was included with
+  the complete source code of &kmymoney;, not all &Linux; distributions included them
+  in the versions they compiled.  For some time, the handbook included instructions
+  for checking this and for compiling them yourself, if necessary.  At this point,
+  many of the basic features of &kmymoney; have been implemented as plugins, and they
+  are included by all distributions, as well as the &Windows; and &macOS; versions
+  distributed on the <ulink url="https://www.kmymoney.org">&kmymoney; web
+  site</ulink>.
+</para>
+
+<para>
+  See the section on <link linkend="details.settings.plugins">Plugins</link> in the
+  chapter on <link linkend="details.settings">Settings</link> in the for more
+  information on determining which plugins are installed and active, and how to
+  configure them.
+</para>
+
+<para>
+  If you wish to write your own plugin in order to implement a feature, such as
+  importing or exporting data in a custom format, you should use one of the existing
+  importer or exporter plugins as an example.  If you do so, please write to the
+  developers' mailing list &devlist;, in case someone has already started a similar
+  effort, and because your work may be of interest to other users.
+</para>
+
+</sect1>
 </chapter>

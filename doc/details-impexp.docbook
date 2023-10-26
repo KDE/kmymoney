@@ -5,7 +5,7 @@
     <author> &Ace.Jones; &Ace.Jones.mail; </author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2023-20-05</date>
+  <date>2023-20-25</date>
   <releaseinfo>5.2</releaseinfo>
 </chapterinfo>
 
@@ -465,7 +465,7 @@
 
 <para>
   These need only be used in the event of import problems.  If you have such
-  problems, you should also report them to the &kmymoney; developer list &devlist;.
+  problems, you should also report them to the developers' mailing list &devlist;.
   Note that the traces produced by these options may contain data of a confidential
   nature, and the <guilabel>Anonymize data</guilabel> option should be used if they
   are to be made publicly available.
@@ -912,7 +912,23 @@
   <author>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
   <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
 </sect1info>
-<title>OFX Importer Plugin</title>
+<title>OFX Importer</title>
+
+<para>
+  The OFX importer was one of the first components of &kmymoney; to be written as a
+  Plugin.  At that time, there were only a few plugins included in the source code,
+  and they were not always included in versions built for &Linux; distributions, so
+  it was sometimes necessary for users to be able to compile the plugins themselves.
+  This is rarely the case any more, but see the section on <link linkend=
+  "makingmostof.plugins">Plugins</link> for more information.  Currently, many of the
+  features considered core parts of &kmymoney; are implemented as plugins, so that
+  fact is not always mentioned in this handbook where those features are discussed.
+  See also the <link linkend="details.settings.plugins">Plugins</link> section in the
+  Settings Chapter.
+</para>
+
+<!-- FIXME: see the new section on plugins at the end of makemostof.  Most of this
+     can probably just be deleted.
 
 <sect2><title>Getting the plugin</title>
 
@@ -948,197 +964,254 @@
   <filename>config.log</filename> file, compressed first via <command>gzip</command>.
 </para>
 </sect2>
+-->
 
 <sect2><title>What is OFX</title>
 
 <para>
-  OFX stands for <quote>Open Financial Exchange</quote>.  According to the
-  <ulink url="https://www.ofx.net/">OFX web site</ulink> <quote>Open Financial
-  Exchange (OFX) is a unified specification for the electronic exchange of
-  financial data between financial institutions, businesses and consumers via
-  the Internet. OFX is not a financial institution.</quote> The specification
-  defines formats for transfer of financial data both by file and by direct
-  interchange.
+  <acronym>OFX</acronym> stands for <quote>Open Financial Exchange</quote>.
+  According to the <ulink url="https://financialdataexchange.org/ofx/">OFX Work Group
+  web site</ulink> <quote>Open Financial Exchange is an open standard for
+  client-server systems and cloud based APIs for exchanging financial data, and
+  performing financial transactions between financial institutions, and financial
+  applications.</quote> The specification defines formats for transfer of financial
+  data both by file and by direct interchange.  Additional historic information may
+  be found on the <ulink url="https://en.wikipedia.org/wiki/Open_Financial_Exchange"
+  >Wikipedia page</ulink>
 </para>
 
 <para>
-  Although the standard is much more complete and robust than QIF, there are
-  still variations, depending on the specific implementation used by any
-  institution.  OFX files may have an extension of <quote>OFX</quote> or
-  <quote>QFX</quote> (upper or lower case); this does not imply any particular
-  difference in the content.  The specification is based on &XML;, so the files
-  can be read in any text editor, but as whitespace is not relevant to the
-  content itself, some implementations do not use any, making it very hard for a
-  human to read.
+  Although the OFX standard is much more complete and robust than QIF, there are
+  still variations, depending on the specific implementation used by any institution.
+  OFX files may have an extension of <quote>OFX</quote> or <quote>QFX</quote> (upper
+  or lower case); this does not imply any particular difference in the content.  The
+  specification was originally based on SGML, and more recent versions are based on
+  &XML;, so the files can be read in any text editor, but as whitespace is not
+  relevant to the content itself, some implementations do not use any, making it very
+  hard for a human to read.
+</para>
+
+<para>
+  In addition, even though the standard includes provisions for additional types of
+  data, &kmymoney; is only able to import transaction data, with some additional data
+  such as the current balance of accounts.
 </para>
 
 <para>
   Another site with good information is <ulink url="https:/ofxhome.com/">OFX
-  Home</ulink>.  They maintain a directory of financial institutions that
-  support OFX.  This can be useful if you have problems setting up <link
-  linkend="details.impexp.ofxdirectconnect">OFX direct connect.</link> They also
-  have a forum for discussions about OFX issues.
+  Home</ulink>.  They maintain a directory of financial institutions that support
+  OFX.  This can be useful if you have problems setting up <link
+  linkend="details.impexp.ofxdirectconnect">OFX direct connect.</link> They also have
+  a forum for discussions about OFX issues.  The site is not as active as it once
+  was, but good information is still available there.
 </para>
 </sect2>
 
-<sect2><title>Importing an OFX file</title>
+<sect2><title>Importing OFX data</title>
 
 <para>
-  The most basic way to import an OFX file is to choose the importer from the
-  menu bar. From the <menuchoice><guimenu>File</guimenu><guisubmenu>Import</guisubmenu>
-  <guimenuitem>OFX...</guimenuitem></menuchoice> menu item. If OFX does not show
-  up under Import, you do not have the OFX Importer Plugin installed correctly.
-  Please see the previous section.
+  The OFX standard defines the organization and formatting of financial data, but
+  that data can exist either as a regular file or as a stream of data between two
+  computers.  The most straightforward way of getting OFX data is to download it from
+  your bank or other financial institution as an OFX file.  In most cases, when you
+  are logged into the bank's web site, on the page which displays your transactions,
+  there is a button or link for downloading that data.  It may say OFX or QFX, or you
+  may reqeuest the data for Quicken or Web Connect (see below for more on this term.)
+  You also have the option of specifying the date range of transactions to download
+  (although that is sometimes restricted to periods matching the available
+  statements,) as well as filtering by type of transaction.
 </para>
 
 <para>
-  The first thing the importer will do is ask you into which account to import
-  the transactions.  If there are transactions from multiple accounts in your
-  file, you will be asked this question multiple times.
+  If you have downloaded an OFX file, the most basic way to import it is to choose
+  the importer from the menu bar, selecting the <menuchoice> <guimenu>File</guimenu>
+  <guisubmenu>Import</guisubmenu> <guimenuitem>OFX...</guimenuitem> </menuchoice>
+  menu item.  If OFX does not show up under Import, you do not have the OFX Importer
+  Plugin installed correctly, or it is not enabled.  Please see the previous section.
 </para>
 
 <para>
-  After importing, some of your transactions may be shown with an exclamation
-  mark on a yellow triangle in the ledger.  This is because they need to be
-  assigned a category.  The importer was not able to automatically assign a
-  category based on your past transaction history.  You can edit each
-  transaction in the ledger to assign a category, and the mark will be removed.
+  The first thing the importer will do is ask you into which account to import the
+  transactions.  If the file includes transactions from multiple accounts, you will
+  be asked this question multiple times.
 </para>
 
 <para>
-  Please note that this section describes the <quote>native</quote> OFX
-  importer.  OFX files may also be imported using the AqBanking Importer Plugin
-  if you have installed that.  Note that the two importers do behave slightly
+  After importing, some of your transactions may be shown with an exclamation mark on
+  a yellow triangle in the ledger.  This is because they need to be assigned a
+  category.  The importer was not able to automatically assign a category based on
+  your past transaction history.  You can edit each transaction in the ledger to
+  assign a category, and the mark will be removed.
+</para>
+
+<para>
+  Please note that this section describes the <quote>native</quote> OFX importer.
+  OFX files may also be imported using the AqBanking Importer Plugin if you have
+  installed that and it is enabled.  Note that the two importers do behave slightly
   differently, and they are written and supported by two different developers.
+  <!-- FIXME: we do not appear to have any info in this handbook on aqbanking other
+       than in the reference section? -->
 </para>
 </sect2>
 
 <sect2><title>Importing Investments</title>
 
 <para>
-  Please note that if you are importing a file with investment transactions,
-  those investments must first exist in your &kmymoney; file.  The trading
-  symbol is used to match, so please ensure that the symbol in &kmymoney; is
-  exactly the same as the one in the file you're importing.
+  <!-- FIXME: Was this true in the past?  Currently, KMM will create securites in OFX
+       data if they do not already exist.  -->
+  Please note that if you are importing a file with investment transactions, those
+  investments must first exist in your &kmymoney; file.  The trading symbol is used
+  to match, so please ensure that the symbol in &kmymoney; is exactly the same as the
+  one in the file you're importing.
 </para>
 </sect2>
 
 <sect2 id="details.impexp.webconnect"><title>Web Connect</title>
 
 <para>
-  The easiest way to import an OFX file is to set up Web Connect.  Visit your
-  bank's web site, and click on a link to download an OFX file.  Your browser
-  should ask you what program you would like to use to open the file.  Point
-  your browser to &kmymoney;.  It will then import the downloaded OFX file into
-  the &kmymoney; file you most recently had open.  You can also change the file
-  associations of your desktop environment, and have &kmymoney; open the OFX
-  file automatically for you.
+  Rather than explicitly downloading an OFX file, as described above, the easiest way
+  to import an OFX file is to set up Web Connect.  Visit your bank's web site, and
+  click on the button or link to download an OFX file.  Your browser should ask
+  whether you want to save the file, or else what program you would like to use to
+  open the file.  Point your browser to &kmymoney;.  It will then import the
+  downloaded OFX file directly into the &kmymoney; file you currenlty have open, or
+  the file you most recently had open.  You can also change the file associations of
+  your desktop environment, and have the system automatically opne &kmymoney; if you
+  click on an OFX file in your file browser.  you.
 </para>
 
 <para>
-  If you need to import the OFX file into some other &kmymoney; file, load up
-  that file in &kmymoney; first, and then visit your bank's web site.
+  If you need to import the OFX file into some other &kmymoney; data file, open that
+  file in &kmymoney; first, and then visit your bank's web site.
 </para>
 </sect2>
 
 <sect2 id="details.impexp.ofxdirectconnect"><title>Direct Connect</title>
 
 <para>
-  OFX Direct Connect is now supported in &kmymoney;.  This gives you the ability
-  to contact your bank directly to obtain statements.  In the future, there will
-  be more help written, and this will be moved to its own section.
+  &kmymoney; also supports OFX Direct Connect.  This gives allows &kmymoney; the
+  ability to contact your bank directly to download transactions, assuming the bank
+  supports it.
 </para>
 
 <para>
-  To enable this feature, you must compile &kmymoney; with the
-  <userinput><option>--enable-ofxbanking</option></userinput> switch (now the default).
+  Please be warned: not all banks support OFX Direct Connect, and those that do often
+  use software provided and supported by third parties, and those third parties often
+  provide customer support only to users of specific, commercial financial management
+  software.  No bank directly supports &kmymoney;, so you may have to tell them you
+  want to bank directly from <application>MS Money</application> or
+  <application>Quicken</application>.  In addition, the OFX Work Group web site
+  mentioned above also says <quote>Further, the API allows the exchange to be
+  facilitated either directly or via an intermediary such as data aggregation service
+  providers.</quote> Users have reported that banks which have migrated to using such
+  aggregation service providers are even less likely to provide any support unless
+  you are using one of the commercial applications.
 </para>
 
 <para>
-  Please be warned: Many banks require a separate signup, will give you a
-  separate password or PIN, and may even charge you a separate fee for this
-  service.  No bank directly supports &kmymoney;.  You will have to tell them
-  you want to bank directly from <application>MS Money</application> or
-  <application>Quicken</application>.
+  In addition, your bank may require a separate signup than for the regular web
+  site, it may give you a separate password or PIN, and it may even charge you a
+  separate fee for this service. 
+</para>
+
+<para>
+  If Direct Connect works for you, it allows you to update your records by
+  downloading recent transactions with a single button push.  If it does not work on
+  your first attempt, you may find an easy soltuion to your issue, or it may take a
+  lot of research, and there is no guarantee that it will work in any particulat
+  situation.  However, plese do not take any of this as a reason to not try it.
 </para>
 
 <para>
   The first step is to configure each account for which you wish to download
-  statements. Go to the Accounts view, right-click on the account you wish to
-  configure, and choose <guimenuitem>Map to online account...</guimenuitem>. 
-  In case more than one online banking plugin is installed on your system
-  you will be asked which one to use. For the internal OFX method select
-  <guimenuitem>&kmymoney; OFX</guimenuitem>. A list of banks will be downloaded
-  from the Internet and a wizard will guide you through choosing a bank,
-  entering your username and password, and selecting an account.  Should you
-  find that your bank is not listed, then it may still be possible to use the
-  manual option. Your bank may be able to provide the required parameters, or
-  you may have to do some research to find them.
+  transactions.  Go to the Accounts view, right-click on the account you wish to
+  configure, and choose <guimenuitem>Map to online account...</guimenuitem>.  This is
+  also available from the <guimenu>Accounts</guimenu> menu if the account is open in
+  the Ledger View.  In case more than one online banking plugin is installed on your
+  system you will be asked which one to use.  For the internal OFX method select
+  <guimenuitem>&kmymoney; OFX</guimenuitem>.  A list of banks will be downloaded from
+  the Internet and a wizard will guide you through choosing a bank, entering your
+  username and password, and selecting an account.  Should you find that your bank is
+  not listed, then it may still be possible to use the manual option.  Your bank may
+  be able to provide the required parameters, or you may have to do some research to
+  find them.
 </para>
 
 <note>
   <para>
-    Setting up OFX Direct Connect can sometimes be a challenge, especially as
-    the implementation at most institutions do not provide sufficient details in
-    error messages.  One particular issue to note is that many institutions
-    require you to change your password the first time you access it online
-    using this method.  Unfortunately, at this time, the library that &kmymoney;
-    uses (libofx) does not have a way to interactively change a password.  In
-    some cases, it is possible to get a technical support person at the
-    institution to change the password for you.  Until we are able to expand
-    this section with more detailed troubleshooting information, if you have
-    trouble getting this to work for you, you can ask for help on the &kmymoney;
-    developer list &devlist;.
+    As implied above, setting up OFX Direct Connect can sometimes be a challenge,
+    especially as the implementations at most institutions do not provide sufficient
+    details in error messages.  One particular issue to note is that many
+    institutions require you to change your password the first time you access it
+    online using this method.  Unfortunately, at this time, the library that
+    &kmymoney; uses (libofx) does not have a way to interactively change a password.
+    In some cases, it is possible to get a technical support person at the
+    institution to change the password for you.  Until we are able to expand this
+    section with more detailed troubleshooting information, if you have trouble
+    getting this to work for you, you can ask for help on the developers' mailing
+    list &devlist; or one of the other <link linkend="firsttime.contact"> support
+    channels</link>.
   </para>
 </note>
 
 <para>
   Once you have an account set up with online banking, go to the ledger for that
-  account. Then choose <menuchoice><guimenu>Account</guimenu><guimenuitem>Update
-  account...</guimenuitem></menuchoice> menu item. This will connect to your bank,
-  and download a statement for the last 60 days.
+  account, and choose <menuchoice><guimenu>Account</guimenu><guimenuitem>Update
+  account...</guimenuitem></menuchoice>.  This will connect to your bank, and
+  download your recent transactions.  See the next section on how you can configure
+  the actual date range of transactions to fetch.
 </para>
 
 <note>
   <para>
-    In version of &kmymoney; prior to 4.6, the payee name was always taken from the
-    <literal>PAYEEID</literal> field. As of version 4.6, the payee name can be based
-    on either the <literal>PAYEEID</literal>, <literal>NAME</literal>, or
-    <literal>MEMO</literal> field in the OFX transaction. You can configure this
-    feature and some other OFX direct connect settings by selecting the appropriate
-    tab in the <link linkend="details.accounts.edit">Edit account</link> dialog.
+    In older versions of &kmymoney;, the Payee name was always taken from the
+    <literal>PAYEEID</literal> field in the OFX data.  As of version 4.6, the payee
+    name can be based on either the <literal>PAYEEID</literal>,
+    <literal>NAME</literal>, or <literal>MEMO</literal> field in the OFX transaction.
+    The next section shows how you can configure this feature and some other OFX
+    direct connect settings.
   </para>
 </note>
+</sect2>
+
+<sect2 id="details.impexp.ofxsettings"><title>Configuring OFX import details</title>
+<para>
+  This was described previously, in the section on <link
+  linkend="details.accounts.edit">editing account details</link>.
+</para>
 </sect2>
 
 <sect2><title>Exporting an OFX file</title>
 
 <para>
-  It is not possible to export your data as an OFX file currently.  If you are
-  interested to contribute in this area, please contact the libofx development
-  team for details.
+  It is currently not possible to export your data as an OFX file.  If you are
+  interested to contribute in this area, please contact the libofx development team
+  for details.
 </para>
 </sect2>
 </sect1>
 
-<!-- here goes the new csv impexp section.  New entity is only a temporary 
-     workaround, although might be good to keep it in a separate file -->
+<!-- Using an entity for the csv impexp sections allow it to be maintained in a
+     separate file.  Original note here suggested this was a workaround, but I
+     don't know why. -->
 <!-- entity defined in index.docbook -->
 &details-impexp-csv;
 &details-impexp-csvexp;
 
-<!-- here goes the new Woob impexp section.  New entity is only a temporary
-     workaround, although might be good to keep it in a separate file -->
+<!-- as above, for woob import. -->
 <!-- entity defined in index.docbook -->
 &details-impexp-woob;
 
 <sect1 id="details.impexp.plugins"><title>Writing Importer Plugins</title>
 
 <para>
-  &kmymoney; contains explicit support for importer plugins.  If you have a
-  custom format, and you would like to write an importer plugin, we would value
-  your contribution.  To do so, you'll need to compile the program from source.
-  Then use the OFX Importer Plugin as an example.
+  <!-- FIXME: this is mentioned more generally in the makemostof section on Plugins,
+       so not sure if it is really necessary to also cover here, or just refer to
+       that section.  -->
+  &kmymoney; contains explicit support for importer plugins.  If you have a custom
+  format, and you would like to write an importer plugin, we would value your
+  contribution.  To do so, you'll need to compile the program from source.  Then use
+  the OFX Importer Plugin as an example.
 </para>
 </sect1>
 </chapter>

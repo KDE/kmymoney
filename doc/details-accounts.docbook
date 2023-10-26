@@ -106,8 +106,9 @@
       <para>
         An indication whether this account has been configured for online access.
         The process of configuring accounts for online access is described in the
-        <link linkend="details.impexp">Importing and Exporting Chapter.</link>
-        <!-- FIXME: make this link more specific -->
+        <link linkend="details.impexp">Importing and Exporting Chapter.</link>, but
+        details on the available settings are below in the section on <link
+        linkend="details.accounts.edit">Editing Account Information</link>.
       </para>
     </listitem>
   </varlistentry>
@@ -841,130 +842,171 @@
       </textobject>
     </mediaobject>
   </screenshot>
+
+This dialog has several tabs for configuring different aspects of an Account.
 </para>
 
-<formalpara><title>General</title>
-<para>
-  View the general information about the account, and change the name, start or
-  opening date, as well as some of the other basic settings of the account.
-</para>
-</formalpara>
-
-<formalpara><title>Institution</title>
-<para>
-  View and change the associated banking institution and account numbers.  You can
-  also create a new institution here.
-</para>
-</formalpara>
-
-<formalpara><title>Hierarchy</title>
-<para>
-<!-- not ported to kde4 or even 5 yet.  uncomment if that is done, see
-     https://bugs.kde.org/show_bug.cgi?id=272737 You can change the parent account by
-     dragging the account in this view of the account hierarchy.  Changing the parent
-     account is also possible in the main Accounts screen, by dragging the account
-     and dropping it on a different parent account.
--->
-  You can change the parent account by clicking the new parent account and then
-  clicking <guibutton>OK</guibutton>.
-</para>
-</formalpara>
-
-<formalpara><title>Limits</title>
-<para>
-  This tab is only present for asset and liability accounts.  If you enter amounts in
-  the available fields, &kmymoney; will warn you when the account balance reaches or
-  exceeds those values.
-</para>
-</formalpara>
-
-<formalpara><title>Tax</title>
-<para>
-  Here you can check whether this is a VAT account, and can specify the percentage of
-  the VAT.  In additon, you can check whether to include this account on tax reports.
-</para>
-</formalpara>
-
-<formalpara><title>Online Settings</title>
-<para>
-  This tab is only be present if the account has been mapped to an <link
-  linkend="details.impexp.ofxdirectconnect">online account</link>.  It has three
-  subtabs.
-</para>
-</formalpara>
-
-<itemizedlist>
-<listitem>
-<para>
-  <emphasis>Account Details</emphasis>: This shows the status of the online
-  connection, the bank/broker, and the account number.  It also allows you to store
-  or change the password for the online account.
-</para>
-</listitem>
-
-<listitem>
-<para>
-  <emphasis>OFX Details</emphasis>: Here you can adjust certain details &kmymoney;
-  uses when it establishes an OFX connection with the institution.  This should only
-  be necessary if you get certain errors when you first set up the online account, or
-  perhaps if your institution changes its OFX server software.
-</para>
-</listitem>
-
-<listitem>
-<para>
-  <emphasis>Import Details</emphasis>: In the upper box, you can tell &kmymoney; what
-  to use as the start date for the import.  The lower box has several items
-  &kmymoney; uses when creating transactions from the downloaded data.
-  <itemizedlist>
+<variablelist>
+  <varlistentry>
+    <term>General</term>
     <listitem>
       <para>
-        You can choose whether the payee's name is based on the PAYEEID, NAME, or
-        MEMO field of the imported transaction.  Different institutions use different
-        standards, so you may need to try a different value here if your imported
-        transactions seem to consistently have the wrong Payee.
+        View the general information about the account, and change the name,
+        start or opening date, as well as some of the other basic settings of the
+        account.
       </para>
     </listitem>
+  </varlistentry>
 
+  <varlistentry>
+    <term>Institution</term>
     <listitem>
       <para>
-        Some banks do not follow the OFX standard of providing a repeatable, uniqe
-        FITID (Financial Institution Transaction Identification) which can cause
-        duplicate transactions on repeated downloads.  If this happens, you can
-        change the method &kmymoney; uses to detect duplicates from the <guilabel>OFX
-        FITID</guilabel> to the internallly calculated <guilabel>KMyMoney
-        ID</guilabel>.  This is not frequently necessary.
+        View and change the associated banking institution and account numbers.  You
+        can also create a new institution here.
       </para>
     </listitem>
+  </varlistentry>
 
+  <varlistentry>
+    <term>Hierarchy</term>
     <listitem>
       <para>
-        Importing transactions from an institution in a different timezone can
-        sometimes lead to the wrong date on an imported transaction.  If this
-        happens, you can set a <guilabel>Timezone offset</guilabel> to adjust for the
-        difference.
+        <!-- FIXME: drag/drop was in KDE3 versions, but still not ported 5.1.x.  See
+             https://bugs.kde.org/show_bug.cgi?id=272737.  You can change the parent
+             account by dragging the account in this view of the account hierarchy.
+             Changing the parent account is also possible in the main Accounts
+             screen, by dragging the account and dropping it on a different parent
+             account. -->
+        This shows where the account is in the overall hierarcy of accounts.  You can
+        change the parent account by clicking the new parent account and then
+        clicking <guibutton>OK</guibutton>.
       </para>
     </listitem>
+  </varlistentry>
 
+  <varlistentry>
+    <term>Limits</term>
     <listitem>
       <para>
-        Very infrequently, an institution will create OFX downloads with the sign of
-        the transaction amount reversed.  You can click this checkbox to correct this
-        problem.
+        This tab is only present for asset and liability accounts.  If you enter
+        amounts in the available fields, &kmymoney; will warn you when the account
+        balance reaches or exceeds those values.
       </para>
     </listitem>
+  </varlistentry>
 
+  <varlistentry>
+    <term>Tax</term>
     <listitem>
       <para>
-        A similar problem sometimes occurs, but only for the values in investment
-        transacionts, such as the purchase and sale of stocks.  Clicking this
-        checkbox corrects this.
+        Here you can check whether this is a VAT account, and you can specify the
+        percentage of the VAT.  In additon, you can check whether to include this
+        account on tax reports.
       </para>
     </listitem>
-  </itemizedlist>
-</para>
-</listitem>
-</itemizedlist>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Online Settings</term>
+    <listitem>
+      <para>
+        This tab is only be present if the account has been mapped to an <link
+        linkend="details.impexp.ofxdirectconnect">online account</link>.  It has
+        three subtabs.
+      </para>
+
+      <variablelist>
+        <varlistentry>
+          <term>Account Details</term>
+          <listitem>
+            <para>
+              This shows the status of the online connection, the bank/broker, and
+              the account number.  It also allows you to store or change the password
+              for the online account.
+              <!-- FIXME:  do we want to say WHERE the password is stored? -->
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>OFX Details</term>
+          <listitem>
+            <para>
+              Here you can adjust certain details &kmymoney; uses when it establishes
+              an OFX connection with the  institution.  This should only be necessary
+              if you get certain errors when you  first set up the online account, or
+              perhaps if your institution changes its OFX server software.
+            </para>
+          </listitem>
+        </varlistentry>
+        
+        <varlistentry>
+          <term>Import Details</term>
+          <listitem>
+            <para>
+              In the upper box, you can tell &kmymoney; what to use as the start date
+              for the import.  The lower box has several items &kmymoney; uses when
+              creating transactions from the downloaded data.
+            </para>
+
+            <itemizedlist>
+              <listitem>
+                <para>
+                  You can choose whether the payee's name is based on the PAYEEID,
+                  NAME, or MEMO field of the imported transaction.  Different
+                  institutions use different standards, so you may need to try a
+                  different value here if your imported transactions seem to
+                  consistently have the wrong Payee.  Unfortunately, this only
+                  applies to Direct Connect, but will hopefully also apply to OFX
+                  file import at some point.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Some banks do not follow the OFX standard of providing a
+                  repeatable, uniqe FITID (Financial Institution Transaction
+                  Identification) which can cause duplicate transactions on repeated
+                  downloads.  If this happens, you can change the method &kmymoney;
+                  uses to detect duplicates from the <guilabel>OFX FITID</guilabel>
+                  to the internallly calculated <guilabel>KMyMoney ID</guilabel>.
+                  This is not frequently necessary.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Importing transactions from an institution in a different timezone
+                  can sometimes lead to the wrong date on an imported transaction.
+                  If this happens, you can set a <guilabel>Timezone offset</guilabel>
+                  to adjust for the difference.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Very infrequently, an institution will create OFX downloads with
+                  the sign of the transaction amount reversed.  You can click this
+                  checkbox to correct this problem.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  A similar problem sometimes occurs, but only for the values in
+                  investment transactions, such as the purchase and sale of stocks.
+                  Clicking this checkbox corrects this.
+                </para>
+              </listitem>
+            </itemizedlist>
+            
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+</variablelist>
 </sect1>
 
 <sect1 id="details.accounts.delete">
