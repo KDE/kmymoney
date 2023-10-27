@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2023-08-31 15:53+0200\n"
-"Last-Translator: A. Villemain <nepasrepondre@monadresse.fr>\n"
+"PO-Revision-Date: 2023-10-25 13:47+0200\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -6551,7 +6551,7 @@ msgstr "&Remplacer"
 #, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
-msgstr "Impossible de créer le répertoire de sauvegarde '%1'."
+msgstr "Impossible de créer le dossier de sauvegarde « %1 »."
 
 #: kmymoney/kmymoney.cpp:2441
 #, kde-format
