@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-23 00:42+0000\n"
-"PO-Revision-Date: 2023-09-19 19:12+0200\n"
+"PO-Revision-Date: 2023-10-25 13:47+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -5676,7 +5676,7 @@ msgstr "&Remplacer"
 #, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
-msgstr "Impossible de créer le répertoire de sauvegarde '%1'."
+msgstr "Impossible de créer le dossier de sauvegarde « %1 »."
 
 #: kmymoney/kmymoney.cpp:3755
 #, kde-format
@@ -19903,7 +19903,7 @@ msgstr " ! R"
 #: kmymoney/views/khomeview_p.h:1026
 #, kde-format
 msgid "To Minimum Balance<br>/ Maximum Credit"
-msgstr "Vers le solde minimum <br> / Crédit maximum"
+msgstr "Vers le solde minimum <br> / Crédit maximum"
 
 #: kmymoney/views/khomeview_p.h:1126
 #, kde-format
