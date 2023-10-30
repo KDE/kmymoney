@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-23 00:42+0000\n"
-"PO-Revision-Date: 2023-08-29 20:32+0200\n"
+"PO-Revision-Date: 2023-10-28 00:39+0200\n"
 "Last-Translator: Kjetil Sørlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
@@ -178,6 +178,8 @@ msgid ""
 "Original payee: %1\n"
 "%2"
 msgstr ""
+"Opprinnelig mottaker: %1\n"
+"%2"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1029
 #, kde-format
@@ -998,7 +1000,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info price source"
 msgid "User"
-msgstr ""
+msgstr "Bruker"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KCurrencyCalculator)
 #: kmymoney/dialogs/kcurrencycalculator.ui:17
@@ -6873,7 +6875,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the currency on or before '%1'."
-msgstr ""
+msgstr "    Skriv inn en valutakurs datert på eller før «%1»."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2984
 #, kde-format
@@ -6889,6 +6891,8 @@ msgid ""
 "    Price for the security has been extracted from transaction and added to "
 "price history."
 msgstr ""
+"    Kursen for verdipapiret er hentet fra transaksjonen og lagt til i "
+"kurshistorikken."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2998
 #, kde-format
