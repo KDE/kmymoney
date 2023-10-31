@@ -4,6 +4,7 @@ adopt-info: kmymoney
 confinement: strict
 grade: stable
 base: core22
+version: '23.08.2'
 apps:
     kmymoney:
         # extensions:
@@ -40,10 +41,10 @@ plugs:
         interface: content
         target: $SNAP/data-dir/sounds
         default-provider: gtk-common-themes
-    kf5-5-108-qt-5-15-10-core22:
-        content: kf5-5-108-qt-5-15-10-core22-all
+    kf5-5-111-qt-5-15-11-core22:
+        content: kf5-5-111-qt-5-15-11-core22-all
         interface: content
-        default-provider: kf5-5-108-qt-5-15-10-core22
+        default-provider: kf5-5-111-qt-5-15-11-core22
         target: $SNAP/kf5
     foo-install-cups:
         interface: content
@@ -52,9 +53,9 @@ plugs:
         target: $SNAP_DATA/foo
 environment:
     SNAP_DESKTOP_RUNTIME: $SNAP/kf5
-    GST_PLUGIN_PATH: "$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/gstreamer-1.0"
-    GST_PLUGIN_SYSTEM_PATH: "$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/gstreamer-1.0"
-    GST_PLUGIN_SCANNER: "$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/gstreamer1.0/gstreamer-1.0/gst-plugin-scanner"
+    GST_PLUGIN_PATH: "$SNAP/kf5/usr/lib/$CRAFT_ARCH_TRIPLET/gstreamer-1.0"
+    GST_PLUGIN_SYSTEM_PATH: "$SNAP/kf5/usr/lib/$CRAFT_ARCH_TRIPLET/gstreamer-1.0"
+    GST_PLUGIN_SCANNER: "$SNAP/kf5/usr/lib/$CRAFT_ARCH_TRIPLET/gstreamer1.0/gstreamer-1.0/gst-plugin-scanner"
     QTWEBENGINEPROCESS_PATH: "$SNAP/kf5/usr/lib/$CRAFT_ARCH_TRIPLET/qt5/libexec/QtWebEngineProcess"
 hooks:
     configure:
@@ -91,18 +92,18 @@ parts:
         source-type: local
         plugin: make
         make-parameters:
-        - PLATFORM_PLUG=kf5-5-108-qt-5-15-10-core22
+        - PLATFORM_PLUG=kf5-5-111-qt-5-15-11-core22
         build-snaps:
-        - kf5-5-108-qt-5-15-10-core22-sdk
+        - kf5-5-111-qt-5-15-11-core22-sdk
         build-environment:
         - &id001
-            PATH: /snap/kf5-5-108-qt-5-15-10-core22-sdk/current/usr/bin${PATH:+:$PATH}
+            PATH: /snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/bin${PATH:+:$PATH}
         - &id002
-            XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-108-qt-5-15-10-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+            XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
         - &id003
-            XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-108-qt-5-15-10-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+            XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-111-qt-5-15-11-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
         - &id004
-            CRAFT_CMAKE_ARGS: -DCMAKE_FIND_ROOT_PATH=/snap/kf5-5-108-qt-5-15-10-core22-sdk/current${CRAFT_CMAKE_ARGS:+:$CRAFT_CMAKE_ARGS}
+            CRAFT_CMAKE_ARGS: -DCMAKE_FIND_ROOT_PATH=/snap/kf5-5-111-qt-5-15-11-core22-sdk/current${CRAFT_CMAKE_ARGS:+:$CRAFT_CMAKE_ARGS}
     kmymoney:
         after:
         - kde-neon
@@ -134,7 +135,6 @@ parts:
         - qtbase5-private-dev
         - qtdeclarative5-dev
         - qtkeychain-qt5-dev
-        - qtwebengine5-dev
         - libkf5doctools-dev
         stage-packages:
         - libalkimia5-8
@@ -161,7 +161,7 @@ parts:
         - python3
         - libpython3.10
         - libqt5keychain1
-        - libqt5webengine5
+        - libsecret-1-0
         source: https://invent.kde.org/office/kmymoney.git
         cmake-parameters:
         - -DKDE_INSTALL_USE_QT_SYS_PATHS=FALSE
@@ -170,7 +170,7 @@ parts:
         - "-DENABLE_TESTING=OFF"
         - "-DBUILD_TESTING=OFF"
         - "-DKDE_SKIP_TEST_SETTINGS=ON"
-        - "-DCMAKE_FIND_ROOT_PATH=/usr\\;$CRAFT_STAGE\\;/snap/kf5-5-108-qt-5-15-10-core22-sdk/current"
+        - "-DCMAKE_FIND_ROOT_PATH=/usr\\;$CRAFT_STAGE\\;/snap/kf5-5-111-qt-5-15-11-core22-sdk/current"
         - "-DKDE_INSTALL_PLUGINDIR=/usr/lib/$CRAFT_ARCH_TRIPLET/qt5/plugins/"
         prime:
         - "-usr/lib/*/cmake/*"
@@ -182,7 +182,7 @@ parts:
         - "-usr/bin/X11"
         - "-usr/lib/gcc/$CRAFT_ARCH_TRIPLET/6.0.0"
         - "-usr/lib/aspell/*"
-        - "-usr/share/lintain"
+        - "-usr/share/lintian"
         build-environment: &id005
         - *id001
         - *id002
