@@ -4,7 +4,6 @@ adopt-info: kmymoney
 confinement: strict
 grade: stable
 base: core22
-version: '23.08.2'
 apps:
     kmymoney:
         # extensions:
