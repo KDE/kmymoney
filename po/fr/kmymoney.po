@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2023-10-25 13:47+0200\n"
+"PO-Revision-Date: 2023-10-29 21:34+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -30,7 +30,7 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -8146,7 +8146,7 @@ msgstr "Biélorussie, Rouble (ancien)"
 #: kmymoney/mymoney/mymoneyfile.cpp:2752
 #, kde-format
 msgid "Zambian Kwacha (old)"
-msgstr "Zambian Kwacha (ancien)"
+msgstr "Kwacha Zambien (ancien)"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2755
 #, kde-format
@@ -8361,7 +8361,7 @@ msgstr "Peso convertible cubain"
 #: kmymoney/mymoney/mymoneyfile.cpp:2806
 #, kde-format
 msgid "Czech Koruna"
-msgstr "Rép. Tchèque, Koruna"
+msgstr "République Tchèque, Koruna"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2807
 #, kde-format
@@ -8376,7 +8376,7 @@ msgstr "Djibouti, Franc"
 #: kmymoney/mymoney/mymoneyfile.cpp:2809
 #, kde-format
 msgid "Dominican Peso"
-msgstr "Rép. Dominicaine, Peso"
+msgstr "République Dominicaine, Peso"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2810
 #, kde-format
@@ -8861,7 +8861,7 @@ msgstr "Tonga, Pa'anga"
 #: kmymoney/mymoney/mymoneyfile.cpp:2907
 #, kde-format
 msgid "Trinidad and Tobago Dollar"
-msgstr "Trinidad and Tobago, Dollar"
+msgstr "Trinidad et Tobago, Dollar"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2908
 #, kde-format
@@ -9837,7 +9837,7 @@ msgstr "Compte non valable"
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:14
 #, kde-format
 msgid "Csv Export"
-msgstr "Exportation Csv"
+msgstr "Exportation au format « csv »"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel2)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:37
@@ -10431,8 +10431,8 @@ msgctxt "Type of operation as in financial statement"
 msgid ""
 "add,stock dividend,divd reinv,transfer in,re-registration in,journal entry"
 msgstr ""
-"ajout,dividende en actions,divd réinv,transfert,ré-enregistrement,entrée "
-"dans le journal"
+"ajout, dividende en actions, divd réinv, transfert, ré-enregistrement, "
+"entrée dans le journal"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1587
 #, kde-format
@@ -12493,7 +12493,7 @@ msgstr "Erreur critique"
 msgid ""
 "Width of the flicker field for optical tan generation (chipTan/sm@rtTan)."
 msgstr ""
-"Largeur du champ clignotant pour la génération optique d'un tan (chipTan/"
+"Largeur du champ clignotant pour la génération optique d'un tan (chipTan / "
 "sm@rtTan)."
 
 #. i18n: ectx: label, entry (clocksetting), group (opticalTan)
@@ -14614,8 +14614,8 @@ msgid ""
 "You must use an SQL CREATE DATABASE statement before creating the tables.\n"
 msgstr ""
 "Impossible d'ouvrir la base de données.\n"
-"Vous devez utilisez une déclaration SQL CREATE DATABASE avant de créer les "
-"tables.\n"
+"Vous devez utilisez une déclaration « SQL CREATE DATABASE » avant de créer "
+"les tables.\n"
 
 #: kmymoney/plugins/sql/kgeneratesqldlg.cpp:209
 #, kde-format
@@ -18361,7 +18361,7 @@ msgid_plural ""
 "%1 days. Please update the key from a keyserver using your GPG frontend (e."
 "g. KGPG)."
 msgstr[0] ""
-"Vous avez configuré KMyMoney de manière à utiliser GPG pour protéger et "
+"Vous avez configuré KMyMoney de manière à utiliser « GPG » pour protéger et "
 "chiffrer vos données et utiliser la clé de récupération KMyMoney. Cette clé "
 "va expirer dans %1 jour. Veuillez mettre à jour la clé depuis un serveur de "
 "clés en utilisant votre interface utilisateur GPG (par exemple KGPG)."
