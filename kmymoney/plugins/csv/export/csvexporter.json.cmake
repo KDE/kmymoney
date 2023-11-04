@@ -31,7 +31,6 @@
                 "Name[sv]": "Allan Anderson",
                 "Name[tr]": "Allan Anderson",
                 "Name[uk]": "Allan Anderson",
-                "Name[x-test]": "xxAllan Andersonxx",
                 "Name[zh_CN]": "Allan Anderson"
             }
         ],
@@ -61,7 +60,6 @@
         "Description[sv]": "Lägg till CSV-export till KMyMoney",
         "Description[tr]": "K Param'a CSV dışa aktarma ekle",
         "Description[uk]": "Експортування даних CSV у KMyMoney",
-        "Description[x-test]": "xxAdd CSV exporting to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 CSV 导出服务",
         "EnabledByDefault": true,
         "Icon": "document-export",
@@ -95,7 +93,6 @@
         "Name[sv]": "CSV-export",
         "Name[tr]": "CSV Dışa Aktarıcısı",
         "Name[uk]": "Експортування CSV",
-        "Name[x-test]": "xxCSV Exporterxx",
         "Name[zh_CN]": "CSV 导出工具",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"

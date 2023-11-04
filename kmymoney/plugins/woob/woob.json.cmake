@@ -31,7 +31,6 @@
                 "Name[sv]": "Romain Bignon",
                 "Name[tr]": "Romain Bignon",
                 "Name[uk]": "Romain Bignon",
-                "Name[x-test]": "xxRomain Bignonxx",
                 "Name[zh_CN]": "Romain Bignon"
             }
         ],
@@ -59,7 +58,6 @@
         "Description[sv]": "Insticksprogram för Woob",
         "Description[tr]": "Woob için eklenti",
         "Description[uk]": "Додаток для Woob",
-        "Description[x-test]": "xxPlugin for Woobxx",
         "Description[zh_CN]": "Woob 插件",
         "EnabledByDefault": true,
         "Icon": "network-connect",
@@ -89,7 +87,6 @@
         "Name[sv]": "Woob",
         "Name[tr]": "Woob",
         "Name[uk]": "Woob",
-        "Name[x-test]": "xxWoobxx",
         "Name[zh_CN]": "Woob",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"

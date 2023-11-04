@@ -31,7 +31,6 @@
                 "Name[sv]": "Darren Gould",
                 "Name[tr]": "Darren Gould",
                 "Name[uk]": "Darren Gould",
-                "Name[x-test]": "xxDarren Gouldxx",
                 "Name[zh_CN]": "Darren Gould"
             }
         ],
@@ -60,7 +59,6 @@
         "Description[sv]": "Lägger till budgetvy i KMyMoney",
         "Description[tr]": "K Param'a bütçe görünümü ekler",
         "Description[uk]": "Панель бюджетів у KMyMoney",
-        "Description[x-test]": "xxAdds budget view to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加预算视图",
         "EnabledByDefault": true,
         "Icon": "budget",
@@ -92,7 +90,6 @@
         "Name[sv]": "Budgetvy",
         "Name[tr]": "Bütçe görünümü",
         "Name[uk]": "Панель бюджету",
-        "Name[x-test]": "xxBudget viewxx",
         "Name[zh_CN]": "预算视图",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"

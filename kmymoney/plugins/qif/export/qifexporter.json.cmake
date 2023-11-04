@@ -31,7 +31,6 @@
                 "Name[sv]": "Michael Edwardes",
                 "Name[tr]": "Michael Edwardes",
                 "Name[uk]": "Michael Edwardes",
-                "Name[x-test]": "xxMichael Edwardesxx",
                 "Name[zh_CN]": "Michael Edwardes"
             }
         ],
@@ -61,7 +60,6 @@
         "Description[sv]": "Lägg till QIF-export till KMyMoney",
         "Description[tr]": "K Param'a QIF dışa aktarma ekle",
         "Description[uk]": "Експортування даних QIF у KMyMoney",
-        "Description[x-test]": "xxAdd QIF exporting to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 QIF 导出服务",
         "EnabledByDefault": true,
         "Icon": "document-export",
@@ -94,7 +92,6 @@
         "Name[sv]": "QIF-export",
         "Name[tr]": "QIF Dışa Aktarıcısı",
         "Name[uk]": "Інструмент експортування QIF",
-        "Name[x-test]": "xxQIF Exporterxx",
         "Name[zh_CN]": "QIF 导出工具",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"

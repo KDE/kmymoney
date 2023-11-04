@@ -30,7 +30,6 @@
                 "Name[sv]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
                 "Name[tr]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
                 "Name[uk]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
-                "Name[x-test]": "xxKevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowiczxx",
                 "Name[zh_CN]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz"
             }
         ],
@@ -59,7 +58,6 @@
         "Description[sv]": "Lägger till stöd för XML-lagring i KMyMoney",
         "Description[tr]": "K Param'a XML depolama desteği ekler",
         "Description[uk]": "Підтримка сховищ XML у KMyMoney",
-        "Description[x-test]": "xxAdds XML storage support to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 XML 存储支持",
         "EnabledByDefault": true,
         "Icon": "server-database",
@@ -91,7 +89,6 @@
         "Name[sv]": "XML-lagring",
         "Name[tr]": "XML Depolama",
         "Name[uk]": "Сховище XML",
-        "Name[x-test]": "xxXML Storagexx",
         "Name[zh_CN]": "XML 存储",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"

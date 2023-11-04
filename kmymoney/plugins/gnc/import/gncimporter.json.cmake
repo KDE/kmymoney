@@ -31,7 +31,6 @@
                 "Name[sv]": "Michael Edwardes",
                 "Name[tr]": "Michael Edwardes",
                 "Name[uk]": "Michael Edwardes",
-                "Name[x-test]": "xxMichael Edwardesxx",
                 "Name[zh_CN]": "Michael Edwardes"
             }
         ],
@@ -61,7 +60,6 @@
         "Description[sv]": "Lägg till GnuCash-import till KMyMoney",
         "Description[tr]": "K Param'a GnuCash içe aktarma ekle",
         "Description[uk]": "Імпортування даних GnuCash у KMyMoney",
-        "Description[x-test]": "xxAdd GnuCash importing to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 GnuCash 导入服务",
         "EnabledByDefault": true,
         "Icon": "document-import",
@@ -94,7 +92,6 @@
         "Name[sv]": "GNC-import",
         "Name[tr]": "GNC İçe Aktarıcı",
         "Name[uk]": "Імпортування GNC",
-        "Name[x-test]": "xxGNC Importerxx",
         "Name[zh_CN]": "GNC 导入工具",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
