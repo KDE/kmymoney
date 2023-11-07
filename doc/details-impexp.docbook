@@ -16,7 +16,6 @@
   <author>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
   <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
 </sect1info>
-
 <title>&gnucash; Importer</title>
 
 <sect2><title>&gnucash; Files</title>
@@ -508,11 +507,11 @@
 </sect2>
 </sect1>
 
-<sect1 id="details.impexp.qifimp"><sect1info>
+<sect1 id="details.impexp.qifimp">
+<sect1info>
   <author>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
   <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
 </sect1info>
-
 <title>QIF Importer</title>
 
 <sect2><title>QIF format considered harmful</title>

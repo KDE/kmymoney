@@ -64,12 +64,13 @@ This is in the order pulled in from index.docbook, with brief note on state of u
   prelim update complete
 
 <!ENTITY details-reports SYSTEM "details-reports.docbook">
-  prelim update complete
+
 
 <!ENTITY details-impexp SYSTEM "details-impexp.docbook">
-  prelim update complete through QIF.  OFX just begun.
+  prelim update complete
 
 <!ENTITY details-impexp-csv SYSTEM "details-impexp-csv.docbook">
+  prelim begun.
 
 <!ENTITY details-impexp-csvexp SYSTEM "details-impexp-csvexp.docbook">
 
@@ -258,7 +259,15 @@ multiple places.
 - is the QIF Profile input filter location a single file or a command?  Does it just use
   a single file as the program, and anything more than that as a command to be invoked?
 
-- 
+- CSV importer wizard, Separators page, for three dropdowns at the bottom, the labels
+  to the left of them are not all aligned the same.  The top seems to be centered in
+  a larger area, the bottom two are right aligned.
+
+- CSV importer: list of steps is lower left in most of wizard, but all of left on start
+  page.  Should it be lower left on all for consistancy?
+
+- CSV importer - Banking cols, many have "X" to clear the value, and ther is "clear all."
+  Investment cols do not have "x" and only "Clear" not "Clear all", plus Clear Fee.
 
 
   ----------------
