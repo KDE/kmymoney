@@ -30,6 +30,7 @@
                 "Name[sv]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[tr]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[uk]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
+                "Name[x-test]": "xxMartin Preuss,Thomas Baumgart,Christian Dávidxx",
                 "Name[zh_CN]": "Martin Preuss,Thomas Baumgart,Christian Dávid"
             }
         ],
@@ -56,6 +57,7 @@
         "Description[sv]": "Lägg till HBCI/FinTs Internetbank och PayPal till KMyMoney",
         "Description[tr]": "K Param'a HBCI/FinTs, OFX ve PayPal çevrimiçi bankacılığını ekle",
         "Description[uk]": "Онлайн-банкінг HBCI/FinTs, OFX і PayPal у KMyMoney",
+        "Description[x-test]": "xxAdd HBCI/FinTs, OFX and PayPal online banking to KMyMoneyxx",
         "Description[zh_CN]": "将 HBCI (FinTs)、OFX 或 PayPal 网上银行添加到 KMyMoney",
         "EnabledByDefault": true,
         "Icon": "network-connect",
@@ -88,6 +90,7 @@
         "Name[sv]": "Kbank",
         "Name[tr]": "KBankacılık",
         "Name[uk]": "KBanking",
+        "Name[x-test]": "xxKBankingxx",
         "Name[zh_CN]": "KBanking",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"

@@ -31,6 +31,7 @@
                 "Name[sv]": "Cristian Oneț",
                 "Name[tr]": "Cristian Oneț",
                 "Name[uk]": "Cristian Oneț",
+                "Name[x-test]": "xxCristian Onețxx",
                 "Name[zh_CN]": "Cristian Oneț"
             }
         ],
@@ -60,6 +61,7 @@
         "Description[sv]": "Skapar en rapport efter varje avstämning som innehåller information om avstämningsprocessen",
         "Description[tr]": "Her mutabakat sonrası mutabakat süreci ile ilgili veriyi içeren bir rapor oluşturur",
         "Description[uk]": "Створення звітів після кожного узгодження із даними щодо процедури узгодження",
+        "Description[x-test]": "xxCreates a report after each reconciliation containing data about the reconciliation processxx",
         "Description[zh_CN]": "每次对账后生成包含对账过程数据的报表",
         "EnabledByDefault": true,
         "Icon": "application-vnd.oasis.opendocument.spreadsheet",
@@ -92,6 +94,7 @@
         "Name[sv]": "Avstämningsrapport",
         "Name[tr]": "Mutabakat raporu",
         "Name[uk]": "Звіт щодо звірки",
+        "Name[x-test]": "xxReconciliation reportxx",
         "Name[zh_CN]": "对账报告",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"

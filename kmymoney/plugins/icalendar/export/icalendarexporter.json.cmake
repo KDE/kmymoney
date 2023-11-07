@@ -31,6 +31,7 @@
                 "Name[sv]": "Cristian Oneț",
                 "Name[tr]": "Cristian Oneț",
                 "Name[uk]": "Cristian Oneț",
+                "Name[x-test]": "xxCristian Onețxx",
                 "Name[zh_CN]": "Cristian Oneț"
             }
         ],
@@ -60,6 +61,7 @@
         "Description[sv]": "Exporterar scheman till iCalendar-filer",
         "Description[tr]": "Zamanlamaları iCalendar dosyalarına dışa aktarır",
         "Description[uk]": "Експортування розкладів до файлів iCalendar",
+        "Description[x-test]": "xxExports schedules to iCalendar filesxx",
         "Description[zh_CN]": "将日程表导出为 iCalebdar 文件",
         "EnabledByDefault": true,
         "Icon": "x-office-calendar",
@@ -93,6 +95,7 @@
         "Name[sv]": "iCalendar",
         "Name[tr]": "iCalendar",
         "Name[uk]": "iCalendar",
+        "Name[x-test]": "xxiCalendarxx",
         "Name[zh_CN]": "iCalendar",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"

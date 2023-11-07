@@ -31,6 +31,7 @@
                 "Name[sv]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[tr]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[uk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[x-test]": "xxAlvaro Soliverez,Łukasz Wojniłowiczxx",
                 "Name[zh_CN]": "Alvaro Soliverez,Łukasz Wojniłowicz"
             }
         ],
@@ -59,6 +60,7 @@
         "Description[sv]": "Lägger till rapportvy i KMyMoney",
         "Description[tr]": "K Param'a raporlar görünümü ekler",
         "Description[uk]": "Панель звітів у KMyMoney",
+        "Description[x-test]": "xxAdds reports view to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加报告视图",
         "EnabledByDefault": true,
         "Icon": "report",
@@ -91,6 +93,7 @@
         "Name[sv]": "Rapportvy",
         "Name[tr]": "Rapor görünümü",
         "Name[uk]": "Перегляд звітів",
+        "Name[x-test]": "xxReports viewxx",
         "Name[zh_CN]": "报表视图",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"

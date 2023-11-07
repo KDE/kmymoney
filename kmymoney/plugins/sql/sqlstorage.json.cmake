@@ -30,6 +30,7 @@
                 "Name[sv]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[tr]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[uk]": "Tony Bloomfield,Łukasz Wojniłowicz",
+                "Name[x-test]": "xxTony Bloomfield,Łukasz Wojniłowiczxx",
                 "Name[zh_CN]": "Tony Bloomfield,Łukasz Wojniłowicz"
             }
         ],
@@ -58,6 +59,7 @@
         "Description[sv]": "Lägger till stöd för SQL-lagring i KMyMoney",
         "Description[tr]": "K Param'a SQL depolama desteği ekler",
         "Description[uk]": "Підтримка сховища даних SQL у KMyMoney",
+        "Description[x-test]": "xxAdds SQL storage support to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 SQL 存储支持",
         "EnabledByDefault": true,
         "Icon": "server-database",
@@ -90,6 +92,7 @@
         "Name[sv]": "SQL-lagring",
         "Name[tr]": "SQL Depolama",
         "Name[uk]": "Сховище SQL",
+        "Name[x-test]": "xxSQL Storagexx",
         "Name[zh_CN]": "SQL 存储",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"

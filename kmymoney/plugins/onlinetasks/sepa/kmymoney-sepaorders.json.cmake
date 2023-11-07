@@ -50,6 +50,7 @@
                 "Name[sv]": "Christian David",
                 "Name[tr]": "Christian David",
                 "Name[uk]": "Christian David",
+                "Name[x-test]": "xxChristian Davidxx",
                 "Name[zh_CN]": "Christian David"
             }
         ],
@@ -77,6 +78,7 @@
         "Description[sv]": "Ordertyp för gemensamma eurobetalningsområdet (SEPA) order",
         "Description[tr]": "Avrupa tek ödeme bölgesi (SEPA) talimatları için talimat türleri",
         "Description[uk]": "Типи векселів для Єдиної європейської системи сплат (SEPA)",
+        "Description[x-test]": "xxOrder types for single european payment area (SEPA) ordersxx",
         "Description[zh_CN]": "单一欧元支付区订单类型",
         "EnabledByDefault": true,
         "Icon": "network-connect",
@@ -108,6 +110,7 @@
         "Name[sv]": "SEPA-order",
         "Name[tr]": "SEPA talimatları",
         "Name[uk]": "Векселі SEPA",
+        "Name[x-test]": "xxSEPA ordersxx",
         "Name[zh_CN]": "单一欧元支付区订单",
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
