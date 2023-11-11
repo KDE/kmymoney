@@ -1,6 +1,6 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Vít Pelčák <vit@pelcak.org>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017.
+# SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2023 Vít Pelčák <vit@pelcak.org>
 # Petr Bravenec <spravce@solartec.cz>, 2010.
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012, 2013.
 # Vit Pelcak <vit@pelcak.org>, 2015, 2018, 2019, 2020, 2021, 2023.
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:34+0000\n"
-"PO-Revision-Date: 2023-07-03 12:01+0200\n"
+"PO-Revision-Date: 2023-11-10 16:09+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.04.2\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -183,6 +183,8 @@ msgid ""
 "Original payee: %1\n"
 "%2"
 msgstr ""
+"Původní plátce: %1\n"
+"%2"
 
 #: kmymoney/converter/mymoneystatementreader.cpp:1029
 #, kde-format
@@ -359,13 +361,13 @@ msgstr "Finanční plán nalezen"
 #, kde-format
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr ""
+msgstr "Vytvořit účet"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
 #, kde-format
 msgctxt "Create undo action"
 msgid "Create category"
-msgstr ""
+msgstr "Vytvořit kategorii"
 
 #: kmymoney/dialogs/editpersonaldatadlg.cpp:174
 #: kmymoney/wizards/newuserwizard/kgeneralpage.cpp:78
@@ -956,7 +958,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info price source"
 msgid "User"
-msgstr ""
+msgstr "Uživatel"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KCurrencyCalculator)
 #: kmymoney/dialogs/kcurrencycalculator.ui:17
@@ -2951,7 +2953,7 @@ msgstr "Cenný papír"
 #, kde-format
 msgctxt "Undo action description"
 msgid "Create payee"
-msgstr ""
+msgstr "Vytvořit plátce"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsColors)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:14
@@ -4924,7 +4926,7 @@ msgstr "Ukázat transakci"
 #, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
-msgstr ""
+msgstr "Zobrazit podrobnosti o transakci"
 
 #: kmymoney/kmymoney.cpp:1846
 #, kde-format
@@ -6675,7 +6677,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info consistency check"
 msgid "    Please enter a price for the currency on or before '%1'."
-msgstr ""
+msgstr "   Prosím, vložte cenu měny platnou před nebo v '%1'."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2984
 #, kde-format
@@ -9179,19 +9181,19 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Comma (,)"
-msgstr ""
+msgstr "Čárka (,)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
 #, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Semicolon (;)"
-msgstr ""
+msgstr "Středník (;)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:66
 #, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Tab (\\t)"
-msgstr ""
+msgstr "Tab (\\t)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:92
 #: kmymoney/plugins/qif/export/kexportdlg.cpp:62
@@ -9235,7 +9237,7 @@ msgstr "Vybrat název souboru pro uložení exportu"
 #, kde-format
 msgctxt "@info Hint in CSV export dialog"
 msgid "Current selected account does not contain any transactions."
-msgstr ""
+msgstr "Zvolený účet neobsahuje jakékoliv transakce"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CsvExportDlg)
 #: kmymoney/plugins/csv/export/csvexportdlg.ui:14
@@ -18624,7 +18626,7 @@ msgstr "Upravit účet \"%1\""
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
-msgstr ""
+msgstr "Upravit účet"
 
 #: kmymoney/views/kaccountsview_p.h:279
 #, kde-format
@@ -18683,7 +18685,7 @@ msgstr "Upravit kategorii \"%1\""
 #, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
-msgstr ""
+msgstr "Upravit kategorii"
 
 #: kmymoney/views/kcategoriesview.cpp:213
 #, kde-format
@@ -19890,7 +19892,7 @@ msgstr "Barva značky:"
 #, kde-format
 msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
-msgstr ""
+msgstr "Vyberte transakci pro použití jako šablona."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:126
 #, kde-format
@@ -20070,7 +20072,7 @@ msgstr ""
 #: kmymoney/views/ledgerviewpage.ui:92
 #, kde-format
 msgid "TextLabel"
-msgstr "Textový štítek"
+msgstr "Textový popisek"
 
 #: kmymoney/views/ledgerviewpage_p.h:96
 #, kde-format
@@ -20118,7 +20120,7 @@ msgstr ""
 #: kmymoney/views/multitransactioneditor.cpp:218
 #, kde-format
 msgid "Select category or account."
-msgstr ""
+msgstr "Vyberte kategorii nebo účet."
 
 #: kmymoney/views/multitransactioneditor.cpp:230
 #, kde-format
@@ -20132,7 +20134,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
-msgstr ""
+msgstr "Nelze upravovat více naplánovaných transakcí najednou."
 
 #: kmymoney/views/multitransactioneditor.cpp:732
 #, kde-format
@@ -22297,7 +22299,7 @@ msgstr "Příští změna úrokové sazby bude provedena"
 #, kde-format
 msgctxt "@info Missing parent account selection in new account wizard"
 msgid "No parent account selected"
-msgstr ""
+msgstr "Nebyl vybrán rodičovský účet"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newaccountwizard/khierarchypage.ui:26
