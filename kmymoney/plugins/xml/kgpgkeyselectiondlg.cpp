@@ -17,6 +17,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "config-kmymoney.h"
 #include <kgpgfile.h>
 #include <ui_kgpgkeyselectiondlg.h>
 
@@ -131,6 +132,7 @@ void KGpgKeySelectionDlg::slotKeyListChanged()
 
 void KGpgKeySelectionDlg::slotIdChanged()
 {
+#ifdef ENABLE_GPG
     Q_D(KGpgKeySelectionDlg);
     // this looks a bit awkward. Here's why: KGPGFile::keyAvailable() starts
     // an external task and processes UI events while it waits for the external
@@ -186,4 +188,5 @@ void KGpgKeySelectionDlg::slotIdChanged()
         --d->checkCount;
         d->ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!enabled || (d->ui->m_keyLed->state() == KLed::On));
     }
+#endif
 }

@@ -21,6 +21,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "config-kmymoney.h"
 #include "kgpgfile.h"
 #include "kmymoneysettings.h"
 
@@ -31,7 +32,11 @@ XMLStorageSettingsWidget::XMLStorageSettingsWidget(QWidget* parent) :
     QWidget(parent)
 {
     setupUi(this);
-    bool available = KGPGFile::GPGAvailable();
+#ifdef ENABLE_GPG
+    const bool available = KGPGFile::GPGAvailable();
+#else
+    const bool available = false;
+#endif
     setEnabled(available);
     if (!available) {
         setToolTip(i18n("GPG installation not found or not working properly."));
@@ -58,6 +63,7 @@ void XMLStorageSettingsWidget::slotKeyListChanged()
 
 void XMLStorageSettingsWidget::slotIdChanged()
 {
+#ifdef ENABLE_GPG
     // this looks a bit awkward. Here's why: KGPGFile::keyAvailable() starts
     // an external task and processes UI events while it waits for the external
     // process to finish. Thus, the first time we get here, the external process
@@ -113,6 +119,7 @@ void XMLStorageSettingsWidget::slotIdChanged()
 
         --m_checkCount;
     }
+#endif
 }
 
 void XMLStorageSettingsWidget::slotIdChanged(int)
@@ -136,6 +143,8 @@ void XMLStorageSettingsWidget::showEvent(QShowEvent * event)
     // fill the secret key combobox with a fresh list
     m_masterKeyCombo->clear();
     QStringList keyList;
+
+#ifdef ENABLE_GPG
     KGPGFile::secretKeyList(keyList);
 
     for (QStringList::iterator it = keyList.begin(); it != keyList.end(); ++it) {
@@ -151,6 +160,7 @@ void XMLStorageSettingsWidget::showEvent(QShowEvent * event)
                 m_masterKeyCombo->setCurrentItem(name);
         }
     }
+#endif
 
     // if we don't have at least one secret key, we turn off encryption
     if (keyList.isEmpty()) {
@@ -165,6 +175,7 @@ void XMLStorageSettingsWidget::showEvent(QShowEvent * event)
 
 void XMLStorageSettingsWidget::slotStatusChanged(bool state)
 {
+#ifdef ENABLE_GPG
     static bool oncePerSession = true;
     if (state && !KGPGFile::GPGAvailable())
         state = false;
@@ -189,6 +200,11 @@ void XMLStorageSettingsWidget::slotStatusChanged(bool state)
         m_recoverKeyFound->setState(KLed::Off);
         m_userKeysFound->setState(KLed::Off);
     }
+#else
+    Q_UNUSED(state)
+    m_recoverKeyFound->setState(KLed::Off);
+    m_userKeysFound->setState(KLed::Off);
+#endif
 }
 
 KCMXMLStorage::KCMXMLStorage(QWidget *parent, const QVariantList& args)

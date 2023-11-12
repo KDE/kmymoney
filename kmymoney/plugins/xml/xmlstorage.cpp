@@ -125,11 +125,14 @@ bool XMLStorage::open(const QUrl &url)
     } else if (sFileHeader == QString("--") ||        // PGP ASCII armored?
                sFileHeader == QString("\205\001") ||  // PGP binary?
                sFileHeader == QString("\205\002")) {  // PGP binary?
+#ifdef ENABLE_GPG
         if (KGPGFile::GPGAvailable()) {
             qfile = new KGPGFile(fileName);
             haveAt = false;
             isEncrypted = true;
-        } else {
+        } else
+#endif
+        {
             throw MYMONEYEXCEPTION(QString::fromLatin1("GPG is not available for decryption of file <b>%1</b>").arg(fileName));
         }
     } else {
@@ -314,6 +317,7 @@ bool XMLStorage::saveAs()
     m_encryptionKeys.clear();
 
     QString selectedKeyName;
+#ifdef ENABLE_GPG
     if (KGPGFile::GPGAvailable() && KMyMoneySettings::writeDataEncrypted()) {
         // fill the secret key list and combo box
         QStringList keyList;
@@ -332,6 +336,7 @@ bool XMLStorage::saveAs()
             return rc;
         }
     }
+#endif
 
     QString prevDir; // don't prompt file name if not a native file
     if (appInterface()->isNativeFile())
@@ -429,6 +434,9 @@ void XMLStorage::ungetString(QIODevice *qfile, char *buf, int len)
 
 void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWriter, bool plaintext, const QString& keyList)
 {
+#ifndef ENABLE_GPG
+    Q_UNUSED(keyList)
+#else
     // Check GPG encryption
     bool encryptFile = true;
     bool encryptRecover = false;
@@ -462,7 +470,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
             }
         }
     }
-
+#endif
     // Permissions to apply to new file
     QFileDevice::Permissions fmode = QFileDevice::ReadUser | QFileDevice::WriteUser;
 
@@ -482,6 +490,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
     MyMoneyFile::instance()->deletePair("kmm-encryption-key");
     std::unique_ptr<QIODevice> device;
 
+#ifdef ENABLE_GPG
     if (!keyList.isEmpty() && encryptFile && !plaintext) {
         std::unique_ptr<KGPGFile> kgpg = std::unique_ptr<KGPGFile>(new KGPGFile{writeFile});
         if (kgpg) {
@@ -495,7 +504,9 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
             MyMoneyFile::instance()->setValue("kmm-encryption-key", keyList);
             device = std::unique_ptr<decltype(device)::element_type>(kgpg.release());
         }
-    } else {
+    } else
+#endif
+    {
         QFile *file = new QFile(writeFile);
         // The second parameter of KCompressionDevice means that KCompressionDevice will delete the QFile object
         device = std::unique_ptr<decltype(device)::element_type>(new KCompressionDevice{file, true, (plaintext) ? KCompressionDevice::None : COMPRESSION_TYPE});
@@ -542,7 +553,8 @@ void XMLStorage::saveToLocalFile(const QString& localFile, MyMoneyXmlWriter* pWr
 
 void XMLStorage::checkRecoveryKeyValidity()
 {
-// check if the recovery key is still valid or expires soon
+#ifdef ENABLE_GPG
+    // check if the recovery key is still valid or expires soon
 
     if (KMyMoneySettings::writeDataEncrypted() && KMyMoneySettings::encryptRecover()) {
         if (KGPGFile::GPGAvailable()) {
@@ -571,6 +583,7 @@ void XMLStorage::checkRecoveryKeyValidity()
             }
         }
     }
+#endif
 }
 
 K_PLUGIN_CLASS_WITH_JSON(XMLStorage, "xmlstorage.json")

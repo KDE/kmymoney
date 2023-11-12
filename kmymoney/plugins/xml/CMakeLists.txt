@@ -21,7 +21,7 @@ target_link_libraries(xmlstorage
     KF5::Archive
     KF5::I18n
     KF5::CoreAddons
-    kmm_gpgfile
+    $<$<BOOL:${ENABLE_GPG}>:kmm_gpgfile>
     kmymoney_common
     kmm_mymoney
     xmlstoragehelper
@@ -54,6 +54,6 @@ target_link_libraries(kcm_xmlstorage
     KF5::CoreAddons
     KF5::ConfigWidgets
     KF5::Completion
-    kmm_gpgfile
+    $<$<BOOL:${ENABLE_GPG}>:kmm_gpgfile>
     kmm_settings
 )
