@@ -178,7 +178,7 @@ if(ENABLE_GPG)
   target_link_libraries( kmm_gpgfile
   PUBLIC
     Qt::Core
-    $<$<BOOL:${WIN32}>:${KDEWIN_LIBRARIES}>
+    # $<$<BOOL:${WIN32}>:${KDEWIN_LIBRARIES}>
     $<$<BOOL:${Gpgmepp_FOUND}>:Gpgmepp>
     $<$<BOOL:${KF5Gpgmepp_FOUND}>:KF5::Gpgmepp>
   )
@@ -188,9 +188,9 @@ if(ENABLE_GPG)
   generate_export_header(kmm_gpgfile)
 
   if(WIN32)
-    find_package(KDEWin REQUIRED)
-    target_include_directories(kmm_gpgfile PUBLIC ${KDEWIN_INCLUDES})
-    target_compile_definitions(kmm_gpgfile PUBLIC ${KDEWIN_DEFINITIONS})
+    #find_package(KDEWin REQUIRED)
+    #target_include_directories(kmm_gpgfile PUBLIC ${KDEWIN_INCLUDES})
+    #target_compile_definitions(kmm_gpgfile PUBLIC ${KDEWIN_DEFINITIONS})
   endif()
   install(TARGETS kmm_gpgfile ${INSTALL_TARGETS_DEFAULT_ARGS})
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_gpgfile_export.h DESTINATION ${KDE_INSTALL_INCLUDEDIR}/kmymoney COMPONENT Devel)
