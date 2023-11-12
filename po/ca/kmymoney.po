@@ -2,22 +2,22 @@
 # Copyright (C) 2006-2023 This_file_is_part_of_KDE
 # This file is put in the public domain.
 #
+# SPDX-FileCopyrightText: 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Antoni Bella Pérez <antonibella5@yahoo.com>
 # Orestes Mas Casals <orestes@tsc.upc.edu>, 2006, 2010, 2011.
 # Josep M. Ferrer <txemaq@gmail.com>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
-# SPDX-FileCopyrightText: 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Antoni Bella Pérez <antonibella5@yahoo.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2023-10-13 23:35+0200\n"
-"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
+"PO-Revision-Date: 2023-11-11 14:21+0100\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -3845,7 +3845,7 @@ msgid ""
 "keep them as a single split"
 msgstr ""
 "En cas de tenir múltiples entrades de desglossament de la mateixa categoria "
-"i voldríeu mantenir-les com un únic desglossament "
+"i voldríeu mantenir-les com un únic desglossament"
 
 #: kmymoney/dialogs/ksplittransactiondlg.cpp:306
 #: kmymoney/dialogs/splitadjustdialog.cpp:53
@@ -19261,7 +19261,7 @@ msgstr "Conciliació"
 #, kde-format
 msgid "Reconcile - disabled because you are currently reconciling <b>%1</b>"
 msgstr ""
-"Conciliació - S'ha desactivat perquè actualment s'està conciliant <b>%1</b> "
+"Conciliació - S'ha desactivat perquè actualment s'està conciliant <b>%1</b>"
 
 #: kmymoney/views/kgloballedgerview.cpp:309
 #, kde-format
