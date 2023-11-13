@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:34+0000\n"
+"POT-Creation-Date: 2023-11-13 00:43+0000\n"
 "PO-Revision-Date: 2023-09-17 22:18+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -5508,7 +5508,7 @@ msgstr "Geen KMyMoney bestand geopend"
 
 #: kmymoney/kmymoney.cpp:3348 kmymoney/kmymoney.cpp:3350
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1360
-#: kmymoney/plugins/xml/xmlstorage.cpp:407
+#: kmymoney/plugins/xml/xmlstorage.cpp:412
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
@@ -14650,7 +14650,7 @@ msgid "Database malfunction"
 msgstr "Database functioneert niet goed"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:188
-#: kmymoney/plugins/xml/xmlstorage.cpp:237
+#: kmymoney/plugins/xml/xmlstorage.cpp:240
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr ""
@@ -17911,12 +17911,12 @@ msgstr "Configuratie van Woob"
 msgid "Retrieving transactions..."
 msgstr "Transacties ophalen..."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:37
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:42
 #, kde-format
 msgid "GPG installation not found or not working properly."
 msgstr "Installatie van GPG niet gevonden of werkt niet juist."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:158
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:168
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
@@ -17924,7 +17924,7 @@ msgstr ""
 "Geen geheime sleutels in GPG gevonden, voor gpg[2] --gen-key uit of "
 "importeer sleutels in gpg"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:173
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:209
 #, kde-format
 msgid ""
@@ -17943,13 +17943,13 @@ msgstr ""
 "is kunt u het oude bestand verwijderen en het nieuwe bestand voorzien van de "
 "originele naam.</p>"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:173
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:209
 #, kde-format
 msgid "GPG encryption activated"
 msgstr "GPG-versleuteling geactiveerd"
 
-#: kmymoney/plugins/xml/kgpgkeyselectiondlg.cpp:71
+#: kmymoney/plugins/xml/kgpgkeyselectiondlg.cpp:72
 #, kde-format
 msgid "No encryption"
 msgstr "Geen versleuteling"
@@ -18015,41 +18015,41 @@ msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
 msgstr "Onbekend type debiteur-identifier %1"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:341
+#: kmymoney/plugins/xml/xmlstorage.cpp:346
 #, kde-format
 msgid "Save As"
 msgstr "Opslaan als"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:342
+#: kmymoney/plugins/xml/xmlstorage.cpp:347
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "KMyMoney bestanden"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:343
+#: kmymoney/plugins/xml/xmlstorage.cpp:348
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "Anonieme bestanden"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:344
+#: kmymoney/plugins/xml/xmlstorage.cpp:349
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "XML-bestanden"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:345
+#: kmymoney/plugins/xml/xmlstorage.cpp:350
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "Alle bestanden"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:419
+#: kmymoney/plugins/xml/xmlstorage.cpp:424
 #, kde-format
 msgid "KMyMoney files (*.kmy *.xml)"
 msgstr "KMyMoney bestanden (*.kmy *.xml)"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:437
+#: kmymoney/plugins/xml/xmlstorage.cpp:445
 #, kde-format
 msgid ""
 "GPG does not seem to be installed on your system. Please make sure that GPG "
@@ -18060,12 +18060,12 @@ msgstr ""
 "gevonden kan worden met het standaard zoekpad. Voor deze keer is encryptie "
 "uitgeschakeld."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:437
+#: kmymoney/plugins/xml/xmlstorage.cpp:445
 #, kde-format
 msgid "GPG not found"
 msgstr "GPG niet gevonden"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:443
+#: kmymoney/plugins/xml/xmlstorage.cpp:451
 #, kde-format
 msgid ""
 "<p>You have selected to encrypt your data also with the KMyMoney recover "
@@ -18082,13 +18082,13 @@ msgstr ""
 "\"https://kmymoney.org/\">KMyMoney website</a>. Deze keer zullen uw gegevens "
 "niet versleuteld worden met de KMyMoney herstelsleutel.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:443
-#: kmymoney/plugins/xml/xmlstorage.cpp:450
+#: kmymoney/plugins/xml/xmlstorage.cpp:451
+#: kmymoney/plugins/xml/xmlstorage.cpp:458
 #, kde-format
 msgid "GPG Key not found"
 msgstr "GPG-sleutel niet gevonden"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:450
+#: kmymoney/plugins/xml/xmlstorage.cpp:458
 #, kde-format
 msgid ""
 "<p>You have specified to encrypt your data for the user-id</p><p><center><b>"
@@ -18101,7 +18101,7 @@ msgstr ""
 "aangetroffen in uw sleutelbos. Zorg ervoor dat u een geldige sleutel "
 "importeert voor deze gebruikers-id. Deze keer is encryptie uitgeschakeld.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:457
+#: kmymoney/plugins/xml/xmlstorage.cpp:465
 #, kde-format
 msgid ""
 "<p>You have configured to save your data in encrypted form using GPG. Make "
@@ -18113,12 +18113,12 @@ msgstr ""
 "als u dit versleuteld opslaat en het later niet meer kan ontcijferen. Als u "
 "onzeker bent, antwoordt dan <b>Nee</b>."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:458
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, kde-format
 msgid "Store GPG encrypted"
 msgstr "Opslaan met GPG versleuteling"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:569
+#: kmymoney/plugins/xml/xmlstorage.cpp:581
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -18141,7 +18141,7 @@ msgstr[1] ""
 "sleutel verloopt over %1 dagen. Werk de sleutel bij vanuit een server voor "
 "sleutels met uw GPG-frontend (bijv. KGPG)."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:569
+#: kmymoney/plugins/xml/xmlstorage.cpp:581
 #, kde-format
 msgid "Recover key expires soon"
 msgstr "Herstelsleutel verloopt binnenkort"

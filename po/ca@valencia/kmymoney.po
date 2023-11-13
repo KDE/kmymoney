@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:34+0000\n"
+"POT-Creation-Date: 2023-11-13 00:43+0000\n"
 "PO-Revision-Date: 2023-10-13 23:35+0200\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -208,7 +208,7 @@ msgstr ""
 "registre de beneficiari i eliminarà la informació de beneficiari d'esta "
 "operació. Si escolliu «Cancel·la» s'interromprà l'operació d'importació.\n"
 "\n"
-"Si escolliu «No» i marqueu la casella de selecció «No ho tornes a "
+"Si escolliu «No» i seleccioneu la casella de selecció «No ho tornes a "
 "preguntar», s'eliminarà la informació del beneficiari per a totes les "
 "operacions successives que facen referència de «%1»."
 
@@ -708,7 +708,7 @@ msgstr ""
 "Encara hi ha com a mínim una operació/planificació que fa referència de la "
 "categoria <b>%1</b>. Tanmateix, cal que existisca com a mínim una categoria "
 "amb la mateixa divisa per tal que les operacions/planificacions es puguen "
-"reassignar."
+"tornar a assignar."
 
 #: kmymoney/dialogs/kcategoryreassigndlg.cpp:94
 #, kde-format
@@ -728,7 +728,7 @@ msgstr "Creació de categoria"
 #: kmymoney/dialogs/kcategoryreassigndlg.ui:14
 #, kde-format
 msgid "Reassign categories"
-msgstr "Reassigna categories"
+msgstr "Torna a assignar les categories"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/dialogs/kcategoryreassigndlg.ui:32
@@ -739,9 +739,9 @@ msgid ""
 "category can be deleted. Please select a category from the list below."
 msgstr ""
 "Les operacions, planificacions i pressupostos associats amb les categories "
-"seleccionades s'han de reassignar a una categoria diferent abans que es puga "
-"suprimir la categoria seleccionada. Seleccioneu una categoria des de la "
-"llista següent."
+"seleccionades s'han de tornar a assignar a una categoria diferent abans que "
+"es puga suprimir la categoria seleccionada. Seleccioneu una categoria des de "
+"la llista següent."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/dialogs/kcategoryreassigndlg.ui:61
@@ -2876,8 +2876,8 @@ msgid ""
 "to a different payee before the selected payees can be deleted. Please "
 "select a payee from the list below."
 msgstr ""
-"Les operacions associades amb els beneficiaris seleccionats s'han de "
-"reassignar a un beneficiari diferent abans que es puguen suprimir els "
+"Les operacions associades amb els beneficiaris seleccionats s'han de tornar "
+"a assignar a un beneficiari diferent abans que es puguen suprimir els "
 "beneficiaris seleccionats. Seleccioneu un beneficiari de la llista següent."
 
 #: kmymoney/dialogs/kpayeereassigndlg.cpp:114
@@ -2898,7 +2898,7 @@ msgstr "Creació de beneficiari"
 #: kmymoney/dialogs/kpayeereassigndlg.ui:14
 #, kde-format
 msgid "Reassign payees"
-msgstr "Reassigna beneficiaris"
+msgstr "Torna a assignar els beneficiaris"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: kmymoney/dialogs/kpayeereassigndlg.ui:58
@@ -3018,7 +3018,7 @@ msgstr "Deixa %1 sense assignar."
 #: kmymoney/dialogs/ktagreassigndlg.ui:14
 #, kde-format
 msgid "Delete or reassign tags"
-msgstr "Suprimix o reassigna les etiquetes"
+msgstr "Suprimix o torna a assignar les etiquetes"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: kmymoney/dialogs/ktagreassigndlg.ui:53
@@ -3031,7 +3031,7 @@ msgid ""
 msgstr ""
 "Per a completar l'operació de supressió, seleccioneu una etiqueta de les "
 "etiquetes disponibles que substituirà les etiquetes seleccionades abans de "
-"suprimir-les, o marqueu la casella de selecció de davall depenent de la "
+"suprimir-les, o seleccioneu la casella de selecció de davall depenent de la "
 "vostra tria. El botó D'acord serà accessible una vegada hàgeu seleccionat "
 "una etiqueta o marcat la casella de selecció."
 
@@ -4225,7 +4225,7 @@ msgid ""
 "Mark this option, if you always want to match names e.g. for payees from the "
 "start. If unset, any substring is matched."
 msgstr ""
-"Marqueu esta opció si voleu que sempre coincidisquen els noms (p. ex., "
+"Seleccioneu esta opció si voleu que sempre coincidisquen els noms (p. ex., "
 "beneficiaris) des de l'inici. Si no s'activa, coincidirà qualsevol subcadena."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_stringMatchFromStart)
@@ -4422,7 +4422,7 @@ msgid ""
 "used otherwise the memos will not be considered when the transaction is "
 "autofilled."
 msgstr ""
-"Si s'activa esta opció, s'utilitzaran els recordatoris de l'operació "
+"Si se selecciona esta opció, s'utilitzaran els recordatoris de l'operació "
 "anterior. En cas contrari, els recordatoris no es consideraran quan es "
 "complete automàticament l'operació."
 
@@ -5512,7 +5512,7 @@ msgstr "No s'ha obert cap fitxer de KMyMoney"
 
 #: kmymoney/kmymoney.cpp:3348 kmymoney/kmymoney.cpp:3350
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:1360
-#: kmymoney/plugins/xml/xmlstorage.cpp:407
+#: kmymoney/plugins/xml/xmlstorage.cpp:412
 #, kde-format
 msgctxt "Application is ready to use"
 msgid "Ready."
@@ -10189,8 +10189,8 @@ msgid ""
 "want to delete it?</center>"
 msgstr ""
 "<center>Durant l'actualització de <b>%1</b><br>el tipus de perfil per a <b>"
-"%2</b> no s'ha pogut reconéixer.<br>Per a açò, el perfil no es pot utilitzar."
-"<br>El voleu suprimir?</center>"
+"%2</b> no s'ha pogut reconéixer.<br>El perfil no es pot utilitzar per a fer "
+"açò.<br>El voleu suprimir?</center>"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1550
 #, kde-format
@@ -10784,7 +10784,7 @@ msgstr "Columna de comissió"
 #, kde-format
 msgid "Check box if any fee is a percentage figure rather than a value."
 msgstr ""
-"Activeu la casella de selecció si alguna xifra de comissió ve donada en "
+"Seleccioneu la casella de selecció si alguna xifra de comissió ve donada en "
 "percentatge en lloc d'un valor."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_typeCol)
@@ -12683,7 +12683,7 @@ msgstr ""
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:248
 #, kde-format
 msgid "OFX host failed. Last successful access was on '%1'. "
-msgstr "El servidor OFX ha fallat. L'últim accés correcte fou «%1». "
+msgstr "L'amfitrió OFX ha fallat. L'últim accés correcte fou «%1». "
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:250
 #, kde-format
@@ -12691,7 +12691,7 @@ msgid ""
 "Certificate verification of OFX host failed. Last successful verification "
 "was on '%1'."
 msgstr ""
-"Ha fallat la verificació del certificat del servidor OFX. L'última "
+"Ha fallat la verificació del certificat de l'amfitrió OFX. L'última "
 "verificació correcta fou «%1»."
 
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.cpp:258
@@ -13117,8 +13117,8 @@ msgid ""
 "transaction amounts, e.g. if you need to reverse charges and payments "
 "because your institution provides them inverted.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Activeu-la si cal invertir el signe dels imports de "
-"les operacions importades, p. ex., si cal invertir els càrrecs i els "
+"<html><head/><body><p>Seleccioneu-la si cal invertir el signe dels imports "
+"de les operacions importades, p. ex., si cal invertir els càrrecs i els "
 "pagaments perquè la institució els proporciona invertits.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
@@ -13138,9 +13138,9 @@ msgid ""
 "institution not applying the correct negative/positive sign to the share "
 "amount or quantity value.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Activeu-la si les operacions d'inversió després de la "
-"importació tenen el tipus Compra/Venda assignat incorrectament, el qual pot "
-"ser provocat per la institució perquè no aplica el signe negatiu/positiu "
+"<html><head/><body><p>Seleccioneu-la si les operacions d'inversió després de "
+"la importació tenen el tipus Compra/Venda assignat incorrectament, el qual "
+"pot ser provocat per la institució perquè no aplica el signe negatiu/positiu "
 "correcte a la quantitat de les accions o el valor de la quantitat.</p></"
 "body></html>"
 
@@ -14529,7 +14529,7 @@ msgstr "Nom de la base de dades (altres)"
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:87
 #, kde-format
 msgid "Host Name"
-msgstr "Nom de la màquina"
+msgstr "Nom de l'amfitrió"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kmymoney/plugins/sql/kgeneratesqldlg.ui:97
@@ -14589,7 +14589,7 @@ msgstr "&Nom de la base de dades"
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:234
 #, kde-format
 msgid "Host &Name"
-msgstr "&Nom de la màquina"
+msgstr "&Nom de l'amfitrió"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kmymoney/plugins/sql/kselectdatabasedlg.ui:251
@@ -14683,7 +14683,7 @@ msgid "Database malfunction"
 msgstr "Funcionament incorrecte de la base de dades"
 
 #: kmymoney/plugins/sql/sqlstorage.cpp:188
-#: kmymoney/plugins/xml/xmlstorage.cpp:237
+#: kmymoney/plugins/xml/xmlstorage.cpp:240
 #, kde-format
 msgid "Tried to access a file when it has not been opened"
 msgstr "S'ha intentat accedir a un fitxer quan no estava obert"
@@ -17400,9 +17400,9 @@ msgstr ""
 "              Si no, es mostrarà 0. En el gràfic, s'ometrà el valor.\n"
 "              </p>\n"
 "              <p>\n"
-"              Si esta opció està desactivada, es mostrarà l'últim preu "
+"              Si esta opció està desseleccionada, es mostrarà l'últim preu "
 "existent per a un període.\n"
-"              Si està activada, es mostrarà «0» i en les taules i en el "
+"              Si se selecciona, es mostrarà «0» i en les taules i en el "
 "gràfic s'efectuarà una interpolació lineal per als valors que falten.\n"
 "              <br>Exemple:\n"
 "              <br>Hi ha preus per a gener i març, però no per a febrer.\n"
@@ -17640,7 +17640,7 @@ msgid ""
 "Check this to propagate the difference of one period to the budget of the "
 "next period."
 msgstr ""
-"Activeu-la per a propagar la diferència d'un període al pressupost del "
+"Seleccioneu-la per a propagar la diferència d'un període al pressupost del "
 "període següent."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_propagateRemainder)
@@ -17816,8 +17816,8 @@ msgid ""
 "<p>Check this box to include only those categories which have been marked to "
 "\"Include on Tax Reports\"</p>"
 msgstr ""
-"<p>Marqueu esta casella només per a aquelles categories que s'han marcat amb "
-"«Inclou en els informes d'impostos»</p>"
+"<p>Seleccioneu esta casella només per a aquelles categories que s'han marcat "
+"amb «Inclou en els informes d'impostos»</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_checkTax)
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:376
@@ -17959,13 +17959,13 @@ msgstr "Configureu Woob"
 msgid "Retrieving transactions..."
 msgstr "S'estan recuperant les operacions..."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:37
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:42
 #, kde-format
 msgid "GPG installation not found or not working properly."
 msgstr ""
 "No s'ha trobat la instal·lació de GPG o no està treballant de forma adequada."
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:158
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:168
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
@@ -17973,7 +17973,7 @@ msgstr ""
 "No s'han trobat les claus secretes de GPG, executeu gpg[2] --gen-key o "
 "importeu les claus a dins de «gpg»"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:173
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:209
 #, kde-format
 msgid ""
@@ -17992,13 +17992,13 @@ msgstr ""
 "podreu suprimir el fitxer antic i canviar el nom de l'encriptat al nom antic."
 "</p>"
 
-#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:173
+#: kmymoney/plugins/xml/kcm_xmlstorage.cpp:184
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:209
 #, kde-format
 msgid "GPG encryption activated"
 msgstr "S'ha activat l'encriptació GPG"
 
-#: kmymoney/plugins/xml/kgpgkeyselectiondlg.cpp:71
+#: kmymoney/plugins/xml/kgpgkeyselectiondlg.cpp:72
 #, kde-format
 msgid "No encryption"
 msgstr "Sense encriptació"
@@ -18063,41 +18063,41 @@ msgctxt "Error message when reading XML file"
 msgid "Unknown payee identifier type %1"
 msgstr "Tipus d'identificador de beneficiari %1 desconegut"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:341
+#: kmymoney/plugins/xml/xmlstorage.cpp:346
 #, kde-format
 msgid "Save As"
 msgstr "Anomena i guarda"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:342
+#: kmymoney/plugins/xml/xmlstorage.cpp:347
 #, kde-format
 msgctxt "KMyMoney (Filefilter)"
 msgid "KMyMoney files"
 msgstr "Fitxers de KMyMoney"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:343
+#: kmymoney/plugins/xml/xmlstorage.cpp:348
 #, kde-format
 msgctxt "Anonymous (Filefilter)"
 msgid "Anonymous files"
 msgstr "Fitxers anònims"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:344
+#: kmymoney/plugins/xml/xmlstorage.cpp:349
 #, kde-format
 msgctxt "XML (Filefilter)"
 msgid "XML files"
 msgstr "Fitxers en XML"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:345
+#: kmymoney/plugins/xml/xmlstorage.cpp:350
 #, kde-format
 msgctxt "All files (Filefilter)"
 msgid "All files"
 msgstr "Tots els fitxers"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:419
+#: kmymoney/plugins/xml/xmlstorage.cpp:424
 #, kde-format
 msgid "KMyMoney files (*.kmy *.xml)"
 msgstr "Fitxers de KMyMoney (*.kmy *.xml)"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:437
+#: kmymoney/plugins/xml/xmlstorage.cpp:445
 #, kde-format
 msgid ""
 "GPG does not seem to be installed on your system. Please make sure that GPG "
@@ -18107,12 +18107,12 @@ msgstr ""
 "Pareix que GPG no està instal·lat en el sistema. Comproveu que es pot trobar "
 "utilitzant el camí de busca estàndard. Ara, s'ha desactivat l'encriptació."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:437
+#: kmymoney/plugins/xml/xmlstorage.cpp:445
 #, kde-format
 msgid "GPG not found"
 msgstr "No s'ha trobat GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:443
+#: kmymoney/plugins/xml/xmlstorage.cpp:451
 #, kde-format
 msgid ""
 "<p>You have selected to encrypt your data also with the KMyMoney recover "
@@ -18129,13 +18129,13 @@ msgstr ""
 "\">lloc web de KMyMoney</a>. En este moment les dades no s'encriptaran amb "
 "la clau de recuperació de KMyMoney.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:443
-#: kmymoney/plugins/xml/xmlstorage.cpp:450
+#: kmymoney/plugins/xml/xmlstorage.cpp:451
+#: kmymoney/plugins/xml/xmlstorage.cpp:458
 #, kde-format
 msgid "GPG Key not found"
 msgstr "No s'ha trobat la clau GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:450
+#: kmymoney/plugins/xml/xmlstorage.cpp:458
 #, kde-format
 msgid ""
 "<p>You have specified to encrypt your data for the user-id</p><p><center><b>"
@@ -18148,7 +18148,7 @@ msgstr ""
 "d'usuari en l'anell de claus. Assegureu-vos d'importar una clau vàlida per a "
 "este ID d'usuari. En este moment, l'encriptació està desactivat.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:457
+#: kmymoney/plugins/xml/xmlstorage.cpp:465
 #, kde-format
 msgid ""
 "<p>You have configured to save your data in encrypted form using GPG. Make "
@@ -18160,12 +18160,12 @@ msgstr ""
 "encripteu però no les podeu desencriptar més tard. Si no esteu segur, "
 "contesteu <b>No</b>.</p>"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:458
+#: kmymoney/plugins/xml/xmlstorage.cpp:466
 #, kde-format
 msgid "Store GPG encrypted"
 msgstr "Emmagatzema-ho encriptat amb GPG"
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:569
+#: kmymoney/plugins/xml/xmlstorage.cpp:581
 #, kde-format
 msgid ""
 "You have configured KMyMoney to use GPG to protect your data and to encrypt "
@@ -18188,7 +18188,7 @@ msgstr[1] ""
 "a punt de caducar en %1 dies. Actualitzeu la clau des de l'anell de claus "
 "emprant el frontal de GPG (p. ex., KGpg)."
 
-#: kmymoney/plugins/xml/xmlstorage.cpp:569
+#: kmymoney/plugins/xml/xmlstorage.cpp:581
 #, kde-format
 msgid "Recover key expires soon"
 msgstr "La clau de recuperació caducarà prompte"
@@ -18310,7 +18310,7 @@ msgstr ""
 "dades encriptades.<p>\n"
 "\n"
 "Es proporciona este mecanisme per al cas que hàgeu perdut la vostra clau i "
-"no pugueu accedir més a les vostres dades. Amb esta opció activada, els "
+"no pugueu accedir més a les vostres dades. Amb esta opció seleccionada, els "
 "desenvolupadors de KMyMoney poden desencriptar les dades i subministrar-vos-"
 "les en una forma accessible. Esteu preparat per a contestar algunes "
 "preguntes detallades quant al contingut de les dades abans que vos les "
@@ -20353,12 +20353,14 @@ msgstr ""
 "Com a mínim hi ha referenciada una operació/operació planificada o un compte "
 "de préstec per a un beneficiari. Actualment, teniu tots els beneficiaris "
 "seleccionats. Tanmateix, almenys ha de romandre un beneficiari per tal que "
-"es puga reassignar l'operació/operació planificada o el compte de préstec."
+"es puga tornar a assignar l'operació/operació planificada o el compte de "
+"préstec."
 
 #: kmymoney/views/kpayeesview_p.h:565
 #, kde-format
 msgid "Unable to reassign payee of transaction/split"
-msgstr "No s'ha pogut reassignar el beneficiari d'una operació/desglossament"
+msgstr ""
+"No s'ha pogut tornar a assignar el beneficiari d'una operació/desglossament"
 
 #: kmymoney/views/kpayeesview_p.h:569
 #, kde-format
@@ -20573,7 +20575,8 @@ msgstr "No s'ha pogut modificar l'etiqueta"
 #: kmymoney/views/ktagsview.cpp:802
 #, kde-format
 msgid "Unable to reassign tag of transaction/split"
-msgstr "No s'ha pogut reassignar l'etiqueta d'una operació/desglossament"
+msgstr ""
+"No s'ha pogut tornar a assignar l'etiqueta d'una operació/desglossament"
 
 #: kmymoney/views/ktagsview.cpp:814
 #, kde-format
@@ -21008,7 +21011,7 @@ msgid ""
 msgstr ""
 "KMyMoney ha detectat operacions que coincidixen amb les dades de "
 "conciliació.\n"
-"Voleu que KMyMoney liquidi estes operacions per vós?"
+"Voleu que KMyMoney liquide estes operacions per tu?"
 
 #: kmymoney/views/reconciliationledgerviewpage.cpp:255
 #, kde-format
@@ -22046,7 +22049,7 @@ msgid ""
 "will create transactions and mark them as cleared."
 msgstr ""
 "Si s'escau, introduïu ací la informació sobre els interessos i càrrecs. "
-"KMyMoney s'encarregarà de crear les operacions per vós i les marcarà com a "
+"KMyMoney s'encarregarà de crear les operacions per tu i les marcarà com a "
 "liquidades."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox2)
@@ -22606,8 +22609,7 @@ msgstr "Cotització en línia"
 msgid ""
 "Mark this checkbox if the account should be maintained as preferred account"
 msgstr ""
-"Marqueu esta casella de selecció si el compte s'ha de tractar com un compte "
-"preferit"
+"Seleccioneu esta casella si el compte s'ha de tractar com un compte preferit"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_preferredAccount)
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.ui:253
@@ -22616,7 +22618,7 @@ msgid ""
 "Selecting the <b>Preferred Account</b> checkbox will allow preferred access "
 "in some dialogs and views of KMyMoney."
 msgstr ""
-"Activant l'opció de la casella de selecció <b>Compte preferit</b> es "
+"Seleccionant l'opció de la casella de selecció <b>Compte preferit</b> es "
 "permetrà l'accés preferit en alguns diàlegs i vistes de KMyMoney."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_preferredAccount)
@@ -22917,9 +22919,9 @@ msgstr ""
 "<b>Tots els pagaments</b> permet introduir tots els pagaments efectuats per "
 "a este préstec.\n"
 "\n"
-"L'opció de <b>començar des de l'inici de l'any actual</b> està pensada per "
-"als préstecs que ja han sigut actius durant un període llarg de temps, i per "
-"als quals no es vol introduir totes les operacions antigues.\n"
+"L'opció <b>començar des de l'inici de l'any actual</b> està pensada per als "
+"préstecs que ja han sigut actius durant un període llarg de temps, i per als "
+"quals no es vol introduir totes les operacions antigues.\n"
 "</qt>"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_recordings)
@@ -23245,7 +23247,7 @@ msgid ""
 "leave one value empty to let KMyMoney calculate it for you"
 msgstr ""
 "Heu introduït informació que no quadra. Modifiqueu les xifres o deixeu un "
-"valor en blanc perquè KMyMoney la calcule per vós"
+"valor en blanc perquè KMyMoney la calcule per tu"
 
 #: kmymoney/wizards/newaccountwizard/kloandetailspage.cpp:279
 #: kmymoney/wizards/newloanwizard/knewloanwizard.cpp:109
@@ -23543,7 +23545,8 @@ msgstr "No crees l'operació de pagament"
 #, kde-format
 msgid ""
 "Check this if you are refinancing a loan that already exists in KMyMoney"
-msgstr "Activeu-la si esteu refinançant un préstec que ja existix en KMyMoney"
+msgstr ""
+"Seleccioneu-la si esteu refinançant un préstec que ja existix en KMyMoney"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_refinanceLoan)
 #: kmymoney/wizards/newaccountwizard/kloanpayoutpage.ui:62
@@ -24535,7 +24538,7 @@ msgid ""
 msgstr ""
 "Heu introduït informació que no quadra. Torneu a la pàgina adequada i "
 "modifiqueu les xifres o deixeu un valor en blanc perquè KMyMoney la calcule "
-"per vós"
+"per tu"
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, LendBorrowWizardPage)
 #: kmymoney/wizards/newloanwizard/lendborrowwizardpage.ui:6
@@ -25302,7 +25305,7 @@ msgid ""
 msgstr ""
 "Si voleu revisar o canviar qualsevol preferència en les opcions de "
 "configuració de KMyMoney després de finalitzar l'assistent, podreu fer-ho "
-"activant esta casella. Si no, cliqueu <b>Següent</b>."
+"seleccionant esta casella. Si no, cliqueu <b>Següent</b>."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_openConfigAfterFinished)
 #: kmymoney/wizards/newuserwizard/kpreferencepage.ui:32
