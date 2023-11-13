@@ -793,14 +793,14 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _kmmID, const QStri
             if (date > QDate::currentDate())
                 date = QDate::currentDate();
 
-            MyMoneyMoney price = MyMoneyMoney::ONE;
+            MyMoneyMoney calculatedPrice = MyMoneyMoney::ONE;
             QString id = _kmmID.toUtf8();
             MyMoneySecurity fromCurrency, toCurrency;
             if (_kmmID.contains(" ") == 0) {
                 MyMoneySecurity security = MyMoneyFile::instance()->security(id);
                 QString factor = security.value("kmm-online-factor");
                 if (!factor.isEmpty()) {
-                    price = price * MyMoneyMoney(factor);
+                    calculatedPrice = calculatedPrice * MyMoneyMoney(factor);
                 }
                 try {
                     toCurrency = MyMoneyFile::instance()->security(id);
@@ -820,9 +820,9 @@ void KEquityPriceUpdateDlg::slotReceivedQuote(const QString& _kmmID, const QStri
                     }
                 }
             }
-            price *= MyMoneyMoney(_price, MyMoneyMoney::precToDenom(toCurrency.pricePrecision()));
+            calculatedPrice *= MyMoneyMoney(_price, MyMoneyMoney::precToDenom(toCurrency.pricePrecision()));
 
-            item->setText(PRICE_COL, price.formatMoney(fromCurrency.tradingSymbol(), toCurrency.pricePrecision()));
+            item->setText(PRICE_COL, calculatedPrice.formatMoney(fromCurrency.tradingSymbol(), toCurrency.pricePrecision()));
             item->setText(DATE_COL, date.toString(Qt::ISODate));
             logStatusMessage(i18n("Price for %1 updated (id %2)", _webID, _kmmID));
             // make sure to make OK button available

@@ -1507,6 +1507,10 @@ bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
                 }
 
             } else if (o == d->ui->payeeEdit) {
+                // set case sensitivity so that a payee with the same spelling
+                // but different case can be created and is not found by accident
+                // inside the Qt logic (see QComboBoxPrivate::_q_editingFinished())
+                d->ui->payeeEdit->completer()->setCaseSensitivity(Qt::CaseSensitive);
                 if (!cb->currentText().isEmpty()) {
                     const auto index(cb->findText(cb->currentText()));
                     if (index != -1) {
@@ -1519,6 +1523,14 @@ bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
                     // default for payee if one is setup
                     d->defaultCategoryAssignment();
                 }
+            }
+        } else if (e->type() == QEvent::FocusIn) {
+            if (o == d->ui->payeeEdit) {
+                // set case sensitivity so that a payee with the same spelling
+                // but different case will be presented in the popup view of
+                // the completion box. We need to do that because the CaseSensitive
+                // mode is set when the focus leaves the widget (see above).
+                d->ui->payeeEdit->completer()->setCaseSensitivity(Qt::CaseInsensitive);
             }
         }
     }

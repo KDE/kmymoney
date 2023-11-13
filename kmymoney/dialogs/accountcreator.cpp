@@ -49,11 +49,11 @@ void AccountCreator::createAccount()
 {
     QTimer::singleShot(150, this, [&]() {
         // wait another round if any of the buttons is pressed
-        for (const auto& button : m_buttons) {
-            if (button->isDown()) {
-                createAccount();
-                return;
-            }
+        if (std::any_of(m_buttons.constBegin(), m_buttons.constEnd(), [&](QAbstractButton* b) -> bool {
+                return b->isDown();
+            })) {
+            createAccount();
+            return;
         }
 
         MyMoneyAccount parent;

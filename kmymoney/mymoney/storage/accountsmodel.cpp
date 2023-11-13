@@ -400,14 +400,14 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
 {
     if(orientation == Qt::Horizontal) {
         // Using Qt::UserRole here to store QHeaderView::ResizeMode
-        if (role == Qt::UserRole)
-            switch (section) {
-            case Column::AccountName:
+        switch (role) {
+        case Qt::UserRole:
+            if (section == Column::AccountName) {
                 return QHeaderView::Stretch;
-            default:
-                return QHeaderView::ResizeToContents;
             }
-        if (role == Qt::DisplayRole) {
+            return QHeaderView::ResizeToContents;
+
+        case Qt::DisplayRole:
             switch (section) {
             case Column::AccountName:
                 return i18nc("@title:column Shows the Name of account", "Name");
@@ -439,11 +439,11 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
             case Column::Bic:
                 return i18nc("@title:column Shows SWIFT/BIC", "SWIFT/BIC");
             default:
-                return QVariant();
+                break;
             }
-        }
+            return QVariant();
 
-        if (role == Qt::ToolTipRole) {
+        case Qt::ToolTipRole:
             switch (section) {
             case Column::AccountName:
                 return i18nc("@info:tooltip for 'Name' column. Used in Account, Category and Institution context, so avoid being too specific", "Full name");
@@ -476,8 +476,25 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
             case Column::Bic:
                 return i18nc("@info:tooltip for 'SWIFT/BIC' column", "A Business Identifier Code, also known as SWIFT.");
             default:
-                return QVariant();
+                break;
             }
+            return QVariant();
+
+        case Qt::TextAlignmentRole:
+            switch (section) {
+            case AccountsModel::Column::Vat:
+            case AccountsModel::Column::Balance:
+            case AccountsModel::Column::PostedValue:
+            case AccountsModel::Column::TotalPostedValue:
+                return QVariant(Qt::AlignRight | Qt::AlignVCenter);
+            case AccountsModel::Column::HasOnlineMapping:
+            case AccountsModel::Column::CostCenter:
+            case AccountsModel::Column::Tax:
+                return QVariant(Qt::AlignCenter | Qt::AlignVCenter);
+            default:
+                break;
+            }
+            return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
         }
     }
     return MyMoneyModelBase::headerData(section, orientation, role);
@@ -585,20 +602,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
         break;
 
     case Qt::TextAlignmentRole:
-        switch (idx.column()) {
-        case AccountsModel::Column::Vat:
-        case AccountsModel::Column::Balance:
-        case AccountsModel::Column::PostedValue:
-        case AccountsModel::Column::TotalPostedValue:
-            return QVariant(Qt::AlignRight | Qt::AlignVCenter);
-        case AccountsModel::Column::HasOnlineMapping:
-        case AccountsModel::Column::CostCenter:
-        case AccountsModel::Column::Tax:
-            return QVariant(Qt::AlignCenter | Qt::AlignVCenter);
-        default:
-            break;
-        }
-        return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+        return headerData(idx.column(), Qt::Horizontal, role);
 
     case Qt::ForegroundRole:
         switch(idx.column()) {

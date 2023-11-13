@@ -107,7 +107,8 @@ void MyMoneyUtilsTest::testStringToDateTime_data()
     QTest::newRow("Tonga") << QDate(2023, 10, 3) << QTime(11, 12, 13) << 46800 << QStringLiteral("2023-10-03T11:12:13+13:00");
     QTest::newRow("UTC") << QDate(2023, 10, 3) << QTime(11, 12, 13) << 0 << QStringLiteral("2023-10-03T11:12:13+00:00");
     QTest::newRow("Zulu") << QDate(2023, 10, 3) << QTime(11, 12, 13) << 0 << QStringLiteral("2023-10-03T11:12:13Z");
-    QTest::newRow("Date only") << QDate(2023, 10, 3) << QTime(0, 0, 0) << QDateTime::currentDateTime().offsetFromUtc() << QStringLiteral("2023-10-03");
+    QTest::newRow("Date only") << QDate(2023, 10, 3) << QTime(0, 0, 0) << QDateTime(QDate(2023, 10, 3), QTime(0, 0, 0)).offsetFromUtc()
+                               << QStringLiteral("2023-10-03");
 }
 
 void MyMoneyUtilsTest::testStringToDateTime()
@@ -117,7 +118,7 @@ void MyMoneyUtilsTest::testStringToDateTime()
     QFETCH(int, offset);
     QFETCH(QString, testvalue);
 
-    QCOMPARE(QDateTime(date, time, QTimeZone(offset)), MyMoneyUtils::stringToDateTime(testvalue));
+    QCOMPARE(MyMoneyUtils::stringToDateTime(testvalue), QDateTime(date, time, QTimeZone(offset)));
 }
 
 void MyMoneyUtilsTest::testDateTimeToString_data()

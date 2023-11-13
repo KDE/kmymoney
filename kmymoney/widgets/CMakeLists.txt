@@ -140,7 +140,7 @@ target_link_libraries(kmm_base_widgets PUBLIC
   kmm_mymoney
   kmm_settings
   kmm_models
-  kmm_gpgfile
+  $<$<BOOL:${ENABLE_GPG}>:kmm_gpgfile>
 )
 
 set_target_properties(kmm_base_widgets PROPERTIES

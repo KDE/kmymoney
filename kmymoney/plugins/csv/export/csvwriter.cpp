@@ -413,7 +413,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
                     //
                     //  Add quantity.
                     //
-                    strQuantity = format(qty, security.smallestAccountFraction());
+                    strQuantity = format(qty, MyMoneyMoney::denomToPrec(acc.fraction()));
                 }
             } else if ((strAction == QLatin1String("Shrsin")) || (strAction == QLatin1String("Shrsout"))) {
                 //
@@ -422,7 +422,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
                 if (strAction == QLatin1String("Shrsout")) {
                     qty = -qty;
                 }
-                strQuantity = format(qty, security.smallestAccountFraction());
+                strQuantity = format(qty, MyMoneyMoney::denomToPrec(acc.fraction()));
             }
             strAction += m_separator;
         }
