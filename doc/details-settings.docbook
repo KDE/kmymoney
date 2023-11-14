@@ -860,30 +860,29 @@ of accounts.</para>
 <title>Plugins</title>
 
 <para>
-  This section provides information about the available plugins, and allow you
-  to modify the behavior of installed plugins.  Note that the list of plugins
-  displayed will depend on which plugins &kmymoney; found when it started.  It
-  does not matter whether the plugin was compiled as part of the application or
-  added as a separate package.
+  This section provides information about the available plugins, and allow you to
+  modify the behavior of installed plugins.  Note that the list of plugins displayed
+  will depend on which plugins &kmymoney; found when it started.  It does not matter
+  whether the plugin was compiled as part of the application or added as a separate
+  package.
   <screenshot>
-	<screeninfo>Configure Plugins</screeninfo>
-	<mediaobject>
-	<imageobject>
+    <screeninfo>Configure Plugins</screeninfo>
+    <mediaobject>
+      <imageobject>
 	<imagedata fileref="configure_plugins.png" format="PNG" />
-	</imageobject>
-	<textobject>
+      </imageobject>
+      <textobject>
 	<phrase>Configure Plugins</phrase>
-	</textobject>
-	</mediaobject>
+      </textobject>
+    </mediaobject>
   </screenshot>
-  Every plugin can be enabled or disabled, according to the state of the
-  checkbox next to the name of the plugin.  In addition, at the right, there is
-  also an <guibutton>information</guibutton> (&infoicon;) button for each, which
-  will show the plugin version and author.  For some plugins, further
-  information on configuring and using it may be found by clicking the
-  configure, or tool icon just to the left of the information button.  There is
-  only one plugin that requires configuration, and that is the Check printing
-  plugin.
+  Every plugin can be enabled or disabled, according to the state of the checkbox
+  next to the name of the plugin.  In addition, at the right, there is also an
+  <guibutton>information</guibutton> (&infoicon;) button for each, which will show
+  the plugin version and author.  For some plugins, further information on
+  configuring and using it may be found by clicking the configure, or tool icon just
+  to the left of the information button.  There is only one plugin that requires
+  configuration, and that is the Check printing plugin.
 </para>
 
 <sect2 id="details.settings.plugins.printchecks">

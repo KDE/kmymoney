@@ -463,9 +463,8 @@
 
 <para>
   See the section on <link linkend="details.settings.plugins">Plugins</link> in the
-  chapter on <link linkend="details.settings">Settings</link> in the for more
-  information on determining which plugins are installed and active, and how to
-  configure them.
+  chapter on <link linkend="details.settings">Settings</link> for more information on
+  determining which plugins are installed and active, and how to configure them.
 </para>
 
 <para>

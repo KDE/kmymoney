@@ -1,37 +1,61 @@
 <sect1 id="details.impexp.woob">
-    <sect1info>
-        <author>&Dawid.Wrobel; &Dawid.Wrobel.mail;</author>
-    </sect1info>
+<sect1info>
+  <author>&Dawid.Wrobel; &Dawid.Wrobel.mail;</author>
+</sect1info>
+<title>Woob Importer</title>
 
-    <title>Woob Importer</title>
-    <sect2>
-        <title>What is Woob?</title>
-        <para>
-            <ulink url="https://woob.tech/">Woob</ulink> is <quote>a collection of applications able to interact with
-            websites, without requiring the user to open them in a browser</quote>. One of
-            <ulink url="https://woob.tech/applications/">such applications</ulink> allows specifically to interact with
-            <ulink url="https://woob.tech/applications/bank">financial institutions</ulink>. &kmymoney; provides a
-            plugin that employs it directly, therefore allowing to import transactions from those accounts which
-            otherwise do not offer support for any other financial protocol that &kmymoney; handles.
-        </para>
+<sect2><title>What is Woob?</title>
 
-        <note>
-            <para>
-                &kmymoney; currently requires that you install Woob independently. Refer to the further sections for
-                details.
-            </para>
-        </note>
-    </sect2>
-    <sect2>
-        <title>Installing Woob</title>
-        <para>
-            You need to install Python 3 first before continuing. You can download a package for your system from the
-            <ulink url="https://www.python.org/downloads/">official website</ulink>.
-        </para>
+<para>
+  <acronym><ulink url="https://woob.tech/">Woob</ulink></acronym>, or <quote>Web
+  outside of browsers</quote> is <quote>a collection of applications able to interact
+  with websites, without requiring the user to open them in a browser.</quote> One of
+  <ulink url="https://woob.tech/applications/">such applications</ulink> allows
+  specifically to interact with <ulink
+  url="https://woob.tech/applications/bank">financial
+  institutions</ulink>. &kmymoney; provides a plugin that employs it directly,
+  therefore allowing to import transactions from those banks and institutions which
+  otherwise do not offer support for any other financial protocol that &kmymoney;
+  handles.
+</para>
 
-        <para>
-            With Python 3 installed, you should now be able to easily download and install required Woob modules.
-            Please refer to the instructions on <ulink url="https://woob.tech/install/">Woob website</ulink>.
-        </para>
-    </sect2>
+<note>
+  <para>
+    &kmymoney; currently requires that you install Woob independently. Refer to the
+    further sections for details.
+  </para>
+</note>
+</sect2>
+  
+<sect2><title>Installing Woob</title>
+
+<para>
+  You need to install Python 3 first before continuing.  All major &Linux;
+  distribuitons package Python, and you should use that version, if possible.
+  Otherwise, you can download a package for your system from the <ulink
+  url="https://www.python.org/downloads/">official Python website</ulink>.
+</para>
+
+<para>
+  With Python 3 installed, you should now be able to easily download and install
+  required Woob modules.  Please refer to the instructions on the <ulink
+  url="https://woob.tech/install/">Woob website</ulink>.  When it runs, &kmymoney;
+  checks for the presence of Woob, and loads the plugin if it is found.  See the
+  section on <link linkend="details.settings.plugins">Plugins</link> in the chapter
+  on <link linkend="details.settings">Settings</link> for more information on
+  confirming that the woob plugin is loaded.
+</para>
+</sect2>
+
+<sect2><title>Using Woob</title>
+
+<para>
+  If Woob is installed, and the &kmymoney; woob plugin is loaded, you should be able
+  to set it up for use with an account by invoking the <menuchoice>
+  <guimenu>Account</guimenu> <guimenuitem>Map to online account...</guimenuitem>
+  </menuchoice> menu item.  Once that is done, the <menuchoice>
+  <guimenu>Account</guimenu> <guimenuitem>Update account...</guimenuitem>
+  </menuchoice> menu item will download transactions for that account using Woob.
+</para>
+</sect2>
 </sect1>

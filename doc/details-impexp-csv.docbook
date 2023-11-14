@@ -416,7 +416,7 @@
 </para>
 </listitem>
 
-<!-- FIXME:  shat does the Calucaltae Fee button do, and when is it activated? -->
+<!-- FIXME:  what does the Calucaltae Fee button do, and when is it activated? -->
 
 <listitem>
 <para>
@@ -643,6 +643,7 @@
 </sect3>
 
 <sect3><title>Make QIF File</title>
+
 <para>
   This button gives you the ability, after the import has been completed, to
   save the data from the CSV file as a QIF file, should you require one for any
@@ -654,6 +655,7 @@
 </sect3>
 
 <sect3><title>Finishing up</title>
+
 <para>
   For a <guilabel>Banking</guilabel> import, the plugin has finished, and
   &kmymoney; will prompt you, as stated above, for the correct account into
@@ -675,6 +677,7 @@
 </sect3>
 
 <sect3><title>Adding Investment Activity Types</title>
+
 <para>
   If you find that your investment statements keep including activity types that
   are not recognized, just add them to the section in the resource file.  (See
@@ -740,4 +743,3 @@
 </sect3>
 </sect2>
 </sect1>
-

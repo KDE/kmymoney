@@ -1190,27 +1190,14 @@
 </sect2>
 </sect1>
 
-<!-- Using an entity for the csv impexp sections allow it to be maintained in a
-     separate file.  Original note here suggested this was a workaround, but I
-     don't know why. -->
-<!-- entity defined in index.docbook -->
+<!-- Using entities for the csv import and export and woob import sections allow then
+     to be maintained in separate files.  The original note here suggested this was a
+     workaround, but I don't know why. -->
+<!-- entities defined in index.docbook -->
+<!-- perhaps these entity invokations should also be in index.docbook, where all
+     the chapters are so invoked. -->
 &details-impexp-csv;
 &details-impexp-csvexp;
-
-<!-- as above, for woob import. -->
-<!-- entity defined in index.docbook -->
 &details-impexp-woob;
 
-<sect1 id="details.impexp.plugins"><title>Writing Importer Plugins</title>
-
-<para>
-  <!-- FIXME: this is mentioned more generally in the makemostof section on Plugins,
-       so not sure if it is really necessary to also cover here, or just refer to
-       that section.  -->
-  &kmymoney; contains explicit support for importer plugins.  If you have a custom
-  format, and you would like to write an importer plugin, we would value your
-  contribution.  To do so, you'll need to compile the program from source.  Then use
-  the OFX Importer Plugin as an example.
-</para>
-</sect1>
 </chapter>

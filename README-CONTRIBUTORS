@@ -64,17 +64,19 @@ This is in the order pulled in from index.docbook, with brief note on state of u
   prelim update complete
 
 <!ENTITY details-reports SYSTEM "details-reports.docbook">
-
+  prelim update complete
 
 <!ENTITY details-impexp SYSTEM "details-impexp.docbook">
   prelim update complete
 
 <!ENTITY details-impexp-csv SYSTEM "details-impexp-csv.docbook">
-  prelim begun.
+  prelim update one pass.  needs lots more work
 
 <!ENTITY details-impexp-csvexp SYSTEM "details-impexp-csvexp.docbook">
+  prelim update complete
 
 <!ENTITY details-impexp-woob SYSTEM "details-impexp-woob.docbook">
+  prelim update complete - needs reveiw by Woob user.
 
 <!ENTITY details-loans SYSTEM "details-loans.docbook">
 
