@@ -80,10 +80,13 @@ This is in the order pulled in from index.docbook, with brief note on state of u
 
 <!ENTITY details-loans SYSTEM "details-loans.docbook">
 
+
 <!ENTITY details-budgets SYSTEM "details-budgets.docbook">
+  prelim update complete, need to add screenshots
 
 <!ENTITY details-forecast SYSTEM "details-forecast.docbook">
-
+  prelim update begun
+  
 <!ENTITY details-settings SYSTEM "details-settings.docbook">
 
 <!ENTITY details-search SYSTEM "details-search.docbook">
@@ -312,5 +315,15 @@ elsewhere.
 - In report configuration dialog, if the report has not been run (select configure from
   the reports list) and you close, do not actually run the report.
 
+- In the Budgets View, the list of categories on the right does not allow resizing
+  columns.  In addition, with all columns displayed, the Name column is so narrow you
+  do not even see the first letters of the name, only the income or expense icon.
 
+- In the Budgets View, should the list on the right be called the Accounts List or
+  the Categories List?  The doc does mention that categories are accounts, but given
+  this list is restricted to categories only, ....?
 
+- In the Budgets View, the three sections on the right cannot be resized, although it is
+  possible to adjust the division between the right and left sections.
+
+- 
