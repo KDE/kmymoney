@@ -18144,7 +18144,7 @@ msgid ""
 "id. This time, encryption is disabled.</p>"
 msgstr ""
 "<p>Heu indicat encriptar les dades amb l'ID d'usuari </p><p><center><b>%1</"
-"b>.</center></p><p>Malauradament, no s'ha trobat cap clau per a este ID "
+"b>.</center></p><p>Desgraciadament, no s'ha trobat cap clau per a este ID "
 "d'usuari en l'anell de claus. Assegureu-vos d'importar una clau vàlida per a "
 "este ID d'usuari. En este moment, l'encriptació està desactivat.</p>"
 

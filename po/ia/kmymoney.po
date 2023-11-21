@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-13 00:43+0000\n"
-"PO-Revision-Date: 2023-07-13 22:22+0200\n"
+"PO-Revision-Date: 2023-11-13 15:18+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -327,19 +327,16 @@ msgid "Schedule found"
 msgstr "Horario trovate"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Create a new Account"
+#, kde-format
 msgctxt "Create undo action"
 msgid "Create account"
-msgstr "Crea un nove conto"
+msgstr "Crea  conto"
 
 #: kmymoney/dialogs/accountcreator.cpp:76
-#, fuzzy, kde-format
-#| msgid "Create a new category"
+#, kde-format
 msgctxt "Create undo action"
 msgid "Create category"
-msgstr "Crea un nove categoria"
+msgstr "Crea categoria"
 
 #: kmymoney/dialogs/editpersonaldatadlg.cpp:174
 #: kmymoney/wizards/newuserwizard/kgeneralpage.cpp:78
@@ -894,8 +891,7 @@ msgstr ""
 
 #: kmymoney/dialogs/kcurrencycalculator.cpp:430
 #: kmymoney/mymoney/mymoneyfile.cpp:2993
-#, fuzzy, kde-format
-#| msgid "User"
+#, kde-format
 msgctxt "@info price source"
 msgid "User"
 msgstr "Usator"
@@ -1399,7 +1395,7 @@ msgstr ""
 #: kmymoney/mymoney/mymoneysecurity.cpp:264
 #, kde-format
 msgid "Round"
-msgstr ""
+msgstr "Round (Circular)"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KEditEquityEntry)
 #: kmymoney/dialogs/keditequityentry.ui:17
@@ -2883,11 +2879,10 @@ msgid "Security"
 msgstr "Securitate"
 
 #: kmymoney/dialogs/payeecreator.cpp:62
-#, fuzzy, kde-format
-#| msgid "Delete payee"
+#, kde-format
 msgctxt "Undo action description"
 msgid "Create payee"
-msgstr "Dele beneficiario"
+msgstr "Crea beneficiario"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KSettingsColors)
 #: kmymoney/dialogs/settings/ksettingscolors.ui:14
@@ -3592,7 +3587,7 @@ msgstr "Identificator"
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.ui:68
 #, kde-format
 msgid "Regular Expression to extract the identifier from the downloaded data"
-msgstr ""
+msgstr "Expression regular per extraher le data ex le datos discargate"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editDate)
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_editDateFormat)
@@ -4831,12 +4826,10 @@ msgid "Show transaction"
 msgstr "Monstra transaction"
 
 #: kmymoney/kmymoney.cpp:1844
-#, fuzzy, kde-format
-#| msgctxt "Show transaction"
-#| msgid "Show transaction"
+#, kde-format
 msgctxt "Display transaction details"
 msgid "Show transaction details"
-msgstr "Monstra transaction"
+msgstr "Monstra detalios de transaction"
 
 #: kmymoney/kmymoney.cpp:1846
 #, kde-format
@@ -9048,15 +9041,13 @@ msgid "%1 and No/%2"
 msgstr "%1 e No/%2"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:64
-#, fuzzy, kde-format
-#| msgid "Comma (,)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Comma (,)"
 msgstr "virgula (,)"
 
 #: kmymoney/plugins/csv/export/csvexportdlg.cpp:65
-#, fuzzy, kde-format
-#| msgid "Semicolon (;)"
+#, kde-format
 msgctxt "@item:inlistbox CSV separator"
 msgid "Semicolon (;)"
 msgstr "Puncto e virgula (;)"
@@ -9234,11 +9225,9 @@ msgid "Account Type:"
 msgstr "Typo de conto:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "Header for AqBanking account list"
-#| msgid "Account Name"
+#, kde-format
 msgid "Account Name:"
-msgstr "Nomine de conto"
+msgstr "Nomine de conto:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:107
 #: kmymoney/plugins/csv/export/csvwriter.cpp:116
@@ -18305,11 +18294,10 @@ msgid "Edit account '%1'"
 msgstr "Modifica conto '%1'"
 
 #: kmymoney/views/kaccountsview_p.h:245
-#, fuzzy, kde-format
-#| msgid "Edit account..."
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit account"
-msgstr "Modifica conto..."
+msgstr "Modifica conto"
 
 #: kmymoney/views/kaccountsview_p.h:279
 #, kde-format
@@ -18365,11 +18353,10 @@ msgid "Edit category '%1'"
 msgstr ""
 
 #: kmymoney/views/kcategoriesview.cpp:199
-#, fuzzy, kde-format
-#| msgid "category"
+#, kde-format
 msgctxt "Undo action description"
 msgid "Edit category"
-msgstr "Categoria"
+msgstr "Modifica Categoria"
 
 #: kmymoney/views/kcategoriesview.cpp:213
 #, kde-format
@@ -19544,12 +19531,10 @@ msgid "Tag color:"
 msgstr ""
 
 #: kmymoney/views/ktransactionselectdlg.cpp:56
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Select the activity for this transaction."
+#, kde-format
 msgctxt "@info:label Description of select transaction dialog"
 msgid "Select the transaction to use as template."
-msgstr "Selige le activitate per iste transaction"
+msgstr "Selige le transaction a usar como patrono."
 
 #: kmymoney/views/ktransactionselectdlg.cpp:126
 #, kde-format
@@ -19775,10 +19760,9 @@ msgid "The posting date is invalid."
 msgstr ""
 
 #: kmymoney/views/multitransactioneditor.cpp:218
-#, fuzzy, kde-format
-#| msgid "Select account"
+#, kde-format
 msgid "Select category or account."
-msgstr "Selige conto"
+msgstr "Selige categoria o conto"
 
 #: kmymoney/views/multitransactioneditor.cpp:230
 #, kde-format
@@ -19789,11 +19773,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/multitransactioneditor.cpp:724
-#, fuzzy, kde-format
-#| msgid "Cannot open file as requested."
+#, kde-format
 msgctxt "@info Error selecting multiple transactions for edit"
 msgid "Cannot edit multiple schedules at once."
-msgstr "Il non pote aperir file como requirite."
+msgstr "Il non pote modificar multiple horarios immediatemente"
 
 #: kmymoney/views/multitransactioneditor.cpp:732
 #, kde-format
@@ -19871,12 +19854,10 @@ msgid ""
 msgstr ""
 
 #: kmymoney/views/newtransactioneditor.cpp:527
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Select the security for this transaction"
+#, kde-format
 msgctxt "@title:window Autofill selection dialog"
 msgid "Select autofill transaction"
-msgstr "Selige le securitate per iste transaction"
+msgstr "Selige  transaction autoreimplente"
 
 #: kmymoney/views/newtransactionform.cpp:113
 #, kde-format
@@ -21819,11 +21800,10 @@ msgid "Next interest change is due"
 msgstr ""
 
 #: kmymoney/wizards/newaccountwizard/khierarchypage.cpp:154
-#, fuzzy, kde-format
-#| msgid "No account selected"
+#, kde-format
 msgctxt "@info Missing parent account selection in new account wizard"
 msgid "No parent account selected"
-msgstr "Nulle conto seligite"
+msgstr "Nulle conto genitor seligite"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/newaccountwizard/khierarchypage.ui:26
@@ -22368,7 +22348,7 @@ msgstr ""
 #, kde-format
 msgctxt "Rounding method"
 msgid "Round"
-msgstr ""
+msgstr "Round (Circular)"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:65
 #, kde-format
