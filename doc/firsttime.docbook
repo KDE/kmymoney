@@ -262,7 +262,7 @@
       <guiicon>
 	<inlinemediaobject>
 	  <imageobject>
-	    <imagedata fileref="forecast_view.png" format="PNG"/>
+	    <imagedata fileref="forecast_view_icon.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>Forecast View</phrase>

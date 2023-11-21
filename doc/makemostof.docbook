@@ -456,8 +456,8 @@
   in the versions they compiled.  For some time, the handbook included instructions
   for checking this and for compiling them yourself, if necessary.  At this point,
   many of the basic features of &kmymoney; have been implemented as plugins, and they
-  are included by all distributions, as well as the &Windows; and &macOS; versions
-  distributed on the <ulink url="https://www.kmymoney.org">&kmymoney; web
+  are included by all distributions, as well as the &Windows;, &macOS;, and Appimage
+  versions distributed on the <ulink url="https://www.kmymoney.org">&kmymoney; web
   site</ulink>.
 </para>
 

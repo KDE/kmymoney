@@ -43,10 +43,11 @@
 <para>
   To ensure that it is enabled within &kmymoney;, check the <menuchoice>
   <guimenu>Settings</guimenu> <guimenuitem>Configure &kmymoney;...</guimenuitem>
-  <guimenuitem>Plugins</guimenuitem> </menuchoice> menu item.  If the CSV importer
-  does not seem to be installed in your version, the first place to check is in the
-  same place you got your base &kmymoney; package.  See if a later version is
-  available, or if the importer is available as a separate package.
+  </menuchoice> menu item, select <guilabel>Plugins</guilabel> on the left pane, and
+  look for the <guilabel>CSV Importer</guilabel> in the displayed list of plugins.
+  If the CSV importer does not seem to be installed in your version, the first place
+  to check is in the same place you got your base &kmymoney; package.  See if a later
+  version is available, or if the importer is available as a separate package.
 </para>
 
 <para> 

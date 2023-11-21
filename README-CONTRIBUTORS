@@ -79,15 +79,16 @@ This is in the order pulled in from index.docbook, with brief note on state of u
   prelim update complete - needs reveiw by Woob user.
 
 <!ENTITY details-loans SYSTEM "details-loans.docbook">
-
+  prelim update complete
 
 <!ENTITY details-budgets SYSTEM "details-budgets.docbook">
   prelim update complete, need to add screenshots
 
 <!ENTITY details-forecast SYSTEM "details-forecast.docbook">
-  prelim update begun
+  prelim update complete
   
 <!ENTITY details-settings SYSTEM "details-settings.docbook">
+  prelim update begun
 
 <!ENTITY details-search SYSTEM "details-search.docbook">
 
@@ -326,4 +327,16 @@ elsewhere.
 - In the Budgets View, the three sections on the right cannot be resized, although it is
   possible to adjust the division between the right and left sections.
 
-- 
+- Forecast View - clicking the Chart tab takes (can take?) a LONG time.  Users need a
+  way to interrupt any such very long operation.  In my experience, these are in reports
+  over all time and accounts, and this graphic.
+
+- In Edit Account, bottom of General tab, Budget Options allows account to be
+  included in budgets as Income or Expense.  Does this essentially allow to include
+  transfers to/from this account in budgets?
+
+- In Forecast, the Advanced tab seems to show one fewer cycle than expected.
+
+- Forecast View, Budget tab seems final column really is Total, not anything
+  predicted, and values seem history predicted, even though my Forecast Method is
+  Scheduled.

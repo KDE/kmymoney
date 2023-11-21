@@ -2,20 +2,21 @@
 <chapter id="details.forecast">
 <chapterinfo>
   <authorgroup>
-    <author> &Colin.Wright; &Colin.Wright.mail; </author>
+    <author> &Colin.Wright; &Colin.Wright.mail; </author> 
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date>2023-11-20</date>
+  <releaseinfo>5.2</releaseinfo>
 </chapterinfo>
 
 <title>Forecast</title>
 
-<sect1 id="details.forecast.define">
-<title>What is a Forecast?</title>
+<sect1 id="details.forecast.define"><title>What is a Forecast?</title>
 
 <para>
   In &kmymoney;, a Forecast is a prediction of the balances of Accounts during a
-  specified future period of time.</para>
+  specified future period of time.
+</para>
 
 <para>
   Forecasts can be predicted using one of two methods.
@@ -25,74 +26,254 @@
   <varlistentry>
     <term>Scheduled and Future Transactions</term>
     <listitem>
-      <para>&kmymoney; uses a combination of future transactions already entered
-        into the ledgers and the entries in the Schedule.</para>
+      <para>
+        &kmymoney; uses a combination of future transactions already entered into the
+        ledgers and the entries in the Schedule.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term>History-based</term>
     <listitem>
-      <para>&kmymoney; uses values from past transactions in the ledgers to
-        predict future transactions.</para>
+      <para>
+        &kmymoney; uses values from past transactions.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 
 <para>
-  The forecast method and forecast period can be set in the &kmymoney; Settings,
-  in the Forecast pane.
-</para>
-
-<para>
-  &kmymoney; Forecast provides a summary, showing the predicted balances at
-  account cycle dates and the expected difference between the starting and
-  ending balances.  The length of the account cycle can be set by the user.  The
-  summary also displays messages about significant predicted changes to the
-  accounts during the forecast period.
-</para>
-
-<para>
-  As well as the summary, &kmymoney; Forecast also allows you to view day-by-day
-  balances and view the minimum and maximum balances for each forecast account
+  The <guilabel>Forecast View</guilabel> shows the predicted balances at account
+  cycle dates and the expected difference between the starting and ending balances.
+  The summary also displays messages about significant predicted changes to the
+  accounts during the forecast period.  In addition to the summary, you can also view
+  day-by-day balances and the minimum and maximum balances for each forecast account
   cycle.
 </para>
 
 <para>
-  By default the Forecast is created for 90-days, with 30-day account cycles
-  using Scheduled and Future Transactions.
+  The next section describes how you can configure the forecast method and other
+  parameters used to calculate a Forecast.  Following that is a section with more
+  details on the Forecast View.
+</para>
+</sect1>
+
+<sect1 id="details.forecast.configure" >
+<title>Configuring the Forecast</title>
+
+<para>
+  The parameters used to calculate a Forecast, including the forecast method, can be set
+  in the <guilabel>Forecast view</guilabel> configuration dialog.  Since the forecast
+  functionality is implemented as a <link linkend="makingmostof.plugins">&kmymoney;
+  plugin</link>, you can reach this dialog by invoking the <menuchoice>
+  <guimenu>Settings</guimenu> <guimenuitem>Configure &kmymoney;...</guimenuitem>
+  </menuchoice> menu item, selecting <guilabel>Plugins</guilabel> on the left pane,
+  and clicking the <guilabel>configure</guilabel> icon next to <guilabel>Forecast
+  view</guilabel>.
+</para>
+
+<para>
+  <screenshot>
+    <screeninfo>forecast configuration</screeninfo>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="plugin_config_forecast.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>forecast configuration</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
+</para>
+
+<variablelist>
+  <varlistentry>
+    <term>Number of Days to Forecast</term>
+    <listitem>
+      <para>
+        The forecast will be calculated up to this far into the future.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Number of Days of Account Cycle</term>
+    <listitem>
+      <para>
+        A Forecast is not based on actual months, but repeating periods of the number
+        of days set in this field.  The most common values used are 30 or 31.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Day of Month to start Forecase</term>
+    <listitem>
+      <para>
+        This sets the day of the current month which is used as the starting point of
+        counting both cycles and the number of days to forecast.  A value of 0 means
+        to use the current day.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Forecast Method</term>
+    <listitem>
+      <para>
+        As mentioned in the previous section, you can choose whether &kmymoney; uses
+        scheduled and future transactions or historical transactions to calculate a
+        Forecast.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>History-based settings</term>
+    <listitem>
+      <para>
+        The settings in this section of the dialog are only applicable if the Forecast
+        Method is set to <quote>History-based</quote>
+      </para>
+
+      <variablelist>
+        <varlistentry>
+          <term>Number of Cycles to use in Forecast</term>
+          <listitem>
+            <para>
+              This sets the number of cycles of historic data to use for predicting
+              future values.
+            </para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>History Forecast Method</term>
+          <listitem>
+            <para>
+              Selecting one of the three radio buttons, <guilabel>Simple Moving
+              Average</guilabel>, <guilabel>Weighted Moving Averate</guilabel> (this
+              is the default setting,) and <guilabel>Linear Regression</guilabel>,
+              sets the mathematical formula &kmymoney; will use for a history based
+              Forecast.
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </listitem>
+  </varlistentry>
+</variablelist>
+
+<para>
+  The Forecast Method set here applies to all Forecasts.  The other settings become
+  defaults, which can be changed when actually calculating and viewing a forecast on
+  the Forecast View.
+</para>
+
+<para>
+  At the bottom of the dialog, the <guibutton>Defaults</guibutton> resets all values
+  to their default values.  The <guibutton>OK</guibutton> and
+  <guibutton>Cancel</guibutton> have their usual meanings.
 </para>
 </sect1>
 
 <sect1 id="details.forecast.view" >
-<title>Viewing Forecasts</title>
+<title>Viewing the Forecasts</title>
 
 <para>
-  You can view a Forecast by clicking the appropriate icon in the navigation
-  pane at the left hand side of your &kmymoney; window.
+  You can display the Forecast View by clicking the appropriate icon in the
+  navigation pane at the left hand side of your &kmymoney; window.
 </para>
 
 <para>
-  The Forecast window is split into five tabs:
-</para>
-
-<sect2>
-<title>Summary Tab</title>
-
-<para>
-  The Summary tab is split vertically into two halves.
-</para>
-
-<sect3>
-<title>Account Summary</title>
-
-<para>
-  The Account Summary contains a grid displaying a row of information for each
-  Asset and Liability.
+  <screenshot>
+    <screeninfo>forecast view</screeninfo>
+    <mediaobject>
+      <imageobject>
+	<imagedata fileref="forecast_view.png" format="PNG" />
+      </imageobject>
+      <textobject>
+	<phrase>forecast view</phrase>
+      </textobject>
+    </mediaobject>
+  </screenshot>
 </para>
 
 <para>
-  The following columns are displayed:
+  The top area of the Forecast View is the <guilabel>Forecast Settings</guilabel>.
+  At the left are several fields to control the forecase calculations.  The defaulsts
+  for these values are set on the Forecast View configuration dialog, as described in
+  the preceeding section.  The values (with the name used on the configuration dialog
+  shown in parentheses if it differs) are:
+</para>
+
+<itemizedlist>
+  <listitem>
+    <para>Days to Forecast (Number of Days to Forecast)</para>
+  </listitem>
+
+  <listitem>
+    <para>Days of Accounts Cycle (Number of Days of Account Cycle)</para>
+  </listitem>
+
+  <listitem>
+        <para>Day of Month to start Forecast</para>
+  </listitem>
+    
+  <listitem>
+        <para>Historic Cycles (Numberof Cycles to use in Forecast)</para>
+  </listitem>
+    
+  <listitem>
+    <para>
+      Chart Detail: This item is not set on the configuratiohn dialog.  Choose one of
+      the following values to control the results as displayed in the
+      <guilabel>Chart</guilabel> tab.
+      <itemizedlist>
+        <listitem>
+          <para>All</para>
+        </listitem>
+        <listitem>
+          <para>Top-Level</para>
+        </listitem>
+        <listitem>
+          <para>Groups</para>
+        </listitem>
+        <listitem>
+          <para>Total</para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </listitem>
+</itemizedlist>
+    
+<para>
+  To the right of these items,  &kmymoney; shows the <guilabel>Current Forecast
+  Method</guilabel>.  To the right of this is a <guibutton>Forecast</guibutton>
+  button.  When you click this button, &kmymoney; calculates the forecast based on
+  the settings to the left, and displays the results in the lower part of the window.
+  Just below these is the <guilabel>History Forecast Method</guilabel>, which is only
+  enabled if the current forecast method is set to <quote>History</quote>.
+</para>
+
+<para>
+  The bottom area of the Forecast View has five tabs.
+</para>
+
+<sect2><title>Summary Tab</title>
+
+<para>
+  The Summary tab has two sections.
+</para>
+
+<sect3><title>Account Summary</title>
+
+<para>
+  On the left is the Account Summary, displaying one row of information for each
+  Asset and Liability, with the columns shows below.  Note that if the Forecast is
+  based on Scheduled and Future Transactions, there will only be rows for accounts
+  referenced in such transactions.
 </para>
 
 <variablelist>
@@ -104,50 +285,54 @@
   </varlistentry>
 
   <varlistentry>
-    <term>Current Balance (Current)</term>
+    <term>Current</term>
     <listitem>
-      <para>The current balance of the account is displayed.</para>
+      <para>The current balance of the account</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term>Account Cycle Balance</term>
     <listitem>
-      <para>The Forecast period is split into account cycles.  The default
-        account cycle length is 30 days, but can be set by the user.</para>
+      <para>
+        The Forecast period is split into account cycles.  The default account cycle
+        length is 30 days, but can be set by the user.
+      </para>
 
-      <para>The first account cycle date is the first Forecast date.  By default
-        this is the current date plus one account cycle, but can change
-        depending on the "Day of Month to start Forecast" setting.</para>
+      <para>
+        The first account cycle date is the first Forecast date.  By default this is
+        the current date plus one account cycle, but this can change depending on the
+        "Day of Month to start Forecast" setting.
+      </para>
 
-      <para>Remaining account cycle dates are determined by adding the account
-        cycle length to the previous account cycle date.  This is continued
-        until the calculated account cycle date would be beyond the Forecast
-        period.</para>
+      <para>
+        The remaining account cycle dates are determined by adding the account cycle
+        length to the previous account cycle date.  This is continued until the
+        calculated account cycle date would be beyond the Forecast period,or Days to
+        Forecast.</para>
 
-      <para>For each account cycle date the predicted balance is
-        displayed.</para>
+      <para>For each account cycle date the predicted balance is displayed.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term>Total Variation</term>
     <listitem>
-      <para>The rightmost column displays the predicted difference in value
-        between the balances at the start and end of the forecast.  If the
-        predicted end value of the account (in terms of net worth) is less than
-        the start value the whole row is highlighted in red.</para>
+      <para>
+        The rightmost column displays the predicted difference in value between the
+        balances at the start and end of the forecast.  If the predicted end value of
+        the account (in terms of net worth) is less than the start value the whole
+        row is highlighted in red.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
-
 </sect3>
 
-<sect3>
-<title>Key Summary Information</title>
+<sect3><title>Key Summary Information</title>
 
 <para>
-  The bottom half of the Summary tab displays noteworthy information about
+  The right portion of the Summary tab displays noteworthy information about
   accounts.  This includes:
 </para>
 
@@ -155,30 +340,33 @@
   <varlistentry>
     <term>Assets below zero</term>
     <listitem>
-      <para>A message is displayed for any asset for which the value starts or
-        will drop below zero during the forecast period.</para>
+      <para>
+        A message is displayed (in red) for any asset account for which the value
+        starts or will drop below zero during the forecast period.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term>Liabilities above zero</term>
     <listitem>
-      <para>A message is displayed for any liability for which the value starts
-        or will rise above zero during the forecast period.  Note that the value
-        of a liability is the negative of its ledger balance, since a positive
-        balance indicates money owed.</para>
+      <para>
+        A message is displayed for any liability account for which the value starts
+        or will rise above zero during the forecast period.  Note that the value of a
+        liability is the negative of its ledger balance, since a positive balance
+        indicates money owed.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect3>
 </sect2>
 
-<sect2>
-<title>Details Tab</title>
+<sect2><title>Details Tab</title>
 
 <para>
-  The Details tab contains a grid displaying a row of information for each Asset
-  and Liability.
+  The Details tab also displays one row for each Asset and Liability account, but the
+  columns displayed differ from the Summary Tab.
 </para>
 
 <variablelist>
@@ -192,30 +380,33 @@
   <varlistentry>
     <term>Dates</term>
     <listitem>
-      <para>For each date in the Forecast period a column displays the predicted
-        balance of the account on that date.  The date columns are in ascending
-        order from left to right.</para>
+      <para>
+        For each date in the Forecast period a column displays the predicted balance
+        of the account on that date.  The date columns are in ascending order from
+        left to right.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term>Total Variation</term>
     <listitem>
-      <para>The rightmost column displays the predicted difference in value
-        between the balances at the start and end of the forecast.  If the
-        predicted end value of the account (in terms of net worth) is less than
-        the start value the whole row is highlighted in red.</para>
+      <para>
+        The rightmost column displays the predicted difference in value between the
+        balances at the start and end of the forecast.  If the predicted end value of
+        the account (in terms of net worth) is less than the start value the whole
+        row is highlighted in red.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2>
-<title>Advanced Tab</title>
+<sect2><title>Advanced Tab</title>
 
 <para>
-  The Advanced tab contains a grid displaying a row of information for each
-  Asset and Liability.  The information is split into columns as follows:
+  The Advanced tab also displays one row of information for each Asset and Liability
+  account.  The information is split into columns as follows:
 </para>
 
 <variablelist>
@@ -227,82 +418,75 @@
   </varlistentry>
 
   <varlistentry>
-    <term>Minimum Account Cycle Balance</term>
+    <term>Minimum Account Cycle Balance Information</term>
     <listitem>
-      <para>For each account cycle number &lt;n&gt; in the Forecast period
-      the following columns are displayed:</para>
+      <para>
+        For each account cycle number &lt;n&gt; in the Forecast period the following
+        columns are displayed:
+      </para>
 
       <variablelist>
 	<varlistentry>
-	  <term>Minimum Balance (Min Bal &lt;n&gt;)</term>
+	  <term>Min Bal &lt;n&gt;</term>
 	  <listitem>
 	    <para>The minimum predicted balance during the account cycle</para>
 	  </listitem>
 	</varlistentry>
+
 	<varlistentry>
-	  <term>Minimum Balance Date (Min Date &lt;n&gt;)</term>
+	  <term>Min Date &lt;n&gt;</term>
 	  <listitem>
-	    <para>The date on which the balance reaches its predicted
-	    minimum.</para>
+	    <para>The date on which the balance reaches its predicted minimum.</para>
 	  </listitem>
 	</varlistentry>
-      </variablelist>
-    </listitem>
-  </varlistentry>
 
-  <varlistentry>
-    <term>Maximum Account Cycle Balance</term>
-
-    <listitem>
-      <para>For each account cycle number &lt;n&gt; in the Forecast period
-      the following columns are displayed:</para>
-
-      <variablelist>
 	<varlistentry>
-	  <term>Maximum Balance (Max Bal &lt;n&gt;)</term>
+	  <term>Max Bal &lt;n&gt;</term>
 	  <listitem>
 	    <para>The maximum predicted balance during the account cycle</para>
 	  </listitem>
 	</varlistentry>
+
 	<varlistentry>
-	  <term>Maximum Balance Date (Max Date &lt;n&gt;)</term>
+	  <term>Max Date &lt;n&gt;</term>
 	  <listitem>
-	    <para>The date on which the balance reaches its predicted
-	    maximum.</para>
+	    <para>The date on which the balance reaches its predicted maximum.</para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
+      <para>
+        Note that all the minimum balances and dates are shown before all the maximum
+        balances and dates.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term>Average</term>
-
     <listitem>
       <para>The average balance of the account during the forecast period</para>
     </listitem>
   </varlistentry>
 </variablelist>
-
 </sect2>
 
-<sect2>
-<title>Budget Forecast Tab</title>
+<sect2><title>Budget Forecast Tab</title>
 
 <para>
-  The Budget tab displays a forecast calculation for the Income and Expense categories. The columns are similar to the Summary and Details tabs.
+  The Budget tab displays a forecast calculation for all Income and Expense
+  categories.  Unlike the Summary Tab, there is one colum per month, starting with
+  January of the current year, and ending with the month which includes the end of
+  the Forecast period.  The final column is a total, rather than a predicted value or
+  a value calculated based on any predicted value.
 </para>
-
 </sect2>
 
-<sect2>
-<title>Chart Tab</title>
+<sect2><title>Chart Tab</title>
 
 <para>
-  It displays a chart showing the forecast. The level of detail varies depending on the detail level selected on the option above.
+  This displays the Forecase in a chart or graphical form.  The level of detail
+  varies depending on the detail level selected on the option above.
 </para>
-
 </sect2>
-
 </sect1>
 </chapter>
