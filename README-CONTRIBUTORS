@@ -87,14 +87,14 @@ This is in the order pulled in from index.docbook, with brief note on state of u
 <!ENTITY details-forecast SYSTEM "details-forecast.docbook">
   prelim update complete
   
-<!ENTITY details-settings SYSTEM "details-settings.docbook">
-  prelim update begun
-
 <!ENTITY details-search SYSTEM "details-search.docbook">
-
+  prelim update complete
+  
 <!ENTITY details-formats SYSTEM "details-formats.docbook">
 
 <!ENTITY details-database SYSTEM "details-database.docbook">
+
+<!ENTITY details-settings SYSTEM "details-settings.docbook">
 
 <!ENTITY faq SYSTEM "faq.docbook">
 
@@ -340,3 +340,15 @@ elsewhere.
 - Forecast View, Budget tab seems final column really is Total, not anything
   predicted, and values seem history predicted, even though my Forecast Method is
   Scheduled.
+
+- Search dialog - some tabs say "All"/"None" but some say "Select all"/"Select none."
+  These should be consisstent.
+
+- The Search Dialog Deatils subtab has a problem with vertical alignment.  "Search
+  number in range" is at the vertical midpoint of from and to (looks good) but
+  "Search this number" seems lower than the text field for that number.
+
+- Search results should include (optional) Number column if you can search on it.
+
+- Cant search results be sorted any more?  (Could they ever?)
+

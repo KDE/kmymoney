@@ -13,7 +13,7 @@
 
 <para>
   Tags provide an additional way for you to group and categorize transactions.  They
-  are often useful in <link linkend="details.search.general">searching for
+  are often useful in <link linkend="details.search">searching for
   transactions</link> and for <link linkend="details.reports.avail">creating
   reports</link>.
 </para>

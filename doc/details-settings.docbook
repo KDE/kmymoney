@@ -6,35 +6,33 @@
     <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2023-08-30</date>
+  <date>2023-11-25</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title>&kmymoney; Settings</title>
 
 <para>
-   The settings described below modify the behavior of &kmymoney;, allowing you
-   to customize it to meet the needs of your unique financial affairs, and to
-   modify its look and feel to match your personality.  These settings can be
-   changed through <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-   &kmymoney;...</guimenuitem></menuchoice> menu item or by using the keyboard
-   shortcut <keycombo action="simul">&Ctrl; &Shift;<keycap>,</keycap></keycombo>.
-   In order for any changes to take effect the <guibutton>Apply</guibutton>
-   button must be clicked.
+   The settings described below modify the behavior of &kmymoney;, allowing you to
+   customize it to meet the needs of your unique financial affairs, and to modify its
+   look and feel to match your personality.  These settings can be changed through
+   the <menuchoice> <guimenu>Settings</guimenu> <guimenuitem>Configure
+   &kmymoney;...</guimenuitem> </menuchoice> menu item or by using the keyboard
+   shortcut <keycombo action="simul">&Ctrl; &Shift;<keycap>,</keycap></keycombo>.  In
+   order for any changes to take effect the <guibutton>Apply</guibutton> button must
+   be clicked.
 </para>
 
 <para>
-    On the left of the settings dialog is a list of icons and labels, each
-    representing a particular area of the program.  When you click on one of
-    those icons, the right part of the dialog will display controls for
-    configuring that area of the program, often divided into several tabs.
+    On the left of the <guilabel>Configure</guilabel> or settings dialog is a list of
+    icons and labels, each representing a particular area of the program.  When you
+    click on one of those icons, the right part of the dialog will display controls
+    for configuring that area of the program, often divided into several tabs.
 </para>
 
-<sect1 id="details.settings.general">
-<title>General</title>
+<sect1 id="details.settings.general"><title>General</title>
 
-<sect2 id="details.settings.general.global">
-<title>Global tab</title>
+<sect2 id="details.settings.general.global"><title>Global tab</title>
 
 <variablelist>
   <varlistentry>
