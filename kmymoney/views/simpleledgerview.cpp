@@ -674,7 +674,19 @@ void SimpleLedgerView::setupCornerWidget()
                         d->webSiteButton->setIcon(favIcon);
                         d->webSiteButton->setText(url);
                         d->webSiteButton->setToolTip(i18n("Open website of <b>%1</b> in your browser.", institution.name()));
-                        d->webSiteUrl.setUrl(QString::fromLatin1("https://%1/").arg(url));
+
+                        // we remove all parts of the URL that we provide ourselves first
+                        auto webUrl(url);
+                        auto pos = webUrl.indexOf(QLatin1String("://"));
+                        if (pos != -1) {
+                            webUrl = webUrl.mid(pos + 3);
+                        }
+                        // make sure it has at least one /
+                        pos = webUrl.indexOf(QLatin1Char('/'));
+                        if (pos != -1) {
+                            webUrl.push_back(QLatin1Char('/'));
+                        }
+                        d->webSiteUrl.setUrl(QString::fromLatin1("https://%1").arg(url));
                     }
                 }
             }

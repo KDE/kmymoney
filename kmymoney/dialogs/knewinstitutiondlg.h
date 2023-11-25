@@ -20,6 +20,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+class QLineEdit;
 class MyMoneyInstitution;
 class KJob;
 
@@ -40,7 +41,7 @@ public:
 private Q_SLOTS:
     void okClicked();
     void institutionNameChanged(const QString &);
-    void slotUrlChanged(const QString&);
+    void slotUrlChanged(QLineEdit* edit);
     void slotLoadIcon();
     void slotIconLoaded(KJob* job);
     void killIconLoad();
