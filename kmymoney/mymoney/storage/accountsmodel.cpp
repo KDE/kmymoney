@@ -347,7 +347,7 @@ struct AccountsModel::Private
         return QString::fromUtf8(encodedData);
     }
 
-    bool canDropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent, bool showWarnings) const
+    bool canDropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) const
     {
         Q_UNUSED(action)
         Q_UNUSED(row)
@@ -1276,7 +1276,7 @@ Qt::ItemFlags AccountsModel::flags(const QModelIndex& index) const
         // favorites cannot be moved nor can they receive drops
         if (!isFavoriteIndex(index.parent()) && !isFavoriteIndex(index)) {
             const Qt::ItemFlag dropFlag =
-                d->canDropMimeData(&d->dragAccountId, Qt::MoveAction, index.row(), index.column(), index, false) ? Qt::ItemIsDropEnabled : Qt::NoItemFlags;
+                d->canDropMimeData(&d->dragAccountId, Qt::MoveAction, index.row(), index.column(), index) ? Qt::ItemIsDropEnabled : Qt::NoItemFlags;
             // only non-top-level accounts can be moved
             if (index.parent().isValid()) {
                 return Qt::ItemIsDragEnabled | dropFlag | defaultFlags;
@@ -1293,7 +1293,7 @@ bool AccountsModel::dropMimeData(const QMimeData* data, Qt::DropAction action, i
 {
     d->dragAccountId.clear();
 
-    if (!d->canDropMimeData(data, action, row, column, parent, true)) {
+    if (!d->canDropMimeData(data, action, row, column, parent)) {
         return false;
     }
 
@@ -1308,7 +1308,7 @@ bool AccountsModel::dropMimeData(const QMimeData* data, Qt::DropAction action, i
 
 bool AccountsModel::canDropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) const
 {
-    return d->canDropMimeData(data, action, row, column, parent, true);
+    return d->canDropMimeData(data, action, row, column, parent);
 }
 
 QStringList AccountsModel::mimeTypes() const
