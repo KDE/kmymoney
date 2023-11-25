@@ -59,6 +59,12 @@ KCategoriesView::KCategoriesView(QWidget *parent) :
     connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::profitLossChanged, this, &KCategoriesView::slotProfitLossChanged);
 
     d->m_sharedToolbarActions.insert(eMenu::Action::FileNew, pActions[eMenu::Action::NewCategory]);
+
+    d->ui->m_accountTree->setSelectionMode(QAbstractItemView::SingleSelection);
+    d->ui->m_accountTree->setDragEnabled(true);
+    d->ui->m_accountTree->setAcceptDrops(true);
+    d->ui->m_accountTree->setDropIndicatorShown(true);
+    d->ui->m_accountTree->setDragDropMode(QAbstractItemView::InternalMove);
 }
 
 KCategoriesView::~KCategoriesView()
