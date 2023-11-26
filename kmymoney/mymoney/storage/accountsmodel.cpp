@@ -121,8 +121,7 @@ struct AccountsModel::Private
                     if (q->m_idToItemMapper) {
                         q->m_idToItemMapper->insert(subAccountId, static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer()));
                     }
-                    if (subAccount.value("PreferredAccount") == QLatin1String("Yes")
-                            && !subAccount.isClosed() ) {
+                    if (subAccount.value("PreferredAccount", false) && !subAccount.isClosed()) {
                         q->addFavorite(subAccountId);
                         ++itemCount;
                     }
@@ -891,7 +890,7 @@ QModelIndex AccountsModel::favoriteIndex() const
 
 bool AccountsModel::isFavoriteIndex(const QModelIndex& index) const
 {
-    return (!index.parent().isValid() && (index.row() == 0));
+    return d->isFavoriteIndex(index.parent()) || d->isFavoriteIndex(index);
 }
 
 QModelIndex AccountsModel::assetIndex() const

@@ -47,6 +47,19 @@ AccountsProxyModel::~AccountsProxyModel()
 {
 }
 
+void AccountsProxyModel::setSourceModel(QAbstractItemModel* model)
+{
+    if (sourceModel() != nullptr) {
+        disconnect(sourceModel(), &QAbstractItemModel::rowsInserted, this, &QSortFilterProxyModel::invalidate);
+        disconnect(sourceModel(), &QAbstractItemModel::rowsRemoved, this, &QSortFilterProxyModel::invalidate);
+    }
+    QSortFilterProxyModel::setSourceModel(model);
+    if (sourceModel() != nullptr) {
+        connect(sourceModel(), &QAbstractItemModel::rowsInserted, this, &QSortFilterProxyModel::invalidate);
+        connect(sourceModel(), &QAbstractItemModel::rowsRemoved, this, &QSortFilterProxyModel::invalidate);
+    }
+}
+
 /**
   * This function was re-implemented so we could have a special display order (favorites first)
   */

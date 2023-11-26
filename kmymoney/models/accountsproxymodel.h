@@ -71,6 +71,8 @@ public:
     explicit AccountsProxyModel(QObject *parent = nullptr);
     virtual ~AccountsProxyModel();
 
+    void setSourceModel(QAbstractItemModel* model) override;
+
     void addAccountType(eMyMoney::Account::Type type);
     void addAccountGroup(const QVector<eMyMoney::Account::Type> &groups);
     void removeAccountType(eMyMoney::Account::Type type);
