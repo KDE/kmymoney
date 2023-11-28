@@ -3,253 +3,281 @@
 <chapterinfo>
   <authorgroup>
     <author>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2011-07-21</date>
-  <releaseinfo>4.6</releaseinfo>
+  <date>2023-11-25</date>
+  <releaseinfo>5.2</releaseinfo>
 </chapterinfo>
 
 <title>Database</title>
 
-<sect1 id="details.database.usage">
-<title>Using relational databases</title>
+<sect1 id="details.database.usage"><title>Using relational databases</title>
 
-<sect2>
-<title>Introduction</title>
+<sect2><title>Introduction</title>
+
 <para>
-  As of release 1.0, &kmymoney; allows you to hold your data in a relational
-  database. One of the advantages of using this industry-standard format is that
-  it may allow you to view your data using one of the graphic front ends such as
-  <trademark>OpenOffice.org</trademark> or <trademark>LibreOffice</trademark>,
-  perhaps in some format that &kmymoney; currently doesn't
-  provide. Also, a little knowledge of SQL (Structured Query Language, the
-  language used world-wide to access relational databases) should enable you
-  more easily to export data to an external program, for example, a budgeting
-  application.
+  Since release 1.0, &kmymoney; allows you to hold your data in a relational
+  database.  One of the advantages of using this industry-standard format is that it
+  may allow you to view your data using one of the graphic front ends such as
+  <trademark>OpenOffice.org</trademark> or <trademark>LibreOffice</trademark>, or
+  perhaps in some format that &kmymoney; currently doesn't provide.  Also, a little
+  knowledge of <acronym><ulink url="https://en.wikipedia.org/wiki/SQL">SQL</ulink>
+  </acronym> (<quote>Structured Query Language</quote>, the language used world-wide
+  to access relational databases) should enable you more easily to export data to an
+  external program, for example, a budgeting application.
 </para>
-<para/>
+
+<note>
+  <para>
+    Although most relational database systems allow concurrent access to a database
+    by more than one user, this is not possible with &kmymoney;.  Even though
+    &kmymoney; can store its data in a relational database, it actually behaves as if
+    the database is just a different type of file storage.  When you open your file,
+    the program reads all of the data from the database.  As you work with your data,
+    the changes are made only to the internal storage; they are not immediately
+    written back to the database.  Only when you save your data does &kmymoney; write
+    the entire file back to the database.
+  </para>
+
+  <para>
+    There have been requests for &kmymoney; to update the database for each data
+    change, but this would require a significant change to the entire way the program
+    manages its internal data structures, so this is extremely unlikely to happen in
+    the foreseeable future.
+  </para>
+</note>
 </sect2>
 
 <sect2><title>Preparation</title>
 
 <para>
-  To access the database, &kmymoney; uses the SQL module supplied by &Qt;
-  Software as part of their &Qt; programming system. This module supports a
-  number of different database systems through a collection of drivers. Among
-  the more popular open-source systems for which drivers are available are
-  <trademark>MySQL</trademark>, SQLite (version 3 and upwards only), and PostgreSQL.
-  The module also supports the 'heavier', more industrial, systems such as <trademark
-  class="registered">Oracle</trademark> and IBM <trademark class="registered">DB2</trademark>.
+  To access the database, &kmymoney; uses the SQL module supplied by &Qt; Software as
+  part of their &Qt; programming system.  This module supports many database systems
+  through a collection of drivers.  &Qt; has drivers for a large numeber of open
+  source and proprietary relational database systems, including
+  <trademark>MySQL</trademark>, PostgreSQL, and Sqlcipher.  The module also supports
+  some 'heavier', more industrial, systems such as <trademark
+  class="registered">Oracle</trademark> and IBM <trademark
+  class="registered">DB2</trademark>.
 </para>
 
 <para>
-  With the exception of SQLite, these systems use a client/server model, where
-  the 'client' software sits on 'your' machine, while the server lives on the
-  same machine as the database itself, which may be elsewhere on a network. Of
-  course, in the normal scenario for a personal finance application such as
-  &kmymoney;, 'your' machine acts as both client and server. Your first task
-  therefore, having decided which database system you wish to use, is to install
-  the client, and most probably server, software.
+  Previous versions of &kmymoney; supported <ulink
+  url="https://www.sqlite.org">SQLite</ulink>.  This has been replaced with support
+  for <ulink url="https://www.zetetic.net/sqlcipher">SQLCipher</ulink>, which is a
+  standalone fork of the SQLite database library that adds 256 bit AES encryption and
+  other security features.  The SQLCipher driver will read existing SQLite files.
+</para>
+
+<para>
+  With the exception of SQLCipher, these systems use a client/server model, where the
+  'client' software sits on 'your' machine, while the server lives on the same
+  machine as the database itself, which may be elsewhere on a network. Of course, in
+  the normal scenario for a personal finance application such as &kmymoney;, 'your'
+  machine can act as both client and server.  Your first task therefore, having
+  decided which database system you wish to use, is to install the client, and most
+  probably server, software.
 </para>
 
 <para>
   In addition to the database software itself, you must also install the
-  corresponding &Qt; driver module. Most distributions will include driver
-  modules for the more popular databases. Otherwise, check with the <ulink
-  url="https://www.qt.io/">&Qt; software web site</ulink> and search for
-  'SQL drivers'.
+  corresponding &Qt; driver module.  Most &Linux; distributions will include driver
+  modules for the more popular databases.  Otherwise, check with the <ulink
+  url="https://www.qt.io/">&Qt; software web site</ulink> and search for <quote>SQL
+  drivers</quote>.
+  <!-- FIXME:  what about Windows and macOS? -->
 </para>
 
 <note>
   <para>
-    SQLite does not operate on a client/server model; each database is held in a
-    regular file, local or remote, accessed using the normal methods supplied by
-    the underlying operating system. In this case, therefore, there is only one
-    software package and the driver to install. Also, some of the following information,
-    particularly that related to administration, may not apply to SQLite.
+    SQLCipher and SQLite do not operate on a client/server model; each database is
+    held in a regular file, local or remote, accessed using the normal methods
+    supplied by the underlying operating system.  In this case, therefore, there is
+    only one software package and the driver to install.  Also, some of the following
+    information, particularly that related to administration, may not apply.
   </para>
 </note>
 </sect2>
 
-<sect2>
-<title>Administration</title>
+<sect2><title>Administration</title>
 
 <para>
-  Looking after databases is a little more complex than dealing with regular
-  files. Each system has different methods for performing those necessary
-  administrative tasks such as creating databases, assigning permissions to
-  various users, producing backups, &etc; Describing these tasks is outside the
-  scope of this manual, but all of the supported products provide comprehensive
-  reference documentation, and a quick search of the web will point you at many
-  tutorials on the subject.
+  Looking after databases is a little more complex than dealing with regular files.
+  Each system has different methods for performing those necessary administrative
+  tasks such as creating databases, assigning permissions to various users, or
+  producing backups.  Describing these tasks is outside the scope of this manual, but
+  all of the supported products provide comprehensive reference documentation, and a
+  quick search of the web will point you at many tutorials on the subject.
 </para>
 
-<sect3>
-<title>Creating the database</title>
+<sect3><title>Creating the database</title>
 
 <para>
-  Code has been included to create an initial database to hold your data if one
-  doesn't exist. However, it is strongly recommended that you pre-create a
-  database, because most of the products provide a number of options which may
-  be relevant. One that may be of particular importance to some would be the
-  designation of the character set (&eg;, UTF-8) to be used for text
-  fields.
+  &kmymoney; includes SQL code to create an initial database to hold your data if one
+  doesn't exist.  However, it is strongly recommended that you pre-create a database,
+  because most of the products provide a number of options which may be relevant.
+  One that may be of particular importance to some would be the designation of the
+  character set (&eg;, UTF-8) to be used for text fields.
 </para>
 
 <para>
   At this time, you will also need to specify permissions for various users to
-  perform different operations on the database. In most systems, the user who
-  creates the database will be automatically assigned all permissions, but this
-  is an area in which the documentation should be consulted.
+  perform different operations on the database.  In most systems, the user who
+  creates the database will be automatically assigned all permissions, but this is an
+  area in which the documentation should be consulted.
 </para>
 
 <para>
   For your first use of the database, and occasionally at other times when the
   database layout changes, you will need permission (also called privileges) to
-  create and alter tables and views (see next paragraph). There may be different
+  create and alter tables and views (see next paragraph.)  There may be different
   names for the permission/privilege in different systems, but something like
-  <literal>CREATE</literal> and <literal>ALTER</literal> should be commonplace.
-  For normal running, you will need to be able to read and write records; these
-  are normally defined in SQL as <literal>SELECT</literal>, <literal>INSERT</literal>,
+  <literal>CREATE</literal> and <literal>ALTER</literal> should be commonplace.  For
+  normal running, you will need to be able to read and write records; these are
+  normally defined in SQL as <literal>SELECT</literal>, <literal>INSERT</literal>,
   <literal>UPDATE</literal>, and <literal>DELETE</literal> permissions.
 </para>
 </sect3>
 
-<sect3>
-<title>Creating Tables</title>
+<sect3><title>Creating Tables</title>
 
 <para>
   On your first use, &kmymoney; will attempt to create the necessary table
-  structures. In order to achieve the maximum compatibility between various
-  database types, only a subset of common data types are used. There may
-  nevertheless be situations where a particular type is not supported, and in
-  this case, provision has been made to generate the SQL code necessary to
-  create tables. This code can then be modified as required and used to create
-  the tables outside of &kmymoney;. Should you find yourself in this situation,
-  help can usually be obtained from &devlist;. See <link
-  linkend="details.database.generatesql">Manual Database Creation</link> for more information.
+  structures.  In order to achieve the maximum compatibility between various database
+  types, only a subset of common data types are used.  There may nevertheless be
+  situations where a particular type is not supported, and in this case, provision
+  has been made to generate the SQL code necessary to create the tables.  This code
+  can then be modified as required and used to create the tables outside of
+  &kmymoney;.  Should you find yourself in this situation, help can usually be
+  obtained from one of the channels listed in the section on <link
+  linkend="firsttime.contact">Getting Help</link>.  See <link
+  linkend="details.database.generatesql">Manual Database Creation</link> for more
+  information.
 </para>
 </sect3>
 </sect2>
 
-<sect2 id="details.database.selectdatabase">
-<title>Creating a Database</title>
+<sect2 id="details.database.selectdatabase"><title>Creating a Database</title>
 
 <para>
-  Using &kmymoney;, open or import an existing data file, or create a new
-  one. Then select <menuchoice><guimenu>File</guimenu><guimenuitem>Save as Database</guimenuitem></menuchoice>
-  menu item. This will present the following dialog:
+  Using &kmymoney;, open or import an existing data file, or create a new one.  Then
+  select <menuchoice><guimenu>File</guimenu><guimenuitem>Save as
+  Database</guimenuitem></menuchoice> menu item.  Select <guilabel>SQL</guilabel>
+  from the <guilabel>Storage type to use for your data</guilabel> dropdown, and click
+  <guibutton>OK</guibutton>.
+  You will then see the following dialog:
 </para>
 
 <screenshot>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="select_database.png" format="PNG" />
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="select_database.png" format="PNG" />
+    </imageobject>
   </mediaobject>
 </screenshot>
 
 <para>
-  Complete the fields appropriate to the database type you have selected
-  (as usual, mandatory fields will be highlighted)
-  and click <guibutton>OK</guibutton> to create the database.
+  Complete the fields appropriate to the database type you have selected (as usual,
+  mandatory fields will be highlighted) and click <guibutton>OK</guibutton> to create
+  the database.
 </para>
 
-<sect3>
-<title>Database Type</title>
+<sect3><title>Database Type</title>
 
 <para>
-  This box lists all &Qt; SQL drivers installed on your system. Select the
-  driver for your database type. If the one you want is not in the list, you
-  need to install the appropriate driver. See your distribution documentation,
-  or visit the <ulink url="https://www.qt.io/">&Qt; software web site</ulink>
-  and search for 'SQL drivers'.
+  This box lists all the &Qt; SQL drivers installed on your system.  Select the
+  driver for your database type.  If the one you want is not in the list, you need to
+  install the appropriate driver.  See your distribution documentation, or visit the
+  <ulink url="https://www.qt.io/">&Qt; software web site</ulink> and search for 'SQL
+  drivers'.
 </para>
 </sect3>
 
-<sect3>
-<title>File (SQLite only)</title>
+<sect3><title>File (SQLite only)</title>
+
 <para>
-  SQLite has one database per file so enter the filename in which you wish to
-  create the database.  To browse the file system, click the icon to the right
-  of the filename.  For SQLite databases, the <guilabel>Host name</guilabel>,
-  <guilabel>Username</guilabel>, and <guilabel>Password</guilabel> fields are
-  not relevant. The SQLite file must have the appropriate read/write permissions
-  set by the underlying file system to enable the appropriate access for the
-  currently logged-in user.
+  SQLCipher has one database per file so enter the filename in which you wish to
+  create the database.  To browse the file system, click the icon to the right of the
+  filename.  For SQLCipher databases, the <guilabel>Database Name</guilabel>,
+  <guilabel>Host name</guilabel>, <guilabel>Username</guilabel> fields are not
+  relevant. The SQLCipher file must have the appropriate read/write permissions set
+  by the underlying file system to enable the appropriate access for the currently
+  logged-in user.
 </para>
 </sect3>
 
 <sect3>
 <title>Database name (others)</title>
 <para>
-  The default database name is <literal>KMyMoney</literal>, but you may choose some other
-  name if you like. For some database types, &kmymoney; may not be able to create the
-  database, so it must be pre-created using the appropriate administrative procedure.
-  However, &kmymoney; will usually be able to create all table structures where necessary.
-  If not, you can create them yourself. See <link linkend="details.database.generatesql">Manual
-  Database Creation</link> for more information.
+  The default database name is <literal>KMyMoney</literal>, but you may choose some
+  other name if you like.  For some database types, &kmymoney; may not be able to
+  create the database, so it must be pre-created using the appropriate administrative
+  procedure.  However, &kmymoney; will usually be able to create all table structures
+  where necessary.  If not, you can create them yourself.  See <link
+  linkend="details.database.generatesql">Manual Database Creation</link> for more
+  information.
 </para>
 </sect3>
 
 <sect3><title>Host name</title>
+
 <para>
   For the average user, the default name of <quote>localhost</quote>, being the
-  machine you are currently using, is correct. For networked databases, enter
-  the connected host name.
+  machine you are currently using, is correct.  For networked databases, enter the
+  connected host name of the database server.
 </para>
-
 </sect3>
 
-<sect3>
-<title>User name and password</title>
+<sect3><title>User name and password</title>
+  
 <para>
   Check the permissions set up on your database, or contact the database
-  administrator, for the correct values to use here. The user name must be
-  capable of selecting, inserting, updating, and deleting records. If the user
-  name is the same as your login name, a password is not normally required.
+  administrator, for the correct values to use here.  The user name must be capable
+  of selecting, inserting, updating, and deleting records.  If the user name is the
+  same as your login name, a password is not normally required.
 </para>
 </sect3>
 </sect2>
 
-<sect2>
-<title>Accessing your data</title>
+<sect2><title>Accessing your data</title>
 
-<sect3>
-<title>Table design</title>
+<sect3><title>Table design</title>
 
 <para>
-  To access your data in &kmymoney;, use the <menuchoice><guimenu>File</guimenu><guimenuitem>Open
-  Database</guimenuitem></menuchoice> menu item. This will
-  open a dialog similar to the above.
+  To access your data in &kmymoney;, use the <menuchoice> <guimenu>File</guimenu>
+  <guimenuitem>Open Database</guimenuitem> </menuchoice> menu item. This will open a
+  dialog similar to the above.
 </para>
 
 <note>
-<para>
-  If you created your database by first opening a file, and then doing
-  <guimenuitem>Save as Database</guimenuitem>, as described above, then any
-  subsequent changes to your data are saved only in the database, not in the
-  file.  This means that you can use the file as a backup or snapshot of your
-  data at a particular time.  To make a new backup like this, open your
-  database, choose the <menuchoice><guimenu>File</guimenu><guimenuitem>Save
-  As...</guimenuitem></menuchoice> menu item, giving an appropriate file name.  Remember
-  to re-open your database, so &kmymoney; does not continue to use the file.
-</para>
+  <para>
+  If you created your database by first opening a file, and then doing <guimenu>File</guimenu>
+    <guimenuitem>Save</guimenuitem> and choosing
+    <guilabel>SQL</guilabel> as described above, then any subsequent changes to your
+    data are saved only in the database, not in the file.  This means that you can use
+    the file as a backup or snapshot of your data at a particular time.  To make a new
+    backup like this, open your database, choose the <menuchoice>
+    <guimenu>File</guimenu> <guimenuitem>Save As...</guimenuitem></menuchoice> menu
+    item, chose <guilabel>XML</guilabel> as the storage type, and giving an
+    appropriate file name.  Remember to re-open your database, so &kmymoney; does not
+    continue to use the file.
+  </para>
 </note>
 
 <para>
-  To access your data in other formats, you will need to know a little about how
-  it is held in relational databases. By far the easiest way to get a feel for
-  this is to open the database in a front-end such as <trademark>OpenOffice.org</trademark>.
-  This provides a list of the various tables which make up the database, and
-  enables you to see the layout of each of them.
+  To access your data in other formats, you will need to know a little about how it
+  is held in relational databases.  By far the easiest way to get a feel for this is
+  to open the database in a front-end such as <trademark>OpenOffice.org</trademark>.
+  This provides a list of the various tables which make up the database, and enables
+  you to see the layout of each of them.
 </para>
 
 <para>
-  To extract data, &eg;, into a spreadsheet or external file, it is almost
-  invariably necessary to select linked data from more than one table. This is
-  done by 'joining' the tables, using a field which is common to each. You can
+  To extract data, &eg;, into a spreadsheet or external file, it is almost invariably
+  necessary to select linked data from more than one table.  This is done by
+  <quote>joining</quote> the tables, using a field which is common to them. You can
   find a lot more information about how this is done from the online database
-  tutorials mentioned above. The following table lists the fields used to define
+  tutorials mentioned above.  The following table lists the fields used to define
   these inter-table relationships.
 </para>
 
@@ -387,6 +415,11 @@
   Notes:
 </para>
 
+<!-- FIXME:  can anyone explain why we should use these character codes?
+     &#x2013 en dash
+     &#x201C left double quote
+     &#x201D right double quote
+-->
 <para>
   1 &#x2013; txType = &#x201C;N&#x201D; for normal transactions,
   &#x201C;S&#x201D; for scheduled transactions
@@ -397,128 +430,133 @@
 </para>
 </sect3>
 
-<sect3>
-<title>Field formats</title>
+<sect3><title>Field formats</title>
 
 <para>
   Several of the data fields are held in an internal format which may not be
-  immediately useful to external programs. In these cases, the information has
-  been duplicated in both internal and external formats.
+  immediately useful to external programs.  In these cases, the information has been
+  duplicated in both internal and external formats.
 </para>
 
 <para>
-  Monetary amounts and share values are shown both in numerator/denominator
-  format, and, with a field name suffixed with '<literal>Formatted</literal>',
-  in the form as shown on your screens.
+  Monetary amounts and share values are shown both in numerator/denominator format,
+  and, with a field name suffixed with <quote> <literal>Formatted</literal> </quote>,
+  in the form as typically displayed.
 </para>
 
 <para>
-  Similarly, some fields, such as account type appear both as a numeric code,
-  and in a field suffixed '<literal>String</literal>' in the form and language
-  of the application.
-</para>
-</sect3>
-
-<sect3>
-<title>Updating your data</title>
-
-<para>
-  Having data in an industry standard format does give you the ability to modify
-  it outside the &kmymoney; application. DO NOT DO IT unless you really know
-  what you are doing, and always be certain to make a backup copy of your data
-  first. If you get it wrong, &kmymoney; may not be able to access your data,
-  and you could even end up losing it altogether. You have been warned!
+  Similarly, some fields, such as account type appear both as a numeric code, and in
+  a field suffixed '<literal>String</literal>' in the form and language of the
+  application.
 </para>
 </sect3>
 
-<sect3>
-<title>Stored queries</title>
+<sect3><title>Updating your data</title>
 
 <para>
-  Most database systems allow you to store commonly used queries and procedures,
-  and in some cases, these may be held as tables or other objects within your
-  database itself. As you will have guessed from the above, all the tables used
-  by &kmymoney; begin with the lowercase letters '<literal>kmm</literal>'. This
-  standard will be maintained, and only tables beginning with these letters will
-  be updated. Thus, provided you avoid these in the naming of your queries &etc;,
-  you should not experience any problems.
+  Having data in an industry standard format does give you the ability to modify it
+  outside the &kmymoney; application.  DO NOT DO IT unless you really know what you
+  are doing, and always be certain to make a backup copy of your data first.  If you
+  get it wrong, &kmymoney; may not be able to access your data, and you could even
+  end up losing it altogether.  You have been warned!
+</para>
+</sect3>
+
+<sect3><title>Stored queries</title>
+
+<para>
+  Most database systems allow you to store commonly used queries and procedures, and
+  in some cases, these may be held as tables or other objects within your database
+  itself.  As you will have guessed from the above, all the tables used by &kmymoney;
+  begin with the lowercase letters '<literal>kmm</literal>'.  This standard will be
+  maintained, and only tables beginning with these letters will be updated.  Thus,
+  provided you avoid these in the naming of your queries &etc;, you should not
+  experience any problems.
 </para>
 </sect3>
 </sect2>
 
-<sect2 id="details.database.generatesql">
-<title>Manual database creation</title>
+<sect2 id="details.database.generatesql"><title>Manual database creation</title>
+
 <note>
   <para>
     This section covers more advanced database usage and may be skipped by the general user.
   </para>
 </note>
 
-<sect3>
-<title>When to use</title>
+<sect3><title>When to use</title>
+
 <para>
-  There may be occasions when &kmymoney; is unable to create the database automatically, or creates it without some
-  options required by the user. For example, the database system used may not completely conform
-  to standard SQL usage, or support may be introduced for new systems which have not been fully tested in &kmymoney;.
+  There may be occasions when &kmymoney; is unable to create the database
+  automatically, or creates it without some options required by the user.  For
+  example, the database system used may not completely conform to standard SQL usage,
+  or support may be introduced for new systems which have not been fully tested in
+  &kmymoney;.
 </para>
+
 <para>
-  Prior to using this facility, you should try just creating the database
-  entry itself (&ie; with the <literal>CREATE DATABASE</literal> statement).
-  Provided the database exists, &kmymoney; may well be able to create the
-  tables, &etc; in the normal database save procedure described above.
+  Prior to using this facility, you should try just creating the database entry
+  itself (&ie; with the <literal>CREATE DATABASE</literal> statement).  Provided the
+  database exists, &kmymoney; may well be able to create the tables, &etc; in the
+  normal database save procedure described above.
 </para>
 </sect3>
 
-<sect3>
-<title>Generating the SQL</title>
+<sect3><title>Generating the SQL</title>
+
 <para>
-  If this fails, it is possible to generate the basic SQL commands needed to
-  create the various tables, views and indexes required by the application.
-  Select the <menuchoice><guimenu>Tools</guimenu><guimenuitem>Generate Database
-  SQL</guimenuitem></menuchoice> menu item. This will present the following dialog:
+  If this fails, it is possible to generate the basic SQL commands needed to create
+  the various tables, views, and indexes required by the application.  Select the
+  <menuchoice> <guimenu>Tools</guimenu> <guimenuitem>Generate Database
+  SQL</guimenuitem> </menuchoice> menu item. This will present the following dialog:
 </para>
+
 <screenshot>
   <mediaobject>
-  <imageobject>
-  <imagedata fileref="generate_sql.png" format="PNG" />
-  </imageobject>
+    <imageobject>
+      <imagedata fileref="generate_sql.png" format="PNG" />
+    </imageobject>
   </mediaobject>
 </screenshot>
 
 <para>
-  On selecting the database type, the appropriate SQL will appear in the <guilabel>SQL for creation</guilabel> text box; this can be edited by the user,
-  or saved to a text file by clicking <guibutton>Save SQL</guibutton>. In the latter case, the database
-  must be created using the administrative functions provided by the database system.
+  On selecting the database type, the appropriate SQL will appear in the
+  <guilabel>SQL for creation</guilabel> text box; this can be edited by the user, or
+  saved to a text file by clicking <guibutton>Save SQL</guibutton>.  In the latter
+  case, the database must be created using the administrative functions provided by
+  the database system.
 </para>
+
 <para>
-  If after editing the text in the dialog, you want &kmymoney; to create the database,
-  you will need to complete the other fields in the dialog, as detailed in <link
-  linkend="details.database.selectdatabase">Creating a Database</link> above,
-  and click <guibutton>Create Tables</guibutton>. Note that, except in the case of
-  SQLite, you will need either to include a suitable <literal>CREATE DATABASE</literal> statement
-  as the first command, or have previously issued such a command externally to &kmymoney;.
+  If after editing the text in the dialog, you want &kmymoney; to create the
+  database, you will need to complete the other fields in the dialog, as detailed in
+  <link linkend="details.database.selectdatabase">Creating a Database</link> above,
+  and click <guibutton>Create Tables</guibutton>.  Note that, except in the case of
+  SQLite, you will need either to include a suitable <literal>CREATE
+  DATABASE</literal> statement as the first command, or have previously issued such a
+  command externally to &kmymoney;.  <!-- FIXME:  to KMM or to the RDBMS? -->
 </para>
 </sect3>
 
-<sect3>
-<title>Warning</title>
+<sect3><title>Warning</title>
+
 <para>
-  You should be very careful editing the definitions of any of the basic tables or views
-  (those with names beginning with '<literal>kmm</literal>'). Some changes,
-  such as increasing the length of an integer field, may have little impact, but you should not
-  remove or change the sequence of any fields, or &kmymoney; may refuse to function, or may corrupt your data.
+  You should be very careful editing the definitions of any of the basic tables or
+  views (those with names beginning with '<literal>kmm</literal>'.)  Some changes,
+  such as increasing the length of an integer field, may have little impact, but you
+  should not remove or change the sequence of any fields, or &kmymoney; may refuse to
+  function, or may corrupt your data.
 </para>
+
 <para>
-  Whilst adding or removing indexes may improve performance, you should also be aware that the opposite
-  may happen. Some knowledge of the internal operation of &kmymoney; may help to get the
-  best performance in these circumstances.
+  While adding or removing indexes may improve performance, you should also be aware
+  that the opposite may happen.  Some knowledge of the internal operation of
+  &kmymoney; may help to get the best performance in these circumstances.
 </para>
 </sect3>
-
 </sect2>
 
-<sect2>
-<title>Encryption</title>
+<sect2><title>Encryption</title>
 
 <para>
   Encryption of data in your database is not currently supported.

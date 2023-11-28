@@ -13,10 +13,10 @@
 <title>&kmymoney; Settings</title>
 
 <para>
-   The settings described below modify the behavior of &kmymoney;, allowing you to
-   customize it to meet the needs of your unique financial affairs, and to modify its
-   look and feel to match your personality.  These settings can be changed through
-   the <menuchoice> <guimenu>Settings</guimenu> <guimenuitem>Configure
+   The settings described in this chapter modify the behavior of &kmymoney;, allowing
+   you to customize it to meet the needs of your unique financial affairs, and to
+   modify its look and feel to match your personality.  These settings can be changed
+   through the <menuchoice> <guimenu>Settings</guimenu> <guimenuitem>Configure
    &kmymoney;...</guimenuitem> </menuchoice> menu item or by using the keyboard
    shortcut <keycombo action="simul">&Ctrl; &Shift;<keycap>,</keycap></keycombo>.  In
    order for any changes to take effect the <guibutton>Apply</guibutton> button must

@@ -91,11 +91,14 @@ This is in the order pulled in from index.docbook, with brief note on state of u
   prelim update complete
   
 <!ENTITY details-formats SYSTEM "details-formats.docbook">
+  prelim update complete
 
 <!ENTITY details-database SYSTEM "details-database.docbook">
+  prelim update complete
 
 <!ENTITY details-settings SYSTEM "details-settings.docbook">
-
+  prelim update begun
+  
 <!ENTITY faq SYSTEM "faq.docbook">
 
 <!ENTITY reference SYSTEM "reference.docbook">
@@ -352,3 +355,9 @@ elsewhere.
 
 - Cant search results be sorted any more?  (Could they ever?)
 
+- Need to mention in file formats chapter that all data files can be stored locally
+  or on a network share.  Also mention mounting the share is often an issue on Windows.
+
+- what does File/Backup do if SQL is the current file type?
+
+- 
