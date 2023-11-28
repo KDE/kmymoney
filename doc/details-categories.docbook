@@ -117,12 +117,9 @@
 </para>
 
 <para>
-<!-- not ported to kde4 yet, much less Frameworks.  Uncomment once that is done.
-     See https://bugs.kde.org/show_bug.cgi?id=272737 
-     You can also change the parent category from the main category page by
-     dragging the category to a different parent. -->
-  The Hierarchy tab allows you to change the parent of a category by clicking on
-  another category which then becomes the parent.
+  The Hierarchy tab allows you to change the parent of the selected category by
+  clicking on another category which then becomes the parent.  In addition, you can
+  drag a category and drop it under its new parent.
 </para>
 
 <para>
