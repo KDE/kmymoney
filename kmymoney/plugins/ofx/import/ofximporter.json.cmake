@@ -92,7 +92,7 @@
         "Name[sk]": "OFX Importer",
         "Name[sl]": "Uvoznik OFX",
         "Name[sv]": "QFX-import",
-        "Name[tr]": "OFX İçe Aktarıcı",
+        "Name[tr]": "OFX İçe Aktarıcısı",
         "Name[uk]": "Інструмент імпортування OFX",
         "Name[x-test]": "xxOFX Importerxx",
         "Name[zh_CN]": "OFX 导入工具",

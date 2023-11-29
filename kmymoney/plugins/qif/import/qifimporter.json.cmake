@@ -92,7 +92,7 @@
         "Name[sk]": "QIF Importer",
         "Name[sl]": "Uvoznik QIF",
         "Name[sv]": "QIF-import",
-        "Name[tr]": "QIF İçe Aktarıcı",
+        "Name[tr]": "QIF İçe Aktarıcısı",
         "Name[uk]": "Інструмент імпортування QIF",
         "Name[x-test]": "xxQIF Importerxx",
         "Name[zh_CN]": "QIF 导入工具",

@@ -90,7 +90,7 @@
         "Name[sk]": "Pohľad rozpočtu ",
         "Name[sl]": "Pogled na proračun",
         "Name[sv]": "Budgetvy",
-        "Name[tr]": "Bütçe görünümü",
+        "Name[tr]": "Bütçe Görünümü",
         "Name[uk]": "Панель бюджету",
         "Name[x-test]": "xxBudget viewxx",
         "Name[zh_CN]": "预算视图",

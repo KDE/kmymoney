@@ -91,7 +91,7 @@
         "Name[sk]": "Pohľad výpisov",
         "Name[sl]": "Pogled poročil",
         "Name[sv]": "Rapportvy",
-        "Name[tr]": "Rapor görünümü",
+        "Name[tr]": "Rapor Görünümü",
         "Name[uk]": "Перегляд звітів",
         "Name[x-test]": "xxReports viewxx",
         "Name[zh_CN]": "报表视图",
