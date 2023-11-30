@@ -7808,11 +7808,7 @@ msgstr[0] "%1 problemo persistanta."
 msgstr[1] "%1 problemoj persistantaj."
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2497
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "%1 is a string, e.g. 7 problems corrected; %2 is a string, e.g. 3 "
-#| "problems ¦still present"
-#| msgid "Finished: %1 %2"
+#, kde-format
 msgctxt ""
 "%1 is a string, e.g. 7 problems corrected; %2 is a string, e.g. 3 problems "
 "still present"
@@ -9538,11 +9534,7 @@ msgstr ", "
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:106
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:109
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@label The first argument is the amount in words, the second is the "
-#| "¦fractional part and the third is the denominator of the fractional part"
-#| msgid "%1 and %2/%3"
+#, kde-format
 msgctxt ""
 "@label The first argument is the amount in words, the second is the "
 "fractional part and the third is the denominator of the fractional part"
@@ -10724,11 +10716,7 @@ msgstr "Malplenigi"
 #. i18n: ectx: property (text), widget (QLabel, lblpriceFraction)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:298
 #: kmymoney/plugins/csv/import/priceswizardpage.ui:195
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "noun, conversion fraction/multiplier to use to make compatible the csv "
-#| "¦pricing with KMM pricing."
-#| msgid "Price Fraction"
+#, kde-format
 msgctxt ""
 "noun, conversion fraction/multiplier to use to make compatible the csv "
 "pricing with KMM pricing."
