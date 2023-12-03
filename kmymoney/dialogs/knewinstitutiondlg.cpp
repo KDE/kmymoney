@@ -212,7 +212,7 @@ void KNewInstitutionDlg::slotLoadIcon()
     if (matcher.hasMatch()) {
         d->ui->iconButton->setEnabled(true);
         d->m_url = QUrl(QString::fromLatin1("https://%1").arg(path));
-        d->m_favIconJob = new KIO::FavIconRequestJob(d->m_url);
+        d->m_favIconJob = new KIO::FavIconRequestJob(d->m_url, KIO::Reload);
         connect(d->m_favIconJob, &KIO::FavIconRequestJob::result, this, &KNewInstitutionDlg::slotIconLoaded);
         // we force to end the job after 1 second to avoid blocking this mechanism in case the thing fails
         QTimer::singleShot(1000, this, &KNewInstitutionDlg::killIconLoad);
