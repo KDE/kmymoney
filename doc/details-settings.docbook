@@ -6,307 +6,435 @@
     <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
     <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2023-11-25</date>
+  <date>2023-11-30</date>
   <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title>&kmymoney; Settings</title>
 
 <para>
-   The settings described in this chapter modify the behavior of &kmymoney;, allowing
-   you to customize it to meet the needs of your unique financial affairs, and to
-   modify its look and feel to match your personality.  These settings can be changed
-   through the <menuchoice> <guimenu>Settings</guimenu> <guimenuitem>Configure
-   &kmymoney;...</guimenuitem> </menuchoice> menu item or by using the keyboard
-   shortcut <keycombo action="simul">&Ctrl; &Shift;<keycap>,</keycap></keycombo>.  In
-   order for any changes to take effect the <guibutton>Apply</guibutton> button must
-   be clicked.
+  The settings described in this chapter modify the behavior of &kmymoney;, allowing
+  you to customize it to meet the needs of your unique financial affairs, and to
+  modify its look and feel to match your personality.  These settings can be changed
+  through the <menuchoice> <guimenu>Settings</guimenu> <guimenuitem>Configure
+  &kmymoney;...</guimenuitem> </menuchoice> menu item or by using the keyboard
+  shortcut <keycombo action="simul">&Ctrl; &Shift;<keycap>,</keycap></keycombo>.  In
+  order for any changes to take effect the <guibutton>Apply</guibutton> button must
+  be clicked.
 </para>
 
 <para>
-    On the left of the <guilabel>Configure</guilabel> or settings dialog is a list of
-    icons and labels, each representing a particular area of the program.  When you
-    click on one of those icons, the right part of the dialog will display controls
-    for configuring that area of the program, often divided into several tabs.
+  On the left of the <guilabel>Configure</guilabel> or settings dialog is a list of
+  icons and labels, each representing a particular area of the program.  When you
+  click on one of those icons, the right part of the dialog will display controls for
+  configuring that area of the program, often divided into several tabs.
 </para>
 
 <sect1 id="details.settings.general"><title>General</title>
 
 <sect2 id="details.settings.general.global"><title>Global tab</title>
 
+<screenshot>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_global.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>general config global tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
+<!-- I would prefer to use a more consistent hierarchy and use of levels on this
+     page, but for now, I'm minimizing changes. -->
 <variablelist>
   <varlistentry>
     <term><guilabel>Autosave options</guilabel></term>
-<!-- I would prefer to use a more consistent hierarchy and use of levels on this
-     page, but for now, I'm minimizing changes. -->
     <listitem>
-      <para>Checking the <guilabel>Autosave periodically</guilabel> box instructs
-      &kmymoney; to autosave your files at a defined interval.  The default value is
-      10 minutes.  You can change this setting from 0 (backup immediately after
-      entering a transaction) up to 60 minutes.</para>
+      <para>
+        An autosave file is just a copy of your data file.  The main point of these
+        is that they are automatically created, according to the configuration
+        settings, so you do not need to remember to take any action.  Any autosave
+        files created will be in the same directory as the data file currently open.
+      </para>
 
-      <para>Checking the <guilabel>Autosave when file is modified upon close</guilabel> box
-      instructs &kmymoney; to autosave your file when the program is closed. You also have the
-      option upon closing the program to backup your &kmymoney; file.  The Number of backup to
-      keep can be set at 0 (Off) upto to 20 backups.  Any backup files will be stored in the same
-      folder as the main file.  They will be labeled sequentially with 1 being the most current.</para>
+      <para>
+        Checking the <guilabel>Autosave periodically</guilabel> box instructs
+        &kmymoney; to automatically save your file at the interval defined by the
+        <guilabel>minutes</guilabel> field.  The default value is 10 minutes.  You
+        can change this setting from 0 (autosave immediately after entering a
+        transaction) up to 60 minutes.
+      </para>
+
+      <para>
+        Checking the <guilabel>Autosave when file is modified upon close</guilabel>
+        box instructs &kmymoney; to autosave your file when the program is closed,
+        but only if any changes have been made.  You also have the option upon
+        closing the program to backup your &kmymoney; file.
+      </para>
+
+      <para>
+        The <guilabel>Number of backup to keep</guilabel> can be set from 0 (Off) up
+        to to 20.  The autosave files will be stored in the same folder as the main
+        file.  If your data file is MyFinances.kmy, then when an autosave file is
+        created, it will be called MyFinances.kmy.1~.  Any existing autosave files
+        will have their number increased by 1, up to the specified number.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Fiscal Year</guilabel></term>
     <listitem>
-      <para>Enter the day and month of your fiscal year.  This value is used for
-      budgets and some reports.</para>
+      <para>
+        &kmymoney; allows you to specify a fiscal year different from the calendar
+        year.  To do so, enter the day and month on which your fiscal year begins.
+        This value is used for budgets and some reports.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>External programs</guilabel></term>
     <listitem>
-      <para>This setting does not directly affect the operation of &kmymoney;,
-      but provides a convenient way to launch any external utility, such as an
-      advanced calculator.  The first step is to enter the full path to your
-      chosen program in the <guilabel>Calculator</guilabel> text box.  There are
-      then two ways to launch the program.</para>
-      <para>First, you can use
-      <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-      Toolbars...</guimenuitem></menuchoice> menu item to place the
-      <guilabel>Calculator</guilabel> icon on the Toolbar.  Then, when you click
-      that icon on the Toolbar, &kmymoney; will launch the selected
-      application.</para>
-      <!-- FIXME since the Settings menu is deferred to the Frameworks docs and
-           not explicitly described in this manual, it would at least be nice to
-           refer to the actual Calculator icon here, but I cannot find the
-           source png.  It might also be nice to have a link to Settings Menu
-           doc page. -->
-      <para>Second, you can use
-      <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-      Shortcuts...</guimenuitem></menuchoice> menu item to set a custom keyboard
-      shortcut. (The entry is under &kmymoney;/Calculator in that list.)  You can
-      then use that shortcut to launch the application.</para>
-      <!-- FIXME is not currently possible to launch the calculator from some menu
+      <para>
+        This setting does not directly affect the operation of &kmymoney;, but
+        provides a convenient way to launch any external utility, such as an advanced
+        calculator.  The first step is to enter the full path to your chosen program
+        in the <guilabel>Calculator</guilabel> text box.  There are then two ways to
+        launch the program.
+      </para>
+
+      <para>
+        First, you can use <menuchoice> <guimenu>Settings</guimenu>
+        <guimenuitem>Configure Toolbars...</guimenuitem> </menuchoice> menu item to
+        place the <guilabel>Calculator</guilabel> icon on the Toolbar.  Then, when
+        you click that icon on the Toolbar, &kmymoney; will launch the selected
+        application.
+      </para>
+      <!-- FIXME:  need to find and use the toolbar icon for the calculator. -->
+
+      <para>
+        Second, you can use <menuchoice> <guimenu>Settings</guimenu>
+        <guimenuitem>Configure Shortcuts...</guimenuitem> </menuchoice> menu item to
+        set a custom keyboard shortcut. (The entry is under &kmymoney;/Calculator in
+        that list.)  You can then use that shortcut to launch the application.
+      </para>
+      <!-- FIXME it is not currently possible to launch the calculator from some menu
            item.  I have filed a wishlist, and when implemented, it should be
            described here, probably as the first choice. -->
-      <para>
-      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.general.views">
-<title>Views tab</title>
+<sect2 id="details.settings.general.views"><title>Views tab</title>
+
+<screenshot>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_views.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>general config views tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
 
 <variablelist>
   <varlistentry>
     <term><guilabel>Startup page options</guilabel></term>
     <listitem>
-      <para>When &kmymoney; starts up, this option indicates whether to start
-      with the Home View or with the view displayed when the program was last
-      closed.</para>
+      <para>
+        When &kmymoney; starts up, this option indicates whether to start with the
+        Home View (<guilabel>Start with homepage</guilabel>) or with the view
+        displayed when the program was last closed (<guilabel>Start with last
+        selected view</guilabel>.)
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
   <term><guilabel>Type of the &kmymoney; view</guilabel></term>
     <listitem>
-      <para> You can select one of three general layouts for &kmymoney; to use.  If
-      you select the List or Tree view, the icons and their labels will be located at
-      the left side of the window.  The List view displays larger icons while the Tree
-      view has smaller icons.  The Tabbed view locates the icons and labels across
-      the top of the window.</para>
+      <para>
+        You can select one of three general layouts for &kmymoney; to use.  If you
+        select <guilabel>List</guilabel> or <guilabel>Tree</guilabel> view, the icons
+        and their labels will be located at the left side of the window.  The List
+        view displays larger icons while the Tree view has smaller icons.  The
+        <guilabel>Tabbed</guilabel> view locates the icons and labels across the top
+        of the window.
+        <!-- FIXME: this should better state that this controls the layout of the
+             Vew Selector area where you select which View to display.  -->
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Show title bar on each page</guilabel></term>
+    <term>
+      <guilabel>
+        Synchronize account selection of ledger and investment view
+      </guilabel>
+    </term>
     <listitem>
-      <para>Checking this box will display the blue &kmymoney; title bar across the
-      top of each page.  Unchecking it will remove the title bar and provide a larger
-      area for viewing the content of each page.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Synchronize account selection of ledger and investment
-    view</guilabel></term>
-    <listitem>
-      <para>If this option is selected, the accounts displayed in the Ledger View and
-      Investment View will be synchronized, meaning if you change the account
-      displayed in one of the views, and then switch to the other view, the
-      information for the same account will be displayed.  This increases the
-      efficiency of navigating between these 2 tab views.  If it is not selected,
-      selecting either of those views will show the same account previously selected
-      in that view, regardless of the account selected in the other view.</para>
+      <para>
+        If this option is selected, the accounts displayed in the Ledger View and
+        Investment View will be synchronized, meaning if you change the account
+        displayed in one of the views, and then switch to the other view, the
+        information for the same account will be displayed.  This increases the
+        efficiency of navigating between these 2 tab views.  If it is not selected,
+        selecting either of those views will show the same account previously
+        selected in that view, regardless of the account selected in the other view.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
 </sect2>
 
-<sect2 id="details.settings.general.filter">
-<title>Filter tab</title>
+<sect2 id="details.settings.general.filter"><title>Filter tab</title>
 
-<sect3>
-<title>Accounts / Categories</title>
+<screenshot>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_filter.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>general config filter tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <variablelist>
   <varlistentry>
-    <term><guilabel>Do not show unused categories</guilabel></term>
+    <term>Accounts / Categories</term>
     <listitem>
-      <para>Checking this box hides unused categories in the Categories View.  A
-      hidden category is still available should a transaction require it.  By typing
-      a hidden category in the ledger it will become available for use.</para>
+      <para>Checking the <guilabel>Do not show unused categories</guilabel> box hides
+      unused categories in the Categories View.  A hidden category is still available
+      should a transaction require it.  By typing a hidden category in the ledger it
+      will become available for use.
+      </para>
+
+      <para>
+        Equity accounts are used to track individual equities or investments held in
+        an Investment Account.  These should not be confused with the top level
+        <emphasis>Equity</emphasis> group of accounts, which includes the account(s)
+        which contain the opening balances for other accounts.  By default, equity
+        accounts are hidden in the Accounts View.  Checking the <guilabel>Show equity
+        accounts</guilabel> box will display the equity accounts in the Accounts
+        View.
+      </para>
+
+      <para>
+        By default, Categories are hidden in the Accounts View.  Checking the
+        <guilabel>Show categories in the accounts list view</guilabel> will display
+        the Categories in the Accounts View.
+      </para>
+
+      <para>
+        Checking the <guilabel>Do not show zero balance equities</guilabel> box will
+        remove any zero balance equity accounts from appearing in the Accounts View.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry> 
+    <term>Schedules</term>
+    <listitem>
+      <para>
+        Checking the <guilabel>Do not show finished schedules</guilabel> box hide all
+        finished schedules from appearing in the Scheduled transaction View.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Show equity accounts</guilabel></term>
+    <term>Transactions</term>
     <listitem>
-      <para>By default, equity accounts are hidden in the Accounts View.  Selecting
-      this option will display the equity accounts in the Accounts View.  Equity
-      accounts are used to track individual equities or investments held in an
-      Investment Account.  This should not be confused with the top level
-      <emphasis>Equity</emphasis> group of accounts, which includes the account(s)
-      which contain the opening balances for other accounts.</para>
-    </listitem>
-  </varlistentry>
+      <para>
+        Transactions prior to the date in the <guilabel>Do not show transaction prior
+        to</guilabel> field will not be displayed in the Ledger View.  This can be
+        useful if your data includes many years of transactions; setting this to one
+        or two years ago hides older transactions.
+      </para>
+      
+      <para>
+        Setting this option to January 1, 1900 (the default value) is a good way to
+        debug date-related data import problems, in case some dates were erroneously
+        very far in the past.
+      </para>
 
-  <varlistentry>
-  <term><guilabel>Show categories in the accounts list view</guilabel></term>
-    <listitem>
-      <para>By default, Categories are hidden in the Accounts View.  Selecting this
-      option will display the Categories in the Accounts View.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-  <term><guilabel>Do not show zero balance equities</guilabel></term>
-    <listitem>
-      <para>Checking this option will remove any zero balance equity accounts from
-      appearing in the Accounts View.</para>
+      <para>
+        Checking the <guilabel>Do not show reconciled transactions</guilabel> box
+        will filter transactions by reconciliation state.  Transactions that are
+        marked as <emphasis>Reconciled</emphasis> will not be shown in the Ledger
+        View.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
-</sect3>
+</sect2>
 
-<sect3>
-<title>Schedules</title>
+<sect2 id="details.settings.general.support"><title>Support tab</title>
+
+<screenshot>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_general_support.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>general config support tab</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <variablelist>
-    <varlistentry>
-    <term><guilabel>Do not show finished schedules</guilabel></term>
+  <varlistentry>
+    <term>Logging</term>
     <listitem>
-      <para>Checking this box will hide all finished schedules from appearing in the
-      Scheduled transaction View.</para>
+      <para>
+        &kmymoney; can create a log file when it imports data.  This can be useful
+        for troubleshooting problems, but it is important to be careful, as these log
+        files can contain sensetive data, such as usernames and plain-text passwords,
+        as noted in the dialog.
+      </para>
+
+      <para>
+        For any logging to take place, specify the path to the directory where logs
+        will be created in the <guilabel>Log path</guilabel> field.  You can also
+        click the <guibutton>...</guibutton> button to the right of the field, and use
+        the file chooser dialog to navigate to the chosen directory.
+      </para>
+
+      <para>
+        If you check the <guilabel>Log imported statements</guilabel> box, whenever
+        &kmymoney; imports data, it will save a file called <quote>
+        <literal>kmm-statement-</literal>yyyy-mm-dd<literal>T</literal>hh-mm-ss.sss<literal>.txt</literal>
+        </quote> in the specified directory.  This file is an &XML; file with all the
+        data just imported.
+      </para>
+
+      <para>
+        If you check the <guilabel>Log OFX transactions</guilabel> box, whenever
+        &kmymoney; uses <link linkend="details.impexp.ofxdirectconnect">OFX direct
+        connect</link> to retrieve transaction data, it will log all the interactions
+        it has with the remote OFX server.  It will append these to a file called
+        <literal>ofxlog.txt</literal> in the specified directory.  As mentioned
+        above, this file is likely to contain account and user names and plain-text
+        passwords.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
-</sect3>
-
-<sect3>
-<title>Transactions</title>
-<variablelist>
-  <varlistentry>
-    <term><guilabel>Do not show transaction prior to</guilabel></term>
-    <listitem>
-      <para>Transactions prior to the date entered here will not be displayed in the
-      Ledger View.  This can be useful if your data includes many years of
-      transactions; setting this to one or two years ago hides older
-      transactions.</para>
-      <para>Setting this option to January 1, 1900 (the default value) is a good way
-      to debug date-related data import problems, in case some dates were erroneously
-      very far in the past.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term><guilabel>Do not show reconciled transactions</guilabel></term>
-    <listitem>
-      <para>Checking this box will filter transactions by reconciliation state.
-      Transactions that are marked as <emphasis>Reconciled</emphasis> will not be
-      shown in the Ledger View.</para>
-    </listitem>
-  </varlistentry>
-</variablelist>
-</sect3>
 </sect2>
 </sect1>
 
-<sect1 id="details.settings.home">
-<title>Home</title>
+<sect1 id="details.settings.home"><title>Home</title>
 
-<sect2>
-<title>Home page display sections</title>
+<!-- FIXME: sect2 should only be used for tabs.  I'm too lazy to convert this to a
+     variablelist now, which would require subsuming the lower one to paras.  -->
+<sect2><title>Home page display sections</title>
+
+<screenshot>
+  <mediaobject>
+    <imageobject>
+      <imagedata fileref="config_home.png" format="PNG" />
+    </imageobject>
+    <textobject>
+      <phrase>home config</phrase>
+    </textobject>
+  </mediaobject>
+</screenshot>
+
 <para>
   These options allow you to customize the appearance of the <link
   linkend="firsttime.mainwindow">Home View</link> (also called the Home Page or Main
   Window) by choosing which information to display there and the order in which it
   appears.  Selected sections can be reordered by clicking the respective
-  <guibutton>Up</guibutton> or <guibutton>Down</guibutton> button.
+  <guibutton>Up</guibutton> or <guibutton>Down</guibutton> button.  Some sections may
+  not appear, even if the appropriate entry is checked, if it would be empty.
 </para>
-<!-- FIXME Many of these sections need a <link> to the doc section actually
-     describing the content. -->
 
+<!-- FIXME: Many of these sections need a <link> to the doc section actually
+     describing the content. -->
 <variablelist>
   <varlistentry>
     <term><guilabel>Assets and Liabilities</guilabel></term>
     <listitem>
-      <para>This will display the asset and liability accounts that are open along
-      with their current balances.  This and other account lists on the Home Page are
-      sorted in alphabetical order, unless otherwise noted.</para>
+      <para>
+        This will display two lists of accounts which are open, assets on the left
+        and liabilities on the right.  This and the other account lists on the Home
+        Page are sorted in alphabetical order, unless otherwise noted.
+      </para>
+
+      <para>
+        For this and the other account lists which can be shown on the Home View, the
+        display will include the account name, date last reconcilied, and current
+        balance.  In addition, there may be other columns specific to that type of
+        report, and in some cases, as configured <link
+        linkend="details.settings.home.acctinfo">elsewhere</link>.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Payments</guilabel></term>
+    <term><guilabel>scheduled payments</guilabel></term>
     <listitem>
-      <para>This will display upcoming occurrences of Scheduled transactions,
-      distinguishing Overdue payments from Future payments.  It shows the date,
-      schedule name, account and amount of the payment, and the account balance after
-      the payment.  By default it will show up to six transaction.  If six are
-      displayed, there is a link you can select to show more, up to 30 days in
-      advance.</para>
+      <para>
+        This will display upcoming occurrences of Scheduled transactions,
+        distinguishing Overdue payments from Future payments.  It shows the date,
+        schedule name, account, and amount of the payment, and the account balance
+        after the payment.  By default, it will show up to six transaction.  If six
+        are displayed, there is a link you can select to show more, up to 30 days in
+        advance.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Preferred accounts</guilabel></term>
     <listitem>
-      <para>This will display the accounts that are identified as Preferred accounts
-      within the <menuchoice><guimenu>Account</guimenu><guimenuitem>Edit account...
-      </guimenuitem></menuchoice> Configuration dialog.</para>
-      <para>For this and all other account list sections addressed by this set of
-      options, the display will include the account name and current balance, and
-      other columns specific to that type of report, and in some cases, as configured
-      elsewhere.</para>
-      <!-- FIXME - the menu item (or maybe link to actual doc page) should point
-           to the actual other config location and perhaps which items for
-           which account type. -->
+      <para>
+        This will display the accounts that are identified as Preferred accounts
+        in the <menuchoice> <guimenu>Account</guimenu> <guimenuitem>Edit account...
+        </guimenuitem> </menuchoice> Configuration dialog.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Payment accounts</guilabel></term>
     <listitem>
-      <para>This will display all Payment accounts; these include any account into
-      which income can be deposited, and/or out of which bills can be paid.</para>
+      <para>
+        This will display all Payment accounts; these include any account into
+        which income can be deposited, and/or out of which bills can be paid.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Favorite Reports</guilabel></term>
     <listitem>
-      <para>This will display a list of all reports that have been identified as a
-      favorite in the Configuration dialog of the Report.  The list ordered
-      chronologically by when each report became a favorite.</para>
+      <para>
+        This will display a list of all reports that have been identified as a
+        favorite in the <link linkend="details.reports.config">Configuration
+        dialog</link> of the Report.  The list ordered chronologically by when each
+        report became a favorite.
+      </para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term><guilabel>Forecast (schedule)</guilabel></term>
     <listitem>
-      <para>This will display a 30, 60, and 90 day forecast for asset and liability accounts with non zero
-      balances and with non reconciled transactions.</para>
-      <!-- FIXME What are the real criteria for inclusion in this (and these other) list(s). -->
+      <para>
+        This will display a forecast for asset and liability accounts, similar to the
+        <link linkend="details.forecast.summary">Summary Tab</link> of the Forecast
+        View.  
+        Details of the display can be controlled with the <link
+        linkend="details.forecast.configure">Forecast Configuration</link> dialog.
+      </para>
+      <!-- FIXME What are the real criteria for inclusion in this (and these other) list(s).
+           JHO: is this question still open?  -->
     </listitem>
   </varlistentry>
 
@@ -317,8 +445,6 @@
       days.</para>
     </listitem>
   </varlistentry>
-
-  <!-- FIXME "Forecast (history) removed as apparently not actually used. -->
 
   <varlistentry>
     <term><guilabel>Budget</guilabel></term>
@@ -338,10 +464,9 @@
 </variablelist>
 </sect2>
 
-<sect2>
-<title>Homepage/Summary page scaling</title>
-<variablelist>
+<sect2><title>Homepage/Summary page scaling</title>
 
+<variablelist>
   <varlistentry>
     <term><guilabel>Zoom factor:</guilabel></term>
     <listitem>
@@ -361,10 +486,13 @@
 </variablelist>
 </sect2>
 
-<sect2>
-<title>Account information display</title>
-<para>These options allow you to customize what information is included in any list
-of accounts.</para>
+<sect2 id="details.settings.home.acctinfo"><title>Account information display</title>
+
+<para>
+  These options allow you to customize what information is included in any list of
+  accounts.
+</para>
+
 <variablelist>
   <varlistentry>
     <term><guilabel>Show account limit information</guilabel></term>
@@ -951,5 +1079,8 @@ of accounts.</para>
 </para>
 
 </sect2>
+
+
+
 </sect1>
 </chapter>

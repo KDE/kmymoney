@@ -261,7 +261,7 @@
   The bottom area of the Forecast View has five tabs.
 </para>
 
-<sect2><title>Summary Tab</title>
+<sect2 id="details.forecast.summary"><title>Summary Tab</title>
 
 <para>
   The Summary tab has two sections.

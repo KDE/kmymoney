@@ -360,4 +360,8 @@ elsewhere.
 
 - what does File/Backup do if SQL is the current file type?
 
-- 
+- on the config dialog, home section, should the top area be put in a box as are the
+  other two areas, and most of the contents on the other sections?
+
+- Forecast Vuiw - doesn't seem to change forecast method without restarting KMM.
+

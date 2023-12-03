@@ -11,9 +11,6 @@
 
 <title>File Formats</title>
 
-<!-- FIXME: be sure to have a better explanation of the Backup command, including
-     mounting the directory.  Can also use OS specifics, especially about folder
-     mounting on Windows.  -->
 <para>
   Unless you choose to use a <link linkend="details.database">relational
   database</link>, &kmymoney; will store all your financial information in a file.
@@ -237,46 +234,14 @@
 </sect2>
 
 <sect2><title>Autosave</title>
-<!-- FIXME: if the Settings chapter is modified to include screenshots and
-     descriptions of all config settings, this section will move there, and just be
-     referred to here. -->
 
 <para>
-  On the &kmymoney; configuration dialog, General section, Global tab, the upper
-  <guilabel>Autosave options</guilabel> area allows you to control this feature.  An
-  autosave file is just a copy of your data file.  The main point of these is that
-  they are automatically created, according to the configuration settings, so you do
-  not need to remember to take any action.  Any autosave files created will be in the
-  same directory as the data file currently open.
+  &kmymoney; has the ability to automatically save a copy of your data file at
+  regular intervals.  It can also do so on closing the program, if the data has
+  changed.  This behavior can be configured on the &kmymoney; <link
+  linkend="details.settings.general.global">configuration dialog, General section,
+  Global tab</link>.
 </para>
-
-<itemizedlist>
-  <listitem>
-    <para>
-      Autosave periodically: if this checkbox is ticked, then &kmymoney; will create
-      a new autosave file at the interval specified by the
-      <guilabel>minutes</guilabel> field.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      Autosave when file is modified upon close: if this checkbox is ticked, then
-      when you close the program, &kmymoney; will create an autosave file if the data
-      has changed at all since it was last saved.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      Number of backups to keep (0=off): This sets the number of autosave files
-      &kmymoney; will create.  If your data file is MyFinances.kmy, then when an
-      autosave file is created, it will be called MyFinances.kmy.1~.  Any existing
-      autosave files will have their number increased by 1, up to the specified
-      number.
-    </para>
-  </listitem>
-</itemizedlist>
 </sect2>
 
 <sect2><title>File copy</title>
@@ -315,7 +280,9 @@
 
   When you click <guibutton>OK</guibutton> &kmymoney; will create a copy of your data
   file, with the date (formatted as YYYY-MM-DD) appended to the name.  Note that this
-  means only one backup per day can be created by this method.
+  means only one backup per day can be created by this method.  If you have already
+  created a backup on the same day, &kmymoney; will ask if you want to replace the
+  previous backup or cancel.
 </para>
 
 <para>
