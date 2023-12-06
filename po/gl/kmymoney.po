@@ -1,27 +1,27 @@
 # translation of kmymoney2 to Galician
 # This file is put in the public domain.
 #
+# SPDX-FileCopyrightText: 2023 Adrián Chaves (Gallaecio)
 # mvillarino <mvillarino@users.sourceforge.net>, 2006, 2007, 2008, 2009.
 # Mvillarino <mvillarino@users.sourceforge.net>, 2007, 2008.
 # marce villarino <mvillarino@users.sourceforge.net>, 2009.
 # Xosé <xosecalvo@gmail.com>, 2013.
 # Marce Villarino <mvillarino@kde-espana.es>, 2013, 2014.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015, 2016, 2017.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2020, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2023-08-05 11:51+0200\n"
+"PO-Revision-Date: 2023-12-05 10:17+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
-"Language-Team: Galician <proxecto@trasno.gal>\n"
+"Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1086,8 +1086,7 @@ msgstr "Identificador"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_currencyList)
 #: kmymoney/dialogs/kavailablecurrencydlg.ui:52
-#, fuzzy, kde-format
-#| msgid "Symbol"
+#, kde-format
 msgctxt "@title currency symbol column"
 msgid "Symbol"
 msgstr "Símbolo"
@@ -1095,7 +1094,7 @@ msgstr "Símbolo"
 #: kmymoney/dialogs/kbackupdlg.cpp:50
 #, kde-format
 msgid "Backup location:"
-msgstr ""
+msgstr "Localización da salvagarda:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBackupDlg)
 #: kmymoney/dialogs/kbackupdlg.ui:14 kmymoney/kmymoney.cpp:2428
@@ -1108,17 +1107,7 @@ msgstr "Salvagarda"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel1)
 #: kmymoney/dialogs/kbackupdlg.ui:26
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use this dialog to backup your data. \n"
-#| "\n"
-#| "Please make sure you have a disk inserted and that the drive is ready. "
-#| "Then choose the mount point from either the Choose button or by entering "
-#| "the path in the available box.\n"
-#| "\n"
-#| "Click OK to perform the backup. If your system does not use an "
-#| "automounter, make sure you mark the checkbox below to \"mount this "
-#| "directory before backing up.\""
+#, kde-format
 msgid ""
 "Use this dialog to backup your data.\n"
 "\n"
@@ -1128,15 +1117,13 @@ msgid ""
 "\n"
 "Click OK to perform the backup."
 msgstr ""
-"Empregue este diálogo para facer unha copia de seguranza dos seus datos.\n"
+"Use este diálogo para facer unha salvagarda dos seus datos.\n"
 "\n"
 "Insira un disco e asegúrese de que o dispositivo estea listo. Entón escolla "
 "o punto de montaxe mediante o botón Escoller ou introducindo a ruta na caixa "
 "dispoñíbel a tal efecto.\n"
 "\n"
-"Prema Aceptar para realizar a copia. Se o seu sistema non usa un "
-"automontador, asegúrese de escoller a opción «Montar este directorio antes "
-"de crear a copia de seguranza.» "
+"Prema Aceptar para realizar a copia."
 
 #. i18n: ectx: property (text), widget (QLabel, txtAutoMount)
 #: kmymoney/dialogs/kbackupdlg.ui:39
@@ -1145,6 +1132,8 @@ msgid ""
 "If your system does not use an automounter, make sure you mark the checkbox "
 "below to \"mount this directory before backing up.\""
 msgstr ""
+"Se o sistema non usa un montador automático, asegúrese de marcar a caixa "
+"«Montar o cartafol antes de salvagardar» embaixo."
 
 #. i18n: ectx: property (title), widget (QGroupBox, GroupBox1)
 #: kmymoney/dialogs/kbackupdlg.ui:61
@@ -1663,16 +1652,14 @@ msgid "New currency"
 msgstr "Nova divisa"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
-#, fuzzy, kde-format
-#| msgid "Cannot update currency. %1"
+#, kde-format
 msgid "Cannot modify currency. %1"
-msgstr "Non se pode actualizar a divisa. %1"
+msgstr "Non é posíbel modificar a divisa. %1"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
-#, fuzzy, kde-format
-#| msgid "Update currency"
+#, kde-format
 msgid "Edit currency"
-msgstr "Actualizar a divisa"
+msgstr "Editar a divisa"
 
 #: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
 #, kde-format
@@ -1703,16 +1690,14 @@ msgstr "Non é posíbel eliminar a divisa %1. %2"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KCurrencyEditDlg)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:14
-#, fuzzy, kde-format
-#| msgid "Currencies"
+#, kde-format
 msgctxt "@title:window"
 msgid "Currencies"
 msgstr "Divisas"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_currencyList)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:42
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "@title:column currency name"
 msgid "Name"
 msgstr "Nome"
@@ -1722,71 +1707,63 @@ msgstr "Nome"
 #, kde-format
 msgctxt "@title:column currency ISO4217 code"
 msgid "ISO 4217 ID"
-msgstr ""
+msgstr "Identificador ISO 4217"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_currencyList)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:52
-#, fuzzy, kde-format
-#| msgid "Symbol"
+#, kde-format
 msgctxt "@title:column currency symbol"
 msgid "Symbol"
 msgstr "Símbolo"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_removeCurrencyButton)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:62
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgctxt "@action:button Remove currency"
 msgid "Remove"
 msgstr "Eliminar"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_addCurrencyButton)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:73
-#, fuzzy, kde-format
-#| msgid "Add"
+#, kde-format
 msgctxt "@action:button Add currency from existing list"
 msgid "Add"
 msgstr "Engadir"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_editCurrencyButton)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:84
-#, fuzzy, kde-format
-#| msgid "Edit"
+#, kde-format
 msgctxt "@action:button Edit currency"
 msgid "Edit"
 msgstr "Editar"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_removeUnusedCurrencyButton)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:91
-#, fuzzy, kde-format
-#| msgid "Remove unused currencies"
+#, kde-format
 msgctxt "@action:button"
 msgid "Remove unused currencies"
 msgstr "Retirar as divisas non usadas"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_closeButton)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:102
-#, fuzzy, kde-format
-#| msgid "Close"
+#, kde-format
 msgctxt "@action:button Close currency dialog"
 msgid "Close"
 msgstr "Pechar"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_selectBaseCurrencyButton)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:109
-#, fuzzy, kde-format
-#| msgid "Select as base currency"
+#, kde-format
 msgctxt "@action:button"
 msgid "Select as base currency"
-msgstr "Escoller como divisa básica"
+msgstr "Seleccionar como divisa base"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_newCurrencyButton)
 #: kmymoney/dialogs/kcurrencyeditdlg.ui:116
-#, fuzzy, kde-format
-#| msgid "New"
+#, kde-format
 msgctxt "@action:button Create new currency"
 msgid "New"
-msgstr "Novo"
+msgstr "Nova"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KCurrencyEditorDlg)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:14
@@ -1796,9 +1773,7 @@ msgstr "Editor de divisas"
 
 #. i18n: ectx: property (text), widget (QLabel, lblIsoCode)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:25
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "ISO Code"
+#, kde-format
 msgid "ISO Code"
 msgstr "Código ISO"
 
@@ -1810,10 +1785,9 @@ msgstr "Símbolo:"
 
 #. i18n: ectx: property (text), widget (QLabel, lblCashFraction)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:39
-#, fuzzy, kde-format
-#| msgid "Smallest money unit:"
+#, kde-format
 msgid "Smallest account unit:"
-msgstr "Fracción máis pequena de diñeiro:"
+msgstr "Unidade máis pequena da conta:"
 
 #. i18n: ectx: property (text), widget (QLabel, lblAccountFraction)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:46
@@ -1823,10 +1797,9 @@ msgstr "Unidade de efectivo máis pequena:"
 
 #. i18n: ectx: property (text), widget (QLabel, lblRemainder)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:53
-#, fuzzy, kde-format
-#| msgid "Routing number"
+#, kde-format
 msgid "Rounding method"
-msgstr "Número de ruta"
+msgstr "Método de arredondamento"
 
 #. i18n: ectx: property (text), widget (QLabel, lblpricePrecision)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:60
@@ -1836,13 +1809,13 @@ msgstr "Precisión do prezo:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, spbPricePrecision)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:67
-#, fuzzy, kde-format
-#| msgid ""
-#| "    Please enter a price for the currency on or before the opening date."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Enter the price precision for this currency to be used for exchange rates."
-msgstr " Introduza un prezo para a divisa na data de apertura ou antes."
+msgstr ""
+"Introduza a precisión do prezo para esta divisa, para usar cos tipos de "
+"cambio."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #. i18n: ectx: property (text), widget (QLabel, lblName)
@@ -1866,7 +1839,7 @@ msgstr "Nome"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the name of the currency here (e.g. Euro)"
-msgstr ""
+msgstr "Escriba o nome da divisa (p. ex. Euro)."
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leIsoCode)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:97
@@ -1877,13 +1850,15 @@ msgid ""
 "for the Euro). This cannot be changed once the currency is created.</p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p>Escriba o código ISO 4217 da divisa (p. ex. EUR para o "
+"euro). Isto non pode cambiarse despois de crear a divisa.</p></body></html>"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leSymbol)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the monetary symbol of the currency here (e.g. € for the Euro)"
-msgstr ""
+msgstr "Escriba o símbolo monetario da divisa (p. ex € para o euro)."
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leAccountFraction)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:111
@@ -1893,6 +1868,8 @@ msgid ""
 "Enter the smallest fraction of the currency used for bank accounts here. "
 "This cannot be changed once the currency is created."
 msgstr ""
+"Introduza a fracción máis pequena da divisa para usar en contas bancarias. "
+"Isto non pode cambiarse despois de crear a divisa."
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, leCashFraction)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:118
@@ -1902,6 +1879,8 @@ msgid ""
 "Enter the smallest fraction of the currency used for cash accounts here. "
 "This cannot be changed once the currency is created."
 msgstr ""
+"Introduza a fracción máis pequena da divisa para usar en contas de efectivo. "
+"Isto non pode cambiarse despois de crear a divisa."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:125
@@ -1912,6 +1891,9 @@ msgid ""
 "<span style=\" font-weight:600;\">What's this</span> for more details.</p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p>Introduza o método de arredondamento para usar con "
+"esta divisa. Consulte <span style=\" font-weight:600;\">Que é isto</span> "
+"para máis información.</p></body></html>"
 
 #. i18n: ectx: property (whatsThis), widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:128
@@ -1939,6 +1921,24 @@ msgid ""
 "RoundHalfDown in case the resulting numerator is even. E.g. 0.5 -&gt; 0.0 "
 "and 1.5 -&gt; 2.0</p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-weight:600;\">RoundNever</span></"
+"p><p>Non arredondar, só recortar e amosar unha advertencia a modo de "
+"lembranza. Polo demais é idéntico a «RoundTrunc».</p><p><span style=\" font-"
+"weight:600;\">RoundFloor</span></p><p>Arredondar ao maior valor enteiro non "
+"superior ao valor. P. ex. 0.5 → 0.0 e -0.5 → -1.0</p><p><span style=\" font-"
+"weight:600;\">RoundCeil</span></p><p>Arredondar ao menor valor enteiro non "
+"inferior ao valor. P. ex. 0.5 → 1.0 e -0.5 → -0.0</p><p><span style=\" font-"
+"weight:600;\">RoundTruncate</span></p><p>Non arredondar, só recortar os "
+"decimais.</p><p><span style=\" font-weight:600;\">RoundPromote</span></"
+"p><p>Usar «RoundCeil» para valores positivos e «RoundFloor» para valores "
+"negativos. P. ex. 0.5 → 1.0 e -0.5 → -1.0</p><p><span style=\" font-"
+"weight:600;\">RoundHalfDown</span></p><p>Arredondar así: 0.1-0.5 → 0.0 e "
+"0.6-0.9 → 1.0</p><p><span style=\" font-weight:600;\">RoundHalfUp</span></"
+"p><p>Arredondar así: 0.1-0.4 → 0.0 e 0.5-0.9 → 1.0</p><p><span style=\" font-"
+"weight:600;\">RoundRound</span></p><p>Usar «RoundHalfDown» para 0.1-0.4 e "
+"«RoundHalfUp» para 0.6-0.9. Usar «RoundHalfUp» para 0.5 cando o numerador "
+"resultante é impar e «RoundHalfDown» cando é par. P. ex. 0.5 → 0.0 e 1.5 → "
+"2.0</p></body></html>"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:135
@@ -1977,15 +1977,13 @@ msgstr "Promover"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:160
-#, fuzzy, kde-format
-#| msgid "HalfDown"
+#, kde-format
 msgid "Half Down"
-msgstr "Metade cara arriba"
+msgstr "Metade cara abaixo"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRoundingMethod)
 #: kmymoney/dialogs/kcurrencyeditordlg.ui:165
-#, fuzzy, kde-format
-#| msgid "HalfUp"
+#, kde-format
 msgid "Half Up"
 msgstr "Metade cara arriba"
 
@@ -2578,16 +2576,14 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:59
-#, fuzzy, kde-format
-#| msgid "From"
+#, kde-format
 msgctxt "@label:chooser Date"
 msgid "From"
 msgstr "De"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:69
-#, fuzzy, kde-format
-#| msgid "To"
+#, kde-format
 msgctxt "@label:chooser Date"
 msgid "To"
 msgstr "A"
@@ -2647,8 +2643,7 @@ msgid "Criteria"
 msgstr "Criterio"
 
 #: kmymoney/dialogs/kfindtransactiondlg_p.h:110
-#, fuzzy, kde-format
-#| msgid "Search transactions"
+#, kde-format
 msgctxt "@info:tooltip for find transaction Open button"
 msgid "Search transactions"
 msgstr "Buscar asentos"
@@ -2692,6 +2687,9 @@ msgid ""
 "transaction.  Cancel and select the other transaction first, if you want its "
 "values to be used."
 msgstr ""
+"Seguro que quere fusionar os asentos? O que seleccionou primeiro é o de "
+"enriba, e os seus valores usaranse na transacción fusionada. Cancele ou "
+"seleccione primeiro a outra transacción se quere usar os seus valores."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KMyMoneyFileInfoDlg)
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:14
@@ -3206,7 +3204,7 @@ msgstr "Crear a categoría"
 #: kmymoney/dialogs/knewaccountdlg.cpp:961
 #, kde-format
 msgid "Create a new Category"
-msgstr "Crear unha categoría nova"
+msgstr "Crear unha nova categoría"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KNewAccountDlg)
 #: kmymoney/dialogs/knewaccountdlg.ui:14
@@ -3485,6 +3483,8 @@ msgid ""
 "The protocol part has been removed by KMyMoney because it is fixed to https "
 "for security reasons."
 msgstr ""
+"KMyMoney retirou a parte do protocolo porque está fixada como https por "
+"motivos de seguridade."
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KNewBankDlg)
 #: kmymoney/dialogs/knewbankdlg.ui:14
@@ -4559,7 +4559,7 @@ msgstr ""
 #: kmymoney/dialogs/settings/ksettingshome.ui:231
 #, kde-format
 msgid "Show date of last reconciliation"
-msgstr "Amosar a data da última reconciliación."
+msgstr "Amosar a data da última conciliación."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceLiabilities)
 #: kmymoney/dialogs/settings/ksettingshome.ui:238
@@ -4647,22 +4647,19 @@ msgid "New Quote Source"
 msgstr "Nova fonte de cotizacións"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:89
-#, fuzzy, kde-format
-#| msgid "Symbol"
+#, kde-format
 msgctxt "@item:inlistbox Stock"
 msgid "Symbol"
 msgstr "Símbolo"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:90
-#, fuzzy, kde-format
-#| msgid "Identification number"
+#, kde-format
 msgctxt "@item:inlistbox Stock"
 msgid "Identification number"
 msgstr "Número de identificación"
 
 #: kmymoney/dialogs/settings/ksettingsonlinequotes.cpp:91
-#, fuzzy, kde-format
-#| msgid "Name"
+#, kde-format
 msgctxt "@item:inlistbox Stock"
 msgid "Name"
 msgstr "Nome"
@@ -5628,10 +5625,9 @@ msgstr ""
 "Pode contribuír a este proxecto mediante código e/ou suxestións."
 
 #: kmymoney/kcreditswindow.cpp:41
-#, fuzzy, kde-format
-#| msgid "(c) 2000-2019 The KMyMoney development team"
+#, kde-format
 msgid "(c) 2000-2022 The KMyMoney development team"
-msgstr "© 2000-2019 Equipo de desenvolvemento de KMyMoney"
+msgstr "© 2000-2022 Equipo de desenvolvemento de KMyMoney"
 
 #: kmymoney/kcreditswindow.cpp:44
 #, kde-format
@@ -5800,7 +5796,7 @@ msgstr "Laurent Montel"
 #: kmymoney/kcreditswindow.cpp:64
 #, kde-format
 msgid "Patches and port to kde4"
-msgstr "Parches e portaxe a kde4"
+msgstr "Parches e adaptación a kde4."
 
 #: kmymoney/kcreditswindow.cpp:65
 #, kde-format
@@ -5858,7 +5854,7 @@ msgstr ""
 "<p>A conta «%1» foi creada con anterioridade como de tipo empréstito pero "
 "falta algunha información.</p><p>O asistente para novos empréstitos comezará "
 "a recoller toda a información de interese.</p><p>Por favor, use unha versión "
-"de KMyMoney  0.8.7 ou posterior pero máir recente que a 0.9 para corrixir o "
+"de KMyMoney  0.8.7 ou posterior pero máis recente que a 0.9 para corrixir o "
 "problema.</p>"
 
 #: kmymoney/kmymoney.cpp:906
@@ -5937,10 +5933,9 @@ msgstr "Agochar os asentos conciliados"
 
 #. i18n: ectx: label, entry (ShowReconciledBalances), group (List Options)
 #: kmymoney/kmymoney.cpp:1399 kmymoney/settings/kmymoney.kcfg:252
-#, fuzzy, kde-format
-#| msgid "Do not show reconciled transactions"
+#, kde-format
 msgid "Show reconciled balances"
-msgstr "Non mostrar os asentos conciliados"
+msgstr "Amosar os saldos reconciliados"
 
 #. i18n: ectx: label, entry (HideUnusedCategory), group (List Options)
 #: kmymoney/kmymoney.cpp:1400 kmymoney/settings/kmymoney.kcfg:228
@@ -6150,11 +6145,10 @@ msgid "Duplicate"
 msgstr "Duplicar"
 
 #: kmymoney/kmymoney.cpp:1460
-#, fuzzy, kde-format
-#| msgid "Add shares"
+#, kde-format
 msgctxt "Add reversing transaction"
 msgid "Add reversing"
-msgstr "Engadir participacións"
+msgstr "Engadir unha inversión"
 
 #: kmymoney/kmymoney.cpp:1461 kmymoney/views/kgloballedgerview.cpp:291
 #: kmymoney/views/kgloballedgerview.cpp:1825
@@ -6463,11 +6457,10 @@ msgid "&Replace"
 msgstr "Substituí&r"
 
 #: kmymoney/kmymoney.cpp:2436
-#, fuzzy, kde-format
-#| msgid "Unable to create account: %1"
+#, kde-format
 msgctxt "@info Error during backup"
 msgid "Unable to create backup directory '%1'."
-msgstr "Non se pode crear conta: %1"
+msgstr "Non é posíbel crear o cartafol de salvagarda «%1»."
 
 #: kmymoney/kmymoney.cpp:2441
 #, kde-format
@@ -6698,17 +6691,15 @@ msgid "Saving file..."
 msgstr "Gardando o ficheiro…"
 
 #: kmymoney/kmymoney.cpp:3513
-#, fuzzy, kde-format
-#| msgid "Failed to save your storage."
+#, kde-format
 msgid "Failed to save your data."
-msgstr "Non se puido gardar o seu almacenamento."
+msgstr "Non foi posíbel gardar os seus datos."
 
 #: kmymoney/kmymoney.cpp:3519
-#, fuzzy, kde-format
-#| msgid "Couldn't find suitable plugin to save your storage."
+#, kde-format
 msgid "Couldn't find suitable plugin to save your data."
 msgstr ""
-"Non se puido atopar un complemento axeitado para gardar o seu almacenamento."
+"Non foi posíbel atopar un complemento axeitado para gardar os seus datos."
 
 #: kmymoney/kmymoney.cpp:3525
 #, kde-format
@@ -6716,10 +6707,9 @@ msgid "Saving file as...."
 msgstr "Gardando o ficheiro como…"
 
 #: kmymoney/kmymoney.cpp:3541
-#, fuzzy, kde-format
-#| msgid "Couldn't find any plugin for saving storage."
+#, kde-format
 msgid "Couldn't find any plugin for saving data."
-msgstr "Non se puido atopar ningún complemento para gardar o almacenamento."
+msgstr "Non foi posíbel atopar ningún complemento para gardar os datos."
 
 #: kmymoney/kmymoney.cpp:3570
 #, kde-format
@@ -7262,8 +7252,7 @@ msgstr "Centro de prezos"
 #: kmymoney/models/securitiesmodel.cpp:263
 #: kmymoney/plugins/csv/import/investmentwizardpage.cpp:57
 #: kmymoney/plugins/csv/import/securitiesdlg.ui:77
-#, fuzzy, kde-format
-#| msgid "Symbol"
+#, kde-format
 msgctxt "@title stock symbol column"
 msgid "Symbol"
 msgstr "Símbolo"
@@ -8053,10 +8042,9 @@ msgid "Belarusian Ruble (old)"
 msgstr "Rublo bielorruso (vello)"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2752
-#, fuzzy, kde-format
-#| msgid "Zambian Kwacha"
+#, kde-format
 msgid "Zambian Kwacha (old)"
-msgstr "Kwacha da Zambia"
+msgstr "Kwacha da Zambia (vella)"
 
 #: kmymoney/mymoney/mymoneyfile.cpp:2755
 #, kde-format
@@ -9185,43 +9173,37 @@ msgstr ""
 "Non foi posíbel cargar o complemento necesario para amosar esta tarefa."
 
 #: kmymoney/mymoney/splitmodel.cpp:34
-#, fuzzy, kde-format
-#| msgid "Category"
+#, kde-format
 msgctxt "Split header"
 msgid "Category"
 msgstr "Categoría"
 
 #: kmymoney/mymoney/splitmodel.cpp:35
-#, fuzzy, kde-format
-#| msgid "Memo"
+#, kde-format
 msgctxt "Split header"
 msgid "Memo"
 msgstr "Concepto"
 
 #: kmymoney/mymoney/splitmodel.cpp:36
-#, fuzzy, kde-format
-#| msgid "Payment"
+#, kde-format
 msgctxt "Split header"
 msgid "Payment"
 msgstr "Pagamento"
 
 #: kmymoney/mymoney/splitmodel.cpp:37
-#, fuzzy, kde-format
-#| msgid "Deposit"
+#, kde-format
 msgctxt "Split header"
 msgid "Deposit"
 msgstr "Imposición"
 
 #: kmymoney/mymoney/statusmodel.cpp:52
-#, fuzzy, kde-format
-#| msgid "Status"
+#, kde-format
 msgctxt "Reconciliation state"
 msgid "Status"
 msgstr "Estado"
 
 #: kmymoney/mymoney/storage/budgetsmodel.cpp:67
-#, fuzzy, kde-format
-#| msgid "Year"
+#, kde-format
 msgctxt "Budget year"
 msgid "Year"
 msgstr "Ano"
@@ -9299,16 +9281,14 @@ msgid "Unknown"
 msgstr "Descoñecido"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:207
-#, fuzzy, kde-format
-#| msgid "Expense categories"
+#, kde-format
 msgid "Multiple fee categories"
-msgstr "Categorías de gastos"
+msgstr "Varias categorías de comisións"
 
 #: kmymoney/mymoney/storage/journalmodel.cpp:207
-#, fuzzy, kde-format
-#| msgid "Interest category"
+#, kde-format
 msgid "Multiple interest categories"
-msgstr "Categoría dos xuros"
+msgstr "Varias categorías de xuros"
 
 #: kmymoney/mymoney/storage/mymoneystoragedump.cpp:452
 #, kde-format
@@ -9365,78 +9345,67 @@ msgid "Payee"
 msgstr "Beneficiario"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:151
-#, fuzzy, kde-format
-#| msgid "Bills"
+#, kde-format
 msgctxt "Schedule group"
 msgid "Bills"
 msgstr "Recibos"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:152
-#, fuzzy, kde-format
-#| msgid "Deposits"
+#, kde-format
 msgctxt "Schedule group"
 msgid "Deposits"
 msgstr "Imposicións"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:153
-#, fuzzy, kde-format
-#| msgid "Transfers"
+#, kde-format
 msgctxt "Schedule group"
 msgid "Transfers"
 msgstr "Transferencias"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:154
-#, fuzzy, kde-format
-#| msgid "Loans"
+#, kde-format
 msgctxt "Schedule group"
 msgid "Loans"
 msgstr "Empréstitos"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:179
-#, fuzzy, kde-format
-#| msgid "Type/Name"
+#, kde-format
 msgctxt "Schedule header"
 msgid "Type/Name"
 msgstr "Tipo/Nome"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:180
-#, fuzzy, kde-format
-#| msgid "Account"
+#, kde-format
 msgctxt "Schedule header"
 msgid "Account"
 msgstr "Conta"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:181
-#, fuzzy, kde-format
-#| msgid "Payee"
+#, kde-format
 msgctxt "Schedule header"
 msgid "Payee"
 msgstr "Beneficiario"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:182
-#, fuzzy, kde-format
-#| msgid "Amount"
+#, kde-format
 msgctxt "Schedule header"
 msgid "Amount"
 msgstr "Importe"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:183
-#, fuzzy, kde-format
-#| msgid "Next Due Date"
+#, kde-format
 msgctxt "Schedule header"
 msgid "Next Due Date"
 msgstr "Próxima data de vencemento"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:184
-#, fuzzy, kde-format
-#| msgid "Frequency"
+#, kde-format
 msgctxt "Schedule header"
 msgid "Frequency"
 msgstr "Frecuencia"
 
 #: kmymoney/mymoney/storage/schedulesmodel.cpp:185
-#, fuzzy, kde-format
-#| msgid "Payment Method"
+#, kde-format
 msgctxt "Schedule header"
 msgid "Payment Method"
 msgstr "Método de pagamento"
@@ -9915,11 +9884,9 @@ msgid "Account Type:"
 msgstr "Tipos de conta:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:101
-#, fuzzy, kde-format
-#| msgctxt "Header for AqBanking account list"
-#| msgid "Account Name"
+#, kde-format
 msgid "Account Name:"
-msgstr "Nome da conta"
+msgstr "Nome da conta:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #, kde-format
@@ -9989,18 +9956,16 @@ msgstr ""
 "concepto, prema «Si».</center>"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:294
-#, fuzzy, kde-format
-#| msgctxt "Security type"
-#| msgid "None"
+#, kde-format
 msgctxt "@item:intext No field selection"
 msgid "None"
-msgstr "Ningún"
+msgstr "Nada"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:302
 #, kde-format
 msgctxt "@label:listbox list of currently selected fields"
 msgid "<i>Memo columns:</i> %1"
-msgstr ""
+msgstr "<i>Columnas de concepto:</i> %1"
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:345
 #, kde-format
@@ -10028,6 +9993,7 @@ msgid ""
 "Column <b>%1</b> cannot be selected because it is already used in '<b>%2</"
 "b>'."
 msgstr ""
+"A columna <b>%1</b> non pode seleccionarse porque xa se usa en «<b>%2</b>»."
 
 #: kmymoney/plugins/csv/import/bankingwizardpage.cpp:388
 #, kde-format
@@ -10080,10 +10046,9 @@ msgstr "Escolla a columna que conteña o campo do número."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_numberColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:119
-#, fuzzy, kde-format
-#| msgid "Clear selections"
+#, kde-format
 msgid "Clear number field selection."
-msgstr "Limpar as seleccións"
+msgstr "Anular a selección do campo numérico."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_dateCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:157
@@ -10095,10 +10060,9 @@ msgstr "Escolla a columna que contén o campo coa data."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_dateColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:167
-#, fuzzy, kde-format
-#| msgid "Clear selections"
+#, kde-format
 msgid "Clear date field selection."
-msgstr "Limpar as seleccións"
+msgstr "Anular a selección do campo de data."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_payee)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:180
@@ -10115,10 +10079,9 @@ msgstr "Escolla a columna que contén o campo co beneficiario ou a descrición."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_payeeColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:209
-#, fuzzy, kde-format
-#| msgid "Clear selections"
+#, kde-format
 msgid "Clear payee field selection."
-msgstr "Limpar as seleccións"
+msgstr "Anular a selección do campo de beneficiaria."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_category)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:228
@@ -10135,10 +10098,9 @@ msgstr "Escolla a columna que contén o campo coa categoría."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_categoryColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:257
-#, fuzzy, kde-format
-#| msgid "Category selection"
+#, kde-format
 msgid "Clear category field selection."
-msgstr "Selección de categoría"
+msgstr "Anular a selección do campo de categoría."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_memoCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:289
@@ -10148,31 +10110,27 @@ msgstr "Escolla a columna que conteña o campo de detalles."
 
 #. i18n: ectx: property (text), widget (QLabel, m_currentMemoColumns)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:305
-#, fuzzy, kde-format
-#| msgid "Select none"
+#, kde-format
 msgid "Selection"
-msgstr "Non escoller nada"
+msgstr "Selección"
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_memoColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:315
-#, fuzzy, kde-format
-#| msgid "Clear selections"
+#, kde-format
 msgid "Clear memo field selection."
-msgstr "Limpar as seleccións"
+msgstr "Anular a selección do campo de concepto."
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_balanceCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:344
-#, fuzzy, kde-format
-#| msgid "Select column containing date field."
+#, kde-format
 msgid "Select column containing balance field."
-msgstr "Escolla a columna que contén o campo coa data."
+msgstr "Escolla a columna que contén o campo co saldo."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_balanceColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:351
-#, fuzzy, kde-format
-#| msgid "Clear selections"
+#, kde-format
 msgid "Clear balance field selection."
-msgstr "Limpar as seleccións"
+msgstr "Anular a selección do campo de saldo."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_amount)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:409
@@ -10190,60 +10148,51 @@ msgstr "Escolla a columna que contén o campo coa cantidade."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_amountColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:438
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "The user selected credit transfers to send. But they cannot be sent."
-#| msgid "Cannot send selection"
+#, kde-format
 msgid "Clear amount field selection."
-msgstr "Non se pode enviar a selección"
+msgstr "Anular a selección do campo de importe."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_indicator)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:448
-#, fuzzy, kde-format
-#| msgctxt "presence of debit/credit columns"
-#| msgid "De&bit/credit"
+#, kde-format
 msgid "Debit/Credit Indicator"
-msgstr "Dé&bito e crédito"
+msgstr "Indicador de débito/crédito"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_creditDebitIndicatorCol)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:461
-#, fuzzy, kde-format
-#| msgid "Select column containing category field."
+#, kde-format
 msgid "Select column containing indicator field."
-msgstr "Escolla a columna que contén o campo coa categoría."
+msgstr "Escolla a columna que conteña o campo de concepto."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditDebitIndicatorColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:468
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "The user selected credit transfers to send. But they cannot be sent."
-#| msgid "Cannot send selection"
+#, kde-format
 msgid "Clear indicator field selection."
-msgstr "Non se pode enviar a selección"
+msgstr "Anular a selección do campo de indicador."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_debit)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:478
 #, kde-format
 msgid "Indicator for Credit"
-msgstr ""
+msgstr "Indicador de crédito"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, m_creditIndicator)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:488
 #, kde-format
 msgid "Enter text that is used to indicate that amount is a credit."
-msgstr ""
+msgstr "Escriba o texto que indica que o importe é un crédito."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_credit)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:498
 #, kde-format
 msgid "Indicator for Debit"
-msgstr ""
+msgstr "Indicador de débito"
 
 #. i18n: ectx: property (toolTip), widget (QLineEdit, m_debitIndicator)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:508
 #, kde-format
 msgid "Enter text that is used to indicate that amount is a debit."
-msgstr ""
+msgstr "Escriba o texto que indica que o importe é un débito."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_opposite)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:518
@@ -10259,11 +10208,9 @@ msgstr "Seleccione se a súa columna de importe ten signos mal definidos."
 
 #. i18n: ectx: attribute (title), widget (QWidget, debitCreditTab)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:563
-#, fuzzy, kde-format
-#| msgctxt "presence of debit/credit columns"
-#| msgid "De&bit/credit"
+#, kde-format
 msgid "Debit/credit"
-msgstr "Dé&bito e crédito"
+msgstr "Débito e crédito"
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_debits)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:577
@@ -10280,10 +10227,9 @@ msgstr "Escolla a columna que contén o campo coas imposicións."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_debitColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:609
-#, fuzzy, kde-format
-#| msgid "Clear selections"
+#, kde-format
 msgid "Clear debit field selection."
-msgstr "Limpar as seleccións"
+msgstr "Anular a selección do campo de débito."
 
 #. i18n: ectx: property (text), widget (QLabel, labelBnk_credits)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:625
@@ -10300,17 +10246,15 @@ msgstr "Escolla a columna que contén o campo co crédito."
 
 #. i18n: ectx: property (toolTip), widget (QToolButton, m_creditColClear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:654
-#, fuzzy, kde-format
-#| msgid "Clear selections"
+#, kde-format
 msgid "Clear credit field selection."
-msgstr "Limpar as seleccións"
+msgstr "Anular a selección do campo de crédito."
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_clear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:719
-#, fuzzy, kde-format
-#| msgid "Clear all selected column entries"
+#, kde-format
 msgid "Clear all selected column and indicator entries"
-msgstr "Baleirar todas as entradas de columnas de texto seleccionadas"
+msgstr "Baleirar todas as entradas de columnas e de indicadores seleccionadas."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_clear)
 #: kmymoney/plugins/csv/import/bankingwizardpage.ui:722
@@ -10369,7 +10313,7 @@ msgstr "dividendo"
 #, kde-format
 msgctxt "Type of operation as in financial statement"
 msgid "interest,income"
-msgstr "interese,intereses,ingreso,ingresos"
+msgstr "xuro,xuros,interese,intereses,ingreso,ingresos"
 
 #: kmymoney/plugins/csv/import/core/csvimportercore.cpp:1585
 #, kde-format
@@ -10893,8 +10837,7 @@ msgstr "Fracción do prezo"
 
 #. i18n: ectx: property (text), widget (QLabel, labelInv_symbolCol)
 #: kmymoney/plugins/csv/import/investmentwizardpage.ui:308
-#, fuzzy, kde-format
-#| msgid "Symbol"
+#, kde-format
 msgctxt "@label:listbox stock symbol"
 msgid "Symbol"
 msgstr "Símbolo"
@@ -11098,7 +11041,7 @@ msgstr ""
 #: kmymoney/plugins/csv/import/rowswizardpage.ui:109
 #, kde-format
 msgid "Header contains account name or number"
-msgstr ""
+msgstr "A cabeceira contén o nome ou o número de conta"
 
 #. i18n: ectx: property (text), widget (QLabel, lblStartLine)
 #: kmymoney/plugins/csv/import/rowswizardpage.ui:148
@@ -12224,9 +12167,9 @@ msgid ""
 "characters inserted after each purpose field are distracting and are removed "
 "when this option is enabled.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Algunhas institucións tratan os campos de múltiples "
-"usos das transacción como un único campo. Neste caso os caracteres de salto "
-"de liña inseridos tras cada entrada dos campos de múltiples usos distraen e "
+"<html><head/><body><p>Algunhas entidades tratan os campos de múltiples usos "
+"das transacción como un único campo. Neste caso os caracteres de salto de "
+"liña inseridos tras cada entrada dos campos de múltiples usos distraen e "
 "retíranse cando se activa esta opción.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_removeLineBreaksFromMemo)
@@ -12237,22 +12180,19 @@ msgstr "Retirar saltos de liña de campos de múltiples liñas"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:211
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html><head/><body><p>Flag this account to be an opening balance account</"
-#| "p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>Add additional payee details found in the transaction "
 "to the memo.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Marcar esta conta para ser unha conta de saldo de "
-"apertura.</p></body></html>"
+"<html><head/><body><p>Engadir ao concepto os detalles adicionais da "
+"beneficiaria que se atopasen no asento.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_includePayeeDetails)
 #: kmymoney/plugins/kbanking/dialogs/kbaccountsettings.ui:214
 #, kde-format
 msgid "Include the payee details in memo"
-msgstr ""
+msgstr "Incluír os detalles da beneficiaria no concepto."
 
 #. i18n: ectx: property (windowTitle), widget (QWizard, MapAccountWizard)
 #. i18n: ectx: property (windowTitle), widget (QDialog, KBMapAccount)
@@ -12904,10 +12844,9 @@ msgstr "Org"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:123
-#, fuzzy, kde-format
-#| msgid "User"
+#, kde-format
 msgid "UserAgent"
-msgstr "Usuario"
+msgstr "Axente de usuaria"
 
 #. i18n: ectx: property (title), widget (QWizardPage, LoginPage)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:171
@@ -13085,17 +13024,15 @@ msgstr "Detalles de OFX"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:245
-#, fuzzy, kde-format
-#| msgid "User defined"
+#, kde-format
 msgid "User Agent"
-msgstr "Definido polo usuario"
+msgstr "Axente de usuaria"
 
 #. i18n: ectx: property (whatsThis), widget (QLineEdit, m_clientUidEdit)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:255
 #, kde-format
 msgid "OFX <CLIENTUID> for institutions that require it"
-msgstr ""
-"OFX <identificador único de cliente> para as institucións que o requiren"
+msgstr "OFX <identificador único de cliente> para as entidades que o requiren"
 
 #. i18n: ectx: attribute (title), widget (QWidget, importTab)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:281
@@ -13216,15 +13153,14 @@ msgid ""
 msgstr ""
 "<html><head/><body><p>Marque isto se necesita inverter o signo das "
 "cantidades dos asentos importados, p. ex. se necesita inverter os cargos e "
-"os pagos porque a súa institución os fornece invertidos.</p></body></html>"
+"os pagos porque a súa entidade os fornece invertidos.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:501
 #: kmymoney/plugins/ofx/import/importoption.ui:136
-#, fuzzy, kde-format
-#| msgid "Cannot edit multiple investment transactions at once"
+#, kde-format
 msgid "Fix sign of the investment transaction amount and quantity"
-msgstr "Non é posíbel editar á vez varios asentos de investimentos"
+msgstr "Corrixir o signo do importe e o número do asento de investimento"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_fixBuySellSignage)
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingstatusdecl.ui:508
@@ -13236,6 +13172,11 @@ msgid ""
 "institution not applying the correct negative/positive sign to the share "
 "amount or quantity value.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Marque isto se os asentos de investimento, unha vez "
+"importados, teñen asignado o tipo de compra ou venda incorrecto, "
+"posiblemente porque a súa entidade non aplica os signos negativo e positivo "
+"correctos aos valores de importe e cantidade das participacións.</p></body></"
+"html>"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:73
 #, kde-format
@@ -13325,10 +13266,9 @@ msgid "Quicken Windows (Expert)"
 msgstr "Quicken Windows (Expert)"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:97
-#, fuzzy, kde-format
-#| msgid "Quicken Windows (Expert)"
+#, kde-format
 msgid "Quicken Mac (Expert)"
-msgstr "Quicken Windows (Expert)"
+msgstr "Quicken Mac (Expert)"
 
 #: kmymoney/plugins/ofx/import/dialogs/mymoneyofxconnector.cpp:100
 #, kde-format
@@ -14103,7 +14043,7 @@ msgstr "Outra aplicación"
 #, kde-format
 msgctxt "Category name"
 msgid "Reinvested interest"
-msgstr "Interese reinvestido"
+msgstr "Xuros reinvestidos"
 
 #: kmymoney/plugins/qif/import/mymoneyqifreader.cpp:168
 #, kde-format
@@ -16095,65 +16035,56 @@ msgid "Transfers"
 msgstr "Transferencias"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:530
-#, fuzzy, kde-format
-#| msgid "Opening Date"
+#, kde-format
 msgctxt "@title:column Report heading"
 msgid "Opening"
-msgstr "Data de apertura"
+msgstr "Apertura"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1374
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:1645
-#, fuzzy, kde-format
-#| msgid "Account"
+#, kde-format
 msgctxt "@title:column report header"
 msgid "Account"
 msgstr "Conta"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2145
-#, fuzzy, kde-format
-#| msgid "Actual"
+#, kde-format
 msgctxt "@title:column report header"
 msgid "Actual"
 msgstr "Real"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2150
-#, fuzzy, kde-format
-#| msgid "Budget"
+#, kde-format
 msgctxt "@title:column report header"
 msgid "Budget"
 msgstr "Orzamento"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2155
-#, fuzzy, kde-format
-#| msgid "Difference"
+#, kde-format
 msgctxt "@title:column report header"
 msgid "Difference"
 msgstr "Diferenza"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2160
-#, fuzzy, kde-format
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@title:column report header"
 msgid "Forecast"
 msgstr "Prognóstico"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2165
-#, fuzzy, kde-format
-#| msgid "Moving Average"
+#, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average"
 msgstr "Media móbil"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2170
-#, fuzzy, kde-format
-#| msgid "Moving Average Price"
+#, kde-format
 msgctxt "@title:column report header"
 msgid "Moving Average Price"
 msgstr "Prezo  da media móbil"
 
 #: kmymoney/plugins/views/reports/core/pivottable.cpp:2175
-#, fuzzy, kde-format
-#| msgid "Price"
+#, kde-format
 msgctxt "@title:column report header"
 msgid "Price"
 msgstr "Prezo"
@@ -17854,10 +17785,9 @@ msgid "History"
 msgstr "Historial"
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:128
-#, fuzzy, kde-format
-#| msgid "Loading Weboob backend..."
+#, kde-format
 msgid "Loading Woob backend..."
-msgstr "Cargando a infraestrutura de Weboob…"
+msgstr "Cargando a infraestrutura de Woob…"
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:129
 #, kde-format
@@ -17876,28 +17806,22 @@ msgid "Getting list of accounts from your bank."
 msgstr "Obtendo a lista de contas do banco."
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:166
-#, fuzzy, kde-format
-#| msgid ""
-#| "No backends available.\n"
-#| "Add one using weboob-config-qt."
+#, kde-format
 msgid ""
 "No backends available.\n"
 "Add one using woob config-qt."
 msgstr ""
 "Non hai infraestruturas dispoñíbeis.\n"
-"Engada unha mediante weboob-config-qt."
+"Engada unha mediante woob-config-qt."
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:181
-#, fuzzy, kde-format
-#| msgid ""
-#| "No accounts available.\n"
-#| "Check your backend configuration in weboob-config-qt."
+#, kde-format
 msgid ""
 "No accounts available.\n"
 "Check your backend configuration in woob config-qt."
 msgstr ""
 "Non hai contas dispoñíbeis.\n"
-"Revise a configuración da súa infraestrutura en weboob-config-qt."
+"Revise a configuración da súa infraestrutura en woob-config-qt."
 
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.cpp:190
 #, kde-format
@@ -17945,6 +17869,9 @@ msgid ""
 "misconfigured Python environment. Please refer to the manual on how to fix "
 "it."
 msgstr ""
+"O complemento de Woob non puido inicializarse completamente, probablemente "
+"por faltar ou estar mal configurado o contorno de Python. Consulte o manual "
+"para corrixilo."
 
 #: kmymoney/plugins/woob/woob.cpp:65
 #, kde-format
@@ -17953,17 +17880,19 @@ msgid ""
 "misconfigured Woob Python module. Please refer to the manual on how to fix "
 "it."
 msgstr ""
+"O complemento de Woob non puido inicializarse completamente, probablemente "
+"por faltar ou estar mal configurado o módulo de Woob de Python. Consulte o "
+"manual para corrixilo."
 
 #: kmymoney/plugins/woob/woob.cpp:86
 #, kde-format
 msgid "Woob"
-msgstr ""
+msgstr "Woob"
 
 #: kmymoney/plugins/woob/woob.cpp:130
-#, fuzzy, kde-format
-#| msgid "Weboob configuration"
+#, kde-format
 msgid "Woob configuration"
-msgstr "Configuración de Weboob"
+msgstr "Configuración de Woob"
 
 #: kmymoney/plugins/woob/woob.cpp:182
 #, kde-format
@@ -17973,13 +17902,15 @@ msgstr "Obtendo os asentos…"
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:34
 #, kde-format
 msgid "GPG installation not found or not working properly."
-msgstr ""
+msgstr "A instalación de GPG non se atopou ou non funciona correctamente."
 
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:153
 #, kde-format
 msgid ""
 "No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"
 msgstr ""
+"Non se atoparon chaves secretas de GPG, execute «gpg[2] --gen-key» ou "
+"importe chaves en «gpg»."
 
 #: kmymoney/plugins/xml/kcm_xmlstorage.cpp:168
 #: kmymoney/plugins/xml/ksettingsgpg.cpp:206
@@ -18362,17 +18293,7 @@ msgstr "A chave de recuperación está dispoñíbel no chaveiro"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_EncryptRecover)
 #: kmymoney/plugins/xml/xmlstoragesettings.ui:178
-#, fuzzy, kde-format
-#| msgid ""
-#| "You can specify to encrypt the data also with the KMyMoney recover key. "
-#| "Only the core KMyMoney developers are in posession of the respective "
-#| "private key required to read back such encrypted data.<p>\n"
-#| "\n"
-#| "This mechanism is provided for the case that you have lost your key and "
-#| "cannot access your data anymore. With this option activated, the KMyMoney "
-#| "developers can decrypt the data and supply you with it in a readable "
-#| "form. Please be prepared, that you have to answer a few detailed "
-#| "questions about the contents of your data before we will send it out."
+#, kde-format
 msgid ""
 "You can specify to encrypt the data also with the KMyMoney recover key. Only "
 "the core KMyMoney developers are in possession of the respective private key "
@@ -18643,7 +18564,7 @@ msgstr ""
 #: kmymoney/settings/kmymoney.kcfg:188
 #, kde-format
 msgid "Show date of last reconciliation on the Homepage"
-msgstr "Amosar a data da última reconciliación na páxina inicial."
+msgstr "Amosar a data da última conciliación na páxina inicial."
 
 #. i18n: ectx: label, entry (HideZeroBalanceLiabilities), group (Homepage Options)
 #: kmymoney/settings/kmymoney.kcfg:192
@@ -18856,64 +18777,55 @@ msgid "Name of default CSS file"
 msgstr "Nome do ficheiro de CSS predeterminado"
 
 #: kmymoney/views/investtransactioneditor.cpp:82
-#, fuzzy, kde-format
-#| msgid "Buy shares"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Buy shares"
 msgstr "Mercar participacións"
 
 #: kmymoney/views/investtransactioneditor.cpp:83
-#, fuzzy, kde-format
-#| msgid "Sell shares"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Sell shares"
 msgstr "Vender participacións"
 
 #: kmymoney/views/investtransactioneditor.cpp:84
-#, fuzzy, kde-format
-#| msgid "Dividend"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Dividend"
 msgstr "Dividendo"
 
 #: kmymoney/views/investtransactioneditor.cpp:85
-#, fuzzy, kde-format
-#| msgid "Reinvest dividend"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Reinvest dividend"
 msgstr "Reinvestir os dividendos"
 
 #: kmymoney/views/investtransactioneditor.cpp:86
-#, fuzzy, kde-format
-#| msgid "Yield"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Yield"
 msgstr "Rendemento"
 
 #: kmymoney/views/investtransactioneditor.cpp:87
-#, fuzzy, kde-format
-#| msgid "Add shares"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Add shares"
 msgstr "Engadir participacións"
 
 #: kmymoney/views/investtransactioneditor.cpp:88
-#, fuzzy, kde-format
-#| msgid "Remove shares"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Remove shares"
 msgstr "Retirar participacións"
 
 #: kmymoney/views/investtransactioneditor.cpp:89
-#, fuzzy, kde-format
-#| msgid "Split shares"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Split shares"
 msgstr "Repartir as participacións"
 
 #: kmymoney/views/investtransactioneditor.cpp:90
-#, fuzzy, kde-format
-#| msgid "Interest Income"
+#, kde-format
 msgctxt "@item:inlistbox transaction type"
 msgid "Interest Income"
 msgstr "Taxa de xuro"
@@ -18938,118 +18850,104 @@ msgid ""
 "The transaction commodity has been changed which will possibly make all "
 "price information invalid. Please check them."
 msgstr ""
+"Cambiouse a mercadoría do asento, co que posibelmente a información de "
+"prezos non sexa válida. Compróbeos."
 
 #: kmymoney/views/investtransactioneditor.cpp:511
-#, fuzzy, kde-format
-#| msgid "Default Category for Payee"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for fees"
-msgstr "Categoría predeterminada para o beneficiario"
+msgstr "Categoría das comisións"
 
 #: kmymoney/views/investtransactioneditor.cpp:512
-#, fuzzy, kde-format
-#| msgid "Amount is:"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of fees"
-msgstr "O importe é:"
+msgstr "Importe das comisións"
 
 #: kmymoney/views/investtransactioneditor.cpp:513
-#, fuzzy, kde-format
-#| msgid "Category options"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Category for interest"
-msgstr "Opcións das categorías"
+msgstr "Categoría dos xuros"
 
 #: kmymoney/views/investtransactioneditor.cpp:514
-#, fuzzy, kde-format
-#| msgid "Amount entered"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Amount of interest"
-msgstr "Importe introducido"
+msgstr "Importe dos xuros"
 
 #: kmymoney/views/investtransactioneditor.cpp:515
-#, fuzzy, kde-format
-#| msgid "Create brokerage account"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Asset or brokerage account"
-msgstr "Crear unha conta de corretaxe nova"
+msgstr "Conta de activos ou de corretaxe"
 
 #: kmymoney/views/investtransactioneditor.cpp:516
-#, fuzzy, kde-format
-#| msgid "Use this button to record this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Price information for this transaction"
-msgstr "Use este botón para gravar este asento"
+msgstr "Información de prezos do asento"
 
 #: kmymoney/views/investtransactioneditor.cpp:526
-#, fuzzy, kde-format
-#| msgid "Number of Days to Forecast:"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Number of shares"
-msgstr "Número de días a prognosticar:"
+msgstr "Número de participacións"
 
 #: kmymoney/views/investtransactioneditor.cpp:529
-#, fuzzy, kde-format
-#| msgid "The check number used for this transaction."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter number of shares for this transaction"
-msgstr "O número de cheque que se usa para este asento."
+msgstr "Introduza o número de participacións do asento."
 
 #: kmymoney/views/investtransactioneditor.cpp:534
-#, fuzzy, kde-format
-#| msgid "Split transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Split ratio"
-msgstr "Varias partidas"
+msgstr "Taxa de partición"
 
 #: kmymoney/views/investtransactioneditor.cpp:537
-#, fuzzy, kde-format
-#| msgid "Use this button to record this transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter the split ratio for this transaction"
-msgstr "Use este botón para gravar este asento"
+msgstr "Introduza a taxa de partición do asento."
 
 #: kmymoney/views/investtransactioneditor.cpp:549
-#, fuzzy, kde-format
-#| msgid "The check number used for this transaction."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter price information for this transaction"
-msgstr "O número de cheque que se usa para este asento."
+msgstr "Introduza a información de prezos do asento"
 
 #: kmymoney/views/investtransactioneditor.cpp:565
-#, fuzzy, kde-format
-#| msgid "Select autofill transaction"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Select account to balance the transaction"
-msgstr "Escoller a transacción de completación automática"
+msgstr "Seleccione a conta para equilibrar o asento."
 
 #: kmymoney/views/investtransactioneditor.cpp:572
-#, fuzzy, kde-format
-#| msgid "Default Category for Payee"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for fees"
-msgstr "Categoría predeterminada para o beneficiario"
+msgstr "Introduza a categoría das comisións"
 
 #: kmymoney/views/investtransactioneditor.cpp:575
-#, fuzzy, kde-format
-#| msgid "Enter additional fees"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of fees"
-msgstr "Introducir os cargos adicionais"
+msgstr "Introduza o importe das comisións"
 
 #: kmymoney/views/investtransactioneditor.cpp:581
-#, fuzzy, kde-format
-#| msgid "Expense categories"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter category for interest"
-msgstr "Categorías de gastos"
+msgstr "Introduza a categoría dos xuros"
 
 #: kmymoney/views/investtransactioneditor.cpp:584
-#, fuzzy, kde-format
-#| msgid "Type of interest"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Enter amount of interest"
-msgstr "Tipo de xuro"
+msgstr "Introduza o importe dos xuros"
 
 #: kmymoney/views/kaccountsview.cpp:338
 #, kde-format
@@ -19268,10 +19166,9 @@ msgid "Duplicate the current selected transactions"
 msgstr "Duplicar os asentos que ten escollidos"
 
 #: kmymoney/views/kgloballedgerview.cpp:313
-#, fuzzy, kde-format
-#| msgid "Cannot create transactions when no account is selected."
+#, kde-format
 msgid "Add reversing transactions to the currently selected"
-msgstr "Non se poden crear asentos se non hai ningunha conta escollida."
+msgstr "Engadir asentos de inversión dos seleccionados"
 
 #: kmymoney/views/kgloballedgerview.cpp:365
 #, kde-format
@@ -19695,12 +19592,11 @@ msgid "To Minimum Balance / Maximum Credit"
 msgstr "Ao saldo mínimo / crédito máximo"
 
 #: kmymoney/views/khomeview_p.h:1048
-#, fuzzy, kde-format
-#| msgid "%1 Day Forecast"
+#, kde-format
 msgctxt "Forecast days"
 msgid "%1 Day Forecast"
 msgid_plural "%1 Day Forecast"
-msgstr[0] "Prognóstico a %1 días"
+msgstr[0] "Prognóstico a %1 día"
 msgstr[1] "Prognóstico a %1 días"
 
 #: kmymoney/views/khomeview_p.h:1057
@@ -19910,7 +19806,7 @@ msgstr "Amosar a páxina de inicio."
 #: kmymoney/views/kmymoneyview.cpp:432
 #, kde-format
 msgid "Show institutions page"
-msgstr "Amosar a páxina das institucións."
+msgstr "Amosar a páxina das entidades."
 
 #: kmymoney/views/kmymoneyview.cpp:433
 #, kde-format
@@ -20752,10 +20648,9 @@ msgid "* Im-/Exporter"
 msgstr "* Importador e exportador"
 
 #: kmymoney/views/kwelcomepage.cpp:237
-#, fuzzy, kde-format
-#| msgid "- Added support for Weboob"
+#, kde-format
 msgid "- Added support for Woob"
-msgstr "- Engadiuse compatibilidade con Weboob"
+msgstr "- Engadiuse compatibilidade con Woob"
 
 #: kmymoney/views/kwelcomepage.cpp:238
 #, kde-format
@@ -21285,16 +21180,14 @@ msgstr "Pago de"
 
 #: kmymoney/widgets/kmymoneycashflowcombo.cpp:51
 #: kmymoney/widgets/transaction_p.h:70 kmymoney/widgets/transaction_p.h:72
-#, fuzzy, kde-format
-#| msgid "Pay to"
+#, kde-format
 msgctxt "Payee"
 msgid "Pay to"
 msgstr "Pagar a"
 
 #: kmymoney/widgets/kmymoneycashflowcombo.cpp:52
 #: kmymoney/widgets/transaction_p.h:70 kmymoney/widgets/transaction_p.h:72
-#, fuzzy, kde-format
-#| msgid "From"
+#, kde-format
 msgctxt "Payer"
 msgid "From"
 msgstr "De"
@@ -21723,10 +21616,9 @@ msgid "Last reconciliation"
 msgstr "Última conciliación"
 
 #: kmymoney/widgets/register.cpp:1711
-#, fuzzy, kde-format
-#| msgid "Opening balance: %1"
+#, kde-format
 msgid "Reconciled Balance: %1"
-msgstr "Saldo de apertura: %1"
+msgstr "Saldo conciliado: %1"
 
 #: kmymoney/widgets/register.cpp:1722
 #, kde-format
@@ -21962,16 +21854,13 @@ msgstr "Xuros / Cargos"
 
 #. i18n: ectx: property (text), widget (QLabel, qLabel1)
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:12
-#, fuzzy, kde-format
-#| msgid ""
-#| "If necessary, enter information about interest or charges here. KMyMoney "
-#| "will create transactions and cleares them directly for you."
+#, kde-format
 msgid ""
 "If necessary, enter information about interest or charges here. KMyMoney "
 "will create transactions and mark them as cleared."
 msgstr ""
 "Se é preciso, introduza aquí información sobre xuros ou cargos. KMyMoney "
-"asentará transaccións e haas compensar por si."
+"asentará transaccións márcaas como compensadas."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox2)
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:134
@@ -23451,10 +23340,10 @@ msgid ""
 msgstr ""
 "KMyMoney crea un plano de pagamentos para este pagamento, e avisa cando deba "
 "facer un. Escolla a conta da/á que serán feitos os pagamentos e a categoría "
-"á que se asignarán os intereses.<p>Se escolleu rexistrar todos os "
-"pagamentos, xa proporcionou esta data. Se escolleu rexistrar só os "
-"pagamentos deste ano, entón a <b>Data de vencemento do primeiro pagamento</"
-"b> é a data do primeiro pagamento realizado este ano."
+"á que se asignarán os xuros.<p>Se escolleu rexistrar todos os pagamentos, xa "
+"proporcionou esta data. Se escolleu rexistrar só os pagamentos deste ano, "
+"entón a <b>Data de vencemento do primeiro pagamento</b> é a data do primeiro "
+"pagamento realizado este ano."
 
 #. i18n: ectx: attribute (title), widget (QWizardPage, InterestCategoryWizardPage)
 #. i18n: ectx: property (text), widget (QLabel, textLabel7)
@@ -23769,10 +23658,9 @@ msgid "Security found"
 msgstr "Atopouse o valor"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:267
-#, fuzzy, kde-format
-#| msgid "An unrecoverable error occurred while reading the database"
+#, kde-format
 msgid "Unexpected error occurred while adding new investment"
-msgstr "Produciuse un erro irrecuperábel mentres se lía a base de dados"
+msgstr "Produciuse un erro inesperado ao engadir un novo investimento"
 
 #: kmymoney/wizards/newinvestmentwizard/knewinvestmentwizard.cpp:283
 #, kde-format
