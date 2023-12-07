@@ -104,9 +104,9 @@
   <listitem>
     <para
 >mais avec <quote
->teau</quote
+>bas</quote
 >, <quote
->gâteau basque</quote
+>Société Gâteau Basque</quote
 > sera aussi trouvé. </para>
   </listitem>
 </itemizedlist>
@@ -131,8 +131,8 @@
 <para
 >Si vous cochez la case <guilabel
 >Traiter le texte comme une expression rationnelle</guilabel
->, le texte sera traité comme une expression rationnelle. Pour des informations sur la manière d'établir une expression rationnelle, visitez la documentation &Qt; à propos de <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
->QRegularExpression class</ulink
+>, le texte sera traité comme une expression rationnelle. Pour des informations sur la manière d'établir une expression rationnelle, visitez la documentation &Qt; à propos de la <ulink url="https://doc.qt.io/qt-5/qregularexpression.html"
+>classe « QRegularExpression »</ulink
 >. </para>
 </sect2>
 

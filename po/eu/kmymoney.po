@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-27 00:42+0000\n"
-"PO-Revision-Date: 2023-09-19 20:42+0200\n"
+"PO-Revision-Date: 2023-12-06 11:31+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2864,25 +2864,21 @@ msgstr "Telefonoa/Faxa:"
 #: kmymoney/dialogs/knewinstitutiondlg.ui:197
 #, kde-format
 msgid "Favicon URL"
-msgstr ""
+msgstr "Gogoko ikonoaren URL"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, iconUrlEdit)
 #: kmymoney/dialogs/knewinstitutiondlg.ui:204
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid ""
-#| "<html><head/><body><p>Enter the rounding method used for this currency.  "
-#| "See <span style=\" font-weight:600;\">What's this</span> for more details."
-#| "</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>If left empty, the icon for the institution will be "
 "located at the root of the Website URL entered above with the name <span "
 "style=\" font-weight:600;\">favicon.ico</span>. You can override the "
 "location here.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>Sartu dibisa honetarako erabilitako biribiltze-"
-"metodoa. Ikusi <span style=\" font-weight:600;\">Zer da hau</span> xehetasun "
-"gehiago lortzeko.</p></body></html>"
+"<html><head/><body><p>Hutsik utziz gero, erakundearen ikonoa, goran "
+"sartutako webgunearen URLaren erroan, <span style=\" font-weight:600;"
+"\">favicon.ico</span> izenarekin bilatuko da. Kokalekua hemen indargabetu "
+"dezakezu.</p></body></html>"
 
 #: kmymoney/dialogs/kpayeereassigndlg.cpp:35
 msgid ""
