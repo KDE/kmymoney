@@ -431,7 +431,7 @@ struct JournalModel::Private
             balance /= factor;
         }
         const auto account = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
-        const auto security = MyMoneyFile::instance()->securitiesModel()->itemById(account.tradingCurrencyId());
+        const auto security = MyMoneyFile::instance()->securitiesModel()->itemById(account.currencyId());
 
         AlkValue::RoundingMethod roundingMethod = AlkValue::RoundRound;
         if (security.roundingMethod() != AlkValue::RoundNever)
