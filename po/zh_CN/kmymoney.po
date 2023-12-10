@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-27 00:42+0000\n"
-"PO-Revision-Date: 2023-11-25 02:29\n"
+"PO-Revision-Date: 2023-12-09 09:27\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -2755,20 +2755,13 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, iconUrlEdit)
 #: kmymoney/dialogs/knewinstitutiondlg.ui:204
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid ""
-#| "<html><head/><body><p>Enter the rounding method used for this currency.  "
-#| "See <span style=\" font-weight:600;\">What's this</span> for more details."
-#| "</p></body></html>"
+#, kde-format
 msgid ""
 "<html><head/><body><p>If left empty, the icon for the institution will be "
 "located at the root of the Website URL entered above with the name <span "
 "style=\" font-weight:600;\">favicon.ico</span>. You can override the "
 "location here.</p></body></html>"
 msgstr ""
-"<html><head/><body><p>输入此货币的舍入方法。详情请点击<span style=\" font-"
-"weight:600;\">这是什么</span>。</p></body></html>"
 
 #: kmymoney/dialogs/kpayeereassigndlg.cpp:35
 msgid ""
@@ -3264,7 +3257,7 @@ msgstr "树形"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:344
 #, kde-format
 msgid "Tabbed"
-msgstr "标签"
+msgstr "标签页"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_syncLedgerInvestment)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:354
@@ -16556,7 +16549,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabperformance.ui:14
 #, kde-format
 msgid "Report Tab"
-msgstr "交易标签"
+msgstr "报表标签页"
 
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabPerformance)
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabCapitalGain)
@@ -16566,7 +16559,7 @@ msgstr "交易标签"
 #: kmymoney/plugins/views/reports/reporttabperformance.ui:20
 #, kde-format
 msgid "<p>On this tab, you set the basic properties of this report.</p>"
-msgstr "<p>您在此标签中设置此报表的属性。</p>"
+msgstr "<p>您在此标签页中设置此报表的属性。</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, lblSettlementPeriod)
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:28
@@ -16621,7 +16614,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrange.ui:14
 #, kde-format
 msgid "Chart Tab"
-msgstr "图形标签页"
+msgstr "图表标签页"
 
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabChart)
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabRange)
@@ -16963,7 +16956,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:20
 #, kde-format
 msgid "Rows/Columns Tab"
-msgstr "行/栏目标签"
+msgstr "行/栏标签页"
 
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabRowColPivot)
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabRowColQuery)
@@ -16973,7 +16966,7 @@ msgstr "行/栏目标签"
 msgid ""
 "<p>On this tab, you configure how you would like the rows and columns to be "
 "selected and organized.</p>"
-msgstr "<p>在此标签中，您配置如何对选中的行和栏目进行组织。</p>"
+msgstr "<p>在此标签页中，您配置如何对选中的行和栏进行组织。</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, m_movingAverageLabel)
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:30
