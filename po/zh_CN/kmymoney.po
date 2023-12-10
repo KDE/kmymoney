@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2023-11-25 02:33\n"
+"PO-Revision-Date: 2023-12-09 09:29\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -4138,7 +4138,7 @@ msgstr "树形"
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:360
 #, kde-format
 msgid "Tabbed"
-msgstr "标签"
+msgstr "标签页"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_showTitleBar)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:370
@@ -16598,7 +16598,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabperformance.ui:14
 #, kde-format
 msgid "Report Tab"
-msgstr "交易标签"
+msgstr "报表标签页"
 
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabPerformance)
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabCapitalGain)
@@ -16608,7 +16608,7 @@ msgstr "交易标签"
 #: kmymoney/plugins/views/reports/reporttabperformance.ui:20
 #, kde-format
 msgid "<p>On this tab, you set the basic properties of this report.</p>"
-msgstr "<p>您在此标签中设置此报表的属性。</p>"
+msgstr "<p>您在此标签页中设置此报表的属性。</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, lblSettlementPeriod)
 #: kmymoney/plugins/views/reports/reporttabcapitalgain.ui:28
@@ -16663,7 +16663,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrange.ui:14
 #, kde-format
 msgid "Chart Tab"
-msgstr "图形标签页"
+msgstr "图表标签页"
 
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabChart)
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabRange)
@@ -17005,7 +17005,7 @@ msgstr ""
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:20
 #, kde-format
 msgid "Rows/Columns Tab"
-msgstr "行/栏目标签"
+msgstr "行/栏标签页"
 
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabRowColPivot)
 #. i18n: ectx: property (whatsThis), widget (QWidget, ReportTabRowColQuery)
@@ -17015,7 +17015,7 @@ msgstr "行/栏目标签"
 msgid ""
 "<p>On this tab, you configure how you would like the rows and columns to be "
 "selected and organized.</p>"
-msgstr "<p>在此标签中，您配置如何对选中的行和栏目进行组织。</p>"
+msgstr "<p>在此标签页中，您配置如何对选中的行和栏进行组织。</p>"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboRows)
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_comboDetail)
@@ -24321,7 +24321,7 @@ msgid ""
 "<p>...that you can switch between a listing of all accounts or\n"
 "an icon view of all asset and liability accounts with the tabs\n"
 "in the accounts view?\n"
-msgstr "<p>...您可以通过账户视图中的标签来切换账户列表和账户图标视图？</p>\n"
+msgstr "<p>...您可以通过账户视图中的标签页来切换账户列表和账户图标视图？\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tips:53
