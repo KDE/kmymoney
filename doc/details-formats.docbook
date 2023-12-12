@@ -133,7 +133,7 @@
 
 <sect3 id="details.formats.encrypted.keysettings"><title>Setting the keys in &kmymoney;</title>
 <para>
-  On the encryption page of the settings dialog, there is a drop down list where you
+  On the encryption page of the settings dialog, there is a dropdown list where you
   can select the key that should be used for encryption and decryption.
   Additionally, there is a field where you can enter the key-id of a key not in the
   listbox.  You can use either the key-id, the email address associated with this

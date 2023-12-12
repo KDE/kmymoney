@@ -431,7 +431,7 @@
         If the file contains transactions for just a single security, with the name
         possibly in a header row, the name should be entered into the
         <guilabel>Security Name</guilabel> box. The name you enter will be added to
-        the drop-down list for future use. You may subsequently wish to remove that
+        the dropdown list for future use. You may subsequently wish to remove that
         name from the list.  If so, select it, then click the <guilabel>Hide
         security</guilabel> button.  This removes it only from this list, and has no
         effect on your main &kmymoney; file.
@@ -563,7 +563,7 @@
   containing that detail. Now, on the <guilabel>Invalid transaction</guilabel>
   box you may get a few entries because the activity type does not match the
   qty/price/amount combination.  On each message, click <guilabel>Select
-  Transaction Type</guilabel>, and a drop down will appear indicating valid
+  Transaction Type</guilabel>, and a dropdown will appear indicating valid
   activity types for that combination of values.
 </para>
 

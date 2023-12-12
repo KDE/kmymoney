@@ -363,5 +363,16 @@ elsewhere.
 - on the config dialog, home section, should the top area be put in a box as are the
   other two areas, and most of the contents on the other sections?
 
-- Forecast Vuiw - doesn't seem to change forecast method without restarting KMM.
+- Forecast View - doesn't seem to change forecast method without restarting KMM.
 
+- "Show all split details in ledger" acts inconsistenly.  With a split transaction,
+  if a split has a memo, that memo is shown in stead of the second category.  I don't
+  know if this is related to the bug I just filed about splits getting duplicated if
+  you toggle that setting while the transaction is open for editing.
+
+- Is there any consistency or pattern in config dialogs where something with a small
+  number of choicees is presented as a dropdown or a set of radio-button items?  For
+  example, Ledger configuration, Data Entry tab: Default reconciliation state is
+  dropdown with three choices, but Autofill has three radio-button choices.
+
+- 

@@ -396,7 +396,7 @@
   probably find that the default Categories do not exactly match your needs; you can
   easily delete ones you know you are never going to need and add others that you
   need. But when you are entering a transaction, you only have to type a few letters
-  of a category and &kmymoney; will offer you a drop down list of the matching
+  of a category and &kmymoney; will offer you a dropdown list of the matching
   categories from which to choose.
 </para>
 

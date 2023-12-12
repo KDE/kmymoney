@@ -166,7 +166,7 @@
   Enter the name of the schedule and the date of the next occurrence into their
   respective fields.  The name is how the schedule will be labelled in the Schedules
   View and other displays.  Specify how often the schedule should occur, using the
-  Frequency field and drop down list.  For example "every 6 weeks" or "every 3
+  Frequency field and dropdown list.  For example "every 6 weeks" or "every 3
   months."  If the amount varies transaction to transaction make sure to check the
   <guilabel>The amount is an estimate because it varies for each payment</guilabel>
   checkbox in the <guilabel>Options</guilabel> area below, and you will be prompted

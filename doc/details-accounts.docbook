@@ -809,7 +809,7 @@
   fileref="ledgers_view.png"
   format="PNG"/></imageobject></inlinemediaobject></guiicon> ledgers icon in the view
   selector.  If the account is not already displayed there, then click on the
-  <quote>+</quote> in the right-most tab and select the account in the drop down box
+  <quote>+</quote> in the right-most tab and select the account in the dropdown box
   which appears.  Alternatively, in the Accounts View or the Institutionss View,
   either double-click the account name or right-click and select <guimenuitem>Open
   ledger</guimenuitem>.

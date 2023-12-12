@@ -329,7 +329,7 @@
   To add individual securities to your Investment Account, navigate to the
   <guibutton>Investments</guibutton> View, select the <guibutton>Equities</guibutton>
   tab, and choose the Investment account where the investment is held from the
-  <guilabel>Select Account</guilabel> drop-down.
+  <guilabel>Select Account</guilabel> dropdown.
 
   <screenshot>
     <screeninfo>Investment View, Equities Tab</screeninfo>
