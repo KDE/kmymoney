@@ -1,19 +1,19 @@
 # translation of kmymoney.po to Slovak
-# Roman Paholik <wizzardsk@gmail.com>, 2014, 2015, 2016, 2019, 2022.
+# SPDX-FileCopyrightText: 2014, 2015, 2016, 2019, 2022, 2023 Roman Paholik <wizzardsk@gmail.com>
 # Matej Mrenica <matejm98mthw@gmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2022-04-09 11:19+0200\n"
+"PO-Revision-Date: 2023-12-11 18:59+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #, kde-format
@@ -5601,7 +5601,7 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgid "(c) 2000-2019 The KMyMoney development team"
 msgid "(c) 2000-2022 The KMyMoney development team"
-msgstr "(c) 2000-2019 Vývojový tím KMyMoney"
+msgstr "(c) 2000-2017 Vývojový tím KMyMoney"
 
 #: kmymoney/kcreditswindow.cpp:44
 #, kde-format
@@ -9429,7 +9429,7 @@ msgstr "Nula"
 #| msgid "Once"
 msgctxt "@item the number 1"
 msgid "One"
-msgstr "Jeden"
+msgstr "Jedna"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, fuzzy, kde-format
@@ -9490,7 +9490,7 @@ msgstr "Deväť"
 #| msgid "ten"
 msgctxt "@item the number 10"
 msgid "Ten"
-msgstr "Desiatka"
+msgstr "Desať"
 
 #: kmymoney/plugins/checkprinting/numbertowords.cpp:14
 #, kde-format
@@ -9909,11 +9909,9 @@ msgid "Account Type:"
 msgstr "Typ účtu:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:101
-#, fuzzy, kde-format
-#| msgctxt "Header for AqBanking account list"
-#| msgid "Account Name"
+#, kde-format
 msgid "Account Name:"
-msgstr "Meno účtu"
+msgstr "Názov účt&u:"
 
 #: kmymoney/plugins/csv/export/csvwriter.cpp:105
 #, kde-format
