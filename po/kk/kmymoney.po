@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-27 00:42+0000\n"
+"POT-Creation-Date: 2023-12-17 00:42+0000\n"
 "PO-Revision-Date: 2013-10-05 05:51+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -1031,7 +1031,7 @@ msgstr "Бағам мен бағалар редакторы"
 #: kmymoney/views/newtransactionform.ui:145
 #: kmymoney/widgets/ktransactionfilter.cpp:131
 #: kmymoney/widgets/ktransactionfilter.ui:181
-#: kmymoney/widgets/transactionsortoption.cpp:34
+#: kmymoney/widgets/transactionsortoption.cpp:39
 #, kde-format
 msgid "Amount"
 msgstr "Сома"
@@ -2061,7 +2061,7 @@ msgstr "Бағалар"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:381
 #: kmymoney/plugins/views/reports/core/listtable.cpp:686
 #: kmymoney/widgets/ktransactionfilter.ui:574
-#: kmymoney/widgets/transactionsortoption.cpp:37
+#: kmymoney/widgets/transactionsortoption.cpp:42
 #, kde-format
 msgid "Type"
 msgstr "Түрі"
@@ -3107,7 +3107,7 @@ msgstr "Жаңа бағасының жазуы"
 #: kmymoney/plugins/csv/import/securitydlg.ui:14
 #: kmymoney/views/investtransactioneditor.ui:99
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:193
-#: kmymoney/widgets/transactionsortoption.cpp:40
+#: kmymoney/widgets/transactionsortoption.cpp:45
 #, kde-format
 msgid "Security"
 msgstr "Құнды қағаз"
@@ -9219,7 +9219,7 @@ msgstr "Мөлшері"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:268
 #: kmymoney/widgets/ktransactionfilter.ui:445
 #: kmymoney/widgets/ktransactionfilter.ui:487
-#: kmymoney/widgets/transactionsortoption.cpp:33
+#: kmymoney/widgets/transactionsortoption.cpp:38
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:76
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.ui:79
 #, kde-format
@@ -13351,7 +13351,7 @@ msgstr ""
 #: kmymoney/views/newspliteditor.ui:130
 #: kmymoney/views/newtransactioneditor.ui:238
 #: kmymoney/views/newtransactionform.ui:54
-#: kmymoney/widgets/transactionsortoption.cpp:35
+#: kmymoney/widgets/transactionsortoption.cpp:40
 #, kde-format
 msgid "Number"
 msgstr "Нөмірі"
@@ -14810,7 +14810,7 @@ msgstr "Ақырғы балансы"
 #: kmymoney/views/newtransactionform.ui:68
 #: kmymoney/widgets/ktransactionfilter.cpp:138
 #: kmymoney/widgets/ktransactionfilter.ui:326
-#: kmymoney/widgets/transactionsortoption.cpp:38
+#: kmymoney/widgets/transactionsortoption.cpp:43
 #, kde-format
 msgid "Category"
 msgstr "Санат"
@@ -22568,28 +22568,28 @@ msgstr "Есепшоттың нөмірі"
 msgid "institution code"
 msgstr "Мекеме коды"
 
-#: kmymoney/widgets/transactionsortoption.cpp:30
+#: kmymoney/widgets/transactionsortoption.cpp:35
 msgctxt "Unknown sort order"
 msgid "Unknown"
 msgstr "Беймәлім"
 
-#: kmymoney/widgets/transactionsortoption.cpp:31
+#: kmymoney/widgets/transactionsortoption.cpp:36
 msgid "Post date"
 msgstr "Жазу күні"
 
-#: kmymoney/widgets/transactionsortoption.cpp:32
+#: kmymoney/widgets/transactionsortoption.cpp:37
 msgid "Date entered"
 msgstr "Келтірілген күні"
 
-#: kmymoney/widgets/transactionsortoption.cpp:36
+#: kmymoney/widgets/transactionsortoption.cpp:41
 msgid "Entry order"
 msgstr "Жазу реті"
 
-#: kmymoney/widgets/transactionsortoption.cpp:39
+#: kmymoney/widgets/transactionsortoption.cpp:44
 msgid "Reconcile state"
 msgstr "Салыстырып тексеру күй-жайы"
 
-#: kmymoney/widgets/transactionsortoption.cpp:41
+#: kmymoney/widgets/transactionsortoption.cpp:46
 #, fuzzy
 #| msgid "Reconciliation view"
 msgid "Reconciliation date"

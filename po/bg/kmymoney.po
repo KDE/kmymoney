@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-27 00:42+0000\n"
+"POT-Creation-Date: 2023-12-17 00:42+0000\n"
 "PO-Revision-Date: 2009-10-17 16:25+0300\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -921,7 +921,7 @@ msgstr ""
 #: kmymoney/views/newtransactionform.ui:145
 #: kmymoney/widgets/ktransactionfilter.cpp:131
 #: kmymoney/widgets/ktransactionfilter.ui:181
-#: kmymoney/widgets/transactionsortoption.cpp:34
+#: kmymoney/widgets/transactionsortoption.cpp:39
 #, kde-format
 msgid "Amount"
 msgstr "Сума"
@@ -1894,7 +1894,7 @@ msgstr "Цени"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:381
 #: kmymoney/plugins/views/reports/core/listtable.cpp:686
 #: kmymoney/widgets/ktransactionfilter.ui:574
-#: kmymoney/widgets/transactionsortoption.cpp:37
+#: kmymoney/widgets/transactionsortoption.cpp:42
 #, kde-format
 msgid "Type"
 msgstr "Вид"
@@ -2877,7 +2877,7 @@ msgstr "Нов..."
 #: kmymoney/plugins/csv/import/securitydlg.ui:14
 #: kmymoney/views/investtransactioneditor.ui:99
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:193
-#: kmymoney/widgets/transactionsortoption.cpp:40
+#: kmymoney/widgets/transactionsortoption.cpp:45
 #, kde-format
 msgid "Security"
 msgstr "Сигурност"
@@ -8567,7 +8567,7 @@ msgstr "Стойност"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:268
 #: kmymoney/widgets/ktransactionfilter.ui:445
 #: kmymoney/widgets/ktransactionfilter.ui:487
-#: kmymoney/widgets/transactionsortoption.cpp:33
+#: kmymoney/widgets/transactionsortoption.cpp:38
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:76
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.ui:79
 #, kde-format
@@ -12289,7 +12289,7 @@ msgstr "Изберете финансовата си институция от �
 #: kmymoney/views/newspliteditor.ui:130
 #: kmymoney/views/newtransactioneditor.ui:238
 #: kmymoney/views/newtransactionform.ui:54
-#: kmymoney/widgets/transactionsortoption.cpp:35
+#: kmymoney/widgets/transactionsortoption.cpp:40
 #, kde-format
 msgid "Number"
 msgstr "Число"
@@ -13694,7 +13694,7 @@ msgstr ""
 #: kmymoney/views/newtransactionform.ui:68
 #: kmymoney/widgets/ktransactionfilter.cpp:138
 #: kmymoney/widgets/ktransactionfilter.ui:326
-#: kmymoney/widgets/transactionsortoption.cpp:38
+#: kmymoney/widgets/transactionsortoption.cpp:43
 #, kde-format
 msgid "Category"
 msgstr "Категория"
@@ -20849,29 +20849,29 @@ msgstr "Номер на сметка"
 msgid "institution code"
 msgstr "Институция"
 
-#: kmymoney/widgets/transactionsortoption.cpp:30
+#: kmymoney/widgets/transactionsortoption.cpp:35
 #, fuzzy
 msgctxt "Unknown sort order"
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: kmymoney/widgets/transactionsortoption.cpp:31
+#: kmymoney/widgets/transactionsortoption.cpp:36
 msgid "Post date"
 msgstr ""
 
-#: kmymoney/widgets/transactionsortoption.cpp:32
+#: kmymoney/widgets/transactionsortoption.cpp:37
 msgid "Date entered"
 msgstr ""
 
-#: kmymoney/widgets/transactionsortoption.cpp:36
+#: kmymoney/widgets/transactionsortoption.cpp:41
 msgid "Entry order"
 msgstr ""
 
-#: kmymoney/widgets/transactionsortoption.cpp:39
+#: kmymoney/widgets/transactionsortoption.cpp:44
 msgid "Reconcile state"
 msgstr ""
 
-#: kmymoney/widgets/transactionsortoption.cpp:41
+#: kmymoney/widgets/transactionsortoption.cpp:46
 #, fuzzy
 msgid "Reconciliation date"
 msgstr "Получено"

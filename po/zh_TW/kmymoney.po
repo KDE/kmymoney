@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-27 00:42+0000\n"
+"POT-Creation-Date: 2023-12-17 00:42+0000\n"
 "PO-Revision-Date: 2023-12-13 17:11+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -1008,7 +1008,7 @@ msgstr "換匯率 / 價格編輯器"
 #: kmymoney/views/newtransactionform.ui:145
 #: kmymoney/widgets/ktransactionfilter.cpp:131
 #: kmymoney/widgets/ktransactionfilter.ui:181
-#: kmymoney/widgets/transactionsortoption.cpp:34
+#: kmymoney/widgets/transactionsortoption.cpp:39
 #, kde-format
 msgid "Amount"
 msgstr "數量"
@@ -2031,7 +2031,7 @@ msgstr "價格"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:381
 #: kmymoney/plugins/views/reports/core/listtable.cpp:686
 #: kmymoney/widgets/ktransactionfilter.ui:574
-#: kmymoney/widgets/transactionsortoption.cpp:37
+#: kmymoney/widgets/transactionsortoption.cpp:42
 #, kde-format
 msgid "Type"
 msgstr "類型"
@@ -3044,7 +3044,7 @@ msgstr "新增價格項目"
 #: kmymoney/plugins/csv/import/securitydlg.ui:14
 #: kmymoney/views/investtransactioneditor.ui:99
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:193
-#: kmymoney/widgets/transactionsortoption.cpp:40
+#: kmymoney/widgets/transactionsortoption.cpp:45
 #, kde-format
 msgid "Security"
 msgstr "抵押品"
@@ -9053,7 +9053,7 @@ msgstr "數值"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:268
 #: kmymoney/widgets/ktransactionfilter.ui:445
 #: kmymoney/widgets/ktransactionfilter.ui:487
-#: kmymoney/widgets/transactionsortoption.cpp:33
+#: kmymoney/widgets/transactionsortoption.cpp:38
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:76
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.ui:79
 #, kde-format
@@ -13107,7 +13107,7 @@ msgstr "請從清單中選取此帳戶裡使用的財務機構帳戶。"
 #: kmymoney/views/newspliteditor.ui:130
 #: kmymoney/views/newtransactioneditor.ui:238
 #: kmymoney/views/newtransactionform.ui:54
-#: kmymoney/widgets/transactionsortoption.cpp:35
+#: kmymoney/widgets/transactionsortoption.cpp:40
 #, kde-format
 msgid "Number"
 msgstr "編號"
@@ -14544,7 +14544,7 @@ msgstr "註冊結餘"
 #: kmymoney/views/newtransactionform.ui:68
 #: kmymoney/widgets/ktransactionfilter.cpp:138
 #: kmymoney/widgets/ktransactionfilter.ui:326
-#: kmymoney/widgets/transactionsortoption.cpp:38
+#: kmymoney/widgets/transactionsortoption.cpp:43
 #, kde-format
 msgid "Category"
 msgstr "類別"
@@ -22155,28 +22155,28 @@ msgstr "帳戶編號"
 msgid "institution code"
 msgstr "機構代碼"
 
-#: kmymoney/widgets/transactionsortoption.cpp:30
+#: kmymoney/widgets/transactionsortoption.cpp:35
 msgctxt "Unknown sort order"
 msgid "Unknown"
 msgstr "未知"
 
-#: kmymoney/widgets/transactionsortoption.cpp:31
+#: kmymoney/widgets/transactionsortoption.cpp:36
 msgid "Post date"
 msgstr "發布日期"
 
-#: kmymoney/widgets/transactionsortoption.cpp:32
+#: kmymoney/widgets/transactionsortoption.cpp:37
 msgid "Date entered"
 msgstr "輸入的日期"
 
-#: kmymoney/widgets/transactionsortoption.cpp:36
+#: kmymoney/widgets/transactionsortoption.cpp:41
 msgid "Entry order"
 msgstr "項目順序"
 
-#: kmymoney/widgets/transactionsortoption.cpp:39
+#: kmymoney/widgets/transactionsortoption.cpp:44
 msgid "Reconcile state"
 msgstr "對帳狀態"
 
-#: kmymoney/widgets/transactionsortoption.cpp:41
+#: kmymoney/widgets/transactionsortoption.cpp:46
 #, fuzzy
 #| msgid "Reconciliation view"
 msgid "Reconciliation date"

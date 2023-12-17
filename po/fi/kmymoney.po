@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-27 00:42+0000\n"
+"POT-Creation-Date: 2023-12-17 00:42+0000\n"
 "PO-Revision-Date: 2023-06-07 16:30+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -1019,7 +1019,7 @@ msgstr "Vaihtokurssi/hinta -muokkain"
 #: kmymoney/views/newtransactionform.ui:145
 #: kmymoney/widgets/ktransactionfilter.cpp:131
 #: kmymoney/widgets/ktransactionfilter.ui:181
-#: kmymoney/widgets/transactionsortoption.cpp:34
+#: kmymoney/widgets/transactionsortoption.cpp:39
 #, kde-format
 msgid "Amount"
 msgstr "Summa"
@@ -2037,7 +2037,7 @@ msgstr "Hinnat"
 #: kmymoney/plugins/ofx/import/dialogs/konlinebankingsetupwizard.ui:381
 #: kmymoney/plugins/views/reports/core/listtable.cpp:686
 #: kmymoney/widgets/ktransactionfilter.ui:574
-#: kmymoney/widgets/transactionsortoption.cpp:37
+#: kmymoney/widgets/transactionsortoption.cpp:42
 #, kde-format
 msgid "Type"
 msgstr "Tyyppi"
@@ -3101,7 +3101,7 @@ msgstr "Uuden hinnan määritys"
 #: kmymoney/plugins/csv/import/securitydlg.ui:14
 #: kmymoney/views/investtransactioneditor.ui:99
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:193
-#: kmymoney/widgets/transactionsortoption.cpp:40
+#: kmymoney/widgets/transactionsortoption.cpp:45
 #, kde-format
 msgid "Security"
 msgstr "Arvopaperi"
@@ -9030,7 +9030,7 @@ msgstr "Arvo"
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:268
 #: kmymoney/widgets/ktransactionfilter.ui:445
 #: kmymoney/widgets/ktransactionfilter.ui:487
-#: kmymoney/widgets/transactionsortoption.cpp:33
+#: kmymoney/widgets/transactionsortoption.cpp:38
 #: kmymoney/wizards/endingbalancedlg/interestchargecheckingswizardpage.ui:76
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.ui:79
 #, kde-format
@@ -12939,7 +12939,7 @@ msgstr "Valitse rahalaitoksesi tileistä tätä tiliä vastaava tili."
 #: kmymoney/views/newspliteditor.ui:130
 #: kmymoney/views/newtransactioneditor.ui:238
 #: kmymoney/views/newtransactionform.ui:54
-#: kmymoney/widgets/transactionsortoption.cpp:35
+#: kmymoney/widgets/transactionsortoption.cpp:40
 #, kde-format
 msgid "Number"
 msgstr "Numero"
@@ -14398,7 +14398,7 @@ msgstr "Tapahtumien loppusaldo"
 #: kmymoney/views/newtransactionform.ui:68
 #: kmymoney/widgets/ktransactionfilter.cpp:138
 #: kmymoney/widgets/ktransactionfilter.ui:326
-#: kmymoney/widgets/transactionsortoption.cpp:38
+#: kmymoney/widgets/transactionsortoption.cpp:43
 #, kde-format
 msgid "Category"
 msgstr "Luokka"
@@ -21924,28 +21924,28 @@ msgstr "tilinumero"
 msgid "institution code"
 msgstr "rahalaitoskoodi"
 
-#: kmymoney/widgets/transactionsortoption.cpp:30
+#: kmymoney/widgets/transactionsortoption.cpp:35
 msgctxt "Unknown sort order"
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: kmymoney/widgets/transactionsortoption.cpp:31
+#: kmymoney/widgets/transactionsortoption.cpp:36
 msgid "Post date"
 msgstr "Kirjauspäivämäärä"
 
-#: kmymoney/widgets/transactionsortoption.cpp:32
+#: kmymoney/widgets/transactionsortoption.cpp:37
 msgid "Date entered"
 msgstr "Syötetty päivänä"
 
-#: kmymoney/widgets/transactionsortoption.cpp:36
+#: kmymoney/widgets/transactionsortoption.cpp:41
 msgid "Entry order"
 msgstr "Kirjausten järjestys"
 
-#: kmymoney/widgets/transactionsortoption.cpp:39
+#: kmymoney/widgets/transactionsortoption.cpp:44
 msgid "Reconcile state"
 msgstr "Yhteensovittamisen tila"
 
-#: kmymoney/widgets/transactionsortoption.cpp:41
+#: kmymoney/widgets/transactionsortoption.cpp:46
 #, fuzzy
 #| msgctxt "Ledger marker showing a reconciliation entry"
 #| msgid "Reconciliation"
