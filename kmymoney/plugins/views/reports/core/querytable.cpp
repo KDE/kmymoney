@@ -564,11 +564,15 @@ void QueryTable::constructTransactionTable()
         const QList<MyMoneySplit>& splits = (*it_transaction).splits();
         QList<MyMoneySplit>::const_iterator myBegin, it_split;
 
+        bool foundTaxAccount = false;
         for (it_split = splits.constBegin(), myBegin = splits.constEnd(); it_split != splits.constEnd(); ++it_split) {
             ReportAccount splitAcc((* it_split).accountId());
             // always put split with a "stock" account if it exists
             if (splitAcc.isInvest())
                 break;
+
+            // remember if we have found a tax related account
+            foundTaxAccount |= splitAcc.isInTaxReports();
 
             // prefer to put splits with a "loan" account if it exists
             if (splitAcc.isLoan())
@@ -580,6 +584,13 @@ void QueryTable::constructTransactionTable()
                     myBegin = it_split;
                 }
             }
+        }
+
+        // we can skip the transaction in case it is a tax report
+        // and the transaction does not reference any tax related
+        // account
+        if (report.isTax() && !foundTaxAccount) {
+            continue;
         }
 
         // select our "reference" split
