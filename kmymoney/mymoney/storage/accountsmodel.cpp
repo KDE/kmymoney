@@ -13,11 +13,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDate>
 #include <QDebug>
-#include <QString>
 #include <QFont>
 #include <QIcon>
-#include <QDate>
+#include <QMimeData>
+#include <QString>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -120,8 +121,7 @@ struct AccountsModel::Private
                     if (q->m_idToItemMapper) {
                         q->m_idToItemMapper->insert(subAccountId, static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer()));
                     }
-                    if (subAccount.value("PreferredAccount") == QLatin1String("Yes")
-                            && !subAccount.isClosed() ) {
+                    if (subAccount.value("PreferredAccount", false) && !subAccount.isClosed()) {
                         q->addFavorite(subAccountId);
                         ++itemCount;
                     }
@@ -340,6 +340,55 @@ struct AccountsModel::Private
         return txt;
     }
 
+    QString idFromMimeData(const QMimeData* data) const
+    {
+        QByteArray encodedData = data->data(mimeTypeName);
+        return QString::fromUtf8(encodedData);
+    }
+
+    bool canDropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) const
+    {
+        Q_UNUSED(action)
+        Q_UNUSED(row)
+        Q_UNUSED(column)
+
+        if (!data->hasFormat(mimeTypeName)) {
+            return false;
+        }
+
+        const auto sourceId = idFromMimeData(data);
+        if (sourceId.isEmpty()) {
+            return false;
+        }
+
+        const auto acc = q_func()->itemById(sourceId);
+        const auto parentAcc = q_func()->itemByIndex(parent);
+
+        // check that it's not one of the standard account groups
+        if (!q_func()->indexById(acc.id()).parent().isValid())
+            return false;
+
+        if (acc.accountGroup() == parentAcc.accountGroup()) {
+            if (acc.isInvest() && parentAcc.accountType() != eMyMoney::Account::Type::Investment) {
+                return false;
+            }
+
+            if (parentAcc.accountType() == eMyMoney::Account::Type::Investment && !acc.isInvest()) {
+                return false;
+            }
+
+            // get current parent
+            const auto curParent = q_func()->itemById(acc.parentAccountId());
+
+            // move to same parent does not make sense
+            if (curParent.id() == parentAcc.id()) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
     struct DefaultAccounts {
         eMyMoney::Account::Standard groupType;
         eMyMoney::Account::Type     accountType;
@@ -354,6 +403,8 @@ struct AccountsModel::Private
         {eMyMoney::Account::Standard::Equity, eMyMoney::Account::Type::Equity, kli18n("Equity accounts").untranslatedText()},
     };
 
+    static const char* const mimeTypeName;
+
     AccountsModel*                  q_ptr;
     QObject*                        parentObject;
     QHash<QString, MyMoneyMoney>    balance;
@@ -362,7 +413,10 @@ struct AccountsModel::Private
     bool                            updateOnBalanceChange;
     QColor                          positiveScheme;
     QColor                          negativeScheme;
+    QMimeData dragAccountId;
 };
+
+const char* const AccountsModel::Private::mimeTypeName = "application/x-org-kmymoney-account-id";
 
 AccountsModel::AccountsModel(QObject* parent, QUndoStack* undoStack)
     : MyMoneyModel<MyMoneyAccount>(parent, QStringLiteral("A"), AccountsModel::ID_SIZE, undoStack)
@@ -834,6 +888,11 @@ QModelIndex AccountsModel::favoriteIndex() const
     return index(0, 0);
 }
 
+bool AccountsModel::isFavoriteIndex(const QModelIndex& index) const
+{
+    return d->isFavoriteIndex(index.parent()) || d->isFavoriteIndex(index);
+}
+
 QModelIndex AccountsModel::assetIndex() const
 {
     return index(1, 0);
@@ -1186,6 +1245,10 @@ void AccountsModel::doReparentItem(const MyMoneyAccount& before, const MyMoneyAc
 
     static_cast<TreeItem<MyMoneyAccount>*>(newParentIdx.internalPointer())->dataRef().addAccountId(after.id());
 
+    // no actual balance changed, but the hierarchy values changed
+    // so we simply update the total values of all accounts
+    updateAccountBalances({});
+
     setDirty(true);
 }
 
@@ -1198,4 +1261,75 @@ MyMoneyModel<MyMoneyAccount>::Operation AccountsModel::undoOperation(const MyMon
             op = Reparent;
     }
     return op;
+}
+
+Qt::DropActions AccountsModel::supportedDropActions() const
+{
+    return Qt::MoveAction;
+}
+
+Qt::ItemFlags AccountsModel::flags(const QModelIndex& index) const
+{
+    auto defaultFlags = MyMoneyModel<MyMoneyAccount>::flags(index);
+    if (defaultFlags & Qt::ItemIsSelectable) {
+        // favorites cannot be moved nor can they receive drops
+        if (!isFavoriteIndex(index.parent()) && !isFavoriteIndex(index)) {
+            const Qt::ItemFlag dropFlag =
+                d->canDropMimeData(&d->dragAccountId, Qt::MoveAction, index.row(), index.column(), index) ? Qt::ItemIsDropEnabled : Qt::NoItemFlags;
+            // only non-top-level accounts can be moved
+            if (index.parent().isValid()) {
+                return Qt::ItemIsDragEnabled | dropFlag | defaultFlags;
+            } else {
+                return dropFlag | defaultFlags;
+            }
+            return defaultFlags;
+        }
+    }
+    return defaultFlags;
+}
+
+bool AccountsModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent)
+{
+    d->dragAccountId.clear();
+
+    if (!d->canDropMimeData(data, action, row, column, parent)) {
+        return false;
+    }
+
+    if (action == Qt::IgnoreAction) {
+        return true;
+    }
+
+    // request reparenting
+    Q_EMIT reparentAccountRequest(d->idFromMimeData(data), parent.data(eMyMoney::Model::IdRole).toString());
+    return false;
+}
+
+bool AccountsModel::canDropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) const
+{
+    return d->canDropMimeData(data, action, row, column, parent);
+}
+
+QStringList AccountsModel::mimeTypes() const
+{
+    return {d->mimeTypeName};
+}
+
+QMimeData* AccountsModel::mimeData(const QModelIndexList& indexes) const
+{
+    QMimeData* mimeData = new QMimeData;
+
+    d->dragAccountId.clear();
+    // make sure to include only one object and keep a local copy
+    for (const QModelIndex& index : indexes) {
+        if (index.isValid()) {
+            const auto objectId = index.data(eMyMoney::Model::IdRole).toString();
+            mimeData->setData(d->mimeTypeName, objectId.toUtf8());
+            // keep a copy of the source account id so that we still have
+            // access to it during the drag operation in the flags() method
+            d->dragAccountId.setData(d->mimeTypeName, objectId.toUtf8());
+            break;
+        }
+    }
+    return mimeData;
 }

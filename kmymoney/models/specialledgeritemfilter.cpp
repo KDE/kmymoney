@@ -136,7 +136,7 @@ public:
         if (isSortingByDate()) {
             const auto rows = q->rowCount();
             if (rows > 0) {
-                parameter.sortOrder = sourceModel->sortOrder();
+                parameter.sortOrder = order.first().sortOrder;
                 parameter.startRow = (parameter.sortOrder == Qt::AscendingOrder) ? 0 : -(rows - 1);
                 parameter.lastRow = (parameter.sortOrder == Qt::AscendingOrder) ? rows - 1 : 0;
 

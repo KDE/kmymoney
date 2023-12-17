@@ -87,7 +87,7 @@
         "Name[ru]": "Представление исходящих сетевых заданий",
         "Name[sl]": "Pogled na spletne posle",
         "Name[sv]": "Utkorgsvy för nätjobb",
-        "Name[tr]": "Çevrimiçi iş giden kutusu görünümü",
+        "Name[tr]": "Çevrimiçi İş Giden Kutusu Görünümü",
         "Name[uk]": "Панель вихідних даних інтернет-завдань",
         "Name[x-test]": "xxOnline job outbox viewxx",
         "Name[zh_CN]": "线上任务发件箱视图",

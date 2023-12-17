@@ -92,7 +92,7 @@
         "Name[sk]": "Zrovnávacia správa",
         "Name[sl]": "Poročilo o uskladitvi",
         "Name[sv]": "Avstämningsrapport",
-        "Name[tr]": "Mutabakat raporu",
+        "Name[tr]": "Mutabakat Raporu",
         "Name[uk]": "Звіт щодо звірки",
         "Name[x-test]": "xxReconciliation reportxx",
         "Name[zh_CN]": "对账报告",

@@ -1,13 +1,15 @@
 # default KDE build env
 include:
-  - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/linux.yml
-  - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/freebsd.yml
-  - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/windows.yml
-  - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/craft-appimage.yml
+  - project: sysadmin/ci-utilities
+    file:
+      - /gitlab-templates/linux.yml
+      - /gitlab-templates/freebsd.yml
+      - /gitlab-templates/windows.yml
+      - /gitlab-templates/craft-appimage.yml
 
 # custom builds
 
-build_local_ubuntu_2110: 
+build_local_ubuntu_2110:
 # make it manual for now, since 21.10 alkimia is at 5.7 and as such incompatible with master
   when: manual
   stage: build

@@ -92,7 +92,7 @@
         "Name[sk]": "GNC Importer",
         "Name[sl]": "Uvoznik GNC",
         "Name[sv]": "GNC-import",
-        "Name[tr]": "GNC İçe Aktarıcı",
+        "Name[tr]": "GNC İçe Aktarıcısı",
         "Name[uk]": "Імпортування GNC",
         "Name[x-test]": "xxGNC Importerxx",
         "Name[zh_CN]": "GNC 导入工具",

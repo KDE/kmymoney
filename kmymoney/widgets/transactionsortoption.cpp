@@ -26,6 +26,11 @@
 using namespace eWidgets;
 using namespace Icons;
 
+/*
+ * IMPORTANT: Keep this in sync with SortField enum in widgetenums.h
+ *            Don't touch the order of this list because it will break
+ *            the sorting in existing data files
+ */
 static constexpr KLazyLocalizedString sortOrderText[] = {
     kli18nc("Unknown sort order", "Unknown"),
     kli18n("Post date"),

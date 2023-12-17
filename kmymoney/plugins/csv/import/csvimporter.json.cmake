@@ -93,7 +93,7 @@
         "Name[sk]": "Importér CSV",
         "Name[sl]": "Uvoznik CSV",
         "Name[sv]": "CSV-import",
-        "Name[tr]": "CSV İçe Aktarıcı",
+        "Name[tr]": "CSV İçe Aktarıcısı",
         "Name[uk]": "Імпортування CSV",
         "Name[x-test]": "xxCSV Importerxx",
         "Name[zh_CN]": "CSV 导入工具",
