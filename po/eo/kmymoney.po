@@ -779,7 +779,7 @@ msgstr "Akcioj"
 #, kde-format
 msgctxt "Total value"
 msgid "Total"
-msgstr "Sumo"
+msgstr "Entute"
 
 #: kmymoney/dialogs/investactivities.cpp:873
 #, kde-format
@@ -1357,7 +1357,7 @@ msgstr ""
 #, kde-format
 msgctxt "Split transaction (category replacement)"
 msgid "Split transaction"
-msgstr "Disigita transakcio"
+msgstr "Split transakcio"
 
 #: kmymoney/dialogs/kconfirmmanualenterdlg.cpp:122
 #, kde-format
@@ -1967,7 +1967,7 @@ msgstr "Duone Supren"
 #: kmymoney/mymoney/mymoneysecurity.cpp:268
 #, kde-format
 msgid "Round"
-msgstr "Rondigi"
+msgstr "Ronda"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, KEditEquityEntry)
 #: kmymoney/dialogs/keditequityentry.ui:17
@@ -2083,7 +2083,7 @@ msgstr "Forigi"
 #: kmymoney/views/newtransactioneditor.ui:260
 #, kde-format
 msgid "Cancel"
-msgstr "Rezigni"
+msgstr "Nuligi"
 
 #: kmymoney/dialogs/keditscheduledlg.cpp:123
 #: kmymoney/dialogs/keditscheduledlg.cpp:739
@@ -2118,7 +2118,7 @@ msgstr "Konstanta ordo"
 #: kmymoney/wizards/newaccountwizard/kcreditcardschedulepage.cpp:77
 #, kde-format
 msgid "Bank transfer"
-msgstr "banka ĝiro"
+msgstr "Banka ĝiro"
 
 #: kmymoney/dialogs/keditscheduledlg.cpp:128
 #: kmymoney/dialogs/keditscheduledlg.cpp:744
@@ -2551,14 +2551,14 @@ msgstr ""
 #, kde-format
 msgctxt "@label:chooser Date"
 msgid "From"
-msgstr "Ekde"
+msgstr "El"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kmymoney/dialogs/kequitypriceupdatedlg.ui:69
 #, kde-format
 msgctxt "@label:chooser Date"
 msgid "To"
-msgstr "Ĝis"
+msgstr "al"
 
 #. i18n: ectx: property (text), widget (QPushButton, btnConfigure)
 #. i18n: ectx: property (text), widget (QPushButton, buttonConfigure)
@@ -2765,7 +2765,7 @@ msgstr "Tipo"
 #: kmymoney/dialogs/kmymoneyfileinfodlg.ui:237 kmymoney/views/khomeview_p.h:975
 #, kde-format
 msgid "Total"
-msgstr "Sumo"
+msgstr "Entute"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_closed)
 #. i18n: ectx: property (text), widget (QTreeWidget, m_accountView)
@@ -3826,7 +3826,7 @@ msgstr ""
 #: kmymoney/views/newtransactioneditor.cpp:143
 #, kde-format
 msgid "Split transaction"
-msgstr "Disigita transakcio"
+msgstr "Split transakcio"
 
 #. i18n: ectx: property (text), widget (QLabel, splitUnassigned)
 #: kmymoney/dialogs/ksplittransactiondlg.ui:139
@@ -5756,7 +5756,7 @@ msgstr "CSV importo/eksporto"
 #: kmymoney/wizards/newaccountwizard/kaccounttypepage.cpp:72
 #, kde-format
 msgid "Equity"
-msgstr "Akcio"
+msgstr "Egaleco"
 
 #: kmymoney/kmymoney.cpp:516
 #, kde-format
@@ -6049,7 +6049,7 @@ msgstr "Redakti disiĝojn"
 #, kde-format
 msgctxt "Cancel transaction edit"
 msgid "Cancel"
-msgstr "Rezigni"
+msgstr "Nuligi"
 
 #: kmymoney/kmymoney.cpp:1458
 #, kde-format
@@ -6399,7 +6399,7 @@ msgstr "Eraro dum muntado de aparato"
 #, kde-format
 msgctxt "Backup done"
 msgid "Done"
-msgstr "Farita"
+msgstr "Preta"
 
 #: kmymoney/kmymoney.cpp:2506 kmymoney/kmymoney.cpp:2526
 #, kde-format
@@ -7241,7 +7241,7 @@ msgstr "C"
 #, kde-format
 msgctxt "Payment made from account"
 msgid "Payment"
-msgstr "Pago"
+msgstr "Pagado"
 
 #: kmymoney/models/ledgermodel.cpp:112
 #: kmymoney/mymoney/storage/journalmodel.cpp:54
@@ -7292,7 +7292,7 @@ msgstr "Pliigi"
 #, kde-format
 msgctxt "Payment towards credit card"
 msgid "Payment"
-msgstr "Pago"
+msgstr "Pagado"
 
 #: kmymoney/models/ledgertransaction.cpp:194
 #: kmymoney/mymoney/storage/journalmodel.cpp:85
@@ -7385,7 +7385,7 @@ msgstr "Ne"
 #: kmymoney/wizards/newloanwizard/summarywizardpage.ui:364
 #, kde-format
 msgid "Payment"
-msgstr "Pago"
+msgstr "Pagado"
 
 #: kmymoney/models/splitmodel.cpp:124 kmymoney/widgets/register.cpp:155
 #, kde-format
@@ -7492,7 +7492,7 @@ msgstr "Akcio"
 #, kde-format
 msgctxt "Account type"
 msgid "Equity"
-msgstr "Akcio"
+msgstr "Egaleco"
 
 #: kmymoney/mymoney/mymoneyaccount.cpp:510
 #, kde-format
@@ -8998,7 +8998,7 @@ msgstr "Konstanta ordo"
 #, kde-format
 msgctxt "Scheduled Transaction payment type"
 msgid "Bank transfer"
-msgstr "banka ĝiro"
+msgstr "Banka ĝiro"
 
 #: kmymoney/mymoney/mymoneyschedule.cpp:1074
 #, kde-format
@@ -9081,7 +9081,7 @@ msgstr "Noto"
 #, kde-format
 msgctxt "Split header"
 msgid "Payment"
-msgstr "Pago"
+msgstr "Pagado"
 
 #: kmymoney/mymoney/splitmodel.cpp:37
 #, kde-format
@@ -11568,7 +11568,7 @@ msgstr "Pli"
 #, kde-format
 msgctxt "Button to close the current dialog"
 msgid "Done"
-msgstr "Farita"
+msgstr "Preta"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2325
 #, kde-format
@@ -14805,7 +14805,7 @@ msgstr "Buĝeto bazita sur prognozo"
 #, kde-format
 msgctxt "Menu header"
 msgid "Budget options"
-msgstr "Buĝetaj elektoj"
+msgstr "Buĝetaj opcioj"
 
 #: kmymoney/plugins/views/budget/kbudgetview.cpp:344
 #, kde-format
@@ -14938,7 +14938,7 @@ msgstr "Taskoj"
 #, kde-format
 msgctxt "Budget total"
 msgid "Total"
-msgstr "Sumo"
+msgstr "Entute"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_cbBudgetSubaccounts)
 #: kmymoney/plugins/views/budget/kbudgetview.ui:261
@@ -15346,7 +15346,7 @@ msgstr "Averaĝa"
 #, kde-format
 msgctxt "Total balance"
 msgid "Total"
-msgstr "Sumo"
+msgstr "Entute"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:656
 #, kde-format
@@ -17354,7 +17354,7 @@ msgstr "Datuma gamo"
 #, kde-format
 msgctxt "From (Data)"
 msgid "From"
-msgstr "Ekde"
+msgstr "El"
 
 #. i18n: ectx: property (text), widget (QLabel, lblDataMajorTick)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:145
@@ -17386,7 +17386,7 @@ msgstr "Malgranda tiktakolongo"
 #, kde-format
 msgctxt "To (Data)"
 msgid "To"
-msgstr "Ĝis"
+msgstr "al"
 
 #. i18n: ectx: property (text), widget (QLabel, lblLabelsPrecision)
 #: kmymoney/plugins/views/reports/reporttabrange.ui:222
@@ -19020,7 +19020,7 @@ msgstr "Diferenco: %1"
 #: kmymoney/views/ktagsview.cpp:284
 #, kde-format
 msgid "Balance: %1"
-msgstr "Saldo: %1"
+msgstr "Bilanco: %1"
 
 #: kmymoney/views/kgloballedgerview.cpp:460
 #, kde-format
@@ -20580,7 +20580,7 @@ msgstr ""
 #: kmymoney/views/newtransactioneditor.cpp:234
 #, kde-format
 msgid "The cost center this transaction should be assigned to."
-msgstr "La kostocentro al kiu ĉi tiu transakcio estu atribuita."
+msgstr "La kostcentro al kiu ĉi tiu transakcio estu atribuita."
 
 #: kmymoney/views/newspliteditor.cpp:124
 #: kmymoney/views/newtransactioneditor.cpp:237
@@ -20733,14 +20733,14 @@ msgstr "&Rezigni"
 #, kde-format
 msgctxt "From (Date)"
 msgid "From"
-msgstr "Ekde"
+msgstr "El"
 
 #. i18n: ectx: property (text), widget (QLabel, TextLabel6)
 #: kmymoney/widgets/daterangedlg.ui:35
 #, kde-format
 msgctxt "To (Date)"
 msgid "To"
-msgstr "Ĝis"
+msgstr "al"
 
 #: kmymoney/widgets/groupmarkers.cpp:54
 #, kde-format
@@ -20993,7 +20993,7 @@ msgstr ""
 #, kde-format
 msgctxt "Payer"
 msgid "From"
-msgstr "Ekde"
+msgstr "El"
 
 #: kmymoney/widgets/kmymoneydateinput.cpp:252
 #, kde-format
@@ -23242,7 +23242,7 @@ msgstr "Ne eblas krei konton: %1"
 #, kde-format
 msgctxt "Rounding method"
 msgid "Round"
-msgstr "Rondigi"
+msgstr "Ronda"
 
 #: kmymoney/wizards/newinvestmentwizard/kinvestmentdetailswizardpage.cpp:65
 #, kde-format
