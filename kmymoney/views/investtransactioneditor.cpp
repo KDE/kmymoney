@@ -71,6 +71,7 @@ public:
         , feeSplitModel(new SplitModel(parent, &undoStack))
         , interestSplitModel(new SplitModel(parent, &undoStack))
         , accepted(false)
+        , loadedFromModel(false)
         , bypassUserPriceUpdate(false)
     {
         accountsModel->setObjectName("InvestTransactionEditor::accountsModel");
@@ -182,6 +183,8 @@ public:
     MyMoneyPrice assetPrice;
 
     bool accepted;
+
+    bool loadedFromModel;
 
     /**
      * Flag to bypass the user dialog to modify exchange rate information.
@@ -1001,6 +1004,15 @@ void InvestTransactionEditor::updateTotalAmount()
 
 void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
 {
+    // we may also get here during saving the transaction as
+    // a callback from the model, but we can safely ignore it
+    // same when we get called from the delegate's setEditorData()
+    // method
+    if (d->accepted || !index.isValid() || d->loadedFromModel)
+        return;
+
+    d->loadedFromModel = true;
+
     d->bypassUserPriceUpdate = true;
     d->ui->activityCombo->setCurrentIndex(-1);
     d->ui->securityAccountCombo->setCurrentIndex(-1);

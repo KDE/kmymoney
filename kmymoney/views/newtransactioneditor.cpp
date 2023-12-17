@@ -82,6 +82,7 @@ public:
         , costCenterRequired(false)
         , inUpdateVat(false)
         , keepCategoryAmount(false)
+        , loadedFromModel(false)
         , splitModel(parent, &undoStack)
         , frameCollection(nullptr)
         , m_splitHelper(nullptr)
@@ -142,6 +143,7 @@ public:
     bool costCenterRequired;
     bool inUpdateVat;
     bool keepCategoryAmount;
+    bool loadedFromModel;
     QUndoStack undoStack;
     SplitModel splitModel;
     MyMoneyAccount m_account;
@@ -1304,8 +1306,12 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
 {
     // we may also get here during saving the transaction as
     // a callback from the model, but we can safely ignore it
-    if (d->accepted || !index.isValid())
+    // same when we get called from the delegate's setEditorData()
+    // method
+    if (d->accepted || !index.isValid() || d->loadedFromModel)
         return;
+
+    d->loadedFromModel = true;
 
     auto idx = MyMoneyFile::baseModel()->mapToBaseSource(index);
     const auto commodity = MyMoneyFile::instance()->currency(d->m_account.currencyId());
