@@ -327,6 +327,7 @@ public:
         eMyMoney::Model::TransactionPostDateRole,
         eMyMoney::Model::TransactionEntryDateRole,
         eMyMoney::Model::SplitReconcileDateRole,
+        eMyMoney::Model::IdRole,
     };
 
     LedgerSortProxyModel* sourceModel;

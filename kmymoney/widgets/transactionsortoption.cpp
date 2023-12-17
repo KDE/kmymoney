@@ -104,31 +104,14 @@ void TransactionSortOption::setSettings(const QString& settings)
     // fill selected list
     QStringList::const_iterator it_s;
     QListWidgetItem* last = 0;
-    int dateSign = 1;
     for (it_s = list.constBegin(); it_s != list.constEnd(); ++it_s) {
         int val = (*it_s).toInt();
         selectedMap[abs(val)] = true;
-        // skip EntryDateSort but keep sign
-        if (abs(val) == static_cast<int>(SortField::EntryDate)) {
-            dateSign = (val < 0) ? -1 : 1;
-            continue;
-        }
-        last = addEntry(ui->m_selectedList, last, val);
-    }
-
-    // make sure to create EntryOrderSort if missing but required
-    if (selectedMap.find(static_cast<int>(SortField::EntryDate)) != selectedMap.end()
-        && selectedMap.find(static_cast<int>(SortField::EntryOrder)) == selectedMap.end()) {
-        int val = dateSign * static_cast<int>(SortField::EntryOrder);
-        selectedMap[static_cast<int>(SortField::EntryOrder)] = true;
         last = addEntry(ui->m_selectedList, last, val);
     }
 
     // fill available list
     for (int i = static_cast<int>(SortField::PostDate); i < static_cast<int>(SortField::MaxFields); ++i) {
-        // Never add EntryDateSort
-        if (i == static_cast<int>(SortField::EntryDate))
-            continue;
         // Only add those, that are not present in the list of selected items
         if (selectedMap.find(i) == selectedMap.end()) {
             int val = i;
@@ -190,13 +173,7 @@ QString TransactionSortOption::settings() const
     QString rc;
     auto item = dynamic_cast<QListWidgetItem*>(ui->m_selectedList->item(0));
     while (item) {
-        auto option = textToSortOrder(item->text());
-        // if we look at the EntryOrderSort option, we have to make
-        // sure, that the EntryDateSort is prepended
-        if (option == SortField::EntryOrder) {
-            rc += QString::number(static_cast<int>(SortField::EntryDate) * item->data(Qt::UserRole).toInt()) + ',';
-        }
-        rc += QString::number((int)textToSortOrder(item->text()) * item->data(Qt::UserRole).toInt());
+        rc += QString::number(static_cast<int>(textToSortOrder(item->text())) * item->data(Qt::UserRole).toInt());
         item = ui->m_selectedList->item(ui->m_selectedList->row(item) + 1);
         if (item != 0)
             rc += ',';
