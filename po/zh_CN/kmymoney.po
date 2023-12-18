@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 02:26+0000\n"
-"PO-Revision-Date: 2023-12-09 09:29\n"
+"PO-Revision-Date: 2023-12-17 11:32\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -11901,7 +11901,7 @@ msgstr "起始日期"
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.ui:45
 #, kde-format
 msgid "&No date (let the bank determine the start date)"
-msgstr "无日期 (让银行决定起始日期)(&N)"
+msgstr "无日期 (让银行决定起始日期) (&N)"
 
 #. i18n: ectx: property (text), widget (QRadioButton, lastUpdateButton)
 #: kmymoney/plugins/kbanking/dialogs/kbpickstartdate.ui:52
