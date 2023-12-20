@@ -953,8 +953,11 @@
 <sect2><title></title>
 <!-- FIXME: This is a good example of problems with the current mix of sect and
      variablelist, as this sect with no title gives no spacing between the previous
-     and this list entry, so it looks like they belong together.  I'm open to
-     suggestions on how to deal with this.  Not using sect2 for boxes might help. -->
+     and this list entry, so it looks like they belong together.  I consider using
+     literallayout a bad solution.  I'm open to suggestions on how to deal with this.
+     Not using sect2 for boxes might help. -->
+<literallayout>
+</literallayout>
 <variablelist>
   <varlistentry>
     <term><guilabel>Number of days to preview schedules in ledger</guilabel></term>
@@ -974,8 +977,8 @@
 
 <para>
   These settings determine how price quotes are retrieved from different online
-  sources.  These include both stock, bond, and other equity prices, as well as
-  prices for precious metals and currency conversion.
+  sources.  These include stock, bond, and other equity prices, as well as prices for
+  precious metals and currency conversion.
 </para>
 
 <para>
@@ -1033,8 +1036,8 @@
     <term><guilabel>Use system fonts</guilabel></term>
     <listitem>
       <para>
-        Select this to use system fonts.  Deselecting this option allows the select
-        the fonts of your choice.
+        Select this to use system fonts.  Deselecting this option allows you to
+        select the fonts of your choice.
       </para>
     </listitem>
   </varlistentry>
@@ -1049,7 +1052,10 @@
   <varlistentry>
     <term><guilabel>Header font</guilabel></term>
     <listitem>
-      <para>Specify the custom font to use for the headers of each view within the ledger.</para>
+      <para>
+        Specify the custom font to use for the headers of each view within the
+        ledger.
+      </para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -1075,15 +1081,14 @@
 </variablelist>
 </sect1>
 
-<sect1 id="details.settings.plugins">
-<title>Plugins</title>
+<sect1 id="details.settings.plugins"><title>Plugins</title>
 
 <para>
   This section provides information about the available plugins, and allow you to
-  modify the behavior of some of the installed plugins.  Note that the list of
-  plugins displayed will depend on which plugins &kmymoney; found when it started.
-  It does not matter whether the plugin was compiled as part of the application or
-  added as a separate package.
+  modify the behavior of some of them.  Note that the list of plugins displayed will
+  depend on which plugins &kmymoney; found when it started.  It does not matter
+  whether the plugin was compiled as part of the application or added as a separate
+  package.
   
   <screenshot>
     <screeninfo>Configure Plugins</screeninfo>
@@ -1098,49 +1103,49 @@
   </screenshot>
 
   Every plugin can be enabled or disabled, according to the state of the checkbox to
-  the left of the name of the plugin.  In addition, at the right, there is also an
-  <guibutton>information</guibutton> (&infoicon;) button for each plugin, which will
-  show the plugin version and author.  For some plugins, further information on
-  configuring and using it may be found by clicking the
-  <guibutton>configure</guibutton> (&configicon;) button just to the left of the
+  the left of the name of the plugin name and icon.  In addition, at the right, there
+  is an <guibutton>information</guibutton> &infoicon; button for each plugin, which
+  will show the plugin version and author(s.)  For some plugins, further information
+  on configuring and using it may be found by clicking the
+  <guibutton>configure</guibutton> &configicon; button just to the left of the
   information button.
 </para>
+
 <para>
   Until recently, there was only one plugin that required configuration, the Check
   printing plugin.  Now, there are several plugins which require configuration.
   These are described in the following sections.
 </para>
 
-<sect2 id="details.settings.plugins.printchecks">
-<title>Check printing plugin</title>
+<sect2 id="details.settings.plugins.printchecks"><title>Check printing plugin</title>
 
 <para>
   There is a plugin for printing checks, which is included with the source of
-  &kmymoney;, and should always be enabled.  It allows printing of a check based on
-  the data from a selected transaction, with the layout controlled by an &HTML;
-  template.  You need to use a template which is matched to your pre-printed checks.
-  A default, built-in template is provided.  You may also choose a custom template.
-  To do so, click on the <guibutton>configure</guibutton> (&configicon;) button to
-  get the <guilabel>Check printing</guilabel> configuration dialog displayed.  At the
-  top you can check the box to use a custom template.  To the right of that is a
-  button which brings up a file chooser, to select an alternate template file.
+  &kmymoney;, and which should always be enabled.  It allows printing of a check
+  based on the data from a selected transaction, with the layout controlled by an
+  &HTML; template.  You need to use a template which is matched to your pre-printed
+  checks.  A default, built-in template is provided.  You may also choose a custom
+  template.  To do so, click on the <guibutton>configure</guibutton> &configicon;
+  button to get the <guilabel>Check printing</guilabel> configuration dialog
+  displayed.  At the top you can check the box to use a custom template.  To the
+  right of that is a button which brings up a file chooser, to select an alternate
+  template file.
 </para>
 
 <para>
   A template file is an &HTML; file, in which specific strings are used to reference
-  the fields from the transaction and from the current account and institution to
-  show where they will be printed on the check.  &kmymoney; ships with a default,
-  built-in template.  At <ulink
-  url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/">this
-  address</ulink>, you can find the HTML source file of the default template, as well
-  as some additional templates.  You should either be able to use one of them, or
-  modify one to suit your needs.  Note that only a <emphasis>subset</emphasis> of the
-  HTML standard is supported — the detailed documentation on that can be found <ulink
-  url="https://doc.qt.io/qt-5/richtext-html-subset.html">here</ulink>.
+  fields from the transaction and from the current account and institution to show
+  where they will be printed on the check.  &kmymoney; ships with a default, built-in
+  template.  At <ulink
+  url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/">
+  this address</ulink>, you can find the HTML source file of the default template, as
+  well as some additional templates.  You should either be able to use one of them or
+  to modify one to suit your needs.  Note that only a <emphasis>subset</emphasis> of
+  the HTML standard is supported — the detailed documentation on that can be found
+  <ulink url="https://doc.qt.io/qt-5/richtext-html-subset.html">here</ulink>.
 </para>
 
 <!-- info from source code on substitution variables.  Future exercise to list/describe them here.
-
     // data about the user
     checkHTML.replace("$OWNER_NAME", file->user().name());
     checkHTML.replace("$OWNER_ADDRESS", file->user().address());
@@ -1168,22 +1173,60 @@
     checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
     checkHTML.replace("$MEMO", (*it).split().memo());
 -->
-
 </sect2>
 
-<!-- FIXME: no kbaning or aqbanking plugin currently listed.  Where is configuration,
-     or do I just not have it included in my personally compiled version?  In
-     addition, where does the Online job outbox view come from?
--->
-<sect2 id="details.settings.plugins.kbanking">
-<title>KBanking</title>
+<sect2><title>CSV Importer</title>
 
 <para>
-  This plugins adds support for HBCI/FinTs, OFX and PayPal online banking to KMyMoney.
-  After this plugin has been enabled, online banking can be configured in the
-  <link linkend="reference.menus.settings.help">Settings</link> menu.
-</para>
 
+</para>
+</sect2>
+
+<sect2><title>Forecast view</title>
+
+<para>
+</para>
+</sect2>
+
+<sect2><title>iCalendar</title>
+
+<para>
+</para>
+</sect2>
+
+<sect2 id="details.settings.plugins.kbanking"><title>KBanking</title>
+
+<para>
+  This plugins adds support for HBCI/FinTs, OFX and PayPal online banking to
+  KMyMoney.  However, configuring this plugin is not done through this dialog, but
+  through the <link linkend="reference.menus.settings.help">Settings</link> menu,
+  with the <menuchoice> <guimenu>Settings</guimenu> <guisubmenu>Configure
+  Aqbanking...</guisubmenu> </menuchoice> menu item.
+</para>
+</sect2>
+
+<sect2><title>QIF Exporter</title>
+
+<para>
+</para>
+</sect2>
+
+<sect2><title>QIF Importer</title>
+
+<para>
+</para>
+</sect2>
+
+<sect2><title>Reports view</title>
+
+<para>
+</para>
+</sect2>
+
+<sect2><title>XML Storage</title>
+
+<para>
+</para>
 </sect2>
 
 </sect1>
