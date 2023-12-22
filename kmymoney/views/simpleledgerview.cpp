@@ -122,6 +122,8 @@ public:
 
         accountsModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
         accountsModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
+        accountsModel->setHideZeroBalancedAccounts(KMyMoneySettings::hideZeroBalanceAccounts());
+        accountsModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
         auto const model = MyMoneyFile::instance()->accountsModel();
         accountsModel->setSourceModel(model);
         accountsModel->sort(AccountsModel::Column::AccountName);
@@ -724,6 +726,8 @@ void SimpleLedgerView::slotSettingsChanged()
         d->accountsModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
         d->accountsModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
         d->accountsModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
+        d->accountsModel->setHideZeroBalancedAccounts(KMyMoneySettings::hideZeroBalanceAccounts());
+        d->accountsModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
         d->accountsModel->setHideFavoriteAccounts(false);
     }
     Q_EMIT settingsChanged();

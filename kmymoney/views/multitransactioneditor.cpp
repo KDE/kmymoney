@@ -349,6 +349,8 @@ MultiTransactionEditor::MultiTransactionEditor(QWidget* parent, const QString& a
     });
     d->accountsModel->setHideEquityAccounts(false);
     d->accountsModel->setHideZeroBalancedEquityAccounts(false);
+    d->accountsModel->setHideZeroBalancedAccounts(false);
+    d->accountsModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
     d->accountsModel->setSourceModel(model);
     d->accountsModel->sort(AccountsModel::Column::AccountName);
     d->ui->accountCombo->setModel(d->accountsModel);
@@ -361,6 +363,7 @@ MultiTransactionEditor::MultiTransactionEditor(QWidget* parent, const QString& a
         eMyMoney::Account::Type::Equity,
     });
     d->categoriesModel->setHideEquityAccounts(false);
+    d->categoriesModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
     d->categoriesModel->setSourceModel(model);
     d->categoriesModel->sort(AccountsModel::Column::AccountName);
     d->ui->categoryCombo->setModel(d->categoriesModel);
@@ -702,8 +705,8 @@ void MultiTransactionEditor::storeTabOrder(const QStringList& tabOrder)
 
 void MultiTransactionEditor::slotSettingsChanged()
 {
-    d->categoriesModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
-    d->accountsModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
+    d->categoriesModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
+    d->accountsModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
 }
 
 bool MultiTransactionEditor::setSelectedJournalEntryIds(const QStringList& selectedJournalEntryIds)

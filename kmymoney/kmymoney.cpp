@@ -3567,7 +3567,6 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
         onlineJobAdministration::instance()->setOnlinePlugins(pPlugins.extended);
         d->m_myMoneyView->setOnlinePlugins(&pPlugins.online);
         d->updateActions(d->m_selections);
-        return;
     }
 
     MyMoneyUtils::clearFormatCaches();

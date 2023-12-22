@@ -34,6 +34,7 @@
 #include "journalmodel.h"
 #include "kcurrencycalculator.h"
 #include "kmymoneyaccountcombo.h"
+#include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
 #include "menuenums.h"
 #include "mymoneyaccount.h"
@@ -323,6 +324,8 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity,});
     d->accountsModel->setHideEquityAccounts(false);
     d->accountsModel->setHideZeroBalancedEquityAccounts(false);
+    d->accountsModel->setHideZeroBalancedAccounts(false);
+    d->accountsModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
     d->accountsModel->setSourceModel(model);
     d->accountsModel->sort(AccountsModel::Column::AccountName);
     d->ui->accountCombo->setModel(d->accountsModel);

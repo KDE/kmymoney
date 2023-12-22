@@ -1044,6 +1044,8 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     });
     d->accountsModel->setHideEquityAccounts(false);
     d->accountsModel->setHideZeroBalancedEquityAccounts(false);
+    d->accountsModel->setHideZeroBalancedAccounts(false);
+    d->accountsModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
     d->accountsModel->setSourceModel(model);
     d->accountsModel->sort(AccountsModel::Column::AccountName);
     d->ui->accountCombo->setModel(d->accountsModel);
@@ -1056,6 +1058,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
         eMyMoney::Account::Type::Equity,
     });
     d->categoriesModel->setHideEquityAccounts(false);
+    d->categoriesModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
     d->categoriesModel->setSourceModel(model);
     d->categoriesModel->sort(AccountsModel::Column::AccountName);
     d->ui->categoryCombo->setModel(d->categoriesModel);
@@ -1605,8 +1608,8 @@ void NewTransactionEditor::storeTabOrder(const QStringList& tabOrder)
 
 void NewTransactionEditor::slotSettingsChanged()
 {
-    d->categoriesModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
-    d->accountsModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
+    d->categoriesModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
+    d->accountsModel->setShowAllEntries(KMyMoneySettings::showAllAccounts());
 }
 
 WidgetHintFrameCollection* NewTransactionEditor::widgetHintFrameCollection() const

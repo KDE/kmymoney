@@ -98,7 +98,7 @@ void KHomeView::executeCustomAction(eView::Action action)
 void KHomeView::refresh()
 {
     Q_D(KHomeView);
-    if (isVisible() && !d->m_skipRefresh && !d->m_resizeRefreshTimeout.isActive()) {
+    if (isVisible() && !d->m_skipRefresh && !d->m_resizeRefreshTimer.isActive()) {
         d->loadView();
         d->m_needsRefresh = false;
     } else {
@@ -109,7 +109,7 @@ void KHomeView::refresh()
 void KHomeView::resizeEvent(QResizeEvent* event)
 {
     Q_D(KHomeView);
-    d->repaintAfterResize();
+    d->repaintAfterResize(event->oldSize(), event->size());
     KMyMoneyViewBase::resizeEvent(event);
 }
 

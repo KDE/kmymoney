@@ -157,8 +157,8 @@ public:
 
         q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KHomeView::refresh);
 
-        m_resizeRefreshTimeout.setSingleShot(true);
-        q->connect(&m_resizeRefreshTimeout, &QTimer::timeout, q, &KHomeView::refresh);
+        m_resizeRefreshTimer.setSingleShot(true);
+        q->connect(&m_resizeRefreshTimer, &QTimer::timeout, q, &KHomeView::refresh);
     }
 
     /**
@@ -399,10 +399,30 @@ public:
         return m_accountList[acc.id()][paymentDate];
     }
 
-    void repaintAfterResize()
+    /**
+     * Trigger a reload if no other resize event is received within
+     * 100ms but only if the size does not toggle. It happens, that
+     * two resize events happen short after another with the
+     * following sizes (examples)
+     *
+     * event oldSize  newSize
+     * -----------------------
+     *  1   1127,777  1127,751
+     *  2   1127,751  1127,777
+     *
+     * when re-entering the home view. repaintAfterResize()
+     * stops the m_resizeRefreshTimer in this case.
+     */
+    void repaintAfterResize(const QSize& oldSize, const QSize& newSize)
     {
-        // refresh only if no other resize event occurs within the specified time
-        m_resizeRefreshTimeout.start(100);
+        if (!m_resizeRefreshTimer.isActive()) {
+            m_startSize = oldSize;
+            m_resizeRefreshTimer.start(100);
+        } else {
+            if (m_startSize == newSize) {
+                m_resizeRefreshTimer.stop();
+            }
+        }
     }
 
     void loadView()
@@ -1286,13 +1306,17 @@ public:
         file->accountList(accounts);
 
         const auto showAllAccounts = KMyMoneySettings::showAllAccounts();
+        const bool hideZeroBalanceAccounts = KMyMoneySettings::hideZeroBalanceAccounts() && !showAllAccounts;
 
         for (it = accounts.constBegin(); it != accounts.constEnd();) {
             if (!(*it).isClosed() || showAllAccounts) {
+                const auto value = MyMoneyFile::instance()->balance((*it).id(), QDate::currentDate());
                 switch ((*it).accountType()) {
                 // group all assets into one list but make sure that investment accounts always show up
                 case Account::Type::Investment:
-                    assets << *it;
+                    if (!(value.isZero() && hideZeroBalanceAccounts)) {
+                        assets << *it;
+                    }
                     break;
 
                 case Account::Type::Checkings:
@@ -1301,8 +1325,11 @@ public:
                 case Account::Type::Asset:
                 case Account::Type::AssetLoan:
                     // list account if it's the last in the hierarchy or has transactions in it
+                    // and listing zero balance account is not suppressed
                     if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
-                        assets << *it;
+                        if (!(value.isZero() && hideZeroBalanceAccounts)) {
+                            assets << *it;
+                        }
                     }
                     break;
 
@@ -1311,11 +1338,9 @@ public:
                 case Account::Type::Liability:
                 case Account::Type::Loan:
                     // list account if it's the last in the hierarchy or has transactions in it
+                    // and listing zero balance account is not suppressed
                     if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
-                        // Add it if we are not hiding zero balance liabilities, or the balance is not zero
-                        const auto value =
-                            MyMoneyFile::instance()->balance((*it).id(), QDate::currentDate());
-                        if (!(KMyMoneySettings::hideZeroBalanceLiabilities() && value.isZero())) {
+                        if (!(value.isZero() && hideZeroBalanceAccounts)) {
                             liabilities << *it;
                         }
                     }
@@ -1957,7 +1982,8 @@ public:
     QString pathStatusHeader; // online download status
     int adjustedIconSize;
     double devRatio;
-    QTimer m_resizeRefreshTimeout;
+    QTimer m_resizeRefreshTimer;
+    QSize m_startSize;
 };
 
 #endif

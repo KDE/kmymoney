@@ -131,6 +131,7 @@ public:
         m_filterProxyModel->setHideClosedAccounts(true);
         m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
         m_filterProxyModel->setHideZeroBalancedEquityAccounts(KMyMoneySettings::hideZeroBalanceEquities());
+        m_filterProxyModel->setHideZeroBalancedAccounts(KMyMoneySettings::hideZeroBalanceAccounts());
         m_filterProxyModel->addAccountGroup(filterAccountGroup);
         // don't allow to select ourself as parent
         m_filterProxyModel->setNotSelectable(m_account.id());
