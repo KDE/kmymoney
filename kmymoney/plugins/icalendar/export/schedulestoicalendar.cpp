@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2009 Cristian Onet onet.cristian @gmail.com
+    SPDX-FileCopyrightText: 2023 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
@@ -239,6 +240,8 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
     // create the calendar
     bool newCalendar = false;
     icalcomponent* vCalendar = 0;
+    struct icaltimetype atime = icaltime_from_timet_with_zone(time(0), 0, icaltimezone_get_utc_timezone());
+
     if (d->m_icalendarAsString.isEmpty()) {
         newCalendar = true;
         vCalendar = icalcomponent_new_vcalendar();
@@ -305,6 +308,13 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
         icalcomponent_set_dtstart(schedule, qdateToIcalTimeType(myMoneySchedule.startDate()));
         // due
         icalcomponent_set_due(schedule, qdateToIcalTimeType(myMoneySchedule.nextDueDate()));
+        // dtstamp
+        icalproperty* dtstamp = icalcomponent_get_first_property(schedule, ICAL_DTSTAMP_PROPERTY);
+        if (dtstamp != nullptr) {
+            icalcomponent_remove_property(schedule, dtstamp);
+        }
+        icalcomponent_add_property(schedule, icalproperty_new_dtstamp(atime));
+
         if (newTodo) {
             // created
             icalcomponent_add_property(schedule, icalproperty_new_created(qdateTimeToIcalTimeType(QDateTime::currentDateTime())));
