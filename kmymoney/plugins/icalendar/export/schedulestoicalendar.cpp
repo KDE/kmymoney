@@ -239,7 +239,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
 
     // create the calendar
     bool newCalendar = false;
-    icalcomponent* vCalendar = 0;
+    icalcomponent* vCalendar = nullptr;
     struct icaltimetype atime = icaltime_from_timet_with_zone(time(0), 0, icaltimezone_get_utc_timezone());
 
     if (d->m_icalendarAsString.isEmpty()) {
@@ -247,7 +247,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
         vCalendar = icalcomponent_new_vcalendar();
     } else {
         vCalendar = icalcomponent_new_from_string(d->m_icalendarAsString.toUtf8());
-        if (vCalendar == 0) {
+        if (vCalendar == nullptr) {
             qDebug() << "Error parsing the following string into an icalendar:" << Qt::endl;
             qDebug() << d->m_icalendarAsString << Qt::endl;
             qDebug() << "so we will overwrite this with a new calendar" << Qt::endl;
@@ -256,7 +256,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
         }
     }
 
-    if (vCalendar == 0) {
+    if (vCalendar == nullptr) {
         // one way or the other we must have a calendar by now
         qDebug() << "Unable to create vcalendar component" << Qt::endl;
         return;
@@ -277,7 +277,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
         if (myMoneySchedule.isFinished())
             continue;  // skip this schedule if it is already finished
 
-        icalcomponent* schedule = 0;
+        icalcomponent* schedule = nullptr;
         bool newTodo = false;
         if (!newCalendar) {
             // try to find the schedule to update it if we do not use a new calendar
@@ -289,7 +289,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
                     break;
                 }
             }
-            if (schedule == 0) {
+            if (schedule == nullptr) {
                 schedule = icalcomponent_new_vtodo();
                 newTodo = true;
             }
@@ -321,7 +321,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
         } else {
             // last modified
             icalproperty* pLastMod = icalcomponent_get_first_property(schedule, ICAL_LASTMODIFIED_PROPERTY);
-            if (pLastMod != 0) {
+            if (pLastMod != nullptr) {
                 // set the current property
                 icalproperty_set_lastmodified(pLastMod, qdateTimeToIcalTimeType(QDateTime::currentDateTime()));
             } else {
@@ -331,7 +331,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
         }
         // recurrence
         icalproperty* pRRule = icalcomponent_get_first_property(schedule, ICAL_RRULE_PROPERTY);
-        if (pRRule != 0) {
+        if (pRRule != nullptr) {
             icalcomponent_remove_property(schedule, pRRule);
         }
         if (myMoneySchedule.occurrence() != Schedule::Occurrence::Once && myMoneySchedule.baseOccurrence() != Schedule::Occurrence::Any)
