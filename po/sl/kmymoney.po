@@ -6,17 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-23 00:42+0000\n"
-"PO-Revision-Date: 2023-11-28 10:26+0100\n"
+"POT-Creation-Date: 2023-12-24 00:42+0000\n"
+"PO-Revision-Date: 2023-12-23 07:54+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 23.08.3\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3462,8 +3462,7 @@ msgstr "Prikazuj kategorije v pogledu seznama računov"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:417
-#, fuzzy, kde-format
-#| msgid "Hide liability accounts with zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance"
 msgstr "Skrij račune obveznosti z ničelnim saldom"
 
@@ -11973,17 +11972,17 @@ msgstr "Pred"
 msgid "After"
 msgstr "Po"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:207
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:208
 #, kde-format
 msgid "Transfer from %1 to %2, Payee %3, amount %4"
 msgstr "Prenos od %1 za %2, Prejemnik %3, znesek %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:209
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:210
 #, kde-format
 msgid "From %1 into %2, Category %3, sum of %4"
 msgstr "Od %1 v %2, Kategorija %3, skupaj %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:210
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:211
 #, kde-format
 msgid "From account %1, Pay to %2, Category %3, sum of %4"
 msgstr "Iz računa %1, Plačilo za %2, Kategorija %3, skupaj %4"
@@ -18541,10 +18540,9 @@ msgstr "Skrij lastniške vrednostne papirje z ničelnim stanjem"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:228
-#, fuzzy, kde-format
-#| msgid "Hide zero balance equities"
+#, kde-format
 msgid "Hide zero balance accounts"
-msgstr "Skrij lastniške vrednostne papirje z ničelnim stanjem"
+msgstr "Skrij račune z ničelnim stanjem"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:232

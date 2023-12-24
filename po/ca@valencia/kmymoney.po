@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-23 00:42+0000\n"
-"PO-Revision-Date: 2023-11-26 10:51+0100\n"
+"POT-Creation-Date: 2023-12-24 00:42+0000\n"
+"PO-Revision-Date: 2023-12-23 10:41+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -3471,10 +3471,9 @@ msgstr "Mostra les categories en la vista de la llista de comptes"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceAccounts)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:417
-#, fuzzy, kde-format
-#| msgid "Hide liability accounts with zero balance"
+#, kde-format
 msgid "Hide accounts with a zero balance"
-msgstr "Oculta els comptes de passiu amb saldo zero"
+msgstr "Oculta els comptes amb saldo zero"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_HideZeroBalanceEquities)
 #: kmymoney/dialogs/settings/ksettingsgeneral.ui:424
@@ -12034,17 +12033,17 @@ msgstr "Abans"
 msgid "After"
 msgstr "Després"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:207
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:208
 #, kde-format
 msgid "Transfer from %1 to %2, Payee %3, amount %4"
 msgstr "Transferència des de %1 cap a %2, beneficiari %3, import %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:209
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:210
 #, kde-format
 msgid "From %1 into %2, Category %3, sum of %4"
 msgstr "Des de %1 en %2, categoria %3, total de %4"
 
-#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:210
+#: kmymoney/plugins/icalendar/export/schedulestoicalendar.cpp:211
 #, kde-format
 msgid "From account %1, Pay to %2, Category %3, sum of %4"
 msgstr "Des del compte %1, pagament a %2, categoria %3, total de %4"
@@ -18630,10 +18629,9 @@ msgstr "Oculta les accions amb saldo zero"
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:228
-#, fuzzy, kde-format
-#| msgid "Hide zero balance equities"
+#, kde-format
 msgid "Hide zero balance accounts"
-msgstr "Oculta les accions amb saldo zero"
+msgstr "Oculta els comptes amb saldo zero"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:232
@@ -25405,6 +25403,3 @@ msgstr ""
 "\n"
 "<p>Tota la informació és optativa i s'utilitza per a personalitzar el fitxer "
 "de KMyMoney.</p>"
-
-#~ msgid "Hide zero balance liabilities on the Homepage"
-#~ msgstr "Oculta els passius amb saldo zero en la pàgina principal"
