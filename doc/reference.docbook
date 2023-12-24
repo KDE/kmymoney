@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="reference">
 <chapterinfo>
-  <date>2016-12-05</date>
-  <releaseinfo>5.0</releaseinfo>
+  <date>2023-12-23</date>
+  <releaseinfo>5.2</releaseinfo>
 </chapterinfo>
 
 <title>Reference</title>
@@ -21,8 +21,7 @@
   you have an account selected or displayed in the current view.
 </para>
 
-<sect2 id="reference.menus.file">
-<title>File Menu</title>
+<sect2 id="reference.menus.file"><title>File Menu</title>
 
 <variablelist>
   <varlistentry>
@@ -199,8 +198,7 @@
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.edit">
-<title>Edit Menu</title>
+<sect2 id="reference.menus.edit"><title>Edit Menu</title>
 
 <variablelist>
   <varlistentry>
@@ -217,8 +215,7 @@
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.view">
-<title>View Menu</title>
+<sect2 id="reference.menus.view"><title>View Menu</title>
 
 <variablelist>
   <varlistentry id="reference.menus.settings.transactiondetail">
@@ -287,8 +284,7 @@
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.institution">
-<title>Institution Menu</title>
+<sect2 id="reference.menus.institution"><title>Institution Menu</title>
 
 <variablelist>
   <varlistentry>
@@ -323,8 +319,7 @@
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.account">
-<title>Account Menu</title>
+<sect2 id="reference.menus.account"><title>Account Menu</title>
 
 <variablelist>
   <varlistentry>
@@ -466,8 +461,7 @@
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.category">
-<title>Category Menu</title>
+<sect2 id="reference.menus.category"><title>Category Menu</title>
 
 <variablelist>
   <varlistentry>
@@ -508,8 +502,7 @@
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.transaction">
-<title>Transaction Menu</title>
+<sect2 id="reference.menus.transaction"><title>Transaction Menu</title>
 
 <variablelist>
   <varlistentry>
@@ -695,8 +688,7 @@
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.tools">
-<title>Tools Menu</title>
+<sect2 id="reference.menus.tools"><title>Tools Menu</title>
 
 <variablelist>
   <varlistentry>
@@ -765,12 +757,13 @@
 </variablelist>
 </sect2>
 
-<sect2 id="reference.menus.settings.help">
-<title>Settings and Help Menu</title>
+<sect2 id="reference.menus.settings.help"><title>Settings and Help Menu</title>
 
-<para>&kmymoney; has the default &kde; Settings and Help menu as described in the
-<ulink url="help:/fundamentals/menus.html">&kde; Fundamentals</ulink>
-with one additional entry:</para>
+<para>
+  &kmymoney; has the default &kde; Settings and Help menus as described
+  in the <ulink url="help:/fundamentals/menus.html">&kde;
+  Fundamentals</ulink> with one additional entry:
+</para>
 
 <variablelist>
   <varlistentry>
@@ -802,7 +795,6 @@ with one additional entry:</para>
 
 </variablelist>
 </sect2>
-
 </sect1>
 
 &details-widgets;
