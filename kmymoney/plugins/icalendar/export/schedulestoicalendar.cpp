@@ -19,16 +19,17 @@
 #include <libical/ical.h>
 
 // KMyMoney includes
-#include "mymoneymoney.h"
-#include "mymoneyfile.h"
-#include "mymoneysecurity.h"
-#include "mymoneyutils.h"
-#include "mymoneyschedule.h"
 #include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "mymoneypayee.h"
+#include "mymoneyschedule.h"
+#include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "mymoneypayee.h"
-#include "mymoneyenums.h"
+#include "mymoneyutils.h"
+#include "schedulesmodel.h"
 
 // plugin includes
 #include "icalendarsettings.h"
@@ -228,7 +229,7 @@ KMMSchedulesToiCalendar::~KMMSchedulesToiCalendar()
     delete d;
 }
 
-void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool settingsChaged)
+void KMMSchedulesToiCalendar::exportToFile(const QString& filePath)
 {
     QFile icsFile(filePath);
 
@@ -282,7 +283,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
         if (!newCalendar) {
             // try to find the schedule to update it if we do not use a new calendar
             icalcomponent* itVTODO = icalcomponent_get_first_component(vCalendar, ICAL_VTODO_COMPONENT);
-            for (; itVTODO != 0; itVTODO = icalcomponent_get_next_component(vCalendar, ICAL_VTODO_COMPONENT)) {
+            for (; itVTODO != nullptr; itVTODO = icalcomponent_get_next_component(vCalendar, ICAL_VTODO_COMPONENT)) {
                 if (icalcomponent_get_uid(itVTODO) == myMoneySchedule.id()) {
                     // we found our todo stop searching
                     schedule = itVTODO;
@@ -337,13 +338,13 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
         if (myMoneySchedule.occurrence() != Schedule::Occurrence::Once && myMoneySchedule.baseOccurrence() != Schedule::Occurrence::Any)
             icalcomponent_add_property(schedule, icalproperty_new_rrule(scheduleToRecurenceRule(myMoneySchedule)));
 
-        icalcomponent* oldAlarm = icalcomponent_get_first_component(schedule, ICAL_VALARM_COMPONENT);
-        if (oldAlarm && settingsChaged)
-            icalcomponent_remove_component(schedule, oldAlarm);
+        icalcomponent* alarm = icalcomponent_get_first_component(schedule, ICAL_VALARM_COMPONENT);
+        if (alarm)
+            icalcomponent_remove_component(schedule, alarm);
 
-        if (ICalendarSettings::createAlarm() && (!oldAlarm || settingsChaged)) {
+        if (ICalendarSettings::createAlarm()) {
             // alarm: beginning with one day before the todo is due every one hour
-            icalcomponent* alarm = icalcomponent_new_valarm();
+            alarm = icalcomponent_new_valarm();
             // alarm: action
             icalcomponent_add_property(alarm, icalproperty_new_action(ICAL_ACTION_DISPLAY));
             // alarm: description
@@ -367,8 +368,21 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
             icalcomponent_add_component(vCalendar, schedule);
     }
 
-    icsFile.open(QIODevice::WriteOnly);
+    // now remove the ones that have been deleted by the user
+    icalcomponent* itVTODO = icalcomponent_get_first_component(vCalendar, ICAL_VTODO_COMPONENT);
 
+    while ((itVTODO = icalcomponent_get_current_component(vCalendar)) != nullptr) {
+        const QString ical_uid = icalcomponent_get_uid(itVTODO);
+        if (!file->schedulesModel()->indexById(ical_uid).isValid()) {
+            icalcomponent_remove_component(vCalendar, itVTODO);
+        } else {
+            icalcomponent_get_next_component(vCalendar, ICAL_VTODO_COMPONENT);
+        }
+    }
+
+    // write out the ics file
+
+    icsFile.open(QIODevice::WriteOnly);
     d->m_icalendarAsString = QString::fromUtf8(icalcomponent_as_ical_string(vCalendar));
     // reclaim some memory :)
     icalcomponent_free(vCalendar);

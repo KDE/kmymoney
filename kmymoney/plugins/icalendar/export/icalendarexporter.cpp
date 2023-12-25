@@ -28,6 +28,7 @@
 #include "viewinterface.h"
 
 struct iCalendarExporter::Private {
+    bool m_skipFirstUpdate;
     QAction* m_action;
     QString  m_profileName;
     QString  m_iCalendarFileEntryName;
@@ -42,6 +43,7 @@ iCalendarExporter::iCalendarExporter(QObject *parent, const KPluginMetaData &met
 
     d->m_profileName = "iCalendarPlugin";
     d->m_iCalendarFileEntryName = "iCalendarFile";
+    d->m_skipFirstUpdate = true;
 
     const auto rcFileName = QLatin1String("icalendarexporter.rc");
     setXMLFile(rcFileName);
@@ -93,11 +95,15 @@ void iCalendarExporter::slotFirstExport()
     fileDialog->setWindowTitle(i18n("Export as"));
 
     if (fileDialog->exec() == QDialog::Accepted) {
-        QUrl newURL = fileDialog->selectedUrls().front();
-        if (newURL.isLocalFile()) {
-            ICalendarSettings::setIcalendarFile(newURL.toLocalFile());
-            ICalendarSettings::self()->save();
-            slotExport();
+        // make sure that the dialog was not deleted
+        // behind the scenes before using it again
+        if (fileDialog != nullptr) {
+            QUrl newURL = fileDialog->selectedUrls().front();
+            if (newURL.isLocalFile()) {
+                ICalendarSettings::setIcalendarFile(newURL.toLocalFile());
+                ICalendarSettings::self()->save();
+                slotExport();
+            }
         }
     }
     delete fileDialog;
@@ -123,11 +129,19 @@ void iCalendarExporter::unplug()
 
 void iCalendarExporter::updateConfiguration()
 {
-    ICalendarSettings::self()->load();
-    // export the schedules because the configuration has changed
-    QString icalFilePath = ICalendarSettings::icalendarFile();
-    if (!icalFilePath.isEmpty())
-        d->m_exporter.exportToFile(icalFilePath);
+    // we get called here at program start when there
+    // is no data loaded. It does not make sense to
+    // write out the calendar file in that case, so we skip it
+    if (!d->m_skipFirstUpdate) {
+        ICalendarSettings::self()->load();
+        // export the schedules because the configuration has changed
+        QString icalFilePath = ICalendarSettings::icalendarFile();
+        if (!icalFilePath.isEmpty()) {
+            d->m_exporter.exportToFile(icalFilePath);
+        }
+    } else {
+        d->m_skipFirstUpdate = false;
+    }
 }
 
 K_PLUGIN_CLASS_WITH_JSON(iCalendarExporter, "icalendarexporter.json")

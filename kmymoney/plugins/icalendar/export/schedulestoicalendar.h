@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2009 Cristian Onet onet.cristian @gmail.com
+    SPDX-FileCopyrightText: 2023 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
@@ -13,7 +14,7 @@ class KMMSchedulesToiCalendar
 public:
     KMMSchedulesToiCalendar();
     ~KMMSchedulesToiCalendar();
-    void exportToFile(const QString& file, bool settingsChaged = false);
+    void exportToFile(const QString& file);
 
 private:
     struct Private;
