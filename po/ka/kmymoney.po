@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-24 00:42+0000\n"
-"PO-Revision-Date: 2023-09-19 05:01+0200\n"
+"PO-Revision-Date: 2023-12-24 05:13+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -8473,7 +8473,7 @@ msgstr "მიზანი"
 #, kde-format
 msgctxt "@title:column"
 msgid "Destination Account"
-msgstr ""
+msgstr "სამიზნე ანგარიში"
 
 #: kmymoney/mymoney/storage/onlinejobsmodel.cpp:53
 #, kde-format
@@ -11196,7 +11196,7 @@ msgstr ""
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2413
 #, kde-format
 msgid "Lots"
-msgstr ""
+msgstr "ბევრი"
 
 #: kmymoney/plugins/gnc/import/mymoneygncreader.cpp:2415
 #, kde-format
@@ -11391,7 +11391,7 @@ msgstr ""
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:149
 #, kde-format
 msgid "iCalendar file"
-msgstr ""
+msgstr "iCalendar ფაილი"
 
 #: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:27
 #: kmymoney/plugins/icalendar/export/kcm_icalendarexporter.cpp:31
@@ -17643,10 +17643,9 @@ msgstr ""
 
 #. i18n: ectx: label, entry (HideZeroBalanceAccounts), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:228
-#, fuzzy, kde-format
-#| msgid "Opening Balance Account"
+#, kde-format
 msgid "Hide zero balance accounts"
-msgstr "საწყისი ბალანსის ანგარიში"
+msgstr "ნულოვანი ბალანსის მქონე ანგარიშების დამალვა"
 
 #. i18n: ectx: label, entry (HideFinishedSchedules), group (List Options)
 #: kmymoney/settings/kmymoney.kcfg:232
@@ -20663,7 +20662,7 @@ msgstr "სისწორე"
 #, kde-format
 msgctxt "@item reconciliation status"
 msgid "All states"
-msgstr ""
+msgstr "ყველა მდგომარეობა"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_stateBox)
 #: kmymoney/widgets/ktransactionfilter.ui:590
