@@ -44,7 +44,8 @@ enum class BudgetAction {
     TreatAsExpense,
 };
 
-inline uint qHash(const BudgetAction key, uint seed) {
+inline qHashSeedType qHash(const BudgetAction key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 };

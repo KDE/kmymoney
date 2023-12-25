@@ -31,7 +31,8 @@ enum class Element {
     Price,
     Security,
 };
-uint qHash(const Element key, uint seed) {
+qHashSeedType qHash(const Element key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 
@@ -66,7 +67,8 @@ enum class Attribute {
     Category,
     SmallestFraction,
 };
-uint qHash(const Attribute key, uint seed) {
+qHashSeedType qHash(const Attribute key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 }

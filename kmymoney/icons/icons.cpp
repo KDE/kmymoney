@@ -1,10 +1,13 @@
 /*
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-FileCopyrightText: 2020 Dawid Wróbel <me@dawidwrobel.com>
+    SPDX-FileCopyrightText: 2023 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 #include "icons.h"
+
+// Qt includes
 
 #include <QHash>
 #include <QString>
@@ -14,13 +17,17 @@
 #include <QDir>
 #include <QStandardPaths>
 
+// Project includes
+
+#include "qhashseedtype.h"
+
 inline void initIconResources()
 {
     Q_INIT_RESOURCE(kmm_icons);
 }
 
 namespace Icons {
-uint qHash(const Icon key, uint seed)
+qHashSeedType qHash(const Icon key, qHashSeedType seed)
 {
     return ::qHash(static_cast<uint>(key), seed);
 }

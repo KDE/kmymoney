@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2023 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -7,6 +8,8 @@
 #define VIEWENUMS_H
 
 #include <QHashFunctions>
+
+#include "qhashseedtype.h"
 
 enum class View {
     Home = 0,
@@ -25,7 +28,8 @@ enum class View {
     None,
 };
 
-inline uint qHash(const View key, uint seed) {
+inline qHashSeedType qHash(const View key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 

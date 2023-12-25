@@ -8,6 +8,8 @@
 
 #include <QHashFunctions>
 
+#include "qhashseedtype.h"
+
 namespace eStorage {
 enum class Reference {
     Account = 0,
@@ -26,7 +28,8 @@ enum class Reference {
     Count,
 };
 
-inline uint qHash(const Reference key, uint seed) {
+inline qHashSeedType qHash(const Reference key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 }

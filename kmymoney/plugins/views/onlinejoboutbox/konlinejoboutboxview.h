@@ -35,7 +35,8 @@ enum class OnlineAction {
     EditOnlineJob,
     SendOnlineJobs,
 };
-inline uint qHash(const OnlineAction key, uint seed) {
+inline qHashSeedType qHash(const OnlineAction key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 };

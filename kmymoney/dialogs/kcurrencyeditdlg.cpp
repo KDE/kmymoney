@@ -58,7 +58,8 @@ enum class Action {
     NewCurrency, RenameCurrency, DeleteCurrency,
     SetBaseCurrency,
 };
-inline uint qHash(const Action key, uint seed) {
+inline qHashSeedType qHash(const Action key, qHashSeedType seed)
+{
     return ::qHash(static_cast<uint>(key), seed);
 }
 }
