@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>475</width>
-    <height>165</height>
+    <height>274</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -28,6 +28,19 @@
   <layout class="QGridLayout">
    <item row="0" column="0">
     <layout class="QVBoxLayout">
+     <item>
+      <widget class="QCheckBox" name="kcfg_writeEventsVsTodos">
+       <property name="toolTip">
+        <string>Write the iCalendar file so that the entries are recognized by Google Calendar.</string>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Write the iCalendar file so that the entries are recognized by Google Calendar. The default is to write &lt;a href=&quot;https://icalendar.org/iCalendar-RFC-5545/3-6-2-to-do-component.html&quot;&gt;VTODO&lt;/a&gt; entries into the iCalendar file but for Google Calendar entries of type &lt;a href=&quot;https://icalendar.org/iCalendar-RFC-5545/3-6-1-event-component.html&quot;&gt;VEVENT&lt;/a&gt; are needed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>Write Google calendar compatible entries</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QCheckBox" name="kcfg_createAlarm">
        <property name="text">
@@ -185,8 +198,13 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
    <class>KUrlRequester</class>
-   <extends>QFrame</extends>
+   <extends>QWidget</extends>
    <header>kurlrequester.h</header>
   </customwidget>
  </customwidgets>
@@ -198,4 +216,3 @@
  <resources/>
  <connections/>
 </ui>
-

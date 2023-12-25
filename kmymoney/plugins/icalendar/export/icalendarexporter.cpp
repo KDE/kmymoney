@@ -113,7 +113,7 @@ void iCalendarExporter::slotExport()
 {
     QString icalFilePath = ICalendarSettings::icalendarFile();
     if (!icalFilePath.isEmpty())
-        d->m_exporter.exportToFile(icalFilePath);
+        d->m_exporter.exportToFile(icalFilePath, ICalendarSettings::writeEventsVsTodos());
 }
 
 void iCalendarExporter::plug(KXMLGUIFactory* guiFactory)
@@ -137,7 +137,7 @@ void iCalendarExporter::updateConfiguration()
         // export the schedules because the configuration has changed
         QString icalFilePath = ICalendarSettings::icalendarFile();
         if (!icalFilePath.isEmpty()) {
-            d->m_exporter.exportToFile(icalFilePath);
+            d->m_exporter.exportToFile(icalFilePath, ICalendarSettings::writeEventsVsTodos());
         }
     } else {
         d->m_skipFirstUpdate = false;

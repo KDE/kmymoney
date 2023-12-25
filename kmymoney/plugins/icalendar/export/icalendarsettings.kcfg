@@ -40,5 +40,9 @@ http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
         <entry name="icalendarFile" type="String">
             <label>The icalendar file in which to export the schedules.</label>
         </entry>
+        <entry name="writeEventsVsTodos" type="Bool">
+            <label>Write Google calendar compatible entries</label>
+            <default>false</default>
+        </entry>
     </group>
 </kcfg>

@@ -14,7 +14,7 @@ class KMMSchedulesToiCalendar
 public:
     KMMSchedulesToiCalendar();
     ~KMMSchedulesToiCalendar();
-    void exportToFile(const QString& file);
+    void exportToFile(const QString& file, bool writeEventVsTodo);
 
 private:
     struct Private;
