@@ -1,7 +1,7 @@
 <sect1 id="details.impexp.csv">
 <sect1info>
-  <author> &Allan.Anderson; &Allan.Anderson.mail; </author>
-  <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  <author>&Allan.Anderson;</author>
+  <author>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
 </sect1info>
 <title>CSV Importer Plugin</title>
 

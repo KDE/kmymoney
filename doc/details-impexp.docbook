@@ -2,11 +2,11 @@
 <chapter id="details.impexp">
 <chapterinfo>
   <authorgroup>
-    <author> &Ace.Jones; &Ace.Jones.mail; </author>
-    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+    <author>&Ace.Jones; &Ace.Jones.mail;</author>
+    <author>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
   </authorgroup>
   <date>2023-20-25</date>
-  <releaseinfo>5.2</releaseinfo>
+  <releaseinfo>5.2.0</releaseinfo>
 </chapterinfo>
 
 <title>Importing and Exporting</title>
@@ -14,7 +14,7 @@
 <sect1 id="details.impexp.gnucash">
 <sect1info>
   <author>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
-  <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  <author>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
 </sect1info>
 <title>&gnucash; Importer</title>
 
@@ -510,7 +510,7 @@
 <sect1 id="details.impexp.qifimp">
 <sect1info>
   <author>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
-  <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  <author>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
 </sect1info>
 <title>QIF Importer</title>
 
@@ -909,7 +909,7 @@
 <sect1info>
   <author>&Ace.Jones; &Ace.Jones.mail;</author>
   <author>&Thomas.Baumgart; &Thomas.Baumgart.mail;</author>
-  <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+  <author>&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</author>
 </sect1info>
 <title>OFX Importer</title>
 
@@ -1190,7 +1190,7 @@
 </sect2>
 </sect1>
 
-<!-- Using entities for the csv import and export and woob import sections allow then
+<!-- Using entities for the csv import and export and woob import sections allow them
      to be maintained in separate files.  The original note here suggested this was a
      workaround, but I don't know why. -->
 <!-- entities defined in index.docbook -->

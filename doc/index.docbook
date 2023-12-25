@@ -26,13 +26,14 @@
   <!-- the following author entity was added to contributor.entities in trunk and probably 4.6 branch of svn
        it can be removed from this file once it is present in the kdelibs minimum version required by &kmymoney; -->
 
-  <!ENTITY Allan.Anderson "<personname><firstname>Allan</firstname><surname>Anderson</surname></personname>">
-  <!ENTITY Allan.Anderson.mail "<email>agander93@gmail.com</email>">
-
+  <!ENTITY Allan.Anderson "<personname><firstname>Allan</firstname><surname>Anderson</surname><lineage>✝</lineage></personname>">
+  <!-- <!ENTITY Allan.Anderson.mail "<email>agander93@gmail.com</email>"> -->
+  <!ENTITY Allan.Anderson.mail "<email>deceased</email>">
+  
   <!-- the following author entities were added to contributor.entities for the 5.0 release
        they can be removed from this file once they are present in the kdelibs minimum version required by &kmymoney; -->
 
-  <!ENTITY Lukasz.Wojnilowiczs "<personname><firstname>Łukasz</firstname><surname>Wojniłowicz</surname></personname>">
+  <!ENTITY Lukasz.Wojnilowicz "<personname><firstname>Łukasz</firstname><surname>Wojniłowicz</surname></personname>">
   <!ENTITY Lukasz.Wojnilowicz.mail "<email>lukasz.wojnilowicz@gmail.com</email>">
 
   <!ENTITY Ralf.Habacker "<personname><firstname>Ralf</firstname><surname>Habacker</surname></personname>">
@@ -77,13 +78,16 @@
   <!ENTITY configicon "<inlinemediaobject><imageobject><imagedata fileref='icon-dialog-configure.png' format='PNG'/>
     </imageobject></inlinemediaobject>">
 
-<!-- the chapters (in order of use in the handbook -->
+<!-- the chapters -->
   <!ENTITY introduction SYSTEM "introduction.docbook">
-  <!ENTITY whatsnew SYSTEM "whatsnew.docbook">
   <!ENTITY makemostof SYSTEM "makemostof.docbook">
   <!ENTITY firsttime SYSTEM "firsttime.docbook">
+  <!ENTITY whatsnew SYSTEM "whatsnew.docbook">
   <!ENTITY details-institutions SYSTEM "details-institutions.docbook">
   <!ENTITY details-accounts SYSTEM "details-accounts.docbook">
+  <!ENTITY details-loans SYSTEM "details-loans.docbook">
+  <!ENTITY details-budgets SYSTEM "details-budgets.docbook">
+  <!ENTITY details-forecast SYSTEM "details-forecast.docbook">
   <!ENTITY details-categories SYSTEM "details-categories.docbook">
   <!ENTITY details-tags SYSTEM "details-tags.docbook">
   <!ENTITY details-payees SYSTEM "details-payees.docbook">
@@ -91,31 +95,28 @@
   <!ENTITY details-ledgers SYSTEM "details-ledgers.docbook">
   <!ENTITY details-investments SYSTEM "details-investments.docbook">
   <!ENTITY details-currencies SYSTEM "details-currencies.docbook">
-  <!ENTITY details-reconciliation SYSTEM "details-reconciliation.docbook">
-  <!ENTITY details-reports SYSTEM "details-reports.docbook">
   <!ENTITY details-impexp SYSTEM "details-impexp.docbook">
   <!ENTITY details-impexp-csv SYSTEM "details-impexp-csv.docbook">
   <!ENTITY details-impexp-csvexp SYSTEM "details-impexp-csvexp.docbook">
   <!ENTITY details-impexp-woob SYSTEM "details-impexp-woob.docbook">
-  <!ENTITY details-loans SYSTEM "details-loans.docbook">
-  <!ENTITY details-budgets SYSTEM "details-budgets.docbook">
-  <!ENTITY details-forecast SYSTEM "details-forecast.docbook">
-  <!ENTITY details-settings SYSTEM "details-settings.docbook">
+  <!ENTITY details-reconciliation SYSTEM "details-reconciliation.docbook">
   <!ENTITY details-search SYSTEM "details-search.docbook">
+  <!ENTITY details-reports SYSTEM "details-reports.docbook">
+  <!ENTITY details-settings SYSTEM "details-settings.docbook">
+  <!ENTITY details-widgets SYSTEM "details-widgets.docbook">
   <!ENTITY details-formats SYSTEM "details-formats.docbook">
   <!ENTITY details-database SYSTEM "details-database.docbook">
+  <!ENTITY details-hbciofx SYSTEM "details-hbciofx.docbook">
   <!ENTITY faq SYSTEM "faq.docbook">
   <!ENTITY reference SYSTEM "reference.docbook">
-  <!ENTITY details-widgets SYSTEM "details-widgets.docbook">
   <!ENTITY credits SYSTEM "credits.docbook">
-  <!-- no longer used? <!ENTITY details-hbciofx SYSTEM "details-hbciofx.docbook"> -->
 ]>
 
 <book id="kmymoney" lang="&language;">
 
 <bookinfo>
 <title>The &kmymoney; Handbook</title>
-<subtitle>for &kmymoney; version 5.2</subtitle>
+<subtitle>for &kmymoney; version 5.0</subtitle>
 
 <authorgroup>
 <!-- This is just put in as an example.  For real documentation, please
@@ -137,7 +138,7 @@ and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
 </authorgroup>
 
 <copyright>
-<year>2000-2023</year>
+<year>2000-2018</year>
 <holder>The &kmymoney; Development Team</holder>
 </copyright>
 <!-- Translators: put here the copyright notice of the translation -->
@@ -152,8 +153,8 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>2023-10-28</date>
-<releaseinfo>5.2.0</releaseinfo>
+<date>2018-01-13</date>
+<releaseinfo>5.0.0</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -163,7 +164,7 @@ Do NOT change these in the translation. -->
 </para>
 
 <para>
-  This handbook describes &kmymoney; version 5.2.
+  This handbook describes &kmymoney; version 5.0.
 </para>
 </abstract>
 
@@ -172,13 +173,11 @@ Please at least include KDE, the KDE package it is in, the name
  of your application, and a few relevant keywords. -->
 <keywordset>
 <keyword>KDE</keyword>
-<keyword>KMyMoney</keyword>
-<keyword>kmymoney</keyword>
-<keyword>KMyMoney4</keyword>
-<keyword>KMyMoney5</keyword>
-<keyword>kmymoney4</keyword>
-<keyword>kmymoney5</keyword>
 <keyword>office</keyword>
+<keyword>KMyMoney4</keyword>
+<keyword>KMyMoney</keyword>
+<keyword>kmymoney4</keyword>
+<keyword>kmymoney</keyword>
 <keyword>finance</keyword>
 <keyword>accounts</keyword>
 <keyword>accounting</keyword>
@@ -219,10 +218,10 @@ consistent documentation style across all KDE apps. -->
 &details-loans;
 &details-budgets;
 &details-forecast;
+&details-settings;
 &details-search;
 &details-formats;
 &details-database;
-&details-settings;
 &faq;
 &reference;
 &credits;
