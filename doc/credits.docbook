@@ -48,43 +48,7 @@
 <itemizedlist>
   <listitem>
     <para>
-      <emphasis role="bold">&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</emphasis>:
-      Documentation and user support.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <emphasis role="bold">Kevin Tambascio <email>tambascio@users.sourceforge.net</email></emphasis>:
-      Initial investment support.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <emphasis role="bold">Javier Campos Morales <email>javi_c@users.sourceforge.net</email></emphasis>:
-      Developer &amp; Artist.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <emphasis role="bold">&Robert.Wadley; &Robert.Wadley.mail;</emphasis>: 
-      Artist. Icons, splash screen, home view.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <emphasis role="bold">Laurent Montel <email>montel@kde.org</email></emphasis>:
-      Patches and port to &kde;4.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <emphasis role="bold">Wolfgang Rohdewald <email>woro@users.sourceforge.net</email></emphasis>:
-      Patches.
+      <emphasis role="bold">&Allan.Anderson;</emphasis>: Patches. CSV import/export.
     </para>
   </listitem>
 
@@ -97,7 +61,43 @@
 
   <listitem>
     <para>
-      <emphasis role="bold">&Allan.Anderson;</emphasis>: Patches. CSV import/export.
+      <emphasis role="bold">Laurent Montel <email>montel@kde.org</email></emphasis>:
+      Patches.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <emphasis role="bold">Javier Campos Morales <email>javi_c@users.sourceforge.net</email></emphasis>:
+      Developer &amp; Artist.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <emphasis role="bold">&Jack.H.Ostroff; &Jack.H.Ostroff.mail;</emphasis>:
+      Documentation and user support.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <emphasis role="bold">Wolfgang Rohdewald <email>woro@users.sourceforge.net</email></emphasis>:
+      Patches.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <emphasis role="bold">Kevin Tambascio <email>tambascio@users.sourceforge.net</email></emphasis>:
+      Initial investment support.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <emphasis role="bold">&Robert.Wadley; &Robert.Wadley.mail;</emphasis>: 
+      Artist. Icons, splash screen, home view.
     </para>
   </listitem>
 </itemizedlist>
@@ -108,53 +108,8 @@
 <itemizedlist>
   <listitem>
     <para>
-      <emphasis>&Cristian.Onet; &Cristian.Onet.mail;</emphasis>: Patches and Plugins.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <emphasis>&Christian.David; &Christian.David.mail;</emphasis>: Developer.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <emphasis>&Lukasz.Wojnilowicz; &Lukasz.Wojnilowicz.mail;</emphasis>: Developer.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <emphasis>&Michael.T.Edwardes; &Michael.T.Edwardes.mail;</emphasis>:
-      Original author, much initial source code. Project admin.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <emphasis>&Alvaro.Soliverez; &Alvaro.Soliverez.mail;</emphasis>:Forecast. Reports.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <emphasis>&Ace.Jones; &Ace.Jones.mail;</emphasis>:
-      Reporting logic. OFX Import. Online Quotes. Documentation editor.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
       <emphasis>&Tony.Bloomfield; &Tony.Bloomfield.mail;</emphasis>:
       &gnucash; Importer. Database support.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <emphasis>Felix Rodriguez <email>frodriguez@users.sourceforge.net</email></emphasis>:
-      Project admin.
     </para>
   </listitem>
 
@@ -167,33 +122,34 @@
  
   <listitem>
     <para>
-      <emphasis>&Fernando.Vilas; &Fernando.Vilas.mail;</emphasis>:Database support.
-    </para>
-  </listitem>
-
-
-  <listitem>
-    <para>
-      <emphasis>&Roger.Lum; &Roger.Lum.mail;</emphasis>: Documentation.
+      <emphasis>&Christian.David; &Christian.David.mail;</emphasis>: Developer.
     </para>
   </listitem>
 
   <listitem>
     <para>
-      <emphasis>&Darin.Strait; &Darin.Strait.mail;</emphasis>: Documentation.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      <emphasis>&Colin.Wright; &Colin.Wright.mail;</emphasis>: Patches and Documentation.
+      <emphasis>&Michael.T.Edwardes; &Michael.T.Edwardes.mail;</emphasis>:
+      Original author, much initial source code. Project admin.
     </para>
   </listitem>
 
   <listitem>
     <para>
       <emphasis>Bernd Gonsior <email>bernd.gonsior@googlemail.com</email></emphasis>:
-      Reports. Migration to &kde;4/&Qt;4.
+      Reports.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <emphasis>&Ace.Jones; &Ace.Jones.mail;</emphasis>:
+      Reporting logic. OFX Import. Online Quotes. Documentation.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <emphasis>&Roger.Lum; &Roger.Lum.mail;</emphasis>: Documentation.
     </para>
   </listitem>
 
@@ -206,8 +162,51 @@
 
   <listitem>
     <para>
-      <emphasis>Migration to &kde;4/&Qt;4</emphasis>: This was a massive effort, and
-      many developers contributed.  Apologies to any we forgot to name explicitly.
+      <emphasis>&Cristian.Onet; &Cristian.Onet.mail;</emphasis>: Patches and Plugins.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <emphasis>Felix Rodriguez <email>frodriguez@users.sourceforge.net</email></emphasis>:
+      Project admin.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <emphasis>&Alvaro.Soliverez; &Alvaro.Soliverez.mail;</emphasis>:Forecast. Reports.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <emphasis>&Darin.Strait; &Darin.Strait.mail;</emphasis>: Documentation.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <emphasis>&Fernando.Vilas; &Fernando.Vilas.mail;</emphasis>:Database support.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <emphasis>&Lukasz.Wojnilowicz; &Lukasz.Wojnilowicz.mail;</emphasis>: Developer.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <emphasis>&Colin.Wright; &Colin.Wright.mail;</emphasis>: Patches and Documentation.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      <emphasis>&Dawid.Wrobel; &Dawid.Wrobel.mail;</emphasis>:
+      Patches and Woob integration.
     </para>
   </listitem>
 </itemizedlist>

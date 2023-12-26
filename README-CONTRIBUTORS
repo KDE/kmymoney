@@ -100,13 +100,16 @@ This is in the order pulled in from index.docbook, with brief note on state of u
   prelim update begun
   
 <!ENTITY faq SYSTEM "faq.docbook">
+  prelim update complete
 
 <!ENTITY reference SYSTEM "reference.docbook">
 
 <!ENTITY details-widgets SYSTEM "details-widgets.docbook">
+  to be reviewed by Thomas
 
 <!ENTITY credits SYSTEM "credits.docbook">
-
+  prelim update complete
+  
 <!-- no longer used? <!ENTITY details-hbciofx SYSTEM "details-hbciofx.docbook"> -->
 
 <!-- not directly included in docbook   "man-kmymoney.1.docbook" -->
