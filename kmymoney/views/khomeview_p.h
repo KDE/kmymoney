@@ -1314,7 +1314,16 @@ public:
                 switch ((*it).accountType()) {
                 // group all assets into one list but make sure that investment accounts always show up
                 case Account::Type::Investment:
-                    if (!(value.isZero() && hideZeroBalanceAccounts)) {
+                    // for investment accounts we also need to check the sub-accounts
+                    if (value.isZero()) {
+                        for (const auto& accId : (*it).accountList()) {
+                            const auto subValue = MyMoneyFile::instance()->balance(accId, QDate::currentDate());
+                            if (!(subValue.isZero() && hideZeroBalanceAccounts)) {
+                                assets << *it;
+                                break;
+                            }
+                        }
+                    } else {
                         assets << *it;
                     }
                     break;
