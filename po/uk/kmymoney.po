@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-26 00:41+0000\n"
-"PO-Revision-Date: 2023-12-23 08:51+0200\n"
+"POT-Creation-Date: 2023-12-27 00:42+0000\n"
+"PO-Revision-Date: 2023-12-26 08:18+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -1188,74 +1188,74 @@ msgstr ""
 msgid "Update price history"
 msgstr "Оновити журнал цін"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:151
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:663
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:664
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "Не вдалося встановити базовою валютою %1: %2"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:151
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:663
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:664
 #, kde-format
 msgid "Set base currency"
 msgstr "Встановіть базову валюту"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:172
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:176
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
 #, kde-format
 msgid "Cannot update currency. %1"
 msgstr "Не вдалося оновити дані валюти. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:172
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:176
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
 #, kde-format
 msgid "Update currency"
 msgstr "Оновлення даних валюти"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:209
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
 #, kde-format
 msgid "Cannot create new currency. %1"
 msgstr "Не вдалося створити запис валюти. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:209
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:504
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
 #, kde-format
 msgid "New currency"
 msgstr "Нова валюта"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:211
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
 #, kde-format
 msgid "Cannot modify currency. %1"
 msgstr "Не вдалося змінити запис валюти. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:211
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
 #, kde-format
 msgid "Edit currency"
 msgstr "Редагування валюти"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
 #, kde-format
 msgid "Rename currency"
 msgstr "Перейменувати валюту"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:648
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
 #, kde-format
 msgid "Delete currency"
 msgstr "Вилучити валюту"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:508
 #, kde-format
 msgid "Select as base currency"
 msgstr "Зробити валюту базовою"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:517
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:518
 #, kde-format
 msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "Параметри валюти"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:648
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Не вдалося вилучити запис валюти %1. %2"
@@ -2101,7 +2101,7 @@ msgstr "Разом"
 msgid "Closed"
 msgstr "Закрито"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:343
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:344
 #, kde-format
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
@@ -2110,32 +2110,32 @@ msgstr[1] "Ви справді бажаєте вилучити позначен�
 msgstr[2] "Ви справді бажаєте вилучити позначені записи цін?"
 msgstr[3] "Ви справді бажаєте вилучити позначений запис ціни?"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:344
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:345
 #, kde-format
 msgid "Delete price information"
 msgstr "Вилучити дані ціни"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:391
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:392
 #, kde-format
 msgid "New price..."
 msgstr "Створити запис ціни…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:392
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:393
 #, kde-format
 msgid "Edit price..."
 msgstr "Змінити запис ціни…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:393
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
 #, kde-format
 msgid "Online Price Update..."
 msgstr "Інтерактивне оновлення цін…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:395
 #, kde-format
 msgid "Delete price..."
 msgstr "Вилучити запис ціни…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:404
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:405
 #, kde-format
 msgctxt "@title:menu"
 msgid "Price options"
@@ -2299,7 +2299,7 @@ msgid "Liability"
 msgstr "Пасиви"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:534 kmymoney/kmymoney.cpp:434
-#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1824
+#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1833
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -4354,8 +4354,8 @@ msgstr "Звірено"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:345
 #: kmymoney/plugins/views/reports/core/listtable.cpp:638
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:1037 kmymoney/views/khomeview_p.h:1397
-#: kmymoney/views/khomeview_p.h:1426
+#: kmymoney/views/khomeview_p.h:1037 kmymoney/views/khomeview_p.h:1406
+#: kmymoney/views/khomeview_p.h:1435
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -6101,7 +6101,7 @@ msgstr "Активи і зобов'язання"
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1560
+#: kmymoney/views/khomeview_p.h:1569
 #, kde-format
 msgid "Budget"
 msgstr "Бюджет"
@@ -10043,8 +10043,8 @@ msgstr "Зняти вибір поля нотаток."
 #: kmymoney/plugins/views/reports/core/listtable.cpp:684
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1040 kmymoney/views/khomeview_p.h:1400
-#: kmymoney/views/khomeview_p.h:1429
+#: kmymoney/views/khomeview_p.h:1040 kmymoney/views/khomeview_p.h:1409
+#: kmymoney/views/khomeview_p.h:1438
 #, kde-format
 msgid "Balance"
 msgstr "Баланс"
@@ -11972,7 +11972,7 @@ msgstr "Файл icalendar, куди слід експортувати розк�
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:40
 #, kde-format
 msgid "Write Google calendar compatible entries"
-msgstr ""
+msgstr "Записати у форматі записів, сумісних із календарем Google"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ICalendarSettingsDecl)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:26
@@ -11986,7 +11986,7 @@ msgstr "Параметри експортування icalendar"
 msgid ""
 "Write the iCalendar file so that the entries are recognized by Google "
 "Calendar."
-msgstr ""
+msgstr "Записати файл iCalendar, щоб записи міг розпізнати Календар Google."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_writeEventsVsTodos)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:37
@@ -11999,6 +11999,12 @@ msgid ""
 "href=\"https://icalendar.org/iCalendar-RFC-5545/3-6-1-event-component.html"
 "\">VEVENT</a> are needed.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Записати дані до файла iCalendar, щоб записи міг "
+"розпізнати Календар Google. Типовим є запис даних до файла iCalendar у "
+"форматі <a href=\"https://icalendar.org/iCalendar-RFC-5545/3-6-2-to-do-"
+"component.html\">VTODO</a>, але для записів Календаря Google потрібен тип <a "
+"href=\"https://icalendar.org/iCalendar-RFC-5545/3-6-1-event-component.html"
+"\">VEVENT</a>.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_createAlarm)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:47
@@ -15562,7 +15568,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "Для цієї діаграми додатком звітування не надано жодних даних."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:660
-#: kmymoney/views/khomeview_p.h:557 kmymoney/views/khomeview_p.h:1564
+#: kmymoney/views/khomeview_p.h:557 kmymoney/views/khomeview_p.h:1573
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Щоб переглянути цю діаграму, увімкніть додаток звітів."
@@ -16759,7 +16765,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Кругова діаграма прибутків і витрат"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:867
-#: kmymoney/views/khomeview_p.h:1536
+#: kmymoney/views/khomeview_p.h:1545
 #, kde-format
 msgid "Net Worth"
 msgstr "Залишкова вартість"
@@ -19911,97 +19917,97 @@ msgstr[1] "%1 дні"
 msgstr[2] "%1 днів"
 msgstr[3] "%1 день"
 
-#: kmymoney/views/khomeview_p.h:1370
+#: kmymoney/views/khomeview_p.h:1379
 #, kde-format
 msgid "Assets and Liabilities Summary"
 msgstr "Резюме активів і зобов'язань"
 
-#: kmymoney/views/khomeview_p.h:1384
+#: kmymoney/views/khomeview_p.h:1393
 #, kde-format
 msgid "Asset Accounts"
 msgstr "Рахунки активів"
 
-#: kmymoney/views/khomeview_p.h:1413
+#: kmymoney/views/khomeview_p.h:1422
 #, kde-format
 msgid "Liability Accounts"
 msgstr "Рахунки пасивів"
 
-#: kmymoney/views/khomeview_p.h:1515
+#: kmymoney/views/khomeview_p.h:1524
 #, kde-format
 msgid "Total Assets"
 msgstr "Загальні активи"
 
-#: kmymoney/views/khomeview_p.h:1525
+#: kmymoney/views/khomeview_p.h:1534
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Загальні пасиви"
 
-#: kmymoney/views/khomeview_p.h:1814
+#: kmymoney/views/khomeview_p.h:1823
 #, kde-format
 msgid "Cash Flow Summary"
 msgstr "Резюме грошової активності"
 
-#: kmymoney/views/khomeview_p.h:1819
+#: kmymoney/views/khomeview_p.h:1828
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Прибутки і витрати поточного місяця"
 
-#: kmymoney/views/khomeview_p.h:1827
+#: kmymoney/views/khomeview_p.h:1836
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Запланований прибуток"
 
-#: kmymoney/views/khomeview_p.h:1830
+#: kmymoney/views/khomeview_p.h:1839
 #, kde-format
 msgid "Expenses"
 msgstr "Витрати"
 
-#: kmymoney/views/khomeview_p.h:1833
+#: kmymoney/views/khomeview_p.h:1842
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Заплановані витрати"
 
-#: kmymoney/views/khomeview_p.h:1861
+#: kmymoney/views/khomeview_p.h:1870
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Ліквідні активи і зобов'язання"
 
-#: kmymoney/views/khomeview_p.h:1866
+#: kmymoney/views/khomeview_p.h:1875
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Ліквідні активи"
 
-#: kmymoney/views/khomeview_p.h:1869
+#: kmymoney/views/khomeview_p.h:1878
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Трансферти на ліквідні зобов'язання"
 
-#: kmymoney/views/khomeview_p.h:1872
+#: kmymoney/views/khomeview_p.h:1881
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Ліквідні зобов'язання"
 
-#: kmymoney/views/khomeview_p.h:1875
+#: kmymoney/views/khomeview_p.h:1884
 #, kde-format
 msgid "Other Transfers"
 msgstr "Інші трансферти"
 
-#: kmymoney/views/khomeview_p.h:1918
+#: kmymoney/views/khomeview_p.h:1927
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Стан грошової активності"
 
-#: kmymoney/views/khomeview_p.h:1923
+#: kmymoney/views/khomeview_p.h:1932
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Очікувані ліквідні активи"
 
-#: kmymoney/views/khomeview_p.h:1926
+#: kmymoney/views/khomeview_p.h:1935
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Очікувані ліквідні зобов'язання"
 
-#: kmymoney/views/khomeview_p.h:1929
+#: kmymoney/views/khomeview_p.h:1938
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Очікувані доходи/втрати"

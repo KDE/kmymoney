@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-26 00:41+0000\n"
+"POT-Creation-Date: 2023-12-27 00:42+0000\n"
 "PO-Revision-Date: 2023-06-07 16:30+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -1148,74 +1148,74 @@ msgstr ""
 msgid "Update price history"
 msgstr "Päivitä hintahistoria"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:151
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:663
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:664
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "Ei voitu asettaa pohjavaluutaksi %1: %2"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:151
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:663
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:664
 #, kde-format
 msgid "Set base currency"
 msgstr "Aseta pohjavaluutaksi."
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:172
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:176
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
 #, kde-format
 msgid "Cannot update currency. %1"
 msgstr "Valuuttaa ei voitu päivittää. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:172
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:176
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
 #, kde-format
 msgid "Update currency"
 msgstr "Päivitä valuutta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:209
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
 #, kde-format
 msgid "Cannot create new currency. %1"
 msgstr "Ei voitu luoda uutta valuuttaa. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:209
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:504
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
 #, kde-format
 msgid "New currency"
 msgstr "Uusi valuutta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:211
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
 #, kde-format
 msgid "Cannot modify currency. %1"
 msgstr "Valuuttaa ei voi muuttaa. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:211
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
 #, kde-format
 msgid "Edit currency"
 msgstr "Muokkaa valuuttaa"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
 #, kde-format
 msgid "Rename currency"
 msgstr "Muuta valuutan nimeä"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:648
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
 #, kde-format
 msgid "Delete currency"
 msgstr "Poista valuutta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:508
 #, kde-format
 msgid "Select as base currency"
 msgstr "Valitse pohjavaluutaksi"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:517
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:518
 #, kde-format
 msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "Valuutta-asetukset"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:648
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Valuuttaa %1 ei voitu poistaa. %2"
@@ -2060,39 +2060,39 @@ msgstr "Yhteensä"
 msgid "Closed"
 msgstr "Suljettu"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:343
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:344
 #, kde-format
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
 msgstr[0] "Poistetaanko valittu hintatieto varmasti?"
 msgstr[1] "Poistetaanko valitut hintatiedot varmasti?"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:344
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:345
 #, kde-format
 msgid "Delete price information"
 msgstr "Poista hintatieto"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:391
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:392
 #, kde-format
 msgid "New price..."
 msgstr "Uusi hinta…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:392
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:393
 #, kde-format
 msgid "Edit price..."
 msgstr "Muokkaa hintaa…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:393
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
 #, kde-format
 msgid "Online Price Update..."
 msgstr "Online-hinnan päivitys…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:395
 #, kde-format
 msgid "Delete price..."
 msgstr "Poista hinta…"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:404
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:405
 #, kde-format
 msgctxt "@title:menu"
 msgid "Price options"
@@ -2256,7 +2256,7 @@ msgid "Liability"
 msgstr "Velat ja lainat"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:534 kmymoney/kmymoney.cpp:434
-#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1824
+#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1833
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -4332,8 +4332,8 @@ msgstr "Varmistettu"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:345
 #: kmymoney/plugins/views/reports/core/listtable.cpp:638
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:1037 kmymoney/views/khomeview_p.h:1397
-#: kmymoney/views/khomeview_p.h:1426
+#: kmymoney/views/khomeview_p.h:1037 kmymoney/views/khomeview_p.h:1406
+#: kmymoney/views/khomeview_p.h:1435
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -6103,7 +6103,7 @@ msgstr "Varat ja velat"
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1560
+#: kmymoney/views/khomeview_p.h:1569
 #, kde-format
 msgid "Budget"
 msgstr "Budjetti"
@@ -10093,8 +10093,8 @@ msgstr "Poista muistiinpanokentän valinta."
 #: kmymoney/plugins/views/reports/core/listtable.cpp:684
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1040 kmymoney/views/khomeview_p.h:1400
-#: kmymoney/views/khomeview_p.h:1429
+#: kmymoney/views/khomeview_p.h:1040 kmymoney/views/khomeview_p.h:1409
+#: kmymoney/views/khomeview_p.h:1438
 #, kde-format
 msgid "Balance"
 msgstr "Yhteensä"
@@ -15509,7 +15509,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "Raportointi-liitännäinen ei tarjonnut tietoja tälle kaaviolle"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:660
-#: kmymoney/views/khomeview_p.h:557 kmymoney/views/khomeview_p.h:1564
+#: kmymoney/views/khomeview_p.h:557 kmymoney/views/khomeview_p.h:1573
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Ota käyttöön raporttiliitännäinen tämän kaavion näkemiseksi."
@@ -16703,7 +16703,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Tulot ja menot -piirakkakaavio"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:867
-#: kmymoney/views/khomeview_p.h:1536
+#: kmymoney/views/khomeview_p.h:1545
 #, kde-format
 msgid "Net Worth"
 msgstr "Nettovarallisuus"
@@ -19801,97 +19801,97 @@ msgid_plural "%1 days"
 msgstr[0] "Yksi päivä"
 msgstr[1] "%1 päivää"
 
-#: kmymoney/views/khomeview_p.h:1370
+#: kmymoney/views/khomeview_p.h:1379
 #, kde-format
 msgid "Assets and Liabilities Summary"
 msgstr "Omaisuuden ja velkojen yhteenveto"
 
-#: kmymoney/views/khomeview_p.h:1384
+#: kmymoney/views/khomeview_p.h:1393
 #, kde-format
 msgid "Asset Accounts"
 msgstr "Omaisuustilit"
 
-#: kmymoney/views/khomeview_p.h:1413
+#: kmymoney/views/khomeview_p.h:1422
 #, kde-format
 msgid "Liability Accounts"
 msgstr "Velkatilit"
 
-#: kmymoney/views/khomeview_p.h:1515
+#: kmymoney/views/khomeview_p.h:1524
 #, kde-format
 msgid "Total Assets"
 msgstr "Omaisuus yhteensä"
 
-#: kmymoney/views/khomeview_p.h:1525
+#: kmymoney/views/khomeview_p.h:1534
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Velat yhteensä"
 
-#: kmymoney/views/khomeview_p.h:1814
+#: kmymoney/views/khomeview_p.h:1823
 #, kde-format
 msgid "Cash Flow Summary"
 msgstr "Rahavirtojen yhteenveto"
 
-#: kmymoney/views/khomeview_p.h:1819
+#: kmymoney/views/khomeview_p.h:1828
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Tulot ja menot tälle kuulle"
 
-#: kmymoney/views/khomeview_p.h:1827
+#: kmymoney/views/khomeview_p.h:1836
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Ajoitettu tulo"
 
-#: kmymoney/views/khomeview_p.h:1830
+#: kmymoney/views/khomeview_p.h:1839
 #, kde-format
 msgid "Expenses"
 msgstr "Menot"
 
-#: kmymoney/views/khomeview_p.h:1833
+#: kmymoney/views/khomeview_p.h:1842
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Ajoitettu meno"
 
-#: kmymoney/views/khomeview_p.h:1861
+#: kmymoney/views/khomeview_p.h:1870
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Rahavarat ja velat"
 
-#: kmymoney/views/khomeview_p.h:1866
+#: kmymoney/views/khomeview_p.h:1875
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Rahavarat"
 
-#: kmymoney/views/khomeview_p.h:1869
+#: kmymoney/views/khomeview_p.h:1878
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Siirrä velkoihin"
 
-#: kmymoney/views/khomeview_p.h:1872
+#: kmymoney/views/khomeview_p.h:1881
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Velat"
 
-#: kmymoney/views/khomeview_p.h:1875
+#: kmymoney/views/khomeview_p.h:1884
 #, kde-format
 msgid "Other Transfers"
 msgstr "Muu siirto"
 
-#: kmymoney/views/khomeview_p.h:1918
+#: kmymoney/views/khomeview_p.h:1927
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Rahavirtatilanne"
 
-#: kmymoney/views/khomeview_p.h:1923
+#: kmymoney/views/khomeview_p.h:1932
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Odotetut rahavarat"
 
-#: kmymoney/views/khomeview_p.h:1926
+#: kmymoney/views/khomeview_p.h:1935
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Odotetut velat"
 
-#: kmymoney/views/khomeview_p.h:1929
+#: kmymoney/views/khomeview_p.h:1938
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Odotettu netto / tappio"

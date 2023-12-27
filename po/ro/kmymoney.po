@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-26 00:41+0000\n"
+"POT-Creation-Date: 2023-12-27 00:42+0000\n"
 "PO-Revision-Date: 2022-08-14 16:08+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -1205,77 +1205,77 @@ msgstr ""
 msgid "Update price history"
 msgstr "Actualizează istoria prețurilor"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:151
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:663
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:664
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "Nu s-a putut seta %1 ca moneda de bază. %2"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:151
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:663
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:664
 #, kde-format
 msgid "Set base currency"
 msgstr "Alege moneda de bază"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:172
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:176
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
 #, kde-format
 msgid "Cannot update currency. %1"
 msgstr "Nu s-a putut actualiza moneda. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:172
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:176
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
 #, kde-format
 msgid "Update currency"
 msgstr "Actualizează moneda"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:209
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
 #, kde-format
 msgid "Cannot create new currency. %1"
 msgstr "Nu s-a putut crea moneda nouă. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:209
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:504
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
 #, kde-format
 msgid "New currency"
 msgstr "Monedă nouă"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:211
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
 #, fuzzy, kde-format
 #| msgid "Cannot update currency. %1"
 msgid "Cannot modify currency. %1"
 msgstr "Nu s-a putut actualiza moneda. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:211
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
 #, fuzzy, kde-format
 #| msgid "Update currency"
 msgid "Edit currency"
 msgstr "Actualizează moneda"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
 #, kde-format
 msgid "Rename currency"
 msgstr "Redenumește moneda"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:648
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
 #, kde-format
 msgid "Delete currency"
 msgstr "Șterge moneda"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:508
 #, kde-format
 msgid "Select as base currency"
 msgstr "Alege ca monedă de bază"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:517
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:518
 #, fuzzy, kde-format
 #| msgid "Currency options"
 msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "Opțiuni valută"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:648
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Nu s-a putut șterge moneda %1. %2"
@@ -2132,7 +2132,7 @@ msgstr "Total"
 msgid "Closed"
 msgstr "Închis"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:343
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:344
 #, kde-format
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
@@ -2140,32 +2140,32 @@ msgstr[0] "Doriți într-adevăr să ștergeți întrarea de preț marcată?"
 msgstr[1] "Doriți într-adevăr să ștergeți întrările de prețuri marcate?"
 msgstr[2] "Doriți într-adevăr să ștergeți întrările de prețuri marcate?"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:344
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:345
 #, kde-format
 msgid "Delete price information"
 msgstr "Șterge informațiile despre preț"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:391
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:392
 #, kde-format
 msgid "New price..."
 msgstr "Preț nou..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:392
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:393
 #, kde-format
 msgid "Edit price..."
 msgstr "Modifică prețul..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:393
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
 #, kde-format
 msgid "Online Price Update..."
 msgstr "Actualizarea prețului online..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:395
 #, kde-format
 msgid "Delete price..."
 msgstr "Șterge prețul ..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:404
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:405
 #, fuzzy, kde-format
 #| msgid "Price options"
 msgctxt "@title:menu"
@@ -2330,7 +2330,7 @@ msgid "Liability"
 msgstr "Pasiv"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:534 kmymoney/kmymoney.cpp:434
-#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1824
+#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1833
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -4415,8 +4415,8 @@ msgstr "Verificate"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:345
 #: kmymoney/plugins/views/reports/core/listtable.cpp:638
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:1037 kmymoney/views/khomeview_p.h:1397
-#: kmymoney/views/khomeview_p.h:1426
+#: kmymoney/views/khomeview_p.h:1037 kmymoney/views/khomeview_p.h:1406
+#: kmymoney/views/khomeview_p.h:1435
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -6269,7 +6269,7 @@ msgstr "Active și pasive"
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1560
+#: kmymoney/views/khomeview_p.h:1569
 #, kde-format
 msgid "Budget"
 msgstr "Buget"
@@ -10541,8 +10541,8 @@ msgstr "Șterge selecțiile"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:684
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1040 kmymoney/views/khomeview_p.h:1400
-#: kmymoney/views/khomeview_p.h:1429
+#: kmymoney/views/khomeview_p.h:1040 kmymoney/views/khomeview_p.h:1409
+#: kmymoney/views/khomeview_p.h:1438
 #, kde-format
 msgid "Balance"
 msgstr "Sold"
@@ -16177,7 +16177,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "Afișează versiunea raportului acestui grafic"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:660
-#: kmymoney/views/khomeview_p.h:557 kmymoney/views/khomeview_p.h:1564
+#: kmymoney/views/khomeview_p.h:557 kmymoney/views/khomeview_p.h:1573
 #, fuzzy, kde-format
 #| msgid "Show the report version of this chart"
 msgid "Enable reports plugin to see this chart."
@@ -17423,7 +17423,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Diagramă circulară cu venituri și cheltuieli"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:867
-#: kmymoney/views/khomeview_p.h:1536
+#: kmymoney/views/khomeview_p.h:1545
 #, kde-format
 msgid "Net Worth"
 msgstr "Valoare netă"
@@ -20724,97 +20724,97 @@ msgstr[0] "%1 zi"
 msgstr[1] "%1 zile"
 msgstr[2] "%1 de zile"
 
-#: kmymoney/views/khomeview_p.h:1370
+#: kmymoney/views/khomeview_p.h:1379
 #, kde-format
 msgid "Assets and Liabilities Summary"
 msgstr "Sumarul activelor și pasivelor"
 
-#: kmymoney/views/khomeview_p.h:1384
+#: kmymoney/views/khomeview_p.h:1393
 #, kde-format
 msgid "Asset Accounts"
 msgstr "Conturi de active"
 
-#: kmymoney/views/khomeview_p.h:1413
+#: kmymoney/views/khomeview_p.h:1422
 #, kde-format
 msgid "Liability Accounts"
 msgstr "Conturi de pasive"
 
-#: kmymoney/views/khomeview_p.h:1515
+#: kmymoney/views/khomeview_p.h:1524
 #, kde-format
 msgid "Total Assets"
 msgstr "Total active"
 
-#: kmymoney/views/khomeview_p.h:1525
+#: kmymoney/views/khomeview_p.h:1534
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Total pasive"
 
-#: kmymoney/views/khomeview_p.h:1814
+#: kmymoney/views/khomeview_p.h:1823
 #, kde-format
 msgid "Cash Flow Summary"
 msgstr "Sumarul fluxului financiar"
 
-#: kmymoney/views/khomeview_p.h:1819
+#: kmymoney/views/khomeview_p.h:1828
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Venituri și cheltuieli în această lună"
 
-#: kmymoney/views/khomeview_p.h:1827
+#: kmymoney/views/khomeview_p.h:1836
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Venit programat"
 
-#: kmymoney/views/khomeview_p.h:1830
+#: kmymoney/views/khomeview_p.h:1839
 #, kde-format
 msgid "Expenses"
 msgstr "Cheltuieli"
 
-#: kmymoney/views/khomeview_p.h:1833
+#: kmymoney/views/khomeview_p.h:1842
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Cheltuieli programate"
 
-#: kmymoney/views/khomeview_p.h:1861
+#: kmymoney/views/khomeview_p.h:1870
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Active și pasive lichide"
 
-#: kmymoney/views/khomeview_p.h:1866
+#: kmymoney/views/khomeview_p.h:1875
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Active lichide"
 
-#: kmymoney/views/khomeview_p.h:1869
+#: kmymoney/views/khomeview_p.h:1878
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Transferuri în pasive lichide"
 
-#: kmymoney/views/khomeview_p.h:1872
+#: kmymoney/views/khomeview_p.h:1881
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Pasive lichide"
 
-#: kmymoney/views/khomeview_p.h:1875
+#: kmymoney/views/khomeview_p.h:1884
 #, kde-format
 msgid "Other Transfers"
 msgstr "Alte transferuri"
 
-#: kmymoney/views/khomeview_p.h:1918
+#: kmymoney/views/khomeview_p.h:1927
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Starea fluxului financiar"
 
-#: kmymoney/views/khomeview_p.h:1923
+#: kmymoney/views/khomeview_p.h:1932
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Active lichide estimate"
 
-#: kmymoney/views/khomeview_p.h:1926
+#: kmymoney/views/khomeview_p.h:1935
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Pasive lichide estimate"
 
-#: kmymoney/views/khomeview_p.h:1929
+#: kmymoney/views/khomeview_p.h:1938
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Profit estimat/Pierdere estimată"

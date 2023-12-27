@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-26 00:41+0000\n"
-"PO-Revision-Date: 2023-12-23 11:32+0300\n"
+"POT-Creation-Date: 2023-12-27 00:42+0000\n"
+"PO-Revision-Date: 2023-12-26 11:05+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.01.85\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1146,74 +1146,74 @@ msgstr ""
 msgid "Update price history"
 msgstr "Fiyat geçmişini güncelle"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:151
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:663
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:664
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "%1, temel para birimi olarak ayarlanamadı: %2"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:151
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:663
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:664
 #, kde-format
 msgid "Set base currency"
 msgstr "Temel para birimini ayarla"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:172
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:176
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
 #, kde-format
 msgid "Cannot update currency. %1"
 msgstr "Para birimi güncellenemedi. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:172
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:176
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
 #, kde-format
 msgid "Update currency"
 msgstr "Para birimini güncelle"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:209
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
 #, kde-format
 msgid "Cannot create new currency. %1"
 msgstr "Yeni para birimi oluşturulamadı. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:209
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:504
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
 #, kde-format
 msgid "New currency"
 msgstr "Yeni para birimi"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:211
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
 #, kde-format
 msgid "Cannot modify currency. %1"
 msgstr "Para birimi değiştirilemedi. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:211
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
 #, kde-format
 msgid "Edit currency"
 msgstr "Para birimini düzenle"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
 #, kde-format
 msgid "Rename currency"
 msgstr "Para birimini yeniden adlandır"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:648
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
 #, kde-format
 msgid "Delete currency"
 msgstr "Para birimini sil"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:508
 #, kde-format
 msgid "Select as base currency"
 msgstr "Temel para birimi olarak seç"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:517
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:518
 #, kde-format
 msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "Para Birimi Seçenekleri"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:648
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "%1 para birimi silinemedi. %2"
@@ -2054,39 +2054,39 @@ msgstr "Toplam"
 msgid "Closed"
 msgstr "Kapalı"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:343
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:344
 #, kde-format
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
 msgstr[0] "Seçilen fiyat girdisini silmeyi gerçekten istiyor musunuz?"
 msgstr[1] "Seçilen fiyat girdilerini silmeyi gerçekten istiyor musunuz?"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:344
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:345
 #, kde-format
 msgid "Delete price information"
 msgstr "Fiyat bilgisini sil"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:391
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:392
 #, kde-format
 msgid "New price..."
 msgstr "Yeni fiyat..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:392
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:393
 #, kde-format
 msgid "Edit price..."
 msgstr "Fiyatı düzenle..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:393
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
 #, kde-format
 msgid "Online Price Update..."
 msgstr "Çevrimiçi Fiyat Güncelle..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:395
 #, kde-format
 msgid "Delete price..."
 msgstr "Fiyatı sil..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:404
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:405
 #, kde-format
 msgctxt "@title:menu"
 msgid "Price options"
@@ -2250,7 +2250,7 @@ msgid "Liability"
 msgstr "Yükümlülük"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:534 kmymoney/kmymoney.cpp:434
-#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1824
+#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1833
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -4286,8 +4286,8 @@ msgstr "Temizlendi"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:345
 #: kmymoney/plugins/views/reports/core/listtable.cpp:638
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:1037 kmymoney/views/khomeview_p.h:1397
-#: kmymoney/views/khomeview_p.h:1426
+#: kmymoney/views/khomeview_p.h:1037 kmymoney/views/khomeview_p.h:1406
+#: kmymoney/views/khomeview_p.h:1435
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -6026,7 +6026,7 @@ msgstr "Varlıklar ve Yükümlülükler"
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1560
+#: kmymoney/views/khomeview_p.h:1569
 #, kde-format
 msgid "Budget"
 msgstr "Bütçe"
@@ -9940,8 +9940,8 @@ msgstr "Not alanı seçimini temizleyin."
 #: kmymoney/plugins/views/reports/core/listtable.cpp:684
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1040 kmymoney/views/khomeview_p.h:1400
-#: kmymoney/views/khomeview_p.h:1429
+#: kmymoney/views/khomeview_p.h:1040 kmymoney/views/khomeview_p.h:1409
+#: kmymoney/views/khomeview_p.h:1438
 #, kde-format
 msgid "Balance"
 msgstr "Bakiye"
@@ -11840,7 +11840,7 @@ msgstr "Dışa aktarılacak planın icalendar dosyası."
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:40
 #, kde-format
 msgid "Write Google calendar compatible entries"
-msgstr ""
+msgstr "Google Takvim uyumlu girdiler yaz"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, ICalendarSettingsDecl)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:26
@@ -11855,6 +11855,8 @@ msgid ""
 "Write the iCalendar file so that the entries are recognized by Google "
 "Calendar."
 msgstr ""
+"Girdilerin Google Takvim tarafından tanınabilmesi için iCalendar dosyasına "
+"yaz"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_writeEventsVsTodos)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:37
@@ -11867,6 +11869,12 @@ msgid ""
 "href=\"https://icalendar.org/iCalendar-RFC-5545/3-6-1-event-component.html"
 "\">VEVENT</a> are needed.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Girdilerin Google Takvim tarafından tanınabilmesi için "
+"iCalendar dosyasına yazın. Öntanımlı ayar, <a href=\"https://icalendar.org/"
+"iCalendar-RFC-5545/3-6-2-to-do-component.html\">VTODO</a> girdilerini "
+"iCalendar dosyasına yazmaktır; ancak Google Takvim için <a href=\"https://"
+"icalendar.org/iCalendar-RFC-5545/3-6-1-event-component.html\">VEVENT</a> "
+"türünde girdiler gerekir.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_createAlarm)
 #: kmymoney/plugins/icalendar/export/icalendarsettingsdecl.ui:47
@@ -15361,7 +15369,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "Bu grafik için rapor eklentisi tarafından sağlanan veri yok."
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:660
-#: kmymoney/views/khomeview_p.h:557 kmymoney/views/khomeview_p.h:1564
+#: kmymoney/views/khomeview_p.h:557 kmymoney/views/khomeview_p.h:1573
 #, kde-format
 msgid "Enable reports plugin to see this chart."
 msgstr "Bu grafiği görmek için rapor eklentisini etkinleştirin."
@@ -16552,7 +16560,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Gelir-Giderler Pasta Grafiği"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:867
-#: kmymoney/views/khomeview_p.h:1536
+#: kmymoney/views/khomeview_p.h:1545
 #, kde-format
 msgid "Net Worth"
 msgstr "Net Değer"
@@ -19650,97 +19658,97 @@ msgid_plural "%1 days"
 msgstr[0] "%1 gün"
 msgstr[1] "%1 gün"
 
-#: kmymoney/views/khomeview_p.h:1370
+#: kmymoney/views/khomeview_p.h:1379
 #, kde-format
 msgid "Assets and Liabilities Summary"
 msgstr "Varlıklar ve Yükümlülükler Özeti"
 
-#: kmymoney/views/khomeview_p.h:1384
+#: kmymoney/views/khomeview_p.h:1393
 #, kde-format
 msgid "Asset Accounts"
 msgstr "Varlık Hesapları"
 
-#: kmymoney/views/khomeview_p.h:1413
+#: kmymoney/views/khomeview_p.h:1422
 #, kde-format
 msgid "Liability Accounts"
 msgstr "Yükümlülük Hesapları"
 
-#: kmymoney/views/khomeview_p.h:1515
+#: kmymoney/views/khomeview_p.h:1524
 #, kde-format
 msgid "Total Assets"
 msgstr "Toplam Varlıklar"
 
-#: kmymoney/views/khomeview_p.h:1525
+#: kmymoney/views/khomeview_p.h:1534
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Toplam Yükümlülükler"
 
-#: kmymoney/views/khomeview_p.h:1814
+#: kmymoney/views/khomeview_p.h:1823
 #, kde-format
 msgid "Cash Flow Summary"
 msgstr "Nakit Akışı Özeti"
 
-#: kmymoney/views/khomeview_p.h:1819
+#: kmymoney/views/khomeview_p.h:1828
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Geçerli Ay Gelirleri ve Giderleri"
 
-#: kmymoney/views/khomeview_p.h:1827
+#: kmymoney/views/khomeview_p.h:1836
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Planlı Gelirler"
 
-#: kmymoney/views/khomeview_p.h:1830
+#: kmymoney/views/khomeview_p.h:1839
 #, kde-format
 msgid "Expenses"
 msgstr "Giderler"
 
-#: kmymoney/views/khomeview_p.h:1833
+#: kmymoney/views/khomeview_p.h:1842
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Planlı Giderler"
 
-#: kmymoney/views/khomeview_p.h:1861
+#: kmymoney/views/khomeview_p.h:1870
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Likit Varlıklar ve Yükümlülükler"
 
-#: kmymoney/views/khomeview_p.h:1866
+#: kmymoney/views/khomeview_p.h:1875
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Likit Varlıklar"
 
-#: kmymoney/views/khomeview_p.h:1869
+#: kmymoney/views/khomeview_p.h:1878
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Likit Yükümlülüklere Aktarımlar"
 
-#: kmymoney/views/khomeview_p.h:1872
+#: kmymoney/views/khomeview_p.h:1881
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Likit Yükümlülükler"
 
-#: kmymoney/views/khomeview_p.h:1875
+#: kmymoney/views/khomeview_p.h:1884
 #, kde-format
 msgid "Other Transfers"
 msgstr "Diğer Aktarımlar"
 
-#: kmymoney/views/khomeview_p.h:1918
+#: kmymoney/views/khomeview_p.h:1927
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Nakit Akışı Durumu"
 
-#: kmymoney/views/khomeview_p.h:1923
+#: kmymoney/views/khomeview_p.h:1932
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Beklenen Likit Varlıklar"
 
-#: kmymoney/views/khomeview_p.h:1926
+#: kmymoney/views/khomeview_p.h:1935
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Beklenen Likit Yükümlülükler"
 
-#: kmymoney/views/khomeview_p.h:1929
+#: kmymoney/views/khomeview_p.h:1938
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Beklenen Kâr/Zarar"

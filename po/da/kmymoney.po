@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kmymoney\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-26 00:41+0000\n"
+"POT-Creation-Date: 2023-12-27 00:42+0000\n"
 "PO-Revision-Date: 2015-02-19 20:48+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -1179,77 +1179,77 @@ msgstr ""
 msgid "Update price history"
 msgstr "Opdatér prishistorik"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:151
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:663
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:664
 #, kde-format
 msgid "Cannot set %1 as base currency: %2"
 msgstr "Kan ikke sætte %1 som basisvaluta: %2"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:151
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:663
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:152
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:664
 #, kde-format
 msgid "Set base currency"
 msgstr "Angiv basisvaluta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:172
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:176
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
 #, kde-format
 msgid "Cannot update currency. %1"
 msgstr "Kan ikke opdatere valuta. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:172
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:176
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:173
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:177
 #, kde-format
 msgid "Update currency"
 msgstr "Opdatér valuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:209
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
 #, kde-format
 msgid "Cannot create new currency. %1"
 msgstr "Kan ikke oprette ny valuta. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:209
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:504
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:210
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
 #, kde-format
 msgid "New currency"
 msgstr "Ny valuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:211
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
 #, fuzzy, kde-format
 #| msgid "Cannot update currency. %1"
 msgid "Cannot modify currency. %1"
 msgstr "Kan ikke opdatere valuta. %1"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:211
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:212
 #, fuzzy, kde-format
 #| msgid "Update currency"
 msgid "Edit currency"
 msgstr "Opdatér valuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:505
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
 #, kde-format
 msgid "Rename currency"
 msgstr "Omdøb valuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:506
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:648
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
 #, kde-format
 msgid "Delete currency"
 msgstr "Slet valuta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:507
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:508
 #, kde-format
 msgid "Select as base currency"
 msgstr "Vælg som basisvaluta"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:517
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:518
 #, fuzzy, kde-format
 #| msgid "Currency options"
 msgctxt "@title:menu"
 msgid "Currency options"
 msgstr "Valutaindstillinger"
 
-#: kmymoney/dialogs/kcurrencyeditdlg.cpp:648
+#: kmymoney/dialogs/kcurrencyeditdlg.cpp:649
 #, kde-format
 msgid "Cannot delete currency %1. %2"
 msgstr "Kan ikke slette valuta %1. %2"
@@ -2102,39 +2102,39 @@ msgstr "I alt"
 msgid "Closed"
 msgstr "Lukket"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:343
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:344
 #, kde-format
 msgid "Do you really want to delete the selected price entry?"
 msgid_plural "Do you really want to delete the selected price entries?"
 msgstr[0] "Vil du virkelig slette den valgte prisindgang?"
 msgstr[1] "Vil du virkelig slette de valgte prisindgange?"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:344
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:345
 #, kde-format
 msgid "Delete price information"
 msgstr "Slet prisinformation"
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:391
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:392
 #, kde-format
 msgid "New price..."
 msgstr "Ny pris..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:392
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:393
 #, kde-format
 msgid "Edit price..."
 msgstr "Redigér pris..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:393
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
 #, kde-format
 msgid "Online Price Update..."
 msgstr "Online prisopdatering..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:394
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:395
 #, kde-format
 msgid "Delete price..."
 msgstr "Slet pris..."
 
-#: kmymoney/dialogs/kmymoneypricedlg.cpp:404
+#: kmymoney/dialogs/kmymoneypricedlg.cpp:405
 #, fuzzy, kde-format
 #| msgid "Price options"
 msgctxt "@title:menu"
@@ -2299,7 +2299,7 @@ msgid "Liability"
 msgstr "Passiver"
 
 #: kmymoney/dialogs/knewaccountdlg.cpp:534 kmymoney/kmymoney.cpp:434
-#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1824
+#: kmymoney/models/ledgerfilterbase.cpp:75 kmymoney/views/khomeview_p.h:1833
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:74
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:190
 #: kmymoney/widgets/kmymoneyaccountselector.cpp:386
@@ -4394,8 +4394,8 @@ msgstr "Godkendt"
 #: kmymoney/dialogs/settings/ksettingsregister.ui:345
 #: kmymoney/plugins/views/reports/core/listtable.cpp:638
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:198
-#: kmymoney/views/khomeview_p.h:1037 kmymoney/views/khomeview_p.h:1397
-#: kmymoney/views/khomeview_p.h:1426
+#: kmymoney/views/khomeview_p.h:1037 kmymoney/views/khomeview_p.h:1406
+#: kmymoney/views/khomeview_p.h:1435
 #: kmymoney/widgets/kmymoneyreconcilecombo.cpp:32
 #, kde-format
 msgid "Reconciled"
@@ -6230,7 +6230,7 @@ msgstr "Aktiver og passiver"
 #: kmymoney/kmymoneyutils.cpp:124 kmymoney/mymoney/storage/budgetsmodel.cpp:68
 #: kmymoney/plugins/views/reports/reportsview.cpp:154
 #: kmymoney/plugins/views/reports/reporttabrowcolpivot.ui:121
-#: kmymoney/views/khomeview_p.h:1560
+#: kmymoney/views/khomeview_p.h:1569
 #, kde-format
 msgid "Budget"
 msgstr "Budget"
@@ -10429,8 +10429,8 @@ msgstr "Ryd markeringer"
 #: kmymoney/plugins/views/reports/core/listtable.cpp:684
 #: kmymoney/plugins/views/reports/reporttabrowcolquery.ui:313
 #: kmymoney/plugins/woob/dialogs/mapaccountwizard.ui:73
-#: kmymoney/views/khomeview_p.h:1040 kmymoney/views/khomeview_p.h:1400
-#: kmymoney/views/khomeview_p.h:1429
+#: kmymoney/views/khomeview_p.h:1040 kmymoney/views/khomeview_p.h:1409
+#: kmymoney/views/khomeview_p.h:1438
 #, kde-format
 msgid "Balance"
 msgstr "Saldo"
@@ -15990,7 +15990,7 @@ msgid "No data provided by reports plugin for this chart."
 msgstr "Vis rapportudgaven af dette diagram"
 
 #: kmymoney/plugins/views/forecast/kforecastview_p.h:660
-#: kmymoney/views/khomeview_p.h:557 kmymoney/views/khomeview_p.h:1564
+#: kmymoney/views/khomeview_p.h:557 kmymoney/views/khomeview_p.h:1573
 #, fuzzy, kde-format
 #| msgid "Show the report version of this chart"
 msgid "Enable reports plugin to see this chart."
@@ -17219,7 +17219,7 @@ msgid "Income and Expenses Pie Chart"
 msgstr "Cirkeldiagram over indtægter og udgifter"
 
 #: kmymoney/plugins/views/reports/kreportsview_p.h:867
-#: kmymoney/views/khomeview_p.h:1536
+#: kmymoney/views/khomeview_p.h:1545
 #, kde-format
 msgid "Net Worth"
 msgstr "Nettoværdi"
@@ -20471,97 +20471,97 @@ msgid_plural "%1 days"
 msgstr[0] "%1 dag"
 msgstr[1] "%1 dage"
 
-#: kmymoney/views/khomeview_p.h:1370
+#: kmymoney/views/khomeview_p.h:1379
 #, kde-format
 msgid "Assets and Liabilities Summary"
 msgstr "Oversigt over aktiver og passiver"
 
-#: kmymoney/views/khomeview_p.h:1384
+#: kmymoney/views/khomeview_p.h:1393
 #, kde-format
 msgid "Asset Accounts"
 msgstr "Konti for aktiver"
 
-#: kmymoney/views/khomeview_p.h:1413
+#: kmymoney/views/khomeview_p.h:1422
 #, kde-format
 msgid "Liability Accounts"
 msgstr "Konti for passiver"
 
-#: kmymoney/views/khomeview_p.h:1515
+#: kmymoney/views/khomeview_p.h:1524
 #, kde-format
 msgid "Total Assets"
 msgstr "Aktiver i alt"
 
-#: kmymoney/views/khomeview_p.h:1525
+#: kmymoney/views/khomeview_p.h:1534
 #, kde-format
 msgid "Total Liabilities"
 msgstr "Passiver i alt"
 
-#: kmymoney/views/khomeview_p.h:1814
+#: kmymoney/views/khomeview_p.h:1823
 #, kde-format
 msgid "Cash Flow Summary"
 msgstr "Oversigt over pengestrømme"
 
-#: kmymoney/views/khomeview_p.h:1819
+#: kmymoney/views/khomeview_p.h:1828
 #, kde-format
 msgid "Income and Expenses of Current Month"
 msgstr "Indtægter og udgifter i indeværende måned"
 
-#: kmymoney/views/khomeview_p.h:1827
+#: kmymoney/views/khomeview_p.h:1836
 #, kde-format
 msgid "Scheduled Income"
 msgstr "Skemalagte indtægter"
 
-#: kmymoney/views/khomeview_p.h:1830
+#: kmymoney/views/khomeview_p.h:1839
 #, kde-format
 msgid "Expenses"
 msgstr "Udgifter"
 
-#: kmymoney/views/khomeview_p.h:1833
+#: kmymoney/views/khomeview_p.h:1842
 #, kde-format
 msgid "Scheduled Expenses"
 msgstr "Skemalagte udgifter"
 
-#: kmymoney/views/khomeview_p.h:1861
+#: kmymoney/views/khomeview_p.h:1870
 #, kde-format
 msgid "Liquid Assets and Liabilities"
 msgstr "Likvide aktiver og passiver"
 
-#: kmymoney/views/khomeview_p.h:1866
+#: kmymoney/views/khomeview_p.h:1875
 #, kde-format
 msgid "Liquid Assets"
 msgstr "Likvide aktiver"
 
-#: kmymoney/views/khomeview_p.h:1869
+#: kmymoney/views/khomeview_p.h:1878
 #, kde-format
 msgid "Transfers to Liquid Liabilities"
 msgstr "Overførsler til likvide passiver"
 
-#: kmymoney/views/khomeview_p.h:1872
+#: kmymoney/views/khomeview_p.h:1881
 #, kde-format
 msgid "Liquid Liabilities"
 msgstr "Likvide passiver"
 
-#: kmymoney/views/khomeview_p.h:1875
+#: kmymoney/views/khomeview_p.h:1884
 #, kde-format
 msgid "Other Transfers"
 msgstr "Andre overførsler"
 
-#: kmymoney/views/khomeview_p.h:1918
+#: kmymoney/views/khomeview_p.h:1927
 #, kde-format
 msgid "Cash Flow Status"
 msgstr "Status på pengestrømme"
 
-#: kmymoney/views/khomeview_p.h:1923
+#: kmymoney/views/khomeview_p.h:1932
 #, kde-format
 msgid "Expected Liquid Assets"
 msgstr "Forventede likvide aktiver"
 
-#: kmymoney/views/khomeview_p.h:1926
+#: kmymoney/views/khomeview_p.h:1935
 #, kde-format
 msgid "Expected Liquid Liabilities"
 msgstr "Forventede likvide passiver"
 
-#: kmymoney/views/khomeview_p.h:1929
+#: kmymoney/views/khomeview_p.h:1938
 #, kde-format
 msgid "Expected Profit/Loss"
 msgstr "Forventet profit/tab"
