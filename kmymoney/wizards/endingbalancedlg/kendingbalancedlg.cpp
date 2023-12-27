@@ -29,7 +29,6 @@
 #include "ui_kendingbalancedlg.h"
 
 #include "kcurrencycalculator.h"
-#include "kmymoneyaccountselector.h"
 #include "kmymoneycategory.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"

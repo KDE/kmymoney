@@ -39,7 +39,6 @@
 #include "ui_finalpaymentwizardpage.h"
 
 #include "kmmyesno.h"
-#include "kmymoneyaccountselector.h"
 #include "kmymoneylineedit.h"
 #include "knewloanwizard.h"
 #include "knewloanwizard_p.h"
